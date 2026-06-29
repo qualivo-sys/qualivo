@@ -17,7 +17,10 @@ var CLIENT = {
   currencySymbol: '€',
   timezone: 'Europe/Madrid',
   // Budget mensual contratado (EUR). Usado para el % de budget gastado.
-  monthlyBudget: 4000
+  monthlyBudget: 4000,
+  // Precio de matrícula (EUR). Facturación = matrículas × este precio
+  // (el monetaryValue de GHL no siempre está cargado).
+  matriculaPrice: 4400
 };
 
 /** Nombres de las pestañas que gestiona el script. */

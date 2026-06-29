@@ -29,7 +29,7 @@ function fetchGHL(monthKey) {
     PIPELINE_STAGES.forEach(function (s) { byStage[s] = 0; });
     var statusCounts = {};
     var sourceCounts = {};
-    var e = { won: 0, wonPrevMonth: 0, interviewed: 0, openActive: 0, lost: 0, abandoned: 0, contractValue: 0, revenue: 0 };
+    var e = { won: 0, wonNew: 0, wonCarry: 0, wonPrevMonth: 0, interviewed: 0, openActive: 0, lost: 0, abandoned: 0, contractValue: 0, revenue: 0 };
 
     opps.forEach(function (o) {
       var status = (o.status || '').toLowerCase(); // open / won / lost / abandoned
@@ -52,15 +52,30 @@ function fetchGHL(monthKey) {
         status: stageName
       });
 
-      if (status === 'won') { e.won += 1; e.contractValue += value; e.revenue += value; }
-      else if (status === 'lost') { e.lost += 1; }
+      // Las matrículas (won) se cuentan por fecha de CIERRE, no de creación
+      // (ver más abajo). Aquí solo clasificamos el cohorte creado en el mes.
+      if (status === 'lost') { e.lost += 1; }
       else if (status === 'abandoned') { e.abandoned += 1; }
-      else {
+      else if (status !== 'won') {
         e.openActive += 1;
         if (PIPELINE_STAGES.indexOf(canon) >= 0) byStage[canon] += 1;
         if (canon === 'Entrevistado') e.interviewed += 1;
       }
     });
+
+    // Matrículas del mes = oportunidades ganadas con fecha de cierre en el mes
+    // (lastStatusChangeAt), aunque entraran como lead en meses anteriores.
+    // Facturación = matrículas × precio de matrícula (monetaryValue de GHL no
+    // siempre está cargado).
+    var wonList = ghlSearchWonInMonth(token, locationId, range.since, range.until);
+    e.won = wonList.length;
+    e.wonNew = wonList.filter(function (o) {
+      var c = (o.createdAt || '').slice(0, 10);
+      return c >= range.since && c <= range.until;
+    }).length;
+    e.wonCarry = e.won - e.wonNew;
+    e.revenue = e.won * CLIENT.matriculaPrice;
+    e.contractValue = e.revenue;
 
     out.byStage = byStage;
     out.byStatus = withPercentages(mapToList(statusCounts), out.totalCreated)
@@ -122,6 +137,32 @@ function ghlSearchOpportunities(token, locationId, since, until) {
       if (created >= since && created <= until) results.push(o);
     });
     if (minDate < since) break; // orden desc: el resto es anterior al mes
+    url = (json.meta && json.meta.nextPageUrl) ? json.meta.nextPageUrl : null;
+  }
+  return results;
+}
+
+/**
+ * Devuelve las oportunidades GANADAS cuya fecha de cierre (lastStatusChangeAt)
+ * cae dentro del mes. Usa el filtro status=won del API y pagina todas (suelen
+ * ser pocas). Respeta GHL_PIPELINE_ID si está definido.
+ */
+function ghlSearchWonInMonth(token, locationId, since, until) {
+  var pipelineId = getProp('GHL_PIPELINE_ID');
+  var url = 'https://services.leadconnectorhq.com/opportunities/search' +
+    '?location_id=' + encodeURIComponent(locationId) + '&status=won&limit=100';
+  if (pipelineId) url += '&pipeline_id=' + encodeURIComponent(pipelineId);
+
+  var results = [];
+  var pages = 0;
+  while (url && pages < 60) {
+    var json = httpJson(url, { headers: ghlHeaders(token) });
+    var opps = json.opportunities || [];
+    pages++;
+    opps.forEach(function (o) {
+      var closed = (o.lastStatusChangeAt || '').slice(0, 10);
+      if (closed >= since && closed <= until) results.push(o);
+    });
     url = (json.meta && json.meta.nextPageUrl) ? json.meta.nextPageUrl : null;
   }
   return results;

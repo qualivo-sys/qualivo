@@ -74,7 +74,10 @@ function emptyCrm(source) {
     byStatus: [],
     bySource: [],
     enrollment: {
-      won: 0, wonPrevMonth: 0, interviewed: 0,
+      won: 0,          // matrículas cerradas (ganadas) en el mes
+      wonNew: 0,       // de ellas, creadas también en el mes
+      wonCarry: 0,     // de ellas, creadas en meses anteriores (arrastre)
+      wonPrevMonth: 0, interviewed: 0,
       openActive: 0, lost: 0, abandoned: 0,
       contractValue: 0, revenue: 0
     },

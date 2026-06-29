@@ -98,20 +98,21 @@ function renderDashboard(monthKey) {
   // los formatos se aplican por celda tras escribir la tabla.
   var e = crm.enrollment || {};
   var enrollRows = [
-    ['Won / Matriculadas (mes)', e.won || 0],
-    ['Matriculadas mes anterior', e.wonPrevMonth || 0],
+    ['Matrículas cerradas (mes)', e.won || 0],
+    ['  · Creadas en el mes', e.wonNew || 0],
+    ['  · Arrastre (meses anteriores)', e.wonCarry || 0],
     ['Entrevistados', e.interviewed || 0],
     ['Open (activas)', e.openActive || 0],
     ['Lost', e.lost || 0],
     ['Abandoned', e.abandoned || 0],
-    ['Valor contratado €', round(e.contractValue || 0, 2)],
-    ['Revenue €', round(e.revenue || 0, 2)],
-    ['CR% leads → matrícula', round(safeDiv(e.won || 0, crm.totalCreated || 0), 4)],
-    ['ROAS (won € / spend €)', round(safeDiv(e.revenue || 0, t.spend), 2)]
+    ['Facturación €', round(e.revenue || 0, 2)],
+    ['CR% entrevistados → matrícula', round(safeDiv(e.won || 0, e.interviewed || 0), 4)],
+    ['% matrículas s/ oportunidades', round(safeDiv(e.won || 0, crm.totalCreated || 0), 4)],
+    ['ROAS (facturación / spend)', round(safeDiv(e.revenue || 0, t.spend), 2)]
   ];
   var enrollDataStart = row + 1; // primera fila de datos (tras la cabecera)
   row = writeTable(sh, row, ['Matrículas / cierres', 'Valor'], enrollRows, null, false);
-  var enrollFmt = [NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.eur, NUMFMT.eur, NUMFMT.pct, NUMFMT.dec2];
+  var enrollFmt = [NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.int, NUMFMT.eur, NUMFMT.pct, NUMFMT.pct, NUMFMT.dec2];
   for (var ei = 0; ei < enrollFmt.length; ei++) {
     sh.getRange(enrollDataStart + ei, 2).setNumberFormat(enrollFmt[ei]);
   }
