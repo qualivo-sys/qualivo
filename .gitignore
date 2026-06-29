@@ -1,0 +1,12 @@
+# clasp
+.clasp.json
+.clasprc.json
+
+# Local env / secrets
+.env
+*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+node_modules/
