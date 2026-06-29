@@ -64,20 +64,24 @@ function fetchMeta(monthKey) {
   return out;
 }
 
-/** Suma las acciones de tipo lead del array de actions de Meta. */
+/**
+ * Extrae los leads del array de actions de Meta.
+ *
+ * Meta expone varios action_type de lead que se SOLAPAN:
+ *   - `lead`                            = total deduplicado (on-site + off-site)
+ *   - `onsite_conversion.lead_grouped`  = lead ads / formularios instantáneos
+ *   - `offsite_conversion.fb_pixel_lead`= leads vía píxel web
+ * Verificado contra la cuenta real: lead (529) = lead_grouped (455) + pixel (74).
+ * Por eso usamos `lead` cuando existe; si no, sumamos los dos componentes.
+ */
 function extractMetaLeads(actions) {
   if (!actions || !actions.length) return 0;
-  var LEAD_TYPES = {
-    'lead': true,
-    'leadgen_grouped': true,
-    'onsite_conversion.lead_grouped': true,
-    'offsite_conversion.fb_pixel_lead': true
-  };
-  var total = 0;
-  actions.forEach(function (a) {
-    if (LEAD_TYPES[a.action_type]) total += toNumber(a.value);
-  });
-  return total;
+  var byType = {};
+  actions.forEach(function (a) { byType[a.action_type] = toNumber(a.value); });
+
+  if (byType['lead'] != null) return byType['lead'];
+  return (byType['onsite_conversion.lead_grouped'] || 0) +
+         (byType['offsite_conversion.fb_pixel_lead'] || 0);
 }
 
 /** Serializa un objeto a query string url-encoded. */
