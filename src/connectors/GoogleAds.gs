@@ -28,7 +28,8 @@ function fetchGoogleAds(monthKey) {
       'WHERE segments.date BETWEEN "' + range.since + '" AND "' + range.until + '" ' +
       'AND metrics.impressions > 0';
 
-    var url = 'https://googleads.googleapis.com/v18/customers/' + customerId + '/googleAds:searchStream';
+    var apiVer = getProp('GOOGLE_ADS_API_VERSION', 'v21');
+    var url = 'https://googleads.googleapis.com/' + apiVer + '/customers/' + customerId + '/googleAds:searchStream';
     var headers = {
       'Authorization': 'Bearer ' + accessToken,
       'developer-token': getProp('GOOGLE_ADS_DEVELOPER_TOKEN'),
