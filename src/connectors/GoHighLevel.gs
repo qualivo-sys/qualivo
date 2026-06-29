@@ -91,29 +91,38 @@ function ghlStageNameMap(token, locationId) {
   return map;
 }
 
-/** Pagina la búsqueda de oportunidades por fecha de creación. */
+/**
+ * Pagina la búsqueda de oportunidades creadas en el rango [since, until].
+ *
+ * La API de GHL v2 ordena por fecha descendente y pagina con cursor
+ * (`meta.nextPageUrl`), NO con un parámetro `page`. Como viene de más reciente
+ * a más antiguo, en cuanto una página contiene una oportunidad anterior a
+ * `since` podemos parar (ya hemos cubierto el mes).
+ *
+ * Si se define GHL_PIPELINE_ID, filtra a ese pipeline (en EAC el pipeline
+ * activo es "Pipeline"; el pipeline "Hubspot" es el volcado de la migración y
+ * se excluye).
+ */
 function ghlSearchOpportunities(token, locationId, since, until) {
+  var pipelineId = getProp('GHL_PIPELINE_ID');
   var results = [];
-  var page = 1;
-  while (true) {
-    var params = {
-      location_id: locationId,
-      date: since, // filtro base; refinamos en cliente por rango
-      startAfter: '',
-      page: String(page),
-      limit: '100'
-    };
-    var url = 'https://services.leadconnectorhq.com/opportunities/search?' + toQuery(params);
+  var url = 'https://services.leadconnectorhq.com/opportunities/search' +
+    '?location_id=' + encodeURIComponent(locationId) + '&limit=100';
+  if (pipelineId) url += '&pipeline_id=' + encodeURIComponent(pipelineId);
+
+  var pages = 0;
+  while (url && pages < 60) {
     var json = httpJson(url, { headers: ghlHeaders(token) });
     var opps = json.opportunities || [];
-    // Filtra por rango de fecha de creación en cliente (la API filtra por mes/día base)
+    pages++;
+    var minDate = '9999';
     opps.forEach(function (o) {
       var created = (o.createdAt || '').slice(0, 10);
+      if (created < minDate) minDate = created;
       if (created >= since && created <= until) results.push(o);
     });
-    var meta = json.meta || {};
-    if (!opps.length || (meta.nextPage == null) || page >= 50) break;
-    page++;
+    if (minDate < since) break; // orden desc: el resto es anterior al mes
+    url = (json.meta && json.meta.nextPageUrl) ? json.meta.nextPageUrl : null;
   }
   return results;
 }

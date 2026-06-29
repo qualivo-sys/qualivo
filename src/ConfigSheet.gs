@@ -29,7 +29,8 @@ var CONFIG_ROWS = [
   ['HUBSPOT_STATUS_PROP', 'hs_lead_status'],
   ['— GOHIGHLEVEL —', ''],
   ['GHL_TOKEN', ''],
-  ['GHL_LOCATION_ID', '']
+  ['GHL_LOCATION_ID', ''],
+  ['GHL_PIPELINE_ID', ''] // opcional: filtra a un pipeline (EAC usa "Pipeline")
 ];
 
 /** Crea la hoja _Config con las filas de credenciales si no existe. */
