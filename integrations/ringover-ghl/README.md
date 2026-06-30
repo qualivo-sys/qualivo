@@ -1,81 +1,67 @@
 # Ringover → GHL · Registro de llamadas (Nuria Roure)
 
-Integración mínima: los agentes **llaman desde Ringover** (app móvil / web / escritorio,
-con número español como identificador) y **cada llamada queda registrada como nota en la
-ficha del contacto en GoHighLevel** (dirección, agente, número, duración, estado y enlace
-a la grabación).
+Los agentes **llaman desde Ringover** (app móvil / web / escritorio, con número español como
+identificador) y **cada llamada queda registrada como nota en la ficha del contacto en
+GoHighLevel** (dirección, agente, nº del lead, duración, fecha, estado y enlace a grabación).
 
-> Alcance actual: **solo registro de llamadas**. Sin transcripción/IA (eso sería una fase
-> posterior — ver "Fase 2" abajo). No requiere subir de plan ni el add-on Empower.
+> Alcance actual: **solo registro de llamadas**. Sin transcripción/IA (Fase 2). No requiere
+> subir de plan ni el add-on Empower.
 
-## Arquitectura
+## Enfoque: POLLING (no webhooks)
+
+El workflow consulta la API de Ringover cada 5 min y registra las llamadas nuevas. Es
+compatible con el plan **SMART** (API + grabación básica incluidas) y no requiere configurar
+webhooks en Ringover.
 
 ```
-Agente llama desde Ringover (móvil/app)
-        │
-        ▼
-Ringover dispara webhook (fin de llamada)
-        │  POST JSON
-        ▼
-n8n  (workflow incluido en esta carpeta)
-        │  1) normaliza el evento
-        │  2) busca/crea el contacto en GHL por teléfono (upsert)
-        │  3) añade una NOTA con los datos de la llamada
-        ▼
-GHL · Ficha del contacto → timeline con la llamada
+Schedule (cada 5 min)
+  → POST https://public-api.ringover.com/v2/calls   (últimos 15 min)
+  → IF call_list_count > 0
+  → Split call_list
+  → Normalizar + DEDUP (Code)         ← mapea campos y evita notas duplicadas
+  → GHL: Buscar contacto por teléfono (E.164 con +)
+  → IF contacto encontrado
+  → GHL: Crear nota con los datos de la llamada
 ```
 
-Coste de plataforma: **0 € extra** (n8n ya está en el stack). Sin Empower ni cambio de plan.
+- **n8n Cloud**: `https://qualivo.app.n8n.cloud`
+- **Workflow**: `Nuria - Ringover -> GHL · Registro de llamadas` (ID `1pBaY5gfx7b8Sqmb`)
+- **GHL Location**: `NqtT9FXlZmVKuyA4HDbV` (subcuenta de Nuria, ~104k contactos)
 
-## Puesta en marcha
+Este JSON (`n8n-ringover-to-ghl-call-logging.json`) es la copia versionada **sin secretos**
+(placeholders `<RINGOVER_API_KEY>` y `<GHL_PRIVATE_TOKEN>`). El workflow desplegado en n8n
+tiene los valores reales en las cabeceras de los nodos HTTP.
 
-### 1. Ringover (telefonía)
-1. Dar de alta los **seats de agentes** (Ferran, Alba, Raquel, Eva) y asignarles número
-   español. *(Hoy solo existe 1 usuario: Maikel · +34 930 52 37 94.)*
-2. Instalarles la **app móvil** (iOS/Android, en español) e iniciar sesión.
-3. Activar **grabación de llamadas** (incluida en SMART, básica).
-4. **Dashboard > Developer > Webhooks**: activar los eventos de llamada
-   (entrante, contestada, perdida, buzón, **fin de llamada/hangup**) y poner como URL la
-   del webhook de n8n (ver paso 3).
+## Estado
 
-### 2. GoHighLevel (CRM)
-1. En la subcuenta de Nuria: **Settings > Private Integrations** → crear un token con
-   permisos sobre **Contacts** (lectura/escritura) y **Notes**.
-2. Anotar el **Location ID** de la subcuenta (Settings > Business Profile).
+- [x] APIs validadas: Ringover (`/v2/users`, `/v2/calls`), GHL (token + location), n8n.
+- [x] Workflow corregido y desplegado en n8n — **INACTIVO** (a la espera de validación).
+- [ ] Llamada de prueba → confirmar que la nota cae en la ficha del contacto.
+- [ ] **Activar** el workflow.
+- [ ] Provisionar agentes en Ringover (Ferran, Alba, Raquel, Eva). Hoy solo Maikel.
+- [ ] Mover secretos a credenciales de n8n y **rotar** la API key de Anthropic expuesta.
 
-### 3. n8n
-1. Importar `n8n-ringover-to-ghl-call-logging.json`.
-2. Crear una credencial **Header Auth** llamada `GHL Private Token (Header Auth)`:
-   - Name: `Authorization`
-   - Value: `Bearer <TU_PRIVATE_INTEGRATION_TOKEN>`
-   - Asignarla a los dos nodos HTTP (`GHL · Buscar/crear contacto` y `GHL · Añadir nota`).
-3. En el nodo **`Normalizar llamada`**, editar:
-   - `GHL_LOCATION_ID` → el Location ID de Nuria.
-   - `RINGOVER_DIDS` → lista de números españoles de Ringover.
-4. **Activar** el workflow y copiar la **Production URL** del nodo `Webhook · Ringover`
-   → pegarla en la configuración de webhooks de Ringover (paso 1.4).
+## Bugs corregidos respecto a la versión anterior
 
-### 4. Validación
-1. Hacer una llamada de prueba desde la app de Ringover.
-2. Revisar la ejecución en n8n: el nodo `Normalizar llamada` incluye el payload crudo en
-   el campo `raw`. **Confirmar que los nombres de campo coinciden** (caller/receiver,
-   direction, duration, record…). Si Ringover usa otros nombres, ajustar los mapeos en ese
-   nodo (están centralizados y comentados).
-3. Comprobar que en la ficha del contacto en GHL aparece la nota de la llamada.
+Verificados contra la API real de Ringover:
 
-## Notas / decisiones tomadas
-- **SMART** incluye API + webhooks + grabación básica → suficiente para esta fase.
-- **Un número español solo llama a España** (perfecto para la audiencia de Nuria).
-- Para no duplicar notas, el workflow registra **solo en el evento terminal** de la llamada
-  (hangup/missed/voicemail/ended). Ajustable en el nodo `¿Llamada terminada?`.
-- El mapeo de campos del webhook se **confirma contra el primer payload real** (campo `raw`).
+| # | Antes (roto) | Ahora |
+|---|---|---|
+| 1 | Fechas con espacio → la API devolvía **400** (nunca llegaba a GHL) | RFC 3339 (`toISOString()`) |
+| 2 | Parámetros `from_date/to_date` | `start_date/end_date` |
+| 3 | `direction` comparado con `'INBOUND'` (Ringover usa `in`/`out`) | `in`/`out`, nº del lead correcto entrante/saliente |
+| 4 | Duración leía `duration` (no existe) → siempre 0 | `total_duration` / `incall_duration` |
+| 5 | Grabación leía `record_url` (no existe) | `record` |
+| 6 | Teléfono sin `+` → GHL no encontraba el contacto | normaliza a **E.164 con `+`** |
+| 7 | Resumen IA sobre transcripción inexistente (gastaba Claude) | nodo de IA **eliminado** (Fase 2) |
+| 8 | Ventana 10 min cada 5 min → notas duplicadas | **dedup** por `call_id` (static data) |
 
-## Fase 2 (futuro, opcional) — Transcripción en GHL
-Sin Empower (que es caro): n8n descarga la grabación → Whisper/Deepgram → resumen con un LLM
-→ se añade a la nota. Coste estimado ~20-30 €/mes a volumen alto. No incluido en esta fase.
+## Esquema real de Ringover `/v2/calls` (referencia)
 
-## Pendiente del cliente
-- [ ] Decidir si Ringover **sustituye a CloudTalk** (hay una tarea de onboarding CloudTalk en Notion).
-- [ ] Provisionar seats + números para Ferran, Alba, Raquel, Eva.
-- [ ] Facilitar **Private Integration token** + **Location ID** de GHL.
-- [ ] Confirmar acceso a la instancia de **n8n** para desplegar el workflow.
+`call_id, direction (in/out), from_number, to_number, total_duration, incall_duration,
+record, start_time, is_answered, missed, voicemail, last_state, user.concat_name`.
+**No incluye transcripción** (eso es Empower / Fase 2).
+
+## Fase 2 (futuro, opcional) — Transcripción
+Sin Empower (caro): n8n descarga la grabación (`record`) → Whisper/Deepgram → resumen con un
+LLM → se añade a la nota. ~20-30 €/mes a volumen alto. No incluido en esta fase.
