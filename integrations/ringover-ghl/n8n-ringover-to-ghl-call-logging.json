@@ -1,0 +1,119 @@
+{
+  "name": "Ringover → GHL · Registro de llamadas (Nuria Roure)",
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ringover-call",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-ringover",
+      "name": "Webhook · Ringover",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-360, 0],
+      "webhookId": "ringover-call"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ── CONFIG (editar) ─────────────────────────────────────────────\n// Location ID de la subcuenta de GHL de Nuria Roure\nconst GHL_LOCATION_ID = 'YOUR_GHL_LOCATION_ID';\n// Número(s) español(es) de Ringover (DID). Para inferir entrante/saliente.\nconst RINGOVER_DIDS = ['+34930523794'];\n\n// IMPORTANTE: confirmar los nombres de campo con el PRIMER payload real.\n// Activa el webhook, haz una llamada de prueba y mira el campo `raw` de la\n// nota/ejecución; ajusta los mapeos de abajo si Ringover usa otros nombres.\n\nconst out = [];\nfor (const item of $input.all()) {\n  const p = item.json.body ?? item.json;\n\n  const event = String(p.event || p.type || p.last_state || '').toLowerCase();\n\n  // Ringover puede usar caller_number/receiver_number o from_number/to_number\n  const caller   = p.caller_number || p.from_number || p.from || '';\n  const receiver = p.receiver_number || p.to_number || p.to || '';\n\n  // Dirección: campo explícito si existe; si no, se infiere\n  let direction = String(p.direction || '').toLowerCase();\n  if (!direction) {\n    if (event.includes('out')) direction = 'out';\n    else if (event.includes('in') || event.includes('incoming')) direction = 'in';\n    else if (RINGOVER_DIDS.includes(caller)) direction = 'out';\n    else direction = 'in';\n  }\n  const isOutbound = direction.startsWith('out');\n\n  // El teléfono del lead es \"la otra parte\"\n  const leadPhone    = isOutbound ? receiver : caller;\n  const agentNumber  = isOutbound ? caller : receiver;\n\n  const durationSec = Number(\n    p.total_duration_in_seconds ?? p.incall_duration_in_seconds ?? p.duration ?? 0\n  );\n  const recording = p.record || p.recording_url || p.record_url || '';\n  const ts        = p.timestamp || p.start_time || p.answered_time || '';\n  const agentName = (p.user && (p.user.concat_name || p.user.email)) || p.agent || '';\n  const callId    = p.call_id || p.id || p.channel_id || '';\n\n  out.push({\n    json: {\n      ghlLocationId: GHL_LOCATION_ID,\n      event,\n      callId,\n      directionLabel: isOutbound ? 'Saliente' : 'Entrante',\n      leadPhone,\n      agentNumber,\n      agentName,\n      durationSec,\n      durationLabel: Math.floor(durationSec / 60) + 'm ' + (durationSec % 60) + 's',\n      recording,\n      timestamp: ts,\n      raw: p\n    }\n  });\n}\nreturn out;"
+      },
+      "id": "normalize-call",
+      "name": "Normalizar llamada",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "completed",
+              "leftValue": "={{ ['hangup','missed','voicemail','ended','answered'].some(e => ($json.event||'').includes(e)) }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            },
+            {
+              "id": "haslead",
+              "leftValue": "={{ !!$json.leadPhone }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-completed",
+      "name": "¿Llamada terminada?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [80, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/contacts/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"locationId\": \"{{ $json.ghlLocationId }}\",\n  \"phone\": \"{{ $json.leadPhone }}\"\n}",
+        "options": {}
+      },
+      "id": "ghl-upsert",
+      "name": "GHL · Buscar/crear contacto",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [320, -100],
+      "credentials": {
+        "httpHeaderAuth": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "GHL Private Token (Header Auth)" }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $json.contact.id }}/notes",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"body\": {{ JSON.stringify(\n    '📞 Llamada ' + $('Normalizar llamada').item.json.directionLabel + ' (Ringover)\\n' +\n    'Fecha: ' + $('Normalizar llamada').item.json.timestamp + '\\n' +\n    'Agente: ' + $('Normalizar llamada').item.json.agentName + '\\n' +\n    'Nº lead: ' + $('Normalizar llamada').item.json.leadPhone + '\\n' +\n    'Duración: ' + $('Normalizar llamada').item.json.durationLabel + '\\n' +\n    'Estado: ' + $('Normalizar llamada').item.json.event +\n    ($('Normalizar llamada').item.json.recording ? '\\nGrabación: ' + $('Normalizar llamada').item.json.recording : '') +\n    '\\nCall ID: ' + $('Normalizar llamada').item.json.callId\n  ) }}\n}",
+        "options": {}
+      },
+      "id": "ghl-note",
+      "name": "GHL · Añadir nota de llamada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, -100],
+      "credentials": {
+        "httpHeaderAuth": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "GHL Private Token (Header Auth)" }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook · Ringover": { "main": [[{ "node": "Normalizar llamada", "type": "main", "index": 0 }]] },
+    "Normalizar llamada": { "main": [[{ "node": "¿Llamada terminada?", "type": "main", "index": 0 }]] },
+    "¿Llamada terminada?": { "main": [[{ "node": "GHL · Buscar/crear contacto", "type": "main", "index": 0 }], []] },
+    "GHL · Buscar/crear contacto": { "main": [[{ "node": "GHL · Añadir nota de llamada", "type": "main", "index": 0 }]] }
+  }
+}
