@@ -1,0 +1,323 @@
+{
+  "_source": {
+    "flow_id": "RyFtr5",
+    "name": "Recordatorio de carrito abandonado",
+    "status": "manual",
+    "exported_from": "VegLiss (XRs8gn)"
+  },
+  "definition": {
+    "triggers": [
+      {
+        "type": "metric",
+        "id": "XBymec",
+        "trigger_filter": null
+      }
+    ],
+    "profile_filter": {
+      "condition_groups": [
+        {
+          "conditions": [
+            {
+              "type": "profile-metric",
+              "metric_id": "YezpQP",
+              "measurement": "count",
+              "measurement_filter": {
+                "type": "numeric",
+                "operator": "equals",
+                "value": 0
+              },
+              "timeframe_filter": {
+                "type": "date",
+                "operator": "flow-start"
+              },
+              "metric_filters": null
+            }
+          ]
+        },
+        {
+          "conditions": [
+            {
+              "type": "profile-not-in-flow",
+              "timeframe_filter": {
+                "type": "date",
+                "operator": "in-the-last",
+                "unit": "day",
+                "quantity": 7
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "actions": [
+      {
+        "id": "81086468",
+        "type": "time-delay",
+        "data": {
+          "unit": "hours",
+          "value": 4,
+          "secondary_value": 0,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "81086469"
+        }
+      },
+      {
+        "id": "81086469",
+        "type": "conditional-split",
+        "data": {
+          "profile_filter": {
+            "condition_groups": [
+              {
+                "conditions": [
+                  {
+                    "type": "profile-marketing-consent",
+                    "consent": {
+                      "channel": "email",
+                      "can_receive_marketing": true,
+                      "consent_status": {
+                        "subscription": "any",
+                        "filters": null
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "links": {
+          "next_if_true": "81086471",
+          "next_if_false": "81086470"
+        }
+      },
+      {
+        "id": "81086471",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "¡Ups! ¿Olvidaste algo en tu carrito?",
+            "preview_text": "¡Notamos que dejaste algunos productos esperándote en el carrito!",
+            "template_id": "QVEqNs",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Email #1 - Carrito Abandonado",
+            "id": "WVX7Ww"
+          },
+          "status": "manual"
+        },
+        "links": {
+          "next": "81086472"
+        }
+      },
+      {
+        "id": "81086470",
+        "type": "send-sms",
+        "data": {
+          "message": {
+            "body": "¡Hola {{ person.first_name|title|default:'' }}! 🛒 Dejaste algo genial en tu carrito en VEGLISS. ¡Todavía estás a tiempo! \n\nFinaliza tu compra aquí 👉{{ event.extra.responsive_checkout_url }}",
+            "image_id": null,
+            "dynamic_image": null,
+            "shorten_links": true,
+            "include_contact_card": false,
+            "add_org_prefix": true,
+            "add_info_link": true,
+            "add_opt_out_language": true,
+            "smart_sending_enabled": false,
+            "sms_quiet_hours_enabled": true,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "template_id": null,
+            "additional_filters": null,
+            "name": "SMS #1 - Carrito Abandonado",
+            "id": "Tm7kVy"
+          },
+          "status": "manual"
+        },
+        "links": {
+          "next": "81091621"
+        }
+      },
+      {
+        "id": "81086472",
+        "type": "time-delay",
+        "data": {
+          "unit": "hours",
+          "value": 20,
+          "secondary_value": 0,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "81086473"
+        }
+      },
+      {
+        "id": "81091621",
+        "type": "conditional-split",
+        "data": {
+          "profile_filter": {
+            "condition_groups": [
+              {
+                "conditions": [
+                  {
+                    "type": "profile-marketing-consent",
+                    "consent": {
+                      "channel": "sms",
+                      "can_receive_marketing": true,
+                      "consent_status": {
+                        "subscription": "subscribed",
+                        "filters": null
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "links": {
+          "next_if_true": "81091674",
+          "next_if_false": null
+        }
+      },
+      {
+        "id": "81086473",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "¡Tu carrito está a punto de expirar! ⏰",
+            "preview_text": "⚡ Algunos artículos están volando y podríamos quedarnos sin stock.",
+            "template_id": "VFV2Hg",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Email #2 - Carrito Abandonado",
+            "id": "TTv9cM"
+          },
+          "status": "manual"
+        },
+        "links": {
+          "next": "81087868"
+        }
+      },
+      {
+        "id": "81091674",
+        "type": "send-sms",
+        "data": {
+          "message": {
+            "body": "Última llamada 📣 Tu carrito en VEGLISS está por expirar. Usa el código VUELVO20 y obtén 20% de descuento. \n\nSolo hoy 👉👉{{ event.extra.responsive_checkout_url }}",
+            "image_id": null,
+            "dynamic_image": null,
+            "shorten_links": true,
+            "include_contact_card": false,
+            "add_org_prefix": true,
+            "add_info_link": true,
+            "add_opt_out_language": true,
+            "smart_sending_enabled": false,
+            "sms_quiet_hours_enabled": true,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "template_id": null,
+            "additional_filters": null,
+            "name": "SMS #2 - Carrito Abandonado",
+            "id": "U9E9Ug"
+          },
+          "status": "manual"
+        },
+        "links": {
+          "next": null
+        }
+      },
+      {
+        "id": "81087868",
+        "type": "time-delay",
+        "data": {
+          "unit": "days",
+          "value": 1,
+          "secondary_value": null,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "81089061"
+        }
+      },
+      {
+        "id": "81089061",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "Última oportunidad: 20% de descuento solo por hoy 🎁",
+            "preview_text": "🎉 Usa el código VUELVO20 para obtener un 20% de descuento, solo por las próximas 24 horas.",
+            "template_id": "UDDWc9",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Email #3 - Carrito Abandonado",
+            "id": "SRe4FE"
+          },
+          "status": "manual"
+        },
+        "links": {
+          "next": null
+        }
+      }
+    ],
+    "entry_action_id": "81086468",
+    "reentry_criteria": {
+      "duration": 7,
+      "unit": "day"
+    }
+  }
+}

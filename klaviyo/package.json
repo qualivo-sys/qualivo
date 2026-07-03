@@ -1,0 +1,17 @@
+{
+  "name": "vegliss-klaviyo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Provisión de automatizaciones (flows) de Klaviyo por API para VegLiss (Qualivo).",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "klaviyo": "node src/cli.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

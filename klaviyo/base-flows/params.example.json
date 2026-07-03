@@ -1,0 +1,20 @@
+{
+  "_comment": "Overrides para flows:clone. Las claves de 'actions' son los ids de acción de la definición base (ver base-flows/abandoned-cart.base.json). Ejemplo sobre el carrito abandonado de VegLiss.",
+  "name": "Carrito abandonado — VegLiss (clon API)",
+  "trigger_metric_id": "XBymec",
+  "actions": {
+    "81086468": {
+      "unit": "hours",
+      "value": 3
+    },
+    "81086471": {
+      "message": {
+        "subject_line": "¿Se te quedó algo en el carrito? 🛒",
+        "preview_text": "Vuelve y termina tu compra en VegLiss",
+        "template_id": "QVEqNs",
+        "from_email": "ventas@vegliss.es",
+        "from_label": "VegLiss"
+      }
+    }
+  }
+}

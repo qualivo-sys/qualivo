@@ -1,0 +1,92 @@
+{
+  "_source": {
+    "flow_id": "TiJfig",
+    "name": "Abandono de producto",
+    "status": "disabled",
+    "exported_from": "VegLiss (XRs8gn)"
+  },
+  "definition": {
+    "triggers": [
+      {
+        "type": "metric",
+        "id": "SLEuXY",
+        "trigger_filter": null
+      }
+    ],
+    "profile_filter": {
+      "condition_groups": [
+        {
+          "conditions": [
+            {
+              "type": "profile-metric",
+              "metric_id": "XBymec",
+              "measurement": "count",
+              "measurement_filter": {
+                "type": "numeric",
+                "operator": "equals",
+                "value": 0
+              },
+              "timeframe_filter": {
+                "type": "date",
+                "operator": "flow-start"
+              },
+              "metric_filters": null
+            }
+          ]
+        }
+      ]
+    },
+    "actions": [
+      {
+        "id": "74409662",
+        "type": "time-delay",
+        "data": {
+          "unit": "hours",
+          "value": 2,
+          "secondary_value": 0,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "74409663"
+        }
+      },
+      {
+        "id": "74409663",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "Le has estado echando un ojo a esto?",
+            "preview_text": "Por si tienes dudas",
+            "template_id": "WTA2je",
+            "smart_sending_enabled": true,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Abandono_producto_e1",
+            "id": "V7a8NK"
+          },
+          "status": "disabled"
+        },
+        "links": {
+          "next": null
+        }
+      }
+    ],
+    "entry_action_id": "74409662"
+  }
+}

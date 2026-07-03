@@ -1,0 +1,129 @@
+{
+  "_source": {
+    "flow_id": "XLP7St",
+    "name": "Email Welcome Series with Discount",
+    "status": "draft",
+    "exported_from": "VegLiss (XRs8gn)"
+  },
+  "definition": {
+    "triggers": [
+      {
+        "type": "list",
+        "id": "Xzxm5F"
+      }
+    ],
+    "profile_filter": null,
+    "actions": [
+      {
+        "id": "58680098",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss | Alisado Brasileño de Keratina Vegetal",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "Bienvenido a VegLiss: Empieza tu viaje hacia la belleza natural 🌿 + Tu descuento especial",
+            "preview_text": "",
+            "template_id": "VKFXqw",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Bienvenida",
+            "id": "Yb8TxC"
+          },
+          "status": "draft"
+        },
+        "links": {
+          "next": "58680099"
+        }
+      },
+      {
+        "id": "58680099",
+        "type": "time-delay",
+        "data": {
+          "unit": "days",
+          "value": 3,
+          "secondary_value": null,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "58680100"
+        }
+      },
+      {
+        "id": "58680100",
+        "type": "conditional-split",
+        "data": {
+          "profile_filter": {
+            "condition_groups": [
+              {
+                "conditions": [
+                  {
+                    "type": "profile-metric",
+                    "metric_id": "YezpQP",
+                    "measurement": "count",
+                    "measurement_filter": {
+                      "type": "numeric",
+                      "operator": "greater-than",
+                      "value": 0
+                    },
+                    "timeframe_filter": {
+                      "type": "date",
+                      "operator": "flow-start"
+                    },
+                    "metric_filters": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "links": {
+          "next_if_true": null,
+          "next_if_false": "58680101"
+        }
+      },
+      {
+        "id": "58680101",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss | Alisado Brasileño de Keratina Vegetal",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "Last chance to claim your offer!",
+            "preview_text": "",
+            "template_id": "Tkf3hq",
+            "smart_sending_enabled": true,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Coupon reminder email",
+            "id": "SaQcpy"
+          },
+          "status": "draft"
+        },
+        "links": {
+          "next": null
+        }
+      }
+    ],
+    "entry_action_id": "58680098"
+  }
+}

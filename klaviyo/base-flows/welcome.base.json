@@ -1,0 +1,259 @@
+{
+  "_source": {
+    "flow_id": "UL3RnP",
+    "name": "Flow de bienvenida",
+    "status": "disabled",
+    "exported_from": "VegLiss (XRs8gn)"
+  },
+  "definition": {
+    "triggers": [
+      {
+        "type": "list",
+        "id": "Xzxm5F"
+      }
+    ],
+    "profile_filter": {
+      "condition_groups": [
+        {
+          "conditions": [
+            {
+              "type": "profile-metric",
+              "metric_id": "YezpQP",
+              "measurement": "count",
+              "measurement_filter": {
+                "type": "numeric",
+                "operator": "equals",
+                "value": 0
+              },
+              "timeframe_filter": {
+                "type": "date",
+                "operator": "flow-start"
+              },
+              "metric_filters": null
+            }
+          ]
+        }
+      ]
+    },
+    "actions": [
+      {
+        "id": "74409651",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "¡Bienvenida a VegLiss! 🎉",
+            "preview_text": "Aquí tienes tu 10% de descuento ",
+            "template_id": "SkAVfH",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Bienvenida_e1",
+            "id": "YkTCpM"
+          },
+          "status": "disabled"
+        },
+        "links": {
+          "next": "74409652"
+        }
+      },
+      {
+        "id": "74409652",
+        "type": "time-delay",
+        "data": {
+          "unit": "days",
+          "value": 1,
+          "secondary_value": null,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": "74409653"
+        }
+      },
+      {
+        "id": "74409653",
+        "type": "conditional-split",
+        "data": {
+          "profile_filter": {
+            "condition_groups": [
+              {
+                "conditions": [
+                  {
+                    "type": "profile-metric",
+                    "metric_id": "XwV6SN",
+                    "measurement": "count",
+                    "measurement_filter": {
+                      "type": "numeric",
+                      "operator": "greater-than",
+                      "value": 0
+                    },
+                    "timeframe_filter": {
+                      "type": "date",
+                      "operator": "in-the-last",
+                      "unit": "day",
+                      "quantity": 30
+                    },
+                    "metric_filters": [
+                      {
+                        "property": "$flow",
+                        "filter": {
+                          "type": "string",
+                          "operator": "equals",
+                          "value": "VjNMp8"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "profile-metric",
+                    "metric_id": "QYeBtv",
+                    "measurement": "count",
+                    "measurement_filter": {
+                      "type": "numeric",
+                      "operator": "greater-than",
+                      "value": 0
+                    },
+                    "timeframe_filter": {
+                      "type": "date",
+                      "operator": "in-the-last",
+                      "unit": "day",
+                      "quantity": 30
+                    },
+                    "metric_filters": [
+                      {
+                        "property": "$flow",
+                        "filter": {
+                          "type": "string",
+                          "operator": "equals",
+                          "value": "VjNMp8"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "links": {
+          "next_if_true": "74409654",
+          "next_if_false": "74409656"
+        }
+      },
+      {
+        "id": "74409654",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "¿Por qué deberías elegir VegLiss?",
+            "preview_text": "Cuida tu cabello como se merece",
+            "template_id": "R6yQ2t",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Bienvenida_e2",
+            "id": "X6Rxax"
+          },
+          "status": "disabled"
+        },
+        "links": {
+          "next": "74409655"
+        }
+      },
+      {
+        "id": "74409656",
+        "type": "send-email",
+        "data": {
+          "message": {
+            "from_email": "ventas@vegliss.es",
+            "from_label": "VegLiss",
+            "reply_to_email": null,
+            "cc_email": null,
+            "bcc_email": null,
+            "subject_line": "¿Por qué deberías elegir VegLiss?",
+            "preview_text": "Cuida tu cabello como se merece",
+            "template_id": "VQPrVh",
+            "smart_sending_enabled": false,
+            "transactional": false,
+            "add_tracking_params": false,
+            "custom_tracking_params": null,
+            "additional_filters": null,
+            "name": "Copy of Bienvenida_e2",
+            "id": "U4pyqN"
+          },
+          "status": "disabled"
+        },
+        "links": {
+          "next": "74409657"
+        }
+      },
+      {
+        "id": "74409655",
+        "type": "time-delay",
+        "data": {
+          "unit": "days",
+          "value": 7,
+          "secondary_value": null,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": null
+        }
+      },
+      {
+        "id": "74409657",
+        "type": "time-delay",
+        "data": {
+          "unit": "days",
+          "value": 7,
+          "secondary_value": null,
+          "timezone": "profile",
+          "delay_until_weekdays": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "links": {
+          "next": null
+        }
+      }
+    ],
+    "entry_action_id": "74409651"
+  }
+}
