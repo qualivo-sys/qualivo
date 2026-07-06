@@ -17,6 +17,9 @@ function onOpen() {
     .addItem('Configurar credenciales (hoja _Config)', 'openConfigSheet')
     .addItem('Guardar credenciales de _Config', 'saveConfigFromSheet')
     .addItem('Programar refresco diario', 'installDailyTrigger')
+    .addSeparator()
+    .addSubMenu(SpreadsheetApp.getUi().createMenu('Eleva Academy')
+      .addItem('Generar embudo mensual + semanal (mes en curso)', 'elevaMenuRenderCurrent'))
     .addToUi();
 }
 
