@@ -91,6 +91,30 @@ def aggregate(invoices):
     return agg
 
 
+def clients_per_month(invoices):
+    """Clientes distintos por mes a partir de facturas emitidas (kind=income).
+    Dedup por NIF; si falta, por id de contacto; si no, por nombre.
+    Devuelve {'YYYY-MM': n_clientes, 'YYYY': n_unicos_del_anyo}."""
+    month = defaultdict(set)
+    year = defaultdict(set)
+    for it in invoices:
+        a = it["attributes"]
+        if a.get("kind") != "income":
+            continue
+        date = a.get("issue_date")
+        if not date:
+            continue
+        rel = it.get("relationships", {})
+        key = ((a.get("recipient_tax_id") or "").strip().upper()
+               or ((rel.get("contact", {}).get("data") or {}).get("id"))
+               or (a.get("recipient_name") or "").strip().upper())
+        month[date[:7]].add(key)
+        year[date[:4]].add(key)
+    out = {ym: len(s) for ym, s in month.items()}
+    out.update({y: len(s) for y, s in year.items()})
+    return out
+
+
 # --------------------------------------------------------------------------- #
 #  Google Sheets (service account, sin dependencias externas)
 # --------------------------------------------------------------------------- #
@@ -141,7 +165,7 @@ LGREEN, LRED, LBLUE, PANEL = "E7F4EC", "FBEAE8", "EAF0FA", "F4F6F8"
 EUR = '#,##0.00" €"'
 
 
-def build_dashboard(sheet_id, sid, token, agg, years):
+def build_dashboard(sheet_id, sid, token, agg, clients, years):
     """Escribe valores, formato y gráficos. `years` = lista de 2 años."""
     y1, y2 = years
     base = lambda kind, ym: round(agg.get(kind, {}).get(ym, {}).get("base", 0.0), 2)
@@ -154,6 +178,8 @@ def build_dashboard(sheet_id, sid, token, agg, years):
 
     i1, e1, b1 = cols(y1)
     i2, e2, b2 = cols(y2)
+    c1 = [clients.get(f"{y1}-{m:02d}", 0) for m in range(1, 13)]
+    c2 = [clients.get(f"{y2}-{m:02d}", 0) for m in range(1, 13)]
     T = lambda a: round(sum(a), 2)
 
     # 1) renombrar pestaña ------------------------------------------------- #
@@ -185,8 +211,14 @@ def build_dashboard(sheet_id, sid, token, agg, years):
     cell("B23", [["TOTAL", T(i1), T(e1), T(b1), T(i2), T(e2), T(b2)]])
     cell("B25", [[f"Ingresos vs Gastos por mes — {y1}"]])
     cell("B45", [[f"Ingresos vs Gastos por mes — {y2}"]])
-    cell("B65", [["Cifras en base imponible (sin IVA). Fuente: API Quipu "
-                  "(kind=income → ingresos, kind=expenses → gastos)."]])
+    # --- clientes activos por mes ---
+    cell("B66", [["CLIENTES ACTIVOS POR MES (facturas emitidas)"]])
+    cell("B67", [["Mes", f"Clientes {y1}", f"Clientes {y2}"]])
+    cell("B68", [[MES[m], c1[m], c2[m]] for m in range(12)])
+    cell("B80", [["Clientes únicos en el año",
+                  clients.get(str(y1), 0), clients.get(str(y2), 0)]])
+    cell("B95", [["Cifras en base imponible (sin IVA). Clientes = destinatarios "
+                  "distintos de facturas emitidas (dedup por NIF). Fuente: API Quipu."]])
     sheets_api("POST", sheet_id + "/values:batchUpdate", token,
                {"valueInputOption": "USER_ENTERED", "data": data})
 
@@ -200,6 +232,7 @@ def build_dashboard(sheet_id, sid, token, agg, years):
     reqs += _format_requests(sid)
     reqs.append(_chart(sid, f"Ingresos vs Gastos por mes — {y1}", [2, 3], 25))
     reqs.append(_chart(sid, f"Ingresos vs Gastos por mes — {y2}", [5, 6], 45))
+    reqs.append(_chart_clients(sid, "Clientes activos por mes"))
     sheets_api("POST", sheet_id + ":batchUpdate", token, {"requests": reqs})
 
 
@@ -320,13 +353,45 @@ def _format_requests(sid):
         "right": {"style": "SOLID", "color": rgb(NAVY)},
         "innerHorizontal": {"style": "SOLID", "color": rgb("E0E0E0")},
         "innerVertical": {"style": "SOLID", "color": rgb("E0E0E0")}}})
-    # títulos de gráficos + pie
+    # títulos de gráficos
     for r in (24, 44):
         merge(r, r + 1, 1, 8)
         fmt(r, r + 1, 1, 8, {"padding": {"left": 4},
                              "textFormat": _tf(True, 12, NAVY)}, "padding,textFormat")
-    merge(64, 65, 1, 8)
-    fmt(64, 65, 1, 8, {"textFormat": _tf(False, 9, GREY, True)}, "textFormat")
+    # sección clientes (título row65, cabecera row66, datos 67..78, total row79)
+    merge(65, 66, 1, 8)
+    fmt(65, 66, 1, 8, {"padding": {"left": 4},
+                       "textFormat": _tf(True, 12, NAVY)}, "padding,textFormat")
+    fmt(66, 67, 1, 4, {"backgroundColor": rgb(NAVY), "horizontalAlignment": "CENTER",
+                       "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 10, "FFFFFF")},
+        "backgroundColor,horizontalAlignment,verticalAlignment,textFormat")
+    fmt(66, 67, 1, 2, {"horizontalAlignment": "LEFT", "padding": {"left": 8}},
+        "horizontalAlignment,padding")
+    fmt(67, 79, 1, 2, {"verticalAlignment": "MIDDLE", "padding": {"left": 8},
+                       "textFormat": _tf(True, 10, NAVY)},
+        "verticalAlignment,padding,textFormat")
+    fmt(67, 79, 2, 4, {"horizontalAlignment": "CENTER",
+                       "textFormat": _tf(False, 10, "333333")},
+        "horizontalAlignment,textFormat")
+    fmt(67, 79, 2, 3, {"backgroundColor": rgb(LGREEN)}, "backgroundColor")
+    fmt(67, 79, 3, 4, {"backgroundColor": rgb(LBLUE)}, "backgroundColor")
+    fmt(79, 80, 1, 2, {"backgroundColor": rgb(NAVY), "padding": {"left": 8},
+                       "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 10, "FFFFFF")},
+        "backgroundColor,padding,verticalAlignment,textFormat")
+    fmt(79, 80, 2, 4, {"backgroundColor": rgb("DDE3EA"), "horizontalAlignment": "CENTER",
+                       "textFormat": _tf(True, 10, NAVY)},
+        "backgroundColor,horizontalAlignment,textFormat")
+    reqs.append({"updateBorders": {
+        "range": _rng(sid, 66, 80, 1, 4),
+        "top": {"style": "SOLID", "color": rgb(NAVY)},
+        "bottom": {"style": "SOLID", "color": rgb(NAVY)},
+        "left": {"style": "SOLID", "color": rgb(NAVY)},
+        "right": {"style": "SOLID", "color": rgb(NAVY)},
+        "innerHorizontal": {"style": "SOLID", "color": rgb("E0E0E0")},
+        "innerVertical": {"style": "SOLID", "color": rgb("E0E0E0")}}})
+    # pie (row94)
+    merge(94, 95, 1, 8)
+    fmt(94, 95, 1, 8, {"textFormat": _tf(False, 9, GREY, True)}, "textFormat")
     return reqs
 
 
@@ -351,6 +416,194 @@ def _chart(sid, title, series_cols, anchor_row):
             "widthPixels": 720, "heightPixels": 360}}}}}
 
 
+def _chart_clients(sid, title):
+    """Gráfico de líneas: clientes activos por mes (tabla filas 66..78)."""
+    domain = {"domain": {"sourceRange": {"sources": [_rng(sid, 66, 79, 1, 2)]}}}
+    series = [{"series": {"sourceRange": {"sources": [_rng(sid, 66, 79, c, c + 1)]}},
+               "targetAxis": "LEFT_AXIS", "color": rgb(col)}
+              for c, col in ((2, GREEN), (3, BLUE))]
+    return {"addChart": {"chart": {
+        "spec": {"title": title,
+                 "titleTextFormat": {"bold": True, "fontSize": 12},
+                 "basicChart": {"chartType": "LINE", "lineSmoothing": False,
+                                "legendPosition": "BOTTOM_LEGEND", "headerCount": 1,
+                                "axis": [{"position": "BOTTOM_AXIS"},
+                                         {"position": "LEFT_AXIS", "title": "nº clientes"}],
+                                "domains": [domain], "series": series}},
+        "position": {"overlayPosition": {
+            "anchorCell": {"sheetId": sid, "rowIndex": 66, "columnIndex": 5},
+            "widthPixels": 560, "heightPixels": 300}}}}}
+
+
+# --------------------------------------------------------------------------- #
+#  Pestaña "Gastos por proveedor"
+# --------------------------------------------------------------------------- #
+def expenses_by_provider(invoices, year):
+    """Lista [(proveedor, [12 importes mensuales], total)] ordenada desc.
+    Dedup por NIF del emisor (issuing_tax_id); nombre = issuing_name."""
+    f = lambda x: float(x) if x not in (None, "") else 0.0
+    prov = {}
+    for it in invoices:
+        a = it["attributes"]
+        d = a.get("issue_date") or ""
+        if a.get("kind") != "expenses" or not d.startswith(str(year)):
+            continue
+        key = (a.get("issuing_tax_id") or "").strip().upper() \
+            or (a.get("issuing_name") or "?").strip().upper()
+        name = (a.get("issuing_name") or "¿Sin nombre?").strip()
+        rec = prov.setdefault(key, {"name": name, "m": [0.0] * 12})
+        rec["m"][int(d[5:7]) - 1] += f(a.get("total_amount_without_taxes"))
+    rows = [(v["name"], [round(x, 2) for x in v["m"]], round(sum(v["m"]), 2))
+            for v in prov.values()]
+    rows.sort(key=lambda r: -r[2])
+    return rows
+
+
+def _get_or_create_tab(sheet_id, token, title):
+    meta = sheets_api("GET", sheet_id +
+                      "?fields=sheets(properties.sheetId,properties.title,charts.chartId,"
+                      "conditionalFormats)", token)
+    for s in meta["sheets"]:
+        if s["properties"]["title"] == title:
+            sid = s["properties"]["sheetId"]
+            reqs = [{"deleteEmbeddedObject": {"objectId": c["chartId"]}}
+                    for c in s.get("charts", [])]
+            # borrar reglas de formato condicional (en orden inverso)
+            for i in range(len(s.get("conditionalFormats", [])) - 1, -1, -1):
+                reqs.append({"deleteConditionalFormatRule": {"sheetId": sid, "index": i}})
+            reqs.append({"updateCells": {
+                "range": {"sheetId": sid}, "fields": "userEnteredValue,userEnteredFormat"}})
+            reqs.append({"unmergeCells": {"range": {"sheetId": sid}}})
+            sheets_api("POST", sheet_id + ":batchUpdate", token, {"requests": reqs})
+            return sid
+    res = sheets_api("POST", sheet_id + ":batchUpdate", token, {"requests": [
+        {"addSheet": {"properties": {"title": title,
+                                     "gridProperties": {"rowCount": 200, "columnCount": 16}}}}]})
+    return res["replies"][0]["addSheet"]["properties"]["sheetId"]
+
+
+def build_providers_tab(sheet_id, token, invoices, years):
+    title = "Gastos por proveedor"
+    sid = _get_or_create_tab(sheet_id, token, title)
+    NC = 15  # última columna usada (O, índice 14) exclusivo -> 15
+    data, reqs = [], []
+
+    def cell(a1, v): data.append({"range": f"'{title}'!" + a1, "values": v})
+
+    def fmt(r0, r1, c0, c1, uf, fields):
+        reqs.append({"repeatCell": {"range": _rng(sid, r0, r1, c0, c1),
+                     "cell": {"userEnteredFormat": uf},
+                     "fields": "userEnteredFormat(" + fields + ")"}})
+
+    def merge(r0, r1, c0, c1):
+        reqs.append({"mergeCells": {"range": _rng(sid, r0, r1, c0, c1),
+                                    "mergeType": "MERGE_ALL"}})
+    # anchos y cabecera general
+    reqs.append({"updateDimensionProperties": {
+        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 0, "endIndex": 1},
+        "properties": {"pixelSize": 32}, "fields": "pixelSize"}})
+    reqs.append({"updateDimensionProperties": {
+        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 1, "endIndex": 2},
+        "properties": {"pixelSize": 250}, "fields": "pixelSize"}})
+    reqs.append({"updateDimensionProperties": {
+        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 2, "endIndex": 15},
+        "properties": {"pixelSize": 84}, "fields": "pixelSize"}})
+    cell("B2", [["GASTOS MENSUALES POR PROVEEDOR"]])
+    cell("B3", [["Base imponible (sin IVA) · Fuente: API Quipu (facturas de gasto). "
+                 "Proveedor = emisor de la factura."]])
+    merge(1, 2, 1, NC)
+    fmt(1, 2, 1, NC, {"backgroundColor": rgb(NAVY), "verticalAlignment": "MIDDLE",
+                      "padding": {"left": 12}, "textFormat": _tf(True, 18, "FFFFFF")},
+        "backgroundColor,verticalAlignment,padding,textFormat")
+    reqs.append({"updateDimensionProperties": {
+        "range": {"sheetId": sid, "dimension": "ROWS", "startIndex": 1, "endIndex": 2},
+        "properties": {"pixelSize": 40}, "fields": "pixelSize"}})
+    merge(2, 3, 1, NC)
+    fmt(2, 3, 1, NC, {"backgroundColor": rgb(NAVY), "padding": {"left": 12},
+                      "textFormat": _tf(False, 10, "AFC6DE", True)},
+        "backgroundColor,padding,textFormat")
+
+    row = 4  # 0-based; siguiente bloque empieza aquí
+    for year in years:
+        rows = expenses_by_provider(invoices, year)
+        n = len(rows)
+        # título del año
+        merge(row, row + 1, 1, NC)
+        fmt(row, row + 1, 1, NC, {"backgroundColor": rgb(RED),
+            "horizontalAlignment": "LEFT", "padding": {"left": 8},
+            "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 12, "FFFFFF")},
+            "backgroundColor,horizontalAlignment,padding,verticalAlignment,textFormat")
+        cell(_a1(row, 1), [[f"AÑO {year} — {n} proveedores"]])
+        hrow = row + 1
+        cell(_a1(hrow, 1), [["Proveedor"] + MES + ["TOTAL"]])
+        fmt(hrow, hrow + 1, 1, NC, {"backgroundColor": rgb(NAVY),
+            "horizontalAlignment": "CENTER", "verticalAlignment": "MIDDLE",
+            "textFormat": _tf(True, 9, "FFFFFF")},
+            "backgroundColor,horizontalAlignment,verticalAlignment,textFormat")
+        fmt(hrow, hrow + 1, 1, 2, {"horizontalAlignment": "LEFT", "padding": {"left": 8}},
+            "horizontalAlignment,padding")
+        # datos
+        drow = hrow + 1
+        block = [[nm] + m + [tot] for nm, m, tot in rows]
+        cell(_a1(drow, 1), block)
+        fmt(drow, drow + n, 1, 2, {"padding": {"left": 8}, "verticalAlignment": "MIDDLE",
+            "textFormat": _tf(False, 9, "333333")}, "padding,verticalAlignment,textFormat")
+        fmt(drow, drow + n, 2, NC, {"numberFormat": {"type": "NUMBER", "pattern": EUR},
+            "horizontalAlignment": "RIGHT", "textFormat": _tf(False, 9, "333333")},
+            "numberFormat,horizontalAlignment,textFormat")
+        fmt(drow, drow + n, 14, NC, {"textFormat": _tf(True, 9, NAVY),
+            "backgroundColor": rgb("DDE3EA")}, "textFormat,backgroundColor")
+        # ceros en gris claro para que resalten los gastos reales
+        reqs.append({"addConditionalFormatRule": {"rule": {
+            "ranges": [_rng(sid, drow, drow + n, 2, 14)],
+            "booleanRule": {
+                "condition": {"type": "NUMBER_EQ", "values": [{"userEnteredValue": "0"}]},
+                "format": {"textFormat": _tf(color="C8CDD3")}}}, "index": 0}})
+        # total del año
+        trow = drow + n
+        totals = [round(sum(rows[i][1][m] for i in range(n)), 2) for m in range(12)]
+        cell(_a1(trow, 1), [["TOTAL"] + totals + [round(sum(totals), 2)]])
+        fmt(trow, trow + 1, 1, 2, {"backgroundColor": rgb(NAVY), "padding": {"left": 8},
+            "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 9, "FFFFFF")},
+            "backgroundColor,padding,verticalAlignment,textFormat")
+        fmt(trow, trow + 1, 2, NC, {"backgroundColor": rgb("C3CAD3"),
+            "numberFormat": {"type": "NUMBER", "pattern": EUR},
+            "horizontalAlignment": "RIGHT", "textFormat": _tf(True, 9, NAVY)},
+            "backgroundColor,numberFormat,horizontalAlignment,textFormat")
+        reqs.append({"updateBorders": {"range": _rng(sid, hrow, trow + 1, 1, NC),
+            "top": {"style": "SOLID", "color": rgb(NAVY)},
+            "bottom": {"style": "SOLID", "color": rgb(NAVY)},
+            "left": {"style": "SOLID", "color": rgb(NAVY)},
+            "right": {"style": "SOLID", "color": rgb(NAVY)},
+            "innerHorizontal": {"style": "SOLID", "color": rgb("E8E8E8")},
+            "innerVertical": {"style": "SOLID", "color": rgb("E8E8E8")}}})
+        # gráfico de barras: total por proveedor (col O=14) vs nombre (col B=1)
+        reqs.append({"addChart": {"chart": {"spec": {
+            "title": f"Gasto total por proveedor — {year}",
+            "titleTextFormat": {"bold": True, "fontSize": 12},
+            "basicChart": {"chartType": "BAR", "legendPosition": "NO_LEGEND",
+                "axis": [{"position": "BOTTOM_AXIS", "title": "€"},
+                         {"position": "LEFT_AXIS"}],
+                "domains": [{"domain": {"sourceRange": {"sources": [_rng(sid, drow, trow, 1, 2)]}}}],
+                "series": [{"series": {"sourceRange": {"sources": [_rng(sid, drow, trow, 14, NC)]}},
+                            "color": rgb(RED)}]}},
+            "position": {"overlayPosition": {
+                "anchorCell": {"sheetId": sid, "rowIndex": trow + 2, "columnIndex": 1},
+                "widthPixels": 760, "heightPixels": max(280, n * 20 + 80)}}}}})
+        # avanzar cursor: bloque + gráfico + separación
+        chart_rows = max(280, n * 20 + 80) // 21 + 2
+        row = trow + 2 + chart_rows + 2
+
+    sheets_api("POST", sheet_id + "/values:batchUpdate", token,
+               {"valueInputOption": "USER_ENTERED", "data": data})
+    sheets_api("POST", sheet_id + ":batchUpdate", token, {"requests": reqs})
+
+
+def _a1(row0, col0):
+    """Convierte índices 0-based a A1 (solo columnas simples A-Z)."""
+    return chr(ord("A") + col0) + str(row0 + 1)
+
+
 # --------------------------------------------------------------------------- #
 def main():
     years = [int(y) for y in sys.argv[1:]] or [2025, 2026]
@@ -365,12 +618,15 @@ def main():
     inv = quipu_all_invoices(quipu_token(cid, csec))
     print(f"  {len(inv)} facturas descargadas", file=sys.stderr)
     agg = aggregate(inv)
+    clients = clients_per_month(inv)
 
     print("Construyendo dashboard en Google Sheets…", file=sys.stderr)
     gtok = google_token(sa)
     meta = sheets_api("GET", sheet_id + "?fields=sheets.properties", gtok)
     sid = meta["sheets"][0]["properties"]["sheetId"]
-    build_dashboard(sheet_id, sid, gtok, agg, years)
+    build_dashboard(sheet_id, sid, gtok, agg, clients, years)
+    print("Construyendo pestaña de gastos por proveedor…", file=sys.stderr)
+    build_providers_tab(sheet_id, gtok, inv, years)
     print(f"Listo → https://docs.google.com/spreadsheets/d/{sheet_id}/edit")
 
 
