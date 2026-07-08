@@ -14,3 +14,7 @@ credentials*.json
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Python
+__pycache__/
+*.pyc

@@ -71,17 +71,37 @@ def quipu_all_invoices(token):
     return out
 
 
+def _dup_key(a):
+    """Clave de duplicado exacto de una factura.
+
+    Incluye el número de factura: dos facturas con números distintos NUNCA
+    son duplicados (aunque coincidan cliente, fecha e importe). Solo se
+    consideran duplicados los registros idénticos, incluido el número
+    (o ambos sin número, típico de facturas de gasto)."""
+    f = lambda x: float(x) if x not in (None, "") else 0.0
+    return (a.get("kind"), a.get("issuing_tax_id"), a.get("recipient_tax_id"),
+            a.get("number"), a.get("issue_date"),
+            round(f(a.get("total_amount_without_taxes")), 2),
+            round(f(a.get("total_amount")), 2), tuple(a.get("concepts") or []))
+
+
 def aggregate(invoices):
-    """{kind: {'YYYY-MM': {count,total,base,vat,retention}}}"""
+    """{kind: {'YYYY-MM': {count,total,base,vat,retention}}}
+    Elimina facturas duplicadas exactas antes de sumar."""
     agg = defaultdict(lambda: defaultdict(
         lambda: {"count": 0, "total": 0.0, "base": 0.0,
                  "vat": 0.0, "retention": 0.0}))
     f = lambda x: float(x) if x not in (None, "") else 0.0
+    seen = set()
     for it in invoices:
         a = it["attributes"]
         date = a.get("issue_date")
         if not date:
             continue
+        k = _dup_key(a)
+        if k in seen:
+            continue
+        seen.add(k)
         rec = agg[a.get("kind")][date[:7]]
         rec["count"] += 1
         rec["total"] += f(a.get("total_amount"))
@@ -439,24 +459,36 @@ def _chart_clients(sid, title):
 #  Pestaña "Gastos por proveedor"
 # --------------------------------------------------------------------------- #
 def expenses_by_provider(invoices, year):
-    """Lista [(proveedor, [12 importes mensuales], total)] ordenada desc.
-    Dedup por NIF del emisor (issuing_tax_id); nombre = issuing_name."""
+    """Gasto por proveedor de un año, eliminando facturas duplicadas.
+
+    Un duplicado exacto = misma (NIF emisor, fecha, importe, concepto);
+    se cuenta una sola vez tanto en importe como en nº de facturas.
+
+    Devuelve (rows, dups_eliminados) donde cada row es
+    (proveedor, n_facturas, [12 importes mensuales], total)."""
     f = lambda x: float(x) if x not in (None, "") else 0.0
-    prov = {}
+    prov, seen, dups = {}, set(), 0
     for it in invoices:
         a = it["attributes"]
         d = a.get("issue_date") or ""
         if a.get("kind") != "expenses" or not d.startswith(str(year)):
             continue
+        base = round(f(a.get("total_amount_without_taxes")), 2)
+        dk = _dup_key(a)
+        if dk in seen:
+            dups += 1
+            continue
+        seen.add(dk)
         key = (a.get("issuing_tax_id") or "").strip().upper() \
             or (a.get("issuing_name") or "?").strip().upper()
         name = (a.get("issuing_name") or "¿Sin nombre?").strip()
-        rec = prov.setdefault(key, {"name": name, "m": [0.0] * 12})
-        rec["m"][int(d[5:7]) - 1] += f(a.get("total_amount_without_taxes"))
-    rows = [(v["name"], [round(x, 2) for x in v["m"]], round(sum(v["m"]), 2))
+        rec = prov.setdefault(key, {"name": name, "m": [0.0] * 12, "n": 0})
+        rec["m"][int(d[5:7]) - 1] += base
+        rec["n"] += 1
+    rows = [(v["name"], v["n"], [round(x, 2) for x in v["m"]], round(sum(v["m"]), 2))
             for v in prov.values()]
-    rows.sort(key=lambda r: -r[2])
-    return rows
+    rows.sort(key=lambda r: -r[3])
+    return rows, dups
 
 
 def _get_or_create_tab(sheet_id, token, title):
@@ -485,7 +517,9 @@ def _get_or_create_tab(sheet_id, token, title):
 def build_providers_tab(sheet_id, token, invoices, years):
     title = "Gastos por proveedor"
     sid = _get_or_create_tab(sheet_id, token, title)
-    NC = 15  # última columna usada (O, índice 14) exclusivo -> 15
+    # Columnas: B=Proveedor(1) C=Nº fact.(2) D..O=meses(3..14) P=TOTAL(15)
+    TOT_C = 15          # índice columna TOTAL
+    NC = 16             # límite de columna (exclusivo) -> P
     data, reqs = [], []
 
     def cell(a1, v): data.append({"range": f"'{title}'!" + a1, "values": v})
@@ -498,19 +532,17 @@ def build_providers_tab(sheet_id, token, invoices, years):
     def merge(r0, r1, c0, c1):
         reqs.append({"mergeCells": {"range": _rng(sid, r0, r1, c0, c1),
                                     "mergeType": "MERGE_ALL"}})
-    # anchos y cabecera general
-    reqs.append({"updateDimensionProperties": {
-        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 0, "endIndex": 1},
-        "properties": {"pixelSize": 32}, "fields": "pixelSize"}})
-    reqs.append({"updateDimensionProperties": {
-        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 1, "endIndex": 2},
-        "properties": {"pixelSize": 250}, "fields": "pixelSize"}})
-    reqs.append({"updateDimensionProperties": {
-        "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": 2, "endIndex": 15},
-        "properties": {"pixelSize": 84}, "fields": "pixelSize"}})
+
+    def width(c0, c1, px):
+        reqs.append({"updateDimensionProperties": {
+            "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": c0, "endIndex": c1},
+            "properties": {"pixelSize": px}, "fields": "pixelSize"}})
+    width(0, 1, 32); width(1, 2, 250); width(2, 3, 62)
+    width(3, 15, 82); width(15, 16, 92)
     cell("B2", [["GASTOS MENSUALES POR PROVEEDOR"]])
-    cell("B3", [["Base imponible (sin IVA) · Fuente: API Quipu (facturas de gasto). "
-                 "Proveedor = emisor de la factura."]])
+    cell("B3", [["Base imponible (sin IVA) · Nº fact. = nº de facturas del proveedor · "
+                 "duplicados exactos (mismo emisor, fecha, importe y concepto) eliminados. "
+                 "Fuente: API Quipu."]])
     merge(1, 2, 1, NC)
     fmt(1, 2, 1, NC, {"backgroundColor": rgb(NAVY), "verticalAlignment": "MIDDLE",
                       "padding": {"left": 12}, "textFormat": _tf(True, 18, "FFFFFF")},
@@ -525,17 +557,19 @@ def build_providers_tab(sheet_id, token, invoices, years):
 
     row = 4  # 0-based; siguiente bloque empieza aquí
     for year in years:
-        rows = expenses_by_provider(invoices, year)
+        rows, dups = expenses_by_provider(invoices, year)
         n = len(rows)
+        n_fact = sum(r[1] for r in rows)
         # título del año
         merge(row, row + 1, 1, NC)
         fmt(row, row + 1, 1, NC, {"backgroundColor": rgb(RED),
             "horizontalAlignment": "LEFT", "padding": {"left": 8},
             "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 12, "FFFFFF")},
             "backgroundColor,horizontalAlignment,padding,verticalAlignment,textFormat")
-        cell(_a1(row, 1), [[f"AÑO {year} — {n} proveedores"]])
+        dtxt = f" · {dups} duplicadas eliminadas" if dups else ""
+        cell(_a1(row, 1), [[f"AÑO {year} — {n} proveedores · {n_fact} facturas{dtxt}"]])
         hrow = row + 1
-        cell(_a1(hrow, 1), [["Proveedor"] + MES + ["TOTAL"]])
+        cell(_a1(hrow, 1), [["Proveedor", "Nº fact."] + MES + ["TOTAL"]])
         fmt(hrow, hrow + 1, 1, NC, {"backgroundColor": rgb(NAVY),
             "horizontalAlignment": "CENTER", "verticalAlignment": "MIDDLE",
             "textFormat": _tf(True, 9, "FFFFFF")},
@@ -544,29 +578,38 @@ def build_providers_tab(sheet_id, token, invoices, years):
             "horizontalAlignment,padding")
         # datos
         drow = hrow + 1
-        block = [[nm] + m + [tot] for nm, m, tot in rows]
+        block = [[nm, nf] + m + [tot] for nm, nf, m, tot in rows]
         cell(_a1(drow, 1), block)
         fmt(drow, drow + n, 1, 2, {"padding": {"left": 8}, "verticalAlignment": "MIDDLE",
             "textFormat": _tf(False, 9, "333333")}, "padding,verticalAlignment,textFormat")
-        fmt(drow, drow + n, 2, NC, {"numberFormat": {"type": "NUMBER", "pattern": EUR},
+        # Nº fact.: entero centrado
+        fmt(drow, drow + n, 2, 3, {"numberFormat": {"type": "NUMBER", "pattern": "0"},
+            "horizontalAlignment": "CENTER", "textFormat": _tf(True, 9, GREY)},
+            "numberFormat,horizontalAlignment,textFormat")
+        # meses + total: euros
+        fmt(drow, drow + n, 3, NC, {"numberFormat": {"type": "NUMBER", "pattern": EUR},
             "horizontalAlignment": "RIGHT", "textFormat": _tf(False, 9, "333333")},
             "numberFormat,horizontalAlignment,textFormat")
-        fmt(drow, drow + n, 14, NC, {"textFormat": _tf(True, 9, NAVY),
+        fmt(drow, drow + n, TOT_C, NC, {"textFormat": _tf(True, 9, NAVY),
             "backgroundColor": rgb("DDE3EA")}, "textFormat,backgroundColor")
-        # ceros en gris claro para que resalten los gastos reales
+        # ceros de meses en gris claro para que resalten los gastos reales
         reqs.append({"addConditionalFormatRule": {"rule": {
-            "ranges": [_rng(sid, drow, drow + n, 2, 14)],
+            "ranges": [_rng(sid, drow, drow + n, 3, TOT_C)],
             "booleanRule": {
                 "condition": {"type": "NUMBER_EQ", "values": [{"userEnteredValue": "0"}]},
                 "format": {"textFormat": _tf(color="C8CDD3")}}}, "index": 0}})
         # total del año
         trow = drow + n
-        totals = [round(sum(rows[i][1][m] for i in range(n)), 2) for m in range(12)]
-        cell(_a1(trow, 1), [["TOTAL"] + totals + [round(sum(totals), 2)]])
+        totals = [round(sum(rows[i][2][m] for i in range(n)), 2) for m in range(12)]
+        cell(_a1(trow, 1), [["TOTAL", n_fact] + totals + [round(sum(totals), 2)]])
         fmt(trow, trow + 1, 1, 2, {"backgroundColor": rgb(NAVY), "padding": {"left": 8},
             "verticalAlignment": "MIDDLE", "textFormat": _tf(True, 9, "FFFFFF")},
             "backgroundColor,padding,verticalAlignment,textFormat")
-        fmt(trow, trow + 1, 2, NC, {"backgroundColor": rgb("C3CAD3"),
+        fmt(trow, trow + 1, 2, 3, {"backgroundColor": rgb("C3CAD3"),
+            "numberFormat": {"type": "NUMBER", "pattern": "0"},
+            "horizontalAlignment": "CENTER", "textFormat": _tf(True, 9, NAVY)},
+            "backgroundColor,numberFormat,horizontalAlignment,textFormat")
+        fmt(trow, trow + 1, 3, NC, {"backgroundColor": rgb("C3CAD3"),
             "numberFormat": {"type": "NUMBER", "pattern": EUR},
             "horizontalAlignment": "RIGHT", "textFormat": _tf(True, 9, NAVY)},
             "backgroundColor,numberFormat,horizontalAlignment,textFormat")
@@ -577,7 +620,7 @@ def build_providers_tab(sheet_id, token, invoices, years):
             "right": {"style": "SOLID", "color": rgb(NAVY)},
             "innerHorizontal": {"style": "SOLID", "color": rgb("E8E8E8")},
             "innerVertical": {"style": "SOLID", "color": rgb("E8E8E8")}}})
-        # gráfico de barras: total por proveedor (col O=14) vs nombre (col B=1)
+        # gráfico de barras: total por proveedor (col TOTAL) vs nombre (col B=1)
         reqs.append({"addChart": {"chart": {"spec": {
             "title": f"Gasto total por proveedor — {year}",
             "titleTextFormat": {"bold": True, "fontSize": 12},
@@ -585,7 +628,7 @@ def build_providers_tab(sheet_id, token, invoices, years):
                 "axis": [{"position": "BOTTOM_AXIS", "title": "€"},
                          {"position": "LEFT_AXIS"}],
                 "domains": [{"domain": {"sourceRange": {"sources": [_rng(sid, drow, trow, 1, 2)]}}}],
-                "series": [{"series": {"sourceRange": {"sources": [_rng(sid, drow, trow, 14, NC)]}},
+                "series": [{"series": {"sourceRange": {"sources": [_rng(sid, drow, trow, TOT_C, NC)]}},
                             "color": rgb(RED)}]}},
             "position": {"overlayPosition": {
                 "anchorCell": {"sheetId": sid, "rowIndex": trow + 2, "columnIndex": 1},
