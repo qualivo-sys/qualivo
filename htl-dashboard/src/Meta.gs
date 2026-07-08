@@ -43,7 +43,7 @@ function htlLeadsFromActions(actions) {
  */
 function htlInsights(level) {
   var fields = (level === 'ad')
-    ? 'campaign_name,adset_name,ad_name,spend,impressions,clicks,ctr,cpc,actions,effective_status'
+    ? 'campaign_name,adset_name,ad_name,spend,impressions,clicks,ctr,cpc,actions'
     : 'campaign_name,spend,impressions,clicks,ctr,cpc,actions';
   var filtering = JSON.stringify([
     { field: 'campaign.name', operator: 'CONTAIN', value: htlNameFilter() }
@@ -65,7 +65,6 @@ function htlInsights(level) {
         campaign: r.campaign_name || '',
         adset: r.adset_name || '',
         ad: r.ad_name || '',
-        status: r.effective_status || '',
         spend: spend,
         impressions: Number(r.impressions) || 0,
         clicks: Number(r.clicks) || 0,

@@ -23,9 +23,9 @@ function htlRenderCampaigns() {
 
 function htlRenderAds() {
   var rows = htlInsights('ad');
-  var header = ['Campaña', 'Conjunto', 'Anuncio', 'Estado', 'Gasto (€)', 'Impresiones', 'Clicks', 'CTR %', 'CPC (€)', 'Leads', 'CPL (€)'];
+  var header = ['Campaña', 'Conjunto', 'Anuncio', 'Gasto (€)', 'Impresiones', 'Clicks', 'CTR %', 'CPC (€)', 'Leads', 'CPL (€)'];
   var data = rows.map(function (r) {
-    return [r.campaign, r.adset, r.ad, r.status, round2(r.spend), r.impressions, r.clicks, round2(r.ctr), round2(r.cpc), r.leads, round2(r.cpl)];
+    return [r.campaign, r.adset, r.ad, round2(r.spend), r.impressions, r.clicks, round2(r.ctr), round2(r.cpc), r.leads, round2(r.cpl)];
   });
   htlWriteSheet(HTL.sheets.ads, header, data, rows);
 }
