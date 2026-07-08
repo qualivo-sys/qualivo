@@ -5,6 +5,10 @@
 # Local env / secrets
 .env
 *.local
+# Google service account keys / credenciales
+service_account*.json
+*-sa.json
+credentials*.json
 
 # OS / editor
 .DS_Store
