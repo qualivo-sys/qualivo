@@ -22,10 +22,10 @@ var QUALIVO = {
   timezone: 'Europe/Madrid',
   currency: 'EUR',
   // Estos 4 se sobrescriben desde _Config si están definidos:
-  website: 'qualivo.io',
-  senderName: '',        // QUALIVO_SENDER_NAME
-  senderEmail: '',       // QUALIVO_SENDER_EMAIL (remitente de los borradores)
-  calendarLink: ''       // QUALIVO_CALENDAR_LINK (Calendly / Google Calendar)
+  website: 'goqualivo.com',
+  senderName: 'Maikel Echevarria',  // QUALIVO_SENDER_NAME
+  senderEmail: '',                  // QUALIVO_SENDER_EMAIL (remitente de los borradores)
+  calendarLink: ''                  // QUALIVO_CALENDAR_LINK (Calendly / Google Calendar)
 };
 
 /**
