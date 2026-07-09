@@ -52,7 +52,13 @@ var TARGET = {
 
   // Umbral de score (0-100) a partir del cual una empresa entra como
   // "Cualificado" (lista para contactar) en vez de "Nuevo".
-  qualifyThreshold: 50
+  qualifyThreshold: 50,
+
+  // ENVÍO AUTOMÁTICO: si true, tras detectar y cualificar, el radar empuja
+  // automáticamente los "Cualificado" con email a la campaña de Smartlead (que
+  // se encarga del envío con warmup/límites). Requiere credenciales de Smartlead
+  // y fuerza revealEmails=true. Déjalo en false hasta tener la campaña lista.
+  autoSmartlead: false
 };
 
 /**
@@ -130,7 +136,8 @@ var CREDENTIAL_KEYS = [
   'RADAR_MAX_COMPANIES',     // p.ej. "25"
   'RADAR_MAX_JOB_AGE_DAYS',  // p.ej. "60"
   'RADAR_REVEAL_EMAILS',     // "true" / "false"
-  'RADAR_QUALIFY_THRESHOLD'  // p.ej. "50"
+  'RADAR_QUALIFY_THRESHOLD', // p.ej. "50"
+  'RADAR_AUTO_SMARTLEAD'     // "true" = enviar solo vía Smartlead tras detectar
 ];
 
 /** Lee una propiedad del script (credencial / ajuste). */
@@ -155,6 +162,11 @@ function applyConfigOverrides() {
 
   var thr = getProp('RADAR_QUALIFY_THRESHOLD');
   if (thr) TARGET.qualifyThreshold = parseInt(thr, 10) || TARGET.qualifyThreshold;
+
+  var autoSL = getProp('RADAR_AUTO_SMARTLEAD');
+  if (autoSL) TARGET.autoSmartlead = (String(autoSL).toLowerCase() === 'true');
+  // El envío automático necesita el email revelado.
+  if (TARGET.autoSmartlead) TARGET.revealEmails = true;
 
   QUALIVO.senderName = getProp('QUALIVO_SENDER_NAME', QUALIVO.senderName);
   QUALIVO.senderEmail = getProp('QUALIVO_SENDER_EMAIL', QUALIVO.senderEmail);

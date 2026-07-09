@@ -19,9 +19,14 @@ function smartleadAddLead(p) {
       first_name: parts.first,
       last_name: parts.last,
       company_name: p.company || '',
+      // Variables que la plantilla de la campaña puede inyectar tal cual:
+      //   Asunto del email  ->  {{asunto}}
+      //   Cuerpo del email  ->  {{mensaje}}
+      // Así el envío queda 100% personalizado sin escribir plantilla en Smartlead.
       custom_fields: {
-        oferta_detectada: p.jobTitle || '',
-        asunto_sugerido: p.subject || ''
+        asunto: p.subject || '',
+        mensaje: p.message || '',
+        oferta_detectada: p.jobTitle || ''
       }
     }],
     // No pisar leads existentes ni parar el resto de la campaña.

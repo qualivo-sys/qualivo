@@ -112,6 +112,41 @@ clasp push -P .clasp-prospecting.json      # o: mv .clasp-prospecting.json .clas
 
 ---
 
+## Envío automático de email (Smartlead)
+
+El envío se hace **por Smartlead**, no por Gmail: así el disparo va con warmup,
+límites diarios, rotación de buzones y gestión de rebotes/bajas, sin quemar tu
+dominio. El motor solo **añade el lead ya personalizado** a la campaña; Smartlead
+envía según su secuencia y horario.
+
+**Flujo automático (end-to-end):**
+```
+Radar detecta → cualifica → revela email (Apollo) → añade a campaña Smartlead
+                                                     → Smartlead envía la secuencia
+```
+
+**Puesta en marcha:**
+1. En **Smartlead**: crea una campaña, conecta el buzón de envío y **actívale el
+   warmup**. Define límite diario prudente (p.ej. 20-30/día al principio).
+2. En la secuencia, usa como **asunto** `{{asunto}}` y como **cuerpo**
+   `{{mensaje}}` — el motor rellena esas variables con el mensaje personalizado
+   de cada empresa (no hace falta escribir la plantilla a mano).
+3. Añade un **paso de baja / unsubscribe** y tu identificación (requisito legal).
+4. En `_Config`: pon `SMARTLEAD_API_KEY`, `SMARTLEAD_CAMPAIGN_ID` y
+   `RADAR_AUTO_SMARTLEAD` = `true`. Guarda credenciales.
+5. A partir de ahí, el **radar diario** detecta y **empuja solo** a Smartlead.
+
+> Deja la campaña **en pausa** hasta revisar los primeros leads; cuando te
+> convenza, dale a *start* en Smartlead y ya envía en automático.
+
+> **Aviso legal (RGPD / LSSI-CE, España):** el email B2B en frío se ampara en
+> interés legítimo, pero **debes** identificarte con claridad, ofrecer baja fácil
+> en cada envío y atender las bajas. El sistema deja preparado el mensaje; el
+> cumplimiento (opt-out, identificación, registro de bajas) lo configuras en la
+> campaña de Smartlead. Empieza con volumen bajo para proteger la reputación.
+
+---
+
 ## Ajustar el target
 
 En `Config.gs`: geografía (`TARGET.locations`), tamaño de empresa

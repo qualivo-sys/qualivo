@@ -50,6 +50,14 @@ function ejecutarRadar() {
 
   if (added.length) appendProspects(added);
   logEvent('Radar ejecutado', added.length + ' prospectos nuevos de ' + candidates.length + ' candidatos');
+
+  // ENVÍO AUTOMÁTICO (opcional): empuja los Cualificado con email a Smartlead,
+  // que se encarga del envío real con warmup y límites. Solo si está activado.
+  if (TARGET.autoSmartlead && hasCreds('Smartlead')) {
+    var pushed = enviarASmartlead();
+    logEvent('Auto-Smartlead', pushed + ' contactos añadidos a la secuencia automática');
+  }
+
   return added.length;
 }
 
