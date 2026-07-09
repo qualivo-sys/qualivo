@@ -6,6 +6,17 @@
 .env
 *.local
 
+# Credenciales (NUNCA subir claves a git)
+*service-account*.json
+*service_account*.json
+*credentials*.json
+*-sa.json
+gcp-*.json
+secrets/
+*.pem
+*.key
+*.p12
+
 # OS / editor
 .DS_Store
 Thumbs.db
