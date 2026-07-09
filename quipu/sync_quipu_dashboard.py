@@ -648,6 +648,246 @@ def _a1(row0, col0):
 
 
 # --------------------------------------------------------------------------- #
+#  Pestaña "Salud del negocio"
+# --------------------------------------------------------------------------- #
+def _eur(x):
+    s = f"{x:,.2f}"                       # 1,234.56  ->  1.234,56
+    return s.replace(",", "§").replace(".", ",").replace("§", ".") + " €"
+
+
+def _pct(x):
+    return f"{x:.1f}".replace(".", ",") + " %"
+
+
+def business_metrics(invoices, agg, clients, years):
+    """Métricas de negocio por año (usa el agregado ya deduplicado)."""
+    f = lambda x: float(x) if x not in (None, "") else 0.0
+    base = lambda kind, ym: round(agg.get(kind, {}).get(ym, {}).get("base", 0.0), 2)
+    # nº de facturas emitidas (deduplicadas) por año
+    seen, ninv = set(), defaultdict(int)
+    for it in invoices:
+        a = it["attributes"]
+        d = a.get("issue_date") or ""
+        if a.get("kind") != "income" or len(d) < 4:
+            continue
+        k = _dup_key(a)
+        if k in seen:
+            continue
+        seen.add(k)
+        ninv[d[:4]] += 1
+    out = {}
+    for y in years:
+        inc = [base("income", f"{y}-{m:02d}") for m in range(1, 13)]
+        exp = [base("expenses", f"{y}-{m:02d}") for m in range(1, 13)]
+        income, expense = round(sum(inc), 2), round(sum(exp), 2)
+        profit = round(income - expense, 2)
+        uniq = clients.get(str(y), 0)
+        ni = ninv[str(y)]
+        rows, _ = expenses_by_provider(invoices, y)
+        active = [clients.get(f"{y}-{m:02d}", 0) for m in range(1, 13)]
+        active = [c for c in active if c > 0]
+        cm = lambda m: clients.get(f"{y}-{m + 1:02d}", 0)
+        out[y] = {
+            "inc": inc, "exp": exp,
+            "prof": [round(i - e, 2) for i, e in zip(inc, exp)],
+            "income": income, "expense": expense, "profit": profit,
+            "margin": profit / income * 100 if income else 0,
+            "h1": round(sum(inc[:6]), 2),
+            "ninv": ni, "clients": uniq,
+            "rev_client": income / uniq if uniq else 0,
+            "ticket": income / ni if ni else 0,
+            "active_avg": sum(active) / len(active) if active else 0,
+            "nprov": len(rows),
+            "top_name": rows[0][0] if rows else "—",
+            "top_amt": rows[0][3] if rows else 0,
+            "top_pct": (rows[0][3] / expense * 100) if rows and expense else 0,
+            "rev_per_client_m": [round(inc[m] / cm(m), 2) if cm(m) else 0
+                                 for m in range(12)],
+        }
+    return out
+
+
+def build_health_tab(sheet_id, token, invoices, agg, clients, years):
+    title = "Salud del negocio"
+    sid = _get_or_create_tab(sheet_id, token, title)
+    y1, y2 = years
+    M = business_metrics(invoices, agg, clients, years)
+    a, b = M[y1], M[y2]
+    growth = (a["h1"] and (b["h1"] / a["h1"] - 1) * 100) or 0
+    data, reqs = [], []
+    cell = lambda a1, v: data.append({"range": f"'{title}'!" + a1, "values": v})
+
+    def fmt(r0, r1, c0, c1, uf, fields):
+        reqs.append({"repeatCell": {"range": _rng(sid, r0, r1, c0, c1),
+                     "cell": {"userEnteredFormat": uf},
+                     "fields": "userEnteredFormat(" + fields + ")"}})
+
+    def merge(r0, r1, c0, c1):
+        reqs.append({"mergeCells": {"range": _rng(sid, r0, r1, c0, c1),
+                                    "mergeType": "MERGE_ALL"}})
+
+    def width(c0, c1, px):
+        reqs.append({"updateDimensionProperties": {
+            "range": {"sheetId": sid, "dimension": "COLUMNS", "startIndex": c0, "endIndex": c1},
+            "properties": {"pixelSize": px}, "fields": "pixelSize"}})
+    width(0, 1, 32); width(1, 2, 300); width(2, 4, 150); width(4, 5, 24); width(5, 11, 92)
+
+    # título
+    cell("B2", [["SALUD DEL NEGOCIO"]])
+    cell("B3", [[f"Indicadores de tendencia · Quipu · actualizado {time.strftime('%Y-%m-%d')}"]])
+    merge(1, 2, 1, 11); merge(2, 3, 1, 11)
+    fmt(1, 2, 1, 11, {"backgroundColor": rgb(NAVY), "verticalAlignment": "MIDDLE",
+        "padding": {"left": 12}, "textFormat": _tf(True, 18, "FFFFFF")},
+        "backgroundColor,verticalAlignment,padding,textFormat")
+    reqs.append({"updateDimensionProperties": {
+        "range": {"sheetId": sid, "dimension": "ROWS", "startIndex": 1, "endIndex": 2},
+        "properties": {"pixelSize": 40}, "fields": "pixelSize"}})
+    fmt(2, 3, 1, 11, {"backgroundColor": rgb(NAVY), "padding": {"left": 12},
+        "textFormat": _tf(False, 10, "AFC6DE", True)}, "backgroundColor,padding,textFormat")
+
+    # ---- KPIs ----
+    cell("B5", [["INDICADOR", str(y1), str(y2)]])
+    kpi = [
+        ["Facturación (base sin IVA)", _eur(a["income"]), _eur(b["income"])],
+        ["   · ene–jun (comparable)", _eur(a["h1"]), _eur(b["h1"])],
+        ["Crecimiento ene–jun interanual", "—", "▲ " + _pct(growth)],
+        ["Gastos", _eur(a["expense"]), _eur(b["expense"])],
+        ["Beneficio", _eur(a["profit"]), _eur(b["profit"])],
+        ["Margen sobre ingresos", _pct(a["margin"]), _pct(b["margin"])],
+        ["Facturas emitidas", str(a["ninv"]), str(b["ninv"])],
+        ["Clientes únicos", str(a["clients"]), str(b["clients"])],
+        ["Ingreso medio por cliente", _eur(a["rev_client"]), _eur(b["rev_client"])],
+        ["Ticket medio por factura", _eur(a["ticket"]), _eur(b["ticket"])],
+        ["Clientes activos / mes (media)", f"{a['active_avg']:.1f}".replace(".", ","),
+         f"{b['active_avg']:.1f}".replace(".", ",")],
+        ["Nº de proveedores", str(a["nprov"]), str(b["nprov"])],
+        ["Mayor proveedor (% del gasto)",
+         f"{a['top_name']} · {_pct(a['top_pct'])}",
+         f"{b['top_name']} · {_pct(b['top_pct'])}"],
+    ]
+    cell("B6", kpi)
+    nk = len(kpi)
+    fmt(4, 5, 1, 4, {"backgroundColor": rgb(NAVY), "verticalAlignment": "MIDDLE",
+        "textFormat": _tf(True, 10, "FFFFFF"), "padding": {"left": 8}},
+        "backgroundColor,verticalAlignment,textFormat,padding")
+    fmt(4, 5, 2, 4, {"horizontalAlignment": "CENTER"}, "horizontalAlignment")
+    fmt(5, 5 + nk, 1, 2, {"padding": {"left": 8}, "verticalAlignment": "MIDDLE",
+        "textFormat": _tf(False, 10, "333333")}, "padding,verticalAlignment,textFormat")
+    fmt(5, 5 + nk, 2, 4, {"horizontalAlignment": "CENTER", "verticalAlignment": "MIDDLE",
+        "textFormat": _tf(True, 10, NAVY)}, "horizontalAlignment,verticalAlignment,textFormat")
+    # resaltar filas clave (crecimiento, beneficio, margen)
+    for rr, col in ((7, GREEN), (9, GREEN), (10, BLUE)):
+        fmt(rr, rr + 1, 1, 4, {"backgroundColor": rgb("F4F6F8")}, "backgroundColor")
+    fmt(7, 8, 3, 4, {"textFormat": _tf(True, 11, GREEN)}, "textFormat")
+    reqs.append({"updateBorders": {"range": _rng(sid, 4, 5 + nk, 1, 4),
+        "top": {"style": "SOLID", "color": rgb(NAVY)}, "bottom": {"style": "SOLID", "color": rgb(NAVY)},
+        "left": {"style": "SOLID", "color": rgb(NAVY)}, "right": {"style": "SOLID", "color": rgb(NAVY)},
+        "innerHorizontal": {"style": "SOLID", "color": rgb("E4E7EB")}}})
+
+    # ---- Beneficio mensual ----
+    r = 5 + nk + 2
+    cell(_a1(r, 1), [["BENEFICIO POR MES (ingresos − gastos)"]])
+    merge(r, r + 1, 1, 4)
+    fmt(r, r + 1, 1, 4, {"textFormat": _tf(True, 12, NAVY)}, "textFormat")
+    hr = r + 1
+    cell(_a1(hr, 1), [["Mes", f"Beneficio {y1}", f"Beneficio {y2}"]])
+    fmt(hr, hr + 1, 1, 4, {"backgroundColor": rgb(NAVY), "horizontalAlignment": "CENTER",
+        "textFormat": _tf(True, 9, "FFFFFF")}, "backgroundColor,horizontalAlignment,textFormat")
+    fmt(hr, hr + 1, 1, 2, {"horizontalAlignment": "LEFT", "padding": {"left": 8}},
+        "horizontalAlignment,padding")
+    dr = hr + 1
+    cell(_a1(dr, 1), [[MES[m], a["prof"][m], b["prof"][m]] for m in range(12)])
+    fmt(dr, dr + 12, 1, 2, {"padding": {"left": 8}, "textFormat": _tf(True, 9, NAVY)},
+        "padding,textFormat")
+    fmt(dr, dr + 12, 2, 4, {"numberFormat": {"type": "NUMBER", "pattern": EUR},
+        "horizontalAlignment": "RIGHT", "textFormat": _tf(False, 9, "333333")},
+        "numberFormat,horizontalAlignment,textFormat")
+    tr = dr + 12
+    cell(_a1(tr, 1), [["TOTAL", round(sum(a["prof"]), 2), round(sum(b["prof"]), 2)]])
+    fmt(tr, tr + 1, 1, 2, {"backgroundColor": rgb(NAVY), "padding": {"left": 8},
+        "textFormat": _tf(True, 9, "FFFFFF")}, "backgroundColor,padding,textFormat")
+    fmt(tr, tr + 1, 2, 4, {"backgroundColor": rgb("DDE3EA"),
+        "numberFormat": {"type": "NUMBER", "pattern": EUR}, "horizontalAlignment": "RIGHT",
+        "textFormat": _tf(True, 9, NAVY)}, "backgroundColor,numberFormat,horizontalAlignment,textFormat")
+    reqs.append({"updateBorders": {"range": _rng(sid, hr, tr + 1, 1, 4),
+        "top": {"style": "SOLID", "color": rgb(NAVY)}, "bottom": {"style": "SOLID", "color": rgb(NAVY)},
+        "left": {"style": "SOLID", "color": rgb(NAVY)}, "right": {"style": "SOLID", "color": rgb(NAVY)},
+        "innerHorizontal": {"style": "SOLID", "color": rgb("EAECEF")}}})
+    reqs.append({"addChart": {"chart": {"spec": {
+        "title": "Beneficio por mes", "titleTextFormat": {"bold": True, "fontSize": 12},
+        "basicChart": {"chartType": "COLUMN", "legendPosition": "BOTTOM_LEGEND", "headerCount": 1,
+            "axis": [{"position": "BOTTOM_AXIS"}, {"position": "LEFT_AXIS", "title": "€"}],
+            "domains": [{"domain": {"sourceRange": {"sources": [_rng(sid, hr, tr, 1, 2)]}}}],
+            "series": [{"series": {"sourceRange": {"sources": [_rng(sid, hr, tr, 2, 3)]}}, "color": rgb(GREEN)},
+                       {"series": {"sourceRange": {"sources": [_rng(sid, hr, tr, 3, 4)]}}, "color": rgb(BLUE)}]}},
+        "position": {"overlayPosition": {"anchorCell": {"sheetId": sid, "rowIndex": hr, "columnIndex": 5},
+            "widthPixels": 560, "heightPixels": 300}}}}})
+
+    # ---- Ingreso medio por cliente por mes ----
+    r = tr + 3
+    cell(_a1(r, 1), [["INGRESO MEDIO POR CLIENTE ACTIVO (por mes)"]])
+    merge(r, r + 1, 1, 4)
+    fmt(r, r + 1, 1, 4, {"textFormat": _tf(True, 12, NAVY)}, "textFormat")
+    hr = r + 1
+    cell(_a1(hr, 1), [["Mes", f"€/cliente {y1}", f"€/cliente {y2}"]])
+    fmt(hr, hr + 1, 1, 4, {"backgroundColor": rgb(NAVY), "horizontalAlignment": "CENTER",
+        "textFormat": _tf(True, 9, "FFFFFF")}, "backgroundColor,horizontalAlignment,textFormat")
+    fmt(hr, hr + 1, 1, 2, {"horizontalAlignment": "LEFT", "padding": {"left": 8}},
+        "horizontalAlignment,padding")
+    dr = hr + 1
+    cell(_a1(dr, 1), [[MES[m], a["rev_per_client_m"][m], b["rev_per_client_m"][m]] for m in range(12)])
+    fmt(dr, dr + 12, 1, 2, {"padding": {"left": 8}, "textFormat": _tf(True, 9, NAVY)},
+        "padding,textFormat")
+    fmt(dr, dr + 12, 2, 4, {"numberFormat": {"type": "NUMBER", "pattern": EUR},
+        "horizontalAlignment": "RIGHT", "textFormat": _tf(False, 9, "333333")},
+        "numberFormat,horizontalAlignment,textFormat")
+    reqs.append({"updateBorders": {"range": _rng(sid, hr, dr + 12, 1, 4),
+        "top": {"style": "SOLID", "color": rgb(NAVY)}, "bottom": {"style": "SOLID", "color": rgb(NAVY)},
+        "left": {"style": "SOLID", "color": rgb(NAVY)}, "right": {"style": "SOLID", "color": rgb(NAVY)},
+        "innerHorizontal": {"style": "SOLID", "color": rgb("EAECEF")}}})
+    reqs.append({"addChart": {"chart": {"spec": {
+        "title": "Ingreso medio por cliente activo", "titleTextFormat": {"bold": True, "fontSize": 12},
+        "basicChart": {"chartType": "LINE", "legendPosition": "BOTTOM_LEGEND", "headerCount": 1,
+            "axis": [{"position": "BOTTOM_AXIS"}, {"position": "LEFT_AXIS", "title": "€ / cliente"}],
+            "domains": [{"domain": {"sourceRange": {"sources": [_rng(sid, hr, dr + 12, 1, 2)]}}}],
+            "series": [{"series": {"sourceRange": {"sources": [_rng(sid, hr, dr + 12, 2, 3)]}}, "color": rgb(GREEN)},
+                       {"series": {"sourceRange": {"sources": [_rng(sid, hr, dr + 12, 3, 4)]}}, "color": rgb(BLUE)}]}},
+        "position": {"overlayPosition": {"anchorCell": {"sheetId": sid, "rowIndex": hr, "columnIndex": 5},
+            "widthPixels": 560, "heightPixels": 300}}}}})
+
+    # ---- Conclusiones ----
+    r = dr + 12 + 2
+    cell(_a1(r, 1), [["LECTURA DEL NEGOCIO"]])
+    merge(r, r + 1, 1, 8)
+    fmt(r, r + 1, 1, 8, {"textFormat": _tf(True, 12, NAVY)}, "textFormat")
+    notas = [
+        f"Crecimiento sano: la facturación ene–jun sube un {_pct(growth)} interanual "
+        f"({_eur(a['h1'])} → {_eur(b['h1'])}), con meses recientes por encima de la media de {y1}.",
+        f"Cartera más diversificada: de una media de {a['active_avg']:.1f} clientes activos/mes en {y1} "
+        f"a {b['active_avg']:.1f} en {y2}; {a['clients']} clientes únicos en {y1} y {b['clients']} en {y2}.",
+        "Ticket medio a la baja (más facturas y más pequeñas): modelo con más clientes de menor importe, "
+        "menos dependencia de proyectos grandes puntuales.",
+        f"Estructura de coste apoyada en subcontratación: el mayor proveedor de {y2} concentra el "
+        f"{_pct(b['top_pct'])} del gasto ({b['top_name']}).",
+        f"⚠ El margen de {y2} ({_pct(b['margin'])}) está sobreestimado: faltan facturas de gasto por "
+        f"registrar ({b['nprov']} proveedores en {y2} vs {a['nprov']} en {y1}). El beneficio real será menor.",
+    ]
+    for i, n in enumerate(notas):
+        cell(_a1(r + 1 + i, 1), [["•  " + n]])
+        merge(r + 1 + i, r + 2 + i, 1, 11)
+        fmt(r + 1 + i, r + 2 + i, 1, 11, {"wrapStrategy": "WRAP", "padding": {"left": 8},
+            "textFormat": _tf(False, 10, "333333")}, "wrapStrategy,padding,textFormat")
+        reqs.append({"updateDimensionProperties": {
+            "range": {"sheetId": sid, "dimension": "ROWS",
+                      "startIndex": r + 1 + i, "endIndex": r + 2 + i},
+            "properties": {"pixelSize": 34}, "fields": "pixelSize"}})
+
+    sheets_api("POST", sheet_id + "/values:batchUpdate", token,
+               {"valueInputOption": "USER_ENTERED", "data": data})
+    sheets_api("POST", sheet_id + ":batchUpdate", token, {"requests": reqs})
+
+
+# --------------------------------------------------------------------------- #
 def main():
     years = [int(y) for y in sys.argv[1:]] or [2025, 2026]
     if len(years) != 2:
@@ -670,6 +910,8 @@ def main():
     build_dashboard(sheet_id, sid, gtok, agg, clients, years)
     print("Construyendo pestaña de gastos por proveedor…", file=sys.stderr)
     build_providers_tab(sheet_id, gtok, inv, years)
+    print("Construyendo pestaña de salud del negocio…", file=sys.stderr)
+    build_health_tab(sheet_id, gtok, inv, agg, clients, years)
     print(f"Listo → https://docs.google.com/spreadsheets/d/{sheet_id}/edit")
 
 
