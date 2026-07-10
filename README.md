@@ -30,6 +30,7 @@ src/
   Formatting.gs            Estilos / tablas / KPIs
   Main.gs                  Menú, onOpen, onEdit, triggers
   ConfigSheet.gs           Hoja _Config para credenciales
+  Swipe.gs                 Pestaña Swipe/Competencia (Meta Ad Library)
   SeedData.gs              Datos de ejemplo (abril–junio 2026) para demo
   connectors/
     MetaAds.gs             Meta Marketing API
@@ -115,6 +116,8 @@ Tras subir el código, recarga el Sheet. Aparecerá el menú **EAC Dashboard**.
 | **Inicializar / crear pestañas** | Crea las pestañas base. |
 | **Cargar datos de ejemplo (demo)** | Carga abril–junio 2026 de la hoja de referencia (sin credenciales). |
 | **Programar refresco diario** | Trigger diario a las 7:00 que refresca el mes en curso. |
+| **Crear pestaña Swipe / Competencia** | Crea la pestaña `Swipe`: enlaces prefiltrados a la Meta Ad Library (competencia de growth/marketing) + tabla para registrar carruseles ganadores. |
+| **Reconstruir ayuda de Swipe (enlaces)** | Repinta solo la cabecera y los enlaces de `Swipe` sin tocar tus registros. |
 
 **Cambiar de mes**: usa el desplegable en `Dashboard!B2`. El cambio repinta el
 Dashboard y los Leads al instante desde la caché (no llama a las APIs).
@@ -127,6 +130,31 @@ Dashboard y los Leads al instante desde la caché (no llama a las APIs).
 
 Verás el dashboard completo con los datos de abril, mayo y junio. Luego
 configura credenciales y usa **Refrescar** para datos en vivo.
+
+---
+
+## Swipe / Competencia (análisis de carruseles virales)
+
+La pestaña **`Swipe`** (menú **EAC Dashboard → Crear pestaña Swipe / Competencia**)
+es una herramienta para analizar y registrar los carruseles/anuncios que la
+competencia tiene **activos en Meta**, usando la **Biblioteca de Anuncios pública**
+(Meta Ad Library):
+
+- **Gratis y sin token**: la Ad Library es pública. Por la DSA, en la UE muestra
+  *todos* los anuncios activos de cualquier página (no solo políticos).
+- **Enlaces prefiltrados** (España, activos) por temática del nicho de growth/
+  marketing y por marcas de referencia. Un clic abre la búsqueda ya montada.
+- **Tabla de registro** con gancho de la tarjeta 1, estructura, oferta/CTA,
+  fecha de inicio del anuncio, nº de variaciones y una **puntuación de viralidad
+  (1–5)** con semáforo.
+
+> Limitación: la Ad Library no da métricas de engagement. La "viralidad" se
+> **infiere** de señales (antigüedad del anuncio + nº de variaciones activas: lo
+> que lleva semanas corriendo y con varias versiones = ganador escalando). Los
+> virales **orgánicos** de Instagram/LinkedIn no aparecen aquí; para eso hace
+> falta una herramienta de terceros o guardado manual.
+
+Las búsquedas y marcas se editan en la constante `SWIPE` de `src/Swipe.gs`.
 
 ---
 
