@@ -37,6 +37,7 @@ MES_SEMANAL = os.environ.get('MES_SEMANAL', '2026-07')
 # Google Ads manual (por campaña) hasta conectar su API. Clave = 'YYYY-MM'.
 GOOGLE_INV = {'2026-07': {'Google · Performance Max': {'spend': 200.55, 'leads': 26},
                           'Google · Search': {'spend': 201.61, 'leads': 20}}}
+COURSE_PRICE = 1500.0  # precio del curso (€) -> Ingresos = matrículas × precio
 
 # ------------------------------- auth (JWT/openssl) -------------------------------
 def sheets_token():
@@ -68,7 +69,7 @@ def sheets(method, url, body=None):
         raise SystemExit("Sheets API %s: %s" % (e.code, e.read().decode()[:500]))
 
 # ------------------------------- data: GHL -------------------------------
-PROV = ['Meta · Instantáneo', 'Meta · Landing', 'Meta · Facebook (s/d)', 'Google Ads', 'Otro']
+PROV = ['Meta · Instantáneo', 'Meta · Landing', 'Google Ads', 'Otro']
 STAGES = []                 # nombres de etapa tal cual en GHL (orden del pipeline); se llena en main()
 GANADOS = 'Alumna activa'   # etapa que cuenta como matrícula para el % ganado
 
@@ -105,10 +106,9 @@ def fetch_opps(since, until):
 def provider(src):
     x = (src or '').lower()
     if 'google' in x: return 'Google Ads'
-    if 'lead form' in x or 'instant' in x or 'formulario' in x: return 'Meta · Instantáneo'
-    if 'meta' in x and 'landing' in x: return 'Meta · Landing'
-    if 'facebook' in x: return 'Meta · Facebook (s/d)'
-    if 'meta' in x: return 'Meta · Landing'
+    if 'landing' in x: return 'Meta · Landing'           # "Meta Ads - Landing web"
+    # formulario instantáneo: incluye source "Facebook" (así entran los Lead Ads en GHL)
+    if 'facebook' in x or 'lead form' in x or 'instant' in x or 'formulario' in x or 'meta' in x: return 'Meta · Instantáneo'
     return 'Otro'
 
 def wkmon(ds):
@@ -214,14 +214,20 @@ MESLBL = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agost
 def mlabel(mk): return MESLBL[int(mk[5:7]) - 1] + ' ' + mk[:4]
 
 def build_mensual(sid, stagemap):
-    nc = 2 + len(STAGES) + 2; L = Layout(sid, nc)
-    L.title('Eleva Academy · Inversión y leads por canal/etapa (mensual)')
-    L.subtitle('Embudo: GoHighLevel (en vivo) · Inversión: Meta (en vivo) + Google (manual) · Actualizado: ' + datetime.datetime.now().strftime('%d/%m/%Y'))
+    nc = 11; L = Layout(sid, nc)
+    L.title('Eleva Academy · Marketing dashboard (mensual)')
+    L.subtitle('Embudo: GoHighLevel (en vivo) · Inversión: Meta (en vivo) + Google (manual) · Curso 1.500 € · Actualizado: ' + datetime.datetime.now().strftime('%d/%m/%Y'))
     L.blank()
+    low = [s.lower() for s in STAGES]
+    prop_idx = low.index('propuesta enviada') if 'propuesta enviada' in low else len(STAGES)
+    ENTRE = [STAGES[i] for i in range(prop_idx, len(STAGES)) if low[i] != 'no cualificada']
     for mk in MESES:
         since, until = month_range(mk); m = matrix(fetch_opps(since, until), stagemap)
+        byc = meta_monthly(mk)
+        # 1) Inversión
         L.section('Inversión · ' + mlabel(mk))
-        L.table(['Canal', 'Inversión €', 'Leads (plataf.)', 'CPL €'], inv_rows(meta_monthly(mk)), [None, EUR, INT, EUR], total=True)
+        L.table(['Canal', 'Inversión €', 'Leads (plataf.)', 'CPL €'], inv_rows(byc), [None, EUR, INT, EUR], total=True)
+        # 2) Leads por canal y etapa
         L.section('Leads por canal y etapa · ' + mlabel(mk) + ' (cohorte del mes)')
         rows, totals = [], defaultdict(int)
         for p in PROV:
@@ -232,9 +238,40 @@ def build_mensual(sid, stagemap):
         grand = sum(totals.values())
         rows.append(['TOTAL'] + [totals[s] for s in STAGES] + [grand, (totals[GANADOS] / grand if grand else 0)])
         L.table(['Canal'] + STAGES + ['Total', '% Ganado'], rows, [None] + [INT] * len(STAGES) + [INT, PCT], total=True)
+        # 3) Rentabilidad y conversión
+        L.section('Rentabilidad y conversión · ' + mlabel(mk))
+        def spend_of(keys): return sum(byc[k]['spend'] for k in keys if k in byc)
+        def agg(provs):
+            leads = entre = matr = 0
+            for p in provs:
+                d = m.get(p, {}); leads += sum(d.values()); entre += sum(d.get(s, 0) for s in ENTRE); matr += d.get(GANADOS, 0)
+            return leads, entre, matr
+        def rrow(label, provs, spend):
+            leads, entre, matr = agg(provs); ing = matr * COURSE_PRICE
+            return [label,
+                    round(spend, 2) if spend else '',
+                    leads, entre, matr,
+                    (entre / leads if leads else ''),
+                    (matr / entre if entre else ''),
+                    (round(spend / entre, 2) if (spend and entre) else ''),
+                    (round(spend / matr, 2) if (spend and matr) else ''),
+                    ing,
+                    (round(ing / spend, 2) if spend else '')]
+        rent = [
+            rrow('Meta · Instantáneo', ['Meta · Instantáneo'], spend_of(['Meta · Instantáneo'])),
+            rrow('Meta · Landing', ['Meta · Landing'], spend_of(['Meta · Landing'])),
+            rrow('Meta (subtotal)', ['Meta · Instantáneo', 'Meta · Landing'], spend_of(['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)'])),
+            rrow('Google Ads', ['Google Ads'], spend_of(['Google · Performance Max', 'Google · Search', 'Google Ads'])),
+            rrow('TOTAL', PROV, spend_of(list(byc.keys()))),
+        ]
+        rent_hdr = ['Canal', 'Inversión €', 'Leads', 'Entrevistas', 'Matrículas', '% L→Entr', '% Entr→Matr', 'Coste/Entr €', 'CPA €', 'Ingresos €', 'ROAS']
+        rent_fmt = [None, EUR, INT, INT, INT, PCT, PCT, EUR, EUR, EUR, '0.0"x"']
+        hr = L.table(rent_hdr, rent, rent_fmt, total=True)
+        L.highlight_row(hr + 1 + 2)  # fila "Meta (subtotal)"
         L.blank()
-    L.note('Leads (embudo) en su etapa ACTUAL en GHL. "Respondidos"=Leads llamados · "Agendados"=Llamada agendada · "Ganados"=Alumna activa. Muchos leads en etapas tempranas están abandonados/perdidos en GHL.')
-    L.colwidths([190] + [92] * len(STAGES) + [70, 84])
+    L.note('Entrevista = "Propuesta enviada" o posterior · Matrícula = "Alumna activa" · Ingresos = matrículas × 1.500 € · ROAS = ingresos / inversión · CPA = inversión / matrículas. '
+           'La inversión es por canal de plataforma y el embudo se atribuye por el source de GHL; fíjate en "Meta (subtotal)" y "TOTAL" para la eficiencia real. Meta · Instantáneo incluye el source "Facebook".')
+    L.colwidths([165] + [92] * 10)
     return L
 
 def build_semanal(sid, stagemap):

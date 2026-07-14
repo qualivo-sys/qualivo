@@ -39,15 +39,18 @@ var CFG = {
   // que cuenta como matrícula para el % Ganado.
   ganadosStage: 'alumna activa',
 
-  providers: ['Meta · Instantáneo', 'Meta · Landing', 'Meta · Facebook (s/d)', 'Google Ads', 'Otro'],
+  coursePrice: 1500,   // precio del curso (€) -> Ingresos = matrículas × precio
+
+  providers: ['Meta · Instantáneo', 'Meta · Landing', 'Google Ads', 'Otro'],
+  // El source "Facebook" de GHL son los Lead Ads (formulario), por eso va a Instantáneo.
   sourceRules: [
     { test: 'google', provider: 'Google Ads' },
+    { test: 'landing', provider: 'Meta · Landing' },
+    { test: 'facebook', provider: 'Meta · Instantáneo' },
     { test: 'lead form', provider: 'Meta · Instantáneo' },
     { test: 'formulario', provider: 'Meta · Instantáneo' },
     { test: 'instant', provider: 'Meta · Instantáneo' },
-    { test: 'landing', provider: 'Meta · Landing' },
-    { test: 'facebook', provider: 'Meta · Facebook (s/d)' },
-    { test: 'meta', provider: 'Meta · Landing' }
+    { test: 'meta', provider: 'Meta · Instantáneo' }
   ]
 };
 
@@ -299,6 +302,31 @@ function elevaRenderMensual_() {
     rows.push(totalLine);
     var fmts = [null].concat(stages.map(function () { return ELVFMT.int; })).concat([ELVFMT.int, ELVFMT.pct]);
     row = elevaTable_(sh, row, header, rows.length ? rows : [['(sin datos)'].concat(elevaPad_(NC - 1))], fmts, rows.length > 0);
+
+    // Rentabilidad y conversión
+    row = elevaSection_(sh, row, NC, 'Rentabilidad y conversión · ' + elevaMonthLabel_(monthKey));
+    var low = stages.map(function (s) { return s.toLowerCase(); });
+    var propIdx = low.indexOf('propuesta enviada'); if (propIdx < 0) propIdx = stages.length;
+    var ENTRE = []; for (var i = propIdx; i < stages.length; i++) if (low[i] !== 'no cualificada') ENTRE.push(stages[i]);
+    var byc = inv.byChannel;
+    var spendOf = function (keys) { var s = 0; keys.forEach(function (k) { if (byc[k]) s += byc[k].spend; }); return s; };
+    var aggF = function (provs) { var L = 0, E = 0, Mt = 0; provs.forEach(function (p) { var d = m[p] || {}; for (var k in d) L += d[k]; ENTRE.forEach(function (s) { E += d[s] || 0; }); Mt += d[ganados] || 0; }); return { l: L, e: E, mt: Mt }; };
+    var rrow = function (label, provs, spend) {
+      var a = aggF(provs), ing = a.mt * CFG.coursePrice;
+      return [label, spend || '', a.l, a.e, a.mt,
+        (a.l ? a.e / a.l : ''), (a.e ? a.mt / a.e : ''),
+        ((spend && a.e) ? spend / a.e : ''), ((spend && a.mt) ? spend / a.mt : ''),
+        ing, (spend ? ing / spend : '')];
+    };
+    var rent = [
+      rrow('Meta · Instantáneo', ['Meta · Instantáneo'], spendOf(['Meta · Instantáneo'])),
+      rrow('Meta · Landing', ['Meta · Landing'], spendOf(['Meta · Landing'])),
+      rrow('Meta (subtotal)', ['Meta · Instantáneo', 'Meta · Landing'], spendOf(['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)'])),
+      rrow('Google Ads', ['Google Ads'], spendOf(['Google · Performance Max', 'Google · Search', 'Google Ads'])),
+      rrow('TOTAL', CFG.providers, spendOf(Object.keys(byc)))
+    ];
+    var rentFmt = [null, ELVFMT.eur, ELVFMT.int, ELVFMT.int, ELVFMT.int, ELVFMT.pct, ELVFMT.pct, ELVFMT.eur, ELVFMT.eur, ELVFMT.eur, '#,##0.0"x"'];
+    row = elevaTable_(sh, row, ['Canal', 'Inversión €', 'Leads', 'Entrevistas', 'Matrículas', '% L→Entr', '% Entr→Matr', 'Coste/Entr €', 'CPA €', 'Ingresos €', 'ROAS'], rent, rentFmt, true);
     row += 1;
   });
 
