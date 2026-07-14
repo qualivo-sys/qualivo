@@ -49,6 +49,45 @@ function doGet(e) {
 }
 
 /**
+ * Mapa etapa/etiqueta de GHL → evento de Meta. Permite devolver TODO el embudo
+ * de calidad (no solo el lead cualificado): así el algoritmo puede optimizar
+ * sobre el evento que más importa cuando haya volumen (~50/semana).
+ *
+ * En el workflow de GHL basta con mandar `stage` (o `tag`/`status`) con uno de
+ * estos valores; si no, se cae a `event_name` explícito y por defecto 'Lead'.
+ */
+var GHL_STAGE_TO_EVENT = {
+  'lead': 'Lead',
+  'nuevo lead': 'Lead',
+  'cualificado': 'QualifiedLead',
+  'qualified': 'QualifiedLead',
+  'cita': 'Schedule',
+  'cita programada': 'Schedule',
+  'cita agendada': 'Schedule',
+  'agendada': 'Schedule',
+  'reservada': 'Schedule',
+  'booked': 'Schedule',
+  'venta': 'Purchase',
+  'ganado': 'Purchase',
+  'won': 'Purchase',
+  'cliente': 'Purchase',
+  'descartado': 'LeadDisqualified',
+  'no cualificado': 'LeadDisqualified'
+};
+
+/** Resuelve el nombre de evento de Meta a partir del payload de GHL. */
+function resolveEventName(body, c) {
+  if (body.event_name) return body.event_name; // override explícito
+  var stage = pick(body, ['stage', 'tag', 'status', 'pipeline_stage']) ||
+              pick(c, ['stage', 'tag', 'status', 'pipeline_stage']);
+  if (stage) {
+    var mapped = GHL_STAGE_TO_EVENT[String(stage).trim().toLowerCase()];
+    if (mapped) return mapped;
+  }
+  return 'Lead';
+}
+
+/**
  * Normaliza el payload del webhook de GHL a la forma que espera la CAPI.
  * GHL permite definir un Custom Data libre en la acción Webhook; soportamos
  * tanto un objeto plano como uno anidado en `contact`, y varias variantes de
@@ -56,10 +95,22 @@ function doGet(e) {
  *
  * IMPRESCINDIBLE en el workflow de GHL: incluir el leadgen_id de Meta (lo
  * guarda la integración nativa) como `meta_lead_id` para el match directo.
+ * Para eventos de venta (Purchase) incluir `value` y opcionalmente `currency`.
  */
 function mapGhlWebhookToLead(body) {
   body = body || {};
   var c = body.contact || body;
+
+  var value = pick(body, ['value', 'amount', 'monetary_value']) ||
+              pick(c, ['value', 'amount', 'monetary_value']);
+  var currency = pick(body, ['currency']) || pick(c, ['currency']) || 'EUR';
+  var stage = pick(body, ['stage', 'tag', 'status', 'pipeline_stage']) ||
+              pick(c, ['stage', 'tag', 'status', 'pipeline_stage']);
+
+  var customData = { lead_event_source: 'GHL', event_source: 'crm' };
+  if (stage) customData.status = String(stage);
+  if (value) { customData.value = Number(value) || value; customData.currency = currency; }
+
   return {
     leadId: pick(body, ['meta_lead_id', 'leadgen_id', 'lead_id']) ||
             pick(c, ['meta_lead_id', 'leadgen_id', 'lead_id']),
@@ -69,8 +120,9 @@ function mapGhlWebhookToLead(body) {
     lastName: pick(c, ['last_name', 'lastName', 'lastname']),
     fbc: pick(body, ['fbc']) || pick(c, ['fbc']),
     fbp: pick(body, ['fbp']) || pick(c, ['fbp']),
-    eventName: body.event_name || 'Lead',
+    eventName: resolveEventName(body, c),
     eventId: body.event_id || pick(c, ['contact_id', 'id']),
+    customData: customData,
     testEventCode: body.test_event_code || ''
   };
 }

@@ -107,13 +107,30 @@ de Apps Script, que reenvía el evento a Meta. Así la campaña optimiza hacia l
   "phone": "{{contact.phone}}",
   "first_name": "{{contact.first_name}}",
   "last_name": "{{contact.last_name}}",
-  "event_name": "Lead"
+  "stage": "cualificado"
 }
 ```
 
 `mapGhlWebhookToLead()` es tolerante a variantes de nombres de clave. Con
 `meta_lead_id` el match es directo (sin PII); si falta, cae a email/teléfono
 hasheados en SHA-256 (lo hace `MetaCAPI.gs`).
+
+### Embudo de calidad completo (no solo el cualificado)
+
+El campo **`stage`** se traduce a evento de Meta (`GHL_STAGE_TO_EVENT`), así que
+puedes disparar el mismo webhook en cada etapa y devolver **todo el funnel**:
+
+| `stage` que manda GHL | Evento Meta | Cuándo dispararlo |
+|---|---|---|
+| `cualificado` | `QualifiedLead` | tag `cualificado` (post-knockout) |
+| `cita` / `agendada` | `Schedule` | reserva la llamada en el calendario |
+| `venta` / `won` | `Purchase` | cierra venta (añade `value` + `currency`) |
+| `descartado` | `LeadDisqualified` | opcional, para análisis |
+
+> Para `Purchase` incluye `"value": {{opportunity.monetary_value}}` y
+> `"currency": "EUR"`. Con volumen (~50 eventos/semana de un mismo tipo) podrás
+> **optimizar la campaña sobre ese evento**; hasta entonces sirve de medición
+> (CPLQ) y para construir histórico. Un `event_name` explícito sobreescribe el mapeo.
 
 **Despliegue del Web App:** Apps Script → Implementar → Nueva implementación →
 Aplicación web · *Ejecutar como: yo* · *Acceso: Cualquier usuario (anónimo)*.
@@ -124,8 +141,8 @@ Aplicación web · *Ejecutar como: yo* · *Acceso: Cualquier usuario (anónimo)*
 
 | Clave | Valor |
 |---|---|
-| `META_CAPI_TOKEN` | Token del dataset/píxel con permiso de Conversions API |
-| `META_DATASET_ID` | ID del dataset (píxel) de Qualivo |
+| `META_CAPI_TOKEN` | Token de Usuario del Sistema permanente (el mismo `ads_management` de Qualivo sirve — verificado) |
+| `META_DATASET_ID` | **`879197745226987`** (dataset "Qualivo Agencia") |
 | `META_TEST_EVENT_CODE` | `TESTxxxx` (Events Manager → Probar eventos) — solo QA |
 | `LEAD_WEBHOOK_SECRET` | Secreto para proteger el Web App (opcional, recomendado) |
 | `GHL_TOKEN` | Private Integration Token (`pit-…`) |
@@ -136,8 +153,12 @@ Cárgalas con **EAC Dashboard → Configurar credenciales (hoja _Config)** y lue
 **Guardar credenciales de _Config**, o directamente en *Configuración del
 proyecto → Propiedades del script*.
 
-> El `META_CAPI_TOKEN` es **distinto** del token de lectura `ads_read`: se genera
-> en Events Manager → Configuración del dataset → Conversions API → Generar token.
+> **Token de CAPI:** el **Usuario del Sistema permanente** de Qualivo
+> (`ads_management`, `leads_retrieval`, caducidad *Nunca*) **funciona también como
+> `META_CAPI_TOKEN`** — no hace falta generar uno aparte en Events Manager.
+> **Verificado en vivo el 2026-07-14:** un evento de prueba al dataset
+> `879197745226987` devolvió `{"events_received":1}`. El tubo CAPI está operativo;
+> solo falta cablearlo desde GHL (§3–4) y hacer el QA (§6).
 
 ---
 
