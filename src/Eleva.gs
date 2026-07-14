@@ -22,8 +22,9 @@ var ELEVA = {
   meses: ['2026-07', '2026-06'],
   mesSemanal: '2026-07',
 
-  // Google Ads manual (mensual) hasta conectar su API.
-  googleInv: { '2026-07': { spend: 157.62, leads: 15 } },
+  // Google Ads manual (por campaña) hasta conectar su API. Clave = 'YYYY-MM'.
+  googleInv: { '2026-07': { 'Google · Performance Max': { spend: 200.55, leads: 26 },
+                            'Google · Search': { spend: 201.61, leads: 20 } } },
 
   // Las columnas del embudo usan los nombres de etapa TAL CUAL están en GHL
   // (orden del pipeline). `ganadosStage` marca la etapa que cuenta como matrícula.
@@ -133,8 +134,8 @@ function elevaInvestment(monthKey) {
   var r = monthRange(monthKey);
   var daily = elevaMetaDaily(r.since, r.until);
   var byChannel = elevaMetaMonthly(daily);
-  var g = ELEVA.googleInv[monthKey];
-  if (g) byChannel['Google Ads'] = { spend: g.spend, leads: g.leads };
+  var g = ELEVA.googleInv[monthKey] || {};
+  Object.keys(g).forEach(function (ch) { byChannel[ch] = g[ch]; });
   return { byChannel: byChannel, metaWeekly: elevaMetaWeekly(daily) };
 }
 
@@ -158,7 +159,7 @@ function elevaInitSheet(sh, ncols, title, sub) {
   sh.getRange(2, 1, 1, ncols).merge().setValue(sub).setFontColor('#57606a');
 }
 function elevaWriteInvestment(sh, row, ncols, byChannel) {
-  var order = ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google Ads'];
+  var order = ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google · Performance Max', 'Google · Search', 'Google Ads'];
   var rows = [], tS = 0, tL = 0;
   order.forEach(function (ch) {
     var v = byChannel[ch]; if (!v) return;

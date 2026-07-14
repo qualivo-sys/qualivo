@@ -34,7 +34,9 @@ META_TOKEN = os.environ.get('META_TOKEN', '')
 META_ACT = os.environ.get('META_ACT', '')
 MESES = os.environ.get('MESES', '2026-07,2026-06').split(',')
 MES_SEMANAL = os.environ.get('MES_SEMANAL', '2026-07')
-GOOGLE_INV = {'2026-07': {'spend': 157.62, 'leads': 15}}  # Google Ads manual hasta conectar su API
+# Google Ads manual (por campaña) hasta conectar su API. Clave = 'YYYY-MM'.
+GOOGLE_INV = {'2026-07': {'Google · Performance Max': {'spend': 200.55, 'leads': 26},
+                          'Google · Search': {'spend': 201.61, 'leads': 20}}}
 
 # ------------------------------- auth (JWT/openssl) -------------------------------
 def sheets_token():
@@ -141,7 +143,7 @@ def meta_daily(mk):
 def meta_monthly(mk):
     m = defaultdict(lambda: {'spend': 0.0, 'leads': 0.0})
     for _, ch, sp, ld in meta_daily(mk): m[ch]['spend'] += sp; m[ch]['leads'] += ld
-    if mk in GOOGLE_INV: m['Google Ads'] = GOOGLE_INV[mk]
+    for ch, v in GOOGLE_INV.get(mk, {}).items(): m[ch] = v
     return m
 
 def meta_weekly(mk):
@@ -196,7 +198,7 @@ class Layout:
 
 def inv_rows(byc):
     rows, tS, tL = [], 0, 0
-    for ch in ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google Ads']:
+    for ch in ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google · Performance Max', 'Google · Search', 'Google Ads']:
         v = byc.get(ch)
         if not v: continue
         rows.append([ch, round(v['spend'], 2), int(v['leads']), round(v['spend'] / v['leads'], 2) if v['leads'] else 0]); tS += v['spend']; tL += v['leads']

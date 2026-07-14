@@ -22,9 +22,10 @@ var CFG = {
   META_ACT: '2028650084720565',   // id de la cuenta SIN el prefijo act_
   META_API_VERSION: 'v21.0',
 
-  // --- Google Ads (inversión, manual hasta tener API) por mes ---
+  // --- Google Ads (inversión manual, por campaña, hasta tener API) por mes ---
   googleInv: {
-    '2026-07': { spend: 157.62, leads: 15 }   // PMax 76.79 + Search 80.83 (datos 1–6; edítalo)
+    '2026-07': { 'Google · Performance Max': { spend: 200.55, leads: 26 },
+                 'Google · Search': { spend: 201.61, leads: 20 } }
   },
 
   timezone: 'Europe/Madrid',
@@ -241,14 +242,14 @@ function elevaInvestment_(monthKey) {
   var r = elevaMonthRange_(monthKey);
   var daily = elevaMetaDaily_(r.since, r.until);
   var byChannel = elevaMetaMonthly_(daily);         // Meta en vivo
-  var g = CFG.googleInv[monthKey];
-  if (g) byChannel['Google Ads'] = { spend: g.spend, leads: g.leads };  // Google manual
+  var g = CFG.googleInv[monthKey] || {};
+  Object.keys(g).forEach(function (ch) { byChannel[ch] = g[ch]; });   // Google manual (por campaña)
   return { byChannel: byChannel, metaWeekly: elevaMetaWeekly_(daily) };
 }
 
 /** Pinta la tabla de inversión (Canal · Inversión · Leads · CPL) y devuelve la fila siguiente. */
 function elevaWriteInvestment_(sh, row, ncols, byChannel) {
-  var order = ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google Ads'];
+  var order = ['Meta · Instantáneo', 'Meta · Landing', 'Meta · (otro)', 'Google · Performance Max', 'Google · Search', 'Google Ads'];
   var rows = [], tS = 0, tL = 0;
   order.forEach(function (ch) {
     var v = byChannel[ch]; if (!v) return;
