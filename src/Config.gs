@@ -88,6 +88,12 @@ var CREDENTIAL_KEYS = [
   'META_ACCESS_TOKEN',
   'META_AD_ACCOUNT_ID', // sin el prefijo act_, p.ej. 1234567890
   'META_API_VERSION', // opcional, por defecto v21.0
+  // Instagram Graph API (publicación + auditoría)
+  'IG_USER_ID', // id de la cuenta IG Business (IG User ID, no el @usuario)
+  'IG_ACCESS_TOKEN', // token con instagram_content_publish / instagram_basic
+  'IG_API_VERSION', // opcional, por defecto el de META_API_VERSION o v21.0
+  'IG_TEST_IMAGE_URL', // opcional: URL pública para la publicación de prueba
+  'IG_TEST_CAPTION', // opcional: caption para la publicación de prueba
   // Google Ads API
   'GOOGLE_ADS_DEVELOPER_TOKEN',
   'GOOGLE_ADS_CLIENT_ID',
@@ -117,6 +123,8 @@ function hasCreds(platform) {
   switch (platform) {
     case 'Meta':
       return !!getProp('META_ACCESS_TOKEN') && !!getProp('META_AD_ACCOUNT_ID');
+    case 'Instagram':
+      return !!getProp('IG_USER_ID') && !!getProp('IG_ACCESS_TOKEN');
     case 'Google':
       return !!getProp('GOOGLE_ADS_DEVELOPER_TOKEN') && !!getProp('GOOGLE_ADS_REFRESH_TOKEN') && !!getProp('GOOGLE_ADS_CUSTOMER_ID');
     case 'TikTok':

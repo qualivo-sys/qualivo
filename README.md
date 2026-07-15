@@ -31,12 +31,14 @@ src/
   Main.gs                  Menú, onOpen, onEdit, triggers
   ConfigSheet.gs           Hoja _Config para credenciales
   SeedData.gs              Datos de ejemplo (abril–junio 2026) para demo
+  InstagramAudit.gs        Auditoría de cuenta IG (perfil, posts, insights)
   connectors/
     MetaAds.gs             Meta Marketing API
     GoogleAds.gs           Google Ads API (GAQL / searchStream)
     TikTokAds.gs           TikTok Marketing API
     HubSpot.gs             HubSpot CRM (contactos + deals)
     GoHighLevel.gs         GoHighLevel / LeadConnector v2 (oportunidades)
+    InstagramPublish.gs    Instagram Graph API (publicar foto/Reel/carrusel/story)
 ```
 
 El **Google Sheet** ya está creado:
@@ -95,6 +97,7 @@ Tras subir el código, recarga el Sheet. Aparecerá el menú **EAC Dashboard**.
 | Plataforma | Claves | Permisos / notas |
 |---|---|---|
 | **Meta** | `META_ACCESS_TOKEN`, `META_AD_ACCOUNT_ID`, `META_API_VERSION` | Token con `ads_read`. Account ID sin el prefijo `act_`. |
+| **Instagram** | `IG_USER_ID`, `IG_ACCESS_TOKEN`, `IG_API_VERSION` | Publicación + auditoría. Cuenta **Business/Creator** vinculada a una Página de Facebook. Token con `instagram_basic`, `instagram_content_publish`, `pages_read_engagement` (+ `instagram_manage_insights` para la auditoría). `IG_USER_ID` es el **IG User ID** (no el `@usuario`). |
 | **Google Ads** | `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET`, `GOOGLE_ADS_REFRESH_TOKEN`, `GOOGLE_ADS_CUSTOMER_ID`, `GOOGLE_ADS_LOGIN_CUSTOMER_ID` | OAuth con scope `adwords`. Customer ID sin guiones. `LOGIN_CUSTOMER_ID` sólo si usas MCC. |
 | **TikTok** | `TIKTOK_ACCESS_TOKEN`, `TIKTOK_ADVERTISER_ID` | App de TikTok Marketing API aprobada. |
 | **HubSpot** | `HUBSPOT_TOKEN`, `HUBSPOT_STATUS_PROP` | Private App token. `STATUS_PROP` = propiedad de estado del lead (por defecto `hs_lead_status`). |
@@ -114,6 +117,8 @@ Tras subir el código, recarga el Sheet. Aparecerá el menú **EAC Dashboard**.
 | **Reconstruir vistas** | Repinta desde caché sin llamar a las APIs. |
 | **Inicializar / crear pestañas** | Crea las pestañas base. |
 | **Cargar datos de ejemplo (demo)** | Carga abril–junio 2026 de la hoja de referencia (sin credenciales). |
+| **Instagram: auditar cuenta** | Lee perfil + últimas publicaciones y pinta la pestaña `IG Auditoría`. |
+| **Instagram: publicar prueba (de _Config)** | Publica una foto de prueba usando `IG_TEST_IMAGE_URL` (pide confirmación). |
 | **Programar refresco diario** | Trigger diario a las 7:00 que refresca el mes en curso. |
 
 **Cambiar de mes**: usa el desplegable en `Dashboard!B2`. El cambio repinta el
@@ -145,3 +150,61 @@ para que todas las plataformas sean consistentes:
 - **ROAS** = revenue (won €) / inversión total
 
 El budget mensual y la zona horaria se ajustan en `src/Config.gs`.
+
+---
+
+## Instagram: publicar contenido
+
+Además de leer métricas, el proyecto puede **publicar** en una cuenta de
+Instagram Business/Creator (`src/connectors/InstagramPublish.gs`) y **auditarla**
+(`src/InstagramAudit.gs`).
+
+### Requisitos
+
+- Cuenta de Instagram **Business** o **Creator** vinculada a una **Página de Facebook**.
+- Una App de Meta con los permisos `instagram_basic`, `instagram_content_publish`
+  y `pages_read_engagement` (y `instagram_manage_insights` para la auditoría).
+- `IG_USER_ID` = el **IG User ID** de la cuenta (número, no el `@usuario`).
+- `IG_ACCESS_TOKEN` = token de Página o de System User con esos permisos.
+
+> ⚠️ Instagram **descarga** la foto/vídeo desde una **URL pública** (`image_url` /
+> `video_url`). No se sube el binario: el fichero debe estar accesible por HTTP(S)
+> (Google Drive con enlace público, un bucket, tu web, etc.).
+
+### Publicar desde código (Apps Script)
+
+```js
+// Foto en el feed
+igPublishPhoto('https://.../foto.jpg', 'Mi caption con #hashtags');
+
+// Reel (vídeo vertical MP4/H.264)
+igPublishReel('https://.../reel.mp4', 'Caption del reel', { shareToFeed: true });
+
+// Story (imagen o vídeo)
+igPublishStory({ imageUrl: 'https://.../story.jpg' });
+
+// Carrusel (2–10 elementos, imagen y/o vídeo)
+igPublishCarousel([
+  { imageUrl: 'https://.../1.jpg' },
+  { imageUrl: 'https://.../2.jpg' },
+  { videoUrl: 'https://.../3.mp4' }
+], 'Caption del carrusel');
+
+// Dispatcher genérico
+igPublish({ type: 'PHOTO', imageUrl: 'https://.../foto.jpg', caption: '¡Hola!' });
+
+// Comprobar cupo de publicación (50 posts/24h)
+igPublishingUsage(); // -> { quota, used, remaining }
+```
+
+Cada función devuelve `{ id, permalink }` del post publicado. Los vídeos/Reels
+se procesan de forma asíncrona: el código **sondea** el contenedor hasta que
+Instagram termina de procesarlo (hasta ~5 min, límite práctico de Apps Script)
+antes de publicar.
+
+### Auditar la cuenta
+
+**EAC Dashboard → Instagram: auditar cuenta** genera la pestaña `IG Auditoría`
+con: KPIs de cuenta (seguidores, ER, likes/comentarios medios, cadencia),
+rendimiento por formato (foto/Reel/carrusel/story), mejor día y hora según tu
+histórico y el top de publicaciones por engagement.
