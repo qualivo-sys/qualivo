@@ -30,7 +30,10 @@ var CONFIG_ROWS = [
   ['— GOHIGHLEVEL —', ''],
   ['GHL_TOKEN', ''],
   ['GHL_LOCATION_ID', ''],
-  ['GHL_PIPELINE_ID', ''] // opcional: filtra a un pipeline (EAC usa "Pipeline")
+  ['GHL_PIPELINE_ID', ''], // opcional: filtra a un pipeline (EAC usa "Pipeline")
+  ['— APIFY (Instagram ABM) —', ''],
+  ['APIFY_TOKEN', ''],
+  ['APIFY_ACTOR_ID', 'apify~instagram-scraper']
 ];
 
 /** Crea la hoja _Config con las filas de credenciales si no existe. */

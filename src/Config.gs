@@ -103,7 +103,10 @@ var CREDENTIAL_KEYS = [
   // GoHighLevel (LeadConnector v2)
   'GHL_TOKEN',
   'GHL_LOCATION_ID',
-  'GHL_PIPELINE_ID' // opcional: limita a un pipeline concreto
+  'GHL_PIPELINE_ID', // opcional: limita a un pipeline concreto
+  // Apify (extractor de Instagram para ABM)
+  'APIFY_TOKEN',
+  'APIFY_ACTOR_ID' // opcional, por defecto apify~instagram-scraper
 ];
 
 /** Lee una propiedad del script (credencial / ajuste). */
@@ -125,6 +128,8 @@ function hasCreds(platform) {
       return !!getProp('HUBSPOT_TOKEN');
     case 'GHL':
       return !!getProp('GHL_TOKEN') && !!getProp('GHL_LOCATION_ID');
+    case 'Apify':
+      return !!getProp('APIFY_TOKEN');
     default:
       return false;
   }
