@@ -18,11 +18,20 @@ var IG_SHEETS = {
   extractor: 'IG_Extractor'
 };
 
-/** Cabeceras de la tabla de contactos (col A..K). */
+/** Cabeceras de la tabla de contactos (col A..L). */
 var IG_HEADERS = ['Foto', '@handle', 'Nombre', 'Bio', 'Seguidores',
-  'Verificado', 'URL perfil', 'Fuente', 'Extraído', 'Estado', 'Notas'];
+  'Verificado', 'URL perfil', 'Fuente', 'Extraído', 'Estado', 'Notas', 'DM enviado'];
 
 var IG_ESTADOS = ['Pendiente', 'Aprobado', 'Descartado'];
+
+/** Hoja de la cola diaria de DMs (Opción A: semi-manual asistido). */
+var IG_COLA_SHEET = 'IG_Cola_DM';
+var IG_COLA_HEADER_ROW = 6; // fila de cabeceras de la tabla (control encima)
+
+/** Plantilla por defecto del mensaje. Placeholders: {nombre} {handle} {bio} {seguidores}. */
+var IG_DEFAULT_TEMPLATE =
+  'Hola {nombre} 👋 vi tu perfil (@{handle}) y creo que lo que hacemos te puede encajar. ' +
+  '¿Te va que te cuente en 1 minuto?';
 
 /* --------------------------- Setup de hojas --------------------------- */
 
@@ -30,6 +39,7 @@ var IG_ESTADOS = ['Pendiente', 'Aprobado', 'Descartado'];
 function setupInstagramAbm() {
   ensureIgExtractorSheet();
   ensureIgContactosSheet();
+  ensureIgColaSheet();
   toast('Hojas de Instagram ABM listas');
 }
 
@@ -82,7 +92,7 @@ function ensureIgContactosSheet() {
   sh.setFrozenRows(1);
 
   // Anchos de columna.
-  var widths = [90, 150, 190, 320, 100, 90, 230, 160, 110, 130, 260];
+  var widths = [90, 150, 190, 320, 100, 90, 230, 160, 110, 130, 260, 110];
   widths.forEach(function (w, i) { sh.setColumnWidth(i + 1, w); });
 
   applyIgValidationAndFormat(sh);
@@ -168,7 +178,8 @@ function writeIgContactos(items, sourceLabel) {
       sourceLabel || '',
       when,
       'Pendiente',
-      ''
+      '',
+      '' // DM enviado
     ]);
   });
 
@@ -236,4 +247,145 @@ function igDriveFolder() {
   var name = CLIENT.name + ' – IG ABM fotos';
   var it = DriveApp.getFoldersByName(name);
   return it.hasNext() ? it.next() : DriveApp.createFolder(name);
+}
+
+/* --------------------------- Cola diaria de DMs (Opción A) --------------------------- */
+
+var IG_COLA_HEADERS = ['Enviado', '@handle', 'Nombre', 'Mensaje', 'Abrir DM'];
+
+/** Crea (idempotente) la hoja IG_Cola_DM con el bloque de control + tabla. */
+function ensureIgColaSheet() {
+  var ss = SpreadsheetApp.getActive();
+  var sh = ss.getSheetByName(IG_COLA_SHEET);
+  if (sh) return sh;
+  sh = ss.insertSheet(IG_COLA_SHEET);
+
+  sh.getRange(1, 1, 1, 2).merge()
+    .setValue('Cola diaria de DMs (semi-manual, sin coste)')
+    .setFontWeight('bold').setFontSize(13)
+    .setBackground(THEME.dark).setFontColor(THEME.textLight);
+
+  sh.getRange(2, 1, 2, 1).setValues([['Mensajes por día'], ['Plantilla']]).setFontWeight('bold');
+  sh.getRange(2, 2).setValue(8);
+  sh.getRange(3, 2).setValue(IG_DEFAULT_TEMPLATE).setWrap(true);
+  sh.getRange(4, 1, 1, 2).merge()
+    .setValue('Placeholders: {nombre} {handle} {bio} {seguidores}. ' +
+      'Menú: Instagram ABM → Generar cola de hoy. Abre cada "Abrir DM", pega el ' +
+      'mensaje, marca Enviado y confirma con "Marcar enviados".')
+    .setFontColor(THEME.warn).setWrap(true);
+  sh.setColumnWidth(1, 90);
+  sh.setColumnWidth(2, 640);
+
+  sh.getRange(IG_COLA_HEADER_ROW, 1, 1, IG_COLA_HEADERS.length).setValues([IG_COLA_HEADERS])
+    .setFontWeight('bold').setBackground(THEME.dark).setFontColor(THEME.textLight);
+  sh.setColumnWidths(2, 1, 150);
+  sh.setColumnWidth(3, 190);
+  sh.setColumnWidth(4, 560);
+  sh.setColumnWidth(5, 120);
+  return sh;
+}
+
+/**
+ * Genera la cola del día: hasta N contactos con Estado=Aprobado y sin DM
+ * enviado, con el mensaje ya personalizado y el link directo a su DM.
+ */
+function menuBuildDmQueue() {
+  var src = SpreadsheetApp.getActive().getSheetByName(IG_SHEETS.contactos);
+  if (!src || src.getLastRow() < 2) { toast('No hay contactos en IG_Contactos'); return; }
+  var cola = ensureIgColaSheet();
+  var cap = toNumber(cola.getRange(2, 2).getValue()) || 8;
+  var tpl = String(cola.getRange(3, 2).getValue() || '').trim() || IG_DEFAULT_TEMPLATE;
+
+  var headers = igColHeaders(src);
+  var cH = headers.indexOf('@handle');
+  var cN = headers.indexOf('Nombre');
+  var cB = headers.indexOf('Bio');
+  var cF = headers.indexOf('Seguidores');
+  var cE = headers.indexOf('Estado');
+  var cD = headers.indexOf('DM enviado');
+  if (cE < 0 || cH < 0) { toast('IG_Contactos no tiene las columnas esperadas'); return; }
+
+  var last = src.getLastRow();
+  var data = src.getRange(2, 1, last - 1, src.getLastColumn()).getValues();
+  var picked = [];
+  for (var i = 0; i < data.length && picked.length < cap; i++) {
+    var row = data[i];
+    if (String(row[cE]).trim() !== 'Aprobado') continue;
+    if (cD >= 0 && String(row[cD]).trim() !== '') continue; // ya contactado
+    var handle = String(row[cH] || '').replace(/^@/, '').trim();
+    if (!handle) continue;
+    var nombre = String(cN >= 0 ? row[cN] : '').trim() || handle;
+    var msg = fillTemplate(tpl, {
+      nombre: nombre,
+      handle: handle,
+      bio: String(cB >= 0 ? row[cB] : ''),
+      seguidores: cF >= 0 ? row[cF] : ''
+    });
+    picked.push([false, '@' + handle, nombre, msg,
+      '=HYPERLINK("https://ig.me/m/' + handle + '","Abrir DM")']);
+  }
+
+  // Limpia filas anteriores y escribe la nueva cola.
+  var startRow = IG_COLA_HEADER_ROW + 1;
+  var maxRows = cola.getMaxRows();
+  if (maxRows >= startRow) {
+    cola.getRange(startRow, 1, maxRows - startRow + 1, IG_COLA_HEADERS.length).clearContent();
+    cola.getRange(startRow, 1, maxRows - startRow + 1, 1).removeCheckboxes();
+  }
+  if (!picked.length) { toast('No hay Aprobados pendientes de contactar'); return; }
+  cola.getRange(startRow, 1, picked.length, IG_COLA_HEADERS.length).setValues(picked);
+  cola.getRange(startRow, 1, picked.length, 1).insertCheckboxes();
+  cola.getRange(startRow, 4, picked.length, 1).setWrap(true);
+  toast('Cola generada: ' + picked.length + ' contactos para hoy');
+}
+
+/**
+ * Marca como enviados (con fecha de hoy en IG_Contactos) los contactos de la
+ * cola con la casilla "Enviado" activada, para que no reaparezcan mañana.
+ */
+function menuConfirmDmSent() {
+  var cola = SpreadsheetApp.getActive().getSheetByName(IG_COLA_SHEET);
+  if (!cola) { toast('No existe la cola IG_Cola_DM'); return; }
+  var startRow = IG_COLA_HEADER_ROW + 1;
+  var last = cola.getLastRow();
+  if (last < startRow) { toast('La cola está vacía'); return; }
+
+  var rows = cola.getRange(startRow, 1, last - startRow + 1, 2).getValues();
+  var sent = {};
+  rows.forEach(function (r) {
+    if (r[0] === true) sent[String(r[1] || '').replace(/^@/, '').trim().toLowerCase()] = true;
+  });
+  var handles = Object.keys(sent);
+  if (!handles.length) { toast('Marca alguna casilla "Enviado" primero'); return; }
+
+  var src = SpreadsheetApp.getActive().getSheetByName(IG_SHEETS.contactos);
+  var headers = igColHeaders(src);
+  var cH = headers.indexOf('@handle');
+  var cD = headers.indexOf('DM enviado');
+  if (cD < 0) { toast('Falta la columna "DM enviado" en IG_Contactos'); return; }
+
+  var today = Utilities.formatDate(new Date(), CLIENT.timezone, 'yyyy-MM-dd');
+  var srcLast = src.getLastRow();
+  var col = src.getRange(2, cH + 1, srcLast - 1, 1).getValues();
+  var count = 0;
+  for (var i = 0; i < col.length; i++) {
+    var h = String(col[i][0] || '').replace(/^@/, '').trim().toLowerCase();
+    if (sent[h]) { src.getRange(i + 2, cD + 1).setValue(today); count++; }
+  }
+  toast(count + ' marcados como enviados');
+  menuBuildDmQueue(); // refresca la cola quitando los ya enviados
+}
+
+/* ------------------------------- Helpers cola ------------------------------- */
+
+/** Cabeceras (fila 1) de una hoja, como array de strings. */
+function igColHeaders(sh) {
+  return sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].map(function (v) { return String(v); });
+}
+
+/** Rellena una plantilla con {placeholders}. */
+function fillTemplate(tpl, vars) {
+  return String(tpl).replace(/\{(\w+)\}/g, function (m, k) {
+    return (vars[k] === null || vars[k] === undefined) ? '' : String(vars[k]);
+  });
 }
