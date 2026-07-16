@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Diagnóstico de Captación · Qualivo</title>
+<meta name="description" content="Las 27 preguntas que toda empresa debería responder antes de invertir 1 € más en publicidad.">
+<style>
+  /* ============================================================
+     EL DIAGNÓSTICO DE CAPTACIÓN — Qualivo
+     Sistema visual: "informe de instrumento"
+     ============================================================ */
+
+  :root{
+    --paper:#EDEBE4;        /* hueso, faintly warm, restrained */
+    --paper-2:#E5E2D8;      /* panel claro */
+    --ink:#17181A;          /* tinta near-black */
+    --ink-soft:#3A3B39;
+    --muted:#6C6C63;        /* warm-grey text */
+    --graphite:#1E2126;     /* dobles páginas oscuras */
+    --graphite-2:#272B31;
+    --on-graphite:#E9E7DE;
+    --on-graphite-mut:#9DA0A0;
+    --line:rgba(23,24,26,.16);
+    --line-2:rgba(23,24,26,.09);
+    --line-dk:rgba(233,231,222,.16);
+    --accent:#0C6B63;       /* petróleo — señal "sistema", estructura */
+    --accent-ink:#0A5751;
+    --accent-soft:rgba(12,107,99,.10);
+    --signal:#B4712A;       /* ámbar — alerta / error (semántico) */
+    --signal-soft:rgba(180,113,42,.12);
+
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'SF Mono','JetBrains Mono',ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+
+    --measure:64ch;
+    --pad:clamp(22px,5vw,64px);
+  }
+
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#181A1D; --paper-2:#1F2226; --ink:#E9E7DE; --ink-soft:#C9C7BE;
+      --muted:#9A9C95; --graphite:#0F1113; --graphite-2:#15181B;
+      --on-graphite:#E9E7DE; --on-graphite-mut:#9DA0A0;
+      --line:rgba(233,231,222,.16); --line-2:rgba(233,231,222,.09);
+      --accent:#33A79B; --accent-ink:#2C9084; --accent-soft:rgba(51,167,155,.12);
+      --signal:#D0954A; --signal-soft:rgba(208,149,74,.14);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#EDEBE4; --paper-2:#E5E2D8; --ink:#17181A; --ink-soft:#3A3B39;
+    --muted:#6C6C63; --graphite:#1E2126; --graphite-2:#272B31;
+    --on-graphite:#E9E7DE; --on-graphite-mut:#9DA0A0;
+    --line:rgba(23,24,26,.16); --line-2:rgba(23,24,26,.09);
+    --accent:#0C6B63; --accent-ink:#0A5751; --accent-soft:rgba(12,107,99,.10);
+    --signal:#B4712A; --signal-soft:rgba(180,113,42,.12);
+  }
+  :root[data-theme="dark"]{
+    --paper:#181A1D; --paper-2:#1F2226; --ink:#E9E7DE; --ink-soft:#C9C7BE;
+    --muted:#9A9C95; --graphite:#0F1113; --graphite-2:#15181B;
+    --on-graphite:#E9E7DE; --on-graphite-mut:#9DA0A0;
+    --line:rgba(233,231,222,.16); --line-2:rgba(233,231,222,.09);
+    --accent:#33A79B; --accent-ink:#2C9084; --accent-soft:rgba(51,167,155,.12);
+    --signal:#D0954A; --signal-soft:rgba(208,149,74,.14);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  .doc{max-width:920px;margin:0 auto}
+  .sheet{padding:clamp(40px,7vw,84px) var(--pad)}
+  .dark{background:var(--graphite);color:var(--on-graphite)}
+  .dark .kicker{color:var(--accent)}
+
+  /* ---- Type ---- */
+  .kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--accent); font-weight:600;
+    display:flex; align-items:center; gap:.7em;
+  }
+  .kicker::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;letter-spacing:-.01em;line-height:1.06}
+  h1{font-size:clamp(38px,7vw,72px);margin:.28em 0 0}
+  h2{font-size:clamp(28px,4.4vw,44px);margin:0}
+  h3{font-size:clamp(21px,2.6vw,27px);line-height:1.15}
+  p{margin:0 0 1em;max-width:var(--measure)}
+  .lead{font-size:clamp(19px,2.3vw,23px);line-height:1.5;color:var(--ink-soft)}
+  .lead-serif{font-family:var(--serif);font-size:clamp(22px,3vw,30px);line-height:1.32;color:var(--ink);max-width:22ch;font-weight:600}
+  strong{font-weight:600}
+  em{font-style:italic}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---- Cover ---- */
+  .cover{min-height:calc(100vh - 0px);display:flex;flex-direction:column;justify-content:space-between;
+         padding-top:clamp(40px,8vh,90px);padding-bottom:clamp(34px,6vh,64px)}
+  .cover-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.01em}
+  .brand span{color:var(--accent)}
+  .cover-mid{margin:auto 0}
+  .cover-sub{font-size:clamp(19px,2.6vw,26px);line-height:1.35;color:var(--on-graphite-mut);
+             max-width:26ch;margin-top:1.1em;font-family:var(--serif)}
+  .cover-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;
+              border-top:1px solid var(--line-dk);padding-top:22px}
+  .cover-foot .meta{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-graphite-mut);line-height:1.9}
+  .byline{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-graphite-mut)}
+  .byline b{color:var(--on-graphite);font-weight:600}
+
+  /* section header */
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:34px;flex-wrap:wrap}
+  .sec-no{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent);font-weight:600;white-space:nowrap}
+
+  /* pullbar / big statement */
+  .statement{font-family:var(--serif);font-size:clamp(26px,4.2vw,40px);line-height:1.18;font-weight:600;
+             max-width:20ch;margin:0 0 .2em;letter-spacing:-.01em}
+  .statement .hl{color:var(--accent);font-style:italic}
+
+  /* two column note */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,54px);margin-top:12px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr;gap:24px}}
+  .note-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.7em}
+
+  /* ---- Flow diagram (framework) ---- */
+  .flow{display:flex;flex-direction:column;gap:0;margin-top:8px;counter-reset:stage}
+  .stage{display:grid;grid-template-columns:74px 1fr;gap:0;position:relative}
+  .stage-rail{position:relative;display:flex;flex-direction:column;align-items:center}
+  .stage-node{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);
+              border:1px solid var(--line-dk);background:var(--graphite-2);border-radius:50%;
+              width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;z-index:1}
+  .stage-line{width:1px;flex:1;background:var(--line-dk);margin:2px 0}
+  .stage:last-child .stage-line{display:none}
+  .stage-body{padding:0 0 30px 20px}
+  .stage-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--on-graphite);margin:0 0 .18em;display:flex;align-items:baseline;gap:.5em}
+  .stage-def{color:var(--on-graphite-mut);max-width:52ch;margin:0 0 .55em;font-size:15.5px;line-height:1.5}
+  .stage-fail{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--signal);
+              display:inline-flex;gap:.6em;align-items:baseline}
+  .stage-fail b{color:var(--on-graphite-mut);font-weight:400;text-transform:uppercase;letter-spacing:.14em;font-size:10.5px}
+  .cascade{margin-top:26px;border:1px solid var(--line-dk);border-radius:4px;padding:20px 22px;
+           display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.02)}
+  .cascade .mk{font-family:var(--mono);color:var(--accent);font-size:22px;line-height:1}
+  .cascade p{color:var(--on-graphite-mut);margin:0;font-size:15px;max-width:60ch}
+  .cascade b{color:var(--on-graphite)}
+
+  /* ---- Errors ledger ---- */
+  .ledger{border-top:1px solid var(--line);margin-top:8px}
+  .err{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:22px 0;border-bottom:1px solid var(--line-2);align-items:start}
+  .err-no{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--signal);padding-top:3px}
+  .err-t{font-family:var(--serif);font-size:20px;font-weight:600;margin:0 0 .3em;line-height:1.2}
+  .err-d{margin:0 0 .55em;color:var(--ink-soft);font-size:16px;max-width:60ch}
+  .err-ex{font-size:14px;color:var(--muted);margin:0;max-width:62ch;padding-left:14px;border-left:2px solid var(--signal-soft)}
+  .err-ex b{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);font-weight:600}
+
+  /* ---- Checklist ---- */
+  .grp{margin-top:34px}
+  .grp:first-of-type{margin-top:6px}
+  .grp-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+  .grp-code{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+  .grp-name{font-family:var(--serif);font-size:19px;font-weight:600}
+  .q{display:grid;grid-template-columns:52px 1fr 30px;gap:6px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-2)}
+  .q-code{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+  .q-txt{font-size:15.5px;line-height:1.4;max-width:62ch}
+  .q-box{justify-self:end;width:18px;height:18px;border:1.5px solid var(--line);border-radius:3px}
+  .score{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:640px){.score{grid-template-columns:1fr}}
+  .score-card{border:1px solid var(--line);border-radius:5px;padding:18px 18px 20px}
+  .score-range{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+  .score-card.warn .score-range{color:var(--signal)}
+  .score-card.crit .score-range{color:#A23B2B}
+  @media (prefers-color-scheme:dark){.score-card.crit .score-range{color:#D9705F}}
+  :root[data-theme="dark"] .score-card.crit .score-range{color:#D9705F}
+  :root[data-theme="light"] .score-card.crit .score-range{color:#A23B2B}
+  .score-t{font-family:var(--serif);font-size:18px;font-weight:600;margin:.35em 0 .25em}
+  .score-d{font-size:13.5px;color:var(--muted);margin:0}
+
+  /* ---- Cases ---- */
+  .case{border:1px solid var(--line);border-radius:6px;padding:clamp(22px,3.4vw,34px);margin-top:22px;background:var(--paper-2)}
+  .case-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .case-h{font-family:var(--serif);font-size:23px;font-weight:600;margin:.4em 0 .2em}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0 4px}
+  @media(max-width:640px){.ba{grid-template-columns:1fr}}
+  .ba-col{border-top:2px solid var(--line);padding-top:12px}
+  .ba-col.after{border-top-color:var(--accent)}
+  .ba-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .ba-col.after .ba-lab{color:var(--accent)}
+  .ba ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .ba li{font-size:14.5px;line-height:1.35;display:flex;gap:9px;color:var(--ink-soft)}
+  .ba li::before{content:"—";color:var(--muted);flex:0 0 auto}
+  .metricrow{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}
+  .metric{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--accent-ink);
+          background:var(--accent-soft);border:1px solid var(--accent-soft);border-radius:4px;padding:8px 12px;font-weight:600}
+  .fillme{color:var(--signal);background:var(--signal-soft);border-color:var(--signal-soft)}
+  .learn{margin:16px 0 0;font-size:14.5px;color:var(--muted)}
+  .learn b{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+  /* ---- CTA ---- */
+  .cta-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,60px);align-items:start;margin-top:12px}
+  @media(max-width:760px){.cta-grid{grid-template-columns:1fr;gap:30px}}
+  .cta-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:0}
+  .cta-list li{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line-dk);font-size:15px;color:var(--on-graphite-mut)}
+  .cta-list li b{color:var(--on-graphite);font-weight:600}
+  .cta-list .n{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .btn{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#fff;
+       font-family:var(--mono);font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+       padding:16px 24px;border-radius:5px;border:none;margin-top:8px}
+  .btn::after{content:"→"}
+  .cta-note{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--on-graphite-mut);margin-top:16px}
+  .cta-panel{border:1px solid var(--line-dk);border-radius:6px;padding:26px}
+  .cta-panel .eyebrow{color:var(--accent)}
+  .cta-panel h3{color:var(--on-graphite);margin:.4em 0 .5em}
+  .cta-panel p{color:var(--on-graphite-mut);font-size:14.5px}
+
+  /* footer */
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+        border-top:1px solid var(--line-dk);padding-top:22px;margin-top:44px;
+        font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-graphite-mut)}
+
+  .rule{height:1px;background:var(--line);border:0;margin:0}
+  .spacer{height:8px}
+
+  /* theme toggle */
+  .toggle{position:fixed;top:14px;right:14px;z-index:50;font-family:var(--mono);font-size:11px;
+          letter-spacing:.12em;text-transform:uppercase;background:var(--paper-2);color:var(--muted);
+          border:1px solid var(--line);border-radius:20px;padding:7px 13px;cursor:pointer}
+  .toggle:hover{color:var(--ink)}
+
+  @media print{
+    .toggle{display:none}
+    body{background:#fff;font-size:11pt}
+    .sheet{padding:26pt 22pt}
+    .cover{min-height:auto;padding-top:30pt}
+    .dark{background:#fff !important;color:#1a1a1a !important}
+    .dark .stage-node{background:#f4f4f0}
+    .dark .cover-sub,.dark .stage-def,.dark .cta-list li,.dark .cta-panel p,.foot,.dark .byline,.dark .cover-foot .meta{color:#555 !important}
+    .dark .stage-title,.dark .brand,.dark h1,.dark h2,.dark .cta-list li b{color:#1a1a1a !important}
+    .sheet{page-break-inside:avoid}
+    .err,.q,.stage,.case{page-break-inside:avoid}
+    a{color:inherit;border:0}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    html{scroll-behavior:smooth}
+  }
+</style>
+</head>
+<body>
+<button class="toggle" id="tgl" aria-label="Cambiar tema">Tema</button>
+<main class="doc">
+
+  <!-- ============ PORTADA ============ -->
+  <section class="sheet dark cover">
+    <div class="cover-top">
+      <div class="brand">Qualivo<span>.</span></div>
+      <div class="byline">Documento de diagnóstico · 01</div>
+    </div>
+
+    <div class="cover-mid">
+      <div class="kicker">Antes de invertir 1&nbsp;€ más en publicidad</div>
+      <h1>El Diagnóstico<br>de Captación</h1>
+      <p class="cover-sub">Las 27 preguntas que toda empresa debería responder antes de escalar su inversión en anuncios.</p>
+    </div>
+
+    <div class="cover-foot">
+      <div class="byline">Por <b>Maikel Echevarría</b><br>Fundador · Qualivo</div>
+      <div class="meta">
+        Uso interno del lector<br>
+        No es teoría · Es una auditoría
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTRODUCCIÓN ============ -->
+  <section class="sheet">
+    <div class="sec-head">
+      <div class="sec-no">00 · Punto de partida</div>
+    </div>
+
+    <p class="statement">No tienes un problema de publicidad.<br><span class="hl">Tienes un problema de sistema.</span></p>
+    <div class="spacer"></div>
+
+    <p class="lead">La mayoría de empresas que se estancan creen que su problema es el anuncio: el coste por lead sube, los leads llegan peor, la campaña «ya no funciona». Así que cambian de creativo, de agencia o de plataforma. Y el problema sigue ahí.</p>
+
+    <p>Porque la publicidad no crea tu sistema comercial: lo <strong>amplifica</strong>. Si tu oferta no diferencia, tu landing no convierte, tu CRM está sucio y nadie hace seguimiento, invertir más solo significa <strong>llevar más gente a un sistema que ya pierde</strong>. Escalas la fuga, no el resultado.</p>
+
+    <div class="cols">
+      <div>
+        <div class="note-label">Lo que la empresa cree</div>
+        <p style="margin:0">«Necesitamos mejores anuncios / más presupuesto / otra agencia que sepa de Meta Ads.»</p>
+      </div>
+      <div>
+        <div class="note-label">Lo que casi siempre es</div>
+        <p style="margin:0">«Tenemos un sistema de captación sin diseñar, del que solo medimos la primera etapa: el formulario.»</p>
+      </div>
+    </div>
+
+    <hr class="rule" style="margin-top:34px">
+    <p style="margin-top:22px;color:var(--muted);max-width:60ch">Este documento no te va a enseñar a hacer anuncios. Te va a dar el mapa para ver <strong style="color:var(--ink)">dónde se rompe tu sistema</strong> — y las preguntas exactas para encontrar tu propia fuga antes de gastar un euro más.</p>
+  </section>
+
+  <!-- ============ FRAMEWORK ============ -->
+  <section class="sheet dark">
+    <div class="sec-head">
+      <div class="sec-no">01 · El método</div>
+    </div>
+    <h2 style="color:var(--on-graphite);max-width:16ch">El Sistema de Captación Qualivo</h2>
+    <p style="color:var(--on-graphite-mut);max-width:56ch;margin-top:14px">Captar clientes de forma predecible no es una campaña: es una cadena de nueve etapas. Cada una alimenta a la siguiente. La publicidad es solo la etapa 3–4. Si diagnosticas por dónde va tu gente, verás que el fallo casi nunca está donde miras.</p>
+
+    <div class="flow" style="margin-top:38px">
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S1</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Sistema</div>
+          <p class="stage-def">La arquitectura y la economía. Objetivo de negocio, CAC máximo que puedes pagar, LTV, y capacidad real de tu equipo comercial para atender lo que generes.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Inviertes sin saber cuánto puedes pagar por un cliente.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S2</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Oferta</div>
+          <p class="stage-def">Qué vendes exactamente y por qué comprarlo ahora. El motor de conversión más infravalorado: una oferta fuerte arregla campañas mediocres; una débil hunde a las mejores.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Tu oferta se resume en «somos los mejores».</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S3</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Mensaje</div>
+          <p class="stage-def">El ángulo, la promesa y la prueba. Cómo hablas del problema del cliente mejor de lo que él lo haría. Antes que el diseño, antes que el canal.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Hablas de ti (features) y no de su problema.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S4</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Creativos</div>
+          <p class="stage-def">Cómo se expresa el mensaje en anuncios. El vehículo, no el destino. Un buen creativo sobre un mensaje flojo solo acelera el gasto.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Pruebas 20 creativos y un solo ángulo.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S5</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Landing</div>
+          <p class="stage-def">Donde la atención se convierte en interés declarado. Una página con un solo trabajo: hacer que la persona correcta dé el siguiente paso.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Mandas el tráfico a la home.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S6</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">CRM</div>
+          <p class="stage-def">Donde vive, se organiza y se puntúa cada lead. La memoria del sistema. Sin él, cada lead es un folio suelto que se pierde.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Tus leads viven en una bandeja de entrada.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S7</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Seguimiento</div>
+          <p class="stage-def">Cómo se nutre al lead hasta que está listo para comprar. Email, WhatsApp, retargeting y automatizaciones. Aquí se recupera la mayoría del dinero.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Un lead que no compra al día 1 no vuelve a saber de ti.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S8</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-title">Ventas</div>
+          <p class="stage-def">Cómo se cierra la conversación. Guion, velocidad de respuesta, gestión de objeciones. La mejor campaña muere en una llamada mal preparada.</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Tardas días en llamar a un lead caliente.</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-node">S9</div></div>
+        <div class="stage-body">
+          <div class="stage-title">Optimización</div>
+          <p class="stage-def">Cómo el sistema aprende. Experimentación continua guiada por datos y por IA: qué etapa mueve la aguja este mes, no qué anuncio tuvo más «me gusta».</p>
+          <span class="stage-fail"><b>Señal de fallo</b> Optimizas por CPL en vez de por clientes.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cascade">
+      <div class="mk">×</div>
+      <p><b>La regla de la cascada.</b> Las etapas no se suman: se multiplican. Un sistema al 80% en ocho etapas y al 0% en una da cero. Por eso «más presupuesto» rara vez es la respuesta: refuerza etapas que ya funcionan e ignora la que está a cero.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10 ERRORES ============ -->
+  <section class="sheet">
+    <div class="sec-head">
+      <div class="sec-no">02 · Diagnóstico</div>
+    </div>
+    <h2 style="max-width:18ch">Los 10 errores que drenan tu inversión</h2>
+    <p class="lead" style="margin-top:14px">Ninguno es de «no saber de anuncios». Todos son de sistema. Marca los que reconozcas.</p>
+
+    <div class="ledger" style="margin-top:30px">
+
+      <div class="err"><div class="err-no">01</div><div>
+        <div class="err-t">Confundir «más leads» con «más clientes»</div>
+        <p class="err-d">El objetivo no es llenar el CRM de formularios, sino cerrar ventas rentables. Más leads malos es más trabajo, no más negocio.</p>
+        <p class="err-ex"><b>Ejemplo</b> Bajas el CPL a la mitad cambiando la oferta a algo genérico… y el equipo de ventas cierra la mitad. El coste por cliente sube.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">02</div><div>
+        <div class="err-t">Escalar antes de que el sistema convierta</div>
+        <p class="err-d">Duplicar el presupuesto de un sistema que pierde solo duplica la fuga. Primero se arregla la conversión; luego se escala.</p>
+        <p class="err-ex"><b>Ejemplo</b> Pasas de 2.000 € a 6.000 €/mes con la misma landing al 1%. Triplicas el gasto y el caos, no las ventas.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">03</div><div>
+        <div class="err-t">Optimizar por CPL en lugar de por CAC</div>
+        <p class="err-d">El coste por lead es una métrica de vanidad si no la conectas con el coste por cliente real. Miras la primera etapa e ignoras las ocho siguientes.</p>
+        <p class="err-ex"><b>Ejemplo</b> La campaña «cara» (CPL alto) trae leads que cierran al 30%; la «barata», al 3%. En el informe gana la barata.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">04</div><div>
+        <div class="err-t">Una oferta indiferenciada</div>
+        <p class="err-d">Si tu propuesta es intercambiable con la de tu competencia, el único argumento que queda es el precio. Y esa es una guerra que casi nadie gana.</p>
+        <p class="err-ex"><b>Ejemplo</b> «Calidad, confianza y trato cercano.» Lo mismo que dicen tus cinco competidores en la misma subasta de Meta.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">05</div><div>
+        <div class="err-t">Enviar el tráfico a la home</div>
+        <p class="err-d">La home tiene diez trabajos y por eso no hace ninguno bien. Un anuncio con una promesa concreta necesita una página con un solo objetivo.</p>
+        <p class="err-ex"><b>Ejemplo</b> El anuncio promete «auditoría gratis» y aterriza en una home con menú, blog y ocho servicios. El lead se pierde en tres segundos.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">06</div><div>
+        <div class="err-t">No tener seguimiento</div>
+        <p class="err-d">La mayoría de los leads no está lista para comprar el día 1. Sin secuencias de seguimiento, tiras a la basura a la mayor parte de lo que ya pagaste por captar.</p>
+        <p class="err-ex"><b>Ejemplo</b> Un lead pide info, no contesta al primer email y nadie vuelve a escribirle. Compra a tu competencia seis semanas después.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">07</div><div>
+        <div class="err-t">Cambiar de campaña cada tres días</div>
+        <p class="err-d">Apagar y encender campañas sin datos suficientes impide que el algoritmo —y tú— aprendáis nada. La impaciencia se disfraza de optimización.</p>
+        <p class="err-ex"><b>Ejemplo</b> Matas un conjunto de anuncios con 40 € de gasto porque «no funciona». Nunca salió de la fase de aprendizaje.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">08</div><div>
+        <div class="err-t">Un CRM que nadie usa</div>
+        <p class="err-d">Datos sucios, etapas sin actualizar, leads sin dueño. Si el CRM no refleja la realidad, cada decisión que tomes encima es a ciegas.</p>
+        <p class="err-ex"><b>Ejemplo</b> El 40% de las oportunidades llevan meses en «contactado». Nadie sabe si están vivas o muertas.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">09</div><div>
+        <div class="err-t">Marketing y ventas desalineados</div>
+        <p class="err-d">Marketing dice que ventas no sigue los leads; ventas dice que los leads son malos. Sin un criterio común de «lead cualificado», ambos tienen razón y nadie mejora.</p>
+        <p class="err-ex"><b>Ejemplo</b> No existe definición escrita de lead cualificado. Cada comercial filtra a ojo y descarta oro.</p>
+      </div></div>
+
+      <div class="err"><div class="err-no">10</div><div>
+        <div class="err-t">No medir el sistema entero</div>
+        <p class="err-d">Si solo mides clics y formularios, tomas decisiones con la primera etapa e ignoras dónde se cae el dinero de verdad: entre el lead y la venta.</p>
+        <p class="err-ex"><b>Ejemplo</b> Sabes el CPL de cada plataforma al céntimo, pero no cuántos clientes trajo cada campaña este trimestre.</p>
+      </div></div>
+
+    </div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <section class="sheet dark">
+    <div class="sec-head"><div class="sec-no">03 · La auditoría</div></div>
+    <h2 style="color:var(--on-graphite);max-width:16ch">Las 27 preguntas</h2>
+    <p style="color:var(--on-graphite-mut);max-width:54ch;margin-top:14px">Tres preguntas por cada etapa del sistema. Respóndelas con honestidad: <strong style="color:var(--on-graphite)">sí</strong> o <strong style="color:var(--on-graphite)">no</strong>. No hay respuestas correctas — hay fugas que encontrar. Marca cada casilla donde la respuesta sea un <em style="color:var(--signal)">no</em> claro.</p>
+
+    <div style="margin-top:20px">
+      <div class="grp"><div class="grp-h"><span class="grp-code">S1</span><span class="grp-name">Sistema</span></div>
+        <div class="q"><span class="q-code">Q01</span><span class="q-txt">¿Sabes cuánto puedes pagar como máximo por un cliente (CAC) sin perder dinero?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q02</span><span class="q-txt">¿Conoces el valor de vida (LTV) medio de un cliente tuyo?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q03</span><span class="q-txt">¿Tu equipo comercial puede atender bien el volumen de leads que quieres generar?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S2</span><span class="grp-name">Oferta</span></div>
+        <div class="q"><span class="q-code">Q04</span><span class="q-txt">¿Puedes explicar en una frase por qué comprarte a ti y no a tu competencia?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q05</span><span class="q-txt">¿Tu oferta da una razón concreta para actuar ahora y no «más adelante»?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q06</span><span class="q-txt">¿Has probado más de una oferta para saber cuál convierte mejor?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S3</span><span class="grp-name">Mensaje</span></div>
+        <div class="q"><span class="q-code">Q07</span><span class="q-txt">¿Tu mensaje habla del problema del cliente antes que de tus características?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q08</span><span class="q-txt">¿Tienes pruebas (casos, cifras, testimonios) que respalden tu promesa?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q09</span><span class="q-txt">¿Sabes qué ángulo o promesa funciona mejor con tu cliente ideal?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S4</span><span class="grp-name">Creativos</span></div>
+        <div class="q"><span class="q-code">Q10</span><span class="q-txt">¿Pruebas ángulos distintos, no solo formatos distintos del mismo mensaje?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q11</span><span class="q-txt">¿Produces creativos nuevos con la frecuencia suficiente para evitar la fatiga?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q12</span><span class="q-txt">¿Sabes qué creativo genera clientes, no solo cuál tiene más interacciones?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S5</span><span class="grp-name">Landing</span></div>
+        <div class="q"><span class="q-code">Q13</span><span class="q-txt">¿Tu tráfico de pago llega a una landing dedicada, no a la home?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q14</span><span class="q-txt">¿Esa página tiene un único objetivo y una única llamada a la acción?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q15</span><span class="q-txt">¿Conoces el % de conversión de tu landing y lo has intentado mejorar?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S6</span><span class="grp-name">CRM</span></div>
+        <div class="q"><span class="q-code">Q16</span><span class="q-txt">¿Todos los leads entran automáticamente a un CRM, sin pasos manuales?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q17</span><span class="q-txt">¿Cada lead tiene un dueño y una etapa clara en todo momento?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q18</span><span class="q-txt">¿Puedes rastrear cada venta hasta la campaña que la originó?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S7</span><span class="grp-name">Seguimiento</span></div>
+        <div class="q"><span class="q-code">Q19</span><span class="q-txt">¿Un lead que no compra al día 1 recibe una secuencia de seguimiento automática?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q20</span><span class="q-txt">¿Combinas varios canales de seguimiento (email, WhatsApp, retargeting)?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q21</span><span class="q-txt">¿Reactivas leads antiguos que nunca llegaron a comprar?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S8</span><span class="grp-name">Ventas</span></div>
+        <div class="q"><span class="q-code">Q22</span><span class="q-txt">¿Contactáis a un lead caliente en minutos, no en días?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q23</span><span class="q-txt">¿Tenéis un guion y un proceso de venta común, no cada uno el suyo?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q24</span><span class="q-txt">¿Existe una definición escrita y compartida de «lead cualificado»?</span><span class="q-box"></span></div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="grp-code">S9</span><span class="grp-name">Optimización</span></div>
+        <div class="q"><span class="q-code">Q25</span><span class="q-txt">¿Tienes experimentos activos ahora mismo, con una hipótesis clara?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q26</span><span class="q-txt">¿Revisas el sistema por el coste por cliente, no solo por el coste por lead?</span><span class="q-box"></span></div>
+        <div class="q"><span class="q-code">Q27</span><span class="q-txt">¿Sabes hoy cuál es la etapa más débil de tu sistema de captación?</span><span class="q-box"></span></div>
+      </div>
+    </div>
+
+    <div class="score">
+      <div class="score-card">
+        <div class="score-range">0 – 3 «no»</div>
+        <div class="score-t">Sistema sólido</div>
+        <p class="score-d">Tu problema probablemente sí es de escala. Ahora invertir más tiene sentido — con instrumentación fina.</p>
+      </div>
+      <div class="score-card warn">
+        <div class="score-range">4 – 9 «no»</div>
+        <div class="score-t">Fugas concretas</div>
+        <p class="score-d">Tienes un sistema, pero pierde dinero en etapas identificables. Arreglarlas rinde más que subir el presupuesto.</p>
+      </div>
+      <div class="score-card crit">
+        <div class="score-range">10 + «no»</div>
+        <div class="score-t">Falta de sistema</div>
+        <p class="score-d">No tienes un problema de anuncios. Cada euro extra en publicidad hoy amplifica la fuga. Empieza por el sistema.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASOS ============ -->
+  <section class="sheet">
+    <div class="sec-head"><div class="sec-no">04 · Evidencia</div></div>
+    <h2 style="max-width:16ch">Antes / Después</h2>
+    <p class="lead" style="margin-top:14px">Mismo presupuesto. Distinto sistema. Estos son los patrones que más se repiten cuando se arregla la etapa correcta.</p>
+
+    <div class="case">
+      <div class="case-tag">Caso · Formación técnica</div>
+      <div class="case-h">La campaña «no funcionaba». El sistema sí, a medias.</div>
+      <div class="ba">
+        <div class="ba-col"><div class="ba-lab">Antes</div>
+          <ul>
+            <li>Tráfico a la home, sin landing dedicada</li>
+            <li>Leads en una hoja de cálculo, sin CRM</li>
+            <li>Cero seguimiento tras el primer contacto</li>
+            <li>Se medía el CPL; nadie medía matrículas por campaña</li>
+          </ul>
+        </div>
+        <div class="ba-col after"><div class="ba-lab">Después</div>
+          <ul>
+            <li>Landing con un solo objetivo por oferta</li>
+            <li>CRM con entrada automática y etapas claras</li>
+            <li>Secuencia de email + WhatsApp a 14 días</li>
+            <li>Cada matrícula atribuida a su campaña</li>
+          </ul>
+        </div>
+      </div>
+      <div class="metricrow">
+        <span class="metric fillme">CPL &nbsp;−[ %]</span>
+        <span class="metric fillme">Coste por matrícula &nbsp;−[ %]</span>
+        <span class="metric fillme">Leads → cliente &nbsp;×[ ]</span>
+      </div>
+      <p class="learn"><b>Aprendizaje</b> &nbsp;El presupuesto no cambió. Cambió a dónde iba la gente después del clic.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">Caso · Servicios B2B</div>
+      <div class="case-h">Bajaron el CPL a la mitad… y las ventas también.</div>
+      <div class="ba">
+        <div class="ba-col"><div class="ba-lab">Antes</div>
+          <ul>
+            <li>Optimización 100% por coste por lead</li>
+            <li>Oferta genérica para «traer volumen»</li>
+            <li>Sin definición común de lead cualificado</li>
+            <li>Ventas contactaba a los 2–3 días</li>
+          </ul>
+        </div>
+        <div class="ba-col after"><div class="ba-lab">Después</div>
+          <ul>
+            <li>Optimización por coste por cliente (CAC)</li>
+            <li>Oferta específica para el cliente ideal</li>
+            <li>Criterio de cualificación escrito y compartido</li>
+            <li>Contacto en menos de 5 minutos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="metricrow">
+        <span class="metric fillme">Tasa de cierre &nbsp;+[ %]</span>
+        <span class="metric fillme">CAC &nbsp;−[ %]</span>
+        <span class="metric fillme">Ingresos / € invertido &nbsp;×[ ]</span>
+      </div>
+      <p class="learn"><b>Aprendizaje</b> &nbsp;El lead más barato era el más caro. La métrica equivocada tomaba las decisiones.</p>
+    </div>
+
+    <p style="margin-top:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);max-width:62ch">
+      Nota para Qualivo: sustituid los marcadores <span style="color:var(--signal)">[ ]</span> por resultados verificados de clientes reales (con permiso) antes de publicar. Mantened el formato antes/después.
+    </p>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="sheet dark">
+    <div class="sec-head"><div class="sec-no">05 · El siguiente paso</div></div>
+    <div class="cta-grid">
+      <div>
+        <h2 style="color:var(--on-graphite);max-width:15ch">Auditoría de Adquisición con IA</h2>
+        <p style="color:var(--on-graphite-mut);max-width:46ch;margin-top:14px">No es una llamada de ventas. Es un diagnóstico. Cogemos tu sistema real —campañas, landing, CRM, seguimiento— y te enseñamos, etapa por etapa, dónde se está cayendo tu dinero.</p>
+        <ul class="cta-list">
+          <li><span class="n">01</span><span>Revisamos tus 9 etapas con datos reales y con IA. <b>Sin humo.</b></span></li>
+          <li><span class="n">02</span><span>Identificamos <b>la etapa que más te está costando</b> ahora mismo.</span></li>
+          <li><span class="n">03</span><span>Te vas con un <b>plan claro</b> — lo apliques con nosotros o por tu cuenta.</span></li>
+        </ul>
+        <a class="btn" href="#reservar">Reservar mi auditoría</a>
+        <div class="cta-note">Plazas limitadas · Solo empresas que ya venden y quieren escalar</div>
+      </div>
+
+      <aside class="cta-panel">
+        <div class="eyebrow">Para quién es</div>
+        <h3>CEOs, fundadores y directores de marketing</h3>
+        <p>De empresas que ya facturan y quieren un sistema de captación predecible — no otro curso de Meta Ads.</p>
+        <hr class="rule" style="background:var(--line-dk);margin:18px 0">
+        <div class="eyebrow">Para quién no</div>
+        <p style="margin-bottom:0">Freelancers o quien busca «aprender a poner anuncios». Este diagnóstico es para quien invierte para crecer.</p>
+      </aside>
+    </div>
+
+    <div class="foot">
+      <div>Qualivo · Sistemas de captación predecibles</div>
+      <div>IA · Meta Ads · Google Ads · CRO · CRM · Automatización</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function(){
+    var b=document.documentElement, t=document.getElementById('tgl');
+    function cur(){return b.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+    t.addEventListener('click',function(){
+      var n=cur()==='dark'?'light':'dark'; b.setAttribute('data-theme',n);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Diagnóstico de Captación · Descárgalo — Qualivo</title>
+<meta name="description" content="Las 27 preguntas que toda empresa debería responder antes de invertir 1 € más en publicidad. Descarga gratis.">
+<style>
+  :root{
+    --paper:#EDEBE4;--paper-2:#E5E2D8;--ink:#17181A;--ink-soft:#3A3B39;--muted:#6C6C63;
+    --graphite:#1E2126;--graphite-2:#272B31;--on-graphite:#E9E7DE;--on-graphite-mut:#9DA0A0;
+    --line:rgba(23,24,26,.16);--line-2:rgba(23,24,26,.09);--line-dk:rgba(233,231,222,.16);
+    --accent:#0C6B63;--accent-ink:#0A5751;--accent-soft:rgba(12,107,99,.10);--signal:#B4712A;--signal-soft:rgba(180,113,42,.12);
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'SF Mono','JetBrains Mono',ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#181A1D;--paper-2:#1F2226;--ink:#E9E7DE;--ink-soft:#C9C7BE;--muted:#9A9C95;
+    --graphite:#0F1113;--graphite-2:#15181B;--line:rgba(233,231,222,.16);--line-2:rgba(233,231,222,.09);
+    --accent:#33A79B;--accent-ink:#2C9084;--accent-soft:rgba(51,167,155,.12);--signal:#D0954A;--signal-soft:rgba(208,149,74,.14);
+  }}
+  :root[data-theme="light"]{--paper:#EDEBE4;--paper-2:#E5E2D8;--ink:#17181A;--ink-soft:#3A3B39;--muted:#6C6C63;--graphite:#1E2126;--graphite-2:#272B31;--line:rgba(23,24,26,.16);--line-2:rgba(23,24,26,.09);--accent:#0C6B63;--accent-ink:#0A5751;--accent-soft:rgba(12,107,99,.10);--signal:#B4712A;--signal-soft:rgba(180,113,42,.12)}
+  :root[data-theme="dark"]{--paper:#181A1D;--paper-2:#1F2226;--ink:#E9E7DE;--ink-soft:#C9C7BE;--muted:#9A9C95;--graphite:#0F1113;--graphite-2:#15181B;--line:rgba(233,231,222,.16);--line-2:rgba(233,231,222,.09);--accent:#33A79B;--accent-ink:#2C9084;--accent-soft:rgba(51,167,155,.12);--signal:#D0954A;--signal-soft:rgba(208,149,74,.14)}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--graphite);color:var(--on-graphite);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#fff}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  a{color:inherit;text-decoration:none}
+
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:.7em}
+  .kicker::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6.4vw,68px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;margin:.3em 0 0}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.6vw,38px);line-height:1.12;text-wrap:balance;margin:0}
+  h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:0}
+  p{margin:0 0 1em;max-width:60ch}
+
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line-dk)}
+  .brand{font-family:var(--serif);font-size:22px;font-weight:600}
+  .brand span{color:var(--accent)}
+  .nav .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-graphite-mut)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,64px);align-items:center;padding:clamp(46px,8vh,96px) 0 clamp(40px,6vh,70px)}
+  @media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px}}
+  .hero-sub{font-size:clamp(18px,2.2vw,21px);color:var(--on-graphite-mut);max-width:44ch;margin-top:1.1em;line-height:1.5}
+  .trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-graphite-mut);border:1px solid var(--line-dk);border-radius:20px;padding:7px 13px}
+
+  /* mockup */
+  .mock{position:relative;aspect-ratio:1/1.32;border-radius:8px;overflow:hidden;
+        background:linear-gradient(155deg,#22262c,#181b1f);border:1px solid var(--line-dk);
+        box-shadow:0 30px 70px rgba(0,0,0,.4);padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;justify-content:space-between}
+  .mock .mk-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .mock .mk-t{font-family:var(--serif);font-size:clamp(26px,4vw,40px);line-height:1.05;font-weight:600;color:var(--on-graphite);margin-top:auto}
+  .mock .mk-s{font-family:var(--serif);font-size:14px;color:var(--on-graphite-mut);margin-top:14px;max-width:24ch;line-height:1.4}
+  .mock .mk-foot{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-graphite-mut);border-top:1px solid var(--line-dk);padding-top:14px;margin-top:20px;display:flex;justify-content:space-between}
+  .mk-rule{position:absolute;left:0;right:0;height:1px;background:var(--line-dk)}
+
+  /* form card */
+  .form-card{background:var(--paper);color:var(--ink);border-radius:8px;padding:clamp(22px,3vw,32px)}
+  .form-card .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .form-card h3{margin:.5em 0 .2em;font-size:23px}
+  .form-card p{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .field input{font-family:var(--sans);font-size:16px;padding:13px 14px;border:1px solid var(--line);border-radius:5px;background:var(--paper-2);color:var(--ink)}
+  .field input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  .submit{width:100%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:none;border-radius:5px;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
+  .submit::after{content:"→"}
+  .submit:hover{background:var(--accent-ink)}
+  .privacy{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--muted);text-align:center;margin:14px 0 0;text-transform:none}
+
+  /* sections on paper */
+  .band{background:var(--paper);color:var(--ink)}
+  .band-2{background:var(--paper-2);color:var(--ink)}
+  .sec{padding:clamp(52px,8vh,92px) 0}
+  .sec-no{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600;margin-bottom:20px}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:8px}
+  @media(max-width:760px){.grid3{grid-template-columns:1fr}}
+  .cell{background:var(--paper);padding:26px 24px}
+  .band-2 .cell{background:var(--paper-2)}
+  .cell .n{font-family:var(--mono);font-size:12px;color:var(--signal);font-weight:600}
+  .cell h3{margin:14px 0 8px;font-size:19px}
+  .cell p{font-size:14.5px;color:var(--muted);margin:0}
+
+  .lead{font-size:clamp(20px,2.6vw,26px);font-family:var(--serif);line-height:1.32;max-width:24ch;color:var(--ink)}
+  :where(.band,.band-2) .lead{color:var(--ink)}
+
+  /* inside list */
+  .inside{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center}
+  @media(max-width:820px){.inside{grid-template-columns:1fr;gap:30px}}
+  .inside ul{list-style:none;margin:14px 0 0;padding:0}
+  .inside li{display:grid;grid-template-columns:34px 1fr;gap:8px;padding:15px 0;border-top:1px solid var(--line-2);align-items:baseline}
+  .inside li .c{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+  .inside li b{font-weight:600}
+  .inside li span.d{color:var(--muted);font-size:14px;display:block;margin-top:2px}
+
+  /* audience */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  @media(max-width:680px){.aud{grid-template-columns:1fr}}
+  .aud-card{border:1px solid var(--line);border-radius:8px;padding:26px}
+  .aud-card .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+  .aud-card.yes .lab{color:var(--accent)}
+  .aud-card.no .lab{color:var(--signal)}
+  .aud-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .aud-card li{display:flex;gap:10px;font-size:15px;color:var(--ink-soft)}
+  .aud-card.yes li::before{content:"✓";color:var(--accent);font-weight:700}
+  .aud-card.no li::before{content:"×";color:var(--signal);font-weight:700}
+
+  /* final cta */
+  .final{text-align:center;padding:clamp(56px,9vh,110px) 0}
+  .final h2{max-width:20ch;margin:0 auto}
+  .final p{margin:16px auto 26px;color:var(--on-graphite-mut);max-width:48ch}
+  .btn-lg{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:18px 30px;border-radius:6px}
+  .btn-lg::after{content:"→"}
+
+  footer{border-top:1px solid var(--line-dk);padding:26px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-graphite-mut)}
+  .toggle{position:fixed;top:14px;right:14px;z-index:50;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--graphite-2);color:var(--on-graphite-mut);border:1px solid var(--line-dk);border-radius:20px;padding:7px 13px;cursor:pointer}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<button class="toggle" id="tgl">Tema</button>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand">Qualivo<span>.</span></div>
+    <div class="tag">Sistemas de captación predecibles</div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <div class="kicker">Documento gratuito · Diagnóstico</div>
+      <h1>El Diagnóstico de Captación</h1>
+      <p class="hero-sub">Las 27 preguntas que toda empresa debería responder <strong>antes de invertir 1&nbsp;€ más en publicidad</strong>. Sin teoría. Un mapa para encontrar tu propia fuga.</p>
+      <div class="trust">
+        <span class="chip">Para CEOs y fundadores</span>
+        <span class="chip">9 etapas · 27 preguntas</span>
+        <span class="chip">Lectura de 12 min</span>
+      </div>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="mk-k">Qualivo · Documento 01</div>
+      <div class="mk-rule" style="top:56px"></div>
+      <div class="mk-t">El Diagnóstico de Captación</div>
+      <div class="mk-s">Las 27 preguntas antes de invertir 1&nbsp;€ más en publicidad.</div>
+      <div class="mk-foot"><span>S1 → S9</span><span>Auditoría</span></div>
+    </div>
+  </header>
+</div>
+
+<!-- FORM BAND -->
+<section class="band-2">
+  <div class="wrap sec" style="display:grid;grid-template-columns:1fr .85fr;gap:clamp(30px,5vw,64px);align-items:center">
+    <div>
+      <div class="sec-no">Descárgalo ahora</div>
+      <h2 style="max-width:16ch">Si esto lo regalamos… imagina trabajar con nosotros.</h2>
+      <p style="margin-top:16px;color:var(--muted)">Te enviamos el documento al instante. Es el mismo mapa con el que auditamos sistemas de captación de empresas que ya facturan.</p>
+    </div>
+    <form class="form-card" onsubmit="return false">
+      <div class="eyebrow">Acceso inmediato</div>
+      <h3>Recibe el diagnóstico</h3>
+      <p>Rellena y te llega al correo. Nada de spam.</p>
+      <div class="field"><label for="n">Nombre</label><input id="n" type="text" placeholder="Tu nombre" autocomplete="name"></div>
+      <div class="field"><label for="e">Email de empresa</label><input id="e" type="email" placeholder="tu@empresa.com" autocomplete="email"></div>
+      <div class="field"><label for="c">Empresa</label><input id="c" type="text" placeholder="Nombre de tu empresa" autocomplete="organization"></div>
+      <button class="submit" type="submit">Enviarme el documento</button>
+      <p class="privacy">Al descargarlo aceptas recibir comunicaciones de Qualivo. Puedes darte de baja cuando quieras.</p>
+    </form>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="band">
+  <div class="wrap sec">
+    <div class="sec-no">Por qué este documento</div>
+    <p class="lead">La mayoría cree que tiene un problema de anuncios. Casi siempre es un problema de sistema.</p>
+    <div class="grid3">
+      <div class="cell"><div class="n">01</div><h3>Los leads no cualifican</h3><p>Llenas el CRM de formularios que ventas no cierra. Más leads no es más negocio.</p></div>
+      <div class="cell"><div class="n">02</div><h3>Escalar no funciona</h3><p>Subes el presupuesto y solo escalas la fuga. El sistema pierde antes de la venta.</p></div>
+      <div class="cell"><div class="n">03</div><h3>No sabes dónde se cae</h3><p>Mides el coste por lead, pero no qué campaña genera clientes reales. Decides a ciegas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="band-2">
+  <div class="wrap sec">
+    <div class="inside">
+      <div>
+        <div class="sec-no">Qué hay dentro</div>
+        <h2 style="max-width:14ch">No es un ebook. Es una auditoría.</h2>
+        <p style="margin-top:16px;color:var(--muted)">Un documento visual, directo y sin relleno. El tipo de material que un CEO guarda porque le ayuda a entender por qué su sistema comercial no está funcionando.</p>
+      </div>
+      <ul>
+        <li><span class="c">01</span><div><b>El Sistema de Captación de 9 etapas</b><span class="d">De la oferta a la optimización. Dónde se rompe de verdad.</span></div></li>
+        <li><span class="c">02</span><div><b>Los 10 errores que drenan tu inversión</b><span class="d">Con ejemplos concretos. Ninguno es «no saber de anuncios».</span></div></li>
+        <li><span class="c">03</span><div><b>Las 27 preguntas de auditoría</b><span class="d">Para detectar tu propia fuga, etapa por etapa.</span></div></li>
+        <li><span class="c">04</span><div><b>Casos antes / después</b><span class="d">Mismo presupuesto, distinto sistema, distinto resultado.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="band">
+  <div class="wrap sec">
+    <div class="sec-no">Para quién es</div>
+    <h2 style="max-width:18ch">Escrito para quien invierte para crecer.</h2>
+    <div class="aud">
+      <div class="aud-card yes">
+        <div class="lab">Es para ti si eres</div>
+        <ul>
+          <li>CEO o fundador de una empresa que ya vende</li>
+          <li>Director o directora de marketing con presupuesto</li>
+          <li>Alguien que quiere un sistema, no otra campaña</li>
+        </ul>
+      </div>
+      <div class="aud-card no">
+        <div class="lab">No es para ti si</div>
+        <ul>
+          <li>Buscas «aprender a poner anuncios en Meta»</li>
+          <li>Eres freelancer buscando tácticas sueltas</li>
+          <li>Quieres un truco, no un sistema</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="wrap">
+  <section class="final">
+    <div class="kicker" style="justify-content:center">El siguiente paso</div>
+    <h2>Descárgalo. Audita tu sistema. Luego hablamos.</h2>
+    <p>Cuando termines las 27 preguntas sabrás cuál es tu etapa más débil. Si quieres, la revisamos juntos en una Auditoría de Adquisición con IA — un diagnóstico, no una venta.</p>
+    <a class="btn-lg" href="#top">Quiero el diagnóstico</a>
+  </section>
+
+  <footer>
+    <div>Qualivo · Sistemas de captación predecibles</div>
+    <div>IA · Meta Ads · Google Ads · CRO · CRM · Automatización</div>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var b=document.documentElement,t=document.getElementById('tgl');
+    function cur(){return b.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+    t.addEventListener('click',function(){b.setAttribute('data-theme',cur()==='dark'?'light':'dark');});
+  })();
+</script>
+</body>
+</html>
