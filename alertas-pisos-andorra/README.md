@@ -16,7 +16,8 @@ sin servidor y **gratis**, cada X minutos.
 | **Pisos.ad** | ✅ Activo (agrega casi todas las inmobiliarias de Andorra) |
 | **Habitaclia** | ✅ Activo |
 | **Pisos.com** | ✅ Activo (incluye particulares) |
-| EnAlquiler · BuscoCasa.ad | ➕ Fáciles de añadir (falta afinar su enlace de detalle) |
+| **EnAlquiler** | ✅ Activo (incluye particulares) |
+| BuscoCasa.ad | ⚠️ Descartado: su listado mezcla venta/alquiler y no tiene precio/habitaciones estructurados (van en texto libre) → poco fiable. Su alquiler ya lo cubren las mismas agencias vía Pisos.ad. |
 | Idealista · Fotocasa · Trovit | 🔒 Bloquean bots (necesitan servicio de scraping de pago) |
 
 Cada aviso incluye la **ficha completa**: foto, precio, habitaciones, m²,
@@ -74,21 +75,23 @@ Ejecuta la función **`pruebaEmail`** ▶️ y mira tu bandeja de entrada.
 
 ## Añadir más portales
 
-### Los fáciles (HTML abierto): EnAlquiler, BuscoCasa.ad
-En `Alertas.gs`, al final, duplica un bloque de `FUENTES` y escribe su `parse`
-(igual que ya se hizo con `parsePisosCom`):
+### Añadir un portal nuevo
+En `Alertas.gs`, al final, duplica un bloque de `FUENTES` y escribe su función
+`parse` (igual que `parsePisosAd`, `parseHabitaclia`, `parsePisosCom` o
+`parseEnAlquiler`):
 
 ```js
 {
-  nombre: 'EnAlquiler',
+  nombre: 'MiPortal',
   activa: function () { return true; },
-  url: function (p) { return 'https://www.enalquiler.com/alquiler-pisos-andorra_53_2/' + p; },
-  parse: function (html) { return parseEnAlquiler(html); }  // <- función de parseo nueva
+  url: function (p) { return 'https://.../andorra/' + p; },
+  parse: function (html) { return parseMiPortal(html); }  // <- función de parseo nueva
 }
 ```
 
-Cada portal tiene su propia maquetación, así que `parse` cambia de uno a otro;
-puedo escribir esos parsers cuando quieras.
+Cada portal tiene su propia maquetación, así que `parse` cambia de uno a otro.
+Requisito para que sea fiable: que el listado tenga **precio y habitaciones en
+campos estructurados** (no en texto libre). Por eso BuscoCasa.ad quedó fuera.
 
 ### Los bloqueados: Idealista, Fotocasa, Trovit
 Estos portales detectan y bloquean bots (captcha geográfico, *Access Denied*).

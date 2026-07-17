@@ -26,7 +26,7 @@
 
 var CONFIG = {
   // ── A quién avisar (separa varios con comas) ──────────────────────────
-  EMAILS: 'info@maikelechevarria.com, EMAIL_DE_ISA_AQUI',
+  EMAILS: 'info@maikelechevarria.com, Isa88gm@gmail.com',
 
   // ── Filtros de búsqueda ───────────────────────────────────────────────
   MAX_PRECIO: 1500,               // € al mes
@@ -49,6 +49,7 @@ var CONFIG = {
   USAR_PISOS_AD: true,
   USAR_HABITACLIA: true,
   USAR_PISOS_COM: true,
+  USAR_ENALQUILER: true,
   MAX_PAGINAS: 12,                // páginas máximas a revisar por portal
 
   // ── Cada cuánto revisar (minutos): 1, 5, 10, 15 o 30 ──────────────────
@@ -252,6 +253,49 @@ function parseHabitaclia(html) {
       url: url, titulo: titulo, tipo: tipo,
       habitaciones: hab, m2: m2, precio: precio, imagen: imagen,
       parroquia: parishFrom(url), agencia: ''
+    });
+  }
+  return out;
+}
+
+/** Parser de EnAlquiler (una tarjeta por bloque schema.org/Product). */
+function parseEnAlquiler(html) {
+  var out = [], seen = {};
+  var cards = html.split('schema.org/Product');
+  for (var i = 1; i < cards.length; i++) {
+    var seg = cards[i];
+    var mId = seg.match(/list-item='(\d+)'/) || seg.match(/property-id="(\d+)"/);
+    if (!mId) continue;
+    var id = mId[1];
+    if (seen[id]) continue; seen[id] = 1;
+
+    var mUrl = seg.match(/href="(https:\/\/www\.enalquiler\.com\/[^"]*_\d+\.html)"/);
+    if (!mUrl) continue;
+    var url = mUrl[1];
+
+    var mName = seg.match(/itemprop="name">([^<]+)</);
+    var titulo = mName ? decodeEntities(mName[1]) : 'Piso en Andorra';
+
+    var precio = 0;
+    var mPre = seg.match(/propertyCard__price--value">\s*([\d.]+)/);
+    if (mPre) precio = parseInt(mPre[1].replace(/\./g, ''), 10) || 0;
+
+    var mHab = seg.match(/(\d+)\s*Hab\b/);
+    var hab = mHab ? parseInt(mHab[1], 10) : 0;
+    var mSup = seg.match(/(\d+)\s*m<sup>/);
+    var m2 = mSup ? parseInt(mSup[1], 10) : 0;
+
+    var mImg = seg.match(/srcset="(https:\/\/images\.enalquiler\.com\/[^"]+\.jpg)"/);
+    var imagen = mImg ? mImg[1] : '';
+
+    var tm = url.match(/alquiler[_-]([a-z]+)/i);
+    var tipo = tm ? tm[1].toLowerCase() : 'piso';
+
+    out.push({
+      source: 'EnAlquiler', id: id, clave: 'enal_' + id,
+      url: url, titulo: titulo, tipo: tipo,
+      habitaciones: hab, m2: m2, precio: precio, imagen: imagen,
+      parroquia: parishFrom(url + ' ' + titulo), agencia: ''
     });
   }
   return out;
@@ -526,7 +570,7 @@ function fetchHtml(url) {
 }
 
 function parishFrom(text) {
-  var t = stripAccents((text || '').toLowerCase()).replace(/_/g, ' ');
+  var t = stripAccents((text || '').toLowerCase()).replace(/[-_]/g, ' ');
   for (var i = 0; i < PARROQUIA_KEYS.length; i++) {
     if (t.indexOf(stripAccents(PARROQUIA_KEYS[i].k)) >= 0) return PARROQUIA_KEYS[i].n;
   }
@@ -620,5 +664,15 @@ var FUENTES = [
     activa: function () { return CONFIG.USAR_PISOS_COM; },
     url: function (p) { return 'https://www.pisos.com/alquiler/pisos-andorra/' + (p > 1 ? p + '/' : ''); },
     parse: function (html) { return parsePisosCom(html); }
+  },
+  {
+    nombre: 'EnAlquiler',
+    activa: function () { return CONFIG.USAR_ENALQUILER; },
+    url: function (p) {
+      return p > 1
+        ? 'https://www.enalquiler.com/alquiler-pisos-andorra_53_2/' + p
+        : 'https://www.enalquiler.com/alquiler-pisos-andorra-53-2-0.html';
+    },
+    parse: function (html) { return parseEnAlquiler(html); }
   }
 ];
