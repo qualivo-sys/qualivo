@@ -34,21 +34,21 @@ var CONFIG = {
   EXIGIR_TERRAZA: true,           // solo pisos con terraza o balcón
   AVISAR_SI_TERRAZA_DUDOSA: true, // si no se confirma, avisar igual (marcado)
 
-  // Parroquias/zonas aceptadas. Deja [] para toda Andorra.
-  PARROQUIAS: [
-    'andorra la vella', 'santa coloma', 'escaldes', 'engordany',
-    'encamp', 'la massana', 'ordino', 'canillo', 'sant julia'
-  ],
+  // Parroquias/zonas aceptadas. [] = toda Andorra (las 7 parroquias + Santa Coloma).
+  // Para restringir, añade nombres, p.ej.: ['encamp', 'la massana', 'ordino'].
+  PARROQUIAS: [],
 
   // Tipos de vivienda que NO interesan (se descartan casas, locales, etc.)
   EXCLUIR_TIPOS: [
     'casa', 'chalet', 'local', 'nave', 'terreno', 'parking', 'garaje',
-    'box', 'oficina', 'edificio', 'solar', 'traspaso', 'habitacion', 'hotel'
+    'box', 'oficina', 'edificio', 'solar', 'traspaso', 'habitacion', 'hotel',
+    'finca'
   ],
 
   // ── Fuentes ───────────────────────────────────────────────────────────
   USAR_PISOS_AD: true,
   USAR_HABITACLIA: true,
+  USAR_PISOS_COM: true,
   MAX_PAGINAS: 12,                // páginas máximas a revisar por portal
 
   // ── Cada cuánto revisar (minutos): 1, 5, 10, 15 o 30 ──────────────────
@@ -211,26 +211,31 @@ function parsePisosAd(html) {
     var mAg = b.match(/list-item__logo[\s\S]{0,220}?title="([^"]+)"/);
     var agencia = mAg ? decodeEntities(mAg[1]) : '';
 
+    var mImg = b.match(/src="(https:\/\/fotos[^"]+\.(?:jpg|jpeg|png|webp))"/i);
+    var imagen = mImg ? mImg[1] : '';
+
     out.push({
       source: 'Pisos.ad', id: id, clave: 'padd_' + id,
       url: 'https://pisos.ad' + path, titulo: titulo, tipo: slug.split('-')[0],
-      habitaciones: hab, m2: m2, precio: precio,
+      habitaciones: hab, m2: m2, precio: precio, imagen: imagen,
       parroquia: parishFrom(slug + ' ' + titulo), agencia: agencia
     });
   }
   return out;
 }
 
-/** Parser de Habitaclia (botón .js-notify con data-hab / data-pvp / data-codanuncio). */
+/** Parser de Habitaclia (una tarjeta por bloque schema.org/Product). */
 function parseHabitaclia(html) {
   var out = [], seen = {};
-  var re = /data-hab="(\d+)"[^>]*?data-sup="(\d+)"[^>]*?data-pvp="(\d+)"[^>]*?data-codanuncio="(\d+)"/g;
-  var m;
-  while ((m = re.exec(html)) !== null) {
-    var hab = parseInt(m[1], 10), m2 = parseInt(m[2], 10), precio = parseInt(m[3], 10), id = m[4];
+  var cards = html.split('schema.org/Product');
+  for (var i = 1; i < cards.length; i++) {
+    var seg = cards[i];
+    var d = seg.match(/data-hab="(\d+)"[^>]*?data-sup="(\d+)"[^>]*?data-pvp="(\d+)"[^>]*?data-codanuncio="(\d+)"/);
+    if (!d) continue;
+    var hab = parseInt(d[1], 10), m2 = parseInt(d[2], 10), precio = parseInt(d[3], 10), id = d[4];
     if (seen[id]) continue; seen[id] = 1;
 
-    var um = html.match(new RegExp('href="(https://www\\.habitaclia\\.com/alquiler-[^"]*-i' + id + '\\.htm)'));
+    var um = seg.match(new RegExp('href="(https://www\\.habitaclia\\.com/alquiler-[^"]*-i' + id + '\\.htm)'));
     if (!um) continue;
     var url = um[1].replace(/&amp;/g, '&');
 
@@ -239,11 +244,56 @@ function parseHabitaclia(html) {
     var sm = url.match(/alquiler-[a-z_]+-([^\/]*?)-i\d+\.htm/);
     var titulo = sm ? decodeEntities(sm[1].replace(/_/g, ' ')) : 'Piso en Andorra';
 
+    var im = seg.match(/(https?:)?\/\/images\.habimg\.com\/[^"']+\.jpg/i);
+    var imagen = im ? (im[0].indexOf('http') === 0 ? im[0] : 'https:' + im[0]) : '';
+
     out.push({
       source: 'Habitaclia', id: id, clave: 'habi_' + id,
       url: url, titulo: titulo, tipo: tipo,
-      habitaciones: hab, m2: m2, precio: precio,
+      habitaciones: hab, m2: m2, precio: precio, imagen: imagen,
       parroquia: parishFrom(url), agencia: ''
+    });
+  }
+  return out;
+}
+
+/** Parser de Pisos.com (tarjetas .ad-preview, ancla .ad-preview__title). */
+function parsePisosCom(html) {
+  var out = [], seen = {};
+  var re = /<a href="(\/alquilar\/([a-z_]+)-[^"\/]*?-(\d+_\d+))\/" class="ad-preview__title">([^<]*)<\/a>/g;
+  var m;
+  while ((m = re.exec(html)) !== null) {
+    var path = m[1], tipo = m[2], id = m[3], titulo = decodeEntities(m[4]);
+    if (seen[id]) continue; seen[id] = 1;
+
+    var antes = html.substring(Math.max(0, m.index - 2600), m.index);
+    var despues = html.substring(m.index, m.index + 1400);
+
+    var precio = 0;
+    var pAll = antes.match(/ad-preview__price">\s*([\d.]+)\s*€/g);
+    if (pAll && pAll.length) {
+      var pm = pAll[pAll.length - 1].match(/([\d.]+)/);
+      if (pm) precio = parseInt(pm[1].replace(/\./g, ''), 10) || 0;
+    }
+    var iAll = antes.match(/data-src="(https:\/\/fotos[^"]+)"/g);
+    var imagen = '';
+    if (iAll && iAll.length) imagen = iAll[iAll.length - 1].replace(/data-src="|"/g, '');
+
+    var mSub = despues.match(/ad-preview__subtitle">([^<]*)</);
+    var subtitulo = mSub ? decodeEntities(mSub[1]) : '';
+    var mHab = despues.match(/ad-preview__char[^>]*>\s*(\d+)\s*habs?/);
+    var hab = mHab ? parseInt(mHab[1], 10) : 0;
+    var mSup = despues.match(/ad-preview__char[^>]*>\s*(\d+)\s*m/);
+    var m2 = mSup ? parseInt(mSup[1], 10) : 0;
+    var mDesc = despues.match(/ad-preview__description">([^<]*)</);
+    var desc = mDesc ? decodeEntities(mDesc[1]) : '';
+
+    out.push({
+      source: 'Pisos.com', id: id, clave: 'pcom_' + id,
+      url: 'https://www.pisos.com' + path, titulo: titulo, tipo: tipo,
+      habitaciones: hab, m2: m2, precio: precio, imagen: imagen,
+      parroquia: parishFrom(subtitulo || titulo || path),
+      agencia: '', _extra: desc
     });
   }
   return out;
@@ -277,7 +327,7 @@ function cumpleFiltros(l) {
 /** Devuelve 'si' | 'no' | 'dudosa'. Solo baja al detalle si permitirFetch. */
 function evaluarTerraza(l, permitirFetch) {
   var rx = /terra(za|ssa|sse)|balc[oó]n?|balc\b|solari?um/i;
-  if (rx.test(l.titulo) || rx.test(l.url)) return 'si';
+  if (rx.test(l.titulo) || rx.test(l.url) || rx.test(l._extra || '')) return 'si';
   if (permitirFetch === false) return 'dudosa';
   var html = fetchHtml(l.url);
   if (!html) return 'dudosa';
@@ -349,7 +399,7 @@ function enviarEmail(matches, esArranque) {
 
 function enviarTelegram(matches) {
   if (!CONFIG.TELEGRAM_BOT_TOKEN || !CONFIG.TELEGRAM_CHAT_ID) return;
-  var api = 'https://api.telegram.org/bot' + CONFIG.TELEGRAM_BOT_TOKEN + '/sendMessage';
+  var base = 'https://api.telegram.org/bot' + CONFIG.TELEGRAM_BOT_TOKEN + '/';
   for (var i = 0; i < matches.length; i++) {
     var l = matches[i];
     var msg = '🏠 <b>' + escapeHtml(l.titulo) + '</b>\n' +
@@ -359,10 +409,17 @@ function enviarTelegram(matches) {
               '🔗 ' + l.url + '\n' +
               '(' + l.source + (l.agencia ? ' · ' + escapeHtml(l.agencia) : '') + ')';
     try {
-      UrlFetchApp.fetch(api, {
-        method: 'post', muteHttpExceptions: true,
-        payload: { chat_id: CONFIG.TELEGRAM_CHAT_ID, text: msg, parse_mode: 'HTML', disable_web_page_preview: 'false' }
-      });
+      if (l.imagen) {
+        UrlFetchApp.fetch(base + 'sendPhoto', {
+          method: 'post', muteHttpExceptions: true,
+          payload: { chat_id: CONFIG.TELEGRAM_CHAT_ID, photo: l.imagen, caption: msg, parse_mode: 'HTML' }
+        });
+      } else {
+        UrlFetchApp.fetch(base + 'sendMessage', {
+          method: 'post', muteHttpExceptions: true,
+          payload: { chat_id: CONFIG.TELEGRAM_CHAT_ID, text: msg, parse_mode: 'HTML', disable_web_page_preview: 'false' }
+        });
+      }
     } catch (e) { Logger.log('Telegram error: ' + e); }
   }
 }
@@ -407,8 +464,13 @@ function construirHtml(matches, esArranque) {
   var cards = '';
   for (var i = 0; i < matches.length; i++) {
     var l = matches[i];
+    var foto = l.imagen
+      ? '<a href="' + l.url + '"><img src="' + l.imagen + '" alt="" width="100%" ' +
+        'style="width:100%;max-height:230px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block"></a>'
+      : '';
     cards +=
       '<div style="border:1px solid #e3e6ea;border-radius:12px;padding:16px;margin:0 0 12px">' +
+      foto +
       '<div style="font-size:16px;font-weight:600;margin-bottom:6px">' + escapeHtml(l.titulo) + '</div>' +
       '<div style="font-size:15px;margin-bottom:6px">' +
         '<b style="color:#0a7d2c">' + precioTxt(l) + '</b>' +
@@ -423,7 +485,9 @@ function construirHtml(matches, esArranque) {
         'Ver anuncio →</a></div>';
   }
 
-  var pie = '<p style="color:#999;font-size:11px;margin-top:8px">Portales vigilados: Pisos.ad · Habitaclia. ' +
+  var portales = [];
+  for (var f = 0; f < FUENTES.length; f++) if (FUENTES[f].activa()) portales.push(FUENTES[f].nombre);
+  var pie = '<p style="color:#999;font-size:11px;margin-top:8px">Portales vigilados: ' + portales.join(' · ') + '. ' +
             'Consejo: llama también a las inmobiliarias — muchos pisos vuelan antes de publicarse.</p></div>';
   return head + intro + cards + pie;
 }
@@ -508,11 +572,24 @@ var PARROQUIA_KEYS = [
   { k: 'pas de la casa',   n: 'Encamp (Pas de la Casa)' },
   { k: 'encamp',           n: 'Encamp' },
   { k: 'la massana',       n: 'La Massana' },
+  { k: 'arinsal',          n: 'La Massana (Arinsal)' },
+  { k: 'sispony',          n: 'La Massana (Sispony)' },
+  { k: 'anyos',            n: 'La Massana (Anyós)' },
+  { k: 'erts',             n: 'La Massana (Erts)' },
+  { k: 'pal',              n: 'La Massana (Pal)' },
   { k: 'massana',          n: 'La Massana' },
+  { k: 'la cortinada',     n: 'Ordino (La Cortinada)' },
+  { k: 'el serrat',        n: 'Ordino (El Serrat)' },
   { k: 'ordino',           n: 'Ordino' },
   { k: 'soldeu',           n: 'Canillo (Soldeu)' },
   { k: 'el tarter',        n: 'Canillo (El Tarter)' },
+  { k: 'meritxell',        n: 'Canillo (Meritxell)' },
+  { k: 'ransol',           n: 'Canillo (Ransol)' },
+  { k: 'el forn',          n: 'Canillo (El Forn)' },
   { k: 'canillo',          n: 'Canillo' },
+  { k: 'aixovall',         n: 'Sant Julià de Lòria (Aixovall)' },
+  { k: 'juberri',          n: 'Sant Julià de Lòria (Juberri)' },
+  { k: 'nagol',            n: 'Sant Julià de Lòria (Nagol)' },
   { k: 'sant julia',       n: 'Sant Julià de Lòria' }
 ];
 
@@ -537,5 +614,11 @@ var FUENTES = [
     activa: function () { return CONFIG.USAR_HABITACLIA; },
     url: function (p) { return 'https://www.habitaclia.com/alquiler-provincia-andorra-' + p + '.htm?orden=mas_recientes'; },
     parse: function (html) { return parseHabitaclia(html); }
+  },
+  {
+    nombre: 'Pisos.com',
+    activa: function () { return CONFIG.USAR_PISOS_COM; },
+    url: function (p) { return 'https://www.pisos.com/alquiler/pisos-andorra/' + (p > 1 ? p + '/' : ''); },
+    parse: function (html) { return parsePisosCom(html); }
   }
 ];

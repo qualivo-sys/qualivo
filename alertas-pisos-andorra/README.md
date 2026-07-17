@@ -15,8 +15,12 @@ sin servidor y **gratis**, cada X minutos.
 |--------|--------|
 | **Pisos.ad** | ✅ Activo (agrega casi todas las inmobiliarias de Andorra) |
 | **Habitaclia** | ✅ Activo |
-| Pisos.com · EnAlquiler · BuscoCasa.ad | ➕ Fáciles de añadir (ver abajo) |
+| **Pisos.com** | ✅ Activo (incluye particulares) |
+| EnAlquiler · BuscoCasa.ad | ➕ Fáciles de añadir (falta afinar su enlace de detalle) |
 | Idealista · Fotocasa · Trovit | 🔒 Bloquean bots (necesitan servicio de scraping de pago) |
+
+Cada aviso incluye la **ficha completa**: foto, precio, habitaciones, m²,
+parroquia, terraza/balcón confirmado, agencia y botón directo al anuncio.
 
 ## Filtros actuales (editables en `CONFIG`)
 
@@ -70,15 +74,16 @@ Ejecuta la función **`pruebaEmail`** ▶️ y mira tu bandeja de entrada.
 
 ## Añadir más portales
 
-### Los fáciles (HTML abierto): Pisos.com, EnAlquiler, BuscoCasa.ad
-En `Alertas.gs`, al final, duplica un bloque de `FUENTES` y escribe su `parse`:
+### Los fáciles (HTML abierto): EnAlquiler, BuscoCasa.ad
+En `Alertas.gs`, al final, duplica un bloque de `FUENTES` y escribe su `parse`
+(igual que ya se hizo con `parsePisosCom`):
 
 ```js
 {
-  nombre: 'Pisos.com',
+  nombre: 'EnAlquiler',
   activa: function () { return true; },
-  url: function (p) { return 'https://www.pisos.com/alquiler/pisos-andorra/' + (p>1?p+'/':''); },
-  parse: function (html) { return parsePisosCom(html); }  // <- función de parseo nueva
+  url: function (p) { return 'https://www.enalquiler.com/alquiler-pisos-andorra_53_2/' + p; },
+  parse: function (html) { return parseEnAlquiler(html); }  // <- función de parseo nueva
 }
 ```
 
