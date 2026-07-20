@@ -30,6 +30,7 @@ function provider(s) {
   if (x.includes('google')) return 'Google Ads';
   if (x.includes('landing')) return 'Meta · Landing';
   if (/facebook|lead form|instant|formulario|meta/.test(x)) return 'Meta · Instantáneo';
+  if (/whatsapp|gener|directo|web/.test(x)) return 'Web / WhatsApp';
   return s ? 'Otro' : '(sin fuente)';
 }
 function weekMonday(ds) {
