@@ -111,6 +111,9 @@
     </div>
   </div>
 
+  <h2>Por etapa del pipeline</h2>
+  <table id="tEtapa"></table>
+
   <h2>Por comercial</h2>
   <table id="tCom"></table>
 
@@ -205,6 +208,12 @@ function render(){
     const n=rows.filter(r=>r.estado===e).length;
     return `<tr><td><span class="pill" style="background:${c}"></span>${e}</td><td>${fmt(n)}</td><td>${pct(n,k.leads)}</td></tr>`;
   }).join('') + `<tr class="tot"><td>Total</td><td>${fmt(k.leads)}</td><td>100%</td></tr>`;
+  // Por etapa del pipeline (todas las etapas, en orden, con % del total)
+  const etapas = DATA.etapas || [];
+  const etC = {};
+  rows.forEach(r => { etC[r.etapa] = (etC[r.etapa] || 0) + 1; });
+  const etBody = etapas.map(e => `<tr><td>${e}</td><td>${fmt(etC[e]||0)}</td><td>${pct(etC[e]||0, k.leads)}</td></tr>`).join('');
+  $('#tEtapa').innerHTML = `<thead><tr><th>Etapa</th><th>Nº</th><th>% del total</th></tr></thead><tbody>${etBody}<tr class="tot"><td>Total</td><td>${fmt(k.leads)}</td><td>100%</td></tr></tbody>`;
   // Por comercial y por procedencia
   breakdown('#tCom','Comercial', rows, 'comercial');
   breakdown('#tPro','Canal', rows, 'procedencia');
