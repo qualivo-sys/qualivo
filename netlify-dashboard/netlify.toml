@@ -8,8 +8,9 @@
 #   GHL_LOCATION_ID      id de la location de Eleva
 #   DASHBOARD_PASSWORD   contraseña compartida para ver el panel
 
+# La "Base directory" se define en la UI de Netlify (= netlify-dashboard).
+# publish y functions son RELATIVOS a esa base — no repitas "netlify-dashboard".
 [build]
-  base = "netlify-dashboard"
   publish = "public"
   functions = "netlify/functions"
 

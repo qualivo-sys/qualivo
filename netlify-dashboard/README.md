@@ -14,10 +14,11 @@ caché de 2 min). Sin base de datos, sin servidor propio, sin subir datos.
 ## Desplegar en Netlify (una vez, ~5 min)
 1. Entra en **app.netlify.com** → **Add new site → Import an existing project**.
 2. Conecta el repositorio `qualivo-sys/qualivo`.
-3. En la configuración del build:
+3. En la configuración del build (⚠️ importante para no dar 404):
    - **Base directory:** `netlify-dashboard`
-   - **Publish directory:** `netlify-dashboard/public`
-   - Functions y build ya vienen definidos en `netlify.toml`.
+   - **Publish directory:** `public`  ← relativo a la base; **NO** pongas `netlify-dashboard/public`
+   - **Build command:** (déjalo vacío)
+   - Functions ya viene en `netlify.toml`.
 4. **Site settings → Environment variables** → añade:
    | Variable | Valor |
    |---|---|
