@@ -39,6 +39,75 @@ function weekMonday(ds) {
   return d.toISOString().slice(0, 10);
 }
 
+/* ---------- Inversión: Meta (en vivo) + Google (manual) ---------- */
+const COURSE_PRICE = Number(process.env.COURSE_PRICE || 1500);
+// Google Ads manual por mes (editable con la env var GOOGLE_INV en JSON).
+const GOOGLE_INV_DEFAULT = {
+  '2026-07': {
+    'Google · Performance Max': { spend: 200.55, leads: 26 },
+    'Google · Search': { spend: 201.61, leads: 20 }
+  }
+};
+function googleInv() {
+  try { return process.env.GOOGLE_INV ? JSON.parse(process.env.GOOGLE_INV) : GOOGLE_INV_DEFAULT; }
+  catch { return GOOGLE_INV_DEFAULT; }
+}
+function metaChannel(name) {
+  const n = (name || '').toLowerCase();
+  if (n.includes('landing')) return 'Meta · Landing';
+  if (/lead|instant|formulario/.test(n)) return 'Meta · Instantáneo';
+  return 'Meta · (otro)';
+}
+function metaLeads(actions) {
+  if (!actions) return 0;
+  const by = {}; actions.forEach((a) => { by[a.action_type] = parseFloat(a.value) || 0; });
+  if (by['lead'] != null) return by['lead'];
+  return (by['onsite_conversion.lead_grouped'] || 0) + (by['offsite_conversion.fb_pixel_lead'] || 0);
+}
+function daysInMonth(mk) { const [y, m] = mk.split('-').map(Number); return new Date(y, m, 0).getDate(); }
+
+/** Insights diarios de Meta por campaña/canal. Devuelve [{date,channel,spend,leads}]. */
+async function metaDaily(since, until) {
+  const tok = process.env.META_TOKEN, act = process.env.META_ACT;
+  if (!tok || !act) return [];
+  const ver = process.env.META_API_VERSION || 'v21.0';
+  const params = new URLSearchParams({
+    level: 'campaign', time_increment: '1',
+    fields: 'campaign_name,spend,actions', limit: '500',
+    time_range: JSON.stringify({ since, until }), access_token: tok
+  });
+  let url = `https://graph.facebook.com/${ver}/act_${act}/insights?${params}`;
+  const out = []; let guard = 0;
+  while (url && guard < 40) {
+    const r = await fetch(url);
+    if (!r.ok) break;
+    const d = await r.json();
+    (d.data || []).forEach((row) => out.push({
+      date: row.date_start, channel: metaChannel(row.campaign_name),
+      spend: parseFloat(row.spend) || 0, leads: metaLeads(row.actions)
+    }));
+    url = (d.paging && d.paging.next) || null;
+  }
+  return out;
+}
+
+/** Array de inversión diaria unificada (Meta real + Google repartido por días del mes). */
+async function buildSpend(since, until) {
+  const spend = await metaDaily(since, until);
+  const g = googleInv();
+  Object.keys(g).forEach((mk) => {
+    const dim = daysInMonth(mk);
+    for (let day = 1; day <= dim; day++) {
+      const date = `${mk}-${String(day).padStart(2, '0')}`;
+      if (date < since || date > until) continue;
+      Object.entries(g[mk]).forEach(([channel, v]) => {
+        spend.push({ date, channel, spend: v.spend / dim, leads: v.leads / dim });
+      });
+    }
+  });
+  return spend;
+}
+
 async function build() {
   const loc = process.env.GHL_LOCATION_ID;
 
@@ -97,7 +166,14 @@ async function build() {
     };
   });
 
-  return { generatedAt: new Date().toISOString(), etapas: orderNames, rows };
+  // Inversión: ventana desde la primera oportunidad (o 2026-05-01) hasta hoy
+  const dates = rows.map((r) => r.fecha).filter(Boolean).sort();
+  const since = dates.length && dates[0] < '2026-05-01' ? dates[0] : '2026-05-01';
+  const until = new Date().toISOString().slice(0, 10);
+  let spend = [];
+  try { spend = await buildSpend(since, until); } catch { spend = []; }
+
+  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, rows };
 }
 
 export default async (req) => {

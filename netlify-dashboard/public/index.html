@@ -117,6 +117,10 @@
   <h2>Por procedencia (canal)</h2>
   <table id="tPro"></table>
 
+  <h2>Inversión y rentabilidad</h2>
+  <table id="tRent"></table>
+  <div class="foot">Inversión Meta en vivo + Google manual · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
+
   <div class="foot">Entrevista = "Propuesta enviada" o posterior · Matrícula = "Alumna activa" · Contactado = etapa "Leads llamados" o posterior. Una sola fuente de verdad: todos ven los mismos números para el mismo periodo.</div>
 </div>
 
@@ -125,6 +129,7 @@ let DATA = null;
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => (n || 0).toLocaleString('es-ES');
 const pct = (a, b) => (b ? (a / b * 100) : 0).toFixed(1) + '%';
+const eur = (n) => (n || 0).toLocaleString('es-ES', {style:'currency', currency:'EUR', maximumFractionDigits:2});
 
 function enter(){ const pw = $('#pw').value.trim(); if(!pw) return;
   sessionStorage.setItem('elpw', pw); load(); }
@@ -203,6 +208,48 @@ function render(){
   // Por comercial y por procedencia
   breakdown('#tCom','Comercial', rows, 'comercial');
   breakdown('#tPro','Canal', rows, 'procedencia');
+  // Inversión y rentabilidad (solo rango de fechas)
+  renderRent($('#from').value, $('#to').value);
+}
+
+function spendByChannel(from, to){
+  const m = {};
+  (DATA.spend || []).forEach(s => {
+    if((!from || s.date >= from) && (!to || s.date <= to)){
+      (m[s.channel] ??= {spend:0, leads:0}); m[s.channel].spend += s.spend; m[s.channel].leads += s.leads;
+    }
+  });
+  return m;
+}
+function funnelByProv(rows){
+  const m = {};
+  rows.forEach(r => { (m[r.procedencia] ??= {entr:0, matr:0}); m[r.procedencia].entr += r.entrevista; m[r.procedencia].matr += r.matricula; });
+  return m;
+}
+function renderRent(from, to){
+  if(!DATA.spend){ $('#tRent').innerHTML=''; return; }
+  const sc = spendByChannel(from, to);
+  const rowsDate = DATA.rows.filter(r => (!from || r.fecha >= from) && (!to || r.fecha <= to));
+  const fp = funnelByProv(rowsDate);
+  const cp = DATA.coursePrice || 1500;
+  const sp = (keys) => keys.reduce((o,k)=>{const v=sc[k]; if(v){o.spend+=v.spend;o.leads+=v.leads;} return o;}, {spend:0,leads:0});
+  const fn = (provs) => provs.reduce((o,p)=>{const v=fp[p]; if(v){o.entr+=v.entr;o.matr+=v.matr;} return o;}, {entr:0,matr:0});
+  const line = (label, s, f) => { const ing = f.matr * cp;
+    return `<tr><td>${label}</td><td>${eur(s.spend)}</td><td>${fmt(Math.round(s.leads))}</td>
+      <td>${s.leads?eur(s.spend/s.leads):'—'}</td><td>${fmt(f.entr)}</td>
+      <td>${(f.entr&&s.spend)?eur(s.spend/f.entr):'—'}</td><td>${fmt(f.matr)}</td>
+      <td>${(f.matr&&s.spend)?eur(s.spend/f.matr):'—'}</td><td>${eur(ing)}</td>
+      <td>${s.spend?(ing/s.spend).toFixed(1)+'x':'—'}</td></tr>`; };
+  const body = [
+    line('Meta · Instantáneo', sp(['Meta · Instantáneo']), fn(['Meta · Instantáneo'])),
+    line('Meta · Landing', sp(['Meta · Landing']), fn(['Meta · Landing'])),
+    line('Meta (subtotal)', sp(['Meta · Instantáneo','Meta · Landing','Meta · (otro)']), fn(['Meta · Instantáneo','Meta · Landing'])),
+    line('Google Ads', sp(['Google · Performance Max','Google · Search']), fn(['Google Ads'])),
+    line('TOTAL', sp(Object.keys(sc)), fn(Object.keys(fp))),
+  ];
+  $('#tRent').innerHTML = `<thead><tr><th>Canal</th><th>Inversión</th><th>Leads plat.</th><th>CPL</th><th>Entrev.</th><th>Coste/Entrev</th><th>Matríc.</th><th>CPA</th><th>Ingresos</th><th>ROAS</th></tr></thead><tbody>${body.join('')}</tbody>`;
+  const trs = $('#tRent').querySelectorAll('tbody tr'); trs[2].classList.add('tot'); trs[4].classList.add('tot');
+  $('#cp').textContent = cp.toLocaleString('es-ES');
 }
 
 function breakdown(sel, label, rows, key){
