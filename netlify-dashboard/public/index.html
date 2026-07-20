@@ -111,6 +111,9 @@
     </div>
   </div>
 
+  <h2>Vista semanal (del rango seleccionado)</h2>
+  <table id="tSemana"></table>
+
   <h2>Por etapa del pipeline</h2>
   <table id="tEtapa"></table>
 
@@ -208,6 +211,8 @@ function render(){
     const n=rows.filter(r=>r.estado===e).length;
     return `<tr><td><span class="pill" style="background:${c}"></span>${e}</td><td>${fmt(n)}</td><td>${pct(n,k.leads)}</td></tr>`;
   }).join('') + `<tr class="tot"><td>Total</td><td>${fmt(k.leads)}</td><td>100%</td></tr>`;
+  // Vista semanal (una fila por semana del rango, respeta filtros)
+  renderWeekly(rows);
   // Por etapa del pipeline (todas las etapas, en orden, con % del total)
   const etapas = DATA.etapas || [];
   const etC = {};
@@ -271,6 +276,26 @@ function breakdown(sel, label, rows, key){
   const body=entries.map(([n,a])=>`<tr><td>${n}</td><td>${fmt(a.leads)}</td><td>${fmt(a.cont)}</td><td>${fmt(a.entr)}</td><td>${fmt(a.matr)}</td><td>${pct(a.matr,a.entr)}</td></tr>`).join('');
   const foot=`<tr class="tot"><td>Total</td><td>${fmt(tot.leads)}</td><td>${fmt(tot.cont)}</td><td>${fmt(tot.entr)}</td><td>${fmt(tot.matr)}</td><td>${pct(tot.matr,tot.entr)}</td></tr>`;
   $(sel).innerHTML = head + '<tbody>' + body + foot + '</tbody>';
+}
+
+function fmtWeek(w){
+  const d = new Date(w + 'T00:00:00Z'); const e = new Date(d); e.setUTCDate(e.getUTCDate() + 6);
+  const f = (x) => String(x.getUTCDate()).padStart(2,'0') + '/' + String(x.getUTCMonth()+1).padStart(2,'0');
+  return f(d) + ' – ' + f(e);
+}
+function renderWeekly(rows){
+  const byWk = {};
+  rows.forEach(r => { if(!r.semana) return; (byWk[r.semana] ??= {leads:0,cont:0,entr:0,matr:0});
+    const a = byWk[r.semana]; a.leads++; a.cont+=r.contactado; a.entr+=r.entrevista; a.matr+=r.matricula; });
+  const weeks = Object.keys(byWk).sort();
+  const head = `<thead><tr><th>Semana</th><th>Leads</th><th>Contact.</th><th>Entrev.</th><th>Matríc.</th><th>% Cierre</th></tr></thead>`;
+  if(!weeks.length){ $('#tSemana').innerHTML = head + '<tbody><tr><td colspan="6">(sin datos en el rango)</td></tr></tbody>'; return; }
+  const body = weeks.map(w => { const a = byWk[w];
+    return `<tr><td>${fmtWeek(w)}</td><td>${fmt(a.leads)}</td><td>${fmt(a.cont)}</td><td>${fmt(a.entr)}</td><td>${fmt(a.matr)}</td><td>${pct(a.matr,a.entr)}</td></tr>`;
+  }).join('');
+  const t = agg(rows);
+  const foot = `<tr class="tot"><td>Total</td><td>${fmt(t.leads)}</td><td>${fmt(t.cont)}</td><td>${fmt(t.entr)}</td><td>${fmt(t.matr)}</td><td>${pct(t.matr,t.entr)}</td></tr>`;
+  $('#tSemana').innerHTML = head + '<tbody>' + body + foot + '</tbody>';
 }
 
 // Auto-login si ya hay contraseña en la sesión
