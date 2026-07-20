@@ -1,0 +1,23 @@
+# Configuración de Netlify para el panel comercial de Eleva.
+# El panel es una web estática (public/) + una función serverless (data)
+# que trae los datos EN VIVO desde GHL (con caché corta). Los tokens van en
+# variables de entorno de Netlify, NUNCA en el repo.
+#
+# Variables de entorno a definir en Netlify (Site settings → Environment):
+#   GHL_TOKEN            token pit-... de GoHighLevel (solo lectura)
+#   GHL_LOCATION_ID      id de la location de Eleva
+#   DASHBOARD_PASSWORD   contraseña compartida para ver el panel
+
+[build]
+  base = "netlify-dashboard"
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# URL bonita para la función de datos.
+[[redirects]]
+  from = "/api/data"
+  to = "/.netlify/functions/data"
+  status = 200

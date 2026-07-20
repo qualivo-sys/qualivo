@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eleva · Panel Comercial</title>
+<style>
+  :root{
+    --surface-0:#f4f5f3; --surface-1:#fcfcfb; --border:#e3e3df;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#8a897f;
+    --accent:#2a78d6;
+    --f1:#86b6ef; --f2:#5598e7; --f3:#2a78d6; --f4:#184f95; /* embudo (azul ordinal) */
+    --c1:#2a78d6; --c2:#008300; --c3:#e87ba4; --c4:#eda100; /* categórico */
+    --good:#0ca30c; --critical:#d03b3b; --warning:#fab219; --serious:#ec835a;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){ :root:where(:not([data-theme="light"])){
+    --surface-0:#141413; --surface-1:#1f1f1d; --border:#37372f;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8e83;
+    --accent:#3987e5;
+    --f1:#5598e7; --f2:#3987e5; --f3:#256abf; --f4:#184f95;
+    --c1:#3987e5; --c2:#008300; --c3:#d55181; --c4:#c98500;
+    color-scheme:dark;
+  }}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--surface-0);color:var(--text-primary)}
+  .wrap{max-width:1160px;margin:0 auto;padding:20px}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px}
+  h1{font-size:20px;margin:0}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-secondary);margin:26px 0 10px}
+  .sub{color:var(--text-muted);font-size:12px}
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px}
+  /* Login */
+  #gate{max-width:340px;margin:12vh auto;padding:24px;text-align:center}
+  #gate input{width:100%;padding:10px;margin:12px 0;border:1px solid var(--border);border-radius:8px;background:var(--surface-0);color:var(--text-primary)}
+  button{cursor:pointer;border:1px solid var(--border);background:var(--surface-0);color:var(--text-primary);
+    padding:8px 14px;border-radius:8px;font-weight:600}
+  button.primary{background:var(--accent);color:#fff;border-color:transparent}
+  /* Filtros */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:14px 0}
+  .filters label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-secondary)}
+  .filters input,.filters select{padding:7px 8px;border:1px solid var(--border);border-radius:8px;background:var(--surface-1);color:var(--text-primary);min-width:130px}
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .kpi{padding:14px 16px}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--text-secondary)}
+  .kpi .val{font-size:26px;font-weight:700;margin-top:4px}
+  .kpi .val small{font-size:13px;font-weight:600;color:var(--text-muted)}
+  /* Embudo */
+  .funnel{padding:16px}
+  .frow{display:grid;grid-template-columns:130px 1fr;align-items:center;gap:12px;margin:9px 0}
+  .frow .name{font-size:13px;color:var(--text-secondary)}
+  .bar{height:26px;border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:flex-end;
+    padding-right:8px;color:#fff;font-weight:600;font-size:12px;min-width:44px;white-space:nowrap}
+  /* Tablas */
+  table{width:100%;border-collapse:collapse;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+  th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left}
+  thead th{background:var(--surface-0);font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--text-secondary)}
+  tbody tr:last-child td{border-bottom:0}
+  tr.tot td{font-weight:700;background:var(--surface-0)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}.frow{grid-template-columns:96px 1fr}}
+  .pill{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  .err{color:var(--critical);margin-top:10px}
+  .foot{color:var(--text-muted);font-size:11px;margin-top:26px}
+</style>
+</head>
+<body>
+
+<div id="gate" class="card">
+  <h1>Panel Comercial · Eleva</h1>
+  <p class="sub">Introduce la contraseña de acceso</p>
+  <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password" />
+  <button class="primary" style="width:100%" onclick="enter()">Entrar</button>
+  <div id="gateErr" class="err"></div>
+</div>
+
+<div id="app" class="wrap" hidden>
+  <header>
+    <h1>Panel Comercial · Eleva</h1>
+    <div class="sub">Fuente: GoHighLevel (en vivo) · <span id="updated"></span> · <button onclick="reload()" style="padding:3px 8px;font-size:12px">↻ Refrescar</button></div>
+  </header>
+
+  <div class="filters card" style="padding:12px">
+    <label>Desde<input id="from" type="date"></label>
+    <label>Hasta<input id="to" type="date"></label>
+    <label>Comercial<select id="fcom"><option value="">Todos</option></select></label>
+    <label>Procedencia<select id="fpro"><option value="">Todas</option></select></label>
+    <label>Estado<select id="fest">
+      <option value="">Todos</option><option>Pendiente</option><option>Ganado</option>
+      <option>Perdido</option><option>Abandonado/Inválido</option></select></label>
+    <button onclick="quick('mtd')">Mes en curso</button>
+    <button onclick="quick('week')">Últimos 7 días</button>
+  </div>
+
+  <div id="err" class="err"></div>
+
+  <h2>KPIs</h2>
+  <div id="kpis" class="kpis"></div>
+
+  <div class="grid2">
+    <div>
+      <h2>Embudo (según filtros)</h2>
+      <div id="funnel" class="funnel card"></div>
+    </div>
+    <div>
+      <h2>Por estado</h2>
+      <table id="tEstado"><tbody></tbody></table>
+    </div>
+  </div>
+
+  <h2>Por comercial</h2>
+  <table id="tCom"></table>
+
+  <h2>Por procedencia (canal)</h2>
+  <table id="tPro"></table>
+
+  <div class="foot">Entrevista = "Propuesta enviada" o posterior · Matrícula = "Alumna activa" · Contactado = etapa "Leads llamados" o posterior. Una sola fuente de verdad: todos ven los mismos números para el mismo periodo.</div>
+</div>
+
+<script>
+let DATA = null;
+const $ = (s) => document.querySelector(s);
+const fmt = (n) => (n || 0).toLocaleString('es-ES');
+const pct = (a, b) => (b ? (a / b * 100) : 0).toFixed(1) + '%';
+
+function enter(){ const pw = $('#pw').value.trim(); if(!pw) return;
+  sessionStorage.setItem('elpw', pw); load(); }
+function reload(){ DATA = null; load(); }
+
+async function load(){
+  const pw = sessionStorage.getItem('elpw') || '';
+  try{
+    const r = await fetch('/api/data?pw=' + encodeURIComponent(pw));
+    if(r.status === 401){ $('#gateErr').textContent = 'Contraseña incorrecta'; sessionStorage.removeItem('elpw'); return; }
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    DATA = await r.json();
+    if(DATA.error) throw new Error(DATA.error);
+    $('#gate').hidden = true; $('#app').hidden = false;
+    $('#updated').textContent = 'Actualizado ' + new Date(DATA.generatedAt).toLocaleString('es-ES');
+    initFilters(); if(!$('#from').value) quick('mtd'); else render();
+  }catch(e){ ($('#app').hidden ? $('#gateErr') : $('#err')).textContent = 'Error: ' + e.message; }
+}
+
+function initFilters(){
+  const coms = [...new Set(DATA.rows.map(r=>r.comercial))].sort();
+  const pros = [...new Set(DATA.rows.map(r=>r.procedencia))].sort();
+  fill($('#fcom'), coms); fill($('#fpro'), pros);
+  ['from','to','fcom','fpro','fest'].forEach(id => $('#'+id).oninput = render);
+}
+function fill(sel, vals){ const keep = sel.value;
+  sel.innerHTML = '<option value="">'+sel.options[0].text+'</option>' + vals.map(v=>`<option>${v}</option>`).join('');
+  sel.value = keep; }
+
+function quick(kind){
+  const today = new Date(); const iso = d => d.toISOString().slice(0,10);
+  let from;
+  if(kind==='mtd') from = new Date(today.getFullYear(), today.getMonth(), 1);
+  else { from = new Date(today); from.setDate(from.getDate()-6); }
+  $('#from').value = iso(from); $('#to').value = iso(today); render();
+}
+
+function filtered(){
+  const f=$('#from').value, t=$('#to').value, c=$('#fcom').value, p=$('#fpro').value, e=$('#fest').value;
+  return DATA.rows.filter(r =>
+    (!f || r.fecha >= f) && (!t || r.fecha <= t) &&
+    (!c || r.comercial === c) && (!p || r.procedencia === p) && (!e || r.estado === e));
+}
+const agg = (rows) => rows.reduce((a,r)=>{
+  a.leads++; a.cont+=r.contactado; a.entr+=r.entrevista; a.matr+=r.matricula;
+  a.perd+=r.perdido; a.aband+=r.abandonado; a.pend+=r.pendiente; return a;
+}, {leads:0,cont:0,entr:0,matr:0,perd:0,aband:0,pend:0});
+
+function render(){
+  const rows = filtered(); const k = agg(rows);
+  // KPIs
+  $('#kpis').innerHTML = [
+    ['Leads nuevos', fmt(k.leads)],
+    ['Contactados', fmt(k.cont)],
+    ['Entrevistas', fmt(k.entr)],
+    ['Matrículas', fmt(k.matr)],
+    ['Perdidos', fmt(k.perd)],
+    ['Abandon./Inválidos', fmt(k.aband)],
+    ['Tasa de cierre', pct(k.matr, k.entr), 'matr / entrev'],
+  ].map(([l,v,s])=>`<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}${s?` <small>${s}</small>`:''}</div></div>`).join('');
+  // Embudo
+  const cols=['var(--f1)','var(--f2)','var(--f3)','var(--f4)'];
+  const steps=[['Leads nuevos',k.leads],['Contactados',k.cont],['Entrevistas',k.entr],['Matrículas',k.matr]];
+  const max=Math.max(k.leads,1);
+  $('#funnel').innerHTML = steps.map(([n,v],i)=>{
+    const w=Math.max(v/max*100,2);
+    return `<div class="frow"><div class="name">${n}</div>
+      <div class="bar" style="width:${w}%;background:${cols[i]}">${fmt(v)} · ${pct(v,k.leads)}</div></div>`;
+  }).join('');
+  // Por estado
+  const estados=[['Pendiente','var(--text-muted)'],['Ganado','var(--good)'],['Perdido','var(--critical)'],['Abandonado/Inválido','var(--serious)']];
+  $('#tEstado').querySelector('tbody').innerHTML = estados.map(([e,c])=>{
+    const n=rows.filter(r=>r.estado===e).length;
+    return `<tr><td><span class="pill" style="background:${c}"></span>${e}</td><td>${fmt(n)}</td><td>${pct(n,k.leads)}</td></tr>`;
+  }).join('') + `<tr class="tot"><td>Total</td><td>${fmt(k.leads)}</td><td>100%</td></tr>`;
+  // Por comercial y por procedencia
+  breakdown('#tCom','Comercial', rows, 'comercial');
+  breakdown('#tPro','Canal', rows, 'procedencia');
+}
+
+function breakdown(sel, label, rows, key){
+  const map={};
+  rows.forEach(r=>{ (map[r[key]] ??= agg([])); const a=map[r[key]];
+    a.leads++; a.cont+=r.contactado; a.entr+=r.entrevista; a.matr+=r.matricula; });
+  const entries=Object.entries(map).sort((a,b)=>b[1].leads-a[1].leads);
+  const tot=agg(rows);
+  const head=`<thead><tr><th>${label}</th><th>Leads</th><th>Contact.</th><th>Entrev.</th><th>Matríc.</th><th>% Cierre</th></tr></thead>`;
+  const body=entries.map(([n,a])=>`<tr><td>${n}</td><td>${fmt(a.leads)}</td><td>${fmt(a.cont)}</td><td>${fmt(a.entr)}</td><td>${fmt(a.matr)}</td><td>${pct(a.matr,a.entr)}</td></tr>`).join('');
+  const foot=`<tr class="tot"><td>Total</td><td>${fmt(tot.leads)}</td><td>${fmt(tot.cont)}</td><td>${fmt(tot.entr)}</td><td>${fmt(tot.matr)}</td><td>${pct(tot.matr,tot.entr)}</td></tr>`;
+  $(sel).innerHTML = head + '<tbody>' + body + foot + '</tbody>';
+}
+
+// Auto-login si ya hay contraseña en la sesión
+if(sessionStorage.getItem('elpw')) load();
+$('#pw') && $('#pw').addEventListener('keydown', e=>{ if(e.key==='Enter') enter(); });
+</script>
+</body>
+</html>
