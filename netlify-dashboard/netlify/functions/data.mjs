@@ -47,6 +47,10 @@ const GOOGLE_INV_DEFAULT = {
   '2026-07': {
     'Google · Performance Max': { spend: 200.55, leads: 26 },
     'Google · Search': { spend: 201.61, leads: 20 }
+  },
+  '2026-06': {
+    'Google · Performance Max': { spend: 355.79, leads: 14 },
+    'Google · Search': { spend: 135.04, leads: 8 }
   }
 };
 function googleInv() {
