@@ -18,7 +18,8 @@ en vez de otra «Guía de Meta Ads» (hay miles), un **diagnóstico del sistema 
 
 | Archivo | Qué es | Cómo se usa |
 |---|---|---|
-| **`analizador.html`** ⭐ | El lead magnet **interactivo**: una web-app que lleva al usuario bloque a bloque (9 eslabones, 27 preguntas con escala Sí / Parcialmente / No) y al final le devuelve un **diagnóstico personalizado** — índice de madurez (0-100), mapa de fugas por eslabón y un plan priorizado de por dónde empezar. Con captura de email para enviar el resultado + reservar la Auditoría. | Publícala como página. Es la pieza de mayor conversión: el usuario obtiene un resultado propio, no un PDF genérico. Conecta el envío a tu CRM (ver abajo). |
+| **`indice-escalabilidad.html`** ⭐ | La pieza principal: el **IEE · Índice de Escalabilidad Empresarial**. Web-app que lleva al usuario eslabón a eslabón (9 preguntas) y al final le da su **IEE (0-100)**, su tramo con nombre (de *Riesgo crítico* a *Diseñada para escalar*), su cuello de botella nº1 y un **plan de 90 días**. **Gatea el resultado** tras nombre + email + teléfono y **empuja todo (con el diagnóstico calculado) a un trato de GHL** vía webhook, que dispara la secuencia automatizada. | Publícala como página, rellena `CONFIG` (webhook GHL + agenda) y móntala en la campaña. Es la pieza de mayor conversión. Ver **«Conectar a GHL»** abajo. |
+| **`analizador.html`** | Versión previa del interactivo (marco «diagnóstico de captación»). Superada por el IEE, se conserva como referencia. | — |
 | **`diagnostico-de-captacion.html`** | La versión **documento** del mismo contenido: premium, listo para leer en el navegador o **imprimir a PDF**. Portada, la tesis, el Sistema de 9 eslabones, los 10 errores, las 27 preguntas y casos antes/después. Sirve como entregable descargable y como pieza para compartir con el equipo. | Ábrelo en el navegador → `Imprimir` → *Guardar como PDF* (A4, ya está maquetado para impresión). |
 | **`landing.html`** | Landing de descarga con captura de email (nombre, email, empresa) y toda la argumentación de por qué descargarlo. | Publícala como página de aterrizaje. Conecta el formulario a tu CRM/automatización (ver abajo). |
 | **`secuencia-emails.md`** | Secuencia de 5 emails: entrega → idea central → prueba → oferta de Auditoría → cierre. | Cárgala en tu herramienta de email marketing / GHL. |
@@ -68,6 +69,35 @@ alejada de las plantillas típicas de lead magnet.
   y botón de tema. El documento incluye estilos de impresión (`@page A4`) para exportar a PDF con buen acabado.
 
 ---
+
+## Conectar el IEE a GHL (captura + trato + secuencia)
+
+El flujo: el usuario contesta → deja **nombre, email y teléfono** → el resultado
+(su IEE, tramo, cuello nº1 y respuestas) se **empuja a GHL**, que crea el trato y
+lanza la secuencia (email → WhatsApp → llamada).
+
+1. **En GHL** → *Automation → Workflows → New Workflow*. Trigger: **Inbound Webhook**.
+   Copia la URL del webhook.
+2. **En `indice-escalabilidad.html`**, arriba del `<script>`, rellena `CONFIG`:
+   ```js
+   var CONFIG={
+     ghlWebhookUrl:"https://services.leadconnectorhq.com/hooks/.../webhook-trigger/...",
+     bookingUrl:"https://api.leadconnectorhq.com/widget/booking/..."   // tu agenda
+   };
+   ```
+3. **En el workflow de GHL**, tras el webhook:
+   - *Create/Update Contact* mapeando `name`, `email`, `phone` (+ tag `IEE: {tramo}`).
+   - *Create Opportunity* (el **trato**) y vuelca en campos personalizados / notas:
+     `iee_score`, `iee_tramo`, `iee_capacidad`, `iee_cuello_principal` y el texto
+     completo `iee_resumen` (llega listo para pegar en la nota del trato).
+   - Añade los pasos de la secuencia: **Email** (inmediato) → **WhatsApp** (min 1-3,
+     requiere opt-in, ya viene en el consentimiento) → **Llamada/IA** (para los tramos
+     de más dolor). Ramifica por el tag del tramo IEE.
+4. El payload completo que envía la web (por si quieres mapear más campos) queda
+   también en `window.__qualivoLead` (consola del navegador) para depurar.
+
+> **Consentimiento:** el formulario incluye una casilla obligatoria de contacto por
+> email/WhatsApp/teléfono. Es lo que te habilita legalmente la secuencia. No la quites.
 
 ## Puesta en marcha (checklist)
 

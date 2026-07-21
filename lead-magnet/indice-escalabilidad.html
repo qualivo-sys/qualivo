@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Índice de Escalabilidad — ¿Tu sistema aguanta crecer? · Qualivo</title>
+<meta name="description" content="Descubre en 2 minutos si tu sistema de captación y ventas aguanta escalar o se rompe. 9 bloques, tu Índice de Escalabilidad, tu techo real de crecimiento y un plan de 90 días para romperlo. Por Qualivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F5F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
+    --ink:#0C1524; --ink-2:#5B6470; --ink-3:#8A929C;
+    --line:#DDE2E7; --line-2:#EAEDF0;
+    --signal:#178E90; --signal-tint:#DFF3F3;
+    --leak:#D6363B; --leak-tint:#FCECEC;
+    --fixed:#12855F; --fixed-tint:#E6F5EE;
+    --warn:#B26A00; --warn-tint:#FBF0DF;
+    --serif:"Nunito",sans-serif;
+    --sans:"Nunito",-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#0E1014;--surface:#16191F;--surface-2:#1B1F26;--ink:#EDEFF2;--ink-2:#A2ABB7;--ink-3:#79828E;
+      --line:#272C34;--line-2:#20242B;--signal:#5FD3D4;--signal-tint:#0F2F32;--leak:#FF6B70;--leak-tint:#2C1719;
+      --fixed:#3FCB93;--fixed-tint:#12271F;--warn:#E4A44B;--warn-tint:#2A2213;}
+  }
+  :root[data-theme="light"]{--paper:#F3F5F7;--surface:#FFFFFF;--surface-2:#FAFBFC;--ink:#0C1524;--ink-2:#5B6470;--ink-3:#8A929C;
+    --line:#DDE2E7;--line-2:#EAEDF0;--signal:#178E90;--signal-tint:#DFF3F3;--leak:#D6363B;--leak-tint:#FCECEC;
+    --fixed:#12855F;--fixed-tint:#E6F5EE;--warn:#B26A00;--warn-tint:#FBF0DF;}
+  :root[data-theme="dark"]{--paper:#0E1014;--surface:#16191F;--surface-2:#1B1F26;--ink:#EDEFF2;--ink-2:#A2ABB7;--ink-3:#79828E;
+    --line:#272C34;--line-2:#20242B;--signal:#5FD3D4;--signal-tint:#0F2F32;--leak:#FF6B70;--leak-tint:#2C1719;
+    --fixed:#3FCB93;--fixed-tint:#12271F;--warn:#E4A44B;--warn-tint:#2A2213;}
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;min-height:100dvh}
+  ::selection{background:var(--signal);color:#fff}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;letter-spacing:-.015em;line-height:1.12;text-wrap:balance;margin:0}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:inline-flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--signal)}
+
+  .top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .top-in{max-width:780px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;letter-spacing:.04em;font-size:13.5px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px var(--signal-tint)}
+  .top-right{display:flex;align-items:center;gap:10px}
+  .step-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+  .toggle{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-radius:100px;padding:6px 11px;cursor:pointer}
+  .toggle:hover{color:var(--ink);border-color:var(--ink-3)}
+  .progress{height:3px;background:var(--line-2);width:100%}
+  .progress .bar{height:100%;background:var(--signal);width:0;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+  main{flex:1;display:flex;flex-direction:column}
+  .stage{max-width:780px;margin:0 auto;width:100%;padding:44px 24px 48px;flex:1;display:flex;flex-direction:column}
+  .screen{animation:in .45s cubic-bezier(.2,.7,.2,1)}
+  @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.screen{animation:none}.progress .bar,.fill{transition:none}}
+
+  /* intro */
+  .intro-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);background:var(--surface);border:1px solid var(--line);padding:7px 13px;border-radius:100px;margin-bottom:26px}
+  .intro-tag b{width:6px;height:6px;border-radius:50%;background:var(--leak);display:inline-block}
+  .intro h1{font-size:clamp(34px,6vw,54px);letter-spacing:-.025em;line-height:1.02;margin-bottom:20px}
+  .intro h1 em{font-style:italic;color:var(--signal)}
+  .intro .lead{font-family:var(--serif);font-size:clamp(19px,2.6vw,23px);color:var(--ink-2);font-weight:500;max-width:34ch;line-height:1.35;margin-bottom:30px}
+  .intro-facts{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .fact{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px;min-width:120px}
+  .fact .n{font-family:var(--serif);font-size:26px;font-weight:800;line-height:1}
+  .fact .t{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+  .intro-note{font-size:14.5px;color:var(--ink-2);margin:22px 0 0;max-width:56ch;display:flex;gap:10px}
+  .intro-note .i{color:var(--signal);font-family:var(--mono)}
+
+  /* section */
+  .sec-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+  .sec-node{width:46px;height:46px;border-radius:12px;border:1.5px solid var(--ink);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;flex:none}
+  .sec-meta .role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:5px}
+  .sec-meta h2{font-size:clamp(24px,3.6vw,32px)}
+  .sec-sub{font-size:15.5px;color:var(--ink-2);margin:14px 0 0;max-width:60ch}
+  .sec-expert{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin-top:16px}
+  .sec-expert .lab{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--signal);white-space:nowrap;padding-top:3px}
+  .sec-expert p{margin:0;font-size:14px;color:var(--ink-2);font-style:italic;line-height:1.45}
+
+  .qs{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+  fieldset.q{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px 20px 18px;margin:0}
+  fieldset.q.answered{border-color:color-mix(in srgb,var(--signal) 40%,var(--line))}
+  .q legend{padding:0;display:flex;gap:12px;align-items:flex-start;width:100%}
+  .q .qn{font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px;font-variant-numeric:tabular-nums}
+  .q .qtxt{font-size:16.5px;line-height:1.45;color:var(--ink);font-weight:500}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .seg label{position:relative;cursor:pointer}
+  .seg input{position:absolute;opacity:0;width:0;height:0}
+  .seg .opt{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:14.5px;font-weight:560;color:var(--ink-2);transition:.14s;line-height:1.2}
+  .seg .opt .dm{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-3);flex:none}
+  .seg label:hover .opt{border-color:var(--ink-3);color:var(--ink)}
+  .seg input:focus-visible+.opt{outline:2px solid var(--signal);outline-offset:2px}
+  .seg .v2 input:checked+.opt{background:var(--fixed-tint);border-color:var(--fixed);color:var(--fixed)}
+  .seg .v2 input:checked+.opt .dm{background:var(--fixed);border-color:var(--fixed)}
+  .seg .v1 input:checked+.opt{background:var(--warn-tint);border-color:var(--warn);color:var(--warn)}
+  .seg .v1 input:checked+.opt .dm{background:var(--warn);border-color:var(--warn)}
+  .seg .v0 input:checked+.opt{background:var(--leak-tint);border-color:var(--leak);color:var(--leak)}
+  .seg .v0 input:checked+.opt .dm{background:var(--leak);border-color:var(--leak)}
+
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:32px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:16px;font-weight:620;text-decoration:none;border-radius:100px;padding:14px 24px;cursor:pointer;border:1px solid transparent;transition:.15s}
+  .btn .arw{font-family:var(--mono)}
+  .btn-primary{background:var(--signal);color:#fff}
+  .btn-primary:hover{filter:brightness(1.06)}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;filter:none}
+  .btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line)}
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink-3)}
+  .btn-white{background:#fff;color:#14161c}
+  .nav-hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
+  :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+  /* ============ RESULTS ============ */
+  .res-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;padding-bottom:8px}
+  .gauge{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none}
+  .gauge::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--surface)}
+  .gauge .inner{position:relative;text-align:center}
+  .gauge .score{font-family:var(--serif);font-size:44px;font-weight:800;line-height:1}
+  .gauge .of{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-top:2px}
+  .res-verdict .lvl-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-bottom:14px}
+  .res-verdict h2{font-size:clamp(25px,4vw,36px);margin-bottom:12px}
+  .res-verdict p{font-size:16px;color:var(--ink-2);max-width:54ch;margin:0}
+  .ceiling{display:flex;gap:12px;align-items:baseline;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:0 11px 11px 0;background:var(--surface-2)}
+  .ceiling .cx{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;color:var(--signal);white-space:nowrap;padding-top:2px}
+  .ceiling .ct{font-size:14px;color:var(--ink-2);line-height:1.45}
+  .ceiling .ct b{color:var(--ink);font-weight:640}
+  .iee-scale{margin:24px 0 0}
+  .iee-scale .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;display:flex;justify-content:space-between}
+  .iee-track{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+  .iee-seg{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:9px 8px;text-align:center;opacity:.5;transition:.2s}
+  .iee-seg.on{opacity:1;border-width:1.5px}
+  .iee-seg .rng{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.02em}
+  .iee-seg .nm{font-size:11.5px;font-weight:800;margin-top:3px;line-height:1.2;color:var(--ink-2)}
+  .iee-seg.on .nm{color:var(--ink)}
+  @media (max-width:640px){.iee-seg .nm{font-size:10px}.iee-seg{padding:8px 4px}}
+
+  .res-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}
+  .rstat{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px}
+  .rstat .n{font-family:var(--serif);font-size:30px;font-weight:800;line-height:1}
+  .rstat .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+  .rstat.leak .n{color:var(--leak)} .rstat.warn .n{color:var(--warn)} .rstat.fixed .n{color:var(--fixed)}
+
+  .res-block-title{display:flex;align-items:baseline;gap:12px;margin:40px 0 18px;flex-wrap:wrap}
+  .res-block-title h3{font-size:23px}
+  .res-block-title .k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
+
+  /* exec summary */
+  .exec{border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:0 14px 14px 0;background:var(--surface);padding:22px 24px}
+  .exec .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:12px;display:block}
+  .exec p{margin:0 0 12px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
+  .exec p:last-child{margin-bottom:0}
+  .exec b{color:var(--ink);font-weight:640}
+
+  /* map */
+  .map{display:flex;flex-direction:column;gap:9px}
+  .row{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+  .row .rl{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--ink-3)}
+  .row .rmid{min-width:0}
+  .row .rname{font-size:15.5px;font-weight:560;margin-bottom:7px}
+  .row .track{height:7px;border-radius:100px;background:var(--line-2);overflow:hidden}
+  .row .fill{height:100%;border-radius:100px;width:0;transition:width .8s cubic-bezier(.3,.8,.3,1)}
+  .row .rp{font-family:var(--mono);font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pill{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:100px;white-space:nowrap}
+  .st-fixed .fill{background:var(--fixed)} .st-fixed .rp{color:var(--fixed)} .pill.st-fixed{background:var(--fixed-tint);color:var(--fixed)}
+  .st-warn .fill{background:var(--warn)} .st-warn .rp{color:var(--warn)} .pill.st-warn{background:var(--warn-tint);color:var(--warn)}
+  .st-leak .fill{background:var(--leak)} .st-leak .rp{color:var(--leak)} .pill.st-leak{background:var(--leak-tint);color:var(--leak)}
+  .pill.spd-fast{background:var(--fixed-tint);color:var(--fixed)}
+  .pill.spd-struct{background:var(--signal-tint);color:var(--signal)}
+
+  /* plan intro */
+  .plan-lead{font-size:15.5px;color:var(--ink-2);max-width:60ch;margin:-4px 0 22px;line-height:1.6}
+  .plan-lead b{color:var(--ink)}
+
+  /* phases */
+  .phase{margin-bottom:8px}
+  .phase-head{display:flex;align-items:center;gap:13px;margin:26px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .phase-badge{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--signal);border-radius:8px;padding:6px 11px;white-space:nowrap}
+  .phase-head h4{font-family:var(--serif);font-size:20px;font-weight:800;margin:0}
+  .phase-head .days{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto;white-space:nowrap;letter-spacing:.03em}
+
+  /* playbook card */
+  .pb{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:22px 22px 20px;margin-bottom:14px}
+  .pb.crit{border-left:3px solid var(--leak)} .pb.rev{border-left:3px solid var(--warn)}
+  .pb-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .pb-l{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:14px;flex:none}
+  .pb-head h5{font-family:var(--serif);font-size:19px;font-weight:800;margin:0;flex:1;min-width:140px}
+  .pb-pills{display:flex;gap:7px;flex-wrap:wrap}
+  .pb-sec{margin:0 0 15px}
+  .pb-lab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;display:block}
+  .pb-problem{font-size:15px;color:var(--ink);margin:0;line-height:1.55}
+  .pb-cost{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.55;border-left:2px solid var(--leak);padding-left:13px}
+  .pb-actions{margin:0;padding:0;counter-reset:act;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .pb-actions li{display:grid;grid-template-columns:26px 1fr;gap:11px;font-size:14.5px;color:var(--ink-2);line-height:1.5;align-items:start}
+  .pb-actions li::before{counter-increment:act;content:counter(act);font-family:var(--mono);font-size:12px;font-weight:700;color:var(--signal);background:var(--signal-tint);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .pb-foot{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;padding-top:15px;border-top:1px solid var(--line-2)}
+  .pb-metric,.pb-impact{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+  .pb-metric .h,.pb-impact .h{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+  .pb-metric .h{color:var(--signal)} .pb-impact .h{color:var(--fixed)}
+  .pb-gaps{list-style:none;margin:14px 0 0;padding:13px 0 0;border-top:1px solid var(--line-2);display:flex;flex-direction:column;gap:6px}
+  .pb-gaps .glab{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+  .pb-gaps li.gi{display:grid;grid-template-columns:16px 1fr;gap:9px;font-size:13.5px;color:var(--ink-2)}
+  .pb-gaps li.gi .m{font-family:var(--mono);font-size:12px}
+  .pb-gaps li.g0 .m{color:var(--leak)} .pb-gaps li.g1 .m{color:var(--warn)}
+
+  .allgood{border:1px solid var(--fixed);background:var(--fixed-tint);border-radius:14px;padding:24px;color:var(--fixed);font-size:16px;line-height:1.55}
+  .allgood b{color:var(--fixed)}
+  .phase-clean{font-size:13.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em;padding:2px 0 10px}
+
+  /* result CTA */
+  .punch{margin:44px 0 0;padding:34px clamp(22px,4vw,40px);border-radius:18px;background:var(--surface-2);border:1px solid var(--line);text-align:center}
+  .punch .big{font-family:var(--serif);font-size:clamp(24px,3.6vw,34px);font-weight:600;line-height:1.18;letter-spacing:-.01em;margin:0 0 14px}
+  .punch .big .hit{color:var(--leak)}
+  .punch .sub{font-size:16px;color:var(--ink-2);max-width:48ch;margin:0 auto;line-height:1.55}
+  .punch .sub b{color:var(--ink);font-weight:640}
+  .res-cta{background:#0C1524;color:#fff;border-radius:20px;padding:clamp(28px,5vw,46px);margin-top:42px;position:relative;overflow:hidden}
+  .res-cta::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%);mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%)}
+  .res-cta>*{position:relative}
+  .res-cta .eyebrow{color:#5FD3D4}.res-cta .eyebrow::before{background:#5FD3D4}
+  .res-cta h3{color:#fff;font-size:clamp(22px,3.4vw,30px);margin:14px 0 12px;max-width:24ch}
+  .res-cta p{color:rgba(255,255,255,.72);max-width:54ch;margin:0 0 22px;font-size:15.5px}
+  .res-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .res-form input{flex:1;min-width:200px;font-family:var(--sans);font-size:15px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:13px 14px}
+  .res-form input::placeholder{color:rgba(255,255,255,.5)}
+  .res-form input:focus{outline:2px solid #5FD3D4;outline-offset:1px}
+  .res-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .res-fine{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.02em}
+  .res-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;margin-top:26px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+  .linkbtn{background:none;border:0;color:var(--ink-2);font-family:var(--mono);font-size:11.5px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;letter-spacing:.03em}
+  .linkbtn:hover{color:var(--ink)}
+
+  @media (max-width:640px){
+    .res-hero{grid-template-columns:1fr;justify-items:start;gap:22px}
+    .res-stats{grid-template-columns:1fr 1fr}
+    .intro-facts .fact{flex:1}
+    .seg{grid-template-columns:1fr}
+    .pb-foot{grid-template-columns:1fr}
+    .stage{padding:32px 20px 40px}
+  }
+  .brand img{height:24px;display:block}
+  .brand .lg-w{display:none}
+  html[data-theme="dark"] .brand .lg-d{display:none}html[data-theme="dark"] .brand .lg-w{display:block}
+  @media (prefers-color-scheme:dark){html:not([data-theme="light"]) .brand .lg-d{display:none}html:not([data-theme="light"]) .brand .lg-w{display:block}}
+  .chain{display:flex;gap:6px;margin:0 0 24px}
+  .chain button{flex:1;height:36px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--ink-3);cursor:pointer;transition:.15s;padding:0}
+  .chain button.cur{border-color:var(--signal);color:var(--signal);box-shadow:0 0 0 3px var(--signal-tint)}
+  .chain button.s2{background:var(--fixed-tint);border-color:var(--fixed);color:var(--fixed)}
+  .chain button.s1{background:var(--warn-tint);border-color:var(--warn);color:var(--warn)}
+  .chain button.s0{background:var(--leak-tint);border-color:var(--leak);color:var(--leak)}
+  .chain button:not(:disabled):hover{border-color:var(--ink-3)}
+  .chain button:disabled{cursor:default;opacity:.5}
+
+  /* gate (captura antes del resultado) */
+  .gate-lock{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);background:var(--signal-tint);border-radius:100px;padding:6px 12px;margin-bottom:18px}
+  .gate-form{display:flex;flex-direction:column;gap:14px;max-width:450px}
+  .gate-field label{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;display:block}
+  .gate-field input{width:100%;font-family:var(--sans);font-size:15.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+  .gate-field input:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:transparent}
+  .gate-consent{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:4px;cursor:pointer}
+  .gate-consent input{margin-top:2px;accent-color:var(--signal);width:16px;height:16px}
+  .gate-err{color:var(--leak);font-size:13px;margin:4px 0 0;min-height:1px;font-weight:600}
+  .gate-fine{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.02em;margin:8px 0 0;max-width:450px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-in">
+    <div class="brand"><img class="lg-d" src="assets/logo-qualivo-dark.png" alt="Qualivo"><img class="lg-w" src="assets/qualivo-white.png" alt="Qualivo"></div>
+    <div class="top-right">
+      <span class="step-label" id="stepLabel">Índice</span>
+      <button class="toggle" id="tg">Tema</button>
+    </div>
+  </div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+</div>
+
+<main><div class="stage"><div id="screen"></div></div></main>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement, tg=document.getElementById('tg');
+  function cur(){return root.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  tg.addEventListener('click',function(){root.dataset.theme=cur()==='dark'?'light':'dark';});
+
+  /* =====================================================================
+     CONFIGURACIÓN — rellena estos 2 valores y todo queda conectado a GHL
+     ---------------------------------------------------------------------
+     ghlWebhookUrl: URL del "Inbound Webhook" de tu workflow en GHL.
+       En GHL → Automation → Workflows → nuevo → Trigger "Inbound Webhook"
+       → copia la URL y pégala aquí. El workflow crea el contacto + el
+       trato (opportunity), mapea los campos IEE y lanza la secuencia.
+     bookingUrl: enlace de tu agenda (GHL Calendar / Calendly) para la
+       sesión de 45 min.
+     ===================================================================== */
+  var CONFIG={
+    ghlWebhookUrl:"",   // p.ej. https://services.leadconnectorhq.com/hooks/XXXX/webhook-trigger/YYYY
+    bookingUrl:"#"      // p.ej. https://api.leadconnectorhq.com/widget/booking/ZZZZ
+  };
+
+  /* =====================================================================
+     9 ESLABONES · PLAYBOOKS DE EXPERTO
+     phase: 1 (0-30d) · 2 (30-60d) · 3 (60-90d)
+     speed: 'fast' (quick win) · 'struct' (estructural)
+     ===================================================================== */
+  var SECTIONS=[
+    {l:"A",role:"El fundamento",title:"Oferta y mercado",phase:1,speed:"struct",
+     sub:"Antes que ningún anuncio: ¿es fácil decirte que sí?",
+     expert:"Un experto no mira tu producto: mira si el mercado puede repetir tu promesa y si el valor justifica lo que cobras.",
+     qs:["¿Puedes explicar tu oferta en una frase que un cliente repetiría sin cambiarla, y sabes cuánto vale a lo largo de la relación?"],
+     pb:{
+      problem:"Si este bloque falla, todo lo demás rema en contra. Una oferta que no es obviamente valiosa y distinta obliga a la publicidad a compensar lo que la oferta no dice — y eso es carísimo.",
+      cost:"Es la fuga más silenciosa y más cara: no aparece en ninguna métrica de campaña, pero hunde el CTR, dispara el CPL y llena el pipeline de gente que regatea el precio porque no ve el valor.",
+      actions:[
+        "Reescribe tu oferta en una frase con la estructura: «ayudo a [quién] a conseguir [resultado concreto] en [plazo] sin [el dolor habitual]». Pruébala con 3 clientes: si la reformulan, aún no está.",
+        "Calcula el LTV real de tu mejor cliente (ticket × recurrencia × permanencia). Ese número —no el precio de entrada— es el que justifica cuánto puedes invertir en captar.",
+        "Define tu mecanismo único: qué haces distinto del competidor obvio que explique por qué contigo el resultado llega mejor o antes. Sin eso, solo compites por precio.",
+        "Empaqueta una oferta de entrada de bajo riesgo (diagnóstico, auditoría, piloto) para que decir «sí» cueste poco."],
+      metric:"Que ≥1 de cada 3 leads pregunte por el precio o el siguiente paso sin que tú lo fuerces. Termómetro: CTR del anuncio y % de scroll en la landing.",
+      impact:"Arreglar la oferta mueve más el CPL que cualquier optimización de campaña. Es el multiplicador de todo lo que viene después."}},
+
+    {l:"B",role:"La traducción",title:"Mensaje y creativos",phase:1,speed:"fast",
+     sub:"¿Hablas del problema del cliente o de tu producto?",
+     expert:"Lo primero que audita un experto no es el diseño del anuncio, sino a quién le habla la primera línea.",
+     qs:["¿Tu anuncio nombra el problema del cliente en la primera línea (antes que a ti) y pruebas varios ángulos cada mes?"],
+     pb:{
+      problem:"Puede que tengas buena oferta, pero la estás contando en tus palabras, no en las del cliente. El mercado no compra lo que haces; compra el problema que reconoce.",
+      cost:"Cada creativo que habla de ti y no de su dolor es dinero quemado en impresiones que nadie procesa. Y sin flujo de ángulos, cuando el único que funciona se fatiga, te quedas sin plan B.",
+      actions:[
+        "Reescribe tus 3 anuncios principales empezando por el problema del cliente en la primera línea. Regla: si tu marca aparece antes que su dolor, va tarde.",
+        "Monta una matriz de ángulos: 4-5 dolores/deseos × 2-3 formatos. Lanza mínimo 4 ángulos nuevos al mes.",
+        "Define el criterio de ganador por dato (hook rate, CTR, CPL), no por gusto del equipo, y documenta por qué gana para replicarlo.",
+        "Crea una biblioteca de referencias con tus ganadores y los del sector para iterar sobre lo que ya prueba funcionar."],
+      metric:"Hook rate (3s) por encima del 25-30% en vídeo y ≥4 ángulos probados/mes. Si el CTR cae y la frecuencia sube, es fatiga: rota, no apagues lo que rinde.",
+      impact:"Un cambio de ángulo acertado puede bajar el CPL a la mitad sin tocar el presupuesto."}},
+
+    {l:"C",role:"El amplificador",title:"Tráfico y canales",phase:2,speed:"struct",
+     sub:"¿Compras atención o solo gastas presupuesto?",
+     expert:"El canal no se juzga por lo que cuesta el lead, sino por lo que cierra.",
+     qs:["¿Sabes qué canal te trae los leads que más cierran (no solo los más baratos) y tienes la frecuencia bajo control?"],
+     pb:{
+      problem:"Estás gastando presupuesto, pero no necesariamente comprando la atención correcta. Sin saber qué canal trae los leads que cierran, optimizas hacia lo barato en vez de hacia lo rentable.",
+      cost:"El canal del lead más barato puede ser el del peor cliente. Optimizar por CPL sin mirar el cierre te lleva a escalar justo lo que no vende.",
+      actions:[
+        "Separa las campañas por intención: captación de demanda existente (Google/búsqueda) vs. creación de demanda (Meta/interrupción). Se miden y optimizan distinto.",
+        "Etiqueta el origen de cada lead hasta el cierre para saber qué canal/campaña trae clientes, no solo formularios.",
+        "Pon alertas a frecuencia y CPM: por encima de ~2,5-3 en frío estás quemando audiencia; refresca creativo o amplía público.",
+        "Reasigna presupuesto cada semana hacia el canal con mejor CPA (no mejor CPL)."],
+      metric:"Conocer el CPA por canal y mantener la frecuencia en frío por debajo de ~3. La pregunta que manda: ¿qué canal me trae clientes, no leads?",
+      impact:"Mover presupuesto del canal barato-malo al caro-bueno sube los ingresos sin subir la inversión."}},
+
+    {l:"D",role:"La conversión",title:"Landing y conversión",phase:1,speed:"fast",
+     sub:"El dinero más caro se pierde aquí: el que ya pagaste para traer a esa persona.",
+     expert:"Aquí un experto calcula cuánto tráfico pagado estás tirando por cada punto de conversión que falta.",
+     qs:["¿Tus anuncios llevan a una landing con una sola acción (no a la home) y conoces su tasa de conversión visita → lead?"],
+     pb:{
+      problem:"Pagas para traer gente y la mandas a un sitio que la distrae o la pierde. Es el eslabón donde se tira el dinero más caro: el que ya gastaste en el clic.",
+      cost:"Duplicar la conversión de la landing equivale a duplicar el presupuesto de anuncios — gratis. Cada punto de conversión que falta es tráfico pagado que se va sin dejar rastro.",
+      actions:[
+        "Crea una landing dedicada por oferta, con una sola acción y sin menú de navegación. La home no es una landing.",
+        "Mide la conversión visita→lead y fíjate un objetivo (referencia sana en B2B: 3-8% según tráfico). Sin objetivo no sabes si un 2% es un problema.",
+        "Testea una cosa cada vez, empezando por el titular y la oferta (lo que más mueve), luego prueba social y formulario.",
+        "Reduce el formulario al mínimo imprescindible para el siguiente paso; pide el resto después, en la llamada."],
+      metric:"Conversión visita→lead por encima de tu referencia de sector, medida y comparada mes a mes. Mínimo un test vivo por trimestre.",
+      impact:"Suele ser el arreglo con mejor retorno a corto plazo: mismo tráfico, más leads, sin subir la inversión."}},
+
+    {l:"E",role:"El registro",title:"CRM y velocidad de respuesta",phase:1,speed:"fast",
+     sub:"La captación termina cuando alguien —o algo— reacciona a tiempo.",
+     expert:"El primer minuto vale más que el mejor guion de ventas: se mide en minutos, no en calidad.",
+     qs:["¿Cada lead entra automáticamente en tu CRM y recibe un primer contacto en minutos, no en horas ni al día siguiente?"],
+     pb:{
+      problem:"El lead entra con una intención que dura minutos y tu sistema reacciona en horas. Para cuando llamas, ya vio a la competencia o se enfrió.",
+      cost:"La probabilidad de conectar cae en picado pasada la primera hora. Responder tarde no pierde un lead cualquiera: pierde el lead que ya pagaste, justo cuando estaba más caliente.",
+      actions:[
+        "Conecta el formulario al CRM sin pasos manuales: cada lead crea un registro automáticamente.",
+        "Dispara un primer contacto automático (email/WhatsApp/SMS) en menos de 5 minutos, aunque el comercial aún no haya podido llamar.",
+        "Crea reglas de asignación y un SLA: quién contacta, en cuánto tiempo, y una alerta si un lead lleva X minutos sin tocar.",
+        "Ten un tablero con el estado de cada lead por etapa para ver los atascos en tiempo real."],
+      metric:"Primer contacto en menos de 5 minutos y 0 leads sin asignar. Métrica de vida o muerte: el tiempo hasta el primer toque.",
+      impact:"Responder en minutos en vez de horas puede multiplicar por varias veces la tasa de conexión y de reunión."}},
+
+    {l:"F",role:"La persistencia",title:"Seguimiento y automatización",phase:2,speed:"fast",
+     sub:"«No ahora» no es «no nunca». ¿Tu sistema lo sabe?",
+     expert:"Un experto cuenta cuántas veces impactas a un lead antes de rendirte. Casi siempre, demasiado pocas.",
+     qs:["¿Cada lead recibe una secuencia de seguimiento automática de al menos 5 impactos, sin depender de que alguien se acuerde?"],
+     pb:{
+      problem:"Contactas una o dos veces y das el lead por perdido. Pero la mayoría de las ventas ocurren tras varios impactos: te rindes justo antes de que la mayoría compraría.",
+      cost:"Cada lead que abandonas tras un intento es inversión tirada y, encima, un cliente que acabará comprando… a quien sí insistió.",
+      actions:[
+        "Monta una secuencia multicanal (email + WhatsApp) de mínimo 5-8 impactos en 2-4 semanas, con valor en cada toque, no solo «¿lo has pensado?».",
+        "Automatízala para que no dependa de la memoria de nadie: se dispara sola al entrar el lead y se detiene si responde o agenda.",
+        "Crea una campaña de reactivación mensual sobre los leads antiguos: los que dijeron «ahora no» son tu pipeline más barato.",
+        "Segmenta el seguimiento por comportamiento (abrió / hizo clic) para subir la relevancia de cada mensaje."],
+      metric:"Al menos 5 impactos por lead antes de cerrarlo como perdido y una tasa de reactivación medida. Vigila el % de ventas que llega tras el 3.er contacto.",
+      impact:"Un seguimiento sistemático rescata ventas que hoy se pierden solo por silencio."}},
+
+    {l:"G",role:"El cierre",title:"Ventas y cierre",phase:2,speed:"struct",
+     sub:"Sin datos de vuelta, el resto del sistema optimiza a ciegas.",
+     expert:"Sin motivo de pérdida registrado, no hay diagnóstico de ventas posible.",
+     qs:["¿Registráis por qué se pierde cada oportunidad (y esa información llega a marketing) y conoces tu tasa de cierre?"],
+     pb:{
+      problem:"El pipeline llega a ventas y el proceso se vuelve artesanal: cada comercial hace lo suyo y el motivo de pérdida no vuelve. Marketing optimiza a ciegas.",
+      cost:"Sin proceso ni datos de vuelta, no sabes si el problema es el lead o el cierre — y acabas pagando por más leads para tapar un problema de ventas, o al revés.",
+      actions:[
+        "Estandariza un guion de descubrimiento y un criterio de cualificación (presupuesto / autoridad / necesidad / plazo) para tratar todos los leads igual.",
+        "Registra el motivo de cada oportunidad perdida con categorías fijas y revísalo con marketing cada mes.",
+        "Mide la tasa de cierre por origen y por comercial; forma al equipo sobre lo que hace el mejor.",
+        "Cierra el bucle: que marketing optimice hacia el perfil que más cierra, no hacia el lead más barato."],
+      metric:"100% de oportunidades con motivo de pérdida registrado y una tasa de cierre que sigues mes a mes.",
+      impact:"Alinear marketing y ventas con datos compartidos sube el CPA rentable sin tocar ni una campaña."}},
+
+    {l:"H",role:"La verdad",title:"Datos y medición",phase:3,speed:"struct",
+     sub:"Si tu informe no llega hasta el ingreso, no sabes si ganas o pierdes.",
+     expert:"Si no llega al ingreso, para un experto no es medición: es decoración.",
+     qs:["¿Puedes seguir la cadena completa (€ invertido → lead → reunión → cliente → € facturado) y decides por CPA, no por CPL?"],
+     pb:{
+      problem:"Tu informe se queda en el lead. Sin ver la cadena hasta el ingreso, estás pilotando con la mitad del salpicadero tapado.",
+      cost:"Optimizar por CPL sin ver el CPA es optimizar hacia el lead barato que no compra. Decisiones de miles de euros tomadas sobre métricas que tranquilizan pero no dicen la verdad.",
+      actions:[
+        "Conecta el dato de punta a punta: € invertido → lead → reunión → cliente → € facturado, con un identificador que viaje de la campaña al CRM.",
+        "Sustituye el CPL por el CPA como métrica de decisión de presupuesto.",
+        "Monta un panel único, en vivo, que vean marketing y ventas, con la cadena completa y el ROAS real.",
+        "Revisa ese panel en un ritmo fijo (semanal) para decidir dónde subir y dónde cortar."],
+      metric:"Poder responder «¿cuánto me cuesta un cliente por canal?» en 30 segundos, con datos en vivo.",
+      impact:"Cuando ves el CPA real, cortas lo que no vende y reinviertes en lo que sí: el mismo presupuesto rinde mucho más."}},
+
+    {l:"I",role:"El bucle",title:"Experimentación continua",phase:3,speed:"struct",
+     sub:"La predictibilidad se construye con pruebas constantes, no con un acierto puntual.",
+     expert:"La predictibilidad no es un acierto; es un ritmo de aciertos.",
+     qs:["¿Lanzas experimentos de marketing con una cadencia fija y tienes ya el próximo ganador en pruebas antes de que el actual se agote?"],
+     pb:{
+      problem:"Vives de uno o dos aciertos. Funcionan… hasta que dejan de funcionar, y entonces no hay siguiente ganador esperando.",
+      cost:"Sin experimentación, la predictibilidad es una ilusión: es una racha, no un sistema. El día que el creativo o el público estrella se agota, el resultado cae en picado.",
+      actions:[
+        "Instala una cadencia fija de experimentos (semanal o quincenal) con hipótesis, variable y métrica de éxito definidas antes de lanzar.",
+        "Mantén un backlog priorizado de pruebas (oferta, ángulo, landing, seguimiento) para no quedarte nunca sin siguiente experimento.",
+        "Ten siempre el próximo ganador en pruebas antes de que el actual se fatigue.",
+        "Documenta los aprendizajes en un registro para que el sistema acumule conocimiento, no solo resultados."],
+      metric:"Entre 4 y 8 experimentos al mes y un «siguiente ganador» siempre en cartera. Mira la evolución del CPL/CPA en el tiempo, no en una foto.",
+      impact:"Es lo que convierte un buen mes en un sistema predecible mes a mes."}}
+  ];
+  var TOTAL_Q=SECTIONS.reduce(function(a,s){return a+s.qs.length;},0); // 27
+
+  var PHASES=[
+    {n:1,title:"Frena las fugas y asienta los cimientos",days:"0–30 días"},
+    {n:2,title:"Construye el motor de conversión",days:"30–60 días"},
+    {n:3,title:"Mide, escala y sistematiza",days:"60–90 días"}
+  ];
+
+  /* ---------- ESTADO ---------- */
+  var answers={}, step=0, lead=null;
+  var GATE=SECTIONS.length+1, RESULT=SECTIONS.length+2, LAST=RESULT;
+  try{var __sv=JSON.parse(localStorage.getItem('qualivo_iee')||'null');if(__sv&&__sv.a){answers=__sv.a;step=__sv.s||0;lead=__sv.lead||null;}}catch(e){}
+  function save(){try{localStorage.setItem('qualivo_iee',JSON.stringify({a:answers,s:step,lead:lead}));}catch(e){}}
+  function secState(si){if(!sectionAnswered(si))return null;var s=SECTIONS[si],max=s.qs.length*2,got=0;for(var i=0;i<s.qs.length;i++)got+=answers[qid(si,i)]||0;var p=got/max;return p>=1?2:(p>=0.5?1:0);}
+  function chainHTML(cur){var h='<div class="chain" aria-label="Eslabones de la cadena">';for(var i=0;i<SECTIONS.length;i++){var st=secState(i),cls=(st===null?'':'s'+st)+(i===cur?' cur':'');var can=(i<=cur)||st!==null;h+='<button type="button" data-go="'+(i+1)+'" class="'+cls+'"'+(can?'':' disabled')+' title="'+esc(SECTIONS[i].title)+'">'+SECTIONS[i].l+'</button>';}return h+'</div>';}
+  function bindChain(){screen.querySelectorAll('.chain button[data-go]').forEach(function(b){if(!b.disabled)b.addEventListener('click',function(){step=parseInt(b.getAttribute('data-go'),10);save();render();});});}
+  var screen=document.getElementById('screen'), bar=document.getElementById('bar'), stepLabel=document.getElementById('stepLabel');
+
+  function qid(si,qi){return SECTIONS[si].l+qi;}
+  function sectionAnswered(si){for(var i=0;i<SECTIONS[si].qs.length;i++){if(answers[qid(si,i)]===undefined)return false;}return true;}
+  function answeredCount(){return Object.keys(answers).length;}
+  function globalNum(si,qi){var n=0;for(var k=0;k<si;k++)n+=SECTIONS[k].qs.length;return n+qi+1;}
+
+  function render(){
+    window.scrollTo(0,0);
+    var pct=step===0?0:step>=RESULT?100:Math.min(100,Math.round(answeredCount()/TOTAL_Q*100));
+    bar.style.width=pct+"%";
+    if(step===0){stepLabel.textContent="Índice";screen.innerHTML=introHTML();bindIntro();}
+    else if(step>=1&&step<=SECTIONS.length){var si=step-1;stepLabel.textContent="Bloque "+step+" / "+SECTIONS.length;screen.innerHTML=sectionHTML(si);bindSection(si);}
+    else if(step===GATE){stepLabel.textContent="Tu resultado";screen.innerHTML=gateHTML();bindGate();}
+    else{stepLabel.textContent="Tu índice";screen.innerHTML=resultsHTML();bindResults();}
+  }
+
+  /* ---------- INTRO ---------- */
+  function introHTML(){
+    return '<div class="screen intro">'
+      +'<span class="intro-tag"><b></b> Índice de Escalabilidad · Gratuito</span>'
+      +'<h1>¿Tu sistema <em>aguanta crecer</em>, o se rompe si le subes la inversión?</h1>'
+      +'<p class="lead">La mayoría no tiene un problema de anuncios: tiene un techo. 9 preguntas, una por cada eslabón. Al final, tu Índice de Escalabilidad: hasta cuánto puedes crecer antes de que algo se rompa, dónde está tu cuello de botella y el plan de 90 días para romperlo.</p>'
+      +'<div class="intro-facts">'
+        +'<div class="fact"><div class="n">9</div><div class="t">Eslabones</div></div>'
+        +'<div class="fact"><div class="n">~2 min</div><div class="t">Para completarlo</div></div>'
+        +'<div class="fact"><div class="n">×?</div><div class="t">Tu techo real</div></div>'
+      +'</div>'
+      +'<div class="nav" style="padding-top:6px"><span></span>'
+        +'<button class="btn btn-primary" id="start">Calcular mi índice <span class="arw">→</span></button></div>'
+      +'<p class="intro-note"><span class="i">↳</span><span>Respóndelo con tus números delante. Si no lo mides, marca «No lo sé»: al escalar, lo que no controlas se rompe igual que lo que no tienes.</span></p>'
+      +'</div>';
+  }
+  function bindIntro(){document.getElementById('start').onclick=function(){step=1;save();render();};}
+
+  /* ---------- SECCIÓN ---------- */
+  function sectionHTML(si){
+    var s=SECTIONS[si];
+    var h='<div class="screen">'+chainHTML(si)
+      +'<div class="sec-head"><div class="sec-node">'+s.l+'</div>'
+      +'<div class="sec-meta"><div class="role">'+esc(s.role)+'</div><h2>'+esc(s.title)+'</h2></div></div>'
+      +'<p class="sec-sub">'+esc(s.sub)+'</p>'
+      +'<div class="sec-expert"><span class="lab">Lente experta</span><p>'+esc(s.expert)+'</p></div>'
+      +'<div class="qs">';
+    for(var i=0;i<s.qs.length;i++){
+      var id=qid(si,i),val=answers[id],num=globalNum(si,i);
+      h+='<fieldset class="q'+(val!==undefined?' answered':'')+'" id="fs_'+id+'">'
+        +'<legend><span class="qn">'+(num<10?'0':'')+num+'</span><span class="qtxt">'+esc(s.qs[i])+'</span></legend>'
+        +'<div class="seg">'+seg(id,2,"Sí",val)+seg(id,1,"Parcialmente",val)+seg(id,0,"No / No lo sé",val)+'</div></fieldset>';
+    }
+    h+='</div>';
+    var done=sectionAnswered(si);
+    h+='<div class="nav">'
+      +'<button class="btn btn-ghost" id="back"><span class="arw">←</span> Atrás</button>'
+      +(done?'':'<span class="nav-hint" id="hint">'+(s.qs.length===1?'Elige una respuesta para continuar':'Responde los '+s.qs.length+' puntos para continuar')+'</span>')
+      +'<button class="btn btn-primary" id="next" '+(done?'':'disabled')+'>'+(si===SECTIONS.length-1?'Ver mi diagnóstico':'Siguiente bloque')+' <span class="arw">→</span></button>'
+      +'</div></div>';
+    return h;
+  }
+  function seg(id,v,label,val){
+    return '<label class="v'+v+'"><input type="radio" name="'+id+'" value="'+v+'"'+(val===v?' checked':'')+'>'
+      +'<span class="opt"><span class="dm"></span>'+label+'</span></label>';
+  }
+  function bindSection(si){
+    var s=SECTIONS[si];
+    for(var i=0;i<s.qs.length;i++){(function(i){
+      var id=qid(si,i);
+      screen.querySelectorAll('input[name="'+id+'"]').forEach(function(r){r.addEventListener('change',function(){
+        answers[id]=parseInt(r.value,10);save();
+        document.getElementById('fs_'+id).classList.add('answered');
+        refreshNav(si);
+      });});
+    })(i);}
+    document.getElementById('back').onclick=function(){step--;save();render();};
+    document.getElementById('next').onclick=function(){if(sectionAnswered(si)){step++;save();render();}};bindChain();
+  }
+  function refreshNav(si){
+    var done=sectionAnswered(si),next=document.getElementById('next'),hint=document.getElementById('hint');
+    next.disabled=!done; if(done&&hint)hint.remove();
+    bar.style.width=Math.round(answeredCount()/TOTAL_Q*100)+"%";
+  }
+
+  /* ---------- GATE: captura antes del resultado ---------- */
+  function gateField(id,label,type,ph,ac,val){
+    return '<div class="gate-field"><label for="'+id+'">'+label+'</label>'
+      +'<input id="'+id+'" type="'+type+'" placeholder="'+ph+'" autocomplete="'+ac+'" value="'+(val?esc(val):'')+'"></div>';
+  }
+  function gateHTML(){
+    var p=lead||{};
+    return '<div class="screen">'
+      +'<span class="gate-lock">🔒 Tu resultado está listo</span>'
+      +'<h2 style="font-size:clamp(26px,4.4vw,40px);margin-bottom:12px">Ya tienes tu Índice de Escalabilidad.</h2>'
+      +'<p class="sec-sub" style="max-width:54ch;margin-bottom:26px">Dinos a dónde enviártelo y lo desbloqueas al instante. Recibirás tu informe completo: tu IEE, el tramo de tu empresa, tu cuello de botella nº1 y el plan de 90 días para romper el techo.</p>'
+      +'<div class="gate-form">'
+        +gateField('gname','Nombre','text','Tu nombre','name',p.name)
+        +gateField('gemail','Email profesional','email','nombre@empresa.com','email',p.email)
+        +gateField('gphone','Teléfono','tel','+34 600 000 000','tel',p.phone)
+        +'<label class="gate-consent"><input type="checkbox" id="gconsent"'+(p.consent?' checked':'')+'>'
+          +'<span>Acepto que Qualivo me contacte por email, WhatsApp o teléfono con mi informe y propuestas relacionadas. Puedo darme de baja cuando quiera.</span></label>'
+        +'<p class="gate-err" id="gerr"></p>'
+      +'</div>'
+      +'<p class="gate-fine">Tratamos tus datos para enviarte el informe y contactarte sobre tu diagnóstico. Responsable: Qualivo. No compartimos tus datos con terceros.</p>'
+      +'<div class="nav"><button class="btn btn-ghost" id="back"><span class="arw">←</span> Atrás</button>'
+        +'<button class="btn btn-primary" id="reveal">Ver mi resultado <span class="arw">→</span></button></div>'
+      +'</div>';
+  }
+  function bindGate(){
+    document.getElementById('back').onclick=function(){step=SECTIONS.length;save();render();};
+    document.getElementById('reveal').onclick=function(){
+      var name=(document.getElementById('gname').value||'').trim();
+      var email=(document.getElementById('gemail').value||'').trim();
+      var phone=(document.getElementById('gphone').value||'').trim();
+      var consent=document.getElementById('gconsent').checked;
+      var err=document.getElementById('gerr');
+      if(name.length<2){err.textContent="Escribe tu nombre.";document.getElementById('gname').focus();return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent="Introduce un email válido.";document.getElementById('gemail').focus();return;}
+      if(phone.replace(/[^0-9]/g,'').length<6){err.textContent="Introduce un teléfono válido.";document.getElementById('gphone').focus();return;}
+      if(!consent){err.textContent="Marca la casilla para poder enviarte el informe.";return;}
+      lead={name:name,email:email,phone:phone,consent:consent,ts:new Date().toISOString()};save();
+      sendToGHL(buildPayload());
+      step=RESULT;save();render();
+    };
+  }
+
+  /* ---------- ENVÍO A GHL ---------- */
+  function ieeText(){
+    var r=compute(), T=IEE_TIERS[tierFor(r.score)];
+    var sorted=r.perSec.slice().sort(function(a,b){return a.pct-b.pct;});
+    var weak=r.perSec.filter(function(s){return s.st!=='fixed';});
+    var L=[];
+    L.push("ÍNDICE DE ESCALABILIDAD (IEE): "+r.score+"/100");
+    L.push("Tramo: "+T.name+" · Capacidad de crecimiento: "+T.capLevel);
+    L.push("Cuello de botella nº1: "+sorted[0].title+" ("+sorted[0].pct+"%)");
+    L.push("Escalables: "+r.nYes+" · Con límite: "+r.nPart+" · Cuellos de botella: "+r.nNo);
+    L.push("");
+    L.push("MAPA POR ESLABÓN:");
+    r.perSec.forEach(function(s){var e=s.st==='fixed'?'Escalable':s.st==='warn'?'Con límite':'Cuello de botella';L.push("  "+s.l+" · "+s.title+": "+s.pct+"% ("+e+")");});
+    if(weak.length){L.push("");L.push("PLAN DE 90 DÍAS (bloques a trabajar):");
+      PHASES.forEach(function(ph){var inp=weak.filter(function(s){return s.phase===ph.n;});if(!inp.length)return;
+        L.push("  Fase "+ph.n+" ("+ph.days+") · "+ph.title+": "+inp.map(function(s){return s.title;}).join("; "));});}
+    return L.join("\n");
+  }
+  function buildPayload(){
+    var r=compute(), T=IEE_TIERS[tierFor(r.score)];
+    var sorted=r.perSec.slice().sort(function(a,b){return a.pct-b.pct;});
+    var ans={};r.perSec.forEach(function(s){ans[s.l+" · "+s.title]=(answers[s.l+"0"]);});
+    return {
+      source:"IEE - Índice de Escalabilidad",
+      fecha:new Date().toISOString(),
+      firstName:lead.name, name:lead.name, email:lead.email, phone:lead.phone,
+      consentimiento:!!lead.consent, consent_fecha:lead.ts,
+      iee_score:r.score,
+      iee_tramo:T.name,
+      iee_capacidad:T.capLevel,
+      iee_cuello_principal:sorted[0].title+" ("+sorted[0].pct+"%)",
+      iee_num_cuellos:r.nNo, iee_num_limite:r.nPart, iee_num_escalables:r.nYes,
+      iee_resumen:ieeText(),
+      iee_bloques:r.perSec.map(function(s){return {eslabon:s.l,titulo:s.title,pct:s.pct,estado:s.st};}),
+      iee_respuestas:ans,
+      tags:["IEE","IEE: "+T.name]
+    };
+  }
+  function sendToGHL(payload){
+    window.__qualivoLead=payload; // disponible en consola para depurar
+    if(!CONFIG.ghlWebhookUrl){return;}
+    try{
+      fetch(CONFIG.ghlWebhookUrl,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload),keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+
+  /* ---------- CÁLCULO ---------- */
+  function compute(){
+    var perSec=SECTIONS.map(function(s,si){
+      var max=s.qs.length*2,got=0,gaps=[];
+      for(var i=0;i<s.qs.length;i++){var v=answers[qid(si,i)]||0;got+=v;if(v<2)gaps.push({q:s.qs[i],v:v});}
+      var p=Math.round(got/max*100), st=p>=75?'fixed':(p>=40?'warn':'leak');
+      return {l:s.l,title:s.title,role:s.role,pct:p,st:st,idx:si,gaps:gaps,phase:s.phase,speed:s.speed,pb:s.pb};
+    });
+    var got=0;for(var k in answers)got+=answers[k];
+    var score=Math.round(got/(TOTAL_Q*2)*100);
+    var nNo=0,nPart=0;for(var kk in answers){if(answers[kk]===0)nNo++;else if(answers[kk]===1)nPart++;}
+    var level=score>=78?'sys':(score>=45?'parts':'struct');
+    return {perSec:perSec,score:score,level:level,nNo:nNo,nPart:nPart,nYes:TOTAL_Q-nNo-nPart};
+  }
+
+  var LEVELS={
+    sys:{color:'var(--fixed)',tint:'var(--fixed-tint)',pill:'Listo para escalar',
+      cx:'3x+',ct:'Tu sistema aguanta <b>triplicar la inversión</b> sin romperse. El límite ya no es tu estructura: es cuánto presupuesto quieras meterle.',
+      h:'Tu sistema está listo para escalar.',
+      p:'La cadena aguanta de punta a punta. Meter más gasolina aquí no amplifica fugas: amplifica resultado. Tu palanca ya no es arreglar, es subir presupuesto donde el CPA aguante y exprimir la experimentación. Aun así, revisa el plan: hasta el sistema más sólido tiene un eslabón que cede primero.'},
+    parts:{color:'var(--warn)',tint:'var(--warn-tint)',pill:'Techo cercano',
+      cx:'~1,5x',ct:'Aguantas tu tamaño actual, pero <b>no el doble</b>. Si subes la inversión ahora, los eslabones flojos se convierten en el cuello de botella que se come el retorno extra.',
+      h:'Aguantas donde estás, no el siguiente nivel.',
+      p:'La estructura existe, pero pierde por las juntas. El riesgo es real: escalar el gasto hoy amplifica las fugas antes que el resultado. Primero se sellan los eslabones débiles; después el mismo presupuesto rinde mucho más. Abajo tienes el plan, en orden.'},
+    struct:{color:'var(--leak)',tint:'var(--leak-tint)',pill:'Techo alcanzado',
+      cx:'~1x',ct:'Ya estás en tu techo. <b>Cada euro extra en anuncios hoy se desperdicia</b>, porque el sistema que rodea al anuncio no está preparado para convertir lo que compra.',
+      h:'Estás en tu techo. Escalar ahora rompe el sistema.',
+      p:'Los cuellos de botella están repartidos por casi toda la cadena. No es un problema de publicidad: es estructural. Meter más presupuesto es echar agua en un cubo agujereado. La buena noticia: sabes exactamente por dónde empezar a romper el techo.'}
+  };
+
+  /* ---------- IEE® · 5 TRAMOS ESTÁNDAR ----------
+     La escala con nombre propio (como NPS o el IMC).
+     capLevel/cap: capacidad de crecimiento cualitativa (sin multiplicador inventado). */
+  var IEE_TIERS=[
+    {max:20,name:'Riesgo crítico',color:'var(--leak)',tint:'var(--leak-tint)',capLevel:'Muy baja',
+     idh:'Ahora mismo, crecer te rompería.',
+     idp:'Tu crecimiento depende de que todo salga bien cada día. Un solo pico de demanda tensiona el sistema hasta partirlo. No es falta de esfuerzo: es falta de estructura.',
+     cap:'Tu sistema no está preparado para absorber un aumento de demanda. Subir la inversión ahora rompería la cadena antes de que llegara el retorno.'},
+    {max:40,name:'Empresa dependiente',color:'var(--leak)',tint:'var(--leak-tint)',capLevel:'Baja',
+     idh:'Eres una empresa dependiente.',
+     idp:'Todo el crecimiento depende todavía del esfuerzo diario del equipo —y de ti. Si mañana duplicas la demanda, el sistema empieza a romperse por las costuras.',
+     cap:'Puedes crecer un poco, pero todo depende de que estés tú encima. En cuanto aceleras, aparecen los cuellos de botella.'},
+    {max:60,name:'Empresa estable',color:'var(--warn)',tint:'var(--warn-tint)',capLevel:'Media',
+     idh:'Eres una empresa estable, todavía no escalable.',
+     idp:'Funcionas bien a tu ritmo actual. Creces, pero cada escalón nuevo cuesta y se nota: el sistema aguanta el tamaño de hoy, no acompaña el de mañana.',
+     cap:'Aguantas tu tamaño actual y algo de crecimiento moderado, pero hay techo cerca: escalar fuerte destaparía las juntas flojas.'},
+    {max:80,name:'Empresa preparada',color:'var(--fixed)',tint:'var(--fixed-tint)',capLevel:'Alta',
+     idh:'Eres una empresa preparada.',
+     idp:'Tu estructura ya no limita el crecimiento. El reto dejó de ser arreglar y pasó a ser acelerar sin perder eficiencia.',
+     cap:'Estás preparado para crecer de forma sostenida. Quedan afinamientos, no reparaciones de fondo.'},
+    {max:100,name:'Diseñada para escalar',color:'var(--fixed)',tint:'var(--fixed-tint)',capLevel:'Muy alta',
+     idh:'Eres una empresa diseñada para escalar.',
+     idp:'El sistema trabaja por ti. Crecer ya no depende de esfuerzo extra, sino de cuánto combustible decidas meterle.',
+     cap:'Tu sistema está diseñado para escalar. El límite ya no es la estructura: es cuánta gasolina decidas meterle.'}
+  ];
+  function tierFor(score){for(var i=0;i<IEE_TIERS.length;i++){if(score<=IEE_TIERS[i].max)return i;}return IEE_TIERS.length-1;}
+  function resultsHTML(){
+    var r=compute(),L=LEVELS[r.level],deg=Math.round(r.score*3.6);
+    var ti=tierFor(r.score),T=IEE_TIERS[ti];
+    var gauge='conic-gradient('+T.color+' '+deg+'deg, var(--line-2) '+deg+'deg)';
+    var scale='<div class="iee-scale"><div class="lab"><span>IEE® · dónde está tu empresa</span><span>0 → 100</span></div><div class="iee-track">';
+    IEE_TIERS.forEach(function(t,i){var lo=i===0?0:IEE_TIERS[i-1].max+1;
+      scale+='<div class="iee-seg'+(i===ti?' on':'')+'"'+(i===ti?' style="border-color:'+t.color+';background:'+t.tint+'"':'')+'>'
+        +'<div class="rng">'+lo+'–'+t.max+'</div><div class="nm">'+esc(t.name)+'</div></div>';});
+    scale+='</div></div>';
+
+    var h='<div class="screen">'
+      +'<div class="eyebrow" style="margin-bottom:22px">IEE® · Índice de Escalabilidad Empresarial</div>'
+      +'<div class="res-hero">'
+        +'<div class="gauge" data-score="'+r.score+'" data-color="'+T.color+'" style="background:conic-gradient(var(--line-2) 0deg, var(--line-2) 0deg)"><div class="inner"><div class="score" style="color:'+T.color+'">0</div><div class="of">/ 100</div></div></div>'
+        +'<div class="res-verdict"><span class="lvl-pill" style="background:'+T.tint+';color:'+T.color+'">'+esc(T.name)+'</span>'
+        +'<h2>'+esc(T.idh)+'</h2><p>'+esc(T.idp)+'</p>'
+        +'<div class="ceiling"><span class="cx" style="color:'+T.color+'">'+esc(T.capLevel)+'</span><span class="ct"><b>Capacidad de crecimiento.</b> '+esc(T.cap)+'</span></div></div>'
+      +'</div>'
+      +scale
+      +'<div class="res-stats">'
+        +'<div class="rstat fixed"><div class="n">'+r.nYes+'</div><div class="t">Escalables</div></div>'
+        +'<div class="rstat warn"><div class="n">'+r.nPart+'</div><div class="t">Con límite</div></div>'
+        +'<div class="rstat leak"><div class="n">'+r.nNo+'</div><div class="t">Cuellos de botella</div></div>'
+      +'</div>';
+
+    // resumen ejecutivo dinámico
+    h+='<div class="res-block-title"><h3>Lectura del experto</h3><span class="k">Resumen ejecutivo</span></div>'
+      +'<div class="exec"><span class="lab">Diagnóstico</span>'+execSummary(r)+'</div>';
+
+    // mapa
+    h+='<div class="res-block-title"><h3>Dónde aguanta y dónde se rompe</h3><span class="k">Eslabón por eslabón</span></div><div class="map">';
+    r.perSec.forEach(function(s){
+      h+='<div class="row st-'+s.st+'"><span class="rl">'+s.l+'</span>'
+        +'<div class="rmid"><div class="rname">'+esc(s.title)+'</div>'
+        +'<div class="track"><div class="fill" data-w="'+s.pct+'"></div></div></div>'
+        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="rp">'+s.pct+'%</span>'
+        +'<span class="pill st-'+s.st+'">'+(s.st==='fixed'?'Escalable':s.st==='warn'?'Con límite':'Cuello de botella')+'</span></div></div>';
+    });
+    h+='</div>';
+
+    // plan de 90 días
+    var weak=r.perSec.filter(function(s){return s.st!=='fixed';});
+    var nActions=weak.reduce(function(a,s){return a+s.pb.actions.length;},0);
+    h+='<div class="res-block-title"><h3>Tu plan de 90 días para romper el techo</h3><span class="k">Cómo desbloquear el escalado</span></div>';
+    if(weak.length===0){
+      h+='<div class="allgood"><b>Ningún cuello de botella.</b> Tu sistema aguanta escalar de arriba abajo. El siguiente movimiento no es reparar, es pisar el acelerador con datos: subir presupuesto donde el CPA aguanta, exprimir la experimentación y defender los márgenes mientras creces. Aquí es donde una auditoría externa afina los últimos puntos porcentuales — los que a un sistema maduro más le cuestan y más valen al multiplicar el volumen.</div>';
+    } else {
+      h+='<p class="plan-lead"><b>'+nActions+' acciones prioritarias</b> en <b>'+weak.length+' de 9 bloques</b>, organizadas en 3 fases. Cada una sube tu techo de escala. Están ordenadas como lo haría un consultor: de <b>arriba de la cadena hacia abajo</b>, porque de nada sirve optimizar la landing si la oferta de detrás se rompe al primer empujón de volumen.</p>';
+      PHASES.forEach(function(ph){
+        var inPh=weak.filter(function(s){return s.phase===ph.n;});
+        if(inPh.length===0) return;
+        h+='<div class="phase"><div class="phase-head"><span class="phase-badge">Fase '+ph.n+'</span><h4>'+esc(ph.title)+'</h4><span class="days">'+ph.days+'</span></div>';
+        inPh.forEach(function(s){h+=playbookCard(s);});
+        h+='</div>';
+      });
+    }
+
+    // mensaje único memorable
+    if(r.nNo>0){
+      h+='<div class="punch"><p class="big">Tu marketing no es el problema. <span class="hit">Tu sistema sí.</span></p>'
+        +'<p class="sub">Mientras no cierres esos <b>'+r.nNo+' cuello'+(r.nNo>1?'s':'')+' de botella</b>, cada euro extra que inviertas en anuncios rendirá menos que el anterior.</p></div>';
+    } else {
+      h+='<div class="punch"><p class="big">Tu sistema ya no te frena.</p>'
+        +'<p class="sub">El único límite que te queda es <b>cuánto decidas invertir</b> en crecer. Esa es exactamente la posición desde la que se escala.</p></div>';
+    }
+
+    // CTA
+    h+='<div class="res-cta"><div class="eyebrow">El siguiente paso</div>'
+      +'<h3>Tu techo no está en el mercado. Está en tu sistema.</h3>'
+      +'<p>En una sesión de 45 minutos te enseñamos <b>qué cuello de botella arreglar primero</b>, cuánto impacto tendría hacerlo y cómo romper el siguiente techo de crecimiento. No es una llamada de ventas: es un diagnóstico sobre tus números reales.</p>'
+      +'<p id="sentline" class="res-fine" style="color:#5FD3D4;font-size:13.5px;margin:0 0 18px"></p>'
+      +'<div class="res-actions"><a class="btn btn-white" id="book" href="#" target="_blank" rel="noopener">Reservar mi sesión de 45 min <span class="arw">→</span></a>'
+      +'<span class="res-fine">Plazas limitadas cada mes · Sin compromiso</span></div></div>'
+      +'<div class="res-foot"><button class="linkbtn" id="restart">↺ Volver a empezar</button><span>Índice de Escalabilidad · Qualivo</span></div>'
+      +'</div>';
+    return h;
+  }
+
+  function execSummary(r){
+    var sorted=r.perSec.slice().sort(function(a,b){return a.pct-b.pct;});
+    var weakest=sorted[0], strongest=sorted[sorted.length-1];
+    var crit=r.perSec.filter(function(s){return s.st==='leak';}).length;
+    var p1='Tu Índice de Escalabilidad es <b>'+r.score+'/100</b>. El eslabón que mejor aguanta crecer es <b>'+esc(strongest.title)+'</b> ('+strongest.pct+'%); el que primero cede es <b>'+esc(weakest.title)+'</b> ('+weakest.pct+'%) — hoy es tu cuello de botella y el techo que te frena antes que ningún otro.';
+    var p2;
+    if(r.level==='struct') p2='Con <b>'+r.nNo+' cuellos de botella</b> y <b>'+r.nPart+' eslabones al límite</b>, la lectura es clara: no es un problema de anuncios, es de sistema. Subir la inversión ahora sería echar agua en un cubo agujereado — más gasto, mismo (o peor) retorno. El plan de abajo empieza por tapar los agujeros, no por abrir el grifo.';
+    else if(r.level==='parts') p2='Tienes <b>'+r.nNo+' cuellos de botella</b> y <b>'+r.nPart+' eslabones al límite</b>. La estructura existe, pero pierde por las juntas. Si escalas el gasto antes de sellarlas, amplificas el problema: el mismo presupuesto rendirá bastante más cuando el sistema deje de gotear al subir el volumen.';
+    else p2='Solo <b>'+r.nNo+' cuellos de botella</b> y <b>'+r.nPart+' eslabones al límite</b>: la base aguanta. Aquí el juego es fino — cada punto que ganes ahora se multiplica al escalar, porque el sistema ya convierte lo que le entra. Es el mejor momento para pisar el acelerador.';
+    var p3='Debajo tienes el plan, en el orden en que lo ejecutaríamos: primero los cimientos y el dinero que se escapa ya, luego el motor de conversión, y al final la medición y la sistematización que hacen que tu crecimiento sea predecible mes a mes en vez de una racha.';
+    return '<p>'+p1+'</p><p>'+p2+'</p><p>'+p3+'</p>';
+  }
+
+  function playbookCard(s){
+    var crit=s.st==='leak';
+    var speedPill=s.speed==='fast'?'<span class="pill spd-fast">Quick win</span>':'<span class="pill spd-struct">Estructural</span>';
+    var h='<div class="pb '+(crit?'crit':'rev')+'"><div class="pb-head">'
+      +'<span class="pb-l">'+esc(s.l)+'</span><h5>'+esc(s.title)+'</h5>'
+      +'<span class="pb-pills"><span class="pill st-'+s.st+'">'+(crit?'Cuello de botella · '+s.pct+'%':'Con límite · '+s.pct+'%')+'</span>'+speedPill+'</span></div>'
+      +'<div class="pb-sec"><span class="pb-lab">El diagnóstico</span><p class="pb-problem">'+esc(s.pb.problem)+'</p></div>'
+      +'<div class="pb-sec"><span class="pb-lab">Lo que te está costando</span><p class="pb-cost">'+esc(s.pb.cost)+'</p></div>'
+      +'<div class="pb-sec"><span class="pb-lab">El plan de acción</span><ol class="pb-actions">';
+    s.pb.actions.forEach(function(a){h+='<li>'+esc(a)+'</li>';});
+    h+='</ol></div>'
+      +'<div class="pb-foot"><div class="pb-metric"><span class="h">Métrica objetivo</span>'+esc(s.pb.metric)+'</div>'
+      +'<div class="pb-impact"><span class="h">Impacto esperado</span>'+esc(s.pb.impact)+'</div></div>';
+    if(s.gaps.length){
+      h+='<ul class="pb-gaps"><span class="glab">Lo que marcaste como pendiente aquí</span>';
+      s.gaps.forEach(function(g){h+='<li class="gi g'+g.v+'"><span class="m">'+(g.v===0?'✕':'~')+'</span><span>'+esc(g.q)+'</span></li>';});
+      h+='</ul>';
+    }
+    h+='</div>';
+    return h;
+  }
+
+  function bindResults(){
+    var g=screen.querySelector('.gauge');
+    if(g){(function(){var target=parseInt(g.getAttribute('data-score'),10),col=g.getAttribute('data-color'),sn=g.querySelector('.score');
+      function setv(v){sn.textContent=v;g.style.background='conic-gradient('+col+' '+(v*3.6)+'deg, var(--line-2) '+(v*3.6)+'deg)';}
+      if(matchMedia('(prefers-reduced-motion:reduce)').matches){setv(target);return;}
+      var t0=null;function gt(now){if(!t0)t0=now;var p=Math.min(1,(now-t0)/1100);setv(Math.round(target*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(gt);}
+      requestAnimationFrame(gt);})();}
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      screen.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
+    });});
+    var restart=document.getElementById('restart');
+    if(restart)restart.onclick=function(){answers={};step=0;lead=null;try{localStorage.removeItem('qualivo_iee');}catch(e){}render();};
+    var book=document.getElementById('book');
+    if(book)book.setAttribute('href',CONFIG.bookingUrl||'#');
+    var sent=document.getElementById('sentline');
+    if(sent&&lead&&lead.email)sent.textContent="✓ Te hemos enviado tu informe completo a "+lead.email;
+  }
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  render();
+})();
+</script>
+</body>
+</html>
