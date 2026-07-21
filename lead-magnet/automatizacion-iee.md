@@ -151,6 +151,28 @@ Personaliza el primer impacto con el resultado. Variables GHL: `{{contact.first_
 
 ---
 
+## Estado: workflow ya creado (inactivo) ✅
+
+Se ha clonado el flujo de DeepAgent en uno nuevo aislado, **sin tocar el de producción**:
+
+- **Nombre:** `IEE → DeepAgent · Llamada (INACTIVO)`  ·  **id:** `RvE7AredgnEiyQjm`
+- **Webhook propio:** `iee-new-lead`
+  → prod: `https://qualivo.app.n8n.cloud/webhook/iee-new-lead`
+  → test: `https://qualivo.app.n8n.cloud/webhook-test/iee-new-lead`
+- **Variables IEE ya inyectadas** en el nodo *Deepagent - Iniciar Llamada*
+  (`iee_score`, `iee_tramo`, `cuello`).
+- Nace **inactivo** para que lo pruebes antes de encenderlo.
+
+### Para dejarlo funcionando (5 min en la UI de n8n)
+1. Abre el workflow → nodo **«Slack - Alerta Booking»** → selecciona tu credencial de Slack
+   (es lo único que quedó sin conectar; los nodos de GHL/DeepAgent/Claude conservan su token).
+2. Revisa que los tokens de cabecera (GHL `Authorization`, DeepAgent `X-API-Key`, Claude
+   `x-api-key`) siguen vigentes. Si rotaste alguno, actualízalo.
+3. En el **workflow de GHL** que dispara la llamada, apunta el HTTP POST a
+   `https://qualivo.app.n8n.cloud/webhook/iee-new-lead` con el body del *Paso 2* de arriba.
+4. Prueba con la **URL de test** (botón *Listen for test event*), verifica la llamada y,
+   cuando cuadre, **activa** el workflow.
+
 ## Nota de seguridad
 
 La API key de n8n usada para auditar esto se compartió por chat: **rótala**
