@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Analizador de Captación y Ventas — Qualivo</title>
-<meta name="description" content="Analiza tu sistema de captación y ventas en 9 bloques y recibe un diagnóstico personalizado: tu índice de madurez, tus fugas y por dónde empezar. Por Qualivo.">
+<meta name="description" content="Analiza tu sistema de captación y ventas en 9 bloques y recibe un diagnóstico experto: tu índice de madurez, tus fugas y un plan detallado de 90 días para solucionarlo. Por Qualivo.">
 <style>
   :root{
     --paper:#F3F5F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
@@ -40,9 +40,8 @@
   .eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:inline-flex;align-items:center;gap:9px}
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--signal)}
 
-  /* ---- top bar + progress ---- */
   .top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .top-in{max-width:760px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .top-in{max-width:780px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;letter-spacing:.04em;font-size:13.5px}
   .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px var(--signal-tint)}
   .top-right{display:flex;align-items:center;gap:10px}
@@ -52,34 +51,36 @@
   .progress{height:3px;background:var(--line-2);width:100%}
   .progress .bar{height:100%;background:var(--signal);width:0;transition:width .4s cubic-bezier(.4,0,.2,1)}
 
-  /* ---- stage / screen ---- */
   main{flex:1;display:flex;flex-direction:column}
-  .stage{max-width:760px;margin:0 auto;width:100%;padding:44px 24px 40px;flex:1;display:flex;flex-direction:column}
+  .stage{max-width:780px;margin:0 auto;width:100%;padding:44px 24px 48px;flex:1;display:flex;flex-direction:column}
   .screen{animation:in .45s cubic-bezier(.2,.7,.2,1)}
   @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.screen{animation:none}.progress .bar{transition:none}}
+  @media (prefers-reduced-motion:reduce){.screen{animation:none}.progress .bar,.fill{transition:none}}
 
-  /* ---- intro ---- */
+  /* intro */
   .intro-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);background:var(--surface);border:1px solid var(--line);padding:7px 13px;border-radius:100px;margin-bottom:26px}
   .intro-tag b{width:6px;height:6px;border-radius:50%;background:var(--leak);display:inline-block}
   .intro h1{font-size:clamp(34px,6vw,54px);letter-spacing:-.025em;line-height:1.02;margin-bottom:20px}
   .intro h1 em{font-style:italic;color:var(--signal)}
-  .intro .lead{font-family:var(--serif);font-size:clamp(19px,2.6vw,23px);color:var(--ink-2);font-weight:500;max-width:32ch;line-height:1.35;margin-bottom:30px}
-  .intro-facts{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .intro .lead{font-family:var(--serif);font-size:clamp(19px,2.6vw,23px);color:var(--ink-2);font-weight:500;max-width:34ch;line-height:1.35;margin-bottom:30px}
+  .intro-facts{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
   .fact{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px;min-width:120px}
   .fact .n{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1}
   .fact .t{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
-  .intro-note{font-size:14.5px;color:var(--ink-2);margin:22px 0 0;max-width:52ch;display:flex;gap:10px}
+  .intro-note{font-size:14.5px;color:var(--ink-2);margin:22px 0 0;max-width:56ch;display:flex;gap:10px}
   .intro-note .i{color:var(--signal);font-family:var(--mono)}
 
-  /* ---- section screen ---- */
+  /* section */
   .sec-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
   .sec-node{width:46px;height:46px;border-radius:12px;border:1.5px solid var(--ink);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;flex:none}
   .sec-meta .role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:5px}
   .sec-meta h2{font-size:clamp(24px,3.6vw,32px)}
-  .sec-sub{font-size:15.5px;color:var(--ink-2);margin:14px 0 4px;max-width:58ch}
+  .sec-sub{font-size:15.5px;color:var(--ink-2);margin:14px 0 0;max-width:60ch}
+  .sec-expert{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin-top:16px}
+  .sec-expert .lab{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--signal);white-space:nowrap;padding-top:3px}
+  .sec-expert p{margin:0;font-size:14px;color:var(--ink-2);font-style:italic;line-height:1.45}
 
-  .qs{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+  .qs{display:flex;flex-direction:column;gap:14px;margin-top:24px}
   fieldset.q{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px 20px 18px;margin:0}
   fieldset.q.answered{border-color:color-mix(in srgb,var(--signal) 40%,var(--line))}
   .q legend{padding:0;display:flex;gap:12px;align-items:flex-start;width:100%}
@@ -99,7 +100,6 @@
   .seg .v0 input:checked+.opt{background:var(--leak-tint);border-color:var(--leak);color:var(--leak)}
   .seg .v0 input:checked+.opt .dm{background:var(--leak);border-color:var(--leak)}
 
-  /* ---- nav buttons ---- */
   .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:32px}
   .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:16px;font-weight:620;text-decoration:none;border-radius:100px;padding:14px 24px;cursor:pointer;border:1px solid transparent;transition:.15s}
   .btn .arw{font-family:var(--mono)}
@@ -108,7 +108,7 @@
   .btn-primary:disabled{opacity:.4;cursor:not-allowed;filter:none}
   .btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line)}
   .btn-ghost:hover{color:var(--ink);border-color:var(--ink-3)}
-  .btn-dark{background:var(--ink);color:var(--paper)}
+  .btn-white{background:#fff;color:#14161c}
   .nav-hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
   :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 
@@ -121,7 +121,7 @@
   .gauge .of{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-top:2px}
   .res-verdict .lvl-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-bottom:14px}
   .res-verdict h2{font-size:clamp(25px,4vw,36px);margin-bottom:12px}
-  .res-verdict p{font-size:16px;color:var(--ink-2);max-width:52ch;margin:0}
+  .res-verdict p{font-size:16px;color:var(--ink-2);max-width:54ch;margin:0}
 
   .res-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}
   .rstat{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px}
@@ -129,54 +129,85 @@
   .rstat .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
   .rstat.leak .n{color:var(--leak)} .rstat.warn .n{color:var(--warn)} .rstat.fixed .n{color:var(--fixed)}
 
-  .res-block-title{display:flex;align-items:baseline;gap:12px;margin:38px 0 18px}
-  .res-block-title h3{font-size:22px}
+  .res-block-title{display:flex;align-items:baseline;gap:12px;margin:40px 0 18px;flex-wrap:wrap}
+  .res-block-title h3{font-size:23px}
   .res-block-title .k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
 
-  /* map of eslabones */
+  /* exec summary */
+  .exec{border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:0 14px 14px 0;background:var(--surface);padding:22px 24px}
+  .exec .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:12px;display:block}
+  .exec p{margin:0 0 12px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
+  .exec p:last-child{margin-bottom:0}
+  .exec b{color:var(--ink);font-weight:640}
+
+  /* map */
   .map{display:flex;flex-direction:column;gap:9px}
   .row{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
   .row .rl{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--ink-3)}
   .row .rmid{min-width:0}
   .row .rname{font-size:15.5px;font-weight:560;margin-bottom:7px}
   .row .track{height:7px;border-radius:100px;background:var(--line-2);overflow:hidden}
-  .row .fill{height:100%;border-radius:100px;transition:width .8s cubic-bezier(.3,.8,.3,1)}
+  .row .fill{height:100%;border-radius:100px;width:0;transition:width .8s cubic-bezier(.3,.8,.3,1)}
   .row .rp{font-family:var(--mono);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
   .pill{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:100px;white-space:nowrap}
   .st-fixed .fill{background:var(--fixed)} .st-fixed .rp{color:var(--fixed)} .pill.st-fixed{background:var(--fixed-tint);color:var(--fixed)}
   .st-warn .fill{background:var(--warn)} .st-warn .rp{color:var(--warn)} .pill.st-warn{background:var(--warn-tint);color:var(--warn)}
   .st-leak .fill{background:var(--leak)} .st-leak .rp{color:var(--leak)} .pill.st-leak{background:var(--leak-tint);color:var(--leak)}
+  .pill.spd-fast{background:var(--fixed-tint);color:var(--fixed)}
+  .pill.spd-struct{background:var(--signal-tint);color:var(--signal)}
 
-  /* plan */
-  .plan{display:flex;flex-direction:column;gap:14px}
-  .pcard{border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:0 12px 12px 0;background:var(--surface);padding:20px 22px}
-  .pcard.crit{border-left-color:var(--leak)}
-  .pcard-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-  .pstep{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--signal);letter-spacing:.05em}
-  .pcard.crit .pstep{color:var(--leak)}
-  .pcard h4{font-family:var(--serif);font-size:19px;font-weight:600;margin:0}
-  .pcard .prec{font-size:15.5px;color:var(--ink-2);margin:0 0 12px}
-  .pcard .pgaps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-  .pcard .pgaps li{display:grid;grid-template-columns:16px 1fr;gap:9px;font-size:14px;color:var(--ink-2)}
-  .pcard .pgaps li .gi{font-family:var(--mono);font-size:12px}
-  .pcard .pgaps li.g0 .gi{color:var(--leak)} .pcard .pgaps li.g1 .gi{color:var(--warn)}
-  .allgood{border:1px solid var(--fixed);background:var(--fixed-tint);border-radius:14px;padding:24px;color:var(--fixed);font-size:16px}
+  /* plan intro */
+  .plan-lead{font-size:15.5px;color:var(--ink-2);max-width:60ch;margin:-4px 0 22px;line-height:1.6}
+  .plan-lead b{color:var(--ink)}
+
+  /* phases */
+  .phase{margin-bottom:8px}
+  .phase-head{display:flex;align-items:center;gap:13px;margin:26px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .phase-badge{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--signal);border-radius:8px;padding:6px 11px;white-space:nowrap}
+  .phase-head h4{font-family:var(--serif);font-size:20px;font-weight:600;margin:0}
+  .phase-head .days{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:auto;white-space:nowrap;letter-spacing:.03em}
+
+  /* playbook card */
+  .pb{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:22px 22px 20px;margin-bottom:14px}
+  .pb.crit{border-left:3px solid var(--leak)} .pb.rev{border-left:3px solid var(--warn)}
+  .pb-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .pb-l{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:14px;flex:none}
+  .pb-head h5{font-family:var(--serif);font-size:19px;font-weight:600;margin:0;flex:1;min-width:140px}
+  .pb-pills{display:flex;gap:7px;flex-wrap:wrap}
+  .pb-sec{margin:0 0 15px}
+  .pb-lab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;display:block}
+  .pb-problem{font-size:15px;color:var(--ink);margin:0;line-height:1.55}
+  .pb-cost{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.55;border-left:2px solid var(--leak);padding-left:13px}
+  .pb-actions{margin:0;padding:0;counter-reset:act;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .pb-actions li{display:grid;grid-template-columns:26px 1fr;gap:11px;font-size:14.5px;color:var(--ink-2);line-height:1.5;align-items:start}
+  .pb-actions li::before{counter-increment:act;content:counter(act);font-family:var(--mono);font-size:12px;font-weight:700;color:var(--signal);background:var(--signal-tint);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .pb-foot{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;padding-top:15px;border-top:1px solid var(--line-2)}
+  .pb-metric,.pb-impact{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+  .pb-metric .h,.pb-impact .h{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+  .pb-metric .h{color:var(--signal)} .pb-impact .h{color:var(--fixed)}
+  .pb-gaps{list-style:none;margin:14px 0 0;padding:13px 0 0;border-top:1px solid var(--line-2);display:flex;flex-direction:column;gap:6px}
+  .pb-gaps .glab{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+  .pb-gaps li.gi{display:grid;grid-template-columns:16px 1fr;gap:9px;font-size:13.5px;color:var(--ink-2)}
+  .pb-gaps li.gi .m{font-family:var(--mono);font-size:12px}
+  .pb-gaps li.g0 .m{color:var(--leak)} .pb-gaps li.g1 .m{color:var(--warn)}
+
+  .allgood{border:1px solid var(--fixed);background:var(--fixed-tint);border-radius:14px;padding:24px;color:var(--fixed);font-size:16px;line-height:1.55}
   .allgood b{color:var(--fixed)}
+  .phase-clean{font-size:13.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em;padding:2px 0 10px}
 
   /* result CTA */
-  .res-cta{background:var(--ink);color:#fff;border-radius:20px;padding:clamp(28px,5vw,44px);margin-top:40px;position:relative;overflow:hidden}
+  .res-cta{background:var(--ink);color:#fff;border-radius:20px;padding:clamp(28px,5vw,46px);margin-top:42px;position:relative;overflow:hidden}
   .res-cta::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%);mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%)}
   .res-cta>*{position:relative}
   .res-cta .eyebrow{color:#8FA6FF}.res-cta .eyebrow::before{background:#8FA6FF}
-  .res-cta h3{color:#fff;font-size:clamp(22px,3.4vw,30px);margin:14px 0 12px;max-width:22ch}
-  .res-cta p{color:rgba(255,255,255,.72);max-width:52ch;margin:0 0 22px;font-size:15.5px}
+  .res-cta h3{color:#fff;font-size:clamp(22px,3.4vw,30px);margin:14px 0 12px;max-width:24ch}
+  .res-cta p{color:rgba(255,255,255,.72);max-width:54ch;margin:0 0 22px;font-size:15.5px}
   .res-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
   .res-form input{flex:1;min-width:200px;font-family:var(--sans);font-size:15px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:13px 14px}
   .res-form input::placeholder{color:rgba(255,255,255,.5)}
   .res-form input:focus{outline:2px solid #8FA6FF;outline-offset:1px}
   .res-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  .btn-white{background:#fff;color:#14161c}
-  .res-fine{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);margin-top:14px;letter-spacing:.02em}
+  .res-fine{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.02em}
   .res-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;margin-top:26px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
   .linkbtn{background:none;border:0;color:var(--ink-2);font-family:var(--mono);font-size:11.5px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;letter-spacing:.03em}
   .linkbtn:hover{color:var(--ink)}
@@ -186,7 +217,8 @@
     .res-stats{grid-template-columns:1fr 1fr}
     .intro-facts .fact{flex:1}
     .seg{grid-template-columns:1fr}
-    .stage{padding:32px 20px 32px}
+    .pb-foot{grid-template-columns:1fr}
+    .stage{padding:32px 20px 40px}
   }
 </style>
 </head>
@@ -212,163 +244,251 @@
   function cur(){return root.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
   tg.addEventListener('click',function(){root.dataset.theme=cur()==='dark'?'light':'dark';});
 
-  /* ---------- DATOS: 9 eslabones · 27 preguntas ---------- */
+  /* =====================================================================
+     9 ESLABONES · 27 PREGUNTAS · PLAYBOOKS DE EXPERTO
+     phase: 1 (0-30d) · 2 (30-60d) · 3 (60-90d)
+     speed: 'fast' (quick win) · 'struct' (estructural)
+     ===================================================================== */
   var SECTIONS=[
-    {l:"A",role:"El fundamento",title:"Oferta y mercado",
+    {l:"A",role:"El fundamento",title:"Oferta y mercado",phase:1,speed:"struct",
      sub:"Antes que ningún anuncio: ¿es fácil decirte que sí?",
-     rec:"Reescribe tu oferta hasta que un cliente pueda repetirla sin cambiarla, y ánclala en el valor a lo largo de la relación (LTV), no en el precio.",
+     expert:"Un experto no mira tu producto: mira si el mercado puede repetir tu promesa y si el valor justifica lo que cobras.",
      qs:[
       "¿Puedes explicar tu oferta en una frase que un cliente repetiría sin cambiarla?",
       "¿Sabes, con datos, quién es tu mejor cliente y cuánto vale a lo largo de la relación?",
-      "¿Tu oferta es claramente distinta de la del competidor más obvio, más allá del precio?"]},
-    {l:"B",role:"La traducción",title:"Mensaje y creativos",
+      "¿Tu oferta es claramente distinta de la del competidor más obvio, más allá del precio?"],
+     pb:{
+      problem:"Si este bloque falla, todo lo demás rema en contra. Una oferta que no es obviamente valiosa y distinta obliga a la publicidad a compensar lo que la oferta no dice — y eso es carísimo.",
+      cost:"Es la fuga más silenciosa y más cara: no aparece en ninguna métrica de campaña, pero hunde el CTR, dispara el CPL y llena el pipeline de gente que regatea el precio porque no ve el valor.",
+      actions:[
+        "Reescribe tu oferta en una frase con la estructura: «ayudo a [quién] a conseguir [resultado concreto] en [plazo] sin [el dolor habitual]». Pruébala con 3 clientes: si la reformulan, aún no está.",
+        "Calcula el LTV real de tu mejor cliente (ticket × recurrencia × permanencia). Ese número —no el precio de entrada— es el que justifica cuánto puedes invertir en captar.",
+        "Define tu mecanismo único: qué haces distinto del competidor obvio que explique por qué contigo el resultado llega mejor o antes. Sin eso, solo compites por precio.",
+        "Empaqueta una oferta de entrada de bajo riesgo (diagnóstico, auditoría, piloto) para que decir «sí» cueste poco."],
+      metric:"Que ≥1 de cada 3 leads pregunte por el precio o el siguiente paso sin que tú lo fuerces. Termómetro: CTR del anuncio y % de scroll en la landing.",
+      impact:"Arreglar la oferta mueve más el CPL que cualquier optimización de campaña. Es el multiplicador de todo lo que viene después."}},
+
+    {l:"B",role:"La traducción",title:"Mensaje y creativos",phase:1,speed:"fast",
      sub:"¿Hablas del problema del cliente o de tu producto?",
-     rec:"Empieza cada mensaje por el problema del cliente y monta un ritmo de prueba de ángulos: mínimo 4 al mes, y quédate con el ganador por dato, no por gusto.",
+     expert:"Lo primero que audita un experto no es el diseño del anuncio, sino a quién le habla la primera línea.",
      qs:[
       "¿Tu anuncio nombra el problema del cliente en la primera línea, antes de nombrarte a ti?",
       "¿Probaste al menos 4 ángulos de mensaje distintos en los últimos 30 días?",
-      "¿Sabes cuál es tu creativo ganador actual y por qué gana (hook, oferta, formato)?"]},
-    {l:"C",role:"El amplificador",title:"Tráfico y canales",
+      "¿Sabes cuál es tu creativo ganador actual y por qué gana (hook, oferta, formato)?"],
+     pb:{
+      problem:"Puede que tengas buena oferta, pero la estás contando en tus palabras, no en las del cliente. El mercado no compra lo que haces; compra el problema que reconoce.",
+      cost:"Cada creativo que habla de ti y no de su dolor es dinero quemado en impresiones que nadie procesa. Y sin flujo de ángulos, cuando el único que funciona se fatiga, te quedas sin plan B.",
+      actions:[
+        "Reescribe tus 3 anuncios principales empezando por el problema del cliente en la primera línea. Regla: si tu marca aparece antes que su dolor, va tarde.",
+        "Monta una matriz de ángulos: 4-5 dolores/deseos × 2-3 formatos. Lanza mínimo 4 ángulos nuevos al mes.",
+        "Define el criterio de ganador por dato (hook rate, CTR, CPL), no por gusto del equipo, y documenta por qué gana para replicarlo.",
+        "Crea una biblioteca de referencias con tus ganadores y los del sector para iterar sobre lo que ya prueba funcionar."],
+      metric:"Hook rate (3s) por encima del 25-30% en vídeo y ≥4 ángulos probados/mes. Si el CTR cae y la frecuencia sube, es fatiga: rota, no apagues lo que rinde.",
+      impact:"Un cambio de ángulo acertado puede bajar el CPL a la mitad sin tocar el presupuesto."}},
+
+    {l:"C",role:"El amplificador",title:"Tráfico y canales",phase:2,speed:"struct",
      sub:"¿Compras atención o solo gastas presupuesto?",
-     rec:"Deja de mirar solo el CPL por canal: mira qué canal trae los leads que cierran. Separa captar demanda existente (búsqueda) de crearla (interrupción) y controla frecuencia y CPM.",
+     expert:"El canal no se juzga por lo que cuesta el lead, sino por lo que cierra.",
      qs:[
       "¿Sabes qué canal te trae los leads que más cierran, no solo los más baratos?",
       "¿Distingues entre captar demanda existente (búsqueda) y crearla (interrupción)?",
-      "¿Tu frecuencia y tu CPM están bajo control, o el coste sube sin que sepas por qué?"]},
-    {l:"D",role:"La conversión",title:"Landing y conversión",
+      "¿Tu frecuencia y tu CPM están bajo control, o el coste sube sin que sepas por qué?"],
+     pb:{
+      problem:"Estás gastando presupuesto, pero no necesariamente comprando la atención correcta. Sin saber qué canal trae los leads que cierran, optimizas hacia lo barato en vez de hacia lo rentable.",
+      cost:"El canal del lead más barato puede ser el del peor cliente. Optimizar por CPL sin mirar el cierre te lleva a escalar justo lo que no vende.",
+      actions:[
+        "Separa las campañas por intención: captación de demanda existente (Google/búsqueda) vs. creación de demanda (Meta/interrupción). Se miden y optimizan distinto.",
+        "Etiqueta el origen de cada lead hasta el cierre para saber qué canal/campaña trae clientes, no solo formularios.",
+        "Pon alertas a frecuencia y CPM: por encima de ~2,5-3 en frío estás quemando audiencia; refresca creativo o amplía público.",
+        "Reasigna presupuesto cada semana hacia el canal con mejor CPA (no mejor CPL)."],
+      metric:"Conocer el CPA por canal y mantener la frecuencia en frío por debajo de ~3. La pregunta que manda: ¿qué canal me trae clientes, no leads?",
+      impact:"Mover presupuesto del canal barato-malo al caro-bueno sube los ingresos sin subir la inversión."}},
+
+    {l:"D",role:"La conversión",title:"Landing y conversión",phase:1,speed:"fast",
      sub:"El dinero más caro se pierde aquí: el que ya pagaste para traer a esa persona.",
-     rec:"Manda el tráfico a una landing con una sola acción (no a la home), mide la conversión visita→lead contra un objetivo, testéala cada trimestre y pide en el formulario solo lo imprescindible.",
+     expert:"Aquí un experto calcula cuánto tráfico pagado estás tirando por cada punto de conversión que falta.",
      qs:[
       "¿Tus anuncios llevan a una landing con una sola acción, no a la home con menú?",
       "¿Conoces tu tasa de conversión visita → lead y la comparas con un objetivo?",
       "¿Hiciste algún test (titular, oferta, formulario) sobre la landing este trimestre?",
-      "¿Tu formulario pide solo lo imprescindible para dar el siguiente paso?"]},
-    {l:"E",role:"El registro",title:"CRM y velocidad de respuesta",
+      "¿Tu formulario pide solo lo imprescindible para dar el siguiente paso?"],
+     pb:{
+      problem:"Pagas para traer gente y la mandas a un sitio que la distrae o la pierde. Es el eslabón donde se tira el dinero más caro: el que ya gastaste en el clic.",
+      cost:"Duplicar la conversión de la landing equivale a duplicar el presupuesto de anuncios — gratis. Cada punto de conversión que falta es tráfico pagado que se va sin dejar rastro.",
+      actions:[
+        "Crea una landing dedicada por oferta, con una sola acción y sin menú de navegación. La home no es una landing.",
+        "Mide la conversión visita→lead y fíjate un objetivo (referencia sana en B2B: 3-8% según tráfico). Sin objetivo no sabes si un 2% es un problema.",
+        "Testea una cosa cada vez, empezando por el titular y la oferta (lo que más mueve), luego prueba social y formulario.",
+        "Reduce el formulario al mínimo imprescindible para el siguiente paso; pide el resto después, en la llamada."],
+      metric:"Conversión visita→lead por encima de tu referencia de sector, medida y comparada mes a mes. Mínimo un test vivo por trimestre.",
+      impact:"Suele ser el arreglo con mejor retorno a corto plazo: mismo tráfico, más leads, sin subir la inversión."}},
+
+    {l:"E",role:"El registro",title:"CRM y velocidad de respuesta",phase:1,speed:"fast",
      sub:"La captación termina cuando alguien —o algo— reacciona a tiempo.",
-     rec:"Automatiza la entrada de cada lead al CRM y dispara el primer contacto en minutos: es donde más intención se enfría. Ten visible en qué etapa se atasca cada lead.",
+     expert:"El primer minuto vale más que el mejor guion de ventas: se mide en minutos, no en calidad.",
      qs:[
       "¿Cada lead entra automáticamente en un CRM, sin pasos manuales que se olvidan?",
       "¿Tu primer contacto con un lead nuevo ocurre en minutos, no en horas ni al día siguiente?",
-      "¿Sabes en qué etapa se atasca cada lead y cuántos hay parados ahora mismo?"]},
-    {l:"F",role:"La persistencia",title:"Seguimiento y automatización",
+      "¿Sabes en qué etapa se atasca cada lead y cuántos hay parados ahora mismo?"],
+     pb:{
+      problem:"El lead entra con una intención que dura minutos y tu sistema reacciona en horas. Para cuando llamas, ya vio a la competencia o se enfrió.",
+      cost:"La probabilidad de conectar cae en picado pasada la primera hora. Responder tarde no pierde un lead cualquiera: pierde el lead que ya pagaste, justo cuando estaba más caliente.",
+      actions:[
+        "Conecta el formulario al CRM sin pasos manuales: cada lead crea un registro automáticamente.",
+        "Dispara un primer contacto automático (email/WhatsApp/SMS) en menos de 5 minutos, aunque el comercial aún no haya podido llamar.",
+        "Crea reglas de asignación y un SLA: quién contacta, en cuánto tiempo, y una alerta si un lead lleva X minutos sin tocar.",
+        "Ten un tablero con el estado de cada lead por etapa para ver los atascos en tiempo real."],
+      metric:"Primer contacto en menos de 5 minutos y 0 leads sin asignar. Métrica de vida o muerte: el tiempo hasta el primer toque.",
+      impact:"Responder en minutos en vez de horas puede multiplicar por varias veces la tasa de conexión y de reunión."}},
+
+    {l:"F",role:"La persistencia",title:"Seguimiento y automatización",phase:2,speed:"fast",
      sub:"«No ahora» no es «no nunca». ¿Tu sistema lo sabe?",
-     rec:"Monta una secuencia de seguimiento (email + WhatsApp) de al menos 5 impactos que no dependa de que alguien se acuerde, y reactiva a los leads antiguos que no cerraron.",
+     expert:"Un experto cuenta cuántas veces impactas a un lead antes de rendirte. Casi siempre, demasiado pocas.",
      qs:[
       "¿Cada lead recibe una secuencia de seguimiento (email/WhatsApp) sin depender de que alguien se acuerde?",
       "¿Impactas a un lead al menos 5 veces antes de darlo por perdido?",
-      "¿Reactivas a los leads antiguos que no cerraron, o quedan enterrados en el CRM?"]},
-    {l:"G",role:"El cierre",title:"Ventas y cierre",
+      "¿Reactivas a los leads antiguos que no cerraron, o quedan enterrados en el CRM?"],
+     pb:{
+      problem:"Contactas una o dos veces y das el lead por perdido. Pero la mayoría de las ventas ocurren tras varios impactos: te rindes justo antes de que la mayoría compraría.",
+      cost:"Cada lead que abandonas tras un intento es inversión tirada y, encima, un cliente que acabará comprando… a quien sí insistió.",
+      actions:[
+        "Monta una secuencia multicanal (email + WhatsApp) de mínimo 5-8 impactos en 2-4 semanas, con valor en cada toque, no solo «¿lo has pensado?».",
+        "Automatízala para que no dependa de la memoria de nadie: se dispara sola al entrar el lead y se detiene si responde o agenda.",
+        "Crea una campaña de reactivación mensual sobre los leads antiguos: los que dijeron «ahora no» son tu pipeline más barato.",
+        "Segmenta el seguimiento por comportamiento (abrió / hizo clic) para subir la relevancia de cada mensaje."],
+      metric:"Al menos 5 impactos por lead antes de cerrarlo como perdido y una tasa de reactivación medida. Vigila el % de ventas que llega tras el 3.er contacto.",
+      impact:"Un seguimiento sistemático rescata ventas que hoy se pierden solo por silencio."}},
+
+    {l:"G",role:"El cierre",title:"Ventas y cierre",phase:2,speed:"struct",
      sub:"Sin datos de vuelta, el resto del sistema optimiza a ciegas.",
-     rec:"Dale a ventas un guion y una cualificación consistentes, registra el motivo de pérdida de cada oportunidad y haz que vuelva a marketing para optimizar hacia quien cierra.",
+     expert:"Sin motivo de pérdida registrado, no hay diagnóstico de ventas posible.",
      qs:[
       "¿Tu equipo comercial sigue un guion y un criterio de cualificación consistentes?",
       "¿Registráis por qué se pierde cada oportunidad, y esa información llega a marketing?",
-      "¿Conoces tu tasa de cierre y sabes si mejora o empeora mes a mes?"]},
-    {l:"H",role:"La verdad",title:"Datos y medición",
+      "¿Conoces tu tasa de cierre y sabes si mejora o empeora mes a mes?"],
+     pb:{
+      problem:"El pipeline llega a ventas y el proceso se vuelve artesanal: cada comercial hace lo suyo y el motivo de pérdida no vuelve. Marketing optimiza a ciegas.",
+      cost:"Sin proceso ni datos de vuelta, no sabes si el problema es el lead o el cierre — y acabas pagando por más leads para tapar un problema de ventas, o al revés.",
+      actions:[
+        "Estandariza un guion de descubrimiento y un criterio de cualificación (presupuesto / autoridad / necesidad / plazo) para tratar todos los leads igual.",
+        "Registra el motivo de cada oportunidad perdida con categorías fijas y revísalo con marketing cada mes.",
+        "Mide la tasa de cierre por origen y por comercial; forma al equipo sobre lo que hace el mejor.",
+        "Cierra el bucle: que marketing optimice hacia el perfil que más cierra, no hacia el lead más barato."],
+      metric:"100% de oportunidades con motivo de pérdida registrado y una tasa de cierre que sigues mes a mes.",
+      impact:"Alinear marketing y ventas con datos compartidos sube el CPA rentable sin tocar ni una campaña."}},
+
+    {l:"H",role:"La verdad",title:"Datos y medición",phase:3,speed:"struct",
      sub:"Si tu informe no llega hasta el ingreso, no sabes si ganas o pierdes.",
-     rec:"Conecta el dato de punta a punta (€ invertido → lead → reunión → cliente → € facturado), decide por CPA y no por CPL, y reúnelo en un panel único que vean marketing y ventas.",
+     expert:"Si no llega al ingreso, para un experto no es medición: es decoración.",
      qs:[
       "¿Puedes seguir la cadena completa: € invertido → lead → reunión → cliente → € facturado?",
       "¿Miras coste por cliente (CPA) y no solo coste por lead (CPL)?",
-      "¿Tienes un panel único que ve marketing y ventas, con datos en vivo?"]},
-    {l:"I",role:"El bucle",title:"Experimentación continua",
+      "¿Tienes un panel único que ve marketing y ventas, con datos en vivo?"],
+     pb:{
+      problem:"Tu informe se queda en el lead. Sin ver la cadena hasta el ingreso, estás pilotando con la mitad del salpicadero tapado.",
+      cost:"Optimizar por CPL sin ver el CPA es optimizar hacia el lead barato que no compra. Decisiones de miles de euros tomadas sobre métricas que tranquilizan pero no dicen la verdad.",
+      actions:[
+        "Conecta el dato de punta a punta: € invertido → lead → reunión → cliente → € facturado, con un identificador que viaje de la campaña al CRM.",
+        "Sustituye el CPL por el CPA como métrica de decisión de presupuesto.",
+        "Monta un panel único, en vivo, que vean marketing y ventas, con la cadena completa y el ROAS real.",
+        "Revisa ese panel en un ritmo fijo (semanal) para decidir dónde subir y dónde cortar."],
+      metric:"Poder responder «¿cuánto me cuesta un cliente por canal?» en 30 segundos, con datos en vivo.",
+      impact:"Cuando ves el CPA real, cortas lo que no vende y reinviertes en lo que sí: el mismo presupuesto rinde mucho más."}},
+
+    {l:"I",role:"El bucle",title:"Experimentación continua",phase:3,speed:"struct",
      sub:"La predictibilidad se construye con pruebas constantes, no con un acierto puntual.",
-     rec:"Instala una cadencia fija de experimentos (semanal o quincenal) y ten siempre el próximo ganador en pruebas antes de que el actual se agote.",
+     expert:"La predictibilidad no es un acierto; es un ritmo de aciertos.",
      qs:[
       "¿Lanzas experimentos de marketing con una cadencia fija (semanal o quincenal)?",
-      "¿Tienes ya identificado el próximo ganador para cuando el actual se agote?"]}
+      "¿Tienes ya identificado el próximo ganador para cuando el actual se agote?"],
+     pb:{
+      problem:"Vives de uno o dos aciertos. Funcionan… hasta que dejan de funcionar, y entonces no hay siguiente ganador esperando.",
+      cost:"Sin experimentación, la predictibilidad es una ilusión: es una racha, no un sistema. El día que el creativo o el público estrella se agota, el resultado cae en picado.",
+      actions:[
+        "Instala una cadencia fija de experimentos (semanal o quincenal) con hipótesis, variable y métrica de éxito definidas antes de lanzar.",
+        "Mantén un backlog priorizado de pruebas (oferta, ángulo, landing, seguimiento) para no quedarte nunca sin siguiente experimento.",
+        "Ten siempre el próximo ganador en pruebas antes de que el actual se fatigue.",
+        "Documenta los aprendizajes en un registro para que el sistema acumule conocimiento, no solo resultados."],
+      metric:"Entre 4 y 8 experimentos al mes y un «siguiente ganador» siempre en cartera. Mira la evolución del CPL/CPA en el tiempo, no en una foto.",
+      impact:"Es lo que convierte un buen mes en un sistema predecible mes a mes."}}
   ];
   var TOTAL_Q=SECTIONS.reduce(function(a,s){return a+s.qs.length;},0); // 27
 
+  var PHASES=[
+    {n:1,title:"Frena las fugas y asienta los cimientos",days:"0–30 días"},
+    {n:2,title:"Construye el motor de conversión",days:"30–60 días"},
+    {n:3,title:"Mide, escala y sistematiza",days:"60–90 días"}
+  ];
+
   /* ---------- ESTADO ---------- */
-  var answers={};           // "A0" -> 0|1|2
-  var step=0;               // 0 intro · 1..9 secciones · 10 resultados
-  var LAST=SECTIONS.length+1;
-  var screen=document.getElementById('screen');
-  var bar=document.getElementById('bar');
-  var stepLabel=document.getElementById('stepLabel');
+  var answers={}, step=0, LAST=SECTIONS.length+1;
+  var screen=document.getElementById('screen'), bar=document.getElementById('bar'), stepLabel=document.getElementById('stepLabel');
 
   function qid(si,qi){return SECTIONS[si].l+qi;}
-  function sectionAnswered(si){
-    for(var i=0;i<SECTIONS[si].qs.length;i++){if(answers[qid(si,i)]===undefined)return false;}
-    return true;
-  }
+  function sectionAnswered(si){for(var i=0;i<SECTIONS[si].qs.length;i++){if(answers[qid(si,i)]===undefined)return false;}return true;}
   function answeredCount(){return Object.keys(answers).length;}
+  function globalNum(si,qi){var n=0;for(var k=0;k<si;k++)n+=SECTIONS[k].qs.length;return n+qi+1;}
 
   function render(){
     window.scrollTo(0,0);
-    var pct = step===0?0 : step>=LAST?100 : Math.round((answeredCount()/TOTAL_Q)*100);
-    bar.style.width = pct+"%";
+    var pct=step===0?0:step>=LAST?100:Math.round(answeredCount()/TOTAL_Q*100);
+    bar.style.width=pct+"%";
     if(step===0){stepLabel.textContent="Analizador";screen.innerHTML=introHTML();bindIntro();}
-    else if(step>=1 && step<=SECTIONS.length){
-      var si=step-1; stepLabel.textContent="Bloque "+step+" / "+SECTIONS.length;
-      screen.innerHTML=sectionHTML(si); bindSection(si);
-    } else {
-      stepLabel.textContent="Diagnóstico"; screen.innerHTML=resultsHTML(); bindResults();
-    }
+    else if(step>=1&&step<=SECTIONS.length){var si=step-1;stepLabel.textContent="Bloque "+step+" / "+SECTIONS.length;screen.innerHTML=sectionHTML(si);bindSection(si);}
+    else{stepLabel.textContent="Diagnóstico";screen.innerHTML=resultsHTML();bindResults();}
   }
 
-  /* ---------- PANTALLA: INTRO ---------- */
+  /* ---------- INTRO ---------- */
   function introHTML(){
     return '<div class="screen intro">'
-      +'<span class="intro-tag"><b></b> Analizador de sistemas · Gratuito</span>'
+      +'<span class="intro-tag"><b></b> Analizador experto · Gratuito</span>'
       +'<h1>¿Por qué no crece tu <em>sistema</em> de captación y ventas?</h1>'
-      +'<p class="lead">Responde 27 preguntas, bloque a bloque. Al final tendrás un diagnóstico de dónde se te escapa el crecimiento y por dónde empezar.</p>'
+      +'<p class="lead">Respóndelo como si tuvieras a un consultor delante. 27 preguntas, bloque a bloque, y al final un diagnóstico con tu índice de madurez y un plan de 90 días para arreglarlo.</p>'
       +'<div class="intro-facts">'
         +'<div class="fact"><div class="n">27</div><div class="t">Preguntas</div></div>'
         +'<div class="fact"><div class="n">9</div><div class="t">Bloques del sistema</div></div>'
-        +'<div class="fact"><div class="n">~6 min</div><div class="t">Para completarlo</div></div>'
+        +'<div class="fact"><div class="n">90</div><div class="t">Días de plan</div></div>'
       +'</div>'
-      +'<div class="nav" style="padding-top:6px">'
-        +'<span></span>'
-        +'<button class="btn btn-primary" id="start">Empezar el análisis <span class="arw">→</span></button>'
-      +'</div>'
+      +'<div class="nav" style="padding-top:6px"><span></span>'
+        +'<button class="btn btn-primary" id="start">Empezar el análisis <span class="arw">→</span></button></div>'
       +'<p class="intro-note"><span class="i">↳</span><span>Responde con tus números delante. Si no lo mides, marca «No lo sé»: para el diagnóstico, no controlarlo cuenta igual que no tenerlo.</span></p>'
       +'</div>';
   }
   function bindIntro(){document.getElementById('start').onclick=function(){step=1;render();};}
 
-  /* ---------- PANTALLA: SECCIÓN ---------- */
+  /* ---------- SECCIÓN ---------- */
   function sectionHTML(si){
     var s=SECTIONS[si];
     var h='<div class="screen">'
       +'<div class="sec-head"><div class="sec-node">'+s.l+'</div>'
       +'<div class="sec-meta"><div class="role">'+esc(s.role)+'</div><h2>'+esc(s.title)+'</h2></div></div>'
-      +'<p class="sec-sub">'+esc(s.sub)+'</p><div class="qs">';
+      +'<p class="sec-sub">'+esc(s.sub)+'</p>'
+      +'<div class="sec-expert"><span class="lab">Lente experta</span><p>'+esc(s.expert)+'</p></div>'
+      +'<div class="qs">';
     for(var i=0;i<s.qs.length;i++){
-      var id=qid(si,i), val=answers[id];
-      var num=globalNum(si,i);
+      var id=qid(si,i),val=answers[id],num=globalNum(si,i);
       h+='<fieldset class="q'+(val!==undefined?' answered':'')+'" id="fs_'+id+'">'
         +'<legend><span class="qn">'+(num<10?'0':'')+num+'</span><span class="qtxt">'+esc(s.qs[i])+'</span></legend>'
-        +'<div class="seg">'
-          +seg(id,2,"Sí",val)
-          +seg(id,1,"Parcialmente",val)
-          +seg(id,0,"No / No lo sé",val)
-        +'</div></fieldset>';
+        +'<div class="seg">'+seg(id,2,"Sí",val)+seg(id,1,"Parcialmente",val)+seg(id,0,"No / No lo sé",val)+'</div></fieldset>';
     }
     h+='</div>';
     var done=sectionAnswered(si);
     h+='<div class="nav">'
       +'<button class="btn btn-ghost" id="back"><span class="arw">←</span> Atrás</button>'
       +(done?'':'<span class="nav-hint" id="hint">Responde los '+s.qs.length+' puntos para continuar</span>')
-      +'<button class="btn btn-primary" id="next" '+(done?'':'disabled')+'>'
-        +(si===SECTIONS.length-1?'Ver mi diagnóstico':'Siguiente bloque')+' <span class="arw">→</span></button>'
+      +'<button class="btn btn-primary" id="next" '+(done?'':'disabled')+'>'+(si===SECTIONS.length-1?'Ver mi diagnóstico':'Siguiente bloque')+' <span class="arw">→</span></button>'
       +'</div></div>';
     return h;
   }
   function seg(id,v,label,val){
-    var checked=val===v?' checked':'';
-    return '<label class="v'+v+'"><input type="radio" name="'+id+'" value="'+v+'"'+checked+'>'
+    return '<label class="v'+v+'"><input type="radio" name="'+id+'" value="'+v+'"'+(val===v?' checked':'')+'>'
       +'<span class="opt"><span class="dm"></span>'+label+'</span></label>';
   }
-  function globalNum(si,qi){var n=0;for(var k=0;k<si;k++)n+=SECTIONS[k].qs.length;return n+qi+1;}
-
   function bindSection(si){
     var s=SECTIONS[si];
     for(var i=0;i<s.qs.length;i++){(function(i){
       var id=qid(si,i);
-      var radios=screen.querySelectorAll('input[name="'+id+'"]');
-      radios.forEach(function(r){r.addEventListener('change',function(){
+      screen.querySelectorAll('input[name="'+id+'"]').forEach(function(r){r.addEventListener('change',function(){
         answers[id]=parseInt(r.value,10);
         document.getElementById('fs_'+id).classList.add('answered');
         refreshNav(si);
@@ -378,53 +498,49 @@
     document.getElementById('next').onclick=function(){if(sectionAnswered(si)){step++;render();}};
   }
   function refreshNav(si){
-    var done=sectionAnswered(si), next=document.getElementById('next'), hint=document.getElementById('hint');
+    var done=sectionAnswered(si),next=document.getElementById('next'),hint=document.getElementById('hint');
     next.disabled=!done; if(done&&hint)hint.remove();
-    var pct=Math.round((answeredCount()/TOTAL_Q)*100); bar.style.width=pct+"%";
+    bar.style.width=Math.round(answeredCount()/TOTAL_Q*100)+"%";
   }
 
   /* ---------- CÁLCULO ---------- */
   function compute(){
     var perSec=SECTIONS.map(function(s,si){
-      var max=s.qs.length*2, got=0, gaps=[];
+      var max=s.qs.length*2,got=0,gaps=[];
       for(var i=0;i<s.qs.length;i++){var v=answers[qid(si,i)]||0;got+=v;if(v<2)gaps.push({q:s.qs[i],v:v});}
-      var p=Math.round((got/max)*100);
-      var st=p>=75?'fixed':(p>=40?'warn':'leak');
-      return {l:s.l,title:s.title,role:s.role,rec:s.rec,pct:p,st:st,idx:si,gaps:gaps};
+      var p=Math.round(got/max*100), st=p>=75?'fixed':(p>=40?'warn':'leak');
+      return {l:s.l,title:s.title,role:s.role,pct:p,st:st,idx:si,gaps:gaps,phase:s.phase,speed:s.speed,pb:s.pb};
     });
-    var got=0; for(var k in answers)got+=answers[k];
-    var score=Math.round((got/(TOTAL_Q*2))*100);
-    var nNo=0,nPart=0; for(var kk in answers){if(answers[kk]===0)nNo++;else if(answers[kk]===1)nPart++;}
-    var level = score>=78?'sys' : (score>=45?'parts':'struct');
+    var got=0;for(var k in answers)got+=answers[k];
+    var score=Math.round(got/(TOTAL_Q*2)*100);
+    var nNo=0,nPart=0;for(var kk in answers){if(answers[kk]===0)nNo++;else if(answers[kk]===1)nPart++;}
+    var level=score>=78?'sys':(score>=45?'parts':'struct');
     return {perSec:perSec,score:score,level:level,nNo:nNo,nPart:nPart,nYes:TOTAL_Q-nNo-nPart};
   }
 
   var LEVELS={
     sys:{color:'var(--fixed)',tint:'var(--fixed-tint)',pill:'Sistema consolidado',
       h:'Tienes un sistema, no una apuesta.',
-      p:'Tu cadena de captación está bien construida de punta a punta. Tu palanca ya no es arreglar, es optimización fina y escalar con cabeza sobre lo que funciona. Aun así, revisa los bloques de abajo: incluso un buen sistema tiene un eslabón más flojo que el resto.'},
+      p:'Tu cadena de captación está bien construida de punta a punta. Tu palanca ya no es arreglar, sino optimización fina y escalar con cabeza sobre lo que funciona. Aun así, revisa el plan: incluso un buen sistema tiene un eslabón más flojo que el resto.'},
     parts:{color:'var(--warn)',tint:'var(--warn-tint)',pill:'Piezas sueltas',
       h:'Tienes piezas sueltas, todavía no un sistema.',
-      p:'Hay partes que funcionan y partes que fugan. El riesgo: si escalas el gasto ahora, amplificas las fugas antes de amplificar el resultado. Primero se conectan y arreglan los eslabones débiles; después se escala. Tu plan está justo abajo.'},
+      p:'Hay partes que funcionan y partes que fugan. El riesgo: si escalas el gasto ahora, amplificas las fugas antes que el resultado. Primero se conectan y arreglan los eslabones débiles; después se escala. Abajo tienes el plan exacto, en orden.'},
     struct:{color:'var(--leak)',tint:'var(--leak-tint)',pill:'Problema estructural',
       h:'Tu problema no es la publicidad. Es estructural.',
       p:'Las fugas están repartidas por casi toda la cadena. Cada euro extra en anuncios hoy se desperdicia en gran parte, porque el sistema que rodea al anuncio no está preparado para convertir lo que compra. La buena noticia: sabes exactamente por dónde empezar.'}
   };
 
-  /* ---------- PANTALLA: RESULTADOS ---------- */
+  /* ---------- RESULTADOS ---------- */
   function resultsHTML(){
-    var r=compute(), L=LEVELS[r.level];
-    var deg=Math.round(r.score*3.6);
+    var r=compute(),L=LEVELS[r.level],deg=Math.round(r.score*3.6);
     var gauge='conic-gradient('+L.color+' '+deg+'deg, var(--line-2) '+deg+'deg)';
 
     var h='<div class="screen">'
-      +'<div class="eyebrow" style="margin-bottom:22px">Tu diagnóstico de captación</div>'
+      +'<div class="eyebrow" style="margin-bottom:22px">Tu diagnóstico de captación y ventas</div>'
       +'<div class="res-hero">'
         +'<div class="gauge" style="background:'+gauge+'"><div class="inner"><div class="score" style="color:'+L.color+'">'+r.score+'</div><div class="of">/ 100</div></div></div>'
-        +'<div class="res-verdict">'
-          +'<span class="lvl-pill" style="background:'+L.tint+';color:'+L.color+'">'+L.pill+'</span>'
-          +'<h2>'+esc(L.h)+'</h2><p>'+esc(L.p)+'</p>'
-        +'</div>'
+        +'<div class="res-verdict"><span class="lvl-pill" style="background:'+L.tint+';color:'+L.color+'">'+L.pill+'</span>'
+        +'<h2>'+esc(L.h)+'</h2><p>'+esc(L.p)+'</p></div>'
       +'</div>'
       +'<div class="res-stats">'
         +'<div class="rstat fixed"><div class="n">'+r.nYes+'</div><div class="t">Sólidos (Sí)</div></div>'
@@ -432,60 +548,86 @@
         +'<div class="rstat leak"><div class="n">'+r.nNo+'</div><div class="t">Fugas (No)</div></div>'
       +'</div>';
 
-    // mapa de eslabones (orden de la cadena)
+    // resumen ejecutivo dinámico
+    h+='<div class="res-block-title"><h3>Lectura del experto</h3><span class="k">Resumen ejecutivo</span></div>'
+      +'<div class="exec"><span class="lab">Diagnóstico</span>'+execSummary(r)+'</div>';
+
+    // mapa
     h+='<div class="res-block-title"><h3>Tu sistema, eslabón por eslabón</h3><span class="k">Mapa de fugas</span></div><div class="map">';
     r.perSec.forEach(function(s){
       h+='<div class="row st-'+s.st+'"><span class="rl">'+s.l+'</span>'
         +'<div class="rmid"><div class="rname">'+esc(s.title)+'</div>'
-        +'<div class="track"><div class="fill" style="width:0" data-w="'+s.pct+'"></div></div></div>'
-        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">'
-          +'<span class="rp">'+s.pct+'%</span>'
-          +'<span class="pill st-'+s.st+'">'+(s.st==='fixed'?'Sólido':s.st==='warn'?'Revisar':'Fuga')+'</span>'
-        +'</div></div>';
+        +'<div class="track"><div class="fill" data-w="'+s.pct+'"></div></div></div>'
+        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="rp">'+s.pct+'%</span>'
+        +'<span class="pill st-'+s.st+'">'+(s.st==='fixed'?'Sólido':s.st==='warn'?'Revisar':'Fuga')+'</span></div></div>';
     });
     h+='</div>';
 
-    // plan prioritario: eslabones débiles en orden de cadena (arriba primero)
-    var weak=r.perSec.filter(function(s){return s.st!=='fixed';}); // ya en orden de cadena
-    h+='<div class="res-block-title"><h3>Por dónde empezar</h3><span class="k">Plan priorizado</span></div>';
+    // plan de 90 días
+    var weak=r.perSec.filter(function(s){return s.st!=='fixed';});
+    var nActions=weak.reduce(function(a,s){return a+s.pb.actions.length;},0);
+    h+='<div class="res-block-title"><h3>Tu plan de los próximos 90 días</h3><span class="k">Cómo solucionarlo</span></div>';
     if(weak.length===0){
-      h+='<div class="allgood"><b>Ningún eslabón en fuga.</b> Tu sistema está sólido de arriba abajo. El siguiente movimiento es optimización continua y escalar con datos. Aquí es donde una Auditoría afina los últimos puntos porcentuales.</div>';
+      h+='<div class="allgood"><b>Ningún eslabón en fuga.</b> Tu sistema está sólido de arriba abajo. El siguiente movimiento no es reparar, es optimización continua y escalar con datos: subir presupuesto donde el CPA aguanta, exprimir la experimentación y defender los márgenes. Aquí es donde una auditoría externa afina los últimos puntos porcentuales que a un sistema maduro más le cuestan.</div>';
     } else {
-      h+='<p style="color:var(--ink-2);font-size:15px;margin:-4px 0 18px;max-width:56ch">Ordenado por posición en la cadena: arregla siempre lo de más arriba primero. Reparar la landing con la oferta rota detrás es pintar una pared con la tubería reventada.</p>';
-      h+='<div class="plan">';
-      weak.forEach(function(s,i){
-        var crit=s.st==='leak';
-        h+='<div class="pcard'+(crit?' crit':'')+'"><div class="pcard-top">'
-          +'<span class="pstep">PASO '+(i+1)+'</span>'
-          +'<span class="pill st-'+s.st+'">'+(crit?'Fuga · '+s.pct+'%':'Revisar · '+s.pct+'%')+'</span>'
-          +'<h4>'+esc(s.l)+' · '+esc(s.title)+'</h4></div>'
-          +'<p class="prec">'+esc(s.rec)+'</p>';
-        if(s.gaps.length){
-          h+='<ul class="pgaps">';
-          s.gaps.forEach(function(g){h+='<li class="g'+g.v+'"><span class="gi">'+(g.v===0?'✕':'~')+'</span><span>'+esc(g.q)+'</span></li>';});
-          h+='</ul>';
-        }
+      h+='<p class="plan-lead"><b>'+nActions+' acciones prioritarias</b> en <b>'+weak.length+' de 9 bloques</b>, organizadas en 3 fases. Están ordenadas como lo haría un consultor: de <b>arriba de la cadena hacia abajo</b>, porque reparar la landing con la oferta rota detrás es pintar una pared con la tubería reventada.</p>';
+      PHASES.forEach(function(ph){
+        var inPh=weak.filter(function(s){return s.phase===ph.n;});
+        if(inPh.length===0) return;
+        h+='<div class="phase"><div class="phase-head"><span class="phase-badge">Fase '+ph.n+'</span><h4>'+esc(ph.title)+'</h4><span class="days">'+ph.days+'</span></div>';
+        inPh.forEach(function(s){h+=playbookCard(s);});
         h+='</div>';
       });
-      h+='</div>';
     }
 
     // CTA
     h+='<div class="res-cta"><div class="eyebrow">El siguiente paso</div>'
-      +'<h3>¿Quieres que revisemos estas fugas contigo?</h3>'
-      +'<p>Este diagnóstico lo has hecho tú. En la <b>Auditoría de Adquisición con IA</b> lo hacemos sobre tu sistema real —tus campañas, tu landing, tu CRM— y salimos con un plan concreto. No es una llamada de ventas: es un diagnóstico. Déjanos dónde enviarte el resultado y el enlace para reservar.</p>'
+      +'<h3>¿Quieres este plan ejecutado, no solo diagnosticado?</h3>'
+      +'<p>Acabas de ver dónde están tus fugas y qué hacer con cada una. En la <b>Auditoría de Adquisición con IA</b> cogemos este plan y lo aterrizamos sobre tu sistema real —con tus números, tus campañas y tu CRM— y priorizamos qué mueve la aguja primero. No es una llamada de ventas: es un diagnóstico. Déjanos dónde enviarte el informe completo y el enlace para reservar.</p>'
       +'<div class="res-form"><input type="text" id="rname" placeholder="Tu nombre" autocomplete="name"><input type="email" id="remail" placeholder="Email profesional" autocomplete="email"></div>'
-      +'<div class="res-actions"><button class="btn btn-white" id="send">Enviarme el resultado + reservar <span class="arw">→</span></button>'
-      +'<span class="res-fine" id="sendmsg">Plazas limitadas cada mes · Sin compromiso</span></div>'
-      +'</div>'
-      +'<div class="res-foot"><button class="linkbtn" id="restart">↺ Volver a empezar</button>'
-      +'<span>Analizador de Captación · Qualivo</span></div>'
+      +'<div class="res-actions"><button class="btn btn-white" id="send">Enviarme el informe + reservar <span class="arw">→</span></button>'
+      +'<span class="res-fine" id="sendmsg">Plazas limitadas cada mes · Sin compromiso</span></div></div>'
+      +'<div class="res-foot"><button class="linkbtn" id="restart">↺ Volver a empezar</button><span>Analizador de Captación · Qualivo</span></div>'
       +'</div>';
     return h;
   }
 
+  function execSummary(r){
+    var sorted=r.perSec.slice().sort(function(a,b){return a.pct-b.pct;});
+    var weakest=sorted[0], strongest=sorted[sorted.length-1];
+    var crit=r.perSec.filter(function(s){return s.st==='leak';}).length;
+    var p1='Tu sistema puntúa <b>'+r.score+'/100</b>. Tu eslabón más sólido es <b>'+esc(strongest.title)+'</b> ('+strongest.pct+'%); el más débil, <b>'+esc(weakest.title)+'</b> ('+weakest.pct+'%), que hoy es tu mayor fuga y el punto donde más crecimiento se te está escapando.';
+    var p2;
+    if(r.level==='struct') p2='Con <b>'+r.nNo+' fugas</b> y <b>'+r.nPart+' puntos a medias</b>, el diagnóstico es claro: no es un problema de anuncios, es de sistema. Meter más presupuesto ahora sería echar agua en un cubo agujereado. El plan de abajo empieza por tapar los agujeros, no por abrir el grifo.';
+    else if(r.level==='parts') p2='Tienes <b>'+r.nNo+' fugas</b> y <b>'+r.nPart+' puntos a medias</b>. La estructura existe, pero pierde por las juntas. Antes de escalar el gasto, conviene sellar esas juntas: el mismo presupuesto rendirá bastante más cuando el sistema deje de gotear.';
+    else p2='Solo <b>'+r.nNo+' fugas</b> y <b>'+r.nPart+' puntos a medias</b>: la base es sólida. Aquí el juego es fino — cada punto porcentual que ganes ahora se multiplica al escalar, porque el sistema ya convierte lo que le entra.';
+    var p3='Debajo tienes el plan, en el orden en que lo ejecutaríamos: primero los cimientos y las fugas de dinero inmediato, luego el motor de conversión, y al final la medición y la sistematización que hacen que todo sea predecible mes a mes.';
+    return '<p>'+p1+'</p><p>'+p2+'</p><p>'+p3+'</p>';
+  }
+
+  function playbookCard(s){
+    var crit=s.st==='leak';
+    var speedPill=s.speed==='fast'?'<span class="pill spd-fast">Quick win</span>':'<span class="pill spd-struct">Estructural</span>';
+    var h='<div class="pb '+(crit?'crit':'rev')+'"><div class="pb-head">'
+      +'<span class="pb-l">'+esc(s.l)+'</span><h5>'+esc(s.title)+'</h5>'
+      +'<span class="pb-pills"><span class="pill st-'+s.st+'">'+(crit?'Fuga · '+s.pct+'%':'Revisar · '+s.pct+'%')+'</span>'+speedPill+'</span></div>'
+      +'<div class="pb-sec"><span class="pb-lab">El diagnóstico</span><p class="pb-problem">'+esc(s.pb.problem)+'</p></div>'
+      +'<div class="pb-sec"><span class="pb-lab">Lo que te está costando</span><p class="pb-cost">'+esc(s.pb.cost)+'</p></div>'
+      +'<div class="pb-sec"><span class="pb-lab">El plan de acción</span><ol class="pb-actions">';
+    s.pb.actions.forEach(function(a){h+='<li>'+esc(a)+'</li>';});
+    h+='</ol></div>'
+      +'<div class="pb-foot"><div class="pb-metric"><span class="h">Métrica objetivo</span>'+esc(s.pb.metric)+'</div>'
+      +'<div class="pb-impact"><span class="h">Impacto esperado</span>'+esc(s.pb.impact)+'</div></div>';
+    if(s.gaps.length){
+      h+='<ul class="pb-gaps"><span class="glab">Lo que marcaste como pendiente aquí</span>';
+      s.gaps.forEach(function(g){h+='<li class="gi g'+g.v+'"><span class="m">'+(g.v===0?'✕':'~')+'</span><span>'+esc(g.q)+'</span></li>';});
+      h+='</ul>';
+    }
+    h+='</div>';
+    return h;
+  }
+
   function bindResults(){
-    // animar barras
     requestAnimationFrame(function(){requestAnimationFrame(function(){
       screen.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
     });});
@@ -493,21 +635,18 @@
     if(restart)restart.onclick=function(){answers={};step=0;render();};
     var send=document.getElementById('send');
     if(send)send.onclick=function(){
-      var email=(document.getElementById('remail').value||'').trim();
-      var name=(document.getElementById('rname').value||'').trim();
+      var email=(document.getElementById('remail').value||'').trim(), name=(document.getElementById('rname').value||'').trim();
       var msg=document.getElementById('sendmsg');
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent="Introduce un email válido para enviarte el resultado.";msg.style.color="var(--leak)";document.getElementById('remail').focus();return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent="Introduce un email válido para enviarte el informe.";msg.style.color="var(--leak)";document.getElementById('remail').focus();return;}
       /* === CONECTA AQUÍ tu CRM/automatización (webhook, GHL, Make…) ===
-         Envía: {name, email, score, level, answers, perSec} y dispara la
-         reserva de la Auditoría. Objeto listo en window.__qualivoLead. */
+         window.__qualivoLead trae {name, email, result, answers} listo para POST. */
       window.__qualivoLead={name:name,email:email,result:compute(),answers:answers};
-      send.textContent="¡Enviado! Revisa tu correo ✓"; send.classList.add('btn-primary'); send.disabled=true;
-      msg.textContent="Te llega el resultado y el enlace para reservar tu Auditoría."; msg.style.color="var(--fixed)";
+      send.textContent="¡Enviado! Revisa tu correo ✓";send.classList.add('btn-primary');send.disabled=true;
+      msg.textContent="Te llega el informe completo y el enlace para reservar tu Auditoría.";msg.style.color="var(--fixed)";
     };
   }
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-
   render();
 })();
 </script>
