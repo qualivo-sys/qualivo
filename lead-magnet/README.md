@@ -18,8 +18,9 @@ en vez de otra «Guía de Meta Ads» (hay miles), un **diagnóstico del sistema 
 
 | Archivo | Qué es | Cómo se usa |
 |---|---|---|
-| **`diagnostico-de-captacion.html`** | El lead magnet en sí: documento premium, listo para leer en el navegador o **imprimir a PDF**. Portada, la tesis, el Sistema de 9 eslabones, los 10 errores, las 27 preguntas y casos antes/después. | Ábrelo en el navegador → `Imprimir` → *Guardar como PDF* (A4, ya está maquetado para impresión) y usa ese PDF como entregable descargable. |
-| **`landing.html`** | Landing de descarga con captura de email (nombre, email, empresa) y toda la argumentación de por qué descargarlo. | Publícala como página de atertizaje. Conecta el formulario a tu CRM/automatización (ver abajo). |
+| **`analizador.html`** ⭐ | El lead magnet **interactivo**: una web-app que lleva al usuario bloque a bloque (9 eslabones, 27 preguntas con escala Sí / Parcialmente / No) y al final le devuelve un **diagnóstico personalizado** — índice de madurez (0-100), mapa de fugas por eslabón y un plan priorizado de por dónde empezar. Con captura de email para enviar el resultado + reservar la Auditoría. | Publícala como página. Es la pieza de mayor conversión: el usuario obtiene un resultado propio, no un PDF genérico. Conecta el envío a tu CRM (ver abajo). |
+| **`diagnostico-de-captacion.html`** | La versión **documento** del mismo contenido: premium, listo para leer en el navegador o **imprimir a PDF**. Portada, la tesis, el Sistema de 9 eslabones, los 10 errores, las 27 preguntas y casos antes/después. Sirve como entregable descargable y como pieza para compartir con el equipo. | Ábrelo en el navegador → `Imprimir` → *Guardar como PDF* (A4, ya está maquetado para impresión). |
+| **`landing.html`** | Landing de descarga con captura de email (nombre, email, empresa) y toda la argumentación de por qué descargarlo. | Publícala como página de aterrizaje. Conecta el formulario a tu CRM/automatización (ver abajo). |
 | **`secuencia-emails.md`** | Secuencia de 5 emails: entrega → idea central → prueba → oferta de Auditoría → cierre. | Cárgala en tu herramienta de email marketing / GHL. |
 | **`secuencia-whatsapp.md`** | Secuencia de WhatsApp (4 mensajes + reactivaciones) para el canal de mayor apertura. | Requiere opt-in. Cárgala en tu plataforma de WhatsApp Business. |
 | **`anuncios-y-creatividades.md`** | Anuncios de Meta (3 variantes), anuncio de LinkedIn, guion de vídeo corto para Instagram y **prompt para generar creatividades con IA**. | Material para las campañas que llevan tráfico frío a la landing. |
@@ -32,11 +33,13 @@ en vez de otra «Guía de Meta Ads» (hay miles), un **diagnóstico del sistema 
    ANUNCIOS (Meta · LinkedIn · Reel IG)
         │   ← anuncios-y-creatividades.md
         ▼
-      LANDING  ── captura email/empresa
-        │   ← landing.html
-        ▼
-   DESCARGA DEL DIAGNÓSTICO (el momento "esta gente me entiende")
-        │   ← diagnostico-de-captacion.html
+   ┌────────────────────────────┬───────────────────────────┐
+   │  ANALIZADOR INTERACTIVO     │   LANDING + DESCARGA PDF   │
+   │  (diagnóstico a medida)     │   (documento premium)      │
+   │  ← analizador.html          │   ← landing.html +         │
+   │    captura email al final   │     diagnostico-...html    │
+   └────────────────────────────┴───────────────────────────┘
+        │  el momento "esta gente me entiende de verdad"
         ├───────────────┬───────────────┐
         ▼               ▼                │
    SECUENCIA EMAIL   SECUENCIA WA        │
@@ -45,6 +48,10 @@ en vez de otra «Guía de Meta Ads» (hay miles), un **diagnóstico del sistema 
                         ▼
         AUDITORÍA DE ADQUISICIÓN CON IA  ← la conversión real (reunión)
 ```
+
+> **Recomendación:** usa el **analizador** como lead magnet principal (convierte mejor porque
+> el usuario se lleva un resultado propio) y el **documento/PDF** como pieza de refuerzo y
+> descarga. Ambos comparten contenido y diseño, así que la marca se percibe consistente.
 
 ---
 

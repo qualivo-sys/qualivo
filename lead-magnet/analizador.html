@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analizador de Captación y Ventas — Qualivo</title>
+<meta name="description" content="Analiza tu sistema de captación y ventas en 9 bloques y recibe un diagnóstico personalizado: tu índice de madurez, tus fugas y por dónde empezar. Por Qualivo.">
+<style>
+  :root{
+    --paper:#F3F5F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
+    --ink:#16181D; --ink-2:#5B6470; --ink-3:#8A929C;
+    --line:#DDE2E7; --line-2:#EAEDF0;
+    --signal:#1E3AE0; --signal-tint:#EAEDFF;
+    --leak:#D6363B; --leak-tint:#FCECEC;
+    --fixed:#12855F; --fixed-tint:#E6F5EE;
+    --warn:#B26A00; --warn-tint:#FBF0DF;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#0E1014;--surface:#16191F;--surface-2:#1B1F26;--ink:#EDEFF2;--ink-2:#A2ABB7;--ink-3:#79828E;
+      --line:#272C34;--line-2:#20242B;--signal:#7C97FF;--signal-tint:#1A2140;--leak:#FF6B70;--leak-tint:#2C1719;
+      --fixed:#3FCB93;--fixed-tint:#12271F;--warn:#E4A44B;--warn-tint:#2A2213;}
+  }
+  :root[data-theme="light"]{--paper:#F3F5F7;--surface:#FFFFFF;--surface-2:#FAFBFC;--ink:#16181D;--ink-2:#5B6470;--ink-3:#8A929C;
+    --line:#DDE2E7;--line-2:#EAEDF0;--signal:#1E3AE0;--signal-tint:#EAEDFF;--leak:#D6363B;--leak-tint:#FCECEC;
+    --fixed:#12855F;--fixed-tint:#E6F5EE;--warn:#B26A00;--warn-tint:#FBF0DF;}
+  :root[data-theme="dark"]{--paper:#0E1014;--surface:#16191F;--surface-2:#1B1F26;--ink:#EDEFF2;--ink-2:#A2ABB7;--ink-3:#79828E;
+    --line:#272C34;--line-2:#20242B;--signal:#7C97FF;--signal-tint:#1A2140;--leak:#FF6B70;--leak-tint:#2C1719;
+    --fixed:#3FCB93;--fixed-tint:#12271F;--warn:#E4A44B;--warn-tint:#2A2213;}
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;min-height:100dvh}
+  ::selection{background:var(--signal);color:#fff}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;line-height:1.12;text-wrap:balance;margin:0}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:inline-flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--signal)}
+
+  /* ---- top bar + progress ---- */
+  .top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .top-in{max-width:760px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;letter-spacing:.04em;font-size:13.5px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px var(--signal-tint)}
+  .top-right{display:flex;align-items:center;gap:10px}
+  .step-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+  .toggle{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-radius:100px;padding:6px 11px;cursor:pointer}
+  .toggle:hover{color:var(--ink);border-color:var(--ink-3)}
+  .progress{height:3px;background:var(--line-2);width:100%}
+  .progress .bar{height:100%;background:var(--signal);width:0;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+  /* ---- stage / screen ---- */
+  main{flex:1;display:flex;flex-direction:column}
+  .stage{max-width:760px;margin:0 auto;width:100%;padding:44px 24px 40px;flex:1;display:flex;flex-direction:column}
+  .screen{animation:in .45s cubic-bezier(.2,.7,.2,1)}
+  @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.screen{animation:none}.progress .bar{transition:none}}
+
+  /* ---- intro ---- */
+  .intro-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);background:var(--surface);border:1px solid var(--line);padding:7px 13px;border-radius:100px;margin-bottom:26px}
+  .intro-tag b{width:6px;height:6px;border-radius:50%;background:var(--leak);display:inline-block}
+  .intro h1{font-size:clamp(34px,6vw,54px);letter-spacing:-.025em;line-height:1.02;margin-bottom:20px}
+  .intro h1 em{font-style:italic;color:var(--signal)}
+  .intro .lead{font-family:var(--serif);font-size:clamp(19px,2.6vw,23px);color:var(--ink-2);font-weight:500;max-width:32ch;line-height:1.35;margin-bottom:30px}
+  .intro-facts{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .fact{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px;min-width:120px}
+  .fact .n{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1}
+  .fact .t{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+  .intro-note{font-size:14.5px;color:var(--ink-2);margin:22px 0 0;max-width:52ch;display:flex;gap:10px}
+  .intro-note .i{color:var(--signal);font-family:var(--mono)}
+
+  /* ---- section screen ---- */
+  .sec-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+  .sec-node{width:46px;height:46px;border-radius:12px;border:1.5px solid var(--ink);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;flex:none}
+  .sec-meta .role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:5px}
+  .sec-meta h2{font-size:clamp(24px,3.6vw,32px)}
+  .sec-sub{font-size:15.5px;color:var(--ink-2);margin:14px 0 4px;max-width:58ch}
+
+  .qs{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+  fieldset.q{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px 20px 18px;margin:0}
+  fieldset.q.answered{border-color:color-mix(in srgb,var(--signal) 40%,var(--line))}
+  .q legend{padding:0;display:flex;gap:12px;align-items:flex-start;width:100%}
+  .q .qn{font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px;font-variant-numeric:tabular-nums}
+  .q .qtxt{font-size:16.5px;line-height:1.45;color:var(--ink);font-weight:500}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .seg label{position:relative;cursor:pointer}
+  .seg input{position:absolute;opacity:0;width:0;height:0}
+  .seg .opt{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:14.5px;font-weight:560;color:var(--ink-2);transition:.14s;line-height:1.2}
+  .seg .opt .dm{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-3);flex:none}
+  .seg label:hover .opt{border-color:var(--ink-3);color:var(--ink)}
+  .seg input:focus-visible+.opt{outline:2px solid var(--signal);outline-offset:2px}
+  .seg .v2 input:checked+.opt{background:var(--fixed-tint);border-color:var(--fixed);color:var(--fixed)}
+  .seg .v2 input:checked+.opt .dm{background:var(--fixed);border-color:var(--fixed)}
+  .seg .v1 input:checked+.opt{background:var(--warn-tint);border-color:var(--warn);color:var(--warn)}
+  .seg .v1 input:checked+.opt .dm{background:var(--warn);border-color:var(--warn)}
+  .seg .v0 input:checked+.opt{background:var(--leak-tint);border-color:var(--leak);color:var(--leak)}
+  .seg .v0 input:checked+.opt .dm{background:var(--leak);border-color:var(--leak)}
+
+  /* ---- nav buttons ---- */
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:32px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:16px;font-weight:620;text-decoration:none;border-radius:100px;padding:14px 24px;cursor:pointer;border:1px solid transparent;transition:.15s}
+  .btn .arw{font-family:var(--mono)}
+  .btn-primary{background:var(--signal);color:#fff}
+  .btn-primary:hover{filter:brightness(1.06)}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;filter:none}
+  .btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line)}
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink-3)}
+  .btn-dark{background:var(--ink);color:var(--paper)}
+  .nav-hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
+  :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+  /* ============ RESULTS ============ */
+  .res-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;padding-bottom:8px}
+  .gauge{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none}
+  .gauge::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--surface)}
+  .gauge .inner{position:relative;text-align:center}
+  .gauge .score{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1}
+  .gauge .of{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-top:2px}
+  .res-verdict .lvl-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-bottom:14px}
+  .res-verdict h2{font-size:clamp(25px,4vw,36px);margin-bottom:12px}
+  .res-verdict p{font-size:16px;color:var(--ink-2);max-width:52ch;margin:0}
+
+  .res-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}
+  .rstat{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px}
+  .rstat .n{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1}
+  .rstat .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+  .rstat.leak .n{color:var(--leak)} .rstat.warn .n{color:var(--warn)} .rstat.fixed .n{color:var(--fixed)}
+
+  .res-block-title{display:flex;align-items:baseline;gap:12px;margin:38px 0 18px}
+  .res-block-title h3{font-size:22px}
+  .res-block-title .k{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
+
+  /* map of eslabones */
+  .map{display:flex;flex-direction:column;gap:9px}
+  .row{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+  .row .rl{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--ink-3)}
+  .row .rmid{min-width:0}
+  .row .rname{font-size:15.5px;font-weight:560;margin-bottom:7px}
+  .row .track{height:7px;border-radius:100px;background:var(--line-2);overflow:hidden}
+  .row .fill{height:100%;border-radius:100px;transition:width .8s cubic-bezier(.3,.8,.3,1)}
+  .row .rp{font-family:var(--mono);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pill{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:100px;white-space:nowrap}
+  .st-fixed .fill{background:var(--fixed)} .st-fixed .rp{color:var(--fixed)} .pill.st-fixed{background:var(--fixed-tint);color:var(--fixed)}
+  .st-warn .fill{background:var(--warn)} .st-warn .rp{color:var(--warn)} .pill.st-warn{background:var(--warn-tint);color:var(--warn)}
+  .st-leak .fill{background:var(--leak)} .st-leak .rp{color:var(--leak)} .pill.st-leak{background:var(--leak-tint);color:var(--leak)}
+
+  /* plan */
+  .plan{display:flex;flex-direction:column;gap:14px}
+  .pcard{border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:0 12px 12px 0;background:var(--surface);padding:20px 22px}
+  .pcard.crit{border-left-color:var(--leak)}
+  .pcard-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .pstep{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--signal);letter-spacing:.05em}
+  .pcard.crit .pstep{color:var(--leak)}
+  .pcard h4{font-family:var(--serif);font-size:19px;font-weight:600;margin:0}
+  .pcard .prec{font-size:15.5px;color:var(--ink-2);margin:0 0 12px}
+  .pcard .pgaps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .pcard .pgaps li{display:grid;grid-template-columns:16px 1fr;gap:9px;font-size:14px;color:var(--ink-2)}
+  .pcard .pgaps li .gi{font-family:var(--mono);font-size:12px}
+  .pcard .pgaps li.g0 .gi{color:var(--leak)} .pcard .pgaps li.g1 .gi{color:var(--warn)}
+  .allgood{border:1px solid var(--fixed);background:var(--fixed-tint);border-radius:14px;padding:24px;color:var(--fixed);font-size:16px}
+  .allgood b{color:var(--fixed)}
+
+  /* result CTA */
+  .res-cta{background:var(--ink);color:#fff;border-radius:20px;padding:clamp(28px,5vw,44px);margin-top:40px;position:relative;overflow:hidden}
+  .res-cta::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%);mask-image:radial-gradient(90% 120% at 90% 0%,#000,transparent 70%)}
+  .res-cta>*{position:relative}
+  .res-cta .eyebrow{color:#8FA6FF}.res-cta .eyebrow::before{background:#8FA6FF}
+  .res-cta h3{color:#fff;font-size:clamp(22px,3.4vw,30px);margin:14px 0 12px;max-width:22ch}
+  .res-cta p{color:rgba(255,255,255,.72);max-width:52ch;margin:0 0 22px;font-size:15.5px}
+  .res-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .res-form input{flex:1;min-width:200px;font-family:var(--sans);font-size:15px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:13px 14px}
+  .res-form input::placeholder{color:rgba(255,255,255,.5)}
+  .res-form input:focus{outline:2px solid #8FA6FF;outline-offset:1px}
+  .res-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn-white{background:#fff;color:#14161c}
+  .res-fine{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);margin-top:14px;letter-spacing:.02em}
+  .res-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;margin-top:26px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+  .linkbtn{background:none;border:0;color:var(--ink-2);font-family:var(--mono);font-size:11.5px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;letter-spacing:.03em}
+  .linkbtn:hover{color:var(--ink)}
+
+  @media (max-width:640px){
+    .res-hero{grid-template-columns:1fr;justify-items:start;gap:22px}
+    .res-stats{grid-template-columns:1fr 1fr}
+    .intro-facts .fact{flex:1}
+    .seg{grid-template-columns:1fr}
+    .stage{padding:32px 20px 32px}
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-in">
+    <div class="brand"><span class="dot"></span> QUALIVO</div>
+    <div class="top-right">
+      <span class="step-label" id="stepLabel">Analizador</span>
+      <button class="toggle" id="tg">Tema</button>
+    </div>
+  </div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+</div>
+
+<main><div class="stage"><div id="screen"></div></div></main>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement, tg=document.getElementById('tg');
+  function cur(){return root.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  tg.addEventListener('click',function(){root.dataset.theme=cur()==='dark'?'light':'dark';});
+
+  /* ---------- DATOS: 9 eslabones · 27 preguntas ---------- */
+  var SECTIONS=[
+    {l:"A",role:"El fundamento",title:"Oferta y mercado",
+     sub:"Antes que ningún anuncio: ¿es fácil decirte que sí?",
+     rec:"Reescribe tu oferta hasta que un cliente pueda repetirla sin cambiarla, y ánclala en el valor a lo largo de la relación (LTV), no en el precio.",
+     qs:[
+      "¿Puedes explicar tu oferta en una frase que un cliente repetiría sin cambiarla?",
+      "¿Sabes, con datos, quién es tu mejor cliente y cuánto vale a lo largo de la relación?",
+      "¿Tu oferta es claramente distinta de la del competidor más obvio, más allá del precio?"]},
+    {l:"B",role:"La traducción",title:"Mensaje y creativos",
+     sub:"¿Hablas del problema del cliente o de tu producto?",
+     rec:"Empieza cada mensaje por el problema del cliente y monta un ritmo de prueba de ángulos: mínimo 4 al mes, y quédate con el ganador por dato, no por gusto.",
+     qs:[
+      "¿Tu anuncio nombra el problema del cliente en la primera línea, antes de nombrarte a ti?",
+      "¿Probaste al menos 4 ángulos de mensaje distintos en los últimos 30 días?",
+      "¿Sabes cuál es tu creativo ganador actual y por qué gana (hook, oferta, formato)?"]},
+    {l:"C",role:"El amplificador",title:"Tráfico y canales",
+     sub:"¿Compras atención o solo gastas presupuesto?",
+     rec:"Deja de mirar solo el CPL por canal: mira qué canal trae los leads que cierran. Separa captar demanda existente (búsqueda) de crearla (interrupción) y controla frecuencia y CPM.",
+     qs:[
+      "¿Sabes qué canal te trae los leads que más cierran, no solo los más baratos?",
+      "¿Distingues entre captar demanda existente (búsqueda) y crearla (interrupción)?",
+      "¿Tu frecuencia y tu CPM están bajo control, o el coste sube sin que sepas por qué?"]},
+    {l:"D",role:"La conversión",title:"Landing y conversión",
+     sub:"El dinero más caro se pierde aquí: el que ya pagaste para traer a esa persona.",
+     rec:"Manda el tráfico a una landing con una sola acción (no a la home), mide la conversión visita→lead contra un objetivo, testéala cada trimestre y pide en el formulario solo lo imprescindible.",
+     qs:[
+      "¿Tus anuncios llevan a una landing con una sola acción, no a la home con menú?",
+      "¿Conoces tu tasa de conversión visita → lead y la comparas con un objetivo?",
+      "¿Hiciste algún test (titular, oferta, formulario) sobre la landing este trimestre?",
+      "¿Tu formulario pide solo lo imprescindible para dar el siguiente paso?"]},
+    {l:"E",role:"El registro",title:"CRM y velocidad de respuesta",
+     sub:"La captación termina cuando alguien —o algo— reacciona a tiempo.",
+     rec:"Automatiza la entrada de cada lead al CRM y dispara el primer contacto en minutos: es donde más intención se enfría. Ten visible en qué etapa se atasca cada lead.",
+     qs:[
+      "¿Cada lead entra automáticamente en un CRM, sin pasos manuales que se olvidan?",
+      "¿Tu primer contacto con un lead nuevo ocurre en minutos, no en horas ni al día siguiente?",
+      "¿Sabes en qué etapa se atasca cada lead y cuántos hay parados ahora mismo?"]},
+    {l:"F",role:"La persistencia",title:"Seguimiento y automatización",
+     sub:"«No ahora» no es «no nunca». ¿Tu sistema lo sabe?",
+     rec:"Monta una secuencia de seguimiento (email + WhatsApp) de al menos 5 impactos que no dependa de que alguien se acuerde, y reactiva a los leads antiguos que no cerraron.",
+     qs:[
+      "¿Cada lead recibe una secuencia de seguimiento (email/WhatsApp) sin depender de que alguien se acuerde?",
+      "¿Impactas a un lead al menos 5 veces antes de darlo por perdido?",
+      "¿Reactivas a los leads antiguos que no cerraron, o quedan enterrados en el CRM?"]},
+    {l:"G",role:"El cierre",title:"Ventas y cierre",
+     sub:"Sin datos de vuelta, el resto del sistema optimiza a ciegas.",
+     rec:"Dale a ventas un guion y una cualificación consistentes, registra el motivo de pérdida de cada oportunidad y haz que vuelva a marketing para optimizar hacia quien cierra.",
+     qs:[
+      "¿Tu equipo comercial sigue un guion y un criterio de cualificación consistentes?",
+      "¿Registráis por qué se pierde cada oportunidad, y esa información llega a marketing?",
+      "¿Conoces tu tasa de cierre y sabes si mejora o empeora mes a mes?"]},
+    {l:"H",role:"La verdad",title:"Datos y medición",
+     sub:"Si tu informe no llega hasta el ingreso, no sabes si ganas o pierdes.",
+     rec:"Conecta el dato de punta a punta (€ invertido → lead → reunión → cliente → € facturado), decide por CPA y no por CPL, y reúnelo en un panel único que vean marketing y ventas.",
+     qs:[
+      "¿Puedes seguir la cadena completa: € invertido → lead → reunión → cliente → € facturado?",
+      "¿Miras coste por cliente (CPA) y no solo coste por lead (CPL)?",
+      "¿Tienes un panel único que ve marketing y ventas, con datos en vivo?"]},
+    {l:"I",role:"El bucle",title:"Experimentación continua",
+     sub:"La predictibilidad se construye con pruebas constantes, no con un acierto puntual.",
+     rec:"Instala una cadencia fija de experimentos (semanal o quincenal) y ten siempre el próximo ganador en pruebas antes de que el actual se agote.",
+     qs:[
+      "¿Lanzas experimentos de marketing con una cadencia fija (semanal o quincenal)?",
+      "¿Tienes ya identificado el próximo ganador para cuando el actual se agote?"]}
+  ];
+  var TOTAL_Q=SECTIONS.reduce(function(a,s){return a+s.qs.length;},0); // 27
+
+  /* ---------- ESTADO ---------- */
+  var answers={};           // "A0" -> 0|1|2
+  var step=0;               // 0 intro · 1..9 secciones · 10 resultados
+  var LAST=SECTIONS.length+1;
+  var screen=document.getElementById('screen');
+  var bar=document.getElementById('bar');
+  var stepLabel=document.getElementById('stepLabel');
+
+  function qid(si,qi){return SECTIONS[si].l+qi;}
+  function sectionAnswered(si){
+    for(var i=0;i<SECTIONS[si].qs.length;i++){if(answers[qid(si,i)]===undefined)return false;}
+    return true;
+  }
+  function answeredCount(){return Object.keys(answers).length;}
+
+  function render(){
+    window.scrollTo(0,0);
+    var pct = step===0?0 : step>=LAST?100 : Math.round((answeredCount()/TOTAL_Q)*100);
+    bar.style.width = pct+"%";
+    if(step===0){stepLabel.textContent="Analizador";screen.innerHTML=introHTML();bindIntro();}
+    else if(step>=1 && step<=SECTIONS.length){
+      var si=step-1; stepLabel.textContent="Bloque "+step+" / "+SECTIONS.length;
+      screen.innerHTML=sectionHTML(si); bindSection(si);
+    } else {
+      stepLabel.textContent="Diagnóstico"; screen.innerHTML=resultsHTML(); bindResults();
+    }
+  }
+
+  /* ---------- PANTALLA: INTRO ---------- */
+  function introHTML(){
+    return '<div class="screen intro">'
+      +'<span class="intro-tag"><b></b> Analizador de sistemas · Gratuito</span>'
+      +'<h1>¿Por qué no crece tu <em>sistema</em> de captación y ventas?</h1>'
+      +'<p class="lead">Responde 27 preguntas, bloque a bloque. Al final tendrás un diagnóstico de dónde se te escapa el crecimiento y por dónde empezar.</p>'
+      +'<div class="intro-facts">'
+        +'<div class="fact"><div class="n">27</div><div class="t">Preguntas</div></div>'
+        +'<div class="fact"><div class="n">9</div><div class="t">Bloques del sistema</div></div>'
+        +'<div class="fact"><div class="n">~6 min</div><div class="t">Para completarlo</div></div>'
+      +'</div>'
+      +'<div class="nav" style="padding-top:6px">'
+        +'<span></span>'
+        +'<button class="btn btn-primary" id="start">Empezar el análisis <span class="arw">→</span></button>'
+      +'</div>'
+      +'<p class="intro-note"><span class="i">↳</span><span>Responde con tus números delante. Si no lo mides, marca «No lo sé»: para el diagnóstico, no controlarlo cuenta igual que no tenerlo.</span></p>'
+      +'</div>';
+  }
+  function bindIntro(){document.getElementById('start').onclick=function(){step=1;render();};}
+
+  /* ---------- PANTALLA: SECCIÓN ---------- */
+  function sectionHTML(si){
+    var s=SECTIONS[si];
+    var h='<div class="screen">'
+      +'<div class="sec-head"><div class="sec-node">'+s.l+'</div>'
+      +'<div class="sec-meta"><div class="role">'+esc(s.role)+'</div><h2>'+esc(s.title)+'</h2></div></div>'
+      +'<p class="sec-sub">'+esc(s.sub)+'</p><div class="qs">';
+    for(var i=0;i<s.qs.length;i++){
+      var id=qid(si,i), val=answers[id];
+      var num=globalNum(si,i);
+      h+='<fieldset class="q'+(val!==undefined?' answered':'')+'" id="fs_'+id+'">'
+        +'<legend><span class="qn">'+(num<10?'0':'')+num+'</span><span class="qtxt">'+esc(s.qs[i])+'</span></legend>'
+        +'<div class="seg">'
+          +seg(id,2,"Sí",val)
+          +seg(id,1,"Parcialmente",val)
+          +seg(id,0,"No / No lo sé",val)
+        +'</div></fieldset>';
+    }
+    h+='</div>';
+    var done=sectionAnswered(si);
+    h+='<div class="nav">'
+      +'<button class="btn btn-ghost" id="back"><span class="arw">←</span> Atrás</button>'
+      +(done?'':'<span class="nav-hint" id="hint">Responde los '+s.qs.length+' puntos para continuar</span>')
+      +'<button class="btn btn-primary" id="next" '+(done?'':'disabled')+'>'
+        +(si===SECTIONS.length-1?'Ver mi diagnóstico':'Siguiente bloque')+' <span class="arw">→</span></button>'
+      +'</div></div>';
+    return h;
+  }
+  function seg(id,v,label,val){
+    var checked=val===v?' checked':'';
+    return '<label class="v'+v+'"><input type="radio" name="'+id+'" value="'+v+'"'+checked+'>'
+      +'<span class="opt"><span class="dm"></span>'+label+'</span></label>';
+  }
+  function globalNum(si,qi){var n=0;for(var k=0;k<si;k++)n+=SECTIONS[k].qs.length;return n+qi+1;}
+
+  function bindSection(si){
+    var s=SECTIONS[si];
+    for(var i=0;i<s.qs.length;i++){(function(i){
+      var id=qid(si,i);
+      var radios=screen.querySelectorAll('input[name="'+id+'"]');
+      radios.forEach(function(r){r.addEventListener('change',function(){
+        answers[id]=parseInt(r.value,10);
+        document.getElementById('fs_'+id).classList.add('answered');
+        refreshNav(si);
+      });});
+    })(i);}
+    document.getElementById('back').onclick=function(){step--;render();};
+    document.getElementById('next').onclick=function(){if(sectionAnswered(si)){step++;render();}};
+  }
+  function refreshNav(si){
+    var done=sectionAnswered(si), next=document.getElementById('next'), hint=document.getElementById('hint');
+    next.disabled=!done; if(done&&hint)hint.remove();
+    var pct=Math.round((answeredCount()/TOTAL_Q)*100); bar.style.width=pct+"%";
+  }
+
+  /* ---------- CÁLCULO ---------- */
+  function compute(){
+    var perSec=SECTIONS.map(function(s,si){
+      var max=s.qs.length*2, got=0, gaps=[];
+      for(var i=0;i<s.qs.length;i++){var v=answers[qid(si,i)]||0;got+=v;if(v<2)gaps.push({q:s.qs[i],v:v});}
+      var p=Math.round((got/max)*100);
+      var st=p>=75?'fixed':(p>=40?'warn':'leak');
+      return {l:s.l,title:s.title,role:s.role,rec:s.rec,pct:p,st:st,idx:si,gaps:gaps};
+    });
+    var got=0; for(var k in answers)got+=answers[k];
+    var score=Math.round((got/(TOTAL_Q*2))*100);
+    var nNo=0,nPart=0; for(var kk in answers){if(answers[kk]===0)nNo++;else if(answers[kk]===1)nPart++;}
+    var level = score>=78?'sys' : (score>=45?'parts':'struct');
+    return {perSec:perSec,score:score,level:level,nNo:nNo,nPart:nPart,nYes:TOTAL_Q-nNo-nPart};
+  }
+
+  var LEVELS={
+    sys:{color:'var(--fixed)',tint:'var(--fixed-tint)',pill:'Sistema consolidado',
+      h:'Tienes un sistema, no una apuesta.',
+      p:'Tu cadena de captación está bien construida de punta a punta. Tu palanca ya no es arreglar, es optimización fina y escalar con cabeza sobre lo que funciona. Aun así, revisa los bloques de abajo: incluso un buen sistema tiene un eslabón más flojo que el resto.'},
+    parts:{color:'var(--warn)',tint:'var(--warn-tint)',pill:'Piezas sueltas',
+      h:'Tienes piezas sueltas, todavía no un sistema.',
+      p:'Hay partes que funcionan y partes que fugan. El riesgo: si escalas el gasto ahora, amplificas las fugas antes de amplificar el resultado. Primero se conectan y arreglan los eslabones débiles; después se escala. Tu plan está justo abajo.'},
+    struct:{color:'var(--leak)',tint:'var(--leak-tint)',pill:'Problema estructural',
+      h:'Tu problema no es la publicidad. Es estructural.',
+      p:'Las fugas están repartidas por casi toda la cadena. Cada euro extra en anuncios hoy se desperdicia en gran parte, porque el sistema que rodea al anuncio no está preparado para convertir lo que compra. La buena noticia: sabes exactamente por dónde empezar.'}
+  };
+
+  /* ---------- PANTALLA: RESULTADOS ---------- */
+  function resultsHTML(){
+    var r=compute(), L=LEVELS[r.level];
+    var deg=Math.round(r.score*3.6);
+    var gauge='conic-gradient('+L.color+' '+deg+'deg, var(--line-2) '+deg+'deg)';
+
+    var h='<div class="screen">'
+      +'<div class="eyebrow" style="margin-bottom:22px">Tu diagnóstico de captación</div>'
+      +'<div class="res-hero">'
+        +'<div class="gauge" style="background:'+gauge+'"><div class="inner"><div class="score" style="color:'+L.color+'">'+r.score+'</div><div class="of">/ 100</div></div></div>'
+        +'<div class="res-verdict">'
+          +'<span class="lvl-pill" style="background:'+L.tint+';color:'+L.color+'">'+L.pill+'</span>'
+          +'<h2>'+esc(L.h)+'</h2><p>'+esc(L.p)+'</p>'
+        +'</div>'
+      +'</div>'
+      +'<div class="res-stats">'
+        +'<div class="rstat fixed"><div class="n">'+r.nYes+'</div><div class="t">Sólidos (Sí)</div></div>'
+        +'<div class="rstat warn"><div class="n">'+r.nPart+'</div><div class="t">A medias</div></div>'
+        +'<div class="rstat leak"><div class="n">'+r.nNo+'</div><div class="t">Fugas (No)</div></div>'
+      +'</div>';
+
+    // mapa de eslabones (orden de la cadena)
+    h+='<div class="res-block-title"><h3>Tu sistema, eslabón por eslabón</h3><span class="k">Mapa de fugas</span></div><div class="map">';
+    r.perSec.forEach(function(s){
+      h+='<div class="row st-'+s.st+'"><span class="rl">'+s.l+'</span>'
+        +'<div class="rmid"><div class="rname">'+esc(s.title)+'</div>'
+        +'<div class="track"><div class="fill" style="width:0" data-w="'+s.pct+'"></div></div></div>'
+        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">'
+          +'<span class="rp">'+s.pct+'%</span>'
+          +'<span class="pill st-'+s.st+'">'+(s.st==='fixed'?'Sólido':s.st==='warn'?'Revisar':'Fuga')+'</span>'
+        +'</div></div>';
+    });
+    h+='</div>';
+
+    // plan prioritario: eslabones débiles en orden de cadena (arriba primero)
+    var weak=r.perSec.filter(function(s){return s.st!=='fixed';}); // ya en orden de cadena
+    h+='<div class="res-block-title"><h3>Por dónde empezar</h3><span class="k">Plan priorizado</span></div>';
+    if(weak.length===0){
+      h+='<div class="allgood"><b>Ningún eslabón en fuga.</b> Tu sistema está sólido de arriba abajo. El siguiente movimiento es optimización continua y escalar con datos. Aquí es donde una Auditoría afina los últimos puntos porcentuales.</div>';
+    } else {
+      h+='<p style="color:var(--ink-2);font-size:15px;margin:-4px 0 18px;max-width:56ch">Ordenado por posición en la cadena: arregla siempre lo de más arriba primero. Reparar la landing con la oferta rota detrás es pintar una pared con la tubería reventada.</p>';
+      h+='<div class="plan">';
+      weak.forEach(function(s,i){
+        var crit=s.st==='leak';
+        h+='<div class="pcard'+(crit?' crit':'')+'"><div class="pcard-top">'
+          +'<span class="pstep">PASO '+(i+1)+'</span>'
+          +'<span class="pill st-'+s.st+'">'+(crit?'Fuga · '+s.pct+'%':'Revisar · '+s.pct+'%')+'</span>'
+          +'<h4>'+esc(s.l)+' · '+esc(s.title)+'</h4></div>'
+          +'<p class="prec">'+esc(s.rec)+'</p>';
+        if(s.gaps.length){
+          h+='<ul class="pgaps">';
+          s.gaps.forEach(function(g){h+='<li class="g'+g.v+'"><span class="gi">'+(g.v===0?'✕':'~')+'</span><span>'+esc(g.q)+'</span></li>';});
+          h+='</ul>';
+        }
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+
+    // CTA
+    h+='<div class="res-cta"><div class="eyebrow">El siguiente paso</div>'
+      +'<h3>¿Quieres que revisemos estas fugas contigo?</h3>'
+      +'<p>Este diagnóstico lo has hecho tú. En la <b>Auditoría de Adquisición con IA</b> lo hacemos sobre tu sistema real —tus campañas, tu landing, tu CRM— y salimos con un plan concreto. No es una llamada de ventas: es un diagnóstico. Déjanos dónde enviarte el resultado y el enlace para reservar.</p>'
+      +'<div class="res-form"><input type="text" id="rname" placeholder="Tu nombre" autocomplete="name"><input type="email" id="remail" placeholder="Email profesional" autocomplete="email"></div>'
+      +'<div class="res-actions"><button class="btn btn-white" id="send">Enviarme el resultado + reservar <span class="arw">→</span></button>'
+      +'<span class="res-fine" id="sendmsg">Plazas limitadas cada mes · Sin compromiso</span></div>'
+      +'</div>'
+      +'<div class="res-foot"><button class="linkbtn" id="restart">↺ Volver a empezar</button>'
+      +'<span>Analizador de Captación · Qualivo</span></div>'
+      +'</div>';
+    return h;
+  }
+
+  function bindResults(){
+    // animar barras
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      screen.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
+    });});
+    var restart=document.getElementById('restart');
+    if(restart)restart.onclick=function(){answers={};step=0;render();};
+    var send=document.getElementById('send');
+    if(send)send.onclick=function(){
+      var email=(document.getElementById('remail').value||'').trim();
+      var name=(document.getElementById('rname').value||'').trim();
+      var msg=document.getElementById('sendmsg');
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent="Introduce un email válido para enviarte el resultado.";msg.style.color="var(--leak)";document.getElementById('remail').focus();return;}
+      /* === CONECTA AQUÍ tu CRM/automatización (webhook, GHL, Make…) ===
+         Envía: {name, email, score, level, answers, perSec} y dispara la
+         reserva de la Auditoría. Objeto listo en window.__qualivoLead. */
+      window.__qualivoLead={name:name,email:email,result:compute(),answers:answers};
+      send.textContent="¡Enviado! Revisa tu correo ✓"; send.classList.add('btn-primary'); send.disabled=true;
+      msg.textContent="Te llega el resultado y el enlace para reservar tu Auditoría."; msg.style.color="var(--fixed)";
+    };
+  }
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  render();
+})();
+</script>
+</body>
+</html>
