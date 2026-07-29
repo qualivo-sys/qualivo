@@ -47,19 +47,33 @@ export function newOrderId(): string {
  * de alta sin necesidad de base de datos. Redsys nos devuelve este dato tal
  * cual y la firma garantiza que no ha sido manipulado.
  */
-export function packMerchantData(data: { email: string; name?: string }): string {
-  const json = JSON.stringify({ e: data.email, n: data.name ?? '' });
+export interface BuyerData {
+  email: string;
+  name: string;
+  surname: string;
+  phone: string;
+  country: string;
+}
+
+export function packMerchantData(data: Partial<BuyerData> & { email: string }): string {
+  const json = JSON.stringify({
+    e: data.email,
+    n: data.name ?? '',
+    a: data.surname ?? '',
+    t: data.phone ?? '',
+    c: data.country ?? '',
+  });
   // Ds_MerchantData admite hasta 1024 caracteres.
   return Buffer.from(json, 'utf8').toString('base64').slice(0, 1024);
 }
 
-export function unpackMerchantData(raw?: string): { email: string; name: string } | null {
+export function unpackMerchantData(raw?: string): BuyerData | null {
   if (!raw) return null;
   try {
     const json = Buffer.from(raw, 'base64').toString('utf8');
-    const parsed = JSON.parse(json) as { e?: string; n?: string };
-    if (!parsed.e) return null;
-    return { email: parsed.e, name: parsed.n ?? '' };
+    const p = JSON.parse(json) as { e?: string; n?: string; a?: string; t?: string; c?: string };
+    if (!p.e) return null;
+    return { email: p.e, name: p.n ?? '', surname: p.a ?? '', phone: p.t ?? '', country: p.c ?? '' };
   } catch {
     return null;
   }
