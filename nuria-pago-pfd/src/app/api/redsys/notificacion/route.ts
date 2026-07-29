@@ -16,6 +16,7 @@ import {
 } from '@/lib/redsys';
 import { enrollStudent } from '@/lib/thrivecart';
 import { assertThriveCartConfigured } from '@/lib/config';
+import { sendSaleNotification, formatEuro } from '@/lib/mailer';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -70,19 +71,23 @@ export async function POST(req: Request) {
     return new NextResponse('OK', { status: 200 });
   }
 
+  const amountEuro = formatEuro(params.Ds_Amount);
+
   try {
     const result = await enrollStudent({ email: buyer.email, name: buyer.name });
-    if (result.ok) {
+    const enrolled = result.ok;
+    if (enrolled) {
       console.log(`[notif] ✅ Alta en ThriveCart OK order=${order} email=${buyer.email}`);
-      return new NextResponse('OK', { status: 200 });
+    } else {
+      console.error(`[notif] ⚠️ Fallo alta ThriveCart order=${order} email=${buyer.email} status=${result.status} body=${result.body}`);
     }
-    // Fallo al dar de alta → devolvemos 500 para que Redsys reintente la
-    // notificacion. El alta por email es idempotente, asi que reintentar es
-    // seguro y permite recuperarse de caidas transitorias de ThriveCart.
-    console.error(`[notif] ⚠️ Fallo alta ThriveCart order=${order} email=${buyer.email} status=${result.status} body=${result.body}`);
-    return new NextResponse('Enrollment failed', { status: 500 });
+    // Aviso de venta por email (best-effort: no afecta a la respuesta ni al alta).
+    await sendSaleNotification({ order, buyer, amountEuro, enrolled });
+    // Si el alta fallo, devolvemos 500 para que Redsys reintente (alta idempotente).
+    return new NextResponse(enrolled ? 'OK' : 'Enrollment failed', { status: enrolled ? 200 : 500 });
   } catch (err) {
     console.error(`[notif] ⚠️ Excepcion en alta ThriveCart order=${order} email=${buyer.email}:`, err);
+    await sendSaleNotification({ order, buyer, amountEuro, enrolled: false });
     return new NextResponse('Enrollment error', { status: 500 });
   }
 }

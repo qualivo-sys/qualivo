@@ -34,6 +34,7 @@ export async function POST(req: Request) {
   const surname = clean(data.surname);
   const email = clean(data.email);
   const phone = clean(data.phone);
+  const country = clean(data.country);
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Introduce un email valido.' }, { status: 400 });
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
     DS_MERCHANT_MERCHANTURL: `${config.baseUrl}/api/redsys/notificacion`,
     DS_MERCHANT_URLOK: `${config.baseUrl}/pago/ok?order=${order}`,
     DS_MERCHANT_URLKO: `${config.baseUrl}/pago/ko?order=${order}`,
-    DS_MERCHANT_MERCHANTDATA: packMerchantData({ email, name: titular }),
+    DS_MERCHANT_MERCHANTDATA: packMerchantData({ email, name, surname, phone, country }),
   };
 
   try {
