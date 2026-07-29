@@ -30,8 +30,8 @@ export async function enrollStudent(params: {
   const { apiToken, courseId, apiBase } = config.thrivecart;
 
   // Ruta del endpoint de alta. Ajustable por env si la referencia oficial
-  // usa otra (p.ej. '/learn/students' o '/courses/students').
-  const path = process.env.THRIVECART_ENROLL_PATH ?? '/learn/access';
+  // usa otra. Endpoint oficial confirmado: POST /api/external/students
+  const path = process.env.THRIVECART_ENROLL_PATH ?? '/students';
   const url = `${apiBase}${path}`;
 
   const payload: Record<string, string> = {
