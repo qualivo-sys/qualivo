@@ -121,6 +121,92 @@ Maikel
 
 ---
 
+## FORMACIÓN (academias / centros de formación)
+
+### Mensaje 1 · Día 0 — Curiosidad
+**Asunto:** dónde se escapan matrículas en {{company_name}}
+
+Buenos días, soy Maikel.
+
+Ayudo a academias y centros de formación a aprovechar mejor los alumnos potenciales
+que ya generan.
+
+Lo que suelo ver es que las matrículas no se pierden en un único punto, sino a lo largo
+de todo el proceso: desde que alguien pide información de un curso hasta que se matricula
+o repite en la siguiente convocatoria.
+
+Por eso hago una radiografía completa del proceso, identifico los puntos de fuga y os
+entrego un plan de mejora antes de que decidáis si tiene sentido trabajar juntos.
+
+¿Creéis que os podría aportar valor una revisión así?
+
+Un saludo,
+Maikel
+
+### Follow-up 1 · Día +3 — Insight (mismo hilo)
+Buenos días, os escribo de nuevo sobre el mensaje anterior.
+
+Algo que suelo ver: las academias saben cuántas personas piden información y cuántas se
+matriculan, pero muy pocas saben exactamente en qué fase se pierden las demás.
+
+Y cuando identificas esa fase, normalmente no hace falta captar más interesados, sino
+mejorar ese punto concreto.
+
+¿Lo tenéis medido?
+
+### Follow-up 2 · Día +6 — Patrón + Propuesta (mismo hilo)
+Buenos días, esta semana revisé el proceso de otra academia y el problema no era la
+publicidad: muchos interesados pedían información de un curso pero no recibían
+seguimiento hasta la fecha de matrícula, y acababan posponiéndolo "para la próxima".
+
+Son fugas que pasan desapercibidas hasta que alguien analiza todo el recorrido.
+
+Si os parece, preparo una radiografía de vuestro proceso y os señalo los principales
+puntos de mejora. Si luego tiene sentido trabajar juntos, perfecto; y si no, os quedáis
+con una hoja de ruta clara.
+
+¿Os encajaría?
+
+### Follow-up 3 · Día +9 — Breakup (mismo hilo)
+No quiero ser pesado, así que lo dejo aquí.
+
+Si en algún momento queréis ver dónde se escapan matrículas en el proceso, respondedme
+y os preparo la radiografía. Mucho éxito con la próxima convocatoria 🎓
+
+Maikel
+
+---
+
+## LINKEDIN (HeyReach) — ángulo "radiografía"
+
+Adaptar `{{firstName}}` `{{companyName}}` al vertical. Reemplaza la copy anterior
+("sistema que aprende"). Se pega en HeyReach (la API no edita campaña ya iniciada →
+crear campaña nueva o pegar a mano).
+
+### Nota de invitación (máx. 300 car.)
+Hola {{firstName}}, ayudo a {SECTOR} a ver dónde se les escapan oportunidades en todo
+el proceso comercial y les entrego una radiografía con los puntos de fuga, gratis. Me
+gustaría conectar y, si te encaja, comentarte una idea. Un saludo, Maikel
+
+*(SECTOR = "academias" / "clínicas" / "empresas de reformas" según campaña.)*
+
+### Mensaje 1 (al aceptar, +1 día)
+Gracias por conectar, {{firstName}}.
+
+Te escribo directo: hago una radiografía del proceso comercial de {{companyName}} —de
+cómo entra un interesado hasta que compra o repite— y te entrego un plan con los puntos
+de fuga concretos, gratis y antes de decidir nada.
+
+¿Te encajaría echarle un ojo?
+
+### Mensaje 2 (+3 días, si no responde)
+{{firstName}}, ¿pudiste verlo?
+
+Si te va mejor, te señalo por aquí un par de fases donde se suelen escapar
+oportunidades en {{companyName}}, sin necesidad de llamada. Tú me dices.
+
+---
+
 ## Notas de montaje
 - **Voz única "yo"** en toda la secuencia (nada de "nosotros/vemos").
 - Email 1 sin links (mejor entregabilidad); a partir del FU se puede añadir Calendly.
