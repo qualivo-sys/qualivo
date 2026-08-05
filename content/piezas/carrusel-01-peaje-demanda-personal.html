@@ -1,0 +1,253 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrusel 01 · El nuevo peaje de la demanda — Marca personal (Maikel)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy-800:#0F2540;
+    --navy-900:#0B1C33;
+    --teal:#27BDB1;
+    --yellow:#F4CC38;
+    --indigo:#4E4FB8;
+    --ink-100:#F3F7FB;
+    --ink-300:#C7D3E0;
+    --ink-500:#8FA3B8;
+
+    --board-w:1080px;
+    --board-h:1350px;
+    --safe:108px;
+
+    --font:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+    /* Foto de perfil: sustituye la URL por tu foto en base64 (data:image/...) */
+    --avatar:none;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    font-family:var(--font);
+    background:#070f1c; color:var(--ink-100);
+    -webkit-font-smoothing:antialiased;
+    padding:48px 24px 96px;
+  }
+
+  .page-head{ max-width:1080px; margin:0 auto 40px; padding:0 8px; }
+  .page-head h1{ font-size:26px; font-weight:800; letter-spacing:-0.01em; color:#fff; }
+  .page-head p{ margin-top:10px; font-size:15px; line-height:1.6; color:var(--ink-500); max-width:70ch; }
+  .page-head .hint{
+    margin-top:16px; font-size:13px; color:var(--ink-300);
+    background:rgba(39,189,177,.08); border:1px solid rgba(39,189,177,.25);
+    border-radius:10px; padding:12px 16px; max-width:70ch;
+  }
+  .page-head code{ color:var(--yellow); font-family:ui-monospace,monospace; font-size:12px; }
+
+  .strip{ display:flex; flex-direction:column; align-items:center; gap:56px; }
+  .slide-wrap{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .slide-tag{ font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-500); }
+
+  .board{
+    position:relative;
+    width:var(--board-w); height:var(--board-h);
+    background:var(--navy-800); overflow:hidden;
+    display:flex; flex-direction:column; padding:var(--safe);
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+  }
+  .board--deep{ background:var(--navy-900); }
+  .board::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:8px;
+    background:linear-gradient(90deg,var(--teal) 0%, var(--teal) 40%, var(--yellow) 100%);
+  }
+
+  .nodes{ position:absolute; top:70px; right:78px; width:200px; height:140px; opacity:.9; pointer-events:none; }
+
+  /* Firma personal: avatar + nombre */
+  .brand{ display:flex; align-items:center; gap:18px; margin-bottom:auto; }
+  .brand .avatar{
+    width:76px; height:76px; border-radius:50%;
+    background:linear-gradient(150deg,var(--teal),var(--indigo));
+    background-image:var(--avatar); background-size:cover; background-position:center;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:34px; color:#fff;
+    border:3px solid rgba(255,255,255,.85); flex:none;
+  }
+  .brand .who{ display:flex; flex-direction:column; line-height:1.1; }
+  .brand .who .name{ font-weight:900; font-size:30px; letter-spacing:-0.01em; color:#fff; }
+  .brand .who .role{ font-weight:600; font-size:19px; color:var(--teal); margin-top:4px; }
+
+  .content{ display:flex; flex-direction:column; justify-content:center; flex:1; }
+
+  .eyebrow{ font-size:26px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); margin-bottom:34px; }
+  .headline{ font-size:88px; line-height:1.02; font-weight:900; letter-spacing:-0.02em; color:#fff; text-wrap:balance; }
+  .headline.sm{ font-size:72px; }
+  .support{ margin-top:40px; font-size:38px; line-height:1.32; font-weight:500; color:var(--ink-300); max-width:22ch; }
+
+  .hl{ background:var(--yellow); color:var(--navy-900); padding:2px 16px; border-radius:8px;
+       box-decoration-break:clone; -webkit-box-decoration-break:clone; font-weight:900; }
+  .hl-text{ color:var(--yellow); font-weight:900; }
+
+  .foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:40px;
+         font-size:20px; color:var(--ink-500); font-weight:600; }
+  .foot .idx{ letter-spacing:.1em; }
+
+  .data{ display:flex; flex-direction:column; gap:26px; margin-top:20px; }
+  .data-row{ display:flex; align-items:baseline; justify-content:space-between; gap:24px;
+             padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,.12); }
+  .data-row .who2{ font-size:40px; font-weight:800; color:#fff; }
+  .data-row .val{ font-size:40px; font-weight:900; color:var(--teal); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .data-row .val em{ font-style:normal; color:var(--yellow); }
+  .disclaimer{ margin-top:34px; font-size:26px; line-height:1.4; color:var(--ink-500); font-weight:500; max-width:32ch; }
+
+  /* CTA seguir */
+  .follow{
+    display:inline-flex; align-items:center; gap:16px; align-self:flex-start; margin-top:48px;
+    background:var(--yellow); color:var(--navy-900);
+    font-size:40px; font-weight:900; letter-spacing:-0.01em; padding:24px 46px; border-radius:16px;
+  }
+  .follow .plus{ font-size:44px; line-height:1; }
+  .handle{ margin-top:34px; font-size:34px; font-weight:800; color:var(--ink-100); letter-spacing:.01em; }
+
+  @media (max-width:1160px){
+    .board{ zoom:.42; }
+    .page-head h1{ font-size:22px; }
+  }
+</style>
+
+<div class="page-head">
+  <h1>Carrusel 01 — «El nuevo peaje de la demanda» · versión marca personal</h1>
+  <p>Pieza 1 del plan editorial de agosto, firmada desde tu marca personal (primera persona). 7 tarjetas para Instagram, 1080×1350. Mismo sistema visual, sin Qualivo/HackTheLead.</p>
+  <div class="hint">
+    <strong>Tu foto:</strong> ahora hay un avatar con tu inicial. Cuando me pases tu foto, la incrusto en la variable CSS <code>--avatar</code> (queda como <code>url("data:image/...")</code>) y aparece en portada, prueba y CTA.<br>
+    <strong>Handle:</strong> el pie pone tu nombre. Si me das tu usuario de IG/LinkedIn, lo añado.<br>
+    <strong>Exportar:</strong> abre en el navegador y captura cada artboard al 100%.
+  </div>
+</div>
+
+<div class="strip">
+
+  <!-- SLIDE 1 · Portada -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 1 / 7 · Portada</div>
+    <div class="board">
+      <svg class="nodes" viewBox="0 0 200 140" fill="none">
+        <line x1="25" y1="28" x2="110" y2="66" stroke="#27BDB1" stroke-width="1.5" opacity=".5"/>
+        <line x1="110" y1="66" x2="175" y2="32" stroke="#F4CC38" stroke-width="1.5" opacity=".5"/>
+        <line x1="110" y1="66" x2="72" y2="122" stroke="#27BDB1" stroke-width="1.5" opacity=".4"/>
+        <circle cx="25" cy="28" r="7" fill="#27BDB1"/>
+        <circle cx="110" cy="66" r="9" fill="#F4CC38"/>
+        <circle cx="175" cy="32" r="7" fill="#27BDB1"/>
+        <circle cx="72" cy="122" r="6" fill="#F4CC38"/>
+      </svg>
+      <div class="brand">
+        <span class="avatar">M</span>
+        <span class="who"><span class="name">Maikel Echevarria</span><span class="role">Captación con IA</span></span>
+      </div>
+      <div class="content">
+        <div class="eyebrow">Captación · 2026</div>
+        <div class="headline">Durante 20 años, la demanda pasó por un solo peaje: Google.</div>
+        <div class="support">Acaba de abrirse <span class="hl">otro</span>.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">Desliza →</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 2 / 7</div>
+    <div class="board board--deep">
+      <div class="content">
+        <div class="headline">Cada vez más gente ya no busca.<br><span class="hl-text">Pregunta.</span></div>
+        <div class="support">La compra empieza dentro de una conversación con un asistente de IA.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">2 / 7</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 3 / 7</div>
+    <div class="board">
+      <div class="content">
+        <div class="headline">Y donde se decide la compra, aparecen los anuncios.</div>
+        <div class="support">Se abre un canal de captación nuevo. Con ventana para quien <span class="hl">llega primero</span>.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">3 / 7</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 4 / 7</div>
+    <div class="board board--deep">
+      <div class="content">
+        <div class="headline sm">El anuncio deja de depender de una palabra clave.</div>
+        <div class="support">Ahora se coloca por contexto, dentro de la conversación. Tu catálogo se convierte en el anuncio.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">4 / 7</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 · La regla -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 5 / 7 · El giro</div>
+    <div class="board">
+      <div class="content">
+        <div class="eyebrow">Lo que no cambia</div>
+        <div class="headline sm">Gana quien llega con el <span class="hl">catálogo limpio</span>.</div>
+        <div class="support">Naming, atributos, imágenes. La IA amplifica lo que ya está bien montado. También el desorden.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">5 / 7</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 · Prueba (datos honestos, 1ª persona) -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 6 / 7 · Prueba</div>
+    <div class="board board--deep">
+      <div class="brand">
+        <span class="avatar">M</span>
+        <span class="who"><span class="name">Maikel Echevarria</span><span class="role">Cuentas reales</span></span>
+      </div>
+      <div class="content">
+        <div class="eyebrow">No es teoría</div>
+        <div class="headline sm">Son cuentas en las que trabajo cada día.</div>
+        <div class="data">
+          <div class="data-row"><span class="who2">FEMXA</span><span class="val">8.216 conversiones</span></div>
+          <div class="data-row"><span class="who2">BelloVinilo</span><span class="val">3.600&nbsp;€ → 30.000&nbsp;€ <em>(8×)</em></span></div>
+          <div class="data-row"><span class="who2">Nuria Roure</span><span class="val">2.000&nbsp;€ → 12.600&nbsp;€</span></div>
+        </div>
+        <div class="disclaimer">Resultados de cuentas que gestionamos. No es una promesa de lo que conseguirás tú.</div>
+      </div>
+      <div class="foot"><span>Maikel Echevarria</span><span class="idx">6 / 7</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 · CTA Seguir -->
+  <div class="slide-wrap">
+    <div class="slide-tag">Tarjeta 7 / 7 · CTA</div>
+    <div class="board">
+      <svg class="nodes" viewBox="0 0 200 140" fill="none">
+        <line x1="25" y1="28" x2="110" y2="66" stroke="#27BDB1" stroke-width="1.5" opacity=".5"/>
+        <line x1="110" y1="66" x2="175" y2="32" stroke="#F4CC38" stroke-width="1.5" opacity=".5"/>
+        <circle cx="25" cy="28" r="7" fill="#27BDB1"/>
+        <circle cx="110" cy="66" r="9" fill="#F4CC38"/>
+        <circle cx="175" cy="32" r="7" fill="#27BDB1"/>
+      </svg>
+      <div class="brand">
+        <span class="avatar">M</span>
+        <span class="who"><span class="name">Maikel Echevarria</span><span class="role">Captación con IA</span></span>
+      </div>
+      <div class="content">
+        <div class="headline sm">Sígueme para no perderte cómo cambia la captación con IA.</div>
+        <div class="follow"><span class="plus">＋</span> Seguir</div>
+        <div class="handle">@ Maikel Echevarria</div>
+      </div>
+      <div class="foot"><span>Cada semana, lo que de verdad mueve leads</span><span class="idx">7 / 7</span></div>
+    </div>
+  </div>
+
+</div>
