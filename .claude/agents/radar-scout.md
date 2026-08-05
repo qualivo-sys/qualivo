@@ -51,8 +51,8 @@ haz `notion-fetch` para confirmar el esquema y la URL del data source vigente.
 | `Idea contenido` | Borrador de ángulo (post LinkedIn/IG/blog). |
 | `Lead magnet` | Idea de lead magnet derivada, si aplica. |
 | `Comentario IG` | Comentario listo copiar-pegar, si aplica. |
-| `URL` | Enlace a la fuente. |
-| `Fecha` | Fecha de la noticia. |
+| `URL` | Enlace a la fuente. Al escribir con `notion-create-pages`, usa la clave interna **`userDefined:URL`** (no `"URL"`, que da validation_error). |
+| `Fecha` | Fecha de la noticia. Usa la propiedad expandida `date:Fecha:start` (formato ISO `YYYY-MM-DD`). |
 
 ---
 
