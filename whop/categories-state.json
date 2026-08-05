@@ -1,0 +1,67 @@
+{
+  "courses": {
+    "c1": {
+      "courseId": "cors_1JiJGATlPFYTe",
+      "chapters": {
+        "Outbound": "chap_g9EkwpcQxOpvI",
+        "ABM": "chap_Xv8PWOg2AVgfJ",
+        "LinkedIn": "chap_1B6VOUcACRHV2",
+        "Email": "chap_WlmVyQ043S5hJ",
+        "Auditorías IA": "chap_YJew0fqh2W7w2"
+      },
+      "defaultCleaned": true
+    },
+    "c2": {
+      "courseId": "cors_t0Jy3lsTXnwer",
+      "chapters": {
+        "CRM": "chap_RCX3UDX48BTQG",
+        "Follow-ups": "chap_cg8etSOcYj0Em",
+        "Lead Scoring": "chap_W0MNgougzzSOK",
+        "IA": "chap_KCBDB53qL3svN"
+      },
+      "defaultCleaned": true
+    },
+    "c3": {
+      "courseId": "cors_oaxQGGh0oqshy",
+      "chapters": {
+        "Claude Code": "chap_yMHKXfPmzfvUW",
+        "Cursor": "chap_fxd1ri3oe4eUx",
+        "MCP": "chap_CdOifKZUgDrGY",
+        "OpenAI": "chap_o1yhjlU3W4RmN",
+        "n8n": "chap_OP1AyamjLj8Ig"
+      },
+      "defaultCleaned": true
+    },
+    "c4": {
+      "courseId": "cors_3QFpbTKnh9gyo",
+      "chapters": {
+        "Finanzas": "chap_nSL49apmwLjKa",
+        "RRHH": "chap_wJX6Dp7GgQ8rV",
+        "Operaciones": "chap_10TUb59loy7Zc",
+        "Customer Success": "chap_YwxbOb0sQLM3U"
+      },
+      "defaultCleaned": true
+    },
+    "c5": {
+      "courseId": "cors_XsnVkkE9xqzWZ",
+      "chapters": {
+        "Python": "chap_7hgz7KphRzyf9",
+        "APIs": "chap_S4Qh9q7Lxz9eP",
+        "Docker": "chap_jMaARiJWVWvLQ",
+        "GitHub": "chap_pIkBgFTf1UAo7",
+        "Bases de datos": "chap_95isrPdjvRSjH"
+      },
+      "defaultCleaned": true
+    },
+    "c6": {
+      "courseId": "cors_LGJ6AfYNAW4e0",
+      "chapters": {
+        "Notion": "chap_Xvb9fiWvowOde",
+        "Sistemas": "chap_XL4dnxRZN8k5l",
+        "SOPs": "chap_0FSgel928a5Rv",
+        "IA personal": "chap_zoA0eI7R762Lz"
+      },
+      "defaultCleaned": true
+    }
+  }
+}

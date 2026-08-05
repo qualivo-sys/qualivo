@@ -1,0 +1,11 @@
+{
+  "id": "AAAA-wNN-slug-corto",
+  "category": "c3",
+  "chapter": "Claude Code",
+  "title": "Título de la lección tal como lo verá el miembro",
+  "video": "",
+  "resources": [
+    { "label": "Template · nombre del activo", "url": "https://..." },
+    { "label": "Repo / agente / workflow", "url": "https://..." }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "2026-w31-sdr-claude-code",
+  "category": "c3",
+  "chapter": "Claude Code",
+  "title": "SDR digital con Claude Code: de cero a un agente que prospecta",
+  "video": "",
+  "resources": [
+    { "label": "Template · prompt maestro del SDR", "url": "https://ejemplo.com/reemplazar-template" },
+    { "label": "Repo del agente (GitHub)", "url": "https://github.com/ejemplo/reemplazar-repo" }
+  ]
+}
