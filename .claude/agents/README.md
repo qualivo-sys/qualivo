@@ -9,7 +9,7 @@ clonar.
 | Agente | Para qué sirve |
 |---|---|
 | `chief-content-officer` | Chief Content Officer del ecosistema (Qualivo, Hack the Prompt, Agentome). Convierte el trabajo real en activos de contenido: propone contenido, diseña estrategia editorial, decide qué documentar y reutiliza cada pieza en varios formatos. Piensa como el CCO de Notion/Linear/Stripe. Nunca propone por tendencias: parte de lo que realmente construimos. |
-| `radar-scout` | Feeder del Radar IA. Mantiene fresca la base de datos "📡 Radar IA Marketing" en Notion: rastrea las noticias de IA relevantes de la semana, las puntúa, las mapea a clientes y escribe los hallazgos. Es la fuente de contexto que consume el `chief-content-officer`. Pensado para correr semanalmente (programado). |
+| `radar-scout` | Feeder del Radar IA. Mantiene fresca la base de datos "📡 Radar IA Marketing" en Notion: rastrea las noticias de IA relevantes de la semana, las puntúa, las mapea a clientes y escribe los hallazgos. Es la fuente de contexto que consume el `chief-content-officer`. Corre a diario (programado) para que el radar no caduque. |
 
 ## Uso dentro de este repo
 

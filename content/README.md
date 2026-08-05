@@ -27,7 +27,8 @@ weekly-digest.sh ──► build log ──────┘        (cruza ambas f
 
 El [`radar-scout`](../.claude/agents/radar-scout.md) mantiene fresco el radar
 (rastrea, puntúa y escribe hallazgos en Notion). Sin él, el radar caduca y el CCO
-lee contexto viejo. Está pensado para correr programado cada semana.
+lee contexto viejo. Corre programado **a diario** (mira desde la última entrada
+hasta hoy, así nunca duplica ni se queda atrás).
 
 ## Flujo semanal
 

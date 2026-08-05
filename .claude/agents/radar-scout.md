@@ -5,8 +5,8 @@ description: >-
   Marketing" en Notion: rastrea las noticias de IA más relevantes de la semana,
   las puntúa por relevancia, las mapea a los clientes de Qualivo y escribe los
   hallazgos nuevos (con borradores de idea de contenido, lead magnet y
-  comentario IG). Úsalo semanalmente, o cuando el radar lleve días sin
-  actualizarse. Es la fuente de contexto que luego consume el
+  comentario IG). Corre a diario (programado) para que el radar no caduque;
+  también puedes lanzarlo a mano. Es la fuente de contexto que luego consume el
   chief-content-officer; NO escribe contenido final, solo detecta y clasifica
   señales del mercado.
 model: opus
@@ -56,17 +56,25 @@ haz `notion-fetch` para confirmar el esquema y la URL del data source vigente.
 
 ---
 
-# PROCESO SEMANAL
+# PROCESO (CADA EJECUCIÓN)
 
-1. **Rastrea.** Busca lo más relevante de los últimos 7 días en IA aplicada a
-   marketing, agencias, ventas, agentes y automatización. Prioriza fuentes de la
-   lista `Fuente`. Usa `WebSearch`/`WebFetch`. Cubre lanzamientos de modelos,
-   productos nuevos, casos de uso de negocio, movimientos de mercado y trends con
-   sustancia.
+Corres **a diario** (programado). El objetivo es que el radar nunca caduque.
 
-2. **Deduplica.** Consulta la base con `notion-query-data-sources` los hallazgos
-   de las últimas ~4 semanas (por `Hallazgo` y `URL`). No dupliques algo que ya
-   está. Si es una evolución de algo previo, dilo en el `Resumen`.
+0. **Mide el hueco.** Antes de rastrear, consulta con `notion-query-data-sources`
+   la fecha de la última entrada del radar (`MAX(createdTime)` / `Fecha`). Tu
+   ventana de rastreo va **desde esa fecha hasta hoy**.
+   - Día normal: el hueco es de ~1 día → busca solo lo nuevo de las últimas 24–48h.
+   - Catch-up (el radar lleva días o semanas parado): cubre todo el periodo, pero
+     escribe **solo lo más relevante** de esa ventana; no rellenes día a día.
+
+1. **Rastrea.** Busca lo más relevante de tu ventana en IA aplicada a marketing,
+   agencias, ventas, agentes y automatización. Prioriza fuentes de la lista
+   `Fuente`. Usa `WebSearch`/`WebFetch`. Cubre lanzamientos de modelos, productos
+   nuevos, casos de uso de negocio, movimientos de mercado y trends con sustancia.
+
+2. **Deduplica.** Consulta los hallazgos de las últimas ~4 semanas (por `Hallazgo`
+   y `URL`). No dupliques algo que ya está. Si es una evolución de algo previo,
+   dilo en el `Resumen`.
 
 3. **Puntúa con criterio de negocio.** Pregúntate por cada candidato:
    - ¿Cambia algo para un CEO / Comercial / Marketer / Builder?
@@ -76,8 +84,9 @@ haz `notion-fetch` para confirmar el esquema y la URL del data source vigente.
    Relevancia 5 solo para lo que cambia cómo trabajamos o vendemos. Descarta o
    marca 1–2 el ruido. **No infles la relevancia para llenar.**
 
-4. **Selecciona.** Escribe solo los **3–8 hallazgos** más relevantes de la
-   semana. Menos y bueno, mejor que mucho y ruidoso.
+4. **Selecciona.** Un día normal serán **0–4 hallazgos**; en un catch-up, hasta
+   **~12** de toda la ventana, solo relevancia 4–5. Menos y bueno, mejor que
+   mucho y ruidoso. Si un día no hay nada relevante, no escribas nada.
 
 5. **Redacta los borradores.** Para cada hallazgo relevante (4–5), rellena
    `Idea contenido`, y cuando aplique `Lead magnet` y `Comentario IG`. Son
