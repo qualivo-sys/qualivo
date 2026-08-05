@@ -17,6 +17,18 @@ El contenido con más autoridad vive en la **intersección**: una noticia del
 radar conectada con algo que ya hicimos. El radar nunca decide solo qué se
 publica; si un hallazgo no se ancla a trabajo real o a un cliente, es ruido.
 
+### El bucle completo
+
+```
+radar-scout ──► Radar IA (Notion) ──┐
+ (feeder semanal)                    ├──► chief-content-officer ──► contenido
+weekly-digest.sh ──► build log ──────┘        (cruza ambas fuentes)
+```
+
+El [`radar-scout`](../.claude/agents/radar-scout.md) mantiene fresco el radar
+(rastrea, puntúa y escribe hallazgos en Notion). Sin él, el radar caduca y el CCO
+lee contexto viejo. Está pensado para correr programado cada semana.
+
 ## Flujo semanal
 
 ```bash
