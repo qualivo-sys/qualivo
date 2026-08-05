@@ -4,6 +4,19 @@ Espacio de trabajo del [`chief-content-officer`](../.claude/agents/chief-content
 La idea es simple: **no creamos contenido, documentamos lo que construimos.**
 Cada commit, PR, cliente cerrado o error resuelto es materia prima.
 
+## Las dos fuentes
+
+El contenido nace del cruce de dos fuentes, nunca de una sola:
+
+1. **Build log (git)** — qué construimos de verdad. Es el driver. → `weekly-digest.sh`
+2. **Radar IA (Notion)** — de qué habla el mercado ahora. Es solo contexto y
+   timing. → base de datos **"📡 Radar IA Marketing"** en `QUALIVO — HQ`,
+   alimentada por el `agente-radar-ia-marketing` (n8n).
+
+El contenido con más autoridad vive en la **intersección**: una noticia del
+radar conectada con algo que ya hicimos. El radar nunca decide solo qué se
+publica; si un hallazgo no se ancla a trabajo real o a un cliente, es ruido.
+
 ## Flujo semanal
 
 ```bash
@@ -14,8 +27,10 @@ bash content/weekly-digest.sh 14 all   # 14 días, todo el equipo
 # 2. Pásaselo al CCO:
 ```
 
-> Actúa como el `chief-content-officer`. Aquí está el digest de la semana.
-> Elige los 2–3 ángulos con más potencial y devuélvemelos con los 8 puntos.
+> Actúa como el `chief-content-officer`. Aquí está el build log de la semana.
+> Crúzalo con el Radar IA (Notion, relevancia 4–5) y dame los 2–3 ángulos con
+> más potencial, con los 8 puntos. Prioriza los que conecten una noticia del
+> radar con algo que ya construimos.
 
 El agente traduce el detalle técnico a lenguaje de negocio, decide a qué empresa
 del ecosistema alimenta cada pieza y propone cómo reutilizarla en newsletter,
