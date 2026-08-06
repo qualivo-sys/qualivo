@@ -127,7 +127,7 @@ async function fetchAppointments(since, until) {
       const j = await ghl(`/calendars/events?locationId=${encodeURIComponent(loc)}&calendarId=${cal.id}&startTime=${startMs}&endTime=${endMs}`);
       (j.events || []).forEach((e) => {
         const date = (e.startTime || '').slice(0, 10);
-        out.push({ date, status: String(e.appointmentStatus || e.appoinmentStatus || '').toLowerCase(), assignedUserId: e.assignedUserId, calendar: cal.name });
+        out.push({ date, status: String(e.appointmentStatus || e.appoinmentStatus || '').toLowerCase(), assignedUserId: e.assignedUserId, contactId: e.contactId, calendar: cal.name });
       });
     } catch { /* calendario sin permiso o vacío */ }
   }
@@ -206,7 +206,7 @@ async function build() {
     const raw = await fetchAppointments('2026-05-01', apUntil);
     appts = raw.filter((a) => a.date).map((a) => ({
       date: a.date, semana: weekMonday(a.date), mes: a.date.slice(0, 7),
-      comercial: users[a.assignedUserId] || '(sin asignar)', status: a.status, calendar: a.calendar
+      comercial: users[a.assignedUserId] || '(sin asignar)', status: a.status, contacto: a.contactId || '', calendar: a.calendar
     }));
   } catch { appts = []; }
 

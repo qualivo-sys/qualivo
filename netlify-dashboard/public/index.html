@@ -114,7 +114,7 @@
   <h2>Citas / Entrevistas (bookings)</h2>
   <div id="kpisCita" class="kpis"></div>
   <table id="tCita"></table>
-  <div class="foot">Fuente: calendarios de GHL (histórico, por fecha de la cita). <b>Agendadas</b> = citas reservadas (sin canceladas). <b>Realizadas</b> = citas ya pasadas y no canceladas/no-show (aprox., porque hoy casi no se marca "showed"). <b>No-show</b> = marcadas como no presentado. Usa rango de fechas + comercial.</div>
+  <div class="foot">Fuente: calendarios de GHL (histórico, por fecha de la cita). <b>Cuenta personas únicas</b> (si alguien reagenda, cuenta una vez). <b>Agendadas</b> = personas con cita no cancelada. <b>Realizadas</b> = cita ya pasada y no cancelada/no-show (aprox., porque hoy casi no se marca "showed"). <b>No-show</b> = no se presentó y no la realizó luego. Usa rango de fechas + comercial.</div>
 
   <h2>Vista semanal (del rango seleccionado)</h2>
   <table id="tSemana"></table>
@@ -290,15 +290,23 @@ function renderCitas(from, to){
   const A = (DATA.appts || []).filter(a => (!from || a.date >= from) && (!to || a.date <= to) && (!cf || a.comercial === cf));
   const today = new Date().toISOString().slice(0,10);
   const dead = (s) => s === 'cancelled' || s === 'invalid';
-  const k = A.reduce((o,a) => { const active = !dead(a.status);
-    if(active) o.agend++; if(a.status==='noshow') o.noshow++; if(a.status==='cancelled') o.cancel++;
-    if(active && a.status!=='noshow' && a.date<=today) o.real++; return o; }, {agend:0,real:0,noshow:0,cancel:0});
+  // Agrupar por PERSONA (contacto). Una persona con varias citas cuenta una vez.
+  const people = {}; let seq = 0;
+  A.forEach(a => {
+    const id = a.contacto || ('_' + (seq++));  // si no hay contacto, cuenta como persona propia
+    const p = (people[id] ??= { agend:false, real:false, noshow:false, comercial:a.comercial });
+    if (!dead(a.status)) p.agend = true;
+    if (!dead(a.status) && a.status !== 'noshow' && a.date <= today) p.real = true;
+    if (a.status === 'noshow') p.noshow = true;
+  });
+  const persons = Object.values(people);
+  const k = persons.reduce((o,p) => { if(p.agend) o.agend++; if(p.real) o.real++; if(p.noshow && !p.real) o.noshow++; return o; }, {agend:0,real:0,noshow:0});
   $('#kpisCita').innerHTML = [
-    ['Agendadas', fmt(k.agend)], ['Realizadas (aprox.)', fmt(k.real)], ['No-show', fmt(k.noshow)], ['Canceladas', fmt(k.cancel)]
+    ['Agendadas (personas)', fmt(k.agend)], ['Realizadas (aprox.)', fmt(k.real)], ['No-show', fmt(k.noshow)]
   ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
   const byc = {};
-  A.forEach(a => { (byc[a.comercial] ??= {agend:0,real:0,noshow:0}); const o = byc[a.comercial]; const active = !dead(a.status);
-    if(active) o.agend++; if(a.status==='noshow') o.noshow++; if(active && a.status!=='noshow' && a.date<=today) o.real++; });
+  persons.forEach(p => { (byc[p.comercial] ??= {agend:0,real:0,noshow:0}); const o = byc[p.comercial];
+    if(p.agend) o.agend++; if(p.real) o.real++; if(p.noshow && !p.real) o.noshow++; });
   const ent = Object.entries(byc).sort((x,y) => y[1].agend - x[1].agend);
   const body = ent.map(([n,o]) => `<tr><td>${n}</td><td>${fmt(o.agend)}</td><td>${fmt(o.real)}</td><td>${fmt(o.noshow)}</td><td>${pct(o.noshow,o.agend)}</td></tr>`).join('');
   const foot = `<tr class="tot"><td>Total</td><td>${fmt(k.agend)}</td><td>${fmt(k.real)}</td><td>${fmt(k.noshow)}</td><td>${pct(k.noshow,k.agend)}</td></tr>`;
