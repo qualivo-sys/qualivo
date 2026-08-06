@@ -113,6 +113,27 @@ async function buildSpend(since, until) {
   return spend;
 }
 
+/** Citas (bookings) de todos los calendarios en [since,until] (fechas YYYY-MM-DD). */
+async function fetchAppointments(since, until) {
+  const loc = process.env.GHL_LOCATION_ID;
+  const startMs = new Date(since + 'T00:00:00Z').getTime();
+  const endMs = new Date(until + 'T23:59:59Z').getTime();
+  let cals = [];
+  try { const c = await ghl(`/calendars/?locationId=${encodeURIComponent(loc)}`); cals = c.calendars || []; }
+  catch { return []; }
+  const out = [];
+  for (const cal of cals) {
+    try {
+      const j = await ghl(`/calendars/events?locationId=${encodeURIComponent(loc)}&calendarId=${cal.id}&startTime=${startMs}&endTime=${endMs}`);
+      (j.events || []).forEach((e) => {
+        const date = (e.startTime || '').slice(0, 10);
+        out.push({ date, status: String(e.appointmentStatus || e.appoinmentStatus || '').toLowerCase(), assignedUserId: e.assignedUserId, calendar: cal.name });
+      });
+    } catch { /* calendario sin permiso o vacío */ }
+  }
+  return out;
+}
+
 async function build() {
   const loc = process.env.GHL_LOCATION_ID;
 
@@ -178,7 +199,18 @@ async function build() {
   let spend = [];
   try { spend = await buildSpend(since, until); } catch { spend = []; }
 
-  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, rows };
+  // Citas (bookings): ventana amplia (incluye futuras). Fuente fiable e histórica de entrevistas.
+  let appts = [];
+  try {
+    const apUntil = new Date(Date.now() + 90 * 864e5).toISOString().slice(0, 10);
+    const raw = await fetchAppointments('2026-05-01', apUntil);
+    appts = raw.filter((a) => a.date).map((a) => ({
+      date: a.date, semana: weekMonday(a.date), mes: a.date.slice(0, 7),
+      comercial: users[a.assignedUserId] || '(sin asignar)', status: a.status, calendar: a.calendar
+    }));
+  } catch { appts = []; }
+
+  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows };
 }
 
 export default async (req) => {
