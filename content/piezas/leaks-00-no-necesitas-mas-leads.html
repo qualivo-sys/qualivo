@@ -1,0 +1,237 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEAKS · No necesitas más leads — Maikel Echevarria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D11;          /* casi negro, frío */
+    --panel:#12151C;
+    --ink:#ECEEF2;         /* off-white */
+    --ink-2:#B7BDC7;
+    --muted:#767D8A;
+    --line:#242A34;        /* hairline sistema */
+    --line-2:#333B47;
+    --acc:#FF5238;         /* señal · LEAK · dato · anomalía */
+    --acc-soft:rgba(255,82,56,.14);
+
+    --W:1080px; --H:1350px; --safe:92px;
+    --disp:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--disp);background:#05070a;color:var(--ink);-webkit-font-smoothing:antialiased;padding:48px 24px 96px}
+  .page-head{max-width:1080px;margin:0 auto 40px;padding:0 6px}
+  .page-head h1{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.01em}
+  .page-head p{margin-top:10px;font-size:14px;line-height:1.6;color:var(--muted);max-width:74ch;font-family:var(--mono)}
+  .strip{display:flex;flex-direction:column;align-items:center;gap:52px}
+  .sw{display:flex;flex-direction:column;align-items:center;gap:11px}
+  .tag{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  .board{position:relative;width:var(--W);height:var(--H);background:var(--bg);overflow:hidden;
+    display:flex;flex-direction:column;padding:var(--safe);box-shadow:0 30px 90px rgba(0,0,0,.6)}
+  /* rejilla técnica sutil de fondo */
+  .board::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:90px 90px;opacity:.16;pointer-events:none}
+
+  /* ---- Chrome ---- */
+  .top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:20px;letter-spacing:.06em;position:relative;z-index:2}
+  .brandmark{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:600}
+  .brandmark .wm{font-weight:600;letter-spacing:.28em}
+  .top .code{color:var(--muted)}
+  .top .code b{color:var(--acc);font-weight:600}
+
+  .content{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;padding:24px 0}
+  .eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:34px;display:flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";width:30px;height:2px;background:var(--acc);display:inline-block}
+  h2{font-weight:900;letter-spacing:-.035em;line-height:.98;color:#fff}
+  .lead{font-size:40px;line-height:1.32;font-weight:600;color:var(--ink-2);max-width:24ch}
+  .lead.sm{font-size:34px}
+  .acc{color:var(--acc)}
+  .u{position:relative;white-space:nowrap}
+  .u::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:3px;background:var(--acc)}
+
+  /* footer flowline (sistema con fuga) */
+  .foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:19px;color:var(--muted);letter-spacing:.04em}
+  .foot .who{color:var(--ink-2)}
+  .foot .who b{color:var(--muted);font-weight:400}
+  .flow{position:absolute;left:var(--safe);right:var(--safe);bottom:150px;z-index:1;height:40px}
+
+  /* ---- S1 hook ---- */
+  .hook{font-size:150px;text-transform:uppercase}
+  .s1 .lead{margin-top:40px;font-size:44px}
+
+  /* ---- S2 stack ---- */
+  .stack{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .stack .row{display:flex;align-items:center;gap:26px;font-size:82px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1.02}
+  .stack .row .p{font-family:var(--mono);font-size:40px;font-weight:500;color:var(--acc)}
+  .note{margin-top:40px;font-family:var(--mono);font-size:24px;color:var(--muted);letter-spacing:.02em}
+
+  /* ---- S3 question ---- */
+  .q{font-size:96px;font-weight:900;letter-spacing:-.03em;line-height:1.02;color:#fff}
+
+  /* ---- S4 data ---- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0 6px;border:1px solid var(--line-2)}
+  .grid .cell{padding:34px 32px;border:1px solid var(--line-2);font-family:var(--mono)}
+  .grid .cell .n{font-size:56px;font-weight:600;color:#fff;letter-spacing:-.02em}
+  .grid .cell .l{font-size:22px;color:var(--muted);margin-top:8px;letter-spacing:.03em}
+
+  /* ---- S5 leaks system ---- */
+  .sys{display:flex;flex-direction:column;gap:0;margin-top:8px;border-left:2px solid var(--line-2);padding-left:0}
+  .leak{display:flex;align-items:flex-start;gap:22px;padding:22px 0;position:relative}
+  .leak::before{content:"";position:absolute;left:-2px;top:34px;width:34px;height:2px;background:var(--acc)}
+  .leak .idx{font-family:var(--mono);font-size:24px;color:var(--acc);font-weight:600;min-width:64px;padding-left:52px}
+  .leak .tx{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.1}
+  .leak .dot{position:absolute;left:30px;top:29px;width:12px;height:12px;border-radius:50%;background:var(--acc)}
+
+  /* ---- S6 error ---- */
+  .big{font-size:104px;font-weight:900;letter-spacing:-.035em;line-height:.98;color:var(--acc);text-transform:uppercase}
+
+  /* ---- S7 memorable ---- */
+  .kill{font-size:118px;font-weight:900;letter-spacing:-.04em;line-height:.96}
+  .kill .a{color:var(--acc)}
+
+  /* ---- S8 close ---- */
+  .close-q{font-size:30px;color:var(--muted);font-family:var(--mono);letter-spacing:.01em}
+  .close-a{font-size:66px;font-weight:900;letter-spacing:-.03em;line-height:1.06;color:#fff;margin-top:20px}
+  .neq{margin-top:40px;font-family:var(--mono);font-size:30px;color:var(--acc);letter-spacing:.04em}
+  .follow{display:inline-flex;align-items:center;gap:12px;margin-top:8px;font-family:var(--mono);font-size:22px;color:var(--bg);background:var(--acc);padding:16px 30px;border-radius:6px;font-weight:600;letter-spacing:.04em;align-self:flex-start}
+
+  @media (max-width:1160px){.board{zoom:.42}.page-head h1{font-size:20px}}
+</style>
+
+<div class="page-head">
+  <h1>LEAKS — pieza inicial · «No necesitas más leads»</h1>
+  <p>// serie LEAKS · 8 slides · 1080×1350 · sistema visual reutilizable (LEAK 01–10). Fondo consola + mono IBM Plex + acento señal. Abrir en navegador y exportar cada slide a PNG.</p>
+</div>
+
+<div class="strip">
+
+  <!-- S1 · HOOK -->
+  <div class="sw"><div class="tag">01 · Hook</div>
+  <div class="board s1">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>01/08</b></span></div>
+    <div class="content">
+      <div class="eyebrow">La tesis</div>
+      <h2 class="hook">No necesitas<br>más leads.</h2>
+      <div class="lead">Necesitas <span class="u">perder menos</span> de los que ya tienes.</div>
+    </div>
+    <svg class="flow" viewBox="0 0 896 40" fill="none" preserveAspectRatio="none">
+      <line x1="0" y1="12" x2="896" y2="12" stroke="#333B47" stroke-width="2"/>
+      <g fill="#333B47"><rect x="120" y="6" width="2" height="12"/><rect x="260" y="6" width="2" height="12"/><rect x="400" y="6" width="2" height="12"/><rect x="540" y="6" width="2" height="12"/><rect x="680" y="6" width="2" height="12"/><rect x="820" y="6" width="2" height="12"/></g>
+      <path d="M540 12c0 16 10 22 24 26" stroke="#FF5238" stroke-width="2"/><circle cx="566" cy="39" r="4" fill="#FF5238"/>
+    </svg>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>@maikel.echevarria</span></div>
+  </div></div>
+
+  <!-- S2 · REFRAME -->
+  <div class="sw"><div class="tag">02 · El reflejo</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>02/08</b></span></div>
+    <div class="content">
+      <div class="eyebrow">El reflejo</div>
+      <div class="lead sm" style="margin-bottom:38px">Cuando las ventas no llegan, casi todas las empresas hacen lo mismo:</div>
+      <div class="stack">
+        <div class="row"><span class="p">+</span>MÁS TRÁFICO</div>
+        <div class="row"><span class="p">+</span>MÁS LEADS</div>
+        <div class="row"><span class="p">+</span>MÁS PRESUPUESTO</div>
+      </div>
+      <div class="note">// meter más cosas dentro del mismo sistema</div>
+    </div>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S3 · PREGUNTA -->
+  <div class="sw"><div class="tag">03 · La pregunta</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>03/08</b></span></div>
+    <div class="content">
+      <div class="lead sm" style="margin-bottom:44px">Pero hay una pregunta mucho más importante:</div>
+      <div class="q">¿Qué pasa con los leads que <span class="acc">ya</span> están entrando?</div>
+    </div>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S4 · EL LEAK -->
+  <div class="sw"><div class="tag">04 · El diagnóstico</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>04/08</b></span></div>
+    <div class="content">
+      <div class="eyebrow">El diagnóstico</div>
+      <div class="lead sm" style="margin-bottom:20px">Puedes tener todo esto:</div>
+      <div class="grid">
+        <div class="cell"><div class="n">1.000</div><div class="l">leads / mes</div></div>
+        <div class="cell"><div class="n">8&nbsp;€</div><div class="l">coste por lead</div></div>
+        <div class="cell"><div class="n">ON</div><div class="l">campañas funcionando</div></div>
+        <div class="cell"><div class="n">✓</div><div class="l">equipo comercial</div></div>
+      </div>
+      <div class="lead sm" style="margin-top:30px">Y aun así estar <span class="acc">perdiendo oportunidades</span>.</div>
+    </div>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S5 · DÓNDE SE ESCAPA -->
+  <div class="sw"><div class="tag">05 · El sistema de fugas</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>05/08</b></span></div>
+    <div class="content" style="padding-top:0;padding-bottom:0">
+      <div class="eyebrow">Dónde se escapa el dinero</div>
+      <div class="sys">
+        <div class="leak"><span class="dot"></span><span class="idx">L01</span><span class="tx">Respondes tarde</span></div>
+        <div class="leak"><span class="dot"></span><span class="idx">L02</span><span class="tx">No diferencias la intención de compra</span></div>
+        <div class="leak"><span class="dot"></span><span class="idx">L03</span><span class="tx">Haces poco seguimiento</span></div>
+        <div class="leak"><span class="dot"></span><span class="idx">L04</span><span class="tx">No sabes quién está listo para comprar</span></div>
+        <div class="leak"><span class="dot"></span><span class="idx">L05</span><span class="tx">No reactivas los leads antiguos</span></div>
+        <div class="leak"><span class="dot"></span><span class="idx">L06</span><span class="tx">Marketing y ventas no comparten criterios</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S6 · EL ERROR -->
+  <div class="sw"><div class="tag">06 · La reacción</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>06/08</b></span></div>
+    <div class="content">
+      <div class="lead sm" style="margin-bottom:34px">Entonces haces lo más fácil:</div>
+      <div class="big">Compras<br>más tráfico.</div>
+      <div class="lead" style="margin-top:40px">Y acabas con <span class="acc">2.000 leads</span> con exactamente el mismo problema.</div>
+    </div>
+    <svg class="flow" viewBox="0 0 896 40" fill="none" preserveAspectRatio="none">
+      <line x1="0" y1="12" x2="896" y2="12" stroke="#333B47" stroke-width="2"/>
+      <path d="M300 12c0 16 10 22 24 26" stroke="#FF5238" stroke-width="2"/><circle cx="326" cy="39" r="4" fill="#FF5238"/>
+      <path d="M600 12c0 16 10 22 24 26" stroke="#FF5238" stroke-width="2"/><circle cx="626" cy="39" r="4" fill="#FF5238"/>
+    </svg>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S7 · REFRAME MEMORABLE -->
+  <div class="sw"><div class="tag">07 · El giro</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>07/08</b></span></div>
+    <div class="content">
+      <div class="kill">Eso no<br>es escalar.<br><span class="a">Es escalar<br>el leak.</span></div>
+    </div>
+    <svg class="flow" viewBox="0 0 896 40" fill="none" preserveAspectRatio="none">
+      <line x1="0" y1="12" x2="896" y2="12" stroke="#333B47" stroke-width="2"/>
+      <path d="M448 12c0 18 20 24 48 26" stroke="#FF5238" stroke-width="3"/><circle cx="496" cy="39" r="6" fill="#FF5238"/>
+    </svg>
+    <div class="foot"><span class="who">Maikel Echevarria</span><span>desliza →</span></div>
+  </div></div>
+
+  <!-- S8 · CIERRE -->
+  <div class="sw"><div class="tag">08 · Cierre</div>
+  <div class="board">
+    <div class="top"><span class="brandmark"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 9h24M3 15h13" stroke="#ECEEF2" stroke-width="2"/><path d="M16 15c4 0 6 3 6 9" stroke="#FF5238" stroke-width="2"/><circle cx="22" cy="25" r="3" fill="#FF5238"/></svg><span class="wm">LEAKS</span></span><span class="code">INTRO · <b>08/08</b></span></div>
+    <div class="content">
+      <div class="eyebrow">Antes de pedir más leads</div>
+      <div class="close-q">No preguntes: «¿Cómo conseguimos más leads?»</div>
+      <div class="close-a">Pregunta: ¿cuánto negocio estamos dejando <span class="acc">escapar</span> con los que ya tenemos?</div>
+      <div class="neq">más leads ≠ más negocio</div>
+    </div>
+    <div class="foot"><span class="follow">Sígueme · más LEAKS</span><span class="who">@maikel.echevarria</span></div>
+  </div></div>
+
+</div>
