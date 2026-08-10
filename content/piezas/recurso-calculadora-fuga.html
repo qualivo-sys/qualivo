@@ -1,0 +1,127 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de la Fuga Silenciosa — Maikel Echevarria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1020; --panel:#141A2E; --panel-2:#1B2340; --ink:#EDECFB; --muted:#9AA0C4;
+    --line:#2A3358; --teal:#27BDB1; --yellow:#F4CC38; --indigo:#6D6FE0;
+    --font:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:radial-gradient(1200px 600px at 50% -10%,#1a2140,#0B1020 60%);color:var(--ink);
+    -webkit-font-smoothing:antialiased;min-height:100vh;padding:40px 20px 80px;display:flex;justify-content:center}
+  .wrap{width:100%;max-width:680px}
+  .head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .badge{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#2B2C6B;background:var(--yellow);padding:5px 11px;border-radius:999px}
+  .head .by{font-size:13px;color:var(--muted);font-weight:600}
+  h1{font-size:clamp(28px,6vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin:14px 0 8px}
+  .sub{color:var(--muted);font-size:16px;line-height:1.5;margin-bottom:26px;max-width:52ch}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field.full{grid-column:1/-1}
+  label{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+  label .hint{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:3px}
+  .inp{display:flex;align-items:center;background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:0 14px}
+  .inp:focus-within{border-color:var(--indigo)}
+  .inp span{color:var(--muted);font-weight:700;font-size:17px}
+  input[type=number]{width:100%;background:transparent;border:0;color:var(--ink);font-family:var(--font);font-size:22px;font-weight:800;padding:14px 8px;outline:none}
+  input[type=range]{width:100%;accent-color:var(--yellow);margin-top:6px}
+  .rangeval{font-family:var(--font);font-weight:800;color:var(--yellow)}
+
+  .result{margin-top:22px;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center;position:relative;overflow:hidden}
+  .result::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--teal),var(--yellow))}
+  .result .rlabel{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .result .big{font-size:clamp(48px,11vw,76px);font-weight:900;letter-spacing:-.03em;color:var(--yellow);line-height:1.02;margin:8px 0 2px}
+  .result .peryear{font-size:19px;color:var(--ink);font-weight:700}
+  .result .peryear b{color:var(--teal)}
+  .breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+  .bd{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .bd .n{font-size:26px;font-weight:900;color:#fff}
+  .bd .l{font-size:12.5px;color:var(--muted);margin-top:4px;font-weight:600}
+
+  .note{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.55}
+  .foot{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:20px}
+  .foot .who{font-size:14px;color:var(--muted)}
+  .foot .who b{color:var(--ink)}
+  .cta{font-size:14px;font-weight:800;color:#2B2C6B;background:var(--yellow);padding:12px 20px;border-radius:10px;text-decoration:none}
+  @media (max-width:520px){.grid{grid-template-columns:1fr}.breakdown{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <div class="head"><span class="badge">Recurso · FUGA</span><span class="by">by Maikel Echevarria</span></div>
+  <h1>Calculadora de la Fuga Silenciosa</h1>
+  <p class="sub">Cuánto dinero, ya pagado, se te escapa cada mes por leads que se enfrían antes de que alguien conteste. Mete tus números reales.</p>
+
+  <div class="card">
+    <div class="grid">
+      <div class="field">
+        <label>Leads al mes<span class="hint">Los que entran de verdad</span></label>
+        <div class="inp"><input id="leads" type="number" min="0" value="1000"></div>
+      </div>
+      <div class="field">
+        <label>Ticket medio<span class="hint">Valor de un cliente</span></label>
+        <div class="inp"><span>€</span><input id="ticket" type="number" min="0" value="1200"></div>
+      </div>
+      <div class="field">
+        <label>Tasa de cierre actual<span class="hint">De lead a cliente</span></label>
+        <div class="inp"><input id="close" type="number" min="0" max="100" value="3"><span>%</span></div>
+      </div>
+      <div class="field">
+        <label>Leads contactados en &lt;1 h<span class="hint">Sé honesto</span></label>
+        <div class="inp"><input id="fast" type="number" min="0" max="100" value="20"><span>%</span></div>
+      </div>
+      <div class="field full">
+        <label>Cuánto de esa fuga es recuperable respondiendo rápido — <span class="rangeval" id="recv">50%</span>
+          <span class="hint">Conservador: la mitad. Ajústalo a tu criterio.</span></label>
+        <input id="rec" type="range" min="20" max="80" step="5" value="50">
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="rlabel">Se te escapa cada mes</div>
+      <div class="big" id="perMonth">—</div>
+      <div class="peryear">≈ <b id="perYear">—</b> al año que ya habías pagado y no cobras</div>
+      <div class="breakdown">
+        <div class="bd"><div class="n" id="slow">—</div><div class="l">leads/mes que se enfrían esperando</div></div>
+        <div class="bd"><div class="n" id="sales">—</div><div class="l">ventas/mes que sí cierras hoy</div></div>
+      </div>
+    </div>
+
+    <p class="note">Es una estimación, no una factura. Pero el orden de magnitud casi nunca falla — y suele ser mayor de lo que parece. La velocidad de respuesta es el multiplicador de ventas más barato que existe: no cuesta más tráfico, solo un sistema que no deje esperando a nadie.</p>
+
+    <div class="foot">
+      <span class="who"><b>Maikel Echevarria</b> · Sistemas de captación</span>
+      <a class="cta" href="#" onclick="return false">¿Miramos de dónde sale tu número?</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const eur = new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  const num = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
+  const $ = id => document.getElementById(id);
+  const ids = ['leads','ticket','close','fast','rec'];
+  function calc(){
+    const L = Math.max(0, +$('leads').value||0);
+    const T = Math.max(0, +$('ticket').value||0);
+    const C = Math.min(100, Math.max(0, +$('close').value||0))/100;
+    const F = Math.min(100, Math.max(0, +$('fast').value||0))/100;
+    const R = (+$('rec').value||0)/100;
+    $('recv').textContent = Math.round(R*100)+'%';
+    const slow = L*(1-F);
+    const lostMonth = slow * C * T * R;
+    const salesMonth = L * C * T;
+    $('perMonth').textContent = eur.format(lostMonth);
+    $('perYear').textContent = eur.format(lostMonth*12);
+    $('slow').textContent = num.format(Math.round(slow));
+    $('sales').textContent = eur.format(salesMonth);
+  }
+  ids.forEach(id => $(id).addEventListener('input', calc));
+  calc();
+</script>
