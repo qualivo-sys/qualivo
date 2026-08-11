@@ -170,6 +170,9 @@ input:focus, select:focus, textarea:focus {
 .btn-teal:hover { background: #0A5F59; }
 .btn-teal:disabled { opacity: .6; cursor: wait; }
 
+#recursos a[href]:hover h3 { color: var(--qv-teal); }
+#recursos a[href]:hover { box-shadow: 0 18px 44px rgba(16, 19, 25, .12) !important; }
+
 .footer-link { color: #C3D1E2; font-size: 14.5px; transition: color 160ms ease; }
 .footer-link:hover { color: #fff; }
 .footer-legal { color: #5E7DA0; font-size: 13px; transition: color 160ms ease; }
