@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El Mapa de Fugas Comerciales · Qualivo</title>
-<meta name="description" content="Sabes cuánto gastas en captar clientes. No sabes cuánto se te escapa después. Auditoría de 45 minutos: te enseñamos dónde se va el dinero entre el contacto y el contrato, y montamos el sistema que lo tapa.">
+<meta name="description" content="Sabes cuánto gastas en captar clientes. No sabes cuánto se te escapa después. Diagnóstico de 45 minutos: te enseñamos dónde se va el dinero entre el contacto y el contrato, y montamos el sistema que lo tapa.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
@@ -356,6 +356,16 @@ input[type="range"]::-moz-range-thumb {
   transition: border-color var(--qv-dur); color: var(--qv-ink-900);
 }
 .field input:focus, .field select:focus { outline: none; border-color: var(--qv-teal-600); background: #fff; }
+.field textarea {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--qv-line-200);
+  font-family: var(--qv-font-body); font-size: 15px; background: var(--qv-surface-50);
+  transition: border-color var(--qv-dur); color: var(--qv-ink-900); resize: vertical;
+}
+.field textarea:focus { outline: none; border-color: var(--qv-teal-600); background: #fff; }
+.field .hint { font-size: 12.5px; color: var(--qv-ink-400); margin: -4px 0 8px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--qv-ink-500); margin: 6px 0 10px; cursor: pointer; }
+.check input { margin-top: 3px; accent-color: var(--qv-teal-600); flex-shrink: 0; }
+.check a { color: var(--qv-teal-700); }
 .form-card .btn { width: 100%; justify-content: center; margin-top: 10px; }
 .form-card .after { text-align: center; font-size: 13px; color: var(--qv-ink-400); margin-top: 16px; }
 
@@ -392,7 +402,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
       <a href="#calculadora">La cuenta</a>
       <a href="#resultados">Resultados</a>
       <a href="#encaje">¿Encajas?</a>
-      <a class="btn sm cta-link" href="#solicitar">Solicitar auditoría <span class="arr">→</span></a>
+      <a class="btn sm cta-link" href="#solicitar">Solicitar diagnóstico <span class="arr">→</span></a>
     </div>
   </div>
 </nav>
@@ -404,7 +414,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
     <h1>Sabes cuánto gastas en captar clientes.<br><span class="hl">No sabes cuánto se te escapa después.</span></h1>
     <p class="lede">Cada mes te entran leads: de ads, de portales, de referencias. Y una parte se pierde por el camino. Nadie contesta a tiempo. Nadie hace seguimiento. Nadie lo mide. Te enseñamos exactamente dónde se te va el dinero. Y montamos el sistema que lo tapa.</p>
     <div class="ctas">
-      <a class="btn" href="#solicitar">Solicitar auditoría comercial <span class="arr">→</span></a>
+      <a class="btn" href="#solicitar">Solicitar diagnóstico comercial <span class="arr">→</span></a>
       <a class="btn ghost" href="#mapa">Ver el Mapa de Fugas ↓</a>
     </div>
     <p class="micro">45 minutos sobre tus números. Sales con tu Mapa de Fugas, trabajes con nosotros o no.</p>
@@ -498,7 +508,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
         </div>
       </div>
     </div>
-    <p class="calc-note">Estimación conservadora: en torno al 40&nbsp;% de los leads se enfrían cuando la respuesta tarda horas, y una de cada cinco de esas conversaciones habría acabado en venta. En la auditoría sustituimos esta estimación por tus datos reales.</p>
+    <p class="calc-note">Estimación conservadora: en torno al 40&nbsp;% de los leads se enfrían cuando la respuesta tarda horas, y una de cada cinco de esas conversaciones habría acabado en venta. En el diagnóstico sustituimos esta estimación por tus datos reales.</p>
     <div class="calc-cta"><a class="btn" href="#solicitar">Quiero el mapa de mi empresa <span class="arr">→</span></a></div>
   </div>
 </section>
@@ -508,7 +518,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
   <div class="wrap caso">
     <div>
       <span class="kicker">03 · Prueba · nosotros mismos</span>
-      <h2>Nos hicimos la auditoría a nosotros mismos. Y salió mal.</h2>
+      <h2>Nos hicimos el diagnóstico a nosotros mismos. Y salió mal.</h2>
       <p>Toni nos escribió un martes. Su mensaje se quedó en una bandeja que ese día no miraba nadie. Cuando le contestamos, ya había firmado con otro.</p>
       <p><span class="punch">Nos dedicamos a esto. Y no lo vimos hasta que lo auditamos.</span></p>
       <p class="punch">Si nos pasa a nosotros, te está pasando a ti. Solo que tú todavía no sabes por dónde.</p>
@@ -563,7 +573,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
     <div class="fases">
       <div class="fase">
         <div class="fnum">Fase 1</div>
-        <h3>Auditoría comercial</h3>
+        <h3>Diagnóstico comercial</h3>
         <p>Repasamos los siete tramos con tus datos: qué entra por cada canal, cuánto tardáis en contestar, qué pasa con los "más adelante". Sales con tu Mapa de Fugas priorizado por dinero perdido, no por facilidad de arreglo.</p>
       </div>
       <div class="fase">
@@ -610,7 +620,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
     <div class="sec-head">
       <span class="kicker">07 · Encaje</span>
       <h2>Trabajo con pocas empresas a la vez. Y no con cualquiera.</h2>
-      <p>Lee esto antes de pedir la auditoría. Te ahorro el tiempo a los dos.</p>
+      <p>Lee esto antes de pedir el diagnóstico. Te ahorro el tiempo a los dos.</p>
     </div>
     <div class="fit">
       <div class="fit-col yes">
@@ -641,7 +651,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
   <div class="wrap">
     <div class="audit">
       <div>
-        <span class="kicker">08 · Auditoría comercial</span>
+        <span class="kicker">08 · Diagnóstico comercial</span>
         <h2 style="font-family:var(--qv-font-display);font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.12;letter-spacing:-0.02em;margin:18px 0;">45 minutos mirando dónde se te cae el dinero.</h2>
         <p style="color:rgba(255,255,255,0.72);font-size:17px;line-height:1.7;">Repasamos tus siete tramos con tus datos delante. Sales con tu Mapa de Fugas y una cifra al lado de cada fuga: lo que te está costando cada mes.</p>
         <ul class="bullets">
@@ -652,7 +662,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
         <div class="bio" style="margin-top:36px;">
           <div class="name">Maikel Echevarría</div>
           <div class="role">Fundador de Qualivo</div>
-          <p>La auditoría la hago yo, y la parte técnica del sistema (CRM, automatizaciones, agente de WhatsApp) la monto y la gestiono yo. No se subcontrata.</p>
+          <p>El diagnóstico lo hago yo, y la parte técnica del sistema (CRM, automatizaciones, agente de WhatsApp) la monto y la gestiono yo. No se subcontrata.</p>
           <ul>
             <li>+10 años en agencias y +40 proyectos de captación implementados</li>
             <li>Especializado en funnels, CRM, automatización y Meta Ads</li>
@@ -660,12 +670,17 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
         </div>
       </div>
       <div>
+<!-- Mapeo GHL (location: campos ya creados por API):
+     nombre_cargo -> contact.name + "QV - Cargo" (Z3a1TzbBAmSJjZxC9jwd)
+     empresa_web  -> contact.companyName / website
+     facturacion  -> "QV - Facturación anual" (4xAHatu7HkiKNVHD14Jp)
+     captacion    -> "QV - Quién lleva la captación" (d6w0ucuobdTXfj7K9vdD)
+     hipotesis    -> "QV - Hipótesis del problema" (Mw37t6A0k0vJuu5CvPa0) -->
         <form class="form-card" id="auditForm" method="post" action="#">
-          <h3>Solicitar auditoría</h3>
-          <p class="sub">Siete campos. Los leo yo antes de la llamada.</p>
+          <h3>Solicitar diagnóstico</h3>
           <div class="field">
-            <label for="f-nombre">Nombre y apellidos</label>
-            <input id="f-nombre" name="nombre" type="text" placeholder="Ana Ruiz" required>
+            <label for="f-nombre">Nombre y cargo</label>
+            <input id="f-nombre" name="nombre_cargo" type="text" placeholder="Ana Ruiz · Directora general" required>
           </div>
           <div class="field">
             <label for="f-email">Email de trabajo</label>
@@ -673,52 +688,40 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
           </div>
           <div class="field">
             <label for="f-empresa">Empresa y web</label>
-            <input id="f-empresa" name="empresa" type="text" placeholder="Tu Empresa · tuempresa.com" required>
+            <input id="f-empresa" name="empresa_web" type="text" placeholder="Tu Empresa · tuempresa.com" required>
           </div>
           <div class="field">
             <label for="f-facturacion">Facturación anual aproximada</label>
             <select id="f-facturacion" name="facturacion" required>
               <option value="" disabled selected>Elige un rango</option>
               <option>Menos de 500.000 €</option>
-              <option>500.000 € – 1 M€</option>
-              <option>1 – 3 M€</option>
+              <option>500.000 € - 1 M€</option>
+              <option>1 - 3 M€</option>
               <option>Más de 3 M€</option>
             </select>
           </div>
           <div class="field">
-            <label for="f-inversion">Inversión publicitaria al mes</label>
-            <select id="f-inversion" name="inversion" required>
-              <option value="" disabled selected>Elige un rango</option>
-              <option>Menos de 1.000 €</option>
-              <option>1.000 – 3.000 €</option>
-              <option>3.000 – 10.000 €</option>
-              <option>Más de 10.000 €</option>
-              <option>No hago ads: me llegan leads por portales, referencias u otros canales</option>
+            <label for="f-captacion">¿Quién lleva actualmente la captación?</label>
+            <select id="f-captacion" name="captacion" required>
+              <option value="" disabled selected>Elige una opción</option>
+              <option>Yo mismo (fundador/dirección)</option>
+              <option>Equipo interno de marketing</option>
+              <option>Agencia externa</option>
+              <option>Freelancers</option>
+              <option>Una mezcla de varios</option>
             </select>
           </div>
           <div class="field">
-            <label for="f-latencia">Cuánto tardáis en contestar a un lead nuevo</label>
-            <select id="f-latencia" name="latencia" required>
-              <option value="" disabled selected>Elige una opción</option>
-              <option>Al momento</option>
-              <option>En la primera hora</option>
-              <option>Ese mismo día</option>
-              <option>Cuando podemos</option>
-              <option>No lo sabemos</option>
-            </select>
+            <label for="f-hipotesis">¿Dónde crees que está el principal problema?</label>
+            <p class="hint">Tu hipótesis en una frase. Es lo que más nos interesa leer.</p>
+            <textarea id="f-hipotesis" name="hipotesis" rows="3" placeholder="Creo que el problema está en…" required></textarea>
           </div>
-          <div class="field">
-            <label for="f-quien">Quién llama a los leads hoy</label>
-            <select id="f-quien" name="quien" required>
-              <option value="" disabled selected>Elige una opción</option>
-              <option>Yo mismo</option>
-              <option>Un comercial / equipo comercial</option>
-              <option>Nadie de forma sistemática</option>
-              <option>Depende del día</option>
-            </select>
-          </div>
-          <button class="btn" type="submit">Solicitar auditoría <span class="arr">→</span></button>
-          <p class="after">Después de enviarlo eliges hora en el calendario. Respondemos en menos de 24&nbsp;h: predicamos con el ejemplo.</p>
+          <label class="check">
+            <input type="checkbox" name="privacidad" required>
+            <span>He leído y acepto la <a href="#">política de privacidad</a>. Usaremos estos datos solo para responder a tu solicitud.</span>
+          </label>
+          <button class="btn" type="submit">Solicitar diagnóstico <span class="arr">→</span></button>
+          <p class="after">Después podrás elegir una hora. Respondemos en menos de 24&nbsp;horas.</p>
         </form>
       </div>
     </div>
@@ -728,7 +731,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
 <!--
   Hueco reservado · NO PUBLICAR TODAVÍA
   Aquí irá la descarga del Mapa de Fugas en PDF. Va deliberadamente al final:
-  si sube en la página, le roba clics a la auditoría.
+  si sube en la página, le roba clics al diagnóstico.
   Activar cuando arranque el re-enganche de septiembre (gancho para los contactos de vacaciones).
 -->
 <section id="pdf" style="display:none;">
@@ -754,7 +757,7 @@ footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 
         <h4>Producto</h4>
         <a href="#mapa">El Mapa de Fugas</a>
         <a href="#resultados">Resultados</a>
-        <a href="#solicitar">Auditoría comercial</a>
+        <a href="#solicitar">Diagnóstico comercial</a>
       </div>
       <div>
         <h4>Ecosistema</h4>
