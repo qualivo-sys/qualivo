@@ -7,6 +7,7 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 ## Servicio principal
 
 - [Qualivo Diagnostic](https://qualivo.io/#diagnostic): radiografía del sistema de captación y ventas en cuatro entregas — mapa de cómo funciona el sistema, fugas donde se pierden oportunidades, prioridades por impacto, y roadmap con qué hacer, en qué orden y cómo medirlo. Incluye implementación opcional.
+- [Growth para empresas de formación](https://qualivo.io/formacion/): vertical especializada en captación de alumnos para escuelas, academias y formación online — campañas por curso, cualificación en origen, CRM y embudo medido del anuncio a la matrícula. Cuatro casos publicados con números (ROAS hasta 10,2x, CPL desde 2,86 €, +102% de entrevistas de venta).
 
 ## Casos
 
@@ -19,6 +20,11 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 ## Recursos
 
 - [Auto-diagnóstico express](https://qualivo.io/diagnostico-express/): herramienta gratuita de 15 preguntas que identifica en qué etapa del sistema (captación, conversión, cualificación, venta o retención) se pierden más oportunidades. Resultado inmediato.
+
+## Blog — biblioteca de problemas de captación y ventas
+
+- [Tienes leads pero no ventas: los 7 puntos que reviso primero](https://qualivo.io/blog/leads-pero-no-ventas/): medición correcta de etapas, velocidad de primer contacto, cualificación, seguimiento, coste por cliente por canal, alineación marketing-ventas y automatización — con los casos que lo demuestran.
+- [Captación de leads: por qué más leads no siempre es más negocio](https://qualivo.io/blog/captacion-de-leads/): la trampa del CPL barato, cualificación en origen, el lead como principio (no final) del sistema, y qué medir en qué orden.
 
 ## Contacto
 
