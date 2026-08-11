@@ -6,10 +6,9 @@
   // Configuración
   // ───────────────────────────────────────────────────────────────────────────
   var CONFIG = {
-    // URL del webhook que recibe el formulario (Make, Zapier, n8n…).
-    // Sin URL, el formulario funciona en modo prueba: no envía nada
-    // y avisa por consola.
-    WEBHOOK_URL: '',
+    // Endpoint que recibe el formulario. /api/lead es la función serverless
+    // del propio dominio que crea el contacto en GoHighLevel.
+    WEBHOOK_URL: '/api/lead',
     // URL de un calendario embebible (Calendly, Cal.com…). Si se define,
     // se incrusta como iframe en la pantalla de confirmación.
     CALENDAR_EMBED_URL: ''
