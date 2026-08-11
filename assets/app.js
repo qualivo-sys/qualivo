@@ -257,6 +257,7 @@
 
       sendToWebhook(payload)
         .then(function () {
+          if (window.va) window.va('event', { name: cualificado ? 'diagnostico_solicitado' : 'lead_fuera_alcance' });
           if (cualificado) {
             show(panelThanks);
             mountCalendar();

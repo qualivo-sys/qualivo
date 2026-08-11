@@ -9,6 +9,8 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 - [Qualivo Diagnostic](https://qualivo.io/#diagnostic): radiografía del sistema de captación y ventas en cuatro entregas — mapa de cómo funciona el sistema, fugas donde se pierden oportunidades, prioridades por impacto, y roadmap con qué hacer, en qué orden y cómo medirlo. Incluye implementación opcional.
 - [Growth para empresas de formación](https://qualivo.io/formacion/): vertical especializada en captación de alumnos para escuelas, academias y formación online — campañas por curso, cualificación en origen, CRM y embudo medido del anuncio a la matrícula. Cuatro casos publicados con números (ROAS hasta 10,2x, CPL desde 2,86 €, +102% de entrevistas de venta).
 
+- [Consultoría de growth marketing](https://qualivo.io/consultoria-growth-marketing/): qué hace un consultor de growth, diferencia con una agencia (el incentivo), cuándo tiene sentido contratarlo y cómo trabaja Qualivo — diagnóstico, priorización por impacto, implementación opcional y medición del coste por cliente por canal.
+
 ## Casos
 
 - [Nuria Roure](https://qualivo.io/casos/nuria-roure/): formación y servicios online. El problema no era conseguir más leads, sino saber cuáles merecían atención. Sistema de cualificación, lead scoring y seguimiento: 2.000 € de inversión → 12.900 € en ventas atribuibles (6,45x).
