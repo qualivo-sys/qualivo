@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto-diagnóstico express · Qualivo — ¿Dónde se te escapa el negocio?</title>
+<meta name="description" content="15 preguntas, 3 minutos. Descubre en qué etapa de tu sistema de captación y ventas estás perdiendo más oportunidades: captación, conversión, cualificación, venta o retención.">
+<link rel="canonical" href="https://qualivo.io/diagnostico-express">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/diagnostico-express">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Auto-diagnóstico express — ¿Dónde se te escapa el negocio?">
+<meta property="og:description" content="15 preguntas, 3 minutos, resultado por etapas de tu sistema de captación y ventas.">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  .dx-card {
+    background: #fff;
+    border: 1px solid rgba(16, 19, 25, .1);
+    border-radius: 18px;
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: 0 24px 60px rgba(16, 19, 25, .08);
+  }
+  .dx-answer {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 20px;
+    border: 1px solid rgba(16, 19, 25, .16);
+    border-radius: 12px;
+    background: var(--qv-cream);
+    color: var(--qv-ink);
+    font-size: 16.5px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .dx-answer:hover { border-color: var(--qv-teal-bright); background: #fff; }
+  .dx-progress-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(16, 19, 25, .08);
+    overflow: hidden;
+  }
+  .dx-progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--qv-teal);
+    transition: width 200ms ease;
+  }
+  .dx-bar-track {
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(16, 19, 25, .08);
+    overflow: hidden;
+  }
+  .dx-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--qv-teal-bright);
+  }
+  .dx-bar.debil { background: var(--qv-coral); }
+  .dx-back {
+    border: none;
+    background: none;
+    color: var(--qv-ink-faint);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+  }
+  .dx-back:hover { color: var(--qv-ink); }
+</style>
+</head>
+<body>
+
+<div style="color:#101319; background:#FAF7F0; overflow-x:clip; min-height:100vh">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width:760px; margin:0 auto; padding:clamp(40px,7vh,72px) 24px 96px">
+
+    <!-- Intro -->
+    <section id="dx-intro">
+      <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0E7C74; font-weight:800; margin:0 0 20px">Auto-diagnóstico express · 3 minutos</p>
+      <h1 style="font-family:var(--qv-font-display); font-size:clamp(34px,6.5vw,58px); line-height:1; letter-spacing:-.035em; font-weight:900; margin:0 0 22px; color:#101319">¿Dónde se te está escapando el negocio?</h1>
+      <p style="font-size:clamp(17px,3vw,19px); line-height:1.6; color:#3D4148; margin:0 0 14px; max-width:52ch">15 preguntas sobre tu sistema de captación y ventas. Al final verás una puntuación por etapa — captación, conversión, cualificación, venta y retención — y en cuál estás perdiendo más.</p>
+      <p style="font-size:15px; line-height:1.6; color:#7A7C82; margin:0 0 36px; max-width:52ch">Responde con sinceridad: cada «no lo sé» también cuenta. No saberlo ya es un dato.</p>
+      <button id="dx-start" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar →</button>
+    </section>
+
+    <!-- Preguntas -->
+    <section id="dx-quiz" hidden>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:10px">
+        <p id="dx-stage-label" style="margin:0; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#0E7C74; font-weight:800"></p>
+        <p id="dx-count" style="margin:0; font-size:13px; color:#7A7C82; font-weight:600"></p>
+      </div>
+      <div class="dx-progress-track" style="margin-bottom:28px"><div id="dx-progress" class="dx-progress-bar" style="width:0%"></div></div>
+      <div class="dx-card">
+        <h2 id="dx-question" style="font-family:var(--qv-font-display); font-size:clamp(21px,4vw,28px); line-height:1.2; letter-spacing:-.02em; font-weight:800; margin:0 0 26px; color:#101319"></h2>
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <button class="dx-answer" data-val="2">Sí</button>
+          <button class="dx-answer" data-val="0">No</button>
+          <button class="dx-answer" data-val="1">No lo sé</button>
+        </div>
+        <div style="margin-top:22px">
+          <button id="dx-prev" class="dx-back" hidden>← Pregunta anterior</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gate -->
+    <section id="dx-gate" hidden>
+      <div class="dx-card">
+        <h2 style="font-family:var(--qv-font-display); font-size:clamp(24px,4.5vw,32px); line-height:1.1; letter-spacing:-.022em; font-weight:900; margin:0 0 10px; color:#101319">Tu resultado está listo.</h2>
+        <p style="font-size:16px; line-height:1.6; color:#3D4148; margin:0 0 24px">Dinos a quién se lo enseñamos y lo ves al momento.</p>
+        <form id="dx-form" novalidate style="display:flex; flex-direction:column; gap:16px">
+          <label class="field">
+            <span class="field-label">Nombre</span>
+            <input type="text" name="nombre" id="dx-nombre" placeholder="Ana Ruiz" autocomplete="name">
+          </label>
+          <label class="field">
+            <span class="field-label">Email de trabajo</span>
+            <input type="email" name="email" id="dx-email" placeholder="ana@tuempresa.com" autocomplete="email">
+          </label>
+          <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer">
+            <input type="checkbox" name="rgpd" id="dx-rgpd" style="width:18px; height:18px; margin-top:2px; accent-color:#0E7C74; flex-shrink:0">
+            <span style="font-size:13px; line-height:1.55; color:#5A5E66">He leído y acepto la <a href="/#" style="text-decoration:underline">política de privacidad</a>. Usaremos estos datos solo para enviarte el resultado y contenido relacionado.</span>
+          </label>
+          <div class="hp-field" aria-hidden="true">
+            <label>No rellenes este campo si eres humano
+              <input type="text" name="website" id="dx-website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+          <p id="dx-error" hidden style="margin:0; font-size:14px; color:#C2410C; font-weight:600; line-height:1.5"></p>
+          <button type="submit" id="dx-submit" class="btn-teal">Ver mi resultado →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Resultado -->
+    <section id="dx-result" hidden>
+      <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0E7C74; font-weight:800; margin:0 0 16px">Tu resultado</p>
+      <h2 id="dx-result-title" style="font-family:var(--qv-font-display); font-size:clamp(28px,5.5vw,44px); line-height:1.02; letter-spacing:-.03em; font-weight:900; margin:0 0 28px; color:#101319"></h2>
+      <div class="dx-card" style="margin-bottom:26px">
+        <div id="dx-bars" style="display:flex; flex-direction:column; gap:18px"></div>
+      </div>
+      <div id="dx-verdict" class="dx-card" style="background:#EFECFB; border-color:rgba(16,19,25,.06)"></div>
+      <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:14px; align-items:center">
+        <a href="/#contacto" class="btn-dark btn-hero">Solicitar diagnóstico completo</a>
+        <span style="font-size:14px; color:#7A7C82">30 min · sin compromiso · con tus datos reales</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/diagnostico-express/dx.js"></script>
+</body>
+</html>
