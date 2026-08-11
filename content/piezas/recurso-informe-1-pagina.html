@@ -1,0 +1,131 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Informe de 1 Página — Maikel Echevarria · Qualivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1020; --panel:#141A2E; --panel-2:#1B2340; --ink:#EDECFB; --muted:#9AA0C4;
+    --line:#2A3358; --teal:#27BDB1; --yellow:#F4CC38; --indigo:#6D6FE0; --red:#E9698A; --green:#3FD8A8;
+    --font:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:radial-gradient(1200px 600px at 50% -10%,#1a2140,#0B1020 60%);color:var(--ink);
+    -webkit-font-smoothing:antialiased;min-height:100vh;padding:40px 20px 80px;display:flex;justify-content:center}
+  .wrap{width:100%;max-width:720px}
+  .head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .badge{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#2B2C6B;background:var(--yellow);padding:5px 11px;border-radius:999px}
+  .by{font-size:13px;color:var(--muted);font-weight:600}
+  h1{font-size:clamp(28px,6vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin:14px 0 8px}
+  .sub{color:var(--muted);font-size:16px;line-height:1.5;margin-bottom:8px;max-width:56ch}
+  .q{color:var(--ink);font-size:15px;font-weight:700;margin:18px 0 14px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .row{display:flex;align-items:center;gap:16px;padding:16px;border-radius:13px;transition:background .15s}
+  .row+.row{border-top:1px solid var(--line)}
+  .row .txt{flex:1}
+  .row .m{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.01em}
+  .row .d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+  .toggle{display:flex;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:none}
+  .toggle button{background:transparent;border:0;color:var(--muted);font-family:var(--font);font-weight:800;font-size:14px;padding:10px 16px;cursor:pointer}
+  .toggle button.on-yes{background:var(--green);color:#06231a}
+  .toggle button.on-no{background:var(--red);color:#2a0713}
+
+  .result{margin-top:18px;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;position:relative;overflow:hidden}
+  .result::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--teal),var(--yellow))}
+  .rlabel{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .score{font-size:clamp(46px,12vw,72px);font-weight:900;letter-spacing:-.03em;line-height:1.02;margin:6px 0}
+  .score b{color:var(--yellow)}
+  .verdict{font-size:18px;font-weight:700;color:var(--ink);max-width:44ch;margin:6px auto 0;line-height:1.4}
+  .bar{display:flex;gap:6px;margin:18px auto 0;max-width:320px}
+  .seg{flex:1;height:10px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line)}
+  .seg.on{background:var(--yellow);border-color:var(--yellow)}
+
+  .foot{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+  .who{font-size:14px;color:var(--muted)}.who b{color:var(--ink)}
+  .cta{font-size:14px;font-weight:800;color:#2B2C6B;background:var(--yellow);padding:12px 20px;border-radius:10px;text-decoration:none}
+  .note{margin-top:14px;font-size:13px;color:var(--muted);line-height:1.55}
+</style>
+
+<div class="wrap">
+  <div class="head"><span class="badge">Recurso · INFORME</span><span class="by">by Maikel · Qualivo</span></div>
+  <h1>El Informe de 1 Página</h1>
+  <p class="sub">Las 6 cifras que un director necesita para decidir dónde va el próximo euro. Y las 14 páginas que puede tirar.</p>
+  <p class="q">De tu informe de marketing actual, ¿cuáles de estas cifras te da hoy, sin tener que pedirlas?</p>
+
+  <div class="card" id="rows">
+    <div class="row" data-k="1">
+      <div class="txt"><div class="m">CAC por canal</div><div class="d">Cuánto te cuesta conseguir un cliente (no un lead) en cada canal.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+    <div class="row" data-k="2">
+      <div class="txt"><div class="m">Leads cualificados, no totales</div><div class="d">Cuántos de los leads valían la pena, separados del volumen bruto.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+    <div class="row" data-k="3">
+      <div class="txt"><div class="m">Tasa de cierre</div><div class="d">De lead cualificado a cliente. Dónde se cae la gente de verdad.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+    <div class="row" data-k="4">
+      <div class="txt"><div class="m">Ticket medio por origen</div><div class="d">Qué canal trae los clientes que más pagan, no solo los que más entran.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+    <div class="row" data-k="5">
+      <div class="txt"><div class="m">Retorno por canal</div><div class="d">Por cada euro invertido en un canal, cuántos vuelven en negocio.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+    <div class="row" data-k="6">
+      <div class="txt"><div class="m">€ que no sabes de dónde vienen</div><div class="d">El % de negocio sin origen atribuido. Tu punto ciego, en euros.</div></div>
+      <div class="toggle"><button data-v="yes">Sí</button><button data-v="no">No</button></div>
+    </div>
+  </div>
+
+  <div class="result">
+    <div class="rlabel">Tu informe responde a</div>
+    <div class="score"><b id="n">0</b> de 6 preguntas que importan</div>
+    <div class="bar" id="bar"></div>
+    <div class="verdict" id="verdict">Marca cada cifra arriba para ver el diagnóstico.</div>
+    <div class="foot">
+      <span class="who"><b>Maikel Echevarria</b> · Growth · Qualivo</span>
+      <a class="cta" href="#" onclick="return false">¿Montamos las que te faltan?</a>
+    </div>
+  </div>
+  <p class="note">Diagnóstico rápido, no un juicio. Pero si tu informe responde a menos de la mitad, no te está informando: te está entreteniendo. Un informe existe para decidir dónde va el próximo euro — el resto es decoración.</p>
+</div>
+
+<script>
+  const state = {1:null,2:null,3:null,4:null,5:null,6:null};
+  const verdicts = {
+    low:"Tu informe te entretiene, no te informa. Estás decidiendo el presupuesto a ciegas.",
+    mid:"Tienes la mitad de la foto. Las cifras que faltan son justo las que dicen dónde va el dinero.",
+    high:"Vas bien. Cierra las que faltan y tu informe pasa de describir a decidir.",
+    full:"Informe de director. Ya no describes marketing: pilotas negocio. Raro y muy bien."
+  };
+  const bar = document.getElementById('bar');
+  for(let i=0;i<6;i++){const s=document.createElement('span');s.className='seg';bar.appendChild(s);}
+  document.querySelectorAll('.row').forEach(row=>{
+    const k=row.dataset.k;
+    row.querySelectorAll('.toggle button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        state[k]=btn.dataset.v;
+        row.querySelectorAll('.toggle button').forEach(b=>{b.classList.remove('on-yes','on-no');});
+        btn.classList.add(btn.dataset.v==='yes'?'on-yes':'on-no');
+        render();
+      });
+    });
+  });
+  function render(){
+    const yes=Object.values(state).filter(v=>v==='yes').length;
+    const answered=Object.values(state).filter(v=>v!==null).length;
+    document.getElementById('n').textContent=yes;
+    bar.querySelectorAll('.seg').forEach((s,i)=>s.classList.toggle('on',i<yes));
+    let v;
+    if(answered<6){v="Sigue marcando… te faltan "+(6-answered)+" por responder.";}
+    else if(yes<=2){v=verdicts.low;}
+    else if(yes<=4){v=verdicts.mid;}
+    else if(yes===5){v=verdicts.high;}
+    else{v=verdicts.full;}
+    document.getElementById('verdict').textContent=v;
+  }
+</script>
