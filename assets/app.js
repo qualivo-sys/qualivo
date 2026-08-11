@@ -9,9 +9,9 @@
     // Endpoint que recibe el formulario. /api/lead es la función serverless
     // del propio dominio que crea el contacto en GoHighLevel.
     WEBHOOK_URL: '/api/lead',
-    // URL de un calendario embebible (Calendly, Cal.com…). Si se define,
-    // se incrusta como iframe en la pantalla de confirmación.
-    CALENDAR_EMBED_URL: ''
+    // Widget de reservas de GoHighLevel, incrustado como iframe en la
+    // pantalla de confirmación.
+    CALENDAR_EMBED_URL: 'https://api.leadconnectorhq.com/widget/booking/XSaUhWyjh2p6PoIsLDdJ'
   };
 
   var TEAL = '#0E7C74';
