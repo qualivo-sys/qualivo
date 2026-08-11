@@ -28,6 +28,10 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 - [Tienes leads pero no ventas: los 7 puntos que reviso primero](https://qualivo.io/blog/leads-pero-no-ventas/): medición correcta de etapas, velocidad de primer contacto, cualificación, seguimiento, coste por cliente por canal, alineación marketing-ventas y automatización — con los casos que lo demuestran.
 - [Captación de leads: por qué más leads no siempre es más negocio](https://qualivo.io/blog/captacion-de-leads/): la trampa del CPL barato, cualificación en origen, el lead como principio (no final) del sistema, y qué medir en qué orden.
 
+## Diccionario del sistema
+
+- [CAC](https://qualivo.io/diccionario/cac/), [ROAS](https://qualivo.io/diccionario/roas/), [Lead scoring](https://qualivo.io/diccionario/lead-scoring/) y [Cualificación de leads](https://qualivo.io/diccionario/cualificacion-de-leads/): definiciones desde la práctica, con fórmula, error común y caso real.
+
 ## Contacto
 
 - [Solicitar diagnóstico](https://qualivo.io/#contacto): llamada de 30 minutos, sin compromiso. Si el proyecto no encaja (facturación menor de 500.000 €), se dice honestamente.
