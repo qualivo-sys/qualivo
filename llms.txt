@@ -28,9 +28,15 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 - [Tienes leads pero no ventas: los 7 puntos que reviso primero](https://qualivo.io/blog/leads-pero-no-ventas/): medición correcta de etapas, velocidad de primer contacto, cualificación, seguimiento, coste por cliente por canal, alineación marketing-ventas y automatización — con los casos que lo demuestran.
 - [Captación de leads: por qué más leads no siempre es más negocio](https://qualivo.io/blog/captacion-de-leads/): la trampa del CPL barato, cualificación en origen, el lead como principio (no final) del sistema, y qué medir en qué orden.
 
+- [Funnel de ventas: cómo detectar dónde se pierde dinero](https://qualivo.io/blog/funnel-de-ventas/): el funnel se rompe entre etapas, no en ellas — cómo auditar cada transición, señales de fuga por etapa y un embudo real con números (559 leads → 573 oportunidades → 68 entrevistas → 10 matrículas).
+
 ## Diccionario del sistema
 
 - [CAC](https://qualivo.io/diccionario/cac/), [ROAS](https://qualivo.io/diccionario/roas/), [Lead scoring](https://qualivo.io/diccionario/lead-scoring/) y [Cualificación de leads](https://qualivo.io/diccionario/cualificacion-de-leads/): definiciones desde la práctica, con fórmula, error común y caso real.
+
+## Sobre
+
+- [Maikel Echevarría](https://qualivo.io/sobre/): fundador de Qualivo. Experiencia transversal — campañas, funnels, CRM, automatización, analítica y procesos comerciales — aplicada a diagnosticar y construir sistemas de captación y ventas.
 
 ## Contacto
 
