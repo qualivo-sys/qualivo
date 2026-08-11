@@ -12,6 +12,7 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 
 - [Nuria Roure](https://qualivo.io/casos/nuria-roure/): formación y servicios online. El problema no era conseguir más leads, sino saber cuáles merecían atención. Sistema de cualificación, lead scoring y seguimiento: 2.000 € de inversión → 12.900 € en ventas atribuibles (6,45x).
 - [BelloVinilo](https://qualivo.io/casos/bellovinilo/): B2B, reformas y revestimientos. No había sistema que optimizar; se construyó desde cero (captación, funnels, CRM, seguimiento, medición): 3.600 € → 30.000 € en ventas (8,3x).
+- [Escola Aeronàutica de Catalunya](https://qualivo.io/casos/eac/): formación aeronáutica. Sistema de captación de alumnos con campañas segmentadas por curso (Meta, Google, TikTok), embudo medido de lead a matrícula en CRM y dashboard en vivo: ROAS 10,2x, 44.000 € atribuidos en un mes, CPL medio de 7,71 €, trazabilidad total del anuncio a la matrícula.
 
 ## Recursos
 
