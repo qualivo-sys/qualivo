@@ -211,6 +211,34 @@ input:focus, select:focus, textarea:focus {
   color: var(--qv-ink-soft);
 }
 
+/* Páginas de caso */
+.caso-main { max-width: 780px; margin: 0 auto; padding: clamp(40px,7vh,72px) 24px 96px; }
+.caso-eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--qv-teal); font-weight: 800; margin: 0 0 20px; }
+.caso-main h1 { font-family: var(--qv-font-display); font-size: clamp(30px,5.5vw,52px); line-height: 1.02; letter-spacing: -.032em; font-weight: 900; margin: 0 0 18px; color: var(--qv-ink); }
+.caso-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 44px; }
+.caso-meta span { font-size: 13px; color: var(--qv-ink-muted); border: 1px solid rgba(16,19,25,.14); border-radius: 999px; padding: 7px 14px; font-weight: 600; }
+.caso-main h2 { font-family: var(--qv-font-display); font-size: clamp(21px,4vw,28px); line-height: 1.15; letter-spacing: -.02em; font-weight: 900; margin: 48px 0 16px; color: var(--qv-ink); }
+.caso-main p, .caso-main li { font-size: 16.5px; line-height: 1.7; color: var(--qv-ink-soft); }
+.caso-main ul { padding-left: 22px; }
+.caso-quote { font-family: var(--qv-font-display); font-weight: 800; font-size: clamp(18px,3.2vw,22px); line-height: 1.35; color: var(--qv-ink); background: var(--qv-lilac); border-radius: 14px; padding: 22px 26px; margin: 20px 0; }
+.caso-impl { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 20px 0 0; }
+.caso-impl div { background: #fff; border: 1px solid rgba(16,19,25,.1); border-radius: 14px; padding: 22px 24px; }
+.caso-impl p:first-child { margin: 0 0 8px; font-family: var(--qv-font-display); font-weight: 900; font-size: 16px; color: var(--qv-ink); letter-spacing: -.01em; }
+.caso-impl p:last-child { margin: 0; font-size: 15px; line-height: 1.6; }
+.caso-resultado { background: var(--qv-black); border-radius: 18px; padding: clamp(28px,5vw,44px); margin: 24px 0; text-align: center; }
+.caso-resultado .paso { font-family: var(--qv-font-display); font-weight: 900; color: #fff; }
+.caso-resultado .cifra { font-size: clamp(30px,6vw,46px); letter-spacing: -.025em; line-height: 1.1; }
+.caso-resultado .etiqueta { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #9AA2AE; font-weight: 700; margin-top: 6px; }
+.caso-resultado .flecha { color: var(--qv-teal-bright); font-size: 24px; margin: 14px 0; }
+.caso-resultado .retorno { color: var(--qv-teal-pale); }
+.caso-demuestra { border-left: 3px solid var(--qv-coral); padding-left: 20px; margin: 20px 0 0; }
+.caso-cta { margin-top: 56px; border-top: 1px solid rgba(16,19,25,.1); padding-top: 40px; }
+
+/* Sección de casos en la landing */
+.casos-item { display: block; border: 1px solid rgba(16,19,25,.1); border-radius: 18px; padding: clamp(24px,4vw,34px); background: #FAF7F0; color: var(--qv-ink); transition: box-shadow 160ms ease; }
+.casos-item:hover { color: var(--qv-ink); box-shadow: 0 18px 44px rgba(16,19,25,.1); }
+.casos-item:hover .casos-leer { color: var(--qv-teal-bright); }
+
 .footer-link { color: #C3D1E2; font-size: 14.5px; transition: color 160ms ease; }
 .footer-link:hover { color: #fff; }
 .footer-legal { color: #5E7DA0; font-size: 13px; transition: color 160ms ease; }

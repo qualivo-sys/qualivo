@@ -8,6 +8,11 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 
 - [Qualivo Diagnostic](https://qualivo.io/#diagnostic): radiografía del sistema de captación y ventas en cuatro entregas — mapa de cómo funciona el sistema, fugas donde se pierden oportunidades, prioridades por impacto, y roadmap con qué hacer, en qué orden y cómo medirlo. Incluye implementación opcional.
 
+## Casos
+
+- [Nuria Roure](https://qualivo.io/casos/nuria-roure/): formación y servicios online. El problema no era conseguir más leads, sino saber cuáles merecían atención. Sistema de cualificación, lead scoring y seguimiento: 2.000 € de inversión → 12.900 € en ventas atribuibles (6,45x).
+- [BelloVinilo](https://qualivo.io/casos/bellovinilo/): B2B, reformas y revestimientos. No había sistema que optimizar; se construyó desde cero (captación, funnels, CRM, seguimiento, medición): 3.600 € → 30.000 € en ventas (8,3x).
+
 ## Recursos
 
 - [Auto-diagnóstico express](https://qualivo.io/diagnostico-express/): herramienta gratuita de 15 preguntas que identifica en qué etapa del sistema (captación, conversión, cualificación, venta o retención) se pierden más oportunidades. Resultado inmediato.
