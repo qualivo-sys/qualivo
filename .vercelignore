@@ -1,0 +1,7 @@
+# Solo se despliega la landing: index.html + assets + vercel.json
+nuria-pago-pfd
+src
+apps-script-standalone
+README.md
+.clasp.json.example
+.gitignore
