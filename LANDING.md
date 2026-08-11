@@ -43,6 +43,10 @@ SEO: `sitemap.xml` (reenviar a GSC al añadir páginas), `robots.txt`, `llms.txt
 
 Cuentas conectadas: LinkedIn personal (Maikel), página LinkedIn Qualivo, Instagram @maikel.echevarria, Google Business Profile (verificado). API: `POST /social-media-posting/{locationId}/posts` con `accountIds`, `summary`, `media` (array, obligatorio aunque vacío), `status` (`draft`/`scheduled`), `userId`. Las tarjetas de Instagram viven en `assets/social/` (generadas con `card-template-v2` — línea gráfica de la web).
 
+## Marco de operación
+
+**`content/growth-os.md` gobierna todo el trabajo de adquisición** (objetivos, funnel, métricas rendimiento-vs-resultado, matriz por canal, review semanal, experimentos). Leerlo antes de producir o programar contenido. El calendario editable y los experimentos viven en Notion ("Máquina de Contenido · Qualivo").
+
 ## Cómo añadir contenido
 
 1. **Caso**: copiar la estructura de `/casos/eac/index.html` (hero con métrica → reto → tarjetas teal → resultados negro → cierre lila → CTA). Añadir a: sección #casos de la landing, `sitemap.xml`, `llms.txt`. Reenviar sitemap.
