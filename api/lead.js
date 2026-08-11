@@ -97,9 +97,69 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Aviso por email vía Resend (opcional: solo si hay RESEND_API_KEY).
+    // Si falla, el lead ya está en el CRM — se registra y no rompe nada.
+    await notifyByEmail({
+      nombre, email, empresa, facturacion, quien, hipotesis,
+      cualificado, contactId, locationId
+    }).catch(function (err) {
+      console.error('[lead] Aviso por email falló:', err);
+    });
+
     return res.status(200).json({ ok: true, cualificado: cualificado });
   } catch (err) {
     console.error('[lead] Error inesperado:', err);
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 };
+
+async function notifyByEmail(lead) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return;
+  const to = process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io';
+  const from = process.env.LEAD_NOTIFY_FROM || 'Qualivo Landing <onboarding@resend.dev>';
+
+  const esc = function (s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+  const fila = function (k, v) {
+    return '<tr><td style="padding:6px 14px 6px 0;color:#5A5E66;white-space:nowrap;vertical-align:top">' +
+      k + '</td><td style="padding:6px 0;color:#101319">' + esc(v) + '</td></tr>';
+  };
+  const ghlUrl = 'https://app.gohighlevel.com/v2/location/' + lead.locationId +
+    '/contacts/detail/' + lead.contactId;
+
+  const html =
+    '<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px">' +
+    '<h2 style="margin:0 0 4px">Nuevo lead en qualivo.io</h2>' +
+    '<p style="margin:0 0 16px;color:' + (lead.cualificado ? '#0E7C74' : '#C2410C') + ';font-weight:700">' +
+    (lead.cualificado ? 'Cualificado' : 'Fuera de alcance (menos de 500k)') + '</p>' +
+    '<table style="border-collapse:collapse;font-size:15px">' +
+    fila('Nombre y cargo', lead.nombre) +
+    fila('Email', lead.email) +
+    fila('Empresa y web', lead.empresa) +
+    fila('Facturación', lead.facturacion) +
+    fila('Captación', lead.quien) +
+    fila('Hipótesis', lead.hipotesis) +
+    '</table>' +
+    (lead.contactId
+      ? '<p style="margin:18px 0 0"><a href="' + ghlUrl + '">Ver contacto en GoHighLevel →</a></p>'
+      : '') +
+    '</div>';
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: from,
+      to: to,
+      subject: '🔔 Lead qualivo.io: ' + lead.nombre + ' · ' + lead.facturacion +
+        (lead.cualificado ? '' : ' (fuera de alcance)'),
+      html: html,
+      reply_to: lead.email
+    })
+  });
+  if (!r.ok) throw new Error('Resend respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
+}
