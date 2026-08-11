@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Política de cookies · Qualivo</title>
-<meta name="description" content="Política de cookies del sitio qualivo.io.">
+<title>Política de cookies de qualivo.io · Qualivo</title>
+<meta name="description" content="Política de cookies de qualivo.io: qué cookies usamos, la analítica con consentimiento y cómo cambiar tu elección en cualquier momento.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://qualivo.io/cookies">
+<meta property="og:title" content="Política de cookies · Qualivo">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 <link rel="stylesheet" href="/assets/styles.css?v=2">
 <style>
@@ -40,7 +42,8 @@
     <p>Las cookies son pequeños archivos que un sitio web almacena en tu navegador para recordar información sobre tu visita.</p>
 
     <h2>2. Cookies que usa este sitio</h2>
-    <p><strong>Este sitio no instala cookies propias</strong>: no utilizamos cookies de analítica, publicidad ni personalización.</p>
+    <p><strong>Cookies de analítica (con tu consentimiento):</strong> utilizamos Google Analytics 4 para entender de forma agregada cómo se usa la web (páginas visitadas, origen del tráfico). Estas cookies <strong>solo se instalan si las aceptas</strong> en el aviso que aparece al visitar la web; si las rechazas, la web funciona exactamente igual. La medición básica del sitio (Vercel Web Analytics) no usa cookies ni identifica a los visitantes.</p>
+    <p><button type="button" onclick="window.qvConsentReset && window.qvConsentReset()" style="min-height:44px; padding:0 18px; border-radius:10px; border:1px solid rgba(16,19,25,.2); background:#fff; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer">Cambiar mi elección de cookies</button></p>
     <p>La única excepción son las <strong>cookies técnicas de terceros</strong> que puede instalar el widget de reserva de cita (LeadConnector / HighLevel Inc.), que se carga únicamente después de enviar el formulario de solicitud de diagnóstico y es necesario para que puedas reservar una hora. Estas cookies tienen finalidad estrictamente funcional.</p>
 
     <h2>3. Cómo gestionarlas</h2>
@@ -64,6 +67,7 @@
     </div>
   </footer>
 </div>
+<script src="/assets/consent.js?v=1"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

@@ -166,6 +166,7 @@
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       if (window.va) window.va('event', { name: 'autodiagnostico_completado', data: { etapa_debil: debil.id } });
+      if (window.qvTrack) window.qvTrack('autodiagnostico_completado', { etapa_debil: debil.id });
       pintarResultado(porEtapa);
       show(result);
     }).catch(function (err) {

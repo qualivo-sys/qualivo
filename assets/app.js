@@ -258,6 +258,7 @@
       sendToWebhook(payload)
         .then(function () {
           if (window.va) window.va('event', { name: cualificado ? 'diagnostico_solicitado' : 'lead_fuera_alcance' });
+          if (window.qvTrack) window.qvTrack(cualificado ? 'diagnostico_solicitado' : 'lead_fuera_alcance', { facturacion: payload.facturacion });
           if (cualificado) {
             show(panelThanks);
             mountCalendar();
