@@ -14,6 +14,7 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 - [BelloVinilo](https://qualivo.io/casos/bellovinilo/): B2B, reformas y revestimientos. No había sistema que optimizar; se construyó desde cero (captación, funnels, CRM, seguimiento, medición): 3.600 € → 30.000 € en ventas (8,3x).
 - [Escola Aeronàutica de Catalunya](https://qualivo.io/casos/eac/): formación aeronáutica. Sistema de captación de alumnos con campañas segmentadas por curso (Meta, Google, TikTok), embudo medido de lead a matrícula en CRM y dashboard en vivo: ROAS 10,2x, 44.000 € atribuidos en un mes, CPL medio de 7,71 €, trazabilidad total del anuncio a la matrícula.
 - [Eleva Academy](https://qualivo.io/casos/eleva-academy/): academia de formación profesional de uñas. Capa de medición y optimización (dashboard en tiempo real cruzando CRM con Meta y Google Ads, métrica de entrevistas corregida, reasignación de presupuesto): +102% de entrevistas de venta (83 → 168/mes), CPL de Google de 22,31 € a 8,74 € (−61%), leads de Google x2,1 y mitad de inversión en Meta sin perder pipeline — en el primer mes.
+- [Focus Practical](https://qualivo.io/casos/focus-practical/): formación de oficios (Carnet REBT de electricista y cursos cortos). Campañas de Meta con cualificación en formulario, CRM en GoHighLevel e integración automática verificada: CPL de 6,86 € a 3,22 € (−53%) iterando creatividades hasta el reel, cursos cortos a 2,86 €/lead, y cada lead entra en el CRM con su trato creado en ~8 segundos, sin trabajo manual.
 
 ## Recursos
 
