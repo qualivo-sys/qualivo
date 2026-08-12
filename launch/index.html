@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Qualivo Launch — de una idea a tu primera máquina de growth</title>
@@ -13,210 +12,916 @@
 <meta property="og:title" content="Qualivo Launch — de idea a primera máquina de growth">
 <meta property="og:description" content="No necesitas otra consultoría. Necesitas salir al mercado. Research → ICP → Positioning → Build → Growth Machine → Launch.">
 <meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/styles.css?v=2">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Service",
-      "name": "Qualivo Launch",
-      "serviceType": "Lanzamiento de nuevos negocios, productos y líneas de negocio — de la idea a la primera máquina de growth",
-      "provider": { "@id": "https://qualivo.io/#organizacion" },
-      "description": "Programa para convertir una idea, un producto o una nueva línea de negocio en algo que sale al mercado: research de oportunidad, definición de ICP, posicionamiento y oferta, construcción de web, funnel, CRM y contenido, y puesta en marcha de la primera máquina de adquisición. El entregable no es una presentación: son señales reales de mercado.",
-      "areaServed": "ES",
-      "url": "https://qualivo.io/launch/"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Qualivo Launch", "item": "https://qualivo.io/launch/" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿En qué se diferencia Qualivo Launch de una consultoría estratégica?",
-          "acceptedAnswer": { "@type": "Answer", "text": "En el entregable. Una consultoría estratégica entrega un plan; Qualivo Launch construye las piezas y las pone a funcionar: la web publicada, el formulario capturando en el CRM, el contenido posicionando, la primera cadencia de adquisición en marcha. El objetivo no es una presentación de 80 páginas — son señales reales de mercado: visitas, leads, conversaciones, primeras ventas." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Para quién es Qualivo Launch?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Para empresas que quieren lanzar una nueva línea de negocio o producto, validar una idea antes de invertir en serio, entrar en un mercado nuevo, convertir conocimiento interno en una oferta vendible — o crear una empresa desde cero. Si ya tienes un negocio funcionando y el problema es que no sabes dónde pierde, tu producto es el Qualivo Diagnostic." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué incluye el programa?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Seis fases: research de la oportunidad (mercado, demanda, competencia), definición del cliente ideal, posicionamiento y oferta, construcción (web, marca, funnel, CRM, tracking, contenido, lead magnets, proceso de venta), la primera máquina de growth (outbound, contenido, SEO y paid cuando tiene sentido), y lanzamiento con medición e iteración." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tenéis algún ejemplo real de un Launch?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Sí — el nuestro. Agent to Me (agenttome.io), la empresa de empleados digitales del fundador de Qualivo, se está construyendo con este mismo proceso: research, ICP, posicionamiento de categoría, web con sistema de captación y su primera máquina de adquisición. Y se está construyendo en público: los números se comparten según se producen." }
-        }
-      ]
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Qualivo Launch","serviceType":"Lanzamiento de nuevos negocios, productos y líneas de negocio — de la idea a la primera máquina de growth","provider":{"@id":"https://qualivo.io/#organizacion"},"description":"Programa para convertir una idea, un producto o una nueva línea de negocio en algo que sale al mercado: research de oportunidad, ICP, posicionamiento y oferta, construcción de web, funnel, CRM y contenido, y puesta en marcha de la primera máquina de adquisición. El entregable no es una presentación: son señales reales de mercado.","areaServed":"ES","url":"https://qualivo.io/launch/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Qualivo","item":"https://qualivo.io/"},{"@type":"ListItem","position":2,"name":"Qualivo Launch","item":"https://qualivo.io/launch/"}]}]}</script>
+<script src="/launch/assets/js-1.js"></script>
 </head>
 <body>
-<div style="color:#101319; background:#FFFFFF; min-height:100vh">
-  <header class="site-header">
-    <div class="container">
-      <a href="/" class="brand">
-        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
-        <span class="brand-tagline">Consultoría de Growth</span>
+
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>/* =============================================================================
+   Qualivo Design System — Colors & Type
+   ============================================================================= */
+
+/* Fonts: Montserrat (display + body) is the closest Google Font to the bold,
+   geometric sans-serif seen across Qualivo's logo, ad creatives, and site. */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/launch/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+:root {
+  /* ---------------------------------------------------------------------------
+     COLOR — Brand
+     --------------------------------------------------------------------------- */
+  /* Primary brand ink — deep navy, used for text, nav, hero panels */
+  --qv-navy-900: #0B1C33;
+  --qv-navy-800: #0F2540;   /* primary navy (hero bg) */
+  --qv-navy-700: #132B4C;
+  --qv-navy-600: #1B3A66;
+
+  /* Teal — the energetic brand color, shapes, primary CTA */
+  --qv-teal-700: #1F9E94;
+  --qv-teal-600: #27BDB1;   /* primary teal */
+  --qv-teal-500: #3CCEC2;
+  --qv-teal-200: #B8EFEA;
+  --qv-teal-100: #E3F8F6;
+
+  /* Yellow — accent dot, highlights, pricing checks, stats */
+  --qv-yellow-700: #D9B420;
+  --qv-yellow-600: #F4CC38;   /* primary yellow */
+  --qv-yellow-300: #FBE896;
+  --qv-yellow-100: #FFF7D6;
+
+  /* Indigo — used for CTA banner + footer */
+  --qv-indigo-700: #3E3F9E;
+  --qv-indigo-600: #4E4FB8;  /* footer + CTA banner */
+  --qv-indigo-400: #8A8BD9;
+  --qv-indigo-100: #E7E7F5;
+
+  /* ---------------------------------------------------------------------------
+     COLOR — Neutrals
+     --------------------------------------------------------------------------- */
+  --qv-black: #0A0F1A;
+  --qv-ink-900: #111827;     /* body copy on light */
+  --qv-ink-700: #374151;
+  --qv-ink-500: #6B7280;     /* secondary copy */
+  --qv-ink-400: #9CA3AF;     /* tertiary, captions */
+  --qv-line-200: #E5E7EB;    /* borders, dividers */
+  --qv-line-100: #F1F3F5;
+  --qv-surface-50: #F7F8FA;  /* app canvas */
+  --qv-surface-0: #FFFFFF;
+
+  /* ---------------------------------------------------------------------------
+     COLOR — Semantic
+     --------------------------------------------------------------------------- */
+  --qv-success: #22A06B;
+  --qv-warning: #E8A317;
+  --qv-danger:  #D94A3D;
+  --qv-info:    #2F7BD9;
+
+  /* Foreground / background tokens */
+  --qv-fg-1: var(--qv-ink-900);   /* primary text */
+  --qv-fg-2: var(--qv-ink-500);   /* secondary */
+  --qv-fg-3: var(--qv-ink-400);   /* muted */
+  --qv-fg-inverse: #FFFFFF;
+
+  --qv-bg-1: var(--qv-surface-0);   /* cards, page */
+  --qv-bg-2: var(--qv-surface-50);  /* app canvas */
+  --qv-bg-dark: var(--qv-navy-800); /* dark sections */
+  --qv-bg-accent: var(--qv-indigo-600); /* CTA banner / footer */
+
+  --qv-border: var(--qv-line-200);
+  --qv-border-strong: #CBD1D9;
+
+  /* Accent-on-dark: bars + data numbers on navy use yellow */
+  --qv-on-dark-accent: var(--qv-yellow-600);
+
+  /* ---------------------------------------------------------------------------
+     TYPOGRAPHY
+     --------------------------------------------------------------------------- */
+  --qv-font-display: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --qv-font-body:    'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --qv-font-mono:    ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Scale — tight heading rhythm, bold weights */
+  --qv-fs-display: 64px;
+  --qv-fs-h1: 48px;
+  --qv-fs-h2: 36px;
+  --qv-fs-h3: 28px;
+  --qv-fs-h4: 22px;
+  --qv-fs-h5: 18px;
+  --qv-fs-lg: 20px;
+  --qv-fs-body: 16px;
+  --qv-fs-sm: 14px;
+  --qv-fs-xs: 12px;
+
+  --qv-lh-tight: 1.08; /* @kind font */
+  --qv-lh-snug: 1.2; /* @kind font */
+  --qv-lh-body: 1.55; /* @kind font */
+  --qv-lh-relaxed: 1.7; /* @kind font */
+
+  --qv-tracking-display: -0.02em;
+  --qv-tracking-eyebrow: 0.12em;
+
+  /* ---------------------------------------------------------------------------
+     SPACING / RADIUS / SHADOW
+     --------------------------------------------------------------------------- */
+  --qv-space-1: 4px;
+  --qv-space-2: 8px;
+  --qv-space-3: 12px;
+  --qv-space-4: 16px;
+  --qv-space-5: 24px;
+  --qv-space-6: 32px;
+  --qv-space-7: 48px;
+  --qv-space-8: 64px;
+  --qv-space-9: 96px;
+
+  --qv-radius-sm: 4px;
+  --qv-radius-md: 8px;
+  --qv-radius-lg: 14px;
+  --qv-radius-xl: 22px;
+  --qv-radius-pill: 999px;
+
+  --qv-shadow-xs: 0 1px 2px rgba(15, 37, 64, 0.06);
+  --qv-shadow-sm: 0 2px 6px rgba(15, 37, 64, 0.06), 0 1px 2px rgba(15, 37, 64, 0.04);
+  --qv-shadow-md: 0 6px 18px rgba(15, 37, 64, 0.08), 0 2px 6px rgba(15, 37, 64, 0.05);
+  --qv-shadow-lg: 0 14px 40px rgba(15, 37, 64, 0.12), 0 4px 12px rgba(15, 37, 64, 0.06);
+  --qv-shadow-card: 0 10px 30px rgba(15, 37, 64, 0.06);
+
+  /* Focus ring */
+  --qv-focus: 0 0 0 3px rgba(39, 189, 177, 0.35);
+
+  /* Motion */
+  --qv-ease: cubic-bezier(.2,.7,.2,1); /* @kind other */
+  --qv-dur-fast: 120ms; /* @kind other */
+  --qv-dur: 200ms; /* @kind other */
+  --qv-dur-slow: 360ms; /* @kind other */
+}
+
+/* =============================================================================
+   BASE
+   ============================================================================= */
+html, body {
+  font-family: var(--qv-font-body);
+  color: var(--qv-fg-1);
+  background: var(--qv-bg-1);
+  font-size: var(--qv-fs-body);
+  line-height: var(--qv-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =============================================================================
+   TYPE — semantic utilities
+   ============================================================================= */
+.qv-eyebrow {
+  font-family: var(--qv-font-display);
+  font-weight: 700;
+  font-size: var(--qv-fs-xs);
+  letter-spacing: var(--qv-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--qv-teal-700);
+}
+
+.qv-display, h1.qv-display {
+  font-family: var(--qv-font-display);
+  font-weight: 900;
+  font-size: var(--qv-fs-display);
+  line-height: var(--qv-lh-tight);
+  letter-spacing: var(--qv-tracking-display);
+  color: var(--qv-fg-1);
+  text-wrap: balance;
+}
+
+h1, .qv-h1 {
+  font-family: var(--qv-font-display);
+  font-weight: 900;
+  font-size: var(--qv-fs-h1);
+  line-height: var(--qv-lh-tight);
+  letter-spacing: -0.015em;
+  color: var(--qv-fg-1);
+  text-wrap: balance;
+}
+
+h2, .qv-h2 {
+  font-family: var(--qv-font-display);
+  font-weight: 800;
+  font-size: var(--qv-fs-h2);
+  line-height: var(--qv-lh-snug);
+  letter-spacing: -0.01em;
+  color: var(--qv-fg-1);
+  text-wrap: balance;
+}
+
+h3, .qv-h3 {
+  font-family: var(--qv-font-display);
+  font-weight: 700;
+  font-size: var(--qv-fs-h3);
+  line-height: var(--qv-lh-snug);
+  color: var(--qv-fg-1);
+}
+
+h4, .qv-h4 {
+  font-family: var(--qv-font-display);
+  font-weight: 700;
+  font-size: var(--qv-fs-h4);
+  line-height: var(--qv-lh-snug);
+  color: var(--qv-fg-1);
+}
+
+h5, .qv-h5 {
+  font-family: var(--qv-font-display);
+  font-weight: 700;
+  font-size: var(--qv-fs-h5);
+  line-height: var(--qv-lh-snug);
+  color: var(--qv-fg-1);
+}
+
+p, .qv-body {
+  font-size: var(--qv-fs-body);
+  line-height: var(--qv-lh-body);
+  color: var(--qv-fg-1);
+  text-wrap: pretty;
+}
+
+.qv-lede {
+  font-size: var(--qv-fs-lg);
+  line-height: var(--qv-lh-relaxed);
+  color: var(--qv-fg-2);
+}
+
+.qv-small {
+  font-size: var(--qv-fs-sm);
+  color: var(--qv-fg-2);
+}
+
+.qv-caption {
+  font-size: var(--qv-fs-xs);
+  color: var(--qv-fg-3);
+  letter-spacing: 0.02em;
+}
+
+.qv-metric {
+  font-family: var(--qv-font-display);
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.qv-quote {
+  font-family: var(--qv-font-display);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+/* On-dark reversals */
+.qv-on-dark { color: var(--qv-fg-inverse); }
+.qv-on-dark .qv-eyebrow { color: var(--qv-teal-500); }
+.qv-on-dark .qv-metric,
+.qv-on-dark .qv-stat-number { color: var(--qv-yellow-600); }
+</style>
+<script src="/launch/assets/js-2.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#fff; scroll-behavior:smooth; }
+  * { box-sizing:border-box; }
+  a { color:#0E7C74; text-decoration:none; }
+  a:hover { color:#27BDB1; }
+  details > summary { list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker { display:none; }
+  details[open] .faq-chevron { transform:rotate(45deg); }
+  @keyframes qvUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { animation:none !important; opacity:1 !important; transform:none !important; } }
+</style>
+</helmet>
+
+<div style="font-family:var(--qv-font-body); color:#101319; background:#fff; overflow-x:clip">
+
+  <header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(16,19,25,.08)">
+    <div style="max-width:1120px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px">
+      <a href="/" style="display:flex; align-items:center; gap:13px">
+        <img src="/launch/assets/img-1.png" alt="Qualivo" style="height:22px; width:auto; display:block">
+        <span style="font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#7A7C82; font-weight:700">Launch</span>
       </a>
-      <nav class="site-nav">
-        <a href="/#casos" class="nav-link">Casos</a>
-        <a href="/#contacto" class="btn-dark btn-nav">Cuéntanos tu idea</a>
-      </nav>
+      <div style="display:flex; align-items:center; gap:22px">
+        <a href="#proceso" style="color:#3D4148; font-size:14px; font-weight:600" style-hover="color:#101319">El proceso</a>
+        <a href="#cta" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border-radius:10px; background:#101319; color:#fff; font-weight:700; font-size:13.5px" style-hover="background:#27BDB1; color:#04231F">Cuéntanos tu idea</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="cs-hero">
-      <div style="max-width:1100px; margin:0 auto">
-        <p class="cs-eyebrow">Qualivo Launch</p>
-        <h1>No necesitas otra consultoría. Necesitas salir al mercado.</h1>
-        <p class="cs-lede">De una idea a tu primera máquina de growth. Investigamos si la oportunidad existe, definimos para quién y por qué tú, y construimos las piezas — web, oferta, funnel, CRM, contenido, adquisición — hasta que el mercado responde. El entregable no es una presentación: son señales reales.</p>
-        <div class="cs-pills">
-          <span class="cs-pill">Research de oportunidad</span>
-          <span class="cs-pill">ICP y Jobs to be Done</span>
-          <span class="cs-pill">Posicionamiento y oferta</span>
-          <span class="cs-pill">Web, funnel y CRM</span>
-          <span class="cs-pill">Primera máquina de growth</span>
-          <span class="cs-pill">Launch &amp; Learn</span>
-        </div>
-        <div class="cs-herostat">
-          <div>
-            <div class="num">48 h</div>
-            <p class="num-label">De dominio recién comprado a web en producción capturando leads</p>
-          </div>
-          <p class="num-explica">Es el ritmo de nuestro propio Launch en marcha — Agent to Me, más abajo. Días, no meses.</p>
-        </div>
+  <section data-screen-label="Hero" style="max-width:1120px; margin:0 auto; padding:clamp(56px,9vw,110px) 24px clamp(50px,7vw,80px); display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(36px,5vw,72px); align-items:center">
+    <div>
+      <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0E7C74; font-weight:800; margin:0 0 20px">Qualivo Launch</p>
+      <h1 style="font-family:var(--qv-font-display); font-size:clamp(36px,6.2vw,64px); line-height:.98; letter-spacing:-.035em; font-weight:900; margin:0 0 24px; color:#101319; max-width:15ch">No necesitas otra consultoría. <span style="color:#0E7C74">Necesitas salir al mercado.</span></h1>
+      <p style="font-size:clamp(16.5px,3vw,19px); line-height:1.65; color:#3D4148; margin:0 0 32px; max-width:52ch">De una idea a tu primera máquina de growth. Investigamos si la oportunidad existe, definimos para quién y por qué tú, y construimos las piezas — web, oferta, funnel, CRM, contenido, adquisición — hasta que el mercado responde. El entregable no es una presentación: <strong style="color:#101319">son señales reales.</strong></p>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:28px">
+        <a href="#cta" style="display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 26px; border-radius:12px; background:#0E7C74; color:#fff; font-weight:800; font-size:16px" style-hover="background:#27BDB1; color:#04231F">Cuéntanos tu idea →</a>
+        <a href="#proceso" style="font-size:15px; font-weight:700; color:#3D4148" style-hover="color:#101319">Ver el proceso ↓</a>
       </div>
-    </section>
-
-    <section class="cs-section" style="background:#fff; border-top:1px solid rgba(16,19,25,.06)">
-      <div class="inner cs-split">
-        <h2>Tres momentos de una empresa. Tres formas de entrar en Qualivo.</h2>
-        <div class="copy" style="color:#3D4148">
-          <p><strong style="color:#101319">«No sé dónde está el problema»</strong> → <a href="/#diagnostic">Qualivo Diagnostic</a>. Ya tienes negocio y captación: analizamos el sistema, detectamos las fugas y priorizamos qué solucionar primero.</p>
-          <p><strong style="color:#101319">«Tengo una idea / quiero lanzar algo»</strong> → <strong style="color:#0E7C74">Qualivo Launch</strong>. Esta página: convertimos la idea en un negocio preparado para crecer.</p>
-          <p><strong style="color:#101319">«Ya vendo y quiero crecer»</strong> → hoy se entra por el Diagnostic (la máquina de crecimiento se construye sobre lo que el diagnóstico encuentra). Como producto propio, llegará cuando toque.</p>
-          <p>No son tres servicios arbitrarios — son tres momentos distintos de una empresa. Y el proceso de Launch es el mismo músculo del Diagnostic aplicado antes de que el negocio exista: entender el sistema, encontrar dónde está el valor, construir lo que falta.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section" style="background:#0E7C74">
-      <div class="inner">
-        <h2 style="color:#fff; max-width:26ch">El proceso: de la idea a las primeras señales.</h2>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:34px">
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">01 · Research</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">¿Existe la oportunidad? Mercado, demanda real (búsquedas y datos, no opiniones), competencia, alternativas y problemas del cliente. Si la respuesta es «no», te lo decimos aquí — y te ahorras el resto.</p>
-          </div>
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">02 · ICP</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">¿Para quién lo construimos? Segmentos, problemas, Jobs to be Done, capacidad de pago y los triggers que hacen que alguien compre esto ahora.</p>
-          </div>
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">03 · Positioning</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">¿Por qué deberían elegirte? Categoría, propuesta de valor, mensaje, oferta y diferenciación. La palabra correcta produce el comportamiento correcto.</p>
-          </div>
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">04 · Build</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">Lo necesario para salir — y nada más: web, marca, oferta, funnel, CRM, tracking, contenido, lead magnets y proceso de venta. Construido, no descrito.</p>
-          </div>
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">05 · Growth Machine</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">La primera máquina completa: tráfico → lead → cualificación → venta → cliente → dato. Outbound, contenido, SEO, paid cuando tiene sentido, CRM y analítica.</p>
-          </div>
-          <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:24px">
-            <p style="font-family:var(--qv-font-display); font-weight:900; color:#B7F0EA; margin:0 0 8px">06 · Launch &amp; Learn</p>
-            <p style="color:#DFF5F2; margin:0; font-size:15px; line-height:1.6">No damos por hecho que el plan funciona. Lanzamos, medimos, aprendemos e iteramos — cada experimento con su hipótesis y su umbral definidos antes de empezar.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section" style="background:#08090C">
-      <div class="inner cs-split">
-        <h2 style="color:#fff">La prueba: estamos lanzando un negocio delante de ti.</h2>
-        <div class="copy" style="color:#9AA7B5">
-          <p><strong style="color:#fff">Agent to Me</strong> — la empresa de empleados digitales de nuestro fundador — se está construyendo con este mismo proceso, en público: research de la categoría, definición del ICP, posicionamiento («empleados digitales», no «automatizaciones»), web con sistema de captación conectado al CRM en 48 horas, lead magnet propio y su primera máquina de adquisición.</p>
-          <p>No te contamos que sabemos lanzar negocios. <strong style="color:#F4CC38">Estás viendo cómo lanzamos el nuestro</strong> — con sus números compartidos según se producen, los buenos y los malos.</p>
-          <p><a href="https://agenttome.io/" style="color:#27BDB1; font-weight:700">Ver Agent to Me →</a></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section" style="background:#EFECFB">
-      <div class="inner cs-split">
-        <h2>Para quién es (y para quién no).</h2>
-        <div class="copy" style="color:#3D4148">
-          <p><strong style="color:#101319">Es para ti si</strong> quieres lanzar una nueva línea de negocio o producto, validar una idea antes de invertir en serio, entrar en un mercado nuevo, convertir conocimiento de tu equipo en una oferta vendible, o crear una empresa desde cero con alguien que ya lo está haciendo.</p>
-          <p><strong style="color:#101319">No es para ti si</strong> buscas un plan de negocio para un banco, una presentación para un comité, o validación emocional de una idea que no quieres contrastar con el mercado. El research de la fase 01 puede concluir que la oportunidad no existe — y ese resultado también se entrega.</p>
-          <p><strong style="color:#101319">Capacidad honesta:</strong> un Launch se trabaja en profundidad. Tomamos pocos a la vez — si hay lista de espera, te lo diremos en la primera conversación.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section" style="background:#fff">
-      <div class="inner cs-split">
-        <h2>Preguntas frecuentes</h2>
-        <div>
-          <details class="faq-item">
-            <summary>¿En qué se diferencia de una consultoría estratégica?</summary>
-            <p>En el entregable. Una consultoría entrega un plan; Launch construye las piezas y las pone a funcionar: la web publicada, el formulario capturando en el CRM, el contenido posicionando, la primera cadencia de adquisición en marcha. El objetivo son señales reales de mercado: visitas, leads, conversaciones, primeras ventas.</p>
-          </details>
-          <details class="faq-item">
-            <summary>¿Y si la idea resulta no tener mercado?</summary>
-            <p>Ese es un resultado válido del research — y de los más valiosos: descubrirlo en la fase 01 cuesta una fracción de descubrirlo después de construir. Te entregamos la evidencia y, si existe, la oportunidad adyacente que sí tiene demanda.</p>
-          </details>
-          <details class="faq-item">
-            <summary>¿Qué necesito tener antes de empezar?</summary>
-            <p>Una idea u oportunidad, capacidad de decisión y alguien de tu lado que vaya a operar el negocio (o la voluntad de contratarlo). No hace falta marca, web ni nada construido — eso es exactamente lo que hacemos juntos.</p>
-          </details>
-          <details class="faq-item">
-            <summary>¿Cómo empezamos?</summary>
-            <p>Cuéntanos qué quieres lanzar en el <a href="/#contacto">formulario</a> — usa el campo de hipótesis para describir la idea. Respondemos en menos de 24 horas con una primera lectura honesta: si vemos la oportunidad, cómo la atacaríamos; si no la vemos, también.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="cs-section" style="background:#FFFFFF; border-top:1px solid rgba(16,19,25,.06)">
-      <div class="inner" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between">
-        <p style="font-family:var(--qv-font-display); font-weight:900; font-size:clamp(22px,4vw,32px); letter-spacing:-.02em; color:#101319; margin:0; max-width:22ch">¿Qué quieres lanzar?</p>
-        <a href="/#contacto" class="btn-dark btn-hero">Cuéntanos tu idea</a>
-      </div>
-    </section>
-  </main>
-
-  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
-    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
-      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
-      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
-        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
-        <a href="/privacidad/" class="footer-legal">Privacidad</a>
-        <a href="/cookies/" class="footer-legal">Cookies</a>
-        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px">
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">Research de oportunidad</span>
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">ICP y Jobs to be Done</span>
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">Posicionamiento y oferta</span>
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">Web, funnel y CRM</span>
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">Primera máquina de growth</span>
+        <span style="font-size:12.5px; color:#5A5E66; border:1px solid rgba(16,19,25,.14); border-radius:999px; padding:7px 13px">Launch &amp; Learn</span>
       </div>
     </div>
+    <div style="min-height:380px; background:linear-gradient(180deg,#F0FAF8,#fff); border:1px solid rgba(14,124,116,.18); border-radius:22px; padding:clamp(16px,3vw,28px); box-shadow:0 24px 60px rgba(14,124,116,.08)">{{ heroViz }}</div>
+  </section>
+
+  <section data-screen-label="48h" style="background:#0E7C74">
+    <div style="max-width:1120px; margin:0 auto; padding:clamp(34px,5vw,54px) 24px; display:flex; flex-wrap:wrap; align-items:center; gap:clamp(22px,4vw,48px)">
+      <p style="margin:0; font-family:var(--qv-font-display); font-size:clamp(56px,9vw,96px); line-height:1; letter-spacing:-.04em; font-weight:900; color:#fff">48&nbsp;h</p>
+      <div style="max-width:52ch">
+        <p style="margin:0 0 6px; font-size:18px; font-weight:800; color:#fff; line-height:1.4">De dominio recién comprado a web en producción capturando leads.</p>
+        <p style="margin:0; font-size:15px; line-height:1.55; color:#B7F0EA">Es el ritmo de nuestro propio Launch en marcha — Agent to Me, más abajo. Días, no meses.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Tres momentos" style="max-width:1120px; margin:0 auto; padding:clamp(56px,8vw,96px) 24px">
+    <h2 style="font-family:var(--qv-font-display); font-size:clamp(26px,4.6vw,42px); line-height:1.02; letter-spacing:-.028em; font-weight:900; margin:0 0 12px; color:#101319; max-width:24ch">Tres momentos de una empresa. Tres formas de entrar en Qualivo.</h2>
+    <p style="font-size:16px; line-height:1.6; color:#5A5E66; margin:0 0 36px; max-width:66ch">No son tres servicios arbitrarios — son tres momentos distintos. El proceso de Launch es el mismo músculo del Diagnostic aplicado antes de que el negocio exista: entender el sistema, encontrar dónde está el valor, construir lo que falta.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px">
+      <div data-reveal="" style="background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:16px; padding:28px; transition:transform .3s, box-shadow .3s" style-hover="transform:translateY(-4px); box-shadow:0 18px 44px rgba(16,19,25,.1)">
+        <p style="margin:0 0 12px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7A7C82; font-weight:800">«No sé dónde está el problema»</p>
+        <h3 style="font-family:var(--qv-font-display); font-size:23px; letter-spacing:-.02em; font-weight:900; margin:0 0 12px; color:#101319">Qualivo Diagnostic</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#5A5E66">Ya tienes negocio y captación: analizamos el sistema, detectamos las fugas y priorizamos qué solucionar primero.</p>
+      </div>
+      <div data-reveal="" style="background:#0E7C74; border-radius:16px; padding:28px; transition:transform .3s, box-shadow .3s" style-hover="transform:translateY(-4px); box-shadow:0 18px 44px rgba(14,124,116,.35)">
+        <p style="margin:0 0 12px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#B7F0EA; font-weight:800">«Tengo una idea / quiero lanzar»</p>
+        <h3 style="font-family:var(--qv-font-display); font-size:23px; letter-spacing:-.02em; font-weight:900; margin:0 0 12px; color:#fff">Qualivo Launch</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#DFF6F3">Esta página: convertimos la idea en un negocio preparado para crecer.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px dashed rgba(16,19,25,.22); border-radius:16px; padding:28px; transition:transform .3s, box-shadow .3s" style-hover="transform:translateY(-4px); box-shadow:0 18px 44px rgba(16,19,25,.1)">
+        <p style="margin:0 0 12px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7A7C82; font-weight:800">«Ya vendo y quiero crecer»</p>
+        <h3 style="font-family:var(--qv-font-display); font-size:23px; letter-spacing:-.02em; font-weight:900; margin:0 0 12px; color:#101319">Se entra por el Diagnostic</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#5A5E66">La máquina de crecimiento se construye sobre lo que el diagnóstico encuentra. Como producto propio, llegará cuando toque.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso" data-screen-label="Proceso" style="background:#F4F9F8; border-top:1px solid rgba(14,124,116,.12)">
+    <div style="max-width:860px; margin:0 auto; padding:clamp(56px,8vw,96px) 24px">
+      <h2 style="font-family:var(--qv-font-display); font-size:clamp(26px,4.6vw,42px); line-height:1.02; letter-spacing:-.028em; font-weight:900; margin:0 0 48px; color:#101319; max-width:22ch">El proceso: de la idea a las primeras señales.</h2>
+
+      <div style="display:grid; grid-template-columns:56px 1fr; gap:0 clamp(18px,3vw,32px)">
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; background:#0E7C74; color:#fff; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center">01</span><span style="flex:1; width:2px; background:rgba(16,19,25,.12); margin:8px 0"></span></div>
+        <div data-reveal="" style="padding-bottom:20px">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">Research — ¿Existe la oportunidad?</h3>
+          <p style="margin:0 0 14px; font-size:15.5px; line-height:1.65; color:#5A5E66">Mercado, demanda real (búsquedas y datos, no opiniones), competencia, alternativas y problemas del cliente.</p>
+          <p style="margin:0 0 26px; font-size:14px; line-height:1.55; color:#B23A0F; background:rgba(232,89,12,.07); border:1px solid rgba(232,89,12,.25); border-radius:10px; padding:12px 16px; max-width:56ch"><strong>Salida honesta:</strong> si la respuesta es «no», te lo decimos aquí — y te ahorras el resto.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; border:2px solid #0E7C74; color:#0E7C74; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center; background:#fff">02</span><span style="flex:1; width:2px; background:rgba(16,19,25,.12); margin:8px 0"></span></div>
+        <div data-reveal="" style="padding-bottom:20px">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">ICP — ¿Para quién lo construimos?</h3>
+          <p style="margin:0 0 26px; font-size:15.5px; line-height:1.65; color:#5A5E66">Segmentos, problemas, Jobs to be Done, capacidad de pago y los triggers que hacen que alguien compre esto ahora.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; border:2px solid #0E7C74; color:#0E7C74; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center; background:#fff">03</span><span style="flex:1; width:2px; background:rgba(16,19,25,.12); margin:8px 0"></span></div>
+        <div data-reveal="" style="padding-bottom:20px">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">Positioning — ¿Por qué deberían elegirte?</h3>
+          <p style="margin:0 0 26px; font-size:15.5px; line-height:1.65; color:#5A5E66">Categoría, propuesta de valor, mensaje, oferta y diferenciación. La palabra correcta produce el comportamiento correcto.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; border:2px solid #0E7C74; color:#0E7C74; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center; background:#fff">04</span><span style="flex:1; width:2px; background:rgba(16,19,25,.12); margin:8px 0"></span></div>
+        <div data-reveal="" style="padding-bottom:20px">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">Build — Lo necesario para salir, y nada más</h3>
+          <p style="margin:0 0 26px; font-size:15.5px; line-height:1.65; color:#5A5E66">Web, marca, oferta, funnel, CRM, tracking, contenido, lead magnets y proceso de venta. <strong style="color:#101319">Construido, no descrito.</strong></p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; border:2px solid #0E7C74; color:#0E7C74; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center; background:#fff">05</span><span style="flex:1; width:2px; background:rgba(16,19,25,.12); margin:8px 0"></span></div>
+        <div data-reveal="" style="padding-bottom:20px">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">Growth Machine — La primera máquina completa</h3>
+          <p style="margin:0 0 26px; font-size:15.5px; line-height:1.65; color:#5A5E66">Tráfico → lead → cualificación → venta → cliente → dato. Outbound, contenido, SEO, paid cuando tiene sentido, CRM y analítica.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center"><span style="width:40px; height:40px; border-radius:12px; background:#27BDB1; color:#04231F; font-family:var(--qv-font-display); font-weight:900; font-size:15px; display:flex; align-items:center; justify-content:center">06</span></div>
+        <div data-reveal="">
+          <h3 style="font-size:19px; letter-spacing:-.015em; margin:6px 0 10px; color:#101319">Launch &amp; Learn — Lanzar, medir, aprender</h3>
+          <p style="margin:0; font-size:15.5px; line-height:1.65; color:#5A5E66">No damos por hecho que el plan funciona. Lanzamos, medimos, aprendemos e iteramos — cada experimento con su hipótesis y su umbral definidos antes de empezar.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Agent to Me" style="background:#101319">
+    <div style="max-width:1120px; margin:0 auto; padding:clamp(56px,8vw,96px) 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(36px,5vw,72px); align-items:center">
+      <div>
+        <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#27BDB1; font-weight:800; margin:0 0 18px">La prueba</p>
+        <h2 style="font-family:var(--qv-font-display); font-size:clamp(28px,5vw,46px); line-height:1; letter-spacing:-.03em; font-weight:900; margin:0 0 20px; color:#fff; max-width:18ch">Estamos lanzando un negocio delante de ti.</h2>
+        <p style="font-size:16.5px; line-height:1.7; color:#C3D1E2; margin:0 0 16px; max-width:56ch"><strong style="color:#fff">Agent to Me</strong> — la empresa de empleados digitales de nuestro fundador — se está construyendo con este mismo proceso, en público: research de la categoría, definición del ICP, posicionamiento («empleados digitales», no «automatizaciones»), web con sistema de captación conectado al CRM en 48 horas, lead magnet propio y su primera máquina de adquisición.</p>
+        <p style="font-size:16.5px; line-height:1.7; color:#C3D1E2; margin:0 0 28px; max-width:56ch">No te contamos que sabemos lanzar negocios. Estás viendo cómo lanzamos el nuestro — con sus números compartidos según se producen, <strong style="color:#fff">los buenos y los malos.</strong></p>
+        <a href="https://agenttome.io/" target="_blank" rel="noopener" style="font-size:15.5px; font-weight:800; color:#27BDB1" style-hover="color:#4FD8CC">Ver Agent to Me →</a>
+      </div>
+      <div>{{ launchLog }}</div>
+    </div>
+  </section>
+
+  <section data-screen-label="Para quién" style="max-width:860px; margin:0 auto; padding:clamp(56px,8vw,96px) 24px">
+    <h2 style="font-family:var(--qv-font-display); font-size:clamp(26px,4.6vw,42px); line-height:1.02; letter-spacing:-.028em; font-weight:900; margin:0 0 32px; color:#101319">Para quién es (y para quién no).</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin-bottom:22px">
+      <div style="background:#fff; border:1px solid rgba(14,124,116,.3); border-radius:16px; padding:28px">
+        <p style="margin:0 0 12px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#0E7C74; font-weight:800">Es para ti si…</p>
+        <p style="margin:0; font-size:15.5px; line-height:1.7; color:#3D4148">Quieres lanzar una nueva línea de negocio o producto, validar una idea antes de invertir en serio, entrar en un mercado nuevo, convertir conocimiento de tu equipo en una oferta vendible, o crear una empresa desde cero con alguien que ya lo está haciendo.</p>
+      </div>
+      <div style="background:#fff; border:1px solid rgba(232,89,12,.3); border-radius:16px; padding:28px">
+        <p style="margin:0 0 12px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#B23A0F; font-weight:800">No es para ti si…</p>
+        <p style="margin:0; font-size:15.5px; line-height:1.7; color:#3D4148">Buscas un plan de negocio para un banco, una presentación para un comité, o validación emocional de una idea que no quieres contrastar con el mercado. El research de la fase 01 puede concluir que la oportunidad no existe — y ese resultado también se entrega.</p>
+      </div>
+    </div>
+    <p style="margin:0; font-size:14.5px; line-height:1.65; color:#5A5E66; background:#fff; border:1px solid rgba(16,19,25,.08); border-radius:12px; padding:18px 22px"><strong style="color:#101319">Capacidad honesta:</strong> un Launch se trabaja en profundidad. Tomamos pocos a la vez — si hay lista de espera, te lo diremos en la primera conversación.</p>
+  </section>
+
+  <section data-screen-label="FAQ" style="max-width:860px; margin:0 auto; padding:0 24px clamp(56px,8vw,96px)">
+    <h2 style="font-family:var(--qv-font-display); font-size:clamp(22px,4vw,32px); letter-spacing:-.025em; font-weight:900; margin:0 0 24px; color:#101319">Preguntas frecuentes</h2>
+    <div style="display:flex; flex-direction:column; gap:10px">
+      <details style="background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:12px; padding:0 22px">
+        <summary style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; font-size:16px; font-weight:700; color:#101319">¿En qué se diferencia de una consultoría estratégica?<span class="faq-chevron" style="font-size:20px; color:#0E7C74; transition:transform .25s">+</span></summary>
+        <p style="margin:0; padding:0 0 20px; font-size:15px; line-height:1.65; color:#5A5E66">Una consultoría entrega recomendaciones. Launch entrega un negocio funcionando: web en producción, funnel conectado, CRM midiendo y las primeras señales del mercado. El entregable no es un documento — es la máquina.</p>
+      </details>
+      <details style="background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:12px; padding:0 22px">
+        <summary style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; font-size:16px; font-weight:700; color:#101319">¿Y si la idea resulta no tener mercado?<span class="faq-chevron" style="font-size:20px; color:#0E7C74; transition:transform .25s">+</span></summary>
+        <p style="margin:0; padding:0 0 20px; font-size:15px; line-height:1.65; color:#5A5E66">Te lo decimos en la fase 01, con los datos que lo demuestran — y paras ahí. Un «no» a tiempo también es un entregable: te ahorra la inversión de construir algo que nadie va a comprar.</p>
+      </details>
+      <details style="background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:12px; padding:0 22px">
+        <summary style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; font-size:16px; font-weight:700; color:#101319">¿Qué necesito tener antes de empezar?<span class="faq-chevron" style="font-size:20px; color:#0E7C74; transition:transform .25s">+</span></summary>
+        <p style="margin:0; padding:0 0 20px; font-size:15px; line-height:1.65; color:#5A5E66">Una idea y capacidad de decidir. No necesitas web, marca ni plan de negocio — eso es exactamente lo que construimos. Ayuda tener claro qué sabes hacer bien y cuánto puedes invertir en validarlo.</p>
+      </details>
+      <details style="background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:12px; padding:0 22px">
+        <summary style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; font-size:16px; font-weight:700; color:#101319">¿Cómo empezamos?<span class="faq-chevron" style="font-size:20px; color:#0E7C74; transition:transform .25s">+</span></summary>
+        <p style="margin:0; padding:0 0 20px; font-size:15px; line-height:1.65; color:#5A5E66">Nos cuentas tu idea en una llamada de 30 minutos. Te decimos si vemos oportunidad para un Launch, cómo lo plantearíamos y si tenemos hueco para tomarlo.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="cta" data-screen-label="CTA final" style="background:#101319">
+    <div style="max-width:860px; margin:0 auto; padding:clamp(70px,10vw,120px) 24px; text-align:center">
+      <h2 style="font-family:var(--qv-font-display); font-size:clamp(40px,7.5vw,80px); line-height:.96; letter-spacing:-.04em; font-weight:900; margin:0 0 30px; color:#fff">¿Qué quieres <span style="color:#27BDB1">lanzar</span>?</h2>
+      <div id="launch-form" style="max-width:560px; margin:0 auto; text-align:left">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+          <input id="lf-nombre" placeholder="Nombre" style="font-size:15px; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:#0B0E14; color:#fff">
+          <input id="lf-empresa" placeholder="Empresa (o «todavía no existe»)" style="font-size:15px; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:#0B0E14; color:#fff">
+        </div>
+        <input id="lf-email" type="email" placeholder="Email" style="width:100%; margin-top:10px; font-size:15px; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:#0B0E14; color:#fff">
+        <textarea id="lf-idea" rows="3" placeholder="¿Qué quieres lanzar? Cuéntanoslo en dos líneas — producto, línea de negocio o empresa desde cero" style="width:100%; margin-top:10px; font-size:15px; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:#0B0E14; color:#fff; resize:vertical"></textarea>
+        <input id="lf-hp" tabindex="-1" autocomplete="off" style="position:absolute; left:-5000px; opacity:0; height:0; width:0">
+        <span id="lf-send" style="display:inline-flex; align-items:center; justify-content:center; min-height:54px; padding:0 34px; margin-top:14px; border-radius:12px; background:#27BDB1; color:#04231F; font-weight:800; font-size:16px; cursor:pointer">Cuéntanos tu idea →</span>
+        <p style="margin:14px 0 0; font-size:13px; color:#7B93B0">30 min · Sin compromiso · Respondemos en menos de 24 h con una lectura honesta. Al enviar aceptas la <a href="/privacidad/" style="color:#9AB0C8; text-decoration:underline">política de privacidad</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#101319; border-top:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1120px; margin:0 auto; padding:26px 24px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img src="/launch/assets/img-2.png" alt="Qualivo" style="height:18px; width:auto">
+      <div style="display:flex; gap:18px">
+        <a href="/aviso-legal/" style="color:#7B93B0; font-size:13.5px" style-hover="color:#fff">Aviso legal</a>
+        <a href="/privacidad/" style="color:#7B93B0; font-size:13.5px" style-hover="color:#fff">Privacidad</a>
+        <a href="/cookies/" style="color:#7B93B0; font-size:13.5px" style-hover="color:#fff">Cookies</a>
+      </div>
+      <p style="margin:0; font-size:13.5px; color:#7B93B0">© 2026 Qualivo · España</p>
+    </div>
   </footer>
+
 </div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+class Component extends DCLogic {
+  state = { step: 0, logOn: false };
+  componentDidMount() {
+    const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!rm) {
+      // run the hero loop only while the hero is on screen
+      const startTimer = () => { if (!this.timer) this.timer = setInterval(() => this.setState(s => ({ step: (s.step + 1) % 13 })), 750); };
+      const stopTimer = () => { if (this.timer) { clearInterval(this.timer); this.timer = null; } };
+      const hero = document.querySelector('[data-screen-label="Hero"]');
+      if (hero) {
+        new IntersectionObserver(es => { es.some(e => e.isIntersecting) ? startTimer() : stopTimer(); }, { threshold: 0.05 }).observe(hero);
+      } else startTimer();
+    } else {
+      this.setState({ step: 9, logOn: true });
+    }
+    setTimeout(() => {
+      // content is visible by default; intersection only ADDS an entrance animation
+      const els = document.querySelectorAll('[data-reveal]');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            if (!rm && en.boundingClientRect.top > 0) en.target.style.animation = 'qvUp .7s ease both';
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(el => io.observe(el));
+      const logSec = document.querySelector('[data-screen-label="Agent to Me"]');
+      if (logSec) {
+        const io2 = new IntersectionObserver(es => {
+          if (es.some(e => e.isIntersecting)) { this.setState({ logOn: true }); io2.disconnect(); }
+        }, { threshold: 0.3 });
+        io2.observe(logSec);
+      }
+    }, 60);
+  }
+  componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
+
+  buildHero() {
+    const E = React.createElement, step = this.state.step;
+    const teal = '#0E7C74', ink = '#101319', line = 'rgba(16,19,25,.22)';
+    // pieces assemble around the idea, then a lead pulses through
+    const nodes = [
+      { l: 'RESEARCH', x: 60,  y: 60,  at: 1 },
+      { l: 'ICP',      x: 300, y: 40,  at: 2 },
+      { l: 'OFERTA',   x: 470, y: 110, at: 3 },
+      { l: 'WEB',      x: 60,  y: 240, at: 4 },
+      { l: 'FUNNEL',   x: 265, y: 265, at: 5 },
+      { l: 'CRM',      x: 465, y: 250, at: 6 }
+    ];
+    const cx = 268, cy = 155;
+    const vis = (at) => step >= at;
+    const els = [];
+    nodes.forEach((n, i) => {
+      const nx = n.x + 50, ny = n.y + 22;
+      els.push(E('line', { key: 'l' + i, x1: cx, y1: cy, x2: nx, y2: ny, stroke: vis(n.at) ? line : 'transparent', strokeWidth: 1.5, style: { transition: 'stroke .5s' } }));
+    });
+    els.push(E('rect', { key: 'c', x: cx - 62, y: cy - 26, width: 124, height: 52, rx: 14, fill: ink }));
+    els.push(E('text', { key: 'ct', x: cx, y: cy + 5, textAnchor: 'middle', fontFamily: 'ui-monospace,Menlo,monospace', fontSize: 13, fontWeight: 800, fill: '#fff', letterSpacing: 2 }, 'TU IDEA'));
+    nodes.forEach((n, i) => {
+      const on = vis(n.at);
+      els.push(E('g', { key: 'n' + i, style: { opacity: on ? 1 : 0, transform: on ? 'none' : 'translateY(10px)', transition: 'opacity .5s, transform .5s' } },
+        E('rect', { x: n.x, y: n.y, width: 100, height: 44, rx: 12, fill: '#fff', stroke: on && step >= 8 ? teal : 'rgba(16,19,25,.16)', strokeWidth: 1.5, style: { transition: 'stroke .5s' } }),
+        E('text', { x: n.x + 50, y: n.y + 27, textAnchor: 'middle', fontFamily: 'ui-monospace,Menlo,monospace', fontSize: 11.5, fontWeight: 800, fill: ink, letterSpacing: 1.5 }, n.l)
+      ));
+    });
+    // exit line + pulse (lead traverses when assembled)
+    const pulseOn = step >= 8 && step <= 11;
+    const t = Math.min(Math.max((step - 8) / 3, 0), 1);
+    els.push(E('line', { key: 'ex', x1: cx, y1: cy + 26, x2: cx, y2: 330, stroke: step >= 7 ? line : 'transparent', strokeWidth: 1.5, style: { transition: 'stroke .5s' } }));
+    if (pulseOn) els.push(E('circle', { key: 'p', cx: cx, cy: cy + 26 + (330 - cy - 26) * t, r: 6, fill: '#27BDB1', style: { transition: 'cy .75s linear' } }));
+    els.push(E('g', { key: 'lead', style: { opacity: step >= 11 ? 1 : 0, transition: 'opacity .5s' } },
+      E('rect', { x: cx - 78, y: 336, width: 156, height: 40, rx: 20, fill: '#E2F6F3', stroke: teal, strokeWidth: 1.5 }),
+      E('text', { x: cx, y: 361, textAnchor: 'middle', fontFamily: 'ui-monospace,Menlo,monospace', fontSize: 12, fontWeight: 800, fill: teal, letterSpacing: 1.5 }, 'PRIMER LEAD ✓')
+    ));
+    els.push(E('text', { key: 'st', x: 8, y: 400, fontFamily: 'ui-monospace,Menlo,monospace', fontSize: 10.5, fontWeight: 700, fill: '#7A7C82', letterSpacing: 2 },
+      step < 7 ? 'ENSAMBLANDO SISTEMA…' : step < 11 ? 'LANZADO · MIDIENDO' : 'SEÑAL REAL RECIBIDA'));
+    return E('svg', { viewBox: '0 0 590 412', width: '100%', style: { display: 'block' }, role: 'img', 'aria-label': 'De una idea se ensambla un sistema completo — research, ICP, oferta, web, funnel y CRM — y captura su primer lead' }, els);
+  }
+
+  buildLog() {
+    const E = React.createElement, on = this.state.logOn;
+    const lines = [
+      ['research de categoría', 'completado'],
+      ['ICP definido', 'empleados digitales · pymes'],
+      ['posicionamiento', '«empleados digitales», no «automatizaciones»'],
+      ['web en producción', '48 h desde el dominio'],
+      ['CRM conectado', 'cada lead, trazado'],
+      ['lead magnet', 'publicado'],
+      ['primera máquina de adquisición', 'en marcha']
+    ];
+    return E('div', { style: { background: '#04231F', border: '1px solid rgba(39,189,177,.25)', borderRadius: 16, padding: '26px 28px', fontFamily: 'ui-monospace,Menlo,monospace' } },
+      E('p', { style: { margin: '0 0 18px', fontSize: 11, letterSpacing: 3, color: '#27BDB1', fontWeight: 700 } }, 'AGENT TO ME · LAUNCH LOG'),
+      lines.map((l, i) => E('div', {
+        key: i,
+        style: { display: 'flex', gap: 12, alignItems: 'baseline', padding: '7px 0', borderBottom: i < lines.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none', opacity: on ? 1 : 0, transform: on ? 'none' : 'translateY(8px)', transition: 'opacity .5s ease ' + (i * 0.18) + 's, transform .5s ease ' + (i * 0.18) + 's' }
+      },
+        E('span', { style: { color: '#27BDB1', fontSize: 13, flexShrink: 0 } }, '✓'),
+        E('span', { style: { color: '#fff', fontSize: 13.5, fontWeight: 700 } }, l[0]),
+        E('span', { style: { color: '#6FA39C', fontSize: 12.5, marginLeft: 'auto', textAlign: 'right' } }, l[1])
+      ))
+    );
+  }
+
+  renderVals() {
+    return { heroViz: this.buildHero(), launchLog: this.buildLog() };
+  }
+}
+</script>
+
+
 <script src="/assets/consent.js?v=1"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
-</body>
-</html>
+</body></html>
