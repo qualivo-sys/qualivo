@@ -62,6 +62,8 @@ Nunca seguidores, impresiones ni tráfico como North Star.
 | Diagnostic | Conversión | Solicitar |
 | Caso | Prueba | Web (fuera del calendario editorial — permanecen como prueba en la web) |
 
+**Regla vigente (ago-2026): sin resultados de clientes en el contenido editorial, ni siquiera anonimizados.** Nada de métricas, retornos ni "trabajamos con una empresa que…" en posts de LinkedIn/Instagram. La evidencia con números vive únicamente en la web (/casos, /formacion, llms.txt). El contenido construye criterio con problemas, frameworks, análisis y opinión; los números ilustrativos solo si son hipotéticos o de fuentes públicas citadas. Esta regla se revisará cuando Maikel decida activar la fase de prueba social en contenido.
+
 ## La métrica clave del content engine
 
 No "este post funcionó porque tiene engagement", sino: **¿qué tipo de contenido genera más interés del ICP y cuál genera conversaciones comerciales?** Análisis por tema con 4 columnas — impresiones / interés ICP / leads / conversaciones — y decisión: duplicar los temas con conversaciones, reducir los de vanidad.
