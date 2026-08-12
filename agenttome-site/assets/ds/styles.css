@@ -578,3 +578,9 @@ p{margin:0}
 a{color:var(--accent);text-decoration:none}
 a:hover{color:var(--accent-hover);text-decoration:underline}
 
+
+/* === mobile fixes residuales (agenttome.io) === */
+@media (max-width: 760px){
+  html, body { overflow-x: clip; }
+  div[style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns: 1fr !important; }
+}
