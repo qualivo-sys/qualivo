@@ -16,6 +16,13 @@ Primer outbound de Agent to Me, separado por completo del pipeline de Qualivo
 **Company Scan** (agenttome.io): analizamos la empresa y decimos qué equipo
 digital necesita. Gratis, concreto, bajo compromiso. Sin demo, sin "agenda 30 min".
 
+## CTA secundario (salida) · Radar IA semanal
+Para quien no quiera el Scan todavía: **Radar IA**, el análisis semanal de Maikel
+de noticias de growth e IA, con su lectura y cómo aplicarla. Convierte el "no"
+en suscriptor en vez de en silencio. Se usa SOLO como oferta de salida en el
+último toque de cada canal, nunca compitiendo con el Scan en los primeros.
+Pendiente: dónde se publica (newsletter LinkedIn / email) para poner el enlace.
+
 ## Infraestructura de envío (pendiente de decisión)
 - **Email**: NO enviar desde agenttome.io (dominio recién estrenado, protegerlo).
   Comprar dominio hermano (p. ej. `agenttome.co` o `getagenttome.io`) + 1-2 buzones
@@ -92,6 +99,10 @@ Si el papeleo repetitivo no es un problema en {{companyName}}, ignora este
 correo y encantado igualmente. Si lo es, el Company Scan te dice en qué tarea
 está el mayor ahorro. Un correo con "sí" y os lo mando.
 
+PD: si prefieres algo sin compromiso, cada semana publico el Radar IA: las
+noticias de IA y growth que importan, mi lectura y cómo aplicarlas en tu
+negocio. [enlace pendiente]
+
 Un abrazo,
 {{sender}}
 
@@ -121,6 +132,9 @@ primero y cuántas horas recupera. ¿Te lo preparo?
 
 Dato rápido: la supervisión de tareas repetitivas suele pasar de ~32h a ~8h
 semanales con un equipo digital. El Scan es gratis y sin llamada. Tú decides.
+
+Y si prefieres verlo con calma: cada semana publico el Radar IA con las
+noticias de IA y growth que importan y cómo aplicarlas. Sígueme y lo ves pasar.
 
 ---
 
