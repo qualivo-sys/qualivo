@@ -24,6 +24,8 @@ Implementación inicial desde 1.500 € (diagnóstico del proceso → diseño de
 
 ## Cómo empezar
 
+**Company Scan** (test gratuito de 2 minutos): la empresa marca qué trabajo repetitivo tiene y recibe el empleado digital recomendado con las horas y euros al mes en juego — https://agenttome.io/company-scan/
+
 El análisis inicial es gratuito: la empresa cuenta qué trabajo repetitivo quiere delegar y Agent to Me responde con qué parte puede ocupar un empleado digital y qué ROI tendría. Formulario: https://agenttome.io/#analiza
 
 ## Páginas
@@ -31,3 +33,4 @@ El análisis inicial es gratuito: la empresa cuenta qué trabajo repetitivo quie
 - Landing: https://agenttome.io/
 - Qué es un empleado digital: https://agenttome.io/que-es-un-empleado-digital/
 - SDR Digital (ficha de contratación): https://agenttome.io/empleados/sdr-digital/
+- Company Scan: https://agenttome.io/company-scan/

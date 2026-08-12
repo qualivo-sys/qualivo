@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company Scan — qué empleado digital necesita tu empresa</title>
+<meta name="description" content="Test gratuito de 2 minutos: marca qué trabajo repetitivo existe en tu empresa y te decimos qué empleado digital lo haría, cuántas horas al mes recuperarías y qué coste tiene hoy.">
+<link rel="canonical" href="https://agenttome.io/company-scan/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Company Scan · Agent to Me">
+<meta property="og:description" content="Descubre en 2 minutos qué empleado digital necesita tu empresa — y cuánto te cuesta hoy ese trabajo repetitivo.">
+<meta property="og:url" content="https://agenttome.io/company-scan/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="/assets/pages.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+.scan-card{border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin:0 0 12px;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.scan-card p{margin:0;font-weight:600;max-width:52ch}
+.scan-card small{display:block;font-weight:400;color:var(--gray);margin-top:4px}
+.scan-opts{display:flex;gap:8px;flex-shrink:0}
+.scan-opts button{font-family:var(--fb);font-size:13px;font-weight:600;padding:9px 14px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--ink);cursor:pointer}
+.scan-opts button:hover{border-color:var(--green)}
+.scan-card.si{border-color:var(--green);background:var(--green-tint)}
+.scan-card.si .b-si{background:var(--green);color:#fff;border-color:var(--green)}
+.scan-card.av .b-av{background:var(--ink);color:#fff;border-color:var(--ink)}
+.scan-card.no{opacity:.55}
+.scan-card.no .b-no{background:var(--gray);color:#fff;border-color:var(--gray)}
+#scan-result,#scan-gate{display:none}
+.res-emp{font-family:var(--fd);font-weight:800;font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;color:var(--green);margin:6px 0 4px}
+.gate-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}
+.gate-grid input{font-family:var(--fb);font-size:15px;padding:12px 14px;border:1px solid var(--dark-border);border-radius:9px;background:#08090C;color:#E8ECEF;width:100%}
+@media(max-width:700px){.gate-grid{grid-template-columns:1fr}}
+#scan-send{border:0;cursor:pointer;font-family:var(--fb)}
+.hp2{position:absolute;left:-5000px;opacity:0;height:0;width:0}
+</style>
+</head>
+<body>
+<nav class="atm-nav"><div class="in">
+  <a class="logo" href="/">Agent to Me</a>
+  <a class="cta" href="/#analiza">Analizar mi empresa →</a>
+</div></nav>
+
+<main class="wrap">
+  <p class="eyebrow">Company Scan · Gratis · 2 minutos</p>
+  <h1>¿Qué empleado digital necesita tu empresa?</h1>
+  <p class="lede">Marca cuánto se repite cada trabajo en tu empresa. Al final: el puesto digital que más sentido tiene para vosotros, las horas al mes que hay en juego y lo que cuestan hoy.</p>
+
+  <div id="scan-quiz">
+    <div id="scan-cards"></div>
+    <div class="box" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+      <label style="font-weight:600">¿Cuánto cuesta una hora de tu equipo (aprox.)?
+        <small style="display:block;font-weight:400;color:var(--gray)">salario + cargas ÷ horas — si no lo sabes, deja 25 €</small>
+      </label>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input id="coste-hora" type="number" min="10" max="120" value="25" style="width:90px;font-size:16px;padding:10px;border:1px solid var(--border);border-radius:8px"> €/h
+      </div>
+    </div>
+    <p style="text-align:center;margin:26px 0"><a class="btn" id="scan-done" href="#resultado">Ver mi resultado →</a></p>
+  </div>
+
+  <div id="scan-gate" class="dark">
+    <h3 style="margin-top:0">Tu resultado está listo.</h3>
+    <p>Dinos dónde te lo enviamos — y te escribimos también una lectura personalizada (persona, no plantilla) de cómo sería ese empleado en tu caso.</p>
+    <div class="gate-grid">
+      <input id="g-nombre" placeholder="Nombre">
+      <input id="g-empresa" placeholder="Empresa">
+      <input id="g-email" type="email" placeholder="Email">
+    </div>
+    <input class="hp2" id="g-hp" tabindex="-1" autocomplete="off">
+    <button id="scan-send" class="btn">Ver mi resultado</button>
+    <p id="gate-msg" style="display:none;color:#E8590C;font-size:13px;margin:10px 0 0"></p>
+    <p style="font-size:12px;color:#5A6472;margin:14px 0 0">Al enviar aceptas la <a href="/privacidad/" style="color:#8A97A3;text-decoration:underline">política de privacidad</a>.</p>
+  </div>
+
+  <div id="scan-result">
+    <div class="box green" id="res-main"></div>
+    <div id="res-secundario"></div>
+    <div class="cta-band">
+      <h2>El siguiente paso es de 30 minutos.</h2>
+      <p>Te contamos cómo sería ese empleado en tu empresa: qué haría cada día, con qué herramientas tuyas trabajaría, sus KPIs y su ROI esperado. Sin compromiso — y si tu caso no encaja, te lo decimos.</p>
+      <a class="btn" href="/#analiza">Hablar con Agent to Me →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="atm-footer"><div class="in">
+  <span>© 2026 Agent to Me · The Home of Digital Employees</span>
+  <span><a href="/company-scan/">Company Scan</a> · <a href="/que-es-un-empleado-digital/">Qué es un empleado digital</a> · <a href="/empleados/sdr-digital/">SDR Digital</a> · <a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
+</div></footer>
+
+<script src="/assets/scan.js"></script>
+</body>
+</html>
