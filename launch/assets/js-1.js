@@ -1958,3 +1958,30 @@
       });
   }, true);
 })();
+
+/* === Claims rotativos del hero de Launch === */
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var frases = [
+    'En menos de una semana, tu idea <span style="color:#0E7C74">está en el mercado.</span>',
+    'No necesitas otra consultoría. <span style="color:#0E7C74">Necesitas salir al mercado.</span>',
+    'Las hipótesis no se debaten. <span style="color:#0E7C74">Se testean.</span>',
+    'De idea a <span style="color:#0E7C74">primera máquina de growth.</span>'
+  ];
+  var i = 0, prepared = false;
+  setInterval(function () {
+    var el = document.querySelector('h1');
+    if (!el) return;
+    if (!prepared) {
+      el.style.transition = 'opacity .35s ease';
+      el.style.minHeight = el.getBoundingClientRect().height + 'px';
+      prepared = true;
+    }
+    el.style.opacity = '0';
+    setTimeout(function () {
+      i = (i + 1) % frases.length;
+      el.innerHTML = frases[i];
+      el.style.opacity = '1';
+    }, 360);
+  }, 5200);
+})();

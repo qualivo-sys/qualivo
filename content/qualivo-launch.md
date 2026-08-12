@@ -15,7 +15,7 @@ No son tres servicios arbitrarios: son tres momentos de una empresa.
 ## Posicionamiento de Launch
 
 - **No vender**: "te ayudamos a lanzar tu empresa" (lo dicen mil consultoras).
-- **Vender**: **"No necesitas otra consultoría. Necesitas salir al mercado."** / "De idea a primera máquina de growth."
+- **Vender**: **"En menos de una semana, tu idea está en el mercado. Testeándose."** — la agilidad para validar hipótesis es LA propuesta de valor. Claims de apoyo rotativos: "No necesitas otra consultoría. Necesitas salir al mercado." / "Las hipótesis no se debaten. Se testean." / "De idea a primera máquina de growth."
 - Diferenciador: no diseñamos la estrategia y nos vamos — **construimos las piezas y las ponemos a funcionar**. El entregable son señales reales de mercado (visitas, leads, conversaciones, ventas), no una presentación de 80 páginas.
 
 ## El proceso (6 fases)
@@ -41,3 +41,7 @@ Agent to Me es el Launch de demostración, construido en público: research de c
 ## Experimento asociado
 
 **E7 — ¿La historia "estamos lanzando un negocio delante de ti" genera conversaciones de Launch?** Métrica primaria: conversaciones/leads que mencionan lanzar algo. Umbral: ≥2 conversaciones de Launch en 6 semanas desde la publicación de la página + primeros posts build-in-public. Si no hay señal, la página se queda (coste cero) pero no se le dedica más producción.
+
+## Claims rotativos (regla de marca, 12-ago)
+
+Los heros de qualivo.io, qualivo.io/launch y agenttome.io rotan su claim cada ~5 s (el primero queda estático en el HTML para SEO/GEO; la rotación es client-side y respeta prefers-reduced-motion). Los sets viven en assets/app.js (qualivo), launch/assets/js-1.js y agenttome-site/assets/app.js. Cuando un claim demuestre generar más conversaciones (Growth OS), se promociona a claim estático.

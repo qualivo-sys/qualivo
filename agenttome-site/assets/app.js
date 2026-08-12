@@ -2007,3 +2007,30 @@
     });
   }, true);
 })();
+
+/* === Claims rotativos del hero de Agent to Me === */
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var frases = [
+    'Tu próximo empleado <span style="color:#0FA968">no tiene por qué ser humano.</span>',
+    'Deja de contratar personas <span style="color:#0FA968">para trabajo de máquinas.</span>',
+    '¿Contratarías a alguien para <span style="color:#0FA968">copiar y pegar 300 veces al mes?</span>',
+    'El empleado que trabaja <span style="color:#0FA968">mientras tu equipo duerme.</span>'
+  ];
+  var i = 0, prepared = false;
+  setInterval(function () {
+    var el = document.querySelector('h1');
+    if (!el) return;
+    if (!prepared) {
+      el.style.transition = 'opacity .35s ease';
+      el.style.minHeight = el.getBoundingClientRect().height + 'px';
+      prepared = true;
+    }
+    el.style.opacity = '0';
+    setTimeout(function () {
+      i = (i + 1) % frases.length;
+      el.innerHTML = frases[i];
+      el.style.opacity = '1';
+    }, 360);
+  }, 5200);
+})();

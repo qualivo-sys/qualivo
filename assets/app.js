@@ -316,3 +316,31 @@
     initForm();
   }
 })();
+
+/* === Claims rotativos del hero (el primero queda estático en HTML para SEO/GEO) === */
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var frases = [
+    'Muchas piezas funcionando. Poca idea de cuáles generan negocio.',
+    'Tu funnel no está roto donde crees.',
+    'Más leads no es un plan. Saber dónde los pierdes, sí.',
+    'Marketing trae leads. Ventas dice que no valen. Alguien cuenta mal.',
+    'Tu CPL ha bajado un 30 %. Tu coste por cliente, no.'
+  ];
+  var i = 0, prepared = false;
+  setInterval(function () {
+    var el = document.querySelector('main h1') || document.querySelector('h1');
+    if (!el) return;
+    if (!prepared) {
+      el.style.transition = 'opacity .35s ease';
+      el.style.minHeight = el.getBoundingClientRect().height + 'px';
+      prepared = true;
+    }
+    el.style.opacity = '0';
+    setTimeout(function () {
+      i = (i + 1) % frases.length;
+      el.textContent = frases[i];
+      el.style.opacity = '1';
+    }, 360);
+  }, 5200);
+})();
