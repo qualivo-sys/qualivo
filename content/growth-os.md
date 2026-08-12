@@ -68,6 +68,17 @@ Nunca seguidores, impresiones ni tráfico como North Star.
 
 No "este post funcionó porque tiene engagement", sino: **¿qué tipo de contenido genera más interés del ICP y cuál genera conversaciones comerciales?** Análisis por tema con 4 columnas — impresiones / interés ICP / leads / conversaciones — y decisión: duplicar los temas con conversaciones, reducir los de vanidad.
 
+### Aviso sobre las cifras de Instagram (12-ago-2026)
+
+La base de seguidores de la cuenta personal (@maikel.echevarria, ~900) está inflada: hay seguidores comprados en su día, y parte del alcance histórico viene de reels promocionados con dinero, no orgánicos. Consecuencias para el análisis:
+
+- **El número de seguidores no se usa nunca como métrica**, ni como denominador para calcular porcentajes de alcance. Está corrupto y no se puede limpiar del todo.
+- **Las visualizaciones históricas no sirven de línea base.** No hay ninguna pieza de negocio con éxito orgánico demostrado; lo que parecía un formato ganador eran reels pagados.
+- **La única lectura válida en Instagram son las conversaciones**: mensajes directos de perfiles reales del ICP y respuestas a historias. Todo lo demás es ruido.
+- El plan es limpiar los seguidores obviamente falsos (sin foto, sin publicaciones, con miles de seguidos) y aceptar que el número baje. Un número más pequeño y verdadero permite decidir; uno grande y falso, no.
+
+Lo mismo aplica a cualquier canal futuro: **si una cifra no se puede auditar hasta una conversación con un humano del ICP, no entra en la Growth Review.**
+
 ## Growth Review semanal (entregable del agente, lunes)
 
 **QUALIVO GROWTH REVIEW**
