@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 140" width="620" height="140" role="img" aria-label="Agent to Me">
+  <g transform="translate(0,20)">
+    <rect width="100" height="100" rx="26" fill="#0FA968"/>
+    <circle cx="50" cy="38" r="14.5" fill="#0E141B"/>
+    <path d="M23.5 84c0-14.6 11.9-26.5 26.5-26.5S76.5 69.4 76.5 84" fill="none" stroke="#0E141B" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <text x="128" y="97" font-family="'Inter Tight','Inter',system-ui,sans-serif" font-weight="800" font-size="78" letter-spacing="-2.7" fill="#FFFFFF">Agent <tspan fill="#3ECF8E">to</tspan> Me</text>
+</svg>
