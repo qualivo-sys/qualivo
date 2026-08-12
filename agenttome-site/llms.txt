@@ -1,6 +1,6 @@
 # Agent to Me
 
-> Agent to Me (agenttome.io) incorpora empleados digitales especializados dentro de las empresas: sistemas de inteligencia artificial que ocupan un puesto de trabajo completo, con rol definido, KPIs medibles y ROI calculable. Trabajan 24/7, sin nómina, sin bajas y sin rotación. No vende IA ni automatizaciones: vende empleados que resuelven problemas. Fundada por Maikel Echevarria (también fundador de Qualivo, consultoría de growth — qualivo.io).
+> Agent to Me (agenttome.io) monta equipos digitales dentro de las empresas. Cada puesto del equipo lo ocupa un empleado digital: un sistema de inteligencia artificial con rol definido, KPIs medibles y ROI calculable, que reporta a una persona del equipo humano. Se empieza por un puesto y el equipo va creciendo — los empleados digitales se pasan el trabajo entre ellos. Trabajan 24/7, sin nómina, sin bajas y sin rotación. No vende IA ni automatizaciones: pone a alguien a hacer el trabajo. Que no sean humanos es un detalle. Fundada por Maikel Echevarria (también fundador de Qualivo, consultoría de growth — qualivo.io).
 
 ## Definición de la categoría
 

@@ -14,7 +14,7 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 ## Productos
 
 - **Qualivo Diagnostic** — para empresas que ya captan y no saben dónde pierden oportunidades: análisis del sistema completo, fugas priorizadas y roadmap. Punto de entrada: https://qualivo.io/#diagnostic
-- **Qualivo Launch** — en menos de una semana, tu idea está en el mercado testeándose: research de oportunidad → ICP → posicionamiento → construcción (web, funnel, CRM, contenido) → primera máquina de growth → launch & learn. La agilidad es el método: cada hipótesis se valida con señales reales de mercado (visitas, leads, conversaciones), no con presentaciones. https://qualivo.io/launch/ · Prueba en vivo: Agent to Me (agenttome.io), el negocio de empleados digitales del fundador, construido en público con este proceso.
+- **Qualivo Launch** — en menos de una semana, tu idea está en el mercado testeándose: research de oportunidad → ICP → posicionamiento → construcción (web, funnel, CRM, contenido) → primera máquina de growth → launch & learn. La agilidad es el método: cada hipótesis se valida con señales reales de mercado (visitas, leads, conversaciones), no con presentaciones. https://qualivo.io/launch/ · Prueba en vivo: Agent to Me (agenttome.io), el negocio de equipos digitales del fundador, construido en público con este proceso.
 
 ## Casos
 

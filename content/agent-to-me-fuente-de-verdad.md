@@ -4,7 +4,9 @@
 
 ## En una frase
 
-**Agent to Me incorpora empleados digitales especializados dentro de las empresas.** Trabajan 24/7, tienen un rol, KPIs y ROI. No vendemos IA — vendemos empleados que resuelven problemas.
+**Agent to Me monta equipos digitales dentro de las empresas.** Cada puesto del equipo lo ocupa un empleado digital — con rol, KPIs, ROI y un responsable humano al que reporta. Se empieza por un puesto; el equipo va creciendo y se pasa el trabajo entre ellos. No vendemos IA — ponemos a alguien a hacer el trabajo. Que no sean humanos es un detalle.
+
+> **Jerarquía de vocabulario (12-ago):** «equipo digital» es la promesa de marca (el paraguas); «empleado digital» es la unidad de venta (el puesto). La visión es el equipo; la compra empieza por UN empleado.
 
 ## Qué es
 
@@ -73,7 +75,7 @@ Captación: demos + contacto directo (ABM). Proceso: diagnóstico del proceso ma
 
 ## Vocabulario
 
-**Decimos:** empleado digital · rol · KPI · ROI · trabaja 24/7 · incorporar · contratar · sin nómina/sin bajas/sin rotación.
+**Decimos:** equipo digital (paraguas) · empleado digital (unidad) · rol · KPI · ROI · trabaja 24/7 · incorporar · contratar · sin nómina/sin bajas/sin rotación.
 **Evitamos:** agente de IA · workflow · automatización · n8n · Make · prompt · LLM · jerga técnica.
 
 ## Frases ancla

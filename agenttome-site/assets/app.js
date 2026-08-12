@@ -2012,10 +2012,11 @@
 (function () {
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var frases = [
-    'Tu próximo empleado <span style="color:#0FA968">no tiene por qué ser humano.</span>',
-    'Deja de contratar personas <span style="color:#0FA968">para trabajo de máquinas.</span>',
+    'Un equipo digital <span style="color:#0FA968">dentro de tu empresa.</span>',
+    'Que no sean humanos <span style="color:#0FA968">es un detalle.</span>',
+    'Viene a quitarle a tu equipo <span style="color:#0FA968">el trabajo que odia.</span>',
     '¿Contratarías a alguien para <span style="color:#0FA968">copiar y pegar 300 veces al mes?</span>',
-    'El empleado que trabaja <span style="color:#0FA968">mientras tu equipo duerme.</span>'
+    'Deja de contratar personas <span style="color:#0FA968">para trabajo de máquinas.</span>'
   ];
   var i = 0, prepared = false;
   setInterval(function () {
