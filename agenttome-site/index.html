@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent to Me · Empleados digitales para tu empresa</title>
+<meta name="description" content="Analizamos tu empresa, detectamos qué trabajo merece ser digitalizado y construimos los empleados digitales que necesitas. Con rol, KPIs y ROI — trabajando 24/7.">
+<link rel="canonical" href="https://agenttome.io/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Agent to Me · Empleados digitales">
+<meta property="og:description" content="Tu próximo empleado no tiene por qué ser humano. Empleados digitales con rol, KPIs y ROI, trabajando 24/7.">
+<meta property="og:url" content="https://agenttome.io/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Agent to Me","url":"https://agenttome.io/","description":"Empleados digitales especializados para empresas: analizamos procesos manuales y los convertimos en puestos digitales con rol, KPIs y ROI.","founder":{"@type":"Person","name":"Maikel Echevarria"}}</script>
+<script src="/assets/app.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="/assets/boot.js"></script>
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+a { color: #5A6472; text-decoration: none; }
+a:hover { color: #0FA968; }
+@keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:.25} }
+@keyframes radarSweep { to { transform: rotate(360deg); } }
+@keyframes scanLine { 0%{top:0%} 50%{top:calc(100% - 2px)} 100%{top:0%} }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes popIn { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+</style>
+</helmet>
+
+<div style="background:#FFFFFF">
+
+<nav style="border-bottom:1px solid #ECEEF1;position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);z-index:20">
+<div style="max-width:1240px;margin:0 auto;padding:18px 64px;display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:var(--font-display);font-weight:700;font-size:20px;color:#08090C">Agent to Me</span>
+<div style="display:flex;gap:32px;font-size:14px"><a href="#wall">Empleados</a><a href="#proceso">Cómo funciona</a><a href="#roi">ROI</a><a href="#radar">Radar IA</a></div>
+<a href="#analiza" style="background:#0FA968;color:#FFFFFF;font-family:var(--font-body);font-weight:600;font-size:14px;padding:10px 20px;border-radius:var(--radius-sm)">Analizar mi empresa →</a>
+</div>
+</nav>
+
+<section style="max-width:1240px;margin:0 auto;padding:88px 64px 72px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:26px;align-items:flex-start">
+<span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#0FA968;border:1px solid #D7EDE2;background:#F2FBF7;border-radius:999px;padding:7px 14px">THE HOME OF DIGITAL EMPLOYEES</span>
+<h1 style="font-family:var(--font-display);font-size:var(--display-1-size);line-height:var(--display-1-line);font-weight:var(--display-1-weight);letter-spacing:var(--display-1-tracking);color:#08090C;margin:0">Tu próximo empleado <span style="color:#0FA968">no tiene por qué ser humano.</span></h1>
+<p style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#5A6472;max-width:500px;margin:0">Analizamos tu empresa, detectamos qué trabajo merece ser digitalizado y construimos los empleados digitales que necesitas.</p>
+<div style="display:flex;gap:12px">
+<a href="#analiza" style="background:#08090C;color:#FFFFFF;font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 26px;border-radius:var(--radius-sm)">Analizar mi empresa →</a>
+<a href="#demo" style="border:1px solid #D9DDE2;color:#08090C;font-family:var(--font-body);font-weight:500;font-size:15px;padding:14px 26px;border-radius:var(--radius-sm)">Ver cómo trabajan →</a>
+</div>
+</div>
+<div style="background:#08090C;border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden;box-shadow:0 24px 60px -24px rgba(8,9,12,.35)">
+<div style="position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#3ECF8E,transparent);opacity:{{ scanLineOpacity }};animation:scanLine 3.2s ease-in-out infinite"></div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:#4E5B67">AGENT TO ME · COMPANY SCAN</span>
+<span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:{{ scanStatusColor }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ scanStatusColor }};animation:pulseDot 1.2s infinite"></span>{{ scanStatus }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+<sc-for list="{{ scanAreas }}" as="s" hint-placeholder-count="6">
+<span style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ s.color }};transition:color .3s"><span>{{ s.mark }}</span>{{ s.label }}</span>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid #1D2732;padding-top:16px">
+<div style="display:flex;flex-direction:column"><span style="font-family:var(--font-display);font-size:24px;font-weight:700;color:#FAF8F4;font-variant-numeric:tabular-nums">{{ nProcesses }}</span><span style="font-family:var(--font-body);font-size:11px;color:#8A97A3">procesos encontrados</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-family:var(--font-display);font-size:24px;font-weight:700;color:#F0B429;font-variant-numeric:tabular-nums">{{ nRepetitive }}</span><span style="font-family:var(--font-body);font-size:11px;color:#8A97A3">tareas repetitivas</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-family:var(--font-display);font-size:24px;font-weight:700;color:#3ECF8E;font-variant-numeric:tabular-nums">{{ nOpps }}</span><span style="font-family:var(--font-body);font-size:11px;color:#8A97A3">oportunidades</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #1D2732;padding-top:16px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:{{ recoLabelColor }};transition:color .4s">{{ recoLabel }}</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap;min-height:52px">
+<sc-for list="{{ recoEmployees }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:1px;border:1px solid {{ r.color }};border-radius:var(--radius-sm);padding:8px 14px;animation:popIn .35s cubic-bezier(.4,0,.2,1) both">
+<span style="font-family:var(--font-display);font-size:14px;font-weight:700;color:#FAF8F4">{{ r.name }}</span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:{{ r.color }}">{{ r.role }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<div style="border-top:1px solid #ECEEF1;border-bottom:1px solid #ECEEF1;overflow:hidden;background:#FAFBFC">
+<div style="display:flex;white-space:nowrap;animation:ticker 36s linear infinite;width:max-content">
+<sc-for list="{{ tickerItems }}" as="t" hint-placeholder-count="12">
+<span style="display:inline-flex;align-items:center;gap:9px;padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border-right:1px solid #ECEEF1"><span style="width:6px;height:6px;border-radius:50%;background:{{ t.dot }}"></span><span style="color:#08090C;font-weight:600">{{ t.who }}</span>{{ t.what }}</span>
+</sc-for>
+</div>
+</div>
+
+<section style="max-width:1000px;margin:0 auto;padding:104px 64px;display:flex;flex-direction:column;gap:40px;align-items:center;text-align:center">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0;max-width:720px">Tu equipo está haciendo demasiado trabajo que no debería hacer.</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:640px">
+<sc-for list="{{ chores }}" as="c" hint-placeholder-count="8">
+<span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:#B45309;background:#FEF6E7;border:1px solid #F5E3BC;border-radius:999px;padding:9px 18px;animation:floatY {{ c.dur }} ease-in-out infinite">{{ c.label }}</span>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0">
+<div style="width:1px;height:32px;background:#D9DDE2"></div>
+<div style="background:#08090C;border-radius:var(--radius-md);padding:14px 28px;display:flex;align-items:center;gap:12px">
+<span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:#FAF8F4">AGENT TO ME</span>
+<span style="display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#3ECF8E"><span style="width:6px;height:6px;border-radius:50%;background:#3ECF8E;animation:pulseDot 1.5s infinite"></span>ABSORBIENDO</span>
+</div>
+<div style="width:1px;height:32px;background:#D9DDE2"></div>
+<span style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#0FA968;font-weight:600">Tu equipo recupera su tiempo.</span>
+</div>
+<p style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#5A6472;margin:0">Hay trabajo que necesita una persona. Y trabajo que necesita un empleado digital.</p>
+</section>
+
+<section id="proceso" style="background:#FAFBFC;border-top:1px solid #ECEEF1;border-bottom:1px solid #ECEEF1;padding:96px 64px">
+<div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">Primero entendemos tu empresa.<br>Después construimos tu equipo.</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px">
+<sc-for list="{{ process }}" as="p" hint-placeholder-count="6">
+<div style="border:1px solid {{ p.border }};border-radius:var(--radius-lg);padding:18px;background:{{ p.bg }};display:flex;flex-direction:column;gap:8px;transition:border-color .4s,background .4s">
+<span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:{{ p.nColor }};transition:color .4s">{{ p.n }}</span>
+<span style="font-family:var(--font-display);font-size:15px;font-weight:600;color:{{ p.titleColor }}">{{ p.title }}</span>
+<p style="font-family:var(--font-body);font-size:12px;color:{{ p.bodyColor }};margin:0">{{ p.body }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="wall" style="max-width:1240px;margin:0 auto;padding:96px 64px;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:#0FA968">DIGITAL EMPLOYEE WALL</span>
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">Conoce a tu nuevo equipo.</h2>
+<p style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#5A6472;margin:0;max-width:600px">Estos son algunos de los empleados que podemos incorporar. El equipo adecuado depende de tu empresa.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start">
+<sc-for list="{{ wall }}" as="w" hint-placeholder-count="8">
+<div sc-camel-on-mouse-enter="{{ w.onEnter }}" sc-camel-on-mouse-leave="{{ w.onLeave }}" style="background:{{ w.cardBg }};border:1px solid {{ w.border }};border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:12px;cursor:default;transform:{{ w.lift }};transition:all .25s cubic-bezier(.4,0,.2,1)">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font-family:var(--font-display);font-size:17px;font-weight:700;color:{{ w.nameColor }};transition:color .25s">{{ w.name }}</span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ w.roleColor }};transition:color .25s">{{ w.role }}</span>
+</div>
+<span style="width:34px;height:34px;border-radius:var(--radius-sm);border:1px solid {{ w.accent }};display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:{{ w.accent }}">{{ w.initial }}</span>
+</div>
+<span style="display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:{{ w.accent }}"><span style="width:6px;height:6px;border-radius:50%;background:{{ w.accent }};animation:pulseDot 1.5s infinite"></span>{{ w.status }}</span>
+<p style="font-family:var(--font-body);font-size:13px;color:{{ w.descColor }};margin:0;transition:color .25s">{{ w.desc }}</p>
+<div style="max-height:{{ w.max }};overflow:hidden;transition:max-height .3s cubic-bezier(.4,0,.2,1)">
+<div style="display:flex;flex-direction:column;gap:10px;padding-top:10px;border-top:1px solid #1D2732">
+<div style="display:flex;flex-direction:column;gap:5px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#4E5B67">HOY</span>
+<sc-for list="{{ w.tasks }}" as="t" hint-placeholder-count="3">
+<span style="font-family:var(--font-body);font-size:13px;color:#C7D0D8">{{ t }}</span>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:3px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#4E5B67">HERRAMIENTAS</span>
+<span style="font-family:var(--font-body);font-size:12px;color:#8A97A3">{{ w.tools }}</span>
+</div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid {{ w.footBorder }};padding-top:10px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:{{ w.kpiLabelColor }}">KPI</span>
+<span style="font-family:var(--font-body);font-size:12px;font-weight:600;color:{{ w.kpiColor }}">{{ w.kpi }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="background:#08090C;border-radius:var(--radius-lg);padding:36px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-family:var(--font-display);font-size:22px;font-weight:700;color:#FAF8F4">¿No sabes qué empleado necesitas? No pasa nada.</span>
+<span style="font-family:var(--font-body);font-size:15px;color:#8A97A3">Analizamos tu empresa y te lo decimos.</span>
+</div>
+<a href="#analiza" style="background:#3ECF8E;color:#08090C;font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 26px;border-radius:var(--radius-sm);flex-shrink:0">Descubrir mi equipo digital →</a>
+</div>
+</section>
+
+<section id="demo" style="background:#08090C;padding:104px 64px">
+<div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#FAF8F4;margin:0">No te contamos qué puede hacer.<br><span style="color:#3ECF8E">Te enseñamos qué está haciendo.</span></h2>
+<p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#4E5B67;margin:0">SOFÍA — SDR DIGITAL · LIVE</p>
+<p style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#8A97A3;margin:0">Tu equipo está ocupado. Ellos no duermen.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ timeline }}" as="t" hint-placeholder-count="7">
+<div style="display:flex;gap:18px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:{{ t.timeColor }};width:50px;flex-shrink:0;padding-top:11px;transition:color .3s">{{ t.time }}</span>
+<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+<div style="width:11px;height:11px;border-radius:50%;margin-top:14px;background:{{ t.dotBg }};border:2px solid {{ t.dotBorder }};transition:background .3s,border-color .3s"></div>
+<div style="width:1px;flex:1;background:#1D2732"></div>
+</div>
+<div style="padding:9px 0 20px;display:flex;flex-direction:column;gap:1px">
+<span style="font-family:var(--font-display);font-size:16px;font-weight:600;color:{{ t.titleColor }};transition:color .3s">{{ t.title }}</span>
+<span style="font-family:var(--font-body);font-size:12px;color:#4E5B67">{{ t.detail }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width:1000px;margin:0 auto;padding:104px 64px;display:flex;flex-direction:column;gap:44px;align-items:center">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0;text-align:center">Trabaja con las herramientas que ya utilizas.</h2>
+<div style="position:relative;width:560px;height:340px">
+<svg sc-camel-view-box="0 0 560 340" style="position:absolute;inset:0;width:100%;height:100%">
+<line x1="90" y1="46" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<line x1="440" y1="38" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<line x1="48" y1="175" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<line x1="512" y1="180" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<line x1="110" y1="302" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<line x1="430" y1="306" x2="280" y2="170" stroke="#E5E8EC" stroke-width="1"></line>
+<circle r="3" fill="#0FA968"><animateMotion dur="2.6s" sc-camel-repeat-count="indefinite" path="M90,46 L280,170"></animateMotion></circle>
+<circle r="3" fill="#0FA968"><animateMotion dur="3.1s" sc-camel-repeat-count="indefinite" path="M440,38 L280,170"></animateMotion></circle>
+<circle r="3" fill="#0FA968"><animateMotion dur="2.2s" sc-camel-repeat-count="indefinite" path="M48,175 L280,170"></animateMotion></circle>
+<circle r="3" fill="#0FA968"><animateMotion dur="3.5s" sc-camel-repeat-count="indefinite" path="M280,170 L512,180"></animateMotion></circle>
+<circle r="3" fill="#0FA968"><animateMotion dur="2.9s" sc-camel-repeat-count="indefinite" path="M110,302 L280,170"></animateMotion></circle>
+<circle r="3" fill="#0FA968"><animateMotion dur="2.4s" sc-camel-repeat-count="indefinite" path="M280,170 L430,306"></animateMotion></circle>
+</svg>
+<span style="position:absolute;left:90px;top:46px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">LinkedIn</span>
+<span style="position:absolute;left:440px;top:38px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">HubSpot</span>
+<span style="position:absolute;left:48px;top:175px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">Gmail</span>
+<span style="position:absolute;left:512px;top:180px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">Sheets</span>
+<span style="position:absolute;left:110px;top:302px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">WhatsApp</span>
+<span style="position:absolute;left:430px;top:306px;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A6472;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:8px 14px;background:#FFFFFF">Slack</span>
+<div style="position:absolute;left:280px;top:170px;transform:translate(-50%,-50%);background:#08090C;border:1px solid #3ECF8E;border-radius:var(--radius-md);padding:14px 22px;display:flex;flex-direction:column;align-items:center;gap:3px">
+<span style="font-family:var(--font-display);font-size:17px;font-weight:700;color:#FAF8F4">SOFÍA</span>
+<span style="display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#3ECF8E"><span style="width:5px;height:5px;border-radius:50%;background:#3ECF8E;animation:pulseDot 1.6s infinite"></span>WORKING</span>
+</div>
+</div>
+</section>
+
+<section style="background:#FAFBFC;border-top:1px solid #ECEEF1;border-bottom:1px solid #ECEEF1;padding:96px 64px">
+<div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px;text-align:center">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">¿Qué trabajo quieres quitarle a tu equipo?</h2>
+<div style="display:flex;gap:12px">
+<input value="{{ taskVal }}" sc-camel-on-change="{{ onTaskText }}" placeholder="Cuéntanos qué tarea repetitiva te gustaría eliminar..." style="flex:1;font-family:var(--font-body);font-size:15px;color:#08090C;background:#FFFFFF;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:15px 18px">
+<span sc-camel-on-click="{{ onAnalyze }}" style="background:#08090C;color:#FFFFFF;font-family:var(--font-body);font-weight:600;font-size:15px;padding:15px 24px;border-radius:var(--radius-sm);cursor:pointer;white-space:nowrap">Analizar proceso →</span>
+</div>
+<div style="max-height:{{ taskResultMax }};opacity:{{ taskResultShow }};overflow:hidden;transition:max-height .3s,opacity .3s">
+<div style="display:flex;flex-direction:column;gap:8px;text-align:left;border:1px solid #E5E8EC;border-radius:var(--radius-md);padding:22px 26px;background:#FFFFFF">
+<div style="display:flex;align-items:center;gap:10px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8B7CF8;border:1px solid #DCD6FB;background:#F6F4FE;border-radius:999px;padding:4px 10px">DEMO · SIMULACIÓN</span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#0FA968">POSIBLE OPORTUNIDAD DETECTADA</span>
+</div>
+<span style="font-family:var(--font-display);font-size:20px;font-weight:700;color:#08090C">{{ taskRole }}</span>
+<span style="font-family:var(--font-body);font-size:14px;color:#5A6472">{{ taskDesc }}</span>
+</div>
+</div>
+</div>
+</section>
+
+<section id="areas" style="max-width:1100px;margin:0 auto;padding:96px 64px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0;text-align:center">Tu próximo empleado puede trabajar en cualquier área.</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+<sc-for list="{{ areaTabs }}" as="a" hint-placeholder-count="8">
+<span sc-camel-on-click="{{ a.onPick }}" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;padding:10px 18px;border-radius:999px;border:1px solid {{ a.border }};cursor:pointer;background:{{ a.bg }};color:{{ a.color }};transition:all .2s">{{ a.name }}</span>
+</sc-for>
+</div>
+<div style="border:1px solid #E5E8EC;border-radius:var(--radius-lg);padding:32px;background:#FFFFFF;display:flex;flex-direction:column;gap:16px;max-width:720px;margin:0 auto;width:100%">
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:{{ areaColor }}">{{ areaName }}</span>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<sc-for list="{{ areaRoles }}" as="r" hint-placeholder-count="4">
+<span style="font-family:var(--font-display);font-size:15px;font-weight:600;color:#08090C;border:1px solid #D9DDE2;border-radius:var(--radius-sm);padding:10px 18px;background:#FAFBFC">{{ r }}</span>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="background:#FAFBFC;border-top:1px solid #ECEEF1;border-bottom:1px solid #ECEEF1;padding:88px 64px">
+<div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+<div style="text-align:center;display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:#0FA968">EMPLOYEE EVOLUTION</span>
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">El empleado crece contigo.</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative">
+<div style="position:absolute;left:12%;right:12%;top:5px;height:1px;background:#D9DDE2"></div>
+<sc-for list="{{ evo }}" as="e" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative">
+<div style="width:11px;height:11px;border-radius:50%;background:{{ e.dot }};border:2px solid #FAFBFC;box-shadow:0 0 0 1px #D9DDE2;transition:background .4s"></div>
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:{{ e.dayColor }};transition:color .4s">{{ e.day }}</span>
+<span style="font-family:var(--font-display);font-size:15px;font-weight:600;color:{{ e.color }};max-width:170px;transition:color .4s">{{ e.label }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="roi" style="max-width:1000px;margin:0 auto;padding:104px 64px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">El verdadero jefe de un empleado es su ROI.</h2>
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9AA3AD;border:1px solid #D9DDE2;border-radius:999px;padding:5px 12px">SIMULACIÓN</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch">
+<div style="border:1px solid #E5E8EC;border-radius:var(--radius-lg);padding:28px;background:#FFFFFF;display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#B45309">TRABAJO ACTUAL</span>
+<span style="font-family:var(--font-display);font-size:38px;font-weight:700;color:#08090C">32h<span style="font-size:15px;color:#9AA3AD">/semana</span></span>
+<span style="font-family:var(--font-body);font-size:13px;color:#5A6472">de trabajo repetitivo en tu equipo</span>
+</div>
+<span style="display:flex;align-items:center;font-family:var(--font-display);font-size:22px;color:#9AA3AD">→</span>
+<div style="border:1px solid #E5E8EC;border-radius:var(--radius-lg);padding:28px;background:#FFFFFF;display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#5A6472">EMPLEADO DIGITAL</span>
+<span style="font-family:var(--font-display);font-size:38px;font-weight:700;color:#08090C">8h<span style="font-size:15px;color:#9AA3AD">/semana</span></span>
+<span style="font-family:var(--font-body);font-size:13px;color:#5A6472">de supervisión humana</span>
+</div>
+<span style="display:flex;align-items:center;font-family:var(--font-display);font-size:22px;color:#9AA3AD">→</span>
+<div style="border:1px solid #0FA968;border-radius:var(--radius-lg);padding:28px;background:#08090C;display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#3ECF8E">CAPACIDAD LIBERADA</span>
+<span style="font-family:var(--font-display);font-size:38px;font-weight:700;color:#3ECF8E">24h<span style="font-size:15px;color:#8A97A3">/semana</span></span>
+<span style="font-family:var(--font-body);font-size:13px;color:#8A97A3">devueltas al trabajo que factura</span>
+</div>
+</div>
+</section>
+
+<section id="radar" style="background:#08090C;padding:104px 64px">
+<div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center">
+<div style="position:relative;width:360px;height:360px;margin:0 auto">
+<div style="position:absolute;inset:0;border:1px solid #1D2732;border-radius:50%"></div>
+<div style="position:absolute;inset:58px;border:1px solid #161D26;border-radius:50%"></div>
+<div style="position:absolute;inset:116px;border:1px solid #12181F;border-radius:50%"></div>
+<div style="position:absolute;left:50%;top:50%;width:50%;height:1px;background:linear-gradient(90deg,#8B7CF8,transparent);transform-origin:left center;animation:radarSweep 5s linear infinite"></div>
+<div style="position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#8B7CF8;transform:translate(-50%,-50%)"></div>
+<sc-for list="{{ radarNodes }}" as="n" hint-placeholder-count="6">
+<span style="position:absolute;left:{{ n.x }};top:{{ n.y }};transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;padding:6px 12px;border-radius:999px;border:1px solid {{ n.border }};color:{{ n.color }};background:#08090C;transition:color .4s,border-color .4s">{{ n.label }}</span>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:#8B7CF8">THE AI RADAR</span>
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#FAF8F4;margin:0">La IA cambia cada semana.<br>Nosotros estamos mirando.</h2>
+</div>
+<div style="background:#0E141B;border:1px solid #1D2732;border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column;gap:14px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#8B7CF8;border:1px solid #2A2650;border-radius:999px;padding:6px 12px;align-self:flex-start">NEW CAPABILITY DETECTED</span>
+<span style="font-family:var(--font-display);font-size:22px;font-weight:700;color:#FAF8F4">{{ cap.cap }}</span>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#4E5B67">WHAT CHANGED</span><span style="font-family:var(--font-body);font-size:14px;color:#C7D0D8">{{ cap.changed }}</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#4E5B67">BUSINESS IMPACT</span><span style="font-family:var(--font-body);font-size:14px;color:#C7D0D8">{{ cap.impact }}</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid #1D2732;padding-top:14px">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#4E5B67">NEW DIGITAL EMPLOYEE</span><span style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#FAF8F4">{{ cap.employee }}</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#4E5B67">OPPORTUNITY</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#3ECF8E">{{ cap.opp }}</span></div>
+</div>
+<a href="#analiza" style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#8B7CF8">Explorar →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section style="max-width:900px;margin:0 auto;padding:96px 64px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:18px">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">No somos otra empresa de IA.</h2>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ noHacemos }}" as="n" hint-placeholder-count="5">
+<span style="display:flex;gap:10px;align-items:baseline;font-family:var(--font-body);font-size:15px;color:#5A6472"><span style="color:#DC5B45;font-weight:700">×</span>{{ n }}</span>
+</sc-for>
+</div>
+</div>
+<div style="border:1px solid #E5E8EC;border-radius:var(--radius-lg);background:#08090C;padding:40px;display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#3ECF8E">VENDEMOS</span>
+<span style="font-family:var(--font-display);font-size:26px;font-weight:700;color:#FAF8F4;line-height:1.25">Trabajo digital con un responsable.</span>
+</div>
+</section>
+
+<section id="analiza" style="background:#08090C;padding:104px 64px">
+<div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#FAF8F4;margin:0">Descubre qué empleados necesita tu empresa.</h2>
+<p style="font-family:var(--font-body);font-size:var(--body-lg-size);color:#8A97A3;margin:0">Analizamos tus procesos y te decimos dónde tiene sentido incorporar capacidad digital.</p>
+<a href="#proceso" style="font-family:var(--font-body);font-size:15px;color:#3ECF8E">Ver cómo funciona →</a>
+</div>
+<div style="background:#0E141B;border:1px solid #1D2732;border-radius:var(--radius-lg);padding:32px;display:flex;flex-direction:column;gap:16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<input placeholder="Nombre" style="font-family:var(--font-body);font-size:14px;color:#E8ECEF;background:#08090C;border:1px solid #1D2732;border-radius:var(--radius-sm);padding:12px 14px">
+<input placeholder="Empresa" style="font-family:var(--font-body);font-size:14px;color:#E8ECEF;background:#08090C;border:1px solid #1D2732;border-radius:var(--radius-sm);padding:12px 14px">
+<input placeholder="Email" style="font-family:var(--font-body);font-size:14px;color:#E8ECEF;background:#08090C;border:1px solid #1D2732;border-radius:var(--radius-sm);padding:12px 14px">
+<input placeholder="Web" style="font-family:var(--font-body);font-size:14px;color:#E8ECEF;background:#08090C;border:1px solid #1D2732;border-radius:var(--radius-sm);padding:12px 14px">
+</div>
+<label style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-body);font-size:13px;color:#8A97A3">¿Qué trabajo repetitivo quieres dejar de hacer?
+<textarea rows="3" placeholder="Ej: perseguir facturas, actualizar el CRM, preparar informes..." style="font-family:var(--font-body);font-size:14px;color:#E8ECEF;background:#08090C;border:1px solid #1D2732;border-radius:var(--radius-sm);padding:12px 14px;resize:vertical"></textarea>
+</label>
+<span style="background:#3ECF8E;color:#08090C;font-family:var(--font-body);font-weight:600;font-size:15px;padding:14px 26px;border-radius:var(--radius-sm);text-align:center;cursor:pointer">Analizar mi empresa →</span>
+</div>
+</div>
+</section>
+
+<footer style="border-top:1px solid #ECEEF1;padding:56px 64px;background:#FFFFFF">
+<div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:var(--font-display);font-weight:700;font-size:20px;color:#08090C">Agent to Me</span>
+<span style="font-family:var(--font-body);font-size:13px;color:#9AA3AD;max-width:280px">The Home of Digital Employees. Analizamos tu empresa y construimos el equipo digital que necesitas.</span>
+</div>
+<div style="display:flex;gap:56px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:9px;font-size:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9AA3AD">EMPLEADOS</span><a href="#wall">The Wall</a><a href="#areas">Áreas</a></div>
+<div style="display:flex;flex-direction:column;gap:9px;font-size:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9AA3AD">RECURSOS</span><a href="#radar">Radar IA</a><a href="#proceso">Cómo funciona</a><a href="#roi">ROI</a></div>
+<div style="display:flex;flex-direction:column;gap:9px;font-size:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9AA3AD">EMPIEZA</span><a href="#analiza" style="color:#0FA968;font-weight:600">Analizar mi empresa →</a></div>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{
+  &quot;liveMotion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Comportamiento&quot;},
+  &quot;demoSpeed&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1400, &quot;min&quot;: 600, &quot;max&quot;: 3000, &quot;step&quot;: 200, &quot;unit&quot;: &quot;ms&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Comportamiento&quot;}
+}">
+class Component extends DCLogic {
+  state = { tick: 0, wallHover: null, area: 0, taskText: "", taskResult: null };
+  componentDidMount() {
+    if (this.props.liveMotion ?? true) this._t = setInterval(() => this.setState(s => ({ tick: s.tick + 1 })), this.props.demoSpeed ?? 1400);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    const { tick, wallHover, area, taskText, taskResult } = this.state;
+    const C = { green: "#3ECF8E", greenD: "#0FA968", violet: "#8B7CF8", cyan: "#4AC8E8", magenta: "#E86FC7", amber: "#F0B429" };
+    const phase = tick % 14;
+    const scanning = phase < 7;
+    const scanAreas = ["MARKETING", "SALES", "OPERATIONS", "FINANCE", "SUPPORT", "DATA"].map((label, i) => ({
+      label, mark: (scanning ? i < phase : true) ? "✓" : "·", color: (scanning ? i < phase : true) ? C.green : "#4E5B67",
+    }));
+    const prog = scanning ? phase / 6 : 1;
+    const shown = scanning ? 0 : Math.min(3, phase - 6);
+    const recos = [
+      { name: "Sofía", role: "SDR DIGITAL", color: C.green },
+      { name: "Lucía", role: "CONTENT CREATOR", color: C.magenta },
+      { name: "Álex", role: "DATA ANALYST", color: C.violet },
+    ];
+    const tickerPool = [
+      { who: "SOFÍA", what: "ha agendado una reunión", dot: C.greenD },
+      { who: "ÁLEX", what: "ha detectado una anomalía en ventas", dot: C.violet },
+      { who: "LUCÍA", what: "ha publicado 2 posts", dot: C.magenta },
+      { who: "NORA", what: "ha optimizado la landing", dot: C.cyan },
+      { who: "MARCOS", what: "ha cerrado la conciliación", dot: C.greenD },
+      { who: "DIEGO", what: "ha cobrado 3 facturas", dot: C.amber },
+      { who: "ELENA", what: "ha resuelto 12 tickets", dot: C.cyan },
+      { who: "LEO", what: "ha encontrado 9 huecos SEO", dot: C.violet },
+    ];
+    const wallData = [
+      { key: "sofia", name: "Sofía", role: "SDR DIGITAL", status: "PROSPECTING", accent: C.green, desc: "Encuentra empresas, decisores y oportunidades.", kpi: "Reuniones cualificadas", tasks: ["47 empresas investigadas", "31 decisores encontrados", "4 reuniones agendadas"], tools: "CRM · LinkedIn · Email · WhatsApp" },
+      { key: "lucia", name: "Lucía", role: "CONTENT CREATOR", status: "CREATING", accent: C.magenta, desc: "Investiga, escribe, adapta y distribuye contenidos.", kpi: "Contenido publicado", tasks: ["3 posts creados", "14 temas analizados", "Newsletter preparada"], tools: "Notion · CMS · Sheets · Email" },
+      { key: "alex", name: "Álex", role: "DATA ANALYST", status: "ANALYZING", accent: C.violet, desc: "Analiza bases de datos, detecta patrones y oportunidades.", kpi: "Insights accionables", tasks: ["18.492 registros procesados", "4 anomalías detectadas", "2 oportunidades encontradas"], tools: "BBDD · Sheets · BI · CRM" },
+      { key: "nora", name: "Nora", role: "WEB DESIGNER", status: "DESIGNING", accent: C.cyan, desc: "Analiza webs, crea propuestas, páginas y experimentos.", kpi: "Experimentos / mejoras", tasks: ["Landing analizada", "7 mejoras detectadas", "Test A/B preparado"], tools: "Web · Analytics · Figma · CMS" },
+      { key: "marcos", name: "Marcos", role: "CFO DIGITAL", status: "MONITORING", accent: C.green, desc: "Analiza información financiera y detecta desviaciones.", kpi: "Cierre a tiempo", tasks: ["214 movimientos conciliados", "38 facturas revisadas", "1 desviación detectada"], tools: "ERP · Banco · Sheets · Email" },
+      { key: "elena", name: "Elena", role: "CUSTOMER SUCCESS", status: "SUPPORTING", accent: C.cyan, desc: "Gestiona onboarding, incidencias y seguimiento.", kpi: "Tiempo de respuesta", tasks: ["96 tickets resueltos", "8 escalados al equipo", "3,2 min de media"], tools: "Email · WhatsApp · CRM · Docs" },
+      { key: "diego", name: "Diego", role: "COLLECTION DIGITAL", status: "COLLECTING", accent: C.amber, desc: "Controla impagos y seguimiento de cobros.", kpi: "Días de cobro (DSO)", tasks: ["23 impagos reclamados", "17 cobrados esta semana", "41 pagos conciliados"], tools: "ERP · Stripe · Email · WhatsApp" },
+      { key: "leo", name: "Leo", role: "SEO ANALYST", status: "RESEARCHING", accent: C.violet, desc: "Audita, investiga keywords y encuentra huecos de contenido.", kpi: "Tráfico orgánico", tasks: ["120 keywords revisadas", "9 huecos de contenido", "3 competidores auditados"], tools: "Search Console · Analytics · Sheets" },
+    ];
+    const wall = wallData.map(w => {
+      const on = wallHover === w.key;
+      return { ...w, initial: w.name[0],
+        cardBg: on ? "#08090C" : "#FFFFFF",
+        border: on ? w.accent : "#E5E8EC",
+        lift: on ? "translateY(-4px)" : "translateY(0)",
+        max: on ? "220px" : "0px",
+        nameColor: on ? "#FAF8F4" : "#08090C",
+        roleColor: on ? "#8A97A3" : "#9AA3AD",
+        descColor: on ? "#C7D0D8" : "#5A6472",
+        footBorder: on ? "#1D2732" : "#ECEEF1",
+        kpiLabelColor: on ? "#4E5B67" : "#9AA3AD",
+        kpiColor: on ? "#FAF8F4" : "#08090C",
+        onEnter: () => this.setState({ wallHover: w.key }),
+        onLeave: () => this.setState(s => (s.wallHover === w.key ? { wallHover: null } : null)),
+      };
+    });
+    const procActive = Math.floor(tick / 2) % 6;
+    const tSteps = [
+      { time: "09:41", title: "New company detected", detail: "entra en el radar comercial" },
+      { time: "09:42", title: "Company analyzed", detail: "sector, tamaño, señales de compra" },
+      { time: "09:43", title: "Decision maker found", detail: "LinkedIn + web + registro" },
+      { time: "09:44", title: "Lead scored: 87/100", detail: "priorizado automáticamente" },
+      { time: "09:45", title: "Message personalized", detail: "uno a uno, sin plantillas" },
+      { time: "09:46", title: "CRM updated", detail: "todo queda registrado" },
+      { time: "09:48", title: "Meeting booked", detail: "directa al calendario del equipo" },
+    ];
+    const step = tick % 7;
+    const areas = [
+      { name: "SALES", roles: ["SDR", "Sales Manager", "Lead Researcher"], color: C.greenD },
+      { name: "MARKETING", roles: ["Marketing Analyst", "SEO Analyst", "Content Creator"], color: C.magenta },
+      { name: "DATA", roles: ["Data Analyst", "Database Analyst", "Reporting Analyst", "BI Assistant"], color: C.violet },
+      { name: "WEB", roles: ["Web Designer", "Landing Specialist", "UX Analyst", "QA Digital"], color: C.cyan },
+      { name: "OPERATIONS", roles: ["Operations", "Project Manager", "Process Analyst"], color: C.greenD },
+      { name: "FINANCE", roles: ["CFO", "Financial Analyst", "Collections"], color: C.greenD },
+      { name: "CUSTOMER SUCCESS", roles: ["Onboarding", "Support", "Retención"], color: C.cyan },
+      { name: "ADMIN", roles: ["Documentación", "Facturación", "Gestión"], color: C.amber },
+    ];
+    const caps = [
+      { cap: "Voz en tiempo real", changed: "Los modelos ya mantienen conversaciones telefónicas naturales.", impact: "La cualificación telefónica puede ser un puesto digital.", employee: "Support Digital", opp: "HIGH", node: 1 },
+      { cap: "Razonamiento largo", changed: "Procesos de varios pasos sin supervisión constante.", impact: "El cierre contable deja de ser una maratón manual.", employee: "Financial Analyst", opp: "HIGH", node: 3 },
+      { cap: "Visión de documentos", changed: "Lectura fiable de facturas, albaranes y contratos.", impact: "La entrada de datos deja de necesitar personas.", employee: "Data Cleaner", opp: "MEDIUM", node: 2 },
+    ];
+    const capIdx = Math.floor(tick / 5) % 3;
+    const evoActive = Math.floor(tick / 2) % 4;
+    const analyze = () => {
+      const t = (this.state.taskText || "").toLowerCase();
+      let r = { role: "Operations Digital", desc: "Podría encargarse de coordinar tus procesos entre herramientas y hacer el seguimiento." };
+      if (/(dato|informe|report|excel|base)/.test(t)) r = { role: "Data Analyst Digital", desc: "Podría encargarse de analizar tus bases de datos, detectar patrones y generar informes." };
+      else if (/(factur|impag|cobr|pago)/.test(t)) r = { role: "Collection Digital", desc: "Podría encargarse de reclamar impagos, conciliar pagos y acelerar tus cobros." };
+      else if (/(lead|venta|prospec|comercial|crm)/.test(t)) r = { role: "SDR Digital", desc: "Podría encargarse de prospectar, cualificar y agendar reuniones para tu equipo." };
+      else if (/(contenido|post|blog|redes|seo)/.test(t)) r = { role: "Content Creator Digital", desc: "Podría encargarse de investigar, escribir y distribuir tu contenido." };
+      else if (/(cliente|ticket|soporte|respuesta)/.test(t)) r = { role: "Customer Success Digital", desc: "Podría encargarse de responder, hacer onboarding y detectar riesgo de baja." };
+      else if (/(web|landing|diseño|página)/.test(t)) r = { role: "Web Designer Digital", desc: "Podría encargarse de analizar tu web, proponer mejoras y preparar experimentos." };
+      this.setState({ taskResult: r });
+    };
+    return {
+      scanStatus: scanning ? "ANALYZING YOUR COMPANY..." : "ANALYSIS COMPLETE",
+      scanStatusColor: scanning ? C.cyan : C.green,
+      scanLineOpacity: scanning ? "1" : "0",
+      scanAreas,
+      nProcesses: Math.round(247 * prog), nRepetitive: Math.round(37 * prog), nOpps: Math.round(12 * prog),
+      recoLabel: scanning ? "SCANNING PROCESSES..." : "3 DIGITAL EMPLOYEES RECOMMENDED",
+      recoLabelColor: scanning ? "#4E5B67" : C.green,
+      recoEmployees: recos.slice(0, shown),
+      tickerItems: [...tickerPool, ...tickerPool],
+      chores: ["BUSCAR", "COPIAR", "PEGAR", "ACTUALIZAR", "PERSEGUIR", "RESPONDER", "CLASIFICAR", "REPETIR"].map((label, i) => ({ label, dur: (2.6 + (i % 4) * 0.5) + "s" })),
+      process: [
+        { n: "01", title: "Analizamos", body: "Procesos, herramientas, datos, equipo, tareas." },
+        { n: "02", title: "Detectamos", body: "Trabajo repetitivo, cuellos de botella, oportunidades." },
+        { n: "03", title: "Diseñamos", body: "Qué empleado tiene sentido y qué KPI tendrá." },
+        { n: "04", title: "Integramos", body: "CRM, email, WhatsApp, ERP, web, bases de datos." },
+        { n: "05", title: "A trabajar", body: "Primero con supervisión. Después con autonomía." },
+        { n: "06", title: "Medimos", body: "Horas, tareas, resultados, ROI." },
+      ].map((p, i) => {
+        const on = i === procActive;
+        return { ...p, border: on ? "#08090C" : "#E5E8EC", bg: on ? "#08090C" : "#FFFFFF", nColor: on ? C.green : "#9AA3AD", titleColor: on ? "#FAF8F4" : "#08090C", bodyColor: on ? "#8A97A3" : "#5A6472" };
+      }),
+      wall,
+      timeline: tSteps.map((t, i) => ({
+        ...t,
+        timeColor: i === step ? C.green : "#4E5B67",
+        dotBg: i === step ? C.green : "#08090C",
+        dotBorder: i === step ? C.green : "#1D2732",
+        titleColor: i === step ? "#FAF8F4" : "#5C6873",
+      })),
+      taskVal: taskText,
+      onTaskText: (e) => this.setState({ taskText: e.target.value, taskResult: null }),
+      onAnalyze: analyze,
+      taskResultMax: taskResult ? "160px" : "0px", taskResultShow: taskResult ? "1" : "0",
+      taskRole: taskResult ? taskResult.role : "", taskDesc: taskResult ? taskResult.desc : "",
+      areaTabs: areas.map((a, i) => ({
+        name: a.name,
+        bg: area === i ? "#08090C" : "#FFFFFF", color: area === i ? "#FAF8F4" : "#5A6472",
+        border: area === i ? "#08090C" : "#D9DDE2",
+        onPick: () => this.setState({ area: i }),
+      })),
+      areaRoles: areas[area].roles, areaName: areas[area].name, areaColor: areas[area].color,
+      evo: [
+        { day: "DAY 1", label: "Basic tasks" }, { day: "DAY 30", label: "Connected" },
+        { day: "DAY 60", label: "More responsibilities" }, { day: "DAY 90", label: "Runs complete processes" },
+      ].map((e, i) => ({ ...e, color: i <= evoActive ? "#08090C" : "#9AA3AD", dot: i <= evoActive ? C.greenD : "#D9DDE2", dayColor: i <= evoActive ? C.greenD : "#9AA3AD" })),
+      radarNodes: ["MODELS", "VOICE", "VISION", "REASONING", "AGENTS", "AUTOMATION"].map((n, i) => {
+        const pos = [["50%", "6%"], ["88%", "30%"], ["86%", "74%"], ["50%", "95%"], ["12%", "72%"], ["13%", "28%"]][i];
+        return { label: n, x: pos[0], y: pos[1], color: caps[capIdx].node === i ? "#8B7CF8" : "#4E5B67", border: caps[capIdx].node === i ? "#8B7CF8" : "#1D2732" };
+      }),
+      cap: caps[capIdx],
+      noHacemos: ["Prompts", "Chatbots genéricos", "Automatizaciones aisladas", "Workflows sin propósito", "Proyectos eternos"],
+    };
+  }
+}
+</script>
+
+
+</body></html>
