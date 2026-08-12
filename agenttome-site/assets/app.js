@@ -1909,3 +1909,101 @@
     throw err;
   });
 })();
+
+/* === agenttome.io: envío del formulario a /api/lead (delegación, sobrevive re-renders) === */
+(function () {
+  var T0 = Date.now();
+  var BUSY = false, SENT = false;
+
+  function getForm() {
+    var sec = document.getElementById('analiza');
+    if (!sec) return null;
+    var btn = null;
+    sec.querySelectorAll('span').forEach(function (s) {
+      if (/Analizar mi empresa/.test(s.textContent) && !s.closest('nav')) btn = s;
+    });
+    var inputs = {};
+    sec.querySelectorAll('input').forEach(function (i) {
+      inputs[(i.placeholder || i.name || '').toLowerCase()] = i;
+    });
+    var ta = sec.querySelector('textarea');
+    if (!btn || !ta) return null;
+    return { sec: sec, btn: btn, inputs: inputs, ta: ta };
+  }
+
+  function decorate() {
+    var f = getForm();
+    if (!f || SENT) return;
+    f.btn.style.cursor = 'pointer';
+    if (!f.sec.querySelector('#atm-legal')) {
+      var legal = document.createElement('p');
+      legal.id = 'atm-legal';
+      legal.style.cssText = 'margin:12px 0 0;font-size:12px;color:#5A6472;line-height:1.5';
+      legal.innerHTML = 'Al enviar aceptas la <a href="/privacidad/" style="color:#8A97A3;text-decoration:underline">política de privacidad</a>. Usamos tus datos solo para responder a tu solicitud.';
+      (f.btn.parentNode || f.sec).appendChild(legal);
+    }
+    if (!f.sec.querySelector('input[name="website2"]')) {
+      var hp = document.createElement('input');
+      hp.type = 'text'; hp.name = 'website2'; hp.tabIndex = -1; hp.autocomplete = 'off';
+      hp.setAttribute('aria-hidden', 'true');
+      hp.style.cssText = 'position:absolute;left:-5000px;opacity:0;height:0;width:0';
+      f.sec.appendChild(hp);
+    }
+  }
+  setInterval(decorate, 1200);
+
+  function msg(f, text, color) {
+    var e = document.getElementById('atm-form-msg');
+    if (!e) {
+      e = document.createElement('p');
+      e.id = 'atm-form-msg';
+      (f.btn.parentNode || f.sec).appendChild(e);
+    }
+    e.style.cssText = 'margin:10px 0 0;font-size:13px;font-family:inherit;color:' + (color || '#E8590C');
+    e.textContent = text;
+  }
+
+  document.addEventListener('click', function (ev) {
+    var span = ev.target && ev.target.closest ? ev.target.closest('span') : null;
+    if (!span || !/Analizar mi empresa/.test(span.textContent)) return;
+    if (!span.closest || !span.closest('#analiza')) return;
+    var f = getForm();
+    if (!f || BUSY || SENT) return;
+
+    var nombre = (f.inputs['nombre'] && f.inputs['nombre'].value || '').trim();
+    var empresa = (f.inputs['empresa'] && f.inputs['empresa'].value || '').trim();
+    var email = (f.inputs['email'] && f.inputs['email'].value || '').trim();
+    var web = (f.inputs['web'] && f.inputs['web'].value || '').trim();
+    var trabajo = (f.ta.value || '').trim();
+    var hp = f.sec.querySelector('input[name="website2"]');
+
+    if (!nombre || !empresa || !trabajo || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      msg(f, 'Revisa los campos: nombre, empresa, un email válido y el trabajo que quieres delegar.');
+      return;
+    }
+    if (Date.now() - T0 < 3000) { msg(f, 'Un segundo…'); return; }
+
+    BUSY = true;
+    var prev = f.btn.textContent;
+    f.btn.textContent = 'Enviando…';
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: nombre, empresa: empresa, email: email, web: web, trabajo: trabajo, website2: hp ? hp.value : '' })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { return r.ok && j.ok; });
+    }).then(function (ok) {
+      if (!ok) throw new Error('bad');
+      SENT = true;
+      var card = f.btn.closest('div') || f.sec;
+      card.innerHTML = '<div style="padding:8px 0">' +
+        '<p style="font-family:var(--font-display),sans-serif;font-size:22px;font-weight:700;color:#3ECF8E;margin:0 0 10px">Recibido, ' + nombre.split(' ')[0].replace(/[<>&]/g, '') + '.</p>' +
+        '<p style="color:#8A97A3;font-size:15px;line-height:1.6;margin:0">Analizamos lo que nos has contado y te escribimos en menos de 24 h laborables con una primera lectura: qué parte de ese trabajo puede hacer un empleado digital y qué ROI tendría.</p></div>';
+      if (window.va) window.va('event', { name: 'atm_lead' });
+    }).catch(function () {
+      BUSY = false;
+      f.btn.textContent = prev;
+      msg(f, 'No se pudo enviar. Inténtalo de nuevo o escríbenos a info@maikelechevarria.com.');
+    });
+  }, true);
+})();
