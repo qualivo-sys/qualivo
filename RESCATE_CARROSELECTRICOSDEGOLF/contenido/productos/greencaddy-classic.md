@@ -26,3 +26,9 @@ Greencaddy Classic | Carros Eléctricos de Golf - Greencar
 ## Campos NO recuperados todavía
 
 descripción larga completa, precio exacto, SKU, variantes, dimensiones, peso, autonomía, velocidad, imágenes originales (/wp-content/uploads/), meta description completa.
+
+## Actualización con snapshot Wayback 14-05-2024 (recuperado directamente)
+
+- **Precio (14-05-2024): 379,00 € – 610,00 €** (mostrado en la home archivada).
+- Imagen original de producto: `/wp-content/uploads/Greencaddy_Classic-Plata.jpg` — referenciada en la home archivada; el archivo NO fue archivado por Wayback (no descargable).
+- El producto aparecía en la home archivada, sección correspondiente.

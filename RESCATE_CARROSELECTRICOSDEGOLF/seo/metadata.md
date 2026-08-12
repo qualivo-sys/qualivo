@@ -51,3 +51,32 @@ Estado del sitio original: caído (HTTP 503 + certificado SSL inválido en las 4
 ## Datos técnicos SEO pendientes de confirmar vía Wayback
 
 - H1/H2 por página, breadcrumbs, schema markup (WooCommerce suele emitir Product schema), Open Graph, canonical, robots.txt, sitemap.xml.
+
+---
+
+# ACTUALIZACIÓN con snapshot Wayback (home, 14-05-2024) — datos confirmados
+
+## Home — metadatos completos (verbatim)
+
+- **Title:** `Inicio | Carros Eléctricos de Golf - Greencar`
+- **Meta description:** no definida (Yoast generaba OG description a partir del contenido)
+- **Meta robots:** `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1`
+- **Canonical:** `https://carroselectricosdegolf.com/`
+- **og:site_name:** `Carros Eléctricos de Golf - Greencar` · **og:locale:** `es_ES` · **og:type:** `website`
+- **og:image:** `http://carroselectricosdegolf.com/wp-content/uploads/greencar-icon.png`
+- **Schema JSON-LD (Yoast):** @graph con WebPage (datePublished 2023-12-13, dateModified 2024-04-24), WebSite, Organization, BreadcrumbList, potentialAction SearchAction.
+
+## Jerarquía de encabezados de la home (verbatim)
+
+- H1: La comodidad en el Golf es una realidad
+- H2: Carros · Baterías · Accesorios · ¿Nuestra filosofía? · Nosotros
+- H3 (productos): Greencaddy Pro Sport · Greencady Pro · Greencaddy Classic · Greencaddy Superior · Batería de litio (SIN cargador) · Cargador de batería de litio · Batería de litio CON cargador · Portaparaguas · Portatarjetas y portabolas · Kit portaparaguas, portatarjetas y portabolas · Soporte móvil o GPS · Funda de viaje · Rueda maciza
+
+## Robots.txt y sitemap
+
+- robots.txt: las 4 capturas de Wayback (2018-2021) devolvieron 500/301 — nunca se archivó con contenido. Con Yoast activo, lo esperable era el robots por defecto de WP + referencia al sitemap de Yoast (`/sitemap_index.xml`), pero no es verificable.
+- Ningún sitemap XML archivado ni indexado.
+
+## Plugin SEO confirmado
+
+**Yoast SEO** (patrón de schema @graph característico + meta robots extendida).
