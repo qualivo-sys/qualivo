@@ -227,3 +227,96 @@ Hoy lo hace todo Maikel. Cuando haya equipo, así se reparte — cada fase ya ti
 - **% de aprobaciones sin corregir** durante el arranque → mide la calidad del empleado.
 - **Coste de IA por cliente y mes** → protege el margen de la suscripción.
 - **Bajas y su motivo** → la métrica que dice si esto es un negocio recurrente de verdad.
+
+---
+
+## 10. Cómo está montado por dentro (arquitectura)
+
+### El patrón que hace que esto escale
+
+n8n **no deja elegir credenciales dinámicamente**, así que la tentación es duplicar el flujo entero por cliente. Ese es el error que mata el negocio: a los cinco clientes tienes cinco flujos distintos y cada mejora hay que aplicarla cinco veces.
+
+**Patrón correcto — envoltorio fino por cliente + motor compartido:**
+
+```
+[Envoltorio cliente A] ─┐
+[Envoltorio cliente B] ─┼─→ [MOTOR DEL PUESTO] → sub-flujos comunes
+[Envoltorio cliente C] ─┘   (uno solo)           · buscar decisor
+                                                 · redactar mensaje
+                                                 · pedir aprobación
+                                                 · registrar en CRM
+                                                 · informe semanal
+```
+
+El envoltorio son 4-6 nodos: **credenciales del cliente + su `cliente_id` + horario + llamada al motor**. Nada más.
+
+**Regla de oro:** el envoltorio lleva **credenciales**; la base de datos lleva **comportamiento** (ICP, tono, límites, textos, excepciones). Si el tono o los mensajes viven dentro del flujo, hay que abrir n8n para cambiar una frase — y eso ata el negocio a una persona técnica para siempre.
+
+**Versiones y cliente canario:** el motor se versiona (`Motor SDR v1`, `v2`). Cada envoltorio apunta a una versión y se migran de uno en uno. Todo cambio se prueba primero en el **cliente cero (Agent to Me vendiéndose a sí mismo)** antes de tocar a un cliente real.
+
+### Las cuatro capas
+
+| Capa | Herramienta | Qué guarda |
+|---|---|---|
+| **Motor** | n8n | La lógica del puesto. Una sola copia. |
+| **Datos** | Supabase (Postgres) | `clientes`, `empleados` (configuración), `acciones` (registro de todo), `aprobaciones`, `metricas`. Aislado por cliente. |
+| **Canal** | WhatsApp (vía GoHighLevel) | Avisos y aprobaciones, **agrupados** en 2-3 tandas al día (menos ruido y menos coste). |
+| **Panel** | Página web con enlace único, sin contraseña | Aprobar, ver actividad y consultar el informe. Sin registro: la contraseña es fricción y llamadas de soporte. |
+
+### Convenciones de nombres (no negociables)
+
+- n8n: `[SDR] Motor v1` · `[SDR] Envoltorio · Equipzilla` · `[CONECTOR] Holded`
+- Supabase: una fila por empleado activo, con `cliente_id` y `version_motor`
+- Notion: base de datos «Clientes AtM», una ficha por cliente
+
+---
+
+## 11. Herramientas del cliente: los cuatro niveles
+
+| Nivel | Situación | Cómo se resuelve | Impacto en precio |
+|---|---|---|---|
+| **1** | Tiene nodo nativo en n8n (Gmail, Sheets, HubSpot, Pipedrive, Slack, Notion, Stripe…) | Elegir credencial y listo | Implementación **simple** |
+| **2** | Tiene API pero no nodo | Se construye como **sub-flujo conector reutilizable** (`[CONECTOR] X`) | **Media** la primera vez, **simple** para los siguientes clientes con esa herramienta |
+| **3** | No tiene API (ERP viejo, software de escritorio) | Por orden: exportación programada a CSV · acceso directo a su base de datos · el correo como interfaz · y solo en último caso automatización de navegador (frágil) | **Compleja** |
+| **4** | No hay forma decente de entrar | **Ese proceso no es candidato.** Se busca otro proceso de la misma empresa | Se dice en R1, no después de firmar |
+
+**La biblioteca de conectores es un activo que se revaloriza.** El primer cliente con una herramienta nueva cuesta un día de trabajo; el segundo, cero. Por eso el precio de implementación lo refleja — no es un capricho: es una inversión que se amortiza.
+
+> ⚠️ **Ajuste al proceso:** la pregunta «¿qué herramientas usáis?» va en la **llamada de descubrimiento (R1)**, no en la fase de accesos. Con la respuesta ya sabes en qué nivel presupuestar y no te llevas la sorpresa a mitad del montaje, con el precio ya dado.
+
+---
+
+## 12. Método de trabajo (cómo se construye cada cliente)
+
+El modelo de trabajo copia al de la arquitectura, y por eso es fácil de recordar:
+
+| | Chat de producto | Chat por cliente |
+|---|---|---|
+| **Equivale a** | El motor | El envoltorio |
+| **Qué se hace ahí** | Esqueletos, conectores nuevos, mejoras que sirven a todos, documentación | Configuración, accesos, arranque supervisado, ajustes e incidencias de ESE cliente |
+| **Cuántos** | Uno | Uno por cliente |
+
+**La memoria no son los chats: es el repositorio.** Los chats se quedan sin contexto y se olvidan; los documentos de `content/` no. Por eso cada decisión se escribe aquí — un chat nuevo se pone al día leyendo estos documentos y funciona igual de bien desde el minuto uno. **Nunca dejar una decisión importante viviendo solo en una conversación.**
+
+### Dónde vive cada cosa
+
+| Cosa | Dónde | Nunca en |
+|---|---|---|
+| Esqueletos, conectores, documentación | Repositorio (git) | — |
+| Configuración del empleado (ICP, tono, límites) | Supabase | El flujo de n8n |
+| **Credenciales del cliente** | n8n, metidas por su responsable o en pantalla compartida | **El repositorio, el chat o un email** |
+| Ficha del cliente, manual del puesto | Notion | — |
+| Registro de lo que hace el empleado | Supabase | — |
+
+**Regla de credenciales de clientes:** las claves de un cliente **no pasan por el chat**. Se meten en n8n directamente, en la sesión de accesos con pantalla compartida. Además de higiene, es un argumento de venta: *«tus claves no salen de tu sitio»*.
+
+### El recorrido de un cliente, en la práctica
+
+1. **Antes de tener clientes** (una vez): en el chat de producto se construye el motor del puesto, el panel y el informe.
+2. **Entra un cliente:** se abre su chat → se genera su configuración, su envoltorio y su panel a partir de los esqueletos → el cliente mete sus credenciales en la sesión de accesos.
+3. **Arranque supervisado:** los ajustes se hacen en su chat.
+4. **Lo que sirva para todos** vuelve al chat de producto y sube al motor. Lo que solo sirve a ese cliente se queda en su configuración.
+
+### El objetivo del método
+
+Que cada cliente necesite menos ayuda técnica que el anterior: **el primero se hace acompañado de principio a fin, el segundo siguiendo la checklist y preguntando solo lo raro, y el tercero lo puede montar otra persona del equipo con los documentos delante.** Si el cliente número cinco sigue necesitando lo mismo que el primero, es que la documentación falla — no las personas.
