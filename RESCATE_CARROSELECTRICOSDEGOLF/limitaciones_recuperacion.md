@@ -47,3 +47,25 @@ Estado del dominio: **caído**. Las 4 variantes (http/https, con/sin www) devuel
 - arquivo.pt: 0 capturas.
 - archive.today: inaccesible desde este entorno.
 - La caché pública de Google ya no existe (retirada en 2024), por lo que el índice de Google solo aporta títulos y snippets.
+
+
+---
+
+# ACTUALIZACIÓN FINAL (tras acceso a Wayback Machine)
+
+## Cobertura real de Wayback Machine (definitiva)
+
+El dominio tiene **solo 14 capturas en total** en Wayback, y **una única captura con contenido**: la home del 14-05-2024 (recuperada íntegra). El resto son: parking de Arsys (2018), redirecciones 301 (2021 → greencar.es; 2024 entre variantes) y errores 500 de robots.txt/favicon. **Ninguna página interior ni ninguna imagen fue archivada jamás.** Esto convierte los snippets de buscador en la única fuente de las descripciones de producto.
+
+## Recuperado (ampliación)
+
+- Home íntegra verbatim (texto, menú, footer, precios, OG, schema, H1-H3).
+- Precios completos del catálogo a 14-05-2024 (15 productos).
+- Stack técnico exacto y desarrollador (ConsulWeb).
+- Nombres de archivo de las 13 imágenes de producto + 2 logos + icono.
+
+## Definitivamente no recuperable de fuentes públicas
+
+- HTML de las páginas interiores (fichas de producto, legales, sobre-nosotros, contacto, tienda, blog).
+- Ficheros de imagen originales de /wp-content/uploads/ (404 en Wayback, 0 en índices, 0 en Common Crawl).
+- Todo lo privado ya listado (BD WooCommerce, pedidos, clientes, configuración).
