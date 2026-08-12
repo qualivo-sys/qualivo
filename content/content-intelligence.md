@@ -1,6 +1,6 @@
 # Content Intelligence Engine — Qualivo (+ Agent to Me)
 
-> Cómo se decide QUÉ publicar. Complementa `growth-os.md` (que define para qué) y la regla editorial vigente (sin resultados de clientes en contenido — evidencia solo en la web).
+> Cómo se decide QUÉ publicar. **Cómo se escribe TODO: `guia-de-voz.md` (la prueba del bar, sin anglicismos, ritmo, nada de gurú) — prevalece sobre cualquier texto.** Complementa `growth-os.md` (que define para qué) y la regla editorial vigente (sin resultados de clientes en contenido — evidencia solo en la web).
 
 ## Idea central
 

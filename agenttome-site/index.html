@@ -332,7 +332,7 @@ a:hover { color: #0FA968; }
 </div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid {{ w.footBorder }};padding-top:10px">
-<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:{{ w.kpiLabelColor }}">KPI</span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:{{ w.kpiLabelColor }}">SE MIDE POR</span>
 <span style="font-family:var(--font-body);font-size:12px;font-weight:600;color:{{ w.kpiColor }}">{{ w.kpi }}</span>
 </div>
 </div>
@@ -462,7 +462,7 @@ a:hover { color: #0FA968; }
 
 <section id="roi" style="max-width:1000px;margin:0 auto;padding:104px 64px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
-<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">El verdadero jefe de un empleado es su ROI.</h2>
+<h2 style="font-family:var(--font-display);font-size:var(--h1-size);font-weight:var(--h1-weight);color:#08090C;margin:0">El verdadero jefe de un empleado es lo que devuelve por lo que cuesta.</h2>
 <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9AA3AD;border:1px solid #D9DDE2;border-radius:999px;padding:5px 12px">SIMULACIÓN</span>
 </div>
 <div class="stack" style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch">
@@ -587,15 +587,15 @@ class Component extends DCLogic {
     const C = { green: "#3ECF8E", greenD: "#0FA968", violet: "#8B7CF8", cyan: "#4AC8E8", magenta: "#E86FC7", amber: "#F0B429" };
     const phase = tick % 14;
     const scanning = phase < 7;
-    const scanAreas = ["MARKETING", "SALES", "OPERATIONS", "FINANCE", "SUPPORT", "DATA"].map((label, i) => ({
+    const scanAreas = ["MARKETING", "VENTAS", "OPERACIONES", "FINANZAS", "SOPORTE", "DATOS"].map((label, i) => ({
       label, mark: (scanning ? i < phase : true) ? "✓" : "·", color: (scanning ? i < phase : true) ? C.green : "#4E5B67",
     }));
     const prog = scanning ? phase / 6 : 1;
     const shown = scanning ? 0 : Math.min(3, phase - 6);
     const recos = [
       { name: "Sofía", role: "SDR DIGITAL", color: C.green },
-      { name: "Lucía", role: "CONTENT CREATOR", color: C.magenta },
-      { name: "Álex", role: "DATA ANALYST", color: C.violet },
+      { name: "Lucía", role: "CREACIÓN DE CONTENIDO", color: C.magenta },
+      { name: "Álex", role: "ANALISTA DE DATOS", color: C.violet },
     ];
     const tickerPool = [
       { who: "SOFÍA", what: "ha agendado una reunión", dot: C.greenD },
@@ -608,14 +608,14 @@ class Component extends DCLogic {
       { who: "LEO", what: "ha encontrado 9 huecos SEO", dot: C.violet },
     ];
     const wallData = [
-      { key: "sofia", name: "Sofía", role: "SDR DIGITAL", status: "PROSPECTING", accent: C.green, desc: "Encuentra empresas, decisores y oportunidades.", kpi: "Reuniones cualificadas", tasks: ["47 empresas investigadas", "31 decisores encontrados", "4 reuniones agendadas"], tools: "CRM · LinkedIn · Email · WhatsApp" },
-      { key: "lucia", name: "Lucía", role: "CONTENT CREATOR", status: "CREATING", accent: C.magenta, desc: "Investiga, escribe, adapta y distribuye contenidos.", kpi: "Contenido publicado", tasks: ["3 posts creados", "14 temas analizados", "Newsletter preparada"], tools: "Notion · CMS · Sheets · Email" },
-      { key: "alex", name: "Álex", role: "DATA ANALYST", status: "ANALYZING", accent: C.violet, desc: "Analiza bases de datos, detecta patrones y oportunidades.", kpi: "Insights accionables", tasks: ["18.492 registros procesados", "4 anomalías detectadas", "2 oportunidades encontradas"], tools: "BBDD · Sheets · BI · CRM" },
-      { key: "nora", name: "Nora", role: "WEB DESIGNER", status: "DESIGNING", accent: C.cyan, desc: "Analiza webs, crea propuestas, páginas y experimentos.", kpi: "Experimentos / mejoras", tasks: ["Landing analizada", "7 mejoras detectadas", "Test A/B preparado"], tools: "Web · Analytics · Figma · CMS" },
-      { key: "marcos", name: "Marcos", role: "CFO DIGITAL", status: "MONITORING", accent: C.green, desc: "Analiza información financiera y detecta desviaciones.", kpi: "Cierre a tiempo", tasks: ["214 movimientos conciliados", "38 facturas revisadas", "1 desviación detectada"], tools: "ERP · Banco · Sheets · Email" },
-      { key: "elena", name: "Elena", role: "CUSTOMER SUCCESS", status: "SUPPORTING", accent: C.cyan, desc: "Gestiona onboarding, incidencias y seguimiento.", kpi: "Tiempo de respuesta", tasks: ["96 tickets resueltos", "8 escalados al equipo", "3,2 min de media"], tools: "Email · WhatsApp · CRM · Docs" },
-      { key: "diego", name: "Diego", role: "COLLECTION DIGITAL", status: "COLLECTING", accent: C.amber, desc: "Controla impagos y seguimiento de cobros.", kpi: "Días de cobro (DSO)", tasks: ["23 impagos reclamados", "17 cobrados esta semana", "41 pagos conciliados"], tools: "ERP · Stripe · Email · WhatsApp" },
-      { key: "leo", name: "Leo", role: "SEO ANALYST", status: "RESEARCHING", accent: C.violet, desc: "Audita, investiga keywords y encuentra huecos de contenido.", kpi: "Tráfico orgánico", tasks: ["120 keywords revisadas", "9 huecos de contenido", "3 competidores auditados"], tools: "Search Console · Analytics · Sheets" },
+      { key: "sofia", name: "Sofía", role: "SDR DIGITAL", status: "BUSCANDO CLIENTES", accent: C.green, desc: "Encuentra empresas, decisores y oportunidades.", kpi: "Reuniones cualificadas", tasks: ["47 empresas investigadas", "31 decisores encontrados", "4 reuniones agendadas"], tools: "CRM · LinkedIn · Email · WhatsApp" },
+      { key: "lucia", name: "Lucía", role: "CREACIÓN DE CONTENIDO", status: "CREANDO", accent: C.magenta, desc: "Investiga, escribe, adapta y distribuye contenidos.", kpi: "Contenido publicado", tasks: ["3 posts creados", "14 temas analizados", "Newsletter preparada"], tools: "Notion · CMS · Sheets · Email" },
+      { key: "alex", name: "Álex", role: "ANALISTA DE DATOS", status: "ANALIZANDO", accent: C.violet, desc: "Analiza bases de datos, detecta patrones y oportunidades.", kpi: "Hallazgos accionables", tasks: ["18.492 registros procesados", "4 anomalías detectadas", "2 oportunidades encontradas"], tools: "BBDD · Sheets · BI · CRM" },
+      { key: "nora", name: "Nora", role: "DISEÑO WEB", status: "DISEÑANDO", accent: C.cyan, desc: "Analiza webs, crea propuestas, páginas y experimentos.", kpi: "Experimentos / mejoras", tasks: ["Landing analizada", "7 mejoras detectadas", "Test A/B preparado"], tools: "Web · Analytics · Figma · CMS" },
+      { key: "marcos", name: "Marcos", role: "CFO DIGITAL", status: "VIGILANDO", accent: C.green, desc: "Analiza información financiera y detecta desviaciones.", kpi: "Cierre a tiempo", tasks: ["214 movimientos conciliados", "38 facturas revisadas", "1 desviación detectada"], tools: "ERP · Banco · Sheets · Email" },
+      { key: "elena", name: "Elena", role: "CUIDADO DEL CLIENTE", status: "ATENDIENDO", accent: C.cyan, desc: "Gestiona las altas de clientes, incidencias y seguimiento.", kpi: "Tiempo de respuesta", tasks: ["96 tickets resueltos", "8 escalados al equipo", "3,2 min de media"], tools: "Email · WhatsApp · CRM · Docs" },
+      { key: "diego", name: "Diego", role: "COLLECTION DIGITAL", status: "COBRANDO", accent: C.amber, desc: "Controla impagos y seguimiento de cobros.", kpi: "Días que tardas en cobrar", tasks: ["23 impagos reclamados", "17 cobrados esta semana", "41 pagos conciliados"], tools: "ERP · Stripe · Email · WhatsApp" },
+      { key: "leo", name: "Leo", role: "ANALISTA SEO", status: "INVESTIGANDO", accent: C.violet, desc: "Audita, investiga qué busca la gente y encuentra huecos de contenido.", kpi: "Tráfico orgánico", tasks: ["120 keywords revisadas", "9 huecos de contenido", "3 competidores auditados"], tools: "Search Console · Analytics · Sheets" },
     ];
     const wall = wallData.map(w => {
       const on = wallHover === w.key;
@@ -636,22 +636,22 @@ class Component extends DCLogic {
     });
     const procActive = Math.floor(tick / 2) % 6;
     const tSteps = [
-      { time: "09:41", title: "New company detected", detail: "entra en el radar comercial" },
-      { time: "09:42", title: "Company analyzed", detail: "sector, tamaño, señales de compra" },
-      { time: "09:43", title: "Decision maker found", detail: "LinkedIn + web + registro" },
-      { time: "09:44", title: "Lead scored: 87/100", detail: "priorizado automáticamente" },
-      { time: "09:45", title: "Message personalized", detail: "uno a uno, sin plantillas" },
-      { time: "09:46", title: "CRM updated", detail: "todo queda registrado" },
-      { time: "09:48", title: "Meeting booked", detail: "directa al calendario del equipo" },
+      { time: "09:41", title: "Nueva empresa detectada", detail: "entra en el radar comercial" },
+      { time: "09:42", title: "Empresa analizada", detail: "sector, tamaño, señales de compra" },
+      { time: "09:43", title: "Decisor localizado", detail: "LinkedIn + web + registro" },
+      { time: "09:44", title: "Oportunidad puntuada: 87/100", detail: "priorizado automáticamente" },
+      { time: "09:45", title: "Mensaje personalizado", detail: "uno a uno, sin plantillas" },
+      { time: "09:46", title: "CRM actualizado", detail: "todo queda registrado" },
+      { time: "09:48", title: "Reunión agendada", detail: "directa al calendario del equipo" },
     ];
     const step = tick % 7;
     const areas = [
-      { name: "SALES", roles: ["SDR", "Sales Manager", "Lead Researcher"], color: C.greenD },
+      { name: "VENTAS", roles: ["SDR", "Sales Manager", "Lead Researcher"], color: C.greenD },
       { name: "MARKETING", roles: ["Marketing Analyst", "SEO Analyst", "Content Creator"], color: C.magenta },
-      { name: "DATA", roles: ["Data Analyst", "Database Analyst", "Reporting Analyst", "BI Assistant"], color: C.violet },
+      { name: "DATOS", roles: ["Data Analyst", "Database Analyst", "Reporting Analyst", "BI Assistant"], color: C.violet },
       { name: "WEB", roles: ["Web Designer", "Landing Specialist", "UX Analyst", "QA Digital"], color: C.cyan },
-      { name: "OPERATIONS", roles: ["Operations", "Project Manager", "Process Analyst"], color: C.greenD },
-      { name: "FINANCE", roles: ["CFO", "Financial Analyst", "Collections"], color: C.greenD },
+      { name: "OPERACIONES", roles: ["Operations", "Project Manager", "Process Analyst"], color: C.greenD },
+      { name: "FINANZAS", roles: ["CFO", "Financial Analyst", "Collections"], color: C.greenD },
       { name: "CUSTOMER SUCCESS", roles: ["Onboarding", "Support", "Retención"], color: C.cyan },
       { name: "ADMIN", roles: ["Documentación", "Facturación", "Gestión"], color: C.amber },
     ];
@@ -674,12 +674,12 @@ class Component extends DCLogic {
       this.setState({ taskResult: r });
     };
     return {
-      scanStatus: scanning ? "ANALYZING YOUR COMPANY..." : "ANALYSIS COMPLETE",
+      scanStatus: scanning ? "ANALIZANDO TU EMPRESA..." : "ANALYSIS COMPLETE",
       scanStatusColor: scanning ? C.cyan : C.green,
       scanLineOpacity: scanning ? "1" : "0",
       scanAreas,
       nProcesses: Math.round(247 * prog), nRepetitive: Math.round(37 * prog), nOpps: Math.round(12 * prog),
-      recoLabel: scanning ? "SCANNING PROCESSES..." : "3 DIGITAL EMPLOYEES RECOMMENDED",
+      recoLabel: scanning ? "ESCANEANDO PROCESOS..." : "3 DIGITAL EMPLOYEES RECOMMENDED",
       recoLabelColor: scanning ? "#4E5B67" : C.green,
       recoEmployees: recos.slice(0, shown),
       tickerItems: [...tickerPool, ...tickerPool],
