@@ -13,7 +13,7 @@ Primer outbound de Agent to Me, separado por completo del pipeline de Qualivo
   los marcados `flag: juridica` son despachos más legales — decidir si entran).
 
 ## Oferta / CTA único
-**Company Scan** (agenttome.io): analizamos la empresa y decimos qué empleado
+**Company Scan** (agenttome.io): analizamos la empresa y decimos qué equipo
 digital necesita. Gratis, concreto, bajo compromiso. Sin demo, sin "agenda 30 min".
 
 ## Infraestructura de envío (pendiente de decisión)
@@ -27,8 +27,9 @@ digital necesita. Gratis, concreto, bajo compromiso. Sin demo, sin "agenda 30 mi
 
 ## Test A/B del remitente (20 leads por rama)
 - **Rama A · Maikel (humano)**: frío clásico bien hecho.
-- **Rama B · Sofía (empleada digital)**: el mensaje ES la demo del producto.
-  Transparencia total: se presenta como empleada digital desde la primera línea.
+- **Rama B · Sofía (equipo digital)**: el mensaje ES la demo del producto.
+  Transparencia total: se presenta como parte del equipo digital desde la
+  primera línea.
 
 ---
 
@@ -42,32 +43,32 @@ Hola {{firstName}},
 Pregunta directa: ¿cuántas horas a la semana se van en {{companyName}} a altas,
 nóminas, requerimientos y responder correos que ya habéis respondido cien veces?
 
-En Agent to Me construimos empleados digitales: asumen ese trabajo repetitivo,
-trabajan 24/7 y tu equipo vuelve a facturar con su tiempo.
+En Agent to Me construimos equipos digitales: asumen ese trabajo repetitivo,
+trabajan 24/7 y tu equipo humano vuelve a facturar con su tiempo.
 
-Si quieres saber cuál encajaría en tu gestoría, os hacemos un **Company Scan
-gratuito**: analizamos vuestros procesos y te decimos exactamente qué tarea
-automatizar primero y cuántas horas recupera. Sin llamada previa, te llega el
-resultado y tú decides.
+Si quieres saber qué equipo digital encajaría en tu gestoría, os hacemos un
+**Company Scan gratuito**: analizamos vuestros procesos y te decimos exactamente
+qué tarea automatizar primero y cuántas horas recupera. Sin llamada previa, te
+llega el resultado y tú decides.
 
 ¿Te lo preparo?
 
 Maikel — Agent to Me
 
 ### Email 1 — Rama B (Sofía)
-**Asunto**: te escribe una empleada digital (en serio)
+**Asunto**: este correo lo ha escrito un equipo digital (en serio)
 
 Hola {{firstName}},
 
-Me llamo Sofía y soy una empleada digital de Agent to Me. Este correo lo he
-preparado yo: investigué {{companyName}}, redacté este mensaje y gestionaré tu
-respuesta. Mi supervisor humano revisa mi trabajo.
+Me llamo Sofía y formo parte del equipo digital de Agent to Me. Este correo lo
+he preparado yo: investigué {{companyName}}, redacté este mensaje y gestionaré
+tu respuesta. Mi supervisor humano revisa mi trabajo.
 
-Lo cuento así porque es exactamente lo que hacemos: empleados digitales que
+Lo cuento así porque es exactamente lo que hacemos: equipos digitales que
 asumen el trabajo repetitivo de gestorías como la tuya (altas, nóminas,
 requerimientos, correos de clientes) y trabajan 24/7.
 
-Si quieres saber qué empleado digital encajaría en {{companyName}}, te preparo
+Si quieres saber qué equipo digital encajaría en {{companyName}}, te preparo
 un **Company Scan gratuito**: análisis de vuestros procesos y qué automatizar
 primero. Tú decides si merece una conversación (con humanos, prometido).
 
@@ -100,26 +101,26 @@ Un abrazo,
 
 ### Nota de invitación (máx. 300 caracteres)
 Hola {{firstName}}, veo que lideras {{companyName}}. En Agent to Me construimos
-empleados digitales que quitan el trabajo repetitivo a gestorías (nóminas,
+equipos digitales que quitan el trabajo repetitivo a gestorías (nóminas,
 requerimientos, correos). Me gustaría conectar y, si te encaja, contarte cómo.
 Un saludo, Maikel
 
 ### Mensaje 1 (al aceptar, +1 día)
 Gracias por conectar, {{firstName}} 🙏
 
-Te resumo: los empleados digitales de Agent to Me asumen el trabajo repetitivo
+Te resumo: los equipos digitales de Agent to Me asumen el trabajo repetitivo
 de una gestoría (altas, nóminas, requerimientos, responder los correos de
 siempre) y trabajan 24/7.
 
-Si quieres saber cuál encajaría en {{companyName}}, os hago un Company Scan
-gratuito: analizo vuestros procesos y te digo qué automatizar primero y cuántas
-horas recupera. ¿Te lo preparo?
+Si quieres saber qué equipo digital encajaría en {{companyName}}, os hago un
+Company Scan gratuito: analizo vuestros procesos y te digo qué automatizar
+primero y cuántas horas recupera. ¿Te lo preparo?
 
 ### Mensaje 2 (+3 días, si no responde)
 {{firstName}}, ¿lo viste?
 
 Dato rápido: la supervisión de tareas repetitivas suele pasar de ~32h a ~8h
-semanales con un empleado digital. El Scan es gratis y sin llamada. Tú decides.
+semanales con un equipo digital. El Scan es gratis y sin llamada. Tú decides.
 
 ---
 
