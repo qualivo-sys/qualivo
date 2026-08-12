@@ -1985,3 +1985,26 @@
     }, 360);
   }, 5200);
 })();
+
+/* === launch: estilos del banner de cookies + formulario en móvil (inyectados en body: sobreviven al runtime) === */
+(function () {
+  function inject() {
+    if (document.getElementById('launch-fixes')) return;
+    var st = document.createElement('style');
+    st.id = 'launch-fixes';
+    st.textContent = [
+      '#qv-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:200;display:flex;justify-content:center;font-family:Montserrat,-apple-system,sans-serif}',
+      '#qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:20px 22px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;justify-content:space-between}',
+      '#qv-cookies p{margin:0;font-size:14px;line-height:1.55;color:#C7D3E0;max-width:46ch}',
+      '#qv-cookies a{color:#B7F0EA;text-decoration:underline}',
+      '#qv-cookies .qv-ck-botones{display:flex;gap:10px}',
+      '#qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}',
+      '#qv-cookies #qv-ck-si{background:#27BDB1;border-color:#27BDB1;color:#04231F}',
+      '@media(max-width:700px){#launch-form div[style*="grid-template-columns"]{grid-template-columns:1fr !important}}'
+    ].join('\n');
+    (document.body || document.documentElement).appendChild(st);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inject);
+  else inject();
+  setInterval(inject, 2000);
+})();
