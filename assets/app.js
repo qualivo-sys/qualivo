@@ -35,57 +35,79 @@
     var host = document.getElementById('hero-flow');
     if (!host) return;
 
-    var W = 1040, H = 210, y = 96;
-    var nodes = ['ANUNCIOS', 'CONTACTOS', 'CRM', 'SEGUIMIENTO', 'VENTAS', '€'];
-    var xs = [82, 285, 462, 645, 842, 995];
-    var halfs = [72, 72, 46, 78, 60, 34];   // 59 px de hueco entre cajas: sitio para la marca de fuga
+    var W = 1040, H = 250, y = 128;
 
-    // En qué tramo se pierde cada vuelta. Tres sitios distintos: el orden
-    // importa poco, lo que cuenta es que no sea siempre el mismo.
-    var FUGAS = [1, 3, 2];
+    // Tres entradas — no todo el mundo capta con anuncios — que confluyen en
+    // la misma cadena. A partir de ahí, una sola fila hasta los ingresos.
+    var FUENTES = ['ANUNCIOS', 'CONTENIDO', 'PROSPECCIÓN'];
+    var fx = 96, fhalf = 88, fys = [y - 58, y, y + 58];
+    var bus = 232;
+
+    var nodes = ['CONTACTOS', 'CRM', 'SEGUIMIENTO', 'VENTAS', '€'];
+    var xs = [340, 506, 678, 864, 1002];
+    var halfs = [72, 46, 78, 60, 34];
+
+    var FUGAS = [1, 3, 2];   // el tramo que falla cambia en cada vuelta; la entrada no, ahi no se pierde nada
     var CICLO = 7000;
 
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
-    svg.setAttribute('aria-label', 'Cadena de captación y ventas: anuncios, contactos, CRM, seguimiento, ventas e ingresos, con una fuga que cambia de sitio');
+    svg.setAttribute('aria-label', 'Anuncios, contenido y prospección alimentan una cadena de contactos, CRM, seguimiento y ventas hasta los ingresos, con una fuga que cambia de sitio');
+
+    // Confluencia de las tres entradas
+    fys.forEach(function (fy) {
+      svg.appendChild(el('path', {
+        d: 'M' + (fx + fhalf) + ' ' + fy + ' H' + (bus - 18) + ' Q' + bus + ' ' + fy + ' ' + bus + ' ' + (fy < y ? fy + 18 : fy > y ? fy - 18 : fy),
+        fill: 'none', stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5
+      }));
+    });
+    svg.appendChild(el('line', { x1: bus, y1: fys[0], x2: bus, y2: fys[2], stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 }));
 
     var lines = [], dots = [];
-    for (var k = 0; k < 5; k++) {
-      var ax = xs[k] + halfs[k], bx = xs[k + 1] - halfs[k + 1];
-      var line = el('line', { x1: ax, y1: y, x2: bx, y2: y, stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 });
+    var tramos = [[bus, xs[0] - halfs[0]]];
+    for (var k = 0; k < 4; k++) tramos.push([xs[k] + halfs[k], xs[k + 1] - halfs[k + 1]]);
+
+    tramos.forEach(function (t, k) {
+      var line = el('line', { x1: t[0], y1: y, x2: t[1], y2: y, stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 });
       lines.push(line);
       svg.appendChild(line);
       for (var j = 0; j < 3; j++) {
         var dot = el('circle', { cy: y, r: 3.4, fill: TEAL, opacity: 0.9 });
-        dots.push({ node: dot, k: k, j: j, ax: ax, bx: bx });
+        dots.push({ node: dot, k: k, j: j, ax: t[0], bx: t[1] });
         svg.appendChild(dot);
       }
-    }
+    });
 
     var pulse = el('circle', { cy: y, fill: 'none', stroke: CORAL, 'stroke-width': 1.5, visibility: 'hidden' });
     svg.appendChild(pulse);
     var label = el('text', {
-      y: y - 34, 'text-anchor': 'middle', 'font-size': 12,
+      y: y - 40, 'text-anchor': 'middle', 'font-size': 12,
       'letter-spacing': '.16em', 'font-weight': 800, 'font-family': MONO, visibility: 'hidden'
     });
     svg.appendChild(label);
 
-    var cajas = [];
-    nodes.forEach(function (n, i) {
-      var isEuro = i === nodes.length - 1;
+    function caja(cx, cy, half, texto, destacada, tam) {
       var g = el('g', {});
       var r = el('rect', {
-        x: xs[i] - halfs[i], y: y - 26, width: halfs[i] * 2, height: 52, rx: 12,
-        fill: isEuro ? TEAL : '#fff', stroke: isEuro ? TEAL : 'rgba(16,19,25,.16)', 'stroke-width': 1.2
+        x: cx - half, y: cy - (destacada ? 26 : 21), width: half * 2, height: destacada ? 52 : 42, rx: destacada ? 12 : 10,
+        fill: destacada === 'euro' ? TEAL : '#fff',
+        stroke: destacada === 'euro' ? TEAL : 'rgba(16,19,25,.16)', 'stroke-width': 1.2
       });
       g.appendChild(r);
       var t = el('text', {
-        x: xs[i], y: y + 5, 'text-anchor': 'middle', fill: isEuro ? '#fff' : INK,
-        'font-size': isEuro ? 19 : 12.5, 'letter-spacing': '.07em', 'font-weight': 800, 'font-family': MONO
+        x: cx, y: cy + (destacada === 'euro' ? 6 : 4.5), 'text-anchor': 'middle',
+        fill: destacada === 'euro' ? '#fff' : INK,
+        'font-size': tam, 'letter-spacing': '.07em', 'font-weight': 800, 'font-family': MONO
       });
-      t.textContent = n;
+      t.textContent = texto;
       g.appendChild(t);
       svg.appendChild(g);
-      cajas.push(r);
+      return r;
+    }
+
+    FUENTES.forEach(function (f, i) { caja(fx, fys[i], fhalf, f, false, 12); });
+
+    var cajas = nodes.map(function (n, i) {
+      return caja(xs[i], y, halfs[i], n, i === nodes.length - 1 ? 'euro' : true, i === nodes.length - 1 ? 19 : 12.5);
     });
 
     host.appendChild(svg);
@@ -96,7 +118,7 @@
       var fuga = FUGAS[vuelta % FUGAS.length];
       var atascado = cyc > 0.28 && cyc < 0.78;
       var cierre = cyc >= 0.78;
-      var mx = (xs[fuga] + xs[fuga + 1]) / 2;
+      var mx = (tramos[fuga][0] + tramos[fuga][1]) / 2;
 
       lines.forEach(function (line, i) {
         var mal = i === fuga && atascado;
@@ -116,13 +138,13 @@
 
       cajas.forEach(function (r, i) {
         var senala = cierre && i === fuga;
-        r.setAttribute('stroke', senala ? TEAL : (i === cajas.length - 1 ? TEAL : 'rgba(16,19,25,.16)'));
+        r.setAttribute('stroke', senala || i === cajas.length - 1 ? TEAL : 'rgba(16,19,25,.16)');
         r.setAttribute('stroke-width', senala ? 2.4 : 1.2);
       });
 
       if (atascado) {
         pulse.setAttribute('cx', mx);
-        pulse.setAttribute('r', 13 + 5 * Math.sin(t / 300));
+        pulse.setAttribute('r', 12 + 4 * Math.sin(t / 300));
         pulse.setAttribute('visibility', 'visible');
         label.setAttribute('x', mx);
         label.textContent = 'AQUÍ SE PIERDE';
@@ -142,7 +164,7 @@
 
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
-      render(CICLO * 0.5); // fotograma fijo: la fuga señalada
+      render(CICLO * 0.5);
       return;
     }
     var t0 = performance.now();
