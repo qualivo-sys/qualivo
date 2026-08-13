@@ -70,8 +70,8 @@
       var line = el('line', { x1: t[0], y1: y, x2: t[1], y2: y, stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 });
       lines.push(line);
       svg.appendChild(line);
-      for (var j = 0; j < 3; j++) {
-        var dot = el('circle', { cy: y, r: 3.4, fill: TEAL, opacity: 0.9 });
+      for (var j = 0; j < 4; j++) {
+        var dot = el('circle', { cy: y, r: 3.6, fill: TEAL, opacity: 0.9 });
         dots.push({ node: dot, k: k, j: j, ax: t[0], bx: t[1] });
         svg.appendChild(dot);
       }
@@ -116,25 +116,33 @@
       var vuelta = Math.floor(t / CICLO);
       var cyc = (t % CICLO) / CICLO;
       var fuga = FUGAS[vuelta % FUGAS.length];
-      var atascado = cyc > 0.28 && cyc < 0.78;
-      var cierre = cyc >= 0.78;
+      var atascado = cyc > 0.16 && cyc < 0.74;
+      var cierre = cyc >= 0.74;
       var mx = (tramos[fuga][0] + tramos[fuga][1]) / 2;
 
       lines.forEach(function (line, i) {
         var mal = i === fuga && atascado;
         line.setAttribute('stroke', mal ? CORAL : 'rgba(16,19,25,.22)');
         line.setAttribute('stroke-width', mal ? 2 : 1.5);
-        if (mal) line.setAttribute('stroke-dasharray', '5 5');
-        else line.removeAttribute('stroke-dasharray');
+        if (mal) {
+          line.setAttribute('stroke-dasharray', '5 5');
+          line.setAttribute('stroke-dashoffset', -(t / 42) % 10);
+        } else {
+          line.removeAttribute('stroke-dasharray');
+          line.removeAttribute('stroke-dashoffset');
+        }
       });
 
       dots.forEach(function (d) {
         var mal = d.k === fuga && atascado;
-        var f = ((t / 1700) + d.j / 3 + d.k * 0.21) % 1;
+        var f = ((t / 1350) + d.j / 4 + d.k * 0.17) % 1;
         if (mal) f = Math.min(f, 0.32 + d.j * 0.07);
         d.node.setAttribute('cx', d.ax + (d.bx - d.ax) * f);
         d.node.setAttribute('fill', mal ? CORAL : TEAL);
       });
+
+      var euro = cajas[cajas.length - 1];
+      euro.setAttribute('transform', atascado ? '' : 'translate(0,' + (Math.sin(t / 420) * 1.6).toFixed(2) + ')');
 
       cajas.forEach(function (r, i) {
         var senala = cierre && i === fuga;
