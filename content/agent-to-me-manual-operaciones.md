@@ -320,3 +320,24 @@ El modelo de trabajo copia al de la arquitectura, y por eso es fácil de recorda
 ### El objetivo del método
 
 Que cada cliente necesite menos ayuda técnica que el anterior: **el primero se hace acompañado de principio a fin, el segundo siguiendo la checklist y preguntando solo lo raro, y el tercero lo puede montar otra persona del equipo con los documentos delante.** Si el cliente número cinco sigue necesitando lo mismo que el primero, es que la documentación falla — no las personas.
+
+---
+
+## 13. Publicar carruseles desde GHL (limitaciones comprobadas)
+
+Comprobado el 13 de agosto de 2026 publicando el escaparate de @agenttome. Está aquí porque cuesta media mañana descubrirlo y se repite en cada cliente que use el planificador de redes.
+
+**GHL no programa carruseles por API.** Un `POST /social-media-posting/{location}/posts` con `status: "scheduled"` acepta las 10 imágenes, devuelve 200 y guarda **solo la primera**. No avisa: el post queda creado y aparentemente bien hasta que lo abres. Reproducido cinco veces (borrador de 10 → 10 imágenes; borrador de 7 → 7; programado de 7 → 1; programado de 3 → 1; borrador convertido a programado → 1).
+
+- **Lo que sí funciona:** `status: "draft"` conserva todas las imágenes, y `status: "published"` publica el carrusel entero al momento.
+- **Consecuencia práctica:** si hay que programar un carrusel, se programa a mano desde la interfaz. Por API solo borrador o publicación inmediata.
+- **Comprobar siempre antes de cantar victoria:** leer el post creado y contar `media`. Un 200 no significa que esté bien.
+
+**Otros detalles del mismo API que cuestan tiempo:**
+
+- `POST /posts/list` exige `limit` y `skip` **como cadenas de texto**. Con números devuelve una lista vacía y ningún error.
+- El payload necesita `userId` (el `createdBy` de cualquier post existente sirve).
+- `DELETE /posts/{id}` borra el registro del planificador y responde `Deleted Post`. **No hay confirmación de que quite el post de la red social**: si hay que retirar algo ya publicado, se borra desde la app de la red y punto.
+- Cada post publicado guarda `previewLink` con la URL real en la red. Conviene leerlo y guardarlo **antes** de borrar nada.
+
+**Ritmo de publicación en cuentas nuevas.** Publicando 12 carruseles seguidos con 75 s de separación, Instagram marcó uno como `failed` y avisó de incumplimiento de normas. No era el contenido: era el patrón. En una cuenta recién creada, mínimo 2,5 minutos entre publicaciones, y mejor repartir en varios días.
