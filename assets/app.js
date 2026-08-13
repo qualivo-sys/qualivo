@@ -177,7 +177,9 @@
     }
     var t0 = performance.now();
     (function tick(now) {
-      render(now - t0);
+      // El primer fotograma puede llegar con marca anterior a t0 y dejar
+      // el tiempo en negativo: la vuelta saldria -1 y no hay tramo -1.
+      render(Math.max(0, now - t0));
       requestAnimationFrame(tick);
     })(t0);
   }
