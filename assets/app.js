@@ -21,8 +21,9 @@
   var SVG_NS = 'http://www.w3.org/2000/svg';
 
   // ───────────────────────────────────────────────────────────────────────────
-  // Hero: flujo ADS → LEADS → CRM → SALES → € con un atasco que se detecta
-  // y se libera en ciclos de 9 s
+  // Hero: la cadena de captación y ventas, con la fuga cambiando de sitio en
+  // cada vuelta. El mensaje no es «hay un atasco», es «no sabes en cuál de las
+  // seis piezas está» — que es justo lo que responde el diagnóstico.
   // ───────────────────────────────────────────────────────────────────────────
   function el(name, attrs) {
     var node = document.createElementNS(SVG_NS, name);
@@ -34,16 +35,22 @@
     var host = document.getElementById('hero-flow');
     if (!host) return;
 
-    var W = 1040, H = 210, y = 92;
-    var nodes = ['ADS', 'LEADS', 'CRM', 'SALES', '€'];
-    var xs = [90, 300, 520, 740, 950];
+    var W = 1040, H = 210, y = 96;
+    var nodes = ['ANUNCIOS', 'CONTACTOS', 'CRM', 'SEGUIMIENTO', 'VENTAS', '€'];
+    var xs = [82, 285, 462, 645, 842, 995];
+    var halfs = [72, 72, 46, 78, 60, 34];   // 59 px de hueco entre cajas: sitio para la marca de fuga
+
+    // En qué tramo se pierde cada vuelta. Tres sitios distintos: el orden
+    // importa poco, lo que cuenta es que no sea siempre el mismo.
+    var FUGAS = [1, 3, 2];
+    var CICLO = 7000;
 
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
-    svg.setAttribute('aria-label', 'Flujo de anuncios a ingresos con un punto donde el sistema se atasca');
+    svg.setAttribute('aria-label', 'Cadena de captación y ventas: anuncios, contactos, CRM, seguimiento, ventas e ingresos, con una fuga que cambia de sitio');
 
     var lines = [], dots = [];
-    for (var k = 0; k < 4; k++) {
-      var ax = xs[k] + 46, bx = xs[k + 1] - 46;
+    for (var k = 0; k < 5; k++) {
+      var ax = xs[k] + halfs[k], bx = xs[k + 1] - halfs[k + 1];
       var line = el('line', { x1: ax, y1: y, x2: bx, y2: y, stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 });
       lines.push(line);
       svg.appendChild(line);
@@ -54,62 +61,77 @@
       }
     }
 
-    var mx = (xs[2] + xs[3]) / 2;
-    var pulse = el('circle', { cx: mx, cy: y, fill: 'none', stroke: CORAL, 'stroke-width': 1.5, visibility: 'hidden' });
+    var pulse = el('circle', { cy: y, fill: 'none', stroke: CORAL, 'stroke-width': 1.5, visibility: 'hidden' });
     svg.appendChild(pulse);
     var label = el('text', {
-      x: mx, y: y - 30, 'text-anchor': 'middle', 'font-size': 12,
+      y: y - 34, 'text-anchor': 'middle', 'font-size': 12,
       'letter-spacing': '.16em', 'font-weight': 800, 'font-family': MONO, visibility: 'hidden'
     });
     svg.appendChild(label);
 
+    var cajas = [];
     nodes.forEach(function (n, i) {
-      var isEuro = i === 4;
+      var isEuro = i === nodes.length - 1;
       var g = el('g', {});
-      g.appendChild(el('rect', {
-        x: xs[i] - 46, y: y - 26, width: 92, height: 52, rx: 12,
+      var r = el('rect', {
+        x: xs[i] - halfs[i], y: y - 26, width: halfs[i] * 2, height: 52, rx: 12,
         fill: isEuro ? TEAL : '#fff', stroke: isEuro ? TEAL : 'rgba(16,19,25,.16)', 'stroke-width': 1.2
-      }));
+      });
+      g.appendChild(r);
       var t = el('text', {
-        x: xs[i], y: y + 5.5, 'text-anchor': 'middle', fill: isEuro ? '#fff' : INK,
-        'font-size': isEuro ? 19 : 14, 'letter-spacing': '.08em', 'font-weight': 800, 'font-family': MONO
+        x: xs[i], y: y + 5, 'text-anchor': 'middle', fill: isEuro ? '#fff' : INK,
+        'font-size': isEuro ? 19 : 12.5, 'letter-spacing': '.07em', 'font-weight': 800, 'font-family': MONO
       });
       t.textContent = n;
       g.appendChild(t);
       svg.appendChild(g);
+      cajas.push(r);
     });
 
     host.appendChild(svg);
 
     function render(t) {
-      var cyc = (t % 9000) / 9000;
-      var clogged = cyc > 0.3 && cyc < 0.75;
+      var vuelta = Math.floor(t / CICLO);
+      var cyc = (t % CICLO) / CICLO;
+      var fuga = FUGAS[vuelta % FUGAS.length];
+      var atascado = cyc > 0.28 && cyc < 0.78;
+      var cierre = cyc >= 0.78;
+      var mx = (xs[fuga] + xs[fuga + 1]) / 2;
 
       lines.forEach(function (line, i) {
-        var isClog = i === 2 && clogged;
-        line.setAttribute('stroke', isClog ? CORAL : 'rgba(16,19,25,.22)');
-        line.setAttribute('stroke-width', isClog ? 2 : 1.5);
-        if (isClog) line.setAttribute('stroke-dasharray', '5 5');
+        var mal = i === fuga && atascado;
+        line.setAttribute('stroke', mal ? CORAL : 'rgba(16,19,25,.22)');
+        line.setAttribute('stroke-width', mal ? 2 : 1.5);
+        if (mal) line.setAttribute('stroke-dasharray', '5 5');
         else line.removeAttribute('stroke-dasharray');
       });
 
       dots.forEach(function (d) {
-        var isClog = d.k === 2 && clogged;
+        var mal = d.k === fuga && atascado;
         var f = ((t / 1700) + d.j / 3 + d.k * 0.21) % 1;
-        if (isClog) f = Math.min(f, 0.32 + d.j * 0.07);
+        if (mal) f = Math.min(f, 0.32 + d.j * 0.07);
         d.node.setAttribute('cx', d.ax + (d.bx - d.ax) * f);
-        d.node.setAttribute('fill', isClog ? CORAL : TEAL);
+        d.node.setAttribute('fill', mal ? CORAL : TEAL);
       });
 
-      if (clogged) {
+      cajas.forEach(function (r, i) {
+        var senala = cierre && i === fuga;
+        r.setAttribute('stroke', senala ? TEAL : (i === cajas.length - 1 ? TEAL : 'rgba(16,19,25,.16)'));
+        r.setAttribute('stroke-width', senala ? 2.4 : 1.2);
+      });
+
+      if (atascado) {
+        pulse.setAttribute('cx', mx);
         pulse.setAttribute('r', 13 + 5 * Math.sin(t / 300));
         pulse.setAttribute('visibility', 'visible');
-        label.textContent = 'AQUÍ SE ATASCA';
+        label.setAttribute('x', mx);
+        label.textContent = 'AQUÍ SE PIERDE';
         label.setAttribute('fill', CORAL);
         label.setAttribute('visibility', 'visible');
-      } else if (cyc >= 0.75) {
+      } else if (cierre) {
         pulse.setAttribute('visibility', 'hidden');
-        label.textContent = 'RESUELTO';
+        label.setAttribute('x', xs[fuga]);
+        label.textContent = 'EMPIEZA POR AQUÍ';
         label.setAttribute('fill', TEAL);
         label.setAttribute('visibility', 'visible');
       } else {
@@ -120,7 +142,7 @@
 
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
-      render(5200); // fotograma fijo: fase de atasco detectado
+      render(CICLO * 0.5); // fotograma fijo: la fuga señalada
       return;
     }
     var t0 = performance.now();
@@ -322,7 +344,7 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var frases = [
     'Muchas piezas funcionando. Poca idea de cuáles generan negocio.',
-    'Tu funnel no está roto donde crees.',
+    'Tu embudo no está roto donde crees.',
     'Más leads no es un plan. Saber dónde los pierdes, sí.',
     'Marketing trae leads. Ventas dice que no valen. Alguien cuenta mal.',
     'Tu CPL ha bajado un 30 %. Tu coste por cliente, no.'
