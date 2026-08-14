@@ -13,10 +13,10 @@
 html,body{margin:0;padding:0;overflow-x:clip}
 body{background:#fff;color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
 
-.atm-nav{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);z-index:20}
-.atm-nav .in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.atm-nav .logo{font-family:var(--fd);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none}
-.atm-nav .cta{background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:9px 18px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.afm-nav{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);z-index:20}
+.afm-nav .in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.afm-nav .logo{font-family:var(--fd);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none}
+.afm-nav .cta{background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:9px 18px;border-radius:8px;text-decoration:none;white-space:nowrap}
 
 .wrap{max-width:860px;margin:0 auto;padding:0 24px}
 .eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
@@ -69,9 +69,9 @@ details p{margin-top:12px}
 .btn{display:inline-block;background:var(--green-bright);color:var(--ink);font-weight:600;font-size:15px;padding:13px 24px;border-radius:10px;text-decoration:none;margin-top:8px}
 .btn:hover{text-decoration:none;filter:brightness(1.05)}
 
-.atm-footer{border-top:1px solid var(--border);margin-top:72px}
-.atm-footer .in{max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray-2)}
-.atm-footer a{color:var(--gray)}
+.afm-footer{border-top:1px solid var(--border);margin-top:72px}
+.afm-footer .in{max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray-2)}
+.afm-footer a{color:var(--gray)}
 main{padding-top:56px}
 .breadcrumb{font-size:13px;color:var(--gray-2);margin-bottom:-4px}
 .breadcrumb a{color:var(--gray-2)}

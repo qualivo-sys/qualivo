@@ -1,7 +1,7 @@
 /* ¿Contratarías a esta persona? — agentforme.io. Envía la descripción del
    puesto a api/contratarias (que llama a Claude) y pinta el reparto
    humano / empleado IA, o el aviso de rechazo. Si es válido, registra el
-   lead (nombre/empresa/email + lo que ha respondido) en api/atm-lead. */
+   lead (nombre/empresa/email + lo que ha respondido) en api/afm-lead. */
 (function () {
   'use strict';
 
@@ -90,7 +90,7 @@
           renderRechazo(res.body);
           return;
         }
-        return fetch('/api/atm-lead', {
+        return fetch('/api/afm-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -98,7 +98,7 @@
             fuente: 'contratarias', input: texto, resumen: resumenReparto(res.body),
             website: hp.value
           })
-        }).catch(function (e) { console.error('[contratarias] atm-lead falló:', e); })
+        }).catch(function (e) { console.error('[contratarias] afm-lead falló:', e); })
           .then(function () { renderReparto(res.body); });
       })
       .catch(function () {

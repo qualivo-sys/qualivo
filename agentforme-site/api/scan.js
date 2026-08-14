@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
       })
     });
     if (!upsertRes.ok) {
-      console.error('[atm-scan] upsert falló', upsertRes.status, (await upsertRes.text()).slice(0, 400));
+      console.error('[afm-scan] upsert falló', upsertRes.status, (await upsertRes.text()).slice(0, 400));
       return res.status(502).json({ ok: false, error: 'crm_error' });
     }
     const upsert = await upsertRes.json();
@@ -76,11 +76,11 @@ module.exports = async function handler(req, res) {
     }
 
     await notify({ nombre, email, empresa, recomendado, horasMes, eurosMes, contactId, locationId })
-      .catch(function (e) { console.error('[atm-scan] email falló:', e); });
+      .catch(function (e) { console.error('[afm-scan] email falló:', e); });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[atm-scan] error:', err);
+    console.error('[afm-scan] error:', err);
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 };

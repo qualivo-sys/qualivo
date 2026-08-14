@@ -15,7 +15,7 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;
   if (!apiKey || !locationId) {
-    console.error('[atm-lead] Faltan GHL_API_KEY o GHL_LOCATION_ID en el entorno');
+    console.error('[afm-lead] Faltan GHL_API_KEY o GHL_LOCATION_ID en el entorno');
     return res.status(500).json({ ok: false, error: 'not_configured' });
   }
 
@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
     });
     if (!upsertRes.ok) {
       const detail = await upsertRes.text();
-      console.error('[atm-lead] GHL upsert falló', upsertRes.status, detail.slice(0, 500));
+      console.error('[afm-lead] GHL upsert falló', upsertRes.status, detail.slice(0, 500));
       return res.status(502).json({ ok: false, error: 'crm_error' });
     }
     const upsert = await upsertRes.json();
@@ -81,16 +81,16 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({ body: nota })
       });
       if (!noteRes.ok) {
-        console.error('[atm-lead] Nota no creada', noteRes.status, (await noteRes.text()).slice(0, 300));
+        console.error('[afm-lead] Nota no creada', noteRes.status, (await noteRes.text()).slice(0, 300));
       }
     }
 
     await notifyByEmail({ nombre, email, empresa, web, trabajo, contactId, locationId })
-      .catch(function (err) { console.error('[atm-lead] Aviso por email falló:', err); });
+      .catch(function (err) { console.error('[afm-lead] Aviso por email falló:', err); });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[atm-lead] Error inesperado:', err);
+    console.error('[afm-lead] Error inesperado:', err);
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 };

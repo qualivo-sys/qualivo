@@ -1935,9 +1935,9 @@
     var f = getForm();
     if (!f || SENT) return;
     f.btn.style.cursor = 'pointer';
-    if (!f.sec.querySelector('#atm-legal')) {
+    if (!f.sec.querySelector('#afm-legal')) {
       var legal = document.createElement('p');
-      legal.id = 'atm-legal';
+      legal.id = 'afm-legal';
       legal.style.cssText = 'margin:12px 0 0;font-size:12px;color:#5A6472;line-height:1.5';
       legal.innerHTML = 'Al enviar aceptas la <a href="/privacidad/" style="color:#8A97A3;text-decoration:underline">política de privacidad</a>. Usamos tus datos solo para responder a tu solicitud.';
       (f.btn.parentNode || f.sec).appendChild(legal);
@@ -1953,10 +1953,10 @@
   setInterval(decorate, 1200);
 
   function msg(f, text, color) {
-    var e = document.getElementById('atm-form-msg');
+    var e = document.getElementById('afm-form-msg');
     if (!e) {
       e = document.createElement('p');
-      e.id = 'atm-form-msg';
+      e.id = 'afm-form-msg';
       (f.btn.parentNode || f.sec).appendChild(e);
     }
     e.style.cssText = 'margin:10px 0 0;font-size:13px;font-family:inherit;color:' + (color || '#E8590C');

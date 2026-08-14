@@ -1,7 +1,7 @@
 /* Convierte una tarea en un puesto — agentforme.io. Envía la tarea en texto
    libre a api/ficha (que llama a Claude) y pinta la ficha o el aviso de
    rechazo. Si la ficha es válida, registra el lead (nombre/empresa/email +
-   lo que ha respondido) en api/atm-lead (GHL) — es un generador de leads,
+   lo que ha respondido) en api/afm-lead (GHL) — es un generador de leads,
    no solo una demo. */
 (function () {
   'use strict';
@@ -103,7 +103,7 @@
           renderRechazo(res.body);
           return;
         }
-        return fetch('/api/atm-lead', {
+        return fetch('/api/afm-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -111,7 +111,7 @@
             fuente: 'convierte-una-tarea', input: texto, resumen: resumenFicha(res.body),
             website: hp.value
           })
-        }).catch(function (e) { console.error('[ficha] atm-lead falló:', e); })
+        }).catch(function (e) { console.error('[ficha] afm-lead falló:', e); })
           .then(function () { renderFicha(res.body); });
       })
       .catch(function () {
