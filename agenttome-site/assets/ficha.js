@@ -1,15 +1,21 @@
 /* Convierte una tarea en un puesto — agenttome.io. Envía la tarea en texto
    libre a api/ficha (que llama a Claude) y pinta la ficha o el aviso de
-   rechazo con los mismos tokens visuales del sitio. */
+   rechazo. Si la ficha es válida, registra el lead (nombre/empresa/email +
+   lo que ha respondido) en api/atm-lead (GHL) — es un generador de leads,
+   no solo una demo. */
 (function () {
   'use strict';
 
   var form = document.getElementById('ficha-form');
   var input = document.getElementById('ficha-input');
+  var nombreEl = document.getElementById('ficha-nombre');
+  var empresaEl = document.getElementById('ficha-empresa');
+  var emailEl = document.getElementById('ficha-email');
   var hp = document.getElementById('ficha-hp');
   var btn = document.getElementById('ficha-submit');
   var err = document.getElementById('ficha-error');
   var result = document.getElementById('ficha-result');
+  var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   var esc = function (s) {
     return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; });
@@ -55,13 +61,25 @@
     result.className = 'fc';
   };
 
+  var resumenFicha = function (d) {
+    return d.puesto + '\n' + d.hace.map(function (h) { return '- ' + h; }).join('\n') + '\nNo hace: ' + d.noHace + '\n' + d.horas;
+  };
+
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     var texto = input.value.trim();
+    var nombre = nombreEl.value.trim();
+    var empresa = empresaEl.value.trim();
+    var email = emailEl.value.trim();
     err.style.display = 'none';
     if (!texto) return;
     if (texto.length > 500) {
       err.textContent = 'Cuéntalo en menos de 500 caracteres.';
+      err.style.display = 'block';
+      return;
+    }
+    if (!nombre || !empresa || !EMAIL_RE.test(email)) {
+      err.textContent = 'Necesitamos nombre, empresa y un email válido.';
       err.style.display = 'block';
       return;
     }
@@ -81,8 +99,20 @@
         if (res.status !== 200 || !res.body || res.body.ok === false) {
           throw new Error('server');
         }
-        if (res.body.valido) renderFicha(res.body);
-        else renderRechazo(res.body);
+        if (!res.body.valido) {
+          renderRechazo(res.body);
+          return;
+        }
+        return fetch('/api/atm-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: nombre, empresa: empresa, email: email,
+            fuente: 'convierte-una-tarea', input: texto, resumen: resumenFicha(res.body),
+            website: hp.value
+          })
+        }).catch(function (e) { console.error('[ficha] atm-lead falló:', e); })
+          .then(function () { renderFicha(res.body); });
       })
       .catch(function () {
         err.textContent = 'Algo ha ido mal generando la ficha. Prueba otra vez en un momento.';

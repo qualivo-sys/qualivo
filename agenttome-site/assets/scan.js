@@ -171,7 +171,8 @@
     document.getElementById('res-score').innerHTML =
       '<p class="eyebrow" style="margin:0">Tu resultado, ' + esc(nombre.split(' ')[0]) + '</p>' +
       '<p class="res-emp">' + r.puntuacion + '/100</p>' +
-      '<p style="margin:0">Puntuación de Empleado IA — cuánto potencial tiene tu empresa para incorporar empleados digitales, según lo que has marcado.</p>';
+      '<p style="margin:0 0 14px">Puntuación de Empleado IA — cuánto potencial tiene tu empresa para incorporar empleados digitales, según lo que has marcado.</p>' +
+      '<p style="margin:0;font-size:13px;color:var(--gray)"><strong>Cómo hemos llegado a esto:</strong> cuenta cuántas tareas marcaste, con qué frecuencia ocurren y si siguen reglas claras o dependen del criterio de alguien. Es una estimación a partir de tus respuestas, no una auditoría completa — si algo no cuadra con tu día a día, es la primera pregunta que resolveríamos juntos.</p>';
 
     document.getElementById('res-ficha').innerHTML =
       '<div class="sc-card">' +

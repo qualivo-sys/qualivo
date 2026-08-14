@@ -20,6 +20,11 @@
 #ficha-input{width:100%;background:transparent;border:2px solid rgba(232,236,239,.22);border-radius:10px;padding:16px 18px;font-family:var(--fb);font-weight:500;font-size:17px;line-height:1.5;color:#F7F8F8;resize:vertical;min-height:110px;display:block}
 #ficha-input:focus{outline:none;border-color:var(--green-bright)}
 #ficha-input::placeholder{color:rgba(232,236,239,.4)}
+.ficha-gate{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.ficha-gate input{font-family:var(--fb);font-size:14.5px;padding:12px 14px;border:2px solid rgba(232,236,239,.22);border-radius:9px;background:transparent;color:#F7F8F8;width:100%}
+.ficha-gate input::placeholder{color:rgba(232,236,239,.4)}
+.ficha-gate input:focus{outline:none;border-color:var(--green-bright)}
+@media(max-width:640px){.ficha-gate{grid-template-columns:1fr}}
 .ficha-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
 .ficha-hint{font-size:13px;color:#5A6472}
 #ficha-submit{border:0;cursor:pointer;font-family:var(--fb)}
@@ -70,9 +75,14 @@
     <div class="ficha-top">
       <div class="ficha-eyebrow">// describe una tarea de tu equipo</div>
       <textarea id="ficha-input" maxlength="500" placeholder="Ej: Cada mañana alguien se tira una hora buscando en LinkedIn quién podría ser cliente y mandando el mismo mensaje copiado veinte veces." required></textarea>
+      <div class="ficha-gate">
+        <input id="ficha-nombre" placeholder="Nombre" required>
+        <input id="ficha-empresa" placeholder="Empresa" required>
+        <input id="ficha-email" type="email" placeholder="Email" required>
+      </div>
       <input class="hp2" id="ficha-hp" tabindex="-1" autocomplete="off">
       <div class="ficha-actions">
-        <span class="ficha-hint">Sin registro. Tarda unos segundos.</span>
+        <span class="ficha-hint">Gratis · te enviamos la ficha también por email.</span>
         <button id="ficha-submit" class="btn" type="submit">Convertir en puesto →</button>
       </div>
     </div>
