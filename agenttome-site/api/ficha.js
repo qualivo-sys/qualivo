@@ -39,6 +39,16 @@ const TOOL = {
   }
 };
 
+// Claude casi siempre devuelve un array, pero a veces junta las frases en un
+// único string. Si pasa, lo partimos por frase en vez de descartar la respuesta.
+function toList(v) {
+  if (Array.isArray(v)) return v.map(String).map(function (s) { return s.trim(); }).filter(Boolean);
+  if (typeof v === 'string') {
+    return v.split(/(?<=[.!?])\s+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  return [];
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -95,13 +105,14 @@ module.exports = async function handler(req, res) {
 
     const out = toolUse.input;
     if (out.valido === true) {
-      if (!PUESTOS.includes(out.puesto) || !Array.isArray(out.hace) || out.hace.length !== 3 || !out.noHace || !out.horas) {
+      const hace = toList(out.hace);
+      if (!PUESTOS.includes(out.puesto) || hace.length !== 3 || !out.noHace || !out.horas) {
         console.error('[ficha] Ficha con forma inválida', JSON.stringify(out).slice(0, 400));
         return res.status(502).json({ ok: false, error: 'ai_error' });
       }
       return res.status(200).json({
         ok: true, valido: true, input: input,
-        puesto: out.puesto, hace: out.hace, noHace: out.noHace, horas: out.horas
+        puesto: out.puesto, hace: hace, noHace: out.noHace, horas: out.horas
       });
     }
 

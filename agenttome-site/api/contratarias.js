@@ -35,6 +35,16 @@ const TOOL = {
   }
 };
 
+// Claude casi siempre devuelve un array, pero a veces junta las frases en un
+// único string. Si pasa, lo partimos por frase en vez de descartar la respuesta.
+function toList(v) {
+  if (Array.isArray(v)) return v.map(String).map(function (s) { return s.trim(); }).filter(Boolean);
+  if (typeof v === 'string') {
+    return v.split(/(?<=[.!?])\s+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  return [];
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -90,14 +100,15 @@ module.exports = async function handler(req, res) {
     const out = toolUse.input;
     if (out.valido === true) {
       const pct = out.porcentajeIA;
-      if (!Array.isArray(out.humano) || !out.humano.length || !Array.isArray(out.empleadoIA) || !out.empleadoIA.length ||
-          !Number.isInteger(pct) || pct < 0 || pct > 100) {
+      const humano = toList(out.humano);
+      const empleadoIA = toList(out.empleadoIA);
+      if (!humano.length || !empleadoIA.length || !Number.isInteger(pct) || pct < 0 || pct > 100) {
         console.error('[contratarias] Reparto con forma inválida', JSON.stringify(out).slice(0, 400));
         return res.status(502).json({ ok: false, error: 'ai_error' });
       }
       return res.status(200).json({
         ok: true, valido: true, input: input,
-        humano: out.humano, empleadoIA: out.empleadoIA, porcentajeIA: pct
+        humano: humano, empleadoIA: empleadoIA, porcentajeIA: pct
       });
     }
 

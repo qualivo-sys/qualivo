@@ -57,6 +57,16 @@ const TOOL = {
   }
 };
 
+// Claude casi siempre devuelve un array, pero a veces junta las frases en un
+// único string. Si pasa, lo partimos por frase en vez de descartar la respuesta.
+function toList(v) {
+  if (Array.isArray(v)) return v.map(String).map(function (s) { return s.trim(); }).filter(Boolean);
+  if (typeof v === 'string') {
+    return v.split(/(?<=[.!?])\s+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  return [];
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -124,13 +134,17 @@ module.exports = async function handler(req, res) {
     }
 
     const out = toolUse.input;
-    const candidatosOk = Array.isArray(out.candidatos) && out.candidatos.length > 0 &&
-      out.candidatos.every(function (c) { return c && typeof c.nombre === 'string' && Number.isInteger(c.potencial) && Array.isArray(c.hace); });
+    const candidatos = Array.isArray(out.candidatos)
+      ? out.candidatos.map(function (c) { return c && { nombre: c.nombre, potencial: c.potencial, hace: toList(c.hace) }; }).filter(Boolean)
+      : [];
+    const candidatosOk = candidatos.length > 0 &&
+      candidatos.every(function (c) { return typeof c.nombre === 'string' && Number.isInteger(c.potencial) && c.hace.length > 0; });
     if (!Number.isInteger(out.puntuacion) || !candidatosOk || !EMPLEADOS.includes(out.principalRolId) ||
         !out.principalNoHace || !Number.isInteger(out.horasMin) || !Number.isInteger(out.horasMax)) {
       console.error('[scan-v2] Salida con forma inválida', JSON.stringify(out).slice(0, 500));
       return res.status(502).json({ ok: false, error: 'ai_error' });
     }
+    out.candidatos = candidatos;
 
     return res.status(200).json({
       ok: true,
