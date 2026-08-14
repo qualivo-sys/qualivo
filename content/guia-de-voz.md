@@ -1,4 +1,4 @@
-# Guía de voz — Qualivo, Launch y Agent to Me
+# Guía de voz — Qualivo, Launch y Agent for Me
 
 > Documento canónico de estilo. Gobierna TODO el copy del ecosistema: webs, posts, emails, anuncios. Prevalece sobre cualquier borrador anterior. Origen: brief de Maikel (ago-2026).
 
@@ -21,7 +21,7 @@ Tecnicismos innecesarios · anglicismos de marketing · lenguaje empresarial · 
 - "decisiones data-driven" → "decidir mirando los datos, no solo la intuición"
 - lead → contacto / interesado · funnel → embudo / camino de compra · outbound → puerta fría / escribir directamente · tracking → medición · paid media → publicidad de pago · pipeline → cartera de oportunidades · dashboard → panel · onboarding → puesta en marcha / alta
 
-**Excepciones acordadas**: (a) palabras que son EL término que la gente busca en Google (CAC, ROAS, lead scoring… en blog/diccionario/páginas SEO — son el tema, no jerga); (b) nombres de producto (Qualivo Diagnostic, Launch, Company Scan, SDR Digital, CRM); (c) el vocabulario de marca de Agent to Me (rol, KPI, ROI) — siempre con glosa humana cerca en su primer uso.
+**Excepciones acordadas**: (a) palabras que son EL término que la gente busca en Google (CAC, ROAS, lead scoring… en blog/diccionario/páginas SEO — son el tema, no jerga); (b) nombres de producto (Qualivo Diagnostic, Launch, Company Scan, SDR Digital, CRM); (c) el vocabulario de marca de Agent for Me (rol, KPI, ROI) — siempre con glosa humana cerca en su primer uso.
 
 ## Anti-ChatGPT
 

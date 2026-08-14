@@ -1,10 +1,10 @@
-# Agent to Me — Fuente de verdad
+# Agent for Me — Fuente de verdad
 
-> Todo lo que salga de Agent to Me —mensaje, web, demo, propuesta, outreach— pasa por este documento.
+> Todo lo que salga de Agent for Me —mensaje, web, demo, propuesta, outreach— pasa por este documento.
 
 ## En una frase
 
-**Agent to Me monta equipos digitales dentro de las empresas.** Cada puesto del equipo lo ocupa un empleado digital — con rol, KPIs, ROI y un responsable humano al que reporta. Se empieza por un puesto; el equipo va creciendo y se pasa el trabajo entre ellos. No vendemos IA — ponemos a alguien a hacer el trabajo. Que no sean humanos es un detalle.
+**Agent for Me monta equipos digitales dentro de las empresas.** Cada puesto del equipo lo ocupa un empleado digital — con rol, KPIs, ROI y un responsable humano al que reporta. Se empieza por un puesto; el equipo va creciendo y se pasa el trabajo entre ellos. No vendemos IA — ponemos a alguien a hacer el trabajo. Que no sean humanos es un detalle.
 
 > **Jerarquía de vocabulario (12-ago):** «equipo digital» es la promesa de marca (el paraguas); «empleado digital» es la unidad de venta (el puesto). La visión es el equipo; la compra empieza por UN empleado.
 
@@ -65,7 +65,7 @@ Nunca vender proyectos; siempre vender empleados. **Implementación: 1.500–5.0
 
 Captación: demos + contacto directo (ABM). Proceso: diagnóstico del proceso manual → diseño del empleado → integración → onboarding → medición de KPIs → iteración. **Cliente cero:** cada empleado se valida usándolo primero (en Qualivo o en un cliente) antes de venderlo.
 
-## 🧭 El filtro Agent to Me — pasa TODO por aquí
+## 🧭 El filtro Agent for Me — pasa TODO por aquí
 
 - [ ] ¿Habla de un EMPLEADO/resultado, no de tecnología, IA o workflow?
 - [ ] ¿Lo entiende un CEO que no sabe nada de IA?
@@ -91,4 +91,4 @@ Captación: demos + contacto directo (ABM). Proceso: diagnóstico del proceso ma
 
 ## Ecosistema
 
-**Contenido → Hack the Prompt → Qualivo → Agent to Me.** Qualivo descubre y valida procesos → Agent to Me los productiza como empleados digitales. Marcas separadas, webs separadas, conectadas por el journey.
+**Contenido → Hack the Prompt → Qualivo → Agent for Me.** Qualivo descubre y valida procesos → Agent for Me los productiza como empleados digitales. Marcas separadas, webs separadas, conectadas por el journey.

@@ -836,7 +836,7 @@ class Component extends DCLogic {
         });
       }, { threshold: 0.15 });
       els.forEach(el => io.observe(el));
-      const logSec = document.querySelector('[data-screen-label="Agent to Me"]');
+      const logSec = document.querySelector('[data-screen-label="Agent for Me"]');
       if (logSec) {
         const io2 = new IntersectionObserver(es => {
           if (es.some(e => e.isIntersecting)) { this.setState({ logOn: true }); io2.disconnect(); }
@@ -901,7 +901,7 @@ class Component extends DCLogic {
       ['primera máquina de adquisición', 'en marcha']
     ];
     return E('div', { style: { background: '#04231F', border: '1px solid rgba(39,189,177,.25)', borderRadius: 16, padding: '26px 28px', fontFamily: 'ui-monospace,Menlo,monospace' } },
-      E('p', { style: { margin: '0 0 18px', fontSize: 11, letterSpacing: 3, color: '#27BDB1', fontWeight: 700 } }, 'AGENT TO ME · LAUNCH LOG'),
+      E('p', { style: { margin: '0 0 18px', fontSize: 11, letterSpacing: 3, color: '#27BDB1', fontWeight: 700 } }, 'AGENT FOR ME · LAUNCH LOG'),
       lines.map((l, i) => E('div', {
         key: i,
         style: { display: 'flex', gap: 12, alignItems: 'baseline', padding: '7px 0', borderBottom: i < lines.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none', opacity: on ? 1 : 0, transform: on ? 'none' : 'translateY(8px)', transition: 'opacity .5s ease ' + (i * 0.18) + 's, transform .5s ease ' + (i * 0.18) + 's' }

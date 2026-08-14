@@ -1,4 +1,4 @@
-# Manual de operaciones — Agent to Me
+# Manual de operaciones — Agent for Me
 
 > Cómo se vende, se monta y se mantiene un empleado digital, paso a paso. Este documento es la fuente de verdad operativa: lo que hoy hace Maikel de memoria, escrito para que mañana lo pueda hacer otra persona igual de bien. Complementa `agent-to-me-fuente-de-verdad.md` (qué decimos) y se rige por `guia-de-voz.md` (cómo lo decimos).
 
@@ -70,7 +70,7 @@ La reunión más importante de todo el proceso. **No es un kick-off técnico: es
 
 **Reglas:**
 - Se hace **en videollamada con el cliente compartiendo pantalla**. Nunca "mándame las credenciales".
-- **Usuario propio para el empleado** en cada herramienta ("Sofía · Agent to Me", con su correo). Nunca la cuenta del jefe.
+- **Usuario propio para el empleado** en cada herramienta ("Sofía · Agent for Me", con su correo). Nunca la cuenta del jefe.
 - Permisos mínimos necesarios: si solo necesita leer, no pedimos escribir.
 - Todo queda anotado en la ficha del cliente: qué acceso, de qué herramienta, quién lo dio y cuándo.
 
@@ -252,7 +252,7 @@ El envoltorio son 4-6 nodos: **credenciales del cliente + su `cliente_id` + hora
 
 **Regla de oro:** el envoltorio lleva **credenciales**; la base de datos lleva **comportamiento** (ICP, tono, límites, textos, excepciones). Si el tono o los mensajes viven dentro del flujo, hay que abrir n8n para cambiar una frase — y eso ata el negocio a una persona técnica para siempre.
 
-**Versiones y cliente canario:** el motor se versiona (`Motor SDR v1`, `v2`). Cada envoltorio apunta a una versión y se migran de uno en uno. Todo cambio se prueba primero en el **cliente cero (Agent to Me vendiéndose a sí mismo)** antes de tocar a un cliente real.
+**Versiones y cliente canario:** el motor se versiona (`Motor SDR v1`, `v2`). Cada envoltorio apunta a una versión y se migran de uno en uno. Todo cambio se prueba primero en el **cliente cero (Agent for Me vendiéndose a sí mismo)** antes de tocar a un cliente real.
 
 ### Las cuatro capas
 
@@ -325,7 +325,7 @@ Que cada cliente necesite menos ayuda técnica que el anterior: **el primero se 
 
 ## 13. Publicar carruseles desde GHL (limitaciones comprobadas)
 
-Comprobado el 13 de agosto de 2026 publicando el escaparate de @agenttome. Está aquí porque cuesta media mañana descubrirlo y se repite en cada cliente que use el planificador de redes.
+Comprobado el 13 de agosto de 2026 publicando el escaparate de @agentforme. Está aquí porque cuesta media mañana descubrirlo y se repite en cada cliente que use el planificador de redes.
 
 **GHL no programa carruseles por API.** Un `POST /social-media-posting/{location}/posts` con `status: "scheduled"` acepta las 10 imágenes, devuelve 200 y guarda **solo la primera**. No avisa: el post queda creado y aparentemente bien hasta que lo abres. Reproducido cinco veces (borrador de 10 → 10 imágenes; borrador de 7 → 7; programado de 7 → 1; programado de 3 → 1; borrador convertido a programado → 1).
 

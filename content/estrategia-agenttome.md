@@ -1,17 +1,17 @@
-# Estrategia de posicionamiento — Agent to Me (agenttome.io)
+# Estrategia de posicionamiento — Agent for Me (agentforme.io)
 
 > Complementa `agent-to-me-fuente-de-verdad.md` (qué decimos) y se rige por `growth-os.md` + `content-intelligence.md` (cómo operamos). Datos de partida: DinoRank ES, agosto 2026.
 
 ## 1. El punto de partida es OPUESTO al de Qualivo
 
-| | Qualivo | Agent to Me |
+| | Qualivo | Agent for Me |
 |---|---|---|
 | Demanda de búsqueda | Existía ("consultoría growth marketing" 180/mes, CAC, ROAS…) | **Casi no existe**: "empleado digital" ≈ 0 búsquedas relevantes; "agencia de automatización de IA" ~110/mes (CPC 3-4 € — poca, pero comercial) |
 | Prueba | 5 casos con números | **Cero casos** (y la regla sin-resultados-de-clientes tampoco aplicaría: no hay clientes) |
 | Categoría | Conocida (consultoría) | **Nueva — hay que definirla** |
 | Estrategia dominante | Capturar demanda existente (BOFU primero) | **Crear demanda + poseer la definición de la categoría** |
 
-Conclusión: replicar el playbook de Qualivo tal cual sería un error. Aquí el SEO clásico es la guarnición, no el plato. Los tres motores de Agent to Me son: **LinkedIn (crear demanda) + GEO/LLMs (poseer la categoría) + producto como contenido (build in public)**.
+Conclusión: replicar el playbook de Qualivo tal cual sería un error. Aquí el SEO clásico es la guarnición, no el plato. Los tres motores de Agent for Me son: **LinkedIn (crear demanda) + GEO/LLMs (poseer la categoría) + producto como contenido (build in public)**.
 
 ## 2. La regla de los dos vocabularios
 
@@ -24,8 +24,8 @@ La fuente de verdad prohíbe "automatización/agente de IA/workflow" en NUESTRO 
 ## 3. Arquitectura web (en fases, cada una desbloquea la siguiente)
 
 **Fase 0 — Infraestructura de captura (antes que nada de contenido):**
-- Formulario → GHL con pipeline/tags propios (`agenttome-landing`, `atm-scan`) + email de aviso. Mismo patrón api/lead que qualivo.io.
-- GSC (propiedad agenttome.io), Vercel Analytics, proyecto DinoRank, `llms.txt`.
+- Formulario → GHL con pipeline/tags propios (`agentforme-landing`, `atm-scan`) + email de aviso. Mismo patrón api/lead que qualivo.io.
+- GSC (propiedad agentforme.io), Vercel Analytics, proyecto DinoRank, `llms.txt`.
 - Sin esto, todo lo demás genera tráfico que no se convierte ni se mide (regla Growth OS).
 
 **Fase 1 — El producto como web (BOFU propio):**
@@ -39,7 +39,7 @@ La fuente de verdad prohíbe "automatización/agente de IA/workflow" en NUESTRO 
 - Long-tail "automatizar [proceso]" — única demanda de búsqueda real que existe.
 
 **Fase 3 — La prueba (sustituto de los casos):**
-- **Build in public con números PROPIOS**: el SDR Digital de Agent to Me vendiendo Agent to Me (cliente cero = nosotros). Los números propios no violan la regla editorial — no son de clientes. "Nuestro SDR digital contactó X empresas esta semana, agendó Y reuniones, coste Z" es la demo definitiva del producto.
+- **Build in public con números PROPIOS**: el SDR Digital de Agent for Me vendiendo Agent for Me (cliente cero = nosotros). Los números propios no violan la regla editorial — no son de clientes. "Nuestro SDR digital contactó X empresas esta semana, agendó Y reuniones, coste Z" es la demo definitiva del producto.
 - Cuando haya clientes reales: fichas de caso al estilo qualivo/casos (la evidencia vive en la web).
 
 ## 4. Lead magnets (biblioteca objetivo — los activa el mercado)
@@ -54,14 +54,14 @@ Regla intacta: se construye el recurso cuyo problema genere señal en contenido 
 ## 5. Distribución (sin duplicar la máquina)
 
 - **LinkedIn Maikel** es el canal compartido — la semana tipo del Content Intelligence ya reserva martes (Radar IA → AtM) y jueves ("¿contratarías a alguien para esto?" → AtM). No se crea calendario aparte: mismo laboratorio, dos marcas.
-- **Página LinkedIn de Agent to Me** (cuando exista): 1/semana, build in public + fichas de empleados.
+- **Página LinkedIn de Agent for Me** (cuando exista): 1/semana, build in public + fichas de empleados.
 - **Outbound = el producto**: la historia "un SDR digital te escribió este email" es el mejor gancho de la categoría. Se activa cuando el SDR cliente-cero esté rodado (Apollo/Mailerfind/HeyReach ya conectados).
 - Sin GBP (no es negocio local) y sin Instagram por ahora — menos canales, mejor elegidos.
 
 ## 6. Medición (Growth OS aplicado)
 
 - **North Star igual: conversaciones comerciales cualificadas.** Métricas de resultado: Company Scans completados, reuniones, implementaciones, MRR.
-- Tags GHL: `origen-agenttome`, `atm-scan`, `atm-outbound` — mismo CRM, pipeline separado.
+- Tags GHL: `origen-agentforme`, `atm-scan`, `atm-outbound` — mismo CRM, pipeline separado.
 - Entra en el **Growth Review semanal** existente como sección propia (no un informe aparte).
 - Experimentos iniciales (base 🧪 de Notion):
   - **E4** — ¿El contenido AtM en LinkedIn de Maikel genera conversaciones ICP? (umbral: ≥2 conversaciones en 4 semanas; si no, revisar problema/mensaje antes que canal)

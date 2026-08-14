@@ -4,7 +4,7 @@
 
 ## El puesto
 
-- **Rol:** SDR Digital de Agent to Me, vendiendo Agent to Me (dogfooding). El gancho es el propio empleado: *"este análisis lo preparó nuestro SDR digital"*.
+- **Rol:** SDR Digital de Agent for Me, vendiendo Agent for Me (dogfooding). El gancho es el propio empleado: *"este análisis lo preparó nuestro SDR digital"*.
 - **KPI principal:** reuniones cualificadas agendadas. Secundarias: tasa de respuesta, % respuestas positivas, coste por reunión.
 - **Umbral E6:** respuesta ≥5 % y ≥2 reuniones en el primer mes. Si no → modificar mensaje/ICP, no escalar volumen.
 - **Reporta a:** Maikel, informe semanal (integrado en el Growth Review).
@@ -34,11 +34,11 @@ Asunto: `el trabajo repetitivo de {{empresa}}`
 >
 > ¿Te enseño en 20 min qué haría uno en {{empresa}}?
 >
-> Maikel Echevarria — Agent to Me
+> Maikel Echevarria — Agent for Me
 
 **Email 2 — valor sin pedir nada (día 3-4, si no responde)**
 Asunto: re: anterior
-> Te dejo algo útil aunque no hablemos: nuestro Company Scan (2 min) te dice qué puesto digital tendría más impacto en {{empresa}} y cuántas horas/€ al mes hay en juego → agenttome.io/company-scan
+> Te dejo algo útil aunque no hablemos: nuestro Company Scan (2 min) te dice qué puesto digital tendría más impacto en {{empresa}} y cuántas horas/€ al mes hay en juego → agentforme.io/company-scan
 >
 > Si el resultado te sorprende, me lo cuentas.
 
@@ -52,7 +52,7 @@ Asunto: re: anterior
 ## Límites (innegociables)
 
 - Máx. **20 cuentas nuevas/día** al empezar (calidad > volumen; protege dominio y marca).
-- Email desde subdominio dedicado (p. ej. `hola@get.agenttome.io`) con SPF/DKIM/DMARC y warm-up — **nunca** desde el dominio raíz.
+- Email desde subdominio dedicado (p. ej. `hola@get.agentforme.io`) con SPF/DKIM/DMARC y warm-up — **nunca** desde el dominio raíz.
 - Research real por cuenta o no se contacta. Prohibido el merge-tag-spam.
 - Respuestas: las frecuentes las gestiona el SDR con plantillas aprobadas; cualquier matiz → Maikel.
 - Baja inmediata y lista de exclusión ante cualquier "no".

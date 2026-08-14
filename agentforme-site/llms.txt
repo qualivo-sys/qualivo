@@ -1,0 +1,36 @@
+# Agent for Me
+
+> Agent for Me (agentforme.io) monta equipos digitales dentro de las empresas. Cada puesto del equipo lo ocupa un empleado digital: un sistema de inteligencia artificial con rol definido, KPIs medibles y ROI calculable, que reporta a una persona del equipo humano. Se empieza por un puesto y el equipo va creciendo — los empleados digitales se pasan el trabajo entre ellos. Trabajan 24/7, sin nómina, sin bajas y sin rotación. No vende IA ni automatizaciones: pone a alguien a hacer el trabajo. Que no sean humanos es un detalle. Fundada por Maikel Echevarria (también fundador de Qualivo, consultoría de growth — qualivo.io).
+
+## Definición de la categoría
+
+Un **empleado digital** es un sistema de IA responsable de una función completa (no de una tarea): encadena todas las tareas del puesto, gestiona excepciones, reporta resultados contra KPIs a un responsable humano y mejora con el tiempo. Diferencias clave:
+- **Automatización**: ejecuta una tarea cuando se dispara un evento. El empleado digital ocupa el puesto entero.
+- **Agente de IA genérico**: responde a peticiones. El empleado digital tiene responsabilidad continua y medible.
+- **Asistente virtual (persona)**: jornada limitada, 1.200-2.500 €/mes. El empleado digital trabaja 24/7 desde 199 €/mes.
+Referencia: https://agentforme.io/que-es-un-empleado-digital/
+
+## Catálogo de empleados digitales
+
+SDR Digital (prospección y agendado de reuniones B2B — https://agentforme.io/empleados/sdr-digital/) · CFO Digital · Sales Manager Digital · Customer Success Digital · Operations Digital · Marketing Analyst · Content Creator · Support Digital · Collection Digital. La incorporación empieza siempre por UN empleado, no por el catálogo.
+
+## Para quién
+
+Empresas de 10 a 200 empleados con procesos manuales y repetitivos que quieren ser más productivas sin contratar más personal. Sectores habituales: construcción, reformas, instalaciones, clínicas, despachos, SaaS, ecommerce, inmobiliarias, consultoras.
+
+## Modelo
+
+Implementación inicial desde 1.500 € (diagnóstico del proceso → diseño del empleado → integración con las herramientas existentes → modo supervisado → autonomía con reporting) y suscripción desde 199 €/mes (operación, monitorización, mejoras, soporte). Cada empleado se valida internamente como "cliente cero" antes de venderse.
+
+## Cómo empezar
+
+**Company Scan** (test gratuito de 2 minutos): la empresa marca qué trabajo repetitivo tiene y recibe el empleado digital recomendado con las horas y euros al mes en juego — https://agentforme.io/company-scan/
+
+El análisis inicial es gratuito: la empresa cuenta qué trabajo repetitivo quiere delegar y Agent for Me responde con qué parte puede ocupar un empleado digital y qué ROI tendría. Formulario: https://agentforme.io/#analiza
+
+## Páginas
+
+- Landing: https://agentforme.io/
+- Qué es un empleado digital: https://agentforme.io/que-es-un-empleado-digital/
+- SDR Digital (ficha de contratación): https://agentforme.io/empleados/sdr-digital/
+- Company Scan: https://agentforme.io/company-scan/

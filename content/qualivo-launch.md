@@ -27,13 +27,13 @@ No son tres servicios arbitrarios: son tres momentos de una empresa.
 5. **Growth Machine** — tráfico → lead → cualificación → venta → cliente → dato. Outbound, contenido, SEO, paid cuando tenga sentido, CRM, automatizaciones, analítica.
 6. **Launch & Learn** — lanzar, medir, aprender, iterar. Experimentos con hipótesis y umbral definidos antes (sistema del Growth OS).
 
-## La prueba: Agent to Me
+## La prueba: Agent for Me
 
-Agent to Me es el Launch de demostración, construido en público: research de categoría → ICP → posicionamiento ("empleados digitales") → web + captación al CRM en 48 h → lead magnet (Company Scan) → primera máquina de adquisición (SDR cliente-cero). La historia comercial: **no decimos que sabemos lanzar negocios — estamos lanzando el nuestro delante de la gente**, con números compartidos según se producen.
+Agent for Me es el Launch de demostración, construido en público: research de categoría → ICP → posicionamiento ("empleados digitales") → web + captación al CRM en 48 h → lead magnet (Company Scan) → primera máquina de adquisición (SDR cliente-cero). La historia comercial: **no decimos que sabemos lanzar negocios — estamos lanzando el nuestro delante de la gente**, con números compartidos según se producen.
 
 ## Reglas operativas
 
-- **El contenido de Launch no abre calendario nuevo**: su contenido ES la serie build-in-public de Agent to Me + piezas de Construcción del pilar existente. Menos acciones, mejor elegidas.
+- **El contenido de Launch no abre calendario nuevo**: su contenido ES la serie build-in-public de Agent for Me + piezas de Construcción del pilar existente. Menos acciones, mejor elegidas.
 - **Capacidad honesta**: pocos Launch simultáneos; si hay lista de espera se dice en la primera conversación.
 - **Métrica de resultado**: conversaciones cualificadas de Launch (tag GHL `launch-interes` cuando lleguen por el formulario mencionando lanzamiento/idea) → propuestas → proyectos. Entra en el Growth Review.
 - **Cualificación**: Launch admite empresas por debajo de 500k (a diferencia del Diagnostic) — la pregunta filtro no es facturación sino capacidad de inversión y de operar el negocio lanzado.
@@ -44,4 +44,4 @@ Agent to Me es el Launch de demostración, construido en público: research de c
 
 ## Claims rotativos (regla de marca, 12-ago)
 
-Los heros de qualivo.io, qualivo.io/launch y agenttome.io rotan su claim cada ~5 s (el primero queda estático en el HTML para SEO/GEO; la rotación es client-side y respeta prefers-reduced-motion). Los sets viven en assets/app.js (qualivo), launch/assets/js-1.js y agenttome-site/assets/app.js. Cuando un claim demuestre generar más conversaciones (Growth OS), se promociona a claim estático.
+Los heros de qualivo.io, qualivo.io/launch y agentforme.io rotan su claim cada ~5 s (el primero queda estático en el HTML para SEO/GEO; la rotación es client-side y respeta prefers-reduced-motion). Los sets viven en assets/app.js (qualivo), launch/assets/js-1.js y agentforme-site/assets/app.js. Cuando un claim demuestre generar más conversaciones (Growth OS), se promociona a claim estático.

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Contratarías a esta persona? — Agent for Me</title>
+<meta name="description" content="Describe un puesto que estés pensando contratar. Te decimos qué parte cubriría un empleado IA y qué parte sigue siendo de una persona.">
+<link rel="canonical" href="https://agentforme.io/contratarias/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="¿Contratarías a esta persona? · Agent for Me">
+<meta property="og:description" content="Antes de contratar, descubre qué parte del puesto necesitas realmente cubrir.">
+<meta property="og:url" content="https://agentforme.io/contratarias/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="/assets/pages.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+.ct-top{background:var(--dark);border:1px solid var(--dark-border);border-radius:16px;padding:30px 28px;margin:28px 0 0}
+.ct-eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,236,239,.5);margin-bottom:14px}
+#ct-input{width:100%;background:transparent;border:2px solid rgba(232,236,239,.22);border-radius:10px;padding:16px 18px;font-family:var(--fb);font-weight:500;font-size:17px;line-height:1.5;color:#F7F8F8;resize:vertical;min-height:110px;display:block}
+#ct-input:focus{outline:none;border-color:var(--green-bright)}
+#ct-input::placeholder{color:rgba(232,236,239,.4)}
+.ct-gate{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.ct-gate input{font-family:var(--fb);font-size:14.5px;padding:12px 14px;border:2px solid rgba(232,236,239,.22);border-radius:9px;background:transparent;color:#F7F8F8;width:100%}
+.ct-gate input::placeholder{color:rgba(232,236,239,.4)}
+.ct-gate input:focus{outline:none;border-color:var(--green-bright)}
+@media(max-width:640px){.ct-gate{grid-template-columns:1fr}}
+.ct-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
+.ct-hint{font-size:13px;color:#5A6472}
+#ct-submit{border:0;cursor:pointer;font-family:var(--fb)}
+#ct-submit:disabled{opacity:.6;cursor:default}
+#ct-error{display:none;color:#E8590C;font-size:14px;margin-top:12px}
+.hp2{position:absolute;left:-5000px;opacity:0;height:0;width:0}
+
+.ct-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:26px 0}
+.ct-pct-wrap{padding:32px 28px 26px;text-align:center;border-bottom:1px solid var(--border)}
+.ct-pct{font-family:var(--fd);font-weight:800;font-size:clamp(40px,7vw,64px);letter-spacing:-.02em;color:var(--green)}
+.ct-pct-label{font-size:15px;color:var(--gray);font-weight:600;margin-top:4px}
+.ct-split{display:flex;height:16px;border-radius:999px;overflow:hidden;margin:20px auto 0;max-width:420px}
+.ct-split .ia{background:var(--green)}
+.ct-split .hum{background:var(--ink)}
+.ct-legend{display:flex;justify-content:center;gap:24px;margin-top:10px;font-size:12px;font-weight:700}
+.ct-legend .ia{color:var(--green)}
+.ct-legend .hum{color:var(--gray-2)}
+.ct-note{margin:0 28px 26px;background:#F7F8F9;border-radius:10px;padding:14px 16px;font-size:12.5px;color:#3A3F46;line-height:1.5}
+.ct-note b{color:var(--ink)}
+.ct-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:640px){.ct-cols{grid-template-columns:1fr}}
+.ct-col{padding:26px 28px}
+.ct-col.hum{border-right:1px solid var(--border)}
+@media(max-width:640px){.ct-col.hum{border-right:0;border-bottom:1px solid var(--border)}}
+.ct-col-kick{font-family:var(--fm);font-size:12px;letter-spacing:.1em;color:var(--gray-2);margin-bottom:14px;text-transform:uppercase}
+.ct-li{font-size:15.5px;line-height:1.4;color:var(--ink);padding-left:24px;position:relative;margin-bottom:10px}
+.ct-li:last-child{margin-bottom:0}
+.ct-col.hum .ct-li:before{content:'—';position:absolute;left:0;color:var(--gray-2)}
+.ct-col.ia .ct-li:before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+.ct-bottom{padding:22px 28px;background:var(--green);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ct-bottom-q{font-family:var(--fd);font-weight:800;font-size:17px;color:#06231A;letter-spacing:-.01em;max-width:520px}
+.ct-bottom .btn{background:#06231A;color:#fff;margin:0}
+.ct-reject{padding:34px 28px;text-align:center;border:2px dashed var(--border);border-radius:16px}
+.ct-reject .ct-no-kick{font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--gray-2);margin-bottom:14px;text-transform:uppercase}
+.ct-reject-h{font-family:var(--fd);font-weight:800;font-size:22px;color:var(--ink);letter-spacing:-.01em;line-height:1.3;margin-bottom:12px}
+.ct-reject-sub{font-size:15px;color:var(--gray);line-height:1.5;max-width:480px;margin:0 auto}
+</style>
+</head>
+<body>
+<nav class="atm-nav"><div class="in">
+  <a class="logo" href="/">Agent <span style="color:#0FA968">for</span> Me</a>
+  <a class="cta" href="/#analiza">Analizar mi empresa →</a>
+</div></nav>
+
+<main class="wrap">
+  <p class="eyebrow">¿Contratarías a esta persona? · Gratis</p>
+  <h1>Antes de contratar, descubre qué parte del puesto necesitas realmente cubrir.</h1>
+  <p class="lede">Describe con tus palabras un puesto que estés pensando contratar. Te decimos qué parte cubriría un empleado IA y qué parte sigue siendo de una persona.</p>
+
+  <form id="ct-form">
+    <div class="ct-top">
+      <div class="ct-eyebrow">// describe el puesto que ibas a contratar</div>
+      <textarea id="ct-input" maxlength="600" placeholder="Ej: Necesito una persona para gestionar leads, actualizar el CRM, hacer seguimiento de presupuestos y cerrar ventas." required></textarea>
+      <div class="ct-gate">
+        <input id="ct-nombre" placeholder="Nombre" required>
+        <input id="ct-empresa" placeholder="Empresa" required>
+        <input id="ct-email" type="email" placeholder="Email" required>
+      </div>
+      <input class="hp2" id="ct-hp" tabindex="-1" autocomplete="off">
+      <div class="ct-actions">
+        <span class="ct-hint">Gratis · te enviamos el reparto también por email.</span>
+        <button id="ct-submit" class="btn" type="submit">Calcular el reparto →</button>
+      </div>
+    </div>
+    <p id="ct-error"></p>
+  </form>
+
+  <div id="ct-result"></div>
+</main>
+
+<footer class="atm-footer"><div class="in">
+  <span>© 2026 Agent for Me · The Home of Digital Employees</span>
+  <span><a href="/company-scan/">Company Scan</a> · <a href="/convierte-una-tarea/">Convierte una tarea</a> · <a href="/que-es-un-empleado-digital/">Qué es un empleado digital</a> · <a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
+</div></footer>
+
+<script src="/assets/contratarias.js"></script>
+<script src="/assets/consent.js?v=1"></script>
+</body>
+</html>

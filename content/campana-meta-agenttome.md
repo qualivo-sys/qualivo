@@ -1,12 +1,12 @@
-# Campaña Meta — Agent to Me · Fase Discovery
+# Campaña Meta — Agent for Me · Fase Discovery
 
-> **Objetivo real: aprender, no escalar.** Agent to Me tiene 0 clientes, 0 casos y una categoría sin demanda de búsqueda. Esta campaña es un laboratorio de mensajes: con 500-900 € descubrimos en 2 semanas qué dolor mueve al ICP. Se rige por `growth-os.md` (métrica de resultado > vanidad) y `guia-de-voz.md` (sin jerga).
+> **Objetivo real: aprender, no escalar.** Agent for Me tiene 0 clientes, 0 casos y una categoría sin demanda de búsqueda. Esta campaña es un laboratorio de mensajes: con 500-900 € descubrimos en 2 semanas qué dolor mueve al ICP. Se rige por `growth-os.md` (métrica de resultado > vanidad) y `guia-de-voz.md` (sin jerga).
 
 ## 0. Antes de gastar un euro — bloqueantes
 
 | # | Bloqueante | Estado | Quién |
 |---|---|---|---|
-| 1 | **Píxel de Meta + API de Conversiones** en agenttome.io | ❌ no instalado | Maikel da el Pixel ID → yo lo monto en 10 min |
+| 1 | **Píxel de Meta + API de Conversiones** en agentforme.io | ❌ no instalado | Maikel da el Pixel ID → yo lo monto en 10 min |
 | 2 | **Banner de consentimiento (RGPD)** — el píxel obliga a pedirlo | ❌ no existe (hoy solo Vercel Analytics, sin cookies) | Yo lo monto (patrón de qualivo.io) |
 | 3 | **Destino del tráfico frío** → `/company-scan/`, no el formulario | ✅ ya existe | — |
 | 4 | Cuenta publicitaria + método de pago + página de Facebook de AtM | ⚠️ verificar | Maikel |
@@ -128,7 +128,7 @@ Meta es débil en cargos B2B, pero **fuerte para llegar a dueños de PYME** — 
 
 ### C3 · Talking head Maikel — "Tu mejor comercial" (A3)
 - **Escena:** Maikel en su sitio de trabajo, plano cercano, 30-40 s.
-- **Guion:** "Tu mejor comercial cobra 2.000 € al mes por vender. Y se pasa dos horas al día metiendo datos en el CRM. / No es culpa suya: alguien tiene que hacerlo. / Nosotros ponemos a un empleado digital a hacer esa parte. Tu comercial vuelve a vender. / Si quieres saber qué parte del trabajo de tu equipo se puede quitar de encima, hay un test de dos minutos en agenttome.io."
+- **Guion:** "Tu mejor comercial cobra 2.000 € al mes por vender. Y se pasa dos horas al día metiendo datos en el CRM. / No es culpa suya: alguien tiene que hacerlo. / Nosotros ponemos a un empleado digital a hacer esa parte. Tu comercial vuelve a vender. / Si quieres saber qué parte del trabajo de tu equipo se puede quitar de encima, hay un test de dos minutos en agentforme.io."
 - **Subtítulos quemados**, sin música. Ratio 9:16 + 4:5.
 
 ### C4 · Carrusel — "8 tareas que ya no contratarías" (A11)

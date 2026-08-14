@@ -1,4 +1,4 @@
-# Content Intelligence Engine — Qualivo (+ Agent to Me)
+# Content Intelligence Engine — Qualivo (+ Agent for Me)
 
 > Cómo se decide QUÉ publicar. **Cómo se escribe TODO: `guia-de-voz.md` (la prueba del bar, sin anglicismos, ritmo, nada de gurú) — prevalece sobre cualquier texto.** Complementa `growth-os.md` (que define para qué) y la regla editorial vigente (sin resultados de clientes en contenido — evidencia solo en la web).
 
@@ -16,9 +16,9 @@ Nunca publiques una noticia solo porque es nueva, un consejo solo porque es corr
 
 ## Las 4 fuentes
 
-1. **El mercado** — Qualivo: fugas de captación, marketing por inercia, leads que no convierten, CRM, ventas, CAC, atribución, funnels, Growth. Agent to Me: tareas manuales, procesos repetitivos, administración, seguimiento, atención, reporting, operaciones, coste de contratar.
-2. **Radar de IA** — no somos un medio de noticias. Filtro: ¿qué acaba de cambiar? → ¿qué puede hacer ahora una empresa que antes no podía? → ¿qué proceso humano afecta? → ¿qué oportunidad crea? → Qualivo / Agent to Me / ambos / ninguno. **Cuarta salida: PRODUCT OPPORTUNITY** (qué hace, para quién, problema, frecuencia, coste actual, tecnología, KPI, dificultad, potencial comercial) — el radar alimenta marketing + producto.
-3. **Experiencia de Maikel** — patrones vistos, errores, decisiones, opiniones, experimentos, construcción de Qualivo y Agent to Me. Transversal, no autobiográfico: "después de trabajar dentro de startups, agencias y equipos comerciales, hay un error que veo constantemente…".
+1. **El mercado** — Qualivo: fugas de captación, marketing por inercia, leads que no convierten, CRM, ventas, CAC, atribución, funnels, Growth. Agent for Me: tareas manuales, procesos repetitivos, administración, seguimiento, atención, reporting, operaciones, coste de contratar.
+2. **Radar de IA** — no somos un medio de noticias. Filtro: ¿qué acaba de cambiar? → ¿qué puede hacer ahora una empresa que antes no podía? → ¿qué proceso humano afecta? → ¿qué oportunidad crea? → Qualivo / Agent for Me / ambos / ninguno. **Cuarta salida: PRODUCT OPPORTUNITY** (qué hace, para quién, problema, frecuencia, coste actual, tecnología, KPI, dificultad, potencial comercial) — el radar alimenta marketing + producto.
+3. **Experiencia de Maikel** — patrones vistos, errores, decisiones, opiniones, experimentos, construcción de Qualivo y Agent for Me. Transversal, no autobiográfico: "después de trabajar dentro de startups, agencias y equipos comerciales, hay un error que veo constantemente…".
 4. **Investigación/análisis** — tendencias, estudios, benchmarks, búsquedas, conversaciones (LinkedIn/Reddit). Siempre evidencia para construir una conclusión, nunca contenido genérico.
 
 ## Territorios (Qualivo)
@@ -52,14 +52,14 @@ Biblioteca objetivo por territorio: checklist de fugas (captación) · Lead Qual
 
 - **LinkedIn Maikel**: canal principal de autoridad — Qualivo + pensamiento + análisis + actualidad.
 - **Página Qualivo**: metodología, diagnóstico, Growth.
-- **Agent to Me**: empleados digitales, productividad, procesos, build in public.
+- **Agent for Me**: empleados digitales, productividad, procesos, build in public.
 - **Blog**: solo demanda SEO + valor comercial.
 - **Newsletter**: los mejores aprendizajes de la semana, no resumen de noticias.
 
 ## Percepción objetivo (tres marcas, un sistema)
 
 - QUALIVO: "estos tíos saben encontrar dónde está el problema."
-- AGENT TO ME: "estos tíos convierten trabajo repetitivo en capacidad operativa."
+- AGENT FOR ME: "estos tíos convierten trabajo repetitivo en capacidad operativa."
 - MAIKEL: "este tío entiende cómo funciona el negocio y está construyendo cosas."
 
-Ecosistema: **Contenido → Hack the Prompt → Qualivo → Agent to Me** (Qualivo descubre y valida procesos; Agent to Me los productiza como empleados digitales; marcas y webs separadas, conectadas por el journey). Fuente de verdad de Agent to Me: `content/agent-to-me-fuente-de-verdad.md`.
+Ecosistema: **Contenido → Hack the Prompt → Qualivo → Agent for Me** (Qualivo descubre y valida procesos; Agent for Me los productiza como empleados digitales; marcas y webs separadas, conectadas por el journey). Fuente de verdad de Agent for Me: `content/agent-to-me-fuente-de-verdad.md`.
