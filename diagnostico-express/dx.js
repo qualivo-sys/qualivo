@@ -1,40 +1,56 @@
-/* Auto-diagnóstico express — qualivo.io/diagnostico-express */
+/* Auto-diagnóstico express v2 — qualivo.io/diagnostico-express
+   5 bloques (Captación · Conversión · Cualificación · Venta · Medición),
+   preguntas de contexto (no puntúan) + preguntas de score (0/5/10 → /10 por bloque),
+   Nivel de Control (0-100, sale del bloque Medición) y resumen "qué hemos detectado". */
 (function () {
   'use strict';
 
-  var ETAPAS = [
+  var BLOQUES = [
     { id: 'captacion', nombre: 'Captación' },
     { id: 'conversion', nombre: 'Conversión' },
     { id: 'cualificacion', nombre: 'Cualificación' },
     { id: 'venta', nombre: 'Venta' },
-    { id: 'retencion', nombre: 'Retención' }
+    { id: 'medicion', nombre: 'Medición' }
   ];
 
-  // 3 preguntas por etapa. Sí = 2 · No lo sé = 1 · No = 0 (máx. 6 por etapa)
+  // type: 'check' (contexto, multi-select, no puntúa) · 'score' (single-select, puntúa 0/5/10)
   var PREGUNTAS = [
-    { etapa: 0, texto: '¿Sabes cuánto te cuesta conseguir un cliente (no un lead) en cada canal?' },
-    { etapa: 0, texto: '¿Podrías decir de qué canal salieron tus últimos 10 clientes?' },
-    { etapa: 0, texto: 'Si mañana duplicaras la inversión en marketing, ¿sabrías dónde ponerla y qué esperar a cambio?' },
-    { etapa: 1, texto: '¿Mides qué porcentaje de tus leads se convierte en oportunidad real de venta?' },
-    { etapa: 1, texto: '¿Sabes en qué punto exacto (página, paso, formulario, llamada) pierdes a más gente?' },
-    { etapa: 1, texto: '¿Has probado y medido algún cambio para mejorar la conversión en los últimos 3 meses?' },
-    { etapa: 2, texto: '¿Tenéis criterios escritos de qué es un lead cualificado (y cuáles no valen la pena)?' },
-    { etapa: 2, texto: '¿Tu CRM refleja fielmente en qué fase está cada oportunidad, sin “limpiezas” pendientes?' },
-    { etapa: 2, texto: '¿Marketing y ventas están de acuerdo en qué leads hay que trabajar primero?' },
-    { etapa: 3, texto: '¿Todos los leads reciben un primer contacto en menos de 24 horas?' },
-    { etapa: 3, texto: '¿Conoces tu tasa de cierre por vendedor y por canal de origen?' },
-    { etapa: 3, texto: '¿Existe un proceso de venta documentado que el equipo siga de verdad?' },
-    { etapa: 4, texto: '¿Sabes cuánto vale un cliente a lo largo del tiempo (LTV), no solo la primera venta?' },
-    { etapa: 4, texto: 'Cuando un cliente se va, ¿sabéis por qué y queda registrado?' },
-    { etapa: 4, texto: '¿Tenéis acciones sistemáticas de recompra, renovación o referidos (no puntuales)?' }
+    { bloque: 0, type: 'check', texto: '¿De dónde vienen actualmente tus clientes?', multi: true,
+      opciones: ['Meta Ads', 'Google Ads', 'SEO', 'Contenido', 'Outbound', 'Referidos', 'Partners', 'Eventos', 'Otros'] },
+    { bloque: 0, type: 'score', texto: '¿Sabes qué canal genera realmente más clientes?',
+      opciones: [['Sí, lo tenemos medido', 10], ['Tenemos una aproximación', 5], ['No', 0]] },
+
+    { bloque: 1, type: 'check', texto: 'Cuando alguien llega a ti, ¿dónde termina normalmente?', multi: false,
+      opciones: ['Landing', 'Formulario', 'WhatsApp', 'Llamada', 'Calendario', 'Tienda', 'Otro'] },
+    { bloque: 1, type: 'score', texto: '¿Sabes qué porcentaje de las personas que llegan termina dejando sus datos o comprando?',
+      opciones: [['Sí', 10], ['Aproximadamente', 5], ['No', 0]] },
+
+    { bloque: 2, type: 'check', texto: 'Cuando entra un lead, ¿cómo decidís si merece la pena atenderlo?', multi: false,
+      opciones: ['Automáticamente', 'Lo decide una persona', 'Lo decide el comercial', 'No tenemos un criterio claro'] },
+    { bloque: 2, type: 'score', texto: '¿Los comerciales reciben información suficiente sobre el lead antes de contactar?',
+      opciones: [['Sí', 10], ['A veces', 5], ['No', 0]] },
+
+    { bloque: 3, type: 'check', texto: '¿Quién se encarga de convertir el lead en cliente?', multi: false,
+      opciones: ['Comercial', 'CEO / fundador', 'Marketing', 'Varias personas', 'No tenemos un proceso definido'] },
+    { bloque: 3, type: 'check', texto: '¿Qué ocurre después del primer contacto?', multi: false,
+      opciones: ['Tenemos un proceso definido', 'Cada comercial lo hace a su manera', 'Hay automatizaciones', 'Seguimos manualmente', 'No tenemos claro el proceso'] },
+    { bloque: 3, type: 'score', texto: '¿Qué ocurre con los leads que no compran?',
+      opciones: [['Tenemos follow-up automático', 10], ['Los comerciales hacen seguimiento', 7], ['Volvemos a contactar de vez en cuando', 4], ['Normalmente se pierden', 0], ['No lo sé', 0]] },
+
+    { bloque: 4, type: 'score', texto: 'Si mañana te preguntara cuánto te cuesta conseguir un cliente, ¿lo sabrías?',
+      opciones: [['Sí', 10], ['Aproximadamente', 5], ['No', 0]] },
+    { bloque: 4, type: 'score', texto: '¿Puedes conectar inversión → lead → venta → ingresos?',
+      opciones: [['Sí', 10], ['Parcialmente', 5], ['No', 0]] },
+    { bloque: 4, type: 'score', texto: 'Si mañana tuvieras un 30% más de presupuesto, ¿sabrías dónde invertirlo?',
+      opciones: [['Sí', 10], ['Probablemente', 5], ['No', 0]] }
   ];
 
   var VEREDICTOS = {
-    captacion: 'Tu punto más débil está en captación: estás invirtiendo sin saber qué te devuelve cada canal. El riesgo no es gastar mucho — es no poder decidir dónde meter el siguiente euro. Antes de subir presupuesto o abrir canales nuevos, toca medir coste por cliente real canal a canal.',
-    conversion: 'Tu punto más débil está en conversión: te llega tráfico e interés, pero no sabes dónde se cae la gente. Cada mejora aquí multiplica todo lo que ya inviertes en captación — suele ser la palanca más barata de todo el sistema.',
-    cualificacion: 'Tu punto más débil está en cualificación: sin criterios claros de qué lead vale la pena, ventas pierde tiempo con quien no va a comprar y marketing celebra volumen que no se convierte en ingresos. Es la fuga más silenciosa — y de las más caras.',
-    venta: 'Tu punto más débil está en venta: los leads llegan, pero el seguimiento y el proceso comercial dejan dinero en la mesa. La buena noticia: es la etapa donde los cambios se notan más rápido en la facturación.',
-    retencion: 'Tu punto más débil está en retención: consigues clientes pero no estás capitalizando su valor a largo plazo. Cada cliente que se va sin saber por qué encarece todo tu sistema de captación — retener es el multiplicador de todo lo demás.'
+    captacion: 'Tu punto más débil está en captación: estás invirtiendo sin saber qué te devuelve cada canal. El riesgo no es gastar mucho — es no poder decidir dónde meter el siguiente euro.',
+    conversion: 'Tu punto más débil está en conversión: te llega tráfico e interés, pero no sabes dónde se cae la gente. Cada mejora aquí multiplica todo lo que ya inviertes en captación.',
+    cualificacion: 'Tu punto más débil está en cualificación: sin criterios claros de qué lead vale la pena, ventas pierde tiempo con quien no va a comprar. Es la fuga más silenciosa — y de las más caras.',
+    venta: 'Tu punto más débil está en venta: los leads llegan, pero el seguimiento y el proceso comercial dejan dinero en la mesa. Es la etapa donde los cambios se notan más rápido en la facturación.',
+    medicion: 'Tu punto más débil está en medición: tienes un sistema funcionando, pero no puedes ver con claridad qué parte está generando negocio de verdad. Sin eso, cada decisión de invertir más es una apuesta.'
   };
 
   var intro = document.getElementById('dx-intro');
@@ -45,7 +61,7 @@
   var submitBtn = document.getElementById('dx-submit');
 
   var actual = 0;
-  var respuestas = new Array(PREGUNTAS.length).fill(null);
+  var respuestas = new Array(PREGUNTAS.length).fill(null); // score: number · check single: string · check multi: array
   var loadedAt = Date.now();
 
   function show(section) {
@@ -53,25 +69,87 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  function siguiente() {
+    if (actual < PREGUNTAS.length - 1) { actual++; pintarPregunta(); }
+    else { show(gate); }
+  }
+
   function pintarPregunta() {
     var p = PREGUNTAS[actual];
     document.getElementById('dx-stage-label').textContent =
-      'Etapa ' + (p.etapa + 1) + ' de 5 · ' + ETAPAS[p.etapa].nombre;
+      'Bloque ' + (p.bloque + 1) + ' de 5 · ' + BLOQUES[p.bloque].nombre;
     document.getElementById('dx-count').textContent = 'Pregunta ' + (actual + 1) + ' de ' + PREGUNTAS.length;
     document.getElementById('dx-progress').style.width = (actual / PREGUNTAS.length * 100) + '%';
     document.getElementById('dx-question').textContent = p.texto;
     document.getElementById('dx-prev').hidden = actual === 0;
+
+    var wrap = document.getElementById('dx-options');
+    wrap.innerHTML = '';
+
+    if (p.type === 'score') {
+      p.opciones.forEach(function (op) {
+        var btn = document.createElement('button');
+        btn.className = 'dx-answer';
+        btn.textContent = op[0];
+        btn.addEventListener('click', function () { respuestas[actual] = op[1]; siguiente(); });
+        wrap.appendChild(btn);
+      });
+    } else if (p.multi) {
+      var seleccion = Array.isArray(respuestas[actual]) ? respuestas[actual].slice() : [];
+      p.opciones.forEach(function (op) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dx-answer dx-check' + (seleccion.indexOf(op) > -1 ? ' sel' : '');
+        btn.textContent = op;
+        btn.addEventListener('click', function () {
+          var i = seleccion.indexOf(op);
+          if (i > -1) seleccion.splice(i, 1); else seleccion.push(op);
+          respuestas[actual] = seleccion;
+          pintarPregunta();
+        });
+        wrap.appendChild(btn);
+      });
+      var cont = document.createElement('button');
+      cont.className = 'dx-answer dx-continue';
+      cont.textContent = seleccion.length ? 'Continuar →' : 'Ninguna de estas / seguir →';
+      cont.addEventListener('click', function () { if (!Array.isArray(respuestas[actual])) respuestas[actual] = []; siguiente(); });
+      wrap.appendChild(cont);
+    } else {
+      p.opciones.forEach(function (op) {
+        var btn = document.createElement('button');
+        btn.className = 'dx-answer';
+        btn.textContent = op;
+        btn.addEventListener('click', function () { respuestas[actual] = op; siguiente(); });
+        wrap.appendChild(btn);
+      });
+    }
   }
 
-  function scores() {
-    var porEtapa = [0, 0, 0, 0, 0];
-    PREGUNTAS.forEach(function (p, i) { porEtapa[p.etapa] += respuestas[i] || 0; });
-    return porEtapa;
+  function scoresPorBloque() {
+    var suma = [0, 0, 0, 0, 0], n = [0, 0, 0, 0, 0];
+    PREGUNTAS.forEach(function (p, i) {
+      if (p.type !== 'score') return;
+      suma[p.bloque] += (respuestas[i] || 0);
+      n[p.bloque]++;
+    });
+    return BLOQUES.map(function (b, i) { return n[i] ? Math.round(suma[i] / n[i]) : 0; });
   }
 
-  function etapaDebil(porEtapa) {
-    var min = Math.min.apply(null, porEtapa);
-    return ETAPAS[porEtapa.indexOf(min)];
+  function nivelDeControl(porBloque) {
+    // Sale directo del bloque Medición (índice 4): ya está en /10, se escala a /100.
+    return porBloque[4] * 10;
+  }
+
+  function tier(score10) {
+    if (score10 >= 8) return { icon: '🟢', label: 'bien' };
+    if (score10 >= 6) return { icon: '🟡', label: 'con margen' };
+    if (score10 >= 4) return { icon: '🟠', label: 'a revisar' };
+    return { icon: '🔴', label: 'fuga probable' };
+  }
+
+  function bloqueDebil(porBloque) {
+    var min = Math.min.apply(null, porBloque);
+    return { bloque: BLOQUES[porBloque.indexOf(min)], idx: porBloque.indexOf(min) };
   }
 
   document.getElementById('dx-start').addEventListener('click', function () {
@@ -79,48 +157,52 @@
     pintarPregunta();
   });
 
-  document.querySelectorAll('.dx-answer').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      respuestas[actual] = Number(btn.dataset.val);
-      if (actual < PREGUNTAS.length - 1) {
-        actual++;
-        pintarPregunta();
-      } else {
-        show(gate);
-      }
-    });
-  });
-
   document.getElementById('dx-prev').addEventListener('click', function () {
     if (actual > 0) { actual--; pintarPregunta(); }
   });
 
-  function pintarResultado(porEtapa) {
-    var debil = etapaDebil(porEtapa);
-    var total = porEtapa.reduce(function (a, b) { return a + b; }, 0);
+  function pintarResultado(porBloque) {
+    var debil = bloqueDebil(porBloque);
+    var nivel = nivelDeControl(porBloque);
 
     document.getElementById('dx-result-title').textContent =
-      total >= 24
-        ? 'Sistema sólido, con margen en ' + debil.nombre.toLowerCase() + '.'
-        : 'Tu fuga principal está en ' + debil.nombre.toLowerCase() + '.';
+      'Tu fuga principal está en ' + debil.bloque.nombre.toLowerCase() + '.';
 
     var bars = document.getElementById('dx-bars');
     bars.innerHTML = '';
-    ETAPAS.forEach(function (e, i) {
-      var pct = Math.round(porEtapa[i] / 6 * 100);
-      var esDebil = e.id === debil.id;
+    BLOQUES.forEach(function (b, i) {
+      var t = tier(porBloque[i]);
+      var esDebil = i === debil.idx;
       var row = document.createElement('div');
       row.innerHTML =
         '<div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px">' +
         '<span style="font-family:var(--qv-font-display); font-weight:800; font-size:15px; color:' + (esDebil ? '#E8590C' : '#101319') + '">' +
-        e.nombre + (esDebil ? ' · aquí se te escapa' : '') + '</span>' +
-        '<span style="font-size:13px; color:#7A7C82; font-weight:600">' + porEtapa[i] + '/6</span></div>' +
-        '<div class="dx-bar-track"><div class="dx-bar' + (esDebil ? ' debil' : '') + '" style="width:' + Math.max(pct, 4) + '%"></div></div>';
+        t.icon + ' ' + b.nombre + (esDebil ? ' · aquí se te escapa' : '') + '</span>' +
+        '<span style="font-size:13px; color:#7A7C82; font-weight:600">' + porBloque[i] + '/10</span></div>' +
+        '<div class="dx-bar-track"><div class="dx-bar' + (esDebil ? ' debil' : '') + '" style="width:' + Math.max(porBloque[i] * 10, 4) + '%"></div></div>';
       bars.appendChild(row);
     });
 
+    document.getElementById('dx-nivel-num').textContent = nivel + '/100';
+    document.getElementById('dx-nivel-texto').textContent =
+      nivel >= 70
+        ? 'Tienes buena visibilidad de qué parte de tu sistema genera negocio de verdad.'
+        : 'Tienes un sistema de captación funcionando, pero todavía no tienes suficiente visibilidad para saber qué partes están generando negocio de verdad.';
+
+    // "Qué hemos detectado": el bloque débil + los 2 siguientes peor puntuados.
+    var orden = porBloque.map(function (s, i) { return { i: i, s: s }; })
+      .sort(function (a, b) { return a.s - b.s; }).slice(0, 3);
+    var detect = document.getElementById('dx-detectado');
+    detect.innerHTML = '';
+    orden.forEach(function (o) {
+      var t = tier(o.s);
+      var li = document.createElement('li');
+      li.textContent = t.icon + ' ' + BLOQUES[o.i].nombre;
+      detect.appendChild(li);
+    });
+
     document.getElementById('dx-verdict').innerHTML =
-      '<p style="margin:0; font-size:16.5px; line-height:1.65; color:#101319">' + VEREDICTOS[debil.id] + '</p>';
+      '<p style="margin:0; font-size:16.5px; line-height:1.65; color:#101319">' + VEREDICTOS[debil.bloque.id] + '</p>';
   }
 
   document.getElementById('dx-form').addEventListener('submit', function (e) {
@@ -130,10 +212,10 @@
     var rgpd = document.getElementById('dx-rgpd').checked;
     var honeypot = document.getElementById('dx-website').value;
 
-    var porEtapa = scores();
+    var porBloque = scoresPorBloque();
 
     if (honeypot || Date.now() - loadedAt < 5000) {
-      pintarResultado(porEtapa);
+      pintarResultado(porBloque);
       show(result);
       return;
     }
@@ -146,7 +228,16 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Un segundo…';
 
-    var debil = etapaDebil(porEtapa);
+    var debil = bloqueDebil(porBloque);
+    var contexto = PREGUNTAS
+      .map(function (p, i) {
+        if (p.type === 'score') return null;
+        var r = respuestas[i];
+        var val = Array.isArray(r) ? (r.length ? r.join(', ') : '—') : (r || '—');
+        return BLOQUES[p.bloque].nombre + ' — ' + p.texto + ': ' + val;
+      })
+      .filter(Boolean);
+
     fetch('/api/autodiagnostico', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -155,19 +246,19 @@
         email: email,
         rgpd: true,
         scores: {
-          captacion: porEtapa[0], conversion: porEtapa[1], cualificacion: porEtapa[2],
-          venta: porEtapa[3], retencion: porEtapa[4]
+          captacion: porBloque[0], conversion: porBloque[1], cualificacion: porBloque[2],
+          venta: porBloque[3], medicion: porBloque[4]
         },
-        etapa_debil: debil.nombre,
-        fugas: PREGUNTAS.filter(function (p, i) { return respuestas[i] !== 2; })
-          .map(function (p) { return ETAPAS[p.etapa].nombre + ': ' + p.texto; }),
+        nivel_control: nivelDeControl(porBloque),
+        etapa_debil: debil.bloque.nombre,
+        contexto: contexto,
         origen: window.location.hostname || 'local'
       })
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      if (window.va) window.va('event', { name: 'autodiagnostico_completado', data: { etapa_debil: debil.id } });
-      if (window.qvTrack) window.qvTrack('autodiagnostico_completado', { etapa_debil: debil.id });
-      pintarResultado(porEtapa);
+      if (window.va) window.va('event', { name: 'autodiagnostico_completado', data: { etapa_debil: debil.bloque.id } });
+      if (window.qvTrack) window.qvTrack('autodiagnostico_completado', { etapa_debil: debil.bloque.id });
+      pintarResultado(porBloque);
       show(result);
     }).catch(function (err) {
       console.error('[dx] Error guardando el resultado:', err);

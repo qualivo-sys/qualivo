@@ -5,7 +5,7 @@
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-const ETAPAS = ['captacion', 'conversion', 'cualificacion', 'venta', 'retencion'];
+const ETAPAS = ['captacion', 'conversion', 'cualificacion', 'venta', 'medicion'];
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -27,12 +27,14 @@ module.exports = async function handler(req, res) {
   const email = String(b.email || '').trim();
   const etapaDebil = String(b.etapa_debil || '').trim();
   const scores = b.scores || {};
-  const fugas = Array.isArray(b.fugas) ? b.fugas.slice(0, 15).map(String) : [];
+  const nivelControl = Number.isInteger(b.nivel_control) ? b.nivel_control : null;
+  const contexto = Array.isArray(b.contexto) ? b.contexto.slice(0, 15).map(String) : [];
 
   const scoresOk = ETAPAS.every(function (e) {
-    return Number.isInteger(scores[e]) && scores[e] >= 0 && scores[e] <= 6;
+    return Number.isInteger(scores[e]) && scores[e] >= 0 && scores[e] <= 10;
   });
-  if (!nombre || !EMAIL_RE.test(email) || b.rgpd !== true || !scoresOk || !etapaDebil) {
+  if (!nombre || !EMAIL_RE.test(email) || b.rgpd !== true || !scoresOk || !etapaDebil ||
+      nivelControl === null || nivelControl < 0 || nivelControl > 100) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
   }
 
@@ -62,19 +64,20 @@ module.exports = async function handler(req, res) {
     const contactId = upsert && upsert.contact && upsert.contact.id;
 
     const resumen = ETAPAS.map(function (e) {
-      return '· ' + e.charAt(0).toUpperCase() + e.slice(1) + ': ' + scores[e] + '/6';
+      return '· ' + e.charAt(0).toUpperCase() + e.slice(1) + ': ' + scores[e] + '/10';
     }).join('\n');
 
     if (contactId) {
       const nota = [
-        'Auto-diagnóstico express — qualivo.io',
+        'Auto-diagnóstico express v2 — qualivo.io',
         '',
         'Etapa más débil: ' + etapaDebil,
+        'Nivel de control: ' + nivelControl + '/100',
         '',
-        'Puntuación:',
+        'Puntuación por bloque:',
         resumen,
         '',
-        fugas.length ? 'Respuestas con fuga (no / no lo sé):\n' + fugas.map(function (f) { return '· ' + f; }).join('\n') : '',
+        contexto.length ? 'Contexto (respuestas no puntuadas):\n' + contexto.map(function (c) { return '· ' + c; }).join('\n') : '',
         '',
         'Consentimiento RGPD: sí · ' + new Date().toISOString()
       ].join('\n');
@@ -89,7 +92,7 @@ module.exports = async function handler(req, res) {
     }
 
     await notifyByEmail({
-      nombre, email, etapaDebil, scores, contactId, locationId
+      nombre, email, etapaDebil, scores, nivelControl, contactId, locationId
     }).catch(function (err) {
       console.error('[dx] Aviso por email falló:', err);
     });
@@ -122,15 +125,16 @@ async function notifyByEmail(lead) {
   const html =
     '<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px">' +
     '<h2 style="margin:0 0 4px">Auto-diagnóstico completado en qualivo.io</h2>' +
-    '<p style="margin:0 0 16px;color:#E8590C;font-weight:700">Etapa más débil: ' + esc(lead.etapaDebil) + '</p>' +
+    '<p style="margin:0 0 4px;color:#E8590C;font-weight:700">Etapa más débil: ' + esc(lead.etapaDebil) + '</p>' +
+    '<p style="margin:0 0 16px;color:#5A5E66">Nivel de control: ' + lead.nivelControl + '/100</p>' +
     '<table style="border-collapse:collapse;font-size:15px">' +
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
-    fila('Captación', lead.scores.captacion + '/6') +
-    fila('Conversión', lead.scores.conversion + '/6') +
-    fila('Cualificación', lead.scores.cualificacion + '/6') +
-    fila('Venta', lead.scores.venta + '/6') +
-    fila('Retención', lead.scores.retencion + '/6') +
+    fila('Captación', lead.scores.captacion + '/10') +
+    fila('Conversión', lead.scores.conversion + '/10') +
+    fila('Cualificación', lead.scores.cualificacion + '/10') +
+    fila('Venta', lead.scores.venta + '/10') +
+    fila('Medición', lead.scores.medicion + '/10') +
     '</table>' +
     (lead.contactId
       ? '<p style="margin:18px 0 0"><a href="' + ghlUrl + '">Ver contacto en GoHighLevel →</a></p>'

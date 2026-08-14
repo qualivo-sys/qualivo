@@ -1,25 +1,60 @@
-/* Company Scan — agenttome.io. Puntúa trabajo repetitivo por área y recomienda
-   el empleado digital con más impacto. Resultado tras dejar email (api/scan). */
+/* Company Scan v2 — agenttome.io. Recoge tamaño, áreas, tareas repetitivas
+   (con frecuencia), cómo se hacen y quién las hace. Llama a api/scan-v2
+   (Claude) para puntuar y proponer hasta 4 empleados IA candidatos, y a
+   api/scan (GHL) para registrar el lead con el candidato principal. */
 (function () {
   'use strict';
 
-  // Cada ítem: texto, detalle, empleado al que apunta, horas/mes estimadas si "sí" (heurística conservadora)
   var ITEMS = [
-    { t: 'Buscar empresas y contactos nuevos y escribir los primeros mensajes comerciales', d: 'listas, LinkedIn, primeros emails', e: 'sdr-digital', n: 'SDR Digital', h: 20 },
-    { t: 'Actualizar el CRM a mano después de cada llamada, email o reunión', d: 'notas, etapas, campos que nadie rellena', e: 'sales-manager-digital', n: 'Sales Manager Digital', h: 12 },
-    { t: 'Perseguir presupuestos enviados que nadie ha respondido', d: 'seguimientos que se olvidan', e: 'sales-manager-digital', n: 'Sales Manager Digital', h: 10 },
-    { t: 'Responder las mismas preguntas de clientes por WhatsApp, email o chat', d: 'horarios, precios, estado del pedido…', e: 'support-digital', n: 'Support Digital', h: 25 },
-    { t: 'Perseguir facturas impagadas y enviar recordatorios de cobro', d: 'impagos, vencimientos, recordatorios', e: 'collection-digital', n: 'Collection Digital', h: 8 },
-    { t: 'Preparar informes de números copiando datos de banco, ERP o Excel', d: 'tesorería, desviaciones, cierres', e: 'cfo-digital', n: 'CFO Digital', h: 10 },
-    { t: 'Sacar informes de marketing y revisar campañas a mano', d: 'Meta, Google, GA4, el informe del lunes', e: 'marketing-analyst', n: 'Marketing Analyst', h: 8 },
-    { t: 'El contenido (posts, newsletter, blog) se queda sin hacer por falta de tiempo', d: 'la web y las redes paradas', e: 'content-creator', n: 'Content Creator', h: 15 },
-    { t: 'El onboarding de cada cliente nuevo repite los mismos pasos, emails y documentos', d: 'altas, accesos, bienvenidas', e: 'customer-success-digital', n: 'Customer Success Digital', h: 10 },
-    { t: 'Perseguir el estado de tareas y detectar retrasos en proyectos', d: '¿esto en qué punto está?', e: 'operations-digital', n: 'Operations Digital', h: 10 }
+    { t: 'Buscar empresas y contactos nuevos y escribir los primeros mensajes comerciales', d: 'listas, LinkedIn, primeros emails' },
+    { t: 'Actualizar el CRM a mano después de cada llamada, email o reunión', d: 'notas, etapas, campos que nadie rellena' },
+    { t: 'Perseguir presupuestos enviados que nadie ha respondido', d: 'seguimientos que se olvidan' },
+    { t: 'Responder las mismas preguntas de clientes por WhatsApp, email o chat', d: 'horarios, precios, estado del pedido…' },
+    { t: 'Perseguir facturas impagadas y enviar recordatorios de cobro', d: 'impagos, vencimientos, recordatorios' },
+    { t: 'Preparar informes de números copiando datos de banco, ERP o Excel', d: 'tesorería, desviaciones, cierres' },
+    { t: 'Sacar informes de marketing y revisar campañas a mano', d: 'Meta, Google, GA4, el informe del lunes' },
+    { t: 'El contenido (posts, newsletter, blog) se queda sin hacer por falta de tiempo', d: 'la web y las redes paradas' },
+    { t: 'El onboarding de cada cliente nuevo repite los mismos pasos, emails y documentos', d: 'altas, accesos, bienvenidas' },
+    { t: 'Perseguir el estado de tareas y detectar retrasos en proyectos', d: '¿esto en qué punto está?' }
   ];
-  var FICHAS = { 'sdr-digital': '/empleados/sdr-digital/' };
+
+  var TAMANOS = ['1–5', '6–10', '11–25', '26–50', '+50'];
+  var AREAS = ['Comercial', 'Administración', 'Marketing', 'Atención al cliente', 'Operaciones', 'Finanzas', 'Recursos humanos', 'Otra'];
+  var COMO = ['Manualmente', 'Excel / Sheets', 'Email', 'WhatsApp', 'CRM', 'Varias herramientas', 'Automatización parcial', 'No lo sé'];
+  var QUIEN = ['Administrativo', 'Comercial', 'Marketing', 'Operaciones', 'CEO / fundador', 'Varias personas'];
 
   var wrap = document.getElementById('scan-cards');
   var answers = new Array(ITEMS.length).fill(null); // 2 sí, 1 a veces, 0 no
+  var tamano = null, areas = [], como = null, quien = null;
+
+  function chipGroup(containerId, opciones, multi, onChange) {
+    var el = document.getElementById(containerId);
+    var seleccion = multi ? [] : null;
+    opciones.forEach(function (op) {
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip';
+      chip.textContent = op;
+      chip.addEventListener('click', function () {
+        if (multi) {
+          var i = seleccion.indexOf(op);
+          if (i > -1) { seleccion.splice(i, 1); chip.classList.remove('sel'); }
+          else { seleccion.push(op); chip.classList.add('sel'); }
+        } else {
+          seleccion = op;
+          Array.prototype.forEach.call(el.children, function (c) { c.classList.remove('sel'); });
+          chip.classList.add('sel');
+        }
+        onChange(seleccion);
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  chipGroup('sc-tamano', TAMANOS, false, function (v) { tamano = v; });
+  chipGroup('sc-areas', AREAS, true, function (v) { areas = v; });
+  chipGroup('sc-como', COMO, false, function (v) { como = v; });
+  chipGroup('sc-quien', QUIEN, false, function (v) { quien = v; });
 
   ITEMS.forEach(function (it, i) {
     var card = document.createElement('div');
@@ -40,30 +75,8 @@
     wrap.appendChild(card);
   });
 
-  var computed = null;
-  function compute() {
-    var costeHora = Math.min(120, Math.max(10, Number(document.getElementById('coste-hora').value) || 25));
-    var porEmpleado = {};
-    var horas = 0;
-    ITEMS.forEach(function (it, i) {
-      var v = answers[i] || 0;
-      var h = v === 2 ? it.h : v === 1 ? it.h * 0.35 : 0;
-      horas += h;
-      if (!porEmpleado[it.e]) porEmpleado[it.e] = { n: it.n, score: 0, h: 0 };
-      porEmpleado[it.e].score += v;
-      porEmpleado[it.e].h += h;
-    });
-    var rank = Object.keys(porEmpleado).map(function (k) {
-      return { slug: k, n: porEmpleado[k].n, score: porEmpleado[k].score, h: porEmpleado[k].h };
-    }).sort(function (a, b) { return b.score - a.score || b.h - a.h; });
-    return {
-      rank: rank,
-      top: rank[0],
-      horasMes: Math.round(horas),
-      eurosMes: Math.round(horas * costeHora),
-      costeHora: costeHora
-    };
-  }
+  var scanResult = null; // respuesta de api/scan-v2
+  var costeHora = 25, horasMesCalc = 0;
 
   document.getElementById('scan-done').addEventListener('click', function (ev) {
     ev.preventDefault();
@@ -72,11 +85,7 @@
       alert('Responde al menos 5 para que el resultado tenga sentido (llevas ' + contestadas + ').');
       return;
     }
-    computed = compute();
-    if (!computed.top || computed.top.score === 0) {
-      alert('Has marcado todo «No» — o tu empresa es un reloj, o hay trabajo invisible. Marca «A veces» donde dudes.');
-      return;
-    }
+    if (!tamano) { alert('Dinos cuántas personas sois.'); return; }
     document.getElementById('scan-quiz').style.display = 'none';
     document.getElementById('scan-gate').style.display = 'block';
     document.getElementById('scan-gate').scrollIntoView({ behavior: 'smooth' });
@@ -97,55 +106,92 @@
     btn.textContent = 'Un momento…';
     btn.disabled = true;
 
-    var detalle = ITEMS.map(function (it, i) {
-      var v = answers[i];
-      return it.n + ' — ' + it.t.slice(0, 60) + ': ' + (v === 2 ? 'SÍ' : v === 1 ? 'a veces' : v === 0 ? 'no' : '—');
-    });
+    costeHora = Math.min(120, Math.max(10, Number(document.getElementById('coste-hora').value) || 25));
 
-    fetch('/api/scan', {
+    var tareas = ITEMS.map(function (it, i) {
+      var v = answers[i];
+      var frecuencia = v === 2 ? 'constantemente' : v === 1 ? 'a veces' : v === 0 ? 'no ocurre' : 'sin responder';
+      return { texto: it.t, frecuencia: frecuencia };
+    }).filter(function (t) { return t.frecuencia !== 'sin responder' && t.frecuencia !== 'no ocurre'; });
+
+    document.getElementById('scan-gate').style.display = 'none';
+    document.getElementById('scan-loading').style.display = 'block';
+
+    fetch('/api/scan-v2', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nombre: nombre, empresa: empresa, email: email,
-        recomendado: computed.top.slug,
-        horas_mes: computed.horasMes,
-        euros_mes: computed.eurosMes,
-        detalle: detalle,
-        website2: document.getElementById('g-hp').value
+        tamano: tamano, areas: areas, tareas: tareas, comoSeHace: como, quienLoHace: quien,
+        website: document.getElementById('g-hp').value
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (j) {
-        if (!j.ok) throw new Error('bad');
+        if (!j.ok) throw new Error('scan-v2 failed');
+        scanResult = j;
+        horasMesCalc = Math.round(((j.principal.horasMin + j.principal.horasMax) / 2) * 4.33);
+
+        var detalle = ITEMS.map(function (it, i) {
+          var v = answers[i];
+          return it.t.slice(0, 60) + ': ' + (v === 2 ? 'SÍ' : v === 1 ? 'a veces' : v === 0 ? 'no' : '—');
+        });
+
+        return fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: nombre, empresa: empresa, email: email,
+            recomendado: j.principal.rolId,
+            horas_mes: horasMesCalc,
+            euros_mes: Math.round(horasMesCalc * costeHora),
+            detalle: detalle,
+            website2: document.getElementById('g-hp').value
+          })
+        });
+      })
+      .then(function (r) { return r && r.json ? r.json().catch(function () { return {}; }) : {}; })
+      .then(function () {
         showResult(nombre);
-        if (window.va) window.va('event', { name: 'atm_scan', data: { empleado: computed.top.slug } });
+        if (window.va) window.va('event', { name: 'atm_scan_v2', data: { empleado: scanResult.principal.rolId } });
       })
       .catch(function () {
+        document.getElementById('scan-loading').style.display = 'none';
+        document.getElementById('scan-gate').style.display = 'block';
         btn.textContent = 'Ver mi resultado';
         btn.disabled = false;
         msg.style.display = 'block';
-        msg.textContent = 'No se pudo enviar — inténtalo de nuevo.';
+        msg.textContent = 'No se pudo generar tu resultado — inténtalo de nuevo.';
       });
   });
 
   function showResult(nombre) {
-    var c = computed;
-    var anual = c.eurosMes * 12;
-    var main = document.getElementById('res-main');
-    var ficha = FICHAS[c.top.slug];
-    main.innerHTML =
+    var r = scanResult, p = r.principal;
+    var eurosMes = Math.round(horasMesCalc * costeHora);
+    var anual = eurosMes * 12;
+
+    document.getElementById('res-score').innerHTML =
       '<p class="eyebrow" style="margin:0">Tu resultado, ' + esc(nombre.split(' ')[0]) + '</p>' +
-      '<p class="res-emp">' + esc(c.top.n) + '</p>' +
-      '<p style="margin:0 0 14px">Es el puesto digital con más impacto en tu empresa según lo que has marcado.</p>' +
-      '<p style="margin:0"><strong>~' + c.horasMes + ' horas/mes</strong> de trabajo repetitivo detectado en total ≈ <strong>' + fmt(c.eurosMes) + ' €/mes</strong> (' + fmt(anual) + ' €/año) a ' + c.costeHora + ' €/hora.</p>' +
-      (ficha ? '<p style="margin:14px 0 0"><a href="' + ficha + '"><strong>Ver la ficha de contratación del ' + esc(c.top.n) + ' →</strong></a></p>' : '');
-    var sec = c.rank.filter(function (r) { return r.score > 0 && r.slug !== c.top.slug; }).slice(0, 2);
-    if (sec.length) {
-      document.getElementById('res-secundario').innerHTML =
-        '<div class="box"><p style="margin:0"><strong>También hay señal en:</strong> ' +
-        sec.map(function (r) { return esc(r.n); }).join(' · ') +
-        '.<br><small style="color:var(--gray)">La incorporación empieza siempre por UN empleado — el de más impacto. Los demás, cuando el primero esté rindiendo.</small></p></div>';
+      '<p class="res-emp">' + r.puntuacion + '/100</p>' +
+      '<p style="margin:0">Puntuación de Empleado IA — cuánto potencial tiene tu empresa para incorporar empleados digitales, según lo que has marcado.</p>';
+
+    document.getElementById('res-ficha').innerHTML =
+      '<div class="sc-card">' +
+        '<div class="sc-head"><div><div class="sc-kick">CANDIDATO PRINCIPAL</div><div class="sc-puesto">' + esc(p.nombreRol) + '</div></div><div class="sc-sello">CUBIERTO</div></div>' +
+        '<div class="sc-sec"><div class="sc-sec-kick">QUÉ HACE</div>' + p.hace.map(function (h) { return '<div class="sc-li">' + esc(h) + '</div>'; }).join('') + '</div>' +
+        '<div class="sc-no"><div class="sc-no-kick">LO QUE NO HACE</div><div class="sc-no-text">' + esc(p.noHace) + '</div></div>' +
+        '<div class="sc-horas"><div class="sc-horas-n">' + p.horasMin + '–' + p.horasMax + ' h/semana</div><div class="sc-horas-l">≈ ' + fmt(eurosMes) + ' €/mes · ' + fmt(anual) + ' €/año a ' + costeHora + ' €/h</div></div>' +
+      '</div>';
+
+    var otros = r.candidatos.slice(1);
+    if (otros.length) {
+      document.getElementById('res-otros').innerHTML =
+        '<div class="box"><p style="margin:0 0 10px"><strong>También hay señal en:</strong></p>' +
+        otros.map(function (c) {
+          return '<div class="sc-otro-row"><span class="sc-otro-n">' + esc(c.nombre) + '</span><span class="sc-otro-p">' + c.potencial + '/100</span></div>';
+        }).join('') +
+        '<p style="margin:14px 0 0"><small style="color:var(--gray)">La incorporación empieza siempre por UN empleado — el de más impacto. Los demás, cuando el primero esté rindiendo.</small></p></div>';
     }
-    document.getElementById('scan-gate').style.display = 'none';
+
+    document.getElementById('scan-loading').style.display = 'none';
     document.getElementById('scan-result').style.display = 'block';
     document.getElementById('scan-result').scrollIntoView({ behavior: 'smooth' });
   }

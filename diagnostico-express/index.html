@@ -94,6 +94,12 @@
     padding: 0;
   }
   .dx-back:hover { color: var(--qv-ink); }
+  .dx-check.sel { border-color: var(--qv-teal); background: var(--qv-teal-pale); }
+  .dx-continue { background: var(--qv-ink); color: #fff; border-color: var(--qv-ink); margin-top: 4px; }
+  .dx-nivel { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px }
+  .dx-nivel-num { font-family: var(--qv-font-display); font-weight: 900; font-size: 30px; letter-spacing: -.02em; color: #101319 }
+  #dx-detectado { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px }
+  #dx-detectado li { font-weight: 700; font-size: 14.5px; color: #101319 }
 </style>
 </head>
 <body>
@@ -118,7 +124,7 @@
     <section id="dx-intro">
       <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0E7C74; font-weight:800; margin:0 0 20px">Auto-diagnóstico express · 3 minutos</p>
       <h1 style="font-family:var(--qv-font-display); font-size:clamp(34px,6.5vw,58px); line-height:1; letter-spacing:-.035em; font-weight:900; margin:0 0 22px; color:#101319">¿Dónde se te está escapando el negocio?</h1>
-      <p style="font-size:clamp(17px,3vw,19px); line-height:1.6; color:#3D4148; margin:0 0 14px; max-width:52ch">15 preguntas sobre tu sistema de captación y ventas. Al final verás una puntuación por etapa — captación, conversión, cualificación, venta y retención — y en cuál estás perdiendo más.</p>
+      <p style="font-size:clamp(17px,3vw,19px); line-height:1.6; color:#3D4148; margin:0 0 14px; max-width:52ch">12 preguntas sobre tu sistema de captación y ventas. Al final verás una puntuación por bloque — captación, conversión, cualificación, venta y medición — y en cuál se te está escapando más.</p>
       <p style="font-size:15px; line-height:1.6; color:#7A7C82; margin:0 0 36px; max-width:52ch">Responde con sinceridad: cada «no lo sé» también cuenta. No saberlo ya es un dato.</p>
       <button id="dx-start" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar →</button>
     </section>
@@ -132,11 +138,7 @@
       <div class="dx-progress-track" style="margin-bottom:28px"><div id="dx-progress" class="dx-progress-bar" style="width:0%"></div></div>
       <div class="dx-card">
         <h2 id="dx-question" style="font-family:var(--qv-font-display); font-size:clamp(21px,4vw,28px); line-height:1.2; letter-spacing:-.02em; font-weight:800; margin:0 0 26px; color:#101319"></h2>
-        <div style="display:flex; flex-direction:column; gap:10px">
-          <button class="dx-answer" data-val="2">Sí</button>
-          <button class="dx-answer" data-val="0">No</button>
-          <button class="dx-answer" data-val="1">No lo sé</button>
-        </div>
+        <div id="dx-options" style="display:flex; flex-direction:column; gap:10px"></div>
         <div style="margin-top:22px">
           <button id="dx-prev" class="dx-back" hidden>← Pregunta anterior</button>
         </div>
@@ -178,6 +180,19 @@
       <h2 id="dx-result-title" style="font-family:var(--qv-font-display); font-size:clamp(28px,5.5vw,44px); line-height:1.02; letter-spacing:-.03em; font-weight:900; margin:0 0 28px; color:#101319"></h2>
       <div class="dx-card" style="margin-bottom:26px">
         <div id="dx-bars" style="display:flex; flex-direction:column; gap:18px"></div>
+      </div>
+      <div class="dx-card" style="margin-bottom:26px">
+        <p style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7A7C82; font-weight:800; margin:0 0 10px">Tu nivel de control</p>
+        <div class="dx-nivel">
+          <span id="dx-nivel-num" class="dx-nivel-num"></span>
+          <span id="dx-nivel-texto" style="font-size:14px; color:#3D4148; line-height:1.5; max-width:44ch"></span>
+        </div>
+      </div>
+      <div class="dx-card" style="margin-bottom:26px">
+        <p style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7A7C82; font-weight:800; margin:0 0 14px">¿Qué hemos detectado?</p>
+        <p style="font-size:14.5px; color:#101319; margin:0 0 14px">Tu sistema parece tener estos puntos a revisar:</p>
+        <ul id="dx-detectado"></ul>
+        <p style="font-size:13px; color:#7A7C82; line-height:1.5; margin:16px 0 0">No significa que estas sean necesariamente tus fugas reales. Son las áreas que merece la pena analizar con más profundidad — esto es un pre-diagnóstico, no una consultoría completa.</p>
       </div>
       <div id="dx-verdict" class="dx-card" style="background:#EFECFB; border-color:rgba(16,19,25,.06)"></div>
       <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:14px; align-items:center">

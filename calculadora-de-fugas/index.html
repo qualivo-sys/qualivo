@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Fugas · Qualivo — ¿cuánto dinero pierdes después de captar un lead?</title>
+<meta name="description" content="4 datos, cálculo al momento: cuánto dinero estás dejando sobre la mesa al año entre tu tasa de cierre actual y una razonable para tu sector. Gratis, sin registro.">
+<link rel="canonical" href="https://qualivo.io/calculadora-de-fugas">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/calculadora-de-fugas">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Calculadora de Fugas — ¿cuánto dinero pierdes después de captar un lead?">
+<meta property="og:description" content="4 datos, cálculo al momento. Gratis, sin registro.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Calculadora de Fugas",
+  "url": "https://qualivo.io/calculadora-de-fugas",
+  "inLanguage": "es",
+  "description": "Calculadora gratuita que muestra cuánto dinero se pierde al año entre la tasa de cierre actual y una razonable para el sector.",
+  "isPartOf": { "@id": "https://qualivo.io/#organizacion" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Calculadora de Fugas", "item": "https://qualivo.io/calculadora-de-fugas" }
+    ]
+  }
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=2">
+<style>
+  .cf-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(16,19,25,.1); border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(16,19,25,.08); }
+  @media (max-width: 760px) { .cf-wrap { grid-template-columns: 1fr; } }
+  .cf-col { padding: clamp(28px,4vw,48px); }
+  .cf-col.form { background: var(--qv-lilac); }
+  .cf-col.result { background: #fff; }
+  .cf-field { margin-bottom: 20px; }
+  .cf-field label { display: block; font-size: 12.5px; font-weight: 700; color: #3D4148; margin-bottom: 7px; }
+  .cf-field input { width: 100%; background: #fff; border: 2px solid rgba(16,19,25,.14); border-radius: 10px; padding: 13px 16px; font-weight: 800; font-size: 17px; color: #101319; font-family: var(--qv-font-body); }
+  .cf-field input:focus { outline: none; border-color: var(--qv-teal-bright); }
+  .cf-result-cab { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: #7A7C82; font-weight: 800; margin-bottom: 18px; }
+  .cf-fuga-num { font-family: var(--qv-font-display); font-weight: 900; font-size: clamp(38px,5vw,52px); letter-spacing: -.02em; color: var(--qv-coral); line-height: 1; }
+  .cf-fuga-label { font-size: 14px; color: #3D4148; font-weight: 700; margin: 8px 0 28px; }
+  .cf-crow { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .cf-crow .n { font-size: 13px; font-weight: 800; color: #101319; }
+  .cf-crow .v { font-size: 13px; font-weight: 700; color: #7A7C82; }
+  .cf-track { height: 10px; border-radius: 999px; background: rgba(16,19,25,.08); overflow: hidden; margin-bottom: 18px; }
+  .cf-bar { height: 100%; border-radius: 999px; transition: width 400ms ease; }
+  .cf-bar.now { background: var(--qv-coral); }
+  .cf-bar.pot { background: var(--qv-teal-bright); }
+  .cf-note { background: var(--qv-lilac); border-radius: 10px; padding: 14px 16px; font-size: 12.5px; color: #3D4148; line-height: 1.5; margin-bottom: 24px; }
+  .cf-note b { color: #101319; }
+  .cf-cta { background: var(--qv-teal); border-radius: 12px; padding: 20px 22px; }
+  .cf-cta p { color: #fff; font-weight: 800; font-size: 15px; margin: 0 0 12px; line-height: 1.35; }
+  .cf-cta a { display: inline-block; background: #fff; color: var(--qv-teal); font-weight: 800; font-size: 13.5px; padding: 11px 18px; border-radius: 8px; text-decoration: none; }
+  .cf-empty { color: #7A7C82; font-size: 14.5px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div style="color:#101319; background:#FFFFFF; overflow-x:clip; min-height:100vh">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width:1040px; margin:0 auto; padding:clamp(40px,7vh,72px) 24px 96px">
+    <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#0E7C74; font-weight:800; margin:0 0 20px">Calculadora de Fugas · gratis</p>
+    <h1 style="font-family:var(--qv-font-display); font-size:clamp(30px,5.5vw,50px); line-height:1.03; letter-spacing:-.03em; font-weight:900; margin:0 0 18px; color:#101319; max-width:20ch">¿Cuánto dinero pierdes después de captar un lead?</h1>
+    <p style="font-size:clamp(16px,2.6vw,18px); line-height:1.6; color:#3D4148; margin:0 0 40px; max-width:56ch">4 datos, cálculo al momento. Si algo no cuadra con tu negocio, lo ajustas y el número se recalcula solo.</p>
+
+    <div class="cf-wrap">
+      <div class="cf-col form">
+        <form id="cf-form">
+          <div class="cf-field"><label for="cf-leads">Leads al mes</label><input type="number" id="cf-leads" min="1" step="1" value="150" required></div>
+          <div class="cf-field"><label for="cf-cierre">Tu tasa de cierre actual (%)</label><input type="number" id="cf-cierre" min="0" max="100" step="0.1" value="8" required></div>
+          <div class="cf-field"><label for="cf-ticket">Ticket medio (€)</label><input type="number" id="cf-ticket" min="1" step="1" value="1200" required></div>
+          <div class="cf-field"><label for="cf-referencia">Tasa de cierre razonable en tu sector (%)</label><input type="number" id="cf-referencia" min="0" max="100" step="0.1" value="15" required></div>
+        </form>
+      </div>
+      <div class="cf-col result">
+        <div class="cf-result-cab">Tu resultado</div>
+        <div id="cf-result"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/calculadora-de-fugas/calc.js?v=1"></script>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

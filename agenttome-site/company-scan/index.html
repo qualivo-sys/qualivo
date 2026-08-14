@@ -33,6 +33,32 @@
 @media(max-width:700px){.gate-grid{grid-template-columns:1fr}}
 #scan-send{border:0;cursor:pointer;font-family:var(--fb)}
 .hp2{position:absolute;left:-5000px;opacity:0;height:0;width:0}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-family:var(--fb);font-size:13px;font-weight:600;padding:9px 14px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--green)}
+.chip.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.scan-loading{display:none;text-align:center;padding:40px 0;color:var(--gray)}
+
+.sc-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:20px 0}
+.sc-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid var(--ink);padding:24px 26px 18px;flex-wrap:wrap}
+.sc-kick{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2)}
+.sc-puesto{font-family:var(--fd);font-weight:800;font-size:clamp(24px,3.6vw,34px);letter-spacing:-.02em;color:var(--ink)}
+.sc-sello{border:3px solid var(--green);color:var(--green);font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:.06em;padding:6px 12px;border-radius:6px;transform:rotate(-6deg);white-space:nowrap}
+.sc-sec{padding:22px 26px 0}
+.sc-sec-kick{font-family:var(--fm);font-size:12px;letter-spacing:.1em;color:var(--gray-2);margin-bottom:12px}
+.sc-li{font-size:16px;line-height:1.4;color:var(--ink);padding-left:24px;position:relative;margin-bottom:9px}
+.sc-li:before{content:'—';position:absolute;left:0;color:var(--gray-2);font-family:var(--fm)}
+.sc-no{margin:20px 26px 0;background:#F7F8F9;border-left:4px solid var(--ink);border-radius:4px;padding:14px 16px}
+.sc-no-kick{font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--ink);margin-bottom:6px;text-transform:uppercase}
+.sc-no-text{font-size:14px;line-height:1.42;color:#3A3F46}
+.sc-horas{margin:20px 26px 22px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.sc-horas-n{font-family:var(--fd);font-weight:800;font-size:24px;color:var(--green);letter-spacing:-.01em}
+.sc-horas-l{font-size:13px;color:var(--gray-2)}
+.sc-otros{margin:24px 0}
+.sc-otro-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--border)}
+.sc-otro-row:last-child{border:0}
+.sc-otro-n{font-weight:700;font-size:14.5px}
+.sc-otro-p{font-size:12.5px;color:var(--gray-2);font-weight:700}
 </style>
 </head>
 <body>
@@ -47,7 +73,26 @@
   <p class="lede">Marca cuánto se repite cada trabajo en tu empresa. Al final: el puesto digital que más sentido tiene para vosotros, las horas al mes que hay en juego y lo que cuestan hoy.</p>
 
   <div id="scan-quiz">
+    <div class="box">
+      <label style="font-weight:600">¿Cuántas personas sois?</label>
+      <div class="chip-row" id="sc-tamano"></div>
+    </div>
+    <div class="box">
+      <label style="font-weight:600">¿Qué áreas tenéis?</label>
+      <div class="chip-row" id="sc-areas"></div>
+    </div>
+
     <div id="scan-cards"></div>
+
+    <div class="box">
+      <label style="font-weight:600">En general, ¿cómo se hace hoy este trabajo?</label>
+      <div class="chip-row" id="sc-como"></div>
+    </div>
+    <div class="box">
+      <label style="font-weight:600">¿Quién suele hacerlo más a menudo?</label>
+      <div class="chip-row" id="sc-quien"></div>
+    </div>
+
     <div class="box" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between">
       <label style="font-weight:600">¿Cuánto cuesta una hora de tu equipo (aprox.)?
         <small style="display:block;font-weight:400;color:var(--gray)">salario + cargas ÷ horas — si no lo sabes, deja 25 €</small>
@@ -58,6 +103,8 @@
     </div>
     <p style="text-align:center;margin:26px 0"><a class="btn" id="scan-done" href="#resultado">Ver mi resultado →</a></p>
   </div>
+
+  <div class="scan-loading" id="scan-loading">Analizando tus respuestas…</div>
 
   <div id="scan-gate" class="dark">
     <h3 style="margin-top:0">Tu resultado está listo.</h3>
@@ -74,8 +121,9 @@
   </div>
 
   <div id="scan-result">
-    <div class="box green" id="res-main"></div>
-    <div id="res-secundario"></div>
+    <div id="res-score" class="box green"></div>
+    <div id="res-ficha"></div>
+    <div id="res-otros" class="sc-otros"></div>
     <div class="cta-band">
       <h2>El siguiente paso es de 30 minutos.</h2>
       <p>Te contamos cómo sería ese empleado en tu empresa: qué haría cada día, con qué herramientas tuyas trabajaría, sus KPIs y su ROI esperado. Sin compromiso — y si tu caso no encaja, te lo decimos.</p>
@@ -86,7 +134,7 @@
 
 <footer class="atm-footer"><div class="in">
   <span>© 2026 Agent to Me · The Home of Digital Employees</span>
-  <span><a href="/company-scan/">Company Scan</a> · <a href="/que-es-un-empleado-digital/">Qué es un empleado digital</a> · <a href="/empleados/sdr-digital/">SDR Digital</a> · <a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
+  <span><a href="/convierte-una-tarea/">Convierte una tarea</a> · <a href="/contratarias/">¿Contratarías a esta persona?</a> · <a href="/que-es-un-empleado-digital/">Qué es un empleado digital</a> · <a href="/empleados/sdr-digital/">SDR Digital</a> · <a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a></span>
 </div></footer>
 
 <script src="/assets/scan.js"></script>
