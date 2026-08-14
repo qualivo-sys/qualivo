@@ -1,7 +1,7 @@
 # Agent to Me · Estrategia de outbound
 
 Documento de trabajo. Sustituye al planteamiento inicial de `piloto-gestorias.md`,
-que pasa a ser el ICP secundario. Base: lectura de agenttome.io (14-ago-2026) y
+que pasa a ser el ICP secundario. Base: lectura de agentforme.io (14-ago-2026) y
 datos reales de la máquina de Qualivo (13 campañas, 3.576 envíos medidos).
 
 ---
@@ -215,7 +215,7 @@ Consecuencia: hoy no se puede lanzar Agent to Me sin tomar una de estas tres
 decisiones.
 
 1. **Dominio hermano y buzones nuevos** (recomendado). Comprar un dominio
-   parecido a agenttome.io, dos buzones, y arrancar warmup ya. Son dos o tres
+   parecido a agentforme.io, dos buzones, y arrancar warmup ya. Son dos o tres
    semanas de reloj, así que cuanto antes empiece, antes se lanza. Protege el
    dominio principal de la web.
 2. **Enviar desde los buzones de Qualivo**. Rápido y sin coste, pero mezcla

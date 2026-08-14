@@ -13,7 +13,7 @@ Primer outbound de Agent to Me, separado por completo del pipeline de Qualivo
   los marcados `flag: juridica` son despachos más legales — decidir si entran).
 
 ## Oferta / CTA único
-**Company Scan** (agenttome.io): analizamos la empresa y decimos qué equipo
+**Company Scan** (agentforme.io): analizamos la empresa y decimos qué equipo
 digital necesita. Gratis, concreto, bajo compromiso. Sin demo, sin "agenda 30 min".
 
 ## CTA secundario (salida) · Radar IA semanal
@@ -24,8 +24,8 @@ en suscriptor en vez de en silencio. Se usa SOLO como oferta de salida en el
 Pendiente: dónde se publica (newsletter LinkedIn / email) para poner el enlace.
 
 ## Infraestructura de envío (pendiente de decisión)
-- **Email**: NO enviar desde agenttome.io (dominio recién estrenado, protegerlo).
-  Comprar dominio hermano (p. ej. `agenttome.co` o `getagenttome.io`) + 1-2 buzones
+- **Email**: NO enviar desde agentforme.io (dominio recién estrenado, protegerlo).
+  Comprar dominio hermano (p. ej. `agentforme.co` o `getagentforme.io`) + 1-2 buzones
   y warmup en Mailerfind **desde ya**: 2-3 semanas de reloj antes del primer envío.
 - **LinkedIn**: canal disponible de inmediato, pero desde una cuenta distinta a la
   del piloto Lanzadera (esa está en vuelo con el pitch de Qualivo). Revisar cuentas
