@@ -5,8 +5,7 @@
   "formato": "9:16",
   "entrega": "1080x1920",
   "duracion_objetivo": 28,
-  "estado": "en_produccion",
-
+  "estado": "montado_sin_voz",
   "referencias": {
     "protagonista": {
       "archivo": "references/protagonista.jpg",
@@ -18,9 +17,15 @@
     "estilo": {
       "prompt_base": "live action documentary cinematography, 35mm, shallow depth of field, natural skin texture, soft overcast daylight, muted realistic colour grade, very subtle handheld float",
       "prohibido": "CGI, 3D look, artificial faces, exaggerated motion, futuristic UI, neon, holograms, generated text or logos"
+    },
+    "escritorio": {
+      "archivo": "references/escritorio.jpg",
+      "job_id": "0f81e668-f98a-487e-859b-05549405d19f",
+      "modelo": "nano_banana_pro",
+      "descripcion": "Puesto de trabajo con monitor mostrando una hoja de cálculo real, cuaderno escrito, café y silla vacía. Sin personas en primer plano.",
+      "nota": "Creada tras fallar el intento de generar una imagen del protagonista sentado. Regla 7."
     }
   },
-
   "planos": [
     {
       "n": 1,
@@ -32,27 +37,81 @@
       "prompt_kling": "The man walks slowly forward down the office corridor, holding eye contact with the lens. His mouth stays closed, calm and steady expression, no talking. The camera retreats backwards at the same pace, keeping him in medium shot. Very subtle handheld float, soft overcast daylight from the windows, live action documentary cinematography, 35mm, shallow depth of field, natural skin texture, muted realistic colour grade. No CGI, no 3D look, no exaggerated motion.",
       "revision": "Cara consistente con la referencia. Piel y ojos correctos, sin deformaciones. Boca cerrada como se dirigió. PERO apenas camina: el cuerpo está casi quieto y no hay balanceo de brazos. La expresión sale más inexpresiva que neutral. Sale a 720x1280."
     },
-    { "n": 2, "duracion": 6, "estado": "pendiente",
+    {
+      "n": 2,
+      "duracion": 6,
+      "estado": "generado",
       "voz": "Pero sí puede sustituir a quien sigue haciendo todo esto a mano.",
-      "visual": "Sentado ante el ordenador con varias campañas y documentos abiertos. Actividad real, no frenética de anuncio." },
-    { "n": 3, "duracion": 8, "estado": "pendiente",
+      "visual": "Acercamiento lento al puesto de trabajo. Nadie entra en cuadro.",
+      "job_id": "fca44e6d-329a-4f27-ad65-761471546fc6",
+      "tipo_plano": "medium",
+      "referencia_id": "escritorio",
+      "action_complexity": "low",
+      "reference_quality": "high",
+      "reference_required": false,
+      "justificacion": "Muestra el trabajo manual sin necesidad de que aparezca el protagonista, porque la Regla 7 impide crear una imagen fija de él sentado. La acción es que no pasa nada: solo la cámara se acerca, así que la complejidad es baja. La referencia es del mismo tipo de plano. Si fallara, se sustituye por un plano fijo de la referencia con movimiento de zoom en postproducción."
+    },
+    {
+      "n": 3,
+      "duracion": 8,
+      "estado": "generado",
       "voz": "Porque mientras tú haces una tarea detrás de otra, un agente puede hacer diez en paralelo.",
-      "visual": "Sentado mientras varios procesos corren en paralelo en la pantalla. Software real, sin interfaz futurista. Push-in lento." },
-    { "n": 4, "duracion": 7, "estado": "pendiente",
+      "visual": "Deriva lateral a la derecha sobre la mesa, revelando la oficina vacía detrás.",
+      "job_id": "3ad1ab79-488a-4a95-a398-fe61f111dc39",
+      "tipo_plano": "medium",
+      "referencia_id": "escritorio",
+      "action_complexity": "low",
+      "reference_quality": "high",
+      "reference_required": false,
+      "justificacion": "Da la sensación de trabajo acumulado y de oficina que sigue funcionando sin nadie. Movimiento de cámara puro, sin acción humana, así que la complejidad es baja. Misma referencia que el plano 2, lo que garantiza que sea el mismo puesto. Plan B: recorte y desplazamiento de la imagen fija."
+    },
+    {
+      "n": 4,
+      "duracion": 7,
+      "estado": "generado",
       "voz": "La ventaja ya no es trabajar más rápido. Es construir sistemas que trabajen por ti.",
-      "visual": "Vuelve a caminar por la oficina mirando a cámara. Al final sigue caminando y la cámara se queda atrás." }
+      "visual": "Se da la vuelta y se aleja por el pasillo. Cámara quieta detrás.",
+      "job_id": "656a4321-15cf-43ea-a91d-b40d0e35258f",
+      "tipo_plano": "medium",
+      "referencia_id": "protagonista",
+      "action_complexity": "low",
+      "reference_quality": "high",
+      "reference_required": false,
+      "justificacion": "Cierra devolviendo al protagonista y dejándolo marchar, que es el gesto que acompaña a la frase final. Parte de la misma referencia que el plano 1, así que es la misma cara. Alejarse caminando es una acción simple. Kling propuso un preset oscuro que se rechazó porque contradecía la luz del brief."
+    }
   ],
-
   "postproduccion": {
-    "pendiente": ["voz superpuesta", "subtitulos", "musica de fondo", "subida a 1080x1920"],
+    "pendiente": [
+      "voz superpuesta",
+      "subtitulos",
+      "musica de fondo",
+      "subida a 1080x1920"
+    ],
     "musica": "Higgsfield NO genera musica (solo voz). La pista tiene que venir de fuera.",
     "motor": "El montaje usa el mismo motor de la prueba del 17-ago: subtitulos con libass y fuente Montserrat 900 estatica, rotulos como PNG de Chromium porque este ffmpeg no tiene drawtext."
   },
-
   "coste": {
-    "gastado_creditos": 52,
-    "detalle": "10 prueba Barcelona + 2 imagen oficina + 30 tres planos video-001 + imagen protagonista + 10 shot_01",
-    "saldo_tras": 217.88,
-    "estimado_para_terminar": "unos 60-70 en total con los 3 planos que faltan, voz y subida de resolucion"
+    "gastado_creditos_total_sesion": "~90",
+    "saldo_aprox": 180,
+    "detalle": "1 retrato + 1 escritorio fallido + 1 escritorio bueno + 4 planos de vídeo + pruebas previas"
+  },
+  "montaje": {
+    "salida": "output/final_video.mp4",
+    "duracion": 20.13,
+    "resolucion": "1080x1920",
+    "fps": 30,
+    "hecho": [
+      "normalizado de tamaño y cadencia",
+      "corrección de color común a rodado y generado",
+      "subtítulos animados con Montserrat 900",
+      "rótulo de cierre en PNG de Chromium",
+      "barra de progreso",
+      "fundidos de entrada y salida"
+    ],
+    "pendiente": [
+      "voz superpuesta",
+      "música (Higgsfield no genera música)"
+    ],
+    "gotcha": "Kling no siempre devuelve la misma resolución: los planos 2 y 3 salieron a 716x1284 y los otros a 720x1280. Hay que normalizar antes de concatenar o la unión falla."
   }
 }

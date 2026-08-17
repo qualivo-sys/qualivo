@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Anthropic from '@anthropic-ai/sdk';
+import { validarStoryboard } from './validar.mjs';
 
 const AQUI = dirname(fileURLToPath(import.meta.url));
 const RAIZ = join(AQUI, '..');
@@ -22,6 +23,8 @@ if (!idea) {
 
 // La voz de la marca no se improvisa: se lee del documento canónico.
 const voz = readFileSync(join(RAIZ, 'content', 'guia-de-voz.md'), 'utf8');
+// Las reglas del director no se repiten a mano: se leen del documento canónico.
+const reglas = readFileSync(join(AQUI, 'reglas-del-director.md'), 'utf8');
 
 const SISTEMA = `Eres el director de una productora pequeña que hace vídeo vertical
 para Maikel Echevarría. Conviertes una idea en un guion de 30-45 segundos y en un
@@ -43,6 +46,13 @@ REGLAS DURAS
   azules, gente de banco de imágenes. Es una oficina española normal.
 - Cada plano lleva en "nota" por qué es así y el plan B si sale mal.
 - Máximo 4 planos generados por vídeo: cada uno cuesta 10 creditos.
+- Ningún plano con action_complexity "high" sale del generador: se simplifica, se
+  divide en dos planos, o se marca reference_required con la imagen que falta.
+- Un plano detalle (close_up, extreme_close_up) con reference_quality "low" va
+  siempre con reference_required en true.
+
+REGLAS DEL DIRECTOR — son obligatorias y explican por qué existen. Cúmplelas.
+${reglas}
 
 GUÍA DE VOZ
 ${voz}`;
@@ -62,6 +72,14 @@ const r = await cliente.messages.create({
 const bloque = r.content.find((c) => c.type === 'tool_use');
 if (!bloque) throw new Error('El modelo no devolvió el storyboard estructurado.');
 const sb = bloque.input;
+
+const fallos = validarStoryboard(sb);
+if (fallos.length) {
+  console.error('\nEl storyboard incumple las reglas del director:\n');
+  for (const f of fallos) console.error('  · ' + f);
+  console.error('\nNo se ha escrito nada. Corrige la idea o vuelve a lanzarlo.\n');
+  process.exit(2);
+}
 
 // Numeración del proyecto: el siguiente hueco libre.
 const dirProy = join(AQUI, 'projects');
@@ -85,6 +103,9 @@ writeFileSync(join(dir, 'storyboard.md'), aMarkdown(sb));
 
 console.log(`\n${dir}`);
 console.log(`${sb.planos.length} planos · ${sb.duracion_storyboard} s · ${generados.length} generados · ${sb.coste_estimado.creditos_higgsfield} creditos`);
+const bloqueados = sb.planos.filter((p) => p.reference_required);
+if (bloqueados.length)
+  console.log(`${bloqueados.length} plano(s) esperando referencia: ${bloqueados.map((p) => p.n).join(', ')}`);
 console.log('\nNO se ha generado ningún vídeo. Revisa storyboard.md y aprueba antes de seguir.\n');
 
 function aMarkdown(s) {
@@ -94,7 +115,13 @@ function aMarkdown(s) {
     L.push(`\n## PLANO ${String(p.n).padStart(2, '0')} · ${p.duracion}s · \`${p.origen}\`\n`,
            `**Voz:** «${p.voz}»\n`, `**Visual:** ${p.visual}\n`,
            `**Plano:** ${p.tipo_plano} · **Cámara:** ${p.camara} · **Luz:** ${p.iluminacion}\n`);
+    if (p.origen === 'generado')
+      L.push(`**Acción:** \`${p.action_complexity}\` · **Referencia:** \`${p.reference_quality}\`` +
+             (p.reference_required ? ` · ⚠️ **HACE FALTA REFERENCIA**\n` : `\n`));
+    if (p.reference_required && p.reference_needed_desc)
+      L.push(`\n> **Imagen que falta:** ${p.reference_needed_desc}\n`);
     if (p.referencia_id) L.push(`**Referencia:** \`${p.referencia_id}\`\n`);
+    if (p.justificacion) L.push(`\n**Por qué así:** ${p.justificacion}\n`);
     if (p.prompt_kling) L.push(`\n**Prompt Kling:**\n\`\`\`\n${p.prompt_kling}\n\`\`\`\n`);
     L.push(`\n*${p.nota}*\n`);
   }

@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,MontBlack,74,&H00E6EEF2,&HC8000000,&H00000000,0,0,0,0,100,100,0,0,1,7,3,2,100,100,280,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.35,0:00:01.55,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}La IA no va
+Dialogue: 0,0:00:01.55,0:00:02.75,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}a sustituir a los
+Dialogue: 0,0:00:02.75,0:00:04.60,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}{\c&H000C59E8&}marketers{\c&H00E6EEF2&}.
+Dialogue: 0,0:00:05.35,0:00:06.60,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}Pero sí puede sustituir
+Dialogue: 0,0:00:06.60,0:00:07.90,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}a quien sigue haciendo
+Dialogue: 0,0:00:07.90,0:00:09.65,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}todo esto {\c&H000C59E8&}a mano{\c&H00E6EEF2&}.
+Dialogue: 0,0:00:10.35,0:00:11.60,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}Tú haces una tarea
+Dialogue: 0,0:00:11.60,0:00:12.80,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}detrás de otra.
+Dialogue: 0,0:00:12.80,0:00:14.65,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}Un agente hace {\c&H000C59E8&}diez{\c&H00E6EEF2&}.
+Dialogue: 0,0:00:15.25,0:00:16.55,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}La ventaja ya no es
+Dialogue: 0,0:00:16.55,0:00:17.75,Sub,,0,0,0,,{\fad(90,60)\fscx88\fscy88\t(0,110,\fscx100\fscy100)}trabajar más rápido.

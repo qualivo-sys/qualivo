@@ -1,51 +1,225 @@
 {
   "$comment": "Forma obligatoria de todo storyboard. La usa generar.mjs como tool schema para forzar salida estructurada de Claude.",
   "type": "object",
-  "required": ["idea", "duracion_objetivo", "formato", "referencias", "planos"],
+  "required": [
+    "idea",
+    "duracion_objetivo",
+    "formato",
+    "referencias",
+    "planos"
+  ],
   "properties": {
-    "idea": { "type": "string" },
-    "duracion_objetivo": { "type": "integer", "minimum": 20, "maximum": 60 },
-    "formato": { "type": "string", "enum": ["9:16", "16:9", "1:1"] },
+    "idea": {
+      "type": "string"
+    },
+    "duracion_objetivo": {
+      "type": "integer",
+      "minimum": 20,
+      "maximum": 60
+    },
+    "formato": {
+      "type": "string",
+      "enum": [
+        "9:16",
+        "16:9",
+        "1:1"
+      ]
+    },
     "hechos_verificados": {
       "type": "array",
       "description": "Todo dato del guion necesita fuente. Sin fuente, fuera.",
-      "items": { "type": "object", "required": ["dato", "fuente"],
-        "properties": { "dato": { "type": "string" }, "fuente": { "type": "string" } } }
+      "items": {
+        "type": "object",
+        "required": [
+          "dato",
+          "fuente"
+        ],
+        "properties": {
+          "dato": {
+            "type": "string"
+          },
+          "fuente": {
+            "type": "string"
+          }
+        }
+      }
     },
     "referencias": {
       "type": "object",
       "properties": {
-        "personajes": { "type": "array", "items": { "type": "object",
-          "required": ["id", "descripcion"],
-          "properties": { "id": {"type":"string"}, "descripcion": {"type":"string"},
-            "imagen_referencia": {"type":"string"} } } },
-        "localizaciones": { "type": "array", "items": { "type": "object",
-          "required": ["id", "descripcion"],
-          "properties": { "id": {"type":"string"}, "descripcion": {"type":"string"},
-            "imagen_referencia": {"type":"string"} } } },
-        "estilo": { "type": "object", "required": ["prompt_base", "prohibido"],
-          "properties": { "prompt_base": {"type":"string"}, "prohibido": {"type":"string"} } }
+        "personajes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "descripcion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "descripcion": {
+                "type": "string"
+              },
+              "imagen_referencia": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "localizaciones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "descripcion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "descripcion": {
+                "type": "string"
+              },
+              "imagen_referencia": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "estilo": {
+          "type": "object",
+          "required": [
+            "prompt_base",
+            "prohibido"
+          ],
+          "properties": {
+            "prompt_base": {
+              "type": "string"
+            },
+            "prohibido": {
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "planos": {
-      "type": "array", "minItems": 5, "maxItems": 12,
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 12,
       "items": {
         "type": "object",
-        "required": ["n","duracion","origen","voz","visual","tipo_plano","camara","iluminacion","nota"],
+        "required": [
+          "n",
+          "duracion",
+          "origen",
+          "voz",
+          "visual",
+          "tipo_plano",
+          "camara",
+          "iluminacion",
+          "action_complexity",
+          "reference_quality",
+          "reference_required",
+          "justificacion",
+          "nota"
+        ],
         "properties": {
-          "n": { "type": "integer" },
-          "duracion": { "type": "integer", "minimum": 2, "maximum": 10 },
-          "origen": { "type": "string", "enum": ["rodado", "generado", "pantalla", "rotulo"],
-            "description": "rodado = Maikel a cámara · generado = Kling · pantalla = grabación de la herramienta · rotulo = solo texto" },
-          "voz": { "type": "string", "description": "En castellano. Es lo que se locuta." },
-          "visual": { "type": "string" },
-          "tipo_plano": { "type": "string" },
-          "camara": { "type": "string" },
-          "iluminacion": { "type": "string" },
-          "referencia_id": { "type": ["string", "null"] },
-          "prompt_kling": { "type": ["string", "null"],
-            "description": "EN INGLÉS. null si origen no es 'generado'." },
-          "nota": { "type": "string", "description": "Por qué este plano es así, y el plan B si sale mal." }
+          "n": {
+            "type": "integer"
+          },
+          "duracion": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 10
+          },
+          "origen": {
+            "type": "string",
+            "enum": [
+              "rodado",
+              "generado",
+              "pantalla",
+              "rotulo"
+            ],
+            "description": "rodado = Maikel a cámara · generado = Kling · pantalla = grabación de la herramienta · rotulo = solo texto"
+          },
+          "voz": {
+            "type": "string",
+            "description": "En castellano. Es lo que se locuta."
+          },
+          "visual": {
+            "type": "string"
+          },
+          "tipo_plano": {
+            "type": "string",
+            "enum": [
+              "establishing",
+              "medium",
+              "close_up",
+              "extreme_close_up",
+              "over_the_shoulder"
+            ],
+            "description": "Regla 4: una referencia de plano general NO sirve para un detalle."
+          },
+          "camara": {
+            "type": "string"
+          },
+          "iluminacion": {
+            "type": "string"
+          },
+          "referencia_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "prompt_kling": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "EN INGLÉS. null si origen no es 'generado'."
+          },
+          "nota": {
+            "type": "string",
+            "description": "Por qué este plano es así, y el plan B si sale mal."
+          },
+          "action_complexity": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "description": "Regla 6. Si es high: simplificar, dividir o pedir otra referencia. No generar."
+          },
+          "reference_quality": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "description": "Regla 6. Calidad de la referencia disponible PARA ESTE tipo de plano."
+          },
+          "reference_required": {
+            "type": "boolean",
+            "description": "Regla 5. true si hace falta una referencia nueva antes de generar."
+          },
+          "reference_needed_desc": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Si reference_required es true: qué imagen exactamente hay que crear."
+          },
+          "justificacion": {
+            "type": "string",
+            "description": "Obligatorio: qué quiere conseguir el plano, qué referencia usa y por qué encaja con el tipo de plano, por qué la acción es sencilla, y qué riesgo de fallo hay con su plan B."
+          }
         }
       }
     }
