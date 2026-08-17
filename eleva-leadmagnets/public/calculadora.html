@@ -3,200 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>¿Cuánto puedes ganar haciendo uñas? | Calculadora — Eleva Nails</title>
-<meta name="description" content="Calcula al instante cuánto puedes ganar como manicurista según tus clientas y precios. Descubre tu potencial real y cómo llegar a 2.000-3.000 €/mes.">
+<title>Calculadora: ¿Cuánto puedes ganar haciendo uñas? | Eleva Nails</title>
+<meta name="description" content="Calcula al instante cuánto puedes ganar como manicurista según tus clientas y precios. Descubre tu potencial real. Calculadora gratuita de Eleva Nails.">
 <meta property="og:title" content="¿Cuánto puedes ganar haciendo uñas? — Calculadora">
-<meta property="og:description" content="Descubre tu ingreso estimado como manicurista y tu potencial real. Calculadora gratuita de Eleva Nails.">
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💅</text></svg>">
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Calculadora de ingresos para manicuristas",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Web",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},
-  "provider":{"@type":"Organization","name":"Eleva Nails","url":"https://elevanails.es"}
-}
-</script>
-<style>
-  :root{
-    --rose-50:#fff1f5; --rose-100:#ffe4ec; --rose-200:#fecdd8; --rose-400:#fb7199;
-    --rose-500:#f43f6f; --rose-600:#e11d54; --rose-700:#be123f;
-    --ink:#2a1720; --muted:#7d5c6a; --line:#f3d6df; --bg:#fff7fa; --card:#ffffff;
-    --shadow:0 12px 40px rgba(225,29,84,.12);
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:linear-gradient(180deg,var(--rose-50),var(--bg) 40%);line-height:1.55;
-    -webkit-font-smoothing:antialiased}
-  .wrap{max-width:640px;margin:0 auto;padding:22px 18px 60px}
-  .badge{display:inline-flex;align-items:center;gap:6px;background:var(--rose-100);color:var(--rose-700);
-    font-weight:600;font-size:13px;padding:6px 12px;border-radius:999px}
-  h1{font-size:30px;line-height:1.15;margin:16px 0 8px;letter-spacing:-.02em}
-  h1 span{color:var(--rose-600)}
-  .lead{color:var(--muted);font-size:17px;margin:0 0 22px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
-  label{display:block;font-weight:600;font-size:15px;margin:0 0 8px}
-  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
-  .seg button{border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:12px;
-    padding:12px 6px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s;line-height:1.2}
-  .seg button.on{border-color:var(--rose-500);background:var(--rose-50);color:var(--rose-700)}
-  .field{margin-bottom:20px}
-  .rowval{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-  .rowval b{font-size:16px}
-  .rowval .v{color:var(--rose-600);font-weight:700;font-size:16px}
-  input[type=range]{width:100%;accent-color:var(--rose-500);height:6px}
-  .result{background:linear-gradient(135deg,var(--rose-600),var(--rose-400));color:#fff;border-radius:20px;
-    padding:24px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px}
-  .result .k{font-size:14px;opacity:.9;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-  .result .big{font-size:46px;font-weight:800;letter-spacing:-.02em;margin:4px 0 2px}
-  .result .sub{font-size:14px;opacity:.92}
-  .pot{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.25);font-size:15px}
-  .pot b{font-size:20px}
-  .gate h2{font-size:20px;margin:0 0 6px}
-  .gate p{color:var(--muted);font-size:15px;margin:0 0 18px}
-  .gate input[type=text],.gate input[type=email],.gate input[type=tel]{
-    width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;margin-bottom:12px;font-family:inherit}
-  .gate input:focus{outline:none;border-color:var(--rose-500)}
-  .cta{width:100%;background:var(--rose-600);color:#fff;border:0;border-radius:12px;padding:15px;
-    font-size:16px;font-weight:700;cursor:pointer;transition:.15s}
-  .cta:hover{background:var(--rose-700)}
-  .cta:disabled{opacity:.6;cursor:default}
-  .fine{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
-  .breakdown{display:none}
-  .brow{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px}
-  .brow:last-child{border-bottom:0}
-  .brow .bv{font-weight:700}
-  .steps{counter-reset:s;margin:14px 0 0;padding:0;list-style:none}
-  .steps li{position:relative;padding:8px 0 8px 34px;font-size:15px}
-  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:7px;width:24px;height:24px;
-    background:var(--rose-100);color:var(--rose-700);border-radius:50%;font-weight:700;font-size:13px;display:grid;place-items:center}
-  .coursecta{display:block;text-align:center;background:var(--ink);color:#fff;border-radius:12px;padding:15px;
-    font-weight:700;text-decoration:none;margin-top:18px}
-  .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:26px;line-height:1.6}
-  .ok{display:none;text-align:center;padding:8px 0}
-  .ok .em{font-size:40px}
-</style>
+<link rel="stylesheet" href="/brand.css">
 </head>
 <body>
+<header class="top"><div class="in"><div class="brand">ELEVA <span>NAILS</span></div><a class="f" href="https://elevanails.es">Ver la formación</a></div></header>
 <div class="wrap">
-  <span class="badge">💅 Calculadora gratuita · Eleva Nails</span>
+  <span class="eyebrow">🧮 Calculadora gratuita</span>
   <h1>¿Cuánto puedes ganar <span>haciendo uñas?</span></h1>
-  <p class="lead">Mueve los valores según tu situación y descubre tu ingreso estimado al instante. Sin humo, con datos reales del sector.</p>
+  <p class="lead">Ajusta tu situación y descúbrelo al instante. Sin humo, con datos reales del sector.</p>
 
-  <div class="card">
+  <section class="calc" id="calc">
     <label>¿Cómo trabajas (o quieres trabajar)?</label>
     <div class="seg" id="seg">
       <button data-mode="empezando" class="on">Empezando de cero</button>
       <button data-mode="ajena">Por cuenta ajena</button>
       <button data-mode="autonoma">Autónoma</button>
     </div>
-
     <div class="field">
       <div class="rowval"><b>Clientas por semana</b><span class="v" id="cv">15</span></div>
       <input type="range" id="clientas" min="3" max="40" value="15">
     </div>
-
     <div class="field">
       <div class="rowval"><b>Precio medio por servicio</b><span class="v" id="pv">25 €</span></div>
       <input type="range" id="precio" min="10" max="70" step="1" value="25">
     </div>
-  </div>
-
-  <div class="result">
-    <div class="k">Ingresos estimados / mes</div>
-    <div class="big" id="mensual">1.623 €</div>
-    <div class="sub" id="anual">≈ 19.470 € al año</div>
-    <div class="pot">✨ Tu potencial especializándote: <b id="potencial">2.272 €</b>/mes</div>
-  </div>
-
-  <div class="card gate" id="gate">
-    <h2>🔓 Desbloquea tu plan personalizado</h2>
-    <p>Te enviamos el <b>desglose completo</b>, la comparativa cuenta ajena vs. autónoma y los <b>3 pasos para llegar a tu objetivo</b>.</p>
-    <form id="form">
-      <input type="text" id="nombre" placeholder="Tu nombre" required autocomplete="name">
-      <input type="email" id="email" placeholder="Tu email" required autocomplete="email">
-      <input type="tel" id="telefono" placeholder="Tu teléfono (WhatsApp)" required autocomplete="tel">
-      <button class="cta" type="submit" id="submit">Ver mi plan personalizado →</button>
-      <div class="fine">Sin spam. Tus datos son para enviarte tu resultado y contactarte sobre la formación.</div>
-    </form>
-  </div>
-
-  <div class="card breakdown" id="breakdown">
-    <div class="ok" id="ok"><div class="em">🎉</div><b>¡Listo! Este es tu plan.</b></div>
-    <h2 style="margin:6px 0 12px;font-size:20px">Tu desglose</h2>
-    <div class="brow"><span>Ingreso actual estimado</span><span class="bv" id="b1">—</span></div>
-    <div class="brow"><span>Potencial especializándote (acrílico, nail art)</span><span class="bv" id="b2">—</span></div>
-    <div class="brow"><span>Diferencia al año</span><span class="bv" id="b3">—</span></div>
-    <h2 style="margin:20px 0 4px;font-size:18px">Cómo llegar ahí</h2>
-    <ol class="steps">
-      <li><b>Especialízate</b> en técnicas que se pagan más: acrílico, gel, acrygel y nail art.</li>
-      <li><b>Aprende la parte de negocio</b>: cómo captar clientas y poner precios (aquí está el 80% del salto).</li>
-      <li><b>Da el paso a autónoma</b> cuando tengas agenda: dejas de cobrar por horas y cobras por valor.</li>
-    </ol>
-    <a class="coursecta" href="https://elevanails.es" id="coursecta">Ver la formación Nail Boss Academy →</a>
-  </div>
-
-  <p class="foot">Estimación orientativa basada en datos del sector (2025-2026). Los ingresos reales varían según zona, experiencia, precios y modelo de trabajo.<br>© Eleva Nails · Formación profesional de manicura</p>
+    <div class="result">
+      <div class="k">Ingresos estimados / mes</div>
+      <div class="big" id="mensual">1.623 €</div>
+      <div class="sub" id="anual">≈ 19.470 € al año</div>
+      <div class="pot">✨ Tu potencial especializándote: <b id="potencial">2.272 €</b>/mes</div>
+    </div>
+    <div class="gate" id="gate">
+      <h4 style="margin-top:18px">Desbloquea tu plan personalizado</h4>
+      <p>Te enviamos el <b>desglose completo</b> y los <b>3 pasos para llegar a tu objetivo</b>.</p>
+      <form id="form">
+        <input type="text" id="nombre" placeholder="Tu nombre" required autocomplete="name">
+        <input type="email" id="email" placeholder="Tu email" required autocomplete="email">
+        <input type="tel" id="telefono" placeholder="Tu teléfono (WhatsApp)" required autocomplete="tel">
+        <button class="ctabtn" type="submit" id="submit">VER MI PLAN PERSONALIZADO →</button>
+        <div class="fine">Sin spam. Tus datos son para enviarte tu resultado y contactarte sobre la formación.</div>
+      </form>
+    </div>
+    <div class="breakdown" id="breakdown">
+      <h4 style="margin:14px 0 10px;font-family:'Bebas Neue',sans-serif;font-size:22px">🎉 Tu desglose</h4>
+      <div class="brow"><span>Ingreso actual estimado</span><span class="bv" id="b1">—</span></div>
+      <div class="brow"><span>Potencial especializándote</span><span class="bv" id="b2">—</span></div>
+      <div class="brow"><span>Diferencia al año</span><span class="bv" id="b3">—</span></div>
+      <h4 style="margin:18px 0 4px;font-family:'Bebas Neue',sans-serif;font-size:20px">Cómo llegar ahí</h4>
+      <ol class="steps">
+        <li><b>Especialízate</b> en lo que se paga más: acrílico, gel, acrygel y nail art.</li>
+        <li><b>Aprende la parte de negocio</b>: captar clientas y poner precios.</li>
+        <li><b>Da el paso a autónoma</b> cuando tengas agenda: cobras por valor.</li>
+      </ol>
+      <a class="coursecta" href="https://elevanails.es" style="margin-top:16px">DESCUBRE NAIL BOSS ACADEMY →</a>
+    </div>
+  </section>
+  <p class="foot">Estimación orientativa basada en datos del sector (2025-2026).<br>© Eleva Nails · Formación profesional de manicura</p>
 </div>
 
+<a href="https://wa.me/34722792501?text=Hola!%20Quiero%20info%20sobre%20la%20formaci%C3%B3n%20de%20u%C3%B1as%20%F0%9F%92%85" class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.47 1.64 6.36L3 29l6.82-1.6A13 13 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm6.45 17.8c-.27.76-1.58 1.45-2.18 1.54-.56.08-1.27.12-2.04-.13a18.6 18.6 0 01-1.85-.68C13.6 20.3 11.5 17.8 11.34 17.6c-.16-.2-1.3-1.73-1.3-3.3 0-1.58.83-2.36 1.12-2.68.29-.32.63-.4.84-.4l.6.01c.19 0 .45-.07.7.54.27.63.92 2.24.99 2.4.08.16.13.35.03.56-.1.2-.16.33-.31.5-.16.18-.33.4-.47.54-.16.16-.33.33-.14.65.19.32.84 1.38 1.8 2.23 1.24 1.1 2.28 1.44 2.6 1.6.32.16.51.13.7-.08.19-.2.8-.93 1.01-1.25.2-.32.41-.27.7-.16.28.1 1.78.84 2.09.99.3.15.5.22.58.35.07.12.07.72-.2 1.49z"/></svg>
+</a>
 <script>
-  var mode='empezando';
-  var el=function(id){return document.getElementById(id)};
+  var mode='empezando', el=function(id){return document.getElementById(id)};
   function eur(n){return Math.round(n).toLocaleString('es-ES')+' €';}
   function calc(){
     var c=+el('clientas').value, p=+el('precio').value;
-    var mensual=c*p*4.33;
-    var potencial=mensual*1.4; // especialización sube ticket medio ~40%
-    el('cv').textContent=c;
-    el('pv').textContent=p+' €';
+    var mensual=c*p*4.33, potencial=mensual*1.4;
+    el('cv').textContent=c; el('pv').textContent=p+' €';
     el('mensual').textContent=eur(mensual);
     el('anual').textContent='≈ '+eur(mensual*12)+' al año';
     el('potencial').textContent=eur(potencial);
-    // breakdown values
-    el('b1').textContent=eur(mensual)+'/mes';
-    el('b2').textContent=eur(potencial)+'/mes';
+    el('b1').textContent=eur(mensual)+'/mes';el('b2').textContent=eur(potencial)+'/mes';
     el('b3').textContent='+'+eur((potencial-mensual)*12);
     return {c:c,p:p,mensual:Math.round(mensual),potencial:Math.round(potencial)};
   }
-  el('seg').addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b)return;
-    [].forEach.call(this.children,function(x){x.classList.remove('on')});
-    b.classList.add('on'); mode=b.dataset.mode;
-    // ajustes suaves de defaults por modo
-    if(mode==='empezando'){el('clientas').value=Math.max(+el('clientas').value,8);}
-    calc();
+  el('seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    [].forEach.call(this.children,function(x){x.classList.remove('on')});b.classList.add('on');mode=b.dataset.mode;calc();});
+  el('clientas').addEventListener('input',calc); el('precio').addEventListener('input',calc); calc();
+  el('form').addEventListener('submit',function(e){e.preventDefault();
+    var btn=el('submit'); btn.disabled=true; btn.textContent='Enviando…';var d=calc();
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      nombre:el('nombre').value.trim(),email:el('email').value.trim(),telefono:el('telefono').value.trim(),
+      modo:mode,clientasSemana:d.c,precioMedio:d.p,ingresoMensual:d.mensual,potencialMensual:d.potencial,origen:'calculadora-standalone'
+    })}).then(function(r){return r.json().catch(function(){return{}})}).then(reveal).catch(reveal);
   });
-  el('clientas').addEventListener('input',calc);
-  el('precio').addEventListener('input',calc);
-  calc();
-
-  el('form').addEventListener('submit',function(e){
-    e.preventDefault();
-    var btn=el('submit'); btn.disabled=true; btn.textContent='Enviando…';
-    var d=calc();
-    var payload={
-      nombre:el('nombre').value.trim(),
-      email:el('email').value.trim(),
-      telefono:el('telefono').value.trim(),
-      modo:mode, clientasSemana:d.c, precioMedio:d.p,
-      ingresoMensual:d.mensual, potencialMensual:d.potencial
-    };
-    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json().catch(function(){return {}})})
-      .then(function(){ reveal(); })
-      .catch(function(){ reveal(); }); // aunque falle el CRM, no bloqueamos el valor al usuario
-  });
-  function reveal(){
-    el('gate').style.display='none';
-    el('breakdown').style.display='block';
-    el('ok').style.display='block';
-    el('breakdown').scrollIntoView({behavior:'smooth',block:'start'});
-  }
+  function reveal(){el('gate').style.display='none';el('breakdown').style.display='block';el('breakdown').scrollIntoView({behavior:'smooth',block:'center'});}
 </script>
 </body>
 </html>

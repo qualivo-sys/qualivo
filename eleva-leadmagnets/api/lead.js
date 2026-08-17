@@ -30,22 +30,26 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, crm: false });
   }
 
-  const notaCampos = [
-    `Origen: ${body.origen || 'calculadora'}`,
-    `Modo: ${body.modo || '—'}`,
-    `Clientas/semana: ${body.clientasSemana ?? '—'}`,
-    `Precio medio: ${body.precioMedio ?? '—'} €`,
-    `Ingreso estimado: ${body.ingresoMensual ?? '—'} €/mes`,
-    `Potencial: ${body.potencialMensual ?? '—'} €/mes`
-  ].join(' · ');
+  // Cada lead magnet puede mandar un resumen libre en `detalle`.
+  // Si no, componemos la nota con los campos de la calculadora de ingresos.
+  const notaCampos = body.detalle
+    ? `Origen: ${body.origen || 'lead-magnet'} · ${String(body.detalle).slice(0, 400)}`
+    : [
+        `Origen: ${body.origen || 'calculadora'}`,
+        `Modo: ${body.modo || '—'}`,
+        `Clientas/semana: ${body.clientasSemana ?? '—'}`,
+        `Precio medio: ${body.precioMedio ?? '—'} €`,
+        `Ingreso estimado: ${body.ingresoMensual ?? '—'} €/mes`,
+        `Potencial: ${body.potencialMensual ?? '—'} €/mes`
+      ].join(' · ');
 
   const payload = {
     locationId,
     firstName: nombre,
     email,
     phone: telefono || undefined,
-    source: 'Calculadora ingresos (web)',
-    tags: ['lead-magnet', 'calculadora-ingresos'],
+    source: String(body.source || 'Calculadora ingresos (web)').slice(0, 80),
+    tags: ['lead-magnet'].concat(body.tag ? [String(body.tag).slice(0, 40)] : ['calculadora-ingresos']),
     // Guardamos el contexto de la simulación en el primer contacto vía companyName libre-></br>
     // (si hay campos personalizados creados, se pueden mapear aquí)
     customFields: []

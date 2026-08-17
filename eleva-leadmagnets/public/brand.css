@@ -1,0 +1,120 @@
+/* ===== Eleva Nails · Sistema de diseño de marca (Nail Boss) =====
+   Reutilizado por todos los artículos + lead magnets. */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root{
+  --hot:#FF2D9E; --deep:#CC0A78; --shd:#8C0055; --dark:#0D0208;
+  --blush:#FFF8FC; --mid:#FF5CB8; --yellow:#FFC107;
+  --ink:#1A0010; --muted:#7A4060; --line:rgba(255,45,158,.14); --card:#fff;
+  --shadow:0 10px 40px rgba(255,45,158,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Poppins',sans-serif;background:var(--blush);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--hot)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* Nav superior */
+header.top{position:sticky;top:0;z-index:500;background:rgba(255,248,252,.92);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,45,158,.12);box-shadow:0 2px 20px rgba(255,45,158,.05)}
+.top .in{max-width:760px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;color:var(--dark)}
+.brand span{color:var(--hot)}
+.top a.f{font-weight:700;font-size:12px;letter-spacing:.03em;background:linear-gradient(135deg,var(--hot),var(--deep));color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;box-shadow:0 4px 0 var(--shd),0 6px 18px rgba(255,45,158,.3);transition:transform .2s}
+.top a.f:hover{transform:translateY(-1px)}
+
+/* Layout artículo */
+.wrap{max-width:760px;margin:0 auto;padding:30px 18px 60px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,45,158,.1);border:1.5px solid rgba(255,45,158,.2);color:var(--hot);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,8vw,62px);line-height:.94;letter-spacing:.01em;margin:14px 0 14px;color:var(--dark)}
+h1 em,h1 span{color:var(--hot);font-style:normal}
+h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,40px);line-height:1;letter-spacing:.01em;margin:38px 0 12px;color:var(--dark)}
+h2 em{color:var(--hot);font-style:normal}
+p{margin:0 0 15px}
+.lead{font-size:17px;color:var(--muted);line-height:1.8}
+.callout{background:rgba(255,45,158,.06);border:1px solid rgba(255,45,158,.14);border-left:4px solid var(--hot);border-radius:14px;padding:16px 18px;margin:20px 0;font-size:15.5px}
+ul{margin:0 0 15px;padding-left:20px}li{margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}
+th{background:rgba(255,45,158,.07);font-weight:700;font-size:13px;color:var(--deep)}
+
+/* Tarjeta calculadora / test */
+.calc,.card{background:var(--card);border:1.5px solid rgba(255,45,158,.1);border-radius:24px;padding:24px;box-shadow:var(--shadow);margin:28px 0}
+.calc .tag,.rbadge,.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,45,158,.1);border:1.5px solid rgba(255,45,158,.2);color:var(--hot);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:999px}
+.calc h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.01em;margin:14px 0 4px;color:var(--dark)}
+.calc .csub{color:var(--muted);font-size:15px;margin:0 0 20px}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 9px;color:var(--dark)}
+.seg{display:grid;gap:8px;margin-bottom:18px;grid-template-columns:1fr 1fr 1fr}
+.seg.g4{grid-template-columns:1fr 1fr}
+.seg button{border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:12px;padding:12px 6px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s;line-height:1.2;font-family:inherit}
+.seg button.on{border-color:var(--hot);background:rgba(255,45,158,.08);color:var(--deep)}
+.field{margin-bottom:18px}
+.rowval{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.rowval b{font-size:15px;font-weight:700}
+.rowval .v{color:var(--hot);font-weight:800}
+input[type=range]{width:100%;accent-color:var(--hot);height:6px}
+
+/* Resultado */
+.result{background:linear-gradient(135deg,var(--hot),var(--mid));color:#fff;border-radius:20px;padding:24px;text-align:center;margin-top:6px;box-shadow:0 10px 30px rgba(255,45,158,.3)}
+.result .k{font-size:12px;opacity:.92;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+.result .big{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;letter-spacing:.02em;margin:6px 0 2px}
+.result .sub{font-size:14px;opacity:.95}
+.pot{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.3);font-size:15px}
+.pot b{font-family:'Bebas Neue',sans-serif;font-size:24px}
+.mini{display:flex;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.3)}
+.mini div{flex:1;text-align:center}.mini b{display:block;font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1}
+.mini span{font-size:11px;opacity:.9;text-transform:uppercase;letter-spacing:.05em}
+
+/* Gate + botones */
+.gate{margin-top:18px}.gate h4{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.01em;margin:0 0 4px;color:var(--dark)}
+.gate p{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+.gate input,.lock input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;margin-bottom:11px;font-family:inherit;background:#fff}
+.gate input:focus,.lock input:focus{outline:none;border-color:var(--hot)}
+.ctabtn,.coursecta{width:100%;display:block;text-align:center;background:linear-gradient(135deg,var(--hot),var(--deep));color:#fff;border:0;border-radius:999px;padding:16px;font-size:15px;font-weight:800;letter-spacing:.03em;cursor:pointer;text-decoration:none;box-shadow:0 5px 0 var(--shd),0 10px 26px rgba(255,45,158,.32);transition:transform .2s}
+.ctabtn:hover,.coursecta:hover{transform:translateY(-2px)}
+.ctabtn:active{transform:translateY(1px);box-shadow:0 2px 0 var(--shd)}
+.ctabtn:disabled{opacity:.6}
+.fine{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+.done{display:none;text-align:center;padding:8px 0}.done .em{font-size:40px}
+
+/* Breakdown / pasos */
+.breakdown{display:none;margin-top:4px}
+.brow{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.brow .bv{font-weight:800;color:var(--deep)}
+.steps{counter-reset:s;margin:12px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 36px;font-size:15px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:25px;height:25px;background:linear-gradient(135deg,var(--hot),var(--deep));color:#fff;border-radius:50%;font-weight:700;font-size:13px;display:grid;place-items:center}
+
+/* Course card oscura */
+.coursecard{background:var(--dark);color:#fff;border-radius:22px;padding:26px;margin:32px 0;text-align:center;position:relative;overflow:hidden}
+.coursecard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 20%,rgba(255,45,158,.25),transparent 60%);pointer-events:none}
+.coursecard h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.01em;margin:0 0 8px;position:relative}
+.coursecard p{opacity:.7;font-size:15px;margin:0 0 16px;position:relative}
+.coursecard a{position:relative;display:inline-block;background:linear-gradient(135deg,var(--hot),var(--deep));color:#fff;font-weight:800;letter-spacing:.03em;text-decoration:none;padding:14px 28px;border-radius:999px;box-shadow:0 5px 0 var(--shd)}
+
+/* FAQ */
+.faq h2{margin-bottom:8px}
+.qa{border-bottom:1px solid var(--line);padding:15px 0;font-size:15px}
+.qa b{display:block;margin-bottom:5px;color:var(--dark);font-weight:700}
+
+/* Bloque enlace interno */
+.more{background:rgba(255,45,158,.06);border:1px solid rgba(255,45,158,.14);border-radius:16px;padding:16px 18px;margin:26px 0;font-size:15px}
+.more a{font-weight:700;text-decoration:none}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:34px;line-height:1.7}
+
+/* Test/Quiz */
+.prog{height:8px;background:rgba(255,45,158,.12);border-radius:999px;overflow:hidden;margin-bottom:20px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--hot),var(--mid));width:8%;transition:.3s}
+.step{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.q{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.01em;margin:0 0 18px;color:var(--dark);line-height:1.05}
+.opts button{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:15px 16px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s;margin-bottom:11px;font-family:inherit}
+.opts button:hover{border-color:var(--hot);background:rgba(255,45,158,.06);transform:translateX(3px)}
+.back{background:none;border:0;color:var(--muted);font-size:14px;cursor:pointer;padding:6px 0;margin-top:4px}
+.res{display:none}.res h2{margin:8px 0 8px}.res .rdesc{color:var(--muted);font-size:15.5px;margin:0 0 18px}
+.lock{background:rgba(255,45,158,.06);border:1px dashed rgba(255,45,158,.3);border-radius:16px;padding:18px;margin-bottom:6px}
+.plan{display:none}.plan ol{margin:10px 0 0;padding-left:20px}.plan li{margin:8px 0}
+
+/* WhatsApp FAB */
+.wa-fab{position:fixed;bottom:24px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 16px rgba(37,211,102,.45),0 2px 6px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s}
+.wa-fab:hover{transform:translateY(-3px) scale(1.05)}
+.wa-fab svg{width:32px;height:32px}
