@@ -1,7 +1,7 @@
 # Campaña · ICP Adelantta · vuestras líneas de servicio
 
-Campaña Smartlead **3812488**. Creada el 17-ago-2026, estado **DRAFTED** —
-nada se envía hasta confirmación explícita.
+Campaña Smartlead **3812488**. Creada el 17-ago-2026, **activada el
+17-ago-2026** tras revisión de las 14 cartas por Maikel.
 
 ## Configuración
 
@@ -67,4 +67,4 @@ arriba y se envía el mismo día de la respuesta.
 - [x] Contactos de marketing enriquecidos en Apollo (5 de 10 cuentas, 6 créditos)
 - [x] Campaña creada, remitentes, calendario y secuencia configurados
 - [x] 14 leads cargados (0 duplicados, 0 rebotes, 0 bloqueos)
-- [ ] **Confirmación de Maikel para pasar a ACTIVE**
+- [x] Confirmación de Maikel para pasar a ACTIVE — campaña **ACTIVA**, primeros envíos hoy 17-ago
