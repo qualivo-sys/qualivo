@@ -20,6 +20,9 @@ header.top{position:sticky;top:0;z-index:500;background:rgba(255,248,252,.92);ba
 .top .in{max-width:760px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;color:var(--dark)}
 .brand span{color:var(--hot)}
+.brandlogo{display:flex;align-items:center;text-decoration:none}
+.brandlogo img{height:44px;width:auto;display:block}
+@media(max-width:560px){.brandlogo img{height:38px}}
 .top a.f{font-weight:700;font-size:12px;letter-spacing:.03em;background:linear-gradient(135deg,var(--hot),var(--deep));color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;box-shadow:0 4px 0 var(--shd),0 6px 18px rgba(255,45,158,.3);transition:transform .2s}
 .top a.f:hover{transform:translateY(-1px)}
 
