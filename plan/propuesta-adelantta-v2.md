@@ -122,6 +122,35 @@ repo, donde todavía convive con el nombre viejo.
 - El precio: 1.000 €/mes. No se sube (la relación está caliente y la cuota
   validada de Qualivo es 1.000-2.500); se ajusta el alcance escrito.
 
+## Mensaje de entrega (borrador, listo para cuando la v2 esté montada)
+
+Para Juan Carlos, con copia a Laura. El objetivo del mensaje no es "aquí va
+el documento": es salir de él con fecha puesta.
+
+> Hola Juan Carlos,
+>
+> Os dejo la versión revisada de la propuesta. Después de nuestra
+> conversación le hemos dado una vuelta con un objetivo: que refleje
+> exactamente lo que se activa el primer mes, sin ruido.
+>
+> Los tres cambios importantes:
+>
+> 1. La fase 1 queda cerrada y concreta: una línea de negocio, dos canales,
+>    una herramienta y un agente por la cuota que hablamos. Todo lo demás
+>    aparece como ampliaciones, cada una con su precio, que se deciden con
+>    datos y no por calendario.
+> 2. Hemos añadido un ejemplo real de la detección de empresas en
+>    contratación funcionando hoy — es la parte del sistema que ya existe y
+>    que más os puede servir desde el primer mes.
+> 3. Al final tenéis una página con lo que necesitamos de vosotros para que
+>    la fase 1 dé resultados medibles en 30 días.
+>
+> ¿Os va bien el [día] a las [hora] para repasarla juntos media hora con
+> Laura? Así cerramos qué línea de negocio ataca la fase 1 y arrancamos.
+>
+> Un abrazo,
+> Maikel
+
 ## Pendiente para ejecutar
 
 - [ ] **PDF de la v1** — no está en este entorno; hace falta para editar las
@@ -129,3 +158,6 @@ repo, donde todavía convive con el nombre viejo.
 - [ ] Decisión de Maikel sobre el canal 2 de la fase 1 y la herramienta única.
 - [ ] Cerrar la reunión de presentación de la v2 con Juan Carlos y Laura
   (llevar fecha propuesta, no "ya os diré").
+- [ ] Registrar cada interacción en GHL en cuanto haya key nueva; mientras
+  tanto, el registro vive en este documento (regla del charter: no simular
+  acciones de CRM).
