@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
   }
 
   const notaCampos = [
+    `Origen: ${body.origen || 'calculadora'}`,
     `Modo: ${body.modo || '—'}`,
     `Clientas/semana: ${body.clientasSemana ?? '—'}`,
     `Precio medio: ${body.precioMedio ?? '—'} €`,
