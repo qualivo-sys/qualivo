@@ -37,7 +37,8 @@ Asunto: {{companyName}} · lo que miraría primero
 > Esto es una foto genérica de que patrón se repite en empresas con vuestra
 > estructura. Para deciros con números cuál de las tres pesa más en vuestro
 > caso necesito ver el embudo real — 15 minutos y os digo si merece la pena
-> seguir.
+> seguir. Aquí tienes hueco directo en mi calendario si prefieres verlo en
+> vivo: https://api.leadconnectorhq.com/widget/bookings/llamada-hackthelead
 
 ## Regla de personalización obligatoria antes de enviar
 
