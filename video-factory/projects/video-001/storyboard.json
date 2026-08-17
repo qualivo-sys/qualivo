@@ -1,0 +1,166 @@
+{
+  "proyecto": "video-001",
+  "idea": "Los anuncios dentro de ChatGPT van a cambiar la forma de hacer publicidad",
+  "marca": "maikel-personal",
+  "duracion_objetivo": 35,
+  "duracion_storyboard": 34,
+  "formato": "9:16",
+  "estado": "pendiente_de_aprobacion",
+  "creado": "2026-08-17",
+
+  "hechos_verificados": [
+    {
+      "dato": "El 11 de agosto de 2026 OpenAI amplió sus pruebas de anuncios en ChatGPT a Reino Unido, México, Brasil, Japón y Corea del Sur. España no está incluida.",
+      "fuente": "https://openai.com/index/testing-ads-in-chatgpt/"
+    },
+    {
+      "dato": "Los anuncios solo se muestran a usuarios de los planes gratuito y Go. Plus, Pro, Business, Enterprise y Educación no los ven.",
+      "fuente": "https://openai.com/index/testing-ads-in-chatgpt/"
+    }
+  ],
+
+  "referencias": {
+    "personajes": [
+      {
+        "id": "duena",
+        "descripcion": "Mujer de unos 45 años, dueña de una empresa pequeña. Ropa de trabajo sobria, sin traje. Cara de cansancio normal, no dramático.",
+        "imagen_referencia": "references/duena.png",
+        "estado_imagen": "pendiente_de_generar",
+        "nota": "Debe generarse UNA imagen y usarse como start_image en todos sus planos. Sin esto no hay consistencia."
+      }
+    ],
+    "localizaciones": [
+      {
+        "id": "oficina",
+        "descripcion": "Oficina pequeña real de una pyme española: mesas juntas, papeles, una impresora vieja, luz de ventana. Nada de oficina de revista.",
+        "imagen_referencia": "references/oficina.png",
+        "estado_imagen": "pendiente_de_generar"
+      }
+    ],
+    "estilo": {
+      "id": "doc-sobrio",
+      "prompt_base": "cinematic documentary style, handheld camera at shoulder height, natural window light, realistic skin texture, muted colour grade, no colour exaggeration, shallow depth of field, 9:16 vertical",
+      "prohibido": "neon lighting, futuristic UI overlays, holograms, robots, glowing blue circuitry, stock-photo smiling"
+    }
+  },
+
+  "planos": [
+    {
+      "n": 1,
+      "duracion": 3,
+      "origen": "rodado",
+      "voz": "El 11 de agosto ChatGPT empezó a probar anuncios. En España todavía no.",
+      "visual": "Maikel a cámara, plano medio corto. Sin rótulo todavía: la primera frase entra sola.",
+      "tipo_plano": "medio corto",
+      "camara": "fija, ligero temblor de mano",
+      "iluminacion": "natural",
+      "referencia_id": null,
+      "prompt_kling": null,
+      "nota": "Rodado, no generado. El gancho lo tiene que decir su cara o no se lo cree nadie."
+    },
+    {
+      "n": 2,
+      "duracion": 4,
+      "origen": "generado",
+      "voz": "Y no me interesa por lo obvio.",
+      "visual": "Plano detalle de un móvil sobre una mesa de oficina con una conversación abierta. Una mano lo desbloquea. No se lee el contenido.",
+      "tipo_plano": "detalle",
+      "camara": "slow push in, handheld",
+      "iluminacion": "luz de ventana lateral",
+      "referencia_id": "oficina",
+      "prompt_kling": "Extreme close-up of a phone lying on a cluttered small-office desk, a hand reaching in to pick it up, screen glare hides the content, cinematic documentary style, handheld slow push in, natural window light, muted colour grade, shallow depth of field, 9:16 vertical",
+      "nota": "Plano de apoyo. Si sale mal, se sustituye por rótulo sobre negro."
+    },
+    {
+      "n": 3,
+      "duracion": 4,
+      "origen": "rodado",
+      "voz": "Me interesa lo que pasa después del clic.",
+      "visual": "Maikel a cámara, un paso más cerrado que el plano 1.",
+      "tipo_plano": "primer plano",
+      "camara": "fija",
+      "iluminacion": "natural",
+      "referencia_id": null,
+      "prompt_kling": null,
+      "nota": "El salto de encuadre respecto al plano 1 hace de corte."
+    },
+    {
+      "n": 4,
+      "duracion": 5,
+      "origen": "generado",
+      "voz": "Llevamos veinte años con el mismo camino. Anuncio, página, formulario.",
+      "visual": "La dueña sentada delante del ordenador rellenando un formulario largo. Se ve el gesto de bajar y bajar con el ratón.",
+      "tipo_plano": "medio, por encima del hombro",
+      "camara": "handheld estático",
+      "iluminacion": "luz de ventana + pantalla",
+      "referencia_id": "duena",
+      "prompt_kling": "Over-the-shoulder shot of a woman in her forties at a desktop computer in a small cluttered office, filling in a long web form, scrolling down repeatedly, tired but ordinary expression, cinematic documentary style, handheld, natural window light mixed with screen light, muted colour grade, 9:16 vertical",
+      "nota": "Debe usar references/duena.png como start_image."
+    },
+    {
+      "n": 5,
+      "duracion": 4,
+      "origen": "generado",
+      "voz": "Y alguien que te llama a los tres días.",
+      "visual": "Teléfono fijo de oficina sonando. Nadie lo coge. La silla al lado está vacía.",
+      "tipo_plano": "detalle",
+      "camara": "fija",
+      "iluminacion": "luz de tarde, más apagada",
+      "referencia_id": "oficina",
+      "prompt_kling": "A desk phone ringing in an empty small office, nobody answers, empty chair beside it, late afternoon light, cinematic documentary style, static handheld, muted colour grade, shallow depth of field, 9:16 vertical",
+      "nota": "Este plano hace el chiste sin decirlo. Es el que más gana con imagen generada."
+    },
+    {
+      "n": 6,
+      "duracion": 5,
+      "origen": "rodado",
+      "voz": "Ahora el anuncio puede llevarte a una conversación. Sin página y sin cuatro campos.",
+      "visual": "Maikel a cámara. Rótulo: ANUNCIO → CONVERSACIÓN.",
+      "tipo_plano": "medio",
+      "camara": "fija",
+      "iluminacion": "natural",
+      "referencia_id": null,
+      "prompt_kling": null,
+      "nota": "Rótulo generado con Chromium, no con Kling."
+    },
+    {
+      "n": 7,
+      "duracion": 5,
+      "origen": "rodado",
+      "voz": "Alguien busca una asesoría para las nóminas de treinta personas. Lo cuenta, y sale con tres nombres.",
+      "visual": "Maikel a cámara. Rótulo con la frase entre comillas.",
+      "tipo_plano": "primer plano",
+      "camara": "fija",
+      "iluminacion": "natural",
+      "referencia_id": null,
+      "prompt_kling": null,
+      "nota": "El ejemplo tiene que salir de su boca. Generado pierde credibilidad."
+    },
+    {
+      "n": 8,
+      "duracion": 4,
+      "origen": "rodado",
+      "voz": "El que gana no es el que tenga la web más bonita. Es el que haya dejado claro para quién trabaja.",
+      "visual": "Maikel a cámara. Tarjeta de cierre con maikelechevarria.com.",
+      "tipo_plano": "medio",
+      "camara": "fija",
+      "iluminacion": "natural",
+      "referencia_id": null,
+      "prompt_kling": null,
+      "nota": "Sin llamada a la acción dura. Cierra en idea."
+    }
+  ],
+
+  "coste_estimado": {
+    "planos_generados": 3,
+    "creditos_higgsfield": 30,
+    "imagenes_referencia": 2,
+    "nota": "3 planos generados de 8. Los 5 con su cara se ruedan de una vez, en la misma sesión que los otros guiones de la semana."
+  },
+
+  "riesgos": [
+    "El plano 4 necesita que la imagen de referencia de la dueña sea buena. Si no, se cae y se sustituye por un plano de las manos, que es más fácil de acertar.",
+    "Kling sale a 24 fps y el material rodado a 30. Hay que igualar antes de concatenar.",
+    "El vídeo mezcla planos rodados y generados: si el color no se iguala, se nota el pegote. Aplicar la misma corrección a los dos."
+  ]
+}
