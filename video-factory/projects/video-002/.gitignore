@@ -1,0 +1,3 @@
+# Los MP4 generados se pueden volver a producir desde storyboard.json con los
+# job_id registrados. No engordamos el repo con ellos.
+output/*.mp4

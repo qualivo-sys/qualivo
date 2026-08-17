@@ -1,0 +1,58 @@
+{
+  "proyecto": "video-002",
+  "idea": "La IA no va a sustituir al marketer. Va a sustituir al marketer que no sabe usar agentes.",
+  "tipo": "demo comercial",
+  "formato": "9:16",
+  "entrega": "1080x1920",
+  "duracion_objetivo": 28,
+  "estado": "en_produccion",
+
+  "referencias": {
+    "protagonista": {
+      "archivo": "references/protagonista.jpg",
+      "job_id": "1f53fdfd-1aec-4b33-a5e8-a153add0340d",
+      "modelo": "soul_2",
+      "descripcion": "Hombre español de 33 años, pelo corto oscuro, barba de dos días, camiseta gris lisa. Pasillo de oficina diáfana con ventanales.",
+      "nota": "Se pasa como start_image en TODOS los planos. Es lo que mantiene la misma cara."
+    },
+    "estilo": {
+      "prompt_base": "live action documentary cinematography, 35mm, shallow depth of field, natural skin texture, soft overcast daylight, muted realistic colour grade, very subtle handheld float",
+      "prohibido": "CGI, 3D look, artificial faces, exaggerated motion, futuristic UI, neon, holograms, generated text or logos"
+    }
+  },
+
+  "planos": [
+    {
+      "n": 1,
+      "duracion": 5,
+      "estado": "generado_pendiente_de_aprobar",
+      "job_id": "5bfc20c6-3f09-4caf-b498-dfbc14977a4b",
+      "voz": "La IA no va a sustituir a los marketers.",
+      "visual": "Camina hacia cámara sosteniendo la mirada. Boca cerrada. La cámara retrocede al mismo ritmo.",
+      "prompt_kling": "The man walks slowly forward down the office corridor, holding eye contact with the lens. His mouth stays closed, calm and steady expression, no talking. The camera retreats backwards at the same pace, keeping him in medium shot. Very subtle handheld float, soft overcast daylight from the windows, live action documentary cinematography, 35mm, shallow depth of field, natural skin texture, muted realistic colour grade. No CGI, no 3D look, no exaggerated motion.",
+      "revision": "Cara consistente con la referencia. Piel y ojos correctos, sin deformaciones. Boca cerrada como se dirigió. PERO apenas camina: el cuerpo está casi quieto y no hay balanceo de brazos. La expresión sale más inexpresiva que neutral. Sale a 720x1280."
+    },
+    { "n": 2, "duracion": 6, "estado": "pendiente",
+      "voz": "Pero sí puede sustituir a quien sigue haciendo todo esto a mano.",
+      "visual": "Sentado ante el ordenador con varias campañas y documentos abiertos. Actividad real, no frenética de anuncio." },
+    { "n": 3, "duracion": 8, "estado": "pendiente",
+      "voz": "Porque mientras tú haces una tarea detrás de otra, un agente puede hacer diez en paralelo.",
+      "visual": "Sentado mientras varios procesos corren en paralelo en la pantalla. Software real, sin interfaz futurista. Push-in lento." },
+    { "n": 4, "duracion": 7, "estado": "pendiente",
+      "voz": "La ventaja ya no es trabajar más rápido. Es construir sistemas que trabajen por ti.",
+      "visual": "Vuelve a caminar por la oficina mirando a cámara. Al final sigue caminando y la cámara se queda atrás." }
+  ],
+
+  "postproduccion": {
+    "pendiente": ["voz superpuesta", "subtitulos", "musica de fondo", "subida a 1080x1920"],
+    "musica": "Higgsfield NO genera musica (solo voz). La pista tiene que venir de fuera.",
+    "motor": "El montaje usa el mismo motor de la prueba del 17-ago: subtitulos con libass y fuente Montserrat 900 estatica, rotulos como PNG de Chromium porque este ffmpeg no tiene drawtext."
+  },
+
+  "coste": {
+    "gastado_creditos": 52,
+    "detalle": "10 prueba Barcelona + 2 imagen oficina + 30 tres planos video-001 + imagen protagonista + 10 shot_01",
+    "saldo_tras": 217.88,
+    "estimado_para_terminar": "unos 60-70 en total con los 3 planos que faltan, voz y subida de resolucion"
+  }
+}
