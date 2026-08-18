@@ -6,7 +6,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio, Video } from "@remotion/media";
+import { Video } from "@remotion/media";
 import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, kicker } from "../theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -26,7 +26,6 @@ export const Hook: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("v10-t1.mp3")} from={6} />
 
       {/* FASE A · pregunta sobre metraje real (portátil) */}
       {!faseSlam && (

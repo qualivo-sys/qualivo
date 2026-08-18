@@ -6,7 +6,6 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio } from "@remotion/media";
 import {
   CREAM,
   DISPLAY,
@@ -32,7 +31,6 @@ export const Remate: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("v10-t5.mp3")} from={8} />
 
       {/* FASE A · la timeline de este mismo vídeo */}
       <AbsoluteFill style={{ opacity: faseLogos ? 0 : 1 }}>

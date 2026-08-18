@@ -123,3 +123,23 @@ frases de relleno.
   Risers + booms en cada transición, sidechain al bombo y ducking bajo la voz.
 - Resultado: 49,9 s, 1080×1920, publicado en
   https://maikelechevarria.com/media/2026-08-18-manifiesto/manifiesto.mp4
+
+## Actualización 18-ago (4ª) — v10.1: música real y voz continua
+
+Feedback: «La música es horrible y la voz se corta».
+
+- **Voz**: el `from` que retrasaba cada toma NO existe en el `<Audio>` de
+  @remotion/media (se ignoraba en silencio). Se eliminó todo el audio de las
+  escenas Remotion: la locución va ahora en UNA pista maestra continua
+  (`vo-master`) montada con numpy a offsets exactos (0.30 / 6.30 / 13.50 /
+  22.90 / 37.40 s) con microfades de 15 ms — imposible que se corte. La toma
+  final se regeneró limpia (sin el empalme quirúrgico de la 3ª).
+- **Música**: fuera el sintetizador. Track real: **«Exhilarate» de Kevin
+  MacLeod (incompetech.com), licencia CC BY 4.0** — electrónica enérgica,
+  ventana 3.88–53.78 s (arranque alineado a un golpe), ducking bajo la voz y
+  fade final. ⚠️ Al publicar en redes hay que acreditar:
+  «Música: Exhilarate — Kevin MacLeod (incompetech.com), CC BY 4.0».
+  Alternativas descargadas y analizadas en caso de cambio: Cut and Run,
+  Getting it Done, Voxel Revolution (más oscura), etc.
+- Mezcla: voz +7 dB sobre la música + compresión sidechain; máster a
+  −14 dB de media, pico −0.1 dB.

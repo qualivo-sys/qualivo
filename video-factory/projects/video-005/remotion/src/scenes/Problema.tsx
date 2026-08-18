@@ -6,7 +6,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio, Video } from "@remotion/media";
+import { Video } from "@remotion/media";
 import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, kicker } from "../theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -23,7 +23,6 @@ export const Problema: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("v10-t2.mp3")} from={10} />
 
       <Video
         src={staticFile("teclado.mp4")}

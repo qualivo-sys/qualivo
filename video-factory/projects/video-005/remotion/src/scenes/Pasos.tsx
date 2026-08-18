@@ -3,10 +3,8 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
-  staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio } from "@remotion/media";
 import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, kicker } from "../theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -28,7 +26,6 @@ export const Pasos: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("v10-t4.mp3")} from={12} />
 
       {/* titular fijo */}
       <div

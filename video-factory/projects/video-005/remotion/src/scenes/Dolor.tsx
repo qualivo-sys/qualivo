@@ -6,7 +6,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio, Video } from "@remotion/media";
+import { Video } from "@remotion/media";
 import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, RED, kicker } from "../theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -22,7 +22,6 @@ export const Dolor: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("v10-t3.mp3")} from={10} />
 
       {/* FASE A · HORAS ENTERRADAS sobre metraje real (espaldas) */}
       {!faseFugas && (
