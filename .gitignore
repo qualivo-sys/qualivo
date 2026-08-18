@@ -13,3 +13,4 @@ node_modules/
 .vercel
 agenttome-site/.vercel
 maikelechevarria-site/.vercel
+.claude/settings.local.json
