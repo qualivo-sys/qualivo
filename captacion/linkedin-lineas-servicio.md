@@ -1,8 +1,8 @@
 # LinkedIn · Líneas de servicio (multicanal)
 
 Segundo canal para las mismas cuentas de las campañas de email "líneas de
-servicio" (Adelantta, PRL, Fincas) más olas 1-2. Preparado el 18-ago;
-arranca cuando Maikel reactive la cuenta de LinkedIn en HeyReach.
+servicio" (Adelantta, PRL, Fincas) más olas 1-2. Preparado y ARRANCADO el 18-ago: campaña HeyReach 557348, estado IN_PROGRESS,
+73 perfiles en cola, 18 invitaciones al día (~4 días de cobertura).
 
 ## Lo que ya está hecho
 
@@ -29,14 +29,14 @@ arranca cuando Maikel reactive la cuenta de LinkedIn en HeyReach.
 3. **Mensaje 2** a +4 días si no responde: "¿Lo viste? El análisis es gratis
    y por escrito. Si no toca, dime más adelante y no insisto."
 
-## El único paso pendiente (Maikel, 1 minuto)
+## Nota operativa
 
-La cuenta maikel.mef@gmail.com tiene la sesión de LinkedIn válida pero está
-DESACTIVADA en HeyReach (toggle en su panel de cuentas). Al reactivarla:
-- se crea la campaña con la lista 871142 y la secuencia de arriba
-- ritmo: 18 invitaciones/día (el límite actual de la cuenta), ~4 días para
-  cubrir los 73
-- la campaña Q-Flow antigua (pausada, 114 en curso) no se toca
+La cuenta estaba Available (el isActive=false de la API solo significaba
+sin campañas activas). La secuencia usa las variables {{nota}} y {{msg1}}
+de los campos personalizados, con mensajes de respaldo sin variables por
+si alguna no resuelve. Verificar en las primeras invitaciones de mañana
+que la nota personalizada renderiza bien (lo revisa el triaje diario).
+La campaña Q-Flow antigua (pausada) no se ha tocado.
 
 ## Por qué multicanal ahora
 
