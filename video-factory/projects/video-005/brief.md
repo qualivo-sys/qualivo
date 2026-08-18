@@ -82,3 +82,18 @@ Maikel decidió no salir ni grabar. Cambios sobre el plan original:
 - Resultado: `manifiesto-v005.mp4`, 77 s, 1080×1920. La música se añade
   nativa al publicar. Si Maikel algún día graba la locución (10 min, sin
   cámara), se integra sin rehacer el montaje.
+
+## Actualización 18-ago (2ª) — versión final CON voz y música
+
+- **Voz**: Qwen Audio TTS con instrucción de acento castellano peninsular
+  (verificado con heurística Whisper y aprobado por Maikel sobre muestra).
+  14 líneas, incluidos dos puentes nuevos y el remate hablado: «Este vídeo,
+  por cierto, lo ha narrado y montado un empleado digital».
+- **Música**: sintetizada con ffmpeg — tres acordes graves encadenados
+  (Am→F→C, filtrados a 650 Hz) + pulso suave a 61 Hz. Entra en «Por eso
+  creamos Qualivo» y se retira al final.
+- **Móvil arreglado**: el plano con texto ilegible en pantalla se sustituyó
+  por uno nuevo de Kling con el móvil boca abajo vibrando (10 creditos más;
+  60 en total).
+- Resultado: `manifiesto-v005-voz.mp4`, 80 s. Montaje reproducible en
+  `montar2.py` (scratchpad v005).
