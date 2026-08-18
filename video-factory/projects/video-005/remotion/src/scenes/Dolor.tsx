@@ -167,9 +167,9 @@ export const Dolor: React.FC = () => {
                 fontFamily: DISPLAY,
                 fontSize: 92,
                 color: CREAM,
-                opacity: interpolate(frame, [168, 176], [0, 1], { ...clamp }),
+                opacity: interpolate(frame, [195, 203], [0, 1], { ...clamp }),
                 scale: String(
-                  interpolate(frame, [168, 180], [1.8, 1], {
+                  interpolate(frame, [195, 207], [1.8, 1], {
                     ...clamp,
                     easing: Easing.bezier(0.2, 1, 0.3, 1),
                   }),
@@ -184,9 +184,9 @@ export const Dolor: React.FC = () => {
                 fontSize: 100,
                 color: ORANGE,
                 marginTop: 8,
-                opacity: interpolate(frame, [196, 204], [0, 1], { ...clamp }),
+                opacity: interpolate(frame, [222, 230], [0, 1], { ...clamp }),
                 scale: String(
-                  interpolate(frame, [196, 210], [2.2, 1], {
+                  interpolate(frame, [222, 236], [2.2, 1], {
                     ...clamp,
                     easing: Easing.bezier(0.2, 1, 0.3, 1),
                   }),
@@ -201,7 +201,7 @@ export const Dolor: React.FC = () => {
                 fontSize: 30,
                 color: MUT,
                 marginTop: 34,
-                opacity: interpolate(frame, [240, 252], [0, 1], { ...clamp }),
+                opacity: interpolate(frame, [258, 270], [0, 1], { ...clamp }),
               }}
             >
               TODAS LAS SEMANAS

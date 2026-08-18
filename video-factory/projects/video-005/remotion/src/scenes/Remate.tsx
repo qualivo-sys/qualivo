@@ -27,7 +27,7 @@ const PISTAS: Array<[string, string[], string]> = [
 
 export const Remate: React.FC = () => {
   const frame = useCurrentFrame();
-  const faseLogos = frame >= 78;
+  const faseLogos = frame >= 142;
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
@@ -130,7 +130,7 @@ export const Remate: React.FC = () => {
       <AbsoluteFill
         style={{
           opacity: faseLogos
-            ? interpolate(frame, [78, 88], [0, 1], { ...clamp })
+            ? interpolate(frame, [142, 152], [0, 1], { ...clamp })
             : 0,
           justifyContent: "center",
           alignItems: "center",
@@ -142,7 +142,7 @@ export const Remate: React.FC = () => {
             style={{
               width: 400,
               scale: String(
-                interpolate(frame, [80, 94], [0.6, 1], {
+                interpolate(frame, [144, 158], [0.6, 1], {
                   ...clamp,
                   easing: Easing.bezier(0.2, 1.3, 0.4, 1),
                 }),
@@ -156,7 +156,7 @@ export const Remate: React.FC = () => {
               fontSize: 26,
               color: ORANGE,
               marginTop: 18,
-              opacity: interpolate(frame, [98, 108], [0, 1], { ...clamp }),
+              opacity: interpolate(frame, [162, 172], [0, 1], { ...clamp }),
             }}
           >
             ENCUENTRA LA FUGA
@@ -167,7 +167,7 @@ export const Remate: React.FC = () => {
               width: 7,
               borderRadius: 4,
               background: `linear-gradient(${ORANGE}, ${GREEN})`,
-              height: interpolate(frame, [118, 134], [0, 90], {
+              height: interpolate(frame, [182, 198], [0, 90], {
                 ...clamp,
                 easing: Easing.bezier(0.2, 1, 0.3, 1),
               }),
@@ -179,7 +179,7 @@ export const Remate: React.FC = () => {
               alignItems: "center",
               justifyContent: "center",
               gap: 22,
-              opacity: interpolate(frame, [134, 146], [0, 1], { ...clamp }),
+              opacity: interpolate(frame, [198, 210], [0, 1], { ...clamp }),
             }}
           >
             <img
@@ -197,7 +197,7 @@ export const Remate: React.FC = () => {
               fontSize: 26,
               color: GREEN,
               marginTop: 18,
-              opacity: interpolate(frame, [156, 166], [0, 1], { ...clamp }),
+              opacity: interpolate(frame, [220, 230], [0, 1], { ...clamp }),
             }}
           >
             CONSTRUYE AL QUE LA TAPA
@@ -209,8 +209,8 @@ export const Remate: React.FC = () => {
               fontSize: 64,
               lineHeight: 1.14,
               color: CREAM,
-              opacity: interpolate(frame, [215, 228], [0, 1], { ...clamp }),
-              translate: `0px ${interpolate(frame, [215, 230], [40, 0], {
+              opacity: interpolate(frame, [272, 285], [0, 1], { ...clamp }),
+              translate: `0px ${interpolate(frame, [272, 287], [40, 0], {
                 ...clamp,
                 easing: Easing.bezier(0.16, 1, 0.3, 1),
               })}px`,
@@ -231,7 +231,7 @@ export const Remate: React.FC = () => {
               fontWeight: 700,
               fontSize: 30,
               color: MUT,
-              opacity: interpolate(frame, [300, 314], [0, 1], { ...clamp }),
+              opacity: interpolate(frame, [348, 362], [0, 1], { ...clamp }),
             }}
           >
             Maikel Echevarría · Building in public

@@ -164,3 +164,17 @@ pasar ejemplos cortos antes de montar el vídeo entero.
 - **Flujo de trabajo**: preview corto por chat (SendUserFile) ANTES del
   montaje completo.
 - Publicado (49.9 s, mismo URL).
+
+## Actualización 18-ago (6ª) — v12: narración hilada y música definitiva
+
+- **Voz con hilo conductor**: tomas 2-5 regrabadas con conectores («Porque
+  tu equipo…», «Eso son horas…», «¿La salida?…», «Por cierto…») e
+  instrucción de narración continua. Las pausas internas >0,75 s del TTS se
+  comprimen automáticamente a 0,45 s (corte solo de silencio, con fundidos).
+  Anclajes re-sincronizados por palabra (Whisper) — cortes de plano, sellos
+  y fases de escena ajustados a la voz nueva.
+- **Música**: «Endless Motion» de Bensound — electrónica corporativa de
+  pulso constante, moderna. Crédito en caption: «Música: Endless Motion —
+  Bensound.com». (Buddy descartada por Maikel.)
+- Máster único de voz (`vo-master`), mezcla con ducking, salida web-safe
+  (yuv420p bt709 + faststart). 49,9 s. Publicado.

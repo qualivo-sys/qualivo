@@ -28,7 +28,12 @@ const CUES: Cue[] = [
     t0: 0.22,
     t1: 1.45,
     lines: [
-      { text: "Tu equipo se pasa el día…", font: FONT, weight: 800, size: 58 },
+      {
+        text: "Porque tu equipo se pasa el día…",
+        font: FONT,
+        weight: 800,
+        size: 56,
+      },
     ],
   },
   { t0: 1.47, t1: 2.4, lines: [{ text: "COPIANDO DATOS", size: 96 }] },
