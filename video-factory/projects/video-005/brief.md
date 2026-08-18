@@ -192,3 +192,11 @@ pasar ejemplos cortos antes de montar el vídeo entero.
 - Cronología del feedback de música para referencia: sintetizada (aburrida)
   → Exhilarate (años 80) → Voxel Revolution (rockera) → Buddy (horrible) →
   Endless Motion («mejor, pero bajaría un poco el volumen»).
+
+## Actualización 18-ago (8ª) — v14: música definitiva elegida por Maikel
+
+- Maikel escuchó 10 muestras por chat (2 tandas: 5 animadas + 5 lofi/chill)
+  y eligió la opción 6: **«Hip Jazz» de Bensound** (lofi-jazz con beat).
+- Mezclada MUY al fondo por petición expresa («que no se escuche fuerte,
+  solo que acompañe»): volume 0.11 (rms del track 0.457 → ~0.05 en mezcla)
+  + ducking bajo la voz. Crédito caption: «Música: Hip Jazz — Bensound.com».
