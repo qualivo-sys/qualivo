@@ -56,6 +56,25 @@ Emails 2 (+3d) y 3 (+6d) son genéricos, mismo hilo, sin asunto propio
 (continúan la conversación): recuerdan el dato de fuga y cierran pidiendo el
 mismo "sí" para el análisis.
 
+## Ola 3 (18-ago)
+
+36 cuentas nuevas cargadas del pool de 559, mismas reglas: un decisor con
+nombre por empresa, email verificado, líneas de servicio verificadas en la
+web de cada una (dos agentes visitaron las 41 candidatas), dedupe contra
+supresión. El embudo de calidad: 250 candidatos revisados → 60 enriquecidos
+(60 créditos) → 50 tras supresión → 41 tras filtro de encaje → 36 tras
+verificación web. Cayeron por el camino: 10 ya contactadas por Qualivo,
+agencias de marketing y software (competidores o fuera de ICP), 3 con email
+de dominio distinto al de su empresa, 1 dominio reutilizado por spam de
+casinos (Oxygen), 1 web en mantenimiento sin confirmar (La Firma), 1
+rebranding total (Asic), y 2 sin líneas de servicio diferenciadas reales.
+
+Destacan por encaje: Bové Montero (asesoría multi-área, 160 emp), Glezco,
+Grupo HOB, Grup Carles, Empatif (ETT+PRL+formación, 140 emp), TempJob,
+Access Talento, New Tandem (ETT+consultoría), Lider System, Moebius
+(consultoría comercial) y Humannova. Con las 3 olas, la campaña queda con
+**57 cuentas** en total.
+
 ## Cuando respondan
 
 El mini-diagnóstico (`mini-diagnostico-lineas-servicio.md`) se personaliza en
