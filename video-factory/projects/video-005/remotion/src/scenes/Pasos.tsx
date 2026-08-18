@@ -7,43 +7,42 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { Audio } from "@remotion/media";
-import { CREAM, FONT, INK, MUT, ORANGE } from "../theme";
+import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, kicker } from "../theme";
+
+const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 const NODOS: Array<[string, number, number, boolean]> = [
-  ["Captación", 250, 700, false],
-  ["Ventas", 760, 640, true],
-  ["Operaciones", 220, 900, false],
-  ["Personas", 780, 860, false],
-  ["Procesos", 330, 1090, true],
-  ["Dinero", 730, 1070, false],
+  ["Captación", 250, 760, false],
+  ["Ventas", 760, 700, true],
+  ["Operaciones", 220, 960, false],
+  ["Personas", 780, 920, false],
+  ["Procesos", 330, 1150, true],
+  ["Dinero", 730, 1130, false],
 ];
 
 const CADENA = ["FUGA", "PUESTO", "EMPLEADO DIGITAL"];
 
 export const Pasos: React.FC = () => {
   const frame = useCurrentFrame();
-  const fase2 = frame >= 300; // segunda mitad: convertir la fuga en un puesto
+  const fase2 = frame >= 224;
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("r-pasos.mp3")} from={6} />
+      <Audio src={staticFile("v10-t4.mp3")} from={12} />
 
-      {/* LA SALIDA NO ES OTRA HERRAMIENTA (tachado animado) */}
+      {/* titular fijo */}
       <div
         style={{
           position: "absolute",
           left: 80,
           right: 80,
           top: 210,
-          fontWeight: 900,
-          fontSize: 74,
-          lineHeight: 1.08,
+          fontWeight: 800,
+          fontSize: 62,
+          lineHeight: 1.14,
           letterSpacing: "-0.02em",
           color: CREAM,
-          opacity: interpolate(frame, [6, 18], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          }),
+          opacity: interpolate(frame, [8, 20], [0, 1], { ...clamp }),
         }}
       >
         La salida no es{" "}
@@ -54,12 +53,11 @@ export const Pasos: React.FC = () => {
               position: "absolute",
               left: 0,
               top: "54%",
-              height: 10,
+              height: 9,
               background: ORANGE,
               borderRadius: 5,
-              width: `${interpolate(frame, [40, 58], [0, 100], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              width: `${interpolate(frame, [42, 58], [0, 100], {
+                ...clamp,
                 easing: Easing.bezier(0.2, 1, 0.3, 1),
               })}%`,
             }}
@@ -71,19 +69,14 @@ export const Pasos: React.FC = () => {
         style={{
           position: "absolute",
           left: 80,
-          top: 400,
-          fontWeight: 900,
-          fontSize: 96,
+          top: 380,
+          fontFamily: DISPLAY,
+          fontSize: 118,
           color: ORANGE,
-          letterSpacing: "-0.03em",
-          opacity: interpolate(frame, [62, 74], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          }),
+          opacity: interpolate(frame, [66, 74], [0, 1], { ...clamp }),
           scale: String(
-            interpolate(frame, [62, 76], [0.5, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
+            interpolate(frame, [66, 80], [0.4, 1], {
+              ...clamp,
               easing: Easing.bezier(0.2, 1.35, 0.4, 1),
             }),
           ),
@@ -92,21 +85,16 @@ export const Pasos: React.FC = () => {
         SON DOS PASOS.
       </div>
 
-      {/* PASO 1 · el capó */}
+      {/* PASO 1 · levantar el capó */}
       <AbsoluteFill style={{ opacity: fase2 ? 0 : 1 }}>
         <div
           style={{
             position: "absolute",
             left: 80,
-            top: 570,
-            fontWeight: 700,
-            fontSize: 34,
-            letterSpacing: "0.14em",
+            top: 620,
+            ...kicker,
             color: MUT,
-            opacity: interpolate(frame, [96, 108], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
+            opacity: interpolate(frame, [94, 106], [0, 1], { ...clamp }),
           }}
         >
           1 · LEVANTAR EL CAPÓ
@@ -130,15 +118,9 @@ export const Pasos: React.FC = () => {
                   stroke="rgba(242,238,230,0.2)"
                   strokeWidth={3}
                   strokeDasharray={d}
-                  strokeDashoffset={interpolate(
-                    frame,
-                    [120, 160],
-                    [d, 0],
-                    {
-                      extrapolateLeft: "clamp",
-                      extrapolateRight: "clamp",
-                    },
-                  )}
+                  strokeDashoffset={interpolate(frame, [112, 150], [d, 0], {
+                    ...clamp,
+                  })}
                 />
               );
             }),
@@ -151,29 +133,28 @@ export const Pasos: React.FC = () => {
               position: "absolute",
               left: x,
               top: y,
-              padding: "18px 28px",
-              borderRadius: 16,
+              padding: "16px 26px",
+              borderRadius: 14,
               background: "#141418",
-              border: `4px solid ${
-                rojo && frame > 190 ? ORANGE : "rgba(242,238,230,0.25)"
+              border: `3px solid ${
+                rojo && frame > 168 ? ORANGE : "rgba(242,238,230,0.22)"
               }`,
-              color: rojo && frame > 190 ? ORANGE : CREAM,
-              fontWeight: 800,
-              fontSize: 36,
-              opacity: interpolate(frame, [108 + i * 8, 118 + i * 8], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              color: rojo && frame > 168 ? ORANGE : CREAM,
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 700,
+              fontSize: 34,
+              opacity: interpolate(frame, [100 + i * 7, 110 + i * 7], [0, 1], {
+                ...clamp,
               }),
               scale: String(
-                interpolate(frame, [108 + i * 8, 122 + i * 8], [0.5, 1], {
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
+                interpolate(frame, [100 + i * 7, 114 + i * 7], [0.5, 1], {
+                  ...clamp,
                   easing: Easing.bezier(0.2, 1.35, 0.4, 1),
                 }),
               ),
               boxShadow:
-                rojo && frame > 190
-                  ? `0 0 ${28 + 14 * Math.sin(frame / 5)}px rgba(232,89,12,0.5)`
+                rojo && frame > 168
+                  ? `0 0 ${26 + 12 * Math.sin(frame / 5)}px rgba(232,89,12,0.5)`
                   : "none",
             }}
           >
@@ -185,15 +166,12 @@ export const Pasos: React.FC = () => {
             position: "absolute",
             left: 80,
             right: 80,
-            top: 1260,
+            top: 1330,
             fontWeight: 800,
-            fontSize: 44,
+            fontSize: 46,
             lineHeight: 1.3,
             color: CREAM,
-            opacity: interpolate(frame, [205, 220], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
+            opacity: interpolate(frame, [175, 190], [0, 1], { ...clamp }),
           }}
         >
           Dónde se pierde <span style={{ color: ORANGE }}>el tiempo</span>.
@@ -208,17 +186,15 @@ export const Pasos: React.FC = () => {
           style={{
             position: "absolute",
             left: 80,
-            top: 570,
-            fontWeight: 700,
-            fontSize: 34,
-            letterSpacing: "0.14em",
+            top: 620,
+            ...kicker,
             color: MUT,
           }}
         >
-          2 · CONVERTIR CADA FUGA EN UN PUESTO
+          2 · CADA FUGA, UN PUESTO
         </div>
         {CADENA.map((txt, i) => {
-          const f0 = 316 + i * 34;
+          const f0 = 238 + i * 30;
           const esUltimo = i === CADENA.length - 1;
           return (
             <React.Fragment key={txt}>
@@ -227,16 +203,14 @@ export const Pasos: React.FC = () => {
                   position: "absolute",
                   left: 0,
                   right: 0,
-                  top: 700 + i * 240,
+                  top: 730 + i * 230,
                   textAlign: "center",
-                  opacity: interpolate(frame, [f0, f0 + 10], [0, 1], {
-                    extrapolateLeft: "clamp",
-                    extrapolateRight: "clamp",
+                  opacity: interpolate(frame, [f0, f0 + 8], [0, 1], {
+                    ...clamp,
                   }),
                   scale: String(
-                    interpolate(frame, [f0, f0 + 14], [0.4, 1], {
-                      extrapolateLeft: "clamp",
-                      extrapolateRight: "clamp",
+                    interpolate(frame, [f0, f0 + 13], [0.4, 1], {
+                      ...clamp,
                       easing: Easing.bezier(0.2, 1.35, 0.4, 1),
                     }),
                   ),
@@ -245,16 +219,16 @@ export const Pasos: React.FC = () => {
                 <span
                   style={{
                     display: "inline-block",
-                    fontWeight: 900,
-                    fontSize: esUltimo ? 62 : 50,
-                    letterSpacing: "0.04em",
-                    padding: "26px 44px",
-                    borderRadius: 18,
+                    fontFamily: DISPLAY,
+                    fontSize: esUltimo ? 74 : 60,
+                    letterSpacing: "0.03em",
+                    padding: "24px 46px",
+                    borderRadius: 16,
                     background: esUltimo ? ORANGE : "#141418",
                     color: esUltimo ? INK : CREAM,
                     border: esUltimo
                       ? "none"
-                      : "4px solid rgba(242,238,230,0.3)",
+                      : "3px solid rgba(242,238,230,0.28)",
                   }}
                 >
                   {txt}
@@ -266,19 +240,13 @@ export const Pasos: React.FC = () => {
                     position: "absolute",
                     left: 0,
                     right: 0,
-                    top: 830 + i * 240,
+                    top: 858 + i * 230,
                     textAlign: "center",
-                    fontSize: 64,
+                    fontSize: 60,
                     color: MUT,
-                    opacity: interpolate(
-                      frame,
-                      [f0 + 20, f0 + 28],
-                      [0, 1],
-                      {
-                        extrapolateLeft: "clamp",
-                        extrapolateRight: "clamp",
-                      },
-                    ),
+                    opacity: interpolate(frame, [f0 + 16, f0 + 24], [0, 1], {
+                      ...clamp,
+                    }),
                   }}
                 >
                   ↓
@@ -297,10 +265,7 @@ export const Pasos: React.FC = () => {
             fontWeight: 800,
             fontSize: 44,
             color: MUT,
-            opacity: interpolate(frame, [452, 468], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
+            opacity: interpolate(frame, [356, 372], [0, 1], { ...clamp }),
           }}
         >
           Cada uno con su{" "}

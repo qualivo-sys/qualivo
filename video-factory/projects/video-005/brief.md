@@ -97,3 +97,29 @@ Maikel decidió no salir ni grabar. Cambios sobre el plan original:
   60 en total).
 - Resultado: `manifiesto-v005-voz.mp4`, 80 s. Montaje reproducible en
   `montar2.py` (scratchpad v005).
+
+## Actualización 18-ago (3ª) — v10: mezcla real + motion, Remotion
+
+Feedback de Maikel sobre la v9 (solo motion): «hay que hacer un mix entre
+ambas cosas», tipografía «cutre», música aburrida, voz con poco ritmo y
+frases de relleno.
+
+- **Mezcla real + motion**: el proyecto Remotion (`remotion/`) intercala
+  metraje Kling (portátil, espaldas, móvil) y grabaciones reales de pantalla
+  (WhatsApp, CRM, hojas, correo, buscador) como tarjetas dentro de las
+  escenas cinéticas. Pasos y Remate quedan como bloques 100 % motion.
+- **Tipografía nueva**: Anton (display condensada, golpes en mayúsculas) +
+  Space Grotesk (etiquetas con tracking) + Montserrat de apoyo. OJO: este
+  Chromium headless no aplica webfonts → las fuentes van instaladas a nivel
+  de sistema (`/usr/local/share/fonts/v10/` + `fc-cache`); `loadFont()` de
+  @remotion/fonts NO basta en este entorno.
+- **Voz v10**: guion condensado (se elimina «¿el resultado?… y mientras
+  tanto el negocio…»), 5 tomas Qwen a speech_rate 1.2 con instrucción de
+  ritmo de anuncio; ~41 s de locución sin huecos. Una pausa residual se
+  recortó con ffmpeg (atrim+concat). Cada toma verificada con Whisper.
+- **Música v10**: `music10.py` — 122 BPM, four-on-floor con hats en
+  contratiempo, bajo sincopado Am-F-C-G, riff de gancho de 2 compases,
+  fills, corte seco de 1 compás al entrar «Son dos pasos» y pico final.
+  Risers + booms en cada transición, sidechain al bombo y ducking bajo la voz.
+- Resultado: 49,9 s, 1080×1920, publicado en
+  https://maikelechevarria.com/media/2026-08-18-manifiesto/manifiesto.mp4

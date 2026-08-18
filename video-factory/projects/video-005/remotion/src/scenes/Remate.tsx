@@ -7,46 +7,61 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { Audio } from "@remotion/media";
-import { CREAM, FONT, INK, MUT, ORANGE } from "../theme";
+import {
+  CREAM,
+  DISPLAY,
+  FONT,
+  GREEN,
+  INK,
+  MUT,
+  ORANGE,
+  kicker,
+} from "../theme";
+
+const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 const PISTAS: Array<[string, string[], string]> = [
   ["VÍDEO", ["hook", "problema", "dolor", "pasos"], ORANGE],
   ["VOZ", ["narración"], "#5B8DEF"],
-  ["MÚSICA", ["beat 104"], "#B48EE0"],
+  ["MÚSICA", ["beat 122"], "#B48EE0"],
 ];
 
 export const Remate: React.FC = () => {
   const frame = useCurrentFrame();
-  const faseLogos = frame >= 150;
+  const faseLogos = frame >= 78;
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("t5-remate.mp3")} from={10} />
+      <Audio src={staticFile("v10-t5.mp3")} from={8} />
 
-      {/* la timeline del propio vídeo */}
+      {/* FASE A · la timeline de este mismo vídeo */}
       <AbsoluteFill style={{ opacity: faseLogos ? 0 : 1 }}>
         <div
           style={{
             position: "absolute",
             left: 80,
-            top: 420,
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 30,
-            letterSpacing: "0.12em",
+            top: 380,
+            ...kicker,
             color: MUT,
+            opacity: interpolate(frame, [4, 12], [0, 1], { ...clamp }),
           }}
         >
-          MONTAJE · este-video.mp4
+          MONTAJE · ESTE-VIDEO.MP4
         </div>
         {PISTAS.map(([et, clips, col], pi) => (
           <div
             key={et}
-            style={{ position: "absolute", left: 80, right: 80, top: 520 + pi * 170 }}
+            style={{
+              position: "absolute",
+              left: 80,
+              right: 80,
+              top: 470 + pi * 160,
+            }}
           >
             <div
               style={{
-                fontFamily: "ui-monospace, monospace",
-                fontSize: 24,
+                ...kicker,
+                fontSize: 22,
                 color: "rgba(242,238,230,0.45)",
                 marginBottom: 12,
               }}
@@ -61,23 +76,23 @@ export const Remate: React.FC = () => {
                     background: col,
                     color: INK,
                     borderRadius: 10,
-                    padding: "20px 30px",
-                    fontWeight: 800,
-                    fontSize: 30,
+                    padding: "18px 28px",
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontWeight: 700,
+                    fontSize: 28,
                     opacity: interpolate(
                       frame,
-                      [10 + (pi * 4 + ci) * 9, 20 + (pi * 4 + ci) * 9],
+                      [6 + (pi * 4 + ci) * 6, 14 + (pi * 4 + ci) * 6],
                       [0, 1],
-                      { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+                      { ...clamp },
                     ),
                     scale: String(
                       interpolate(
                         frame,
-                        [10 + (pi * 4 + ci) * 9, 24 + (pi * 4 + ci) * 9],
+                        [6 + (pi * 4 + ci) * 6, 18 + (pi * 4 + ci) * 6],
                         [0.6, 1],
                         {
-                          extrapolateLeft: "clamp",
-                          extrapolateRight: "clamp",
+                          ...clamp,
                           easing: Easing.bezier(0.2, 1.35, 0.4, 1),
                         },
                       ),
@@ -95,16 +110,17 @@ export const Remate: React.FC = () => {
             position: "absolute",
             left: 80,
             right: 80,
-            top: 1120,
-            fontWeight: 900,
-            fontSize: 64,
-            lineHeight: 1.15,
+            top: 1080,
+            fontWeight: 800,
+            fontSize: 66,
+            lineHeight: 1.16,
             letterSpacing: "-0.02em",
             color: CREAM,
-            opacity: interpolate(frame, [55, 70], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
+            opacity: interpolate(frame, [26, 40], [0, 1], { ...clamp }),
+            translate: `0px ${interpolate(frame, [26, 42], [40, 0], {
+              ...clamp,
+              easing: Easing.bezier(0.16, 1, 0.3, 1),
+            })}px`,
           }}
         >
           Este vídeo lo ha narrado y montado{" "}
@@ -112,14 +128,11 @@ export const Remate: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      {/* logos + tesis */}
+      {/* FASE B · logos + tesis */}
       <AbsoluteFill
         style={{
           opacity: faseLogos
-            ? interpolate(frame, [150, 162], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              })
+            ? interpolate(frame, [78, 88], [0, 1], { ...clamp })
             : 0,
           justifyContent: "center",
           alignItems: "center",
@@ -128,18 +141,36 @@ export const Remate: React.FC = () => {
         <div style={{ textAlign: "center" }}>
           <img
             src={staticFile("qualivo.png")}
-            style={{ width: 380 }}
+            style={{
+              width: 400,
+              scale: String(
+                interpolate(frame, [80, 94], [0.6, 1], {
+                  ...clamp,
+                  easing: Easing.bezier(0.2, 1.3, 0.4, 1),
+                }),
+              ),
+            }}
             alt="Qualivo"
           />
           <div
             style={{
-              margin: "26px auto",
-              width: 8,
+              ...kicker,
+              fontSize: 26,
+              color: ORANGE,
+              marginTop: 18,
+              opacity: interpolate(frame, [98, 108], [0, 1], { ...clamp }),
+            }}
+          >
+            ENCUENTRA LA FUGA
+          </div>
+          <div
+            style={{
+              margin: "24px auto",
+              width: 7,
               borderRadius: 4,
-              background: `linear-gradient(${ORANGE}, #0FA968)`,
-              height: interpolate(frame, [168, 186], [0, 110], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              background: `linear-gradient(${ORANGE}, ${GREEN})`,
+              height: interpolate(frame, [118, 134], [0, 90], {
+                ...clamp,
                 easing: Easing.bezier(0.2, 1, 0.3, 1),
               }),
             }}
@@ -150,62 +181,59 @@ export const Remate: React.FC = () => {
               alignItems: "center",
               justifyContent: "center",
               gap: 22,
-              opacity: interpolate(frame, [184, 196], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              }),
+              opacity: interpolate(frame, [134, 146], [0, 1], { ...clamp }),
             }}
           >
             <img
               src={staticFile("afm.svg")}
-              style={{ width: 96, borderRadius: 22 }}
+              style={{ width: 92, borderRadius: 20 }}
               alt="Agent for Me"
             />
-            <span
-              style={{
-                fontWeight: 900,
-                fontSize: 58,
-                color: CREAM,
-              }}
-            >
-              Agent <span style={{ color: "#0FA968" }}>for</span> Me
+            <span style={{ fontWeight: 900, fontSize: 56, color: CREAM }}>
+              Agent <span style={{ color: GREEN }}>for</span> Me
             </span>
           </div>
           <div
             style={{
-              marginTop: 70,
-              fontWeight: 900,
-              fontSize: 58,
-              lineHeight: 1.2,
-              letterSpacing: "-0.02em",
+              ...kicker,
+              fontSize: 26,
+              color: GREEN,
+              marginTop: 18,
+              opacity: interpolate(frame, [156, 166], [0, 1], { ...clamp }),
+            }}
+          >
+            CONSTRUYE AL QUE LA TAPA
+          </div>
+          <div
+            style={{
+              marginTop: 80,
+              fontFamily: DISPLAY,
+              fontSize: 64,
+              lineHeight: 1.14,
               color: CREAM,
-              opacity: interpolate(frame, [200, 214], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              }),
-              translate: `0px ${interpolate(frame, [200, 216], [40, 0], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              opacity: interpolate(frame, [215, 228], [0, 1], { ...clamp }),
+              translate: `0px ${interpolate(frame, [215, 230], [40, 0], {
+                ...clamp,
                 easing: Easing.bezier(0.16, 1, 0.3, 1),
               })}px`,
             }}
           >
-            PRIMERO ENTIENDES EL NEGOCIO.
+            PRIMERO ENTIENDES
             <br />
-            <span style={{ color: ORANGE }}>
-              DESPUÉS DECIDES QUÉ CONSTRUIR.
-            </span>
+            EL NEGOCIO.
+            <div style={{ color: ORANGE, marginTop: 10 }}>
+              DESPUÉS DECIDES
+              <br />
+              QUÉ CONSTRUIR.
+            </div>
           </div>
           <div
             style={{
-              marginTop: 44,
+              marginTop: 46,
               fontWeight: 700,
               fontSize: 30,
               color: MUT,
-              opacity: interpolate(frame, [214, 226], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              }),
+              opacity: interpolate(frame, [300, 314], [0, 1], { ...clamp }),
             }}
           >
             Maikel Echevarría · Building in public

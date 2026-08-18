@@ -6,193 +6,210 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Audio } from "@remotion/media";
-import { CREAM, FONT, INK, MUT, ORANGE, RED } from "../theme";
+import { Audio, Video } from "@remotion/media";
+import { CREAM, DISPLAY, FONT, INK, MUT, ORANGE, RED, kicker } from "../theme";
+
+const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 const FUGAS: Array<[string, string, number]> = [
-  ["Contactos sin responder", "SE ENFRÍAN", 118],
-  ["Presupuestos sin seguimiento", "SE PIERDEN", 148],
-  ["Oportunidades en el CRM", "SE MUEREN", 178],
+  ["CONTACTOS SIN RESPONDER", "SE ENFRÍAN", 66],
+  ["PRESUPUESTOS SIN SEGUIMIENTO", "SE PIERDEN", 114],
 ];
 
 export const Dolor: React.FC = () => {
   const frame = useCurrentFrame();
-  const flip = interpolate(frame, [248, 262], [0, 180], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.2, 1, 0.3, 1),
-  });
+  const faseFugas = frame >= 62;
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-      <Audio src={staticFile("r-dolor.mp3")} from={6} />
+      <Audio src={staticFile("v10-t3.mp3")} from={10} />
 
-      {/* HORAS ENTERRADAS */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 260,
-          textAlign: "center",
-          fontWeight: 900,
-          fontSize: 118,
-          lineHeight: 1.02,
-          letterSpacing: "-0.03em",
-          color: CREAM,
-          rotate: `${interpolate(frame, [16, 30], [-8, -2], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          })}deg`,
-          scale: String(
-            interpolate(frame, [16, 30], [2.4, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-              easing: Easing.bezier(0.2, 1, 0.3, 1),
-            }),
-          ),
-          opacity: interpolate(frame, [16, 24], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          }),
-        }}
-      >
-        HORAS
-        <div style={{ color: ORANGE }}>ENTERRADAS</div>
-        <div style={{ fontSize: 40, color: MUT, fontWeight: 700 }}>
-          en tareas repetitivas
-        </div>
-      </div>
-
-      {/* y el negocio que se escapa */}
-      <div
-        style={{
-          position: "absolute",
-          left: 80,
-          top: 720,
-          fontWeight: 700,
-          fontSize: 34,
-          letterSpacing: "0.14em",
-          color: MUT,
-          opacity: interpolate(frame, [100, 112], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          }),
-        }}
-      >
-        Y MIENTRAS TANTO, EL NEGOCIO…
-      </div>
-
-      {FUGAS.map(([txt, sello, f0], i) => (
-        <div
-          key={txt}
-          style={{
-            position: "absolute",
-            left: 70,
-            right: 70,
-            top: 800 + i * 190,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 20,
-            padding: "34px 38px",
-            borderRadius: 20,
-            background: "#141418",
-            border: "3px solid rgba(242,238,230,0.14)",
-            opacity: interpolate(frame, [f0, f0 + 10], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
-            translate: `0px ${interpolate(frame, [f0, f0 + 12], [90, 0], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-              easing: Easing.bezier(0.2, 1.35, 0.4, 1),
-            })}px`,
-          }}
-        >
-          <span style={{ fontWeight: 800, fontSize: 44, color: CREAM }}>
-            {txt}
-          </span>
-          <span
+      {/* FASE A · HORAS ENTERRADAS sobre metraje real (espaldas) */}
+      {!faseFugas && (
+        <AbsoluteFill>
+          <Video
+            src={staticFile("k2.mp4")}
+            playbackRate={0.85}
             style={{
-              fontWeight: 900,
-              fontSize: 30,
-              letterSpacing: "0.1em",
-              color: RED,
-              border: `4px solid ${RED}`,
-              borderRadius: 12,
-              padding: "10px 16px",
-              rotate: "-4deg",
-              whiteSpace: "nowrap",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
               scale: String(
-                interpolate(frame, [f0 + 10, f0 + 20], [2.2, 1], {
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
-                  easing: Easing.bezier(0.2, 1, 0.3, 1),
-                }),
+                interpolate(frame, [0, 62], [1, 1.07], { ...clamp }),
               ),
-              opacity: interpolate(frame, [f0 + 10, f0 + 16], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              }),
             }}
+          />
+          <AbsoluteFill style={{ background: "rgba(10,10,11,0.66)" }} />
+          <AbsoluteFill
+            style={{ justifyContent: "center", alignItems: "center" }}
           >
-            {sello}
-          </span>
-        </div>
-      ))}
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  fontFamily: DISPLAY,
+                  fontSize: 200,
+                  lineHeight: 0.95,
+                  color: CREAM,
+                  rotate: `${interpolate(frame, [12, 26], [-7, -2], {
+                    ...clamp,
+                  })}deg`,
+                  scale: String(
+                    interpolate(frame, [12, 26], [2.6, 1], {
+                      ...clamp,
+                      easing: Easing.bezier(0.2, 1, 0.3, 1),
+                    }),
+                  ),
+                  opacity: interpolate(frame, [12, 20], [0, 1], { ...clamp }),
+                }}
+              >
+                HORAS
+                <div style={{ color: ORANGE, fontSize: 148 }}>ENTERRADAS</div>
+              </div>
+              <div
+                style={{
+                  ...kicker,
+                  fontSize: 34,
+                  color: CREAM,
+                  marginTop: 34,
+                  opacity: interpolate(frame, [38, 48], [0, 1], { ...clamp }),
+                }}
+              >
+                CADA SEMANA
+              </div>
+            </div>
+          </AbsoluteFill>
+        </AbsoluteFill>
+      )}
 
-      {/* TIEMPO PERDIDO = DINERO PERDIDO (volteo) */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 1480,
-          textAlign: "center",
-          fontWeight: 900,
-          fontSize: 84,
-          letterSpacing: "-0.03em",
-          opacity: interpolate(frame, [232, 244], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          }),
-        }}
-      >
-        <span style={{ color: CREAM, display: "inline-block", perspective: 600 }}>
-          <span
+      {/* FASE B · las fugas de negocio */}
+      {faseFugas && (
+        <AbsoluteFill>
+          <div
             style={{
-              display: "inline-block",
-              rotate: `x ${flip > 90 ? flip - 180 : flip}deg`,
-              color: flip > 90 ? ORANGE : CREAM,
+              position: "absolute",
+              left: 80,
+              top: 260,
+              ...kicker,
+              color: RED,
+              opacity: interpolate(frame, [64, 74], [0, 1], { ...clamp }),
             }}
           >
-            {flip > 90 ? "DINERO" : "TIEMPO"}
-          </span>{" "}
-          PERDIDO
-        </span>
-        <div
-          style={{
-            fontSize: 44,
-            color: MUT,
-            fontWeight: 800,
-            marginTop: 16,
-            scale: String(
-              interpolate(frame, [300, 312, 400], [0.6, 1.08, 1.14], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: Easing.bezier(0.2, 1.2, 0.4, 1),
-              }),
-            ),
-            opacity: interpolate(frame, [300, 310], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
-          }}
-        >
-          TODAS LAS SEMANAS.
-        </div>
-      </div>
+            Y MIENTRAS, EL NEGOCIO
+          </div>
+
+          {FUGAS.map(([txt, sello, f0], i) => (
+            <div
+              key={txt}
+              style={{
+                position: "absolute",
+                left: 80,
+                right: 80,
+                top: 380 + i * 380,
+                opacity: interpolate(frame, [f0, f0 + 8], [0, 1], {
+                  ...clamp,
+                }),
+                translate: `0px ${interpolate(frame, [f0, f0 + 12], [80, 0], {
+                  ...clamp,
+                  easing: Easing.bezier(0.2, 1.3, 0.4, 1),
+                })}px`,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: DISPLAY,
+                  fontSize: 84,
+                  lineHeight: 1.02,
+                  color: CREAM,
+                  maxWidth: 760,
+                }}
+              >
+                {txt}
+              </div>
+              <div
+                style={{
+                  display: "inline-block",
+                  marginTop: 22,
+                  fontFamily: DISPLAY,
+                  fontSize: 52,
+                  letterSpacing: "0.06em",
+                  color: RED,
+                  border: `5px solid ${RED}`,
+                  borderRadius: 12,
+                  padding: "10px 26px",
+                  rotate: "-4deg",
+                  scale: String(
+                    interpolate(frame, [f0 + 14, f0 + 24], [2.4, 1], {
+                      ...clamp,
+                      easing: Easing.bezier(0.2, 1, 0.3, 1),
+                    }),
+                  ),
+                  opacity: interpolate(frame, [f0 + 14, f0 + 20], [0, 1], {
+                    ...clamp,
+                  }),
+                }}
+              >
+                {sello}
+              </div>
+            </div>
+          ))}
+
+          {/* TIEMPO PERDIDO = DINERO PERDIDO */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 1250,
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: DISPLAY,
+                fontSize: 92,
+                color: CREAM,
+                opacity: interpolate(frame, [168, 176], [0, 1], { ...clamp }),
+                scale: String(
+                  interpolate(frame, [168, 180], [1.8, 1], {
+                    ...clamp,
+                    easing: Easing.bezier(0.2, 1, 0.3, 1),
+                  }),
+                ),
+              }}
+            >
+              TIEMPO PERDIDO
+            </div>
+            <div
+              style={{
+                fontFamily: DISPLAY,
+                fontSize: 100,
+                color: ORANGE,
+                marginTop: 8,
+                opacity: interpolate(frame, [196, 204], [0, 1], { ...clamp }),
+                scale: String(
+                  interpolate(frame, [196, 210], [2.2, 1], {
+                    ...clamp,
+                    easing: Easing.bezier(0.2, 1, 0.3, 1),
+                  }),
+                ),
+              }}
+            >
+              = DINERO PERDIDO
+            </div>
+            <div
+              style={{
+                ...kicker,
+                fontSize: 30,
+                color: MUT,
+                marginTop: 34,
+                opacity: interpolate(frame, [240, 252], [0, 1], { ...clamp }),
+              }}
+            >
+              TODAS LAS SEMANAS
+            </div>
+          </div>
+        </AbsoluteFill>
+      )}
     </AbsoluteFill>
   );
 };
