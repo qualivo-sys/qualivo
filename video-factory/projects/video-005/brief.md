@@ -213,3 +213,17 @@ pasar ejemplos cortos antes de montar el vídeo entero.
 - REGLA APRENDIDA: no poner nombres de marca en la locución TTS
   (Qualivo → «cualivo», Agent for Me → inestable). Las marcas, siempre en
   pantalla.
+
+## Actualización 18-ago (10ª) — v16 FINAL: cierre con CTA en pantalla
+
+- La tesis «Primero entiendes el negocio / Después decides qué construir»
+  queda SOLO en pantalla (fuera de la locución, igual que las marcas).
+- La última voz es la coletilla «Por cierto: este vídeo lo ha narrado y
+  montado un empleado digital» (termina en el seg. 44); el resto del cierre
+  va solo con música.
+- Ficha de montaje ampliada: pista GUION (idea·guion) + «Investigó la idea ·
+  escribió el guion · generó las imágenes · lo montó» en pantalla.
+- Tarjeta final: «¿Analizamos qué procesos puede llevar un empleado digital
+  en tu empresa?» + SÍGUEME Y ESCRÍBEME + @maikel.echevarria.
+- 53,2 s. (El TTS de Higgsfield cayó durante esta iteración; el cierre se
+  resolvió sin regenerar voz, por decisión de Maikel.)

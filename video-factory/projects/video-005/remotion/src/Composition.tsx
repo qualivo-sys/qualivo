@@ -17,7 +17,7 @@ const D_HOOK = 195;
 const D_PROBLEMA = 320;
 const D_DOLOR = 290;
 const D_PASOS = 450;
-const D_REMATE = 385;
+const D_REMATE = 390;
 const T = 12; // duración de cada transición
 
 export const Manifiesto: React.FC = () => {

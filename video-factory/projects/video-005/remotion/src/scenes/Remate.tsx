@@ -19,26 +19,29 @@ import {
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
+// Escena de 480f (16s). VO t5a (lo que hizo el agente) sobre la fase de
+// montaje; logos solo con música y rótulos; tesis SOLO en pantalla;
+// VO t5b = CTA «escríbeme» con @maikel.echevarria en pantalla.
 const PISTAS: Array<[string, string[], string]> = [
+  ["GUION", ["idea", "guion"], "#E8B84B"],
   ["VÍDEO", ["hook", "problema", "dolor", "pasos"], ORANGE],
   ["VOZ", ["narración"], "#5B8DEF"],
-  ["MÚSICA", ["beat 122"], "#B48EE0"],
+  ["MÚSICA", ["hip jazz"], "#B48EE0"],
 ];
 
 export const Remate: React.FC = () => {
   const frame = useCurrentFrame();
-  const faseLogos = frame >= 142;
+  const faseLogos = frame >= 150;
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK, fontFamily: FONT }}>
-
       {/* FASE A · la timeline de este mismo vídeo */}
       <AbsoluteFill style={{ opacity: faseLogos ? 0 : 1 }}>
         <div
           style={{
             position: "absolute",
             left: 80,
-            top: 380,
+            top: 340,
             ...kicker,
             color: MUT,
             opacity: interpolate(frame, [4, 12], [0, 1], { ...clamp }),
@@ -53,7 +56,7 @@ export const Remate: React.FC = () => {
               position: "absolute",
               left: 80,
               right: 80,
-              top: 470 + pi * 160,
+              top: 430 + pi * 150,
             }}
           >
             <div
@@ -74,10 +77,10 @@ export const Remate: React.FC = () => {
                     background: col,
                     color: INK,
                     borderRadius: 10,
-                    padding: "18px 28px",
+                    padding: "16px 26px",
                     fontFamily: "'Space Grotesk', monospace",
                     fontWeight: 700,
-                    fontSize: 28,
+                    fontSize: 27,
                     opacity: interpolate(
                       frame,
                       [6 + (pi * 4 + ci) * 6, 14 + (pi * 4 + ci) * 6],
@@ -108,10 +111,10 @@ export const Remate: React.FC = () => {
             position: "absolute",
             left: 80,
             right: 80,
-            top: 1080,
+            top: 1130,
             fontWeight: 800,
-            fontSize: 66,
-            lineHeight: 1.16,
+            fontSize: 62,
+            lineHeight: 1.18,
             letterSpacing: "-0.02em",
             color: CREAM,
             opacity: interpolate(frame, [26, 40], [0, 1], { ...clamp }),
@@ -124,13 +127,30 @@ export const Remate: React.FC = () => {
           Este vídeo lo ha narrado y montado{" "}
           <span style={{ color: ORANGE }}>un empleado digital</span>.
         </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 80,
+            right: 80,
+            top: 1390,
+            fontWeight: 700,
+            fontSize: 40,
+            lineHeight: 1.4,
+            color: MUT,
+            opacity: interpolate(frame, [100, 114], [0, 1], { ...clamp }),
+          }}
+        >
+          Investigó la idea · escribió el guion
+          <br />
+          generó las imágenes · lo montó
+        </div>
       </AbsoluteFill>
 
-      {/* FASE B · logos + tesis */}
+      {/* FASE B · logos + tesis (solo pantalla) + CTA */}
       <AbsoluteFill
         style={{
           opacity: faseLogos
-            ? interpolate(frame, [142, 152], [0, 1], { ...clamp })
+            ? interpolate(frame, [150, 160], [0, 1], { ...clamp })
             : 0,
           justifyContent: "center",
           alignItems: "center",
@@ -140,9 +160,9 @@ export const Remate: React.FC = () => {
           <img
             src={staticFile("qualivo.png")}
             style={{
-              width: 400,
+              width: 360,
               scale: String(
-                interpolate(frame, [144, 158], [0.6, 1], {
+                interpolate(frame, [152, 166], [0.6, 1], {
                   ...clamp,
                   easing: Easing.bezier(0.2, 1.3, 0.4, 1),
                 }),
@@ -153,21 +173,21 @@ export const Remate: React.FC = () => {
           <div
             style={{
               ...kicker,
-              fontSize: 26,
+              fontSize: 25,
               color: ORANGE,
-              marginTop: 18,
-              opacity: interpolate(frame, [162, 172], [0, 1], { ...clamp }),
+              marginTop: 16,
+              opacity: interpolate(frame, [170, 180], [0, 1], { ...clamp }),
             }}
           >
             ENCUENTRA LA FUGA
           </div>
           <div
             style={{
-              margin: "24px auto",
+              margin: "20px auto",
               width: 7,
               borderRadius: 4,
               background: `linear-gradient(${ORANGE}, ${GREEN})`,
-              height: interpolate(frame, [182, 198], [0, 90], {
+              height: interpolate(frame, [190, 206], [0, 76], {
                 ...clamp,
                 easing: Easing.bezier(0.2, 1, 0.3, 1),
               }),
@@ -178,63 +198,88 @@ export const Remate: React.FC = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 22,
-              opacity: interpolate(frame, [198, 210], [0, 1], { ...clamp }),
+              gap: 20,
+              opacity: interpolate(frame, [206, 218], [0, 1], { ...clamp }),
             }}
           >
             <img
               src={staticFile("afm.svg")}
-              style={{ width: 92, borderRadius: 20 }}
+              style={{ width: 84, borderRadius: 18 }}
               alt="Agent for Me"
             />
-            <span style={{ fontWeight: 900, fontSize: 56, color: CREAM }}>
+            <span style={{ fontWeight: 900, fontSize: 52, color: CREAM }}>
               Agent <span style={{ color: GREEN }}>for</span> Me
             </span>
           </div>
           <div
             style={{
               ...kicker,
-              fontSize: 26,
+              fontSize: 25,
               color: GREEN,
-              marginTop: 18,
-              opacity: interpolate(frame, [220, 230], [0, 1], { ...clamp }),
+              marginTop: 16,
+              opacity: interpolate(frame, [228, 238], [0, 1], { ...clamp }),
             }}
           >
             CONSTRUYE AL QUE LA TAPA
           </div>
           <div
             style={{
-              marginTop: 80,
+              marginTop: 60,
               fontFamily: DISPLAY,
-              fontSize: 64,
-              lineHeight: 1.14,
+              fontSize: 56,
+              lineHeight: 1.16,
               color: CREAM,
-              opacity: interpolate(frame, [240, 253], [0, 1], { ...clamp }),
-              translate: `0px ${interpolate(frame, [240, 255], [40, 0], {
+              opacity: interpolate(frame, [244, 257], [0, 1], { ...clamp }),
+              translate: `0px ${interpolate(frame, [244, 259], [40, 0], {
                 ...clamp,
                 easing: Easing.bezier(0.16, 1, 0.3, 1),
               })}px`,
             }}
           >
-            PRIMERO ENTIENDES
-            <br />
-            EL NEGOCIO.
-            <div style={{ color: ORANGE, marginTop: 10 }}>
-              DESPUÉS DECIDES
-              <br />
-              QUÉ CONSTRUIR.
+            PRIMERO ENTIENDES EL NEGOCIO.
+            <div style={{ color: ORANGE, marginTop: 8 }}>
+              DESPUÉS DECIDES QUÉ CONSTRUIR.
             </div>
           </div>
           <div
             style={{
-              marginTop: 46,
-              fontWeight: 700,
-              fontSize: 30,
-              color: MUT,
-              opacity: interpolate(frame, [300, 314], [0, 1], { ...clamp }),
+              marginTop: 56,
+              opacity: interpolate(frame, [290, 304], [0, 1], { ...clamp }),
+              scale: String(
+                interpolate(frame, [290, 306], [0.7, 1], {
+                  ...clamp,
+                  easing: Easing.bezier(0.2, 1.3, 0.4, 1),
+                }),
+              ),
             }}
           >
-            Maikel Echevarría · Building in public
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: 38,
+                lineHeight: 1.35,
+                color: CREAM,
+                maxWidth: 860,
+                margin: "0 auto",
+              }}
+            >
+              ¿Analizamos qué procesos puede llevar un{" "}
+              <span style={{ color: ORANGE }}>empleado digital</span> en tu
+              empresa?
+            </div>
+            <div style={{ ...kicker, fontSize: 26, color: MUT, marginTop: 22 }}>
+              SÍGUEME Y ESCRÍBEME
+            </div>
+            <div
+              style={{
+                marginTop: 14,
+                fontFamily: DISPLAY,
+                fontSize: 66,
+                color: ORANGE,
+              }}
+            >
+              @maikel.echevarria
+            </div>
           </div>
         </div>
       </AbsoluteFill>
