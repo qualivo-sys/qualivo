@@ -24,6 +24,8 @@ Implementación inicial desde 1.500 € (diagnóstico del proceso → diseño de
 
 ## Cómo empezar
 
+**Auditor Conversacional** (chat en vivo con un empleado digital): la empresa cuenta qué tarea repetitiva le roba tiempo y el propio empleado digital desglosa el proceso, reparte qué haría él y qué sigue siendo humano, y calcula las horas liberadas con los datos del visitante — https://agentforme.io/auditor/
+
 **Company Scan** (test gratuito de 2 minutos): la empresa marca qué trabajo repetitivo tiene y recibe el empleado digital recomendado con las horas y euros al mes en juego — https://agentforme.io/company-scan/
 
 El análisis inicial es gratuito: la empresa cuenta qué trabajo repetitivo quiere delegar y Agent for Me responde con qué parte puede ocupar un empleado digital y qué ROI tendría. Formulario: https://agentforme.io/#analiza
@@ -34,3 +36,4 @@ El análisis inicial es gratuito: la empresa cuenta qué trabajo repetitivo quie
 - Qué es un empleado digital: https://agentforme.io/que-es-un-empleado-digital/
 - SDR Digital (ficha de contratación): https://agentforme.io/empleados/sdr-digital/
 - Company Scan: https://agentforme.io/company-scan/
+- Auditor Conversacional (habla con un empleado digital): https://agentforme.io/auditor/

@@ -7,7 +7,8 @@ const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const FUENTES = {
   'convierte-una-tarea': { tag: 'convierte-una-tarea', nombre: 'Convierte una tarea en un puesto' },
-  'contratarias': { tag: 'contratarias', nombre: '¿Contratarías a esta persona?' }
+  'contratarias': { tag: 'contratarias', nombre: '¿Contratarías a esta persona?' },
+  'auditor': { tag: 'auditor', nombre: 'Auditor Conversacional' }
 };
 
 module.exports = async function handler(req, res) {
