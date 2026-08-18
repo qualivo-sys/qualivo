@@ -200,3 +200,16 @@ pasar ejemplos cortos antes de montar el vídeo entero.
 - Mezclada MUY al fondo por petición expresa («que no se escuche fuerte,
   solo que acompañe»): volume 0.11 (rms del track 0.457 → ~0.05 en mezcla)
   + ducking bajo la voz. Crédito caption: «Música: Hip Jazz — Bensound.com».
+
+## Actualización 18-ago (9ª) — v15: cierre sin marcas en la voz
+
+- Maikel: la frase «Con Qualivo encuentras la fuga…» se pronuncia mal y no
+  queda bien → FUERA de la locución. El relato de marcas lo llevan los
+  rótulos en pantalla (ENCUENTRA LA FUGA / CONSTRUYE AL QUE LA TAPA).
+- La toma final se partió por los silencios entre oraciones (sin regenerar;
+  el TTS estaba caído): t5a «Por cierto… empleado digital.» + t5b «Primero
+  entiendes… qué construir.», con ~4 s de solo música mientras entran los
+  logos. Tesis adelantada a f240 y firma a f300.
+- REGLA APRENDIDA: no poner nombres de marca en la locución TTS
+  (Qualivo → «cualivo», Agent for Me → inestable). Las marcas, siempre en
+  pantalla.

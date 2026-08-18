@@ -209,8 +209,8 @@ export const Remate: React.FC = () => {
               fontSize: 64,
               lineHeight: 1.14,
               color: CREAM,
-              opacity: interpolate(frame, [272, 285], [0, 1], { ...clamp }),
-              translate: `0px ${interpolate(frame, [272, 287], [40, 0], {
+              opacity: interpolate(frame, [240, 253], [0, 1], { ...clamp }),
+              translate: `0px ${interpolate(frame, [240, 255], [40, 0], {
                 ...clamp,
                 easing: Easing.bezier(0.16, 1, 0.3, 1),
               })}px`,
@@ -231,7 +231,7 @@ export const Remate: React.FC = () => {
               fontWeight: 700,
               fontSize: 30,
               color: MUT,
-              opacity: interpolate(frame, [348, 362], [0, 1], { ...clamp }),
+              opacity: interpolate(frame, [300, 314], [0, 1], { ...clamp }),
             }}
           >
             Maikel Echevarría · Building in public
