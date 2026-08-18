@@ -143,3 +143,24 @@ Feedback: «La música es horrible y la voz se corta».
   Getting it Done, Voxel Revolution (más oscura), etc.
 - Mezcla: voz +7 dB sobre la música + compresión sidechain; máster a
   −14 dB de media, pico −0.1 dB.
+
+## Actualización 18-ago (5ª) — v11: estructura «editor de vídeo natural»
+
+Feedback de Maikel: la primera mitad debe ser imagen real (como v5/v6), las
+animaciones solo al final; música normal/animada (ni rock ni años 80);
+pasar ejemplos cortos antes de montar el vídeo entero.
+
+- **Primera mitad (0–13 s)**: metraje Kling y capturas de pantalla A PANTALLA
+  COMPLETA con cortes secos sincronizados a la voz + subtítulos cinéticos
+  (componente `Subs.tsx`, estilo ASS de v5/v6). Sin escenas de motion.
+  El playbackRate de cada plano se elige para que el clip no se agote y
+  congele dentro del plano.
+- **Segunda mitad (13–50 s)**: las animaciones de v10 sin cambios (fugas con
+  sellos, TIEMPO=DINERO, dos pasos, cadena, timeline, logos).
+- **Música**: «Buddy» de Bensound (piano + palmas, animada sin pasarse).
+  Crédito necesario en la caption: «Música: Buddy — Bensound.com».
+  Descartadas por feedback: sintetizada propia (aburrida/horrible),
+  Exhilarate (años 80), Voxel Revolution (rockera).
+- **Flujo de trabajo**: preview corto por chat (SendUserFile) ANTES del
+  montaje completo.
+- Publicado (49.9 s, mismo URL).
