@@ -1,5 +1,6 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
+import { Portada } from "./Portada";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
 import { slide } from "@remotion/transitions/slide";
@@ -60,13 +61,18 @@ export const Manifiesto: React.FC = () => {
 
 export const MyComposition: React.FC = () => {
   return (
-    <Composition
-      id="Manifiesto"
-      component={Manifiesto}
-      durationInFrames={D_HOOK + D_PROBLEMA + D_DOLOR + D_PASOS + D_REMATE - 4 * T}
-      fps={FPS}
-      width={1080}
-      height={1920}
-    />
+    <>
+      <Composition
+        id="Manifiesto"
+        component={Manifiesto}
+        durationInFrames={
+          D_HOOK + D_PROBLEMA + D_DOLOR + D_PASOS + D_REMATE - 4 * T
+        }
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Still id="Portada" component={Portada} width={1080} height={1920} />
+    </>
   );
 };
