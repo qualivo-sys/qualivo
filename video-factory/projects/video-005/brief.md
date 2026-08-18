@@ -178,3 +178,17 @@ pasar ejemplos cortos antes de montar el vídeo entero.
   Bensound.com». (Buddy descartada por Maikel.)
 - Máster único de voz (`vo-master`), mezcla con ducking, salida web-safe
   (yuv420p bt709 + faststart). 49,9 s. Publicado.
+
+## Actualización 18-ago (7ª) — v13: pantalla partida y música al fondo
+
+- **Problema explicado con pantallas**: t2 regrabada nombrando las
+  herramientas («…saltando entre el correo, el ce erre eme y las hojas de
+  cálculo») y escena Problema ampliada a 320f: pantalla partida en 3 bandas
+  (CORREO / CRM / HOJAS DE CÁLCULO, capturas reales entrando alternadas)
+  mientras la voz las nombra, y después los cortes a pantalla completa por
+  tarea. Vídeo total 53,1 s.
+- **Música**: se mantiene Endless Motion pero al fondo (volume 0.42 → 0.26)
+  tras el feedback «está bastante fuerte».
+- Cronología del feedback de música para referencia: sintetizada (aburrida)
+  → Exhilarate (años 80) → Voxel Revolution (rockera) → Buddy (horrible) →
+  Endless Motion («mejor, pero bajaría un poco el volumen»).

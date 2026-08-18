@@ -14,7 +14,7 @@ const FPS = 30;
 
 // duraciones por escena (frames)
 const D_HOOK = 195;
-const D_PROBLEMA = 225;
+const D_PROBLEMA = 320;
 const D_DOLOR = 290;
 const D_PASOS = 450;
 const D_REMATE = 385;
