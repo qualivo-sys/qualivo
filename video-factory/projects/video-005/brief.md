@@ -63,3 +63,22 @@ grabarlo línea a línea.
 Pieza madre 9:16 (Reels/TikTok, 75-90 s) → recorte 45 s para LinkedIn →
 los bloques 3-5 sirven sueltos como piezas cortas. Es también el vídeo de
 cabecera natural para maikelechevarria.com.
+
+---
+
+## Actualización 18-ago (tarde) — versión producida SIN Maikel
+
+Maikel decidió no salir ni grabar. Cambios sobre el plan original:
+
+- **Sin rodaje**: los 7 clips previstos se sustituyeron por 5 planos de Kling
+  sin cara visible (manos tecleando, hombre de espaldas ante la pantalla,
+  móvil con notificaciones, portátil cerrándose, calle al atardecer). 50 creditos.
+- **Sin voz en off**: se auditó todo el catálogo de voces de Higgsfield con un
+  detector de acento (transcripción fonética con Whisper forzada a inglés: la
+  zeta castellana aparece como «th») y todas las voces en castellano hacen
+  seseo. Antes que una voz latina, la pieza es 100 % tipográfica.
+- **Coletilla de honestidad** en la tarjeta final: «Este vídeo lo ha montado
+  un empleado digital» + agentforme.io.
+- Resultado: `manifiesto-v005.mp4`, 77 s, 1080×1920. La música se añade
+  nativa al publicar. Si Maikel algún día graba la locución (10 min, sin
+  cámara), se integra sin rehacer el montaje.
