@@ -216,3 +216,32 @@ Receta libre: género + edad + gravedad (deep/bright) + textura (gravelly/smooth
 ### Acciones especiales moda/skincare (imagen → vídeo, no talking)
 Patrón común: `Using this image as reference, keep the SAME person (same face and identity) and the SAME location, background and lighting as the reference (do NOT change the setting). [ACCIÓN]. Cinematic lighting, no talking, mouth closed. Single continuous take, no cuts.`
 Acciones: cuerpo entero mostrando outfit · detalle de tejido · giro 360 turntable · andando tipo pasarela · pose editorial · detalle de accesorio.
+
+---
+
+## RECETA VALIDADA (19-ago): avatar walking-talking con Grok 1.5 vía KIE
+
+Pipeline de 2 pasos por toma (~83 créditos KIE):
+
+1. **Imagen de arranque en escena** — `nano-banana-pro`, 9:16, refs = 2 FOTOS REALES
+   de `identidad/sesion-*.jpg` (nunca character sheets: doble salto = deriva).
+   Prompt 6C describiendo el PRIMER frame de la toma (postura, calle, luz).
+2. **Animar con diálogo** — `grok-imagine-video-1-5-preview`, image_urls = [imagen paso 1],
+   1080p, 9:16, 8-10s. El prompt lleva: cámara + "Continue naturally from the first frame"
+   + guión con `says:` + Voice línea hombre 30s + acento Madrid + anti-corte.
+
+Reglas aprendidas a base de pruebas:
+- **1 sola imagen de referencia en Grok = CON voz; varias = SIN voz.**
+- Grok hereda el aspect ratio de la imagen de entrada (el parámetro se ignora) →
+  la imagen de arranque debe ser ya 9:16.
+- El vídeo siempre arranca mostrando la imagen de entrada → si la imagen es la foto
+  en la pared, sale un morph raro; si es la escena, arranca perfecto.
+- Contra el efecto robot: "continuous natural flow, WITHOUT long pauses", parpadeos,
+  media sonrisa, mirada breve a un lado, un gesto de mano, "nothing exaggerated".
+- La voz de Grok dice el guion EXACTO (verificar siempre con Whisper) con acento
+  peninsular decente. La pausa entre frases se controla desde el prompt.
+- Raccords entre tomas: terminar una toma con un objeto/gesto delante de cámara
+  (móvil, mano) y arrancar la siguiente con el mismo elemento.
+- Después de generar: recorte a 1080×1920 exacto + capa de realismo + encode web-safe.
+- HeyGen queda SOLO para primeros planos estáticos con el gemelo (nunca para
+  planos caminando: solo anima el busto).
