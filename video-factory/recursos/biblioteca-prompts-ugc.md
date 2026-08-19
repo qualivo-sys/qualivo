@@ -129,3 +129,31 @@ Brown, oferta/Hormozi, Cialdini, historia A→B, Sugarman, testing modular hook/
 Usarla SIEMPRE que se pidan guiones de anuncio, hooks o ángulos — respeta el gate de Fase 2
 (no escribir guiones hasta que Maikel elija ángulos). `metodo-angulos.md` queda como
 referencia rápida; esta skill es el motor operativo.
+
+---
+
+## Capa de realismo (color grade del curso — aplicar a TODO clip generado por IA)
+
+Valores CapCut del curso: temp -3 · tint +2 · saturation -6 · exposure -3 ·
+contrast +12 · highlight -35 · shadow +18 · fade +6.
+
+Objetivo: que el clip generado parezca grabado con móvil — se quita el look "render"
+bajando saturación y aplastando luces altas, levantando sombras y con negros ligeramente
+lavados (fade).
+
+Equivalente ffmpeg para nuestro pipeline (aplicar antes del encode web-safe):
+
+```
+-vf "eq=saturation=0.94:contrast=1.12:brightness=-0.015,\
+curves=master='0/0.023 0.25/0.30 0.75/0.70 1/0.97',\
+colorbalance=bs=0.02:ms=0.01:hs=-0.02"
+```
+
+- `eq` → saturación -6, contraste +12, exposición -3.
+- `curves master` → shadow +18 (sube el cuarto bajo), highlight -35 (comprime el cuarto
+  alto), fade +6 (negro arranca en ~0.023, blanco no llega a 1).
+- `colorbalance` → temp -3 (un punto más frío en sombras) y tint +2.
+
+En Remotion, alternativa por CSS en el clip: `filter: saturate(0.94) contrast(1.12)
+brightness(0.985)` + overlay negro al 2-3% para el fade (las curvas de highlights/shadows
+solo salen bien en ffmpeg).
