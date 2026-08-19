@@ -80,3 +80,12 @@ Instrucción de uso en generaciones con 2 referencias (aportada por Maikel):
 > reference: match the subject's facial features, proportions and physical
 > traits exactly. Do not copy the layout, background, framing or poses from
 > reference image 2.
+
+## Fotos reales de identidad (19-ago-2026, aportadas por Maikel)
+Carpeta: `video-factory/recursos/identidad/`
+- `foto-frontal-escritorio.jpg` — frontal nítida, luz natural → REFERENCIA PRIMARIA de identidad
+- `foto-perfil-bebiendo.jpg` — perfil izquierdo completo
+- `foto-perfil-abajo.jpg` — perfil 3/4 mirada baja
+- `foto-entrenamiento-soul.jpg` — la usada para entrenar el Soul de Higgsfield
+Uso: en generaciones de 2 referencias, cualquiera de estas (o el character
+sheet) va como imagen 2 = solo identidad. La frontal es la mejor ancla.
