@@ -71,8 +71,13 @@ Planos: frontal / 3-4 / perfil / primer plano / medio / entero / picado /
 contrapicado / desde atrás / espejo.
 
 ## Character sheet maestro de Maikel (19-ago-2026)
-Archivo: `video-factory/recursos/character-sheet-maikel.png` (3×3, 2048px,
-generado con seedream_v5_pro desde su foto real de entrenamiento del Soul).
+⚠️ **DESCARTADO por Maikel (19-ago): "no se parece nada a mí"** — el sheet de
+seedream_v5_pro arrastra deriva de identidad. NO usarlo como referencia.
+Pendiente de regenerar (nano banana pro con las 4 fotos reales, o los modelos
+"omni" de KIE) cuando haya créditos. Mientras tanto: **usar SIEMPRE las 4 fotos
+reales de `identidad/` directamente como referencias** — sin sheet intermedio
+no hay deriva por construcción (nano banana pro admite hasta 8 imágenes).
+Archivo antiguo: `video-factory/recursos/character-sheet-maikel.png`.
 
 Instrucción de uso en generaciones con 2 referencias (aportada por Maikel):
 > Reference image 1 defines the scene, framing, composition and action.
@@ -157,3 +162,14 @@ colorbalance=bs=0.02:bm=0.01:gm=-0.01:bh=-0.02"
 En Remotion, alternativa por CSS en el clip: `filter: saturate(0.94) contrast(1.12)
 brightness(0.985)` + overlay negro al 2-3% para el fade (las curvas de highlights/shadows
 solo salen bien en ffmpeg).
+
+---
+
+## Costes reales medidos en KIE (19-ago-2026)
+
+- nano banana pro, imagen 1K con referencias: **18 créditos**
+- Kling 2.6 image-to-video, 5 s 1080p: **~55 créditos**
+- (saldo inicial 80 → tras 1 imagen + 1 clip: 7)
+
+Regla: presupuestar ~73 créditos por plano de localización (imagen + animación).
+Un vídeo de 3-4 localizaciones ≈ 220-300 créditos.
