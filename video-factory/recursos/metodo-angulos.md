@@ -70,3 +70,14 @@ villano antes de presentar la solución.
 objetivo y (2) ángulo — en ese orden. El nivel decide QUÉ conversación tener; el ángulo decide
 POR DÓNDE entrar. El contenido orgánico de Maikel (IG) habla sobre todo a niveles 01-03;
 el retargeting y el email a 04-05.
+
+## Aplicado a Meta Ads
+
+**El tráfico frío vive en los niveles 1·2·3.** Hacer variedad de anuncios para esos tres
+niveles — no para el 5. En captación con Meta no se lanza oferta directa a desconocidos:
+se abre los ojos (01), se remueve el problema (02) y se explica el mecanismo con su villano
+(03). Los niveles 4-5 se trabajan con retargeting, email y conversación (DM/WhatsApp).
+
+Para la tarea pendiente de creatividades Meta (backlog #15): variantes por nivel, no solo
+por ángulo — mínimo un anuncio de nivel 01, uno de 02 y uno de 03, cada uno con el ángulo
+más fuerte de su temperatura.
