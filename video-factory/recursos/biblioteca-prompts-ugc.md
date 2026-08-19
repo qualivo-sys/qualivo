@@ -173,3 +173,46 @@ solo salen bien en ffmpeg).
 
 Regla: presupuestar ~73 créditos por plano de localización (imagen + animación).
 Un vídeo de 3-4 localizaciones ≈ 220-300 créditos.
+
+---
+
+## El vídeo: montar el prompt de animación (imagen ya creada → clip con voz)
+
+**Orden de piezas** (acción opcional):
+1. Cámara → 2. Acción (gesto) → 3. Guión (`says: "..."`) → 4. Voz (`Voice: ...`) → 5. Acento.
+
+### Movimientos de cámara (ya llevan el anti-corte)
+- ★ **El más usado**: `(static camera, no movement) realistic arm movements and subtle micro-movements. Single continuous take, no cuts or scene changes.`
+- **Plano fijo**: `Locked-off static shot, camera completely still on a tripod, no movement at all. Single continuous take, no cuts or scene changes.`
+- **Zoom lento a la cara**: `Slow, continuous zoom-in toward the subject's face, starting from the very first frame and moving steadily closer, then holding steady on the close-up for the rest of the clip. Single continuous take, no cuts or scene changes.`
+- **Zoom rápido al hablar**: `Fast zoom-in to the subject's face at the very start, settling into a close-up exactly as they begin to speak, then holding steady. Single continuous take, no cuts or scene changes.`
+- **En mano sutil**: `Subtle handheld movement, very slight and natural, for a real human feel without distraction. Single continuous take, no cuts or scene changes.`
+- **Acercamiento sutil (podcast)**: `Very gentle, almost imperceptible slow push-in on the speaker, from a medium shot to a medium close-up over the whole clip. Single continuous take, no cuts or scene changes.`
+- **Retroceso que revela**: `Slow pull-back from a close-up, revealing the surrounding environment as the subject starts talking, then holding on the wider shot. Single continuous take, no cuts or scene changes.`
+- **Órbita lenta**: `Slow arc shot, the camera orbiting around the subject in a smooth half-circle, subject stays centered. Single continuous take, no cuts or scene changes.`
+- **Seguimiento al caminar**: `Tracking shot following alongside the subject as they walk and talk, smooth and steady. Single continuous take, no cuts or scene changes.`
+- **Push-in a los ojos**: `Slow creeping push-in that tightens into an extreme close-up on the eyes right as the key line is delivered, then holds. Single continuous take, no cuts or scene changes.`
+- **Contrapicado heroico**: `Low-angle hero shot looking up at the subject, slow push-in for authority and impact, then holding. Single continuous take, no cuts or scene changes.`
+- **Bokeh**: `Shallow depth of field with a creamy bokeh background, slow push-in on the in-focus subject, then holding. Single continuous take, no cuts or scene changes.`
+- **Cámara lenta**: `Slow-motion delivery, smooth and cinematic, with a subtle camera drift. Single continuous take, no cuts or scene changes.`
+- Coletilla anti-corte para planos propios: `single continuous take, no cuts or scene changes — the camera holds steady on the framing after the move`
+
+### Micro-acciones (gesto ≠ guión)
+- Antes de hablar: `The person [acción], then looks at the camera and says: "[guión]"`
+- Mientras/después: `The person says: "[guión]" [acción]`
+- Combinadas: `The person adjusts their cap, then says: "[guión]" and smiles.`
+- Catálogo: adjusts their cap · takes a sip of coffee and sets the cup down · fixes their hair · waves hello · laughs · with a surprised look on their face · and nods slowly, smiling · points up / up to the left / to the right · crosses their arms · shrugs · gives a thumbs up · claps once · tilts their head curiously · adjusts their glasses · tucks hair behind their ear · taps their chin thoughtfully · snaps their fingers · rolls their eyes playfully.
+
+### Voz (misma línea `Voice:` en todos los clips del personaje, misma sesión)
+**Para Maikel (hombre mediados de 30):**
+`Voice: a male voice in his mid-30s, medium pitch, a bit fuller and more settled than a twenty-something, calm and confident, friendly but grounded.`
+Otras plantillas: hombre ~50 (deep, warm, gravelly) · hombre 25-30 (bright, energetic) · mujer ~50 (warm, mature, smoky) · mujer 25-30 (light, lively) · mujer 30s (fuller, settled).
+Receta libre: género + edad + gravedad (deep/bright) + textura (gravelly/smooth/breathy) + entrega (calm/energetic/warm/authoritative).
+
+### Acentos (línea final de todo prompt con voz)
+- **España (LA NUESTRA)**: `Spanish with a neutral Peninsular (Madrid) accent, informal and conversational, like a real casual chat in Spain.`
+- Argentina rioplatense · Colombia Bogotá · México CDMX · LatAm neutro (mismas fórmulas, cambiar región).
+
+### Acciones especiales moda/skincare (imagen → vídeo, no talking)
+Patrón común: `Using this image as reference, keep the SAME person (same face and identity) and the SAME location, background and lighting as the reference (do NOT change the setting). [ACCIÓN]. Cinematic lighting, no talking, mouth closed. Single continuous take, no cuts.`
+Acciones: cuerpo entero mostrando outfit · detalle de tejido · giro 360 turntable · andando tipo pasarela · pose editorial · detalle de accesorio.
