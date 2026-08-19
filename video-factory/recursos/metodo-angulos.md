@@ -41,13 +41,24 @@ El vídeo manifiesto (video-005) fue ángulo 03 (mecanismo) + 12 (rompe-mitos).
 
 Cada persona está en un punto distinto respecto al producto y al problema:
 
-| Nivel | Estado | Qué necesita oír |
-|-------|--------|------------------|
-| 01 | Inconsciente | Ni sabe que tiene el problema → despertar con síntomas, historias, identidad |
-| 02 | Consciente del problema | Sufre el problema pero no sabe que hay solución → agitar el dolor + revelar que existe salida |
-| 03 | Consciente de la solución | Sabe que existen soluciones, no conoce la tuya → mecanismo, comparación, diferenciación |
-| 04 | Consciente del producto | Conoce tu producto pero no ha comprado → rompe-objeciones, prueba, precio/valor |
-| 05 | El más consciente | Solo le falta el empujón → oferta directa, urgencia, miedo/pérdida |
+| Nivel | Temp. | Estado | TU JUGADA |
+|-------|-------|--------|-----------|
+| 01 | Frío | Inconsciente — no sabe que tiene el problema | **Ábrele los ojos**: cuéntale una historia, hazle ver el problema. Nada de vender agresivo, solo hacerle consciente |
+| 02 | Frío | Consciente del problema — siente el dolor, no sabe que hay solución | **Remueve el problema**: agita el dolor, enséñale que hay salida (y esa salida es la tuya) |
+| 03 | Templado | Consciente de la solución — conoce soluciones, no la tuya | **Explica tu mecanismo**: por qué el tuyo sí, por qué la competencia no |
+| 04 | Caliente | Consciente del producto — ya te conoce, pero duda | **Dale pruebas**: prueba social, reseñas, comparativas. Quítale las objeciones una a una |
+| 05 | Caliente | El más consciente — solo le falta el empujón | Oferta directa, urgencia, miedo/pérdida |
+
+### El villano contra tu solución (clave del nivel 03 / mecanismo)
+
+Nombrar un CULPABLE concreto y oponerle tu mecanismo. Ejemplo del curso (champú rizos):
+*el culpable* = sulfatos ("deterioran tu rizo de forma irreversible con cada lavado") →
+*el tuyo* = aloe vera ("sin sulfatos, una barrera que protege la hidratación").
+
+Aplicado a Qualivo/AfM: el villano es **el trabajo manual entre herramientas desconectadas**
+(copiar datos, buscar archivos, perseguir respuestas) → el mecanismo es **el empleado digital
+que se conecta a lo que ya usas y lo hace solo, con responsable humano**. Nombrar siempre al
+villano antes de presentar la solución.
 
 ## Cruce ángulo × nivel de consciencia (guía rápida)
 
