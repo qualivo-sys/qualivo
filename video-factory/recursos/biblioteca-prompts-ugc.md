@@ -89,3 +89,15 @@ Carpeta: `video-factory/recursos/identidad/`
 - `foto-entrenamiento-soul.jpg` — la usada para entrenar el Soul de Higgsfield
 Uso: en generaciones de 2 referencias, cualquiera de estas (o el character
 sheet) va como imagen 2 = solo identidad. La frontal es la mejor ancla.
+
+---
+
+## Skill del curso: Método 6C (AvatarHype Prompt Engine)
+
+Instalada en `.claude/skills/avatarhype-6c-prompt-engine/SKILL.md`. Genera prompts de imagen
+hiperrealista estilo iPhone/UGC con 6 componentes: Character, Camera, Clothing, Context,
+Cinematic Light, Consistency Anchors. Salida siempre en inglés, un solo bloque, terminando en
+"No text, no watermark, no distortion." Nunca menciona AI/CGI/hyperrealistic; siempre incluye
+detalle de piel (pores, freckles, imperfections). Modo CHANGE-ONLY: cambiar solo outfit /
+localización / pose manteniendo el resto idéntico — encaja con la instrucción de 2 referencias
+(ref 1 = escena, ref 2 = solo identidad).
