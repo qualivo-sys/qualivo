@@ -69,3 +69,14 @@ Sitios+luz: baño mañana / dormitorio cálido / ventana / cocina luminosa /
 calle / terraza / salón tarde / tienda / parque / noche flash directo.
 Planos: frontal / 3-4 / perfil / primer plano / medio / entero / picado /
 contrapicado / desde atrás / espejo.
+
+## Character sheet maestro de Maikel (19-ago-2026)
+Archivo: `video-factory/recursos/character-sheet-maikel.png` (3×3, 2048px,
+generado con seedream_v5_pro desde su foto real de entrenamiento del Soul).
+
+Instrucción de uso en generaciones con 2 referencias (aportada por Maikel):
+> Reference image 1 defines the scene, framing, composition and action.
+> Reference image 2 is a character sheet provided only as an identity
+> reference: match the subject's facial features, proportions and physical
+> traits exactly. Do not copy the layout, background, framing or poses from
+> reference image 2.
