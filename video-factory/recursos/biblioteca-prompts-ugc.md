@@ -101,3 +101,18 @@ Cinematic Light, Consistency Anchors. Salida siempre en inglés, un solo bloque,
 detalle de piel (pores, freckles, imperfections). Modo CHANGE-ONLY: cambiar solo outfit /
 localización / pose manteniendo el resto idéntico — encaja con la instrucción de 2 referencias
 (ref 1 = escena, ref 2 = solo identidad).
+
+---
+
+## Herramienta: MakeItYours (makeityours.app) — conversión de voz en post
+
+Cambia la voz de un vídeo YA terminado sin regrabar: aísla la pista vocal (respeta música y
+ambiente) y la sustituye por una voz del catálogo o un clon de la voz de Maikel, manteniendo
+imagen y lipsync. MP4/MOV hasta 3 min y 500 MB. Sin API pública → flujo manual por su web
+(cuenta de Maikel; el clon de voz requiere muestra con verificación de consentimiento).
+Planes: $13.99/20min · $27.99/65min · $54.99/140min+3 clones · $139/400min+10 clones.
+
+**Cuándo usarla**: un clip generado (Seedance, Kling, etc.) trae buena interpretación pero la
+voz no es la de Maikel o pronuncia mal → conversión en post conservando el ritmo. Complementa
+la vía principal (nota de voz real de Maikel → lipsync). También vale para doblar a otros
+idiomas con acento regional.
