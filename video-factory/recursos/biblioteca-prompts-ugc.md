@@ -116,3 +116,16 @@ Planes: $13.99/20min · $27.99/65min · $54.99/140min+3 clones · $139/400min+10
 voz no es la de Maikel o pronuncia mal → conversión en post conservando el ritmo. Complementa
 la vía principal (nota de voz real de Maikel → lipsync). También vale para doblar a otros
 idiomas con acento regional.
+
+---
+
+## Skill del curso: El Estratega (estratega-avatarhype)
+
+Instalada en `.claude/skills/estratega-avatarhype/SKILL.md`. Director creativo de respuesta
+directa: convierte cualquier producto en guiones UGC que venden para Meta/TikTok. Flujo de
+5 fases (brief → estrategia con gate → guiones → revisión → handoff clip a clip). Incluye el
+MÁSTER completo "Anuncios que venden" (12 ángulos, voz del cliente, Schwartz, mecanismo/Todd
+Brown, oferta/Hormozi, Cialdini, historia A→B, Sugarman, testing modular hook/hold).
+Usarla SIEMPRE que se pidan guiones de anuncio, hooks o ángulos — respeta el gate de Fase 2
+(no escribir guiones hasta que Maikel elija ángulos). `metodo-angulos.md` queda como
+referencia rápida; esta skill es el motor operativo.
