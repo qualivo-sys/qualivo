@@ -36,3 +36,26 @@ cambiando el titular. Cada ángulo cambia el punto de entrada psicológico, no e
 
 Antes de proponer un vídeo nuevo: decir explícitamente qué ángulo usa y por qué ese.
 El vídeo manifiesto (video-005) fue ángulo 03 (mecanismo) + 12 (rompe-mitos).
+
+## Los 5 niveles de consciencia (por qué el mismo mensaje no sirve para todos)
+
+Cada persona está en un punto distinto respecto al producto y al problema:
+
+| Nivel | Estado | Qué necesita oír |
+|-------|--------|------------------|
+| 01 | Inconsciente | Ni sabe que tiene el problema → despertar con síntomas, historias, identidad |
+| 02 | Consciente del problema | Sufre el problema pero no sabe que hay solución → agitar el dolor + revelar que existe salida |
+| 03 | Consciente de la solución | Sabe que existen soluciones, no conoce la tuya → mecanismo, comparación, diferenciación |
+| 04 | Consciente del producto | Conoce tu producto pero no ha comprado → rompe-objeciones, prueba, precio/valor |
+| 05 | El más consciente | Solo le falta el empujón → oferta directa, urgencia, miedo/pérdida |
+
+## Cruce ángulo × nivel de consciencia (guía rápida)
+
+- **Nivel 01-02 (frío)**: problema/dolor, identidad, emocional, rompe-mitos.
+- **Nivel 03 (templado)**: mecanismo, comparación, beneficio, comodidad.
+- **Nivel 04-05 (caliente)**: rompe-objeciones, precio/valor, miedo/pérdida, estatus.
+
+**Regla del agente**: antes de escribir una pieza, fijar (1) nivel de consciencia del público
+objetivo y (2) ángulo — en ese orden. El nivel decide QUÉ conversación tener; el ángulo decide
+POR DÓNDE entrar. El contenido orgánico de Maikel (IG) habla sobre todo a niveles 01-03;
+el retargeting y el email a 04-05.
