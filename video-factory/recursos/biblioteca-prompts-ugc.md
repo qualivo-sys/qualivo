@@ -146,7 +146,7 @@ Equivalente ffmpeg para nuestro pipeline (aplicar antes del encode web-safe):
 ```
 -vf "eq=saturation=0.94:contrast=1.12:brightness=-0.015,\
 curves=master='0/0.023 0.25/0.30 0.75/0.70 1/0.97',\
-colorbalance=bs=0.02:ms=0.01:hs=-0.02"
+colorbalance=bs=0.02:bm=0.01:gm=-0.01:bh=-0.02"
 ```
 
 - `eq` → saturación -6, contraste +12, exposición -3.
