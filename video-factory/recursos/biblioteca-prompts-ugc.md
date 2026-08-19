@@ -245,3 +245,18 @@ Reglas aprendidas a base de pruebas:
 - Después de generar: recorte a 1080×1920 exacto + capa de realismo + encode web-safe.
 - HeyGen queda SOLO para primeros planos estáticos con el gemelo (nunca para
   planos caminando: solo anima el busto).
+
+## Acabado del reel (validado en "lista infinita", 19-ago)
+
+- **Música a medida**: Suno V5_5 vía KIE (`POST /api/v1/generate`, customMode+instrumental,
+  callBackUrl obligatorio aunque se haga polling con `/api/v1/generate/record-info` —
+  esperar status SUCCESS, no TEXT_SUCCESS). Estilo que funciona de fondo: "warm organic
+  lofi hip hop, understated, no melody hooks, consistent energy" + negativeTags
+  "epic, cinematic, edm, vocals". Elegir entre las 2 variantes por menor variación de
+  energía. Mezcla: volume 0.10 + sidechaincompress contra la voz (threshold .06 ratio 3).
+- **SFX sintetizados** (numpy, sin licencias): whoosh (ruido+envolvente) en cada corte,
+  pop 740Hz en notificaciones, tick 1320Hz en las automatizaciones.
+- **Textos**: subs kinéticos palabra a palabra (Whisper word-timestamps del máster
+  ensamblado → cues de 2-3 palabras) + rótulos de énfasis Anton naranja arriba en los
+  momentos clave + chips apilables con borde para listas. Remotion sobre el máster
+  (OffthreadVideo) a 30fps.
