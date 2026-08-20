@@ -130,9 +130,37 @@ se ha estancado.»
 - 📊 **Información**: datos repartidos, métricas que nadie mira, información contradictoria, falta de visibilidad.
 - 📣 **Marketing a ciegas**: campañas que traen prospectos pero nadie sabe si son rentables;
   publicar en redes «porque hay que publicar» sin saber qué aporta; invertir en varios
-  canales sin saber cuál llena el cubo y cuál solo gasta; contactos que llegan de la
-  publicidad y se enfrían porque nadie mide qué pasa después; renovar presupuestos por
+  canales sin saber cuál llena el cubo y cuál solo gasta; renovar presupuestos por
   inercia. La ceguera es doble: **no sabes dónde pierdes NI qué te está funcionando.**
+
+## 9b. El mapa de fugas del recorrido completo (posicionamiento de consultor)
+
+⚠️ REGLA DE POSICIONAMIENTO: no vendemos «responder más rápido al lead» (speed to lead) —
+eso lo vende cualquier agencia y reduce el problema a un solo punto. Qualivo es EL CONSULTOR
+QUE REVISA EL RECORRIDO ENTERO, desde que se capta hasta que se cierra. La fuga puede estar
+en cualquier etapa, y casi nunca está donde el dueño cree. El seguimiento es UNA fuga
+posible entre muchas — nunca el mensaje central.
+
+**CAPTACIÓN**: anuncios demasiado genéricos que atraen curiosos y no compradores; campañas
+mal montadas que gastan de más; públicos mal segmentados; mensajes que no dicen nada («somos
+líderes en calidad»); invertir en el canal equivocado para ese negocio.
+**ATRACCIÓN → INTERÉS**: páginas que no cuentan lo que el cliente quiere saber; formularios
+que espantan; ofertas iguales que las de todos; nadie mide qué anuncio trae al que compra
+y cuál al que hace perder el tiempo.
+**CUALIFICACIÓN**: todos los contactos tratados igual (el bueno y el curioso); el comercial
+pierde horas con quien nunca iba a comprar; no hay criterio de a quién llamar primero.
+**PROPUESTA**: presupuestos genéricos que no responden a lo que el cliente pidió; precios
+sin criterio; propuestas que tardan tanto que llegan frías; nadie sabe cuántas se envían
+ni cuántas se aceptan.
+**CIERRE**: sin proceso de cierre — cada comercial improvisa; objeciones que nadie ha
+preparado; ventas que se caen al final y nadie pregunta por qué.
+**POSVENTA**: clientes que compran una vez y nadie vuelve a hablarles; sin recompra ni
+referidos; quejas que no llegan a dirección.
+**TRANSVERSAL**: nadie mide el recorrido completo — cada herramienta tiene un trozo de la
+foto y nadie tiene la foto entera.
+
+El mensaje del consultor: **«Yo no vengo a arreglar un punto. Vengo a revisar el recorrido
+entero y decirte en qué punto exacto estás perdiendo.»**
 
 ## 10. La metodología Qualivo (repetir hasta que sea reconocible)
 01 DETECTAR → 02 ENTENDER → 03 PRIORIZAR → 04 SOLUCIONAR → 05 SISTEMATIZAR →
