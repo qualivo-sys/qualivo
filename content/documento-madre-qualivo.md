@@ -128,6 +128,11 @@ se ha estancado.»
 - 👥 **Equipo**: responsabilidades poco claras, falta de seguimiento, tareas duplicadas, comerciales haciendo administración, dirección apagando fuegos.
 - 🔧 **Procesos**: pasos innecesarios, errores, herramientas que no se hablan, procesos que dependen de personas.
 - 📊 **Información**: datos repartidos, métricas que nadie mira, información contradictoria, falta de visibilidad.
+- 📣 **Marketing a ciegas**: campañas que traen prospectos pero nadie sabe si son rentables;
+  publicar en redes «porque hay que publicar» sin saber qué aporta; invertir en varios
+  canales sin saber cuál llena el cubo y cuál solo gasta; contactos que llegan de la
+  publicidad y se enfrían porque nadie mide qué pasa después; renovar presupuestos por
+  inercia. La ceguera es doble: **no sabes dónde pierdes NI qué te está funcionando.**
 
 ## 10. La metodología Qualivo (repetir hasta que sea reconocible)
 01 DETECTAR → 02 ENTENDER → 03 PRIORIZAR → 04 SOLUCIONAR → 05 SISTEMATIZAR →
