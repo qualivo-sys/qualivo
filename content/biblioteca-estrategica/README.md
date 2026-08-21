@@ -15,9 +15,10 @@
 | `datos/historial.json` | Lo publicado, para la antirrepetición |
 
 ```bash
-python3 content/biblioteca-estrategica/motor.py            # informe del día
-python3 content/biblioteca-estrategica/motor.py --icp ICP-FOR
-python3 content/biblioteca-estrategica/motor.py --json     # para el agente
+python3 content/biblioteca-estrategica/motor.py                 # carril A · orgánico
+python3 content/biblioteca-estrategica/motor.py --canal pago    # carril B · el ICP que toque
+python3 content/biblioteca-estrategica/motor.py --canal pago --icp ICP-FOR
+python3 content/biblioteca-estrategica/motor.py --json          # para el agente
 ```
 
 Los dolores **no se duplican en JSON**: `motor.py` parsea las tablas de

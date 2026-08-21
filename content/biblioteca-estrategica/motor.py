@@ -110,7 +110,8 @@ def peso_senal(dolor_id, senales, hoy):
     return 0.0, None
 
 
-def puntuar(icp_id, icp, dolor_id, angulo, nivel, senales, hist, hoy, icp_semana):
+def puntuar(icp_id, icp, dolor_id, angulo, nivel, senales, hist, hoy, icp_semana,
+            canal="organico"):
     # --- reglas de compatibilidad (descartan) ---
     if angulo in BLOQUEADOS:
         return None
@@ -147,8 +148,9 @@ def puntuar(icp_id, icp, dolor_id, angulo, nivel, senales, hist, hoy, icp_semana
 
     usados = [p["codigo"].split("·")[2] for p in hist["publicado"][-3:]]
     f_frescura = 0 if angulo in usados else 5
+    f_canal = 8 if (canal == "organico" and angulo == "A-BTS") else 0
 
-    total = f_senal + f_icp + f_dolor + f_encaje + f_cuota + f_frescura
+    total = (f_senal + f_icp + f_dolor + f_encaje + f_cuota + f_frescura + f_canal)
     return {
         "codigo": codigo, "icp": icp_id, "icp_nombre": icp["nombre"],
         "dolor": dolor_id, "angulo": angulo, "angulo_nombre": ANGULOS[angulo],
@@ -158,14 +160,19 @@ def puntuar(icp_id, icp, dolor_id, angulo, nivel, senales, hist, hoy, icp_semana
     }
 
 
-def generar(icp_semana=None, hoy=None):
+def generar(icp_semana=None, hoy=None, canal="organico"):
+    """canal='organico' habla a la audiencia que YA tenemos (ICP-TRA, sin sector).
+    canal='pago' habla al ICP de la semana, porque en publicidad y en puerta fria
+    elegimos nosotros quien nos ve."""
     hoy = hoy or dt.date.today()
     dolores = cargar_dolores()
     icps = cargar("icps.json")
     senales = cargar("senales.json")
     hist = cargar("historial.json")
     if icp_semana is None:
-        icp_semana = min(icps, key=lambda k: icps[k]["prioridad"])
+        icp_semana = "ICP-TRA" if canal == "organico" else min(
+            (k for k in icps if k != "ICP-TRA"),
+            key=lambda k: icps[k]["prioridad"])
 
     cands = []
     for icp_id, icp in icps.items():
@@ -173,7 +180,7 @@ def generar(icp_semana=None, hoy=None):
             for angulo in ANGULOS:
                 for nivel in COMPAT:
                     c = puntuar(icp_id, icp, dolor_id, angulo, nivel,
-                                senales, hist, hoy, icp_semana)
+                                senales, hist, hoy, icp_semana, canal)
                     if c:
                         c["llano"] = dolores[dolor_id]["llano"]
                         c["escape"] = dolores[dolor_id]["escape"]
@@ -225,7 +232,7 @@ def repartir(cands, n=10, icp_semana=None, max_por_dolor=3, max_por_angulo=2):
     return sorted(elegidos, key=lambda c: (c["nivel"], -c["puntos"]))
 
 
-def informe(icp_semana, cands, dolores):
+def informe(icp_semana, cands, dolores, canal="organico"):
     top10 = repartir(cands, 10, icp_semana)
     anuncios = repartir([c for c in cands if c["nivel"] in (1, 2, 3)],
                         5, icp_semana, max_por_dolor=2)
@@ -239,7 +246,7 @@ def informe(icp_semana, cands, dolores):
             dolores_top.append(c["dolor"])
         if len(dolores_top) == 3:
             break
-    return {"icp_semana": icp_semana, "contenidos": top10, "anuncios": anuncios,
+    return {"icp_semana": icp_semana, "canal": canal, "contenidos": top10, "anuncios": anuncios,
             "lead_magnets": magnets, "landings": landings,
             "campanas": [{"dolor": d, "llano": dolores[d]["llano"],
                           "icp": icp_semana} for d in dolores_top]}
@@ -247,7 +254,7 @@ def informe(icp_semana, cands, dolores):
 
 def imprimir(inf):
     print(f"\n📊 QUALIVO DAILY · {dt.date.today():%d-%m-%Y}")
-    print(f"ICP de la semana: {inf['icp_semana']}\n")
+    print(f"Canal: {inf['canal']}   ·   ICP: {inf['icp_semana']}\n")
     print("── TOP 10 CONTENIDOS " + "─" * 40)
     for i, c in enumerate(inf["contenidos"], 1):
         print(f"{i:2}. [N{c['nivel']} · {c['angulo_nombre']}] {c['puntos']:>5} pts  {c['codigo']}")
@@ -268,10 +275,11 @@ def imprimir(inf):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--icp")
+    ap.add_argument("--canal", choices=("organico", "pago"), default="organico")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
-    icp, cands, dols = generar(a.icp)
-    inf = informe(icp, cands, dols)
+    icp, cands, dols = generar(a.icp, canal=a.canal)
+    inf = informe(icp, cands, dols, a.canal)
     if a.json:
         print(json.dumps(inf, ensure_ascii=False, indent=2))
     else:

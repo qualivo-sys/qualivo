@@ -1,0 +1,550 @@
+<title>Sala de Máquinas Qualivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;100,700;110,800&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --ink:#14161A; --paper:#F1F2F4; --surface:#FFFFFF; --surface-2:#F7F8F9;
+  --accent:#E8590C; --accent-ink:#B44508;
+  --muted:#6C727A; --line:#DCDEE2; --line-soft:#E7E9EC;
+  --shadow:0 1px 2px rgba(20,22,26,.05), 0 8px 24px -16px rgba(20,22,26,.28);
+  --disp:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E8EAEC; --paper:#0D0F12; --surface:#16191D; --surface-2:#1C1F24;
+    --accent:#FF7A2E; --accent-ink:#FFA062;
+    --muted:#949AA3; --line:#2A2F36; --line-soft:#232830;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E8EAEC; --paper:#0D0F12; --surface:#16191D; --surface-2:#1C1F24;
+  --accent:#FF7A2E; --accent-ink:#FFA062;
+  --muted:#949AA3; --line:#2A2F36; --line-soft:#232830;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--disp); font-variation-settings:"wdth" 100;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:940px; margin:0 auto; padding:0 22px}
+a{color:var(--accent-ink)}
+h1,h2,h3{text-wrap:balance; margin:0}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+}
+
+/* ---------- cabecera ---------- */
+header.top{padding:56px 0 30px; border-bottom:1px solid var(--line)}
+header.top h1{
+  font-size:clamp(38px,7vw,62px); font-weight:800; line-height:.98;
+  font-variation-settings:"wdth" 110; letter-spacing:-.02em; margin:14px 0 0;
+}
+header.top h1 em{font-style:normal; color:var(--accent)}
+.lede{
+  font-family:var(--serif); font-size:19px; line-height:1.5;
+  color:var(--muted); max-width:60ch; margin:18px 0 0;
+}
+.meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
+.meta span{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.04em;
+  border:1px solid var(--line); border-radius:999px; padding:6px 12px;
+  background:var(--surface); color:var(--muted);
+}
+.meta span b{color:var(--ink); font-weight:600}
+
+/* ---------- navegación ---------- */
+nav.jump{
+  position:sticky; top:0; z-index:20; background:var(--paper);
+  border-bottom:1px solid var(--line); margin-bottom:44px;
+}
+nav.jump .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none}
+nav.jump .wrap::-webkit-scrollbar{display:none}
+nav.jump a{
+  font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; text-decoration:none; color:var(--muted);
+  padding:14px 12px; white-space:nowrap; border-bottom:2px solid transparent;
+}
+nav.jump a:hover,nav.jump a:focus-visible{color:var(--ink); border-bottom-color:var(--accent)}
+
+section{margin-bottom:64px; scroll-margin-top:60px}
+.sec-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px}
+.sec-head h2{
+  font-size:26px; font-weight:800; font-variation-settings:"wdth" 110;
+  letter-spacing:-.01em;
+}
+.sec-note{font-family:var(--serif); color:var(--muted); max-width:64ch; margin:0 0 26px; font-size:16.5px}
+
+/* ---------- fichas de contenido ---------- */
+.briefs{display:flex; flex-direction:column; gap:14px}
+.brief{
+  background:var(--surface); border:1px solid var(--line-soft);
+  border-left:4px solid var(--accent); border-radius:6px;
+  padding:20px 22px 18px; box-shadow:var(--shadow);
+}
+.brief[data-n="1"]{border-left-color:color-mix(in srgb, var(--accent) 28%, var(--line))}
+.brief[data-n="2"]{border-left-color:color-mix(in srgb, var(--accent) 48%, var(--line))}
+.brief[data-n="3"]{border-left-color:color-mix(in srgb, var(--accent) 68%, var(--line))}
+.brief[data-n="4"]{border-left-color:color-mix(in srgb, var(--accent) 85%, var(--line))}
+.brief[data-n="5"]{border-left-color:var(--accent)}
+.brief-top{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.code{
+  font-family:var(--mono); font-size:11px; letter-spacing:.02em; color:var(--muted);
+  background:var(--surface-2); border:1px solid var(--line-soft);
+  border-radius:4px; padding:4px 8px;
+}
+.angle{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--accent-ink);
+}
+.dots{display:flex; gap:4px; margin-left:auto; align-items:center}
+.dots i{
+  width:7px; height:7px; border-radius:50%; display:block;
+  border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+.dots i.on{background:var(--accent); border-color:var(--accent)}
+.dots small{font-family:var(--mono); font-size:10.5px; color:var(--muted); margin-left:5px; letter-spacing:.08em}
+.hook{
+  font-family:var(--serif); font-size:21px; line-height:1.38; margin:0 0 16px;
+  max-width:56ch; text-wrap:pretty;
+}
+.rows{display:grid; grid-template-columns:82px 1fr; gap:7px 16px; align-items:baseline}
+.rows dt{
+  font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); padding-top:3px;
+}
+.rows dd{margin:0; font-size:15px; line-height:1.5; color:var(--ink)}
+.rows dd.dim{color:var(--muted)}
+.cta{color:var(--accent-ink); font-weight:500}
+
+/* ---------- listas compactas ---------- */
+.grid3{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+.card{
+  background:var(--surface); border:1px solid var(--line-soft); border-radius:6px;
+  padding:16px 18px; box-shadow:var(--shadow);
+}
+.card h3{font-size:15px; font-weight:700; margin-bottom:7px; letter-spacing:-.005em}
+.card p{margin:0; font-size:14.5px; color:var(--muted); line-height:1.5}
+.card p + p{margin-top:8px}
+.card .code{display:inline-block; margin-bottom:10px}
+ol.ads{list-style:none; padding:0; margin:0; counter-reset:ad; display:flex; flex-direction:column; gap:1px}
+ol.ads li{
+  counter-increment:ad; background:var(--surface); border:1px solid var(--line-soft);
+  padding:13px 18px 13px 46px; position:relative; font-size:15px;
+}
+ol.ads li:first-child{border-radius:6px 6px 0 0}
+ol.ads li:last-child{border-radius:0 0 6px 6px}
+ol.ads li::before{
+  content:counter(ad,decimal-leading-zero); position:absolute; left:18px; top:14px;
+  font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:600;
+}
+ol.ads b{font-weight:600}
+ol.ads span{display:block; color:var(--muted); font-size:13.5px; margin-top:3px; font-family:var(--mono); letter-spacing:.02em}
+
+/* ---------- tablas ---------- */
+.scroll{overflow-x:auto; border:1px solid var(--line-soft); border-radius:6px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:600px; font-size:14.5px}
+th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+thead th{
+  font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); background:var(--surface-2);
+  position:sticky; top:0;
+}
+tbody tr:last-child td{border-bottom:none}
+td.k{font-family:var(--mono); font-size:12px; color:var(--accent-ink); white-space:nowrap}
+td.s{font-family:var(--serif)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+.chip{
+  font-size:14px; background:var(--surface); border:1px solid var(--line-soft);
+  border-radius:5px; padding:9px 13px; box-shadow:var(--shadow);
+}
+.chip b{font-family:var(--mono); font-size:10.5px; font-weight:600; color:var(--accent-ink);
+  letter-spacing:.08em; display:block; margin-bottom:2px}
+.chip span{color:var(--muted); font-size:13.5px}
+
+.callout{
+  border:1px solid var(--line); border-left:3px solid var(--accent);
+  background:var(--surface-2); border-radius:5px; padding:16px 18px;
+  font-family:var(--serif); font-size:16px; line-height:1.5;
+}
+.callout strong{font-family:var(--disp); font-weight:700; font-size:14px}
+
+pre.cmd{
+  font-family:var(--mono); font-size:12.5px; background:var(--surface);
+  border:1px solid var(--line-soft); border-radius:6px; padding:14px 16px;
+  overflow-x:auto; margin:0; color:var(--ink);
+}
+footer{border-top:1px solid var(--line); padding:30px 0 60px; color:var(--muted); font-size:14px}
+footer p{margin:0 0 10px; max-width:66ch}
+@media (max-width:560px){
+  .rows{grid-template-columns:1fr; gap:2px 0}
+  .rows dt{padding-top:9px}
+  .hook{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Biblioteca estratégica · semana del 21 de agosto</p>
+    <h1>La sala de máquinas<br>de <em>Qualivo</em></h1>
+    <p class="lede">Diez ideas para publicar esta semana, y la maquinaria que las produce.
+      No son diez temas sueltos: son <strong>tres fugas recorridas por los cinco niveles de
+      consciencia</strong>. Ese es el hilo conductor.</p>
+    <div class="meta">
+      <span>Carril · <b>Orgánico, tu cuenta</b></span>
+      <span>Fugas en juego · <b>3</b></span>
+      <span>Biblioteca · <b>49 fugas · 13 perfiles · 12 ángulos</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="wrap">
+  <a href="#carriles">Dos carriles</a>
+  <a href="#semana">Esta semana</a>
+  <a href="#anuncios">Cuando pongas dinero</a>
+  <a href="#imanes">Lead magnets</a>
+  <a href="#campanas">Campañas</a>
+  <a href="#fugas">Las fugas</a>
+  <a href="#angulos">Los ángulos</a>
+  <a href="#niveles">Los niveles</a>
+  <a href="#donde">Dónde vive</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="carriles">
+  <div class="sec-head"><h2>Dos carriles, y no se mezclan</h2></div>
+  <p class="sec-note">La primera versión de esta página hablaba a clínicas. En tu cuenta no hay
+    clínicas. El fallo era mío y era de fondo: estaba usando el mismo perfil de cliente para dos
+    cosas que funcionan al revés.</p>
+  <div class="grid3">
+    <div class="card"><span class="code">CARRIL A · ORGÁNICO</span>
+      <h3>Tú no eliges quién te ve</h3>
+      <p>En tu Instagram te ve quien ya te sigue. Aquí el contenido tiene que ser
+        <b>transversal</b>: fugas que reconoce cualquiera que tenga un negocio con equipo y
+        clientes, sin importar el sector.</p>
+      <p>Es el carril que construye la marca y el que llena la agenda a medio plazo.</p></div>
+    <div class="card"><span class="code">CARRIL B · PAGO Y PUERTA FRÍA</span>
+      <h3>Ahí sí eliges tú</h3>
+      <p>En publicidad y escribiendo en frío decides exactamente a quién le sale. Ahí sí se
+        habla de pacientes, de agenda y de recepción, porque solo lo ven clínicas.</p>
+      <p>Ese material está hecho y esperando: no se publica en tu perfil, se lanza cuando
+        haya presupuesto o cuando salga la lista de la puerta fría.</p></div>
+    <div class="card"><span class="code">LO QUE COMPARTEN</span>
+      <h3>La misma fuga, distinto traje</h3>
+      <p>«Pidió presupuesto y nadie volvió a escribirle» es la misma fuga en tu perfil y en un
+        anuncio a clínicas. Cambia el vocabulario, no la idea.</p>
+      <p>Por eso el trabajo de la biblioteca no se tira: se traduce.</p></div>
+  </div>
+</section>
+
+<section id="semana">
+  <div class="sec-head"><h2>Las 10 de esta semana</h2><span class="eyebrow">Carril A · tu cuenta</span></div>
+  <p class="sec-note">Ordenadas por nivel de consciencia: las primeras hablan a quien no sabe
+    todavía que tiene un problema; las últimas, a quien ya está buscando con quién resolverlo.
+    Las bolitas marcan a qué profundidad va cada pieza. Ninguna menciona un sector.</p>
+
+  <div class="briefs">
+
+    <article class="brief" data-n="1">
+      <div class="brief-top">
+        <span class="code">D-COM-10</span><span class="angle">Coste oculto</span>
+        <span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><small>N1</small></span>
+      </div>
+      <p class="hook">«El cliente más caro de tu negocio no es el que nunca llegó. Es el que llegó, pidió precio, dijo “me lo pienso”… y nadie volvió a escribirle.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Por ese ya pagaste el anuncio, la llamada, la reunión y el rato de escribir la propuesta. Todo. Y ahora está en una carpeta con fecha de marzo.</dd>
+        <dt>El giro</dt><dd>No es un cliente que no llegó. Es uno que llegó, costó dinero y se fue solo.</dd>
+        <dt>Cierre</dt><dd class="dim">Sin llamada a la acción. «Cuenta cuántos tienes de este trimestre. No hace falta ninguna herramienta: hace falta contarlos.»</dd>
+        <dt>Formato</dt><dd class="dim">Reel 25–35 s · voz en off sobre plano de carpeta o pantalla, sin cara a cámara</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="1">
+      <div class="brief-top">
+        <span class="code">D-COM-01</span><span class="angle">Coste oculto</span>
+        <span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><small>N1</small></span>
+      </div>
+      <p class="hook">«El que iba a comprar y el que solo estaba mirando reciben en tu negocio exactamente el mismo trato. La misma persona, el mismo rato, la misma paciencia.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>No porque alguien lo haya decidido mal. Porque nadie lo ha decidido.</dd>
+        <dt>El giro</dt><dd>Y el que iba a comprar suele ser el que se cansa antes de esperar.</dd>
+        <dt>El coste</dt><dd>El tiempo de quien mejor vende, repartido a partes iguales entre quien compra y quien pasaba por ahí.</dd>
+        <dt>Formato</dt><dd class="dim">Reel 20–30 s · dos planos alternos, misma escena con dos personas distintas</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="1">
+      <div class="brief-top">
+        <span class="code">D-DIR-02</span><span class="angle">Diagnóstico</span>
+        <span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><small>N1</small></span>
+      </div>
+      <p class="hook">«Tres preguntas. Si dudas en una, ya tienes la respuesta. Uno: ¿gastas más que hace un año? Dos: ¿facturas mucho más que hace un año? Tres: si las dos respuestas no son la misma, ¿sabes dónde se ha ido la diferencia?»</p>
+      <dl class="rows">
+        <dt>El giro</dt><dd>Casi nadie puede responder la tercera. Y esa es la única que importa.</dd>
+        <dt>Cierre</dt><dd class="dim">«Guárdatelo y hazlo el lunes con los números delante.»</dd>
+        <dt>Formato</dt><dd class="dim">Reel 30 s a cámara · las tres preguntas en pantalla, una a una</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="2">
+      <div class="brief-top">
+        <span class="code">D-COM-10</span><span class="angle">El error</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><small>N2</small></span>
+      </div>
+      <p class="hook">«El error es apuntar “no interesado”. Casi nunca es “no interesado”. Es “ahora no”, y nadie se acordó de volver.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Un “ahora no” caduca en semanas. Un “no interesado” en el sistema no caduca nunca: te lo quitas de la lista y ya está.</dd>
+        <dt>El nombre</dt><dd>Eso tiene nombre. Es una fuga: dinero que ya entró en tu negocio y se va por un sitio que nadie mira.</dd>
+        <dt>CTA</dt><dd class="cta">«Si quieres saber dónde están las tuyas, escríbeme FUGAS.»</dd>
+        <dt>Formato</dt><dd class="dim">Carrusel de 5 · o reel 35 s a cámara</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="2">
+      <div class="brief-top">
+        <span class="code">D-COM-01</span><span class="angle">El error</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><small>N2</small></span>
+      </div>
+      <p class="hook">«El error no es que falte gente en el equipo. El error es que nadie ha decidido a quién se atiende primero.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Contratas a otra persona y consigues dos personas atendiendo igual de bien y de mal por orden de llegada. No era un problema de manos: era de criterio.</dd>
+        <dt>La frase</dt><dd>Tener catorce pestañas abiertas no es tener un sistema comercial.</dd>
+        <dt>CTA</dt><dd class="cta">«Escríbeme FUGAS.»</dd>
+        <dt>Formato</dt><dd class="dim">Reel 35–45 s · a cámara con rótulos</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="2">
+      <div class="brief-top">
+        <span class="code">D-DIR-02</span><span class="angle">El mito</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><small>N2</small></span>
+      </div>
+      <p class="hook">«“Si quiero crecer, tengo que invertir más.” Es probablemente la frase que más dinero ha costado en negocios que ya funcionaban.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Invertir más en un negocio con agujeros es echar más agua en un cubo agujereado. Entra más, sí. Y también se va más, y más rápido.</dd>
+        <dt>El nombre</dt><dd>Antes de meter más, mira por dónde se está escapando.</dd>
+        <dt>CTA</dt><dd class="cta">«Escríbeme FUGAS.»</dd>
+        <dt>Formato</dt><dd class="dim">Reel 30 s · el cubo en plano, sin explicarlo — se entiende solo</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="3">
+      <div class="brief-top">
+        <span class="code">D-COM-10</span><span class="angle">Contrarian</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><small>N3</small></span>
+      </div>
+      <p class="hook">«Antes de montar la campaña de septiembre, para. Coge los presupuestos que enviaste antes de verano y cuenta cuántos siguen sin respuesta.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Ese número es tu campaña más barata del año. Y ya está pagada.</dd>
+        <dt>El giro</dt><dd>No hace falta contratar nada ni comprar nada. Hace falta que alguien se siente una tarde a contarlo.</dd>
+        <dt>CTA</dt><dd class="cta">«Si quieres ponerle una cifra, tengo una calculadora hecha. Escríbeme DIAGNÓSTICO.»</dd>
+        <dt>Formato</dt><dd class="dim">Reel 40 s + enlace en la biografía a la Calculadora de Fugas</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="3">
+      <div class="brief-top">
+        <span class="code">D-COM-01</span><span class="angle">Contrarian</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><small>N3</small></span>
+      </div>
+      <p class="hook">«No contrates a nadie todavía.»</p>
+      <dl class="rows">
+        <dt>Desarrollo</dt><dd>Antes, coge una semana de conversaciones y sepáralas en dos montones: los que iban a comprar y los que preguntaban. Si no puedes hacer esos dos montones, no tienes un problema de personal.</dd>
+        <dt>El giro</dt><dd>Contratar es la forma más cara de tapar una decisión que nadie ha tomado.</dd>
+        <dt>CTA</dt><dd class="cta">«Si quieres saber qué miraría yo primero, escríbeme DIAGNÓSTICO.»</dd>
+        <dt>Formato</dt><dd class="dim">Vídeo 50–70 s a cámara · el ángulo más nuestro que existe</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="4">
+      <div class="brief-top">
+        <span class="code">D-DIR-02</span><span class="angle">Entre bastidores</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><small>N4</small></span>
+      </div>
+      <p class="hook">«Esto es lo primero que miro cuando alguien me dice que invierte más y factura igual.»</p>
+      <dl class="rows">
+        <dt>Contenido</dt><dd>El proceso tal cual: detectar dónde se pierde, entender por qué, priorizar qué cuesta más caro, solucionarlo, dejarlo montado para que no dependa de quién esté ese día, y solo entonces automatizar.</dd>
+        <dt>La parte incómoda</dt><dd>Casi nunca el problema está donde el dueño cree. Por eso el primer paso no es arreglar: es mirar.</dd>
+        <dt>CTA</dt><dd class="cta">Diagnóstico gratuito · Calculadora de Fugas</dd>
+        <dt>Formato</dt><dd class="dim">Vídeo 90 s · pantalla compartida o pizarra. Es también el guion de la landing</dd>
+      </dl>
+    </article>
+
+    <article class="brief" data-n="5">
+      <div class="brief-top">
+        <span class="code">D-DIR-01</span><span class="angle">Entre bastidores</span>
+        <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><small>N5</small></span>
+      </div>
+      <p class="hook">«Si tu negocio necesita que estés pendiente de todo para funcionar, no tienes un negocio. Tienes un trabajo con más responsabilidad.»</p>
+      <dl class="rows">
+        <dt>Contenido</dt><dd>Qué hago exactamente cuando entro en una empresa: qué accesos pido, cuánto tardo, qué te entrego y quién lo mantiene después.</dd>
+        <dt>El freno que quita</dt><dd>Si tras el análisis no aparece ninguna fuga con impacto demostrable, no pagas la implementación.</dd>
+        <dt>CTA</dt><dd class="cta">Reservar el escáner</dd>
+        <dt>Formato</dt><dd class="dim">Vídeo 2 min · también es la sección de proceso de la página de oferta</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <p style="margin-top:22px"><span class="callout" style="display:block"><strong>Fíjate en la 1, la 4 y la 7:</strong>
+    son la misma fuga a tres profundidades. La primera solo pone la escena y no pide nada. La
+    segunda le pone nombre y pide FUGAS. La tercera le dice qué hacer el lunes. Ese es el truco
+    entero — cinco piezas de un solo dolor, y la semana con hilo.</span></p>
+</section>
+
+<section id="anuncios">
+  <div class="sec-head"><h2>Cuando pongas dinero</h2><span class="eyebrow">Carril B · clínicas</span></div>
+  <p class="sec-note">Esto <strong>no va a tu perfil</strong>. Va a publicidad segmentada o a
+    puerta fría, que es donde eliges tú quién lo ve. Son las mismas fugas de arriba traducidas
+    al idioma de una clínica. Regla: al pago solo va lo que antes funcionó en orgánico — tu
+    cuenta es el laboratorio.</p>
+  <ol class="ads">
+    <li><b>«La misma llamada para el implante y para la limpieza.»</b><span>D-COM-01 · coste oculto · N1 · palanca: comodidad</span></li>
+    <li><b>«Ya pagaste por ese paciente. Se fue solo.»</b><span>D-COM-10 · coste oculto · N1 · palanca: miedo a la pérdida</span></li>
+    <li><b>«El error no es que falte gente en recepción.»</b><span>D-COM-01 · el error · N2 · palanca: rompe-mitos</span></li>
+    <li><b>«Para llenar la agenda del mes que viene no hace falta una campaña.»</b><span>D-COM-10 · el error · N2 · palanca: precio o valor</span></li>
+    <li><b>«Agenda con huecos y lista de espera a la vez.»</b><span>D-OPS-08 · contrarian · N3 · palanca: problema</span></li>
+  </ol>
+</section>
+
+<section id="imanes">
+  <div class="sec-head"><h2>Lead magnets y landings</h2></div>
+  <p class="sec-note">El ángulo diagnóstico se convierte casi solo en herramienta: el que
+    responde hace el trabajo y se asusta con sus propios números, no con los nuestros.</p>
+  <div class="grid3">
+    <div class="card"><span class="code">D-COM-01 · A-DIAG</span>
+      <h3>Las 6 preguntas que separan al que va a comprar del que solo pregunta</h3>
+      <p>Seis preguntas y un semáforo. Vale para cualquier negocio y sirve de guion a quien coge el teléfono.</p></div>
+    <div class="card"><span class="code">D-DIR-02 · A-DIAG</span>
+      <h3>Gastas más, ¿facturas más?</h3>
+      <p>Dos cifras suyas y la diferencia en pantalla. Es el hook número tres convertido en herramienta.</p></div>
+    <div class="card"><span class="code">D-COM-10 · A-FRAME</span>
+      <h3>¿Cuánto vale tu lista de presupuestos sin cerrar?</h3>
+      <p>Es la Calculadora de Fugas apuntando a un solo sitio. Ya está construida: solo hay que darle esta puerta de entrada.</p></div>
+  </div>
+  <p class="sec-note" style="margin-top:22px">Landings: <b>«No contrates a nadie todavía»</b> (D-COM-01·N3) ·
+    <b>«Antes de la campaña de septiembre»</b> (D-COM-10·N3) ·
+    <b>«Gastas más y facturas igual»</b> (D-DIR-02·N4).</p>
+  <p class="callout"><strong>El hueco real →</strong> entre el lead magnet y la oferta no hay página.
+    Las tres campañas de abajo se quedan cojas justo ahí. Es la siguiente cosa a construir.</p>
+</section>
+
+<section id="campanas">
+  <div class="sec-head"><h2>Las 3 campañas</h2></div>
+  <p class="sec-note">Una campaña no es un anuncio con presupuesto: es <strong>una sola fuga
+    recorrida por los cinco niveles</strong>. Se lanza de abajo arriba — primero existe dónde
+    recoger, después se abre el grifo.</p>
+  <div class="grid3">
+    <div class="card"><span class="code">D-COM-10</span>
+      <h3>El dinero que ya pagaste</h3>
+      <p>La más cuantificable que tenemos: el contacto ya costó dinero. Conecta directa con la Calculadora de Fugas.</p>
+      <p>Clínicas y formación online.</p></div>
+    <div class="card"><span class="code">D-COM-01</span>
+      <h3>El bueno y el curioso</h3>
+      <p>De la escena de recepción al criterio de a quién se llama primero. Se demuestra sola en la primera reunión.</p>
+      <p>Clínicas, y en versión propuestas, servicios B2B.</p></div>
+    <div class="card"><span class="code">D-DIR-07</span>
+      <h3>Nadie mira el recorrido entero</h3>
+      <p>La campaña de posicionamiento: instala «Qualivo revisa el recorrido completo» frente al «te respondemos los leads en 5 minutos» de todas las agencias.</p>
+      <p>Servicios B2B, SaaS, industrial.</p></div>
+  </div>
+</section>
+
+<section id="fugas">
+  <div class="sec-head"><h2>Las fugas</h2><span class="eyebrow">49 en la biblioteca</span></div>
+  <p class="sec-note">Cada fuga tiene un identificador, una manera de decirse en lenguaje normal
+    —eso es lo que va al vídeo, nunca el nombre técnico—, la señal que permite detectarla y por
+    dónde se escapa el dinero. Estas ocho son las de entrada: las que reconoce cualquiera sin
+    saber de qué sector hablas. Son las que sirven en tu cuenta.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>ID</th><th>Cómo se dice</th><th>Por dónde se escapa</th></tr></thead>
+    <tbody>
+      <tr><td class="k">D-DIR-02</td><td class="s">Inviertes más y el resultado apenas cambia.</td><td>El síntoma que abre casi todas las conversaciones</td></tr>
+      <tr><td class="k">D-DIR-01</td><td class="s">Para que esto funcione tienes que estar pendiente de todo.</td><td>El negocio no escala y tú no descansas</td></tr>
+      <tr><td class="k">D-COM-10</td><td class="s">Una persona estaba interesada, no compró, y nadie volvió a hablar con ella.</td><td>Dinero ya gastado en generar ese contacto</td></tr>
+      <tr><td class="k">D-OPS-01</td><td class="s">Tu empleado copia datos de un sitio a otro todos los días.</td><td>Horas repetidas cada semana, más los errores</td></tr>
+      <tr><td class="k">D-MKT-03</td><td class="s">Inviertes en cuatro sitios y no sabes cuál llena el cubo.</td><td>Se renueva por inercia el canal que no vende</td></tr>
+      <tr><td class="k">D-COM-01</td><td class="s">Tratas igual al que va a comprar y al que solo preguntaba.</td><td>La mejor persona del equipo en la conversación menos rentable</td></tr>
+      <tr><td class="k">D-DIR-04</td><td class="s">Tienes datos en cuatro sitios y ninguno cuadra.</td><td>Se decide a ciegas y se discute por los números</td></tr>
+      <tr><td class="k">D-DIR-10</td><td class="s">Sabes que la IA va a cambiar esto y no tienes ni idea de por dónde empezar.</td><td>Meses de ventaja que se van sin hacer nada</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-note" style="margin-top:18px">Las 49 (estas ocho incluidas) se agrupan en cuatro áreas —Marketing, Comercial,
+    Operaciones y Dirección— y se etiquetan por etapa del recorrido, de la captación a la posventa.
+    Esa etiqueta es la que sostiene el posicionamiento: la fuga puede estar en cualquier punto, y
+    casi nunca está donde el dueño cree.</p>
+</section>
+
+<section id="angulos">
+  <div class="sec-head"><h2>Los 12 ángulos</h2></div>
+  <p class="sec-note">Cómo se cuenta cualquier fuga. Nunca dos piezas seguidas con el mismo.</p>
+  <div class="chips">
+    <span class="chip"><b>A-ERROR</b>El error<br><span>Lo que casi todo el sector hace mal</span></span>
+    <span class="chip"><b>A-COSTE</b>El coste oculto<br><span>Poner precio a algo que él cree gratis</span></span>
+    <span class="chip"><b>A-MITO</b>El mito<br><span>Desmontar una creencia aceptada</span></span>
+    <span class="chip"><b>A-CONTRA</b>Contrarian<br><span>Pedirle que no haga lo que iba a hacer</span></span>
+    <span class="chip"><b>A-CASO</b>Caso real<br><span>Bloqueado hasta el primer piloto</span></span>
+    <span class="chip"><b>A-DIAG</b>Diagnóstico<br><span>Las preguntas para que se autoevalúe</span></span>
+    <span class="chip"><b>A-FRAME</b>Framework<br><span>Enseñar el mecanismo</span></span>
+    <span class="chip"><b>A-COMPA</b>Comparativa<br><span>Dos caminos, dos resultados</span></span>
+    <span class="chip"><b>A-TEND</b>Tendencia<br><span>Lo que acaba de pasar y le afecta</span></span>
+    <span class="chip"><b>A-PRED</b>Predicción<br><span>Hacia dónde va esto</span></span>
+    <span class="chip"><b>A-BTS</b>Entre bastidores<br><span>Cómo trabajamos nosotros</span></span>
+    <span class="chip"><b>A-OPOR</b>Oportunidad<br><span>El dinero que ya tiene y no coge</span></span>
+  </div>
+  <p class="callout" style="margin-top:20px"><strong>Regla de ejecución →</strong> todo reel abre
+    en escena o en dolor, y el ángulo aparece en el giro, entre el segundo tres y el ocho. Abrir
+    directamente por el ángulo suena a anuncio y se nota.</p>
+</section>
+
+<section id="niveles">
+  <div class="sec-head"><h2>Los 5 niveles</h2></div>
+  <p class="sec-note">El nivel lo fija la audiencia, no el tema. La misma fuga contada a un nivel
+    uno y a un nivel cinco son dos piezas distintas — y de ahí salen cinco piezas de un solo dolor.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Nivel</th><th>Su frase</th><th>Se puede decir</th><th>Llamada a la acción</th><th>Peso</th></tr></thead>
+    <tbody>
+      <tr><td class="k">N1</td><td class="s">Vamos bien, pero cuesta más que antes</td><td>Síntomas y escenas. Nada de producto, ni marca, ni IA</td><td>Ninguna</td><td>30 %</td></tr>
+      <tr><td class="k">N2</td><td class="s">Algo no cuadra y no sé qué es</td><td>El nombre «fuga» y el coste oculto</td><td>Escríbeme FUGAS</td><td>30 %</td></tr>
+      <tr><td class="k">N3</td><td class="s">Tengo que arreglarlo, ¿por dónde?</td><td>El mecanismo, el diagnóstico, el orden de prioridades</td><td>Escríbeme DIAGNÓSTICO</td><td>25 %</td></tr>
+      <tr><td class="k">N4</td><td class="s">Sé que existen consultorías y automatizaciones</td><td>Qualivo, los 7 pasos, Agent for Me</td><td>Diagnóstico gratuito</td><td>10 %</td></tr>
+      <tr><td class="k">N5</td><td class="s">¿Con quién lo hago?</td><td>Proceso, garantía, cómo trabajamos</td><td>Reservar el escáner</td><td>5 %</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-note" style="margin-top:18px">El 60 % vive en los dos primeros niveles porque ahí
+    está el mercado donde todavía no compite nadie. En los dos últimos compiten todas las agencias
+    de IA de España diciendo exactamente lo mismo.</p>
+</section>
+
+<section id="donde">
+  <div class="sec-head"><h2>Dónde vive todo esto</h2></div>
+  <p class="sec-note">La biblioteca está en el repositorio, en <code style="font-family:var(--mono);font-size:13px">content/biblioteca-estrategica/</code>.
+    Los siete documentos son texto plano y se editan como cualquier otra cosa. El motor los lee y saca este informe.</p>
+  <pre class="cmd">python3 motor.py                          # carril A · lo que publicas tú
+python3 motor.py --canal pago             # carril B · el ICP que toque
+python3 motor.py --canal pago --icp ICP-FOR
+python3 motor.py --json                   # para el agente</pre>
+  <p class="sec-note" style="margin-top:18px">Para añadir una fuga nueva se añade una fila a la tabla
+    de <code style="font-family:var(--mono);font-size:13px">01-dolores.md</code> y ya entra sola en el cruce: los dolores no están
+    duplicados en ningún sitio. Lo que se actualiza a diario es
+    <code style="font-family:var(--mono);font-size:13px">datos/senales.json</code>, que es por donde entra lo que detecta el radar.</p>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <p><strong>Dos bloqueos puestos a propósito.</strong> El ángulo de caso real está desactivado
+    en el código hasta que exista un piloto cerrado y con permiso: es el que más convierte y el
+    único que nos puede reventar si inventamos. Y las cifras de coste de la biblioteca son para
+    razonar, no para publicar — si un número sale a un vídeo, sale del diagnóstico de un cliente real.</p>
+  <p>Antes de hacer más, descubre qué está fallando.</p>
+</div></footer>

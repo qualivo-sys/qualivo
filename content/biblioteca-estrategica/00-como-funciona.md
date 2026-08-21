@@ -53,8 +53,28 @@ Ese código es suficiente para escribir el brief entero. Ejemplo, expandido:
 > **Cuánto sabe**: sabe que algo no cuadra pero no sabe qué → le pongo nombre,
 > no le vendo nada todavía. CTA de curiosidad, no de llamada.
 
+## Los dos carriles (la regla que más se olvida)
+
+| | Carril A · ORGÁNICO | Carril B · PAGO Y PUERTA FRÍA |
+|---|---|---|
+| ¿Quién nos ve? | Quien ya nos sigue. **No lo elegimos.** | Lo elegimos nosotros |
+| Perfil | `ICP-TRA` — dueño de negocio que ya factura, sin sector | El ICP de la semana (clínicas, formación…) |
+| Dolores | Los 8 de entrada, los que reconoce cualquiera | Los prioritarios de ese ICP |
+| Vocabulario | Negocio, equipo, clientes, el día a día | El del sector: pacientes, matrículas, expedientes |
+| Ángulo con peso extra | `A-BTS` — es lo que sostiene la marca personal | Ninguno; manda la señal |
+
+**El error a evitar**: hablar de pacientes y de agenda en un perfil donde no hay
+clínicas. La fuga es la misma en los dos carriles; lo que cambia es el traje. Por eso
+el trabajo de un ICP nunca se tira: se traduce.
+
+```bash
+python3 motor.py                # carril A
+python3 motor.py --canal pago   # carril B
+```
+
 ## Reglas que la biblioteca impone (no negociables)
 
+0. **Nunca contenido de sector en un canal propio.** Ver los dos carriles, arriba.
 1. **Nunca se publica una combinación sin nivel de consciencia.** El mismo dolor
    contado a un nivel 1 y a un nivel 5 son dos piezas distintas; mezclarlos es
    la forma más rápida de no conectar con nadie.
