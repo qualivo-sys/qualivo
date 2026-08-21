@@ -1,0 +1,174 @@
+{
+ "TOMA1-FINAL": [
+  {
+   "ini": 0.0,
+   "fin": 4.36,
+   "texto": "Últimamente me he dado cuenta de una cosa, tener una empresa puede convertirse fácilmente"
+  },
+  {
+   "ini": 4.36,
+   "fin": 6.56,
+   "texto": "en tener una lista infinita de cosas que recordar."
+  }
+ ],
+ "avatarD-toma1-final": [
+  {
+   "ini": 0.0,
+   "fin": 2.28,
+   "texto": "Últimamente me he dado cuenta de una cosa."
+  },
+  {
+   "ini": 2.28,
+   "fin": 4.68,
+   "texto": "Tener una empresa puede convertirse fácilmente"
+  },
+  {
+   "ini": 4.68,
+   "fin": 7.88,
+   "texto": "en tener una lista infinita de cosas que recordar."
+  }
+ ],
+ "avatarD-toma2-final": [
+  {
+   "ini": 0.0,
+   "fin": 5.08,
+   "texto": "¿Qué tengo que responder a este cliente? ¿Qué tengo que revisar esto? ¿Qué tengo"
+  },
+  {
+   "ini": 5.08,
+   "fin": 7.04,
+   "texto": "que decirle a alguien que haga aquello?"
+  }
+ ],
+ "avatarD-toma3-final": [
+  {
+   "ini": 0.0,
+   "fin": 3.44,
+   "texto": "y al final te pasas el día apagando pequeñas cosas,"
+  },
+  {
+   "ini": 3.44,
+   "fin": 4.52,
+   "texto": "una detrás de otra."
+  }
+ ],
+ "avatarD-toma4-final": [
+  {
+   "ini": 0.0,
+   "fin": 6.0,
+   "texto": "Y lo peor es que muchas de ellas ni siquiera deberían depender de ti, deberían pasar solas."
+  }
+ ],
+ "avatarD-toma5-final": [
+  {
+   "ini": 0.0,
+   "fin": 3.32,
+   "texto": "Un cliente hace algo y automáticamente ocurre lo siguiente."
+  },
+  {
+   "ini": 3.32,
+   "fin": 5.48,
+   "texto": "Un lid entra y se gestiona."
+  },
+  {
+   "ini": 5.48,
+   "fin": 7.48,
+   "texto": "Una tarea termina y se crea la siguiente."
+  }
+ ],
+ "avatarD-toma6-final": [
+  {
+   "ini": 0.0,
+   "fin": 5.2,
+   "texto": "Porque para mí el objetivo de la IA no es que tengas otra herramienta a la que"
+  },
+  {
+   "ini": 5.2,
+   "fin": 10.32,
+   "texto": "preguntarle cosas, es que empiece a trabajar contigo."
+  }
+ ],
+ "avatarD-toma7-final": [
+  {
+   "ini": 0.0,
+   "fin": 5.72,
+   "texto": "que tu empresa funcione un poco más, aunque tú no estés pendiente de ella todo el rato."
+  }
+ ],
+ "esto-cierre": [
+  {
+   "ini": 0.0,
+   "fin": 2.56,
+   "texto": "Yo me dedico a encontrarlas."
+  },
+  {
+   "ini": 2.56,
+   "fin": 5.56,
+   "texto": "Antes de meter más, mira por donde estás perdiendo."
+  }
+ ],
+ "esto-fugas2": [
+  {
+   "ini": 0.0,
+   "fin": 5.0,
+   "texto": "anuncios que llevan meses sin revisar, clientes que piden información y tardas dos días en responder,"
+  },
+  {
+   "ini": 5.0,
+   "fin": 9.0,
+   "texto": "comerciales que no saben ni a quién llamar, ventas a las que nadie hace seguimiento."
+  },
+  {
+   "ini": 9.0,
+   "fin": 13.0,
+   "texto": "Esos son fugas y no aparecen en ninguna factura."
+  }
+ ],
+ "esto-hook": [
+  {
+   "ini": 0.0,
+   "fin": 5.0,
+   "texto": "Cuando tu negocio se estanca y el beneficio no sube, esto es lo que haces."
+  }
+ ],
+ "esto-insight": [
+  {
+   "ini": 0.0,
+   "fin": 4.0,
+   "texto": "porque el problema no era cuánto estabas metiendo,"
+  },
+  {
+   "ini": 4.0,
+   "fin": 7.0,
+   "texto": "era por dónde se te estaba escapando."
+  }
+ ],
+ "esto-r1": [
+  {
+   "ini": 0.0,
+   "fin": 4.0,
+   "texto": "meter más dinero en publicidad."
+  }
+ ],
+ "esto-r2": [
+  {
+   "ini": 0.0,
+   "fin": 3.0,
+   "texto": "Contratar a otra persona."
+  }
+ ],
+ "esto-r3": [
+  {
+   "ini": 0.0,
+   "fin": 2.0,
+   "texto": "Comprar otra herramienta."
+  }
+ ],
+ "esto-r4": [
+  {
+   "ini": 0.0,
+   "fin": 5.0,
+   "texto": "y echarle más horas."
+  }
+ ]
+}
