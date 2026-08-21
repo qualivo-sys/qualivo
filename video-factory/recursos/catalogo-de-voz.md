@@ -81,8 +81,23 @@ volver a renderizar:
 **Marca de marca**: el nombre de la empresa nunca se pronuncia, va en pantalla.
 Aquí es una cartela de 1,3 s con el logo antes de la animación.
 
-**Lo que falta grabar** (si algún día se hacen tomas nuevas):
-- «Si pones más dinero en una tubería con fugas, el dinero se te escapa.»
-- «En Qualivo abrimos el capó para ver dónde se te está escapando.»
-Ahora esas dos ideas las cuenta la imagen. Generarlas con otra voz sintética no
-vale: el salto respecto a la voz del avatar se nota demasiado.
+### Tomas nuevas del 21-ago-2026 (112 créditos)
+
+| Archivo | Frase | Sitio |
+|---|---|---|
+| `avatar/nueva-tuberia.mp4` (6 s) | «Si pones más dinero en una tubería con fugas, el dinero se te escapa igual.» | sala de reuniones |
+| `avatar/nueva-capo.mp4` (8 s) | «Abrimos el capó, miramos el negocio entero y buscamos por dónde se te está escapando.» | calle |
+
+**El truco de la referencia**: la imagen de partida es **un fotograma del propio
+plano que ya está en el montaje** (`esto-insight` en 6.3 s, `esto-cierre` en 6.4 s),
+no una foto suelta ni una hoja de personaje. Misma cara, misma ropa, misma luz,
+mismo sitio: la continuidad sale gratis. Esto resuelve de raíz el problema que
+nos hizo tirar tantas tomas.
+
+```bash
+ffmpeg -ss 6.3 -i esto-insight.mp4 -frames:v 1 -vf scale=1080:1920 ref-sala.png
+```
+
+Modelo `grok-imagine/image-to-video`, 1080p, `aspect_ratio 9:16`, una sola imagen
+de referencia (con varias el clip sale mudo). Ambas dijeron la frase palabra por
+palabra a la primera — comprobado con Whisper antes de montarlas.

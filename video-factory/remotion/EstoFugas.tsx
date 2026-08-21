@@ -12,11 +12,13 @@ const cl = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 /* tramos del montaje */
 const A_DUR = 14.10;   // esto-v1: hook + las cuatro cosas que haces
 const B_DUR = 5.70;    // facturas: «y a los tres meses estás exactamente igual»
-const C_DUR = 7.00;    // «no era cuánto metías, era por dónde se te escapaba»
+const T_DUR = 5.90;    // «si pones más dinero en una tubería con fugas…»
 const D_DUR = 12.80;   // las cuatro fugas
-const E_DUR = 8.60;    // Qualivo levanta el capó (sin voz)
+const L_DUR = 0.90;    // cartela de marca
+const E_DUR = 10.50;   // él + el capó: el mapa del negocio
 const F_DUR = 5.90;    // cierre
-const A0 = 0, B0 = A_DUR, C0 = B0 + B_DUR, D0 = C0 + C_DUR, E0 = D0 + D_DUR, F0 = E0 + E_DUR;
+const A0 = 0, B0 = A_DUR, T0 = B0 + B_DUR, D0 = T0 + T_DUR,
+      L0 = D0 + D_DUR, E0 = L0 + L_DUR, F0 = E0 + E_DUR;
 export const ESTO_FUGAS_FRAMES = f(F0 + F_DUR);
 
 type Enc = { src: string; desde?: number; zoom: [number, number];
@@ -177,20 +179,24 @@ export const EstoFugas: React.FC = () => (
       ]} />
     </Sequence>
 
-    {/* C · no era cuánto metías */}
-    <Sequence from={f(C0)} durationInFrames={f(C_DUR)} name="C · el diagnóstico">
-      <Audio src={staticFile("vo-insight.mp3")} />
-      <Sequence from={0} durationInFrames={f(4.0)}>
-        <Plano src="cubo-e3.mp4" desde={0.8} zoom={[1.72, 1.56]} y={[18, 14]} dur={4.0} mudo />
-        <Velo />
-        <Rotulo ent={0.4} sal={3.7} y={1300} lineas={[{ t: "NO ERA CUÁNTO METES", tam: 70 }]} />
+    {/* T · la tubería con fugas — toma nueva */}
+    <Sequence from={f(T0)} durationInFrames={f(T_DUR)} name="T · la tubería">
+      <Audio src={staticFile("vo-tuberia.mp3")} />
+      <Sequence from={0} durationInFrames={f(2.1)}>
+        <Plano src="nueva-tuberia.mp4" zoom={[1.06, 1.14]} dur={2.1} mudo />
+        <Velo k={1.15} />
+        <Rotulo ent={0.25} y={1330} lineas={[{ t: "PARA CRECER, INVERTIR MÁS", tam: 54 }]} />
       </Sequence>
-      <Sequence from={f(4.0)} durationInFrames={f(3.0)}>
-        <Plano src="cubo-e2.mp4" desde={2.6} zoom={[2.6, 2.85]} x={[14, 9]} y={[1, 5]} dur={3.0} mudo />
+      <Sequence from={f(2.1)} durationInFrames={f(1.9)}>
+        <Plano src="cubo-e3.mp4" desde={0.9} zoom={[1.70, 1.55]} y={[18, 14]} dur={1.9} mudo />
         <Velo />
-        <Rotulo ent={0.3} y={1240} lineas={[
-          { t: "ERA POR DÓNDE", tam: 70 },
-          { t: "SE ESCAPA", tam: 88, naranja: true },
+      </Sequence>
+      <Sequence from={f(4.0)} durationInFrames={f(1.9)}>
+        <Plano src="cubo-e2.mp4" desde={2.6} zoom={[2.6, 2.85]} x={[14, 9]} y={[1, 5]} dur={1.9} mudo />
+        <Velo />
+        <Rotulo ent={0.2} y={1250} lineas={[
+          { t: "MISMA TUBERÍA", tam: 66 },
+          { t: "MISMAS FUGAS", tam: 82, naranja: true },
         ]} />
       </Sequence>
     </Sequence>
@@ -214,15 +220,22 @@ export const EstoFugas: React.FC = () => (
       ]} />
     </Sequence>
 
-    {/* E · Qualivo levanta el capó */}
+    {/* L · cartela de marca */}
+    <Sequence from={f(L0)} durationInFrames={f(L_DUR)} name="L · marca">
+      <AbsoluteFill style={{ backgroundColor: "#08080A", justifyContent: "center", alignItems: "center" }}>
+        <Img src={staticFile("qualivo.png")} style={{ height: 76 }} />
+      </AbsoluteFill>
+    </Sequence>
+
+    {/* E · abrimos el capó */}
     <Sequence from={f(E0)} durationInFrames={f(E_DUR)} name="E · el capó">
-      <Sequence from={0} durationInFrames={f(1.3)}>
-        <AbsoluteFill style={{ backgroundColor: "#08080A", justifyContent: "center", alignItems: "center" }}>
-          <Img src={staticFile("qualivo.png")} style={{ height: 72 }} />
-        </AbsoluteFill>
+      <Audio src={staticFile("vo-capo.mp3")} />
+      <Sequence from={0} durationInFrames={f(2.2)}>
+        <Plano src="nueva-capo.mp4" zoom={[1.08, 1.16]} dur={2.2} mudo />
+        <Velo k={1.1} />
       </Sequence>
-      <Sequence from={f(1.3)} durationInFrames={f(E_DUR - 1.3)}>
-        <Plano src="capo.mp4" zoom={[1.0, 1.06]} dur={E_DUR - 1.3} mudo />
+      <Sequence from={f(2.2)} durationInFrames={f(E_DUR - 2.2)}>
+        <Plano src="capo.mp4" zoom={[1.0, 1.07]} dur={E_DUR - 2.2} mudo />
       </Sequence>
     </Sequence>
 
