@@ -12,8 +12,12 @@ const cl = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 /* tramos del montaje */
 const A_DUR = 14.10;   // esto-v1: hook + las cuatro cosas que haces
 const B_DUR = 5.70;    // facturas: «y a los tres meses estás exactamente igual»
-const C_DUR = 23.10;   // voz en off sobre la tubería
-export const ESTO_FUGAS_FRAMES = f(A_DUR + B_DUR + C_DUR);
+const C_DUR = 7.00;    // «no era cuánto metías, era por dónde se te escapaba»
+const D_DUR = 12.80;   // las cuatro fugas
+const E_DUR = 8.60;    // Qualivo levanta el capó (sin voz)
+const F_DUR = 5.90;    // cierre
+const A0 = 0, B0 = A_DUR, C0 = B0 + B_DUR, D0 = C0 + C_DUR, E0 = D0 + D_DUR, F0 = E0 + E_DUR;
+export const ESTO_FUGAS_FRAMES = f(F0 + F_DUR);
 
 type Enc = { src: string; desde?: number; zoom: [number, number];
              x?: [number, number]; y?: [number, number]; dur: number; mudo?: boolean };
@@ -82,12 +86,12 @@ const Chip: React.FC<{ texto: string; ent: number; idx: number }> = ({ texto, en
   });
   return (
     <div style={{
-      position: "absolute", left: 0, right: 0, top: 1230 + idx * 112,
+      position: "absolute", left: 0, right: 0, top: 1120 + idx * 116,
       display: "flex", justifyContent: "center",
       transform: `scale(${pop})`, opacity: interpolate(frame, [f0, f0 + 5], [0, 1], cl),
     }}>
       <div style={{
-        fontFamily: LABEL, fontWeight: 700, fontSize: 30, letterSpacing: "0.05em",
+        fontFamily: LABEL, fontWeight: 700, fontSize: 27, letterSpacing: "0.04em",
         color: CREAM, background: "rgba(8,8,9,0.80)",
         border: `2px solid rgba(232,89,12,0.62)`, borderRadius: 13, padding: "16px 28px",
         maxWidth: 900, textAlign: "center",
@@ -98,7 +102,16 @@ const Chip: React.FC<{ texto: string; ent: number; idx: number }> = ({ texto, en
   );
 };
 
-/* ---------- tramo C: la tubería ---------- */
+/* ---------- planos del tramo de las fugas ---------- */
+const FUGA_PLANOS: Enc[] = [
+  { src: "cubo-e2.mp4", desde: 5.4, zoom: [2.25, 2.40], x: [-4, 0], y: [3, 6], dur: 2.4, mudo: true },
+  { src: "cubo-e2.mp4", desde: 0.6, zoom: [2.45, 2.60], x: [9, 5], y: [-2, 1], dur: 3.0, mudo: true },
+  { src: "cubo-e2.mp4", desde: 7.2, zoom: [2.05, 2.25], x: [-10, -6], y: [2, 5], dur: 1.9, mudo: true },
+  { src: "cubo-e2.mp4", desde: 3.0, zoom: [2.30, 2.15], x: [4, 8], y: [4, 1], dur: 2.1, mudo: true },
+  { src: "cubo-e2.mp4", desde: 3.6, zoom: [1.14, 1.30], dur: 3.4, mudo: true },
+];
+const FUGA_INI = FUGA_PLANOS.reduce<number[]>((a, p, i) => [...a, i ? a[i-1] + FUGA_PLANOS[i-1].dur : 0], []);
+
 const SUB: Enc[] = [
   { src: "cubo-e3.mp4", desde: 0.8, zoom: [1.72, 1.56], y: [18, 14], dur: 4.0, mudo: true },
   { src: "cubo-e2.mp4", desde: 2.6, zoom: [2.60, 2.80], x: [14, 10], y: [1, 4], dur: 3.1, mudo: true },
@@ -164,31 +177,62 @@ export const EstoFugas: React.FC = () => (
       ]} />
     </Sequence>
 
-    {/* C · dónde se estaba escapando */}
-    <Sequence from={f(A_DUR + B_DUR)} durationInFrames={f(C_DUR)} name="C · la tubería">
-      <Audio src={staticFile("vo-fugas.mp3")} />
-      {SUB.map((s, i) => (
-        <Sequence key={i} from={f(SUB_INI[i])} durationInFrames={f(s.dur)}>
-          <Plano {...s} />
+    {/* C · no era cuánto metías */}
+    <Sequence from={f(C0)} durationInFrames={f(C_DUR)} name="C · el diagnóstico">
+      <Audio src={staticFile("vo-insight.mp3")} />
+      <Sequence from={0} durationInFrames={f(4.0)}>
+        <Plano src="cubo-e3.mp4" desde={0.8} zoom={[1.72, 1.56]} y={[18, 14]} dur={4.0} mudo />
+        <Velo />
+        <Rotulo ent={0.4} sal={3.7} y={1300} lineas={[{ t: "NO ERA CUÁNTO METES", tam: 70 }]} />
+      </Sequence>
+      <Sequence from={f(4.0)} durationInFrames={f(3.0)}>
+        <Plano src="cubo-e2.mp4" desde={2.6} zoom={[2.6, 2.85]} x={[14, 9]} y={[1, 5]} dur={3.0} mudo />
+        <Velo />
+        <Rotulo ent={0.3} y={1240} lineas={[
+          { t: "ERA POR DÓNDE", tam: 70 },
+          { t: "SE ESCAPA", tam: 88, naranja: true },
+        ]} />
+      </Sequence>
+    </Sequence>
+
+    {/* D · las cuatro fugas */}
+    <Sequence from={f(D0)} durationInFrames={f(D_DUR)} name="D · las fugas">
+      <Audio src={staticFile("vo-fugas4.mp3")} />
+      {FUGA_PLANOS.map((p, i) => (
+        <Sequence key={i} from={f(FUGA_INI[i])} durationInFrames={f(p.dur)}>
+          <Plano {...p} />
           <Velo />
         </Sequence>
       ))}
-      <Rotulo ent={0.5} sal={3.7} y={1300} lineas={[{ t: "NO ERA CUÁNTO METES", tam: 70 }]} />
-      <Rotulo ent={4.4} sal={6.9} y={1300} lineas={[
-        { t: "ERA POR DÓNDE", tam: 70 },
-        { t: "SE ESCAPA", tam: 84, naranja: true },
+      <Chip idx={0} ent={0.20} texto="ANUNCIOS QUE LLEVAN MESES SIN REVISAR" />
+      <Chip idx={1} ent={2.45} texto="PIDEN INFORMACIÓN Y TARDAS DOS DÍAS" />
+      <Chip idx={2} ent={5.45} texto="COMERCIALES QUE NO SABEN A QUIÉN LLAMAR" />
+      <Chip idx={3} ent={7.35} texto="VENTAS A LAS QUE NADIE HACE SEGUIMIENTO" />
+      <Rotulo ent={9.8} y={210} lineas={[
+        { t: "NO APARECEN", tam: 64 },
+        { t: "EN NINGUNA FACTURA", tam: 64, naranja: true },
       ]} />
-      <Sequence from={f(7.0)} durationInFrames={f(10.0)}>
-        <Chip idx={0} ent={0.3} texto="PREGUNTA Y NADIE RESPONDE" />
-        <Chip idx={1} ent={2.7} texto="PROPUESTA QUE LLEGA TARDE" />
-        <Chip idx={2} ent={4.6} texto="COMERCIAL HACIENDO PAPELEO" />
+    </Sequence>
+
+    {/* E · Qualivo levanta el capó */}
+    <Sequence from={f(E0)} durationInFrames={f(E_DUR)} name="E · el capó">
+      <Sequence from={0} durationInFrames={f(1.3)}>
+        <AbsoluteFill style={{ backgroundColor: "#08080A", justifyContent: "center", alignItems: "center" }}>
+          <Img src={staticFile("qualivo.png")} style={{ height: 72 }} />
+        </AbsoluteFill>
       </Sequence>
-      <Rotulo ent={14.3} sal={17.1} y={190} lineas={[
-        { t: "NO APARECEN", tam: 66 },
-        { t: "EN NINGUNA FACTURA", tam: 66, naranja: true },
-      ]} />
-      <Rotulo ent={17.8} sal={19.5} y={1300} lineas={[{ t: "YO LAS ENCUENTRO", tam: 78, naranja: true }]} />
-      <Sequence from={f(19.4)}>
+      <Sequence from={f(1.3)} durationInFrames={f(E_DUR - 1.3)}>
+        <Plano src="capo.mp4" zoom={[1.0, 1.06]} dur={E_DUR - 1.3} mudo />
+      </Sequence>
+    </Sequence>
+
+    {/* F · cierre */}
+    <Sequence from={f(F0)} durationInFrames={f(F_DUR)} name="F · cierre">
+      <Audio src={staticFile("vo-cierre.mp3")} />
+      <Plano src="cubo-e5.mp4" desde={4.2} zoom={[1.35, 1.5]} dur={F_DUR} mudo />
+      <Velo />
+      <Rotulo ent={0.3} sal={2.3} y={1300} lineas={[{ t: "YO LAS ENCUENTRO", tam: 80, naranja: true }]} />
+      <Sequence from={f(2.5)}>
         <Cierre />
       </Sequence>
     </Sequence>

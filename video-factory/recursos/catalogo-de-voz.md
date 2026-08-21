@@ -54,3 +54,35 @@ Total ≈ 49 s en bruto; apretando silencios queda en 38–40.
 Solución con lo aprendido: se conserva **la voz** de la toma 6 y debajo van otras
 imágenes. Ese era el problema todo el rato — se descartaba la toma entera cuando
 solo fallaba el plano.
+
+## Montaje final del GUION A (21-ago-2026)
+
+`EstoFugas.tsx`, 54 s. Seis tramos:
+
+| Tramo | Duración | Voz | Imagen |
+|---|---|---|---|
+| A | 14.1 s | hook + las cuatro cosas | `esto-v1` con su vídeo |
+| B | 5.7 s | «y a los tres meses…» | `esto-facturas` |
+| C | 7.0 s | `vo-insight` | grifo abriéndose → la fuga de cerca |
+| D | 12.8 s | `vo-fugas4` (las cuatro) | cinco encuadres de la tubería + un chip por fuga |
+| E | 8.6 s | **sin voz** | logo + `capo.mp4` (el mapa del negocio) |
+| F | 5.9 s | `vo-cierre` | tubería parcheada + tarjeta FUGAS |
+
+**El tramo sin voz necesita sonido propio.** Ocho segundos mudos en medio de un
+reel se sienten como una avería. Sonido sintetizado para el capó: pad de medios,
+un tic por cada nodo que aparece (880 Hz subiendo), un barrido de análisis, y un
+aviso de dos notas cuando se encienden las fugas. Se mezcla en ffmpeg sin
+volver a renderizar:
+
+```
+[1:a]adelay=39600|39600,volume=0.9[capo];[0:a][capo]amix=inputs=2:duration=first:normalize=0
+```
+
+**Marca de marca**: el nombre de la empresa nunca se pronuncia, va en pantalla.
+Aquí es una cartela de 1,3 s con el logo antes de la animación.
+
+**Lo que falta grabar** (si algún día se hacen tomas nuevas):
+- «Si pones más dinero en una tubería con fugas, el dinero se te escapa.»
+- «En Qualivo abrimos el capó para ver dónde se te está escapando.»
+Ahora esas dos ideas las cuenta la imagen. Generarlas con otra voz sintética no
+vale: el salto respecto a la voz del avatar se nota demasiado.
