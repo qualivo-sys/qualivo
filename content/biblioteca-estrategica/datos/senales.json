@@ -1,0 +1,9 @@
+{
+  "_comentario": "Señales calientes de la semana. Las alimentan el radar de IA, el radar comercial y las conversaciones reales de Maikel. Peso 0-1. Caducan: A-TEND a los 7 dias.",
+  "_actualizado": "2026-08-21",
+  "senales": [
+    {"dolor": "D-OPS-10", "peso": 0.9, "fuente": "Radar IA 21-ago: Calendly lanza Callie + Notetaker (actas y tareas automáticas tras la reunión)", "caduca": "2026-08-28", "angulo_sugerido": "A-TEND"},
+    {"dolor": "D-COM-10", "peso": 0.7, "fuente": "Dolor de entrada + encaje directo con la Calculadora de Fugas ya construida", "caduca": null, "angulo_sugerido": null},
+    {"dolor": "D-COM-01", "peso": 0.6, "fuente": "ICP de la semana (clínicas): es su dolor número uno", "caduca": null, "angulo_sugerido": null}
+  ]
+}

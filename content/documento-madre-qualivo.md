@@ -2,6 +2,10 @@
 
 > Fuente de verdad para todo el contenido de Qualivo. Aportado por Maikel el 20-ago-2026.
 > Todo vídeo, post, anuncio o guion de Qualivo se construye desde aquí.
+>
+> 👉 La versión operativa de este documento —dolores con ID, ICPs, ángulos, niveles y
+> el motor que los cruza— vive en `content/biblioteca-estrategica/`. Este documento
+> sigue siendo la fuente de la VOZ; la biblioteca es la fuente de la DECISIÓN.
 
 ## 1. La idea central
 Qualivo ayuda a negocios que ya tienen movimiento, equipo y clientes, pero sienten que
