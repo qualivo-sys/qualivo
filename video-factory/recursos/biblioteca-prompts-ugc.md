@@ -301,3 +301,34 @@ oscuro. Versión suave que sí funciona:
 **Sonido**: lecho grave 55 Hz + pulso a 103 bpm + golpe con barrido de aire en
 cada corte, sintetizado con numpy. Cero coste. Como los cortes van a ritmo
 constante, el reel aguanta cualquier audio de tendencia si se silencia.
+
+### El hilo conductor sale de la voz, no del montaje
+
+21-ago-2026. Tres intentos de reel sin hilo y la solución era mirar lo que ya
+había: la narración completa estaba grabada en `avatar/REEL-ESTO-v1.mp4`.
+Transcribiendo con marcas de tiempo aparece el guion entero, seguido y coherente:
+
+```
+ 0.00-13.82  hook + las cuatro cosas que haces
+14.40-17.38  «y a los tres meses estás exactamente igual»
+18.64-25.20  «no era cuánto estabas metiendo, era por dónde se te escapaba»
+25.68-35.32  las tres fugas + «no aparecen en ninguna factura»
+36.14-41.42  «yo me dedico a encontrarlas» / «antes de meter más, mira»
+```
+
+**El método**: la voz manda y las imágenes se cuelgan de ella. Se corta el audio
+por frases, y cada frase decide qué plano va debajo. Nunca al revés — montar
+imágenes bonitas y buscarles texto después es exactamente lo que producía los
+reels sin hilo.
+
+Para reutilizar voz de un montaje anterior bajo imágenes nuevas:
+```bash
+ffmpeg -ss 18.50 -t 23.10 -i REEL-ESTO-v1.mp4 -vn -c:a libmp3lame -q:a 2 vo.mp3
+```
+y en Remotion `<Audio src={staticFile("vo.mp3")} />` dentro de la Sequence,
+con los rótulos temporizados a las marcas de la transcripción.
+
+**Antes de dar por bueno un audio, mirar el reparto por bandas, no los dB.**
+Una mezcla a -8.6 dB con el 99 % de la energía por debajo de 120 Hz es
+inaudible en un móvil: esos altavoces no bajan de ~400 Hz. Objetivo: la mayor
+parte entre 120 Hz y 1.5 kHz, `highpass=f=110` y `loudnorm=I=-13:TP=-1.0`.
