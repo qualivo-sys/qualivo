@@ -260,3 +260,44 @@ Reglas aprendidas a base de pruebas:
   ensamblado → cues de 2-3 palabras) + rótulos de énfasis Anton naranja arriba en los
   momentos clave + chips apilables con borde para listas. Remotion sobre el máster
   (OffthreadVideo) a 30fps.
+
+---
+
+## Reel de titulares animados sobre material ya generado (coste 0)
+
+Validado el 21-ago-2026 con «Si quiero crecer, tengo que invertir más».
+Componente: `video-factory/remotion/InvertirMas.tsx`.
+
+**La idea**: no generar vídeo nuevo. Coger clips ya pagados y sacarles planos
+distintos con recorte + deriva lenta. Un clip de 10 s da cuatro planos que
+parecen rodados por separado.
+
+```ts
+// cada plano = mismo archivo, encuadre distinto
+{ src: "cubo-e2.mp4", desde: 2.6, zoom: [2.75, 2.95], x: [15, 11], y: [1, 4] }
+```
+
+- `zoom` de 1.1 a 1.2 → plano general. De 2.3 a 2.9 → primer plano.
+- `x`/`y` en % desplazan el encuadre: `y` positivo enseña la parte de arriba,
+  negativo la de abajo; `x` negativo se va a la derecha de la imagen.
+- Corte cada 1.8–2.6 s. Nunca dos planos seguidos con el mismo encuadre.
+
+**Mezclar avatar y animación**: las tomas de avatar van **mudas**, con el
+titular encima. Al no haber voz no hay nada que descuadre con los labios —
+que es distinto de poner una voz que no encaja. Proporción que funciona:
+4 planos de persona por cada 6 de animación, y uno de los de persona
+justo antes del cierre, mirando a cámara.
+
+**Velo por plano**: las tomas con luz de día necesitan 1.4–1.5 de velo para
+que el texto se lea; las oscuras, 1.0.
+
+**Máscara de los titulares**: `lineHeight` mínimo 1.15 dentro del
+`overflow:hidden`. Con 1.02 se cortan los acentos (MÁS salía MAS).
+
+**Corrección de color**: la del curso enterraba la imagen sobre material ya
+oscuro. Versión suave que sí funciona:
+`eq=saturation=0.97:contrast=1.05:brightness=0.018,curves=master='0/0.015 0.3/0.34 0.75/0.79 1/1'`
+
+**Sonido**: lecho grave 55 Hz + pulso a 103 bpm + golpe con barrido de aire en
+cada corte, sintetizado con numpy. Cero coste. Como los cortes van a ritmo
+constante, el reel aguanta cualquier audio de tendencia si se silencia.
