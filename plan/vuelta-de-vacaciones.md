@@ -26,6 +26,12 @@ scratchpad `cosecha_ooo.json`).
 - Los retoques son respuestas de hilo (reply-email-thread), nunca
   reinicios de secuencia.
 
+## Cosecha posterior
+
+- **21-ago** · INSTERCAP (Tarragona, campaña Construcción, `info@instercap.com`,
+  +34 977 202 330): cerrada del 17 al 21 de agosto, lee el correo a partir del
+  **24**. Entra en la ola del lunes 25.
+
 ## Expectativa honesta para la meta de 5 reuniones
 
 Agosto es el peor mes del año para outbound en España y aun así hay 4
