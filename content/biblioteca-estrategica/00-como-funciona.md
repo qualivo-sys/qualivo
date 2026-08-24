@@ -72,6 +72,24 @@ python3 motor.py                # carril A
 python3 motor.py --canal pago   # carril B
 ```
 
+## Regla del recorrido (la que más se incumple)
+
+**Nunca dos piezas seguidas de la misma etapa.** La biblioteca etiqueta cada fuga
+con su etapa —CAPTACIÓN, ATRACCIÓN, CUALIFICACIÓN, PROPUESTA, CIERRE, POSVENTA,
+TRANSVERSAL— y esa etiqueta no es decorativa: es el posicionamiento.
+
+Si la semana entera sale del bloque comercial, el mensaje que queda es «te
+ayudamos a hacer seguimiento», que es exactamente lo que vende cualquier agencia
+de IA. Lo nuestro es que **la fuga puede estar en cualquier punto y casi nunca
+está donde el dueño cree**, y eso solo se demuestra enseñando puntos distintos.
+
+Fallo real del 24-ago-2026: la semana se planificó con dos piezas, `D-COM-10`
+(cierre) y `D-COM-01` (cualificación). Las dos comerciales. Se rehízo con
+`D-MKT-01` (captación) y `D-DIR-11` (posventa), abriendo y cerrando el recorrido.
+
+Comprobación antes de cerrar una semana: escribir la etapa de cada pieza en una
+línea. Si se repite, cambiar una.
+
 ## Reglas que la biblioteca impone (no negociables)
 
 0. **Nunca contenido de sector en un canal propio.** Ver los dos carriles, arriba.
