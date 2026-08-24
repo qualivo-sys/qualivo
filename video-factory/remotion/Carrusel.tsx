@@ -10,7 +10,7 @@ export type Lamina = {
   cierre?: boolean;
 };
 
-export const LAMINAS: Lamina[] = [
+const NO_INTERESADO: Lamina[] = [
   { lineas: [{ t: "«NO", tam: 250 }, { t: "INTERESADO»", tam: 152, naranja: true }],
     pie: "La etiqueta más cara que existe en un CRM" },
   { lineas: [{ t: "Y CASI NUNCA", tam: 96 }, { t: "ES VERDAD", tam: 132, naranja: true }] },
@@ -25,7 +25,30 @@ export const LAMINAS: Lamina[] = [
     pie: "FUGAS" },
 ];
 
-export const Carrusel: React.FC<{ i?: number }> = ({ i = 0 }) => {
+const NO_CONTRATES: Lamina[] = [
+  { lineas: [{ t: "NO CONTRATES", tam: 118 }, { t: "A NADIE", tam: 118 }, { t: "TODAVÍA", tam: 152, naranja: true }] },
+  { lineas: [{ t: "ANTES COGE", tam: 96 }, { t: "UNA SEMANA", tam: 96 }, { t: "DE LLAMADAS", tam: 110, naranja: true }] },
+  { lineas: [{ t: "Y HAZ", tam: 96 }, { t: "DOS MONTONES", tam: 130, naranja: true }],
+    pie: "Los que iban a comprar. Los que preguntaban." },
+  { lineas: [{ t: "¿NO PUEDES", tam: 96 }, { t: "HACERLOS?", tam: 130, naranja: true }],
+    pie: "Entonces no tienes un problema de personal." },
+  { lineas: [{ t: "SI CONTRATAS", tam: 88 }, { t: "AHORA, TENDRÁS", tam: 88 }, { t: "DOS PERSONAS", tam: 104, naranja: true }],
+    pie: "Atendiendo igual de bien y de mal, por orden de llegada." },
+  { lineas: [{ t: "NO ERA", tam: 104 }, { t: "DE MANOS", tam: 104 }, { t: "ERA DE CRITERIO", tam: 116, naranja: true }] },
+  { lineas: [{ t: "CONTRATAR", tam: 100 }, { t: "ES LA FORMA", tam: 84 }, { t: "MÁS CARA", tam: 116, naranja: true }],
+    pie: "De tapar una decisión que nadie ha tomado." },
+  { cierre: true,
+    lineas: [{ t: "¿QUIERES SABER", tam: 68 }, { t: "QUÉ MIRARÍA YO", tam: 68 }, { t: "PRIMERO?", tam: 68 }],
+    pie: "DIAGNÓSTICO" },
+];
+
+export const SETS: Record<string, Lamina[]> = {
+  "no-interesado": NO_INTERESADO,
+  "no-contrates": NO_CONTRATES,
+};
+
+export const Carrusel: React.FC<{ i?: number; set?: string }> = ({ i = 0, set = "no-interesado" }) => {
+  const LAMINAS = SETS[set] ?? NO_INTERESADO;
   const L = LAMINAS[i] ?? LAMINAS[0];
   return (
     <AbsoluteFill style={{ backgroundColor: L.cierre ? "#08080A" : INK, padding: 92,
@@ -62,7 +85,7 @@ export const Carrusel: React.FC<{ i?: number }> = ({ i = 0 }) => {
           <div style={{ width: 92, height: 5, background: ORANGE, margin: "46px 0 34px" }} />
           <div style={{ fontFamily: LABEL, fontWeight: 700, fontSize: 30, letterSpacing: "0.2em",
             color: MUT, textTransform: "uppercase" }}>Escríbeme</div>
-          <div style={{ fontFamily: DISPLAY, fontSize: 168, color: ORANGE, lineHeight: 1.0,
+          <div style={{ fontFamily: DISPLAY, fontSize: L.pie && L.pie.length > 6 ? 128 : 168, color: ORANGE, lineHeight: 1.0,
             marginTop: 8 }}>{L.pie}</div>
         </>
       ) : null}
