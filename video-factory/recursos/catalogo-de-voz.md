@@ -102,6 +102,15 @@ Modelo `grok-imagine/image-to-video`, 1080p, `aspect_ratio 9:16`, una sola image
 de referencia (con varias el clip sale mudo). Ambas dijeron la frase palabra por
 palabra a la primera — comprobado con Whisper antes de montarlas.
 
+### Toma nueva del 25-ago-2026 (65 créditos)
+
+| Archivo | Frase | Sitio |
+|---|---|---|
+| `premium/voz-prioridad.mp4` (6 s) | «No todas cuestan lo mismo. La pregunta es cuál tapas primero.» | calle (ref-calle.png) |
+
+Grabada para el reel premium del cubo (`CuboPremium.tsx`). Verificada con
+Whisper: frase completa, acentuación correcta a la primera.
+
 ### Regla de ortografía en los prompts de voz (25-ago)
 
 **Grok lee literalmente lo que está escrito.** La toma del capó se generó con

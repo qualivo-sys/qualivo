@@ -114,6 +114,18 @@ textos de P5-P7 la cubren. CON ella, la pieza respira mejor. Recomiendo grabarla
 - **Añadir**: nada más.
 - **Eliminar**: P2-P4 de oficina, calculadora, lista de etiquetas, capó.
 
+## PRODUCCIÓN (25-ago-2026) — HECHA ✅
+Aprobada por Maikel («venga pruebalo si»). Montada en `CuboPremium.tsx`, 50,9 s.
+- 6 stills nano-banana-pro (108 cr.) + 6 animaciones Kling 2.6 (330 cr.)
+  + línea de voz nueva con Grok (65 cr.) ≈ **503 créditos**. Saldo tras producir: 4.729.
+- Nota de API: en `kling-2.6/image-to-video` el campo `sound` (boolean) es
+  OBLIGATORIO y la imagen va en `image_urls` (array). Sin `sound` → 500
+  «This field is required». Los fallos no cobran.
+- QA pasado: Whisper (todas las frases completas, voz nueva bien acentuada) +
+  tira de fotogramas (mundo consistente, contador día 1→90, marcado ámbar).
+- Master: lecho de agua sintetizado (ruido marrón + agua de `k6/k4`) desde el
+  s 17,6, cadena estándar de audio móvil y etalonaje suave.
+
 ## 12 · CRITERIO FINAL
 Después de estos cambios, este reel representa a Qualivo porque ya no dice
 «tienes fugas» —eso lo diría cualquiera—, sino que hace vivir al espectador el
