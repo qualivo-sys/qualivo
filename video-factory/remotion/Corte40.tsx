@@ -16,10 +16,11 @@ const T = [
   { id: "r3",    dur: 2.0 },
   { id: "fact",  dur: 5.5 },
   { id: "tub",   dur: 2.8 },
-  { id: "chips", dur: 9.0 },
-  { id: "fact2", dur: 2.6 },
-  { id: "capo",  dur: 7.0 },
-  { id: "fin",   dur: 3.4 },
+  { id: "chips", dur: 6.2 },
+  { id: "fact2", dur: 2.2 },
+  { id: "capo",  dur: 6.4 },
+  { id: "idea",  dur: 2.6 },
+  { id: "fin",   dur: 3.0 },
 ];
 const INI: Record<string, number> = {};
 { let t = 0; for (const x of T) { INI[x.id] = t; t += x.dur; } }
@@ -109,27 +110,42 @@ export const Corte40: React.FC = () => (
     <Sequence from={f(INI.tub)} durationInFrames={f(2.8)} name="tuberia">
       <Audio src={staticFile("vo-tuberia.mp3")} trimBefore={f(3.3)} />
       <Vid src="cubo-e3.mp4" desde={0.9} mudo dur={2.8} zoom={[1.7, 1.56]} y={[17, 14]} />
-      <Velo /><Rot ent={0.2} lineas={[{ t: "MISMA TUBERÍA", tam: 62 }, { t: "MISMAS FUGAS", tam: 76, naranja: true }]} />
+      <Velo /><Rot ent={0.2} lineas={[{ t: "EL DINERO", tam: 66 }, { t: "SE TE ESCAPA IGUAL", tam: 66, naranja: true }]} />
     </Sequence>
-    <Sequence from={f(INI.chips)} durationInFrames={f(9.0)} name="chips">
-      <Vid src="cubo-e2.mp4" desde={0.6} mudo dur={9.0} zoom={[1.35, 1.6]} x={[6, 2]} />
-      <Velo />
+    <Sequence from={f(INI.chips)} durationInFrames={f(6.2)} name="chips">
+      <Sequence from={0} durationInFrames={f(3.2)}>
+        <Vid src="cubo-e2.mp4" desde={0.6} mudo dur={3.2} zoom={[1.4, 1.55]} x={[6, 3]} />
+        <Velo />
+      </Sequence>
+      <Sequence from={f(3.2)} durationInFrames={f(3.0)}>
+        <Vid src="cubo-e2.mp4" desde={6.6} mudo dur={3.0} zoom={[1.9, 2.05]} x={[-8, -5]} y={[2, 4]} />
+        <Velo />
+      </Sequence>
       <Chip idx={0} ent={0.4} texto="ANUNCIOS QUE LLEVAN MESES SIN REVISAR" />
-      <Chip idx={1} ent={2.4} texto="PIDEN INFORMACIÓN Y TARDAS DOS DÍAS" />
-      <Chip idx={2} ent={4.4} texto="COMERCIALES QUE NO SABEN A QUIÉN LLAMAR" />
-      <Chip idx={3} ent={6.4} texto="VENTAS A LAS QUE NADIE HACE SEGUIMIENTO" />
+      <Chip idx={1} ent={1.8} texto="PIDEN INFORMACIÓN Y TARDAS DOS DÍAS" />
+      <Chip idx={2} ent={3.4} texto="COMERCIALES QUE NO SABEN A QUIÉN LLAMAR" />
+      <Chip idx={3} ent={4.9} texto="VENTAS A LAS QUE NADIE HACE SEGUIMIENTO" />
     </Sequence>
-    <Sequence from={f(INI.fact2)} durationInFrames={f(2.6)} name="factura2">
-      <Vid src="cubo-e2.mp4" desde={7.2} mudo dur={2.6} zoom={[2.0, 2.2]} x={[-9, -6]} y={[2, 5]} />
+    <Sequence from={f(INI.fact2)} durationInFrames={f(2.2)} name="factura2">
+      <Vid src="cubo-e2.mp4" desde={7.4} mudo dur={2.2} zoom={[2.0, 2.2]} x={[-9, -6]} y={[2, 5]} />
       <Velo /><Rot y={1280} ent={0.2} lineas={[{ t: "NO APARECEN", tam: 64 }, { t: "EN NINGUNA FACTURA", tam: 64, naranja: true }]} />
     </Sequence>
-    <Sequence from={f(INI.capo)} durationInFrames={f(7.0)} name="capo">
+    <Sequence from={f(INI.capo)} durationInFrames={f(6.4)} name="capo">
       <AbsoluteFill style={{ backgroundColor: "#0A0A0B" }}>
-        <OffthreadVideo src={staticFile("capo.mp4")} muted playbackRate={13.4 / 7.0}
+        <OffthreadVideo src={staticFile("capo.mp4")} muted trimBefore={f(5.7)} playbackRate={1.2}
           style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </AbsoluteFill>
     </Sequence>
-    <Sequence from={f(INI.fin)} durationInFrames={f(3.4)} name="fin">
+    <Sequence from={f(INI.idea)} durationInFrames={f(2.6)} name="idea">
+      <AbsoluteFill style={{ backgroundColor: "#08080A", justifyContent: "center", alignItems: "center" }}>
+        <div style={{ textAlign: "center", padding: "0 60px" }}>
+          <Rot y={0 as any} ent={0} lineas={[]} />
+          <div style={{ fontFamily: DISPLAY, fontSize: 82, color: CREAM, lineHeight: 1.1 }}>NO NECESITAS MÁS.</div>
+          <div style={{ fontFamily: DISPLAY, fontSize: 96, color: ORANGE, lineHeight: 1.1, marginTop: 8 }}>NECESITAS VER.</div>
+        </div>
+      </AbsoluteFill>
+    </Sequence>
+    <Sequence from={f(INI.fin)} durationInFrames={f(3.0)} name="fin">
       <AbsoluteFill style={{ backgroundColor: "#08080A", justifyContent: "center", alignItems: "center" }}>
         <div style={{ textAlign: "center" }}>
           <div style={{ fontFamily: LABEL, fontWeight: 700, fontSize: 25, letterSpacing: "0.24em",
