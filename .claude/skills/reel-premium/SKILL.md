@@ -150,3 +150,14 @@ el resto en animación. No al revés.
 45-60 s funciona en LinkedIn y en YouTube Shorts. En Instagram penaliza si la
 retención cae: si la pieza es para Instagram, entregar también un corte de
 20-25 s marcando qué bloques se caen.
+
+## Contrabrief (25-ago-2026) — prevalece sobre lo anterior
+
+Las fugas son metáfora, **no la categoría**. Qualivo vende CONTROL sobre un
+sistema demasiado complejo para la intuición; el enemigo es la complejidad
+invisible; la gran idea: **antes de crecer más, entiende lo que ya tienes**.
+Cada pieza pertenece a un territorio: lo que no estás viendo · el sistema
+completo · priorización · construir el sistema · el coste de no saber.
+Regla creativa: UNA idea por pieza, resumible en una frase.
+Antes de escribir nada, responder: *¿qué va a entender el dueño sobre su propio
+negocio que antes no veía?* Sin respuesta, no se escribe.

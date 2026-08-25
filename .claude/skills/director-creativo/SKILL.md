@@ -80,3 +80,11 @@ remate.
 7. **Cambios concretos recomendados**
 8. **Versión mejorada del storyboard**
 9. **Versión mejorada del cierre**
+
+## Filtro del contrabrief (además de las cinco preguntas)
+
+Ninguna pieza aprueba sin pasar las seis: ¿solo Qualivo podría publicarlo? ·
+¿habla al dueño? · ¿cambia una percepción? · ¿demuestra criterio? · ¿la imagen
+es memorable? · ¿sube el valor percibido de Qualivo? Y la definitiva: ¿qué
+entiende el dueño de su propio negocio que antes no veía? Si la pieza reduce
+Qualivo a «los de las fugas del funnel», se rehace el ángulo.

@@ -77,3 +77,10 @@ Todo brief termina exactamente así:
 
 No se inicia la producción hasta recibir aprobación explícita.
 ```
+
+## Comprobación de contrabrief (obligatoria en la sección 9)
+
+Los criterios de éxito incluyen siempre las seis preguntas del contrabrief y la
+pregunta guía (*qué entiende el dueño que antes no veía*). Un brief cuya big
+idea podría firmarla cualquier agencia de marketing no llega a la casilla de
+aprobación: se devuelve al director creativo.
