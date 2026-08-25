@@ -33,6 +33,23 @@ como protagonista que explica.
 
 Esto es lo que hace que todas las piezas se reconozcan como el mismo universo.
 
+## La regla del WOW (la que descarta conceptos)
+
+**Si la escena se puede encontrar en un banco de imágenes, no merece generarse.**
+Nada de oficinas, portátiles, reuniones, gente escribiendo, llamadas ni paneles
+de datos. La IA está para hacer **imágenes imposibles, épicas o carísimas de
+producir**, no para ahorrarse un rodaje.
+
+El repertorio visual es: infraestructuras (presas, puentes, aeropuertos,
+centrales, vías, túneles, carreteras), sistemas mecánicos (engranajes, motores,
+cadenas de montaje, relojes gigantes), arquitectura (torres, ciudades,
+estructuras imposibles), flujos (agua, luz, energía, vehículos) y metáforas
+abstractas (laberintos, circuitos, redes, conductos).
+
+Cada pieza necesita como mínimo: **un plano espectacular, una transición
+sorprendente, una metáfora visual principal y un plano final memorable.** Si
+parece una sucesión de clips normales, se rehace.
+
 ## Contexto de marca
 
 Qualivo encuentra las fugas invisibles de una empresa en marketing, ventas,
@@ -59,6 +76,26 @@ es por dónde se te escapa.
 4. **Sin casos de clientes**, ni siquiera anonimizados, mientras no se levante
    esa regla.
 5. **La voz no vende.** Es tono de documental corto: observa, no convence.
+
+## Prohibido decir
+
+«Multiplica tus ventas», «escala más rápido», «revoluciona tu negocio», «la IA
+lo cambia todo», «automatiza y olvídate», «el secreto de», «nadie te cuenta
+esto». Ni promesas, ni exageraciones, ni hype.
+
+La voz no suena a vendedor, ni a consultor, ni a formador: suena a **alguien
+revelando una verdad**. Ejemplo del registro: «Mientras la mayoría busca más
+clientes, casi nadie se pregunta cuántos ya está perdiendo.»
+
+## Test de los diez puntos (antes de entregar nada)
+
+1. ¿Se entiende sin sonido? · 2. ¿La imagen principal es memorable? ·
+3. ¿Podría ser un anuncio de Apple o Stripe? · 4. ¿La IA aporta algo imposible
+de grabar? · 5. ¿Evita oficinas y portátiles? · 6. ¿Genera reflexión? ·
+7. ¿Parece premium? · 8. ¿Habla de negocio y no de herramientas? · 9. ¿Tiene un
+momento wow? · 10. ¿Deja pensando?
+
+Si alguna es que no, **se rehace el concepto**, no la ejecución.
 
 ## Formato de salida (siempre estos siete bloques, en este orden)
 
