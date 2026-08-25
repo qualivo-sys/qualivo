@@ -101,3 +101,13 @@ ffmpeg -ss 6.3 -i esto-insight.mp4 -frames:v 1 -vf scale=1080:1920 ref-sala.png
 Modelo `grok-imagine/image-to-video`, 1080p, `aspect_ratio 9:16`, una sola imagen
 de referencia (con varias el clip sale mudo). Ambas dijeron la frase palabra por
 palabra a la primera — comprobado con Whisper antes de montarlas.
+
+### Regla de ortografía en los prompts de voz (25-ago)
+
+**Grok lee literalmente lo que está escrito.** La toma del capó se generó con
+«capo» sin tilde en el prompt y la voz dijo /kápo/. Regenerada con «capó» y una
+línea de refuerzo («stress on the final syllable») salió perfecta a la primera.
+
+Regla: el texto que va a decir la voz se escribe SIEMPRE con la ortografía
+completa del español — tildes, eñes, signos de apertura. Nada de asciificar.
+Coste del despiste: 65 créditos y un re-render.
