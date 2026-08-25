@@ -68,6 +68,55 @@ const Rot: React.FC<{ lineas: Array<{ t: string; naranja?: boolean; tam?: number
   );
 };
 
+/* narración escrita: palabras que entran una a una, estilo kinetic */
+const Frase: React.FC<{ t: string; ent: number; sale?: number; y?: number;
+  tam?: number; naranja?: boolean }> = ({ t, ent, sale, y = 1440, tam = 58, naranja }) => {
+  const frame = useCurrentFrame();
+  if (frame < f(ent) - 1) return null;
+  const palabras = t.split(" ");
+  const op = sale ? interpolate(frame, [f(sale), f(sale) + 8], [1, 0], cl) : 1;
+  return (
+    <div style={{ position: "absolute", left: 54, right: 54, top: y, textAlign: "center",
+      opacity: op }}>
+      <div style={{ display: "inline" }}>
+        {palabras.map((p, i) => {
+          const f0 = f(ent) + i * 3;
+          const o = interpolate(frame, [f0, f0 + 6], [0, 1], cl);
+          const s = interpolate(frame, [f0, f0 + 7], [1.25, 1], suave);
+          return (
+            <span key={i} style={{ fontFamily: DISPLAY, fontSize: tam, lineHeight: 1.22,
+              color: naranja ? ORANGE : CREAM, opacity: o, display: "inline-block",
+              transform: `scale(${s})`, marginRight: 16,
+              textShadow: "0 5px 36px rgba(0,0,0,0.92)" }}>{p}</span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+/* lista que se acumula: + PUBLICIDAD / + PERSONAS / + HERRAMIENTAS */
+const Acumula: React.FC<{ items: Array<{ t: string; ent: number }> }> = ({ items }) => {
+  const frame = useCurrentFrame();
+  return (
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1290, textAlign: "center" }}>
+      {items.map((it, i) => {
+        const f0 = f(it.ent);
+        if (frame < f0) return null;
+        const o = interpolate(frame, [f0, f0 + 6], [0, 1], cl);
+        const s = interpolate(frame, [f0, f0 + 9], [1.4, 1], suave);
+        return (
+          <div key={i} style={{ fontFamily: DISPLAY, fontSize: 62, lineHeight: 1.3,
+            color: CREAM, opacity: o, transform: `scale(${s})`,
+            textShadow: "0 5px 36px rgba(0,0,0,0.92)" }}>
+            <span style={{ color: ORANGE }}>+</span> {it.t}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 /* contador DÍA 1 → DÍA 90 que acelera y se congela */
 const Contador: React.FC = () => {
   const frame = useCurrentFrame();
@@ -134,6 +183,7 @@ export const CuboPremium: React.FC = () => (
       <Sequence from={0} durationInFrames={f(2.4)}><Audio src={staticFile("esto-r1.mp4")} /></Sequence>
       <Sequence from={f(2.4)} durationInFrames={f(2.9)}><Audio src={staticFile("esto-r2.mp4")} /></Sequence>
       <Sequence from={f(5.3)} durationInFrames={f(2.0)}><Audio src={staticFile("esto-r3.mp4")} /></Sequence>
+      <Acumula items={[{ t: "PUBLICIDAD", ent: 0.5 }, { t: "PERSONAS", ent: 2.9 }, { t: "HERRAMIENTAS", ent: 5.7 }]} />
     </Sequence>
 
     <Sequence from={f(INI.medidor)} durationInFrames={f(5.5)} name="medidor">
@@ -147,11 +197,13 @@ export const CuboPremium: React.FC = () => (
     <Sequence from={f(INI.gota)} durationInFrames={f(4.0)} name="gota">
       <Vid src="s4-gota.mp4" dur={4.0} zoom={[1.0, 1.08]} />
       <Audio src={staticFile("vo-tuberia.mp3")} trimBefore={f(3.3)} />
+      <Frase t="Y NO LO VES." ent={2.5} y={1470} tam={62} naranja />
     </Sequence>
 
     <Sequence from={f(INI.jerarquia)} durationInFrames={f(6.0)} name="jerarquia">
       <Vid src="s5-jerarquia.mp4" dur={6.0} rate={0.83} />
-      <Rot ent={1.2} y={1500} lineas={[{ t: "NO TODAS LAS FUGAS", tam: 56 }, { t: "CUESTAN LO MISMO", tam: 56, naranja: true }]} />
+      <Frase t="PIERDES POR VARIOS SITIOS A LA VEZ." ent={0.4} sale={2.9} y={1420} tam={56} />
+      <Frase t="Y NO TODAS LAS FUGAS CUESTAN LO MISMO." ent={3.2} y={1420} tam={56} naranja />
     </Sequence>
 
     <Sequence from={f(INI.wow)} durationInFrames={f(9.0)} name="wow">
@@ -161,7 +213,9 @@ export const CuboPremium: React.FC = () => (
       <Sequence from={f(5.0)} durationInFrames={f(4.0)}>
         <Vid src="s7-wow-b.mp4" dur={4.0} zoom={[1.02, 1.0]} />
       </Sequence>
-      <Rot ent={5.6} y={1500} lineas={[{ t: "EL PROBLEMA", tam: 56 }, { t: "NO ES ENCONTRARLAS", tam: 56 }]} />
+      <Frase t="ESTE ES TU NEGOCIO POR DENTRO." ent={0.7} sale={3.4} y={1440} tam={58} />
+      <Frase t="CADA LUZ ES UNA FUGA." ent={3.8} sale={6.1} y={1440} tam={58} />
+      <Frase t="EL PROBLEMA NO ES ENCONTRARLAS." ent={6.4} y={1440} tam={56} naranja />
     </Sequence>
 
     <Sequence from={f(INI.prioridad)} durationInFrames={f(5.8)} name="prioridad">
