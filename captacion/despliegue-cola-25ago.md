@@ -66,3 +66,32 @@ Lo aprendido, para no repetirlo:
    `campaign/Resume?campaignId=`. `PauseCampaign` y `StopCampaign` dan 404.
 4. `campaign/GetLeadsFromCampaign` no devuelve los campos personalizados
    nunca. Para verificar hay que leer la lista, no la campaña.
+
+## Corrección del 26 de agosto: no era lentitud, era el orden
+
+El 25 di por buena la explicación de que los campos "tardan un par de minutos
+en aparecer". **Era falsa.** El 26, con la campaña de Andorra y Lleida, se
+esperaron 45 minutos y seguían a cero.
+
+La causa real: **`list/AddLeadsToListV2` con `customFields` no rellena los
+campos.** Lo que los rellena es `campaign/AddLeadsToCampaignV2` con
+`customUserFields`. Y ese endpoint devuelve
+`"You cannot add new leads to a draft campaign"`, así que exige que la
+campaña esté ya arrancada.
+
+El 25 pareció cosa del tiempo porque la campaña ya estaba en marcha cuando se
+hizo el alta a nivel de campaña.
+
+**Orden correcto, y es contraintuitivo:**
+
+1. Crear lista y subir los leads (los campos no se guardarán, da igual)
+2. Crear campaña con `linkedInUserListId`
+3. Poner la secuencia con `campaign/UpdateSequence`
+4. **Arrancar la campaña** con `StartCampaign?campaignId=`
+5. **Inmediatamente después**, `campaign/AddLeadsToCampaignV2` con
+   `customUserFields`
+6. Verificar leyendo la lista: los campos aparecen en menos de 15 segundos
+
+Arrancar antes de tener los campos parece temerario pero no lo es: la
+secuencia empieza con `VIEW_PROFILE` a 0 y la `CONNECTION_REQUEST` va a +1
+día. Hay 24 horas de margen para el paso 5.
