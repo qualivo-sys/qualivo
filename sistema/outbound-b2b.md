@@ -21,6 +21,18 @@ Las aperturas no son KPI.
 El outbound no vende servicios. Vende la necesidad de revisar un posible
 problema de negocio.
 
+## Fugas comerciales: nuestro marco, no una categoría más
+
+No hablamos de marketing, captación, automatizaciones, IA ni CRM. Esas son
+categorías saturadas donde competimos contra todos. Hablamos de **fugas
+comerciales**, y dentro: captación, conversión, seguimiento, nutrición,
+reactivación y venta.
+
+**La fuga es el problema. Nuestros servicios son la solución.** Ese orden no
+se invierte nunca. El marco encaja con todo lo que podemos acabar haciendo
+después (estrategia, CRM, automatización, IA, campañas, procesos) sin tener
+que anunciarlo en el primer contacto.
+
 ## Los ocho puntos de fuga
 
 | | Fuga | La pregunta |
@@ -85,11 +97,36 @@ CRM, crecimiento de plantilla, entrada en mercados nuevos.
 
 ## Priorización
 
-Se puntúa de 0 a 10: encaje de ICP, potencial económico, fuga detectable,
-trigger, facilidad de personalización, probabilidad de reunión.
+Se puntúa de 0 a 10 en ocho ejes:
 
-No se contacta a una empresa solo porque cumple el ICP. Primero las de alto
-encaje más alto potencial más fuga clara más trigger.
+| Eje | Qué mide |
+|---|---|
+| ICP fit | encaje con el perfil |
+| Potencial económico | tamaño posible del contrato |
+| **Dolor potencial de la fuga** | cuánto dinero puede estar perdiendo |
+| **Evidencia de la fuga** | cuánto sabemos de verdad, no cuánto sospechamos |
+| Trigger | razón para contactar ahora |
+| **Accesibilidad del decisor** | de nada sirve la empresa perfecta con un decisor inalcanzable |
+| Facilidad de personalización | cuánto material verificable hay |
+| Probabilidad de reunión | juicio final |
+
+**Dolor y evidencia se puntúan por separado y no son intercambiables.** Una
+fuga con dolor 10 y evidencia 3 va por detrás de una con dolor 8 y evidencia
+10. Para outbound queremos problema suficientemente grande **más** evidencia
+muy clara. "Creo que probablemente no tienen nutrición" no es evidencia. "He
+comprobado que tienen blog y formulario y ningún mecanismo de captación de
+correo" sí lo es.
+
+No se contacta a una empresa solo porque cumple el ICP.
+
+## Regla de descarte
+
+**Si durante la investigación no aparece una fuga con evidencia suficiente,
+la cuenta se descarta y se sustituye por otra.** No se fabrica una
+personalización para rellenar el hueco.
+
+El objetivo no son 15 emails personalizados. Son 15 buenas razones para
+contactar. Es muy distinto.
 
 ## El ángulo depende del ICP
 
@@ -118,11 +155,18 @@ análisis completos ni listas de errores antes de la reunión.
 
 ## CTA
 
-Por orden de prioridad:
+CTA principal, y se mantiene como control:
 
-1. `Si vols, t'ensenyo en 15 minuts què hi veig.`
-2. `Té sentit que ho mirem?`
-3. `Com ho teniu resolt avui?`
+`Si vols, t'ensenyo en 15 minuts què hi veig.`
+
+Variantes autorizadas para testear, no para cambiar arbitrariamente en cada
+email. Se elige una por rama del experimento y se mide:
+
+- `Si et sembla interessant, t'ensenyo en 15 minuts què hi veig.`
+- `Si vols, ho mirem 15 minuts i et dic on crec que hi ha la fuga.` (la más
+  comercial, para cuando la hipótesis es especialmente sólida)
+- `Té sentit que ho mirem?`
+- `Com ho teniu resolt avui?`
 
 Prohibidos como CTA principal: "¿Te interesa?", "¿Us encaixa?", "¿Quieres una
 auditoría gratis?", "Reserva aquí".
@@ -155,9 +199,23 @@ sentido para esa empresa concreta.**
 
 Adaptable al ICP. Sin bombardeo.
 
-**Los follow-ups no repiten el primer email.** Cada uno aporta observación
-nueva, consecuencia, pregunta, ejemplo, hipótesis distinta o trigger. Nunca
-"solo hago seguimiento" ni "¿has visto mi email?".
+**Los follow-ups no repiten el primer email, y tampoco explican más la misma
+teoría.** Cada uno aporta **evidencia nueva**.
+
+**Open loop obligatorio**: el email 1 revela **una** fuga. El follow-up revela
+**otra evidencia distinta**, de otro tramo. La reunión es lo que hace falta
+para entender cómo se conectan las dos. Así:
+
+| | Qué se revela |
+|---|---|
+| Email 1 | una fuga de nutrición |
+| Follow-up | además, algo en el seguimiento |
+| Reunión | cómo están conectadas las dos |
+
+Prohibida la fórmula "he visto un par de cosas más", que se convierte en
+muletilla. Se nombra la segunda evidencia, no se insinúa.
+
+Nunca "solo hago seguimiento" ni "¿has visto mi email?".
 
 **LinkedIn no copia el email.** Su función es familiaridad y conversación. La
 solicitud es breve, natural y sin vender. Tras aceptar, conversación antes que
@@ -165,10 +223,15 @@ pitch.
 
 ## Idioma
 
+**La regla es cómo comunica la empresa, no dónde está.**
+
 - **Catalunya**: catalán solo con evidencia clara de que la empresa comunica
   en catalán (web, LinkedIn, comunicación corporativa). Si no hay evidencia,
   castellano.
-- **Andorra**: catalán por defecto.
+- **Andorra**: catalán como punto de partida, **no como imposición**. Si la
+  empresa comunica públicamente en castellano y su posicionamiento apunta a
+  cliente internacional, se escribe en castellano.
+- **Mixto**: se elige según la persona y el canal.
 - El catalán se revisa lingüísticamente antes de campañas grandes.
 - Nunca traducción literal si existe una forma comercial más natural.
 
@@ -231,6 +294,38 @@ MERCADO / ICP / SUB-ICP / DECISOR / IDIOMA / TICKET / CICLO DE VENTA /
 MODELO DE NEGOCIO / CANALES DE CAPTACIÓN / DOLORES PROBABLES / TRIGGERS /
 ÁNGULO / OFERTA / CTA / SECUENCIA
 ```
+
+## Proximidad como reductor de fricción
+
+Cuando existe cercanía geográfica real, se usa. No en el primer email por
+defecto, sino cuando aporta: `A més, som aquí al costat, així que si té sentit
+fins i tot ho podem veure en persona.`
+
+Baja muchísimo la fricción de aceptar, sobre todo en ticket alto. Es un
+argumento de cierre, no un gancho de apertura.
+
+## Prioridad geográfica
+
+La disponibilidad de datos en una herramienta **no es una decisión de
+mercado**. Si el objetivo estratégico es la cercanía, la proximidad sigue
+valiendo aunque haya que construir contactos a mano.
+
+El orden es: **el mercado objetivo primero, la comarca cercana construida
+manualmente después, y solo entonces la extensión que la herramienta permita.**
+Nunca al revés.
+
+## Composición de una tanda de prueba
+
+No 15 cuentas planas. Tres bloques de 5:
+
+| Bloque | Perfil |
+|---|---|
+| A+ | ICP perfecto más fuga con evidencia muy clara |
+| A | ICP perfecto más fuga razonablemente clara |
+| B | ICP bueno más hipótesis interesante |
+
+Así, cuando lleguen las reuniones, se sabe si lo que mueve el resultado es la
+calidad de la cuenta o el ángulo.
 
 ## Las tres reglas de oro
 
