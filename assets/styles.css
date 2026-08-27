@@ -333,6 +333,23 @@ input:focus, select:focus, textarea:focus {
 .post-lede { font-size: clamp(17px,3vw,19px); line-height: 1.65; color: var(--qv-ink-muted); }
 .post-destacado { background: linear-gradient(135deg, #EAF7F5, var(--qv-lilac)); border-left: 6px solid var(--qv-teal-bright); border-radius: 0 16px 16px 0; padding: 26px 30px; margin: 36px 0; }
 .post-destacado p { margin: 0; font-family: var(--qv-font-display); font-weight: 800; font-size: clamp(19px,3vw,22px); line-height: 1.42; letter-spacing: -.014em; color: var(--qv-ink); }
+/* componentes editoriales de artículo */
+.post-tabla { width: 100%; border-collapse: collapse; margin: 26px 0; font-size: 15.5px; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 26px rgba(16,19,25,.06); }
+.post-tabla th { background: var(--qv-black); color: #fff; text-align: left; padding: 13px 16px; font-family: var(--qv-font-display); font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.post-tabla td { padding: 13px 16px; border-bottom: 1px solid rgba(16,19,25,.08); background: #fff; color: var(--qv-ink-soft); line-height: 1.5; vertical-align: top; }
+.post-tabla tr:last-child td { border-bottom: none; }
+.post-tabla td:first-child { font-weight: 700; color: var(--qv-ink); }
+.post-tabla-scroll { overflow-x: auto; }
+.post-regla { display: flex; gap: 14px; align-items: flex-start; background: #FFF8EE; border: 1px solid rgba(232,150,12,.3); border-radius: 14px; padding: 18px 22px; margin: 26px 0; }
+.post-regla .ico { font-family: var(--qv-font-display); font-weight: 900; font-size: 12px; letter-spacing: .1em; color: #B9640A; background: rgba(232,150,12,.14); border-radius: 999px; padding: 5px 12px; white-space: nowrap; margin-top: 2px; }
+.post-regla p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--qv-ink); font-weight: 600; }
+.post-sino { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin: 26px 0; }
+.post-sino .col { background: #fff; border: 1px solid rgba(16,19,25,.1); border-radius: 0 14px 14px 0; padding: 20px 24px; }
+.post-sino .col.si { border-left: 5px solid var(--qv-teal-bright); }
+.post-sino .col.no { border-left: 5px solid #C0392B; }
+.post-sino .col p.t { margin: 0 0 10px; font-family: var(--qv-font-display); font-weight: 900; font-size: 15px; color: var(--qv-ink); }
+.post-sino .col ul { margin: 0; padding-left: 18px; }
+.post-sino .col li { font-size: 15px; line-height: 1.55; margin-bottom: 6px; }
 /* números como datos: mono en métricas */
 .caso-dark .metrica, .dx-preview .v, .post-flow .paso .n, .stat-num, .cs-stat .n, .cs-herostat .num {
   font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
