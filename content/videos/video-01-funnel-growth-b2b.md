@@ -91,7 +91,7 @@ Formato de cada una: Hook / Idea / Desarrollo (2-3 frases habladas) / Cierre / V
 
 ## DERIVADOS
 - **Artículo SEO:** ya existe (/blog/funnel-de-ventas/) — al publicar el vídeo: embeberlo arriba del artículo + añadir el bloque answer-first aprobado.
-- **LinkedIn (4):** ① la anécdota 83→168 contada en primera persona · ② «las cajas dan igual, mirad las flechas» con G1 · ③ el embudo real 559→10 con lectura de consultor · ④ contrarian: «el benchmark de internet te miente; tu benchmark eres tú».
+- **LinkedIn (4):** ① «¿cuentas personas u ocupación?» en primera persona, desde el patrón · ② «las cajas dan igual, mirad las flechas» con G1 · ③ el embudo de ejemplo leído como lo lee un consultor (declarado ilustrativo) · ④ contrarian: «el benchmark de internet te miente; tu benchmark eres tú».
 - **Newsletter:** «La flecha por la que se te escapa el dinero» — resumen del framework + enlace al vídeo.
 - **Carrusel IG:** el framework de 4 flechas en estilo v2 (cuando toque en calendario).
 - **Lead magnet (candidato):** plantilla de auditoría de funnel en una tarde (los 5 pasos como hoja de trabajo) — encaja con /recursos (tarea #30).
