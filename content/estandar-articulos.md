@@ -35,6 +35,15 @@ Cada artículo compite contra el mejor resultado de Google Y contra la respuesta
 - Voz de la guía: hecho / hipótesis / opinión separados; sin anglicismos gratuitos; los términos en inglés se explican la primera vez.
 - Cifras siempre con contexto («−53 % de CPL — de 6,86 € a 3,22 €»), nunca sueltas.
 
+## Componente humano — obligatorio en cada pieza (decisión de Maikel, 27-ago)
+Que ninguna pieza pueda haberla escrito una IA genérica o «cualquier agencia»:
+1. **Al menos un momento en primera persona por artículo**: algo que Maikel ha visto, le ha pasado o piensa («la frase que más escucho en las primeras llamadas», «me lo dijo un cliente delante de su equipo»). Real, no inventado — si no hay anécdota verificable, se usa opinión marcada como opinión.
+2. **La prueba del bar en cada párrafo**: si la frase no se la dirías a alguien con una cerveza delante, se reescribe.
+3. **Vetos anti-ChatGPT activos** (guia-de-voz.md §Anti-ChatGPT): «no se trata de X sino de Y», «la clave está en», «en definitiva», simetrías perfectas de tres elementos en cada lista, listas donde todos los puntos miden igual. El texto puede ser imperfecto; los robots no.
+4. **Una gracia cuando encaje** (ironía, comparación cotidiana, giro): 7/10 de creatividad. «14 herramientas no son un sistema comercial. A veces solo son 14 pestañas abiertas.»
+5. **Opinión con la cara**: cada pieza toma partido en algo («mi recomendación», «yo no lo haría»). Contenido sin postura = contenido de agencia.
+6. **Test final de voz**: leerlo en voz alta. Si suena a informe o a LinkedIn de gurú, no sale.
+
 ## Orientación a LLMs (GEO) — prioridad alta por decisión de Maikel (27-ago)
 El artículo debe ser citable por ChatGPT, Perplexity y Gemini, no solo rankeable en Google:
 1. **Primera frase de cada H2 = respuesta autocontenida.** Si la IA extrae solo esa frase, debe ser correcta y completa («Un growth partner es…»). Nada de empezar secciones con rodeos.
