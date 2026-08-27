@@ -334,7 +334,7 @@ input:focus, select:focus, textarea:focus {
 .post-destacado { background: linear-gradient(135deg, #EAF7F5, var(--qv-lilac)); border-left: 6px solid var(--qv-teal-bright); border-radius: 0 16px 16px 0; padding: 26px 30px; margin: 36px 0; }
 .post-destacado p { margin: 0; font-family: var(--qv-font-display); font-weight: 800; font-size: clamp(19px,3vw,22px); line-height: 1.42; letter-spacing: -.014em; color: var(--qv-ink); }
 /* números como datos: mono en métricas */
-.caso-dark .metrica, .dx-preview .v, .post-flow .paso .n, .stat-num {
+.caso-dark .metrica, .dx-preview .v, .post-flow .paso .n, .stat-num, .cs-stat .n, .cs-herostat .num {
   font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   letter-spacing: -.02em;
 }
