@@ -35,6 +35,17 @@ Cada artículo compite contra el mejor resultado de Google Y contra la respuesta
 - Voz de la guía: hecho / hipótesis / opinión separados; sin anglicismos gratuitos; los términos en inglés se explican la primera vez.
 - Cifras siempre con contexto («−53 % de CPL — de 6,86 € a 3,22 €»), nunca sueltas.
 
+## Orientación a LLMs (GEO) — prioridad alta por decisión de Maikel (27-ago)
+El artículo debe ser citable por ChatGPT, Perplexity y Gemini, no solo rankeable en Google:
+1. **Primera frase de cada H2 = respuesta autocontenida.** Si la IA extrae solo esa frase, debe ser correcta y completa («Un growth partner es…»). Nada de empezar secciones con rodeos.
+2. **Definiciones con patrón «X es Y»** en la primera aparición del término — es lo que los modelos citan.
+3. **Datos con contexto y fuente** («−53 % de CPL, de 6,86 € a 3,22 €, caso Focus Practical») — los números atribuibles se citan; los adjetivos no.
+4. **Tablas y listas**: los LLMs las extraen mejor que la prosa. Cada comparación importante, en tabla.
+5. **FAQ con schema** en toda pieza que responda preguntas — es el formato que las IA reutilizan directo.
+6. **Entidades consistentes**: siempre «Qualivo», «Maikel Echevarría», «Qualivo Diagnostic» — mismas grafías, para que el modelo asocie la marca al tema.
+7. **llms.txt actualizado** con cada pieza nueva (una línea: título + qué responde + el dato estrella). Es nuestro escaparate directo ante los crawlers de IA.
+8. **Fechas visibles**: datePublished en schema y «actualizado a…» en piezas de actualidad — los modelos prefieren citar contenido datado.
+
 ## Checklist pre-publicación (las 6 preguntas)
 1. ¿Alguien pagaría por leer esto? (el filtro §32 del sistema de contenidos)
 2. ¿Dice algo que el primer resultado de Google no dice?
