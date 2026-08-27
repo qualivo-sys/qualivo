@@ -64,5 +64,6 @@
       "destination": "/#casos",
       "permanent": true
     }
-  ]
+  ],
+  "trailingSlash": true
 }

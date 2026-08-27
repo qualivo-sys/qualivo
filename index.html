@@ -22,84 +22,123 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://qualivo.io/#organizacion",
+   "name": "Qualivo",
+   "url": "https://qualivo.io/",
+   "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+   "image": "https://qualivo.io/assets/img/og-image.png",
+   "description": "Consultoría de growth para empresas que facturan más de 500.000 € al año. Analizamos el sistema completo de captación y ventas — marketing, ventas y datos — para encontrar dónde se pierden oportunidades y qué solucionar primero. Especial experiencia en empresas de formación, servicios y B2B.",
+   "email": "maikel@qualivo.io",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "La Seu d'Urgell",
+    "addressRegion": "Lleida",
+    "postalCode": "25700",
+    "addressCountry": "ES"
+   },
+   "areaServed": "ES",
+   "founder": {
+    "@id": "https://qualivo.io/#maikel"
+   },
+   "knowsAbout": [
+    "growth marketing",
+    "paid media",
+    "funnels de venta",
+    "CRM",
+    "automatización de marketing",
+    "outbound",
+    "analítica de marketing",
+    "procesos comerciales",
+    "captación de alumnos para empresas de formación"
+   ],
+   "sameAs": [
+    "https://maikelechevarria.com"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://qualivo.io/#maikel",
+   "name": "Maikel Echevarría",
+   "url": "https://qualivo.io/sobre/",
+   "jobTitle": "Fundador y Director de Estrategia",
+   "worksFor": {
+    "@id": "https://qualivo.io/#organizacion"
+   },
+   "image": "https://qualivo.io/assets/img/maikel-echevarria.jpg",
+   "description": "Consultor de growth especializado en sistemas de captación y ventas para empresas de formación, servicios y B2B.",
+   "sameAs": [
+    "https://maikelechevarria.com"
+   ]
+  },
+  {
+   "@type": "Service",
+   "name": "Qualivo Diagnostic",
+   "serviceType": "Consultoría de growth — diagnóstico del sistema de captación y ventas",
+   "provider": {
+    "@id": "https://qualivo.io/#organizacion"
+   },
+   "description": "Radiografía del sistema de captación y ventas en cuatro entregas: mapa de cómo funciona el sistema, fugas donde se pierden oportunidades, prioridades por impacto y roadmap con qué hacer, en qué orden y cómo medirlo. Implementación opcional.",
+   "areaServed": "ES"
+  },
+  {
+   "@type": "WebSite",
+   "url": "https://qualivo.io/",
+   "name": "Qualivo",
+   "inLanguage": "es",
+   "publisher": {
+    "@id": "https://qualivo.io/#organizacion"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
     {
-      "@type": "ProfessionalService",
-      "@id": "https://qualivo.io/#organizacion",
-      "name": "Qualivo",
-      "url": "https://qualivo.io/",
-      "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
-      "image": "https://qualivo.io/assets/img/og-image.png",
-      "description": "Consultoría de growth para empresas que facturan más de 500.000 € al año. Analizamos el sistema completo de captación y ventas — marketing, ventas y datos — para encontrar dónde se pierden oportunidades y qué solucionar primero. Especial experiencia en empresas de formación, servicios y B2B.",
-      "email": "maikel@qualivo.io",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "La Seu d'Urgell",
-        "addressRegion": "Lleida",
-        "postalCode": "25700",
-        "addressCountry": "ES"
-      },
-      "areaServed": "ES",
-      "founder": { "@id": "https://qualivo.io/#maikel" },
-      "knowsAbout": ["growth marketing", "paid media", "funnels de venta", "CRM", "automatización de marketing", "outbound", "analítica de marketing", "procesos comerciales", "captación de alumnos para empresas de formación"]
+     "@type": "Question",
+     "name": "¿Qué es el Qualivo Diagnostic?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Una radiografía completa de tu sistema de captación y ventas: mapeamos cómo funciona hoy, detectamos dónde estás perdiendo oportunidades, priorizamos por impacto y te entregamos un roadmap con qué hacer, en qué orden y cómo medirlo."
+     }
     },
     {
-      "@type": "Person",
-      "@id": "https://qualivo.io/#maikel",
-      "name": "Maikel Echevarría",
-      "url": "https://qualivo.io/sobre/",
-      "jobTitle": "Fundador",
-      "worksFor": { "@id": "https://qualivo.io/#organizacion" },
-      "image": "https://qualivo.io/assets/img/maikel-echevarria.jpg",
-      "description": "Consultor de growth especializado en sistemas de captación y ventas para empresas de formación, servicios y B2B."
+     "@type": "Question",
+     "name": "¿Tiene sentido si ya trabajo con una agencia?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. El diagnóstico evalúa el sistema completo — campañas, embudos, CRM, cualificación, seguimiento y ventas — y no sustituye a tu agencia. A veces demuestra que tu agencia hace bien su trabajo y el problema está en otra parte del sistema."
+     }
     },
     {
-      "@type": "Service",
-      "name": "Qualivo Diagnostic",
-      "serviceType": "Consultoría de growth — diagnóstico del sistema de captación y ventas",
-      "provider": { "@id": "https://qualivo.io/#organizacion" },
-      "description": "Radiografía del sistema de captación y ventas en cuatro entregas: mapa de cómo funciona el sistema, fugas donde se pierden oportunidades, prioridades por impacto y roadmap con qué hacer, en qué orden y cómo medirlo. Implementación opcional.",
-      "areaServed": "ES"
+     "@type": "Question",
+     "name": "¿Para qué empresas tiene sentido?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Para negocios que ya facturan más de 500.000 € al año, con varios canales activos y un equipo o proceso comercial detrás. Por debajo de esa escala, un diagnóstico completo costaría más de lo que devuelve — y te lo diremos con la misma honestidad."
+     }
     },
     {
-      "@type": "WebSite",
-      "url": "https://qualivo.io/",
-      "name": "Qualivo",
-      "inLanguage": "es",
-      "publisher": { "@id": "https://qualivo.io/#organizacion" }
+     "@type": "Question",
+     "name": "¿Qué pasa después del diagnóstico?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tú decides: puedes implementar el roadmap con tu equipo o tu agencia, o hacerlo con nosotros — trabajamos con especialistas en medios pagados, creatividades, vídeo, CRM y automatización. No nos casamos con ningún canal."
+     }
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Qué es el Qualivo Diagnostic?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Una radiografía completa de tu sistema de captación y ventas: mapeamos cómo funciona hoy, detectamos dónde estás perdiendo oportunidades, priorizamos por impacto y te entregamos un roadmap con qué hacer, en qué orden y cómo medirlo." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tiene sentido si ya trabajo con una agencia?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Sí. El diagnóstico evalúa el sistema completo — campañas, embudos, CRM, cualificación, seguimiento y ventas — y no sustituye a tu agencia. A veces demuestra que tu agencia hace bien su trabajo y el problema está en otra parte del sistema." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Para qué empresas tiene sentido?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Para negocios que ya facturan más de 500.000 € al año, con varios canales activos y un equipo o proceso comercial detrás. Por debajo de esa escala, un diagnóstico completo costaría más de lo que devuelve — y te lo diremos con la misma honestidad." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué pasa después del diagnóstico?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Tú decides: puedes implementar el roadmap con tu equipo o tu agencia, o hacerlo con nosotros — trabajamos con especialistas en medios pagados, creatividades, vídeo, CRM y automatización. No nos casamos con ningún canal." }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo empiezo?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Rellena el formulario contándonos cómo captas clientes y qué números estás viendo, o haz primero el auto-diagnóstico express de 3 minutos. Respondemos en menos de 24 horas." }
-        }
-      ]
+     "@type": "Question",
+     "name": "¿Cómo empiezo?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Rellena el formulario contándonos cómo captas clientes y qué números estás viendo, o haz primero el auto-diagnóstico express de 3 minutos. Respondemos en menos de 24 horas."
+     }
     }
-  ]
+   ]
+  }
+ ]
 }
 </script>
 <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
