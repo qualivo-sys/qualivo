@@ -1,5 +1,5 @@
 # VÍDEO 01 · Formato A (Growth System) — Kit completo §27
-**Pieza madre de la semana del 1-sep. Cluster 2 (Growth Funnel). Intención: problema + comercial. Duración objetivo: 12-15 min. Regla de oro: bullets para hablar natural, nada de memorizar.**
+**Pieza madre de la semana del 1-sep. REGLA DE MAIKEL (28-ago): sin casos concretos — se habla desde el patrón y con ejemplos ilustrativos declarados. Cluster 2 (Growth Funnel). Intención: problema + comercial. Duración objetivo: 12-15 min. Regla de oro: bullets para hablar natural, nada de memorizar.**
 
 ---
 
@@ -8,8 +8,8 @@
 
 ### Alternativos
 1. Tu funnel de ventas está roto. Pero no donde crees.
-2. El embudo real de una empresa que factura 44.000 € al mes con anuncios (con los números en pantalla)
-3. De 559 leads a 10 ventas: anatomía de un funnel B2B que funciona
+2. El error de medición que veo en casi todas las empresas B2B
+3. Anatomía de un funnel B2B bien medido (paso a paso)
 4. Por qué mides mal tu funnel (y cuánto te cuesta)
 5. Funnel de ventas B2B: la guía que enseña los números de verdad
 
@@ -20,7 +20,7 @@ Cámara directa, sin intro, sin logo:
 
 - «De los presupuestos que enviaste el mes pasado… ¿cuántos tuvieron un segundo contacto?»
 - Pausa. «Hago esta pregunta en casi todos los diagnósticos. La respuesta suele ser: los que el cliente contestó.»
-- «Hoy te voy a enseñar un funnel de verdad, con números de verdad — 559 leads que acabaron en 10 matrículas y 44.000 euros — y el método para encontrar dónde pierde dinero el tuyo.»
+- «Hoy te voy a enseñar cómo se lee un funnel de verdad — etapa por etapa, flecha por flecha — y el método para encontrar dónde pierde dinero el tuyo.»
 - «Y te aviso: casi nunca se rompe donde crees.»
 
 ---
@@ -29,7 +29,7 @@ Cámara directa, sin intro, sin logo:
 
 ### 1. Contexto (min 1-3) — «Todos tenéis funnel. Casi nadie lo mide.»
 - Todo el mundo dibuja el embudo en la pizarra; casi nadie sabe cuánta gente pasó por cada etapa el mes pasado.
-- Anécdota real: la academia que creía tener 83 entrevistas al mes. Al contar bien, eran 168. **Todas las decisiones de inversión se tomaban sobre un dato falso.** (Dato real, contable con detalle.)
+- Patrón que veo constantemente en los diagnósticos: empresas que cuentan la «ocupación» de cada etapa en vez de las personas que pasaron. Cuando se corrige, la foto cambia por completo — a veces hay el doble de actividad comercial de la que se creía. **Y todas las decisiones anteriores salían de un dato falso.** (Contado como patrón, sin nombrar a nadie.)
 - La idea que estructura el vídeo: **el funnel no se rompe EN las etapas. Se rompe ENTRE ellas.**
 
 ### 2. Framework (min 3-6) — Las 4 flechas
@@ -40,11 +40,11 @@ Dibujar o mostrar el gráfico (G1): Visita → Lead → Oportunidad → Venta �
 - **Flecha 4 (venta→repetición):** el cliente que se va sin saber por qué encarece todo lo anterior.
 - Regla para decir a cámara: «contad personas que PASAN, no la ocupación del momento. Este error solo, cambia diagnósticos enteros.»
 
-### 3. Ejemplo con números reales (min 6-9) — EL momento del vídeo
-Grabación de pantalla (S1): el embudo real de la Escola Aeronàutica.
-- 559 leads → 573 oportunidades (¿por qué sube? entradas orgánicas — explicar honestidad del dato) → 68 entrevistas → 10 matrículas → 44.000 € atribuidos → ROAS 10,2×.
-- Leer el embudo en voz alta como lo lee un consultor: «si las entrevistas caen, el problema NO son los anuncios; si suben los leads y no las entrevistas, es cualificación o primer contacto».
-- Frase para dejar caer: «esto no es un funnel bonito. Es un funnel MEDIDO. La diferencia es que este permite decidir.»
+### 3. Cómo se lee un funnel (min 6-9) — EL momento del vídeo
+Gráfico G3: un embudo de EJEMPLO con números redondos, declarado como ilustrativo («números inventados para que se vea el método; los tuyos serán otros»).
+- 500 leads → 300 cualificados → 60 conversaciones → 12 ventas. Leerlo en voz alta como lo lee un consultor: «si las conversaciones caen, el problema NO son los anuncios; si suben los leads y no las conversaciones, es cualificación o primer contacto».
+- Jugar con el ejemplo: ¿y si el canal A convierte al 4% y el B al 1%? La media del 2,5% no existe — desglosar o decidir a ciegas.
+- Frase para dejar caer: «un funnel bonito no sirve de nada. Un funnel MEDIDO permite decidir. Esa es toda la diferencia.»
 
 ### 4. Aplicación práctica (min 9-12) — «Audita el tuyo en una tarde»
 Los 5 pasos (mostrar gráfico G2, ir tachando):
@@ -65,10 +65,10 @@ Los 5 pasos (mostrar gráfico G2, ir tachando):
 ---
 
 ## VISUALES / GRABACIONES / GRÁFICOS
-- **S1 (pantalla):** dashboard real del embudo EAC (anonimizar lo sensible; las cifras son públicas en el caso). Si no se puede grabar el dashboard vivo, uso el gráfico G3.
+- **S1 (pantalla):** opcional — la calculadora de fugas o una hoja de auditoría en blanco rellenándose. Sin dashboards de clientes.
 - **G1:** el funnel de 4 flechas (estilo web Qualivo: crema/tinta/teal, números en mono) — lo produzco yo como imagen/HTML navegable.
 - **G2:** checklist de los 5 pasos de auditoría — ídem.
-- **G3:** el embudo 559→573→68→10 con los € — ídem (ya existe la versión web en el artículo; hago la versión 16:9 para pantalla).
+- **G3:** embudo de ejemplo 500→300→60→12, rotulado «ejemplo ilustrativo» — hecho.
 - B-roll opcional: la calculadora de fugas en uso, 10 segundos.
 
 ---
@@ -78,8 +78,8 @@ Formato de cada una: Hook / Idea / Desarrollo (2-3 frases habladas) / Cierre / V
 
 1. **«¿Cuántos presupuestos tuvieron segundo contacto?»** — La pregunta que incomoda en todos los diagnósticos. Desarrollo: la respuesta real («los que el cliente contestó») y qué significa. Cierre: «el seguimiento lo hace el cliente. Y el cliente no está en nómina.» Visual: cámara directa. Caption: la pregunta + «hazla hoy en tu empresa».
 2. **«Tu funnel no se rompe donde crees»** — Se rompe ENTRE etapas, no en ellas. Desarrollo: las cajas vs las flechas. Cierre: «mirad las flechas». Visual: G1 animado.
-3. **«La empresa que tenía el doble de entrevistas y no lo sabía»** — 83 vs 168. Desarrollo: contaban ocupación, no personas. Cierre: «todas sus decisiones salían de un dato falso». Visual: los dos números en pantalla, mono, gigantes.
-4. **«559 leads. 10 ventas. ¿Está roto?»** — No: es un ROAS de 10,2×. Desarrollo: sin el desglose, este funnel parecería un desastre; con él, es una máquina. Cierre: «un funnel medido no es bonito. Es decidible.» Visual: G3.
+3. **«¿Cuentas personas o cuentas ocupación?»** — El error de medición que más veo. Desarrollo: contar quién está HOY en una etapa vs quién PASÓ por ella; la foto puede cambiar por completo. Cierre: «decidir con ese dato es decidir con un dato falso». Visual: los dos conceptos en pantalla, mono.
+4. **«Muchos leads y pocas ventas no significa funnel roto»** — Depende de la economía de cada etapa. Desarrollo: con el desglose delante, un embudo que parece un desastre puede ser una máquina rentable — y al revés. Cierre: «sin desglose no hay veredicto». Visual: G3.
 5. **«El benchmark de internet te está mintiendo»** — Tu comparación útil es entre TUS canales. Desarrollo: la diferencia entre tu canal bueno y el malo señala la fuga mejor que cualquier estudio. Visual: cámara + tabla simple.
 6. **«La media que esconde el problema»** — Tasa de cierre por canal, nunca la media. Desarrollo: dos canales, 30% y 4%, media 17%: no existe ese número. Cierre: «desglosa o decide a ciegas». (Ejemplo hipotético y se dice.)
 7. **«¿Y si no tienes datos?»** — Entonces no optimices: construye. Desarrollo: no hay vergüenza en admitir que el funnel no existe; la hay en optimizar humo. Visual: cámara directa.
@@ -100,5 +100,4 @@ Formato de cada una: Hook / Idea / Desarrollo (2-3 frases habladas) / Cierre / V
 
 ## LO QUE NECESITO DE MAIKEL
 1. Ok al kit (o cambios de ángulo/hook).
-2. Grabar: cámara (hook, contexto, aplicación, cierre) + pantalla del dashboard EAC si es posible. Con el móvil vale; luz de ventana; los gráficos los pongo yo en edición.
-3. Confirmar que el dato «83→168 entrevistas» se puede contar con ese detalle (está publicado como +102% en el caso; el vídeo lo cuenta con los números absolutos).
+2. Grabar a cámara: hook, contexto, aplicación y cierre. Con el móvil y luz de ventana vale; los gráficos los pongo yo en edición. Nada de pantallas de clientes.
