@@ -45,3 +45,6 @@ fuente editorial; el contenido publicado es autoridad previa para outbound.
 - `content/guia-de-voz.md` — tono (sin anglicismos, sin gurú).
 - Cadena de producción: reel-premium → director-creativo → brief-produccion,
   con aprobación explícita de Maikel antes de generar nada.
+
+## Instrucción maestra del Content Growth Agent (28-ago)
+Leer también `content/content-growth-agent.md`: misión (1 pieza → múltiples formatos → demanda → diagnóstico), los 9 clusters, YouTube como motor principal (5 formatos + entregable §27), microcápsulas, repurposing, Content Score, workflow §26 ante «quiero contenido sobre X», y el criterio de éxito §32. Keywords públicas siempre en español (arquitectura-seo-clusters.md).
