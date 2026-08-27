@@ -10,6 +10,9 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 - [Growth para empresas de formación](https://qualivo.io/formacion/): vertical especializada en captación de alumnos para escuelas, academias y formación online — campañas por curso, cualificación en origen, CRM y embudo medido del anuncio a la matrícula. Cuatro casos publicados con números (ROAS hasta 10,2x, CPL desde 2,86 €, +102% de entrevistas de venta).
 
 - [Consultora de growth B2B](https://qualivo.io/consultoria-growth-marketing/): qué hace un consultor de growth, diferencia con una agencia (el incentivo), qué es un growth partner, cuándo tiene sentido contratarlo y cómo trabaja Qualivo — diagnóstico, priorización por impacto, implementación opcional y medición del coste por cliente por canal.
+- [Qualivo Diagnostic — auditoría de marketing y ventas](https://qualivo.io/diagnostico/): las cuatro entregas — mapa del sistema, fugas con números, prioridades por impacto económico y roadmap. El diagnóstico determina la solución, no al revés; la implementación posterior es opcional.
+- [Automatización comercial](https://qualivo.io/automatizacion-comercial/): lead al CRM en ~8 segundos, primer contacto inmediato, cadencias de seguimiento automáticas y panel diario. Tesis: las ventas no mueren por un «no», mueren por olvido.
+- [Servicios (índice)](https://qualivo.io/servicios/): la escalera completa en el orden en que tiene sentido — diagnóstico → tapar fugas → capa de IA → growth partner continuo.
 - [Consultoría de IA para pymes](https://qualivo.io/consultoria-ia/): IA aplicada a marketing y ventas — primer contacto automático (lead al CRM en ~8 segundos), cualificación y lead scoring, seguimiento comercial y reporting. Regla de la casa: la IA no arregla un proceso roto, lo acelera; primero el diagnóstico, después la herramienta.
 
 ## Productos
