@@ -95,3 +95,35 @@ hizo el alta a nivel de campaña.
 Arrancar antes de tener los campos parece temerario pero no lo es: la
 secuencia empieza con `VIEW_PROFILE` a 0 y la `CONNECTION_REQUEST` va a +1
 día. Hay 24 horas de margen para el paso 5.
+
+
+## Segunda corrección, 27 de agosto: dónde va exactamente customUserFields
+
+El matiz que faltaba: en `campaign/AddLeadsToCampaignV2`, el array
+`customUserFields` tiene que ir **dentro del objeto `lead`**, no como hermano
+suyo en el `accountLeadPair`. Como hermano, la API responde
+`addedLeadsCount` correcto y no da error, pero los campos quedan vacíos.
+
+Forma que funciona, verificada en la campaña 572444:
+
+```json
+{"campaignId": 572444, "accountLeadPairs": [{
+  "linkedInAccountId": 201834,
+  "lead": {
+    "firstName": "...", "lastName": "...", "profileUrl": "...",
+    "customUserFields": [
+      {"name": "nota", "value": "..."},
+      {"name": "msg1", "value": "..."}
+    ]
+  }
+}]}
+```
+
+La verificación se hace leyendo la LISTA (`list/GetLeadsFromList`), no los
+leads de la campaña: en la campaña los campos no se ven ni cuando están bien.
+
+Aviso operativo: si el alta inicial se hizo con la forma mala, se corrige
+repitiendo la llamada con la forma buena (responde `updatedLeadsCount`). Y
+cuidado con los scripts con efectos en el nivel superior: un `import` para
+reutilizar el copy re-ejecuta el script entero y crea campañas duplicadas.
+Pasó el 27-ago (campaña 572451, pausada al momento; la buena es la 572444).
