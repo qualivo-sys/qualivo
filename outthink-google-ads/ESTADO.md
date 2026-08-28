@@ -74,6 +74,23 @@ Notas para la revisión de Adigital:
 
 **Plan B si la landing no se toca a tiempo:** apuntar las URLs finales de los anuncios directamente a `espacio.adigital.org/evento/outthink-2026/` — mismo dominio, sin salto, atribución garantizada a costa de perder la landing como página de venta.
 
+## Remarketing — corrección 28-08
+GA4 está vinculado a la cuenta (hay conversiones importadas y audiencias tipo REMARKETING de
+las propiedades "RAI Outthink", "Espacio Adigital v2" y "adigital.org"). Eso permite hacer
+remarketing de los visitantes de la landing **sin acceso a GTM-WC7PTQTB**: la etiqueta GA4
+que ya existe allí alimenta las audiencias.
+
+Las listas propias `OT26_RL_*` son RULE_BASED y dependen de una etiqueta de remarketing de
+Google Ads que no existe en ningún contenedor, así que probablemente no se poblarán. La
+audiencia `OT26_AUD_Interesados_RMK` (357704231) se ha ampliado para incluir las de GA4:
+`OT26 · Visitó la landing`, `OT26 · Vio la agenda`, `All Users of RAI Outthink`, además de
+las dos propias como respaldo.
+
+Todas las listas están a 0 miembros: son nuevas y necesitan 24-48 h + tráfico. Demand Gen
+exige un mínimo (~1.000 usuarios) para servir, así que la campaña de remarketing no
+entregará hasta que haya volumen — es lo esperado y por eso arranca con el 20% del
+presupuesto.
+
 ## Pendiente para activar (31-08/01-09)
 - [x] Conversión de registro creada, publicada y probada end-to-end (28-08)
 - [x] Anuncios aprobados: los 15 en APPROVED / REVIEWED
