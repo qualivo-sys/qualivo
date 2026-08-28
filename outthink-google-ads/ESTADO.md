@@ -36,6 +36,12 @@ Común: fechas 31-08 → 24-09 · Comunidad de Madrid · español · UTMs `utm_c
 - **Medición (conversiones, GTM, Consent Mode)**: la lleva el equipo del cliente.
 - Puja en las 3: Maximizar clics (sin conversiones aún). Cuando su medición esté activa, valorar Maximizar conversiones.
 
+### Ajustes 28-08 (tarde)
+- **Automatización de creativos desactivada** en los 11 anuncios Demand Gen (a nivel de anuncio): vídeos generados (`GENERATE_VIDEOS_FROM_OTHER_ASSETS`), imágenes animadas y versiones de diseño auto-generadas → OPTED_OUT. Solo se sirven las imágenes originales del design system.
+- **Conversión creada** en la cuenta: `OT26_Registro` (id `7737267067`, categoría Registro, primaria, 1 por clic).
+  - ID de conversión: **AW-18413667658** · Etiqueta/send_to: **AW-18413667658/JmwmCPumtekcEMqKqcxE**
+  - Entregado a Adigital (Aída) para configurar la etiqueta en el GTM de espacio.adigital.org con vinculador entre dominios (rai.outthink.es ↔ espacio.adigital.org).
+
 ## Pendiente para activar (31-08/01-09)
 - [ ] Cliente: conversión de registro + tag activos (las listas RMK dependen de esto)
 - [ ] Cliente: método de pago/facturación activo en la cuenta
