@@ -167,6 +167,10 @@ duplicando emails.
 | yinius.io | historico | Meta | sin formulario |
 | yolandacambra.com | historico | Meta | sin formulario, sin GTM/GA4 |
 | zelsia.es | historico | Meta | sin formulario, sin GTM/GA4 |
+| gruporecio.es | inmobiliarias | Google Ads | sin formulario, solo buzon generico |
+| cetic.es | academias | Meta | sin formulario, solo buzon generico |
+| mopeformacion.net | academias | Meta | sin formulario |
+| formatoedu.com | academias | Meta+Google Ads | sin formulario |
 
 ## Tier B · pagan y no miden nada (34)
 
@@ -206,6 +210,7 @@ duplicando emails.
 | soyannaferrer.com | historico | Meta | sin GTM/GA4 |
 | susanawise.com | historico | Meta | sin GTM/GA4 |
 | vaccari-bass.com | historico | Meta | sin GTM/GA4, solo buzon generico |
+| grupoalfer.es | solar | Meta | sin GTM/GA4 |
 
 ## Tier C · pagan y solo tienen un buzon generico (24)
 
@@ -235,6 +240,9 @@ duplicando emails.
 | soundub.com | historico | Google Ads | solo buzon generico |
 | urbenia.es | historico | Meta | solo buzon generico |
 | whatsup.es | historico | Meta | solo buzon generico |
+| autoeabril.com | academias | Google Ads | solo buzon generico |
+| escolajordi.com | academias | Meta | solo buzon generico |
+| formacioncontreras.com | academias | Google Ads | solo buzon generico |
 
 El dataset completo vive en `captacion/datos/probe-dataset.csv` y crece cada
 dia con la carga (paso 4b de la rutina diaria). La muestra ya supera con mucho
