@@ -6,7 +6,7 @@ Cuenta cliente: **918-811-5388** (acceso estándar vía info@) · API v25 · Act
 
 | Campaña | ID | Presupuesto/día | Tipo |
 |---|---|---|---|
-| OT26_Search | 24182552133 | 25,00 € (600 € ÷ 24d) | Search · Maximizar clics |
+| OT26_Search | 24182552133 | 25,00 € (600 € ÷ 24d) | Search · Maximizar clics · ENABLED |
 | OT26_DemandGen_Prospecting | 24188461112 | 41,67 € (1.000 € ÷ 24d) | Demand Gen · Maximizar clics |
 | OT26_DemandGen_Remarketing | 24193394560 | 16,67 € (400 € ÷ 24d) | Demand Gen · Maximizar clics |
 
@@ -100,7 +100,7 @@ Contenido previo: solo dos etiquetas — **Cookiebot Banner** (plantilla `cvt_57
 "Cookie Consent Update". Es decir: **sí hay CMP** y la medición está condicionada al
 consentimiento — queda resuelta la duda que teníamos sobre Consent Mode.
 
-### Preparado en workspace SIN PUBLICAR
+### Workspace 5 — PENDIENTE DE PUBLICAR (Adigital autorizó la vinculación el 28-08)
 `accounts/318940788/containers/259282561/workspaces/5` — "OutThink 2026 — Qualivo"
 
 | Tag | Detalle |
@@ -121,11 +121,13 @@ la versión anterior — mismo problema que ocurrió en el contenedor de espacio
 - [x] Conversión de registro creada, publicada y probada end-to-end (28-08)
 - [x] Anuncios aprobados: los 15 en APPROVED / REVIEWED
 - [~] Vinculación de dominios en la landing: montada en workspace 5, **falta publicar**
-- [ ] Cliente: método de pago/facturación activo en la cuenta (bloqueante real del día 31)
+- [x] Facturación: billing_setup **APPROVED**, cuenta de pagos «Adigital» (verificado 28-08)
 - [ ] Confirmar que la conversión de prueba aparece en Google Ads (~3 h de retardo)
 - [ ] Lista de registrados → exclusión en las 3 campañas + lookalike (reactivaría el ad group C)
 - [ ] Creatividades faltantes: P4/P4B/P4C/P4D y tarjetas CAR_T2–T4 → añadir anuncios/carrusel
 - [x] Consent Mode: la landing usa Cookiebot y gatea GA4 tras el consentimiento; nuestras
       etiquetas replican ese gating
-- [ ] Quitar PAUSED (decisión con Maikel)
+- [x] Campañas **ENABLED** el 28-08 con serving_status=PENDING: arrancan solas el lunes
+      31-08 a las 00:00 por fecha de inicio. Sin franjas horarias (24 h) a propósito,
+      para no limitar la recogida de datos la primera semana.
 - [ ] Con conversiones ya midiendo: valorar paso de Maximizar clics → Maximizar conversiones
