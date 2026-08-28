@@ -42,6 +42,31 @@ Común: fechas 31-08 → 24-09 · Comunidad de Madrid · español · UTMs `utm_c
   - ID de conversión: **AW-18413667658** · Etiqueta/send_to: **AW-18413667658/JmwmCPumtekcEMqKqcxE**
   - Entregado a Adigital (Aída) para configurar la etiqueta en el GTM de espacio.adigital.org con vinculador entre dominios (rai.outthink.es ↔ espacio.adigital.org).
 
+## Medición — GTM (28-08)
+
+Contenedores reales en producción (verificado leyendo el HTML de ambos dominios):
+- `rai.outthink.es` (landing) → **GTM-WC7PTQTB** + GA4 `G-SZBKQGZFN5` · **sin acceso desde info@**
+- `espacio.adigital.org` (registro) → **GTM-WV69PHLH** + GA4 `G-52Z0M6VHBR` · acceso OK
+- GTM-NT3ZHDL5 (Observatorio) no está en ninguno de los dos dominios — irrelevante.
+
+### Preparado en workspace SIN PUBLICAR
+`accounts/318940788/containers/204427292/workspaces/9` — "OutThink 2026 — Qualivo (pendiente de revisión)"
+https://tagmanager.google.com/#/container/accounts/318940788/containers/204427292/workspaces/9
+
+| Elemento | Detalle |
+|---|---|
+| Trigger 10 | "Envío de formulario — Registro OutThink" · formSubmission · filtro Page URL contiene `outthink-2026` |
+| Tag 11 | Google Ads conversión · `18413667658` / `JmwmCPumtekcEMqKqcxE` · conversion linker activo |
+| Tag 12 | Vinculador de conversiones · cross-domain `rai.outthink.es, espacio.adigital.org, outthink.es` · en Initialization |
+
+Notas para la revisión de Adigital:
+- El activador existente (id 5) **no tiene filtro**: dispara en todos los formularios del sitio. Por eso la conversión de OutThink usa un activador propio acotado a la URL del evento. Implicación colateral: la etiqueta antigua del Observatorio está contando también los registros de OutThink en AW-16923064235.
+- Falta la mitad del cross-domain: la decoración del enlace ocurre en la landing (GTM-WC7PTQTB), donde no tenemos acceso. Sin eso, el `_gl` no viaja.
+- Riesgo a validar en la prueba: en formularios Divi el activador nativo puede dispararse aunque falle la validación. Si sobrecuenta, cambiar a visibilidad de `.et-pb-contact-message`.
+- No se detecta CMP en el HTML; revisar Consent Mode v2 antes de lanzar.
+
+**Plan B si la landing no se toca a tiempo:** apuntar las URLs finales de los anuncios directamente a `espacio.adigital.org/evento/outthink-2026/` — mismo dominio, sin salto, atribución garantizada a costa de perder la landing como página de venta.
+
 ## Pendiente para activar (31-08/01-09)
 - [ ] Cliente: conversión de registro + tag activos (las listas RMK dependen de esto)
 - [ ] Cliente: método de pago/facturación activo en la cuenta
