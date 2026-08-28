@@ -91,15 +91,41 @@ exige un mínimo (~1.000 usuarios) para servir, así que la campaña de remarket
 entregará hasta que haya volumen — es lo esperado y por eso arranca con el 20% del
 presupuesto.
 
+
+## Landing — GTM-WC7PTQTB (acceso concedido 28-08)
+
+Contenedor `accounts/318940788/containers/259282561` ("rai.outthink.es/"), cuenta Adigital.
+Contenido previo: solo dos etiquetas — **Cookiebot Banner** (plantilla `cvt_57SF4`) y **GA4**
+(`googtag`, id via variable `{{GA4 ID}}`), esta última disparada por el activador 10
+"Cookie Consent Update". Es decir: **sí hay CMP** y la medición está condicionada al
+consentimiento — queda resuelta la duda que teníamos sobre Consent Mode.
+
+### Preparado en workspace SIN PUBLICAR
+`accounts/318940788/containers/259282561/workspaces/5` — "OutThink 2026 — Qualivo"
+
+| Tag | Detalle |
+|---|---|
+| 13 · Vinculador de conversiones — dominios OutThink | `gclidw` · cross-domain `rai.outthink.es, espacio.adigital.org, outthink.es` · url passthrough |
+| 14 · Google Ads — Remarketing OutThink | `sp` · conversionId 18413667658 · alimenta las listas `OT26_RL_*` |
+
+Ambas disparan en el **activador 10 (Cookie Consent Update)**, el mismo que usa su GA4:
+así heredan exactamente el gating de consentimiento que ya tienen validado, sin introducir
+una dependencia nueva que pudiera bloquear las etiquetas en silencio.
+
+`quick_preview` sin errores de compilación. Pendiente de publicar.
+
+Al publicar: **sincronizar el Default Workspace** (workspace 4) para que no quede anclado a
+la versión anterior — mismo problema que ocurrió en el contenedor de espacio.adigital.org.
+
 ## Pendiente para activar (31-08/01-09)
 - [x] Conversión de registro creada, publicada y probada end-to-end (28-08)
 - [x] Anuncios aprobados: los 15 en APPROVED / REVIEWED
-- [ ] **Vinculación de dominios en la landing** (GTM-WC7PTQTB, sin acceso) — sin esto la
-      atribución se pierde en el salto rai.outthink.es → espacio.adigital.org
+- [~] Vinculación de dominios en la landing: montada en workspace 5, **falta publicar**
 - [ ] Cliente: método de pago/facturación activo en la cuenta (bloqueante real del día 31)
 - [ ] Confirmar que la conversión de prueba aparece en Google Ads (~3 h de retardo)
 - [ ] Lista de registrados → exclusión en las 3 campañas + lookalike (reactivaría el ad group C)
 - [ ] Creatividades faltantes: P4/P4B/P4C/P4D y tarjetas CAR_T2–T4 → añadir anuncios/carrusel
-- [ ] Revisar Consent Mode v2 (no se detecta CMP en el HTML del registro)
+- [x] Consent Mode: la landing usa Cookiebot y gatea GA4 tras el consentimiento; nuestras
+      etiquetas replican ese gating
 - [ ] Quitar PAUSED (decisión con Maikel)
 - [ ] Con conversiones ya midiendo: valorar paso de Maximizar clics → Maximizar conversiones
