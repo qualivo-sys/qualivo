@@ -49,7 +49,14 @@ Contenedores reales en producción (verificado leyendo el HTML de ambos dominios
 - `espacio.adigital.org` (registro) → **GTM-WV69PHLH** + GA4 `G-52Z0M6VHBR` · acceso OK
 - GTM-NT3ZHDL5 (Observatorio) no está en ninguno de los dos dominios — irrelevante.
 
-### Preparado en workspace SIN PUBLICAR
+### PUBLICADO en producción (28-08) — versión 8 del contenedor
+Verificado en el `gtm.js` que sirve Google para GTM-WV69PHLH: la etiqueta de conversión,
+el vinculador con los tres dominios y el activador filtrado están en vivo.
+Probado end-to-end en Vista previa con un registro real: la conversión se dispara al
+enviar el formulario (mensaje de éxito de Divi confirmado). El registro de prueba queda
+en la lista de Adigital para que lo borren.
+
+### Contenido (originalmente preparado en workspace 9)
 `accounts/318940788/containers/204427292/workspaces/9` — "OutThink 2026 — Qualivo (pendiente de revisión)"
 https://tagmanager.google.com/#/container/accounts/318940788/containers/204427292/workspaces/9
 
@@ -68,9 +75,14 @@ Notas para la revisión de Adigital:
 **Plan B si la landing no se toca a tiempo:** apuntar las URLs finales de los anuncios directamente a `espacio.adigital.org/evento/outthink-2026/` — mismo dominio, sin salto, atribución garantizada a costa de perder la landing como página de venta.
 
 ## Pendiente para activar (31-08/01-09)
-- [ ] Cliente: conversión de registro + tag activos (las listas RMK dependen de esto)
-- [ ] Cliente: método de pago/facturación activo en la cuenta
-- [ ] Revisar aprobación de policies de los 15 anuncios (en revisión tras la creación)
+- [x] Conversión de registro creada, publicada y probada end-to-end (28-08)
+- [x] Anuncios aprobados: los 15 en APPROVED / REVIEWED
+- [ ] **Vinculación de dominios en la landing** (GTM-WC7PTQTB, sin acceso) — sin esto la
+      atribución se pierde en el salto rai.outthink.es → espacio.adigital.org
+- [ ] Cliente: método de pago/facturación activo en la cuenta (bloqueante real del día 31)
+- [ ] Confirmar que la conversión de prueba aparece en Google Ads (~3 h de retardo)
 - [ ] Lista de registrados → exclusión en las 3 campañas + lookalike (reactivaría el ad group C)
 - [ ] Creatividades faltantes: P4/P4B/P4C/P4D y tarjetas CAR_T2–T4 → añadir anuncios/carrusel
+- [ ] Revisar Consent Mode v2 (no se detecta CMP en el HTML del registro)
 - [ ] Quitar PAUSED (decisión con Maikel)
+- [ ] Con conversiones ya midiendo: valorar paso de Maximizar clics → Maximizar conversiones
