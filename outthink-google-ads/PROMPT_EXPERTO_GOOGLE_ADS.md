@@ -40,13 +40,13 @@ Hipótesis estratégicas (en orden de prioridad de testing): AI Act · Autoridad
 **Geo:** Madrid + área de influencia. **Idioma:** español. **Exclusión permanente en las 3 campañas:** registrados/conversores (Customer Match, actualización semanal).
 
 ### Campaña 1 — Search (600 €)
-- **Puja:** Maximizar conversiones → transición a tCPA cuando haya ≥15–20 conversiones/30 días.
+- **Puja:** Maximizar clics (plan actualizado 28-ago). Evaluar paso a Maximizar conversiones/tCPA cuando la conversión esté verificada y haya volumen.
 - **Ad groups y keywords:**
   - *AI Act:* ai act empresas · ai act españa · regulación ia cumplimiento · ai act normativa inteligencia artificial · gobernanza ia
   - *Compliance y Riesgo:* riesgos inteligencia artificial · compliance ia · protección de datos ia · regulación tecnológica
   - *Eventos IA:* evento inteligencia artificial madrid · congreso ia madrid · foro inteligencia artificial · conferencia inteligencia artificial madrid
   - *Marca:* outthink · outthink madrid · outthink adigital · outthink ai
-- **Titulares RSA (≤30 car.):** OutThink 2026 · Madrid / Foro de IA y Regulación / ¿Te afecta el AI Act? / Resuelve el AI Act en 1 día / Con AEPD, OCDE y ONU / 24 Sept · Casa del Lector / Ponencias y talleres de IA / Regístrate: plazas limitadas / IA, ciberseguridad, cuántica / Habla con quien regula / Cumple la normativa de IA / Foro presencial en Madrid / Evento de IA para empresas / Agenda de primer nivel / Networking institucional
+- **Titulares RSA (≤30 car.):** OutThink 2026 · Madrid / Foro de IA y Regulación / ¿Te afecta el AI Act? / Comprende el AI Act en 1 día / Con AEPD, OCDE y ONU / 24 Sept · Casa del Lector / Ponencias y talleres de IA / Regístrate: plazas limitadas / IA, ciberseguridad, cuántica / Habla con quien regula / Cumple la normativa de IA / Foro presencial en Madrid / Evento de IA para empresas / Agenda de primer nivel / Networking institucional
 - **Descripciones RSA (≤90 car.):**
   - Foro presencial con AEPD, OCDE, ONU y Gobierno de España. 24 de septiembre, Madrid.
   - Entiende el AI Act y sal con un mapa claro de obligaciones. Plazas limitadas.
@@ -63,7 +63,7 @@ Hipótesis estratégicas (en orden de prioridad de testing): AI Act · Autoridad
 | C · Similar a registrados | Lookalike del Customer Match de registrados (150), actualización semanal | Carrusel · P4 · P4C · R2 |
 
 - Señales de intereses como capa de observación: AI Governance, Risk Management, Data Protection, Cybersecurity, Executive Leadership.
-- **Titulares Demand Gen (≤40 car.):** ¿Está tu empresa lista para el AI Act? / Pregunta cara a cara a la AEPD y la OCDE / El foro que reúne a quienes regulan la IA / Resuelve el AI Act en un solo día / Multas de hasta el 7%: ¿te afecta? (+ los 15 de Search reutilizables)
+- **Titulares Demand Gen (≤40 car.):** ¿Está tu empresa lista para el AI Act? / Pregunta cara a cara a la AEPD y la OCDE / El foro que reúne a quienes regulan la IA / Comprende el AI Act en 1 día / Multas de hasta el 7%: ¿te afecta? (+ los 15 de Search reutilizables)
 - **Descripciones por ángulo:** Compliance (qué sistemas regula el AI Act y qué te exige) · Dirección (criterios y casos reales de las empresas que van por delante) · Ponentes (González Veracruz, Cotino y García Robles en el mismo foro).
 - **Formatos:** 3 imágenes por ratio (1200×628 · 1080×1080 · 1080×1350) por ad group + carrusel de 5 tarjetas (gancho → 3 ponentes → cierre con agenda y CTA).
 

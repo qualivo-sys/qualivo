@@ -21,7 +21,7 @@ import sys
 import urllib.parse
 import urllib.request
 
-API_VERSION = "v21"  # si devuelve 404, probar con la versión estable actual
+API_VERSION = "v25"  # verificada 28-ago-2026
 CUSTOMER_ID = "9188115388"  # OutThink / Adigital (918-811-5388)
 
 
