@@ -131,3 +131,31 @@ la versión anterior — mismo problema que ocurrió en el contenedor de espacio
       31-08 a las 00:00 por fecha de inicio. Sin franjas horarias (24 h) a propósito,
       para no limitar la recogida de datos la primera semana.
 - [ ] Con conversiones ya midiendo: valorar paso de Maximizar clics → Maximizar conversiones
+
+## Día 1 (31-08) — diagnóstico y primera optimización
+
+Datos a las ~11:00 (11 h servidas): Search 4 impresiones / 0 clics / **0 € de 25 €**;
+DG Prospecting 127 impr / 2 clics / 3,60 €; DG Remarketing 0 (audiencias vacías, esperado).
+
+**Diagnóstico Search:** 4 de las 17 keywords marcadas `RARELY_SERVED` por volumen insuficiente
+(`conferencia inteligencia artificial madrid`, `regulación ia cumplimiento`,
+`ai act normativa inteligencia artificial`, `outthink madrid`). Un único término de búsqueda
+real en todo el día: «congreso ia madrid 2026». Causa: se multiplican tres filtros —
+keywords hipernicho × concordancia de frase × solo Comunidad de Madrid.
+
+**Aplicado (decisión de Maikel: solo keywords, sin tocar geo de momento):**
+- 19 keywords nuevas en **concordancia amplia** repartidas en AI Act (7), Compliance (6) y
+  Eventos (6). Ejemplos: `ai act`, `reglamento ia`, `ley de inteligencia artificial`,
+  `gobernanza inteligencia artificial`, `congreso inteligencia artificial`.
+- Marca **se queda en frase** a propósito: «outthink» en amplia arrastraría tráfico en inglés
+  sin relación. Añadidos `outthink for ai`, `outthink 2026`, `foro outthink`.
+- 16 negativas nuevas (22 en total) como contrapeso a la concordancia amplia: chatgpt, curso
+  online, certificacion, universidad, tfg, tfm, descargar, wikipedia, generador, trabajo,
+  sueldo, becas, apuntes...
+
+**Pendiente sobre la mesa:** abrir el geo a toda España. Es el cambio con más recorrido
+(el geo actual recorta ~85% de un mercado ya pequeño) pero se desvía del brief aprobado,
+así que queda a decisión de Maikel/Adigital.
+
+**A vigilar mañana:** términos de búsqueda reales que traiga la amplia — hay que revisarlos
+a diario los primeros días y añadir negativas de lo que no encaje.
