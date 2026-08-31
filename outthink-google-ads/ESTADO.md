@@ -181,3 +181,16 @@ Google Ads solo contabiliza conversiones atribuibles a un clic en anuncio. El re
 prueba del 28-08 se hizo entrando directo, sin gclid, así que la etiqueta disparó pero no
 aparece en informes. No es un fallo de medición. La validación real llega con el primer
 registro procedente de un clic de campaña.
+
+## Reporte diario automatizado
+`scripts/reporte_diario.js` — script de Google Ads (se ejecuta dentro de la cuenta, sin
+infraestructura externa ni credenciales que mantener).
+
+Instalación: Google Ads → Herramientas → Acciones masivas → Scripts → "+" → pegar → autorizar
+→ Vista previa para probar → Programar diariamente a las 08:00. Ajustar `DESTINATARIOS`.
+
+Envía por email: acumulado por campaña con CPL, datos del día anterior, términos de búsqueda
+del día (para ir limpiando la concordancia amplia), consumo de presupuesto y proyección de
+registros al ritmo actual. Incluye bloque de avisos: campañas activas sin impresiones, gasto
+sin conversiones (posible fallo de medición), CPL por encima de 15 €, ritmo de gasto bajo y
+alerta de objetivo cuando quedan menos de 7 días.
