@@ -194,3 +194,28 @@ del día (para ir limpiando la concordancia amplia), consumo de presupuesto y pr
 registros al ritmo actual. Incluye bloque de avisos: campañas activas sin impresiones, gasto
 sin conversiones (posible fallo de medición), CPL por encima de 15 €, ritmo de gasto bajo y
 alerta de objetivo cuando quedan menos de 7 días.
+
+### Cierre del día 1 (31-08)
+Total: 317 impresiones · 2 clics · 7,09 € · 0 conversiones.
+- Search 75 impr / 0 clics / 0 € · DG Prospecting 242 impr / 2 clics / 7,09 € (CPC 3,54 €) ·
+  DG Remarketing 0 (audiencias aún vacías).
+- **Las keywords en amplia funcionaron**: Search pasó de 4 a 75 impresiones en el día.
+- **Los RSA por grupo también**: los cuatro APPROVED, Compliance POOR → AVERAGE, Marca → GOOD.
+- `OT26_RL_Visitantes_Web` ya tiene 8 usuarios → la etiqueta de remarketing de la landing
+  está alimentando la lista (quedaba la duda de si las rule-based se poblarían).
+
+**Problema detectado:** 75 impresiones con 0 clics. Cuota de impresiones 30%, con el **70%
+perdido por ranking y 0% por presupuesto** — no falta dinero, no ganamos subastas. Los
+términos confirman intención informativa/legal: `reglamento ue 2024 1689`, `eu ai act que es`,
+`article 50 eu ai act`, `ley de la ia`. Gente buscando el texto normativo, no un evento.
+
+**Aplicado:**
+- Techo de CPC 3 € → **5 €**. El de 3 € se puso por la mañana como protección ante la
+  concordancia amplia, pero ese riesgo no se materializó (0 € gastados en Search) y muy
+  probablemente estaba contribuyendo a la pérdida por ranking en un vertical B2B legal.
+- 15 negativas nuevas contra búsquedas de texto legal (37 en total): 2024 1689, eur lex, boe,
+  texto legal, artículo, article, consolidado, diario oficial, traducción, infografía...
+
+**A comprobar mañana:** si Search empieza a recibir clics. Si sigue sin arrancar con el techo
+más alto y las negativas puestas, el cuello de botella es el geo y hay que llevar la
+propuesta de abrir a toda España a Adigital.
