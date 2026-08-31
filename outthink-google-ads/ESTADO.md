@@ -159,3 +159,25 @@ así que queda a decisión de Maikel/Adigital.
 
 **A vigilar mañana:** términos de búsqueda reales que traiga la amplia — hay que revisarlos
 a diario los primeros días y añadir negativas de lo que no encaje.
+
+### Optimización 31-08 (tarde)
+- **RSA reescritos por grupo.** Los cuatro grupos compartían los mismos 15 titulares y el de
+  Compliance estaba en calidad POOR. Se mantienen 11 de los 15 aprobados y se sustituyen 4
+  genéricos (Networking institucional, Agenda de primer nivel, Ponencias y talleres de IA,
+  IA/ciberseguridad/cuántica) por titulares propios de cada tema:
+  - AI Act: AI Act para empresas · Reglamento europeo de IA · Obligaciones del AI Act · ¿Cumples ya el AI Act?
+  - Compliance: Riesgos de la IA en tu empresa · Protección de datos e IA · Compliance de IA en España · Gobernanza de IA aplicada
+  - Eventos: Congreso de IA en Madrid · Foro de IA · 24 septiembre · Evento IA Madrid 2026 · Jornada de IA para empresas
+  - Marca: OutThink for AI · Adigital · OutThink: foro de IA · OutThink 2026 · Registro · OutThink · Casa del Lector
+- **Techo de CPC de 3,00 €** en Search: maximizar clics sin límite + concordancia amplia era
+  una combinación con riesgo de que una sola subasta cara se comiera el día.
+- **Recursos de imagen en Search: no se pueden añadir por API.** `AD_IMAGE` devuelve
+  `UNSUPPORTED_FIELD_TYPE` (no admitido vía asset links) y MARKETING_IMAGE/SQUARE no son
+  compatibles con campañas de búsqueda. Hay que añadirlos a mano desde la interfaz
+  (Anuncios y recursos → Recursos → Imágenes).
+
+### Nota sobre la conversión a 0
+Google Ads solo contabiliza conversiones atribuibles a un clic en anuncio. El registro de
+prueba del 28-08 se hizo entrando directo, sin gclid, así que la etiqueta disparó pero no
+aparece en informes. No es un fallo de medición. La validación real llega con el primer
+registro procedente de un clic de campaña.
