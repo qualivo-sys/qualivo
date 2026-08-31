@@ -171,6 +171,7 @@ duplicando emails.
 | cetic.es | academias | Meta | sin formulario, solo buzon generico |
 | mopeformacion.net | academias | Meta | sin formulario |
 | formatoedu.com | academias | Meta+Google Ads | sin formulario |
+| impulsainmo.com | inmo | Meta | sin formulario, solo buzon generico |
 
 ## Tier B · pagan y no miden nada (34)
 
