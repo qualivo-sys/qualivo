@@ -1,0 +1,210 @@
+{
+  "name": "Qualivo · Seguimientos 3-7-14 (borradores, nunca autoenvío)",
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "Cada mañana 7:30 (L-V)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 7 * * 1-5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "Leer ventas/seguimiento.md (GitHub)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/qualivo-sys/qualivo/claude/qualivo-agente-ventas-sq3vnt/ventas/seguimiento.md",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "Parsear tabla de seguimiento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Lee ventas/seguimiento.md y extrae la tabla '## Tabla de seguimiento'.\n// Devuelve UN item: { hoy, total, toques[] } con los toques cuyo 'Próximo toque' vence hoy o ya venció.\nconst md = String($input.first().json.data ?? $input.first().json.body ?? '');\nconst ahora = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));\nconst hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());\n\nconst MESES = { ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sept: 8, sep: 8, oct: 9, nov: 10, dic: 11 };\nconst limpiar = (s) => (s || '').replace(/\\*\\*/g, '').trim();\n\nfunction parseFecha(txt) {\n  const m = limpiar(txt).toLowerCase().match(/(\\d{1,2})[-\\/\\s]*(sept|ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)/);\n  if (!m) return null;\n  const dia = parseInt(m[1], 10);\n  let f = new Date(hoy.getFullYear(), MESES[m[2]], dia);\n  // La tabla no lleva año: si queda a más de medio año de distancia, corrige de año.\n  const medioAnio = 182 * 86400000;\n  if (f.getTime() - hoy.getTime() > medioAnio) f = new Date(hoy.getFullYear() - 1, MESES[m[2]], dia);\n  else if (hoy.getTime() - f.getTime() > medioAnio) f = new Date(hoy.getFullYear() + 1, MESES[m[2]], dia);\n  return f;\n}\n\nconst seccion = md.split(/^##\\s+Tabla de seguimiento\\s*$/m)[1];\nif (!seccion) throw new Error(\"No encuentro la sección '## Tabla de seguimiento' en seguimiento.md — ¿ha cambiado el formato del tracker?\");\nconst cuerpo = seccion.split(/^##\\s+/m)[0];\n\nconst filas = cuerpo.split('\\n').filter((l) => l.trim().startsWith('|'));\nconst toques = [];\nfor (const linea of filas.slice(2)) { // salta cabecera y separador\n  const c = linea.split('|').slice(1, -1).map(limpiar);\n  if (c.length < 8 || !c[0] || /^-+$/.test(c[0])) continue;\n  const proximo = parseFecha(c[5]);\n  if (!proximo) continue;\n  const diffDias = Math.round((proximo.getTime() - hoy.getTime()) / 86400000);\n  if (diffDias > 0) continue; // solo lo que vence hoy o ya venció\n  const toqueM = c[4].match(/d[ií]a\\s*(\\d+)/i);\n  toques.push({\n    cuenta: c[0],\n    contacto: c[1],\n    canal: c[2],\n    ultimoContacto: c[3],\n    toque: c[4],\n    dia: toqueM ? parseInt(toqueM[1], 10) : null,\n    proximoToque: proximo.toISOString().slice(0, 10),\n    vencidoDias: -diffDias,\n    estado: c[6],\n    material: c[7],\n  });\n}\n\nreturn [{ json: { hoy: hoy.toISOString().slice(0, 10), total: toques.length, toques } }];"
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "Preparar textos de toque",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Convierte cada toque en un texto listo para revisar. NADA se envía a clientes desde aquí.\nconst { toques, hoy } = $input.first().json;\n\nfunction plantilla(t) {\n  const nombre = ((t.contacto || '').split('/')[0].trim().split(' ')[0]) || '';\n  const saludo = nombre ? `Hola ${nombre},` : 'Hola,';\n  if (/emana/i.test(t.cuenta)) {\n    return `⚠️ CUENTA RELACIÓN, NO VENTA (regla del pipeline: cero pitch y cero enlace de calendario hasta que ella abra la puerta comercial).\\n\\nNo usar plantilla comercial. Confirmar con el cerebro si la respuesta escrita por el SDR (rama outbound, captacion/despliegue-cola-25ago.md) se aprobó y envió antes de tocar nada.`;\n  }\n  if (t.dia === 3) return `${saludo}\\n\\nte escribí hace unos días y no quiero que se pierda en la bandeja. Si te encaja, te mando en dos líneas cómo lo enfocaría para ${t.cuenta} — sin reunión de por medio. ¿Te lo paso?`;\n  if (t.dia === 7) return `${saludo}\\n\\nuna sola pregunta rápida para no robarte tiempo: ¿esto es algo que tenéis sobre la mesa este trimestre en ${t.cuenta}, o lo aparco? Con un sí o un no me vale.`;\n  if (t.dia === 14) return `${saludo}\\n\\ncierro el hilo por mi parte para no insistir. Si más adelante vuelve a la mesa, retomamos donde lo dejamos. Un abrazo y buen cierre de trimestre.`;\n  return `${saludo}\\n\\n(retomo el hilo — toque sin día de cadencia definido en el tracker: redactar a mano según contexto)`;\n}\n\nif (!toques || toques.length === 0) {\n  return [{ json: { sinToques: true, hoy, esEmail: false } }];\n}\n\nreturn toques.map((t) => {\n  const esEmail = /mail/i.test(t.canal);\n  const cabecera =\n    `── CONTEXTO (borrar antes de enviar) ──\\n` +\n    `Cuenta: ${t.cuenta} · Contacto: ${t.contacto} · Canal: ${t.canal}\\n` +\n    `Toque: ${t.toque || 'seguimiento'} · Vencía: ${t.proximoToque} (${t.vencidoDias} día(s) de retraso)\\n` +\n    `Último contacto: ${t.ultimoContacto}\\n` +\n    `Estado: ${t.estado}\\n` +\n    `Material del agente de ventas: ${t.material}\\n` +\n    `───────────────────────────\\n\\n`;\n  return {\n    json: {\n      ...t,\n      hoy,\n      esEmail,\n      asunto: `[BORRADOR ${t.toque || 'seguimiento'}] ${t.cuenta} — revisar y enviar a mano`,\n      cuerpo: cabecera + plantilla(t),\n      textoToque: plantilla(t),\n    },\n  };\n});"
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "name": "Solo canal email",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [1120, 180],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $json.esEmail }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "name": "Crear BORRADOR en Gmail (sin destinatario)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1340, 180],
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $json.asunto }}",
+        "emailType": "text",
+        "message": "={{ $json.cuerpo }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000007",
+      "name": "Componer resumen del día",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 420],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Un solo email-resumen interno para Maikel con la lista de toques del día.\nconst items = $input.all().map((i) => i.json);\nconst hoy = items[0].hoy || new Date().toISOString().slice(0, 10);\n\nlet cuerpo;\nlet titulo;\nif (items[0].sinToques) {\n  titulo = 'ninguno';\n  cuerpo = `Sin toques de seguimiento que venzan hoy (${hoy}). ✅\\n\\nFuente: ventas/seguimiento.md`;\n} else {\n  titulo = String(items.length);\n  const bloques = items.map((t) => {\n    let b = `• ${t.cuenta} — ${t.toque || 'seguimiento'} (vencía ${t.proximoToque}, ${t.vencidoDias} día(s) de retraso) · canal: ${t.canal}\\n  Estado: ${t.estado}\\n`;\n    if (t.esEmail) {\n      b += `  → Borrador creado en Gmail: \"${t.asunto}\" (sin destinatario: pon el email, revisa y envía tú).`;\n    } else {\n      b += `  → Canal no-email: copiar/pegar a mano. Texto propuesto:\\n\\n${t.textoToque.split('\\n').map((l) => '    ' + l).join('\\n')}`;\n    }\n    return b;\n  });\n  cuerpo = `Toques de seguimiento 3-7-14 que tocan HOY (${hoy}): ${items.length}\\n\\n${bloques.join('\\n\\n')}\\n\\n— Nada se envía solo: revisa cada borrador, ajusta y envíalo tú.\\n— Tras enviar, registra el toque en ventas/seguimiento.md (o pídeselo al agente de ventas).\\n\\nFuente: ventas/seguimiento.md · Workflow: Qualivo · Seguimientos 3-7-14`;\n}\n\nreturn [{ json: { asunto: `[Qualivo] Toques 3-7-14 de hoy — ${titulo}`, cuerpo } }];"
+      }
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000008",
+      "name": "Enviar resumen a Maikel (interno)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1340, 420],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "info@maikelechevarria.com",
+        "subject": "={{ $json.asunto }}",
+        "emailType": "text",
+        "message": "={{ $json.cuerpo }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Cada mañana 7:30 (L-V)": {
+      "main": [
+        [
+          {
+            "node": "Leer ventas/seguimiento.md (GitHub)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer ventas/seguimiento.md (GitHub)": {
+      "main": [
+        [
+          {
+            "node": "Parsear tabla de seguimiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear tabla de seguimiento": {
+      "main": [
+        [
+          {
+            "node": "Preparar textos de toque",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar textos de toque": {
+      "main": [
+        [
+          {
+            "node": "Solo canal email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Componer resumen del día",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solo canal email": {
+      "main": [
+        [
+          {
+            "node": "Crear BORRADOR en Gmail (sin destinatario)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Componer resumen del día": {
+      "main": [
+        [
+          {
+            "node": "Enviar resumen a Maikel (interno)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false
+}
