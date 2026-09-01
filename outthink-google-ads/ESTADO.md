@@ -251,3 +251,9 @@ Dos vías, ambas en el repo:
 **La API de Google Ads no admite cuentas de servicio** (solo con delegación en todo el
 dominio de Workspace). El flujo usa el refresh token de OAuth para Ads y reserva la cuenta
 de servicio para Google Sheets, que sí la soporta.
+
+### Dashboard operativo (01-09)
+Hoja **Dashboard - Adigital** (`1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA`), pestaña
+`Historico` creada, formateada y rellenada con los datos reales desde el 31-08. Acceso de la
+cuenta de servicio `apiclaude@kinetic-dream-377917.iam.gserviceaccount.com` verificado.
+El flujo de n8n añade una fila por día sobre esa pestaña.

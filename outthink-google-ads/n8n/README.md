@@ -27,7 +27,7 @@ Reparto que sí funciona y es el que usa este flujo:
 | `GADS_REFRESH_TOKEN` | refresh token de info@maikelechevarria.com |
 | `GADS_DEVELOPER_TOKEN` | developer token del MCC |
 | `GADS_CUSTOMER_ID` | 9188115388 |
-| `SHEET_ID` | id de la hoja de cálculo del dashboard |
+| `SHEET_ID` | 1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA (ya viene puesto en el nodo) |
 | `REPORT_TO` | info@maikelechevarria.com,aida@adigital.org |
 
 Si vuestro plan de n8n no tiene Variables, sustituir las expresiones `{{$vars.X}}`
@@ -41,16 +41,19 @@ por los valores directamente en cada nodo.
 2. **SMTP**: para el envío del email. Alternativamente cambiar el nodo final por el
    nodo Gmail con OAuth.
 
-## Hoja de cálculo
+## Hoja de cálculo — ya preparada
 
-Crear una hoja llamada `Historico` con esta cabecera en la fila 1:
+**Dashboard - Adigital** · https://docs.google.com/spreadsheets/d/1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA
 
-```
-fecha | impresiones | clics | ctr | cpc_medio | coste | conversiones | cpl | coste_acumulado | conversiones_acumuladas | pct_presupuesto | proyeccion_registros
-```
+La pestaña `Historico` está creada, con cabecera, formato de moneda y porcentaje, y
+**rellenada con los datos reales desde el 31 de agosto**. La cuenta de servicio
+`apiclaude@kinetic-dream-377917.iam.gserviceaccount.com` ya tiene acceso comprobado.
 
-El flujo añade una fila por día, así que a partir de ahí se pueden montar gráficos
-en la propia hoja (evolución de registros, CPL por día, ritmo de gasto).
+Columnas: fecha · impresiones · clics · ctr · cpc_medio · coste · conversiones · cpl ·
+coste_acumulado · conversiones_acumuladas · pct_presupuesto · proyeccion_registros
+
+El flujo añade una fila por día. Sobre esa pestaña se pueden montar gráficos directamente
+en Sheets (evolución de registros, CPL por día, ritmo de gasto frente a presupuesto).
 
 ## Qué envía el email
 

@@ -59,7 +59,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://googleads.googleapis.com/v25/customers/{{ $vars.GADS_CUSTOMER_ID }}/googleAds:search",
+        "url": "https://googleads.googleapis.com/v25/customers/9188115388/googleAds:search",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -89,7 +89,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://googleads.googleapis.com/v25/customers/{{ $vars.GADS_CUSTOMER_ID }}/googleAds:search",
+        "url": "https://googleads.googleapis.com/v25/customers/9188115388/googleAds:search",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -145,8 +145,8 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "={{ $vars.SHEET_ID }}",
-          "mode": "id"
+          "mode": "id",
+          "value": "1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA"
         },
         "sheetName": {
           "__rl": true,
@@ -167,7 +167,7 @@
         200
       ],
       "name": "Dashboard (Google Sheets)",
-      "notes": "Autenticación: cuenta de servicio. Compartir la hoja con el email de la SA."
+      "notes": "Autenticación: cuenta de servicio apiclaude@kinetic-dream-377917.iam.gserviceaccount.com — ya tiene permiso de edición sobre la hoja."
     },
     {
       "parameters": {
