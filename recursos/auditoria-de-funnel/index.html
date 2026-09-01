@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoría de funnel en una tarde: checklist + hoja de trabajo · Qualivo</title>
+<meta name="description" content="Los 5 pasos para auditar tu funnel de ventas en una tarde, con la hoja de trabajo lista para rellenar. El método completo está en la página — la hoja te la llevas con tu correo.">
+<link rel="canonical" href="https://qualivo.io/recursos/auditoria-de-funnel/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/recursos/auditoria-de-funnel/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Auditoría de funnel en una tarde — checklist + hoja de trabajo">
+<meta property="og:description" content="5 pasos, una tarde, y sabrás por qué flecha se te escapa el dinero. Método completo a la vista; hoja de trabajo con tu correo.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Auditoría de funnel de ventas en una tarde",
+  "description": "Método de 5 pasos para auditar el funnel de ventas de una pyme en una tarde: dibujar las etapas reales, contar personas por etapa, calcular transiciones por canal, ponerle precio a la peor y arreglar una sola cosa.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Dibuja tus etapas reales", "text": "Las de tu proceso, no las de un manual." },
+    { "@type": "HowToStep", "position": 2, "name": "Cuenta personas por etapa", "text": "Las que pasaron el último trimestre, no la ocupación del momento." },
+    { "@type": "HowToStep", "position": 3, "name": "Calcula el % de cada transición por canal", "text": "Tu benchmark eres tú: compara tus canales entre sí." },
+    { "@type": "HowToStep", "position": 4, "name": "Ponle precio a la peor flecha", "text": "¿Cuántas ventas más habría con la conversión del canal bueno?" },
+    { "@type": "HowToStep", "position": 5, "name": "Arregla una cosa y mide", "text": "La que más dinero devuelve. El antes y el después, apuntados." }
+  ],
+  "publisher": { "@id": "https://qualivo.io/#organizacion" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://qualivo.io/#organizacion",
+  "name": "Qualivo",
+  "url": "https://qualivo.io/",
+  "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+  "description": "Qualivo es una consultora de growth B2B con sede en España, fundada por Maikel Echevarría, que diagnostica sistemas de captación y ventas: encuentra dónde se pierden oportunidades y dinero, prioriza por impacto y construye sistemas que se pueden medir.",
+  "areaServed": "ES",
+  "founder": { "@type": "Person", "@id": "https://qualivo.io/#maikel", "name": "Maikel Echevarría", "url": "https://qualivo.io/sobre/", "sameAs": ["https://maikelechevarria.com"] },
+  "sameAs": ["https://maikelechevarria.com"]
+}
+</script>
+<style>
+  .chk{border:2px solid rgba(16,19,25,.12); border-radius:16px; padding:26px 28px; margin:0 0 16px; background:#fff}
+  .chk .paso{display:flex; gap:16px; align-items:flex-start}
+  .chk .num{font-family:ui-monospace,Menlo,monospace; font-weight:700; color:#0E7C74; font-size:20px; flex:0 0 auto; padding-top:2px}
+  .chk h3{margin:0 0 8px; font-size:19px}
+  .chk p{margin:0; font-size:15.5px; line-height:1.6; color:#3D4148}
+  .lm-form{background:#101319; border-radius:20px; padding:36px 34px; color:#fff}
+  .lm-form label{display:block; font-size:13.5px; font-weight:700; margin:0 0 6px; color:rgba(255,255,255,.85)}
+  .lm-form input[type=text],.lm-form input[type=email]{width:100%; box-sizing:border-box; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06); color:#fff; border-radius:10px; padding:12px 14px; font-size:15px; margin-bottom:16px}
+  .lm-form .rgpd{display:flex; gap:10px; align-items:flex-start; font-size:13px; color:rgba(255,255,255,.65); margin:0 0 18px}
+  .lm-form button{background:#27BDB1; color:#04231F; border:0; border-radius:10px; padding:14px 26px; font-weight:800; font-size:15.5px; cursor:pointer}
+  .lm-form button:disabled{opacity:.6; cursor:wait}
+  .lm-ok{display:none; background:#0E7C74; border-radius:20px; padding:36px 34px; color:#fff}
+</style>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/recursos/" class="nav-link">Recursos</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">Recurso gratuito</p>
+    <h1>Auditoría de funnel en una tarde: el checklist.</h1>
+    <p class="post-meta">Método de la casa · 5 pasos · Una tarde y un café</p>
+
+    <p class="post-lede">Este es el método que usamos para la primera pasada de cualquier diagnóstico, entero y a la vista — en esta casa el valor va primero y el formulario después. Si además quieres la <strong>hoja de trabajo</strong> (la plantilla con las tablas listas para rellenar y la guía de lectura), te la llevas dejando el correo al final.</p>
+
+    <div class="chk"><div class="paso"><span class="num">01</span><div>
+      <h3>Dibuja TUS etapas reales</h3>
+      <p>Las de tu proceso, no las de un manual. Si tu venta pasa por «visita al showroom» o «prueba gratuita», esas son etapas. Entre 4 y 6 suele bastar. ¿Dudas con el concepto? <a href="/blog/embudo-de-ventas/">Qué es un embudo de ventas, sin humo</a>.</p>
+    </div></div></div>
+
+    <div class="chk"><div class="paso"><span class="num">02</span><div>
+      <h3>Cuenta PERSONAS por etapa (último trimestre)</h3>
+      <p>Cuántas <strong>pasaron</strong> por cada etapa — no cuántas están hoy. Este error solo cambia diagnósticos enteros: contar la ocupación infla unas etapas y esconde otras. Fuente: tu CRM si registra, tus correos y facturas si no.</p>
+    </div></div></div>
+
+    <div class="chk"><div class="paso"><span class="num">03</span><div>
+      <h3>Calcula el % de cada transición — POR CANAL</h3>
+      <p>De visita a lead, de lead a conversación, de conversación a venta. Y separado por canal de origen: tu benchmark no es el «2,35 % del sector», es la diferencia entre tu canal bueno y tu canal malo.</p>
+    </div></div></div>
+
+    <div class="chk"><div class="paso"><span class="num">04</span><div>
+      <h3>Ponle precio a la peor flecha</h3>
+      <p>¿Cuántas ventas más habría si esa transición convirtiera como la de tu canal bueno? Multiplica por tu ticket medio. Ese número — no una sensación — es tu prioridad. La <a href="/calculadora-de-fugas/">calculadora</a> te hace esta cuenta si prefieres no pelearte con la hoja.</p>
+    </div></div></div>
+
+    <div class="chk"><div class="paso"><span class="num">05</span><div>
+      <h3>Arregla UNA cosa. Y mide.</h3>
+      <p>La que más dinero devuelve, no la más visible. Tres arreglos a la vez = no saber cuál funcionó. Apunta el antes, ejecuta, apunta el después. Eso es todo el secreto del growth que funciona.</p>
+    </div></div></div>
+
+    <div class="post-regla"><span class="ico">Ojo</span><p>¿Y si no tienes ni CRM ni datos para el paso 02? Entonces no optimices: construye. Es otro proyecto, no pasa nada por admitirlo — y es más barato que optimizar humo.</p></div>
+
+    <div class="lm-form" id="lmform">
+      <p style="margin:0 0 6px; font-family:var(--qv-font-display); font-weight:900; font-size:clamp(20px,3.4vw,27px); letter-spacing:-.02em">Llévate la hoja de trabajo</p>
+      <p style="margin:0 0 22px; font-size:14.5px; color:rgba(255,255,255,.7)">La plantilla con las tablas de los 5 pasos listas para rellenar (imprimible o para usar en pantalla) y la guía de lectura de resultados. Sin cursos por goteo ni llamadas sorpresa: el recurso y ya.</p>
+      <form id="f-recurso" novalidate>
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+        <label for="lm-nombre">Nombre (opcional)</label>
+        <input type="text" id="lm-nombre" name="nombre" autocomplete="name">
+        <label for="lm-email">Correo</label>
+        <input type="email" id="lm-email" name="email" required autocomplete="email">
+        <div class="rgpd">
+          <input type="checkbox" id="lm-rgpd" required style="margin-top:2px">
+          <label for="lm-rgpd" style="font-weight:400; margin:0">Acepto la <a href="/privacidad/" style="color:#7CE8DD">política de privacidad</a>. Usaremos tu correo para enviarte este recurso y, de vez en cuando, material del mismo estilo. Ni spam ni cesiones: te das de baja con un clic.</label>
+        </div>
+        <button type="submit" id="lm-btn">Acceder a la hoja de trabajo →</button>
+        <p id="lm-err" style="display:none; color:#FCA5A5; font-size:13.5px; margin:12px 0 0"></p>
+      </form>
+    </div>
+
+    <div class="lm-ok" id="lmok">
+      <p style="margin:0 0 8px; font-family:var(--qv-font-display); font-weight:900; font-size:clamp(20px,3.4vw,27px)">Hecho. Aquí tienes tu hoja:</p>
+      <p style="margin:0 0 18px; font-size:14.5px; color:rgba(255,255,255,.85)">Ábrela y guárdala o imprímela (Ctrl/Cmd + P → guardar como PDF). El método de lectura va incluido al final de la hoja.</p>
+      <a href="/recursos/auditoria-de-funnel/hoja/" style="display:inline-block; background:#fff; color:#04231F; border-radius:10px; padding:14px 26px; font-weight:800; font-size:15.5px; text-decoration:none">Abrir la hoja de trabajo →</a>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:32px 0 6px; font-weight:700">El siguiente paso natural</p>
+    <p style="font-size:15px; line-height:1.8; margin:0">Si la auditoría te destapa una fuga y quieres una segunda opinión con tus números, <a href="/diagnostico/">así funciona nuestro diagnóstico</a>. Y la teoría completa, gratis como siempre: <a href="/blog/funnel-de-ventas/">dónde se pierde el dinero en un funnel</a>.</p>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+(function(){
+  var form = document.getElementById('f-recurso');
+  var btn = document.getElementById('lm-btn');
+  var err = document.getElementById('lm-err');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    err.style.display = 'none';
+    var email = document.getElementById('lm-email').value.trim();
+    var rgpd = document.getElementById('lm-rgpd').checked;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Revisa el correo — no parece válido.'; err.style.display = 'block'; return; }
+    if (!rgpd) { err.textContent = 'Necesitamos el consentimiento para enviarte el recurso.'; err.style.display = 'block'; return; }
+    btn.disabled = true; btn.textContent = 'Un segundo…';
+    fetch('/api/recurso', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        nombre: document.getElementById('lm-nombre').value.trim(),
+        email: email,
+        recurso: 'auditoria-funnel',
+        rgpd: true,
+        website: form.website.value
+      })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if (d && d.ok) {
+        document.getElementById('lmform').style.display = 'none';
+        document.getElementById('lmok').style.display = 'block';
+        if (window.va) window.va('event', { name: 'recurso_descargado', data: { recurso: 'auditoria-funnel' } });
+      } else { throw new Error('api'); }
+    }).catch(function(){
+      btn.disabled = false; btn.textContent = 'Acceder a la hoja de trabajo →';
+      err.textContent = 'No hemos podido registrarte. Prueba de nuevo o escríbenos a maikel@qualivo.io.';
+      err.style.display = 'block';
+    });
+  });
+})();
+</script>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -32,7 +32,9 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 
 ## Recursos
 
+- [Recursos (índice)](https://qualivo.io/recursos/): las herramientas y plantillas gratuitas de Qualivo — versiones autoservicio de lo que se usa en los diagnósticos.
 - [Auto-diagnóstico express](https://qualivo.io/diagnostico-express/): herramienta gratuita de 15 preguntas que identifica en qué etapa del sistema (captación, conversión, cualificación, venta o retención) se pierden más oportunidades. Resultado inmediato.
+- [Auditoría de funnel en una tarde](https://qualivo.io/recursos/auditoria-de-funnel/): el método de 5 pasos de los diagnósticos de Qualivo (etapas reales → contar personas que pasan → transiciones por canal → precio de la peor flecha → arreglar una cosa y medir), con checklist completo a la vista y hoja de trabajo descargable.
 
 ## Guía central
 
