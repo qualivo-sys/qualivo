@@ -31,6 +31,14 @@ def build(a):
     if a.get('related'):
         links = " · ".join('<a href="%s">%s</a>' % (u, t) for u, t in a['related'])
         more = '<div class="more">👉 Sigue: %s</div>' % links
+    toc = ''
+    if len(a['sections']) >= 3:
+        items = "".join('<li>%s</li>' % h for h, _ in a['sections'])
+        toc = '<div class="toc"><b>En esta guía:</b><ul>%s</ul></div>' % items
+    recap = ''
+    if a.get('recap'):
+        rs = "".join('<li>%s</li>' % r for r in a['recap'])
+        recap = '<div class="callout"><b>En resumen</b><ul style="margin:8px 0 0">%s</ul></div>' % rs
     art_schema = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article",'
                   '"headline":%s,"author":{"@type":"Organization","name":"Eleva Nails"},'
                   '"publisher":{"@type":"Organization","name":"Eleva Nails","url":"https://elevanails.es"},'
@@ -58,7 +66,9 @@ def build(a):
   <h1>{h1}</h1>
   <p class="lead">{lead}</p>
   {callout}
+  {toc}
   {secs}
+  {recap}
   {course}
   {more}
   {faq}
@@ -71,7 +81,7 @@ def build(a):
                   header=HEADER, eyebrow=a['eyebrow'], lead=a['lead'],
                   callout=('<div class="callout">%s</div>' % a['callout']) if a.get('callout') else '',
                   secs=secs, course=COURSE.format(ct=a['course'][0], cp=a['course'][1]),
-                  more=more, faq=faq, wa=WA)
+                  more=more, faq=faq, wa=WA, toc=toc, recap=recap)
 
 # CTA de curso reutilizable
 CTA_GEN = ("¿Te ves dedicándote a esto?",
