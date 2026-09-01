@@ -287,3 +287,16 @@ anidado que llegaba al nodo de Sheets. Detalle en `n8n/README.md`.
 Destinatarios definitivos: `info@maikelechevarria.com`, `maikel@qualivo.io` y
 `asanchez@adigital.org`. Remitente `info@maikelechevarria.com` (debe coincidir con la cuenta
 del SMTP o Gmail rechaza el envío).
+
+### Corrección del dashboard (01-09)
+El panel de KPIs mostraba ceros. Dos causas, ambas mías:
+1. Al deduplicar la hoja tras la ejecución manual leí los valores **ya formateados** y los
+   reescribí como texto (`'504'`, `'2.98%'`). `SUM` y `COUNT` sobre texto devuelven 0.
+   Histórico reconstruido desde la API con tipos numéricos reales.
+2. Las fórmulas usaban `COUNT` sobre la columna de fechas, que son texto → cero filas
+   contadas → proyección a 0. Cambiado a `COUNTA`, y el subtítulo de `MAX()` a
+   `INDEX(...;COUNTA(...))`.
+
+Panel verificado: 1 registro · CPL 99,42 € · 99,42 € invertidos (5%) · proyección 13 ·
+23 días restantes. Nota: al deduplicar a mano hay que leer siempre con
+`valueRenderOption=UNFORMATTED_VALUE`; el nodo de n8n sí escribe tipos correctos.
