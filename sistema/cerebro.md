@@ -14,6 +14,7 @@
 | Outbound / SDR | Client acquisition strategy | `claude/client-acquisition-ideas-k00f5d` |
 | Landing / Growth / Contenido | Landing Qualivo.io en Vercel | `claude/qualivo-landing-vercel-nubk1i` |
 | Ventas / Closer | Agente de Ventas Qualivo (`session_01EsVfarsm7LwubAYY6Kis9s`) | su propia rama, carpeta `ventas/` |
+| Automatización | Agente de Automatización Qualivo (`session_01DAmUZHTVFxPG37QyuAMQvr`) | su propia rama, carpeta `automatizaciones/` — entrega n8n en borrador, nunca autoenvía a clientes |
 | Eleva | Eleva Academy metrics dashboard | `claude/eleva-academy-metrics-jm8msg` |
 | EAC | EAC metrics dashboard | `claude/eac-metrics-dashboard-qx7fkh` |
 
