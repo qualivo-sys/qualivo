@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo aparecer en ChatGPT y Perplexity si eres una empresa (GEO explicado desde dentro) · Qualivo</title>
+<meta name="description" content="GEO: cómo conseguir que ChatGPT, Perplexity y Gemini citen a tu empresa cuando alguien pide una recomendación. Lo estamos aplicando en nuestra propia web — y enseñamos la cocina: llms.txt, entidad, datos citables y cómo medirlo.">
+<link rel="canonical" href="https://qualivo.io/blog/aparecer-en-chatgpt-geo/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/blog/aparecer-en-chatgpt-geo/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Cómo aparecer en ChatGPT si eres una empresa (GEO desde dentro)">
+<meta property="og:description" content="Cada vez más clientes preguntan a una IA antes que a Google. Esto es lo que hace que te cite — contado por alguien que lo está aplicando en su propia web.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Cómo aparecer en ChatGPT y Perplexity si eres una empresa (GEO explicado desde dentro)",
+      "description": "Guía de GEO (Generative Engine Optimization) para empresas: por qué el clic tradicional se muere, cómo eligen las IA a quién citar, las seis acciones con más impacto y cómo medir si funciona — aplicado en la propia web de Qualivo.",
+      "url": "https://qualivo.io/blog/aparecer-en-chatgpt-geo/",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "inLanguage": "es",
+      "image": "https://qualivo.io/assets/img/og-image.png",
+      "author": { "@type": "Person", "name": "Maikel Echevarría", "url": "https://qualivo.io/#maikel" },
+      "publisher": { "@id": "https://qualivo.io/#organizacion" },
+      "about": ["GEO", "Generative Engine Optimization", "aparecer en ChatGPT", "SEO para IA", "llms.txt"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el GEO (Generative Engine Optimization)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El GEO es el trabajo de conseguir que los motores de respuesta con IA — ChatGPT, Perplexity, Gemini, Claude o los resúmenes de IA de Google — mencionen y citen a tu empresa cuando alguien les pide información o una recomendación de tu categoría. Se diferencia del SEO clásico en el objetivo: el SEO busca el clic hacia tu web; el GEO busca la mención dentro de la respuesta, porque en muchos casos ese clic ya no ocurre." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo decide ChatGPT qué empresas citar en una respuesta?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Combinando lo que aprendió en su entrenamiento con lo que encuentra al buscar en la web en el momento de la pregunta. Pesan tres cosas: que tu empresa sea una entidad clara y consistente (mismo nombre, misma descripción, mismos datos en tu web y en las fuentes que hablan de ti), que existan datos y afirmaciones citables (cifras propias, definiciones nítidas, comparativas), y que tu contenido sea fácil de extraer (respuestas directas, estructura limpia, FAQ, datos estructurados). Las listas y rankings de terceros que los modelos consultan también influyen mucho." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve de algo el archivo llms.txt?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es una convención joven y ningún proveedor de IA ha confirmado oficialmente que lo use como fuente prioritaria, así que la respuesta honesta es: probablemente ayuda, seguro que no perjudica y cuesta una hora. Es un resumen en texto plano de quién eres y qué contiene tu web, pensado para que un modelo lo lea sin pelearse con tu HTML. En qualivo.io/llms.txt puedes ver el nuestro y copiarte la estructura." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo mido si aparezco en ChatGPT y otras IA?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Hoy no existe un Search Console de ChatGPT, así que se mide a mano y por señales: una batería fija de prompts (los mismos, cada mes, en ventana sin sesión) anotando si te citan y a quién citan; el tráfico de referencia desde chatgpt.com y perplexity.ai en tu analítica; y un campo «¿cómo nos has conocido?» en tu formulario con la opción «ChatGPT u otra IA». Nosotros publicamos nuestra batería de 8 prompts y medimos contra ella cada mes." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://qualivo.io/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Aparecer en ChatGPT (GEO)", "item": "https://qualivo.io/blog/aparecer-en-chatgpt-geo/" }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://qualivo.io/#organizacion",
+  "name": "Qualivo",
+  "url": "https://qualivo.io/",
+  "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+  "description": "Qualivo es una consultora de growth B2B con sede en España, fundada por Maikel Echevarría, que diagnostica sistemas de captación y ventas: encuentra dónde se pierden oportunidades y dinero, prioriza por impacto y construye sistemas que se pueden medir.",
+  "areaServed": "ES",
+  "founder": { "@type": "Person", "@id": "https://qualivo.io/#maikel", "name": "Maikel Echevarría", "url": "https://qualivo.io/sobre/", "sameAs": ["https://maikelechevarria.com"] },
+  "sameAs": ["https://maikelechevarria.com"]
+}
+</script>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/servicios/" class="nav-link">Servicios</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">★ Guía pilar · Aparecer cuando la IA responde</p>
+    <h1>Cómo aparecer en ChatGPT y Perplexity si eres una empresa — contado desde dentro.</h1>
+    <p class="post-meta">Maikel Echevarría · Septiembre 2026 · 12 min de lectura</p>
+
+    <p class="post-lede">Hace unas semanas hicimos una prueba incómoda: preguntar a varios buscadores con IA por «Qualivo, consultora de growth». La IA respondió con soltura… atribuyéndonos la web de otra empresa que se llama parecido. Ahí decidimos dos cosas: arreglarlo, y <strong>documentar en público todo lo que hiciéramos</strong>. Esta guía es esa cocina — lo que sabemos, lo que es hipótesis y lo que estamos midiendo en nuestra propia web mientras lees esto.</p>
+
+    <div class="post-resumen">
+      <p class="rl">En 30 segundos</p>
+      <ul>
+        <li><strong>GEO</strong> = conseguir que las IA te citen cuando alguien pide una recomendación de tu categoría.</li>
+        <li>El clic se muere: cuando Google muestra un resumen de IA, los clics a resultados caen aproximadamente a la mitad (Pew Research, 2025).</li>
+        <li>Las IA citan a quien entienden (entidad clara), a quien aporta datos citables y a quien es fácil de extraer.</li>
+        <li>Las 6 acciones de este mes: entidad consistente · datos propios · estructura answer-first · schema + FAQ · llms.txt · presencia en las listas que las IA leen.</li>
+        <li>Se mide a mano: batería fija de prompts mensual + referrers de IA + preguntar al lead cómo te conoció.</li>
+      </ul>
+    </div>
+
+    <h2>Qué es el GEO (y por qué te afecta aunque no te guste)</h2>
+    <p>El GEO (<em>Generative Engine Optimization</em>) es el trabajo de conseguir que los motores de respuesta — ChatGPT, Perplexity, Gemini, Claude, los resúmenes de IA de Google — <strong>mencionen a tu empresa dentro de la respuesta</strong> cuando alguien pregunta por tu categoría. No sustituye al SEO: cambia el premio. El SEO compite por el clic; el GEO compite por la mención, porque el clic, cada vez más, no ocurre.</p>
+    <p>Dos datos con fuente, porque aquí no jugamos a inventar cifras: según <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/" rel="nofollow noopener" target="_blank">Pew Research Center (2025)</a>, cuando aparece un resumen de IA en Google los usuarios hacen clic en un resultado en el 8 % de las visitas, frente al 15 % cuando no aparece — prácticamente la mitad. Y los análisis de <a href="https://sparktoro.com/blog" rel="nofollow noopener" target="_blank">SparkToro con datos de clickstream</a> vienen estimando desde 2024 que alrededor de 6 de cada 10 búsquedas en Google terminan sin ningún clic. La pregunta ya no es si esto te afectará: es si te encontrarán cuando pase.</p>
+
+    <div class="post-destacado">
+      <p>El comprador B2B de 2026 hace la mitad de su proceso de compra en una ventana de chat donde tu web no puede interrumpir. O estás en la respuesta, o no estás en el proceso.</p>
+    </div>
+
+    <h2>Cómo eligen las IA a quién citar</h2>
+    <p>Nadie fuera de esas empresas conoce la fórmula exacta, y quien te la venda cerrada te está vendiendo humo. Pero combinando lo que los proveedores han publicado, lo que se observa al preguntar y nuestra experiencia aplicándolo, pesan tres cosas:</p>
+    <p><strong>1. Entidad clara.</strong> La IA tiene que poder responder «¿qué es esta empresa?» sin dudar. Eso exige consistencia militante: mismo nombre, misma descripción, mismos datos en tu web, tu LinkedIn, los directorios y cualquier sitio que hable de ti. Nuestro susto de la atribución equivocada era exactamente esto: dos entidades con nombre parecido y señales débiles — la IA fusionó ambas. Es más común de lo que crees; compruébalo con tu marca hoy.</p>
+    <p><strong>2. Datos citables.</strong> Los modelos citan afirmaciones concretas: cifras propias, definiciones nítidas («X es Y»), comparativas, metodologías con nombre. Un blog de generalidades no da nada que citar. Una frase como «la mayoría de los presupuestos muere sin un segundo contacto» — con el razonamiento detrás — sí.</p>
+    <p><strong>3. Extraíble.</strong> Respuestas directas en la primera frase de cada sección, estructura limpia de encabezados, tablas, FAQ con schema, fechas visibles. El modelo trocea tu página en fragmentos; cada sección debería sostenerse sola, como una microrrespuesta.</p>
+    <p>Y una cuarta que incomoda: <strong>las listas de terceros</strong>. Cuando pides «recomiéndame una consultora», las IA se apoyan muchísimo en rankings y comparativas ya publicados («mejores consultoras de growth en España»). Aparecer en esas listas mueve la aguja más que casi cualquier ajuste de tu web — es trabajo de relaciones, no de código.</p>
+
+    <h2>Las 6 cosas que hacer este mes (por orden)</h2>
+    <div class="post-tabla-scroll"><table class="post-tabla">
+      <thead><tr><th>#</th><th>Acción</th><th>Esfuerzo</th><th>Qué consigue</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Descripción canónica</strong>: una frase que define tu empresa, repetida palabra por palabra en web, LinkedIn, directorios y schema.</td><td>2 h</td><td>Entidad consistente — la base de todo</td></tr>
+        <tr><td>2</td><td><strong>Schema de organización y de artículo</strong> en todas las páginas (Organization/ProfessionalService, Article, FAQPage).</td><td>Medio día</td><td>Le das a la máquina tu ficha, no se la dejas adivinar</td></tr>
+        <tr><td>3</td><td><strong>Reescribir en answer-first</strong> tus páginas clave: la respuesta en la primera frase, el desarrollo después.</td><td>1-2 días</td><td>Cada sección se vuelve citable por separado</td></tr>
+        <tr><td>4</td><td><strong>Publicar datos propios</strong>: aunque sea un solo número de tu operación con su metodología.</td><td>Variable</td><td>Lo único que las IA no pueden encontrar en otro sitio</td></tr>
+        <tr><td>5</td><td><strong>llms.txt + robots.txt que permita bots de IA</strong> (GPTBot, ClaudeBot, PerplexityBot, Google-Extended).</td><td>1 h</td><td>Si les cierras la puerta, el resto de la lista no importa</td></tr>
+        <tr><td>6</td><td><strong>Salir en las listas</strong>: contactar los rankings y directorios de tu categoría que las IA ya citan.</td><td>Continuo</td><td>La señal externa que más pesa en recomendaciones</td></tr>
+      </tbody>
+    </table></div>
+    <p>Todo esto está aplicado en qualivo.io — el <a href="/llms.txt">llms.txt</a> es público, el schema está en el código de esta misma página y la descripción canónica la verás repetida hasta el aburrimiento. No te pedimos fe: mira la cocina.</p>
+
+    <h2>Lo que NO funciona (y se vende igual)</h2>
+    <ul>
+      <li><strong>Stuffing para bots:</strong> páginas ocultas «para la IA», texto blanco, listas de keywords. Los modelos leen como un humano espabilado — y los proveedores penalizan como Google aprendió a penalizar.</li>
+      <li><strong>Publicar 100 artículos genéricos con IA:</strong> si tu contenido dice lo mismo que otros mil, no hay razón para citarte a ti. El volumen sin ángulo propio es invisible dos veces.</li>
+      <li><strong>«Garantizamos que saldrás en ChatGPT»:</strong> nadie puede garantizarlo. Quien lo garantiza, miente sobre lo que controla.</li>
+      <li><strong>Esperar al estándar perfecto:</strong> llms.txt no es oficial, los schemas evolucionan, todo es joven. La ventaja es precisamente esa: casi nadie en español lo está haciendo bien todavía.</li>
+    </ul>
+
+    <h2>Cómo medirlo sin engañarte</h2>
+    <p>No existe un Search Console de ChatGPT, así que se mide con disciplina artesanal:</p>
+    <ol>
+      <li><strong>Batería fija de prompts.</strong> Los mismos 8-10 prompts («mejor consultora de X en España», «recomiéndame quien arregle Y»…), cada mes, en ventana sin sesión, en ChatGPT, Perplexity, Gemini y Claude. Se anota: ¿aparecemos? ¿quién aparece? Nuestra batería es pública en el repositorio de medición y la corremos mensualmente.</li>
+      <li><strong>Referrers de IA en la analítica.</strong> Tráfico desde chatgpt.com, perplexity.ai, gemini.google.com. Pequeño pero creciente — y de intención altísima.</li>
+      <li><strong>Preguntar al lead.</strong> Un campo «¿cómo nos has conocido?» con la opción «ChatGPT u otra IA» en el formulario. La atribución más fiable sigue siendo la que te cuenta el cliente.</li>
+    </ol>
+    <div class="post-regla"><span class="ico">Regla</span><p>Si una cifra de visibilidad en IA no se puede auditar hasta una conversación con un humano, no entra en el informe. Lo mismo que pedimos para <a href="/blog/metricas-de-marketing/">cualquier métrica de marketing</a>.</p></div>
+
+    <h2>El movimiento completo: de la mención al cliente</h2>
+    <p>Aparecer en la respuesta no es el final — es la primera flecha de un <a href="/blog/funnel-de-ventas/">funnel</a> nuevo: mención → visita de altísima intención → lead → conversación. Y aquí vuelve la regla de siempre: si tu web no convierte o tus leads esperan días una respuesta, ser citado por ChatGPT solo hará que pierdas clientes mejor informados. El GEO trae la visita; <a href="/growth-b2b/">el sistema</a> hace el resto.</p>
+    <p>Una cosa más, ya que estamos: los anuncios dentro de ChatGPT son la otra cara de esta moneda — la visibilidad pagada donde el GEO es la ganada. Escribimos la guía completa y la mantenemos al día: <a href="/blog/chatgpt-ads-espana/">ChatGPT Ads en España</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <details class="faq-item"><summary>¿El GEO sustituye al SEO?</summary><p>No: lo amplía. Casi todo lo que funciona en GEO (entidad, estructura, datos, autoridad externa) es SEO bien hecho con otro énfasis. La web que Google entiende bien es, en general, la que las IA extraen bien. Lo que cambia es qué mides como éxito: mención además de clic.</p></details>
+    <details class="faq-item"><summary>¿Cuánto tarda en verse resultado?</summary><p>Lo honesto: no hay plazo garantizable. Las señales técnicas (que los bots te lean, que la entidad se limpie) se mueven en semanas; las menciones en respuestas dependen de ciclos de entrenamiento y de la autoridad externa, y eso son meses. Por eso la batería de prompts mensual importa: sin baseline, jamás sabrás si avanzas.</p></details>
+    <details class="faq-item"><summary>¿Bloqueo o permito los bots de IA en robots.txt?</summary><p>Depende de tu negocio: un medio que vive de páginas vistas puede querer bloquear. Una empresa que vive de ser encontrada y recomendada, casi seguro que no. Nosotros permitimos GPTBot, ClaudeBot, PerplexityBot y compañía — ser leídos es el requisito de ser citados.</p></details>
+    <details class="faq-item"><summary>¿Esto lo puede hacer mi equipo o necesito ayuda?</summary><p>Las acciones 1, 3 y 5 de la tabla las puede hacer un equipo interno con criterio en una semana. El schema y la estrategia de datos propios suelen necesitar ayuda una vez; las listas de terceros son trabajo comercial continuo. Si quieres que revisemos cómo está tu empresa hoy — entidad, extraibilidad, medición — <a href="/consultoria-ia/">es parte de nuestra consultoría de IA</a>.</p></details>
+
+    <div class="post-cta">
+      <p class="titulo">¿Qué dice la IA de tu empresa ahora mismo?</p>
+      <p class="sub">Haz la prueba: pregunta a ChatGPT por tu marca y tu categoría. Si no te gusta la respuesta — o sale un competidor —, hablemos.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px">
+        <a href="/consultoria-ia/" class="btn-dark btn-nav" style="background:#27BDB1; color:#04231F">Consultoría de IA</a>
+        <a href="/#contacto" class="btn-dark btn-nav" style="border:1px solid rgba(255,255,255,.3)">Solicitar diagnóstico</a>
+      </div>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:28px 0 6px; font-weight:700">Sigue leyendo</p>
+    <p style="font-size:15px; line-height:1.9; margin:0 0 8px">
+      <a href="/blog/chatgpt-ads-espana/">ChatGPT Ads en España: la guía completa</a><br>
+      <a href="/blog/metricas-de-marketing/">Las 5 métricas que importan (y las que decoran)</a><br>
+      <a href="/growth-b2b/">Growth B2B: cómo construir un sistema de crecimiento</a>
+    </p>
+
+    <div class="post-autor">
+      <img loading="lazy" decoding="async" src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+      <div>
+        <p class="n">Maikel Echevarría</p>
+        <p class="r">Fundador de Qualivo. Construye y diagnostica sistemas de captación y ventas para empresas de formación, servicios y B2B.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
