@@ -73,17 +73,24 @@ ritmo de gasto bajo o pérdida de impresiones por presupuesto.
 | Workflow `t6g8nV3pQXqYLpuN` | **activo**, ejecución diaria a las 08:00 |
 | Credencial `Google SA · apiclaude (OutThink)` (`Np6XgvlYOuBp9rmM`) | creada, tipo cuenta de servicio |
 | Escritura en la pestaña `Historico` | configurada |
-| Nodo «Enviar informe» | **desactivado**: no hay ninguna credencial de email en la instancia |
+| Credencial `SMTP Gmail · info@maikelechevarria.com` (`2lt9aBFiTuuZWMV7`) | creada, Gmail con contraseña de aplicación |
+| Nodo «Enviar informe» | **activo**, probado end-to-end |
 
-### Lo único que falta: el envío del email
+### Validado end-to-end (01-09)
 
-No existe ninguna credencial SMTP ni de Gmail en la instancia de n8n (revisados los 35
-workflows). Dos opciones:
+Ejecución `27542`: los 9 nodos en verde, incluido el envío del correo. Para probarlo se
+añadió temporalmente un trigger de webhook, que **se ha eliminado después** — un endpoint
+sin autenticar capaz de enviar correos y escribir en la hoja no debe quedarse publicado.
+Para lanzarlo a mano: botón *Execute workflow* en la interfaz.
 
-1. **Crear una credencial SMTP** en n8n y activar el nodo «Enviar informe». Es el camino
-   natural si ya tenéis un servidor de correo.
-2. **Usar `scripts/reporte_diario.js`** (script nativo de Google Ads) solo para el email:
-   envía con `MailApp` sin necesidad de credencial alguna. n8n se encarga del dashboard y
-   el script del correo.
+### Problemas encontrados y resueltos durante el despliegue
 
-Mientras tanto el flujo ya alimenta el dashboard cada día; solo no envía el correo.
+1. **`pageSize` no soportado** en la v25 de la API de Google Ads → eliminado del cuerpo.
+2. **Expresiones `{{ }}` anidadas** dentro de otra expresión de n8n: sintaxis inválida.
+   Reescritas las consultas GAQL con plantillas de JavaScript (`${...}` entre backticks).
+3. **Orden de ejecución**: las dos consultas colgaban en paralelo del mismo nodo, así que el
+   de cálculo se disparaba antes de que llegara la segunda. Reencadenadas en serie
+   (token → campañas → términos → cálculo) y el código lee las campañas con
+   `$('Google Ads · campañas').all()`.
+4. **Objeto anidado hacia Sheets**: el nodo recibía `{html, asunto, fila}` y no habría
+   mapeado columnas. Añadido el nodo «Fila para el dashboard» que aplana la fila.

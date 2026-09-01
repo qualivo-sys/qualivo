@@ -274,3 +274,15 @@ Pestaña `Dashboard` creada en la hoja, con panel de KPIs por fórmulas (registr
 invertido, proyección, días restantes — se recalculan solos al añadir filas), cuatro gráficos
 (registros acumulados, coste diario, clics por día, inversión acumulada) y formato condicional
 en el histórico: días con registros en verde, CPL por encima de 15 € en rojo.
+
+### Reporte diario en producción (01-09) — validado
+Ejecución `27542` correcta de punta a punta: consulta a Google Ads, cálculo de KPIs, fila en
+el dashboard y **email enviado**. Credencial SMTP `2lt9aBFiTuuZWMV7` (Gmail con contraseña de
+aplicación de info@). El webhook temporal usado para la prueba se eliminó tras validar.
+
+Cuatro fallos corregidos durante el despliegue: `pageSize` no soportado en v25, expresiones
+`{{ }}` anidadas en n8n, orden de ejecución de las dos consultas en paralelo, y el objeto
+anidado que llegaba al nodo de Sheets. Detalle en `n8n/README.md`.
+
+**Pendiente menor:** confirmar la dirección de correo exacta de Aída (puse
+`aida.sanchez@adigital.org` como supuesto) antes del envío programado de mañana.
