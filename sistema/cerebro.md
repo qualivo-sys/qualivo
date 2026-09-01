@@ -43,6 +43,13 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 
 Cualquier cambio de fase (propuesta / negociación / cerrado / perdido) se reporta con importe — alimenta la previsión de caja.
 
+## Qualivo OS (Notion)
+
+La ejecución vive en Notion, página **"Qualivo OS · Sala de Mando"**, con cuatro bases: Roadmap Sep–Dic, Tareas, Experimentos y Decisiones. Las finanzas NO se duplican en Notion: viven en el Google Sheet del cerebro. Los agentes proponen tareas/experimentos vía `[PARA CEREBRO]`; el cerebro las registra y asigna.
+
+Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain — CEO advisor, COO, CFO, orquestador de agentes. Regla de prioridad cuando haya conflicto: 1) revenue inmediato, 2) pipeline, 3) adquisición, 4) conversión, 5) retención, 6) automatización. No se automatiza una operación que no funcione manualmente primero.
+
 ## Registro de cambios
 
+- **2026-09-01** · v2. Qualivo OS creado en Notion (Roadmap, Tareas, Experimentos, Decisiones) y charter del cerebro registrado.
 - **2026-09-01** · v1. Creación del fichero. Canal cerebro→Landing activo (Routine). Canal cerebro→Outbound pendiente de cablear desde el lado de Outbound. Revisión diaria 9:30 activa en el cerebro.
