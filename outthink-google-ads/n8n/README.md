@@ -30,7 +30,7 @@ Reparto que sí funciona y es el que usa este flujo:
 | `GADS_DEVELOPER_TOKEN` | developer token del MCC |
 | `GADS_CUSTOMER_ID` | 9188115388 |
 | `SHEET_ID` | 1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA (ya viene puesto en el nodo) |
-| `REPORT_TO` | info@maikelechevarria.com,aida@adigital.org |
+| `REPORT_TO` | info@maikelechevarria.com,maikel@qualivo.io,asanchez@adigital.org |
 
 Si vuestro plan de n8n no tiene Variables, sustituir las expresiones `{{$vars.X}}`
 por los valores directamente en cada nodo.

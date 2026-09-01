@@ -284,5 +284,6 @@ Cuatro fallos corregidos durante el despliegue: `pageSize` no soportado en v25, 
 `{{ }}` anidadas en n8n, orden de ejecución de las dos consultas en paralelo, y el objeto
 anidado que llegaba al nodo de Sheets. Detalle en `n8n/README.md`.
 
-**Pendiente menor:** confirmar la dirección de correo exacta de Aída (puse
-`aida.sanchez@adigital.org` como supuesto) antes del envío programado de mañana.
+Destinatarios definitivos: `info@maikelechevarria.com`, `maikel@qualivo.io` y
+`asanchez@adigital.org`. Remitente `info@maikelechevarria.com` (debe coincidir con la cuenta
+del SMTP o Gmail rechaza el envío).
