@@ -257,3 +257,20 @@ Hoja **Dashboard - Adigital** (`1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA`), 
 `Historico` creada, formateada y rellenada con los datos reales desde el 31-08. Acceso de la
 cuenta de servicio `apiclaude@kinetic-dream-377917.iam.gserviceaccount.com` verificado.
 El flujo de n8n añade una fila por día sobre esa pestaña.
+
+### n8n desplegado (01-09)
+- Workflow **`t6g8nV3pQXqYLpuN`** — «Qualivo — OutThink 2026 · Reporte diario Google Ads»,
+  **activo**, ejecución diaria a las 08:00. https://qualivo.app.n8n.cloud/workflow/t6g8nV3pQXqYLpuN
+- Credencial `Np6XgvlYOuBp9rmM` («Google SA · apiclaude (OutThink)») creada con la cuenta de
+  servicio, usada por el nodo de Google Sheets.
+- Corregido antes de activar: el nodo de Sheets recibía un objeto anidado y no habría mapeado
+  las columnas. Se añadió el nodo «Fila para el dashboard» que la aplana.
+- **Nodo de email desactivado**: no existe ninguna credencial SMTP/Gmail en la instancia
+  (revisados los 35 workflows). Falta crearla, o usar el script nativo de Google Ads para el
+  correo y dejar n8n solo para el dashboard.
+
+### Dashboard con formato (01-09)
+Pestaña `Dashboard` creada en la hoja, con panel de KPIs por fórmulas (registros, CPL,
+invertido, proyección, días restantes — se recalculan solos al añadir filas), cuatro gráficos
+(registros acumulados, coste diario, clics por día, inversión acumulada) y formato condicional
+en el histórico: días con registros en verde, CPL por encima de 15 € en rojo.

@@ -1,5 +1,5 @@
 {
-  "name": "OutThink 2026 · reporte diario de Google Ads",
+  "name": "Qualivo — OutThink 2026 · Reporte diario Google Ads",
   "nodes": [
     {
       "parameters": {
@@ -18,7 +18,8 @@
         -200,
         300
       ],
-      "name": "Cada día a las 08:00"
+      "name": "Cada día a las 08:00",
+      "id": "8922d9b1-0625-4a31-a571-4dcdb87cde9e"
     },
     {
       "parameters": {
@@ -54,7 +55,8 @@
         20,
         300
       ],
-      "name": "Token de Google Ads"
+      "name": "Token de Google Ads",
+      "id": "9cea2ec0-6ef7-41d3-9f72-7bb60a79594e"
     },
     {
       "parameters": {
@@ -84,7 +86,8 @@
         240,
         200
       ],
-      "name": "Google Ads · campañas"
+      "name": "Google Ads · campañas",
+      "id": "f7991e8f-8065-41c2-9b8c-0c7f22166d16"
     },
     {
       "parameters": {
@@ -114,7 +117,8 @@
         240,
         420
       ],
-      "name": "Google Ads · términos de ayer"
+      "name": "Google Ads · términos de ayer",
+      "id": "eb0d8158-4e49-402b-bb96-84ec2e3fcde3"
     },
     {
       "parameters": {
@@ -126,7 +130,8 @@
         480,
         300
       ],
-      "name": "Calcular KPIs y avisos"
+      "name": "Calcular KPIs y avisos",
+      "id": "f83ec5d3-5a80-498a-af60-a3f9ff9d2000"
     },
     {
       "parameters": {
@@ -138,7 +143,8 @@
         700,
         300
       ],
-      "name": "Construir email y fila"
+      "name": "Construir email y fila",
+      "id": "13f8130c-f8a3-4799-8847-4c4eea601fc1"
     },
     {
       "parameters": {
@@ -158,7 +164,8 @@
           "matchingColumns": [],
           "value": {}
         },
-        "options": {}
+        "options": {},
+        "authentication": "serviceAccount"
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -167,12 +174,19 @@
         200
       ],
       "name": "Dashboard (Google Sheets)",
-      "notes": "Autenticación: cuenta de servicio apiclaude@kinetic-dream-377917.iam.gserviceaccount.com — ya tiene permiso de edición sobre la hoja."
+      "notes": "Autenticación: cuenta de servicio apiclaude@kinetic-dream-377917.iam.gserviceaccount.com — ya tiene permiso de edición sobre la hoja.",
+      "credentials": {
+        "googleApi": {
+          "id": "Np6XgvlYOuBp9rmM",
+          "name": "Google SA · apiclaude (OutThink)"
+        }
+      },
+      "id": "a80a46f8-d74b-4620-9027-83d74740c9cc"
     },
     {
       "parameters": {
         "fromEmail": "info@maikelechevarria.com",
-        "toEmail": "={{ $vars.REPORT_TO }}",
+        "toEmail": "=info@maikelechevarria.com",
         "subject": "={{ $('Construir email y fila').item.json.asunto }}",
         "html": "={{ $('Construir email y fila').item.json.html }}",
         "options": {}
@@ -183,7 +197,24 @@
         920,
         400
       ],
-      "name": "Enviar informe"
+      "name": "Enviar informe",
+      "disabled": true,
+      "notes": "Pendiente de credencial SMTP o Gmail. Activar cuando esté configurada.",
+      "id": "ebc6820a-4d7f-4261-acf9-16d63828bb8e",
+      "webhookId": "d07f2aa1-0f4a-43ce-aece-5b49ea637f67"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: $json.fila }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        820,
+        140
+      ],
+      "name": "Fila para el dashboard",
+      "id": "f9a60090-31d3-4d12-99a9-ff698a8516ab"
     }
   ],
   "connections": {
@@ -251,12 +282,23 @@
       "main": [
         [
           {
-            "node": "Dashboard (Google Sheets)",
+            "node": "Fila para el dashboard",
             "type": "main",
             "index": 0
           },
           {
             "node": "Enviar informe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila para el dashboard": {
+      "main": [
+        [
+          {
+            "node": "Dashboard (Google Sheets)",
             "type": "main",
             "index": 0
           }

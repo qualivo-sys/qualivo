@@ -3,7 +3,9 @@
 Flujo que cada mañana consulta la API de Google Ads, guarda una fila histórica en
 Google Sheets (el dashboard) y envía un email con el resumen a los destinatarios.
 
-Importar `workflow_reporte_diario.json` en n8n (Workflows → Import from File).
+**Ya desplegado y activo** en https://qualivo.app.n8n.cloud/workflow/t6g8nV3pQXqYLpuN
+(se ejecuta cada día a las 08:00). El JSON de este repo es la copia de referencia, con los
+secretos sustituidos por `{{ $vars.* }}`.
 
 ## Aviso importante sobre la cuenta de servicio
 
@@ -62,3 +64,26 @@ del día ordenados por gasto, presupuesto consumido y proyección de registros a
 actual. Arriba, un bloque de avisos que solo aparece cuando hay algo que mirar:
 campañas activas sin impresiones, gasto sin conversiones, CPL por encima del umbral,
 ritmo de gasto bajo o pérdida de impresiones por presupuesto.
+
+
+## Estado del despliegue (01-09)
+
+| Pieza | Estado |
+|---|---|
+| Workflow `t6g8nV3pQXqYLpuN` | **activo**, ejecución diaria a las 08:00 |
+| Credencial `Google SA · apiclaude (OutThink)` (`Np6XgvlYOuBp9rmM`) | creada, tipo cuenta de servicio |
+| Escritura en la pestaña `Historico` | configurada |
+| Nodo «Enviar informe» | **desactivado**: no hay ninguna credencial de email en la instancia |
+
+### Lo único que falta: el envío del email
+
+No existe ninguna credencial SMTP ni de Gmail en la instancia de n8n (revisados los 35
+workflows). Dos opciones:
+
+1. **Crear una credencial SMTP** en n8n y activar el nodo «Enviar informe». Es el camino
+   natural si ya tenéis un servidor de correo.
+2. **Usar `scripts/reporte_diario.js`** (script nativo de Google Ads) solo para el email:
+   envía con `MailApp` sin necesidad de credencial alguna. n8n se encarga del dashboard y
+   el script del correo.
+
+Mientras tanto el flujo ya alimenta el dashboard cada día; solo no envía el correo.
