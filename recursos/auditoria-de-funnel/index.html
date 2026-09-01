@@ -166,7 +166,7 @@
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Revisa el correo — no parece válido.'; err.style.display = 'block'; return; }
     if (!rgpd) { err.textContent = 'Necesitamos el consentimiento para enviarte el recurso.'; err.style.display = 'block'; return; }
     btn.disabled = true; btn.textContent = 'Un segundo…';
-    fetch('/api/recurso', {
+    fetch('/api/recurso/', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
