@@ -1,0 +1,270 @@
+{
+  "name": "OutThink 2026 · reporte diario de Google Ads",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -200,
+        300
+      ],
+      "name": "Cada día a las 08:00"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://oauth2.googleapis.com/token",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "client_id",
+              "value": "={{ $vars.GADS_CLIENT_ID }}"
+            },
+            {
+              "name": "client_secret",
+              "value": "={{ $vars.GADS_CLIENT_SECRET }}"
+            },
+            {
+              "name": "refresh_token",
+              "value": "={{ $vars.GADS_REFRESH_TOKEN }}"
+            },
+            {
+              "name": "grant_type",
+              "value": "refresh_token"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        20,
+        300
+      ],
+      "name": "Token de Google Ads"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://googleads.googleapis.com/v25/customers/{{ $vars.GADS_CUSTOMER_ID }}/googleAds:search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Token de Google Ads').item.json.access_token }}"
+            },
+            {
+              "name": "developer-token",
+              "value": "={{ $vars.GADS_DEVELOPER_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: \"SELECT campaign.name, campaign.status, segments.date, metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions, metrics.search_budget_lost_impression_share FROM campaign WHERE segments.date BETWEEN '2026-08-31' AND '{{ $now.toFormat('yyyy-MM-dd') }}' AND campaign.status != 'REMOVED'\" }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        200
+      ],
+      "name": "Google Ads · campañas"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://googleads.googleapis.com/v25/customers/{{ $vars.GADS_CUSTOMER_ID }}/googleAds:search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Token de Google Ads').item.json.access_token }}"
+            },
+            {
+              "name": "developer-token",
+              "value": "={{ $vars.GADS_DEVELOPER_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: \"SELECT search_term_view.search_term, metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions FROM search_term_view WHERE segments.date = '{{ $now.minus(1, 'days').toFormat('yyyy-MM-dd') }}' ORDER BY metrics.cost_micros DESC LIMIT 20\" }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        420
+      ],
+      "name": "Google Ads · términos de ayer"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Agrega las filas de la API en KPIs diarios y acumulados\nconst INICIO = '2026-08-31', FIN = '2026-09-24';\nconst PRESUPUESTO = 2000, OBJETIVO = 200, CPL_ALERTA = 15;\n\nconst filas = [];\nfor (const item of $input.all()) {\n  for (const r of (item.json.results || [])) {\n    filas.push({\n      campania: r.campaign.name,\n      estado: r.campaign.status,\n      fecha: r.segments.date,\n      impresiones: Number(r.metrics.impressions || 0),\n      clics: Number(r.metrics.clicks || 0),\n      coste: Number(r.metrics.costMicros || 0) / 1e6,\n      conversiones: Number(r.metrics.conversions || 0),\n      isPerdidaPresupuesto: Number(r.metrics.searchBudgetLostImpressionShare || 0),\n    });\n  }\n}\n\nconst ayer = new Date(Date.now() - 86400000).toISOString().slice(0, 10);\nconst suma = (arr) => arr.reduce((a, f) => ({\n  impresiones: a.impresiones + f.impresiones, clics: a.clics + f.clics,\n  coste: a.coste + f.coste, conversiones: a.conversiones + f.conversiones,\n}), {impresiones: 0, clics: 0, coste: 0, conversiones: 0});\n\nconst porCampania = {};\nfor (const f of filas) {\n  if (!porCampania[f.campania]) porCampania[f.campania] = [];\n  porCampania[f.campania].push(f);\n}\nconst acumCampanias = Object.keys(porCampania).map((n) => {\n  const t = suma(porCampania[n]);\n  return {campania: n, ...t, cpl: t.conversiones ? t.coste / t.conversiones : null,\n          estado: porCampania[n][0].estado,\n          isPerdidaPresupuesto: Math.max(...porCampania[n].map((x) => x.isPerdidaPresupuesto))};\n});\nconst ayerCampanias = Object.keys(porCampania).map((n) => {\n  const t = suma(porCampania[n].filter((f) => f.fecha === ayer));\n  return {campania: n, ...t};\n});\n\nconst acum = suma(filas), deAyer = suma(filas.filter((f) => f.fecha === ayer));\nconst diasCorridos = Math.max(1, Math.round((new Date(ayer) - new Date(INICIO)) / 86400000) + 1);\nconst diasRestantes = Math.max(0, Math.round((new Date(FIN) - new Date()) / 86400000));\nconst proyeccion = acum.conversiones / diasCorridos * (diasCorridos + diasRestantes);\n\nconst avisos = [];\nfor (const c of acumCampanias) {\n  const a = ayerCampanias.find((x) => x.campania === c.campania);\n  if (c.estado === 'ENABLED' && a && a.impresiones === 0)\n    avisos.push('«' + c.campania + '» no tuvo impresiones ayer.');\n  if (c.isPerdidaPresupuesto > 0.2)\n    avisos.push('«' + c.campania + '» pierde el ' +\n      (c.isPerdidaPresupuesto * 100).toFixed(0) + '% de impresiones por presupuesto: ' +\n      'considerar subirlo o moverlo desde otra campaña.');\n}\nconst cpl = acum.conversiones ? acum.coste / acum.conversiones : 0;\nif (cpl > CPL_ALERTA) avisos.push('CPL acumulado de ' + cpl.toFixed(2) + ' €, por encima del umbral.');\nif (acum.coste > 150 && acum.conversiones === 0)\n  avisos.push('Más de ' + acum.coste.toFixed(0) + ' € sin conversiones: revisar el seguimiento.');\nconst ritmoNecesario = diasRestantes ? (PRESUPUESTO - acum.coste) / diasRestantes : 0;\nif (deAyer.coste > 0 && ritmoNecesario > 0 && deAyer.coste < ritmoNecesario * 0.6)\n  avisos.push('Ritmo de gasto bajo: ayer ' + deAyer.coste.toFixed(2) + ' € frente a ' +\n    ritmoNecesario.toFixed(2) + ' €/día necesarios.');\nif (diasRestantes <= 7 && acum.conversiones < OBJETIVO * 0.6)\n  avisos.push('Quedan ' + diasRestantes + ' días y llevamos ' +\n    acum.conversiones.toFixed(0) + ' de ' + OBJETIVO + ' registros.');\n\nreturn [{json: {\n  ayer, diasRestantes, diasCorridos, proyeccion, avisos,\n  acum: {...acum, cpl}, deAyer, acumCampanias, ayerCampanias,\n  pctPresupuesto: acum.coste / PRESUPUESTO * 100,\n  presupuesto: PRESUPUESTO, objetivo: OBJETIVO,\n  terminos: ($('Google Ads · términos de ayer').all()[0]?.json?.results || []).map((r) => ({\n    termino: r.searchTermView.searchTerm,\n    clics: Number(r.metrics.clicks || 0),\n    coste: Number(r.metrics.costMicros || 0) / 1e6,\n    conversiones: Number(r.metrics.conversions || 0),\n  })),\n}}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ],
+      "name": "Calcular KPIs y avisos"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst d = $json;\nconst eur = (v) => v.toFixed(2).replace('.', ',') + ' €';\nconst num = (v) => String(Math.round(v)).replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n\nlet h = '<div style=\"font-family:system-ui,Arial,sans-serif;max-width:780px;color:#1a1a1a\">';\nh += '<h2 style=\"margin:0 0 4px\">OutThink 2026 · informe del ' + d.ayer + '</h2>';\nh += '<p style=\"color:#666;margin:0 0 20px\">Quedan ' + d.diasRestantes +\n     ' días para el evento (24 de septiembre).</p>';\n\nh += '<div style=\"display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap\">';\nconst tarjeta = (etiqueta, valor, sub) =>\n  '<div style=\"flex:1;min-width:150px;background:#f6f7f9;border-radius:8px;padding:14px 16px\">' +\n  '<div style=\"color:#666;font-size:12px;text-transform:uppercase;letter-spacing:.04em\">' + etiqueta + '</div>' +\n  '<div style=\"font-size:26px;font-weight:700;margin-top:4px\">' + valor + '</div>' +\n  (sub ? '<div style=\"color:#888;font-size:12px;margin-top:2px\">' + sub + '</div>' : '') + '</div>';\nh += tarjeta('Registros', Math.round(d.acum.conversiones), 'objetivo ' + d.objetivo + '+');\nh += tarjeta('CPL', d.acum.cpl ? eur(d.acum.cpl) : '—', 'coste por registro');\nh += tarjeta('Invertido', eur(d.acum.coste), d.pctPresupuesto.toFixed(0) + '% de ' + eur(d.presupuesto));\nh += tarjeta('Proyección', Math.round(d.proyeccion), 'al ritmo actual');\nh += '</div>';\n\nif (d.avisos.length) {\n  h += '<div style=\"background:#fff5f5;border-left:4px solid #d64545;padding:12px 16px;margin-bottom:24px;border-radius:0 6px 6px 0\">';\n  h += '<strong>Requiere atención</strong><ul style=\"margin:8px 0 0;padding-left:18px\">';\n  for (const a of d.avisos) h += '<li style=\"margin:4px 0\">' + a + '</li>';\n  h += '</ul></div>';\n}\n\nconst tabla = (cabeceras, filas) => {\n  let t = '<table style=\"border-collapse:collapse;width:100%;font-size:14px;margin-bottom:24px\">';\n  t += '<tr>' + cabeceras.map((c, i) =>\n    '<th style=\"padding:8px 10px;border-bottom:2px solid #e5e5e5;background:#fafafa;text-align:' +\n    (i ? 'right' : 'left') + '\">' + c + '</th>').join('') + '</tr>';\n  for (const f of filas) {\n    t += '<tr>' + f.map((c, i) =>\n      '<td style=\"padding:8px 10px;border-bottom:1px solid #eee;text-align:' +\n      (i ? 'right' : 'left') + '\">' + c + '</td>').join('') + '</tr>';\n  }\n  return t + '</table>';\n};\n\nh += '<h3>Acumulado por campaña</h3>';\nh += tabla(['Campaña', 'Impresiones', 'Clics', 'CTR', 'Coste', 'Registros', 'CPL'],\n  d.acumCampanias.map((c) => [c.campania, num(c.impresiones), num(c.clics),\n    (c.impresiones ? (c.clics / c.impresiones * 100).toFixed(2) : '0,00') + '%',\n    eur(c.coste), Math.round(c.conversiones), c.cpl ? eur(c.cpl) : '—']));\n\nh += '<h3>Ayer</h3>';\nh += tabla(['Campaña', 'Impresiones', 'Clics', 'Coste', 'Registros'],\n  d.ayerCampanias.map((c) => [c.campania, num(c.impresiones), num(c.clics),\n    eur(c.coste), Math.round(c.conversiones)]));\n\nif (d.terminos.length) {\n  h += '<h3>Términos de búsqueda de ayer</h3>';\n  h += '<p style=\"color:#666;font-size:13px;margin:0 0 8px\">Revisar y añadir como negativas ' +\n       'los que no encajen con el perfil del evento.</p>';\n  h += tabla(['Término', 'Clics', 'Coste', 'Registros'],\n    d.terminos.map((t) => [t.termino, num(t.clics), eur(t.coste), Math.round(t.conversiones)]));\n}\n\nh += '<p style=\"color:#999;font-size:12px;border-top:1px solid #eee;padding-top:12px\">' +\n     'Generado automáticamente · Qualivo</p></div>';\n\nreturn [{json: {\n  html: h,\n  asunto: 'OutThink 2026 · ' + Math.round(d.acum.conversiones) +\n          (Math.round(d.acum.conversiones) === 1 ? ' registro · ' : ' registros · ') +\n          d.diasRestantes + ' días' + (d.avisos.length ? ' · ' + d.avisos.length + ' aviso(s)' : ''),\n  fila: {\n    fecha: d.ayer,\n    impresiones: d.deAyer.impresiones, clics: d.deAyer.clics,\n    ctr: d.deAyer.impresiones ? +(d.deAyer.clics / d.deAyer.impresiones * 100).toFixed(2) : 0,\n    cpc_medio: d.deAyer.clics ? +(d.deAyer.coste / d.deAyer.clics).toFixed(2) : 0,\n    coste: +d.deAyer.coste.toFixed(2), conversiones: d.deAyer.conversiones,\n    cpl: d.deAyer.conversiones ? +(d.deAyer.coste / d.deAyer.conversiones).toFixed(2) : 0,\n    coste_acumulado: +d.acum.coste.toFixed(2),\n    conversiones_acumuladas: d.acum.conversiones,\n    pct_presupuesto: +d.pctPresupuesto.toFixed(1),\n    proyeccion_registros: Math.round(d.proyeccion),\n  },\n}}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ],
+      "name": "Construir email y fila"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $vars.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Historico",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        920,
+        200
+      ],
+      "name": "Dashboard (Google Sheets)",
+      "notes": "Autenticación: cuenta de servicio. Compartir la hoja con el email de la SA."
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@maikelechevarria.com",
+        "toEmail": "={{ $vars.REPORT_TO }}",
+        "subject": "={{ $('Construir email y fila').item.json.asunto }}",
+        "html": "={{ $('Construir email y fila').item.json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        920,
+        400
+      ],
+      "name": "Enviar informe"
+    }
+  ],
+  "connections": {
+    "Cada día a las 08:00": {
+      "main": [
+        [
+          {
+            "node": "Token de Google Ads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Token de Google Ads": {
+      "main": [
+        [
+          {
+            "node": "Google Ads · campañas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Ads · términos de ayer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Ads · términos de ayer": {
+      "main": [
+        [
+          {
+            "node": "Calcular KPIs y avisos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Ads · campañas": {
+      "main": [
+        [
+          {
+            "node": "Calcular KPIs y avisos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular KPIs y avisos": {
+      "main": [
+        [
+          {
+            "node": "Construir email y fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construir email y fila": {
+      "main": [
+        [
+          {
+            "node": "Dashboard (Google Sheets)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar informe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -219,3 +219,35 @@ términos confirman intención informativa/legal: `reglamento ue 2024 1689`, `eu
 **A comprobar mañana:** si Search empieza a recibir clics. Si sigue sin arrancar con el techo
 más alto y las negativas puestas, el cuello de botella es el geo y hay que llevar la
 propuesta de abrir a toda España a Adigital.
+
+## Día 2 (01-09) — arranque confirmado
+
+| | 31-08 | 01-09 (mediodía) |
+|---|---|---|
+| Impresiones | 504 | 815 |
+| Clics | 15 | 53 |
+| Coste | 42,04 € | 52,38 € |
+| Conversiones | **1** | 0 |
+
+Acumulado: 1.319 impr · 68 clics · 94,42 € (4,7% del presupuesto) · **1 registro**.
+
+- **Primera conversión registrada**, procedente de `OT26_Search_EventosIA`. Valida la cadena
+  de medición completa de punta a punta (clic → landing → cross-domain → registro → Ads).
+- Search desbloqueada del todo: 0 → 18 clics, CTR 5,23%, CPC 2,45 € (por debajo del techo de
+  5 €, así que el techo ya no limita).
+- Demand Gen saliendo del aprendizaje: CPC de 3,54 € → 1,01 €.
+- **Cuota de impresiones de Search al 45,8%, con 22,7% perdido por presupuesto** (ayer 0%).
+  Search ya se queda corta de dinero: es el primer candidato a recibir presupuesto de otras
+  campañas en la revisión de la semana 2.
+- Negativas añadidas: `caepia`, `sepln`, `congreso academico` — «caepia 2026» es un congreso
+  académico de informática, se llevó 4,06 € sin convertir.
+
+## Automatización del reporte
+Dos vías, ambas en el repo:
+- `scripts/reporte_diario.js` — script nativo de Google Ads, sin dependencias externas.
+- `n8n/workflow_reporte_diario.json` — flujo de n8n con dashboard histórico en Google Sheets
+  y email a varios destinatarios. Ver `n8n/README.md`.
+
+**La API de Google Ads no admite cuentas de servicio** (solo con delegación en todo el
+dominio de Workspace). El flujo usa el refresh token de OAuth para Ads y reserva la cuenta
+de servicio para Google Sheets, que sí la soporta.
