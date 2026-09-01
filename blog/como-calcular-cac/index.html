@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo calcular el coste de adquisición de cliente (CAC) sin engañarte · Qualivo</title>
+<meta name="description" content="La fórmula del CAC es fácil; lo difícil es no hacerse trampas: qué costes incluir de verdad, por qué solo sirve por canal, y cuánto puede tardar un cliente en devolverte lo que costó.">
+<link rel="canonical" href="https://qualivo.io/blog/como-calcular-cac/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/blog/como-calcular-cac/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Cómo calcular el CAC sin engañarte">
+<meta property="og:description" content="Coste de adquisición de cliente: la fórmula, sus tres trampas y el único desglose que sirve para decidir — por canal.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Cómo calcular el coste de adquisición de cliente (CAC) sin engañarte",
+      "description": "Guía para calcular el CAC de verdad: la fórmula, qué costes incluir (no solo los anuncios), por qué el CAC medio esconde el problema y cómo relacionarlo con lo que un cliente te devuelve y en cuánto tiempo.",
+      "url": "https://qualivo.io/blog/como-calcular-cac/",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "inLanguage": "es",
+      "image": "https://qualivo.io/assets/img/og-image.png",
+      "author": { "@type": "Person", "name": "Maikel Echevarría", "url": "https://qualivo.io/#maikel" },
+      "publisher": { "@id": "https://qualivo.io/#organizacion" },
+      "about": ["CAC", "coste de adquisición de cliente", "coste por cliente", "métricas de marketing"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el coste de adquisición de cliente (CAC)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La fórmula: CAC = todo lo que gastaste en captar en un periodo ÷ número de clientes nuevos conseguidos en ese periodo. La clave está en el «todo»: no solo la inversión publicitaria, sino también agencias y consultores, herramientas de marketing y CRM, y la parte proporcional de las nóminas dedicadas a captación. Un CAC que solo cuenta los anuncios es una cifra de marketing; el CAC completo es una cifra de negocio." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es un buen CAC?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No existe un buen CAC universal: existe un buen CAC para tu negocio, y se define comparándolo con lo que un cliente te deja (margen, no facturación) y en cuánto tiempo te lo devuelve. Como referencia de trabajo, muchos negocios sanos operan con un valor de cliente de al menos tres veces su CAC — pero esa proporción es orientación, no ley: un negocio con ingresos recurrentes soporta CACs que arruinarían a uno de compra única." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué hay que calcular el CAC por canal?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Porque el CAC medio es una ficción estadística que esconde el problema: un canal excelente y uno ruinoso producen juntos una media aparentemente aceptable, y con ella decides a ciegas. Solo el desglose por canal — qué cuesta un cliente que vino por anuncios, por referidos, por SEO — permite la única decisión que importa: dónde invertir más y qué arreglar o cortar." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://qualivo.io/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Cómo calcular el CAC", "item": "https://qualivo.io/blog/como-calcular-cac/" }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://qualivo.io/#organizacion",
+  "name": "Qualivo",
+  "url": "https://qualivo.io/",
+  "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+  "description": "Qualivo es una consultora de growth B2B con sede en España, fundada por Maikel Echevarría, que diagnostica sistemas de captación y ventas: encuentra dónde se pierden oportunidades y dinero, prioriza por impacto y construye sistemas que se pueden medir.",
+  "areaServed": "ES",
+  "founder": { "@type": "Person", "@id": "https://qualivo.io/#maikel", "name": "Maikel Echevarría", "url": "https://qualivo.io/sobre/", "sameAs": ["https://maikelechevarria.com"] },
+  "sameAs": ["https://maikelechevarria.com"]
+}
+</script>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/servicios/" class="nav-link">Servicios</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">Medición y diagnóstico</p>
+    <h1>Cómo calcular el coste de adquisición de cliente (CAC) sin engañarte.</h1>
+    <p class="post-meta">Maikel Echevarría · Septiembre 2026 · 7 min de lectura</p>
+
+    <p class="post-lede">De todas las cifras de un negocio, esta es mi favorita — porque es la que más discusiones termina. Cuando alguien me dice «el marketing no funciona» o «funciona genial», mi respuesta es la misma pregunta: <strong>¿cuánto te cuesta un cliente, y por qué canal?</strong> Nueve de cada diez veces no hay respuesta. Esta guía es para que tú la tengas — y para que la cifra sea verdad, que es la parte difícil.</p>
+
+    <div class="post-resumen">
+      <p class="rl">En 30 segundos</p>
+      <ul>
+        <li><strong>CAC = todo lo gastado en captar ÷ clientes nuevos</strong> del mismo periodo.</li>
+        <li>La trampa nº 1: contar solo los anuncios. Van también agencia, herramientas y nóminas dedicadas.</li>
+        <li>La trampa nº 2: el CAC medio. Solo el desglose <strong>por canal</strong> permite decidir.</li>
+        <li>La trampa nº 3: compararlo con la facturación. Se compara con el <strong>margen</strong> — y con el tiempo que tarda en llegar.</li>
+        <li>No hay CAC bueno universal: hay CAC que tu economía soporta, o no.</li>
+      </ul>
+    </div>
+
+    <h2>La fórmula (y el diablo en el numerador)</h2>
+    <p>CAC = <strong>todo lo que gastaste en captar clientes en un periodo ÷ clientes nuevos conseguidos en ese periodo</strong>. Simple. El engaño vive en el «todo». Lo que debe entrar:</p>
+    <div class="post-tabla-scroll"><table class="post-tabla">
+      <thead><tr><th>Partida</th><th>Entra</th><th>El autoengaño típico</th></tr></thead>
+      <tbody>
+        <tr><td>Inversión publicitaria</td><td>Sí, toda</td><td>Es lo único que casi todos cuentan</td></tr>
+        <tr><td>Agencia / consultora / freelance</td><td>Sí</td><td>«Eso es un fijo, no captación» — lo es</td></tr>
+        <tr><td>Herramientas (CRM, email, web, analítica)</td><td>Sí, la parte de captación</td><td>Se olvidan porque se pagan una vez al año</td></tr>
+        <tr><td>Nóminas dedicadas a captar</td><td>Sí, la parte proporcional</td><td>«Es plantilla» — sus horas cuestan dinero</td></tr>
+        <tr><td>Descuentos de captación (primer pedido, pruebas)</td><td>Sí</td><td>Se contabilizan como «comercial», no como coste</td></tr>
+      </tbody>
+    </table></div>
+    <p>¿Por qué tanta manía con incluirlo todo? Porque el CAC de solo-anuncios produce decisiones alegres: parece que un cliente cuesta 80 € cuando el negocio está pagando 300 €. Con el número de verdad, algunas campañas «rentables» dejan de serlo — y mejor saberlo tú antes que tu cuenta de resultados.</p>
+
+    <h2>El único CAC útil: por canal</h2>
+    <p>El CAC medio es una ficción estadística. Ejemplo con números inventados para ver el mecanismo: los referidos te traen clientes a 50 € y los anuncios a 500 €; si consigues la mitad de cada, tu «CAC medio» es 275 € — un número que no describe a ningún cliente real y con el que no se puede decidir nada. Desglosado, en cambio, la decisión se escribe sola: sistematizar referidos, arreglar o repensar anuncios.</p>
+    <p>Para poder desglosar necesitas una sola cosa, y es de fontanería: <strong>que cada cliente tenga registrado su canal de origen</strong> — en el <a href="/blog/crm-para-pymes/">CRM</a>, desde el primer contacto, sin excepciones. Sin ese registro, todo lo demás de esta guía es teórica.</p>
+
+    <div class="post-regla"><span class="ico">Regla</span><p>Si no puedes decir qué te cuesta un cliente POR CANAL, no tienes un problema de marketing: tienes un problema de medición. Y se arregla antes y más barato.</p></div>
+
+    <h2>¿Y qué CAC es «bueno»? Las dos comparaciones</h2>
+    <p><strong>1. Contra lo que el cliente te deja.</strong> Margen, no facturación: si un cliente te factura 1.000 € con un margen del 30 %, te deja 300 € — y un CAC de 250 € te condena a trabajar casi gratis. La referencia de trabajo habitual es que el valor de un cliente supere ampliamente su coste (se suele hablar de tres veces o más), pero tómala como orientación: cada modelo de negocio tiene su física.</p>
+    <p><strong>2. Contra el tiempo.</strong> ¿Cuánto tarda el cliente en devolverte lo que costó captarlo? Si vendes suscripción o servicios recurrentes, un CAC alto puede ser buenísimo — pagadero en meses. Si vendes una vez, el CAC tiene que caber en el margen de esa única venta. Mismo número, veredictos opuestos.</p>
+
+    <h2>Los tres errores que más vemos al calcularlo</h2>
+    <ul>
+      <li><strong>Periodo incoherente:</strong> gastos de este mes divididos entre clientes que empezaron a captarse hace tres. Con ciclos de venta largos, usa ventanas amplias (trimestre) o asume el desfase explícitamente.</li>
+      <li><strong>Confundir CAC con CPL:</strong> el coste por lead es un indicador intermedio; <a href="/blog/captacion-de-leads/">un CPL barato con leads que no compran</a> es un CAC carísimo disfrazado de éxito.</li>
+      <li><strong>Calcularlo una vez y enmarcarlo:</strong> el CAC es un signo vital, no un diploma. Se revisa cada mes, por canal, y sus movimientos cuentan la historia de tu sistema.</li>
+    </ul>
+
+    <h2>Hazlo hoy: la versión de 20 minutos</h2>
+    <ol>
+      <li>Suma lo gastado en captación el último trimestre — con la tabla de arriba delante, sin piedad.</li>
+      <li>Cuenta los clientes nuevos del mismo trimestre y, si puedes, sepáralos por canal de origen.</li>
+      <li>Divide. Anota el total y los parciales por canal.</li>
+      <li>Compara cada parcial con tu margen por cliente. Señala el canal héroe y el sospechoso.</li>
+    </ol>
+    <p>Si el paso 2 se te atasca porque nadie registró orígenes — bienvenido a la fuga más común de todas. La <a href="/calculadora-de-fugas/">calculadora de fugas</a> te ayuda a estimar cuánto te está costando, y <a href="/medicion-atribucion/">montarte la medición</a> es probablemente tu inversión más rentable de este trimestre.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <details class="faq-item"><summary>¿El CAC incluye el coste de retener clientes?</summary><p>No: retención y adquisición se miden por separado, precisamente para poder compararlas. Lo que sí conviene mirar juntas es la conclusión: en muchas pymes, bajar la pérdida de clientes es más barato que comprimir el CAC — el cliente que repite tiene coste de adquisición cero.</p></details>
+    <details class="faq-item"><summary>¿Cómo calculo el CAC si capto por varios canales a la vez?</summary><p>Con honestidad imperfecta: los costes compartidos (la web, el CRM) se reparten con un criterio fijo, y los clientes se atribuyen a su primer origen conocido más el sentido común (quien vino «por Google» tras ver tres anuncios no es 100 % SEO). La atribución perfecta no existe; la consistente sirve para decidir, que es lo que importa.</p></details>
+    <details class="faq-item"><summary>¿Cada cuánto reviso el CAC?</summary><p>Mensual por canal para pilotar; trimestral para decidir cambios grandes (un mes malo no es una tendencia). Y siempre la misma definición de qué entra en el numerador — cambiar el criterio cada mes es la forma elegante de no enterarse de nada.</p></details>
+
+    <div class="post-cta">
+      <p class="titulo">¿Sabes lo que te cuesta un cliente?</p>
+      <p class="sub">Es la primera cifra que reconstruye nuestro diagnóstico — y la que cambia todas las conversaciones de marketing que vienen después.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px">
+        <a href="/calculadora-de-fugas/" class="btn-dark btn-nav" style="background:#27BDB1; color:#04231F">Calcular mis fugas</a>
+        <a href="/#contacto" class="btn-dark btn-nav" style="border:1px solid rgba(255,255,255,.3)">Solicitar diagnóstico</a>
+      </div>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:28px 0 6px; font-weight:700">Sigue leyendo</p>
+    <p style="font-size:15px; line-height:1.9; margin:0 0 8px">
+      <a href="/blog/metricas-de-marketing/">Las 5 métricas que importan (y las que decoran)</a><br>
+      <a href="/blog/cuanto-cuesta-google-ads/">Cuánto cuesta Google Ads de verdad para una pyme</a><br>
+      <a href="/blog/que-es-un-lead/">Qué es un lead — y por qué tener muchos no significa vender</a>
+    </p>
+
+    <div class="post-autor">
+      <img loading="lazy" decoding="async" src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+      <div>
+        <p class="n">Maikel Echevarría</p>
+        <p class="r">Fundador de Qualivo. Construye y diagnostica sistemas de captación y ventas para empresas de formación, servicios y B2B.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
