@@ -239,6 +239,31 @@ create table if not exists public.revisiones (
   unique (user_id, semana_inicio)
 );
 
+-- ── Notificaciones push ────────────────────────────────────────────────
+create table if not exists public.push_suscripciones (
+  id         uuid primary key default gen_random_uuid(),
+  user_id    uuid not null references auth.users on delete cascade,
+  endpoint   text not null unique,
+  p256dh     text not null,
+  auth       text not null,
+  navegador  text,
+  creado     timestamptz not null default now()
+);
+create index if not exists push_user on public.push_suscripciones (user_id);
+
+-- Registro de avisos enviados, para no repetir el mismo aviso el mismo dia.
+create table if not exists public.push_envios (
+  id      uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users on delete cascade,
+  fecha   date not null,
+  tipo    text not null,
+  creado  timestamptz not null default now(),
+  unique (user_id, fecha, tipo)
+);
+
+-- Preferencias de avisos (horas locales y si estan activos).
+alter table public.perfiles add column if not exists preferencias jsonb not null default '{}'::jsonb;
+
 -- ── Uso de IA (para limites por plan) ──────────────────────────────────
 create table if not exists public.uso_ia (
   id             uuid primary key default gen_random_uuid(),
@@ -260,7 +285,7 @@ begin
   foreach t in array array[
     'perfiles','metricas_corporales','comidas','planes_entreno','entrenamientos','series',
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
-    'chat_mensajes','xp_eventos','revisiones','uso_ia'
+    'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);
@@ -277,6 +302,10 @@ begin
     -- Si pudiera, se pondria los mensajes a cero y consumiria API gratis.
     elsif t = 'uso_ia' then
       execute 'create policy "propio_select" on public.uso_ia for select using (auth.uid() = user_id)';
+
+    -- push_envios lo escribe solo el cron (service role); el usuario puede verlo.
+    elsif t = 'push_envios' then
+      execute 'create policy "propio_select" on public.push_envios for select using (auth.uid() = user_id)';
 
     else
       execute format('create policy "propio_select" on public.%I for select using (auth.uid() = user_id)', t);
@@ -305,7 +334,7 @@ grant update (
   nombre, sexo, edad, altura_cm, ocupacion,
   objetivo, objetivos_extra, nivel, dias_semana, entorno, actividad,
   limitaciones, alergias, preferencias_comida, horario_comidas, alcohol_semanal,
-  hora_dormir, hora_despertar, zona_horaria, onboarding, notas, actualizado
+  hora_dormir, hora_despertar, zona_horaria, onboarding, notas, actualizado, preferencias
 ) on public.perfiles to authenticated;
 
 -- ═══════════════════════════════════════════════════════════════════════

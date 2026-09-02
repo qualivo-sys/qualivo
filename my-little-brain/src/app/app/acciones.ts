@@ -292,6 +292,26 @@ export async function guardarPerfil(datos: FormData) {
   revalidatePath('/app');
 }
 
+/** Horas de los avisos push. Vacio = desactivado. */
+export async function guardarPreferencias(datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const hora = (clave: string): string | null => {
+    const v = texto(datos.get(clave));
+    return v && /^\d{2}:\d{2}$/.test(v) ? v : null;
+  };
+  const preferencias = {
+    aviso_manana: hora('aviso_manana'),
+    aviso_noche: hora('aviso_noche'),
+    aviso_entreno: datos.get('aviso_entreno') === 'on',
+  };
+  const zona = texto(datos.get('zona_horaria'));
+  await supabase
+    .from('perfiles')
+    .update({ preferencias, ...(zona ? { zona_horaria: zona } : {}), actualizado: new Date().toISOString() })
+    .eq('id', userId);
+  revalidatePath('/app/ajustes');
+}
+
 export async function cerrarSesion() {
   const { supabase } = await sesion();
   await supabase.auth.signOut();

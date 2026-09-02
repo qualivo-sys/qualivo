@@ -7,7 +7,12 @@ import type { MensajeChat } from '@/lib/tipos';
 
 export const dynamic = 'force-dynamic';
 
-export default async function PaginaCoach() {
+const CHECKINS: Record<string, string> = {
+  manana: 'Check-in de la manana.',
+  noche: 'Check-in de la noche.',
+};
+
+export default async function PaginaCoach({ searchParams }: { searchParams: { checkin?: string } }) {
   const { supabase, usuario, perfil } = await sesionRequerida();
 
   const { data } = await supabase
@@ -38,6 +43,7 @@ export default async function PaginaCoach() {
 
       <ChatCoach
         historial={historial}
+        mensajeInicial={searchParams.checkin ? CHECKINS[searchParams.checkin] : undefined}
         saludo="Cuentame lo que has hecho y yo me encargo del resto: comidas, entrenos, horas de foco, sueno, animo. Tambien puedes mandarme una foto de la comida."
       />
     </main>

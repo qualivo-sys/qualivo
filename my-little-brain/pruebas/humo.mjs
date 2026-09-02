@@ -164,6 +164,19 @@ check('el lector SSE entrega las acciones', eventos.some((e) => e.evento === 'ac
 check('un bloque corrupto no rompe el resto',
   eventos[eventos.length - 1].evento === 'fin' && eventos[eventos.length - 1].datos.texto.includes('pierna'));
 
+// ── 5d. Avisos push: que toca a cada hora ──────────────────────────────
+const { decidirAvisos, textoAviso } = await import(`${L}/push.js`);
+const base = { diaSemana: 3, tieneCheckInManana: false, tieneComidasHoy: false, entrenoHoy: false, entrenoPendienteSemana: true, revisionNueva: false, enviadosHoy: [] };
+check('a las 8 manda el aviso de la manana', decidirAvisos({}, { ...base, hora: 8 }).includes('manana'));
+check('no repite la manana si ya se envio', !decidirAvisos({}, { ...base, hora: 8, enviadosHoy: ['manana'] }).includes('manana'));
+check('no molesta por la manana si ya hizo el check-in', !decidirAvisos({}, { ...base, hora: 8, tieneCheckInManana: true }).includes('manana'));
+check('respeta la hora elegida', decidirAvisos({ aviso_manana: '06:30' }, { ...base, hora: 6 }).includes('manana') && !decidirAvisos({ aviso_manana: '06:30' }, { ...base, hora: 8 }).includes('manana'));
+check('hora vacia (null) desactiva el aviso', decidirAvisos({ aviso_noche: null }, { ...base, hora: 21 }).length === 0);
+check('a las 17 recuerda entrenar solo si faltan sesiones', decidirAvisos({}, { ...base, hora: 17 }).includes('entreno') && !decidirAvisos({}, { ...base, hora: 17, entrenoPendienteSemana: false }).includes('entreno'));
+check('el domingo avisa de la revision nueva', decidirAvisos({}, { ...base, hora: 10, diaSemana: 0, revisionNueva: true }).includes('revision'));
+const aviso = textoAviso('noche', 'Maikel Echevarria', { racha: 3, kcal: 1450, metaKcal: 2100 });
+check('el aviso de la noche abre el check-in con las calorias', aviso.url.includes('checkin=noche') && aviso.cuerpo.includes('1450'));
+
 // ── 6. Revision semanal ────────────────────────────────────────────────
 const stats = estadisticasSemana(panel, panel.dias[panel.dias.length - 1].fecha.slice(0, 8) + '01' > '' ? (await import(`${L}/fechas.js`)).inicioSemana(hoy()) : hoy());
 check('las estadisticas de la semana cuadran', stats.entrenos === 1 && stats.alcoholTotal === 1, `entrenos ${stats.entrenos}, alcohol ${stats.alcoholTotal}`);

@@ -1,0 +1,20 @@
+# Avisos push de My Little Brain, cada hora.
+# Vercel Hobby solo permite crons diarios, asi que el disparo horario sale de aqui.
+# Necesita el secreto CRON_SECRET en el repo (Settings → Secrets → Actions),
+# con el mismo valor que la variable CRON_SECRET del proyecto en Vercel.
+name: my-little-brain · avisos
+
+on:
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  avisar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar al endpoint de avisos
+        run: |
+          curl --fail --silent --show-error --max-time 120 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://my-little-brain.vercel.app/api/cron/avisos

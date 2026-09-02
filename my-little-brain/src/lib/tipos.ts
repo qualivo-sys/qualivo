@@ -12,6 +12,15 @@ export type Plan = 'free' | 'pro' | 'founder';
 export type CategoriaFoco = 'deep_work' | 'negocio' | 'aprendizaje' | 'idiomas' | 'lectura' | 'otro';
 export type AreaObjetivo = 'cuerpo' | 'fitness' | 'productividad' | 'aprendizaje' | 'mente' | 'negocio';
 
+export interface PreferenciasAvisos {
+  /** Hora local "HH:MM" del aviso de la manana; null desactiva. */
+  aviso_manana?: string | null;
+  /** Hora local "HH:MM" del aviso de la noche; null desactiva. */
+  aviso_noche?: string | null;
+  /** Aviso de entreno pendiente por la tarde. */
+  aviso_entreno?: boolean;
+}
+
 export interface Perfil {
   id: string;
   email: string | null;
@@ -38,6 +47,7 @@ export interface Perfil {
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   onboarding: boolean;
+  preferencias: PreferenciasAvisos;
   notas: string | null;
   creado: string;
   actualizado: string;

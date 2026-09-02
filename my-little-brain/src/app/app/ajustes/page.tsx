@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { borrarCuenta, cerrarSesion, guardarPerfil } from '@/app/app/acciones';
+import { borrarCuenta, cerrarSesion, guardarPerfil, guardarPreferencias } from '@/app/app/acciones';
+import Notificaciones from '@/components/notificaciones';
 import PlanSuscripcion from '@/components/plan-suscripcion';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { LIMITE_MENSAJES, cuota } from '@/lib/ia/limites';
@@ -72,6 +73,34 @@ export default async function PaginaAjustes({
           </p>
         )}
         <PlanSuscripcion plan={perfil.plan} pagosActivos={hayPagos()} />
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Avisos</TituloTarjeta>
+        <p className="mb-3 text-sm text-muted-foreground">
+          El coach te escribe por la manana y por la noche, y te avisa si toca entrenar. Primero
+          activa los avisos en este navegador; luego elige las horas.
+        </p>
+        <Notificaciones />
+        <form action={guardarPreferencias} className="mt-4 space-y-3 border-t border-border pt-4">
+          <div className="grid grid-cols-2 gap-3">
+            <Campo etiqueta="Aviso de la manana" name="aviso_manana" type="time"
+              defaultValue={perfil.preferencias?.aviso_manana ?? '08:00'} ayuda="Vacio = sin aviso." />
+            <Campo etiqueta="Aviso de la noche" name="aviso_noche" type="time"
+              defaultValue={perfil.preferencias?.aviso_noche ?? '21:30'} ayuda="Vacio = sin aviso." />
+          </div>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="aviso_entreno" defaultChecked={perfil.preferencias?.aviso_entreno !== false}
+              className="h-4 w-4 rounded border-border bg-muted" />
+            Recordarme a las 17:00 si aun no he entrenado y me faltan sesiones esta semana
+          </label>
+          <Selector etiqueta="Zona horaria" name="zona_horaria" defaultValue={perfil.zona_horaria}>
+            {['Europe/Madrid', 'Atlantic/Canary', 'Europe/London', 'Europe/Lisbon', 'America/Mexico_City', 'America/Bogota', 'America/Argentina/Buenos_Aires', 'America/New_York'].map((z) => (
+              <option key={z} value={z}>{z}</option>
+            ))}
+          </Selector>
+          <Boton type="submit" variante="secundario" className="w-full">Guardar horas</Boton>
+        </form>
       </Tarjeta>
 
       <Tarjeta>

@@ -26,10 +26,13 @@ export default function ChatCoach({
   historial,
   modoAlta = false,
   saludo,
+  mensajeInicial,
 }: {
   historial: MensajeChat[];
   modoAlta?: boolean;
   saludo?: string;
+  /** Mensaje que se envia solo al abrir (por ejemplo, el check-in desde un aviso). */
+  mensajeInicial?: string;
 }) {
   const router = useRouter();
   const [mensajes, setMensajes] = useState<Burbuja[]>(
@@ -44,6 +47,15 @@ export default function ChatCoach({
   useEffect(() => {
     finRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [mensajes, enviando]);
+
+  // Un aviso push abre el chat con el check-in ya lanzado, sin teclear nada.
+  const inicialEnviado = useRef(false);
+  useEffect(() => {
+    if (!mensajeInicial || inicialEnviado.current) return;
+    inicialEnviado.current = true;
+    void enviar(mensajeInicial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mensajeInicial]);
 
   const enviar = async (texto: string, imagen?: { media_type: string; data: string }) => {
     if ((!texto.trim() && !imagen) || enviando) return;

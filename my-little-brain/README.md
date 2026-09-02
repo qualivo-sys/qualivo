@@ -28,6 +28,8 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Check-in diario** | Manana (sueno, animo, energia, peso) y noche (foco, pasos, notas), en dos formularios de diez segundos. |
 | **Progreso** | Logros, constancia por semana, horas de foco, peso, grasa, sueno y animo. |
 | **Cuenta** | Recuperar y cambiar contrasena, descargar todos los datos en JSON y borrar la cuenta (RGPD). |
+| **Avisos** | Notificaciones push: el coach te escribe por la manana y por la noche (abren el chat con el check-in lanzado), recuerda el entreno pendiente y avisa cuando la revision del domingo esta lista. |
+| **Comidas** | Calculadora con tabla de ~95 alimentos: "200 g pollo, 150 arroz, 1 cucharada de aceite" sale calculado al momento, sin IA. El coach usa la misma tabla. |
 
 ### Lo que lo diferencia de un tracker
 
@@ -87,6 +89,7 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_SITE_URL` | no | URL publica, para las vueltas de Stripe. En Vercel se deduce. |
 | `CRON_SECRET` | para el cron | Cadena aleatoria; Vercel la manda como Bearer. |
 | `NEXT_PUBLIC_LEGAL_EMPRESA`, `_CIF`, `_DIRECCION`, `_EMAIL` | para publicar | Responsable del tratamiento en `/legal`. Mientras falten, esas paginas muestran un aviso. |
+| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | para avisos | Claves Web Push (`npx web-push generate-vapid-keys`). Sin ellas, Ajustes dice que los avisos no estan configurados. |
 
 ### 4. Local y despliegue
 
@@ -215,6 +218,26 @@ textos de `/legal` estan escritos para este producto y esta arquitectura
 analitica); los datos del responsable van por variables de entorno. **Que los
 revise alguien de legal antes de cobrar a nadie**: son un punto de partida
 serio, no un dictamen.
+
+### Avisos push y el cron horario
+
+Los avisos son Web Push estandar (funcionan en Android y en iPhone con la app
+anadida a la pantalla de inicio). El navegador se suscribe en Ajustes, el
+service worker (`public/sw.js`) pinta el aviso y al tocarlo abre la ruta que
+toque: el de la manana y el de la noche abren el chat con el check-in ya
+lanzado, y el coach pregunta lo que falta en un solo mensaje.
+
+Que aviso toca a cada hora lo decide `decidirAvisos()` en `src/lib/push.ts`
+(logica pura, con pruebas): cada tipo sale como mucho una vez al dia, en la
+hora local del usuario, y solo si hay algo pendiente (nada de "buenos dias"
+si ya has hecho el check-in).
+
+`/api/cron/avisos` debe llamarse **cada hora**. Vercel Hobby solo permite crons
+diarios, asi que el disparo horario esta en GitHub Actions
+(`.github/workflows/mlb-avisos.yml`), que necesita el secreto `CRON_SECRET` en
+el repo (Settings → Secrets and variables → Actions) con el mismo valor que en
+Vercel. Si el proyecto pasa a Vercel Pro, basta con mover la entrada a
+`vercel.json`.
 
 ### Multiusuario y modelo de seguridad
 
