@@ -350,3 +350,17 @@ Datos nuevos del día: en Search el móvil cuesta 2,78 €/clic frente a 1,21 �
 no ha convertido; las franjas 20–23 h y 06–07 h concentran la mitad del gasto de Search con
 CPC > 3 €. En DG Prospecting el 96 % de los clics son móvil (0 registros) y el grupo A
 (ComplianceLegal) apenas sirve: 81 impresiones frente a 1.619 del grupo B.
+
+### Ajustes aplicados (02-09, tarde) — aprobados por Maikel · `api/ajuste_dia3.py`
+1. **Search, móvil −40 %** (CPC móvil 2,78 € vs 1,21 € escritorio, 0 registros en móvil).
+2. **Search, programación de anuncios**: 07–22 h al 100 %, 22–07 h al 50 %, todos los días
+   (21 franjas; se cubren las 24 h para que la campaña no deje de servir de noche).
+3. **Presupuestos**: Search 25 → **35 €/día** · DG Prospecting 41,67 → **31,67 €/día**.
+   Total diario sin cambios: 35 + 31,67 + 16,67 (PMax) = 83,34 €.
+4. **DG Prospecting, URL final directa al formulario** `espacio.adigital.org/evento/outthink-2026/`
+   (mismos UTM). Elimina el doble salto landing → formulario en móvil (96 % de sus clics).
+   Los 7 anuncios han vuelto a revisión de políticas (`REVIEW_IN_PROGRESS`); unas horas sin
+   servir. Search sigue apuntando a la landing porque es la que convierte.
+
+Sin tocar: grupo A de DG (ComplianceLegal, ya va como señal en PMax). Pendiente: pedir a
+Aída el embudo GA4 landing → registro → formulario completado.
