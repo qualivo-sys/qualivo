@@ -364,3 +364,25 @@ CPC > 3 €. En DG Prospecting el 96 % de los clics son móvil (0 registros) y e
 
 Sin tocar: grupo A de DG (ComplianceLegal, ya va como señal en PMax). Pendiente: pedir a
 Aída el embudo GA4 landing → registro → formulario completado.
+
+### Correo de Aída (02-09) y acciones
+Aída propone: subir Search quitando a Prospecting (hecho hoy); pasar DG Prospecting a
+conversiones; quitar pantallas de TV; duda sobre las UTM (opciones de URL de campaña vacías).
+Informa de que la **CSP de la landing bloqueaba `google.com/ccm/collect` y
+`doubleclick.net/ccm/collect`** (connect-src), ya resuelto: la etiqueta de remarketing no
+había podido construir audiencia desde el lunes. Eso explica las listas a 16 usuarios.
+
+Hecho tras su correo:
+- **TV excluida en DG Prospecting** (ajuste −100 % en CONNECTED_TV; la exclusión negativa
+  no se admite y en Search no aplica).
+- **UTM duplicadas corregidas.** La cuenta tenía un sufijo de URL final
+  (`utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={creative}&utm_term={keyword}`)
+  que se añadía detrás de las UTM ya incluidas en cada anuncio → `utm_campaign` dos veces
+  (nombre e ID). Sufijo a nivel de campaña, que tiene prioridad: Search
+  `utm_id={campaignid}&utm_term={keyword}`; DG, RMK y PMax `utm_id={campaignid}`.
+- **Hallazgo:** los enlaces de la landing al formulario (`espacio.adigital.org/evento/outthink-2026/`)
+  van sin parámetros. El tráfico de Search llega al formulario sin UTM (solo `_gl` del
+  vinculador), así que en el listado de inscritos no se puede separar por campaña salvo
+  que la landing propague la query string a esos enlaces. DG ya va directa desde hoy.
+- DG a Maximizar conversiones: propuesto para el viernes, con dos días de datos de la URL
+  directa. PMax ya corre en Maximizar conversiones.
