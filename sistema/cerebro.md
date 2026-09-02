@@ -27,23 +27,27 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 3. **Decisiones**: las decisiones de dinero y de campaña las toma **Maikel**, no los agentes ni el cerebro. Los agentes las dejan planteadas; el cerebro se las lleva a Maikel en el parte diario.
 4. **Este fichero**: solo lo edita el cerebro. Si un agente quiere proponer un cambio de estrategia, lo escribe en su propia carpeta y lo marca `[PARA CEREBRO]`.
 
-## Directrices vigentes (septiembre 2026)
+## Directrices vigentes (actualizadas 2 sep 2026)
 
-- **Prioridad nº 1: cosechar, no sembrar más.** Responder toda respuesta entrante en <2h antes de abrir más volumen de envío.
-- Objetivos semanales de Maikel: **8-10 respuestas · 5 conversaciones · 2 propuestas**.
-- Propuestas en <48h desde la conversación; seguimientos a 3-7-14 días.
-- **Modo caja**: no abrir gasto nuevo (herramientas, ads propios, dominios) sin pasar por el cerebro. La decisión grande de financiación está congelada hasta **noviembre**.
-- Motor templado activo: 5 reactivaciones/semana de contactos antiguos + referidos + partners.
+- **OBJETIVO DEL MES, único y claro: 1 cliente recurrente nuevo de 1.000-1.500 €/mes.** NO escalar, NO reinventar Qualivo. Todo lo que no acerque a ese cliente es secundario.
+- Objetivos semanales de Maikel: **10 seguimientos · 1 reunión nueva · 1 oportunidad comercial seria**.
+- Propuestas en <48h desde la conversación; seguimientos a 3-7-14 días; responder respuestas entrantes en <2h.
+- **Modo caja estricto**: la caja libre operativa es mínima (la mayor parte del saldo está reservada para impuestos). Ningún gasto nuevo sin pasar por el cerebro. Decisión de financiación congelada hasta **noviembre**.
+- Ingresos recurrentes actuales: Equipzilla 2.040 € nómina (sube a ~2.850 € en octubre) + EAC 800 € + Eleva 400-500 €. Fase actual: estancamiento, no crisis — la misión es el siguiente cliente.
 
-## Pipeline vivo (fuente: Growth Review Landing/Growth)
+## Pipeline y oportunidades vivas (2 sep 2026)
 
-| Cuenta | Importe | Estado |
+| Cuenta | Detalle | Estado |
 |---|---|---|
+| Inspyria | Han pedido hablar — entender qué necesitan | Reunión por agendar |
+| Marilia | Propone colaboración al 50%, visita clientes presencialmente | Conversación abierta |
+| Antic Barcelona | Cliente nuevo a comisión | Arrancando |
 | Equilibrha | 1.500 € | abierto |
 | Grup Montaner | 1.500 € | abierto |
 | Emana | 1.000 € | abierto |
+| Prospectos antiguos | Reactivar con seguimiento | 10 seguimientos/semana |
 
-Cualquier cambio de fase (propuesta / negociación / cerrado / perdido) se reporta con importe — alimenta la previsión de caja.
+Cualquier cambio de fase (propuesta / negociación / cerrado / perdido) se reporta con importe — alimenta la previsión de caja. Cobros clave de septiembre: Eleva agosto (pendiente), Eleva sept (~día 20), EAC 800 € (~día 20).
 
 ## Qualivo OS (Notion)
 
@@ -52,6 +56,8 @@ La ejecución vive en Notion, página **"Qualivo OS · Sala de Mando"**, con cua
 Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain — CEO advisor, COO, CFO, orquestador de agentes. Regla de prioridad cuando haya conflicto: 1) revenue inmediato, 2) pipeline, 3) adquisición, 4) conversión, 5) retención, 6) automatización. No se automatiza una operación que no funcione manualmente primero.
 
 ## Registro de cambios
+
+- **2026-09-02** · v3. Estado actualizado por Maikel: objetivo del mes = 1 cliente recurrente 1.000-1.500 €/mes (no escalar); KPIs semanales 10 seguimientos / 1 reunión / 1 oportunidad; nuevas oportunidades Inspyria, Marilia, Antic Barcelona; Equipzilla confirmada al alza (~2.850 € desde octubre); modo caja estricto.
 
 - **2026-09-01** · v2. Qualivo OS creado en Notion (Roadmap, Tareas, Experimentos, Decisiones) y charter del cerebro registrado.
 - **2026-09-01** · v1. Creación del fichero. Canal cerebro→Landing activo (Routine). Canal cerebro→Outbound pendiente de cablear desde el lado de Outbound. Revisión diaria 9:30 activa en el cerebro.
