@@ -386,3 +386,6 @@ Hecho tras su correo:
   que la landing propague la query string a esos enlaces. DG ya va directa desde hoy.
 - DG a Maximizar conversiones: propuesto para el viernes, con dos días de datos de la URL
   directa. PMax ya corre en Maximizar conversiones.
+- **DG Prospecting → Maximizar conversiones** (sin CPA objetivo) aplicado el mismo 02-09 a
+  petición de Aída, con el visto bueno de Maikel. Se pierde el tope de CPC de 5 € que tenía
+  Maximizar clics; vigilar el CPC los dos primeros días. Search sigue en Maximizar clics.
