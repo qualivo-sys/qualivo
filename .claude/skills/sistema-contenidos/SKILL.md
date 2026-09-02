@@ -46,8 +46,13 @@ primera persona en los captions). La marca Qualivo nunca firma piezas de
 redes; qualivo.io aparece solo como recurso o CTA dentro del contenido.
 Paleta de los creativos = la de maikelechevarria.com: crema #F2EEE6,
 tinta #0A0A0B, NARANJA #E8590C como acento principal (#FF7A33 en fondos
-oscuros, #C2410C oscuro, #FBE896 amarillo pálido puntual). Nada de teal
-en redes — el teal es de la web de Qualivo.
+oscuros, #C2410C oscuro, #FBE896 amarillo palido puntual). Nada de teal
+en redes (el teal es de la web de Qualivo).
+Lenguaje en redes: PROHIBIDA la raya larga (—) y el punto y coma; delatan
+IA. Frases cortas y directas, como habla Maikel. Parentesis o punto y
+seguido en su lugar. Cada carrusel ataca UN dolor NUEVO: consultar el mapa
+de conceptos ya publicados en content/borradores/cola-de-publicacion.md
+antes de proponer nada.
 
 ## Convive con
 - `content/contrabrief-qualivo.md` — posicionamiento (fugas = metáfora,

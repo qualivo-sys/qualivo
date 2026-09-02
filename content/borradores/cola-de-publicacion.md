@@ -19,3 +19,11 @@ Tanda 2 (mañana): diagnostico · automatizacion-comercial · servicios · consu
 - Tarjeta en blog/index.html + sitemap + llms.txt el mismo día
 - Línea «Parte de la guía Growth B2B» si pertenece al cluster
 - Avisar a Maikel con la URL para su ronda de GSC
+
+
+## Mapa de conceptos YA publicados en IG (no repetir, 2-sep)
+Fugas del funnel en general · seguimiento/2o contacto · velocidad de primer
+contacto · formulario largo · linterna (mirar donde no miras) · el cubo /
+echar mas agua · la persona equivocada · las 6 comprobaciones.
+Dolores virgenes en cola: reactivacion CRM (mie 3-sep) · GEO/ChatGPT te
+busca (vie 5-sep) · CAC/ticket (recamara) · metricas de vanidad · CRM-teatro.
