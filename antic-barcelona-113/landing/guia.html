@@ -78,7 +78,7 @@
           </div>
           <label class="checkline" style="margin-bottom:24px">
             <input type="checkbox" id="ok" required>
-            <span>He leído y acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a> y consiento recibir la guía y comunicaciones sobre mi proyecto.</span>
+            <span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a> y consiento recibir la guía y comunicaciones sobre mi proyecto.</span>
           </label>
           <button class="btn btn--inv" type="submit" style="width:100%;justify-content:center">Descargar la guía <span class="arw">→</span></button>
         </form>
@@ -108,7 +108,7 @@ document.getElementById('f').addEventListener('submit', function(e){
   };
   try { sessionStorage.setItem('ab113_lead', JSON.stringify(d)); } catch(err){}
   window.ab113 && ab113.track('Lead', { content_name:'guia_mesa_perfecta', value:0, currency:'EUR' });
-  location.href = '/gracias.html';
+  location.href = '/gracias';
 });
 </script>
 </body>

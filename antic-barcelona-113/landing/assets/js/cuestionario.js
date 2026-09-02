@@ -129,7 +129,7 @@
         '</div>' +
         '<div class="field" style="max-width:400px"><label for="wa">WhatsApp</label><input id="wa" type="tel" autocomplete="tel" placeholder="+34 600 000 000" value="' + esc(a.tel || '') + '"><span class="hint">Es por donde te respondemos más rápido.</span><span class="errmsg">Necesitamos un teléfono para escribirte.</span></div>' +
         '<label class="checkline" style="max-width:600px"><input type="checkbox" id="ok"' + (a.consent ? ' checked' : '') + '>' +
-        '<span>He leído y acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a> y consiento que me contactéis sobre mi proyecto.</span></label>';
+        '<span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a> y consiento que me contactéis sobre mi proyecto.</span></label>';
     }
 
     h += '</div>';
