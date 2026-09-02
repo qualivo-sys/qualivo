@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14100D">
+<meta name="robots" content="noindex">
+<title>Diseña tu pieza — Antic Barcelona 113</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="icon" href="/assets/photos/logo-antic-barcelona-113.png">
+<style>
+  body{background:var(--ink-900);color:var(--text-inverse)}
+  .q{min-height:100svh;display:flex;flex-direction:column}
+  .q__bar{position:sticky;top:0;z-index:60;background:rgba(20,16,13,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-inverse)}
+  .q__barin{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px var(--gutter)}
+  .q__barin img{height:34px;width:auto}
+  .q__exit{font-family:var(--font-label);font-size:11px;font-weight:600;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-inverse-muted);transition:color .3s}
+  .q__exit:hover{color:var(--paper-100)}
+  .prog{height:2px;background:var(--border-inverse);position:relative}
+  .prog i{position:absolute;inset:0 auto 0 0;background:var(--oak-500);width:0;transition:width .65s var(--ease-out)}
+  .q__steps{display:flex;gap:6px;flex-wrap:wrap;padding:11px var(--gutter) 0}
+  .q__steps span{font-family:var(--font-label);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500);transition:color .4s}
+  .q__steps span.on{color:var(--oak-400)}
+  .q__steps span.done{color:var(--ink-400)}
+  .q__steps span+span::before{content:"—";margin-right:6px;color:var(--ink-700)}
+
+  .q__body{flex:1;display:flex;align-items:center;padding-block:clamp(36px,7vh,80px)}
+  .pane{display:none;width:100%}
+  .pane.on{display:block;animation:paneIn .75s var(--ease-out)}
+  @keyframes paneIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .pane h2{font-family:var(--font-editorial);font-weight:400;font-size:clamp(2rem,5vw,3.6rem);line-height:1.04;color:var(--paper-000);margin-bottom:10px}
+  .pane h2 em{font-style:italic;color:var(--oak-400)}
+  .pane .sub{color:var(--text-inverse-muted);font-size:15px;margin-bottom:clamp(24px,3.4vw,40px);max-width:52ch}
+
+  .opts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+  .opt{
+    position:relative;text-align:left;overflow:hidden;
+    border:1px solid var(--border-inverse);background:rgba(255,255,255,.03);
+    transition:border-color .4s,background .4s,transform .5s var(--ease-out);
+  }
+  .opt:hover{border-color:var(--oak-600);transform:translateY(-3px)}
+  .opt[aria-pressed="true"]{border-color:var(--oak-400);background:rgba(169,123,74,.14)}
+  .opt[aria-pressed="true"]::after{content:"✓";position:absolute;top:12px;right:14px;color:var(--oak-400);font-size:15px}
+  .opt__img{aspect-ratio:4/3;overflow:hidden;background:var(--ink-800)}
+  .opt__img img{width:100%;height:100%;object-fit:cover;opacity:.72;transition:opacity .5s,transform 1s var(--ease-out)}
+  .opt:hover .opt__img img,.opt[aria-pressed="true"] .opt__img img{opacity:1;transform:scale(1.05)}
+  .opt__t{padding:16px 18px 18px}
+  .opt__t b{display:block;font-family:var(--font-display);font-size:1.02rem;font-weight:600;color:var(--paper-000)}
+  .opt__t span{display:block;font-size:12.5px;color:var(--text-inverse-muted);margin-top:4px;line-height:1.5}
+  .opts--plain .opt__t{padding:20px 20px}
+
+  .row{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .chip{padding:11px 18px;border-radius:999px;border:1px solid var(--border-inverse);font-family:var(--font-label);font-size:12.5px;font-weight:600;color:var(--text-inverse-muted);transition:all .35s}
+  .chip:hover{border-color:var(--oak-600);color:var(--paper-100)}
+  .chip[aria-pressed="true"]{background:var(--oak-600);border-color:var(--oak-600);color:var(--paper-000)}
+
+  .q__foot{position:sticky;bottom:0;background:rgba(20,16,13,.92);backdrop-filter:blur(14px);border-top:1px solid var(--border-inverse)}
+  .q__footin{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--gutter)}
+  .q__count{font-family:var(--font-label);font-size:11px;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-inverse-muted)}
+  .btn[disabled]{opacity:.32;pointer-events:none}
+
+  /* final */
+  .done{text-align:center;max-width:60ch;margin-inline:auto}
+  .done .tick{width:62px;height:62px;border-radius:50%;border:1px solid var(--oak-500);display:grid;place-items:center;margin:0 auto 26px}
+  .done .tick svg{width:26px;height:26px;stroke:var(--oak-400);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:32;stroke-dashoffset:32;animation:draw .9s var(--ease-out) .3s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .peek{margin-top:44px;border:1px dashed var(--border-inverse);padding:22px;text-align:left;background:rgba(255,255,255,.02)}
+  .peek h4{font-family:var(--font-label);font-size:10px;font-weight:600;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--ink-400);margin-bottom:14px}
+  .peek dl{display:grid;grid-template-columns:auto 1fr;gap:7px 18px;font-size:13.5px;margin:0}
+  .peek dt{font-family:var(--font-label);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);align-self:center}
+  .peek dd{margin:0;color:var(--paper-200)}
+  .tier{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.12em}
+  .tier.HOT{background:rgba(180,67,47,.18);color:#E08A72;border:1px solid rgba(224,138,114,.4)}
+  .tier.WARM{background:rgba(169,123,74,.18);color:var(--oak-300);border:1px solid rgba(217,190,156,.35)}
+  .tier.COLD{background:rgba(124,114,102,.16);color:#A79C8E;border:1px solid rgba(167,156,142,.3)}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="q">
+  <header class="q__bar">
+    <div class="q__barin">
+      <a href="/"><img src="/assets/photos/logo-antic-barcelona-113.png" alt="Antic Barcelona 113"></a>
+      <a class="q__exit" href="/">Salir ✕</a>
+    </div>
+    <div class="q__steps" id="crumbs"></div>
+    <div class="prog"><i id="pbar"></i></div>
+  </header>
+
+  <main class="q__body">
+    <div class="wrap" id="panes"></div>
+  </main>
+
+  <footer class="q__foot" id="foot">
+    <div class="q__footin">
+      <button class="btn btn--ghost" id="back" style="border-color:var(--border-inverse);color:var(--paper-100)">← Atrás</button>
+      <span class="q__count" id="count"></span>
+      <button class="btn btn--inv" id="next">Siguiente <span class="arw">→</span></button>
+    </div>
+  </footer>
+</div>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/cuestionario.js"></script>
+</body>
+</html>

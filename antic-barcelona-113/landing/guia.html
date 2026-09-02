@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14100D">
+<title>Guía para elegir la mesa perfecta — Antic Barcelona 113</title>
+<meta name="description" content="Guía gratuita: medidas, comensales, maderas, estilos y presupuesto a considerar antes de encargar una mesa a medida.">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="icon" href="/assets/photos/logo-antic-barcelona-113.png">
+<style>
+  .lm{min-height:100svh;background:var(--ink-900);display:flex;align-items:center;padding-block:clamp(90px,12vh,140px)}
+  .lm__grid{display:grid;gap:clamp(34px,5vw,80px);grid-template-columns:1fr;align-items:center}
+  @media(min-width:900px){.lm__grid{grid-template-columns:1.05fr .95fr}}
+  .lm__cover{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--border-inverse)}
+  .lm__cover img{width:100%;height:100%;object-fit:cover}
+  .lm__cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,16,13,.9),transparent 55%)}
+  .lm__cover figcaption{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;font-family:var(--font-editorial);font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--paper-000);line-height:1.2}
+  .lm__form{background:rgba(255,255,255,.03);border:1px solid var(--border-inverse);padding:clamp(26px,3.4vw,44px)}
+  .toc{display:grid;gap:9px;margin:22px 0 0;padding:0;list-style:none;counter-reset:t}
+  .toc li{counter-increment:t;display:flex;gap:12px;font-size:14px;color:var(--text-inverse-muted);align-items:baseline}
+  .toc li::before{content:"0" counter(t);font-family:var(--font-label);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--oak-500);flex:none}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar stuck">
+  <a class="topbar__logo" href="/"><img src="/assets/photos/logo-antic-barcelona-113.png" alt="Antic Barcelona 113"></a>
+  <a class="btn btn--ghost" href="/" style="border-color:var(--border-inverse);color:var(--paper-100)">← Volver</a>
+</header>
+
+<main class="lm inv">
+  <div class="wrap">
+    <div class="lm__grid">
+      <div>
+        <span class="eyebrow eyebrow--inv" data-rv>Guía gratuita · 7 apartados</span>
+        <h1 class="display" style="font-size:clamp(2.2rem,5.4vw,4.2rem);margin-block:18px 20px" data-rv data-rv-d="1">
+          Antes de elegir una mesa, asegúrate de <em>elegir la correcta.</em>
+        </h1>
+        <p class="lead" data-rv data-rv-d="2">Una mesa a medida es una decisión de diez o veinte años. Esta guía recoge lo que preguntamos a todos nuestros clientes antes de empezar, para que llegues sabiendo lo que quieres.</p>
+        <ol class="toc" data-rv data-rv-d="3">
+          <li>Cómo medir tu espacio de verdad (y el error de los 90 cm)</li>
+          <li>Cuántos comensales caben realmente en cada largo</li>
+          <li>Roble, teca, nogal: qué aguanta cada madera</li>
+          <li>Canto vivo, canto recto y cuándo elegir cada uno</li>
+          <li>Acabados: aceite, cera o barniz según el uso</li>
+          <li>Qué encarece una pieza a medida y qué no</li>
+          <li>Plazos reales de fabricación y cómo planificarlos</li>
+        </ol>
+        <figure class="lm__cover rv-img" style="margin-top:34px;max-width:420px" data-rv data-rv-d="4">
+          <img src="/assets/photos/mesa-madera-encaje.jpg" alt="Portada de la guía">
+          <figcaption>Guía para elegir la mesa perfecta para tu espacio</figcaption>
+        </figure>
+      </div>
+
+      <div class="lm__form" data-rv data-rv-d="2">
+        <h2 style="font-family:var(--font-editorial);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--paper-000);line-height:1.2;margin-bottom:8px">Descarga la guía y descubre qué mesa encaja con tu espacio.</h2>
+        <p style="font-size:14px;color:var(--text-inverse-muted);margin-bottom:26px">PDF de 7 apartados. Te llega al correo en menos de un minuto.</p>
+
+        <form id="f" novalidate>
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="given-name" required>
+            <span class="errmsg">Dinos cómo te llamas.</span>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+            <span class="hint">Te enviamos la guía en PDF a este correo.</span>
+            <span class="errmsg">Revisa el correo, parece que falta algo.</span>
+          </div>
+          <div class="field">
+            <label for="tel">WhatsApp <span style="text-transform:none;letter-spacing:0;font-weight:400;opacity:.6">(opcional)</span></label>
+            <input id="tel" name="tel" type="tel" placeholder="+34 600 000 000" autocomplete="tel">
+            <span class="hint">Te escribimos solo para hablar de tu proyecto.</span>
+          </div>
+          <label class="checkline" style="margin-bottom:24px">
+            <input type="checkbox" id="ok" required>
+            <span>He leído y acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a> y consiento recibir la guía y comunicaciones sobre mi proyecto.</span>
+          </label>
+          <button class="btn btn--inv" type="submit" style="width:100%;justify-content:center">Descargar la guía <span class="arw">→</span></button>
+        </form>
+        <p style="font-size:11.5px;color:var(--text-inverse-muted);margin-top:18px;line-height:1.6">Sin spam. Puedes darte de baja en cualquier momento escribiendo a info@anticbarcelona113.com.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="/assets/js/main.js"></script>
+<script>
+document.getElementById('f').addEventListener('submit', function(e){
+  e.preventDefault();
+  var ok = true;
+  [['nombre', function(v){return v.trim().length>1}], ['email', function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)}]]
+    .forEach(function(p){
+      var el = document.getElementById(p[0]), f = el.closest('.field');
+      var good = p[1](el.value); f.classList.toggle('err', !good); if(!good) ok = false;
+    });
+  if(!document.getElementById('ok').checked){ ok = false; document.getElementById('ok').focus(); }
+  if(!ok) return;
+
+  var d = {
+    nombre: document.getElementById('nombre').value.trim(),
+    email:  document.getElementById('email').value.trim(),
+    tel:    document.getElementById('tel').value.trim()
+  };
+  try { sessionStorage.setItem('ab113_lead', JSON.stringify(d)); } catch(err){}
+  window.ab113 && ab113.track('Lead', { content_name:'guia_mesa_perfecta', value:0, currency:'EUR' });
+  location.href = '/gracias.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<title>Creatividad — Antic Barcelona 113</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+:root{
+  --ink-900:#14100D;--ink-800:#1F1913;--paper-000:#FBF8F3;--paper-100:#F4EFE7;--paper-200:#EAE3D6;
+  --oak-700:#6E4A26;--oak-600:#8C5E32;--oak-500:#A97B4A;--oak-400:#C39A6B;--oak-300:#D9BE9C;
+  --fd:"Urbanist",sans-serif;--fb:"Open Sans",sans-serif;--fe:"Instrument Serif",Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#555}
+.ad{position:relative;overflow:hidden;background:var(--ink-900);color:var(--paper-000);font-family:var(--fb)}
+.ad img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.veil{position:absolute;inset:0}
+.ad.bleed .veil{background:linear-gradient(to top,rgba(20,16,13,.96) 0%,rgba(20,16,13,.82) 26%,rgba(20,16,13,.28) 58%,rgba(20,16,13,.5) 100%)}
+.in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;z-index:3}
+
+.logo{position:absolute;z-index:4}
+.logo img{width:100%;height:auto;display:block;filter:drop-shadow(0 2px 14px rgba(20,16,13,.85))}
+.scrim{position:absolute;top:0;left:0;right:0;height:26%;z-index:2;
+  background:linear-gradient(to bottom,rgba(20,16,13,.62),transparent)}
+
+.eyebrow{
+  font-family:var(--fd);font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;color:var(--oak-400);
+  display:inline-flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";display:block;height:1px;background:var(--oak-500)}
+h1{font-family:var(--fe);font-weight:400;line-height:.99;letter-spacing:-.015em;color:var(--paper-000)}
+h1 em{font-style:italic;color:var(--oak-400)}
+.sub{font-family:var(--fb);font-weight:300;color:#D8CFC2;line-height:1.35}
+.cta{
+  display:inline-flex;align-items:center;gap:.6em;background:var(--paper-000);color:var(--ink-900);
+  font-family:var(--fd);font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;
+}
+.dom{font-family:var(--fd);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#8E8477}
+
+/* split */
+.ad.split .top{position:relative;overflow:hidden}
+.ad.split .top img{width:100%;height:100%;object-fit:cover}
+.ad.split .top::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,16,13,.55),transparent 45%)}
+.ad.split .bot{position:relative;background:var(--ink-900);display:flex;flex-direction:column;justify-content:center}
+.ad.split .in{position:static;display:contents}
+
+/* cotas */
+.cotas{position:absolute;z-index:3;inset:0;pointer-events:none}
+.cotas .line{position:absolute;background:var(--oak-400);opacity:.9}
+.cotas .tag{
+  position:absolute;font-family:var(--fd);font-weight:700;letter-spacing:.1em;
+  background:var(--oak-600);color:var(--paper-000);border-radius:3px;
+}
+.ia{
+  position:absolute;z-index:5;font-family:var(--fd);font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:rgba(251,248,243,.5);
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="/ads/creativos.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const c = window.CREATIVOS.find(x => x.id === (P.get('id')||'1A'));
+const FMT = { '4x5':[1080,1350], '1x1':[1080,1080], '9x16':[1080,1920] };
+const [W,H] = FMT[P.get('fmt')||'4x5'];
+const k = W/1080;                      // escala base
+const s = n => (n*k).toFixed(2)+'px';  // helper de escala
+// alturas relativas por formato
+const tall = H/W;                      // 1.25 · 1.0 · 1.777
+const pad  = 78;
+const em = t => t.replace(/\*(.+?)\*/g,'<em>$1</em>');
+
+const hSize  = tall>1.6 ? 104 : tall>1.1 ? 92 : 82;
+const subSz  = tall>1.6 ? 34  : 31;
+const eySz   = tall>1.6 ? 19  : 17;
+
+let inner = `
+  <span class="eyebrow" style="font-size:${s(eySz)};margin-bottom:${s(26)}">
+    <span style="display:block;width:${s(34)};height:1px;background:var(--oak-500)"></span>${c.eyebrow}
+  </span>
+  <h1 style="font-size:${s(hSize)};margin-bottom:${s(20)};max-width:${s(900)}">${em(c.headline)}</h1>
+  <p class="sub" style="font-size:${s(subSz)};margin-bottom:${s(40)};max-width:${s(820)}">${c.sub}</p>
+  <div style="display:flex;align-items:center;gap:${s(24)};flex-wrap:wrap">
+    <span class="cta" style="font-size:${s(25)};padding:${s(22)} ${s(40)}">${c.cta} <span>→</span></span>
+    <span class="dom" style="font-size:${s(17)}">anticbarcelona113.es</span>
+  </div>`;
+
+let html;
+if (c.layout === 'bleed') {
+  html = `
+  <div class="ad bleed" style="width:${W}px;height:${H}px">
+    <img class="bg" src="${c.img}" style="object-position:${c.pos||'center'}">
+    <div class="veil"></div>
+    <div class="scrim"></div>
+    ${c.cotas ? cotas() : ''}
+    <div class="logo" style="top:${s(58)};left:${s(pad)};width:${s(200)}"><img src="/assets/photos/logo-antic-barcelona-113.png"></div>
+    <div class="in" style="padding:${s(pad)}">${inner}</div>
+    ${c.ia ? `<span class="ia" style="bottom:${s(24)};right:${s(pad)};font-size:${s(13)}">Ambientación recreada digitalmente</span>` : ''}
+  </div>`;
+} else {
+  const topH = tall>1.6 ? 0.56 : tall>1.1 ? 0.55 : 0.52;
+  html = `
+  <div class="ad split" style="width:${W}px;height:${H}px;display:flex;flex-direction:column">
+    <div class="top" style="height:${(H*topH).toFixed(0)}px">
+      <img src="${c.img}" style="object-position:${c.pos||'center'}">
+      <div class="scrim"></div>
+      ${c.cotas ? cotas() : ''}
+      <div class="logo" style="top:${s(52)};left:${s(pad)};width:${s(190)}"><img src="/assets/photos/logo-antic-barcelona-113.png"></div>
+    </div>
+    <div class="bot" style="height:${(H*(1-topH)).toFixed(0)}px;padding:${s(pad)}">${inner}</div>
+    ${c.ia ? `<span class="ia" style="bottom:${s(22)};right:${s(pad)};font-size:${s(13)}">Ambientación recreada digitalmente</span>` : ''}
+  </div>`;
+}
+
+function cotas(){
+  return `<div class="cotas">
+    <div class="line" style="left:12%;right:12%;top:62%;height:${s(2)}"></div>
+    <div class="line" style="left:12%;top:60%;width:${s(2)};height:${s(24)}"></div>
+    <div class="line" style="right:12%;top:60%;width:${s(2)};height:${s(24)}"></div>
+    <span class="tag" style="left:50%;top:62%;transform:translate(-50%,-50%);font-size:${s(20)};padding:${s(8)} ${s(16)}">240 cm</span>
+  </div>`;
+}
+document.getElementById('root').innerHTML = html;
+document.title = c.id + ' · ' + c.concepto;
+</script>
+</body></html>

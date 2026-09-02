@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14100D">
+<meta name="robots" content="noindex">
+<title>Guía enviada — Antic Barcelona 113</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="icon" href="/assets/photos/logo-antic-barcelona-113.png">
+<style>
+  .ty{min-height:100svh;background:var(--ink-900);display:flex;align-items:center;padding-block:clamp(100px,13vh,150px);position:relative;overflow:hidden}
+  .ty__bg{position:absolute;inset:0;opacity:.16}
+  .ty__bg img{width:100%;height:100%;object-fit:cover}
+  .ty__in{position:relative;z-index:2}
+  .tick{width:58px;height:58px;border-radius:50%;border:1px solid var(--oak-500);display:grid;place-items:center;margin-bottom:26px}
+  .tick svg{width:24px;height:24px;stroke:var(--oak-400);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:32;stroke-dashoffset:32;animation:draw .8s var(--ease-out) .35s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .nxt{display:grid;gap:1px;background:var(--border-inverse);grid-template-columns:1fr;margin-top:clamp(36px,5vw,56px)}
+  @media(min-width:760px){.nxt{grid-template-columns:repeat(3,1fr)}}
+  .nxt>div{background:var(--ink-900);padding:26px 24px}
+  .nxt b{display:block;font-family:var(--font-label);font-size:11px;font-weight:600;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--oak-400);margin-bottom:9px}
+  .nxt p{font-size:14px;color:var(--text-inverse-muted);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<header class="topbar stuck">
+  <a class="topbar__logo" href="/"><img src="/assets/photos/logo-antic-barcelona-113.png" alt="Antic Barcelona 113"></a>
+  <a class="btn btn--ghost" href="/" style="border-color:var(--border-inverse);color:var(--paper-100)">← Volver a la web</a>
+</header>
+
+<main class="ty inv">
+  <div class="ty__bg"><img src="/assets/photos/textura-antic-barcelona.jpg" alt=""></div>
+  <div class="wrap ty__in">
+    <div style="max-width:60ch">
+      <div class="tick"><svg viewBox="0 0 24 24"><polyline points="4,12.5 9.5,18 20,6.5"></polyline></svg></div>
+      <span class="eyebrow eyebrow--inv">Guía enviada a tu correo</span>
+      <h1 class="display" style="font-size:clamp(2.2rem,5.6vw,4.4rem);margin-block:16px 20px">
+        Listo, <em id="nm">ya está en camino.</em>
+      </h1>
+      <p class="lead">Revisa tu bandeja de entrada (y la carpeta de promociones, por si acaso). Ahora podemos ir un paso más allá: cuéntanos cómo es tu espacio y te decimos qué pieza podría encajar.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(28px,4vw,40px)">
+        <a class="btn btn--inv" href="/cuestionario.html" data-cta="gracias">Diseña tu mesa <span class="arw">→</span></a>
+        <a class="btn btn--ghost" href="/guia.html">Descargar la guía de nuevo</a>
+      </div>
+    </div>
+    <div class="nxt">
+      <div><b>6 preguntas</b><p>Dos minutos, sin datos técnicos. Solo lo que necesitamos para proponerte algo real.</p></div>
+      <div><b>Te llamamos</b><p>Con una propuesta de pieza para tu espacio y una horquilla de precio.</p></div>
+      <div><b>Visita al taller</b><p>Ves el material y las piezas terminadas en Terrassa, y decides con la mesa delante.</p></div>
+    </div>
+  </div>
+</main>
+
+<script src="/assets/js/main.js"></script>
+<script>
+try {
+  var d = JSON.parse(sessionStorage.getItem('ab113_lead') || '{}');
+  if (d.nombre) {
+    document.querySelector('h1').innerHTML = 'Listo, ' + d.nombre.split(' ')[0].replace(/[<>&]/g,'') + '.<br><em>Ya está en camino.</em>';
+  }
+} catch(e){}
+</script>
+</body>
+</html>
