@@ -1,4 +1,5 @@
 import { Trash2 } from 'lucide-react';
+import CalculadoraComida from '@/components/calculadora-comida';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
 import { borrarComida, guardarComida, guardarMedicion } from '@/app/app/acciones';
@@ -83,7 +84,14 @@ export default async function PaginaCuerpo() {
           </p>
         )}
 
-        <form action={guardarComida} className="space-y-3 border-t border-border pt-4">
+        <div className="border-t border-border pt-4">
+          <p className="mb-3 text-sm font-medium">Calcular con la tabla de alimentos</p>
+          <CalculadoraComida />
+        </div>
+
+        <details className="mt-4 border-t border-border pt-4">
+          <summary className="cursor-pointer text-sm text-muted-foreground">O apuntar las calorias a mano</summary>
+        <form action={guardarComida} className="mt-3 space-y-3">
           <Campo etiqueta="Que has comido" name="descripcion" required placeholder="Pollo con arroz y ensalada" />
           <div className="grid grid-cols-2 gap-3">
             <Campo etiqueta="Kcal" name="kcal" type="number" inputMode="numeric" required />
@@ -99,6 +107,7 @@ export default async function PaginaCuerpo() {
           </div>
           <Boton type="submit" variante="secundario" className="w-full">Anadir comida</Boton>
         </form>
+        </details>
       </Tarjeta>
 
       <Tarjeta>

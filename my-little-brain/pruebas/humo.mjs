@@ -34,6 +34,7 @@ const ctx = { supabase, userId: 'u1', perfil, hoy: hoy() };
 
 // ── 1. Cada herramienta se ejecuta y escribe donde debe ────────────────
 const llamadas = [
+  ['calcular_comida', { texto: '200 g pollo, 150 arroz, 1 cucharada de aceite y un platano' }],
   ['registrar_comida', { descripcion: 'Hamburguesa y una cerveza', kcal: 950, proteina_g: 45, carbos_g: 70, grasa_g: 50, alcohol_ud: 1, confianza: 'media', momento: 'cena' }],
   ['registrar_peso', { peso_kg: 82.4, cintura_cm: 92, cuello_cm: 39 }],
   ['registrar_entrenamiento', { nombre: 'Torso A', sensacion: 4, ejercicios: [
@@ -100,6 +101,21 @@ check('reconstruye las sesiones para el motor', sesiones.length === 1 && sesione
 const bloque = { ejercicioId: 'press_banca', rol: 'principal', series: 3, repMin: 6, repMax: 8, rir: 2, descansoSeg: 150 };
 const consejo = sugerencia(bloque, sesiones);
 check('propone subir peso tras cerrar el rango', consejo.tipo === 'subir' && consejo.pesoKg === 82.5, consejo.texto);
+
+// ── 5a. Calculadora de comidas ─────────────────────────────────────────
+const { calcularComida, buscarAlimento } = await import(`${L}/motor/alimentos.js`);
+const plato = calcularComida('200 g pollo, 150 arroz, 1 cucharada de aceite y un platano');
+check('reconoce las 4 partes del plato', plato.lineas.every((l) => l.alimento) && plato.sinReconocer.length === 0,
+  plato.lineas.map((l) => `${l.alimento?.nombre} ${l.gramos}g`).join(' | '));
+check('calcula kcal y proteina coherentes', plato.kcal > 550 && plato.kcal < 720 && plato.proteina > 45, `${plato.kcal} kcal, ${plato.proteina} P`);
+const desayuno = calcularComida('2 huevos y cafe con leche');
+check('"cafe con leche" es un alimento, no dos', desayuno.lineas.length === 2 && desayuno.lineas[1].alimento?.id === 'cafe_leche',
+  desayuno.lineas.map((l) => l.alimento?.nombre ?? '??').join(' | '));
+check('"2 huevos" son dos unidades de 55 g', desayuno.lineas[0].gramos === 110);
+const bar = calcularComida('una cana y dos tercios');
+check('cuenta unidades de alcohol', bar.alcoholUd >= 2.5 && bar.alcoholUd <= 2.7, `${bar.alcoholUd} ud`);
+check('lo desconocido no suma pero se avisa', calcularComida('flan de la abuela, 100 g de xyzabc').sinReconocer.length === 1);
+check('busca por alias con plural', buscarAlimento('platanos')?.id === 'platano');
 
 // ── 5b. Señales proactivas y logros ────────────────────────────────────
 const { senales } = await import(`${L}/motor/senales.js`);

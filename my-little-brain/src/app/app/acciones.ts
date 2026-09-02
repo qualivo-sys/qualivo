@@ -113,6 +113,37 @@ export async function guardarComida(datos: FormData) {
   revalidatePath('/app/cuerpo');
 }
 
+/** Comida calculada con la tabla de alimentos (confianza alta: no hay estimacion). */
+export async function guardarComidaCalculada(datos: {
+  descripcion: string;
+  momento: string;
+  kcal: number;
+  proteina_g: number;
+  carbos_g: number;
+  grasa_g: number;
+  alcohol_ud: number;
+}) {
+  const { supabase, userId } = await sesion();
+  if (!datos.descripcion || !Number.isFinite(datos.kcal)) return;
+
+  await supabase.from('comidas').insert({
+    user_id: userId,
+    fecha: hoyIso(),
+    momento: ['desayuno', 'comida', 'cena', 'snack', 'bebida'].includes(datos.momento) ? datos.momento : null,
+    descripcion: datos.descripcion.slice(0, 300),
+    kcal: Math.max(0, Math.round(datos.kcal)),
+    proteina_g: Math.max(0, Math.round(datos.proteina_g)),
+    carbos_g: Math.max(0, Math.round(datos.carbos_g)),
+    grasa_g: Math.max(0, Math.round(datos.grasa_g)),
+    alcohol_ud: Math.max(0, Number(datos.alcohol_ud) || 0),
+    fuente: 'manual',
+    confianza: 'alta',
+  });
+  await sumarXp('comida', datos.descripcion);
+  revalidatePath('/app');
+  revalidatePath('/app/cuerpo');
+}
+
 export async function borrarComida(id: string) {
   const { supabase, userId } = await sesion();
   await supabase.from('comidas').delete().eq('id', id).eq('user_id', userId);

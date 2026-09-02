@@ -2,6 +2,7 @@ import type Anthropic from '@anthropic-ai/sdk';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { hoy as hoyIso, sumarDias } from '../fechas';
+import { calcularComida } from '../motor/alimentos';
 import { EJERCICIOS } from '../motor/ejercicios';
 import { firmaPerfil, generarPlan } from '../motor/planificador';
 import { XP_POR_ACCION } from '../motor/puntuaciones';
@@ -20,6 +21,21 @@ export interface ContextoHerramientas {
 const FECHA = { type: 'string' as const, description: 'Fecha YYYY-MM-DD. Omitir para hoy.' };
 
 export const HERRAMIENTAS: Anthropic.Tool[] = [
+  {
+    name: 'calcular_comida',
+    description:
+      'Calcula kcal y macros de una comida con la tabla de alimentos de la app (valores por 100 g, sin estimar). Usala ANTES de registrar_comida cuando el usuario describa ingredientes o platos comunes con cantidades. Devuelve los totales y las partes que no estan en la tabla, que si estimaras tu.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        texto: {
+          type: 'string',
+          description: 'La comida tal cual, separando partes por comas. Ej: "200 g pollo, 150 arroz cocido, 1 cucharada de aceite, un platano".',
+        },
+      },
+      required: ['texto'],
+    },
+  },
   {
     name: 'registrar_comida',
     description:
@@ -333,6 +349,23 @@ async function despachar(
   const { supabase, userId } = ctx;
 
   switch (nombre) {
+    case 'calcular_comida': {
+      const d = z.object({ texto: z.string().min(1) }).parse(entrada);
+      const r = calcularComida(d.texto);
+      const detalle = r.lineas
+        .filter((l) => l.alimento)
+        .map((l) => `${l.alimento!.nombre} ${l.gramos} g: ${l.kcal} kcal, ${l.proteina} P, ${l.carbos} C, ${l.grasa} G`)
+        .join('; ');
+      const texto = [
+        `Total segun tabla: ${r.kcal} kcal, ${r.proteina} g proteina, ${r.carbos} g carbos, ${r.grasa} g grasa${r.alcoholUd ? `, ${r.alcoholUd} ud alcohol` : ''}.`,
+        detalle ? `Detalle: ${detalle}.` : 'Ninguna parte reconocida.',
+        r.sinReconocer.length
+          ? `No estan en la tabla (estimalas tu y sumalas): ${r.sinReconocer.join(', ')}.`
+          : 'Todas las partes reconocidas: registra con confianza alta.',
+      ].join(' ');
+      return { texto, accion: null };
+    }
+
     case 'registrar_comida': {
       const d = z
         .object({
