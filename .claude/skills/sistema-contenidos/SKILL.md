@@ -55,9 +55,15 @@ de un canal, decisiones con datos vs opiniones, el techo de facturacion,
 economia del crecimiento. La operativa comercial (leads, CRM, seguimiento,
 presupuestos) solo aparece como ejemplo puntual, nunca como tema central.
 El contrabrief manda: Qualivo vende CONTROL del crecimiento.
-Estetica de imagenes en redes: FOTOGRAFIA REALISTA cinematografica y
-adulta (referencia: carrusel linterna). Nada de dibujos, 3D cartoon ni
-estilo Pixar. El humor va en la situacion, no en el personaje.
+Estetica de imagenes en redes (v2, aprobada 2-sep con "la reunion de
+los lunes"): FOTO DOCUMENTAL CON FLASH DIRECTO, como foto robada en una
+oficina real (fluorescentes, cafes a medias, post-its, encuadres
+imperfectos). Nada de dibujos/3D cartoon NI de penumbra cinematica de
+stock (canta a IA). El humor va en la situacion reconocible.
+Estructura de carrusel: HILO CONDUCTOR como historia en actos (kicker
+naranja arriba que situa cada lamina), titulares autoexplicativos con
+la frase completa como la diria el personaje, y remate que explica el
+concepto entero. Un solo taco bien puesto vale; tres es el maximo.
 Lenguaje en redes: PROHIBIDA la raya larga (—) y el punto y coma; delatan
 IA. Frases cortas y directas, como habla Maikel. Parentesis o punto y
 seguido en su lugar. Cada carrusel ataca UN dolor NUEVO: consultar el mapa
