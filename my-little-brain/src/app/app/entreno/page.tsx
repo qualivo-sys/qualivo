@@ -1,0 +1,148 @@
+import Link from 'next/link';
+import { regenerarPlan } from '@/app/app/acciones';
+import RegistroEntreno, { type BloqueVista } from '@/components/registro-entreno';
+import { Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
+import { sumarDias } from '@/lib/fechas';
+import { ejercicio } from '@/lib/motor/ejercicios';
+import { esIsometrico, planDesactualizado, volumenSemanal } from '@/lib/motor/planificador';
+import { proximoDia, sugerencia } from '@/lib/motor/progresion';
+import { perfilEntreno } from '@/lib/perfil';
+import { sesionRequerida } from '@/lib/sesion';
+
+export const dynamic = 'force-dynamic';
+
+export default async function PaginaEntreno({
+  searchParams,
+}: {
+  searchParams: { dia?: string };
+}) {
+  const { supabase, usuario, perfil } = await sesionRequerida();
+  const panel = await cargarPanel(supabase, usuario.id, perfil);
+
+  if (!panel.plan) {
+    return (
+      <main className="space-y-4">
+        <h1>Entreno</h1>
+        <Tarjeta>
+          <p className="mb-3 text-sm text-muted-foreground">
+            Aun no tienes plan. Lo genero con tu objetivo, nivel, dias disponibles, material y
+            molestias.
+          </p>
+          <form action={regenerarPlan}>
+            <Boton type="submit" className="w-full">Generar mi plan</Boton>
+          </form>
+        </Tarjeta>
+      </main>
+    );
+  }
+
+  const sesiones = await cargarSesionesMotor(supabase, usuario.id, sumarDias(panel.hoy, -120));
+  const diaSeleccionado =
+    panel.plan.dias.find((d) => d.id === searchParams.dia) ??
+    panel.plan.dias.find((d) => d.id === proximoDia(panel.plan!, sesiones)) ??
+    panel.plan.dias[0];
+
+  const bloques: BloqueVista[] = diaSeleccionado.bloques.map((bloque) => {
+    const info = ejercicio(bloque.ejercicioId);
+    const consejo = sugerencia(bloque, sesiones);
+    return {
+      ...bloque,
+      nombre: info?.nombre ?? bloque.ejercicioId,
+      tecnica: info?.tecnica ?? '',
+      sugerencia: consejo.texto,
+      pesoSugerido: consejo.pesoKg,
+      esIsometrico: esIsometrico(bloque.ejercicioId),
+    };
+  });
+
+  const datosPerfil = perfilEntreno(perfil);
+  const desactualizado = datosPerfil ? planDesactualizado(panel.plan, datosPerfil) : false;
+  const volumen = volumenSemanal(panel.plan);
+  const maxVolumen = Math.max(...volumen.map((v) => v.series), 1);
+
+  return (
+    <main className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h1>Entreno</h1>
+        <Insignia>{panel.plan.dias.length} dias/semana</Insignia>
+      </div>
+
+      {desactualizado && (
+        <Tarjeta className="border-amber-500/40">
+          <p className="mb-2 text-sm">
+            Has cambiado datos del perfil que afectan a la rutina. ¿Regenero el plan?
+          </p>
+          <form action={regenerarPlan}>
+            <Boton type="submit" variante="secundario" tamano="sm">Regenerar plan</Boton>
+          </form>
+        </Tarjeta>
+      )}
+
+      <div className="desplazable-x">
+        <div className="flex min-w-max gap-2 pb-1">
+          {panel.plan.dias.map((dia) => (
+            <Link key={dia.id} href={`/app/entreno?dia=${dia.id}`} scroll={false}>
+              <span
+                className={`inline-block rounded-full border px-3 py-1.5 text-xs ${
+                  dia.id === diaSeleccionado.id
+                    ? 'border-transparent bg-primary text-primary-foreground'
+                    : 'border-border text-muted-foreground'
+                }`}
+              >
+                {dia.nombre.replace('Dia ', 'D')}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2>{diaSeleccionado.nombre}</h2>
+        <p className="text-sm text-muted-foreground">{diaSeleccionado.foco}</p>
+      </div>
+
+      <RegistroEntreno diaId={diaSeleccionado.id} nombre={diaSeleccionado.nombre} bloques={bloques} />
+
+      {diaSeleccionado.cardio && (
+        <Tarjeta>
+          <TituloTarjeta>Cardio</TituloTarjeta>
+          <p className="text-sm text-muted-foreground">{diaSeleccionado.cardio}</p>
+        </Tarjeta>
+      )}
+
+      <Tarjeta>
+        <TituloTarjeta>Volumen semanal por musculo</TituloTarjeta>
+        <ul className="space-y-1.5">
+          {volumen.map((v) => (
+            <li key={v.musculo} className="flex items-center gap-3 text-sm">
+              <span className="w-24 shrink-0 capitalize text-muted-foreground">{v.musculo}</span>
+              <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
+                <span
+                  className="block h-full rounded-full bg-[hsl(var(--area-fitness))]"
+                  style={{ width: `${(v.series / maxVolumen) * 100}%` }}
+                />
+              </span>
+              <span className="w-6 text-right tabular-nums">{v.series}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Entre 10 y 20 series semanales por grupo muscular es donde casi todo el mundo progresa.
+        </p>
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Como funciona el plan</TituloTarjeta>
+        <ul className="space-y-2 text-sm text-muted-foreground">
+          {panel.plan.notas.map((nota) => (
+            <li key={nota}>· {nota}</li>
+          ))}
+        </ul>
+        <form action={regenerarPlan} className="mt-4">
+          <Boton type="submit" variante="contorno" className="w-full">Regenerar plan desde cero</Boton>
+        </form>
+      </Tarjeta>
+    </main>
+  );
+}

@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+
+    --background: 225 40% 7%;
+    --foreground: 220 40% 96%;
+    --card: 225 32% 13%;
+    --card-foreground: 220 40% 96%;
+    --muted: 225 25% 18%;
+    --muted-foreground: 222 18% 68%;
+    --primary: 250 90% 68%;
+    --primary-foreground: 250 40% 10%;
+    --secondary: 225 25% 18%;
+    --secondary-foreground: 220 40% 96%;
+    --accent: 250 60% 22%;
+    --accent-foreground: 220 40% 96%;
+    --destructive: 0 72% 62%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 226 25% 22%;
+    --input: 226 25% 22%;
+    --ring: 250 90% 68%;
+    --radius: 0.9rem;
+
+    /* Paleta categorica por area, validada para esta superficie oscura
+       (banda de luminosidad, croma, separacion CVD y contraste >= 3:1). */
+    --area-cuerpo: 212 76% 56%;    /* #3987e5 */
+    --area-fitness: 17 70% 50%;    /* #d95926 */
+    --area-foco: 162 73% 36%;      /* #199e70 */
+    --area-mente: 39 100% 39%;     /* #c98500 */
+    --area-habitos: 340 62% 58%;   /* #d55181 */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: radial-gradient(900px 500px at 50% -25%, hsl(250 60% 24% / 0.5) 0%, transparent 60%);
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1 { @apply text-2xl font-semibold tracking-tight; }
+  h2 { @apply text-lg font-semibold tracking-tight; }
+}
+
+@layer components {
+  .etiqueta-seccion {
+    @apply text-xs uppercase tracking-widest text-muted-foreground;
+  }
+  .desplazable-x {
+    @apply overflow-x-auto;
+    scrollbar-width: thin;
+  }
+}
