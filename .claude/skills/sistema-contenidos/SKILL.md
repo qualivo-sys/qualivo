@@ -48,6 +48,13 @@ Paleta de los creativos = la de maikelechevarria.com: crema #F2EEE6,
 tinta #0A0A0B, NARANJA #E8590C como acento principal (#FF7A33 en fondos
 oscuros, #C2410C oscuro, #FBE896 amarillo palido puntual). Nada de teal
 en redes (el teal es de la web de Qualivo).
+ALTITUD DE LOS TEMAS (correccion Maikel 2-sep): somos CONSULTORA DE
+GROWTH, no comerciales. Los carruseles hablan de crecimiento a nivel
+estrategico: sistema vs esfuerzo, palancas del crecimiento, dependencia
+de un canal, decisiones con datos vs opiniones, el techo de facturacion,
+economia del crecimiento. La operativa comercial (leads, CRM, seguimiento,
+presupuestos) solo aparece como ejemplo puntual, nunca como tema central.
+El contrabrief manda: Qualivo vende CONTROL del crecimiento.
 Estetica de imagenes en redes: FOTOGRAFIA REALISTA cinematografica y
 adulta (referencia: carrusel linterna). Nada de dibujos, 3D cartoon ni
 estilo Pixar. El humor va en la situacion, no en el personaje.
