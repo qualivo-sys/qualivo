@@ -36,28 +36,19 @@ export async function cuota(
   return { usados, limite, quedan: Math.max(0, limite - usados), agotada: usados >= limite };
 }
 
+/**
+ * Suma un mensaje al contador del mes. Va por una funcion SQL security definer
+ * (`incrementar_uso`) porque el usuario no tiene permiso de escritura sobre
+ * `uso_ia`: si lo tuviera, podria ponerse el contador a cero y gastar API gratis.
+ */
 export async function anotarUso(
   supabase: SupabaseClient,
-  userId: string,
+  _userId: string,
   tokens: { entrada: number; salida: number },
 ): Promise<void> {
-  const mes = mesActual();
-  const { data } = await supabase
-    .from('uso_ia')
-    .select('mensajes, tokens_entrada, tokens_salida')
-    .eq('user_id', userId)
-    .eq('mes', mes)
-    .maybeSingle();
-
-  await supabase.from('uso_ia').upsert(
-    {
-      user_id: userId,
-      mes,
-      mensajes: (data?.mensajes ?? 0) + 1,
-      tokens_entrada: (data?.tokens_entrada ?? 0) + tokens.entrada,
-      tokens_salida: (data?.tokens_salida ?? 0) + tokens.salida,
-      actualizado: new Date().toISOString(),
-    },
-    { onConflict: 'user_id,mes' },
-  );
+  const { error } = await supabase.rpc('incrementar_uso', {
+    p_tokens_entrada: Math.max(0, Math.round(tokens.entrada)),
+    p_tokens_salida: Math.max(0, Math.round(tokens.salida)),
+  });
+  if (error) console.error('[uso] no se pudo anotar el consumo', error.message);
 }

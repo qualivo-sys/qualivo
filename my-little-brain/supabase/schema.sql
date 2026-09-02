@@ -272,6 +272,12 @@ begin
       execute 'create policy "propio_select" on public.perfiles for select using (auth.uid() = id)';
       execute 'create policy "propio_insert" on public.perfiles for insert with check (auth.uid() = id)';
       execute 'create policy "propio_update" on public.perfiles for update using (auth.uid() = id) with check (auth.uid() = id)';
+
+    -- uso_ia es el contador de consumo: el usuario puede mirarlo, no tocarlo.
+    -- Si pudiera, se pondria los mensajes a cero y consumiria API gratis.
+    elsif t = 'uso_ia' then
+      execute 'create policy "propio_select" on public.uso_ia for select using (auth.uid() = user_id)';
+
     else
       execute format('create policy "propio_select" on public.%I for select using (auth.uid() = user_id)', t);
       execute format('create policy "propio_insert" on public.%I for insert with check (auth.uid() = user_id)', t);
@@ -280,6 +286,63 @@ begin
     end if;
   end loop;
 end $$;
+
+-- ═══════════════════════════════════════════════════════════════════════
+--  Permisos por columna en perfiles
+--
+--  RLS decide QUE FILAS se pueden tocar, pero no QUE COLUMNAS. Sin esto, un
+--  usuario con su propio JWT puede llamar a PostgREST y ponerse plan
+--  'founder' o escribirse el stripe_customer_id de otra persona. El plan y los
+--  identificadores de Stripe solo los escribe el webhook (service role).
+-- ═══════════════════════════════════════════════════════════════════════
+revoke insert, update on public.perfiles from authenticated, anon;
+
+grant insert (id, email, nombre) on public.perfiles to authenticated;
+
+-- Ojo al anadir columnas nuevas que el usuario deba poder editar: hay que
+-- sumarlas aqui, porque por defecto quedan sin permiso de escritura.
+grant update (
+  nombre, sexo, edad, altura_cm, ocupacion,
+  objetivo, objetivos_extra, nivel, dias_semana, entorno, actividad,
+  limitaciones, alergias, preferencias_comida, horario_comidas, alcohol_semanal,
+  hora_dormir, hora_despertar, zona_horaria, onboarding, notas, actualizado
+) on public.perfiles to authenticated;
+
+-- ═══════════════════════════════════════════════════════════════════════
+--  Contador de uso de la IA: solo se puede sumar, nunca restar ni reiniciar
+-- ═══════════════════════════════════════════════════════════════════════
+create or replace function public.incrementar_uso(
+  p_tokens_entrada bigint default 0,
+  p_tokens_salida  bigint default 0
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if auth.uid() is null then
+    raise exception 'Sin sesion';
+  end if;
+
+  insert into public.uso_ia (user_id, mes, mensajes, tokens_entrada, tokens_salida, actualizado)
+  values (
+    auth.uid(),
+    to_char(now() at time zone 'utc', 'YYYY-MM'),
+    1,
+    greatest(coalesce(p_tokens_entrada, 0), 0),
+    greatest(coalesce(p_tokens_salida, 0), 0),
+    now()
+  )
+  on conflict (user_id, mes) do update
+    set mensajes       = uso_ia.mensajes + 1,
+        tokens_entrada = uso_ia.tokens_entrada + greatest(coalesce(p_tokens_entrada, 0), 0),
+        tokens_salida  = uso_ia.tokens_salida + greatest(coalesce(p_tokens_salida, 0), 0),
+        actualizado    = now();
+end $$;
+
+revoke all on function public.incrementar_uso(bigint, bigint) from public, anon;
+grant execute on function public.incrementar_uso(bigint, bigint) to authenticated;
 
 -- ═══════════════════════════════════════════════════════════════════════
 --  Alta automatica de perfil al registrarse

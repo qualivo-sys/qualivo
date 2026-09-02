@@ -195,12 +195,30 @@ tarea recorre a los usuarios Pro con datos de la semana, genera la revision que
 falte y la deja guardada. Va protegida con `CRON_SECRET` y se salta a quien no
 tenga nada registrado, para no gastar llamadas.
 
-### Multiusuario
+### Multiusuario y modelo de seguridad
 
 Cada tabla tiene `user_id` y politicas de RLS `auth.uid() = user_id`; las fotos
-viven en `comidas/<user_id>/…` con la misma regla. El limite de mensajes al
-coach se lleva en `uso_ia` por mes y plan (`free` 40, `pro` 1500, `founder`
-100.000), y se comprueba antes de cada llamada.
+viven en `comidas/<user_id>/…` con la misma regla. Tres decisiones importan mas
+de lo que parece, porque la clave `anon` viaja en el navegador y cualquier
+usuario puede llamar a la API de Supabase directamente con su token:
+
+1. **RLS filtra filas, no columnas.** `perfiles` guarda `plan` y los
+   identificadores de Stripe, asi que la escritura esta cortada por columna:
+   `revoke update on perfiles` y `grant update (…)` solo sobre los campos que el
+   usuario edita de verdad. Sin esto, cualquiera podria ponerse plan `founder` o
+   escribirse el `stripe_customer_id` de otra persona y abrir su portal de
+   facturacion.
+2. **El contador de uso no es dato del usuario.** `uso_ia` tiene politica de
+   solo lectura; se incrementa con la funcion `incrementar_uso`
+   (`security definer`), que solo sabe sumar. Si el usuario pudiera escribir la
+   tabla, se pondria el contador a cero y consumiria API a tu cuenta.
+3. **El plan lo decide Stripe.** Solo el webhook, con service role, escribe
+   `perfiles.plan`. Para regalarte a ti mismo el plan `founder`, hazlo desde el
+   SQL editor de Supabase:
+   `update perfiles set plan = 'founder' where email = 'tu@email.com';`
+
+El limite de mensajes al coach se lleva por mes y plan (`free` 40, `pro` 1500,
+`founder` 100.000) y se comprueba antes de cada llamada.
 
 ---
 
@@ -213,6 +231,13 @@ agregacion diaria, las puntuaciones, el contexto del coach, la progresion de
 cargas, las senales proactivas, los logros, el lector de streaming (incluidos
 bloques partidos entre chunks y bloques corruptos) y el parseo de la revision.
 La portada, el registro y la proteccion de rutas estan comprobados en navegador.
+
+**Revisado en seguridad:** se paso una revision especifica sobre RLS, rutas de
+API, webhook, uso de la service-role key y el ejecutor de herramientas. Salieron
+dos agujeros reales —escalado de plan por columna en `perfiles` y borrado del
+contador `uso_ia`— y los dos estan corregidos en el esquema (ver arriba). Si ya
+habias ejecutado `schema.sql` antes, vuelve a ejecutarlo: es idempotente y
+aplica las dos correcciones.
 
 **Sin verificar en ejecucion:** todo lo que necesita un proyecto de Supabase
 real (login completo, RLS en vivo, subida de fotos) y las llamadas reales a la
