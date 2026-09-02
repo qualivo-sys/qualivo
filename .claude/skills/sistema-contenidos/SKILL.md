@@ -39,6 +39,12 @@ diferenciación, potencial de conversación, potencial de negocio.
 Contenido y outbound comparten inteligencia: las objeciones y reuniones son
 fuente editorial; el contenido publicado es autoridad previa para outbound.
 
+## Identidad en redes sociales (regla de Maikel, 2-sep)
+En redes sociales se publica SIEMPRE con la identidad personal de Maikel
+(firma «Maikel Echevarría» / @maikel.echevarria en los creativos y voz en
+primera persona en los captions). La marca Qualivo nunca firma piezas de
+redes; qualivo.io aparece solo como recurso o CTA dentro del contenido.
+
 ## Convive con
 - `content/contrabrief-qualivo.md` — posicionamiento (fugas = metáfora,
   Qualivo vende CONTROL) y las 6 preguntas de aprobación.
