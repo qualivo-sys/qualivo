@@ -101,6 +101,53 @@ const bloque = { ejercicioId: 'press_banca', rol: 'principal', series: 3, repMin
 const consejo = sugerencia(bloque, sesiones);
 check('propone subir peso tras cerrar el rango', consejo.tipo === 'subir' && consejo.pesoKg === 82.5, consejo.texto);
 
+// ── 5b. Señales proactivas y logros ────────────────────────────────────
+const { senales } = await import(`${L}/motor/senales.js`);
+const { logros } = await import(`${L}/motor/logros.js`);
+
+const lecturas = senales({
+  dias: panel.dias, hoy: hoy(), objetivoEntrenos: 4,
+  metaKcal: panel.metas.kcal, metaProteina: panel.metas.proteinaG,
+  tendenciaPeso: null, ritmoObjetivo: panel.metas.ritmoKgSemana, racha: panel.racha,
+});
+check('detecta que duerme poco', lecturas.some((s) => s.id === 'sueno_corto'),
+  lecturas.map((s) => s.id).join(', '));
+check('las senales vienen ordenadas por peso',
+  lecturas.every((s, i) => i === 0 || lecturas[i - 1].peso >= s.peso));
+
+const sinDatos = senales({
+  dias: panel.dias.map((d) => ({ ...d, comidas: 0, kcal: 0, entreno: false, focoMin: 0, animo: null, suenoHoras: null, alcoholUd: 0 })),
+  hoy: hoy(), objetivoEntrenos: 4, metaKcal: 2000, metaProteina: 150,
+  tendenciaPeso: null, ritmoObjetivo: -0.5, racha: 0,
+});
+check('avisa cuando lleva dias sin registrar', sinDatos.some((s) => s.id === 'sin_registrar'));
+
+const insignias = logros({
+  dias: panel.dias, racha: panel.racha, entrenosTotales: 1, comidasTotales: 1,
+  tonelajeTotal: 1920, revisiones: 0, pesajes: 1,
+});
+check('los logros se calculan con progreso acotado',
+  insignias.length === 9 && insignias.every((l) => l.progreso >= 0 && l.progreso <= 1));
+check('el primer logro ya esta conseguido', insignias[0].conseguido === true);
+
+// ── 5c. Lectura del streaming del coach ────────────────────────────────
+const { leerSSE } = await import(`${L}/sse.js`);
+const trozos = [
+  'event: texto\ndata: {"delta":"Apun"}\n\nevent: texto\ndata: {"delta":"tado. "}\n\nev',
+  'ent: accion\ndata: {"herramienta":"registrar_comida","resumen":"Cerveza · 150 kcal","xp":5}\n\n',
+  'event: mal\ndata: {roto\n\nevent: fin\ndata: {"texto":"Apuntado. Manana toca pierna.","acciones":[]}\n\n',
+];
+const flujo = new ReadableStream({
+  start(c) { const e = new TextEncoder(); trozos.forEach((t) => c.enqueue(e.encode(t))); c.close(); },
+});
+const eventos = [];
+for await (const evento of leerSSE(flujo)) eventos.push(evento);
+check('el lector SSE junta los deltas partidos entre chunks',
+  eventos.filter((e) => e.evento === 'texto').map((e) => e.datos.delta).join('') === 'Apuntado. ');
+check('el lector SSE entrega las acciones', eventos.some((e) => e.evento === 'accion' && e.datos.xp === 5));
+check('un bloque corrupto no rompe el resto',
+  eventos[eventos.length - 1].evento === 'fin' && eventos[eventos.length - 1].datos.texto.includes('pierna'));
+
 // ── 6. Revision semanal ────────────────────────────────────────────────
 const stats = estadisticasSemana(panel, panel.dias[panel.dias.length - 1].fecha.slice(0, 8) + '01' > '' ? (await import(`${L}/fechas.js`)).inicioSemana(hoy()) : hoy());
 check('las estadisticas de la semana cuadran', stats.entrenos === 1 && stats.alcoholTotal === 1, `entrenos ${stats.entrenos}, alcohol ${stats.alcoholTotal}`);

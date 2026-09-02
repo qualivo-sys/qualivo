@@ -1,7 +1,7 @@
 import type Anthropic from '@anthropic-ai/sdk';
 import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
-import { BETA_FALLBACK, MODELO, clienteIA, hayClaveIA, textoDe } from '@/lib/ia/cliente';
+import { BETA_FALLBACK, MODELO, clienteIA, hayClaveIA } from '@/lib/ia/cliente';
 import { construirContexto } from '@/lib/ia/contexto';
 import { HERRAMIENTAS, ejecutarHerramienta } from '@/lib/ia/herramientas';
 import { anotarUso, cuota } from '@/lib/ia/limites';
@@ -10,12 +10,16 @@ import { clienteServidor } from '@/lib/supabase/servidor';
 import type { AccionRegistrada } from '@/lib/tipos';
 
 export const runtime = 'nodejs';
-export const maxDuration = 60;
+export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
 
 const MAX_VUELTAS = 6;
 const MENSAJES_HISTORIAL = 16;
 
+/**
+ * Chat del coach. Responde en streaming (SSE) porque en un chat la espera en
+ * blanco se nota mas que el total: eventos `texto`, `accion`, `fin` y `error`.
+ */
 export async function POST(peticion: Request) {
   const supabase = clienteServidor();
   const { data: sesion } = await supabase.auth.getUser();
@@ -37,9 +41,7 @@ export async function POST(peticion: Request) {
   }
 
   const mensaje = (cuerpo.mensaje ?? '').trim();
-  if (!mensaje && !cuerpo.imagen) {
-    return NextResponse.json({ error: 'Mensaje vacio' }, { status: 400 });
-  }
+  if (!mensaje && !cuerpo.imagen) return NextResponse.json({ error: 'Mensaje vacio' }, { status: 400 });
 
   const perfil = await cargarPerfil(supabase, usuario.id);
   if (!perfil) return NextResponse.json({ error: 'Perfil no encontrado' }, { status: 404 });
@@ -52,7 +54,7 @@ export async function POST(peticion: Request) {
     );
   }
 
-  // La foto se guarda en el bucket privado del usuario, ademas de ir al modelo.
+  // La foto va al modelo y ademas se guarda en el bucket privado del usuario.
   let fotoPath: string | null = null;
   if (cuerpo.imagen?.data) {
     try {
@@ -101,96 +103,117 @@ export async function POST(peticion: Request) {
 
   const cliente = clienteIA();
   const ctxHerramientas = { supabase, userId: usuario.id, perfil, hoy: panel.hoy };
-  const acciones: AccionRegistrada[] = [];
-  let tokensEntrada = 0;
-  let tokensSalida = 0;
-  let respuesta = '';
+  const codificador = new TextEncoder();
 
-  try {
-    for (let vuelta = 0; vuelta < MAX_VUELTAS; vuelta++) {
-      const mensajeIa = await cliente.beta.messages.create({
-        model: MODELO,
-        max_tokens: 4096,
-        betas: [BETA_FALLBACK],
-        fallbacks: 'default',
-        output_config: { effort: 'medium' },
-        system: [
-          {
-            type: 'text',
-            text: perfil.onboarding ? PROMPT_COACH : PROMPT_ONBOARDING,
-            cache_control: { type: 'ephemeral' },
-          },
-          { type: 'text', text: `DATOS ACTUALES DEL USUARIO\n${contexto}` },
-        ],
-        tools: HERRAMIENTAS,
-        messages: mensajes,
-      });
+  const flujo = new ReadableStream({
+    async start(controlador) {
+      const acciones: AccionRegistrada[] = [];
+      let tokensEntrada = 0;
+      let tokensSalida = 0;
+      let respuesta = '';
 
-      tokensEntrada += mensajeIa.usage.input_tokens ?? 0;
-      tokensSalida += mensajeIa.usage.output_tokens ?? 0;
+      const enviar = (evento: string, datos: unknown) => {
+        controlador.enqueue(codificador.encode(`event: ${evento}\ndata: ${JSON.stringify(datos)}\n\n`));
+      };
 
-      if (mensajeIa.stop_reason === 'refusal') {
-        respuesta =
-          'No puedo ayudarte con eso. Si es algo de salud delicado, mejor con un profesional; para cualquier otra cosa, dime y seguimos.';
-        break;
-      }
+      try {
+        for (let vuelta = 0; vuelta < MAX_VUELTAS; vuelta++) {
+          const emision = cliente.beta.messages.stream({
+            model: MODELO,
+            max_tokens: 4096,
+            betas: [BETA_FALLBACK],
+            fallbacks: 'default',
+            output_config: { effort: 'medium' },
+            system: [
+              {
+                type: 'text',
+                text: perfil.onboarding ? PROMPT_COACH : PROMPT_ONBOARDING,
+                cache_control: { type: 'ephemeral' },
+              },
+              { type: 'text', text: `DATOS ACTUALES DEL USUARIO\n${contexto}` },
+            ],
+            tools: HERRAMIENTAS,
+            messages: mensajes,
+          });
 
-      const texto = textoDe(mensajeIa);
-      if (texto) respuesta = texto;
+          emision.on('text', (delta) => {
+            respuesta += delta;
+            enviar('texto', { delta });
+          });
 
-      const llamadas = mensajeIa.content.filter(
-        (b): b is Anthropic.Beta.Messages.BetaToolUseBlock => b.type === 'tool_use',
-      );
-      if (!llamadas.length) break;
+          const mensajeIa = await emision.finalMessage();
+          tokensEntrada += mensajeIa.usage.input_tokens ?? 0;
+          tokensSalida += mensajeIa.usage.output_tokens ?? 0;
 
-      mensajes.push({ role: 'assistant', content: mensajeIa.content });
+          if (mensajeIa.stop_reason === 'refusal') {
+            const aviso =
+              'No puedo ayudarte con eso. Si es algo de salud delicado, mejor con un profesional; para cualquier otra cosa, dime y seguimos.';
+            respuesta = aviso;
+            enviar('texto', { delta: aviso });
+            break;
+          }
 
-      const resultados: Anthropic.Beta.Messages.BetaToolResultBlockParam[] = [];
-      for (const llamada of llamadas) {
-        const resultado = await ejecutarHerramienta(llamada.name, llamada.input, ctxHerramientas);
-        if (resultado.accion) acciones.push(resultado.accion);
-        resultados.push({
-          type: 'tool_result',
-          tool_use_id: llamada.id,
-          content: resultado.texto,
+          const llamadas = mensajeIa.content.filter(
+            (b): b is Anthropic.Beta.Messages.BetaToolUseBlock => b.type === 'tool_use',
+          );
+          if (!llamadas.length) break;
+
+          mensajes.push({ role: 'assistant', content: mensajeIa.content });
+
+          const resultados: Anthropic.Beta.Messages.BetaToolResultBlockParam[] = [];
+          for (const llamada of llamadas) {
+            const resultado = await ejecutarHerramienta(llamada.name, llamada.input, ctxHerramientas);
+            if (resultado.accion) {
+              acciones.push(resultado.accion);
+              enviar('accion', resultado.accion);
+            }
+            resultados.push({ type: 'tool_result', tool_use_id: llamada.id, content: resultado.texto });
+          }
+          mensajes.push({ role: 'user', content: resultados });
+        }
+
+        if (!respuesta.trim()) respuesta = 'Apuntado.';
+
+        if (fotoPath && acciones.some((a) => a.herramienta === 'registrar_comida')) {
+          const { data: ultima } = await supabase
+            .from('comidas')
+            .select('id')
+            .eq('user_id', usuario.id)
+            .order('creado', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+          if (ultima) {
+            await supabase.from('comidas').update({ foto_path: fotoPath, fuente: 'foto' }).eq('id', ultima.id);
+          }
+        }
+
+        await supabase.from('chat_mensajes').insert([
+          { user_id: usuario.id, rol: 'user', texto: mensaje || '[foto de comida]' },
+          { user_id: usuario.id, rol: 'assistant', texto: respuesta, acciones },
+        ]);
+        await anotarUso(supabase, usuario.id, { entrada: tokensEntrada, salida: tokensSalida });
+
+        enviar('fin', {
+          texto: respuesta,
+          acciones,
+          xp: acciones.reduce((total, a) => total + (a.xp ?? 0), 0),
+          cuota: { ...estado, usados: estado.usados + 1, quedan: Math.max(0, estado.quedan - 1) },
         });
+      } catch (error) {
+        console.error('[coach] error durante la conversacion', error);
+        enviar('error', { error: 'El coach se ha quedado a medias. Reintenta en un momento.' });
+      } finally {
+        controlador.close();
       }
-      mensajes.push({ role: 'user', content: resultados });
-    }
-  } catch (error) {
-    console.error('[coach] error llamando a la API de Claude', error);
-    return NextResponse.json(
-      { error: 'El coach no ha podido responder. Reintenta en un momento.' },
-      { status: 502 },
-    );
-  }
+    },
+  });
 
-  if (!respuesta) respuesta = 'Apuntado.';
-
-  // Si habia foto, la enganchamos a la ultima comida registrada.
-  if (fotoPath && acciones.some((a) => a.herramienta === 'registrar_comida')) {
-    const { data: ultima } = await supabase
-      .from('comidas')
-      .select('id')
-      .eq('user_id', usuario.id)
-      .order('creado', { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (ultima) {
-      await supabase.from('comidas').update({ foto_path: fotoPath, fuente: 'foto' }).eq('id', ultima.id);
-    }
-  }
-
-  await supabase.from('chat_mensajes').insert([
-    { user_id: usuario.id, rol: 'user', texto: mensaje || '[foto de comida]' },
-    { user_id: usuario.id, rol: 'assistant', texto: respuesta, acciones },
-  ]);
-  await anotarUso(supabase, usuario.id, { entrada: tokensEntrada, salida: tokensSalida });
-
-  return NextResponse.json({
-    texto: respuesta,
-    acciones,
-    xp: acciones.reduce((total, a) => total + (a.xp ?? 0), 0),
-    cuota: { ...estado, usados: estado.usados + 1, quedan: Math.max(0, estado.quedan - 1) },
+  return new Response(flujo, {
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache, no-transform',
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no',
+    },
   });
 }

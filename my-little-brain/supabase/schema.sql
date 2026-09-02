@@ -28,11 +28,18 @@ create table if not exists public.perfiles (
   hora_despertar      text,
   zona_horaria        text not null default 'Europe/Madrid',
   plan                text not null default 'free' check (plan in ('free','pro','founder')),
+  stripe_customer_id     text,
+  stripe_subscription_id text,
   onboarding          boolean not null default false,
   notas               text,
   creado              timestamptz not null default now(),
   actualizado         timestamptz not null default now()
 );
+
+-- Instalaciones anteriores: anadir las columnas de Stripe si faltan.
+alter table public.perfiles add column if not exists stripe_customer_id text;
+alter table public.perfiles add column if not exists stripe_subscription_id text;
+create index if not exists perfiles_stripe_customer on public.perfiles (stripe_customer_id);
 
 -- ── Cuerpo ─────────────────────────────────────────────────────────────
 create table if not exists public.metricas_corporales (

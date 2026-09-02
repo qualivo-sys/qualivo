@@ -24,7 +24,9 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Foco** | Trabajo profundo, negocio, aprendizaje, idiomas y lectura. |
 | **Mente** | Sueno, animo, energia, estres y motivacion. |
 | **Habitos** | Habitos con objetivo semanal, rachas, XP y niveles. |
-| **Revision semanal** | El informe de los domingos: puntuaciones, patrones, cuello de botella y tres acciones para la semana siguiente. |
+| **Revision semanal** | El informe de los domingos: puntuaciones, patrones, cuello de botella y tres acciones para la semana siguiente. Se genera sola cada domingo para los usuarios Pro. |
+| **Check-in diario** | Manana (sueno, animo, energia, peso) y noche (foco, pasos, notas), en dos formularios de diez segundos. |
+| **Progreso** | Logros, constancia por semana, horas de foco, peso, grasa, sueno y animo. |
 
 ### Lo que lo diferencia de un tracker
 
@@ -40,6 +42,12 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 4. **Memoria a largo plazo.** Lo que cuentas una vez (una lesion, que odias el
    pescado, que viajas los martes) se guarda y condiciona todo lo que viene
    despues.
+5. **Lecturas gratis, sin llamar al modelo.** El panel saca solo sus propias
+   conclusiones —"duermes 5,8 h y tus dias cortos rinden un 40% menos de foco",
+   "llevas 4 dias sin entrenar", "alcohol 3 de los ultimos 7 dias"— con datos y
+   una accion concreta. Cuestan cero y siempre son ciertas.
+6. **El chat responde escribiendo.** Streaming token a token y las acciones
+   ejecutadas van apareciendo bajo la respuesta segun se guardan.
 
 ---
 
@@ -69,8 +77,12 @@ cp .env.example .env.local
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | si | Proyecto de Supabase. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | si | Clave publica de Supabase (RLS protege los datos). |
+| `SUPABASE_SERVICE_ROLE_KEY` | para pagos y cron | Se salta RLS. Solo servidor: webhook de Stripe y tarea del domingo. |
 | `ANTHROPIC_API_KEY` | para el coach | Sin ella el resto de la app funciona; el chat avisa. |
 | `ANTHROPIC_MODEL` | no | Por defecto `claude-opus-5`. |
+| `STRIPE_SECRET_KEY`, `STRIPE_PRICE_PRO`, `STRIPE_WEBHOOK_SECRET` | para cobrar | Sin ellas la app no ofrece pagar. |
+| `NEXT_PUBLIC_SITE_URL` | no | URL publica, para las vueltas de Stripe. En Vercel se deduce. |
+| `CRON_SECRET` | para el cron | Cadena aleatoria; Vercel la manda como Bearer. |
 
 ### 4. Local y despliegue
 
@@ -96,7 +108,9 @@ src/
     auth/callback/              Vuelta del email de confirmacion
     app/
       page.tsx                  Panel del dia: puntuaciones, metas, habitos, entreno
-      coach/                    Chat con el coach
+      coach/                    Chat con el coach (streaming)
+      checkin/                  Check-in de manana y de noche
+      progreso/                 Logros, constancia y graficas
       onboarding/               Alta conversacional (sin formularios)
       entreno/                  Plan + registro de sesion con progresion
       cuerpo/                   Peso, medidas, comidas del dia y graficas
@@ -106,6 +120,8 @@ src/
       acciones.ts               Server actions (toda la escritura desde la UI)
     api/coach/                  Chat con herramientas (el corazon del producto)
     api/revision/               Generacion de la revision semanal
+    api/pago/                   Stripe: checkout, portal y webhook
+    api/cron/revision/          Tarea de los domingos (Vercel Cron)
   lib/
     motor/                      Dominio puro, sin dependencias externas
       ejercicios.ts             Catalogo (~55 ejercicios con patron, material y tecnica)
@@ -114,6 +130,8 @@ src/
       nutricion.ts              Mifflin-St Jeor, macros y ajuste por tendencia
       cuerpo.ts                 IMC, grasa US Navy, tendencia de peso
       puntuaciones.ts           Agregacion diaria, notas por area, XP y correlaciones
+      senales.ts                Lecturas proactivas calculadas sin IA
+      logros.ts                 Logros derivados de los datos
     ia/
       prompt.ts                 Personalidad y reglas del coach
       herramientas.ts           Las 13 herramientas que puede usar (y su ejecucion)
@@ -121,6 +139,8 @@ src/
       revision.ts               Estadisticas de la semana y prompt de la revision
       limites.ts                Cuota de mensajes por plan
     datos.ts                    Carga unica del panel (una sola fuente de verdad)
+    pago.ts                     Stripe (cliente y helpers)
+    sse.ts                      Lector de Server-Sent Events del chat
     supabase/                   Clientes de navegador y servidor
 supabase/schema.sql             Tablas, RLS, trigger de alta y bucket de fotos
 pruebas/humo.mjs                Prueba de humo del dominio con un Supabase falso
@@ -143,8 +163,9 @@ pruebas/humo.mjs                Prueba de humo del dominio con un Supabase falso
   asi que las politicas de RLS siguen mandando aunque el modelo se equivoque.
 - **Fallbacks** (`fallbacks: "default"`): si los clasificadores declinan una
   peticion, la API la reintenta sola en otro modelo dentro de la misma llamada.
-- **Efecto en la UI**: cada mensaje devuelve las acciones ejecutadas y el XP
-  ganado, y se pintan bajo la respuesta.
+- **Streaming (SSE)**: la respuesta se emite token a token con eventos `texto`,
+  `accion`, `fin` y `error`. Las acciones aparecen bajo el mensaje segun se
+  guardan, con el XP ganado.
 
 El alta usa el mismo motor con otro prompt: pregunta de una en una, va guardando
 el perfil segun se lo cuentas y termina generando el plan.
@@ -155,6 +176,24 @@ el perfil segun se lo cuentas y termina generando el plan.
 (adherencia, medias, alcohol, sueno, correlaciones) y le pide al modelo que las
 **interprete** y senale el cuello de botella. La respuesta se guarda en
 `revisiones` y se puede regenerar.
+
+### Cobro (Stripe)
+
+`POST /api/pago/checkout` abre la sesion de Stripe Checkout con el `user_id` en
+los metadatos; `POST /api/pago/portal` abre el portal de facturacion. El
+**webhook** (`/api/pago/webhook`) verifica la firma con el cuerpo crudo y es la
+unica fuente de verdad del plan: escribe `perfiles.plan` con service role al
+completarse el pago y al actualizarse o cancelarse la suscripcion. Si las
+variables de Stripe no estan, la app simplemente no ofrece pagar.
+
+Para probarlo en local: `stripe listen --forward-to localhost:3000/api/pago/webhook`.
+
+### La revision automatica de los domingos
+
+`vercel.json` programa `/api/cron/revision` los domingos a las 07:00 UTC. La
+tarea recorre a los usuarios Pro con datos de la semana, genera la revision que
+falte y la deja guardada. Va protegida con `CRON_SECRET` y se salta a quien no
+tenga nada registrado, para no gastar llamadas.
 
 ### Multiusuario
 
@@ -171,18 +210,18 @@ coach se lleva en `uso_ia` por mes y plan (`free` 40, `pro` 1500, `founder`
 escriben donde deben, el emparejamiento de ejercicios por nombre libre, el plan
 que excluye ejercicios segun las lesiones, el calculo de calorias y grasa, la
 agregacion diaria, las puntuaciones, el contexto del coach, la progresion de
-cargas y el parseo de la revision. La portada, el registro y la proteccion de
-rutas estan comprobados en navegador.
+cargas, las senales proactivas, los logros, el lector de streaming (incluidos
+bloques partidos entre chunks y bloques corruptos) y el parseo de la revision.
+La portada, el registro y la proteccion de rutas estan comprobados en navegador.
 
 **Sin verificar en ejecucion:** todo lo que necesita un proyecto de Supabase
 real (login completo, RLS en vivo, subida de fotos) y las llamadas reales a la
 API de Claude. El codigo compila y esta cubierto por las pruebas, pero la
 primera vez conviene hacer el recorrido completo con datos reales.
 
-**Aun no esta hecho:** cobro con Stripe (la estructura de planes y el limite de
-uso ya estan; falta el checkout y el webhook que cambie `perfiles.plan`),
-lectura de codigos de barras, integracion con wearables y envio automatico de la
-revision del domingo (hoy se genera con un boton).
+**Aun no esta hecho:** lectura de codigos de barras, integracion con wearables,
+notificaciones push, modo offline con cola de sincronizacion y avisos por email.
+La revision del domingo se genera sola pero no se notifica: aparece en la app.
 
 ---
 

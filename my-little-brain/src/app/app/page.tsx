@@ -1,4 +1,4 @@
-import { ArrowRight, Flame, MessageCircle } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Flame, Info, MessageCircle, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
@@ -8,6 +8,7 @@ import { cargarPanel } from '@/lib/datos';
 import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { proximoDia } from '@/lib/motor/progresion';
+import { senales } from '@/lib/motor/senales';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -43,6 +44,17 @@ export default async function PanelHoy() {
     ? panel.plan.dias.find((d) => d.id === proximoDia(panel.plan!, sesionesMotor)) ?? panel.plan.dias[0]
     : null;
 
+  const lecturas = senales({
+    dias: panel.dias,
+    hoy: panel.hoy,
+    objetivoEntrenos: perfil.dias_semana ?? 3,
+    metaKcal: metas?.kcal ?? null,
+    metaProteina: metas?.proteinaG ?? null,
+    tendenciaPeso: cuerpo.tendencia,
+    ritmoObjetivo: metas?.ritmoKgSemana ?? null,
+    racha: panel.racha,
+  }).slice(0, 3);
+
   const habitosHechos = panel.registrosHabitos
     .filter((r) => r.fecha === panel.hoy && r.hecho)
     .map((r) => r.habito_id);
@@ -69,6 +81,25 @@ export default async function PanelHoy() {
           <Barra valor={panel.progreso.porcentaje} />
         </div>
       </section>
+
+      <nav aria-label="Atajos" className="desplazable-x">
+        <div className="flex min-w-max gap-2">
+          {[
+            { href: '/app/checkin', etiqueta: '✍️ Check-in' },
+            { href: '/app/habitos', etiqueta: '✅ Habitos' },
+            { href: '/app/progreso', etiqueta: '📈 Progreso' },
+            { href: '/app/coach', etiqueta: '💬 Coach' },
+          ].map((atajo) => (
+            <Link
+              key={atajo.href}
+              href={atajo.href}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
+            >
+              {atajo.etiqueta}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       <Tarjeta>
         <div className="mb-3 flex items-baseline justify-between">
@@ -142,6 +173,40 @@ export default async function PanelHoy() {
           </div>
         </div>
       </Tarjeta>
+
+      {lecturas.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="etiqueta-seccion">Lo que veo</h2>
+          {lecturas.map((senal) => {
+            const Icono =
+              senal.tono === 'bien' ? CheckCircle2 : senal.tono === 'alerta' ? AlertTriangle : senal.tono === 'aviso' ? TrendingDown : Info;
+            const color =
+              senal.tono === 'bien'
+                ? 'border-emerald-500/40 text-emerald-400'
+                : senal.tono === 'alerta'
+                  ? 'border-destructive/40 text-destructive'
+                  : senal.tono === 'aviso'
+                    ? 'border-amber-500/40 text-amber-400'
+                    : 'border-border text-muted-foreground';
+            return (
+              <Tarjeta key={senal.id} className={color.split(' ')[0]}>
+                <div className="flex gap-3">
+                  <Icono size={18} className={`mt-0.5 shrink-0 ${color.split(' ')[1]}`} />
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold text-foreground">{senal.titulo}</p>
+                    <p className="mt-0.5 text-sm text-muted-foreground">{senal.detalle}</p>
+                    {senal.accion && (
+                      <Link href={senal.accion.href} className="mt-2 inline-block text-sm text-primary underline">
+                        {senal.accion.texto}
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </Tarjeta>
+            );
+          })}
+        </section>
+      )}
 
       {ajuste && ajuste.estado !== 'sin_datos' && (
         <Tarjeta className={ajuste.estado === 'ok' ? 'border-emerald-500/40' : 'border-amber-500/40'}>

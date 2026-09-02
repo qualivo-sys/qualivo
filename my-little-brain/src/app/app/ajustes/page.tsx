@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { cerrarSesion, guardarPerfil } from '@/app/app/acciones';
+import PlanSuscripcion from '@/components/plan-suscripcion';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
-import { cuota } from '@/lib/ia/limites';
+import { LIMITE_MENSAJES, cuota } from '@/lib/ia/limites';
+import { hayPagos } from '@/lib/pago';
 import { ETIQUETA_OBJETIVO } from '@/lib/perfil';
 import { sesionRequerida } from '@/lib/sesion';
 import type { Limitacion } from '@/lib/tipos';
@@ -16,7 +18,11 @@ const LIMITACIONES: { valor: Limitacion; etiqueta: string }[] = [
   { valor: 'cadera', etiqueta: 'Cadera' },
 ];
 
-export default async function PaginaAjustes() {
+export default async function PaginaAjustes({
+  searchParams,
+}: {
+  searchParams: { pago?: string };
+}) {
   const { supabase, usuario, perfil } = await sesionRequerida({ permitirSinAlta: true });
   const estado = await cuota(supabase, usuario.id, perfil.plan);
 
@@ -24,8 +30,19 @@ export default async function PaginaAjustes() {
     <main className="space-y-4">
       <h1>Ajustes</h1>
 
+      {searchParams.pago === 'ok' && (
+        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
+          Pago confirmado. Si el plan tarda unos segundos en actualizarse, recarga la pagina.
+        </p>
+      )}
+      {searchParams.pago === 'cancelado' && (
+        <p className="rounded-lg bg-muted px-3 py-2 text-sm text-muted-foreground">
+          Has salido del pago sin completarlo. Sigues en tu plan actual.
+        </p>
+      )}
+
       <Tarjeta>
-        <div className="flex items-center justify-between">
+        <div className="mb-3 flex items-center justify-between">
           <div>
             <TituloTarjeta className="mb-0">Tu plan</TituloTarjeta>
             <p className="text-sm text-muted-foreground">
@@ -34,6 +51,13 @@ export default async function PaginaAjustes() {
           </div>
           <Insignia tono={perfil.plan === 'free' ? 'neutro' : 'marca'}>{perfil.plan}</Insignia>
         </div>
+        {perfil.plan === 'free' && (
+          <p className="mb-3 text-sm text-muted-foreground">
+            Pro sube a {LIMITE_MENSAJES.pro} mensajes al mes, fotos de comida sin limite y
+            revision semanal automatica cada domingo.
+          </p>
+        )}
+        <PlanSuscripcion plan={perfil.plan} pagosActivos={hayPagos()} />
       </Tarjeta>
 
       <Tarjeta>

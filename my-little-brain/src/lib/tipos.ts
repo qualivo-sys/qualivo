@@ -35,6 +35,8 @@ export interface Perfil {
   hora_despertar: string | null;
   zona_horaria: string;
   plan: Plan;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
   onboarding: boolean;
   notas: string | null;
   creado: string;

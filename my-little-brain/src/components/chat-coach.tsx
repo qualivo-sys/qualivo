@@ -4,6 +4,7 @@ import { Camera, Loader2, Send, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Boton } from '@/components/ui/base';
+import { leerSSE } from '@/lib/sse';
 import type { AccionRegistrada, MensajeChat } from '@/lib/tipos';
 import { cn } from '@/lib/utils';
 
@@ -49,10 +50,16 @@ export default function ChatCoach({
     setError('');
     setEnviando(true);
     setBorrador('');
+
+    const idRespuesta = `ia-${Date.now()}`;
     setMensajes((previos) => [
       ...previos,
       { id: `local-${Date.now()}`, rol: 'user', texto: texto || '📷 Foto de comida', acciones: [] },
+      { id: idRespuesta, rol: 'assistant', texto: '', acciones: [] },
     ]);
+
+    const actualizar = (cambio: (burbuja: Burbuja) => Burbuja) =>
+      setMensajes((previos) => previos.map((m) => (m.id === idRespuesta ? cambio(m) : m)));
 
     try {
       const respuesta = await fetch('/api/coach', {
@@ -60,20 +67,31 @@ export default function ChatCoach({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mensaje: texto, imagen }),
       });
-      const datos = await respuesta.json();
 
-      if (!respuesta.ok) {
+      // Los errores (cuota, sesion, configuracion) llegan como JSON, no como stream.
+      if (!respuesta.ok || !respuesta.body) {
+        const datos = await respuesta.json().catch(() => ({}));
         setError(datos.error ?? 'El coach no ha podido responder.');
+        setMensajes((previos) => previos.filter((m) => m.id !== idRespuesta));
         return;
       }
 
-      setMensajes((previos) => [
-        ...previos,
-        { id: `ia-${Date.now()}`, rol: 'assistant', texto: datos.texto, acciones: datos.acciones ?? [] },
-      ]);
-      router.refresh();
+      for await (const { evento, datos } of leerSSE(respuesta.body)) {
+        const carga = datos as { delta?: string; texto?: string; acciones?: AccionRegistrada[]; error?: string };
+
+        if (evento === 'texto' && carga.delta) {
+          actualizar((m) => ({ ...m, texto: m.texto + carga.delta }));
+        } else if (evento === 'accion') {
+          actualizar((m) => ({ ...m, acciones: [...m.acciones, datos as AccionRegistrada] }));
+        } else if (evento === 'error') {
+          setError(carga.error ?? 'El coach se ha quedado a medias.');
+        } else if (evento === 'fin') {
+          actualizar((m) => ({ ...m, texto: carga.texto ?? m.texto, acciones: carga.acciones ?? m.acciones }));
+          router.refresh();
+        }
+      }
     } catch {
-      setError('No hay conexion con el servidor. Reintenta.');
+      setError('Se ha cortado la conexion. Lo que te haya confirmado ya esta guardado.');
     } finally {
       setEnviando(false);
     }
@@ -130,7 +148,7 @@ export default function ChatCoach({
           </div>
         ))}
 
-        {enviando && (
+        {enviando && !mensajes[mensajes.length - 1]?.texto && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 size={15} className="animate-spin" /> Pensando…
           </div>
