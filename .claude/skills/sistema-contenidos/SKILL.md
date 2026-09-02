@@ -48,6 +48,9 @@ Paleta de los creativos = la de maikelechevarria.com: crema #F2EEE6,
 tinta #0A0A0B, NARANJA #E8590C como acento principal (#FF7A33 en fondos
 oscuros, #C2410C oscuro, #FBE896 amarillo palido puntual). Nada de teal
 en redes (el teal es de la web de Qualivo).
+Estetica de imagenes en redes: FOTOGRAFIA REALISTA cinematografica y
+adulta (referencia: carrusel linterna). Nada de dibujos, 3D cartoon ni
+estilo Pixar. El humor va en la situacion, no en el personaje.
 Lenguaje en redes: PROHIBIDA la raya larga (—) y el punto y coma; delatan
 IA. Frases cortas y directas, como habla Maikel. Parentesis o punto y
 seguido en su lugar. Cada carrusel ataca UN dolor NUEVO: consultar el mapa
