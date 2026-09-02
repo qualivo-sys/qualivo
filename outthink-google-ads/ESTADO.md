@@ -300,3 +300,40 @@ El panel de KPIs mostraba ceros. Dos causas, ambas mías:
 Panel verificado: 1 registro · CPL 99,42 € · 99,42 € invertidos (5%) · proyección 13 ·
 23 días restantes. Nota: al deduplicar a mano hay que leer siempre con
 `valueRenderOption=UNFORMATTED_VALUE`; el nodo de n8n sí escribe tipos correctos.
+
+## Día 3 (02-09) — PMax de prueba con el presupuesto de Remarketing
+
+Acumulado a mediodía: 113 € (5,7 %), 137 clics, 1 registro (Search/EventosIA, escritorio).
+Search pierde el 39 % de impresiones por presupuesto; DG Prospecting 106 clics / 0 registros;
+Remarketing sin servir (16 usuarios en lista, necesita ~1.000).
+
+Propuse mover los 16,67 €/día de Remarketing a Search. **Decisión de Maikel: probar PMax
+con ese presupuesto, a Maximizar conversiones.** Ejecutado con `api/create_pmax.py`:
+
+- `OT26_DemandGen_Remarketing` `24193394560` → **PAUSADA** (se reactivará si las listas
+  superan ~1.000 usuarios, improbable antes del evento).
+- **`OT26_PMax_Test` `24210974587`** · presupuesto `15843105114` 16,67 €/día · Maximizar
+  conversiones sin CPA objetivo · 02-09 → 24-09 · Comunidad de Madrid (solo presencia) ·
+  español · **exclusión de marca** por negativas de campaña en frase (`outthink`,
+  `out think`, `adigital`) para que no se coma a Search/Marca.
+- Sin expansión de URL final ni automatizaciones generativas (texto, vídeos mejorados,
+  mejoras/extracción/versiones de imagen): solo creatividades y copies validados.
+- Grupo de recursos `OT26_AG_AIAct` `6744460423`: 9 titulares (≤30), 4 titulares largos,
+  4 descripciones, imágenes P1/P2/P3/P5/R1 (horizontal), P1/P2/P3/P5/C5 (cuadrada),
+  P1/P2/P5/C5 (vertical). Nombre de empresa y logo van como CampaignAsset (Brand
+  Guidelines viene activado por defecto en PMax). Señales: audiencia
+  `OT26_AUD_ComplianceLegal` + 10 temas de búsqueda del brief.
+- Estado al crearla: grupo en revisión (`ASSET_GROUP_UNDER_REVIEW`), puja en aprendizaje.
+
+**Criterio de corte acordado:** si a los 100 € gastados no hay ningún registro, se pausa y el
+presupuesto vuelve a Search. Se juzga por registros totales de la cuenta, no solo por los
+que se atribuya PMax.
+
+Aprendizajes de API v25 para PMax: `urlExpansionOptOut` ya no existe (se controla con
+`FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION`); los únicos opt-outs admitidos a nivel de
+campaña son expansión de URL, texto, vídeos mejorados y los tres de imagen; titulares y
+descripciones deben crearse en un mutate previo (la validación del grupo es incremental y
+rechaza recursos temporales para esos dos tipos).
+
+Pendiente que sigue sobre la mesa: ajuste −30 % en móvil en Search (no ejecutado, sin
+confirmación) y subir Search de presupuesto si PMax no arranca.
