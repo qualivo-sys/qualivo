@@ -8,8 +8,17 @@ export function hayClaveIA(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
+/**
+ * Las claves "vinculadas a identidad" de la consola de Anthropic exigen decir
+ * en cada peticion en que workspace actuan; las claves clasicas no. Con
+ * ANTHROPIC_WORKSPACE_ID definida se manda el cabecero y valen las dos.
+ */
 export function clienteIA(): Anthropic {
-  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const workspace = process.env.ANTHROPIC_WORKSPACE_ID;
+  return new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    defaultHeaders: workspace ? { 'anthropic-workspace-id': workspace } : undefined,
+  });
 }
 
 /** Modelo por defecto; se puede fijar otro con ANTHROPIC_MODEL. */

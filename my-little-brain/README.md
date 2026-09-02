@@ -81,6 +81,7 @@ cp .env.example .env.local
 | `SUPABASE_SERVICE_ROLE_KEY` | para pagos y cron | Se salta RLS. Solo servidor: webhook de Stripe y tarea del domingo. |
 | `ANTHROPIC_API_KEY` | para el coach | Sin ella el resto de la app funciona; el chat avisa. |
 | `ANTHROPIC_MODEL` | no | Por defecto `claude-opus-5`. |
+| `ANTHROPIC_WORKSPACE_ID` | segun la clave | Si la API responde "anthropic-workspace-id is required", tu clave es vinculada a identidad: pon aqui el `wrkspc_…` de Console → Settings → Workspaces. |
 | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_PRO`, `STRIPE_WEBHOOK_SECRET` | para cobrar | Sin ellas la app no ofrece pagar. |
 | `NEXT_PUBLIC_SITE_URL` | no | URL publica, para las vueltas de Stripe. En Vercel se deduce. |
 | `CRON_SECRET` | para el cron | Cadena aleatoria; Vercel la manda como Bearer. |
