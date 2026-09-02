@@ -44,6 +44,10 @@ En redes sociales se publica SIEMPRE con la identidad personal de Maikel
 (firma «Maikel Echevarría» / @maikel.echevarria en los creativos y voz en
 primera persona en los captions). La marca Qualivo nunca firma piezas de
 redes; qualivo.io aparece solo como recurso o CTA dentro del contenido.
+Paleta de los creativos = la de maikelechevarria.com: crema #F2EEE6,
+tinta #0A0A0B, NARANJA #E8590C como acento principal (#FF7A33 en fondos
+oscuros, #C2410C oscuro, #FBE896 amarillo pálido puntual). Nada de teal
+en redes — el teal es de la web de Qualivo.
 
 ## Convive con
 - `content/contrabrief-qualivo.md` — posicionamiento (fugas = metáfora,
