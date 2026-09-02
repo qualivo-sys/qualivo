@@ -1,7 +1,7 @@
 import type Anthropic from '@anthropic-ai/sdk';
 import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
-import { BETA_FALLBACK, MODELO, clienteIA, hayClaveIA } from '@/lib/ia/cliente';
+import { MODELO, clienteIA, hayClaveIA, parametrosModelo } from '@/lib/ia/cliente';
 import { construirContexto } from '@/lib/ia/contexto';
 import { HERRAMIENTAS, ejecutarHerramienta } from '@/lib/ia/herramientas';
 import { anotarUso, cuota } from '@/lib/ia/limites';
@@ -121,9 +121,7 @@ export async function POST(peticion: Request) {
           const emision = cliente.beta.messages.stream({
             model: MODELO,
             max_tokens: 4096,
-            betas: [BETA_FALLBACK],
-            fallbacks: 'default',
-            output_config: { effort: 'medium' },
+            ...parametrosModelo(MODELO, 'medium'),
             system: [
               {
                 type: 'text',

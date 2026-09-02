@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
 import { inicioSemana, sumarDias } from '@/lib/fechas';
-import { BETA_FALLBACK, MODELO, clienteIA, hayClaveIA, textoDe } from '@/lib/ia/cliente';
+import { MODELO_REVISION, clienteIA, hayClaveIA, parametrosModelo, textoDe } from '@/lib/ia/cliente';
 import { anotarUso, cuota } from '@/lib/ia/limites';
 import { estadisticasSemana, parsearRevision, promptRevision } from '@/lib/ia/revision';
 import { clienteServidor } from '@/lib/supabase/servidor';
@@ -43,11 +43,9 @@ export async function POST(peticion: Request) {
 
   try {
     const respuesta = await clienteIA().beta.messages.create({
-      model: MODELO,
+      model: MODELO_REVISION,
       max_tokens: 4096,
-      betas: [BETA_FALLBACK],
-      fallbacks: 'default',
-      output_config: { effort: 'high' },
+      ...parametrosModelo(MODELO_REVISION, 'high'),
       system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: promptRevision(panel, stats) }],
     });

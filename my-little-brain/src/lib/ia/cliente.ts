@@ -21,14 +21,36 @@ export function clienteIA(): Anthropic {
   });
 }
 
-/** Modelo por defecto; se puede fijar otro con ANTHROPIC_MODEL. */
+/** Modelo del chat; se puede fijar otro con ANTHROPIC_MODEL. */
 export const MODELO = process.env.ANTHROPIC_MODEL || 'claude-opus-5';
+
+/**
+ * Modelo de la revision semanal. Es una llamada a la semana y la que mas
+ * criterio pide, asi que puede ir en un modelo mejor que el del chat.
+ */
+export const MODELO_REVISION = process.env.ANTHROPIC_MODEL_REVISION || MODELO;
 
 /**
  * Los clasificadores de seguridad pueden declinar una peticion. Con fallbacks
  * en modo "default" la API la reintenta sola en otro modelo en la misma llamada.
  */
 export const BETA_FALLBACK = 'server-side-fallback-2026-07-01';
+
+type Esfuerzo = 'low' | 'medium' | 'high' | 'xhigh' | 'max';
+
+/**
+ * No todos los modelos aceptan los mismos parametros: `fallbacks` solo existe
+ * en la gama Opus/Fable, y Haiku 4.5 rechaza `effort`. Esto devuelve lo que
+ * corresponde a cada uno para que cambiar de modelo sea cambiar una variable.
+ */
+export function parametrosModelo(modelo: string, esfuerzo: Esfuerzo) {
+  const gamaAlta = /opus|fable|mythos/.test(modelo);
+  const soportaEsfuerzo = !/haiku|sonnet-4-5|opus-4-5/.test(modelo);
+  return {
+    ...(gamaAlta ? { betas: [BETA_FALLBACK], fallbacks: 'default' as const } : {}),
+    ...(soportaEsfuerzo ? { output_config: { effort: esfuerzo } } : {}),
+  };
+}
 
 export function textoDe(mensaje: Anthropic.Messages.Message | Anthropic.Beta.Messages.BetaMessage): string {
   return mensaje.content
