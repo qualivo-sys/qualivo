@@ -337,3 +337,16 @@ rechaza recursos temporales para esos dos tipos).
 
 Pendiente que sigue sobre la mesa: ajuste −30 % en móvil en Search (no ejecutado, sin
 confirmación) y subir Search de presupuesto si PMax no arranca.
+
+### Revisión de términos (02-09, tarde)
+`congreso inteligencia artificial` (amplia) está casando con otros eventos: AI Summit
+Barcelona, Tech Show Madrid, eShow, CAEPIA, Gartner, South Summit, Smart City Expo…
+17,5 € sin registro. `ley de inteligencia artificial` y `reglamento ia` traen búsquedas
+informativas («qué es», «cuándo entra en vigor», «2024/1689») con muchas impresiones y
+casi ningún clic. Añadidas 32 negativas de campaña en frase (ciudades fuera de Madrid,
+nombres de otros eventos, términos informativos y de texto legal). Total: 72 negativas.
+
+Datos nuevos del día: en Search el móvil cuesta 2,78 €/clic frente a 1,21 € en escritorio y
+no ha convertido; las franjas 20–23 h y 06–07 h concentran la mitad del gasto de Search con
+CPC > 3 €. En DG Prospecting el 96 % de los clics son móvil (0 registros) y el grupo A
+(ComplianceLegal) apenas sirve: 81 impresiones frente a 1.619 del grupo B.
