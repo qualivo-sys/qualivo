@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { cerrarSesion, guardarPerfil } from '@/app/app/acciones';
+import { borrarCuenta, cerrarSesion, guardarPerfil } from '@/app/app/acciones';
 import PlanSuscripcion from '@/components/plan-suscripcion';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { LIMITE_MENSAJES, cuota } from '@/lib/ia/limites';
@@ -21,7 +21,7 @@ const LIMITACIONES: { valor: Limitacion; etiqueta: string }[] = [
 export default async function PaginaAjustes({
   searchParams,
 }: {
-  searchParams: { pago?: string };
+  searchParams: { pago?: string; clave?: string; borrar?: string };
 }) {
   const { supabase, usuario, perfil } = await sesionRequerida({ permitirSinAlta: true });
   const estado = await cuota(supabase, usuario.id, perfil.plan);
@@ -33,6 +33,20 @@ export default async function PaginaAjustes({
       {searchParams.pago === 'ok' && (
         <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
           Pago confirmado. Si el plan tarda unos segundos en actualizarse, recarga la pagina.
+        </p>
+      )}
+      {searchParams.clave === 'ok' && (
+        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
+          Contraseña cambiada.
+        </p>
+      )}
+      {searchParams.borrar && (
+        <p className="rounded-lg bg-destructive/15 px-3 py-2 text-sm text-destructive">
+          {searchParams.borrar === 'confirmacion'
+            ? 'Para borrar la cuenta tienes que escribir BORRAR en el campo.'
+            : searchParams.borrar === 'sin_servicio'
+              ? 'El borrado automatico no esta configurado en este despliegue. Escribenos y lo hacemos a mano.'
+              : 'No se ha podido borrar la cuenta. Reintenta o escribenos.'}
         </p>
       )}
       {searchParams.pago === 'cancelado' && (
@@ -151,10 +165,37 @@ export default async function PaginaAjustes({
       </Tarjeta>
 
       <Tarjeta>
-        <TituloTarjeta>Sesion</TituloTarjeta>
+        <TituloTarjeta>Sesion y seguridad</TituloTarjeta>
         <p className="mb-3 text-sm text-muted-foreground">{perfil.email}</p>
-        <form action={cerrarSesion}>
-          <Boton type="submit" variante="contorno" className="w-full">Cerrar sesion</Boton>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <Link href="/app/ajustes/clave">
+            <Boton variante="contorno" className="w-full">Cambiar contraseña</Boton>
+          </Link>
+          <form action={cerrarSesion}>
+            <Boton type="submit" variante="contorno" className="w-full">Cerrar sesion</Boton>
+          </form>
+        </div>
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Tus datos</TituloTarjeta>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Todo lo que has registrado es tuyo. Puedes llevartelo en un JSON cuando quieras.
+        </p>
+        <a href="/api/exportar" download>
+          <Boton variante="secundario" className="w-full">Descargar todos mis datos</Boton>
+        </a>
+      </Tarjeta>
+
+      <Tarjeta className="border-destructive/40">
+        <TituloTarjeta>Borrar la cuenta</TituloTarjeta>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Se borra todo al instante y sin vuelta atras: perfil, registros, conversaciones y fotos.
+          Si tienes una suscripcion, cancelala antes desde el portal de facturacion.
+        </p>
+        <form action={borrarCuenta} className="space-y-3">
+          <Campo etiqueta='Escribe BORRAR para confirmar' name="confirmacion" autoComplete="off" />
+          <Boton type="submit" variante="peligro" className="w-full">Borrar mi cuenta para siempre</Boton>
         </form>
       </Tarjeta>
 

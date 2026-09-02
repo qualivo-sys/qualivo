@@ -27,6 +27,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Revision semanal** | El informe de los domingos: puntuaciones, patrones, cuello de botella y tres acciones para la semana siguiente. Se genera sola cada domingo para los usuarios Pro. |
 | **Check-in diario** | Manana (sueno, animo, energia, peso) y noche (foco, pasos, notas), en dos formularios de diez segundos. |
 | **Progreso** | Logros, constancia por semana, horas de foco, peso, grasa, sueno y animo. |
+| **Cuenta** | Recuperar y cambiar contrasena, descargar todos los datos en JSON y borrar la cuenta (RGPD). |
 
 ### Lo que lo diferencia de un tracker
 
@@ -83,6 +84,7 @@ cp .env.example .env.local
 | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_PRO`, `STRIPE_WEBHOOK_SECRET` | para cobrar | Sin ellas la app no ofrece pagar. |
 | `NEXT_PUBLIC_SITE_URL` | no | URL publica, para las vueltas de Stripe. En Vercel se deduce. |
 | `CRON_SECRET` | para el cron | Cadena aleatoria; Vercel la manda como Bearer. |
+| `NEXT_PUBLIC_LEGAL_EMPRESA`, `_CIF`, `_DIRECCION`, `_EMAIL` | para publicar | Responsable del tratamiento en `/legal`. Mientras falten, esas paginas muestran un aviso. |
 
 ### 4. Local y despliegue
 
@@ -104,7 +106,9 @@ anade las variables de entorno y despliega. Es una PWA: desde el movil,
 src/
   app/
     page.tsx                    Portada publica
-    entrar/                     Login y registro (Supabase Auth)
+    entrar/                     Login y registro (Supabase Auth, con consentimiento de datos de salud)
+    recuperar/                  Recuperar contrasena por email
+    legal/                      Politica de privacidad y terminos
     auth/callback/              Vuelta del email de confirmacion
     app/
       page.tsx                  Panel del dia: puntuaciones, metas, habitos, entreno
@@ -116,12 +120,13 @@ src/
       cuerpo/                   Peso, medidas, comidas del dia y graficas
       habitos/                  Habitos, rejilla de 7 dias y rachas
       semana/                   Revision semanal (el informe del domingo)
-      ajustes/                  Perfil, plan y sesion
+      ajustes/                  Perfil, plan, contrasena, exportar y borrar cuenta
       acciones.ts               Server actions (toda la escritura desde la UI)
     api/coach/                  Chat con herramientas (el corazon del producto)
     api/revision/               Generacion de la revision semanal
     api/pago/                   Stripe: checkout, portal y webhook
     api/cron/revision/          Tarea de los domingos (Vercel Cron)
+    api/exportar/               Portabilidad: todos los datos del usuario en JSON
   lib/
     motor/                      Dominio puro, sin dependencias externas
       ejercicios.ts             Catalogo (~55 ejercicios con patron, material y tecnica)
@@ -195,6 +200,20 @@ tarea recorre a los usuarios Pro con datos de la semana, genera la revision que
 falte y la deja guardada. Va protegida con `CRON_SECRET` y se salta a quien no
 tenga nada registrado, para no gastar llamadas.
 
+### Privacidad y RGPD
+
+Se tratan datos de salud (categoria especial), asi que ademas del contrato hay
+**consentimiento explicito** en el registro (queda anotado con fecha en los
+metadatos del usuario). El usuario puede ejercer por su cuenta los derechos que
+mas se ejercen: **portabilidad** (`/api/exportar`, JSON con todo) y
+**supresion** (borrar cuenta desde Ajustes: el `on delete cascade` de
+`auth.users` se lleva todas las tablas y las fotos se borran del bucket). Los
+textos de `/legal` estan escritos para este producto y esta arquitectura
+(Supabase en Irlanda, Anthropic como encargado, Stripe, sin cookies de
+analitica); los datos del responsable van por variables de entorno. **Que los
+revise alguien de legal antes de cobrar a nadie**: son un punto de partida
+serio, no un dictamen.
+
 ### Multiusuario y modelo de seguridad
 
 Cada tabla tiene `user_id` y politicas de RLS `auth.uid() = user_id`; las fotos
@@ -244,9 +263,11 @@ real (login completo, RLS en vivo, subida de fotos) y las llamadas reales a la
 API de Claude. El codigo compila y esta cubierto por las pruebas, pero la
 primera vez conviene hacer el recorrido completo con datos reales.
 
-**Aun no esta hecho:** lectura de codigos de barras, integracion con wearables,
-notificaciones push, modo offline con cola de sincronizacion y avisos por email.
-La revision del domingo se genera sola pero no se notifica: aparece en la app.
+**Aun no esta hecho:** notificaciones push, modo offline con cola de
+sincronizacion, emails con marca propia (confirmacion y revision del domingo),
+lectura de codigos de barras, integracion con wearables y monitorizacion de
+errores. La revision del domingo se genera sola pero no se notifica: aparece
+en la app.
 
 ---
 

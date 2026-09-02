@@ -13,7 +13,10 @@ function Formulario() {
   const [email, setEmail] = useState('');
   const [clave, setClave] = useState('');
   const [nombre, setNombre] = useState('');
-  const [error, setError] = useState('');
+  const [consiente, setConsiente] = useState(false);
+  const [error, setError] = useState(
+    parametros.get('error') === 'enlace_caducado' ? 'El enlace ha caducado o ya se uso. Pide otro.' : '',
+  );
   const [aviso, setAviso] = useState('');
   const [enviando, setEnviando] = useState(false);
 
@@ -26,11 +29,15 @@ function Formulario() {
 
     try {
       if (modo === 'registro') {
+        if (!consiente) {
+          setError('Necesitamos tu consentimiento para tratar tus datos de salud.');
+          return;
+        }
         const { data, error: fallo } = await supabase.auth.signUp({
           email,
           password: clave,
           options: {
-            data: { nombre },
+            data: { nombre, consentimiento_salud: new Date().toISOString() },
             emailRedirectTo: `${window.location.origin}/auth/callback`,
           },
         });
@@ -85,6 +92,26 @@ function Formulario() {
         />
         {error && <p className="rounded-lg bg-destructive/15 px-3 py-2 text-sm text-destructive">{error}</p>}
         {aviso && <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">{aviso}</p>}
+        {modo === 'entrar' ? (
+          <p className="text-center text-sm">
+            <Link href="/recuperar" className="text-muted-foreground underline">¿Has olvidado la contraseña?</Link>
+          </p>
+        ) : (
+          <label className="flex items-start gap-2 text-xs text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={consiente}
+              onChange={(e) => setConsiente(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-border bg-muted"
+            />
+            <span>
+              Acepto los <Link href="/legal/terminos" className="underline">terminos</Link> y la{' '}
+              <Link href="/legal/privacidad" className="underline">politica de privacidad</Link>, y
+              consiento que se traten mis datos de salud (peso, alimentacion, entrenamiento, sueno y
+              animo) para prestarme el servicio.
+            </span>
+          </label>
+        )}
         <Boton type="submit" className="w-full" disabled={enviando}>
           {enviando ? 'Un momento…' : modo === 'entrar' ? 'Entrar' : 'Crear mi cuenta'}
         </Boton>

@@ -7,6 +7,7 @@ import { firmaPerfil, generarPlan } from '@/lib/motor/planificador';
 import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
 import { perfilEntreno } from '@/lib/perfil';
 import { clienteServidor } from '@/lib/supabase/servidor';
+import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
 import { cargarPerfil } from '@/lib/datos';
 
 async function sesion() {
@@ -264,4 +265,34 @@ export async function cerrarSesion() {
   const { supabase } = await sesion();
   await supabase.auth.signOut();
   redirect('/entrar');
+}
+
+/**
+ * Borrado de cuenta (art. 17 RGPD). Irreversible: el cascade de auth.users se
+ * lleva todas las tablas, y las fotos se borran a mano porque Storage no cascadea.
+ */
+export async function borrarCuenta(datos: FormData) {
+  const { supabase, userId } = await sesion();
+  if (texto(datos.get('confirmacion'))?.toUpperCase() !== 'BORRAR') {
+    redirect('/app/ajustes?borrar=confirmacion');
+  }
+  if (!hayServiceRole()) {
+    redirect('/app/ajustes?borrar=sin_servicio');
+  }
+
+  const admin = clienteAdmin();
+
+  const { data: fotos } = await admin.storage.from('comidas').list(userId, { limit: 1000 });
+  if (fotos?.length) {
+    await admin.storage.from('comidas').remove(fotos.map((f) => `${userId}/${f.name}`));
+  }
+
+  const { error } = await admin.auth.admin.deleteUser(userId);
+  if (error) {
+    console.error('[cuenta] no se pudo borrar el usuario', error.message);
+    redirect('/app/ajustes?borrar=error');
+  }
+
+  await supabase.auth.signOut();
+  redirect('/?cuenta=borrada');
 }

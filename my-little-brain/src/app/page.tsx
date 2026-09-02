@@ -19,11 +19,16 @@ const EJEMPLOS = [
   '3 horas de trabajo profundo en el proyecto de IA',
 ];
 
-export default async function Portada() {
+export default async function Portada({ searchParams }: { searchParams: { cuenta?: string } }) {
   const usuario = await usuarioActual();
 
   return (
     <main className="mx-auto max-w-3xl px-5 pb-20 pt-14">
+      {searchParams.cuenta === 'borrada' && (
+        <p className="mb-6 rounded-lg bg-emerald-500/15 px-3 py-2 text-center text-sm text-emerald-300">
+          Cuenta borrada. Gracias por haber estado aqui.
+        </p>
+      )}
       <header className="text-center">
         <Insignia tono="marca">Tu sistema operativo personal</Insignia>
         <h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-5xl">My Little Brain</h1>
@@ -110,9 +115,15 @@ export default async function Portada() {
         </div>
       </section>
 
-      <footer className="mt-14 text-center text-xs text-muted-foreground">
-        My Little Brain calcula estimaciones con formulas estandar (Mifflin-St Jeor, US Navy).
-        No es consejo medico ni sustituye a un profesional sanitario.
+      <footer className="mt-14 space-y-2 text-center text-xs text-muted-foreground">
+        <p>
+          My Little Brain calcula estimaciones con formulas estandar (Mifflin-St Jeor, US Navy).
+          No es consejo medico ni sustituye a un profesional sanitario.
+        </p>
+        <p>
+          <Link href="/legal/privacidad" className="underline">Privacidad</Link> ·{' '}
+          <Link href="/legal/terminos" className="underline">Terminos</Link>
+        </p>
       </footer>
     </main>
   );
