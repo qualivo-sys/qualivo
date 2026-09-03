@@ -9,7 +9,7 @@ import { clienteNavegador } from '@/lib/supabase/cliente';
 function Formulario() {
   const router = useRouter();
   const parametros = useSearchParams();
-  const [modo, setModo] = useState<'entrar' | 'registro'>('entrar');
+  const [modo, setModo] = useState<'entrar' | 'registro'>(parametros.get('modo') === 'registro' ? 'registro' : 'entrar');
   const [email, setEmail] = useState('');
   const [clave, setClave] = useState('');
   const [nombre, setNombre] = useState('');

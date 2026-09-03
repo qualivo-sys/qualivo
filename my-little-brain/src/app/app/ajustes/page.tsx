@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CompartirApp from '@/components/compartir-app';
 import { borrarCuenta, cerrarSesion, guardarPerfil, guardarPreferencias } from '@/app/app/acciones';
 import Notificaciones from '@/components/notificaciones';
 import { SelectorTema } from '@/components/tema';
@@ -199,6 +200,14 @@ export default async function PaginaAjustes({
             <Link href="/app/importar" className="text-primary underline">importarlos</Link>.
           </p>
         </form>
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Invitar a alguien</TituloTarjeta>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Manda el enlace de instalacion a quien quieras: se crea su cuenta gratis y le explica como ponerla en el movil.
+        </p>
+        <CompartirApp variante="secundario" />
       </Tarjeta>
 
       <Tarjeta>
