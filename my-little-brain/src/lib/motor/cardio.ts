@@ -10,9 +10,13 @@ export interface TipoCardio {
 
 export const TIPOS_CARDIO: TipoCardio[] = [
   { id: 'andar', nombre: 'Andar (paseo)', met: 3.5 },
-  { id: 'andar_rapido', nombre: 'Andar rapido o cinta inclinada', met: 5 },
+  { id: 'andar_rapido', nombre: 'Andar rapido (llano)', met: 5 },
+  { id: 'cinta_subida', nombre: 'Cinta en subida (10-15 %)', met: 7 },
+  { id: 'senderismo', nombre: 'Senderismo / andar en cuesta', met: 6 },
+  { id: 'monte_mochila', nombre: 'Subir monte con mochila', met: 8 },
   { id: 'correr_suave', nombre: 'Correr suave (zona 2)', met: 8 },
   { id: 'correr', nombre: 'Correr (ritmo medio)', met: 10 },
+  { id: 'correr_cuesta', nombre: 'Correr en cuesta', met: 12 },
   { id: 'eliptica', nombre: 'Eliptica', met: 5.5 },
   { id: 'bici', nombre: 'Bicicleta estatica', met: 6.5 },
   { id: 'remo', nombre: 'Remo', met: 7 },
