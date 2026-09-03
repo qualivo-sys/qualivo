@@ -91,6 +91,9 @@ export interface Entrenamiento {
   duracion_min: number | null;
   notas: string | null;
   completado: boolean;
+  cardio_tipo?: string | null;
+  cardio_min?: number | null;
+  cardio_kcal?: number | null;
 }
 
 export interface SerieRegistro {

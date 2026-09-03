@@ -101,6 +101,10 @@ create table if not exists public.entrenamientos (
   creado     timestamptz not null default now()
 );
 create index if not exists entrenamientos_user_fecha on public.entrenamientos (user_id, fecha desc);
+-- Cardio al final de la sesion (tipo, minutos y kcal estimadas por MET).
+alter table public.entrenamientos add column if not exists cardio_tipo text;
+alter table public.entrenamientos add column if not exists cardio_min int;
+alter table public.entrenamientos add column if not exists cardio_kcal int;
 
 create table if not exists public.series (
   id               uuid primary key default gen_random_uuid(),

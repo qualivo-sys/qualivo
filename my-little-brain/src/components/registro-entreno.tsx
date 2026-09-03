@@ -4,7 +4,8 @@ import { Check, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { guardarEntreno, type SeriePayload } from '@/app/app/acciones';
-import { Boton, Tarjeta } from '@/components/ui/base';
+import { Boton, Selector, Tarjeta } from '@/components/ui/base';
+import { TIPOS_CARDIO, enlaceTecnica, kcalCardio } from '@/lib/motor/cardio';
 import type { Bloque } from '@/lib/motor/tipos-motor';
 import { cn } from '@/lib/utils';
 
@@ -27,10 +28,13 @@ export default function RegistroEntreno({
   diaId,
   nombre,
   bloques,
+  pesoKg,
 }: {
   diaId: string;
   nombre: string;
   bloques: BloqueVista[];
+  /** Peso corporal para estimar las calorias del cardio. */
+  pesoKg: number;
 }) {
   const router = useRouter();
   const [estado, setEstado] = useState<SerieEditable[][]>(
@@ -47,6 +51,9 @@ export default function RegistroEntreno({
   const [notas, setNotas] = useState('');
   const [guardando, setGuardando] = useState(false);
   const [descanso, setDescanso] = useState<number | null>(null);
+  const [cardioTipo, setCardioTipo] = useState('');
+  const [cardioMin, setCardioMin] = useState('');
+  const cardioKcal = cardioTipo && Number(cardioMin) > 0 ? kcalCardio(cardioTipo, Number(cardioMin), pesoKg) : 0;
 
   const editar = (bloque: number, serie: number, cambios: Partial<SerieEditable>) =>
     setEstado((previo) =>
@@ -80,7 +87,14 @@ export default function RegistroEntreno({
       });
     });
 
-    await guardarEntreno({ nombre, dia_plan: diaId, sensacion, notas: notas || null, series });
+    await guardarEntreno({
+      nombre,
+      dia_plan: diaId,
+      sensacion,
+      notas: notas || null,
+      series,
+      cardio: cardioTipo && Number(cardioMin) > 0 ? { tipo: cardioTipo, minutos: Number(cardioMin), kcal: cardioKcal } : null,
+    });
     setGuardando(false);
     router.push('/app');
     router.refresh();
@@ -165,9 +179,52 @@ export default function RegistroEntreno({
             + serie
           </button>
 
-          <p className="mt-3 border-l-2 border-border pl-3 text-xs text-muted-foreground">{bloque.tecnica}</p>
+          <p className="mt-3 border-l-2 border-border pl-3 text-xs text-muted-foreground">
+            {bloque.tecnica}{' '}
+            <a
+              href={enlaceTecnica(bloque.nombre)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline"
+            >
+              Ver como se hace
+            </a>
+          </p>
         </Tarjeta>
       ))}
+
+      <Tarjeta>
+        <h3 className="mb-1 font-semibold">Cardio al acabar</h3>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Opcional. Las calorias son una estimacion por MET con tu peso ({pesoKg} kg).
+        </p>
+        <div className="grid grid-cols-[1fr_96px] gap-3">
+          <Selector etiqueta="Tipo" value={cardioTipo} onChange={(e) => setCardioTipo(e.target.value)}>
+            <option value="">Sin cardio</option>
+            {TIPOS_CARDIO.map((t) => (
+              <option key={t.id} value={t.id}>{t.nombre}</option>
+            ))}
+          </Selector>
+          <div className="space-y-1.5">
+            <label htmlFor="cardio-min" className="block text-sm text-muted-foreground">Minutos</label>
+            <input
+              id="cardio-min"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              value={cardioMin}
+              onChange={(e) => setCardioMin(e.target.value)}
+              disabled={!cardioTipo}
+              className="h-11 w-full rounded-lg border border-input bg-muted/40 px-3 text-center text-base outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
+            />
+          </div>
+        </div>
+        {cardioKcal > 0 && (
+          <p className="mt-3 text-sm">
+            ≈ <strong>{cardioKcal} kcal</strong> en {cardioMin} min.
+          </p>
+        )}
+      </Tarjeta>
 
       <Tarjeta>
         <h3 className="mb-2 font-semibold">Como ha ido</h3>

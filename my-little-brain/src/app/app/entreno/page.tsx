@@ -102,7 +102,14 @@ export default async function PaginaEntreno({
         <p className="text-sm text-muted-foreground">{diaSeleccionado.foco}</p>
       </div>
 
-      <RegistroEntreno diaId={diaSeleccionado.id} nombre={diaSeleccionado.nombre} bloques={bloques} />
+      {/* key: al cambiar de dia el registro se reinicia y no arrastra los pesos del anterior. */}
+      <RegistroEntreno
+        key={diaSeleccionado.id}
+        diaId={diaSeleccionado.id}
+        nombre={diaSeleccionado.nombre}
+        bloques={bloques}
+        pesoKg={Math.round(panel.cuerpo.peso ?? 75)}
+      />
 
       {diaSeleccionado.cardio && (
         <Tarjeta>

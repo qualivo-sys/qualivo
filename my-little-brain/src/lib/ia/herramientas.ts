@@ -3,6 +3,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
+import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { EJERCICIOS } from '../motor/ejercicios';
 import { firmaPerfil, generarPlan } from '../motor/planificador';
 import { XP_POR_ACCION } from '../motor/puntuaciones';
@@ -14,6 +15,8 @@ export interface ContextoHerramientas {
   userId: string;
   perfil: Perfil;
   hoy: string;
+  /** Ultimo peso corporal conocido, para estimar calorias de cardio. */
+  pesoKg?: number | null;
 }
 
 // ── Definiciones que ve el modelo ───────────────────────────────────────
@@ -87,6 +90,12 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         sensacion: { type: 'number', description: 'Del 1 al 5.' },
         duracion_min: { type: 'number' },
         notas: { type: 'string' },
+        cardio_tipo: {
+          type: 'string',
+          enum: TIPOS_CARDIO.map((t) => t.id),
+          description: 'Cardio hecho en la sesion, si lo hubo.',
+        },
+        cardio_min: { type: 'number', description: 'Minutos de cardio.' },
         ejercicios: {
           type: 'array',
           items: {
@@ -453,6 +462,8 @@ async function despachar(
           sensacion: num.optional(),
           duracion_min: num.optional(),
           notas: z.string().optional(),
+          cardio_tipo: z.string().optional(),
+          cardio_min: num.optional(),
           ejercicios: z
             .array(
               z.object({
@@ -467,6 +478,10 @@ async function despachar(
         .parse(entrada);
 
       const fecha = d.fecha ?? ctx.hoy;
+      const cardio =
+        d.cardio_tipo && d.cardio_min && d.cardio_min > 0
+          ? { tipo: d.cardio_tipo, minutos: Math.round(d.cardio_min), kcal: kcalCardio(d.cardio_tipo, d.cardio_min, ctx.pesoKg ?? 75) }
+          : null;
       const { data: entreno, error } = await supabase
         .from('entrenamientos')
         .insert({
@@ -477,6 +492,9 @@ async function despachar(
           duracion_min: d.duracion_min ? Math.round(d.duracion_min) : null,
           notas: d.notas ?? null,
           completado: true,
+          cardio_tipo: cardio?.tipo ?? null,
+          cardio_min: cardio?.minutos ?? null,
+          cardio_kcal: cardio?.kcal ?? null,
         })
         .select('id')
         .single();
@@ -507,9 +525,10 @@ async function despachar(
       }
 
       const xp = await otorgarXp(ctx, 'entreno', d.nombre);
+      const textoCardio = cardio ? ` + ${cardio.minutos} min de cardio (~${cardio.kcal} kcal)` : '';
       return {
-        texto: `Entreno registrado: ${d.nombre} (${totalSeries} series).`,
-        accion: { herramienta: nombre, resumen: `${d.nombre} · ${totalSeries} series`, xp },
+        texto: `Entreno registrado: ${d.nombre} (${totalSeries} series)${textoCardio}.`,
+        accion: { herramienta: nombre, resumen: `${d.nombre} · ${totalSeries} series${textoCardio}`, xp },
       };
     }
 

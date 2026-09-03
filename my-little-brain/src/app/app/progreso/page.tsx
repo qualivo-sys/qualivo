@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { Barra, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
-import { cargarPanel } from '@/lib/datos';
-import { fechaCorta, inicioSemana } from '@/lib/fechas';
+import FuerzaSemanal, { type SerieEjercicio } from '@/components/fuerza-semanal';
+import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
+import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
+import { nombreEjercicio } from '@/lib/motor/ejercicios';
+import { tipoCardio } from '@/lib/motor/cardio';
 import { grasaCorporal } from '@/lib/motor/cuerpo';
 import { logros } from '@/lib/motor/logros';
 import { sesionRequerida } from '@/lib/sesion';
@@ -26,6 +29,34 @@ export default async function PaginaProgreso() {
     (total, s) => total + Number(s.peso_kg ?? 0) * (s.reps ?? 0),
     0,
   );
+
+  // Mejor peso por ejercicio y semana (ultimos 6 meses).
+  const sesiones = await cargarSesionesMotor(supabase, usuario.id, sumarDias(panel.hoy, -180));
+  const porEjercicio = new Map<string, Map<string, number>>();
+  const mejores = new Map<string, { pesoKg: number; reps: number; fecha: string }>();
+  for (const sesion of sesiones) {
+    const semana = inicioSemana(sesion.fecha);
+    for (const ej of sesion.ejercicios) {
+      for (const serie of ej.series) {
+        if (!serie.hecha || !serie.pesoKg || !serie.reps) continue;
+        const semanas = porEjercicio.get(ej.ejercicioId) ?? new Map<string, number>();
+        semanas.set(semana, Math.max(semanas.get(semana) ?? 0, serie.pesoKg));
+        porEjercicio.set(ej.ejercicioId, semanas);
+        const mejor = mejores.get(ej.ejercicioId);
+        if (!mejor || serie.pesoKg > mejor.pesoKg || (serie.pesoKg === mejor.pesoKg && serie.reps > mejor.reps)) {
+          mejores.set(ej.ejercicioId, { pesoKg: serie.pesoKg, reps: serie.reps, fecha: sesion.fecha });
+        }
+      }
+    }
+  }
+  const fuerza: SerieEjercicio[] = [...porEjercicio.entries()]
+    .map(([ejercicioId, semanas]) => ({
+      ejercicioId,
+      nombre: nombreEjercicio(ejercicioId),
+      porSemana: [...semanas.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([fecha, valor]) => ({ fecha, valor })),
+      mejor: mejores.get(ejercicioId) ?? null,
+    }))
+    .sort((a, b) => b.porSemana.length - a.porSemana.length || a.nombre.localeCompare(b.nombre));
 
   const conseguidos = logros({
     dias: panel.dias,
@@ -107,6 +138,35 @@ export default async function PaginaProgreso() {
           ))}
         </ul>
       </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Peso por ejercicio, semana a semana</TituloTarjeta>
+        <FuerzaSemanal ejercicios={fuerza} />
+      </Tarjeta>
+
+      {panel.entrenamientos.some((e) => e.completado) && (
+        <Tarjeta>
+          <TituloTarjeta>Ultimos entrenos</TituloTarjeta>
+          <ul className="divide-y divide-border text-sm">
+            {panel.entrenamientos
+              .filter((e) => e.completado)
+              .slice(0, 10)
+              .map((e) => (
+                <li key={e.id} className="flex items-center justify-between gap-3 py-2">
+                  <span>
+                    {e.nombre}
+                    {e.cardio_min ? (
+                      <span className="text-muted-foreground">
+                        {' '}· {tipoCardio(e.cardio_tipo ?? '')?.nombre ?? 'cardio'} {e.cardio_min} min (~{e.cardio_kcal} kcal)
+                      </span>
+                    ) : null}
+                  </span>
+                  <span className="shrink-0 text-xs text-muted-foreground">{fechaCorta(e.fecha)}</span>
+                </li>
+              ))}
+          </ul>
+        </Tarjeta>
+      )}
 
       {semanas.length >= 2 && (
         <Tarjeta>

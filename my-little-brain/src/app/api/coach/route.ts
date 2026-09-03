@@ -102,7 +102,7 @@ export async function POST(peticion: Request) {
   mensajes.push({ role: 'user', content: contenidoUsuario });
 
   const cliente = clienteIA();
-  const ctxHerramientas = { supabase, userId: usuario.id, perfil, hoy: panel.hoy };
+  const ctxHerramientas = { supabase, userId: usuario.id, perfil, hoy: panel.hoy, pesoKg: panel.cuerpo.peso };
   const codificador = new TextEncoder();
 
   const flujo = new ReadableStream({

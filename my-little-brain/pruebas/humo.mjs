@@ -117,6 +117,12 @@ check('cuenta unidades de alcohol', bar.alcoholUd >= 2.5 && bar.alcoholUd <= 2.7
 check('lo desconocido no suma pero se avisa', calcularComida('flan de la abuela, 100 g de xyzabc').sinReconocer.length === 1);
 check('busca por alias con plural', buscarAlimento('platanos')?.id === 'platano');
 
+// ── 5a2. Cardio por MET ────────────────────────────────────────────────
+const { kcalCardio, enlaceTecnica } = await import(`${L}/motor/cardio.js`);
+check('30 min de eliptica a 80 kg rondan las 220 kcal', Math.abs(kcalCardio('eliptica', 30, 80) - 220) <= 5, `${kcalCardio('eliptica', 30, 80)} kcal`);
+check('tipo desconocido o minutos 0 dan 0', kcalCardio('xyz', 30, 80) === 0 && kcalCardio('correr', 0, 80) === 0);
+check('el enlace de tecnica esta codificado', enlaceTecnica('Press de banca con barra').includes('Press%20de%20banca'));
+
 // ── 5b. Señales proactivas y logros ────────────────────────────────────
 const { senales } = await import(`${L}/motor/senales.js`);
 const { logros } = await import(`${L}/motor/logros.js`);

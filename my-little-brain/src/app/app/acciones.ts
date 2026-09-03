@@ -218,9 +218,11 @@ export async function guardarEntreno(payload: {
   sensacion: number | null;
   notas: string | null;
   series: SeriePayload[];
+  cardio?: { tipo: string; minutos: number; kcal: number } | null;
 }) {
   const { supabase, userId } = await sesion();
   const fecha = hoyIso();
+  const cardio = payload.cardio && payload.cardio.minutos > 0 ? payload.cardio : null;
 
   const { data: entreno, error } = await supabase
     .from('entrenamientos')
@@ -232,6 +234,9 @@ export async function guardarEntreno(payload: {
       sensacion: payload.sensacion,
       notas: payload.notas,
       completado: true,
+      cardio_tipo: cardio?.tipo ?? null,
+      cardio_min: cardio ? Math.round(cardio.minutos) : null,
+      cardio_kcal: cardio ? Math.round(cardio.kcal) : null,
     })
     .select('id')
     .single();
