@@ -11,7 +11,7 @@
         { label: 'Mesa', desc: 'Comedor, salón o cocina', img: '/assets/photos/mesa-madera-encaje.jpg' },
         { label: 'Banco', desc: 'A medida del espacio', img: '/assets/photos/banco-artesanal-de-madera.jpg' },
         { label: 'Cajonera', desc: 'Madera maciza', img: '/assets/photos/cajonera-escalonada-madera.jpg' },
-        { label: 'Otra pieza', desc: 'Piedra, vitrinas, puertas…', img: '/assets/photos/banera-de-piedra-vintage.jpg' }
+        { label: 'Otra pieza', desc: 'Vitrina, estantería, mesa de centro…', img: '/assets/photos/vitrina-madera-masia.jpg' }
       ]
     },
     {

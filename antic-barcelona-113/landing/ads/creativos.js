@@ -58,11 +58,5 @@ window.CREATIVOS = [
     eyebrow:'Antes de ser mesa', headline:'De viga a pieza *única.*',
     sub:'El mismo roble, cien años después.', cta:'Descubre el proceso',
     img:'/assets/photos/banco-artesanal-de-madera.jpg', pos:'center 40%',
-    primero:'La viga convertida en pieza.', dosSeg:'La transformación del material.' },
-
-  { id:'6A', concepto:'06 Piedra · B2B (fase 2)', exec:'A — Hostelería', layout:'bleed',
-    eyebrow:'Piedra natural · Un solo bloque', headline:'Su hotel merece una pieza *irrepetible.*',
-    sub:'Bañeras y lavamanos tallados en piedra natural.', cta:'Hablemos del proyecto',
-    img:'/assets/photos/ia-banera-hotel-boutique.jpg', pos:'center', ia:true,
-    primero:'La bañera de piedra en el ambiente.', dosSeg:'Esto no se compra en un catálogo de baño.' }
+    primero:'La viga convertida en pieza.', dosSeg:'La transformación del material.' }
 ];

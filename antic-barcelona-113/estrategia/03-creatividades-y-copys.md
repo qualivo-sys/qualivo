@@ -430,5 +430,7 @@ natural cambia sutilmente, como si pasara una nube. Cinematográfico, 24 fps,
 sensación de anuncio de marca de lujo.
 ```
 
-> **Nota de coste:** la cuenta de Higgsfield tiene 10,12 créditos (plan starter). Da para
-> 1-2 imágenes de prueba, no para producir el set completo. Ver `07-produccion-ia.md`.
+> **Nota de coste:** se gastaron 9 de los 10,12 créditos de Higgsfield (3 por imagen a 2K)
+> en tres ambientaciones. Dos están en producción; la tercera era la bañera de piedra y
+> queda archivada al salir esa línea de la campaña. Saldo actual: 1,12 créditos. El detalle
+> de lo producido y lo que falta está en `07-produccion-ia.md`.

@@ -4,15 +4,23 @@
 
 | | |
 |---|---|
-| Negocio | Diseño y fabricación de mobiliario a medida en madera recuperada y piedra natural |
+| Negocio | Diseño y fabricación de mobiliario a medida en madera recuperada |
 | Taller | Carrer de Mura 20, Terrassa (Barcelona) |
 | Producto estrella | Mesas de tronco / madera maciza a medida |
-| Otros | Bancos, cajoneras, vitrinas, estanterías, lavamanos y bañeras de piedra, restauración |
+| Otros | Bancos, cajoneras, vitrinas, estanterías, mesas de centro, restauración de muebles y puertas |
 | Materia prima | Roble centenario recuperado, teca, vigas y tablones con historia |
 | Servicios incluidos | Asesoría de proyecto, transporte e instalación |
 | Canal de venta | Bajo demanda. **No hay tienda online** |
 | Mercados | B2C particulares · B2B interioristas, arquitectos, hostelería, casas rurales |
 | Contacto | +34 665 521 684 · info@anticbarcelona113.com |
+
+> **Alcance de esta campaña: solo madera.** El taller también talla lavamanos y bañeras en
+> piedra natural, y son piezas espectaculares, pero quedan fuera por decisión del cliente.
+> Es la decisión correcta: con 600-1.000 €/mes no se pueden defender dos categorías con
+> compradores, ciclos y precios distintos sin diluir las dos. La piedra tiene su propio
+> mercado natural —hostelería y hoteles boutique— y merece una campaña propia cuando la
+> de madera esté funcionando, no un hueco prestado en esta. El material producido para
+> piedra queda archivado en `creatividades/descartados/`, listo para retomarse.
 
 **Consecuencia inmediata de "no hay tienda online":** el objetivo de campaña no puede ser
 venta. Es **generación de leads cualificados**. Todo el plan se construye sobre eso.
