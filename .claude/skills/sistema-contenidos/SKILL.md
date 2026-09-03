@@ -67,6 +67,17 @@ carrusel-bocaboca2.html); (c) fotografia de calle espanola real,
 exteriores y luz natural; (d) tipografico/grafico puro sin foto, fondos
 planos de color. Nada de dibujos/3D cartoon NI penumbra cinematica de
 stock (canta a IA). El humor va en la situacion o el objeto reconocible.
+MODOS DE CONTENIDO (3-sep, pedidos por Maikel): ademas del modo DOLOR
+(historia en actos + humor), existen (1) modo ASPIRACIONAL: foto nocturna
+azul-violeta con UNA luz calida como foco emocional (referencia
+starmedia.latam «ventana encendida»), texto pequeno centrado casi
+susurrado, cero venta, cero tacos, celebra al dueno que pelea; hueco:
+domingo noche. La penumbra cinematica SI esta permitida dentro de este
+modo (es su lenguaje). (2) modo HISTORIAS DE MARCA: serie «Como lo hizo»,
+una marca conocida por carrusel contando su mecanica de growth real y la
+leccion aplicable a una pyme; SOLO datos publicos verificados con fuente
+(cero cifras inventadas), tono admirativo-analitico, no burla; hueco:
+martes. Estos modos tambien rotan estetica y no venden en duro.
 Estructura de carrusel: HILO CONDUCTOR como historia en actos (kicker
 naranja arriba que situa cada lamina), titulares autoexplicativos con
 la frase completa como la diria el personaje, y remate que explica el
