@@ -413,3 +413,17 @@ Aplicado (decisión de Maikel de subir PMax; el resto, rutina):
   Search acumule ~5 registros, con CPA objetivo.
 - **DG Prospecting: URL final devuelta a la landing** `rai.outthink.es` (03-09, decisión de
   Maikel). Mismos UTM. Los 7 anuncios vuelven a revisión.
+
+### Segundo correo de Aída (03-09): dos alertas de política
+1. **«Diseño engañoso»**: es la creatividad **R1** (simula un menú/notificación). Estaba en
+   PMax como imagen horizontal (retirada esa mañana) y como anuncio `OT26_R1` en
+   Remarketing (`APPROVED_LIMITED`, campaña pausada) → **anuncio pausado**. No está en DG
+   Prospecting. R1 queda descartada en todos los formatos.
+2. **«Un sitio web por cada grupo de anuncios»**: los 7 anuncios de DG Prospecting quedaron
+   rechazados tras el cambio de URL al formulario y la vuelta a la landing: el revisor
+   evaluó durante la transición y el rechazo se mantuvo aunque las 7 URL ya eran iguales.
+   **Solución: los 7 anuncios se han eliminado y recreado idénticos** (mismos assets,
+   textos y opt-outs de vídeo) con URL final `rai.outthink.es`. IDs nuevos
+   823311229325…343. En revisión. Copia del contenido en el scratchpad (`dg_ads_backup.json`).
+   Lección: en Demand Gen no cambiar la URL final de anuncios existentes; crear anuncios
+   nuevos y pausar los antiguos.
