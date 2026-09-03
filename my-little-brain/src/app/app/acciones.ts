@@ -3,7 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
-import { firmaPerfil, generarPlan } from '@/lib/motor/planificador';
+import { firmaPerfil, generarPlan, prescripcion } from '@/lib/motor/planificador';
+import type { Bloque } from '@/lib/motor/tipos-motor';
 import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
 import { perfilEntreno } from '@/lib/perfil';
 import { clienteServidor } from '@/lib/supabase/servidor';
@@ -252,6 +253,34 @@ export async function guardarEntreno(payload: {
   revalidatePath('/app');
   revalidatePath('/app/entreno');
   return { ok: true };
+}
+
+/** Anade un ejercicio al dia del plan activo (desde el registro de sesion). */
+export async function anadirAlPlan(diaId: string, ejercicioId: string, nombre: string) {
+  const { supabase, userId } = await sesion();
+  const [{ data: plan }, perfil] = await Promise.all([
+    supabase
+      .from('planes_entreno')
+      .select('id, datos')
+      .eq('user_id', userId)
+      .eq('activo', true)
+      .order('generado_el', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+    cargarPerfil(supabase, userId),
+  ]);
+  if (!plan || !perfil) return;
+
+  const datos = plan.datos as { dias: { id: string; bloques: Bloque[] }[] };
+  const dia = datos.dias.find((d) => d.id === diaId);
+  if (!dia || dia.bloques.some((b) => b.ejercicioId === ejercicioId)) return;
+
+  const datosEntreno = perfilEntreno(perfil);
+  const pauta = prescripcion('accesorio', datosEntreno?.objetivo ?? 'mantener', datosEntreno?.nivel ?? 'intermedio', ejercicioId);
+  dia.bloques.push({ ejercicioId, rol: 'accesorio', ...pauta, ...(ejercicioId.startsWith('libre_') ? { nombreLibre: nombre } : {}) });
+
+  await supabase.from('planes_entreno').update({ datos }).eq('id', plan.id);
+  revalidatePath('/app/entreno');
 }
 
 /** Accion de formulario: regenera el plan con los datos actuales del perfil. */

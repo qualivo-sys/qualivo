@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { regenerarPlan } from '@/app/app/acciones';
-import RegistroEntreno, { type BloqueVista } from '@/components/registro-entreno';
+import RegistroEntreno, { type BloqueVista, type OpcionCatalogo } from '@/components/registro-entreno';
 import { Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
 import { sumarDias } from '@/lib/fechas';
-import { ejercicio } from '@/lib/motor/ejercicios';
+import { EJERCICIOS, ejercicio } from '@/lib/motor/ejercicios';
 import { esIsometrico, planDesactualizado, volumenSemanal } from '@/lib/motor/planificador';
 import { proximoDia, sugerencia } from '@/lib/motor/progresion';
 import { perfilEntreno } from '@/lib/perfil';
@@ -48,7 +48,7 @@ export default async function PaginaEntreno({
     const consejo = sugerencia(bloque, sesiones);
     return {
       ...bloque,
-      nombre: info?.nombre ?? bloque.ejercicioId,
+      nombre: info?.nombre ?? bloque.nombreLibre ?? bloque.ejercicioId,
       tecnica: info?.tecnica ?? '',
       sugerencia: consejo.texto,
       pesoSugerido: consejo.pesoKg,
@@ -61,6 +61,18 @@ export default async function PaginaEntreno({
     (e) => e.completado && e.fecha === panel.hoy && e.dia_plan === diaSeleccionado.id,
   );
   const sesionHoy = hechaHoy && !searchParams.nueva ? sesiones.find((s) => s.id === hechaHoy.id) ?? null : null;
+
+  // Catalogo para anadir ejercicios a la sesion, con la sugerencia de carga de cada uno.
+  const GRUPOS: Record<string, string> = {
+    empuje_horizontal: 'Pecho', empuje_vertical: 'Hombro (empuje)', traccion_horizontal: 'Espalda (remo)',
+    traccion_vertical: 'Espalda (dominadas y jalones)', dominante_rodilla: 'Pierna (cuadriceps)',
+    dominante_cadera: 'Pierna (isquios y gluteo)', gluteo: 'Gluteo', gemelo: 'Gemelo', core: 'Core',
+    hombro: 'Hombro (aislamiento)', biceps: 'Biceps', triceps: 'Triceps',
+  };
+  const catalogo: OpcionCatalogo[] = EJERCICIOS.map((e) => {
+    const consejo = sugerencia({ ejercicioId: e.id, rol: 'accesorio', series: 3, repMin: 8, repMax: 12, rir: 2, descansoSeg: 90 }, sesiones);
+    return { id: e.id, nombre: e.nombre, grupo: GRUPOS[e.patron] ?? e.patron, tecnica: e.tecnica, pesoSugerido: consejo.pesoKg, sugerencia: consejo.texto };
+  });
 
   const datosPerfil = perfilEntreno(perfil);
   const desactualizado = datosPerfil ? planDesactualizado(panel.plan, datosPerfil) : false;
@@ -117,7 +129,9 @@ export default async function PaginaEntreno({
           <ul className="space-y-3 text-sm">
             {sesionHoy.ejercicios.map((ej) => (
               <li key={ej.ejercicioId}>
-                <div className="font-medium">{ejercicio(ej.ejercicioId)?.nombre ?? ej.ejercicioId}</div>
+                <div className="font-medium">
+                  {ejercicio(ej.ejercicioId)?.nombre ?? ej.ejercicioId.replace(/^libre_/, '').replace(/_/g, ' ')}
+                </div>
                 <div className="text-muted-foreground">
                   {ej.series
                     .filter((serie) => serie.hecha)
@@ -145,6 +159,7 @@ export default async function PaginaEntreno({
           bloques={bloques}
           pesoKg={Math.round(panel.cuerpo.peso ?? 75)}
           claveBorrador={`${usuario.id}:${diaSeleccionado.id}:${panel.hoy}`}
+          catalogo={catalogo}
         />
       )}
 

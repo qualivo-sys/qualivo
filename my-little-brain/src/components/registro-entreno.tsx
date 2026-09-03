@@ -3,8 +3,8 @@
 import { Check, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { guardarEntreno, type SeriePayload } from '@/app/app/acciones';
-import { Boton, Selector, Tarjeta } from '@/components/ui/base';
+import { anadirAlPlan, guardarEntreno, type SeriePayload } from '@/app/app/acciones';
+import { Boton, Campo, Selector, Tarjeta } from '@/components/ui/base';
 import { TIPOS_CARDIO, enlaceTecnica, kcalCardio } from '@/lib/motor/cardio';
 import type { Bloque } from '@/lib/motor/tipos-motor';
 import { cn } from '@/lib/utils';
@@ -15,6 +15,19 @@ export interface BloqueVista extends Bloque {
   sugerencia: string;
   pesoSugerido: number | null;
   esIsometrico: boolean;
+  /** Anadido a mano en esta sesion (no viene del plan). */
+  extra?: boolean;
+  /** Si ademas quiere guardarlo en el plan de este dia. */
+  alPlan?: boolean;
+}
+
+export interface OpcionCatalogo {
+  id: string;
+  nombre: string;
+  grupo: string;
+  tecnica: string;
+  pesoSugerido: number | null;
+  sugerencia: string;
 }
 
 interface SerieEditable {
@@ -30,6 +43,7 @@ export default function RegistroEntreno({
   bloques,
   pesoKg,
   claveBorrador,
+  catalogo,
 }: {
   diaId: string;
   nombre: string;
@@ -38,8 +52,21 @@ export default function RegistroEntreno({
   pesoKg: number;
   /** Clave unica de usuario+dia+fecha para el borrador local. */
   claveBorrador: string;
+  /** Catalogo completo para poder anadir ejercicios a la sesion. */
+  catalogo: OpcionCatalogo[];
 }) {
   const router = useRouter();
+  const [extras, setExtras] = useState<BloqueVista[]>([]);
+  const todos = [...bloques, ...extras];
+
+  const filasPara = (bloque: BloqueVista): SerieEditable[] =>
+    Array.from({ length: bloque.series }, () => ({
+      peso: bloque.pesoSugerido !== null ? String(bloque.pesoSugerido) : '',
+      reps: '',
+      rir: '',
+      hecha: false,
+    }));
+
   const inicial = (): SerieEditable[][] =>
     bloques.map((bloque) =>
       Array.from({ length: bloque.series }, () => ({
@@ -57,9 +84,13 @@ export default function RegistroEntreno({
     try {
       const crudo = window.localStorage.getItem(claveLocal);
       if (!crudo) return null;
-      const b = JSON.parse(crudo) as { estado?: SerieEditable[][]; sensacion?: number | null; notas?: string; cardioTipo?: string; cardioMin?: string };
-      if (!Array.isArray(b.estado) || b.estado.length !== bloques.length) return null;
-      return b;
+      const b = JSON.parse(crudo) as {
+        estado?: SerieEditable[][]; extras?: BloqueVista[]; sensacion?: number | null;
+        notas?: string; cardioTipo?: string; cardioMin?: string;
+      };
+      const extrasGuardados = Array.isArray(b.extras) ? b.extras : [];
+      if (!Array.isArray(b.estado) || b.estado.length !== bloques.length + extrasGuardados.length) return null;
+      return { ...b, extras: extrasGuardados };
     } catch {
       return null;
     }
@@ -81,6 +112,7 @@ export default function RegistroEntreno({
     const b = leerBorrador();
     if (b) {
       if (b.estado) setEstado(b.estado);
+      setExtras(b.extras ?? []);
       setSensacion(b.sensacion ?? null);
       setNotas(b.notas ?? '');
       setCardioTipo(b.cardioTipo ?? '');
@@ -95,17 +127,17 @@ export default function RegistroEntreno({
   useEffect(() => {
     if (!hidratado.current) return;
     const hayAlgo =
-      estado.some((filas) => filas.some((f) => f.hecha || f.reps || f.rir)) || notas || sensacion || cardioTipo;
+      estado.some((filas) => filas.some((f) => f.hecha || f.reps || f.rir)) || notas || sensacion || cardioTipo || extras.length;
     try {
       if (hayAlgo) {
-        window.localStorage.setItem(claveLocal, JSON.stringify({ estado, sensacion, notas, cardioTipo, cardioMin }));
+        window.localStorage.setItem(claveLocal, JSON.stringify({ estado, extras, sensacion, notas, cardioTipo, cardioMin }));
       } else {
         window.localStorage.removeItem(claveLocal);
       }
     } catch {
       // Sin espacio o modo privado: seguimos sin borrador.
     }
-  }, [estado, sensacion, notas, cardioTipo, cardioMin, claveLocal]);
+  }, [estado, extras, sensacion, notas, cardioTipo, cardioMin, claveLocal]);
 
   const editar = (bloque: number, serie: number, cambios: Partial<SerieEditable>) =>
     setEstado((previo) =>
@@ -113,6 +145,48 @@ export default function RegistroEntreno({
         i !== bloque ? filas : filas.map((fila, j) => (j !== serie ? fila : { ...fila, ...cambios })),
       ),
     );
+
+  const [seleccion, setSeleccion] = useState('');
+  const [libre, setLibre] = useState('');
+
+  const anadirEjercicio = () => {
+    let nuevo: BloqueVista | null = null;
+    if (seleccion) {
+      const o = catalogo.find((c) => c.id === seleccion);
+      if (o) {
+        nuevo = {
+          ejercicioId: o.id, rol: 'accesorio', series: 3, repMin: 8, repMax: 12, rir: 2, descansoSeg: 90,
+          nombre: o.nombre, tecnica: o.tecnica, sugerencia: o.sugerencia, pesoSugerido: o.pesoSugerido,
+          esIsometrico: false, extra: true, alPlan: false,
+        };
+      }
+    } else if (libre.trim()) {
+      const slug = libre.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').slice(0, 40);
+      nuevo = {
+        ejercicioId: `libre_${slug}`, rol: 'accesorio', series: 3, repMin: 8, repMax: 12, rir: 2, descansoSeg: 90,
+        nombre: libre.trim(), tecnica: '', sugerencia: 'Ejercicio propio: apunta el peso que uses y la proxima vez te digo como progresar.',
+        pesoSugerido: null, esIsometrico: false, extra: true, alPlan: false,
+      };
+    }
+    if (!nuevo) return;
+    if (todos.some((b) => b.ejercicioId === nuevo!.ejercicioId)) return;
+    setExtras((previos) => [...previos, nuevo!]);
+    setEstado((previo) => [...previo, filasPara(nuevo!)]);
+    setSeleccion('');
+    setLibre('');
+  };
+
+  const quitarExtra = (indiceGlobal: number) => {
+    const indiceExtra = indiceGlobal - bloques.length;
+    if (indiceExtra < 0) return;
+    setExtras((previos) => previos.filter((_, i) => i !== indiceExtra));
+    setEstado((previo) => previo.filter((_, i) => i !== indiceGlobal));
+  };
+
+  const alternarAlPlan = (indiceGlobal: number) => {
+    const indiceExtra = indiceGlobal - bloques.length;
+    setExtras((previos) => previos.map((b, i) => (i !== indiceExtra ? b : { ...b, alPlan: !b.alPlan })));
+  };
 
   const anadirSerie = (bloque: number) =>
     setEstado((previo) =>
@@ -128,8 +202,8 @@ export default function RegistroEntreno({
       filas.forEach((fila, indiceSerie) => {
         if (!fila.hecha && !fila.reps) return;
         series.push({
-          ejercicio_id: bloques[indiceBloque].ejercicioId,
-          ejercicio_nombre: bloques[indiceBloque].nombre,
+          ejercicio_id: todos[indiceBloque].ejercicioId,
+          ejercicio_nombre: todos[indiceBloque].nombre,
           orden: indiceBloque,
           serie: indiceSerie + 1,
           peso_kg: fila.peso ? Number(fila.peso.replace(',', '.')) : null,
@@ -147,6 +221,9 @@ export default function RegistroEntreno({
       series,
       cardio: cardioTipo && Number(cardioMin) > 0 ? { tipo: cardioTipo, minutos: Number(cardioMin), kcal: cardioKcal } : null,
     });
+    for (const extra of extras.filter((e) => e.alPlan)) {
+      await anadirAlPlan(diaId, extra.ejercicioId, extra.nombre);
+    }
     try {
       window.localStorage.removeItem(claveLocal);
     } catch {
@@ -175,9 +252,22 @@ export default function RegistroEntreno({
         </div>
       )}
 
-      {bloques.map((bloque, indiceBloque) => (
+      {todos.map((bloque, indiceBloque) => (
         <Tarjeta key={`${bloque.ejercicioId}-${indiceBloque}`}>
-          <h3 className="font-semibold">{bloque.nombre}</h3>
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-semibold">{bloque.nombre}</h3>
+            {bloque.extra && (
+              <button type="button" onClick={() => quitarExtra(indiceBloque)} className="text-xs text-muted-foreground underline">
+                quitar
+              </button>
+            )}
+          </div>
+          {bloque.extra && (
+            <label className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
+              <input type="checkbox" checked={Boolean(bloque.alPlan)} onChange={() => alternarAlPlan(indiceBloque)} className="h-4 w-4 rounded border-border bg-muted" />
+              Guardarlo en el plan de este dia
+            </label>
+          )}
           <p className="mt-0.5 text-xs text-muted-foreground">
             {bloque.series} × {bloque.repMin}-{bloque.repMax} {bloque.esIsometrico ? 'seg' : 'reps'} · RIR {bloque.rir} ·
             descanso {Math.round(bloque.descansoSeg / 60)} min
@@ -242,7 +332,7 @@ export default function RegistroEntreno({
           </button>
 
           <p className="mt-3 border-l-2 border-border pl-3 text-xs text-muted-foreground">
-            {bloque.tecnica}{' '}
+            {bloque.tecnica}{bloque.tecnica ? ' ' : ''}
             <a
               href={enlaceTecnica(bloque.nombre)}
               target="_blank"
@@ -254,6 +344,29 @@ export default function RegistroEntreno({
           </p>
         </Tarjeta>
       ))}
+
+      <Tarjeta>
+        <h3 className="mb-1 font-semibold">Anadir un ejercicio</h3>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Del catalogo o uno tuyo. Si marcas &ldquo;guardarlo en el plan&rdquo;, saldra siempre en este dia.
+        </p>
+        <div className="space-y-3">
+          <Selector etiqueta="Del catalogo" value={seleccion} onChange={(e) => { setSeleccion(e.target.value); if (e.target.value) setLibre(''); }}>
+            <option value="">Elegir…</option>
+            {[...new Set(catalogo.map((c) => c.grupo))].map((grupo) => (
+              <optgroup key={grupo} label={grupo}>
+                {catalogo.filter((c) => c.grupo === grupo).map((c) => (
+                  <option key={c.id} value={c.id} disabled={todos.some((b) => b.ejercicioId === c.id)}>{c.nombre}</option>
+                ))}
+              </optgroup>
+            ))}
+          </Selector>
+          <Campo etiqueta="O escribe uno que no este" value={libre} onChange={(e) => { setLibre(e.target.value); if (e.target.value) setSeleccion(''); }} placeholder="Curl nordico, farmer walk…" />
+          <Boton type="button" variante="secundario" className="w-full" onClick={anadirEjercicio} disabled={!seleccion && !libre.trim()}>
+            + Anadir a la sesion
+          </Boton>
+        </div>
+      </Tarjeta>
 
       <Tarjeta>
         <h3 className="mb-1 font-semibold">Cardio al acabar</h3>

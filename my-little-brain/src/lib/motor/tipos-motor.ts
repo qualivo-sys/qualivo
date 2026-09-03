@@ -39,6 +39,8 @@ export interface PerfilEntreno {
 
 export interface Bloque {
   ejercicioId: string;
+  /** Nombre para ejercicios propios que no estan en el catalogo (id libre_…). */
+  nombreLibre?: string;
   rol: Rol;
   series: number;
   repMin: number;
