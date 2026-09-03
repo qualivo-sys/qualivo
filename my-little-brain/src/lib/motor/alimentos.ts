@@ -423,6 +423,8 @@ function analizarSegmento(segmento: string): LineaComida {
  */
 export function calcularComida(texto: string): ComidaCalculada {
   const segmentos = texto
+    // "0,0" (cerveza sin) no es una coma de separar: se junta antes de partir.
+    .replace(/\b0[,.]0\b/g, '00')
     .split(/,|\n|\+|;| y /i)
     .map((s) => s.trim())
     // Se ignoran los trozos que son solo un numero ("cerveza 0,0" se parte en "cerveza 0" y "0").
@@ -432,7 +434,11 @@ export function calcularComida(texto: string): ComidaCalculada {
   // y, si no se reconoce, se parte por " con ".
   const lineas = segmentos.flatMap((segmento) => {
     const entera = analizarSegmento(segmento);
-    if (entera.alimento || !/ con /i.test(segmento)) return [entera];
+    if (!/ con /i.test(segmento)) return [entera];
+    // Entero solo vale si el alimento reconocido es de los que llevan "con" en el nombre
+    // (cafe con leche, macarrones con tomate); si no, "tostadas con aguacate" son dos.
+    const esPlatoConCon = entera.alimento && [entera.alimento.nombre, ...entera.alimento.alias].some((al) => / con /i.test(al));
+    if (esPlatoConCon) return [entera];
     return segmento.split(/ con /i).map((parte) => analizarSegmento(parte.trim()));
   });
   const reconocidas = lineas.filter((l) => l.alimento);
