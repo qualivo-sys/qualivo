@@ -21,9 +21,11 @@ Tanda 2 (mañana): diagnostico · automatizacion-comercial · servicios · consu
 - Avisar a Maikel con la URL para su ronda de GSC
 
 
-## Mapa de conceptos YA publicados en IG (no repetir, 2-sep)
+## Mapa de conceptos YA publicados en IG (no repetir, 3-sep)
 Fugas del funnel en general · seguimiento/2o contacto · velocidad de primer
 contacto · formulario largo · linterna (mirar donde no miras) · el cubo /
-echar mas agua · la persona equivocada · las 6 comprobaciones.
-Dolores virgenes en cola: reactivacion CRM (mie 3-sep) · GEO/ChatGPT te
-busca (vie 5-sep) · CAC/ticket (recamara) · metricas de vanidad · CRM-teatro.
+echar mas agua · la persona equivocada · las 6 comprobaciones · la reunion
+de los lunes / silos y huecos (jue 3-sep) · el stalkeo del cliente /
+reputacion completa antes de subir presupuesto (vie 4-sep, programado).
+Dolores virgenes en cola: reactivacion CRM · GEO/ChatGPT te busca ·
+CAC/ticket (recamara) · metricas de vanidad · CRM-teatro.
