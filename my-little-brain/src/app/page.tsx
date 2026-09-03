@@ -25,7 +25,7 @@ export default async function Portada({ searchParams }: { searchParams: { cuenta
   return (
     <main className="mx-auto max-w-3xl px-5 pb-20 pt-14">
       {searchParams.cuenta === 'borrada' && (
-        <p className="mb-6 rounded-lg bg-emerald-500/15 px-3 py-2 text-center text-sm text-emerald-300">
+        <p className="mb-6 rounded-lg bg-emerald-500/15 px-3 py-2 text-center text-sm text-emerald-700 dark:text-emerald-300">
           Cuenta borrada. Gracias por haber estado aqui.
         </p>
       )}
@@ -36,12 +36,12 @@ export default async function Portada({ searchParams }: { searchParams: { cuenta
           Un entrenador, un nutricionista y un jefe de operaciones de tu vida, disponibles
           las 24 horas. Le cuentas tu dia por chat y el sistema se construye solo.
         </p>
-        <div className="mt-7 flex justify-center gap-3">
-          <Link href={usuario ? '/app' : '/entrar'}>
-            <Boton tamano="lg">{usuario ? 'Entrar en mi panel' : 'Empezar gratis'}</Boton>
+        <div className="mx-auto mt-7 flex max-w-sm flex-col justify-center gap-3 sm:max-w-none sm:flex-row">
+          <Link href={usuario ? '/app' : '/entrar'} className="block">
+            <Boton tamano="lg" className="w-full whitespace-nowrap sm:w-auto">{usuario ? 'Entrar en mi panel' : 'Empezar gratis'}</Boton>
           </Link>
-          <Link href="#como-funciona">
-            <Boton tamano="lg" variante="contorno">Como funciona</Boton>
+          <Link href="#como-funciona" className="block">
+            <Boton tamano="lg" variante="contorno" className="w-full whitespace-nowrap sm:w-auto">Como funciona</Boton>
           </Link>
         </div>
       </header>

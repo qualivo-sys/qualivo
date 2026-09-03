@@ -104,7 +104,7 @@ export default function VistaRevision({
               <ol className="space-y-2 text-sm">
                 {revision.acciones.map((accion, i) => (
                   <li key={accion} className="flex gap-2">
-                    <span className="font-semibold text-emerald-400">{i + 1}.</span> {accion}
+                    <span className="font-semibold text-emerald-600 dark:text-emerald-400">{i + 1}.</span> {accion}
                   </li>
                 ))}
               </ol>

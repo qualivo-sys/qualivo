@@ -91,7 +91,7 @@ function Formulario() {
           ayuda={modo === 'registro' ? 'Minimo 8 caracteres.' : undefined}
         />
         {error && <p className="rounded-lg bg-destructive/15 px-3 py-2 text-sm text-destructive">{error}</p>}
-        {aviso && <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">{aviso}</p>}
+        {aviso && <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">{aviso}</p>}
         {modo === 'entrar' ? (
           <p className="text-center text-sm">
             <Link href="/recuperar" className="text-muted-foreground underline">¿Has olvidado la contraseña?</Link>

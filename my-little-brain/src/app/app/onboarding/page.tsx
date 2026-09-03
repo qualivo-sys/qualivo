@@ -29,7 +29,7 @@ export default async function PaginaAlta() {
 
       {!hayClaveIA() ? (
         <div className="rounded-[var(--radius)] border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
-          <p className="mb-2 font-semibold text-amber-300">Falta la clave de la IA</p>
+          <p className="mb-2 font-semibold text-amber-700 dark:text-amber-300">Falta la clave de la IA</p>
           <p className="text-muted-foreground">
             Configura <code>ANTHROPIC_API_KEY</code> en el servidor para hacer el alta por chat.
             Mientras tanto puedes rellenar tus datos a mano en{' '}

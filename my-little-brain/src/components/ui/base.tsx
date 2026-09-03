@@ -58,8 +58,8 @@ export function Insignia({
 }: React.HTMLAttributes<HTMLSpanElement> & { tono?: 'neutro' | 'exito' | 'aviso' | 'marca' }) {
   const tonos = {
     neutro: 'bg-secondary text-muted-foreground',
-    exito: 'bg-emerald-500/15 text-emerald-300',
-    aviso: 'bg-amber-500/15 text-amber-300',
+    exito: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+    aviso: 'bg-amber-500/15 text-amber-700 dark:text-amber-300',
     marca: 'bg-primary/20 text-primary',
   };
   return (

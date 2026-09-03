@@ -74,7 +74,7 @@ export default function CalculadoraComida() {
                   </span>
                 </li>
               ) : (
-                <li key={i} className="text-amber-300">
+                <li key={i} className="text-amber-700 dark:text-amber-300">
                   &ldquo;{linea.texto}&rdquo; no esta en la tabla: no suma. Diselo al coach y lo estima.
                 </li>
               ),
@@ -101,7 +101,7 @@ export default function CalculadoraComida() {
           Guardar
         </Boton>
       </div>
-      {guardado && <p className="text-sm text-emerald-300">Comida guardada.</p>}
+      {guardado && <p className="text-sm text-emerald-700 dark:text-emerald-300">Comida guardada.</p>}
     </div>
   );
 }

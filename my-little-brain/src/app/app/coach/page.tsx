@@ -35,7 +35,7 @@ export default async function PaginaCoach({ searchParams }: { searchParams: { ch
       </div>
 
       {!hayClaveIA() && (
-        <p className="mb-3 rounded-lg bg-amber-500/15 px-3 py-2 text-sm text-amber-300">
+        <p className="mb-3 rounded-lg bg-amber-500/15 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
           Falta configurar <code>ANTHROPIC_API_KEY</code> en el servidor: el coach no puede
           responder todavia. El resto de la app funciona.
         </p>

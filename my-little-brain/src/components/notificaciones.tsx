@@ -123,7 +123,7 @@ export default function Notificaciones() {
   }
   if (estado === 'denegado') {
     return (
-      <p className="text-sm text-amber-300">
+      <p className="text-sm text-amber-700 dark:text-amber-300">
         Has bloqueado los avisos para esta web. Actívalos en los ajustes del navegador y recarga.
       </p>
     );

@@ -1,6 +1,7 @@
 import { Settings } from 'lucide-react';
 import Link from 'next/link';
 import Navegacion from '@/components/navegacion';
+import { BotonTema } from '@/components/tema';
 import { Insignia } from '@/components/ui/base';
 import { sesionRequerida } from '@/lib/sesion';
 
@@ -19,6 +20,7 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
         </Link>
         <div className="flex items-center gap-2">
           {perfil.plan !== 'free' && <Insignia tono="marca">{perfil.plan}</Insignia>}
+          <BotonTema />
           <Link href="/app/ajustes" aria-label="Ajustes" className="text-muted-foreground hover:text-foreground">
             <Settings size={20} />
           </Link>

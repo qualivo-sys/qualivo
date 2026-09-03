@@ -39,7 +39,7 @@ export default function PaginaRecuperar() {
           Te mandamos un enlace al correo para que pongas una nueva.
         </p>
         {enviado ? (
-          <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
+          <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
             Si ese email tiene cuenta, el enlace ya va de camino. Mira tambien en spam.
           </p>
         ) : (

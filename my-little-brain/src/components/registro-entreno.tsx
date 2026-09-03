@@ -392,7 +392,7 @@ export default function RegistroEntreno({
               Guardar en el plan del dia
             </Boton>
           </div>
-          {avisoPlan && <p className="text-sm text-emerald-300">{avisoPlan}</p>}
+          {avisoPlan && <p className="text-sm text-emerald-700 dark:text-emerald-300">{avisoPlan}</p>}
         </div>
       </Tarjeta>
 

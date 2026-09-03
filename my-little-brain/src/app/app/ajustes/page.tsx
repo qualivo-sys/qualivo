@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { borrarCuenta, cerrarSesion, guardarPerfil, guardarPreferencias } from '@/app/app/acciones';
 import Notificaciones from '@/components/notificaciones';
+import { SelectorTema } from '@/components/tema';
 import PlanSuscripcion from '@/components/plan-suscripcion';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { LIMITE_MENSAJES, cuota } from '@/lib/ia/limites';
@@ -32,12 +33,12 @@ export default async function PaginaAjustes({
       <h1>Ajustes</h1>
 
       {searchParams.pago === 'ok' && (
-        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
+        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
           Pago confirmado. Si el plan tarda unos segundos en actualizarse, recarga la pagina.
         </p>
       )}
       {searchParams.clave === 'ok' && (
-        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-300">
+        <p className="rounded-lg bg-emerald-500/15 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
           Contraseña cambiada.
         </p>
       )}
@@ -73,6 +74,11 @@ export default async function PaginaAjustes({
           </p>
         )}
         <PlanSuscripcion plan={perfil.plan} pagosActivos={hayPagos()} />
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Aspecto</TituloTarjeta>
+        <SelectorTema />
       </Tarjeta>
 
       <Tarjeta>

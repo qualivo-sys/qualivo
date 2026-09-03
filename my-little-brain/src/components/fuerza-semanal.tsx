@@ -56,7 +56,7 @@ export default function FuerzaSemanal({ ejercicios }: { ejercicios: SerieEjercic
                 <tr key={p.fecha} className="border-t border-border">
                   <td className="py-1.5">{p.fecha.slice(8)}/{p.fecha.slice(5, 7)}</td>
                   <td className="py-1.5 text-right tabular-nums">{p.valor} kg</td>
-                  <td className={`py-1.5 text-right tabular-nums ${delta === null ? 'text-muted-foreground' : delta > 0 ? 'text-emerald-400' : delta < 0 ? 'text-amber-400' : 'text-muted-foreground'}`}>
+                  <td className={`py-1.5 text-right tabular-nums ${delta === null ? 'text-muted-foreground' : delta > 0 ? 'text-emerald-600 dark:text-emerald-400' : delta < 0 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
                     {delta === null ? '—' : `${delta > 0 ? '+' : ''}${delta.toFixed(1)}`}
                   </td>
                 </tr>

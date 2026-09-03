@@ -182,11 +182,11 @@ export default async function PanelHoy() {
               senal.tono === 'bien' ? CheckCircle2 : senal.tono === 'alerta' ? AlertTriangle : senal.tono === 'aviso' ? TrendingDown : Info;
             const color =
               senal.tono === 'bien'
-                ? 'border-emerald-500/40 text-emerald-400'
+                ? 'border-emerald-500/40 text-emerald-600 dark:text-emerald-400'
                 : senal.tono === 'alerta'
                   ? 'border-destructive/40 text-destructive'
                   : senal.tono === 'aviso'
-                    ? 'border-amber-500/40 text-amber-400'
+                    ? 'border-amber-500/40 text-amber-600 dark:text-amber-400'
                     : 'border-border text-muted-foreground';
             return (
               <Tarjeta key={senal.id} className={color.split(' ')[0]}>

@@ -6,7 +6,7 @@ export default function LayoutLegal({ children }: { children: React.ReactNode })
     <main className="mx-auto max-w-2xl px-5 pb-16 pt-10">
       <Link href="/" className="text-sm text-muted-foreground">← My Little Brain</Link>
       {!legalConfigurado() && (
-        <p className="mt-4 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-300">
+        <p className="mt-4 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
           Faltan los datos del responsable (variables <code>NEXT_PUBLIC_LEGAL_*</code>). Este aviso
           desaparece al configurarlas.
         </p>
