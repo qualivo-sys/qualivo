@@ -73,7 +73,7 @@ export default async function PaginaSemana() {
       <Tarjeta>
         <TituloTarjeta>Calendario de la semana</TituloTarjeta>
         <div className="desplazable-x">
-          <div className="grid min-w-[560px] grid-cols-7 gap-1.5">
+          <div className="grid min-w-[640px] grid-cols-7 gap-1.5">
             {diasCalendario.map((d, i) => (
               <div
                 key={d.fecha}
@@ -99,9 +99,9 @@ export default async function PaginaSemana() {
                 </div>
                 {!d.futuro && d.dia && (
                   <dl className="mt-1.5 space-y-0.5 text-[11px] text-muted-foreground tabular-nums">
-                    <div className="flex justify-between"><dt>comido</dt><dd>{d.dia.comidas ? d.dia.kcal : '—'}</dd></div>
-                    <div className="flex justify-between"><dt>gastado</dt><dd>{d.dia.gastoKcal ? `~${d.dia.gastoKcal}` : '—'}</dd></div>
-                    <div className="flex justify-between"><dt>pasos</dt><dd>{d.dia.pasos ? d.dia.pasos.toLocaleString('es-ES') : '—'}</dd></div>
+                    <div className="flex justify-between gap-1"><dt>com.</dt><dd className="text-foreground">{d.dia.comidas ? d.dia.kcal : '—'}</dd></div>
+                    <div className="flex justify-between gap-1"><dt>gast.</dt><dd className="text-foreground">{d.dia.gastoKcal ? `~${d.dia.gastoKcal}` : '—'}</dd></div>
+                    <div className="flex justify-between gap-1"><dt>pasos</dt><dd className="text-foreground">{d.dia.pasos ? (d.dia.pasos / 1000).toFixed(1) + 'k' : '—'}</dd></div>
                   </dl>
                 )}
               </div>
