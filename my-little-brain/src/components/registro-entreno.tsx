@@ -176,6 +176,27 @@ export default function RegistroEntreno({
     setLibre('');
   };
 
+  const [guardandoPlan, setGuardandoPlan] = useState(false);
+  const [avisoPlan, setAvisoPlan] = useState('');
+
+  /** Anade el ejercicio elegido al plan de este dia sin necesidad de registrar sesion. */
+  const guardarEnPlanAhora = async () => {
+    const o = seleccion ? catalogo.find((c) => c.id === seleccion) : null;
+    const id = o ? o.id : libre.trim() ? `libre_${libre.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').slice(0, 40)}` : '';
+    const nombreEj = o ? o.nombre : libre.trim();
+    if (!id) return;
+    setGuardandoPlan(true);
+    try {
+      await anadirAlPlan(diaId, id, nombreEj);
+      setAvisoPlan(`${nombreEj} ya esta en el plan de este dia.`);
+      setSeleccion('');
+      setLibre('');
+      router.refresh();
+    } finally {
+      setGuardandoPlan(false);
+    }
+  };
+
   const quitarExtra = (indiceGlobal: number) => {
     const indiceExtra = indiceGlobal - bloques.length;
     if (indiceExtra < 0) return;
@@ -345,7 +366,7 @@ export default function RegistroEntreno({
         </Tarjeta>
       ))}
 
-      <Tarjeta>
+      <Tarjeta id="anadir">
         <h3 className="mb-1 font-semibold">Anadir un ejercicio</h3>
         <p className="mb-3 text-xs text-muted-foreground">
           Del catalogo o uno tuyo. Si marcas &ldquo;guardarlo en el plan&rdquo;, saldra siempre en este dia.
@@ -362,9 +383,16 @@ export default function RegistroEntreno({
             ))}
           </Selector>
           <Campo etiqueta="O escribe uno que no este" value={libre} onChange={(e) => { setLibre(e.target.value); if (e.target.value) setSeleccion(''); }} placeholder="Curl nordico, farmer walk…" />
-          <Boton type="button" variante="secundario" className="w-full" onClick={anadirEjercicio} disabled={!seleccion && !libre.trim()}>
-            + Anadir a la sesion
-          </Boton>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <Boton type="button" variante="secundario" onClick={anadirEjercicio} disabled={!seleccion && !libre.trim()}>
+              + Anadir a la sesion de hoy
+            </Boton>
+            <Boton type="button" variante="contorno" onClick={guardarEnPlanAhora} disabled={guardandoPlan || (!seleccion && !libre.trim())}>
+              {guardandoPlan ? <Loader2 size={16} className="animate-spin" /> : null}
+              Guardar en el plan del dia
+            </Boton>
+          </div>
+          {avisoPlan && <p className="text-sm text-emerald-300">{avisoPlan}</p>}
         </div>
       </Tarjeta>
 

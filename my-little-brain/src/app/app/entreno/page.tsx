@@ -146,9 +146,14 @@ export default async function PaginaEntreno({
               Cardio: {hechaHoy.cardio_min} min (~{hechaHoy.cardio_kcal} kcal).
             </p>
           ) : null}
-          <Link href={`/app/entreno?dia=${diaSeleccionado.id}&nueva=1`} className="mt-4 block">
-            <Boton variante="contorno" className="w-full">Registrar otra sesion de este dia</Boton>
-          </Link>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            <Link href={`/app/entreno?dia=${diaSeleccionado.id}&nueva=1`} className="block">
+              <Boton variante="contorno" className="w-full">Registrar otra sesion</Boton>
+            </Link>
+            <Link href={`/app/entreno?dia=${diaSeleccionado.id}&nueva=1#anadir`} className="block">
+              <Boton variante="contorno" className="w-full">Anadir ejercicios al plan</Boton>
+            </Link>
+          </div>
         </Tarjeta>
       ) : (
         /* key: al cambiar de dia el registro se reinicia y no arrastra los pesos del anterior. */
