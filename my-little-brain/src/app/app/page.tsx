@@ -1,10 +1,11 @@
-import { AlertTriangle, ArrowRight, CheckCircle2, Flame, Info, MessageCircle, TrendingDown } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Dumbbell, Flame, Info, MessageCircle, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
 import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
-import { cargarPanel } from '@/lib/datos';
+import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
+import { ejercicio } from '@/lib/motor/ejercicios';
 import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { proximoDia } from '@/lib/motor/progresion';
@@ -54,6 +55,19 @@ export default async function PanelHoy() {
     ritmoObjetivo: metas?.ritmoKgSemana ?? null,
     racha: panel.racha,
   }).slice(0, 3);
+
+  // Entrenos de hoy con sus series, para ensenar lo hecho y no solo un "si".
+  const entrenosHoy = panel.entrenamientos.filter((e) => e.completado && e.fecha === panel.hoy);
+  const sesionesHoy = entrenosHoy.length ? await cargarSesionesMotor(supabase, usuario.id, panel.hoy) : [];
+  const resumenHoy = entrenosHoy.map((e) => {
+    const sesion = sesionesHoy.find((s) => s.id === e.id);
+    const series = (sesion?.ejercicios ?? []).flatMap((ej) => ej.series.filter((serie) => serie.hecha));
+    const volumen = series.reduce((total, serie) => total + (serie.pesoKg ?? 0) * (serie.reps ?? 0), 0);
+    const nombres = (sesion?.ejercicios ?? []).map(
+      (ej) => ejercicio(ej.ejercicioId)?.nombre ?? ej.ejercicioId.replace(/^libre_/, '').replace(/_/g, ' '),
+    );
+    return { ...e, ejercicios: nombres, seriesHechas: series.length, volumen: Math.round(volumen) };
+  });
 
   const habitosHechos = panel.registrosHabitos
     .filter((r) => r.fecha === panel.hoy && r.hecho)
@@ -174,6 +188,41 @@ export default async function PanelHoy() {
         </div>
       </Tarjeta>
 
+      {resumenHoy.length > 0 && (
+        <Tarjeta className="border-emerald-500/40">
+          <div className="mb-2 flex items-center justify-between">
+            <TituloTarjeta className="mb-0 flex items-center gap-2">
+              <Dumbbell size={16} className="text-[hsl(var(--area-fitness))]" /> Entreno de hoy
+            </TituloTarjeta>
+            <Insignia tono="exito">hecho</Insignia>
+          </div>
+          <ul className="space-y-3">
+            {resumenHoy.map((e) => (
+              <li key={e.id} className="text-sm">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-semibold">{e.nombre}</span>
+                  {e.sensacion ? <span className="text-xs text-muted-foreground">sensacion {e.sensacion}/5</span> : null}
+                </div>
+                <div className="mt-0.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground tabular-nums">
+                  {e.ejercicios.length > 0 && <span>{e.ejercicios.length} ejercicios</span>}
+                  {e.seriesHechas > 0 && <span>{e.seriesHechas} series</span>}
+                  {e.volumen > 0 && <span>{e.volumen.toLocaleString('es-ES')} kg movidos</span>}
+                  {e.cardio_min ? <span>cardio {e.cardio_min} min{e.cardio_kcal ? ` · ~${e.cardio_kcal} kcal` : ''}</span> : null}
+                </div>
+                {e.ejercicios.length > 0 && (
+                  <p className="mt-1 text-xs text-muted-foreground">{e.ejercicios.join(' · ')}</p>
+                )}
+                {e.dia_plan && (
+                  <Link href={`/app/entreno?dia=${e.dia_plan}`} className="mt-1 inline-block text-xs text-primary underline">
+                    Ver las series
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </Tarjeta>
+      )}
+
       {lecturas.length > 0 && (
         <section className="space-y-2">
           <h2 className="etiqueta-seccion">Lo que veo</h2>
@@ -224,7 +273,7 @@ export default async function PanelHoy() {
         <Tarjeta className="border-primary/40 bg-gradient-to-br from-primary/15 to-transparent">
           <div className="flex items-center justify-between">
             <div>
-              <p className="etiqueta-seccion">{diaHoy.entreno ? 'Ya has entrenado hoy' : 'Toca hoy'}</p>
+              <p className="etiqueta-seccion">{diaHoy.entreno ? 'Siguiente entreno' : 'Toca hoy'}</p>
               <p className="mt-1 font-semibold">{siguiente.nombre}</p>
               <p className="text-sm text-muted-foreground">
                 {siguiente.foco} · {siguiente.bloques.length} ejercicios

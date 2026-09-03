@@ -182,9 +182,8 @@ export function progreso(xpTotal: number): Progreso {
 }
 
 /** Dias consecutivos hasta hoy (o ayer, para no romper la racha antes de acostarse). */
-export function racha(fechasConActividad: string[]): number {
+export function racha(fechasConActividad: string[], hoyIso: string = hoy()): number {
   const set = new Set(fechasConActividad);
-  const hoyIso = hoy();
   let cursor = set.has(hoyIso) ? hoyIso : sumarDias(hoyIso, -1);
   let total = 0;
   while (set.has(cursor)) {

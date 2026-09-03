@@ -13,18 +13,25 @@ import { cargarPerfil } from '@/lib/datos';
 import { planDesdeImportacion, type Importacion } from '@/lib/importar';
 import type { ObjetivosManual } from '@/lib/tipos';
 
+/**
+ * Sesion + fecha de "hoy" en la zona horaria del usuario. El servidor va en UTC:
+ * sin esto, lo que se guarda entre las 00:00 y las 02:00 en Espana caia en el dia
+ * anterior y el panel no lo ensenaba como de hoy.
+ */
 async function sesion() {
   const supabase = clienteServidor();
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect('/entrar');
-  return { supabase, userId: data.user.id };
+  const { data: perfil } = await supabase.from('perfiles').select('zona_horaria').eq('id', data.user.id).maybeSingle();
+  const hoy = hoyIso((perfil?.zona_horaria as string | null) || undefined);
+  return { supabase, userId: data.user.id, hoy };
 }
 
 async function sumarXp(tipo: string, motivo: string) {
-  const { supabase, userId } = await sesion();
+  const { supabase, userId, hoy } = await sesion();
   await supabase.from('xp_eventos').insert({
     user_id: userId,
-    fecha: hoyIso(),
+    fecha: hoy,
     tipo,
     xp: XP_POR_ACCION[tipo] ?? 5,
     motivo,
@@ -70,8 +77,8 @@ export async function archivarHabito(habitoId: string) {
 }
 
 export async function guardarMedicion(datos: FormData) {
-  const { supabase, userId } = await sesion();
-  const fecha = texto(datos.get('fecha')) ?? hoyIso();
+  const { supabase, userId, hoy } = await sesion();
+  const fecha = texto(datos.get('fecha')) ?? hoy;
   const fila = {
     user_id: userId,
     fecha,
@@ -93,14 +100,14 @@ export async function guardarMedicion(datos: FormData) {
 }
 
 export async function guardarComida(datos: FormData) {
-  const { supabase, userId } = await sesion();
+  const { supabase, userId, hoy } = await sesion();
   const descripcion = texto(datos.get('descripcion'));
   const kcal = numero(datos.get('kcal'));
   if (!descripcion || kcal === null) return;
 
   await supabase.from('comidas').insert({
     user_id: userId,
-    fecha: texto(datos.get('fecha')) ?? hoyIso(),
+    fecha: texto(datos.get('fecha')) ?? hoy,
     momento: texto(datos.get('momento')),
     descripcion,
     kcal: Math.round(kcal),
@@ -126,12 +133,12 @@ export async function guardarComidaCalculada(datos: {
   grasa_g: number;
   alcohol_ud: number;
 }) {
-  const { supabase, userId } = await sesion();
+  const { supabase, userId, hoy } = await sesion();
   if (!datos.descripcion || !Number.isFinite(datos.kcal)) return;
 
   await supabase.from('comidas').insert({
     user_id: userId,
-    fecha: hoyIso(),
+    fecha: hoy,
     momento: ['desayuno', 'comida', 'cena', 'snack', 'bebida'].includes(datos.momento) ? datos.momento : null,
     descripcion: datos.descripcion.slice(0, 300),
     kcal: Math.max(0, Math.round(datos.kcal)),
@@ -154,8 +161,8 @@ export async function borrarComida(id: string) {
 }
 
 export async function guardarCheckIn(datos: FormData) {
-  const { supabase, userId } = await sesion();
-  const fecha = texto(datos.get('fecha')) ?? hoyIso();
+  const { supabase, userId, hoy } = await sesion();
+  const fecha = texto(datos.get('fecha')) ?? hoy;
   const escala = (clave: string) => {
     const valor = numero(datos.get(clave));
     return valor === null ? null : Math.max(1, Math.min(10, Math.round(valor)));
@@ -189,14 +196,14 @@ export async function guardarCheckIn(datos: FormData) {
 }
 
 export async function guardarFoco(datos: FormData) {
-  const { supabase, userId } = await sesion();
+  const { supabase, userId, hoy } = await sesion();
   const minutos = numero(datos.get('minutos'));
   const categoria = texto(datos.get('categoria'));
   if (!minutos || !categoria) return;
 
   await supabase.from('foco').insert({
     user_id: userId,
-    fecha: texto(datos.get('fecha')) ?? hoyIso(),
+    fecha: texto(datos.get('fecha')) ?? hoy,
     categoria,
     minutos: Math.round(minutos),
     descripcion: texto(datos.get('descripcion')),
@@ -223,8 +230,8 @@ export async function guardarEntreno(payload: {
   series: SeriePayload[];
   cardio?: { tipo: string; minutos: number; kcal: number } | null;
 }) {
-  const { supabase, userId } = await sesion();
-  const fecha = hoyIso();
+  const { supabase, userId, hoy } = await sesion();
+  const fecha = hoy;
   const cardio = payload.cardio && payload.cardio.minutos > 0 ? payload.cardio : null;
 
   const base = {
@@ -408,7 +415,7 @@ export async function aplicarImportacion(
   datos: Importacion,
   opciones: { entreno: boolean; dieta: boolean },
 ): Promise<{ ok: true; aplicado: string[] } | { ok: false; error: string }> {
-  const { supabase, userId } = await sesion();
+  const { supabase, userId, hoy } = await sesion();
   const aplicado: string[] = [];
 
   if (opciones.entreno && datos.entreno?.dias?.length) {
@@ -434,7 +441,7 @@ export async function aplicarImportacion(
       // Si faltan los carbos, se deducen de lo que queda de las calorias.
       const carbos = Math.round(Math.max(0, d.carbos_g ?? (kcal - proteina * 4 - grasa * 9) / 4));
       const objetivos: ObjetivosManual = {
-        kcal, proteina_g: proteina, carbos_g: carbos, grasa_g: grasa, fuente, fijado_el: hoyIso(),
+        kcal, proteina_g: proteina, carbos_g: carbos, grasa_g: grasa, fuente, fijado_el: hoy,
       };
       const { error } = await supabase.from('perfiles').update({ objetivos_manual: objetivos }).eq('id', userId);
       if (error) {

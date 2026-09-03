@@ -130,7 +130,7 @@ export async function cargarPanel(
     semana,
     puntuaciones: puntuar(semana, metasSemana),
     progreso: progreso(xp.reduce((total, e) => total + e.xp, 0)),
-    racha: racha(xp.map((e) => e.fecha)),
+    racha: racha(xp.map((e) => e.fecha), hoy),
     plan: planes[0]?.datos ?? null,
     habitos: habitos.filter((h) => h.activo),
     registrosHabitos: registros,
