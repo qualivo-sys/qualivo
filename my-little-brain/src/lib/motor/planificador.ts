@@ -57,15 +57,64 @@ const TORSO_COMPLETO: Plantilla = {
   huecos: [h('empuje_horizontal', 'principal'), h('traccion_horizontal', 'principal'), h('empuje_vertical', 'secundario'), h('traccion_vertical', 'secundario'), h('core', 'accesorio')],
 };
 
-/** Reparto semanal segun los dias disponibles. */
-function plantillas(dias: number): Plantilla[] {
-  switch (Math.max(2, Math.min(6, dias))) {
+// ── Variantes con mas pierna y gluteo ─────────────────────────────────
+// Por defecto para mujeres: es lo que la mayoria pide y donde mas responden;
+// el torso se mantiene, pero con menos accesorios de brazo.
+const FULL_A_G: Plantilla = {
+  id: 'fb_a_g', nombre: 'Full body A', foco: 'Gluteo + empuje',
+  huecos: [h('dominante_cadera', 'principal'), h('dominante_rodilla', 'secundario'), h('empuje_horizontal', 'secundario'), h('traccion_horizontal', 'secundario'), h('gluteo', 'accesorio')],
+};
+const FULL_B_G: Plantilla = {
+  id: 'fb_b_g', nombre: 'Full body B', foco: 'Pierna + espalda',
+  huecos: [h('dominante_rodilla', 'principal'), h('traccion_vertical', 'secundario'), h('dominante_cadera', 'secundario'), h('empuje_vertical', 'accesorio'), h('core', 'accesorio')],
+};
+const FULL_C_G: Plantilla = {
+  id: 'fb_c_g', nombre: 'Full body C', foco: 'Gluteo + hombro',
+  huecos: [h('dominante_cadera', 'principal'), h('gluteo', 'secundario'), h('empuje_horizontal', 'secundario'), h('traccion_horizontal', 'secundario'), h('hombro', 'accesorio')],
+};
+const PIERNA_A_G: Plantilla = {
+  id: 'pierna_a_g', nombre: 'Pierna A', foco: 'Gluteo y cuadriceps',
+  huecos: [h('dominante_rodilla', 'principal'), h('dominante_cadera', 'secundario'), h('gluteo', 'secundario'), h('dominante_rodilla', 'accesorio'), h('core', 'accesorio')],
+};
+const PIERNA_B_G: Plantilla = {
+  id: 'pierna_b_g', nombre: 'Pierna B', foco: 'Gluteo e isquios',
+  huecos: [h('dominante_cadera', 'principal'), h('dominante_rodilla', 'secundario'), h('gluteo', 'secundario'), h('dominante_cadera', 'accesorio'), h('gemelo', 'accesorio')],
+};
+const PIERNA_C_G: Plantilla = {
+  id: 'pierna_c_g', nombre: 'Gluteo', foco: 'Gluteo y core',
+  huecos: [h('dominante_cadera', 'principal'), h('gluteo', 'secundario'), h('dominante_rodilla', 'secundario'), h('gluteo', 'accesorio'), h('core', 'accesorio')],
+};
+const TORSO_G: Plantilla = {
+  id: 'torso_g', nombre: 'Torso', foco: 'Espalda, hombro y pecho',
+  huecos: [h('traccion_horizontal', 'principal'), h('empuje_horizontal', 'principal'), h('traccion_vertical', 'secundario'), h('empuje_vertical', 'secundario'), h('hombro', 'accesorio'), h('core', 'accesorio')],
+};
+
+export type Enfasis = 'equilibrado' | 'pierna_gluteo';
+
+/** Reparto semanal segun los dias disponibles y el enfasis. */
+function plantillas(dias: number, enfasis: Enfasis): Plantilla[] {
+  const n = Math.max(2, Math.min(6, dias));
+  if (enfasis === 'pierna_gluteo') {
+    switch (n) {
+      case 2: return [FULL_A_G, FULL_B_G];
+      case 3: return [FULL_A_G, FULL_B_G, FULL_C_G];
+      case 4: return [PIERNA_A_G, TORSO_G, PIERNA_B_G, TORSO_A];
+      case 5: return [PIERNA_A_G, TORSO_G, PIERNA_B_G, TIRON, PIERNA_C_G];
+      default: return [PIERNA_A_G, EMPUJE, PIERNA_B_G, TIRON, PIERNA_C_G, TORSO_G];
+    }
+  }
+  switch (n) {
     case 2: return [FULL_A, FULL_B];
     case 3: return [FULL_A, FULL_B, FULL_C];
     case 4: return [TORSO_A, PIERNA_A, TORSO_B, PIERNA_B];
     case 5: return [EMPUJE, TIRON, PIERNA_A, TORSO_COMPLETO, PIERNA_B];
     default: return [EMPUJE, TIRON, PIERNA_A, { ...EMPUJE, id: 'empuje_b', nombre: 'Empuje B' }, { ...TIRON, id: 'tiron_b', nombre: 'Tiron B' }, PIERNA_B];
   }
+}
+
+/** Enfasis por defecto: las mujeres, salvo que busquen fuerza pura, van a pierna y gluteo. */
+export function enfasisDe(perfil: PerfilEntreno): Enfasis {
+  return perfil.sexo === 'mujer' && perfil.objetivo !== 'fuerza' ? 'pierna_gluteo' : 'equilibrado';
 }
 
 /** Si un patron no tiene ejercicios validos (por material o lesion), se busca aqui. */
@@ -117,7 +166,8 @@ function elegir(
     if (!lista.length) continue;
 
     // El ejercicio principal debe ser un basico; los accesorios, preferiblemente no.
-    const ordenados = [...lista].sort((a, b) => puntuar(b, hueco.rol) - puntuar(a, hueco.rol));
+    const gluteo = enfasisDe(perfil) === 'pierna_gluteo';
+    const ordenados = [...lista].sort((a, b) => puntuar(b, hueco.rol, gluteo) - puntuar(a, hueco.rol, gluteo));
     const frescos = ordenados.filter((e) => !usadosPlan.has(e.id));
     const elegido = frescos[0] ?? ordenados[0];
     if (elegido) return elegido;
@@ -125,12 +175,31 @@ function elegir(
   return null;
 }
 
-function puntuar(e: Ejercicio, rol: Rol): number {
+function puntuar(e: Ejercicio, rol: Rol, preferirGluteo = false): number {
   const posicion = EJERCICIOS.findIndex((x) => x.id === e.id);
   const orden = (EJERCICIOS.length - posicion) / 100; // respeta el orden del catalogo
-  if (rol === 'principal') return (e.basico ? 10 : 0) + orden;
-  if (rol === 'secundario') return (e.basico ? 4 : 3) + orden;
-  return (e.basico ? 0 : 5) + orden;
+  // Con enfasis de gluteo, entre dos candidatos gana el que lo trabaje (hip thrust antes que curl femoral).
+  // El gluteo como musculo principal (hip thrust, patada) pesa mas que como secundario (peso muerto).
+  const extra = preferirGluteo ? (e.musculos[0] === 'gluteo' ? 3 : e.musculos.includes('gluteo') ? 1.5 : 0) : 0;
+  if (rol === 'principal') return (e.basico ? 10 : 0) + orden + extra;
+  if (rol === 'secundario') return (e.basico ? 4 : 3) + orden + extra;
+  return (e.basico ? 0 : 5) + orden + extra;
+}
+
+/**
+ * Ejercicios que pueden sustituir a otro: mismo patron, validos para el
+ * material, nivel y molestias del perfil. Para cuando "no sale bien" o no
+ * hay maquina en el gimnasio.
+ */
+export function alternativas(ejercicioId: string, perfil: PerfilEntreno, excluir: string[] = []): Ejercicio[] {
+  const actual = ejercicio(ejercicioId);
+  if (!actual) return [];
+  const fuera = new Set([ejercicioId, ...excluir]);
+  const lista = candidatos(perfil, actual.patron).filter((e) => !fuera.has(e.id));
+  const respaldo = (RESPALDO[actual.patron] ?? []).flatMap((p) => candidatos(perfil, p)).filter((e) => !fuera.has(e.id));
+  const gluteo = enfasisDe(perfil) === 'pierna_gluteo';
+  const orden = (a: Ejercicio, b: Ejercicio) => puntuar(b, 'secundario', gluteo) - puntuar(a, 'secundario', gluteo);
+  return [...lista.sort(orden), ...respaldo.sort(orden)].filter((e, i, arr) => arr.findIndex((x) => x.id === e.id) === i);
 }
 
 export function prescripcion(rol: Rol, objetivo: ObjetivoEntreno, nivel: Nivel, ejercicioId: string): Omit<Bloque, 'ejercicioId' | 'rol'> {
@@ -197,6 +266,9 @@ function notas(perfil: PerfilEntreno): string[] {
   if (perfil.objetivo === 'ganar_musculo') {
     base.push('Duerme 7-9 h: sin descanso no hay musculo, por muchas series que hagas.');
   }
+  if (enfasisDe(perfil) === 'pierna_gluteo') {
+    base.push('Enfasis en pierna y gluteo: dos de cada cuatro sesiones van ahi, con hip thrust y peso muerto rumano como base. Cualquier ejercicio se cambia diciendoselo al coach.');
+  }
   if (perfil.limitaciones.length) {
     base.push(`Plan adaptado a tus molestias (${perfil.limitaciones.join(', ')}): se han excluido los ejercicios mas agresivos. Si algo duele, para.`);
   }
@@ -205,7 +277,7 @@ function notas(perfil: PerfilEntreno): string[] {
 
 /** Huella de los campos del perfil que afectan al plan. */
 export function firmaPerfil(p: PerfilEntreno): string {
-  const crudo = [p.objetivo, p.nivel, p.diasPorSemana, p.entorno, [...p.limitaciones].sort().join('-')].join('|');
+  const crudo = [p.objetivo, p.nivel, p.diasPorSemana, p.entorno, enfasisDe(p), [...p.limitaciones].sort().join('-')].join('|');
   let hash = 5381;
   for (let i = 0; i < crudo.length; i++) hash = ((hash << 5) + hash + crudo.charCodeAt(i)) | 0;
   return Math.abs(hash).toString(36);
@@ -213,7 +285,7 @@ export function firmaPerfil(p: PerfilEntreno): string {
 
 export function generarPlan(perfil: PerfilEntreno): PlanEntreno {
   const usadosPlan = new Set<string>();
-  const dias: DiaPlan[] = plantillas(perfil.diasPorSemana).map((plantilla, indice) => {
+  const dias: DiaPlan[] = plantillas(perfil.diasPorSemana, enfasisDe(perfil)).map((plantilla, indice) => {
     const usadosDia = new Set<string>();
     const bloques: Bloque[] = [];
 

@@ -20,7 +20,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | Area | Que lleva |
 |---|---|
 | **Cuerpo** | Peso, perimetros, grasa corporal (US Navy), IMC, tendencia real de peso y objetivos de calorias y macros que se recalculan solos. |
-| **Entrenamiento** | Plan generado a medida (dias disponibles, material, nivel, lesiones), registro serie a serie y progresion doble de cargas. |
+| **Entrenamiento** | Plan generado a medida (dias disponibles, material, nivel, lesiones, sexo: las mujeres reciben por defecto un reparto con mas pierna y gluteo), registro serie a serie y progresion doble de cargas. El coach cambia cualquier ejercicio por otro del mismo patron (`cambiar_ejercicio`) cuando no sale, molesta o no hay maquina. |
 | **Foco** | Trabajo profundo, negocio, aprendizaje, idiomas y lectura. |
 | **Mente** | Sueno, animo, energia, estres y motivacion. |
 | **Habitos** | Habitos con objetivo semanal, rachas, XP y niveles. |

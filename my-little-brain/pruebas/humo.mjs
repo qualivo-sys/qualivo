@@ -48,6 +48,7 @@ const llamadas = [
   ['crear_tarea', { titulo: 'Preparar propuesta EAC', prioridad: 1 }],
   ['recordar', { clave: 'lesion_hombro', valor: 'Molestia en el hombro derecho desde 2025' }],
   ['generar_plan_entreno', {}],
+  ['cambiar_ejercicio', { ejercicio_actual: 'press de banca', ejercicio_nuevo: 'press de banca con mancuernas' }],
   ['consultar_historial', { dias: 14 }],
 ];
 
@@ -259,6 +260,22 @@ const diasCtx = construirDias(
   { tmbKcal: 1800, pesoKg: 80, metaKcal: 2200, metaProteina: 170 },
 );
 check('el dia agregado lleva actividad, pasos, gasto y redondo', diasCtx[0].actividad && !diasCtx[0].entreno && diasCtx[0].pasos === 8000 && diasCtx[0].gastoKcal === 2160 + 320 + 960 && diasCtx[0].redondo, JSON.stringify({ a: diasCtx[0].actividad, g: diasCtx[0].gastoKcal, r: diasCtx[0].redondo }));
+
+// ── 10. Planes distintos por sexo y cambio de ejercicio ───────────────
+const { generarPlan, alternativas, enfasisDe } = await import(`${L}/motor/planificador.js`);
+const baseEntreno = { sexo: 'hombre', edad: 30, alturaCm: 175, objetivo: 'perder_grasa', nivel: 'intermedio', diasPorSemana: 4, entorno: 'gimnasio', actividad: 'ligera', limitaciones: [] };
+const planEl = generarPlan(baseEntreno);
+const planElla = generarPlan({ ...baseEntreno, sexo: 'mujer' });
+const ids = (plan) => plan.dias.map((d) => d.bloques.map((b) => b.ejercicioId).join(',')).join(' | ');
+check('mujer y hombre con los mismos datos reciben planes distintos', ids(planEl) !== ids(planElla) && planEl.firma !== planElla.firma);
+check('el plan de ella pone mas pierna y gluteo', planElla.dias.filter((d) => /Pierna|Gluteo/.test(d.nombre)).length >= 2 && planElla.dias.flatMap((d) => d.bloques).some((b) => b.ejercicioId === 'hip_thrust'), ids(planElla));
+check('con objetivo de fuerza el enfasis es equilibrado', enfasisDe({ ...baseEntreno, sexo: 'mujer', objetivo: 'fuerza' }) === 'equilibrado');
+const alt = alternativas('sentadilla_barra', { ...baseEntreno, entorno: 'casa_mancuernas' });
+check('las alternativas respetan el material y no repiten el ejercicio', alt.length >= 2 && alt.every((e) => e.id !== 'sentadilla_barra' && e.entornos.includes('casa_mancuernas')), alt.map((e) => e.id).join(','));
+const cambio = await ejecutarHerramienta('cambiar_ejercicio', { ejercicio_actual: 'sentadilla con barra', motivo: 'no hay rack' }, ctx);
+check('el coach puede cambiar un ejercicio del plan', /Cambiado Sentadilla con barra por /.test(cambio.texto), cambio.texto);
+const cambio2 = await ejecutarHerramienta('cambiar_ejercicio', { ejercicio_actual: 'press de banca', ejercicio_nuevo: 'flexiones' }, ctx);
+check('o por el que pida el usuario', /por Flexiones/.test(cambio2.texto) || /No encuentro/.test(cambio2.texto), cambio2.texto);
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

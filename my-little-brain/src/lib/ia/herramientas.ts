@@ -5,7 +5,9 @@ import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { emparejarEjercicio } from '../motor/ejercicios';
-import { firmaPerfil, generarPlan } from '../motor/planificador';
+import { alternativas, firmaPerfil, generarPlan, prescripcion } from '../motor/planificador';
+import { ejercicio } from '../motor/ejercicios';
+import type { Bloque, PlanEntreno } from '../motor/tipos-motor';
 import { XP_POR_ACCION } from '../motor/puntuaciones';
 import { perfilEntreno } from '../perfil';
 import type { AccionRegistrada, Perfil } from '../tipos';
@@ -268,6 +270,21 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
     description:
       'Genera (o regenera) el plan de entrenamiento con los datos actuales del perfil. Usalo tras el alta o si cambian objetivo, dias, nivel, material o lesiones.',
     input_schema: { type: 'object', properties: {}, required: [] },
+  },
+  {
+    name: 'cambiar_ejercicio',
+    description:
+      'Sustituye un ejercicio del plan activo por otro: porque no le sale bien, no hay maquina en su gimnasio, le molesta o simplemente lo prefiere. Si no dice por cual, elige tu la mejor alternativa del mismo patron valida para su material y molestias. Mantiene series, repeticiones y progresion.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        ejercicio_actual: { type: 'string', description: 'Nombre del ejercicio a quitar, tal como lo dice el usuario.' },
+        ejercicio_nuevo: { type: 'string', description: 'Nombre del ejercicio que quiere en su lugar, si lo dice. Si no, se elige la mejor alternativa.' },
+        motivo: { type: 'string', description: 'Por que lo cambia (no hay maquina, molestia, no le sale…).' },
+        todos_los_dias: { type: 'boolean', description: 'true para cambiarlo en todos los dias del plan donde aparezca (por defecto). false para solo el primero.' },
+      },
+      required: ['ejercicio_actual'],
+    },
   },
   {
     name: 'consultar_historial',
@@ -797,6 +814,70 @@ async function despachar(
       return {
         texto: `Plan generado con ${plan.dias.length} dias: ${resumen}`,
         accion: { herramienta: nombre, resumen: `plan de ${plan.dias.length} dias generado` },
+      };
+    }
+
+    case 'cambiar_ejercicio': {
+      const d = z
+        .object({
+          ejercicio_actual: z.string().min(1),
+          ejercicio_nuevo: z.string().optional(),
+          motivo: z.string().optional(),
+          todos_los_dias: z.boolean().optional(),
+        })
+        .parse(entrada);
+      const datosPerfil = perfilEntreno(ctx.perfil);
+      const { data: fila } = await supabase
+        .from('planes_entreno').select('id, datos').eq('user_id', userId).eq('activo', true)
+        .order('creado', { ascending: false }).limit(1).maybeSingle();
+      if (!fila) return { texto: 'No hay plan activo: genera uno primero con generar_plan_entreno.', accion: null };
+      const plan = fila.datos as PlanEntreno;
+
+      // Localizar el ejercicio: por id del catalogo o por el nombre libre.
+      const actual = emparejarEjercicio(d.ejercicio_actual);
+      const objetivoNorm = d.ejercicio_actual.trim().toLowerCase();
+      const coincide = (b: Bloque) =>
+        b.ejercicioId === actual.id || (b.nombreLibre ?? '').toLowerCase() === objetivoNorm || (ejercicio(b.ejercicioId)?.nombre ?? '').toLowerCase() === objetivoNorm;
+      const sitios = plan.dias.flatMap((dia) => dia.bloques.filter(coincide).map((b) => ({ dia, bloque: b })));
+      if (!sitios.length) {
+        const nombres = [...new Set(plan.dias.flatMap((dia) => dia.bloques.map((b) => ejercicio(b.ejercicioId)?.nombre ?? b.nombreLibre ?? b.ejercicioId)))];
+        return { texto: `No encuentro "${d.ejercicio_actual}" en el plan. Los ejercicios del plan son: ${nombres.join(', ')}.`, accion: null };
+      }
+      const objetivoSitios = d.todos_los_dias === false ? sitios.slice(0, 1) : sitios;
+
+      // Elegir el sustituto: el que pida el usuario o la mejor alternativa del mismo patron.
+      let nuevoId: string;
+      let nuevoNombre: string;
+      let nombreLibre: string | undefined;
+      let otras: string[] = [];
+      if (d.ejercicio_nuevo?.trim()) {
+        const n = emparejarEjercicio(d.ejercicio_nuevo);
+        nuevoId = n.id; nuevoNombre = n.nombre; nombreLibre = n.enCatalogo ? undefined : n.nombre;
+      } else {
+        if (!datosPerfil) return { texto: 'Faltan datos del perfil (material, nivel) para elegir una alternativa. Pregunta por cual quiere cambiarlo.', accion: null };
+        const enElDia = objetivoSitios[0].dia.bloques.map((b) => b.ejercicioId);
+        const opciones = alternativas(actual.id, datosPerfil, enElDia);
+        if (!opciones.length) return { texto: `No tengo alternativas de ese patron para su material. Pregunta que ejercicio prefiere.`, accion: null };
+        nuevoId = opciones[0].id; nuevoNombre = opciones[0].nombre;
+        otras = opciones.slice(1, 4).map((e) => e.nombre);
+      }
+      if (nuevoId === actual.id) return { texto: 'Es el mismo ejercicio; no hay nada que cambiar.', accion: null };
+
+      for (const sitio of objetivoSitios) {
+        const indice = sitio.dia.bloques.indexOf(sitio.bloque);
+        const receta = nombreLibre
+          ? { series: sitio.bloque.series, repMin: sitio.bloque.repMin, repMax: sitio.bloque.repMax, rir: sitio.bloque.rir, descansoSeg: sitio.bloque.descansoSeg }
+          : { ...prescripcion(sitio.bloque.rol, datosPerfil?.objetivo ?? 'mantener', datosPerfil?.nivel ?? 'intermedio', nuevoId), series: sitio.bloque.series };
+        sitio.dia.bloques[indice] = { ejercicioId: nuevoId, ...(nombreLibre ? { nombreLibre } : {}), rol: sitio.bloque.rol, ...receta };
+      }
+      plan.notas = [...plan.notas.filter((n) => !n.startsWith(`Cambio: ${actual.nombre} → `)), `Cambio: ${actual.nombre} → ${nuevoNombre}${d.motivo ? ` (${d.motivo})` : ''}.`].slice(-12);
+      const { error } = await supabase.from('planes_entreno').update({ datos: plan }).eq('id', fila.id);
+      if (error) throw error;
+
+      const dias = [...new Set(objetivoSitios.map((s) => s.dia.nombre))].join(', ');
+      return {
+        texto: `Cambiado ${actual.nombre} por ${nuevoNombre} en ${dias}.${otras.length ? ` Otras opciones si no le convence: ${otras.join(', ')}.` : ''}`,
+        accion: { herramienta: nombre, resumen: `${actual.nombre} → ${nuevoNombre}` },
       };
     }
 
