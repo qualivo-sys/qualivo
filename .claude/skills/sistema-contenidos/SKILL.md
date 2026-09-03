@@ -55,11 +55,18 @@ de un canal, decisiones con datos vs opiniones, el techo de facturacion,
 economia del crecimiento. La operativa comercial (leads, CRM, seguimiento,
 presupuestos) solo aparece como ejemplo puntual, nunca como tema central.
 El contrabrief manda: Qualivo vende CONTROL del crecimiento.
-Estetica de imagenes en redes (v2, aprobada 2-sep con "la reunion de
-los lunes"): FOTO DOCUMENTAL CON FLASH DIRECTO, como foto robada en una
-oficina real (fluorescentes, cafes a medias, post-its, encuadres
-imperfectos). Nada de dibujos/3D cartoon NI de penumbra cinematica de
-stock (canta a IA). El humor va en la situacion reconocible.
+Estetica de imagenes en redes (v3, regla de Maikel 3-sep: "cada carrusel
+debe ser diferente entre si"): ROTACION DE DIRECCIONES DE ARTE. Misma
+marca siempre (Anton, naranja E8590C, firma @maikel.echevarria) pero
+nunca dos carruseles seguidos con el mismo estilo visual. Estilos del
+catalogo: (a) flash documental de interior con gag visual (plantilla
+oscura; entornos ACTUALES y limpios, nada de pisos viejos ni trapos);
+(b) bodegon de estudio: un objeto simbolico centrado en fondo liso, luz
+dura, humor surrealista (plantilla clara tinta-sobre-crema,
+carrusel-bocaboca2.html); (c) fotografia de calle espanola real,
+exteriores y luz natural; (d) tipografico/grafico puro sin foto, fondos
+planos de color. Nada de dibujos/3D cartoon NI penumbra cinematica de
+stock (canta a IA). El humor va en la situacion o el objeto reconocible.
 Estructura de carrusel: HILO CONDUCTOR como historia en actos (kicker
 naranja arriba que situa cada lamina), titulares autoexplicativos con
 la frase completa como la diria el personaje, y remate que explica el
