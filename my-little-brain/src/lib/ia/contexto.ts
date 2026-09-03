@@ -32,12 +32,16 @@ export function construirContexto(panel: Panel): string {
     l.push(`- Sueno habitual: ${perfil.hora_dormir ?? '?'} a ${perfil.hora_despertar ?? '?'}.`);
   }
 
-  l.push('\nOBJETIVOS DIARIOS (calculados por la app)');
+  l.push(metas?.manual ? '\nOBJETIVOS DIARIOS (fijados por su especialista)' : '\nOBJETIVOS DIARIOS (calculados por la app)');
   if (metas) {
     l.push(
       `- ${metas.kcal} kcal · ${metas.proteinaG} g proteina · ${metas.grasaG} g grasa · ${metas.carbosG} g carbos · ${metas.aguaMl} ml agua · ${metas.pasos} pasos.`,
     );
-    l.push(`- Ritmo de peso objetivo: ${n(metas.ritmoKgSemana, 2)} kg/semana. Gasto estimado: ${metas.gastoTotal} kcal.`);
+    if (metas.manual) {
+      l.push(`- Estos objetivos los ha fijado su ${metas.manual}: respetalos y no los recalcules salvo que te lo pida.`);
+    } else {
+      l.push(`- Ritmo de peso objetivo: ${n(metas.ritmoKgSemana, 2)} kg/semana. Gasto estimado: ${metas.gastoTotal} kcal.`);
+    }
   } else {
     l.push('- Sin calcular todavia: falta peso o datos del perfil.');
   }

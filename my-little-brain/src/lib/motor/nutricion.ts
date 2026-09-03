@@ -50,6 +50,8 @@ export interface ObjetivosDiarios {
   aguaMl: number;
   pasos: number;
   ritmoKgSemana: number;
+  /** Si viene de una dieta importada o fijada a mano, quien la fijo. */
+  manual?: string;
 }
 
 export interface DatosNutricion {

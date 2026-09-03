@@ -268,6 +268,10 @@ create table if not exists public.push_envios (
 -- Preferencias de avisos (horas locales y si estan activos).
 alter table public.perfiles add column if not exists preferencias jsonb not null default '{}'::jsonb;
 
+-- Objetivos de calorias y macros fijados a mano o importados de una dieta de
+-- un especialista. Si existen, mandan sobre el calculo automatico.
+alter table public.perfiles add column if not exists objetivos_manual jsonb;
+
 -- ── Uso de IA (para limites por plan) ──────────────────────────────────
 create table if not exists public.uso_ia (
   id             uuid primary key default gen_random_uuid(),
@@ -338,7 +342,8 @@ grant update (
   nombre, sexo, edad, altura_cm, ocupacion,
   objetivo, objetivos_extra, nivel, dias_semana, entorno, actividad,
   limitaciones, alergias, preferencias_comida, horario_comidas, alcohol_semanal,
-  hora_dormir, hora_despertar, zona_horaria, onboarding, notas, actualizado, preferencias
+  hora_dormir, hora_despertar, zona_horaria, onboarding, notas, actualizado, preferencias,
+  objetivos_manual
 ) on public.perfiles to authenticated;
 
 -- ═══════════════════════════════════════════════════════════════════════

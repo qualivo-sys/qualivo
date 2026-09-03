@@ -21,6 +21,17 @@ export interface PreferenciasAvisos {
   aviso_entreno?: boolean;
 }
 
+/** Objetivos diarios fijados a mano o importados; mandan sobre el calculo automatico. */
+export interface ObjetivosManual {
+  kcal: number;
+  proteina_g: number;
+  carbos_g: number;
+  grasa_g: number;
+  /** De donde salen: "dieta de Laura (nutricionista)", "a mano"... */
+  fuente: string;
+  fijado_el: string;
+}
+
 export interface Perfil {
   id: string;
   email: string | null;
@@ -48,6 +59,7 @@ export interface Perfil {
   stripe_subscription_id: string | null;
   onboarding: boolean;
   preferencias: PreferenciasAvisos;
+  objetivos_manual: ObjetivosManual | null;
   notas: string | null;
   creado: string;
   actualizado: string;

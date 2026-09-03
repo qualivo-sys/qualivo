@@ -194,7 +194,9 @@ export default async function PaginaAjustes({
           <Boton type="submit" className="w-full">Guardar cambios</Boton>
           <p className="text-xs text-muted-foreground">
             Si cambias objetivo, nivel, dias, material o lesiones, acuerdate de regenerar el plan
-            en <Link href="/app/entreno" className="text-primary underline">Entreno</Link>.
+            en <Link href="/app/entreno" className="text-primary underline">Entreno</Link>. Si ya tienes un
+            plan o una dieta de un especialista, puedes{' '}
+            <Link href="/app/importar" className="text-primary underline">importarlos</Link>.
           </p>
         </form>
       </Tarjeta>

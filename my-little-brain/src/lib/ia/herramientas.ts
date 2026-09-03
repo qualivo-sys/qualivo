@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
-import { EJERCICIOS } from '../motor/ejercicios';
+import { emparejarEjercicio } from '../motor/ejercicios';
 import { firmaPerfil, generarPlan } from '../motor/planificador';
 import { XP_POR_ACCION } from '../motor/puntuaciones';
 import { perfilEntreno } from '../perfil';
@@ -313,25 +313,6 @@ function normalizar(texto: string): string {
     .trim();
 }
 
-/** Empareja un nombre libre ("press banca") con el catalogo de ejercicios. */
-function buscarEjercicio(nombre: string): { id: string; nombre: string } {
-  const objetivo = normalizar(nombre);
-  const exacto = EJERCICIOS.find((e) => normalizar(e.nombre) === objetivo);
-  if (exacto) return { id: exacto.id, nombre: exacto.nombre };
-
-  const palabras = objetivo.split(' ').filter((p) => p.length > 2);
-  let mejor: { id: string; nombre: string; puntos: number } | null = null;
-  for (const e of EJERCICIOS) {
-    const candidato = normalizar(e.nombre);
-    const puntos = palabras.filter((p) => candidato.includes(p)).length;
-    if (puntos && (!mejor || puntos > mejor.puntos)) {
-      mejor = { id: e.id, nombre: e.nombre, puntos };
-    }
-  }
-  if (mejor) return { id: mejor.id, nombre: mejor.nombre };
-  return { id: `libre_${objetivo.replace(/ /g, '_').slice(0, 40)}`, nombre };
-}
-
 export interface ResultadoHerramienta {
   texto: string;
   accion: AccionRegistrada | null;
@@ -502,7 +483,7 @@ async function despachar(
 
       let totalSeries = 0;
       const filas = (d.ejercicios ?? []).flatMap((ejercicio, orden) => {
-        const info = buscarEjercicio(ejercicio.nombre);
+        const info = emparejarEjercicio(ejercicio.nombre);
         return (ejercicio.series ?? []).map((s, indice) => {
           totalSeries += 1;
           return {

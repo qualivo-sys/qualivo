@@ -247,7 +247,8 @@ export function generarPlan(perfil: PerfilEntreno): PlanEntreno {
 }
 
 export function planDesactualizado(plan: PlanEntreno | null, perfil: PerfilEntreno): boolean {
-  return !!plan && plan.firma !== firmaPerfil(perfil);
+  // Un plan importado de un especialista no depende del perfil: nunca caduca.
+  return !!plan && plan.firma !== 'importado' && plan.firma !== firmaPerfil(perfil);
 }
 
 /** Series totales por grupo muscular en la semana, para revisar el volumen. */

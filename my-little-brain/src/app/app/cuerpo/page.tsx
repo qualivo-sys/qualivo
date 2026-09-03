@@ -2,7 +2,8 @@ import { Trash2 } from 'lucide-react';
 import CalculadoraComida from '@/components/calculadora-comida';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
-import { borrarComida, guardarComida, guardarMedicion } from '@/app/app/acciones';
+import Link from 'next/link';
+import { borrarComida, guardarComida, guardarMedicion, quitarObjetivosManual } from '@/app/app/acciones';
 import { cargarPanel } from '@/lib/datos';
 import { fechaLarga } from '@/lib/fechas';
 import { grasaCorporal } from '@/lib/motor/cuerpo';
@@ -56,6 +57,21 @@ export default async function PaginaCuerpo() {
         <p className="mb-3 text-sm text-muted-foreground">
           {kcalHoy} kcal y {proteinaHoy} g de proteina
           {metas ? ` de ${metas.kcal} kcal y ${metas.proteinaG} g` : ''}.
+        </p>
+        <p className="mb-3 text-xs text-muted-foreground">
+          {metas?.manual ? (
+            <>
+              Objetivo fijado por tu {metas.manual}.{' '}
+              <form action={quitarObjetivosManual} className="inline">
+                <button type="submit" className="underline">Volver al que calcula la app</button>
+              </form>
+            </>
+          ) : (
+            <>
+              Objetivo calculado por la app.{' '}
+              <Link href="/app/importar" className="underline">¿Tienes dieta de un nutricionista? Importala</Link>.
+            </>
+          )}
         </p>
 
         {comidasHoy.length ? (

@@ -322,3 +322,44 @@ export function alternativas(id: string, entorno: Entorno, limitaciones: Limitac
       !e.evitarSi.some((l) => limitaciones.includes(l)),
   );
 }
+
+function normalizarNombre(texto: string): string {
+  return texto
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9 ]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Empareja un nombre escrito a mano ("press banca", "jalon al pecho") con el
+ * catalogo. Si no hay nada razonable, devuelve un id libre_… con ese nombre.
+ */
+export function emparejarEjercicio(nombre: string): { id: string; nombre: string; enCatalogo: boolean } {
+  const objetivo = normalizarNombre(nombre);
+  const exacto = EJERCICIOS.find((e) => normalizarNombre(e.nombre) === objetivo);
+  if (exacto) return { id: exacto.id, nombre: exacto.nombre, enCatalogo: true };
+
+  const VACIAS = ['con', 'de', 'en', 'la', 'el', 'los', 'las', 'del', 'una', 'uno', 'por', 'para', 'sin'];
+  const palabras = objetivo.split(' ').filter((p) => p.length > 2 && !VACIAS.includes(p));
+  if (!palabras.length) return { id: `libre_${objetivo.replace(/ /g, '_').slice(0, 40)}`, nombre: nombre.trim(), enCatalogo: false };
+  let mejor: { id: string; nombre: string; puntos: number } | null = null;
+  for (const e of EJERCICIOS) {
+    const candidato = normalizarNombre(e.nombre);
+    const suyas = candidato.split(' ').filter((p) => p.length > 2 && !VACIAS.includes(p));
+    const comunes = palabras.filter((p) => suyas.some((q) => q.startsWith(p) || p.startsWith(q))).length;
+    if (!comunes) continue;
+    const extras = Math.max(0, suyas.length - comunes);
+    // Si todo lo que dijo el usuario esta en el nombre del catalogo ("sentadilla" →
+    // "sentadilla con barra"), es ese ejercicio: gana la variante mas basica con
+    // menos palabras de mas. Si solo coincide en parte, hace falta mas de una pista.
+    const puntos = comunes === palabras.length
+      ? 10 - extras * 0.5 + (e.basico ? 0.25 : 0)
+      : comunes * 2 - extras * 0.5;
+    if (!mejor || puntos > mejor.puntos) mejor = { id: e.id, nombre: e.nombre, puntos };
+  }
+  if (mejor && mejor.puntos >= 2) return { id: mejor.id, nombre: mejor.nombre, enCatalogo: true };
+  return { id: `libre_${objetivo.replace(/ /g, '_').slice(0, 40)}`, nombre: nombre.trim(), enCatalogo: false };
+}

@@ -3,10 +3,12 @@ import Link from 'next/link';
 import Navegacion from '@/components/navegacion';
 import { BotonTema } from '@/components/tema';
 import { Insignia } from '@/components/ui/base';
+import { comprobarEsquema } from '@/lib/esquema';
 import { sesionRequerida } from '@/lib/sesion';
 
 export default async function LayoutApp({ children }: { children: React.ReactNode }) {
-  const { perfil } = await sesionRequerida({ permitirSinAlta: true });
+  const { supabase, perfil } = await sesionRequerida({ permitirSinAlta: true });
+  const faltan = await comprobarEsquema(supabase);
 
   return (
     <div className="mx-auto max-w-2xl px-4 pb-28 pt-5">
@@ -26,6 +28,14 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
           </Link>
         </div>
       </header>
+
+      {faltan.length > 0 && (
+        <p className="mb-4 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm">
+          <strong>La base de datos necesita actualizarse.</strong> Vuelve a ejecutar{' '}
+          <code>supabase/schema.sql</code> en el SQL Editor de Supabase (es idempotente). Falta:{' '}
+          {faltan.join(', ')}.
+        </p>
+      )}
 
       {children}
 

@@ -102,6 +102,7 @@ export default function RegistroEntreno({
   const [restaurado, setRestaurado] = useState(false);
   const hidratado = useRef(false);
   const [guardando, setGuardando] = useState(false);
+  const [errorGuardar, setErrorGuardar] = useState('');
   const [descanso, setDescanso] = useState<number | null>(null);
   const [cardioTipo, setCardioTipo] = useState('');
   const [cardioMin, setCardioMin] = useState('');
@@ -234,14 +235,28 @@ export default function RegistroEntreno({
       });
     });
 
-    await guardarEntreno({
-      nombre,
-      dia_plan: diaId,
-      sensacion,
-      notas: notas || null,
-      series,
-      cardio: cardioTipo && Number(cardioMin) > 0 ? { tipo: cardioTipo, minutos: Number(cardioMin), kcal: cardioKcal } : null,
-    });
+    setErrorGuardar('');
+    let resultado: Awaited<ReturnType<typeof guardarEntreno>>;
+    try {
+      resultado = await guardarEntreno({
+        nombre,
+        dia_plan: diaId,
+        sensacion,
+        notas: notas || null,
+        series,
+        cardio: cardioTipo && Number(cardioMin) > 0 ? { tipo: cardioTipo, minutos: Number(cardioMin), kcal: cardioKcal } : null,
+      });
+    } catch (e) {
+      setGuardando(false);
+      setErrorGuardar(`No se ha podido guardar: ${(e as Error).message}. Tus series siguen aqui; reintenta.`);
+      return;
+    }
+    if (!resultado.ok) {
+      setGuardando(false);
+      setErrorGuardar(`No se ha podido guardar: ${resultado.error}. Tus series siguen aqui; reintenta.`);
+      return;
+    }
+    if (resultado.aviso) window.alert(resultado.aviso);
     for (const extra of extras.filter((e) => e.alPlan)) {
       await anadirAlPlan(diaId, extra.ejercicioId, extra.nombre);
     }
@@ -455,6 +470,9 @@ export default function RegistroEntreno({
           placeholder="Molestias, cambios de ejercicio, sensaciones…"
           className="mt-3 w-full rounded-lg border border-input bg-muted/40 p-3 text-base outline-none focus:ring-2 focus:ring-ring"
         />
+        {errorGuardar && (
+          <p className="mt-3 rounded-lg bg-destructive/15 px-3 py-2 text-sm text-destructive">{errorGuardar}</p>
+        )}
         <Boton onClick={terminar} disabled={guardando} className="mt-3 w-full">
           {guardando ? <Loader2 size={16} className="animate-spin" /> : null}
           Terminar entreno ({totalHechas} series)

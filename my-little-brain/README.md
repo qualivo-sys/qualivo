@@ -30,6 +30,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Cuenta** | Recuperar y cambiar contrasena, descargar todos los datos en JSON y borrar la cuenta (RGPD). |
 | **Avisos** | Notificaciones push: el coach te escribe por la manana y por la noche (abren el chat con el check-in lanzado), recuerda el entreno pendiente y avisa cuando la revision del domingo esta lista. |
 | **Comidas** | Calculadora con tabla de ~95 alimentos: "200 g pollo, 150 arroz, 1 cucharada de aceite" sale calculado al momento, sin IA. El coach usa la misma tabla. |
+| **Importar** | Si ya tienes un entreno o una dieta de un entrenador o nutricionista, subes el PDF, una foto o el texto y la app lo convierte en tu plan activo y en tus objetivos de calorias. |
 
 ### Lo que lo diferencia de un tracker
 
@@ -186,6 +187,22 @@ el perfil segun se lo cuentas y termina generando el plan.
 (adherencia, medias, alcohol, sueno, correlaciones) y le pide al modelo que las
 **interprete** y senale el cuello de botella. La respuesta se guarda en
 `revisiones` y se puede regenerar.
+
+### Importar un plan de un especialista
+
+`POST /api/importar` recibe un PDF, una imagen o texto y le pide al modelo
+que extraiga solo lo escrito en un JSON (`src/lib/importar.ts`). El servidor
+devuelve una vista previa; nada se guarda hasta que el usuario confirma en
+`/app/importar`, que llama a la accion `aplicarImportacion`:
+
+- El entreno se convierte en un `PlanEntreno` con firma `importado`
+  (`planDesdeImportacion`): cada ejercicio se empareja con el catalogo por
+  nombre (`emparejarEjercicio`) y, si no esta, se guarda como ejercicio propio.
+  Un plan importado no se marca como desactualizado al cambiar el perfil.
+- La dieta fija `perfiles.objetivos_manual` (kcal y macros), que manda sobre
+  el calculo de la app en `metasNutricion`, y deja las pautas en la memoria
+  del coach con la clave `dieta_especialista`. En Cuerpo se puede volver a los
+  objetivos calculados con un clic.
 
 ### Cobro (Stripe)
 

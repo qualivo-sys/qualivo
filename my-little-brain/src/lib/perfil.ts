@@ -41,12 +41,32 @@ export function perfilEntreno(p: Perfil): PerfilEntreno | null {
   };
 }
 
-/** Objetivos diarios de calorias y macros, o null si falta peso o datos basicos. */
+/**
+ * Objetivos diarios de calorias y macros. Si hay objetivos manuales (dieta de un
+ * especialista o fijados a mano) mandan ellos; si no, se calculan. Null si falta
+ * peso o datos basicos y no hay manuales.
+ */
 export function metasNutricion(
   p: Perfil,
   pesoKg: number | null,
   grasaPct: number | null,
 ): ObjetivosDiarios | null {
+  const manual = p.objetivos_manual;
+  if (manual && manual.kcal > 0) {
+    const peso = pesoKg ?? 75;
+    return {
+      tmb: 0,
+      gastoTotal: 0,
+      kcal: Math.round(manual.kcal),
+      proteinaG: Math.round(manual.proteina_g),
+      grasaG: Math.round(manual.grasa_g),
+      carbosG: Math.round(manual.carbos_g),
+      aguaMl: Math.round((peso * 35) / 100) * 100,
+      pasos: p.objetivo === 'perder_grasa' ? 10000 : 8000,
+      ritmoKgSemana: 0,
+      manual: manual.fuente,
+    };
+  }
   if (!p.sexo || !p.edad || !p.altura_cm || !p.objetivo || !pesoKg) return null;
   const datos: DatosNutricion = {
     sexo: p.sexo,

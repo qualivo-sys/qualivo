@@ -10,6 +10,8 @@ import { perfilEntreno } from '@/lib/perfil';
 import { clienteServidor } from '@/lib/supabase/servidor';
 import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
 import { cargarPerfil } from '@/lib/datos';
+import { planDesdeImportacion, type Importacion } from '@/lib/importar';
+import type { ObjetivosManual } from '@/lib/tipos';
 
 async function sesion() {
   const supabase = clienteServidor();
@@ -225,23 +227,37 @@ export async function guardarEntreno(payload: {
   const fecha = hoyIso();
   const cardio = payload.cardio && payload.cardio.minutos > 0 ? payload.cardio : null;
 
-  const { data: entreno, error } = await supabase
+  const base = {
+    user_id: userId,
+    fecha,
+    dia_plan: payload.dia_plan,
+    nombre: payload.nombre,
+    sensacion: payload.sensacion,
+    notas: payload.notas,
+    completado: true,
+  };
+  let { data: entreno, error } = await supabase
     .from('entrenamientos')
     .insert({
-      user_id: userId,
-      fecha,
-      dia_plan: payload.dia_plan,
-      nombre: payload.nombre,
-      sensacion: payload.sensacion,
-      notas: payload.notas,
-      completado: true,
+      ...base,
       cardio_tipo: cardio?.tipo ?? null,
       cardio_min: cardio ? Math.round(cardio.minutos) : null,
       cardio_kcal: cardio ? Math.round(cardio.kcal) : null,
     })
     .select('id')
     .single();
-  if (error || !entreno) return { ok: false };
+
+  // Base de datos sin actualizar (faltan las columnas de cardio): guardamos
+  // igualmente el entreno sin cardio y avisamos, en vez de perder la sesion.
+  let aviso: string | null = null;
+  if (error && /cardio_/.test(error.message)) {
+    ({ data: entreno, error } = await supabase.from('entrenamientos').insert(base).select('id').single());
+    aviso = 'Entreno guardado, pero sin el cardio: la base de datos necesita actualizarse (ejecuta schema.sql en Supabase).';
+  }
+  if (error || !entreno) {
+    console.error('[entreno] no se pudo guardar', error?.message);
+    return { ok: false as const, error: error?.message ?? 'No se pudo guardar el entreno.' };
+  }
 
   const series = payload.series.filter((s) => s.reps !== null || s.peso_kg !== null);
   if (series.length) {
@@ -252,7 +268,7 @@ export async function guardarEntreno(payload: {
   await sumarXp('entreno', payload.nombre);
   revalidatePath('/app');
   revalidatePath('/app/entreno');
-  return { ok: true };
+  return { ok: true as const, aviso };
 }
 
 /** Anade un ejercicio al dia del plan activo (desde el registro de sesion). */
@@ -380,4 +396,84 @@ export async function borrarCuenta(datos: FormData) {
 
   await supabase.auth.signOut();
   redirect('/?cuenta=borrada');
+}
+
+/**
+ * Guarda lo que el usuario ha confirmado de un plan importado: el entreno pasa
+ * a ser el plan activo (firma 'importado', asi no se marca como desactualizado)
+ * y la dieta fija los objetivos de calorias y deja sus pautas en la memoria
+ * del coach.
+ */
+export async function aplicarImportacion(
+  datos: Importacion,
+  opciones: { entreno: boolean; dieta: boolean },
+): Promise<{ ok: true; aplicado: string[] } | { ok: false; error: string }> {
+  const { supabase, userId } = await sesion();
+  const aplicado: string[] = [];
+
+  if (opciones.entreno && datos.entreno?.dias?.length) {
+    const { plan } = planDesdeImportacion(datos.entreno);
+    if (!plan.dias.some((d) => d.bloques.length)) {
+      return { ok: false, error: 'El plan de entreno no tiene ejercicios.' };
+    }
+    await supabase.from('planes_entreno').update({ activo: false }).eq('user_id', userId).eq('activo', true);
+    const { error } = await supabase
+      .from('planes_entreno')
+      .insert({ user_id: userId, firma: 'importado', datos: plan, activo: true });
+    if (error) return { ok: false, error: `No se ha podido guardar el plan: ${error.message}` };
+    aplicado.push(`entreno de ${plan.dias.length} dias`);
+  }
+
+  if (opciones.dieta && datos.dieta) {
+    const d = datos.dieta;
+    const fuente = d.origen?.trim() ? `dieta de ${d.origen.trim()}` : 'dieta importada';
+    if (typeof d.kcal === 'number' && d.kcal > 0) {
+      const kcal = Math.round(d.kcal);
+      const proteina = Math.round(Math.max(0, d.proteina_g ?? 0));
+      const grasa = Math.round(Math.max(0, d.grasa_g ?? 0));
+      // Si faltan los carbos, se deducen de lo que queda de las calorias.
+      const carbos = Math.round(Math.max(0, d.carbos_g ?? (kcal - proteina * 4 - grasa * 9) / 4));
+      const objetivos: ObjetivosManual = {
+        kcal, proteina_g: proteina, carbos_g: carbos, grasa_g: grasa, fuente, fijado_el: hoyIso(),
+      };
+      const { error } = await supabase.from('perfiles').update({ objetivos_manual: objetivos }).eq('id', userId);
+      if (error) {
+        return {
+          ok: false,
+          error: /objetivos_manual/.test(error.message)
+            ? 'Falta actualizar la base de datos (ejecuta supabase/schema.sql) para guardar los objetivos.'
+            : `No se han podido guardar los objetivos: ${error.message}`,
+        };
+      }
+      aplicado.push(`objetivo de ${kcal} kcal`);
+    }
+    const pautas = [d.resumen?.trim(), ...(d.normas ?? []).map((x) => `- ${x}`)].filter(Boolean).join('\n');
+    if (pautas) {
+      await supabase.from('memoria').upsert(
+        {
+          user_id: userId,
+          clave: 'dieta_especialista',
+          valor: `${fuente}: ${pautas}`.slice(0, 4000),
+          categoria: 'nutricion',
+          actualizado: new Date().toISOString(),
+        },
+        { onConflict: 'user_id,clave' },
+      );
+      aplicado.push('pautas de la dieta en la memoria del coach');
+    }
+  }
+
+  if (!aplicado.length) return { ok: false, error: 'No habia nada que aplicar.' };
+  revalidatePath('/app');
+  revalidatePath('/app/entreno');
+  revalidatePath('/app/cuerpo');
+  return { ok: true, aplicado };
+}
+
+/** Vuelve a los objetivos que calcula la app a partir del perfil. */
+export async function quitarObjetivosManual(): Promise<void> {
+  const { supabase, userId } = await sesion();
+  await supabase.from('perfiles').update({ objetivos_manual: null }).eq('id', userId);
+  revalidatePath('/app');
+  revalidatePath('/app/cuerpo');
 }

@@ -193,5 +193,32 @@ check('parsea la revision aunque venga en un bloque de codigo',
   revision?.titular === 'Semana solida' && revision.acciones.length === 3 && revision.errores.length === 0);
 check('devuelve null si no hay JSON', parsearRevision('lo siento, no puedo') === null);
 
+// ── 7. Importar plan de un especialista ────────────────────────────────
+const { parsearImportacion, planDesdeImportacion } = await import(`${L}/importar.js`);
+const { emparejarEjercicio } = await import(`${L}/motor/ejercicios.js`);
+const { planDesactualizado } = await import(`${L}/motor/planificador.js`);
+const { metasNutricion, perfilEntreno } = await import(`${L}/perfil.js`);
+
+const emp = emparejarEjercicio('press banca con barra');
+check('empareja un ejercicio del catalogo aunque el nombre varie', emp.enCatalogo && /banca/i.test(emp.nombre), emp.id);
+const sent = emparejarEjercicio('Sentadilla');
+check('una sola palabra elige la variante basica', sent.id === 'sentadilla_barra', sent.id);
+check('sentadilla bulgara no cae en la barra', emparejarEjercicio('sentadillas bulgaras').id === 'sentadilla_bulgara', emparejarEjercicio('sentadillas bulgaras').id);
+const libre = emparejarEjercicio('Aperturas invertidas en TRX con giro');
+check('un ejercicio desconocido se guarda como libre', !libre.enCatalogo && libre.id.startsWith('libre_'), libre.id);
+
+const importado = parsearImportacion(`Claro, aqui tienes:\n\`\`\`json\n{"entreno":{"origen":"Laura, entrenadora","dias":[{"nombre":"Torso","foco":"pecho","ejercicios":[{"nombre":"Press de banca","series":4,"repMin":8,"repMax":10,"rir":2},{"nombre":"Remo con barra","series":3,"repMin":10,"repMax":12},{"nombre":"Aperturas invertidas en TRX con giro","series":3}]},{"nombre":"Pierna","ejercicios":[{"nombre":"Sentadilla","series":5,"repMin":5,"repMax":5,"rir":1,"descansoSeg":180}]}]},"dieta":{"origen":"Pedro, nutricionista","kcal":2100,"proteina_g":160,"grasa_g":65,"resumen":"4 comidas","normas":["sin alcohol entre semana"]}}\n\`\`\``);
+check('parsea la importacion aunque venga con texto y bloque de codigo', importado?.entreno?.dias.length === 2 && importado.dieta?.kcal === 2100);
+check('sin entreno ni dieta devuelve null', parsearImportacion('{"entreno":null,"dieta":null}') === null && parsearImportacion('nada') === null);
+const { plan: planImp, sinCatalogo } = planDesdeImportacion(importado.entreno);
+check('el plan importado tiene los dias y ejercicios del documento', planImp.dias.length === 2 && planImp.dias[0].bloques.length === 3 && planImp.firma === 'importado');
+check('respeta series, reps, RIR y descanso escritos', (() => { const b = planImp.dias[1].bloques[0]; return b.series === 5 && b.repMin === 5 && b.repMax === 5 && b.rir === 1 && b.descansoSeg === 180; })());
+check('completa lo que falta con valores razonables', (() => { const b = planImp.dias[0].bloques[2]; return b.series === 3 && b.repMin >= 8 && b.repMax >= b.repMin && b.rir === 2; })());
+check('los ejercicios fuera del catalogo se listan y llevan nombre', sinCatalogo.length >= 1 && planImp.dias[0].bloques.some((b) => b.nombreLibre), sinCatalogo.join(', '));
+check('un plan importado no se marca como desactualizado', !planDesactualizado(planImp, perfilEntreno(perfil)));
+const metasManual = metasNutricion({ ...perfil, objetivos_manual: { kcal: 2100, proteina_g: 160, carbos_g: 220, grasa_g: 65, fuente: 'dieta de Pedro', fijado_el: "2026-09-01" } }, 82, null);
+check('los objetivos manuales mandan sobre los calculados', metasManual?.kcal === 2100 && metasManual.proteinaG === 160 && metasManual.manual === 'dieta de Pedro');
+check('sin objetivos manuales la app los calcula', !metasNutricion({ ...perfil, objetivos_manual: null }, 82, null)?.manual);
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

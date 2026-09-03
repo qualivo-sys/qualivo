@@ -203,9 +203,16 @@ export default async function PaginaEntreno({
             <li key={nota}>· {nota}</li>
           ))}
         </ul>
-        <form action={regenerarPlan} className="mt-4">
-          <Boton type="submit" variante="contorno" className="w-full">Regenerar plan desde cero</Boton>
-        </form>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <form action={regenerarPlan}>
+            <Boton type="submit" variante="contorno" className="w-full">
+              {panel.plan.firma === 'importado' ? 'Que la app me haga el plan' : 'Regenerar plan desde cero'}
+            </Boton>
+          </form>
+          <Link href="/app/importar" className="block">
+            <Boton type="button" variante="contorno" className="w-full">Importar plan de un especialista</Boton>
+          </Link>
+        </div>
       </Tarjeta>
     </main>
   );
