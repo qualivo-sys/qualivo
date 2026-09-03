@@ -389,3 +389,25 @@ Hecho tras su correo:
 - **DG Prospecting → Maximizar conversiones** (sin CPA objetivo) aplicado el mismo 02-09 a
   petición de Aída, con el visto bueno de Maikel. Se pierde el tope de CPC de 5 € que tenía
   Maximizar clics; vigilar el CPC los dos primeros días. Search sigue en Maximizar clics.
+
+## Día 4 (03-09) — primera conversión de PMax, presupuestos y fuerza del anuncio
+
+Datos del 02-09: PMax 140 clics / 18,07 € / **1 registro** (móvil, red Display, CPC 0,13 €),
+con el 75 % de impresiones perdidas por presupuesto. Search 29 clics / 35,42 € / 0 (65 % IS
+perdido por presupuesto). DG Prospecting 100 clics / 23,37 € / 0. Acumulado: 202,75 €
+gastados, 2 registros (Search 31-08, PMax 02-09). Restante 1.797 € → 85,6 €/día para 21 días.
+
+Hallazgos en PMax: campaña `LIMITED` por `HAS_ASSET_GROUPS_LIMITED_BY_POLICY` — la imagen
+**OT26_R1_HZ rechazada por `MISLEADING_AD_DESIGN`** (en DG el anuncio que la usa sigue
+aprobado). Fuerza del anuncio POOR.
+
+Aplicado (decisión de Maikel de subir PMax; el resto, rutina):
+- Imagen R1_HZ retirada del grupo de recursos de PMax.
+- +5 titulares (Congreso de IA en Madrid · AI Act para empresas · Reglamento europeo de IA ·
+  Jornada de IA para empresas · Gobernanza de IA aplicada), +1 titular largo, +1 descripción.
+  Ahora 14/5/5. Grupo de nuevo en revisión.
+- Presupuestos: **PMax 16,67 → 26,67 €/día · DG Prospecting 31,67 → 23,67 €/día** · Search 35.
+  Total 85,34 €/día, ajustado al restante.
+- Search **se mantiene en Maximizar clics** (tope 5 €): con 1 registro propio y limitada por
+  presupuesto, Maximizar conversiones subiría el CPC sin añadir volumen. Cambiar cuando
+  Search acumule ~5 registros, con CPA objetivo.
