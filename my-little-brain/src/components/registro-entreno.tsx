@@ -14,11 +14,18 @@ export interface BloqueVista extends Bloque {
   tecnica: string;
   sugerencia: string;
   pesoSugerido: number | null;
+  /** Ultima sesion registrada de este ejercicio, para verla al lado del registro. */
+  ultima?: UltimaVez | null;
   esIsometrico: boolean;
   /** Anadido a mano en esta sesion (no viene del plan). */
   extra?: boolean;
   /** Si ademas quiere guardarlo en el plan de este dia. */
   alPlan?: boolean;
+}
+
+export interface UltimaVez {
+  fecha: string;
+  series: { pesoKg: number | null; reps: number | null }[];
 }
 
 export interface OpcionCatalogo {
@@ -28,7 +35,11 @@ export interface OpcionCatalogo {
   tecnica: string;
   pesoSugerido: number | null;
   sugerencia: string;
+  ultima?: UltimaVez | null;
 }
+
+const fechaBreve = (iso: string) =>
+  new Date(iso + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
 
 interface SerieEditable {
   peso: string;
@@ -158,7 +169,7 @@ export default function RegistroEntreno({
         nuevo = {
           ejercicioId: o.id, rol: 'accesorio', series: 3, repMin: 8, repMax: 12, rir: 2, descansoSeg: 90,
           nombre: o.nombre, tecnica: o.tecnica, sugerencia: o.sugerencia, pesoSugerido: o.pesoSugerido,
-          esIsometrico: false, extra: true, alPlan: false,
+          ultima: o.ultima ?? null, esIsometrico: false, extra: true, alPlan: false,
         };
       }
     } else if (libre.trim()) {
@@ -223,14 +234,17 @@ export default function RegistroEntreno({
     estado.forEach((filas, indiceBloque) => {
       filas.forEach((fila, indiceSerie) => {
         if (!fila.hecha && !fila.reps) return;
+        // Marcar la serie sin escribir nada significa "he hecho lo que pone":
+        // se guardan las reps y el RIR del plan (los que se ven en gris).
+        const bloque = todos[indiceBloque];
         series.push({
-          ejercicio_id: todos[indiceBloque].ejercicioId,
-          ejercicio_nombre: todos[indiceBloque].nombre,
+          ejercicio_id: bloque.ejercicioId,
+          ejercicio_nombre: bloque.nombre,
           orden: indiceBloque,
           serie: indiceSerie + 1,
           peso_kg: fila.peso ? Number(fila.peso.replace(',', '.')) : null,
-          reps: fila.reps ? Number(fila.reps) : null,
-          rir: fila.rir ? Number(fila.rir) : null,
+          reps: fila.reps ? Number(fila.reps) : fila.hecha ? bloque.repMax : null,
+          rir: fila.rir ? Number(fila.rir) : fila.hecha ? bloque.rir : null,
         });
       });
     });
@@ -312,6 +326,14 @@ export default function RegistroEntreno({
           <p className="mt-2 rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-xs">
             {bloque.sugerencia}
           </p>
+          {bloque.ultima && (
+            <p className="mt-2 text-xs text-muted-foreground tabular-nums">
+              <span className="font-medium text-foreground">Ultima vez</span> ({fechaBreve(bloque.ultima.fecha)}):{' '}
+              {bloque.ultima.series
+                .map((serie) => `${serie.pesoKg ?? 'sin peso'} × ${serie.reps ?? '—'}`)
+                .join(' · ')}
+            </p>
+          )}
 
           <div className="mt-3 grid grid-cols-[24px_1fr_1fr_1fr_40px] gap-1.5 text-center text-[11px] text-muted-foreground">
             <span>#</span>

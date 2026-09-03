@@ -268,9 +268,13 @@ export async function guardarEntreno(payload: {
 
   const series = payload.series.filter((s) => s.reps !== null || s.peso_kg !== null);
   if (series.length) {
-    await supabase.from('series').insert(
+    const { error: errorSeries } = await supabase.from('series').insert(
       series.map((s) => ({ ...s, user_id: userId, entrenamiento_id: entreno.id, hecha: true })),
     );
+    if (errorSeries) {
+      console.error('[entreno] no se pudieron guardar las series', errorSeries.message);
+      aviso = `Entreno guardado, pero sin las series: ${errorSeries.message}`;
+    }
   }
   await sumarXp('entreno', payload.nombre);
   revalidatePath('/app');

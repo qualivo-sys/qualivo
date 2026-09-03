@@ -52,6 +52,9 @@ export default async function PaginaEntreno({
       tecnica: info?.tecnica ?? '',
       sugerencia: consejo.texto,
       pesoSugerido: consejo.pesoKg,
+      ultima: consejo.referencia
+        ? { fecha: consejo.referencia.fecha, series: consejo.referencia.series.map((serie) => ({ pesoKg: serie.pesoKg, reps: serie.reps })) }
+        : null,
       esIsometrico: esIsometrico(bloque.ejercicioId),
     };
   });
@@ -71,7 +74,12 @@ export default async function PaginaEntreno({
   };
   const catalogo: OpcionCatalogo[] = EJERCICIOS.map((e) => {
     const consejo = sugerencia({ ejercicioId: e.id, rol: 'accesorio', series: 3, repMin: 8, repMax: 12, rir: 2, descansoSeg: 90 }, sesiones);
-    return { id: e.id, nombre: e.nombre, grupo: GRUPOS[e.patron] ?? e.patron, tecnica: e.tecnica, pesoSugerido: consejo.pesoKg, sugerencia: consejo.texto };
+    return {
+      id: e.id, nombre: e.nombre, grupo: GRUPOS[e.patron] ?? e.patron, tecnica: e.tecnica, pesoSugerido: consejo.pesoKg, sugerencia: consejo.texto,
+      ultima: consejo.referencia
+        ? { fecha: consejo.referencia.fecha, series: consejo.referencia.series.map((serie) => ({ pesoKg: serie.pesoKg, reps: serie.reps })) }
+        : null,
+    };
   });
 
   const datosPerfil = perfilEntreno(perfil);
