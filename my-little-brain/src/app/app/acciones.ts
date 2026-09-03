@@ -284,8 +284,10 @@ export async function guardarEntreno(payload: {
     }
   }
   await sumarXp('entreno', payload.nombre);
+  // Solo se revalida Hoy: si se revalidara /app/entreno, la pagina se volveria a
+  // pintar como "hoy ya lo has hecho" y el premio desapareceria. Entreno es
+  // dinamica y se vuelve a generar en la siguiente navegacion de todos modos.
   revalidatePath('/app');
-  revalidatePath('/app/entreno');
   const { data: xp } = await supabase.from('xp_eventos').select('fecha').eq('user_id', userId);
   return {
     ok: true as const,
@@ -321,7 +323,6 @@ export async function anadirAlPlan(diaId: string, ejercicioId: string, nombre: s
   dia.bloques.push({ ejercicioId, rol: 'accesorio', ...pauta, ...(ejercicioId.startsWith('libre_') ? { nombreLibre: nombre } : {}) });
 
   await supabase.from('planes_entreno').update({ datos }).eq('id', plan.id);
-  revalidatePath('/app/entreno');
 }
 
 /** Accion de formulario: regenera el plan con los datos actuales del perfil. */
