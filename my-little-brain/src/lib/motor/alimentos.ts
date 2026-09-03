@@ -423,8 +423,8 @@ function analizarSegmento(segmento: string): LineaComida {
  */
 export function calcularComida(texto: string): ComidaCalculada {
   const segmentos = texto
-    // "0,0" (cerveza sin) no es una coma de separar: se junta antes de partir.
-    .replace(/\b0[,.]0\b/g, '00')
+    // "0,0" (cerveza sin) no es una coma de separar ni una cantidad.
+    .replace(/\b0[,.]0\b|\b00\b|\bcero cero\b/g, 'sin alcohol')
     .split(/,|\n|\+|;| y /i)
     .map((s) => s.trim())
     // Se ignoran los trozos que son solo un numero ("cerveza 0,0" se parte en "cerveza 0" y "0").
@@ -435,10 +435,11 @@ export function calcularComida(texto: string): ComidaCalculada {
   const lineas = segmentos.flatMap((segmento) => {
     const entera = analizarSegmento(segmento);
     if (!/ con /i.test(segmento)) return [entera];
-    // Entero solo vale si el alimento reconocido es de los que llevan "con" en el nombre
-    // (cafe con leche, macarrones con tomate); si no, "tostadas con aguacate" son dos.
-    const esPlatoConCon = entera.alimento && [entera.alimento.nombre, ...entera.alimento.alias].some((al) => / con /i.test(al));
-    if (esPlatoConCon) return [entera];
+    // Entero solo vale si coincide exactamente con un nombre de la tabla ("cafe con leche",
+    // "macarrones con tomate"); si no, "tostadas con aguacate" o "pollo con arroz" son dos.
+    const sinCantidad = normalizar(segmento).replace(/^(\d+([.,]\d+)?|un|una|uno|dos|tres|medio|media)\s*(g|gr|grs|gramos?|ml|ud|uds|unidades?)?\s*(de\s)?/, '').trim();
+    const exacto = entera.alimento && [entera.alimento.nombre, ...entera.alimento.alias].some((al) => normalizar(al) === sinCantidad);
+    if (exacto) return [entera];
     return segmento.split(/ con /i).map((parte) => analizarSegmento(parte.trim()));
   });
   const reconocidas = lineas.filter((l) => l.alimento);
