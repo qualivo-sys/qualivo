@@ -248,3 +248,5 @@ duplicando emails.
 El dataset completo vive en `captacion/datos/probe-dataset.csv` y crece cada
 dia con la carga (paso 4b de la rutina diaria). La muestra ya supera con mucho
 las 500 webs: el informe publicable esta desbloqueado.
+
+- **lema-asesores.com** (Lema Asesores Inmobiliarios, Alfredo Muñoz, 3-sep) · Tier B: píxel de Meta activo con 4 formularios pero sin GTM ni GA4. Ángulo tipo RGM Fincas: la captura está, la medición no. Cargado en campaña inmo.
