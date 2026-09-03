@@ -411,3 +411,5 @@ Aplicado (decisión de Maikel de subir PMax; el resto, rutina):
 - Search **se mantiene en Maximizar clics** (tope 5 €): con 1 registro propio y limitada por
   presupuesto, Maximizar conversiones subiría el CPC sin añadir volumen. Cambiar cuando
   Search acumule ~5 registros, con CPA objetivo.
+- **DG Prospecting: URL final devuelta a la landing** `rai.outthink.es` (03-09, decisión de
+  Maikel). Mismos UTM. Los 7 anuncios vuelven a revisión.
