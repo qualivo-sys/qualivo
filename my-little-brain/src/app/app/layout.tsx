@@ -1,6 +1,7 @@
 import { Settings } from 'lucide-react';
 import Link from 'next/link';
 import Navegacion from '@/components/navegacion';
+import RefrescoAlVolver from '@/components/refresco';
 import { BotonTema } from '@/components/tema';
 import { Insignia } from '@/components/ui/base';
 import { comprobarEsquema } from '@/lib/esquema';
@@ -40,6 +41,7 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
       {children}
 
       {perfil.onboarding && <Navegacion />}
+      <RefrescoAlVolver />
     </div>
   );
 }
