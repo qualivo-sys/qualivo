@@ -1,4 +1,5 @@
 import { hoy, inicioSemana, sumarDias, ultimosDias } from '../fechas';
+import { esActividad, esDiaRedondo, gastoDia } from './energia';
 import type { Bienestar, Comida, Entrenamiento, Foco, Habito, HabitoRegistro, MetricaCorporal } from '../tipos';
 
 /** Todo lo que pasa en un dia, ya agregado. Es la unidad de calculo de la app. */
@@ -10,8 +11,17 @@ export interface Dia {
   grasa: number;
   alcoholUd: number;
   comidas: number;
+  /** Sesion del plan (fuerza) completada. */
   entreno: boolean;
+  /** Actividad libre (monte, bici, padel…) registrada. */
+  actividad: boolean;
+  nombresActividad: string[];
   seriesEntreno: number;
+  pasos: number | null;
+  /** Estimacion de calorias gastadas (basal + pasos + entrenos). */
+  gastoKcal: number;
+  /** Entreno o actividad + calorias en rango + proteina cubierta. */
+  redondo: boolean;
   focoMin: number;
   habitosHechos: number;
   habitosTotal: number;
@@ -34,14 +44,17 @@ export interface FuentesDatos {
 }
 
 /** Agrega todas las fuentes en una serie de dias, de mas antiguo a mas reciente. */
-export function construirDias(fuentes: FuentesDatos, fechas: string[]): Dia[] {
+export function construirDias(fuentes: FuentesDatos, fechas: string[],
+  contexto: { tmbKcal: number; pesoKg: number; metaKcal: number | null; metaProteina: number | null } | null = null): Dia[] {
   const habitosActivos = fuentes.habitos.filter((h) => h.activo);
   const porFecha = <T extends { fecha: string }>(lista: T[], fecha: string) =>
     lista.filter((x) => x.fecha === fecha);
 
   return fechas.map((fecha) => {
     const comidas = porFecha(fuentes.comidas, fecha);
-    const entrenos = porFecha(fuentes.entrenamientos, fecha).filter((e) => e.completado);
+    const completados = porFecha(fuentes.entrenamientos, fecha).filter((e) => e.completado);
+    const entrenos = completados.filter((e) => !esActividad(e));
+    const actividades = completados.filter(esActividad);
     const focos = porFecha(fuentes.foco, fecha);
     const registros = porFecha(fuentes.registros, fecha).filter((r) => r.hecho);
     const animo = fuentes.bienestar.find((b) => b.fecha === fecha) ?? null;
@@ -56,7 +69,19 @@ export function construirDias(fuentes: FuentesDatos, fechas: string[]): Dia[] {
       alcoholUd: suma(comidas.map((c) => Number(c.alcohol_ud ?? 0))),
       comidas: comidas.length,
       entreno: entrenos.length > 0,
+      actividad: actividades.length > 0,
+      nombresActividad: actividades.map((a) => a.nombre),
       seriesEntreno: 0,
+      pasos: animo?.pasos ?? null,
+      gastoKcal: contexto
+        ? gastoDia({ tmbKcal: contexto.tmbKcal, pesoKg: contexto.pesoKg, pasos: animo?.pasos ?? null, entrenamientos: completados }).total
+        : 0,
+      redondo: contexto
+        ? esDiaRedondo(
+            { entreno: entrenos.length > 0, actividad: actividades.length > 0, kcal: suma(comidas.map((c) => c.kcal ?? 0)), proteina: suma(comidas.map((c) => c.proteina_g ?? 0)), comidas: comidas.length },
+            { kcal: contexto.metaKcal, proteina: contexto.metaProteina },
+          )
+        : false,
       focoMin: suma(focos.map((f) => f.minutos)),
       habitosHechos: registros.length,
       habitosTotal: habitosActivos.length,
@@ -154,6 +179,8 @@ export const XP_POR_ACCION: Record<string, number> = {
   peso: 10,
   medidas: 15,
   entreno: 40,
+  actividad: 25,
+  dia_redondo: 30,
   foco: 5,
   habito: 8,
   checkin: 10,

@@ -58,6 +58,8 @@ export function logros(entrada: EntradaLogros): Logro[] {
     definir('semana_entera', '📅', 'Semana entera', 'Siete dias seguidos registrando', semanaCompleta, 7, 'dias'),
     definir('mes_de_racha', '🔥', 'Mes de racha', '30 dias seguidos de actividad', entrada.racha, 30, 'dias'),
     definir('diez_entrenos', '💪', 'Diez entrenos', 'Completa 10 sesiones', entrada.entrenosTotales, 10, 'entrenos'),
+    definir('dias_redondos', '⭐', 'Diez dias redondos', 'Entreno, calorias en rango y proteina cubierta el mismo dia, diez veces', dias.filter((d) => d.redondo).length, 10, 'dias'),
+    definir('aventurero', '🥾', 'Aventurero', 'Cinco actividades fuera del plan (monte, bici, padel…)', dias.filter((d) => d.actividad).length, 5, 'dias'),
     definir('cincuenta_entrenos', '🏋️', 'Cincuenta entrenos', 'Completa 50 sesiones', entrada.entrenosTotales, 50, 'entrenos'),
     definir('cien_comidas', '🍽️', 'Cien comidas', 'Registra 100 comidas', entrada.comidasTotales, 100, 'comidas'),
     definir('diez_toneladas', '🚚', 'Diez toneladas', 'Mueve 10.000 kg en total', Math.round(entrada.tonelajeTotal), 10000, 'kg'),

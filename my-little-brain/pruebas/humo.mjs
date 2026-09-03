@@ -149,7 +149,7 @@ const insignias = logros({
   tonelajeTotal: 1920, revisiones: 0, pesajes: 1,
 });
 check('los logros se calculan con progreso acotado',
-  insignias.length === 9 && insignias.every((l) => l.progreso >= 0 && l.progreso <= 1));
+  insignias.length === 11 && insignias.every((l) => l.progreso >= 0 && l.progreso <= 1));
 check('el primer logro ya esta conseguido', insignias[0].conseguido === true);
 
 // ── 5c. Lectura del streaming del coach ────────────────────────────────
@@ -241,6 +241,24 @@ const sugVeg = sugerirComidas(bal.restante, ['cena'], { alergias: ['lactosa'], p
 check('respeta alergias y preferencias', sugVeg[0].opciones.every((o) => !o.lineas.some((l) => /pollo|merluza|gambas|ternera|skyr|yogur/.test(l.id))), sugVeg[0].opciones.map((o) => o.titulo).join('/'));
 check('vegano quita carne, pescado, lacteos y huevo', ['carne', 'pescado', 'lacteo', 'huevo'].every((e) => restricciones([], 'soy vegano').has(e)));
 check('sin calorias restantes no propone nada', sugerirComidas({ kcal: 50, proteina: 5, carbos: 5, grasa: 2 }, ['cena']).length === 0);
+
+// ── 9. Balance de energia, actividades y dia redondo ───────────────────
+const { gastoDia, balanceEnergia, esActividad, esDiaRedondo } = await import(`${L}/motor/energia.js`);
+const { construirDias } = await import(`${L}/motor/puntuaciones.js`);
+const entrenoFuerza = { id: 'e1', fecha: '2026-09-03', dia_plan: 'd3', nombre: 'Dia 3 · Pierna A', sensacion: 4, duracion_min: 60, notas: null, completado: true, cardio_tipo: 'cinta_subida', cardio_min: 15, cardio_kcal: 140 };
+const actividadMonte = { id: 'e2', fecha: '2026-09-03', dia_plan: null, nombre: 'Ruta por la montaña', sensacion: null, duracion_min: 120, notas: null, completado: true, cardio_tipo: 'senderismo', cardio_min: 120, cardio_kcal: 960 };
+check('distingue actividad libre de sesion del plan', esActividad(actividadMonte) && !esActividad(entrenoFuerza));
+const gasto = gastoDia({ tmbKcal: 1800, pesoKg: 80, pasos: 10000, entrenamientos: [entrenoFuerza, actividadMonte] });
+check('el gasto suma basal, pasos, fuerza, cardio y actividad', gasto.basal === 2160 && gasto.pasos === 400 && gasto.fuerza === 300 && gasto.cardio === 140 && gasto.actividades === 960 && gasto.total === 3960, JSON.stringify(gasto));
+check('el balance interpreta el deficit segun el objetivo', balanceEnergia(3400, gasto, 'perder_grasa', true).tono === 'bien' && balanceEnergia(3400, gasto, 'ganar_musculo', true).tono === 'aviso' && balanceEnergia(2500, gasto, 'perder_grasa', true).tono === 'alerta');
+check('durante el dia no alarma por ir por debajo', balanceEnergia(1200, gasto, 'perder_grasa', false).tono === 'info');
+check('dia redondo exige moverse, calorias en rango y proteina', esDiaRedondo({ entreno: false, actividad: true, kcal: 2150, proteina: 150, comidas: 3 }, { kcal: 2200, proteina: 170 }) && !esDiaRedondo({ entreno: true, actividad: false, kcal: 1500, proteina: 170, comidas: 3 }, { kcal: 2200, proteina: 170 }) && !esDiaRedondo({ entreno: false, actividad: false, kcal: 2200, proteina: 170, comidas: 3 }, { kcal: 2200, proteina: 170 }));
+const diasCtx = construirDias(
+  { comidas: [comidaMock('comida', 2150, 150, 200, 70)], entrenamientos: [actividadMonte], foco: [], habitos: [], registros: [], bienestar: [{ id: 'b', fecha: '2026-09-03', animo: 7, energia: 7, estres: 3, ansiedad: null, motivacion: null, sueno_horas: 7, sueno_calidad: 7, pasos: 8000, notas: null }], metricas: [] },
+  ['2026-09-03'],
+  { tmbKcal: 1800, pesoKg: 80, metaKcal: 2200, metaProteina: 170 },
+);
+check('el dia agregado lleva actividad, pasos, gasto y redondo', diasCtx[0].actividad && !diasCtx[0].entreno && diasCtx[0].pasos === 8000 && diasCtx[0].gastoKcal === 2160 + 320 + 960 && diasCtx[0].redondo, JSON.stringify({ a: diasCtx[0].actividad, g: diasCtx[0].gastoKcal, r: diasCtx[0].redondo }));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

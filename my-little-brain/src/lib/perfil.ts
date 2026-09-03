@@ -1,4 +1,4 @@
-import type { DatosNutricion, ObjetivosDiarios } from './motor/nutricion';
+import { tmb, type DatosNutricion, type ObjetivosDiarios } from './motor/nutricion';
 import { objetivosDiarios } from './motor/nutricion';
 import type { ObjetivoEntreno, PerfilEntreno } from './motor/tipos-motor';
 import type { Limitacion, Objetivo, Perfil } from './tipos';
@@ -102,3 +102,9 @@ export const ETIQUETA_CATEGORIA_FOCO: Record<string, string> = {
   lectura: 'Lectura',
   otro: 'Otro',
 };
+
+/** Metabolismo basal a partir del perfil, para el balance de energia (0 si faltan datos). */
+export function tmbDe(p: Perfil, pesoKg: number | null): number {
+  if (!p.sexo || !p.edad || !p.altura_cm || !pesoKg) return 0;
+  return Math.round(tmb({ sexo: p.sexo, edad: p.edad, alturaCm: p.altura_cm, actividad: p.actividad ?? 'ligera', objetivo: p.objetivo ?? 'energia', pesoKg, grasaPct: null }));
+}

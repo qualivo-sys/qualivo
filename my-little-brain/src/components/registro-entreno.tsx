@@ -1,10 +1,10 @@
 'use client';
 
-import { Check, Loader2 } from 'lucide-react';
+import { Check, Loader2, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { anadirAlPlan, guardarEntreno, type SeriePayload } from '@/app/app/acciones';
-import { Boton, Campo, Selector, Tarjeta } from '@/components/ui/base';
+import { Boton, Campo, Insignia, Selector, Tarjeta } from '@/components/ui/base';
 import { TIPOS_CARDIO, enlaceTecnica, kcalCardio } from '@/lib/motor/cardio';
 import type { Bloque } from '@/lib/motor/tipos-motor';
 import { cn } from '@/lib/utils';
@@ -114,6 +114,8 @@ export default function RegistroEntreno({
   const hidratado = useRef(false);
   const [guardando, setGuardando] = useState(false);
   const [errorGuardar, setErrorGuardar] = useState('');
+  const [celebracion, setCelebracion] = useState<{ xp: number; racha: number; series: number; ejercicios: number; volumen: number; kcalCardio: number } | null>(null);
+  const [copiado, setCopiado] = useState(false);
   const [descanso, setDescanso] = useState<number | null>(null);
   const [cardioTipo, setCardioTipo] = useState('');
   const [cardioMin, setCardioMin] = useState('');
@@ -279,10 +281,71 @@ export default function RegistroEntreno({
     } catch {
       // nada
     }
+    const hechas = estado.flat().filter((s) => s.hecha || s.reps);
+    const volumen = Math.round(
+      hechas.reduce((total, s) => total + (Number(s.peso.replace(',', '.')) || 0) * (Number(s.reps) || 0), 0),
+    );
     setGuardando(false);
-    router.push('/app');
+    setCelebracion({
+      xp: resultado.xp + (resultado.kcalCardio ? 10 : 0),
+      racha: resultado.racha,
+      series: hechas.length,
+      ejercicios: todos.length,
+      volumen,
+      kcalCardio: resultado.kcalCardio,
+    });
     router.refresh();
   };
+
+  const compartir = async () => {
+    if (!celebracion) return;
+    const partes = [
+      `💪 ${nombre} hecho: ${celebracion.ejercicios} ejercicios, ${celebracion.series} series`,
+      celebracion.volumen ? `${celebracion.volumen.toLocaleString('es-ES')} kg movidos` : null,
+      celebracion.kcalCardio ? `cardio ~${celebracion.kcalCardio} kcal` : null,
+      `🔥 racha de ${celebracion.racha} ${celebracion.racha === 1 ? 'dia' : 'dias'}`,
+    ].filter(Boolean);
+    const textoCompartir = `${partes.join(' · ')}\nRegistrado con My Little Brain`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ text: textoCompartir, url: window.location.origin });
+      } else {
+        await navigator.clipboard.writeText(`${textoCompartir} ${window.location.origin}`);
+        setCopiado(true);
+      }
+    } catch {
+      // cancelado por el usuario
+    }
+  };
+
+  if (celebracion) {
+    return (
+      <Tarjeta className="border-emerald-500/50 bg-gradient-to-br from-emerald-500/10 to-transparent">
+        <p className="text-3xl">🎉</p>
+        <h3 className="mt-1 text-lg font-semibold">{nombre} hecho</h3>
+        <p className="text-sm text-muted-foreground">
+          {celebracion.ejercicios} ejercicios · {celebracion.series} series
+          {celebracion.volumen ? ` · ${celebracion.volumen.toLocaleString('es-ES')} kg movidos` : ''}
+          {celebracion.kcalCardio ? ` · cardio ~${celebracion.kcalCardio} kcal` : ''}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Insignia tono="marca">+{celebracion.xp} XP</Insignia>
+          <Insignia tono="exito">🔥 {celebracion.racha} {celebracion.racha === 1 ? 'dia' : 'dias'} de racha</Insignia>
+        </div>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Clava hoy las calorias y la proteina y te llevas +30 XP por dia redondo. Lo compruebo en el check-in de la noche.
+        </p>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <Boton type="button" variante="secundario" onClick={compartir}>
+            <Share2 size={16} /> {copiado ? 'Copiado, pegalo donde quieras' : 'Compartir'}
+          </Boton>
+          <Boton type="button" onClick={() => { router.push('/app'); router.refresh(); }}>
+            Ir a Hoy
+          </Boton>
+        </div>
+      </Tarjeta>
+    );
+  }
 
   const totalHechas = estado.flat().filter((s) => s.hecha).length;
 

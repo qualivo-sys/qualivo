@@ -5,7 +5,10 @@ import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
 import { firmaPerfil, generarPlan, prescripcion } from '@/lib/motor/planificador';
 import type { Bloque } from '@/lib/motor/tipos-motor';
-import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
+import { XP_POR_ACCION, racha as calcularRacha } from '@/lib/motor/puntuaciones';
+import { kcalCardio, tipoCardio } from '@/lib/motor/cardio';
+import { esDiaRedondo } from '@/lib/motor/energia';
+import { cargarPanel } from '@/lib/datos';
 import { perfilEntreno } from '@/lib/perfil';
 import { clienteServidor } from '@/lib/supabase/servidor';
 import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
@@ -192,6 +195,7 @@ export async function guardarCheckIn(datos: FormData) {
     { onConflict: 'user_id,fecha' },
   );
   if (!previo) await sumarXp('checkin', `check-in ${fecha}`);
+  await premiarDiaRedondo(supabase, userId, fecha);
   revalidatePath('/app');
 }
 
@@ -234,6 +238,7 @@ export async function guardarEntreno(payload: {
   const fecha = hoy;
   const cardio = payload.cardio && payload.cardio.minutos > 0 ? payload.cardio : null;
 
+  const seriesConDatos = payload.series.filter((s) => s.reps !== null || s.peso_kg !== null);
   const base = {
     user_id: userId,
     fecha,
@@ -242,6 +247,8 @@ export async function guardarEntreno(payload: {
     sensacion: payload.sensacion,
     notas: payload.notas,
     completado: true,
+    // Duracion estimada (unos 3 min por serie con descanso) mas el cardio: sirve para el gasto.
+    duracion_min: Math.max(15, seriesConDatos.length * 3) + (cardio ? Math.round(cardio.minutos) : 0),
   };
   let { data: entreno, error } = await supabase
     .from('entrenamientos')
@@ -279,7 +286,14 @@ export async function guardarEntreno(payload: {
   await sumarXp('entreno', payload.nombre);
   revalidatePath('/app');
   revalidatePath('/app/entreno');
-  return { ok: true as const, aviso };
+  const { data: xp } = await supabase.from('xp_eventos').select('fecha').eq('user_id', userId);
+  return {
+    ok: true as const,
+    aviso,
+    xp: XP_POR_ACCION.entreno,
+    racha: calcularRacha((xp ?? []).map((e) => e.fecha as string), hoy),
+    kcalCardio: cardio ? Math.round(cardio.kcal) : 0,
+  };
 }
 
 /** Anade un ejercicio al dia del plan activo (desde el registro de sesion). */
@@ -487,4 +501,65 @@ export async function quitarObjetivosManual(): Promise<void> {
   await supabase.from('perfiles').update({ objetivos_manual: null }).eq('id', userId);
   revalidatePath('/app');
   revalidatePath('/app/cuerpo');
+}
+
+
+/** Da la bonificacion de "dia redondo" una sola vez por dia, cuando se cumple. */
+async function premiarDiaRedondo(supabase: Awaited<ReturnType<typeof sesion>>['supabase'], userId: string, fecha: string) {
+  const perfil = await cargarPerfil(supabase, userId);
+  if (!perfil) return;
+  const panel = await cargarPanel(supabase, userId, perfil);
+  const dia = panel.dias.find((d) => d.fecha === fecha);
+  if (!dia || !esDiaRedondo(dia, { kcal: panel.metas?.kcal ?? null, proteina: panel.metas?.proteinaG ?? null })) return;
+  const { data: ya } = await supabase
+    .from('xp_eventos').select('id').eq('user_id', userId).eq('fecha', fecha).eq('tipo', 'dia_redondo').limit(1);
+  if (ya?.length) return;
+  await supabase.from('xp_eventos').insert({ user_id: userId, fecha, tipo: 'dia_redondo', xp: XP_POR_ACCION.dia_redondo, motivo: 'dia redondo' });
+}
+
+/**
+ * Actividad libre fuera del plan (monte, bici, padel, natacion…): se guarda como
+ * entrenamiento sin dia del plan, con su tipo, minutos y calorias estimadas.
+ */
+export async function registrarActividad(datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const fecha = texto(datos.get('fecha')) ?? hoy;
+  const tipo = texto(datos.get('tipo')) ?? 'andar';
+  const minutos = Math.max(1, Math.round(numero(datos.get('minutos')) ?? 30));
+  const { data: ultimoPeso } = await supabase
+    .from('metricas_corporales').select('peso_kg').eq('user_id', userId).not('peso_kg', 'is', null)
+    .order('fecha', { ascending: false }).limit(1).maybeSingle();
+  const peso = Number(ultimoPeso?.peso_kg) || 75;
+  const info = tipoCardio(tipo);
+  const kcal = info ? kcalCardio(tipo, minutos, peso) : Math.round(5 * peso * (minutos / 60));
+  const nombre = texto(datos.get('nombre')) ?? info?.nombre ?? 'Actividad';
+  const { error } = await supabase.from('entrenamientos').insert({
+    user_id: userId,
+    fecha,
+    dia_plan: null,
+    nombre: nombre.slice(0, 80),
+    sensacion: numero(datos.get('sensacion')),
+    notas: texto(datos.get('notas')),
+    completado: true,
+    duracion_min: minutos,
+    cardio_tipo: info ? tipo : 'otro',
+    cardio_min: minutos,
+    cardio_kcal: kcal,
+  });
+  if (error) {
+    console.error('[actividad] no se pudo guardar', error.message);
+    return;
+  }
+  await supabase.from('xp_eventos').insert({ user_id: userId, fecha, tipo: 'actividad', xp: XP_POR_ACCION.actividad, motivo: nombre });
+  revalidatePath('/app');
+  revalidatePath('/app/semana');
+  revalidatePath('/app/entreno');
+  revalidatePath('/app/progreso');
+}
+
+export async function borrarActividad(id: string) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('entrenamientos').delete().eq('id', id).eq('user_id', userId).is('dia_plan', null);
+  revalidatePath('/app');
+  revalidatePath('/app/semana');
 }

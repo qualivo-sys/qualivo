@@ -8,6 +8,9 @@ import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
 import { ejercicio } from '@/lib/motor/ejercicios';
 import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
+import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
+import { horaActual } from '@/lib/fechas';
+import { tmbDe } from '@/lib/perfil';
 import { proximoDia } from '@/lib/motor/progresion';
 import { senales } from '@/lib/motor/senales';
 import { sesionRequerida } from '@/lib/sesion';
@@ -68,6 +71,26 @@ export default async function PanelHoy() {
     );
     return { ...e, ejercicios: nombres, seriesHechas: series.length, volumen: Math.round(volumen) };
   });
+
+  // Balance de energia: gastado (basal, pasos, entrenos) frente a comido.
+  const hora = horaActual(perfil.zona_horaria || undefined);
+  const gasto = gastoDia({
+    tmbKcal: metas?.tmb || tmbDe(perfil, cuerpo.peso),
+    pesoKg: cuerpo.peso ?? 75,
+    pasos: diaHoy.pasos,
+    entrenamientos: entrenosHoy,
+  });
+  const energia = gasto.basal ? balanceEnergia(diaHoy.kcal, gasto, perfil.objetivo, hora >= 21) : null;
+  const tonoEnergia = { bien: 'text-emerald-700 dark:text-emerald-300', aviso: 'text-amber-700 dark:text-amber-300', alerta: 'text-destructive', info: 'text-muted-foreground' };
+  const redondo = metas
+    ? [
+        { etiqueta: 'Entreno o actividad', ok: diaHoy.entreno || diaHoy.actividad },
+        { etiqueta: `Calorias en rango (±12 % de ${metas.kcal})`, ok: diaHoy.comidas > 0 && Math.abs(diaHoy.kcal - metas.kcal) <= metas.kcal * 0.12 },
+        { etiqueta: `Proteina ≥ ${Math.round(metas.proteinaG * 0.85)} g`, ok: diaHoy.proteina >= metas.proteinaG * 0.85 },
+        { etiqueta: 'Check-in de la noche', ok: diaHoy.animo !== null },
+      ]
+    : [];
+  const esRedondo = metas ? esDiaRedondo(diaHoy, { kcal: metas.kcal, proteina: metas.proteinaG }) : false;
 
   const habitosHechos = panel.registrosHabitos
     .filter((r) => r.fecha === panel.hoy && r.hecho)
@@ -188,6 +211,48 @@ export default async function PanelHoy() {
         </div>
       </Tarjeta>
 
+      {energia && (
+        <Tarjeta>
+          <TituloTarjeta>Balance de energia</TituloTarjeta>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className="text-lg font-semibold tabular-nums">{energia.gasto.total.toLocaleString('es-ES')}</div>
+              <div className="text-xs text-muted-foreground">gastadas</div>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className="text-lg font-semibold tabular-nums">{energia.consumido.toLocaleString('es-ES')}</div>
+              <div className="text-xs text-muted-foreground">comidas</div>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className={`text-lg font-semibold tabular-nums ${tonoEnergia[energia.tono]}`}>
+                {energia.neto > 0 ? '+' : ''}{Math.round(energia.neto).toLocaleString('es-ES')}
+              </div>
+              <div className="text-xs text-muted-foreground">balance</div>
+            </div>
+          </div>
+          <p className={`mt-3 text-sm ${tonoEnergia[energia.tono]}`}>{energia.texto}</p>
+          <p className="mt-2 text-xs text-muted-foreground tabular-nums">
+            Gasto: {energia.gasto.basal} basal
+            {energia.gasto.pasos ? ` · ${energia.gasto.pasos} pasos` : ' · pasos sin apuntar'}
+            {energia.gasto.fuerza ? ` · ${energia.gasto.fuerza} fuerza` : ''}
+            {energia.gasto.cardio ? ` · ${energia.gasto.cardio} cardio` : ''}
+            {energia.gasto.actividades ? ` · ${energia.gasto.actividades} actividad` : ''}. Son estimaciones.
+          </p>
+          {redondo.length > 0 && (
+            <div className="mt-3 border-t border-border pt-3">
+              <p className="text-sm font-medium">{esRedondo ? '⭐ Dia redondo conseguido (+30 XP)' : 'Dia redondo (+30 XP)'}</p>
+              <ul className="mt-1.5 grid gap-1 text-xs sm:grid-cols-2">
+                {redondo.map((r) => (
+                  <li key={r.etiqueta} className={r.ok ? 'text-emerald-700 dark:text-emerald-300' : 'text-muted-foreground'}>
+                    {r.ok ? '✓' : '○'} {r.etiqueta}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Tarjeta>
+      )}
+
       {resumenHoy.length > 0 && (
         <Tarjeta className="border-emerald-500/40">
           <div className="mb-2 flex items-center justify-between">
@@ -207,7 +272,7 @@ export default async function PanelHoy() {
                   {e.ejercicios.length > 0 && <span>{e.ejercicios.length} ejercicios</span>}
                   {e.seriesHechas > 0 && <span>{e.seriesHechas} series</span>}
                   {e.volumen > 0 && <span>{e.volumen.toLocaleString('es-ES')} kg movidos</span>}
-                  {e.cardio_min ? <span>cardio {e.cardio_min} min{e.cardio_kcal ? ` · ~${e.cardio_kcal} kcal` : ''}</span> : null}
+                  {e.cardio_min ? <span>{e.dia_plan ? 'cardio' : 'actividad'} {e.cardio_min} min{e.cardio_kcal ? ` · ~${e.cardio_kcal} kcal` : ''}</span> : null}
                 </div>
                 {e.ejercicios.length > 0 && (
                   <p className="mt-1 text-xs text-muted-foreground">{e.ejercicios.join(' · ')}</p>

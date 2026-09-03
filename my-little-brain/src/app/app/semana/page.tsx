@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import VistaRevision from '@/components/revision-semanal';
 import { Anillo } from '@/components/ui/anillo';
-import { Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { borrarActividad, registrarActividad } from '@/app/app/acciones';
+import { TIPOS_CARDIO } from '@/lib/motor/cardio';
+import { esActividad } from '@/lib/motor/energia';
 import { cargarPanel } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import { estadisticasSemana } from '@/lib/ia/revision';
@@ -23,6 +26,32 @@ export default async function PaginaSemana() {
   const statsCerrada = estadisticasSemana(panel, semana);
   const diasTranscurridos = panel.semana.length;
 
+  // Calendario de la semana: los 7 dias de lunes a domingo con lo hecho en cada uno.
+  const diasCalendario = Array.from({ length: 7 }, (_, i) => sumarDias(semanaActual, i)).map((fecha) => {
+    const dia = panel.dias.find((d) => d.fecha === fecha);
+    const del = panel.entrenamientos.filter((e) => e.fecha === fecha && e.completado);
+    return {
+      fecha,
+      futuro: fecha > panel.hoy,
+      esHoy: fecha === panel.hoy,
+      dia,
+      entrenos: del.filter((e) => !esActividad(e)),
+      actividades: del.filter(esActividad),
+    };
+  });
+  const totales = diasCalendario.reduce(
+    (t, d) => ({
+      entrenos: t.entrenos + d.entrenos.length,
+      actividades: t.actividades + d.actividades.length,
+      comido: t.comido + (d.dia?.kcal ?? 0),
+      gastado: t.gastado + (d.dia && !d.futuro ? d.dia.gastoKcal : 0),
+      pasos: t.pasos + (d.dia?.pasos ?? 0),
+      redondos: t.redondos + (d.dia?.redondo ? 1 : 0),
+    }),
+    { entrenos: 0, actividades: 0, comido: 0, gastado: 0, pasos: 0, redondos: 0 },
+  );
+  const LETRAS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+
   const { data } = await supabase
     .from('revisiones')
     .select('contenido')
@@ -40,6 +69,77 @@ export default async function PaginaSemana() {
           Semana en curso: del {fechaCorta(stats.desde)} al {fechaCorta(stats.hasta)} · llevas {diasTranscurridos} de 7 dias
         </p>
       </div>
+
+      <Tarjeta>
+        <TituloTarjeta>Calendario de la semana</TituloTarjeta>
+        <div className="desplazable-x">
+          <div className="grid min-w-[560px] grid-cols-7 gap-1.5">
+            {diasCalendario.map((d, i) => (
+              <div
+                key={d.fecha}
+                className={`rounded-lg border p-2 text-xs ${d.esHoy ? 'border-primary bg-primary/10' : 'border-border bg-muted/30'} ${d.futuro ? 'opacity-50' : ''}`}
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="font-semibold">{LETRAS[i]} {d.fecha.slice(8)}</span>
+                  {d.dia?.redondo && <span title="Dia redondo">⭐</span>}
+                </div>
+                <div className="mt-1.5 min-h-[2.5rem] space-y-0.5">
+                  {d.entrenos.map((e) => (
+                    <div key={e.id} className="truncate rounded bg-[hsl(var(--area-fitness))]/15 px-1 py-0.5" title={e.nombre}>🏋️ {e.nombre.replace(/^Dia \d+ · /, '')}</div>
+                  ))}
+                  {d.actividades.map((e) => (
+                    <div key={e.id} className="flex items-center justify-between gap-1 rounded bg-[hsl(var(--area-habitos))]/15 px-1 py-0.5" title={e.nombre}>
+                      <span className="truncate">🥾 {e.nombre}{e.cardio_min ? ` ${e.cardio_min}'` : ''}</span>
+                      <form action={borrarActividad.bind(null, e.id)}>
+                        <button type="submit" aria-label="Borrar actividad" className="text-muted-foreground hover:text-destructive">×</button>
+                      </form>
+                    </div>
+                  ))}
+                  {!d.futuro && !d.entrenos.length && !d.actividades.length && <div className="text-muted-foreground">descanso</div>}
+                </div>
+                {!d.futuro && d.dia && (
+                  <dl className="mt-1.5 space-y-0.5 text-[11px] text-muted-foreground tabular-nums">
+                    <div className="flex justify-between"><dt>comido</dt><dd>{d.dia.comidas ? d.dia.kcal : '—'}</dd></div>
+                    <div className="flex justify-between"><dt>gastado</dt><dd>{d.dia.gastoKcal ? `~${d.dia.gastoKcal}` : '—'}</dd></div>
+                    <div className="flex justify-between"><dt>pasos</dt><dd>{d.dia.pasos ? d.dia.pasos.toLocaleString('es-ES') : '—'}</dd></div>
+                  </dl>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="mt-3 text-sm tabular-nums">
+          <strong>{totales.entrenos}</strong> entrenos · <strong>{totales.actividades}</strong> actividades ·{' '}
+          <strong>{totales.redondos}</strong> dias redondos · comido <strong>{totales.comido.toLocaleString('es-ES')}</strong> kcal ·{' '}
+          gastado <strong>~{totales.gastado.toLocaleString('es-ES')}</strong> kcal
+          {totales.pasos ? <> · <strong>{totales.pasos.toLocaleString('es-ES')}</strong> pasos</> : null}
+        </p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Balance de la semana: {totales.comido - totales.gastado > 0 ? '+' : ''}{(totales.comido - totales.gastado).toLocaleString('es-ES')} kcal
+          {totales.comido ? '' : ' (apunta las comidas para que tenga sentido)'}. Los pasos salen del check-in de la noche.
+        </p>
+
+        <details id="actividad" className="mt-4 border-t border-border pt-3">
+          <summary className="cursor-pointer text-sm font-medium">Anadir una actividad fuera del plan</summary>
+          <form action={registrarActividad} className="mt-3 space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <Campo etiqueta="Dia" name="fecha" type="date" defaultValue={panel.hoy} max={panel.hoy} required />
+              <Campo etiqueta="Minutos" name="minutos" type="number" inputMode="numeric" min={1} defaultValue={60} required />
+            </div>
+            <Selector etiqueta="Que has hecho" name="tipo" defaultValue="senderismo">
+              {TIPOS_CARDIO.map((t) => (
+                <option key={t.id} value={t.id}>{t.nombre}</option>
+              ))}
+              <option value="otro">Otro deporte (padel, futbol, yoga…)</option>
+            </Selector>
+            <Campo etiqueta="Nombre (opcional)" name="nombre" placeholder="Ruta por la montaña, padel con Isa…" />
+            <Boton type="submit" variante="secundario" className="w-full">Guardar actividad</Boton>
+            <p className="text-xs text-muted-foreground">
+              Calcula las calorias con tu peso y los minutos, suma 25 XP y cuenta para la racha y el dia redondo.
+            </p>
+          </form>
+        </details>
+      </Tarjeta>
 
       <Tarjeta>
         <TituloTarjeta>Puntuaciones</TituloTarjeta>

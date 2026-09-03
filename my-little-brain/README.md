@@ -31,6 +31,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Avisos** | Notificaciones push: el coach te escribe por la manana y por la noche (abren el chat con el check-in lanzado), recuerda el entreno pendiente y avisa cuando la revision del domingo esta lista. |
 | **Comidas** | Calculadora con tabla de ~95 alimentos: "200 g pollo, 150 arroz, 1 cucharada de aceite" sale calculado al momento, sin IA. El coach usa la misma tabla. |
 | **Macros del dia** | Barras de calorias, proteina, carbos y grasa frente al objetivo, lectura de nutricionista segun la hora (proteina que falta, exceso de grasa, carbos el dia de entreno, verdura, alcohol) y propuestas con gramos para las comidas que quedan (merienda, cena…) que se apuntan con un toque. Motor determinista en `src/lib/motor/dieta.ts`. |
+| **Energia y semana** | Balance del dia: gastado (basal, pasos, fuerza, cardio, actividades) frente a comido, con lectura segun el objetivo. Actividades fuera del plan (monte, bici, padel…) con calorias por MET. Calendario semanal con entrenos, actividades, comido, gastado, pasos y dias redondos. Al terminar un entreno: XP, racha y boton de compartir; "dia redondo" (+30 XP) cuando coinciden entreno, calorias y proteina. |
 | **Importar** | Si ya tienes un entreno o una dieta de un entrenador o nutricionista, subes el PDF, una foto o el texto y la app lo convierte en tu plan activo y en tus objetivos de calorias. |
 
 ### Lo que lo diferencia de un tracker

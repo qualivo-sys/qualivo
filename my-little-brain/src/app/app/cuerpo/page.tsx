@@ -113,6 +113,13 @@ export default async function PaginaCuerpo() {
               ))}
             </ul>
           )}
+          {panel.diaHoy.gastoKcal > 0 && (
+            <p className="mt-3 text-xs text-muted-foreground tabular-nums">
+              Hoy llevas gastadas ~{panel.diaHoy.gastoKcal.toLocaleString('es-ES')} kcal (basal, pasos y entrenos); balance{' '}
+              {panel.diaHoy.kcal - panel.diaHoy.gastoKcal > 0 ? '+' : ''}{(panel.diaHoy.kcal - panel.diaHoy.gastoKcal).toLocaleString('es-ES')} kcal.{' '}
+              El detalle esta en <Link href="/app" className="underline">Hoy</Link>.
+            </p>
+          )}
           {semana.dias > 0 && (
             <p className="mt-3 text-xs text-muted-foreground">
               Esta semana ({semana.dias} {semana.dias === 1 ? 'dia' : 'dias'} con registro): media de {semana.kcal} kcal,{' '}

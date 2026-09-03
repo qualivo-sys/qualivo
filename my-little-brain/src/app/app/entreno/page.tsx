@@ -221,6 +221,10 @@ export default async function PaginaEntreno({
             <Boton type="button" variante="contorno" className="w-full">Importar plan de un especialista</Boton>
           </Link>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground">
+          ¿Hoy has hecho otra cosa (monte, bici, padel, natacion)?{' '}
+          <Link href="/app/semana#actividad" className="text-primary underline">Apuntalo como actividad</Link> y cuenta en tu semana.
+        </p>
       </Tarjeta>
     </main>
   );

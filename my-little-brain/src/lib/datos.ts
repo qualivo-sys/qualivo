@@ -12,7 +12,7 @@ import {
   type Progreso,
   type Puntuaciones,
 } from './motor/puntuaciones';
-import { metasNutricion } from './perfil';
+import { tmbDe, metasNutricion } from './perfil';
 import type {
   Bienestar, Comida, Entrenamiento, Foco, Habito, HabitoRegistro,
   MetricaCorporal, ObjetivoRegistro, Perfil, RecuerdoCoach, Tarea,
@@ -109,6 +109,7 @@ export async function cargarPanel(
   const dias = construirDias(
     { comidas, entrenamientos, foco, habitos, registros, bienestar, metricas },
     fechas,
+    { tmbKcal: metas?.tmb || tmbDe(perfil, cuerpo.peso), pesoKg: cuerpo.peso ?? 75, metaKcal: metas?.kcal ?? null, metaProteina: metas?.proteinaG ?? null },
   );
   const lunes = inicioSemana(hoy);
   const semana = dias.filter((d) => d.fecha >= lunes && d.fecha <= hoy);
