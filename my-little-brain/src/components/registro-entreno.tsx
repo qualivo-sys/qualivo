@@ -2,7 +2,7 @@
 
 import { Check, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { guardarEntreno, type SeriePayload } from '@/app/app/acciones';
 import { Boton, Selector, Tarjeta } from '@/components/ui/base';
 import { TIPOS_CARDIO, enlaceTecnica, kcalCardio } from '@/lib/motor/cardio';
@@ -29,15 +29,18 @@ export default function RegistroEntreno({
   nombre,
   bloques,
   pesoKg,
+  claveBorrador,
 }: {
   diaId: string;
   nombre: string;
   bloques: BloqueVista[];
   /** Peso corporal para estimar las calorias del cardio. */
   pesoKg: number;
+  /** Clave unica de usuario+dia+fecha para el borrador local. */
+  claveBorrador: string;
 }) {
   const router = useRouter();
-  const [estado, setEstado] = useState<SerieEditable[][]>(
+  const inicial = (): SerieEditable[][] =>
     bloques.map((bloque) =>
       Array.from({ length: bloque.series }, () => ({
         peso: bloque.pesoSugerido !== null ? String(bloque.pesoSugerido) : '',
@@ -45,15 +48,64 @@ export default function RegistroEntreno({
         rir: '',
         hecha: false,
       })),
-    ),
-  );
+    );
+
+  // Borrador local: lo que escribes se guarda al momento en este navegador,
+  // asi que bloquear el movil o salir a mitad no pierde nada.
+  const claveLocal = `mlb:borrador:${claveBorrador}`;
+  const leerBorrador = () => {
+    try {
+      const crudo = window.localStorage.getItem(claveLocal);
+      if (!crudo) return null;
+      const b = JSON.parse(crudo) as { estado?: SerieEditable[][]; sensacion?: number | null; notas?: string; cardioTipo?: string; cardioMin?: string };
+      if (!Array.isArray(b.estado) || b.estado.length !== bloques.length) return null;
+      return b;
+    } catch {
+      return null;
+    }
+  };
+
+  const [estado, setEstado] = useState<SerieEditable[][]>(inicial);
   const [sensacion, setSensacion] = useState<number | null>(null);
   const [notas, setNotas] = useState('');
+  const [restaurado, setRestaurado] = useState(false);
+  const hidratado = useRef(false);
   const [guardando, setGuardando] = useState(false);
   const [descanso, setDescanso] = useState<number | null>(null);
   const [cardioTipo, setCardioTipo] = useState('');
   const [cardioMin, setCardioMin] = useState('');
   const cardioKcal = cardioTipo && Number(cardioMin) > 0 ? kcalCardio(cardioTipo, Number(cardioMin), pesoKg) : 0;
+
+  // Al montar: restaurar el borrador si lo hay (solo en el navegador).
+  useEffect(() => {
+    const b = leerBorrador();
+    if (b) {
+      if (b.estado) setEstado(b.estado);
+      setSensacion(b.sensacion ?? null);
+      setNotas(b.notas ?? '');
+      setCardioTipo(b.cardioTipo ?? '');
+      setCardioMin(b.cardioMin ?? '');
+      setRestaurado(true);
+    }
+    hidratado.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [claveLocal]);
+
+  // Cada cambio se guarda; si no hay nada escrito, se borra el borrador.
+  useEffect(() => {
+    if (!hidratado.current) return;
+    const hayAlgo =
+      estado.some((filas) => filas.some((f) => f.hecha || f.reps || f.rir)) || notas || sensacion || cardioTipo;
+    try {
+      if (hayAlgo) {
+        window.localStorage.setItem(claveLocal, JSON.stringify({ estado, sensacion, notas, cardioTipo, cardioMin }));
+      } else {
+        window.localStorage.removeItem(claveLocal);
+      }
+    } catch {
+      // Sin espacio o modo privado: seguimos sin borrador.
+    }
+  }, [estado, sensacion, notas, cardioTipo, cardioMin, claveLocal]);
 
   const editar = (bloque: number, serie: number, cambios: Partial<SerieEditable>) =>
     setEstado((previo) =>
@@ -95,6 +147,11 @@ export default function RegistroEntreno({
       series,
       cardio: cardioTipo && Number(cardioMin) > 0 ? { tipo: cardioTipo, minutos: Number(cardioMin), kcal: cardioKcal } : null,
     });
+    try {
+      window.localStorage.removeItem(claveLocal);
+    } catch {
+      // nada
+    }
     setGuardando(false);
     router.push('/app');
     router.refresh();
@@ -104,6 +161,11 @@ export default function RegistroEntreno({
 
   return (
     <div className="space-y-3">
+      {restaurado && (
+        <p className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm">
+          He recuperado lo que llevabas de esta sesion. Sigue donde lo dejaste.
+        </p>
+      )}
       {descanso !== null && (
         <div className="sticky top-2 z-10 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm">
           Descanso sugerido: {Math.round(descanso / 60)} min {descanso % 60 ? `${descanso % 60} s` : ''}

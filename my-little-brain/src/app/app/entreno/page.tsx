@@ -15,7 +15,7 @@ export const dynamic = 'force-dynamic';
 export default async function PaginaEntreno({
   searchParams,
 }: {
-  searchParams: { dia?: string };
+  searchParams: { dia?: string; nueva?: string };
 }) {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
@@ -55,6 +55,12 @@ export default async function PaginaEntreno({
       esIsometrico: esIsometrico(bloque.ejercicioId),
     };
   });
+
+  // Si hoy ya has terminado este dia, ensenamos lo registrado (salvo que pidas otra sesion).
+  const hechaHoy = panel.entrenamientos.find(
+    (e) => e.completado && e.fecha === panel.hoy && e.dia_plan === diaSeleccionado.id,
+  );
+  const sesionHoy = hechaHoy && !searchParams.nueva ? sesiones.find((s) => s.id === hechaHoy.id) ?? null : null;
 
   const datosPerfil = perfilEntreno(perfil);
   const desactualizado = datosPerfil ? planDesactualizado(panel.plan, datosPerfil) : false;
@@ -102,14 +108,45 @@ export default async function PaginaEntreno({
         <p className="text-sm text-muted-foreground">{diaSeleccionado.foco}</p>
       </div>
 
-      {/* key: al cambiar de dia el registro se reinicia y no arrastra los pesos del anterior. */}
-      <RegistroEntreno
-        key={diaSeleccionado.id}
-        diaId={diaSeleccionado.id}
-        nombre={diaSeleccionado.nombre}
-        bloques={bloques}
-        pesoKg={Math.round(panel.cuerpo.peso ?? 75)}
-      />
+      {sesionHoy ? (
+        <Tarjeta className="border-emerald-500/40">
+          <div className="mb-3 flex items-center justify-between">
+            <TituloTarjeta className="mb-0">Hoy ya lo has hecho</TituloTarjeta>
+            <Insignia tono="exito">guardado</Insignia>
+          </div>
+          <ul className="space-y-3 text-sm">
+            {sesionHoy.ejercicios.map((ej) => (
+              <li key={ej.ejercicioId}>
+                <div className="font-medium">{ejercicio(ej.ejercicioId)?.nombre ?? ej.ejercicioId}</div>
+                <div className="text-muted-foreground">
+                  {ej.series
+                    .filter((serie) => serie.hecha)
+                    .map((serie) => `${serie.pesoKg ?? '—'} × ${serie.reps ?? '—'}`)
+                    .join('  ·  ') || 'sin series con datos'}
+                </div>
+              </li>
+            ))}
+          </ul>
+          {hechaHoy?.cardio_min ? (
+            <p className="mt-3 text-sm text-muted-foreground">
+              Cardio: {hechaHoy.cardio_min} min (~{hechaHoy.cardio_kcal} kcal).
+            </p>
+          ) : null}
+          <Link href={`/app/entreno?dia=${diaSeleccionado.id}&nueva=1`} className="mt-4 block">
+            <Boton variante="contorno" className="w-full">Registrar otra sesion de este dia</Boton>
+          </Link>
+        </Tarjeta>
+      ) : (
+        /* key: al cambiar de dia el registro se reinicia y no arrastra los pesos del anterior. */
+        <RegistroEntreno
+          key={diaSeleccionado.id}
+          diaId={diaSeleccionado.id}
+          nombre={diaSeleccionado.nombre}
+          bloques={bloques}
+          pesoKg={Math.round(panel.cuerpo.peso ?? 75)}
+          claveBorrador={`${usuario.id}:${diaSeleccionado.id}:${panel.hoy}`}
+        />
+      )}
 
       {diaSeleccionado.cardio && (
         <Tarjeta>
