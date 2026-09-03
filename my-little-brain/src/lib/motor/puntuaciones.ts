@@ -6,6 +6,8 @@ export interface Dia {
   fecha: string;
   kcal: number;
   proteina: number;
+  carbos: number;
+  grasa: number;
   alcoholUd: number;
   comidas: number;
   entreno: boolean;
@@ -49,6 +51,8 @@ export function construirDias(fuentes: FuentesDatos, fechas: string[]): Dia[] {
       fecha,
       kcal: suma(comidas.map((c) => c.kcal ?? 0)),
       proteina: suma(comidas.map((c) => c.proteina_g ?? 0)),
+      carbos: suma(comidas.map((c) => c.carbos_g ?? 0)),
+      grasa: suma(comidas.map((c) => c.grasa_g ?? 0)),
       alcoholUd: suma(comidas.map((c) => Number(c.alcohol_ud ?? 0))),
       comidas: comidas.length,
       entreno: entrenos.length > 0,

@@ -220,5 +220,27 @@ const metasManual = metasNutricion({ ...perfil, objetivos_manual: { kcal: 2100, 
 check('los objetivos manuales mandan sobre los calculados', metasManual?.kcal === 2100 && metasManual.proteinaG === 160 && metasManual.manual === 'dieta de Pedro');
 check('sin objetivos manuales la app los calcula', !metasNutricion({ ...perfil, objetivos_manual: null }, 82, null)?.manual);
 
+// ── 8. Nutricion del dia: balance, lectura y sugerencias ───────────────
+const { balanceDia, momentosPendientes, sugerirComidas, restricciones } = await import(`${L}/motor/dieta.js`);
+const metasDieta = { tmb: 1800, gastoTotal: 2500, kcal: 2200, proteinaG: 170, grasaG: 70, carbosG: 220, aguaMl: 2800, pasos: 8000, ritmoKgSemana: -0.3 };
+const comidaMock = (momento, kcal, p, c, g, descripcion = 'pollo con arroz') => ({ id: momento, fecha: '2026-09-03', momento, descripcion, kcal, proteina_g: p, carbos_g: c, grasa_g: g, alcohol_ud: 0, foto_path: null, fuente: 'manual', confianza: 'alta', creado: '' });
+const bal = balanceDia([comidaMock('desayuno', 400, 20, 50, 12, 'tostadas con huevo')], metasDieta, 16, { entrenoHoy: true });
+check('el balance resta lo comido del objetivo', bal.restante.kcal === 1800 && bal.restante.proteina === 150 && bal.pct.proteina === 12);
+check('a media tarde avisa de que va corto de proteina', bal.lecturas.some((l) => /corto de proteina/.test(l.texto)), bal.lecturas.map((l) => l.texto).join(' | '));
+check('sin verdura a las 16 lo dice', bal.lecturas.some((l) => /verdura/.test(l.texto)));
+const balPasado = balanceDia([comidaMock('comida', 2600, 180, 300, 90)], metasDieta, 21);
+check('si te pasas de calorias lo marca como alerta', balPasado.lecturas.some((l) => l.tono === 'alerta' && /por encima/.test(l.texto)));
+check('las comidas pendientes dependen de la hora y de lo registrado', JSON.stringify(momentosPendientes([comidaMock('desayuno', 1, 1, 1, 1)], 15)) === '["comida","snack","cena"]' && !momentosPendientes([], 20).includes('desayuno'));
+const sug = sugerirComidas(bal.restante, ['snack', 'cena'], { alergias: [], preferencias: null, semilla: 0 });
+check('propone opciones para merienda y cena', sug.length === 2 && sug.every((g) => g.opciones.length === 2), sug.map((g) => g.opciones.map((o) => o.titulo).join('/')).join(' ; '));
+const cena = sug.find((g) => g.momento === 'cena');
+const desvio = Math.abs(cena.opciones[0].macros.kcal - cena.objetivo.kcal) / cena.objetivo.kcal;
+check('la cena propuesta se acerca a las calorias que tocan', desvio <= 0.2, `${cena.opciones[0].macros.kcal} vs ${Math.round(cena.objetivo.kcal)} (${cena.opciones[0].texto})`);
+check('la proteina de la cena cuadra', Math.abs(cena.opciones[0].macros.proteina - cena.objetivo.proteina) <= cena.objetivo.proteina * 0.25, `${cena.opciones[0].macros.proteina} vs ${Math.round(cena.objetivo.proteina)}`);
+const sugVeg = sugerirComidas(bal.restante, ['cena'], { alergias: ['lactosa'], preferencias: 'vegetariano', semilla: 0 });
+check('respeta alergias y preferencias', sugVeg[0].opciones.every((o) => !o.lineas.some((l) => /pollo|merluza|gambas|ternera|skyr|yogur/.test(l.id))), sugVeg[0].opciones.map((o) => o.titulo).join('/'));
+check('vegano quita carne, pescado, lacteos y huevo', ['carne', 'pescado', 'lacteo', 'huevo'].every((e) => restricciones([], 'soy vegano').has(e)));
+check('sin calorias restantes no propone nada', sugerirComidas({ kcal: 50, proteina: 5, carbos: 5, grasa: 2 }, ['cena']).length === 0);
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

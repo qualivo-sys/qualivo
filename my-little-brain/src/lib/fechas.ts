@@ -53,3 +53,10 @@ export function ultimosDias(n: number, hasta = hoy()): string[] {
 export function esHoy(fechaIso: string): boolean {
   return fechaIso === hoy();
 }
+
+/** Hora del dia (0-23) en la zona horaria del usuario. */
+export function horaActual(zona?: string): number {
+  const partes = new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hour12: false, timeZone: zona || undefined }).formatToParts(new Date());
+  const hora = Number(partes.find((p) => p.type === 'hour')?.value ?? new Date().getHours());
+  return Number.isFinite(hora) ? hora % 24 : new Date().getHours();
+}
