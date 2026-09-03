@@ -14,11 +14,14 @@ export default async function PaginaSemana() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
 
-  // La revision es de la semana pasada hasta que la actual termina el domingo.
+  // Las puntuaciones y los numeros son de la semana en curso (de lunes a hoy).
+  // La revision es de la ultima semana cerrada: la pasada hasta que llega el domingo.
   const semanaActual = inicioSemana(panel.hoy);
   const esDomingo = new Date(panel.hoy + 'T12:00:00').getDay() === 0;
   const semana = esDomingo ? semanaActual : inicioSemana(sumarDias(semanaActual, -1));
-  const stats = estadisticasSemana(panel, semana);
+  const stats = estadisticasSemana(panel, semanaActual);
+  const statsCerrada = estadisticasSemana(panel, semana);
+  const diasTranscurridos = panel.semana.length;
 
   const { data } = await supabase
     .from('revisiones')
@@ -34,7 +37,7 @@ export default async function PaginaSemana() {
       <div>
         <h1>Tu semana</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Del {fechaCorta(stats.desde)} al {fechaCorta(stats.hasta)}
+          Semana en curso: del {fechaCorta(stats.desde)} al {fechaCorta(stats.hasta)} · llevas {diasTranscurridos} de 7 dias
         </p>
       </div>
 
@@ -77,10 +80,19 @@ export default async function PaginaSemana() {
           ))}
         </dl>
         <p className="mt-3 text-xs text-muted-foreground">
-          Dias con comidas registradas: {stats.diasConRegistro} de 7. Cuanto mas registras, mas
-          fina es la lectura.
+          Hasta hoy. Dias con comidas registradas: {stats.diasConRegistro} de {diasTranscurridos}. Cuanto mas
+          registras, mas fina es la lectura.
         </p>
       </Tarjeta>
+
+      <div className="pt-2">
+        <h2>Revision de la semana pasada</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Del {fechaCorta(statsCerrada.desde)} al {fechaCorta(statsCerrada.hasta)} ·{' '}
+          {statsCerrada.entrenos} entrenos · {statsCerrada.kcalMedia ? `${statsCerrada.kcalMedia} kcal de media` : 'sin comidas'} ·{' '}
+          {statsCerrada.suenoMedio ? `${statsCerrada.suenoMedio.toFixed(1)} h de sueno` : 'sin sueno'}
+        </p>
+      </div>
 
       <VistaRevision inicial={revision} semana={semana} />
 
