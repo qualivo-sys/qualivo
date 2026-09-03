@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { cargarPerfil } from './datos';
+import { cerrarAltaSiCompleta } from './ia/herramientas';
 import { clienteServidor, hayConfiguracionSupabase } from './supabase/servidor';
 import type { Perfil } from './tipos';
 
@@ -27,6 +28,8 @@ export async function sesionRequerida(opciones: { permitirSinAlta?: boolean } = 
   }
   if (!perfil) redirect('/entrar');
 
+  // Si el chat del alta no llego a marcarla pero el perfil ya esta completo, se cierra aqui.
+  if (!perfil.onboarding) await cerrarAltaSiCompleta(supabase, usuario.id, perfil);
   if (!perfil.onboarding && !opciones.permitirSinAlta) redirect('/app/onboarding');
 
   return { supabase, usuario, perfil };

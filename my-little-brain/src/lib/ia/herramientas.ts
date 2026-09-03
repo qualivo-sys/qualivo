@@ -760,9 +760,12 @@ async function despachar(
       Object.assign(ctx.perfil, cambios);
 
       const campos = Object.keys(d).filter((k) => (d as Record<string, unknown>)[k] !== undefined);
+      // En cuanto el perfil tiene lo esencial, el alta se cierra sola: nadie se queda
+      // atrapado en el chat porque el modelo olvide marcarla.
+      const cerrada = await cerrarAltaSiCompleta(supabase, userId, ctx.perfil);
       return {
-        texto: `Perfil actualizado: ${campos.join(', ')}.`,
-        accion: { herramienta: nombre, resumen: `perfil · ${campos.join(', ')}` },
+        texto: `Perfil actualizado: ${campos.join(', ')}.${cerrada ? ' Alta completada y plan generado: ya puede usar toda la app.' : ''}`,
+        accion: { herramienta: nombre, resumen: `perfil · ${campos.join(', ')}${cerrada ? ' · alta completada' : ''}` },
       };
     }
 
@@ -784,6 +787,11 @@ async function despachar(
         activo: true,
       });
       if (error) throw error;
+
+      if (!ctx.perfil.onboarding) {
+        await supabase.from('perfiles').update({ onboarding: true, actualizado: new Date().toISOString() }).eq('id', userId);
+        ctx.perfil.onboarding = true;
+      }
 
       const resumen = plan.dias.map((dia) => `${dia.nombre} (${dia.bloques.length} ejercicios)`).join('; ');
       return {
@@ -902,3 +910,21 @@ async function despachar(
 }
 
 export { hoyIso };
+
+/**
+ * Si el alta no esta marcada pero el perfil ya tiene lo que hace falta para
+ * entrenar, la cierra y genera el plan si no hay uno. Devuelve true si la cerro.
+ */
+export async function cerrarAltaSiCompleta(supabase: SupabaseClient, userId: string, perfil: Perfil): Promise<boolean> {
+  if (perfil.onboarding) return false;
+  const datos = perfilEntreno(perfil);
+  if (!datos) return false;
+  const { data: activo } = await supabase.from('planes_entreno').select('id').eq('user_id', userId).eq('activo', true).limit(1);
+  if (!activo?.length) {
+    await supabase.from('planes_entreno').insert({ user_id: userId, firma: firmaPerfil(datos), datos: generarPlan(datos), activo: true });
+  }
+  const { error } = await supabase.from('perfiles').update({ onboarding: true, actualizado: new Date().toISOString() }).eq('id', userId);
+  if (error) return false;
+  perfil.onboarding = true;
+  return true;
+}

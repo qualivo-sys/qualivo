@@ -294,7 +294,8 @@ export default function RegistroEntreno({
       volumen,
       kcalCardio: resultado.kcalCardio,
     });
-    router.refresh();
+    // Sin router.refresh() aqui: si no, la pagina se vuelve a pintar como "hoy ya lo
+    // has hecho" y el premio desaparece antes de verse. Se refresca al salir.
   };
 
   const compartir = async () => {

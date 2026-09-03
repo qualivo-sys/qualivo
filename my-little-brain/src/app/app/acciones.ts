@@ -563,3 +563,36 @@ export async function borrarActividad(id: string) {
   revalidatePath('/app');
   revalidatePath('/app/semana');
 }
+
+/**
+ * Alta a mano, por si el chat no termina o la persona prefiere un formulario:
+ * guarda lo esencial, el peso, genera el plan y abre la app.
+ */
+export async function terminarAlta(datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const cambios: Record<string, unknown> = { actualizado: new Date().toISOString() };
+  for (const campo of ['sexo', 'objetivo', 'nivel', 'entorno', 'actividad']) {
+    const valor = texto(datos.get(campo));
+    if (valor) cambios[campo] = valor;
+  }
+  for (const campo of ['edad', 'altura_cm', 'dias_semana']) {
+    const valor = numero(datos.get(campo));
+    if (valor !== null) cambios[campo] = valor;
+  }
+  await supabase.from('perfiles').update(cambios).eq('id', userId);
+  const peso = numero(datos.get('peso_kg'));
+  if (peso) {
+    await supabase.from('metricas_corporales').upsert({ user_id: userId, fecha: hoy, peso_kg: peso }, { onConflict: 'user_id,fecha' });
+  }
+  const perfil = await cargarPerfil(supabase, userId);
+  if (!perfil) redirect('/app/onboarding');
+  const datosEntreno = perfilEntreno(perfil);
+  if (!datosEntreno) redirect('/app/onboarding?faltan=1');
+  const { data: activo } = await supabase.from('planes_entreno').select('id').eq('user_id', userId).eq('activo', true).limit(1);
+  if (!activo?.length) {
+    await supabase.from('planes_entreno').insert({ user_id: userId, firma: firmaPerfil(datosEntreno), datos: generarPlan(datosEntreno), activo: true });
+  }
+  await supabase.from('perfiles').update({ onboarding: true, actualizado: new Date().toISOString() }).eq('id', userId);
+  revalidatePath('/app');
+  redirect('/app');
+}
