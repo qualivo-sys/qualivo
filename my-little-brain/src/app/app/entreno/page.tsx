@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { regenerarPlan } from '@/app/app/acciones';
+import PremioEntreno from '@/components/premio-entreno';
 import RegistroEntreno, { type BloqueVista, type OpcionCatalogo } from '@/components/registro-entreno';
 import { Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
@@ -127,6 +128,8 @@ export default async function PaginaEntreno({
         <h2>{diaSeleccionado.nombre}</h2>
         <p className="text-sm text-muted-foreground">{diaSeleccionado.foco}</p>
       </div>
+
+      {sesionHoy && <PremioEntreno diaId={diaSeleccionado.id} />}
 
       {sesionHoy ? (
         <Tarjeta className="border-emerald-500/40">
