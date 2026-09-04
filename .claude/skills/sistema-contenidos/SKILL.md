@@ -73,7 +73,12 @@ azul-violeta con UNA luz calida como foco emocional (referencia
 starmedia.latam «ventana encendida»), texto pequeno centrado casi
 susurrado, cero venta, cero tacos, celebra al dueno que pelea; hueco:
 domingo noche. La penumbra cinematica SI esta permitida dentro de este
-modo (es su lenguaje). (2) modo HISTORIAS DE MARCA: serie «Como lo hizo»,
+modo (es su lenguaje). (2) modo FRASES DE REALIDAD (serie «Sin humo», ref. starmedia.latam adaptada):
+tarjeta tipo tweet crema con avatar y firma de Maikel sobre fondo tinta con
+formas naranjas y grano (plantilla frases-realidad.html, NO necesita fotos
+generadas: se produce en minutos). Una verdad incomoda de dueno por
+tarjeta, remate en naranja. Sirve para rellenar huecos, dias sin produccion
+y para subir frecuencia sin coste. (3) modo HISTORIAS DE MARCA: serie «Como lo hizo»,
 una marca conocida por carrusel contando su mecanica de growth real y la
 leccion aplicable a una pyme; SOLO datos publicos verificados con fuente
 (cero cifras inventadas), tono admirativo-analitico, no burla; hueco:
