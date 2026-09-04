@@ -1,5 +1,6 @@
 import { AlertTriangle, ArrowRight, CheckCircle2, Dumbbell, Flame, Info, MessageCircle, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
+import ComidasHabituales from '@/components/comidas-habituales';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
 import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
@@ -9,6 +10,7 @@ import { ejercicio } from '@/lib/motor/ejercicios';
 import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
+import { comidasHabituales } from '@/lib/motor/habituales';
 import { horaActual } from '@/lib/fechas';
 import { tmbDe } from '@/lib/perfil';
 import { proximoDia } from '@/lib/motor/progresion';
@@ -92,6 +94,9 @@ export default async function PanelHoy() {
     : [];
   const esRedondo = metas ? esDiaRedondo(diaHoy, { kcal: metas.kcal, proteina: metas.proteinaG }) : false;
 
+  // Lo que suele comer a esta hora: apuntarlo sin salir de aqui.
+  const habituales = comidasHabituales(panel.comidas, { hoy: panel.hoy, hora, limite: 5 });
+
   const habitosHechos = panel.registrosHabitos
     .filter((r) => r.fecha === panel.hoy && r.hecho)
     .map((r) => r.habito_id);
@@ -123,6 +128,7 @@ export default async function PanelHoy() {
         <div className="flex min-w-max gap-2">
           {[
             { href: '/app/checkin', etiqueta: '✍️ Check-in' },
+            { href: '/app/cuerpo', etiqueta: '🍽️ Comida' },
             { href: '/app/habitos', etiqueta: '✅ Habitos' },
             { href: '/app/progreso', etiqueta: '📈 Progreso' },
             { href: '/app/coach', etiqueta: '💬 Coach' },
@@ -190,6 +196,15 @@ export default async function PanelHoy() {
           <p className="text-sm text-muted-foreground">
             Dile tu peso al coach y calculo tus calorias y macros al momento.
           </p>
+        )}
+
+        {habituales.length > 0 && (
+          <div className="mt-4 border-t border-border pt-4">
+            <ComidasHabituales habituales={habituales} />
+            <Link href="/app/cuerpo" className="text-xs text-primary underline">
+              Apuntar otra cosa
+            </Link>
+          </div>
         )}
 
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">

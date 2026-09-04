@@ -277,5 +277,24 @@ check('el coach puede cambiar un ejercicio del plan', /Cambiado Sentadilla con b
 const cambio2 = await ejecutarHerramienta('cambiar_ejercicio', { ejercicio_actual: 'press de banca', ejercicio_nuevo: 'flexiones' }, ctx);
 check('o por el que pida el usuario', /por Flexiones/.test(cambio2.texto) || /No encuentro/.test(cambio2.texto), cambio2.texto);
 
+// ── 11. Comidas habituales ─────────────────────────────────────────────
+const { comidasHabituales, momentoDeHora } = await import(`${L}/motor/habituales.js`);
+const cHab = (fecha, momento, descripcion, kcal, p) => ({ id: fecha + descripcion, fecha, momento, descripcion, kcal, proteina_g: p, carbos_g: 20, grasa_g: 10, alcohol_ud: 0, foto_path: null, fuente: 'manual', confianza: 'alta', creado: '' });
+const historial = [
+  cHab('2026-09-01', 'desayuno', 'Avena con queso batido y arandanos', 400, 27),
+  cHab('2026-09-02', 'desayuno', 'avena con queso batido y arandanos', 410, 28),
+  cHab('2026-09-03', 'desayuno', 'Avena con queso batido y arandanos', 390, 26),
+  cHab('2026-09-02', 'cena', 'Merluza con verduras', 500, 40),
+  cHab('2026-09-03', 'cena', 'Merluza con verduras', 520, 42),
+  cHab('2026-07-01', 'comida', 'Paella del chiringuito', 900, 30),
+  { ...cHab('2026-09-03', 'comida', 'Sin calorias', null, null), kcal: null },
+];
+const manana = comidasHabituales(historial, { hoy: '2026-09-04', hora: 9 });
+check('agrupa la misma comida aunque cambie mayusculas y promedia sus macros', manana[0].descripcion.toLowerCase().startsWith('avena') && manana[0].veces === 3 && manana[0].kcal === 400, JSON.stringify(manana[0]));
+check('a las 9 manda el desayuno; por la noche, la cena', manana[0].momento === 'desayuno' && comidasHabituales(historial, { hoy: '2026-09-04', hora: 21 })[0].momento === 'cena');
+check('descarta lo puntual y viejo, y lo que no tiene calorias', !manana.some((h) => /paella|sin calorias/i.test(h.descripcion)), manana.map((h) => h.descripcion).join(' | '));
+check('marca lo ya apuntado hoy y lo manda al final', (() => { const hoy = comidasHabituales([...historial, cHab('2026-09-04', 'desayuno', 'Avena con queso batido y arandanos', 400, 27)], { hoy: '2026-09-04', hora: 9 }); const avena = hoy.find((h) => /avena/i.test(h.descripcion)); return avena.hoy === true && hoy[0] !== avena; })());
+check('la franja horaria se calcula bien', momentoDeHora(8) === 'desayuno' && momentoDeHora(14) === 'comida' && momentoDeHora(18) === 'snack' && momentoDeHora(22) === 'cena');
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

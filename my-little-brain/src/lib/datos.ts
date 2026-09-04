@@ -37,6 +37,8 @@ export interface Panel {
   tareas: Tarea[];
   memoria: RecuerdoCoach[];
   entrenamientos: Entrenamiento[];
+  /** Historial de comidas (60 dias), para las habituales y los patrones. */
+  comidas: Comida[];
   comidasHoy: Comida[];
   metricas: MetricaCorporal[];
 }
@@ -139,6 +141,7 @@ export async function cargarPanel(
     tareas,
     memoria,
     entrenamientos,
+    comidas,
     comidasHoy: comidas.filter((c) => c.fecha === hoy),
     metricas,
   };

@@ -1,5 +1,6 @@
 import { Trash2 } from 'lucide-react';
 import CalculadoraComida from '@/components/calculadora-comida';
+import ComidasHabituales from '@/components/comidas-habituales';
 import SugerenciasComida from '@/components/sugerencias-comida';
 import { Barra, Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
@@ -8,6 +9,7 @@ import { borrarComida, guardarComida, guardarMedicion, quitarObjetivosManual } f
 import { cargarPanel } from '@/lib/datos';
 import { fechaLarga, horaActual, inicioSemana } from '@/lib/fechas';
 import { balanceDia, momentosPendientes, sugerirComidas } from '@/lib/motor/dieta';
+import { comidasHabituales } from '@/lib/motor/habituales';
 import { grasaCorporal } from '@/lib/motor/cuerpo';
 import { sesionRequerida } from '@/lib/sesion';
 
@@ -29,6 +31,9 @@ export default async function PaginaCuerpo() {
   const sugerencias = balance
     ? sugerirComidas(balance.restante, pendientes, { alergias: perfil.alergias ?? [], preferencias: perfil.preferencias_comida, semilla })
     : [];
+  // Lo que suele comer, para apuntarlo de un toque.
+  const habituales = comidasHabituales(panel.comidas, { hoy: panel.hoy, hora });
+
   const macrosBarra = balance
     ? [
         { etiqueta: 'Calorias', valor: balance.consumido.kcal, meta: balance.objetivo.kcal, unidad: 'kcal', pct: balance.pct.kcal, color: 'hsl(var(--area-cuerpo))' },
@@ -167,6 +172,8 @@ export default async function PaginaCuerpo() {
             </>
           )}
         </p>
+
+        <ComidasHabituales habituales={habituales} />
 
         {comidasHoy.length ? (
           <ul className="mb-4 divide-y divide-border">
