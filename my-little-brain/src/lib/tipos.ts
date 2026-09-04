@@ -19,6 +19,8 @@ export interface PreferenciasAvisos {
   aviso_noche?: string | null;
   /** Aviso de entreno pendiente por la tarde. */
   aviso_entreno?: boolean;
+  /** Fecha en la que se pospuso el ajuste de calorias (no volver a proponerlo en 2 semanas). */
+  ajuste_pospuesto?: string | null;
 }
 
 /** Objetivos diarios fijados a mano o importados; mandan sobre el calculo automatico. */

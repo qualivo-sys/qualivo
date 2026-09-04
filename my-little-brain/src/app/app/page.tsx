@@ -11,6 +11,8 @@ import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
 import { comidasHabituales } from '@/lib/motor/habituales';
+import { ajustePendiente } from '@/lib/ajuste';
+import { aplicarAjusteCalorias, posponerAjuste } from '@/app/app/acciones';
 import { horaActual } from '@/lib/fechas';
 import { tmbDe } from '@/lib/perfil';
 import { proximoDia } from '@/lib/motor/progresion';
@@ -93,6 +95,9 @@ export default async function PanelHoy() {
       ]
     : [];
   const esRedondo = metas ? esDiaRedondo(diaHoy, { kcal: metas.kcal, proteina: metas.proteinaG }) : false;
+
+  // Ajuste de calorias con datos suficientes: se propone un cambio concreto.
+  const propuesta = ajustePendiente(panel, perfil);
 
   // Lo que suele comer a esta hora: apuntarlo sin salir de aqui.
   const habituales = comidasHabituales(panel.comidas, { hoy: panel.hoy, hora, limite: 5 });
@@ -337,11 +342,37 @@ export default async function PanelHoy() {
         </section>
       )}
 
-      {ajuste && ajuste.estado !== 'sin_datos' && (
-        <Tarjeta className={ajuste.estado === 'ok' ? 'border-emerald-500/40' : 'border-amber-500/40'}>
-          <TituloTarjeta>Ajuste de calorias</TituloTarjeta>
-          <p className="text-sm text-muted-foreground">{ajuste.mensaje}</p>
+      {propuesta ? (
+        <Tarjeta className="border-primary/50 bg-gradient-to-br from-primary/10 to-transparent">
+          <TituloTarjeta>{propuesta.titulo}</TituloTarjeta>
+          <p className="text-sm text-muted-foreground">{propuesta.detalle}</p>
+          <div className="mt-3 flex items-center gap-3 text-sm tabular-nums">
+            <span className="text-muted-foreground line-through">{propuesta.kcalActuales} kcal</span>
+            <ArrowRight size={16} className="text-muted-foreground" />
+            <span className="text-lg font-semibold">{propuesta.kcalNuevas} kcal</span>
+            <span className="text-xs text-muted-foreground">
+              {propuesta.proteinaG} P · {propuesta.carbosG} C · {propuesta.grasaG} G
+            </span>
+          </div>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            <form action={aplicarAjusteCalorias}>
+              <Boton type="submit" className="w-full">Aplicar el ajuste</Boton>
+            </form>
+            <form action={posponerAjuste}>
+              <Boton type="submit" variante="contorno" className="w-full">Ahora no</Boton>
+            </form>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Sale de tu tendencia real de peso y de lo que has comido estas dos semanas. Puedes volver atras cuando quieras desde Cuerpo.
+          </p>
         </Tarjeta>
+      ) : (
+        ajuste && ajuste.estado !== 'sin_datos' && (
+          <Tarjeta className={ajuste.estado === 'ok' ? 'border-emerald-500/40' : 'border-amber-500/40'}>
+            <TituloTarjeta>Ajuste de calorias</TituloTarjeta>
+            <p className="text-sm text-muted-foreground">{ajuste.mensaje}</p>
+          </Tarjeta>
+        )
       )}
 
       <Tarjeta>

@@ -12,7 +12,7 @@ const EJEMPLO = '200 g pollo, 150 arroz, 1 cucharada de aceite y un platano';
  * Escribes la comida en una linea y sale calculada al momento con la tabla de
  * alimentos: sin IA, sin esperar y siempre con el mismo resultado.
  */
-export default function CalculadoraComida() {
+export default function CalculadoraComida({ fecha }: { fecha?: string } = {}) {
   const [texto, setTexto] = useState('');
   const [momento, setMomento] = useState('comida');
   const [guardado, setGuardado] = useState(false);
@@ -32,6 +32,7 @@ export default function CalculadoraComida() {
         carbos_g: Math.round(resultado.carbos),
         grasa_g: Math.round(resultado.grasa),
         alcohol_ud: resultado.alcoholUd,
+        fecha,
       });
       setTexto('');
       setGuardado(true);

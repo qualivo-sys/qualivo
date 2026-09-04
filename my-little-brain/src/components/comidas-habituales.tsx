@@ -10,7 +10,7 @@ import type { ComidaHabitual } from '@/lib/motor/habituales';
  * Lo que sueles comer, a un toque. Es la diferencia entre apuntar la comida
  * durante una semana y hacerlo durante un año.
  */
-export default function ComidasHabituales({ habituales }: { habituales: ComidaHabitual[] }) {
+export default function ComidasHabituales({ habituales, fecha }: { habituales: ComidaHabitual[]; fecha?: string }) {
   const router = useRouter();
   const [pendiente, empezar] = useTransition();
   const [apuntando, setApuntando] = useState<string | null>(null);
@@ -29,6 +29,7 @@ export default function ComidasHabituales({ habituales }: { habituales: ComidaHa
         carbos_g: h.carbos,
         grasa_g: h.grasa,
         alcohol_ud: h.alcoholUd,
+        fecha,
       });
       setApuntando(null);
       setHecha(h.clave);

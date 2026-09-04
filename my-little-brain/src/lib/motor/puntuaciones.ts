@@ -118,7 +118,8 @@ export interface MetasSemana {
   kcal: number | null;
   proteinaG: number | null;
   entrenos: number;
-  focoHoras: number;
+  /** Null cuando la persona no usa el area de foco: entonces no puntua ni penaliza. */
+  focoHoras: number | null;
 }
 
 /**

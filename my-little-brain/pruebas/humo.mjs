@@ -296,5 +296,24 @@ check('descarta lo puntual y viejo, y lo que no tiene calorias', !manana.some((h
 check('marca lo ya apuntado hoy y lo manda al final', (() => { const hoy = comidasHabituales([...historial, cHab('2026-09-04', 'desayuno', 'Avena con queso batido y arandanos', 400, 27)], { hoy: '2026-09-04', hora: 9 }); const avena = hoy.find((h) => /avena/i.test(h.descripcion)); return avena.hoy === true && hoy[0] !== avena; })());
 check('la franja horaria se calcula bien', momentoDeHora(8) === 'desayuno' && momentoDeHora(14) === 'comida' && momentoDeHora(18) === 'snack' && momentoDeHora(22) === 'cena');
 
+// ── 12. Ajuste automatico de calorias ──────────────────────────────────
+const { proponerAjuste } = await import(`${L}/motor/ajuste.js`);
+const metasAj = { tmb: 1600, gastoTotal: 2200, kcal: 2000, proteinaG: 150, grasaG: 65, carbosG: 200, aguaMl: 2600, pasos: 10000, ritmoKgSemana: -0.5 };
+const baseAj = { metas: metasAj, pesajes: 6, diasConComidas: 10, ultimoAjuste: null, hoy: '2026-09-04', sueloKcal: 1600 };
+const lento = proponerAjuste({ ...baseAj, tendenciaKgSemana: -0.05 });
+check('si bajas mas lento de lo previsto, propone recortar calorias', lento && lento.delta < 0 && lento.kcalNuevas < 2000, JSON.stringify(lento && { d: lento.delta, k: lento.kcalNuevas }));
+const rapido = proponerAjuste({ ...baseAj, tendenciaKgSemana: -1.2 });
+check('si bajas demasiado rapido, propone subirlas', rapido && rapido.delta > 0 && rapido.kcalNuevas > 2000, JSON.stringify(rapido && { d: rapido.delta, k: rapido.kcalNuevas }));
+check('el ajuste no pasa de 300 kcal de golpe', Math.abs(lento.delta) <= 300 && Math.abs(rapido.delta) <= 300);
+check('la proteina no se toca y los macros cuadran con las kcal nuevas', lento.proteinaG === 150 && Math.abs(lento.proteinaG * 4 + lento.carbosG * 4 + lento.grasaG * 9 - lento.kcalNuevas) <= 30, JSON.stringify(lento));
+check('si vas en el ritmo previsto no propone nada', proponerAjuste({ ...baseAj, tendenciaKgSemana: -0.45 }) === null);
+check('sin pesarte o sin apuntar comida no propone nada', proponerAjuste({ ...baseAj, pesajes: 2, tendenciaKgSemana: -0.05 }) === null && proponerAjuste({ ...baseAj, diasConComidas: 3, tendenciaKgSemana: -0.05 }) === null);
+check('no vuelve a proponer antes de dos semanas', proponerAjuste({ ...baseAj, tendenciaKgSemana: -0.05, ultimoAjuste: '2026-08-28' }) === null && proponerAjuste({ ...baseAj, tendenciaKgSemana: -0.05, ultimoAjuste: '2026-08-10' }) !== null);
+const suelo = proponerAjuste({ ...baseAj, metas: { ...metasAj, kcal: 1800 }, tendenciaKgSemana: -0.05 });
+check('nunca propone bajar del suelo de seguridad', suelo === null || suelo.kcalNuevas >= 1600, JSON.stringify(suelo && { k: suelo.kcalNuevas, d: suelo.delta }));
+check('y si el suelo deja el cambio en calderilla, no molesta', proponerAjuste({ ...baseAj, metas: { ...metasAj, kcal: 1630 }, tendenciaKgSemana: -0.05 }) === null);
+const mantener = proponerAjuste({ ...baseAj, metas: { ...metasAj, ritmoKgSemana: 0 }, tendenciaKgSemana: 0.45 });
+check('con objetivo de mantener, corrige la deriva', mantener && mantener.delta < 0, JSON.stringify(mantener && mantener.titulo));
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

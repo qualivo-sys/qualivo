@@ -15,6 +15,7 @@ import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
 import { cargarPerfil } from '@/lib/datos';
 import { planDesdeImportacion, type Importacion } from '@/lib/importar';
 import type { ObjetivosManual } from '@/lib/tipos';
+import { FUENTE_AJUSTE, ajustePendiente } from '@/lib/ajuste';
 
 /**
  * Sesion + fecha de "hoy" en la zona horaria del usuario. El servidor va en UTC:
@@ -49,6 +50,14 @@ const numero = (valor: FormDataEntryValue | null): number | null => {
 
 const texto = (valor: FormDataEntryValue | null): string | null =>
   typeof valor === 'string' && valor.trim() ? valor.trim() : null;
+
+/** Acepta una fecha del ultimo mes y nunca del futuro; si no vale, hoy. */
+const fechaValida = (valor: string | null | undefined, hoy: string): string => {
+  if (!valor || !/^\d{4}-\d{2}-\d{2}$/.test(valor)) return hoy;
+  const limite = new Date(hoy + 'T12:00:00');
+  limite.setDate(limite.getDate() - 30);
+  return valor <= hoy && valor >= limite.toISOString().slice(0, 10) ? valor : hoy;
+};
 
 export async function alternarHabito(habitoId: string, fecha: string, hecho: boolean) {
   const { supabase, userId } = await sesion();
@@ -110,7 +119,7 @@ export async function guardarComida(datos: FormData) {
 
   await supabase.from('comidas').insert({
     user_id: userId,
-    fecha: texto(datos.get('fecha')) ?? hoy,
+    fecha: fechaValida(texto(datos.get('fecha')), hoy),
     momento: texto(datos.get('momento')),
     descripcion,
     kcal: Math.round(kcal),
@@ -135,13 +144,15 @@ export async function guardarComidaCalculada(datos: {
   carbos_g: number;
   grasa_g: number;
   alcohol_ud: number;
+  /** Dia al que va la comida; por defecto hoy. */
+  fecha?: string;
 }) {
   const { supabase, userId, hoy } = await sesion();
   if (!datos.descripcion || !Number.isFinite(datos.kcal)) return;
 
   await supabase.from('comidas').insert({
     user_id: userId,
-    fecha: hoy,
+    fecha: fechaValida(datos.fecha, hoy),
     momento: ['desayuno', 'comida', 'cena', 'snack', 'bebida'].includes(datos.momento) ? datos.momento : null,
     descripcion: datos.descripcion.slice(0, 300),
     kcal: Math.max(0, Math.round(datos.kcal)),
@@ -596,4 +607,65 @@ export async function terminarAlta(datos: FormData) {
   await supabase.from('perfiles').update({ onboarding: true, actualizado: new Date().toISOString() }).eq('id', userId);
   revalidatePath('/app');
   redirect('/app');
+}
+
+/** Edita una comida ya apuntada (descripcion, momento y macros). */
+export async function actualizarComida(datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const id = texto(datos.get('id'));
+  const descripcion = texto(datos.get('descripcion'));
+  const kcal = numero(datos.get('kcal'));
+  if (!id || !descripcion || kcal === null) return;
+
+  const momento = texto(datos.get('momento'));
+  await supabase
+    .from('comidas')
+    .update({
+      descripcion: descripcion.slice(0, 300),
+      momento: momento && ['desayuno', 'comida', 'cena', 'snack', 'bebida'].includes(momento) ? momento : null,
+      kcal: Math.max(0, Math.round(kcal)),
+      proteina_g: numero(datos.get('proteina_g')),
+      carbos_g: numero(datos.get('carbos_g')),
+      grasa_g: numero(datos.get('grasa_g')),
+    })
+    .eq('id', id)
+    .eq('user_id', userId);
+  revalidatePath('/app');
+  revalidatePath('/app/cuerpo');
+}
+
+/**
+ * Aplica el ajuste de calorias que propone la app. Se vuelve a calcular aqui:
+ * lo que llega del navegador no decide cuantas calorias comes.
+ */
+export async function aplicarAjusteCalorias() {
+  const { supabase, userId, hoy } = await sesion();
+  const perfil = await cargarPerfil(supabase, userId);
+  if (!perfil) return;
+  const panel = await cargarPanel(supabase, userId, perfil);
+  const propuesta = ajustePendiente(panel, perfil);
+  if (!propuesta) return;
+
+  const objetivos: ObjetivosManual = {
+    kcal: propuesta.kcalNuevas,
+    proteina_g: propuesta.proteinaG,
+    carbos_g: propuesta.carbosG,
+    grasa_g: propuesta.grasaG,
+    fuente: FUENTE_AJUSTE,
+    fijado_el: hoy,
+  };
+  await supabase.from('perfiles').update({ objetivos_manual: objetivos, actualizado: new Date().toISOString() }).eq('id', userId);
+  revalidatePath('/app');
+  revalidatePath('/app/cuerpo');
+}
+
+/** "Ahora no": no se vuelve a proponer hasta dentro de dos semanas. */
+export async function posponerAjuste() {
+  const { supabase, userId, hoy } = await sesion();
+  const perfil = await cargarPerfil(supabase, userId);
+  await supabase
+    .from('perfiles')
+    .update({ preferencias: { ...(perfil?.preferencias ?? {}), ajuste_pospuesto: hoy }, actualizado: new Date().toISOString() })
+    .eq('id', userId);
+  revalidatePath('/app');
 }

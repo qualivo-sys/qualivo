@@ -1,13 +1,14 @@
-import { Trash2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CalculadoraComida from '@/components/calculadora-comida';
 import ComidasHabituales from '@/components/comidas-habituales';
+import ListaComidas from '@/components/lista-comidas';
 import SugerenciasComida from '@/components/sugerencias-comida';
-import { Barra, Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { Barra, Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
 import Link from 'next/link';
-import { borrarComida, guardarComida, guardarMedicion, quitarObjetivosManual } from '@/app/app/acciones';
+import { guardarComida, guardarMedicion, quitarObjetivosManual } from '@/app/app/acciones';
 import { cargarPanel } from '@/lib/datos';
-import { fechaLarga, horaActual, inicioSemana } from '@/lib/fechas';
+import { fechaLarga, horaActual, inicioSemana, sumarDias } from '@/lib/fechas';
 import { balanceDia, momentosPendientes, sugerirComidas } from '@/lib/motor/dieta';
 import { comidasHabituales } from '@/lib/motor/habituales';
 import { grasaCorporal } from '@/lib/motor/cuerpo';
@@ -15,24 +16,33 @@ import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
 
-export default async function PaginaCuerpo() {
+export default async function PaginaCuerpo({ searchParams }: { searchParams: { dia?: string } }) {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
-  const { cuerpo, metas, comidasHoy } = panel;
+  const { cuerpo, metas } = panel;
 
-  const kcalHoy = comidasHoy.reduce((total, c) => total + (c.kcal ?? 0), 0);
-  const proteinaHoy = comidasHoy.reduce((total, c) => total + (c.proteina_g ?? 0), 0);
+  // Se puede mirar y apuntar en dias pasados (hasta 30 dias atras), no solo hoy.
+  const minimo = sumarDias(panel.hoy, -30);
+  const pedido = searchParams?.dia ?? '';
+  const dia = /^\d{4}-\d{2}-\d{2}$/.test(pedido) && pedido <= panel.hoy && pedido >= minimo ? pedido : panel.hoy;
+  const esHoy = dia === panel.hoy;
+  const comidasDia = panel.comidas.filter((c) => c.fecha === dia);
+  const diaResumen = panel.dias.find((d) => d.fecha === dia);
 
-  // Balance de macros de hoy, lectura de nutricionista y que comer en lo que falta.
-  const hora = horaActual(perfil.zona_horaria || undefined);
-  const balance = metas ? balanceDia(comidasHoy, metas, hora, { entrenoHoy: panel.diaHoy.entreno }) : null;
-  const pendientes = momentosPendientes(comidasHoy, hora);
+  const kcalHoy = comidasDia.reduce((total, c) => total + (c.kcal ?? 0), 0);
+  const proteinaHoy = comidasDia.reduce((total, c) => total + (c.proteina_g ?? 0), 0);
+
+  // Balance de macros, lectura de nutricionista y que comer en lo que falta.
+  // En un dia pasado se lee como dia cerrado (hora 23), no como uno a medias.
+  const hora = esHoy ? horaActual(perfil.zona_horaria || undefined) : 23;
+  const balance = metas ? balanceDia(comidasDia, metas, hora, { entrenoHoy: diaResumen?.entreno ?? false }) : null;
+  const pendientes = esHoy ? momentosPendientes(comidasDia, hora) : [];
   const semilla = Number(panel.hoy.replace(/-/g, '')) % 7;
   const sugerencias = balance
     ? sugerirComidas(balance.restante, pendientes, { alergias: perfil.alergias ?? [], preferencias: perfil.preferencias_comida, semilla })
     : [];
   // Lo que suele comer, para apuntarlo de un toque.
-  const habituales = comidasHabituales(panel.comidas, { hoy: panel.hoy, hora });
+  const habituales = comidasHabituales(panel.comidas, { hoy: dia, hora });
 
   const macrosBarra = balance
     ? [
@@ -94,7 +104,7 @@ export default async function PaginaCuerpo() {
 
       {balance && (
         <Tarjeta>
-          <TituloTarjeta>Macros de hoy</TituloTarjeta>
+          <TituloTarjeta>{esHoy ? 'Macros de hoy' : `Macros del ${fechaLarga(dia)}`}</TituloTarjeta>
           <div className="space-y-3">
             {macrosBarra.map((m) => (
               <div key={m.etiqueta}>
@@ -118,7 +128,7 @@ export default async function PaginaCuerpo() {
               ))}
             </ul>
           )}
-          {panel.diaHoy.gastoKcal > 0 && (
+          {esHoy && panel.diaHoy.gastoKcal > 0 && (
             <p className="mt-3 text-xs text-muted-foreground tabular-nums">
               Hoy llevas gastadas ~{panel.diaHoy.gastoKcal.toLocaleString('es-ES')} kcal (basal, pasos y entrenos); balance{' '}
               {panel.diaHoy.kcal - panel.diaHoy.gastoKcal > 0 ? '+' : ''}{(panel.diaHoy.kcal - panel.diaHoy.gastoKcal).toLocaleString('es-ES')} kcal.{' '}
@@ -152,7 +162,32 @@ export default async function PaginaCuerpo() {
       )}
 
       <Tarjeta>
-        <TituloTarjeta>Comidas de hoy</TituloTarjeta>
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <TituloTarjeta className="mb-0">{esHoy ? 'Comidas de hoy' : `Comidas del ${fechaLarga(dia)}`}</TituloTarjeta>
+          <div className="flex items-center gap-1">
+            {dia > minimo && (
+              <Link
+                href={`/app/cuerpo?dia=${sumarDias(dia, -1)}`}
+                aria-label="Dia anterior"
+                className="rounded-lg border border-border p-1.5 text-muted-foreground hover:text-foreground"
+              >
+                <ChevronLeft size={16} />
+              </Link>
+            )}
+            {!esHoy && (
+              <>
+                <Link
+                  href={`/app/cuerpo?dia=${sumarDias(dia, 1)}`}
+                  aria-label="Dia siguiente"
+                  className="rounded-lg border border-border p-1.5 text-muted-foreground hover:text-foreground"
+                >
+                  <ChevronRight size={16} />
+                </Link>
+                <Link href="/app/cuerpo" className="ml-1 text-xs text-primary underline">Hoy</Link>
+              </>
+            )}
+          </div>
+        </div>
         <p className="mb-3 text-sm text-muted-foreground">
           {kcalHoy} kcal y {proteinaHoy} g de proteina
           {metas ? ` de ${metas.kcal} kcal y ${metas.proteinaG} g` : ''}.
@@ -173,42 +208,19 @@ export default async function PaginaCuerpo() {
           )}
         </p>
 
-        <ComidasHabituales habituales={habituales} />
+        <ComidasHabituales habituales={habituales} fecha={dia} />
 
-        {comidasHoy.length ? (
-          <ul className="mb-4 divide-y divide-border">
-            {comidasHoy.map((comida) => (
-              <li key={comida.id} className="flex items-center gap-3 py-2 text-sm">
-                <div className="flex-1">
-                  <div>{comida.descripcion}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {comida.kcal ?? '—'} kcal · {comida.proteina_g ?? '—'} P · {comida.carbos_g ?? '—'} C · {comida.grasa_g ?? '—'} G
-                    {comida.confianza === 'baja' && ' · estimacion aproximada'}
-                  </div>
-                </div>
-                {comida.momento && <Insignia>{comida.momento}</Insignia>}
-                <form action={borrarComida.bind(null, comida.id)}>
-                  <button type="submit" aria-label="Borrar" className="text-muted-foreground hover:text-destructive">
-                    <Trash2 size={16} />
-                  </button>
-                </form>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mb-4 text-sm text-muted-foreground">
-            Nada apuntado hoy. Lo mas rapido es decirselo al coach; aqui abajo lo tienes a mano.
-          </p>
-        )}
+        <ListaComidas comidas={comidasDia} />
 
         <div className="border-t border-border pt-4">
           <p className="mb-3 text-sm font-medium">Calcular con la tabla de alimentos</p>
-          <CalculadoraComida />
+          <CalculadoraComida fecha={dia} />
         </div>
 
         <details className="mt-4 border-t border-border pt-4">
           <summary className="cursor-pointer text-sm text-muted-foreground">O apuntar las calorias a mano</summary>
         <form action={guardarComida} className="mt-3 space-y-3">
+          <input type="hidden" name="fecha" value={dia} />
           <Campo etiqueta="Que has comido" name="descripcion" required placeholder="Pollo con arroz y ensalada" />
           <div className="grid grid-cols-2 gap-3">
             <Campo etiqueta="Kcal" name="kcal" type="number" inputMode="numeric" required />

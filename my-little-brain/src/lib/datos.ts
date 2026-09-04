@@ -120,7 +120,9 @@ export async function cargarPanel(
     kcal: metas?.kcal ?? null,
     proteinaG: metas?.proteinaG ?? null,
     entrenos: perfil.dias_semana ?? 3,
-    focoHoras: 10,
+    // Si nunca ha registrado foco, el area no cuenta: no se penaliza a quien
+    // usa la app solo para entrenar y comer.
+    focoHoras: dias.some((d) => d.focoMin > 0) ? 10 : null,
   };
 
   return {
