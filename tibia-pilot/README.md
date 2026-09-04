@@ -94,6 +94,81 @@ estado y accion de los callbacks del propio cliente, con timestamp exacto.
 **El dataset no se comparte**: 2 h a 20 Hz son ~100 MB. Se queda en la maquina
 que graba. Lo que viaja son `head -3`, metricas y errores.
 
+## Vocacion: caballero
+
+El piloto va con perfil de **caballero**, y no es un detalle de configuracion:
+cambia que reglas existen.
+
+```bash
+python -m agent --sim --profile knight     # por defecto
+python -m agent --sim --profile mage       # para comparar
+```
+
+La regla que mas se equivoca al portar un bot de mago a caballero: **un
+caballero se cura con potions, no con hechizos**. Tiene poco mana, asi que la
+potion es su curacion principal y el hechizo el apoyo. Al reves que un druida.
+Eso es `prefer_potion_over_spell` en `profiles.py`, y hay un test que lo fija.
+
+El caballero ademas no persigue a distancia (`max_target_distance=1`) y usa
+`exori` cuando tiene tres o mas enemigos pegados, que es cuando compensa.
+
+Los perfiles de paladin y mago estan escritos pero **sin contrastar** contra un
+datapack real: sus palabras de hechizo y costes de mana son de memoria, no
+verificados. El de caballero tambien conviene revisarlo contra vuestro
+servidor antes de la primera sesion; el supervisor los puede corregir en
+caliente con `POST /config` sin tocar codigo.
+
+## Montar el servidor
+
+```bash
+cp .env.example .env          # y cambia las dos contrasenas
+docker compose up -d db n8n   # esto funciona tal cual
+```
+
+n8n queda en <http://localhost:5678>. Importa `n8n/supervisor.workflow.json`
+desde su interfaz y activalo; el webhook queda en
+`http://localhost:5678/webhook/tibia-eventos`.
+
+El servidor de juego necesita una mano mas:
+
+1. `docker compose build tfs` compila The Forgotten Server del repositorio
+   oficial. Tarda.
+2. Hace falta un **datapack** (mapa, monstruos, scripts, `config.lua`) en
+   `server/`. El repositorio de TFS trae uno de ejemplo en su carpeta `data/`.
+3. El esquema de la base de datos va en `server/schema.sql`; TFS lo publica
+   en su repositorio.
+4. `docker compose up -d tfs` y ya se puede entrar con el cliente apuntando a
+   `127.0.0.1`.
+
+**No he podido probar esta parte**: no tengo forma de arrancar un servidor de
+juego ni un cliente grafico. El compose esta escrito con cuidado, pero dadlo
+por no verificado hasta que arranque en vuestra maquina.
+
+## Conectar el cliente
+
+El modulo de OTClient vive en `otclient_module/tibia_bridge/`. Se copia a la
+carpeta `modules/` de vuestro OTClient y se activa desde el gestor de modulos.
+
+Empuja el estado 20 veces por segundo por websocket y ejecuta lo que le
+responde el agente:
+
+```bash
+pip install websockets
+python -m agent --bridge otclient --profile knight          # el robot juega
+python -m agent --bridge otclient --mode record --out data/hunt.jsonl
+```
+
+El segundo comando es la fase de grabacion: la policy no actua, y lo que se
+guarda son las acciones **del humano**. No se leen del teclado: se envuelven
+las funciones del propio cliente, asi que da igual si la accion vino de una
+hotkey, del raton o de una macro -- llega la accion exacta y con su instante,
+que es justo lo que un video no da.
+
+**Tampoco he podido probar el modulo Lua.** El API de websocket que usa
+(`g_http.webSocket`) existe en el fork mehah/otclient; en otros forks puede
+llamarse distinto. Si falla al cargar, el sitio a mirar es la funcion
+`conectar()`.
+
 ## Estructura
 
 ```
@@ -123,10 +198,11 @@ pip install websockets        # python -m agent --bridge otclient
 
 ## Pendiente
 
-- Modulo Lua de OTClient (`otclient_module/`) — el puente real con el juego
-- Workflow de n8n del supervisor (`n8n/`)
-- `docker-compose.yml` con TFS + Postgres + n8n
-- Fase 3: script de entrenamiento por clonacion de comportamiento
+- Entrenamiento por clonacion de comportamiento (fase 3): el dataset ya se
+  graba en el formato correcto, falta el script que lo consume.
+- Verificar el modulo Lua y el compose contra una maquina real.
+- Contrastar hechizos y costes con el datapack elegido.
+
 
 ## Nota sobre el baseline
 

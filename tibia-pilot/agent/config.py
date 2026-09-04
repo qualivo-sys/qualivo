@@ -18,6 +18,9 @@ class Config:
     mana_at_pct: float = 0.40
 
     # --- hechizos e items ---
+    # Un caballero se cura con potions y usa el hechizo de apoyo; un mago al
+    # reves. Esta bandera es la que distingue a los dos.
+    prefer_potion_over_spell: bool = False
     heal_spell: str = "exura"
     heal_spell_cost: int = 20
     strong_heal_spell: str = "exura gran"
@@ -28,6 +31,13 @@ class Config:
     # --- cooldowns (s) ---
     spell_cooldown_s: float = 1.0
     potion_cooldown_s: float = 1.0
+
+    # --- ataque en area (exori y equivalentes) ---
+    # Vacio = desactivado. Solo compensa con varios enemigos pegados encima.
+    area_attack_spell: str = ""
+    area_attack_cost: int = 0
+    area_attack_min_targets: int = 3
+    area_attack_cooldown_s: float = 2.0
 
     # --- targeting ---
     target_priority: list[str] = field(default_factory=lambda: ["dragon", "cyclops", "rotworm"])

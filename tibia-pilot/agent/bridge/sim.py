@@ -32,18 +32,22 @@ class SimBridge:
         spawn_target: int = 2,
         burst_every: float = 90.0,
         clock: Callable[[], float] | None = None,
+        max_hp: int = 800,
+        max_mana: int = 600,
+        inventory: dict[str, int] | None = None,
     ) -> None:
         # El reloj es inyectable para poder simular horas de hunt en segundos
         # durante los tests, en vez de esperarlas en tiempo real.
         self._clock = clock or time.monotonic
         self.rng = random.Random(seed)
-        self.max_hp = 800
-        self.max_mana = 600
+        self.max_hp = max_hp
+        self.max_mana = max_mana
         self.hp = self.max_hp
         self.mana = self.max_mana
         self.x, self.y, self.z = 1000, 1000, 7
         self.experience = 0
-        self.inventory = {"health potion": 200, "mana potion": 200}
+        self.inventory = dict(inventory) if inventory is not None \
+            else {"health potion": 200, "mana potion": 200}
         self.target_id: int | None = None
         self.connected = True
 
@@ -65,6 +69,7 @@ class SimBridge:
         self.heals_cast = 0
         self.potions_used = 0
         self.wasted_casts = 0  # casts rechazados por cooldown o mana: spam
+        self.area_casts = 0
 
     # ---------------- Bridge protocol ----------------
 
@@ -118,6 +123,14 @@ class SimBridge:
                 self.mana -= 80
                 self.hp = min(self.max_hp, self.hp + self.rng.randint(200, 300))
                 self.heals_cast += 1
+            elif words == "exura ico" and self.mana >= 70:
+                self.mana -= 70
+                self.hp = min(self.max_hp, self.hp + self.rng.randint(180, 260))
+                self.heals_cast += 1
+            elif words == "exori" and self.mana >= 115:
+                self.mana -= 115
+                self.area_casts += 1
+                self._golpe_en_area()
             else:
                 self.wasted_casts += 1
 
@@ -131,10 +144,12 @@ class SimBridge:
                 return
             self.inventory[name] -= 1
             self.potions_used += 1
-            if name == "health potion":
-                self.hp = min(self.max_hp, self.hp + self.rng.randint(150, 250))
-            elif name == "mana potion":
-                self.mana = min(self.max_mana, self.mana + self.rng.randint(80, 160))
+            if "health potion" in name:
+                cura = (250, 400) if "strong" in name else (150, 250)
+                self.hp = min(self.max_hp, self.hp + self.rng.randint(*cura))
+            elif "mana potion" in name:
+                gana = (150, 250) if "strong" in name else (80, 160)
+                self.mana = min(self.max_mana, self.mana + self.rng.randint(*gana))
 
         elif action.kind == "attack":
             cid = action.params.get("creature_id")
@@ -149,6 +164,20 @@ class SimBridge:
 
         elif action.kind == "logout":
             self.connected = False
+
+    def _golpe_en_area(self) -> None:
+        """Exori: dana a todo lo adyacente. Por eso solo compensa con varios."""
+        for mid in list(self._monsters):
+            m = self._monsters[mid]
+            if max(abs(m["x"] - self.x), abs(m["y"] - self.y)) > 1:
+                continue
+            m["hp"] -= self.rng.randint(70, 130)
+            if m["hp"] <= 0:
+                self.experience += m["exp"]
+                self.kills += 1
+                del self._monsters[mid]
+                if self.target_id == mid:
+                    self.target_id = None
 
     def _consume_cooldown(self, key: str, cd: float) -> bool:
         if self._now < self._cooldowns.get(key, 0.0):
@@ -241,3 +270,13 @@ class SimBridge:
             self.kills += 1
             del self._monsters[self.target_id]
             self.target_id = None
+
+
+def knight_sim(**kwargs) -> SimBridge:
+    """Simulador con el molde de un caballero: mucha vida, poco mana, y el
+    zurron lleno de potions fuertes, que es de lo que vive."""
+    kwargs.setdefault("max_hp", 1400)
+    kwargs.setdefault("max_mana", 400)
+    kwargs.setdefault("inventory", {"strong health potion": 300,
+                                    "strong mana potion": 100})
+    return SimBridge(**kwargs)

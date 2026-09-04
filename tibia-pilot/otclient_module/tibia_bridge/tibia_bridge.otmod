@@ -1,0 +1,9 @@
+Module
+  name: tibia_bridge
+  description: Puente entre el cliente de juego y el agente Python
+  author: piloto tibia
+  website: -
+  sandboxed: true
+  scripts: [ tibia_bridge ]
+  @onLoad: init()
+  @onUnload: terminate()

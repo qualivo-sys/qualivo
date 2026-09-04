@@ -1,0 +1,125 @@
+{
+  "name": "Tibia - supervisor",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tibia-eventos",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-eventos",
+      "name": "Evento del agente",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "tibia-eventos"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            { "conditions": { "options": { "caseSensitive": true, "version": 2 },
+              "conditions": [ { "leftValue": "={{ $json.body.kind }}",
+                "rightValue": "death",
+                "operator": { "type": "string", "operation": "equals" } } ],
+              "combinator": "and" }, "renameOutput": true, "outputKey": "muerte" },
+            { "conditions": { "options": { "caseSensitive": true, "version": 2 },
+              "conditions": [ { "leftValue": "={{ $json.body.kind }}",
+                "rightValue": "low_supplies",
+                "operator": { "type": "string", "operation": "equals" } } ],
+              "combinator": "and" }, "renameOutput": true, "outputKey": "sin-suministros" },
+            { "conditions": { "options": { "caseSensitive": true, "version": 2 },
+              "conditions": [ { "leftValue": "={{ $json.body.kind }}",
+                "rightValue": "player_nearby",
+                "operator": { "type": "string", "operation": "equals" } } ],
+              "combinator": "and" }, "renameOutput": true, "outputKey": "jugador-cerca" }
+          ]
+        },
+        "options": { "fallbackOutput": "extra" }
+      },
+      "id": "clasificar",
+      "name": "Que ha pasado",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "modelId": { "__rl": true, "value": "claude-sonnet-5", "mode": "list" },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Eres el entrenador de un personaje automatico de Tibia (vocacion caballero). Recibes la telemetria de una muerte y devuelves SOLO un objeto JSON con los ajustes de configuracion a aplicar.\n\nCampos que puedes tocar: heal_at_pct, emergency_at_pct, area_attack_min_targets, surrounded_threshold, max_target_distance, panic_logout, paused.\n\nCriterio: si murio rodeado, sube heal_at_pct y baja surrounded_threshold. Si murio sin potions, pon paused=true, que el problema es de logistica y no de umbrales. No inventes campos: los que no reconozca el agente se ignoran."
+            },
+            {
+              "role": "user",
+              "content": "={{ JSON.stringify($json.body.payload) }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": { "temperature": 0 }
+      },
+      "id": "pensar",
+      "name": "Decidir ajuste",
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [460, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.AGENT_URL }}/config",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ updates: $json.message.content }) }}",
+        "options": {}
+      },
+      "id": "aplicar",
+      "name": "Aplicar al agente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.AGENT_URL }}/pause",
+        "options": {}
+      },
+      "id": "pausar",
+      "name": "Pausar (sin suministros)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.AGENT_URL }}/pause",
+        "options": {}
+      },
+      "id": "pausar-jugador",
+      "name": "Pausar (hay alguien)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 560]
+    }
+  ],
+  "connections": {
+    "Evento del agente": { "main": [[{ "node": "Que ha pasado", "type": "main", "index": 0 }]] },
+    "Que ha pasado": {
+      "main": [
+        [{ "node": "Decidir ajuste", "type": "main", "index": 0 }],
+        [{ "node": "Pausar (sin suministros)", "type": "main", "index": 0 }],
+        [{ "node": "Pausar (hay alguien)", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Decidir ajuste": { "main": [[{ "node": "Aplicar al agente", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

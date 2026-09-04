@@ -1,0 +1,68 @@
+# Infraestructura del piloto.
+#
+#   docker compose up -d n8n db      <- funciona tal cual
+#   docker compose up -d tfs         <- necesita datapack, ver README
+#
+# n8n y la base de datos usan imagenes publicadas y arrancan sin tocar nada.
+# El servidor de juego se compila desde el repositorio oficial, y ademas hay
+# que darle un datapack (mapa, monstruos, config). Eso ultimo no lo puede
+# resolver este fichero: ver la seccion "Montar el servidor" del README.
+
+services:
+
+  db:
+    image: mariadb:11
+    container_name: tibia-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-cambiaesto}
+      MARIADB_DATABASE: forgottenserver
+      MARIADB_USER: tfs
+      MARIADB_PASSWORD: ${DB_PASSWORD:-cambiaesto}
+    volumes:
+      - db-data:/var/lib/mysql
+      # El esquema se importa solo la primera vez que arranca el contenedor.
+      - ./server/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  tfs:
+    # Se compila del repositorio oficial. La primera vez tarda un buen rato.
+    build:
+      context: https://github.com/otland/forgottenserver.git#master
+    container_name: tibia-server
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "7171:7171"   # login
+      - "7172:7172"   # juego
+    volumes:
+      # El datapack lo pones tu: mapa, scripts, config.lua. Ver README.
+      - ./server/data:/srv/data
+      - ./server/config.lua:/srv/config.lua:ro
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: tibia-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      GENERIC_TIMEZONE: Europe/Madrid
+      N8N_SECURE_COOKIE: "false"          # solo para uso local
+      # El agente corre fuera de Docker, en la maquina anfitriona.
+      AGENT_URL: http://host.docker.internal:8778
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - n8n-data:/home/node/.n8n
+      - ./n8n:/workflows:ro
+
+volumes:
+  db-data:
+  n8n-data:

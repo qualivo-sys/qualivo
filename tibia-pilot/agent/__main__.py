@@ -11,7 +11,8 @@ import json
 import sys
 import time
 
-from .config import Config, SharedConfig
+from .config import SharedConfig
+from .profiles import load as load_profile
 from .events import EventEmitter
 from .loop import ControlLoop
 from .policy import NullPolicy
@@ -31,6 +32,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--api", action="store_true", help="levanta la API HTTP")
     p.add_argument("--api-port", type=int, default=8778)
     p.add_argument("--ws-port", type=int, default=8777, help="puerto del bridge OTClient")
+    p.add_argument("--profile", choices=["knight", "paladin", "mage"], default="knight",
+                   help="vocacion: decide que reglas existen, no solo los umbrales")
     p.add_argument("--hz", type=float, default=20.0)
     p.add_argument("--duration", type=float, default=0.0,
                    help="segundos a correr (0 = indefinido)")
@@ -42,20 +45,27 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
 
     if args.bridge == "sim":
-        from .bridge.sim import SimBridge
-        bridge = SimBridge(seed=args.seed)
+        # El simulador imita el molde de la vocacion: un caballero tiene el
+        # doble de vida y un tercio del mana que un mago, y eso cambia por
+        # completo que decisiones son correctas.
+        from .bridge.sim import SimBridge, knight_sim
+        bridge = knight_sim(seed=args.seed) if args.profile == "knight" \
+            else SimBridge(seed=args.seed)
     else:
         from .bridge.otclient import OTClientBridge
         bridge = OTClientBridge(port=args.ws_port)
 
     policy = NullPolicy() if args.mode == "record" else RulePolicy()
-    config = SharedConfig(Config(tick_hz=args.hz))
+    base = load_profile(args.profile)
+    base.tick_hz = args.hz
+    config = SharedConfig(base)
     emitter = EventEmitter(args.webhook)
     recorder = Recorder(args.out) if args.out else None
 
     loop = ControlLoop(bridge, policy, config, emitter, recorder)
 
-    print(f"[agent] bridge={args.bridge} mode={args.mode} hz={args.hz} "
+    print(f"[agent] bridge={args.bridge} profile={args.profile} "
+          f"mode={args.mode} hz={args.hz} "
           f"record={'si' if recorder else 'no'} webhook={'si' if args.webhook else 'no'}",
           file=sys.stderr)
 
