@@ -38,6 +38,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--duration", type=float, default=0.0,
                    help="segundos a correr (0 = indefinido)")
     p.add_argument("--seed", type=int, default=0, help="semilla del simulador")
+    # Para ver el bucle lento sin esperar a que la mala suerte ocurra sola.
+    p.add_argument("--sim-pressure", type=int, default=None,
+                   help="monstruos simultaneos en el simulador (sube la dificultad)")
+    p.add_argument("--sim-supplies", type=int, default=None,
+                   help="potions iniciales; ponlo bajo para forzar el aviso")
     return p
 
 
@@ -49,8 +54,16 @@ def main(argv: list[str] | None = None) -> int:
         # doble de vida y un tercio del mana que un mago, y eso cambia por
         # completo que decisiones son correctas.
         from .bridge.sim import SimBridge, knight_sim
-        bridge = knight_sim(seed=args.seed) if args.profile == "knight" \
-            else SimBridge(seed=args.seed)
+        extra = {}
+        if args.sim_pressure is not None:
+            extra["spawn_target"] = args.sim_pressure
+        if args.sim_supplies is not None:
+            extra["inventory"] = {"strong health potion": args.sim_supplies,
+                                  "strong mana potion": args.sim_supplies,
+                                  "health potion": args.sim_supplies,
+                                  "mana potion": args.sim_supplies}
+        bridge = knight_sim(seed=args.seed, **extra) if args.profile == "knight" \
+            else SimBridge(seed=args.seed, **extra)
     else:
         from .bridge.otclient import OTClientBridge
         bridge = OTClientBridge(port=args.ws_port)

@@ -12,6 +12,75 @@ Todo va en la misma maquina: el mundo del juego, el cliente y el robot.
 
 ---
 
+## Probarlo tu solo antes de enseñarselo a nadie
+
+Tres escalones. Los dos primeros no necesitan ni juego ni servidor, y se
+hacen en media hora larga.
+
+### Escalon 1 — el cerebro (15 min, solo Python)
+
+```bash
+python -m agent --sim --profile knight --duration 60
+```
+
+Un minuto de caza simulada y un resumen al final. Si imprime numeros, el
+bucle rapido funciona. Para comparar vocaciones: `--profile mage`.
+
+### Escalon 2 — el bucle lento (20 min, sigue sin juego)
+
+Aqui ves la otra mitad del sistema: los avisos que el robot manda cuando algo
+va mal, y como se le cambia la configuracion en caliente. **Tres terminales**:
+
+```bash
+# 1) el receptor de avisos (n8n de mentira)
+python tools/fake_n8n.py
+
+# 2) el robot, con la dificultad subida para que pasen cosas ya
+python -m agent --sim --profile knight --api \
+    --sim-pressure 7 --sim-supplies 4 \
+    --webhook http://127.0.0.1:5678/webhook/tibia-eventos
+
+# 3) tu, haciendo de supervisor
+curl http://127.0.0.1:8778/status
+curl -X POST http://127.0.0.1:8778/config \
+     -H "Content-Type: application/json" \
+     -d '{"updates": {"heal_at_pct": 0.85}}'
+curl -X POST http://127.0.0.1:8778/pause
+```
+
+En la primera terminal van saliendo los avisos:
+
+```
+[23:43:25] Se queda sin suministros  (low_supplies)
+      health_potions: 4
+[23:43:35] Le estan rodeando  (surrounded)
+      count: 5
+      names: ['cyclops', 'dragon', 'dragon', 'dragon', 'rotworm']
+      hp_pct: 0.677
+```
+
+Eso es exactamente lo que recibira n8n. Cuando cambies `heal_at_pct` veras
+que el robot empieza a curarse antes, en vivo, sin reiniciarlo.
+
+El `POST /config` contesta que aplico y que ignoro:
+
+```json
+{"applied": {"heal_at_pct": 0.85}, "ignored": ["campo_inventado"]}
+```
+
+Ignorar lo desconocido es deliberado: al otro lado hay una IA decidiendo, y
+antes o despues se inventara un nombre de campo. Mejor que lo tire a que
+reviente el agente a media caza.
+
+`--sim-pressure` y `--sim-supplies` estan solo para esto: forzar que pasen
+cosas malas sin esperar a la mala suerte.
+
+### Escalon 3 — el juego de verdad
+
+Los once pasos de abajo. Una tarde.
+
+---
+
 ## Paso 0 — Comprobar la maquina
 
 ```bash

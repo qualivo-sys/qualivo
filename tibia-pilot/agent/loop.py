@@ -93,7 +93,10 @@ class ControlLoop:
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
         self._was_alive = True
-        self._summary_at = 0.0
+        # Arranca en "ahora", no en cero: con cero, la primera comparacion
+        # contra time.monotonic() ya supera el intervalo y se emite un resumen
+        # vacio, de cero ticks, en el primer tick de la sesion.
+        self._summary_at = time.monotonic()
 
     def start(self) -> None:
         self._thread = threading.Thread(target=self.run, name="control-loop", daemon=True)

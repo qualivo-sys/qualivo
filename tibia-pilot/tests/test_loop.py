@@ -149,3 +149,21 @@ def test_config_patch_coacciona_tipos():
     snapshot = config.snapshot()
     assert snapshot.heal_at_pct == 0.55
     assert snapshot.surrounded_threshold == 6
+
+
+def test_no_emite_un_resumen_vacio_al_arrancar():
+    """El resumen de sesion es cada 5 min; en el primer tick no toca, y uno
+    de cero ticks no le dice nada a nadie."""
+    clock = VirtualClock()
+    bridge = SimBridge(seed=2, spawn_target=2, clock=clock)
+    emitter = EventEmitter(None)
+    vistos = []
+    original = emitter.emit
+    emitter.emit = lambda k, p, debounce_s=0.0: (
+        vistos.append(k), original(k, p, debounce_s))[1]
+    loop = ControlLoop(bridge, RulePolicy(), SharedConfig(Config()), emitter)
+    loop.bridge.connect()
+    for _ in range(40):
+        clock.advance()
+        loop.tick()
+    assert "session_summary" not in vistos
