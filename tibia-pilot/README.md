@@ -164,10 +164,26 @@ las funciones del propio cliente, asi que da igual si la accion vino de una
 hotkey, del raton o de una macro -- llega la accion exacta y con su instante,
 que es justo lo que un video no da.
 
-**Tampoco he podido probar el modulo Lua.** El API de websocket que usa
-(`g_http.webSocket`) existe en el fork mehah/otclient; en otros forks puede
-llamarse distinto. Si falla al cargar, el sitio a mirar es la funcion
-`conectar()`.
+### Que esta probado del puente y que no
+
+El **transporte esta probado de punta a punta**. `tools/fake_client.py` habla
+el mismo protocolo que el modulo Lua -- empuja estado a 20 Hz y aplica las
+acciones que le vuelven -- asi que el websocket, el formato de los mensajes y
+el lado Python quedan verificados sin necesidad de juego:
+
+```bash
+python -m agent --bridge otclient --profile knight --duration 20 &
+python tools/fake_client.py --duration 12 --hp 500
+```
+
+En esa prueba el personaje entra con 500 de vida y sale con 1243: el agente lo
+curo a traves del cable. Hay tres tests que lo fijan en `tests/test_bridge_ws.py`,
+incluido uno que le manda basura al puente para comprobar que no se cae.
+
+Lo que **sigue sin verificar** es unicamente el API de Lua del cliente:
+`g_http.webSocket` existe en el fork mehah/otclient, y en otros forks puede
+llamarse distinto. Si el modulo falla al cargar, el sitio a mirar es la
+funcion `conectar()`; el resto del fichero sirve igual.
 
 ## Estructura
 
@@ -200,7 +216,8 @@ pip install websockets        # python -m agent --bridge otclient
 
 - Entrenamiento por clonacion de comportamiento (fase 3): el dataset ya se
   graba en el formato correcto, falta el script que lo consume.
-- Verificar el modulo Lua y el compose contra una maquina real.
+- Verificar el modulo Lua (solo el API del cliente) y el compose contra
+  una maquina real.
 - Contrastar hechizos y costes con el datapack elegido.
 
 

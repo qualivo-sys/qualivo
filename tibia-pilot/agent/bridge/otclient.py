@@ -55,17 +55,31 @@ class OTClientBridge:
         sender.start()
         try:
             for raw in websocket:
+                # Nada de lo que llegue por el cable puede tumbar el puente:
+                # al otro lado hay un modulo Lua que puede mandar cualquier
+                # cosa, y quedarse sin puente a media caza es perder el
+                # personaje.
                 try:
                     msg = json.loads(raw)
-                except (json.JSONDecodeError, TypeError):
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    continue
+                if not isinstance(msg, dict):
                     continue
                 kind = msg.get("type")
                 if kind == "state":
-                    state = GameState.from_dict(msg["data"])
+                    datos = msg.get("data")
+                    if not isinstance(datos, dict):
+                        continue
+                    try:
+                        state = GameState.from_dict(datos)
+                    except (KeyError, TypeError, ValueError):
+                        continue
                     with self._latest_lock:
                         self._latest = state
                 elif kind == "observed":
-                    for a in msg.get("actions", []):
+                    for a in msg.get("actions") or []:
+                        if not isinstance(a, dict) or "kind" not in a:
+                            continue
                         d = dict(a)
                         d["source"] = "human"
                         self._observed.put(Action.from_dict(d))
