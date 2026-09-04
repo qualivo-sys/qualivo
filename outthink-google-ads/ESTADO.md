@@ -427,3 +427,34 @@ Aplicado (decisión de Maikel de subir PMax; el resto, rutina):
    823311229325…343. En revisión. Copia del contenido en el scratchpad (`dg_ads_backup.json`).
    Lección: en Demand Gen no cambiar la URL final de anuncios existentes; crear anuncios
    nuevos y pausar los antiguos.
+
+## Día 5 (04-09) — Search confirma, PMax trae basura, DG sigue a cero
+
+Ayer (03-09): Search 26 clics / 35,74 € / **2 registros** (uno escritorio, uno móvil) con el
+61 % de IS perdido por presupuesto. PMax 90 clics / 27,32 € / 0. DG 50 clics / 9,26 € / 0.
+Acumulado: 275 € (13,8 %), **4 registros** → CPL 68,8 €. Por campaña: Search 3 reg. /
+129,8 € (CPL 43 €), PMax 1 / 53,9 €, DG 0 / 91,4 € en 260 clics. Restante 1.725 € → 86 €/día.
+
+Dentro de Search, todo viene de **EventosIA** (3 reg. / 71 € → CPL 24 €). AIAct 50 € / 0
+(`ai act` y `reglamento ia` amplias: intención informativa) y `congreso inteligencia
+artificial` amplia 45 € / 0 (otros eventos). Términos que convirtieron: «evento inteligencia
+artificial madrid», «convenciones en madrid», «eventos ia 2026».
+
+PMax: ubicaciones de Display de baja calidad (apps de transporte, radios, CallApp, wallapop,
+poki, granjas de contenido) y hoy 118 clics a 0,07 €. Grupo de recursos ya `ELIGIBLE` con
+fuerza AVERAGE. DG: los 7 anuncios recreados aprobados. Listas de remarketing siguen en 16
+(la corrección de la CSP de Aída es del 02-09; tardan 24-48 h en reflejarse).
+
+Aplicado:
+- **Presupuestos: Search 35 → 45 €/día · DG Prospecting 23,67 → 13,67** · PMax 26,67. Total 85,34.
+- **Keywords pausadas** (0 registros): `congreso inteligencia artificial` amplia (45 €),
+  `reglamento ia` amplia (16,8 €), `ai act` amplia (16,7 €). Añadida `congreso inteligencia
+  artificial` en **frase**. Las de frase de AIAct siguen activas.
+- Negativas: `metaworld`, `city summit`.
+- **Exclusiones a nivel de cuenta**: 172 apps móviles y 71 sitios donde PMax había mostrado
+  anuncios (todos salvo medios reconocidos). La exclusión de categorías de apps ya no es
+  válida en v25 (`INVALID_MOBILE_APP_CATEGORY`), hay que excluir app por app.
+  Lista en el scratchpad `exclusiones_04-09.json`.
+
+Criterio para el lunes: DG sin registro → pausar. PMax: si con las exclusiones el CPL no
+baja de ~40 € en 3 días, recortar a 15 €/día y pasar el resto a Search.
