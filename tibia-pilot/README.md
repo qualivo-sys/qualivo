@@ -120,6 +120,9 @@ caliente con `POST /config` sin tocar codigo.
 
 ## Montar el servidor
 
+Guia completa paso a paso: **[SETUP.md](SETUP.md)**. Empieza siempre por
+`python tools/preflight.py`, que dice que falta y que hacer con cada cosa.
+
 ```bash
 cp .env.example .env          # y cambia las dos contrasenas
 docker compose up -d db n8n   # esto funciona tal cual

@@ -21,8 +21,11 @@ services:
       MARIADB_PASSWORD: ${DB_PASSWORD:-cambiaesto}
     volumes:
       - db-data:/var/lib/mysql
-      # El esquema se importa solo la primera vez que arranca el contenedor.
-      - ./server/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      # Todo .sql que dejes en server/initdb/ se importa la primera vez que
+      # arranca el contenedor. Se monta la carpeta, no el fichero: montar un
+      # fichero inexistente hace que Docker cree un directorio con ese nombre
+      # y el fallo que da despues no se parece en nada a la causa.
+      - ./server/initdb:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
