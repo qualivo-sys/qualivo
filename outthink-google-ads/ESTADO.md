@@ -458,3 +458,27 @@ Aplicado:
 
 Criterio para el lunes: DG sin registro → pausar. PMax: si con las exclusiones el CPL no
 baja de ~40 € en 3 días, recortar a 15 €/día y pasar el resto a Search.
+
+## Día 6 (05-09, sábado) — el mejor día: 4 registros el viernes
+
+Viernes 04-09: Search 30 clics / 45,05 € / **3 registros** (CPL 15 €); PMax 337 clics /
+26,07 € / **1 registro**; DG 56 clics / 13,60 € / 0. Acumulado: 352 € (17,6 %), **8 registros**,
+CPL 44 €. Search 6 reg. / 174 € (CPL 29 €), todos de **EventosIA**; PMax 2 / 73 € (CPL 37 €);
+DG 0 / 105 € en 330 clics. Restante 1.648 € → 86,7 €/día (19 días).
+
+Las exclusiones del viernes han funcionado: la red de Display de PMax pasa de 5.030
+impresiones el viernes a 67 el sábado; ahora sirve casi todo en YouTube y productos de Google.
+Términos que convirtieron el viernes: «eventos ia madrid», «congreso ia madrid», «web summit 2026».
+Listas de remarketing siguen en 16 (tres días después de la corrección de la CSP).
+
+Aplicado:
+- **DG Prospecting PAUSADA** (criterio acordado: sin registro → pausar; adelantado del lunes
+  al sábado para no gastar el fin de semana). Su presupuesto pasa a **Search: 45 → 58,67 €/día**.
+- AIAct: pausadas las dos amplias que quedaban (`ley de inteligencia artificial`,
+  `reglamento europeo inteligencia artificial`) — casaban «inteligencia artificial» a secas.
+  El grupo queda solo con frases. Acumula ~64 € sin registro; si el lunes sigue a cero, se pausa.
+- Negativas: `[inteligencia artificial]` exacta, `"marketing"`.
+- Dos apps nuevas excluidas a nivel de cuenta.
+- Search **sigue en Maximizar clics** hasta el lunes: cambiar de puja en fin de semana, con
+  poco volumen, arranca el aprendizaje con los peores datos. El lunes, con 6+ registros en
+  Search, pasar a Maximizar conversiones con CPA objetivo 25 €.
