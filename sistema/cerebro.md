@@ -27,10 +27,13 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 3. **Decisiones**: las decisiones de dinero y de campaña las toma **Maikel**, no los agentes ni el cerebro. Los agentes las dejan planteadas; el cerebro se las lleva a Maikel en el parte diario.
 4. **Este fichero**: solo lo edita el cerebro. Si un agente quiere proponer un cambio de estrategia, lo escribe en su propia carpeta y lo marca `[PARA CEREBRO]`.
 
-## Directrices vigentes (actualizadas 2 sep 2026)
+## Directrices vigentes (actualizadas 6 sep 2026 · SO Maikel 2026)
 
-- **OBJETIVO DEL MES, único y claro: 1 cliente recurrente nuevo de 1.000-1.500 €/mes.** NO escalar, NO reinventar Qualivo. Todo lo que no acerque a ese cliente es secundario.
-- Objetivos semanales de Maikel: **10 seguimientos · 1 reunión nueva · 1 oportunidad comercial seria**.
+- **OBJETIVO SEPTIEMBRE — se mide por ACTIVIDAD, no por dinero: 30 conversaciones comerciales · 8-10 propuestas · 2-4 clientes nuevos.** Rumbo: 10.000 €/mes recurrentes (hoy 4.100).
+- **Motor diario de Maikel: 3 contactos nuevos · 5 seguimientos · 1 acción comercial importante.** Semanal: 10 conversaciones · 3 propuestas.
+- Prioridad absoluta cuando algo choca: 1) salud y energía 2) ventas 3) clientes 4) IA y aprendizaje 5) inglés 6) administración.
+- Las mañanas (09:00-11:00) son bloque comercial profundo: prospección, seguimientos, propuestas. Nada de organizar ni consumir contenido.
+- Estructura semanal: lunes CEO Day + comercial · martes ventas y construcción · miércoles growth y contenido · jueves operaciones y proyecto IA · viernes revisión semanal.
 - Propuestas en <48h desde la conversación; seguimientos a 3-7-14 días; responder respuestas entrantes en <2h.
 - **Modo caja estricto**: la caja libre operativa es mínima (la mayor parte del saldo está reservada para impuestos). Ningún gasto nuevo sin pasar por el cerebro. Decisión de financiación congelada hasta **noviembre**.
 - Ingresos recurrentes actuales: Equipzilla 2.040 € nómina (sube a ~2.850 € en octubre) + EAC 800 € + Eleva 400-500 €. Fase actual: estancamiento, no crisis — la misión es el siguiente cliente.
