@@ -250,3 +250,6 @@ dia con la carga (paso 4b de la rutina diaria). La muestra ya supera con mucho
 las 500 webs: el informe publicable esta desbloqueado.
 
 - **lema-asesores.com** (Lema Asesores Inmobiliarios, Alfredo Muñoz, 3-sep) · Tier B: píxel de Meta activo con 4 formularios pero sin GTM ni GA4. Ángulo tipo RGM Fincas: la captura está, la medición no. Cargado en campaña inmo.
+
+- **pisoferta.com** (Pisoferta, Raúl Gómez de Cádiz, 6-sep) · Tier A: etiqueta de Google Ads activa y CERO formularios en portada (GTM y GA4 presentes). Paga clics sin sitio donde capturarlos. Cargado en inmo.
+- **monikarusch.com** (Monika Rusch, Jordi Gruart, 6-sep) · Tier B: píxel de Meta con 4 formularios pero sin GTM ni GA4. Ángulo RGM: captura sí, medición no. Cargado en inmo.
