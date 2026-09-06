@@ -1,6 +1,8 @@
 # Pipeline de ventas · Qualivo
 
-> Actualizado: **2026-09-01** · Agente de ventas
+> Actualizado: **2026-09-06** · Agente de ventas
+>
+> **Addendum 6-sep** — cerebro.md v3 (2-sep) añade al pipeline: **Inspyria** (han pedido hablar, reunión por agendar — prioridad 1 de la campaña de reactivación), **Marilia** (propone colaboración al 50%) y **Antic Barcelona** (cliente nuevo a comisión, arrancando). En marcha además la **campaña de reactivación de cartera** (13 cuentas, `ventas/reactivacion/`) y las **subidas de precio** Eleva 450→800-900 € y EAC 800→1.000-1.200 € (`ventas/pricing/`), encargo del cerebro del 6-sep. Objetivo del mes: +2.700 €/mes de recurrente (de ~4.100 a ~6.800). Los tres seguimientos de la tabla original (Equilibrha, Grup Montaner, Emana) siguen bloqueados por los datos pedidos el 1-sep, aún sin respuesta.
 > Fuente de importes y estado oficial: `sistema/cerebro.md` (cerebro). Contexto de cada cuenta: ficheros del SDR en `claude/client-acquisition-ideas-k00f5d` (`captacion/clics-calendario-adelantta.md`, `captacion/llamadas-27ago.md`, `captacion/despliegue-cola-25ago.md`).
 > Fases: `señal → conversación → diagnóstico → propuesta → negociación → cerrado / perdido / dormida`.
 > Las probabilidades son estimación del agente por fase, no dato: señal 15-25%, conversación 30%, diagnóstico 40%, propuesta 60%, negociación 75%.
