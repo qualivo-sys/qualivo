@@ -30,7 +30,11 @@ const perfil = {
 };
 
 const supabase = crearSupabaseFalso({ perfiles: [perfil] });
-const ctx = { supabase, userId: 'u1', perfil, hoy: hoy() };
+// La misma fecha que usa la app: la de la zona del perfil, no la de UTC.
+// Con hoy() a secas las pruebas fallaban cada noche entre las 22:00 y las
+// 00:00 UTC, cuando en Madrid ya es el dia siguiente.
+const HOY = hoy(perfil.zona_horaria);
+const ctx = { supabase, userId: 'u1', perfil, hoy: HOY };
 
 // ── 1. Cada herramienta se ejecuta y escribe donde debe ────────────────
 const llamadas = [
@@ -41,6 +45,7 @@ const llamadas = [
       { nombre: 'press banca', series: [{ peso_kg: 80, reps: 8, rir: 1 }, { peso_kg: 80, reps: 8, rir: 1 }, { peso_kg: 80, reps: 8, rir: 2 }] },
       { nombre: 'jalon al pecho', series: [{ peso_kg: 60, reps: 12, rir: 2 }] }] }],
   ['registrar_foco', { categoria: 'idiomas', minutos: 45, descripcion: 'Ingles' }],
+  ['registrar_foco', { categoria: 'aprendizaje', actividad: 'Guitarra', minutos: 30 }],
   ['registrar_bienestar', { sueno_inicio: '01:15', sueno_fin: '06:45', animo: 6, energia: 4, estres: 7, cafes: 3, cafeina_ultima: '18:30' }],
   ['registrar_agua', { vasos: 2 }],
   ['registrar_habito', { nombre: '10.000 pasos' }],
@@ -66,6 +71,15 @@ check('todas las herramientas declaradas se pueden ejecutar',
   HERRAMIENTAS.every((h) => h.name === 'actualizar_perfil' || llamadas.some(([n]) => n === h.name)),
   `${HERRAMIENTAS.length} declaradas`);
 
+// El coach crea la actividad la primera vez y la reutiliza despues
+check('el coach crea la actividad que le nombras', (supabase.db.tablas.actividades_tiempo ?? []).some((a) => a.nombre === 'Guitarra'),
+  JSON.stringify(supabase.db.tablas.actividades_tiempo ?? []));
+await ejecutarHerramienta('registrar_foco', { categoria: 'aprendizaje', actividad: 'guitarra', minutos: 20 }, ctx);
+check('y no la duplica aunque la escribas distinto', (supabase.db.tablas.actividades_tiempo ?? []).filter((a) => /guitarra/i.test(a.nombre)).length === 1,
+  JSON.stringify((supabase.db.tablas.actividades_tiempo ?? []).map((a) => a.nombre)));
+check('el rato queda atado a la actividad', (supabase.db.tablas.foco ?? []).filter((f) => f.actividad_id).length === 2,
+  JSON.stringify((supabase.db.tablas.foco ?? []).map((f) => ({ m: f.minutos, a: f.actividad_id }))));
+
 // El nombre libre se empareja con el catalogo
 const series = supabase.db.tablas.series ?? [];
 check('empareja "press banca" con el catalogo',
@@ -88,7 +102,7 @@ check('el panel ve el peso de hoy', panel.cuerpo.peso === 82.4);
 check('estima la grasa corporal', panel.cuerpo.grasaPct !== null, `${panel.cuerpo.grasaPct?.toFixed(1)} %`);
 check('suma las calorias de hoy', panel.diaHoy.kcal === 950, `${panel.diaHoy.kcal} kcal`);
 check('cuenta el entreno de hoy', panel.diaHoy.entreno === true);
-check('cuenta los minutos de foco', panel.diaHoy.focoMin === 45);
+check('cuenta los minutos de foco', panel.diaHoy.focoMin === 95, `${panel.diaHoy.focoMin} min`); // 45 idiomas + 30 y 20 de guitarra
 check('acumula XP y nivel', panel.progreso.xp > 0, `${panel.progreso.xp} XP, nivel ${panel.progreso.nivel}`);
 check('puntua las areas', panel.puntuaciones.global !== null, JSON.stringify(panel.puntuaciones));
 
@@ -101,7 +115,7 @@ check('el contexto lleva la memoria a largo plazo', contexto.includes('Molestia 
 check('el contexto no es enorme', contexto.length < 9000, `${contexto.length} caracteres`);
 
 // ── 5. Progresion sobre datos reales ───────────────────────────────────
-const sesiones = await cargarSesionesMotor(supabase, 'u1', sumarDias(hoy(), -90));
+const sesiones = await cargarSesionesMotor(supabase, 'u1', sumarDias(HOY, -90));
 check('reconstruye las sesiones para el motor', sesiones.length === 1 && sesiones[0].ejercicios.length === 2);
 const bloque = { ejercicioId: 'press_banca', rol: 'principal', series: 3, repMin: 6, repMax: 8, rir: 2, descansoSeg: 150 };
 const consejo = sugerencia(bloque, sesiones);
@@ -133,7 +147,7 @@ const { senales } = await import(`${L}/motor/senales.js`);
 const { logros } = await import(`${L}/motor/logros.js`);
 
 const lecturas = senales({
-  dias: panel.dias, hoy: hoy(), objetivoEntrenos: 4,
+  dias: panel.dias, hoy: HOY, objetivoEntrenos: 4,
   metaKcal: panel.metas.kcal, metaProteina: panel.metas.proteinaG,
   tendenciaPeso: null, ritmoObjetivo: panel.metas.ritmoKgSemana, racha: panel.racha,
 });
@@ -144,7 +158,7 @@ check('las senales vienen ordenadas por peso',
 
 const sinDatos = senales({
   dias: panel.dias.map((d) => ({ ...d, comidas: 0, kcal: 0, entreno: false, focoMin: 0, animo: null, suenoHoras: null, alcoholUd: 0 })),
-  hoy: hoy(), objetivoEntrenos: 4, metaKcal: 2000, metaProteina: 150,
+  hoy: HOY, objetivoEntrenos: 4, metaKcal: 2000, metaProteina: 150,
   tendenciaPeso: null, ritmoObjetivo: -0.5, racha: 0,
 });
 check('avisa cuando lleva dias sin registrar', sinDatos.some((s) => s.id === 'sin_registrar'));
@@ -189,7 +203,7 @@ const aviso = textoAviso('noche', 'Maikel Echevarria', { racha: 3, kcal: 1450, m
 check('el aviso de la noche abre el check-in con las calorias', aviso.url.includes('checkin=noche') && aviso.cuerpo.includes('1450'));
 
 // ── 6. Revision semanal ────────────────────────────────────────────────
-const stats = estadisticasSemana(panel, panel.dias[panel.dias.length - 1].fecha.slice(0, 8) + '01' > '' ? (await import(`${L}/fechas.js`)).inicioSemana(hoy()) : hoy());
+const stats = estadisticasSemana(panel, panel.dias[panel.dias.length - 1].fecha.slice(0, 8) + '01' > '' ? (await import(`${L}/fechas.js`)).inicioSemana(HOY) : HOY);
 check('las estadisticas de la semana cuadran', stats.entrenos === 1 && stats.alcoholTotal === 1, `entrenos ${stats.entrenos}, alcohol ${stats.alcoholTotal}`);
 const prompt = promptRevision(panel, stats);
 check('el prompt de la revision lleva los numeros', prompt.includes('NUMEROS DE LA SEMANA') && prompt.includes('DIA A DIA'));
@@ -514,6 +528,67 @@ const entrenoSinAgua = insightsDescanso({
 });
 check('si entrenas y no bebes, te lo dice', entrenoSinAgua.some((i) => i.id === 'agua_entreno'), JSON.stringify(entrenoSinAgua.map((i) => i.texto)));
 check('ningun aviso de descanso regana', [...alerta, ...conRetraso, ...entrenoSinAgua].every((i) => !/deberias|tienes que|mal hecho/i.test(i.texto)));
+
+// ── 17. Tiempo: en que has estado y si vas a mas o a menos ─────────────
+const { resumenTiempo, avance, insightsTiempo, semanasHasta, segundosDelCronometro, reloj } = await import(`${L}/motor/tiempo.js`);
+const { inicioSemana: iniSem } = await import(`${L}/fechas.js`);
+const etq = (id) => ({ deep_work: 'Trabajo profundo', idiomas: 'Idiomas', otro: 'Otro' })[id] ?? 'Otro';
+
+const acts = [
+  { id: 'a1', nombre: 'Ingles', emoji: '🇬🇧', categoria: 'idiomas', objetivo_min_semana: 120, archivada: false, creada: '2026-08-01' },
+  { id: 'a2', nombre: 'Guitarra', emoji: '🎸', categoria: 'aprendizaje', objetivo_min_semana: null, archivada: false, creada: '2026-08-01' },
+];
+const rato = (fecha, minutos, actividad_id, categoria = 'otro') => ({ id: `${fecha}-${minutos}-${actividad_id ?? 'x'}`, fecha, minutos, categoria, descripcion: null, actividad_id });
+const semanaFechas = ['2026-09-07', '2026-09-08', '2026-09-09', '2026-09-10', '2026-09-11', '2026-09-12', '2026-09-13'];
+const ratos = [
+  rato('2026-09-07', 60, 'a1'), rato('2026-09-09', 30, 'a1'),
+  rato('2026-09-08', 90, 'a2'), rato('2026-09-10', 30, 'a2'),
+  rato('2026-09-11', 45, null, 'deep_work'),
+];
+const rt = resumenTiempo(ratos, acts, semanaFechas, etq);
+check('reparte el tiempo por actividad, de mas a menos', rt.actividades.map((a) => a.nombre).join(',') === 'Guitarra,Ingles,Trabajo profundo', rt.actividades.map((a) => `${a.nombre}:${a.minutos}`).join(' '));
+check('suma total, ratos y dias activos', rt.minutos === 255 && rt.sesiones === 5 && rt.diasActivos === 5, JSON.stringify({ m: rt.minutos, s: rt.sesiones, d: rt.diasActivos }));
+check('los registros sin actividad no se pierden, van por categoria', rt.actividades.some((a) => a.nombre === 'Trabajo profundo' && a.minutos === 45));
+check('el porcentaje del total cuadra', rt.actividades.find((a) => a.nombre === 'Ingles').pct === 35, String(rt.actividades.find((a) => a.nombre === 'Ingles').pct));
+check('solo mide objetivo donde la persona se ha puesto uno', rt.actividades.find((a) => a.nombre === 'Ingles').objetivoPct === 75 && rt.actividades.find((a) => a.nombre === 'Guitarra').objetivoPct === null);
+check('el tiempo por dia respeta el orden de las fechas', rt.porDia.length === 7 && rt.porDia[0].minutos === 60 && rt.porDia[5].minutos === 0);
+check('lo de fuera del periodo no cuenta', resumenTiempo([...ratos, rato('2026-08-30', 600, 'a1')], acts, semanaFechas, etq).minutos === 255);
+
+// Avance: la semana en curso no ensucia la media de las cerradas
+const semanas = semanasHasta('2026-09-13', 4, iniSem, sumarDias);
+check('trocea las semanas en lunes correctos', semanas.map((s) => s.desde).join(',') === '2026-08-24,2026-08-31,2026-09-07,2026-09-14' || semanas[semanas.length - 1].fechas.includes('2026-09-13'), semanas.map((s) => s.desde).join(','));
+const historico = [
+  rato('2026-08-25', 60, 'a1'), rato('2026-09-01', 120, 'a1'), rato('2026-09-07', 60, 'a1'), rato('2026-09-09', 30, 'a1'),
+];
+const av = avance(historico, semanasHasta('2026-09-13', 3, iniSem, sumarDias), 'a1');
+check('compara con la semana pasada', av.estaSemana === 90 && av.semanaAnterior === 120 && av.cambio === -25, JSON.stringify(av));
+check('la media solo cuenta semanas cerradas', av.mediaSemanal === 90, String(av.mediaSemanal));
+check('guarda la mejor semana y el total', av.mejorSemana === 120 && av.totalMinutos === 270, JSON.stringify({ m: av.mejorSemana, t: av.totalMinutos }));
+check('cuenta las semanas seguidas', av.semanasSeguidas === 2, String(av.semanasSeguidas));
+const empezandoHoy = avance([rato('2026-09-08', 60, 'a1')], semanasHasta('2026-09-13', 4, iniSem, sumarDias), 'a1');
+check('sin semana anterior no inventa un porcentaje', empezandoHoy.cambio === null && empezandoHoy.mediaSemanal === null, JSON.stringify(empezandoHoy));
+check('el avance de una actividad ignora las demas', avance(ratos, [{ desde: '2026-09-07', fechas: semanaFechas }], 'a2').estaSemana === 120);
+
+// Lo que veo
+const vacio = insightsTiempo(resumenTiempo([], acts, semanaFechas, etq), avance([], semanas), 7);
+check('sin nada apuntado invita a empezar, no regana', vacio.length === 1 && /dale al play/i.test(vacio[0].texto), JSON.stringify(vacio));
+const conAvisos = insightsTiempo(rt, av, 7);
+check('dice donde se te ha ido el tiempo', conAvisos.some((i) => i.id === 'reparto' && /Guitarra/.test(i.texto)), JSON.stringify(conAvisos.map((i) => i.texto)));
+check('nunca mas de tres frases', conAvisos.length <= 3, String(conAvisos.length));
+check('ninguna frase de tiempo regana', conAvisos.every((i) => !/deberias|tienes que|vago|poco/i.test(i.texto)), JSON.stringify(conAvisos.map((i) => i.texto)));
+const subida = insightsTiempo(rt, { ...av, estaSemana: 200, semanaAnterior: 100, cambio: 100 }, 7);
+check('celebra la subida con el dato', subida.some((i) => i.id === 'cambio' && /100 %/.test(i.texto)), JSON.stringify(subida.map((i) => i.texto)));
+const atracon = insightsTiempo(resumenTiempo([rato('2026-09-07', 180, 'a1')], acts, semanaFechas, etq), av, 7);
+check('avisa si todo cayo en un solo dia', atracon.some((i) => i.id === 'concentrado'), JSON.stringify(atracon.map((i) => i.texto)));
+
+// El cronometro cuenta desde la marca del servidor, no sumando en el navegador
+const ahora = Date.parse('2026-09-07T12:00:00Z');
+check('cuenta lo corrido desde el inicio', segundosDelCronometro({ actividad_id: 'a1', descripcion: null, inicio: '2026-09-07T11:30:00Z', acumulado_seg: 0 }, ahora) === 1800);
+check('suma lo acumulado de antes de la pausa', segundosDelCronometro({ actividad_id: 'a1', descripcion: null, inicio: '2026-09-07T11:59:00Z', acumulado_seg: 600 }, ahora) === 660);
+check('en pausa no sigue contando', segundosDelCronometro({ actividad_id: 'a1', descripcion: null, inicio: null, acumulado_seg: 900 }, ahora) === 900);
+check('sin cronometro son cero segundos', segundosDelCronometro(null, ahora) === 0);
+check('si el reloj del movil va atrasado no cuenta en negativo', segundosDelCronometro({ actividad_id: 'a1', descripcion: null, inicio: '2026-09-07T12:05:00Z', acumulado_seg: 0 }, ahora) === 0);
+check('el reloj se lee bien', reloj(65) === '01:05' && reloj(3725) === '1:02:05' && reloj(0) === '00:00', `${reloj(65)} ${reloj(3725)}`);
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

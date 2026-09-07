@@ -129,6 +129,25 @@ export interface Foco {
   categoria: CategoriaFoco;
   minutos: number;
   descripcion: string | null;
+  /** Actividad con nombre propio. Null en los registros de antes. */
+  actividad_id?: string | null;
+  /** Hora a la que empezo, si el rato se cronometro. */
+  inicio?: string | null;
+}
+
+/**
+ * Algo a lo que dedicas tiempo, con el nombre que tu le pongas.
+ * Se llama asi y no "Actividad" a secas porque eso ya es el nivel de
+ * actividad fisica del perfil, y ademas hay actividades de cardio.
+ */
+export interface ActividadTiempo {
+  id: string;
+  nombre: string;
+  emoji: string | null;
+  categoria: CategoriaFoco;
+  objetivo_min_semana: number | null;
+  archivada: boolean;
+  creada: string;
 }
 
 export interface Tarea {

@@ -1,12 +1,13 @@
-import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, MessageCircle, Moon, TrendingDown } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, MessageCircle, Moon, Timer, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
+import { CronometroEnMarcha } from '@/components/cronometro';
 import ComidasHabituales from '@/components/comidas-habituales';
 import VasoAgua from '@/components/vaso-agua';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
 import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
-import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
+import { cargarPanel, cargarSesionesMotor, cargarTiempo } from '@/lib/datos';
 import { ejercicio } from '@/lib/motor/ejercicios';
 import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
@@ -34,6 +35,7 @@ const AREAS = [
 export default async function PanelHoy() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
+  const tiempo = await cargarTiempo(supabase, usuario.id);
   const { diaHoy, metas, cuerpo, puntuaciones } = panel;
 
   const metaAgua = objetivoAgua({
@@ -238,6 +240,20 @@ export default async function PanelHoy() {
           </div>
         </div>
       </Tarjeta>
+
+      {/* Si hay algo contando tiene que verse desde Hoy, no solo en Mente. */}
+      {tiempo.cronometro && (
+        <Link
+          href="/app/mente"
+          className="flex items-center justify-between rounded-xl border border-[hsl(var(--area-foco))]/40 bg-[hsl(var(--area-foco))]/10 px-4 py-3 text-sm"
+        >
+          <span className="flex items-center gap-2">
+            <Timer size={16} className="text-[hsl(var(--area-foco))]" />
+            <CronometroEnMarcha cronometro={tiempo.cronometro} nombre={tiempo.enMarcha} />
+          </span>
+          <ArrowRight size={15} />
+        </Link>
+      )}
 
       {/* El agua se apunta desde aqui: si hay que entrar en otra pantalla, nadie la apunta. */}
       <Tarjeta>

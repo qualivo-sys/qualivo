@@ -279,6 +279,44 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Tiempo: actividades propias y cronometro ───────────────────────────
+-- Las 6 categorias de foco se quedan (los registros viejos siguen valiendo),
+-- pero ahora cada uno puede ponerle nombre a lo suyo: "Ingles", "Guitarra",
+-- "Qualivo". Es lo que permite responder "¿en que he estado esta semana?".
+create table if not exists public.actividades_tiempo (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid not null references auth.users on delete cascade,
+  nombre    text not null,
+  emoji     text,
+  categoria text not null default 'otro'
+            check (categoria in ('deep_work','negocio','aprendizaje','idiomas','lectura','otro')),
+  -- Minutos a la semana que quiere dedicarle, si se marca un objetivo.
+  objetivo_min_semana int check (objetivo_min_semana > 0),
+  archivada boolean not null default false,
+  creada    timestamptz not null default now(),
+  unique (user_id, nombre)
+);
+create index if not exists actividades_tiempo_user on public.actividades_tiempo (user_id, archivada, creada);
+
+alter table public.foco add column if not exists actividad_id uuid references public.actividades_tiempo on delete set null;
+-- Cuando el rato se ha cronometrado guardamos a que hora empezo: sirve para
+-- saber a que horas del dia rinde cada uno.
+alter table public.foco add column if not exists inicio timestamptz;
+create index if not exists foco_user_actividad on public.foco (user_id, actividad_id, fecha desc);
+
+-- El cronometro vive en el servidor, no en el navegador: si cierras la app o
+-- cambias de movil, el rato sigue contando donde lo dejaste. Uno por persona.
+create table if not exists public.cronometro (
+  user_id      uuid primary key references auth.users on delete cascade,
+  actividad_id uuid references public.actividades_tiempo on delete cascade,
+  descripcion  text,
+  -- Cuando arranco el tramo que corre ahora. Null = esta en pausa.
+  inicio       timestamptz,
+  -- Segundos ya acumulados en tramos anteriores de esta misma sesion.
+  acumulado_seg int not null default 0,
+  creado       timestamptz not null default now()
+);
+
 -- ── Descanso: sueno con horas reales, agua y cafeina ───────────────────
 -- Va en bienestar y no en una tabla nueva porque es un dato por dia, igual
 -- que el animo. sueno_horas se sigue guardando: es lo que leen los motores,
@@ -410,7 +448,8 @@ begin
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
     'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
     'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos','finanzas_sobres',
-    'diario','hojas'
+    'diario','hojas',
+    'actividades_tiempo','cronometro'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);

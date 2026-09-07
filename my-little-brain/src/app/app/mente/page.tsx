@@ -1,9 +1,10 @@
-import { Trash2 } from 'lucide-react';
+import { ArrowRight, Timer, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import CronometroFoco from '@/components/cronometro';
 import EstadoEmocional from '@/components/estado-emocional';
-import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { Barra, Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { anadirHoja, borrarHoja, devolverHoja, guardarDiario, retirarHoja } from '@/app/app/mente/acciones';
-import { cargarMente, cargarPanel } from '@/lib/datos';
+import { cargarMente, cargarPanel, cargarTiempo } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import {
   TEMAS,
@@ -13,6 +14,8 @@ import {
   resumenEmocional,
   tema as infoTema,
 } from '@/lib/motor/emociones';
+import { ETIQUETA_CATEGORIA_FOCO } from '@/lib/perfil';
+import { avance, resumenTiempo, semanasHasta } from '@/lib/motor/tiempo';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -29,6 +32,7 @@ export default async function PaginaMente() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   const mente = await cargarMente(supabase, usuario.id, panel.hoy);
+  const tiempo = await cargarTiempo(supabase, usuario.id);
 
   const lunes = inicioSemana(panel.hoy);
   const hoyDia = panel.dias.find((d) => d.fecha === panel.hoy);
@@ -39,6 +43,16 @@ export default async function PaginaMente() {
   const evidencias = evidenciasSemana({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, desde: lunes, hasta: panel.hoy });
   const entrada = mente.entradaDeHoy;
   const abiertas = resumen.hojasAbiertas;
+
+  const semanas = semanasHasta(panel.hoy, 8, inicioSemana, sumarDias);
+  const semanaTiempo = resumenTiempo(panel.foco, tiempo.actividades, semanas[semanas.length - 1].fechas,
+    (id) => ETIQUETA_CATEGORIA_FOCO[id] ?? 'Otro');
+  const avanceTiempo = avance(panel.foco, semanas);
+  const hm = (min: number) => {
+    if (!min) return '0 min';
+    const h = Math.floor(min / 60);
+    return h ? `${h} h${min % 60 ? ` ${min % 60} min` : ''}` : `${min} min`;
+  };
   const retiradas = mente.hojas.filter((h) => h.cerrada).slice(0, 5);
 
   return (
@@ -76,6 +90,52 @@ export default async function PaginaMente() {
           )}
         </Tarjeta>
       )}
+
+      <Tarjeta>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Timer size={18} className="text-[hsl(var(--area-foco))]" />
+            <TituloTarjeta className="mb-0">En que estas</TituloTarjeta>
+          </div>
+          <Link href="/app/mente/tiempo" className="text-xs text-primary underline">Tu tiempo</Link>
+        </div>
+        <CronometroFoco
+          cronometro={tiempo.cronometro}
+          actividades={tiempo.actividades.filter((a) => !a.archivada)}
+          nombreActividad={tiempo.enMarcha}
+        />
+
+        {semanaTiempo.minutos > 0 && (
+          <div className="mt-4 border-t border-border pt-3">
+            <div className="mb-2 flex items-baseline justify-between text-sm">
+              <span className="text-muted-foreground">Esta semana</span>
+              <span className="tabular-nums">
+                <strong>{hm(semanaTiempo.minutos)}</strong>
+                {avanceTiempo.cambio !== null && (
+                  <span className={`ml-2 text-xs ${avanceTiempo.cambio >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground'}`}>
+                    {avanceTiempo.cambio > 0 ? '+' : ''}{avanceTiempo.cambio} %
+                  </span>
+                )}
+              </span>
+            </div>
+            <ul className="space-y-2">
+              {semanaTiempo.actividades.slice(0, 3).map((a) => (
+                <li key={a.id}>
+                  <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                    <span className="min-w-0 truncate">{a.emoji} {a.nombre}</span>
+                    <span className="shrink-0 tabular-nums text-muted-foreground">{hm(a.minutos)}</span>
+                  </div>
+                  <Barra valor={a.pct} color="hsl(var(--area-foco))" />
+                </li>
+              ))}
+            </ul>
+            <Link href="/app/mente/tiempo" className="mt-3 flex items-center justify-between text-sm text-primary">
+              <span>Ver el avance de todas</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        )}
+      </Tarjeta>
 
       <Tarjeta>
         <TituloTarjeta>Como estas hoy</TituloTarjeta>

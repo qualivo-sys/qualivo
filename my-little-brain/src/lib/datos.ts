@@ -15,10 +15,11 @@ import {
 import { tmbDe, metasNutricion } from './perfil';
 import type {
   Bienestar, Comida, EntradaDiario, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
-  Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil, Presupuesto,
-  RecuerdoCoach, Sobre, Tarea,
+  ActividadTiempo, Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil,
+  Presupuesto, RecuerdoCoach, Sobre, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
+import type { Cronometro } from './motor/tiempo';
 
 export interface Panel {
   perfil: Perfil;
@@ -38,6 +39,7 @@ export interface Panel {
   tareas: Tarea[];
   memoria: RecuerdoCoach[];
   entrenamientos: Entrenamiento[];
+  foco: Foco[];
   /** Historial de comidas (60 dias), para las habituales y los patrones. */
   comidas: Comida[];
   comidasHoy: Comida[];
@@ -144,6 +146,7 @@ export async function cargarPanel(
     tareas,
     memoria,
     entrenamientos,
+    foco,
     comidas,
     comidasHoy: comidas.filter((c) => c.fecha === hoy),
     metricas,
@@ -295,5 +298,33 @@ export async function cargarMente(
     hojas,
     emociones: bienestar.map((b) => ({ fecha: b.fecha, emociones: b.emociones ?? [] })),
     entradaDeHoy: diario.find((e) => e.fecha === hoy) ?? null,
+  };
+}
+
+export interface DatosTiempo {
+  actividades: ActividadTiempo[];
+  cronometro: Cronometro | null;
+  /** Nombre de la actividad que corre ahora, para no volver a buscarla. */
+  enMarcha: string | null;
+}
+
+/**
+ * Actividades y cronometro. Va aparte del panel porque el cronometro cambia
+ * cada segundo y no tiene sentido arrastrarlo en todas las pantallas.
+ */
+export async function cargarTiempo(supabase: SupabaseClient, userId: string): Promise<DatosTiempo> {
+  const [actividades, cronometro] = await Promise.all([
+    supabase.from('actividades_tiempo').select('*').eq('user_id', userId).order('creada')
+      .then((r) => (r.data ?? []) as ActividadTiempo[]),
+    supabase.from('cronometro').select('*').eq('user_id', userId).maybeSingle()
+      .then((r) => (r.data as Cronometro | null) ?? null),
+  ]);
+
+  return {
+    actividades,
+    cronometro,
+    enMarcha: cronometro?.actividad_id
+      ? actividades.find((a) => a.id === cronometro.actividad_id)?.nombre ?? null
+      : null,
   };
 }

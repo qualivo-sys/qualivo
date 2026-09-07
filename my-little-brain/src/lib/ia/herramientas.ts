@@ -128,7 +128,10 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   },
   {
     name: 'registrar_foco',
-    description: 'Apunta tiempo de trabajo profundo, de negocio, de estudio o de lectura.',
+    description:
+      'Apunta un rato dedicado a algo: trabajo profundo, negocio, estudio, lectura, un hobby. '
+      + 'Si menciona a que se lo ha dedicado ("la guitarra", "ingles", "el proyecto X"), pasalo en actividad: '
+      + 'la app la busca entre las suyas y, si no la tiene, la crea.',
     input_schema: {
       type: 'object',
       properties: {
@@ -136,6 +139,7 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
           type: 'string',
           enum: ['deep_work', 'negocio', 'aprendizaje', 'idiomas', 'lectura', 'otro'],
         },
+        actividad: { type: 'string', description: 'A que se lo ha dedicado, con sus palabras: "Guitarra", "Ingles".' },
         minutos: { type: 'number' },
         descripcion: { type: 'string' },
         fecha: FECHA,
@@ -613,11 +617,32 @@ async function despachar(
       const d = z
         .object({
           categoria: z.enum(['deep_work', 'negocio', 'aprendizaje', 'idiomas', 'lectura', 'otro']),
+          actividad: z.string().optional(),
           minutos: num.positive(),
           descripcion: z.string().optional(),
           fecha: fechaOpc,
         })
         .parse(entrada);
+
+      // La actividad se busca por nombre sin distinguir mayusculas ni acentos,
+      // para que "ingles" y "Ingles" no acaben siendo dos cosas distintas.
+      let actividadId: string | null = null;
+      const nombreAct = d.actividad?.trim().slice(0, 40);
+      if (nombreAct) {
+        const { data: suyas } = await supabase
+          .from('actividades_tiempo').select('id, nombre').eq('user_id', userId);
+        const llano = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        const ya = (suyas ?? []).find((a) => llano(a.nombre) === llano(nombreAct));
+        if (ya) {
+          actividadId = ya.id;
+        } else {
+          const { data: creada } = await supabase
+            .from('actividades_tiempo')
+            .insert({ user_id: userId, nombre: nombreAct, categoria: d.categoria })
+            .select('id').maybeSingle();
+          actividadId = creada?.id ?? null;
+        }
+      }
 
       const { error } = await supabase.from('foco').insert({
         user_id: userId,
@@ -625,13 +650,14 @@ async function despachar(
         categoria: d.categoria,
         minutos: Math.round(d.minutos),
         descripcion: d.descripcion ?? null,
+        actividad_id: actividadId,
       });
       if (error) throw error;
 
-      const xp = await otorgarXp(ctx, 'foco', d.descripcion ?? d.categoria);
+      const xp = await otorgarXp(ctx, 'foco', nombreAct ?? d.descripcion ?? d.categoria);
       return {
-        texto: `Apuntados ${Math.round(d.minutos)} min de ${d.categoria.replace('_', ' ')}.`,
-        accion: { herramienta: nombre, resumen: `${Math.round(d.minutos)} min · ${d.categoria.replace('_', ' ')}`, xp },
+        texto: `Apuntados ${Math.round(d.minutos)} min de ${nombreAct ?? d.categoria.replace('_', ' ')}.`,
+        accion: { herramienta: nombre, resumen: `${Math.round(d.minutos)} min · ${nombreAct ?? d.categoria.replace('_', ' ')}`, xp },
       };
     }
 
