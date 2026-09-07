@@ -140,6 +140,18 @@
   <h2>Por procedencia (canal)</h2>
   <table id="tPro"></table>
 
+  <div class="grid2">
+    <div>
+      <h2>Provincias de los leads <span class="sub" id="regWin"></span></h2>
+      <table id="tReg"></table>
+    </div>
+    <div>
+      <h2>Anuncios que mejor rinden <span class="sub" id="adsWin"></span></h2>
+      <table id="tAds"></table>
+    </div>
+  </div>
+  <div class="foot">Provincias y anuncios salen de <b>Meta Ads</b> (últimos 30 días), que reporta los leads por región. Cubre los leads de campañas de Meta; los de web/orgánico no llevan provincia.</div>
+
   <h2>Inversión y rentabilidad</h2>
   <table id="tRent"></table>
   <div class="foot">Inversión Meta en vivo + Google manual · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
@@ -256,8 +268,30 @@ function render(){
   // Por comercial y por procedencia
   breakdown('#tCom','Comercial', rows, 'comercial');
   breakdown('#tPro','Canal', rows, 'procedencia');
+  // Provincias y anuncios (Meta, ventana propia de 30 días)
+  renderMetaExtra();
   // Inversión y rentabilidad (solo rango de fechas)
   renderRent($('#from').value, $('#to').value);
+}
+
+function renderMetaExtra(){
+  const m = DATA.metaExtra || {};
+  const win = (m.since && m.until) ? `(${m.since} → ${m.until})` : '(últimos 30 días)';
+  $('#regWin') && ($('#regWin').textContent = win);
+  $('#adsWin') && ($('#adsWin').textContent = win);
+  // Provincias
+  const reg = m.regions || [];
+  const totL = reg.reduce((a,r)=>a+(r.leads||0),0);
+  const regHead = `<thead><tr><th>Provincia / región</th><th>Leads</th><th>%</th></tr></thead>`;
+  const regBody = reg.length ? reg.slice(0,15).map(r=>`<tr><td>${r.region}</td><td>${fmt(r.leads)}</td><td>${pct(r.leads,totL)}</td></tr>`).join('')
+    : '<tr><td colspan="3">(sin datos de Meta — falta conectar META_TOKEN o no hay leads en la ventana)</td></tr>';
+  $('#tReg').innerHTML = regHead + '<tbody>' + regBody + (reg.length?`<tr class="tot"><td>Total</td><td>${fmt(totL)}</td><td>100%</td></tr>`:'') + '</tbody>';
+  // Anuncios
+  const ads = m.ads || [];
+  const adsHead = `<thead><tr><th>Campaña</th><th>Leads</th><th>Inversión</th><th>CPL</th></tr></thead>`;
+  const adsBody = ads.length ? ads.slice(0,12).map(a=>`<tr><td>${a.name}</td><td>${fmt(a.leads)}</td><td>${eur(a.spend)}</td><td>${a.cpl!=null?eur(a.cpl):'—'}</td></tr>`).join('')
+    : '<tr><td colspan="4">(sin datos de Meta — falta conectar META_TOKEN o no hay campañas activas)</td></tr>';
+  $('#tAds').innerHTML = adsHead + '<tbody>' + adsBody + '</tbody>';
 }
 
 function spendByChannel(from, to){

@@ -99,6 +99,42 @@ async function metaDaily(since, until) {
   return out;
 }
 
+/** Insights de Meta agregados (sin trocear por día). `breakdowns` opcional (p.ej. 'region'). */
+async function metaAgg(level, breakdowns, since, until) {
+  const tok = process.env.META_TOKEN, act = process.env.META_ACT;
+  if (!tok || !act) return [];
+  const ver = process.env.META_API_VERSION || 'v21.0';
+  const p = new URLSearchParams({ fields: 'campaign_name,spend,actions', limit: '500', time_range: JSON.stringify({ since, until }), access_token: tok });
+  if (level) p.set('level', level);
+  if (breakdowns) p.set('breakdowns', breakdowns);
+  let url = `https://graph.facebook.com/${ver}/act_${act}/insights?${p}`;
+  const out = []; let guard = 0;
+  while (url && guard < 20) { const r = await fetch(url); if (!r.ok) break; const d = await r.json(); (d.data || []).forEach((row) => out.push(row)); url = (d.paging && d.paging.next) || null; guard++; }
+  return out;
+}
+
+/** Anuncios (campañas) que mejor rinden + provincias de los leads (Meta), últimos 30 días. */
+async function metaExtras() {
+  const until = new Date().toISOString().slice(0, 10);
+  const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  let ads = [], regions = [];
+  try {
+    const camp = await metaAgg('campaign', null, since, until);
+    const byC = {};
+    camp.forEach((r) => { const n = r.campaign_name || '(sin nombre)'; (byC[n] ??= { spend: 0, leads: 0 }); byC[n].spend += parseFloat(r.spend) || 0; byC[n].leads += metaLeads(r.actions); });
+    ads = Object.entries(byC).map(([name, v]) => ({ name, spend: v.spend, leads: v.leads, cpl: v.leads ? v.spend / v.leads : null }))
+      .sort((a, b) => b.leads - a.leads || a.spend - b.spend);
+  } catch { ads = []; }
+  try {
+    const reg = await metaAgg(null, 'region', since, until);
+    const byR = {};
+    reg.forEach((r) => { const n = r.region || '(desconocida)'; (byR[n] ??= { leads: 0, spend: 0 }); byR[n].leads += metaLeads(r.actions); byR[n].spend += parseFloat(r.spend) || 0; });
+    regions = Object.entries(byR).map(([region, v]) => ({ region, leads: v.leads, spend: v.spend }))
+      .filter((x) => x.leads > 0).sort((a, b) => b.leads - a.leads);
+  } catch { regions = []; }
+  return { since, until, ads, regions };
+}
+
 /** Array de inversión diaria unificada (Meta real + Google repartido por días del mes). */
 async function buildSpend(since, until) {
   const spend = await metaDaily(since, until);
@@ -293,6 +329,10 @@ async function build() {
   let spend = [];
   try { spend = await buildSpend(since, until); } catch { spend = []; }
 
+  // Anuncios que mejor rinden + provincias de los leads (Meta, últimos 30 días)
+  let metaExtra = { since: '', until: '', ads: [], regions: [] };
+  try { metaExtra = await metaExtras(); } catch { /* sin Meta */ }
+
   // Citas (bookings): ventana amplia (incluye futuras). Fuente fiable e histórica de entrevistas.
   let appts = [];
   try {
@@ -315,7 +355,7 @@ async function build() {
     if (gtok) { [seo, ga4, email] = await Promise.all([fetchSEO(gtok), fetchGA4(gtok), fetchEmailKPIs(gtok)]); }
   } catch { /* sin datos de Google */ }
 
-  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, ga4, email };
+  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, ga4, email, metaExtra };
 }
 
 export default async (req) => {
