@@ -74,7 +74,7 @@ const n = (valor: number | null, decimales = 1) =>
   valor === null || !Number.isFinite(valor) ? 'sin datos' : valor.toFixed(decimales);
 
 /** Prompt de la revision: datos duros dentro, narrativa fuera. */
-export function promptRevision(panel: Panel, stats: EstadisticasSemana, dinero?: string | null): string {
+export function promptRevision(panel: Panel, stats: EstadisticasSemana, dinero?: string | null, mente?: string | null): string {
   const correl = correlaciones(panel.dias.slice(-30));
   const detalleDias = stats.dias
     .map(
@@ -84,6 +84,7 @@ export function promptRevision(panel: Panel, stats: EstadisticasSemana, dinero?:
     .join('\n');
 
   const bloqueDinero = dinero ? `\n\nDINERO DE LA SEMANA\n${dinero}` : '';
+  const bloqueMente = mente ? `\n\nESTADO EMOCIONAL\n${mente}` : '';
   return `Semana del ${stats.desde} al ${stats.hasta}.
 
 OBJETIVO DEL USUARIO: ${panel.perfil.objetivo ? ETIQUETA_OBJETIVO[panel.perfil.objetivo] : 'sin definir'}.
@@ -101,7 +102,7 @@ NUMEROS DE LA SEMANA (calculados por la app, no los recalcules)
 - Puntuaciones de la semana: nutricion ${panel.puntuaciones.nutricion ?? '—'}, entrenamiento ${panel.puntuaciones.entrenamiento ?? '—'}, foco ${panel.puntuaciones.foco ?? '—'}, habitos ${panel.puntuaciones.habitos ?? '—'}, mente ${panel.puntuaciones.mente ?? '—'}.
 
 DIA A DIA
-${detalleDias}${bloqueDinero}
+${detalleDias}${bloqueDinero}${bloqueMente}
 
 ${correl.length ? `CORRELACIONES DE LOS ULTIMOS 30 DIAS (r de Pearson)\n${correl.map((c) => `- ${c.variable} vs ${c.contra}: r = ${c.r} (n = ${c.n})`).join('\n')}` : 'Sin correlaciones significativas todavia.'}
 
@@ -111,6 +112,7 @@ Escribe la revision semanal. Reglas:
 - Las acciones para la semana que viene son tres, concretas y medibles.
 - Tono de jefe de operaciones de su vida: directo, sin peloteo, sin frases de coach de Instagram.
 - Si hay datos de dinero, trata el gasto como una decision mas de la semana: no juzgues, senala si le acerca o le aleja de lo que quiere.
+- Si hay estado emocional, no intentes quitarle la emocion: relacionala con lo que hizo esa semana y termina con evidencias reales de progreso, porque la cabeza solo recuerda los problemas.
 
 Responde SOLO con un objeto JSON valido, sin texto alrededor ni bloques de codigo, con estas claves:
 {"titular": "una frase que resuma la semana",

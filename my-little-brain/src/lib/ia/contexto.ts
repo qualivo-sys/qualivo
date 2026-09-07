@@ -12,12 +12,19 @@ const n = (valor: number | null | undefined, decimales = 1) =>
  * Contexto que el coach recibe en cada mensaje. Son datos calculados por la app,
  * no estimaciones del modelo: aqui esta la unica fuente de verdad numerica.
  */
+export interface ContextoMente {
+  hojasAbiertas: { texto: string; tema: string; creada: string }[];
+  emocionesRecientes: string[];
+  patrones: string[];
+  escribioDiarioHoy: boolean;
+}
+
 export interface ContextoFinanzas {
   resumen: ResumenFinanzas;
   ajustes: FinanzasAjustes | null;
 }
 
-export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | null): string {
+export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | null, mente?: ContextoMente | null): string {
   const { perfil, metas, cuerpo, diaHoy, semana, puntuaciones } = panel;
   const l: string[] = [];
 
@@ -163,6 +170,20 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
     if (resumen.gastoImpulsivo > 0) l.push(`- Marcado como impulso este mes: ${eurCoach(resumen.gastoImpulsivo)}.`);
     if (finanzas.ajustes?.ahorro_mes) l.push(`- Quiere ahorrar ${eurCoach(Number(finanzas.ajustes.ahorro_mes))} al mes.`);
     if (finanzas.ajustes?.caja_minima) l.push(`- Caja minima que se ha fijado: ${eurCoach(Number(finanzas.ajustes.caja_minima))}.`);
+  }
+
+  if (mente) {
+    if (mente.emocionesRecientes.length) l.push(`\nEMOCIONES DE ESTOS DIAS\n- ${mente.emocionesRecientes.join(', ')}.`);
+    if (mente.hojasAbiertas.length) {
+      l.push('\nHOJAS DEL ESTANQUE (preocupaciones abiertas)');
+      for (const h of mente.hojasAbiertas.slice(0, 8)) l.push(`- ${h.texto} (${h.tema}, desde el ${h.creada}).`);
+      l.push('- Metafora que usa la app: las emociones son el clima y las preocupaciones son hojas sobre el estanque. No hay que quitarlas a la fuerza.');
+    }
+    if (mente.patrones.length) {
+      l.push('\nPATRONES EMOCIONALES DETECTADOS');
+      for (const p of mente.patrones.slice(0, 4)) l.push(`- ${p}`);
+    }
+    if (!mente.escribioDiarioHoy) l.push('- Hoy todavia no ha escrito el diario.');
   }
 
   return l.join('\n');

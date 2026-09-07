@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { cargarFinanzas, cargarPanel, cargarPerfil } from '@/lib/datos';
+import { cargarFinanzas, cargarMente, cargarPanel, cargarPerfil } from '@/lib/datos';
 import { resumenFinanzas, revisionSemana } from '@/lib/motor/finanzas';
+import { evidenciasSemana, patronesEmocionales, resumenEmocional } from '@/lib/motor/emociones';
 import { inicioSemana, sumarDias } from '@/lib/fechas';
 import { MODELO_REVISION, clienteIA, hayClaveIA, parametrosModelo, textoDe } from '@/lib/ia/cliente';
 import { anotarUso, cuota } from '@/lib/ia/limites';
@@ -57,12 +58,28 @@ export async function POST(peticion: Request) {
   }
 
   try {
-    const respuesta = await clienteIA().beta.messages.create({
+    const datosMente = await cargarMente(supabase, usuario.id, panel.hoy);
+  const domingo = sumarDias(lunes, 6);
+  const emocional = resumenEmocional(panel.dias, datosMente.emociones, datosMente.hojas, lunes, domingo);
+  const evidencias = evidenciasSemana({ dias: panel.dias, diario: datosMente.diario, hojas: datosMente.hojas, desde: lunes, hasta: domingo });
+  const patronesM = patronesEmocionales({ dias: panel.dias, diario: datosMente.diario, hojas: datosMente.hojas, hoy: panel.hoy });
+  const mente = emocional.diasRegistrados || evidencias.length
+    ? [
+        `- Animo medio ${emocional.animoMedio?.toFixed(1) ?? '—'}, energia ${emocional.energiaMedia?.toFixed(1) ?? '—'}, estres ${emocional.estresMedio?.toFixed(1) ?? '—'} (${emocional.diasRegistrados} dias registrados).`,
+        emocional.frecuentes.length ? `- Emociones mas frecuentes: ${emocional.frecuentes.map((f) => `${f.emocion.nombre.toLowerCase()} (${f.veces})`).join(', ')}.` : null,
+        emocional.hojasAbiertas.length ? `- Preocupaciones abiertas: ${emocional.hojasAbiertas.map((h) => h.texto).join('; ')}.` : null,
+        emocional.hojasCerradas.length ? `- Se resolvieron: ${emocional.hojasCerradas.map((h) => `${h.texto}${h.accion ? ` (${h.accion})` : ''}`).join('; ')}.` : null,
+        ...patronesM.slice(0, 3).map((p) => `- Patron: ${p.texto}`),
+        evidencias.length ? `- Evidencias positivas: ${evidencias.join(' | ')}.` : null,
+      ].filter(Boolean).join('\n')
+    : null;
+
+  const respuesta = await clienteIA().beta.messages.create({
       model: MODELO_REVISION,
       max_tokens: 4096,
       ...parametrosModelo(MODELO_REVISION, 'high'),
       system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: promptRevision(panel, stats, dinero) }],
+      messages: [{ role: 'user', content: promptRevision(panel, stats, dinero, mente) }],
     });
 
     if (respuesta.stop_reason === 'refusal') {

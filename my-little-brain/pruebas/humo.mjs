@@ -50,6 +50,8 @@ const llamadas = [
   ['generar_plan_entreno', {}],
   ['cambiar_ejercicio', { ejercicio_actual: 'press de banca', ejercicio_nuevo: 'press de banca con mancuernas' }],
   ['registrar_gasto', { importe: 18, categoria: 'restaurantes', descripcion: 'Menu del mediodia' }],
+  ['anotar_preocupacion', { texto: 'Caja baja este mes' }],
+  ['retirar_preocupacion', { texto: 'Caja baja', accion: 'Cobre la factura del cliente A' }],
   ['consultar_historial', { dias: 14 }],
 ];
 
@@ -358,6 +360,40 @@ check('si va bien, lo dice sin reganar', buenas.every((i) => i.tono !== 'alerta'
 const semanaFin = revisionSemana(movimientos, resFin, '2026-08-31', '2026-09-06');
 check('la revision de la semana cuadra', semanaFin.gastado === 417 && semanaFin.categoriaTop.nombre === 'Restaurantes' && semanaFin.impulsivo === 94 && semanaFin.dentroDePresupuesto === false, JSON.stringify(semanaFin));
 check('la sugerencia apunta a donde se ha salido', /restaurantes/i.test(semanaFin.sugerencia), semanaFin.sugerencia);
+
+// ── 14. Estado emocional: patrones y estanque ──────────────────────────
+const { patronesEmocionales, perfilDeDias, resumenEmocional, evidenciasSemana, temaDe, comparar } = await import(`${L}/motor/emociones.js`);
+const diaMock = (fecha, extra = {}) => ({ fecha, kcal: 2000, proteina: 150, carbos: 200, grasa: 60, alcoholUd: 0, comidas: 3, entreno: false, actividad: false, nombresActividad: [], seriesEntreno: 0, pasos: 6000, gastoKcal: 2400, redondo: false, focoMin: 0, habitosHechos: 0, habitosTotal: 0, animo: 6, energia: 6, estres: 5, suenoHoras: 7, suenoCalidad: 7, peso: null, ...extra });
+// 8 dias entrenando con buen animo, 8 sin entrenar con animo bajo
+const diasMente = [
+  ...Array.from({ length: 8 }, (_, i) => diaMock(`2026-09-${String(i + 1).padStart(2, '0')}`, { entreno: true, animo: 8, estres: 3, focoMin: 90, suenoHoras: 7.5 })),
+  ...Array.from({ length: 8 }, (_, i) => diaMock(`2026-09-${String(i + 9).padStart(2, '0')}`, { entreno: false, animo: 5, estres: 7, focoMin: 0, suenoHoras: 5.5 })),
+];
+const comp = comparar(diasMente, (d) => d.entreno, (d) => d.animo);
+check('compara una metrica entre los dias que cumplen algo y los que no', comp.con === 8 && comp.sin === 5 && comp.cambio === 60, JSON.stringify(comp));
+check('no inventa patrones sin dias suficientes', comparar(diasMente.slice(0, 9), (d) => !d.entreno, (d) => d.animo) === null);
+
+const pat = patronesEmocionales({ dias: diasMente, diario: [{ id: 'd', fecha: '2026-09-01', bien: 'He entrenado', preocupa: null, controlo: null, aprendido: null, agradecido: null }], hojas: [], hoy: '2026-09-16' });
+check('detecta que moverse le sube el animo', pat.some((p) => p.id === 'entreno_animo' && /animo medio es 8/.test(p.texto)), pat.map((p) => p.texto).join(' | '));
+check('detecta que dormir mas le baja el estres', pat.some((p) => p.id === 'sueno_estres' && /estres baja/.test(p.texto)));
+check('los patrones van ordenados por fuerza', pat.length > 1 && pat[0].fuerza >= pat[1].fuerza);
+
+const perfilM = perfilDeDias(diasMente);
+check('sabe que tienen en comun los mejores dias', perfilM.buenos.some((f) => f.id === 'entreno') && perfilM.buenos.some((f) => f.id === 'foco'), JSON.stringify(perfilM.buenos.map((f) => f.id)));
+check('y que falta en los peores', perfilM.malos.length === 0 || perfilM.malos.every((f) => f.diferencia <= -25));
+check('sin dias suficientes no saca conclusiones', perfilDeDias(diasMente.slice(0, 5)) === null);
+
+check('adivina el tema de una preocupacion', temaDe('La caja esta baja y no llega la factura') === 'dinero' && temaDe('Dudas con Isa') === 'relaciones' && temaDe('Me duele el hombro') === 'salud' && temaDe('Cosas raras') === 'otros');
+
+const hojasMock = [
+  { id: 'h1', texto: 'Caja baja', tema: 'dinero', peso: 2, creada: '2026-09-01', cerrada: null, accion: null },
+  { id: 'h2', texto: 'Cliente pendiente', tema: 'trabajo', peso: 2, creada: '2026-09-02', cerrada: '2026-09-10', accion: 'Me contesto' },
+];
+const resM = resumenEmocional(diasMente, [{ fecha: '2026-09-01', emociones: ['motivado', 'tranquilo'] }, { fecha: '2026-09-02', emociones: ['motivado'] }], hojasMock, '2026-09-01', '2026-09-16');
+check('resume animo, emociones frecuentes y estado del estanque', resM.animoMedio === 6.5 && resM.frecuentes[0].emocion.id === 'motivado' && resM.frecuentes[0].veces === 2 && resM.hojasAbiertas.length === 1 && resM.hojasCerradas.length === 1, JSON.stringify({ a: resM.animoMedio, f: resM.frecuentes[0], ab: resM.hojasAbiertas.length }));
+
+const evid = evidenciasSemana({ dias: diasMente, diario: [{ id: 'd', fecha: '2026-09-02', bien: 'Cerre una reunion', preocupa: null, controlo: null, aprendido: null, agradecido: null }], hojas: hojasMock, desde: '2026-09-01', hasta: '2026-09-16' });
+check('las evidencias recogen lo hecho y las hojas que se fueron', evid.some((e) => /8 dias/.test(e)) && evid.some((e) => /Se fue una hoja/.test(e)) && evid.includes('Cerre una reunion'), evid.join(' | '));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

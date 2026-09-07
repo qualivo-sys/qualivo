@@ -6,7 +6,8 @@ import { borrarActividad, registrarActividad } from '@/app/app/acciones';
 import { TIPOS_CARDIO } from '@/lib/motor/cardio';
 import { esActividad } from '@/lib/motor/energia';
 import { insightsFinanzas, resumenFinanzas, revisionSemana } from '@/lib/motor/finanzas';
-import { cargarFinanzas, cargarPanel } from '@/lib/datos';
+import { evidenciasSemana, patronesEmocionales, resumenEmocional } from '@/lib/motor/emociones';
+import { cargarFinanzas, cargarMente, cargarPanel } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import { estadisticasSemana } from '@/lib/ia/revision';
 import { sesionRequerida } from '@/lib/sesion';
@@ -52,6 +53,12 @@ export default async function PaginaSemana() {
     { entrenos: 0, actividades: 0, comido: 0, gastado: 0, pasos: 0, redondos: 0 },
   );
   const LETRAS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+
+  // Semana emocional: como ha ido, que hojas hay y las pruebas de progreso.
+  const mente = await cargarMente(supabase, usuario.id, panel.hoy);
+  const emocional = resumenEmocional(panel.dias, mente.emociones, mente.hojas, semanaActual, panel.hoy);
+  const evidencias = evidenciasSemana({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, desde: semanaActual, hasta: panel.hoy });
+  const patronesMente = patronesEmocionales({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, hoy: panel.hoy }).slice(0, 2);
 
   // Dinero de la semana, si usa el modulo.
   const finanzas = await cargarFinanzas(supabase, usuario.id, panel.hoy);
@@ -154,6 +161,61 @@ export default async function PaginaSemana() {
           </form>
         </details>
       </Tarjeta>
+
+      {(emocional.diasRegistrados > 0 || evidencias.length > 0) && (
+        <Tarjeta>
+          <div className="mb-3 flex items-baseline justify-between">
+            <TituloTarjeta className="mb-0">Tu semana por dentro</TituloTarjeta>
+            <Link href="/app/mente" className="text-sm text-primary underline">Mente</Link>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            {[
+              ['Animo', emocional.animoMedio],
+              ['Energia', emocional.energiaMedia],
+              ['Estres', emocional.estresMedio],
+            ].map(([etiqueta, valor]) => (
+              <div key={etiqueta as string} className="rounded-lg bg-muted/40 p-3">
+                <div className="text-lg font-semibold tabular-nums">{valor === null ? '—' : (valor as number).toFixed(1)}</div>
+                <div className="text-xs text-muted-foreground">{etiqueta as string}</div>
+              </div>
+            ))}
+          </div>
+
+          {emocional.frecuentes.length > 0 && (
+            <p className="mt-3 text-sm">
+              Emociones mas frecuentes:{' '}
+              {emocional.frecuentes.slice(0, 3).map((f) => `${f.emocion.emoji} ${f.emocion.nombre.toLowerCase()}`).join(' · ')}
+            </p>
+          )}
+
+          {emocional.hojasAbiertas.length > 0 && (
+            <p className="mt-2 text-sm text-muted-foreground">
+              🍂 {emocional.hojasAbiertas.length} {emocional.hojasAbiertas.length === 1 ? 'hoja' : 'hojas'} en el estanque:{' '}
+              {emocional.hojasAbiertas.slice(0, 3).map((h) => h.texto).join(' · ')}
+              {emocional.hojasCerradas.length > 0 && ` · ${emocional.hojasCerradas.length} se fueron esta semana`}
+            </p>
+          )}
+
+          {patronesMente.length > 0 && (
+            <ul className="mt-3 space-y-1 border-t border-border pt-3 text-sm text-muted-foreground">
+              {patronesMente.map((p) => (
+                <li key={p.id}>· {p.texto}</li>
+              ))}
+            </ul>
+          )}
+
+          {evidencias.length > 0 && (
+            <div className="mt-3 border-t border-border pt-3">
+              <p className="mb-1 text-sm font-medium">Evidencias de que la semana ha ido a algun sitio</p>
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                {evidencias.slice(0, 5).map((e) => (
+                  <li key={e}>✓ {e}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Tarjeta>
+      )}
 
       {dinero && (
         <Tarjeta>

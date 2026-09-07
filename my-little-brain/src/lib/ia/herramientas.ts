@@ -6,6 +6,7 @@ import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { emparejarEjercicio } from '../motor/ejercicios';
 import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
+import { EMOCIONES, TEMAS as TEMAS_HOJA, temaDe as temaDeTexto } from '../motor/emociones';
 import { alternativas, firmaPerfil, generarPlan, prescripcion } from '../motor/planificador';
 import { ejercicio } from '../motor/ejercicios';
 import type { Bloque, PlanEntreno } from '../motor/tipos-motor';
@@ -155,6 +156,14 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         motivacion: { type: 'number' },
         sueno_horas: { type: 'number' },
         sueno_calidad: { type: 'number' },
+        emociones: {
+          type: 'array',
+          description: 'Hasta 3 emociones predominantes del dia, si las menciona.',
+          items: {
+            type: 'string',
+            enum: ['tranquilo', 'feliz', 'motivado', 'orgulloso', 'agradecido', 'energetico', 'esperanzado', 'estresado', 'ansioso', 'triste', 'frustrado', 'agobiado', 'enfadado', 'solo', 'desmotivado', 'inseguro'],
+          },
+        },
         pasos: { type: 'number' },
         notas: { type: 'string' },
         fecha: FECHA,
@@ -285,6 +294,32 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         todos_los_dias: { type: 'boolean', description: 'true para cambiarlo en todos los dias del plan donde aparezca (por defecto). false para solo el primero.' },
       },
       required: ['ejercicio_actual'],
+    },
+  },
+  {
+    name: 'anotar_preocupacion',
+    description:
+      'Guarda una preocupacion como una "hoja del estanque" cuando el usuario cuente algo que le ronda (dinero, trabajo, relaciones, salud, futuro). Metafora de la app: las emociones son el clima y las preocupaciones son hojas sobre el estanque; no hay que quitarlas a la fuerza.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        texto: { type: 'string', description: 'La preocupacion en una linea, con sus palabras.' },
+        tema: { type: 'string', enum: ['dinero', 'trabajo', 'relaciones', 'salud', 'futuro', 'otros'] },
+      },
+      required: ['texto'],
+    },
+  },
+  {
+    name: 'retirar_preocupacion',
+    description:
+      'Retira una hoja del estanque cuando el usuario diga que algo ya esta resuelto o ya no le preocupa. Apunta que ayudo, aunque sea "se fue con el tiempo".',
+    input_schema: {
+      type: 'object',
+      properties: {
+        texto: { type: 'string', description: 'La preocupacion que ya no esta (basta con parte del texto).' },
+        accion: { type: 'string', description: 'Que ayudo a retirarla.' },
+      },
+      required: ['texto'],
     },
   },
   {
@@ -581,6 +616,7 @@ async function despachar(
     case 'registrar_bienestar': {
       const d = z
         .object({
+          emociones: z.array(z.string()).optional(),
           animo: num.optional(),
           energia: num.optional(),
           estres: num.optional(),
@@ -618,6 +654,9 @@ async function despachar(
         sueno_calidad: escala(d.sueno_calidad) ?? previo?.sueno_calidad ?? null,
         pasos: d.pasos ? Math.round(d.pasos) : previo?.pasos ?? null,
         notas: d.notas ?? previo?.notas ?? null,
+        emociones: d.emociones?.length
+          ? d.emociones.filter((e) => EMOCIONES.some((x) => x.id === e)).slice(0, 3)
+          : previo?.emociones ?? [],
       };
       const { error } = await supabase.from('bienestar').upsert(fila, { onConflict: 'user_id,fecha' });
       if (error) throw error;
@@ -900,6 +939,47 @@ async function despachar(
       return {
         texto: `Cambiado ${actual.nombre} por ${nuevoNombre} en ${dias}.${otras.length ? ` Otras opciones si no le convence: ${otras.join(', ')}.` : ''}`,
         accion: { herramienta: nombre, resumen: `${actual.nombre} → ${nuevoNombre}` },
+      };
+    }
+
+    case 'anotar_preocupacion': {
+      const d = z.object({ texto: z.string().min(1), tema: z.string().optional() }).parse(entrada);
+      const { data: abiertas } = await supabase.from('hojas').select('texto').eq('user_id', userId).is('cerrada', null);
+      if ((abiertas ?? []).some((h) => (h.texto as string).toLowerCase() === d.texto.trim().toLowerCase())) {
+        return { texto: 'Esa hoja ya estaba en el estanque.', accion: null };
+      }
+      const { error } = await supabase.from('hojas').insert({
+        user_id: userId,
+        texto: d.texto.trim().slice(0, 160),
+        tema: TEMAS_HOJA.some((t) => t.id === d.tema) ? d.tema : temaDeTexto(d.texto),
+        creada: ctx.hoy,
+      });
+      if (error) throw error;
+      return {
+        texto: `Hoja anotada en el estanque: "${d.texto.trim()}".`,
+        accion: { herramienta: nombre, resumen: `hoja · ${d.texto.trim().slice(0, 40)}` },
+      };
+    }
+
+    case 'retirar_preocupacion': {
+      const d = z.object({ texto: z.string().min(1), accion: z.string().optional() }).parse(entrada);
+      const { data: abiertas } = await supabase.from('hojas').select('id, texto').eq('user_id', userId).is('cerrada', null);
+      const buscado = d.texto.trim().toLowerCase();
+      const hoja = (abiertas ?? []).find(
+        (h) => (h.texto as string).toLowerCase().includes(buscado) || buscado.includes((h.texto as string).toLowerCase()),
+      );
+      if (!hoja) {
+        return { texto: `No encuentro esa hoja abierta. Las que hay: ${(abiertas ?? []).map((h) => h.texto).join('; ') || 'ninguna'}.`, accion: null };
+      }
+      const { error } = await supabase
+        .from('hojas')
+        .update({ cerrada: ctx.hoy, accion: d.accion?.slice(0, 200) ?? null })
+        .eq('id', hoja.id)
+        .eq('user_id', userId);
+      if (error) throw error;
+      return {
+        texto: `Hoja retirada: "${hoja.texto}"${d.accion ? ` (${d.accion})` : ''}.`,
+        accion: { herramienta: nombre, resumen: `hoja retirada · ${String(hoja.texto).slice(0, 40)}` },
       };
     }
 

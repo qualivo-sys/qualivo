@@ -12,6 +12,7 @@ export async function comprobarEsquema(supabase: SupabaseClient): Promise<string
     { nombre: 'objetivos manuales en perfiles', consulta: () => supabase.from('perfiles').select('objetivos_manual').limit(1) },
     { nombre: 'tabla push_suscripciones', consulta: () => supabase.from('push_suscripciones').select('id').limit(1) },
     { nombre: 'tablas de finanzas', consulta: () => supabase.from('finanzas_movimientos').select('id').limit(1) },
+    { nombre: 'diario y hojas del estanque', consulta: () => supabase.from('hojas').select('id').limit(1) },
   ];
   for (const prueba of pruebas) {
     const { error } = await prueba.consulta();

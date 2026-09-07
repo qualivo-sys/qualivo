@@ -4,6 +4,12 @@ function coincide(fila, filtros) {
     if (tipo === 'eq') return String(fila[campo]) === String(valor);
     if (tipo === 'gte') return String(fila[campo]) >= String(valor);
     if (tipo === 'in') return valor.map(String).includes(String(fila[campo]));
+    if (tipo === 'is') return valor === null ? fila[campo] === null || fila[campo] === undefined : fila[campo] === valor;
+    if (tipo === 'not') {
+      const [operador, esperado] = valor;
+      if (operador === 'is') return esperado === null ? fila[campo] !== null && fila[campo] !== undefined : fila[campo] !== esperado;
+      return String(fila[campo]) !== String(esperado);
+    }
     return true;
   });
 }
@@ -19,6 +25,8 @@ class Consulta {
   eq(campo, valor) { this.filtros.push(['eq', campo, valor]); return this; }
   gte(campo, valor) { this.filtros.push(['gte', campo, valor]); return this; }
   in(campo, valores) { this.filtros.push(['in', campo, valores]); return this; }
+  is(campo, valor) { this.filtros.push(['is', campo, valor]); return this; }
+  not(campo, operador, valor) { this.filtros.push(['not', campo, [operador, valor]]); return this; }
   order(campo, opciones = {}) { this._orden = [campo, opciones.ascending !== false]; return this; }
   limit(n) { this._limite = n; return this; }
   single() { this._single = 'single'; return this; }

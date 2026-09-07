@@ -155,6 +155,29 @@ export interface HabitoRegistro {
   hecho: boolean;
 }
 
+export interface EntradaDiario {
+  id: string;
+  fecha: string;
+  bien: string | null;
+  preocupa: string | null;
+  controlo: string | null;
+  aprendido: string | null;
+  agradecido: string | null;
+}
+
+export type TemaHoja = 'dinero' | 'trabajo' | 'relaciones' | 'salud' | 'futuro' | 'otros';
+
+/** Una preocupacion: se posa en el estanque y algun dia se retira. */
+export interface Hoja {
+  id: string;
+  texto: string;
+  tema: TemaHoja;
+  peso: number;
+  creada: string;
+  cerrada: string | null;
+  accion: string | null;
+}
+
 export interface Bienestar {
   id: string;
   fecha: string;
@@ -167,6 +190,8 @@ export interface Bienestar {
   sueno_calidad: number | null;
   pasos: number | null;
   notas: string | null;
+  /** Hasta tres emociones predominantes del dia. */
+  emociones?: string[];
 }
 
 export interface ObjetivoRegistro {

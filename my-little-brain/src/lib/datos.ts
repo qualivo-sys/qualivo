@@ -14,8 +14,8 @@ import {
 } from './motor/puntuaciones';
 import { tmbDe, metasNutricion } from './perfil';
 import type {
-  Bienestar, Comida, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
-  IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil, Presupuesto,
+  Bienestar, Comida, EntradaDiario, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
+  Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil, Presupuesto,
   RecuerdoCoach, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
@@ -259,5 +259,37 @@ export async function cargarFinanzas(
     presupuestos,
     movimientos,
     activo: Boolean(ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length),
+  };
+}
+
+export interface DatosMente {
+  diario: EntradaDiario[];
+  hojas: Hoja[];
+  /** Emociones marcadas por dia, para los patrones y el resumen. */
+  emociones: { fecha: string; emociones: string[] }[];
+  entradaDeHoy: EntradaDiario | null;
+}
+
+/** Diario guiado, hojas del estanque y emociones de los ultimos meses. */
+export async function cargarMente(
+  supabase: SupabaseClient,
+  userId: string,
+  hoy: string,
+): Promise<DatosMente> {
+  const desde = sumarDias(hoy, -90);
+  const [diario, hojas, bienestar] = await Promise.all([
+    supabase.from('diario').select('*').eq('user_id', userId).gte('fecha', desde).order('fecha', { ascending: false })
+      .then((r) => (r.data ?? []) as EntradaDiario[]),
+    supabase.from('hojas').select('*').eq('user_id', userId).order('creada', { ascending: false })
+      .then((r) => (r.data ?? []) as Hoja[]),
+    supabase.from('bienestar').select('fecha, emociones').eq('user_id', userId).gte('fecha', desde)
+      .then((r) => (r.data ?? []) as { fecha: string; emociones: string[] | null }[]),
+  ]);
+
+  return {
+    diario,
+    hojas,
+    emociones: bienestar.map((b) => ({ fecha: b.fecha, emociones: b.emociones ?? [] })),
+    entradaDeHoy: diario.find((e) => e.fecha === hoy) ?? null,
   };
 }

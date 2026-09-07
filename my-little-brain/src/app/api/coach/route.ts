@@ -3,8 +3,9 @@ import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
 import { MODELO, clienteIA, hayClaveIA, parametrosModelo } from '@/lib/ia/cliente';
 import { construirContexto } from '@/lib/ia/contexto';
-import { cargarFinanzas } from '@/lib/datos';
+import { cargarFinanzas, cargarMente } from '@/lib/datos';
 import { resumenFinanzas } from '@/lib/motor/finanzas';
+import { emocion, patronesEmocionales } from '@/lib/motor/emociones';
 import { HERRAMIENTAS, ejecutarHerramienta } from '@/lib/ia/herramientas';
 import { anotarUso, cuota } from '@/lib/ia/limites';
 import { PROMPT_COACH, PROMPT_ONBOARDING } from '@/lib/ia/prompt';
@@ -75,11 +76,20 @@ export async function POST(peticion: Request) {
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   // El coach tambien lleva el dinero, si la persona usa ese modulo.
   const finanzas = await cargarFinanzas(supabase, usuario.id, panel.hoy);
+  const mente = await cargarMente(supabase, usuario.id, panel.hoy);
   const contexto = construirContexto(
     panel,
     finanzas.activo
       ? { resumen: resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy }), ajustes: finanzas.ajustes }
       : null,
+    {
+      hojasAbiertas: mente.hojas.filter((h) => !h.cerrada).map((h) => ({ texto: h.texto, tema: h.tema, creada: h.creada })),
+      emocionesRecientes: [
+        ...new Set(mente.emociones.filter((e) => e.fecha >= panel.dias[panel.dias.length - 7]?.fecha).flatMap((e) => e.emociones)),
+      ].map((id) => emocion(id).nombre.toLowerCase()),
+      patrones: patronesEmocionales({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, hoy: panel.hoy }).map((p) => p.texto),
+      escribioDiarioHoy: Boolean(mente.entradaDeHoy),
+    },
   );
 
   const { data: historial } = await supabase

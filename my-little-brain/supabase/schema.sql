@@ -259,6 +259,42 @@ create table if not exists public.memoria (
   unique (user_id, clave)
 );
 
+
+-- ── Estado emocional: diario guiado y hojas del estanque ───────────────
+-- Las emociones del dia van con el resto del bienestar.
+alter table public.bienestar add column if not exists emociones text[] not null default '{}';
+
+create table if not exists public.diario (
+  id         uuid primary key default gen_random_uuid(),
+  user_id    uuid not null references auth.users on delete cascade,
+  fecha      date not null,
+  bien       text,
+  preocupa   text,
+  controlo   text,
+  aprendido  text,
+  agradecido text,
+  creado     timestamptz not null default now(),
+  actualizado timestamptz not null default now(),
+  unique (user_id, fecha)
+);
+create index if not exists diario_user_fecha on public.diario (user_id, fecha desc);
+
+-- Cada preocupacion es una hoja sobre el estanque: se posa, y tarde o
+-- temprano se va. Guardar que la retiro es lo que ensena a la persona.
+create table if not exists public.hojas (
+  id       uuid primary key default gen_random_uuid(),
+  user_id  uuid not null references auth.users on delete cascade,
+  texto    text not null,
+  tema     text not null default 'otros'
+           check (tema in ('dinero','trabajo','relaciones','salud','futuro','otros')),
+  peso     int not null default 2 check (peso between 1 and 3),
+  creada   date not null,
+  cerrada  date,
+  accion   text,
+  creado   timestamptz not null default now()
+);
+create index if not exists hojas_user_estado on public.hojas (user_id, cerrada, creada desc);
+
 -- ── Chat con el coach ──────────────────────────────────────────────────
 create table if not exists public.chat_mensajes (
   id      uuid primary key default gen_random_uuid(),
@@ -343,7 +379,8 @@ begin
     'perfiles','metricas_corporales','comidas','planes_entreno','entrenamientos','series',
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
     'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
-    'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos'
+    'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos',
+    'diario','hojas'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);

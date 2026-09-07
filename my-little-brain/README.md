@@ -22,7 +22,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Cuerpo** | Peso, perimetros, grasa corporal (US Navy), IMC, tendencia real de peso y objetivos de calorias y macros que se recalculan solos. |
 | **Entrenamiento** | Plan generado a medida (dias disponibles, material, nivel, lesiones, sexo: las mujeres reciben por defecto un reparto con mas pierna y gluteo), registro serie a serie y progresion doble de cargas. El coach cambia cualquier ejercicio por otro del mismo patron (`cambiar_ejercicio`) cuando no sale, molesta o no hay maquina. |
 | **Foco** | Trabajo profundo, negocio, aprendizaje, idiomas y lectura. |
-| **Mente** | Sueno, animo, energia, estres y motivacion. |
+| **Mente** | Check-in emocional de un minuto (animo, energia, estres y hasta 3 emociones), diario guiado de cinco preguntas, hojas del estanque (cada preocupacion se posa y se retira apuntando que ayudo), patrones que cruzan animo con lo que haces, perfil de tus mejores y peores dias, y evidencias positivas de la semana. Motor en `src/lib/motor/emociones.ts`. |
 | **Habitos** | Habitos con objetivo semanal, rachas, XP y niveles. |
 | **Revision semanal** | El informe de los domingos: puntuaciones, patrones, cuello de botella y tres acciones para la semana siguiente. Se genera sola cada domingo para los usuarios Pro. |
 | **Check-in diario** | Manana (sueno, animo, energia, peso) y noche (foco, pasos, notas), en dos formularios de diez segundos. |
