@@ -143,7 +143,8 @@ export default async function PaginaTiempo() {
             })}
           </ul>
           <p className="mt-4 border-t border-border pt-3 text-sm tabular-nums">
-            Total: <strong>{hm(resumen.minutos)}</strong> en {resumen.sesiones} ratos y {resumen.diasActivos}{' '}
+            Total: <strong>{hm(resumen.minutos)}</strong> en {resumen.sesiones}{' '}
+            {resumen.sesiones === 1 ? 'rato' : 'ratos'} y {resumen.diasActivos}{' '}
             {resumen.diasActivos === 1 ? 'dia' : 'dias'}.
           </p>
         </Tarjeta>

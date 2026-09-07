@@ -249,7 +249,7 @@ export default async function PanelHoy() {
         >
           <span className="flex items-center gap-2">
             <Timer size={16} className="text-[hsl(var(--area-foco))]" />
-            <CronometroEnMarcha cronometro={tiempo.cronometro} nombre={tiempo.enMarcha} />
+            <CronometroEnMarcha cronometro={tiempo.cronometro} segundosIniciales={tiempo.segundos} nombre={tiempo.enMarcha} />
           </span>
           <ArrowRight size={15} />
         </Link>

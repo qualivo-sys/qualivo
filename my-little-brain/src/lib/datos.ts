@@ -19,7 +19,7 @@ import type {
   Presupuesto, RecuerdoCoach, Sobre, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
-import type { Cronometro } from './motor/tiempo';
+import { segundosDelCronometro, type Cronometro } from './motor/tiempo';
 
 export interface Panel {
   perfil: Perfil;
@@ -304,6 +304,13 @@ export async function cargarMente(
 export interface DatosTiempo {
   actividades: ActividadTiempo[];
   cronometro: Cronometro | null;
+  /**
+   * Segundos calculados en el servidor. El cliente pinta este numero en el
+   * primer render para que coincida con el HTML que llego, y solo despues
+   * empieza a recalcular con su propio reloj. Sin esto React se queja de que
+   * el servidor y el navegador no dicen lo mismo, porque no pueden decirlo.
+   */
+  segundos: number;
   /** Nombre de la actividad que corre ahora, para no volver a buscarla. */
   enMarcha: string | null;
 }
@@ -323,6 +330,7 @@ export async function cargarTiempo(supabase: SupabaseClient, userId: string): Pr
   return {
     actividades,
     cronometro,
+    segundos: segundosDelCronometro(cronometro),
     enMarcha: cronometro?.actividad_id
       ? actividades.find((a) => a.id === cronometro.actividad_id)?.nombre ?? null
       : null,

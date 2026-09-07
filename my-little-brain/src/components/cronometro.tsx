@@ -21,24 +21,30 @@ import { cn } from '@/lib/utils';
  */
 export default function CronometroFoco({
   cronometro,
+  segundosIniciales,
   actividades,
   nombreActividad,
 }: {
   cronometro: Cronometro | null;
+  segundosIniciales: number;
   actividades: ActividadTiempo[];
   nombreActividad: string | null;
 }) {
   const [pendiente, iniciar] = useTransition();
-  const [segundos, setSegundos] = useState(() => segundosDelCronometro(cronometro));
+  const [segundos, setSegundos] = useState(segundosIniciales);
   const [descripcion, setDescripcion] = useState('');
-  const corriendo = Boolean(cronometro?.inicio);
+  const inicio = cronometro?.inicio ?? null;
+  const acumulado = cronometro?.acumulado_seg ?? 0;
+  const corriendo = Boolean(inicio);
 
   useEffect(() => {
-    setSegundos(segundosDelCronometro(cronometro));
-    if (!cronometro?.inicio) return;
-    const id = setInterval(() => setSegundos(segundosDelCronometro(cronometro)), 1000);
+    const leer = () =>
+      setSegundos(segundosDelCronometro({ actividad_id: null, descripcion: null, inicio, acumulado_seg: acumulado }));
+    leer();
+    if (!inicio) return;
+    const id = setInterval(leer, 1000);
     return () => clearInterval(id);
-  }, [cronometro]);
+  }, [inicio, acumulado]);
 
   const accion = (fn: () => Promise<void>) => iniciar(() => fn());
 
@@ -118,19 +124,30 @@ export default function CronometroFoco({
 }
 
 /** Aviso pequeno para el resto de la app: "tienes algo contando". */
-export function CronometroEnMarcha({ cronometro, nombre }: { cronometro: Cronometro; nombre: string | null }) {
-  const [segundos, setSegundos] = useState(() => segundosDelCronometro(cronometro));
+export function CronometroEnMarcha({
+  cronometro,
+  segundosIniciales,
+  nombre,
+}: {
+  cronometro: Cronometro;
+  segundosIniciales: number;
+  nombre: string | null;
+}) {
+  const [segundos, setSegundos] = useState(segundosIniciales);
+  const { inicio, acumulado_seg: acumulado } = cronometro;
 
   useEffect(() => {
-    if (!cronometro.inicio) return;
-    const id = setInterval(() => setSegundos(segundosDelCronometro(cronometro)), 1000);
+    const leer = () => setSegundos(segundosDelCronometro({ actividad_id: null, descripcion: null, inicio, acumulado_seg: acumulado }));
+    leer();
+    if (!inicio) return;
+    const id = setInterval(leer, 1000);
     return () => clearInterval(id);
-  }, [cronometro]);
+  }, [inicio, acumulado]);
 
   return (
     <span className="tabular-nums">
       {nombre ?? 'En marcha'} · {reloj(segundos)}
-      {!cronometro.inicio && ' (en pausa)'}
+      {!inicio && ' (en pausa)'}
     </span>
   );
 }

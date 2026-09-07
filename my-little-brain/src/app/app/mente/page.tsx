@@ -101,6 +101,7 @@ export default async function PaginaMente() {
         </div>
         <CronometroFoco
           cronometro={tiempo.cronometro}
+          segundosIniciales={tiempo.segundos}
           actividades={tiempo.actividades.filter((a) => !a.archivada)}
           nombreActividad={tiempo.enMarcha}
         />
