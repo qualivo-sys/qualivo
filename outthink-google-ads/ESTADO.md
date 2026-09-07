@@ -507,3 +507,18 @@ Aplicado:
 Vigilar: CPC de Search los dos primeros días de Smart Bidding (hoy ya 2,07 € de media);
 si el volumen cae más del 40 % sin registros, subir CPA objetivo a 40 €. PMax: si el
 miércoles sigue sin registro desde el viernes, pausar y pasar los 15 € a Search.
+
+### 07-09, tarde — todo el presupuesto a Search (decisión de Maikel)
+- **PMax pausada** (2 reg. / 140 €). Search **85,23 €/día** = restante 1.449 € / 17 días.
+  Únicas activas: Search. DG Prospecting, DG Remarketing y PMax pausadas.
+- Ranking de keywords por registros (31-08 → 07-09): `evento ia madrid` amplia 3 reg. / 74,6 €
+  (CPL 25); `eventos ia 2026` amplia 2 / 13,2 € (CPL 6,6); `evento inteligencia artificial
+  madrid` frase 1 / 18,8 €; `ai act` amplia 1 / 18,4 €; `congreso ia madrid` frase 1 / 6,4 €.
+  Sin registro con gasto: `congreso inteligencia artificial` amplia 45 €, `reglamento ia` 16,8 €,
+  `normativa europea ia` 16 €, `reglamento europeo inteligencia artificial` 15 €, `gobernanza ia` 14 €,
+  `conferencia ia españa` 13,8 €.
+- Términos que registraron: «congreso ia madrid», «eventos ia madrid», «convenciones en madrid»,
+  «web summit 2026», «eu ai act».
+- **`ai act` amplia reactivada** (la pausé el viernes con 0; ya tiene 1 registro a 18 €).
+- 7 frases nuevas en EventosIA: eventos ia madrid · evento ia 2026 · congreso ia 2026 · foro ia
+  madrid · evento ia septiembre · jornada ia madrid · eventos inteligencia artificial 2026.
