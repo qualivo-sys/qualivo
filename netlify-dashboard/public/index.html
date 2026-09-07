@@ -65,6 +65,9 @@
   .pill{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
   .err{color:var(--critical);margin-top:10px}
   .foot{color:var(--text-muted);font-size:11px;margin-top:26px}
+  .tabs{display:flex;gap:4px;margin:16px 0 6px;border-bottom:1px solid var(--border)}
+  .tab{border:0;border-radius:0;background:none;padding:9px 16px;font-weight:600;color:var(--text-secondary);border-bottom:2px solid transparent}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -83,6 +86,13 @@
     <div class="sub">Fuente: GoHighLevel (en vivo) · <span id="updated"></span> · <button onclick="reload()" style="padding:3px 8px;font-size:12px">↻ Refrescar</button></div>
   </header>
 
+  <div class="tabs">
+    <button class="tab active" data-view="comercial" onclick="showView('comercial')">Comercial</button>
+    <button class="tab" data-view="seo" onclick="showView('seo')">SEO</button>
+    <button class="tab" data-view="email" onclick="showView('email')">Email</button>
+  </div>
+
+  <div id="view-comercial">
   <div class="filters card" style="padding:12px">
     <label>Desde<input id="from" type="date"></label>
     <label>Hasta<input id="to" type="date"></label>
@@ -133,6 +143,19 @@
   <div class="foot">Inversión Meta en vivo + Google manual · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
 
   <div class="foot">Entrevista = "Propuesta enviada" o posterior · Matrícula = "Alumna activa" · Contactado = etapa "Leads llamados" o posterior. Una sola fuente de verdad: todos ven los mismos números para el mismo periodo.</div>
+  </div><!-- /view-comercial -->
+
+  <div id="view-seo" hidden>
+    <h2>SEO · Tráfico y posiciones (Search Console)</h2>
+    <div id="seoBody"></div>
+    <div class="foot">Datos en vivo de Google Search Console para el dominio completo (incluye el blog). Google publica los datos con ~2 días de retraso.</div>
+  </div>
+
+  <div id="view-email" hidden>
+    <h2>Email · Secuencia de bienvenida</h2>
+    <div id="emailBody"></div>
+    <div class="foot">GoHighLevel no expone las aperturas/clics por API, así que este resumen se rellena a mano en la pestaña "Email KPIs" del Google Sheet y se muestra aquí.</div>
+  </div>
 </div>
 
 <script>
@@ -157,6 +180,7 @@ async function load(){
     $('#gate').hidden = true; $('#app').hidden = false;
     $('#updated').textContent = 'Actualizado ' + new Date(DATA.generatedAt).toLocaleString('es-ES');
     initFilters(); if(!$('#from').value) quick('mtd'); else render();
+    renderSEO(); renderEmail();
   }catch(e){ ($('#app').hidden ? $('#gateErr') : $('#err')).textContent = 'Error: ' + e.message; }
 }
 
@@ -330,6 +354,42 @@ function renderWeekly(rows){
   const t = agg(rows);
   const foot = `<tr class="tot"><td>Total</td><td>${fmt(t.leads)}</td><td>${fmt(t.cont)}</td><td>${fmt(t.entr)}</td><td>${fmt(t.matr)}</td><td>${pct(t.matr,t.entr)}</td></tr>`;
   $('#tSemana').innerHTML = head + '<tbody>' + body + foot + '</tbody>';
+}
+
+function showView(v){
+  ['comercial','seo','email'].forEach(x => { const el = $('#view-'+x); if(el) el.hidden = (x!==v); });
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.view===v));
+}
+
+function renderSEO(){
+  const s = DATA.seo, box = $('#seoBody');
+  if(!s){ box.innerHTML = '<div class="foot">Search Console aún no está conectado a este panel. Falta añadir la credencial de Google (variable <b>GOOGLE_SA_B64</b>) en Netlify.</div>'; return; }
+  const kpis = [
+    ['Clics (28 d)', fmt(s.totals.clicks)],
+    ['Impresiones', fmt(s.totals.impressions)],
+    ['CTR medio', s.totals.ctr + '%'],
+    ['Posición media', s.totals.position || '—'],
+  ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
+  const qBody = s.queries.length ? s.queries.map(r => `<tr><td>${r.q}</td><td>${fmt(r.clicks)}</td><td>${fmt(r.impressions)}</td><td>${r.ctr}%</td><td>${r.position}</td></tr>`).join('') : '<tr><td colspan="5">(sin datos todavía — dominio nuevo)</td></tr>';
+  const pBody = s.pages.length ? s.pages.map(r => `<tr><td>${(r.url||'').replace('https://','')}</td><td>${fmt(r.clicks)}</td><td>${fmt(r.impressions)}</td><td>${r.position}</td></tr>`).join('') : '<tr><td colspan="4">(sin datos todavía)</td></tr>';
+  box.innerHTML = `
+    <div class="sub" style="margin:2px 0 12px">Search Console · ${s.start} → ${s.end}</div>
+    <div class="kpis">${kpis}</div>
+    <h2>Top consultas (posición en Google)</h2>
+    <table><thead><tr><th>Consulta</th><th>Clics</th><th>Impres.</th><th>CTR</th><th>Pos.</th></tr></thead><tbody>${qBody}</tbody></table>
+    <h2>Top páginas</h2>
+    <table><thead><tr><th>Página</th><th>Clics</th><th>Impres.</th><th>Pos.</th></tr></thead><tbody>${pBody}</tbody></table>`;
+}
+
+function renderEmail(){
+  const e = DATA.email, box = $('#emailBody');
+  if(!e || !e.rows || !e.rows.length){
+    box.innerHTML = '<div class="foot">Aún no hay datos. Rellena la pestaña <b>"Email KPIs"</b> del Google Sheet (p. ej. columnas: Semana · Enviados · Aperturas % · Clics % · Respuestas · Llamadas · Notas) y aparecerá aquí.' + (!e ? ' <b>Falta añadir la credencial de Google (GOOGLE_SA_B64) en Netlify.</b>' : '') + '</div>';
+    return;
+  }
+  const head = '<thead><tr>' + e.header.map(h => `<th>${h}</th>`).join('') + '</tr></thead>';
+  const body = e.rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('');
+  box.innerHTML = `<div class="sub" style="margin:2px 0 12px">Resumen manual · se edita en la pestaña "Email KPIs" del Sheet.</div><table>${head}<tbody>${body}</tbody></table>`;
 }
 
 // Auto-login si ya hay contraseña en la sesión

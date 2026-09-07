@@ -7,6 +7,8 @@
  * viven en variables de entorno de Netlify, nunca se envían al navegador.
  * Caché en memoria de 2 min para no golpear GHL en cada visita.
  */
+import crypto from 'node:crypto';
+
 const GHL = 'https://services.leadconnectorhq.com';
 const TTL = 120000; // 2 minutos
 let CACHE = { at: 0, data: null };
@@ -135,6 +137,73 @@ async function fetchAppointments(since, until) {
   return out;
 }
 
+/* ---------- Google: Search Console (SEO) + Sheet (KPIs email) ---------- */
+const b64url = (b) => Buffer.from(b).toString('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+
+/** Token de service account (JWT RS256 firmado con crypto nativo). Lee GOOGLE_SA_B64. */
+async function googleToken(scopes) {
+  const raw = process.env.GOOGLE_SA_B64;
+  if (!raw) return null;
+  let sa;
+  try { sa = JSON.parse(Buffer.from(raw, 'base64').toString('utf8')); } catch { return null; }
+  const now = Math.floor(Date.now() / 1000);
+  const head = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const claim = b64url(JSON.stringify({ iss: sa.client_email, scope: scopes.join(' '), aud: sa.token_uri, iat: now, exp: now + 3600 }));
+  let sig;
+  try { const s = crypto.createSign('RSA-SHA256'); s.update(head + '.' + claim); sig = b64url(s.sign(sa.private_key)); }
+  catch { return null; }
+  try {
+    const r = await fetch(sa.token_uri, {
+      method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion: `${head}.${claim}.${sig}` })
+    });
+    if (!r.ok) return null;
+    return (await r.json()).access_token || null;
+  } catch { return null; }
+}
+
+/** Search Console: totales + top consultas + top páginas (últimos ~28 días). */
+async function fetchSEO(token) {
+  if (!token) return null;
+  const site = 'sc-domain:' + (process.env.GSC_DOMAIN || 'elevanails.es');
+  const end = new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);   // GSC va ~2 días retrasado
+  const start = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const base = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`;
+  const q = async (body) => {
+    try { const r = await fetch(base, { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify(body) }); return r.ok ? r.json() : { rows: [] }; }
+    catch { return { rows: [] }; }
+  };
+  const [tot, queries, pages] = await Promise.all([
+    q({ startDate: start, endDate: end }),
+    q({ startDate: start, endDate: end, dimensions: ['query'], rowLimit: 25 }),
+    q({ startDate: start, endDate: end, dimensions: ['page'], rowLimit: 25 })
+  ]);
+  const t = (tot.rows && tot.rows[0]) || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  const r1 = (n) => Math.round((n || 0) * 10) / 10;
+  return {
+    start, end,
+    totals: { clicks: t.clicks || 0, impressions: t.impressions || 0, ctr: r1((t.ctr || 0) * 100), position: r1(t.position) },
+    queries: (queries.rows || []).map((r) => ({ q: r.keys[0], clicks: r.clicks, impressions: r.impressions, ctr: r1((r.ctr || 0) * 100), position: r1(r.position) })),
+    pages: (pages.rows || []).map((r) => ({ url: r.keys[0], clicks: r.clicks, impressions: r.impressions, position: r1(r.position) }))
+  };
+}
+
+/** KPIs de email (resumen manual) desde la pestaña "Email KPIs" del Sheet SEO. */
+async function fetchEmailKPIs(token) {
+  const sheet = process.env.SEO_SHEET_ID;
+  if (!token || !sheet) return null;
+  const rng = encodeURIComponent('Email KPIs!A1:G60');
+  try {
+    const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheet}/values/${rng}`, { headers: { Authorization: 'Bearer ' + token } });
+    if (!r.ok) return null;
+    const vals = (await r.json()).values || [];
+    if (vals.length < 2) return { header: [], rows: [] };
+    const header = vals[0];
+    const rows = vals.slice(1).filter((x) => x.length && x[0]).map((x) => header.map((_, i) => x[i] || ''));
+    return { header, rows };
+  } catch { return null; }
+}
+
 async function build() {
   const loc = process.env.GHL_LOCATION_ID;
 
@@ -211,7 +280,17 @@ async function build() {
     }));
   } catch { appts = []; }
 
-  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows };
+  // SEO (Search Console) + KPIs de email (Sheet). Degradan a null si no hay credencial.
+  let seo = null, email = null;
+  try {
+    const gtok = await googleToken([
+      'https://www.googleapis.com/auth/webmasters.readonly',
+      'https://www.googleapis.com/auth/spreadsheets.readonly'
+    ]);
+    if (gtok) { [seo, email] = await Promise.all([fetchSEO(gtok), fetchEmailKPIs(gtok)]); }
+  } catch { /* sin datos de Google */ }
+
+  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, email };
 }
 
 export default async (req) => {
