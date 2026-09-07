@@ -46,7 +46,8 @@ export function mesAnteriorA(mes: string): string {
 
 export function nombreMes(mes: string): string {
   const [anio, m] = mes.split('-').map(Number);
-  return new Date(anio, m - 1, 1).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const texto = new Date(anio, m - 1, 1).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
 export type EstadoCategoria = 'bien' | 'cerca' | 'pasado';
@@ -78,6 +79,8 @@ export interface ResumenFinanzas {
   presupuestoTotal: number;
   /** Gasto estimado a fin de mes si sigue este ritmo. */
   proyeccion: number;
+  /** Falso cuando hay tan pocos apuntes que proyectar seria adivinar. */
+  proyeccionFiable: boolean;
   /** Porcentaje de categorias con presupuesto que no se han pasado. */
   cumplimiento: number | null;
   categorias: LineaCategoria[];
@@ -154,6 +157,8 @@ export function resumenFinanzas(datos: {
     .sort((a, b) => b.gastado - a.gastado);
 
   const presupuestoTotal = suma(activos.map((p) => num(p.importe)));
+  // Proyectar el mes con uno o dos apuntes es adivinar: hacen falta varios dias.
+  const diasConGasto = new Set(gastosMes.map((m) => m.fecha)).size;
   return {
     mes,
     caja: Math.round(caja * 100) / 100,
@@ -163,6 +168,7 @@ export function resumenFinanzas(datos: {
     ingresosPrevistos: suma(datos.ingresosPrevistos.filter((i) => i.activo !== false).map((i) => num(i.importe))),
     presupuestoTotal,
     proyeccion: diaDelMes > 0 ? Math.round((gastos / diaDelMes) * dias) : 0,
+    proyeccionFiable: diasConGasto >= 3 && diaDelMes >= 5,
     cumplimiento: categorias.length
       ? Math.round((categorias.filter((c) => c.estado !== 'pasado').length / categorias.length) * 100)
       : null,
@@ -223,7 +229,7 @@ export function insightsFinanzas(
     }
   }
 
-  if (actual.presupuestoTotal > 0 && actual.diaDelMes >= 5 && actual.diaDelMes < actual.dias) {
+  if (actual.presupuestoTotal > 0 && actual.proyeccionFiable && actual.diaDelMes < actual.dias) {
     const diferencia = actual.proyeccion - actual.presupuestoTotal;
     // Si la proyeccion cuadra con el presupuesto no hay nada que decir.
     if (Math.abs(diferencia) >= 20) salida.push({
@@ -234,7 +240,7 @@ export function insightsFinanzas(
     });
   }
 
-  if (actual.gastoImpulsivo > 0 && actual.gastos > 0) {
+  if (actual.gastoImpulsivo > 0 && actual.gastos >= 60) {
     const pct = Math.round((actual.gastoImpulsivo / actual.gastos) * 100);
     if (pct >= 15) {
       salida.push({ tono: 'aviso', texto: `${eur(actual.gastoImpulsivo)} de lo que llevas gastado (${pct} %) lo marcaste como impulsivo. Ahi esta el margen mas facil.` });

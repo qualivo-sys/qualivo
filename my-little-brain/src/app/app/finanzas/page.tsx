@@ -97,7 +97,7 @@ export default async function PaginaFinanzas() {
       <div className="flex items-baseline justify-between gap-2">
         <div>
           <h1>Dinero</h1>
-          <p className="mt-1 text-sm capitalize text-muted-foreground">{nombreMes(resumen.mes)}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{nombreMes(resumen.mes)}</p>
         </div>
         <Link href="/app/finanzas/ajustes" className="text-sm text-primary underline">Ajustes</Link>
       </div>
@@ -137,7 +137,7 @@ export default async function PaginaFinanzas() {
           <p className="mt-3 text-xs text-muted-foreground tabular-nums">
             Previsto este mes: {eur(resumen.ingresosPrevistos)} de ingresos
             {resumen.presupuestoTotal > 0 ? ` y ${eur(resumen.presupuestoTotal)} de gasto` : ''}.
-            {resumen.diaDelMes < resumen.dias && resumen.presupuestoTotal > 0
+            {resumen.proyeccionFiable && resumen.diaDelMes < resumen.dias && resumen.presupuestoTotal > 0
               ? ` A este ritmo acabaras en ${eur(resumen.proyeccion)}.`
               : ''}
           </p>
