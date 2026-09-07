@@ -123,7 +123,7 @@ export default async function PaginaDescanso() {
           {/* Una barra por noche: se ve de un vistazo si el sueno es estable o un sube y baja. */}
           <div className="flex h-24 items-end gap-1">
             {dias.map((d) => (
-              <div key={d.fecha} className="flex flex-1 flex-col items-center justify-end gap-1" title={`${fechaCorta(d.fecha)}: ${d.suenoHoras ?? '—'} h`}>
+              <div key={d.fecha} className="flex h-full flex-1 flex-col justify-end" title={`${fechaCorta(d.fecha)}: ${d.suenoHoras ?? '—'} h`}>
                 <div
                   className={`w-full rounded-t ${
                     d.suenoHoras === null ? 'bg-muted' : d.suenoHoras < 6.5 ? 'bg-amber-500/70' : 'bg-indigo-500/70'
