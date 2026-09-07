@@ -144,7 +144,7 @@
   <table id="tRent"></table>
   <div class="foot">Inversión Meta en vivo + Google manual · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
 
-  <div class="foot">Entrevista = "Propuesta enviada" o posterior · Matrícula = "Alumna activa" · Contactado = etapa "Leads llamados" o posterior. Una sola fuente de verdad: todos ven los mismos números para el mismo periodo.</div>
+  <div class="foot"><b>KPIs y embudo</b> — Citas agendadas y Entrevistas se miden por el <b>calendario</b> de GHL (misma fuente que la sección "Citas"), porque el equipo trabaja por calendario y no siempre mueve las etapas del pipeline. Matrícula = etapa "Alumna activa". Tasa de cierre = matrículas / entrevistas realizadas. <br>Las tablas <b>Por etapa / Por comercial / Por procedencia / Vista semanal</b> siguen contando por <b>etapa del pipeline</b> (por eso sus "Contact./Entrev." pueden salir más bajos: reflejan solo lo que se ha movido de etapa).</div>
   </div><!-- /view-comercial -->
 
   <div id="view-seo" hidden>
@@ -217,19 +217,20 @@ const agg = (rows) => rows.reduce((a,r)=>{
 
 function render(){
   const rows = filtered(); const k = agg(rows);
-  // KPIs
+  const citas = citasSummary($('#from').value, $('#to').value, $('#fcom').value).k;
+  // KPIs (embudo medido por el calendario, que es donde el equipo trabaja de verdad)
   $('#kpis').innerHTML = [
     ['Leads nuevos', fmt(k.leads)],
-    ['Contactados', fmt(k.cont)],
-    ['Entrevistas', fmt(k.entr)],
+    ['Citas agendadas', fmt(citas.agend)],
+    ['Entrevistas (realizadas)', fmt(citas.real)],
     ['Matrículas', fmt(k.matr)],
     ['Perdidos', fmt(k.perd)],
     ['Abandon./Inválidos', fmt(k.aband)],
-    ['Tasa de cierre', pct(k.matr, k.entr), 'matr / entrev'],
+    ['Tasa de cierre', pct(k.matr, citas.real), 'matr / entrev'],
   ].map(([l,v,s])=>`<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}${s?` <small>${s}</small>`:''}</div></div>`).join('');
   // Embudo
   const cols=['var(--f1)','var(--f2)','var(--f3)','var(--f4)'];
-  const steps=[['Leads nuevos',k.leads],['Contactados',k.cont],['Entrevistas',k.entr],['Matrículas',k.matr]];
+  const steps=[['Leads nuevos',k.leads],['Citas agendadas',citas.agend],['Entrevistas',citas.real],['Matrículas',k.matr]];
   const max=Math.max(k.leads,1);
   $('#funnel').innerHTML = steps.map(([n,v],i)=>{
     const w=Math.max(v/max*100,2);
@@ -311,12 +312,11 @@ function breakdown(sel, label, rows, key){
   $(sel).innerHTML = head + '<tbody>' + body + foot + '</tbody>';
 }
 
-function renderCitas(from, to){
-  const cf = $('#fcom').value;
+// Resumen de citas del calendario por PERSONA (fuente real de contacto/entrevista).
+function citasSummary(from, to, cf){
   const A = (DATA.appts || []).filter(a => (!from || a.date >= from) && (!to || a.date <= to) && (!cf || a.comercial === cf));
   const today = new Date().toISOString().slice(0,10);
   const dead = (s) => s === 'cancelled' || s === 'invalid';
-  // Agrupar por PERSONA (contacto). Una persona con varias citas cuenta una vez.
   const people = {}; let seq = 0;
   A.forEach(a => {
     const id = a.contacto || ('_' + (seq++));  // si no hay contacto, cuenta como persona propia
@@ -327,12 +327,17 @@ function renderCitas(from, to){
   });
   const persons = Object.values(people);
   const k = persons.reduce((o,p) => { if(p.agend) o.agend++; if(p.real) o.real++; if(p.noshow && !p.real) o.noshow++; return o; }, {agend:0,real:0,noshow:0});
-  $('#kpisCita').innerHTML = [
-    ['Agendadas (personas)', fmt(k.agend)], ['Realizadas (aprox.)', fmt(k.real)], ['No-show', fmt(k.noshow)]
-  ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
   const byc = {};
   persons.forEach(p => { (byc[p.comercial] ??= {agend:0,real:0,noshow:0}); const o = byc[p.comercial];
     if(p.agend) o.agend++; if(p.real) o.real++; if(p.noshow && !p.real) o.noshow++; });
+  return { k, byc };
+}
+function renderCitas(from, to){
+  const cf = $('#fcom').value;
+  const { k, byc } = citasSummary(from, to, cf);
+  $('#kpisCita').innerHTML = [
+    ['Agendadas (personas)', fmt(k.agend)], ['Realizadas (aprox.)', fmt(k.real)], ['No-show', fmt(k.noshow)]
+  ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
   const ent = Object.entries(byc).sort((x,y) => y[1].agend - x[1].agend);
   const body = ent.map(([n,o]) => `<tr><td>${n}</td><td>${fmt(o.agend)}</td><td>${fmt(o.real)}</td><td>${fmt(o.noshow)}</td><td>${pct(o.noshow,o.agend)}</td></tr>`).join('');
   const foot = `<tr class="tot"><td>Total</td><td>${fmt(k.agend)}</td><td>${fmt(k.real)}</td><td>${fmt(k.noshow)}</td><td>${pct(k.noshow,k.agend)}</td></tr>`;
