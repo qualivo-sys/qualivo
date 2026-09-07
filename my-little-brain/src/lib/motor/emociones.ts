@@ -5,8 +5,13 @@
  * Las emociones son el clima. Las preocupaciones son hojas sobre el estanque.
  * El estanque sigue ahi aunque hoy no se vea con claridad.
  */
+import { comparar, media } from './estadistica';
+import type { Comparacion } from './estadistica';
 import type { Dia } from './puntuaciones';
 import type { EntradaDiario, Hoja, TemaHoja } from '../tipos';
+
+export { comparar } from './estadistica';
+export type { Comparacion } from './estadistica';
 
 export interface Emocion {
   id: string;
@@ -58,39 +63,6 @@ export function temaDe(texto: string): TemaHoja {
   if (/salud|dolor|duele|molest|lesion|medic|analitica|peso|enferm|sueno|dormir|ansiedad|cansancio/.test(t)) return 'salud';
   if (/futuro|no se que|incertidumbre|manana|dentro de|carrera|mudar|decision/.test(t)) return 'futuro';
   return 'otros';
-}
-
-// ── Comparaciones entre dias ──────────────────────────────────────────
-
-const media = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
-
-export interface Comparacion {
-  con: number;
-  sin: number;
-  nCon: number;
-  nSin: number;
-  /** Diferencia relativa en % (positiva = mejor con el factor). */
-  cambio: number;
-}
-
-/**
- * Compara una metrica entre los dias que cumplen algo y los que no. Devuelve
- * null si no hay dias suficientes de los dos tipos: no inventamos patrones.
- */
-export function comparar(
-  dias: Dia[],
-  cumple: (d: Dia) => boolean,
-  metrica: (d: Dia) => number | null,
-  minimo = 3,
-): Comparacion | null {
-  const valor = (lista: Dia[]) => lista.map(metrica).filter((v): v is number => v !== null && Number.isFinite(v));
-  const con = valor(dias.filter(cumple));
-  const sin = valor(dias.filter((d) => !cumple(d)));
-  if (con.length < minimo || sin.length < minimo) return null;
-  const mc = media(con)!;
-  const ms = media(sin)!;
-  if (ms === 0) return null;
-  return { con: Math.round(mc * 10) / 10, sin: Math.round(ms * 10) / 10, nCon: con.length, nSin: sin.length, cambio: Math.round(((mc - ms) / ms) * 100) };
 }
 
 export interface PatronEmocional {

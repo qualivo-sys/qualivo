@@ -41,7 +41,8 @@ const llamadas = [
       { nombre: 'press banca', series: [{ peso_kg: 80, reps: 8, rir: 1 }, { peso_kg: 80, reps: 8, rir: 1 }, { peso_kg: 80, reps: 8, rir: 2 }] },
       { nombre: 'jalon al pecho', series: [{ peso_kg: 60, reps: 12, rir: 2 }] }] }],
   ['registrar_foco', { categoria: 'idiomas', minutos: 45, descripcion: 'Ingles' }],
-  ['registrar_bienestar', { sueno_horas: 5.5, animo: 6, energia: 4, estres: 7 }],
+  ['registrar_bienestar', { sueno_inicio: '01:15', sueno_fin: '06:45', animo: 6, energia: 4, estres: 7, cafes: 3, cafeina_ultima: '18:30' }],
+  ['registrar_agua', { vasos: 2 }],
   ['registrar_habito', { nombre: '10.000 pasos' }],
   ['crear_habito', { nombre: 'Leer 20 min', emoji: '📚', veces_por_semana: 5 }],
   ['crear_objetivo', { area: 'negocio', titulo: 'Cerrar 3 clientes nuevos' }],
@@ -422,6 +423,97 @@ check('un sobre ya cerrado no da la lata', !insightsFinanzas(cerradoPasado, null
 const casiRoma = resumenFinanzas({ movimientos: [...movimientos, mov('2026-09-12', 350, 'restaurantes', { sobre_id: 's1' })], presupuestos, ingresosPrevistos: [], ajustes: null, sobres: [sobresMock[0]], hoy: '2026-09-12' });
 check('avisa cuando queda poco dinero y pocos dias', insightsFinanzas(casiRoma, null, null).some((i) => /Roma.*quedan|quedan.*Roma/i.test(i.texto)), insightsFinanzas(casiRoma, null, null).map((i) => i.texto).join(' | '));
 check('sin sobres, el resumen sigue igual que antes', resumenFinanzas({ movimientos, presupuestos, ingresosPrevistos: [], ajustes: null, hoy: '2026-09-10' }).sobres.length === 0);
+
+// ── 16. Descanso: sueno, agua y lo que cuesta dormir poco ──────────────
+const {
+  horasDeSueno, minutosDesdeLasSeis, horaDesdeLasSeis, objetivoSueno, objetivoAgua, desgloseAgua,
+  resumenSueno, resumenAgua, impactoSueno, insightsDescanso, VASO_ML,
+} = await import(`${L}/motor/descanso.js`);
+
+check('calcula las horas cruzando la medianoche', horasDeSueno('23:30', '07:00') === 7.5, String(horasDeSueno('23:30', '07:00')));
+check('y tambien cuando se acuesta de madrugada', horasDeSueno('01:15', '08:45') === 7.5, String(horasDeSueno('01:15', '08:45')));
+check('descarta un dedazo de am/pm', horasDeSueno('23:00', '23:30') === null && horasDeSueno('08:00', '23:00') === null);
+check('sin las dos horas no se inventa nada', horasDeSueno('23:00', null) === null && horasDeSueno(null, null) === null && horasDeSueno('25:00', '07:00') === null);
+check('las 00:30 y las 23:30 quedan a una hora, no a 23', Math.abs(minutosDesdeLasSeis('00:30') - minutosDesdeLasSeis('23:30')) === 60);
+check('la hora vuelve a leerse bien', horaDesdeLasSeis(minutosDesdeLasSeis('23:40')) === '23:40' && horaDesdeLasSeis(minutosDesdeLasSeis('01:05')) === '01:05');
+
+check('el objetivo sale del horario que la persona dijo querer', objetivoSueno('23:00', '07:00') === 8, String(objetivoSueno('23:00', '07:00')));
+check('si no lo puso, 7,5 h', objetivoSueno(null, null) === 7.5 && objetivoSueno('23:00', null) === 7.5);
+
+check('el agua base son 35 ml por kilo', objetivoAgua({ pesoKg: 80 }) === 2800, String(objetivoAgua({ pesoKg: 80 })));
+check('entrenar y beber alcohol suben el objetivo', objetivoAgua({ pesoKg: 80, entreno: true, alcoholUd: 2 }) === 3800, String(objetivoAgua({ pesoKg: 80, entreno: true, alcoholUd: 2 })));
+check('el objetivo se puede explicar por partes', desgloseAgua({ pesoKg: 80, entreno: true }).length === 2 && desgloseAgua({ pesoKg: 80 }).length === 1);
+
+const diaD = (fecha, extra = {}) => ({ fecha, kcal: 2000, proteina: 150, carbos: 200, grasa: 60, alcoholUd: 0, comidas: 3, entreno: false, actividad: false, nombresActividad: [], seriesEntreno: 0, pasos: 6000, gastoKcal: 2400, redondo: false, focoMin: 60, habitosHechos: 0, habitosTotal: 0, animo: 6, energia: 6, estres: 5, suenoHoras: 7, suenoCalidad: 7, suenoInicio: '23:30', suenoFin: '07:00', aguaMl: 0, cafes: 0, cafeinaUltima: null, peso: null, ...extra });
+
+// Una semana acostandose siempre a la misma hora frente a otra a salto de mata.
+const regulares = Array.from({ length: 7 }, (_, i) => diaD(`2026-09-0${i + 1}`, { suenoInicio: '23:30', suenoHoras: 7.5 }));
+const rs = resumenSueno(regulares, 7.5);
+check('resume media, regularidad y hora habitual', rs.mediaHoras === 7.5 && rs.regularidadMin === 0 && rs.horaHabitual === '23:30' && rs.noches === 7, JSON.stringify(rs));
+check('sin deuda si duerme lo que se propuso', rs.deudaHoras === 0 && rs.nochesCortas === 0);
+
+const caoticos = [
+  diaD('2026-09-01', { suenoInicio: '22:30', suenoHoras: 8 }),
+  diaD('2026-09-02', { suenoInicio: '01:30', suenoHoras: 5 }),
+  diaD('2026-09-03', { suenoInicio: '23:00', suenoHoras: 7 }),
+  diaD('2026-09-04', { suenoInicio: '02:00', suenoHoras: 5 }),
+  diaD('2026-09-05', { suenoInicio: '23:30', suenoHoras: 6 }),
+];
+const rc = resumenSueno(caoticos, 7.5);
+check('detecta que la hora de acostarse baila', rc.regularidadMin >= 60, String(rc.regularidadMin));
+check('acumula la deuda de sueno', rc.deudaHoras === 7 && rc.nochesCortas === 3, JSON.stringify({ d: rc.deudaHoras, c: rc.nochesCortas }));
+check('propone una hora que ya ha conseguido, no la media del caos', rc.horaBuena === '23:00' && rc.horaHabitual === '00:06', JSON.stringify({ b: rc.horaBuena, h: rc.horaHabitual }));
+check('un dia suelto no da regularidad', resumenSueno([diaD('2026-09-01')], 7.5).regularidadMin === null);
+check('sin noches apuntadas no inventa medias', resumenSueno([diaD('2026-09-01', { suenoHoras: null, suenoInicio: null })], 7.5).mediaHoras === null);
+
+// El precio de dormir poco, con dias suficientes en los dos grupos.
+const mezcla = [
+  ...Array.from({ length: 6 }, (_, i) => diaD(`2026-09-0${i + 1}`, { suenoHoras: 5.5, energia: 4, animo: 5, kcal: 2600, focoMin: 30, entreno: false })),
+  ...Array.from({ length: 6 }, (_, i) => diaD(`2026-09-${i + 7}`, { suenoHoras: 7.5, energia: 8, animo: 8, kcal: 2100, focoMin: 90, entreno: true })),
+];
+const imp = impactoSueno(mezcla);
+check('dice cuanto baja la energia durmiendo poco', imp.some((p) => p.id === 'energia' && /4/.test(p.texto) && /8/.test(p.texto)), JSON.stringify(imp.map((p) => p.texto)));
+check('dice cuantas kcal de mas se comen', imp.some((p) => p.id === 'kcal' && /500 kcal mas/.test(p.texto)), JSON.stringify(imp.map((p) => p.texto)));
+check('y que se entrena menos', imp.some((p) => p.id === 'entreno' && /100 %/.test(p.texto) && /0 %/.test(p.texto)), JSON.stringify(imp.map((p) => p.texto)));
+check('los patrones vienen ordenados por relevancia', imp.every((p, i) => i === 0 || imp[i - 1].fuerza >= p.fuerza));
+check('con pocos dias no dice nada', impactoSueno(mezcla.slice(0, 4)).length === 0);
+
+// El cafe de la tarde, que es lo unico que se puede cambiar hoy mismo.
+const conCafe = [
+  ...Array.from({ length: 5 }, (_, i) => diaD(`2026-09-0${i + 1}`, { cafeinaUltima: '18:00', suenoHoras: 6 })),
+  ...Array.from({ length: 5 }, (_, i) => diaD(`2026-09-${i + 10}`, { cafeinaUltima: '09:00', suenoHoras: 7.5 })),
+];
+check('relaciona el cafe tardio con dormir menos', impactoSueno(conCafe).some((p) => p.id === 'cafeina' && /90 min menos/.test(p.texto)), JSON.stringify(impactoSueno(conCafe).map((p) => p.texto)));
+
+// Agua
+const semanaAgua = Array.from({ length: 7 }, (_, i) => diaD(`2026-09-0${i + 1}`, { aguaMl: 2800 }));
+const ra = resumenAgua(semanaAgua, 2800, '2026-09-07');
+check('cuenta la racha de dias cumpliendo el agua', ra.racha === 7 && ra.diasCumplidos === 7 && ra.pct === 100 && ra.vasosQueFaltan === 0, JSON.stringify(ra));
+const aMedias = resumenAgua([...semanaAgua.slice(0, 6), diaD('2026-09-07', { aguaMl: 1000 })], 2800, '2026-09-07');
+check('hoy sin terminar no rompe la racha', aMedias.racha === 6 && aMedias.pct === 36 && aMedias.vasosQueFaltan === Math.ceil(1800 / VASO_ML), JSON.stringify(aMedias));
+const roto = resumenAgua([diaD('2026-09-01', { aguaMl: 500 }), diaD('2026-09-02', { aguaMl: 2800 }), diaD('2026-09-03', { aguaMl: 2800 })], 2800, '2026-09-03');
+check('la racha para en el primer dia que no llego', roto.racha === 2, String(roto.racha));
+check('sin agua apuntada no hay media', resumenAgua([diaD('2026-09-01')], 2800, '2026-09-01').mediaMl === null);
+
+// Lo que veo
+const alerta = insightsDescanso({
+  dias: [diaD('2026-09-05', { suenoHoras: 5 }), diaD('2026-09-06', { suenoHoras: 5.5 }), diaD('2026-09-07', { suenoHoras: 6 })],
+  sueno: resumenSueno(caoticos, 7.5), agua: resumenAgua(semanaAgua, 2800, '2026-09-07'), hoy: '2026-09-07',
+});
+check('tres noches malas seguidas son lo primero que se dice', alerta[0].tono === 'alerta' && /media hora antes/.test(alerta[0].texto), JSON.stringify(alerta));
+check('nunca mas de cuatro frases', alerta.length <= 4, String(alerta.length));
+const conRetraso = insightsDescanso({
+  dias: regulares, sueno: resumenSueno(regulares, 7.5),
+  agua: resumenAgua(semanaAgua, 2800, '2026-09-07'), hoy: '2026-09-07', horaObjetivo: '22:30',
+});
+check('contrasta la hora que dijo con la que se acuesta', conRetraso.some((i) => i.id === 'retraso' && /60 min mas tarde/.test(i.texto)), JSON.stringify(conRetraso.map((i) => i.texto)));
+const entrenoSinAgua = insightsDescanso({
+  dias: [diaD('2026-09-07', { entreno: true, aguaMl: 500 })],
+  sueno: resumenSueno(regulares, 7.5),
+  agua: resumenAgua([diaD('2026-09-07', { entreno: true, aguaMl: 500 })], 3300, '2026-09-07'), hoy: '2026-09-07',
+});
+check('si entrenas y no bebes, te lo dice', entrenoSinAgua.some((i) => i.id === 'agua_entreno'), JSON.stringify(entrenoSinAgua.map((i) => i.texto)));
+check('ningun aviso de descanso regana', [...alerta, ...conRetraso, ...entrenoSinAgua].every((i) => !/deberias|tienes que|mal hecho/i.test(i.texto)));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

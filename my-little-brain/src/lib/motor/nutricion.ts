@@ -1,3 +1,4 @@
+import { objetivoAgua } from './descanso';
 import type { Actividad, Objetivo, Sexo } from '../tipos';
 
 const FACTOR_ACTIVIDAD: Record<Actividad, number> = {
@@ -90,7 +91,7 @@ export function objetivosDiarios(d: DatosNutricion): ObjetivosDiarios {
     proteinaG,
     grasaG,
     carbosG,
-    aguaMl: Math.round((d.pesoKg * 35) / 100) * 100,
+    aguaMl: objetivoAgua({ pesoKg: d.pesoKg }),
     pasos: d.objetivo === 'perder_grasa' ? 10000 : 8000,
     ritmoKgSemana: Number(((d.pesoKg * RITMO_PCT_SEMANA[d.objetivo]) / 100).toFixed(2)),
   };

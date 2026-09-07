@@ -83,7 +83,10 @@ export default async function PaginaCuerpo({ searchParams }: { searchParams: { d
 
   return (
     <main className="space-y-4">
-      <h1>Cuerpo</h1>
+      <div className="flex items-baseline justify-between">
+        <h1>Cuerpo</h1>
+        <Link href="/app/descanso" className="text-sm text-primary underline">Sueno y agua</Link>
+      </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[

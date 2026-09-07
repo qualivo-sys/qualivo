@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
+import { AGUA_MAX_ML, VASO_ML, horasDeSueno } from '../motor/descanso';
 import { emparejarEjercicio } from '../motor/ejercicios';
 import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
 import { EMOCIONES, TEMAS as TEMAS_HOJA, temaDe as temaDeTexto } from '../motor/emociones';
@@ -156,6 +157,10 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         motivacion: { type: 'number' },
         sueno_horas: { type: 'number' },
         sueno_calidad: { type: 'number' },
+        sueno_inicio: { type: 'string', description: 'Hora a la que se acosto, "23:30". Si la dice, mejor que las horas sueltas.' },
+        sueno_fin: { type: 'string', description: 'Hora a la que se levanto, "07:15".' },
+        cafes: { type: 'number', description: 'Cafes del dia.' },
+        cafeina_ultima: { type: 'string', description: 'Hora del ultimo cafe, "17:00".' },
         emociones: {
           type: 'array',
           description: 'Hasta 3 emociones predominantes del dia, si las menciona.',
@@ -166,6 +171,22 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         },
         pasos: { type: 'number' },
         notas: { type: 'string' },
+        fecha: FECHA,
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'registrar_agua',
+    description:
+      'Apunta agua bebida. Suma a lo que ya lleve el dia. Un vaso son 250 ml y una botella 500 ml. '
+      + 'Usa ml si lo dice en litros o mililitros, y vasos si habla de vasos o botellas.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        ml: { type: 'number', description: 'Mililitros a sumar. Negativo para corregir de menos.' },
+        vasos: { type: 'number', description: 'Vasos de 250 ml, si lo cuenta asi.' },
+        total: { type: 'boolean', description: 'true si lo que dice es el total del dia y no algo que sumar.' },
         fecha: FECHA,
       },
       required: [],
@@ -625,6 +646,10 @@ async function despachar(
           motivacion: num.optional(),
           sueno_horas: num.optional(),
           sueno_calidad: num.optional(),
+          sueno_inicio: z.string().optional(),
+          sueno_fin: z.string().optional(),
+          cafes: num.optional(),
+          cafeina_ultima: z.string().optional(),
           pasos: num.optional(),
           notas: z.string().optional(),
           fecha: fechaOpc,
@@ -634,6 +659,13 @@ async function despachar(
       const fecha = d.fecha ?? ctx.hoy;
       const escala = (v: number | undefined) =>
         v === undefined ? undefined : Math.max(1, Math.min(10, Math.round(v)));
+      const hora = (v: string | undefined) =>
+        v && /^\d{1,2}:\d{2}/.test(v) ? v.slice(0, 5).padStart(5, '0') : undefined;
+      const inicio = hora(d.sueno_inicio);
+      const fin = hora(d.sueno_fin);
+      // Si nos da las dos horas, la resta la hacemos nosotros: es mas fiable
+      // que fiarnos de que el modelo la haya hecho bien.
+      const calculadas = horasDeSueno(inicio ?? null, fin ?? null);
 
       const { data: previo } = await supabase
         .from('bienestar')
@@ -651,8 +683,12 @@ async function despachar(
         estres: escala(d.estres) ?? previo?.estres ?? null,
         ansiedad: escala(d.ansiedad) ?? previo?.ansiedad ?? null,
         motivacion: escala(d.motivacion) ?? previo?.motivacion ?? null,
-        sueno_horas: d.sueno_horas ?? previo?.sueno_horas ?? null,
+        sueno_horas: calculadas ?? d.sueno_horas ?? previo?.sueno_horas ?? null,
         sueno_calidad: escala(d.sueno_calidad) ?? previo?.sueno_calidad ?? null,
+        sueno_inicio: inicio ?? previo?.sueno_inicio ?? null,
+        sueno_fin: fin ?? previo?.sueno_fin ?? null,
+        cafes: d.cafes !== undefined ? Math.max(0, Math.min(12, Math.round(d.cafes))) : previo?.cafes ?? 0,
+        cafeina_ultima: hora(d.cafeina_ultima) ?? previo?.cafeina_ultima ?? null,
         pasos: d.pasos ? Math.round(d.pasos) : previo?.pasos ?? null,
         notas: d.notas ?? previo?.notas ?? null,
         emociones: d.emociones?.length
@@ -664,13 +700,41 @@ async function despachar(
 
       const xp = await otorgarXp(ctx, 'checkin', `bienestar ${fecha}`);
       const partes = [
-        d.sueno_horas !== undefined ? `${d.sueno_horas} h de sueno` : null,
+        calculadas !== null ? `${calculadas} h de sueno` : d.sueno_horas !== undefined ? `${d.sueno_horas} h de sueno` : null,
         d.animo !== undefined ? `animo ${escala(d.animo)}/10` : null,
         d.energia !== undefined ? `energia ${escala(d.energia)}/10` : null,
       ].filter(Boolean);
       return {
         texto: `Bienestar guardado (${fecha}).`,
         accion: { herramienta: nombre, resumen: partes.join(' · ') || 'check-in', xp },
+      };
+    }
+
+    case 'registrar_agua': {
+      const d = z
+        .object({ ml: num.optional(), vasos: num.optional(), total: z.boolean().optional(), fecha: fechaOpc })
+        .parse(entrada);
+
+      const cantidad = Math.round((d.ml ?? 0) + (d.vasos ?? 0) * VASO_ML);
+      if (!cantidad) return { texto: 'No me has dicho cuanta agua.', accion: null };
+      const fecha = d.fecha ?? ctx.hoy;
+
+      const { data: previo } = await supabase
+        .from('bienestar').select('agua_ml').eq('user_id', userId).eq('fecha', fecha).maybeSingle();
+
+      // Por defecto suma; "llevo dos litros hoy" es un total y sustituye.
+      const bruto = d.total ? cantidad : (previo?.agua_ml ?? 0) + cantidad;
+      const total = Math.max(0, Math.min(AGUA_MAX_ML, bruto));
+
+      const { error } = await supabase.from('bienestar').upsert(
+        { user_id: userId, fecha, agua_ml: total },
+        { onConflict: 'user_id,fecha' },
+      );
+      if (error) throw error;
+
+      return {
+        texto: `Agua apuntada: ${total} ml en total el ${fecha}.`,
+        accion: { herramienta: nombre, resumen: `${(total / 1000).toFixed(2).replace('.', ',')} l de agua` },
       };
     }
 

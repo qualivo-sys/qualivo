@@ -1,4 +1,5 @@
 import { fechaLarga } from '../fechas';
+import { impactoSueno, objetivoAgua, objetivoSueno, resumenSueno } from '../motor/descanso';
 import { correlaciones } from '../motor/puntuaciones';
 import { ETIQUETA_CATEGORIA_FOCO, ETIQUETA_OBJETIVO } from '../perfil';
 import type { Panel } from '../datos';
@@ -78,6 +79,17 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
   l.push(
     `- Animo ${diaHoy.animo ?? '—'}/10 · energia ${diaHoy.energia ?? '—'}/10 · estres ${diaHoy.estres ?? '—'}/10 · sueno ${diaHoy.suenoHoras ?? '—'} h.`,
   );
+  const metaAgua = objetivoAgua({
+    pesoKg: panel.cuerpo.peso ?? 75,
+    entreno: diaHoy.entreno || diaHoy.actividad,
+    alcoholUd: diaHoy.alcoholUd,
+  });
+  l.push(
+    `- Agua ${diaHoy.aguaMl} de ${metaAgua} ml`
+    + `${diaHoy.suenoInicio ? ` · se acosto a las ${diaHoy.suenoInicio}` : ''}`
+    + `${diaHoy.suenoFin ? ` y se levanto a las ${diaHoy.suenoFin}` : ''}`
+    + `${diaHoy.cafes ? ` · ${diaHoy.cafes} cafes${diaHoy.cafeinaUltima ? `, el ultimo a las ${diaHoy.cafeinaUltima}` : ''}` : ''}.`,
+  );
 
   l.push('\nESTA SEMANA');
   const entrenosSemana = semana.filter((d) => d.entreno).length;
@@ -97,12 +109,24 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
 
   const ultimos = panel.dias.slice(-14);
   if (ultimos.some((d) => d.comidas || d.entreno || d.focoMin || d.animo)) {
-    l.push('\nULTIMOS 14 DIAS (fecha | kcal | prot | entreno | foco min | sueno h | animo)');
+    l.push('\nULTIMOS 14 DIAS (fecha | kcal | prot | entreno | foco min | sueno h | agua ml | animo)');
     for (const d of ultimos) {
       l.push(
-        `${d.fecha} | ${d.kcal || '—'} | ${d.proteina || '—'} | ${d.entreno ? 'si' : 'no'} | ${d.focoMin || 0} | ${d.suenoHoras ?? '—'} | ${d.animo ?? '—'}`,
+        `${d.fecha} | ${d.kcal || '—'} | ${d.proteina || '—'} | ${d.entreno ? 'si' : 'no'} | ${d.focoMin || 0} | ${d.suenoHoras ?? '—'} | ${d.aguaMl || '—'} | ${d.animo ?? '—'}`,
       );
     }
+  }
+
+  const sueno = resumenSueno(panel.dias.slice(-14), objetivoSueno(perfil.hora_dormir, perfil.hora_despertar));
+  if (sueno.noches >= 3) {
+    l.push('\nDESCANSO');
+    l.push(
+      `- Media ${sueno.mediaHoras} h en ${sueno.noches} noches · objetivo ${sueno.objetivoHoras} h`
+      + `${sueno.horaHabitual ? ` · se acuesta sobre las ${sueno.horaHabitual}` : ''}`
+      + `${sueno.regularidadMin !== null ? ` (baila ±${sueno.regularidadMin} min)` : ''}`
+      + `${sueno.deudaHoras > 0 ? ` · ${sueno.deudaHoras} h de deuda` : ''}.`,
+    );
+    for (const p of impactoSueno(panel.dias).slice(0, 3)) l.push(`- ${p.texto}`);
   }
 
   const correl = correlaciones(panel.dias.slice(-30));

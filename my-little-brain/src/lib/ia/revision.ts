@@ -1,6 +1,8 @@
 import type { Panel } from '../datos';
 import { fechaCorta, inicioSemana, sumarDias } from '../fechas';
 import { correlaciones, type Dia } from '../motor/puntuaciones';
+import { minutosDesdeLasSeis, objetivoAgua } from '../motor/descanso';
+import { desviacion } from '../motor/estadistica';
 import { ETIQUETA_OBJETIVO } from '../perfil';
 import type { RevisionSemanal } from '../tipos';
 
@@ -18,6 +20,11 @@ export interface EstadisticasSemana {
   focoHoras: number;
   habitosPct: number | null;
   suenoMedio: number | null;
+  /** Cuanto baila la hora de acostarse, en minutos. */
+  suenoRegularidad: number | null;
+  /** Dias de la semana en los que llego a su objetivo de agua. */
+  diasAguaOk: number;
+  aguaMedia: number | null;
   animoMedio: number | null;
   energiaMedia: number | null;
   estresMedio: number | null;
@@ -38,6 +45,8 @@ export function estadisticasSemana(panel: Panel, lunes: string): EstadisticasSem
   const dias = panel.dias.filter((d) => d.fecha >= lunes && d.fecha <= domingo);
   const conRegistro = dias.filter((d) => d.comidas > 0);
   const pesos = dias.filter((d) => d.peso !== null);
+
+  const pesoKg = panel.cuerpo.peso;
 
   const habitosPosibles = dias.reduce((total, d) => total + d.habitosTotal, 0);
   const habitosHechos = dias.reduce((total, d) => total + d.habitosHechos, 0);
@@ -60,6 +69,15 @@ export function estadisticasSemana(panel: Panel, lunes: string): EstadisticasSem
     focoHoras: Number((dias.reduce((t, d) => t + d.focoMin, 0) / 60).toFixed(1)),
     habitosPct: habitosPosibles ? Math.round((habitosHechos / habitosPosibles) * 100) : null,
     suenoMedio: media(dias.map((d) => d.suenoHoras)),
+    suenoRegularidad: (() => {
+      const horas = dias.map((d) => minutosDesdeLasSeis(d.suenoInicio)).filter((v): v is number => v !== null);
+      return horas.length >= 3 ? Math.round(desviacion(horas)!) : null;
+    })(),
+    diasAguaOk: dias.filter((d) => d.aguaMl > 0 && d.aguaMl >= objetivoAgua({ pesoKg: pesoKg ?? 75, entreno: d.entreno || d.actividad, alcoholUd: d.alcoholUd })).length,
+    aguaMedia: (() => {
+      const conAgua = dias.filter((d) => d.aguaMl > 0);
+      return conAgua.length ? Math.round(conAgua.reduce((t, d) => t + d.aguaMl, 0) / conAgua.length) : null;
+    })(),
     animoMedio: media(dias.map((d) => d.animo)),
     energiaMedia: media(dias.map((d) => d.energia)),
     estresMedio: media(dias.map((d) => d.estres)),

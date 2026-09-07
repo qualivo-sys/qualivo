@@ -30,6 +30,14 @@ export interface Dia {
   estres: number | null;
   suenoHoras: number | null;
   suenoCalidad: number | null;
+  /** Hora de acostarse y de levantarse, "23:30". Permiten calcular regularidad. */
+  suenoInicio: string | null;
+  suenoFin: string | null;
+  /** Agua bebida en el dia, en ml. 0 cuando no se ha apuntado nada. */
+  aguaMl: number;
+  cafes: number;
+  /** Hora del ultimo cafe del dia, "17:15". */
+  cafeinaUltima: string | null;
   peso: number | null;
 }
 
@@ -90,9 +98,19 @@ export function construirDias(fuentes: FuentesDatos, fechas: string[],
       estres: animo?.estres ?? null,
       suenoHoras: animo?.sueno_horas ?? null,
       suenoCalidad: animo?.sueno_calidad ?? null,
+      suenoInicio: recorta(animo?.sueno_inicio),
+      suenoFin: recorta(animo?.sueno_fin),
+      aguaMl: animo?.agua_ml ?? 0,
+      cafes: animo?.cafes ?? 0,
+      cafeinaUltima: recorta(animo?.cafeina_ultima),
       peso: metrica?.peso_kg ?? null,
     };
   });
+}
+
+/** Postgres devuelve las horas como "23:30:00"; nos basta "23:30". */
+function recorta(hora: string | null | undefined): string | null {
+  return hora ? hora.slice(0, 5) : null;
 }
 
 function suma(valores: number[]): number {

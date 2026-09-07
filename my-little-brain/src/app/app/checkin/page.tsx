@@ -1,4 +1,5 @@
 import { Moon, Sun } from 'lucide-react';
+import Link from 'next/link';
 import { guardarCheckIn, guardarFoco, guardarMedicion } from '@/app/app/acciones';
 import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel } from '@/lib/datos';
@@ -29,9 +30,12 @@ export default async function PaginaCheckIn() {
       </div>
 
       <Tarjeta>
-        <div className="mb-3 flex items-center gap-2">
-          <Sun size={18} className="text-[hsl(var(--area-mente))]" />
-          <TituloTarjeta className="mb-0">Manana</TituloTarjeta>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Sun size={18} className="text-[hsl(var(--area-mente))]" />
+            <TituloTarjeta className="mb-0">Manana</TituloTarjeta>
+          </div>
+          <Link href="/app/descanso" className="text-xs text-primary underline">Sueno y agua</Link>
         </div>
         <form action={guardarCheckIn} className="space-y-3">
           <div className="grid grid-cols-2 gap-3">

@@ -279,6 +279,17 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Descanso: sueno con horas reales, agua y cafeina ───────────────────
+-- Va en bienestar y no en una tabla nueva porque es un dato por dia, igual
+-- que el animo. sueno_horas se sigue guardando: es lo que leen los motores,
+-- y ahora ademas se puede calcular solo a partir de las dos horas.
+alter table public.bienestar
+  add column if not exists sueno_inicio   time,
+  add column if not exists sueno_fin      time,
+  add column if not exists agua_ml        int  not null default 0,
+  add column if not exists cafes          int  not null default 0,
+  add column if not exists cafeina_ultima time;
+
 -- ── Estado emocional: diario guiado y hojas del estanque ───────────────
 -- Las emociones del dia van con el resto del bienestar.
 alter table public.bienestar add column if not exists emociones text[] not null default '{}';

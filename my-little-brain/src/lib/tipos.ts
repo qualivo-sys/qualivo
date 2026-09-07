@@ -188,6 +188,13 @@ export interface Bienestar {
   motivacion: number | null;
   sueno_horas: number | null;
   sueno_calidad: number | null;
+  /** Hora de acostarse y de levantarse. De ellas sale sueno_horas. */
+  sueno_inicio?: string | null;
+  sueno_fin?: string | null;
+  /** Agua del dia en ml, y el cafe, que es lo que mas mueve el sueno. */
+  agua_ml?: number | null;
+  cafes?: number | null;
+  cafeina_ultima?: string | null;
   pasos: number | null;
   notas: string | null;
   /** Hasta tres emociones predominantes del dia. */

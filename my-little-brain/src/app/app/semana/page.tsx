@@ -270,6 +270,8 @@ export default async function PaginaSemana() {
             ['Foco', `${stats.focoHoras} h`],
             ['Alcohol', `${stats.alcoholTotal} ud · ${stats.diasConAlcohol} dias`],
             ['Sueno medio', stats.suenoMedio ? `${stats.suenoMedio.toFixed(1)} h` : '—'],
+            ['Regularidad', stats.suenoRegularidad !== null ? `±${stats.suenoRegularidad} min` : '—'],
+            ['Agua', stats.aguaMedia ? `${(stats.aguaMedia / 1000).toFixed(1)} l · ${stats.diasAguaOk} dias ok` : '—'],
             ['Animo medio', stats.animoMedio ? `${stats.animoMedio.toFixed(1)}/10` : '—'],
             ['Habitos', stats.habitosPct === null ? '—' : `${stats.habitosPct}%`],
             [

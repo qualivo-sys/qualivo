@@ -1,6 +1,7 @@
-import { AlertTriangle, ArrowRight, CheckCircle2, Dumbbell, Flame, Info, MessageCircle, TrendingDown } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, MessageCircle, Moon, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
 import ComidasHabituales from '@/components/comidas-habituales';
+import VasoAgua from '@/components/vaso-agua';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
 import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
@@ -11,6 +12,7 @@ import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
 import { comidasHabituales } from '@/lib/motor/habituales';
+import { objetivoAgua } from '@/lib/motor/descanso';
 import { ajustePendiente } from '@/lib/ajuste';
 import { aplicarAjusteCalorias, posponerAjuste } from '@/app/app/acciones';
 import { horaActual } from '@/lib/fechas';
@@ -33,6 +35,12 @@ export default async function PanelHoy() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   const { diaHoy, metas, cuerpo, puntuaciones } = panel;
+
+  const metaAgua = objetivoAgua({
+    pesoKg: cuerpo.peso ?? 75,
+    entreno: diaHoy.entreno || diaHoy.actividad,
+    alcoholUd: diaHoy.alcoholUd,
+  });
 
   const ajuste = metas ? ajusteCalorico(metas, cuerpo.tendencia, perfil.objetivo ?? 'energia') : null;
   const kcalPct = metas ? Math.round((diaHoy.kcal / metas.kcal) * 100) : 0;
@@ -229,6 +237,30 @@ export default async function PanelHoy() {
             <div className="text-xs text-muted-foreground">sueno</div>
           </div>
         </div>
+      </Tarjeta>
+
+      {/* El agua se apunta desde aqui: si hay que entrar en otra pantalla, nadie la apunta. */}
+      <Tarjeta>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Droplets size={18} className="text-sky-500" />
+            <TituloTarjeta className="mb-0">Agua</TituloTarjeta>
+          </div>
+          <Link href="/app/descanso" className="text-xs text-primary underline">Descanso</Link>
+        </div>
+        <VasoAgua ml={diaHoy.aguaMl} objetivoMl={metaAgua} compacto />
+        <Link
+          href="/app/descanso"
+          className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm text-muted-foreground"
+        >
+          <span className="flex items-center gap-2">
+            <Moon size={15} className="text-indigo-500" />
+            {diaHoy.suenoHoras !== null
+              ? `Anoche dormiste ${String(diaHoy.suenoHoras).replace('.', ',')} h`
+              : 'Apunta como has dormido esta noche'}
+          </span>
+          <ArrowRight size={15} />
+        </Link>
       </Tarjeta>
 
       {energia && (

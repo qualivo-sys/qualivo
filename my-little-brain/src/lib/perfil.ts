@@ -1,3 +1,4 @@
+import { objetivoAgua } from './motor/descanso';
 import { tmb, type DatosNutricion, type ObjetivosDiarios } from './motor/nutricion';
 import { objetivosDiarios } from './motor/nutricion';
 import type { ObjetivoEntreno, PerfilEntreno } from './motor/tipos-motor';
@@ -61,7 +62,7 @@ export function metasNutricion(
       proteinaG: Math.round(manual.proteina_g),
       grasaG: Math.round(manual.grasa_g),
       carbosG: Math.round(manual.carbos_g),
-      aguaMl: Math.round((peso * 35) / 100) * 100,
+      aguaMl: objetivoAgua({ pesoKg: peso }),
       pasos: p.objetivo === 'perder_grasa' ? 10000 : 8000,
       ritmoKgSemana: 0,
       manual: manual.fuente,
