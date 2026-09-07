@@ -68,6 +68,8 @@
   .tabs{display:flex;gap:4px;margin:16px 0 6px;border-bottom:1px solid var(--border)}
   .tab{border:0;border-radius:0;background:none;padding:9px 16px;font-weight:600;color:var(--text-secondary);border-bottom:2px solid transparent}
   .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .spark{display:flex;align-items:flex-end;gap:2px;height:70px;padding:8px 10px;background:var(--surface-1);border:1px solid var(--border);border-radius:10px}
+  .spark span{flex:1;background:var(--accent);border-radius:2px 2px 0 0;min-height:2px;opacity:.85}
 </style>
 </head>
 <body>
@@ -362,8 +364,31 @@ function showView(v){
 }
 
 function renderSEO(){
-  const s = DATA.seo, box = $('#seoBody');
-  if(!s){ box.innerHTML = '<div class="foot">Search Console aún no está conectado a este panel. Falta añadir la credencial de Google (variable <b>GOOGLE_SA_B64</b>) en Netlify.</div>'; return; }
+  const s = DATA.seo, g = DATA.ga4, box = $('#seoBody');
+  if(!s && !g){ box.innerHTML = '<div class="foot">Analytics y Search Console aún no están conectados a este panel. Falta añadir la credencial de Google (variable <b>GOOGLE_SA_B64</b>) en Netlify.</div>'; return; }
+
+  // --- Analítica web (GA4) ---
+  let gaHtml = '';
+  if(g){
+    const gk = [
+      ['Visitantes (28 d)', fmt(g.totals.users)],
+      ['Sesiones', fmt(g.totals.sessions)],
+      ['Páginas vistas', fmt(g.totals.pageviews)],
+    ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
+    const maxS = Math.max(1, ...g.daily.map(d=>d.sessions));
+    const spark = g.daily.length ? `<div class="spark">${g.daily.map(d=>`<span title="${d.date}: ${d.sessions}" style="height:${Math.max(2, d.sessions/maxS*100)}%"></span>`).join('')}</div>` : '';
+    const chan = (g.channels||[]).length ? g.channels.map(c=>`<tr><td>${c.channel}</td><td>${fmt(c.sessions)}</td><td>${pct(c.sessions, g.totals.sessions)}</td></tr>`).join('') : '<tr><td colspan="3">(sin datos)</td></tr>';
+    gaHtml = `
+      <h2>Analítica web · GA4 (últimos 28 días)</h2>
+      <div class="kpis">${gk}</div>
+      ${spark ? `<div class="sub" style="margin:14px 0 4px">Sesiones por día</div>${spark}` : ''}
+      <h2>Por canal</h2>
+      <table><thead><tr><th>Canal</th><th>Sesiones</th><th>%</th></tr></thead><tbody>${chan}</tbody></table>`;
+  } else {
+    gaHtml = '<div class="foot">Google Analytics aún no está conectado (falta <b>GA4_PROPERTY_ID</b> en Netlify y dar acceso al service account en la propiedad GA4).</div>';
+  }
+
+  if(!s){ box.innerHTML = gaHtml + '<div class="foot" style="margin-top:20px">Search Console aún no está conectado (falta <b>GOOGLE_SA_B64</b>).</div>'; return; }
   const kpis = [
     ['Clics (28 d)', fmt(s.totals.clicks)],
     ['Impresiones', fmt(s.totals.impressions)],
@@ -372,8 +397,8 @@ function renderSEO(){
   ].map(([l,v]) => `<div class="kpi card"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('');
   const qBody = s.queries.length ? s.queries.map(r => `<tr><td>${r.q}</td><td>${fmt(r.clicks)}</td><td>${fmt(r.impressions)}</td><td>${r.ctr}%</td><td>${r.position}</td></tr>`).join('') : '<tr><td colspan="5">(sin datos todavía — dominio nuevo)</td></tr>';
   const pBody = s.pages.length ? s.pages.map(r => `<tr><td>${(r.url||'').replace('https://','')}</td><td>${fmt(r.clicks)}</td><td>${fmt(r.impressions)}</td><td>${r.position}</td></tr>`).join('') : '<tr><td colspan="4">(sin datos todavía)</td></tr>';
-  box.innerHTML = `
-    <div class="sub" style="margin:2px 0 12px">Search Console · ${s.start} → ${s.end}</div>
+  box.innerHTML = gaHtml + `
+    <h2>Buscador · Search Console (${s.start} → ${s.end})</h2>
     <div class="kpis">${kpis}</div>
     <h2>Top consultas (posición en Google)</h2>
     <table><thead><tr><th>Consulta</th><th>Clics</th><th>Impres.</th><th>CTR</th><th>Pos.</th></tr></thead><tbody>${qBody}</tbody></table>

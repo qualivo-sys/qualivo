@@ -204,6 +204,30 @@ async function fetchEmailKPIs(token) {
   } catch { return null; }
 }
 
+/** Google Analytics 4: usuarios, sesiones, páginas vistas + por canal + tendencia diaria (28 d). */
+async function fetchGA4(token) {
+  const pid = process.env.GA4_PROPERTY_ID;
+  if (!token || !pid) return null;
+  const url = `https://analyticsdata.googleapis.com/v1beta/properties/${pid}:runReport`;
+  const run = async (body) => {
+    try { const r = await fetch(url, { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: JSON.stringify(body) }); return r.ok ? r.json() : null; }
+    catch { return null; }
+  };
+  const dateRanges = [{ startDate: '28daysAgo', endDate: 'today' }];
+  const [tot, chan, daily] = await Promise.all([
+    run({ dateRanges, metrics: [{ name: 'activeUsers' }, { name: 'sessions' }, { name: 'screenPageViews' }] }),
+    run({ dateRanges, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 8 }),
+    run({ dateRanges, dimensions: [{ name: 'date' }], metrics: [{ name: 'sessions' }], orderBys: [{ dimension: { dimensionName: 'date' } }] })
+  ]);
+  if (!tot) return null;
+  const num = (rep, i) => (rep && rep.rows && rep.rows[0]) ? Number(rep.rows[0].metricValues[i].value) : 0;
+  return {
+    totals: { users: num(tot, 0), sessions: num(tot, 1), pageviews: num(tot, 2) },
+    channels: ((chan && chan.rows) || []).map((r) => ({ channel: r.dimensionValues[0].value, sessions: Number(r.metricValues[0].value) })),
+    daily: ((daily && daily.rows) || []).map((r) => ({ date: r.dimensionValues[0].value, sessions: Number(r.metricValues[0].value) }))
+  };
+}
+
 async function build() {
   const loc = process.env.GHL_LOCATION_ID;
 
@@ -280,17 +304,18 @@ async function build() {
     }));
   } catch { appts = []; }
 
-  // SEO (Search Console) + KPIs de email (Sheet). Degradan a null si no hay credencial.
-  let seo = null, email = null;
+  // SEO (Search Console) + GA4 (Analytics) + KPIs de email (Sheet). Degradan a null si falta credencial.
+  let seo = null, ga4 = null, email = null;
   try {
     const gtok = await googleToken([
       'https://www.googleapis.com/auth/webmasters.readonly',
+      'https://www.googleapis.com/auth/analytics.readonly',
       'https://www.googleapis.com/auth/spreadsheets.readonly'
     ]);
-    if (gtok) { [seo, email] = await Promise.all([fetchSEO(gtok), fetchEmailKPIs(gtok)]); }
+    if (gtok) { [seo, ga4, email] = await Promise.all([fetchSEO(gtok), fetchGA4(gtok), fetchEmailKPIs(gtok)]); }
   } catch { /* sin datos de Google */ }
 
-  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, email };
+  return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, ga4, email };
 }
 
 export default async (req) => {
