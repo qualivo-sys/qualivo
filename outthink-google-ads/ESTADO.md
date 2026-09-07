@@ -482,3 +482,28 @@ Aplicado:
 - Search **sigue en Maximizar clics** hasta el lunes: cambiar de puja en fin de semana, con
   poco volumen, arranca el aprendizaje con los peores datos. El lunes, con 6+ registros en
   Search, pasar a Maximizar conversiones con CPA objetivo 25 €.
+
+## Día 8 (07-09, lunes) — Search a Maximizar conversiones, PMax recortada
+
+Fin de semana: sábado Search 22 clics / 30,9 € / 1 registro, PMax 198 clics / 17,75 € / 0;
+domingo Search 17 / 27,2 € / 0, PMax 298 / 38 € / 0. Acumulado: **510 € (25,5 %), 10
+registros, CPL 51 €**. Search 8 reg. / 264 € (CPL 33 €; EventosIA 7, AIAct 1). PMax 2 / 140 €
+(CPL 70 €), sin registro desde el viernes y volviendo a apps basura (IPTV, phone manager,
+juegos infantiles). Restante 1.489 € → 87,6 €/día (17 días).
+
+Listas de remarketing por fin creciendo tras la CSP: Visitantes_Web 110, Registro_Iniciado 24,
+All Converters 8. A ~50/día no llegan a 1.000 antes del evento → Remarketing DG se queda pausada.
+
+Aplicado:
+- **Search → Maximizar conversiones con CPA objetivo 30 €** (CPL real 33 €; con 8 registros
+  en 8 días hay señal suficiente y esperar más dejaría el aprendizaje sin tiempo). Los
+  ajustes de móvil/horario quedan pero Smart Bidding los ignora salvo el −100 %.
+- **Presupuestos: Search 58,67 → 70 €/día · PMax 26,67 → 15 €/día** (criterio del viernes:
+  CPL no bajó de 40 €). Total 85 €/día.
+- 15 negativas más (otros eventos y marcas: red hat, anthropic, ibm, bizz, meta world,
+  madring, ecommerce, feria, tic, openai, google cloud, aws, microsoft, salesforce, sap).
+- 39 apps y 5 sitios más excluidos a nivel de cuenta.
+
+Vigilar: CPC de Search los dos primeros días de Smart Bidding (hoy ya 2,07 € de media);
+si el volumen cae más del 40 % sin registros, subir CPA objetivo a 40 €. PMax: si el
+miércoles sigue sin registro desde el viernes, pausar y pasar los 15 € a Search.
