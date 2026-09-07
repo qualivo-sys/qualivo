@@ -4,6 +4,8 @@ import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/
 import {
   borrarIngreso,
   borrarPresupuesto,
+  borrarSobre,
+  crearSobre,
   guardarAjustesFinanzas,
   guardarIngreso,
   guardarPresupuesto,
@@ -20,7 +22,7 @@ const eur = (n: number) => `${Number(n).toLocaleString('es-ES', { maximumFractio
 export default async function AjustesFinanzas() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const hoy = hoyIso(perfil.zona_horaria || undefined);
-  const { ajustes, ingresos, presupuestos } = await cargarFinanzas(supabase, usuario.id, hoy);
+  const { ajustes, ingresos, presupuestos, sobres, movimientos } = await cargarFinanzas(supabase, usuario.id, hoy);
 
   const totalIngresos = ingresos.filter((i) => i.activo !== false).reduce((t, i) => t + Number(i.importe), 0);
   const totalPresupuesto = presupuestos.filter((p) => p.activo !== false).reduce((t, p) => t + Number(p.importe), 0);
@@ -88,6 +90,58 @@ export default async function AjustesFinanzas() {
           </Selector>
           <Boton type="submit" variante="contorno" className="w-full">Anadir ingreso</Boton>
         </form>
+      </Tarjeta>
+
+      <Tarjeta id="sobres">
+        <TituloTarjeta>Presupuesto para algo concreto</TituloTarjeta>
+        <p className="mb-3 text-sm text-muted-foreground">
+          Un finde en Roma, la boda de tu primo, las vacaciones. Le pones nombre y un importe, y al apuntar un gasto
+          eliges si va ahi. No toca tu presupuesto mensual.
+        </p>
+        {sobres.length > 0 && (
+          <ul className="mb-4 divide-y divide-border">
+            {sobres.map((s) => {
+              const gastado = movimientos
+                .filter((m) => m.sobre_id === s.id && m.tipo === 'gasto')
+                .reduce((t, m) => t + Number(m.importe), 0);
+              return (
+                <li key={s.id} className="flex items-center gap-3 py-2 text-sm">
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate">
+                      {s.emoji || '🎯'} {s.nombre}
+                      {s.cerrado && <span className="ml-1 text-xs text-muted-foreground">cerrado</span>}
+                    </div>
+                    <div className="text-xs text-muted-foreground tabular-nums">
+                      {eur(gastado)} de {eur(Number(s.importe))}
+                      {s.hasta ? ` · hasta el ${fechaCorta(s.hasta)}` : ''}
+                    </div>
+                  </div>
+                  <form action={borrarSobre.bind(null, s.id)}>
+                    <button type="submit" aria-label={`Borrar ${s.nombre}`} className="text-muted-foreground hover:text-destructive">
+                      <Trash2 size={16} />
+                    </button>
+                  </form>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        <form action={crearSobre} className="space-y-3 border-t border-border pt-3">
+          <div className="grid grid-cols-[4rem_1fr] gap-3">
+            <Campo etiqueta="Icono" name="emoji" placeholder="✈️" maxLength={4} />
+            <Campo etiqueta="Para que es" name="nombre" placeholder="Finde en Roma" required />
+          </div>
+          <Campo etiqueta="Cuanto quieres gastar" name="importe" inputMode="decimal" placeholder="400" required />
+          <div className="grid grid-cols-2 gap-3">
+            <Campo etiqueta="Desde (opcional)" name="desde" type="date" />
+            <Campo etiqueta="Hasta (opcional)" name="hasta" type="date" />
+          </div>
+          <Boton type="submit" variante="contorno" className="w-full">Crear el presupuesto</Boton>
+        </form>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Si le pones fecha de fin, te avisa cuando queden pocos dias y poco dinero. Al borrarlo, sus gastos vuelven al
+          dia a dia.
+        </p>
       </Tarjeta>
 
       <Tarjeta>

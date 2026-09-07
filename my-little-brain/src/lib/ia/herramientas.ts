@@ -338,6 +338,7 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         descripcion: { type: 'string', description: 'En pocas palabras: "menu del mediodia".' },
         impulsivo: { type: 'boolean', description: 'true si fue un gasto no previsto o impulsivo.' },
         ambito: { type: 'string', enum: ['personal', 'empresa'] },
+        sobre: { type: 'string', description: 'Nombre del presupuesto concreto al que va (un viaje, un evento), si el usuario lo menciona.' },
         fecha: { type: 'string', description: 'YYYY-MM-DD. Por defecto hoy.' },
       },
       required: ['importe', 'categoria'],
@@ -992,10 +993,27 @@ async function despachar(
           descripcion: z.string().optional(),
           impulsivo: z.boolean().optional(),
           ambito: z.enum(['personal', 'empresa']).optional(),
+          sobre: z.string().optional(),
           fecha: z.string().optional(),
         })
         .parse(entrada);
       const cat = CATEGORIAS.some((c) => c.id === d.categoria) ? d.categoria : 'otros';
+
+      // Si menciona un presupuesto concreto ("del viaje"), se busca por nombre.
+      let sobreId: string | null = null;
+      let sobreNombre: string | null = null;
+      if (d.sobre) {
+        const { data: abiertos } = await supabase
+          .from('finanzas_sobres').select('id, nombre').eq('user_id', userId).eq('cerrado', false);
+        const buscado = d.sobre.toLowerCase();
+        const encontrado = (abiertos ?? []).find(
+          (s) => (s.nombre as string).toLowerCase().includes(buscado) || buscado.includes((s.nombre as string).toLowerCase()),
+        );
+        if (encontrado) {
+          sobreId = encontrado.id as string;
+          sobreNombre = encontrado.nombre as string;
+        }
+      }
       const valor = Math.round(Math.abs(d.importe) * 100) / 100;
       const { error } = await supabase.from('finanzas_movimientos').insert({
         user_id: userId,
@@ -1006,12 +1024,13 @@ async function despachar(
         descripcion: d.descripcion?.slice(0, 200) ?? null,
         ambito: d.ambito ?? 'personal',
         impulsivo: d.impulsivo ?? false,
+        sobre_id: sobreId,
         fuente: 'chat',
       });
       if (error) throw error;
       const etiqueta = categoriaFinanzas(cat).nombre;
       return {
-        texto: `${d.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'} de ${valor} € apuntado en ${etiqueta}${d.impulsivo ? ' (marcado como impulso)' : ''}.`,
+        texto: `${d.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'} de ${valor} € apuntado en ${etiqueta}${sobreNombre ? ` (${sobreNombre})` : ''}${d.impulsivo ? ' (marcado como impulso)' : ''}.`,
         accion: { herramienta: nombre, resumen: `${d.tipo === 'ingreso' ? '+' : '−'}${valor} € · ${etiqueta}` },
       };
     }

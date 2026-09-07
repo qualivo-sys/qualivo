@@ -115,6 +115,7 @@ export async function registrarMovimiento(datos: FormData) {
     descripcion: texto(datos.get('descripcion'))?.slice(0, 200) ?? null,
     ambito: esAmbito(texto(datos.get('ambito'))),
     impulsivo: datos.get('impulsivo') === 'on' || datos.get('impulsivo') === 'true',
+    sobre_id: texto(datos.get('sobre_id')) || null,
     fuente: 'manual',
   });
   await supabase.from('xp_eventos').insert({
@@ -137,5 +138,43 @@ export async function borrarMovimiento(id: string) {
 export async function alternarImpulsivo(id: string, impulsivo: boolean) {
   const { supabase, userId } = await sesion();
   await supabase.from('finanzas_movimientos').update({ impulsivo }).eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+/**
+ * Un sobre: presupuesto con nombre propio para algo concreto (un finde, una
+ * escapada, un evento). Lo que se gaste ahi no come el presupuesto mensual.
+ */
+export async function crearSobre(datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const nombre = texto(datos.get('nombre'));
+  const valor = importe(datos.get('importe'));
+  if (!nombre || valor === null) return;
+
+  const fecha = (clave: string) => {
+    const v = texto(datos.get(clave));
+    return v && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null;
+  };
+  await supabase.from('finanzas_sobres').insert({
+    user_id: userId,
+    nombre: nombre.slice(0, 80),
+    importe: valor,
+    emoji: texto(datos.get('emoji'))?.slice(0, 4) ?? null,
+    desde: fecha('desde'),
+    hasta: fecha('hasta'),
+  });
+  refrescar();
+}
+
+export async function cerrarSobre(id: string, cerrado: boolean) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('finanzas_sobres').update({ cerrado }).eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+/** Al borrar el sobre, sus gastos se quedan: vuelven al dia a dia. */
+export async function borrarSobre(id: string) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('finanzas_sobres').delete().eq('id', id).eq('user_id', userId);
   refrescar();
 }

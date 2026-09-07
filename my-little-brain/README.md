@@ -28,7 +28,7 @@ rachas y un ajuste de calorias si hace falta. **El usuario solo habla.**
 | **Check-in diario** | Manana (sueno, animo, energia, peso) y noche (foco, pasos, notas), en dos formularios de diez segundos. |
 | **Progreso** | Logros, constancia por semana, horas de foco, peso, grasa, sueno y animo. |
 | **Dias pasados** | Cuerpo se puede mover por los ultimos 30 dias: ver, apuntar y editar comidas de cualquier dia, con macros y lectura de ese dia. |
-| **Dinero** | Control de caja, no contabilidad: caja actual, presupuesto por categoria con semaforo, cumplimiento financiero, gasto marcado como impulso, proyeccion a fin de mes e insights. Registro en dos toques o contandoselo al coach. Motor en `src/lib/motor/finanzas.ts`. |
+| **Dinero** | Control de caja, no contabilidad: caja actual, presupuesto por categoria con semaforo, cumplimiento financiero, gasto marcado como impulso, proyeccion a fin de mes e insights. Presupuestos para algo concreto (un finde, un evento) con nombre, importe y fechas: su gasto no toca el presupuesto mensual. Registro en dos toques o contandoselo al coach. Motor en `src/lib/motor/finanzas.ts`. |
 | **Cuenta** | Recuperar y cambiar contrasena, descargar todos los datos en JSON y borrar la cuenta (RGPD). |
 | **Avisos** | Notificaciones push: el coach te escribe por la manana y por la noche (abren el chat con el check-in lanzado), recuerda el entreno pendiente y avisa cuando la revision del domingo esta lista. |
 | **Comidas** | Calculadora con tabla de ~220 alimentos: "200 g pollo, 150 arroz, 1 cucharada de aceite" sale calculado al momento, sin IA. El coach usa la misma tabla. |

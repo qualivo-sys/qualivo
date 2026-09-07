@@ -10,11 +10,16 @@ import { CATEGORIAS } from '@/lib/motor/finanzas';
  * Apuntar un gasto tiene que costar dos toques: importe y categoria. Todo lo
  * demas (descripcion, si fue un impulso, si es de empresa) es opcional.
  */
-export default function RegistroGasto({ frecuentes = [] as string[], moneda = 'â‚¬' }) {
+export default function RegistroGasto({
+  frecuentes = [] as string[],
+  moneda = 'â‚¬',
+  sobres = [] as { id: string; nombre: string; emoji: string; disponible: number }[],
+}) {
   const formulario = useRef<HTMLFormElement>(null);
   const [categoria, setCategoria] = useState(frecuentes[0] ?? 'restaurantes');
   const [tipo, setTipo] = useState<'gasto' | 'ingreso'>('gasto');
   const [impulsivo, setImpulsivo] = useState(false);
+  const [sobre, setSobre] = useState('');
   const [enviando, setEnviando] = useState(false);
   const [hecho, setHecho] = useState(false);
 
@@ -32,6 +37,7 @@ export default function RegistroGasto({ frecuentes = [] as string[], moneda = 'â
         await registrarMovimiento(datos);
         formulario.current?.reset();
         setImpulsivo(false);
+        setSobre('');
         setEnviando(false);
         setHecho(true);
         setTimeout(() => setHecho(false), 2000);
@@ -41,6 +47,7 @@ export default function RegistroGasto({ frecuentes = [] as string[], moneda = 'â
       <input type="hidden" name="categoria" value={categoria} />
       <input type="hidden" name="tipo" value={tipo} />
       <input type="hidden" name="impulsivo" value={impulsivo ? 'true' : 'false'} />
+      <input type="hidden" name="sobre_id" value={sobre} />
 
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
@@ -84,6 +91,38 @@ export default function RegistroGasto({ frecuentes = [] as string[], moneda = 'â
           ))}
         </div>
       </div>
+
+      {tipo === 'gasto' && sobres.length > 0 && (
+        <div>
+          <p className="mb-1.5 text-xs text-muted-foreground">Â¿Va a un presupuesto concreto?</p>
+          <div className="desplazable-x">
+            <div className="flex min-w-max gap-1.5 pb-1">
+              <button
+                type="button"
+                onClick={() => setSobre('')}
+                className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                  sobre === '' ? 'border-primary bg-primary/15 text-foreground' : 'border-border bg-card text-muted-foreground'
+                }`}
+              >
+                Dia a dia
+              </button>
+              {sobres.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => setSobre(s.id)}
+                  className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                    sobre === s.id ? 'border-primary bg-primary/15 text-foreground' : 'border-border bg-card text-muted-foreground'
+                  }`}
+                >
+                  {s.emoji} {s.nombre}
+                  <span className="ml-1 tabular-nums opacity-70">{Math.round(s.disponible)} {moneda}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <input
         name="descripcion"

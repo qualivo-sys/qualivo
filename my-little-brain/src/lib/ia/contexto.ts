@@ -167,6 +167,9 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
     for (const c of resumen.categorias.slice(0, 6)) {
       l.push(`- ${c.nombre}: ${eurCoach(c.gastado)} de ${eurCoach(c.presupuesto)} (${c.pct} %)${c.estado === 'pasado' ? ' — pasado' : c.ritmoAlto ? ' — va rapido' : ''}.`);
     }
+    for (const s of resumen.sobres.filter((x) => !x.cerrado)) {
+      l.push(`- Presupuesto concreto "${s.nombre}": ${eurCoach(s.gastado)} de ${eurCoach(s.importe)}${s.diasRestantes !== null ? `, quedan ${s.diasRestantes} dias` : ''}.`);
+    }
     if (resumen.gastoImpulsivo > 0) l.push(`- Marcado como impulso este mes: ${eurCoach(resumen.gastoImpulsivo)}.`);
     if (finanzas.ajustes?.ahorro_mes) l.push(`- Quiere ahorrar ${eurCoach(Number(finanzas.ajustes.ahorro_mes))} al mes.`);
     if (finanzas.ajustes?.caja_minima) l.push(`- Caja minima que se ha fijado: ${eurCoach(Number(finanzas.ajustes.caja_minima))}.`);

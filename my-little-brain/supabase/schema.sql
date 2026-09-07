@@ -260,6 +260,25 @@ create table if not exists public.memoria (
 );
 
 
+
+-- Presupuestos para algo concreto (un finde, una escapada, un evento): el
+-- gasto de un sobre no come el presupuesto mensual del dia a dia.
+create table if not exists public.finanzas_sobres (
+  id      uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users on delete cascade,
+  nombre  text not null,
+  importe numeric(12,2) not null check (importe >= 0),
+  emoji   text,
+  desde   date,
+  hasta   date,
+  cerrado boolean not null default false,
+  creado  timestamptz not null default now()
+);
+create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_id, cerrado, creado desc);
+
+alter table public.finanzas_movimientos
+  add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
+
 -- ── Estado emocional: diario guiado y hojas del estanque ───────────────
 -- Las emociones del dia van con el resto del bienestar.
 alter table public.bienestar add column if not exists emociones text[] not null default '{}';
@@ -379,7 +398,7 @@ begin
     'perfiles','metricas_corporales','comidas','planes_entreno','entrenamientos','series',
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
     'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
-    'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos',
+    'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos','finanzas_sobres',
     'diario','hojas'
   ] loop
     execute format('alter table public.%I enable row level security', t);

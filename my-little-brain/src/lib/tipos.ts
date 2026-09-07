@@ -272,6 +272,18 @@ export interface Presupuesto {
   activo: boolean;
 }
 
+/** Presupuesto con nombre propio para algo puntual: un finde, un evento. */
+export interface Sobre {
+  id: string;
+  nombre: string;
+  importe: number;
+  emoji: string | null;
+  desde: string | null;
+  hasta: string | null;
+  cerrado: boolean;
+  creado: string;
+}
+
 export interface Movimiento {
   id: string;
   fecha: string;
@@ -282,5 +294,7 @@ export interface Movimiento {
   ambito: AmbitoFinanzas;
   impulsivo: boolean;
   fuente: 'manual' | 'chat';
+  /** Si va contra un sobre, no cuenta en el presupuesto mensual de su categoria. */
+  sobre_id: string | null;
   creado: string;
 }

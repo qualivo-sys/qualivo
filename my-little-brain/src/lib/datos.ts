@@ -16,7 +16,7 @@ import { tmbDe, metasNutricion } from './perfil';
 import type {
   Bienestar, Comida, EntradaDiario, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
   Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil, Presupuesto,
-  RecuerdoCoach, Tarea,
+  RecuerdoCoach, Sobre, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
 
@@ -227,6 +227,7 @@ export interface DatosFinanzas {
   ingresos: IngresoPrevisto[];
   presupuestos: Presupuesto[];
   movimientos: Movimiento[];
+  sobres: Sobre[];
   /** true cuando la persona ha configurado o usado el modulo alguna vez. */
   activo: boolean;
 }
@@ -241,7 +242,7 @@ export async function cargarFinanzas(
   hoy: string,
 ): Promise<DatosFinanzas> {
   const desde = sumarDias(hoy, -120);
-  const [ajustes, ingresos, presupuestos, movimientos] = await Promise.all([
+  const [ajustes, ingresos, presupuestos, movimientos, sobres] = await Promise.all([
     supabase.from('finanzas_ajustes').select('*').eq('user_id', userId).maybeSingle()
       .then((r) => (r.data as FinanzasAjustes | null) ?? null),
     supabase.from('finanzas_ingresos').select('*').eq('user_id', userId).order('creado')
@@ -251,6 +252,8 @@ export async function cargarFinanzas(
     supabase.from('finanzas_movimientos').select('*').eq('user_id', userId).gte('fecha', desde)
       .order('fecha', { ascending: false }).order('creado', { ascending: false })
       .then((r) => (r.data ?? []) as Movimiento[]),
+    supabase.from('finanzas_sobres').select('*').eq('user_id', userId).order('creado', { ascending: false })
+      .then((r) => (r.data ?? []) as Sobre[]),
   ]);
 
   return {
@@ -258,7 +261,8 @@ export async function cargarFinanzas(
     ingresos,
     presupuestos,
     movimientos,
-    activo: Boolean(ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length),
+    sobres,
+    activo: Boolean(ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length || sobres.length),
   };
 }
 

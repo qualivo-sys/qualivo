@@ -320,7 +320,7 @@ check('con objetivo de mantener, corrige la deriva', mantener && mantener.delta 
 
 // ── 13. Finanzas: control de caja ──────────────────────────────────────
 const { resumenFinanzas, insightsFinanzas, revisionSemana, mesAnteriorA, diasDelMes } = await import(`${L}/motor/finanzas.js`);
-const mov = (fecha, importe, categoria, extra = {}) => ({ id: fecha + categoria + importe, fecha, tipo: 'gasto', importe, categoria, descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', creado: '', ...extra });
+const mov = (fecha, importe, categoria, extra = {}) => ({ id: fecha + categoria + importe, fecha, tipo: 'gasto', importe, categoria, descripcion: null, ambito: 'personal', impulsivo: false, sobre_id: null, fuente: 'manual', creado: '', ...extra });
 const movimientos = [
   mov('2026-09-02', 18, 'restaurantes'),
   mov('2026-09-03', 94, 'restaurantes', { impulsivo: true }),
@@ -394,6 +394,34 @@ check('resume animo, emociones frecuentes y estado del estanque', resM.animoMedi
 
 const evid = evidenciasSemana({ dias: diasMente, diario: [{ id: 'd', fecha: '2026-09-02', bien: 'Cerre una reunion', preocupa: null, controlo: null, aprendido: null, agradecido: null }], hojas: hojasMock, desde: '2026-09-01', hasta: '2026-09-16' });
 check('las evidencias recogen lo hecho y las hojas que se fueron', evid.some((e) => /8 dias/.test(e)) && evid.some((e) => /Se fue una hoja/.test(e)) && evid.includes('Cerre una reunion'), evid.join(' | '));
+
+// ── 15. Sobres: presupuesto para algo concreto ─────────────────────────
+const sobresMock = [
+  { id: 's1', nombre: 'Finde en Roma', importe: 400, emoji: '✈️', desde: '2026-09-11', hasta: '2026-09-14', cerrado: false, creado: '' },
+  { id: 's2', nombre: 'Boda de Javi', importe: 200, emoji: '💒', desde: null, hasta: null, cerrado: true, creado: '' },
+];
+const conSobres = [
+  ...movimientos,
+  mov('2026-09-12', 180, 'restaurantes', { sobre_id: 's1' }),
+  mov('2026-09-13', 90, 'transporte', { sobre_id: 's1' }),
+  mov('2026-08-20', 210, 'ocio', { sobre_id: 's2' }),
+];
+const resSob = resumenFinanzas({ movimientos: conSobres, presupuestos, ingresosPrevistos: [], ajustes: null, sobres: sobresMock, hoy: '2026-09-12' });
+const roma = resSob.sobres.find((s) => s.id === 's1');
+check('el sobre suma solo sus gastos y calcula lo que queda', roma.gastado === 270 && roma.disponible === 130 && roma.pct === 68 && roma.movimientos === 2, JSON.stringify(roma));
+check('cuenta los dias que quedan del sobre', roma.diasRestantes === 2, String(roma.diasRestantes));
+const restSob = resSob.categorias.find((c) => c.id === 'restaurantes');
+check('el gasto del sobre NO come el presupuesto mensual de su categoria', restSob.gastado === 172, String(restSob.gastado));
+check('pero si cuenta en el gasto total y en la caja', resSob.gastos === 417 + 270 && resSob.gastoEnSobres === 270, JSON.stringify({ g: resSob.gastos, s: resSob.gastoEnSobres }));
+const boda = resSob.sobres.find((s) => s.id === 's2');
+check('un sobre cerrado sigue con sus numeros aunque sea de otro mes', boda.cerrado && boda.gastado === 210 && boda.estado === 'pasado', JSON.stringify(boda));
+const pasado = resumenFinanzas({ movimientos: [mov('2026-09-12', 520, 'restaurantes', { sobre_id: 's1' })], presupuestos: [], ingresosPrevistos: [], ajustes: null, sobres: [sobresMock[0]], hoy: '2026-09-12' });
+check('avisa cuando te pasas en un sobre abierto', insightsFinanzas(pasado, null, null).some((i) => /Finde en Roma/.test(i.texto) && /pasado/.test(i.texto)), insightsFinanzas(pasado, null, null).map((i) => i.texto).join(' | '));
+const cerradoPasado = resumenFinanzas({ movimientos: [mov('2026-08-20', 210, 'ocio', { sobre_id: 's2' })], presupuestos: [], ingresosPrevistos: [], ajustes: null, sobres: [sobresMock[1]], hoy: '2026-09-12' });
+check('un sobre ya cerrado no da la lata', !insightsFinanzas(cerradoPasado, null, null).some((i) => /Boda de Javi/.test(i.texto)));
+const casiRoma = resumenFinanzas({ movimientos: [...movimientos, mov('2026-09-12', 350, 'restaurantes', { sobre_id: 's1' })], presupuestos, ingresosPrevistos: [], ajustes: null, sobres: [sobresMock[0]], hoy: '2026-09-12' });
+check('avisa cuando queda poco dinero y pocos dias', insightsFinanzas(casiRoma, null, null).some((i) => /Roma.*quedan|quedan.*Roma/i.test(i.texto)), insightsFinanzas(casiRoma, null, null).map((i) => i.texto).join(' | '));
+check('sin sobres, el resumen sigue igual que antes', resumenFinanzas({ movimientos, presupuestos, ingresosPrevistos: [], ajustes: null, hoy: '2026-09-10' }).sobres.length === 0);
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

@@ -3,7 +3,7 @@
  * "cuanto he gastado exactamente", es "¿voy por encima o por debajo de lo que
  * decidi gastar, y ese dinero me acerca a lo que quiero?".
  */
-import type { FinanzasAjustes, IngresoPrevisto, Movimiento, Presupuesto } from '../tipos';
+import type { FinanzasAjustes, IngresoPrevisto, Movimiento, Presupuesto, Sobre } from '../tipos';
 
 export interface Categoria {
   id: string;
@@ -68,6 +68,23 @@ export interface LineaCategoria {
   inversion: boolean;
 }
 
+export interface LineaSobre {
+  id: string;
+  nombre: string;
+  emoji: string;
+  importe: number;
+  gastado: number;
+  disponible: number;
+  pct: number;
+  estado: EstadoCategoria;
+  cerrado: boolean;
+  desde: string | null;
+  hasta: string | null;
+  /** Dias que quedan si tiene fecha de fin; null si no la tiene o ya paso. */
+  diasRestantes: number | null;
+  movimientos: number;
+}
+
 export interface ResumenFinanzas {
   mes: string;
   /** Dinero que hay ahora: la caja conocida mas lo movido desde entonces. */
@@ -86,6 +103,10 @@ export interface ResumenFinanzas {
   categorias: LineaCategoria[];
   /** Categorias sin presupuesto en las que si hay gasto. */
   sinPresupuesto: { id: string; nombre: string; emoji: string; gastado: number }[];
+  /** Presupuestos para algo concreto: un finde, un evento. Van aparte. */
+  sobres: LineaSobre[];
+  /** Gasto del mes que ha ido a sobres y no al presupuesto del dia a dia. */
+  gastoEnSobres: number;
   gastoImpulsivo: number;
   diaDelMes: number;
   dias: number;
@@ -99,6 +120,7 @@ export function resumenFinanzas(datos: {
   presupuestos: Presupuesto[];
   ingresosPrevistos: IngresoPrevisto[];
   ajustes: FinanzasAjustes | null;
+  sobres?: Sobre[];
   hoy: string;
   mes?: string;
 }): ResumenFinanzas {
@@ -121,10 +143,12 @@ export function resumenFinanzas(datos: {
   const parteDelMes = diaDelMes / dias;
 
   const activos = datos.presupuestos.filter((p) => p.activo !== false);
+  // Lo que va a un sobre es gasto planificado aparte: no come el presupuesto del dia a dia.
+  const gastosDiaADia = gastosMes.filter((m) => !m.sobre_id);
   const categorias: LineaCategoria[] = activos
     .map((p) => {
       const info = categoria(p.categoria);
-      const suyos = gastosMes.filter((m) => m.categoria === p.categoria);
+      const suyos = gastosDiaADia.filter((m) => m.categoria === p.categoria);
       const gastado = Math.round(suma(suyos.map((m) => num(m.importe))) * 100) / 100;
       const presupuesto = num(p.importe);
       const pct = presupuesto > 0 ? Math.round((gastado / presupuesto) * 100) : 0;
@@ -147,14 +171,42 @@ export function resumenFinanzas(datos: {
     .sort((a, b) => b.pct - a.pct);
 
   const conPresupuesto = new Set(activos.map((p) => p.categoria));
-  const sinPresupuesto = [...new Set(gastosMes.map((m) => m.categoria))]
+  const sinPresupuesto = [...new Set(gastosDiaADia.map((m) => m.categoria))]
     .filter((id) => !conPresupuesto.has(id))
     .map((id) => ({
       ...categoria(id),
-      gastado: Math.round(suma(gastosMes.filter((m) => m.categoria === id).map((m) => num(m.importe))) * 100) / 100,
+      gastado: Math.round(suma(gastosDiaADia.filter((m) => m.categoria === id).map((m) => num(m.importe))) * 100) / 100,
     }))
     .filter((c) => c.gastado > 0)
     .sort((a, b) => b.gastado - a.gastado);
+
+  // Un sobre puede cruzar meses (un viaje a caballo entre julio y agosto),
+  // asi que se cuenta con todos los movimientos, no solo con los del mes.
+  const todosGastos = datos.movimientos.filter((m) => m.tipo === 'gasto');
+  const sobres: LineaSobre[] = (datos.sobres ?? []).map((s) => {
+    const suyos = todosGastos.filter((m) => m.sobre_id === s.id);
+    const gastado = Math.round(suma(suyos.map((m) => num(m.importe))) * 100) / 100;
+    const presupuesto = num(s.importe);
+    const pct = presupuesto > 0 ? Math.round((gastado / presupuesto) * 100) : 0;
+    const restantes = s.hasta
+      ? Math.round((new Date(s.hasta + 'T12:00:00').getTime() - new Date(datos.hoy + 'T12:00:00').getTime()) / 86400000)
+      : null;
+    return {
+      id: s.id,
+      nombre: s.nombre,
+      emoji: s.emoji || '🎯',
+      importe: presupuesto,
+      gastado,
+      disponible: Math.round((presupuesto - gastado) * 100) / 100,
+      pct,
+      estado: gastado > presupuesto ? 'pasado' : pct >= 80 ? 'cerca' : 'bien',
+      cerrado: s.cerrado,
+      desde: s.desde,
+      hasta: s.hasta,
+      diasRestantes: restantes !== null && restantes >= 0 ? restantes : null,
+      movimientos: suyos.length,
+    };
+  });
 
   const presupuestoTotal = suma(activos.map((p) => num(p.importe)));
   // Proyectar el mes con uno o dos apuntes es adivinar: hacen falta varios dias.
@@ -174,6 +226,8 @@ export function resumenFinanzas(datos: {
       : null,
     categorias,
     sinPresupuesto,
+    sobres,
+    gastoEnSobres: Math.round(suma(gastosMes.filter((m) => m.sobre_id).map((m) => num(m.importe))) * 100) / 100,
     gastoImpulsivo: Math.round(suma(gastosMes.filter((m) => m.impulsivo).map((m) => num(m.importe))) * 100) / 100,
     diaDelMes,
     dias,
@@ -244,6 +298,14 @@ export function insightsFinanzas(
     const pct = Math.round((actual.gastoImpulsivo / actual.gastos) * 100);
     if (pct >= 15) {
       salida.push({ tono: 'aviso', texto: `${eur(actual.gastoImpulsivo)} de lo que llevas gastado (${pct} %) lo marcaste como impulsivo. Ahi esta el margen mas facil.` });
+    }
+  }
+
+  for (const s of actual.sobres.filter((x) => !x.cerrado)) {
+    if (s.estado === 'pasado') {
+      salida.push({ tono: 'aviso', texto: `Te has pasado ${eur(-s.disponible)} en ${s.nombre}: llevas ${eur(s.gastado)} de ${eur(s.importe)}.` });
+    } else if (s.estado === 'cerca' && s.diasRestantes !== null && s.diasRestantes > 0) {
+      salida.push({ tono: 'aviso', texto: `${s.nombre}: te quedan ${eur(s.disponible)} y ${s.diasRestantes} ${s.diasRestantes === 1 ? 'dia' : 'dias'}.` });
     }
   }
 
