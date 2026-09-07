@@ -30,6 +30,7 @@ function provider(s) {
   if (x.includes('google')) return 'Google Ads';
   if (x.includes('landing')) return 'Meta · Landing';
   if (/facebook|lead form|instant|formulario|meta/.test(x)) return 'Meta · Instantáneo';
+  if (/calculadora|test qu|lead[\s-]?magnet/.test(x)) return 'Lead magnet · Blog';
   if (/whatsapp|gener|directo|web/.test(x)) return 'Web / WhatsApp';
   return s ? 'Otro' : '(sin fuente)';
 }
