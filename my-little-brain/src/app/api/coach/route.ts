@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
 import { MODELO, clienteIA, hayClaveIA, parametrosModelo } from '@/lib/ia/cliente';
 import { construirContexto } from '@/lib/ia/contexto';
+import { cargarFinanzas } from '@/lib/datos';
+import { resumenFinanzas } from '@/lib/motor/finanzas';
 import { HERRAMIENTAS, ejecutarHerramienta } from '@/lib/ia/herramientas';
 import { anotarUso, cuota } from '@/lib/ia/limites';
 import { PROMPT_COACH, PROMPT_ONBOARDING } from '@/lib/ia/prompt';
@@ -71,7 +73,14 @@ export async function POST(peticion: Request) {
   }
 
   const panel = await cargarPanel(supabase, usuario.id, perfil);
-  const contexto = construirContexto(panel);
+  // El coach tambien lleva el dinero, si la persona usa ese modulo.
+  const finanzas = await cargarFinanzas(supabase, usuario.id, panel.hoy);
+  const contexto = construirContexto(
+    panel,
+    finanzas.activo
+      ? { resumen: resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy }), ajustes: finanzas.ajustes }
+      : null,
+  );
 
   const { data: historial } = await supabase
     .from('chat_mensajes')

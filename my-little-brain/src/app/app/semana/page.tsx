@@ -5,7 +5,8 @@ import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/
 import { borrarActividad, registrarActividad } from '@/app/app/acciones';
 import { TIPOS_CARDIO } from '@/lib/motor/cardio';
 import { esActividad } from '@/lib/motor/energia';
-import { cargarPanel } from '@/lib/datos';
+import { insightsFinanzas, resumenFinanzas, revisionSemana } from '@/lib/motor/finanzas';
+import { cargarFinanzas, cargarPanel } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import { estadisticasSemana } from '@/lib/ia/revision';
 import { sesionRequerida } from '@/lib/sesion';
@@ -51,6 +52,19 @@ export default async function PaginaSemana() {
     { entrenos: 0, actividades: 0, comido: 0, gastado: 0, pasos: 0, redondos: 0 },
   );
   const LETRAS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+
+  // Dinero de la semana, si usa el modulo.
+  const finanzas = await cargarFinanzas(supabase, usuario.id, panel.hoy);
+  const dinero = finanzas.activo
+    ? (() => {
+        const resumen = resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy });
+        return {
+          resumen,
+          semana: revisionSemana(finanzas.movimientos, resumen, semanaActual, panel.hoy),
+          insights: insightsFinanzas(resumen, null, finanzas.ajustes).slice(0, 2),
+        };
+      })()
+    : null;
 
   const { data } = await supabase
     .from('revisiones')
@@ -140,6 +154,36 @@ export default async function PaginaSemana() {
           </form>
         </details>
       </Tarjeta>
+
+      {dinero && (
+        <Tarjeta>
+          <div className="mb-3 flex items-baseline justify-between">
+            <TituloTarjeta className="mb-0">Dinero</TituloTarjeta>
+            <Link href="/app/finanzas" className="text-sm text-primary underline">Ver</Link>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className="text-lg font-semibold tabular-nums">{Math.round(dinero.semana.gastado).toLocaleString('es-ES')} €</div>
+              <div className="text-xs text-muted-foreground">esta semana</div>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className="text-lg font-semibold tabular-nums">{Math.round(dinero.resumen.caja).toLocaleString('es-ES')} €</div>
+              <div className="text-xs text-muted-foreground">caja</div>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <div className="text-lg font-semibold tabular-nums">{dinero.resumen.cumplimiento ?? '—'}{dinero.resumen.cumplimiento !== null ? ' %' : ''}</div>
+              <div className="text-xs text-muted-foreground">cumplimiento</div>
+            </div>
+          </div>
+          {dinero.insights.length > 0 && (
+            <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+              {dinero.insights.map((i) => (
+                <li key={i.texto}>· {i.texto}</li>
+              ))}
+            </ul>
+          )}
+        </Tarjeta>
+      )}
 
       <Tarjeta>
         <TituloTarjeta>Puntuaciones</TituloTarjeta>

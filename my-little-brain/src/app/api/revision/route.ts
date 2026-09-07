@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { cargarPanel, cargarPerfil } from '@/lib/datos';
+import { cargarFinanzas, cargarPanel, cargarPerfil } from '@/lib/datos';
+import { resumenFinanzas, revisionSemana } from '@/lib/motor/finanzas';
 import { inicioSemana, sumarDias } from '@/lib/fechas';
 import { MODELO_REVISION, clienteIA, hayClaveIA, parametrosModelo, textoDe } from '@/lib/ia/cliente';
 import { anotarUso, cuota } from '@/lib/ia/limites';
@@ -41,13 +42,27 @@ export async function POST(peticion: Request) {
   const lunes = inicioSemana(semana ?? sumarDias(panel.hoy, -7));
   const stats = estadisticasSemana(panel, lunes);
 
+  // Bloque de dinero para la revision, si usa el modulo.
+  const finanzas = await cargarFinanzas(supabase, usuario.id, panel.hoy);
+  let dinero: string | null = null;
+  if (finanzas.activo) {
+    const resumen = resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy });
+    const sem = revisionSemana(finanzas.movimientos, resumen, lunes, sumarDias(lunes, 6));
+    dinero = [
+      `- Gastado en la semana: ${Math.round(sem.gastado)} €${sem.categoriaTop ? `, sobre todo en ${sem.categoriaTop.nombre.toLowerCase()} (${Math.round(sem.categoriaTop.gastado)} €)` : ''}.`,
+      `- Marcado como impulso: ${Math.round(sem.impulsivo)} €.`,
+      `- Mes en curso: ${Math.round(resumen.gastos)} € de gasto sobre ${Math.round(resumen.presupuestoTotal)} € de presupuesto. Cumplimiento ${resumen.cumplimiento ?? '—'} %.`,
+      ...resumen.categorias.filter((c) => c.estado === 'pasado').map((c) => `- Pasado en ${c.nombre.toLowerCase()}: ${Math.round(c.gastado)} € de ${Math.round(c.presupuesto)} €.`),
+    ].join('\n');
+  }
+
   try {
     const respuesta = await clienteIA().beta.messages.create({
       model: MODELO_REVISION,
       max_tokens: 4096,
       ...parametrosModelo(MODELO_REVISION, 'high'),
       system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: promptRevision(panel, stats) }],
+      messages: [{ role: 'user', content: promptRevision(panel, stats, dinero) }],
     });
 
     if (respuesta.stop_reason === 'refusal') {

@@ -2,6 +2,8 @@ import { fechaLarga } from '../fechas';
 import { correlaciones } from '../motor/puntuaciones';
 import { ETIQUETA_CATEGORIA_FOCO, ETIQUETA_OBJETIVO } from '../perfil';
 import type { Panel } from '../datos';
+import type { ResumenFinanzas } from '../motor/finanzas';
+import type { FinanzasAjustes } from '../tipos';
 
 const n = (valor: number | null | undefined, decimales = 1) =>
   valor === null || valor === undefined || !Number.isFinite(valor) ? '—' : valor.toFixed(decimales);
@@ -10,7 +12,12 @@ const n = (valor: number | null | undefined, decimales = 1) =>
  * Contexto que el coach recibe en cada mensaje. Son datos calculados por la app,
  * no estimaciones del modelo: aqui esta la unica fuente de verdad numerica.
  */
-export function construirContexto(panel: Panel): string {
+export interface ContextoFinanzas {
+  resumen: ResumenFinanzas;
+  ajustes: FinanzasAjustes | null;
+}
+
+export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | null): string {
   const { perfil, metas, cuerpo, diaHoy, semana, puntuaciones } = panel;
   const l: string[] = [];
 
@@ -141,7 +148,26 @@ export function construirContexto(panel: Panel): string {
     l.push(`\nFOCO ULTIMOS 30 DIAS: ${((focoPorCategoria.get('total') ?? 0) / 60).toFixed(1)} h en total.`);
   }
 
+  if (finanzas) {
+    const { resumen } = finanzas;
+    l.push('\nDINERO (control de caja, no contabilidad)');
+    l.push(
+      `- Caja actual: ${eurCoach(resumen.caja)}. Este mes: ${eurCoach(resumen.gastos)} de gasto, ${eurCoach(resumen.ingresos)} de ingresos, neto ${eurCoach(resumen.neto)}.`,
+    );
+    if (resumen.presupuestoTotal > 0) {
+      l.push(`- Presupuesto del mes: ${eurCoach(resumen.presupuestoTotal)}. Cumplimiento: ${resumen.cumplimiento ?? '—'} %. A este ritmo acabara en ${eurCoach(resumen.proyeccion)}.`);
+    }
+    for (const c of resumen.categorias.slice(0, 6)) {
+      l.push(`- ${c.nombre}: ${eurCoach(c.gastado)} de ${eurCoach(c.presupuesto)} (${c.pct} %)${c.estado === 'pasado' ? ' — pasado' : c.ritmoAlto ? ' — va rapido' : ''}.`);
+    }
+    if (resumen.gastoImpulsivo > 0) l.push(`- Marcado como impulso este mes: ${eurCoach(resumen.gastoImpulsivo)}.`);
+    if (finanzas.ajustes?.ahorro_mes) l.push(`- Quiere ahorrar ${eurCoach(Number(finanzas.ajustes.ahorro_mes))} al mes.`);
+    if (finanzas.ajustes?.caja_minima) l.push(`- Caja minima que se ha fijado: ${eurCoach(Number(finanzas.ajustes.caja_minima))}.`);
+  }
+
   return l.join('\n');
 }
 
 export { ETIQUETA_CATEGORIA_FOCO };
+
+const eurCoach = (n: number) => `${Math.round(n).toLocaleString('es-ES')} €`;

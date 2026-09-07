@@ -14,8 +14,9 @@ import {
 } from './motor/puntuaciones';
 import { tmbDe, metasNutricion } from './perfil';
 import type {
-  Bienestar, Comida, Entrenamiento, Foco, Habito, HabitoRegistro,
-  MetricaCorporal, ObjetivoRegistro, Perfil, RecuerdoCoach, Tarea,
+  Bienestar, Comida, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
+  IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil, Presupuesto,
+  RecuerdoCoach, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
 
@@ -219,4 +220,44 @@ export async function cargarSesionesMotor(
       ejercicios: [...porEjercicio.entries()].map(([ejercicioId, series]) => ({ ejercicioId, series })),
     };
   });
+}
+
+export interface DatosFinanzas {
+  ajustes: FinanzasAjustes | null;
+  ingresos: IngresoPrevisto[];
+  presupuestos: Presupuesto[];
+  movimientos: Movimiento[];
+  /** true cuando la persona ha configurado o usado el modulo alguna vez. */
+  activo: boolean;
+}
+
+/**
+ * Todo lo de finanzas de los ultimos meses. Va aparte del panel porque no
+ * todo el mundo usa este modulo y no tiene sentido cargarlo siempre.
+ */
+export async function cargarFinanzas(
+  supabase: SupabaseClient,
+  userId: string,
+  hoy: string,
+): Promise<DatosFinanzas> {
+  const desde = sumarDias(hoy, -120);
+  const [ajustes, ingresos, presupuestos, movimientos] = await Promise.all([
+    supabase.from('finanzas_ajustes').select('*').eq('user_id', userId).maybeSingle()
+      .then((r) => (r.data as FinanzasAjustes | null) ?? null),
+    supabase.from('finanzas_ingresos').select('*').eq('user_id', userId).order('creado')
+      .then((r) => (r.data ?? []) as IngresoPrevisto[]),
+    supabase.from('finanzas_presupuestos').select('*').eq('user_id', userId).order('categoria')
+      .then((r) => (r.data ?? []) as Presupuesto[]),
+    supabase.from('finanzas_movimientos').select('*').eq('user_id', userId).gte('fecha', desde)
+      .order('fecha', { ascending: false }).order('creado', { ascending: false })
+      .then((r) => (r.data ?? []) as Movimiento[]),
+  ]);
+
+  return {
+    ajustes,
+    ingresos,
+    presupuestos,
+    movimientos,
+    activo: Boolean(ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length),
+  };
 }

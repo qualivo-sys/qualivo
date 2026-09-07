@@ -182,6 +182,7 @@ export const XP_POR_ACCION: Record<string, number> = {
   entreno: 40,
   actividad: 25,
   dia_redondo: 30,
+  gasto: 3,
   foco: 5,
   habito: 8,
   checkin: 10,

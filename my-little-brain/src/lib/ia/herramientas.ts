@@ -5,6 +5,7 @@ import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { emparejarEjercicio } from '../motor/ejercicios';
+import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
 import { alternativas, firmaPerfil, generarPlan, prescripcion } from '../motor/planificador';
 import { ejercicio } from '../motor/ejercicios';
 import type { Bloque, PlanEntreno } from '../motor/tipos-motor';
@@ -284,6 +285,27 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         todos_los_dias: { type: 'boolean', description: 'true para cambiarlo en todos los dias del plan donde aparezca (por defecto). false para solo el primero.' },
       },
       required: ['ejercicio_actual'],
+    },
+  },
+  {
+    name: 'registrar_gasto',
+    description:
+      'Apunta un gasto o un ingreso cuando el usuario lo cuente ("me he gastado 18 en el menu", "he cobrado la factura del cliente A"). Elige tu la categoria. Marca impulsivo:true solo si el usuario da a entender que no lo tenia previsto o se arrepiente.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        importe: { type: 'number', description: 'Importe en euros, siempre positivo.' },
+        tipo: { type: 'string', enum: ['gasto', 'ingreso'], description: 'Por defecto gasto.' },
+        categoria: {
+          type: 'string',
+          enum: ['alimentacion', 'restaurantes', 'ocio', 'vivienda', 'transporte', 'suscripciones', 'formacion', 'deporte', 'salud', 'otros'],
+        },
+        descripcion: { type: 'string', description: 'En pocas palabras: "menu del mediodia".' },
+        impulsivo: { type: 'boolean', description: 'true si fue un gasto no previsto o impulsivo.' },
+        ambito: { type: 'string', enum: ['personal', 'empresa'] },
+        fecha: { type: 'string', description: 'YYYY-MM-DD. Por defecto hoy.' },
+      },
+      required: ['importe', 'categoria'],
     },
   },
   {
@@ -878,6 +900,39 @@ async function despachar(
       return {
         texto: `Cambiado ${actual.nombre} por ${nuevoNombre} en ${dias}.${otras.length ? ` Otras opciones si no le convence: ${otras.join(', ')}.` : ''}`,
         accion: { herramienta: nombre, resumen: `${actual.nombre} → ${nuevoNombre}` },
+      };
+    }
+
+    case 'registrar_gasto': {
+      const d = z
+        .object({
+          importe: num,
+          tipo: z.enum(['gasto', 'ingreso']).optional(),
+          categoria: z.string(),
+          descripcion: z.string().optional(),
+          impulsivo: z.boolean().optional(),
+          ambito: z.enum(['personal', 'empresa']).optional(),
+          fecha: z.string().optional(),
+        })
+        .parse(entrada);
+      const cat = CATEGORIAS.some((c) => c.id === d.categoria) ? d.categoria : 'otros';
+      const valor = Math.round(Math.abs(d.importe) * 100) / 100;
+      const { error } = await supabase.from('finanzas_movimientos').insert({
+        user_id: userId,
+        fecha: d.fecha && /^\d{4}-\d{2}-\d{2}$/.test(d.fecha) ? d.fecha : ctx.hoy,
+        tipo: d.tipo ?? 'gasto',
+        importe: valor,
+        categoria: cat,
+        descripcion: d.descripcion?.slice(0, 200) ?? null,
+        ambito: d.ambito ?? 'personal',
+        impulsivo: d.impulsivo ?? false,
+        fuente: 'chat',
+      });
+      if (error) throw error;
+      const etiqueta = categoriaFinanzas(cat).nombre;
+      return {
+        texto: `${d.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'} de ${valor} € apuntado en ${etiqueta}${d.impulsivo ? ' (marcado como impulso)' : ''}.`,
+        accion: { herramienta: nombre, resumen: `${d.tipo === 'ingreso' ? '+' : '−'}${valor} € · ${etiqueta}` },
       };
     }
 

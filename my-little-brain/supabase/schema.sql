@@ -122,6 +122,55 @@ create table if not exists public.series (
 create index if not exists series_entreno on public.series (entrenamiento_id);
 create index if not exists series_user_ejercicio on public.series (user_id, ejercicio_id);
 
+
+-- ── Finanzas: control de caja, no contabilidad ─────────────────────────
+create table if not exists public.finanzas_ajustes (
+  user_id      uuid primary key references auth.users on delete cascade,
+  -- Caja conocida a una fecha; a partir de ahi se suma y resta lo registrado.
+  caja_inicial numeric(12,2) not null default 0,
+  caja_fecha   date not null default current_date,
+  ahorro_mes   numeric(12,2),
+  caja_minima  numeric(12,2),
+  moneda       text not null default 'EUR',
+  activo       boolean not null default true,
+  actualizado  timestamptz not null default now()
+);
+
+create table if not exists public.finanzas_ingresos (
+  id      uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users on delete cascade,
+  nombre  text not null,
+  importe numeric(12,2) not null,
+  ambito  text not null default 'personal' check (ambito in ('personal','empresa')),
+  activo  boolean not null default true,
+  creado  timestamptz not null default now()
+);
+
+create table if not exists public.finanzas_presupuestos (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid not null references auth.users on delete cascade,
+  categoria text not null,
+  importe   numeric(12,2) not null,
+  activo    boolean not null default true,
+  unique (user_id, categoria)
+);
+
+create table if not exists public.finanzas_movimientos (
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid not null references auth.users on delete cascade,
+  fecha       date not null,
+  tipo        text not null default 'gasto' check (tipo in ('gasto','ingreso')),
+  importe     numeric(12,2) not null check (importe >= 0),
+  categoria   text not null,
+  descripcion text,
+  ambito      text not null default 'personal' check (ambito in ('personal','empresa')),
+  -- Lo que separa el control de caja de la contabilidad: ¿fue consciente?
+  impulsivo   boolean not null default false,
+  fuente      text not null default 'manual' check (fuente in ('manual','chat')),
+  creado      timestamptz not null default now()
+);
+create index if not exists finanzas_mov_user_fecha on public.finanzas_movimientos (user_id, fecha desc);
+
 -- ── Productividad y aprendizaje ────────────────────────────────────────
 create table if not exists public.foco (
   id          uuid primary key default gen_random_uuid(),
@@ -293,7 +342,8 @@ begin
   foreach t in array array[
     'perfiles','metricas_corporales','comidas','planes_entreno','entrenamientos','series',
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
-    'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios'
+    'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
+    'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);

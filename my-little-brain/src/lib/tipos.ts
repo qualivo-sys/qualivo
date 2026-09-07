@@ -216,3 +216,46 @@ export interface RevisionSemanal {
   errores: string[];
   acciones: string[];
 }
+
+// ── Finanzas ────────────────────────────────────────────────────────────
+
+export type AmbitoFinanzas = 'personal' | 'empresa';
+
+export interface FinanzasAjustes {
+  user_id: string;
+  caja_inicial: number;
+  caja_fecha: string;
+  ahorro_mes: number | null;
+  caja_minima: number | null;
+  moneda: string;
+  activo: boolean;
+  actualizado: string;
+}
+
+export interface IngresoPrevisto {
+  id: string;
+  nombre: string;
+  importe: number;
+  ambito: AmbitoFinanzas;
+  activo: boolean;
+}
+
+export interface Presupuesto {
+  id: string;
+  categoria: string;
+  importe: number;
+  activo: boolean;
+}
+
+export interface Movimiento {
+  id: string;
+  fecha: string;
+  tipo: 'gasto' | 'ingreso';
+  importe: number;
+  categoria: string;
+  descripcion: string | null;
+  ambito: AmbitoFinanzas;
+  impulsivo: boolean;
+  fuente: 'manual' | 'chat';
+  creado: string;
+}

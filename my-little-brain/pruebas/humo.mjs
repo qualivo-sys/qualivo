@@ -49,6 +49,7 @@ const llamadas = [
   ['recordar', { clave: 'lesion_hombro', valor: 'Molestia en el hombro derecho desde 2025' }],
   ['generar_plan_entreno', {}],
   ['cambiar_ejercicio', { ejercicio_actual: 'press de banca', ejercicio_nuevo: 'press de banca con mancuernas' }],
+  ['registrar_gasto', { importe: 18, categoria: 'restaurantes', descripcion: 'Menu del mediodia' }],
   ['consultar_historial', { dias: 14 }],
 ];
 
@@ -314,6 +315,49 @@ check('nunca propone bajar del suelo de seguridad', suelo === null || suelo.kcal
 check('y si el suelo deja el cambio en calderilla, no molesta', proponerAjuste({ ...baseAj, metas: { ...metasAj, kcal: 1630 }, tendenciaKgSemana: -0.05 }) === null);
 const mantener = proponerAjuste({ ...baseAj, metas: { ...metasAj, ritmoKgSemana: 0 }, tendenciaKgSemana: 0.45 });
 check('con objetivo de mantener, corrige la deriva', mantener && mantener.delta < 0, JSON.stringify(mantener && mantener.titulo));
+
+// ── 13. Finanzas: control de caja ──────────────────────────────────────
+const { resumenFinanzas, insightsFinanzas, revisionSemana, mesAnteriorA, diasDelMes } = await import(`${L}/motor/finanzas.js`);
+const mov = (fecha, importe, categoria, extra = {}) => ({ id: fecha + categoria + importe, fecha, tipo: 'gasto', importe, categoria, descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', creado: '', ...extra });
+const movimientos = [
+  mov('2026-09-02', 18, 'restaurantes'),
+  mov('2026-09-03', 94, 'restaurantes', { impulsivo: true }),
+  mov('2026-09-04', 60, 'restaurantes'),
+  mov('2026-09-02', 120, 'alimentacion'),
+  mov('2026-09-05', 100, 'formacion'),
+  mov('2026-09-01', 25, 'ocio'),
+  mov('2026-09-01', 2040, 'otros', { tipo: 'ingreso' }),
+  mov('2026-08-15', 200, 'restaurantes'),
+];
+const presupuestos = [
+  { id: '1', categoria: 'restaurantes', importe: 150, activo: true },
+  { id: '2', categoria: 'alimentacion', importe: 400, activo: true },
+  { id: '3', categoria: 'ocio', importe: 50, activo: true },
+];
+const ajustesFin = { user_id: 'u1', caja_inicial: 3000, caja_fecha: '2026-09-01', ahorro_mes: 300, caja_minima: 5000, moneda: 'EUR', activo: true, actualizado: '' };
+const resFin = resumenFinanzas({ movimientos, presupuestos, ingresosPrevistos: [{ id: 'i1', nombre: 'Nomina', importe: 2040, ambito: 'personal', activo: true }], ajustes: ajustesFin, hoy: '2026-09-10' });
+check('suma gastos e ingresos del mes y el neto', resFin.gastos === 417 && resFin.ingresos === 2040 && resFin.neto === 1623, JSON.stringify({ g: resFin.gastos, i: resFin.ingresos, n: resFin.neto }));
+check('la caja parte de la referencia y suma lo movido despues', resFin.caja === 3000 + 2040 - 417, String(resFin.caja));
+check('no mezcla meses', !resFin.categorias.some((c) => c.id === 'restaurantes' && c.gastado > 172));
+const rest = resFin.categorias.find((c) => c.id === 'restaurantes');
+check('marca en rojo la categoria pasada y calcula lo que sobra', rest.estado === 'pasado' && rest.gastado === 172 && rest.disponible === -22, JSON.stringify(rest));
+check('separa el gasto impulsivo por categoria', rest.impulsivo === 94 && resFin.gastoImpulsivo === 94);
+check('el cumplimiento es el porcentaje de categorias no pasadas', resFin.cumplimiento === 67, String(resFin.cumplimiento));
+check('formacion cuenta como inversion y sin presupuesto aparece aparte', resFin.sinPresupuesto.some((c) => c.id === 'formacion' && c.gastado === 100));
+check('proyecta el gasto a fin de mes', resFin.proyeccion === Math.round((417 / 10) * 30) && resFin.dias === 30 && diasDelMes('2026-02') === 28, String(resFin.proyeccion));
+check('el mes anterior se calcula bien, tambien en enero', mesAnteriorA('2026-09') === '2026-08' && mesAnteriorA('2026-01') === '2025-12');
+
+const ideas = insightsFinanzas(resFin, null, ajustesFin);
+check('avisa de la categoria en la que se ha pasado', ideas.some((i) => /restaurantes/i.test(i.texto) && i.tono === 'alerta'), ideas.map((i) => i.texto).join(' | '));
+check('lo urgente va primero: la caja por debajo del minimo no se queda fuera', ideas.some((i) => /minimo/i.test(i.texto)) && ideas[0].tono === 'alerta' && ideas.length <= 4, ideas.map((i) => i.tono).join(','));
+const soloImpulso = insightsFinanzas(resumenFinanzas({ movimientos: [mov('2026-09-02', 100, 'alimentacion', { impulsivo: true }), mov('2026-09-02', 100, 'alimentacion')], presupuestos, ingresosPrevistos: [], ajustes: null, hoy: '2026-09-10' }), null, null);
+check('senala el gasto impulsivo cuando hay hueco', soloImpulso.some((i) => /impulsivo/i.test(i.texto)), soloImpulso.map((i) => i.texto).join(' | '));
+const buenas = insightsFinanzas(resumenFinanzas({ movimientos: [mov('2026-09-02', 20, 'restaurantes')], presupuestos, ingresosPrevistos: [], ajustes: null, hoy: '2026-09-10' }), null, null);
+check('si va bien, lo dice sin reganar', buenas.every((i) => i.tono !== 'alerta'), buenas.map((i) => i.texto).join(' | '));
+
+const semanaFin = revisionSemana(movimientos, resFin, '2026-08-31', '2026-09-06');
+check('la revision de la semana cuadra', semanaFin.gastado === 417 && semanaFin.categoriaTop.nombre === 'Restaurantes' && semanaFin.impulsivo === 94 && semanaFin.dentroDePresupuesto === false, JSON.stringify(semanaFin));
+check('la sugerencia apunta a donde se ha salido', /restaurantes/i.test(semanaFin.sugerencia), semanaFin.sugerencia);
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);
