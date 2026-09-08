@@ -26,6 +26,16 @@ Fugas del funnel en general · seguimiento/2o contacto · velocidad de primer
 contacto · formulario largo · linterna (mirar donde no miras) · el cubo /
 echar mas agua · la persona equivocada · las 6 comprobaciones · la reunion
 de los lunes / silos y huecos (jue 3-sep) · el stalkeo del cliente /
-reputacion completa antes de subir presupuesto (vie 4-sep, programado).
+reputacion completa antes de subir presupuesto (vie 4-sep) · la ventana
+encendida (dom 6-sep, aspiracional) · el boca a boca y el trimestre seco
+(lun 7-sep) · Como lo hizo: Vicio (mar 8-sep, historia de marca) · el
+cliente misterioso «llamo el» (mie 9-sep) · «eso lo lleva un chico que
+tenemos» (jue 10-sep) · el cementerio de canales (vie 11-sep).
 Dolores virgenes en cola: reactivacion CRM · GEO/ChatGPT te busca ·
 CAC/ticket (recamara) · metricas de vanidad · CRM-teatro.
+
+## Rotacion visual usada (para no repetir estilo seguido)
+dom 6 aspiracional nocturno · lun 7 bodegon claro · mar 8 editorial claro
+con foto de producto · mie 9 calle espanola · jue 10 flash documental con
+panel crema · vie 11 tipografico puro con fondos planos. Proximo carrusel
+con foto: NO usar flash documental ni editorial claro seguidos.
