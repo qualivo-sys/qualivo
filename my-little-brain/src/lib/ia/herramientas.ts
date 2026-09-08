@@ -5,6 +5,8 @@ import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { AGUA_MAX_ML, VASO_ML, horasDeSueno } from '../motor/descanso';
+import { METRICAS, valorActual } from '../motor/objetivos';
+import { cargarPanel } from '../datos';
 import { MAX_HOY as MAX_TAREAS_HOY } from '../motor/tareas';
 import { emparejarEjercicio } from '../motor/ejercicios';
 import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
@@ -14,7 +16,7 @@ import { ejercicio } from '../motor/ejercicios';
 import type { Bloque, PlanEntreno } from '../motor/tipos-motor';
 import { XP_POR_ACCION } from '../motor/puntuaciones';
 import { perfilEntreno } from '../perfil';
-import type { AccionRegistrada, Perfil } from '../tipos';
+import type { AccionRegistrada, ObjetivoRegistro, Perfil } from '../tipos';
 
 export interface ContextoHerramientas {
   supabase: SupabaseClient;
@@ -225,7 +227,10 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   },
   {
     name: 'crear_objetivo',
-    description: 'Guarda un objetivo del usuario con su area y, si la hay, su metrica.',
+    description:
+      'Guarda un objetivo. Elige la metrica que la app pueda medir sola siempre que encaje (peso, cintura, '
+      + 'grasa, entrenos_semana, foco_semana, sueno); usa "manual" solo para lo que nadie puede medir por el, '
+      + 'como clientes o capitulos. Con valor_objetivo la app puede enseñarle cuanto lleva del camino.',
     input_schema: {
       type: 'object',
       properties: {
@@ -234,12 +239,30 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
           enum: ['cuerpo', 'fitness', 'productividad', 'aprendizaje', 'mente', 'negocio'],
         },
         titulo: { type: 'string' },
-        detalle: { type: 'string' },
-        metrica: { type: 'string' },
-        valor_objetivo: { type: 'number' },
+        detalle: { type: 'string', description: 'Por que le importa, con sus palabras.' },
+        metrica: {
+          type: 'string',
+          enum: ['peso', 'cintura', 'grasa', 'entrenos_semana', 'foco_semana', 'sueno', 'manual'],
+        },
+        valor_objetivo: { type: 'number', description: 'El numero al que quiere llegar.' },
         fecha_limite: { type: 'string' },
       },
       required: ['area', 'titulo'],
+    },
+  },
+  {
+    name: 'actualizar_objetivo',
+    description:
+      'Cambia como va un objetivo: darlo por conseguido, pausarlo, soltarlo o, en los de metrica manual, '
+      + 'apuntar por donde va ("ya llevo 2 clientes"). Se busca por el titulo.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        titulo: { type: 'string' },
+        estado: { type: 'string', enum: ['activo', 'conseguido', 'pausado', 'abandonado'] },
+        valor_actual: { type: 'number' },
+      },
+      required: ['titulo'],
     },
   },
   {
@@ -409,6 +432,20 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
 
 const num = z.number().finite();
 const fechaOpc = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional();
+
+/**
+ * De donde parte un objetivo con metrica automatica. Se calcula al crearlo
+ * porque despues ya no hay forma de saberlo: si tu objetivo es bajar a 78 kg,
+ * lo unico que convierte "te faltan 3 kg" en "llevas el 40 %" es acordarse de
+ * los 83 con los que empezaste.
+ */
+async function partidaObjetivo(ctx: ContextoHerramientas, idMetrica: string): Promise<number | null> {
+  const panel = await cargarPanel(ctx.supabase, ctx.userId, ctx.perfil);
+  return valorActual(
+    { metrica: idMetrica, valor_actual: null } as ObjetivoRegistro,
+    { cuerpo: panel.cuerpo, dias: panel.dias, hoy: panel.hoy },
+  );
+}
 
 async function otorgarXp(ctx: ContextoHerramientas, tipo: string, motivo: string): Promise<number> {
   const xp = XP_POR_ACCION[tipo] ?? 5;
@@ -848,20 +885,67 @@ async function despachar(
           fecha_limite: fechaOpc,
         })
         .parse(entrada);
+      // El punto de partida se guarda al crearlo: sin el solo se puede decir
+      // "te faltan 3 kg", nunca "llevas el 40 % del camino".
+      const met = METRICAS.some((m) => m.id === d.metrica) ? d.metrica! : 'manual';
+      const inicial = met === 'manual' ? 0 : await partidaObjetivo(ctx, met);
+
       const { error } = await supabase.from('objetivos').insert({
         user_id: userId,
         area: d.area,
         titulo: d.titulo,
         detalle: d.detalle ?? null,
-        metrica: d.metrica ?? null,
+        metrica: met,
         valor_objetivo: d.valor_objetivo ?? null,
+        valor_inicial: inicial,
+        valor_actual: met === 'manual' ? 0 : null,
         fecha_limite: d.fecha_limite ?? null,
+        estado: 'activo',
       });
       if (error) throw error;
       const xp = await otorgarXp(ctx, 'objetivo', d.titulo);
       return {
         texto: `Objetivo guardado: ${d.titulo}.`,
         accion: { herramienta: nombre, resumen: `objetivo · ${d.titulo}`, xp },
+      };
+    }
+
+    case 'actualizar_objetivo': {
+      const d = z
+        .object({
+          titulo: z.string().min(1),
+          estado: z.enum(['activo', 'conseguido', 'pausado', 'abandonado']).optional(),
+          valor_actual: num.optional(),
+        })
+        .parse(entrada);
+
+      const { data: suyos } = await supabase
+        .from('objetivos').select('id, titulo').eq('user_id', userId).limit(50);
+      const llano = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const busca = llano(d.titulo);
+      const encontrado = (suyos ?? []).find((o) => llano(o.titulo) === busca)
+        ?? (suyos ?? []).find((o) => llano(o.titulo).includes(busca) || busca.includes(llano(o.titulo)));
+
+      if (!encontrado) return { texto: `No encuentro ningun objetivo parecido a "${d.titulo}".`, accion: null };
+      if (d.estado === undefined && d.valor_actual === undefined) {
+        return { texto: 'Dime que cambio: como va, o si lo das por conseguido.', accion: null };
+      }
+
+      const { error } = await supabase
+        .from('objetivos')
+        .update({
+          ...(d.estado ? { estado: d.estado } : {}),
+          ...(d.valor_actual !== undefined ? { valor_actual: d.valor_actual } : {}),
+          actualizado: new Date().toISOString(),
+        })
+        .eq('id', encontrado.id).eq('user_id', userId);
+      if (error) throw error;
+
+      return {
+        texto: d.estado === 'conseguido'
+          ? `Objetivo conseguido: ${encontrado.titulo}.`
+          : `Objetivo actualizado: ${encontrado.titulo}.`,
+        accion: { herramienta: nombre, resumen: encontrado.titulo },
       };
     }
 

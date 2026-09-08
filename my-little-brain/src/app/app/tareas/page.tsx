@@ -213,7 +213,8 @@ export default async function PaginaTareas() {
       )}
 
       <p className="pb-2 text-center text-xs text-muted-foreground">
-        Tambien puedes decirselo al <Link href="/app/coach" className="text-primary underline">coach</Link>:
+        Tus <Link href="/app/objetivos" className="text-primary underline">objetivos</Link> estan aparte. Y todo esto
+        puedes decirselo al <Link href="/app/coach" className="text-primary underline">coach</Link>:
         &ldquo;hoy tengo que cerrar la propuesta y llamar al gestor&rdquo;.
       </p>
     </main>

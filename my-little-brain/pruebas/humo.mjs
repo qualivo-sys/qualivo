@@ -50,7 +50,8 @@ const llamadas = [
   ['registrar_agua', { vasos: 2 }],
   ['registrar_habito', { nombre: '10.000 pasos' }],
   ['crear_habito', { nombre: 'Leer 20 min', emoji: '📚', veces_por_semana: 5 }],
-  ['crear_objetivo', { area: 'negocio', titulo: 'Cerrar 3 clientes nuevos' }],
+  ['crear_objetivo', { area: 'negocio', titulo: 'Cerrar 3 clientes nuevos', metrica: 'manual', valor_objetivo: 3 }],
+  ['actualizar_objetivo', { titulo: 'cerrar 3 clientes', valor_actual: 1 }],
   ['crear_tarea', { titulo: 'Preparar propuesta EAC', prioridad: 1, para_hoy: true }],
   ['completar_tarea', { titulo: 'preparar propuesta' }],
   ['recordar', { clave: 'lesion_hombro', valor: 'Molestia en el hombro derecho desde 2025' }],
@@ -657,6 +658,76 @@ check('el coach marca la tarea buscandola por el titulo', supabase.db.tablas.tar
 check('y guarda el dia en que se cerro', supabase.db.tablas.tareas.find((t) => t.titulo === 'Uno')?.completada_el === HOY);
 const noExiste = await ejecutarHerramienta('completar_tarea', { titulo: 'pasear al dragon' }, ctx);
 check('si no la encuentra lo dice, no inventa', /No encuentro/.test(noExiste.texto), noExiste.texto);
+
+// ── 19. Objetivos que se miden solos ───────────────────────────────────
+const { medir, ritmo: ritmoObj, valorActual, insightsObjetivos, metrica: metricaDe, METRICAS } = await import(`${L}/motor/objetivos.js`);
+const { diasEntre } = await import(`${L}/fechas.js`);
+
+const obj = (extra = {}) => ({ id: 'o1', area: 'cuerpo', titulo: 'Bajar a 78 kg', detalle: null, metrica: 'peso', valor_objetivo: 78, valor_inicial: 83, valor_actual: null, fecha_limite: null, estado: 'activo', creado: '2026-08-11', ...extra });
+const diaO = (fecha, extra = {}) => ({ fecha, kcal: 0, proteina: 0, carbos: 0, grasa: 0, alcoholUd: 0, comidas: 0, entreno: false, actividad: false, nombresActividad: [], seriesEntreno: 0, pasos: null, gastoKcal: 0, redondo: false, focoMin: 0, habitosHechos: 0, habitosTotal: 0, animo: null, energia: null, estres: null, suenoHoras: null, suenoCalidad: null, suenoInicio: null, suenoFin: null, aguaMl: 0, cafes: 0, cafeinaUltima: null, peso: null, ...extra });
+const cuerpoMock = { peso: 81, fecha: '2026-09-08', imc: null, grasaPct: 20.5, masaMagra: null, tendencia: -0.4, cintura: 92 };
+const fuentes = { cuerpo: cuerpoMock, dias: [], hoy: '2026-09-08' };
+
+// La app lee el valor sola: no hay que apuntar nada dos veces
+check('el peso lo lee de tus pesajes', valorActual(obj(), fuentes) === 81, String(valorActual(obj(), fuentes)));
+check('la cintura y la grasa tambien', valorActual(obj({ metrica: 'cintura' }), fuentes) === 92 && valorActual(obj({ metrica: 'grasa' }), fuentes) === 20.5);
+const con30 = { ...fuentes, dias: Array.from({ length: 30 }, (_, i) => diaO(`2026-08-${String(i + 1).padStart(2, '0')}`, { entreno: i % 3 === 0, focoMin: 60, suenoHoras: 7 })) };
+check('cuenta los entrenos de los ultimos 30 dias', valorActual(obj({ metrica: 'entrenos_semana' }), con30) === 10, String(valorActual(obj({ metrica: 'entrenos_semana' }), con30)));
+check('y las horas dedicadas', valorActual(obj({ metrica: 'foco_semana' }), con30) === 30, String(valorActual(obj({ metrica: 'foco_semana' }), con30)));
+check('el sueno es la media de dos semanas', valorActual(obj({ metrica: 'sueno' }), con30) === 7);
+check('lo manual solo lo sabe la persona', valorActual(obj({ metrica: 'manual', valor_actual: 2 }), fuentes) === 2);
+check('sin datos devuelve null, no un cero que engane', valorActual(obj({ metrica: 'peso' }), { ...fuentes, cuerpo: { ...cuerpoMock, peso: null } }) === null);
+
+// El camino recorrido
+const m1 = medir(obj(), fuentes);
+check('mide el camino de 83 a 78 estando en 81', m1.pct === 40 && m1.falta === 3 && m1.direccion === 'bajar' && !m1.conseguido, JSON.stringify(m1));
+check('sabe cuando ya has llegado', medir(obj({ valor_objetivo: 82 }), fuentes).conseguido === true);
+const subir = medir(obj({ titulo: 'Subir a 85', valor_objetivo: 85, valor_inicial: 79 }), fuentes);
+check('funciona igual hacia arriba', subir.direccion === 'subir' && subir.pct === 33, JSON.stringify(subir));
+check('sin numero objetivo no hay barra', medir(obj({ valor_objetivo: null }), fuentes).pct === null);
+check('sin datos para medir tampoco', medir(obj(), { ...fuentes, cuerpo: { ...cuerpoMock, peso: null } }).pct === null);
+check('pasarse de la meta no da mas del 100 %', medir(obj({ valor_objetivo: 82, valor_inicial: 83 }), fuentes).pct === 100);
+const desdeHoy = medir(obj({ valor_inicial: null }), fuentes);
+check('sin punto de partida se toma el de hoy: empieza en 0 %, no sin barra', desdeHoy.pct === 0 && desdeHoy.inicial === 81 && desdeHoy.falta === 3, JSON.stringify(desdeHoy));
+
+// El ritmo: da la fecha, no una bronca
+const r1 = ritmoObj(obj({ fecha_limite: '2026-10-30' }), m1, '2026-08-11', '2026-09-08', sumarDias, diasEntre);
+check('calcula el ritmo por semana', r1.porSemana === -0.5, String(r1.porSemana));
+check('proyecta la fecha de llegada', r1.llegada === '2026-10-20', String(r1.llegada));
+check('dice si llega a tiempo', r1.aTiempo === true && r1.diasHastaLimite === 52, JSON.stringify(r1));
+const rTarde = ritmoObj(obj({ fecha_limite: '2026-09-20' }), m1, '2026-08-11', '2026-09-08', sumarDias, diasEntre);
+check('y si no llega, tambien', rTarde.aTiempo === false);
+const sinRecorrido = ritmoObj(obj(), m1, '2026-09-05', '2026-09-08', sumarDias, diasEntre);
+check('con menos de una semana no proyecta nada', sinRecorrido.porSemana === null && sinRecorrido.llegada === null);
+const alReves = medir(obj({ valor_inicial: 80 }), fuentes);
+check('yendo hacia el lado contrario no inventa una fecha', ritmoObj(obj({ valor_inicial: 80 }), alReves, '2026-08-11', '2026-09-08', sumarDias, diasEntre).llegada === null);
+
+// Lo que veo
+const conMedida = (o, extra = {}) => ({ objetivo: o, medicion: medir(o, fuentes), ritmo: ritmoObj(o, medir(o, fuentes), '2026-08-11', '2026-09-08', sumarDias, diasEntre), tareasAbiertas: 0, ...extra });
+const avisosO = insightsObjetivos([conMedida(obj({ fecha_limite: '2026-09-20' }))]);
+check('avisa de lo que no llega dando las dos salidas', avisosO.some((i) => i.id === 'tarde' && /mueves la fecha/.test(i.texto)), JSON.stringify(avisosO.map((i) => i.texto)));
+check('senala el objetivo sin ninguna tarea detras', avisosO.some((i) => i.id === 'sin_tareas'), JSON.stringify(avisosO.map((i) => i.texto)));
+check('avisa cuando ya has llegado', insightsObjetivos([conMedida(obj({ valor_objetivo: 82 }))]).some((i) => i.id === 'conseguido'));
+check('celebra el que va en hora', insightsObjetivos([conMedida(obj({ fecha_limite: '2026-12-30' }), { tareasAbiertas: 1 })]).some((i) => i.id === 'en_camino' && /40 %/.test(i.texto)));
+const sinObj = insightsObjetivos([]);
+check('sin objetivos explica que es uno bueno, no regana', sinObj.length === 1 && /bajar a 78 kg/.test(sinObj[0].texto), JSON.stringify(sinObj));
+check('los pausados no cuentan como activos', insightsObjetivos([conMedida(obj({ estado: 'pausado' }))])[0].id === 'vacio');
+check('nunca mas de tres frases', avisosO.length <= 3);
+check('ninguna frase de objetivos culpabiliza', [...avisosO, ...sinObj].every((i) => !/deberias|fracas|vago/i.test(i.texto)));
+check('las metricas automaticas se distinguen de la manual', METRICAS.filter((m) => m.automatica).length === 6 && metricaDe('manual').automatica === false);
+
+// El coach
+const objCoach = supabase.db.tablas.objetivos.find((o) => /clientes/i.test(o.titulo));
+check('el coach guarda el objetivo con su metrica y su punto de partida', objCoach?.metrica === 'manual' && objCoach?.valor_objetivo === 3 && objCoach?.valor_inicial === 0, JSON.stringify(objCoach));
+check('y lo actualiza buscandolo por el titulo', objCoach?.valor_actual === 1, String(objCoach?.valor_actual));
+await ejecutarHerramienta('actualizar_objetivo', { titulo: 'clientes', estado: 'conseguido' }, ctx);
+check('lo puede dar por conseguido', supabase.db.tablas.objetivos.find((o) => /clientes/i.test(o.titulo))?.estado === 'conseguido');
+const objNo = await ejecutarHerramienta('actualizar_objetivo', { titulo: 'aprender a volar' }, ctx);
+check('si no lo encuentra lo dice', /No encuentro/.test(objNo.texto), objNo.texto);
+const objPeso = await ejecutarHerramienta('crear_objetivo', { area: 'cuerpo', titulo: 'Bajar a 78', metrica: 'peso', valor_objetivo: 78 }, ctx);
+check('en los automaticos guarda de donde partes sin preguntartelo',
+  supabase.db.tablas.objetivos.find((o) => o.titulo === 'Bajar a 78')?.valor_inicial === 82.4,
+  JSON.stringify(supabase.db.tablas.objetivos.find((o) => o.titulo === 'Bajar a 78')));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

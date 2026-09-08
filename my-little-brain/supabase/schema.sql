@@ -279,6 +279,22 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Objetivos que se miden solos ───────────────────────────────────────
+-- La tabla existia pero solo guardaba un titulo. Para poder decir "vas por el
+-- 60 %" hace falta de donde partiste (valor_inicial); el valor de ahora casi
+-- siempre lo sabe ya la app (tu peso, tus entrenos, tu tiempo), y valor_actual
+-- solo se usa en los que nadie puede medir por ti, como "cerrar 3 clientes".
+alter table public.objetivos
+  add column if not exists valor_inicial numeric,
+  add column if not exists valor_actual  numeric,
+  add column if not exists actualizado   timestamptz not null default now();
+create index if not exists objetivos_user_estado on public.objetivos (user_id, estado, creado desc);
+
+-- Una tarea puede colgar de un objetivo: es lo que convierte un proposito en
+-- algo que se hace hoy.
+alter table public.tareas
+  add column if not exists objetivo_id uuid references public.objetivos on delete set null;
+
 -- ── Las tareas de hoy ──────────────────────────────────────────────────
 -- La tabla ya existia pero solo se podia escribir en ella. Para poder ver el
 -- avance hace falta saber CUANDO se cerro cada tarea, no solo que esta hecha.

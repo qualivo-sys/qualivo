@@ -155,9 +155,10 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
     }
   }
 
-  if (panel.objetivos.length) {
+  const objetivosActivos = panel.objetivos.filter((o) => o.estado === 'activo');
+  if (objetivosActivos.length) {
     l.push('\nOBJETIVOS ACTIVOS');
-    for (const o of panel.objetivos) {
+    for (const o of objetivosActivos) {
       l.push(`- [${o.area}] ${o.titulo}${o.fecha_limite ? ` (antes de ${o.fecha_limite})` : ''}.`);
     }
   }

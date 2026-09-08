@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, ListChecks, MessageCircle, Moon, Timer, TrendingDown } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, ListChecks, MessageCircle, Moon, Target, Timer, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
 import { CronometroEnMarcha } from '@/components/cronometro';
 import ComidasHabituales from '@/components/comidas-habituales';
@@ -15,6 +15,7 @@ import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
 import { comidasHabituales } from '@/lib/motor/habituales';
 import { tareasDelDia } from '@/lib/motor/tareas';
+import { medir, metrica as infoMetrica } from '@/lib/motor/objetivos';
 import { objetivoAgua } from '@/lib/motor/descanso';
 import { ajustePendiente } from '@/lib/ajuste';
 import { aplicarAjusteCalorias, posponerAjuste } from '@/app/app/acciones';
@@ -41,6 +42,12 @@ export default async function PanelHoy() {
   const { diaHoy, metas, cuerpo, puntuaciones } = panel;
 
   const tareas = tareasDelDia(panel.tareas, panel.hoy);
+
+  // El objetivo con mas camino hecho: el que mejor demuestra que esto avanza.
+  const objetivos = panel.objetivos
+    .filter((o) => o.estado === 'activo')
+    .map((o) => ({ objetivo: o, medicion: medir(o, { cuerpo: panel.cuerpo, dias: panel.dias, hoy: panel.hoy }) }))
+    .sort((a, b) => (b.medicion.pct ?? -1) - (a.medicion.pct ?? -1));
 
   const metaAgua = objetivoAgua({
     pesoKg: cuerpo.peso ?? 75,
@@ -494,6 +501,40 @@ export default async function PanelHoy() {
           </Link>
         )}
       </Tarjeta>
+
+      {objetivos.length > 0 && (
+        <Tarjeta>
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Target size={18} className="text-primary" />
+              <TituloTarjeta className="mb-0">Hacia donde vas</TituloTarjeta>
+            </div>
+            <Link href="/app/objetivos" className="text-xs text-primary underline">
+              {objetivos.length > 2 ? `Los ${objetivos.length}` : 'Ver todo'}
+            </Link>
+          </div>
+          <ul className="space-y-3">
+            {objetivos.slice(0, 2).map(({ objetivo, medicion }) => {
+              const unidad = infoMetrica(objetivo.metrica).unidad;
+              return (
+                <li key={objetivo.id}>
+                  <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                    <span className="min-w-0 truncate">{objetivo.titulo}</span>
+                    <span className="shrink-0 tabular-nums text-muted-foreground">
+                      {medicion.pct !== null
+                        ? `${medicion.pct} %`
+                        : medicion.actual !== null
+                          ? `${medicion.actual}${unidad ? ` ${unidad}` : ''}`
+                          : '—'}
+                    </span>
+                  </div>
+                  <Barra valor={medicion.pct ?? 0} color={medicion.conseguido ? 'hsl(142 71% 45%)' : 'hsl(var(--primary))'} />
+                </li>
+              );
+            })}
+          </ul>
+        </Tarjeta>
+      )}
 
       <Link href="/app/coach" className="block">
         <Tarjeta className="flex items-center gap-3 border-dashed">

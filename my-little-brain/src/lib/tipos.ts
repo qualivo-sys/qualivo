@@ -162,6 +162,8 @@ export interface Tarea {
   completada_el?: string | null;
   /** Veces que se ha ido pasando de un dia al siguiente. */
   pospuesta: number;
+  /** El objetivo del que cuelga, si es que empuja alguno. */
+  objetivo_id?: string | null;
 }
 
 export interface Habito {
@@ -234,6 +236,11 @@ export interface ObjetivoRegistro {
   valor_objetivo: number | null;
   fecha_limite: string | null;
   estado: 'activo' | 'conseguido' | 'pausado' | 'abandonado';
+  /** De donde partio, para poder medir el camino recorrido. */
+  valor_inicial: number | null;
+  /** Solo para los objetivos que la app no puede medir por si sola. */
+  valor_actual: number | null;
+  creado: string;
 }
 
 export interface RecuerdoCoach {
