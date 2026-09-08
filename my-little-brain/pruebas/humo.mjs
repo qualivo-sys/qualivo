@@ -613,7 +613,42 @@ check('el dia no esta cerrado si queda algo abierto', d1.diaCerrado === false);
 const cerrado = tareasDelDia([tarea('a', 'Una', { fecha: '2026-09-08', completada: true, completada_el: '2026-09-08' })], '2026-09-08');
 check('el dia se cierra cuando estan todas', cerrado.diaCerrado === true && cerrado.huecos === 2);
 check('un dia sin tareas no cuenta como cerrado', tareasDelDia([], '2026-09-08').diaCerrado === false);
-check('el limite es tres', MAX_HOY === 3);
+check('tres es la recomendacion', MAX_HOY === 3);
+
+// Tres no es un muro: se pueden poner mas y todo sigue cuadrando
+const cinco = tareasDelDia([
+  tarea('c1', 'A', { fecha: '2026-09-08' }), tarea('c2', 'B', { fecha: '2026-09-08' }),
+  tarea('c3', 'C', { fecha: '2026-09-08' }), tarea('c4', 'D', { fecha: '2026-09-08' }),
+  tarea('c5', 'E', { fecha: '2026-09-08', completada: true, completada_el: '2026-09-08' }),
+], '2026-09-08');
+check('acepta mas de tres en un dia', cinco.hoy.length === 4 && cinco.hechasHoy.length === 1);
+check('cuenta cuantas van por encima de las tres', cinco.extra === 2 && cinco.huecos === 0, JSON.stringify({ e: cinco.extra, h: cinco.huecos }));
+check('con menos de tres no hay extras', d1.extra === 0 && d1.huecos === 1);
+const cincoCerradas = tareasDelDia(['a', 'b', 'c', 'd', 'e'].map((x) => tarea(x, x, { fecha: '2026-09-08', completada: true, completada_el: '2026-09-08' })), '2026-09-08');
+check('un dia de cinco tambien se puede cerrar', cincoCerradas.diaCerrado === true && cincoCerradas.extra === 2);
+
+// El aviso sale de SUS dias, no de una norma nuestra
+const diasMix = ['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04', '2026-09-05', '2026-09-06'];
+const mixTareas = [
+  // tres dias de <=3, cerrados los tres
+  ...['2026-09-01', '2026-09-02', '2026-09-03'].map((f, i) => tarea(`p${i}`, 'P', { fecha: f, completada: true, completada_el: f })),
+  // tres dias de 4, sin cerrar ninguno
+  ...['2026-09-04', '2026-09-05', '2026-09-06'].flatMap((f, i) =>
+    [0, 1, 2, 3].map((n) => tarea(`m${i}${n}`, 'M', { fecha: f, completada: n < 2, completada_el: n < 2 ? f : null }))),
+];
+const prMix = progresoTareas(mixTareas, diasMix);
+check('separa los dias de tres o menos de los de mas', prMix.segunCuantas.hasta3.dias === 3 && prMix.segunCuantas.masDe3.dias === 3, JSON.stringify(prMix.segunCuantas));
+check('y cuantos cerro en cada grupo', prMix.segunCuantas.hasta3.cerrados === 3 && prMix.segunCuantas.masDe3.cerrados === 0);
+const avisoMix = insightsTareas(cinco, prMix);
+check('te lo cuenta con tus numeros, sin prohibir nada', avisoMix.some((i) => i.id === 'mas_de_tres' && /100 %/.test(i.texto) && /0 %/.test(i.texto) && /tu sabras/i.test(i.texto)), JSON.stringify(avisoMix.map((i) => i.texto)));
+const prBueno = progresoTareas([
+  ...['2026-09-01', '2026-09-02', '2026-09-03'].map((f, i) => tarea(`q${i}`, 'Q', { fecha: f })),
+  ...['2026-09-04', '2026-09-05', '2026-09-06'].flatMap((f, i) =>
+    [0, 1, 2, 3].map((n) => tarea(`n${i}${n}`, 'N', { fecha: f, completada: true, completada_el: f }))),
+], diasMix);
+check('si te va bien poniendote mas, te lo dice tambien', insightsTareas(cinco, prBueno).some((i) => i.id === 'mas_de_tres' && i.tono === 'bien'), JSON.stringify(insightsTareas(cinco, prBueno).map((i) => i.texto)));
+check('sin dias suficientes en los dos grupos no opina', !insightsTareas(cinco, progresoTareas(mixTareas.slice(0, 4), diasMix)).some((i) => i.id === 'mas_de_tres'));
+check('con tres o menos no saca el tema', !insightsTareas(d1, prMix).some((i) => i.id === 'mas_de_tres'));
 
 // El avance: los dias sin tareas no son dias fallados
 const dias5 = ['2026-09-04', '2026-09-05', '2026-09-06', '2026-09-07', '2026-09-08'];
@@ -643,16 +678,19 @@ check('senala lo que lleva demasiado tiempo posponiendose', avisosT.some((i) => 
 check('y ofrece salida, no bronca', avisosT.some((i) => /suéltala|partela|troce/i.test(i.texto)));
 check('celebra el dia cerrado', insightsTareas(cerrado, rachaLarga).some((i) => i.id === 'cerrado' && /2 seguidos/.test(i.texto)), JSON.stringify(insightsTareas(cerrado, rachaLarga)));
 const sinNada = insightsTareas(tareasDelDia([], '2026-09-08'), progresoTareas([], dias5));
-check('sin tareas invita a elegir tres, no regana', sinNada.some((i) => i.id === 'vacio' && /tres/.test(i.texto)), JSON.stringify(sinNada));
+check('sin tareas sugiere tres pero deja claro que el dia es tuyo', sinNada.some((i) => i.id === 'vacio' && /Tres suele ser/.test(i.texto) && /el dia es tuyo/.test(i.texto)), JSON.stringify(sinNada));
 check('nunca mas de tres frases', avisosT.length <= 3 && sinNada.length <= 3);
 check('ninguna frase de tareas culpabiliza', [...avisosT, ...sinNada].every((i) => !/deberias|vago|fracas|mal\b/i.test(i.texto)), JSON.stringify([...avisosT, ...sinNada].map((i) => i.texto)));
 
 // El coach respeta el limite de tres
-const antesTareas = supabase.db.tablas.tareas.length;
+// Tres es la recomendacion, no un tope: el coach pone las que le digas.
+const antesTareas = supabase.db.tablas.tareas.filter((t) => t.fecha === HOY).length;
 for (const t of ['Uno', 'Dos', 'Tres', 'Cuatro']) await ejecutarHerramienta('crear_tarea', { titulo: t, para_hoy: true }, ctx);
 const deHoy = supabase.db.tablas.tareas.filter((t) => t.fecha === HOY);
-check('el coach no mete mas de tres tareas en un dia', deHoy.length === MAX_HOY, `${deHoy.length} para hoy de ${supabase.db.tablas.tareas.length - antesTareas} creadas`);
-check('la que no cabe no se pierde, se queda sin fecha', supabase.db.tablas.tareas.some((t) => t.titulo === 'Cuatro' && !t.fecha));
+check('el coach pone en hoy todas las que le digas, tres no es un tope', deHoy.length === antesTareas + 4, `${deHoy.length} para hoy`);
+check('ninguna acaba sin fecha por el camino', supabase.db.tablas.tareas.filter((t) => ['Uno', 'Dos', 'Tres', 'Cuatro'].includes(t.titulo)).every((t) => t.fecha === HOY));
+const cuarta = await ejecutarHerramienta('crear_tarea', { titulo: 'Quinta', para_hoy: true }, ctx);
+check('pero te dice cuantas llevas cuando pasas de tres', /van \d+ para hoy/.test(cuarta.texto), cuarta.texto);
 await ejecutarHerramienta('completar_tarea', { titulo: 'uno' }, ctx);
 check('el coach marca la tarea buscandola por el titulo', supabase.db.tablas.tareas.find((t) => t.titulo === 'Uno')?.completada === true);
 check('y guarda el dia en que se cerro', supabase.db.tablas.tareas.find((t) => t.titulo === 'Uno')?.completada_el === HOY);

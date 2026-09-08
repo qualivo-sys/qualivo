@@ -6,7 +6,6 @@ import { hoy as hoyIso } from '@/lib/fechas';
 import { cargarPanel } from '@/lib/datos';
 import { METRICAS, valorActual } from '@/lib/motor/objetivos';
 import type { ObjetivoRegistro, Perfil } from '@/lib/tipos';
-import { MAX_HOY } from '@/lib/motor/tareas';
 import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
 import { clienteServidor } from '@/lib/supabase/servidor';
 
@@ -125,22 +124,19 @@ export async function borrarObjetivo(id: string) {
 
 /**
  * Lo que convierte un proposito en algo que pasa: una tarea concreta colgada
- * del objetivo. Si hoy ya estan las tres, va a la mochila en vez de perderse.
+ * del objetivo. Va a hoy aunque ya tengas tres: si estas mirando el objetivo y
+ * decides que hoy haces esto, mandarlo a la mochila seria llevarte la contraria.
  */
 export async function tareaParaObjetivo(objetivoId: string, datos: FormData) {
   const { supabase, userId, hoy } = await sesion();
   const titulo = texto(datos.get('titulo'));
   if (!titulo) return;
 
-  const { count } = await supabase
-    .from('tareas').select('id', { count: 'exact', head: true })
-    .eq('user_id', userId).eq('fecha', hoy);
-
   await supabase.from('tareas').insert({
     user_id: userId,
     titulo: titulo.slice(0, 160),
     prioridad: 2,
-    fecha: (count ?? 0) < MAX_HOY ? hoy : null,
+    fecha: hoy,
     objetivo_id: objetivoId,
     completada: false,
     pospuesta: 0,

@@ -268,8 +268,8 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   {
     name: 'crear_tarea',
     description:
-      'Anota una tarea concreta. Marca para_hoy solo si dice que es de HOY: solo caben tres al dia, '
-      + 'y si ya tiene tres la tarea se guarda para mas adelante en vez de amontonarse.',
+      'Anota una tarea concreta. Marca para_hoy si dice que es de HOY. Tres al dia es lo que suele '
+      + 'cundir, pero no es un tope: si dice que hoy tiene cinco cosas importantes, van las cinco.',
     input_schema: {
       type: 'object',
       properties: {
@@ -960,16 +960,14 @@ async function despachar(
         })
         .parse(entrada);
 
-      // Solo tres al dia. La cuarta no se pierde: se guarda sin fecha.
-      let fecha = d.fecha ?? (d.para_hoy ? ctx.hoy : null);
-      let cabe = true;
+      // Tres es la recomendacion, no un tope: si dice que hoy tiene cinco cosas
+      // importantes, van las cinco. Solo se cuenta para poder mencionarlo.
+      const fecha = d.fecha ?? (d.para_hoy ? ctx.hoy : null);
+      let yaTenia = 0;
       if (fecha === ctx.hoy) {
         const { data: yaHoy } = await supabase
           .from('tareas').select('id').eq('user_id', userId).eq('fecha', ctx.hoy);
-        if ((yaHoy?.length ?? 0) >= MAX_TAREAS_HOY) {
-          fecha = null;
-          cabe = false;
-        }
+        yaTenia = yaHoy?.length ?? 0;
       }
 
       const { error } = await supabase.from('tareas').insert({
@@ -983,9 +981,9 @@ async function despachar(
       });
       if (error) throw error;
       return {
-        texto: cabe
-          ? `Tarea anotada: ${d.titulo}.`
-          : `Anotada, pero para mas adelante: hoy ya tienes tus ${MAX_TAREAS_HOY}. Si esta es mas importante, cambiala tu por una de ellas.`,
+        texto: yaTenia >= MAX_TAREAS_HOY
+          ? `Anotada: ${d.titulo}. Con esta van ${yaTenia + 1} para hoy.`
+          : `Tarea anotada: ${d.titulo}.`,
         accion: { herramienta: nombre, resumen: `tarea · ${d.titulo}` },
       };
     }

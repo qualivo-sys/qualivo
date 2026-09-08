@@ -5,7 +5,7 @@ import TareasHoy from '@/components/tareas-hoy';
 import { Barra, Boton, Campo, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel } from '@/lib/datos';
 import { fechaCorta, fechaLarga, ultimosDias } from '@/lib/fechas';
-import { MAX_HOY, insightsTareas, progresoTareas, tareasDelDia } from '@/lib/motor/tareas';
+import { RECOMENDADAS, insightsTareas, progresoTareas, tareasDelDia } from '@/lib/motor/tareas';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -23,6 +23,7 @@ export default async function PaginaTareas() {
   const panel = await cargarPanel(supabase, usuario.id, perfil);
 
   const dia = tareasDelDia(panel.tareas, panel.hoy);
+  const totalHoy = dia.hoy.length + dia.hechasHoy.length;
   const fechas = ultimosDias(DIAS, panel.hoy);
   const progreso = progresoTareas(panel.tareas, fechas);
   const avisos = insightsTareas(dia, progreso);
@@ -41,35 +42,34 @@ export default async function PaginaTareas() {
 
       <Tarjeta>
         <div className="mb-3 flex items-baseline justify-between">
-          <TituloTarjeta className="mb-0">Tus {MAX_HOY} de hoy</TituloTarjeta>
+          <TituloTarjeta className="mb-0">Lo de hoy</TituloTarjeta>
           <span className="text-xs text-muted-foreground">
-            {dia.hechasHoy.length} de {dia.hoy.length + dia.hechasHoy.length}
+            {dia.hechasHoy.length} de {totalHoy}
           </span>
         </div>
 
-        {dia.hoy.length || dia.hechasHoy.length ? (
+        {totalHoy > 0 ? (
           <TareasHoy abiertas={dia.hoy} hechas={dia.hechasHoy} />
         ) : (
           <p className="text-sm text-muted-foreground">
-            Elige como mucho tres cosas. Si eliges diez, no vas a hacer ninguna.
+            Elige lo que de verdad mueve el dia. Tres suele ser el numero que cunde, pero el dia es tuyo.
           </p>
         )}
 
-        {dia.huecos > 0 && (
-          <form action={crearTarea} className="mt-3 space-y-2 border-t border-border pt-3">
-            <input type="hidden" name="para_hoy" value="si" />
-            <Campo
-              etiqueta={`Anadir a las de hoy (${dia.huecos} ${dia.huecos === 1 ? 'hueco' : 'huecos'})`}
-              name="titulo" placeholder="Cerrar la propuesta de EAC" required
-            />
-            <Boton type="submit" variante="secundario" className="w-full">Anadir a hoy</Boton>
-          </form>
-        )}
-        {dia.huecos === 0 && !dia.diaCerrado && (
-          <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
-            Ya tienes tus tres. Lo que se te ocurra ahora va a la mochila, no a hoy.
-          </p>
-        )}
+        {/* Siempre se puede anadir: tres es la recomendacion, no un muro. */}
+        <form action={crearTarea} className="mt-3 space-y-2 border-t border-border pt-3">
+          <input type="hidden" name="para_hoy" value="si" />
+          <Campo
+            etiqueta="Anadir a las de hoy"
+            name="titulo" placeholder="Cerrar la propuesta de EAC" required
+            ayuda={
+              dia.huecos > 0
+                ? `Te ${dia.huecos === 1 ? 'queda' : 'quedan'} ${dia.huecos} de las ${RECOMENDADAS} que suelen cundir.`
+                : `Ya llevas ${totalHoy}. Puedes poner las que quieras: hay dias que traen mas.`
+            }
+          />
+          <Boton type="submit" variante="secundario" className="w-full">Anadir a hoy</Boton>
+        </form>
       </Tarjeta>
 
       {avisos.length > 0 && (
@@ -97,13 +97,11 @@ export default async function PaginaTareas() {
                     {t.pospuesta > 0 && ` · pospuesta ${t.pospuesta} ${t.pospuesta === 1 ? 'vez' : 'veces'}`}
                   </span>
                 </span>
-                {dia.huecos > 0 && (
-                  <form action={traerAHoy.bind(null, t.id)}>
-                    <button type="submit" aria-label={`Traer ${t.titulo} a hoy`} className="flex items-center gap-1 text-xs text-primary">
-                      <ArrowUp size={14} /> Hoy
-                    </button>
-                  </form>
-                )}
+                <form action={traerAHoy.bind(null, t.id)}>
+                  <button type="submit" aria-label={`Traer ${t.titulo} a hoy`} className="flex items-center gap-1 text-xs text-primary">
+                    <ArrowUp size={14} /> Hoy
+                  </button>
+                </form>
                 <form action={aLaMochila.bind(null, t.id)}>
                   <button type="submit" aria-label={`Mandar ${t.titulo} a la mochila`} className="text-muted-foreground hover:text-foreground">
                     <Backpack size={16} />
@@ -172,13 +170,11 @@ export default async function PaginaTareas() {
                   {t.titulo}
                   {t.fecha && <span className="ml-1.5 text-xs text-muted-foreground">para el {fechaCorta(t.fecha)}</span>}
                 </span>
-                {dia.huecos > 0 && (
-                  <form action={traerAHoy.bind(null, t.id)}>
-                    <button type="submit" aria-label={`Traer ${t.titulo} a hoy`} className="flex items-center gap-1 text-xs text-primary">
-                      <ArrowUp size={14} /> Hoy
-                    </button>
-                  </form>
-                )}
+                <form action={traerAHoy.bind(null, t.id)}>
+                  <button type="submit" aria-label={`Traer ${t.titulo} a hoy`} className="flex items-center gap-1 text-xs text-primary">
+                    <ArrowUp size={14} /> Hoy
+                  </button>
+                </form>
                 <form action={borrarTarea.bind(null, t.id)}>
                   <button type="submit" aria-label={`Borrar ${t.titulo}`} className="text-muted-foreground hover:text-destructive">
                     <Trash2 size={16} />

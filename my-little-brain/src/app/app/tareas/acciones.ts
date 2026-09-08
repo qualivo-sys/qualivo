@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
-import { MAX_HOY } from '@/lib/motor/tareas';
 import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
 import { clienteServidor } from '@/lib/supabase/servidor';
 
@@ -24,23 +23,16 @@ const texto = (valor: FormDataEntryValue | null): string | null =>
   typeof valor === 'string' && valor.trim() ? valor.trim() : null;
 
 /**
- * Crear una tarea. Si viene marcada "para hoy" pero ya hay tres, se guarda en
- * la mochila en vez de rechazarla: perder lo que acabas de escribir es peor
- * que romper el limite, y el limite se sigue respetando donde importa.
+ * Crear una tarea. Si dice que es de hoy, va a hoy: tres es lo que suele
+ * cundir, pero hay dias que traen cinco cosas de verdad importantes y quien
+ * sabe eso es la persona, no la app.
  */
 export async function crearTarea(datos: FormData) {
   const { supabase, userId, hoy } = await sesion();
   const titulo = texto(datos.get('titulo'));
   if (!titulo) return;
 
-  const paraHoy = datos.get('para_hoy') === 'si';
-  let fecha: string | null = null;
-  if (paraHoy) {
-    const { count } = await supabase
-      .from('tareas').select('id', { count: 'exact', head: true })
-      .eq('user_id', userId).eq('fecha', hoy);
-    if ((count ?? 0) < MAX_HOY) fecha = hoy;
-  }
+  const fecha = datos.get('para_hoy') === 'si' ? hoy : null;
 
   await supabase.from('tareas').insert({
     user_id: userId,
@@ -77,11 +69,6 @@ export async function completarTarea(id: string, completada: boolean) {
  */
 export async function traerAHoy(id: string) {
   const { supabase, userId, hoy } = await sesion();
-
-  const { count } = await supabase
-    .from('tareas').select('id', { count: 'exact', head: true })
-    .eq('user_id', userId).eq('fecha', hoy);
-  if ((count ?? 0) >= MAX_HOY) return;
 
   const { data: previa } = await supabase
     .from('tareas').select('fecha, pospuesta').eq('id', id).eq('user_id', userId).maybeSingle();

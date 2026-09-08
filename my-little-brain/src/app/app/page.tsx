@@ -487,7 +487,7 @@ export default async function PanelHoy() {
           </>
         ) : (
           <Link href="/app/tareas" className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>Elige como mucho tres cosas para hoy.</span>
+            <span>Elige lo que de verdad mueve el dia.</span>
             <ArrowRight size={15} />
           </Link>
         )}

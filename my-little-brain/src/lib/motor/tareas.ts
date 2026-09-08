@@ -1,10 +1,13 @@
 /**
  * Las tareas de hoy.
  *
- * La decision de producto es el limite. Una lista de cuarenta pendientes no
- * ayuda a nadie: es una maquina de generar culpa, y esta app no va de eso. Lo
- * que si funciona es elegir tres cosas por la manana y saber por la noche si
- * salieron. Todo lo demas es mochila, y la mochila no se mira cada dia.
+ * Tres es la recomendacion, no un muro. Una lista de cuarenta pendientes es
+ * una maquina de generar culpa y esta app no va de eso, pero hay dias que de
+ * verdad traen cinco cosas importantes y quien lo sabe es la persona, no la
+ * app. Asi que se pueden poner las que hagan falta: lo unico que hace la app
+ * es marcar donde estaba la linea y, cuando tenga dias suficientes, contarle
+ * con SUS numeros que le pasa los dias que se pone mas de tres. Un dato es
+ * mas util que una norma.
  *
  * La otra decision es no dejar que nada se arrastre en silencio. Una tarea que
  * lleva cinco dias saltando de un dia al siguiente no es una tarea: es una
@@ -13,8 +16,12 @@
  */
 import type { Tarea } from '../tipos';
 
-/** Tres. Ni una mas: si todo es importante, nada lo es. */
+/**
+ * Las que se recomiendan al dia. No es un tope: se pueden poner mas.
+ * Sigue llamandose MAX_HOY por compatibilidad con lo que ya lo usa.
+ */
 export const MAX_HOY = 3;
+export const RECOMENDADAS = MAX_HOY;
 
 /** A partir de aqui una tarea deja de ser una tarea y es una decision pendiente. */
 export const POSPUESTA_DEMASIADO = 3;
@@ -28,9 +35,11 @@ export interface TareasDelDia {
   arrastradas: Tarea[];
   /** Lo que no es de hoy: sin fecha o para mas adelante. */
   mochila: Tarea[];
-  /** Cuantas de las tres quedan libres. */
+  /** Cuantas quedan hasta las tres recomendadas. 0 si ya las ha pasado. */
   huecos: number;
-  /** true cuando eligio tareas para hoy y las cerro todas. */
+  /** Cuantas se ha puesto por encima de las tres. */
+  extra: number;
+  /** true cuando eligio tareas para hoy y las cerro todas, sean las que sean. */
   diaCerrado: boolean;
 }
 
@@ -48,7 +57,8 @@ export function tareasDelDia(tareas: Tarea[], hoy: string): TareasDelDia {
     mochila: tareas
       .filter((t) => !t.completada && (t.fecha === null || t.fecha > hoy))
       .sort((a, b) => a.prioridad - b.prioridad),
-    huecos: Math.max(0, MAX_HOY - deHoy.length),
+    huecos: Math.max(0, RECOMENDADAS - deHoy.length),
+    extra: Math.max(0, deHoy.length - RECOMENDADAS),
     diaCerrado: deHoy.length > 0 && abiertasHoy.length === 0,
   };
 }
@@ -58,6 +68,11 @@ export function tareasDelDia(tareas: Tarea[], hoy: string): TareasDelDia {
 export interface ProgresoTareas {
   /** Dias del periodo en los que eligio tareas. */
   diasConTareas: number;
+  /**
+   * Que tal le va segun cuantas se ponga. Es la unica forma honesta de hablar
+   * del numero: con sus dias, no con una norma nuestra.
+   */
+  segunCuantas: { hasta3: { dias: number; cerrados: number }; masDe3: { dias: number; cerrados: number } };
   /** Dias en los que cerro todas las que se habia puesto. */
   diasCerrados: number;
   hechas: number;
@@ -88,8 +103,17 @@ export function progresoTareas(tareas: Tarea[], fechas: string[]): ProgresoTarea
     else break;
   }
 
+  const grupo = (filtra: (d: { total: number }) => boolean) => {
+    const suyos = conTareas.filter(filtra);
+    return { dias: suyos.length, cerrados: suyos.filter((d) => d.hechas === d.total).length };
+  };
+
   return {
     diasConTareas: conTareas.length,
+    segunCuantas: {
+      hasta3: grupo((d) => d.total <= RECOMENDADAS),
+      masDe3: grupo((d) => d.total > RECOMENDADAS),
+    },
     diasCerrados: cerrados.length,
     hechas: conTareas.reduce((t, d) => t + d.hechas, 0),
     racha,
@@ -136,11 +160,32 @@ export function insightsTareas(dia: TareasDelDia, progreso: ProgresoTareas): Ins
     });
   }
 
+  // Que le pasa a ESTA persona los dias que se pone mas de tres. Sin dias
+  // suficientes en los dos grupos no decimos nada: seria una opinion.
+  const { hasta3, masDe3 } = progreso.segunCuantas;
+  if (dia.extra > 0 && hasta3.dias >= 3 && masDe3.dias >= 3) {
+    const pctPocas = Math.round((hasta3.cerrados / hasta3.dias) * 100);
+    const pctMuchas = Math.round((masDe3.cerrados / masDe3.dias) * 100);
+    if (pctPocas - pctMuchas >= 20) {
+      fuera.push({
+        id: 'mas_de_tres',
+        tono: 'info',
+        texto: `Los dias de tres o menos cierras el ${pctPocas} % y los de mas, el ${pctMuchas} %. Hoy te has puesto ${dia.hoy.length + dia.hechasHoy.length}: tu sabras si el dia da para tanto.`,
+      });
+    } else if (pctMuchas >= pctPocas) {
+      fuera.push({
+        id: 'mas_de_tres',
+        tono: 'bien',
+        texto: `Los dias que te pones mas de tres cierras el ${pctMuchas} %, igual o mejor que los flojos. Este ritmo es el tuyo.`,
+      });
+    }
+  }
+
   if (!dia.hoy.length && !dia.hechasHoy.length) {
     fuera.push({
       id: 'vacio',
       tono: 'info',
-      texto: 'Elige como mucho tres cosas para hoy. Si eliges diez, no vas a hacer ninguna.',
+      texto: 'Elige lo que de verdad mueve el dia. Tres suele ser el numero que cunde, pero el dia es tuyo.',
     });
   } else if (dia.hoy.length && progreso.pct !== null && progreso.diasConTareas >= 4) {
     fuera.push({
