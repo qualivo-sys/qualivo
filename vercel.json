@@ -63,6 +63,31 @@
       "source": "/casos/eleva-academy/",
       "destination": "/#casos",
       "permanent": true
+    },
+    {
+      "source": "/donde-pierdes-clientes",
+      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "permanent": true
+    },
+    {
+      "source": "/donde-pierdes-clientes/",
+      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "permanent": true
+    },
+    {
+      "source": "/donde-pierdes-clientes/fugas.js",
+      "destination": "/donde-se-rompe-tu-crecimiento/diagnostico.js",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostico-express",
+      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostico-express/",
+      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "permanent": true
     }
   ],
   "trailingSlash": true
