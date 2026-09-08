@@ -38,7 +38,25 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 - **Modo caja estricto**: la caja libre operativa es mínima (la mayor parte del saldo está reservada para impuestos). Ningún gasto nuevo sin pasar por el cerebro. Decisión de financiación congelada hasta **noviembre**.
 - Ingresos recurrentes actuales: Equipzilla 2.040 € nómina (sube a ~2.850 € en octubre) + EAC 800 € + Eleva 400-500 €. Fase actual: estancamiento, no crisis — la misión es el siguiente cliente.
 
-## Pipeline y oportunidades vivas (2 sep 2026)
+## Posicionamiento en 10 segundos (8 sep 2026) — MATRIZ OBLIGATORIA
+
+Todo mensaje, secuencia, post, anuncio, propuesta y respuesta se alinea a esto. Si un tramo no cabe en la frase, sobra el tramo.
+
+| | |
+|---|---|
+| **Dolor principal** | "Invierto en marketing y no sé por dónde se me escapan los clientes." No es falta de leads: es que el dueño no ve dónde se rompe (nadie contesta a tiempo, nadie persigue el presupuesto, todo pasa por él, no sabe qué funciona). |
+| **Transformación** | De "hago cosas y espero" a "sé qué falla, qué arreglo primero y cuánto me cuesta cada cliente". Un sistema que capta, cualifica y persigue solo, con un número a fin de mes. |
+| **Prueba** | Nadie compró "más marketing"; todos compraron ver la fuga y taparla: Eleva CPL −61% / entrevistas +102% · Equipzilla ROAS 0,1→7,6, CAC −80% · EAC 10,2× · BelloVinilo 8,3× · Focus −53% coste/contacto · Nuria 6,45×. Prueba interna: los 24 clics de 6.874 envíos salen del único mensaje que es un diagnóstico. |
+| **Mecanismo único** | La Radiografía: primero la fuga, después qué arreglar, y se arregla con sistemas y agentes de IA que no dependen del dueño. Diagnóstico antes que táctica · implementación, no PowerPoint · agentes de IA como parte del arreglo. |
+| **Oferta** | Entrada: Radiografía del crecimiento (gratis, 90 s, qualivo.io/donde-se-rompe-tu-crecimiento/). Núcleo: Growth System, 1.000-2.500 €/mes, garantía 30 días. Ampliación: agentes de IA (Agent For Me). Nada más en la carta. |
+
+**Frase de 10 segundos:** "Encuentro dónde se te escapan los clientes y lo arreglo con sistemas y agentes de IA que trabajan solos. Eleva perdía el 61% de su presupuesto en leads que no cualificaban; hoy hace el doble de entrevistas con la mitad."
+
+**Versión para partners:** "Maikel encuentra por dónde pierdes clientes y lo arregla. Si tu cliente dice 'invierto y no sé si funciona', preséntaselo."
+
+**Lead magnet central:** la Radiografía. Todo canal (outbound, contenido, ads, partners) termina ahí con UTM propia (utm_campaign=radiografia, utm_source=<canal>, utm_content=<pieza o campaña>). Landing instrumenta eventos + UTM + tag `cuello-<valor>` en GHL; el SDR contacta <24h a cada radiografía completada usando SU cuello de botella como gancho.
+
+
 
 | Cuenta | Detalle | Estado |
 |---|---|---|
