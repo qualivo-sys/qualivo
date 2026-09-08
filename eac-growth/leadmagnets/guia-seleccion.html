@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cómo superar la selección de una aerolínea · EAC</title>
+<meta name="description" content="Guía gratuita: el proceso de selección de TCP de una aerolínea, fase por fase, con preguntas reales y errores que descartan.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/eac.css">
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a class="logo" href="/">Escola Aeronàutica <em>de Catalunya</em></a>
+  <span class="tag">Guía gratuita · 12 páginas</span>
+</div></div>
+<main class="shell">
+  <section class="card">
+    <span class="kicker">Guía gratuita · 12 páginas</span>
+    <h1>Cómo superar la selección de una aerolínea</h1>
+    <p class="lead">La dinámica de grupo es donde se cae la mayoría de candidatos a TCP. Esta guía recorre el proceso completo de una aerolínea, fase por fase, con las preguntas que se repiten y los errores que descartan de forma automática.</p>
+    <h3 style="margin-top:20px">Qué encontrarás dentro</h3>
+    <div class="checks" id="idx"></div>
+  </section>
+  <div id="after" style="margin-top:18px"></div>
+</main>
+<footer class="f">Escola Aeronàutica de Catalunya · Barcelona</footer>
+<script src="/assets/eac.js"></script>
+<script>
+window.EAC_MAGNET='lm_guia_seleccion';
+var IDX=[["El CV que pasa la criba", "Foto, orden de la información y qué destacar para que se vea en 10 segundos que cumples."], ["La entrevista en inglés", "Las preguntas que más se repiten y el método para responder sin quedarte en blanco."], ["La dinámica de grupo", "Qué evalúan de verdad, qué comportamientos suman y cuáles descartan al instante."], ["La entrevista final", "Motivación, disponibilidad y encaje con la cultura de la compañía."], ["La prueba de alcance", "En qué consiste y por qué no es una prueba de altura."], ["Después de la oferta", "El curso de habilitación de tipo y qué pasa hasta tu primer vuelo."]];
+document.getElementById('idx').innerHTML = IDX.map(function(x,i){
+  return '<div class="chk y"><span class="ic">'+(i+1)+'</span><span><b>'+x[0]+'</b><span>'+x[1]+'</span></span></div>';
+}).join('');
+EAC.gate(document.getElementById('after'),{
+  title:'Descárgala gratis',
+  sub:'Te la enviamos al email en cuanto rellenes estos datos.',
+  why:'Además de la guía, te avisamos cuando abran convocatorias del sector y te podemos llamar si quieres resolver dudas concretas.',
+  cta:'Quiero que me llamen',
+  extra:{curso:'TCP'},
+  onDone:function(d,res){
+    document.getElementById('after').innerHTML =
+     '<div class="card"><span class="kicker">Enviada</span>'
+    +'<h2>Ya va camino de tu email, '+d.nombre.split(' ')[0]+'</h2>'
+    +'<p>La hemos enviado a <b>'+d.email+'</b>. Si no la ves en unos minutos, revisa la carpeta de promociones o spam.</p>'
+    +'<div class="cta"><h3>¿Lo vemos en una llamada de 10 minutos?</h3><p>Calendario, precio y cómo se financia. Sin compromiso.</p>'
+    +'<a class="btn" href="https://escolaeronauticadecatalunya.cat/curso-auxiliar-vuelo/?utm_source=leadmagnet&utm_medium=guia&utm_campaign=lm_guia_seleccion">Quiero que me llamen</a></div>'
+    +'<p class="tiny" style="margin-top:16px">Puntuación asignada a este lead: <b>'+(res&&res.score!=null?res.score:'—')+'</b> · '+(res&&res.tag?res.tag:'—')+'.</p></div>';
+    window.scrollTo({top:document.getElementById('after').offsetTop-20,behavior:'smooth'});
+  }
+});
+</script>
+</body>
+</html>

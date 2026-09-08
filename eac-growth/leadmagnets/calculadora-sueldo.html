@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora: cuánto ganarías como TCP · EAC</title>
+<meta name="description" content="Calcula una estimación de lo que ganarías como tripulante de cabina de pasajeros según tipo de aerolínea, radio, antigüedad e idiomas.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/eac.css">
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a class="logo" href="/">Escola Aeronàutica <em>de Catalunya</em></a>
+  <span class="tag">Calculadora de sueldo TCP</span>
+</div></div>
+
+<main class="shell">
+  <section class="card">
+    <span class="kicker">Calculadora · 30 segundos</span>
+    <h1>¿Cuánto ganarías volando?</h1>
+    <p class="lead">El sueldo de un TCP no es una cifra fija: depende del radio, de la compañía, de la antigüedad y de los idiomas. Ajusta los cuatro factores y verás tu horquilla.</p>
+
+    <div class="field">
+      <label>Tipo de operación <span class="hint">— el radio es lo que más cambia la nómina</span></label>
+      <div class="seg" data-k="radio">
+        <button type="button" data-v="corto" class="on">Corto radio</button>
+        <button type="button" data-v="medio">Medio radio</button>
+        <button type="button" data-v="largo">Largo radio</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Tipo de aerolínea</label>
+      <div class="seg" data-k="tipo">
+        <button type="button" data-v="lowcost" class="on">Bajo coste</button>
+        <button type="button" data-v="tradicional">Tradicional / bandera</button>
+        <button type="button" data-v="ejecutiva">Ejecutiva / chárter</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Antigüedad</label>
+      <div class="seg" data-k="ant">
+        <button type="button" data-v="0" class="on">Primer año</button>
+        <button type="button" data-v="3">3 – 5 años</button>
+        <button type="button" data-v="6">Más de 5 años</button>
+        <button type="button" data-v="sob">Sobrecargo</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Idiomas además del español</label>
+      <div class="seg" data-k="idi">
+        <button type="button" data-v="1" class="on">Solo inglés</button>
+        <button type="button" data-v="2">Inglés + 1 más</button>
+        <button type="button" data-v="3">Inglés + 2 o más</button>
+      </div>
+    </div>
+
+    <div class="resbox" id="res">
+      <div class="lab">Estimación orientativa · bruto anual</div>
+      <div class="big" id="rng">—</div>
+      <div class="sub" id="sub">Ajusta los factores de arriba</div>
+    </div>
+
+    <div class="stats" id="brk"></div>
+
+    <p class="tiny">Horquillas orientativas de mercado, no una oferta ni un dato de convenio. El sueldo real depende del convenio de cada compañía, de las horas voladas, de las dietas por destino y de los complementos de nocturnidad y festivos. Sirve para hacerte una idea del orden de magnitud, no para negociar un contrato.</p>
+  </section>
+
+  <div id="after"></div>
+</main>
+
+<footer class="f">Escola Aeronàutica de Catalunya · Barcelona</footer>
+
+<script src="/assets/eac.js"></script>
+<script>
+window.EAC_MAGNET='lm_calc_sueldo';
+var st={radio:'corto',tipo:'lowcost',ant:'0',idi:'1'};
+
+// base bruta anual por antigüedad (corto radio, bajo coste) → se ajusta con multiplicadores
+var BASE={'0':[16000,20000],'3':[19500,25000],'6':[23000,30000],'sob':[30000,40000]};
+var RADIO={corto:[1,1],medio:[1.06,1.10],largo:[1.18,1.32]};       // dietas y pernoctas
+var TIPO ={lowcost:[1,1],tradicional:[1.08,1.16],ejecutiva:[1.05,1.25]};
+var IDI  ={'1':[1,1],'2':[1.02,1.05],'3':[1.04,1.08]};
+
+function calc(){
+  var b=BASE[st.ant], r=RADIO[st.radio], t=TIPO[st.tipo], i=IDI[st.idi];
+  var lo=Math.round(b[0]*r[0]*t[0]*i[0]/500)*500;
+  var hi=Math.round(b[1]*r[1]*t[1]*i[1]/500)*500;
+  EAC.$('#rng').textContent = fmt(lo)+' – '+fmt(hi)+' €';
+  EAC.$('#sub').textContent = 'Equivale a unos '+fmt(Math.round(lo/12/50)*50)+' – '+fmt(Math.round(hi/12/50)*50)+' € al mes, incluyendo variables.';
+  EAC.$('#brk').innerHTML =
+    tile(pct(r), 'por el radio de operación')
+   +tile(pct(t), 'por el tipo de aerolínea')
+   +tile(pct(i), 'por idiomas')
+   +tile(st.ant==='sob'?'+40%':(st.ant==='6'?'+45%':(st.ant==='3'?'+22%':'base')), st.ant==='0'?'punto de partida':'sobre el primer año');
+  return {lo:lo,hi:hi};
+}
+function pct(a){var m=((a[0]+a[1])/2-1)*100;return m<1?'base':'+'+Math.round(m)+'%';}
+function tile(b,s){return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>';}
+function fmt(n){return n.toLocaleString('es-ES');}
+
+EAC.$$('.seg').forEach(function(g){
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    EAC.$$('button',g).forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on'); st[g.dataset.k]=b.dataset.v; calc();
+  });
+});
+var cur=calc();
+setTimeout(function(){ cur=calc(); mostrarGate(); },300);
+
+function mostrarGate(){
+  EAC.gate(EAC.$('#after'),{
+    title:'¿Quieres el desglose completo?',
+    sub:'Te enviamos cómo se compone esa nómina y cómo se llega a la parte alta de la horquilla.',
+    why:'Recibirás el desglose de salario base, dietas, prima por hora de vuelo y complementos, y qué hace que dos TCP de la misma promoción cobren cifras muy distintas.',
+    cta:'Enviarme el desglose',
+    extra:{curso:'TCP', estimacion:cur, config:st},
+    onDone:function(d,res){
+      EAC.$('#after').innerHTML =
+       '<div class="card">'
+      +'  <span class="kicker">Enviado</span>'
+      +'  <h2>Listo, '+d.nombre.split(' ')[0]+'</h2>'
+      +'  <p>Te hemos enviado el desglose a <b>'+d.email+'</b>. Mientras tanto, tres cosas que conviene saber:</p>'
+      +'  <div class="checks">'
+      +'    <div class="chk y"><span class="ic">1</span><span><b>El radio manda</b><span>Un TCP de largo radio suma dietas y pernoctas que no existen en corto radio. Es la mayor diferencia entre dos nóminas.</span></span></div>'
+      +'    <div class="chk y"><span class="ic">2</span><span><b>Los idiomas se pagan</b><span>No solo como complemento: te abren las bases y las flotas mejor pagadas.</span></span></div>'
+      +'    <div class="chk y"><span class="ic">3</span><span><b>La promoción llega antes de lo que crees</b><span>El salto a sobrecargo cambia el tramo salarial de forma clara.</span></span></div>'
+      +'  </div>'
+      +'  <div class="cta"><h3>¿Empezamos por el certificado?</h3>'
+      +'  <p>Nada de esto pasa sin el certificado oficial de TCP. Te contamos cómo se obtiene.</p>'
+      +'  <a class="btn" href="https://escolaeronauticadecatalunya.cat/curso-auxiliar-vuelo/?utm_source=leadmagnet&utm_medium=calc&utm_campaign=lm_calc_sueldo">Ver el curso de TCP</a></div>'
+      +'  <p class="tiny" style="margin-top:16px">Puntuación asignada a este lead: <b>'+(res&&res.score!=null?res.score:'—')+'</b> · '+(res&&res.tag?res.tag:'—')+'.</p>'
+      +'</div>';
+      window.scrollTo({top:EAC.$('#after').offsetTop-20,behavior:'smooth'});
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Temario y salidas del despachador de vuelo · EAC</title>
+<meta name="description" content="Temario completo del curso de despachador de vuelo y salidas laborales reales en aerolíneas y centros de operaciones.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/eac.css">
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a class="logo" href="/">Escola Aeronàutica <em>de Catalunya</em></a>
+  <span class="tag">Programa gratuito</span>
+</div></div>
+<main class="shell">
+  <section class="card">
+    <span class="kicker">Programa gratuito</span>
+    <h1>Temario y salidas del despachador de vuelo</h1>
+    <p class="lead">Es la profesión aeronáutica con mejor relación entre demanda y número de gente formada. Te enviamos el temario completo, el perfil que encaja y las salidas reales en aerolíneas, handling y aviación ejecutiva.</p>
+    <h3 style="margin-top:20px">Qué encontrarás dentro</h3>
+    <div class="checks" id="idx"></div>
+  </section>
+  <div id="after" style="margin-top:18px"></div>
+</main>
+<footer class="f">Escola Aeronàutica de Catalunya · Barcelona</footer>
+<script src="/assets/eac.js"></script>
+<script>
+window.EAC_MAGNET='lm_temario_fd';
+var IDX=[["Meteorología aeronáutica", "Interpretación de METAR, TAF, mapas significativos y fenómenos peligrosos."], ["Navegación y espacio aéreo", "Cartas, rutas y procedimientos de salida y llegada."], ["Performance y peso y balance", "Limitaciones de la aeronave, carga, centrado y documentación operativa."], ["Plan de vuelo y combustible", "Cálculo de ruta óptima, reservas y política de combustible."], ["Normativa y NOTAM", "Regulación aplicable, avisos aeronáuticos y limitaciones operativas."], ["Seguimiento del vuelo", "Monitorización, desvíos e incidencias, y coordinación con la tripulación."], ["Salidas laborales", "Centro de operaciones, handling, aviación ejecutiva y coordinación aeroportuaria."]];
+document.getElementById('idx').innerHTML = IDX.map(function(x,i){
+  return '<div class="chk y"><span class="ic">'+(i+1)+'</span><span><b>'+x[0]+'</b><span>'+x[1]+'</span></span></div>';
+}).join('');
+EAC.gate(document.getElementById('after'),{
+  title:'Descárgala gratis',
+  sub:'Te la enviamos al email en cuanto rellenes estos datos.',
+  why:'Además de la guía, te avisamos cuando abran convocatorias del sector y te podemos llamar si quieres resolver dudas concretas.',
+  cta:'Quiero información del curso',
+  extra:{curso:'FD'},
+  onDone:function(d,res){
+    document.getElementById('after').innerHTML =
+     '<div class="card"><span class="kicker">Enviada</span>'
+    +'<h2>Ya va camino de tu email, '+d.nombre.split(' ')[0]+'</h2>'
+    +'<p>La hemos enviado a <b>'+d.email+'</b>. Si no la ves en unos minutos, revisa la carpeta de promociones o spam.</p>'
+    +'<div class="cta"><h3>¿Lo vemos en una llamada de 10 minutos?</h3><p>Calendario, precio y cómo se financia. Sin compromiso.</p>'
+    +'<a class="btn" href="https://escolaeronauticadecatalunya.cat/curso-despachador-vuelo/?utm_source=leadmagnet&utm_medium=guia&utm_campaign=lm_temario_fd">Quiero información del curso</a></div>'
+    +'<p class="tiny" style="margin-top:16px">Puntuación asignada a este lead: <b>'+(res&&res.score!=null?res.score:'—')+'</b> · '+(res&&res.tag?res.tag:'—')+'.</p></div>';
+    window.scrollTo({top:document.getElementById('after').offsetTop-20,behavior:'smooth'});
+  }
+});
+</script>
+</body>
+</html>
