@@ -148,7 +148,7 @@
     } catch (e) { /* el tracking nunca rompe la experiencia */ }
   }
 
-  function show(id) { SECS.forEach(function (s) { var el = $(s); if (el) el.hidden = s !== id; }); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function show(id) { SECS.forEach(function (s) { var el = $(s); if (el) el.hidden = s !== id; }); if ($('fg-sticky')) $('fg-sticky').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
   // ── Scoring ─────────────────────────────────────────────────────────
   // Cada dimensión puntúa sobre su máximo posible con lo contestado. Un «no lo sé»
@@ -481,8 +481,17 @@
 
   function empezar() { track('dx_start', {}); actual = 0; pintarPregunta(); show('fg-quiz'); }
 
-  $('fg-start').addEventListener('click', empezar);
-  $('fg-start2').addEventListener('click', empezar);
+  ['fg-start', 'fg-start2', 'fg-start3', 'fg-start4'].forEach(function (id) { if ($(id)) $(id).addEventListener('click', empezar); });
+
+  // CTA fija en móvil: aparece cuando el botón del hero sale de pantalla, solo en la landing
+  var sticky = $('fg-sticky'), heroBtn = $('fg-start');
+  if (sticky && heroBtn && 'IntersectionObserver' in window) {
+    var heroVisible = true;
+    var enLanding = function () { return !$('fg-landing').hidden; };
+    new IntersectionObserver(function (en) { heroVisible = en[0].isIntersecting; sticky.hidden = heroVisible || !enLanding(); }, { threshold: 0 }).observe(heroBtn);
+    var finalBtn = $('fg-start2');
+    if (finalBtn) new IntersectionObserver(function (en) { if (en[0].isIntersecting) sticky.hidden = true; else sticky.hidden = heroVisible || !enLanding(); }, { threshold: 0 }).observe(finalBtn);
+  }
   $('fg-prev').addEventListener('click', function () {
     if (enPerfil) { actual = PREGUNTAS.length - 1; pintarPregunta(); return; }
     if (actual > 0) { actual--; pintarPregunta(); }

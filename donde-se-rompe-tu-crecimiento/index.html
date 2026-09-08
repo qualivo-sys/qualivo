@@ -159,6 +159,33 @@
   @keyframes fgUp { from { opacity:0; transform:translateY(24px) rotate(-1.2deg) } to { opacity:1 } }
   @keyframes fgPulse { 0%,100% { box-shadow:0 0 0 0 rgba(232,89,12,0) } 50% { box-shadow:0 0 0 6px rgba(232,89,12,.18) } }
   @media (prefers-reduced-motion:reduce) { .fg-preview, .fg-preview .fg-sem li { animation:none; opacity:1; transform:none } }
+  .fg-eyebrow { margin:0 0 10px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--qv-teal); font-weight:800 }
+  .fg-big { font-family:var(--qv-font-display); font-size:clamp(26px,5vw,38px) !important; line-height:1.05 !important; letter-spacing:-.03em; font-weight:900; margin:0 0 16px !important; color:#101319 }
+  .fg-lead { font-size:17px; line-height:1.65; color:var(--qv-ink-soft); margin:0 }
+  .fg-grid4 { display:grid; gap:10px; margin:22px 0 0; padding:0; list-style:none }
+  @media (min-width:600px) { .fg-grid4 { grid-template-columns:1fr 1fr } }
+  .fg-grid4 li { display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:14px; padding:16px 18px; font-size:16.5px; font-weight:800; line-height:1.35; color:#101319 }
+  .fg-grid4 .fg-dot { margin-top:6px; width:11px; height:11px }
+  .fg-steps { display:grid; gap:14px; margin:0; padding:0; list-style:none; counter-reset:none }
+  @media (min-width:700px) { .fg-steps { grid-template-columns:1fr 1fr 1fr } }
+  .fg-steps li { display:flex; gap:12px; align-items:flex-start; background:#F7F8F9; border-radius:14px; padding:18px }
+  .fg-steps .num { flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--qv-ink); color:#fff; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center }
+  .fg-steps strong { display:block; font-size:16px; color:#101319; margin-bottom:4px }
+  .fg-steps span:not(.num) { display:block; font-size:14.5px; line-height:1.55; color:var(--qv-ink-soft) }
+  .fg-mid { text-align:center; margin-top:28px }
+  .fg-two { display:grid; gap:28px }
+  @media (min-width:700px) { .fg-two { grid-template-columns:1fr 1fr; gap:40px } }
+  .fg-check { margin:0; padding:0; list-style:none }
+  .fg-check li { position:relative; padding-left:30px; margin:0 0 12px; font-size:16.5px; line-height:1.5; color:#101319; font-weight:700 }
+  .fg-check li::before { content:"✓"; position:absolute; left:0; top:0; width:22px; height:22px; border-radius:50%; background:var(--qv-teal-pale); color:var(--qv-teal); font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center }
+  .fg-quien p { margin:0 0 12px; font-size:15.5px; line-height:1.65; color:var(--qv-ink-soft) }
+  .fg-final { margin:56px 0 0; padding:clamp(32px,6vw,52px) clamp(22px,5vw,44px); background:#08090C; color:#fff; border-radius:22px; text-align:center }
+  .fg-final h2 { font-family:var(--qv-font-display); font-size:clamp(26px,5vw,40px); line-height:1.02; letter-spacing:-.03em; font-weight:900; margin:0 0 10px; color:#fff }
+  .fg-final p { margin:0 0 24px; font-size:18px; color:rgba(255,255,255,.7) }
+  .fg-final .fg-mini { margin:14px 0 0; color:rgba(255,255,255,.45) }
+  .fg-sticky { position:fixed; left:0; right:0; bottom:0; z-index:40; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-top:1px solid rgba(16,19,25,.1); display:flex; justify-content:center }
+  .fg-sticky .fg-cta { width:100%; max-width:480px; justify-content:center; padding:15px 22px }
+  @media (min-width:860px) { .fg-sticky { display:none } }
   #fg-canvas { display:none }
   select.fg-select { width:100%; min-height:50px; padding:12px 14px; border:1px solid rgba(16,19,25,.18); border-radius:12px;
     background:#fff; font:inherit; font-size:16px; color:var(--qv-ink) }
@@ -213,81 +240,84 @@
 
       <div class="fg-wrap">
 
+      <!-- 1 · el giro -->
       <div class="fg-sec">
-        <h2>El problema</h2>
-        <p>Cuando una empresa no crece, el dueño casi siempre llega a la misma conclusión: necesito más clientes. Y se pone a buscarlos. Más anuncios, más redes, más llamadas.</p>
-        <p>A veces es verdad. Muchas veces no. Puede que estés intentando conseguir más clientes cuando el problema está en otra parte: en lo que pasa cuando alguien pregunta y nadie contesta a tiempo. En el presupuesto que sale y nadie persigue. En que todo pasa por ti. En que haces cosas y no sabes cuáles te hacen crecer.</p>
-        <p>Nada de eso aparece en ningún informe. Por eso se sigue invirtiendo en el sitio equivocado.</p>
-      </div>
-
-      <div class="fg-sec">
-        <h2>La promesa</h2>
-        <p>Once preguntas sobre lo que pasa en tu empresa un martes cualquiera. Al terminar, no te damos una nota. Te decimos <strong>cuál es tu principal cuello de botella</strong>, cómo de grave es, qué arreglarías primero si solo pudieras arreglar una cosa en los próximos treinta días, y qué puedes hacer hoy mismo.</p>
-        <p>Y si tu problema de verdad es que no te llegan suficientes oportunidades, también te lo decimos. No damos por hecho nada.</p>
-      </div>
-
-      <div class="fg-sec">
-        <h2>Cómo funciona</h2>
-        <ul class="fg-pasos">
-          <li><span class="num">1</span><p style="margin:0"><strong>Contestas once preguntas.</strong> Ninguna pide un dato que tengas que buscar. «Cuando necesitas más clientes, ¿qué ocurre?». «Después de enviar un presupuesto, ¿qué haces?». Cosas que ya sabes.</p></li>
-          <li><span class="num">2</span><p style="margin:0"><strong>Miramos las cinco partes de tu sistema de crecimiento.</strong> Captación, conversión, seguimiento, dependencia y control. Cada una recibe una puntuación sobre cien que sale solo de tus respuestas.</p></li>
-          <li><span class="num">3</span><p style="margin:0"><strong>Te decimos dónde se rompe.</strong> La parte más floja es tu cuello de botella. Con su nivel, por qué es esa y no otra, qué arreglar primero y una acción concreta para hoy.</p></li>
+        <p class="fg-eyebrow">Lo que casi nadie mira</p>
+        <h2 class="fg-big">Puede que estés buscando clientes en el sitio equivocado.</h2>
+        <p class="fg-lead">Cuando una empresa no crece, el dueño concluye «necesito más clientes» y sale a buscarlos. A veces es verdad. Muchas veces el problema está en otra parte:</p>
+        <ul class="fg-grid4">
+          <li><span class="fg-dot r"></span>Alguien pregunta y nadie contesta a tiempo.</li>
+          <li><span class="fg-dot r"></span>Sale un presupuesto y nadie lo persigue.</li>
+          <li><span class="fg-dot r"></span>Todo pasa por ti.</li>
+          <li><span class="fg-dot r"></span>Haces cosas y no sabes cuáles te hacen crecer.</li>
         </ul>
+        <p class="fg-lead" style="margin-top:18px"><strong>Nada de eso sale en ningún informe.</strong> Por eso se sigue invirtiendo donde no toca.</p>
       </div>
 
+      <!-- 2 · cómo -->
       <div class="fg-sec">
-        <h2>Qué vas a descubrir</h2>
-        <ul style="margin:0; padding-left:20px">
-          <li>Si tu problema es conseguir oportunidades o aprovechar las que ya tienes</li>
-          <li>Cuál de las cinco partes de tu crecimiento está frenando a las otras cuatro</li>
-          <li>Qué arreglarías primero, y qué no tocarías todavía aunque te apetezca</li>
-          <li>Qué tienes mejor de lo que pensabas</li>
-        </ul>
+        <p class="fg-eyebrow">Cómo funciona</p>
+        <h2 class="fg-big">Once preguntas. Un veredicto.</h2>
+        <ol class="fg-steps">
+          <li><span class="num">1</span><div><strong>Contestas once preguntas.</strong><span>Sobre lo que pasa en tu empresa un martes cualquiera. Ningún dato que buscar.</span></div></li>
+          <li><span class="num">2</span><div><strong>Puntuamos las cinco partes.</strong><span>Captación, conversión, seguimiento, dependencia y control. De 0 a 100, solo con tus respuestas.</span></div></li>
+          <li><span class="num">3</span><div><strong>Te decimos dónde se rompe.</strong><span>La parte más floja es tu cuello de botella. Qué arreglar primero y qué hacer hoy.</span></div></li>
+        </ol>
+        <div class="fg-mid"><button id="fg-start3" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button><p class="fg-mini">Gratis · sin registro · 90 segundos</p></div>
       </div>
 
+      <!-- 3 · resultados -->
       <div class="fg-sec">
-        <h2>Así son los resultados</h2>
+        <p class="fg-eyebrow">Así son los resultados</p>
+        <h2 class="fg-big">Cinco sitios donde se rompe. Uno es el tuyo.</h2>
         <ul class="fg-ej">
-          <li><p class="k">Cuello de botella</p><p class="d">Captación</p><p>Tu problema empieza antes de que llegue el cliente. No tienes una fuente de oportunidades que puedas medir y repetir.</p></li>
+          <li><p class="k">Cuello de botella</p><p class="d">Captación</p><p>Tu problema empieza antes de que llegue el cliente. No tienes una fuente de oportunidades que puedas repetir.</p></li>
           <li><p class="k">Cuello de botella</p><p class="d">Conversión</p><p>Ya te llegan oportunidades. Se pierden nada más entrar: alguien pregunta y se enfría antes de que nadie le atienda.</p></li>
           <li><p class="k">Cuello de botella</p><p class="d">Seguimiento</p><p>Ya consigues oportunidades. El problema es lo que pasa después: mandas presupuestos y ahí se acaba.</p></li>
           <li><p class="k">Cuello de botella</p><p class="d">Dependencia</p><p>Tu empresa crece hasta donde llega el dueño. Y ahí para.</p></li>
-          <li><p class="k">Cuello de botella</p><p class="d">Control</p><p>Haces cosas, pero no sabes cuáles te hacen crecer. Y cuando toque recortar, puedes apagar justo lo que funcionaba.</p></li>
+          <li><p class="k">Cuello de botella</p><p class="d">Control</p><p>Haces cosas, pero no sabes cuáles te hacen crecer. Cuando toque recortar, puedes apagar justo lo que funcionaba.</p></li>
           <li><p class="k">Cuello de botella</p><p class="d" style="color:#0E7C74">Ninguno</p><p>Pasa en menos empresas de las que dicen. Tu problema ya no es dónde se rompe, sino hasta dónde aguanta.</p></li>
         </ul>
       </div>
 
-      <div class="fg-sec">
-        <h2>Quién hay detrás</h2>
-        <p>Lo ha hecho Maikel Echevarría, que se dedica a mirar por dentro sistemas de captación y ventas de empresas de dos a veinte personas. Las preguntas salen de lo que aparece una y otra vez cuando abres una de estas empresas por dentro.</p>
-        <p>No hay promedios del sector inventados ni números decorativos. El resultado sale de tus respuestas, te enseñamos cómo se calcula y te decimos cómo comprobar en una semana si ha acertado.</p>
+      <!-- 4 · qué te llevas + credibilidad -->
+      <div class="fg-sec fg-two">
+        <div>
+          <p class="fg-eyebrow">Qué te llevas</p>
+          <ul class="fg-check">
+            <li>Si tu problema es conseguir oportunidades o aprovechar las que ya tienes</li>
+            <li>Cuál de las cinco partes está frenando a las otras cuatro</li>
+            <li>Qué arreglar primero, y qué no tocar todavía aunque te apetezca</li>
+            <li>Una acción concreta para hoy</li>
+          </ul>
+        </div>
+        <div class="fg-quien">
+          <p class="fg-eyebrow">Quién lo ha hecho</p>
+          <p><strong>Maikel Echevarría</strong>, que se dedica a mirar por dentro sistemas de captación y ventas de empresas de dos a veinte personas. Las preguntas salen de lo que aparece una y otra vez al abrir una de estas empresas.</p>
+          <p>Sin promedios del sector inventados. El resultado sale de tus respuestas, te enseñamos cómo se calcula y cómo comprobar en una semana si ha acertado.</p>
+        </div>
       </div>
 
-      <div class="fg-sec">
-        <h2>Lo que sueles preguntarte antes de empezar</h2>
-        <dl class="fg-obj">
-          <dt>«No tengo tiempo.»</dt><dd>Noventa segundos. Once preguntas que se contestan con lo que ya sabes. Si tardas más de dos minutos es que te has parado a pensar, y eso ya es parte del valor.</dd>
-          <dt>«¿Me vais a llamar?»</dt><dd>No. El resultado sale en pantalla sin que dejes nada. Si quieres la radiografía ampliada, entonces sí te pedimos el correo.</dd>
-          <dt>«Ya sé lo que me pasa.»</dt><dd>Puede. La mayoría acierta con su primer cuello de botella. Casi nadie acierta con el segundo, y suele ser el que sostiene al primero.</dd>
-          <dt>«Esto es para empresas grandes.»</dt><dd>Al revés. Está pensado para negocios de dos a veinte personas donde el dueño todavía vende.</dd>
-        </dl>
-      </div>
-
-      <div class="fg-sec" style="text-align:center; padding:36px 24px; background:#F7F8F9; border-radius:18px">
-        <h2 style="margin-bottom:8px">Puede que tu problema no sea conseguir más clientes.</h2>
-        <p style="margin:0 0 22px">Once preguntas y lo sabes.</p>
+      <!-- 5 · cierre -->
+      <div class="fg-final">
+        <h2>Puede que tu problema no sea conseguir más clientes.</h2>
+        <p>Once preguntas y lo sabes.</p>
         <button id="fg-start2" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button>
+        <p class="fg-mini">Sin registro. El resultado sale en pantalla.</p>
       </div>
 
       <div class="fg-sec">
         <h2>Preguntas frecuentes</h2>
-        <details class="faq-item"><summary>¿Cuánto tarda de verdad?</summary><p>Entre noventa segundos y dos minutos. Once preguntas, una por pantalla, que se contestan con lo que ya sabes de tu empresa.</p></details>
-        <details class="faq-item"><summary>¿Tengo que dar mi correo?</summary><p>Para ver el resultado no. Solo si quieres además la radiografía ampliada: las cinco partes explicadas, la segunda más floja, cómo comprobar que acierta y un plan de treinta días.</p></details>
+        <details class="faq-item"><summary>¿Cuánto tarda de verdad?</summary><p>Entre noventa segundos y dos minutos. Once preguntas, una por pantalla, que se contestan con lo que ya sabes de tu empresa. Si tardas más es que te has parado a pensar, y eso ya es parte del valor.</p></details>
+        <details class="faq-item"><summary>¿Tengo que dar mi correo? ¿Me vais a llamar?</summary><p>Para ver el resultado no, y no te llamamos. Solo si quieres además la radiografía ampliada (las cinco partes explicadas, la segunda más floja, cómo comprobar que acierta y un plan de treinta días) te pedimos el correo.</p></details>
         <details class="faq-item"><summary>¿Qué hacéis con mis datos?</summary><p>Si dejas el correo, te llega la radiografía y después algunos correos sobre tu cuello de botella concreto. Te puedes dar de baja en cualquiera. No se los damos a nadie. Más detalle en <a href="/privacidad/">privacidad</a>.</p></details>
         <details class="faq-item"><summary>¿Sirve si mi problema es que no me llegan clientes?</summary><p>Sí. Tres de las once preguntas miden captación: si te llegan suficientes oportunidades, si puedes generarlas cuando quieres y si te encuentran. Si el problema es la demanda, el diagnóstico lo dice.</p></details>
-        <details class="faq-item"><summary>¿Esto es para venderme algo?</summary><p>Al final te proponemos dar un paso más si quieres. No hace falta para tener tu resultado.</p></details>
+        <details class="faq-item"><summary>¿Ya sé lo que me pasa?</summary><p>Puede. La mayoría acierta con su primer cuello de botella. Casi nadie acierta con el segundo, y suele ser el que sostiene al primero.</p></details>
+        <details class="faq-item"><summary>¿Esto es para empresas grandes?</summary><p>Al revés. Está pensado para negocios de dos a veinte personas donde el dueño todavía vende. Al final te proponemos dar un paso más si quieres; no hace falta para tener tu resultado.</p></details>
       </div>
       </div>
+
+      <div id="fg-sticky" class="fg-sticky" hidden><button id="fg-start4" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button></div>
     </section>
 
   <div class="fg-wrap" style="padding-top:clamp(36px,6vw,64px)">
