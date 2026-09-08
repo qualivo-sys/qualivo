@@ -532,3 +532,9 @@ vigilar dos días. Ojo con la atribución: los registros se apuntan a la fecha d
 lunes y martes pueden ganar registros a posteriori.
 Marca gastó 12,25 € en 3 clics el lunes (4 €/clic con puja inteligente). Negativas nuevas:
 consultoria/consultoría, tech summit.
+**08-09, después:** Maikel acepta mi recomendación → **Search vuelve a Maximizar clics con
+tope de 5 €/clic**, 85,23 €/día. Razón: única configuración con resultados (8 reg. a 33 €);
+una puja inteligente no tiene tiempo de aprender con 16 días y 8 registros. Los ajustes de
+móvil (−40 %) y horario (noche −50 %) vuelven a aplicar. Plan: pausar el jueves las keywords
+de AIAct/Compliance sin registro; si el jueves Search pasa de 15 registros, probar CPA
+objetivo 35–40 €.
