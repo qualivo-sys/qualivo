@@ -2,6 +2,8 @@
 // actualiza el contacto en GoHighLevel con el estado de sus cinco etapas, la más débil,
 // el síntoma concreto y su perfil. Mismas credenciales que /api/lead.
 
+const R = require('./_radiografia');
+
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -148,8 +150,15 @@ module.exports = async function handler(req, res) {
       nombre, email, etapaDebil, sintoma, nivel, total, maximo, completo, etapas,
       empleados, valorCliente, prioritario, contactId, locationId
     }).catch(function (err) {
-      console.error('[fugas] Aviso por email falló:', err);
+      console.error('[fugas] Aviso interno falló:', err);
     });
+
+    // La radiografía prometida en el formulario. Si falla, el lead ya está
+    // guardado: no se devuelve error al navegador por esto.
+    await enviarRadiografia({ nombre, email, etapaDebil, etapas, completo })
+      .catch(function (err) {
+        console.error('[fugas] Radiografía no enviada:', err);
+      });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
@@ -210,6 +219,114 @@ async function avisar(lead) {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: from, to: to, subject: asunto, html: html, reply_to: lead.email })
+  });
+  if (!r.ok) throw new Error('Resend respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
+}
+
+
+// ── Radiografía ampliada para el usuario ──────────────────────────────────
+async function enviarRadiografia(d) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return;
+  const from = process.env.RADIOGRAFIA_FROM || process.env.LEAD_NOTIFY_FROM ||
+    'Maikel de Qualivo <onboarding@resend.dev>';
+
+  const esc = function (s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+  const nombreCorto = esc(d.nombre.split(' ')[0]);
+  const segunda = R.segundaPeor(d.etapas, d.etapaDebil);
+
+  const bloque = function (e) {
+    const p = d.etapas[e];
+    return '<tr><td style="padding:20px 0;border-bottom:1px solid #E8E6E1">' +
+      '<table style="width:100%"><tr>' +
+      '<td style="font:700 17px -apple-system,Segoe UI,Roboto,sans-serif;color:#101319">' +
+        R.NOMBRE[e] + ' <span style="font-weight:500;color:#8A8B90">· ' + R.PREGUNTA[e] + '</span></td>' +
+      '<td align="right" style="font:800 14px -apple-system,Segoe UI,Roboto,sans-serif;color:' +
+        R.color(p) + '">' + R.etiqueta(p) + ' · ' + p + '/8</td>' +
+      '</tr></table>' +
+      '<p style="margin:10px 0 0;font:400 15.5px/1.65 -apple-system,Segoe UI,Roboto,sans-serif;color:#3D4148">' +
+        R.EXPLICA[e][R.estado(p)] + '</p></td></tr>';
+  };
+
+  const pasos = R.MOVIMIENTOS[d.etapaDebil].map(function (m, i) {
+    return '<tr><td style="padding:0 0 16px"><table><tr>' +
+      '<td valign="top" style="width:30px"><div style="width:24px;height:24px;border-radius:50%;' +
+      'background:#101319;color:#fff;font:800 13px -apple-system,sans-serif;text-align:center;' +
+      'line-height:24px">' + (i + 1) + '</div></td>' +
+      '<td style="font:400 15.5px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:#3D4148">' +
+      m + '</td></tr></table></td></tr>';
+  }).join('');
+
+  const html =
+  '<div style="background:#F7F8F9;padding:28px 14px">' +
+  '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;padding:34px 30px;' +
+  'font-family:-apple-system,Segoe UI,Roboto,sans-serif">' +
+    '<p style="margin:0 0 6px;font:800 12px -apple-system,sans-serif;letter-spacing:.14em;' +
+      'text-transform:uppercase;color:#0E7C74">Tu radiografía</p>' +
+    '<h1 style="margin:0 0 18px;font:800 27px/1.2 -apple-system,Segoe UI,Roboto,sans-serif;' +
+      'color:#101319;letter-spacing:-.02em">' + nombreCorto + ', donde más se te escapa es en ' +
+      R.NOMBRE[d.etapaDebil].toLowerCase() + '.</h1>' +
+    (d.completo ? '' :
+      '<p style="margin:0 0 18px;padding:12px 16px;background:#FDF4E0;border-radius:10px;' +
+      'font:600 14.5px/1.6 -apple-system,sans-serif;color:#8A6206">Contestaste solo una parte del ' +
+      'diagnóstico, así que esto sale de lo que dio tiempo a ver. Si vuelves y terminas las etapas ' +
+      'que faltan, la foto será más fiel.</p>') +
+
+    '<h2 style="margin:26px 0 4px;font:800 19px -apple-system,sans-serif;color:#101319">' +
+      'Las cinco etapas, una a una</h2>' +
+    '<table style="width:100%;border-collapse:collapse">' + R.ETAPAS.map(bloque).join('') + '</table>' +
+
+    '<div style="margin:28px 0 0;padding:22px 24px;background:#F7F8F9;border-radius:14px">' +
+      '<p style="margin:0 0 6px;font:800 12px -apple-system,sans-serif;letter-spacing:.14em;' +
+        'text-transform:uppercase;color:#0E7C74">La que no esperabas</p>' +
+      '<p style="margin:0;font:400 16px/1.65 -apple-system,sans-serif;color:#3D4148">' +
+        'Casi todo el mundo acierta con su primera fuga. Con la segunda no. La tuya es <strong>' +
+        R.NOMBRE[segunda].toLowerCase() + '</strong>, y suele ser la que sostiene a la primera: ' +
+        'arreglar una sin mirar la otra dura poco.</p>' +
+    '</div>' +
+
+    '<h2 style="margin:30px 0 10px;font:800 19px -apple-system,sans-serif;color:#101319">' +
+      'Cómo saber si esto acierta</h2>' +
+    '<p style="margin:0;font:400 16px/1.65 -apple-system,sans-serif;color:#3D4148">' +
+      R.COMPROBAR[d.etapaDebil] + '</p>' +
+
+    '<h2 style="margin:30px 0 14px;font:800 19px -apple-system,sans-serif;color:#101319">' +
+      'Los tres primeros movimientos, en orden</h2>' +
+    '<table style="width:100%;border-collapse:collapse">' + pasos + '</table>' +
+
+    '<div style="margin:30px 0 0;padding:24px;background:#101319;border-radius:14px">' +
+      '<p style="margin:0 0 8px;font:800 19px -apple-system,sans-serif;color:#fff">' +
+        'Ya sabes por dónde se te escapa.</p>' +
+      '<p style="margin:0 0 18px;font:400 15.5px/1.65 -apple-system,sans-serif;color:#B9BDC4">' +
+        'La siguiente pregunta es cuánto te está costando y qué habría que tocar primero para que ' +
+        'deje de pasar.</p>' +
+      '<a href="https://qualivo.io/diagnostico/?origen=radiografia" style="display:inline-block;' +
+        'background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px -apple-system,sans-serif;' +
+        'padding:13px 22px;border-radius:10px">Ver mi radiografía de crecimiento →</a>' +
+    '</div>' +
+
+    '<p style="margin:26px 0 0;font:400 14px/1.6 -apple-system,sans-serif;color:#8A8B90">' +
+      'Si algo de esto no te cuadra, contéstame a este correo y lo miramos. Lo leo yo.<br>Maikel</p>' +
+  '</div>' +
+  '<p style="max-width:600px;margin:16px auto 0;font:400 12.5px/1.6 -apple-system,sans-serif;' +
+    'color:#8A8B90;text-align:center">Recibes esto porque hiciste el diagnóstico en qualivo.io. ' +
+    '<a href="https://qualivo.io/privacidad/" style="color:#8A8B90">Privacidad</a></p>' +
+  '</div>';
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: from,
+      to: d.email,
+      subject: 'Tu radiografía: se te escapan en ' + R.NOMBRE[d.etapaDebil].toLowerCase(),
+      html: html,
+      reply_to: process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io'
+    })
   });
   if (!r.ok) throw new Error('Resend respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
 }
