@@ -359,7 +359,12 @@
     } else {
       $('fg-nivel').className = 'fg-nivel ' + n.cl;
       $('fg-nivel').textContent = n.et + ' — ' + n.li;
-      $('fg-title').textContent = 'Se te escapan en ' + et.nombre.toLowerCase() + ': ' + s.corto.toLowerCase() + '.';
+      // Evita el titular redundante cuando el síntoma ya nombra la etapa
+      var corto = s.corto.toLowerCase();
+      var etapa = et.nombre.toLowerCase();
+      $('fg-title').textContent = corto.indexOf(etapa) === 0
+        ? 'Se te escapan en el ' + corto + '.'
+        : 'Se te escapan en ' + etapa + ': ' + corto + '.';
       $('fg-diag').textContent = s.diag;
       $('fg-prio').textContent = s.prio;
       $('fg-accion').textContent = s.accion;
