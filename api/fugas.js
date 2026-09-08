@@ -1,25 +1,30 @@
-// Recibe el resultado del diagnóstico "¿Cuántos clientes estás perdiendo sin saberlo?"
-// y crea/actualiza el contacto en GoHighLevel con su fuga principal, su nivel y su
-// perfil. Mismas credenciales que /api/lead (variables de entorno de Vercel).
+// Recibe el resultado del diagnóstico "¿Dónde se te escapan los clientes?" y crea o
+// actualiza el contacto en GoHighLevel con el estado de sus cinco etapas, la más débil,
+// el síntoma concreto y su perfil. Mismas credenciales que /api/lead.
 
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-const DIMS = ['seguimiento', 'velocidad', 'origen', 'dependencia', 'proceso', 'cartera'];
-const FUGAS = DIMS.concat(['perfecto']);
+const ETAPAS = ['captacion', 'conversion', 'seguimiento', 'proceso', 'medicion'];
+const SINTOMAS = ['presupuestos', 'velocidad', 'caida', 'perdidos', 'cartera', 'origen',
+  'canal-unico', 'coste', 'sin-registro', 'dependencia', 'sin-guion', 'sin-revision'];
 const NIVELES = ['critica', 'relevante', 'bajo'];
 const EMPLEADOS = ['Solo yo', '2 a 5', '6 a 20', 'Más de 20'];
 const VALORES = ['Menos de 500 €', '500 a 2.000 €', '2.000 a 10.000 €', 'Más de 10.000 €', 'No lo sé'];
 
-const NOMBRE_FUGA = {
-  seguimiento: 'Seguimiento de presupuestos',
-  velocidad: 'Velocidad de respuesta',
-  origen: 'Origen de los clientes',
-  dependencia: 'Dependencia del dueño',
-  proceso: 'Proceso sin escribir',
-  cartera: 'Cartera dormida',
-  perfecto: 'Sin fuga evidente'
+const NOMBRE_ETAPA = {
+  captacion: 'Captación', conversion: 'Conversión', seguimiento: 'Seguimiento',
+  proceso: 'Proceso', medicion: 'Medición'
+};
+
+const NOMBRE_SINTOMA = {
+  'presupuestos': 'Seguimiento de presupuestos', 'velocidad': 'Velocidad de respuesta',
+  'caida': 'Gente que se cae por el camino', 'perdidos': 'Los «no» que se tiran',
+  'cartera': 'Cartera dormida', 'origen': 'No sabe qué le trae los clientes',
+  'canal-unico': 'Todo depende de un solo canal', 'coste': 'No sabe lo que cuesta un cliente',
+  'sin-registro': 'El proceso vive en su cabeza', 'dependencia': 'El cuello de botella es el dueño',
+  'sin-guion': 'Cada uno lo hace a su manera', 'sin-revision': 'Nadie mira los números'
 };
 
 // Un lead es prioritario cuando la fuga es crítica, la empresa cae dentro del ICP
@@ -48,21 +53,25 @@ module.exports = async function handler(req, res) {
 
   const nombre = String(b.nombre || '').trim();
   const email = String(b.email || '').trim();
-  const fuga = String(b.fuga || '');
-  const segunda = String(b.segunda || '');
+  const etapaDebil = String(b.etapa_debil || '');
+  const sintoma = String(b.sintoma || '');
   const nivel = String(b.nivel || '');
   const total = Number.isInteger(b.total) ? b.total : null;
-  const puntos = b.puntos || {};
+  const maximo = Number.isInteger(b.maximo) ? b.maximo : null;
+  const completo = b.completo === true;
+  const etapas = b.etapas || {};
   const empleados = String(b.empleados || '');
   const valorCliente = String(b.valor_cliente || '');
 
-  const puntosOk = DIMS.every(function (d) {
-    return Number.isInteger(puntos[d]) && puntos[d] >= 0 && puntos[d] <= 2;
+  const etapasOk = ETAPAS.every(function (e) {
+    return Number.isInteger(etapas[e]) && etapas[e] >= 0 && etapas[e] <= 8;
   });
 
   if (!nombre || !EMAIL_RE.test(email) || b.rgpd !== true ||
-      !FUGAS.includes(fuga) || !NIVELES.includes(nivel) ||
-      total === null || total < 0 || total > 12 || !puntosOk ||
+      !ETAPAS.includes(etapaDebil) || !NIVELES.includes(nivel) ||
+      (sintoma && !SINTOMAS.includes(sintoma)) || !etapasOk ||
+      total === null || maximo === null || total < 0 || maximo < 0 ||
+      total > 40 || maximo > 40 || total > maximo ||
       !EMPLEADOS.includes(empleados) || !VALORES.includes(valorCliente)) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
   }
@@ -75,7 +84,9 @@ module.exports = async function handler(req, res) {
     'Content-Type': 'application/json'
   };
 
-  const tags = ['qualivo-landing', 'diagnostico-fugas', 'fuga-' + fuga, 'nivel-' + nivel];
+  const tags = ['qualivo-landing', 'diagnostico-fugas', 'etapa-' + etapaDebil, 'nivel-' + nivel];
+  if (sintoma) tags.push('sintoma-' + sintoma);
+  if (completo) tags.push('diagnostico-completo');
   if (prioritario) tags.push('prioridad-alta');
 
   try {
@@ -98,25 +109,26 @@ module.exports = async function handler(req, res) {
     const contactId = upsert && upsert.contact && upsert.contact.id;
 
     if (contactId) {
-      const detalle = DIMS.map(function (d) {
-        const p = puntos[d];
-        const icono = p === 2 ? 'OK' : (p === 1 ? 'regular' : 'MAL');
-        return '· ' + d.charAt(0).toUpperCase() + d.slice(1) + ': ' + p + '/2 (' + icono + ')';
+      const detalle = ETAPAS.map(function (e) {
+        const p = etapas[e];
+        const estado = p <= 2 ? 'CRÍTICA' : (p <= 5 ? 'floja' : 'sólida');
+        return '· ' + NOMBRE_ETAPA[e] + ': ' + p + '/8 (' + estado + ')';
       }).join('\n');
 
       const nota = [
         'Diagnóstico «¿Cuántos clientes estás perdiendo sin saberlo?» — qualivo.io',
         '',
-        'FUGA PRINCIPAL: ' + (NOMBRE_FUGA[fuga] || fuga),
-        'Segunda fuga: ' + (NOMBRE_FUGA[segunda] || segunda || '—'),
-        'Nivel: ' + nivel + ' (' + total + '/12 puntos)',
+        'ETAPA MÁS DÉBIL: ' + (NOMBRE_ETAPA[etapaDebil] || etapaDebil),
+        'Síntoma concreto: ' + (NOMBRE_SINTOMA[sintoma] || sintoma || '—'),
+        'Nivel: ' + nivel + ' (' + total + '/' + maximo + ' puntos)',
+        completo ? 'Diagnóstico completo (20 preguntas)' : 'Diagnóstico parcial: se fue antes de terminar',
         prioritario ? '>>> LEAD PRIORITARIO: contactar en 24 h <<<' : '',
         '',
         'Perfil:',
         '· Personas en la empresa: ' + empleados,
         '· Valor de un cliente al año: ' + valorCliente,
         '',
-        'Puntuación por dimensión:',
+        'Puntuación por etapa:',
         detalle,
         '',
         'Consentimiento RGPD: sí · ' + new Date().toISOString()
@@ -133,7 +145,7 @@ module.exports = async function handler(req, res) {
     }
 
     await avisar({
-      nombre, email, fuga, segunda, nivel, total, puntos,
+      nombre, email, etapaDebil, sintoma, nivel, total, maximo, completo, etapas,
       empleados, valorCliente, prioritario, contactId, locationId
     }).catch(function (err) {
       console.error('[fugas] Aviso por email falló:', err);
@@ -170,15 +182,21 @@ async function avisar(lead) {
       ? '<p style="background:#E8590C;color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;margin:0 0 16px">LEAD PRIORITARIO · contactar en 24 h</p>'
       : '') +
     '<h2 style="margin:0 0 4px">Diagnóstico completado en qualivo.io</h2>' +
-    '<p style="margin:0 0 4px;color:#E8590C;font-weight:700">Fuga principal: ' +
-      esc(NOMBRE_FUGA[lead.fuga] || lead.fuga) + '</p>' +
-    '<p style="margin:0 0 16px;color:#5A5E66">Nivel ' + esc(lead.nivel) + ' · ' + lead.total + '/12</p>' +
+    '<p style="margin:0 0 4px;color:#E8590C;font-weight:700">Etapa más débil: ' +
+      esc(NOMBRE_ETAPA[lead.etapaDebil] || lead.etapaDebil) + ' — ' +
+      esc(NOMBRE_SINTOMA[lead.sintoma] || lead.sintoma || '') + '</p>' +
+    '<p style="margin:0 0 16px;color:#5A5E66">Nivel ' + esc(lead.nivel) + ' · ' + lead.total + '/' + lead.maximo +
+      (lead.completo ? '' : ' · diagnóstico parcial') + '</p>' +
     '<table style="border-collapse:collapse;font-size:15px">' +
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
     fila('Personas', lead.empleados) +
     fila('Valor cliente/año', lead.valorCliente) +
-    fila('Segunda fuga', NOMBRE_FUGA[lead.segunda] || lead.segunda || '—') +
+    fila('Captación', lead.etapas.captacion + '/8') +
+    fila('Conversión', lead.etapas.conversion + '/8') +
+    fila('Seguimiento', lead.etapas.seguimiento + '/8') +
+    fila('Proceso', lead.etapas.proceso + '/8') +
+    fila('Medición', lead.etapas.medicion + '/8') +
     '</table>' +
     (lead.contactId
       ? '<p style="margin:18px 0 0"><a href="' + ghlUrl + '">Ver contacto en GoHighLevel →</a></p>'
@@ -186,7 +204,7 @@ async function avisar(lead) {
     '</div>';
 
   const asunto = (lead.prioritario ? '🔴 PRIORITARIO · ' : '📊 ') +
-    lead.nombre + ' · fuga: ' + (NOMBRE_FUGA[lead.fuga] || lead.fuga);
+    lead.nombre + ' · falla en ' + (NOMBRE_ETAPA[lead.etapaDebil] || lead.etapaDebil);
 
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
