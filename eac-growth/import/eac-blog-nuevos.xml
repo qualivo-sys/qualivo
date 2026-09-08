@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:wp="http://wordpress.org/export/1.2/"
+ xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/">
+ <channel>
+  <title>EAC · Blog (importación Qualivo)</title>
+  <link>https://escolaeronauticadecatalunya.cat</link>
+  <description>Posts nuevos para el blog</description>
+  <wp:wxr_version>1.2</wp:wxr_version>
+  <wp:base_site_url>https://escolaeronauticadecatalunya.cat</wp:base_site_url>
+  <wp:base_blog_url>https://escolaeronauticadecatalunya.cat</wp:base_blog_url>
+  <wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[EAC]]></wp:author_login></wp:author>
+
+  <item>
+   <title>Despachador de vuelo: qué hace, cuánto gana y cómo serlo</title>
+   <link>https://escolaeronauticadecatalunya.cat/blog/despachador-de-vuelo-que-hace-cuanto-gana/</link>
+   <pubDate>Tue, 08 Sep 2026 09:20:12 GMT</pubDate>
+   <dc:creator><![CDATA[EAC]]></dc:creator>
+   <guid isPermaLink="false">eac-nuevo-despachador-de-vuelo-que-hace-cuanto-gana</guid>
+   <content:encoded><![CDATA[<style>
+.eac-article{max-width:760px;margin:0 auto;font-size:18px;line-height:1.7;color:#0E1621}
+.eac-article h2{font-weight:700;margin:1.5em 0 .4em;border-top:3px solid #D8232A;display:inline-block;padding-top:.3em}
+.eac-article h3{margin:1.2em 0 .3em}
+.eac-article blockquote{border-left:4px solid #D8232A;background:#F4F6F9;margin:1.1em 0;padding:.8em 1.1em}
+.eac-toc,.eac-recap{background:#F4F6F9;border:1px solid #E4E8EE;border-radius:12px;padding:14px 18px;margin:1.3em 0}
+.eac-cta{background:#0E1621;color:#fff;border-radius:12px;padding:22px;margin:2em 0;text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .3em}.eac-cta p{color:#C7D0DC;margin:0 0 1em}
+.eac-cta a.eac-btn{display:inline-block;background:#D8232A;color:#fff;text-decoration:none;font-weight:700;padding:13px 26px;border-radius:999px}
+.eac-stat{display:inline-flex;flex-direction:column;background:#F4F6F9;border:1px solid #E4E8EE;border-radius:12px;padding:12px 16px;margin:.3em .3em .3em 0}
+.eac-stat b{font-size:24px;color:#D8232A}.eac-stat span{font-size:13px;color:#5B6675}
+</style>
+<article class="eac-article">
+  <p style="color:var(--eac-muted);font-size:14px;margin:0">Carreras en aviación · Despachador de vuelo</p>
+  <h1>Despachador de vuelo: qué hace, cuánto gana y cómo serlo</h1>
+  <p><strong>El despachador de vuelo (flight dispatcher) es el profesional que planifica y autoriza cada vuelo junto al
+  comandante: ruta, combustible, meteorología y carga. Es una de las profesiones <em>menos conocidas y mejor pagadas</em>
+  de la aviación</strong>, con una demanda estable y poca gente formada. Te contamos en qué consiste y cómo entrar.</p>
+
+  <div class="eac-toc"><strong>En este artículo</strong>
+    <ol>
+      <li><a href="#que">Qué hace un despachador de vuelo</a></li>
+      <li><a href="#gana">Cuánto gana</a></li>
+      <li><a href="#requisitos">Requisitos y formación</a></li>
+      <li><a href="#salidas">Salidas y por qué es una apuesta segura</a></li>
+      <li><a href="#faq">Preguntas frecuentes</a></li>
+    </ol>
+  </div>
+
+  <span class="eac-stat"><b>Profesión clave</b><span>ningún avión despega sin su visto bueno</span></span>
+  <span class="eac-stat"><b>Poca oferta formada</b><span>= más oportunidades para ti</span></span>
+
+  <h2 id="que">1. Qué hace un despachador de vuelo</h2>
+  <p>Trabaja en el centro de operaciones de la aerolínea (no a bordo) y es <strong>corresponsable del vuelo junto al
+  comandante</strong>. Sus tareas principales:</p>
+  <ul>
+    <li>Diseñar el <strong>plan de vuelo</strong> (ruta óptima según viento, tráfico y restricciones).</li>
+    <li>Calcular el <strong>combustible</strong> necesario y las alternativas.</li>
+    <li>Analizar la <strong>meteorología</strong> y los NOTAM (avisos aeronáuticos).</li>
+    <li>Vigilar <strong>peso y balance</strong> y la documentación del vuelo.</li>
+    <li>Hacer <strong>seguimiento del vuelo</strong> y apoyar ante imprevistos.</li>
+  </ul>
+  <blockquote>Es un trabajo de oficina, técnico y con responsabilidad real: sin el despacho del vuelo, el avión no sale.</blockquote>
+
+  <h2 id="gana">2. Cuánto gana un despachador de vuelo</h2>
+  <p>Es una profesión <strong>bien remunerada</strong> por su responsabilidad y por la escasez de perfiles formados. El sueldo
+  crece con la experiencia y con el tamaño de la operación de la aerolínea, y al ser un trabajo en tierra y por turnos, suele
+  sumar complementos de nocturnidad y festivos. Frente a otras salidas de aviación, ofrece <strong>estabilidad</strong> (no
+  dependes de temporada de vuelo) y recorrido profesional dentro de operaciones.</p>
+
+  <h2 id="requisitos">3. Requisitos y formación</h2>
+  <p>Necesitas una <strong>formación específica de despachador de vuelo / operaciones</strong> que te prepare para la licencia
+  y para el puesto: meteorología, navegación, performance, plan de vuelo y regulación. Se pide inglés (entorno técnico
+  internacional) y perfil metódico y resolutivo. No requiere ser piloto.</p>
+
+  <h2 id="salidas">4. Salidas y por qué es una apuesta segura</h2>
+  <p>Aerolíneas, empresas de handling, centros de control de operaciones y aviación ejecutiva necesitan despachadores. Al
+  haber <strong>menos gente formada que en TCP</strong>, la competencia por cada plaza es menor. Si buscas una carrera en
+  aviación <em>estable, técnica y bien pagada sin volar</em>, es de las mejores opciones.</p>
+
+  <div class="eac-cta">
+    <h3>¿Te encaja el perfil de despachador de vuelo?</h3>
+    <p>Fórmate en una de las profesiones con mejor relación demanda/oferta del sector aéreo.</p>
+    <a class="eac-btn" href="/curso-despachador-vuelo/?utm_source=blog&utm_medium=post&utm_campaign=despachador">Ver el curso de Despachador</a>
+  </div>
+
+  <div class="eac-recap"><strong>Resumen</strong>
+  <p>El despachador de vuelo planifica y autoriza los vuelos (ruta, combustible, meteo, carga) desde tierra, junto al
+  comandante. Está bien pagado, es estable y tiene poca oferta de profesionales formados → muchas oportunidades. Requiere
+  formación específica e inglés, no ser piloto.</p></div>
+
+  <h2 id="faq">Preguntas frecuentes</h2>
+  <p><strong>¿El despachador vuela?</strong> No: trabaja en el centro de operaciones, en tierra.</p>
+  <p><strong>¿Es lo mismo que controlador aéreo?</strong> No. El controlador gestiona el tráfico en el aire desde torre/centro; el despachador planifica y sigue los vuelos de su aerolínea.</p>
+  <p><strong>¿Necesito ser piloto?</strong> No, es una profesión independiente con su propia formación.</p>
+
+  <p style="margin-top:2em"><a href="/blog/">← Más sobre carreras en aviación</a></p>
+</article>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Despachador de vuelo: qué hace, cuánto gana y cómo serlo","publisher":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya"},"inLanguage":"es-ES"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"¿El despachador de vuelo vuela?","acceptedAnswer":{"@type":"Answer","text":"No. Trabaja en el centro de operaciones de la aerolínea, en tierra."}},
+ {"@type":"Question","name":"¿Es lo mismo que controlador aéreo?","acceptedAnswer":{"@type":"Answer","text":"No. El controlador gestiona el tráfico aéreo desde torre o centro de control; el despachador planifica y hace seguimiento de los vuelos de su aerolínea."}},
+ {"@type":"Question","name":"¿Necesito ser piloto para ser despachador de vuelo?","acceptedAnswer":{"@type":"Answer","text":"No. Es una profesión independiente con su propia formación específica."}}
+]}
+</script>]]></content:encoded>
+   <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+   <wp:post_name><![CDATA[despachador-de-vuelo-que-hace-cuanto-gana]]></wp:post_name>
+   <wp:status><![CDATA[draft]]></wp:status>
+   <wp:post_type><![CDATA[post]]></wp:post_type>
+   <wp:comment_status><![CDATA[closed]]></wp:comment_status>
+   <category domain="category" nicename="despachador"><![CDATA[Carreras en aviación]]></category>
+  </item>
+  <item>
+   <title>Agente de tierra y de rampa: funciones, sueldo y cómo trabajar en el aeropuerto</title>
+   <link>https://escolaeronauticadecatalunya.cat/blog/agente-de-tierra-funciones-sueldo/</link>
+   <pubDate>Tue, 08 Sep 2026 09:20:12 GMT</pubDate>
+   <dc:creator><![CDATA[EAC]]></dc:creator>
+   <guid isPermaLink="false">eac-nuevo-agente-de-tierra-funciones-sueldo</guid>
+   <content:encoded><![CDATA[<style>
+.eac-article{max-width:760px;margin:0 auto;font-size:18px;line-height:1.7;color:#0E1621}
+.eac-article h2{font-weight:700;margin:1.5em 0 .4em;border-top:3px solid #D8232A;display:inline-block;padding-top:.3em}
+.eac-article h3{margin:1.2em 0 .3em}
+.eac-article blockquote{border-left:4px solid #D8232A;background:#F4F6F9;margin:1.1em 0;padding:.8em 1.1em}
+.eac-toc,.eac-recap{background:#F4F6F9;border:1px solid #E4E8EE;border-radius:12px;padding:14px 18px;margin:1.3em 0}
+.eac-cta{background:#0E1621;color:#fff;border-radius:12px;padding:22px;margin:2em 0;text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .3em}.eac-cta p{color:#C7D0DC;margin:0 0 1em}
+.eac-cta a.eac-btn{display:inline-block;background:#D8232A;color:#fff;text-decoration:none;font-weight:700;padding:13px 26px;border-radius:999px}
+.eac-stat{display:inline-flex;flex-direction:column;background:#F4F6F9;border:1px solid #E4E8EE;border-radius:12px;padding:12px 16px;margin:.3em .3em .3em 0}
+.eac-stat b{font-size:24px;color:#D8232A}.eac-stat span{font-size:13px;color:#5B6675}
+</style>
+<article class="eac-article">
+  <p style="color:var(--eac-muted);font-size:14px;margin:0">Carreras en aviación · Trabajo en tierra</p>
+  <h1>Agente de tierra y de rampa: funciones, sueldo y cómo trabajar en el aeropuerto</h1>
+  <p><strong>El agente de tierra (o de handling) es quien hace posible que un vuelo salga a tiempo desde el aeropuerto:
+  facturación, embarque, equipajes, rampa y atención al pasajero.</strong> Es una de las formas más rápidas de
+  <strong>trabajar en aviación sin volar</strong>, con contratación continua en aeropuertos como Barcelona-El Prat.</p>
+
+  <div class="eac-toc"><strong>En este artículo</strong>
+    <ol>
+      <li><a href="#que">Qué hace un agente de tierra</a></li>
+      <li><a href="#tipos">Tipos de puesto (mostrador, embarque, rampa)</a></li>
+      <li><a href="#gana">Cuánto gana</a></li>
+      <li><a href="#requisitos">Requisitos y cómo empezar</a></li>
+      <li><a href="#faq">Preguntas frecuentes</a></li>
+    </ol>
+  </div>
+
+  <span class="eac-stat"><b>Sin volar</b><span>trabajas en el aeropuerto, en tierra</span></span>
+  <span class="eac-stat"><b>Contratación continua</b><span>alta rotación = muchas vacantes</span></span>
+
+  <h2 id="que">1. Qué hace un agente de tierra</h2>
+  <p>Se encarga de la operativa del pasajero y del avión en el aeropuerto: <strong>facturación y embarque</strong>, gestión
+  de <strong>equipajes</strong>, coordinación en <strong>rampa</strong> (el avión en plataforma), atención e incidencias, y
+  documentación del vuelo. Es un trabajo dinámico, por turnos y de cara al público.</p>
+
+  <h2 id="tipos">2. Tipos de puesto</h2>
+  <ul>
+    <li><strong>Mostrador / facturación:</strong> check-in, equipajes, tarjetas de embarque.</li>
+    <li><strong>Puerta de embarque:</strong> control de acceso al vuelo y coordinación con la tripulación.</li>
+    <li><strong>Rampa / handling:</strong> equipajes, carga, señalización y servicios al avión en plataforma.</li>
+    <li><strong>Atención al pasajero / conexiones:</strong> incidencias, personas con movilidad reducida, pérdidas de equipaje.</li>
+  </ul>
+
+  <h2 id="gana">3. Cuánto gana un agente de tierra</h2>
+  <p>El sueldo base es más contenido que el de un TCP, pero sube con <strong>turnos, nocturnidad y festivos</strong> (el
+  aeropuerto no cierra). Es un punto de entrada excelente al sector: muchos profesionales empiezan aquí y luego promocionan a
+  coordinación, supervisión o pasan a puestos de operaciones/tripulación.</p>
+
+  <h2 id="requisitos">4. Requisitos y cómo empezar</h2>
+  <p>Se pide ESO, <strong>idiomas</strong> (inglés muy valorado por el pasaje internacional), buena atención al cliente y
+  disponibilidad de turnos. Una <strong>formación específica en operaciones aeroportuarias y handling</strong> te da ventaja
+  real en la selección frente a quien llega sin preparación.</p>
+
+  <div class="eac-cta">
+    <h3>¿Quieres trabajar en el aeropuerto?</h3>
+    <p>Fórmate en azafata/agente de tierra y operaciones y entra al sector aéreo sin volar.</p>
+    <a class="eac-btn" href="/azafata-de-tierra-y-operaciones/?utm_source=blog&utm_medium=post&utm_campaign=agente_tierra">Ver el curso</a>
+  </div>
+
+  <div class="eac-recap"><strong>Resumen</strong>
+  <p>El agente de tierra/handling trabaja en el aeropuerto (facturación, embarque, equipajes, rampa) sin volar. Es una vía
+  rápida de entrada al sector con contratación continua; el sueldo crece con turnos y promoción. Requisitos: ESO, idiomas y
+  actitud de servicio; la formación específica marca la diferencia.</p></div>
+
+  <h2 id="faq">Preguntas frecuentes</h2>
+  <p><strong>¿Se puede trabajar en el aeropuerto sin volar?</strong> Sí: agente de tierra, rampa, handling y operaciones son puestos en tierra.</p>
+  <p><strong>¿Piden experiencia?</strong> Muchas vacantes son de entrada; una formación en handling/operaciones te posiciona mejor.</p>
+  <p><strong>¿Es lo mismo agente de tierra que azafata de vuelo?</strong> No: el agente de tierra trabaja en el aeropuerto; el/la TCP vuela a bordo.</p>
+
+  <p style="margin-top:2em"><a href="/blog/">← Más sobre carreras en aviación</a></p>
+</article>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Agente de tierra y de rampa: funciones, sueldo y cómo trabajar en el aeropuerto","publisher":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya"},"inLanguage":"es-ES"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"¿Se puede trabajar en el aeropuerto sin volar?","acceptedAnswer":{"@type":"Answer","text":"Sí. Agente de tierra, rampa, handling y operaciones son puestos que se desempeñan en tierra, en el aeropuerto."}},
+ {"@type":"Question","name":"¿Piden experiencia para ser agente de tierra?","acceptedAnswer":{"@type":"Answer","text":"Muchas vacantes son de entrada. Una formación en handling y operaciones aeroportuarias te posiciona mejor en la selección."}},
+ {"@type":"Question","name":"¿Es lo mismo agente de tierra que azafata de vuelo?","acceptedAnswer":{"@type":"Answer","text":"No. El agente de tierra trabaja en el aeropuerto; el TCP o auxiliar de vuelo trabaja a bordo del avión."}}
+]}
+</script>]]></content:encoded>
+   <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+   <wp:post_name><![CDATA[agente-de-tierra-funciones-sueldo]]></wp:post_name>
+   <wp:status><![CDATA[draft]]></wp:status>
+   <wp:post_type><![CDATA[post]]></wp:post_type>
+   <wp:comment_status><![CDATA[closed]]></wp:comment_status>
+   <category domain="category" nicename="agente"><![CDATA[Carreras en aviación]]></category>
+  </item>
+ </channel>
+</rss>
