@@ -155,8 +155,13 @@ export interface Tarea {
   titulo: string;
   area: string | null;
   prioridad: number;
+  /** El dia para el que se eligio. Null = esta en la mochila, sin fecha. */
   fecha: string | null;
   completada: boolean;
+  /** Dia en que se cerro, para poder medir el avance. */
+  completada_el?: string | null;
+  /** Veces que se ha ido pasando de un dia al siguiente. */
+  pospuesta: number;
 }
 
 export interface Habito {

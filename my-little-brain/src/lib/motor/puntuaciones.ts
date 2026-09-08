@@ -204,6 +204,7 @@ export const XP_POR_ACCION: Record<string, number> = {
   diario: 10,
   foco: 5,
   habito: 8,
+  tarea: 8,
   checkin: 10,
   revision: 25,
   objetivo: 30,

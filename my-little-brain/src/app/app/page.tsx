@@ -1,7 +1,8 @@
-import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, MessageCircle, Moon, Timer, TrendingDown } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, Droplets, Dumbbell, Flame, Info, ListChecks, MessageCircle, Moon, Timer, TrendingDown } from 'lucide-react';
 import Link from 'next/link';
 import { CronometroEnMarcha } from '@/components/cronometro';
 import ComidasHabituales from '@/components/comidas-habituales';
+import TareasHoy from '@/components/tareas-hoy';
 import VasoAgua from '@/components/vaso-agua';
 import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
@@ -13,6 +14,7 @@ import { fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
 import { comidasHabituales } from '@/lib/motor/habituales';
+import { tareasDelDia } from '@/lib/motor/tareas';
 import { objetivoAgua } from '@/lib/motor/descanso';
 import { ajustePendiente } from '@/lib/ajuste';
 import { aplicarAjusteCalorias, posponerAjuste } from '@/app/app/acciones';
@@ -37,6 +39,8 @@ export default async function PanelHoy() {
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   const tiempo = await cargarTiempo(supabase, usuario.id);
   const { diaHoy, metas, cuerpo, puntuaciones } = panel;
+
+  const tareas = tareasDelDia(panel.tareas, panel.hoy);
 
   const metaAgua = objetivoAgua({
     pesoKg: cuerpo.peso ?? 75,
@@ -454,19 +458,42 @@ export default async function PanelHoy() {
         </Tarjeta>
       )}
 
-      {panel.tareas.length > 0 && (
-        <Tarjeta>
-          <TituloTarjeta>Pendiente</TituloTarjeta>
-          <ul className="space-y-1.5 text-sm">
-            {panel.tareas.slice(0, 5).map((tarea) => (
-              <li key={tarea.id} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                {tarea.titulo}
-              </li>
-            ))}
-          </ul>
-        </Tarjeta>
-      )}
+      {/* Lo importante del dia, con la casilla a mano: si hay que entrar en
+          otra pantalla para marcarla, nadie la marca. */}
+      <Tarjeta>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <ListChecks size={18} className="text-[hsl(var(--area-habitos))]" />
+            <TituloTarjeta className="mb-0">Lo importante de hoy</TituloTarjeta>
+          </div>
+          <Link href="/app/tareas" className="text-xs text-primary underline">Ver todo</Link>
+        </div>
+
+        {tareas.hoy.length || tareas.hechasHoy.length ? (
+          <>
+            <TareasHoy abiertas={tareas.hoy} hechas={tareas.hechasHoy} compacto />
+            {tareas.diaCerrado && (
+              <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">
+                Dia cerrado. Lo que te propusiste esta hecho.
+              </p>
+            )}
+          </>
+        ) : (
+          <Link href="/app/tareas" className="flex items-center justify-between text-sm text-muted-foreground">
+            <span>Elige como mucho tres cosas para hoy.</span>
+            <ArrowRight size={15} />
+          </Link>
+        )}
+
+        {tareas.arrastradas.length > 0 && (
+          <Link href="/app/tareas" className="mt-3 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
+            <span>
+              {tareas.arrastradas.length} {tareas.arrastradas.length === 1 ? 'cosa viene' : 'cosas vienen'} de dias anteriores
+            </span>
+            <ArrowRight size={14} />
+          </Link>
+        )}
+      </Tarjeta>
 
       <Link href="/app/coach" className="block">
         <Tarjeta className="flex items-center gap-3 border-dashed">

@@ -1,5 +1,6 @@
 import { fechaLarga } from '../fechas';
 import { impactoSueno, objetivoAgua, objetivoSueno, resumenSueno } from '../motor/descanso';
+import { tareasDelDia } from '../motor/tareas';
 import { correlaciones } from '../motor/puntuaciones';
 import { ETIQUETA_CATEGORIA_FOCO, ETIQUETA_OBJETIVO } from '../perfil';
 import type { Panel } from '../datos';
@@ -161,9 +162,15 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
     }
   }
 
-  if (panel.tareas.length) {
-    l.push('\nTAREAS PENDIENTES');
-    for (const t of panel.tareas.slice(0, 8)) l.push(`- ${t.titulo}`);
+  const tareas = tareasDelDia(panel.tareas, panel.hoy);
+  if (tareas.hoy.length || tareas.hechasHoy.length || tareas.arrastradas.length || tareas.mochila.length) {
+    l.push('\nTAREAS');
+    if (tareas.hoy.length) l.push(`- Para hoy, sin hacer: ${tareas.hoy.map((t) => t.titulo).join(' · ')}.`);
+    if (tareas.hechasHoy.length) l.push(`- Ya hechas hoy: ${tareas.hechasHoy.map((t) => t.titulo).join(' · ')}.`);
+    for (const t of tareas.arrastradas.slice(0, 4)) {
+      l.push(`- Arrastrada desde el ${t.fecha}${t.pospuesta ? ` (pospuesta ${t.pospuesta} veces)` : ''}: ${t.titulo}.`);
+    }
+    if (tareas.mochila.length) l.push(`- En la mochila: ${tareas.mochila.slice(0, 6).map((t) => t.titulo).join(' · ')}.`);
   }
 
   if (panel.memoria.length) {

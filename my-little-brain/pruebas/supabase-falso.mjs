@@ -10,6 +10,13 @@ function coincide(fila, filtros) {
       if (operador === 'is') return esperado === null ? fila[campo] !== null && fila[campo] !== undefined : fila[campo] !== esperado;
       return String(fila[campo]) !== String(esperado);
     }
+    // or('a.eq.1,b.gte.2'): basta con que se cumpla una de las condiciones.
+    if (tipo === 'or') {
+      return valor.split(',').some((trozo) => {
+        const [c, op, ...resto] = trozo.split('.');
+        return coincide(fila, [[op, c, resto.join('.')]]);
+      });
+    }
     return true;
   });
 }
@@ -27,6 +34,7 @@ class Consulta {
   in(campo, valores) { this.filtros.push(['in', campo, valores]); return this; }
   is(campo, valor) { this.filtros.push(['is', campo, valor]); return this; }
   not(campo, operador, valor) { this.filtros.push(['not', campo, [operador, valor]]); return this; }
+  or(condiciones) { this.filtros.push(['or', null, condiciones]); return this; }
   order(campo, opciones = {}) { this._orden = [campo, opciones.ascending !== false]; return this; }
   limit(n) { this._limite = n; return this; }
   single() { this._single = 'single'; return this; }

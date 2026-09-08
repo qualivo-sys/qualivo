@@ -5,6 +5,7 @@ import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { AGUA_MAX_ML, VASO_ML, horasDeSueno } from '../motor/descanso';
+import { MAX_HOY as MAX_TAREAS_HOY } from '../motor/tareas';
 import { emparejarEjercicio } from '../motor/ejercicios';
 import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
 import { EMOCIONES, TEMAS as TEMAS_HOJA, temaDe as temaDeTexto } from '../motor/emociones';
@@ -243,14 +244,31 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   },
   {
     name: 'crear_tarea',
-    description: 'Anota una tarea concreta que el usuario se compromete a hacer.',
+    description:
+      'Anota una tarea concreta. Marca para_hoy solo si dice que es de HOY: solo caben tres al dia, '
+      + 'y si ya tiene tres la tarea se guarda para mas adelante en vez de amontonarse.',
     input_schema: {
       type: 'object',
       properties: {
         titulo: { type: 'string' },
         area: { type: 'string' },
         prioridad: { type: 'number', description: '1 alta, 2 media, 3 baja.' },
+        para_hoy: { type: 'boolean', description: 'true si es una de las cosas importantes de hoy.' },
         fecha: FECHA,
+      },
+      required: ['titulo'],
+    },
+  },
+  {
+    name: 'completar_tarea',
+    description:
+      'Marca una tarea como hecha cuando el usuario cuenta que la ha hecho ("ya he llamado al gestor"). '
+      + 'Se busca por el titulo, no hace falta que coincida palabra por palabra.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        titulo: { type: 'string', description: 'La tarea, con las palabras que use el usuario.' },
+        hecha: { type: 'boolean', description: 'false para desmarcarla. Por defecto true.' },
       },
       required: ['titulo'],
     },
@@ -853,20 +871,66 @@ async function despachar(
           titulo: z.string().min(1),
           area: z.string().optional(),
           prioridad: num.optional(),
+          para_hoy: z.boolean().optional(),
           fecha: fechaOpc,
         })
         .parse(entrada);
+
+      // Solo tres al dia. La cuarta no se pierde: se guarda sin fecha.
+      let fecha = d.fecha ?? (d.para_hoy ? ctx.hoy : null);
+      let cabe = true;
+      if (fecha === ctx.hoy) {
+        const { data: yaHoy } = await supabase
+          .from('tareas').select('id').eq('user_id', userId).eq('fecha', ctx.hoy);
+        if ((yaHoy?.length ?? 0) >= MAX_TAREAS_HOY) {
+          fecha = null;
+          cabe = false;
+        }
+      }
+
       const { error } = await supabase.from('tareas').insert({
         user_id: userId,
         titulo: d.titulo,
         area: d.area ?? null,
         prioridad: d.prioridad ? Math.max(1, Math.min(3, Math.round(d.prioridad))) : 2,
-        fecha: d.fecha ?? ctx.hoy,
+        fecha,
+        completada: false,
+        pospuesta: 0,
       });
       if (error) throw error;
       return {
-        texto: `Tarea anotada: ${d.titulo}.`,
+        texto: cabe
+          ? `Tarea anotada: ${d.titulo}.`
+          : `Anotada, pero para mas adelante: hoy ya tienes tus ${MAX_TAREAS_HOY}. Si esta es mas importante, cambiala tu por una de ellas.`,
         accion: { herramienta: nombre, resumen: `tarea · ${d.titulo}` },
+      };
+    }
+
+    case 'completar_tarea': {
+      const d = z.object({ titulo: z.string().min(1), hecha: z.boolean().optional() }).parse(entrada);
+      const hecha = d.hecha !== false;
+
+      const { data: abiertas } = await supabase
+        .from('tareas').select('id, titulo, completada').eq('user_id', userId)
+        .eq('completada', !hecha).limit(60);
+
+      const llano = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const busca = llano(d.titulo);
+      const encontrada = (abiertas ?? []).find((t) => llano(t.titulo) === busca)
+        ?? (abiertas ?? []).find((t) => llano(t.titulo).includes(busca) || busca.includes(llano(t.titulo)));
+
+      if (!encontrada) return { texto: `No encuentro ninguna tarea que se parezca a "${d.titulo}".`, accion: null };
+
+      const { error } = await supabase
+        .from('tareas')
+        .update({ completada: hecha, completada_el: hecha ? ctx.hoy : null })
+        .eq('id', encontrada.id).eq('user_id', userId);
+      if (error) throw error;
+
+      const xp = hecha ? await otorgarXp(ctx, 'tarea', encontrada.titulo) : undefined;
+      return {
+        texto: hecha ? `Hecha: ${encontrada.titulo}.` : `Desmarcada: ${encontrada.titulo}.`,
+        accion: { herramienta: nombre, resumen: encontrada.titulo, xp },
       };
     }
 

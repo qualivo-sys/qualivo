@@ -279,6 +279,17 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Las tareas de hoy ──────────────────────────────────────────────────
+-- La tabla ya existia pero solo se podia escribir en ella. Para poder ver el
+-- avance hace falta saber CUANDO se cerro cada tarea, no solo que esta hecha.
+-- Y para no dejar que una tarea se arrastre en silencio semana tras semana,
+-- se cuenta cuantas veces se ha ido pasando de un dia al siguiente.
+alter table public.tareas
+  add column if not exists completada_el date,
+  add column if not exists pospuesta     int not null default 0;
+create index if not exists tareas_user_fecha on public.tareas (user_id, fecha, completada);
+create index if not exists tareas_user_hechas on public.tareas (user_id, completada_el desc);
+
 -- ── Tiempo: actividades propias y cronometro ───────────────────────────
 -- Las 6 categorias de foco se quedan (los registros viejos siguen valiendo),
 -- pero ahora cada uno puede ponerle nombre a lo suyo: "Ingles", "Guitarra",

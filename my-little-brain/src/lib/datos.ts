@@ -85,13 +85,15 @@ export async function cargarPanel(
       .eq('user_id', userId)
       .eq('estado', 'activo')
       .then((r) => (r.data ?? []) as ObjetivoRegistro[]),
+    // Las abiertas (de cuando sean) y las cerradas de los ultimos 60 dias:
+    // sin las cerradas no se puede medir si se cierra el dia o no.
     supabase
       .from('tareas')
       .select('*')
       .eq('user_id', userId)
-      .eq('completada', false)
+      .or(`completada.eq.false,completada_el.gte.${sumarDias(hoy, -60)}`)
       .order('prioridad')
-      .limit(20)
+      .limit(300)
       .then((r) => (r.data ?? []) as Tarea[]),
     supabase
       .from('memoria')
