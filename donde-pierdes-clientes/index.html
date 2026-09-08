@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Cuántos clientes estás perdiendo sin saberlo? · Diagnóstico de 90 segundos · Qualivo</title>
+<meta name="description" content="Siete preguntas, noventa segundos. Descubre qué parte de tu negocio deja escapar clientes antes de gastar más dinero en conseguirlos. Sin registro: el resultado se ve al terminar.">
+<link rel="canonical" href="https://qualivo.io/donde-pierdes-clientes/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/donde-pierdes-clientes/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="¿Cuántos clientes estás perdiendo sin saberlo?">
+<meta property="og:description" content="Siete preguntas, noventa segundos, y sabes por dónde se te escapan. Sin registro.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "¿Cuántos clientes estás perdiendo sin saberlo?",
+      "url": "https://qualivo.io/donde-pierdes-clientes/",
+      "inLanguage": "es",
+      "description": "Diagnóstico gratuito de siete preguntas que identifica cuál de las seis partes del sistema comercial de un negocio pequeño deja escapar más clientes: velocidad de respuesta, seguimiento de presupuestos, origen de los clientes, dependencia del dueño, proceso y cartera.",
+      "isPartOf": { "@id": "https://qualivo.io/#organizacion" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
+          { "@type": "ListItem", "position": 2, "name": "Dónde pierdes clientes", "item": "https://qualivo.io/donde-pierdes-clientes/" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuánto tarda de verdad?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Entre uno y dos minutos. Son siete preguntas, una por pantalla, y ninguna te obliga a buscar datos ni a consultar informes." } },
+        { "@type": "Question", "name": "¿Tengo que dar mi correo para ver el resultado?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. El resultado completo aparece en pantalla al terminar, sin registro. El correo solo hace falta si quieres además la radiografía ampliada con las seis partes explicadas y tu segunda fuga." } },
+        { "@type": "Question", "name": "¿Qué hacéis con mis datos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Si dejas el correo, te enviamos la radiografía y después algunos correos relacionados con tu fuga concreta. Puedes darte de baja en cualquiera de ellos. No cedemos los datos a terceros." } },
+        { "@type": "Question", "name": "¿Sirve si tengo una tienda online?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, aunque está pensado sobre todo para negocios donde hay una conversación antes de la venta: presupuestos, visitas, llamadas. En comercio electrónico puro algunas preguntas encajan peor." } },
+        { "@type": "Question", "name": "¿Esto es para venderme algo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Al final te proponemos dar un paso más si te interesa, pero no hace falta para tener tu resultado ni para entenderlo. El diagnóstico se explica solo." } }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<style>
+  .fg-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .fg-card { background:#fff; border:1px solid rgba(16,19,25,.1); border-radius:18px;
+    padding: clamp(22px,4vw,38px); box-shadow: 0 24px 60px rgba(16,19,25,.08); }
+  .fg-answer { width:100%; min-height:60px; padding:14px 20px; border:1px solid rgba(16,19,25,.16);
+    border-radius:12px; background:#fff; color:var(--qv-ink); font-size:16.5px; font-weight:700;
+    text-align:left; cursor:pointer; line-height:1.35;
+    transition: border-color 120ms ease, background 120ms ease, transform 80ms ease; }
+  .fg-answer:hover { border-color: var(--qv-teal-bright); background: #F6FEFD; }
+  .fg-answer:active { transform: scale(.995); }
+  .fg-answer.sel { border-color: var(--qv-teal); background: var(--qv-teal-pale); }
+  .fg-track { height:4px; background:rgba(16,19,25,.08); border-radius:99px; overflow:hidden }
+  .fg-bar { height:100%; background:var(--qv-teal); border-radius:99px; transition:width 220ms ease }
+  .fg-back { background:none; border:none; padding:8px 0; color:var(--qv-ink-faint);
+    font-size:14px; font-weight:700; cursor:pointer }
+  .fg-back:hover { color: var(--qv-ink) }
+  .fg-sem { display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none }
+  .fg-sem li { display:flex; align-items:center; gap:7px; font-size:14px; font-weight:700;
+    color:var(--qv-ink); background:#fff; border:1px solid rgba(16,19,25,.12);
+    border-radius:99px; padding:7px 14px }
+  .fg-dot { width:10px; height:10px; border-radius:50%; flex:0 0 auto }
+  .fg-dot.v { background:#12A150 } .fg-dot.a { background:#E8A50C } .fg-dot.r { background:#E8590C }
+  .fg-nivel { display:inline-flex; align-items:center; gap:9px; font-weight:800; font-size:15px;
+    padding:8px 16px; border-radius:99px; margin-bottom:18px }
+  .fg-nivel.critica { background:#FDECE3; color:#B4400A }
+  .fg-nivel.relevante { background:#FDF4E0; color:#8A6206 }
+  .fg-nivel.bajo { background:#E6F7EF; color:#0B7038 }
+  .fg-h { font-family:var(--qv-font-display); font-weight:900; letter-spacing:-.03em; color:#101319 }
+  .fg-block { margin-top:26px; padding-top:24px; border-top:1px solid rgba(16,19,25,.1) }
+  .fg-block .lbl { margin:0 0 6px; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--qv-teal); font-weight:800 }
+  .fg-block p { margin:0; font-size:16.5px; line-height:1.65; color:var(--qv-ink-soft) }
+  .fg-como { margin-top:24px; padding:18px 20px; background:#F7F8F9; border-radius:14px }
+  .fg-como .t { margin:0 0 12px; font-size:13px; font-weight:800; color:var(--qv-ink) }
+  .fg-como .n { margin:12px 0 0; font-size:13.5px; line-height:1.6; color:var(--qv-ink-muted) }
+  .fg-actions { display:flex; flex-direction:column; gap:12px; margin-top:28px }
+  .fg-share { background:#fff; color:var(--qv-ink); border:2px solid var(--qv-ink);
+    border-radius:12px; min-height:56px; font-size:16px; font-weight:800; cursor:pointer }
+  .fg-share:hover { background:var(--qv-ink); color:#fff }
+  .fg-paso { display:block; margin-top:16px; padding:18px 20px; border-radius:14px;
+    background:var(--qv-teal-pale); color:#04231F; font-weight:700; font-size:15.5px; line-height:1.55 }
+  .fg-mini { font-size:13.5px; color:var(--qv-ink-faint); margin:10px 0 0; text-align:center }
+  .fg-q { font-family:var(--qv-font-display); font-size:clamp(20px,4vw,27px); line-height:1.22;
+    letter-spacing:-.02em; font-weight:800; margin:0 0 24px; color:#101319 }
+  .fg-sec { margin:56px 0 0 }
+  .fg-sec h2 { font-family:var(--qv-font-display); font-size:clamp(21px,3.6vw,27px); font-weight:900;
+    letter-spacing:-.02em; margin:0 0 16px; color:#101319 }
+  .fg-sec p, .fg-sec li { font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft) }
+  .fg-pasos { display:flex; flex-direction:column; gap:16px; margin:0; padding:0; list-style:none }
+  .fg-pasos li { display:flex; gap:14px; align-items:flex-start }
+  .fg-pasos .num { flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--qv-ink);
+    color:#fff; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center }
+  .fg-obj { margin:0; padding:0 }
+  .fg-obj dt { font-weight:800; color:#101319; margin-top:18px; font-size:16px }
+  .fg-obj dd { margin:5px 0 0; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft) }
+  #fg-canvas { display:none }
+  [hidden] { display:none !important }
+</style>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Consultoría de Growth</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/servicios/" class="nav-link">Servicios</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding:clamp(36px,6vw,64px) 0 80px">
+  <div class="fg-wrap">
+
+    <!-- ░░ LANDING ░░ -->
+    <section id="fg-landing">
+      <p style="margin:0 0 14px; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--qv-teal); font-weight:800">Diagnóstico gratuito · 90 segundos</p>
+      <h1 class="fg-h" style="font-size:clamp(32px,6.4vw,52px); line-height:1.03; margin:0 0 20px">¿Cuántos clientes estás perdiendo sin saberlo?</h1>
+      <p style="font-size:clamp(17px,2.6vw,20px); line-height:1.6; color:var(--qv-ink-soft); margin:0 0 30px">Siete preguntas, noventa segundos. Descubre qué parte de tu negocio deja escapar clientes antes de gastar más dinero en conseguirlos.</p>
+      <button id="fg-start" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar →</button>
+      <p class="fg-mini" style="text-align:left; margin-top:12px">Sin registro. El resultado se ve al terminar.</p>
+
+      <div class="fg-sec">
+        <h2>El problema</h2>
+        <p>La mayoría de negocios pequeños no tienen un problema de clientes. Tienen un problema de clientes que se escapan por el camino.</p>
+        <p>Alguien pregunta y se le contesta dos días tarde. Se manda un presupuesto y nadie vuelve a llamar. Entra una venta buena y nadie sabe de dónde vino, así que no se puede repetir.</p>
+        <p>Nada de eso aparece en ningún informe. Por eso se sigue gastando en conseguir gente nueva mientras la de antes se pierde en silencio.</p>
+      </div>
+
+      <div class="fg-sec">
+        <h2>Cómo funciona</h2>
+        <ul class="fg-pasos">
+          <li><span class="num">1</span><p style="margin:0"><strong>Respondes siete preguntas.</strong> Ninguna te obliga a buscar datos. Son sobre lo que pasa en tu empresa un martes cualquiera.</p></li>
+          <li><span class="num">2</span><p style="margin:0"><strong>Te decimos por dónde se te escapa.</strong> Una fuga principal, con nombre, y cómo de grave es.</p></li>
+          <li><span class="num">3</span><p style="margin:0"><strong>Te decimos qué tocar primero.</strong> Una sola cosa, la que más pesa. Y qué puedes hacer hoy mismo.</p></li>
+        </ul>
+      </div>
+
+      <div class="fg-sec">
+        <h2>Qué vas a descubrir</h2>
+        <ul style="margin:0; padding-left:20px">
+          <li>Cuál de las seis partes de tu sistema es la más débil</li>
+          <li>Qué te está costando más dinero de lo que crees</li>
+          <li>Por dónde empezar, y por dónde no</li>
+          <li>Qué tienes mejor de lo que pensabas</li>
+        </ul>
+      </div>
+
+      <div class="fg-sec">
+        <h2>Quién hay detrás</h2>
+        <p>Lo ha hecho Maikel Echevarría, que se dedica a mirar por dentro sistemas de captación y ventas de empresas pequeñas. Las preguntas salen de lo que aparece una y otra vez cuando abres una de estas empresas por dentro.</p>
+        <p>No hay trucos ni promedios del sector inventados. El resultado sale de tus respuestas y te enseñamos cómo se calcula.</p>
+      </div>
+
+      <div class="fg-sec">
+        <h2>Lo que sueles preguntarte antes de empezar</h2>
+        <dl class="fg-obj">
+          <dt>«No tengo tiempo.»</dt><dd>Noventa segundos. Menos que leer esta página entera.</dd>
+          <dt>«¿Me vais a llamar?»</dt><dd>No. El resultado sale en pantalla sin que dejes nada. Si quieres el informe ampliado, entonces sí te pedimos el correo.</dd>
+          <dt>«Ya sé lo que me pasa.»</dt><dd>Puede. La mitad de la gente acierta con su fuga principal. Casi nadie acierta con la segunda.</dd>
+          <dt>«Esto es para empresas grandes.»</dt><dd>Al revés. Está pensado para negocios de dos a veinte personas donde el dueño todavía vende.</dd>
+        </dl>
+      </div>
+
+      <div class="fg-sec" style="text-align:center; padding:36px 24px; background:#F7F8F9; border-radius:18px">
+        <h2 style="margin-bottom:20px">Noventa segundos para saber dónde se te va el dinero.</h2>
+        <button id="fg-start2" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar el diagnóstico →</button>
+      </div>
+
+      <div class="fg-sec">
+        <h2>Preguntas frecuentes</h2>
+        <details class="faq-item"><summary>¿Cuánto tarda de verdad?</summary><p>Entre uno y dos minutos. Siete preguntas, una por pantalla.</p></details>
+        <details class="faq-item"><summary>¿Tengo que dar mi correo?</summary><p>Para ver el resultado no. Solo si quieres además la radiografía ampliada.</p></details>
+        <details class="faq-item"><summary>¿Qué hacéis con mis datos?</summary><p>Si dejas el correo, te llega la radiografía y después algunos correos sobre tu fuga concreta. Te puedes dar de baja en cualquiera. No se los damos a nadie. Más detalle en <a href="/privacidad/">privacidad</a>.</p></details>
+        <details class="faq-item"><summary>¿Sirve si tengo tienda online?</summary><p>Sí, aunque está pensado sobre todo para negocios donde hay una conversación antes de la venta.</p></details>
+        <details class="faq-item"><summary>¿Esto es para venderme algo?</summary><p>Al final te proponemos dar un paso más si quieres. No hace falta para tener tu resultado.</p></details>
+      </div>
+    </section>
+
+    <!-- ░░ QUIZ ░░ -->
+    <section id="fg-quiz" hidden>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px">
+        <p id="fg-dim" style="margin:0; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--qv-teal); font-weight:800"></p>
+        <p id="fg-count" style="margin:0; font-size:13px; color:var(--qv-ink-faint); font-weight:700"></p>
+      </div>
+      <div class="fg-track" style="margin-bottom:26px"><div id="fg-bar" class="fg-bar" style="width:0%"></div></div>
+      <div class="fg-card">
+        <h2 id="fg-question" class="fg-q"></h2>
+        <div id="fg-options" style="display:flex; flex-direction:column; gap:10px"></div>
+        <div style="margin-top:18px"><button id="fg-prev" class="fg-back" hidden>← Anterior</button></div>
+      </div>
+    </section>
+
+    <!-- ░░ RESULTADO ░░ -->
+    <section id="fg-result" hidden>
+      <p style="margin:0 0 14px; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--qv-teal); font-weight:800">Tu diagnóstico</p>
+      <div id="fg-nivel" class="fg-nivel"></div>
+      <h2 id="fg-title" class="fg-h" style="font-size:clamp(27px,5.4vw,42px); line-height:1.05; margin:0 0 22px"></h2>
+      <div class="fg-card">
+        <p id="fg-diag" style="margin:0; font-size:17px; line-height:1.7; color:var(--qv-ink-soft)"></p>
+        <div class="fg-block"><p class="lbl">Por dónde empezar</p><p id="fg-prio"></p></div>
+        <div class="fg-block"><p class="lbl">Qué puedes hacer hoy</p><p id="fg-accion"></p></div>
+        <div class="fg-como">
+          <p class="t">Cómo hemos llegado aquí</p>
+          <ul id="fg-semaforos" class="fg-sem"></ul>
+          <p class="n">Tu fuga principal es la peor de las seis. Sale de tus respuestas, no de ningún promedio del sector.</p>
+        </div>
+      </div>
+      <a id="fg-calc" class="fg-paso" href="/calculadora-de-fugas/" hidden>Ponerle un número: calcula cuánto se te está escapando al año →</a>
+      <div class="fg-actions">
+        <button id="fg-sharebtn" class="fg-share">A ver qué le sale a tu socio</button>
+        <button id="fg-gatebtn" class="btn-teal">Enviarme la radiografía completa →</button>
+      </div>
+      <p class="fg-mini">La radiografía incluye las seis partes explicadas y tu segunda fuga.</p>
+      <canvas id="fg-canvas" width="1080" height="1350"></canvas>
+    </section>
+
+    <!-- ░░ GATE ░░ -->
+    <section id="fg-gate" hidden>
+      <div class="fg-card">
+        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">La radiografía completa</h2>
+        <p style="margin:0 0 24px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Lo que acabas de ver es tu fuga principal. En la radiografía va lo demás: las seis partes explicadas una a una, <strong>tu segunda fuga</strong> (que suele sorprender más que la primera), cómo comprobar que esto acierta, y los tres primeros movimientos en orden.</p>
+        <form id="fg-form" novalidate style="display:flex; flex-direction:column; gap:16px">
+          <label style="display:block">
+            <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">Nombre</span>
+            <input type="text" id="fg-nombre" placeholder="Ana Ruiz" autocomplete="name">
+          </label>
+          <label style="display:block">
+            <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">Correo</span>
+            <input type="email" id="fg-email" placeholder="ana@tuempresa.com" autocomplete="email">
+          </label>
+          <label style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.55; color:var(--qv-ink-muted)">
+            <input type="checkbox" id="fg-rgpd" style="width:18px; height:18px; margin-top:2px; accent-color:#0E7C74; flex-shrink:0">
+            <span>Acepto que Qualivo trate mis datos para enviarme la radiografía y contenido relacionado. <a href="/privacidad/">Privacidad</a>.</span>
+          </label>
+          <div style="position:absolute; left:-9999px" aria-hidden="true">
+            <label>No rellenar<input type="text" id="fg-website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <p id="fg-error" hidden style="margin:0; font-size:14px; color:#C2410C; font-weight:700; line-height:1.5"></p>
+          <button type="submit" id="fg-submit" class="btn-teal">Enviarme la radiografía</button>
+          <p class="fg-mini" style="margin:0">Sin llamadas comerciales. Te das de baja en un clic.</p>
+        </form>
+        <div style="margin-top:18px"><button id="fg-gateback" class="fg-back">← Volver a mi resultado</button></div>
+      </div>
+    </section>
+
+    <!-- ░░ GRACIAS ░░ -->
+    <section id="fg-thanks" hidden>
+      <div class="fg-card">
+        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">Hecho. La radiografía va para tu correo.</h2>
+        <p style="margin:0 0 26px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Llega en unos minutos. Si no la ves, mira en promociones o spam.</p>
+        <div class="fg-block" style="border-top:none; padding-top:0; margin-top:0">
+          <p class="lbl">Y ahora</p>
+          <p style="margin:0 0 20px"><strong>Ya sabes por dónde se te escapa.</strong> La siguiente pregunta es cuánto te está costando, y qué habría que tocar primero para que deje de pasar.</p>
+          <a href="/diagnostico/" class="btn-dark btn-nav">Ver mi radiografía de crecimiento →</a>
+        </div>
+      </div>
+      <div style="margin-top:22px; text-align:center"><button id="fg-sharebtn2" class="fg-share" style="width:100%">A ver qué le sale a tu socio</button></div>
+    </section>
+
+  </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="/assets/consent.js?v=1"></script>
+<script src="fugas.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
