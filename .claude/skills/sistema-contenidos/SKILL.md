@@ -39,6 +39,30 @@ diferenciación, potencial de conversación, potencial de negocio.
 Contenido y outbound comparten inteligencia: las objeciones y reuniones son
 fuente editorial; el contenido publicado es autoridad previa para outbound.
 
+## ICP: empresas de 2 a 20 empleados (correccion de Maikel, 8-sep)
+TODO el contenido apunta a negocios de 2 a 20 empleados. No es una pyme con
+departamentos: es un duenyo que vende, cotiza, persigue y decide, con una
+persona que «lleva lo digital» como mucho. Antes de aprobar cualquier pieza:
+¿esto lo reconoce alguien con 6 empleados? Si el ejemplo necesita un equipo de
+marketing, un CFO o un presupuesto de agencia, la altitud esta mal. Nada de
+lenguaje de corporacion ni de escenarios de 50 personas.
+
+## Radar de IA como cantera de contenido (8-sep)
+La base «AI Growth Radar — Noticias & Ideas» (Notion,
+collection://94d01c42-1d1f-4888-bfc7-ed0a9476f39c) alimenta temas, NO piezas.
+Reglas de traduccion, obligatorias:
+- Ninguna fila se publica con el hook que trae. Se reescribe al tono de Maikel.
+- Fuera los anglicismos que llegan del radar: funnel, agentic, stack, run rate,
+  product feeds, AI visibility, agentic commerce. Se dicen en castellano llano.
+- Cada tema necesita una ESCENA concreta de un negocio de 2-20 empleados. Si no
+  se le encuentra escena, no es pieza: es titular de sector y se descarta.
+- Sin fuente verificada no se publica, y las cifras se citan de la fuente que
+  las publica de verdad, no de la nota de prensa que las repite.
+- LinkedIn se queda el analisis (ahi el tema de sector si funciona). Instagram
+  solo acepta el radar cuando el tema toca un dolor que el duenyo reconoce en su
+  empresa. Maximo UN carrusel de radar al mes en IG: la cuenta no es un
+  noticiero de IA.
+
 ## Identidad en redes sociales (regla de Maikel, 2-sep)
 En redes sociales se publica SIEMPRE con la identidad personal de Maikel
 (firma «Maikel Echevarría» / @maikel.echevarria en los creativos y voz en

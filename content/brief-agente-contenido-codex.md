@@ -52,7 +52,8 @@ completo y muestra: qué está fallando, cuánto cuesta y **qué tapar primero**
 ## 4 · ICP
 
 - **Quién**: dueño, CEO o responsable comercial de una empresa de servicios
-  de 10-80 empleados. Decisor directo. España (foco Catalunya/Andorra/Lleida).
+  de 2-20 empleados. Decisor directo (casi siempre el dueño, que además vende).
+  España (foco Catalunya/Andorra/Lleida).
 - **Situación**: ya invierte en captación (publicidad, web, quizá agencia),
   presupuesta a sus clientes, ciclo de venta con conversación (no e-commerce).
 - **Dolores típicos**: "metemos más y seguimos igual", presupuestos sin

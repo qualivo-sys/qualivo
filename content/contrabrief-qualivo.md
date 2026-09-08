@@ -21,11 +21,13 @@ duplicados, información fragmentada, tareas manuales, herramientas que no se
 hablan, dependencias personales, decisiones por intuición. El problema no es que
 nadie trabaje: es que **nadie está viendo el sistema completo**.
 
-## El ICP
-Empresas que han alcanzado suficiente complejidad como para que el crecimiento
-genere problemas internos: 10–80 empleados, ya venden, ya invierten en captar,
-varias herramientas, procesos creados sobre la marcha, dirección demasiado
-involucrada, datos repartidos, sensación de «esto debería funcionar mejor».
+## El ICP (corregido por Maikel, 8-sep-2026)
+**Empresas de 2 a 20 empleados.** Negocios pequeños que ya venden y ya invierten
+en captar, pero donde el dueño sigue metido en todo: él vende, él cotiza, él
+persigue y él decide. Varias herramientas que no se hablan, procesos creados
+sobre la marcha, datos repartidos, sensación de «esto debería funcionar mejor».
+No hay departamento de marketing: hay el dueño y, con suerte, una persona que
+lleva «lo digital». Esa es la escala que manda en todo el contenido.
 La pregunta del contenido: *¿esta empresa ya es lo bastante compleja como para
 necesitar que alguien mire el sistema completo?*
 
