@@ -89,7 +89,19 @@ oscura; entornos ACTUALES y limpios, nada de pisos viejos ni trapos);
 dura, humor surrealista (plantilla clara tinta-sobre-crema,
 carrusel-bocaboca2.html); (c) fotografia de calle espanola real,
 exteriores y luz natural; (d) tipografico/grafico puro sin foto, fondos
-planos de color. Nada de dibujos/3D cartoon NI penumbra cinematica de
+planos de color; (e) COMPARACION DE OBJETOS (8-sep, adaptado de un formato
+de neuromark.pro que Maikel trajo con 3.043 compartidos): dos objetos de
+catalogo uno encima del otro sobre papel crema, con «Primero X» arriba y
+«Luego Y» abajo, cada titular con subrayado a mano (naranja el primero,
+tinta el segundo). Plantilla carrusel-pares.html.
+  REGLA DEL FORMATO: se copia el molde, NUNCA el mensaje. El original lo usa
+  para motivar («no esperes a ser bueno para empezar»), que es lo que publica
+  cualquiera. Nosotros lo usamos para CORREGIR EL ORDEN de las cosas: primero
+  tapas el agujero / luego echas mas agua. El progreso anima; el orden es una
+  tesis. Si un par se puede leer como frase de superacion, esta mal planteado.
+  Tipografia SIEMPRE la nuestra (Anton), nunca la serif de la referencia: si se
+  copia tambien la tipografia deja de reconocerse como nuestro. Es un molde
+  infinito, cada tesis que tengamos se puede convertir en un par. Nada de dibujos/3D cartoon NI penumbra cinematica de
 stock (canta a IA). El humor va en la situacion o el objeto reconocible.
 MODOS DE CONTENIDO (3-sep, pedidos por Maikel): ademas del modo DOLOR
 (historia en actos + humor), existen (1) modo ASPIRACIONAL: foto nocturna
