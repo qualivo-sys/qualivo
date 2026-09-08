@@ -20,7 +20,8 @@ function score(d){
   if(d.email && !/@(mailinator|tempmail|guerrilla|yopmail|10minutemail)/i.test(d.email)){s+=3;reasons.push('Email personal (+3)');}
   if(d.menor===true){s-=20;reasons.push('Menor de 18 (−20)');}
   s=Math.max(0,Math.min(100,s));
-  var tag = s>=70?'CALIENTE' : s>=45?'TEMPLADO' : s>=25?'TIBIO' : 'FRÍO';
+  // etiquetas alineadas con el campo "Lead Temperature" que ya existe en el CRM de EAC
+  var tag = s>=70?'Caliente' : s>=45?'Tibio' : s>=25?'Frio' : 'Congelado';
   return {score:s, tag:tag, reasons:reasons};
 }
 
@@ -106,6 +107,7 @@ function gate(container, opts){
   +'        <option value="es">Resto de España</option>'
   +'        <option value="int">Fuera de España</option>'
   +'      </select></div>'
+  +'    <div aria-hidden="true" style="position:absolute;left:-9999px"><label>No rellenar<input id="hp" name="empresa" type="text" tabindex="-1" autocomplete="off"></label></div>'
   +'    <div class="err" id="er">Revisa el nombre, el email, el teléfono y el plazo.</div>'
   +'    <button class="btn" type="submit" id="sb">'+(opts.cta||'Ver mi resultado completo')+'</button>'
   +'    <p class="consent">Al enviar aceptas que la Escola Aeronàutica de Catalunya te contacte sobre su formación. '
@@ -116,6 +118,7 @@ function gate(container, opts){
   $('#lf').addEventListener('submit', async function(ev){
     ev.preventDefault();
     var f=ev.target, er=$('#er'), sb=$('#sb');
+    if(f.empresa && f.empresa.value){ return; }   // honeypot: lo rellenan los bots
     var d={ nombre:f.nombre.value.trim(), email:f.email.value.trim(), telefono:f.telefono.value.trim(),
             plazo:f.plazo.value, provincia:f.provincia.value };
     var ok = d.nombre.length>1 && /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(d.email)
