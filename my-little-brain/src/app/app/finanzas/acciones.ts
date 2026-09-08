@@ -128,6 +128,41 @@ export async function registrarMovimiento(datos: FormData) {
   refrescar();
 }
 
+/**
+ * Corregir un apunte ya hecho. Casi siempre es la categoria: apuntas rapido
+ * "18 €" desde el movil y luego ves que aquello no era restaurantes. Si no se
+ * puede arreglar, el presupuesto deja de decir la verdad y se abandona.
+ *
+ * Solo se toca lo que venga en el formulario; lo demas se queda como estaba.
+ */
+export async function editarMovimiento(id: string, datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+
+  const { data: previo } = await supabase
+    .from('finanzas_movimientos').select('*').eq('id', id).eq('user_id', userId).maybeSingle();
+  if (!previo) return;
+
+  const valor = importe(datos.get('importe'));
+  const fecha = texto(datos.get('fecha'));
+  const cat = texto(datos.get('categoria'));
+
+  await supabase
+    .from('finanzas_movimientos')
+    .update({
+      ...(valor !== null && valor !== 0 ? { importe: valor } : {}),
+      ...(fecha && /^\d{4}-\d{2}-\d{2}$/.test(fecha) && fecha <= hoy ? { fecha } : {}),
+      ...(cat ? { categoria: esCategoria(cat) } : {}),
+      descripcion: texto(datos.get('descripcion'))?.slice(0, 200) ?? null,
+      ambito: esAmbito(texto(datos.get('ambito'))),
+      impulsivo: datos.get('impulsivo') === 'on' || datos.get('impulsivo') === 'true',
+      // "" es "que vuelva al dia a dia", que no es lo mismo que no tocarlo.
+      sobre_id: texto(datos.get('sobre_id')) || null,
+    })
+    .eq('id', id)
+    .eq('user_id', userId);
+  refrescar();
+}
+
 export async function borrarMovimiento(id: string) {
   const { supabase, userId } = await sesion();
   await supabase.from('finanzas_movimientos').delete().eq('id', id).eq('user_id', userId);

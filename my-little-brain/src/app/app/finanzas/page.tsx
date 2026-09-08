@@ -1,11 +1,12 @@
-import { Trash2 } from 'lucide-react';
+import { ChevronRight, Pencil, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import RegistroGasto from '@/components/registro-gasto';
-import { Barra, Boton, Campo, Tarjeta, TituloTarjeta } from '@/components/ui/base';
-import { activarFinanzas, borrarMovimiento, cerrarSobre } from '@/app/app/finanzas/acciones';
+import { Barra, Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { activarFinanzas, borrarMovimiento, cerrarSobre, editarMovimiento } from '@/app/app/finanzas/acciones';
 import { cargarFinanzas } from '@/lib/datos';
 import { fechaCorta, hoy as hoyIso, inicioSemana } from '@/lib/fechas';
 import {
+  CATEGORIAS,
   categoria as infoCategoria,
   insightsFinanzas,
   mesAnteriorA,
@@ -93,6 +94,12 @@ export default async function PaginaFinanzas() {
   const semana = revisionSemana(finanzas.movimientos, resumen, lunes, hoy);
   const delMes = finanzas.movimientos.filter((m) => m.fecha.slice(0, 7) === resumen.mes);
   const frecuentes = [...new Set(finanzas.movimientos.slice(0, 40).map((m) => m.categoria))].slice(0, 4);
+
+  /** Los gastos del dia a dia de una categoria este mes, del mas reciente al mas viejo. */
+  const porCategoria = (id: string) =>
+    delMes
+      .filter((m) => m.tipo === 'gasto' && m.categoria === id && !m.sobre_id)
+      .sort((a, b) => (a.fecha < b.fecha ? 1 : -1));
 
   return (
     <main className="space-y-4">
@@ -245,6 +252,30 @@ export default async function PaginaFinanzas() {
                   {c.impulsivo > 0 ? ` · ${eur(c.impulsivo)} en impulsos` : ''}
                   {c.inversion ? ' · esto es inversion en ti' : ''}
                 </p>
+
+                {/* Un numero rojo sin saber de que viene no sirve de nada. */}
+                {porCategoria(c.id).length > 0 && (
+                  <details className="mt-1.5 group">
+                    <summary className="flex cursor-pointer items-center gap-1 text-xs text-primary marker:content-['']">
+                      <ChevronRight size={12} className="transition-transform group-open:rotate-90" />
+                      Ver en que se ha ido ({porCategoria(c.id).length})
+                    </summary>
+                    <ul className="mt-1.5 space-y-1 border-l border-border pl-3">
+                      {porCategoria(c.id).map((m) => (
+                        <li key={m.id} className="flex items-baseline justify-between gap-2 text-xs">
+                          <span className="min-w-0 truncate text-muted-foreground">
+                            {fechaCorta(m.fecha)} · {m.descripcion || 'sin descripcion'}
+                            {m.impulsivo && ' ⚡'}
+                          </span>
+                          <span className="shrink-0 tabular-nums">{eur(Number(m.importe))}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href="#movimientos" className="mt-1.5 inline-block text-xs text-primary underline">
+                      Corregir alguno
+                    </a>
+                  </details>
+                )}
               </li>
             ))}
           </ul>
@@ -299,40 +330,86 @@ export default async function PaginaFinanzas() {
         </p>
       </Tarjeta>
 
-      <Tarjeta>
+      <Tarjeta id="movimientos">
         <TituloTarjeta>Movimientos del mes</TituloTarjeta>
         {delMes.length ? (
           <ul className="divide-y divide-border">
-            {delMes.slice(0, 40).map((m) => {
+            {delMes.slice(0, 60).map((m) => {
               const cat = infoCategoria(m.categoria);
+              const sobre = m.sobre_id ? resumen.sobres.find((s) => s.id === m.sobre_id) : null;
               return (
-                <li key={m.id} className="flex items-center gap-3 py-2 text-sm">
-                  <span className="text-base">{cat.emoji}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate">
-                      {m.descripcion || cat.nombre}
-                      {m.impulsivo && <span className="ml-1 text-xs text-amber-600 dark:text-amber-400">⚡</span>}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {fechaCorta(m.fecha)} · {cat.nombre}
-                      {m.ambito === 'empresa' ? ' · empresa' : ''}
-                      {m.sobre_id ? ` · ${resumen.sobres.find((s) => s.id === m.sobre_id)?.nombre ?? 'sobre'}` : ''}
-                    </div>
-                  </div>
-                  <span className={`shrink-0 tabular-nums ${m.tipo === 'ingreso' ? TONOS.bien : ''}`}>
-                    {m.tipo === 'ingreso' ? '+' : '−'}{eur(Number(m.importe))}
-                  </span>
-                  <form action={borrarMovimiento.bind(null, m.id)}>
-                    <button type="submit" aria-label="Borrar" className="text-muted-foreground hover:text-destructive">
-                      <Trash2 size={16} />
-                    </button>
-                  </form>
+                <li key={m.id} className="py-2 text-sm">
+                  <details className="group">
+                    <summary className="flex cursor-pointer items-center gap-3 marker:content-['']">
+                      <span className="text-base">{cat.emoji}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate">
+                          {m.descripcion || cat.nombre}
+                          {m.impulsivo && <span className="ml-1 text-xs text-amber-600 dark:text-amber-400">⚡</span>}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {fechaCorta(m.fecha)} · {cat.nombre}
+                          {m.ambito === 'empresa' ? ' · empresa' : ''}
+                          {sobre ? ` · ${sobre.nombre}` : ''}
+                        </div>
+                      </div>
+                      <span className={`shrink-0 tabular-nums ${m.tipo === 'ingreso' ? TONOS.bien : ''}`}>
+                        {m.tipo === 'ingreso' ? '+' : '−'}{eur(Number(m.importe))}
+                      </span>
+                      <Pencil size={14} className="shrink-0 text-muted-foreground transition-colors group-open:text-primary" />
+                    </summary>
+
+                    {/* Corregir sin tener que borrar y volver a apuntar. */}
+                    <form action={editarMovimiento.bind(null, m.id)} className="mt-3 space-y-3 rounded-lg bg-muted/40 p-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        <Selector etiqueta="Categoria" name="categoria" defaultValue={m.categoria}>
+                          {CATEGORIAS.map((c) => (
+                            <option key={c.id} value={c.id}>{c.emoji} {c.nombre}</option>
+                          ))}
+                        </Selector>
+                        <Campo etiqueta="Importe" name="importe" inputMode="decimal" defaultValue={String(Number(m.importe))} />
+                      </div>
+                      <Campo etiqueta="Descripcion" name="descripcion" defaultValue={m.descripcion ?? ''} placeholder="Menu del mediodia" />
+                      <div className="grid grid-cols-2 gap-3">
+                        <Campo etiqueta="Dia" name="fecha" type="date" defaultValue={m.fecha} max={hoy} />
+                        <Selector etiqueta="Ambito" name="ambito" defaultValue={m.ambito}>
+                          <option value="personal">Personal</option>
+                          <option value="empresa">Empresa</option>
+                        </Selector>
+                      </div>
+                      {resumen.sobres.length > 0 && (
+                        <Selector etiqueta="¿Va a un presupuesto concreto?" name="sobre_id" defaultValue={m.sobre_id ?? ''}>
+                          <option value="">Dia a dia</option>
+                          {resumen.sobres.map((sb) => (
+                            <option key={sb.id} value={sb.id}>{sb.emoji || '🎯'} {sb.nombre}</option>
+                          ))}
+                        </Selector>
+                      )}
+                      <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <input type="checkbox" name="impulsivo" defaultChecked={m.impulsivo} className="h-4 w-4 rounded border-input" />
+                        Fue un impulso
+                      </label>
+                      <div className="flex gap-2">
+                        <Boton type="submit" variante="secundario" className="flex-1">Guardar cambios</Boton>
+                      </div>
+                    </form>
+                    <form action={borrarMovimiento.bind(null, m.id)} className="mt-2">
+                      <button type="submit" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive">
+                        <Trash2 size={13} /> Borrar este apunte
+                      </button>
+                    </form>
+                  </details>
                 </li>
               );
             })}
           </ul>
         ) : (
           <p className="text-sm text-muted-foreground">Nada apuntado este mes todavia.</p>
+        )}
+        {delMes.length > 0 && (
+          <p className="mt-3 text-xs text-muted-foreground">
+            Toca cualquier apunte para corregirlo: la categoria, el importe, el dia o la descripcion.
+          </p>
         )}
         {finanzas.ajustes && (
           <p className="mt-3 text-xs text-muted-foreground">
