@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test: ¿cumples los requisitos para ser TCP? · EAC</title>
+<meta name="description" content="Test gratuito de 6 preguntas para saber si cumples los requisitos oficiales para ser tripulante de cabina de pasajeros (TCP) en España.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/eac.css">
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a class="logo" href="/">Escola Aeronàutica <em>de Catalunya</em></a>
+  <span class="tag">Test de requisitos TCP</span>
+</div></div>
+
+<main class="shell">
+  <section class="card" id="app">
+    <span class="kicker">Test gratuito · 1 minuto</span>
+    <h1>¿Cumples los requisitos para ser TCP?</h1>
+    <p class="lead">Seis preguntas para saber si puedes presentarte ya a una aerolínea, qué te falta y por dónde deberías empezar.</p>
+    <div class="prog"><i></i></div>
+    <div class="pstep" id="pstep">Pregunta 1 de 6</div>
+    <div id="quiz"></div>
+  </section>
+  <div id="after"></div>
+</main>
+
+<footer class="f">Escola Aeronàutica de Catalunya · Barcelona</footer>
+
+<script src="/assets/eac.js"></script>
+<script>
+window.EAC_MAGNET='lm_test_tcp';
+var A={};
+var QS=[
+ {t:'¿Qué edad tienes?', h:'Para volar hay que ser mayor de edad.',
+  opts:[{t:'Menos de 18 años',v:'menor'},{t:'Entre 18 y 25',v:'18-25'},{t:'Entre 26 y 35',v:'26-35'},{t:'Más de 35',v:'35+'}]},
+ {t:'¿Tienes la ESO o un título equivalente?', h:'Es el nivel mínimo de estudios que se pide. No hace falta carrera.',
+  opts:[{t:'Sí',v:true},{t:'No, pero la estoy sacando',v:'curso'},{t:'No',v:false}]},
+ {t:'¿Cómo te defiendes en inglés hablado?', h:'Las aerolíneas piden en torno a un B1-B2 funcional.',
+  opts:[{t:'Puedo mantener una conversación sin problema',v:'alto'},{t:'Me defiendo, con esfuerzo',v:'medio'},{t:'Muy poco o nada',v:'bajo'}]},
+ {t:'¿Sabes nadar?', h:'Hay prácticas de supervivencia y evacuación en el agua.',
+  opts:[{t:'Sí',v:true},{t:'Un poco, me falta soltura',v:'poco'},{t:'No',v:false}]},
+ {t:'¿Podrías trabajar por turnos, festivos y noches fuera de casa?', h:'Es la parte de la profesión que más se subestima.',
+  opts:[{t:'Sí, sin problema',v:'alta'},{t:'Sí, con algo de organización',v:'media'},{t:'Me sería muy difícil',v:'baja'}]},
+ {t:'¿Tienes ya el certificado oficial de TCP?', h:'Es el único documento que te habilita para volar.',
+  opts:[{t:'Sí, ya lo tengo',v:'si'},{t:'No, aún no',v:'no'},{t:'No sé qué es exactamente',v:'nose'}]}
+];
+
+function evaluar(a){
+  var edad=a[0].v, eso=a[1].v, ing=a[2].v, nad=a[3].v, disp=a[4].v, cert=a[5].v;
+  var checks=[], bloqueos=0, avisos=0;
+  function add(k,t,s){checks.push({k:k,t:t,s:s}); if(k==='n')bloqueos++; if(k==='m')avisos++;}
+  edad==='menor' ? add('n','Edad','Aún no puedes obtener el certificado. Podrás empezar al cumplir los 18.')
+                 : add('y','Edad','Cumples el requisito de edad.');
+  eso===true ? add('y','Estudios','Tienes el nivel exigido. No hace falta carrera universitaria.')
+   : eso==='curso' ? add('m','Estudios','En cuanto tengas la ESO cumples. Puedes ir preparando el resto mientras tanto.')
+   : add('n','Estudios','Necesitas la ESO o un título equivalente para acceder.');
+  ing==='alto' ? add('y','Inglés','Tu nivel encaja con lo que piden las aerolíneas.')
+   : ing==='medio' ? add('m','Inglés','Suficiente para empezar, pero conviene reforzarlo: se evalúa hablado en la entrevista.')
+   : add('n','Inglés','Es el requisito que más candidatos frena. Hay que trabajarlo sí o sí.');
+  nad===true ? add('y','Natación','Podrás hacer las prácticas de supervivencia en el agua.')
+   : nad==='poco' ? add('m','Natación','Con algo de práctica lo tendrás. No es nadar rápido, es desenvolverse con seguridad.')
+   : add('n','Natación','Hay pruebas de evacuación en el agua: es un requisito de la formación.');
+  disp==='alta' ? add('y','Disponibilidad','Encajas con la operativa real de una tripulación.')
+   : disp==='media' ? add('m','Disponibilidad','Es viable, pero organiza tu vida contando con turnos y pernoctas.')
+   : add('m','Disponibilidad','Si no puedes con turnos ni noches fuera, quizá te encaje mejor un puesto en tierra.');
+  cert==='si' ? add('y','Certificado oficial','Ya lo tienes: puedes presentarte a cualquier convocatoria.')
+   : add('m','Certificado oficial','Es el único paso que te separa de poder presentarte. Sin él no se puede volar.');
+
+  var verdict, vclass, resumen;
+  if(bloqueos>0 && edad==='menor'){
+    verdict='Todavía no, pero vas bien'; vclass='v-mid';
+    resumen='Aún no cumples la edad mínima, pero puedes ir preparando el inglés y la natación para empezar en cuanto cumplas los 18.';
+  } else if(bloqueos>=2){
+    verdict='Te faltan cosas'; vclass='v-no';
+    resumen='Hay dos o más requisitos que hoy no cumples. Son resolubles, pero conviene ordenarlos antes de invertir en formación.';
+  } else if(bloqueos===1){
+    verdict='Casi'; vclass='v-mid';
+    resumen='Cumples casi todo. Con un requisito resuelto estarías en condiciones de presentarte.';
+  } else if(cert==='si'){
+    verdict='Puedes presentarte ya'; vclass='v-ok';
+    resumen='Cumples los requisitos y ya tienes el certificado. Lo que te queda es preparar bien el proceso de selección: es donde se cae la mayoría.';
+  } else {
+    verdict='Cumples los requisitos'; vclass='v-ok';
+    resumen='Cumples lo que se pide. Solo te falta el certificado oficial de TCP para poder presentarte a las aerolíneas.';
+  }
+  return {checks:checks, verdict:verdict, vclass:vclass, resumen:resumen, bloqueos:bloqueos, avisos:avisos,
+          datos:{edad:edad,eso:eso,ingles:ing,nadar:nad,disp:disp,cert:cert}};
+}
+
+EAC.Quiz({questions:QS, onFinish:function(a){
+  var r=evaluar(a); A=r;
+  var app=EAC.$('#app');
+  app.innerHTML =
+   '<span class="kicker">Resultado preliminar</span>'
+  +'<h1>'+r.verdict+'</h1>'
+  +'<p class="lead">'+r.resumen+'</p>'
+  +'<div class="stats">'
+  +'  <div class="stat"><b>'+(6-r.bloqueos-r.avisos)+'/6</b><span>requisitos que ya cumples</span></div>'
+  +'  <div class="stat"><b>'+r.avisos+'</b><span>puntos a reforzar</span></div>'
+  +'  <div class="stat"><b>'+r.bloqueos+'</b><span>que hay que resolver</span></div>'
+  +'</div>'
+  +'<p class="small">Abajo tienes el desglose completo, requisito por requisito, y qué haría falta en cada uno.</p>';
+  var after=EAC.$('#after');
+  EAC.gate(after,{
+    title:'Tu informe completo, requisito por requisito',
+    sub:'Te lo enviamos por email y lo ves aquí al instante.',
+    why:'Recibirás el desglose de los 6 requisitos, qué te falta exactamente en cada uno y los pasos concretos para presentarte a una aerolínea.',
+    cta:'Ver mi informe completo',
+    extra:{ curso:'TCP',
+            edad: r.datos.edad!=='menor', menor: r.datos.edad==='menor',
+            eso: r.datos.eso===true, ingles: r.datos.ingles==='alto', nadar: r.datos.nadar===true,
+            resultado:r.verdict, detalle:r.datos },
+    onDone:function(d,res){ mostrar(r,d,res); }
+  });
+  after.scrollIntoView({behavior:'smooth',block:'start'});
+}});
+
+function mostrar(r,d,res){
+  var nombre=d.nombre.split(' ')[0];
+  var chk = r.checks.map(function(c){
+    var ic = c.k==='y'?'✓':(c.k==='n'?'✕':'!');
+    return '<div class="chk '+c.k+'"><span class="ic">'+ic+'</span><span><b>'+c.t+'</b><span>'+c.s+'</span></span></div>';
+  }).join('');
+  EAC.$('#after').innerHTML =
+   '<div class="card">'
+  +'  <span class="verdict '+r.vclass+'">'+r.verdict+'</span>'
+  +'  <h2>'+nombre+', este es tu informe</h2>'
+  +'  <p class="small" style="margin-bottom:6px">Te hemos enviado una copia a <b>'+d.email+'</b>.</p>'
+  +'  <div class="checks">'+chk+'</div>'
+  +'  <h3 style="margin-top:22px">Tu siguiente paso</h3>'
+  +'  <p class="small">'+siguiente(r)+'</p>'
+  +'  <div class="cta">'
+  +'    <h3>¿Lo vemos en una llamada de 10 minutos?</h3>'
+  +'    <p>Te contamos el calendario, el precio y cómo se financia, sin compromiso.</p>'
+  +'    <a class="btn" href="https://escolaeronauticadecatalunya.cat/contacto/?utm_source=leadmagnet&utm_medium=test&utm_campaign=lm_test_tcp">Quiero que me llamen</a>'
+  +'  </div>'
+  +'  <p class="tiny" style="margin-top:16px">'+(res&&res.ok?'':'Nota interna: el envío al CRM está pendiente de conectar (fase 4). ')
+  +'Puntuación asignada a este lead: <b>'+(res&&res.score!=null?res.score:'—')+'</b> · '+(res&&res.tag?res.tag:'—')+'.</p>'
+  +'</div>';
+  window.scrollTo({top:EAC.$('#after').offsetTop-20,behavior:'smooth'});
+}
+function siguiente(r){
+  if(r.datos.edad==='menor') return 'Aprovecha este tiempo para reforzar el inglés hablado y coger soltura nadando. En cuanto cumplas los 18 podrás cursar el certificado y presentarte.';
+  if(r.datos.ingles==='bajo') return 'Prioriza el inglés hablado: es lo que se evalúa en la entrevista y lo que más candidatos deja fuera. En paralelo puedes ir informándote del certificado.';
+  if(r.datos.eso===false) return 'Necesitas la ESO o equivalente para acceder a la formación. Mientras la sacas, puedes ir trabajando el inglés.';
+  if(r.datos.cert==='si') return 'Ya cumples y tienes el certificado: céntrate en preparar el proceso de selección (CV, entrevista en inglés y dinámica de grupo), que es donde se decide todo.';
+  return 'Tu siguiente paso es obtener el certificado oficial de TCP. Es lo único que te separa de poder presentarte a cualquier convocatoria en España y en Europa.';
+}
+</script>
+</body>
+</html>
