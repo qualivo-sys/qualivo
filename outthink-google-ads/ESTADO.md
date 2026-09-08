@@ -522,3 +522,13 @@ miércoles sigue sin registro desde el viernes, pausar y pasar los 15 € a Sear
 - **`ai act` amplia reactivada** (la pausé el viernes con 0; ya tiene 1 registro a 18 €).
 - 7 frases nuevas en EventosIA: eventos ia madrid · evento ia 2026 · congreso ia 2026 · foro ia
   madrid · evento ia septiembre · jornada ia madrid · eventos inteligencia artificial 2026.
+
+## Día 9 (08-09) — Search a Maximizar conversiones SIN CPA objetivo
+Desde el cambio a CPA objetivo 30 € (lunes mediodía): lunes 39 clics / 89,8 € / 0 registros,
+CPC 2,30 € (antes 1,4); hoy CPC 3,13 €. Sin registro desde el sábado (domingo 0, lunes 0).
+Decisión de Maikel: **quitar el CPA objetivo** (demasiado pronto con 8 registros); queda
+Maximizar conversiones puro con 85,23 €/día. Riesgo: sin tope, el CPC puede seguir subiendo;
+vigilar dos días. Ojo con la atribución: los registros se apuntan a la fecha del clic, así que
+lunes y martes pueden ganar registros a posteriori.
+Marca gastó 12,25 € en 3 clics el lunes (4 €/clic con puja inteligente). Negativas nuevas:
+consultoria/consultoría, tech summit.
