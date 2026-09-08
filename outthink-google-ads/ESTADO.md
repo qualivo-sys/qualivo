@@ -538,3 +538,9 @@ una puja inteligente no tiene tiempo de aprender con 16 días y 8 registros. Los
 móvil (−40 %) y horario (noche −50 %) vuelven a aplicar. Plan: pausar el jueves las keywords
 de AIAct/Compliance sin registro; si el jueves Search pasa de 15 registros, probar CPA
 objetivo 35–40 €.
+**08-09, noche:** hoy 33 clics / 81,3 € / 1 registro (EventosIA), CPC 2,46 € (casi todo el
+día bajo Maximizar conversiones). Acumulado **649 € (32 %), 11 registros, CPL 59 €**; Search
+9 reg. / 398 € (CPL 44 €). Restante 1.351 € → 84,45 €/día (16 días). `ai act` amplia estaba
+casando «digital services act» (6,5 €) y «european ai act summary» → pausada, sustituida por
+`ai act` en frase. Negativas: digital services act, dsa, summary, ayudas, subvenciones, pymes,
+competencia, omnibus. Presupuesto Search ajustado a 84,45 €/día.
