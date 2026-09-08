@@ -27,11 +27,12 @@ Los secretos reales de esta sesión viven fuera del repo (scratchpad). Si un sec
 | Servicio | Estado |
 |---|---|
 | Google service account (Sheets) | ✅ |
-| Search Console (propiedad EAC) | ⏳ verificando acceso de la SA |
-| DinoRank | ✅ key recibida |
+| Search Console (propiedad EAC) | ✅ vía OAuth (maikel@qualivo.io) |
+| DinoRank | ✅ |
 | GoHighLevel (PIT + location + pipeline) | ✅ |
 | Meta Ads (token + act_id) | ✅ |
+| Vercel | ✅ (maikel-7413) |
 | GA4 (property id) | ❌ pendiente |
-| Vercel / Netlify / Cloudflare | ❌ pendiente |
+| Netlify / Cloudflare | ❌ pendiente |
 | Google Ads (OAuth completo) | ❌ pendiente (proxy) |
 | `MAQUINA-SEO-QUALIVO.md` (guía técnica) | ❌ no recibido aún |
