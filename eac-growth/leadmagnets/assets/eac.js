@@ -38,11 +38,12 @@ async function send(payload){
 
 /* ── motor de test ─────────────────────────────────────── */
 function Quiz(cfg){
-  var i=0, answers=[], root=$('#quiz'), prog=$('#prog i'), step=$('#pstep');
+  var i=0, answers=[], root=$('#quiz'), prog=$('.prog i')||$('#prog i'), step=$('#pstep');
+  if(!root){ console.error('EAC.Quiz: falta el contenedor #quiz'); return; }
+  function setProg(pctv, txt){ if(prog) prog.style.width=pctv+'%'; if(step) step.textContent=txt; }
   function render(){
     var q=cfg.questions[i];
-    prog.style.width = (i/cfg.questions.length*100)+'%';
-    step.textContent = 'Pregunta '+(i+1)+' de '+cfg.questions.length;
+    setProg(i/cfg.questions.length*100, 'Pregunta '+(i+1)+' de '+cfg.questions.length);
     root.innerHTML='';
     var w=document.createElement('div'); w.className='q';
     var h=document.createElement('div'); h.className='qt'; h.textContent=q.t; w.appendChild(h);
@@ -69,7 +70,7 @@ function Quiz(cfg){
     var f=w.querySelector('.opt'); if(f) f.focus({preventScroll:true});
   }
   function finish(){
-    prog.style.width='100%'; step.textContent='Test completado';
+    setProg(100,'Test completado');
     cfg.onFinish(answers);
   }
   render();
