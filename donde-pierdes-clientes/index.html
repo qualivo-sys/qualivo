@@ -112,6 +112,41 @@
   .fg-obj { margin:0; padding:0 }
   .fg-obj dt { font-weight:800; color:#101319; margin-top:18px; font-size:16px }
   .fg-obj dd { margin:5px 0 0; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft) }
+  /* ── hero ── */
+  .fg-hero { background:#08090C; color:#fff; padding:clamp(40px,7vw,80px) 0 clamp(44px,7vw,72px); overflow:hidden; position:relative }
+  .fg-hero::before { content:""; position:absolute; inset:0; background:
+    radial-gradient(60% 50% at 85% 10%, rgba(39,189,177,.16), transparent 70%),
+    radial-gradient(40% 40% at 10% 90%, rgba(232,89,12,.10), transparent 70%); pointer-events:none }
+  .fg-hero .fg-wrap { position:relative; display:grid; gap:36px; align-items:center }
+  @media (min-width:860px) { .fg-hero .fg-wrap { max-width:1080px; grid-template-columns:1.1fr .9fr; gap:56px } }
+  .fg-kick { margin:0 0 16px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--qv-teal-bright); font-weight:800 }
+  .fg-hero h1 { font-family:var(--qv-font-display); font-weight:900; letter-spacing:-.035em; line-height:.98;
+    font-size:clamp(38px,7.2vw,64px); margin:0 0 20px; color:#fff }
+  .fg-hero h1 em { font-style:normal; color:var(--qv-teal-bright) }
+  .fg-hero .fg-sub { font-size:clamp(16.5px,2.4vw,19px); line-height:1.6; color:rgba(255,255,255,.72); margin:0 0 28px; max-width:520px }
+  .fg-cta { display:inline-flex; align-items:center; gap:10px; background:var(--qv-teal-bright); color:#04231F;
+    border:none; border-radius:14px; padding:18px 28px; font-size:17px; font-weight:800; cursor:pointer;
+    box-shadow:0 12px 32px rgba(39,189,177,.25); transition:transform 120ms ease, box-shadow 120ms ease }
+  .fg-cta:hover { transform:translateY(-1px); box-shadow:0 16px 40px rgba(39,189,177,.35) }
+  .fg-hero .fg-mini { text-align:left; margin:14px 0 0; color:rgba(255,255,255,.5); font-size:13.5px }
+  .fg-hero .fg-mini b { color:rgba(255,255,255,.8); font-weight:700 }
+  /* vista previa del resultado */
+  .fg-preview { background:#fff; border-radius:20px; padding:22px 22px 20px; color:var(--qv-ink);
+    box-shadow:0 30px 80px rgba(0,0,0,.45); transform:rotate(-1.2deg); animation:fgUp .7s cubic-bezier(.2,.8,.2,1) both }
+  @media (min-width:860px) { .fg-preview { transform:rotate(-2deg) } }
+  .fg-preview .lbl { margin:0 0 8px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--qv-teal); font-weight:800 }
+  .fg-preview .tit { margin:0 0 12px; font-family:var(--qv-font-display); font-weight:900; font-size:21px; line-height:1.15; letter-spacing:-.02em }
+  .fg-preview .fg-nivel { margin:0 0 14px; font-size:13px; padding:6px 12px }
+  .fg-preview .fg-sem li { font-size:13px; padding:6px 12px; opacity:0; animation:fgIn .45s ease both }
+  .fg-preview .fg-sem li:nth-child(1){animation-delay:.25s} .fg-preview .fg-sem li:nth-child(2){animation-delay:.4s}
+  .fg-preview .fg-sem li:nth-child(3){animation-delay:.55s} .fg-preview .fg-sem li:nth-child(4){animation-delay:.7s}
+  .fg-preview .fg-sem li:nth-child(5){animation-delay:.85s}
+  .fg-preview .fg-sem li.rota { border-color:#E8590C; border-width:2px; animation:fgIn .45s ease both, fgPulse 2.4s ease 1.4s infinite }
+  .fg-preview .n { margin:14px 0 0; font-size:13px; line-height:1.55; color:var(--qv-ink-muted) }
+  @keyframes fgIn { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:none } }
+  @keyframes fgUp { from { opacity:0; transform:translateY(24px) rotate(-1.2deg) } to { opacity:1 } }
+  @keyframes fgPulse { 0%,100% { box-shadow:0 0 0 0 rgba(232,89,12,0) } 50% { box-shadow:0 0 0 6px rgba(232,89,12,.18) } }
+  @media (prefers-reduced-motion:reduce) { .fg-preview, .fg-preview .fg-sem li { animation:none; opacity:1; transform:none } }
   #fg-canvas { display:none }
   [hidden] { display:none !important }
 </style>
@@ -132,16 +167,36 @@
     </div>
   </header>
 
-  <main style="padding:clamp(36px,6vw,64px) 0 80px">
-  <div class="fg-wrap">
+  <main style="padding:0 0 80px">
 
     <!-- ░░ LANDING ░░ -->
     <section id="fg-landing">
-      <p style="margin:0 0 14px; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--qv-teal); font-weight:800">Diagnóstico gratuito · 5 etapas</p>
-      <h1 class="fg-h" style="font-size:clamp(32px,6.4vw,52px); line-height:1.03; margin:0 0 20px">¿Dónde se te escapan los clientes?</h1>
-      <p style="font-size:clamp(17px,2.6vw,20px); line-height:1.6; color:var(--qv-ink-soft); margin:0 0 30px">Repasamos las cinco etapas de tu recorrido comercial, una por una, y te decimos en cuál se te está yendo el dinero. Ves el resultado de cada etapa según avanzas.</p>
-      <button id="fg-start" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar →</button>
-      <p class="fg-mini" style="text-align:left; margin-top:12px">Sin registro. Puedes parar cuando quieras y te llevas lo que lleves.</p>
+      <div class="fg-hero">
+        <div class="fg-wrap">
+          <div>
+            <p class="fg-kick">Gratis · 5 etapas · 3 minutos</p>
+            <h1>¿Dónde se te <em>escapan</em> los clientes?</h1>
+            <p class="fg-sub">Las cinco etapas de tu recorrido comercial, una por una. Te decimos en cuál se te está yendo el dinero, qué tocar primero y qué puedes hacer hoy.</p>
+            <button id="fg-start" class="fg-cta">Empezar el diagnóstico <span aria-hidden="true">→</span></button>
+            <p class="fg-mini"><b>Sin registro.</b> Ves el resultado de cada etapa según avanzas y puedes parar cuando quieras.</p>
+          </div>
+          <div class="fg-preview" aria-hidden="true">
+            <p class="lbl">Así es un resultado</p>
+            <p class="tit">Se te escapan en conversión: contestas tarde y no lo notas.</p>
+            <div class="fg-nivel critica">Fuga crítica</div>
+            <ul class="fg-sem">
+              <li><span class="fg-dot v"></span>Captación 6/8</li>
+              <li class="rota"><span class="fg-dot r"></span>Conversión 2/8</li>
+              <li><span class="fg-dot a"></span>Seguimiento 4/8</li>
+              <li><span class="fg-dot v"></span>Proceso 7/8</li>
+              <li><span class="fg-dot a"></span>Medición 3/8</li>
+            </ul>
+            <p class="n"><strong>Qué puedes hacer hoy:</strong> decide quién contesta cuando tú no puedes, y en cuánto tiempo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg-wrap">
 
       <div class="fg-sec">
         <h2>El problema</h2>
@@ -187,7 +242,7 @@
 
       <div class="fg-sec" style="text-align:center; padding:36px 24px; background:#F7F8F9; border-radius:18px">
         <h2 style="margin-bottom:20px">Las cinco etapas de tu recorrido, revisadas una a una.</h2>
-        <button id="fg-start2" class="btn-dark btn-hero" style="border:none; cursor:pointer">Empezar el diagnóstico →</button>
+        <button id="fg-start2" class="fg-cta">Empezar el diagnóstico <span aria-hidden="true">→</span></button>
       </div>
 
       <div class="fg-sec">
@@ -198,7 +253,10 @@
         <details class="faq-item"><summary>¿Sirve si tengo tienda online?</summary><p>Sí, aunque está pensado sobre todo para negocios donde hay una conversación antes de la venta.</p></details>
         <details class="faq-item"><summary>¿Esto es para venderme algo?</summary><p>Al final te proponemos dar un paso más si quieres. No hace falta para tener tu resultado.</p></details>
       </div>
+      </div>
     </section>
+
+  <div class="fg-wrap" style="padding-top:clamp(36px,6vw,64px)">
 
     <!-- ░░ QUIZ ░░ -->
     <section id="fg-quiz" hidden>
