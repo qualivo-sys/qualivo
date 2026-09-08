@@ -14,6 +14,7 @@ const SINTOMAS = ['demanda', 'predecible', 'visibilidad', 'velocidad', 'cierre',
 const NIVELES = ['critico', 'relevante', 'leve'];
 const EMPLEADOS = ['Solo yo', '2 a 5', '6 a 20', 'Más de 20'];
 const VALORES = ['Menos de 500 €', '500 a 2.000 €', '2.000 a 10.000 €', 'Más de 10.000 €', 'No lo sé'];
+const ROLES = ['', 'Dueño o socio', 'Dirijo ventas o marketing', 'Otro'];
 const SECTORES = ['', 'Servicios profesionales (asesoría, consultoría, abogados)', 'Reformas, construcción o instalaciones',
   'Salud, clínica o bienestar', 'Formación o academia', 'Industria, taller o fabricación',
   'Agencia o estudio (marketing, diseño, software)', 'Comercio o tienda', 'Hostelería o turismo', 'Otro'];
@@ -41,7 +42,7 @@ const SECTOR_SLUG = {
 // Un lead es prioritario cuando el cuello de botella es crítico, la empresa cae dentro
 // del ICP y el valor de cliente justifica la conversación. Se avisa al momento.
 function esPrioritario(b) {
-  return b.nivel === 'critico' &&
+  return b.nivel === 'critico' && b.rol !== 'Otro' &&
     (b.empleados === '2 a 5' || b.empleados === '6 a 20') &&
     (b.valor_cliente === '2.000 a 10.000 €' || b.valor_cliente === 'Más de 10.000 €');
 }
@@ -75,6 +76,9 @@ module.exports = async function handler(req, res) {
   const empleados = String(b.empleados || '');
   const valorCliente = String(b.valor_cliente || '');
   const sector = String(b.sector || '');
+  const rol = String(b.rol || '');
+  const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
+  const utmOk = Object.keys(utm).every(function (k) { return /^(utm_(source|medium|campaign|content|term)|ref)$/.test(k) && typeof utm[k] === 'string' && utm[k].length <= 80; });
 
   const dimsOk = DIMS.every(function (e) {
     return dims[e] === null || (Number.isInteger(dims[e]) && dims[e] >= 0 && dims[e] <= 100);
@@ -85,11 +89,12 @@ module.exports = async function handler(req, res) {
       (sintoma && !SINTOMAS.includes(sintoma)) || !dimsOk ||
       total === null || maximo === null || total < 0 || maximo < 0 ||
       total > 33 || maximo > 33 || total > maximo ||
-      !EMPLEADOS.includes(empleados) || !VALORES.includes(valorCliente) || !SECTORES.includes(sector)) {
+      !EMPLEADOS.includes(empleados) || !VALORES.includes(valorCliente) || !SECTORES.includes(sector) ||
+      !ROLES.includes(rol) || !utmOk) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
   }
 
-  const prioritario = esPrioritario({ nivel, empleados, valor_cliente: valorCliente });
+  const prioritario = esPrioritario({ nivel, empleados, valor_cliente: valorCliente, rol });
 
   const ghlHeaders = {
     Authorization: 'Bearer ' + apiKey,
@@ -101,6 +106,8 @@ module.exports = async function handler(req, res) {
   if (segunda) tags.push('segunda-' + segunda);
   if (sintoma) tags.push('sintoma-' + sintoma);
   if (sector) tags.push('sector-' + SECTOR_SLUG[sector]);
+  if (rol) tags.push('rol-' + (rol === 'Dueño o socio' ? 'dueno' : rol === 'Otro' ? 'otro' : 'directivo'));
+  if (utm.utm_source) tags.push('utm-' + String(utm.utm_source).toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30));
   if (completo) tags.push('diagnostico-completo');
   if (prioritario) tags.push('prioridad-alta');
 
@@ -141,12 +148,15 @@ module.exports = async function handler(req, res) {
         prioritario ? '>>> LEAD PRIORITARIO: contactar en 24 h <<<' : '',
         '',
         'Perfil:',
+        '· Papel: ' + (rol || 'no indicado'),
         '· Personas en la empresa: ' + empleados,
         '· Valor de un cliente al año: ' + valorCliente,
         '· Sector: ' + (sector || 'no indicado'),
         '',
         'Puntuación por dimensión:',
         detalle,
+        '',
+        Object.keys(utm).length ? 'Origen: ' + Object.keys(utm).map(function (k) { return k + '=' + utm[k]; }).join(' · ') : 'Origen: directo o sin UTM',
         '',
         'Consentimiento RGPD: sí · ' + new Date().toISOString()
       ].filter(Boolean).join('\n');
@@ -163,7 +173,7 @@ module.exports = async function handler(req, res) {
 
     await avisar({
       nombre, email, cuello, segunda, sintoma, nivel, total, maximo, completo, dims,
-      empleados, valorCliente, sector, prioritario, contactId, locationId
+      empleados, valorCliente, sector, rol, utm, prioritario, contactId, locationId
     }).catch(function (err) {
       console.error('[dx] Aviso interno falló:', err);
     });
@@ -220,6 +230,8 @@ async function avisar(lead) {
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
     fila('Sector', lead.sector || 'no indicado') +
+    fila('Papel', lead.rol || 'no indicado') +
+    fila('Origen', Object.keys(lead.utm).length ? Object.keys(lead.utm).map(function (k) { return k + '=' + lead.utm[k]; }).join(' · ') : 'directo') +
     fila('Personas', lead.empleados) +
     fila('Valor cliente/año', lead.valorCliente) +
     DIMS.map(dim).join('') +
@@ -322,7 +334,7 @@ async function enviarRadiografia(d) {
     body: JSON.stringify({
       from: from,
       to: d.email,
-      subject: 'Tu radiografía: tu crecimiento se rompe en ' + R.NOMBRE[d.cuello].toLowerCase(),
+      subject: 'Tu plan de 30 días: tu crecimiento se rompe en ' + R.NOMBRE[d.cuello].toLowerCase(),
       html: html,
       reply_to: process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io'
     })

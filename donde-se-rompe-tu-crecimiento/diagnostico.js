@@ -24,8 +24,8 @@
   // ── Las 11 preguntas (0 a 3 puntos). `ns` marca «no lo sé»: resta 1 en control.
   var PREGUNTAS = [
     // Captación (3)
-    { d: 0, sintoma: 'demanda', texto: 'Piensa en los últimos tres meses. ¿Te han llegado las oportunidades que necesitas?',
-      op: [['Sí. Entran más de las que podemos atender', 3], ['Las justas, sin margen', 2], ['A rachas: meses buenos y meses vacíos', 1], ['No. Nos faltan oportunidades casi siempre', 0]] },
+    { d: 0, sintoma: 'demanda', texto: 'En los últimos tres meses, ¿te ha llegado suficiente gente interesada en comprarte?',
+      op: [['Sí. Más de la que podemos atender', 3], ['La justa, sin margen', 2], ['A rachas: meses buenos y meses vacíos', 1], ['No. Nos falta casi siempre', 0]] },
     { d: 0, sintoma: 'predecible', texto: 'Cuando necesitas más clientes, ¿qué ocurre normalmente?',
       op: [['Sabemos qué canal los trae y cómo subirlo', 3], ['Tenemos varios canales y más o menos sabemos cuáles funcionan', 2], ['Tiramos de recomendaciones y contactos', 1], ['Probamos cosas, o nos ponemos a buscar cuando hace falta', 0]] },
     { d: 0, sintoma: 'visibilidad', texto: 'Alguien que no te conoce busca lo que vendes: en Google, en una IA, en redes. ¿Te encuentra?',
@@ -33,18 +33,18 @@
     // Conversión (2)
     { d: 1, sintoma: 'velocidad', texto: 'Entra una oportunidad nueva: una llamada, un formulario, un WhatsApp. ¿Qué pasa?',
       op: [['Se contesta en menos de una hora, siempre igual', 3], ['Se contesta el mismo día, según quién esté', 2], ['Puede pasar un día o más', 1], ['Algunas se quedan sin contestar', 0]] },
-    { d: 1, sintoma: 'cierre', texto: 'De cada diez presupuestos o propuestas que envías, ¿cuántos cierras?',
+    { d: 1, sintoma: 'cierre', texto: 'De cada diez personas que te piden precio, ¿cuántas acaban comprando?',
       op: [['Más de cinco', 3], ['Entre tres y cinco', 2], ['Menos de tres', 1], ['No lo sé', 1, true]] },
     // Seguimiento (2)
-    { d: 2, sintoma: 'presupuestos', texto: 'Después de enviar un presupuesto, ¿qué haces?',
+    { d: 2, sintoma: 'presupuestos', texto: 'Alguien pide precio y no cierra en el momento. ¿Qué pasa después?',
       op: [['Hay un seguimiento fijo: se llama o se escribe en fechas concretas hasta cerrar o descartar', 3], ['Se hace seguimiento, pero depende de que alguien se acuerde', 2], ['Se insiste una vez y, si no contestan, se deja', 1], ['Esperamos a que el cliente responda', 0]] },
     { d: 2, sintoma: 'perdidos', texto: '¿Qué pasa con los que dijeron «ahora no» o dejaron de contestar?',
       op: [['Los volvemos a contactar más adelante, con fecha', 3], ['A veces, si alguien se acuerda', 2], ['Quedan apuntados, pero no hacemos nada', 1], ['Se pierden', 0]] },
     // Dependencia (2)
-    { d: 3, sintoma: 'dueno', texto: 'Si el dueño desapareciera dos semanas, ¿qué pasaría con las ventas?',
-      op: [['Seguirían igual: está escrito y otra persona lo lleva', 3], ['Seguirían, pero más lentas', 2], ['Solo se atenderían las urgencias', 1], ['Se pararían. Todo pasa por el dueño', 0]] },
+    { d: 3, sintoma: 'dueno', texto: 'Si desaparecieras dos semanas, ¿qué pasaría con las ventas?',
+      op: [['Seguirían igual: está escrito y otra persona lo lleva', 3], ['Seguirían, pero más lentas', 2], ['Solo se atenderían las urgencias', 1], ['Se pararían. Todo pasa por mí', 0]] },
     { d: 3, sintoma: 'sin-registro', texto: 'Ahora mismo, ¿dónde está apuntado a qué clientes les debéis una respuesta?',
-      op: [['En un programa que usamos todos', 3], ['En una hoja de cálculo o una libreta compartida', 2], ['Cada uno tiene lo suyo', 1], ['En la cabeza del dueño, el móvil y algún papel', 0]] },
+      op: [['En un programa que usamos todos', 3], ['En una hoja de cálculo o una libreta compartida', 2], ['Cada uno tiene lo suyo', 1], ['En mi cabeza, el móvil y algún papel', 0]] },
     // Control (2)
     { d: 4, sintoma: 'origen', texto: '¿Sabes qué canal te ha traído más ventas en los últimos tres meses? Ventas, no visitas ni seguidores.',
       op: [['Sí, lo tenemos apuntado y lo revisamos', 3], ['Lo sabemos a grandes rasgos, sin números', 2], ['Tenemos intuiciones, nada apuntado', 1], ['No lo sabemos', 0, true]] },
@@ -53,6 +53,7 @@
   ];
 
   var PERFIL = [
+    { id: 'rol', label: '¿Cuál es tu papel en la empresa?', op: ['Dueño o socio', 'Dirijo ventas o marketing', 'Otro'] },
     { id: 'empleados', label: '¿Cuántas personas sois?', op: ['Solo yo', '2 a 5', '6 a 20', 'Más de 20'] },
     { id: 'valor', label: '¿Cuánto suele dejarte un cliente en un año?', op: ['Menos de 500 €', '500 a 2.000 €', '2.000 a 10.000 €', 'Más de 10.000 €', 'No lo sé'] }
   ];
@@ -112,6 +113,26 @@
     }
   };
 
+  // La frase que duele: depende del cuello y de si captación está bien (paga por
+  // gente que luego pierde) o no.
+  function frase(c) {
+    var capOk = c.pct.captacion !== null && c.pct.captacion >= 67;
+    switch (c.cuello) {
+      case 'captacion': return c.pct.seguimiento >= 67 && c.pct.conversion >= 67
+        ? 'No tienes un problema de ventas. Tienes un problema de que no llega nadie a quien venderle.'
+        : 'Puedes atender mejor y cerrar mejor, pero todo eso trabaja sobre un caudal que no controlas.';
+      case 'conversion': return capOk
+        ? 'Ya estás pagando por que te pregunten. Y los pierdes en las primeras horas.'
+        : 'Te cuesta que te pregunten, y a los que preguntan los pierdes en las primeras horas.';
+      case 'seguimiento': return capOk
+        ? 'Estás buscando clientes nuevos mientras los que ya te pidieron precio se enfrían sin que nadie les llame.'
+        : 'Cada persona que te pide precio te ha costado conseguirla. Y después no la persigue nadie.';
+      case 'dependencia': return 'Tu empresa no tiene un techo de mercado. Tiene un techo de horas: las tuyas.';
+      case 'control': return 'Estás invirtiendo sin saber qué funciona. El día que recortes, puedes apagar justo lo que te traía clientes.';
+    }
+    return '';
+  }
+
   // La acción concreta sale de la peor respuesta dentro del cuello de botella.
   var ACCION = {
     'demanda': 'Cuenta cuántas oportunidades nuevas te llegaron el mes pasado. Solo el número. Si no lo tienes, ese es el primer trabajo: contarlas durante treinta días.',
@@ -136,9 +157,10 @@
   var actual = 0;
   var enPerfil = false;
   var respuestas = new Array(PREGUNTAS.length).fill(null);
-  var perfil = { empleados: null, valor: null };
+  var perfil = { rol: null, empleados: null, valor: null };
   var calculado = null;
   var loadedAt = Date.now();
+  var UTM = {};
   var qStart = 0;
 
   function track(n, d) {
@@ -215,7 +237,7 @@
       b.textContent = o[0];
       b.addEventListener('click', function () {
         respuestas[actual] = { p: o[1], ns: !!o[2], txt: o[0] };
-        track('dx_q', { n: actual + 1, dim: dim.id, puntos: o[1], ms: Date.now() - qStart });
+        track('hero_question_answer', { n: actual + 1, dim: dim.id, puntos: o[1], ms: Date.now() - qStart });
         avanzar();
       });
       cont.appendChild(b);
@@ -235,7 +257,7 @@
     enPerfil = true;
     $('fg-dim').textContent = 'Casi está';
     $('fg-bar').style.width = '94%';
-    $('fg-question').textContent = 'Dos datos rápidos para ajustar el resultado a tu caso.';
+    $('fg-question').textContent = 'Tres datos rápidos para ajustar el resultado a tu caso.';
     $('fg-prev').hidden = false;
     $('fg-salir').hidden = true;
 
@@ -258,7 +280,7 @@
           perfil[campo.id] = o;
           Array.prototype.forEach.call(grid.children, function (c) { c.classList.remove('sel'); });
           b.classList.add('sel');
-          if (perfil.empleados && perfil.valor) $('fg-final').disabled = false;
+          if (perfil.rol && perfil.empleados && perfil.valor) $('fg-final').disabled = false;
         });
         grid.appendChild(b);
       });
@@ -268,7 +290,7 @@
     var fin = document.createElement('button');
     fin.type = 'button'; fin.id = 'fg-final'; fin.className = 'btn-teal';
     fin.textContent = 'Ver mi cuello de botella →'; fin.style.marginTop = '6px';
-    fin.disabled = !(perfil.empleados && perfil.valor);
+    fin.disabled = !(perfil.rol && perfil.empleados && perfil.valor);
     fin.addEventListener('click', function () { terminar(true); });
     cont.appendChild(fin);
     show('fg-quiz');
@@ -276,16 +298,16 @@
 
   function terminar(completo) {
     calculado = calcular();
-    track('dx_complete', {
+    track('hero_complete', {
       cuello: calculado.cuello, segunda: calculado.segunda || '', sintoma: calculado.sintoma, nivel: calculado.nivel,
       total: calculado.total, de: calculado.maximo, completo: calculado.completo,
       respondidas: calculado.respondidas, no_lo_se: calculado.ns,
-      empleados: perfil.empleados || '', valor_cliente: perfil.valor || '',
+      rol: perfil.rol || '', empleados: perfil.empleados || '', valor_cliente: perfil.valor || '',
       segundos: Math.round((Date.now() - loadedAt) / 1000)
     });
     pintarResultado();
     show('fg-result');
-    track('dx_result_view', { cuello: calculado.cuello, nivel: calculado.nivel, completo: calculado.completo });
+    track('hero_result_view', { cuello: calculado.cuello, nivel: calculado.nivel, completo: calculado.completo });
   }
 
   // ── Resultado ───────────────────────────────────────────────────────
@@ -300,6 +322,7 @@
       $('fg-nivel').textContent = 'Sin cuello de botella claro. Pasa en menos empresas de las que dicen.';
       $('fg-cuello').textContent = 'Ninguno';
       $('fg-title').textContent = 'No hemos encontrado nada que esté frenando tu crecimiento.';
+      $('fg-hostia').textContent = 'Tu problema ya no es dónde se rompe. Es hasta dónde aguanta.';
       $('fg-diag').textContent = 'Si has contestado honestamente, tu problema ya no es dónde se rompe: es cuánto puedes crecer sin que el sistema se rompa. Que es otra conversación.';
       $('fg-prio').textContent = 'Dejar de tapar agujeros y mirar el techo.';
       $('fg-antes').textContent = 'Antes de hacer nada nuevo, miraría qué parte se rompería primero si entrara el triple de trabajo.';
@@ -310,6 +333,7 @@
       $('fg-nivel').textContent = n.et + ' — ' + n.li;
       $('fg-cuello').textContent = dim.nombre;
       $('fg-title').textContent = R.titulo;
+      $('fg-hostia').textContent = frase(c);
       $('fg-diag').textContent = R[c.nivel];
       $('fg-prio').textContent = R.prio;
       $('fg-antes').textContent = R.antes;
@@ -358,6 +382,8 @@
     x.fillStyle = '#E8590C'; x.fillRect(72, 88, 520, 52);
     x.fillStyle = '#F2EEE6'; x.font = '800 23px Montserrat, system-ui, sans-serif';
     x.fillText('MI PRINCIPAL CUELLO DE BOTELLA', 92, 122);
+    x.fillStyle = '#0A0A0B'; x.font = '900 30px Montserrat, system-ui, sans-serif'; x.textAlign = 'right';
+    x.fillText('QUALIVO', W - 72, 124); x.textAlign = 'left';
 
     x.fillStyle = '#5A5E66'; x.font = '700 27px Montserrat, system-ui, sans-serif';
     x.fillText('MI CRECIMIENTO SE ROMPE EN', 72, 218);
@@ -390,7 +416,7 @@
 
     x.fillStyle = '#0A0A0B'; x.fillRect(0, H - 150, W, 150);
     x.fillStyle = '#F2EEE6'; x.font = '800 34px Montserrat, system-ui, sans-serif';
-    x.fillText('¿Y a ti dónde se te rompe? 90 segundos.', 72, H - 88);
+    x.fillText('¿Necesitas más clientes o los estás perdiendo?', 72, H - 88);
     x.fillStyle = '#FF7A33'; x.font = '800 29px Montserrat, system-ui, sans-serif';
     x.fillText('qualivo.io/donde-se-rompe-tu-crecimiento', 72, H - 44);
     return c;
@@ -415,35 +441,40 @@
 
   // Mándaselo a tu socio: nativo con imagen si se puede; si no, WhatsApp con el texto.
   function compartir() {
-    track('dx_share_click', { cuello: calculado.cuello, nivel: calculado.nivel });
+    track('hero_share', { cuello: calculado.cuello, nivel: calculado.nivel });
     dibujarCard().toBlob(function (blob) {
       var f = blob ? new File([blob], 'mi-cuello-de-botella.png', { type: 'image/png' }) : null;
       var datos = { text: textoShare('share') };
       if (f && navigator.canShare && navigator.canShare({ files: [f] })) datos.files = [f];
       if (navigator.share) {
-        navigator.share(datos).then(function () { track('dx_share_done', { canal: 'nativo' }); }).catch(function () {});
+        navigator.share(datos).then(function () { track('hero_share_done', { canal: 'nativo' }); }).catch(function () {});
       } else {
         window.open('https://wa.me/?text=' + encodeURIComponent(textoShare('wa')), '_blank', 'noopener');
-        track('dx_share_done', { canal: 'whatsapp' });
+        track('hero_share_done', { canal: 'whatsapp' });
       }
     }, 'image/png');
   }
 
   function descargarCard() {
-    track('dx_share_click', { cuello: calculado.cuello, nivel: calculado.nivel, canal: 'descarga' });
+    track('hero_share', { cuello: calculado.cuello, nivel: calculado.nivel, canal: 'descarga' });
     dibujarCard().toBlob(function (blob) {
       if (!blob) return;
       var u = URL.createObjectURL(blob), a = document.createElement('a');
       a.href = u; a.download = 'mi-cuello-de-botella.png'; a.click();
       setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
-      track('dx_share_done', { canal: 'descarga' });
+      track('hero_share_done', { canal: 'descarga' });
     }, 'image/png');
   }
 
+  function whatsapp() {
+    track('hero_share_whatsapp', { cuello: calculado.cuello, nivel: calculado.nivel });
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoShare('wa')), '_blank', 'noopener');
+  }
+
   function linkedin() {
-    track('dx_share_click', { cuello: calculado.cuello, nivel: calculado.nivel, canal: 'linkedin' });
+    track('hero_share_linkedin', { cuello: calculado.cuello, nivel: calculado.nivel });
     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(URL_PUBLICA + '?ref=li'), '_blank', 'noopener');
-    track('dx_share_done', { canal: 'linkedin' });
+    track('hero_share_done', { canal: 'linkedin' });
   }
 
   // ── Envío ───────────────────────────────────────────────────────────
@@ -467,19 +498,19 @@
         total: calculado.total, maximo: calculado.maximo, completo: calculado.completo,
         dims: calculado.pct,
         empleados: perfil.empleados || '', valor_cliente: perfil.valor || '',
-        origen: window.location.hostname || 'local'
+        origen: window.location.hostname || 'local', rol: perfil.rol || '', utm: UTM
       })
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      track('dx_email_submit', { cuello: calculado.cuello, nivel: calculado.nivel, sector: sector,
-        empleados: perfil.empleados || '', valor_cliente: perfil.valor || '' });
+      track('hero_email_submit', { cuello: calculado.cuello, nivel: calculado.nivel, sector: sector,
+        rol: perfil.rol || '', empleados: perfil.empleados || '', valor_cliente: perfil.valor || '' });
       show('fg-thanks');
     }).catch(function () {
       err.textContent = 'No hemos podido guardarlo. Inténtalo otra vez en unos segundos.'; err.hidden = false;
     }).finally(function () { btn.disabled = false; btn.textContent = 'Enviarme la radiografía'; });
   }
 
-  function empezar() { track('dx_start', {}); actual = 0; pintarPregunta(); show('fg-quiz'); }
+  function empezar() { track('hero_start', {}); actual = 0; pintarPregunta(); show('fg-quiz'); }
 
   ['fg-start', 'fg-start2', 'fg-start3', 'fg-start4'].forEach(function (id) { if ($(id)) $(id).addEventListener('click', empezar); });
 
@@ -501,15 +532,28 @@
   $('fg-sharebtn').addEventListener('click', compartir);
   $('fg-sharebtn2').addEventListener('click', compartir);
   $('fg-descargar').addEventListener('click', descargarCard);
+  $('fg-whatsapp').addEventListener('click', whatsapp);
   $('fg-linkedin').addEventListener('click', linkedin);
-  $('fg-gatebtn').addEventListener('click', function () { track('dx_gate_view', { cuello: calculado.cuello }); show('fg-gate'); });
+  $('fg-gatebtn').addEventListener('click', function () {
+    var dim = DIMS.filter(function (d) { return d.id === calculado.cuello; })[0];
+    $('fg-gate-dim').textContent = calculado.perfecto ? 'tu siguiente techo' : dim.nombre.toLowerCase();
+    track('hero_gate_view', { cuello: calculado.cuello }); show('fg-gate');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-radiografia]'), function (a) {
+    a.addEventListener('click', function () { track('hero_radiografia_click', { cuello: calculado ? calculado.cuello : '', desde: a.getAttribute('data-radiografia') }); });
+  });
   $('fg-gateback').addEventListener('click', function () { show('fg-result'); });
   $('fg-form').addEventListener('submit', enviar);
 
   window.addEventListener('beforeunload', function () {
-    if (calculado === null && actual > 0) track('dx_abandon', { ultima_pregunta: actual + 1 });
+    if (calculado === null && actual > 0) track('hero_abandon', { ultima_pregunta: actual + 1 });
   });
 
   var qs = new URLSearchParams(location.search);
-  track('dx_view', { utm_source: qs.get('utm_source') || '', utm_campaign: qs.get('utm_campaign') || '', ref: qs.get('ref') || '', referrer: document.referrer || '' });
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'].forEach(function (k) { if (qs.get(k)) UTM[k] = qs.get(k).slice(0, 80); });
+  try {
+    if (Object.keys(UTM).length) sessionStorage.setItem('qv_utm', JSON.stringify(UTM));
+    else UTM = JSON.parse(sessionStorage.getItem('qv_utm') || '{}');
+  } catch (e) { /* sin almacenamiento, sin drama */ }
+  track('hero_view', { utm_source: UTM.utm_source || '', utm_campaign: UTM.utm_campaign || '', utm_content: UTM.utm_content || '', ref: UTM.ref || '', referrer: document.referrer || '' });
 })();

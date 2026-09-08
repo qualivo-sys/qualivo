@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>¿Dónde se está rompiendo tu crecimiento? · Diagnóstico gratuito en 90 segundos · Qualivo</title>
-<meta name="description" content="Once preguntas sobre lo que pasa en tu empresa un martes cualquiera. Te decimos cuál es tu principal cuello de botella (captación, conversión, seguimiento, dependencia o control), qué arreglar primero y qué hacer hoy. Sin registro.">
+<title>¿Necesitas más clientes o estás perdiendo los que ya te llegan? · Radiografía rápida del crecimiento · Qualivo</title>
+<meta name="description" content="En 90 segundos: tu principal cuello de botella (captación, conversión, seguimiento, dependencia o control), qué arreglar primero y qué no tocar todavía. Para empresas de 2 a 20 personas. Sin registro.">
 <link rel="canonical" href="https://qualivo.io/donde-se-rompe-tu-crecimiento/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://qualivo.io/donde-se-rompe-tu-crecimiento/">
 <meta property="og:site_name" content="Qualivo">
-<meta property="og:title" content="¿Dónde se está rompiendo tu crecimiento?">
-<meta property="og:description" content="Descubre en 90 segundos qué está frenando tu empresa y qué deberías arreglar primero. Once preguntas, sin registro.">
+<meta property="og:title" content="¿Necesitas más clientes o estás perdiendo los que ya te llegan?">
+<meta property="og:description" content="En 90 segundos: dónde se está rompiendo tu crecimiento y qué arreglar primero. Sin registro.">
 <meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -186,6 +186,13 @@
   .fg-sticky { position:fixed; left:0; right:0; bottom:0; z-index:40; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-top:1px solid rgba(16,19,25,.1); display:flex; justify-content:center }
   .fg-sticky .fg-cta { width:100%; max-width:480px; justify-content:center; padding:15px 22px }
   @media (min-width:860px) { .fg-sticky { display:none } }
+  .fg-hdr { margin:0; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--qv-ink-faint); font-weight:800 }
+  @media (max-width:520px) { .fg-hdr { display:none } }
+  .site-header .container { flex-wrap:nowrap }
+  .fg-hostia { margin:0 0 18px; padding:0 0 0 16px; border-left:4px solid #E8590C; font-family:var(--qv-font-display); font-weight:800; font-size:clamp(18px,3.6vw,22px); line-height:1.3; letter-spacing:-.01em; color:#101319 }
+  .fg-trust p { margin:14px 0 0; font-size:15px; line-height:1.65; color:var(--qv-ink-soft) }
+  .fg-chips { display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none }
+  .fg-chips li { font-size:13px; font-weight:700; color:var(--qv-ink); background:#F7F8F9; border-radius:99px; padding:7px 13px }
   #fg-canvas { display:none }
   select.fg-select { width:100%; min-height:50px; padding:12px 14px; border:1px solid rgba(16,19,25,.18); border-radius:12px;
     background:#fff; font:inherit; font-size:16px; color:var(--qv-ink) }
@@ -200,11 +207,7 @@
         <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
         <span class="brand-tagline">Consultoría de Growth</span>
       </a>
-      <nav class="site-nav">
-        <a href="/servicios/" class="nav-link">Servicios</a>
-        <a href="/blog/" class="nav-link">Blog</a>
-        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
-      </nav>
+      <p class="fg-hdr">Radiografía rápida del crecimiento</p>
     </div>
   </header>
 
@@ -215,11 +218,11 @@
       <div class="fg-hero">
         <div class="fg-wrap">
           <div>
-            <p class="fg-kick">Gratis · 11 preguntas · 90 segundos</p>
-            <h1>¿Dónde se está <em>rompiendo</em> tu crecimiento?</h1>
-            <p class="fg-sub">Descubre en 90 segundos qué está frenando tu empresa y qué deberías arreglar primero. Puede que sea conseguir más clientes. Puede que no.</p>
-            <button id="fg-start" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button>
-            <p class="fg-mini"><b>Sin registro.</b> El resultado sale en pantalla. Once preguntas sobre lo que pasa en tu empresa, no sobre marketing.</p>
+            <p class="fg-kick">Gratis · 90 segundos · Empresas de 2 a 20 personas</p>
+            <h1>¿Necesitas más clientes o estás <em>perdiendo</em> los que ya te llegan?</h1>
+            <p class="fg-sub">En 90 segundos sabrás dónde se está rompiendo tu crecimiento: tu principal cuello de botella y qué arreglar primero.</p>
+            <button id="fg-start" class="fg-cta">Ver qué frena mi empresa <span aria-hidden="true">→</span></button>
+            <p class="fg-mini"><b>Sin registro.</b> El resultado sale en pantalla. Nada que buscar ni calcular.</p>
           </div>
           <div class="fg-preview" aria-hidden="true">
             <p class="lbl">Tu principal cuello de botella</p>
@@ -244,26 +247,26 @@
       <div class="fg-sec">
         <p class="fg-eyebrow">Lo que casi nadie mira</p>
         <h2 class="fg-big">Puede que estés buscando clientes en el sitio equivocado.</h2>
-        <p class="fg-lead">Cuando una empresa no crece, el dueño concluye «necesito más clientes» y sale a buscarlos. A veces es verdad. Muchas veces el problema está en otra parte:</p>
+        <p class="fg-lead">Cuando una empresa no crece, el dueño concluye «necesito más clientes» y sale a buscarlos. A veces es verdad y el diagnóstico lo dirá. Muchas veces el problema está después:</p>
         <ul class="fg-grid4">
           <li><span class="fg-dot r"></span>Alguien pregunta y nadie contesta a tiempo.</li>
           <li><span class="fg-dot r"></span>Sale un presupuesto y nadie lo persigue.</li>
           <li><span class="fg-dot r"></span>Todo pasa por ti.</li>
           <li><span class="fg-dot r"></span>Haces cosas y no sabes cuáles te hacen crecer.</li>
         </ul>
-        <p class="fg-lead" style="margin-top:18px"><strong>Nada de eso sale en ningún informe.</strong> Por eso se sigue invirtiendo donde no toca.</p>
+        <p class="fg-lead" style="margin-top:18px"><strong>Nada de eso sale en ningún informe.</strong> Por eso se sigue invirtiendo donde no toca. Antes de hacer más, conviene saber qué está frenando.</p>
       </div>
 
       <!-- 2 · cómo -->
       <div class="fg-sec">
         <p class="fg-eyebrow">Cómo funciona</p>
-        <h2 class="fg-big">Once preguntas. Un veredicto.</h2>
+        <h2 class="fg-big">Noventa segundos. Un veredicto.</h2>
         <ol class="fg-steps">
-          <li><span class="num">1</span><div><strong>Contestas once preguntas.</strong><span>Sobre lo que pasa en tu empresa un martes cualquiera. Ningún dato que buscar.</span></div></li>
+          <li><span class="num">1</span><div><strong>Nos cuentas qué pasa en tu empresa.</strong><span>Once respuestas sobre un martes cualquiera: qué ocurre cuando alguien pregunta, pide precio o no contesta. Nada que buscar.</span></div></li>
           <li><span class="num">2</span><div><strong>Puntuamos las cinco partes.</strong><span>Captación, conversión, seguimiento, dependencia y control. De 0 a 100, solo con tus respuestas.</span></div></li>
           <li><span class="num">3</span><div><strong>Te decimos dónde se rompe.</strong><span>La parte más floja es tu cuello de botella. Qué arreglar primero y qué hacer hoy.</span></div></li>
         </ol>
-        <div class="fg-mid"><button id="fg-start3" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button><p class="fg-mini">Gratis · sin registro · 90 segundos</p></div>
+        <div class="fg-mid"><button id="fg-start3" class="fg-cta">Ver qué frena mi empresa <span aria-hidden="true">→</span></button><p class="fg-mini">Gratis · sin registro · 90 segundos</p></div>
       </div>
 
       <!-- 3 · resultados -->
@@ -280,44 +283,32 @@
         </ul>
       </div>
 
-      <!-- 4 · qué te llevas + credibilidad -->
-      <div class="fg-sec fg-two">
-        <div>
-          <p class="fg-eyebrow">Qué te llevas</p>
-          <ul class="fg-check">
-            <li>Si tu problema es conseguir oportunidades o aprovechar las que ya tienes</li>
-            <li>Cuál de las cinco partes está frenando a las otras cuatro</li>
-            <li>Qué arreglar primero, y qué no tocar todavía aunque te apetezca</li>
-            <li>Una acción concreta para hoy</li>
-          </ul>
-        </div>
-        <div class="fg-quien">
-          <p class="fg-eyebrow">Quién lo ha hecho</p>
-          <p><strong>Maikel Echevarría</strong>, que se dedica a mirar por dentro sistemas de captación y ventas de empresas de dos a veinte personas. Las preguntas salen de lo que aparece una y otra vez al abrir una de estas empresas.</p>
-          <p>Sin promedios del sector inventados. El resultado sale de tus respuestas, te enseñamos cómo se calcula y cómo comprobar en una semana si ha acertado.</p>
-        </div>
+      <!-- 4 · confianza -->
+      <div class="fg-sec fg-trust">
+        <ul class="fg-chips"><li>Sin promedios inventados</li><li>Te enseñamos cómo se calcula</li><li>Cómo comprobarlo en una semana</li><li>Sin llamadas comerciales</li></ul>
+        <p><strong>Lo ha hecho Maikel Echevarría</strong>, que se dedica a mirar por dentro sistemas de captación y ventas de empresas de dos a veinte personas. Las preguntas salen de lo que aparece una y otra vez al abrir una de estas empresas. El resultado sale solo de tus respuestas.</p>
       </div>
 
       <!-- 5 · cierre -->
       <div class="fg-final">
         <h2>Puede que tu problema no sea conseguir más clientes.</h2>
-        <p>Once preguntas y lo sabes.</p>
-        <button id="fg-start2" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button>
+        <p>Noventa segundos y lo sabes.</p>
+        <button id="fg-start2" class="fg-cta">Ver qué frena mi empresa <span aria-hidden="true">→</span></button>
         <p class="fg-mini">Sin registro. El resultado sale en pantalla.</p>
       </div>
 
       <div class="fg-sec">
         <h2>Preguntas frecuentes</h2>
-        <details class="faq-item"><summary>¿Cuánto tarda de verdad?</summary><p>Entre noventa segundos y dos minutos. Once preguntas, una por pantalla, que se contestan con lo que ya sabes de tu empresa. Si tardas más es que te has parado a pensar, y eso ya es parte del valor.</p></details>
+        <details class="faq-item"><summary>¿Cuánto tarda de verdad?</summary><p>Entre noventa segundos y dos minutos. Se contesta con lo que ya sabes de tu empresa, una cosa por pantalla. Si tardas más es que te has parado a pensar, y eso ya es parte del valor.</p></details>
         <details class="faq-item"><summary>¿Tengo que dar mi correo? ¿Me vais a llamar?</summary><p>Para ver el resultado no, y no te llamamos. Solo si quieres además la radiografía ampliada (las cinco partes explicadas, la segunda más floja, cómo comprobar que acierta y un plan de treinta días) te pedimos el correo.</p></details>
         <details class="faq-item"><summary>¿Qué hacéis con mis datos?</summary><p>Si dejas el correo, te llega la radiografía y después algunos correos sobre tu cuello de botella concreto. Te puedes dar de baja en cualquiera. No se los damos a nadie. Más detalle en <a href="/privacidad/">privacidad</a>.</p></details>
-        <details class="faq-item"><summary>¿Sirve si mi problema es que no me llegan clientes?</summary><p>Sí. Tres de las once preguntas miden captación: si te llegan suficientes oportunidades, si puedes generarlas cuando quieres y si te encuentran. Si el problema es la demanda, el diagnóstico lo dice.</p></details>
+        <details class="faq-item"><summary>¿Sirve si mi problema es que no me llegan clientes?</summary><p>Sí. Una de las cinco partes que miramos es captación: si te llega suficiente gente, si puedes generarla cuando quieres y si te encuentran. Si el problema es la demanda, el diagnóstico lo dice. Y si no lo es, también.</p></details>
         <details class="faq-item"><summary>¿Ya sé lo que me pasa?</summary><p>Puede. La mayoría acierta con su primer cuello de botella. Casi nadie acierta con el segundo, y suele ser el que sostiene al primero.</p></details>
         <details class="faq-item"><summary>¿Esto es para empresas grandes?</summary><p>Al revés. Está pensado para negocios de dos a veinte personas donde el dueño todavía vende. Al final te proponemos dar un paso más si quieres; no hace falta para tener tu resultado.</p></details>
       </div>
       </div>
 
-      <div id="fg-sticky" class="fg-sticky" hidden><button id="fg-start4" class="fg-cta">Ver dónde se me rompe <span aria-hidden="true">→</span></button></div>
+      <div id="fg-sticky" class="fg-sticky" hidden><button id="fg-start4" class="fg-cta">Ver qué frena mi empresa <span aria-hidden="true">→</span></button></div>
     </section>
 
   <div class="fg-wrap" style="padding-top:clamp(36px,6vw,64px)">
@@ -339,8 +330,9 @@
       <p id="fg-cuello" class="fg-cuello"></p>
       <div id="fg-nivel" class="fg-nivel"></div>
       <h2 id="fg-title" class="fg-h" style="font-size:clamp(24px,4.8vw,36px); line-height:1.1; margin:0 0 22px"></h2>
-      <div id="fg-parcial" hidden style="margin:0 0 18px; padding:14px 18px; background:#FDF4E0; border-radius:12px; font-size:15px; line-height:1.6; color:#8A6206; font-weight:600">Has contestado <span id="fg-parcial-n"></span> de 11 preguntas. Este resultado sale de lo que llevas: si terminas, será más fiel.</div>
+      <div id="fg-parcial" hidden style="margin:0 0 18px; padding:14px 18px; background:#FDF4E0; border-radius:12px; font-size:15px; line-height:1.6; color:#8A6206; font-weight:600">Has contestado <span id="fg-parcial-n"></span> de 11. Este resultado sale de lo que llevas: si terminas, será más fiel.</div>
       <div class="fg-card">
+        <p id="fg-hostia" class="fg-hostia"></p>
         <p id="fg-diag" style="margin:0; font-size:17px; line-height:1.7; color:var(--qv-ink-soft)"></p>
         <div class="fg-block"><p class="lbl">Tu prioridad</p><p id="fg-prio"></p></div>
         <div class="fg-block"><p class="lbl">Antes de hacer otra cosa</p><p id="fg-antes"></p></div>
@@ -355,10 +347,10 @@
       <a id="fg-calc" class="fg-paso" href="/calculadora-de-fugas/" hidden>Ponerle un número: calcula con tus datos cuánto se te está escapando al año →</a>
       <div class="fg-actions">
         <button id="fg-sharebtn" class="fg-share">Mándaselo a tu socio: a ver qué le sale</button>
-        <div class="fg-share-mini"><button id="fg-linkedin" type="button">Compartir en LinkedIn</button><button id="fg-descargar" type="button">Descargar mi tarjeta</button></div>
-        <button id="fg-gatebtn" class="btn-teal">Enviarme la radiografía completa →</button>
+        <div class="fg-share-mini"><button id="fg-whatsapp" type="button">WhatsApp</button><button id="fg-linkedin" type="button">LinkedIn</button><button id="fg-descargar" type="button">Descargar mi tarjeta</button></div>
+        <button id="fg-gatebtn" class="btn-teal">Quiero el plan de 30 días para arreglarlo →</button>
       </div>
-      <p class="fg-mini">La radiografía explica las cinco partes, la segunda más floja, cómo comprobar que esto acierta y un plan de treinta días.</p>
+      <p class="fg-mini">Te llega por correo: las cinco partes explicadas, cómo comprobar en una semana que esto acierta y los tres movimientos en orden.</p>
       <div style="margin-top:14px; text-align:center"><button id="fg-seguir" class="fg-back" style="color:var(--qv-teal)">← Volver y terminar las preguntas que faltan</button></div>
       <canvas id="fg-canvas" width="1080" height="1350"></canvas>
     </section>
@@ -366,8 +358,8 @@
     <!-- ░░ GATE ░░ -->
     <section id="fg-gate" hidden>
       <div class="fg-card">
-        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">La radiografía completa</h2>
-        <p style="margin:0 0 24px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Lo que acabas de ver es la foto. En la radiografía va el detalle: las cinco partes de tu sistema explicadas una a una, <strong>la segunda que peor tienes</strong> (que suele sorprender más que la primera), cómo comprobar en una semana que esto acierta, y los tres primeros movimientos en orden para los próximos treinta días.</p>
+        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">Tu plan de 30 días para <span id="fg-gate-dim"></span></h2>
+        <p style="margin:0 0 24px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Lo que acabas de ver es la foto. Por correo te llega la radiografía completa: <strong>los tres movimientos en orden</strong> para los próximos treinta días, las cinco partes de tu sistema explicadas una a una, por qué la segunda más floja suele sostener a la primera, y cómo comprobar en una semana que esto acierta.</p>
         <form id="fg-form" novalidate style="display:flex; flex-direction:column; gap:16px">
           <label style="display:block">
             <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">Nombre</span>
@@ -400,7 +392,7 @@
             <label>No rellenar<input type="text" id="fg-website" tabindex="-1" autocomplete="off"></label>
           </div>
           <p id="fg-error" hidden style="margin:0; font-size:14px; color:#C2410C; font-weight:700; line-height:1.5"></p>
-          <button type="submit" id="fg-submit" class="btn-teal">Enviarme la radiografía</button>
+          <button type="submit" id="fg-submit" class="btn-teal">Enviarme el plan y la radiografía</button>
           <p class="fg-mini" style="margin:0">Sin llamadas comerciales. Te das de baja en un clic.</p>
         </form>
         <div style="margin-top:18px"><button id="fg-gateback" class="fg-back">← Volver a mi resultado</button></div>
@@ -410,12 +402,12 @@
     <!-- ░░ GRACIAS ░░ -->
     <section id="fg-thanks" hidden>
       <div class="fg-card">
-        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">Hecho. La radiografía va para tu correo.</h2>
-        <p style="margin:0 0 26px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Llega en unos minutos. Si no la ves, mira en promociones o spam.</p>
+        <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">Hecho. El plan va para tu correo.</h2>
+        <p style="margin:0 0 26px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Llega en unos minutos. Si no lo ves, mira en promociones o spam.</p>
         <div class="fg-block" style="border-top:none; padding-top:0; margin-top:0">
           <p class="lbl">Y ahora</p>
-          <p style="margin:0 0 20px"><strong>Ya sabes dónde está el cuello de botella.</strong> La siguiente pregunta es qué deberías arreglar primero y cuánto te está costando no hacerlo.</p>
-          <a href="/diagnostico/?origen=dx" class="btn-dark btn-nav">Ver mi radiografía de crecimiento →</a>
+          <p style="margin:0 0 20px"><strong>Ya sabes dónde se rompe.</strong> La siguiente pregunta es qué arreglar primero y cuánto te está costando no hacerlo. Eso lo miramos contigo, con tus números.</p>
+          <a href="/diagnostico/?origen=dx" class="btn-dark btn-nav" data-radiografia="gracias">Decidir qué arreglar primero →</a>
         </div>
       </div>
       <div style="margin-top:22px; text-align:center"><button id="fg-sharebtn2" class="fg-share" style="width:100%">Mándaselo a tu socio: a ver qué le sale</button></div>
