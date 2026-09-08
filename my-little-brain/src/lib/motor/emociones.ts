@@ -201,9 +201,15 @@ export function diasSenalados(
   dias: Dia[],
   emocionesPorDia: { fecha: string; emociones: string[] }[],
   cuantos = 2,
+  /**
+   * Dias minimos para atreverse a señalar uno. En 30 dias pedimos tres; en una
+   * semana bastan dos, porque el martes solo llevas dos y "tu mejor dia hasta
+   * ahora" sigue siendo verdad.
+   */
+  minimo = 3,
 ): { mejores: DiaSenalado[]; peores: DiaSenalado[] } {
   const conAnimo = dias.filter((d) => d.animo !== null);
-  if (conAnimo.length < 3) return { mejores: [], peores: [] };
+  if (conAnimo.length < minimo) return { mejores: [], peores: [] };
 
   const monta = (d: Dia): DiaSenalado => ({
     fecha: d.fecha,
@@ -263,7 +269,7 @@ export function semanaEmocional(
     for (const id of e.emociones) cuenta.set(id, (cuenta.get(id) ?? 0) + 1);
   }
 
-  const senalados = diasSenalados(rango, emocionesPorDia, 1);
+  const senalados = diasSenalados(rango, emocionesPorDia, 1, 2);
 
   return {
     animoMedio: animoAhora === null ? null : Math.round(animoAhora * 10) / 10,

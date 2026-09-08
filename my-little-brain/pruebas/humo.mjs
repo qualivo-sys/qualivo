@@ -796,6 +796,7 @@ check('trae las emociones de ese dia', sen.mejores[0].emociones.map((e) => e.id)
 check('y el mas flojo, con lo suyo', sen.peores[0].fecha === '2026-09-10' && sen.peores[0].animo === 3 && /alcohol/.test(sen.peores[0].porque.join(' ')), JSON.stringify(sen.peores[0]));
 check('un dia no sale a la vez como mejor y como peor', sen.mejores.every((m) => !sen.peores.some((x) => x.fecha === m.fecha)));
 check('con menos de tres dias no senala nada', diasSenalados(semanaDias.slice(0, 2), emosPorDia).mejores.length === 0);
+check('pero en la semana bastan dos dias', diasSenalados(semanaDias.slice(0, 2), emosPorDia, 1, 2).mejores.length === 1);
 check('los dias sin animo no cuentan', diasSenalados([diaA('2026-09-01'), diaA('2026-09-02'), diaA('2026-09-03')], []).mejores.length === 0);
 const empate = diasSenalados([diaA('2026-09-01', { animo: 7 }), diaA('2026-09-05', { animo: 7 }), diaA('2026-09-03', { animo: 2 })], [], 1);
 check('a igual animo, gana el mas reciente', empate.mejores[0].fecha === '2026-09-05', empate.mejores[0].fecha);
@@ -810,6 +811,8 @@ check('da el mejor y el peor dia de la semana', se.mejor?.fecha === '2026-09-08'
 check('y las emociones que mas se han repetido', se.frecuentes.length === 3 && se.frecuentes.every((f) => f.veces === 1));
 const sinAnterior = semanaEmocional(semanaDias, emosPorDia, '2026-09-07', '2026-09-13');
 check('sin semana anterior no inventa una comparacion', sinAnterior.cambioAnimo === null);
+const dosDias = semanaEmocional([...anteriores, diaA('2026-09-07', { animo: 4 }), diaA('2026-09-08', { animo: 8, entreno: true })], [], '2026-09-07', '2026-09-13');
+check('con dos dias la semana ya senala el mejor y el peor', dosDias.mejor?.fecha === '2026-09-08' && dosDias.peor?.fecha === '2026-09-07', JSON.stringify({ m: dosDias.mejor?.fecha, p: dosDias.peor?.fecha }));
 const soloUno = semanaEmocional([...anteriores.slice(0, 1), ...semanaDias], emosPorDia, '2026-09-07', '2026-09-13');
 check('con un solo dia anterior tampoco compara', soloUno.cambioAnimo === null);
 // Un dia bueno no es una semana mejor: hacen falta dos a cada lado.
