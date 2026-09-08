@@ -188,7 +188,9 @@ export default async function PaginaSemana() {
             ))}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Media de los {porDentro.diasRegistrados} {porDentro.diasRegistrados === 1 ? 'dia registrado' : 'dias registrados'} esta semana.
+            {porDentro.diasRegistrados === 1
+              ? 'Solo con un dia registrado esta semana.'
+              : `Media de los ${porDentro.diasRegistrados} dias registrados esta semana.`}
           </p>
 
           {/* Los dias con nombre: de eso uno se acuerda, de una media no. */}

@@ -250,9 +250,13 @@ export function semanaEmocional(
   const conAnimo = rango.filter((d) => d.animo !== null);
 
   // La semana anterior son los siete dias justo antes del lunes de esta.
+  // Hacen falta dos dias en CADA lado: con un dia suelto, una jornada buena
+  // se leeria como "+3 respecto a la semana pasada", y eso no es verdad.
   const anterior = dias.filter((d) => d.fecha < desde && d.fecha >= restar7(desde) && d.animo !== null);
   const animoAhora = media(conAnimo.map((d) => d.animo!));
-  const animoAntes = anterior.length >= 2 ? media(anterior.map((d) => d.animo!)) : null;
+  const animoAntes = anterior.length >= 2 && conAnimo.length >= 2
+    ? media(anterior.map((d) => d.animo!))
+    : null;
 
   const cuenta = new Map<string, number>();
   for (const e of emocionesPorDia.filter((e) => e.fecha >= desde && e.fecha <= hasta)) {

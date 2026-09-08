@@ -812,6 +812,9 @@ const sinAnterior = semanaEmocional(semanaDias, emosPorDia, '2026-09-07', '2026-
 check('sin semana anterior no inventa una comparacion', sinAnterior.cambioAnimo === null);
 const soloUno = semanaEmocional([...anteriores.slice(0, 1), ...semanaDias], emosPorDia, '2026-09-07', '2026-09-13');
 check('con un solo dia anterior tampoco compara', soloUno.cambioAnimo === null);
+// Un dia bueno no es una semana mejor: hacen falta dos a cada lado.
+const unDiaEstaSemana = semanaEmocional([...anteriores, diaA('2026-09-08', { animo: 10 })], [], '2026-09-07', '2026-09-13');
+check('con un solo dia esta semana no compara con la anterior', unDiaEstaSemana.cambioAnimo === null && unDiaEstaSemana.animoMedio === 10, JSON.stringify(unDiaEstaSemana));
 const vaciaSem = semanaEmocional([diaA('2026-09-07')], [], '2026-09-07', '2026-09-13');
 check('una semana sin registrar no da medias falsas', vaciaSem.animoMedio === null && vaciaSem.diasRegistrados === 0 && vaciaSem.mejor === null);
 
