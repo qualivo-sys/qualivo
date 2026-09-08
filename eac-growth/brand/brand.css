@@ -1,0 +1,60 @@
+/* ============================================================
+   EAC · Escola Aeronàutica de Catalunya — Brand tokens
+   Motor de Crecimiento Qualivo · marca para blog + lead magnets
+   Estética: aviación · profesional · aspiracional pero con datos
+   ============================================================ */
+:root{
+  /* Color — negro + rojo EAC, con azul cielo de apoyo */
+  --eac-ink:      #0E1621;   /* casi-negro azulado (cielo de noche) — textos y héroe */
+  --eac-ink-2:    #1B2635;   /* superficies oscuras secundarias */
+  --eac-red:      #D8232A;   /* rojo EAC — acentos, CTAs, subrayados */
+  --eac-red-dark: #A81820;   /* hover de CTA */
+  --eac-sky:      #1E6FE0;   /* azul cielo — enlaces, datos */
+  --eac-paper:    #FFFFFF;   /* fondo de lectura */
+  --eac-mist:     #F4F6F9;   /* fondos de sección / tarjetas */
+  --eac-line:     #E4E8EE;   /* bordes sutiles */
+  --eac-muted:    #5B6675;   /* texto secundario / notas */
+  --eac-good:     #12854F;   /* éxitos / datos positivos */
+
+  /* Tipografía — titular con carácter, cuerpo legible */
+  --eac-font-head: "Montserrat", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --eac-font-body: "Inter", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+  /* Escala y ritmo */
+  --eac-maxw: 760px;          /* ancho de lectura del artículo */
+  --eac-radius: 12px;
+  --eac-shadow: 0 6px 24px rgba(14,22,33,.08);
+}
+
+/* Base de artículo */
+.eac-article{max-width:var(--eac-maxw);margin:0 auto;padding:24px;
+  font-family:var(--eac-font-body);color:var(--eac-ink);font-size:18px;line-height:1.7}
+.eac-article h1{font-family:var(--eac-font-head);font-weight:800;font-size:clamp(30px,5vw,44px);
+  line-height:1.12;letter-spacing:-.02em;margin:.2em 0 .4em}
+.eac-article h2{font-family:var(--eac-font-head);font-weight:700;font-size:clamp(23px,3.5vw,30px);
+  margin:1.6em 0 .5em;padding-top:.3em;border-top:3px solid var(--eac-red);display:inline-block}
+.eac-article h3{font-family:var(--eac-font-head);font-weight:700;font-size:20px;margin:1.3em 0 .4em}
+.eac-article a{color:var(--eac-sky);text-decoration:underline;text-underline-offset:2px}
+.eac-article strong{color:var(--eac-ink)}
+.eac-article blockquote{border-left:4px solid var(--eac-red);background:var(--eac-mist);
+  margin:1.2em 0;padding:.8em 1.1em;border-radius:0 var(--eac-radius) var(--eac-radius) 0;color:var(--eac-ink)}
+
+/* Índice / recap */
+.eac-toc,.eac-recap{background:var(--eac-mist);border:1px solid var(--eac-line);
+  border-radius:var(--eac-radius);padding:16px 20px;margin:1.4em 0}
+.eac-toc strong,.eac-recap strong{font-family:var(--eac-font-head);color:var(--eac-ink)}
+
+/* CTA a lead magnet */
+.eac-cta{display:block;background:var(--eac-ink);color:#fff;border-radius:var(--eac-radius);
+  padding:24px;margin:2em 0;box-shadow:var(--eac-shadow);text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .3em;font-family:var(--eac-font-head)}
+.eac-cta p{color:#C7D0DC;margin:0 0 1em}
+.eac-cta a.eac-btn{display:inline-block;background:var(--eac-red);color:#fff;text-decoration:none;
+  font-family:var(--eac-font-head);font-weight:700;padding:14px 28px;border-radius:999px;transition:background .15s}
+.eac-cta a.eac-btn:hover{background:var(--eac-red-dark)}
+
+/* Tarjeta de dato (píldora aspiracional pero con cifra real) */
+.eac-stat{display:inline-flex;flex-direction:column;background:var(--eac-mist);border:1px solid var(--eac-line);
+  border-radius:var(--eac-radius);padding:14px 18px;margin:.3em .3em .3em 0}
+.eac-stat b{font-family:var(--eac-font-head);font-size:26px;color:var(--eac-red)}
+.eac-stat span{font-size:13px;color:var(--eac-muted)}
