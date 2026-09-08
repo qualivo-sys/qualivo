@@ -170,6 +170,118 @@ export function perfilDeDias(dias: Dia[], minimo = 8): { buenos: FactorDia[]; ma
   };
 }
 
+// ── Los dias concretos ────────────────────────────────────────────────
+
+export interface DiaSenalado {
+  fecha: string;
+  animo: number;
+  emociones: Emocion[];
+  /** Que tenia ese dia de particular, en palabras: "entreno, 8 h de sueno". */
+  porque: string[];
+}
+
+/** Lo que hace que un dia se distinga, para poder contarlo sin dar una tabla. */
+function loQueTenia(d: Dia): string[] {
+  const partes: string[] = [];
+  if (d.entreno) partes.push('entreno');
+  else if (d.actividad) partes.push(d.nombresActividad[0] ?? 'actividad');
+  if (d.suenoHoras !== null) partes.push(`${String(d.suenoHoras).replace('.', ',')} h de sueno`);
+  if (d.focoMin >= 60) partes.push(`${Math.round(d.focoMin / 60)} h de foco`);
+  if (d.alcoholUd > 0) partes.push(`${d.alcoholUd} ud de alcohol`);
+  if ((d.pasos ?? 0) >= 10000) partes.push(`${Math.round((d.pasos ?? 0) / 1000)} mil pasos`);
+  return partes;
+}
+
+/**
+ * Los mejores y peores dias con nombre y apellidos. El perfil de factores dice
+ * "tus buenos dias llevan entreno"; esto dice "el jueves 4 estuviste a 9 y ese
+ * dia entrenaste y dormiste 8 h". Lo segundo se recuerda, lo primero no.
+ */
+export function diasSenalados(
+  dias: Dia[],
+  emocionesPorDia: { fecha: string; emociones: string[] }[],
+  cuantos = 2,
+): { mejores: DiaSenalado[]; peores: DiaSenalado[] } {
+  const conAnimo = dias.filter((d) => d.animo !== null);
+  if (conAnimo.length < 3) return { mejores: [], peores: [] };
+
+  const monta = (d: Dia): DiaSenalado => ({
+    fecha: d.fecha,
+    animo: d.animo!,
+    emociones: (emocionesPorDia.find((e) => e.fecha === d.fecha)?.emociones ?? []).map(emocion),
+    porque: loQueTenia(d),
+  });
+
+  // A igual animo, el mas reciente primero: es del que uno se acuerda.
+  const orden = [...conAnimo].sort((a, b) => (b.animo! - a.animo!) || (a.fecha < b.fecha ? 1 : -1));
+  const mejores = orden.slice(0, cuantos).map(monta);
+  const peores = [...orden].reverse().slice(0, cuantos).map(monta);
+
+  // Con pocos dias, el mejor y el peor pueden ser el mismo: no se repite.
+  const usados = new Set(mejores.map((d) => d.fecha));
+  return { mejores, peores: peores.filter((d) => !usados.has(d.fecha)) };
+}
+
+// ── La semana emocional ───────────────────────────────────────────────
+
+export interface SemanaEmocional {
+  animoMedio: number | null;
+  energiaMedia: number | null;
+  estresMedio: number | null;
+  /** Diferencia de animo con la semana anterior. null si no hay con que comparar. */
+  cambioAnimo: number | null;
+  diasRegistrados: number;
+  mejor: DiaSenalado | null;
+  peor: DiaSenalado | null;
+  frecuentes: { emocion: Emocion; veces: number }[];
+}
+
+/**
+ * Como ha ido la semana por dentro, comparada con la anterior. La comparacion
+ * es contra uno mismo: no hay un animo "correcto" al que llegar.
+ */
+export function semanaEmocional(
+  dias: Dia[],
+  emocionesPorDia: { fecha: string; emociones: string[] }[],
+  desde: string,
+  hasta: string,
+): SemanaEmocional {
+  const rango = dias.filter((d) => d.fecha >= desde && d.fecha <= hasta);
+  const conAnimo = rango.filter((d) => d.animo !== null);
+
+  // La semana anterior son los siete dias justo antes del lunes de esta.
+  const anterior = dias.filter((d) => d.fecha < desde && d.fecha >= restar7(desde) && d.animo !== null);
+  const animoAhora = media(conAnimo.map((d) => d.animo!));
+  const animoAntes = anterior.length >= 2 ? media(anterior.map((d) => d.animo!)) : null;
+
+  const cuenta = new Map<string, number>();
+  for (const e of emocionesPorDia.filter((e) => e.fecha >= desde && e.fecha <= hasta)) {
+    for (const id of e.emociones) cuenta.set(id, (cuenta.get(id) ?? 0) + 1);
+  }
+
+  const senalados = diasSenalados(rango, emocionesPorDia, 1);
+
+  return {
+    animoMedio: animoAhora === null ? null : Math.round(animoAhora * 10) / 10,
+    energiaMedia: redondea(media(rango.map((d) => d.energia).filter((v): v is number => v !== null))),
+    estresMedio: redondea(media(rango.map((d) => d.estres).filter((v): v is number => v !== null))),
+    cambioAnimo: animoAhora === null || animoAntes === null ? null : Math.round((animoAhora - animoAntes) * 10) / 10,
+    diasRegistrados: conAnimo.length,
+    mejor: senalados.mejores[0] ?? null,
+    peor: senalados.peores[0] ?? null,
+    frecuentes: [...cuenta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id, veces]) => ({ emocion: emocion(id), veces })),
+  };
+}
+
+const redondea = (v: number | null) => (v === null ? null : Math.round(v * 10) / 10);
+
+/** Siete dias antes, sin depender del modulo de fechas para no cruzar capas. */
+function restar7(fechaIso: string): string {
+  const d = new Date(fechaIso + 'T12:00:00');
+  d.setDate(d.getDate() - 7);
+  return d.toISOString().slice(0, 10);
+}
+
 // ── Resumen y evidencias ──────────────────────────────────────────────
 
 export interface ResumenEmocional {

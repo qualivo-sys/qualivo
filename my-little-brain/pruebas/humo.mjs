@@ -773,5 +773,47 @@ check('en los automaticos guarda de donde partes sin preguntartelo',
   supabase.db.tablas.objetivos.find((o) => o.titulo === 'Bajar a 78')?.valor_inicial === 82.4,
   JSON.stringify(supabase.db.tablas.objetivos.find((o) => o.titulo === 'Bajar a 78')));
 
+// ── 20. El animo con nombre y apellidos ────────────────────────────────
+const { diasSenalados, semanaEmocional } = await import(`${L}/motor/emociones.js`);
+
+const diaA = (fecha, extra = {}) => diaMock(fecha, { animo: null, energia: null, estres: null, suenoHoras: null, focoMin: 0, entreno: false, actividad: false, pasos: null, alcoholUd: 0, ...extra });
+const semanaDias = [
+  diaA('2026-09-07', { animo: 5, energia: 5, estres: 6, suenoHoras: 6 }),
+  diaA('2026-09-08', { animo: 9, energia: 8, estres: 3, entreno: true, suenoHoras: 8, focoMin: 120 }),
+  diaA('2026-09-09', { animo: 7, energia: 7, estres: 4 }),
+  diaA('2026-09-10', { animo: 3, energia: 3, estres: 8, alcoholUd: 3 }),
+  diaA('2026-09-11', { animo: 6, energia: 6, estres: 5 }),
+];
+const emosPorDia = [
+  { fecha: '2026-09-08', emociones: ['feliz', 'motivado'] },
+  { fecha: '2026-09-10', emociones: ['agobiado'] },
+];
+
+const sen = diasSenalados(semanaDias, emosPorDia);
+check('senala el mejor dia por su fecha y su animo', sen.mejores[0].fecha === '2026-09-08' && sen.mejores[0].animo === 9, JSON.stringify(sen.mejores[0]));
+check('y cuenta que tenia ese dia', sen.mejores[0].porque.join(', ') === 'entreno, 8 h de sueno, 2 h de foco', sen.mejores[0].porque.join(', '));
+check('trae las emociones de ese dia', sen.mejores[0].emociones.map((e) => e.id).join() === 'feliz,motivado');
+check('y el mas flojo, con lo suyo', sen.peores[0].fecha === '2026-09-10' && sen.peores[0].animo === 3 && /alcohol/.test(sen.peores[0].porque.join(' ')), JSON.stringify(sen.peores[0]));
+check('un dia no sale a la vez como mejor y como peor', sen.mejores.every((m) => !sen.peores.some((x) => x.fecha === m.fecha)));
+check('con menos de tres dias no senala nada', diasSenalados(semanaDias.slice(0, 2), emosPorDia).mejores.length === 0);
+check('los dias sin animo no cuentan', diasSenalados([diaA('2026-09-01'), diaA('2026-09-02'), diaA('2026-09-03')], []).mejores.length === 0);
+const empate = diasSenalados([diaA('2026-09-01', { animo: 7 }), diaA('2026-09-05', { animo: 7 }), diaA('2026-09-03', { animo: 2 })], [], 1);
+check('a igual animo, gana el mas reciente', empate.mejores[0].fecha === '2026-09-05', empate.mejores[0].fecha);
+
+// La semana, comparada consigo misma
+const anteriores = ['2026-08-31', '2026-09-01', '2026-09-02', '2026-09-03'].map((f) => diaA(f, { animo: 4, energia: 4, estres: 7 }));
+const se = semanaEmocional([...anteriores, ...semanaDias], emosPorDia, '2026-09-07', '2026-09-13');
+check('resume el animo de la semana', se.animoMedio === 6 && se.diasRegistrados === 5, JSON.stringify({ a: se.animoMedio, d: se.diasRegistrados }));
+check('lo compara con la semana anterior', se.cambioAnimo === 2, String(se.cambioAnimo));
+check('trae tambien energia y estres', se.energiaMedia === 5.8 && se.estresMedio === 5.2, JSON.stringify({ e: se.energiaMedia, s: se.estresMedio }));
+check('da el mejor y el peor dia de la semana', se.mejor?.fecha === '2026-09-08' && se.peor?.fecha === '2026-09-10', JSON.stringify({ m: se.mejor?.fecha, p: se.peor?.fecha }));
+check('y las emociones que mas se han repetido', se.frecuentes.length === 3 && se.frecuentes.every((f) => f.veces === 1));
+const sinAnterior = semanaEmocional(semanaDias, emosPorDia, '2026-09-07', '2026-09-13');
+check('sin semana anterior no inventa una comparacion', sinAnterior.cambioAnimo === null);
+const soloUno = semanaEmocional([...anteriores.slice(0, 1), ...semanaDias], emosPorDia, '2026-09-07', '2026-09-13');
+check('con un solo dia anterior tampoco compara', soloUno.cambioAnimo === null);
+const vaciaSem = semanaEmocional([diaA('2026-09-07')], [], '2026-09-07', '2026-09-13');
+check('una semana sin registrar no da medias falsas', vaciaSem.animoMedio === null && vaciaSem.diasRegistrados === 0 && vaciaSem.mejor === null);
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

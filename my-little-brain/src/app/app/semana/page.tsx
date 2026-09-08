@@ -6,7 +6,7 @@ import { borrarActividad, registrarActividad } from '@/app/app/acciones';
 import { TIPOS_CARDIO } from '@/lib/motor/cardio';
 import { esActividad } from '@/lib/motor/energia';
 import { insightsFinanzas, resumenFinanzas, revisionSemana } from '@/lib/motor/finanzas';
-import { evidenciasSemana, patronesEmocionales, resumenEmocional } from '@/lib/motor/emociones';
+import { evidenciasSemana, patronesEmocionales, resumenEmocional, semanaEmocional } from '@/lib/motor/emociones';
 import { cargarFinanzas, cargarMente, cargarPanel } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import { estadisticasSemana } from '@/lib/ia/revision';
@@ -57,6 +57,7 @@ export default async function PaginaSemana() {
   // Semana emocional: como ha ido, que hojas hay y las pruebas de progreso.
   const mente = await cargarMente(supabase, usuario.id, panel.hoy);
   const emocional = resumenEmocional(panel.dias, mente.emociones, mente.hojas, semanaActual, panel.hoy);
+  const porDentro = semanaEmocional(panel.dias, mente.emociones, semanaActual, panel.hoy);
   const evidencias = evidenciasSemana({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, desde: semanaActual, hasta: panel.hoy });
   const patronesMente = patronesEmocionales({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, hoy: panel.hoy }).slice(0, 2);
 
@@ -170,16 +171,51 @@ export default async function PaginaSemana() {
           </div>
           <div className="grid grid-cols-3 gap-2 text-center">
             {[
-              ['Animo', emocional.animoMedio],
-              ['Energia', emocional.energiaMedia],
-              ['Estres', emocional.estresMedio],
-            ].map(([etiqueta, valor]) => (
+              ['Animo', emocional.animoMedio, porDentro.cambioAnimo],
+              ['Energia', emocional.energiaMedia, null],
+              ['Estres', emocional.estresMedio, null],
+            ].map(([etiqueta, valor, cambio]) => (
               <div key={etiqueta as string} className="rounded-lg bg-muted/40 p-3">
                 <div className="text-lg font-semibold tabular-nums">{valor === null ? '—' : (valor as number).toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground">{etiqueta as string}</div>
+                {/* Comparado contigo mismo: no hay un animo "correcto" al que llegar. */}
+                {cambio !== null && cambio !== 0 && (
+                  <div className={`text-[10px] tabular-nums ${(cambio as number) > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground'}`}>
+                    {(cambio as number) > 0 ? '+' : ''}{(cambio as number).toFixed(1)} vs la pasada
+                  </div>
+                )}
               </div>
             ))}
           </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Media de los {porDentro.diasRegistrados} {porDentro.diasRegistrados === 1 ? 'dia registrado' : 'dias registrados'} esta semana.
+          </p>
+
+          {/* Los dias con nombre: de eso uno se acuerda, de una media no. */}
+          {(porDentro.mejor || porDentro.peor) && (
+            <ul className="mt-3 space-y-2 border-t border-border pt-3 text-sm">
+              {porDentro.mejor && (
+                <li>
+                  <span className="text-emerald-700 dark:text-emerald-300">Tu mejor dia</span>{' '}
+                  fue el {fechaCorta(porDentro.mejor.fecha)} ({porDentro.mejor.animo}/10)
+                  {porDentro.mejor.emociones.length > 0 && `: ${porDentro.mejor.emociones.map((e) => `${e.emoji} ${e.nombre.toLowerCase()}`).join(', ')}`}.
+                  {porDentro.mejor.porque.length > 0 && (
+                    <span className="text-muted-foreground"> Ese dia: {porDentro.mejor.porque.join(', ')}.</span>
+                  )}
+                </li>
+              )}
+              {porDentro.peor && (
+                <li>
+                  <span className="text-muted-foreground">El mas flojo</span>{' '}
+                  fue el {fechaCorta(porDentro.peor.fecha)} ({porDentro.peor.animo}/10)
+                  {porDentro.peor.emociones.length > 0 && `: ${porDentro.peor.emociones.map((e) => `${e.emoji} ${e.nombre.toLowerCase()}`).join(', ')}`}.
+                  {porDentro.peor.porque.length > 0 && (
+                    <span className="text-muted-foreground"> Ese dia: {porDentro.peor.porque.join(', ')}.</span>
+                  )}
+                </li>
+              )}
+            </ul>
+          )}
 
           {emocional.frecuentes.length > 0 && (
             <p className="mt-3 text-sm">

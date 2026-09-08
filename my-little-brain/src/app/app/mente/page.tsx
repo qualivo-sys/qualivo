@@ -8,6 +8,7 @@ import { cargarMente, cargarPanel, cargarTiempo } from '@/lib/datos';
 import { fechaCorta, inicioSemana, sumarDias } from '@/lib/fechas';
 import {
   TEMAS,
+  diasSenalados,
   evidenciasSemana,
   patronesEmocionales,
   perfilDeDias,
@@ -40,6 +41,8 @@ export default async function PaginaMente() {
   const resumen = resumenEmocional(panel.dias, mente.emociones, mente.hojas, sumarDias(panel.hoy, -29), panel.hoy);
   const patrones = patronesEmocionales({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, hoy: panel.hoy });
   const perfilDias = perfilDeDias(panel.dias);
+  const ultimos30 = panel.dias.slice(-30);
+  const senalados = diasSenalados(ultimos30, mente.emociones);
   const evidencias = evidenciasSemana({ dias: panel.dias, diario: mente.diario, hojas: mente.hojas, desde: lunes, hasta: panel.hoy });
   const entrada = mente.entradaDeHoy;
   const abiertas = resumen.hojasAbiertas;
@@ -82,12 +85,55 @@ export default async function PaginaMente() {
             ))}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">Media de los ultimos 30 dias ({resumen.diasRegistrados} registrados).</p>
+
+          {/* El animo dia a dia: una media esconde si has estado estable o a saltos. */}
+          <div className="mt-3 flex h-16 items-end gap-0.5">
+            {ultimos30.map((d) => (
+              <div key={d.fecha} className="flex h-full flex-1 flex-col justify-end" title={`${fechaCorta(d.fecha)}: ${d.animo ?? '—'}/10`}>
+                <div
+                  className={`w-full rounded-t ${
+                    d.animo === null ? 'bg-muted' : d.animo >= 7 ? 'bg-emerald-500/70' : d.animo >= 5 ? 'bg-[hsl(var(--area-mente))]/70' : 'bg-amber-500/70'
+                  }`}
+                  style={{ height: d.animo === null ? '8%' : `${(d.animo / 10) * 100}%` }}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-1 flex justify-between text-[10px] text-muted-foreground">
+            <span>{fechaCorta(ultimos30[0]?.fecha ?? panel.hoy)}</span>
+            <span>hoy</span>
+          </div>
+
           {resumen.frecuentes.length > 0 && (
-            <p className="mt-2 text-sm">
+            <p className="mt-3 text-sm">
               Lo que mas se repite:{' '}
               {resumen.frecuentes.slice(0, 3).map((f) => `${f.emocion.emoji} ${f.emocion.nombre.toLowerCase()} (${f.veces})`).join(' · ')}
             </p>
           )}
+
+          {(senalados.mejores.length > 0 || senalados.peores.length > 0) && (
+            <ul className="mt-3 space-y-2 border-t border-border pt-3 text-sm">
+              {senalados.mejores.map((d) => (
+                <li key={d.fecha}>
+                  <span className="text-emerald-700 dark:text-emerald-300">{fechaCorta(d.fecha)}</span>{' '}
+                  · {d.animo}/10
+                  {d.emociones.length > 0 && ` · ${d.emociones.map((e) => `${e.emoji} ${e.nombre.toLowerCase()}`).join(', ')}`}
+                  {d.porque.length > 0 && <span className="text-muted-foreground"> · {d.porque.join(', ')}</span>}
+                </li>
+              ))}
+              {senalados.peores.map((d) => (
+                <li key={d.fecha} className="text-muted-foreground">
+                  <span>{fechaCorta(d.fecha)}</span> · {d.animo}/10
+                  {d.emociones.length > 0 && ` · ${d.emociones.map((e) => `${e.emoji} ${e.nombre.toLowerCase()}`).join(', ')}`}
+                  {d.porque.length > 0 && ` · ${d.porque.join(', ')}`}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-2 text-xs text-muted-foreground">
+            Tus mejores dias arriba y los mas flojos abajo, con lo que tenian. Ninguno de los dos es quien eres: son
+            dias.
+          </p>
         </Tarjeta>
       )}
 
