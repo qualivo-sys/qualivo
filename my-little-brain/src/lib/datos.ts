@@ -82,8 +82,9 @@ export async function cargarPanel(
     supabase
       .from('objetivos')
       .select('*')
+      // Todos, no solo los activos: la pantalla necesita los conseguidos y los
+      // soltados para poder enseñarlos y para poder retomarlos.
       .eq('user_id', userId)
-      .eq('estado', 'activo')
       .then((r) => (r.data ?? []) as ObjetivoRegistro[]),
     // Las abiertas (de cuando sean) y las cerradas de los ultimos 60 dias:
     // sin las cerradas no se puede medir si se cierra el dia o no.

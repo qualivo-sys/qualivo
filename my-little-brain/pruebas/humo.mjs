@@ -722,6 +722,12 @@ check('el coach guarda el objetivo con su metrica y su punto de partida', objCoa
 check('y lo actualiza buscandolo por el titulo', objCoach?.valor_actual === 1, String(objCoach?.valor_actual));
 await ejecutarHerramienta('actualizar_objetivo', { titulo: 'clientes', estado: 'conseguido' }, ctx);
 check('lo puede dar por conseguido', supabase.db.tablas.objetivos.find((o) => /clientes/i.test(o.titulo))?.estado === 'conseguido');
+// El panel tiene que traer TODOS los objetivos: si solo trae los activos, los
+// conseguidos desaparecen de la pantalla en cuanto los cierras.
+const panelObj = await cargarPanel(supabase, 'u1', supabase.db.tablas.perfiles[0]);
+check('el panel trae tambien los objetivos ya cerrados',
+  panelObj.objetivos.some((o) => o.estado === 'conseguido'),
+  JSON.stringify(panelObj.objetivos.map((o) => [o.titulo, o.estado])));
 const objNo = await ejecutarHerramienta('actualizar_objetivo', { titulo: 'aprender a volar' }, ctx);
 check('si no lo encuentra lo dice', /No encuentro/.test(objNo.texto), objNo.texto);
 const objPeso = await ejecutarHerramienta('crear_objetivo', { area: 'cuerpo', titulo: 'Bajar a 78', metrica: 'peso', valor_objetivo: 78 }, ctx);
