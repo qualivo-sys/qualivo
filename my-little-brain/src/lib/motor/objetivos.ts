@@ -180,6 +180,85 @@ export function ritmo(
   };
 }
 
+// ── Cuanto te falta, tal y como vas ───────────────────────────────────
+
+export interface Proyeccion {
+  /** Lo que falta hasta la meta, en las unidades de la metrica. */
+  falta: number;
+  /** Ritmo real por semana, con su signo. */
+  porSemana: number | null;
+  /** Semanas que quedan al ritmo actual. */
+  semanas: number | null;
+  llegada: string | null;
+  /** Dias hasta la fecha que se puso. Negativo si ya paso. */
+  diasHastaLimite: number | null;
+  aTiempo: boolean | null;
+  /**
+   * A que ritmo tendria que ir para llegar a su fecha. Es el dato que de
+   * verdad ayuda: no "vas mal", sino "tendrias que ir a 0,52 y vas a 0,35".
+   */
+  ritmoNecesario: number | null;
+  /** true cuando el ritmo actual le aleja de la meta en vez de acercarle. */
+  alejandose: boolean;
+  conseguido: boolean;
+}
+
+/**
+ * Cuanto falta y cuando llegarias al ritmo que llevas AHORA.
+ *
+ * El ritmo se pasa de fuera a proposito: para el peso, la tendencia que ya
+ * calcula el motor de cuerpo (suavizada, con varios pesajes) es mucho mejor
+ * que dividir el avance entre las semanas transcurridas, y ademas esta
+ * disponible desde el primer dia sin esperar a acumular historial.
+ */
+export function proyectar(
+  medicion: Medicion,
+  porSemana: number | null,
+  hoy: string,
+  fechaLimite: string | null,
+  sumarDias: (fecha: string, dias: number) => string,
+  diasEntre: (a: string, b: string) => number,
+): Proyeccion {
+  const diasHastaLimite = fechaLimite ? diasEntre(hoy, fechaLimite) : null;
+  const base = {
+    falta: medicion.falta ?? 0,
+    porSemana,
+    diasHastaLimite,
+    conseguido: medicion.conseguido,
+  };
+
+  if (medicion.actual === null || medicion.meta === null || medicion.conseguido) {
+    return { ...base, semanas: null, llegada: null, aTiempo: null, ritmoNecesario: null, alejandose: false };
+  }
+
+  const queda = medicion.meta - medicion.actual;
+  // Lo que tendria que moverse cada semana para llegar justo a su fecha.
+  const ritmoNecesario = diasHastaLimite !== null && diasHastaLimite > 0
+    ? Math.round((queda / (diasHastaLimite / 7)) * 100) / 100
+    : null;
+
+  if (porSemana === null || porSemana === 0) {
+    return { ...base, semanas: null, llegada: null, aTiempo: diasHastaLimite === null ? null : false, ritmoNecesario, alejandose: false };
+  }
+
+  // Ir hacia el otro lado no da fecha de llegada: daria una fecha del pasado.
+  if (Math.sign(porSemana) !== Math.sign(queda)) {
+    return { ...base, semanas: null, llegada: null, aTiempo: diasHastaLimite === null ? null : false, ritmoNecesario, alejandose: true };
+  }
+
+  const semanas = Math.round((queda / porSemana) * 10) / 10;
+  const llegada = sumarDias(hoy, Math.ceil(semanas * 7));
+
+  return {
+    ...base,
+    semanas,
+    llegada,
+    aTiempo: fechaLimite ? llegada <= fechaLimite : null,
+    ritmoNecesario,
+    alejandose: false,
+  };
+}
+
 // ── Lo que veo ────────────────────────────────────────────────────────
 
 export interface InsightObjetivo {

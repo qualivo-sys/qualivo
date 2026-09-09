@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { regenerarPlan } from '@/app/app/acciones';
 import PremioEntreno from '@/components/premio-entreno';
 import RegistroEntreno, { type BloqueVista, type OpcionCatalogo } from '@/components/registro-entreno';
-import { Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
-import { sumarDias } from '@/lib/fechas';
+import { diasEntre, sumarDias } from '@/lib/fechas';
 import { EJERCICIOS, ejercicio } from '@/lib/motor/ejercicios';
 import { esIsometrico, planDesactualizado, volumenSemanal } from '@/lib/motor/planificador';
 import { proximoDia, sugerencia } from '@/lib/motor/progresion';
+import { medir } from '@/lib/motor/objetivos';
 import { perfilEntreno } from '@/lib/perfil';
 import { sesionRequerida } from '@/lib/sesion';
 
@@ -86,6 +87,29 @@ export default async function PaginaEntreno({
   const datosPerfil = perfilEntreno(perfil);
   const desactualizado = datosPerfil ? planDesactualizado(panel.plan, datosPerfil) : false;
   const volumen = volumenSemanal(panel.plan);
+
+  // Cuanto le falta para su objetivo de entrenos. Aqui la frase util no es una
+  // fecha de llegada sino cuantos por semana, que es como se decide "¿entreno
+  // hoy o lo dejo para manana?".
+  const objetivoEntreno = panel.objetivos.find(
+    (o) => o.estado === 'activo' && o.metrica === 'entrenos_semana' && o.valor_objetivo !== null,
+  ) ?? null;
+  const faltaEntrenos = (() => {
+    if (!objetivoEntreno) return null;
+    const m = medir(objetivoEntreno, { cuerpo: panel.cuerpo, dias: panel.dias, hoy: panel.hoy });
+    if (m.actual === null || m.meta === null) return null;
+    const faltan = Math.max(0, Math.ceil(m.meta - m.actual));
+    const dias = objetivoEntreno.fecha_limite ? diasEntre(panel.hoy, objetivoEntreno.fecha_limite) : null;
+    return {
+      titulo: objetivoEntreno.titulo,
+      llevas: Math.round(m.actual),
+      meta: Math.round(m.meta),
+      faltan,
+      pct: Math.min(100, Math.round((m.actual / m.meta) * 100)),
+      dias: dias !== null && dias > 0 ? dias : null,
+      porSemana: dias !== null && dias > 0 ? (faltan / dias) * 7 : 0,
+    };
+  })();
   const maxVolumen = Math.max(...volumen.map((v) => v.series), 1);
 
   return (
@@ -183,6 +207,40 @@ export default async function PaginaEntreno({
         <Tarjeta>
           <TituloTarjeta>Cardio</TituloTarjeta>
           <p className="text-sm text-muted-foreground">{diaSeleccionado.cardio}</p>
+        </Tarjeta>
+      )}
+
+      {faltaEntrenos && (
+        <Tarjeta>
+          <div className="mb-2 flex items-baseline justify-between gap-2">
+            <TituloTarjeta className="mb-0">Cuanto te falta</TituloTarjeta>
+            <Link href="/app/objetivos" className="text-xs text-primary underline">Objetivos</Link>
+          </div>
+          <p className="mb-3 text-sm text-muted-foreground">{faltaEntrenos.titulo}</p>
+          <div className="mb-1 flex items-baseline justify-between gap-2 text-sm tabular-nums">
+            <span className="text-muted-foreground">ultimos 30 dias</span>
+            <span>
+              <strong>{faltaEntrenos.llevas}</strong>
+              <span className="text-muted-foreground"> / {faltaEntrenos.meta} entrenos</span>
+            </span>
+          </div>
+          <Barra valor={faltaEntrenos.pct} color="hsl(var(--area-fitness))" />
+          {/* En entrenos la frase util no es una fecha, es cuantos por semana. */}
+          <p className="mt-2 text-sm">
+            {faltaEntrenos.faltan <= 0 ? (
+              <span className="text-emerald-600 dark:text-emerald-400">
+                Ya estas en tu objetivo. Dalo por conseguido y pon el siguiente.
+              </span>
+            ) : faltaEntrenos.dias !== null ? (
+              <>
+                Te {faltaEntrenos.faltan === 1 ? 'falta' : 'faltan'} <strong>{faltaEntrenos.faltan}</strong>{' '}
+                y {faltaEntrenos.dias === 1 ? 'queda 1 dia' : `quedan ${faltaEntrenos.dias} dias`}:{' '}
+                <strong>{faltaEntrenos.porSemana.toFixed(1).replace('.', ',')} por semana</strong> hasta tu fecha.
+              </>
+            ) : (
+              <>Te {faltaEntrenos.faltan === 1 ? 'falta' : 'faltan'} <strong>{faltaEntrenos.faltan}</strong> para tu objetivo.</>
+            )}
+          </p>
         </Tarjeta>
       )}
 

@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CalculadoraComida from '@/components/calculadora-comida';
+import CuantoFalta from '@/components/cuanto-falta';
 import ComidasHabituales from '@/components/comidas-habituales';
 import ListaComidas from '@/components/lista-comidas';
 import SugerenciasComida from '@/components/sugerencias-comida';
@@ -8,10 +9,12 @@ import Grafica from '@/components/ui/grafica';
 import Link from 'next/link';
 import { guardarComida, guardarMedicion, quitarObjetivosManual } from '@/app/app/acciones';
 import { cargarPanel } from '@/lib/datos';
-import { fechaLarga, horaActual, inicioSemana, sumarDias } from '@/lib/fechas';
+import { diasEntre, fechaLarga, horaActual, inicioSemana, sumarDias } from '@/lib/fechas';
 import { balanceDia, momentosPendientes, sugerirComidas } from '@/lib/motor/dieta';
 import { comidasHabituales } from '@/lib/motor/habituales';
 import { grasaCorporal } from '@/lib/motor/cuerpo';
+import { medir, metrica as infoMetrica, proyectar } from '@/lib/motor/objetivos';
+import { crearObjetivo } from '@/app/app/objetivos/acciones';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -27,6 +30,26 @@ export default async function PaginaCuerpo({ searchParams }: { searchParams: { d
   const dia = /^\d{4}-\d{2}-\d{2}$/.test(pedido) && pedido <= panel.hoy && pedido >= minimo ? pedido : panel.hoy;
   const esHoy = dia === panel.hoy;
   const comidasDia = panel.comidas.filter((c) => c.fecha === dia);
+
+  // El objetivo de peso, cintura o grasa que tenga en marcha. Para el ritmo
+  // usamos la tendencia real del motor de cuerpo, no la del motor de
+  // objetivos: esta suavizada con varios pesajes y esta disponible desde el
+  // primer dia, sin esperar a acumular semanas.
+  const objetivoCuerpo = panel.objetivos.find(
+    (o) => o.estado === 'activo' && ['peso', 'cintura', 'grasa'].includes(o.metrica ?? ''),
+  ) ?? null;
+  const fuentesObj = { cuerpo, dias: panel.dias, hoy: panel.hoy };
+  const medicionCuerpo = objetivoCuerpo ? medir(objetivoCuerpo, fuentesObj) : null;
+  const proyeccionCuerpo = objetivoCuerpo && medicionCuerpo
+    ? proyectar(
+        medicionCuerpo,
+        objetivoCuerpo.metrica === 'peso' ? cuerpo.tendencia : null,
+        panel.hoy,
+        objetivoCuerpo.fecha_limite,
+        sumarDias,
+        diasEntre,
+      )
+    : null;
   const diaResumen = panel.dias.find((d) => d.fecha === dia);
 
   const kcalHoy = comidasDia.reduce((total, c) => total + (c.kcal ?? 0), 0);
@@ -241,6 +264,43 @@ export default async function PaginaCuerpo({ searchParams }: { searchParams: { d
         </form>
         </details>
       </Tarjeta>
+
+      {objetivoCuerpo && medicionCuerpo && proyeccionCuerpo ? (
+        <CuantoFalta
+          titulo={objetivoCuerpo.titulo}
+          medicion={medicionCuerpo}
+          proyeccion={proyeccionCuerpo}
+          unidad={infoMetrica(objetivoCuerpo.metrica).unidad}
+          unidadRitmo={`${infoMetrica(objetivoCuerpo.metrica).unidad}/semana`}
+          fechaLimite={objetivoCuerpo.fecha_limite}
+        />
+      ) : (
+        cuerpo.peso !== null && (
+          <Tarjeta>
+            <TituloTarjeta>Cuanto te falta</TituloTarjeta>
+            <p className="mb-3 text-sm text-muted-foreground">
+              Dime a que peso quieres llegar y te digo cuanto te falta y, al ritmo que llevas, que dia llegarias.
+            </p>
+            <form action={crearObjetivo} className="space-y-3">
+              <input type="hidden" name="area" value="cuerpo" />
+              <input type="hidden" name="metrica" value="peso" />
+              <input type="hidden" name="titulo" value="Llegar a mi peso objetivo" />
+              <div className="grid grid-cols-2 gap-3">
+                <Campo
+                  etiqueta="Peso al que quieres llegar" name="valor_objetivo" type="number" step="0.1"
+                  inputMode="decimal" placeholder={String(Math.round(cuerpo.peso - 3))} required
+                />
+                <Campo etiqueta="Para cuando (opcional)" name="fecha_limite" type="date" />
+              </div>
+              <Boton type="submit" variante="secundario" className="w-full">Ponerme el objetivo</Boton>
+            </form>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Ahora estas en {cuerpo.peso.toFixed(1).replace('.', ',')} kg. Se guarda como objetivo y lo puedes cambiar
+              cuando quieras.
+            </p>
+          </Tarjeta>
+        )
+      )}
 
       <Tarjeta>
         <TituloTarjeta>Nueva medicion</TituloTarjeta>

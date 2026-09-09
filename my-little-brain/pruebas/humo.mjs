@@ -754,6 +754,28 @@ check('nunca mas de tres frases', avisosO.length <= 3);
 check('ninguna frase de objetivos culpabiliza', [...avisosO, ...sinObj].every((i) => !/deberias|fracas|vago/i.test(i.texto)));
 check('las metricas automaticas se distinguen de la manual', METRICAS.filter((m) => m.automatica).length === 6 && metricaDe('manual').automatica === false);
 
+// Cuanto te falta, tal y como vas
+const { proyectar } = await import(`${L}/motor/objetivos.js`);
+const mPeso = medir(obj({ fecha_limite: '2026-10-30' }), fuentes); // de 83 a 78, esta en 81
+const pr1 = proyectar(mPeso, -0.35, '2026-09-08', '2026-10-30', sumarDias, diasEntre);
+check('dice cuanto falta y a que dia llegarias al ritmo que llevas', pr1.falta === 3 && pr1.semanas === 8.6 && pr1.llegada === '2026-11-08', JSON.stringify(pr1));
+check('y si eso llega o no a tu fecha', pr1.aTiempo === false && pr1.diasHastaLimite === 52);
+check('da el ritmo que HARIA falta, que es el dato util', pr1.ritmoNecesario === -0.4, String(pr1.ritmoNecesario));
+const pr2 = proyectar(mPeso, -0.6, '2026-09-08', '2026-10-30', sumarDias, diasEntre);
+check('yendo mas rapido, llega a tiempo', pr2.aTiempo === true && pr2.llegada === '2026-10-13', JSON.stringify({ a: pr2.aTiempo, l: pr2.llegada }));
+const alReves2 = proyectar(mPeso, 0.3, '2026-09-08', '2026-10-30', sumarDias, diasEntre);
+check('si vas hacia el otro lado no inventa una fecha', alReves2.alejandose === true && alReves2.llegada === null, JSON.stringify(alReves2));
+check('pero sigue diciendo a que ritmo tendrias que ir', alReves2.ritmoNecesario === -0.4);
+const sinRitmo = proyectar(mPeso, null, '2026-09-08', null, sumarDias, diasEntre);
+check('sin ritmo no hay fecha ni se la inventa', sinRitmo.llegada === null && sinRitmo.semanas === null && sinRitmo.aTiempo === null);
+check('sin fecha limite no hay ritmo necesario', sinRitmo.ritmoNecesario === null);
+const yaEsta = proyectar(medir(obj({ valor_objetivo: 82 }), fuentes), -0.35, '2026-09-08', null, sumarDias, diasEntre);
+check('si ya has llegado, lo dice y no proyecta', yaEsta.conseguido === true && yaEsta.llegada === null);
+const vencida = proyectar(mPeso, -0.35, '2026-09-08', '2026-09-01', sumarDias, diasEntre);
+check('una fecha ya pasada sale en negativo, no como ritmo imposible', vencida.diasHastaLimite === -7 && vencida.ritmoNecesario === null, JSON.stringify({ d: vencida.diasHastaLimite, r: vencida.ritmoNecesario }));
+const subiendo = proyectar(medir(obj({ titulo: 'Subir a 85', valor_objetivo: 85, valor_inicial: 79 }), fuentes), 0.25, '2026-09-08', null, sumarDias, diasEntre);
+check('funciona igual para ganar peso', subiendo.falta === 4 && subiendo.semanas === 16 && !subiendo.alejandose, JSON.stringify(subiendo));
+
 // El coach
 const objCoach = supabase.db.tablas.objetivos.find((o) => /clientes/i.test(o.titulo));
 check('el coach guarda el objetivo con su metrica y su punto de partida', objCoach?.metrica === 'manual' && objCoach?.valor_objetivo === 3 && objCoach?.valor_inicial === 0, JSON.stringify(objCoach));
