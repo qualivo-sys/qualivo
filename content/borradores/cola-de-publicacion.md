@@ -39,3 +39,10 @@ dom 6 aspiracional nocturno · lun 7 bodegon claro · mar 8 editorial claro
 con foto de producto · mie 9 calle espanola · jue 10 flash documental con
 panel crema · vie 11 tipografico puro con fondos planos. Proximo carrusel
 con foto: NO usar flash documental ni editorial claro seguidos.
+
+## 9-sep · estado y nota operativa
+- Blog publicado hoy: /blog/cuanto-cuesta-google-ads/ y /blog/cuanto-cuestan-anuncios-facebook-instagram/ (intención de precio; datos LocaliQ citados; sin cifras españolas porque no hay fuente pública con método).
+- IG: mié 9 «llamó él» y jue 10 «un chico que tenemos» programados de forma NATIVA en GHL (status scheduled + scheduleDate 09:00Z). Ya no dependen de un trigger de sesión. Antes de reprogramar nada: consultar posts/list para no duplicar.
+- Vie 11 «cementerio de canales»: 5 láminas en carrusel-viernes/ (tipográfico puro). Falta caption, subida y programación (se hace jue 10).
+- LinkedIn jue 10 (comprobación, no noticia), borrador:
+  «Busca en Google lo que vendes, desde el móvil, como lo haría un cliente. Mira quién sale primero. Desde el lunes 8, en toda Europa, para hoteles, vuelos, transporte y productos, lo más probable es que ya no seas tú: es Booking o un comparador, con tus precios dentro. Google lo llama "la mayor reducción de calidad en 29 años" y dice que sus cambios anteriores ya quitaron un 30 % del tráfico de reserva directa (cifra de Google). Restaurantes y servicios locales, próxima fase. No es una noticia sobre Google. Es la misma lección de siempre: el canal que no controlas cambia las reglas sin avisar. Si el 70 % de tus clientes entra por un solo sitio, eso no es un canal, es una dependencia. Pregunta de la semana: si mañana se corta tu canal principal, ¿cuándo lo notarías en la facturación? → qualivo.io/donde-se-rompe-tu-crecimiento» Fuente: Search Engine Journal 8-sep + Reuters.
