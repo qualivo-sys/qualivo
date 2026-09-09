@@ -5,7 +5,7 @@
 
 const crypto = require('crypto');
 
-const PIXEL_ID = process.env.META_PIXEL_ID || '1055987250570278';
+const PIXEL_ID = process.env.META_PIXEL_ID || '879197745226987';
 
 function sha(v) {
   v = String(v || '').trim().toLowerCase();

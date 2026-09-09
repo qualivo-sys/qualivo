@@ -5,7 +5,7 @@
   'use strict';
 
   var GA_ID = 'G-LVDQS0MXF4';
-  var META_PIXEL = '1055987250570278';
+  var META_PIXEL = '879197745226987';
   var KEY = 'qv-consent';
 
   // Stub de gtag siempre presente: los eventos se encolan en dataLayer y
