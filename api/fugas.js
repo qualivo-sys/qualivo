@@ -390,7 +390,7 @@ async function enviarRadiografia(d) {
       '<p style="margin:0 0 8px;font:800 19px ' + F + ';color:#fff">Ya sabes dónde está el cuello de botella.</p>' +
       '<p style="margin:0 0 18px;font:400 15.5px/1.65 ' + F + ';color:#B9BDC4">' +
         'La siguiente pregunta es qué deberías arreglar primero y cuánto te está costando no hacerlo. Eso lo miramos en veinte minutos, con tus números delante. Sin presentación comercial.</p>' +
-      '<a href="https://qualivo.io/diagnostico/?origen=radiografia&cuello=' + d.cuello + '" style="display:inline-block;background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px ' + F + ';padding:13px 22px;border-radius:10px">Ver mi radiografía de crecimiento →</a>' +
+      '<a href="' + RESERVA + '?cuello=' + d.cuello + '" style="display:inline-block;background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px ' + F + ';padding:13px 22px;border-radius:10px">Reservar 20 minutos con Maikel →</a>' +
     '</div>' +
 
     '<p style="margin:26px 0 0;font:400 14px/1.6 ' + F + ';color:#8A8B90">' +
