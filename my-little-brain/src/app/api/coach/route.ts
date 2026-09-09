@@ -1,4 +1,5 @@
 import type Anthropic from '@anthropic-ai/sdk';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { cargarPanel, cargarPerfil } from '@/lib/datos';
 import { MODELO, clienteIA, hayClaveIA, parametrosModelo } from '@/lib/ia/cliente';
@@ -23,6 +24,30 @@ const MENSAJES_HISTORIAL = 16;
  * Chat del coach. Responde en streaming (SSE) porque en un chat la espera en
  * blanco se nota mas que el total: eventos `texto`, `accion`, `fin` y `error`.
  */
+/**
+ * Guarda un mensaje del chat.
+ *
+ * Va de uno en uno a proposito. Antes se insertaban los dos de golpe en un
+ * array, y como el del usuario no llevaba `acciones` y el del coach si,
+ * PostgREST rechazaba la peticion entera con PGRST102 ("All object keys must
+ * match"). El insert de Supabase no lanza excepcion, devuelve el error en el
+ * resultado, y como no se miraba, TODAS las conversaciones se perdieron en
+ * silencio desde el primer dia. De ahi que aqui se compruebe el error y se
+ * grite en los logs si falla.
+ */
+async function guardarMensaje(
+  supabase: SupabaseClient,
+  userId: string,
+  rol: 'user' | 'assistant',
+  texto: string,
+  acciones: AccionRegistrada[] = [],
+): Promise<void> {
+  const { error } = await supabase
+    .from('chat_mensajes')
+    .insert({ user_id: userId, rol, texto, acciones });
+  if (error) console.error('[coach] no se pudo guardar el mensaje', rol, error.message);
+}
+
 export async function POST(peticion: Request) {
   const supabase = clienteServidor();
   const { data: sesion } = await supabase.auth.getUser();
@@ -102,6 +127,11 @@ export async function POST(peticion: Request) {
   const mensajes: Anthropic.Beta.Messages.BetaMessageParam[] = (historial ?? [])
     .reverse()
     .map((m) => ({ role: m.rol as 'user' | 'assistant', content: m.texto }));
+
+  // El mensaje del usuario se guarda ANTES de llamar al modelo, no al final:
+  // si el coach falla, se corta la conexion o cierra la app, lo que ha escrito
+  // no se pierde. Va despues de leer el historial para no duplicarlo.
+  await guardarMensaje(supabase, usuario.id, 'user', mensaje || '[foto de comida]');
 
   const contenidoUsuario: Anthropic.Beta.Messages.BetaContentBlockParam[] = [];
   if (cuerpo.imagen?.data) {
@@ -204,10 +234,7 @@ export async function POST(peticion: Request) {
           }
         }
 
-        await supabase.from('chat_mensajes').insert([
-          { user_id: usuario.id, rol: 'user', texto: mensaje || '[foto de comida]' },
-          { user_id: usuario.id, rol: 'assistant', texto: respuesta, acciones },
-        ]);
+        await guardarMensaje(supabase, usuario.id, 'assistant', respuesta, acciones);
         await anotarUso(supabase, usuario.id, { entrada: tokensEntrada, salida: tokensSalida });
 
         enviar('fin', {
@@ -218,6 +245,12 @@ export async function POST(peticion: Request) {
         });
       } catch (error) {
         console.error('[coach] error durante la conversacion', error);
+        await guardarMensaje(
+          supabase,
+          usuario.id,
+          'assistant',
+          respuesta.trim() || 'Me quede a medias y no pude responder a esto. Tu mensaje esta guardado: puedes repetirmelo.',
+        );
         enviar('error', { error: 'El coach se ha quedado a medias. Reintenta en un momento.' });
       } finally {
         controlador.close();
