@@ -87,7 +87,7 @@ module.exports = async function handler(req, res) {
   const rol = String(b.rol || '');
   let telefono = String(b.telefono || '').replace(/[^\d+]/g, '');
   if (telefono && /^\d{9}$/.test(telefono)) telefono = '+34' + telefono;
-  const telefonoOk = !telefono || /^\+\d{9,15}$/.test(telefono);
+  const telefonoOk = /^\+\d{9,15}$/.test(telefono);
   const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
   const utmOk = Object.keys(utm).every(function (k) { return /^(utm_(source|medium|campaign|content|term)|ref)$/.test(k) && typeof utm[k] === 'string' && utm[k].length <= 80; });
 

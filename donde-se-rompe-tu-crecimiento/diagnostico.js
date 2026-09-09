@@ -493,7 +493,8 @@
     err.hidden = true;
     if (!nombre) { err.textContent = 'Dinos tu nombre.'; err.hidden = false; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Revisa el correo.'; err.hidden = false; return; }
-    if (telefono && !/^\+?\d{9,15}$/.test(telefono)) { err.textContent = 'Revisa el número de WhatsApp (o déjalo vacío).'; err.hidden = false; return; }
+    if (!telefono) { err.textContent = 'Dinos tu WhatsApp: es donde te escribo con el plan.'; err.hidden = false; return; }
+    if (!/^\+?\d{9,15}$/.test(telefono)) { err.textContent = 'Revisa el número de WhatsApp.'; err.hidden = false; return; }
     if (!rgpd) { err.textContent = 'Necesitamos tu consentimiento para tratar los datos.'; err.hidden = false; return; }
 
     var btn = $('fg-submit'); btn.disabled = true; btn.textContent = 'Un segundo…';
