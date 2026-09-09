@@ -166,3 +166,63 @@ antes de proponer nada.
 
 ## Instrucción maestra del Content Growth Agent (28-ago)
 Leer también `content/content-growth-agent.md`: misión (1 pieza → múltiples formatos → demanda → diagnóstico), los 9 clusters, YouTube como motor principal (5 formatos + entregable §27), microcápsulas, repurposing, Content Score, workflow §26 ante «quiero contenido sobre X», y el criterio de éxito §32. Keywords públicas siempre en español (arquitectura-seo-clusters.md).
+
+## Mandato del agente de contenido (Maikel, 9-sep) — manda sobre lo anterior
+La mision NO es generar likes: es generar CONVERSACIONES COMERCIALES
+cualificadas. Toda pieza construye autoridad, genera confianza o provoca
+conversacion. Nunca publicar por publicar.
+
+**Posicionamiento:** ayudamos a empresas a crecer mediante sistemas,
+automatizacion e inteligencia artificial aplicada a ventas, marketing y
+operaciones. No somos una agencia mas.
+
+**ICP prioritarios y su dolor:**
+- Duenyo o fundador: falta de tiempo, crecimiento estancado, procesos manuales,
+  dependencia del equipo.
+- Director comercial: pocas oportunidades, seguimientos inconsistentes, CRM
+  infrautilizado, baja productividad comercial.
+- Director de marketing: exceso de operativa, dificultad para demostrar retorno,
+  equipo saturado, escalar sin subir costes.
+
+**Cinco pilares:** 1) aprendizajes reales, 2) casos reales (antes, despues,
+proceso, aprendizajes), 3) sistemas de crecimiento, 4) IA aplicada con caso y
+resultado (nunca IA en abstracto), 5) construccion publica de la transformacion
+de Qualivo.
+
+**Regla principal:** no publicar teoria, publicar experiencia.
+No: «la IA cambiara el mundo». Si: «he conectado un agente de voz a un sistema
+de captacion y esto es lo que he aprendido».
+
+**Mezcla:** 70 % experiencia real, 20 % marcos de trabajo, 10 % opinion.
+
+**Tono:** directo, cercano, constructor, transparente, sin humo ni postureo.
+Escribir como un emprendedor que construye sistemas reales, no como un
+influencer.
+
+**Prueba de la pieza:** debe responder a una de estas preguntas: como consigo
+mas clientes, como ahorro tiempo, como automatizo esto, como escalo sin
+contratar, como aplico IA de forma practica. Si no responde a ninguna, no se
+publica.
+
+**KPI principal: conversaciones generadas.** Secundarios: comentarios
+cualificados, mensajes directos, reuniones, leads. NO likes, NO seguidores,
+NO impresiones.
+
+**La espina dorsal es el viaje de Maikel:** fundador que pasa de agencia
+tradicional, atraviesa una etapa dura, aprende IA, reconstruye la empresa y
+crea una nueva generacion de sistemas de crecimiento. Esa historia vale mas
+que cualquier contenido generico.
+
+## Lo que demuestra el radar del sector (9-sep, 227 publicaciones medidas)
+- Marca personal >> pagina de empresa. Cuentas personales del sector: 22 a 539
+  de interaccion mediana. Agencias y consultoras: 0 a 16. Bastida&Farina
+  publica testimonios en imagen y su mediana es CERO.
+- Lo que funciona, con evidencia: tesis contraria en una linea; «como [logro]
+  (y [dolor que evitas])»; decision drastica propia con cifra; fracaso propio
+  contado entero; la injusticia que el lector ya siente; dato propio
+  sorprendente.
+- Lo que no funciona: testimonios en imagen, fotos de eventos, hablar de uno
+  mismo, y el tip tecnico diario (a Miguel le hundio el alcance de 819 a 144
+  visualizaciones medianas en dos meses).
+- Detalle: «Tu empresa no necesita mas clientes, necesita esto» (Romuald Fons)
+  hizo 7.266 visualizaciones. Es el titular de nuestro Hero, ya validado fuera.
