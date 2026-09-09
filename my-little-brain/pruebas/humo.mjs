@@ -193,6 +193,7 @@ check('un bloque corrupto no rompe el resto',
 
 // ── 5d. Avisos push: que toca a cada hora ──────────────────────────────
 const { decidirAvisos, textoAviso } = await import(`${L}/push.js`);
+
 const base = { diaSemana: 3, tieneCheckInManana: false, tieneComidasHoy: false, entrenoHoy: false, entrenoPendienteSemana: true, revisionNueva: false, enviadosHoy: [] };
 check('a las 8 manda el aviso de la manana', decidirAvisos({}, { ...base, hora: 8 }).includes('manana'));
 check('no repite la manana si ya se envio', !decidirAvisos({}, { ...base, hora: 8, enviadosHoy: ['manana'] }).includes('manana'));
@@ -842,6 +843,75 @@ const unDiaEstaSemana = semanaEmocional([...anteriores, diaA('2026-09-08', { ani
 check('con un solo dia esta semana no compara con la anterior', unDiaEstaSemana.cambioAnimo === null && unDiaEstaSemana.animoMedio === 10, JSON.stringify(unDiaEstaSemana));
 const vaciaSem = semanaEmocional([diaA('2026-09-07')], [], '2026-09-07', '2026-09-13');
 check('una semana sin registrar no da medias falsas', vaciaSem.animoMedio === null && vaciaSem.diasRegistrados === 0 && vaciaSem.mejor === null);
+
+// ── 21. Habitos que se caen entre semana ───────────────────────────────
+const { habitosOlvidados, diasHabilesEntre, umbralDe, avisoHabito } = await import(`${L}/motor/habitos.js`);
+
+
+// 2026-09-07 es lunes; 12 viernes, 13 domingo, 14 lunes.
+check('cuenta solo dias laborables', diasHabilesEntre('2026-09-07', '2026-09-09') === 2, String(diasHabilesEntre('2026-09-07', '2026-09-09')));
+check('el fin de semana no suma', diasHabilesEntre('2026-09-11', '2026-09-14') === 1, String(diasHabilesEntre('2026-09-11', '2026-09-14')));
+check('de viernes a lunes es un dia habil, no tres', diasHabilesEntre('2026-09-11', '2026-09-13') === 0 && diasHabilesEntre('2026-09-11', '2026-09-14') === 1);
+check('el mismo dia son cero', diasHabilesEntre('2026-09-09', '2026-09-09') === 0);
+
+check('un habito diario avisa a los 2 dias', umbralDe(7) === 2 && umbralDe(5) === 2);
+check('uno de tres veces por semana aguanta mas', umbralDe(3) === 3 && umbralDe(2) === 4 && umbralDe(1) === 7);
+
+const hab = (id, nombre, veces = 7, activo = true) => ({ id, nombre, emoji: '📚', veces_por_semana: veces, activo });
+const reg = (habito_id, fecha) => ({ id: `${habito_id}-${fecha}`, habito_id, fecha, hecho: true });
+
+// Miercoles 9: leer se hizo el lunes 7 -> martes y miercoles sin hacerlo = 2
+const olv = habitosOlvidados({
+  habitos: [hab('h1', 'Leer 20 min'), hab('h2', 'Estirar', 3)],
+  registros: [reg('h1', '2026-09-07'), reg('h2', '2026-09-07')],
+  hoy: '2026-09-09',
+});
+check('avisa del diario a los dos dias laborables', olv.length === 1 && olv[0].id === 'h1' && olv[0].diasHabiles === 2, JSON.stringify(olv));
+check('y no del de tres veces por semana, que aun va en plazo', !olv.some((h) => h.id === 'h2'));
+const olv3 = habitosOlvidados({
+  habitos: [hab('h2', 'Estirar', 3)],
+  registros: [reg('h2', '2026-09-07')],
+  hoy: '2026-09-10',
+});
+check('pero al tercero si', olv3.length === 1 && olv3[0].diasHabiles === 3, JSON.stringify(olv3));
+
+check('hoy no cuenta: aun le da tiempo', habitosOlvidados({ habitos: [hab('h1', 'Leer')], registros: [reg('h1', '2026-09-09')], hoy: '2026-09-09' }).length === 0);
+check('el fin de semana no rompe nada', habitosOlvidados({ habitos: [hab('h1', 'Leer')], registros: [reg('h1', '2026-09-11')], hoy: '2026-09-14' }).length === 0, JSON.stringify(habitosOlvidados({ habitos: [hab('h1', 'Leer')], registros: [reg('h1', '2026-09-11')], hoy: '2026-09-14' })));
+check('un habito apagado no da la lata', habitosOlvidados({ habitos: [hab('h1', 'Leer', 7, false)], registros: [], hoy: '2026-09-30', creados: { h1: '2026-09-01' } }).length === 0);
+check('uno recien creado tampoco', habitosOlvidados({ habitos: [hab('h1', 'Leer')], registros: [], hoy: '2026-09-09', creados: { h1: '2026-09-08' } }).length === 0);
+const sinEstrenar = habitosOlvidados({ habitos: [hab('h1', 'Leer')], registros: [], hoy: '2026-09-11', creados: { h1: '2026-09-07' } });
+check('pero uno creado hace dias y nunca hecho, si', sinEstrenar.length === 1 && sinEstrenar[0].ultima === null, JSON.stringify(sinEstrenar));
+check('el aviso de uno sin estrenar se nota que es distinto', /sin estrenarse/.test(avisoHabito(sinEstrenar[0])), avisoHabito(sinEstrenar[0]));
+check('ningun aviso de habitos regaña', [avisoHabito(olv[0]), avisoHabito(sinEstrenar[0])].every((t) => !/deberias|mal|fatal|fracas|vago/i.test(t)));
+check('y ofrece salir sin deuda', /no hace falta recuperar nada/i.test(avisoHabito(olv[0])), avisoHabito(olv[0]));
+
+const varios = habitosOlvidados({
+  habitos: [hab('h1', 'Leer'), hab('h3', 'Meditar')],
+  registros: [reg('h1', '2026-09-07'), reg('h3', '2026-09-02')],
+  hoy: '2026-09-09',
+});
+check('los ordena del mas abandonado al menos', varios.map((h) => h.id).join() === 'h3,h1', JSON.stringify(varios.map((h) => [h.id, h.diasHabiles])));
+
+// La señal en el panel: solo entre semana
+const baseSenal = { dias: [], objetivoEntrenos: 4, metaKcal: null, metaProteina: null, tendenciaPeso: null, ritmoObjetivo: null, racha: 0 };
+const conHabito = senales({ ...baseSenal, hoy: '2026-09-09', habitosOlvidados: olv });
+check('la señal sale entre semana', conHabito.some((x) => x.id === 'habito_h1'), JSON.stringify(conHabito.map((x) => x.id)));
+const enSabado = senales({ ...baseSenal, hoy: '2026-09-12', habitosOlvidados: olv });
+check('el fin de semana no da la brasa con esto', !enSabado.some((x) => x.id.startsWith('habito_')), JSON.stringify(enSabado.map((x) => x.id)));
+check('sin habitos olvidados no hay señal', !senales({ ...baseSenal, hoy: '2026-09-09' }).some((x) => x.id.startsWith('habito_')));
+
+// El aviso al movil
+const prefs = {};
+const estadoBase = { hora: 19, diaSemana: 3, tieneCheckInManana: true, tieneComidasHoy: true, entrenoHoy: true, entrenoPendienteSemana: false, revisionNueva: false, enviadosHoy: [] };
+const hOlv = { nombre: 'Leer 20 min', emoji: '📚', dias: 2 };
+check('manda el aviso a las 19 entre semana', decidirAvisos(prefs, { ...estadoBase, habitoOlvidado: hOlv }).includes('habito'));
+check('no lo manda el domingo', !decidirAvisos(prefs, { ...estadoBase, diaSemana: 0, habitoOlvidado: hOlv }).includes('habito'));
+check('ni a otra hora', !decidirAvisos(prefs, { ...estadoBase, hora: 11, habitoOlvidado: hOlv }).includes('habito'));
+check('ni dos veces el mismo dia', !decidirAvisos(prefs, { ...estadoBase, habitoOlvidado: hOlv, enviadosHoy: ['habito'] }).includes('habito'));
+check('ni si no hay ningun habito caido', !decidirAvisos(prefs, { ...estadoBase, habitoOlvidado: null }).includes('habito'));
+check('se puede apagar', !decidirAvisos({ aviso_habito: false }, { ...estadoBase, habitoOlvidado: hOlv }).includes('habito'));
+const textoH = textoAviso('habito', 'Maikel', { racha: 0, kcal: 0, metaKcal: null, habito: hOlv });
+check('el aviso lleva el nombre del habito y que hacer', /Leer 20 min/.test(textoH.titulo) && /2 dias entre semana/.test(textoH.cuerpo) && textoH.url === '/app/habitos', JSON.stringify(textoH));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

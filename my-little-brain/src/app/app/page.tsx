@@ -23,6 +23,7 @@ import { horaActual } from '@/lib/fechas';
 import { tmbDe } from '@/lib/perfil';
 import { proximoDia } from '@/lib/motor/progresion';
 import { senales } from '@/lib/motor/senales';
+import { habitosOlvidados } from '@/lib/motor/habitos';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -73,9 +74,17 @@ export default async function PanelHoy() {
     ? panel.plan.dias.find((d) => d.id === proximoDia(panel.plan!, sesionesMotor)) ?? panel.plan.dias[0]
     : null;
 
+  const olvidados = habitosOlvidados({
+    habitos: panel.habitos,
+    registros: panel.registrosHabitos,
+    hoy: panel.hoy,
+    creados: Object.fromEntries(panel.habitos.map((h) => [h.id, (h.creado ?? panel.hoy).slice(0, 10)])),
+  });
+
   const lecturas = senales({
     dias: panel.dias,
     hoy: panel.hoy,
+    habitosOlvidados: olvidados,
     objetivoEntrenos: perfil.dias_semana ?? 3,
     metaKcal: metas?.kcal ?? null,
     metaProteina: metas?.proteinaG ?? null,

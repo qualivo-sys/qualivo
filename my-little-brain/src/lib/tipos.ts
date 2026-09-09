@@ -19,6 +19,8 @@ export interface PreferenciasAvisos {
   aviso_noche?: string | null;
   /** Aviso de entreno pendiente por la tarde. */
   aviso_entreno?: boolean;
+  /** Aviso cuando un habito lleva dias laborables sin hacerse. */
+  aviso_habito?: boolean;
   /** Fecha en la que se pospuso el ajuste de calorias (no volver a proponerlo en 2 semanas). */
   ajuste_pospuesto?: string | null;
 }
@@ -172,6 +174,7 @@ export interface Habito {
   emoji: string;
   veces_por_semana: number;
   activo: boolean;
+  creado?: string;
 }
 
 export interface HabitoRegistro {

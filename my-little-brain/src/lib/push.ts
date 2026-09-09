@@ -65,7 +65,7 @@ export async function enviarAviso(
 
 // ── Que aviso toca a cada hora (logica pura, sin red) ─────────────────
 
-export type TipoAviso = 'manana' | 'noche' | 'entreno' | 'revision';
+export type TipoAviso = 'manana' | 'noche' | 'entreno' | 'revision' | 'habito';
 
 export interface EstadoDia {
   /** Hora local del usuario, 0-23. */
@@ -77,6 +77,8 @@ export interface EstadoDia {
   entrenoHoy: boolean;
   entrenoPendienteSemana: boolean;
   revisionNueva: boolean;
+  /** Habito que lleva demasiados dias laborables sin hacerse, si hay alguno. */
+  habitoOlvidado?: { nombre: string; emoji: string; dias: number } | null;
   /** Avisos ya enviados hoy. */
   enviadosHoy: TipoAviso[];
 }
@@ -120,10 +122,28 @@ export function decidirAvisos(prefs: PreferenciasAvisos, estado: EstadoDia): Tip
     salida.push('revision');
   }
 
+  // Habitos que se caen: solo de lunes a viernes y a media tarde, cuando aun
+  // da tiempo a hacerlo. Uno al dia como mucho, y nunca a la vez que el de
+  // entreno: dos avisos seguidos de "te falta esto" se apagan las notificaciones.
+  if (
+    prefs.aviso_habito !== false &&
+    estado.habitoOlvidado &&
+    estado.diaSemana >= 1 &&
+    estado.diaSemana <= 5 &&
+    estado.hora === 19 &&
+    !ya('habito')
+  ) {
+    salida.push('habito');
+  }
+
   return salida;
 }
 
-export function textoAviso(tipo: TipoAviso, nombre: string, datos: { racha: number; kcal: number; metaKcal: number | null }): Aviso {
+export function textoAviso(
+  tipo: TipoAviso,
+  nombre: string,
+  datos: { racha: number; kcal: number; metaKcal: number | null; habito?: { nombre: string; emoji: string; dias: number } | null },
+): Aviso {
   const quien = nombre.split(' ')[0] || 'crack';
   switch (tipo) {
     case 'manana':
@@ -157,5 +177,19 @@ export function textoAviso(tipo: TipoAviso, nombre: string, datos: { racha: numb
         url: '/app/semana',
         tag: 'revision',
       };
+
+    case 'habito': {
+      const h = datos.habito;
+      return {
+        titulo: h ? `${h.emoji} ${h.nombre}` : 'Un habito se te esta cayendo',
+        // Ni "llevas fatal" ni "¡animo campeon!": el dato y algo que se puede
+        // hacer esta misma tarde.
+        cuerpo: h
+          ? `${h.dias} dias entre semana sin hacerlo. Con hacerlo hoy se corta, no hay que recuperar nada.`
+          : 'Con hacerlo hoy se corta.',
+        url: '/app/habitos',
+        tag: 'habito',
+      };
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { diasEntre } from '../fechas';
+import { avisoHabito, type HabitoOlvidado } from './habitos';
 import type { Dia } from './puntuaciones';
 
 export type TonoSenal = 'bien' | 'aviso' | 'alerta' | 'info';
@@ -17,6 +18,8 @@ export interface Senal {
 export interface EntradaSenales {
   dias: Dia[];
   hoy: string;
+  /** Habitos que llevan demasiados dias laborables sin hacerse. */
+  habitosOlvidados?: HabitoOlvidado[];
   objetivoEntrenos: number;
   metaKcal: number | null;
   metaProteina: number | null;
@@ -39,6 +42,28 @@ export function senales(entrada: EntradaSenales): Senal[] {
   const ultimos7 = dias.slice(-7);
   const ultimos14 = dias.slice(-14);
   const salida: Senal[] = [];
+
+  // ── Habitos que se estan cayendo ────────────────────────────────────
+  // Solo entre semana: el fin de semana no se avisa de esto. Un habito que se
+  // cae el sabado no se esta cayendo, es sabado.
+  const diaSemana = new Date(hoy + 'T12:00:00').getDay();
+  const entreSemana = diaSemana >= 1 && diaSemana <= 5;
+  const olvidados = entrada.habitosOlvidados ?? [];
+  if (entreSemana && olvidados.length) {
+    const peor = olvidados[0];
+    salida.push({
+      id: `habito_${peor.id}`,
+      tono: peor.diasHabiles >= peor.umbral * 2 ? 'alerta' : 'aviso',
+      titulo: olvidados.length === 1
+        ? `${peor.emoji} ${peor.nombre} lleva ${peor.diasHabiles} dias entre semana sin hacerse`
+        : `${olvidados.length} habitos llevan dias sin hacerse`,
+      detalle: olvidados.length === 1
+        ? avisoHabito(peor)
+        : `${olvidados.map((h) => `${h.emoji} ${h.nombre} (${h.diasHabiles})`).join(' · ')}. Elige uno y hazlo hoy; los demas ya volveran.`,
+      accion: { texto: 'Ver mis habitos', href: '/app/habitos' },
+      peso: 62,
+    });
+  }
 
   // ── Constancia del registro ─────────────────────────────────────────
   const ultimoRegistro = [...dias].reverse().find((d) => d.comidas > 0 || d.entreno || d.focoMin > 0);

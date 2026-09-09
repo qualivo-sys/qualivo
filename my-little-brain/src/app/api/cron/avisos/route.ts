@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { cargarPanel } from '@/lib/datos';
+import { habitosOlvidados } from '@/lib/motor/habitos';
 import { hoy as hoyIso, inicioSemana, sumarDias } from '@/lib/fechas';
 import { decidirAvisos, enviarAviso, hayPush, textoAviso, type TipoAviso } from '@/lib/push';
 import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
@@ -65,6 +66,15 @@ export async function GET(peticion: Request) {
 
       const panel = await cargarPanel(supabase, perfil.id, perfil);
       const entrenosSemana = panel.semana.filter((d) => d.entreno).length;
+      const olvidados = habitosOlvidados({
+        habitos: panel.habitos,
+        registros: panel.registrosHabitos,
+        hoy,
+        creados: Object.fromEntries(panel.habitos.map((h) => [h.id, (h.creado ?? hoy).slice(0, 10)])),
+      });
+      const habitoOlvidado = olvidados.length
+        ? { nombre: olvidados[0].nombre, emoji: olvidados[0].emoji, dias: olvidados[0].diasHabiles }
+        : null;
 
       const tipos = decidirAvisos(perfil.preferencias ?? {}, {
         hora,
@@ -74,6 +84,7 @@ export async function GET(peticion: Request) {
         entrenoHoy: panel.diaHoy.entreno,
         entrenoPendienteSemana: entrenosSemana < (perfil.dias_semana ?? 3),
         revisionNueva: Boolean(revision && Date.now() - new Date(revision.generado_el).getTime() < 36 * 3600 * 1000),
+        habitoOlvidado,
         enviadosHoy: (enviadosHoy ?? []).map((e) => e.tipo as TipoAviso),
       });
 
@@ -82,6 +93,7 @@ export async function GET(peticion: Request) {
           racha: panel.racha,
           kcal: panel.diaHoy.kcal,
           metaKcal: panel.metas?.kcal ?? null,
+          habito: habitoOlvidado,
         });
         const resultado = await enviarAviso(supabase, porUsuario.get(perfil.id) ?? [], aviso);
         if (resultado.enviados) {
