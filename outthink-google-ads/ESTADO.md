@@ -554,3 +554,9 @@ Noé Moreno (IT Adigital) migra OutThink al nuevo servidor el jueves 10-09 a pri
   de modo que entre 9:00 y 14:00 del jueves la campaña no sirve aunque el planificador falle.
 - Al confirmar Noé/Aída el fin de la migración: reactivar Search y restaurar la franja
   del jueves a 07–22 h (`api/` no tiene script; ver este bloque para los pasos).
+
+## Día 10 (09-09) — primer día completo de vuelta a Maximizar clics: 3 registros
+Search: 893 impr, 58 clics, 84,1 €, **3 registros** (EventosIA 2, AIAct 1 con «eu ai act»),
+CPC 1,45 € (frente a 2,42 € el día de Maximizar conversiones). Acumulado **734 € (37 %),
+14 registros, CPL 52 €**; Search 12 reg. Listas de remarketing: 160 visitantes, 24 registro
+iniciado. Negativas nuevas: google enterprise, apply ai, startups/startup, consulting, ia summit.
