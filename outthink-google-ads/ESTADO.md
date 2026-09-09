@@ -544,3 +544,13 @@ día bajo Maximizar conversiones). Acumulado **649 € (32 %), 11 registros, CPL
 casando «digital services act» (6,5 €) y «european ai act summary» → pausada, sustituida por
 `ai act` en frase. Negativas: digital services act, dsa, summary, ayudas, subvenciones, pymes,
 competencia, omnibus. Presupuesto Search ajustado a 84,45 €/día.
+
+### 09-09, tarde — migración de servidor de OutThink el 10-09
+Noé Moreno (IT Adigital) migra OutThink al nuevo servidor el jueves 10-09 a primera hora,
+2-3 h de corte previstas; pide pausar campañas. Aída: pausar a partir de las 9:00.
+- Programado en el planificador de la sesión (`trig_01XnchLHiFGtjRh3ZM3eFFsd`, 07:00 UTC =
+  09:00 Madrid): pausar `OT26_Search` por API y avisar a Maikel.
+- **Respaldo en Google Ads**: la franja del jueves 07–22 h se ha partido en 07–09 h y 14–22 h,
+  de modo que entre 9:00 y 14:00 del jueves la campaña no sirve aunque el planificador falle.
+- Al confirmar Noé/Aída el fin de la migración: reactivar Search y restaurar la franja
+  del jueves a 07–22 h (`api/` no tiene script; ver este bloque para los pasos).
