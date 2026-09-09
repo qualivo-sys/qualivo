@@ -201,12 +201,17 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   },
   {
     name: 'registrar_habito',
-    description: 'Marca un habito como hecho (o no hecho) en un dia. Si el habito no existe, se crea.',
+    description:
+      'Marca un habito. En los de HACER, hecho=true significa que lo hizo. En los de EVITAR (rumiar, '
+      + 'mirar metricas) es al reves: solo se apunta cuando CAE, con hecho=true, y el silencio quiere '
+      + 'decir que ese dia lo evito. Si cuenta que ha caido, apuntalo sin dramatizar y sin reñirle. '
+      + 'Si el habito no existe, se crea.',
     input_schema: {
       type: 'object',
       properties: {
         nombre: { type: 'string' },
         hecho: { type: 'boolean' },
+        nota: { type: 'string', description: 'En los de evitar: que lo disparo, con sus palabras.' },
         fecha: FECHA,
       },
       required: ['nombre'],
@@ -214,13 +219,16 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
   },
   {
     name: 'crear_habito',
-    description: 'Crea un habito nuevo que el usuario quiere sostener.',
+    description:
+      'Crea un habito. Usa tipo "evitar" cuando lo que quiere es DEJAR de hacer algo (rumiar, mirar '
+      + 'el movil a todas horas, picar de noche); en esos no se marca nada cada dia, solo las caidas.',
     input_schema: {
       type: 'object',
       properties: {
         nombre: { type: 'string' },
         emoji: { type: 'string' },
-        veces_por_semana: { type: 'number' },
+        tipo: { type: 'string', enum: ['hacer', 'evitar'] },
+        veces_por_semana: { type: 'number', description: 'Solo en los de hacer.' },
       },
       required: ['nombre'],
     },
@@ -821,13 +829,13 @@ async function despachar(
 
     case 'registrar_habito': {
       const d = z
-        .object({ nombre: z.string().min(1), hecho: z.boolean().optional(), fecha: fechaOpc })
+        .object({ nombre: z.string().min(1), hecho: z.boolean().optional(), nota: z.string().optional(), fecha: fechaOpc })
         .parse(entrada);
       const fecha = d.fecha ?? ctx.hoy;
 
       const { data: existentes } = await supabase
         .from('habitos')
-        .select('id, nombre')
+        .select('id, nombre, tipo')
         .eq('user_id', userId);
       const objetivo = normalizar(d.nombre);
       let habito = (existentes ?? []).find((h) => normalizar(h.nombre) === objetivo);
@@ -836,36 +844,50 @@ async function despachar(
         const { data: creado, error } = await supabase
           .from('habitos')
           .insert({ user_id: userId, nombre: d.nombre, activo: true })
-          .select('id, nombre')
+          .select('id, nombre, tipo')
           .single();
         if (error) throw error;
         habito = creado;
       }
 
+      if (!habito) return { texto: 'No pude crear el habito.', accion: null };
+
       const { error: errorRegistro } = await supabase
         .from('habitos_registro')
         .upsert(
-          { user_id: userId, habito_id: habito.id, fecha, hecho: d.hecho ?? true },
+          { user_id: userId, habito_id: habito.id, fecha, hecho: d.hecho ?? true, nota: d.nota ?? null },
           { onConflict: 'habito_id,fecha' },
         );
       if (errorRegistro) throw errorRegistro;
 
-      const xp = d.hecho === false ? 0 : await otorgarXp(ctx, 'habito', habito.nombre);
+      // En los de evitar no hay XP: ni premio ni castigo por caer. Apuntarlo
+      // tiene que ser barato, si no se deja de apuntar y se pierde el patron.
+      const evitar = (habito as { tipo?: string }).tipo === 'evitar';
+      const xp = evitar || d.hecho === false ? 0 : await otorgarXp(ctx, 'habito', habito.nombre);
       return {
-        texto: `Habito "${habito.nombre}" marcado como ${d.hecho === false ? 'no hecho' : 'hecho'} (${fecha}).`,
+        texto: evitar
+          ? `Apuntado que hoy caiste en "${habito.nombre}" (${fecha}).`
+          : `Habito "${habito.nombre}" marcado como ${d.hecho === false ? 'no hecho' : 'hecho'} (${fecha}).`,
         accion: { herramienta: nombre, resumen: `${habito.nombre}`, xp },
       };
     }
 
     case 'crear_habito': {
       const d = z
-        .object({ nombre: z.string().min(1), emoji: z.string().optional(), veces_por_semana: num.optional() })
+        .object({
+          nombre: z.string().min(1),
+          emoji: z.string().optional(),
+          tipo: z.enum(['hacer', 'evitar']).optional(),
+          veces_por_semana: num.optional(),
+        })
         .parse(entrada);
+      const deEvitar = d.tipo === 'evitar';
       const { error } = await supabase.from('habitos').insert({
         user_id: userId,
         nombre: d.nombre,
-        emoji: d.emoji ?? '✅',
-        veces_por_semana: d.veces_por_semana ? Math.max(1, Math.min(7, Math.round(d.veces_por_semana))) : 7,
+        emoji: d.emoji ?? (deEvitar ? '🚫' : '✅'),
+        tipo: deEvitar ? 'evitar' : 'hacer',
+        veces_por_semana: deEvitar ? 7 : d.veces_por_semana ? Math.max(1, Math.min(7, Math.round(d.veces_por_semana))) : 7,
       });
       if (error) throw error;
       return {

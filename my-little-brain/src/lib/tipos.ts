@@ -175,13 +175,21 @@ export interface Habito {
   veces_por_semana: number;
   activo: boolean;
   creado?: string;
+  /**
+   * 'hacer' es un habito normal. 'evitar' funciona al reves: se apunta la
+   * caida, no el logro, y el silencio quiere decir que ese dia lo evitaste.
+   */
+  tipo?: 'hacer' | 'evitar';
 }
 
 export interface HabitoRegistro {
   id: string;
   habito_id: string;
   fecha: string;
+  /** En los de 'evitar', true significa "cai ese dia". */
   hecho: boolean;
+  /** Que lo disparo, si lo apunto. */
+  nota?: string | null;
 }
 
 export interface EntradaDiario {

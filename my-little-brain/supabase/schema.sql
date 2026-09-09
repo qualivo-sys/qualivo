@@ -279,6 +279,17 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Habitos de evitar ──────────────────────────────────────────────────
+-- Los de "evitar" (rumiar, mirar metricas a todas horas) funcionan al reves:
+-- lo que se apunta es la CAIDA, no el logro. El silencio significa que ese dia
+-- lo evitaste, que es lo unico que hace que registrarlo no de pereza. Por eso
+-- una fila en habitos_registro de un habito de evitar quiere decir "cai".
+alter table public.habitos
+  add column if not exists tipo text not null default 'hacer' check (tipo in ('hacer','evitar'));
+
+-- Que lo disparo. En los de evitar es la mitad del valor: la pauta esta ahi.
+alter table public.habitos_registro add column if not exists nota text;
+
 -- ── Objetivos que se miden solos ───────────────────────────────────────
 -- La tabla existia pero solo guardaba un titulo. Para poder decir "vas por el
 -- 60 %" hace falta de donde partiste (valor_inicial); el valor de ahora casi

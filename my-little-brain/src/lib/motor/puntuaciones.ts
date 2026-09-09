@@ -91,7 +91,13 @@ export function construirDias(fuentes: FuentesDatos, fechas: string[],
           )
         : false,
       focoMin: suma(focos.map((f) => f.minutos)),
-      habitosHechos: registros.length,
+      // Los de evitar cuentan al reves: el dia esta bien si NO hay registro.
+      // Sumarlos como los otros haria que evitar algo no puntuara nunca.
+      habitosHechos:
+        registros.filter((r) => habitosActivos.some((h) => h.id === r.habito_id && h.tipo !== 'evitar')).length
+        + habitosActivos.filter(
+          (h) => h.tipo === 'evitar' && !porFecha(fuentes.registros, fecha).some((r) => r.habito_id === h.id && r.hecho),
+        ).length,
       habitosTotal: habitosActivos.length,
       animo: animo?.animo ?? null,
       energia: animo?.energia ?? null,

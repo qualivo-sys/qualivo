@@ -50,6 +50,8 @@ const llamadas = [
   ['registrar_agua', { vasos: 2 }],
   ['registrar_habito', { nombre: '10.000 pasos' }],
   ['crear_habito', { nombre: 'Leer 20 min', emoji: '📚', veces_por_semana: 5 }],
+  ['crear_habito', { nombre: 'Rumiar por la noche', tipo: 'evitar' }],
+  ['registrar_habito', { nombre: 'Rumiar por la noche', nota: 'Mail del cliente a las 23:00' }],
   ['crear_objetivo', { area: 'negocio', titulo: 'Cerrar 3 clientes nuevos', metrica: 'manual', valor_objetivo: 3 }],
   ['actualizar_objetivo', { titulo: 'cerrar 3 clientes', valor_actual: 1 }],
   ['crear_tarea', { titulo: 'Preparar propuesta EAC', prioridad: 1, para_hoy: true }],
@@ -912,6 +914,56 @@ check('ni si no hay ningun habito caido', !decidirAvisos(prefs, { ...estadoBase,
 check('se puede apagar', !decidirAvisos({ aviso_habito: false }, { ...estadoBase, habitoOlvidado: hOlv }).includes('habito'));
 const textoH = textoAviso('habito', 'Maikel', { racha: 0, kcal: 0, metaKcal: null, habito: hOlv });
 check('el aviso lleva el nombre del habito y que hacer', /Leer 20 min/.test(textoH.titulo) && /2 dias entre semana/.test(textoH.cuerpo) && textoH.url === '/app/habitos', JSON.stringify(textoH));
+
+// ── 22. Habitos de evitar ──────────────────────────────────────────────
+const { resumenEvitar, textoEvitar, patronesRecaida } = await import(`${L}/motor/habitos.js`);
+
+const habEvitar = { id: 'e1', nombre: 'Rumiar', emoji: '🌀', veces_por_semana: 7, activo: true, tipo: 'evitar' };
+const dias10 = Array.from({ length: 10 }, (_, i) => `2026-09-${String(i + 1).padStart(2, '0')}`);
+const caida = (fecha, nota = null) => ({ id: `c-${fecha}`, habito_id: 'e1', fecha, hecho: true, nota });
+
+// Cayo el 1 y el 4; del 5 al 10 limpio.
+const rEv = resumenEvitar(habEvitar, [caida('2026-09-01', 'poco sueño'), caida('2026-09-04')], dias10);
+check('la racha son los dias SIN caer', rEv.racha === 6, String(rEv.racha));
+check('cuenta los dias limpios y las caidas', rEv.diasLimpios === 8 && rEv.recaidas.length === 2, JSON.stringify({ l: rEv.diasLimpios, r: rEv.recaidas.length }));
+check('guarda la mejor racha', rEv.mejorRacha === 6, String(rEv.mejorRacha));
+check('las caidas vienen de la mas reciente y con su nota', rEv.recaidas[0].fecha === '2026-09-04' && rEv.recaidas[1].nota === 'poco sueño');
+check('sin ninguna caida, la racha es todo el periodo', resumenEvitar(habEvitar, [], dias10).racha === 10);
+const hoyCaido = resumenEvitar(habEvitar, [caida('2026-09-10')], dias10);
+check('si caes hoy la racha se pone a cero y se sabe', hoyCaido.racha === 0 && hoyCaido.caidoHoy === true);
+check('el dia empieza limpio mientras no marques nada', resumenEvitar(habEvitar, [caida('2026-09-09')], dias10).caidoHoy === false);
+
+check('al caer se mira lo que sigue en pie, no la culpa', /no borra eso/.test(textoEvitar(hoyCaido)), textoEvitar(hoyCaido));
+check('la primera caida no dramatiza', /la mitad del trabajo/.test(textoEvitar(resumenEvitar(habEvitar, [caida('2026-09-10')], ['2026-09-10']))));
+check('celebra la mejor racha sin exagerar', /mejor racha/.test(textoEvitar(rEv)), textoEvitar(rEv));
+check('ningun texto de evitar culpabiliza', [textoEvitar(hoyCaido), textoEvitar(rEv)].every((t) => !/deberias|mal|fatal|fracas|recaida|debil/i.test(t)));
+
+// El patron con lo que la app ya sabe
+const diasPat = [
+  ...['2026-09-01', '2026-09-02', '2026-09-03'].map((f) => diaMock(f, { suenoHoras: 5.5, animo: 4, estres: 8 })),
+  ...['2026-09-05', '2026-09-06', '2026-09-07', '2026-09-08'].map((f) => diaMock(f, { suenoHoras: 7.5, animo: 8, estres: 3 })),
+];
+const patRec = patronesRecaida('e1', ['2026-09-01', '2026-09-02', '2026-09-03'].map((f) => caida(f)), diasPat);
+check('cruza las caidas con el sueño', patRec.some((x) => x.id === 'sueno' && /5,5 h/.test(x.texto)), JSON.stringify(patRec.map((x) => x.texto)));
+check('y con el estres', patRec.some((x) => x.id === 'estres'), JSON.stringify(patRec.map((x) => x.id)));
+check('con pocos dias no inventa patrones', patronesRecaida('e1', [caida('2026-09-01')], diasPat).length === 0);
+
+// Los de evitar no entran en la regla de "llevas dias sin hacerlo"
+const mezclaHab = habitosOlvidados({
+  habitos: [hab('h1', 'Leer'), { ...habEvitar, id: 'e1' }],
+  registros: [reg('h1', '2026-09-07')],
+  hoy: '2026-09-09',
+  creados: { e1: '2026-09-01' },
+});
+check('un habito de evitar nunca sale como olvidado', !mezclaHab.some((h) => h.id === 'e1'), JSON.stringify(mezclaHab.map((h) => h.id)));
+
+// El coach
+const habsCoach = supabase.db.tablas.habitos ?? [];
+check('el coach crea el habito de evitar con su tipo', habsCoach.some((h) => h.nombre === 'Rumiar por la noche' && h.tipo === 'evitar'), JSON.stringify(habsCoach.map((h) => [h.nombre, h.tipo])));
+const rumia = habsCoach.find((h) => h.nombre === 'Rumiar por la noche');
+const regRumia = (supabase.db.tablas.habitos_registro ?? []).find((r) => r.habito_id === rumia?.id);
+check('apunta la caida con lo que la disparo', regRumia?.hecho === true && /Mail del cliente/.test(regRumia?.nota ?? ''), JSON.stringify(regRumia));
+check('y no da XP por caer', !(supabase.db.tablas.xp_eventos ?? []).some((x) => x.motivo === 'Rumiar por la noche'));
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

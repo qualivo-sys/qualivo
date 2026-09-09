@@ -69,15 +69,47 @@ export async function alternarHabito(habitoId: string, fecha: string, hecho: boo
   revalidatePath('/app/habitos');
 }
 
+/**
+ * Apuntar una caida en un habito de evitar. No da ni quita XP: convertirlo en
+ * puntos premiaria o castigaria algo que solo hay que ver con claridad. Lo que
+ * si suma es la nota: el patron esta ahi.
+ */
+export async function apuntarCaida(habitoId: string, datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const fecha = texto(datos.get('fecha')) ?? hoy;
+  await supabase.from('habitos_registro').upsert(
+    { user_id: userId, habito_id: habitoId, fecha, hecho: true, nota: texto(datos.get('nota'))?.slice(0, 200) ?? null },
+    { onConflict: 'habito_id,fecha' },
+  );
+  revalidatePath('/app');
+  revalidatePath('/app/habitos');
+}
+
+/** Deshacer: te confundiste de habito o de dia. */
+export async function borrarCaida(habitoId: string, fecha: string) {
+  const { supabase, userId } = await sesion();
+  await supabase
+    .from('habitos_registro')
+    .delete()
+    .eq('user_id', userId)
+    .eq('habito_id', habitoId)
+    .eq('fecha', fecha);
+  revalidatePath('/app');
+  revalidatePath('/app/habitos');
+}
+
 export async function crearHabito(datos: FormData) {
   const { supabase, userId } = await sesion();
   const nombre = texto(datos.get('nombre'));
   if (!nombre) return;
+  const evitar = texto(datos.get('tipo')) === 'evitar';
   await supabase.from('habitos').insert({
     user_id: userId,
     nombre,
-    emoji: texto(datos.get('emoji')) ?? '✅',
-    veces_por_semana: Math.max(1, Math.min(7, numero(datos.get('veces_por_semana')) ?? 7)),
+    emoji: texto(datos.get('emoji')) ?? (evitar ? '🚫' : '✅'),
+    // En los de evitar la frecuencia no pinta nada: la meta es todos los dias.
+    veces_por_semana: evitar ? 7 : Math.max(1, Math.min(7, numero(datos.get('veces_por_semana')) ?? 7)),
+    tipo: evitar ? 'evitar' : 'hacer',
   });
   revalidatePath('/app/habitos');
 }
