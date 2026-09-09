@@ -85,6 +85,7 @@ Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain
 
 ## Registro de cambios
 
+- **2026-09-09 (tarde)** · "Dale caña" de Maikel. Recorrido Radiografía → reunión en `sistema/radiografia-recorrido.md` (regla: no se pide reunión, se le pone número a la fuga). Encargos enviados: Landing (3 cambios en la Radiografía, etapa y workflow GHL, emails día 1/3/7, campaña Meta con UTM alineadas y anuncios 01+06), Outbound (motor de exploración de ICPs §2.7, agente de voz con dos puertas, agente de WhatsApp en copiloto, enlace `?l=<id>`), Ventas (7 mensajes + plantilla plan 48 h en `ventas/radiografia/`), Automatización (secuencia 3-7-14 enchufada; timbre nuevo `trig_01BbyosrYLyxV5km966rguJs`). Tarea Todoist "Cola de aprobaciones del cerebro" para Maikel hoy 17:00.
 - **2026-09-09** · Estrategia central v1 publicada como Google Doc editable (fuente de verdad de Maikel) y enlazada desde `sistema/estrategia-central.md`.
 - **2026-09-02** · v3. Estado actualizado por Maikel: objetivo del mes = 1 cliente recurrente 1.000-1.500 €/mes (no escalar); KPIs semanales 10 seguimientos / 1 reunión / 1 oportunidad; nuevas oportunidades Inspyria, Marilia, Antic Barcelona; Equipzilla confirmada al alza (~2.850 € desde octubre); modo caja estricto.
 
