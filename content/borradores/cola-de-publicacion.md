@@ -46,3 +46,9 @@ con foto: NO usar flash documental ni editorial claro seguidos.
 - Vie 11 «cementerio de canales»: 5 láminas en carrusel-viernes/ (tipográfico puro). Falta caption, subida y programación (se hace jue 10).
 - LinkedIn jue 10 (comprobación, no noticia), borrador:
   «Busca en Google lo que vendes, desde el móvil, como lo haría un cliente. Mira quién sale primero. Desde el lunes 8, en toda Europa, para hoteles, vuelos, transporte y productos, lo más probable es que ya no seas tú: es Booking o un comparador, con tus precios dentro. Google lo llama "la mayor reducción de calidad en 29 años" y dice que sus cambios anteriores ya quitaron un 30 % del tráfico de reserva directa (cifra de Google). Restaurantes y servicios locales, próxima fase. No es una noticia sobre Google. Es la misma lección de siempre: el canal que no controlas cambia las reglas sin avisar. Si el 70 % de tus clientes entra por un solo sitio, eso no es un canal, es una dependencia. Pregunta de la semana: si mañana se corta tu canal principal, ¿cuándo lo notarías en la facturación? → qualivo.io/donde-se-rompe-tu-crecimiento» Fuente: Search Engine Journal 8-sep + Reuters.
+
+## ⛔ PAUSA DE CONTENIDO EN REDES (Maikel, 9-sep 09:45Z)
+«Pausa de momento la parte de contenido hasta que le demos un vistazo final porque las imágenes así no sé si tienen mucho sentido.»
+- Jueves 10 «un chico que tenemos»: programación en GHL CANCELADA (post borrado, payload guardado en scratchpad/post-jueves-publicar.json con las URLs de las láminas ya subidas).
+- No se programa ni publica NADA en Instagram/LinkedIn hasta que Maikel dé el visto bueno tras la revisión. La rutina diaria de content machine sigue produciendo borradores y blog, pero no sube a GHL.
+- Pendiente de revisión conjunta: jueves (flash documental), viernes «cementerio» (tipográfico, 5 láminas), domingo aspiracional, y la dirección de arte en general.

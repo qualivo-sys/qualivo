@@ -63,6 +63,12 @@ Reglas de traduccion, obligatorias:
   empresa. Maximo UN carrusel de radar al mes en IG: la cuenta no es un
   noticiero de IA.
 
+## ⛔ PAUSA DE REDES (Maikel, 9-sep): «pausa de momento la parte de contenido
+hasta que le demos un vistazo final porque las imágenes así no sé si tienen
+mucho sentido». NO subir ni programar nada en GHL (Instagram/LinkedIn) hasta
+que Maikel levante la pausa por escrito. Producir borradores sí; publicar no.
+El blog no está afectado por esta pausa.
+
 ## Identidad en redes sociales (regla de Maikel, 2-sep)
 En redes sociales se publica SIEMPRE con la identidad personal de Maikel
 (firma «Maikel Echevarría» / @maikel.echevarria en los creativos y voz en
