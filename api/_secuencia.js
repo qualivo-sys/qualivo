@@ -49,7 +49,7 @@ function correo(paso, contacto, cuello, segunda, bajaUrl) {
   const n = nombreCorto(contacto);
   const dim = R.NOMBRE[cuello].toLowerCase();
   const seg = segunda && R.NOMBRE[segunda] ? R.NOMBRE[segunda].toLowerCase() : null;
-  const diag = 'https://qualivo.io/diagnostico/?origen=secuencia&cuello=' + cuello;
+  const diag = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl?cuello=' + cuello;
 
   if (paso === 2) return {
     asunto: '¿Ha acertado?',
@@ -91,8 +91,8 @@ function correo(paso, contacto, cuello, segunda, bajaUrl) {
           ? p('Para esto hay calculadora: pide tus números (cuántos presupuestos, cuántos se quedan sin respuesta, lo que te deja un cliente) y enseña la fórmula. Sin promedios del sector: solo tus datos.') +
             boton('https://qualivo.io/calculadora-de-fugas/?origen=secuencia&fuga=' + (cuello === 'seguimiento' ? 'presupuestos' : 'velocidad'), 'Ponerle un número →')
           : p('Para ' + dim + ' no hay calculadora honesta, pero sí una cuenta a mano:') + p('<em>' + CUENTA[cuello] + '</em>')) +
-        p('Si quieres que lo miremos juntos con tus números, eso es la radiografía de crecimiento. No es una llamada de ventas: es la misma pregunta que ya te has hecho, con datos delante.') +
-        boton(diag, 'Decidir qué arreglar primero →'),
+        p('Si quieres que lo miremos juntos con tus números, son veinte minutos. No es una llamada de ventas: es la misma pregunta que ya te has hecho, con datos delante.') +
+        boton(diag, 'Reservar 20 minutos →'),
         bajaUrl)
     };
   }
@@ -104,7 +104,7 @@ function correo(paso, contacto, cuello, segunda, bajaUrl) {
       '<ul style="margin:0 0 16px;padding-left:20px"><li>Dónde se rompe: <strong>' + dim + '</strong>.</li>' +
       '<li>Qué hacer primero: ' + R.MOVIMIENTOS[cuello][0] + '</li>' +
       '<li>Cómo saber si acierta: ' + R.COMPROBAR[cuello] + '</li></ul>' +
-      p('Si dentro de un mes sigues en el mismo sitio, contéstame a este correo con una sola palabra: <strong>' + dim + '</strong>. Te digo por dónde empezaría yo en tu caso.'),
+      p('Si dentro de un mes sigues en el mismo sitio, contéstame a este correo con una sola palabra: <strong>' + dim + '</strong>. Te digo por dónde empezaría yo en tu caso. Y si prefieres verlo en directo, veinte minutos y lo dejamos claro.') + boton(diag, 'Reservar 20 minutos →'),
       bajaUrl)
   };
 

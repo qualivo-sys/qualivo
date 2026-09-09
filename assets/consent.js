@@ -5,6 +5,7 @@
   'use strict';
 
   var GA_ID = 'G-LVDQS0MXF4';
+  var META_PIXEL = '1055987250570278';
   var KEY = 'qv-consent';
 
   // Stub de gtag siempre presente: los eventos se encolan en dataLayer y
@@ -29,10 +30,40 @@
     document.head.appendChild(s);
   }
 
-  // Helper de eventos: siempre llamable; solo llega a GA si hubo consentimiento
-  // y el script cargó. Vercel Analytics (sin cookies) recibe siempre.
+  // Píxel de Meta: solo tras consentimiento. Los eventos del diagnóstico se
+  // traducen a eventos del píxel para optimizar y hacer retargeting.
+  function cargarMeta() {
+    if (window.fbq) return;
+    var n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+    if (!window._fbq) window._fbq = n;
+    n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    document.head.appendChild(s);
+    fbq('init', META_PIXEL);
+    fbq('track', 'PageView');
+  }
+
+  var META_EVENTOS = {
+    hero_start: ['trackCustom', 'HeroStart'],
+    hero_complete: ['trackCustom', 'HeroComplete'],
+    hero_result_view: ['trackCustom', 'HeroResult'],
+    hero_email_submit: ['track', 'Lead'],
+    hero_radiografia_click: ['trackCustom', 'HeroSiguientePaso'],
+    diagnostico_solicitado: ['track', 'Contact']
+  };
+
+  // Helper de eventos: siempre llamable; solo llega a GA y a Meta si hubo
+  // consentimiento y los scripts cargaron. Vercel Analytics (sin cookies) recibe siempre.
   window.qvTrack = function (nombre, datos) {
     try { gtag('event', nombre, datos || {}); } catch (e) {}
+    try {
+      var m = META_EVENTOS[nombre];
+      if (m && window.fbq) {
+        var d = datos || {};
+        fbq(m[0], m[1], { cuello: d.cuello || d.etapa_debil || '', nivel: d.nivel || '' });
+      }
+    } catch (e) {}
   };
 
   window.qvConsentReset = function () {
@@ -44,7 +75,7 @@
     try { localStorage.setItem(KEY, valor); } catch (e) {}
     var b = document.getElementById('qv-cookies');
     if (b) b.remove();
-    if (valor === 'granted') cargarGA();
+    if (valor === 'granted') { cargarGA(); cargarMeta(); }
   }
 
   function pintarBanner() {
@@ -54,7 +85,7 @@
     b.setAttribute('aria-label', 'Aviso de cookies');
     b.innerHTML =
       '<div class="qv-ck-inner">' +
-      '<p>Usamos cookies de analítica (Google Analytics) para entender cómo se usa la web. Puedes aceptarlas o rechazarlas — la web funciona igual. <a href="/cookies/">Más información</a>.</p>' +
+      '<p>Usamos cookies de analítica (Google Analytics) y de publicidad (Meta) para entender cómo se usa la web y medir los anuncios. Puedes aceptarlas o rechazarlas: la web funciona igual. <a href="/cookies/">Más información</a>.</p>' +
       '<div class="qv-ck-botones">' +
       '<button type="button" id="qv-ck-no">Rechazar</button>' +
       '<button type="button" id="qv-ck-si">Aceptar</button>' +
@@ -67,7 +98,7 @@
   function init() {
     var previo = null;
     try { previo = localStorage.getItem(KEY); } catch (e) {}
-    if (previo === 'granted') { cargarGA(); return; }
+    if (previo === 'granted') { cargarGA(); cargarMeta(); return; }
     if (previo === 'denied') { return; }
     pintarBanner();
   }

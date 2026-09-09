@@ -13,6 +13,8 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PIPELINE_ID = '980j4DzvOwp7aDmkk2ZA';
 const STAGE_NUEVO = 'fa70d288-c614-40ad-9e67-df04f4da3443';
 const STAGE_CONTACTADO = 'd08bc03a-1b25-4732-9b5f-3cb7295bfd94';
+const RESERVA = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl';
+const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
 
 const DIMS = ['captacion', 'conversion', 'seguimiento', 'dependencia', 'control'];
 const SINTOMAS = ['demanda', 'predecible', 'visibilidad', 'velocidad', 'cierre', 'presupuestos',
@@ -187,6 +189,10 @@ module.exports = async function handler(req, res) {
     if (contactId) {
       await crearOportunidad({ contactId, locationId, nombre, cuello, nivel, prioritario, valorCliente, ghlHeaders })
         .catch(function (err) { console.error('[dx] Oportunidad no creada:', err); });
+      if (telefono) {
+        await crearTareaWhatsApp({ contactId, nombre, telefono, cuello, prioritario, ghlHeaders })
+          .catch(function (err) { console.error('[dx] Tarea de WhatsApp no creada:', err); });
+      }
     }
 
     await avisar({
@@ -213,6 +219,30 @@ module.exports = async function handler(req, res) {
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 };
+
+function mensajeWhatsApp(nombre, cuello) {
+  return 'Hola ' + nombre.split(' ')[0] + ', soy Maikel, de Qualivo. He visto tu diagnóstico: se te rompe en ' +
+    R.NOMBRE[cuello].toLowerCase() + '. ¿Te cuadra? Si quieres lo miramos en 20 minutos con tus números: ' + RESERVA;
+}
+
+// Tarea en GoHighLevel para escribir por WhatsApp al lead que dejó el número.
+// Aparece en la app con el mensaje ya redactado; vence en dos horas (prioritario) o mañana.
+async function crearTareaWhatsApp(t) {
+  const vence = new Date(Date.now() + (t.prioritario ? 2 : 24) * 3600 * 1000).toISOString();
+  const r = await fetch(GHL_BASE + '/contacts/' + t.contactId + '/tasks', {
+    method: 'POST',
+    headers: t.ghlHeaders,
+    body: JSON.stringify({
+      title: (t.prioritario ? '🔴 ' : '') + 'WhatsApp a ' + t.nombre + ' · se rompe en ' + R.NOMBRE[t.cuello],
+      body: 'https://wa.me/' + t.telefono.replace('+', '') + '?text=' + encodeURIComponent(mensajeWhatsApp(t.nombre, t.cuello)) +
+        '\n\nMensaje: ' + mensajeWhatsApp(t.nombre, t.cuello),
+      dueDate: vence,
+      completed: false,
+      assignedTo: USUARIO_MAIKEL
+    })
+  });
+  if (!r.ok) throw new Error('GHL tasks respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
+}
 
 async function crearOportunidad(o) {
   const r = await fetch(GHL_BASE + '/opportunities/', {
@@ -269,7 +299,7 @@ async function avisar(lead) {
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
     (lead.telefono ? '<tr><td style="padding:6px 14px 6px 0;color:#5A5E66">WhatsApp</td><td style="padding:6px 0"><a href="https://wa.me/' + lead.telefono.replace('+', '') +
-      '?text=' + encodeURIComponent('Hola ' + lead.nombre.split(' ')[0] + ', soy Maikel, de Qualivo. He visto tu diagnóstico: se te rompe en ' + R.NOMBRE[lead.cuello].toLowerCase() + '. ¿Te cuadra?') +
+      '?text=' + encodeURIComponent(mensajeWhatsApp(lead.nombre, lead.cuello)) +
       '" style="font-weight:700">Escribirle por WhatsApp (' + esc(lead.telefono) + ') →</a></td></tr>' : '') +
     fila('Sector', lead.sector || 'no indicado') +
     fila('Papel', lead.rol || 'no indicado') +
@@ -359,7 +389,7 @@ async function enviarRadiografia(d) {
     '<div style="margin:30px 0 0;padding:24px;background:#101319;border-radius:14px">' +
       '<p style="margin:0 0 8px;font:800 19px ' + F + ';color:#fff">Ya sabes dónde está el cuello de botella.</p>' +
       '<p style="margin:0 0 18px;font:400 15.5px/1.65 ' + F + ';color:#B9BDC4">' +
-        'La siguiente pregunta es qué deberías arreglar primero y cuánto te está costando no hacerlo. Eso lo miramos contigo, con tus números.</p>' +
+        'La siguiente pregunta es qué deberías arreglar primero y cuánto te está costando no hacerlo. Eso lo miramos en veinte minutos, con tus números delante. Sin presentación comercial.</p>' +
       '<a href="https://qualivo.io/diagnostico/?origen=radiografia&cuello=' + d.cuello + '" style="display:inline-block;background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px ' + F + ';padding:13px 22px;border-radius:10px">Ver mi radiografía de crecimiento →</a>' +
     '</div>' +
 
