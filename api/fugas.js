@@ -3,6 +3,7 @@
 // principal, el síntoma concreto y su perfil. Mismas credenciales que /api/lead.
 
 const R = require('./_radiografia');
+const META = require('./_meta');
 
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
@@ -89,6 +90,8 @@ module.exports = async function handler(req, res) {
   if (telefono && /^\d{9}$/.test(telefono)) telefono = '+34' + telefono;
   const telefonoOk = /^\+\d{9,15}$/.test(telefono);
   const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
+  // Identificador del evento que también dispara el píxel del navegador (deduplicación en Meta)
+  const eventoId = /^[a-z0-9-]{8,48}$/.test(String(b.evento_id || '')) ? String(b.evento_id) : '';
   const utmOk = Object.keys(utm).every(function (k) { return /^(utm_(source|medium|campaign|content|term)|ref)$/.test(k) && typeof utm[k] === 'string' && utm[k].length <= 80; });
 
   const dimsOk = DIMS.every(function (e) {
@@ -213,7 +216,20 @@ module.exports = async function handler(req, res) {
         return 'error: ' + String(err && err.message || err).slice(0, 160);
       });
 
-    return res.status(200).json({ ok: true, radiografia: radiografia });
+    // Registro contado en Meta aunque no haya consentimiento de cookies (Conversions API).
+    const ck = META.cookiesMeta(req);
+    const meta = await META.enviarLead({
+      email, telefono, nombre, eventoId, cuello, nivel,
+      ip: String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined,
+      ua: String(req.headers['user-agent'] || '').slice(0, 300) || undefined,
+      fbp: ck.fbp, fbc: ck.fbc,
+      url: 'https://qualivo.io/donde-se-rompe-tu-crecimiento/'
+    }).catch(function (err) {
+      console.error('[dx] Evento Meta no enviado:', err);
+      return 'error';
+    });
+
+    return res.status(200).json({ ok: true, radiografia: radiografia, meta: meta });
   } catch (err) {
     console.error('[dx] Error inesperado:', err);
     return res.status(502).json({ ok: false, error: 'crm_error' });

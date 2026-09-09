@@ -498,10 +498,12 @@
     if (!rgpd) { err.textContent = 'Necesitamos tu consentimiento para tratar los datos.'; err.hidden = false; return; }
 
     var btn = $('fg-submit'); btn.disabled = true; btn.textContent = 'Un segundo…';
+    // Mismo identificador para el píxel del navegador y el evento del servidor (Meta los deduplica)
+    var eventoId = 'dx-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
     fetch('/api/fugas', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nombre: nombre, email: email, rgpd: true, sector: sector, telefono: telefono,
+        nombre: nombre, email: email, rgpd: true, sector: sector, telefono: telefono, evento_id: eventoId,
         cuello: calculado.cuello, segunda: calculado.segunda || '', sintoma: calculado.sintoma, nivel: calculado.nivel,
         total: calculado.total, maximo: calculado.maximo, completo: calculado.completo,
         dims: calculado.pct,
@@ -510,7 +512,7 @@
       })
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      track('hero_email_submit', { cuello: calculado.cuello, nivel: calculado.nivel, sector: sector, con_telefono: !!telefono,
+      track('hero_email_submit', { cuello: calculado.cuello, nivel: calculado.nivel, sector: sector, con_telefono: !!telefono, evento_id: eventoId,
         rol: perfil.rol || '', empleados: perfil.empleados || '', valor_cliente: perfil.valor || '' });
       show('fg-thanks');
     }).catch(function () {

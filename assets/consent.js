@@ -61,7 +61,9 @@
       var m = META_EVENTOS[nombre];
       if (m && window.fbq) {
         var d = datos || {};
-        fbq(m[0], m[1], { cuello: d.cuello || d.etapa_debil || '', nivel: d.nivel || '' });
+        var params = { cuello: d.cuello || d.etapa_debil || '', nivel: d.nivel || '' };
+        if (d.evento_id) fbq(m[0], m[1], params, { eventID: d.evento_id });
+        else fbq(m[0], m[1], params);
       }
     } catch (e) {}
   };
