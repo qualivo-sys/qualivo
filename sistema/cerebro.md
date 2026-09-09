@@ -78,6 +78,11 @@ La ejecución vive en Notion, página **"Qualivo OS · Sala de Mando"**, con cua
 
 Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain — CEO advisor, COO, CFO, orquestador de agentes. Regla de prioridad cuando haya conflicto: 1) revenue inmediato, 2) pipeline, 3) adquisición, 4) conversión, 5) retención, 6) automatización. No se automatiza una operación que no funcione manualmente primero.
 
+## Infraestructura (para no volver a buscarlo)
+
+- **Dominio qualivo.io:** registrador Dinahosting; zona DNS en sus nameservers de marca blanca (`ns*.gestiondecuenta.com`). La cuenta NO está bajo maikel@qualivo.io (probable info@maikelechevarria.com o Gmail personal). Correo en Google Workspace; web en Vercel (equipo "Qualivo Agency", proyecto de la landing). SPF actual `v=spf1 a mx ~all`: Resend sin verificar hasta que Maikel entre en Dinahosting y pegue DKIM/SPF/MX de Resend.
+- **Meta Ads:** ningún agente tiene API de Meta. Las campañas se montan a mano en el Administrador de anuncios (Maikel); los agentes preparan (creatividades, copies, UTM, píxel, eventos) y miden por eventos propios (GA4/Vercel/GHL), no por la API de Meta.
+
 ## Registro de cambios
 
 - **2026-09-09** · Estrategia central v1 publicada como Google Doc editable (fuente de verdad de Maikel) y enlazada desde `sistema/estrategia-central.md`.
