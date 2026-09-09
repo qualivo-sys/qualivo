@@ -90,6 +90,7 @@ Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain
 - **Respuestas de campañas:** SDR de respuestas de Outbound en copiloto (Smartlead → n8n → sesión; borrador → ok de Maikel → envío en el hilo).
 - **Métricas:** `captacion/datos/funnel-diario.csv` (Outbound) es la fuente única del scorecard; Landing publica `web-diario.csv`; el cerebro rellena `clientes` desde Quipu los viernes. Pendiente: columnas respuestas_reales, señales, toques_24h, reuniones_celebradas, propuestas, y `funnel-semana.csv`.
 - **Automatización:** sin construir nada nuevo hasta tener el mapa único de n8n (`automatizaciones/mapa-n8n.md`).
+- **Cuadro de mando de growth (pedido por Maikel 9-sep):** una sola página, orden fijo: 1) North Star y scorecard de 8 números, 2) embudo por canal, 3) web · contenido · SEO, 4) redes, 5) pipeline y MRR (Quipu). Fuentes, todas CSV en ramas de agentes, una fila por día o semana: `funnel-diario.csv` y `funnel-semana.csv` (Outbound), `web-diario.csv`, `contenido-diario.csv`, `seo-diario.csv`, `seo-keywords-semanal.csv`, `redes-semanal.csv` (Landing), `ventas/pipeline.md` (Ventas), Quipu (cerebro). El cerebro construye la v1 el viernes 12-sep con los datos acumulados desde el 10 y la actualiza cada mañana en la revisión de las 9:30. Ciclo semanal de entrenamiento: viernes = leer cuadro → matar/escalar hipótesis (Notion Experimentos) → actualizar estrategia-central, Outbound Brain y encargos; lunes = prioridades desde el número más lejos de objetivo.
 
 ## Registro de cambios
 
