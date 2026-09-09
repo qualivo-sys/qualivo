@@ -61,7 +61,9 @@ module.exports = async function handler(req, res) {
     if (resumen.enviados >= MAX_ENVIOS) break;
     const tags = (c.tags || []).map(String);
     const email = String(c.email || '');
-    if (!email || tags.includes('sec-baja') || tags.includes('sec-tibio') || tags.includes('respondio') || tags.includes('diagnostic-cualificado') || c.dnd === true) { resumen.saltados++; continue; }
+    // Fuera de la secuencia: baja, tibio, contestó, reunión reservada, cliente, cualificado a mano o DND
+    const PARAR = ['sec-baja', 'sec-tibio', 'respondio', 'reunion-reservada', 'cliente-ganado', 'diagnostic-cualificado'];
+    if (!email || PARAR.some(function (t) { return tags.includes(t); }) || c.dnd === true) { resumen.saltados++; continue; }
     const cuello = (tags.find(function (t) { return t.startsWith('cuello-'); }) || '').slice(7);
     if (!cuello || !S.ORDEN.includes(cuello)) { resumen.saltados++; continue; }
     const segunda = (tags.find(function (t) { return t.startsWith('segunda-'); }) || '').slice(8);
