@@ -12,28 +12,34 @@ function sha(v) {
   return v ? crypto.createHash('sha256').update(v).digest('hex') : null;
 }
 
+// Envía un evento estándar de Meta (Lead, Schedule, Purchase…) por la Conversions API.
 // Devuelve 'enviado', 'sin_token' o lanza error.
-async function enviarLead(d) {
+async function enviarEvento(nombre, d) {
   const token = process.env.META_CAPI_TOKEN;
   if (!token) return 'sin_token';
   const userData = {
-    em: [sha(d.email)],
+    em: d.email ? [sha(d.email)] : undefined,
     ph: d.telefono ? [sha(String(d.telefono).replace(/\D/g, ''))] : undefined,
     fn: d.nombre ? [sha(String(d.nombre).split(' ')[0])] : undefined,
     country: [sha('es')],
+    external_id: d.contactId ? [sha(d.contactId)] : undefined,
     client_ip_address: d.ip || undefined,
     client_user_agent: d.ua || undefined,
     fbp: d.fbp || undefined,
     fbc: d.fbc || undefined
   };
+  if (!userData.em && !userData.ph && !userData.external_id) throw new Error('sin datos de contacto para Meta');
+  const custom = Object.assign({ content_name: 'diagnostico-crecimiento' }, d.custom || {});
+  if (d.cuello) custom.cuello = d.cuello;
+  if (d.nivel) custom.nivel = d.nivel;
   const evento = {
-    event_name: 'Lead',
+    event_name: nombre,
     event_time: Math.floor(Date.now() / 1000),
     event_id: d.eventoId || undefined,
-    action_source: 'website',
+    action_source: d.accion || 'website',
     event_source_url: d.url || 'https://qualivo.io/donde-se-rompe-tu-crecimiento/',
     user_data: userData,
-    custom_data: { cuello: d.cuello || '', nivel: d.nivel || '', content_name: 'diagnostico-crecimiento' }
+    custom_data: custom
   };
   const body = { data: [evento] };
   if (process.env.META_TEST_EVENT_CODE) body.test_event_code = process.env.META_TEST_EVENT_CODE;
@@ -45,6 +51,8 @@ async function enviarLead(d) {
   if (!r.ok) throw new Error('Meta CAPI ' + r.status + ': ' + (await r.text()).slice(0, 200));
   return 'enviado';
 }
+
+function enviarLead(d) { return enviarEvento('Lead', d); }
 
 // Lee _fbp y _fbc de la cabecera Cookie (cookies de primera parte del píxel).
 function cookiesMeta(req) {
@@ -58,4 +66,4 @@ function cookiesMeta(req) {
   return out;
 }
 
-module.exports = { enviarLead, cookiesMeta };
+module.exports = { enviarEvento, enviarLead, cookiesMeta };
