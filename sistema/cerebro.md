@@ -81,7 +81,7 @@ Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain
 ## Infraestructura (para no volver a buscarlo)
 
 - **Dominio qualivo.io:** registrador Dinahosting; zona DNS en sus nameservers de marca blanca (`ns*.gestiondecuenta.com`). La cuenta NO está bajo maikel@qualivo.io (probable info@maikelechevarria.com o Gmail personal). Correo en Google Workspace; web en Vercel (equipo "Qualivo Agency", proyecto de la landing). SPF actual `v=spf1 a mx ~all`: Resend sin verificar hasta que Maikel entre en Dinahosting y pegue DKIM/SPF/MX de Resend.
-- **Meta Ads:** ningún agente tiene API de Meta. Las campañas se montan a mano en el Administrador de anuncios (Maikel); los agentes preparan (creatividades, copies, UTM, píxel, eventos) y miden por eventos propios (GA4/Vercel/GHL), no por la API de Meta.
+- **Meta Ads (Marketing API):** Maikel la tiene montada desde hace tiempo. En el repo hay conector de lectura (`src/connectors/MetaAds.gs`, token `META_ACCESS_TOKEN` + `META_AD_ACCOUNT_ID` en Script Properties, permiso `ads_read`) usado en los dashboards de EAC (act_10151404080652508) y Eleva. Para MONTAR campañas hace falta un token con `ads_management` sobre la cuenta publicitaria de Qualivo; pendiente de confirmar por Maikel dónde vive ese token. Regla: el agente construye la campaña por API en PAUSADO, Maikel revisa en el Administrador y la activa él.
 
 ## Registro de cambios
 
