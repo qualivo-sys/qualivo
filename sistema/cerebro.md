@@ -83,6 +83,14 @@ Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain
 - **Dominio qualivo.io:** registrador Dinahosting; zona DNS en sus nameservers de marca blanca (`ns*.gestiondecuenta.com`). La cuenta NO está bajo maikel@qualivo.io (probable info@maikelechevarria.com o Gmail personal). Correo en Google Workspace; web en Vercel (equipo "Qualivo Agency", proyecto de la landing). SPF actual `v=spf1 a mx ~all`: Resend sin verificar hasta que Maikel entre en Dinahosting y pegue DKIM/SPF/MX de Resend.
 - **Meta Ads (Marketing API):** Maikel la tiene montada desde hace tiempo. En el repo hay conector de lectura (`src/connectors/MetaAds.gs`, token `META_ACCESS_TOKEN` + `META_AD_ACCOUNT_ID` en Script Properties, permiso `ads_read`) usado en los dashboards de EAC (act_10151404080652508) y Eleva. Para MONTAR campañas hace falta un token con `ads_management` sobre la cuenta publicitaria de Qualivo; pendiente de confirmar por Maikel dónde vive ese token. Regla: el agente construye la campaña por API en PAUSADO, Maikel revisa en el Administrador y la activa él.
 
+## Decisiones de reparto vigentes (9 sep, cierre)
+
+- **Secuencia email día 1/3/7 de la Radiografía:** Landing (Vercel cron + Resend + webhook de Resend que suma puntuación). La versión n8n de Automatización queda aparcada como plan B.
+- **Día 1:** formulario → tarea de GHL con mensaje relleno (Landing). Identificados por `?l=` sin formulario → webhook `radiografia-dia1` de Outbound, respuesta en el hilo de Smartlead.
+- **Respuestas de campañas:** SDR de respuestas de Outbound en copiloto (Smartlead → n8n → sesión; borrador → ok de Maikel → envío en el hilo).
+- **Métricas:** `captacion/datos/funnel-diario.csv` (Outbound) es la fuente única del scorecard; Landing publica `web-diario.csv`; el cerebro rellena `clientes` desde Quipu los viernes. Pendiente: columnas respuestas_reales, señales, toques_24h, reuniones_celebradas, propuestas, y `funnel-semana.csv`.
+- **Automatización:** sin construir nada nuevo hasta tener el mapa único de n8n (`automatizaciones/mapa-n8n.md`).
+
 ## Registro de cambios
 
 - **2026-09-09 (tarde)** · "Dale caña" de Maikel. Recorrido Radiografía → reunión en `sistema/radiografia-recorrido.md` (regla: no se pide reunión, se le pone número a la fuga). Encargos enviados: Landing (3 cambios en la Radiografía, etapa y workflow GHL, emails día 1/3/7, campaña Meta con UTM alineadas y anuncios 01+06), Outbound (motor de exploración de ICPs §2.7, agente de voz con dos puertas, agente de WhatsApp en copiloto, enlace `?l=<id>`), Ventas (7 mensajes + plantilla plan 48 h en `ventas/radiografia/`), Automatización (secuencia 3-7-14 enchufada; timbre nuevo `trig_01BbyosrYLyxV5km966rguJs`). Tarea Todoist "Cola de aprobaciones del cerebro" para Maikel hoy 17:00.
