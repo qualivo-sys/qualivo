@@ -25,9 +25,9 @@ payload = {
         "messages": [{"role": "system", "content": GUION}],
         "temperature": 0.6,
     },
-    "voice": VOCES["candidata_1"],
+    "voice": {"provider": "11labs", "voiceId": "1eHrpOW5l98cxiSRjbzJ", "model": "eleven_multilingual_v2"},  # Raquel (aprobada 9-sep, cuenta 11labs propia)
     "transcriber": {"provider": "deepgram", "model": "nova-2", "language": "es"},
-    "firstMessage": "Hola, ¿{{nombre}}? Mira, te llamo de parte de Maikel Echevarría, de Qualivo. Te escribió hace unos días por email, por lo de {{dato_corto}}. ¿Te pillo bien dos minutos?",
+    "firstMessage": "Hola, ¿{{nombre}}? Mira, te llamo de parte de Maikel Echevarría, de Cualivo. Te escribió hace unos días por email, por lo de {{dato_corto}}. ¿Te pillo bien dos minutos?",
     "firstMessageMode": "assistant-speaks-first",
     "silenceTimeoutSeconds": 12,
     "maxDurationSeconds": 300,
