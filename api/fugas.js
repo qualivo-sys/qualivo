@@ -83,6 +83,9 @@ module.exports = async function handler(req, res) {
   const valorCliente = String(b.valor_cliente || '');
   const sector = String(b.sector || '');
   const rol = String(b.rol || '');
+  let telefono = String(b.telefono || '').replace(/[^\d+]/g, '');
+  if (telefono && /^\d{9}$/.test(telefono)) telefono = '+34' + telefono;
+  const telefonoOk = !telefono || /^\+\d{9,15}$/.test(telefono);
   const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
   const utmOk = Object.keys(utm).every(function (k) { return /^(utm_(source|medium|campaign|content|term)|ref)$/.test(k) && typeof utm[k] === 'string' && utm[k].length <= 80; });
 
@@ -96,7 +99,7 @@ module.exports = async function handler(req, res) {
       total === null || maximo === null || total < 0 || maximo < 0 ||
       total > 33 || maximo > 33 || total > maximo ||
       !EMPLEADOS.includes(empleados) || !VALORES.includes(valorCliente) || !SECTORES.includes(sector) ||
-      !ROLES.includes(rol) || !utmOk) {
+      !ROLES.includes(rol) || !utmOk || !telefonoOk) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
   }
 
@@ -114,6 +117,7 @@ module.exports = async function handler(req, res) {
   if (sector) tags.push('sector-' + SECTOR_SLUG[sector]);
   if (rol) tags.push('rol-' + (rol === 'Dueño o socio' ? 'dueno' : rol === 'Otro' ? 'otro' : 'directivo'));
   if (utm.utm_source) tags.push('utm-' + String(utm.utm_source).toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30));
+  if (telefono) tags.push('con-whatsapp');
   if (completo) tags.push('diagnostico-completo');
   if (prioritario) tags.push('prioridad-alta');
 
@@ -125,6 +129,7 @@ module.exports = async function handler(req, res) {
         locationId: locationId,
         name: nombre,
         email: email,
+        phone: telefono || undefined,
         source: 'qualivo.io — dónde se rompe tu crecimiento',
         tags: tags
       })
@@ -155,6 +160,7 @@ module.exports = async function handler(req, res) {
         '',
         'Perfil:',
         '· Papel: ' + (rol || 'no indicado'),
+        '· WhatsApp: ' + (telefono || 'no dejado'),
         '· Personas en la empresa: ' + empleados,
         '· Valor de un cliente al año: ' + valorCliente,
         '· Sector: ' + (sector || 'no indicado'),
@@ -184,7 +190,7 @@ module.exports = async function handler(req, res) {
 
     await avisar({
       nombre, email, cuello, segunda, sintoma, nivel, total, maximo, completo, dims,
-      empleados, valorCliente, sector, rol, utm, prioritario, contactId, locationId
+      empleados, valorCliente, sector, rol, utm, telefono, prioritario, contactId, locationId
     }).catch(function (err) {
       console.error('[dx] Aviso interno falló:', err);
     });
@@ -257,6 +263,9 @@ async function avisar(lead) {
     '<table style="border-collapse:collapse;font-size:15px">' +
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
+    (lead.telefono ? '<tr><td style="padding:6px 14px 6px 0;color:#5A5E66">WhatsApp</td><td style="padding:6px 0"><a href="https://wa.me/' + lead.telefono.replace('+', '') +
+      '?text=' + encodeURIComponent('Hola ' + lead.nombre.split(' ')[0] + ', soy Maikel, de Qualivo. He visto tu diagnóstico: se te rompe en ' + R.NOMBRE[lead.cuello].toLowerCase() + '. ¿Te cuadra?') +
+      '" style="font-weight:700">Escribirle por WhatsApp (' + esc(lead.telefono) + ') →</a></td></tr>' : '') +
     fila('Sector', lead.sector || 'no indicado') +
     fila('Papel', lead.rol || 'no indicado') +
     fila('Origen', Object.keys(lead.utm).length ? Object.keys(lead.utm).map(function (k) { return k + '=' + lead.utm[k]; }).join(' · ') : 'directo') +
