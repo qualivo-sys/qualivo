@@ -198,12 +198,16 @@ module.exports = async function handler(req, res) {
 
     // La radiografía prometida en el formulario. Si falla, el lead ya está
     // guardado: no se devuelve error al navegador por esto.
-    await enviarRadiografia({ nombre, email, cuello, dims, completo })
+    // Se devuelve el resultado del envío (sin datos sensibles) para poder diagnosticar
+    // desde fuera si Resend acepta el remitente configurado.
+    const radiografia = await enviarRadiografia({ nombre, email, cuello, dims, completo })
+      .then(function () { return 'enviada'; })
       .catch(function (err) {
         console.error('[dx] Radiografía no enviada:', err);
+        return 'error: ' + String(err && err.message || err).slice(0, 160);
       });
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, radiografia: radiografia });
   } catch (err) {
     console.error('[dx] Error inesperado:', err);
     return res.status(502).json({ ok: false, error: 'crm_error' });
