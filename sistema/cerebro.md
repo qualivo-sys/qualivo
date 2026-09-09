@@ -42,7 +42,7 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 
 Todo mensaje, secuencia, post, anuncio, propuesta y respuesta se alinea a esto. Si un tramo no cabe en la frase, sobra el tramo.
 
-**Documento eje (9 sep 2026):** la estrategia completa (propuesta de valor, ICPs, mensaje por canal, recorrido, medición, plan 30 días) está en `sistema/estrategia-central.md`. La copia que edita Maikel es el Google Doc "Estrategia Central Qualivo v1" (id `1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o`); el cerebro sincroniza Doc → repo → agentes. Si hay discrepancia, manda el Doc.
+**Documento eje (9 sep 2026):** la estrategia completa (propuesta de valor, ICPs, mensaje por canal, recorrido, medición, plan 30 días) está en `sistema/estrategia-central.md`. La copia que edita Maikel es el Google Doc "Estrategia Central Qualivo v1" (id `1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o`); el cerebro sincroniza Doc → repo → agentes. Si hay discrepancia, manda el Doc. Para outbound existe además el **OUTBOUND BRAIN** en Notion (18 ICPs, scoring de encaje 0-50, prohibiciones de copy, gobernanza), editado por Maikel y espejado por Outbound en `estrategia/outbound-brain.md`; el motor de exploración de ICPs (estrategia §2.7) se alimenta de ahí.
 
 | | |
 |---|---|

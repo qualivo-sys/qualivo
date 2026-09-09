@@ -166,6 +166,21 @@ Genéricos en volumen · señales "estáis contratando" (0/151 con 62% de apertu
 - Radiografía completada: +40 · clic en calendario: +35 · respuesta escrita real: +30 · reenvío interno: +25 · 3+ aperturas: +15 · aceptación LinkedIn: +10 · dato del probe negativo (fuga visible): +10 · ICP 1: +10 · autorespuesta/rechazo: −100.
 - ≥60 → llamada hoy · 30-59 → email de paso pequeño <24 h · <30 → sigue en secuencia.
 
+### 2.7 Motor de exploración de ICPs **[DECISIÓN de Maikel, 9 sep]**
+
+Maikel no quiere apostar solo por ICP 1: la respuesta global es 1,56 % y las cifras buenas son muestras pequeñas. El motor de outbound explora ICPs en paralelo hasta dar con la combinación que produce conversaciones. Con reglas, no a ojo:
+
+- **Fuente de ICPs:** el **OUTBOUND BRAIN** de Notion (18 ICPs con scoring 0-50 de encaje, lo mantiene Maikel; espejo en `estrategia/outbound-brain.md` de la rama de Outbound) y sus 12 recetas con email 1 ya escritas (`estrategia/icps-brain-mensajes.md`). No se crean listas de ICPs paralelas: el atlas del Growth OS v3 se vuelca ahí como anexo.
+- **Dos puntuaciones, no tres:** el 0-50 del Brain mide *encaje del ICP* (antes de escribir); el 0-100 de §2.6 mide *calor de la señal* (después de enviar). Son complementarias.
+- **Reparto semanal:** 300 emails a explotación (el mejor ICP de la semana anterior; hoy multiservicio) + 3 brazos nuevos × 120 leads a exploración. Total ~660/semana, bajo el techo de 375/día.
+- **Una sola variable:** todos los brazos usan la estructura de email 1 validada (señal concreta → observación → hipótesis → pregunta fácil). Cambia el ICP, la fuga atribuida y el caso citado. Nunca mensaje e ICP a la vez.
+- **Decisión a los 7 días** (email 1 y 2 enviados, n ≥ 100): ≥5 % respuestas reales o ≥2 clics → promociona a explotación · 2-5 % → una semana más con el ángulo de otra fuga · <2 % → se mata y se apunta en el Documento Madre. Por debajo de 100 no se lee nada.
+- **Ningún brazo sin cosecha:** todas las señales entran en la misma lista caliente (§2.6) y en GHL como oportunidad "Conversación abierta" con el texto literal (ya automatizado por Outbound el 9-sep). Explorar sin llamar solo fabrica señales que nadie trabaja.
+- **Orden de brazos** (prioridades del Brain, filtradas por señal verificable + caso propio): semana 15-sep → ICP 15 base desaprovechada (caso Nuria), ICP 08 CRM sin disciplina (Nuria/Equipzilla), ICP 02 paid + equipo comercial (Equipzilla). Semana 22-sep → corredurías, ETT/fincas, ICP 17 B2B ciclo largo (BelloVinilo).
+- **Radiografía en email 1:** el Brain la prohíbe como CTA de entrada. Se respeta en exploración. Solo se prueba como variante B en la campaña de explotación multiservicio (experimento 2), donde hay volumen para leer el resultado.
+- **Lunes:** tabla brazo × enviados × respuesta real × clics × señales → decisión. Una línea por brazo. "Dar con la clave" es seis semanas de esa tabla.
+- **Cuello real del motor:** las aprobaciones. Copies de dirección nueva (desde el 2-sep), 3 secuencias del 2-sep, 12 recetas del 8-sep y guion de Vapi esperan el ok de Maikel. Regla: Maikel aprueba plantillas por ICP una vez; los leads que siguen una plantilla aprobada y la regla de evidencia salen sin volver a preguntar.
+
 ---
 
 ## 3. Mensaje por canal
