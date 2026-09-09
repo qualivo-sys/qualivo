@@ -69,6 +69,28 @@ mucho sentido». NO subir ni programar nada en GHL (Instagram/LinkedIn) hasta
 que Maikel levante la pausa por escrito. Producir borradores sí; publicar no.
 El blog no está afectado por esta pausa.
 
+## Catálogo de formatos (lista de Vilma Núñez que trajo Maikel, 9-sep)
+Regla de siempre: se copia el molde, nunca el mensaje. Cada formato solo vale
+si sirve para CORREGIR EL ORDEN o enseñar dónde se rompe el crecimiento.
+Adaptación a Qualivo de los 15 (✅ usar · ⚠️ con cuidado · ❌ no encaja):
+1. No digas / Mejor di → ✅ «No digas “necesito más leads” / Mejor di “¿qué pasa con los que ya llegan?”». Molde de pares, ya tenemos plantilla.
+2. Tu top 10 → ✅ «Las 10 frases que oigo en una empresa que se rompe en seguimiento».
+3. 24 horas · vlog → ⚠️ Solo como «24 horas de un presupuesto sin respuesta» (historia de un presupuesto, no de Maikel).
+4. Malo, bueno, excelente → ✅ Tres formas de contestar a un formulario (a los 2 días / el mismo día / en 10 minutos con una pregunta).
+5. Este o esto → ✅ «¿Subir el presupuesto de anuncios o llamar a los 14 presupuestos sin respuesta?». Puente directo al diagnóstico.
+6. Bandera roja vs verde → ✅ Banderas rojas de cada dimensión (captación, conversión, seguimiento, dependencia, control). Serie de 5.
+7. Lista rápida → ✅ «5 cosas que apunto en la primera hora dentro de una empresa».
+8. No hagas esto vs haz esto → ✅ Igual que el 1 pero en acción: «No contrates a otro comercial / Haz que el que tienes llame a los que ya pidieron precio».
+9. Una vez al día, a la semana, al mes → ✅ Perfecto para CONTROL: qué mirar cada día (respuestas pendientes), cada semana (presupuestos sin contestar), cada mes (de dónde vino cada cliente).
+10. Clonado en pantalla → ⚠️ Maikel discutiendo con Maikel («el dueño» vs «el consultor»). Solo si se graba bien; no con avatar.
+11. Dar un argumento y explicar → ✅ Es nuestro formato natural de LinkedIn (comprobación + tesis).
+12. Sobrevalorado vs infravalorado → ✅ «Sobrevalorado: más seguidores. Infravalorado: llamar al día siguiente». Serie por dimensión.
+13. Lista de niveles → ✅ Niveles de una empresa según cómo lleva el seguimiento (del «esperamos a que llame» al «fecha y responsable»). Encaja con el nivel del diagnóstico.
+14. Explicar algo en un minuto → ✅ Reel de un minuto por dimensión: «Qué es el cuello de botella de control en 60 segundos».
+15. Comprar por nivel económico → ❌ Es de consumo; no aplica. Variante posible: «qué arreglar primero con 0 €, con 300 €, con 3.000 €».
+Prioridad para cuando se levante la pausa: 6 (banderas por dimensión), 9 (día/semana/mes), 5 (este o esto), 13 (niveles), 1 (no digas / mejor di).
+Todos con CTA al diagnóstico cuando el formato lo permita sin forzar.
+
 ## Identidad en redes sociales (regla de Maikel, 2-sep)
 En redes sociales se publica SIEMPRE con la identidad personal de Maikel
 (firma «Maikel Echevarría» / @maikel.echevarria en los creativos y voz en
