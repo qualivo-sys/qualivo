@@ -95,6 +95,10 @@
     {
       "path": "/api/secuencia/",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/informe/",
+      "schedule": "45 6 * * *"
     }
   ]
 }
