@@ -1,0 +1,160 @@
+{
+  "name": "Qualivo · Radiografía PARADA total (respuesta o cita → etiqueta + tarea puente)",
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "b3000000-0000-4000-8000-000000000001",
+      "name": "Parada: respuesta o cita",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "radiografia-parada",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "radiografia/parada",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000002",
+      "name": "Config parada",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, 300],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "d1", "name": "ghl_base", "type": "string", "value": "https://services.leadconnectorhq.com" },
+            { "id": "d2", "name": "maikel_user_id", "type": "string", "value": "PON-AQUI-USER-ID-MAIKEL" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000003",
+      "name": "Preparar parada y puente",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Payload esperado: { contact_id, motivo: 'email_reply'|'whatsapp_reply'|'cita', nombre?, empresa?, cuello?, puntos?, texto_respuesta? }\n// Lo llaman: el workflow de GHL de Landing (reply de email / cita creada) y los workflows del agente\n// de WhatsApp de Outbound (reply de WhatsApp). Idempotente: repetir la llamada no duplica daño.\nconst entrada = $input.first().json;\nconst b = entrada.body || entrada;\nif (!b.contact_id) throw new Error('Payload sin contact_id.');\n\nconst quitarAcentos = (s) => String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();\nconst cuello = quitarAcentos(b.cuello || 'ninguno');\nconst motivo = ['email_reply', 'whatsapp_reply', 'cita'].includes(b.motivo) ? b.motivo : 'email_reply';\n\nconst REACCION = {\n  captacion: 'Reacciona con su número: cuántas oportunidades son al año y qué valen con su ticket medio. Una frase, sin adjetivos.',\n  conversion: 'Reacciona con su número: minutos u horas de espera → cuántos leads se enfrían al mes con su volumen. Una frase, sin adjetivos.',\n  seguimiento: \"Ejemplo del guion: 'Ocho presupuestos sin respuesta. Si tu ticket medio anda por los 2.000 €, son 16.000 € que ya te costaron atraer y calcular, esperando una llamada de dos minutos.'\",\n  dependencia: 'Reacciona con su número: cuántas de 30 se atenderían sin él → % del negocio que depende de su agenda. Una frase, sin adjetivos.',\n  control: 'Reacciona con su número (o su “no lo sé”): no saber de dónde salió el último cliente es la fuga misma. Una frase, sin adjetivos.',\n  ninguno: 'Reacciona a la pieza que nombró: qué costaría al año que se cayera. Una frase, sin adjetivos.',\n};\n\nconst PUENTE = 'Con ese dato y tu ticket medio te lo pongo en un folio: cuánto se está escapando y qué haría yo primero. ¿Lo vemos en 20 minutos con tus números delante, o te lo mando por escrito?';\nconst NI_IDEA = \"Si dice 'ni idea': 'Es lo normal, casi nadie lo tiene. Justo por eso: ¿lo miramos en 20 minutos o prefieres que te mande cómo contarlo en una semana?'\";\n\nconst quien = [b.nombre, b.empresa].filter(Boolean).join(' · ') || b.contact_id;\nconst nota = `[secuencia radiografía] PARADA por ${motivo}. ${b.texto_respuesta ? 'Respuesta literal: «' + b.texto_respuesta + '»' : 'Sin texto adjunto.'}`;\n\nconst tareaTitulo = `PUENTE (responder <2h) · ${quien}`;\nconst tareaCuerpo =\n  `Contestó a la secuencia de la radiografía (${motivo}). Secuencia parada.\\n\\n` +\n  `Mini-brief: cuello ${cuello}${b.puntos ? ' · ' + b.puntos + '/100' : ''}${b.empresa ? ' · ' + b.empresa : ''}.\\n` +\n  `${b.texto_respuesta ? 'Qué dijo: «' + b.texto_respuesta + '»\\n' : ''}` +\n  `\\n1) ${REACCION[cuello] || REACCION.ninguno}\\n` +\n  `2) Puente (dos salidas, las dos avanzan):\\n«${PUENTE}»\\n` +\n  `- 20 min → agenda con huecos reales.\\n- Por escrito → tarea a Ventas “plan 48 h” con el brief.\\n${NI_IDEA}`;\n\nreturn [{ json: { contact_id: b.contact_id, motivo, esCita: motivo === 'cita', nota, tareaTitulo, tareaCuerpo } }];"
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000004",
+      "name": "Etiqueta secuencia-parada (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [820, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config parada').first().json.ghl_base }}/contacts/{{ $json.contact_id }}/tags",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ tags: ['secuencia-parada'] }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000005",
+      "name": "Nota en el contacto (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1040, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config parada').first().json.ghl_base }}/contacts/{{ $('Preparar parada y puente').first().json.contact_id }}/notes",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ body: $('Preparar parada y puente').first().json.nota }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000006",
+      "name": "IF es cita",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1260, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $('Preparar parada y puente').first().json.esCita }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000007",
+      "name": "Cita creada: sin tarea puente",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1480, 200],
+      "parameters": {}
+    },
+    {
+      "id": "b3000000-0000-4000-8000-000000000008",
+      "name": "Tarea PUENTE a Maikel <2h (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1480, 400],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config parada').first().json.ghl_base }}/contacts/{{ $('Preparar parada y puente').first().json.contact_id }}/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ title: $('Preparar parada y puente').first().json.tareaTitulo, body: $('Preparar parada y puente').first().json.tareaCuerpo, dueDate: new Date(Date.now() + 2 * 3600000).toISOString(), completed: false, assignedTo: $('Config parada').first().json.maikel_user_id }) }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Parada: respuesta o cita": { "main": [[{ "node": "Config parada", "type": "main", "index": 0 }]] },
+    "Config parada": { "main": [[{ "node": "Preparar parada y puente", "type": "main", "index": 0 }]] },
+    "Preparar parada y puente": { "main": [[{ "node": "Etiqueta secuencia-parada (GHL)", "type": "main", "index": 0 }]] },
+    "Etiqueta secuencia-parada (GHL)": { "main": [[{ "node": "Nota en el contacto (GHL)", "type": "main", "index": 0 }]] },
+    "Nota en el contacto (GHL)": { "main": [[{ "node": "IF es cita", "type": "main", "index": 0 }]] },
+    "IF es cita": { "main": [
+      [{ "node": "Cita creada: sin tarea puente", "type": "main", "index": 0 }],
+      [{ "node": "Tarea PUENTE a Maikel <2h (GHL)", "type": "main", "index": 0 }]
+    ] }
+  },
+  "pinData": {},
+  "active": false
+}

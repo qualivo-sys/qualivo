@@ -1,0 +1,534 @@
+{
+  "name": "Qualivo · Radiografía secuencia 3-7 (emails GHL, parada por etiqueta)",
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "b2000000-0000-4000-8000-000000000001",
+      "name": "Entrada: radiografía completada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "radiografia-secuencia",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "radiografia/secuencia",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000002",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, 300],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "c1", "name": "modo_prueba", "type": "boolean", "value": true },
+            { "id": "c2", "name": "ghl_base", "type": "string", "value": "https://services.leadconnectorhq.com" },
+            { "id": "c3", "name": "location_id", "type": "string", "value": "PON-AQUI-LOCATION-ID" },
+            { "id": "c4", "name": "tibio_stage_id", "type": "string", "value": "PON-AQUI-STAGE-ID-TIBIO" },
+            { "id": "c5", "name": "sdr_user_id", "type": "string", "value": "PON-AQUI-USER-ID-SDR-O-MAIKEL" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000003",
+      "name": "Lead y copys",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Normaliza el payload del webhook y construye los 3 emails por cuello.\n// COPYS: borrador del cerebro (sistema/radiografia-recorrido.md §2). Cuando Ventas publique\n// ventas/radiografia/ en su rama, se sustituyen aquí (solo este nodo).\nconst entrada = $('Entrada: radiografía completada').first().json;\nconst b = entrada.body || entrada;\nif (!b.contact_id) throw new Error('Payload sin contact_id — revisar el webhook del workflow de entrada de GHL (Landing).');\n\nconst quitarAcentos = (s) => String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase();\nlet cuelloRaw = b.cuello;\nif (!cuelloRaw && Array.isArray(b.tags)) cuelloRaw = (b.tags.find((t) => /^cuello-/.test(t)) || '').replace('cuello-', '');\nconst CUELLOS = ['captacion', 'conversion', 'seguimiento', 'dependencia', 'control', 'ninguno'];\nconst cuello = CUELLOS.includes(quitarAcentos(cuelloRaw)) ? quitarAcentos(cuelloRaw) : 'ninguno';\nconst BONITO = { captacion: 'captación', conversion: 'conversión', seguimiento: 'seguimiento', dependencia: 'dependencia', control: 'control', ninguno: 'sin cuello claro' };\n\nconst PREGUNTA = {\n  captacion: '¿cuántas oportunidades nuevas os entraron el mes pasado?',\n  conversion: 'cuando entra un formulario o un WhatsApp, ¿cuánto tarda en contestarse de media?',\n  seguimiento: '¿cuántos presupuestos del mes pasado siguen sin respuesta?',\n  dependencia: 'si mañana entraran 30 oportunidades, ¿cuántas se atenderían sin pasar por ti?',\n  control: '¿de qué canal salió el último cliente que firmó? El último cliente, no el último lead.',\n  ninguno: '¿qué pieza se caería primero si entrara el triple de trabajo?',\n};\n\n// Día 3: caso con número + acción que puede hacer hoy sin nosotros.\nconst DIA3 = {\n  captacion: { caso: 'BelloVinilo', cuerpo: 'El error más común en captación no es invertir poco: es atraer a cualquiera.\\n\\nEn BelloVinilo no tocamos primero el presupuesto: afinamos a quién entraba. De 3.600 € al mes pasaron a 30.000 €.\\n\\nAcción que puedes hacer hoy sin nosotros: coge los últimos 10 clientes que firmaron y apunta de qué canal salió cada uno. Donde salgan 6 o más, ahí va tu próximo euro.' },\n  conversion: { caso: 'Eleva', cuerpo: 'El error más común en conversión no es el anuncio: es contestar tarde a quien ya levantó la mano.\\n\\nEn Eleva el 61% del presupuesto se iba en leads que no cualificaban; filtrando y contestando en minutos, hoy hacen el doble de entrevistas con la mitad.\\n\\nAcción que puedes hacer hoy sin nosotros: mira cuánto tardó en contestarse el último formulario que os entró. Si son más de 15 minutos, ahí está la fuga.' },\n  seguimiento: { caso: 'Nuria', cuerpo: 'El error más común en seguimiento: presupuestos que nadie persigue.\\n\\nNuria multiplicó por 6,45 lo que sacaba de cada euro cuando cada presupuesto pasó a tener fecha de siguiente toque.\\n\\nAcción que puedes hacer hoy sin nosotros: cuenta los presupuestos del mes pasado sin respuesta y ponle a cada uno una fecha de llamada esta semana.' },\n  dependencia: { caso: 'EAC', cuerpo: 'El error más común en dependencia: que todo pase por el dueño, también lo que no debería.\\n\\nEAC multiplicó por 10,2 el retorno cuando el sistema pasó a captar, cualificar y perseguir solo, y el dueño entraba únicamente a cerrar.\\n\\nAcción que puedes hacer hoy sin nosotros: apunta las 3 tareas comerciales que solo sabes hacer tú y documenta una de ellas hoy en un folio.' },\n  control: { caso: 'Equipzilla', cuerpo: 'El error más común en control: invertir sin saber qué funciona.\\n\\nEn Equipzilla el ROAS estaba en 0,1; midiendo canal a canal y cortando lo que no rendía, llegó a 7,6.\\n\\nAcción que puedes hacer hoy sin nosotros: averigua de qué canal salió tu último cliente firmado. Si no lo sabes en 5 minutos, esa es la fuga.' },\n  ninguno: { caso: 'Eleva', cuerpo: 'Cuando no sale un cuello claro, casi siempre es que aún no hay un número que lo señale.\\n\\nEn Eleva el número apareció al medir: el 61% del presupuesto se iba en leads que no cualificaban. Hoy hacen el doble de entrevistas con la mitad.\\n\\nAcción que puedes hacer hoy sin nosotros: elige la pieza que se caería primero si entrara el triple de trabajo y ponle un número esta semana.' },\n};\n\n// Día 7: qué se hizo, en qué orden, qué número cambió + oferta del análisis por escrito.\nconst DIA7 = {\n  captacion: 'En BelloVinilo hicimos tres cosas, en este orden: definir a quién NO queríamos, mensaje solo para los que sí, y escalar únicamente lo que traía firmas. El número que cambió: de 3.600 € a 30.000 € al mes.',\n  conversion: 'En Eleva hicimos tres cosas, en este orden: filtro de cualificación en el formulario, respuesta automática en minutos, y a entrevista solo los que cumplían. El número que cambió: −61% de coste por lead y el doble de entrevistas.',\n  seguimiento: 'Con Nuria hicimos tres cosas, en este orden: inventario de presupuestos vivos, cadencia de seguimiento con fechas, y plantillas para que perseguir no dependiera de acordarse. El número que cambió: 6,45 € de vuelta por cada euro.',\n  dependencia: 'En EAC hicimos tres cosas, en este orden: documentar el proceso comercial, sistemas que captan y cualifican solos, y el dueño solo entra a cerrar. El número que cambió: 10,2× de retorno.',\n  control: 'En Equipzilla hicimos tres cosas, en este orden: medición canal a canal, cortar lo que no rendía, y reinvertir en lo que sí. El número que cambió: ROAS de 0,1 a 7,6 con un CAC un 80% menor.',\n  ninguno: 'En Eleva hicimos tres cosas, en este orden: medir, filtrar y contestar en minutos. El número que cambió: −61% de coste por lead y el doble de entrevistas.',\n};\n\nconst nombre = String(b.nombre || '').trim();\nconst primerNombre = nombre.split(' ')[0] || '';\nconst saludo = primerNombre ? `Hola ${primerNombre},` : 'Hola,';\nconst puntos = b.puntos != null && b.puntos !== '' ? String(b.puntos) : null;\nconst tieneWhatsapp = Boolean(b.whatsapp || b.telefono_whatsapp);\nconst cb = BONITO[cuello];\n\nconst email1 = `${saludo} soy Maikel. Vi que en la radiografía te salió ${cb} como cuello de botella${puntos ? `, ${puntos} de 100` : ''}. Una pregunta rápida: ${PREGUNTA[cuello]} Si me dices el número, te digo en dos líneas cuánto es eso al año.`;\nconst email3 = `${saludo}\\n\\n${DIA3[cuello].cuerpo}\\n\\nSi quieres, te digo cuánto es en tu caso: responde con el número.`;\nconst email7 = `${saludo}\\n\\n${DIA7[cuello]}\\n\\nTe hago el análisis por escrito de dónde se te escapa y qué arreglar primero. Sin llamada, sin compromiso. ¿Te lo mando?`;\nconst aHtml = (t) => t.replace(/\\n/g, '<br>');\n\nreturn [{\n  json: {\n    contact_id: b.contact_id,\n    email: b.email || null,\n    nombre, primerNombre,\n    empresa: b.empresa || b.web || '',\n    cuello, cuelloBonito: cb, puntos, tieneWhatsapp,\n    email1_asunto: `tu radiografía: ${cb}`,\n    email1_html: aHtml(email1),\n    email3_asunto: `el error más común en ${cb}`,\n    email3_html: aHtml(email3),\n    email7_asunto: `cómo lo arreglamos en ${DIA3[cuello].caso}`,\n    email7_html: aHtml(email7),\n  },\n}];"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000004",
+      "name": "Espera a día 1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [800, 300],
+      "webhookId": "radiografia-espera-d1",
+      "parameters": {
+        "amount": "={{ $('Config').first().json.modo_prueba ? 1 : 1440 }}",
+        "unit": "minutes"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000005",
+      "name": "¿Sigue viva? (día 1)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1000, 300],
+      "parameters": {
+        "url": "={{ $('Config').first().json.ghl_base }}/contacts/{{ $('Lead y copys').first().json.contact_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000006",
+      "name": "IF parada (día 1)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1200, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ (($json.contact && $json.contact.tags) || []).join(',') }}",
+              "rightValue": "secuencia-parada",
+              "operator": { "type": "string", "operation": "contains" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000007",
+      "name": "Parada: no seguir (día 1)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1400, 160],
+      "parameters": {}
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000008",
+      "name": "IF dejó WhatsApp",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1400, 420],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $('Lead y copys').first().json.tieneWhatsapp }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000009",
+      "name": "Día 1 va por WhatsApp (Outbound/Maikel)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1620, 320],
+      "parameters": {}
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000010",
+      "name": "Email día 1 (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1620, 520],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.ghl_base }}/conversations/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-04-15" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ type: 'Email', contactId: $('Lead y copys').first().json.contact_id, subject: $('Lead y copys').first().json.email1_asunto, html: $('Lead y copys').first().json.email1_html }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000011",
+      "name": "Espera a día 3",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1840, 420],
+      "webhookId": "radiografia-espera-d3",
+      "parameters": {
+        "amount": "={{ $('Config').first().json.modo_prueba ? 2 : 2880 }}",
+        "unit": "minutes"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000012",
+      "name": "¿Sigue viva? (día 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2040, 420],
+      "parameters": {
+        "url": "={{ $('Config').first().json.ghl_base }}/contacts/{{ $('Lead y copys').first().json.contact_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000013",
+      "name": "IF parada (día 3)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2240, 420],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ (($json.contact && $json.contact.tags) || []).join(',') }}",
+              "rightValue": "secuencia-parada",
+              "operator": { "type": "string", "operation": "contains" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000014",
+      "name": "Parada: no seguir (día 3)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2440, 300],
+      "parameters": {}
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000015",
+      "name": "Email día 3 (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2440, 520],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.ghl_base }}/conversations/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-04-15" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ type: 'Email', contactId: $('Lead y copys').first().json.contact_id, subject: $('Lead y copys').first().json.email3_asunto, html: $('Lead y copys').first().json.email3_html }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000016",
+      "name": "Espera a día 7",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2640, 520],
+      "webhookId": "radiografia-espera-d7",
+      "parameters": {
+        "amount": "={{ $('Config').first().json.modo_prueba ? 4 : 5760 }}",
+        "unit": "minutes"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000017",
+      "name": "¿Sigue viva? (día 7)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2840, 520],
+      "parameters": {
+        "url": "={{ $('Config').first().json.ghl_base }}/contacts/{{ $('Lead y copys').first().json.contact_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000018",
+      "name": "IF parada (día 7)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [3040, 520],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ (($json.contact && $json.contact.tags) || []).join(',') }}",
+              "rightValue": "secuencia-parada",
+              "operator": { "type": "string", "operation": "contains" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000019",
+      "name": "Parada: no seguir (día 7)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [3240, 400],
+      "parameters": {}
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000020",
+      "name": "Email día 7 (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3240, 620],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.ghl_base }}/conversations/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-04-15" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ type: 'Email', contactId: $('Lead y copys').first().json.contact_id, subject: $('Lead y copys').first().json.email7_asunto, html: $('Lead y copys').first().json.email7_html }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000021",
+      "name": "Espera 24h tras día 7",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [3440, 620],
+      "webhookId": "radiografia-espera-final",
+      "parameters": {
+        "amount": "={{ $('Config').first().json.modo_prueba ? 1 : 1440 }}",
+        "unit": "minutes"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000022",
+      "name": "¿Sigue viva? (final)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3640, 620],
+      "parameters": {
+        "url": "={{ $('Config').first().json.ghl_base }}/contacts/{{ $('Lead y copys').first().json.contact_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000023",
+      "name": "IF parada (final)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [3840, 620],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ (($json.contact && $json.contact.tags) || []).join(',') }}",
+              "rightValue": "secuencia-parada",
+              "operator": { "type": "string", "operation": "contains" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000024",
+      "name": "Contestó: nada que reencolar",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [4040, 500],
+      "parameters": {}
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000025",
+      "name": "Buscar oportunidad (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [4040, 720],
+      "parameters": {
+        "url": "={{ $('Config').first().json.ghl_base }}/opportunities/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "location_id", "value": "={{ $('Config').first().json.location_id }}" },
+            { "name": "contact_id", "value": "={{ $('Lead y copys').first().json.contact_id }}" }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000026",
+      "name": "Elegir oportunidad",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [4240, 720],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Se queda con la oportunidad abierta del contacto (la crea el workflow de entrada de Landing).\nconst r = $input.first().json;\nconst opps = r.opportunities || r.data || [];\nconst abierta = opps.find((o) => (o.status || '').toLowerCase() === 'open') || opps[0];\nreturn [{ json: { opportunity_id: abierta ? abierta.id : null } }];"
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000027",
+      "name": "IF hay oportunidad",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [4440, 720],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $json.opportunity_id }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEmpty", "singleValue": true }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000028",
+      "name": "Mover a etapa Tibio (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [4660, 640],
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ $('Config').first().json.ghl_base }}/opportunities/{{ $json.opportunity_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ pipelineStageId: $('Config').first().json.tibio_stage_id }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2000000-0000-4000-8000-000000000029",
+      "name": "Tarea SDR a 30 días (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [4660, 820],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.ghl_base }}/contacts/{{ $('Lead y copys').first().json.contact_id }}/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ title: 'Toque SDR (Tibio, 30 días) · ' + ($('Lead y copys').first().json.empresa || $('Lead y copys').first().json.nombre || 'radiografía'), body: 'Radiografía sin respuesta tras la secuencia día 1/3/7. Cuello: ' + $('Lead y copys').first().json.cuelloBonito + ($('Lead y copys').first().json.puntos ? ' (' + $('Lead y copys').first().json.puntos + '/100)' : '') + '. Gancho para el toque: su propio cuello de botella.', dueDate: new Date(Date.now() + ($('Config').first().json.modo_prueba ? 10 * 60 * 1000 : 30 * 86400000)).toISOString(), completed: false, assignedTo: $('Config').first().json.sdr_user_id }) }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Entrada: radiografía completada": { "main": [[{ "node": "Config", "type": "main", "index": 0 }]] },
+    "Config": { "main": [[{ "node": "Lead y copys", "type": "main", "index": 0 }]] },
+    "Lead y copys": { "main": [[{ "node": "Espera a día 1", "type": "main", "index": 0 }]] },
+    "Espera a día 1": { "main": [[{ "node": "¿Sigue viva? (día 1)", "type": "main", "index": 0 }]] },
+    "¿Sigue viva? (día 1)": { "main": [[{ "node": "IF parada (día 1)", "type": "main", "index": 0 }]] },
+    "IF parada (día 1)": { "main": [
+      [{ "node": "Parada: no seguir (día 1)", "type": "main", "index": 0 }],
+      [{ "node": "IF dejó WhatsApp", "type": "main", "index": 0 }]
+    ] },
+    "IF dejó WhatsApp": { "main": [
+      [{ "node": "Día 1 va por WhatsApp (Outbound/Maikel)", "type": "main", "index": 0 }],
+      [{ "node": "Email día 1 (GHL)", "type": "main", "index": 0 }]
+    ] },
+    "Día 1 va por WhatsApp (Outbound/Maikel)": { "main": [[{ "node": "Espera a día 3", "type": "main", "index": 0 }]] },
+    "Email día 1 (GHL)": { "main": [[{ "node": "Espera a día 3", "type": "main", "index": 0 }]] },
+    "Espera a día 3": { "main": [[{ "node": "¿Sigue viva? (día 3)", "type": "main", "index": 0 }]] },
+    "¿Sigue viva? (día 3)": { "main": [[{ "node": "IF parada (día 3)", "type": "main", "index": 0 }]] },
+    "IF parada (día 3)": { "main": [
+      [{ "node": "Parada: no seguir (día 3)", "type": "main", "index": 0 }],
+      [{ "node": "Email día 3 (GHL)", "type": "main", "index": 0 }]
+    ] },
+    "Email día 3 (GHL)": { "main": [[{ "node": "Espera a día 7", "type": "main", "index": 0 }]] },
+    "Espera a día 7": { "main": [[{ "node": "¿Sigue viva? (día 7)", "type": "main", "index": 0 }]] },
+    "¿Sigue viva? (día 7)": { "main": [[{ "node": "IF parada (día 7)", "type": "main", "index": 0 }]] },
+    "IF parada (día 7)": { "main": [
+      [{ "node": "Parada: no seguir (día 7)", "type": "main", "index": 0 }],
+      [{ "node": "Email día 7 (GHL)", "type": "main", "index": 0 }]
+    ] },
+    "Email día 7 (GHL)": { "main": [[{ "node": "Espera 24h tras día 7", "type": "main", "index": 0 }]] },
+    "Espera 24h tras día 7": { "main": [[{ "node": "¿Sigue viva? (final)", "type": "main", "index": 0 }]] },
+    "¿Sigue viva? (final)": { "main": [[{ "node": "IF parada (final)", "type": "main", "index": 0 }]] },
+    "IF parada (final)": { "main": [
+      [{ "node": "Contestó: nada que reencolar", "type": "main", "index": 0 }],
+      [{ "node": "Buscar oportunidad (GHL)", "type": "main", "index": 0 }, { "node": "Tarea SDR a 30 días (GHL)", "type": "main", "index": 0 }]
+    ] },
+    "Buscar oportunidad (GHL)": { "main": [[{ "node": "Elegir oportunidad", "type": "main", "index": 0 }]] },
+    "Elegir oportunidad": { "main": [[{ "node": "IF hay oportunidad", "type": "main", "index": 0 }]] },
+    "IF hay oportunidad": { "main": [
+      [{ "node": "Mover a etapa Tibio (GHL)", "type": "main", "index": 0 }],
+      []
+    ] }
+  },
+  "pinData": {},
+  "active": false
+}

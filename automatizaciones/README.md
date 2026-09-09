@@ -17,11 +17,13 @@
 | Ruta | Qué es | Estado |
 |---|---|---|
 | `seguimientos-3-7-14/` | Workflow n8n nº 1: lista diaria de toques del tracker de ventas + borradores Gmail (sin destinatario). | **Listo para importar** |
+| `radiografia/` | Recorrido Radiografía → reunión: secuencia día 1/3/7 por email (GHL) + workflow de parada total con tarea puente. Encargo del cerebro 9-sep. | **Listo para importar** (modo prueba) |
 | `auditoria-automatizables.md` | Auditoría de procesos repetitivos del repo: Problema→Impacto→Solución→Automatización, con horas/mes y coste. | v1 (2026-09-01) |
-| `parte-2026-09-01.md` | Parte de turno para el cerebro. | — |
+| `parte-2026-09-01.md` / `parte-2026-09-09.md` | Partes de turno para el cerebro. | — |
 
 ## Backlog (orden de valor)
 
-1. ~~Seguimientos 3-7-14~~ → entregado.
-2. **Cobros** (Quipu): recordatorio de facturas emitidas sin cobrar a los X días. Caso de prueba: Adigital, 850 €.
-3. **Pipeline → Notion**: reflejar cambios de fase de `ventas/pipeline.md` en la base Tareas del Qualivo OS.
+1. ~~Seguimientos 3-7-14~~ → entregado (01-sep).
+2. ~~Secuencia Radiografía 3-7 + parada~~ → entregado (09-sep, pendiente de importar y de IDs de GHL).
+3. **Cobros** (Quipu): recordatorio de facturas emitidas sin cobrar a los X días. Caso de prueba: Adigital, 850 €.
+4. **Pipeline → Notion**: reflejar cambios de fase de `ventas/pipeline.md` en la base Tareas del Qualivo OS.
