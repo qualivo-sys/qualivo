@@ -42,6 +42,8 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 
 Todo mensaje, secuencia, post, anuncio, propuesta y respuesta se alinea a esto. Si un tramo no cabe en la frase, sobra el tramo.
 
+**Documento eje (9 sep 2026):** la estrategia completa (propuesta de valor, ICPs, mensaje por canal, recorrido, medición, plan 30 días) está en `sistema/estrategia-central.md`. La copia que edita Maikel es el Google Doc "Estrategia Central Qualivo v1" (id `1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o`); el cerebro sincroniza Doc → repo → agentes. Si hay discrepancia, manda el Doc.
+
 | | |
 |---|---|
 | **Dolor principal** | "Invierto en marketing y no sé por dónde se me escapan los clientes." No es falta de leads: es que el dueño no ve dónde se rompe (nadie contesta a tiempo, nadie persigue el presupuesto, todo pasa por él, no sabe qué funciona). |
@@ -78,6 +80,7 @@ Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain
 
 ## Registro de cambios
 
+- **2026-09-09** · Estrategia central v1 publicada como Google Doc editable (fuente de verdad de Maikel) y enlazada desde `sistema/estrategia-central.md`.
 - **2026-09-02** · v3. Estado actualizado por Maikel: objetivo del mes = 1 cliente recurrente 1.000-1.500 €/mes (no escalar); KPIs semanales 10 seguimientos / 1 reunión / 1 oportunidad; nuevas oportunidades Inspyria, Marilia, Antic Barcelona; Equipzilla confirmada al alza (~2.850 € desde octubre); modo caja estricto.
 
 - **2026-09-01** · v2. Qualivo OS creado en Notion (Roadmap, Tareas, Experimentos, Decisiones) y charter del cerebro registrado.

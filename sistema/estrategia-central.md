@@ -1,6 +1,8 @@
 # Estrategia central de Qualivo · v1
 
 > Eje de toda la operación comercial y de contenido. Lo mantiene el cerebro; lo leen todos los agentes; lo decide Maikel. Cada afirmación lleva su base: **[VALIDADO]** = con números propios · **[HIPÓTESIS]** = por probar, con la prueba que lo validaría · **[DECISIÓN]** = elección de Maikel, no dato. Versión 1 · 9 sep 2026 · revisión semanal los viernes.
+>
+> **Copia editable (fuente de verdad para Maikel):** Google Doc "Estrategia Central Qualivo v1" · https://docs.google.com/document/d/1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o/edit · Maikel edita ahí; el cerebro lee el Doc (Drive `read_file_content`, id `1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o`) y vuelca los cambios a este archivo y a los agentes los viernes o cuando Maikel lo pida.
 
 ---
 
