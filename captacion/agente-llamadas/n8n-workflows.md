@@ -38,7 +38,7 @@ configurada en n8n. Credencial Vapi: header `Authorization: Bearer <VAPI_KEY>`.
    }
    ```
 5. Antes del paso 4, **HTTP Request → GHL** (free slots del calendario
-   llamada-hackthelead, próximos 4 días laborables) y construir
+   qualivo-20 (Llamada de 20 minutos), próximos 4 días laborables) y construir
    `dias_ofrecidos` = "martes a las 10 y media o jueves a las 4" (texto, no
    lista). Así el agente solo ofrece huecos reales.
 
@@ -48,7 +48,7 @@ configurada en n8n. Credencial Vapi: header `Authorization: Bearer <VAPI_KEY>`.
    custom tool `agendar` con parámetros `{slot_elegido, email_confirmado}`;
    Vapi manda además el `metadata.email` del lead.
 2. **HTTP Request → GHL**: crear appointment en el calendario
-   llamada-hackthelead para ese contacto (buscar contacto por email; si no
+   qualivo-20 (Llamada de 20 minutos) para ese contacto (buscar contacto por email; si no
    existe, crearlo). GHL envía la invitación por email automáticamente.
 3. **Respond to Webhook** — `{ "result": "confirmado {{slot}}" }`. El agente
    lo lee en voz alta en la misma llamada.

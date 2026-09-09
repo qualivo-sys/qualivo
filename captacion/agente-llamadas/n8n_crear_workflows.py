@@ -10,7 +10,7 @@ H = {"X-N8N-API-KEY": KEY, "Content-Type": "application/json"}
 PH_VAPI = "PEGA_AQUI_VAPI_PRIVATE_KEY"
 PH_PIT = "PEGA_AQUI_TOKEN_PIT_GHL"
 PH_LOC = "PEGA_AQUI_LOCATION_ID"
-PH_CAL = "PEGA_AQUI_CALENDAR_ID"      # el de llamada-hackthelead
+PH_CAL = "PEGA_AQUI_CALENDAR_ID"      # el de qualivo-20 (Llamada de 20 minutos)
 PH_PHONE = "PEGA_AQUI_PHONE_NUMBER_ID"  # el numero +34 en Vapi
 ASSISTANT_ID = "fe2ed34d-82e9-4c6b-b351-8acf90d9dcce"
 

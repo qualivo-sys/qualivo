@@ -32,7 +32,7 @@ Webhook → filtro horario (lab. 10-18h) → por cada lead:
 
 [Vapi · durante la llamada]
 Tool "agendar" → webhook n8n "agenda" → n8n consulta huecos del calendario
-GHL (llamada-hackthelead), crea la cita y devuelve "martes 10:30 confirmado"
+GHL (qualivo-20 (Llamada de 20 minutos)), crea la cita y devuelve "martes 10:30 confirmado"
 → el agente lo dice en la misma llamada. Invitación por email automática (GHL).
 
 [Vapi · al colgar]
