@@ -62,7 +62,9 @@ module.exports = async function handler(req, res) {
     const cuello = (tags.find(function (t) { return t.startsWith('cuello-'); }) || '').slice(7);
     if (!cuello || !S.ORDEN.includes(cuello)) { resumen.saltados++; continue; }
     const segunda = (tags.find(function (t) { return t.startsWith('segunda-'); }) || '').slice(8);
-    const creado = Date.parse(c.dateAdded || c.createdAt || '');
+    // Fecha del diagnóstico: etiqueta dx-YYYYMMDD (la más reciente); si no la hay, el alta del contacto
+    const dx = tags.filter(function (t) { return /^dx-\d{8}$/.test(t); }).sort().pop();
+    const creado = dx ? Date.parse(dx.slice(3, 7) + '-' + dx.slice(7, 9) + '-' + dx.slice(9, 11) + 'T08:00:00Z') : Date.parse(c.dateAdded || c.createdAt || '');
     if (!creado) { resumen.saltados++; continue; }
     const dias = (ahora - creado) / 86400000;
     if (dias > MAX_DIAS) { resumen.saltados++; continue; }

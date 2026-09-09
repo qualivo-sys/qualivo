@@ -118,6 +118,7 @@ module.exports = async function handler(req, res) {
   if (rol) tags.push('rol-' + (rol === 'Dueño o socio' ? 'dueno' : rol === 'Otro' ? 'otro' : 'directivo'));
   if (utm.utm_source) tags.push('utm-' + String(utm.utm_source).toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30));
   if (telefono) tags.push('con-whatsapp');
+  tags.push('dx-' + new Date().toISOString().slice(0, 10).replace(/-/g, ''));
   if (completo) tags.push('diagnostico-completo');
   if (prioritario) tags.push('prioridad-alta');
 
