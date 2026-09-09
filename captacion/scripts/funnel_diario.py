@@ -16,6 +16,7 @@ HOY = sys.argv[1] if len(sys.argv) > 1 else datetime.datetime.now(TZ).date().iso
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 CSV_FUNNEL = os.path.join(RAIZ, "captacion", "datos", "funnel-diario.csv")
 CSV_EMBUDO = os.path.join(RAIZ, "captacion", "datos", "embudo-ghl.csv")
+CSV_CAMPS = os.path.join(RAIZ, "captacion", "datos", "campanas-diario.csv")
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126"}
 COLS = ["fecha", "canal", "volumen", "aperturas", "clics", "respuestas",
         "conversaciones", "reuniones", "notas"]
@@ -38,25 +39,44 @@ def curl(u, headers):
 # --- 1. EMAIL FRIO (Smartlead) ------------------------------------------------
 def email_frio():
     KEY = clave(".smartlead_key")
-    n = collections.Counter(); deposito = 0
+    n = collections.Counter(); deposito = 0; por_camp = []
     camps = req(f"https://server.smartlead.ai/api/v1/campaigns?api_key={KEY}")
     for c in camps:
         if c["status"] != "ACTIVE" and HOY != datetime.datetime.now(TZ).date().isoformat():
             continue
-        off = 0
+        off = 0; k = collections.Counter()
         while True:
             d = req(f"https://server.smartlead.ai/api/v1/campaigns/{c['id']}/statistics?api_key={KEY}&offset={off}&limit=500")
             rows = d.get("data") or []
             for r in rows:
-                if (r.get("sent_time") or "")[:10] == HOY: n["env"] += 1
-                if (r.get("open_time") or "")[:10] == HOY and (r.get("open_count") or 0): n["ap"] += 1
-                if (r.get("click_time") or "")[:10] == HOY and (r.get("click_count") or 0): n["clic"] += 1
-                if (r.get("reply_time") or "")[:10] == HOY: n["resp"] += 1
+                if (r.get("sent_time") or "")[:10] == HOY:
+                    k["env"] += 1
+                    if r.get("is_bounced"): k["reb"] += 1
+                if (r.get("open_time") or "")[:10] == HOY and (r.get("open_count") or 0): k["ap"] += 1
+                if (r.get("click_time") or "")[:10] == HOY and (r.get("click_count") or 0): k["clic"] += 1
+                if (r.get("reply_time") or "")[:10] == HOY: k["resp"] += 1
             if len(rows) < 500: break
             off += 500
+        n.update(k)
+        dep = ""
         if c["status"] == "ACTIVE":
             a = req(f"https://server.smartlead.ai/api/v1/campaigns/{c['id']}/analytics?api_key={KEY}")
-            deposito += int((a.get("campaign_lead_stats") or {}).get("notStarted") or 0)
+            dep = int((a.get("campaign_lead_stats") or {}).get("notStarted") or 0)
+            deposito += dep
+        if sum(k.values()) or c["status"] == "ACTIVE":
+            por_camp.append([HOY, c["name"][:45], c["status"], k["env"], k["ap"], k["clic"],
+                             k["resp"], k["reb"], dep])
+    hist = []
+    if os.path.exists(CSV_CAMPS):
+        hist = [r for r in csv.reader(open(CSV_CAMPS)) if r and r[0] not in ("fecha", HOY)]
+    with open(CSV_CAMPS, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["fecha", "campana", "estado", "enviados", "aperturas", "clics",
+                    "respuestas", "rebotes", "deposito_sin_empezar"])
+        for r in hist + por_camp: w.writerow(r)
+    print("== CAMPAÑAS HOY (env/ap/clic/resp/reb | deposito) ==")
+    for r in sorted(por_camp, key=lambda x: -x[3]):
+        print(f"{r[1]:46} {r[2]:9} {r[3]:>4} {r[4]:>4} {r[5]:>4} {r[6]:>4} {r[7]:>4} | {r[8]}")
     return dict(canal="email-frio", volumen=n["env"], aperturas=n["ap"], clics=n["clic"],
                 respuestas=n["resp"], conversaciones="", reuniones="",
                 notas=f"deposito sin empezar: {deposito}")
@@ -230,10 +250,13 @@ if __name__ == "__main__":
     todas = guardar(filas)
 
     cuenta, valor = embudo()
-    nuevo = not os.path.exists(CSV_EMBUDO)
-    with open(CSV_EMBUDO, "a", newline="") as f:
+    hist_e = []
+    if os.path.exists(CSV_EMBUDO):
+        hist_e = [r for r in csv.reader(open(CSV_EMBUDO)) if r and r[0] not in ("fecha", HOY)]
+    with open(CSV_EMBUDO, "w", newline="") as f:
         w = csv.writer(f)
-        if nuevo: w.writerow(["fecha", "pipeline", "etapa", "oportunidades", "valor_eur"])
+        w.writerow(["fecha", "pipeline", "etapa", "oportunidades", "valor_eur"])
+        for r in hist_e: w.writerow(r)
         for (p, e), n in sorted(cuenta.items()):
             w.writerow([HOY, p, e, n, valor[(p, e)]])
 
