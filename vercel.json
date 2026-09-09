@@ -93,7 +93,7 @@
   "trailingSlash": true,
   "crons": [
     {
-      "path": "/api/secuencia",
+      "path": "/api/secuencia/",
       "schedule": "0 8 * * *"
     }
   ]

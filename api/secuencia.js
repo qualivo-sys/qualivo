@@ -71,7 +71,7 @@ module.exports = async function handler(req, res) {
     const paso = PASOS.find(function (pz) { return dias >= pz && !tags.includes('sec-d' + pz); });
     if (!paso) { resumen.saltados++; continue; }
 
-    const bajaUrl = 'https://qualivo.io/api/baja?c=' + encodeURIComponent(c.id) + '&t=' + firma(c.id, secreto);
+    const bajaUrl = 'https://qualivo.io/api/baja/?c=' + encodeURIComponent(c.id) + '&t=' + firma(c.id, secreto);
     const m = S.correo(paso, c, cuello, segunda, bajaUrl);
     if (!m) { resumen.saltados++; continue; }
 
