@@ -35,7 +35,7 @@ def crop_to(im, w, h, face_y=0.35):
         nw = int(ih * target); x0 = (iw - nw) // 2; box = (x0, 0, x0 + nw, ih)
     else:                           # sobra altura
         nh = int(iw / target)
-        cy = int(face_y * ih); y0 = max(0, min(ih - nh, cy - int(nh * 0.40)))
+        cy = int(face_y * ih); y0 = max(0, min(ih - nh, cy - int(nh * 0.55)))  # aire por encima de la cabeza
         box = (0, y0, iw, y0 + nh)
     return im.crop(box).resize((w, h), Image.LANCZOS)
 
@@ -66,7 +66,7 @@ def brand(photo, W, H, args, logo):
         ph = int(H * 0.52); p = crop_to(photo, W, ph, args.face_y); im.paste(p, (0, 0)); tx, ty, tw = 54, ph + 44, W - 108
     else:
         pw = int(W * 0.44); p = crop_to(photo, pw, H, args.face_y); im.paste(p, (W - pw, 0)); tx, ty, tw = 54, 54, W - pw - 100
-    s = W / 1080
+    s = min(W, H) / 1080  # escala por el lado corto para que quepa en horizontal
     y = pill(d, (tx, ty), "FORO PRESENCIAL · MADRID · 24 SEPT", font(FONT_B, int(22 * s)))
     y += int(48 * s)
     for line in wrap(d, args.claim.upper(), font(FONT_B, int(64 * s)), tw):
