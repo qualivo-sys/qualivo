@@ -306,6 +306,9 @@
       segundos: Math.round((Date.now() - loadedAt) / 1000)
     });
     pintarResultado();
+    try { sessionStorage.setItem('qv_hero', JSON.stringify({ cuello: calculado.cuello, nivel: calculado.nivel, segunda: calculado.segunda || '' })); } catch (e) { /* sin sesión */ }
+    var sig = document.querySelector('[data-radiografia="gracias"]');
+    if (sig) sig.href = '/diagnostico/?origen=dx&cuello=' + calculado.cuello;
     show('fg-result');
     track('hero_result_view', { cuello: calculado.cuello, nivel: calculado.nivel, completo: calculado.completo });
   }

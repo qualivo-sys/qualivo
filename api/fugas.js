@@ -8,6 +8,12 @@ const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+// Pipeline «Qualivo Pipeline» de GoHighLevel: cada lead del diagnóstico entra como
+// oportunidad en «Nuevo Lead»; los prioritarios, directamente en «Contactado».
+const PIPELINE_ID = '980j4DzvOwp7aDmkk2ZA';
+const STAGE_NUEVO = 'fa70d288-c614-40ad-9e67-df04f4da3443';
+const STAGE_CONTACTADO = 'd08bc03a-1b25-4732-9b5f-3cb7295bfd94';
+
 const DIMS = ['captacion', 'conversion', 'seguimiento', 'dependencia', 'control'];
 const SINTOMAS = ['demanda', 'predecible', 'visibilidad', 'velocidad', 'cierre', 'presupuestos',
   'perdidos', 'dueno', 'sin-registro', 'origen', 'sin-revision'];
@@ -171,6 +177,11 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    if (contactId) {
+      await crearOportunidad({ contactId, locationId, nombre, cuello, nivel, prioritario, valorCliente, ghlHeaders })
+        .catch(function (err) { console.error('[dx] Oportunidad no creada:', err); });
+    }
+
     await avisar({
       nombre, email, cuello, segunda, sintoma, nivel, total, maximo, completo, dims,
       empleados, valorCliente, sector, rol, utm, prioritario, contactId, locationId
@@ -191,6 +202,23 @@ module.exports = async function handler(req, res) {
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 };
+
+async function crearOportunidad(o) {
+  const r = await fetch(GHL_BASE + '/opportunities/', {
+    method: 'POST',
+    headers: o.ghlHeaders,
+    body: JSON.stringify({
+      pipelineId: PIPELINE_ID,
+      locationId: o.locationId,
+      contactId: o.contactId,
+      name: o.nombre + ' · se rompe en ' + R.NOMBRE[o.cuello] + ' (' + o.nivel + ')',
+      pipelineStageId: o.prioritario ? STAGE_CONTACTADO : STAGE_NUEVO,
+      status: 'open',
+      source: 'Diagnóstico de crecimiento'
+    })
+  });
+  if (!r.ok) throw new Error('GHL opportunities respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
+}
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, function (c) {
@@ -318,7 +346,7 @@ async function enviarRadiografia(d) {
       '<p style="margin:0 0 8px;font:800 19px ' + F + ';color:#fff">Ya sabes dónde está el cuello de botella.</p>' +
       '<p style="margin:0 0 18px;font:400 15.5px/1.65 ' + F + ';color:#B9BDC4">' +
         'La siguiente pregunta es qué deberías arreglar primero y cuánto te está costando no hacerlo. Eso lo miramos contigo, con tus números.</p>' +
-      '<a href="https://qualivo.io/diagnostico/?origen=radiografia" style="display:inline-block;background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px ' + F + ';padding:13px 22px;border-radius:10px">Ver mi radiografía de crecimiento →</a>' +
+      '<a href="https://qualivo.io/diagnostico/?origen=radiografia&cuello=' + d.cuello + '" style="display:inline-block;background:#27BDB1;color:#04231F;text-decoration:none;font:800 15px ' + F + ';padding:13px 22px;border-radius:10px">Ver mi radiografía de crecimiento →</a>' +
     '</div>' +
 
     '<p style="margin:26px 0 0;font:400 14px/1.6 ' + F + ';color:#8A8B90">' +

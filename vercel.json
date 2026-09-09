@@ -90,5 +90,11 @@
       "permanent": true
     }
   ],
-  "trailingSlash": true
+  "trailingSlash": true,
+  "crons": [
+    {
+      "path": "/api/secuencia",
+      "schedule": "0 8 * * *"
+    }
+  ]
 }

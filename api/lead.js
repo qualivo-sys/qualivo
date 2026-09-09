@@ -33,6 +33,11 @@ module.exports = async function handler(req, res) {
   const facturacion = String(b.facturacion || '').trim();
   const quien = String(b.quien_capta || '').trim();
   const hipotesis = String(b.hipotesis || '').trim();
+  const hero = (b.hero && typeof b.hero === 'object') ? b.hero : null;
+  const cuello = hero && /^(captacion|conversion|seguimiento|dependencia|control)$/.test(String(hero.cuello || '')) ? String(hero.cuello) : '';
+  const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
+  const utmTxt = Object.keys(utm).filter(function (k) { return /^(utm_(source|medium|campaign|content|term)|ref)$/.test(k); })
+    .map(function (k) { return k + '=' + String(utm[k]).slice(0, 80); }).join(' · ');
 
   if (!nombre || !empresa || !quien || !hipotesis ||
       !EMAIL_RE.test(email) || !FACT_VALORES.includes(factValor) ||
@@ -60,7 +65,7 @@ module.exports = async function handler(req, res) {
         tags: [
           'qualivo-landing',
           cualificado ? 'diagnostic-cualificado' : 'diagnostic-fuera-de-alcance'
-        ]
+        ].concat(cuello ? ['desde-hero', 'cuello-' + cuello] : [])
       })
     });
     if (!upsertRes.ok) {
@@ -80,12 +85,14 @@ module.exports = async function handler(req, res) {
         'Facturación anual: ' + facturacion,
         'Quién lleva la captación: ' + quien,
         'Cualificado: ' + (cualificado ? 'sí' : 'no (menos de 500k)'),
+        cuello ? 'Viene del diagnóstico de crecimiento: cuello de botella en ' + cuello + (hero.nivel ? ' (' + hero.nivel + ')' : '') : '',
+        utmTxt ? 'Origen: ' + utmTxt : '',
         '',
         'Hipótesis del principal problema:',
         hipotesis,
         '',
         'Consentimiento RGPD: sí · ' + new Date().toISOString()
-      ].join('\n');
+      ].filter(Boolean).join('\n');
       const noteRes = await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
         method: 'POST',
         headers: ghlHeaders,
@@ -101,7 +108,7 @@ module.exports = async function handler(req, res) {
     // Si falla, el lead ya está en el CRM — se registra y no rompe nada.
     await notifyByEmail({
       nombre, email, empresa, facturacion, quien, hipotesis,
-      cualificado, contactId, locationId
+      cualificado, contactId, locationId, cuello
     }).catch(function (err) {
       console.error('[lead] Aviso por email falló:', err);
     });
@@ -143,6 +150,7 @@ async function notifyByEmail(lead) {
     fila('Facturación', lead.facturacion) +
     fila('Captación', lead.quien) +
     fila('Hipótesis', lead.hipotesis) +
+    (lead.cuello ? fila('Viene del diagnóstico', 'cuello de botella en ' + lead.cuello) : '') +
     '</table>' +
     (lead.contactId
       ? '<p style="margin:18px 0 0"><a href="' + ghlUrl + '">Ver contacto en GoHighLevel →</a></p>'

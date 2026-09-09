@@ -246,6 +246,10 @@
       slot.appendChild(iframe);
     }
 
+    function leerSesion(k) {
+      try { return JSON.parse(sessionStorage.getItem(k) || 'null'); } catch (e) { return null; }
+    }
+
     function sendToWebhook(payload) {
       if (!CONFIG.WEBHOOK_URL) {
         console.warn('[qualivo] WEBHOOK_URL sin configurar: el formulario no envía datos. Payload:', payload);
@@ -302,7 +306,9 @@
         rgpd: true,
         cualificado: cualificado,
         origen: window.location.hostname || 'local',
-        fecha: new Date().toISOString()
+        fecha: new Date().toISOString(),
+        hero: leerSesion('qv_hero'),
+        utm: leerSesion('qv_utm')
       };
 
       clearError();
