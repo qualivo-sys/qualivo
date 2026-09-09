@@ -171,7 +171,8 @@ module.exports = async function handler(req, res) {
   if (!sid || !process.env.GOOGLE_SA_JSON) return res.status(500).json({ ok: false, error: 'not_configured' });
 
   const q = req.query || {};
-  const dias = Math.min(31, Math.max(1, parseInt(q.dias, 10) || 1));
+  // Por defecto los tres ultimos dias: Search Console y GA4 tardan en cerrar el dia
+  const dias = Math.min(31, Math.max(1, parseInt(q.dias, 10) || 3));
   const fin = /^\d{4}-\d{2}-\d{2}$/.test(String(q.fecha || '')) ? String(q.fecha) : fechaISO(new Date(Date.now() - 86400000));
   const resumen = { fechas: [], errores: [] };
   const ahora = new Date().toISOString().slice(0, 16).replace('T', ' ');
