@@ -1,6 +1,11 @@
 // Recibe el resultado del diagnóstico «¿Dónde se está rompiendo tu crecimiento?» y crea
 // o actualiza el contacto en GoHighLevel con sus cinco dimensiones, el cuello de botella
 // principal, el síntoma concreto y su perfil. Mismas credenciales que /api/lead.
+//
+// Modo anónimo (enlace de outbound `?l=<id de contacto en GoHighLevel>`): el navegador
+// manda el resultado sin formulario; se etiqueta el contacto (radiografia-anonima,
+// cuello-*, nivel-*), se anota y se suma la puntuación de señal. Sin correo ni oportunidad.
+// Recorrido completo en sistema/radiografia-recorrido.md (rama del cerebro).
 
 const R = require('./_radiografia');
 const META = require('./_meta');
@@ -16,13 +21,17 @@ const STAGE_NUEVO = 'fa70d288-c614-40ad-9e67-df04f4da3443';
 const STAGE_CONTACTADO = 'd08bc03a-1b25-4732-9b5f-3cb7295bfd94';
 const RESERVA = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl';
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
+const CAMPO_SENAL = 'Señal · puntuación';   // campo numérico del contacto (se crea si no existe)
+const ICP1_SECTOR = 'Servicios profesionales (asesoría, consultoría, abogados)'; // ICP 1: despachos y servicios profesionales
+let campoSenalId = null;
+let etapasCache = { t: 0, porNombre: {} };
 
 const DIMS = ['captacion', 'conversion', 'seguimiento', 'dependencia', 'control'];
 const SINTOMAS = ['demanda', 'predecible', 'visibilidad', 'velocidad', 'cierre', 'presupuestos',
   'perdidos', 'dueno', 'sin-registro', 'origen', 'sin-revision'];
 const NIVELES = ['critico', 'relevante', 'leve'];
-const EMPLEADOS = ['Solo yo', '2 a 5', '6 a 20', 'Más de 20'];
-const VALORES = ['Menos de 500 €', '500 a 2.000 €', '2.000 a 10.000 €', 'Más de 10.000 €', 'No lo sé'];
+const EMPLEADOS = ['', 'Solo yo', '2 a 5', '6 a 20', 'Más de 20'];
+const VALORES = ['', 'Menos de 500 €', '500 a 2.000 €', '2.000 a 10.000 €', 'Más de 10.000 €', 'No lo sé'];
 const ROLES = ['', 'Dueño o socio', 'Dirijo ventas o marketing', 'Otro'];
 const SECTORES = ['', 'Servicios profesionales (asesoría, consultoría, abogados)', 'Reformas, construcción o instalaciones',
   'Salud, clínica o bienestar', 'Formación o academia', 'Industria, taller o fabricación',
@@ -88,7 +97,9 @@ module.exports = async function handler(req, res) {
   const rol = String(b.rol || '');
   let telefono = String(b.telefono || '').replace(/[^\d+]/g, '');
   if (telefono && /^\d{9}$/.test(telefono)) telefono = '+34' + telefono;
-  const telefonoOk = /^\+\d{9,15}$/.test(telefono);
+  const telefonoOk = !telefono || /^\+\d{9,15}$/.test(telefono);
+  const leadId = /^[A-Za-z0-9]{10,40}$/.test(String(b.l || '')) ? String(b.l) : '';
+  const anonimo = b.anonimo === true;
   const utm = (b.utm && typeof b.utm === 'object') ? b.utm : {};
   // Identificador del evento que también dispara el píxel del navegador (deduplicación en Meta)
   const eventoId = /^[a-z0-9-]{8,48}$/.test(String(b.evento_id || '')) ? String(b.evento_id) : '';
@@ -98,7 +109,8 @@ module.exports = async function handler(req, res) {
     return dims[e] === null || (Number.isInteger(dims[e]) && dims[e] >= 0 && dims[e] <= 100);
   }) && Number.isInteger(dims[cuello]);
 
-  if (!nombre || !EMAIL_RE.test(email) || b.rgpd !== true ||
+  const identidadOk = anonimo ? !!leadId : (nombre && EMAIL_RE.test(email) && b.rgpd === true);
+  if (!identidadOk ||
       !DIMS.includes(cuello) || (segunda && !DIMS.includes(segunda)) || !NIVELES.includes(nivel) ||
       (sintoma && !SINTOMAS.includes(sintoma)) || !dimsOk ||
       total === null || maximo === null || total < 0 || maximo < 0 ||
@@ -116,7 +128,42 @@ module.exports = async function handler(req, res) {
     'Content-Type': 'application/json'
   };
 
+  const hoy = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const icp1 = sector === ICP1_SECTOR;
+
+  // ── Modo anónimo: resultado sobre un contacto que ya existe (outbound) ──
+  if (anonimo) {
+    try {
+      const cr = await fetch(GHL_BASE + '/contacts/' + leadId, { headers: ghlHeaders });
+      if (!cr.ok) return res.status(404).json({ ok: false, error: 'contacto_desconocido' });
+      const contacto = (await cr.json()).contact || {};
+      if (contacto.locationId && contacto.locationId !== locationId) return res.status(404).json({ ok: false, error: 'contacto_desconocido' });
+      const tagsA = ['radiografia-anonima', 'cuello-' + cuello, 'nivel-' + nivel, 'dx-' + hoy];
+      if (segunda) tagsA.push('segunda-' + segunda);
+      if (sintoma) tagsA.push('sintoma-' + sintoma);
+      if (utm.utm_source) tagsA.push('utm-' + String(utm.utm_source).toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30));
+      const yaTenia = (contacto.tags || []).map(String);
+      await limpiarResultadoAnterior(leadId, yaTenia, tagsA, ghlHeaders).catch(function () {});
+      const tg = await fetch(GHL_BASE + '/contacts/' + leadId + '/tags', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ tags: tagsA }) });
+      if (!tg.ok) throw new Error('tags ' + tg.status);
+      const notaA = ['Radiografía (sin formulario, enlace de outbound) · ' + new Date().toISOString(),
+        'Cuello de botella: ' + R.NOMBRE[cuello] + ' (' + nivel + ')' + (segunda ? ' · segunda: ' + R.NOMBRE[segunda] : ''),
+        DIMS.map(function (e) { return R.NOMBRE[e] + ' ' + (dims[e] === null ? '—' : dims[e] + '/100'); }).join(' · '),
+        rol || empleados || valorCliente ? 'Perfil: ' + [rol, empleados, valorCliente].filter(Boolean).join(' · ') : ''].filter(Boolean).join('\n');
+      await fetch(GHL_BASE + '/contacts/' + leadId + '/notes', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ body: notaA }) });
+      // Puntuación de señal: +40 por radiografía (una vez), +10 si ICP 1
+      const primera = !yaTenia.includes('radiografia-anonima') && !yaTenia.includes('diagnostico-crecimiento');
+      const esIcp1 = yaTenia.some(function (t) { return /^icp-?0?1$/.test(t); });
+      if (primera) await sumarSenal(leadId, 40 + (esIcp1 ? 10 : 0), locationId, ghlHeaders).catch(function (err) { console.error('[dx] señal no sumada', err); });
+      return res.status(200).json({ ok: true, anonimo: true });
+    } catch (err) {
+      console.error('[dx] Modo anónimo falló:', err);
+      return res.status(502).json({ ok: false, error: 'crm_error' });
+    }
+  }
+
   const tags = ['qualivo-landing', 'diagnostico-crecimiento', 'cuello-' + cuello, 'nivel-' + nivel];
+  if (icp1) tags.push('icp-1');
   if (segunda) tags.push('segunda-' + segunda);
   if (sintoma) tags.push('sintoma-' + sintoma);
   if (sector) tags.push('sector-' + SECTOR_SLUG[sector]);
@@ -146,6 +193,9 @@ module.exports = async function handler(req, res) {
     }
     const upsert = await upsertRes.json();
     const contactId = upsert && upsert.contact && upsert.contact.id;
+    // ¿Ya había hecho la radiografía otro día? (etiqueta dx-AAAAMMDD anterior a hoy)
+    const yaHizo = (((upsert || {}).contact || {}).tags || []).some(function (t) { return /^dx-\d{8}$/.test(String(t)) && String(t) !== 'dx-' + hoy; });
+    if (contactId) await limpiarResultadoAnterior(contactId, ((upsert || {}).contact || {}).tags, tags, ghlHeaders).catch(function () {});
 
     if (contactId) {
       const detalle = DIMS.map(function (e) {
@@ -192,8 +242,20 @@ module.exports = async function handler(req, res) {
     if (contactId) {
       await crearOportunidad({ contactId, locationId, nombre, cuello, nivel, prioritario, valorCliente, ghlHeaders })
         .catch(function (err) { console.error('[dx] Oportunidad no creada:', err); });
+      // Puntuación de señal: +40 por la radiografía (una vez), +10 si ICP 1
+      if (!yaHizo) {
+        await sumarSenal(contactId, 40 + (icp1 ? 10 : 0), locationId, ghlHeaders)
+          .catch(function (err) { console.error('[dx] Señal no sumada:', err); });
+      }
+      if (leadId && leadId !== contactId) {
+        // El contacto del outbound es otro registro: se enlaza y se le quita la etiqueta anónima
+        await fetch(GHL_BASE + '/contacts/' + leadId + '/tags', { method: 'DELETE', headers: ghlHeaders, body: JSON.stringify({ tags: ['radiografia-anonima'] }) }).catch(function () {});
+        await fetch(GHL_BASE + '/contacts/' + leadId + '/notes', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ body: 'Pidió el plan de 30 días con otro correo (' + email + '). Contacto: ' + contactId }) }).catch(function () {});
+      } else if (leadId) {
+        await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'DELETE', headers: ghlHeaders, body: JSON.stringify({ tags: ['radiografia-anonima'] }) }).catch(function () {});
+      }
       if (telefono) {
-        await crearTareaWhatsApp({ contactId, nombre, telefono, cuello, prioritario, ghlHeaders })
+        await crearTareaWhatsApp({ contactId, nombre, telefono, cuello, prioritario, ghlHeaders, puntos: dims[cuello] })
           .catch(function (err) { console.error('[dx] Tarea de WhatsApp no creada:', err); });
       }
     }
@@ -209,7 +271,7 @@ module.exports = async function handler(req, res) {
     // guardado: no se devuelve error al navegador por esto.
     // Se devuelve el resultado del envío (sin datos sensibles) para poder diagnosticar
     // desde fuera si Resend acepta el remitente configurado.
-    const radiografia = await enviarRadiografia({ nombre, email, cuello, dims, completo })
+    const radiografia = await enviarRadiografia({ nombre, email, cuello, dims, completo, contactId })
       .then(function () { return 'enviada'; })
       .catch(function (err) {
         console.error('[dx] Radiografía no enviada:', err);
@@ -236,9 +298,75 @@ module.exports = async function handler(req, res) {
   }
 };
 
-function mensajeWhatsApp(nombre, cuello) {
-  return 'Hola ' + nombre.split(' ')[0] + ', soy Maikel, de Qualivo. He visto tu diagnóstico: se te rompe en ' +
-    R.NOMBRE[cuello].toLowerCase() + '. ¿Te cuadra? Si quieres lo miramos en 20 minutos con tus números: ' + RESERVA;
+// Pregunta con número por cuello (recorrido Radiografía → reunión, §2). La reunión
+// no se pide: se le pone número a la fuga y la reunión es donde se pone el número.
+const PREGUNTA_DIA1 = {
+  captacion: '¿cuántas oportunidades nuevas os entraron el mes pasado?',
+  conversion: 'cuando entra un formulario o un WhatsApp, ¿cuánto tarda en contestarse de media?',
+  seguimiento: '¿cuántos presupuestos del mes pasado siguen sin respuesta?',
+  dependencia: 'si mañana entraran 30 oportunidades, ¿cuántas se atenderían sin pasar por ti?',
+  control: '¿de qué canal salió el último cliente que firmó? El último cliente, no el último lead.'
+};
+
+function mensajeWhatsApp(nombre, cuello, puntos) {
+  const p = Number.isInteger(puntos) ? puntos + ' de 100' : 'la más floja de las cinco';
+  return 'Hola ' + nombre.split(' ')[0] + ', soy Maikel. Vi que en la radiografía te salió ' + R.NOMBRE[cuello].toLowerCase() +
+    ' como cuello de botella, ' + p + '. Una pregunta rápida: ' + PREGUNTA_DIA1[cuello] +
+    ' Si me dices el número, te digo en dos líneas cuánto es eso al año.';
+}
+
+// Quita del contacto las etiquetas de un resultado anterior que ya no coinciden
+// (cuello-*, nivel-*, segunda-*, sintoma-*): la radiografía más reciente manda.
+async function limpiarResultadoAnterior(contactId, tagsActuales, nuevas, ghlHeaders) {
+  const viejas = (tagsActuales || []).map(String).filter(function (t) {
+    return /^(cuello|nivel|segunda|sintoma)-/.test(t) && !nuevas.includes(t);
+  });
+  if (!viejas.length) return;
+  await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'DELETE', headers: ghlHeaders, body: JSON.stringify({ tags: viejas }) });
+}
+
+// Etapas del pipeline por nombre (Radiografía completada, Tibio…), con caché de 10 minutos.
+async function etapaPorNombre(patron, ghlHeaders, locationId) {
+  if (Date.now() - etapasCache.t > 600000) {
+    const r = await fetch(GHL_BASE + '/opportunities/pipelines?locationId=' + locationId, { headers: ghlHeaders });
+    if (r.ok) {
+      const d = await r.json();
+      const pl = (d.pipelines || []).filter(function (x) { return x.id === PIPELINE_ID; })[0];
+      const m = {};
+      ((pl && pl.stages) || []).forEach(function (st) { m[String(st.name).toLowerCase()] = st.id; });
+      etapasCache = { t: Date.now(), porNombre: m };
+    }
+  }
+  const k = Object.keys(etapasCache.porNombre).filter(function (n) { return patron.test(n); })[0];
+  return k ? etapasCache.porNombre[k] : null;
+}
+
+// Puntuación de señal (0-100) en un campo numérico del contacto: se suma, no se pisa.
+async function sumarSenal(contactId, puntos, locationId, ghlHeaders) {
+  if (!campoSenalId) {
+    const r = await fetch(GHL_BASE + '/locations/' + locationId + '/customFields?model=contact', { headers: ghlHeaders });
+    if (!r.ok) throw new Error('customFields ' + r.status);
+    const f = ((await r.json()).customFields || []).filter(function (x) { return x.name === CAMPO_SENAL; })[0];
+    if (f) campoSenalId = f.id;
+    else {
+      const c = await fetch(GHL_BASE + '/locations/' + locationId + '/customFields', {
+        method: 'POST', headers: ghlHeaders,
+        body: JSON.stringify({ name: CAMPO_SENAL, dataType: 'NUMERICAL', model: 'contact', placeholder: '0-100' })
+      });
+      if (!c.ok) throw new Error('crear campo ' + c.status + ': ' + (await c.text()).slice(0, 200));
+      campoSenalId = ((await c.json()).customField || {}).id;
+    }
+  }
+  const cr = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: ghlHeaders });
+  const contacto = cr.ok ? ((await cr.json()).contact || {}) : {};
+  const actual = (contacto.customFields || []).filter(function (x) { return x.id === campoSenalId; })[0];
+  const valor = Math.min(100, (Number(actual && (actual.value || actual.fieldValue)) || 0) + puntos);
+  const u = await fetch(GHL_BASE + '/contacts/' + contactId, {
+    method: 'PUT', headers: ghlHeaders,
+    body: JSON.stringify({ customFields: [{ id: campoSenalId, field_value: valor }] })
+  });
+  if (!u.ok) throw new Error('PUT contacto ' + u.status + ': ' + (await u.text()).slice(0, 200));
+  return valor;
 }
 
 // Tarea en GoHighLevel para escribir por WhatsApp al lead que dejó el número.
@@ -249,9 +377,10 @@ async function crearTareaWhatsApp(t) {
     method: 'POST',
     headers: t.ghlHeaders,
     body: JSON.stringify({
-      title: (t.prioritario ? '🔴 ' : '') + 'WhatsApp a ' + t.nombre + ' · se rompe en ' + R.NOMBRE[t.cuello],
-      body: 'https://wa.me/' + t.telefono.replace('+', '') + '?text=' + encodeURIComponent(mensajeWhatsApp(t.nombre, t.cuello)) +
-        '\n\nMensaje: ' + mensajeWhatsApp(t.nombre, t.cuello),
+      title: (t.prioritario ? '🔴 ' : '') + 'WhatsApp día 1 · ' + t.nombre + ' · ' + R.NOMBRE[t.cuello],
+      body: 'https://wa.me/' + t.telefono.replace('+', '') + '?text=' + encodeURIComponent(mensajeWhatsApp(t.nombre, t.cuello, t.puntos)) +
+        '\n\nMensaje: ' + mensajeWhatsApp(t.nombre, t.cuello, t.puntos) +
+        '\n\nSi contesta con el número: reacción con una frase y puente (20 min con sus números o plan por escrito). Si contesta, etiqueta «respondio» para parar los correos.',
       dueDate: vence,
       completed: false,
       assignedTo: USUARIO_MAIKEL
@@ -261,6 +390,7 @@ async function crearTareaWhatsApp(t) {
 }
 
 async function crearOportunidad(o) {
+  const etapa = await etapaPorNombre(/radiograf/, o.ghlHeaders, o.locationId).catch(function () { return null; });
   const r = await fetch(GHL_BASE + '/opportunities/', {
     method: 'POST',
     headers: o.ghlHeaders,
@@ -269,7 +399,7 @@ async function crearOportunidad(o) {
       locationId: o.locationId,
       contactId: o.contactId,
       name: o.nombre + ' · se rompe en ' + R.NOMBRE[o.cuello] + ' (' + o.nivel + ')',
-      pipelineStageId: o.prioritario ? STAGE_CONTACTADO : STAGE_NUEVO,
+      pipelineStageId: etapa || (o.prioritario ? STAGE_CONTACTADO : STAGE_NUEVO),
       status: 'open',
       source: 'Diagnóstico de crecimiento'
     })
@@ -315,7 +445,7 @@ async function avisar(lead) {
     fila('Nombre', lead.nombre) +
     fila('Email', lead.email) +
     (lead.telefono ? '<tr><td style="padding:6px 14px 6px 0;color:#5A5E66">WhatsApp</td><td style="padding:6px 0"><a href="https://wa.me/' + lead.telefono.replace('+', '') +
-      '?text=' + encodeURIComponent(mensajeWhatsApp(lead.nombre, lead.cuello)) +
+      '?text=' + encodeURIComponent(mensajeWhatsApp(lead.nombre, lead.cuello, lead.dims[lead.cuello])) +
       '" style="font-weight:700">Escribirle por WhatsApp (' + esc(lead.telefono) + ') →</a></td></tr>' : '') +
     fila('Sector', lead.sector || 'no indicado') +
     fila('Papel', lead.rol || 'no indicado') +
@@ -424,8 +554,11 @@ async function enviarRadiografia(d) {
       to: d.email,
       subject: 'Tu plan de 30 días: tu crecimiento se rompe en ' + R.NOMBRE[d.cuello].toLowerCase(),
       html: html,
-      reply_to: process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io'
+      reply_to: process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io',
+      tags: [{ name: 'paso', value: 'plan' }, { name: 'contacto', value: String(d.contactId || 'sin-id') }]
     })
   });
   if (!r.ok) throw new Error('Resend respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
 }
+
+module.exports.sumarSenal = sumarSenal;

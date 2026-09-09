@@ -161,6 +161,7 @@
   var calculado = null;
   var loadedAt = Date.now();
   var UTM = {};
+  var L_ID = '';   // identificador del contacto en el CRM (enlace del outbound ?l=)
   var qStart = 0;
 
   function track(n, d) {
@@ -247,26 +248,20 @@
   function avanzar() {
     actual++;
     if (actual < PREGUNTAS.length) { pintarPregunta(); return; }
-    pintarPerfil();
+    terminar(true);
   }
 
-  // ── Perfil (cualificación mínima) ───────────────────────────────────
+  // ── Perfil (opcional, después del resultado): tres datos para ajustar el plan ──
   function pintarPerfil() {
-    var cont = $('fg-options');
+    var cont = $('fg-perfil-campos');
+    if (!cont) return;
     cont.innerHTML = '';
-    enPerfil = true;
-    $('fg-dim').textContent = 'Casi está';
-    $('fg-bar').style.width = '94%';
-    $('fg-question').textContent = 'Tres datos rápidos para ajustar el resultado a tu caso.';
-    $('fg-prev').hidden = false;
-    $('fg-salir').hidden = true;
-
     PERFIL.forEach(function (campo) {
       var wrap = document.createElement('div');
-      wrap.style.marginBottom = '18px';
+      wrap.style.marginBottom = '14px';
       var lab = document.createElement('p');
       lab.textContent = campo.label;
-      lab.style.cssText = 'margin:0 0 10px; font-size:15.5px; font-weight:800; color:#101319';
+      lab.style.cssText = 'margin:0 0 8px; font-size:14.5px; font-weight:800; color:#101319';
       wrap.appendChild(lab);
       var grid = document.createElement('div');
       grid.style.cssText = 'display:flex; flex-wrap:wrap; gap:8px';
@@ -275,25 +270,44 @@
         b.type = 'button';
         b.className = 'fg-answer' + (perfil[campo.id] === o ? ' sel' : '');
         b.textContent = o;
-        b.style.cssText = 'width:auto; min-height:46px; padding:10px 16px; font-size:15px';
+        b.style.cssText = 'width:auto; min-height:42px; padding:9px 14px; font-size:14.5px';
         b.addEventListener('click', function () {
           perfil[campo.id] = o;
           Array.prototype.forEach.call(grid.children, function (c) { c.classList.remove('sel'); });
           b.classList.add('sel');
-          if (perfil.rol && perfil.empleados && perfil.valor) $('fg-final').disabled = false;
+          track('hero_perfil', { campo: campo.id, valor: o, cuello: calculado ? calculado.cuello : '' });
+          if (perfil.rol && perfil.empleados && perfil.valor) {
+            var ok = $('fg-perfil-ok'); if (ok) ok.hidden = false;
+            guardarAnonimo();
+          }
         });
         grid.appendChild(b);
       });
       wrap.appendChild(grid);
       cont.appendChild(wrap);
     });
-    var fin = document.createElement('button');
-    fin.type = 'button'; fin.id = 'fg-final'; fin.className = 'btn-teal';
-    fin.textContent = 'Ver mi cuello de botella →'; fin.style.marginTop = '6px';
-    fin.disabled = !(perfil.rol && perfil.empleados && perfil.valor);
-    fin.addEventListener('click', function () { terminar(true); });
-    cont.appendChild(fin);
-    show('fg-quiz');
+  }
+
+  // Con enlace de outbound (?l=id): el resultado se guarda en el contacto del CRM
+  // aunque no rellene el formulario. Sin id, no se envía nada.
+  var anonimoEnviado = '';
+  function guardarAnonimo() {
+    if (!L_ID || !calculado) return;
+    var firma = calculado.cuello + '|' + (perfil.rol || '') + (perfil.empleados || '') + (perfil.valor || '');
+    if (anonimoEnviado === firma) return;
+    anonimoEnviado = firma;
+    try {
+      fetch('/api/fugas', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          anonimo: true, l: L_ID,
+          cuello: calculado.cuello, segunda: calculado.segunda || '', sintoma: calculado.sintoma, nivel: calculado.nivel,
+          total: calculado.total, maximo: calculado.maximo, completo: calculado.completo, dims: calculado.pct,
+          empleados: perfil.empleados || '', valor_cliente: perfil.valor || '', rol: perfil.rol || '',
+          origen: window.location.hostname || 'local', utm: UTM
+        })
+      }).catch(function () { /* silencioso: no afecta a la experiencia */ });
+    } catch (e) { /* nada */ }
   }
 
   function terminar(completo) {
@@ -306,6 +320,8 @@
       segundos: Math.round((Date.now() - loadedAt) / 1000)
     });
     pintarResultado();
+    pintarPerfil();
+    guardarAnonimo();
     try { sessionStorage.setItem('qv_hero', JSON.stringify({ cuello: calculado.cuello, nivel: calculado.nivel, segunda: calculado.segunda || '' })); } catch (e) { /* sin sesión */ }
     var sig = document.querySelector('[data-radiografia="gracias"]');
     if (sig) sig.href = '/diagnostico/?origen=dx&cuello=' + calculado.cuello;
@@ -493,8 +509,7 @@
     err.hidden = true;
     if (!nombre) { err.textContent = 'Dinos tu nombre.'; err.hidden = false; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Revisa el correo.'; err.hidden = false; return; }
-    if (!telefono) { err.textContent = 'Dinos tu WhatsApp: es donde te escribo con el plan.'; err.hidden = false; return; }
-    if (!/^\+?\d{9,15}$/.test(telefono)) { err.textContent = 'Revisa el número de WhatsApp.'; err.hidden = false; return; }
+    if (telefono && !/^\+?\d{9,15}$/.test(telefono)) { err.textContent = 'Revisa el número de WhatsApp.'; err.hidden = false; return; }
     if (!rgpd) { err.textContent = 'Necesitamos tu consentimiento para tratar los datos.'; err.hidden = false; return; }
 
     var btn = $('fg-submit'); btn.disabled = true; btn.textContent = 'Un segundo…';
@@ -503,7 +518,7 @@
     fetch('/api/fugas', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nombre: nombre, email: email, rgpd: true, sector: sector, telefono: telefono, evento_id: eventoId,
+        nombre: nombre, email: email, rgpd: true, sector: sector, telefono: telefono, evento_id: eventoId, l: L_ID || undefined,
         cuello: calculado.cuello, segunda: calculado.segunda || '', sintoma: calculado.sintoma, nivel: calculado.nivel,
         total: calculado.total, maximo: calculado.maximo, completo: calculado.completo,
         dims: calculado.pct,
@@ -534,10 +549,9 @@
     if (finalBtn) new IntersectionObserver(function (en) { if (en[0].isIntersecting) sticky.hidden = true; else sticky.hidden = heroVisible || !enLanding(); }, { threshold: 0 }).observe(finalBtn);
   }
   $('fg-prev').addEventListener('click', function () {
-    if (enPerfil) { actual = PREGUNTAS.length - 1; pintarPregunta(); return; }
     if (actual > 0) { actual--; pintarPregunta(); }
   });
-  $('fg-salir').addEventListener('click', function () { pintarPerfil(); });
+  $('fg-salir').addEventListener('click', function () { terminar(false); });
   $('fg-seguir').addEventListener('click', function () { actual = respuestas.indexOf(null); if (actual < 0) actual = 0; pintarPregunta(); show('fg-quiz'); });
   $('fg-sharebtn').addEventListener('click', compartir);
   $('fg-sharebtn2').addEventListener('click', compartir);
@@ -564,6 +578,9 @@
   try {
     if (Object.keys(UTM).length) sessionStorage.setItem('qv_utm', JSON.stringify(UTM));
     else UTM = JSON.parse(sessionStorage.getItem('qv_utm') || '{}');
+    var lq = qs.get('l') || '';
+    if (/^[A-Za-z0-9]{10,40}$/.test(lq)) { L_ID = lq; sessionStorage.setItem('qv_l', lq); }
+    else L_ID = sessionStorage.getItem('qv_l') || '';
   } catch (e) { /* sin almacenamiento, sin drama */ }
   track('hero_view', { utm_source: UTM.utm_source || '', utm_campaign: UTM.utm_campaign || '', utm_content: UTM.utm_content || '', ref: UTM.ref || '', referrer: document.referrer || '' });
 })();

@@ -1,14 +1,17 @@
-// Cron diario (vercel.json → 08:00 UTC): envía a cada contacto del diagnóstico el
-// correo de la secuencia que le toque (días 2, 5, 9, 14, 21 desde que dejó el correo).
-// Estado en las etiquetas del contacto en GoHighLevel: sec-d2, sec-d5, sec-d9,
-// sec-d14, sec-d21 (enviado), sec-baja (no quiere más). Un correo por contacto y día.
+// Cron diario (vercel.json → 08:00 UTC): envía a cada contacto de la radiografía el
+// correo que le toque (días 1, 3 y 7 desde que dejó el correo; el día 1 solo si no dejó
+// WhatsApp, porque entonces la pregunta va por WhatsApp). Tras el día 7: etiqueta sec-tibio
+// y, si existe, etapa «Tibio» en el pipeline (toque a 30 días por el SDR, sin día 14 automático).
+// Estado en etiquetas: sec-d1, sec-d3, sec-d7 (enviado), sec-tibio, sec-baja (no quiere más),
+// respondio (contestó: se para todo). Un correo por contacto y día.
 
 const crypto = require('crypto');
 const S = require('./_secuencia');
 
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
-const PASOS = [2, 5, 9, 14, 21];
+const PASOS = [1, 3, 7];
+const PIPELINE_ID = '980j4DzvOwp7aDmkk2ZA';
 const MAX_DIAS = 35;   // más antiguo que esto: no se le escribe, la secuencia caducó
 const MAX_ENVIOS = 60; // tope por ejecución
 
@@ -58,7 +61,7 @@ module.exports = async function handler(req, res) {
     if (resumen.enviados >= MAX_ENVIOS) break;
     const tags = (c.tags || []).map(String);
     const email = String(c.email || '');
-    if (!email || tags.includes('sec-baja') || tags.includes('diagnostic-cualificado') || c.dnd === true) { resumen.saltados++; continue; }
+    if (!email || tags.includes('sec-baja') || tags.includes('sec-tibio') || tags.includes('respondio') || tags.includes('diagnostic-cualificado') || c.dnd === true) { resumen.saltados++; continue; }
     const cuello = (tags.find(function (t) { return t.startsWith('cuello-'); }) || '').slice(7);
     if (!cuello || !S.ORDEN.includes(cuello)) { resumen.saltados++; continue; }
     const segunda = (tags.find(function (t) { return t.startsWith('segunda-'); }) || '').slice(8);
@@ -70,11 +73,17 @@ module.exports = async function handler(req, res) {
     if (dias > MAX_DIAS) { resumen.saltados++; continue; }
 
     // El primer paso vencido que no se haya enviado; solo uno por ejecución.
-    const paso = PASOS.find(function (pz) { return dias >= pz && !tags.includes('sec-d' + pz); });
-    if (!paso) { resumen.saltados++; continue; }
+    // Día 1 solo sin WhatsApp (con número, la pregunta la hace Maikel por WhatsApp).
+    const conWhatsApp = !!c.phone || tags.includes('con-whatsapp');
+    const paso = PASOS.find(function (pz) { return dias >= pz && !tags.includes('sec-d' + pz) && !(pz === 1 && conWhatsApp); });
+    if (!paso) {
+      if (dias >= 8 && tags.includes('sec-d7')) await marcarTibio(c, ghl, locationId).catch(function (err) { console.error('[secuencia] tibio', c.id, String(err).slice(0, 120)); });
+      resumen.saltados++; continue;
+    }
+    const puntos = puntosCuello(c, cuello);
 
     const bajaUrl = 'https://qualivo.io/api/baja/?c=' + encodeURIComponent(c.id) + '&t=' + firma(c.id, secreto);
-    const m = S.correo(paso, c, cuello, segunda, bajaUrl);
+    const m = S.correo(paso, c, cuello, segunda, bajaUrl, puntos);
     if (!m) { resumen.saltados++; continue; }
 
     try {
@@ -83,7 +92,8 @@ module.exports = async function handler(req, res) {
         headers: { Authorization: 'Bearer ' + resendKey, 'Content-Type': 'application/json' },
         body: JSON.stringify({ from, to: email, subject: m.asunto, html: m.html,
           reply_to: process.env.LEAD_NOTIFY_TO || 'maikel@qualivo.io',
-          headers: { 'List-Unsubscribe': '<' + bajaUrl + '>' } })
+          headers: { 'List-Unsubscribe': '<' + bajaUrl + '>' },
+          tags: [{ name: 'paso', value: 'd' + paso }, { name: 'contacto', value: String(c.id) }] })
       });
       if (!env.ok) throw new Error('Resend ' + env.status + ': ' + (await env.text()).slice(0, 200));
       // Marcar como enviado (si esto falla, mañana podría repetirse: se registra)
@@ -91,6 +101,7 @@ module.exports = async function handler(req, res) {
         method: 'POST', headers: ghl, body: JSON.stringify({ tags: ['sec-d' + paso] })
       });
       if (!tg.ok) console.error('[secuencia] etiqueta no puesta', c.id, tg.status);
+      if (paso === 7) await marcarTibio(c, ghl, locationId).catch(function (err) { console.error('[secuencia] tibio', c.id, String(err).slice(0, 120)); });
       resumen.enviados++;
     } catch (err) {
       resumen.errores++;
@@ -101,3 +112,29 @@ module.exports = async function handler(req, res) {
   console.log('[secuencia]', JSON.stringify(resumen));
   return res.status(200).json(Object.assign({ ok: true }, resumen));
 };
+
+// Puntuación del cuello (0-100) leída de la última nota de la radiografía; si no, null.
+function puntosCuello(c, cuello) {
+  const nombre = { captacion: 'Captación', conversion: 'Conversión', seguimiento: 'Seguimiento', dependencia: 'Dependencia', control: 'Control' }[cuello];
+  const t = (c.tags || []).map(String).find(function (x) { return x.indexOf('puntos-' + cuello + '-') === 0; });
+  if (t) { const n = parseInt(t.split('-').pop(), 10); if (Number.isInteger(n)) return n; }
+  void nombre;
+  return null;
+}
+
+// Fin de la secuencia automática: etiqueta sec-tibio y etapa «Tibio» si existe en el pipeline.
+async function marcarTibio(c, ghl, locationId) {
+  const tags = (c.tags || []).map(String);
+  if (tags.includes('sec-tibio')) return;
+  await fetch(GHL_BASE + '/contacts/' + c.id + '/tags', { method: 'POST', headers: ghl, body: JSON.stringify({ tags: ['sec-tibio'] }) });
+  const pr = await fetch(GHL_BASE + '/opportunities/pipelines?locationId=' + locationId, { headers: ghl });
+  if (!pr.ok) return;
+  const pl = ((await pr.json()).pipelines || []).filter(function (x) { return x.id === PIPELINE_ID; })[0];
+  const etapa = ((pl && pl.stages) || []).filter(function (st) { return /tibio/i.test(st.name); })[0];
+  if (!etapa) return;
+  const sr = await fetch(GHL_BASE + '/opportunities/search?location_id=' + locationId + '&contact_id=' + c.id + '&pipeline_id=' + PIPELINE_ID, { headers: ghl });
+  if (!sr.ok) return;
+  const op = ((await sr.json()).opportunities || []).filter(function (o) { return o.status === 'open'; })[0];
+  if (!op) return;
+  await fetch(GHL_BASE + '/opportunities/' + op.id, { method: 'PUT', headers: ghl, body: JSON.stringify({ pipelineStageId: etapa.id }) });
+}

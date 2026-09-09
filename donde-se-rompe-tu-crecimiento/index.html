@@ -348,6 +348,12 @@
       <div class="fg-actions">
         <button id="fg-sharebtn" class="fg-share">Mándaselo a tu socio: a ver qué le sale</button>
         <div class="fg-share-mini"><button id="fg-whatsapp" type="button">WhatsApp</button><button id="fg-linkedin" type="button">LinkedIn</button><button id="fg-descargar" type="button">Descargar mi tarjeta</button></div>
+        <div id="fg-perfil" style="margin:0 0 22px; padding:18px 18px 6px; border:1px solid rgba(16,19,25,.1); border-radius:14px; background:#FAFAF8">
+          <p style="margin:0 0 4px; font-size:16px; font-weight:800; color:#101319">Tres datos para ajustar tu plan <span style="font-weight:600; color:var(--qv-ink-faint)">(opcional)</span></p>
+          <p style="margin:0 0 14px; font-size:14px; line-height:1.55; color:var(--qv-ink-muted)">Con esto el plan de 30 días se escribe para una empresa como la tuya, no para una media.</p>
+          <div id="fg-perfil-campos"></div>
+          <p id="fg-perfil-ok" hidden style="margin:0 0 12px; font-size:13.5px; font-weight:700; color:#0E7C74">Listo. El plan se ajustará a tu caso.</p>
+        </div>
         <button id="fg-gatebtn" class="btn-teal">Quiero el plan de 30 días para arreglarlo →</button>
       </div>
       <p class="fg-mini">Te llega por correo: las cinco partes explicadas, cómo comprobar en una semana que esto acierta y los tres movimientos en orden.</p>
@@ -359,7 +365,7 @@
     <section id="fg-gate" hidden>
       <div class="fg-card">
         <h2 class="fg-h" style="font-size:clamp(23px,4.4vw,32px); line-height:1.15; margin:0 0 14px">Tu plan de 30 días para <span id="fg-gate-dim"></span></h2>
-        <p style="margin:0 0 24px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Lo que acabas de ver es la foto. Déjame correo y WhatsApp y te llega la radiografía completa: <strong>los tres movimientos en orden</strong> para los próximos treinta días, las cinco partes de tu sistema explicadas una a una, por qué la segunda más floja suele sostener a la primera, y cómo comprobar en una semana que esto acierta.</p>
+        <p style="margin:0 0 24px; font-size:16.5px; line-height:1.7; color:var(--qv-ink-soft)">Lo que acabas de ver es la foto. Déjame tu correo y te llega la radiografía completa: <strong>los tres movimientos en orden</strong> para los próximos treinta días, las cinco partes de tu sistema explicadas una a una, por qué la segunda más floja suele sostener a la primera, y cómo comprobar en una semana que esto acierta.</p>
         <form id="fg-form" novalidate style="display:flex; flex-direction:column; gap:16px">
           <label style="display:block">
             <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">Nombre</span>
@@ -370,9 +376,9 @@
             <input type="email" id="fg-email" placeholder="ana@tuempresa.com" autocomplete="email">
           </label>
           <label style="display:block">
-            <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">WhatsApp</span>
+            <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">WhatsApp <span style="font-weight:600; color:var(--qv-ink-faint)">(opcional)</span></span>
             <input type="tel" id="fg-telefono" placeholder="600 000 000" autocomplete="tel" inputmode="tel">
-            <span style="display:block; margin-top:6px; font-size:13px; line-height:1.5; color:var(--qv-ink-faint)">El plan te llega por correo y yo te escribo por WhatsApp para ver si te cuadra. Sin cadenas de mensajes.</span>
+            <span style="display:block; margin-top:6px; font-size:13px; line-height:1.5; color:var(--qv-ink-faint)">Si quieres que te lo comente en dos minutos. Un mensaje de Maikel, sin cadenas.</span>
           </label>
           <label style="display:block">
             <span style="display:block; font-size:14px; font-weight:800; margin-bottom:7px">¿A qué se dedica tu empresa? <span style="font-weight:600; color:var(--qv-ink-faint)">(opcional)</span></span>
@@ -391,7 +397,7 @@
           </label>
           <label style="display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.55; color:var(--qv-ink-muted)">
             <input type="checkbox" id="fg-rgpd" style="width:18px; height:18px; margin-top:2px; accent-color:#0E7C74; flex-shrink:0">
-            <span>Acepto que Qualivo trate mis datos para enviarme el plan y contenido relacionado por correo y WhatsApp. <a href="/privacidad/">Privacidad</a>.</span>
+            <span>Acepto que Qualivo trate mis datos para enviarme el plan y contenido relacionado por correo y, si dejo mi número, por WhatsApp. <a href="/privacidad/">Privacidad</a>.</span>
           </label>
           <div style="position:absolute; left:-9999px" aria-hidden="true">
             <label>No rellenar<input type="text" id="fg-website" tabindex="-1" autocomplete="off"></label>
