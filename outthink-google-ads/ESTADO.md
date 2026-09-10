@@ -567,3 +567,46 @@ pausa. Pendiente: confirmación de Noé/Aída del fin de la migración → react
 restaurar la franja del jueves (07–22 h) si la confirmación llega antes de las 14:00.
 **10-09, tras la migración:** Maikel confirma que está resuelto → `OT26_Search` reactivada y
 franja del jueves restaurada a 07–22 h. Landing y formulario responden 200.
+
+## 10-09 · AUDITORÍA (encargo de la rutina «Paid · Auditoría y Review», sesión de arquitectura)
+
+Nota previa: el encargo afirma que este fichero «no se toca desde el 28-ago» y que los
+presupuestos son 600/1.000/400. Ambas cosas están desactualizadas: ESTADO.md se actualiza a
+diario (último commit hoy 10-09) y el reparto se cambió el 04-09 y el 07-09 (todo a Search).
+Fuente de todas las cifras: Google Ads API v25, cuenta 918-811-5388, consulta 10-09 12:30 CEST.
+
+1. **Campañas ENABLED y gasto** (31-08 → 10-09): solo `OT26_Search` (Maximizar clics, tope
+   5 €, 84,45 €/día). Gasto acumulado **768,75 € de 2.000 €** (38 %): Search 517,82 ·
+   DG Prospecting 106,11 (pausada 05-09) · PMax 144,82 (pausada 07-09) · DG Remarketing 0.
+   Restante 1.231 € para 15 días → 82 €/día.
+2. **Conversiones `OT26_Registro`**: **15** (Search 13, PMax 2). CPL global **51,3 €**; Search
+   **39,8 €**; en los últimos 7 días Search 10 reg. / 375 € → 37,5 €. Objetivo del plan 8–12 €:
+   no alcanzable con Search; el mercado de búsqueda en Madrid es pequeño.
+3. **Términos que queman sin convertir**: nada significativo hoy. El mayor sin registro en todo
+   el periodo es «ai act» exacto (7,76 €, 4 clics) y «reglamento europeo de inteligencia
+   artificial» (6,51 €). Ya hay **108 negativas** de campaña; se añaden a diario. Frenado ya
+   hecho estos días: `congreso inteligencia artificial` amplia (45 €/0), `reglamento ia` amplia
+   (16,8 €/0), `ai act` amplia (18,4 €/1 → pasada a frase), DG Prospecting (106 €/0) y PMax
+   (145 €/2, CPL 72 €).
+4. **n8n 08:00**: **sí corre**. Evidencia: fila del 09-09 en `Historico` del dashboard
+   (59 clics, 84,66 €, 3 conv, acumulado 740,24 €), escrita en la ejecución de hoy. No se ha
+   podido consultar la API de n8n (clave no guardada en el entorno), la evidencia es el Sheet.
+5. **Observatorio**: **NO resuelto**. En la versión publicada (v10 «Revisión LinkedIn») del
+   contenedor de espacio.adigital.org, la etiqueta «Seguimiento de conversiones de Google Ads»
+   (AW-16923064235 / kX9WCIDm_L8aEKvvxYU_) sigue disparando con el activador 5 «Envío de
+   formulario» **sin filtro de URL**, así que cuenta también los registros de OutThink en esa
+   otra cuenta. No afecta a nuestra medición (nuestra etiqueta tiene activador propio filtrado
+   a `outthink-2026`). Es contenedor de Adigital: proponer a Aída añadir al activador 5 la
+   condición `Page URL no contiene outthink-2026`. **Listas de remarketing**: pobladas desde la
+   corrección de la CSP (02-09): Visitantes_Web 160 · Registro_Iniciado 24; insuficientes para
+   Demand Gen (mín. 1.000) antes del 24-09.
+6. **Esta semana**: sin cambios de aceleración pendientes de mi lado. Con OK de Maikel:
+   (A) subir las imágenes de Germán Zarama a Search (UI) + titular/descripción en EventosIA,
+   cuando Aída valide; (B) test LinkedIn + Meta con parte del presupuesto (propuesta enviada a
+   Aída el 07-09, sin respuesta); (C) mantener 82–85 €/día en Search hasta el 24. Solo freno:
+   seguir con negativas diarias; pausar AIAct/Compliance si en 3 días no registran.
+
+**Adigital vs OutThink**: el cliente es **Adigital** (Asociación Española de la Economía
+Digital). OutThink 2026 es su evento (24-09, Madrid); la cuenta 918-811-5388 es la cuenta de
+Google Ads de Adigital para OutThink. El Observatorio es otro proyecto de Adigital con su propia
+cuenta (AW-16923064235). Interlocutora: Aída Sánchez (data manager de Adigital).
