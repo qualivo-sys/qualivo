@@ -205,9 +205,11 @@
       "guardrail": "construye en PAUSADO; activar, subir presupuesto y cambiar pujas son de Maikel, siempre. Pausar y excluir si son autonomos porque frenar es reversible",
       "migration": {
         "action": "REBUILD",
-        "estado": "dormido para Qualivo, vivo para clientes en Agente Adigital",
-        "enciende_cuando": "Meta con 7 dias de datos + impresiones BOFU en Search Console + financiado por un cobro nuevo"
-      }
+        "estado": "el gasto de Meta ya corre dentro de Agente growth, sin dueno propio",
+        "cambio": "sesion propia hermana, no subagente hijo (ADR-009). Growth cede la inversion y conserva la instrumentacion",
+        "google_ads": "sigue esperando las tres condiciones del 9-sep"
+      },
+      "frontera": "la instrumentacion es de Growth, la inversion es de Paid"
     }
   ],
   "not_yet": [

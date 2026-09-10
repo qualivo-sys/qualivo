@@ -164,14 +164,55 @@ La hace Agente Adigital, hoy, y son seis preguntas:
 Salida: `outthink-google-ads/ESTADO.md` actualizado y el primer Paid Review en el formato de abajo.
 Después se hace lo mismo con EAC, Focus y Eleva.
 
+## CÓMO SE MONTA EL DE QUALIVO
+
+Sesión propia hermana, no subagente hijo de growth. Razones en ADR-009. La frontera:
+**la instrumentación es de Growth, la inversión es de Paid.**
+
+### Los cinco pasos
+
+1. **Crear la sesión** "Agente Paid", con su rama `claude/qualivo-paid-*`.
+2. **Traspaso escrito** de Growth a Paid, con la lista de abajo. Growth lo escribe en su rama;
+   Paid lo lee. Nada de traspasar por conversación.
+3. **Dos rutinas**, y solo dos: aviso de anomalías diario y Paid Review los lunes.
+4. **Permisos cargados desde el primer día**: construye en pausado, frena solo, no activa nunca.
+5. **Growth cede el gasto y conserva todo lo demás.**
+
+### Traspaso · lo que Growth tiene que dejar escrito
+
+| Qué | Dónde está hoy |
+|---|---|
+| Esquema de UTMs y qué significa cada valor | recorrido de la Radiografía |
+| Píxel Qualivo Agencia: ID y dónde está puesto | `api/_meta.js` |
+| Eventos de la API de Conversiones y su deduplicación | `api/meta-evento.js` |
+| Webhook de GoHighLevel: Schedule y Purchase | commits del 9-sep |
+| El Sheet del embudo y su cron diario por anuncio | informe diario |
+| Biblioteca de dolores y motor de campañas | `content/biblioteca-estrategica/` |
+| Creatividades: skill de director creativo y fábrica de vídeo | `.claude/skills/`, `video-factory/` |
+| **Estado real: qué campañas corren, con qué presupuesto y cuánto llevan gastado** | **SIN DATO en el repo** |
+
+La última fila es la que importa y es la que no está escrita en ninguna parte. Es la primera tarea
+de Paid el día que se abra.
+
+### Qué se queda cada uno
+
+| Growth conserva | Paid se lleva |
+|---|---|
+| landing, CRO, Radiografía | presupuesto y pujas |
+| píxel, API de Conversiones, eventos | campañas, grupos, anuncios |
+| SEO y páginas | audiencias y segmentación |
+| creatividades y fábrica de vídeo | qué creatividad se sirve y con cuánto dinero |
+| el dato del embudo | el dato por campaña y por anuncio |
+
 ## CUÁNDO SE ENCIENDE EL DE QUALIVO
 
 Las tres condiciones que ya fijó el Cerebro el 9-sep, sin cambios:
 Meta leído con 7 días de datos · impresiones en las páginas BOFU de Search Console · financiado
 por un cobro nuevo, empezando por los 450 € de Eleva de agosto sin cobrar.
 
-Mientras tanto el agente existe en el papel y no se abre. **Un agente sin presupuesto no tiene
-nada que poseer.**
+Eso era para Google Ads y sigue en pie. **Meta es otra cosa: ya está corriendo dentro de Agente
+growth**, así que ahí el agente no espera a nada. Se abre, recibe el traspaso y toma el mando del
+gasto que ya existe.
 
 ## SYSTEM_PROMPT_SKELETON
 
