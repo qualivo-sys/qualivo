@@ -5,12 +5,11 @@
 body{background:#3a3a3a;padding:40px}
 .page{width:1080px;height:1350px;position:relative;background:#0A0A0B;overflow:hidden;font-family:SG;margin:0 auto 40px}
 .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* hueco visible mientras no está la foto; se sustituye por <img class="foto"> */
 .hueco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
   background:repeating-linear-gradient(45deg,#17171a 0 26px,#121215 26px 52px);
-  color:rgba(242,238,230,.22);font-size:21px;letter-spacing:.16em;text-transform:uppercase;line-height:1.8;padding:0 140px}
-.velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.46) 34%,rgba(8,8,10,.16) 54%,rgba(8,8,10,.52) 78%,rgba(8,8,10,.9) 100%)}
-.velo.alto{background:linear-gradient(180deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.72) 40%,rgba(8,8,10,.3) 62%,rgba(8,8,10,.88) 100%)}
+  color:rgba(242,238,230,.2);font-size:20px;letter-spacing:.16em;text-transform:uppercase;line-height:1.8;padding:0 150px}
+.velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.5) 32%,rgba(8,8,10,.14) 52%,rgba(8,8,10,.58) 80%,rgba(8,8,10,.93) 100%)}
+.velo.alto{background:linear-gradient(180deg,rgba(8,8,10,.95) 0%,rgba(8,8,10,.78) 42%,rgba(8,8,10,.34) 64%,rgba(8,8,10,.9) 100%)}
 .kick{position:absolute;top:52px;left:56px;right:56px;font-size:24px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
 .tit{position:absolute;left:56px;right:56px;font-family:Anton;color:#F2EEE6;text-transform:uppercase;line-height:1.02;letter-spacing:.005em}
 .nar{color:#E8590C}
@@ -18,122 +17,137 @@ body{background:#3a3a3a;padding:40px}
 .firma{position:absolute;bottom:48px;left:56px;font-size:24px;letter-spacing:.05em;color:rgba(242,238,230,.55)}
 .pag{position:absolute;bottom:48px;right:56px;font-size:24px;color:rgba(242,238,230,.4);letter-spacing:.08em}
 .regla{position:absolute;left:56px;width:80px;height:5px;background:#E8590C}
-.fila{margin-bottom:38px}
-.fila .rol{font-family:Anton;font-size:46px;color:#E8590C;text-transform:uppercase;line-height:1.06;margin-bottom:8px}
-.fila .qh{font-size:33px;line-height:1.36;color:rgba(242,238,230,.92)}
-.pend{font-size:29px;line-height:1.45;color:rgba(242,238,230,.55)}
+.etapa{position:absolute;top:118px;left:56px;right:56px;font-family:Anton;font-size:62px;color:#E8590C;text-transform:uppercase;line-height:1.04}
+.err{position:absolute;left:56px;right:66px;font-family:Anton;font-size:76px;line-height:1.06;color:#F2EEE6;text-transform:uppercase}
 </style></head><body>
 
-<!-- 01 · PORTADA -->
+<!-- 01 -->
 <div class="page">
-  <div class="hueco">Foto A · bolsas de la compra nuevas<br>en el suelo de la cocina</div>
+  <div class="hueco">Foto A · termostato de pared<br>con la rueda subida a tope</div>
   <div class="velo"></div>
-  <div class="kick">Medios de pago</div>
-  <div class="tit" style="top:700px;font-size:128px">No subas<br>el presupuesto<br><span class="nar">todavía.</span></div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">1 / 10</div>
+  <div class="kick">Antes de subir el presupuesto</div>
+  <div class="tit" style="top:720px;font-size:118px">¿Quieres<br>más clientes<br><span class="nar">este mes?</span></div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">1 / 11</div>
 </div>
 
 <!-- 02 -->
 <div class="page">
-  <div class="hueco">Foto B · la compra apilada en la encimera,<br>sin guardar</div>
+  <div class="hueco">Foto B · la misma habitación con la ventana<br>abierta de par en par, la cortina volando</div>
   <div class="velo alto"></div>
-  <div class="kick">Lo de siempre</div>
-  <div class="tit" style="top:130px;font-size:88px">No entran suficientes<br>clientes<span class="nar">,</span> así que metes<br>más dinero arriba.</div>
-  <div class="sub" style="bottom:150px">Y entran más. <span style="color:#E8590C;font-weight:700">Más caros, también.</span></div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">2 / 10</div>
+  <div class="kick">Y lo primero que haces es</div>
+  <div class="tit" style="top:126px;font-size:94px">Subir el<br>presupuesto<br>de anuncios.</div>
+  <div class="regla" style="bottom:250px"></div>
+  <div class="sub" style="bottom:140px">Es subir la calefacción <span style="color:#E8590C;font-weight:700">con las ventanas abiertas.</span></div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">2 / 11</div>
 </div>
 
 <!-- 03 -->
 <div class="page">
-  <div class="hueco">Foto C · bolsa rota, la fruta<br>rodando por el suelo</div>
+  <div class="hueco">Foto C · billetes en el alféizar de una<br>ventana abierta, el viento llevándoselos</div>
   <div class="velo alto"></div>
-  <div class="kick">Pero mira esto</div>
-  <div class="tit" style="top:130px;font-size:92px">Si el agujero está<br><span class="nar">después del clic</span>,<br>acabas de pagar<br>más caro el mismo<br>agujero.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">3 / 10</div>
+  <div class="kick">Ventana 1</div>
+  <div class="etapa">Los anuncios</div>
+  <div class="err" style="top:250px">Optimizas a leads baratos.</div>
+  <div class="regla" style="bottom:250px"></div>
+  <div class="sub" style="bottom:140px">Y el lead barato casi nunca es el que compra.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">3 / 11</div>
 </div>
 
 <!-- 04 -->
 <div class="page">
-  <div class="hueco">Foto D · móvil boca arriba en la encimera,<br>notificaciones sin abrir</div>
+  <div class="hueco">Foto D · megáfono apoyado en el suelo<br>de una calle española vacía</div>
   <div class="velo alto"></div>
-  <div class="kick">Antes de subir un euro · 1</div>
-  <div class="tit" style="top:130px;font-size:96px">¿Cuánto tardas<br>en contestar<br>al que pregunta?</div>
-  <div class="regla" style="bottom:230px"></div>
-  <div class="sub" style="bottom:140px">La de ayer. No la media que dice el equipo.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">4 / 10</div>
+  <div class="kick">Ventana 2</div>
+  <div class="etapa">El contenido</div>
+  <div class="err" style="top:250px">Publicas para que te vean.</div>
+  <div class="regla" style="bottom:280px"></div>
+  <div class="sub" style="bottom:140px">No para que te encuentre el que ya tiene el problema.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">4 / 11</div>
 </div>
 
 <!-- 05 -->
 <div class="page">
-  <div class="hueco">Foto E · bandeja de papeles y sobres<br>sin abrir, con polvo</div>
+  <div class="hueco">Foto E · escaparate de un local con el cristal<br>cubierto de carteles, no se ve nada dentro</div>
   <div class="velo alto"></div>
-  <div class="kick">2</div>
-  <div class="tit" style="top:130px;font-size:96px">¿Cuántos<br>presupuestos<br>llevan más de<br>una semana<br>abiertos?</div>
-  <div class="regla" style="bottom:230px"></div>
-  <div class="sub" style="bottom:140px">Sin que nadie haya vuelto a escribir.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">5 / 10</div>
+  <div class="kick">Ventana 3</div>
+  <div class="etapa">Tu página</div>
+  <div class="err" style="top:250px">Cuenta lo que haces.<br>No dice a quién<br>le pasa qué.</div>
+  <div class="regla" style="bottom:280px"></div>
+  <div class="sub" style="bottom:140px">El que llega no se reconoce, y se va.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">5 / 11</div>
 </div>
 
 <!-- 06 -->
 <div class="page">
-  <div class="hueco">Foto F · tuppers olvidados al fondo<br>de la nevera</div>
+  <div class="hueco">Foto F · teléfono descolgado<br>sobre un mostrador vacío</div>
   <div class="velo alto"></div>
-  <div class="kick">3</div>
-  <div class="tit" style="top:130px;font-size:96px">¿A cuántos<br>de los que dijeron<br><span class="nar">«ahora no»</span><br>has vuelto?</div>
-  <div class="regla" style="bottom:230px"></div>
-  <div class="sub" style="bottom:140px">Este trimestre. No en general.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">6 / 10</div>
+  <div class="kick">Ventana 4</div>
+  <div class="etapa">Cuando alguien pregunta</div>
+  <div class="err" style="top:290px">Contestas<br>en unas horas.</div>
+  <div class="regla" style="bottom:280px"></div>
+  <div class="sub" style="bottom:140px">Para entonces ya está hablando con otro.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">6 / 11</div>
 </div>
 
 <!-- 07 -->
 <div class="page">
-  <div class="hueco">Foto G · nevera abierta a rebosar,<br>flash directo</div>
-  <div class="velo"></div>
-  <div class="kick">Y ahora sí</div>
-  <div class="tit" style="top:660px;font-size:90px">Si esas tres están mal,<br>subir el presupuesto<br><span class="nar">multiplica<br>el problema.</span></div>
-  <div class="sub" style="bottom:140px">Si están bien, sube. Entonces sí.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">7 / 10</div>
+  <div class="hueco">Foto G · carpeta de presupuestos impresos<br>en una bandeja, con polvo</div>
+  <div class="velo alto"></div>
+  <div class="kick">Ventana 5</div>
+  <div class="etapa">El seguimiento</div>
+  <div class="err" style="top:250px">Mandas el<br>presupuesto<br>y esperas.</div>
+  <div class="regla" style="bottom:280px"></div>
+  <div class="sub" style="bottom:140px">Un «ahora no» no es un no. Es una fecha.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">7 / 11</div>
 </div>
 
 <!-- 08 -->
 <div class="page">
-  <div class="hueco">Foto H · cocina recogida, todo guardado,<br>la encimera vacía</div>
-  <div class="velo"></div>
-  <div class="kick">Lo que hice yo</div>
-  <div class="tit" style="top:640px;font-size:118px">Dejar de<br>mirar solo<br>arriba<span class="nar">.</span></div>
-  <div class="sub" style="bottom:140px;font-size:42px;color:#F2EEE6">Ahora tengo una IA en cada etapa.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">8 / 10</div>
-</div>
-
-<!-- 09 · el mapa -->
-<div class="page">
-  <div class="hueco">Foto H otra vez, muy oscurecida<br>(fondo del mapa)</div>
-  <div class="velo" style="background:rgba(8,8,10,.9)"></div>
-  <div class="kick">Una en cada etapa</div>
-  <div style="position:absolute;top:150px;left:56px;right:66px">
-    <div class="fila"><div class="rol">Prospección y contenido</div><div class="qh">Buscan las cuentas del día, sondan su web, escriben y publican.</div></div>
-    <div class="fila"><div class="rol">Atención</div><div class="qh">Contesta al instante, sin que nadie esté delante.</div></div>
-    <div class="fila"><div class="rol">Cualificación</div><div class="qh">Puntúa de cero a cien y dice a quién llamar primero.</div></div>
-    <div class="fila"><div class="rol">Seguimiento</div><div class="qh">Barre los embudos cada mañana y crea la tarea con fecha y dueño.</div></div>
-    <div class="fila"><div class="rol">Llamadas y reactivación</div><div class="qh">Una llama y escribe el resumen. Otra vuelve a los que no volvieron.</div></div>
-  </div>
+  <div class="hueco">Foto H · fichero o agenda de clientes<br>cerrado y con polvo</div>
+  <div class="velo alto"></div>
+  <div class="kick">Ventana 6</div>
+  <div class="etapa">Lo que ya vendiste</div>
+  <div class="err" style="top:250px">El que ya te<br>compró no vuelve<br>a saber de ti.</div>
   <div class="regla" style="bottom:250px"></div>
-  <div class="pend" style="position:absolute;bottom:140px;left:56px;right:66px">Y estoy montando dos más. La que leerá mis campañas cada día y la que mide dónde se cae la página.</div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">9 / 10</div>
+  <div class="sub" style="bottom:140px">Ni el que pidió precio y se quedó a medias.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">8 / 11</div>
 </div>
 
-<!-- 10 · CIERRE -->
+<!-- 09 -->
 <div class="page">
-  <div class="hueco">Foto A otra vez, oscurecida</div>
-  <div class="velo" style="background:rgba(8,8,10,.88)"></div>
-  <div class="tit" style="top:300px;font-size:96px;text-align:center">No he cambiado<br>de CRM, ni de web,<br>ni de agencia<span class="nar">.</span></div>
-  <div style="position:absolute;left:0;right:0;top:760px;text-align:center">
+  <div class="hueco">Foto I · contador de la luz girando<br>en un rellano oscuro</div>
+  <div class="velo alto"></div>
+  <div class="kick">Y la que no se ve</div>
+  <div class="etapa">La medición</div>
+  <div class="err" style="top:250px">No sabes qué<br>canal trajo al<br>último cliente<br>que pagó.</div>
+  <div class="regla" style="bottom:250px"></div>
+  <div class="sub" style="bottom:140px">Así que cuando toque recortar, apagarás el que funcionaba.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">9 / 11</div>
+</div>
+
+<!-- 10 -->
+<div class="page">
+  <div class="hueco">Foto J · unas manos cerrando la ventana<br>desde dentro, luz cálida</div>
+  <div class="velo alto"></div>
+  <div class="kick">Lo que hacemos nosotros</div>
+  <div class="tit" style="top:126px;font-size:80px">Miramos tu proceso<br>entero, <span class="nar">de la captación<br>a la venta</span>, y te decimos<br>qué ventana tienes<br>abierta.</div>
+  <div class="regla" style="bottom:280px"></div>
+  <div class="sub" style="bottom:130px;font-size:40px;color:#F2EEE6">Y metemos IA justo ahí, para que se cierre sola. Sin cambiar de CRM, ni de web, ni de agencia.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">10 / 11</div>
+</div>
+
+<!-- 11 · CIERRE -->
+<div class="page">
+  <div class="hueco">Foto A otra vez, muy oscurecida</div>
+  <div class="velo" style="background:rgba(8,8,10,.9)"></div>
+  <div class="tit" style="top:290px;font-size:98px;text-align:center">¿Cuál de las<br>seis ventanas<br>tienes <span class="nar">abierta?</span></div>
+  <div style="position:absolute;left:0;right:0;top:770px;text-align:center">
     <div style="width:80px;height:5px;background:#E8590C;margin:0 auto 44px"></div>
-    <div style="font-size:37px;line-height:1.5;color:rgba(242,238,230,.9);padding:0 110px">¿Tu agujero está antes o después del clic?<br>Once preguntas. Noventa segundos.</div>
+    <div style="font-size:37px;line-height:1.5;color:rgba(242,238,230,.9);padding:0 110px">Once preguntas. Noventa segundos.<br>Sin registro.</div>
     <div style="margin-top:52px;font-size:25px;letter-spacing:.24em;color:rgba(242,238,230,.5);text-transform:uppercase">enlace en el perfil</div>
     <div style="font-family:Anton;font-size:86px;color:#E8590C;margin-top:8px">QUALIVO.IO</div>
   </div>
-  <div class="firma">@maikel.echevarria</div><div class="pag">10 / 10</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">11 / 11</div>
 </div>
 
 </body></html>

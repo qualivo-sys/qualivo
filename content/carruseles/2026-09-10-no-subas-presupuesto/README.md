@@ -3,24 +3,37 @@
 Primera pieza de Instagram del posicionamiento V1. **NO PUBLICAR**: la pausa de
 redes sigue vigente hasta que Maikel la levante por escrito.
 
-- 10 láminas, 1080 × 1350. Identidad personal de Maikel.
+- 11 láminas, 1080 × 1350. Identidad personal de Maikel.
 - Tinta #0A0A0B, crema #F2EEE6, naranja #E8590C. Anton + Space Grotesk
   (incluidas en `fuentes/` para que renderice igual en cualquier máquina).
 - Comparte gancho con el ángulo 2 de la campaña de Meta, para que quien vea el
   anuncio y luego el carrusel reciba el mismo mensaje dos veces.
 
-## Estructura (10 láminas, foto en todas)
+## El mensaje
 
-1-3 · el gancho: subes presupuesto, entran más caros, y el agujero seguía después del clic.
-4-6 · tres preguntas que se contesta él solo, una por lámina.
-7 · el veredicto: si esas tres están mal, subir multiplica el problema.
-8 · el giro: dejar de mirar solo arriba.
-9 · el mapa de agentes, de arriba del embudo hasta después de la venta.
-10 · cierre a la Radiografía.
+No es «no subas el presupuesto» a secas. Es: **antes de subirlo, mira por dónde
+se te está escapando**, etapa por etapa, y luego qué hacemos nosotros con eso.
 
-Estilo igual que el resto de carruseles: foto a sangre en cada lámina con el
-velo degradado encima y el texto sobre él. Los prompts de las ocho fotos están
-en `FOTOS.md`.
+> Subir el presupuesto es subir la calefacción con las ventanas abiertas.
+
+Seis ventanas, una por lámina, con el error típico de cada etapa: los anuncios,
+el contenido, tu página, cuando alguien pregunta, el seguimiento y lo que ya
+vendiste. Más una séptima que no se ve, la medición.
+
+Y el cierre dice lo que hacemos, que es lo que faltaba en las versiones
+anteriores: **miramos tu proceso entero de la captación a la venta, te decimos
+qué ventana tienes abierta, y metemos IA justo ahí para que se cierre sola.**
+
+## Estructura (11 láminas, foto en todas)
+
+1-2 · el gancho: quieres más clientes, y lo primero que haces es subir el presupuesto.
+3-8 · las seis ventanas abiertas, una por etapa, con su error.
+9 · la que no se ve: no sabes qué canal trajo al último cliente que pagó.
+10 · qué hacemos: proceso entero, dónde falla, e IA justo ahí.
+11 · cierre a la Radiografía.
+
+Estilo igual que el resto de carruseles: foto a sangre con el velo degradado
+encima y el texto sobre él. Los prompts de las diez fotos están en `FOTOS.md`.
 
 ## Rigor
 
