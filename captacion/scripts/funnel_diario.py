@@ -114,10 +114,12 @@ def voz():
         if (c.get("createdAt") or "")[:10] != HOY: continue
         if (c.get("assistantOverrides") or {}).get("metadata", {}).get("prueba"): continue
         llamadas += 1
-        if c.get("endedReason") == "customer-ended-call" or (c.get("startedAt") and c.get("endedAt")):
+        if "User:" in (c.get("transcript") or ""):
             contestadas += 1
-        if "agendar" in json.dumps(c.get("messages") or []):
-            agendadas += 1
+        for m in c.get("messages") or []:
+            if m.get("role") == "tool_calls" and "agendar" in json.dumps(m.get("toolCalls") or []):
+                agendadas += 1
+                break
     return dict(canal="voz", volumen=llamadas, aperturas="", clics="", respuestas="",
                 conversaciones=contestadas, reuniones=agendadas, notas="sin contar pruebas")
 
