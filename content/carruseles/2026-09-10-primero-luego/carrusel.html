@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+/* Molde de pares: papel crema, dos objetos apilados, «Primero» arriba con
+   subrayado naranja a mano, «Luego» abajo con subrayado tinta. Se copia el
+   molde, nunca el mensaje: aquí corrige el orden, no motiva. */
+.page{width:1080px;height:1350px;position:relative;background:#F2EEE6;overflow:hidden;font-family:SG;margin:0 auto 40px;color:#0A0A0B}
+.page::before{content:'';position:absolute;inset:0;opacity:.35;
+  background-image:radial-gradient(rgba(10,10,11,.055) 1px,transparent 1px);background-size:7px 7px}
+.mitad{position:absolute;left:0;right:0;height:640px}
+.mitad.arriba{top:34px}
+.mitad.abajo{top:686px}
+.obj{position:absolute;left:50%;transform:translateX(-50%);top:26px;width:420px;height:300px;display:flex;align-items:center;justify-content:center}
+.obj img{max-width:100%;max-height:100%;object-fit:contain}
+.obj .hueco{width:300px;height:220px;border:2px dashed rgba(10,10,11,.25);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,11,.4);line-height:1.7;padding:0 24px}
+.etq{position:absolute;top:350px;left:0;right:0;text-align:center;font-size:24px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:rgba(10,10,11,.5)}
+.fr{position:absolute;top:396px;left:70px;right:70px;text-align:center;font-family:Anton;font-size:64px;line-height:1.16;text-transform:uppercase;color:#0A0A0B}
+.fr .u{position:relative;display:inline-block;white-space:nowrap}
+.fr .u svg{position:absolute;left:-6px;right:-6px;bottom:-10px;width:calc(100% + 12px);height:22px}
+.fr .u.n svg use{stroke:#E8590C}
+.fr .u.t svg use{stroke:#0A0A0B}
+.sep{position:absolute;left:120px;right:120px;top:672px;border-top:2px dashed rgba(10,10,11,.22)}
+.firma{position:absolute;bottom:44px;left:56px;font-size:24px;letter-spacing:.05em;color:rgba(10,10,11,.55)}
+.pag{position:absolute;bottom:44px;right:56px;font-size:24px;color:rgba(10,10,11,.4);letter-spacing:.08em}
+.kick{position:absolute;top:56px;left:56px;right:56px;font-size:24px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.big{position:absolute;left:70px;right:70px;font-family:Anton;text-transform:uppercase;line-height:1.02;color:#0A0A0B}
+.nar{color:#E8590C}
+.txt{position:absolute;left:70px;right:70px;font-size:36px;line-height:1.45;color:rgba(10,10,11,.8)}
+</style>
+<svg width="0" height="0" style="position:absolute"><defs>
+<path id="raya" d="M2 14 C 60 6, 120 20, 180 11 S 320 18, 420 9 S 600 16, 760 10" fill="none" stroke-width="7" stroke-linecap="round"/>
+</defs></svg>
+</head><body>
+
+<!-- 01 · PORTADA -->
+<div class="page">
+  <div class="kick">Antes de subir el presupuesto</div>
+  <div class="obj" style="top:180px;width:620px;height:480px"><div class="hueco" style="width:520px;height:400px">Objeto · termostato de pared<br>con la rueda a tope</div></div>
+  <div class="big" style="top:760px;font-size:112px;text-align:center">¿Quieres más<br>clientes<br><span class="nar">este mes?</span></div>
+  <div class="txt" style="bottom:130px;text-align:center">Vale. Pero hay un orden.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">1 / 9</div>
+</div>
+
+<!-- 02 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · temporizador<br>de cocina</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Contesta en <span class="u n">diez minutos<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span><br>al que ya preguntó.</div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">2 / 9</div>
+</div>
+
+<!-- 03 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · auricular<br>de teléfono fijo</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Llama a los <span class="u n">presupuestos<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span><br>que siguen abiertos.</div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">3 / 9</div>
+</div>
+
+<!-- 04 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · espejo<br>de mano</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Que tu página diga<br><span class="u n">a quién le pasa qué.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">4 / 9</div>
+</div>
+
+<!-- 05 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · calderilla,<br>monedas de céntimo</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Deja de pagar <span class="u n">leads baratos<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span><br>que nunca compran.</div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">5 / 9</div>
+</div>
+
+<!-- 06 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · sobre<br>con sello</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Escribe a los que<br><span class="u n">ya te compraron.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">6 / 9</div>
+</div>
+
+<!-- 07 -->
+<div class="page">
+  <div class="mitad arriba">
+    <div class="obj"><div class="hueco">Objeto · lupa</div></div>
+    <div class="etq">Primero</div>
+    <div class="fr">Averigua <span class="u n">qué canal<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span> trajo<br>al último que pagó.</div>
+  </div>
+  <div class="sep"></div>
+  <div class="mitad abajo">
+    <div class="obj"><div class="hueco">Objeto · termostato</div></div>
+    <div class="etq">Luego</div>
+    <div class="fr"><span class="u t">Sube el presupuesto.<svg viewBox="0 0 780 22" preserveAspectRatio="none"><use href="#raya"/></svg></span></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">7 / 9</div>
+</div>
+
+<!-- 08 · LO QUE HACEMOS -->
+<div class="page">
+  <div class="kick">Lo que hacemos nosotros</div>
+  <div class="big" style="top:150px;font-size:78px">Miramos tu<br>proceso entero,<br><span class="nar">de la captación<br>a la venta.</span></div>
+  <div class="txt" style="top:640px;font-size:38px">Te decimos cuál de estos seis te toca primero. Y metemos IA justo ahí, para que deje de depender de que alguien se acuerde.</div>
+  <div style="position:absolute;left:70px;top:900px;width:80px;height:5px;background:#E8590C"></div>
+  <div class="txt" style="top:950px;font-size:34px;color:rgba(10,10,11,.6)">Sin cambiar de CRM. Ni de web. Ni de agencia.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">8 / 9</div>
+</div>
+
+<!-- 09 · CIERRE -->
+<div class="page">
+  <div class="obj" style="top:150px;width:520px;height:380px"><div class="hueco" style="width:420px;height:300px">Objeto · termostato<br>(rueda en posición normal)</div></div>
+  <div class="big" style="top:600px;font-size:96px;text-align:center">¿Cuál te toca<br><span class="nar">primero?</span></div>
+  <div class="txt" style="top:880px;text-align:center">Once preguntas. Noventa segundos.<br>Sin registro.</div>
+  <div style="position:absolute;left:0;right:0;top:1040px;text-align:center;font-family:Anton;font-size:72px;color:#E8590C">QUALIVO.IO</div>
+  <div style="position:absolute;left:0;right:0;top:1130px;text-align:center;font-size:23px;letter-spacing:.24em;text-transform:uppercase;color:rgba(10,10,11,.5)">enlace en el perfil</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">9 / 9</div>
+</div>
+
+</body></html>
