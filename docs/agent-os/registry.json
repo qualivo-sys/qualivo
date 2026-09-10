@@ -201,15 +201,18 @@
         "angulos_devueltos"
       ],
       "attention_cost_week": 2,
-      "session_id": null,
+      "session_id": "session_01U6fb4Lc12iG7egcZNiv5SX",
       "guardrail": "construye en PAUSADO; activar, subir presupuesto y cambiar pujas son de Maikel, siempre. Pausar y excluir si son autonomos porque frenar es reversible",
       "migration": {
         "action": "REBUILD",
-        "estado": "el gasto de Meta ya corre dentro de Agente growth, sin dueno propio",
-        "cambio": "sesion propia hermana, no subagente hijo (ADR-009). Growth cede la inversion y conserva la instrumentacion",
-        "google_ads": "sigue esperando las tres condiciones del 9-sep"
+        "estado": "sesion creada el 10-sep, arranca desde la rama main",
+        "primera_tarea": "paid/estado.md con lo que este corriendo y paid/accesos-que-necesito.md",
+        "rutinas": "ninguna todavia: se le cuelgan las dos (anomalias diaria, Paid Review lunes) cuando tenga accesos",
+        "google_ads_qualivo": "sigue esperando las tres condiciones del 9-sep"
       },
-      "frontera": "la instrumentacion es de Growth, la inversion es de Paid"
+      "frontera": "la instrumentacion es de Growth, la inversion es de Paid",
+      "session_title": "Agente Paid",
+      "branch": "claude/qualivo-paid"
     }
   ],
   "not_yet": [
