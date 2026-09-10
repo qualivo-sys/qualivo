@@ -560,3 +560,8 @@ Search: 893 impr, 58 clics, 84,1 €, **3 registros** (EventosIA 2, AIAct 1 con 
 CPC 1,45 € (frente a 2,42 € el día de Maximizar conversiones). Acumulado **734 € (37 %),
 14 registros, CPL 52 €**; Search 12 reg. Listas de remarketing: 160 visitantes, 24 registro
 iniciado. Negativas nuevas: google enterprise, apply ai, startups/startup, consulting, ia summit.
+
+## 10-09, 09:00 — Search PAUSADA por la migración de servidor (planificador)
+Ejecutado por el planificador a las 09:00 Madrid: `OT26_Search` → PAUSED. Toda la cuenta en
+pausa. Pendiente: confirmación de Noé/Aída del fin de la migración → reactivar Search y
+restaurar la franja del jueves (07–22 h) si la confirmación llega antes de las 14:00.
