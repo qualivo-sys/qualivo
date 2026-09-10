@@ -86,6 +86,53 @@ Y cuatro reglas que nos separan: empezamos por el proceso y no por la tecnologí
 - **Piloto:** acotado en alcance y tiempo, con suelo que cubre coste duro y variable ligado al resultado. **No se publica ni se ofrece a cualquiera:** solo a quien pasa las cinco condiciones (producto que ya se vende, ticket que aguante, equipo capaz de atender lo que le mandes, ciclo corto o medio, y que sepas cómo juegan).
 - **Sistema:** recurrente, cuando el piloto ha demostrado impacto. Aquí está el dinero, no en la entrada.
 
-## 8. Lo que no decimos
+## 8 bis. El reloj: cuánto tarda en verse el primer número
+
+Quien compra sistemas tiene miedo a implantaciones eternas. Esto va en la web, en la reunión y en la primera página del piloto:
+
+**El plan por escrito en 48 horas. El primer arreglo funcionando en dos semanas. El primer número en cuatro.**
+
+| Cuándo | Qué pasa |
+|---|---|
+| Día 0 | Radiografía. 90 segundos. Su cuello de botella |
+| Día 2 | Plan por escrito. Las tres fugas por impacto, qué tocar y qué no |
+| Semana 1 | Arranque. Accesos y, sobre todo, **se mide el número base** |
+| Semana 2 | Primer agente desplegado sobre un proceso concreto |
+| Semana 3 | Primeros datos. Ajuste |
+| Semana 4 | **El número: antes y después**, y la conversación de continuidad |
+
+### La regla que lo sostiene: el número base se mide el primer día
+
+El "antes" se mide y se acuerda por escrito en la semana 1, firmado por los dos. Sin línea base no hay número al día 30, hay una discusión. Esto es lo que la mayoría se salta y es la diferencia entre tener un caso y tener una opinión.
+
+### Qué número, según la fuga
+
+| Fuga | Número base (semana 1) | El mismo número (semana 4) |
+|---|---|---|
+| Captación | Oportunidades nuevas el mes anterior | Oportunidades nuevas del mes |
+| Conversión | Tiempo medio hasta la primera respuesta | El mismo, en minutos |
+| Seguimiento | Presupuestos abiertos sin siguiente paso | Cuántos tocados y cuántos han contestado |
+| Dependencia | % de oportunidades que pasan por el dueño | El mismo % |
+| Control | % de clientes nuevos con origen conocido | El mismo % |
+
+Todos se pueden medir el primer día desde su CRM, sin proyecto de instrumentación.
+
+### La fecha de decisión, no solo la de fin
+
+Lo que dicen todos (Kubysoft, Adigital, Adelantta) no es "no pago", es **"no pago antes de la prueba"**. Eso no es una objeción de precio, es de calendario. Por tanto el piloto lleva escrita **la fecha en la que se decide**, no solo cuándo acaba:
+
+> El día 30 nos sentamos con el número delante y decidimos una de tres: seguimos con el sistema, ajustamos el alcance, o lo dejamos aquí.
+
+Sin esa fecha el piloto se alarga solo y nunca se llega al recurrente. Con ella, la prueba es un mecanismo de cierre y no una barra libre.
+
+### Y si el número no se mueve
+
+Se dice antes de empezar, y es la mitad de la fuerza de la oferta: **si al día 30 el número no se ha movido, no seguimos, y el diagnóstico y lo que hayamos montado se queda contigo.**
+
+## 8 ter. El primer piloto vale más como caso que como factura
+
+No hay ningún caso todavía de "agentizamos un proceso y pasó esto": los cuatro que hay son de growth. Por eso, en el acuerdo del primer piloto: el número se define antes de empezar, se mide antes y después, y se pide **permiso para publicarlo** con nombre o sin él. Ese caso vale más que los honorarios del piloto.
+
+## 9. Lo que no decimos
 
 Nunca: "transformación digital" · "IA" como argumento en frío · "somos una agencia de X" · precios en frío o en la web · el piloto de riesgo compartido en abierto · promesas de resultado sin datos del cliente · la palabra "agentizar" a quien todavía no sabe que tiene un problema.
