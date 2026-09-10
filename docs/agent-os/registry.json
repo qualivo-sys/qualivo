@@ -201,7 +201,8 @@
         "angulos_devueltos"
       ],
       "attention_cost_week": 2,
-      "session_id": null,
+      "session_id": "session_01U6fb4Lc12iG7egcZNiv5SX",
+      "branch": "claude/qualivo-paid",
       "guardrail": "construye en PAUSADO; activar, subir presupuesto y cambiar pujas son de Maikel, siempre. Pausar y excluir si son autonomos porque frenar es reversible",
       "migration": {
         "action": "REBUILD",
