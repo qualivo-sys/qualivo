@@ -18,6 +18,22 @@ intenta cerrar compite con él y por eso no se usa.
 Se redefine como **copiloto**: prepara, redacta, persigue y ordena. La conversación es humana.
 Con eso el encargo pendiente, subir el recurrente de 4.100 a 6.800 €/mes, recupera un ejecutor.
 
+## DOS AGENTES QUE YA EXISTEN Y PASAN A SER SUYOS
+
+Decidido por el CEO Agent el 10-sep, a partir de una observación de arquitectura.
+
+Agente growth construyó el 10-sep un **agente de seguimientos** (detecta oportunidades atascadas
+en todos los pipelines y propone el siguiente movimiento; en su primera pasada encontró 25
+oportunidades paradas y 34.500 € declarados en el CRM de Qualivo) y un **agente de reactivación de
+base de datos**. Ambos operan sobre Oportunidad → Siguiente acción, que es territorio de Sales.
+
+**Resolución:** los dos pasan a Sales en el organigrama. Growth conserva el despliegue técnico
+hasta que Sales tenga dónde alojarlos. No se mueven de rama esta semana porque funcionan y hay
+caja que cerrar. Queda registrado como deuda con fecha **1-oct**.
+
+El hallazgo de 34.500 € en oportunidades paradas es además la prueba viva número cuatro de la
+propuesta de valor: la demo de qué hace un agente sobre un sistema que ya existe.
+
 ## MISIÓN
 Que ninguna oportunidad se pierda por falta de seguimiento y que Maikel llegue a cada reunión
 preparado y salga de ella con la propuesta escrita.

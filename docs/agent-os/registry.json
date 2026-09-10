@@ -158,7 +158,12 @@
         "estado": "fichado sin operar",
         "cambio": "de closer a copiloto; recupera el encargo 4.100 -> 6.800 EUR/mes"
       },
-      "session_title": "Agente de Ventas Qualivo"
+      "session_title": "Agente de Ventas Qualivo",
+      "hereda": [
+        "agente de seguimientos",
+        "agente de reactivacion de base de datos"
+      ],
+      "deuda": "growth conserva el despliegue tecnico hasta el 1-oct"
     },
     {
       "agent_id": "qualivo.ops",
@@ -212,7 +217,10 @@
       },
       "frontera": "la instrumentacion es de Growth, la inversion es de Paid",
       "session_title": "Agente Paid",
-      "branch": "claude/qualivo-paid"
+      "branch": "claude/qualivo-paid",
+      "cuenta_qualivo": "act_3453332464718877 · Qualivo Agencia",
+      "estado_10sep": "1 campana activa de 68, 15 EUR/dia sin tope ni fecha de fin, 17,03 EUR gastados, 0 leads",
+      "bloqueo": "token de Meta con alcance sobre mas de 20 cuentas de clientes; pendiente de rotar y acotar (H12)"
     }
   ],
   "not_yet": [
@@ -309,23 +317,13 @@
     }
   ],
   "propuesta_de_valor": {
-    "version": "V1 definitiva",
+    "version": "V2 definitiva",
     "fecha": "2026-09-10",
-    "deroga": "matriz obligatoria del 8-sep en sistema/cerebro.md",
-    "categoria": "No sustituimos tu sistema comercial. Lo agentizamos.",
-    "oferta": [
-      "Radiografia 90s",
-      "Plan por escrito 48h gratis",
-      "Piloto acotado y medido",
-      "Sistema recurrente"
-    ],
-    "icp": "servicios 5-50 personas, ticket >1.000 EUR, con traccion y capacidad de atender mas",
-    "suelo": "500 EUR/mes",
+    "fuente_unica": "claude/quipu-billing-dashboard-g2s2ap:sistema/propuesta-valor.md",
+    "espejo": "main:sistema/propuesta-de-valor.md, con cabecera de procedencia",
     "unico_editor": "qualivo.brain",
-    "conflictos_abiertos": [
-      "ICP 5-50 frente a Radar IA 2-20 y frente a los 18 ICPs del Outbound Brain",
-      "precios que puedan quedar en la landing",
-      "suelo de 500 EUR/mes sin propagar a Outbound y SDR"
-    ]
+    "congelada_hasta": "8-10 propuestas enviadas",
+    "cambio_clave": "territorio completo: antes, en y despues del lead. La V1 solo cubria despues",
+    "conflictos": "los tres de la V1 cerrados por el CEO Agent el 10-sep: ICP 5-50 en todas partes, suelo 500 EUR/mes, precios nunca en frio ni en web"
   }
 }

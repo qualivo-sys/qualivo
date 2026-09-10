@@ -208,3 +208,55 @@ Paid deja de ser un agente a futuro y pasa a ser **el que más urge**, por delan
 demás del roadmap. Es dinero de un cliente, con fecha de fin, y hoy no tiene dueño.
 
 Y cambia el orden de prioridad del brief: esto es *client-delivery-critical*, no *intelligence*.
+
+---
+
+## H12 · Un token de Meta alcanza más de veinte cuentas publicitarias de clientes distintos
+
+Encontrado por el propio Agente Paid en su primer turno, 10-sep 18:30, y verificado en
+`claude/qualivo-paid:paid/accesos-que-necesito.md`.
+
+Se le concedió lectura sobre **una** cuenta, la de Qualivo. El token entregado, identidad
+"Twin Integration", devuelve en `/me/adaccounts` **más de veinte cuentas de negocios distintos**:
+EAC, Dra. Nuria Roure, Alaska, Venta Garantizada, Opertek, Belfort, AMC Fisioterapia, Ciencia
+Interior, GREENCAR y varias más.
+
+**Por qué importa.** No es un fallo del agente: se ha limitado a `act_3453332464718877` y lo ha
+declarado por escrito. El problema es de diseño de permisos. Un solo token con alcance sobre las
+cuentas publicitarias de nueve o diez clientes significa que cualquier agente, script o persona
+que lo tenga puede leer, y según su alcance modificar, la publicidad de todos ellos. Es dinero de
+clientes y son datos de clientes.
+
+Y el agente añade un segundo aviso: **el token viajó por el chat**, así que queda en la
+transcripción. Recomienda rotarlo. Estoy de acuerdo.
+
+**Qué hacer**, por orden:
+
+1. **Rotar el token.** Business Manager → Usuarios del sistema → generar nuevo. El anterior deja
+   de valer. Es higiene barata.
+2. **Emitir uno por cuenta**, no uno para todo. Un agente que opera Qualivo no debe poder leer la
+   cuenta de EAC ni la de Nuria Roure.
+3. **Inventariarlo.** Es la primera tarea del inventario de secretos que le toca a Ops.
+
+Esto encaja con la regla A4 del anexo y con el hallazgo H7: las credenciales no tienen dueño ni
+inventario, y por eso su alcance no lo controla nadie.
+
+## H13 · Primera lectura real de la campaña de Qualivo en Meta
+
+`claude/qualivo-paid:paid/estado.md`, 10-sep 18:30, leído de la API, no del repositorio.
+
+| Casilla | Valor |
+|---|---|
+| Cuenta | `act_3453332464718877` · Qualivo Agencia |
+| Campañas activas | 1 de 68. `QV_HERO_LEADS_Sep26`, objetivo leads |
+| Presupuesto | 15 €/día, sin tope total y sin fecha de fin |
+| Corriendo desde | 9-sep 18:16. Hoy es el día 2 |
+| Gastado | 17,03 € |
+| **Leads** | **0** |
+
+Día 2 y 17 € es demasiado pronto para concluir nada, y el agente lo dice. Dos cosas sí merecen
+atención: **no hay tope total ni fecha de fin**, así que la campaña gasta hasta que alguien la
+pare; y de 68 campañas en la cuenta, 67 están pausadas, lo que sugiere que hace falta una limpieza.
+
+Esto es exactamente lo que justificaba tener un agente de Paid: el dato existía en la API desde el
+9-sep y nadie lo estaba mirando.
