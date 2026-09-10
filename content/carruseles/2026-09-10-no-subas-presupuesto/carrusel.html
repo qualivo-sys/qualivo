@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.page{width:1080px;height:1350px;position:relative;background:#0A0A0B;overflow:hidden;font-family:SG;margin:0 auto 40px}
+.page::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(242,238,230,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.028) 1px,transparent 1px);
+  background-size:90px 90px}
+.barra{position:absolute;left:0;top:0;bottom:0;width:22px;background:#E8590C}
+.kick{position:absolute;top:96px;left:104px;right:80px;font-size:26px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.tit{position:absolute;left:104px;right:80px;font-family:Anton;color:#F2EEE6;text-transform:uppercase;line-height:1.02;letter-spacing:.005em}
+.nar{color:#E8590C}
+.txt{position:absolute;left:104px;right:96px;font-size:38px;line-height:1.45;color:rgba(242,238,230,.86)}
+.firma{position:absolute;bottom:56px;left:104px;font-size:25px;letter-spacing:.05em;color:rgba(242,238,230,.5)}
+.pag{position:absolute;bottom:56px;right:80px;font-size:25px;color:rgba(242,238,230,.35);letter-spacing:.08em}
+.regla{position:absolute;left:104px;width:88px;height:5px;background:#E8590C}
+.num{position:absolute;top:280px;right:80px;font-family:Anton;font-size:300px;line-height:.8;color:rgba(232,89,12,.16)}
+/* filas del mapa de agentes */
+.lista{position:absolute;left:104px;right:96px}
+.fila{margin-bottom:52px}
+.fila .rol{font-family:Anton;font-size:52px;color:#E8590C;text-transform:uppercase;line-height:1.06;margin-bottom:10px}
+.fila .qh{font-size:36px;line-height:1.4;color:rgba(242,238,230,.88)}
+.pend{font-size:31px;line-height:1.45;color:rgba(242,238,230,.5)}
+.foto-slot{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:180px;
+  background:repeating-linear-gradient(45deg,#141416 0 22px,#0f0f11 22px 44px);color:rgba(242,238,230,.28);
+  font-size:22px;letter-spacing:.18em;text-transform:uppercase;text-align:center;line-height:1.7}
+.velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,10,.9) 0%,rgba(8,8,10,.5) 40%,rgba(8,8,10,.3) 60%,rgba(8,8,10,.9) 100%)}
+</style></head><body>
+
+<!-- 01 · PORTADA -->
+<div class="page">
+  <div class="foto-slot">FOTO 1 · cocina moderna, flash directo<br>bolsas de la compra nuevas en el suelo<br>y la nevera llena al fondo</div>
+  <div class="velo"></div><div class="barra"></div>
+  <div class="kick">Medios de pago</div>
+  <div class="tit" style="top:640px;font-size:130px">No subas<br>el presupuesto<br><span class="nar">todavía.</span></div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">1 / 13</div>
+</div>
+
+<!-- 02 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Lo de siempre</div>
+  <div class="tit" style="top:280px;font-size:96px">No entran<br>suficientes<br>clientes<span class="nar">,</span><br>así que metes<br>más dinero arriba.</div>
+  <div class="regla" style="top:990px"></div>
+  <div class="txt" style="top:1060px">Y entran más. Más caros, también.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">2 / 13</div>
+</div>
+
+<!-- 03 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Pero mira esto</div>
+  <div class="tit" style="top:330px;font-size:104px">Si el agujero<br>está <span class="nar">después<br>del clic</span>, acabas<br>de pagar más caro<br>el mismo agujero.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">3 / 13</div>
+</div>
+
+<!-- 04 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Antes de subir un euro · pregunta 1</div>
+  <div class="num">1</div>
+  <div class="tit" style="top:340px;font-size:100px">¿Cuánto tardas<br>en contestar<br>al que pregunta?</div>
+  <div class="regla" style="top:830px"></div>
+  <div class="txt" style="top:900px">La de ayer. No la media que dice el equipo.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">4 / 13</div>
+</div>
+
+<!-- 05 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Pregunta 2</div>
+  <div class="num">2</div>
+  <div class="tit" style="top:340px;font-size:100px">¿Cuántos<br>presupuestos<br>llevan más de<br>una semana<br>abiertos?</div>
+  <div class="regla" style="top:920px"></div>
+  <div class="txt" style="top:990px">Sin que nadie haya vuelto a escribir.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">5 / 13</div>
+</div>
+
+<!-- 06 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Pregunta 3</div>
+  <div class="num">3</div>
+  <div class="tit" style="top:340px;font-size:100px">¿A cuántos<br>de los que<br>dijeron<br><span class="nar">«ahora no»</span><br>has vuelto?</div>
+  <div class="regla" style="top:930px"></div>
+  <div class="txt" style="top:1000px">Este trimestre. No en general.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">6 / 13</div>
+</div>
+
+<!-- 07 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Y ahora sí</div>
+  <div class="tit" style="top:300px;font-size:92px">Si esas tres<br>están mal, subir<br>el presupuesto<br><span class="nar">multiplica<br>el problema.</span></div>
+  <div class="regla" style="top:960px"></div>
+  <div class="txt" style="top:1030px">Si están bien, sube. Entonces sí.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">7 / 13</div>
+</div>
+
+<!-- 08 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Lo que hice yo</div>
+  <div class="tit" style="top:400px;font-size:122px">Dejar de<br>mirar solo<br>arriba<span class="nar">.</span></div>
+  <div class="regla" style="top:880px"></div>
+  <div class="txt" style="top:950px;font-size:44px;color:#F2EEE6">Ahora tengo una IA en cada etapa.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">8 / 13</div>
+</div>
+
+<!-- 09 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Arriba, para que entren</div>
+  <div class="lista" style="top:330px">
+    <div class="fila"><div class="rol">Prospección</div><div class="qh">Busca las cuentas del día y sonda su web antes de escribir nada.</div></div>
+    <div class="fila"><div class="rol">Contenido</div><div class="qh">Escribe, publica y vigila la posición semana a semana.</div></div>
+  </div>
+  <div class="regla" style="top:830px"></div>
+  <div class="pend" style="position:absolute;top:900px;left:104px;right:96px">Y estoy montando la que leerá mis campañas cada día en vez de cada mes.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">9 / 13</div>
+</div>
+
+<!-- 10 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Cuando alguien pregunta</div>
+  <div class="lista" style="top:340px">
+    <div class="fila"><div class="rol">Atención</div><div class="qh">Contesta al instante, sin que nadie tenga que estar delante. Once preguntas y le dice dónde se le rompe.</div></div>
+  </div>
+  <div class="regla" style="top:740px"></div>
+  <div class="pend" style="position:absolute;top:810px;left:104px;right:96px">Y estoy montando la que mide en qué punto exacto se cae la página.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">10 / 13</div>
+</div>
+
+<!-- 11 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">A quién llamar y qué se quedó abierto</div>
+  <div class="lista" style="top:420px">
+    <div class="fila"><div class="rol">Cualificación</div><div class="qh">Puntúa cada contacto de cero a cien y te dice a quién llamar primero.</div></div>
+    <div class="fila"><div class="rol">Seguimiento</div><div class="qh">Barre todos los embudos cada mañana y crea la tarea con fecha y con dueño.</div></div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">11 / 13</div>
+</div>
+
+<!-- 12 -->
+<div class="page">
+  <div class="barra"></div><div class="kick">Y después de la venta</div>
+  <div class="lista" style="top:330px">
+    <div class="fila"><div class="rol">Llamadas</div><div class="qh">Llama al que acaba de entrar y escribe el resumen en el CRM.</div></div>
+    <div class="fila"><div class="rol">Reactivación</div><div class="qh">Vuelve a los que pidieron precio y no volvieron.</div></div>
+  </div>
+  <div class="regla" style="top:830px"></div>
+  <div class="txt" style="top:900px;font-size:44px;color:#F2EEE6">No he cambiado de CRM, ni de web, ni de agencia.</div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">12 / 13</div>
+</div>
+
+<!-- 13 · CIERRE -->
+<div class="page">
+  <div class="barra"></div>
+  <div class="tit" style="top:280px;font-size:100px;text-align:center;left:80px;right:80px">¿Está tu agujero<br>antes o <span class="nar">después<br>del clic?</span></div>
+  <div style="position:absolute;left:0;right:0;top:790px;text-align:center">
+    <div style="width:88px;height:5px;background:#E8590C;margin:0 auto 48px"></div>
+    <div style="font-size:38px;line-height:1.5;color:rgba(242,238,230,.85);padding:0 120px">Once preguntas. Noventa segundos.<br>Sin registro.</div>
+    <div style="margin-top:56px;font-size:26px;letter-spacing:.24em;color:rgba(242,238,230,.5);text-transform:uppercase">enlace en el perfil</div>
+    <div style="font-family:Anton;font-size:88px;color:#E8590C;margin-top:8px;letter-spacing:.01em">QUALIVO.IO</div>
+  </div>
+  <div class="firma">@maikel.echevarria</div><div class="pag">13 / 13</div>
+</div>
+
+</body></html>
