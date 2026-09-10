@@ -23,9 +23,9 @@ semana**. Cada agente que no existe todavía tiene escrito qué lo desbloquea.
       │              │              │              │
    DEMANDA        CONVERSIÓN      CIERRE        PLATAFORMA
       │              │              │              │
- ┌────┴────┐    ┌────┴────┐         │              │
- │         │    │         │         │              │
-CONTENT  DEMAND OUTBOUND  SDR     SALES           OPS
+ ┌────┼────┐    ┌────┴────┐         │              │
+ │    │    │    │         │         │              │
+CONT DEM PAID  OUTB      SDR      SALES           OPS
       │              │              │              │
       └──────────────┴──────┬───────┴──────────────┘
                             │
@@ -45,6 +45,7 @@ CONTENT  DEMAND OUTBOUND  SDR     SALES           OPS
 | Conversación → Reunión | **SDR** | reuniones agendadas |
 | Reunión → Propuesta → Cliente | **Sales** (copiloto de Maikel) | propuestas enviadas, cierres |
 | Cliente → Expansión / Reactivación | **Sales** | recurrente añadido |
+| Presupuesto → Tráfico cualificado | **Paid** | coste por lead cualificado |
 | Proceso manual → Workflow · salud del sistema | **Ops** | rutinas verdes, incidencias |
 | Estrategia → Prioridad → Caja | **Brain** | recurrente, runway |
 | Decisiones de dinero, campaña y contrato | **Maikel** | — |
@@ -73,7 +74,6 @@ un evento y sigue con lo suyo.
 | Voice of Customer | Haya 30+ llamadas transcritas. Hasta entonces es un workflow semanal que resume y entrega al Brain |
 | Market Intelligence | Nunca como agente propio. Es el Radar IA, dentro de Content |
 | Revenue Intelligence | El Weekly Review lleve 8 semanas ejecutándose. Es un cuadro de mando antes que un agente |
-| Paid Media | Se encienda Google Ads o Meta con presupuesto propio de Qualivo |
 | Delivery | Haya 6+ clientes o el primer empleado |
 
 **Regla de creación:** un agente nuevo necesita una transición sin dueño, un KPI propio y un
