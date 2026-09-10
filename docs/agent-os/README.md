@@ -6,8 +6,9 @@ Estado: **arquitectura TO-BE diseñada · 10-sep-2026 · pendiente de firma de M
 
 1. **`04-systems/00-organigrama.md`** — la arquitectura: siete agentes, quién posee qué.
 2. **`02-diagnosis/00-hallazgos-fase0.md`** — los nueve hallazgos de la inspección, con evidencia.
-3. **`07-operations/00-ritmo.md`** — cómo es un día, una semana y un mes.
-4. **`08-roadmap/10-plan-migracion.md`** — cómo se llega, paso a paso y por riesgo.
+3. **`07-operations/10-interfaz-humana.md`** — cómo hablas con ellos y cómo te reportan.
+4. **`07-operations/00-ritmo.md`** — cómo es un día, una semana y un mes.
+5. **`08-roadmap/10-plan-migracion.md`** — cómo se llega, paso a paso y por riesgo.
 
 ## Los siete agentes
 
@@ -54,7 +55,7 @@ Paso 0 del plan de migración.
 | `04-systems/` | Organigrama y las seis fichas de agente | ✅ |
 | `05-protocols/` | Event, Task, Result, Agent Card, Report | 🟡 borrador |
 | `06-control-plane/` | Bus, registry, salud, permisos, memoria, secretos | ✅ |
-| `07-operations/` | Ritmo diario, semanal y mensual | ✅ |
+| `07-operations/` | Interfaz humana, ritmo diario, semanal y mensual | ✅ |
 | `08-roadmap/` | Modelo de ejecución y plan de migración | ✅ |
 | `registry.json` | Fuente de verdad sobre agentes | ✅ v2 |
 | `decisions/` | Seis ADR | ✅ |
