@@ -4,7 +4,9 @@
 
 ## 1. La propuesta
 
-**Qualivo pone agentes de IA dentro del sistema comercial que ya tienes, justo donde se te está escapando el negocio, para que captes, sigas y cierres más sin rehacer nada ni contratar a nadie.**
+**Qualivo pone agentes de IA dentro del sistema comercial que ya tienes, justo donde se te está escapando el negocio, para que captes, sigas y conviertas más sin rehacer nada ni contratar a nadie.**
+
+*"Conviertas", no "cierres": el cierre lo hace el cliente. Prometer el cierre rompe la frontera que separa lo que hace Qualivo de lo que hace él.*
 
 Categoría, la línea que se repite y se posee:
 
@@ -13,6 +15,8 @@ Categoría, la línea que se repite y se posee:
 Diez segundos, oral:
 
 > Miro por dónde se te escapan los clientes y meto agentes de IA en esa parte concreta de tu proceso. Nuria Roure hizo 6,45 veces lo invertido sin captar un lead más, solo persiguiendo bien lo que ya tenía.
+
+Y si preguntan cómo, la línea de seguimiento: *"para que ese trozo deje de depender de que alguien se acuerde. Si tienes leads y nadie los persigue, ponemos algo que detecta, prioriza y persigue."*
 
 ## 2. Para quién
 
@@ -26,16 +30,20 @@ No es mejor que estén atrasadas. Es mejor que tengan cosas, porque Qualivo entr
 
 Tu sistema comercial funciona. Lo que falla es todo lo que depende de que alguien se acuerde: contestar rápido, perseguir el presupuesto, saber a quién llamar primero, volver a los que dijeron "ahora no", saber qué canal trajo al último cliente. Cada oportunidad que se enfría ahí ya estaba pagada: costó atraerla, visitarla y calcular el precio.
 
-## 4. El mecanismo
+## 4. Mecanismo y oferta, que no son lo mismo
 
-**Radiografía → Plan → Piloto → Sistema.**
+Los agentes no deben mezclarlos: uno es **cómo creamos valor**, el otro es **cómo se compra**.
+
+**Mecanismo (cómo creamos valor):** detectar → agentizar → operar → medir → aprender → escalar.
+
+**Oferta (cómo se compra):**
 
 1. **Radiografía.** 90 segundos, sin registro. Dónde se rompe y qué arreglar primero.
 2. **Plan por escrito.** 48 horas, gratis. Las tres fugas por impacto, qué tocar y qué no. Sin precio.
 3. **Piloto.** Agentizamos un proceso concreto. Acotado, medido, con la parte variable ligada al resultado. Es la prueba, no la transformación.
-4. **Sistema.** Conectamos el resto de procesos cuando el primero ha demostrado impacto.
+4. **Sistema.** Conectamos el resto de procesos cuando el primero ha demostrado impacto. Aquí está el recurrente.
 
-Por dentro: detectar → agentizar → operar → aprender → escalar.
+**Jerarquía interna, para cualquier propuesta:** resultado → fuga → agentización → piloto → prueba → escala. Debajo van los agentes, workflows, CRM, datos y canales. Nunca al revés.
 
 ## 5. La prueba
 
@@ -47,6 +55,18 @@ Por dentro: detectar → agentizar → operar → aprender → escalar.
 | El propio CRM de Qualivo | 25 oportunidades paradas, 34.500 € declarados, encontradas por un agente en su primera pasada | La demo en vivo de qué hace un agente sobre un sistema que ya existe |
 
 Un caso por conversación, el más parecido. Nunca los cuatro.
+
+**Cómo se arma la afirmación**, siempre en este orden: promesa → prueba → mecanismo.
+
+> **Más negocio sin comprar más demanda.** Nuria Roure: 6,45 veces lo invertido con el sistema de seguimiento, sin captar un lead más. Lo hicimos detectando las oportunidades abiertas, priorizándolas, persiguiéndolas con fecha y midiendo cada toque.
+
+**Antes de publicarlo en abierto, Landing verifica la cifra exacta contra el caso original.** La prueba es el activo más valioso que hay y una cifra mal redondeada lo quema entero.
+
+## 5 bis. Qué es hipótesis y qué es evidencia
+
+- **Evidencia:** el formato diagnóstico genera respuesta y clics en frío (24 de 24). El enfoque de entrar encima de lo existente despierta interés repetido (Kubysoft, Adigital, Adelantta, Scubalight). La reactivación y el seguimiento producen retorno (Nuria, Equipzilla, EAC).
+- **Hipótesis:** que este ICP responda en frío como responden las gestorías · que el precio aguante · que un piloto agentizado mueva el indicador del cliente en semanas · que el paso de piloto a sistema ocurra.
+- Interés repetido no es encaje producto-mercado. Lo que falta son **pilotos con resultado económico**, y eso solo llega vendiendo.
 
 ## 6. Por qué nosotros, contra las alternativas reales
 
