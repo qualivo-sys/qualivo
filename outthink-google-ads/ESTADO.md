@@ -617,3 +617,7 @@ https://claude.ai/code/artifact/7b435c5f-e950-43d1-8b4c-cff58605ef27 y **vista p
 publicada en https://qualivo.io/outthink-preview/** (noindex; commits en la rama de producción
 de qualivo.io `claude/qualivo-landing-vercel-nubk1i`, aprobado por Maikel). Análisis de
 conversión y justificación en `landing/ANALISIS_LANDING.md`; HTML en `landing/preview-index.html`.
+- 10-09: agenda real (rai.outthink.es/agenda, 9:00–18:00) incorporada a la propuesta; copy
+  ajustado (keynotes y paneles en vez de talleres donde no cuadraba con el programa).
+  Vercel: el equipo qualivo-agency pasó a Pro; filtro de ramas (Ignored Build Step) activo
+  para que solo despliegue la rama de producción.
