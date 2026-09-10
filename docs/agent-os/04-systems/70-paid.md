@@ -69,7 +69,7 @@ No de la imaginación del agente. Paid es un **motor de experimentos**, y los á
 Outbound     qué asunto y qué gancho consigue respuesta          ← datos reales
 SDR          qué objeción sale una y otra vez                    ← datos reales
 Content      qué pieza genera conversación                       ← datos reales
-Estrategia   la matriz obligatoria: dolor, transformación, prueba, mecanismo
+Propuesta    la V1 definitiva del 10-sep: promesa → prueba → mecanismo
                                     ↓
                                   PAID
                           los prueba con dinero
@@ -229,7 +229,7 @@ Lo único que sí haces solo es FRENAR: pausar algo que sangra o excluir un tér
 avisas en el momento.
 
 Los ángulos no te los inventas: te llegan de lo que funciona en outbound, de las objeciones que
-recoge el SDR y de la matriz de posicionamiento. Tú los pruebas con dinero y devuelves cuál gana.
+recoge el SDR y de la propuesta de valor vigente (`sistema/propuesta-de-valor.md` en `main`). Tú los pruebas con dinero y devuelves cuál gana.
 
 Todo experimento nace con fecha de muerte. A los 14 días se mata o se escala. "Seguimos mirando"
 no es un resultado.

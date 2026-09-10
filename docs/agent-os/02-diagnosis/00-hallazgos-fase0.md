@@ -108,7 +108,7 @@ subir el recurrente de 4.100 € a 6.800 €.
 
 ---
 
-## H10 · CONFLICT · Hay dos ofertas escritas al mismo tiempo
+## H10 · RESUELTO el 10-sep · Había dos ofertas escritas al mismo tiempo
 
 Detectado el 10-sep al revisar el agente de ofertas. **Es el hallazgo con más consecuencias
 comerciales de todos.**
@@ -138,6 +138,26 @@ precedencia.
 
 Lo que no se puede hacer es dejarlo como está. Un mes vendiendo dos cosas distintas cuesta más que
 cualquier fallo técnico de esta lista.
+
+### RESOLUCIÓN · 10-sep, mismo día
+
+Maikel firma una **tercera** versión, que no es ninguna de las dos anteriores: la **Propuesta de
+valor V1 definitiva**, decidida por el cerebro a petición suya. Está en `sistema/propuesta-de-valor.md`
+de la rama `main`, como espejo de solo lectura que leen todos los agentes.
+
+Conserva la Radiografía como entrada, así que no es el Leak Map, y deroga la matriz del 8-sep. Los
+cambios de fondo: la categoría pasa a "no sustituimos tu sistema comercial, lo agentizamos"; la
+oferta pasa a cuatro escalones (Radiografía, plan en 48 h, piloto, sistema); el ICP pasa a 5-50
+personas; y entra el reloj con la regla del número base firmado en semana 1 y la fecha de decisión
+al día 30.
+
+**Se congela hasta que haya 8-10 propuestas enviadas.** A partir de ahí manda la evidencia, no una
+versión nueva. Esa cláusula es lo mejor del documento: convierte la oferta en algo que se falsa
+con datos en vez de reescribirse cada semana.
+
+**Tres conflictos nuevos que abre y hay que cerrar**, listados al final del propio fichero: el ICP
+contra el Radar IA (2-20 empleados) y contra el Outbound Brain (18 ICPs), los precios que puedan
+quedar en la landing, y el suelo de 500 €/mes que no estaba escrito en ningún sitio.
 
 ---
 

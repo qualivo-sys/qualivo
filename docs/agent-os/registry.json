@@ -301,10 +301,31 @@
     {
       "nombre": "Agente de ofertas",
       "tipo": "TALLER, no agente",
-      "motivo": "no posee transicion ni KPI; la oferta es un input, no un output",
-      "salida": "la oferta firmada entra en la Estrategia Central y se cierra",
       "adr": "ADR-008",
-      "conflicto_abierto": "H10 · dos ofertas escritas a la vez, seis agentes leyendo la del 8-sep"
+      "estado": "CERRADO el 10-sep",
+      "salida": "Propuesta de valor V1 definitiva, firmada por Maikel",
+      "donde": "sistema/propuesta-de-valor.md en la rama main, espejo de solo lectura",
+      "congelada_hasta": "8-10 propuestas enviadas"
     }
-  ]
+  ],
+  "propuesta_de_valor": {
+    "version": "V1 definitiva",
+    "fecha": "2026-09-10",
+    "deroga": "matriz obligatoria del 8-sep en sistema/cerebro.md",
+    "categoria": "No sustituimos tu sistema comercial. Lo agentizamos.",
+    "oferta": [
+      "Radiografia 90s",
+      "Plan por escrito 48h gratis",
+      "Piloto acotado y medido",
+      "Sistema recurrente"
+    ],
+    "icp": "servicios 5-50 personas, ticket >1.000 EUR, con traccion y capacidad de atender mas",
+    "suelo": "500 EUR/mes",
+    "unico_editor": "qualivo.brain",
+    "conflictos_abiertos": [
+      "ICP 5-50 frente a Radar IA 2-20 y frente a los 18 ICPs del Outbound Brain",
+      "precios que puedan quedar en la landing",
+      "suelo de 500 EUR/mes sin propagar a Outbound y SDR"
+    ]
+  }
 }
