@@ -1,21 +1,32 @@
-# Propuesta de valor de Qualivo · V1 definitiva
-
-> **ESPEJO DE SOLO LECTURA.** Decidida el 10-sep-2026 por el cerebro a petición de Maikel y
-> entregada por él a la sesión de arquitectura ese mismo día. El original editable vive en la
-> Estrategia Central y en Notion; aquí está para que **todos los agentes lean lo mismo**.
-> Solo el CEO Agent la actualiza. Ningún otro agente edita este fichero.
+<!-- ESPEJO GENERADO · NO EDITAR AQUÍ -->
+> **ESPEJO DE SOLO LECTURA.** Copia literal de la fuente única, que es
+> `claude/quipu-billing-dashboard-g2s2ap:sistema/propuesta-valor.md`.
 >
-> **Sustituye a la matriz obligatoria del 8-sep** de `sistema/cerebro.md` y cierra el conflicto
-> H10. Se congela hasta que haya 8-10 propuestas enviadas: a partir de aquí manda la evidencia,
-> no una versión nueva.
+> | | |
+> |---|---|
+> | Commit de origen | `9bce7fe 2026-09-10` |
+> | Blob | `3ed2a46ca765` |
+> | Espejado el | 10-sep-2026 por la sesión de arquitectura |
+>
+> **Único editor: el CEO Agent**, y solo en su rama. Aquí no se edita: se republica.
+> Si el commit de arriba no es el último que toca ese fichero, este espejo está viejo.
+> Sustituye a la V1 espejada a las 17:22 y a la matriz obligatoria del 8-sep.
 
 ---
 
-> Decidida el 10 sep 2026 por el cerebro a petición de Maikel, sobre la evidencia propia (24 clics de 24 del formato diagnóstico) y el mercado de esta semana (Kubysoft, Adigital, Adelantta, Scubalight: encaje sí, objeción de riesgo). **Se congela hasta que haya 8-10 propuestas enviadas.** No más versiones: a partir de aquí, evidencia.
+# Propuesta de valor de Qualivo · V2 definitiva
+
+> Decidida el 10 sep 2026 por Maikel. **CONGELADA hasta que haya 8-10 propuestas enviadas.** No más versiones: a partir de aquí, evidencia. Cuatro compradores han entrado con esta propuesta y han pedido probarla (Antic, Adigital, Kubysoft, Scubalight); lo que falta no son palabras, son pilotos por escrito.
+>
+> **Qué cambia de la V1:** el territorio. La V1 encerraba a Qualivo en lo que pasa **después** del lead. El sistema pierde rendimiento antes del lead, en el lead y después del lead, y Qualivo entra donde más impacto haya. Todo lo demás de la V1 se mantiene.
 
 ## 1. La propuesta
 
-**Qualivo pone agentes de IA dentro del sistema comercial que ya tienes, justo donde se te está escapando el negocio, para que captes, sigas y conviertas más sin rehacer nada ni contratar a nadie.**
+**Qualivo detecta dónde tu sistema de adquisición y ventas está perdiendo rendimiento e incorpora agentes de IA justo en ese punto para mejorar captación, seguimiento y conversión sin rehacer tu sistema.**
+
+Versión comercial, la que se dice en una reunión:
+
+**Detectamos dónde estás perdiendo negocio, desde el anuncio hasta la venta, y ponemos agentes de IA justo ahí para mejorar el rendimiento.**
 
 *"Conviertas", no "cierres": el cierre lo hace el cliente. Prometer el cierre rompe la frontera que separa lo que hace Qualivo de lo que hace él.*
 
@@ -41,11 +52,33 @@ No es mejor que estén atrasadas. Es mejor que tengan cosas, porque Qualivo entr
 
 Tu sistema comercial funciona. Lo que falla es todo lo que depende de que alguien se acuerde: contestar rápido, perseguir el presupuesto, saber a quién llamar primero, volver a los que dijeron "ahora no", saber qué canal trajo al último cliente. Cada oportunidad que se enfría ahí ya estaba pagada: costó atraerla, visitarla y calcular el precio.
 
+**Pero no damos por hecho que el problema esté siempre después del lead.** Puede estar antes, en el lead o después, y por eso la primera pregunta nunca es "¿qué hacemos?" sino "¿dónde está el mayor cuello de botella?".
+
+| Antes del lead | En el lead | Después del lead |
+|---|---|---|
+| Anuncios sin evolucionar en meses · creatividades agotadas · segmentación pobre · keywords que no rinden · SEO con tráfico y sin intención · inversión mal repartida | Landing que convierte poco · formulario con fricción · oferta mal planteada · CTA débil · tráfico que no cuaja | Leads mal cualificados · respuesta lenta · sin prioridad · seguimiento flojo · presupuestos olvidados · oportunidades que se enfrían · no saber qué canal trae negocio |
+
+Qualivo puede actuar en cualquiera de los tres. Lo que no hace es empezar por la táctica: empieza por dónde está la fuga.
+
+### Frases que llevan esto dentro (para copy, contenido y reuniones)
+
+- Un anuncio que lleva seis meses sin cambiar no está optimizado. Está abandonado.
+- No todo lead barato es un lead rentable.
+- Más tráfico no arregla una landing que no convierte.
+- Cada oportunidad que se enfría ya estaba pagada.
+- Si no sabes qué canal te trae clientes, no sabes qué marketing funciona.
+- No necesitas otro software. Puede que necesites que alguien haga el trabajo que el software no hace.
+- No agentizamos por moda. Agentizamos donde hay dinero o tiempo que recuperar.
+
 ## 4. Mecanismo y oferta, que no son lo mismo
 
 Los agentes no deben mezclarlos: uno es **cómo creamos valor**, el otro es **cómo se compra**.
 
-**Mecanismo (cómo creamos valor):** detectar → agentizar → operar → medir → aprender → escalar.
+**Mecanismo (cómo creamos valor):** auditar → **priorizar** → agentizar → operar → medir → aprender → escalar.
+
+*Priorizar es un paso propio y no un detalle: auditar encuentra varias fugas, y el trabajo es decidir cuál mejorada mueve más dinero. Ahí es donde se gana o se pierde el piloto.*
+
+**Regla del piloto: un piloto, un resultado concreto.** Nunca "vamos a mejorar vuestro growth". Sí "vamos a bajar el tiempo de primera respuesta de X a Y", "vamos a generar X reuniones cualificadas", "vamos a recuperar X oportunidades", "vamos a saber qué canal trae los clientes que firman".
 
 **Oferta (cómo se compra):**
 
@@ -144,6 +177,16 @@ Se dice antes de empezar, y es la mitad de la fuerza de la oferta: **si al día 
 
 No hay ningún caso todavía de "agentizamos un proceso y pasó esto": los cuatro que hay son de growth. Por eso, en el acuerdo del primer piloto: el número se define antes de empezar, se mide antes y después, y se pide **permiso para publicarlo** con nombre o sin él. Ese caso vale más que los honorarios del piloto.
 
+## 7 bis. La demo es la mejor prueba que tenemos
+
+Más fuerte que cualquier argumento: **"enséñame vuestro CRM"**. El agente de seguimientos pasa por sus oportunidades abiertas delante de ellos y saca lo que hay parado, cuánto tiempo lleva y cuánto dinero declara. Cambia la percepción de "puede hacer esto" a "ya lo está haciendo".
+
+Se hace en la reunión de diagnóstico, con permiso y en su pantalla o con acceso de solo lectura. Si no dan acceso, se enseña la pasada sobre el CRM de Qualivo: 30 oportunidades abiertas, 25 paradas, 34.500 € declarados, encontradas en una primera ejecución. Ventas escribe el mini-guion de este momento.
+
+## 7 ter. Registro de propuestas: cómo aprendemos
+
+Cada propuesta enviada se anota con: ICP · problema · resultado buscado · fuga · agente propuesto · objeción principal · oferta · precio · aceptación o rechazo · resultado del piloto. Con 8-10 filas se revisa la evidencia y se decide si la V2 sigue o cambia. Lo mantiene Ventas.
+
 ## 8 quater. Inventario real de agentes, para no prometer de más
 
 El catálogo de agentes se enseña en la reunión: es la prueba de profundidad y es lo que ha hecho decir "pruébalo" a cuatro compradores. Pero **Ventas y Maikel tienen que saber qué está corriendo hoy y qué es promesa**, porque "estos ocho funcionan en mi propia empresa desde esta mañana" convence más que una lista de trece nombres.
@@ -162,28 +205,30 @@ Nunca: "transformación digital" · "IA" como argumento en frío · "somos una a
 
 ---
 
-# PROPAGACIÓN · qué cambia para cada agente
+# PROPAGACIÓN · qué cambia para cada agente con la V2
 
-Añadido por la sesión de arquitectura el 10-sep. No forma parte de la propuesta: es su traducción
-a órdenes de trabajo.
+Añadido por la sesión de arquitectura. No es parte de la propuesta: es su traducción a órdenes de
+trabajo. El CEO Agent puede corregir esta tabla; es quien coordina.
 
-| Agente | Qué cambia |
+**El cambio de fondo de la V2 es el territorio.** La V1 encerraba a Qualivo en lo que pasa después
+del lead. La V2 cubre antes, en y después. Eso mueve trabajo hacia Paid, Demand y Content, que en
+la V1 casi no vendían nada.
+
+| Agente | Qué cambia con la V2 |
 |---|---|
-| **Todos** | La matriz del 8-sep queda derogada. La frase de diez segundos, la categoría y el orden promesa → prueba → mecanismo son obligatorios |
-| **Content** | Nada de "transformación digital", nada de "IA" en frío, nada de "agencia de X". "Agentizar" solo con quien ya sabe que tiene un problema. Ningún precio en abierto |
-| **Demand** | **Verificar toda cifra de caso contra el original antes de publicarla.** Quitar de la web cualquier precio y el piloto de riesgo compartido. Meter el reloj: plan en 48 h, primer arreglo en 2 semanas, primer número en 4 |
-| **Outbound** | El ICP pasa a **5-50 personas** con ticket por encima de 1.000 €, tracción y capacidad de atender más. El formato diagnóstico se mantiene: es lo único con evidencia (24 de 24) |
-| **SDR** | No dar precio, nunca. La entrada es Radiografía y plan gratis. La objeción real no es precio, es "no pago antes de la prueba": se responde con la fecha de decisión del día 30 |
-| **Sales** | La propuesta sigue la jerarquía resultado → fuga → agentización → piloto → prueba → escala. Todo piloto lleva número base firmado la semana 1, fecha de decisión al día 30, y permiso para publicar el caso |
-| **Paid** | Ningún anuncio promete cierre ni resultado sin datos del cliente. Los ángulos salen de esta propuesta |
-| **Cerebro** | Es el único editor de este fichero. Deroga la matriz del 8-sep en `cerebro.md` y avisa a todos el mismo día |
+| **Todos** | Territorio completo. La primera pregunta nunca es "qué hacemos" sino "dónde está la fuga". Orden obligatorio de toda afirmación: promesa → prueba → mecanismo |
+| **Paid** | **Es el que más gana.** "Antes del lead" es suyo: anuncios agotados, creatividades sin evolucionar, segmentación pobre, inversión mal repartida. Deja de ser solo gasto interno y pasa a ser parte de lo que Qualivo vende. Las siete frases de marca son munición directa para sus ángulos |
+| **Demand** | "En el lead" es suyo: landing que convierte poco, formulario con fricción, CTA débil. Verifica toda cifra de caso contra el original antes de publicarla. Quita de la web cualquier precio y el piloto de riesgo compartido. Mete el reloj: plan en 48 h, arreglo en 2 semanas, número en 4 |
+| **Content** | Las siete frases de la V2 son la línea editorial. Nada de "transformación digital", ni "IA" en frío, ni "agencia de X". "Agentizar" solo con quien ya sabe que tiene un problema |
+| **Outbound** | ICP 5-50 personas, ticket por encima de 1.000 €, suelo de 500 €/mes de inversión en captación. El formato diagnóstico se mantiene: es lo único con evidencia propia |
+| **SDR** | Nunca da precio. La objeción real no es precio, es "no pago antes de la prueba": se responde con la fecha de decisión del día 30. La demo es prueba: "enséñame vuestro CRM" |
+| **Sales** | Jerarquía resultado → fuga → agentización → piloto → prueba → escala. Todo piloto lleva número base firmado en semana 1, fecha de decisión al día 30 y permiso para publicar el caso. Mantiene el registro de propuestas |
+| **Cerebro** | Único editor. Ha resuelto ya los tres conflictos que abrió la V1 y los ha escrito en `cerebro.md` |
 
-## Conflictos que abre esta versión y hay que resolver
+## Conflictos de la V1 · CERRADOS por el CEO Agent el 10-sep
 
-1. **ICP.** Aquí dice 5-50 personas. La rutina diaria del Radar IA dice "empresas de 2 a 20
-   empleados, corregido por Maikel el 8-sep". Y el OUTBOUND BRAIN de Notion tiene 18 ICPs con su
-   propio scoring. **Los tres tienen que decir lo mismo.**
-2. **Precio.** La matriz del 8-sep decía "Growth System 1.000-2.500 €/mes" y esta versión prohíbe
-   precios en frío y en la web. Hay que revisar la landing.
-3. **Suelo de 500 €/mes.** Aparece aquí como criterio de descarte y no estaba en ninguna parte.
-   Outbound y SDR lo necesitan para cualificar.
+| Conflicto | Resolución |
+|---|---|
+| ICP | **5 a 50 personas en todas partes.** Deroga el "2 a 20" del Radar IA y el de la página de la Radiografía. Los 18 ICPs del Outbound Brain no compiten: son candidatos, y el filtro se aplica encima |
+| Suelo | **500 €/mes de inversión en captación, medios incluidos**, como criterio de descarte. Estaba en la estrategia central y no en un sitio visible para Outbound y el SDR |
+| Precio | **Nunca en frío ni en la web.** Deroga el "1.000-2.500 €/mes" de la matriz vieja |
