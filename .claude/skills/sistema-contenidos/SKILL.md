@@ -5,6 +5,35 @@ description: Sistema maestro de contenidos de Qualivo. Cargar SIEMPRE antes de i
 
 # Sistema de contenidos de Qualivo — puertas obligatorias
 
+## PUERTA CERO · La propuesta de valor manda (10 sep 2026)
+
+**Antes que cualquier otra cosa de este documento, leer
+`content/propuesta-de-valor-v1.md`.** Es la V1 definitiva, congelada hasta que
+haya 8-10 propuestas enviadas. Toda pieza que la contradiga está mal y se
+corrige.
+
+Lo mínimo que hay que llevar puesto al escribir:
+
+- **Qué vendemos:** agentes de IA metidos dentro del sistema comercial que el
+  cliente ya tiene, justo donde se le escapa el negocio. Captar, seguir y
+  convertir más **sin rehacer nada ni contratar a nadie**.
+- **Categoría:** «No sustituimos tu sistema comercial. Lo agentizamos.»
+- **Nunca "cierres"**, siempre "conviertas": el cierre lo hace el cliente.
+- **Orden obligatorio de toda afirmación:** promesa → prueba → mecanismo.
+- **Un solo caso por pieza**, el más parecido al lector. Nunca los cuatro.
+- **La IA no es el gancho en frío.** Se abre por la fuga (§3 de la propuesta);
+  la IA aparece como mecanismo, después. La palabra «agentizar» no se usa con
+  quien todavía no sabe que tiene un problema.
+- **Pilares de contenido = las cinco fugas:** captación · conversión ·
+  seguimiento · dependencia del dueño · control (saber qué trae clientes).
+  Cada pieza termina en la Radiografía.
+- **Prohibido:** «transformación digital», «somos una agencia de X», precios,
+  el piloto de riesgo compartido en abierto, prometer resultado sin datos del
+  cliente.
+- **Inventario de agentes (§10 de la propuesta):** no prometer nada del grupo
+  «habría que construirlo» como si estuviera funcionando.
+
+
 Documento completo: `content/sistema-maestro-contenidos.md` (leerlo antes de
 cualquier trabajo de contenido). Resumen operativo:
 
