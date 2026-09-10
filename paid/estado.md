@@ -128,6 +128,102 @@ tercer ángulo no va a salir ninguna conclusión.
 
 ---
 
+## 4 bis · AUDITORÍA CONTRA LA PROPUESTA DE VALOR V1 (10-sep, 19:00)
+
+La sesión de arquitectura me corrigió esta tarde: Maikel firmó hoy una **tercera** versión de la
+oferta, que no es ninguna de las dos del conflicto H10. **Verificado en la fuente primaria**, no en
+el aviso: commit `4de891a` en `main`, fichero `sistema/propuesta-de-valor.md`, que se declara
+espejo de solo lectura y **deroga la matriz del 8-sep**.
+
+Ayer escribí que hasta la firma mandaba la del 8-sep. **Ya no.** Manda la V1.
+
+Lo que me ata a mí, literal de la tabla de propagación: *«Paid · Ningún anuncio promete cierre ni
+resultado sin datos del cliente. Los ángulos salen de esta propuesta.»*
+
+**Hay dinero corriendo sobre copy escrito bajo la norma derogada**, así que lo primero era auditar
+los tres anuncios vivos. Copy completo leído de la API, 10-sep.
+
+### Las siete prohibiciones del §9 · los tres anuncios pasan
+
+| Prohibición | HERO 01 | HERO 03 | HERO 06 |
+|---|---|---|---|
+| «transformación digital» | ✅ no aparece | ✅ | ✅ |
+| «IA» como argumento en frío | ✅ no aparece | ✅ | ✅ |
+| «somos una agencia de X» | ✅ | ✅ | ✅ |
+| Precio en abierto | ✅ | ✅ | ✅ |
+| El piloto de riesgo compartido | ✅ | ✅ | ✅ |
+| Promesa de resultado sin datos del cliente | ✅ ninguno promete un número | ✅ | ✅ |
+| «agentizar» con quien no sabe que tiene un problema | ✅ no aparece | ✅ | ✅ |
+
+El «Gratis · sin registro» de las descripciones no es un precio en frío: la Radiografía **es**
+gratis por diseño (§7 de la V1). Está alineado, no infringido.
+
+### Y encajan mejor de lo que esperaba
+
+Los tres son **formato diagnóstico**, que es *la única evidencia propia en frío que existe*: 24
+clics de 24. La corrección dice explícitamente que si voy a probar ángulos con dinero empiece por
+ahí. Ya está empezado.
+
+HERO 03 es casi el §3 de la V1 palabra por palabra —*«ese presupuesto ya te ha costado dinero:
+atraer al cliente, visitarlo, calcular el precio»*— y HERO 06 ataca la fuga de **Control** de la
+tabla del §8 bis. No hay que reescribir la campaña. Hay que leerla.
+
+| Anuncio | Fuga de la V1 que ataca | Gasto |
+|---|---|---|
+| HERO 01 | Conversión + Dependencia | 7,74 € |
+| HERO 03 | **Seguimiento** — la fuga de la prueba madre (Nuria) | 0,16 € |
+| HERO 06 | **Control** | 9,13 € |
+
+Sin cubrir: **Captación**, y está bien que lo esté. La promesa de la V1 es *más negocio sin comprar
+más demanda*; un anuncio de captación se contradiría con ella.
+
+### 🔴 LO QUE SÍ ESTÁ MAL, y es de segmentación, no de prohibición
+
+**HERO 01 termina su copy diciendo, literalmente: «Para empresas de 2 a 20 personas.»**
+
+La V1 firmada hoy define el ICP en **5 a 50 personas**, con ticket por encima de 1.000 € y
+capacidad de atender más negocio.
+
+Ese anuncio, ahora mismo, con dinero:
+
+- **Repele al núcleo del ICP nuevo.** Una empresa de 30 personas lee «de 2 a 20» y se descarta sola.
+- **Atrae al descarte explícito.** Las de 2 a 4 personas caen bajo el suelo de 500 €/mes que la V1
+  fija como criterio de exclusión.
+- **Y lo peor para mi trabajo: contamina el experimento.** Es el anuncio con más impresiones de los
+  tres (551). Cualquier CPL que mida sobre él será el CPL de la gente equivocada, y un CPL barato
+  de gente que no puede comprar es exactamente el `FAILURE_MODE` número uno de mi ficha.
+
+**No lo he pausado, y quiero ser explícito sobre por qué, porque pausar sí está en mi mano.**
+
+La propia V1 abre el asunto como **Conflicto #1 sin resolver**: dice 5-50, la rutina del Radar IA
+dice «2 a 20 empleados, corregido por Maikel el 8-sep», y el OUTBOUND BRAIN de Notion tiene 18 ICPs
+con su propio scoring. El documento firmado pide que *«los tres digan lo mismo»* y no dice cuál
+gana operativamente. El «2 a 20» del anuncio no salió de la nada: **lo corrigió Maikel a mano hace
+dos días.**
+
+Pausar HERO 01 por mi cuenta sería resolver un conflicto abierto de posicionamiento con el dinero
+de otro y sin que nadie me lo haya pedido. Eso no es frenar algo que sangra: es decidir el ICP. Y
+el ICP no es mío.
+
+Lo que hago en su lugar: dejarlo escrito, ponerlo el primero de la lista de decisiones, y avisar de
+que **hasta que se resuelva, los datos de HERO 01 no son leíbles** — los de HERO 03 y HERO 06 sí,
+porque no llevan esa línea.
+
+### Ángulos candidatos que la V1 habilita, para cuando toque
+
+No los invento: los saco de su §5 y su §6, y ninguno se lanza sin tu ok.
+
+1. **La prueba madre.** «6,45 veces lo invertido sin captar un lead más» (Nuria Roure). Es prueba,
+   no promesa. **Bloqueado hasta que Demand verifique la cifra contra el caso original**, como
+   ordena el §5: una cifra mal redondeada quema la prueba entera.
+2. **Contra la alternativa real.** «Contratar otro comercial cuesta más de 2.000 € al mes, tarda
+   meses en rendir y también se olvida.» Del §6. Ojo: lleva una cifra de coste de mercado, no una
+   promesa de resultado. Permitido, pero conviene revisarlo.
+3. **El reloj.** «El plan por escrito en 48 horas.» Del §8 bis. Responde al miedo a implantaciones
+   eternas y no promete ningún número del cliente.
+
+---
+
 ## 5 · LO QUE SÍ ESTÁ MONTADO, CON FUENTE
 
 Todo esto lo construyó la sesión Agente growth el **9-sep-2026**. Sigue siendo suyo: es
@@ -298,12 +394,12 @@ Y una que es de Ops, no de Growth: **verificar que el `Purchase` lleva valor**. 
 | Activar, subir presupuesto, cambiar pujas, gastar | **Maikel, siempre** |
 | Google Ads de OutThink, cuenta `918-811-5388` | Agente Adigital |
 
-**Sobre la oferta:** hay conflicto abierto (H10). La matriz obligatoria del **8-sep** dice
-Radiografía + Growth System de 1.000-2.500 €/mes; la sesión de ofertas del **10-sep** propone Leak
-Map y 24.000 €. Hasta que Maikel firme, **mando por la del 8-sep** y no cambio ningún mensaje por
-mi cuenta. Aviso además de una tercera versión que ya está escrita en la rama de growth:
-`content/biblioteca-estrategica/06-motor-campanas.md` cierra con «Sprint de Recuperación,
-2.500–5.000 €». Son tres precios distintos en el mismo repositorio.
+**Sobre la oferta: H10 está cerrado y mi instrucción de ayer era la equivocada.** Escribí que
+mandaba la matriz del 8-sep. Maikel firmó el 10-sep una tercera versión —`sistema/propuesta-de-valor.md`
+en `main`, commit `4de891a`— que deroga esa matriz y también la propuesta de Leak Map. **Manda la
+V1 definitiva.** La auditoría de los anuncios contra ella está en §4 bis. El «Sprint de
+Recuperación 2.500-5.000 €» de la rama de growth también queda derogado: la V1 prohíbe precios en
+abierto.
 
 ---
 
