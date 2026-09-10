@@ -1,9 +1,23 @@
-# Solo se despliega la landing: index.html + assets + vercel.json
+# Solo se despliega la landing: HTML + assets + funciones /api + vercel.json
+# Todo lo que sea trabajo interno NO se sube: se serviria en abierto en qualivo.io
+
+# Proyectos y codigo que no son la landing
 nuria-pago-pfd
 src
 apps-script-standalone
-README.md
-.clasp.json.example
-.gitignore
+eac-growth
 agenttome-site
 maikelechevarria-site
+
+# Documentacion interna (estrategia, propuesta de valor, playbooks, borradores)
+content
+drafts
+outreach
+measurement
+entity
+video-factory
+.claude
+README.md
+LANDING.md
+.clasp.json.example
+.gitignore
