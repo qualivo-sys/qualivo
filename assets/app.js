@@ -32,7 +32,7 @@
   }
 
   function initHeroFlow() {
-    var host = document.getElementById('hero-flow');
+    var host = document.getElementById('mech-flow') || document.getElementById('hero-flow');
     if (!host) return;
 
     var W = 1040, H = 250, y = 128;
@@ -203,6 +203,191 @@
     otro: 'Otro'
   };
 
+  // ───────────────────────────────────────────────────────────────────────────
+  // Sala de control del hero: los ocho agentes que ya funcionan, trabajando a
+  // la vez sobre el mismo CRM. Es una simulación de un día — así se anuncia en
+  // el pie del panel — y las cifras que salen son de ejecuciones reales:
+  // 4 pipelines, 30 oportunidades abiertas, 25 paradas, 34.500 € declarados y
+  // 25 tareas creadas (agente de seguimientos, 10-sep-2026); 16 llamadas del
+  // agente de voz; 11 preguntas y 5 dimensiones de la Radiografía; secuencia de
+  // días 1, 3 y 7. No se inventa ningún número.
+  // ───────────────────────────────────────────────────────────────────────────
+  var AGENTES = [
+    { id: 'radiografia',  nombre: 'radiografía' },
+    { id: 'senal',        nombre: 'señal' },
+    { id: 'seguimientos', nombre: 'seguimientos' },
+    { id: 'reactivacion', nombre: 'reactivación' },
+    { id: 'secuencia',    nombre: 'secuencia' },
+    { id: 'sdr',          nombre: 'sdr' },
+    { id: 'voz',          nombre: 'voz' },
+    { id: 'informe',      nombre: 'informe' }
+  ];
+
+  var DIA = [
+    { a: 'sdr',          t: 'cargando las cuentas del día y sondando sus webs',        e: 720 },
+    { a: 'radiografia',  t: 'diagnóstico nuevo · 11 preguntas, 5 dimensiones',          e: 700 },
+    { a: 'senal',        t: 'puntuación de la señal',              v: '78/100',         e: 620 },
+    { a: 'senal',        t: 'cuello de botella detectado: seguimiento', tipo: 'warn',    e: 700 },
+    { a: 'secuencia',    t: 'correo del día 1 programado con su pregunta',              e: 660 },
+    { a: 'voz',          t: 'llamada lanzada al contacto que acaba de entrar',          e: 720 },
+    { a: 'voz',          t: 'resumen y siguiente paso escritos en el CRM',              e: 680 },
+    { a: 'seguimientos', t: 'barriendo todos los pipelines',        v: '4',             e: 560 },
+    { a: 'seguimientos', t: 'oportunidades abiertas',               v: '30',            e: 560 },
+    { a: 'seguimientos', t: 'paradas sin siguiente paso',           v: '25', tipo: 'warn', e: 640 },
+    { a: 'seguimientos', t: 'importe declarado que estaba parado',  v: '34.500 €', tipo: 'warn', e: 780 },
+    { a: 'seguimientos', t: 'tareas creadas, con fecha y con dueño', v: '25', tipo: 'done', e: 720 },
+    { a: 'reactivacion', t: 'buscando a quien pidió precio y nunca volvió',             e: 700 },
+    { a: 'reactivacion', t: 'un mensaje distinto por cada motivo real de parada',       e: 720 },
+    { a: 'secuencia',    t: 'día 3 y día 7 en cola · se paran si contesta', tipo: 'done', e: 680 },
+    { a: 'sdr',          t: 'respuestas triadas · las buenas suben a Maikel',           e: 700 },
+    { a: 'informe',      t: 'anuncios, visitas y posiciones al Sheet',                  e: 640 },
+    { a: 'informe',      t: 'informe de la mañana enviado', tipo: 'done',               e: 4600 }
+  ];
+
+  var VISIBLES = 9;   // cuántas líneas caben en el panel sin recortarse
+
+  function initSalaControl() {
+    var log = document.getElementById('qv-log');
+    var roster = document.getElementById('qv-roster');
+    if (!log || !roster) return;
+
+    var pills = {};
+    AGENTES.forEach(function (ag) {
+      var li = document.createElement('li');
+      li.textContent = ag.nombre;
+      roster.appendChild(li);
+      pills[ag.id] = li;
+    });
+
+    var nombres = {};
+    AGENTES.forEach(function (ag) { nombres[ag.id] = ag.nombre; });
+
+    function evento(paso) {
+      var row = document.createElement('div');
+      row.className = 'qv-ev' + (paso.tipo ? ' qv-ev--' + paso.tipo : '');
+      var w = document.createElement('span');
+      w.className = 'qv-ev__who';
+      w.textContent = nombres[paso.a];
+      var t = document.createElement('span');
+      t.className = 'qv-ev__txt';
+      t.textContent = paso.t;
+      row.appendChild(w);
+      row.appendChild(t);
+      if (paso.v) {
+        var v = document.createElement('span');
+        v.className = 'qv-ev__val';
+        v.textContent = paso.v;
+        row.appendChild(v);
+      }
+      return row;
+    }
+
+    var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Sin animación: las últimas líneas del día, ya escritas, y todos los
+    // agentes marcados como activos. Mismo contenido, sin movimiento.
+    if (reducido) {
+      DIA.slice(-VISIBLES).forEach(function (paso) {
+        var row = evento(paso);
+        row.className += ' is-in';
+        log.appendChild(row);
+      });
+      AGENTES.forEach(function (ag) { pills[ag.id].className = 'is-act'; });
+      return;
+    }
+
+    var caret = document.createElement('span');
+    caret.className = 'qv-caret';
+    caret.setAttribute('aria-hidden', 'true');
+
+    var i = 0, timer = null, corriendo = false, apagar = {};
+
+    function siguiente() {
+      if (i >= DIA.length) {
+        timer = window.setTimeout(function () {
+          log.style.transition = 'opacity 420ms ease';
+          log.style.opacity = '0';
+          timer = window.setTimeout(function () {
+            log.innerHTML = '';
+            log.style.opacity = '1';
+            i = 0;
+            siguiente();
+          }, 440);
+        }, DIA[DIA.length - 1].e);
+        return;
+      }
+
+      var paso = DIA[i++];
+      var row = evento(paso);
+      log.appendChild(row);
+      row.appendChild(caret);
+      while (log.children.length > VISIBLES) log.removeChild(log.firstChild);
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () { row.className += ' is-in'; });
+      });
+
+      // El agente que acaba de actuar se enciende y se apaga solo al rato.
+      var pill = pills[paso.a];
+      if (pill) {
+        pill.className = 'is-act';
+        if (apagar[paso.a]) window.clearTimeout(apagar[paso.a]);
+        apagar[paso.a] = window.setTimeout(function () { pill.className = ''; }, 2600);
+      }
+
+      timer = window.setTimeout(siguiente, paso.e);
+    }
+
+    function arrancar() { if (!corriendo) { corriendo = true; siguiente(); } }
+    function parar() {
+      corriendo = false;
+      if (timer) { window.clearTimeout(timer); timer = null; }
+    }
+
+    // No gastar batería con el panel fuera de pantalla o la pestaña de fondo,
+    // pero arrancarlo un poco antes de que entre para que no se vea vacío.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) { e.isIntersecting ? arrancar() : parar(); });
+      }, { threshold: 0, rootMargin: '260px 0px 260px 0px' }).observe(log);
+    } else {
+      arrancar();
+    }
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? parar() : arrancar();
+    });
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Tira del mecanismo: detectar → agentizar → operar → medir → aprender →
+  // escalar. Va encendiendo el paso activo mientras la sección está a la vista.
+  // ───────────────────────────────────────────────────────────────────────────
+  function initMech() {
+    var lista = document.getElementById('qv-mech');
+    if (!lista) return;
+    var pasos = lista.querySelectorAll('li');
+    if (!pasos.length) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (var k = 0; k < pasos.length; k++) pasos[k].className += ' is-on';
+      return;
+    }
+    var n = 0, timer = null;
+    function tic() {
+      for (var k = 0; k < pasos.length; k++) {
+        pasos[k].className = (k === n % pasos.length) ? 'is-on' : '';
+      }
+      n++;
+      timer = window.setTimeout(tic, 1100);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting) { if (!timer) tic(); }
+          else if (timer) { window.clearTimeout(timer); timer = null; }
+        });
+      }, { threshold: 0.3 }).observe(lista);
+    } else { tic(); }
+  }
+
   function initForm() {
     var form = document.getElementById('lead-form');
     if (!form) return;
@@ -368,11 +553,15 @@
     document.addEventListener('DOMContentLoaded', function () {
       initReveal();
       initHeroFlow();
+      initSalaControl();
+      initMech();
       initForm();
     });
   } else {
     initReveal();
     initHeroFlow();
+    initSalaControl();
+    initMech();
     initForm();
   }
 })();
@@ -380,12 +569,14 @@
 /* === Claims rotativos del hero (el primero queda estático en HTML para SEO/GEO) === */
 (function () {
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Todas abren por la fuga, nunca por la IA (propuesta de valor V1, §11).
+  // La primera es la misma que va estática en el HTML.
   var frases = [
-    'Muchas piezas funcionando. Poca idea de cuáles generan negocio.',
-    'Tu embudo no está roto donde crees.',
-    'Más leads no es un plan. Saber dónde los pierdes, sí.',
-    'Marketing trae leads. Ventas dice que no valen. Alguien cuenta mal.',
-    'Tu CPL ha bajado un 30 %. Tu coste por cliente, no.'
+    'Tu sistema comercial funciona. Lo que falla es lo que depende de que alguien se acuerde.',
+    'El presupuesto que enviaste hace tres semanas sigue abierto. Nadie ha vuelto.',
+    'Cada oportunidad que se enfría ya la habías pagado.',
+    'No te falta demanda. Te falta que alguien vuelva a llamar.',
+    'Más leads encima del mismo agujero no es un plan.'
   ];
   var i = 0, prepared = false;
   setInterval(function () {

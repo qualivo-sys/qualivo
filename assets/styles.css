@@ -573,3 +573,142 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 400px) {
   .brand img { height: 20px; }
 }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Consola de agente (hero). No es decoración: reproduce la pasada real del
+   agente de seguimientos sobre el CRM de Qualivo del 10-sep-2026. Todos los
+   números salen de esa ejecución — no hay ninguno de adorno.
+   ─────────────────────────────────────────────────────────────────────────── */
+.qv-console {
+  background: var(--qv-black);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(16, 19, 25, .22);
+  font-family: var(--qv-font-mono);
+  text-align: left;
+}
+.qv-console__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(255, 255, 255, .03);
+}
+.qv-console__dots { display: flex; gap: 6px; flex-shrink: 0; }
+.qv-console__dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, .18); }
+.qv-console__name {
+  font-size: 12.5px; letter-spacing: .04em; color: #9AA2AE; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.qv-console__name b { color: var(--qv-teal-pale); font-weight: 700; }
+.qv-console__state {
+  margin-left: auto; display: flex; align-items: center; gap: 7px; flex-shrink: 0;
+  font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--qv-teal-bright); font-weight: 700;
+}
+.qv-console__pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--qv-teal-bright);
+  box-shadow: 0 0 0 0 rgba(39, 189, 177, .7); animation: qvPulse 1.9s ease-out infinite;
+}
+@keyframes qvPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(39, 189, 177, .55); }
+  70%  { box-shadow: 0 0 0 8px rgba(39, 189, 177, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(39, 189, 177, 0); }
+}
+.qv-sala { display: grid; grid-template-columns: 216px 1fr; }
+.qv-roster {
+  margin: 0; padding: 16px 12px; list-style: none;
+  border-right: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(255, 255, 255, .02);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.qv-roster li {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 12.5px; letter-spacing: .02em; color: #6E7684;
+  white-space: nowrap; transition: color 220ms ease, background 220ms ease;
+}
+.qv-roster li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255, 255, 255, .16); transition: background 220ms ease, box-shadow 220ms ease;
+}
+.qv-roster li.is-act {
+  color: #fff; background: rgba(39, 189, 177, .1);
+}
+.qv-roster li.is-act::before {
+  background: var(--qv-teal-bright); box-shadow: 0 0 0 3px rgba(39, 189, 177, .22);
+}
+.qv-log {
+  padding: 16px 18px 18px; height: 322px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 38px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 38px);
+  font-size: 13px; line-height: 1.5; color: #C9CFD8;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 7px;
+}
+.qv-ev { display: flex; gap: 10px; align-items: baseline; opacity: 0; transform: translateY(5px); }
+.qv-ev.is-in { opacity: 1; transform: none; transition: opacity 300ms ease, transform 300ms ease; }
+.qv-ev__who { flex-shrink: 0; width: 96px; padding-right: 8px; color: var(--qv-teal-bright); font-weight: 700; }
+.qv-ev__txt { flex: 1; min-width: 0; }
+.qv-ev__val { margin-left: auto; padding-left: 12px; color: #fff; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.qv-ev--warn .qv-ev__who { color: var(--qv-coral); }
+.qv-ev--warn .qv-ev__txt { color: #E6C9B4; }
+.qv-ev--done .qv-ev__txt, .qv-ev--done .qv-ev__val { color: #7CE8DD; font-weight: 700; }
+.qv-caret {
+  display: inline-block; width: 8px; height: 14px; margin-left: 3px;
+  background: var(--qv-teal-bright); vertical-align: -2px; animation: qvBlink 1.05s step-end infinite;
+}
+@keyframes qvBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.qv-console__foot {
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding: 14px 18px;
+  font-family: var(--qv-font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7A8290;
+}
+.qv-console__foot b { color: #C9CFD8; font-weight: 700; }
+@media (max-width: 760px) {
+  .qv-sala { grid-template-columns: 1fr; }
+  .qv-roster {
+    flex-direction: row; overflow-x: auto; gap: 6px; padding: 12px;
+    border-right: none; border-bottom: 1px solid rgba(255, 255, 255, .08);
+    scrollbar-width: none;
+  }
+  .qv-roster::-webkit-scrollbar { display: none; }
+  .qv-roster {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+  }
+  .qv-roster li { font-size: 11.5px; padding: 6px 10px; border: 1px solid rgba(255, 255, 255, .1); }
+}
+@media (max-width: 600px) {
+  .qv-log { font-size: 11.5px; height: 300px; padding: 14px; gap: 6px; }
+  .qv-ev__who { width: 94px; padding-right: 6px; }
+  .qv-ev__val { padding-left: 8px; }
+  .qv-console__name { font-size: 11.5px; }
+  .qv-console__state span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qv-ev { opacity: 1; transform: none; }
+  .qv-caret, .qv-console__pulse { animation: none; }
+}
+
+/* Tira del mecanismo: detectar → agentizar → operar → medir → aprender → escalar */
+.qv-mech { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 40px; padding: 0; list-style: none; }
+.qv-mech li {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--qv-font-mono); font-size: 12.5px; letter-spacing: .09em;
+  text-transform: uppercase; font-weight: 700; color: var(--qv-ink-faint);
+  border: 1px solid rgba(16, 19, 25, .14); border-radius: 999px; padding: 9px 16px;
+  transition: color 300ms ease, border-color 300ms ease, background 300ms ease;
+}
+.qv-mech li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(16, 19, 25, .2); transition: background 300ms ease;
+}
+.qv-mech li.is-on {
+  color: var(--qv-teal); border-color: var(--qv-teal); background: rgba(14, 124, 116, .06);
+}
+.qv-mech li.is-on::before { background: var(--qv-teal-bright); }
