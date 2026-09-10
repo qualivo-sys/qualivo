@@ -3,19 +3,24 @@
 Primera pieza de Instagram del posicionamiento V1. **NO PUBLICAR**: la pausa de
 redes sigue vigente hasta que Maikel la levante por escrito.
 
-- 13 láminas, 1080 × 1350. Identidad personal de Maikel.
+- 10 láminas, 1080 × 1350. Identidad personal de Maikel.
 - Tinta #0A0A0B, crema #F2EEE6, naranja #E8590C. Anton + Space Grotesk
   (incluidas en `fuentes/` para que renderice igual en cualquier máquina).
 - Comparte gancho con el ángulo 2 de la campaña de Meta, para que quien vea el
   anuncio y luego el carrusel reciba el mismo mensaje dos veces.
 
-## Estructura
+## Estructura (10 láminas, foto en todas)
 
 1-3 · el gancho: subes presupuesto, entran más caros, y el agujero seguía después del clic.
 4-6 · tres preguntas que se contesta él solo, una por lámina.
 7 · el veredicto: si esas tres están mal, subir multiplica el problema.
-8-12 · qué hice yo: una IA en cada etapa, de arriba del embudo hasta después de la venta.
-13 · cierre a la Radiografía.
+8 · el giro: dejar de mirar solo arriba.
+9 · el mapa de agentes, de arriba del embudo hasta después de la venta.
+10 · cierre a la Radiografía.
+
+Estilo igual que el resto de carruseles: foto a sangre en cada lámina con el
+velo degradado encima y el texto sobre él. Los prompts de las ocho fotos están
+en `FOTOS.md`.
 
 ## Rigor
 
@@ -26,13 +31,9 @@ en el caption.
 
 ## Fotos pendientes
 
-Una para la portada, marcada en el HTML como `.foto-slot`:
-
-> Cocina moderna con flash directo. Bolsas de la compra nuevas en el suelo y la
-> nevera llena de la semana pasada al fondo. Sigues comprando y no te has comido
-> lo que ya tienes.
-
-El carrusel se lee entero sin ella.
+Las ocho, con sus prompts, en `FOTOS.md`. Coste estimado 28 créditos de
+Higgsfield y el saldo está en 1,12: hay que recargar. Mientras tanto los huecos
+se ven marcados y el carrusel se lee entero.
 
 ## Cómo se regenera
 
