@@ -14,194 +14,6 @@
     CALENDAR_EMBED_URL: 'https://api.leadconnectorhq.com/widget/booking/XSaUhWyjh2p6PoIsLDdJ'
   };
 
-  var TEAL = '#0E7C74';
-  var CORAL = '#E8590C';
-  var INK = '#101319';
-  var MONO = 'ui-monospace,SFMono-Regular,Menlo,monospace';
-  var SVG_NS = 'http://www.w3.org/2000/svg';
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // Hero: la cadena de captación y ventas, con la fuga cambiando de sitio en
-  // cada vuelta. El mensaje no es «hay un atasco», es «no sabes en cuál de las
-  // seis piezas está» — que es justo lo que responde el diagnóstico.
-  // ───────────────────────────────────────────────────────────────────────────
-  function el(name, attrs) {
-    var node = document.createElementNS(SVG_NS, name);
-    for (var k in attrs) node.setAttribute(k, attrs[k]);
-    return node;
-  }
-
-  function initHeroFlow() {
-    var host = document.getElementById('mech-flow') || document.getElementById('hero-flow');
-    if (!host) return;
-
-    var W = 1040, H = 250, y = 128;
-
-    // Tres entradas — no todo el mundo capta con anuncios — que confluyen en
-    // la misma cadena. A partir de ahí, una sola fila hasta los ingresos.
-    var FUENTES = ['ANUNCIOS', 'CONTENIDO', 'PROSPECCIÓN'];
-    var fx = 96, fhalf = 88, fys = [y - 58, y, y + 58];
-    var bus = 232;
-
-    var nodes = ['CONTACTOS', 'CRM', 'SEGUIMIENTO', 'VENTAS', '€'];
-    var xs = [340, 506, 678, 864, 1002];
-    var halfs = [72, 46, 78, 60, 34];
-
-    var FUGAS = [1, 3, 2];   // el tramo que falla cambia en cada vuelta; la entrada no, ahi no se pierde nada
-    var CICLO = 7000;
-
-    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
-    svg.setAttribute('aria-label', 'Anuncios, contenido y prospección alimentan una cadena de contactos, CRM, seguimiento y ventas hasta los ingresos, con una fuga que cambia de sitio');
-
-    // Confluencia de las tres entradas
-    fys.forEach(function (fy) {
-      svg.appendChild(el('path', {
-        d: 'M' + (fx + fhalf) + ' ' + fy + ' H' + (bus - 18) + ' Q' + bus + ' ' + fy + ' ' + bus + ' ' + (fy < y ? fy + 18 : fy > y ? fy - 18 : fy),
-        fill: 'none', stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5
-      }));
-    });
-    svg.appendChild(el('line', { x1: bus, y1: fys[0], x2: bus, y2: fys[2], stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 }));
-
-    var lines = [], dots = [];
-    var tramos = [[bus, xs[0] - halfs[0]]];
-    for (var k = 0; k < 4; k++) tramos.push([xs[k] + halfs[k], xs[k + 1] - halfs[k + 1]]);
-
-    tramos.forEach(function (t, k) {
-      var line = el('line', { x1: t[0], y1: y, x2: t[1], y2: y, stroke: 'rgba(16,19,25,.22)', 'stroke-width': 1.5 });
-      lines.push(line);
-      svg.appendChild(line);
-      for (var j = 0; j < 4; j++) {
-        var dot = el('circle', { cy: y, r: 3.6, fill: TEAL, opacity: 0.9 });
-        dots.push({ node: dot, k: k, j: j, ax: t[0], bx: t[1] });
-        svg.appendChild(dot);
-      }
-    });
-
-    var pulse = el('circle', { cy: y, fill: 'none', stroke: CORAL, 'stroke-width': 1.5, visibility: 'hidden' });
-    svg.appendChild(pulse);
-    var label = el('text', {
-      y: y - 40, 'text-anchor': 'middle', 'font-size': 12,
-      'letter-spacing': '.16em', 'font-weight': 800, 'font-family': MONO, visibility: 'hidden'
-    });
-    svg.appendChild(label);
-
-    function caja(cx, cy, half, texto, destacada, tam) {
-      var g = el('g', {});
-      var r = el('rect', {
-        x: cx - half, y: cy - (destacada ? 26 : 21), width: half * 2, height: destacada ? 52 : 42, rx: destacada ? 12 : 10,
-        fill: destacada === 'euro' ? TEAL : '#fff',
-        stroke: destacada === 'euro' ? TEAL : 'rgba(16,19,25,.16)', 'stroke-width': 1.2
-      });
-      g.appendChild(r);
-      var t = el('text', {
-        x: cx, y: cy + (destacada === 'euro' ? 6 : 4.5), 'text-anchor': 'middle',
-        fill: destacada === 'euro' ? '#fff' : INK,
-        'font-size': tam, 'letter-spacing': '.07em', 'font-weight': 800, 'font-family': MONO
-      });
-      t.textContent = texto;
-      g.appendChild(t);
-      svg.appendChild(g);
-      return r;
-    }
-
-    FUENTES.forEach(function (f, i) { caja(fx, fys[i], fhalf, f, false, 12); });
-
-    var cajas = nodes.map(function (n, i) {
-      return caja(xs[i], y, halfs[i], n, i === nodes.length - 1 ? 'euro' : true, i === nodes.length - 1 ? 19 : 12.5);
-    });
-
-    host.appendChild(svg);
-
-    function render(t) {
-      var vuelta = Math.floor(t / CICLO);
-      var cyc = (t % CICLO) / CICLO;
-      var fuga = FUGAS[vuelta % FUGAS.length];
-      var atascado = cyc > 0.16 && cyc < 0.74;
-      var cierre = cyc >= 0.74;
-      var mx = (tramos[fuga][0] + tramos[fuga][1]) / 2;
-
-      lines.forEach(function (line, i) {
-        var mal = i === fuga && atascado;
-        line.setAttribute('stroke', mal ? CORAL : 'rgba(16,19,25,.22)');
-        line.setAttribute('stroke-width', mal ? 2 : 1.5);
-        if (mal) {
-          line.setAttribute('stroke-dasharray', '5 5');
-          line.setAttribute('stroke-dashoffset', -(t / 42) % 10);
-        } else {
-          line.removeAttribute('stroke-dasharray');
-          line.removeAttribute('stroke-dashoffset');
-        }
-      });
-
-      dots.forEach(function (d) {
-        var mal = d.k === fuga && atascado;
-        var f = ((t / 1350) + d.j / 4 + d.k * 0.17) % 1;
-        if (mal) f = Math.min(f, 0.32 + d.j * 0.07);
-        d.node.setAttribute('cx', d.ax + (d.bx - d.ax) * f);
-        d.node.setAttribute('fill', mal ? CORAL : TEAL);
-      });
-
-      var euro = cajas[cajas.length - 1];
-      euro.setAttribute('transform', atascado ? '' : 'translate(0,' + (Math.sin(t / 420) * 1.6).toFixed(2) + ')');
-
-      cajas.forEach(function (r, i) {
-        var senala = cierre && i === fuga;
-        r.setAttribute('stroke', senala || i === cajas.length - 1 ? TEAL : 'rgba(16,19,25,.16)');
-        r.setAttribute('stroke-width', senala ? 2.4 : 1.2);
-      });
-
-      if (atascado) {
-        pulse.setAttribute('cx', mx);
-        pulse.setAttribute('r', 12 + 4 * Math.sin(t / 300));
-        pulse.setAttribute('visibility', 'visible');
-        label.setAttribute('x', mx);
-        label.textContent = 'AQUÍ SE PIERDE';
-        label.setAttribute('fill', CORAL);
-        label.setAttribute('visibility', 'visible');
-      } else if (cierre) {
-        pulse.setAttribute('visibility', 'hidden');
-        label.setAttribute('x', xs[fuga]);
-        label.textContent = 'EMPIEZA POR AQUÍ';
-        label.setAttribute('fill', TEAL);
-        label.setAttribute('visibility', 'visible');
-      } else {
-        pulse.setAttribute('visibility', 'hidden');
-        label.setAttribute('visibility', 'hidden');
-      }
-    }
-
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
-      render(CICLO * 0.5);
-      return;
-    }
-    var t0 = performance.now();
-    (function tick(now) {
-      // El primer fotograma puede llegar con marca anterior a t0 y dejar
-      // el tiempo en negativo: la vuelta saldria -1 y no hay tramo -1.
-      render(Math.max(0, now - t0));
-      requestAnimationFrame(tick);
-    })(t0);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // Formulario: validación, honeypot, envío por fetch y tres estados
-  // ───────────────────────────────────────────────────────────────────────────
-  var FACT_LABELS = {
-    '0': 'Menos de 500k €',
-    '1': '500k–1M €',
-    '2': '1M–3M €',
-    '3': '3M–10M €',
-    '4': '+10M €'
-  };
-  var QUIEN_LABELS = {
-    interno: 'Equipo interno',
-    agencia: 'Agencia',
-    freelance: 'Freelancers',
-    mixto: 'Agencia + equipo interno',
-    direccion: 'Fundador / equipo directivo',
-    otro: 'Otro'
-  };
 
   // ───────────────────────────────────────────────────────────────────────────
   // Sala de control del hero: los ocho agentes que ya funcionan, trabajando a
@@ -349,6 +161,147 @@
       new IntersectionObserver(function (entradas) {
         entradas.forEach(function (e) { e.isIntersecting ? arrancar() : parar(); });
       }, { threshold: 0, rootMargin: '260px 0px 260px 0px' }).observe(log);
+    } else {
+      arrancar();
+    }
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? parar() : arrancar();
+    });
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Un agente en cada etapa del sistema comercial. Va encendiendo la etapa
+  // activa y enseñando, una a una, las cosas que ese agente hace de verdad hoy.
+  // Todo lo que se lee aquí está construido y corriendo: nada del grupo "habría
+  // que construirlo" del inventario de agentes aparece en esta lista.
+  // ───────────────────────────────────────────────────────────────────────────
+  var ETAPAS = [
+    {
+      fase: 'Captación', agente: 'sdr',
+      hace: [
+        'carga las cuentas del día',
+        'sonda su web antes de escribir nada',
+        'redacta la secuencia y la deja lista'
+      ]
+    },
+    {
+      fase: 'Conversión', agente: 'radiografía',
+      hace: [
+        'contesta al instante, sin que nadie esté delante',
+        'once preguntas, cinco dimensiones',
+        'devuelve el cuello de botella en pantalla'
+      ]
+    },
+    {
+      fase: 'Cualificación', agente: 'señal',
+      hace: [
+        'puntúa la señal de 0 a 100',
+        'suma cada apertura, cada clic, cada respuesta',
+        'marca tibio al que se está enfriando'
+      ]
+    },
+    {
+      fase: 'Seguimiento', agente: 'seguimientos',
+      hace: [
+        'barre todos los pipelines cada mañana',
+        'encuentra lo parado y desde cuántos días',
+        'crea la tarea con fecha y con dueño'
+      ]
+    },
+    {
+      fase: 'Venta', agente: 'voz',
+      hace: [
+        'llama al contacto que acaba de entrar',
+        'escribe el resumen en el CRM',
+        'deja apuntado el siguiente paso'
+      ]
+    },
+    {
+      fase: 'Retención', agente: 'reactivación',
+      hace: [
+        'busca a quien pidió precio y no volvió',
+        'un mensaje distinto por cada motivo de parada',
+        'y a los que ya fueron clientes'
+      ]
+    }
+  ];
+
+  function initEtapas() {
+    var grid = document.getElementById('qv-etapas-grid');
+    if (!grid) return;
+
+    var tarjetas = ETAPAS.map(function (et) {
+      var li = document.createElement('li');
+      li.className = 'qv-etapa';
+
+      var fase = document.createElement('p');
+      fase.className = 'qv-etapa__fase';
+      fase.textContent = et.fase;
+
+      // El nombre va partido en dos trozos para que, si no cabe, rompa por los
+      // dos puntos y nunca por la mitad de una palabra.
+      var ag = document.createElement('p');
+      ag.className = 'qv-etapa__agente';
+      var punto = document.createElement('i');
+      punto.setAttribute('aria-hidden', 'true');
+      var pre = document.createElement('span');
+      pre.className = 'qv-etapa__pre';
+      pre.textContent = 'agente:';
+      var id = document.createElement('span');
+      id.className = 'qv-etapa__id';
+      id.textContent = et.agente;
+      ag.appendChild(punto);
+      ag.appendChild(pre);
+      ag.appendChild(id);
+
+      var acc = document.createElement('p');
+      acc.className = 'qv-etapa__accion';
+      acc.textContent = et.hace[0];
+
+      li.appendChild(fase);
+      li.appendChild(ag);
+      li.appendChild(acc);
+      grid.appendChild(li);
+      return { li: li, acc: acc, hace: et.hace, n: 0 };
+    });
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      tarjetas.forEach(function (t) { t.li.className = 'qv-etapa is-on'; });
+      return;
+    }
+
+    var i = 0, timer = null, corriendo = false;
+
+    function paso() {
+      tarjetas.forEach(function (t, k) {
+        t.li.className = 'qv-etapa' + (k === i ? ' is-on' : '');
+      });
+
+      var t = tarjetas[i];
+      // A la vuelta siguiente, esta etapa enseña otra de las cosas que hace.
+      timer = window.setTimeout(function () {
+        t.li.className += ' is-fade';
+        timer = window.setTimeout(function () {
+          t.n = (t.n + 1) % t.hace.length;
+          t.acc.textContent = t.hace[t.n];
+          t.li.className = t.li.className.replace(' is-fade', '');
+        }, 260);
+      }, 1500);
+
+      i = (i + 1) % tarjetas.length;
+      window.setTimeout(function () { if (corriendo) paso(); }, 2100);
+    }
+
+    function arrancar() { if (!corriendo) { corriendo = true; paso(); } }
+    function parar() {
+      corriendo = false;
+      if (timer) { window.clearTimeout(timer); timer = null; }
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) { e.isIntersecting ? arrancar() : parar(); });
+      }, { threshold: 0, rootMargin: '200px 0px 200px 0px' }).observe(grid);
     } else {
       arrancar();
     }
@@ -552,16 +505,16 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initReveal();
-      initHeroFlow();
       initSalaControl();
       initMech();
+      initEtapas();
       initForm();
     });
   } else {
     initReveal();
-    initHeroFlow();
     initSalaControl();
     initMech();
+    initEtapas();
     initForm();
   }
 })();

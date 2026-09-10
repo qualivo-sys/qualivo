@@ -712,3 +712,79 @@ input:focus, select:focus, textarea:focus {
   color: var(--qv-teal); border-color: var(--qv-teal); background: rgba(14, 124, 116, .06);
 }
 .qv-mech li.is-on::before { background: var(--qv-teal-bright); }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Un agente en cada etapa del sistema comercial. Se va encendiendo la etapa
+   activa y cada agente enseña, línea a línea, lo que hace de verdad.
+   ─────────────────────────────────────────────────────────────────────────── */
+.qv-etapas { margin: 0; }
+.qv-etapas__grid {
+  list-style: none; margin: 0 0 26px; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 12px;
+}
+.qv-etapa {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(16, 19, 25, .12);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  transition: border-color 320ms ease, box-shadow 320ms ease, transform 320ms ease;
+}
+.qv-etapa__fase {
+  margin: 0 0 12px; font-family: var(--qv-font-mono); font-size: 11.5px;
+  letter-spacing: .15em; text-transform: uppercase; font-weight: 800; color: var(--qv-ink-faint);
+  transition: color 320ms ease;
+}
+.qv-etapa__agente {
+  margin: 0 0 10px; display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+  font-family: var(--qv-font-mono); font-size: 12.5px; line-height: 1.4; font-weight: 700;
+  color: var(--qv-ink);
+}
+.qv-etapa__pre { color: var(--qv-ink-faint); white-space: nowrap; }
+.qv-etapa__id { white-space: nowrap; }
+.qv-etapa__agente i { order: -1; }
+.qv-etapa__agente i {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-right: 8px;
+  background: rgba(16, 19, 25, .18); transition: background 320ms ease, box-shadow 320ms ease;
+}
+.qv-etapa__accion {
+  margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--qv-ink-muted);
+  min-height: 3em; transition: opacity 260ms ease, color 320ms ease;
+}
+.qv-etapa.is-on {
+  border-color: var(--qv-teal);
+  box-shadow: 0 14px 34px rgba(14, 124, 116, .14);
+  transform: translateY(-2px);
+}
+.qv-etapa.is-on .qv-etapa__fase { color: var(--qv-teal); }
+.qv-etapa.is-on .qv-etapa__agente i {
+  background: var(--qv-teal-bright); box-shadow: 0 0 0 4px rgba(39, 189, 177, .2);
+}
+.qv-etapa.is-on .qv-etapa__accion { color: var(--qv-ink); }
+.qv-etapa.is-fade .qv-etapa__accion { opacity: 0; }
+/* barrita de trabajo: solo en la etapa activa */
+.qv-etapa::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 10px; height: 2px;
+  border-radius: 2px; background: var(--qv-teal-bright);
+  transform: scaleX(0); transform-origin: left center; opacity: 0;
+}
+.qv-etapa.is-on::after { animation: qvTrabajo 2100ms linear forwards; opacity: 1; }
+@keyframes qvTrabajo { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.qv-etapas__trans { display: grid; gap: 8px; }
+.qv-trans {
+  margin: 0; display: flex; align-items: baseline; gap: 10px;
+  font-size: 14.5px; line-height: 1.55; color: var(--qv-ink-muted);
+  border-left: 2px dashed rgba(14, 124, 116, .35); padding-left: 14px;
+}
+.qv-trans i {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--qv-teal); flex-shrink: 0;
+  position: relative; top: -2px;
+}
+.qv-trans b { font-family: var(--qv-font-mono); font-size: 13px; color: var(--qv-ink); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qv-etapa, .qv-etapa__accion { transition: none; }
+  .qv-etapa.is-on { transform: none; }
+  .qv-etapa.is-on::after { animation: none; transform: scaleX(1); }
+}
