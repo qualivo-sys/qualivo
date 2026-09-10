@@ -720,8 +720,11 @@ input:focus, select:focus, textarea:focus {
 .qv-etapas { margin: 0; }
 .qv-etapas__grid {
   list-style: none; margin: 0 0 26px; padding: 0;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 12px;
+  display: grid; grid-template-columns: 1fr; gap: 12px;
 }
+/* Nueve etapas: en tres columnas quedan tres filas iguales, sin huecos sueltos. */
+@media (min-width: 560px) { .qv-etapas__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .qv-etapas__grid { grid-template-columns: repeat(3, 1fr); } }
 .qv-etapa {
   position: relative;
   background: #FFFFFF;
@@ -787,4 +790,33 @@ input:focus, select:focus, textarea:focus {
   .qv-etapa, .qv-etapa__accion { transition: none; }
   .qv-etapa.is-on { transform: none; }
   .qv-etapa.is-on::after { animation: none; transform: scaleX(1); }
+}
+
+/* Estado de cada agente: lo que corre hoy y lo que se construye en el piloto.
+   La distinción va siempre visible — enseñar el mapa entero sí, darlo por hecho no. */
+.qv-etapa { display: flex; flex-direction: column; padding-bottom: 14px; }
+.qv-etapa__accion { flex: 1; }
+.qv-etapa__estado {
+  align-self: flex-start; margin-top: 12px;
+  font-family: var(--qv-font-mono); font-size: 10.5px; letter-spacing: .1em;
+  text-transform: uppercase; font-weight: 800; border-radius: 999px; padding: 4px 9px;
+  white-space: nowrap;
+}
+.qv-etapa__estado.es-hoy { color: #0B5F59; background: rgba(39, 189, 177, .16); }
+.qv-etapa__estado.es-piloto { color: #9A4A0B; background: rgba(232, 89, 12, .12); }
+/* la barra de trabajo sube al borde de arriba para no chocar con la etiqueta */
+.qv-etapa::after { top: -1px; bottom: auto; left: 14px; right: 14px; height: 3px; }
+
+.qv-leyenda {
+  margin: 0 0 22px; font-size: 14px; line-height: 2.1; color: var(--qv-ink-muted); max-width: 78ch;
+}
+.qv-leyenda .qv-etapa__estado { margin: 0 6px 0 0; vertical-align: 1px; }
+.qv-trans--piloto { border-left-color: rgba(232, 89, 12, .38); }
+.qv-trans--piloto i { background: var(--qv-coral); }
+
+/* El mapa completo se enseña, pero el piloto es UNO. Esto lo deja claro. */
+.qv-aviso {
+  margin: 0 0 26px; padding: 14px 18px; max-width: 70ch;
+  background: var(--qv-lilac); border-radius: 12px;
+  font-size: 15px; line-height: 1.6; color: var(--qv-ink-soft); font-weight: 600;
 }

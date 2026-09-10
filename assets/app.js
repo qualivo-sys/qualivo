@@ -177,7 +177,23 @@
   // ───────────────────────────────────────────────────────────────────────────
   var ETAPAS = [
     {
-      fase: 'Captación', agente: 'sdr',
+      fase: 'Medios de pago', agente: 'paid', estado: 'piloto',
+      hace: [
+        'lee las campañas cada día, no cada mes',
+        'avisa cuando una creatividad se está cansando',
+        'propone el siguiente ángulo y lo pone a competir'
+      ]
+    },
+    {
+      fase: 'Contenido y SEO', agente: 'contenido', estado: 'hoy',
+      hace: [
+        'busca la pregunta que nadie ha respondido bien',
+        'escribe y publica',
+        'vigila la posición semana a semana'
+      ]
+    },
+    {
+      fase: 'Prospección', agente: 'sdr', estado: 'hoy',
       hace: [
         'carga las cuentas del día',
         'sonda su web antes de escribir nada',
@@ -185,7 +201,15 @@
       ]
     },
     {
-      fase: 'Conversión', agente: 'radiografía',
+      fase: 'Landing', agente: 'cro', estado: 'piloto',
+      hace: [
+        'mide en qué punto exacto se cae la página',
+        'propone el cambio y lo pone a prueba',
+        'se queda con el que gana'
+      ]
+    },
+    {
+      fase: 'Conversión', agente: 'radiografía', estado: 'hoy',
       hace: [
         'contesta al instante, sin que nadie esté delante',
         'once preguntas, cinco dimensiones',
@@ -193,7 +217,7 @@
       ]
     },
     {
-      fase: 'Cualificación', agente: 'señal',
+      fase: 'Cualificación', agente: 'señal', estado: 'hoy',
       hace: [
         'puntúa la señal de 0 a 100',
         'suma cada apertura, cada clic, cada respuesta',
@@ -201,7 +225,7 @@
       ]
     },
     {
-      fase: 'Seguimiento', agente: 'seguimientos',
+      fase: 'Seguimiento', agente: 'seguimientos', estado: 'hoy',
       hace: [
         'barre todos los pipelines cada mañana',
         'encuentra lo parado y desde cuántos días',
@@ -209,7 +233,7 @@
       ]
     },
     {
-      fase: 'Venta', agente: 'voz',
+      fase: 'Venta', agente: 'voz', estado: 'hoy',
       hace: [
         'llama al contacto que acaba de entrar',
         'escribe el resumen en el CRM',
@@ -217,7 +241,7 @@
       ]
     },
     {
-      fase: 'Retención', agente: 'reactivación',
+      fase: 'Retención', agente: 'reactivación', estado: 'hoy',
       hace: [
         'busca a quien pidió precio y no volvió',
         'un mensaje distinto por cada motivo de parada',
@@ -225,6 +249,11 @@
       ]
     }
   ];
+
+  var ESTADOS = {
+    hoy:    { texto: 'en marcha',   clase: 'es-hoy' },
+    piloto: { texto: 'en tu piloto', clase: 'es-piloto' }
+  };
 
   function initEtapas() {
     var grid = document.getElementById('qv-etapas-grid');
@@ -258,9 +287,17 @@
       acc.className = 'qv-etapa__accion';
       acc.textContent = et.hace[0];
 
+      // Lo que corre hoy y lo que se construye dentro del piloto se distinguen
+      // siempre. Enseñar el mapa entero, sí; darlo por hecho, nunca.
+      var est = ESTADOS[et.estado];
+      var badge = document.createElement('span');
+      badge.className = 'qv-etapa__estado ' + est.clase;
+      badge.textContent = est.texto;
+
       li.appendChild(fase);
       li.appendChild(ag);
       li.appendChild(acc);
+      li.appendChild(badge);
       grid.appendChild(li);
       return { li: li, acc: acc, hace: et.hace, n: 0 };
     });

@@ -177,6 +177,7 @@ Nunca:
 | Superficie | Regla |
 |---|---|
 | **Home y landings** | Abren por la fuga (§3), no por la IA. La línea de categoría (§1) aparece **después** de nombrar el problema. Un solo caso (§5). Sin precios |
+| **Catálogo de agentes en la web** | Se enseña **entero**, incluida la parte por construir: es la prueba de profundidad y el alcance real de la oferta. Cada agente lleva su estado visible — «en marcha» (corre hoy, se puede enseñar en vivo) o «en tu piloto» (se construye sobre su sistema, con alcance y precio cerrados antes de empezar). Y siempre al lado: **el piloto es uno solo**, el de su fuga; el resto llega cuando ese ha demostrado impacto (§4) |
 | **Radiografía** | Es la pieza 1 de la oferta. 90 segundos, sin registro. Su salida es "dónde se rompe" y el siguiente paso es el plan por escrito en 48 h |
 | **Anuncios** | Gancho = síntoma concreto del §3. Prueba = un número del §5. Nunca "IA" en el titular en frío |
 | **Contenido** | Pilares = las cinco fugas del §8. Cada pieza termina en la Radiografía |
