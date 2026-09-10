@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 (async () => {
   const dir = '/home/user/qualivo/content/infografias/2026-09-10';
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
-  for (const n of ['banderas', 'dia-semana-mes']) {
+  for (const n of ['no-digas','niveles','malo-bueno-excelente','sobrevalorado']) {
     const p = await b.newPage({ viewport: { width: 1160, height: 1440 } });
     await p.goto('file://' + dir + '/' + n + '.html', { waitUntil: 'networkidle' });
     await p.waitForTimeout(700);

@@ -1,0 +1,19 @@
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.page{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto}
+.page.tinta{background:#0A0A0B;color:#F2EEE6}
+.page.tinta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.028) 1px,transparent 1px);background-size:90px 90px}
+.page.crema{background:#F2EEE6;color:#0A0A0B}
+.page.crema::before{content:'';position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(10,10,11,.055) 1px,transparent 1px);background-size:7px 7px}
+.kick{position:absolute;top:50px;left:56px;right:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.tit{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:72px;line-height:1;text-transform:uppercase}
+.nar{color:#E8590C}
+.pie{position:absolute;bottom:118px;left:56px;right:56px;border-top:2px solid #E8590C;padding-top:24px;font-size:27px;line-height:1.4}
+.tinta .pie{color:rgba(242,238,230,.85)} .crema .pie{color:rgba(10,10,11,.85)}
+.pie b{font-weight:700} .tinta .pie b{color:#F2EEE6} .crema .pie b{color:#0A0A0B}
+.firma{position:absolute;bottom:46px;left:56px;font-size:23px;letter-spacing:.05em}
+.tinta .firma{color:rgba(242,238,230,.55)} .crema .firma{color:rgba(10,10,11,.55)}
+.web{position:absolute;bottom:46px;right:56px;font-family:Anton;font-size:26px;letter-spacing:.04em;color:#E8590C}
+.mono{font-family:SG;font-size:17px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
