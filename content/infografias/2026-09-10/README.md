@@ -13,10 +13,14 @@ redes vigente.
 | `niveles.html` | 13 · Lista de niveles | seguimiento | tinta, escalera |
 | `malo-bueno-excelente.html` | 4 · Malo, bueno, excelente | conversión | crema, tres grados |
 | `sobrevalorado.html` | 12 · Sobrevalorado / infravalorado | todas, etapa por etapa | tinta, dos columnas |
+| `lista-rapida.html` | 7 · Lista rápida | dependencia, control | crema, numerada |
+| `no-hagas.html` | 8 · No hagas esto / haz esto | todas, por la alternativa | tinta, dos columnas |
 
 Estilos compartidos en `_base.css`. Orden de publicación sugerido, alternando
 fondo: banderas (tinta) → no-digas (crema) → niveles (tinta) →
-malo-bueno-excelente (crema) → sobrevalorado (tinta) → dia-semana-mes (crema).
+malo-bueno-excelente (crema) → sobrevalorado (tinta) → dia-semana-mes (crema)
+→ no-hagas (tinta) → lista-rapida (crema). Ocho piezas: casi tres semanas a
+tres por semana.
 
 Sin imágenes generadas: son tipográficas a propósito, para poder publicarlas sin
 depender de créditos y para no repetir estilo con el carrusel de pares.

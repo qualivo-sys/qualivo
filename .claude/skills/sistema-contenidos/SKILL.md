@@ -70,6 +70,17 @@ documento:
   alguien con 12 empleados, un CRM medio usado y dos comerciales?
 
 Y fija:
+- **Formato de casa en Instagram (decidido por Maikel el 10-sep, «estos me gustan
+  más»): la infografía de una sola imagen**, 1080 × 1350, tipográfica, sin foto
+  generada. Base de estilos en `content/infografias/2026-09-10/_base.css`:
+  kicker naranja, título en Anton, cuerpo en Space Grotesk, remate sobre regla
+  naranja con la frase de la IA, firma @maikel.echevarria y QUALIVO.IO. Se alterna
+  fondo tinta y crema entre piezas seguidas. Los moldes ya montados: bandera
+  roja/verde (6), no digas/mejor di (1), niveles (13), malo-bueno-excelente (4),
+  sobrevalorado/infravalorado (12), día/semana/mes (9), lista rápida (7), no
+  hagas/haz esto (8). El carrusel de pares «Primero/Luego» queda como formato
+  secundario. Toda pieza remata con lo que hacemos: el proceso entero de la
+  captación a la venta, e IA donde falla.
 - **LinkedIn pesa más que Instagram**: 4 piezas semanales frente a 3. Si hay que
   recortar, se recorta Instagram.
 - **Cinco series**, no temas sueltos: «Agentizando mi propia empresa» (la espina
