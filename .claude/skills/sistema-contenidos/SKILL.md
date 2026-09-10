@@ -56,6 +56,28 @@ Lo mínimo que hay que llevar puesto al escribir:
 - **La métrica que decide** no son las visitas: son las radiografías completadas
   y de qué artículo venían.
 
+## PUERTA CERO TER · La estrategia de redes
+
+`content/estrategia-redes-v1.md`. Deroga dos reglas anteriores de este mismo
+documento:
+
+- **Cae la regla de altitud del 2-sep.** El seguimiento, el CRM y los
+  presupuestos dejan de ser «ejemplo puntual» y pasan a ser tema central: es
+  donde está nuestra mejor prueba (Nuria) y nuestro mejor agente. Lo que se
+  conserva: no hablar como comerciales, sino como quien construye el sistema.
+- **El ICP pasa de 2-20 a 5-50 personas** (propuesta V1 §2). El de 2-20 no tiene
+  sistema que agentizar. Prueba antes de aprobar una pieza: ¿esto lo reconoce
+  alguien con 12 empleados, un CRM medio usado y dos comerciales?
+
+Y fija:
+- **LinkedIn pesa más que Instagram**: 4 piezas semanales frente a 3. Si hay que
+  recortar, se recorta Instagram.
+- **Cinco series**, no temas sueltos: «Agentizando mi propia empresa» (la espina
+  dorsal, LinkedIn), banderas rojas por fuga, sobrevalorado/infravalorado, Sin
+  humo, y la tesis contraria.
+- **Un dato propio verificado por pieza, o no hay pieza.** Y el «qué salió mal»
+  no es opcional en el diario del sistema.
+
 
 Documento completo: `content/sistema-maestro-contenidos.md` (leerlo antes de
 cualquier trabajo de contenido). Resumen operativo:
@@ -91,6 +113,9 @@ diferenciación, potencial de conversación, potencial de negocio.
 Contenido y outbound comparten inteligencia: las objeciones y reuniones son
 fuente editorial; el contenido publicado es autoridad previa para outbound.
 
+## ICP: ⚠️ ACTUALIZADO EL 10-SEP a empresas de 5 a 50 personas (propuesta V1 §2)
+que YA generan oportunidades y YA tienen las piezas (web o campañas, un CRM,
+alguien que vende) y ticket por encima de 1.000 €. Texto anterior, superado:
 ## ICP: empresas de 2 a 20 empleados (correccion de Maikel, 8-sep)
 TODO el contenido apunta a negocios de 2 a 20 empleados. No es una pyme con
 departamentos: es un duenyo que vende, cotiza, persigue y decide, con una
@@ -120,6 +145,11 @@ hasta que le demos un vistazo final porque las imágenes así no sé si tienen
 mucho sentido». NO subir ni programar nada en GHL (Instagram/LinkedIn) hasta
 que Maikel levante la pausa por escrito. Producir borradores sí; publicar no.
 El blog no está afectado por esta pausa.
+**Vía de salida propuesta (10-sep, pendiente del ok de Maikel):** levantar la
+pausa SOLO para las dos series que no llevan ninguna imagen generada — el diario
+del sistema (texto en LinkedIn, captura real de pantalla en Instagram) y la tesis
+contraria (texto puro). Instagram con imagen generada sigue parado hasta revisar
+la estética.
 
 ## Catálogo de formatos (lista de Vilma Núñez que trajo Maikel, 9-sep)
 Regla de siempre: se copia el molde, nunca el mensaje. Cada formato solo vale
@@ -152,8 +182,10 @@ Paleta de los creativos = la de maikelechevarria.com: crema #F2EEE6,
 tinta #0A0A0B, NARANJA #E8590C como acento principal (#FF7A33 en fondos
 oscuros, #C2410C oscuro, #FBE896 amarillo palido puntual). Nada de teal
 en redes (el teal es de la web de Qualivo).
-ALTITUD DE LOS TEMAS (correccion Maikel 2-sep): somos CONSULTORA DE
-GROWTH, no comerciales. Los carruseles hablan de crecimiento a nivel
+ALTITUD DE LOS TEMAS — ⚠️ DEROGADA EL 10-SEP por la propuesta de valor V1.
+Se conserva solo «no hablar como comerciales»; lo demás ya no aplica, el
+seguimiento y el CRM SON tema central. Texto original, para contexto:
+(correccion Maikel 2-sep): somos CONSULTORA DE GROWTH, no comerciales. Los carruseles hablan de crecimiento a nivel
 estrategico: sistema vs esfuerzo, palancas del crecimiento, dependencia
 de un canal, decisiones con datos vs opiniones, el techo de facturacion,
 economia del crecimiento. La operativa comercial (leads, CRM, seguimiento,
