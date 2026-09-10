@@ -4,8 +4,9 @@
 NAME              Content
 ID                qualivo.content
 SYSTEM            demand
-OWNS              Atención → Tráfico
-DOES_NOT_OWN      la web y el CRO (Demand) · el mensaje comercial (Estrategia Central)
+OWNS              Atención → Tráfico  ·  incluye blog y redes
+DOES_NOT_OWN      la web y el CRO (Demand) · el mensaje comercial (Estrategia Central) ·
+                  contactar por LinkedIn (Outbound) · responder mensajes (SDR)
 SESIÓN            nueva, escindida de Landing Qualivo.io
 ```
 

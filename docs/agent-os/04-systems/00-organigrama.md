@@ -39,7 +39,7 @@ CONT DEM PAID  OUTB      SDR      SALES           OPS
 
 | Transición del negocio | Owner | Métrica que posee |
 |---|---|---|
-| Atención → Tráfico | **Content** | visitas de contenido, alcance |
+| Atención → Tráfico (blog y redes) | **Content** | piezas que generan conversación |
 | Tráfico → Lead conocido | **Demand** | radiografías completadas |
 | Cuenta → Conversación | **Outbound** | conversaciones iniciadas |
 | Conversación → Reunión | **SDR** | reuniones agendadas |
@@ -74,10 +74,16 @@ un evento y sigue con lo suyo.
 | Voice of Customer | Haya 30+ llamadas transcritas. Hasta entonces es un workflow semanal que resume y entrega al Brain |
 | Market Intelligence | Nunca como agente propio. Es el Radar IA, dentro de Content |
 | Revenue Intelligence | El Weekly Review lleve 8 semanas ejecutándose. Es un cuadro de mando antes que un agente |
+| Redes sociales | Produzca 4 conversaciones entrantes/mes, dos meses seguidos (ADR-010) |
 | Delivery | Haya 6+ clientes o el primer empleado |
 
 **Regla de creación:** un agente nuevo necesita una transición sin dueño, un KPI propio y un
 presupuesto de atención. Si le falta uno de los tres, es un workflow.
+
+**Y un umbral escrito.** Cada agente propuesto suena razonable por separado. Paid pasó el corte
+porque gasta dinero de forma irreversible (ADR-007). Redes no lo pasó porque comparte transición,
+KPI y cadencia con Content, y tiene su umbral escrito para revisarlo (ADR-010). Sin umbrales, se
+llega a los veinticinco agentes del brief en tres semanas.
 
 ## Las tres capas, separadas por `scope`
 
