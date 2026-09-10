@@ -1,4 +1,4 @@
-import { EJERCICIOS, ejercicio } from './ejercicios';
+import { EJERCICIOS, ejercicio, familia, mismoMovimiento } from './ejercicios';
 import type { Bloque, DiaPlan, Ejercicio, ObjetivoEntreno, Patron, PerfilEntreno, PlanEntreno, Rol } from './tipos-motor';
 import type { Nivel } from '../tipos';
 
@@ -160,17 +160,30 @@ function elegir(
   usadosDia: Set<string>,
 ): Ejercicio | null {
   const patrones: Patron[] = [hueco.patron, ...(RESPALDO[hueco.patron] ?? [])];
+  // Familias ya usadas hoy: no basta con mirar el id. "Puente de gluteo" y
+  // "puente de gluteo a una pierna" son ids distintos y hasta patrones
+  // distintos, pero para quien entrena es el mismo ejercicio dos veces.
+  const familiasDia = new Set([...usadosDia].map(familia));
+  const familiasPlan = new Set([...usadosPlan].map(familia));
 
-  for (const patron of patrones) {
-    const lista = candidatos(perfil, patron).filter((e) => !usadosDia.has(e.id));
-    if (!lista.length) continue;
+  // Se intenta primero sin repetir movimiento en el dia; si no hay con que
+  // llenar el hueco, se afloja antes que dejar la sesion coja.
+  for (const evitarFamilia of [true, false]) {
+    for (const patron of patrones) {
+      const lista = candidatos(perfil, patron)
+        .filter((e) => !usadosDia.has(e.id))
+        .filter((e) => !evitarFamilia || !familiasDia.has(familia(e.id)));
+      if (!lista.length) continue;
 
-    // El ejercicio principal debe ser un basico; los accesorios, preferiblemente no.
-    const gluteo = enfasisDe(perfil) === 'pierna_gluteo';
-    const ordenados = [...lista].sort((a, b) => puntuar(b, hueco.rol, gluteo) - puntuar(a, hueco.rol, gluteo));
-    const frescos = ordenados.filter((e) => !usadosPlan.has(e.id));
-    const elegido = frescos[0] ?? ordenados[0];
-    if (elegido) return elegido;
+      // El ejercicio principal debe ser un basico; los accesorios, preferiblemente no.
+      const gluteo = enfasisDe(perfil) === 'pierna_gluteo';
+      const ordenados = [...lista].sort((a, b) => puntuar(b, hueco.rol, gluteo) - puntuar(a, hueco.rol, gluteo));
+      // Entre iguales gana el que no se haya visto en toda la semana, y antes
+      // aun el de un movimiento que no se repita en ningun otro dia.
+      const frescos = ordenados.filter((e) => !usadosPlan.has(e.id) && !familiasPlan.has(familia(e.id)));
+      const elegido = frescos[0] ?? ordenados.filter((e) => !usadosPlan.has(e.id))[0] ?? ordenados[0];
+      if (elegido) return elegido;
+    }
   }
   return null;
 }
@@ -195,8 +208,11 @@ export function alternativas(ejercicioId: string, perfil: PerfilEntreno, excluir
   const actual = ejercicio(ejercicioId);
   if (!actual) return [];
   const fuera = new Set([ejercicioId, ...excluir]);
-  const lista = candidatos(perfil, actual.patron).filter((e) => !fuera.has(e.id));
-  const respaldo = (RESPALDO[actual.patron] ?? []).flatMap((p) => candidatos(perfil, p)).filter((e) => !fuera.has(e.id));
+  // Ofrecer "puente de gluteo a una pierna" como alternativa al puente de
+  // gluteo no cambia nada: se descartan las variantes del mismo movimiento.
+  const otro = (e: Ejercicio) => !fuera.has(e.id) && !mismoMovimiento(e.id, ejercicioId);
+  const lista = candidatos(perfil, actual.patron).filter(otro);
+  const respaldo = (RESPALDO[actual.patron] ?? []).flatMap((p) => candidatos(perfil, p)).filter(otro);
   const gluteo = enfasisDe(perfil) === 'pierna_gluteo';
   const orden = (a: Ejercicio, b: Ejercicio) => puntuar(b, 'secundario', gluteo) - puntuar(a, 'secundario', gluteo);
   return [...lista.sort(orden), ...respaldo.sort(orden)].filter((e, i, arr) => arr.findIndex((x) => x.id === e.id) === i);

@@ -4,12 +4,14 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
 import { firmaPerfil, generarPlan, prescripcion } from '@/lib/motor/planificador';
-import type { Bloque } from '@/lib/motor/tipos-motor';
+import type { Bloque, PlanEntreno } from '@/lib/motor/tipos-motor';
+import { ejercicio } from '@/lib/motor/ejercicios';
 import { XP_POR_ACCION, racha as calcularRacha } from '@/lib/motor/puntuaciones';
 import { kcalCardio, tipoCardio } from '@/lib/motor/cardio';
 import { esDiaRedondo } from '@/lib/motor/energia';
 import { cargarPanel } from '@/lib/datos';
 import { perfilEntreno } from '@/lib/perfil';
+import type { Perfil } from '@/lib/tipos';
 import { clienteServidor } from '@/lib/supabase/servidor';
 import { clienteAdmin, hayServiceRole } from '@/lib/supabase/admin';
 import { cargarPerfil } from '@/lib/datos';
@@ -118,6 +120,57 @@ export async function archivarHabito(habitoId: string) {
   const { supabase, userId } = await sesion();
   await supabase.from('habitos').update({ activo: false }).eq('id', habitoId).eq('user_id', userId);
   revalidatePath('/app/habitos');
+}
+
+/**
+ * Cambiar un ejercicio del plan por otro. Misma logica que usa el coach, pero
+ * a un toque desde la pantalla del entreno: cuando uno no te sale, no tienes
+ * la maquina o simplemente no te gusta, tener que pedirlo por chat sobra.
+ *
+ * El cambio se aplica en todos los dias donde salga: si te molesta el hombro,
+ * te molesta el lunes y el jueves.
+ */
+export async function cambiarEjercicioPlan(ejercicioId: string, datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const nuevoId = texto(datos.get('nuevo'));
+  if (!nuevoId || nuevoId === ejercicioId) return;
+
+  const { data: perfil } = await supabase.from('perfiles').select('*').eq('id', userId).maybeSingle();
+  const datosPerfil = perfil ? perfilEntreno(perfil as Perfil) : null;
+
+  const { data: fila } = await supabase
+    .from('planes_entreno').select('id, datos').eq('user_id', userId).eq('activo', true)
+    .order('creado', { ascending: false }).limit(1).maybeSingle();
+  if (!fila) return;
+
+  const plan = fila.datos as PlanEntreno;
+  const nuevo = ejercicio(nuevoId);
+  const actual = ejercicio(ejercicioId);
+  if (!nuevo || !actual) return;
+
+  let cambiados = 0;
+  for (const dia of plan.dias) {
+    dia.bloques = dia.bloques.map((b) => {
+      if (b.ejercicioId !== ejercicioId) return b;
+      cambiados += 1;
+      // Las series se respetan; el resto de la receta se recalcula para el
+      // ejercicio nuevo, que puede pedir otro rango de repeticiones.
+      const receta = datosPerfil
+        ? { ...prescripcion(b.rol, datosPerfil.objetivo, datosPerfil.nivel, nuevoId), series: b.series }
+        : { series: b.series, repMin: b.repMin, repMax: b.repMax, rir: b.rir, descansoSeg: b.descansoSeg };
+      return { ejercicioId: nuevoId, rol: b.rol, ...receta };
+    });
+  }
+  if (!cambiados) return;
+
+  plan.notas = [
+    ...plan.notas.filter((n) => !n.startsWith(`Cambio: ${actual.nombre} → `)),
+    `Cambio: ${actual.nombre} → ${nuevo.nombre}.`,
+  ].slice(-12);
+
+  await supabase.from('planes_entreno').update({ datos: plan }).eq('id', fila.id);
+  revalidatePath('/app/entreno');
+  revalidatePath('/app');
 }
 
 export async function guardarMedicion(datos: FormData) {

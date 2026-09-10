@@ -965,5 +965,55 @@ const regRumia = (supabase.db.tablas.habitos_registro ?? []).find((r) => r.habit
 check('apunta la caida con lo que la disparo', regRumia?.hecho === true && /Mail del cliente/.test(regRumia?.nota ?? ''), JSON.stringify(regRumia));
 check('y no da XP por caer', !(supabase.db.tablas.xp_eventos ?? []).some((x) => x.motivo === 'Rumiar por la noche'));
 
+// ── 23. El plan no repite el mismo movimiento en un dia ────────────────
+const { familia, mismoMovimiento } = await import(`${L}/motor/ejercicios.js`);
+
+check('las variantes del mismo movimiento comparten familia',
+  familia('puente_gluteo') === familia('puente_gluteo_una_pierna') && mismoMovimiento('puente_gluteo', 'puente_gluteo_una_pierna'));
+check('y las que no, no', !mismoMovimiento('sentadilla_barra', 'peso_muerto') && !mismoMovimiento('press_banca', 'press_militar_barra'));
+check('press plano e inclinado NO son el mismo movimiento', !mismoMovimiento('press_banca', 'press_banca_inclinado_mancuernas'));
+check('un ejercicio sin variantes es familia de si mismo', familia('face_pull') === 'face_pull');
+check('nada es el mismo movimiento que si mismo', !mismoMovimiento('press_banca', 'press_banca'));
+
+// El caso real: el plan de Isa tenia puente de gluteo y puente a una pierna
+// el mismo dia, uno detras de otro.
+const perfilIsa = { sexo: 'mujer', edad: 38, alturaCm: 171, objetivo: 'perder_grasa', nivel: 'avanzado', diasSemana: 4, entorno: 'gimnasio', actividad: 'moderada', limitaciones: [], objetivosExtra: [] };
+const planIsa = generarPlan(perfilIsa);
+const puentesJuntos = planIsa.dias.some((d) => {
+  const f = d.bloques.map((b) => familia(b.ejercicioId));
+  return f.filter((x) => x === 'puente_gluteo').length > 1;
+});
+check('ya no salen dos puentes de gluteo el mismo dia', !puentesJuntos, JSON.stringify(planIsa.dias.map((d) => d.bloques.map((b) => b.ejercicioId))));
+check('ningun ejercicio se repite por id dentro de un dia', planIsa.dias.every((d) => {
+  const ids = d.bloques.map((b) => b.ejercicioId);
+  return new Set(ids).size === ids.length;
+}));
+check('los dias siguen completos, no se vacian por filtrar', planIsa.dias.every((d) => d.bloques.length >= 4), JSON.stringify(planIsa.dias.map((d) => d.bloques.length)));
+
+// El filtro no puede dejar ningun dia vacio ni quitar ejercicios: cuando no
+// hay con que llenar el hueco sin repetir movimiento, se afloja y se repite,
+// que es mejor que una sesion coja. (Sin material los dias de empuje y tiron
+// salen cortos, pero eso ya pasaba antes: el catalogo de peso corporal da
+// para poco, no es cosa del filtro.)
+for (const entorno of ['gimnasio', 'casa_mancuernas', 'casa_sin_material']) {
+  for (const nivel of ['principiante', 'intermedio', 'avanzado']) {
+    const pl = generarPlan({ ...perfilIsa, entorno, nivel, diasSemana: 4 });
+    check(`ningun dia vacio en ${entorno}/${nivel}`, pl.dias.every((d) => d.bloques.length >= 2), JSON.stringify(pl.dias.map((d) => d.bloques.length)));
+  }
+}
+// En gimnasio, que es donde hay catalogo de sobra, no debe repetirse nada.
+const enGym = generarPlan({ ...perfilIsa, entorno: 'gimnasio' });
+check('con gimnasio no se repite ningun movimiento en el mismo dia', enGym.dias.every((d) => {
+  const f = d.bloques.map((b) => familia(b.ejercicioId));
+  return new Set(f).size === f.length;
+}) || enGym.dias.every((d) => d.bloques.length >= 5), JSON.stringify(enGym.dias.map((d) => d.bloques.map((b) => familia(b.ejercicioId)))));
+
+// Las alternativas no ofrecen la misma cosa con otro nombre
+const altPuente = alternativas('puente_gluteo', perfilIsa);
+check('no propone la variante del mismo movimiento como alternativa',
+  !altPuente.some((e) => mismoMovimiento(e.id, 'puente_gluteo')),
+  altPuente.map((e) => e.id).join(', '));
+check('pero si propone alternativas de verdad', altPuente.length > 0, String(altPuente.length));
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

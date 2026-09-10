@@ -363,3 +363,43 @@ export function emparejarEjercicio(nombre: string): { id: string; nombre: string
   if (mejor && mejor.puntos >= 2) return { id: mejor.id, nombre: mejor.nombre, enCatalogo: true };
   return { id: `libre_${objetivo.replace(/ /g, '_').slice(0, 40)}`, nombre: nombre.trim(), enCatalogo: false };
 }
+
+/**
+ * Ejercicios que son el mismo movimiento con otra forma.
+ *
+ * Existe porque el generador descartaba repetidos por id, y "puente de gluteo"
+ * y "puente de gluteo a una pierna" tienen ids distintos y hasta patrones
+ * distintos: acababan los dos en la misma sesion, uno detras de otro. Para
+ * quien entrena eso es el mismo ejercicio dos veces.
+ *
+ * Solo se agrupa lo que de verdad canta junto. Sentadilla y prensa, o press
+ * plano y press inclinado, se programan juntos a diario y NO van aqui.
+ */
+const FAMILIAS: Record<string, string[]> = {
+  press_banca: ['press_banca', 'press_banca_mancuernas', 'press_maquina_pecho', 'flexiones'],
+  press_hombro: ['press_militar_barra', 'press_hombro_mancuernas', 'press_arnold', 'press_maquina_hombro', 'flexiones_pica'],
+  remo: ['remo_barra', 'remo_mancuerna', 'remo_polea', 'remo_maquina', 'remo_invertido'],
+  jalon: ['dominadas', 'dominadas_asistidas', 'jalon_polea'],
+  sentadilla: ['sentadilla_barra', 'sentadilla_goblet', 'sentadilla_peso_corporal'],
+  zancada: ['sentadilla_bulgara', 'zancadas', 'step_up'],
+  bisagra: ['peso_muerto', 'peso_muerto_rumano', 'peso_muerto_una_pierna', 'buenos_dias'],
+  puente_gluteo: ['puente_gluteo', 'puente_gluteo_una_pierna', 'hip_thrust'],
+  curl_biceps: ['curl_barra', 'curl_mancuernas', 'curl_martillo'],
+  extension_triceps: ['extension_polea', 'press_frances', 'patada_triceps', 'fondos_banco'],
+  gemelo: ['elevacion_talones', 'elevacion_talones_sentado'],
+  apertura: ['aperturas_polea', 'aperturas_mancuernas'],
+};
+
+const DE_FAMILIA = new Map<string, string>(
+  Object.entries(FAMILIAS).flatMap(([familia, ids]) => ids.map((id) => [id, familia] as [string, string])),
+);
+
+/** La familia de un ejercicio. Los que no tienen variantes son familia de uno. */
+export function familia(ejercicioId: string): string {
+  return DE_FAMILIA.get(ejercicioId) ?? ejercicioId;
+}
+
+/** true si son el mismo movimiento con distinto material o a una pierna. */
+export function mismoMovimiento(a: string, b: string): boolean {
+  return a !== b && familia(a) === familia(b);
+}

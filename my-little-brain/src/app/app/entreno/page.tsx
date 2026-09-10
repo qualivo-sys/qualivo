@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { regenerarPlan } from '@/app/app/acciones';
+import { cambiarEjercicioPlan, regenerarPlan } from '@/app/app/acciones';
 import PremioEntreno from '@/components/premio-entreno';
 import RegistroEntreno, { type BloqueVista, type OpcionCatalogo } from '@/components/registro-entreno';
-import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { Barra, Boton, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarPanel, cargarSesionesMotor } from '@/lib/datos';
 import { diasEntre, sumarDias } from '@/lib/fechas';
 import { EJERCICIOS, ejercicio } from '@/lib/motor/ejercicios';
-import { esIsometrico, planDesactualizado, volumenSemanal } from '@/lib/motor/planificador';
+import { alternativas, esIsometrico, planDesactualizado, volumenSemanal } from '@/lib/motor/planificador';
 import { proximoDia, sugerencia } from '@/lib/motor/progresion';
 import { medir } from '@/lib/motor/objetivos';
 import { perfilEntreno } from '@/lib/perfil';
@@ -111,6 +111,18 @@ export default async function PaginaEntreno({
     };
   })();
   const maxVolumen = Math.max(...volumen.map((v) => v.series), 1);
+
+  // Alternativas para cada ejercicio del dia, para poder cambiarlo sin pasar
+  // por el coach. Se excluye lo que ya esta ese dia: cambiarlo por algo que ya
+  // haces no arregla nada.
+  const enElDia = diaSeleccionado.bloques.map((b) => b.ejercicioId);
+  const cambios = datosPerfil
+    ? diaSeleccionado.bloques.map((b) => ({
+        id: b.ejercicioId,
+        nombre: ejercicio(b.ejercicioId)?.nombre ?? b.ejercicioId,
+        opciones: alternativas(b.ejercicioId, datosPerfil, enElDia).slice(0, 6),
+      })).filter((c) => c.opciones.length)
+    : [];
 
   return (
     <main className="space-y-4">
@@ -241,6 +253,36 @@ export default async function PaginaEntreno({
               <>Te {faltaEntrenos.faltan === 1 ? 'falta' : 'faltan'} <strong>{faltaEntrenos.faltan}</strong> para tu objetivo.</>
             )}
           </p>
+        </Tarjeta>
+      )}
+
+      {cambios.length > 0 && (
+        <Tarjeta>
+          <TituloTarjeta>Cambiar un ejercicio</TituloTarjeta>
+          <p className="mb-3 text-sm text-muted-foreground">
+            Si alguno no te sale, no tienes la maquina o simplemente no te gusta. Se cambia en todos los dias donde
+            salga y se queda guardado.
+          </p>
+          <ul className="divide-y divide-border">
+            {cambios.map((c) => (
+              <li key={c.id} className="py-2">
+                <details>
+                  <summary className="flex cursor-pointer items-center justify-between gap-2 text-sm marker:content-['']">
+                    <span className="min-w-0 truncate">{c.nombre}</span>
+                    <span className="shrink-0 text-xs text-primary">Cambiar</span>
+                  </summary>
+                  <form action={cambiarEjercicioPlan.bind(null, c.id)} className="mt-2 flex gap-2">
+                    <Selector etiqueta="" name="nuevo" className="flex-1" aria-label={`Cambiar ${c.nombre} por`}>
+                      {c.opciones.map((o) => (
+                        <option key={o.id} value={o.id}>{o.nombre}</option>
+                      ))}
+                    </Selector>
+                    <Boton type="submit" variante="secundario">Cambiar</Boton>
+                  </form>
+                </details>
+              </li>
+            ))}
+          </ul>
         </Tarjeta>
       )}
 
