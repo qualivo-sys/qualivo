@@ -133,6 +133,18 @@ Se dice antes de empezar, y es la mitad de la fuerza de la oferta: **si al día 
 
 No hay ningún caso todavía de "agentizamos un proceso y pasó esto": los cuatro que hay son de growth. Por eso, en el acuerdo del primer piloto: el número se define antes de empezar, se mide antes y después, y se pide **permiso para publicarlo** con nombre o sin él. Ese caso vale más que los honorarios del piloto.
 
+## 8 quater. Inventario real de agentes, para no prometer de más
+
+El catálogo de agentes se enseña en la reunión: es la prueba de profundidad y es lo que ha hecho decir "pruébalo" a cuatro compradores. Pero **Ventas y Maikel tienen que saber qué está corriendo hoy y qué es promesa**, porque "estos ocho funcionan en mi propia empresa desde esta mañana" convence más que una lista de trece nombres.
+
+**Funcionando hoy (se pueden enseñar en vivo):** SDR de outbound (carga diaria, sonda de webs, triaje de respuestas, redacción de secuencias) · agente de llamadas por voz (Vapi, 16 llamadas reales) · SDR de respuestas en copiloto · agente de seguimientos (encontró 25 oportunidades paradas y 34.500 € en el CRM de Qualivo en su primera pasada) · agente de reactivación de base de datos · secuencia post-Radiografía días 1, 3 y 7 · máquina de contenido y SEO · el cerebro que coordina y reporta.
+
+**Existe el patrón, falta el cliente (se adapta dentro de un piloto):** conversacional por WhatsApp (contrato escrito, hoy en copiloto) · inteligencia y priorización de leads (la puntuación de señal 0-100 ya está viva).
+
+**Habría que construirlo (no prometer plazo sin cotizarlo):** paid intelligence · SEO intelligence · creatividad y test de ángulos · landing y CRO · revenue intelligence completo (existe el embudo multicanal diario, falta la atribución a revenue).
+
+Regla: si en una reunión alguien señala uno del tercer grupo, se dice que se construye dentro del piloto y se cotiza. Nunca se da por hecho.
+
 ## 9. Lo que no decimos
 
 Nunca: "transformación digital" · "IA" como argumento en frío · "somos una agencia de X" · precios en frío o en la web · el piloto de riesgo compartido en abierto · promesas de resultado sin datos del cliente · la palabra "agentizar" a quien todavía no sabe que tiene un problema.
