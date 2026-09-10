@@ -105,3 +105,36 @@ subir el recurrente de 4.100 € a 6.800 €.
 1. **El bucle semanal no cierra** → se ejecuta sin corregir el rumbo. (H2)
 2. **Outbound/SDR concentra 4 funciones** → tapón en `Account → Conversation → Meeting`, sin poder medir dónde se rompe. (H5)
 3. **La atención de Maikel es el único aprobador** → todo lo 🟡 y 🔴 espera a una persona, y no hay mecanismo para que la autonomía crezca con el tiempo. (Ver Anexo A del prompt)
+
+---
+
+## H10 · CONFLICT · Hay dos ofertas escritas al mismo tiempo
+
+Detectado el 10-sep al revisar el agente de ofertas. **Es el hallazgo con más consecuencias
+comerciales de todos.**
+
+| Fuente | Fecha | Entrada | Núcleo |
+|---|---|---|---|
+| `sistema/cerebro.md`, matriz **obligatoria** | 8-sep | Radiografía del crecimiento, gratis, 90 s | Growth System, 1.000-2.500 €/mes. *"Nada más en la carta"* |
+| Sesión de ofertas | 10-sep | **Leak Map** como producto de entrada | posicionamiento de **24.000 €**, nicho pyme, validación en 14 días |
+
+Las dos no pueden ser ciertas a la vez. Y mientras tanto seis agentes están leyendo la primera:
+Content escribe con ella, Outbound manda copy con ella, el SDR responde con ella, Sales propone
+con ella.
+
+**Aviso de precisión:** he leído el resumen de la sesión de ofertas, no su contenido completo.
+Puede que sea exploración sin cerrar. Pero eso no cambia el riesgo: hay dos documentos de oferta y
+seis agentes leyendo el viejo.
+
+**Es H4 repitiéndose**, ahora sobre el activo más importante que tiene Qualivo. La deuda de
+memoria no aparece por descuido, aparece cada vez que se trabaja en paralelo sin una regla de
+precedencia.
+
+**Resolución, y solo hay dos caminos.**
+
+| Si la oferta nueva está decidida | Si sigue siendo exploración |
+|---|---|
+| Maikel la firma, se actualiza la matriz de la Estrategia Central, y el Cerebro avisa a los seis el mismo día | Se marca explícitamente como borrador, y la matriz del 8-sep sigue siendo la única válida |
+
+Lo que no se puede hacer es dejarlo como está. Un mes vendiendo dos cosas distintas cuesta más que
+cualquier fallo técnico de esta lista.

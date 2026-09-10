@@ -183,6 +183,31 @@
         "cambio": "mandato ampliado: salud, secretos, workflows, mapa n8n, integridad del repo"
       },
       "session_title": "Agente de Automatización Qualivo"
+    },
+    {
+      "agent_id": "qualivo.paid",
+      "name": "Paid Media",
+      "system": "demand",
+      "owns": "Presupuesto -> Trafico cualificado",
+      "does_not_own": [
+        "web y conversion",
+        "el mensaje",
+        "gastar"
+      ],
+      "kpis": [
+        "coste_por_lead_cualificado",
+        "pct_presupuesto_en_ganadoras",
+        "experimentos_cerrados_mes",
+        "angulos_devueltos"
+      ],
+      "attention_cost_week": 2,
+      "session_id": null,
+      "guardrail": "construye en PAUSADO; activar, subir presupuesto y cambiar pujas son de Maikel, siempre. Pausar y excluir si son autonomos porque frenar es reversible",
+      "migration": {
+        "action": "REBUILD",
+        "estado": "dormido para Qualivo, vivo para clientes en Agente Adigital",
+        "enciende_cuando": "Meta con 7 dias de datos + impresiones BOFU en Search Console + financiado por un cobro nuevo"
+      }
     }
   ],
   "not_yet": [
@@ -209,10 +234,6 @@
       "agent_id": "revenue.intelligence",
       "desbloquea": "8 semanas seguidas de Weekly Review",
       "mientras_tanto": "cuadro de mando"
-    },
-    {
-      "agent_id": "demand.paid",
-      "desbloquea": "presupuesto propio de Qualivo en Google Ads o Meta"
     },
     {
       "agent_id": "delivery",
@@ -270,5 +291,15 @@
     "estado": "parcial",
     "pendiente": "5 rutinas y sistema/cerebro.md siguen nombrando sesiones por su titulo antiguo",
     "riesgo": "las rutinas siguen despertando la sesion correcta porque van por session_id, pero su texto manda buscar nombres que ya no existen"
-  }
+  },
+  "talleres": [
+    {
+      "nombre": "Agente de ofertas",
+      "tipo": "TALLER, no agente",
+      "motivo": "no posee transicion ni KPI; la oferta es un input, no un output",
+      "salida": "la oferta firmada entra en la Estrategia Central y se cierra",
+      "adr": "ADR-008",
+      "conflicto_abierto": "H10 · dos ofertas escritas a la vez, seis agentes leyendo la del 8-sep"
+    }
+  ]
 }
