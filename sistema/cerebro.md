@@ -38,7 +38,21 @@ El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madr
 - **Modo caja estricto**: la caja libre operativa es mínima (la mayor parte del saldo está reservada para impuestos). Ningún gasto nuevo sin pasar por el cerebro. Decisión de financiación congelada hasta **noviembre**.
 - Ingresos recurrentes actuales: Equipzilla 2.040 € nómina (sube a ~2.850 € en octubre) + EAC 800 € + Eleva 400-500 €. Fase actual: estancamiento, no crisis — la misión es el siguiente cliente.
 
-## Posicionamiento en 10 segundos (8 sep 2026) — MATRIZ OBLIGATORIA
+## Posicionamiento · DEROGADO el 10-sep
+
+> ⛔ **La matriz obligatoria del 8-sep queda derogada.** El único documento válido es
+> **`sistema/propuesta-valor.md` (V2, 10-sep)** en la rama `claude/quipu-billing-dashboard-g2s2ap`.
+> Lo edita solo el cerebro. El espejo de `main:sistema/propuesta-de-valor.md` lo publica la sesión
+> de Arquitectura a partir de ese fichero; si difieren, manda el de esta rama.
+> Lo de abajo se conserva como histórico y **no se usa**.
+
+### Tres reglas que resuelven los conflictos abiertos (10-sep)
+
+1. **Tamaño de empresa: 5 a 50 personas, en todas partes.** Deroga el "2 a 20" del Radar IA diario y del texto de la Radiografía. Motivo: por debajo de 5 no hay ni volumen para que agentizar tenga retorno ni capacidad de atender más negocio. Los 18 ICPs del OUTBOUND BRAIN no compiten con esto: son candidatos, y el filtro de tamaño y capacidad se aplica encima de cualquiera de ellos.
+2. **Suelo de 500 €/mes de inversión en captación, medios incluidos**, como criterio de descarte en cualificación. Ya estaba en la estrategia central §1.2 pero no en un sitio donde Outbound y el SDR lo vieran. Ahora es regla de cualificación.
+3. **Nunca precio en frío ni en la web.** Deroga el "Growth System 1.000-2.500 €/mes" de la matriz vieja. Landing revisa la web y lo quita si aparece.
+
+## Histórico · Posicionamiento en 10 segundos (8 sep 2026) — DEROGADO
 
 Todo mensaje, secuencia, post, anuncio, propuesta y respuesta se alinea a esto. Si un tramo no cabe en la frase, sobra el tramo.
 
