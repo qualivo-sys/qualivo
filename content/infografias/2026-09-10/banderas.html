@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.page{width:1080px;height:1350px;position:relative;background:#0A0A0B;overflow:hidden;font-family:SG;color:#F2EEE6;margin:0 auto}
+.page::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(242,238,230,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.028) 1px,transparent 1px);background-size:90px 90px}
+.kick{position:absolute;top:50px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.tit{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:72px;line-height:1;text-transform:uppercase}
+.nar{color:#E8590C}
+.cab{position:absolute;top:262px;left:56px;right:56px;display:grid;grid-template-columns:150px 1fr 1fr;gap:0 22px;font-size:17px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:rgba(242,238,230,.45)}
+.cab .r{color:#E8590C}
+.filas{position:absolute;top:304px;left:56px;right:56px}
+.fila{display:grid;grid-template-columns:150px 1fr 1fr;gap:0 22px;align-items:start;padding:20px 0 18px;border-top:1px solid rgba(242,238,230,.12)}
+.fila .et{font-family:Anton;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:#F2EEE6;line-height:1.1;padding-top:3px}
+.fila .r,.fila .v{font-size:23px;line-height:1.36;padding-left:34px;position:relative}
+.fila .r{color:#F2EEE6}
+.fila .v{color:rgba(242,238,230,.72)}
+.fila .r::before{content:'';position:absolute;left:0;top:6px;width:16px;height:16px;background:#E8590C;clip-path:polygon(0 0,100% 30%,0 60%);transform:scale(1.35);transform-origin:left top}
+.fila .v::before{content:'✓';position:absolute;left:0;top:-1px;font-size:22px;font-weight:700;color:#F2EEE6;opacity:.75}
+.pie{position:absolute;bottom:118px;left:56px;right:56px;border-top:2px solid #E8590C;padding-top:26px;font-size:27px;line-height:1.4}
+.pie b{color:#F2EEE6;font-weight:700}
+.firma{position:absolute;bottom:46px;left:56px;font-size:23px;letter-spacing:.05em;color:rgba(242,238,230,.55)}
+.web{position:absolute;bottom:46px;right:56px;font-family:Anton;font-size:26px;letter-spacing:.04em;color:#E8590C}
+</style></head><body>
+<div class="page">
+  <div class="kick">Tu proceso de ventas, etapa por etapa</div>
+  <div class="tit">Bandera roja<span class="nar">.</span><br>Bandera verde<span class="nar">.</span></div>
+  <div class="cab"><span></span><span class="r">🚩 Rojo</span><span>Verde</span></div>
+  <div class="filas">
+    <div class="fila"><div class="et">Anuncios</div><div class="r">Mides leads, no clientes.</div><div class="v">Sabes qué anuncio trajo al último que pagó.</div></div>
+    <div class="fila"><div class="et">Contenido</div><div class="r">Publicas para que te vean.</div><div class="v">Publicas lo que busca el que ya tiene el problema.</div></div>
+    <div class="fila"><div class="et">Tu página</div><div class="r">Dice lo que haces.</div><div class="v">Dice a quién le pasa qué.</div></div>
+    <div class="fila"><div class="et">Primer contacto</div><div class="r">Contestas en unas horas.</div><div class="v">Contestas en minutos, sin que nadie esté delante.</div></div>
+    <div class="fila"><div class="et">Seguimiento</div><div class="r">Mandas el presupuesto y esperas.</div><div class="v">Cada presupuesto tiene fecha y dueño.</div></div>
+    <div class="fila"><div class="et">Clientes</div><div class="r">El que compró no vuelve a saber de ti.</div><div class="v">Vuelves a los que dijeron «ahora no».</div></div>
+    <div class="fila"><div class="et">Medición</div><div class="r">No sabes de dónde vino el último cliente.</div><div class="v">Lo sabes antes de recortar nada.</div></div>
+  </div>
+  <div class="pie"><b>Miramos el proceso entero, de la captación a la venta.</b> Y metemos IA justo donde está la bandera roja, sin cambiar de CRM, ni de web, ni de agencia.</div>
+  <div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div>
+</div>
+</body></html>
