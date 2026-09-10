@@ -565,3 +565,5 @@ iniciado. Negativas nuevas: google enterprise, apply ai, startups/startup, consu
 Ejecutado por el planificador a las 09:00 Madrid: `OT26_Search` → PAUSED. Toda la cuenta en
 pausa. Pendiente: confirmación de Noé/Aída del fin de la migración → reactivar Search y
 restaurar la franja del jueves (07–22 h) si la confirmación llega antes de las 14:00.
+**10-09, tras la migración:** Maikel confirma que está resuelto → `OT26_Search` reactivada y
+franja del jueves restaurada a 07–22 h. Landing y formulario responden 200.
