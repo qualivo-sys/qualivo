@@ -1,0 +1,126 @@
+{
+  "$schema": "./05-protocols/agent-card.schema.json",
+  "version": "1.0-draft",
+  "generated": "2026-09-10",
+  "generated_by": "session_01LUAyjXErmSduvTZQjv8Frk (Arquitectura de agentes Qualivo)",
+  "note": "Sustituye la tabla 'Quien es quien' de sistema/cerebro.md, que a 10-sep-2026 tiene tres copias divergentes. Los campos marcados UNKNOWN se completan en Fase 1 con la ficha que devuelve cada agente.",
+  "agents": [
+    {
+      "agent_id": "qualivo.brain",
+      "name": "Cerebro",
+      "system": "command",
+      "scope": "qualivo",
+      "session_id": "session_014JU3v9jX3ErSbc6ZSTe5wa",
+      "session_title": "Quipu billing dashboard 2025-2026",
+      "branch": "claude/quipu-billing-dashboard-g2s2ap",
+      "owns": "Strategy -> Prioritization -> Orchestration",
+      "does_not_own": ["ejecucion especializada de cualquier sistema"],
+      "routines": [
+        {"name": "Daily 9:30 · Revision de agentes", "cron": "30 7 * * 1-5", "health": "ok"},
+        {"name": "Lunes · Weekly Plan", "cron": "0 7 * * 1", "health": "NUNCA EJECUTADA"},
+        {"name": "Viernes · Weekly Review + CEO Brief", "cron": "0 13 * * 5", "health": "NUNCA EJECUTADA"},
+        {"name": "Dia 1 · Cierre financiero", "cron": "0 6 1 * *", "health": "sin registro"},
+        {"name": "Timbre Outbound -> Cerebro", "cron": "POKE", "health": "nunca disparada"}
+      ],
+      "kpis": ["UNKNOWN"],
+      "memory": ["sistema/cerebro.md", "Google Doc Estrategia Central v1", "Google Sheet caja 12m", "Notion Sala de Mando"],
+      "permissions": {"green": ["diagnosticar", "priorizar", "crear tareas"], "yellow": ["reasignar trabajo entre agentes"], "red": ["gasto", "campana", "financiacion"]},
+      "attention_cost_week": "UNKNOWN",
+      "status": "active",
+      "issues": ["4 de 5 rutinas no se ejecutan", "concentra Brain + Finance + Operations"]
+    },
+    {
+      "agent_id": "qualivo.outbound",
+      "name": "Outbound / SDR / Voz",
+      "system": "revenue",
+      "scope": "qualivo",
+      "session_id": "session_01CQu7vwR41PJkVKgtfbSEo4",
+      "session_title": "Client acquisition strategy",
+      "branch": "claude/client-acquisition-ideas-k00f5d",
+      "owns": "CONFLICT: Account -> Conversation + Conversation -> Meeting + infraestructura telefonia",
+      "does_not_own": ["UNKNOWN"],
+      "routines": [
+        {"name": "Carga diaria de leads", "cron": "30 5 * * 1-5", "health": "ok"},
+        {"name": "Agente SDR autonomo", "cron": "0 6 * * 1-5", "health": "ok"},
+        {"name": "Triaje de respuestas", "cron": "30 7 * * 1-5", "health": "ok"},
+        {"name": "Guardian reenvios Smartlead", "cron": "0 10 * * 1-5", "health": "ok"},
+        {"name": "Reporte diario de envios", "cron": "30 15 * * 1-5", "health": "ok"},
+        {"name": "Informe de los lunes", "cron": "0 7 * * 1", "health": "NUNCA EJECUTADA"},
+        {"name": "Parte ronda 1 Raquel", "cron": "POKE", "health": "nunca disparada"},
+        {"name": "Check bundle Twilio v2", "cron": "POKE", "health": "nunca disparada"},
+        {"name": "Documento Madre ICP", "cron": "POKE", "health": "nunca disparada"},
+        {"name": "Timbre Cerebro -> Outbound", "cron": "POKE", "health": "nunca disparada"}
+      ],
+      "kpis": [{"name": "reuniones_cualificadas", "source": "captacion/datos/funnel-diario.csv"}],
+      "memory": ["Notion OUTBOUND BRAIN", "estrategia/outbound-brain.md", "captacion/"],
+      "tools": ["Smartlead", "Apollo", "HeyReach", "Vapi", "Twilio", "GoHighLevel"],
+      "attention_cost_week": "UNKNOWN",
+      "status": "active",
+      "issues": ["43% de todas las rutinas de Qualivo", "4 funciones en un solo agente", "claves en scratchpad efimero"]
+    },
+    {
+      "agent_id": "qualivo.growth",
+      "name": "Growth / Landing / Contenido",
+      "system": "demand",
+      "scope": "qualivo",
+      "session_id": "session_01GcrdLXcbaEyggvw8NbrHLL",
+      "session_title": "Landing Qualivo.io en Vercel",
+      "branch": "claude/qualivo-landing-vercel-nubk1i",
+      "owns": "CONFLICT: Traffic -> Lead + Search -> Traffic + produccion de contenido",
+      "does_not_own": ["UNKNOWN"],
+      "routines": [
+        {"name": "Content machine diaria", "cron": "15 5 * * 1-5", "health": "ok"},
+        {"name": "Radar IA diario", "cron": "0 4 * * *", "health": "ok"},
+        {"name": "Growth Review semanal", "cron": "0 6 * * 1", "health": "NUNCA EJECUTADA"},
+        {"name": "Canal cerebro -> Landing", "cron": "POKE", "health": "nunca disparada"}
+      ],
+      "kpis": [{"name": "radiografias_completadas", "source": "web-diario.csv"}],
+      "tools": ["Vercel", "Resend", "GoHighLevel", "Search Console", "GA4"],
+      "attention_cost_week": "UNKNOWN",
+      "status": "active",
+      "issues": ["3 funciones en un solo agente", "275 commits sin integrar"]
+    },
+    {
+      "agent_id": "qualivo.ventas",
+      "name": "Ventas / Closer",
+      "system": "revenue",
+      "scope": "qualivo",
+      "session_id": "session_01EsVfarsm7LwubAYY6Kis9s",
+      "session_title": "Agente de Ventas Qualivo",
+      "branch": "claude/qualivo-agente-ventas-sq3vnt",
+      "owns": "Meeting -> Proposal -> Customer",
+      "routines": [{"name": "Campana reactivacion cartera + subidas de precio", "cron": "POKE", "health": "nunca disparada"}],
+      "memory": ["ventas/pipeline.md", "copia CONGELADA de sistema/cerebro.md (63 de 103 lineas)"],
+      "status": "chartered_not_operating",
+      "issues": ["Maikel no usa la sesion (10-sep)", "encargo de maxima prioridad sin ejecutar: 4.100 -> 6.800 EUR/mes", "constitucion desactualizada"],
+      "decision_required": "KEEP / MERGE en qualivo.brain / RETIRE"
+    },
+    {
+      "agent_id": "qualivo.automatizacion",
+      "name": "Automatizacion",
+      "system": "operations",
+      "scope": "qualivo",
+      "session_id": "session_01DAmUZHTVFxPG37QyuAMQvr",
+      "session_title": "Agente de Automatizacion Qualivo",
+      "branch": "claude/qualivo-automatizaciones-b7k2m9",
+      "owns": "Proceso manual -> Workflow",
+      "routines": [{"name": "Timbre Cerebro -> Automatizacion", "cron": "POKE", "health": "1 disparo 09-sep"}],
+      "memory": ["automatizaciones/", "copia CONGELADA de sistema/cerebro.md (57 de 103 lineas)"],
+      "status": "chartered_not_operating",
+      "issues": ["Maikel no usa la sesion (10-sep)", "mapa-n8n.md pendiente y bloquea otras decisiones"],
+      "decision_required": "KEEP / MERGE / RETIRE"
+    }
+  ],
+  "client_agents": [
+    {"agent_id": "client.eac", "session_title": "EAC metrics dashboard", "branch": "claude/eac-metrics-dashboard-qx7fkh", "scope": "eac", "routines": 0, "note": "esta rama es la rama por defecto del repo, probablemente por error"},
+    {"agent_id": "client.eleva", "session_title": "Eleva Academy metrics dashboard", "branch": "claude/eleva-academy-metrics-jm8msg", "scope": "eleva", "routines": 0},
+    {"agent_id": "client.outthink", "session_title": "Google Ads expert prompt", "branch": "claude/google-ads-expert-prompt-uqmo9m", "scope": "outthink", "routines": 0},
+    {"agent_id": "client.focus", "session_title": "Focus Practical ad campaign", "branch": "claude/focus-practical-ad-campaign-ltbqnk", "scope": "focus", "routines": 1}
+  ],
+  "orphan_ownership": [
+    "Lead -> Qualified Lead: sin owner declarado",
+    "Customer -> Retention / Expansion: sin owner",
+    "Delivery de clientes: sin owner en el Internal OS",
+    "Observabilidad y salud de agentes: sin owner"
+  ]
+}
