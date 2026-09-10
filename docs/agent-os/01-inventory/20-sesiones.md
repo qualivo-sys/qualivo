@@ -8,9 +8,9 @@ Confirmado por: tienen rutinas programadas + rama propia + están en `sistema/ce
 
 | Sesión | Función real | Rama | Rutinas | Estado |
 |---|---|---|---|---|
-| **Quipu billing dashboard 2025-2026** | **EL CEREBRO** (CEO advisor / COO / CFO / orquestador) | `claude/quipu-billing-dashboard-g2s2ap` | 5 | IDLE, activa hoy |
-| **Client acquisition strategy** | Outbound + SDR + Voz (Raquel) + infra Twilio + guardián Smartlead | `claude/client-acquisition-ideas-k00f5d` | **10** | IDLE, activa hoy |
-| **Landing Qualivo.io en Vercel** | Growth + Landing + Contenido + SEO + Radar IA | `claude/qualivo-landing-vercel-nubk1i` | 4 | IDLE, activa hoy |
+| **CEO Agent** (antes "Quipu billing dashboard 2025-2026") | **EL CEREBRO** (CEO advisor / COO / CFO / orquestador) | `claude/quipu-billing-dashboard-g2s2ap` | 5 | IDLE, activa hoy |
+| **Agente Outbound** (antes "Client acquisition strategy") | Outbound + SDR + Voz (Raquel) + infra Twilio + guardián Smartlead | `claude/client-acquisition-ideas-k00f5d` | **10** | IDLE, activa hoy |
+| **Agente growth** (antes "Landing Qualivo.io en Vercel") | Growth + Landing + Contenido + SEO + Radar IA | `claude/qualivo-landing-vercel-nubk1i` | 4 | IDLE, activa hoy |
 
 ## B.2 Sesiones que el Cerebro tiene fichadas pero Maikel NO usa
 

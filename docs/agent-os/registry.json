@@ -33,7 +33,8 @@
         "action": "MODIFY",
         "estado": "activo",
         "cambio": "suelta el polling de sesiones y absorbe Finance como rutina, no como agente"
-      }
+      },
+      "session_title": "CEO Agent"
     },
     {
       "agent_id": "qualivo.outbound",
@@ -57,7 +58,8 @@
         "action": "MODIFY",
         "estado": "activo con 10 rutinas",
         "cambio": "cede triaje, WhatsApp y voz al SDR; cede telefonia a Ops"
-      }
+      },
+      "session_title": "Agente Outbound"
     },
     {
       "agent_id": "qualivo.sdr",
@@ -108,7 +110,8 @@
         "action": "MODIFY",
         "estado": "activo",
         "cambio": "cede contenido y Radar a Content; pasa a cadencia semanal"
-      }
+      },
+      "session_title": "Agente growth"
     },
     {
       "agent_id": "qualivo.content",
@@ -154,7 +157,8 @@
         "action": "MODIFY",
         "estado": "fichado sin operar",
         "cambio": "de closer a copiloto; recupera el encargo 4.100 -> 6.800 EUR/mes"
-      }
+      },
+      "session_title": "Agente de Ventas Qualivo"
     },
     {
       "agent_id": "qualivo.ops",
@@ -177,7 +181,8 @@
         "action": "MODIFY",
         "estado": "fichado sin operar",
         "cambio": "mandato ampliado: salud, secretos, workflows, mapa n8n, integridad del repo"
-      }
+      },
+      "session_title": "Agente de Automatización Qualivo"
     }
   ],
   "not_yet": [
@@ -232,5 +237,38 @@
     "firma": "Maikel en el Weekly Review",
     "degradacion": "una sola correccion vuelve a amarillo",
     "nunca_promociona": "irreversible"
+  },
+  "client_agents": [
+    {
+      "agent_id": "client.eac",
+      "session_title": "Agente EAC",
+      "branch": "claude/eac-metrics-dashboard-qx7fkh",
+      "scope": "eac"
+    },
+    {
+      "agent_id": "client.eleva",
+      "session_title": "Agente Eleva",
+      "branch": "claude/eleva-academy-metrics-jm8msg",
+      "scope": "eleva"
+    },
+    {
+      "agent_id": "client.adigital",
+      "session_title": "Agente Adigital",
+      "branch": "claude/google-ads-expert-prompt-uqmo9m",
+      "scope": "adigital",
+      "nota": "Google Ads sobre la cuenta 918-811-5388 de OutThink. UNKNOWN: si Adigital y OutThink son el mismo cliente"
+    },
+    {
+      "agent_id": "client.focus",
+      "session_title": "Focus Practical ad campaign",
+      "branch": "claude/focus-practical-ad-campaign-ltbqnk",
+      "scope": "focus"
+    }
+  ],
+  "renombrado_2026_09_10": {
+    "hecho_por": "Maikel",
+    "estado": "parcial",
+    "pendiente": "5 rutinas y sistema/cerebro.md siguen nombrando sesiones por su titulo antiguo",
+    "riesgo": "las rutinas siguen despertando la sesion correcta porque van por session_id, pero su texto manda buscar nombres que ya no existen"
   }
 }

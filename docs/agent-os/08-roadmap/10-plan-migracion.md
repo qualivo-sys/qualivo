@@ -66,21 +66,36 @@ de precio, de 4.100 a 6.800 €/mes.
 
 ## Paso 7 · Renombrar sesiones y retirar `cerebro.md`
 
-Renombrar en el mismo movimiento las sesiones **y** los prompts de las rutinas que las nombran por
-título, porque la rutina diaria del Cerebro busca "Client acquisition strategy" literalmente.
+**Estado: hecho a medias el 10-sep.** Maikel renombró las sesiones. Los nombres nuevos son mejores
+que los que yo proponía, así que se adoptan:
 
-| Ahora | Después |
+| Antes | Ahora | Agente del diseño |
+|---|---|---|
+| Quipu billing dashboard 2025-2026 | **CEO Agent** | Cerebro |
+| Client acquisition strategy | **Agente Outbound** | Outbound, y de ahí sale SDR |
+| Landing Qualivo.io en Vercel | **Agente growth** | Demand, y de ahí sale Content |
+| Google Ads expert prompt | **Agente Adigital** | cliente |
+| EAC metrics dashboard | **Agente EAC** | cliente |
+| Eleva Academy metrics dashboard | **Agente Eleva** | cliente |
+
+**Falta la otra mitad, y es la que rompe cosas.** Cinco rutinas y `sistema/cerebro.md` siguen
+nombrando las sesiones por su título antiguo:
+
+| Qué | Nombra a |
 |---|---|
-| Quipu billing dashboard 2025-2026 | Qualivo · Cerebro |
-| Client acquisition strategy | Qualivo · Outbound |
-| Landing Qualivo.io en Vercel | Qualivo · Demand |
-| Agente de Ventas Qualivo | Qualivo · Sales |
-| Agente de Automatización Qualivo | Qualivo · Ops |
+| Daily 9:30 · Revisión de agentes | Agente Outbound, Agente growth |
+| Timbre Cerebro → Outbound | CEO Agent |
+| Timbre Outbound → Cerebro | Agente Outbound |
+| Canal cerebro → Landing/Growth | CEO Agent |
+| Outbound · Documento Madre | CEO Agent |
+| `sistema/cerebro.md`, tabla Quién es quién | las seis |
+
+Las rutinas **siguen despertando a la sesión correcta**, porque van por `session_id`. Lo que falla
+es el texto: la revisión diaria del CEO Agent le dice que busque "Client acquisition strategy" y
+"Landing Qualivo.io en Vercel", que ya no existen. El fallo no es ruidoso, es silencioso: reporta
+que no hay novedades. Es el mismo patrón del hallazgo H2.
 
 Y solo entonces borrar las tres copias de `cerebro.md`.
-
-Rompe: **la revisión diaria del Cerebro, si se renombra sin actualizar los prompts.** Por eso va
-al final y en un solo movimiento.
 
 ## Paso 8 · Client OS
 
