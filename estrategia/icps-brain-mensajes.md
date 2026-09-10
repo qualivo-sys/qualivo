@@ -1,3 +1,57 @@
+# Mensajes por ICP · alineados a la Propuesta de Valor V1 (10-sep)
+
+> DESDE EL 10-SEP los emails 1 se generan con las plantillas V1 de abajo
+> (ver estrategia/propuesta-valor-v1.md). Regla de oro: señal verificada →
+> "lo que depende de que alguien se acuerde" → UN caso (el más parecido) →
+> pregunta fácil o plan por escrito gratis en 48 h. Prohibido: "IA" en frío,
+> precios, "agentizar", y todo lo del Brain. Filtro ICP V1: servicios 5-50
+> personas, con piezas (web/campañas + CRM + alguien que vende), ticket
+> >1.000 €. Las plantillas antiguas de este doc quedan como histórico.
+
+## PLANTILLAS V1 ACTIVAS (cargas desde el 11-sep)
+
+### ICP15 · Base desaprovechada — asunto: los contactos viejos de [Empresa]
+Hola [Nombre],
+[Empresa] lleva [N] años en el mercado. Eso es una base enorme de clientes y
+contactos que ya os conocen.
+¿Quién los persigue hoy? Lo pregunto porque casi siempre la respuesta es
+"nadie, si nos acordamos".
+A una clienta le hicimos solo eso, perseguir bien lo que ya tenía, sin captar
+un solo lead más: recuperó 6,45 veces lo invertido.
+Si quieres te digo qué habría en vuestra base. Por escrito y gratis, en 48
+horas.
+Maikel
+
+### ICP08 · CRM sin disciplina — asunto: vuestro [CRM]
+Hola [Nombre],
+Veo que en [Empresa] trabajáis con [CRM]. Una prueba que hago mucho: entrar a
+un CRM y contar cuántos presupuestos abiertos no tienen siguiente paso.
+En el nuestro propio aparecieron 25 oportunidades paradas con 34.500 euros
+declarados. En el primer repaso.
+¿Cuántas habría en el vuestro?
+Si quieres lo miramos y te paso lo que salga por escrito. Gratis, en 48 horas.
+Maikel
+
+### ICP02 · Paid + equipo comercial — asunto: vuestros anuncios
+Hola [Nombre],
+He visto que invertís en anuncios (se ve desde vuestra web).
+La pregunta que casi nadie sabe responder: ¿qué campaña trajo al último
+cliente que firmó? El último cliente, no el último lead.
+A una cuenta que perdía dinero le dimos la vuelta así: de 0,1 a 7,6 de
+retorno, con el mismo presupuesto.
+Puedo mirarlo con vuestros datos y pasártelo por escrito, gratis, en 48 horas.
+Maikel
+
+### Multiservicio (patrón ganador) — SE MANTIENE tal cual (Brain: DOBLAR).
+El cierre pasa a: "Si te apetece, puedo echarle un vistazo a [Empresa] y te
+paso lo que vea por escrito. Gratis, en 48 horas."
+
+### Dirección nueva — SE MANTIENE con cierre V1:
+"Si te sirve, puedo mirarlo desde fuera y pasarte lo que vea por escrito, en
+48 horas. Gratis."
+
+---
+
 # ICPs del Brain · Recetas de búsqueda y mensajes (8-sep-2026)
 
 Desarrollo accionable de los ICPs de la matriz del OUTBOUND BRAIN que aún no
