@@ -30,8 +30,31 @@ Lo mínimo que hay que llevar puesto al escribir:
 - **Prohibido:** «transformación digital», «somos una agencia de X», precios,
   el piloto de riesgo compartido en abierto, prometer resultado sin datos del
   cliente.
-- **Inventario de agentes (§10 de la propuesta):** no prometer nada del grupo
-  «habría que construirlo» como si estuviera funcionando.
+- **Inventario de agentes (§10 de la propuesta):** el catálogo se enseña entero,
+  pero lo que está por construir se etiqueta como tal («en tu piloto»), nunca se
+  da por funcionando.
+
+## PUERTA CERO BIS · La estrategia de contenidos
+
+`content/estrategia-de-contenidos-v1.md`. Lo que hay que llevar puesto:
+
+- **Dos trabajos que no se mezclan.** A: capturar la demanda que ya existe (SEO,
+  síntoma, blog). B: construir la categoría (demostración, formato largo). Toda
+  pieza declara a cuál sirve. Ninguna a los dos.
+- **La jugada nº 1 no es escribir, es re-apuntar.** 19 de los 35 artículos están
+  escritos para el posicionamiento viejo. No se borran ni se reescriben: se
+  cambian los dos últimos párrafos y el CTA. No se toca título, URL, H1 ni el
+  cuerpo que rankea. Se comprueba la posición antes y a las cuatro semanas.
+- **El diario del sistema** es el contenido que nadie puede copiarnos: lo que
+  hacen nuestros agentes en nuestra propia casa, con un dato real verificado por
+  pieza. Sin dato, no hay pieza.
+- **Hueco abierto:** la fuga de dependencia del dueño no tiene ni un artículo, y
+  seguimiento solo tiene uno siendo nuestra mejor prueba.
+- **Una sola salida: la Radiografía.** Ni guías, ni newsletter aparte, ni
+  «reserva una llamada» al final de un artículo.
+- **No se escriben más artículos de canal.** Los 14 que hay se re-apuntan.
+- **La métrica que decide** no son las visitas: son las radiografías completadas
+  y de qué artículo venían.
 
 
 Documento completo: `content/sistema-maestro-contenidos.md` (leerlo antes de
