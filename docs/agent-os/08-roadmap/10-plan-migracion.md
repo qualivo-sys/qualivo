@@ -3,7 +3,20 @@
 Orden por riesgo, no por ilusión. Cada paso dice qué rompe si sale mal y cómo se revierte.
 **Nada de esto se ejecuta sin el visto bueno de Maikel**, porque toca agentes vivos.
 
-## Paso 0 · Reparar el bucle semanal · ANTES QUE NADA
+## Paso 0.A · Auditar las campañas vivas · HOY
+
+Hay dinero de clientes corriendo sin dueño y con fecha de fin el 24-sep (H11). Es lo único del
+plan que tiene un reloj en contra. Lo ejecuta Agente Adigital con las seis preguntas de
+`04-systems/70-paid.md`.
+
+**Criterio de éxito:** `ESTADO.md` al día y un Paid Review con las decisiones que esperan a Maikel.
+
+## Paso 0.B · Resolver qué oferta es la buena · HOY
+
+Dos ofertas escritas a la vez y seis agentes leyendo la vieja (H10). O se firma la nueva y se
+avisa a todos el mismo día, o se marca como borrador y manda la matriz del 8-sep.
+
+## Paso 0.C · Reparar el bucle semanal · ANTES QUE NADA
 
 No tiene sentido diseñar aprendizaje sobre cinco rutinas que llevan un mes sin ejecutarse.
 
@@ -106,7 +119,9 @@ el primer caso porque es el que más código tiene ya escrito.
 
 | Paso | Riesgo | Desbloquea |
 |---|---|---|
-| 0 · bucle semanal | ninguno | que el sistema aprenda |
+| 0.A · auditar campañas | ninguno, solo lee | dejar de gastar a ciegas dinero de un cliente |
+| 0.B · una sola oferta | ninguno | que los seis agentes digan lo mismo |
+| 0.C · bucle semanal | ninguno | que el sistema aprenda |
 | 1 · rama de integración | ninguno | una sola fuente de verdad |
 | 2 · bus | bajo | que el Brain vea sin preguntar |
 | 3 · Ops | ninguno | que nada falle en silencio |

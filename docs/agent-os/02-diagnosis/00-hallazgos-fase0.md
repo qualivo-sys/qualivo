@@ -138,3 +138,53 @@ precedencia.
 
 Lo que no se puede hacer es dejarlo como está. Un mes vendiendo dos cosas distintas cuesta más que
 cualquier fallo técnico de esta lista.
+
+---
+
+## H11 · Hay campañas vivas con dinero de clientes y nadie las gobierna
+
+Corrección de un error mío. Escribí que Paid estaba dormido porque Qualivo no tiene presupuesto
+propio. Maikel lo corrigió: hay campañas activas ahora mismo. Al comprobarlo, tenía razón, y el
+problema es mayor de lo que parecía.
+
+### Lo que está corriendo hoy, 10-sep
+
+| Cliente | Plataforma | Presupuesto | Periodo | Quién lo vigila |
+|---|---|---|---|---|
+| **OutThink / Adigital** | Google Ads `918-811-5388` | **2.000 €** (600 Search + 1.000 Prospecting + 400 Remarketing) | 31-ago → **24-sep**, hoy es el día 11 de 25 | workflow n8n diario a las 08:00 → Sheet + email. **Ninguna rutina despierta al agente** |
+| **EAC** | Meta + Google + TikTok | **4.000 €/mes** contratado (`CLIENT.monthlyBudget`) | continuo | dashboard, sin rutina |
+| **Focus Practical** | Meta | SIN DATO | continuo | rutina diaria REBT 06:00, refresca el dashboard |
+| **Eleva** | SIN DATO | SIN DATO | continuo | dashboard, sin rutina |
+| **Antic Barcelona** | creatividades preparadas | SIN DATO | — | sesión **bloqueada desde el 7-sep** esperando un permiso |
+
+### El diagnóstico exacto: hay medición, no hay gobierno
+
+No falta instrumentación. Está bien montada: conectores de Meta, Google Ads y TikTok en el repo,
+dashboards en Sheets, un workflow de n8n desplegado y activo que reporta cada mañana, conversión
+`OT26_Registro` creada y verificada end-to-end en producción.
+
+Lo que no existe es **quién decide qué cambiar**. El informe llega a un correo y ahí muere.
+
+**Pruebas de que nadie lo está gobernando:**
+
+1. `outthink-google-ads/ESTADO.md` no se actualiza desde el **28-ago**. La campaña lleva **11 días
+   corriendo** y el documento de estado tiene 13 días.
+2. Agente Adigital tiene **cero rutinas** programadas. Solo trabaja cuando Maikel lo abre.
+3. El propio ESTADO.md se contradice: dice "todas en PAUSED (0 € de gasto)" y a la vez marca
+   OT26_Search como ENABLED. A 28-ago era coherente; a 10-sep nadie sabe cuál es el estado real
+   sin abrir la cuenta.
+4. Quedan **13 días de campaña**. Lo que no se optimice esta semana ya no se optimiza: el
+   presupuesto se habrá gastado.
+
+### Riesgo pendiente heredado, ya documentado por el propio agente
+
+Del ESTADO.md, sin resolver: la etiqueta antigua del Observatorio está contando también los
+registros de OutThink en otra cuenta de conversión. Las listas de remarketing no se poblarán hasta
+que el cliente active su medición. Y `rai.outthink.es` no es accesible desde la cuenta de Qualivo.
+
+### Consecuencia para la arquitectura
+
+Paid deja de ser un agente a futuro y pasa a ser **el que más urge**, por delante de casi todo lo
+demás del roadmap. Es dinero de un cliente, con fecha de fin, y hoy no tiene dueño.
+
+Y cambia el orden de prioridad del brief: esto es *client-delivery-critical*, no *intelligence*.

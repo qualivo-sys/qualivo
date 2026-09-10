@@ -6,13 +6,14 @@ ID                qualivo.paid  ·  client.<cliente>.paid
 SYSTEM            demand
 OWNS              Presupuesto → Tráfico cualificado
 DOES_NOT_OWN      la web y la conversión (Demand) · el mensaje (Estrategia Central) · gastar (Maikel)
-ESTADO            Qualivo: dormido hasta que haya caja · Clientes: vivo en Agente Adigital
+ESTADO            VIVO HOY con dinero de clientes y sin dueño (ver H11) · el de Qualivo, dormido
 ```
 
 ## Sí, separado de Growth. Cuatro razones
 
-Cambio mi posición anterior. No por el presupuesto de Qualivo, que sigue sin existir, sino porque
-el dinero que ya se gasta en campañas es de clientes y es mucho mayor.
+Cambio mi posición anterior, y no por matices: había dado por dormido algo que está corriendo.
+Hoy hay al menos 2.000 € de OutThink en vuelo hasta el 24-sep y 4.000 €/mes contratados en EAC.
+Ver hallazgo H11.
 
 1. **Decisión distinta.** Growth posee Tráfico → Lead. Paid posee Presupuesto → Tráfico
    cualificado. Son dos decisiones, y una transición tiene un solo dueño.
@@ -147,6 +148,21 @@ No activa nada. No sube presupuesto. No inventa ángulos. No mezcla cuentas de c
 ## ATTENTION_COST_WEEK
 
 2 por cliente activo. Es caro y es correcto: es dinero.
+
+## PRIMERA TAREA, ANTES DE NINGÚN DISEÑO
+
+**Auditoría de lo que está gastando ahora.** No la puedo hacer yo: no tengo acceso a las cuentas.
+La hace Agente Adigital, hoy, y son seis preguntas:
+
+1. ¿Qué campañas están ENABLED ahora mismo en `918-811-5388` y cuánto llevan gastado de los 2.000 €?
+2. ¿Cuántas conversiones `OT26_Registro` van, y a qué coste?
+3. ¿Qué términos de búsqueda están quemando presupuesto sin convertir?
+4. ¿El workflow de n8n de las 08:00 sigue ejecutándose, o falló en silencio como las rutinas semanales?
+5. ¿Se resolvió lo de la etiqueta del Observatorio contando registros de OutThink en otra cuenta?
+6. Con 13 días por delante, ¿qué se cambia esta semana y qué necesita el ok de Maikel?
+
+Salida: `outthink-google-ads/ESTADO.md` actualizado y el primer Paid Review en el formato de abajo.
+Después se hace lo mismo con EAC, Focus y Eleva.
 
 ## CUÁNDO SE ENCIENDE EL DE QUALIVO
 
