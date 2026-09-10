@@ -610,3 +610,10 @@ Fuente de todas las cifras: Google Ads API v25, cuenta 918-811-5388, consulta 10
 Digital). OutThink 2026 es su evento (24-09, Madrid); la cuenta 918-811-5388 es la cuenta de
 Google Ads de Adigital para OutThink. El Observatorio es otro proyecto de Adigital con su propia
 cuenta (AW-16923064235). Interlocutora: Aída Sánchez (data manager de Adigital).
+
+### Landing (10-09)
+Propuesta de landing orientada a conversión: lienzo editable
+https://claude.ai/code/artifact/7b435c5f-e950-43d1-8b4c-cff58605ef27 y **vista previa
+publicada en https://qualivo.io/outthink-preview/** (noindex; commits en la rama de producción
+de qualivo.io `claude/qualivo-landing-vercel-nubk1i`, aprobado por Maikel). Análisis de
+conversión y justificación en `landing/ANALISIS_LANDING.md`; HTML en `landing/preview-index.html`.
