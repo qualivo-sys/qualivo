@@ -13,15 +13,18 @@
 - Destino: la **Landing**, que convierte a matrícula 4,5× mejor (2,7 % vs 0,6 %) — es donde mandar
   al público caliente.
 
-## 1) Audiencias a crear (Custom Audiences)
-1. **Visitantes web 30 días** — todo el tráfico del píxel, 30 días.
-2. **Visitantes web 90 días** — para tener volumen suficiente.
-3. **Vieron la landing pero NO enviaron formulario** — visitantes de la landing menos los que
-   dispararon el evento Lead (exclusión).
-4. **Video-views 50 %+** de los anuncios actuales (engagement alto).
-5. **Engagement Instagram/Facebook 365 días** — han interactuado con el perfil/anuncios.
-6. **Leads del CRM sin matricular** — subir CSV desde GHL (contactos sin etiqueta de alumna) para
-   retargetear a los que ya son lead pero no cerraron.
+## 1) Audiencias — ✅ CREADAS (cuenta Eleva Nails)
+Creadas por API el 11/09/2026 (píxel 962769166393542, página 945259455348081, IG @elevanailboss
+17841448140451000). Ya se pueden seleccionar en Ads Manager:
+
+1. ✅ **RTG · Visitantes web 30d** (id 120253598745040359)
+2. ✅ **RTG · Visitantes web 90d** (id 120253598745150359)
+3. ✅ **RTG · Landing sin Lead 30d** (id 120253598757310359) — visitó y NO dejó datos
+4. ✅ **RTG · Engagement Instagram 365d** (id 120253598759750359)
+5. ✅ **RTG · Engagement Facebook 365d** (id 120253598760500359)
+
+Pendiente (manual, opcional): **Leads del CRM sin matricular** — exportar CSV desde GHL (contactos
+sin etiqueta de alumna) y subirlo como audiencia. Requiere el export manual.
 
 **Lookalike (opcional, fase 2):** LAL 1 % a partir de la audiencia de matriculadas → prospección de
 mejor calidad. (No es retargeting, pero es el siguiente paso natural.)
@@ -52,12 +55,16 @@ mejor calidad. (No es retargeting, pero es el siguiente paso natural.)
   aparecerá como una fila más.
 
 ## 5) Pasos para lanzar (checklist)
-- [ ] Crear las 6 audiencias (Ads Manager → Audiencias, o API con `ads_management`).
-- [ ] Exportar de GHL el CSV de leads sin matricular y subirlo como audiencia.
-- [ ] Crear la campaña con los 2 AdSets y las exclusiones.
+- [x] **Aceptar TOS de Custom Audiences** de la cuenta (hecho).
+- [x] **Crear las audiencias** (5 creadas por API — ver sección 1).
+- [ ] Exportar de GHL el CSV de leads sin matricular y subirlo como audiencia (opcional).
+- [ ] **Crear la campaña** con los 2 AdSets y las exclusiones (Ads Manager — gasta dinero).
 - [ ] Subir 3 creatividades (A/B/C).
 - [ ] Presupuesto 5-8 €/día. Publicar.
 - [ ] Revisar a los 3-4 días: frecuencia, CPL y coste por matrícula.
+
+> Falta solo el paso de campaña + creatividades. Eso ya gasta dinero, así que va por Ads Manager
+> (seleccionando estas audiencias) o quitando el bloqueo de gasto para que Claude lo monte.
 
 ---
 *Qualivo — Eleva Nails. No se lanza automáticamente porque implica gasto publicitario; requiere
