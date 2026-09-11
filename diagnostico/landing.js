@@ -83,7 +83,9 @@
     b.disabled = true; b.textContent = 'Un segundo…';
 
     enviar(false).then(function () {
-      if (window.qvTrack) window.qvTrack('diagnostico_lead', {});
+      // El mismo identificador que usa el servidor en la Conversions API, para
+      // que Meta deduplique en vez de contar el lead dos veces.
+      if (window.qvTrack) window.qvTrack('diagnostico_lead', { evento_id: 'diag-' + datos.email });
       calendario();
       ver(p3);
     }).catch(function () {

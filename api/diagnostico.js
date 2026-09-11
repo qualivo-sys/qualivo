@@ -132,7 +132,9 @@ module.exports = async function handler(req, res) {
           telefono: telefono,
           nombre: nombre,
           contactId: contactId,
-          eventoId: 'diag-' + (contactId || email),
+          // Mismo identificador que manda el navegador en landing.js, para que
+          // Meta deduplique el Lead en vez de contarlo dos veces.
+          eventoId: 'diag-' + email,
           url: 'https://qualivo.io/diagnostico/',
           ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined,
           ua: req.headers['user-agent'],

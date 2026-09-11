@@ -50,7 +50,13 @@
     hero_result_view: ['trackCustom', 'HeroResult'],
     hero_email_submit: ['track', 'Lead'],
     hero_radiografia_click: ['trackCustom', 'HeroSiguientePaso'],
-    diagnostico_solicitado: ['track', 'Contact']
+    diagnostico_solicitado: ['track', 'Contact'],
+    // Landing /diagnostico/. Sin esto el píxel nunca ve un Lead de la landing y
+    // una campaña optimizada a Lead aprende de un evento que no ocurre.
+    diagnostico_paso1: ['trackCustom', 'DiagnosticoPaso1'],
+    diagnostico_lead: ['track', 'Lead'],
+    diagnostico_leadform_agenda: ['trackCustom', 'DiagnosticoAgenda'],
+    diagnostico_whatsapp: ['trackCustom', 'DiagnosticoWhatsApp']
   };
 
   // Helper de eventos: siempre llamable; solo llega a GA y a Meta si hubo
