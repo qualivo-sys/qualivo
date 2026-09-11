@@ -363,3 +363,28 @@ export interface ApunteOcio {
   minutos: number | null;
   creado: string;
 }
+
+/** Un enlace publico a una lista de ocio, revocable. */
+export interface OcioCompartido {
+  id: string;
+  token: string;
+  titulo: string;
+  categorias: string[];
+  solo_pendientes: boolean;
+  incluye_notas: boolean;
+  activo: boolean;
+  creado: string;
+}
+
+/** Lo que ve quien abre el enlace. Nunca incluye con_quien. */
+export interface ApuntePublico {
+  titulo: string;
+  categoria: string;
+  estado: string;
+  enlace: string | null;
+  lugar: string | null;
+  nota: string | null;
+  valoracion: number | null;
+  minutos: number | null;
+  fecha_hecho: string | null;
+}

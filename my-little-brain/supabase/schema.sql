@@ -308,6 +308,68 @@ create table if not exists public.ocio (
 create index if not exists ocio_user on public.ocio (user_id, estado, categoria, creado desc);
 create index if not exists ocio_user_hecho on public.ocio (user_id, fecha_hecho desc);
 
+-- ── Compartir una lista de ocio ────────────────────────────────────────
+-- Un enlace con un token imposible de adivinar, revocable, y que solo enseña
+-- lo que la persona ha elegido enseñar.
+create table if not exists public.ocio_compartidos (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid not null references auth.users on delete cascade,
+  token     text not null unique,
+  titulo    text not null default 'Mi lista',
+  -- Vacio = todas. Si no, solo estas categorias.
+  categorias text[] not null default '{}',
+  solo_pendientes boolean not null default false,
+  -- Las notas son lo mas personal de un apunte: fuera salvo que lo pida.
+  incluye_notas boolean not null default false,
+  activo    boolean not null default true,
+  creado    timestamptz not null default now()
+);
+create index if not exists ocio_compartidos_user on public.ocio_compartidos (user_id, activo);
+
+-- Lo que ve quien abre el enlace. Va por funcion en vez de dar acceso directo
+-- a la tabla: asi es la funcion la que decide exactamente que columnas salen,
+-- y con_quien NUNCA sale (nombra a terceros que no han dado permiso).
+create or replace function public.ocio_publico(p_token text)
+returns table (
+  titulo text, categoria text, estado text, enlace text,
+  lugar text, nota text, valoracion int, minutos int, fecha_hecho date
+)
+language sql
+stable
+security definer
+set search_path = public
+as $func$
+  select
+    o.titulo, o.categoria, o.estado, o.enlace, o.lugar,
+    case when c.incluye_notas then o.nota else null end,
+    o.valoracion, o.minutos, o.fecha_hecho
+  from public.ocio_compartidos c
+  join public.ocio o on o.user_id = c.user_id
+  where c.token = p_token
+    and c.activo
+    and o.estado <> 'descartado'
+    and (cardinality(c.categorias) = 0 or o.categoria = any (c.categorias))
+    and (not c.solo_pendientes or o.estado = 'pendiente')
+  order by o.estado, o.creado desc
+  limit 300;
+$func$;
+
+-- El titulo del enlace. Lo escribe la persona: no se filtra su nombre real.
+create or replace function public.ocio_compartido_info(p_token text)
+returns table (titulo text, solo_pendientes boolean)
+language sql
+stable
+security definer
+set search_path = public
+as $func$
+  select c.titulo, c.solo_pendientes
+  from public.ocio_compartidos c
+  where c.token = p_token and c.activo;
+$func$;
+
+grant execute on function public.ocio_publico(text) to anon, authenticated;
+grant execute on function public.ocio_compartido_info(text) to anon, authenticated;
+
 -- ── Habitos de evitar ──────────────────────────────────────────────────
 -- Los de "evitar" (rumiar, mirar metricas a todas horas) funcionan al reves:
 -- lo que se apunta es la CAIDA, no el logro. El silencio significa que ese dia
@@ -517,7 +579,7 @@ begin
     'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos','finanzas_sobres',
     'diario','hojas',
     'actividades_tiempo','cronometro',
-    'ocio'
+    'ocio','ocio_compartidos'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);

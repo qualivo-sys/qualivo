@@ -184,3 +184,40 @@ export function insightsOcio({ resumen, apuntes, dias, hoy, diaSemana }: DatosIn
 
   return fuera.slice(0, 3);
 }
+
+// ── Compartir ─────────────────────────────────────────────────────────
+
+export interface AjustesCompartir {
+  categorias: string[];
+  solo_pendientes: boolean;
+  incluye_notas: boolean;
+}
+
+/**
+ * Que sale en un enlace compartido. La misma regla que aplica la funcion SQL,
+ * aqui en TypeScript para poder probarla sin base de datos: es la frontera
+ * entre lo tuyo y lo que ve un tercero, y eso conviene tenerlo comprobado.
+ *
+ * con_quien no sale NUNCA: nombra a gente que no ha dado permiso.
+ */
+export function loQueVeOtro<T extends { categoria: string; estado: string; nota: string | null }>(
+  apuntes: T[],
+  ajustes: AjustesCompartir,
+): Omit<T, 'con_quien'>[] {
+  return apuntes
+    .filter((a) => a.estado !== 'descartado')
+    .filter((a) => ajustes.categorias.length === 0 || ajustes.categorias.includes(a.categoria))
+    .filter((a) => !ajustes.solo_pendientes || a.estado === 'pendiente')
+    .map(({ ...a }) => {
+      const copia = a as T & { con_quien?: unknown };
+      delete copia.con_quien;
+      return { ...copia, nota: ajustes.incluye_notas ? a.nota : null };
+    });
+}
+
+/** Token de enlace: largo y sin ambiguedades al leerlo en voz alta. */
+export function nuevoToken(azar: () => number = Math.random): string {
+    // Sin i, l, o, 0 ni 1: se confunden al leer un enlace en voz alta.
+  const alfabeto = 'abcdefghjkmnpqrstuvwxyz23456789';
+  return Array.from({ length: 22 }, () => alfabeto[Math.floor(azar() * alfabeto.length)]).join('');
+}

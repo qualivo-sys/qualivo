@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
-import { CATEGORIAS_OCIO } from '@/lib/motor/ocio';
+import { CATEGORIAS_OCIO, nuevoToken } from '@/lib/motor/ocio';
 import { clienteServidor } from '@/lib/supabase/servidor';
 
 async function sesion() {
@@ -105,5 +105,38 @@ export async function descartarOcio(id: string) {
 export async function borrarOcio(id: string) {
   const { supabase, userId } = await sesion();
   await supabase.from('ocio').delete().eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+// ── Compartir ─────────────────────────────────────────────────────────
+
+/**
+ * Crea (o rehace) el enlace publico. Solo hay uno activo a la vez: dos
+ * enlaces vivos son dos cosas que revocar y una que se te olvida.
+ */
+export async function compartirOcio(datos: FormData) {
+  const { supabase, userId } = await sesion();
+
+  const categorias = CATEGORIAS_OCIO.map((c) => c.id).filter((id) => datos.get(`cat_${id}`) === 'si');
+
+  // El anterior se desactiva: el enlace viejo deja de funcionar al momento.
+  await supabase.from('ocio_compartidos').update({ activo: false }).eq('user_id', userId).eq('activo', true);
+
+  await supabase.from('ocio_compartidos').insert({
+    user_id: userId,
+    token: nuevoToken(),
+    titulo: texto(datos.get('titulo_lista'))?.slice(0, 80) ?? 'Mi lista',
+    categorias,
+    solo_pendientes: datos.get('solo_pendientes') === 'si',
+    incluye_notas: datos.get('incluye_notas') === 'si',
+    activo: true,
+  });
+  refrescar();
+}
+
+/** Dejar de compartir. El enlace deja de servir en el momento. */
+export async function dejarDeCompartir() {
+  const { supabase, userId } = await sesion();
+  await supabase.from('ocio_compartidos').update({ activo: false }).eq('user_id', userId).eq('activo', true);
   refrescar();
 }

@@ -1071,5 +1071,34 @@ check('y lo ya hecho lo apunta ya valorado', filasOcio.some((o) => o.titulo === 
 check('marca como hecho algo que ya tenias apuntado', filasOcio.find((o) => o.titulo === 'Ruta del Cares')?.estado === 'hecho', JSON.stringify(filasOcio.find((o) => o.titulo === 'Ruta del Cares')));
 check('sin duplicar el apunte', filasOcio.filter((o) => o.titulo === 'Ruta del Cares').length === 1);
 
+// ── 25. Compartir: la frontera entre lo tuyo y lo que ve un tercero ────
+const { loQueVeOtro, nuevoToken } = await import(`${L}/motor/ocio.js`);
+
+const mios = [
+  { titulo: 'Casa Paco', categoria: 'restaurante', estado: 'hecho', nota: 'El cachopo brutal', con_quien: 'Isa', valoracion: 5 },
+  { titulo: 'Ruta del Cares', categoria: 'actividad', estado: 'pendiente', nota: 'Me la recomendo Javi', con_quien: null },
+  { titulo: 'Dune', categoria: 'pantalla', estado: 'pendiente', nota: null, con_quien: null },
+  { titulo: 'Aquello que ya no', categoria: 'actividad', estado: 'descartado', nota: 'secreto', con_quien: 'nadie' },
+];
+const todo = { categorias: [], solo_pendientes: false, incluye_notas: false };
+
+const visto = loQueVeOtro(mios, todo);
+check('CON QUIEN no sale nunca, aunque compartas todo', visto.every((a) => !('con_quien' in a)), JSON.stringify(visto[0]));
+check('las notas fuera por defecto', visto.every((a) => a.nota === null), JSON.stringify(visto.map((a) => a.nota)));
+check('con las notas marcadas, salen', loQueVeOtro(mios, { ...todo, incluye_notas: true })[0].nota === 'El cachopo brutal');
+check('lo descartado no se comparte', !visto.some((a) => a.titulo === 'Aquello que ya no'), JSON.stringify(visto.map((a) => a.titulo)));
+check('y sigue sin compartirse aunque pidas notas', !loQueVeOtro(mios, { ...todo, incluye_notas: true }).some((a) => a.titulo.includes('ya no')));
+check('filtrando por categoria solo sale esa', loQueVeOtro(mios, { ...todo, categorias: ['pantalla'] }).map((a) => a.titulo).join() === 'Dune');
+check('solo pendientes deja fuera lo hecho', loQueVeOtro(mios, { ...todo, solo_pendientes: true }).every((a) => a.estado === 'pendiente'));
+check('sin categorias marcadas se comparten todas', loQueVeOtro(mios, todo).length === 3);
+check('no toca la lista original', mios[0].con_quien === 'Isa' && mios[0].nota === 'El cachopo brutal');
+
+// El token
+let n = 0;
+const tk = nuevoToken(() => { n += 0.017; return n % 1; });
+check('el token es largo', tk.length === 22, `${tk.length}: ${tk}`);
+check('sin letras que se confunden al leerlas', !/[loi01]/.test(nuevoToken()));
+check('dos tokens seguidos no se parecen', nuevoToken() !== nuevoToken());
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

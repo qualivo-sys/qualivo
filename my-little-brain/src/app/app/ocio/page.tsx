@@ -2,17 +2,24 @@ import { Check, ExternalLink, Trash2, Undo2 } from 'lucide-react';
 import Link from 'next/link';
 import {
   anotarOcio,
+  compartirOcio,
+  dejarDeCompartir,
   borrarOcio,
   descartarOcio,
   devolverAPendiente,
   marcarHecho,
   valorarOcio,
 } from '@/app/app/ocio/acciones';
+import EnlaceCompartir from '@/components/enlace-compartir';
 import { Boton, Campo, Insignia, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { cargarOcio, cargarPanel } from '@/lib/datos';
 import { diasEntre, fechaCorta } from '@/lib/fechas';
 import { CATEGORIAS_OCIO, categoriaOcio, insightsOcio, resumenOcio, sugerencias } from '@/lib/motor/ocio';
 import { sesionRequerida } from '@/lib/sesion';
+import type { OcioCompartido } from '@/lib/tipos';
+
+/** La direccion publica de la app, para poder dar el enlace entero. */
+const urlBase = process.env.NEXT_PUBLIC_URL_BASE ?? 'https://my-little-brain.vercel.app';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,6 +43,10 @@ export default async function PaginaOcio({
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   const apuntes = await cargarOcio(supabase, usuario.id, panel.hoy);
+
+  const { data: compartidos } = await supabase
+    .from('ocio_compartidos').select('*').eq('user_id', usuario.id).eq('activo', true).maybeSingle();
+  const compartido = (compartidos as OcioCompartido | null) ?? null;
 
   const resumen = resumenOcio(apuntes, panel.hoy, diasEntre);
   const diaSemana = new Date(panel.hoy + 'T12:00:00').getDay();
@@ -269,6 +280,63 @@ export default async function PaginaOcio({
           </details>
           <Boton type="submit" className="w-full">Apuntar</Boton>
         </form>
+      </Tarjeta>
+
+      <Tarjeta>
+        <TituloTarjeta>Compartir tu lista</TituloTarjeta>
+        {compartido ? (
+          <>
+            <p className="mb-3 text-sm text-muted-foreground">
+              &ldquo;{compartido.titulo}&rdquo; esta compartida. Quien tenga el enlace la ve sin necesidad de cuenta, y
+              se actualiza sola cuando apuntas algo.
+            </p>
+            <EnlaceCompartir url={`${urlBase}/lista/${compartido.token}`} />
+            <p className="mt-3 text-xs text-muted-foreground">
+              {compartido.categorias.length === 0
+                ? 'Se ven todas las categorias'
+                : `Solo: ${compartido.categorias.map((c) => categoriaOcio(c).nombre).join(', ')}`}
+              {compartido.solo_pendientes ? ' · solo lo que tienes por hacer' : ' · tambien lo ya hecho'}
+              {compartido.incluye_notas ? ' · con tus notas' : ' · sin tus notas'}.
+              Con quien fuiste no se comparte nunca.
+            </p>
+            <form action={dejarDeCompartir} className="mt-3">
+              <Boton type="submit" variante="fantasma" tamano="sm">Dejar de compartir</Boton>
+            </form>
+          </>
+        ) : (
+          <>
+            <p className="mb-3 text-sm text-muted-foreground">
+              Un enlace para mandarle tu lista a quien quieras. No hace falta que tenga cuenta, y lo puedes quitar
+              cuando te apetezca.
+            </p>
+            <form action={compartirOcio} className="space-y-3">
+              <Campo etiqueta="Como quieres llamarla" name="titulo_lista" defaultValue="Mi lista de ocio" maxLength={80} />
+              <div>
+                <p className="mb-1.5 text-sm text-muted-foreground">¿Que categorias? (ninguna marcada = todas)</p>
+                <div className="flex flex-wrap gap-2">
+                  {CATEGORIAS_OCIO.map((c) => (
+                    <label key={c.id} className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs">
+                      <input type="checkbox" name={`cat_${c.id}`} value="si" className="h-3.5 w-3.5 rounded border-input" />
+                      {c.emoji} {c.nombre}
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                <input type="checkbox" name="solo_pendientes" value="si" className="h-4 w-4 rounded border-input" />
+                Solo lo que tengo por hacer
+              </label>
+              <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                <input type="checkbox" name="incluye_notas" value="si" className="h-4 w-4 rounded border-input" />
+                Incluir mis notas
+              </label>
+              <Boton type="submit" variante="secundario" className="w-full">Crear el enlace</Boton>
+            </form>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Con quien fuiste a cada sitio no se comparte nunca: nombra a gente que no ha dado permiso.
+            </p>
+          </>
+        )}
       </Tarjeta>
 
       <p className="pb-2 text-center text-xs text-muted-foreground">
