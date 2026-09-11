@@ -28,28 +28,40 @@ falta exprimir variaciones de uno que funciona.
 
 ## Estructura · fase 1, validación
 
-Una campaña. Un conjunto. Cuatro anuncios. Nada más.
+Dos campañas separadas, decisión de Maikel: una al formulario instantáneo y otra a la
+landing. Separadas y no dos conjuntos de la misma campaña, para que Meta no mueva el
+presupuesto de una a otra y las dos tengan datos propios.
 
 ```
-CAMPAÑA · Qualivo · Diagnóstico · sep 2026        OUTCOME_LEADS
-└── CONJUNTO A · Lead form · 15 €/día
+CAMPAÑA 1 · Qualivo · Diagnóstico · Lead form · sep26      OUTCOME_LEADS
+└── CONJUNTO · España 28-60 · 15 €/día
     ├── AD 01 · fuga        · la cinta
     ├── AD 02 · alerta      · el cuadro de mandos
     ├── AD 03 · diagnóstico · el médico
     └── AD 04 · mecanismo   · la radiografía
+
+CAMPAÑA 2 · Qualivo · Diagnóstico · Landing · sep26        OUTCOME_LEADS
+└── CONJUNTO · España 28-60 · 15 €/día · píxel 879197745226987, evento Lead
+    └── los mismos cuatro anuncios, a /diagnostico/
 ```
 
-**Por qué un solo conjunto.** 15 €/día partidos en dos son 7,50 € cada uno: ninguno
-sale de la fase de aprendizaje y los dos mienten. Un conjunto con cuatro anuncios deja
-que Meta reparta y, sobre todo, **reporta cada creatividad por separado**.
+**Los mismos cuatro creativos en las dos.** Si cambian los creativos y el destino a la
+vez, la comparación no vale para nada: no se sabría si la diferencia es del anuncio o
+de la página.
 
-**Por qué lead form y no la landing, todavía.** El CPL del formulario instantáneo
-ronda los 5-10 € en esta cuenta; el de una landing fría, 20-30 €. Con 15 €/día eso es
-la diferencia entre 2-3 leads diarios y menos de uno. En dos semanas: 30-40 leads
-frente a 8. Para aprender qué ángulo funciona hace falta el primero.
+**El presupuesto tiene que ser 15 € en cada una, no 15 en total.** Repartir quince
+entre las dos deja siete y medio por campaña, con lo que ninguna sale de la fase de
+aprendizaje y las dos dan datos falsos. Con dos campañas el mínimo realista son
+**30 €/día**.
 
-La calidad más baja del formulario la compensa la capa de activación: WhatsApp al
-minuto, llamada a los veinte y la pregunta de inversión dentro del propio formulario.
+Si solo hay quince al día, la decisión correcta es empezar únicamente por el
+formulario instantáneo y abrir la landing en dos semanas: el CPL del formulario en
+esta cuenta ronda los 5-10 €, y el de una landing fría 20-30 €. Con 7,50 €/día la
+campaña a landing daría menos de un lead cada tres días, que no es una muestra.
+
+**Lo que compara este experimento** no es cuál trae leads más baratos, eso ya se sabe.
+Es cuál trae **más citas por euro**. El formulario trae volumen y peor intención; la
+landing, lo contrario. La respuesta está en el CRM dos semanas después, no en Meta.
 
 **Segmentación.** España, 28-60, Facebook e Instagram, ubicaciones automáticas y
 audiencia amplia con Advantage+. Sin intereses al principio: el formulario ya filtra
@@ -70,8 +82,8 @@ Se abre cuando haya **30 leads o 14 días**, lo que llegue antes, y entonces:
 | Leads buenos y pocas citas | la activación | mirar WhatsApp y llamada, no la campaña |
 | Citas y ningún piloto | la oferta | eso no lo arregla paid |
 
-Solo entonces entra el conjunto B a la landing, con el píxel ya calentado por el
-tráfico del lead form.
+A los 14 días se compara **coste por cita** entre las dos campañas, no CPL, y se apaga
+la que salga peor o se reparte el presupuesto según lo que diga ese número.
 
 ## Tracking
 
