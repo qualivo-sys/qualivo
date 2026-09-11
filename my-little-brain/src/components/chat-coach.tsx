@@ -1,9 +1,10 @@
 'use client';
 
-import { Camera, Loader2, Send, Sparkles } from 'lucide-react';
+import { Camera, Loader2, Mic, Send, Sparkles, Square } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Boton } from '@/components/ui/base';
+import { empezarDictado, hayDictado, type Dictado } from '@/lib/dictado';
 import { leerSSE } from '@/lib/sse';
 import type { AccionRegistrada, MensajeChat } from '@/lib/tipos';
 import { cn } from '@/lib/utils';
@@ -44,6 +45,44 @@ export default function ChatCoach({
   const finRef = useRef<HTMLDivElement>(null);
   const archivoRef = useRef<HTMLInputElement>(null);
 
+  // Dictado. El boton solo aparece si el navegador sabe hacerlo: enseñar un
+  // microfono que no funciona es peor que no tenerlo.
+  const [puedeDictar, setPuedeDictar] = useState(false);
+  const [dictando, setDictando] = useState(false);
+  const dictadoRef = useRef<Dictado | null>(null);
+  // Lo que ya habia escrito antes de empezar a hablar, para no pisarlo.
+  const previoRef = useRef('');
+
+  useEffect(() => {
+    setPuedeDictar(hayDictado());
+    return () => dictadoRef.current?.parar();
+  }, []);
+
+  const alternarDictado = () => {
+    if (dictando) {
+      dictadoRef.current?.parar();
+      dictadoRef.current = null;
+      setDictando(false);
+      return;
+    }
+    setError('');
+    previoRef.current = borrador ? `${borrador.trimEnd()} ` : '';
+    const dictado = empezarDictado({
+      alTexto: (texto) => setBorrador(previoRef.current + texto),
+      alError: (mensaje) => setError(mensaje),
+      alTerminar: () => {
+        dictadoRef.current = null;
+        setDictando(false);
+      },
+    });
+    if (!dictado) {
+      setError('Tu navegador no puede dictar. Prueba en Chrome o en Safari.');
+      return;
+    }
+    dictadoRef.current = dictado;
+    setDictando(true);
+  };
+
   useEffect(() => {
     finRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [mensajes, enviando]);
@@ -58,6 +97,11 @@ export default function ChatCoach({
   }, [mensajeInicial]);
 
   const enviar = async (texto: string, imagen?: { media_type: string; data: string }) => {
+    if (dictadoRef.current) {
+      dictadoRef.current.parar();
+      dictadoRef.current = null;
+      setDictando(false);
+    }
     if ((!texto.trim() && !imagen) || enviando) return;
     setError('');
     setEnviando(true);
@@ -213,11 +257,24 @@ export default function ChatCoach({
               tamano="icono"
               aria-label="Foto de la comida"
               onClick={() => archivoRef.current?.click()}
-              disabled={enviando}
+              disabled={enviando || dictando}
             >
               <Camera size={20} />
             </Boton>
           </>
+        )}
+        {puedeDictar && (
+          <Boton
+            type="button"
+            variante={dictando ? 'secundario' : 'fantasma'}
+            tamano="icono"
+            aria-label={dictando ? 'Dejar de hablar' : 'Hablar en vez de escribir'}
+            onClick={alternarDictado}
+            disabled={enviando}
+            className={dictando ? 'animate-pulse text-destructive' : undefined}
+          >
+            {dictando ? <Square size={18} /> : <Mic size={20} />}
+          </Boton>
         )}
         <textarea
           value={borrador}
@@ -229,7 +286,7 @@ export default function ChatCoach({
             }
           }}
           rows={1}
-          placeholder={modoAlta ? 'Responde aqui…' : 'Cuentame que has hecho…'}
+          placeholder={dictando ? 'Te escucho…' : modoAlta ? 'Responde aqui…' : 'Cuentame que has hecho…'}
           className="max-h-32 flex-1 resize-none bg-transparent px-2 py-2.5 text-base outline-none placeholder:text-muted-foreground/60"
         />
         <Boton type="submit" tamano="icono" disabled={enviando || (!borrador.trim() && !enviando)}>

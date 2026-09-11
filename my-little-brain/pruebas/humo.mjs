@@ -1100,5 +1100,75 @@ check('el token es largo', tk.length === 22, `${tk.length}: ${tk}`);
 check('sin letras que se confunden al leerlas', !/[loi01]/.test(nuevoToken()));
 check('dos tokens seguidos no se parecen', nuevoToken() !== nuevoToken());
 
+// ── 26. Dictado: acumular bien y no cortarse a la mitad ────────────────
+const { empezarDictado, hayDictado } = await import(`${L}/dictado.js`);
+
+check('sin navegador no hay dictado', hayDictado() === false);
+check('y empezar devuelve null en vez de reventar', empezarDictado({ alTexto() {}, alError() {}, alTerminar() {} }) === null);
+
+// Un reconocedor de mentira para probar la logica sin navegador
+class Falso {
+  constructor() { Falso.ultimo = this; this.arrancado = 0; this.parado = false; this.estado = []; }
+  start() { this.arrancado += 1; }
+  stop() { this.parado = true; this.onend?.(); }
+  abort() {}
+  // Ayudas para la prueba. Como el navegador de verdad: results es la lista
+  // COMPLETA de lo oido, y resultIndex apunta al primero que ha cambiado.
+  dice(trozos) {
+    let desde = 0;
+    while (desde < trozos.length && this.estado[desde] && this.estado[desde][1]
+           && this.estado[desde][0] === trozos[desde][0] && trozos[desde][1]) desde += 1;
+    this.estado = trozos;
+    this.reenvia(desde, trozos);
+  }
+  reenvia(desde, trozos) {
+    this.onresult({ resultIndex: desde, results: trozos.map((t) => Object.assign([{ transcript: t[0] }], { isFinal: t[1] })) });
+  }
+  seCorta() { this.onend?.(); }
+  falla(error) { this.onerror({ error }); }
+}
+
+let dicho = '', errores2 = '', terminado = 0;
+const d = empezarDictado({ alTexto: (t) => { dicho = t; }, alError: (m) => { errores2 = m; }, alTerminar: () => { terminado += 1; } }, Falso);
+check('arranca', d !== null && Falso.ultimo.arrancado === 1);
+check('el idioma es el nuestro', Falso.ultimo.lang === 'es-ES' && Falso.ultimo.continuous === true && Falso.ultimo.interimResults === true);
+
+Falso.ultimo.dice([['He comido ', true], ['dos huev', false]]);
+check('junta lo definitivo con lo que va oyendo', dicho === 'He comido dos huev', dicho);
+Falso.ultimo.dice([['He comido ', true], ['dos huevos y pan', true]]);
+check('lo provisional se sustituye, no se duplica', dicho === 'He comido dos huevos y pan', dicho);
+// Safari reenvia trozos ya cerrados; concatenando salia "huevos y pan y pan"
+Falso.ultimo.reenvia(0, Falso.ultimo.estado);
+check('si el navegador repite lo ya cerrado, no se duplica', dicho === 'He comido dos huevos y pan', dicho);
+
+// Lo que rompia en iOS: el reconocimiento se corta solo cada pocos segundos
+const antes = Falso.ultimo.arrancado;
+Falso.ultimo.seCorta();
+check('si se corta solo, se reengancha', Falso.ultimo.arrancado === antes + 1, `${Falso.ultimo.arrancado} vs ${antes}`);
+check('y no avisa de que ha terminado', terminado === 0, String(terminado));
+// Al reengancharse el navegador cuenta de cero otra vez: lo dicho antes no se pisa
+Falso.ultimo.estado = [];
+Falso.ultimo.dice([['con tomate', true]]);
+check('y no se pierde lo dicho antes de cortarse', dicho === 'He comido dos huevos y pan con tomate', dicho);
+
+d.parar();
+check('al parar de verdad, si termina', terminado === 1 && Falso.ultimo.parado);
+const trasParar = Falso.ultimo.arrancado;
+Falso.ultimo.seCorta();
+check('y ya no se reengancha', Falso.ultimo.arrancado === trasParar);
+
+// Errores
+let err2 = '', fin2 = 0;
+empezarDictado({ alTexto() {}, alError: (m) => { err2 = m; }, alTerminar: () => { fin2 += 1; } }, Falso);
+Falso.ultimo.falla('not-allowed');
+check('el permiso denegado se explica en cristiano', /permiso/.test(err2) && /ajustes del navegador/.test(err2), err2);
+check('y se da por terminado', fin2 === 1);
+let err3 = '';
+empezarDictado({ alTexto() {}, alError: (m) => { err3 = m; }, alTerminar() {} }, Falso);
+Falso.ultimo.falla('no-speech');
+check('quedarse callado un momento no es un error', err3 === '', err3);
+Falso.ultimo.falla('cualquier-cosa-rara');
+check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test(err3), err3);
+
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);
