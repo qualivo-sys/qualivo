@@ -279,6 +279,35 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- ── Ocio: lo que quieres hacer y lo que ya has hecho ───────────────────
+-- Una sola tabla para las dos cosas a proposito. "Quiero ir a ese sitio" y
+-- "fuimos y estuvo bien" no son dos listas: son el mismo apunte en dos
+-- momentos. Que pase de pendiente a hecho con un toque es lo que hace que
+-- esto siga vivo, y ademas resuelve el arranque: una lista de deseos se llena
+-- sola, un diario de lo ya vivido exige disciplina y se abandona.
+create table if not exists public.ocio (
+  id        uuid primary key default gen_random_uuid(),
+  user_id   uuid not null references auth.users on delete cascade,
+  titulo    text not null,
+  categoria text not null default 'otros'
+            check (categoria in ('actividad','restaurante','viaje','pantalla','libro','formacion','experiencia','revisar','otros')),
+  estado    text not null default 'pendiente' check (estado in ('pendiente','hecho','descartado')),
+  -- El enlace es medio valor: el sitio, el trailer, el curso.
+  enlace    text,
+  nota      text,
+  lugar     text,
+  -- Con quien, que en ocio importa tanto como el que.
+  con_quien text,
+  -- Solo tiene sentido una vez hecho. 1-5.
+  valoracion int check (valoracion between 1 and 5),
+  fecha_hecho date,
+  -- Para poder decir "algo de menos de una hora" cuando hay un rato suelto.
+  minutos   int check (minutos > 0),
+  creado    timestamptz not null default now()
+);
+create index if not exists ocio_user on public.ocio (user_id, estado, categoria, creado desc);
+create index if not exists ocio_user_hecho on public.ocio (user_id, fecha_hecho desc);
+
 -- ── Habitos de evitar ──────────────────────────────────────────────────
 -- Los de "evitar" (rumiar, mirar metricas a todas horas) funcionan al reves:
 -- lo que se apunta es la CAIDA, no el logro. El silencio significa que ese dia
@@ -487,7 +516,8 @@ begin
     'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
     'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos','finanzas_sobres',
     'diario','hojas',
-    'actividades_tiempo','cronometro'
+    'actividades_tiempo','cronometro',
+    'ocio'
   ] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "propio_select" on public.%I', t);

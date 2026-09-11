@@ -15,8 +15,8 @@ import {
 import { tmbDe, metasNutricion } from './perfil';
 import type {
   Bienestar, Comida, EntradaDiario, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
-  ActividadTiempo, Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro, Perfil,
-  Presupuesto, RecuerdoCoach, Sobre, Tarea,
+  ActividadTiempo, ApunteOcio, Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro,
+  Perfil, Presupuesto, RecuerdoCoach, Sobre, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
 import { segundosDelCronometro, type Cronometro } from './motor/tiempo';
@@ -338,4 +338,16 @@ export async function cargarTiempo(supabase: SupabaseClient, userId: string): Pr
       ? actividades.find((a) => a.id === cronometro.actividad_id)?.nombre ?? null
       : null,
   };
+}
+
+/** Todo el ocio: pendientes de siempre y hechos de los ultimos meses. */
+export async function cargarOcio(supabase: SupabaseClient, userId: string, hoy: string): Promise<ApunteOcio[]> {
+  const { data } = await supabase
+    .from('ocio')
+    .select('*')
+    .eq('user_id', userId)
+    .or(`estado.eq.pendiente,fecha_hecho.gte.${sumarDias(hoy, -365)}`)
+    .order('creado', { ascending: false })
+    .limit(500);
+  return (data ?? []) as ApunteOcio[];
 }

@@ -8,14 +8,15 @@ import HabitosHoy from '@/components/habitos-hoy';
 import { Anillo } from '@/components/ui/anillo';
 import { Barra, Boton, Insignia, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import Grafica from '@/components/ui/grafica';
-import { cargarPanel, cargarSesionesMotor, cargarTiempo } from '@/lib/datos';
+import { cargarOcio, cargarPanel, cargarSesionesMotor, cargarTiempo } from '@/lib/datos';
 import { ejercicio } from '@/lib/motor/ejercicios';
-import { fechaLarga } from '@/lib/fechas';
+import { diasEntre, fechaLarga } from '@/lib/fechas';
 import { ajusteCalorico } from '@/lib/motor/nutricion';
 import { balanceEnergia, esDiaRedondo, gastoDia } from '@/lib/motor/energia';
 import { comidasHabituales } from '@/lib/motor/habituales';
 import { tareasDelDia } from '@/lib/motor/tareas';
 import { medir, metrica as infoMetrica } from '@/lib/motor/objetivos';
+import { categoriaOcio, resumenOcio, sugerencias } from '@/lib/motor/ocio';
 import { objetivoAgua } from '@/lib/motor/descanso';
 import { ajustePendiente } from '@/lib/ajuste';
 import { aplicarAjusteCalorias, posponerAjuste } from '@/app/app/acciones';
@@ -40,9 +41,19 @@ export default async function PanelHoy() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const panel = await cargarPanel(supabase, usuario.id, perfil);
   const tiempo = await cargarTiempo(supabase, usuario.id);
+  const ocio = await cargarOcio(supabase, usuario.id, panel.hoy);
   const { diaHoy, metas, cuerpo, puntuaciones } = panel;
 
   const tareas = tareasDelDia(panel.tareas, panel.hoy);
+
+  // El ocio solo asoma en Hoy el fin de semana o si lleva mucho sin hacer
+  // nada: entre semana a las ocho de la manana no ayuda, estorba.
+  const resumenDeOcio = resumenOcio(ocio, panel.hoy, diasEntre);
+  const diaSemanaHoy = new Date(panel.hoy + 'T12:00:00').getDay();
+  const tocaOcio =
+    resumenDeOcio.totalPendientes > 0 &&
+    (diaSemanaHoy === 5 || diaSemanaHoy === 6 || diaSemanaHoy === 0 || (resumenDeOcio.diasDesdeUltimo ?? 0) >= 14);
+  const planesSugeridos = tocaOcio ? sugerencias(ocio).slice(0, 3) : [];
 
   // El objetivo con mas camino hecho: el que mejor demuestra que esto avanza.
   const objetivos = panel.objetivos
@@ -542,6 +553,33 @@ export default async function PanelHoy() {
               );
             })}
           </ul>
+        </Tarjeta>
+      )}
+
+      {planesSugeridos.length > 0 && (
+        <Tarjeta>
+          <div className="mb-3 flex items-center justify-between">
+            <TituloTarjeta className="mb-0">De tu lista de ocio</TituloTarjeta>
+            <Link href="/app/ocio" className="text-xs text-primary underline">
+              Las {resumenDeOcio.totalPendientes}
+            </Link>
+          </div>
+          <ul className="space-y-1.5 text-sm">
+            {planesSugeridos.map((a) => (
+              <li key={a.id} className="flex items-center gap-2">
+                <span>{categoriaOcio(a.categoria).emoji}</span>
+                <span className="min-w-0 flex-1 truncate">{a.titulo}</span>
+                {a.minutos && (
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {a.minutos < 60 ? `${a.minutos} min` : `${Math.round(a.minutos / 60)} h`}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Lo que llevas mas tiempo queriendo hacer. Lo dificil no es elegir, es acordarse.
+          </p>
         </Tarjeta>
       )}
 

@@ -347,3 +347,19 @@ export interface Movimiento {
   sobre_id: string | null;
   creado: string;
 }
+
+/** Algo que quieres hacer o que ya has hecho: un plan, un sitio, una peli. */
+export interface ApunteOcio {
+  id: string;
+  titulo: string;
+  categoria: string;
+  estado: 'pendiente' | 'hecho' | 'descartado';
+  enlace: string | null;
+  nota: string | null;
+  lugar: string | null;
+  con_quien: string | null;
+  valoracion: number | null;
+  fecha_hecho: string | null;
+  minutos: number | null;
+  creado: string;
+}

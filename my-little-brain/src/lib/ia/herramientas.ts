@@ -5,6 +5,7 @@ import { hoy as hoyIso, sumarDias } from '../fechas';
 import { calcularComida } from '../motor/alimentos';
 import { TIPOS_CARDIO, kcalCardio } from '../motor/cardio';
 import { AGUA_MAX_ML, VASO_ML, horasDeSueno } from '../motor/descanso';
+import { CATEGORIAS_OCIO } from '../motor/ocio';
 import { METRICAS, valorActual } from '../motor/objetivos';
 import { cargarPanel } from '../datos';
 import { MAX_HOY as MAX_TAREAS_HOY } from '../motor/tareas';
@@ -181,6 +182,45 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         fecha: FECHA,
       },
       required: [],
+    },
+  },
+  {
+    name: 'anotar_ocio',
+    description:
+      'Apunta algo que quiere hacer o ver (un sitio, una peli, un viaje, una formacion, una idea para '
+      + 'revisar). Si cuenta que YA lo ha hecho, pon ya_hecho en true y, si dice que tal estuvo, la '
+      + 'valoracion del 1 al 5 y la nota. Usalo en cuanto lo mencione, sin preguntar nada mas.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        titulo: { type: 'string' },
+        categoria: {
+          type: 'string',
+          enum: ['actividad', 'restaurante', 'viaje', 'pantalla', 'libro', 'formacion', 'experiencia', 'revisar', 'otros'],
+        },
+        ya_hecho: { type: 'boolean' },
+        valoracion: { type: 'number', description: '1 a 5, solo si ya lo ha hecho y dice que tal.' },
+        lugar: { type: 'string' },
+        con_quien: { type: 'string' },
+        enlace: { type: 'string' },
+        nota: { type: 'string' },
+        minutos: { type: 'number', description: 'Cuanto dura, si se sabe.' },
+      },
+      required: ['titulo'],
+    },
+  },
+  {
+    name: 'marcar_ocio_hecho',
+    description: 'Marca como hecho algo que ya tenia apuntado en su lista de ocio. Se busca por el titulo.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        titulo: { type: 'string' },
+        valoracion: { type: 'number' },
+        con_quien: { type: 'string' },
+        nota: { type: 'string' },
+      },
+      required: ['titulo'],
     },
   },
   {
@@ -797,6 +837,75 @@ async function despachar(
         texto: `Bienestar guardado (${fecha}).`,
         accion: { herramienta: nombre, resumen: partes.join(' · ') || 'check-in', xp },
       };
+    }
+
+    case 'anotar_ocio': {
+      const d = z
+        .object({
+          titulo: z.string().min(1),
+          categoria: z.string().optional(),
+          ya_hecho: z.boolean().optional(),
+          valoracion: num.optional(),
+          lugar: z.string().optional(),
+          con_quien: z.string().optional(),
+          enlace: z.string().optional(),
+          nota: z.string().optional(),
+          minutos: num.optional(),
+        })
+        .parse(entrada);
+
+      const cat = CATEGORIAS_OCIO.some((c) => c.id === d.categoria) ? d.categoria! : 'otros';
+      const hecho = d.ya_hecho === true;
+      const { error } = await supabase.from('ocio').insert({
+        user_id: userId,
+        titulo: d.titulo.slice(0, 160),
+        categoria: cat,
+        estado: hecho ? 'hecho' : 'pendiente',
+        fecha_hecho: hecho ? ctx.hoy : null,
+        valoracion: hecho && d.valoracion ? Math.max(1, Math.min(5, Math.round(d.valoracion))) : null,
+        lugar: d.lugar?.slice(0, 120) ?? null,
+        con_quien: d.con_quien?.slice(0, 120) ?? null,
+        enlace: d.enlace?.slice(0, 500) ?? null,
+        nota: d.nota?.slice(0, 500) ?? null,
+        minutos: d.minutos ? Math.round(d.minutos) : null,
+      });
+      if (error) throw error;
+
+      return {
+        texto: hecho ? `Apuntado como hecho: ${d.titulo}.` : `Apuntado en tu lista: ${d.titulo}.`,
+        accion: { herramienta: nombre, resumen: d.titulo },
+      };
+    }
+
+    case 'marcar_ocio_hecho': {
+      const d = z
+        .object({ titulo: z.string().min(1), valoracion: num.optional(), con_quien: z.string().optional(), nota: z.string().optional() })
+        .parse(entrada);
+
+      const { data: suyos } = await supabase
+        .from('ocio').select('id, titulo').eq('user_id', userId).eq('estado', 'pendiente').limit(200);
+      const llano = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const busca = llano(d.titulo);
+      const hallado = (suyos ?? []).find((o) => llano(o.titulo) === busca)
+        ?? (suyos ?? []).find((o) => llano(o.titulo).includes(busca) || busca.includes(llano(o.titulo)));
+
+      if (!hallado) {
+        return { texto: `No lo tenia apuntado. Puedo anotarlo ya como hecho con anotar_ocio.`, accion: null };
+      }
+
+      const { error } = await supabase
+        .from('ocio')
+        .update({
+          estado: 'hecho',
+          fecha_hecho: ctx.hoy,
+          ...(d.valoracion ? { valoracion: Math.max(1, Math.min(5, Math.round(d.valoracion))) } : {}),
+          ...(d.con_quien ? { con_quien: d.con_quien.slice(0, 120) } : {}),
+          ...(d.nota ? { nota: d.nota.slice(0, 500) } : {}),
+        })
+        .eq('id', hallado.id).eq('user_id', userId);
+      if (error) throw error;
+
+      return { texto: `Hecho: ${hallado.titulo}.`, accion: { herramienta: nombre, resumen: hallado.titulo } };
     }
 
     case 'registrar_agua': {

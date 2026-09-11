@@ -62,6 +62,9 @@ const llamadas = [
   ['registrar_gasto', { importe: 18, categoria: 'restaurantes', descripcion: 'Menu del mediodia' }],
   ['anotar_preocupacion', { texto: 'Caja baja este mes' }],
   ['retirar_preocupacion', { texto: 'Caja baja', accion: 'Cobre la factura del cliente A' }],
+  ['anotar_ocio', { titulo: 'Ruta del Cares', categoria: 'actividad', minutos: 300, lugar: 'Asturias' }],
+  ['anotar_ocio', { titulo: 'Dune', categoria: 'pantalla', ya_hecho: true, valoracion: 5, con_quien: 'Isa' }],
+  ['marcar_ocio_hecho', { titulo: 'ruta del cares', valoracion: 4 }],
   ['consultar_historial', { dias: 14 }],
 ];
 
@@ -1014,6 +1017,59 @@ check('no propone la variante del mismo movimiento como alternativa',
   !altPuente.some((e) => mismoMovimiento(e.id, 'puente_gluteo')),
   altPuente.map((e) => e.id).join(', '));
 check('pero si propone alternativas de verdad', altPuente.length > 0, String(altPuente.length));
+
+// ── 24. Ocio: la misma lista antes y despues ───────────────────────────
+const { resumenOcio, sugerencias, insightsOcio, categoriaOcio, CATEGORIAS_OCIO } = await import(`${L}/motor/ocio.js`);
+const { diasEntre: dEntre } = await import(`${L}/fechas.js`);
+
+const oc = (id, extra = {}) => ({ id, titulo: id, categoria: 'actividad', estado: 'pendiente', enlace: null, nota: null, lugar: null, con_quien: null, valoracion: null, fecha_hecho: null, minutos: null, creado: '2026-09-01T10:00:00Z', ...extra });
+const listaOcio = [
+  oc('cares', { titulo: 'Ruta del Cares', minutos: 300, creado: '2026-08-01T10:00:00Z' }),
+  oc('paco', { titulo: 'Casa Paco', categoria: 'restaurante', minutos: 90, creado: '2026-08-15T10:00:00Z' }),
+  oc('dune', { titulo: 'Dune', categoria: 'pantalla', estado: 'hecho', fecha_hecho: '2026-09-05', valoracion: 5, minutos: 155 }),
+  oc('museo', { titulo: 'Museo', estado: 'hecho', fecha_hecho: '2026-09-08' }),
+  oc('viejo', { titulo: 'Algo que ya no', estado: 'descartado' }),
+];
+const rOc = resumenOcio(listaOcio, '2026-09-10', dEntre);
+check('cuenta pendientes y hechas sin contar lo descartado', rOc.totalPendientes === 2 && rOc.totalHechos === 2, JSON.stringify({ p: rOc.totalPendientes, h: rOc.totalHechos }));
+check('agrupa por categoria y solo enseña las que tienen algo', rOc.categorias.length === 3, JSON.stringify(rOc.categorias.map((c) => [c.categoria.id, c.pendientes, c.hechos])));
+check('sabe cuanto hace que no haces nada', rOc.diasDesdeUltimo === 2 && rOc.ultimo?.titulo === 'Museo', JSON.stringify({ d: rOc.diasDesdeUltimo, u: rOc.ultimo?.titulo }));
+check('cuenta lo hecho este mes', rOc.hechosMes === 2, String(rOc.hechosMes));
+check('una lista vacia no rompe nada', resumenOcio([], '2026-09-10', dEntre).diasDesdeUltimo === null);
+
+// La pregunta real: "tengo una hora, ¿que hago?"
+check('lo que lleva mas tiempo esperando va primero', sugerencias(listaOcio)[0].id === 'cares', sugerencias(listaOcio).map((a) => a.id).join());
+const conHueco = sugerencias(listaOcio, { minutos: 120 });
+check('con una hora y media solo sale lo que cabe', conHueco.length === 1 && conHueco[0].id === 'paco', conHueco.map((a) => a.id).join());
+check('filtra por categoria', sugerencias(listaOcio, { categoria: 'restaurante' }).length === 1);
+check('lo hecho y lo descartado no salen como sugerencia', sugerencias(listaOcio).every((a) => a.estado === 'pendiente'));
+const sinDuracion = sugerencias([...listaOcio, oc('libre', { titulo: 'Sin duracion', creado: '2026-09-09T10:00:00Z' })], { minutos: 60 });
+check('lo que no tiene duracion puesta sigue saliendo, pero detras', sinDuracion.some((a) => a.id === 'libre'), sinDuracion.map((a) => a.id).join());
+
+// Lo que veo
+// Tres dias con plan y tres sin el: el minimo para que comparar se moje.
+const conPlan = [oc('d1', { estado: 'hecho', fecha_hecho: '2026-09-05' }), oc('d2', { estado: 'hecho', fecha_hecho: '2026-09-06' }), oc('d3', { estado: 'hecho', fecha_hecho: '2026-09-08' })];
+const diasOcio = [
+  ...['2026-09-05', '2026-09-06', '2026-09-08'].map((f) => diaMock(f, { animo: 9 })),
+  ...['2026-09-01', '2026-09-02', '2026-09-03', '2026-09-04'].map((f) => diaMock(f, { animo: 6 })),
+];
+const avisosOc = insightsOcio({ resumen: rOc, apuntes: [...listaOcio, ...conPlan], dias: diasOcio, hoy: '2026-09-10', diaSemana: 4 });
+check('con menos de tres dias por grupo no se moja', !insightsOcio({ resumen: rOc, apuntes: listaOcio, dias: diasOcio, hoy: '2026-09-10', diaSemana: 4 }).some((i) => i.id === 'animo'));
+check('cruza tu lista con tu animo', avisosOc.some((i) => i.id === 'animo' && /9/.test(i.texto)), JSON.stringify(avisosOc.map((i) => i.texto)));
+const enFinde = insightsOcio({ resumen: { ...rOc, diasDesdeUltimo: 15 }, apuntes: listaOcio, dias: [], hoy: '2026-09-12', diaSemana: 5 });
+check('el viernes, con tiempo sin hacer nada, te lo recuerda', enFinde.some((i) => i.id === 'finde' && /15 dias/.test(i.texto)), JSON.stringify(enFinde.map((i) => i.texto)));
+check('entre semana no da la brasa con eso', !insightsOcio({ resumen: { ...rOc, diasDesdeUltimo: 15 }, apuntes: listaOcio, dias: [], hoy: '2026-09-09', diaSemana: 3 }).some((i) => i.id === 'finde'));
+const vacioOc = insightsOcio({ resumen: resumenOcio([], '2026-09-10', dEntre), apuntes: [], dias: [], hoy: '2026-09-10', diaSemana: 3 });
+check('sin nada apuntado explica para que sirve, no regaña', vacioOc.length === 1 && /no tendras que pensar/.test(vacioOc[0].texto), JSON.stringify(vacioOc));
+check('ninguna frase de ocio te dice como vivir', [...avisosOc, ...enFinde, ...vacioOc].every((i) => !/deberias|tienes que|sal mas|aburrid/i.test(i.texto)));
+check('una categoria desconocida cae en otros', categoriaOcio('inventada').id === 'otros' && CATEGORIAS_OCIO.length === 9);
+
+// El coach
+const filasOcio = supabase.db.tablas.ocio ?? [];
+check('el coach apunta lo que quieres hacer', filasOcio.some((o) => o.titulo === 'Ruta del Cares' && o.categoria === 'actividad' && o.minutos === 300), JSON.stringify(filasOcio.map((o) => [o.titulo, o.estado])));
+check('y lo ya hecho lo apunta ya valorado', filasOcio.some((o) => o.titulo === 'Dune' && o.estado === 'hecho' && o.valoracion === 5 && o.con_quien === 'Isa'));
+check('marca como hecho algo que ya tenias apuntado', filasOcio.find((o) => o.titulo === 'Ruta del Cares')?.estado === 'hecho', JSON.stringify(filasOcio.find((o) => o.titulo === 'Ruta del Cares')));
+check('sin duplicar el apunte', filasOcio.filter((o) => o.titulo === 'Ruta del Cares').length === 1);
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);
