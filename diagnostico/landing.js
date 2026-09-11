@@ -1,6 +1,6 @@
 /* Landing del diagnóstico. Dos pasos: primero se comprueba si tiene sentido y
    solo entonces se pide el dato personal y se enseña el calendario. Quien no
-   pasa el corte no se queda sin nada: se le manda a la Radiografía. */
+   pasa el corte se le dice con claridad y se guarda el contacto. */
 (function () {
   'use strict';
 
@@ -52,7 +52,7 @@
     if (window.qvTrack) window.qvTrack('diagnostico_paso1', { cualificado: datos.cualificado });
 
     if (!datos.cualificado) {
-      // Se guarda igualmente: es un contacto que vale para la Radiografía.
+      // Se guarda igualmente: es un contacto que puede encajar más adelante.
       enviar(true);
       ver(p4);
       return;
@@ -86,7 +86,7 @@
       calendario();
       ver(p3);
     }).catch(function () {
-      b.disabled = false; b.textContent = 'Ver horas disponibles →';
+      b.disabled = false; b.textContent = 'Quiero ver dónde está la fuga →';
       error(e2, 'No ha salido. Escríbeme a hola@qualivo.io y lo vemos.');
     });
   });

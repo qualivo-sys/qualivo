@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diagnóstico de crecimiento · 15 minutos · Qualivo</title>
-<meta name="description" content="Quince minutos. Miramos tu sistema de captación y ventas entero, del anuncio al cierre, y te decimos dónde se te escapa el dinero. Plan por escrito y piloto de 30 días: si no mejoramos tus resultados, no pagas nada.">
+<meta name="description" content="Quince minutos. Miramos tu sistema de captación y ventas entero, del anuncio al cierre, y te decimos dónde se te escapa el dinero. Plan por escrito y piloto de 30 días con un número acordado: si no mejora, no pagas el piloto.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://qualivo.io/diagnostico/">
 <meta property="og:title" content="Te decimos dónde se te escapa el dinero entre el anuncio y el cierre.">
-<meta property="og:description" content="Ponemos agentes de IA en tu sistema de captación y ventas, justo donde se te escapa el negocio. Diagnóstico de 15 min, plan por escrito, piloto de 30 días. Si no mejoramos tus resultados, no pagas nada.">
+<meta property="og:description" content="Ponemos agentes de IA en tu sistema de captación y ventas, justo donde se te escapa el negocio. Diagnóstico de 15 min, plan por escrito, piloto de 30 días. Si no mejora el número que acordamos, no pagas el piloto.">
 <meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
 <link rel="icon" href="/assets/img/favicon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
@@ -159,10 +159,13 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
 .logos .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px clamp(26px,4vw,48px);opacity:.75}
 .casos{background:var(--tinta);color:#fff;padding:clamp(40px,6vw,64px) 0}
 .casos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--amarillo);text-align:center;margin-bottom:26px}
-.casos .rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px 18px;text-align:center}
+.casos .rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px 18px;text-align:center;align-items:center}
 .casos .n{white-space:nowrap;font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo)}
 .casos p{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:#AEB5BF}
 .casos p b{color:#fff;font-weight:700}
+.casos .destacado{background:var(--amarillo);border-radius:16px;padding:18px 14px 16px;color:var(--tinta)}
+.casos .destacado .n{color:var(--tinta)}
+.casos .destacado p{color:rgba(16,19,25,.8)}
 
 /* los ocho */
 .ocho{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px}
@@ -204,10 +207,10 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
   <div class="wrap">
     <div class="chip"><i></i>Diagnóstico de crecimiento · 15 min</div>
     <h1>Te decimos dónde se te <span class="am">escapa el dinero</span> entre el anuncio y el cierre.</h1>
-    <p class="bajada">Ponemos agentes de IA en tu sistema de captación y ventas, justo donde se te escapa el negocio. Sin empezar de cero, sin rehacer tu sistema, sin más trabajo manual para tu equipo.</p>
+    <p class="bajada">Miramos tu sistema de captación y ventas entero, encontramos dónde está perdiendo rendimiento y ponemos un agente justo ahí. Sin rehacer todo lo demás.</p>
     <div class="cta">
-      <a href="#reservar" class="btn grande">Reservar mis 15 minutos →</a>
-      <small>Sales con un plan por escrito, lo hagas con nosotros o no.<br>Si no mejoramos tus resultados, no pagas nada.</small>
+      <a href="#reservar" class="btn grande">Quiero ver dónde está la fuga →</a>
+      <small>Quince minutos. Sales con un plan por escrito, lo hagas con nosotros o no.<br>Si no mejora el número que acordamos, no pagas el piloto.</small>
     </div>
     <div class="tres">
       <div><b>1 · Diagnóstico</b> 15 min. Encontramos la fuga.</div>
@@ -243,10 +246,10 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
 
 <section class="casos">
   <div class="wrap">
-    <p class="lbl">Más negocio sin comprar más demanda</p>
+    <p class="lbl">No siempre hacen falta más leads. A veces hace falta ver dónde pierdes los que ya tienes.</p>
     <div class="rej">
       <div><div class="n">6,45×</div><p>lo invertido <b>sin captar un lead más</b><br>Nuria Roure</p></div>
-      <div><div class="n">34.500 €</div><p>en 25 oportunidades paradas que un agente<br>encontró en su primera pasada · CRM de Qualivo</p></div>
+      <div class="destacado"><div class="n">34.500 €</div><p>en 25 oportunidades paradas que ya estaban en el CRM.<br>Un agente las encontró en su primera pasada.</p></div>
       <div><div class="n">10,2×</div><p>del anuncio a la matrícula<br>Escola Aeronàutica de Catalunya</p></div>
       <div><div class="n">0,1 → 7,6</div><p>ROAS, rescatando una cuenta que perdía dinero<br>Equipzilla</p></div>
     </div>
@@ -274,17 +277,13 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
   <div class="wrap">
     <h2>Encontramos la fuga.<br>Ponemos un agente justo ahí.</h2>
     <div class="filas">
-      <div class="fila-a"><span class="f">Adquisición</span><span class="fl">→</span><span class="a"><b>Un agente</b> que encuentra dónde pierdes eficiencia antes de que llegue el lead.</span></div>
+      <div class="fila-a"><span class="f">Adquisición</span><span class="fl">→</span><span class="a"><b>Un agente</b> que detecta qué campañas, tráfico, mensajes o inversión no acaban en negocio.</span></div>
       <div class="fila-a"><span class="f">Anuncios</span><span class="fl">→</span><span class="a"><b>Un agente</b> que detecta qué campañas y palabras traen negocio, no solo clics.</span></div>
       <div class="fila-a"><span class="f">El lead</span><span class="fl">→</span><span class="a"><b>Un agente</b> que cualifica antes de gastar tiempo comercial.</span></div>
       <div class="fila-a"><span class="f">Seguimiento</span><span class="fl">→</span><span class="a"><b>Un agente</b> que detecta lo que se quedó a medias y lo persigue.</span></div>
       <div class="fila-a"><span class="f">El CRM</span><span class="fl">→</span><span class="a"><b>Un agente</b> que encuentra oportunidades paradas y las devuelve a la mesa.</span></div>
     </div>
-    <div class="sines">
-      <div><h3>Sin empezar de cero</h3><p>Tu web, tu CRM, tus campañas y tu agencia se quedan como están.</p></div>
-      <div><h3>Sin rehacer tu sistema</h3><p>Entramos en el punto que falla. El resto sigue funcionando como hoy.</p></div>
-      <div><h3>Sin más trabajo manual</h3><p>El agente hace lo que hoy depende de que alguien se acuerde.</p></div>
-    </div>
+    <div class="sines" style="grid-template-columns:1fr"><div><h3>Sin empezar de cero</h3><p>Tu web, tus campañas, tu CRM, tus herramientas y tu equipo siguen funcionando como hoy. Entramos en el punto concreto donde está la fuga.</p></div></div>
     <p class="remate">No sustituimos tu sistema. <span class="am">Lo agentizamos.</span></p>
   </div>
 </section>
@@ -303,7 +302,7 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
       </div>
       <div class="paso destacado">
         <div class="num">03</div>
-        <div><h3>Piloto. Treinta días.</h3><p>Montamos el agente sobre lo que ya tienes. Un proceso, un número: se mide antes de empezar y se vuelve a medir al día treinta. <strong>Si no mejoramos tus resultados, no pagas nada.</strong></p></div>
+        <div><h3>Piloto. Treinta días.</h3><p>Un proceso. Un número. Treinta días. Montamos el agente sobre lo que ya tienes, medimos el número antes de empezar y lo volvemos a medir al terminar. <strong>Si no mejora, no pagas el piloto.</strong></p></div>
       </div>
     </div>
   </div>
@@ -312,9 +311,9 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
 <section class="sec garantia">
   <div class="wrap">
     <div class="caja">
-      <h2>Si no mejoramos tus resultados, no pagas nada.</h2>
+      <h2>Si no mejora el número que acordamos, no pagas el piloto.</h2>
     </div>
-    <p>El número que tiene que moverse se acuerda por escrito antes de empezar, se mide el primer día y se vuelve a medir el día treinta. Si no se ha movido, no hay factura y lo que hayamos montado se queda contigo.</p>
+    <p>El número que tiene que moverse se acuerda por escrito antes de empezar, se mide el día 1 y se vuelve a medir el día 30. Si no se ha movido, no hay factura y lo que hayamos montado se queda contigo.</p>
   </div>
 </section>
 
@@ -349,8 +348,8 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
     <h2>Lo que suelen preguntar.</h2>
     <div style="margin-top:36px;max-width:760px">
       <details><summary>¿Cuánto cuesta el diagnóstico?</summary><p>Nada. Son quince minutos y sales con el plan por escrito, lo hagas con nosotros o no. Si vemos que no podemos ayudarte, te lo decimos en la misma llamada.</p></details>
-      <details><summary>¿Y el piloto?</summary><p>Treinta días sobre un proceso concreto, el que hayamos visto que más te está costando. El número que tiene que moverse se acuerda antes de empezar. Si al día treinta no se ha movido, no pagas nada.</p></details>
-      <details><summary>¿Y si ya trabajo con una agencia?</summary><p>Mejor. No venimos a sustituirla. Miramos el recorrido entero, incluido lo que pasa después de que ella trae el contacto. Muchas veces su trabajo está bien y la fuga está detrás.</p></details>
+      <details><summary>¿Y el piloto?</summary><p>Treinta días sobre un proceso concreto, el que hayamos visto que más te está costando. El número que tiene que moverse se acuerda antes de empezar. Si al día 30 no se ha movido, no pagas el piloto.</p></details>
+      <details><summary>¿Y si ya trabajo con una agencia?</summary><p>No hace falta sustituirla. Miramos el recorrido entero y entramos donde esté la fuga: antes de su trabajo, después o en medio. No venimos necesariamente a llevarte el marketing. Empezamos por encontrar qué está limitando el rendimiento.</p></details>
     </div>
   </div>
 </section>
@@ -424,7 +423,7 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
             <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
             <p class="err" id="e2" hidden></p>
-            <button type="submit" class="btn" style="width:100%" id="b2">Ver horas disponibles →</button>
+            <button type="submit" class="btn" style="width:100%" id="b2">Quiero ver dónde está la fuga →</button>
           </div>
 
           <div id="p3" hidden>
@@ -438,8 +437,7 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
             <div class="fuera">
               <h3>Sinceramente: todavía no.</h3>
               <p>Un diagnóstico completo tiene sentido cuando ya entran oportunidades y hay algo montado detrás. En tu caso te costaría más tiempo del que te devolvería, y prefiero decírtelo ahora.</p>
-              <p>Pero hay algo que sí te sirve hoy: once preguntas, noventa segundos, y te dice cuál de las cinco partes de tu crecimiento es la más floja. Gratis y sin dejar ningún dato.</p>
-              <a class="btn-sec" href="/donde-se-rompe-tu-crecimiento/">Ver dónde se rompe mi crecimiento →</a>
+              <p>Cuando eso cambie, escríbenos a <a href="mailto:hola@qualivo.io" style="color:var(--teal);font-weight:700">hola@qualivo.io</a> y lo miramos.</p>
             </div>
           </div>
         </form>
