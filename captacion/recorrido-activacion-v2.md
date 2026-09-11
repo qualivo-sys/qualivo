@@ -139,6 +139,19 @@ Una sola fuente de verdad. El CRM manda; el código solo lee y escribe etiquetas
 | `act-agendado` | tiene hueco en el calendario · **para todo** |
 | `act-respondio` | ha contestado · **para la cadencia**, sigue el agente |
 | `act-baja` | ha dicho que no · **no se le vuelve a escribir** |
+
+Las tres las pone **el propio reloj**, en cada pasada de diez minutos y antes de hacer
+nada: mira si hay un mensaje entrante posterior al arranque, si hay cita en el
+calendario y si el texto pide la baja. No hace falta ningún workflow de GHL ni de n8n.
+
+Se hizo así a propósito. Escribir a alguien que ya ha contestado, o a quien ha pedido
+que le dejen en paz, es el peor fallo de esta cadencia y el que costó la queja de
+protección de datos de agosto. Si eso dependiera de un workflow en otra herramienta,
+el día que ese workflow se desactive nadie se entera hasta que llega la queja.
+
+Se consideran baja: «baja», «darme de baja», «no me interesa», «dejadme en paz»,
+«stop», «no vuelvas a escribirme» y equivalentes. «No tengo tiempo ahora» no es una
+baja: eso es timing, y lo trabaja el agente.
 | `act-fin` | cadencia agotada |
 
 ## Quién hace qué

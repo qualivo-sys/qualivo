@@ -184,6 +184,49 @@ async function lanzarLlamada(datos) {
   return { ok: true, id: d.id };
 }
 
+// Detecta si el contacto ha contestado, sin depender de que GHL tenga un
+// workflow puesto. Devuelve qué hacer: parar la cadencia porque ha respondido,
+// o darle de baja si lo ha pedido con todas las letras.
+const BAJA = /\b(baja|d[ae]r?me de baja|no me interesa|no estoy interesad|dejad?me? en paz|stop|unsubscribe|no escrib|no vuelvas a|no quiero)\b/i;
+
+async function revisarRespuesta(contactId, desdeMs) {
+  try {
+    const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
+      encodeURIComponent(process.env.GHL_LOCATION_ID) + '&contactId=' + contactId,
+      { headers: cabeceras() });
+    if (!r.ok) return { respondio: false };
+    const d = await r.json();
+    const convs = d.conversations || [];
+    let respondio = false, texto = '';
+    for (const c of convs) {
+      const fecha = Number(c.lastMessageDate || 0);
+      if (String(c.lastMessageDirection) === 'inbound' && fecha >= (desdeMs || 0)) {
+        respondio = true;
+        texto = String(c.lastMessageBody || '');
+      }
+      // Un WhatsApp entrante posterior al arranque también cuenta como respuesta.
+      const wa = Number(c.lastInboundWhatsappMessageDate || 0);
+      if (wa && wa >= (desdeMs || 0)) respondio = true;
+    }
+    return { respondio: respondio, baja: BAJA.test(texto), texto: texto.slice(0, 200) };
+  } catch (err) {
+    return { respondio: false };
+  }
+}
+
+async function tieneCitaGHL(contactId) {
+  try {
+    const r = await fetch(GHL_BASE + '/contacts/' + contactId + '/appointments', { headers: cabeceras() });
+    if (!r.ok) return false;
+    const d = await r.json();
+    return (d.events || d.appointments || []).some(function (e) {
+      return !/cancelled|noshow/i.test(String(e.appointmentStatus || ''));
+    });
+  } catch (err) {
+    return false;
+  }
+}
+
 function tiene(contacto, etiqueta) {
   return (contacto.tags || []).some(function (t) { return String(t).toLowerCase() === etiqueta; });
 }
@@ -196,5 +239,5 @@ function minutosDesde(iso) {
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje,
-  lanzarLlamada, telefonoE164, tiene, minutosDesde
+  lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

@@ -50,20 +50,6 @@ function siguientePaso(contacto, minutos) {
   return null;
 }
 
-// Antes de molestar por teléfono se comprueba que no haya cogido hueco ya.
-async function tieneCita(contactId) {
-  try {
-    const r = await fetch(A.GHL_BASE + '/contacts/' + contactId + '/appointments', { headers: A.cabeceras() });
-    if (!r.ok) return false;
-    const d = await r.json();
-    return (d.events || d.appointments || []).some(function (e) {
-      return !/cancelled|noshow/i.test(String(e.appointmentStatus || ''));
-    });
-  } catch (err) {
-    return false;
-  }
-}
-
 async function correo(contacto, asunto, html) {
   const email = contacto.email;
   if (!email) return { ok: false, motivo: 'sin_email' };
@@ -104,6 +90,12 @@ async function procesarSecuencias(resumen) {
         continue;
       }
       const minutos = minutosDesdeInicio(c);
+      const rr = await A.revisarRespuesta(c.id, Date.now() - minutos * 60000);
+      if (rr.baja || rr.respondio) {
+        await A.etiquetar(c.id, [rr.baja ? 'act-baja' : 'act-respondio'], [sec.disparador]);
+        resumen.cerrados++;
+        continue;
+      }
       let paso = null;
       for (const p of sec.pasos) {
         if (!A.tiene(c, p.etiqueta) && minutos >= p.dias * 24 * 60) { paso = p; break; }
@@ -163,6 +155,30 @@ module.exports = async function handler(req, res) {
     }
 
     const minutos = minutosDesdeInicio(c);
+
+    // Antes de tocar nada: ¿ha contestado, ha cogido hora o ha pedido la baja?
+    // Se mira aquí y no en un workflow de GHL para que no dependa de que ese
+    // workflow exista: escribir a quien ya ha respondido es el peor fallo
+    // posible de esta cadencia.
+    const inicioMs = Date.now() - minutos * 60000;
+    const r = await A.revisarRespuesta(c.id, inicioMs);
+    if (r.baja) {
+      await A.etiquetar(c.id, ['act-baja'], ['activacion']);
+      await A.nota(c.id, 'Pide no recibir más contacto: «' + (r.texto || '') + '». Cadencia detenida.');
+      resumen.cerrados++;
+      continue;
+    }
+    if (r.respondio) {
+      await A.etiquetar(c.id, ['act-respondio'], ['activacion']);
+      resumen.cerrados++;
+      continue;
+    }
+    if (await A.tieneCitaGHL(c.id)) {
+      await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
+      resumen.cerrados++;
+      continue;
+    }
+
     const paso = siguientePaso(c, minutos);
     if (!paso) { resumen.esperando++; continue; }
 
@@ -191,7 +207,7 @@ module.exports = async function handler(req, res) {
         resumen.wa++; hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
-        if (await tieneCita(c.id)) {
+        if (await A.tieneCitaGHL(c.id)) {
           await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
           resumen.cerrados++; continue;
         }
