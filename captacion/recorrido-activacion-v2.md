@@ -95,7 +95,7 @@ Una sola fuente de verdad. El CRM manda; el código solo lee y escribe etiquetas
 | Reloj de la cadencia | `api/activacion.js` (cron cada 10 min) | — |
 | Entrada del lead form | `api/meta-leadform.js` | — |
 | Entrada de la landing | `api/diagnostico.js` | — |
-| Voz · clon de campaña | Vapi | `VAPI_ASSISTANT_ID` en el entorno |
+| Voz · clon de campaña | Vapi | `af978111-4c4e-4373-ba7b-91827bd3efde` · «Raquel · Landing Diagnóstico» |
 | Voz · número saliente | Vapi BYO | `b60821ae-39fc-46b3-b8f8-23ee593ee6fd` |
 | WhatsApp | GHL, número 647 | location `bHGMuZEGUESZmVoNv9HT` |
 | Calendario | GHL | `zBlsw8BEKA2zah81YlOl` (15 min) |
@@ -117,10 +117,25 @@ Ninguna clave está en el repositorio y así se queda.
 | `GHL_API_KEY` · `GHL_LOCATION_ID` | contactos, etiquetas y WhatsApp · **ya puestas** |
 | `RESEND_API_KEY` | los tres correos · **ya puesta** |
 | `CRON_SECRET` | proteger el reloj · **ya puesta** |
-| `VAPI_API_KEY` | lanzar la llamada · **falta** |
-| `VAPI_ASSISTANT_ID` | el clon de esta campaña · **falta** |
-| `VAPI_PHONE_NUMBER_ID` | por defecto el 647 · opcional |
-| `META_LEADFORM_VERIFY` · `META_LEADFORM_TOKEN` | webhook del lead form · **falta** |
+| `VAPI_API_KEY` | lanzar la llamada · pendiente de poner en Vercel |
+| `VAPI_ASSISTANT_ID` | `af978111-4c4e-4373-ba7b-91827bd3efde` · pendiente de poner |
+| `VAPI_PHONE_NUMBER_ID` | por defecto el 647 · no hace falta tocarlo |
+| `META_LEADFORM_TOKEN` | token de sistema, no caduca · pendiente de poner |
+| `META_LEADFORM_VERIFY` | lo inventas tú; el mismo texto va en Meta · pendiente |
+
+## Lo comprobado el 11-sep
+
+| Pieza | Estado |
+|---|---|
+| Clon de voz con `agendar_diagnostico` conectada | creado y verificado |
+| Número saliente +34 647118491 | existe en Vapi, id `b60821ae-39fc-46b3-b8f8-23ee593ee6fd` |
+| Token de GHL contra `/conversations/messages` | responde; puede mandar WhatsApp |
+| Token de Meta | usuario de sistema, sin caducidad, con `leads_retrieval` |
+| `/api/activacion/` en producción | 401 sin secreto, como debe ser |
+| `/api/meta-leadform/` en producción | 403 con token equivocado, como debe ser |
+
+**La URL del webhook lleva barra final**: `https://qualivo.io/api/meta-leadform/`.
+Sin ella el sitio responde 308 y Meta no sigue redirecciones en POST.
 
 Sin `VAPI_API_KEY` el reloj sigue funcionando: manda WhatsApp y correos y **anota la
 llamada como pendiente** en vez de lanzarla. No se cae y no se pierde ningún lead.
