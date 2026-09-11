@@ -3,12 +3,12 @@
 @font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#3a3a3a;padding:40px}
-.ad{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 44px;background:#0A0A0B}
+.ad{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 44px;background:#050505}
 .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .velo{position:absolute;inset:0}
 .k{position:absolute;top:48px;left:56px;font-size:21px;letter-spacing:.28em;text-transform:uppercase;font-weight:800;color:#F4CC38}
 .t{position:absolute;top:84px;left:56px;right:56px;font-family:Anton;line-height:1;text-transform:uppercase;color:#F2EEE6}
-.s{position:absolute;left:56px;right:56px;font-size:30px;line-height:1.35;color:rgba(242,238,230,.9);font-weight:600}
+.s{position:absolute;left:56px;right:56px;font-size:30px;line-height:1.35;color:rgba(242,238,230,.92);font-weight:600}
 .franja{position:absolute;left:0;right:0;bottom:0;height:232px;background:#F4CC38;color:#101319;padding:30px 56px 0}
 .franja .pasos{display:flex;align-items:center;gap:14px;font-family:Anton;font-size:29px;text-transform:uppercase;flex-wrap:wrap}
 .franja .pasos span{display:inline-flex;align-items:center;gap:11px}
@@ -17,19 +17,32 @@ body{background:#3a3a3a;padding:40px}
 .franja .gar{margin-top:16px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.05}
 .franja .pie{position:absolute;bottom:24px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:21px;color:rgba(16,19,25,.6)}
 .franja .pie b{font-family:Anton;font-size:23px;color:#101319;letter-spacing:.04em}
-/* 1 radiografia: la foto ya es negra arriba, el velo solo abajo */
-.a1 .velo{background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
-.a1 .foto{height:1118px;object-position:center bottom}
-/* 2 tendedero: velo arriba para el titular, cielo se oscurece */
-.a2 .velo{background:linear-gradient(180deg,rgba(8,8,10,.86) 0%,rgba(8,8,10,.55) 30%,rgba(8,8,10,.05) 55%,rgba(8,8,10,.5) 100%)}
-.a2 .foto{object-position:center 60%}
+
+/* 1 radiografía: fondo negro uniforme, la placa entera cabe sobre la franja */
+.a1 .foto{object-fit:contain;object-position:center top;top:0;height:1225px}
+.a1 .velo{background:linear-gradient(180deg,rgba(0,0,0,0) 78%,rgba(0,0,0,.5) 100%)}
+/* 2 cuadro de mandos: arriba ya es negro */
+.a2 .foto{object-position:center 50%}
+.a2 .velo{background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 40%)}
+/* 3 médico: noche, velo arriba para el titular */
+.a3 .foto{object-position:center 22%}
+.a3 .velo{background:linear-gradient(180deg,rgba(6,6,8,.9) 0%,rgba(6,6,8,.72) 24%,rgba(6,6,8,.15) 46%,rgba(6,6,8,0) 60%)}
+/* 4 cinta: fondo crema, tipografía en tinta */
+.a4 .foto{object-position:center 50%}
+.a4 .k{color:#E8590C}
+.a4 .t{color:#0A0A0B}
+.a4 .s{color:rgba(10,10,11,.8)}
+/* 5 plano: madera, velo arriba */
+.a5 .foto{object-position:center 88%}
+.a5 .velo{background:linear-gradient(180deg,rgba(10,10,11,.94) 0%,rgba(10,10,11,.9) 22%,rgba(10,10,11,.7) 30%,rgba(10,10,11,.2) 40%,rgba(10,10,11,0) 48%)}
+.a5 .s{left:292px;font-size:28px}
 </style></head><body>
 
 <div class="ad a1">
   <img class="foto" src="fotos/01.png"><div class="velo"></div>
   <div class="k">Diagnóstico de crecimiento</div>
-  <div class="t" style="font-size:112px">Tu sistema<br>de ventas,<br><span style="color:#F4CC38">radiografiado.</span></div>
-  <div class="s" style="top:480px">Quince minutos. Vemos dónde está la fractura<br>y cuánto te está costando.</div>
+  <div class="t" style="font-size:104px">Tu sistema de ventas,<br><span style="color:#F4CC38">radiografiado.</span></div>
+  <div class="s" style="top:310px">Quince minutos. Vemos dónde está la fractura<br>y cuánto te está costando.</div>
   <div class="franja">
     <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
     <div class="gar">Si no mejora, no pagas.</div>
@@ -39,9 +52,45 @@ body{background:#3a3a3a;padding:40px}
 
 <div class="ad a2">
   <img class="foto" src="fotos/02.png"><div class="velo"></div>
-  <div class="k">Seguimiento</div>
-  <div class="t" style="font-size:88px">Los presupuestos<br>que mandaste<br>este mes<span style="color:#F4CC38">.</span></div>
-  <div class="s" style="top:420px">Siguen ahí. Nadie los ha recogido.</div>
+  <div class="k">Diagnóstico de crecimiento</div>
+  <div class="t" style="font-size:100px">Siete avisos<br>encendidos.<br><span style="color:#F4CC38">Y tú, pisando a fondo.</span></div>
+  <div class="s" style="top:420px">Anuncios, web, formularios, respuesta, seguimiento,<br>presupuestos, cierre. Los miramos todos en quince minutos.</div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Si no mejora, no pagas.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<div class="ad a3">
+  <img class="foto" src="fotos/03.png"><div class="velo"></div>
+  <div class="k">Diagnóstico de crecimiento</div>
+  <div class="t" style="font-size:104px">Tu negocio<br>no está enfermo.<br><span style="color:#F4CC38">Tiene fugas.</span></div>
+  <div class="s" style="top:420px">Y se encuentran en quince minutos. Anuncios, web, leads,<br>seguimiento, cierre: todo el sistema, en una llamada.</div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Si no mejora, no pagas.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<div class="ad a4">
+  <img class="foto" src="fotos/04.png"><div class="velo"></div>
+  <div class="k">Diagnóstico de crecimiento</div>
+  <div class="t" style="font-size:96px">Así se pierde el dinero<br>en un sistema<br>de ventas<span style="color:#E8590C">.</span></div>
+  <div class="s" style="top:400px">Por los huecos entre una parte y la siguiente.<br>Del anuncio a la web. Del lead a la llamada.<br>Del presupuesto al cierre.</div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Si no mejora, no pagas.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<div class="ad a5">
+  <img class="foto" src="fotos/05.png"><div class="velo"></div>
+  <div class="k">Diagnóstico de crecimiento</div>
+  <div class="t" style="font-size:104px">Dónde se te va<br>el dinero. <span style="color:#F4CC38">Marcado.</span></div>
+  <div class="s" style="top:312px">Eso es lo que te llevas por escrito:<br>dónde se escapa, cuánto y qué arreglar primero.</div>
   <div class="franja">
     <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
     <div class="gar">Si no mejora, no pagas.</div>
