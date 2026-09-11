@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
       if (gasto >= GASTO_SIN_LEADS && leads === 0) {
         avisos.push(r.campaign_name + ': ' + eur(gasto) + ' sin un solo lead. Merece mirarla.');
       } else if (leads > 0 && cpl > CPL_MALO) {
-        avisos.push(r.campaign_name + ': lead a ' + eur(cpl) + ', el doble de lo normal en esta cuenta.');
+        avisos.push(r.campaign_name + ': lead a ' + eur(cpl) + ', por encima del umbral de ' + eur(CPL_MALO) + ' que fijamos.');
       }
     }
   } catch (err) {
