@@ -14,8 +14,8 @@ const CF = {
   estudios:          'Om5K9YjzJnO7YvglvPGb',
   fuente_plataforma: 'w4iNpw1LrivCyb0vvKsZ',
   fuente_campania:   'CLYQMLrGYZi8iiHRactB',
-  iman_captacion:    null,   // se resuelve por fieldKey
-  resultado_test:    null,
+  iman_captacion:    'Baa3dQNDNsn1egjx5cxE',
+  resultado_test:    'UGXJAIaJYIiT8HTOUJSj',
 };
 
 // Traducción a los valores exactos de cada desplegable del CRM
@@ -28,6 +28,17 @@ const TAG_IMAN= { lm_test_tcp:'lm-test-tcp', lm_calc_sueldo:'lm-calc-sueldo',
                   lm_guia_seleccion:'lm-guia-seleccion', lm_test_perfil:'lm-test-perfil',
                   lm_temario_fd:'lm-temario-fd' };
 const TAG_CURSO={ TCP:'lead-tcp', AT:'lead-azafata-tierra', FD:'lead-flight-dispatcher' };
+
+// Traza legible para la asesora, en el campo de texto largo del contacto
+function resumen(body, sc, det) {
+  const l = [];
+  if (body.resultado) l.push('Resultado: ' + body.resultado);
+  l.push('Puntuación: ' + (sc.score ?? '?') + ' (' + (sc.tag || '?') + ')');
+  if (body.plazo) l.push('Quiere empezar: ' + (PLAZO[body.plazo] || body.plazo));
+  if (det && Object.keys(det).length) l.push('Respuestas: ' + JSON.stringify(det));
+  if (body.utm) l.push('Origen: ' + body.url + ' ' + body.utm);
+  return l.join('\n');
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'method' });
@@ -61,9 +72,9 @@ export default async function handler(req, res) {
       { id: CF.programa_interes, value: PROGRAMA[body.curso] || 'Aun no estoy seguro' },
       { id: CF.fuente_plataforma,value: 'Organico SEO' },
       { id: CF.fuente_campania,  value: body.magnet || '' },
-    ].filter(f => f.id),
-    // trazabilidad completa por si se quiere volcar a un campo de texto largo
-    meta: { magnet: body.magnet, url: body.url, utm: body.utm, resultado: body.resultado || null, detalle: det, puntos: sc.reasons || [] }
+      { id: CF.iman_captacion,   value: IMAN[body.magnet] || '' },
+      { id: CF.resultado_test,   value: resumen(body, sc, det) },
+    ].filter(f => f.id && f.value !== '' && f.value != null),
   };
 
   const hook  = process.env.CRM_WEBHOOK_URL;     // webhook de entrada del CRM
@@ -85,7 +96,8 @@ export default async function handler(req, res) {
         headers: { Authorization: 'Bearer ' + token, Version: '2021-07-28', 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...payload, locationId: loc })
       });
-      return res.status(200).json({ ok: r.ok, mode: 'ghl', score: sc.score ?? null, tag: sc.tag ?? null });
+      const detalle = r.ok ? null : (await r.text()).slice(0, 300);
+      return res.status(200).json({ ok: r.ok, mode: 'ghl', score: sc.score ?? null, tag: sc.tag ?? null, detalle });
     }
     const r = await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     return res.status(200).json({ ok: r.ok, mode: 'webhook', score: sc.score ?? null, tag: sc.tag ?? null });

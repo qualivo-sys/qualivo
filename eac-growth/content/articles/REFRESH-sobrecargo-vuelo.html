@@ -1,0 +1,122 @@
+<style>
+.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+ max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.eac-article *{box-sizing:border-box}
+.eac-article a{color:var(--sky);text-decoration:underline;text-underline-offset:2px}
+.eac-kicker{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+ color:var(--r);background:#FDF2F2;border:1px solid #F4CCCE;padding:5px 13px;border-radius:999px;margin:0 0 16px}
+.eac-article h1{font-size:2.1em;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:0 0 .3em}
+.eac-meta{font-size:14px;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:14px;margin:0 0 24px}
+.eac-lead{font-size:1.14em;line-height:1.62;color:#233040;margin:0 0 1.2em}
+.eac-article h2{font-size:1.45em;line-height:1.25;font-weight:800;letter-spacing:-.01em;margin:2em 0 .5em;
+ padding-top:.55em;border-top:3px solid var(--r);display:block}
+.eac-article h3{font-size:1.12em;font-weight:700;margin:1.6em 0 .35em}
+.eac-article p{margin:0 0 1.1em}
+.eac-article ul,.eac-article ol{margin:0 0 1.2em;padding-left:1.3em}
+.eac-article li{margin:.4em 0}
+.eac-key{border-left:5px solid var(--r);background:linear-gradient(180deg,#FFF7F7 0%,#fff 100%);
+ border:1px solid #F4DDDE;border-left-width:5px;border-radius:0 14px 14px 0;padding:18px 22px;margin:1.6em 0}
+.eac-key .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--r);margin-bottom:.55em}
+.eac-key ul{margin:0;padding-left:1.15em}
+.eac-toc{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:1.8em 0}
+.eac-toc .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-toc ol{margin:0;padding-left:1.2em;font-size:.96em}
+.eac-toc li{margin:.28em 0}
+.eac-stats{display:flex;flex-wrap:wrap;gap:10px;margin:1.5em 0}
+.eac-stat{flex:1 1 170px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--r);
+ border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
+.eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
+.eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
+.eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
+.eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
+.eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
+.eac-t td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.eac-t tr:nth-child(even) td{background:#FAFBFC}
+.eac-steps{list-style:none;counter-reset:s;margin:1.5em 0;padding:0}
+.eac-steps li{counter-increment:s;position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:16px 18px 16px 62px;margin:0 0 10px}
+.eac-steps li:before{content:counter(s);position:absolute;left:16px;top:15px;width:32px;height:32px;border-radius:50%;
+ background:var(--r);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.eac-steps b{display:block;margin-bottom:2px}
+.eac-pc{display:flex;flex-wrap:wrap;gap:12px;margin:1.5em 0}
+.eac-pc>div{flex:1 1 260px;border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#fff}
+.eac-pc .ok{border-top:3px solid #17915B}.eac-pc .ko{border-top:3px solid var(--r)}
+.eac-pc .t{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:.4em}
+.eac-pc .ok .t{color:#17915B}.eac-pc .ko .t{color:var(--r)}
+.eac-pc ul{margin:0;padding-left:1.1em;font-size:.96em}
+.eac-note,.eac-warn{border-radius:12px;padding:14px 18px;margin:1.5em 0;font-size:.97em}
+.eac-note{background:#F0F6FF;border:1px solid #CFE0FA}
+.eac-warn{background:#FFF8E9;border:1px solid #F2DFB0}
+.eac-note .t,.eac-warn .t{display:block;font-weight:800;margin-bottom:.25em}
+.eac-article blockquote{border-left:4px solid var(--r);background:var(--mist);margin:1.5em 0;padding:14px 20px;
+ font-size:1.05em;font-style:italic;border-radius:0 10px 10px 0}
+.eac-article blockquote p{margin:0}
+.eac-cta{background:linear-gradient(135deg,#0E1621 0%,#1B2A3D 100%);color:#fff;border-radius:16px;padding:30px 26px;margin:2.4em 0;text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .35em;font-size:1.3em;font-weight:800}
+.eac-cta p{color:#BFCADA;margin:0 0 1.2em;font-size:1em}
+.eac-btn{display:inline-block;background:var(--r);color:#fff !important;text-decoration:none !important;font-weight:800;
+ padding:14px 30px;border-radius:999px;margin:4px}
+.eac-btn2{display:inline-block;background:transparent;color:#fff !important;border:1px solid rgba(255,255,255,.45);
+ text-decoration:none !important;font-weight:700;padding:13px 26px;border-radius:999px;margin:4px}
+.eac-recap{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:2em 0}
+.eac-recap .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-faq details{border:1px solid var(--line);border-radius:12px;padding:0;margin:0 0 10px;background:#fff}
+.eac-faq summary{cursor:pointer;font-weight:700;padding:14px 18px;list-style:none;position:relative;padding-right:44px}
+.eac-faq summary::-webkit-details-marker{display:none}
+.eac-faq summary:after{content:"+";position:absolute;right:18px;top:11px;font-size:22px;color:var(--r);font-weight:800}
+.eac-faq details[open] summary:after{content:"–"}
+.eac-faq .a{padding:0 18px 14px;color:#25313F}
+.eac-faq .a p{margin:0}
+.eac-rel{border-top:1px solid var(--line);margin-top:2.4em;padding-top:16px}
+.eac-rel .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-rel ul{margin:0;padding-left:1.1em}
+.eac-author{display:flex;gap:14px;align-items:flex-start;background:var(--mist);border:1px solid var(--line);
+ border-radius:14px;padding:16px 18px;margin:2em 0 0;font-size:14.5px;line-height:1.6;color:var(--mut)}
+.eac-author b{color:var(--ink)}
+@media(max-width:700px){
+ .eac-article{font-size:17px}
+ .eac-article h1{font-size:1.72em}
+ .eac-article h2{font-size:1.28em}
+ .eac-cta{padding:24px 18px}
+ .eac-steps li{padding:14px 16px 14px 56px}
+}
+</style>
+<article class="eac-article">
+<span class="eac-kicker">Carrera · Cabina</span>
+<h1>Sobrecargo de vuelo: qué hace, cuánto gana y cómo se llega</h1>
+<p class="eac-meta">Actualizado el septiembre de 2026 · 3 min de lectura · Por el equipo de EAC</p>
+<p class="eac-lead"><strong>El sobrecargo es el responsable de la tripulación de cabina: lidera al equipo, coordina con los pilotos y responde de la seguridad y del servicio de todo el pasaje.</strong> No es un TCP con más años: es un puesto de mando con formación y responsabilidad propias. Te contamos qué hace exactamente, qué cambia en la nómina y cómo se llega.</p>
+<div class="eac-key"><span class="t">Respuesta rápida</span><ul><li>Es el <strong>responsable de cabina</strong>: lidera al equipo y es el enlace con los pilotos.</li><li>Asume la <strong>decisión operativa</strong> en cabina ante una incidencia o una emergencia.</li><li>Supone un <strong>cambio de categoría</strong> y de tramo salarial, no solo un plus.</li><li>Se llega por <strong>promoción interna</strong> desde TCP: antigüedad, evaluación y formación.</li></ul></div>
+<div class="eac-stats"><div class="eac-stat"><b>Responsable</b><span>de toda la tripulación de cabina</span></div><div class="eac-stat"><b>Otro tramo</b><span>cambio de categoría salarial</span></div><div class="eac-stat"><b>Desde TCP</b><span>es promoción interna, no acceso directo</span></div></div>
+<nav class="eac-toc"><span class="t">En este artículo</span><ol><li><a href="#que">Qué hace un sobrecargo durante un vuelo</a></li><li><a href="#diferencia">Sobrecargo y TCP: qué cambia exactamente</a></li><li><a href="#sueldo">Cuánto gana un sobrecargo</a></li><li><a href="#llegar">Cómo se llega al puesto</a></li><li><a href="#faq">Preguntas frecuentes</a></li></ol></nav>
+<h2 id="que">1. Qué hace un sobrecargo durante un vuelo</h2>
+<p>Su trabajo empieza antes de que embarque nadie y no termina hasta que el último pasajero baja.</p>
+<ul><li><strong>Briefing previo</strong>: reúne a la tripulación, reparte posiciones y repasa procedimientos y particularidades del vuelo.</li><li><strong>Enlace con la cabina de vuelo</strong>: es el canal entre los pilotos y el resto de la tripulación.</li><li><strong>Comprobaciones de seguridad</strong>: verifica equipamiento, salidas y documentación antes del despegue.</li><li><strong>Gestión del pasaje</strong>: asume las incidencias que el resto de la tripulación no puede resolver.</li><li><strong>Decisión en emergencia</strong>: coordina la respuesta de cabina y la evacuación si hiciera falta.</li><li><strong>Informe posterior</strong>: reporta incidencias a la compañía.</li></ul>
+<blockquote><p>En cabina, cuando algo se complica, la tripulación mira al sobrecargo. Esa es la diferencia real con ser TCP.</p></blockquote>
+<h2 id="diferencia">2. Sobrecargo y TCP: qué cambia exactamente</h2>
+<div class="eac-tw"><table class="eac-t"><thead><tr><th></th><th>TCP</th><th>Sobrecargo</th></tr></thead><tbody><tr><td>Responsabilidad</td><td>Su zona de cabina y sus pasajeros</td><td>Toda la cabina y toda la tripulación</td></tr><tr><td>Decisión</td><td>Ejecuta procedimientos</td><td>Decide y coordina la respuesta</td></tr><tr><td>Relación con pilotos</td><td>Puntual</td><td>Es el enlace permanente</td></tr><tr><td>Formación</td><td>Certificado de TCP</td><td>Formación adicional de mando y gestión</td></tr><tr><td>Retribución</td><td>Tramo de TCP</td><td>Categoría superior, otro tramo salarial</td></tr></tbody></table></div>
+<h2 id="sueldo">3. Cuánto gana un sobrecargo</h2>
+<p>El salto no es un complemento sobre la misma nómina: es un <strong>cambio de categoría</strong> en el convenio. A partir de ahí siguen aplicando las mismas variables que en cualquier puesto de cabina — dietas, prima por hora de vuelo, nocturnidad y festivos — pero sobre una base superior.</p>
+<p>Como en el resto de la profesión, el radio sigue marcando la diferencia: un sobrecargo de largo radio suma dietas y pernoctas que uno de corto radio no genera.</p>
+<div class="eac-iman"><div class="h"><span class="lab">Calculadora gratuita</span><b>¿Cuánto ganarías volando?</b><span class="d">Incluye la opción de sobrecargo: mira cómo cambia la horquilla.</span></div><iframe src="https://eac-imanes.vercel.app/calculadora-sueldo" title="¿Cuánto ganarías volando?" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#F4F6F9"></iframe><p class="f">¿No se carga? <a href="https://eac-imanes.vercel.app/calculadora-sueldo" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>.</p></div>
+<h2 id="llegar">4. Cómo se llega al puesto</h2>
+<p>No hay acceso directo: <strong>se llega desde TCP</strong>, por promoción interna. Lo que pesa en esa promoción:</p>
+<ol class="eac-steps"><li><b>Antigüedad y experiencia</b>Horas de vuelo acumuladas y trayectoria en la compañía.</li><li><b>Evaluación de desempeño</b>Cómo trabajas en equipo, cómo gestionas incidencias y qué reportan tus responsables.</li><li><b>Idiomas</b>Especialmente en compañías de largo radio y en rutas premium.</li><li><b>Formación adicional</b>Cursos de mando, gestión de crisis, instrucción. Cada uno suma en la baremación.</li><li><b>Vacantes disponibles</b>Depende del crecimiento de la flota y de la rotación interna. Es el factor que no controlas.</li></ol>
+<div class="eac-note"><span class="t">Consejo práctico</span>Si tu objetivo es llegar a sobrecargo, empieza a construirlo desde tu primer año: acumula formación interna, cuida la evaluación y suma idiomas. Es una carrera que se prepara, no una que llega sola con la antigüedad.</div>
+<div class="eac-cta"><h3>Todo empieza por el certificado</h3><p>Para llegar a sobrecargo primero hay que volar. Fórmate como TCP con el certificado oficial.</p><a class="eac-btn" href="/curso-auxiliar-vuelo/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=sobrecargo-vuelo">Ver el curso de TCP</a><a class="eac-btn2" href="/contacto/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=sobrecargo-vuelo">Pedir información</a></div>
+<div class="eac-recap"><span class="t">En resumen</span><p>El sobrecargo es el responsable de la tripulación de cabina: dirige el briefing, es el enlace con los pilotos, gestiona las incidencias graves y coordina la respuesta en una emergencia. Supone un cambio de categoría salarial, no un simple plus. Se llega por promoción interna desde TCP, y pesan la antigüedad, la evaluación de desempeño, los idiomas, la formación adicional y las vacantes disponibles.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
+<div class="eac-faq"><details><summary>¿Qué diferencia hay entre un sobrecargo y un TCP?</summary><div class="a"><p>El TCP se ocupa de su zona de cabina y ejecuta los procedimientos. El sobrecargo es el responsable de toda la cabina y de toda la tripulación: dirige el briefing, es el enlace con los pilotos y toma las decisiones operativas en cabina.</p></div></details><details><summary>¿Se puede entrar directamente como sobrecargo?</summary><div class="a"><p>No. Es un puesto de promoción interna al que se llega desde TCP, con antigüedad, evaluación positiva y formación adicional de mando.</p></div></details><details><summary>¿Cuánto gana un sobrecargo de vuelo?</summary><div class="a"><p>Su categoría en el convenio es superior a la de TCP, de modo que la base es mayor. Sobre ella siguen aplicando las mismas variables: dietas, prima por hora de vuelo y pluses de nocturnidad y festivos.</p></div></details><details><summary>¿Cuántos años se tarda en llegar a sobrecargo?</summary><div class="a"><p>Depende de la aerolínea, de su estructura y de las vacantes internas. Influyen la antigüedad, la evaluación de desempeño, los idiomas y la formación adicional acumulada.</p></div></details></div>
+<div class="eac-rel"><span class="t">Sigue leyendo</span><ul><li><a href="/blog/cuanto-cobran-las-azafatas-de-vuelo/">Cuánto cobra un TCP en España</a></li><li><a href="/blog/salidas-profesionales-tcp-carrera-aviacion/">Salidas profesionales de un TCP</a></li><li><a href="/blog/diferencia-azafata-auxiliar-vuelo/">Diferencia entre azafata y auxiliar de vuelo</a></li></ul></div>
+<div class="eac-author"><div><b>Escola Aeronàutica de Catalunya</b> — Centro de formación aeronáutica en Barcelona. Formamos a tripulantes de cabina de pasajeros (TCP), personal de tierra y despachadores de vuelo. Contenido revisado por el equipo docente de EAC.<br><span style="font-size:13px">Última actualización: septiembre de 2026.</span></div></div>
+</article>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Sobrecargo de vuelo: qué hace, cuánto gana y cómo se llega","description":"Qué hace un sobrecargo de vuelo, qué responsabilidades asume, cuánto gana respecto a un TCP y cuál es el camino real para llegar al puesto.","inLanguage":"es-ES","author":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya"},"publisher":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya","url":"https://escolaeronauticadecatalunya.cat"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://escolaeronauticadecatalunya.cat/blog/sobrecargo-vuelo/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué diferencia hay entre un sobrecargo y un TCP?","acceptedAnswer":{"@type":"Answer","text":"El TCP se ocupa de su zona de cabina y ejecuta los procedimientos. El sobrecargo es el responsable de toda la cabina y de toda la tripulación: dirige el briefing, es el enlace con los pilotos y toma las decisiones operativas en cabina."}},{"@type":"Question","name":"¿Se puede entrar directamente como sobrecargo?","acceptedAnswer":{"@type":"Answer","text":"No. Es un puesto de promoción interna al que se llega desde TCP, con antigüedad, evaluación positiva y formación adicional de mando."}},{"@type":"Question","name":"¿Cuánto gana un sobrecargo de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Su categoría en el convenio es superior a la de TCP, de modo que la base es mayor. Sobre ella siguen aplicando las mismas variables: dietas, prima por hora de vuelo y pluses de nocturnidad y festivos."}},{"@type":"Question","name":"¿Cuántos años se tarda en llegar a sobrecargo?","acceptedAnswer":{"@type":"Answer","text":"Depende de la aerolínea, de su estructura y de las vacantes internas. Influyen la antigüedad, la evaluación de desempeño, los idiomas y la formación adicional acumulada."}}]}</script>

@@ -33,6 +33,12 @@ export const STYLE = `<style>
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -115,6 +121,14 @@ function block(b) {
         `<ul>${rest[0].items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></div>` +
         `<div class="ko"><span class="t">${inline(rest[1].t || 'En contra')}</span>` +
         `<ul>${rest[1].items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></div></div>`;
+    case 'iman': {
+      const m = rest[0];
+      return `<div class="eac-iman"><div class="h"><span class="lab">${inline(m.lab||'Herramienta gratuita')}</span>` +
+        `<b>${inline(m.t)}</b><span class="d">${inline(m.d)}</span></div>` +
+        `<iframe src="https://eac-imanes.vercel.app/${m.slug}" title="${inline(m.t)}" loading="lazy" ` +
+        `style="width:100%;height:640px;border:0;display:block;background:#F4F6F9"></iframe>` +
+        `<p class="f">¿No se carga? <a href="https://eac-imanes.vercel.app/${m.slug}" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>.</p></div>`;
+    }
     case 'stats':
       return `<div class="eac-stats">${rest[0].map(s => `<div class="eac-stat"><b>${inline(s.b)}</b><span>${inline(s.s)}</span></div>`).join('')}</div>`;
     default: throw new Error('Bloque desconocido: ' + type);

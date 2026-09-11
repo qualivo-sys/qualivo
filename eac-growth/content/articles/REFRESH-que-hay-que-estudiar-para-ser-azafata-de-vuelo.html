@@ -1,0 +1,122 @@
+<style>
+.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+ max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.eac-article *{box-sizing:border-box}
+.eac-article a{color:var(--sky);text-decoration:underline;text-underline-offset:2px}
+.eac-kicker{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+ color:var(--r);background:#FDF2F2;border:1px solid #F4CCCE;padding:5px 13px;border-radius:999px;margin:0 0 16px}
+.eac-article h1{font-size:2.1em;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:0 0 .3em}
+.eac-meta{font-size:14px;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:14px;margin:0 0 24px}
+.eac-lead{font-size:1.14em;line-height:1.62;color:#233040;margin:0 0 1.2em}
+.eac-article h2{font-size:1.45em;line-height:1.25;font-weight:800;letter-spacing:-.01em;margin:2em 0 .5em;
+ padding-top:.55em;border-top:3px solid var(--r);display:block}
+.eac-article h3{font-size:1.12em;font-weight:700;margin:1.6em 0 .35em}
+.eac-article p{margin:0 0 1.1em}
+.eac-article ul,.eac-article ol{margin:0 0 1.2em;padding-left:1.3em}
+.eac-article li{margin:.4em 0}
+.eac-key{border-left:5px solid var(--r);background:linear-gradient(180deg,#FFF7F7 0%,#fff 100%);
+ border:1px solid #F4DDDE;border-left-width:5px;border-radius:0 14px 14px 0;padding:18px 22px;margin:1.6em 0}
+.eac-key .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--r);margin-bottom:.55em}
+.eac-key ul{margin:0;padding-left:1.15em}
+.eac-toc{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:1.8em 0}
+.eac-toc .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-toc ol{margin:0;padding-left:1.2em;font-size:.96em}
+.eac-toc li{margin:.28em 0}
+.eac-stats{display:flex;flex-wrap:wrap;gap:10px;margin:1.5em 0}
+.eac-stat{flex:1 1 170px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--r);
+ border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
+.eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
+.eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
+.eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
+.eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
+.eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
+.eac-t td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.eac-t tr:nth-child(even) td{background:#FAFBFC}
+.eac-steps{list-style:none;counter-reset:s;margin:1.5em 0;padding:0}
+.eac-steps li{counter-increment:s;position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:16px 18px 16px 62px;margin:0 0 10px}
+.eac-steps li:before{content:counter(s);position:absolute;left:16px;top:15px;width:32px;height:32px;border-radius:50%;
+ background:var(--r);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.eac-steps b{display:block;margin-bottom:2px}
+.eac-pc{display:flex;flex-wrap:wrap;gap:12px;margin:1.5em 0}
+.eac-pc>div{flex:1 1 260px;border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#fff}
+.eac-pc .ok{border-top:3px solid #17915B}.eac-pc .ko{border-top:3px solid var(--r)}
+.eac-pc .t{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:.4em}
+.eac-pc .ok .t{color:#17915B}.eac-pc .ko .t{color:var(--r)}
+.eac-pc ul{margin:0;padding-left:1.1em;font-size:.96em}
+.eac-note,.eac-warn{border-radius:12px;padding:14px 18px;margin:1.5em 0;font-size:.97em}
+.eac-note{background:#F0F6FF;border:1px solid #CFE0FA}
+.eac-warn{background:#FFF8E9;border:1px solid #F2DFB0}
+.eac-note .t,.eac-warn .t{display:block;font-weight:800;margin-bottom:.25em}
+.eac-article blockquote{border-left:4px solid var(--r);background:var(--mist);margin:1.5em 0;padding:14px 20px;
+ font-size:1.05em;font-style:italic;border-radius:0 10px 10px 0}
+.eac-article blockquote p{margin:0}
+.eac-cta{background:linear-gradient(135deg,#0E1621 0%,#1B2A3D 100%);color:#fff;border-radius:16px;padding:30px 26px;margin:2.4em 0;text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .35em;font-size:1.3em;font-weight:800}
+.eac-cta p{color:#BFCADA;margin:0 0 1.2em;font-size:1em}
+.eac-btn{display:inline-block;background:var(--r);color:#fff !important;text-decoration:none !important;font-weight:800;
+ padding:14px 30px;border-radius:999px;margin:4px}
+.eac-btn2{display:inline-block;background:transparent;color:#fff !important;border:1px solid rgba(255,255,255,.45);
+ text-decoration:none !important;font-weight:700;padding:13px 26px;border-radius:999px;margin:4px}
+.eac-recap{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:2em 0}
+.eac-recap .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-faq details{border:1px solid var(--line);border-radius:12px;padding:0;margin:0 0 10px;background:#fff}
+.eac-faq summary{cursor:pointer;font-weight:700;padding:14px 18px;list-style:none;position:relative;padding-right:44px}
+.eac-faq summary::-webkit-details-marker{display:none}
+.eac-faq summary:after{content:"+";position:absolute;right:18px;top:11px;font-size:22px;color:var(--r);font-weight:800}
+.eac-faq details[open] summary:after{content:"–"}
+.eac-faq .a{padding:0 18px 14px;color:#25313F}
+.eac-faq .a p{margin:0}
+.eac-rel{border-top:1px solid var(--line);margin-top:2.4em;padding-top:16px}
+.eac-rel .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-rel ul{margin:0;padding-left:1.1em}
+.eac-author{display:flex;gap:14px;align-items:flex-start;background:var(--mist);border:1px solid var(--line);
+ border-radius:14px;padding:16px 18px;margin:2em 0 0;font-size:14.5px;line-height:1.6;color:var(--mut)}
+.eac-author b{color:var(--ink)}
+@media(max-width:700px){
+ .eac-article{font-size:17px}
+ .eac-article h1{font-size:1.72em}
+ .eac-article h2{font-size:1.28em}
+ .eac-cta{padding:24px 18px}
+ .eac-steps li{padding:14px 16px 14px 56px}
+}
+</style>
+<article class="eac-article">
+<span class="eac-kicker">Formación · TCP</span>
+<h1>Qué hay que estudiar para ser azafata de vuelo: la ruta completa desde cero</h1>
+<p class="eac-meta">Actualizado el septiembre de 2026 · 3 min de lectura · Por el equipo de EAC</p>
+<p class="eac-lead"><strong>No hay que estudiar una carrera: hay que obtener un certificado.</strong> Es la confusión más común y la que hace perder años a mucha gente. Para volar como TCP no se cursa una titulación universitaria ni un grado de FP obligatorio, sino una formación específica que termina en el certificado oficial de tripulante de cabina de pasajeros. Esta es la ruta completa.</p>
+<div class="eac-key"><span class="t">Respuesta rápida</span><ul><li>No existe una carrera ni un grado obligatorio: lo que habilita es el <strong>certificado oficial de TCP</strong>.</li><li>La formación combina <strong>teoría y prácticas reales</strong> de evacuación, fuego y supervivencia en el agua.</li><li>Se accede con la <strong>ESO</strong>; el bachillerato o una carrera no son requisito.</li><li>Después del certificado, la aerolínea imparte la <strong>habilitación de su tipo de avión</strong>.</li></ul></div>
+<div class="eac-stats"><div class="eac-stat"><b>Certificado</b><span>no carrera universitaria</span></div><div class="eac-stat"><b>Teoría + práctica</b><span>evacuación, fuego, agua y simulador</span></div><div class="eac-stat"><b>Meses</b><span>no años</span></div></div>
+<nav class="eac-toc"><span class="t">En este artículo</span><ol><li><a href="#confusion">La confusión de partida: carrera vs. certificado</a></li><li><a href="#temario">Qué se estudia exactamente en el curso de TCP</a></li><li><a href="#ruta">La ruta completa, paso a paso</a></li><li><a href="#idiomas">Y en paralelo: el inglés</a></li><li><a href="#test">Antes de matricularte en nada, comprueba tu punto de partida</a></li><li><a href="#faq">Preguntas frecuentes</a></li></ol></nav>
+<h2 id="confusion">1. La confusión de partida: carrera vs. certificado</h2>
+<p>Mucha gente busca «qué carrera hay que hacer para ser azafata» y acaba matriculándose en turismo, en idiomas o en un grado de FP pensando que es el camino. Son estudios útiles, pero <strong>ninguno te habilita para volar</strong>.</p>
+<div class="eac-tw"><table class="eac-t"><thead><tr><th>Lo que la gente cree</th><th>La realidad</th></tr></thead><tbody><tr><td>Hay que estudiar turismo</td><td>Ayuda, pero no habilita ni es requisito</td></tr><tr><td>Hace falta una carrera</td><td>No. Se accede con la ESO</td></tr><tr><td>Es un grado de FP</td><td>No existe un grado obligatorio para TCP</td></tr><tr><td>Basta un curso de atención al cliente</td><td>No habilita para volar</td></tr><tr><td>Hay que hacer el certificado de TCP</td><td>✔ Esto es lo correcto</td></tr></tbody></table></div>
+<h2 id="temario">2. Qué se estudia exactamente en el curso de TCP</h2>
+<p>El programa está marcado por la normativa europea y es fundamentalmente <strong>de seguridad</strong>, no de servicio. Esa es otra sorpresa habitual: la mayor parte de la formación va sobre qué hacer cuando algo va mal.</p>
+<ul><li><strong>Normativa aeronáutica</strong> y responsabilidades de la tripulación.</li><li><strong>Conocimiento de aeronaves</strong>: sistemas, equipamiento y limitaciones.</li><li><strong>Factores humanos y CRM</strong>: coordinación, fatiga, toma de decisiones.</li><li><strong>Mercancías peligrosas</strong>: identificación y procedimientos.</li><li><strong>Primeros auxilios</strong> y uso del equipamiento médico de cabina.</li><li><strong>Supervivencia y evacuación</strong>: humo, fuego, salidas de emergencia y agua.</li><li><strong>Seguridad (security)</strong> y gestión de pasajeros conflictivos.</li><li><strong>Servicio a bordo</strong> y atención al pasaje.</li></ul>
+<div class="eac-note"><span class="t">La parte que no se puede estudiar en casa</span>Las prácticas de evacuación, extinción de fuego y supervivencia en el agua son presenciales y obligatorias. Un curso que sea solo online no puede completar la formación.</div>
+<h2 id="ruta">3. La ruta completa, paso a paso</h2>
+<ol class="eac-steps"><li><b>Comprobar que cumples los requisitos</b>Edad, ESO, inglés funcional, natación y aptitud médica.</li><li><b>Cursar la formación oficial de TCP</b>Teoría más prácticas presenciales de seguridad y supervivencia.</li><li><b>Obtener el certificado</b>Conforme a normativa europea y reconocido por AESA. Es válido en toda la UE.</li><li><b>Pasar el reconocimiento médico aeronáutico</b>En un centro autorizado. Es obligatorio para poder volar.</li><li><b>Presentarte a las convocatorias</b>CV orientado, entrevista en inglés y dinámica de grupo.</li><li><b>Habilitación de tipo de avión</b>La imparte la aerolínea que te contrata, sobre su flota y sus procedimientos.</li></ol>
+<h2 id="idiomas">4. Y en paralelo: el inglés</h2>
+<p>Es la parte que la gente deja para el final y la que más candidatos descarta. No se trata de sacar un título: se trata de <strong>poder atender a un pasajero, dar instrucciones de seguridad y resolver una incidencia</strong> en inglés, en voz alta y con naturalidad.</p>
+<p>Si tu nivel es bajo, empieza hoy en paralelo a la formación. Llegar al proceso de selección con el certificado pero sin poder sostener una conversación es perder la convocatoria.</p>
+<h2 id="test">5. Antes de matricularte en nada, comprueba tu punto de partida</h2>
+<div class="eac-iman"><div class="h"><span class="lab">Test gratuito</span><b>¿Cumples los requisitos para ser TCP?</b><span class="d">Seis preguntas para saber qué te falta antes de invertir en formación.</span></div><iframe src="https://eac-imanes.vercel.app/test-tcp" title="¿Cumples los requisitos para ser TCP?" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#F4F6F9"></iframe><p class="f">¿No se carga? <a href="https://eac-imanes.vercel.app/test-tcp" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>.</p></div>
+<div class="eac-cta"><h3>¿Quieres el programa completo?</h3><p>Te enviamos el temario, el calendario y qué certificado obtienes al terminar.</p><a class="eac-btn" href="/curso-auxiliar-vuelo/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=que-hay-que-estudiar-para-ser-azafata-de-vuelo">Ver el curso de TCP</a><a class="eac-btn2" href="/contacto/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=que-hay-que-estudiar-para-ser-azafata-de-vuelo">Pedir el temario</a></div>
+<div class="eac-recap"><span class="t">En resumen</span><p>Para ser azafata o auxiliar de vuelo no se estudia una carrera: se obtiene el certificado oficial de tripulante de cabina de pasajeros reconocido por AESA. La formación es sobre todo de seguridad (normativa, aeronaves, mercancías peligrosas, primeros auxilios, evacuación, fuego y supervivencia en el agua) e incluye prácticas presenciales obligatorias. Se accede con la ESO y, después del certificado, la aerolínea imparte la habilitación de su tipo de avión.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
+<div class="eac-faq"><details><summary>¿Qué carrera hay que estudiar para ser azafata de vuelo?</summary><div class="a"><p>Ninguna. No existe una carrera universitaria ni un grado obligatorio. Lo que habilita para volar es el certificado oficial de tripulante de cabina de pasajeros reconocido por AESA, al que se accede con la ESO.</p></div></details><details><summary>¿Se puede hacer el curso de TCP online?</summary><div class="a"><p>La parte teórica puede tener componente online, pero las prácticas de evacuación, fuego y supervivencia en el agua son presenciales y obligatorias. Un curso exclusivamente online no completa la formación.</p></div></details><details><summary>¿Cuánto se tarda en ser TCP?</summary><div class="a"><p>Se habla de meses, no de años. El plazo depende del formato del curso y de cuándo se abran las convocatorias de las aerolíneas a las que quieras presentarte.</p></div></details><details><summary>¿Sirve estudiar turismo para ser azafata de vuelo?</summary><div class="a"><p>Es un complemento útil y se valora, pero no habilita para volar ni sustituye al certificado oficial de TCP.</p></div></details></div>
+<div class="eac-rel"><span class="t">Sigue leyendo</span><ul><li><a href="/blog/requisitos-azafata-vuelo/">Requisitos para ser TCP</a></li><li><a href="/blog/curso-tcp-precio-cuanto-cuesta/">Cuánto cuesta el curso de TCP</a></li><li><a href="/blog/que-es-certificado-tcp/">Qué es el certificado TCP</a></li></ul></div>
+<div class="eac-author"><div><b>Escola Aeronàutica de Catalunya</b> — Centro de formación aeronáutica en Barcelona. Formamos a tripulantes de cabina de pasajeros (TCP), personal de tierra y despachadores de vuelo. Contenido revisado por el equipo docente de EAC.<br><span style="font-size:13px">Última actualización: septiembre de 2026.</span></div></div>
+</article>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Qué hay que estudiar para ser azafata de vuelo: la ruta completa desde cero","description":"Qué hay que estudiar para ser azafata o auxiliar de vuelo: qué formación sirve, qué incluye el curso oficial de TCP y cuánto se tarda en estar volando.","inLanguage":"es-ES","author":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya"},"publisher":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya","url":"https://escolaeronauticadecatalunya.cat"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://escolaeronauticadecatalunya.cat/blog/que-hay-que-estudiar-para-ser-azafata-de-vuelo/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué carrera hay que estudiar para ser azafata de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Ninguna. No existe una carrera universitaria ni un grado obligatorio. Lo que habilita para volar es el certificado oficial de tripulante de cabina de pasajeros reconocido por AESA, al que se accede con la ESO."}},{"@type":"Question","name":"¿Se puede hacer el curso de TCP online?","acceptedAnswer":{"@type":"Answer","text":"La parte teórica puede tener componente online, pero las prácticas de evacuación, fuego y supervivencia en el agua son presenciales y obligatorias. Un curso exclusivamente online no completa la formación."}},{"@type":"Question","name":"¿Cuánto se tarda en ser TCP?","acceptedAnswer":{"@type":"Answer","text":"Se habla de meses, no de años. El plazo depende del formato del curso y de cuándo se abran las convocatorias de las aerolíneas a las que quieras presentarte."}},{"@type":"Question","name":"¿Sirve estudiar turismo para ser azafata de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Es un complemento útil y se valora, pero no habilita para volar ni sustituye al certificado oficial de TCP."}}]}</script>
