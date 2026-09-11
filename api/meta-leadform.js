@@ -5,8 +5,17 @@
 // con veinte minutos de margen antes de la primera llamada, porque este lead no
 // ha leído nada: solo ha pulsado dos veces sin salir de Instagram.
 //
-// Configuración en Meta: URL de devolución de llamada /api/meta-leadform,
-// token de verificación META_LEADFORM_VERIFY y suscripción al campo «leadgen».
+// Configuración en Meta: URL de devolución de llamada /api/meta-leadform/ (con
+// barra final), token de verificación META_LEADFORM_VERIFY y suscripción al
+// campo «leadgen».
+//
+// AVISO: la suscripción es por página, no por formulario, así que llegan los
+// leads de TODOS los formularios activos, incluidos los de campañas viejas.
+// Por eso META_LEADFORM_IDS lleva los identificadores de los formularios de
+// esta campaña, separados por comas. Un lead de un formulario que no esté en
+// esa lista se guarda en el CRM pero NO entra en la cadencia: nadie le escribe
+// ni le llama. Sin la lista, no se activa ninguno. Escribir a un lead de una
+// campaña de hace seis meses es el error que costó la queja de agosto.
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
 const GHL_BASE = 'https://services.leadconnectorhq.com';
@@ -33,6 +42,10 @@ async function guardar(lead) {
     Version: GHL_VERSION,
     'Content-Type': 'application/json'
   };
+  const permitidos = String(process.env.META_LEADFORM_IDS || '')
+    .split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+  const deEstaCampana = permitidos.length > 0 && permitidos.indexOf(String(lead.form_id || '')) !== -1;
+
   const campos = lead.field_data || [];
   const nombre = valor(campos, ['full_name', 'nombre', 'nombre_completo', 'first_name']);
   const email = valor(campos, ['email', 'correo', 'correo_electronico']);
@@ -43,8 +56,15 @@ async function guardar(lead) {
   if (!telefono && !EMAIL_RE.test(email)) return { ok: false, motivo: 'sin_contacto' };
 
   const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
-  const etiquetas = ['diagnostico-landing', 'diagnostico-cualificado', 'paid', 'leadform',
-    'activacion', 'act-ini-' + sello];
+  const etiquetas = ['leadform'];
+  if (deEstaCampana) {
+    etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
+      'activacion', 'act-ini-' + sello);
+  } else {
+    // Formulario que no es de esta campaña: se guarda y se queda quieto.
+    etiquetas.push('leadform-otra-campana');
+  }
+  if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
 
   const up = await fetch(GHL_BASE + '/contacts/upsert', {
@@ -63,7 +83,10 @@ async function guardar(lead) {
   if (!up.ok) throw new Error('ghl_upsert ' + up.status + ' ' + (await up.text()).slice(0, 200));
   const d = await up.json().catch(function () { return {}; });
   const contactId = d && d.contact ? d.contact.id : null;
-  return { ok: true, contactId: contactId, nombre: nombre, telefono: telefono, campos: campos };
+  return {
+    ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
+    campos: campos, activar: deEstaCampana
+  };
 }
 
 module.exports = async function handler(req, res) {
@@ -103,6 +126,12 @@ module.exports = async function handler(req, res) {
       lead.ad_id = lead.ad_id || av.ad_id;
       const r = await guardar(lead);
       if (!r.ok) { console.error('[leadform] descartado', av.leadgen_id, r.motivo); continue; }
+
+      if (!r.activar) {
+        console.log('[leadform] guardado sin activar (formulario fuera de la lista)',
+          av.leadgen_id, 'form', lead.form_id || '?');
+        continue;
+      }
 
       if (r.contactId && r.telefono) {
         try {

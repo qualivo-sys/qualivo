@@ -122,6 +122,16 @@ Ninguna clave está en el repositorio y así se queda.
 | `VAPI_PHONE_NUMBER_ID` | por defecto el 647 · no hace falta tocarlo |
 | `META_LEADFORM_TOKEN` | token de sistema, no caduca · pendiente de poner |
 | `META_LEADFORM_VERIFY` | lo inventas tú; el mismo texto va en Meta · pendiente |
+| `META_LEADFORM_IDS` | id de los formularios de esta campaña, separados por comas · pendiente |
+
+**La suscripción de Meta es por página, no por formulario.** La página «Maikel
+Echevarria» (`359073050620335`) tiene diez formularios antiguos activos (HackTheLead,
+Qualivo marzo, Qualivo diciembre…). Al suscribirla llegan los leads de todos.
+
+Por eso `META_LEADFORM_IDS` lleva los identificadores de los formularios de esta
+campaña. Un lead de cualquier otro formulario se guarda en el CRM con la etiqueta
+`leadform-otra-campana` y **no entra en la cadencia**: nadie le escribe ni le llama.
+Si la variable está vacía, no se activa ninguno. El valor por defecto es no molestar.
 
 ## Lo comprobado el 11-sep
 
