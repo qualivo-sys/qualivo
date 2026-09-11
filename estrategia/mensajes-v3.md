@@ -4,6 +4,16 @@
 > harta de recibir emails. El email 1 tiene que ganarse el sitio en la primera
 > línea y decir a qué venimos, sin rodeos.
 
+## ICP CORREGIDO POR MAIKEL (11-sep)
+El ICP NO es solo "empresas de servicios" en sentido estrecho (despachos).
+Es cualquier empresa B2B de 5-50 personas que YA tiene sistema comercial:
+web o campañas + CRM + alguien que vende, con ticket de su cliente >1.000 EUR.
+LAS EMPRESAS DE SOFTWARE Y TECNOLOGIA ENTRAN (ejemplo de Maikel: Kubysoft).
+De hecho encajan bien: suelen tener CRM, anuncios y equipo comercial, que son
+justo las tres señales que usamos. Lo que NO entra sigue igual: sin tracción,
+sin capacidad de atender más, ciclo >6 meses, <500 EUR/mes, quien solo quiere
+leads sin tocar su proceso, quien busca "que le lleven las redes".
+
 ## Estructura obligatoria del email 1 (6 latidos, ~80 palabras)
 1. QUÉ HE VISTO en su web/empresa — el condicionante de por qué le escribo.
 2. Por qué eso me hizo pensar que hay margen de mejora (una línea).
