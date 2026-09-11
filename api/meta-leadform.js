@@ -93,8 +93,21 @@ async function guardar(lead) {
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
   const web = valor(campos, ['website', 'web', 'sitio_web']);
-  const inversion = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
-  const fuga = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios y la captaci', 'web y los formul', 'tiempo de respuesta', 'seguimiento y los presu', 'no lo sé']);
+  // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
+  const CLAVES_INV = {
+    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €',
+    '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €'
+  };
+  const CLAVES_FUGA = {
+    anuncios: 'En los anuncios y la captación', web: 'En la web y los formularios',
+    respuesta: 'En el tiempo de respuesta al lead',
+    seguimiento: 'En el seguimiento y los presupuestos',
+    nose: 'No lo sé, eso es lo que quiero averiguar'
+  };
+  const inversionCruda = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
+  const fugaCruda = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios', 'web', 'respuesta', 'seguimiento', 'no lo s']);
+  const inversion = CLAVES_INV[inversionCruda] || inversionCruda;
+  const fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
 
   if (!telefono && !EMAIL_RE.test(email)) return { ok: false, motivo: 'sin_contacto' };
 
@@ -178,6 +191,7 @@ module.exports = async function handler(req, res) {
   }
 
   const cuerpo = req.body || {};
+  const parte = { recibidos: 0, guardados: 0, sin_activar: 0, descartados: 0, errores: [] };
   const avisos = [];
   (cuerpo.entry || []).forEach(function (e) {
     (e.changes || []).forEach(function (ch) {
@@ -191,13 +205,22 @@ module.exports = async function handler(req, res) {
   for (const av of avisos) {
     try {
       const lead = await traerLead(av.leadgen_id, token);
+      // El identificador del formulario y del anuncio viajan en el aviso, no en
+      // la respuesta de la Graph API. Sin esto la lista blanca nunca acierta.
+      lead.form_id = lead.form_id || av.form_id;
       lead.ad_id = lead.ad_id || av.ad_id;
       const r = await guardar(lead);
-      if (!r.ok) { console.error('[leadform] descartado', av.leadgen_id, r.motivo); continue; }
+      if (!r.ok) {
+        console.error('[leadform] descartado', av.leadgen_id, r.motivo);
+        parte.descartados++;
+        continue;
+      }
+      parte.guardados++;
 
       if (!r.activar) {
         console.log('[leadform] guardado sin activar (formulario fuera de la lista)',
           av.leadgen_id, 'form', lead.form_id || '?');
+        parte.sin_activar++;
         continue;
       }
 
@@ -218,8 +241,10 @@ module.exports = async function handler(req, res) {
       console.log('[leadform] lead guardado', av.leadgen_id, r.contactId || '');
     } catch (err) {
       console.error('[leadform] error con', av.leadgen_id, err && err.message);
+      parte.errores.push(String(err && err.message).slice(0, 160));
     }
   }
 
-  return res.status(200).json({ ok: true, recibidos: avisos.length });
+  parte.recibidos = avisos.length;
+  return res.status(200).json({ ok: true, parte: parte });
 };
