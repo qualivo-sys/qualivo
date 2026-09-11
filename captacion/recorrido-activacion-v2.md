@@ -73,6 +73,25 @@ la misma: ante la duda, no se llama.
 
 Lo que cae fuera de ventana no se pierde: espera al siguiente hueco.
 
+## Las otras cuatro secuencias
+
+La cadencia de arriba es para quien no contesta. El resto del recorrido tiene las
+suyas, cada una con su etiqueta disparadora. Las pone GHL o las pones tú a mano.
+
+| Etiqueta | Secuencia | Pasos |
+|---|---|---|
+| `act-noshow` | Cogió hueco y no apareció | día 0 «te he esperado» · día 2 lo que iba a mirar · día 6 cierre |
+| `act-post-diag` | Ya ha tenido el diagnóstico | día 1 el plan por escrito · día 4 «¿lo montamos o lo dejamos?» · día 9 cierre |
+| `act-fuera` | No encaja todavía | un solo correo, honesto, con tres cosas que puede mirar él |
+| `act-tibio` | Dijo «ahora no» | un único toque a los 30 días |
+
+Ninguna insiste más de lo que dice la tabla. La de fuera de alcance es un correo y se
+acabó: mantener un goteo eterno a quien has dicho que no encaja es ruido, y además
+mata la credibilidad de haber sido sincero.
+
+**Los recordatorios de la cita los manda GHL** desde el calendario. Aquí no se
+duplican: recibir el mismo aviso dos veces es la forma más tonta de parecer un robot.
+
 ## Estado, en etiquetas de GHL
 
 Una sola fuente de verdad. El CRM manda; el código solo lee y escribe etiquetas.

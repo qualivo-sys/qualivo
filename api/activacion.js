@@ -9,6 +9,7 @@
 
 const A = require('./_activacion');
 const M = require('./_mensajes');
+const S = require('./_secuencias');
 
 const TOPE = 40;          // contactos procesados por ejecución
 const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
@@ -63,8 +64,7 @@ async function tieneCita(contactId) {
   }
 }
 
-async function enviarCorreo(contacto, indice) {
-  const e = M.EMAILS[indice];
+async function correo(contacto, asunto, html) {
   const email = contacto.email;
   if (!email) return { ok: false, motivo: 'sin_email' };
   const r = await fetch('https://api.resend.com/emails', {
@@ -73,11 +73,62 @@ async function enviarCorreo(contacto, indice) {
     body: JSON.stringify({
       from: process.env.RADIOGRAFIA_FROM || 'Maikel de Qualivo <onboarding@resend.dev>',
       to: [email],
-      subject: e.asunto(contacto),
-      html: e.html(contacto)
+      subject: asunto,
+      html: html
     })
   });
   return { ok: r.ok, motivo: r.ok ? '' : 'resend_' + r.status };
+}
+
+function enviarCorreo(contacto, indice) {
+  const e = M.EMAILS[indice];
+  return correo(contacto, e.asunto(contacto), e.html(contacto));
+}
+
+// Las demás ramas del recorrido: no se presentó, después del diagnóstico, fuera
+// de alcance y el toque al mes. Cada una se dispara con su etiqueta y se apaga
+// sola. Se salta a quien haya respondido o pedido la baja.
+async function procesarSecuencias(resumen) {
+  for (const sec of S.SECUENCIAS) {
+    let lista;
+    try {
+      lista = await A.buscarPorEtiqueta(sec.disparador, 300);
+    } catch (err) {
+      console.error('[activacion] búsqueda de ' + sec.id + ' falló:', err.message);
+      continue;
+    }
+    for (const c of lista) {
+      if (A.tiene(c, sec.final) || A.tiene(c, 'act-baja') || A.tiene(c, 'act-respondio')) {
+        await A.etiquetar(c.id, null, [sec.disparador]);
+        resumen.cerrados++;
+        continue;
+      }
+      const minutos = minutosDesdeInicio(c);
+      let paso = null;
+      for (const p of sec.pasos) {
+        if (!A.tiene(c, p.etiqueta) && minutos >= p.dias * 24 * 60) { paso = p; break; }
+      }
+      if (!paso) {
+        const ultimo = sec.pasos[sec.pasos.length - 1];
+        if (A.tiene(c, ultimo.etiqueta)) {
+          await A.etiquetar(c.id, [sec.final], [sec.disparador]);
+          resumen.cerrados++;
+        } else {
+          resumen.esperando++;
+        }
+        continue;
+      }
+      if (!process.env.RESEND_API_KEY) { resumen.esperando++; continue; }
+      try {
+        const r = await correo(c, paso.asunto(c), paso.html(c));
+        if (r.ok) { await A.etiquetar(c.id, [paso.etiqueta]); resumen.email++; }
+        else { resumen.errores++; console.error('[activacion] ' + sec.id + ' ' + paso.etiqueta, r.motivo); }
+      } catch (err) {
+        resumen.errores++;
+        console.error('[activacion] ' + sec.id + ' falló en ' + c.id + ':', err.message);
+      }
+    }
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -181,6 +232,8 @@ module.exports = async function handler(req, res) {
       console.error('[activacion] ' + paso.tipo + ' falló en ' + c.id + ':', err.message);
     }
   }
+
+  await procesarSecuencias(resumen);
 
   console.log('[activacion]', JSON.stringify(resumen));
   return res.status(200).json({ ok: true, resumen: resumen });
