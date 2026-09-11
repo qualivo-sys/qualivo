@@ -195,6 +195,13 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
 .sines p{font-size:15.5px;color:#AEB5BF;line-height:1.45}
 @media(max-width:700px){.sines{grid-template-columns:1fr}}
 .remate{margin-top:36px;font-size:clamp(22px,3.4vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+
+/* botón de WhatsApp, fijo abajo a la derecha */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;
+  background:#25D366;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.28);transition:transform .16s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:26px;height:26px;flex-shrink:0}
+@media(max-width:600px){.wa{padding:0;width:58px;height:58px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}}
 </style>
 </head>
 <body>
@@ -212,7 +219,7 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
     <h1>Te decimos dónde se te <span class="am">escapa el dinero</span> entre el anuncio y el cierre.</h1>
     <p class="bajada">Miramos tu sistema de captación y ventas entero, encontramos dónde está perdiendo rendimiento y ponemos un agente justo ahí. Sin rehacer todo lo demás.</p>
     <div class="cta">
-      <a href="#reservar" class="btn grande">Quiero ver dónde está la fuga →</a>
+      <a href="#reservar" class="btn grande">Quiero ver dónde está la fuga&nbsp;→</a>
       <small>Quince minutos. Sales con un plan por escrito, lo hagas con nosotros o no.<br>Si no mejora el número que acordamos, no pagas el piloto.</small>
     </div>
     <div class="tres">
@@ -427,7 +434,7 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
             <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
             <p class="err" id="e2" hidden></p>
-            <button type="submit" class="btn" style="width:100%" id="b2">Quiero ver dónde está la fuga →</button>
+            <button type="submit" class="btn" style="width:100%" id="b2">Quiero ver dónde está la fuga&nbsp;→</button>
           </div>
 
           <div id="p3" hidden>
@@ -456,6 +463,11 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
     <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
   </div>
 </footer>
+
+<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20landing%20del%20diagn%C3%B3stico%20y%20quiero%20ver%20d%C3%B3nde%20est%C3%A1%20la%20fuga." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" onclick="window.qvTrack&&qvTrack('diagnostico_whatsapp',{})">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 0 1 5.3 16C5.3 10.1 10.1 5.3 16 5.3S26.7 10.1 26.7 16 21.9 26.7 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  <span>WhatsApp</span>
+</a>
 
 <script src="/assets/consent.js" defer></script>
 <script src="./landing.js" defer></script>
