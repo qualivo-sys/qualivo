@@ -26,51 +26,41 @@ lo que hay que aprender ahora.
 Dinámico se reserva para la fase 3, cuando ya se sepa qué ángulo gana y solo haga
 falta exprimir variaciones de uno que funciona.
 
-## Estructura · fase 1, validación
-
-Dos campañas separadas, decisión de Maikel: una al formulario instantáneo y otra a la
-landing. Separadas y no dos conjuntos de la misma campaña, para que Meta no mueva el
-presupuesto de una a otra y las dos tengan datos propios.
+## Lo que está montado (11-sep, en pausa)
 
 ```
-CAMPAÑA 1 · Qualivo · Diagnóstico · Lead form · sep26      OUTCOME_LEADS
-└── CONJUNTO · España 28-60 · 15 €/día
-    ├── AD 01 · fuga        · la cinta
-    ├── AD 02 · alerta      · el cuadro de mandos
-    ├── AD 03 · diagnóstico · el médico
-    └── AD 04 · mecanismo   · la radiografía
+QV_DIAG_LEADFORM_Sep26            OUTCOME_LEADS
+└── ES 25-65 · Advantage+ · DINÁMICO · Lead form · 20 €/día
+    └── DIN · 10 creativos · Lead form
 
-CAMPAÑA 2 · Qualivo · Diagnóstico · Landing · sep26        OUTCOME_LEADS
-└── CONJUNTO · España 28-60 · 15 €/día · píxel 879197745226987, evento Lead
-    └── los mismos cuatro anuncios, a /diagnostico/
+QV_DIAG_LANDING_Sep26             OUTCOME_LEADS
+└── ES 25-65 · Advantage+ · DINÁMICO · Landing · 20 €/día
+    └── DIN · 10 creativos · Landing
 ```
 
-**Los mismos cuatro creativos en las dos.** Si cambian los creativos y el destino a la
-vez, la comparación no vale para nada: no se sabría si la diferencia es del anuncio o
-de la página.
+Las dos en creatividad dinámica, con **las diez imágenes**, cuatro textos y cuatro
+titulares que Meta combina. Segmentación idéntica en las dos: Advantage+ con semilla
+de nueve intereses y las tres exclusiones que separaban los conjuntos de 13 € de los
+de 50 € en el histórico.
 
-**El presupuesto tiene que ser 15 € en cada una, no 15 en total.** Repartir quince
-entre las dos deja siete y medio por campaña, con lo que ninguna sale de la fase de
-aprendizaje y las dos dan datos falsos. Con dos campañas el mínimo realista son
-**30 €/día**.
+Los cuatro ángulos que van en los textos: fuga, alertas, diagnóstico y mecanismo.
 
-Si solo hay quince al día, la decisión correcta es empezar únicamente por el
-formulario instantáneo y abrir la landing en dos semanas: el CPL del formulario en
-esta cuenta ronda los 5-10 €, y el de una landing fría 20-30 €. Con 7,50 €/día la
-campaña a landing daría menos de un lead cada tres días, que no es una muestra.
+**Lo que se pierde con dinámico**, y conviene saberlo al leer los datos: Meta reporta
+por imagen, pero no dice qué combinación exacta de imagen y texto ganó. Si a los 14
+días hay un ganador claro, el siguiente paso es sacarlo a su propio conjunto con
+creatividad fija para confirmarlo.
 
-**Lo que compara este experimento** no es cuál trae leads más baratos, eso ya se sabe.
-Es cuál trae **más citas por euro**. El formulario trae volumen y peor intención; la
-landing, lo contrario. La respuesta está en el CRM dos semanas después, no en Meta.
+## Cuándo arrancar
 
-**Segmentación.** España, 28-60, Facebook e Instagram, ubicaciones automáticas y
-audiencia amplia con Advantage+. Sin intereses al principio: el formulario ya filtra
-por inversión y el ICP es difícil de dibujar con intereses. Esto sí es «dinámico», y
-es el sitio donde el dinámico funciona.
+Se montó un viernes a las 19:00 y se dejó en pausa a propósito. El histórico de la
+cuenta dice que el fin de semana capta **a la mitad de precio** (8 € de CPL frente a
+22 € entre semana), así que el fin de semana no es el problema.
 
-Nada de lookalike: en julio dio 50,83 € por lead.
+El problema era la activación: el agente de voz no llamaba ni sábado ni domingo, y un
+lead del sábado se quedaba sin llamada hasta el lunes. Ya está corregido: **la voz
+atiende los sábados de 10:00 a 14:00**. Domingo sigue sin llamadas.
 
-## La fase 2 no se abre por corazonada
+## La fase 2 no se abre por corazonada## La fase 2 no se abre por corazonada
 
 Se abre cuando haya **30 leads o 14 días**, lo que llegue antes, y entonces:
 

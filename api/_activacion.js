@@ -36,7 +36,12 @@ function enVentana(canal, fecha) {
   const t = ahoraMadrid(fecha);
   if (canal === 'whatsapp') return t.minutos >= 8 * 60 && t.minutos <= 21 * 60 + 30;
   if (canal === 'voz') {
-    if (t.dia === 0 || t.dia === 6) return false;
+    if (t.dia === 0) return false;                       // domingo nunca
+    // Sábado solo por la mañana. El histórico de la cuenta dice que el fin de
+    // semana capta a la mitad de precio, así que dejar esos leads sin llamada
+    // hasta el lunes es tirar el dinero que costó traerlos. Pero llamar a un
+    // empresario un domingo, o un sábado por la tarde, es pasarse.
+    if (t.dia === 6) return t.minutos >= 10 * 60 && t.minutos < 14 * 60;
     const manana = t.minutos >= 9 * 60 + 30 && t.minutos < 14 * 60;
     const tarde = t.minutos >= 16 * 60 && t.minutos < 20 * 60;
     return manana || tarde;
