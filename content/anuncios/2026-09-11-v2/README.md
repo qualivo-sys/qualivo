@@ -5,7 +5,7 @@ alrededor del presupuesto olvidado. Estos son globales, van al grano y **los
 cinco llevan el proceso dentro**.
 
 **Revisión del 11-sep (tarde):** garantía con número acordado, «sistema de
-ventas» → «sistema comercial», fuera «casi siempre falla en tres» (no hay dato
+ventas» → «sistema de captación y ventas», fuera «casi siempre falla en tres» (no hay dato
 que lo sostenga), fuera «arreglado o gratis», y pieza nueva «fuga → agente».
 
 ## La regla de las cinco
@@ -15,12 +15,12 @@ costando dinero**, **cómo lo arreglamos** y **qué riesgo corre**. Por eso las
 cuatro terminan en la misma franja amarilla:
 
 Jerarquía fija en cada pieza: **titular = dolor**, **una línea = qué hacemos**
-(«Ponemos agentes de IA en tu sistema comercial, justo donde se te escapa el
-negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.») y
+(«Ponemos agentes de IA en tu sistema de captación y ventas, justo donde se te escapa el
+negocio. Sin empezar de cero, sin rehacer tu sistema, sin más trabajo manual para tu equipo.») y
 **franja = los tres pasos en cuatro palabras + garantía**:
 
-> **1 Diagnóstico** 15 min. Dónde se escapa. · **2 Plan** Por escrito. Qué
-> va primero. · **3 Piloto** 30 días. Puesto y medido.
+> **1 Diagnóstico** 15 min. Encontramos la fuga. · **2 Plan** Por escrito. Qué
+> va primero. · **3 Piloto** 30 días. Un proceso. Un número.
 > Si no mejoramos tus resultados, no pagas nada.
 
 Lo que contiene cada paso en detalle va en el texto del anuncio y en la
@@ -68,37 +68,37 @@ Presupuestos · El cierre. Tres marcadas en rojo como fuga.
 > presupuesto que nadie persigue.
 >
 > Miramos los ocho en quince minutos, te damos el plan, y montamos un piloto de
-> treinta días sin coste. El número se acuerda antes: si no mejora, no pagas el piloto.
+> treinta días a riesgo de Qualivo. El número se acuerda antes: si no mejora, no pagas el piloto.
 
 **Titular:** La fuga suele estar en más de uno. Y no en los que crees.
-**Descripción:** Tu sistema comercial, de punta a punta.
+**Descripción:** Tu sistema de captación y ventas, de punta a punta.
 
 ### 3 · La propuesta
-> Qué hacemos, en una frase: ponemos agentes de IA en el sistema comercial que
+> Qué hacemos, en una frase: ponemos agentes de IA en el sistema de captación y ventas que
 > ya tienes, justo donde se te escapa el negocio.
 >
-> Sin rehacer nada: tu web, tu CRM, tus campañas y tu agencia se quedan como
-> están. Sin invertir más: no es más presupuesto, es que lo que ya entra deje de
-> escaparse. Sin contratar a nadie: el agente hace el trabajo que hoy depende de
-> que alguien se acuerde.
+> Sin empezar de cero: tu web, tu CRM, tus campañas y tu agencia se quedan como
+> están. Sin rehacer tu sistema: entramos en el punto que falla y el resto sigue
+> como hoy. Sin más trabajo manual: el agente hace lo que hoy depende de que
+> alguien se acuerde.
 >
 > Quince minutos de diagnóstico, plan por escrito en 48 horas y un piloto de
 > treinta días con el número acordado antes de empezar. Si no mejora, no pagas
 > el piloto.
 
 **Titular:** Agentes de IA justo donde se te escapa el negocio.
-**Descripción:** Sin rehacer nada, sin invertir más, sin contratar.
+**Descripción:** Sin empezar de cero, sin rehacer tu sistema.
 
 ### 4 · La factura
 > Esta es la factura que te mandamos si el piloto no funciona.
 >
-> Analizamos tu sistema comercial entero, te damos un plan por escrito y montamos
+> Analizamos tu sistema de captación y ventas entero, te damos un plan por escrito y montamos
 > el arreglo durante treinta días. El número se acuerda antes de empezar y se
 > mide al día treinta.
 >
 > Si no mejora: cero euros, y lo que hayamos montado se queda contigo.
 
-**Titular:** La factura si no mejoramos tus resultados.
+**Titular:** La factura si no mejora el número que importa.
 **Descripción:** Tú no asumes el riesgo del piloto.
 
 ### 5 · Fuga → agente
@@ -123,8 +123,8 @@ Presupuestos · El cierre. Tres marcadas en rojo como fuga.
 >
 > Ninguna de esas cosas sale en un informe, y las cuatro te están costando dinero.
 >
-> Nosotros analizamos tu sistema comercial entero en quince minutos. Te damos un
-> plan por escrito de qué arreglar primero. Y lo montamos treinta días sin coste.
+> Nosotros analizamos tu sistema de captación y ventas entero en quince minutos. Te damos un
+> plan por escrito de qué arreglar primero. Y lo montamos treinta días a riesgo de Qualivo.
 >
 > Acordamos el número antes de empezar. Si no mejora, no pagas el piloto. El
 > enlace está aquí abajo.

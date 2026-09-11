@@ -6,12 +6,12 @@ titular corto en Anton y la misma franja amarilla en los cinco. La franja lleva
 la propuesta entera y qué contiene cada paso (desde la revisión del 11-sep):
 
 Jerarquía fija en cada pieza: **titular = dolor**, **una línea = qué hacemos**
-(«Ponemos agentes de IA en tu sistema comercial, justo donde se te escapa el
-negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.») y
+(«Ponemos agentes de IA en tu sistema de captación y ventas, justo donde se te escapa el
+negocio. Sin empezar de cero, sin rehacer tu sistema, sin más trabajo manual para tu equipo.») y
 **franja = los tres pasos en cuatro palabras + garantía**:
 
-> **1 Diagnóstico** 15 min. Dónde se escapa. · **2 Plan** Por escrito. Qué
-> va primero. · **3 Piloto** 30 días. Puesto y medido.
+> **1 Diagnóstico** 15 min. Encontramos la fuga. · **2 Plan** Por escrito. Qué
+> va primero. · **3 Piloto** 30 días. Un proceso. Un número.
 > Si no mejoramos tus resultados, no pagas nada.
 
 Lo que contiene cada paso en detalle va en el texto del anuncio y en la
@@ -19,10 +19,10 @@ landing, no en la imagen.
 
 | # | Concepto | Titular | Foto |
 |---|---|---|---|
-| 1 | La radiografía | Tu sistema comercial, radiografiado. | Escritorio en rayos X con tres fracturas naranjas (móvil, portátil, presupuesto) |
+| 1 | La radiografía | Tu sistema de captación y ventas, radiografiado. | Escritorio en rayos X con tres fracturas naranjas (móvil, portátil, presupuesto) |
 | 2 | El cuadro de mandos | Siete avisos encendidos. Y tú, pisando a fondo. | Salpicadero de noche con todos los testigos encendidos |
 | 3 | El médico | Tu negocio no está enfermo. Está perdiendo dinero por el camino. | Médico con fonendo en la persiana de un negocio, de noche |
-| 4 | La cinta | Así se pierde el dinero entre el anuncio y el cierre. | Cinta transportadora por tramos con monedas de euro cayendo por los huecos |
+| 4 | La cinta | Así se te escapa el dinero entre el anuncio y el cierre. | Cinta transportadora por tramos con monedas de euro cayendo por los huecos |
 | 5 | El plano | Dónde se te va el dinero. Marcado. | Plano de oficina con tres zonas rayadas en naranja |
 
 Cada uno ataca el dolor global (el sistema entero pierde dinero, no una pieza)
