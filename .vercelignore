@@ -19,5 +19,6 @@ video-factory
 .claude
 README.md
 LANDING.md
+SESSION.md
 .clasp.json.example
 .gitignore
