@@ -56,9 +56,18 @@ async function buscarContacto(email, telefono) {
 }
 
 module.exports = async function handler(req, res) {
+  // El token puede venir en la query ya parseada, en la URL cruda o en cabecera.
+  let recibido = (req.query && req.query.k) || req.headers['x-agenda-secret'] || '';
+  if (!recibido && req.url) {
+    const m = String(req.url).match(/[?&]k=([^&]+)/);
+    if (m) recibido = decodeURIComponent(m[1]);
+  }
   const esperado = process.env.AGENDA_SECRET;
-  const recibido = String((req.query && req.query.k) || req.headers['x-agenda-secret'] || '');
-  if (!esperado || recibido !== esperado) {
+  if (!esperado) {
+    console.error('[agendar] falta AGENDA_SECRET en el entorno');
+    return res.status(500).json({ ok: false, error: 'not_configured' });
+  }
+  if (String(recibido) !== esperado) {
     return res.status(401).json({ ok: false, error: 'unauthorized' });
   }
   if (req.method !== 'POST') {
