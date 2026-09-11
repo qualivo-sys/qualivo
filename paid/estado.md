@@ -418,3 +418,66 @@ abierto.
 **Y una que no espera a nadie:** la caída de 15 visitas a 2 inicios de Radiografía (§3) es hoy el
 número que más dinero cuesta, y no es mío. Va devuelta a Growth (landing) y a Estrategia Central
 (promesa del anuncio frente a lo que se encuentra al llegar).
+
+---
+
+## 10 · CIERRE DE LA CAMPAÑA · 11-sep, 12:20 CEST
+
+**Maikel pausó `QV_HERO_LEADS_Sep26` el 10-sep a las 23:00:10 UTC.** Consta en el registro de
+actividad de la cuenta, actor «Maikel Echevarria Franconetti», `update_campaign_run_status`, Activa
+→ Inactiva. No he sido yo: todas mis llamadas a Meta han sido de lectura.
+
+La campaña vivió **de 9-sep 18:16 CEST a 11-sep 01:00 CEST**. Esta es la foto completa y final.
+
+| Día | Gasto | Impresiones | Clics enlace | Visitas (Meta) | Leads |
+|---|---|---|---|---|---|
+| 9-sep | 4,17 € | 365 | 11 | 1 | 0 |
+| 10-sep | 16,59 € | 764 | 14 | 4 | 0 |
+| 11-sep (cola) | 0,20 € | 15 | 0 | 0 | 0 |
+| **TOTAL** | **20,96 €** | **1.144** | **25** | **5** | **0** |
+
+CTR de enlace 2,19 % · CPC 0,84 € · CPM 18,32 €. Fuente: Meta Ads API v21.0, 11-sep 12:20 CEST.
+
+### En qué punto se cae, que es la pregunta del CEO Agent
+
+Eventos del píxel `879197745226987` por día (todo el tráfico del sitio, solo quien acepta cookies):
+
+| Día | PageView | HeroStart | HeroComplete | Lead |
+|---|---|---|---|---|
+| 9-sep | 5 | 4 | **4** | 3 |
+| **10-sep** | **44** | **2** | **0** | **0** |
+
+```
+1 · Impresión → clic .......... 2,19 % CTR de enlace ........... SANO
+2 · Clic → visita ............. entre 5 y 25 .................... NO MEDIBLE LIMPIO
+3 · Visita → empezar el test .. 44 → 2  (≈4,5 %) ............... ◄── AQUÍ SE CAE
+4 · Empezar → completar ....... 2 → 0 .......................... SIN BASE (n=2)
+```
+
+**El paso 1 funciona.** Un CTR de enlace del 2,19 % en frío es sano. El anuncio para el scroll.
+
+**El paso 2 no lo puedo afirmar y no lo voy a inventar.** Meta cuenta 5 visitas de 25 clics, pero
+`landing_page_view` depende del píxel y el píxel solo carga tras aceptar cookies. Las 44 PageView
+del 10-sep, por su parte, incluyen tráfico orgánico y directo, no solo el pagado. La horquilla
+honesta es **entre 5 y 25** y para cerrarla hace falta GA4 o los logs de Vercel, no Meta.
+
+**El paso 3 es el que cuesta el dinero.** 44 visitas al sitio y 2 personas empiezan el test.
+
+**Y el paso 4 no está roto, aunque lo parezca.** La prueba está en el 9-sep: cuando el equipo probó
+el recorrido de extremo a extremo, **4 inicios dieron 4 completados y 3 Lead**. El test funciona.
+Quien lo empieza, lo acaba.
+
+> **Respuesta en una línea: hay clics y no hay completados porque casi nadie empieza. El problema
+> es la página, no el anuncio.** Confirma tu heurística, y la confirma en el escalón de antes del
+> que esperabas: no es que abandonen el test a la mitad, es que no lo abren.
+
+**Y por eso no había que optimizar nada.** Con 25 clics no hay significancia para elegir ángulo,
+público ni puja. Cambiar la puja sobre esto habría sido ruido caro.
+
+### Los tres números para septiembre, para poner esto en contexto
+
+El plan de septiembre fija **40-60 Radiografías completadas** (Meta + orgánico) como fuente de 5
+conversaciones. Van **0 por la vía de pago**. A la tasa observada el 10-sep —44 visitas, 2 inicios,
+0 completados— el presupuesto no es el cuello de botella: **el cuello es la portada del test.**
+Arreglar eso vale más que cualquier cosa que yo pueda hacer con 15 €/día.
+
