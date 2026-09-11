@@ -31,6 +31,17 @@ async function send(payload){
   payload.url      = location.href;
   payload.utm      = location.search || '';
   payload.scored   = score(payload);
+  // Avisar a la página que nos incrusta para que su Tag Manager registre el lead.
+  // El escuchador del contenedor espera exactamente este formato.
+  try{
+    if(window.parent && window.parent !== window){
+      window.parent.postMessage({
+        source:'eac-leadmagnet', event:'lead',
+        magnet: payload.magnet, curso: payload.curso,
+        score: payload.scored.score, tag: payload.scored.tag, plazo: payload.plazo
+      },'*');
+    }
+  }catch(e){}
   try{
     var r = await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     return await r.json();

@@ -1,0 +1,126 @@
+<style>
+.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+ max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.eac-article *{box-sizing:border-box}
+.eac-article a{color:var(--sky);text-decoration:underline;text-underline-offset:2px}
+.eac-kicker{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+ color:var(--r);background:#FDF2F2;border:1px solid #F4CCCE;padding:5px 13px;border-radius:999px;margin:0 0 16px}
+.eac-article h1{font-size:2.1em;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:0 0 .3em}
+.eac-meta{font-size:14px;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:14px;margin:0 0 24px}
+.eac-lead{font-size:1.14em;line-height:1.62;color:#233040;margin:0 0 1.2em}
+.eac-article h2{font-size:1.45em;line-height:1.25;font-weight:800;letter-spacing:-.01em;margin:2em 0 .5em;
+ padding-top:.55em;border-top:3px solid var(--r);display:block}
+.eac-article h3{font-size:1.12em;font-weight:700;margin:1.6em 0 .35em}
+.eac-article p{margin:0 0 1.1em}
+.eac-article ul,.eac-article ol{margin:0 0 1.2em;padding-left:1.3em}
+.eac-article li{margin:.4em 0}
+.eac-key{border-left:5px solid var(--r);background:linear-gradient(180deg,#FFF7F7 0%,#fff 100%);
+ border:1px solid #F4DDDE;border-left-width:5px;border-radius:0 14px 14px 0;padding:18px 22px;margin:1.6em 0}
+.eac-key .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--r);margin-bottom:.55em}
+.eac-key ul{margin:0;padding-left:1.15em}
+.eac-toc{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:1.8em 0}
+.eac-toc .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-toc ol{margin:0;padding-left:1.2em;font-size:.96em}
+.eac-toc li{margin:.28em 0}
+.eac-stats{display:flex;flex-wrap:wrap;gap:10px;margin:1.5em 0}
+.eac-stat{flex:1 1 170px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--r);
+ border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
+.eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
+.eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
+.eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
+.eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
+.eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
+.eac-t td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.eac-t tr:nth-child(even) td{background:#FAFBFC}
+.eac-steps{list-style:none;counter-reset:s;margin:1.5em 0;padding:0}
+.eac-steps li{counter-increment:s;position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:16px 18px 16px 62px;margin:0 0 10px}
+.eac-steps li:before{content:counter(s);position:absolute;left:16px;top:15px;width:32px;height:32px;border-radius:50%;
+ background:var(--r);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.eac-steps b{display:block;margin-bottom:2px}
+.eac-pc{display:flex;flex-wrap:wrap;gap:12px;margin:1.5em 0}
+.eac-pc>div{flex:1 1 260px;border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#fff}
+.eac-pc .ok{border-top:3px solid #17915B}.eac-pc .ko{border-top:3px solid var(--r)}
+.eac-pc .t{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:.4em}
+.eac-pc .ok .t{color:#17915B}.eac-pc .ko .t{color:var(--r)}
+.eac-pc ul{margin:0;padding-left:1.1em;font-size:.96em}
+.eac-note,.eac-warn{border-radius:12px;padding:14px 18px;margin:1.5em 0;font-size:.97em}
+.eac-note{background:#F0F6FF;border:1px solid #CFE0FA}
+.eac-warn{background:#FFF8E9;border:1px solid #F2DFB0}
+.eac-note .t,.eac-warn .t{display:block;font-weight:800;margin-bottom:.25em}
+.eac-article blockquote{border-left:4px solid var(--r);background:var(--mist);margin:1.5em 0;padding:14px 20px;
+ font-size:1.05em;font-style:italic;border-radius:0 10px 10px 0}
+.eac-article blockquote p{margin:0}
+.eac-cta{background:linear-gradient(135deg,#0E1621 0%,#1B2A3D 100%);color:#fff;border-radius:16px;padding:30px 26px;margin:2.4em 0;text-align:center}
+.eac-cta h3{color:#fff;margin:0 0 .35em;font-size:1.3em;font-weight:800}
+.eac-cta p{color:#BFCADA;margin:0 0 1.2em;font-size:1em}
+.eac-btn{display:inline-block;background:var(--r);color:#fff !important;text-decoration:none !important;font-weight:800;
+ padding:14px 30px;border-radius:999px;margin:4px}
+.eac-btn2{display:inline-block;background:transparent;color:#fff !important;border:1px solid rgba(255,255,255,.45);
+ text-decoration:none !important;font-weight:700;padding:13px 26px;border-radius:999px;margin:4px}
+.eac-recap{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:2em 0}
+.eac-recap .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-faq details{border:1px solid var(--line);border-radius:12px;padding:0;margin:0 0 10px;background:#fff}
+.eac-faq summary{cursor:pointer;font-weight:700;padding:14px 18px;list-style:none;position:relative;padding-right:44px}
+.eac-faq summary::-webkit-details-marker{display:none}
+.eac-faq summary:after{content:"+";position:absolute;right:18px;top:11px;font-size:22px;color:var(--r);font-weight:800}
+.eac-faq details[open] summary:after{content:"–"}
+.eac-faq .a{padding:0 18px 14px;color:#25313F}
+.eac-faq .a p{margin:0}
+.eac-rel{border-top:1px solid var(--line);margin-top:2.4em;padding-top:16px}
+.eac-rel .t{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mut);margin-bottom:.5em}
+.eac-rel ul{margin:0;padding-left:1.1em}
+.eac-author{display:flex;gap:14px;align-items:flex-start;background:var(--mist);border:1px solid var(--line);
+ border-radius:14px;padding:16px 18px;margin:2em 0 0;font-size:14.5px;line-height:1.6;color:var(--mut)}
+.eac-author b{color:var(--ink)}
+@media(max-width:700px){
+ .eac-article{font-size:17px}
+ .eac-article h1{font-size:1.72em}
+ .eac-article h2{font-size:1.28em}
+ .eac-cta{padding:24px 18px}
+ .eac-steps li{padding:14px 16px 14px 56px}
+}
+</style>
+<article class="eac-article">
+<span class="eac-kicker">Sueldos · TCP</span>
+<h1>Cuánto cobra un auxiliar de vuelo (TCP) en España: sueldo real por aerolínea y antigüedad</h1>
+<p class="eac-meta">Actualizado el septiembre de 2026 · 3 min de lectura · Por el equipo de EAC</p>
+<p class="eac-lead"><strong>El sueldo de un TCP no es una cifra fija: es una suma.</strong> Salario base, dietas, prima por hora de vuelo y pluses de nocturnidad y festivos. Por eso dos compañeros de la misma promoción pueden acabar el año con nóminas muy distintas. Te explicamos de qué depende cada parte y cómo se llega a la parte alta de la horquilla.</p>
+<div class="eac-key"><span class="t">Respuesta rápida</span><ul><li>La nómina se compone de <strong>base + dietas + prima de vuelo + pluses</strong>. La parte variable pesa mucho.</li><li>La mayor diferencia entre dos TCP es el <strong>radio</strong>: el largo radio suma dietas y pernoctas que el corto radio no tiene.</li><li>Los <strong>idiomas</strong> no son solo un complemento: abren las bases y las flotas mejor pagadas.</li><li>El salto a <strong>sobrecargo</strong> cambia de tramo salarial, y llega antes de lo que la gente cree.</li></ul></div>
+<div class="eac-stats"><div class="eac-stat"><b>4 partidas</b><span>base · dietas · prima de vuelo · pluses</span></div><div class="eac-stat"><b>El radio manda</b><span>es lo que más separa dos nóminas</span></div><div class="eac-stat"><b>Sin carrera</b><span>se accede con la ESO y el certificado</span></div></div>
+<nav class="eac-toc"><span class="t">En este artículo</span><ol><li><a href="#compone">De qué se compone realmente la nómina</a></li><li><a href="#radio">El factor que más cambia el resultado: corto o largo radio</a></li><li><a href="#antiguedad">Cómo evoluciona con la antigüedad</a></li><li><a href="#calculadora">Calcula tu horquilla en 30 segundos</a></li><li><a href="#mas">Lo que sube el sueldo (y lo que no)</a></li><li><a href="#faq">Preguntas frecuentes</a></li></ol></nav>
+<h2 id="compone">1. De qué se compone realmente la nómina</h2>
+<p>Cuando alguien pregunta «cuánto cobra un auxiliar de vuelo» espera un número. La respuesta honesta es que hay cuatro partidas y solo una es fija:</p>
+<div class="eac-tw"><table class="eac-t"><thead><tr><th>Partida</th><th>De qué depende</th><th>¿Es fija?</th></tr></thead><tbody><tr><td>Salario base</td><td>Convenio de la aerolínea y tu antigüedad</td><td>Sí</td></tr><tr><td>Dietas</td><td>Destinos, pernoctas y tiempo fuera de base</td><td>No</td></tr><tr><td>Prima por hora de vuelo</td><td>Horas efectivamente voladas ese mes</td><td>No</td></tr><tr><td>Pluses</td><td>Nocturnidad, festivos, idiomas, funciones adicionales</td><td>No</td></tr></tbody></table></div>
+<blockquote><p>Por eso preguntar «cuánto se cobra» sin decir en qué aerolínea y en qué radio es como preguntar cuánto cuesta un coche.</p></blockquote>
+<h2 id="radio">2. El factor que más cambia el resultado: corto o largo radio</h2>
+<p>Es la diferencia más grande y la que menos se explica. Un TCP de <strong>corto radio</strong> suele hacer varios vuelos al día y dormir en su base: cobra base, prima por hora y pluses, pero apenas genera dietas.</p>
+<p>Un TCP de <strong>largo radio</strong> hace menos rotaciones pero más largas, con pernoctas fuera. Eso genera dietas que, mes a mes, suponen una parte muy significativa del ingreso total.</p>
+<div class="eac-pc"><div class="ok"><span class="t">Largo radio</span><ul><li>Dietas y pernoctas que engordan la nómina</li><li>Destinos intercontinentales</li><li>Menos rotaciones, más descanso entre vuelos</li><li>Mejor tramo salarial en general</li></ul></div><div class="ko"><span class="t">Corto radio</span><ul><li>Duermes en casa la mayoría de noches</li><li>Más rotaciones y más horas de vuelo al mes</li><li>Vida personal más previsible</li><li>Entrada más habitual para quien empieza</li></ul></div></div>
+<div class="eac-note"><span class="t">Para comparar bien</span>No compares salario base contra salario base. Compara el <strong>ingreso neto anual real</strong> incluyendo variables, y réstale el coste de vida de cada opción (desplazamientos a la base, noches fuera).</div>
+<h2 id="antiguedad">3. Cómo evoluciona con la antigüedad</h2>
+<p>Es una profesión donde el recorrido se nota. La progresión típica:</p>
+<ol class="eac-steps"><li><b>Primer año</b>Entras en el tramo inicial del convenio. El ingreso depende mucho de cuánto vueles y de si hay temporada alta.</li><li><b>Tres a cinco años</b>Sube la base por antigüedad y sueles tener más control sobre tu programación mensual.</li><li><b>Más de cinco años</b>Tramo consolidado, acceso a flotas y rutas mejor pagadas, y posibilidad de funciones adicionales retribuidas.</li><li><b>Sobrecargo</b>Lideras la tripulación de cabina. Cambio de categoría y de tramo salarial.</li></ol>
+<h2 id="calculadora">4. Calcula tu horquilla en 30 segundos</h2>
+<p>En lugar de darte una cifra genérica que no se parece a tu caso, hemos hecho una calculadora: eliges radio, tipo de aerolínea, antigüedad e idiomas, y te da tu horquilla estimada con el desglose de qué aporta cada factor.</p>
+<div class="eac-iman"><div class="h"><span class="lab">Calculadora gratuita</span><b>¿Cuánto ganarías volando?</b><span class="d">Ajusta cuatro factores y mira tu horquilla estimada, con el desglose.</span></div><iframe src="https://eac-imanes.vercel.app/calculadora-sueldo" title="¿Cuánto ganarías volando?" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#F4F6F9"></iframe><p class="f">¿No se carga? <a href="https://eac-imanes.vercel.app/calculadora-sueldo" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>.</p></div>
+<h2 id="mas">5. Lo que sube el sueldo (y lo que no)</h2>
+<ul><li><strong>Sube:</strong> idiomas adicionales, largo radio, antigüedad, promoción a sobrecargo, funciones de instructor.</li><li><strong>Sube:</strong> disponibilidad real para cubrir turnos, festivos y cambios de última hora.</li><li><strong>No sube:</strong> la altura, el aspecto físico o el género. La retribución la fija el convenio.</li><li><strong>No sube:</strong> tener carrera universitaria. No es un requisito ni se retribuye como tal.</li></ul>
+<div class="eac-warn"><span class="t">Cuidado con las cifras que circulan</span>En internet verás sueldos de aerolíneas de Oriente Medio o de Estados Unidos mezclados con los españoles. Los convenios, los impuestos y el coste de vida no son comparables. Pide siempre la referencia del país y del convenio.</div>
+<div class="eac-cta"><h3>¿Quieres empezar a volar?</h3><p>El certificado oficial de TCP es lo único que te separa de presentarte a cualquier convocatoria.</p><a class="eac-btn" href="/curso-auxiliar-vuelo/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=cuanto-cobran-las-azafatas-de-vuelo">Ver el curso de TCP</a><a class="eac-btn2" href="/contacto/?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=cuanto-cobran-las-azafatas-de-vuelo">Pedir información</a></div>
+<div class="eac-recap"><span class="t">En resumen</span><p>El sueldo de un TCP en España se compone de salario base, dietas, prima por hora de vuelo y pluses. La variable que más lo cambia es el radio: el largo radio suma dietas y pernoctas que el corto radio no genera. Los idiomas, la antigüedad y el salto a sobrecargo son los principales aceleradores. Ni la altura ni el género influyen: la retribución la marca el convenio.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
+<div class="eac-faq"><details><summary>¿Cuánto cobra un auxiliar de vuelo al mes en España?</summary><div class="a"><p>Depende del convenio de la aerolínea, de la antigüedad y, sobre todo, de cuánto se vuele y en qué radio. El salario base es solo una parte: las dietas, la prima por hora de vuelo y los pluses de nocturnidad y festivos completan la nómina.</p></div></details><details><summary>¿Se gana más en largo radio o en corto radio?</summary><div class="a"><p>En general el largo radio ofrece mejores condiciones porque genera dietas y pernoctas que el corto radio no tiene. A cambio implica más noches fuera de casa.</p></div></details><details><summary>¿Cobra lo mismo un hombre que una mujer?</summary><div class="a"><p>Sí. La retribución la fija el convenio de cada aerolínea según categoría y antigüedad, no el género.</p></div></details><details><summary>¿Hace falta carrera universitaria para ser TCP?</summary><div class="a"><p>No. Con la ESO y el certificado oficial de tripulante de cabina de pasajeros es suficiente para presentarse a las convocatorias.</p></div></details></div>
+<div class="eac-rel"><span class="t">Sigue leyendo</span><ul><li><a href="/blog/requisitos-azafata-vuelo/">Requisitos para ser TCP en España</a></li><li><a href="/blog/sobrecargo-vuelo/">Qué es un sobrecargo y cuánto gana</a></li><li><a href="/blog/salidas-profesionales-tcp-carrera-aviacion/">Salidas profesionales de un TCP</a></li></ul></div>
+<div class="eac-author"><div><b>Escola Aeronàutica de Catalunya</b> — Centro de formación aeronáutica en Barcelona. Formamos a tripulantes de cabina de pasajeros (TCP), personal de tierra y despachadores de vuelo. Contenido revisado por el equipo docente de EAC.<br><span style="font-size:13px">Última actualización: septiembre de 2026.</span></div></div>
+</article>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cuánto cobra un auxiliar de vuelo (TCP) en España: sueldo real por aerolínea y antigüedad","description":"Cuánto gana de verdad un auxiliar de vuelo en España: salario base, dietas, prima de vuelo y pluses. Diferencias por aerolínea, radio y antigüedad.","inLanguage":"es-ES","author":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya"},"publisher":{"@type":"Organization","name":"Escola Aeronàutica de Catalunya","url":"https://escolaeronauticadecatalunya.cat"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://escolaeronauticadecatalunya.cat/blog/cuanto-cobran-las-azafatas-de-vuelo/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cobra un auxiliar de vuelo al mes en España?","acceptedAnswer":{"@type":"Answer","text":"Depende del convenio de la aerolínea, de la antigüedad y, sobre todo, de cuánto se vuele y en qué radio. El salario base es solo una parte: las dietas, la prima por hora de vuelo y los pluses de nocturnidad y festivos completan la nómina."}},{"@type":"Question","name":"¿Se gana más en largo radio o en corto radio?","acceptedAnswer":{"@type":"Answer","text":"En general el largo radio ofrece mejores condiciones porque genera dietas y pernoctas que el corto radio no tiene. A cambio implica más noches fuera de casa."}},{"@type":"Question","name":"¿Cobra lo mismo un hombre que una mujer?","acceptedAnswer":{"@type":"Answer","text":"Sí. La retribución la fija el convenio de cada aerolínea según categoría y antigüedad, no el género."}},{"@type":"Question","name":"¿Hace falta carrera universitaria para ser TCP?","acceptedAnswer":{"@type":"Answer","text":"No. Con la ESO y el certificado oficial de tripulante de cabina de pasajeros es suficiente para presentarse a las convocatorias."}}]}</script>
