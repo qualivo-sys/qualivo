@@ -30,11 +30,11 @@
     return s && s.value !== '' ? parseInt(s.value, 10) : -1;
   }
 
-  // Corte: se queda fuera solo quien está solo o no invierte nada todavía.
-  // Con equipo y algo de inversión ya hay sistema que mirar; el resto se
+  // Corte: se queda fuera solo quien no invierte nada todavía. Si invierte,
+  // aunque esté solo, hay sistema que mirar y puede ser cliente. El resto se
   // decide en la llamada, no en el formulario.
   function cualifica() {
-    return valor('equipo') >= 1 && valor('inversion') >= 1;
+    return valor('inversion') >= 1;
   }
 
   document.getElementById('b1').addEventListener('click', function () {
