@@ -142,6 +142,7 @@ Ninguna clave está en el repositorio y así se queda.
 | `META_LEADFORM_TOKEN` | token de sistema, no caduca · pendiente de poner |
 | `META_LEADFORM_VERIFY` | lo inventas tú; el mismo texto va en Meta · pendiente |
 | `META_LEADFORM_IDS` | `1006694072388659` · pendiente de poner |
+| `META_APP_SECRET` | firma de cada entrega de Meta · pendiente de poner |
 
 **La suscripción de Meta es por página, no por formulario.** La página «Maikel
 Echevarria» (`359073050620335`) tiene diez formularios antiguos activos (HackTheLead,
@@ -178,6 +179,12 @@ tiene prisa puede coger hueco sin esperar al WhatsApp.
 | Token de Meta | usuario de sistema, sin caducidad, con `leads_retrieval` |
 | `/api/activacion/` en producción | 401 sin secreto, como debe ser |
 | `/api/meta-leadform/` en producción | 403 con token equivocado, como debe ser |
+
+Cada entrega de Meta llega firmada con el secreto de la app. Con `META_APP_SECRET`
+puesto, una entrega sin firma o con firma que no cuadra se rechaza: sin eso,
+cualquiera que conozca la URL podría inventarse leads y hacer que les llamemos.
+Queda además una segunda barrera: los datos del lead no salen del webhook, se van a
+buscar a la Graph API con nuestro token, y un identificador inventado no existe allí.
 
 **La URL del webhook lleva barra final**: `https://qualivo.io/api/meta-leadform/`.
 Sin ella el sitio responde 308 y Meta no sigue redirecciones en POST.

@@ -17,6 +17,8 @@
 // ni le llama. Sin la lista, no se activa ninguno. Escribir a un lead de una
 // campaña de hace seis meses es el error que costó la queja de agosto.
 
+const crypto = require('crypto');
+
 const GRAPH = 'https://graph.facebook.com/v21.0';
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
@@ -39,6 +41,26 @@ function respuesta(campos, trozos, valores) {
     }
   }
   return '';
+}
+
+// Meta firma cada entrega con el secreto de la app. Sin esta comprobación
+// cualquiera que conozca la URL podría inventarse leads y provocar que les
+// escribamos y les llamemos. Se valida cuando hay secreto y firma; si el cuerpo
+// no se puede leer tal cual llegó, queda la segunda barrera: los datos del lead
+// no salen del webhook, se van a buscar a la Graph API con nuestro token, y un
+// identificador inventado no existe allí.
+function firmaValida(req) {
+  const secreto = process.env.META_APP_SECRET;
+  const cabecera = String(req.headers['x-hub-signature-256'] || '');
+  if (!secreto) return { ok: true, motivo: 'sin_secreto' };
+  if (!cabecera.startsWith('sha256=')) return { ok: false, motivo: 'sin_firma' };
+
+  const crudo = req.rawBody || (typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {}));
+  const esperada = 'sha256=' + crypto.createHmac('sha256', secreto).update(crudo, 'utf8').digest('hex');
+  const a = Buffer.from(cabecera);
+  const b = Buffer.from(esperada);
+  if (a.length !== b.length) return { ok: false, motivo: 'firma_distinta' };
+  return { ok: crypto.timingSafeEqual(a, b), motivo: 'firma_distinta' };
 }
 
 function valor(campos, nombres) {
@@ -141,6 +163,12 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
+  }
+
+  const firma = firmaValida(req);
+  if (!firma.ok) {
+    console.error('[leadform] entrega rechazada:', firma.motivo);
+    return res.status(200).json({ ok: false, error: firma.motivo });
   }
 
   const token = process.env.META_LEADFORM_TOKEN;
