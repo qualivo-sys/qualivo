@@ -30,10 +30,11 @@
     return s && s.value !== '' ? parseInt(s.value, 10) : -1;
   }
 
-  // Corte: hace falta equipo de 5 o más Y alguna inversión en captación.
-  // Con menos, un diagnóstico completo cuesta más de lo que devuelve.
+  // Corte: se queda fuera solo quien está solo o no invierte nada todavía.
+  // Con equipo y algo de inversión ya hay sistema que mirar; el resto se
+  // decide en la llamada, no en el formulario.
   function cualifica() {
-    return valor('equipo') >= 2 && valor('inversion') >= 2;
+    return valor('equipo') >= 1 && valor('inversion') >= 1;
   }
 
   document.getElementById('b1').addEventListener('click', function () {
