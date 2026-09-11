@@ -11,8 +11,8 @@ negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.») y
 **franja = los tres pasos en cuatro palabras + garantía**:
 
 > **1 Diagnóstico** 15 min. Dónde se escapa. · **2 Plan** Por escrito. Qué
-> agente, qué número. · **3 Piloto** 30 días. Puesto y medido.
-> Acordamos el número antes. Si no mejora, no pagas el piloto.
+> va primero. · **3 Piloto** 30 días. Puesto y medido.
+> Si no mejoramos tus resultados, no pagas nada.
 
 Lo que contiene cada paso en detalle va en el texto del anuncio y en la
 landing, no en la imagen.
