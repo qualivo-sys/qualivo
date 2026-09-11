@@ -1,82 +1,87 @@
-# Anuncios WOW · prompts listos para Kie o Higgsfield
+# Anuncios WOW · cinco conceptos globales · prompts listos
 
-Cinco conceptos que no se parecen a nada del sector. Cada uno es una imagen que
-para el dedo por sí sola, y encima va el titular en Anton y la franja amarilla
-del proceso (1 Diagnóstico → 2 Plan → 3 Piloto 30 días · Si no mejora, no pagas).
+Regla que cumplen los cinco: **el dolor es del sistema entero, no de una etapa**,
+y la propuesta queda clara en la propia pieza: quince minutos, plan por escrito,
+piloto de 30 días sin coste. Encima de cada imagen, titular corto en Anton y la
+franja amarilla: *1 Diagnóstico → 2 Plan → 3 Piloto 30 días · Si no mejora, no
+pagas.*
 
-**Modelo:** `gpt_image_2` · **formato** `3:4` · **calidad** `high` · **resolución** `1k`
-**Coste en Higgsfield:** 3,5 créditos por imagen, unas 18 las cinco.
-
-Reglas para las cinco: sin texto dentro de la imagen, sin gente sonriendo a
-cámara, sin aspecto de banco de imágenes. Dejar despejado el tercio superior,
-que es donde va el titular.
+**Modelo** `gpt_image_2` · **formato** `3:4` · **calidad** `high` · sin texto
+dentro de la imagen · sin gente sonriendo a cámara · tercio superior despejado.
 
 ---
 
-## 1 · LA RADIOGRAFÍA — la que es literalmente nuestro producto
+## 1 · LA RADIOGRAFÍA — el diagnóstico hecho literal ✅ probado
 
-**Titular:** DIAGNÓSTICO. QUINCE MINUTOS.
-**Sub:** Tu sistema de ventas, radiografiado.
+**Titular:** Tu sistema de ventas, radiografiado.
+**Sub:** Quince minutos. Vemos dónde está la fractura y cuánto te cuesta.
 
 > A real medical X-ray radiograph, viewed on black film, of a small business
 > owner's desk seen from directly above: a smartphone, an open laptop, a stapled
 > paper quote, a coffee cup and a pen, all rendered as translucent blue-white
-> X-ray forms like bones. One bright glowing orange-red fracture line crosses the
-> smartphone. Authentic radiology aesthetic: film grain, faint corner markers,
-> subtle vignette. No text anywhere. Leave the top third of the frame as empty
-> black film.
+> X-ray forms like bones. Several small glowing orange-red fracture lines: one on
+> the phone, one on the laptop screen, one on the paper quote. Authentic
+> radiology aesthetic: film grain, faint corner markers. No text. Leave the top
+> third as empty black film.
 
-## 2 · LOS PRESUPUESTOS TENDIDOS — la más española
+*(Cambio respecto a la prueba: tres fracturas en vez de una, para que se lea
+«varios sitios» y no «el móvil».)*
 
-**Titular:** LOS PRESUPUESTOS QUE MANDASTE ESTE MES.
-**Sub:** Siguen ahí. Nadie los ha recogido.
+## 2 · EL CUADRO DE MANDOS — las siete alertas, sin lista
 
-> Documentary photograph, a typical Spanish apartment balcony in Madrid with a
-> wrought iron railing, late afternoon sun. A clothesline strung across the
-> balcony with about a dozen printed A4 business quotes pinned with wooden
-> clothes pegs, pages slightly yellowed and curling, a couple lifting in the
-> wind. Shot from the street looking slightly up, 35mm lens, natural light,
-> realistic, not staged. No people. No readable text on the pages. Leave clear
-> sky at the top for a headline.
+**Titular:** Siete avisos encendidos. Y tú subiendo el presupuesto.
+**Sub:** Anuncios, web, formularios, respuesta, seguimiento, presupuestos, cierre.
+
+> Close-up photograph of a car dashboard at night, driver's point of view, every
+> warning light lit up in orange and red at once: engine, oil, battery,
+> temperature, brake, tyre pressure, fuel. The speedometer needle is high. Real
+> car interior, shallow depth of field, ambient dashboard glow only. No readable
+> words. Dark empty space above the dashboard for a headline.
 
 ## 3 · EL MÉDICO EN LA PERSIANA — la graciosa
 
-**Titular:** TU NEGOCIO NO ESTÁ ENFERMO. TIENE UNA FUGA.
-**Sub:** Y se encuentra en quince minutos.
+**Titular:** Tu negocio no está enfermo. Tiene fugas.
+**Sub:** Y se encuentran en quince minutos.
 
 > Direct-flash street photograph at night in a Spanish town: a doctor in a white
 > coat with a stethoscope pressed against the closed metal roller shutter of a
 > small shop, listening intently, seen from the side at a slight distance. Hard
 > on-camera flash, sharp shadows on the pavement, realistic and slightly absurd,
-> like a photo taken by a passer-by. No text, no readable signage. Keep the
-> upper part of the shutter plain for a headline.
+> like a photo taken by a passer-by. No text, no readable signage. Upper part of
+> the shutter plain for a headline.
 
-## 4 · LAS 3:12 — la que duele
+## 4 · LA CINTA — el sistema con huecos
 
-**Titular:** ENTRÓ A LAS 3:12. LE CONTESTASTE A LAS 10:40.
-**Sub:** A las 9 ya había comprado a otro.
-
-> A small Spanish office at night, completely dark except one smartphone lying
-> face up on a desk, its screen lighting up with a notification and casting a
-> glow over a paper quote and a cold cup of coffee. Low camera angle at desk
-> level, shallow depth of field, real photograph, not a stock render. No
-> readable text on the screen. The upper half of the frame is dark and empty.
-
-## 5 · LA CINTA — la que explica «sistema» sin palabras
-
-**Titular:** ASÍ SE PIERDE EL DINERO EN UN SISTEMA DE VENTAS.
+**Titular:** Así se pierde el dinero en un sistema de ventas.
 **Sub:** Por los huecos entre una parte y la siguiente.
 
-> Industrial studio photograph: a factory conveyor belt carrying a stream of euro
-> coins, seen from the side at belt height, with visible gaps between belt
-> sections where coins slip through and fall, several caught mid-air. Clean even
-> studio light on a warm cream background, hyper-real, slightly surreal, no
-> people. No text. Leave the space above the belt empty for a headline.
+> Industrial studio photograph: a long factory conveyor belt made of several
+> separate sections carrying a stream of euro coins, seen from the side at belt
+> height. At each gap between sections coins slip through and fall, several
+> caught mid-air. Clean even studio light on a warm cream background, hyper-real,
+> slightly surreal, no people. No text. Empty space above the belt.
+
+## 5 · EL PLANO EN ROJO — el plan hecho imagen
+
+**Titular:** Dónde se te va el dinero. Marcado.
+**Sub:** Eso es lo que te llevas por escrito.
+
+> Architectural floor plan of a small business office, printed on paper and
+> photographed from above on a wooden desk with a pen and a coffee cup. Three
+> areas of the plan are circled and hatched in bright orange marker, like a
+> surveyor marking damp spots. Realistic paper texture, natural window light,
+> slight shadow. No readable text on the plan. Clear space at the top of the
+> frame.
 
 ---
 
+## Descartados
+
+- Los presupuestos tendidos y las 3:12. Buenas imágenes, pero vuelven al dolor
+  del presupuesto y del tiempo de respuesta. Aquí el dolor tiene que ser el
+  sistema entero.
+
 ## Cómo se montan
 
-Cada foto entra en `fotos/0N.png` y la plantilla `anuncios.html` le pone encima
-el velo, el titular y la franja. Lo que ya está probado con dos pruebas a
-calidad baja.
+Cada foto entra en `fotos/0N.png` y `anuncios.html` le pone el velo, el titular,
+el sub y la franja. Hace falta la clave de Kie o unos 18 créditos de Higgsfield.
