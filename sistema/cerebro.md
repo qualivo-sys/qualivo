@@ -1,0 +1,127 @@
+# Cerebro Qualivo · Estado y directrices
+
+> Fichero de coordinación entre agentes. Lo escribe el **cerebro** (sesión "Quipu billing dashboard 2025-2026", `session_014JU3v9jX3ErSbc6ZSTe5wa`, rama `claude/quipu-billing-dashboard-g2s2ap`).
+> Los demás agentes lo leen en su rutina diaria con:
+> `git fetch origin claude/quipu-billing-dashboard-g2s2ap && git show origin/claude/quipu-billing-dashboard-g2s2ap:sistema/cerebro.md`
+>
+> Última actualización: **2026-09-01**
+
+## Quién es quién
+
+| Rol | Sesión | Rama |
+|---|---|---|
+| **Cerebro (CFO/COO)** | Quipu billing dashboard 2025-2026 | `claude/quipu-billing-dashboard-g2s2ap` |
+| Outbound / SDR | Client acquisition strategy | `claude/client-acquisition-ideas-k00f5d` |
+| Landing / Growth / Contenido | Landing Qualivo.io en Vercel | `claude/qualivo-landing-vercel-nubk1i` |
+| Ventas / Closer | Agente de Ventas Qualivo (`session_01EsVfarsm7LwubAYY6Kis9s`) | su propia rama, carpeta `ventas/` |
+| Automatización | Agente de Automatización Qualivo (`session_01DAmUZHTVFxPG37QyuAMQvr`) | su propia rama, carpeta `automatizaciones/` — entrega n8n en borrador, nunca autoenvía a clientes |
+| Eleva | Eleva Academy metrics dashboard | `claude/eleva-academy-metrics-jm8msg` |
+| EAC | EAC metrics dashboard | `claude/eac-metrics-dashboard-qx7fkh` |
+
+El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madrid) y prepara el parte para Maikel.
+
+## Protocolo
+
+1. **Reporting**: cada agente cierra sus bloques de trabajo con cifras concretas (respuestas, conversaciones, propuestas, € de pipeline, leads, visitas). El cerebro las lee de vuestros resúmenes de sesión y de vuestros ficheros en el repo (`captacion/`, `sdr/`, `plan/`…).
+2. **Urgencias**: lo que necesite al cerebro se marca con el prefijo `[PARA CEREBRO]` en la primera línea del resumen de turno (lead caliente, problema de deliverability, decisión de dinero).
+3. **Decisiones**: las decisiones de dinero y de campaña las toma **Maikel**, no los agentes ni el cerebro. Los agentes las dejan planteadas; el cerebro se las lleva a Maikel en el parte diario.
+4. **Este fichero**: solo lo edita el cerebro. Si un agente quiere proponer un cambio de estrategia, lo escribe en su propia carpeta y lo marca `[PARA CEREBRO]`.
+
+## Directrices vigentes (actualizadas 6 sep 2026 · SO Maikel 2026)
+
+- **OBJETIVO SEPTIEMBRE — se mide por ACTIVIDAD, no por dinero: 30 conversaciones comerciales · 8-10 propuestas · 2-4 clientes nuevos.** Rumbo: 10.000 €/mes recurrentes (hoy 4.100).
+- **Motor diario de Maikel: 3 contactos nuevos · 5 seguimientos · 1 acción comercial importante.** Semanal: 10 conversaciones · 3 propuestas.
+- Prioridad absoluta cuando algo choca: 1) salud y energía 2) ventas 3) clientes 4) IA y aprendizaje 5) inglés 6) administración.
+- Las mañanas (09:00-11:00) son bloque comercial profundo: prospección, seguimientos, propuestas. Nada de organizar ni consumir contenido.
+- Estructura semanal: lunes CEO Day + comercial · martes ventas y construcción · miércoles growth y contenido · jueves operaciones y proyecto IA · viernes revisión semanal.
+- Propuestas en <48h desde la conversación; seguimientos a 3-7-14 días; responder respuestas entrantes en <2h.
+- **Modo caja estricto**: la caja libre operativa es mínima (la mayor parte del saldo está reservada para impuestos). Ningún gasto nuevo sin pasar por el cerebro. Decisión de financiación congelada hasta **noviembre**.
+- Ingresos recurrentes actuales: Equipzilla 2.040 € nómina (sube a ~2.850 € en octubre) + EAC 800 € + Eleva 400-500 €. Fase actual: estancamiento, no crisis — la misión es el siguiente cliente.
+
+## Posicionamiento · DEROGADO el 10-sep
+
+> ⛔ **La matriz obligatoria del 8-sep queda derogada.** El único documento válido es
+> **`sistema/propuesta-valor.md` (V2, 10-sep)** en la rama `claude/quipu-billing-dashboard-g2s2ap`.
+> Lo edita solo el cerebro. El espejo de `main:sistema/propuesta-de-valor.md` lo publica la sesión
+> de Arquitectura a partir de ese fichero; si difieren, manda el de esta rama.
+> Lo de abajo se conserva como histórico y **no se usa**.
+
+### Tres reglas que resuelven los conflictos abiertos (10-sep)
+
+1. **Tamaño de empresa: 5 a 50 personas, en todas partes.** Deroga el "2 a 20" del Radar IA diario y del texto de la Radiografía. Motivo: por debajo de 5 no hay ni volumen para que agentizar tenga retorno ni capacidad de atender más negocio. Los 18 ICPs del OUTBOUND BRAIN no compiten con esto: son candidatos, y el filtro de tamaño y capacidad se aplica encima de cualquiera de ellos.
+2. **Suelo de 500 €/mes de inversión en captación, medios incluidos**, como criterio de descarte en cualificación. Ya estaba en la estrategia central §1.2 pero no en un sitio donde Outbound y el SDR lo vieran. Ahora es regla de cualificación.
+3. **Nunca precio en frío ni en la web.** Deroga el "Growth System 1.000-2.500 €/mes" de la matriz vieja. Landing revisa la web y lo quita si aparece.
+
+## Histórico · Posicionamiento en 10 segundos (8 sep 2026) — DEROGADO
+
+Todo mensaje, secuencia, post, anuncio, propuesta y respuesta se alinea a esto. Si un tramo no cabe en la frase, sobra el tramo.
+
+**Documento eje (9 sep 2026):** la estrategia completa (propuesta de valor, ICPs, mensaje por canal, recorrido, medición, plan 30 días) está en `sistema/estrategia-central.md`. La copia que edita Maikel es el Google Doc "Estrategia Central Qualivo v1" (id `1GIDjC9ZeNmyds016UEEeNYCgGx8g9OpLwFMDHhFDT1o`); el cerebro sincroniza Doc → repo → agentes. Si hay discrepancia, manda el Doc. Para outbound existe además el **OUTBOUND BRAIN** en Notion (18 ICPs, scoring de encaje 0-50, prohibiciones de copy, gobernanza), editado por Maikel y espejado por Outbound en `estrategia/outbound-brain.md`; el motor de exploración de ICPs (estrategia §2.7) se alimenta de ahí.
+
+| | |
+|---|---|
+| **Dolor principal** | "Invierto en marketing y no sé por dónde se me escapan los clientes." No es falta de leads: es que el dueño no ve dónde se rompe (nadie contesta a tiempo, nadie persigue el presupuesto, todo pasa por él, no sabe qué funciona). |
+| **Transformación** | De "hago cosas y espero" a "sé qué falla, qué arreglo primero y cuánto me cuesta cada cliente". Un sistema que capta, cualifica y persigue solo, con un número a fin de mes. |
+| **Prueba** | Nadie compró "más marketing"; todos compraron ver la fuga y taparla: Eleva CPL −61% / entrevistas +102% · Equipzilla ROAS 0,1→7,6, CAC −80% · EAC 10,2× · BelloVinilo 8,3× · Focus −53% coste/contacto · Nuria 6,45×. Prueba interna: los 24 clics de 6.874 envíos salen del único mensaje que es un diagnóstico. |
+| **Mecanismo único** | La Radiografía: primero la fuga, después qué arreglar, y se arregla con sistemas y agentes de IA que no dependen del dueño. Diagnóstico antes que táctica · implementación, no PowerPoint · agentes de IA como parte del arreglo. |
+| **Oferta** | Entrada: Radiografía del crecimiento (gratis, 90 s, qualivo.io/donde-se-rompe-tu-crecimiento/). Núcleo: Growth System, 1.000-2.500 €/mes, garantía 30 días. Ampliación: agentes de IA (Agent For Me). Nada más en la carta. |
+
+**Frase de 10 segundos:** "Encuentro dónde se te escapan los clientes y lo arreglo con sistemas y agentes de IA que trabajan solos. Eleva perdía el 61% de su presupuesto en leads que no cualificaban; hoy hace el doble de entrevistas con la mitad."
+
+**Versión para partners:** "Maikel encuentra por dónde pierdes clientes y lo arregla. Si tu cliente dice 'invierto y no sé si funciona', preséntaselo."
+
+**Lead magnet central:** la Radiografía. Todo canal (outbound, contenido, ads, partners) termina ahí con UTM propia (utm_campaign=radiografia, utm_source=<canal>, utm_content=<pieza o campaña>). Landing instrumenta eventos + UTM + tag `cuello-<valor>` en GHL; el SDR contacta <24h a cada radiografía completada usando SU cuello de botella como gancho.
+
+
+
+| Cuenta | Detalle | Estado |
+|---|---|---|
+| Inspyria | Han pedido hablar — entender qué necesitan | Reunión por agendar |
+| Marilia | Propone colaboración al 50%, visita clientes presencialmente | Conversación abierta |
+| Antic Barcelona | Cliente nuevo a comisión | Arrancando |
+| Equilibrha | 1.500 € | abierto |
+| Grup Montaner | 1.500 € | abierto |
+| Emana | 1.000 € | abierto |
+| Prospectos antiguos | Reactivar con seguimiento | 10 seguimientos/semana |
+
+Cualquier cambio de fase (propuesta / negociación / cerrado / perdido) se reporta con importe — alimenta la previsión de caja. Cobros clave de septiembre: Eleva agosto (pendiente), Eleva sept (~día 20), EAC 800 € (~día 20).
+
+## Qualivo OS (Notion)
+
+La ejecución vive en Notion, página **"Qualivo OS · Sala de Mando"**, con cuatro bases: Roadmap Sep–Dic, Tareas, Experimentos y Decisiones. Las finanzas NO se duplican en Notion: viven en el Google Sheet del cerebro. Los agentes proponen tareas/experimentos vía `[PARA CEREBRO]`; el cerebro las registra y asigna.
+
+Mandato del cerebro (charter de Maikel, 2026-09-01): actuar como operating brain — CEO advisor, COO, CFO, orquestador de agentes. Regla de prioridad cuando haya conflicto: 1) revenue inmediato, 2) pipeline, 3) adquisición, 4) conversión, 5) retención, 6) automatización. No se automatiza una operación que no funcione manualmente primero.
+
+## Infraestructura (para no volver a buscarlo)
+
+- **Dominio qualivo.io:** registrador Dinahosting; zona DNS en sus nameservers de marca blanca (`ns*.gestiondecuenta.com`). La cuenta NO está bajo maikel@qualivo.io (probable info@maikelechevarria.com o Gmail personal). Correo en Google Workspace; web en Vercel (equipo "Qualivo Agency", proyecto de la landing). SPF actual `v=spf1 a mx ~all`: Resend sin verificar hasta que Maikel entre en Dinahosting y pegue DKIM/SPF/MX de Resend.
+- **Meta Ads (Marketing API):** Maikel la tiene montada desde hace tiempo. En el repo hay conector de lectura (`src/connectors/MetaAds.gs`, token `META_ACCESS_TOKEN` + `META_AD_ACCOUNT_ID` en Script Properties, permiso `ads_read`) usado en los dashboards de EAC (act_10151404080652508) y Eleva. Para MONTAR campañas hace falta un token con `ads_management` sobre la cuenta publicitaria de Qualivo; pendiente de confirmar por Maikel dónde vive ese token. Regla: el agente construye la campaña por API en PAUSADO, Maikel revisa en el Administrador y la activa él.
+
+## Decisiones de reparto vigentes (9 sep, cierre)
+
+- **Secuencia email día 1/3/7 de la Radiografía:** Landing (Vercel cron + Resend + webhook de Resend que suma puntuación). La versión n8n de Automatización queda aparcada como plan B.
+- **Día 1:** formulario → tarea de GHL con mensaje relleno (Landing). Identificados por `?l=` sin formulario → webhook `radiografia-dia1` de Outbound, respuesta en el hilo de Smartlead.
+- **Respuestas de campañas:** SDR de respuestas de Outbound en copiloto (Smartlead → n8n → sesión; borrador → ok de Maikel → envío en el hilo).
+- **Métricas:** `captacion/datos/funnel-diario.csv` (Outbound) es la fuente única del scorecard; Landing publica `web-diario.csv`; el cerebro rellena `clientes` desde Quipu los viernes. Pendiente: columnas respuestas_reales, señales, toques_24h, reuniones_celebradas, propuestas, y `funnel-semana.csv`.
+- **Automatización:** sin construir nada nuevo hasta tener el mapa único de n8n (`automatizaciones/mapa-n8n.md`).
+- **Insights del 10-sep (Kubysoft + Scubalight), reglas adoptadas:** (1) el resultado determina el sistema y el sistema determina los agentes, nunca al revés; (2) no duplicar lo que el cliente ya tiene: con canales maduros se añade la capa que falta, no se rehace el canal; (3) no softwareizar antes de validar, la v1 se monta con herramientas existentes; (4) el piloto acotado vende cuando la transformación no, y se paga con validación, no con fe; (5) cada agente con contrato (objetivo, input, decisiones, acciones, output, KPI, límites, handoff); (6) frontera explícita en cada propuesta entre lo que hace Qualivo y lo que hace el cliente; (7) el Brain coordina, no se vende.
+- **Guardarraíl de pricing [DECISIÓN del cerebro, 10-sep]:** ningún piloto sin suelo. La respuesta a "no quiero pagar fijo" es **reducir alcance, no quitar el suelo** (estrategia §1.6). El fijo cubre coste duro (Smartlead, Apollo, datos, número de voz, ~150-200 €/mes por campaña), no es margen. "Reunión cualificada" se define **por escrito antes de empezar**: empresa del ICP pactado, decisor, celebrada sin no-show, mínimo 15 minutos, y tope mensual. Referencia de precio por reunión: el valor esperado para el cliente, no el coste nuestro.
+- **Scubalight (gaming, wishlists):** se acepta como caja puntual si paga, **no como vertical**. No genera playbook ni caso reutilizable para el ICP. No se abren agentes ni contenido para gaming.
+- **Propuesta "Qualivo audita y construye sistemas" (10-sep):** veredicto **MODIFICAR, no sustituir**. Regla que zanja el debate: **el mensaje no cambia, la arquitectura sí**. Hacia fuera sigue mandando el posicionamiento validado ("Encuentro dónde se te escapan los clientes y lo arreglo"), que es el único que ha producido clics. Hacia dentro se adoptan tres cosas: (1) la frase corta "No automatizamos tareas, construimos sistemas comerciales" como respuesta a la objeción de la IA y como titular de LinkedIn; (2) CAPTURE / SEGUIMIENTO / VENTAS como empaquetado interno de la oferta por fuga; (3) la jerarquía negocio → procesos → sistemas → agentes → workflows → herramientas como regla para todos los agentes: un agente es un componente, nunca el producto. **NO se adopta:** el lenguaje en inglés y las cinco capas "Intelligence" (no las compra un gerente de despacho de 10 personas), ni el modelo de cinco fases tipo consultora enterprise (ciclo largo, comprador que no tenemos). Congelado el debate de posicionamiento hasta el 1-oct.
+- **Google Ads (9-sep):** preparado, no encendido. Datos de DinoRank: ~1.800 búsquedas/mes útiles a 3-4 € de CPC (consultoría marketing digital 2.110, pymes 430, growth 510, consultoría IA 210, captación 330). A 15 €/día son ~4 clics/día → 1 lead cada 5-7 días → ~230 € por reunión, con las primeras 2 semanas en aprendizaje. En septiembre no hay caja: 300-450 € solo salen de la tarjeta, y la de octubre ya está comprometida (IVA 1.400 el día 20). **Decisión: se enciende el 1-oct si se cumplen las tres condiciones (Meta leído con 7 días de datos · impresiones en las páginas BOFU de Search Console · financiado por un cobro nuevo, empezando por los 450 € de Eleva de agosto sin cobrar).** Fuera de la lista: agencia marketing Barcelona/Madrid (subasta cara), CRM pymes (20 € CPC), y verticales sin búsqueda (academias 20/mes, reformas 40/mes → esas siguen en Meta y outbound).
+- **REGLA DE MEDICIÓN DE LEADS [DECISIÓN del cerebro, 11-sep, corrige un error propio]:** el único número de leads válido es el de **GoHighLevel** (contactos con etiqueta `diagnostico-crecimiento`). **Los eventos `lead` del píxel de Meta NO son leads** y no se reportan como tales por ninguna sesión. El 11-sep conté 3 "leads" del píxel que eran una prueba de extremo a extremo hecha por el propio cerebro; Maikel lo corrigió. Estado real del embudo a 11-sep: **cero registros reales**. `api/informe.js` ya separa las dos columnas ("Leads (píxel)" y "Registros GHL"); el cuadro de mando debe leer la segunda. Aplica a Landing, Paid y Outbound.
+- **Fuga clic → página [HALLAZGO del 11-sep, prioridad máxima]:** campaña `QV_HERO_LEADS_Sep26`, 20,76 € gastados: 1.129 impresiones, **25 clics de enlace, CTR 2,21 %** (el histórico de la cuenta está en 0,39-0,85 %: las creatividades y el mensaje nuevo funcionan) y solo **5 `landing_page_view`**. Se pierde el 80 % entre el clic y la página, y el coste por visita sale a **4,15 €**. Encargo enviado a Landing el 11-sep (tiempo de carga en móvil/4G, disparo de `PageView`, redirecciones del enlace, navegador dentro de Instagram/Facebook). **Hasta que no esté arreglado no se sube presupuesto:** a 4,15 €/visita, 200 € compran 48 visitas y no permiten aprender nada; arreglado, los mismos 200 € compran 200-250.
+- **Campaña de pago [DECISIÓN 11-sep]:** arranca el **lunes 15-sep**, no antes. Formato: **una sola campaña, un conjunto, 40 €/día, 4 creatividades dentro, 5 días, 200 €**. No dos campañas a 20 €: parte en dos una señal que ya es minúscula y ninguna sale de la fase de aprendizaje. No se enciende en viernes ni en fin de semana: el ICP es B2B y Meta calibraría el aprendizaje con el peor tráfico de la semana.
+- **Préstamo [DECISIÓN 11-sep]:** se mantiene la secuencia de Maikel — validar primero, pedir después. Deuda hoy 45.428 € y 2.767 €/mes; liquidar todo menos el coche cuesta **33.368 €** (no 27.000). Techo defendible hoy: **36.000 €** (liquidación + un mes de gastos de suelo). Los 42.000 € con 6.000 € de presupuesto de publicidad vuelven a la mesa **cuando haya un registro real en la Radiografía**. Criterio de validación al **2-nov: 2 pilotos cobrando, 1.500 € de recurrente firmado y un registro real de un desconocido**. Antes de hablar con ningún banco: confirmar plazo y TIN (no la cuota), pedir sin comisión de cancelación, y confirmar los saldos de Younited y del ordenador, que siguen vacíos en el Sheet. Detalle en el artifact `28398144-dfc6-4bf8-a70a-08b938e77930`.
+- **Credenciales [11-sep]:** inventario en Notion, dos páginas dentro de "Qualivo OS · Sala de Mando" — Qualivo (`3d856e1ad6ed81419265e55a9a22efb8`) y Equipzilla (`3d856e1ad6ed811a92daf79e6fd5d370`). **Regla: en Notion va el inventario, nunca el valor.** Notion está conectado por MCP a varias sesiones de agentes. Trece llaves pasaron por el chat el 11-sep y están todas quemadas; orden de rotación por daño: Meta (ads_read sobre 20+ cuentas de clientes) → GoHighLevel → Pipedrive → Brevo → Vercel → cuenta de servicio de Google. **El token de Vercel es el mismo para Qualivo y Equipzilla:** al rotarlo, partirlo en dos con alcance por proyecto.
+- **Cuadro de mando de growth (pedido por Maikel 9-sep):** una sola página, orden fijo: 1) North Star y scorecard de 8 números, 2) embudo por canal, 3) web · contenido · SEO, 4) redes, 5) pipeline y MRR (Quipu). Fuentes, todas CSV en ramas de agentes, una fila por día o semana: `funnel-diario.csv` y `funnel-semana.csv` (Outbound), `web-diario.csv`, `contenido-diario.csv`, `seo-diario.csv`, `seo-keywords-semanal.csv`, `redes-semanal.csv` (Landing), `ventas/pipeline.md` (Ventas), Quipu (cerebro). El cerebro construye la v1 el viernes 12-sep con los datos acumulados desde el 10 y la actualiza cada mañana en la revisión de las 9:30. Ciclo semanal de entrenamiento: viernes = leer cuadro → matar/escalar hipótesis (Notion Experimentos) → actualizar estrategia-central, Outbound Brain y encargos; lunes = prioridades desde el número más lejos de objetivo.
+
+## Registro de cambios
+
+- **2026-09-11** · Día de correcciones. (1) Propuesta de valor V2 congelada y propagada a los cuatro agentes. (2) Plan de septiembre escrito (`sistema/plan-septiembre.md`). (3) Escenarios de préstamo con los números reales del Sheet; techo defendible 36.000 €, secuencia validar→pedir confirmada. (4) **Maikel corrigió dos errores del cerebro:** los 27k de liquidación eran 33,4k, y los "3 leads" del píxel no eran leads — no hay ni un registro real en el CRM. Regla de medición de leads escrita arriba. (5) Encontrada la fuga clic→página del 80 % y enviada a Landing. (6) Inventario de credenciales en Notion, trece llaves a rotar. (7) **Borrador del piloto de Kubysoft escrito por el cerebro** (`sistema/piloto-kubysoft.md`) para que Maikel lo edite y lo envíe el lunes 14 antes de las 10:00 — diagnóstico del cerebro: el cuello real del negocio no es el embudo ni la financiación, son las cuatro propuestas sin escribir con cuatro compradores esperando.
+- **2026-09-09 (tarde)** · "Dale caña" de Maikel. Recorrido Radiografía → reunión en `sistema/radiografia-recorrido.md` (regla: no se pide reunión, se le pone número a la fuga). Encargos enviados: Landing (3 cambios en la Radiografía, etapa y workflow GHL, emails día 1/3/7, campaña Meta con UTM alineadas y anuncios 01+06), Outbound (motor de exploración de ICPs §2.7, agente de voz con dos puertas, agente de WhatsApp en copiloto, enlace `?l=<id>`), Ventas (7 mensajes + plantilla plan 48 h en `ventas/radiografia/`), Automatización (secuencia 3-7-14 enchufada; timbre nuevo `trig_01BbyosrYLyxV5km966rguJs`). Tarea Todoist "Cola de aprobaciones del cerebro" para Maikel hoy 17:00.
+- **2026-09-09** · Estrategia central v1 publicada como Google Doc editable (fuente de verdad de Maikel) y enlazada desde `sistema/estrategia-central.md`.
+- **2026-09-02** · v3. Estado actualizado por Maikel: objetivo del mes = 1 cliente recurrente 1.000-1.500 €/mes (no escalar); KPIs semanales 10 seguimientos / 1 reunión / 1 oportunidad; nuevas oportunidades Inspyria, Marilia, Antic Barcelona; Equipzilla confirmada al alza (~2.850 € desde octubre); modo caja estricto.
+
+- **2026-09-01** · v2. Qualivo OS creado en Notion (Roadmap, Tareas, Experimentos, Decisiones) y charter del cerebro registrado.
+- **2026-09-01** · v1. Creación del fichero. Canal cerebro→Landing activo (Routine). Canal cerebro→Outbound pendiente de cablear desde el lado de Outbound. Revisión diaria 9:30 activa en el cerebro.
