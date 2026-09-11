@@ -50,7 +50,7 @@ Reloj desde que entra el lead. Todo se para si agenda, responde o pide la baja.
 
 | Momento | Canal | Solo si |
 |---|---|---|
-| 0-2 min | WhatsApp 1 | hay teléfono |
+| 0-2 min | WhatsApp 1, o SMS si WhatsApp no puede | hay teléfono |
 | +10 min (landing) · +20 min (lead form) | Voz 1 | sin respuesta y en horario de llamada |
 | +2 h | WhatsApp 2 | la llamada no se cogió |
 | +1 día | Voz 2 | sigue sin respuesta |
@@ -65,6 +65,21 @@ persona, no el reloj.
 **Dos llamadas como máximo.** El incidente de reenvíos de agosto costó una queja
 de protección de datos por repetir contacto por fallo de sistema. La regla aquí es
 la misma: ante la duda, no se llama.
+
+## WhatsApp solo puede escribir primero dentro de 24 horas
+
+Comprobado el 11-sep con mensajes reales: WhatsApp deja escribir a alguien únicamente
+dentro de las 24 horas siguientes a su último mensaje. Fuera de esa ventana, y sin una
+plantilla aprobada por Meta, **la API acepta el mensaje y luego lo marca `failed`**.
+Nadie avisa. El lead se pierde en silencio y en el CRM parece que se le escribió.
+
+Por eso el primer mensaje no se da por bueno hasta comprobarlo: se envía, se mira el
+estado cinco segundos después y, si ha fallado, el mismo texto sale **por SMS**. Esos
+contactos quedan marcados con `act-por-sms`.
+
+Lo correcto a medio plazo es crear una plantilla de WhatsApp aprobada para el primer
+mensaje: llega mejor y cuesta menos que un SMS. Mientras no exista, el respaldo por
+SMS evita que un lead pagado se quede sin respuesta.
 
 ## Ventanas horarias (Europe/Madrid)
 

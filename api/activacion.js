@@ -186,8 +186,8 @@ module.exports = async function handler(req, res) {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
         const texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
-        await A.enviarWhatsApp(c.id, texto);
-        await A.etiquetar(c.id, ['act-' + paso.tipo]);
+        const env = await A.enviarMensaje(c.id, texto);
+        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
         resumen.wa++; hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }

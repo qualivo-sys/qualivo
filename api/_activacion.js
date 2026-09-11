@@ -102,6 +102,51 @@ async function enviarWhatsApp(contactId, texto) {
   return r.json().catch(function () { return {}; });
 }
 
+async function enviarSMS(contactId, texto) {
+  const r = await fetch(GHL_BASE + '/conversations/messages', {
+    method: 'POST',
+    headers: cabeceras(),
+    body: JSON.stringify({ type: 'SMS', contactId: contactId, message: texto })
+  });
+  if (!r.ok) throw new Error('ghl_sms ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  return r.json().catch(function () { return {}; });
+}
+
+async function estadoMensaje(messageId) {
+  try {
+    const r = await fetch(GHL_BASE + '/conversations/messages/' + messageId, { headers: cabeceras() });
+    if (!r.ok) return '';
+    const d = await r.json();
+    return String(((d && d.message) || d || {}).status || '');
+  } catch (err) {
+    return '';
+  }
+}
+
+function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+// WhatsApp solo deja escribir primero dentro de las 24 horas siguientes al
+// último mensaje del contacto. Fuera de esa ventana, y sin una plantilla
+// aprobada por Meta, el mensaje se acepta por API y luego queda en «failed»
+// sin avisar a nadie: el lead se pierde en silencio. Por eso se comprueba el
+// estado y, si ha fallado, el mismo texto sale por SMS.
+async function enviarMensaje(contactId, texto) {
+  let idWa = '';
+  try {
+    const r = await enviarWhatsApp(contactId, texto);
+    idWa = (r && (r.messageId || r.msgId)) || '';
+  } catch (err) {
+    idWa = '';
+  }
+  if (idWa) {
+    await esperar(5000);
+    const estado = await estadoMensaje(idWa);
+    if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado };
+  }
+  await enviarSMS(contactId, texto);
+  return { canal: 'sms', estado: 'enviado' };
+}
+
 // Teléfono a E.164 español. Sin prefijo y con nueve dígitos se asume España;
 // cualquier otra cosa se devuelve como está para no inventar un número.
 function telefonoE164(valor) {
@@ -150,5 +195,6 @@ function minutosDesde(iso) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta,
-  etiquetar, nota, enviarWhatsApp, lanzarLlamada, telefonoE164, tiene, minutosDesde
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje,
+  lanzarLlamada, telefonoE164, tiene, minutosDesde
 };

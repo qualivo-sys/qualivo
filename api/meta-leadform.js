@@ -245,10 +245,10 @@ module.exports = async function handler(req, res) {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');
           if (act.enVentana('whatsapp')) {
-            await act.enviarWhatsApp(r.contactId, msg.whatsapp1({
+            const env = await act.enviarMensaje(r.contactId, msg.whatsapp1({
               nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga
             }));
-            await act.etiquetar(r.contactId, ['act-wa1']);
+            await act.etiquetar(r.contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
           }
         } catch (err) {
           console.error('[leadform] primer WhatsApp no salió:', err && err.message);
