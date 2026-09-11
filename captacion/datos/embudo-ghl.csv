@@ -1,0 +1,48 @@
+fecha,pipeline,etapa,oportunidades,valor_eur
+2026-09-09,ABM,Respondió,15,30000
+2026-09-09,Prospección,Conversación abierta,3,1500
+2026-09-09,Prospección,Más adelante,1,1000
+2026-09-09,Prospección,Nuevo Lead,3,3000
+2026-09-09,Prospección,Oferta enviada,1,0
+2026-09-09,Prospección,Reunión agendada,3,0
+2026-09-09,Prospección,Seguimiento,1,0
+2026-09-09,Qualivo Pipeline,Call Agendada,1,0
+2026-09-09,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-09,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-09,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-09,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-10,ABM,Respondió,15,30000
+2026-09-10,Prospección,Conversación abierta,3,1500
+2026-09-10,Prospección,Más adelante,1,1000
+2026-09-10,Prospección,Nuevo Lead,3,3000
+2026-09-10,Prospección,Oferta enviada,1,0
+2026-09-10,Prospección,Reunión agendada,3,0
+2026-09-10,Prospección,Seguimiento,1,0
+2026-09-10,Qualivo Pipeline,Call Agendada,1,0
+2026-09-10,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-10,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-10,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-10,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-10,Qualivo Pipeline,Radiografía completada,1,0
+2026-09-11,ABM,Respondió,15,30000
+2026-09-11,Prospección,Conversación abierta,3,1500
+2026-09-11,Prospección,Más adelante,1,1000
+2026-09-11,Prospección,Nuevo Lead,3,3000
+2026-09-11,Prospección,Oferta enviada,1,0
+2026-09-11,Prospección,Reunión agendada,1,0
+2026-09-11,Prospección,Seguimiento,3,0
+2026-09-11,Qualivo Pipeline,Call Agendada,1,0
+2026-09-11,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-11,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-11,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-11,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-11,Qualivo Pipeline,Radiografía completada,1,0

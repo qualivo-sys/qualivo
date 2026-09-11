@@ -1,0 +1,34 @@
+fecha,campana,estado,enviados,aperturas,clics,respuestas,rebotes,deposito_sin_empezar
+2026-09-09,ICP10 · Dirección nueva (Brain),ACTIVE,4,0,0,0,0,0
+2026-09-09,ICP15 · Base desaprovechada (Brain),ACTIVE,0,0,0,0,0,0
+2026-09-09,"Solar · con señal (Brain, 8-sep) BORRADOR",ACTIVE,1,0,0,0,0,0
+2026-09-09,Multiservicio · Brain (8-sep) BORRADOR,ACTIVE,4,0,0,0,0,0
+2026-09-09,Gestorías · Piloto (1-sep),ACTIVE,0,0,0,0,0,0
+2026-09-09,Vuelta al curso · Re-enganche (1-sep),COMPLETED,1,2,0,0,0,
+2026-09-09,"SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",ACTIVE,0,0,0,0,0,0
+2026-09-09,Señales ES · contratando comerciales,ACTIVE,0,0,0,0,0,0
+2026-09-09,Inmobiliarias ES · Genérica (volumen),ACTIVE,33,11,0,0,0,0
+2026-09-09,Solar ES · Genérica (volumen),ACTIVE,43,6,0,0,0,0
+2026-09-09,Academias ES · Q3 2026 · voz Maikel,ACTIVE,0,0,0,0,0,0
+2026-09-10,ICP10 · Dirección nueva (Brain),ACTIVE,0,0,0,0,0,0
+2026-09-10,ICP08 · CRM sin disciplina (Brain),ACTIVE,8,2,0,0,0,0
+2026-09-10,ICP15 · Base desaprovechada (Brain),ACTIVE,15,2,0,0,0,8
+2026-09-10,"Solar · con señal (Brain, 8-sep) BORRADOR",ACTIVE,0,0,0,0,0,0
+2026-09-10,Multiservicio · Brain (8-sep) BORRADOR,ACTIVE,0,0,0,0,0,0
+2026-09-10,Gestorías · Piloto (1-sep),ACTIVE,0,1,0,0,0,0
+2026-09-10,"SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",ACTIVE,0,0,0,0,0,0
+2026-09-10,Agent for Me · Gestorías (A2),COMPLETED,0,1,0,0,0,
+2026-09-10,Señales ES · contratando comerciales,ACTIVE,10,1,0,0,0,0
+2026-09-10,Inmobiliarias ES · Genérica (volumen),ACTIVE,49,8,0,0,1,0
+2026-09-10,Solar ES · Genérica (volumen),ACTIVE,8,0,0,0,0,0
+2026-09-10,Academias ES · Q3 2026 · voz Maikel,ACTIVE,12,0,0,0,0,0
+2026-09-11,V3 · Motor de puertas (copy por lead),ACTIVE,37,0,0,1,0,0
+2026-09-11,ICP10 · Dirección nueva (Brain),ACTIVE,0,0,0,0,0,0
+2026-09-11,ICP08 · CRM sin disciplina (Brain),ACTIVE,7,2,0,0,0,0
+2026-09-11,ICP15 · Base desaprovechada (Brain),ACTIVE,15,2,0,0,0,0
+2026-09-11,"Solar · con señal (Brain, 8-sep) BORRADOR",ACTIVE,3,0,0,0,0,0
+2026-09-11,Multiservicio · Brain (8-sep) BORRADOR,ACTIVE,11,0,0,0,0,0
+2026-09-11,Gestorías · Piloto (1-sep),ACTIVE,0,0,0,0,0,0
+2026-09-11,"SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",ACTIVE,0,1,0,0,0,0
+2026-09-11,Inmobiliarias ES · Genérica (volumen),PAUSED,31,8,0,0,0,
+2026-09-11,Solar ES · Genérica (volumen),PAUSED,28,1,0,0,0,
