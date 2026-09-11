@@ -200,6 +200,7 @@ module.exports = async function handler(req, res) {
           nombre: datos.nombre,
           contexto: {
             nombre: datos.nombre,
+            email: c.email || '',
             empresa: c.companyName || '',
             origen: datos.origen === 'leadform' ? 'el anuncio del diagnóstico' : 'la página del diagnóstico',
             fuga: datos.fuga || datos.sector || ''

@@ -135,7 +135,12 @@ module.exports = async function handler(req, res) {
   }
 
   const nombre = String(args.nombre || '').trim().slice(0, 120);
-  const email = String(args.email || '').trim().toLowerCase().slice(0, 160);
+  let email = String(args.email || '').trim().toLowerCase().slice(0, 160);
+  // El email dictado por teléfono se transcribe fatal: en la prueba del 11-sep
+  // «maikel@equipzilla.com» llegó como «maike@equillazilla.com». Si tenemos el
+  // del formulario, ese manda: el de la llamada solo sirve para confirmarlo.
+  const emailFiable = String(args.email_conocido || '').trim().toLowerCase().slice(0, 160);
+  if (EMAIL_RE.test(emailFiable)) email = emailFiable;
   const telefono = String(args.telefono || '').replace(/[^\d+]/g, '').slice(0, 20);
   const contexto = String(args.contexto || args.fuga || '').trim().slice(0, 900);
 
