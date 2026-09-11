@@ -145,6 +145,22 @@ async function guardar(lead) {
   if (!up.ok) throw new Error('ghl_upsert ' + up.status + ' ' + (await up.text()).slice(0, 200));
   const d = await up.json().catch(function () { return {}; });
   const contactId = d && d.contact ? d.contact.id : null;
+
+  // El upsert empareja por email y no rellena los campos que el contacto ya
+  // tenía vacíos. Si el lead trae teléfono y en el CRM no hay, se completa: sin
+  // número no hay WhatsApp ni llamada, y el lead se queda muerto sin avisar.
+  const guardado = (d && d.contact) || {};
+  const faltaTelefono = telefono && !guardado.phone;
+  const faltaEmail = EMAIL_RE.test(email) && !guardado.email;
+  if (contactId && (faltaTelefono || faltaEmail)) {
+    const parche = {};
+    if (faltaTelefono) parche.phone = telefono;
+    if (faltaEmail) parche.email = email;
+    const pr = await fetch(GHL_BASE + '/contacts/' + contactId, {
+      method: 'PUT', headers: headers, body: JSON.stringify(parche)
+    });
+    if (!pr.ok) console.error('[leadform] no se pudo completar el contacto', contactId, pr.status);
+  }
   if (contactId && (inversion || fuga)) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
       method: 'POST', headers: headers,
