@@ -5,18 +5,17 @@ foto generada con Kie (gpt-4o-image, 1024×1536) que para el dedo por sí sola,
 titular corto en Anton y la misma franja amarilla en los cinco. La franja lleva
 la propuesta entera y qué contiene cada paso (desde la revisión del 11-sep):
 
-> Ponemos **agentes de IA** en el sistema comercial que ya tienes, justo donde
-> se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a
-> nadie.
->
-> **1 Diagnóstico · 15 min** Miramos tu sistema entero, de los anuncios al
-> cierre, y te decimos dónde se escapa el negocio.
-> **2 Plan · 48 h** Por escrito: qué fuga va primero, qué agente ponemos ahí y
-> qué número tiene que moverse.
-> **3 Piloto · 30 días** Montamos el agente sobre lo que ya tienes y medimos
-> ese número antes y después.
->
-> Acordamos el número antes de empezar. Si no mejora, no pagas el piloto.
+Jerarquía fija en cada pieza: **titular = dolor**, **una línea = qué hacemos**
+(«Ponemos agentes de IA en tu sistema comercial, justo donde se te escapa el
+negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.») y
+**franja = los tres pasos en cuatro palabras + garantía**:
+
+> **1 Diagnóstico** 15 min. Dónde se escapa. · **2 Plan** Por escrito. Qué
+> agente, qué número. · **3 Piloto** 30 días. Puesto y medido.
+> Acordamos el número antes. Si no mejora, no pagas el piloto.
+
+Lo que contiene cada paso en detalle va en el texto del anuncio y en la
+landing, no en la imagen.
 
 | # | Concepto | Titular | Foto |
 |---|---|---|---|
