@@ -41,6 +41,43 @@ function corregirFecha(iso) {
   return d;
 }
 
+// Huecos reales del calendario. Sin esto el agente propone horas a ojo, el
+// calendario las rechaza una tras otra y la llamada entra en bucle: pasó en la
+// prueba del 11-sep, con el calendario pidiendo un día de aviso y el agente
+// ofreciendo la tarde de hoy.
+async function huecosLibres(limite) {
+  const ini = Date.now();
+  const fin = ini + 10 * 24 * 3600 * 1000;
+  const cal = process.env.AGENDA_CALENDARIO || CALENDARIO;
+  const r = await fetch(GHL_BASE + '/calendars/' + cal + '/free-slots?startDate=' + ini +
+    '&endDate=' + fin + '&timezone=Europe%2FMadrid', { headers: cabeceras() });
+  if (!r.ok) return [];
+  const d = await r.json().catch(function () { return {}; });
+  const dias = Object.keys(d).filter(function (k) { return d[k] && d[k].slots; }).sort();
+  const fuera = [];
+  // Uno por franja para no cantarle quince horas seguidas: primero de la mañana
+  // y primero de la tarde de cada día.
+  for (const dia of dias) {
+    let manana = null, tarde = null;
+    for (const s of d[dia].slots) {
+      const h = parseInt(String(s).slice(11, 13), 10);
+      if (h < 14 && !manana) manana = s;
+      if (h >= 14 && !tarde) tarde = s;
+    }
+    if (manana) fuera.push(manana);
+    if (tarde) fuera.push(tarde);
+    if (fuera.length >= (limite || 4)) break;
+  }
+  return fuera.slice(0, limite || 4);
+}
+
+function enPalabras(iso) {
+  return new Intl.DateTimeFormat('es-ES', {
+    timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long',
+    hour: '2-digit', minute: '2-digit'
+  }).format(new Date(iso));
+}
+
 async function buscarContacto(email, telefono) {
   const filtros = [];
   if (EMAIL_RE.test(email)) filtros.push({ field: 'email', operator: 'eq', value: email });
@@ -78,18 +115,29 @@ module.exports = async function handler(req, res) {
   const cuerpo = req.body || {};
   const llamada = (((cuerpo.message || {}).toolCalls) || [])[0] || {};
   const toolCallId = llamada.id;
+  const funcion = String((llamada.function || {}).name || '');
   let args = (llamada.function || {}).arguments || cuerpo;
   if (typeof args === 'string') { try { args = JSON.parse(args); } catch (e) { args = {}; } }
+
+  if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) {
+    console.error('[agendar] falta GHL_API_KEY o GHL_LOCATION_ID');
+    return respuesta(res, toolCallId, 'No puedo mirar la agenda ahora. Dile que Maikel le manda el enlace enseguida.');
+  }
+
+  // Consulta de huecos: se llama antes de proponer nada.
+  if (funcion === 'huecos_disponibles' || args.solo_consultar) {
+    const libres = await huecosLibres(4);
+    if (!libres.length) {
+      return respuesta(res, toolCallId, 'No veo huecos en los próximos días. Dile que Maikel le escribe con opciones.');
+    }
+    return respuesta(res, toolCallId, 'Huecos libres, ofrécele dos de estos: ' +
+      libres.map(enPalabras).join(' · '));
+  }
 
   const nombre = String(args.nombre || '').trim().slice(0, 120);
   const email = String(args.email || '').trim().toLowerCase().slice(0, 160);
   const telefono = String(args.telefono || '').replace(/[^\d+]/g, '').slice(0, 20);
   const contexto = String(args.contexto || args.fuga || '').trim().slice(0, 900);
-
-  if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) {
-    console.error('[agendar] falta GHL_API_KEY o GHL_LOCATION_ID');
-    return respuesta(res, toolCallId, 'No he podido reservarlo ahora mismo. Dile que Maikel le escribe enseguida con el enlace.');
-  }
 
   const inicio = corregirFecha(args.slot || args.fecha || args.startTime);
   if (!inicio) {
@@ -140,7 +188,12 @@ module.exports = async function handler(req, res) {
       console.error('[agendar] GHL rechazó la cita', cita.status, detalle);
       // Casi siempre es que ese hueco no está libre.
       if (cita.status === 400 || cita.status === 422) {
-        return respuesta(res, toolCallId, 'Ese hueco no está libre. Ofrécele otro momento del mismo día o del siguiente.');
+        const libres = await huecosLibres(3);
+        if (libres.length) {
+          return respuesta(res, toolCallId, 'Ese hueco no está libre. NO propongas otro a ojo: ' +
+            'ofrécele exactamente uno de estos, que sí lo están: ' + libres.map(enPalabras).join(' · '));
+        }
+        return respuesta(res, toolCallId, 'Ese hueco no está libre y no veo otros. Dile que Maikel le escribe con opciones.');
       }
       return respuesta(res, toolCallId, 'No he podido reservarlo ahora. Dile que Maikel le manda el enlace en un momento.');
     }
