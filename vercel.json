@@ -148,6 +148,10 @@
     {
       "path": "/api/activacion/",
       "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/informe-paid/",
+      "schedule": "0 7,18 * * *"
     }
   ]
 }

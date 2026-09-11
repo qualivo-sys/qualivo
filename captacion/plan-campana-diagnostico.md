@@ -96,8 +96,37 @@ cuál trajo a alguien que se sentó quince minutos.
 
 ## Presupuesto y ritmo
 
-15 €/día. No se toca nada los tres primeros días, pase lo que pase: antes de eso solo
-hay ruido. Revisión a los 7 días y decisión a los 14.
+20 €/día en cada campaña (40 € al día en total). No se toca nada los tres primeros
+días, pase lo que pase: antes de eso solo hay ruido. Revisión a los 7 días y decisión
+a los 14.
 
 No se sube el presupuesto porque haya leads baratos. Se sube cuando un ángulo traiga
 citas a un coste que tenga sentido contra lo que vale un piloto.
+
+## Parte automático (para no mirar el panel)
+
+`api/informe-paid.js` manda un correo a las **7:00 y a las 18:00** (cron en
+`vercel.json`). Cruza los insights de las campañas `QV_DIAG*` con los contactos de
+GHL por etiqueta (`activacion`, `act-agendado`, `act-respondio`, `act-por-sms`), así
+que no dice solo cuántos leads entraron sino cuántos cogieron el teléfono y cuántos
+se sentaron.
+
+Si no ha pasado nada, no manda nada. El correo solo llega si hay actividad, y separa
+dos bloques:
+
+- **Lo normal**: gasto, leads, CPL, citas. Informativo. No hay que hacer nada.
+- **Esto sí pide una decisión**: solo aparece si se cruza un umbral.
+
+Umbrales:
+
+| Aviso | Cuándo salta |
+|---|---|
+| CPL alto | CPL del día por encima de **35 €** |
+| Gasto sin leads | más de **25 €** gastados en un conjunto sin un solo lead |
+
+Los dos umbrales son para el día, no acumulados: un mal día no significa una mala
+campaña, pero dos seguidos sí. Un conjunto se pausa desde la app de Meta en el móvil
+en diez segundos; no hace falta PC ni esperar a nadie.
+
+Destinatario por defecto `maikel@qualivo.io`. Se cambia con la variable
+`INFORME_PAID_TO` en Vercel.
