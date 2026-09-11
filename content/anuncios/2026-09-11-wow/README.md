@@ -12,7 +12,7 @@ negocio. Sin empezar de cero, sin rehacer tu sistema, sin más trabajo manual pa
 
 > **1 Diagnóstico** 15 min. Encontramos la fuga. · **2 Plan** Por escrito. Qué
 > va primero. · **3 Piloto** 30 días. Un proceso. Un número.
-> Si no mejoramos tus resultados, no pagas nada.
+> Si no mejora, no pagas el piloto.
 
 Lo que contiene cada paso en detalle va en el texto del anuncio y en la
 landing, no en la imagen.

@@ -218,6 +218,24 @@ Las dos respuestas se guardan en etiquetas (`inv-…`, `fuga-…`) y en una nota
 contacto. La pantalla de gracias lleva al calendario con `?paso=agenda`, así que quien
 tiene prisa puede coger hueco sin esperar al WhatsApp.
 
+## Lo que queda fuera de mi alcance
+
+| Qué | Por qué |
+|---|---|
+| Crear o activar la campaña en Meta | mi entorno bloquea cualquier acción que comprometa gasto real |
+| Pedir la plantilla de WhatsApp | el número va por el proveedor de GHL, no por una cuenta de WhatsApp propia: la plantilla se pide desde GHL |
+| Rotar las claves | hay que hacerlo en cada panel |
+
+Los cuatro creativos **sí están subidos** a la cuenta publicitaria «Qualivo Agencia»
+(`act_3453332464718877`), listos para usar al montar los anuncios:
+
+| Creativo | Hash en Meta |
+|---|---|
+| Radiografía | `01f12a22c1125b2ea23f39ef03d5aa68` |
+| Cuadro de mandos | `605c02b5e5af390cefccf007279ef478` |
+| El médico | `763aef6846d6cddad5f08831672c3536` |
+| La cinta | `b36fbdae35b2d205b4b51ec2edd6f98e` |
+
 ## Lo comprobado el 11-sep
 
 | Pieza | Estado |
