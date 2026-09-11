@@ -81,6 +81,25 @@ Lo correcto a medio plazo es crear una plantilla de WhatsApp aprobada para el pr
 mensaje: llega mejor y cuesta menos que un SMS. Mientras no exista, el respaldo por
 SMS evita que un lead pagado se quede sin respuesta.
 
+## Por qué la agenda es nuestra y no de n8n
+
+La primera llamada real, el 11-sep, terminó con el contacto diciendo que sí a un
+hueco y **sin cita creada**. Raquel llamó a la herramienta, pero el webhook de n8n
+(`agente-llamadas-agendar`) contesta 200 con el cuerpo vacío y Vapi registra «No
+result returned»: la conversación siguió como si todo hubiera ido bien y Raquel se
+despidió confirmando una cita que no existía.
+
+Además el modelo mandó `2023-09-12` en vez de 2026, porque no sabe en qué año vive,
+y se inventó el teléfono con el texto «[número de teléfono del contacto]».
+
+Ahora la herramienta apunta a `api/agendar.js`, que crea la cita en GHL, corrige el
+año si viene del pasado, pone `act-agendado` para parar la cadencia y **le devuelve a
+Raquel la frase exacta que debe decir**. Si el hueco está ocupado, le dice que ofrezca
+otro. Si falla, que Maikel escribirá. Ya no puede confirmar algo que no ha pasado.
+
+El prompt lleva además la fecha de hoy inyectada y la obligación de deletrear el email
+y esperar confirmación: en la prueba se transcribió «michael.ech@gmail.com».
+
 ## Ventanas horarias (Europe/Madrid)
 
 - **WhatsApp**: 8:00-21:30, todos los días.
@@ -130,6 +149,7 @@ Una sola fuente de verdad. El CRM manda; el código solo lee y escribe etiquetas
 | Entrada del lead form | `api/meta-leadform.js` | — |
 | Entrada de la landing | `api/diagnostico.js` | — |
 | Voz · clon de campaña | Vapi | `af978111-4c4e-4373-ba7b-91827bd3efde` · «Raquel · Landing Diagnóstico» |
+| Agenda de la llamada | `api/agendar.js` | `https://qualivo.io/api/agendar/?k=…` |
 | Voz · número saliente | Vapi BYO | `b60821ae-39fc-46b3-b8f8-23ee593ee6fd` |
 | WhatsApp | GHL, número 647 | location `bHGMuZEGUESZmVoNv9HT` |
 | Calendario | GHL | `zBlsw8BEKA2zah81YlOl` (15 min) |
@@ -158,6 +178,7 @@ Ninguna clave está en el repositorio y así se queda.
 | `META_LEADFORM_VERIFY` | lo inventas tú; el mismo texto va en Meta · pendiente |
 | `META_LEADFORM_IDS` | `1006694072388659` · pendiente de poner |
 | `META_APP_SECRET` | firma de cada entrega de Meta · pendiente de poner |
+| `AGENDA_SECRET` | protege `/api/agendar/`; el mismo valor va en la URL de la herramienta de Vapi · pendiente |
 
 **La suscripción de Meta es por página, no por formulario.** La página «Maikel
 Echevarria» (`359073050620335`) tiene diez formularios antiguos activos (HackTheLead,
