@@ -13,6 +13,13 @@ function nombreCorto(nombre) {
 
 // Una pregunta, elegida por lo que sabemos del lead. Nunca varias a la vez.
 function pregunta(datos) {
+  // Si él mismo ha dicho dónde cree que se le escapa, se pregunta por ahí.
+  const f = String(datos.fuga || '').toLowerCase();
+  if (/anuncios|captaci/.test(f)) return '¿sabes qué campaña te trajo tu último cliente? El último cliente, no el último lead.';
+  if (/web|formular/.test(f)) return 'de los que entran en la web, ¿cuántos acaban dejándote los datos?';
+  if (/respuesta/.test(f)) return 'cuando te entra un contacto nuevo, ¿cuánto se tarda de media en contestarle?';
+  if (/seguimiento|presupuest/.test(f)) return '¿cuántos presupuestos del mes pasado siguen hoy sin respuesta?';
+
   const inv = String(datos.inversion || '').toLowerCase();
   if (/nada todav/.test(inv)) return 'cuando te entra un contacto nuevo, ¿cuánto se tarda de media en contestarle?';
   if (/más de 5|5\.000/.test(inv)) return '¿sabes qué campaña te trajo tu último cliente? El último cliente, no el último lead.';

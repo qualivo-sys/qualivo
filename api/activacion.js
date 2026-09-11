@@ -127,6 +127,7 @@ module.exports = async function handler(req, res) {
       const s = String(t);
       if (s.startsWith('sector-')) datos.sector = s.slice(7).replace(/-/g, ' ');
       if (s.startsWith('inv-')) datos.inversion = s.slice(4).replace(/-/g, ' ');
+      if (s.startsWith('fuga-')) datos.fuga = s.slice(5).replace(/-/g, ' ');
     });
     if (c.website) datos.web = c.website;
 
@@ -150,7 +151,7 @@ module.exports = async function handler(req, res) {
             nombre: datos.nombre,
             empresa: c.companyName || '',
             origen: datos.origen === 'leadform' ? 'el anuncio del diagnóstico' : 'la página del diagnóstico',
-            fuga: datos.sector || ''
+            fuga: datos.fuga || datos.sector || ''
           }
         });
         if (r.ok) {

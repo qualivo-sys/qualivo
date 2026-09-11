@@ -22,6 +22,25 @@ const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+// Las respuestas de las preguntas propias llegan con el nombre convertido en
+// slug por Meta, que no siempre coincide con la clave que le dimos. Se buscan
+// por trozo del nombre y, si no, por el propio valor.
+function respuesta(campos, trozos, valores) {
+  for (const c of campos) {
+    const n = String(c.name || '').toLowerCase();
+    if (trozos.some(function (t) { return n.indexOf(t) !== -1; })) {
+      return String((c.values || [])[0] || '').trim();
+    }
+  }
+  if (valores) {
+    for (const c of campos) {
+      const v = String((c.values || [])[0] || '').trim();
+      if (valores.some(function (x) { return v.toLowerCase().indexOf(x) !== -1; })) return v;
+    }
+  }
+  return '';
+}
+
 function valor(campos, nombres) {
   for (const n of nombres) {
     const c = campos.filter(function (x) { return String(x.name).toLowerCase() === n; })[0];
@@ -52,6 +71,8 @@ async function guardar(lead) {
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
   const web = valor(campos, ['website', 'web', 'sitio_web']);
+  const inversion = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
+  const fuga = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios y la captaci', 'web y los formul', 'tiempo de respuesta', 'seguimiento y los presu', 'no lo sé']);
 
   if (!telefono && !EMAIL_RE.test(email)) return { ok: false, motivo: 'sin_contacto' };
 
@@ -64,6 +85,12 @@ async function guardar(lead) {
     // Formulario que no es de esta campaña: se guarda y se queda quieto.
     etiquetas.push('leadform-otra-campana');
   }
+  const rotulo = function (v) {
+    return String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30);
+  };
+  if (inversion) etiquetas.push('inv-' + rotulo(inversion));
+  if (fuga) etiquetas.push('fuga-' + rotulo(fuga));
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
 
@@ -83,9 +110,22 @@ async function guardar(lead) {
   if (!up.ok) throw new Error('ghl_upsert ' + up.status + ' ' + (await up.text()).slice(0, 200));
   const d = await up.json().catch(function () { return {}; });
   const contactId = d && d.contact ? d.contact.id : null;
+  if (contactId && (inversion || fuga)) {
+    await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+      method: 'POST', headers: headers,
+      body: JSON.stringify({
+        body: ['Lead del formulario instantáneo de Meta', '',
+          inversion ? 'Inversión mensual en captación: ' + inversion : '',
+          fuga ? 'Dónde cree que se le escapa: ' + fuga : '',
+          lead.form_id ? 'Formulario: ' + lead.form_id : '',
+          '', new Date().toISOString()].filter(Boolean).join('\n')
+      })
+    }).catch(function () {});
+  }
+
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
-    campos: campos, activar: deEstaCampana
+    inversion: inversion, fuga: fuga, campos: campos, activar: deEstaCampana
   };
 }
 
@@ -138,7 +178,9 @@ module.exports = async function handler(req, res) {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');
           if (act.enVentana('whatsapp')) {
-            await act.enviarWhatsApp(r.contactId, msg.whatsapp1({ nombre: r.nombre, origen: 'leadform' }));
+            await act.enviarWhatsApp(r.contactId, msg.whatsapp1({
+              nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga
+            }));
             await act.etiquetar(r.contactId, ['act-wa1']);
           }
         } catch (err) {

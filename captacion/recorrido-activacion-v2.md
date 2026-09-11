@@ -122,7 +122,7 @@ Ninguna clave está en el repositorio y así se queda.
 | `VAPI_PHONE_NUMBER_ID` | por defecto el 647 · no hace falta tocarlo |
 | `META_LEADFORM_TOKEN` | token de sistema, no caduca · pendiente de poner |
 | `META_LEADFORM_VERIFY` | lo inventas tú; el mismo texto va en Meta · pendiente |
-| `META_LEADFORM_IDS` | id de los formularios de esta campaña, separados por comas · pendiente |
+| `META_LEADFORM_IDS` | `1006694072388659` · pendiente de poner |
 
 **La suscripción de Meta es por página, no por formulario.** La página «Maikel
 Echevarria» (`359073050620335`) tiene diez formularios antiguos activos (HackTheLead,
@@ -132,6 +132,22 @@ Por eso `META_LEADFORM_IDS` lleva los identificadores de los formularios de esta
 campaña. Un lead de cualquier otro formulario se guarda en el CRM con la etiqueta
 `leadform-otra-campana` y **no entra en la cadencia**: nadie le escribe ni le llama.
 Si la variable está vacía, no se activa ninguno. El valor por defecto es no molestar.
+
+## El formulario de esta campaña
+
+`Qualivo_Diagnostico_sep2026_v1` · id `1006694072388659` · página Maikel Echevarria.
+
+De alta intención, con pantalla de revisión antes de enviar: menos volumen y mejor
+lead. Cinco preguntas, las tres de contacto y dos de cualificación:
+
+- **¿Cuánto invertís al mes en conseguir clientes?** — el mismo corte que la landing.
+- **¿Dónde crees que se te está escapando el negocio?** — anuncios, web, respuesta,
+  seguimiento o «no lo sé». Esta es la que decide qué pregunta lleva el primer
+  WhatsApp, y la que se le pasa a Raquel como contexto de la llamada.
+
+Las dos respuestas se guardan en etiquetas (`inv-…`, `fuga-…`) y en una nota del
+contacto. La pantalla de gracias lleva al calendario con `?paso=agenda`, así que quien
+tiene prisa puede coger hueco sin esperar al WhatsApp.
 
 ## Lo comprobado el 11-sep
 
