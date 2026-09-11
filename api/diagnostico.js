@@ -1,6 +1,10 @@
-// Formulario de /diagnostico-de-crecimiento/ (tráfico de pago).
+// Formulario de /diagnostico/ (tráfico de pago).
 // Dos pasos: el paso 1 llega siempre, aunque no cualifique, porque ese contacto
-// vale para la Radiografía. El paso 2 solo llega de quien ha pasado el corte.
+// puede encajar más adelante. El paso 2 solo llega de quien ha pasado el corte.
+// Al entrar un lead cualificado se le mete en la capa de activación: se marca
+// con «activacion» y sale el primer WhatsApp, que es el único mensaje con la
+// hipótesis del lead escrita con sus palabras. El resto lo lleva el reloj de
+// api/activacion.js. Recorrido en captacion/recorrido-activacion-v2.md.
 // Claves en variables de entorno de Vercel; nunca llegan al navegador.
 
 const GHL_BASE = 'https://services.leadconnectorhq.com';
@@ -54,10 +58,23 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, cualificado: false });
   }
 
+  const rotulo = function (v) {
+    return String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 34);
+  };
   const etiquetas = ['diagnostico-landing']
     .concat(cualificado ? ['diagnostico-cualificado', 'paid'] : ['diagnostico-fuera-de-alcance']);
   const utmContent = (utm.match(/utm_content=([^&]+)/) || [])[1];
   if (utmContent) etiquetas.push('creativo-' + decodeURIComponent(utmContent).slice(0, 40));
+
+  // Contexto que necesita el reloj para escribir el siguiente mensaje, en
+  // etiquetas porque es lo único que devuelve la búsqueda de contactos de GHL.
+  if (cualificado) {
+    const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
+    etiquetas.push('activacion', 'act-ini-' + sello);
+    if (sector) etiquetas.push('sector-' + rotulo(sector));
+    if (inversion) etiquetas.push('inv-' + rotulo(inversion));
+  }
 
   try {
     const upsertRes = await fetch(GHL_BASE + '/contacts/upsert', {
@@ -116,7 +133,7 @@ module.exports = async function handler(req, res) {
           nombre: nombre,
           contactId: contactId,
           eventoId: 'diag-' + (contactId || email),
-          url: 'https://qualivo.io/diagnostico-de-crecimiento/',
+          url: 'https://qualivo.io/diagnostico/',
           ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined,
           ua: req.headers['user-agent'],
           fbp: ck && ck.fbp,
@@ -125,6 +142,21 @@ module.exports = async function handler(req, res) {
         });
       } catch (err) {
         console.error('[diagnostico] CAPI falló:', err && err.message);
+      }
+    }
+
+    // Primer WhatsApp: sale ya, con su hipótesis tal cual la ha escrito. Si
+    // falla, el reloj lo reintenta en el siguiente paso sin la cita textual.
+    if (cualificado && contactId && telefono) {
+      try {
+        const act = require('./_activacion.js');
+        const msg = require('./_mensajes.js');
+        await act.enviarWhatsApp(contactId, msg.whatsapp1({
+          nombre: nombre, hipotesis: hipotesis, sector: sector, inversion: inversion, origen: 'landing'
+        }));
+        await act.etiquetar(contactId, ['act-wa1']);
+      } catch (err) {
+        console.error('[diagnostico] primer WhatsApp no salió:', err && err.message);
       }
     }
 
