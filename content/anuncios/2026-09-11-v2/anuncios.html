@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.ad{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 44px}
+.na{color:#E8590C} .am{color:#F4CC38}
+/* franja de propuesta, igual en las cuatro */
+.franja{position:absolute;left:0;right:0;bottom:0;height:250px;background:#F4CC38;color:#101319;padding:34px 56px 0}
+.franja .pasos{display:flex;align-items:center;gap:14px;font-family:Anton;font-size:30px;text-transform:uppercase;letter-spacing:.01em;flex-wrap:wrap}
+.franja .pasos span{display:inline-flex;align-items:center;gap:11px}
+.franja .pasos b{width:38px;height:38px;border-radius:50%;background:#101319;color:#F4CC38;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.franja .pasos i{color:rgba(16,19,25,.4);font-style:normal;font-size:26px}
+.franja .gar{margin-top:20px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.05}
+.franja .pie{position:absolute;bottom:26px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:22px;color:rgba(16,19,25,.6);letter-spacing:.03em}
+.franja .pie b{font-family:Anton;font-size:24px;color:#101319;letter-spacing:.04em}
+
+/* ── 1 · PANEL DE ALERTAS ─────────────────────────── */
+.a1{background:#0A0A0B;color:#F2EEE6}
+.a1::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.03) 1px,transparent 1px);background-size:90px 90px}
+.a1 .cab{position:absolute;top:54px;left:56px;right:56px;display:flex;align-items:center;gap:16px}
+.a1 .badge{background:#E8590C;color:#fff;font-family:Anton;font-size:26px;padding:8px 16px;border-radius:8px;letter-spacing:.04em}
+.a1 .cab .t{font-family:Anton;font-size:46px;line-height:1;text-transform:uppercase}
+.a1 .alertas{position:absolute;top:170px;left:56px;right:56px}
+.al{display:flex;align-items:center;gap:18px;min-height:82px;background:rgba(232,89,12,.07);border:1px solid rgba(232,89,12,.3);border-left:6px solid #E8590C;border-radius:10px;padding:17px 22px;margin-bottom:11px}
+.al .ic{width:30px;height:30px;flex-shrink:0;border-radius:50%;background:#E8590C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800}
+.al .tx{font-size:28px;line-height:1.28}
+.a1 .pregunta{position:absolute;top:880px;left:56px;right:56px;font-family:Anton;font-size:52px;text-transform:uppercase;color:#F4CC38;line-height:1.05}
+
+/* ── 2 · EL RECORRIDO CON FUGAS ───────────────────── */
+.a2{background:#F2EEE6;color:#101319}
+.a2 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#E8590C}
+.a2 .t{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:58px;line-height:1.02;text-transform:uppercase}
+.tubo{position:absolute;top:250px;left:56px;right:56px;height:730px}
+.tubo .linea{position:absolute;left:96px;top:12px;bottom:12px;width:14px;background:linear-gradient(180deg,#101319,#3a3f47);border-radius:8px}
+.est{position:relative;height:91px}
+.est .punto{position:absolute;left:88px;top:16px;width:30px;height:30px;border-radius:50%;background:#F2EEE6;border:6px solid #101319;box-sizing:border-box}
+.est .nom{position:absolute;left:158px;top:8px;font-family:Anton;font-size:36px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.est .nota{position:absolute;left:158px;top:52px;font-size:22px;color:rgba(16,19,25,.55);line-height:1.2}
+.est.fuga .punto{background:#E8590C;border-color:#E8590C;box-shadow:0 0 0 10px rgba(232,89,12,.18)}
+.est.fuga .nom{color:#E8590C}
+/* gotas de dinero cayendo por la fuga */
+.est.fuga::after{content:'€';position:absolute;left:30px;top:10px;font-family:Anton;font-size:30px;color:#E8590C;opacity:.9}
+.est.fuga::before{content:'€ €';position:absolute;left:22px;top:46px;font-family:Anton;font-size:22px;color:#E8590C;opacity:.5;letter-spacing:.22em}
+.a2 .remate{position:absolute;top:996px;left:56px;right:56px;font-family:Anton;font-size:40px;text-transform:uppercase;line-height:1.08}
+
+/* ── 3 · EL PROCESO ───────────────────────────────── */
+.a3{background:#101319;color:#F2EEE6}
+.a3 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#F4CC38}
+.a3 .t{position:absolute;top:88px;left:56px;right:340px;font-family:Anton;font-size:62px;line-height:1.02;text-transform:uppercase}
+.sello{position:absolute;top:96px;right:46px;width:250px;height:250px;border:9px solid #E8590C;border-radius:50%;color:#E8590C;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-13deg);font-family:Anton;text-transform:uppercase;line-height:.92}
+.sello .n{font-size:96px}
+.sello .s{font-size:23px;letter-spacing:.12em;margin-top:8px}
+.blq{position:absolute;left:56px;right:56px;border-radius:18px;padding:28px 32px;display:grid;grid-template-columns:86px 1fr;gap:24px;align-items:center}
+.blq .num{font-family:Anton;font-size:78px;line-height:.86}
+.blq h3{font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.02;margin-bottom:8px}
+.blq p{font-size:26px;line-height:1.35}
+.blq.uno{top:400px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.blq.dos{top:590px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.blq.tres{top:780px;background:#F4CC38;color:#101319}
+.blq.uno .num,.blq.dos .num{color:rgba(255,255,255,.28)}
+.blq.tres .num{color:rgba(16,19,25,.3)}
+.blq.uno p,.blq.dos p{color:#AEB5BF}
+.blq.tres p{color:rgba(16,19,25,.8)}
+
+/* ── 4 · LA FACTURA ───────────────────────────────── */
+.a4{background:#E8590C}
+.a4 .top{position:absolute;top:50px;left:56px;right:56px;font-family:Anton;font-size:50px;line-height:1.04;text-transform:uppercase;color:#fff}
+.papel{position:absolute;top:288px;left:92px;right:92px;background:#FFFDF8;border-radius:6px;padding:40px 44px 34px;transform:rotate(-1.6deg);box-shadow:0 30px 70px rgba(0,0,0,.3);color:#101319}
+.papel .cab{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #101319;padding-bottom:18px;margin-bottom:26px}
+.papel .cab .marca{font-family:Anton;font-size:36px;letter-spacing:.02em}
+.papel .cab .meta{text-align:right;font-size:19px;line-height:1.5;color:rgba(16,19,25,.6)}
+.lin{display:flex;justify-content:space-between;align-items:center;font-size:26px;padding:19px 0;border-bottom:1px dotted rgba(16,19,25,.25)}
+.lin b{font-family:Anton;font-size:28px}
+.tot{display:flex;justify-content:space-between;align-items:center;border-top:3px solid #101319;margin-top:20px;padding-top:20px;font-family:Anton;font-size:54px;text-transform:uppercase}
+.papel .concepto{margin-top:22px;font-size:21px;color:rgba(16,19,25,.6);font-style:italic}
+.stamp{position:absolute;right:64px;bottom:-28px;border:6px solid #C2410C;color:#C2410C;font-family:Anton;font-size:38px;text-transform:uppercase;padding:12px 24px;transform:rotate(-9deg);letter-spacing:.04em;background:rgba(255,253,248,.9);border-radius:6px}
+</style></head><body>
+
+<!-- ═══ 1 · LAS SIETE ═══ -->
+<div class="ad a1">
+  <div class="cab"><span class="badge">7 ALERTAS</span><span class="t">en tu sistema<br>de ventas</span></div>
+  <div class="alertas">
+    <div class="al"><span class="ic">!</span><span class="tx">Tus anuncios llevan un mes sin que nadie los mire.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">Te entran leads que nunca iban a comprarte.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">Tu web es bonita, pero no convierte.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">Contestas cuando puedes, no cuando hace falta.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">Mandas el presupuesto y ahí se acaba.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">Llamas por orden de llegada, no a quien va a comprar.</span></div>
+    <div class="al"><span class="ic">!</span><span class="tx">No sabes de dónde salió tu último cliente.</span></div>
+  </div>
+  <div class="pregunta">¿Cuántas te has reconocido?</div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Si no mejora, no pagas.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<!-- ═══ 2 · EL RECORRIDO ═══ -->
+<div class="ad a2">
+  <div class="k">Tu sistema de ventas, de punta a punta</div>
+  <div class="t">Miramos los ocho.<br>Casi siempre falla<br>en tres<span class="na">.</span></div>
+  <div class="tubo">
+    <div class="linea"></div>
+    <div class="est"><span class="punto"></span><span class="nom">Anuncios</span><span class="nota">Sin revisar desde hace semanas</span></div>
+    <div class="est fuga"><span class="punto"></span><span class="nom">La web</span><span class="nota">Bonita, pero no convierte</span></div>
+    <div class="est"><span class="punto"></span><span class="nom">Formularios</span><span class="nota">Piden más de lo que nadie da</span></div>
+    <div class="est"><span class="punto"></span><span class="nom">El lead</span><span class="nota">La mitad no iba a comprarte</span></div>
+    <div class="est fuga"><span class="punto"></span><span class="nom">Tiempo de respuesta</span><span class="nota">Horas, cuando hacían falta minutos</span></div>
+    <div class="est"><span class="punto"></span><span class="nom">Seguimientos</span><span class="nota">Los hace quien se acuerda</span></div>
+    <div class="est fuga"><span class="punto"></span><span class="nom">Presupuestos</span><span class="nota">Enviados y nunca perseguidos</span></div>
+    <div class="est"><span class="punto"></span><span class="nom">El cierre</span><span class="nota">Depende de que estés tú</span></div>
+  </div>
+  <div class="remate">Y casi nunca son<br>los que tú crees<span class="na">.</span></div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Si no mejora, no pagas.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<!-- ═══ 3 · EL PROCESO ═══ -->
+<div class="ad a3">
+  <div class="k">Así trabajamos</div>
+  <div class="t">Tu sistema<br>de ventas,<br>arreglado<br>o gratis<span class="na">.</span></div>
+  <div class="sello"><span class="n">0€</span><span class="s">si no mejora</span></div>
+  <div class="blq uno"><span class="num">1</span><div><h3>Diagnóstico</h3><p>Quince minutos. Miramos tu sistema entero, de los anuncios al cierre.</p></div></div>
+  <div class="blq dos"><span class="num">2</span><div><h3>El plan</h3><p>Por escrito. Qué te está costando dinero y qué arreglamos primero.</p></div></div>
+  <div class="blq tres"><span class="num">3</span><div><h3>El piloto · 30 días</h3><p>Lo montamos sobre lo que ya tienes. Sin coste.</p></div></div>
+  <div class="franja" style="background:#F2EEE6">
+    <div class="pasos" style="font-size:27px"><span>Se mide el número antes</span><i>→</i><span>y al día treinta</span></div>
+    <div class="gar" style="font-size:40px;margin-top:16px">Si no mejoramos tu sistema,<br>no te cobramos nada.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+<!-- ═══ 4 · LA FACTURA ═══ -->
+<div class="ad a4">
+  <div class="top">Esta es la factura<br>si tu sistema no mejora<span style="color:#F4CC38">.</span></div>
+  <div class="papel">
+    <div class="cab">
+      <span class="marca">QUALIVO</span>
+      <span class="meta">Piloto de 30 días<br>Sistema de ventas</span>
+    </div>
+    <div class="lin"><span>Análisis del sistema completo</span><b>0,00 €</b></div>
+    <div class="lin"><span>Plan de mejoras por escrito</span><b>0,00 €</b></div>
+    <div class="lin"><span>Piloto de 30 días</span><b>0,00 €</b></div>
+    <div class="tot"><span>Total</span><span>0,00 €</span></div>
+    <div class="concepto">Concepto: el sistema no mejoró. No se cobra.</div>
+    <div class="stamp">No se cobra</div>
+  </div>
+  <div class="franja">
+    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="gar">Tú solo arriesgas quince minutos.</div>
+    <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  </div>
+</div>
+
+</body></html>
