@@ -92,27 +92,42 @@
     },
     {
       "source": "/donde-pierdes-clientes",
-      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "destination": "/diagnostico/",
       "permanent": true
     },
     {
       "source": "/donde-pierdes-clientes/",
-      "destination": "/donde-se-rompe-tu-crecimiento/",
-      "permanent": true
-    },
-    {
-      "source": "/donde-pierdes-clientes/fugas.js",
-      "destination": "/donde-se-rompe-tu-crecimiento/diagnostico.js",
+      "destination": "/diagnostico/",
       "permanent": true
     },
     {
       "source": "/diagnostico-express",
-      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "destination": "/diagnostico/",
       "permanent": true
     },
     {
       "source": "/diagnostico-express/",
-      "destination": "/donde-se-rompe-tu-crecimiento/",
+      "destination": "/diagnostico/",
+      "permanent": true
+    },
+    {
+      "source": "/donde-se-rompe-tu-crecimiento",
+      "destination": "/diagnostico/",
+      "permanent": true
+    },
+    {
+      "source": "/donde-se-rompe-tu-crecimiento/",
+      "destination": "/diagnostico/",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostico-de-crecimiento",
+      "destination": "/diagnostico/",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostico-de-crecimiento/",
+      "destination": "/diagnostico/",
       "permanent": true
     }
   ],

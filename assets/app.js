@@ -469,7 +469,7 @@
       if (!hipotesis) return showError('Escribe tu hipótesis, aunque sea a medias.');
       if (!rgpd) return showError('Necesitamos tu consentimiento para tratar los datos.');
 
-      var cualificado = fact !== '0';
+      var cualificado = true; // la escala se guarda en el CRM; se decide en la llamada, no en el formulario
       var payload = {
         nombre: nombre,
         email: email,
