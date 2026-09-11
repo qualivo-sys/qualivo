@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:Anton;src:url(fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.ad{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 44px}
+.na{color:#E8590C} .am{color:#F4CC38} .te{color:#27BDB1}
+.firma{position:absolute;bottom:44px;left:56px;font-size:23px;letter-spacing:.04em}
+.web{position:absolute;bottom:44px;right:56px;font-family:Anton;font-size:26px;letter-spacing:.04em;color:#E8590C}
+.cta{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:14px;font-family:Anton;font-size:30px;text-transform:uppercase;letter-spacing:.02em}
+.cta i{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+
+/* ── 1 · GOLPE TIPOGRÁFICO ─────────────────────────────── */
+.a1{background:#F4CC38;color:#101319}
+.a1 .k{position:absolute;top:56px;left:56px;font-size:23px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:rgba(16,19,25,.55)}
+.a1 .big{position:absolute;top:170px;left:56px;right:56px;font-family:Anton;font-size:168px;line-height:.98;text-transform:uppercase}
+.a1 .sub{position:absolute;top:760px;left:56px;right:66px;font-size:40px;line-height:1.35;font-weight:600}
+.a1 .rule{position:absolute;left:56px;top:1000px;width:110px;height:7px;background:#101319}
+.a1 .pie{position:absolute;top:1050px;left:56px;right:66px;font-size:29px;line-height:1.45;color:rgba(16,19,25,.7)}
+
+/* ── 2 · LO QUE MIRAMOS ────────────────────────────────── */
+.a2{background:#08090C;color:#F2EEE6}
+.a2::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.03) 1px,transparent 1px);background-size:90px 90px}
+.a2 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:#F4CC38;font-weight:800}
+.a2 .t{position:absolute;top:96px;left:56px;right:56px;font-family:Anton;font-size:70px;line-height:1;text-transform:uppercase}
+.a2 .lista{position:absolute;top:340px;left:56px;right:56px;display:grid;grid-template-columns:1fr 1fr;gap:16px 26px}
+.a2 .lista div{font-family:Anton;font-size:40px;text-transform:uppercase;color:#F2EEE6;display:flex;align-items:center;gap:14px}
+.a2 .lista div::before{content:'';width:12px;height:12px;background:#E8590C;flex-shrink:0}
+.a2 .pie{position:absolute;top:790px;left:56px;right:66px;font-size:33px;line-height:1.45;color:rgba(242,238,230,.8)}
+.a2 .pie b{color:#F4CC38}
+
+/* ── 3 · LA CONVERSACIÓN QUE SE MUERE ──────────────────── */
+.a3{background:#EFECFB;color:#101319}
+.a3 .k{position:absolute;top:56px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#E8590C}
+.a3 .t{position:absolute;top:96px;left:56px;right:56px;font-family:Anton;font-size:68px;line-height:1.02;text-transform:uppercase}
+.chat{position:absolute;top:300px;left:56px;right:56px}
+.msg{max-width:74%;padding:20px 24px;border-radius:20px;font-size:31px;line-height:1.35;margin-bottom:16px;position:relative}
+.msg.el{background:#fff;border-bottom-left-radius:6px}
+.msg.tu{background:#101319;color:#F2EEE6;margin-left:auto;border-bottom-right-radius:6px}
+.msg .h{display:block;font-size:19px;color:rgba(16,19,25,.4);margin-top:8px}
+.msg.tu .h{color:rgba(242,238,230,.45)}
+.silencio{margin:44px 0 0;text-align:center;font-family:Anton;font-size:40px;color:#E8590C;text-transform:uppercase;letter-spacing:.04em}
+.silencio small{display:block;font-family:SG;font-size:25px;color:rgba(16,19,25,.5);letter-spacing:0;text-transform:none;margin-top:8px;font-weight:600}
+.a3 .pie{position:absolute;bottom:210px;left:56px;right:66px;font-size:32px;line-height:1.4;font-weight:700}
+
+/* ── 4 · ANTES / DESPUÉS ───────────────────────────────── */
+.a4{background:#F2EEE6;color:#101319}
+.a4 .k{position:absolute;top:56px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#E8590C}
+.a4 .t{position:absolute;top:96px;left:56px;right:56px;font-family:Anton;font-size:66px;line-height:1.04;text-transform:uppercase}
+.mit{position:absolute;left:56px;right:56px;border-radius:20px;padding:30px 34px}
+.mit .lbl{font-family:Anton;font-size:34px;text-transform:uppercase;margin-bottom:18px}
+.mit li{list-style:none;font-size:30px;line-height:1.35;padding:13px 0 13px 40px;position:relative}
+.mit.hoy{top:340px;background:#fff;border:2px solid rgba(16,19,25,.12)}
+.mit.hoy .lbl{color:rgba(16,19,25,.45)}
+.mit.hoy li::before{content:'✕';position:absolute;left:0;top:13px;color:#E8590C;font-weight:800}
+.mit.luego{top:715px;background:#101319;color:#F2EEE6}
+.mit.luego .lbl{color:#F4CC38}
+.mit.luego li::before{content:'✓';position:absolute;left:0;top:13px;color:#F4CC38;font-weight:800}
+.a4 .pie{position:absolute;bottom:168px;left:56px;right:66px;font-size:30px;line-height:1.4;font-weight:700}
+</style></head><body>
+
+<!-- ═══ ANUNCIO 1 · el golpe ═══ -->
+<div class="ad a1">
+  <div class="k">Diagnóstico de crecimiento</div>
+  <div class="big">30<br>días<span class="na">.</span><br>0 €.</div>
+  <div class="sub">Montamos el arreglo. Si el número no se mueve, <strong>no pagas nada</strong>.</div>
+  <div class="rule"></div>
+  <div class="pie">Empieza por una llamada de quince minutos donde miramos tu sistema de ventas entero.</div>
+  <div class="cta" style="bottom:120px"><i style="background:#101319;color:#F4CC38">→</i>Reserva tus 15 minutos</div>
+  <div class="firma" style="color:rgba(16,19,25,.6)">@maikel.echevarria</div>
+  <div class="web" style="color:#101319">QUALIVO.IO</div>
+</div>
+
+<!-- ═══ ANUNCIO 2 · lo que miramos ═══ -->
+<div class="ad a2">
+  <div class="k">Quince minutos</div>
+  <div class="t">Lo que miramos<br>en tu sistema<br>de ventas<span class="na">.</span></div>
+  <div class="lista">
+    <div>Captación</div><div>Anuncios</div>
+    <div>Prospección</div><div>Formularios</div>
+    <div>Orgánico</div><div>El lead</div>
+    <div>Seguimiento</div><div>El cierre</div>
+  </div>
+  <div class="pie">Todo, de arriba abajo. Y sales con <b>un plan concreto</b>: qué arreglamos primero y qué número tiene que moverse.</div>
+  <div class="cta" style="bottom:120px;color:#F4CC38"><i style="background:#F4CC38;color:#101319">→</i>Reserva tus 15 minutos</div>
+  <div class="firma" style="color:rgba(242,238,230,.55)">@maikel.echevarria</div>
+  <div class="web">QUALIVO.IO</div>
+</div>
+
+<!-- ═══ ANUNCIO 3 · la conversación que se muere ═══ -->
+<div class="ad a3">
+  <div class="k">Esto pasa todos los meses</div>
+  <div class="t">Y luego dicen que<br>falta captación<span class="na">.</span></div>
+  <div class="chat" style="top:340px">
+    <div class="msg el">Hola, ¿me podéis pasar presupuesto?<span class="h">mar · 10:24</span></div>
+    <div class="msg tu">¡Claro! Te lo mando hoy mismo.<span class="h">mar · 18:40</span></div>
+    <div class="msg tu">Aquí lo tienes. Cualquier duda me dices.<span class="h">mié · 09:12</span></div>
+    <div class="silencio">3 semanas<small>Nadie ha vuelto a escribir</small></div>
+  </div>
+  <div class="pie">Ese cliente ya estaba pagado. Y sigue ahí, esperando.</div>
+  <div class="cta" style="bottom:120px"><i style="background:#E8590C;color:#fff">→</i>Mira cuántos tienes así</div>
+  <div class="firma" style="color:rgba(16,19,25,.55)">@maikel.echevarria</div>
+  <div class="web">QUALIVO.IO</div>
+</div>
+
+<!-- ═══ ANUNCIO 4 · antes / después ═══ -->
+<div class="ad a4">
+  <div class="k">Treinta días</div>
+  <div class="t">Lo mismo<span class="na">.</span> Pero<br>sin que nadie<br>se acuerde.</div>
+  <div class="mit hoy">
+    <div class="lbl">Hoy</div>
+    <ul>
+      <li>Contestas cuando puedes.</li>
+      <li>El presupuesto se manda y se olvida.</li>
+      <li>El «ahora no» se pierde para siempre.</li>
+    </ul>
+  </div>
+  <div class="mit luego">
+    <div class="lbl">En treinta días</div>
+    <ul>
+      <li>Se contesta en minutos, a cualquier hora.</li>
+      <li>Ningún presupuesto se queda sin siguiente paso.</li>
+      <li>Al «ahora no» se vuelve con fecha.</li>
+    </ul>
+  </div>
+  <div class="pie">Sin cambiar de CRM, ni de web, ni de agencia. Y si no funciona, no pagas.</div>
+  <div class="cta" style="bottom:120px"><i style="background:#101319;color:#F4CC38">→</i>Reserva tus 15 minutos</div>
+  <div class="firma" style="color:rgba(16,19,25,.55)">@maikel.echevarria</div>
+  <div class="web">QUALIVO.IO</div>
+</div>
+
+</body></html>
