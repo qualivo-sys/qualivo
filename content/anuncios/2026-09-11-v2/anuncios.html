@@ -6,15 +6,16 @@ body{background:#3a3a3a;padding:40px}
 .ad{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 44px}
 .na{color:#E8590C} .am{color:#F4CC38}
 /* franja de propuesta, igual en las cuatro */
-.franja{position:absolute;left:0;right:0;bottom:0;height:268px;background:#F4CC38;color:#101319;padding:30px 56px 0}
-.franja .pasos{display:flex;align-items:center;gap:14px;font-family:Anton;font-size:30px;text-transform:uppercase;letter-spacing:.01em;flex-wrap:wrap}
-.franja .pasos span{display:inline-flex;align-items:center;gap:11px}
-.franja .pasos b{width:38px;height:38px;border-radius:50%;background:#101319;color:#F4CC38;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
-.franja .pasos i{color:rgba(16,19,25,.4);font-style:normal;font-size:26px}
-.franja .gar{margin-top:12px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.05}
-.franja .gar small{display:block;font-family:SG;font-size:22px;font-weight:700;text-transform:none;letter-spacing:0;color:rgba(16,19,25,.72);margin-bottom:5px}
-.franja .pie{position:absolute;bottom:22px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:22px;color:rgba(16,19,25,.6);letter-spacing:.03em}
-.franja .pie b{font-family:Anton;font-size:24px;color:#101319;letter-spacing:.04em}
+.franja{position:absolute;left:0;right:0;bottom:0;height:372px;background:#F4CC38;color:#101319;padding:24px 56px 0}
+.franja .pv{font-size:23px;line-height:1.3;font-weight:700;color:#101319}
+.franja .pv em{font-style:normal;background:#101319;color:#F4CC38;padding:0 8px;border-radius:5px}
+.franja .pasos3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:14px;padding-top:14px;border-top:2px solid rgba(16,19,25,.18)}
+.franja .pasos3 h4{font-family:Anton;font-size:24px;text-transform:uppercase;letter-spacing:.01em;display:flex;align-items:center;gap:9px;margin-bottom:6px;line-height:1}
+.franja .pasos3 h4 b{width:28px;height:28px;border-radius:50%;background:#101319;color:#F4CC38;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;font-family:SG;font-weight:800}
+.franja .pasos3 p{font-size:17.5px;line-height:1.3;color:rgba(16,19,25,.78);font-weight:500}
+.franja .gar{margin-top:14px;font-family:Anton;font-size:36px;text-transform:uppercase;line-height:1.05}
+.franja .gar small{display:inline-block;font-family:SG;font-size:19px;font-weight:700;text-transform:none;letter-spacing:0;color:rgba(16,19,25,.72);margin-right:14px;vertical-align:middle}
+.franja .pie{position:absolute;bottom:16px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:19px;color:rgba(16,19,25,.6)}
 
 /* ── 1 · PANEL DE ALERTAS ─────────────────────────── */
 .a1{background:#0A0A0B;color:#F2EEE6}
@@ -23,47 +24,38 @@ body{background:#3a3a3a;padding:40px}
 .a1 .badge{background:#E8590C;color:#fff;font-family:Anton;font-size:26px;padding:8px 16px;border-radius:8px;letter-spacing:.04em}
 .a1 .cab .t{font-family:Anton;font-size:46px;line-height:1;text-transform:uppercase}
 .a1 .alertas{position:absolute;top:170px;left:56px;right:56px}
-.al{display:flex;align-items:center;gap:18px;min-height:82px;background:rgba(232,89,12,.07);border:1px solid rgba(232,89,12,.3);border-left:6px solid #E8590C;border-radius:10px;padding:17px 22px;margin-bottom:11px}
+.al{display:flex;align-items:center;gap:18px;min-height:74px;background:rgba(232,89,12,.07);border:1px solid rgba(232,89,12,.3);border-left:6px solid #E8590C;border-radius:10px;padding:14px 22px;margin-bottom:9px}
 .al .ic{width:30px;height:30px;flex-shrink:0;border-radius:50%;background:#E8590C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800}
 .al .tx{font-size:28px;line-height:1.28}
-.a1 .pregunta{position:absolute;top:880px;left:56px;right:56px;font-family:Anton;font-size:52px;text-transform:uppercase;color:#F4CC38;line-height:1.05}
+.a1 .pregunta{position:absolute;top:800px;left:56px;right:56px;font-family:Anton;font-size:52px;text-transform:uppercase;color:#F4CC38;line-height:1.05}
 
 /* ── 2 · EL RECORRIDO CON FUGAS ───────────────────── */
 .a2{background:#F2EEE6;color:#101319}
 .a2 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#E8590C}
 .a2 .t{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:58px;line-height:1.02;text-transform:uppercase}
-.tubo{position:absolute;top:272px;left:56px;right:56px;height:700px}
+.tubo{position:absolute;top:272px;left:56px;right:56px;height:586px}
 .tubo .linea{position:absolute;left:96px;top:12px;bottom:12px;width:14px;background:linear-gradient(180deg,#101319,#3a3f47);border-radius:8px}
-.est{position:relative;height:86px}
-.est .punto{position:absolute;left:88px;top:16px;width:30px;height:30px;border-radius:50%;background:#F2EEE6;border:6px solid #101319;box-sizing:border-box}
-.est .nom{position:absolute;left:158px;top:8px;font-family:Anton;font-size:36px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
-.est .nota{position:absolute;left:158px;top:52px;font-size:22px;color:rgba(16,19,25,.55);line-height:1.2}
+.est{position:relative;height:72px}
+.est .punto{position:absolute;left:88px;top:12px;width:30px;height:30px;border-radius:50%;background:#F2EEE6;border:6px solid #101319;box-sizing:border-box}
+.est .nom{position:absolute;left:158px;top:6px;font-family:Anton;font-size:32px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.est .nota{position:absolute;left:158px;top:42px;font-size:20px;color:rgba(16,19,25,.55);line-height:1.2}
 .est.fuga .punto{background:#E8590C;border-color:#E8590C;box-shadow:0 0 0 10px rgba(232,89,12,.18)}
 .est.fuga .nom{color:#E8590C}
 /* gotas de dinero cayendo por la fuga */
-.est.fuga::after{content:'€';position:absolute;left:30px;top:10px;font-family:Anton;font-size:30px;color:#E8590C;opacity:.9}
-.est.fuga::before{content:'€ €';position:absolute;left:22px;top:46px;font-family:Anton;font-size:22px;color:#E8590C;opacity:.5;letter-spacing:.22em}
-.a2 .remate{position:absolute;top:978px;left:56px;right:56px;font-family:Anton;font-size:40px;text-transform:uppercase;line-height:1.08}
+.est.fuga::after{content:'€';position:absolute;left:30px;top:4px;font-family:Anton;font-size:30px;color:#E8590C;opacity:.9}
+.est.fuga::before{content:'€ €';position:absolute;left:22px;top:38px;font-family:Anton;font-size:22px;color:#E8590C;opacity:.5;letter-spacing:.22em}
+.a2 .remate{position:absolute;top:866px;left:56px;right:56px;font-family:Anton;font-size:38px;text-transform:uppercase;line-height:1.08}
 
-/* ── 3 · EL PROCESO ───────────────────────────────── */
+/* ── 3 · LA PROPUESTA ─────────────────────────────── */
 .a3{background:#101319;color:#F2EEE6}
 .a3 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#F4CC38}
-.a3 .t{position:absolute;top:88px;left:56px;right:340px;font-family:Anton;font-size:62px;line-height:1.02;text-transform:uppercase}
-.sello{position:absolute;top:96px;right:46px;width:250px;height:250px;border:9px solid #E8590C;border-radius:50%;color:#E8590C;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-13deg);font-family:Anton;text-transform:uppercase;line-height:.92}
-.sello .n{font-size:96px}
-.sello .s{font-size:19px;letter-spacing:.1em;margin-top:8px;line-height:1.05;text-align:center}
-.blq{position:absolute;left:56px;right:56px;border-radius:18px;padding:28px 32px;display:grid;grid-template-columns:86px 1fr;gap:24px;align-items:center}
-.blq .num{font-family:Anton;font-size:78px;line-height:.86}
-.blq h3{font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.02;margin-bottom:8px}
-.blq p{font-size:26px;line-height:1.35}
-.blq.uno{top:400px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
-.blq.dos{top:590px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
-.blq.tres{top:780px;background:#F4CC38;color:#101319}
-.blq.uno .num,.blq.dos .num{color:rgba(255,255,255,.28)}
-.blq.tres .num{color:rgba(16,19,25,.3)}
-.blq.uno p,.blq.dos p{color:#AEB5BF}
-.blq.tres p{color:rgba(16,19,25,.8)}
-
+.a3 .t{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:72px;line-height:1.02;text-transform:uppercase}
+.sines{position:absolute;top:490px;left:56px;right:56px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.sines div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px 22px 20px;min-height:250px}
+.sines .x{display:inline-flex;width:44px;height:44px;border-radius:50%;background:#E8590C;color:#fff;align-items:center;justify-content:center;font-size:24px;font-weight:800;margin-bottom:14px}
+.sines h3{font-family:Anton;font-size:32px;text-transform:uppercase;line-height:1.02;margin-bottom:10px}
+.sines p{font-size:21px;line-height:1.32;color:#AEB5BF}
+.a3 .para{position:absolute;top:800px;left:56px;right:56px;font-family:Anton;font-size:52px;text-transform:uppercase;line-height:1.05;color:#F4CC38}
 /* ── 4 · LA FACTURA ───────────────────────────────── */
 .a4{background:#E8590C}
 .a4 .top{position:absolute;top:50px;left:56px;right:56px;font-family:Anton;font-size:50px;line-height:1.04;text-transform:uppercase;color:#fff}
@@ -80,15 +72,15 @@ body{background:#3a3a3a;padding:40px}
 /* ── 5 · FUGA → AGENTE ────────────────────────────── */
 .a5{background:#0A0A0B;color:#F2EEE6}
 .a5 .k{position:absolute;top:52px;left:56px;font-size:22px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;color:#F4CC38}
-.a5 .t{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:66px;line-height:1.02;text-transform:uppercase}
-.a5 .mapa{position:absolute;top:318px;left:56px;right:56px}
-.fila{display:grid;grid-template-columns:250px 54px 1fr;align-items:center;gap:14px;min-height:104px;padding:12px 0;border-bottom:1px solid rgba(242,238,230,.12)}
+.a5 .t{position:absolute;top:88px;left:56px;right:56px;font-family:Anton;font-size:60px;line-height:1.02;text-transform:uppercase}
+.a5 .mapa{position:absolute;top:290px;left:56px;right:56px}
+.fila{display:grid;grid-template-columns:250px 54px 1fr;align-items:center;gap:14px;min-height:88px;padding:10px 0;border-bottom:1px solid rgba(242,238,230,.12)}
 .fila .fuga{font-family:Anton;font-size:36px;text-transform:uppercase;color:#E8590C;line-height:1;display:flex;align-items:center;gap:12px}
 .fila .fuga::before{content:'';width:14px;height:14px;border-radius:50%;background:#E8590C;box-shadow:0 0 0 7px rgba(232,89,12,.2);flex-shrink:0}
 .fila .fl{font-family:Anton;font-size:40px;color:#F4CC38;text-align:center}
-.fila .ag{font-size:25px;line-height:1.3;color:#F2EEE6}
+.fila .ag{font-size:23px;line-height:1.3;color:#F2EEE6}
 .fila .ag b{color:#F4CC38;font-weight:800}
-.a5 .remate{position:absolute;top:938px;left:56px;right:56px;font-family:Anton;font-size:48px;text-transform:uppercase;line-height:1.05}
+.a5 .remate{position:absolute;top:840px;left:56px;right:56px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.05}
 </style></head><body>
 
 <!-- ═══ 1 · LAS SIETE ═══ -->
@@ -105,7 +97,12 @@ body{background:#3a3a3a;padding:40px}
   </div>
   <div class="pregunta">¿Cuántas te has reconocido?</div>
   <div class="franja">
-    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="pv">Ponemos <em>agentes de IA</em> en el sistema comercial que ya tienes, justo donde se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.</div>
+    <div class="pasos3">
+      <div><h4><b>1</b>Diagnóstico · 15 min</h4><p>Miramos tu sistema entero, de los anuncios al cierre, y te decimos dónde se escapa el negocio.</p></div>
+      <div><h4><b>2</b>Plan · 48 h</h4><p>Por escrito: qué fuga va primero, qué agente ponemos ahí y qué número tiene que moverse.</p></div>
+      <div><h4><b>3</b>Piloto · 30 días</h4><p>Montamos el agente sobre lo que ya tienes y medimos ese número antes y después.</p></div>
+    </div>
     <div class="gar"><small>Acordamos el número antes de empezar.</small>Si no mejora, no pagas el piloto.</div>
     <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
   </div>
@@ -128,23 +125,35 @@ body{background:#3a3a3a;padding:40px}
   </div>
   <div class="remate">Y no suelen ser<br>los que tú crees<span class="na">.</span></div>
   <div class="franja">
-    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="pv">Ponemos <em>agentes de IA</em> en el sistema comercial que ya tienes, justo donde se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.</div>
+    <div class="pasos3">
+      <div><h4><b>1</b>Diagnóstico · 15 min</h4><p>Miramos tu sistema entero, de los anuncios al cierre, y te decimos dónde se escapa el negocio.</p></div>
+      <div><h4><b>2</b>Plan · 48 h</h4><p>Por escrito: qué fuga va primero, qué agente ponemos ahí y qué número tiene que moverse.</p></div>
+      <div><h4><b>3</b>Piloto · 30 días</h4><p>Montamos el agente sobre lo que ya tienes y medimos ese número antes y después.</p></div>
+    </div>
     <div class="gar"><small>Acordamos el número antes de empezar.</small>Si no mejora, no pagas el piloto.</div>
     <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
   </div>
 </div>
 
-<!-- ═══ 3 · EL PROCESO ═══ -->
+<!-- ═══ 3 · LA PROPUESTA ═══ -->
 <div class="ad a3">
-  <div class="k">Así trabajamos</div>
-  <div class="t">Lo miramos.<br>Lo medimos.<br>Lo probamos<span class="na">.</span></div>
-  <div class="sello"><span class="n">0€</span><span class="s">si el número<br>no mejora</span></div>
-  <div class="blq uno"><span class="num">1</span><div><h3>Diagnóstico</h3><p>Quince minutos. Miramos tu sistema entero, de los anuncios al cierre.</p></div></div>
-  <div class="blq dos"><span class="num">2</span><div><h3>El plan</h3><p>Por escrito. Qué te está costando dinero y qué arreglamos primero.</p></div></div>
-  <div class="blq tres"><span class="num">3</span><div><h3>El piloto · 30 días</h3><p>Sobre lo que ya tienes. El número se acuerda antes y se mide al día treinta.</p></div></div>
-  <div class="franja" style="background:#F2EEE6">
-    <div class="pasos" style="font-size:27px"><span>Se mide el número antes</span><i>→</i><span>y al día treinta</span></div>
-    <div class="gar" style="font-size:40px;margin-top:14px">Si ese número no mejora,<br>no pagas el piloto.</div>
+  <div class="k">Qué hacemos, en una frase</div>
+  <div class="t">Ponemos agentes de IA<br>en el sistema comercial<br>que ya tienes<span class="na">.</span><br><span class="am">Justo donde se te<br>escapa el negocio.</span></div>
+  <div class="sines">
+    <div><span class="x">✕</span><h3>Sin rehacer nada</h3><p>Tu web, tu CRM, tus campañas y tu agencia se quedan como están.</p></div>
+    <div><span class="x">✕</span><h3>Sin invertir más</h3><p>No es más presupuesto. Es que lo que ya entra deje de escaparse.</p></div>
+    <div><span class="x">✕</span><h3>Sin contratar a nadie</h3><p>El agente hace el trabajo que hoy depende de que alguien se acuerde.</p></div>
+  </div>
+  <div class="para">Para captar, seguir y convertir más con lo que ya tienes.</div>
+  <div class="franja">
+    <div class="pv">Ponemos <em>agentes de IA</em> en el sistema comercial que ya tienes, justo donde se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.</div>
+    <div class="pasos3">
+      <div><h4><b>1</b>Diagnóstico · 15 min</h4><p>Miramos tu sistema entero, de los anuncios al cierre, y te decimos dónde se escapa el negocio.</p></div>
+      <div><h4><b>2</b>Plan · 48 h</h4><p>Por escrito: qué fuga va primero, qué agente ponemos ahí y qué número tiene que moverse.</p></div>
+      <div><h4><b>3</b>Piloto · 30 días</h4><p>Montamos el agente sobre lo que ya tienes y medimos ese número antes y después.</p></div>
+    </div>
+    <div class="gar"><small>Acordamos el número antes de empezar.</small>Si no mejora, no pagas el piloto.</div>
     <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
   </div>
 </div>
@@ -165,8 +174,13 @@ body{background:#3a3a3a;padding:40px}
     <div class="stamp">No se cobra</div>
   </div>
   <div class="franja">
-    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
-    <div class="gar"><small>Acordamos el número antes de empezar.</small>Tú no asumes el riesgo del piloto.</div>
+    <div class="pv">Ponemos <em>agentes de IA</em> en el sistema comercial que ya tienes, justo donde se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.</div>
+    <div class="pasos3">
+      <div><h4><b>1</b>Diagnóstico · 15 min</h4><p>Miramos tu sistema entero, de los anuncios al cierre, y te decimos dónde se escapa el negocio.</p></div>
+      <div><h4><b>2</b>Plan · 48 h</h4><p>Por escrito: qué fuga va primero, qué agente ponemos ahí y qué número tiene que moverse.</p></div>
+      <div><h4><b>3</b>Piloto · 30 días</h4><p>Montamos el agente sobre lo que ya tienes y medimos ese número antes y después.</p></div>
+    </div>
+    <div class="gar"><small>Acordamos el número antes de empezar.</small>Si no mejora, no pagas el piloto.</div>
     <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
   </div>
 </div>
@@ -182,9 +196,14 @@ body{background:#3a3a3a;padding:40px}
     <div class="fila"><span class="fuga">Seguimiento</span><span class="fl">→</span><span class="ag"><b>Un agente</b> que detecta a quien se quedó a medias y lo persigue.</span></div>
     <div class="fila"><span class="fuga">El CRM</span><span class="fl">→</span><span class="ag"><b>Un agente</b> que encuentra las oportunidades paradas y las saca a la mesa.</span></div>
   </div>
-  <div class="remate">No sustituimos tu sistema.<br><span class="am">Lo agentizamos.</span></div>
+  <div class="remate">No sustituimos tu sistema. <span class="am">Lo agentizamos.</span></div>
   <div class="franja">
-    <div class="pasos"><span><b>1</b>Diagnóstico</span><i>→</i><span><b>2</b>Plan</span><i>→</i><span><b>3</b>Piloto 30 días</span></div>
+    <div class="pv">Ponemos <em>agentes de IA</em> en el sistema comercial que ya tienes, justo donde se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a nadie.</div>
+    <div class="pasos3">
+      <div><h4><b>1</b>Diagnóstico · 15 min</h4><p>Miramos tu sistema entero, de los anuncios al cierre, y te decimos dónde se escapa el negocio.</p></div>
+      <div><h4><b>2</b>Plan · 48 h</h4><p>Por escrito: qué fuga va primero, qué agente ponemos ahí y qué número tiene que moverse.</p></div>
+      <div><h4><b>3</b>Piloto · 30 días</h4><p>Montamos el agente sobre lo que ya tienes y medimos ese número antes y después.</p></div>
+    </div>
     <div class="gar"><small>Acordamos el número antes de empezar.</small>Si no mejora, no pagas el piloto.</div>
     <div class="pie"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
   </div>

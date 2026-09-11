@@ -14,14 +14,27 @@ Cada creatividad tiene que resolver tres cosas de un vistazo: **qué le está
 costando dinero**, **cómo lo arreglamos** y **qué riesgo corre**. Por eso las
 cuatro terminan en la misma franja amarilla:
 
-> **1 Diagnóstico → 2 Plan → 3 Piloto 30 días**
-> **Acordamos el número antes de empezar. Si no mejora, no pagas el piloto.**
+> Ponemos **agentes de IA** en el sistema comercial que ya tienes, justo donde
+> se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a
+> nadie.
+>
+> **1 Diagnóstico · 15 min** Miramos tu sistema entero, de los anuncios al
+> cierre, y te decimos dónde se escapa el negocio.
+> **2 Plan · 48 h** Por escrito: qué fuga va primero, qué agente ponemos ahí y
+> qué número tiene que moverse.
+> **3 Piloto · 30 días** Montamos el agente sobre lo que ya tienes y medimos
+> ese número antes y después.
+>
+> Acordamos el número antes de empezar. Si no mejora, no pagas el piloto.
+
+La franja ocupa 372 px: la propuesta de valor va en todas las piezas, no solo
+en la de proceso.
 
 | # | Concepto | Visual | Fondo |
 |---|---|---|---|
 | 1 | Las siete alertas | Panel de avisos rojos, como un sistema que pita | tinta |
 | 2 | El recorrido | Tubería vertical de ocho etapas con tres fugas y euros cayendo | crema |
-| 3 | El proceso | Tres bloques en escalera y sello circular de 0 € | tinta |
+| 3 | La propuesta | El titular es la propuesta de valor entera; tres tarjetas «sin rehacer, sin invertir más, sin contratar» | tinta |
 | 4 | La factura | Factura en papel a 0,00 € con sello «NO SE COBRA» | naranja |
 | 5 | Fuga → agente | Cinco fugas y el agente que va en cada una; remate «No sustituimos tu sistema. Lo agentizamos.» | tinta |
 
@@ -64,20 +77,21 @@ Presupuestos · El cierre. Tres marcadas en rojo como fuga.
 **Titular:** La fuga suele estar en más de uno. Y no en los que crees.
 **Descripción:** Tu sistema comercial, de punta a punta.
 
-### 3 · El proceso
-> Así trabajamos, sin letra pequeña.
+### 3 · La propuesta
+> Qué hacemos, en una frase: ponemos agentes de IA en el sistema comercial que
+> ya tienes, justo donde se te escapa el negocio.
 >
-> Primero una llamada de quince minutos donde miramos tu sistema comercial de
-> arriba abajo: de dónde salen los clientes, qué pasa cuando entran y cómo acaban
-> comprando.
+> Sin rehacer nada: tu web, tu CRM, tus campañas y tu agencia se quedan como
+> están. Sin invertir más: no es más presupuesto, es que lo que ya entra deje de
+> escaparse. Sin contratar a nadie: el agente hace el trabajo que hoy depende de
+> que alguien se acuerde.
 >
-> Después te damos un plan por escrito. Tuyo, lo uses con nosotros o no.
->
-> Y si vemos algo claro, lo montamos y lo probamos treinta días. Acordamos el
-> número antes de empezar: si no mejora, no pagas el piloto.
+> Quince minutos de diagnóstico, plan por escrito en 48 horas y un piloto de
+> treinta días con el número acordado antes de empezar. Si no mejora, no pagas
+> el piloto.
 
-**Titular:** Lo miramos. Lo medimos. Lo probamos.
-**Descripción:** Si el número no mejora, 0 €.
+**Titular:** Agentes de IA justo donde se te escapa el negocio.
+**Descripción:** Sin rehacer nada, sin invertir más, sin contratar.
 
 ### 4 · La factura
 > Esta es la factura que te mandamos si el piloto no funciona.

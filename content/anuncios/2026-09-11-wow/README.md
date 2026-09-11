@@ -2,9 +2,21 @@
 
 Los de `2026-09-11-v2` quedan como plan B. Estos son los que van primero:
 foto generada con Kie (gpt-4o-image, 1024×1536) que para el dedo por sí sola,
-titular corto en Anton y la misma franja amarilla del proceso en los cinco:
-`1 Diagnóstico → 2 Plan → 3 Piloto 30 días` /
-`Acordamos el número antes de empezar. Si no mejora, no pagas el piloto.`
+titular corto en Anton y la misma franja amarilla en los cinco. La franja lleva
+la propuesta entera y qué contiene cada paso (desde la revisión del 11-sep):
+
+> Ponemos **agentes de IA** en el sistema comercial que ya tienes, justo donde
+> se te escapa el negocio. Sin rehacer nada, sin invertir más, sin contratar a
+> nadie.
+>
+> **1 Diagnóstico · 15 min** Miramos tu sistema entero, de los anuncios al
+> cierre, y te decimos dónde se escapa el negocio.
+> **2 Plan · 48 h** Por escrito: qué fuga va primero, qué agente ponemos ahí y
+> qué número tiene que moverse.
+> **3 Piloto · 30 días** Montamos el agente sobre lo que ya tienes y medimos
+> ese número antes y después.
+>
+> Acordamos el número antes de empezar. Si no mejora, no pagas el piloto.
 
 | # | Concepto | Titular | Foto |
 |---|---|---|---|
