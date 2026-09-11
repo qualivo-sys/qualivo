@@ -60,11 +60,11 @@ PUERTAS = {
 }
 
 COMUN = (
- "Nosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, "
- "y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\n"
- "El primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué "
- "veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene "
- "sentido seguir.\n\n"
+ "Nosotros detectamos dónde se pierden clientes en captación y ventas, y lo arreglamos "
+ "metiendo IA en el sistema que ya tenéis.\n\n"
+ "El primer paso son quince minutos: me cuentas cómo lo tenéis montado y te digo qué "
+ "veo. Si sale algo claro, acordamos un número que mover y lo probamos un mes. Si no "
+ "se mueve, no pagáis el piloto.\n\n"
  "¿Te va bien esta semana?\n\n"
  "Maikel")
 
@@ -104,8 +104,8 @@ def construir(l):
     saludo = f"Hola {nom}," if nom else "Hola,"
     b1 = f"{saludo}\n\n{render(primera, l)}\n\n{COMUN}"
     b2 = (f"{saludo}\n\nUn ejemplo de lo que te decía.\n\n{CASOS[p]}\n\n"
-          "No hace falta que me creas. La llamada es para mirar vuestro caso, no para "
-          "contaros el nuestro.\n\n¿Esta semana o la que viene?\n\nMaikel")
+          "No hace falta que me creas. Los quince minutos son para mirar vuestro caso, no "
+          "para contaros el nuestro.\n\n¿Esta semana o la que viene?\n\nMaikel")
     b3 = (f"{saludo}\n\nLo dejo aquí, pero te hago una última pregunta por si te sirve "
           f"a ti.\n\nSi tuvieras que apostar dónde se pierde más negocio en "
           f"{l.get('company_name') or 'tu empresa'} hoy: ¿captación, conversión o "
