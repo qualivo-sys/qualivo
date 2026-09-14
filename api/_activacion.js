@@ -241,8 +241,29 @@ function minutosDesde(iso) {
   return isFinite(t) ? (Date.now() - t) / 60000 : Infinity;
 }
 
+// Envio de correo suelto, para lo que no va por la cadencia del reloj (hoy, el
+// correo del minuto cero). Devuelve el motivo en vez de lanzar: quien lo llama
+// esta a mitad de dar de alta un lead y no puede romperse por esto.
+async function enviarCorreo(email, asunto, html) {
+  if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
+  if (!email) return { ok: false, motivo: 'sin_email' };
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: process.env.RADIOGRAFIA_FROM || 'Maikel de Qualivo <onboarding@resend.dev>',
+        to: [email], subject: asunto, html: html
+      })
+    });
+    return { ok: r.ok, motivo: r.ok ? '' : 'resend_' + r.status };
+  } catch (e) {
+    return { ok: false, motivo: 'fetch_' + (e && e.message) };
+  }
+}
+
 module.exports = {
-  GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta,
+  GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

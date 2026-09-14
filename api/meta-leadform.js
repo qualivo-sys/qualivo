@@ -176,6 +176,7 @@ async function guardar(lead) {
 
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
+    email: EMAIL_RE.test(email) ? email : '',
     inversion: inversion, fuga: fuga, campos: campos, activar: deEstaCampana
   };
 }
@@ -252,6 +253,24 @@ module.exports = async function handler(req, res) {
           }
         } catch (err) {
           console.error('[leadform] primer WhatsApp no salió:', err && err.message);
+        }
+      }
+
+      // Correo del minuto cero. Sin ventana horaria a proposito: el WhatsApp de
+      // arriba no sale de madrugada, asi que un lead que entra a las 23:00 se
+      // quedaba sin nada hasta la manana siguiente. Un correo a esa hora no
+      // molesta a nadie y le confirma que su peticion ha llegado.
+      if (r.contactId && r.email) {
+        try {
+          const act = require('./_activacion.js');
+          const msg = require('./_mensajes.js');
+          const e = msg.emailBienvenida({ nombre: r.nombre, email: r.email, telefono: r.telefono,
+            waAhora: !!(r.telefono && act.enVentana('whatsapp')) });
+          const env = await act.enviarCorreo(r.email, e.asunto, e.html);
+          if (env.ok) await act.etiquetar(r.contactId, ['act-email0']);
+          else console.error('[leadform] correo de bienvenida no salio:', env.motivo);
+        } catch (err) {
+          console.error('[leadform] correo de bienvenida no salio:', err && err.message);
         }
       }
       console.log('[leadform] lead guardado', av.leadgen_id, r.contactId || '');

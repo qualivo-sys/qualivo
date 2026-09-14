@@ -89,6 +89,36 @@ function boton(texto, datos) {
     'text-decoration:none;font-weight:700;padding:14px 24px;border-radius:10px">' + texto + '</a></p>';
 }
 
+// Correo del minuto cero. No va en la cadencia del reloj: lo manda el
+// formulario, a la vez que el primer WhatsApp.
+//
+// Existe porque hasta ahora lo unico que recibia un lead el dia que entraba
+// era un WhatsApp. Si el numero estaba mal, si tenia bloqueado WhatsApp
+// Business o si el mensaje caia fuera de la ventana de 24 h, se quedaba en
+// silencio hasta el dia 2 sin ninguna confirmacion de que su peticion habia
+// llegado. Es la unica via por la que un lead pagado se evapora sin rastro.
+//
+// No repite la pregunta del WhatsApp a proposito: dos preguntas a la vez por
+// dos canales distintos es ruido, y ya hay una esperando respuesta.
+function emailBienvenida(datos) {
+  const n = nombreCorto(datos && datos.nombre);
+  return {
+    asunto: n ? n + ', recibido: tu diagnóstico de quince minutos' : 'Recibido: tu diagnóstico de quince minutos',
+    html: envoltura(
+      '<p>' + (n ? n + ', h' : 'H') + 'e recibido tu solicitud. Soy Maikel, de Qualivo.</p>' +
+      // El WhatsApp no sale de madrugada. Prometer «en unos minutos» a alguien
+      // que ha entrado a las 23:00 es quedar mal en el primer contacto.
+      '<p>' + (datos && datos.waAhora === false
+        ? 'Mañana por la mañana te escribo por WhatsApp con una pregunta'
+        : 'Te escribo por WhatsApp en unos minutos con una pregunta') +
+      ', para llegar a la llamada sabiendo algo de ti y no gastar los quince minutos en presentaciones.</p>' +
+      '<p>Si prefieres ir al grano y coger hueco tú mismo, aquí lo tienes:</p>' +
+      boton('Elegir mi hora', datos) +
+      '<p style="color:#5A5E66">Son quince minutos. Repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre, con tus números delante. ' +
+      'Te mando el plan por escrito en 24 horas, lo hagas con nosotros o no.</p>')
+  };
+}
+
 const EMAILS = [
   {
     etiqueta: 'act-email1',
@@ -135,4 +165,4 @@ const EMAILS = [
   }
 ];
 
-module.exports = { AGENDA, agenda, nombreCorto, pregunta, whatsapp1, whatsapp2, whatsapp3, EMAILS };
+module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsapp2, whatsapp3, EMAILS };

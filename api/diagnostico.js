@@ -162,6 +162,23 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Correo del minuto cero. Va despues del WhatsApp y no depende de el: si el
+    // telefono estaba mal o el mensaje cayo fuera de la ventana de 24 h, esto es
+    // lo unico que le confirma que su peticion ha llegado.
+    if (cualificado && contactId && email) {
+      try {
+        const act = require('./_activacion.js');
+        const msg = require('./_mensajes.js');
+        const e = msg.emailBienvenida({ nombre: nombre, email: email, telefono: telefono,
+          waAhora: !!telefono });
+        const r = await act.enviarCorreo(email, e.asunto, e.html);
+        if (r.ok) await act.etiquetar(contactId, ['act-email0']);
+        else console.error('[diagnostico] correo de bienvenida no salio:', r.motivo);
+      } catch (err) {
+        console.error('[diagnostico] correo de bienvenida no salio:', err && err.message);
+      }
+    }
+
     return res.status(200).json({ ok: true, cualificado: cualificado });
   } catch (err) {
     console.error('[diagnostico] Error inesperado:', err);
