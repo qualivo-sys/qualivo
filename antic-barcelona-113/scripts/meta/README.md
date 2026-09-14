@@ -67,3 +67,21 @@ Cosas que la API rechazó y cómo se resolvieron. Sirven para la próxima cuenta
 También se cachean los hashes de imagen en `.image-hashes.json`: cada reintento
 se ahorra 10 llamadas, que en nivel `development_access` es la diferencia entre
 completar la pasada o agotar el cupo.
+
+---
+
+## Públicos personalizados
+
+```bash
+node scripts/meta/build-audiences.mjs                    # simulacro
+META_TOKEN=... node scripts/meta/build-audiences.mjs --apply
+```
+
+Idempotente vía `.audiences.json`. Los públicos tardan **24-48 h en poblarse**:
+crearlos no es lo mismo que poder usarlos.
+
+| Error | Causa | Solución |
+|---|---|---|
+| `El parámetro "subtipo" no se admite` | `subtype` dejó de aceptarse en v21 | Quitarlo: el tipo se deduce del `event_source` de la regla |
+| `Formato JSON de regla no válido` | Regla de sitio web sin `filter` | El filtro es obligatorio, aunque el público sea "todos los visitantes" |
+| `(#2663) Terms of service has not been accepted` | Faltan las Condiciones de Públicos Personalizados | Las acepta una persona en business.facebook.com/ads/manage/customaudiences/tos/ — **solo afecta a los públicos de sitio web**; los de interacción con IG y Facebook se crean sin ellas |
