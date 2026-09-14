@@ -25,6 +25,18 @@ function envoltura(cuerpo) {
     'Si no quieres que te escriba más, respóndeme «baja» y listo.</p></div>';
 }
 
+// Aqui los contactos vienen de GHL, con sus nombres de campo. Si ya sabemos
+// quien es, el enlace va relleno: nadie deberia reescribir su propio correo
+// para coger un hueco que le estamos ofreciendo nosotros.
+function agendaCon(d) {
+  const q = [];
+  const n = String((d && (d.firstName || d.contactName || d.name)) || '').trim();
+  if (n) q.push('first_name=' + encodeURIComponent(n));
+  if (d && d.email) q.push('email=' + encodeURIComponent(d.email));
+  if (d && d.phone) q.push('phone=' + encodeURIComponent(d.phone));
+  return q.length ? AGENDA + '?' + q.join('&') : AGENDA;
+}
+
 function boton(texto, url) {
   return '<p style="margin:26px 0"><a href="' + (url || AGENDA) + '" style="display:inline-block;background:#101319;color:#fff;' +
     'text-decoration:none;font-weight:700;padding:14px 24px;border-radius:10px">' + texto + '</a></p>';
@@ -43,7 +55,7 @@ const SECUENCIAS = [
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'abíamos quedado hoy y no has podido entrar. Sin problema, pasa continuamente.</p>' +
             '<p>Si sigue interesándote, coge otro hueco cuando quieras. Son quince minutos y el calendario está abierto.</p>' +
-            boton('Coger otro hueco'));
+            boton('Coger otro hueco', agendaCon(d)));
         }
       },
       {
@@ -53,7 +65,7 @@ const SECUENCIAS = [
           return envoltura('<p>' + (nom(d) ? nom(d) + ', t' : 'T') + 'e dejo por escrito lo que iba a repasar contigo, por si te sirve aunque no lleguemos a hablar.</p>' +
             '<p>Los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre: anuncios, la web, formularios, el lead, el tiempo de respuesta, los seguimientos, los presupuestos y el cierre.</p>' +
             '<p>La pregunta que más cosas destapa suele ser la más tonta: <strong>¿cuántos presupuestos del mes pasado siguen hoy sin respuesta?</strong> Si no sabes el número, ahí ya hay algo.</p>' +
-            boton('Si quieres, lo vemos en quince minutos'));
+            boton('Si quieres, lo vemos en quince minutos', agendaCon(d)));
         }
       },
       {
@@ -61,7 +73,7 @@ const SECUENCIAS = [
         asunto: function () { return 'Cierro esto por mi parte'; },
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', n' : 'N') + 'o te escribo más por este tema. El hueco sigue ahí si en algún momento te viene bien.</p>' +
-            boton('Cogerlo cuando quieras'));
+            boton('Cogerlo cuando quieras', agendaCon(d)));
         }
       }
     ]
@@ -135,11 +147,11 @@ const SECUENCIAS = [
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'ace un mes me dijiste que no era el momento. Te escribo una sola vez por si ahora lo es.</p>' +
             '<p>Nada ha cambiado por mi parte: quince minutos, los ocho puntos, un plan por escrito. Si sigue sin ser el momento, ignora este correo y no vuelvo a escribirte.</p>' +
-            boton('Coger quince minutos'));
+            boton('Coger quince minutos', agendaCon(d)));
         }
       }
     ]
   }
 ];
 
-module.exports = { SECUENCIAS, AGENDA, nom, envoltura, boton };
+module.exports = { SECUENCIAS, AGENDA, agendaCon, nom, envoltura, boton };

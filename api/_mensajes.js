@@ -6,6 +6,24 @@
 const AGENDA = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl';
 const F = '-apple-system,Segoe UI,Roboto,sans-serif';
 
+// El widget de GHL acepta los datos por la URL. Si ya los conocemos, mandarle
+// el enlace pelado obliga a reescribir nombre, correo y telefono justo en el
+// momento de mas intencion, que es donde mas caro sale perder a alguien.
+//
+// Solo se usa en los correos, donde el enlace viaja escondido en un boton. En
+// WhatsApp el enlace se ve entero, y una URL larguisima con el correo del
+// contacto dentro delata la maquina justo en un mensaje que pretende sonar a
+// persona. Ahi va limpio: si le da pereza rellenar, siempre puede contestar
+// «el jueves por la manana» y lo agendamos nosotros.
+function agenda(datos) {
+  const d = datos || {};
+  const q = [];
+  if (d.nombre) q.push('first_name=' + encodeURIComponent(d.nombre));
+  if (d.email) q.push('email=' + encodeURIComponent(d.email));
+  if (d.telefono) q.push('phone=' + encodeURIComponent(d.telefono));
+  return q.length ? AGENDA + '?' + q.join('&') : AGENDA;
+}
+
 function nombreCorto(nombre) {
   const n = String(nombre || '').trim().split(/\s+/)[0];
   return n ? n.charAt(0).toUpperCase() + n.slice(1) : '';
@@ -66,8 +84,8 @@ function envoltura(cuerpo) {
     'Si no quieres que te escriba más, respóndeme «baja» y listo.</p></div>';
 }
 
-function boton(texto) {
-  return '<p style="margin:26px 0"><a href="' + AGENDA + '" style="display:inline-block;background:#101319;color:#fff;' +
+function boton(texto, datos) {
+  return '<p style="margin:26px 0"><a href="' + agenda(datos) + '" style="display:inline-block;background:#101319;color:#fff;' +
     'text-decoration:none;font-weight:700;padding:14px 24px;border-radius:10px">' + texto + '</a></p>';
 }
 
@@ -83,7 +101,7 @@ const EMAILS = [
         '<p>Son quince minutos en los que repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre:</p>' +
         '<p style="color:#3D4148">Anuncios · la web · formularios · el lead · tiempo de respuesta · seguimientos · presupuestos · el cierre.</p>' +
         '<p>La fuga casi nunca está en un solo sitio, y casi nunca está donde uno cree. De ahí sale un plan por escrito con qué arreglar primero. Es tuyo, lo hagas con nosotros o no.</p>' +
-        boton('Coger mis quince minutos'));
+        boton('Coger mis quince minutos', d));
     }
   },
   {
@@ -99,7 +117,7 @@ const EMAILS = [
         '<p>En una academia de formación fue al revés: la fuga estaba antes, en cómo se medía y se captaba. Ahí salieron <strong>1.160 leads y 21 matrículas en cuatro meses</strong>, ' +
         'y las entrevistas de venta pasaron de 83 a 168 al mes.</p>' +
         '<p>Los dos empezaron igual: encontrando dónde se perdía el rendimiento antes de tocar nada.</p>' +
-        boton('Ver dónde está la fuga en tu caso'));
+        boton('Ver dónde está la fuga en tu caso', d));
     }
   },
   {
@@ -111,10 +129,10 @@ const EMAILS = [
       return envoltura(
         '<p>' + (n ? n + ', t' : 'T') + 'e escribí porque pediste el diagnóstico y no hemos llegado a hablar. Cierro el tema por mi parte, que no quiero ser de esos que insisten.</p>' +
         '<p>Si en algún momento te pica la duda de por dónde se te está yendo el dinero entre el anuncio y el cierre, el hueco sigue estando ahí y sigue siendo de quince minutos.</p>' +
-        boton('Cogerlo cuando quieras') +
+        boton('Cogerlo cuando quieras', d) +
         '<p style="color:#5A5E66">Y si lo que pasa es que no es el momento, también me vale saberlo. Responde a este correo y lo dejo apuntado.</p>');
     }
   }
 ];
 
-module.exports = { AGENDA, nombreCorto, pregunta, whatsapp1, whatsapp2, whatsapp3, EMAILS };
+module.exports = { AGENDA, agenda, nombreCorto, pregunta, whatsapp1, whatsapp2, whatsapp3, EMAILS };

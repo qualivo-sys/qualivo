@@ -115,9 +115,19 @@
     datos.nombre = q.get('nombre') || q.get('first_name') || '';
     datos.email = q.get('email') || '';
     datos.telefono = q.get('telefono') || q.get('phone') || '';
-    document.getElementById('p3-n').textContent = 'Ya tenemos tus datos';
-    document.getElementById('p3-t').textContent = 'Solo falta la hora. Coge la que te venga bien.';
-    document.getElementById('form-bajada').textContent = 'Ya nos has dejado tus datos. Elige la hora y antes de la llamada reviso tu web y lo que nos has contado.';
+    // Meta no sustituye variables en la URL del botón de su formulario: los
+    // datos llegan vacíos salvo que el enlace venga de otro sitio (el WhatsApp
+    // que sale al minuto, por ejemplo, que sí puede rellenarlos). Prometer
+    // «ya tenemos tus datos» y que el calendario los pida a renglón seguido
+    // queda fatal, así que el texto se ajusta a lo que de verdad hay.
+    var tenemos = !!(datos.email || datos.nombre);
+    document.getElementById('p3-n').textContent = tenemos ? 'Ya tenemos tus datos' : 'Solo falta la hora';
+    document.getElementById('p3-t').textContent = tenemos
+      ? 'Solo falta la hora. Coge la que te venga bien.'
+      : 'Coge la que te venga bien.';
+    document.getElementById('form-bajada').textContent = tenemos
+      ? 'Ya nos has dejado tus datos. Elige la hora y antes de la llamada reviso tu web y lo que nos has contado.'
+      : 'Elige la hora que te venga bien. Antes de la llamada reviso tu web y lo que nos has contado.';
     calendario();
     [p1, p2, p4].forEach(function (x) { x.hidden = true; });
     p3.hidden = false;
