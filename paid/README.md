@@ -8,9 +8,16 @@ dinero invertido en anuncios.
 
 ## Qué va en cada sitio
 
-- **`devoluciones/`** — lo que el agente de paid devuelve: inventarios de lo que
-  está corriendo, lecturas de resultados, decisiones y por qué se tomaron. Un
-  fichero por fecha, con el dato leído de la API y no de memoria.
+- **`devoluciones/`** — lo que se devuelve sobre las campañas: inventarios de lo
+  que está corriendo, lecturas de resultados, decisiones y por qué se tomaron.
+  Un fichero por fecha, con el dato leído de la API y no de memoria.
+
+  Aquí escriben dos: el agente de Paid (que decide qué se sirve y con cuánto
+  dinero) y el de Growth (que produce las creatividades). **Por eso el nombre
+  del fichero lleva de qué va, no solo la fecha**: el 14-sep los dos escribimos
+  a la vez sobre las mismas creatividades y estuvimos a punto de pisarnos el
+  fichero. `…-inventario-creatividades.md` es el de Growth,
+  `…-creatividades-diag.md` es la devolución de Paid.
 
 ## Reglas de esta carpeta
 
