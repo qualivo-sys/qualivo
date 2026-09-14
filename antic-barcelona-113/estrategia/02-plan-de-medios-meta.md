@@ -108,6 +108,63 @@ Exclusiones: conversores 90 d.
 | Públicos similares (Lookalike) | Necesitan ≥ 100 conversiones de origen. **Disponible a partir del mes 3-4.** |
 | B2B / interioristas | Otro mensaje, otro funnel. Fase 3. |
 
+## 4 bis. Lo que sí se montó, y por qué cambia el reparto
+
+Dos cosas que el plan original descartaba y que, con lo visto al montar la cuenta,
+merecen entrar desde el día uno:
+
+### Formulario instantáneo: de «reevaluable en mes 3» a test desde el principio
+
+El plan lo descartaba por calidad de lead. Sigue siendo el riesgo, pero hay un
+argumento que no estaba sobre la mesa: **el formulario vive dentro de Meta y no
+depende de la captura de leads de la web**. Puede rodar aunque el resto del
+circuito no esté conectado.
+
+Se monta con **cuatro preguntas de cualificación** (pieza, espacio, medidas,
+plazo) en lugar de los tres campos habituales. Sin ellas la comparación contra
+la landing no mide nada: mediría precio, no valor.
+
+`AB113 | FRIO | Formulario` · 8 €/día · 3 anuncios.
+
+### Publicaciones orgánicas de Instagram
+
+El análisis de las 128 publicaciones de @antic.barcelona113 da un dato que afina
+el documento 03: **las dos de más alcance son de proceso de taller con una
+persona a cámara**, y duplican a todo lo demás (17.700 de alcance frente a los
+2.800 de la media del resto).
+
+Tres publicaciones entran a competir **en el mismo conjunto de frío** que los
+diez estáticos diseñados, con el mismo público y el mismo presupuesto. La
+pregunta que responde el test: si un Reel orgánico, con sus likes y comentarios
+ya acumulados, bate a un estático recién hecho.
+
+| Publicación | Por qué | Destino |
+|---|---|---|
+| Proceso de secado de las vigas | 24.099 reproducciones, el máximo | Guía |
+| Mueble auxiliar en casa real | Lo único fotografiado en un interior doméstico | Cuestionario |
+| Mesa de olmo | Ratio de guardado del 1,94 %, el triple que el resto | Cuestionario |
+
+Queda fuera a propósito la de mayor alcance (15.219, 101 guardados): dice «pino
+macizo» y «disponible en stock», y contradice el posicionamiento de pieza a
+medida en madera noble. El alcance no compensa vender lo contrario de lo que
+cuenta la landing.
+
+> **Antes de activar:** comprobar uno a uno que los Reels no lleven música
+> licenciada. La API deja crear el anuncio y Meta lo rechaza después en revisión.
+
+### Reparto real resultante
+
+| Campaña | €/día | Anuncios |
+|---|---|---|
+| `AB113 \| FRIO \| Lead` | 22 | 13 (10 estáticos + 3 Reels orgánicos) |
+| `AB113 \| RTG \| Lead` | 8 | 3 |
+| `AB113 \| FRIO \| Formulario` | 8 | 3 |
+| **Total** | **38 €/día ≈ 1.140 €/mes** | **19** |
+
+Son 240 € más al mes que el escenario de 900 €. Si el presupuesto es rígido,
+lo que se baja es el frío de 22 a 16 €/día mientras dure el test de formulario:
+tres semanas dan para decidir.
+
 ## 5. Reparto por escenario de presupuesto
 
 | | 600 €/mes (20 €/día) | **900 €/mes (30 €/día)** | 1.000 €/mes (33 €/día) |
