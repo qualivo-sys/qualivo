@@ -1,0 +1,109 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0A0A0B;font-family:SG;color:#F2EEE6}
+
+/* ===== HOOK ===== */
+.hook{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 84px 200px;z-index:5;background:transparent;
+      animation:hookOut .5s 3.7s forwards}
+.hook .l{font-family:Anton;font-size:126px;line-height:.96;text-transform:uppercase;opacity:0;transform:translateY(40px)}
+.h1{animation:golpe .32s .9s forwards}
+.h2{animation:golpe .32s 1.3s forwards}
+.h3{animation:golpe .32s 1.7s forwards;color:#E8590C}
+.hook .s{font-size:40px;margin-top:40px;color:rgba(242,238,230,.85);opacity:0;animation:golpe .4s 2.3s forwards}
+@keyframes golpe{0%{opacity:0;transform:translateY(46px) scale(.96)}70%{transform:translateY(-6px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes hookOut{to{opacity:0;visibility:hidden}}
+
+/* ===== ESCENA ===== */
+.esc{position:absolute;inset:0;padding:70px 64px 120px;display:flex;flex-direction:column;opacity:0;animation:ap .3s 3.50s forwards}
+@keyframes ap{to{opacity:1}}
+.cab{text-align:center;border-bottom:4px solid rgba(242,238,230,.18);padding-bottom:22px}
+.dep{font-size:22px;letter-spacing:.44em;font-weight:700;color:#E8590C}
+.tt{font-family:Anton;font-size:74px;line-height:1;text-transform:uppercase;margin-top:10px}
+.cont{font-family:Anton;font-size:128px;line-height:1;color:#E8590C;margin-top:16px;letter-spacing:.01em}
+.cont small{font-size:30px;font-family:SG;display:block;color:rgba(242,238,230,.55);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;font-weight:700}
+
+.lista{flex:1;display:flex;flex-direction:column;justify-content:center;gap:30px;padding:24px 0}
+.d{position:relative;opacity:0;transform:translateX(-30px)}
+.n{font-family:Anton;font-size:52px;line-height:1.06;text-transform:uppercase}
+.g{font-size:27px;line-height:1.35;color:rgba(242,238,230,.62);margin-top:5px}
+@keyframes entra{0%{opacity:0;transform:translateX(-34px)}70%{transform:translateX(4px)}100%{opacity:1;transform:translateX(0)}}
+.d1{animation:entra .34s 4.00s forwards}.d2{animation:entra .34s 5.60s forwards}
+.d3{animation:entra .34s 7.20s forwards}.d4{animation:entra .34s 8.80s forwards}
+.d5{animation:entra .34s 10.40s forwards}.d6{animation:entra .34s 12.00s forwards}
+
+/* sello que cae */
+.sello{position:absolute;right:-6px;top:2px;font-family:Anton;font-size:40px;letter-spacing:.06em;color:#E8590C;
+       border:5px solid #E8590C;padding:5px 16px;transform:rotate(-13deg) scale(3);opacity:0;text-transform:uppercase}
+@keyframes sella{0%{opacity:0;transform:rotate(-30deg) scale(3.4)}55%{opacity:1;transform:rotate(-11deg) scale(.94)}75%{transform:rotate(-13deg) scale(1.05)}100%{opacity:1;transform:rotate(-13deg) scale(1)}}
+.d1 .sello{animation:sella .3s 4.35s forwards}.d2 .sello{animation:sella .3s 5.95s forwards}
+.d3 .sello{animation:sella .3s 7.55s forwards}.d4 .sello{animation:sella .3s 9.15s forwards}
+.d5 .sello{animation:sella .3s 10.75s forwards}.d6 .sello{animation:sella .3s 12.35s forwards}
+
+/* sacudida de toda la escena al sellar */
+@keyframes tiembla{0%,100%{transform:translate(0,0)}25%{transform:translate(-6px,3px)}60%{transform:translate(5px,-3px)}}
+.esc.sh{animation:ap .3s 3.50s forwards, tiembla .16s linear}
+
+.pie{border-top:4px solid #E8590C;padding-top:26px;opacity:0;animation:golpe .45s 13.90s forwards}
+.chiste{font-family:Anton;font-size:60px;line-height:1.1;text-transform:uppercase}
+.chiste .n2{color:#E8590C}
+.tesis{font-size:30px;line-height:1.4;margin-top:20px;color:rgba(242,238,230,.8)}
+.tesis b{font-weight:700;color:#F2EEE6}
+.fir{display:flex;justify-content:space-between;margin-top:26px;font-size:24px;color:rgba(242,238,230,.45)}
+.fir .m{font-family:Anton;font-size:28px;color:#E8590C}
+</style>
+
+<video id="bg" src="bg-archivador.webm" muted playsinline style="position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;z-index:1"></video>
+<div id="velo" style="position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(10,10,11,.15) 0%,rgba(10,10,11,.35) 45%,rgba(10,10,11,.92) 100%)"></div>
+<div id="fund" style="position:absolute;inset:0;z-index:3;background:#0A0A0B;opacity:0;animation:fundido .5s 3.7s forwards"></div>
+<style>@keyframes fundido{to{opacity:1}} .esc{z-index:4}</style>
+<div class="hook">
+  <div class="l h1">Aquí están</div>
+  <div class="l h2">tus oportunidades</div>
+  <div class="l h3">de marzo.</div>
+  <div class="s">Nadie las ha vuelto a abrir.</div>
+</div>
+
+<div class="esc" id="esc">
+  <div class="cab">
+    <div class="dep">D. E. P.</div>
+    <div class="tt">Defunciones del mes</div>
+    <div class="cont"><small>Se llevaron</small><span id="c">0 €</span></div>
+  </div>
+  <div class="lista">
+    <div class="d d1"><div class="n">El anuncio que nadie miró</div><div class="g">31 días gastando. Nadie preguntó por él.</div><span class="sello">Muerto</span></div>
+    <div class="d d2"><div class="n">El formulario de nueve campos</div><div class="g">Se llevó a la mitad de los que iban a rellenarlo.</div><span class="sello">Muerto</span></div>
+    <div class="d d3"><div class="n">El contacto de las 23:40</div><div class="g">Esperó seis horas. Se fue con otro.</div><span class="sello">Muerto</span></div>
+    <div class="d d4"><div class="n">El presupuesto 1847</div><div class="g">El CRM lo dejó en «enviado». Ahí sigue.</div><span class="sello">Muerto</span></div>
+    <div class="d d5"><div class="n">El «ahora no» de marzo</div><div class="g">Nadie volvió a llamarle. Ya compró. A otro.</div><span class="sello">Muerto</span></div>
+    <div class="d d6"><div class="n">El cliente que llamó él</div><div class="g">Nunca se supo de dónde salió. No se puede repetir.</div><span class="sello">Muerto</span></div>
+  </div>
+  <div class="pie">
+    <div class="chiste">Ninguno murió de mala venta.<br><span class="n2">Todos murieron de olvido.</span></div>
+    <div class="tesis">Todo lo que depende de que <b>alguien se acuerde</b> acaba rompiéndose.</div>
+    <div class="fir"><span>@maikel.echevarria</span><span class="m">QUALIVO.IO</span></div>
+  </div>
+</div>
+
+<script>
+// el contador sube de golpe con cada sello, no de forma continua
+var saltos = [[4350, 1200], [5950, 3400], [7550, 1900], [9150, 8500], [10750, 3200], [12350, 4400]];
+var c = document.getElementById('c'), esc = document.getElementById('esc'), total = 0;
+function fmt(n){ return n.toLocaleString('es-ES') + ' €'; }
+saltos.forEach(function (s) {
+  setTimeout(function () {
+    var desde = total, hasta = total + s[1], t0 = performance.now();
+    total = hasta;
+    esc.classList.add('sh'); setTimeout(function(){ esc.classList.remove('sh'); }, 170);
+    (function paso(){
+      var k = Math.min(1, (performance.now() - t0) / 420);
+      var e = 1 - Math.pow(1 - k, 3);
+      c.textContent = fmt(Math.round(desde + (hasta - desde) * e));
+      if (k < 1) requestAnimationFrame(paso);
+    })();
+  }, s[0]);
+});
+document.getElementById("bg").play();
+</script>
