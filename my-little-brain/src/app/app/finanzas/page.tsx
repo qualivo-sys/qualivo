@@ -323,7 +323,7 @@ export default async function PaginaFinanzas({
               <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground tabular-nums">
                 Ahorro menos deuda: <strong className={deudas.patrimonio >= 0 ? TONOS.bien : TONOS.alerta}>
                   {deudas.patrimonio >= 0 ? '+' : '−'}{eurAbs(deudas.patrimonio)}
-                </strong>. Es el numero que de verdad mide como estas, no el de la caja.
+                </strong>
               </p>
             )}
           </>
