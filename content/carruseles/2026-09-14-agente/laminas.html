@@ -39,9 +39,17 @@ body{background:#3a3a3a;padding:40px}
 .verbo{font-family:Anton;font-size:74px;text-transform:uppercase;line-height:.95}
 .verbo span{color:#E8590C;font-size:34px;vertical-align:super;margin-right:14px}
 .final{font-family:Anton;font-size:92px;line-height:.98;text-transform:uppercase}
+/* recursos de composicion */
+.num{position:absolute;font-family:Anton;line-height:.8;color:#E8590C;opacity:.13;pointer-events:none}
+.sangre{position:absolute;left:0;right:0;background:#E8590C;color:#0A0A0B}
+.gigante{font-family:Anton;font-size:210px;line-height:.82;text-transform:uppercase}
+.med{font-family:Anton;font-size:118px;line-height:.9;text-transform:uppercase}
+.eti{display:inline-block;background:#E8590C;color:#0A0A0B;font-family:Anton;font-size:30px;text-transform:uppercase;padding:7px 16px;line-height:1}
+.barra{height:8px;background:#E8590C;margin:30px 0}
+.dos{display:flex;gap:40px;align-items:flex-start}
 </style>
 
-<div class="page tinta"><div class="in">
+<div class="page tinta"><div class="num" style="font-size:620px;right:-70px;bottom:-110px">01</div><div class="in">
   <div class="kick">El sistema que ya tienes</div>
   <div class="tit">¿Y si tuvieras un agente vigilando <span class="nar">todo el recorrido</span>?</div>
   <div class="sub mid">No solo tus contactos.<br>No solo tu CRM.<br><b>Todo el camino hasta la venta.</b></div>
@@ -51,15 +59,19 @@ body{background:#3a3a3a;padding:40px}
 <div class="page crema"><div class="in">
   <div class="kick">El recorrido entero</div>
   <div class="tit sm">En cada punto hay <span class="nar">una pregunta</span></div>
-  <div class="flujo">
-    <div class="paso">Adquisición</div><div class="fl">↓</div>
-    <div class="paso">Captación</div><div class="fl">↓</div>
-    <div class="paso">Contacto</div><div class="fl">↓</div>
-    <div class="paso">Cualificación</div><div class="fl">↓</div>
-    <div class="paso">Seguimiento</div><div class="fl">↓</div>
-    <div class="paso">Presupuesto</div><div class="fl">↓</div>
-    <div class="paso">Venta</div><div class="fl">↓</div>
-    <div class="paso">Reactivación</div>
+  <div class="dos" style="margin:auto 0">
+    <div class="flujo" style="margin:0;flex:1">
+      <div class="paso">Adquisición</div><div class="fl">↓</div>
+      <div class="paso">Captación</div><div class="fl">↓</div>
+      <div class="paso">Contacto</div><div class="fl">↓</div>
+      <div class="paso">Cualificación</div>
+    </div>
+    <div class="flujo" style="margin:0;flex:1">
+      <div class="paso">Seguimiento</div><div class="fl">↓</div>
+      <div class="paso">Presupuesto</div><div class="fl">↓</div>
+      <div class="paso">Venta</div><div class="fl">↓</div>
+      <div class="paso">Reactivación</div>
+    </div>
   </div>
   <div class="pie"><b>¿Qué está pasando aquí ahora mismo?</b></div>
 </div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
@@ -93,21 +105,20 @@ body{background:#3a3a3a;padding:40px}
 
 <div class="page tinta"><div class="in">
   <div class="kick">No solo vigila</div>
-  <div class="verbos">
-    <div class="verbo"><span>01</span>Observa</div>
-    <div class="verbo"><span>02</span>Detecta</div>
-    <div class="verbo"><span>03</span>Prioriza</div>
-    <div class="verbo"><span>04</span>Actúa</div>
-    <div class="verbo"><span>05</span>Mide</div>
-    <div class="verbo"><span>06</span>Aprende</div>
+  <div style="margin:auto 0">
+    <div class="med">Observa.<br>Detecta.<br>Prioriza.</div>
+    <div class="barra"></div>
+    <div class="gigante nar">Actúa.</div>
+    <div class="med" style="margin-top:22px;opacity:.55">Mide. Aprende.</div>
   </div>
   <div class="pie">No necesitas un agente por herramienta. Necesitas <b>cabeza donde tu negocio pierde rendimiento</b>.</div>
 </div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
 <div class="page tinta"><div class="in">
   <div class="kick">Qualivo</div>
-  <div style="margin-top:auto;margin-bottom:auto">
+  <div style="margin:auto 0">
     <div class="final">Encontramos<br>la fuga.<br><span class="nar">Ponemos un agente<br>justo ahí.</span></div>
-    <div class="sub" style="margin-top:54px"><b>No sustituimos tu sistema comercial.<br>Lo agentizamos.</b></div>
   </div>
-</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+</div>
+<div class="sangre" style="bottom:108px;padding:30px 56px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.1">No sustituimos tu sistema.<br>Lo agentizamos.</div>
+<div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
