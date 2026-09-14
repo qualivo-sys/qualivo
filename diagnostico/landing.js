@@ -37,6 +37,59 @@
     return valor('inversion') >= 1;
   }
 
+  // Medicion de entrada al formulario. El evento diagnostico_paso1 se dispara
+  // cuando ya se han contestado las cuatro preguntas, asi que mide «lo ha
+  // completado», no «lo ha empezado». Sin estos tres, un cero de inicios en
+  // cuarenta visitas puede querer decir tres cosas distintas: que no llegan al
+  // formulario, que llegan y no lo abren, o que lo empiezan y lo dejan a mitad.
+  // Son tres problemas con tres arreglos distintos.
+  (function medirEntrada() {
+    var visto = false, empezado = false, ultimo = '', enviado = false;
+
+    function marca(evento, extra) {
+      if (window.qvTrack) window.qvTrack(evento, extra || {});
+    }
+
+    if (window.IntersectionObserver) {
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting && !visto) {
+            visto = true;
+            marca('diagnostico_form_view', {});
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      obs.observe(f);
+    }
+
+    // Primera interaccion real con cualquier campo, sea del paso que sea.
+    ['focusin', 'change'].forEach(function (tipo) {
+      f.addEventListener(tipo, function (ev) {
+        var n = ev.target && ev.target.name;
+        if (!n) return;
+        ultimo = n;
+        if (!empezado) { empezado = true; marca('diagnostico_form_start', {}); }
+      });
+    });
+
+    // Se marca como completado cuando se manda de verdad, para no contar como
+    // abandono a quien termina.
+    f.addEventListener('qv:enviado', function () { enviado = true; });
+
+    // El abandono se manda al irse, no antes. pagehide es el unico que llega
+    // con fiabilidad en movil: beforeunload no se dispara en iOS.
+    function alSalir() {
+      if (!empezado || enviado) return;
+      enviado = true; // que no salga dos veces
+      marca('diagnostico_form_abandon', { ultimo_campo: ultimo || 'ninguno' });
+    }
+    window.addEventListener('pagehide', alSalir);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') alSalir();
+    });
+  })();
+
   document.getElementById('b1').addEventListener('click', function () {
     e1.hidden = true;
     var faltan = ['sector', 'equipo', 'inversion', 'web'].filter(function (n) {
@@ -86,6 +139,7 @@
       // El mismo identificador que usa el servidor en la Conversions API, para
       // que Meta deduplique en vez de contar el lead dos veces.
       if (window.qvTrack) window.qvTrack('diagnostico_lead', { evento_id: 'diag-' + datos.email });
+      f.dispatchEvent(new Event('qv:enviado'));
       calendario();
       ver(p3);
     }).catch(function () {

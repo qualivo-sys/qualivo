@@ -53,6 +53,11 @@
     diagnostico_solicitado: ['track', 'Contact'],
     // Landing /diagnostico/. Sin esto el píxel nunca ve un Lead de la landing y
     // una campaña optimizada a Lead aprende de un evento que no ocurre.
+    // Los tres de entrada al formulario. Sin ellos no se puede distinguir si la
+    // gente no llega al formulario, llega y no lo abre, o lo empieza y lo deja.
+    diagnostico_form_view: ['trackCustom', 'DiagnosticoFormView'],
+    diagnostico_form_start: ['trackCustom', 'DiagnosticoFormStart'],
+    diagnostico_form_abandon: ['trackCustom', 'DiagnosticoFormAbandon'],
     diagnostico_paso1: ['trackCustom', 'DiagnosticoPaso1'],
     diagnostico_lead: ['track', 'Lead'],
     diagnostico_leadform_agenda: ['trackCustom', 'DiagnosticoAgenda'],
