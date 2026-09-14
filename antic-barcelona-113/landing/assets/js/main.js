@@ -110,10 +110,15 @@
   }
 
   /* ---------- Seguimiento (píxel listo, sin disparar sin consentimiento) ---------- */
+  window.__ab113_cola = window.__ab113_cola || [];
   window.ab113 = {
     track: function (name, params) {
+      var id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
       if (typeof fbq === 'function') {
-        fbq('track', name, params || {}, { eventID: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())) });
+        fbq('track', name, params || {}, { eventID: id });
+      } else if (window.ab113Consent && !window.ab113Consent.concedido()) {
+        // Sin consentimiento aún: se guarda y se envía si el usuario acepta.
+        if (window.__ab113_cola.length < 20) window.__ab113_cola.push({ name: name, params: params || {}, id: id });
       }
       if (typeof gtag === 'function') gtag('event', name, params || {});
       try { console.debug('[ab113] evento', name, params || {}); } catch (e) {}

@@ -370,3 +370,24 @@ section{position:relative}
   .rv-img::after{display:none}.rv-img img{transform:none}
   .grain{display:none}
 }
+
+/* ---------- Aviso de cookies ---------- */
+.cookiebar{
+  position:fixed;left:0;right:0;bottom:0;z-index:9990;
+  background:rgba(20,16,13,.97);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border-inverse);
+  transform:translateY(100%);transition:transform .6s var(--ease-out);
+}
+.cookiebar.in{transform:none}
+.cookiebar__in{
+  max-width:var(--max);margin:0 auto;padding:20px var(--gutter);
+  display:flex;gap:clamp(16px,3vw,40px);align-items:center;flex-wrap:wrap;justify-content:space-between;
+}
+.cookiebar p{
+  font-size:13.5px;line-height:1.6;color:var(--text-inverse-muted);
+  margin:0;max-width:62ch;flex:1 1 320px;
+}
+.cookiebar a{color:var(--oak-400);text-decoration:underline;text-underline-offset:2px}
+.cookiebar__btns{display:flex;gap:10px;flex-wrap:wrap;flex:0 0 auto}
+.cookiebar .btn{padding:.8em 1.5em;font-size:12px}
+.cookiebar .btn--ghost{border-color:var(--border-inverse);color:var(--paper-100)}
