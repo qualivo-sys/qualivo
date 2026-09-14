@@ -1,5 +1,26 @@
 # Borradores de las respuestas atrasadas · 14-sep-2026
 
+> **CORRECCIÓN del 14-sep, antes de enviar nada.** Este documento nació diciendo
+> que había seis respuestas sin contestar. **Es falso.** Al comprobar el historial
+> de cada hilo antes de enviar, cinco de las seis SÍ estaban contestadas, y
+> rápido: Jelen el 10-ago (dos días después de preguntar), Víctor el 9-sep (al
+> día siguiente), Antonio, Carvajalinos y Mónica el 17 y 18 de agosto.
+>
+> El error vino de leer solo las respuestas entrantes del informe de Smartlead y
+> no el hilo completo. Lo que en realidad tenemos no son respuestas sin
+> contestar: son **conversaciones que se quedaron paradas porque el lead no
+> volvió a escribir**. Eso es otro problema y pide otro mensaje, no una disculpa
+> por tardar.
+>
+> **La única que nunca se contestó es Lara**, que preguntó de dónde salió su
+> email hace 27 días. Esa sí sigue viva y sigue siendo la urgente.
+>
+> Los cinco borradores de abajo que empiezan disculpándose por la tardanza NO
+> deben enviarse tal cual: dirían una mentira comprobable en el propio hilo.
+> Quedan aquí como registro, tachados en la práctica.
+
+---
+
 Todo esto lleva entre 6 y 63 días sin contestar. Ninguno se envía sin el ok de
 Maikel. Van en el mismo hilo, desde el mismo buzón que escribió.
 
@@ -8,7 +29,7 @@ responder exactamente lo que preguntaron, y un solo siguiente paso.
 
 ---
 
-## 1 · Jelen Colak · My Language Coach · preguntó el 8-ago (37 días)
+## 1 · Jelen Colak · My Language Coach · NO ENVIAR (contestada el 10-ago)
 **Dijo:** "Suena interesante, pero antes de nada me gustaría saber cómo cobras por
 tu trabajo, me lo podrías explicar por favor?" · dejó móvil 650926098
 **Campaña 3608540 · lead 4291894278**
@@ -35,7 +56,7 @@ cifra: la regla es darlo solo si lo piden, y lo pidió.
 
 ---
 
-## 2 · Víctor González · AV Energías · pidió propuesta el 8-sep (6 días)
+## 2 · Víctor González · AV Energías · NO ENVIAR (contestada el 9-sep)
 **Dijo:** "Si tienes alguna propuesta mándamela por mail."
 **Campaña 3767479 · lead 4328296448**
 
@@ -62,7 +83,7 @@ cifra: la regla es darlo solo si lo piden, y lo pidió.
 
 ---
 
-## 3 · Antonio Calviño · pasó sus dos webs el 13-ago (32 días)
+## 3 · Antonio Calviño · NO ENVIAR (contestada el 17-ago)
 **Dijo:** "Son academiakaizen.net y dojoikigai.com" — respondiendo a la oferta de
 radiografía gratuita.
 **Campaña 3785391 · lead 4325310394**
@@ -85,7 +106,7 @@ hay que hacer la radiografía de verdad antes de volver a escribirle.
 
 ---
 
-## 4 · Carvajalinos · pidió info el 14-ago (31 días)
+## 4 · Carvajalinos · NO ENVIAR (contestada el 17-ago)
 **Dijo:** "Envíanos más info"
 **Campaña 3785391 · lead 4325310436**
 
@@ -104,7 +125,7 @@ hay que hacer la radiografía de verdad antes de volver a escribirle.
 
 ---
 
-## 5 · Mónica · Mawah Assessors · 15-ago (30 días) · es timing, no rechazo
+## 5 · Mónica · Mawah Assessors · NO ENVIAR (contestada el 18-ago con un plan)
 **Dijo:** "Me parece una opción razonable. La verdad es que la situación es
 complicada y eso hace que la inversión la tengamos que reducir."
 **Campaña 3772173 · lead 4305992914**
@@ -125,7 +146,7 @@ complicada y eso hace que la inversión la tengamos que reducir."
 
 ---
 
-## 6 · Lara · 18-ago (27 días) · pregunta de procedencia de datos
+## 6 · Lara · 18-ago (27 días) · LA ÚNICA REAL · pendiente de enviar
 **Dijo:** "¿Cómo adquiriste mi mail?"
 **Campaña 3785391 · lead 4325310511**
 
