@@ -699,7 +699,11 @@ export interface ResumenDeudas {
   pctIngresos: number | null;
   /** Ahorro menos deuda: el numero que de verdad dice como estas. */
   patrimonio: number | null;
-  /** La ultima en terminar, o null. */
+  /**
+   * La ultima en terminar, o null. Es null tambien si alguna no se acaba
+   * nunca: decir "la ultima en agosto de 2028" habiendo una que no se
+   * amortiza seria dar por hecho un final que no existe.
+   */
   ultimoFin: string | null;
   /** Cual conviene atacar primero: la mas cara, no la mas grande. */
   masCara: LineaDeuda | null;
@@ -770,7 +774,7 @@ export function resumenDeudas(datos: {
     patrimonio: datos.ahorrado !== null && datos.ahorrado !== undefined
       ? Math.round((datos.ahorrado - pendiente) * 100) / 100
       : null,
-    ultimoFin: conFin.length ? conFin[conFin.length - 1] : null,
+    ultimoFin: deudas.some((d) => d.nuncaAcaba) || !conFin.length ? null : conFin[conFin.length - 1],
     // La mas cara por TAE, no la mas grande: es la que mas te cuesta tener viva.
     masCara: deudas.filter((d) => d.tae && d.pendiente > 0).sort((a, b) => (b.tae ?? 0) - (a.tae ?? 0))[0] ?? null,
     alguna: deudas.length > 0,

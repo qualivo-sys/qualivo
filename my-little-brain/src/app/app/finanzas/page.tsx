@@ -25,6 +25,8 @@ import { sesionRequerida } from '@/lib/sesion';
 export const dynamic = 'force-dynamic';
 
 const eur = (n: number) => `${n.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €`;
+/** Para cuando el signo lo pone el texto de al lado: si no, salia "−-850 €". */
+const eurAbs = (n: number) => eur(Math.abs(n));
 
 const TONOS = {
   bien: 'text-emerald-700 dark:text-emerald-300',
@@ -320,7 +322,7 @@ export default async function PaginaFinanzas({
             {deudas.patrimonio !== null && (
               <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground tabular-nums">
                 Ahorro menos deuda: <strong className={deudas.patrimonio >= 0 ? TONOS.bien : TONOS.alerta}>
-                  {deudas.patrimonio >= 0 ? '+' : '−'}{eur(deudas.patrimonio)}
+                  {deudas.patrimonio >= 0 ? '+' : '−'}{eurAbs(deudas.patrimonio)}
                 </strong>. Es el numero que de verdad mide como estas, no el de la caja.
               </p>
             )}

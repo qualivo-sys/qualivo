@@ -1329,6 +1329,8 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
     movimientos: [], hoy: '2026-09-14', ingresosMes: 2000, ahorrado: 0,
   });
   check('la trampa de la revolving se detecta', revolving.deudas[0].nuncaAcaba === true);
+  check('y con una que no se acaba no se promete un final', revolving.ultimoFin === null, String(revolving.ultimoFin));
+  check('con todas normales si se dice cuando acabas', typeof rd.ultimoFin === 'string', String(rd.ultimoFin));
   const avisoRev = insightsPatrimonio(resumenCuentas([], { hoy: '2026-09-14' }), revolving, []);
   check('y se dice claramente', avisoRev.some((a) => a.tono === 'alerta' && /no llegas ni a cubrir los intereses/.test(a.texto)), JSON.stringify(avisoRev[0]));
 }
