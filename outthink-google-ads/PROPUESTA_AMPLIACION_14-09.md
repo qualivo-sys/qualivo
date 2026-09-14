@@ -30,7 +30,7 @@ un evento en Barcelona.
 | Nivel | Zona | Tiempo a Madrid | Volumen estimado vs Madrid | Conversión esperada | Recomendación |
 |---|---|---|---|---|---|
 | 1 | Corona de 1 h: Toledo, Guadalajara, Segovia, Ávila, Cuenca | ≤ 1 h coche/AVE | +10–15 % | igual que Madrid | **Abrir ya**, en la misma campaña |
-| 2 | Ciudades AVE ≤ 2,5 h: Barcelona, Valencia, Zaragoza, Valladolid, Sevilla, Málaga, Córdoba | 1–2,5 h AVE | +120–150 % (Barcelona ≈ Madrid, Valencia ≈ 0,4×, resto 0,1–0,2×) | 40–60 % de Madrid | **Abrir como campaña aparte** con presupuesto propio y solo keywords "madrid" |
+| 2 | Ciudades AVE ≤ 2,5 h | 1–2,5 h AVE | +120–150 % | 40–60 % de Madrid | **Descartado por Adigital (14-09)** |
 | 3 | Resto de España | > 2,5 h | +40 % adicional, cola larga | < 30 % de Madrid | No, salvo streaming |
 | — | América Latina (la tarde se emite en streaming) | — | grande | solo si hay registro de streaming | Preguntar a Adigital si existe registro online; si sí, es una campaña distinta |
 
@@ -40,10 +40,7 @@ clave en la UI, pegar las 4 keywords "madrid" y filtrar por ciudad.
 
 **Estructura propuesta**
 
-- `OT26_Search` (Madrid + corona 1 h): 50 €/día. Grupo EventosIA + Marca, como está.
-- `OT26_Search_AVE` (7 ciudades, presencia física): 12 €/día, Maximizar clics con tope 2,5 €,
-  4 keywords "madrid" en frase + `evento ia madrid` amplia, RSA con "Madrid, 24 de septiembre"
-  y "A 2,5 h en AVE" como titular opcional. Corte: si a los 60 € no hay registro, se pausa.
+- `OT26_Search` (Madrid + corona 1 h): 62 €/día. Grupo EventosIA + Marca, como está.
 - Negativas y programación (noche y fin de semana al 50 %) copiadas de la actual.
 
 ## 3. PMax optimizada · qué cambia respecto a la de la semana pasada
@@ -63,7 +60,7 @@ la red de socios de búsqueda. Por tanto la optimización va por estas palancas:
 | Ubicaciones | 0 exclusiones al arrancar | **246 apps y 76 sitios ya excluidos** a nivel de cuenta; revisión diaria |
 | Negativas de campaña | outthink, adigital | + reglamento, ley, ai act, peligro, curso, empleo, otros eventos |
 | Red de socios | activa | **desactivada** |
-| Geo | Madrid presencia | Madrid + corona 1 h, presencia |
+| Geo | Madrid presencia | Madrid + corona 1 h, presencia (sin ciudades AVE, decisión de Adigital) |
 | Horario | 24/7 | lunes–viernes 7–22 h |
 | Presupuesto y corte | 16,67 → 26,67 €/día | **15 €/día, 7 días**; se pausa si a los 100 € no hay registro o el CPL supera 60 € |
 
@@ -74,10 +71,9 @@ Expectativa honesta: con 19 registros de señal y sin poder cerrar Display, lo r
 
 | Campaña | €/día | Total | Registros esperados |
 |---|---|---|---|
-| Search Madrid + corona | 50 | 550 | 10–13 |
-| Search AVE (prueba 5 días, luego decidir) | 12 | 60–130 | 1–3 |
+| Search Madrid + corona 1 h | 62 | 680 | 12–15 |
 | PMax optimizada (prueba 7 días) | 15 | 105 | 3–6 |
-| **Total** | **77** | **≈ 850** | **14–22** → cierre en 33–41 registros |
+| **Total** | **77** | **≈ 850** | **15–21** → cierre en 34–40 registros |
 
 Todo se construye en pausado y se activa con OK de Maikel. Lo que no cambia: sin landing
 nueva, la conversión de Search seguirá entre el 2 % y el 3 %; el techo lo pone la página, no
