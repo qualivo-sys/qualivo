@@ -111,7 +111,38 @@
 
   /* ---------- Seguimiento (píxel listo, sin disparar sin consentimiento) ---------- */
   window.__ab113_cola = window.__ab113_cola || [];
+
+  /** Contexto de campaña que acompaña a cada lead, para poder atribuir
+   *  una venta que se cierre semanas después del clic. */
+  function contexto() {
+    var c = {};
+    try {
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function (k) {
+        var v = sessionStorage.getItem(k); if (v) c[k] = v;
+      });
+      var fbc = localStorage.getItem('_fbc');
+      if (fbc) c.fbclid = fbc.split('.').pop();
+    } catch (e) {}
+    return c;
+  }
+
   window.ab113 = {
+    /** Envía el lead al endpoint. Resuelve si se guardó; rechaza si no,
+     *  para que el formulario pueda avisar en vez de fingir que fue bien. */
+    enviarLead: function (datos) {
+      var cuerpo = Object.assign({ consent: true }, contexto(), datos);
+      return fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cuerpo)
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || !j.ok) throw new Error(j.error || 'fallo_envio');
+          if (j.stored === false) console.warn('[ab113] lead aceptado pero NO guardado:', j.motivo);
+          return j;
+        });
+      });
+    },
     track: function (name, params) {
       var id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
       if (typeof fbq === 'function') {

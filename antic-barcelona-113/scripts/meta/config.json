@@ -3,11 +3,11 @@
   "cuenta": {
     "ad_account_id": "act_1581533106801110",
     "page_id": "383844784821243",
-    "instagram_actor_id": "17841469981930192",
     "pixel_id": "1002102899517167",
     "api_version": "v21.0",
     "dsa_beneficiary": "Antic Barcelona 113",
-    "dsa_payor": "Antic Barcelona 113"
+    "dsa_payor": "Antic Barcelona 113",
+    "instagram_user_id": "17841469981930192"
   },
   "landing": "https://antic-barcelona-113.vercel.app",
   "utm": "utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}&utm_id={{campaign.id}}",

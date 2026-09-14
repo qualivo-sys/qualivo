@@ -76,6 +76,9 @@
             <input id="tel" name="tel" type="tel" placeholder="+34 600 000 000" autocomplete="tel">
             <span class="hint">Te escribimos solo para hablar de tu proyecto.</span>
           </div>
+          <input type="text" id="web" name="web" tabindex="-1" autocomplete="off"
+                 aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0">
+          <p id="avisoerr" style="display:none;background:rgba(180,67,47,.15);border:1px solid rgba(224,138,114,.4);color:#E08A72;padding:12px 14px;border-radius:3px;font-size:13.5px;margin-bottom:16px"></p>
           <label class="checkline" style="margin-bottom:24px">
             <input type="checkbox" id="ok" required>
             <span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a> y consiento recibir la guía y comunicaciones sobre mi proyecto.</span>
@@ -108,8 +111,22 @@ document.getElementById('f').addEventListener('submit', function(e){
     tel:    document.getElementById('tel').value.trim()
   };
   try { sessionStorage.setItem('ab113_lead', JSON.stringify(d)); } catch(err){}
-  window.ab113 && ab113.track('Lead', { content_name:'guia_mesa_perfecta', value:0, currency:'EUR' });
-  location.href = '/gracias';
+
+  var btn = e.target.querySelector('button[type=submit]');
+  btn.disabled = true; btn.innerHTML = 'Enviando…';
+
+  ab113.enviarLead({
+    origen: 'guia', nombre: d.nombre, email: d.email, telefono: d.tel,
+    web: document.getElementById('web').value
+  }).then(function(r){
+    window.ab113 && ab113.track('Lead', { content_name:'guia_mesa_perfecta', value:0, currency:'EUR' });
+    location.href = '/gracias';
+  }).catch(function(){
+    btn.disabled = false; btn.innerHTML = 'Descargar la guía <span class="arw">→</span>';
+    var av = document.getElementById('avisoerr');
+    av.textContent = 'No hemos podido guardar tus datos. Prueba otra vez o escríbenos al 665 521 684.';
+    av.style.display = 'block';
+  });
 });
 </script>
 </body>

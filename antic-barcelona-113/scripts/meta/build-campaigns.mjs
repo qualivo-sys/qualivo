@@ -192,7 +192,9 @@ async function main() {
           name: `${adId} | ${c.titular}`,
           object_story_spec: {
             page_id: cfg.cuenta.page_id,
-            ...(cfg.cuenta.instagram_actor_id ? { instagram_actor_id: cfg.cuenta.instagram_actor_id } : {}),
+            // El campo es instagram_user_id y toma el id de la cuenta profesional
+            // de IG. 'instagram_actor_id' espera otro identificador y da error.
+            ...(cfg.cuenta.instagram_user_id ? { instagram_user_id: cfg.cuenta.instagram_user_id } : {}),
             link_data: {
               image_hash: hashes[adId],
               link,

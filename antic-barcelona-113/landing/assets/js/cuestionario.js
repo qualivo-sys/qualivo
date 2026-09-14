@@ -215,6 +215,19 @@
     });
     try { sessionStorage.setItem('ab113_quiz', JSON.stringify({ a: a, tier: q.tier })); } catch (e) {}
 
+    // Enviar al CRM. Si falla, se avisa: un lead cualificado perdido es caro.
+    window.ab113 && ab113.enviarLead({
+      origen: 'cuestionario',
+      nombre: a.nombre, email: a.email, telefono: a.tel,
+      tier: q.tier, pieza: a.pieza, espacio: a.espacio, estilo: a.estilo,
+      medidas: (a.largo && a.ancho) ? a.largo + 'x' + a.ancho + ' cm' + (a.comensales ? ' · ' + a.comensales + ' comensales' : '') : (a.medidasLibres || ''),
+      presupuesto: a.presupuesto || (a.presupuestoHablar ? 'prefiere hablarlo' : ''),
+      plazo: a.plazo, referencias: a.referencias
+    }).catch(function () {
+      var av = document.getElementById('avisoenvio');
+      if (av) av.style.display = 'block';
+    });
+
     var rows = [
       ['Pieza', a.pieza], ['Espacio', a.espacio],
       ['Medidas', (a.largo && a.ancho) ? a.largo + ' × ' + a.ancho + ' cm' + (a.comensales ? ' · ' + a.comensales + ' comensales' : '') : (a.medidasLibres || '—')],
@@ -232,6 +245,7 @@
       '<a class="btn btn--inv" href="https://wa.me/34665521684?text=' + encodeURIComponent('Hola, acabo de completar el cuestionario en la web (' + (a.pieza || 'pieza') + ' para ' + (a.espacio || 'mi espacio') + ').') + '" target="_blank" rel="noopener" id="wabtn">Escribir por WhatsApp ahora <span class="arw">→</span></a>' +
       '<a class="btn btn--ghost" href="/" style="border-color:var(--border-inverse);color:var(--paper-100)">Volver a la web</a></div>' +
 
+      '<p id="avisoenvio" style="display:none;background:rgba(180,67,47,.15);border:1px solid rgba(224,138,114,.4);color:#E08A72;padding:12px 16px;border-radius:3px;font-size:13.5px;max-width:52ch;margin:20px auto 0">No hemos podido guardar tus respuestas. Escríbenos por WhatsApp y lo resolvemos al momento.</p>' +
       '<div class="peek"><h4>Vista interna — no visible para el usuario final</h4>' +
       '<p style="margin-bottom:16px"><span class="tier ' + q.tier + '">' + q.tier + '</span></p>' +
       '<p style="font-size:13.5px;color:var(--text-inverse-muted);margin-bottom:16px">' + esc(q.note) + '</p>' +
