@@ -85,3 +85,39 @@ crearlos no es lo mismo que poder usarlos.
 | `El parámetro "subtipo" no se admite` | `subtype` dejó de aceptarse en v21 | Quitarlo: el tipo se deduce del `event_source` de la regla |
 | `Formato JSON de regla no válido` | Regla de sitio web sin `filter` | El filtro es obligatorio, aunque el público sea "todos los visitantes" |
 | `(#2663) Terms of service has not been accepted` | Faltan las Condiciones de Públicos Personalizados | Las acepta una persona en business.facebook.com/ads/manage/customaudiences/tos/ — **solo afecta a los públicos de sitio web**; los de interacción con IG y Facebook se crean sin ellas |
+
+---
+
+## Campaña de formulario instantáneo
+
+```bash
+META_TOKEN=... node scripts/meta/build-leadform.mjs --apply
+```
+
+Test en paralelo a la de landing, con 8 €/día. El formulario vive dentro de Meta,
+así que **no depende de la captura de leads de la web**: puede rodar aunque el
+Apps Script no esté conectado todavía.
+
+Lleva **cuatro preguntas de cualificación** (pieza, espacio, medidas, plazo) en
+lugar de los tres campos de rigor. Un formulario de tres campos da leads baratos
+y basura; con estas preguntas el comercial recibe lo mismo que por la web y se
+puede comparar la **calidad**, no solo el precio.
+
+| Error | Causa | Solución |
+|---|---|---|
+| `Condiciones del servicio no aceptadas` | La **página de Facebook** no ha aceptado las condiciones de generación de clientes potenciales | Un administrador de la página las acepta en facebook.com/ads/leadgen/tos — es una condición distinta de la de públicos personalizados |
+
+Los leads del formulario **no llegan a la hoja de cálculo**: se descargan del
+Administrador de anuncios, o se conecta una integración (Zapier, Make o el
+webhook de leadgen) para que caigan en el mismo sitio que los de la web.
+
+---
+
+## Publicaciones de Instagram promocionables
+
+`creatividades/instagram-posts-analisis.json` guarda el análisis de las 12
+publicaciones con más alcance de @antic.barcelona113 (128 en total, 123 Reels).
+
+Las seis primeras se comprobaron una a una contra la API: **todas admiten
+promoción**. Se crea la creatividad con `source_instagram_media_id` más
+`instagram_user_id`, no con `object_story_id`.
