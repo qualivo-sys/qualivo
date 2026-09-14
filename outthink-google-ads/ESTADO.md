@@ -621,3 +621,16 @@ conversión y justificación en `landing/ANALISIS_LANDING.md`; HTML en `landing/
   ajustado (keynotes y paneles en vez de talleres donde no cuadraba con el programa).
   Vercel: el equipo qualivo-agency pasó a Pro; filtro de ramas (Ignored Build Step) activo
   para que solo despliegue la rama de producción.
+
+## Día 15 (14-09, lunes) — la conversión cae; frenos aplicados
+Desde el jueves: 244 clics / 412 € / 4 registros (CPL 103 €). El domingo 13-09 Search gastó
+141,6 € (CPC 2,32 €) por 1 registro. Acumulado **1.146 € (57 %), 19 registros, CPL 60 €**;
+Search 17 reg. / 896 €. Restante 854 € → 77,6 €/día (11 días). Conversión de Search: 5,3 % la
+primera semana → 3,0 % la segunda → 1,6 % desde el jueves (saturación del mercado de Madrid +
+consultas cada vez más genéricas). AIAct 59 clics / 121 € / 0 y Compliance 28 / 47 € / 0 desde
+el jueves. Adigital no puede cambiar la landing de momento.
+Aplicado (frenos): **grupos AIAct y ComplianceRiesgo pausados**; **sábado y domingo al 50 %**
+(07–22 h); **tope de CPC 5 → 3 €**; presupuesto 84,45 → **77,60 €/día**; 10 negativas
+(reglamento, ley de ia, peligro, openexpo, merodio, 2027…). Listas RMK: 200 / 24.
+Propuesto a Maikel: test de URL directa al formulario en un segundo anuncio de EventosIA;
+empujar canales propios de Adigital (newsletter/LinkedIn) y el test LinkedIn+Meta.
