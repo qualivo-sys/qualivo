@@ -1254,9 +1254,9 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
 
   // -- Deudas: apuntar la cuota hace bajar la deuda
   const deudasDemo = [
-    { id: 'd1', nombre: 'Coche', tipo: 'prestamo', pendiente: 6000, pendiente_fecha: '2026-08-31', cuota: 200, tae: 6, dia_cobro: 5, ambito: 'personal', nota: null, cerrada: false, creado: '' },
-    { id: 'd2', nombre: 'Tarjeta', tipo: 'tarjeta', pendiente: 1200, pendiente_fecha: '2026-08-31', cuota: 100, tae: 20, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' },
-    { id: 'd3', nombre: 'Cerrada', tipo: 'prestamo', pendiente: 500, pendiente_fecha: '2026-08-31', cuota: 50, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: true, creado: '' },
+    { id: 'd1', nombre: 'Coche', tipo: 'prestamo', pendiente: 6000, pendiente_fecha: '2026-08-31', actualizada: '2026-08-31T12:00:00.000Z', cuota: 200, tae: 6, dia_cobro: 5, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+    { id: 'd2', nombre: 'Tarjeta', tipo: 'tarjeta', pendiente: 1200, pendiente_fecha: '2026-08-31', actualizada: '2026-08-31T12:00:00.000Z', cuota: 100, tae: 20, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+    { id: 'd3', nombre: 'Cerrada', tipo: 'prestamo', pendiente: 500, pendiente_fecha: '2026-08-31', actualizada: '2026-08-31T12:00:00.000Z', cuota: 50, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: true, creado: '' },
   ];
   const pagosDemo = [
     { id: 'p1', fecha: '2026-09-05', tipo: 'gasto', importe: 200, categoria: 'otros', descripcion: 'cuota coche', ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: 'd1', creado: '2026-09-05T10:00:00Z' },
@@ -1274,6 +1274,14 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
   check('la mas cara es por interes, no por tamaño', rd.masCara.nombre === 'Tarjeta', rd.masCara?.nombre);
   check('se sabe en que mes acaba cada una', /^\d{4}-\d{2}$/.test(rd.deudas[0].fin), rd.deudas[0].fin);
   check('y cuanto vas a pagar de intereses', rd.deudas[0].intereses > 0, String(rd.deudas[0].intereses));
+  // Apuntar la deuda y pagar la cuota el MISMO dia tiene que bajarla: con la
+  // fecha a secas el pago caia fuera y parecia que el boton no hacia nada.
+  const hoyMismo = [{ id: 'h1', nombre: 'Recien puesta', tipo: 'prestamo', pendiente: 3000, pendiente_fecha: '2026-09-14', actualizada: '2026-09-14T10:00:00.000Z', cuota: 150, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: false, creado: '' }];
+  const pagoDeHoy = (creado) => [{ id: 'ph', fecha: '2026-09-14', tipo: 'gasto', importe: 150, categoria: 'vivienda', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: 'h1', creado }];
+  const tras = (creado) => resumenDeudas({ deudas: hoyMismo, movimientos: pagoDeHoy(creado), hoy: '2026-09-14' }).deudas[0].pendiente;
+  check('pagar el mismo dia que la apuntas si la baja', tras('2026-09-14T18:00:00.000Z') === 2850, String(tras('2026-09-14T18:00:00.000Z')));
+  check('pero un pago anterior a decir lo que debes ya estaba dentro', tras('2026-09-14T08:00:00.000Z') === 3000, String(tras('2026-09-14T08:00:00.000Z')));
+
   const rdVacio = resumenDeudas({ deudas: [], movimientos: [], hoy: '2026-09-14' });
   check('sin deudas no se inventa nada', rdVacio.alguna === false && rdVacio.pendiente === 0 && rdVacio.pctIngresos === null);
 
@@ -1317,7 +1325,7 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
   const avisos = insightsPatrimonio(cajas, rd, sem);
   check('los avisos salen ordenados y acotados', Array.isArray(avisos) && avisos.length <= 4);
   const revolving = resumenDeudas({
-    deudas: [{ id: 'r1', nombre: 'Revolving', tipo: 'tarjeta', pendiente: 3000, pendiente_fecha: '2026-08-31', cuota: 55, tae: 24, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
+    deudas: [{ id: 'r1', nombre: 'Revolving', tipo: 'tarjeta', pendiente: 3000, pendiente_fecha: '2026-08-31', actualizada: '2026-08-31T12:00:00.000Z', cuota: 55, tae: 24, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
     movimientos: [], hoy: '2026-09-14', ingresosMes: 2000, ahorrado: 0,
   });
   check('la trampa de la revolving se detecta', revolving.deudas[0].nuncaAcaba === true);

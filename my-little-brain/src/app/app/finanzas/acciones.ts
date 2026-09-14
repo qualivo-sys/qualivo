@@ -315,8 +315,9 @@ export async function crearDeuda(datos: FormData) {
     nombre: nombre.slice(0, 80),
     tipo: esTipoDeuda(texto(datos.get('tipo'))),
     pendiente,
-    // La foto es de hoy: los pagos que apuntes a partir de ahora la bajan.
+    // La foto es de ahora: los pagos que apuntes a partir de aqui la bajan.
     pendiente_fecha: hoy,
+    actualizada: new Date().toISOString(),
     cuota: importe(datos.get('cuota')) ?? 0,
     tae: porcentaje(datos.get('tae')),
     dia_cobro: Number.isInteger(dia) && dia >= 1 && dia <= 31 ? dia : null,
@@ -342,7 +343,7 @@ export async function editarDeuda(id: string, datos: FormData) {
     .update({
       ...(nombre ? { nombre: nombre.slice(0, 80) } : {}),
       tipo: esTipoDeuda(texto(datos.get('tipo'))),
-      ...(pendiente !== null ? { pendiente, pendiente_fecha: hoy } : {}),
+      ...(pendiente !== null ? { pendiente, pendiente_fecha: hoy, actualizada: new Date().toISOString() } : {}),
       ...(cuota !== null ? { cuota } : {}),
       tae: porcentaje(datos.get('tae')),
       dia_cobro: Number.isInteger(dia) && dia >= 1 && dia <= 31 ? dia : null,

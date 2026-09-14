@@ -322,6 +322,10 @@ create table if not exists public.finanzas_deudas (
   ambito          text not null default 'personal' check (ambito in ('personal','empresa')),
   nota            text,
   cerrada         boolean not null default false,
+  -- Cuando se fijo 'pendiente' por ultima vez. Hace falta la hora, no solo el
+  -- dia: si apuntas la deuda y pagas la cuota el mismo dia, con la fecha a
+  -- secas el pago cae fuera y la deuda no baja.
+  actualizada     timestamptz not null default now(),
   creado          timestamptz not null default now()
 );
 create index if not exists finanzas_deudas_user on public.finanzas_deudas (user_id, cerrada, creado);

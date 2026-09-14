@@ -721,9 +721,15 @@ export function resumenDeudas(datos: {
   const deudas: LineaDeuda[] = suyas
     .map((d) => {
       // Solo los pagos posteriores a la foto: los de antes ya estan descontados.
-      const pagos = datos.movimientos.filter(
-        (m) => m.deuda_id === d.id && m.tipo === 'gasto' && m.fecha > d.pendiente_fecha,
-      );
+      // Misma regla que la caja: manda la fecha del pago, y para los del mismo
+      // dia que la foto, la hora. Si no, apuntar la deuda y pagar la cuota el
+      // mismo dia no bajaba nada y parecia que el boton no hacia su trabajo.
+      const pagos = datos.movimientos.filter((m) => {
+        if (m.deuda_id !== d.id || m.tipo !== 'gasto') return false;
+        if (m.fecha > d.pendiente_fecha) return true;
+        if (m.fecha < d.pendiente_fecha) return false;
+        return Boolean(d.actualizada && m.creado && m.creado > d.actualizada);
+      });
       const pagado = Math.round(suma(pagos.map((m) => num(m.importe))) * 100) / 100;
       const inicial = num(d.pendiente);
       const pendiente = Math.max(0, Math.round((inicial - pagado) * 100) / 100);

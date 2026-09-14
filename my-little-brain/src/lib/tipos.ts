@@ -360,6 +360,9 @@ export interface Deuda {
   ambito: AmbitoFinanzas;
   nota: string | null;
   cerrada: boolean;
+  /** Cuando se fijo 'pendiente'. Con la hora: si apuntas la deuda y pagas la
+   *  cuota el mismo dia, la fecha a secas dejaria el pago fuera. */
+  actualizada: string;
   creado: string;
 }
 
