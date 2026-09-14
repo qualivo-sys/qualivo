@@ -110,7 +110,14 @@ async function procesarSecuencias(resumen) {
         }
         continue;
       }
-      if (!process.env.RESEND_API_KEY) { resumen.esperando++; continue; }
+      // Sin clave de correo no se puede mandar nada. Contarlo como «esperando»
+      // era mentir: el contacto se queda clavado en este paso para siempre y el
+      // resumen dice que todo va bien. Se registra como error para que salga.
+      if (!process.env.RESEND_API_KEY) {
+        resumen.errores++;
+        console.error('[activacion] falta RESEND_API_KEY: ' + sec.id + '/' + paso.etiqueta + ' no sale para ' + c.id);
+        continue;
+      }
       try {
         const r = await correo(c, paso.asunto(c), paso.html(c));
         if (r.ok) { await A.etiquetar(c.id, [paso.etiqueta]); resumen.email++; }
@@ -236,7 +243,11 @@ module.exports = async function handler(req, res) {
           resumen.errores++; hechos++;
         }
       } else if (paso.tipo === 'email') {
-        if (!process.env.RESEND_API_KEY) { resumen.esperando++; continue; }
+        if (!process.env.RESEND_API_KEY) {
+          resumen.errores++;
+          console.error('[activacion] falta RESEND_API_KEY: el correo ' + paso.indice + ' no sale para ' + c.id);
+          continue;
+        }
         const r = await enviarCorreo(c, paso.indice);
         if (r.ok) { await A.etiquetar(c.id, [M.EMAILS[paso.indice].etiqueta]); resumen.email++; hechos++; }
         else { resumen.errores++; console.error('[activacion] correo', c.id, r.motivo); }
