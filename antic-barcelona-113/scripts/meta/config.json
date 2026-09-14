@@ -66,7 +66,6 @@
           "optimization_goal": "OFFSITE_CONVERSIONS",
           "custom_event_type": "LEAD",
           "billing_event": "IMPRESSIONS",
-          "_audiencias": "Crear a mano en Públicos: web 180 d, cuestionario abandonado 90 d, IG/FB 365 d, vídeo 50 % 365 d. Excluir conversores 90 d.",
           "targeting": {
             "age_min": 32,
             "age_max": 65,
@@ -88,6 +87,16 @@
             "4B",
             "5A",
             "3A"
+          ],
+          "publicos_incluir": [
+            "RTG | Web · todos 180d",
+            "RTG | Cuestionario sin terminar 90d",
+            "RTG | Guía · vieron la página 90d",
+            "RTG | Instagram · interacción 365d",
+            "RTG | Facebook · interacción 365d"
+          ],
+          "publicos_excluir": [
+            "EXC | Convertidos 90d"
           ]
         }
       ]

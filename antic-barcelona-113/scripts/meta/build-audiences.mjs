@@ -12,7 +12,7 @@ const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/meta/config.json
 const APPLY = process.argv.includes('--apply');
 const TOKEN = process.env.META_TOKEN;
 const ACT = cfg.cuenta.ad_account_id, PIXEL = cfg.cuenta.pixel_id;
-const PAGE = cfg.cuenta.page_id, IG = cfg.cuenta.instagram_actor_id;
+const PAGE = cfg.cuenta.page_id, IG = cfg.cuenta.instagram_user_id;
 const BASE = `https://graph.facebook.com/${cfg.cuenta.api_version}`;
 const DIA = 86400;
 const dormir = ms => new Promise(r => setTimeout(r, ms));
