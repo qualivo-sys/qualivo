@@ -343,7 +343,7 @@ check('con objetivo de mantener, corrige la deriva', mantener && mantener.delta 
 
 // ── 13. Finanzas: control de caja ──────────────────────────────────────
 const { resumenFinanzas, insightsFinanzas, revisionSemana, mesAnteriorA, diasDelMes } = await import(`${L}/motor/finanzas.js`);
-const mov = (fecha, importe, categoria, extra = {}) => ({ id: fecha + categoria + importe, fecha, tipo: 'gasto', importe, categoria, descripcion: null, ambito: 'personal', impulsivo: false, sobre_id: null, fuente: 'manual', creado: '', ...extra });
+const mov = (fecha, importe, categoria, extra = {}) => ({ id: fecha + categoria + importe, fecha, tipo: 'gasto', importe, categoria, descripcion: null, ambito: 'personal', impulsivo: false, sobre_id: null, deuda_id: null, fuente: 'manual', creado: `${fecha}T12:00:00.000Z`, ...extra });
 const movimientos = [
   mov('2026-09-02', 18, 'restaurantes'),
   mov('2026-09-03', 94, 'restaurantes', { impulsivo: true }),
@@ -359,7 +359,7 @@ const presupuestos = [
   { id: '2', categoria: 'alimentacion', importe: 400, activo: true },
   { id: '3', categoria: 'ocio', importe: 50, activo: true },
 ];
-const ajustesFin = { user_id: 'u1', caja_inicial: 3000, caja_fecha: '2026-09-01', ahorro_mes: 300, caja_minima: 5000, moneda: 'EUR', activo: true, actualizado: '' };
+const ajustesFin = { user_id: 'u1', caja_inicial: 3000, caja_fecha: '2026-09-01', ahorro_mes: 300, caja_minima: 5000, moneda: 'EUR', activo: true, actualizado: '2026-09-01T00:00:00.000Z' };
 const resFin = resumenFinanzas({ movimientos, presupuestos, ingresosPrevistos: [{ id: 'i1', nombre: 'Nomina', importe: 2040, ambito: 'personal', activo: true }], ajustes: ajustesFin, hoy: '2026-09-10' });
 check('suma gastos e ingresos del mes y el neto', resFin.gastos === 417 && resFin.ingresos === 2040 && resFin.neto === 1623, JSON.stringify({ g: resFin.gastos, i: resFin.ingresos, n: resFin.neto }));
 check('la caja parte de la referencia y suma lo movido despues', resFin.caja === 3000 + 2040 - 417, String(resFin.caja));
@@ -1169,6 +1169,161 @@ Falso.ultimo.falla('no-speech');
 check('quedarse callado un momento no es un error', err3 === '', err3);
 Falso.ultimo.falla('cualquier-cosa-rara');
 check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test(err3), err3);
+
+// ── 26 bis. La caja y el saldo anotado: no contar dos veces ───────────
+// En su propio bloque: asi sus nombres no pueden chocar con los de otra
+// seccion. Este fichero es un unico ambito enorme.
+{
+  // Si el martes miras el banco y pone 3.000, el cafe del lunes YA esta ahi
+  // aunque lo apuntes el jueves. Restarlo otra vez seria contarlo dos veces.
+  const ajFoto = { user_id: 'u1', caja_inicial: 3000, caja_fecha: '2026-09-10', ahorro_mes: null, caja_minima: null, moneda: 'EUR', activo: true, actualizado: '2026-09-10T09:00:00.000Z' };
+  const movFoto = (id, fecha, creado, extra = {}) => ({ id, fecha, tipo: 'gasto', importe: 100, categoria: 'otros', descripcion: null, ambito: 'personal', impulsivo: false, sobre_id: null, deuda_id: null, fuente: 'manual', creado, ...extra });
+  const caja = (ms) => resumenFinanzas({ movimientos: ms, presupuestos: [], ingresosPrevistos: [], ajustes: ajFoto, hoy: '2026-09-14' }).caja;
+
+  check('un gasto anterior a la foto ya estaba dentro', caja([movFoto('a', '2026-09-08', '2026-09-08T12:00:00.000Z')]) === 3000);
+  check('y aunque lo apuntes despues, sigue estando dentro', caja([movFoto('b', '2026-09-08', '2026-09-13T20:00:00.000Z')]) === 3000);
+  check('un gasto posterior si resta', caja([movFoto('c', '2026-09-12', '2026-09-12T12:00:00.000Z')]) === 2900);
+  check('el del mismo dia, apuntado antes de mirar el banco, ya estaba', caja([movFoto('d', '2026-09-10', '2026-09-10T08:00:00.000Z')]) === 3000);
+  check('el del mismo dia, apuntado despues, resta', caja([movFoto('e', '2026-09-10', '2026-09-10T21:00:00.000Z')]) === 2900);
+  check('lo de mañana todavia no ha pasado', caja([movFoto('f', '2026-09-20', '2026-09-14T10:00:00.000Z')]) === 3000);
+
+  // Si ha dicho en que cuentas tiene el dinero, manda la suma de las cuentas
+  const cuentasCaja = [
+    { id: 'x1', nombre: 'Corriente', tipo: 'corriente', saldo: 1000, ahorro: false, ambito: 'personal', orden: 0, creado: '' },
+    { id: 'x2', nombre: 'Ahorro', tipo: 'ahorro', saldo: 4000, ahorro: true, ambito: 'personal', orden: 1, creado: '' },
+    { id: 'x3', nombre: 'La SL', tipo: 'corriente', saldo: 9000, ahorro: false, ambito: 'empresa', orden: 2, creado: '' },
+  ];
+  const conCuentas = resumenFinanzas({ movimientos: [], presupuestos: [], ingresosPrevistos: [], ajustes: ajFoto, cuentas: cuentasCaja, hoy: '2026-09-14' });
+  check('con cuentas, la caja es la suma de las cuentas', conCuentas.caja === 5000, String(conCuentas.caja));
+  check('y la de la empresa no se cuela', conCuentas.caja !== 14000);
+  const sinCuentas = resumenFinanzas({ movimientos: [], presupuestos: [], ingresosPrevistos: [], ajustes: ajFoto, cuentas: [], hoy: '2026-09-14' });
+  check('sin cuentas se sigue usando el numero de siempre', sinCuentas.caja === 3000, String(sinCuentas.caja));
+
+  // El gasto de empresa no puede reventar el presupuesto personal
+  const presuPers = [{ id: 'p', categoria: 'otros', importe: 200, activo: true }];
+  const mezcla = [
+    movFoto('g1', '2026-09-12', '2026-09-12T12:00:00.000Z', { importe: 150 }),
+    movFoto('g2', '2026-09-12', '2026-09-12T12:00:00.000Z', { importe: 3000, ambito: 'empresa' }),
+  ];
+  const soloPers = resumenFinanzas({ movimientos: mezcla, presupuestos: presuPers, ingresosPrevistos: [], ajustes: ajFoto, hoy: '2026-09-14' });
+  check('una factura de la empresa no revienta tu presupuesto', soloPers.categorias[0].estado === 'bien' && soloPers.gastos === 150, JSON.stringify({ e: soloPers.categorias[0].estado, g: soloPers.gastos }));
+  const todoJunto = resumenFinanzas({ movimientos: mezcla, presupuestos: presuPers, ingresosPrevistos: [], ajustes: ajFoto, hoy: '2026-09-14', ambito: 'todo' });
+  check('pero si lo pides todo junto, sale todo', todoJunto.gastos === 3150, String(todoJunto.gastos));
+  const soloEmp = resumenFinanzas({ movimientos: mezcla, presupuestos: presuPers, ingresosPrevistos: [], ajustes: ajFoto, hoy: '2026-09-14', ambito: 'empresa' });
+  check('y mirando solo la empresa, solo la empresa', soloEmp.gastos === 3000, String(soloEmp.gastos));
+}
+
+// ── 27. Dinero: cajas, semanas, categorias y deudas ───────────────────
+// En su propio bloque: asi sus nombres no pueden chocar con los de otra
+// seccion. Es lo que hacia reventar el fichero al crecer.
+{
+  const fin27 = await import(`${L}/motor/finanzas.js`);
+  const {
+    resumenCuentas, porSemanas, gastoPorCategoria, resumenDeudas, mesesParaLiquidar, insightsPatrimonio,
+  } = fin27;
+
+  // -- Cajas: de donde sale el ahorro
+  const cuentasDemo = [
+    { id: 'c1', nombre: 'Nomina', tipo: 'corriente', saldo: 2000, ahorro: false, ambito: 'personal', orden: 0 },
+    { id: 'c2', nombre: 'Fondo de emergencia', tipo: 'ahorro', saldo: 6000, ahorro: true, ambito: 'personal', orden: 1 },
+    { id: 'c3', nombre: 'Indexados', tipo: 'inversion', saldo: 4000, ahorro: true, ambito: 'personal', orden: 2 },
+    { id: 'c4', nombre: 'Cuenta de la SL', tipo: 'corriente', saldo: 9000, ahorro: false, ambito: 'empresa', orden: 3 },
+  ];
+  const cajas = resumenCuentas(cuentasDemo, { hoy: '2026-09-14', fechaFoto: '2026-09-01' });
+  check('lo de la empresa no entra en lo personal', cajas.total === 12000, String(cajas.total));
+  check('el ahorro sale solo de las cajas marcadas', cajas.ahorrado === 10000, String(cajas.ahorrado));
+  check('y se puede decir de que cajas sale', cajas.cajasDeAhorro.map((c) => c.nombre).sort().join('+') === 'Fondo de emergencia+Indexados');
+  check('lo disponible es el resto', cajas.disponible === 2000, String(cajas.disponible));
+  check('la caja mas gorda va primero', cajas.cuentas[0].nombre === 'Fondo de emergencia');
+  check('y se sabe cuanto pesa cada una', cajas.cuentas[0].pct === 50, String(cajas.cuentas[0].pct));
+  check('se cuentan los dias desde la foto', cajas.diasDesdeFoto === 13, String(cajas.diasDesdeFoto));
+  const rcEmp = resumenCuentas(cuentasDemo, { hoy: '2026-09-14', fechaFoto: null, ambito: 'empresa' });
+  check('y mirando la empresa solo sale la empresa', rcEmp.total === 9000 && rcEmp.diasDesdeFoto === null);
+
+  // -- Intereses: la cuenta que hace todo el mundo esta mal
+  check('sin intereses, dividir y redondear', mesesParaLiquidar(1000, 100, 0) === 10);
+  check('sin TAE conocida se hace lo mismo', mesesParaLiquidar(1000, 100, null) === 10);
+  // 3.000 al 18 % pagando 150: dividiendo salen 20 meses, con intereses son 24
+  const conIva = mesesParaLiquidar(3000, 150, 18);
+  check('con un 18 % de TAE faltan mas meses de los que parece', conIva === 24, String(conIva));
+  check('y son mas que la cuenta a pelo', conIva > Math.ceil(3000 / 150));
+  // Revolving: 3.000 al 24 % pagando 55 al mes. Los intereses del primer mes son 60.
+  check('si la cuota no cubre ni los intereses, no se acaba nunca', mesesParaLiquidar(3000, 55, 24) === null);
+  check('sin cuota no se puede saber', mesesParaLiquidar(1000, 0, 5) === null);
+  check('lo ya pagado son cero meses', mesesParaLiquidar(0, 100, 5) === 0);
+
+  // -- Deudas: apuntar la cuota hace bajar la deuda
+  const deudasDemo = [
+    { id: 'd1', nombre: 'Coche', tipo: 'prestamo', pendiente: 6000, pendiente_fecha: '2026-08-31', cuota: 200, tae: 6, dia_cobro: 5, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+    { id: 'd2', nombre: 'Tarjeta', tipo: 'tarjeta', pendiente: 1200, pendiente_fecha: '2026-08-31', cuota: 100, tae: 20, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+    { id: 'd3', nombre: 'Cerrada', tipo: 'prestamo', pendiente: 500, pendiente_fecha: '2026-08-31', cuota: 50, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: true, creado: '' },
+  ];
+  const pagosDemo = [
+    { id: 'p1', fecha: '2026-09-05', tipo: 'gasto', importe: 200, categoria: 'otros', descripcion: 'cuota coche', ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: 'd1', creado: '2026-09-05T10:00:00Z' },
+    // Este es ANTERIOR a la foto: ya estaba descontado, no puede restar otra vez
+    { id: 'p2', fecha: '2026-08-05', tipo: 'gasto', importe: 200, categoria: 'otros', descripcion: 'cuota vieja', ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: 'd1', creado: '2026-08-05T10:00:00Z' },
+  ];
+  const rd = resumenDeudas({ deudas: deudasDemo, movimientos: pagosDemo, hoy: '2026-09-14', ingresosMes: 2000, ahorrado: 10000 });
+  check('las deudas cerradas no cuentan', rd.deudas.length === 2);
+  check('apuntar la cuota baja la deuda', rd.deudas[0].pendiente === 5800, String(rd.deudas[0].pendiente));
+  check('un pago anterior a la foto no se descuenta dos veces', rd.deudas[0].pagado === 200, String(rd.deudas[0].pagado));
+  check('el total pendiente suma lo de hoy', rd.pendiente === 7000, String(rd.pendiente));
+  check('la cuota del mes es lo comprometido', rd.cuotaMes === 300, String(rd.cuotaMes));
+  check('se sabe que parte del sueldo se va en cuotas', rd.pctIngresos === 15, String(rd.pctIngresos));
+  check('el patrimonio es ahorro menos deuda', rd.patrimonio === 3000, String(rd.patrimonio));
+  check('la mas cara es por interes, no por tamaño', rd.masCara.nombre === 'Tarjeta', rd.masCara?.nombre);
+  check('se sabe en que mes acaba cada una', /^\d{4}-\d{2}$/.test(rd.deudas[0].fin), rd.deudas[0].fin);
+  check('y cuanto vas a pagar de intereses', rd.deudas[0].intereses > 0, String(rd.deudas[0].intereses));
+  const rdVacio = resumenDeudas({ deudas: [], movimientos: [], hoy: '2026-09-14' });
+  check('sin deudas no se inventa nada', rdVacio.alguna === false && rdVacio.pendiente === 0 && rdVacio.pctIngresos === null);
+
+  // -- El mes por semanas
+  const movSem = [
+    { id: 'm1', fecha: '2026-09-01', tipo: 'gasto', importe: 100, categoria: 'restaurantes', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' },
+    { id: 'm2', fecha: '2026-09-10', tipo: 'gasto', importe: 70, categoria: 'alimentacion', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' },
+    { id: 'm3', fecha: '2026-09-12', tipo: 'ingreso', importe: 2000, categoria: 'otros', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' },
+    { id: 'm4', fecha: '2026-09-12', tipo: 'gasto', importe: 900, categoria: 'otros', descripcion: 'factura', ambito: 'empresa', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' },
+  ];
+  // Septiembre de 2026 empieza en martes: la primera semana tiene 6 dias (1-6)
+  const sem = porSemanas(movSem, '2026-09', { hoy: '2026-09-14', presupuestoMes: 900 });
+  check('el mes se parte en semanas naturales', sem.length === 5, String(sem.length));
+  check('la primera semana cojea y se sabe', sem[0].dias === 6 && sem[0].desde === '2026-09-01' && sem[0].hasta === '2026-09-06');
+  check('las semanas enteras tienen siete dias', sem[1].dias === 7 && sem[1].desde === '2026-09-07');
+  check('los dias de todas las semanas suman el mes', sem.reduce((a, x) => a + x.dias, 0) === 30);
+  check('el gasto cae en su semana', sem[0].gastos === 100 && sem[1].gastos === 70, `${sem[0].gastos}/${sem[1].gastos}`);
+  check('lo de la empresa no ensucia lo personal', sem[1].gastos === 70);
+  check('los ingresos van aparte', sem[1].ingresos === 2000);
+  check('se compara por dia, no por total', sem[0].porDia === Math.round((100 / 6) * 100) / 100, String(sem[0].porDia));
+  check('el limite se reparte a prorrata de los dias', sem[0].limite === Math.round((900 / 30) * 6), String(sem[0].limite));
+  check('se sabe en que semana estas', sem.filter((x) => x.encurso).length === 1 && sem[2].encurso === true);
+  check('la semana en curso no se marca como pasada', sem[2].pasado === false);
+  const semTodo = porSemanas(movSem, '2026-09', { hoy: '2026-09-14', ambito: 'todo' });
+  check('mirando todo si sale lo de la empresa', semTodo[1].gastos === 970, String(semTodo[1].gastos));
+
+  // -- En que se va el dinero
+  const gc = gastoPorCategoria(
+    [...movSem,
+     { id: 'v1', fecha: '2026-08-10', tipo: 'gasto', importe: 200, categoria: 'restaurantes', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' },
+     { id: 'v2', fecha: '2026-08-10', tipo: 'gasto', importe: 10, categoria: 'alimentacion', descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '' }],
+    '2026-09',
+  );
+  check('solo gastos, y los ingresos fuera', gc.total === 170, String(gc.total));
+  check('lo mas gordo primero', gc.lineas[0].id === 'restaurantes');
+  check('se sabe que parte del mes es cada cosa', gc.lineas[0].pct === 59, String(gc.lineas[0].pct));
+  check('se compara con el mes pasado', gc.lineas[0].cambio === -50, String(gc.lineas[0].cambio));
+  check('con cuatro duros el mes pasado no se calcula el cambio', gc.lineas[1].cambio === null, String(gc.lineas[1].cambio));
+
+  // -- Lo que hay que avisar
+  const avisos = insightsPatrimonio(cajas, rd, sem);
+  check('los avisos salen ordenados y acotados', Array.isArray(avisos) && avisos.length <= 4);
+  const revolving = resumenDeudas({
+    deudas: [{ id: 'r1', nombre: 'Revolving', tipo: 'tarjeta', pendiente: 3000, pendiente_fecha: '2026-08-31', cuota: 55, tae: 24, dia_cobro: 1, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
+    movimientos: [], hoy: '2026-09-14', ingresosMes: 2000, ahorrado: 0,
+  });
+  check('la trampa de la revolving se detecta', revolving.deudas[0].nuncaAcaba === true);
+  const avisoRev = insightsPatrimonio(resumenCuentas([], { hoy: '2026-09-14' }), revolving, []);
+  check('y se dice claramente', avisoRev.some((a) => a.tono === 'alerta' && /no llegas ni a cubrir los intereses/.test(a.texto)), JSON.stringify(avisoRev[0]));
+}
 
 console.log(fallos ? `\n${fallos} COMPROBACIONES FALLIDAS` : '\nTodo correcto.');
 process.exit(fallos ? 1 : 0);

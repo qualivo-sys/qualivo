@@ -5,7 +5,7 @@ import { cargarPanel, cargarPerfil } from '@/lib/datos';
 import { MODELO, clienteIA, hayClaveIA, parametrosModelo } from '@/lib/ia/cliente';
 import { construirContexto } from '@/lib/ia/contexto';
 import { cargarFinanzas, cargarMente } from '@/lib/datos';
-import { resumenFinanzas } from '@/lib/motor/finanzas';
+import { resumenCuentas, resumenDeudas, resumenFinanzas } from '@/lib/motor/finanzas';
 import { emocion, patronesEmocionales } from '@/lib/motor/emociones';
 import { HERRAMIENTAS, ejecutarHerramienta } from '@/lib/ia/herramientas';
 import { anotarUso, cuota } from '@/lib/ia/limites';
@@ -105,7 +105,22 @@ export async function POST(peticion: Request) {
   const contexto = construirContexto(
     panel,
     finanzas.activo
-      ? { resumen: resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy }), ajustes: finanzas.ajustes }
+      ? {
+          // 'todo' a proposito: el coach tiene que poder responder por lo
+          // personal y por lo de la empresa; en la app se filtra al mirar.
+          resumen: resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy: panel.hoy, ambito: 'todo' }),
+          ajustes: finanzas.ajustes,
+          cuentas: resumenCuentas(finanzas.cuentas, {
+            ambito: 'todo', fechaFoto: finanzas.ajustes?.caja_fecha ?? null, hoy: panel.hoy,
+          }),
+          deudas: resumenDeudas({
+            deudas: finanzas.deudas, movimientos: finanzas.movimientos, hoy: panel.hoy, ambito: 'todo',
+            ingresosMes: finanzas.ingresos.filter((i) => i.activo !== false).reduce((t, i) => t + Number(i.importe), 0) || null,
+            ahorrado: finanzas.cuentas.length
+              ? finanzas.cuentas.filter((c) => c.ahorro).reduce((t, c) => t + Number(c.saldo), 0)
+              : null,
+          }),
+        }
       : null,
     {
       hojasAbiertas: mente.hojas.filter((h) => !h.cerrada).map((h) => ({ texto: h.texto, tema: h.tema, creada: h.creada })),

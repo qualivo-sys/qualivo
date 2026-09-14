@@ -279,6 +279,57 @@ create index if not exists finanzas_sobres_user on public.finanzas_sobres (user_
 alter table public.finanzas_movimientos
   add column if not exists sobre_id uuid references public.finanzas_sobres on delete set null;
 
+-- Donde vive el dinero. La caja no es un numero: son cuentas, y no es lo
+-- mismo tener 6.000 € repartidos en la corriente que 5.000 en un fondo de
+-- emergencia que no vas a tocar. Lo que marcas como ahorro se lee aparte.
+--
+-- Los saldos son una foto a una fecha (finanzas_ajustes.caja_fecha, la misma
+-- para todas), no un saldo vivo: no hay banco detras. A partir de esa foto se
+-- suman y restan los apuntes. Por eso se actualizan todas a la vez.
+create table if not exists public.finanzas_cuentas (
+  id      uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users on delete cascade,
+  nombre  text not null,
+  tipo    text not null default 'corriente'
+          check (tipo in ('corriente','ahorro','efectivo','inversion','otro')),
+  saldo   numeric(12,2) not null default 0,
+  -- Si cuenta como dinero ahorrado o como dinero del dia a dia.
+  ahorro  boolean not null default false,
+  ambito  text not null default 'personal' check (ambito in ('personal','empresa')),
+  orden   int not null default 0,
+  creado  timestamptz not null default now()
+);
+create index if not exists finanzas_cuentas_user on public.finanzas_cuentas (user_id, orden);
+
+-- Deudas y prestamos. Lo que importa no es el total, es la cuota: cuanto de
+-- lo que entra cada mes ya esta comprometido antes de decidir nada.
+--
+-- 'pendiente' es lo que quedaba el dia 'pendiente_fecha'. Los pagos que
+-- apuntes contra la deuda despues de esa fecha se restan solos, asi que
+-- apuntar la cuota hace bajar la deuda sin tener que editar nada.
+create table if not exists public.finanzas_deudas (
+  id              uuid primary key default gen_random_uuid(),
+  user_id         uuid not null references auth.users on delete cascade,
+  nombre          text not null,
+  tipo            text not null default 'prestamo'
+                  check (tipo in ('prestamo','hipoteca','tarjeta','financiacion','personal','otro')),
+  pendiente       numeric(12,2) not null check (pendiente >= 0),
+  pendiente_fecha date not null default current_date,
+  cuota           numeric(12,2) not null default 0 check (cuota >= 0),
+  -- TAE en porcentaje (5.9 = 5,9 %). Opcional: mucha gente no se la sabe.
+  tae             numeric(6,3),
+  dia_cobro       int check (dia_cobro between 1 and 31),
+  ambito          text not null default 'personal' check (ambito in ('personal','empresa')),
+  nota            text,
+  cerrada         boolean not null default false,
+  creado          timestamptz not null default now()
+);
+create index if not exists finanzas_deudas_user on public.finanzas_deudas (user_id, cerrada, creado);
+
+-- Un pago atado a su deuda: al apuntarlo, la deuda baja.
+alter table public.finanzas_movimientos
+  add column if not exists deuda_id uuid references public.finanzas_deudas on delete set null;
+
 -- ── Ocio: lo que quieres hacer y lo que ya has hecho ───────────────────
 -- Una sola tabla para las dos cosas a proposito. "Quiero ir a ese sitio" y
 -- "fuimos y estuvo bien" no son dos listas: son el mismo apunte en dos
@@ -577,6 +628,7 @@ begin
     'foco','tareas','habitos','habitos_registro','bienestar','objetivos','memoria',
     'chat_mensajes','xp_eventos','revisiones','uso_ia','push_suscripciones','push_envios',
     'finanzas_ajustes','finanzas_ingresos','finanzas_presupuestos','finanzas_movimientos','finanzas_sobres',
+    'finanzas_cuentas','finanzas_deudas',
     'diario','hojas',
     'actividades_tiempo','cronometro',
     'ocio','ocio_compartidos'

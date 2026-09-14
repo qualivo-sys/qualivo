@@ -4,7 +4,7 @@ import { tareasDelDia } from '../motor/tareas';
 import { correlaciones } from '../motor/puntuaciones';
 import { ETIQUETA_CATEGORIA_FOCO, ETIQUETA_OBJETIVO } from '../perfil';
 import type { Panel } from '../datos';
-import type { ResumenFinanzas } from '../motor/finanzas';
+import type { ResumenCuentas, ResumenDeudas, ResumenFinanzas } from '../motor/finanzas';
 import type { FinanzasAjustes } from '../tipos';
 
 const n = (valor: number | null | undefined, decimales = 1) =>
@@ -24,6 +24,8 @@ export interface ContextoMente {
 export interface ContextoFinanzas {
   resumen: ResumenFinanzas;
   ajustes: FinanzasAjustes | null;
+  cuentas?: ResumenCuentas | null;
+  deudas?: ResumenDeudas | null;
 }
 
 export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | null, mente?: ContextoMente | null): string {
@@ -203,6 +205,23 @@ export function construirContexto(panel: Panel, finanzas?: ContextoFinanzas | nu
       l.push(`- Presupuesto concreto "${s.nombre}": ${eurCoach(s.gastado)} de ${eurCoach(s.importe)}${s.diasRestantes !== null ? `, quedan ${s.diasRestantes} dias` : ''}.`);
     }
     if (resumen.gastoImpulsivo > 0) l.push(`- Marcado como impulso este mes: ${eurCoach(resumen.gastoImpulsivo)}.`);
+    if (finanzas.cuentas && finanzas.cuentas.cuentas.length) {
+      const c = finanzas.cuentas;
+      l.push(`- Repartido asi: ${c.cuentas.map((x) => `${x.nombre} ${eurCoach(x.saldo)}${x.ahorro ? ' (ahorro)' : ''}`).join(', ')}.`);
+      l.push(`- Ahorrado: ${eurCoach(c.ahorrado)}. Para el dia a dia: ${eurCoach(c.disponible)}.`);
+    }
+    if (finanzas.deudas?.alguna) {
+      const d = finanzas.deudas;
+      l.push(`- Debe ${eurCoach(d.pendiente)} en total, ${eurCoach(d.cuotaMes)} al mes en cuotas${d.pctIngresos !== null ? ` (${d.pctIngresos} % de lo que ingresa)` : ''}.`);
+      for (const x of d.deudas) {
+        l.push(
+          `- Deuda "${x.nombre}": quedan ${eurCoach(x.pendiente)}, cuota ${eurCoach(x.cuota)}`
+          + `${x.tae !== null ? `, TAE ${x.tae} %` : ''}`
+          + `${x.nuncaAcaba ? '. OJO: la cuota no cubre ni los intereses, la deuda crece' : x.meses !== null ? `, ${x.meses} meses para liquidarla` : ''}.`,
+        );
+      }
+      if (d.patrimonio !== null) l.push(`- Ahorro menos deuda: ${eurCoach(d.patrimonio)}.`);
+    }
     if (finanzas.ajustes?.ahorro_mes) l.push(`- Quiere ahorrar ${eurCoach(Number(finanzas.ajustes.ahorro_mes))} al mes.`);
     if (finanzas.ajustes?.caja_minima) l.push(`- Caja minima que se ha fijado: ${eurCoach(Number(finanzas.ajustes.caja_minima))}.`);
   }

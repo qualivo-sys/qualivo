@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Loader2 } from 'lucide-react';
+import { CalendarDays, Check, Loader2 } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { registrarMovimiento } from '@/app/app/finanzas/acciones';
 import { Boton } from '@/components/ui/base';
@@ -14,12 +14,27 @@ export default function RegistroGasto({
   frecuentes = [] as string[],
   moneda = '€',
   sobres = [] as { id: string; nombre: string; emoji: string; disponible: number }[],
+  hoy,
+  ayer,
+  /** Solo se enseña el conmutador si de verdad lleva dos dineros. */
+  conEmpresa = false,
+}: {
+  frecuentes?: string[];
+  moneda?: string;
+  sobres?: { id: string; nombre: string; emoji: string; disponible: number }[];
+  hoy: string;
+  ayer: string;
+  conEmpresa?: boolean;
 }) {
   const formulario = useRef<HTMLFormElement>(null);
   const [categoria, setCategoria] = useState(frecuentes[0] ?? 'restaurantes');
   const [tipo, setTipo] = useState<'gasto' | 'ingreso'>('gasto');
   const [impulsivo, setImpulsivo] = useState(false);
   const [sobre, setSobre] = useState('');
+  // Casi siempre apuntas lo de hoy, pero te acuerdas de la cena de anteayer
+  // cuando ya es tarde. Hoy y ayer a un toque; el resto, calendario.
+  const [fecha, setFecha] = useState(hoy);
+  const [ambito, setAmbito] = useState<'personal' | 'empresa'>('personal');
   const [enviando, setEnviando] = useState(false);
   const [hecho, setHecho] = useState(false);
 
@@ -38,6 +53,9 @@ export default function RegistroGasto({
         formulario.current?.reset();
         setImpulsivo(false);
         setSobre('');
+        // El ambito NO se reinicia: si estas apuntando gastos de la empresa,
+        // normalmente vas a apuntar varios seguidos. La fecha si, que es lo raro.
+        setFecha(hoy);
         setEnviando(false);
         setHecho(true);
         setTimeout(() => setHecho(false), 2000);
@@ -48,6 +66,7 @@ export default function RegistroGasto({
       <input type="hidden" name="tipo" value={tipo} />
       <input type="hidden" name="impulsivo" value={impulsivo ? 'true' : 'false'} />
       <input type="hidden" name="sobre_id" value={sobre} />
+      <input type="hidden" name="ambito" value={ambito} />
 
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
@@ -130,6 +149,62 @@ export default function RegistroGasto({
         aria-label="Descripcion"
         className="h-11 w-full rounded-lg border border-input bg-muted/40 px-3 text-sm outline-none placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-ring"
       />
+
+      {/* Cuando fue, y con que dinero. Por defecto hoy y personal: lo normal
+          se sigue apuntando sin tocar nada de esto. */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <input type="hidden" name="fecha" value={fecha} />
+        {[
+          { valor: hoy, texto: 'Hoy' },
+          { valor: ayer, texto: 'Ayer' },
+        ].map((d) => (
+          <button
+            key={d.valor}
+            type="button"
+            onClick={() => setFecha(d.valor)}
+            className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+              fecha === d.valor ? 'border-primary bg-primary/15 text-foreground' : 'border-border bg-card text-muted-foreground'
+            }`}
+          >
+            {d.texto}
+          </button>
+        ))}
+        <label
+          className={`flex cursor-pointer items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-colors ${
+            fecha !== hoy && fecha !== ayer
+              ? 'border-primary bg-primary/15 text-foreground'
+              : 'border-border bg-card text-muted-foreground'
+          }`}
+        >
+          <CalendarDays size={13} />
+          {fecha !== hoy && fecha !== ayer ? fecha.slice(8, 10) + '/' + fecha.slice(5, 7) : 'Otro dia'}
+          <input
+            type="date"
+            value={fecha}
+            max={hoy}
+            onChange={(e) => e.target.value && setFecha(e.target.value)}
+            aria-label="Otro dia"
+            className="sr-only"
+          />
+        </label>
+
+        {conEmpresa && (
+          <div className="ml-auto flex overflow-hidden rounded-full border border-border text-xs">
+            {(['personal', 'empresa'] as const).map((a) => (
+              <button
+                key={a}
+                type="button"
+                onClick={() => setAmbito(a)}
+                className={`px-3 py-1.5 capitalize transition-colors ${
+                  ambito === a ? 'bg-primary text-primary-foreground' : 'bg-card text-muted-foreground'
+                }`}
+              >
+                {a}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="flex items-center justify-between gap-3">
         {tipo === 'gasto' ? (

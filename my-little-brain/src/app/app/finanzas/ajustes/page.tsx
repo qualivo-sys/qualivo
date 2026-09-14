@@ -2,17 +2,21 @@ import { Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import {
+  actualizarSaldos,
+  borrarCuenta,
   borrarIngreso,
   borrarPresupuesto,
   borrarSobre,
+  crearCuenta,
   crearSobre,
+  editarCuenta,
   guardarAjustesFinanzas,
   guardarIngreso,
   guardarPresupuesto,
 } from '@/app/app/finanzas/acciones';
 import { cargarFinanzas } from '@/lib/datos';
 import { fechaCorta, hoy as hoyIso } from '@/lib/fechas';
-import { CATEGORIAS, categoria as infoCategoria } from '@/lib/motor/finanzas';
+import { CATEGORIAS, categoria as infoCategoria, resumenCuentas, TIPOS_CUENTA } from '@/lib/motor/finanzas';
 import { sesionRequerida } from '@/lib/sesion';
 
 export const dynamic = 'force-dynamic';
@@ -22,7 +26,8 @@ const eur = (n: number) => `${Number(n).toLocaleString('es-ES', { maximumFractio
 export default async function AjustesFinanzas() {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const hoy = hoyIso(perfil.zona_horaria || undefined);
-  const { ajustes, ingresos, presupuestos, sobres, movimientos } = await cargarFinanzas(supabase, usuario.id, hoy);
+  const { ajustes, ingresos, presupuestos, sobres, movimientos, cuentas } = await cargarFinanzas(supabase, usuario.id, hoy);
+  const cajas = resumenCuentas(cuentas, { ambito: 'todo', fechaFoto: ajustes?.caja_fecha ?? null, hoy });
 
   const totalIngresos = ingresos.filter((i) => i.activo !== false).reduce((t, i) => t + Number(i.importe), 0);
   const totalPresupuesto = presupuestos.filter((p) => p.activo !== false).reduce((t, p) => t + Number(p.importe), 0);
@@ -90,6 +95,119 @@ export default async function AjustesFinanzas() {
           </Selector>
           <Boton type="submit" variante="contorno" className="w-full">Anadir ingreso</Boton>
         </form>
+      </Tarjeta>
+
+      <Tarjeta id="cajas">
+        <TituloTarjeta>Donde tienes el dinero</TituloTarjeta>
+        <p className="mb-3 text-xs text-muted-foreground">
+          No es lo mismo tener 6.000 € en la cuenta de siempre que 5.000 en un fondo de emergencia que no piensas tocar.
+          Lo que marques como ahorro se lee aparte de lo que tienes para el dia a dia.
+        </p>
+
+        {cuentas.length > 0 ? (
+          <>
+            {/* Se actualizan TODAS a la vez a proposito: los saldos son una foto
+                a una fecha, y actualizar una sola dejaria las demas en la foto
+                vieja, contando mal los apuntes de por medio. */}
+            <form action={actualizarSaldos} className="space-y-3">
+              {cuentas.map((c) => (
+                <Campo
+                  key={c.id}
+                  etiqueta={`${c.nombre}${c.ahorro ? ' · ahorro' : ''}${c.ambito === 'empresa' ? ' · empresa' : ''}`}
+                  name={`saldo_${c.id}`}
+                  inputMode="decimal"
+                  defaultValue={String(Number(c.saldo))}
+                />
+              ))}
+              <Boton type="submit" className="w-full">Poner al dia los saldos</Boton>
+            </form>
+            <div className="mt-3 grid grid-cols-3 gap-2 text-center text-sm">
+              <div className="rounded-lg bg-muted/40 p-2.5">
+                <div className="font-semibold tabular-nums">{eur(cajas.total)}</div>
+                <div className="text-xs text-muted-foreground">en total</div>
+              </div>
+              <div className="rounded-lg bg-muted/40 p-2.5">
+                <div className="font-semibold tabular-nums">{eur(cajas.ahorrado)}</div>
+                <div className="text-xs text-muted-foreground">ahorrado</div>
+              </div>
+              <div className="rounded-lg bg-muted/40 p-2.5">
+                <div className="font-semibold tabular-nums">{eur(cajas.disponible)}</div>
+                <div className="text-xs text-muted-foreground">dia a dia</div>
+              </div>
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Ultima foto: {ajustes?.caja_fecha ? fechaCorta(ajustes.caja_fecha) : '—'}. Pon los saldos tal y como los
+              ves en el banco: lo que ya habias apuntado antes de esta foto no se vuelve a restar.
+            </p>
+
+            <details className="mt-3 border-t border-border pt-3">
+              <summary className="cursor-pointer text-sm text-muted-foreground">Renombrar o quitar cajas</summary>
+              <ul className="mt-3 space-y-3">
+                {cuentas.map((c) => (
+                  <li key={c.id} className="rounded-lg bg-muted/40 p-3">
+                    <form action={editarCuenta.bind(null, c.id)} className="space-y-2.5">
+                      <Campo etiqueta="Nombre" name="nombre" defaultValue={c.nombre} />
+                      <div className="grid grid-cols-2 gap-2.5">
+                        <Selector etiqueta="Tipo" name="tipo" defaultValue={c.tipo}>
+                          {TIPOS_CUENTA.map((t) => (
+                            <option key={t.id} value={t.id}>{t.emoji} {t.nombre}</option>
+                          ))}
+                        </Selector>
+                        <Selector etiqueta="Ambito" name="ambito" defaultValue={c.ambito}>
+                          <option value="personal">Personal</option>
+                          <option value="empresa">Empresa</option>
+                        </Selector>
+                      </div>
+                      <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <input type="checkbox" name="ahorro" defaultChecked={c.ahorro} className="h-4 w-4 rounded border-input" />
+                        Esto es ahorro, no dinero del dia a dia
+                      </label>
+                      <div className="flex items-center gap-3">
+                        <Boton type="submit" variante="secundario" className="flex-1">Guardar</Boton>
+                      </div>
+                    </form>
+                    <form action={borrarCuenta.bind(null, c.id)} className="mt-2">
+                      <button type="submit" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive">
+                        <Trash2 size={13} /> Quitar esta caja
+                      </button>
+                    </form>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </>
+        ) : (
+          <p className="mb-3 text-sm text-muted-foreground">
+            Aun no has dicho donde tienes el dinero. Mientras tanto se usa el numero suelto de la caja de arriba.
+          </p>
+        )}
+
+        <details className="mt-3 border-t border-border pt-3" open={cuentas.length === 0}>
+          <summary className="cursor-pointer text-sm text-primary">Añadir una caja</summary>
+          <form action={crearCuenta} className="mt-3 space-y-3">
+            <Campo etiqueta="¿Como se llama?" name="nombre" placeholder="Fondo de emergencia" required />
+            <div className="grid grid-cols-2 gap-3">
+              <Selector etiqueta="Tipo" name="tipo" defaultValue="corriente">
+                {TIPOS_CUENTA.map((t) => (
+                  <option key={t.id} value={t.id}>{t.emoji} {t.nombre}</option>
+                ))}
+              </Selector>
+              <Campo etiqueta="¿Cuanto hay?" name="saldo" inputMode="decimal" placeholder="5000" />
+            </div>
+            <Selector etiqueta="Ambito" name="ambito" defaultValue="personal">
+              <option value="personal">Personal</option>
+              <option value="empresa">Empresa</option>
+            </Selector>
+            <label className="flex items-center gap-2 text-sm text-muted-foreground">
+              <input type="checkbox" name="ahorro" className="h-4 w-4 rounded border-input" />
+              Esto es ahorro, no dinero del dia a dia
+            </label>
+            <Boton type="submit" className="w-full">Añadir la caja</Boton>
+          </form>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Las de ahorro e inversion se marcan como ahorro solas.
+          </p>
+        </details>
       </Tarjeta>
 
       <Tarjeta id="sobres">

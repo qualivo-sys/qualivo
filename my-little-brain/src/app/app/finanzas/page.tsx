@@ -4,13 +4,19 @@ import RegistroGasto from '@/components/registro-gasto';
 import { Barra, Boton, Campo, Selector, Tarjeta, TituloTarjeta } from '@/components/ui/base';
 import { activarFinanzas, borrarMovimiento, cerrarSobre, editarMovimiento } from '@/app/app/finanzas/acciones';
 import { cargarFinanzas } from '@/lib/datos';
-import { fechaCorta, hoy as hoyIso, inicioSemana } from '@/lib/fechas';
+import { fechaCorta, hoy as hoyIso, inicioSemana, sumarDias } from '@/lib/fechas';
 import {
+  type Ambito,
   CATEGORIAS,
   categoria as infoCategoria,
+  gastoPorCategoria,
   insightsFinanzas,
+  insightsPatrimonio,
   mesAnteriorA,
   nombreMes,
+  porSemanas,
+  resumenCuentas,
+  resumenDeudas,
   resumenFinanzas,
   revisionSemana,
 } from '@/lib/motor/finanzas';
@@ -33,7 +39,11 @@ const SEMAFORO = {
   pasado: { punto: '🔴', color: 'hsl(var(--destructive))' },
 } as const;
 
-export default async function PaginaFinanzas() {
+export default async function PaginaFinanzas({
+  searchParams,
+}: {
+  searchParams?: { ambito?: string };
+}) {
   const { supabase, usuario, perfil } = await sesionRequerida();
   const hoy = hoyIso(perfil.zona_horaria || undefined);
   const finanzas = await cargarFinanzas(supabase, usuario.id, hoy);
@@ -85,15 +95,48 @@ export default async function PaginaFinanzas() {
     );
   }
 
-  const resumen = resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy });
+  // Lleva dos dineros si alguna vez ha marcado algo como de empresa. Mientras
+  // no sea asi, el conmutador no aparece: no se enseña una decision que no tiene.
+  const conEmpresa =
+    finanzas.movimientos.some((m) => m.ambito === 'empresa')
+    || finanzas.cuentas.some((c) => c.ambito === 'empresa')
+    || finanzas.deudas.some((d) => d.ambito === 'empresa')
+    || finanzas.ingresos.some((i) => i.ambito === 'empresa');
+  const pedido = searchParams?.ambito;
+  const ambito: Ambito = conEmpresa && (pedido === 'empresa' || pedido === 'todo') ? pedido : 'personal';
+
+  const comun = { ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy, ambito };
+  const resumen = resumenFinanzas(comun);
   const sobresAbiertos = resumen.sobres.filter((s) => !s.cerrado);
   const sobresCerrados = resumen.sobres.filter((s) => s.cerrado);
-  const anterior = resumenFinanzas({ ...finanzas, ingresosPrevistos: finanzas.ingresos, hoy, mes: mesAnteriorA(resumen.mes) });
+  const anterior = resumenFinanzas({ ...comun, mes: mesAnteriorA(resumen.mes) });
   const insights = insightsFinanzas(resumen, anterior, finanzas.ajustes);
   const lunes = inicioSemana(hoy);
-  const semana = revisionSemana(finanzas.movimientos, resumen, lunes, hoy);
-  const delMes = finanzas.movimientos.filter((m) => m.fecha.slice(0, 7) === resumen.mes);
+  const semana = revisionSemana(
+    finanzas.movimientos.filter((m) => ambito === 'todo' || m.ambito === ambito),
+    resumen, lunes, hoy,
+  );
+  const delMes = finanzas.movimientos
+    .filter((m) => m.fecha.slice(0, 7) === resumen.mes)
+    .filter((m) => ambito === 'todo' || m.ambito === ambito);
   const frecuentes = [...new Set(finanzas.movimientos.slice(0, 40).map((m) => m.categoria))].slice(0, 4);
+
+  const cuentas = resumenCuentas(finanzas.cuentas, { ambito, fechaFoto: finanzas.ajustes?.caja_fecha ?? null, hoy });
+  const deudas = resumenDeudas({
+    deudas: finanzas.deudas,
+    movimientos: finanzas.movimientos,
+    hoy,
+    ingresosMes: resumen.ingresosPrevistos || resumen.ingresos || null,
+    ahorrado: finanzas.cuentas.length ? cuentas.ahorrado : null,
+    ambito,
+  });
+  const semanas = porSemanas(finanzas.movimientos, resumen.mes, {
+    hoy, presupuestoMes: resumen.presupuestoTotal || null, ambito,
+  });
+  const donde = gastoPorCategoria(finanzas.movimientos, resumen.mes, { ambito });
+  const avisos = insightsPatrimonio(cuentas, deudas, semanas);
+  // La barra mas alta manda: si no, un mes tranquilo se ve igual que uno caro.
+  const picoSemana = Math.max(1, ...semanas.map((x) => x.porDia));
 
   /** Los gastos del dia a dia de una categoria este mes, del mas reciente al mas viejo. */
   const porCategoria = (id: string) =>
@@ -110,6 +153,28 @@ export default async function PaginaFinanzas() {
         </div>
         <Link href="/app/finanzas/ajustes" className="text-sm text-primary underline">Ajustes</Link>
       </div>
+
+      {/* El dinero de la empresa no es tuyo para gastartelo: mezclarlo hace que
+          el presupuesto personal mienta. Por defecto se mira lo personal. */}
+      {conEmpresa && (
+        <div className="flex overflow-hidden rounded-xl border border-border text-sm">
+          {([
+            { id: 'personal', texto: 'Personal' },
+            { id: 'empresa', texto: 'Empresa' },
+            { id: 'todo', texto: 'Todo junto' },
+          ] as const).map((o) => (
+            <Link
+              key={o.id}
+              href={o.id === 'personal' ? '/app/finanzas' : `/app/finanzas?ambito=${o.id}`}
+              className={`flex-1 py-2 text-center transition-colors ${
+                ambito === o.id ? 'bg-primary text-primary-foreground' : 'bg-card text-muted-foreground'
+              }`}
+            >
+              {o.texto}
+            </Link>
+          ))}
+        </div>
+      )}
 
       <Tarjeta>
         <div className="flex items-end justify-between gap-3">
@@ -142,6 +207,43 @@ export default async function PaginaFinanzas() {
             <div className="text-xs text-muted-foreground">neto</div>
           </div>
         </div>
+        {/* De que cajas sale el dinero. Un total sin desglosar no distingue
+            entre tenerlo disponible y tenerlo en un fondo que no vas a tocar. */}
+        {cuentas.cuentas.length > 0 && (
+          <div className="mt-4 border-t border-border pt-3">
+            <div className="flex items-baseline justify-between gap-2">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Donde esta</p>
+              <Link href="/app/finanzas/ajustes#cajas" className="text-xs text-primary underline">Poner al dia</Link>
+            </div>
+            <div className="mt-2 grid grid-cols-2 gap-2 text-center">
+              <div className="rounded-lg bg-muted/40 p-3">
+                <div className="text-lg font-semibold tabular-nums">{eur(cuentas.ahorrado)}</div>
+                <div className="text-xs text-muted-foreground">ahorrado</div>
+              </div>
+              <div className="rounded-lg bg-muted/40 p-3">
+                <div className="text-lg font-semibold tabular-nums">{eur(cuentas.disponible)}</div>
+                <div className="text-xs text-muted-foreground">para el dia a dia</div>
+              </div>
+            </div>
+            <ul className="mt-2 space-y-1">
+              {cuentas.cuentas.map((c) => (
+                <li key={c.id} className="flex items-baseline justify-between gap-2 text-sm">
+                  <span className="min-w-0 truncate">
+                    {c.emoji} {c.nombre}
+                    {c.ahorro && <span className="ml-1 text-xs text-muted-foreground">ahorro</span>}
+                  </span>
+                  <span className="shrink-0 tabular-nums">{eur(c.saldo)}</span>
+                </li>
+              ))}
+            </ul>
+            {cuentas.diasDesdeFoto !== null && cuentas.diasDesdeFoto > 0 && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Saldos de hace {cuentas.diasDesdeFoto} {cuentas.diasDesdeFoto === 1 ? 'dia' : 'dias'}, mas lo que has
+                apuntado desde entonces.
+              </p>
+            )}
+          </div>
+        )}
         {resumen.ingresosPrevistos > 0 && (
           <p className="mt-3 text-xs text-muted-foreground tabular-nums">
             Previsto este mes: {eur(resumen.ingresosPrevistos)} de ingresos
@@ -157,20 +259,79 @@ export default async function PaginaFinanzas() {
         <TituloTarjeta>Apuntar un movimiento</TituloTarjeta>
         <RegistroGasto
           frecuentes={frecuentes}
+          hoy={hoy}
+          ayer={sumarDias(hoy, -1)}
+          conEmpresa={conEmpresa}
           sobres={sobresAbiertos.map((s) => ({ id: s.id, nombre: s.nombre, emoji: s.emoji, disponible: s.disponible }))}
         />
       </Tarjeta>
 
-      {insights.length > 0 && (
+      {insights.length + avisos.length > 0 && (
         <Tarjeta>
           <TituloTarjeta>Lo que veo</TituloTarjeta>
           <ul className="space-y-1.5 text-sm">
-            {insights.map((i) => (
+            {[...avisos, ...insights].map((i) => (
               <li key={i.texto} className={TONOS[i.tono]}>· {i.texto}</li>
             ))}
           </ul>
         </Tarjeta>
       )}
+
+      <Tarjeta>
+        <div className="mb-1 flex items-baseline justify-between">
+          <TituloTarjeta className="mb-0">Deudas y prestamos</TituloTarjeta>
+          <Link href="/app/finanzas/deudas" className="text-sm text-primary underline">
+            {deudas.alguna ? 'Gestionar' : 'Añadir'}
+          </Link>
+        </div>
+        {deudas.alguna ? (
+          <>
+            <div className="grid grid-cols-2 gap-2 text-center">
+              <div className="rounded-lg bg-muted/40 p-3">
+                <div className="text-lg font-semibold tabular-nums">{eur(deudas.pendiente)}</div>
+                <div className="text-xs text-muted-foreground">pendiente</div>
+              </div>
+              <div className="rounded-lg bg-muted/40 p-3">
+                <div className="text-lg font-semibold tabular-nums">{eur(deudas.cuotaMes)}</div>
+                <div className="text-xs text-muted-foreground">
+                  al mes{deudas.pctIngresos !== null ? ` · ${deudas.pctIngresos} % de lo que entra` : ''}
+                </div>
+              </div>
+            </div>
+            <ul className="mt-3 space-y-2">
+              {deudas.deudas.map((d) => (
+                <li key={d.id} className="flex items-baseline justify-between gap-2 text-sm">
+                  <span className="min-w-0 truncate">
+                    {d.emoji} {d.nombre}
+                    <span className="ml-1 text-xs text-muted-foreground">
+                      {d.nuncaAcaba
+                        ? 'la cuota no cubre ni los intereses'
+                        : d.meses === 0
+                          ? 'pagada'
+                          : d.meses !== null
+                            ? `${d.meses} ${d.meses === 1 ? 'mes' : 'meses'}`
+                            : 'sin cuota fijada'}
+                    </span>
+                  </span>
+                  <span className={`shrink-0 tabular-nums ${d.nuncaAcaba ? TONOS.alerta : ''}`}>{eur(d.pendiente)}</span>
+                </li>
+              ))}
+            </ul>
+            {deudas.patrimonio !== null && (
+              <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground tabular-nums">
+                Ahorro menos deuda: <strong className={deudas.patrimonio >= 0 ? TONOS.bien : TONOS.alerta}>
+                  {deudas.patrimonio >= 0 ? '+' : '−'}{eur(deudas.patrimonio)}
+                </strong>. Es el numero que de verdad mide como estas, no el de la caja.
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            Si tienes un prestamo, una hipoteca o algo financiado, ponlo aqui. Lo que pesa no es el total: es cuanto de
+            lo que entra cada mes ya esta comprometido antes de que decidas nada.
+          </p>
+        )}
+      </Tarjeta>
 
       {(sobresAbiertos.length > 0 || sobresCerrados.length > 0) && (
         <Tarjeta>
@@ -301,6 +462,82 @@ export default async function PaginaFinanzas() {
         </Tarjeta>
       )}
 
+      {donde.lineas.length > 0 && (
+        <Tarjeta>
+          <TituloTarjeta>En que se te va</TituloTarjeta>
+          <p className="mb-3 text-xs text-muted-foreground">
+            Todo lo gastado este mes, tenga presupuesto o no, contando tambien los sobres. La tarjeta de arriba dice si
+            te has pasado; esta dice en que vives.
+          </p>
+          <ul className="space-y-2.5">
+            {donde.lineas.map((c) => (
+              <li key={c.id}>
+                <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                  <span className="min-w-0 truncate">
+                    {c.emoji} {c.nombre}
+                    <span className="ml-1 text-xs text-muted-foreground">{c.pct} %</span>
+                    {c.cambio !== null && Math.abs(c.cambio) >= 15 && (
+                      <span className={`ml-1 text-xs ${c.cambio > 0 ? TONOS.aviso : TONOS.bien}`}>
+                        {c.cambio > 0 ? '+' : ''}{c.cambio} % vs mes pasado
+                      </span>
+                    )}
+                  </span>
+                  <span className="shrink-0 tabular-nums">{eur(c.gastado)}</span>
+                </div>
+                <Barra
+                  valor={donde.total > 0 ? (c.gastado / donde.lineas[0].gastado) * 100 : 0}
+                  color={c.inversion ? 'hsl(var(--area-habitos))' : 'hsl(var(--primary))'}
+                />
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground tabular-nums">
+            Total del mes: {eur(donde.total)} en {donde.lineas.length}{' '}
+            {donde.lineas.length === 1 ? 'categoria' : 'categorias'}.
+            {donde.lineas[0] ? ` Lo mas gordo, ${donde.lineas[0].nombre.toLowerCase()} (${donde.lineas[0].pct} %).` : ''}
+          </p>
+        </Tarjeta>
+      )}
+
+      <Tarjeta>
+        <TituloTarjeta>El mes, semana a semana</TituloTarjeta>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Comparadas por gasto al dia, no por total: la primera semana del mes y la ultima casi nunca tienen siete dias,
+          y compararlas a pelo seria mentir con la verdad por delante.
+        </p>
+        <ul className="space-y-2.5">
+          {semanas.map((w) => (
+            <li key={w.numero}>
+              <div className="mb-1 flex items-baseline justify-between gap-2 text-sm">
+                <span>
+                  {w.pasado ? '🔴' : w.encurso ? '🔵' : '🟢'} {w.numero}.ª
+                  <span className="ml-1 text-xs text-muted-foreground">
+                    {Number(w.desde.slice(8, 10))}–{Number(w.hasta.slice(8, 10))}
+                    {w.dias !== 7 ? ` · ${w.dias} d` : ''}
+                    {w.encurso ? ' · en curso' : ''}
+                  </span>
+                </span>
+                <span className="tabular-nums">
+                  <strong>{eur(w.gastos)}</strong>
+                  <span className="text-muted-foreground"> · {eur(w.porDia)}/dia</span>
+                </span>
+              </div>
+              <Barra
+                valor={(w.porDia / picoSemana) * 100}
+                color={w.pasado ? SEMAFORO.pasado.color : w.encurso ? 'hsl(var(--primary))' : SEMAFORO.bien.color}
+              />
+              {w.limite !== null && (
+                <p className="mt-1 text-xs text-muted-foreground tabular-nums">
+                  {w.gastos > w.limite
+                    ? `${eur(w.gastos - w.limite)} por encima de lo que tocaba en ${w.dias} dias`
+                    : `${eur(w.limite - w.gastos)} por debajo de lo que tocaba en ${w.dias} dias`}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Tarjeta>
+
       <Tarjeta>
         <TituloTarjeta>Tu semana en dinero</TituloTarjeta>
         <dl className="grid grid-cols-2 gap-3 text-sm">
@@ -351,6 +588,7 @@ export default async function PaginaFinanzas() {
                           {fechaCorta(m.fecha)} · {cat.nombre}
                           {m.ambito === 'empresa' ? ' · empresa' : ''}
                           {sobre ? ` · ${sobre.nombre}` : ''}
+                          {m.deuda_id ? ' · cuota' : ''}
                         </div>
                       </div>
                       <span className={`shrink-0 tabular-nums ${m.tipo === 'ingreso' ? TONOS.bien : ''}`}>
@@ -382,6 +620,15 @@ export default async function PaginaFinanzas() {
                           <option value="">Dia a dia</option>
                           {resumen.sobres.map((sb) => (
                             <option key={sb.id} value={sb.id}>{sb.emoji || '🎯'} {sb.nombre}</option>
+                          ))}
+                        </Selector>
+                      )}
+                      {/* Atar el pago a su deuda hace que la deuda baje sola. */}
+                      {deudas.alguna && m.tipo === 'gasto' && (
+                        <Selector etiqueta="¿Es la cuota de una deuda?" name="deuda_id" defaultValue={m.deuda_id ?? ''}>
+                          <option value="">No</option>
+                          {deudas.deudas.map((d) => (
+                            <option key={d.id} value={d.id}>{d.emoji} {d.nombre}</option>
                           ))}
                         </Selector>
                       )}

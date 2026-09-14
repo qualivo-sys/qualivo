@@ -15,7 +15,7 @@ import {
 import { tmbDe, metasNutricion } from './perfil';
 import type {
   Bienestar, Comida, EntradaDiario, Entrenamiento, FinanzasAjustes, Foco, Habito, HabitoRegistro,
-  ActividadTiempo, ApunteOcio, Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro,
+  ActividadTiempo, ApunteOcio, Cuenta, Deuda, Hoja, IngresoPrevisto, MetricaCorporal, Movimiento, ObjetivoRegistro,
   Perfil, Presupuesto, RecuerdoCoach, Sobre, Tarea,
 } from './tipos';
 import type { ObjetivosDiarios } from './motor/nutricion';
@@ -234,6 +234,8 @@ export interface DatosFinanzas {
   presupuestos: Presupuesto[];
   movimientos: Movimiento[];
   sobres: Sobre[];
+  cuentas: Cuenta[];
+  deudas: Deuda[];
   /** true cuando la persona ha configurado o usado el modulo alguna vez. */
   activo: boolean;
 }
@@ -248,7 +250,7 @@ export async function cargarFinanzas(
   hoy: string,
 ): Promise<DatosFinanzas> {
   const desde = sumarDias(hoy, -120);
-  const [ajustes, ingresos, presupuestos, movimientos, sobres] = await Promise.all([
+  const [ajustes, ingresos, presupuestos, movimientos, sobres, cuentas, deudas] = await Promise.all([
     supabase.from('finanzas_ajustes').select('*').eq('user_id', userId).maybeSingle()
       .then((r) => (r.data as FinanzasAjustes | null) ?? null),
     supabase.from('finanzas_ingresos').select('*').eq('user_id', userId).order('creado')
@@ -260,6 +262,10 @@ export async function cargarFinanzas(
       .then((r) => (r.data ?? []) as Movimiento[]),
     supabase.from('finanzas_sobres').select('*').eq('user_id', userId).order('creado', { ascending: false })
       .then((r) => (r.data ?? []) as Sobre[]),
+    supabase.from('finanzas_cuentas').select('*').eq('user_id', userId).order('orden')
+      .then((r) => (r.data ?? []) as Cuenta[]),
+    supabase.from('finanzas_deudas').select('*').eq('user_id', userId).order('creado')
+      .then((r) => (r.data ?? []) as Deuda[]),
   ]);
 
   return {
@@ -268,7 +274,12 @@ export async function cargarFinanzas(
     presupuestos,
     movimientos,
     sobres,
-    activo: Boolean(ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length || sobres.length),
+    cuentas,
+    deudas,
+    activo: Boolean(
+      ajustes?.activo || presupuestos.length || ingresos.length || movimientos.length
+      || sobres.length || cuentas.length || deudas.length,
+    ),
   };
 }
 

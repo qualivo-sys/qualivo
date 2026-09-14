@@ -157,6 +157,8 @@ export async function editarMovimiento(id: string, datos: FormData) {
       impulsivo: datos.get('impulsivo') === 'on' || datos.get('impulsivo') === 'true',
       // "" es "que vuelva al dia a dia", que no es lo mismo que no tocarlo.
       sobre_id: texto(datos.get('sobre_id')) || null,
+      // Igual con la deuda: desatarlo tiene que ser posible, no solo atarlo.
+      deuda_id: texto(datos.get('deuda_id')) || null,
     })
     .eq('id', id)
     .eq('user_id', userId);
@@ -211,5 +213,180 @@ export async function cerrarSobre(id: string, cerrado: boolean) {
 export async function borrarSobre(id: string) {
   const { supabase, userId } = await sesion();
   await supabase.from('finanzas_sobres').delete().eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+// ── Cajas: donde vive el dinero ────────────────────────────────────────
+
+const esTipoCuenta = (v: string | null) =>
+  v && ['corriente', 'ahorro', 'efectivo', 'inversion', 'otro'].includes(v) ? v : 'corriente';
+
+export async function crearCuenta(datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const nombre = texto(datos.get('nombre'));
+  if (!nombre) return;
+  const { count } = await supabase
+    .from('finanzas_cuentas').select('id', { count: 'exact', head: true }).eq('user_id', userId);
+  await supabase.from('finanzas_cuentas').insert({
+    user_id: userId,
+    nombre: nombre.slice(0, 60),
+    tipo: esTipoCuenta(texto(datos.get('tipo'))),
+    saldo: importe(datos.get('saldo')) ?? 0,
+    // Ahorro e inversion se marcan solas: es lo que la gente espera.
+    ahorro: datos.get('ahorro') === 'on' || ['ahorro', 'inversion'].includes(esTipoCuenta(texto(datos.get('tipo')))),
+    ambito: esAmbito(texto(datos.get('ambito'))),
+    orden: count ?? 0,
+  });
+  refrescar();
+}
+
+/**
+ * Poner al dia TODOS los saldos de una vez, no uno a uno.
+ *
+ * Los saldos son una foto a una fecha: si actualizas uno solo, los demas se
+ * quedan en la foto vieja y los apuntes de por medio se cuentan mal. Por eso
+ * el formulario manda todas las cuentas juntas y se sella la fecha de hoy.
+ */
+export async function actualizarSaldos(datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const { data: cuentas } = await supabase
+    .from('finanzas_cuentas').select('id').eq('user_id', userId);
+  if (!cuentas?.length) return;
+
+  for (const c of cuentas) {
+    const valor = importe(datos.get(`saldo_${c.id}`));
+    if (valor === null) continue;
+    await supabase.from('finanzas_cuentas').update({ saldo: valor }).eq('id', c.id).eq('user_id', userId);
+  }
+  // La foto entera pasa a ser de hoy, a esta hora: a partir de aqui se suman
+  // los apuntes nuevos, y lo que ya habias apuntado se queda dentro del saldo.
+  await supabase.from('finanzas_ajustes').upsert({
+    user_id: userId,
+    caja_fecha: hoy,
+    activo: true,
+    actualizado: new Date().toISOString(),
+  });
+  refrescar();
+}
+
+export async function editarCuenta(id: string, datos: FormData) {
+  const { supabase, userId } = await sesion();
+  const nombre = texto(datos.get('nombre'));
+  await supabase
+    .from('finanzas_cuentas')
+    .update({
+      ...(nombre ? { nombre: nombre.slice(0, 60) } : {}),
+      tipo: esTipoCuenta(texto(datos.get('tipo'))),
+      ahorro: datos.get('ahorro') === 'on',
+      ambito: esAmbito(texto(datos.get('ambito'))),
+    })
+    .eq('id', id)
+    .eq('user_id', userId);
+  refrescar();
+}
+
+export async function borrarCuenta(id: string) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('finanzas_cuentas').delete().eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+// ── Deudas y prestamos ─────────────────────────────────────────────────
+
+const esTipoDeuda = (v: string | null) =>
+  v && ['prestamo', 'hipoteca', 'tarjeta', 'financiacion', 'personal', 'otro'].includes(v) ? v : 'prestamo';
+
+/** TAE como numero: acepta "5,9", "5.9" y "5,9 %". */
+const porcentaje = (valor: FormDataEntryValue | null): number | null => {
+  if (typeof valor !== 'string' || !valor.trim()) return null;
+  const n = Number(valor.replace(/[^\d,.-]/g, '').replace(',', '.'));
+  return Number.isFinite(n) && n >= 0 && n < 1000 ? Math.round(n * 1000) / 1000 : null;
+};
+
+export async function crearDeuda(datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const nombre = texto(datos.get('nombre'));
+  const pendiente = importe(datos.get('pendiente'));
+  if (!nombre || pendiente === null) return;
+
+  const dia = Number(texto(datos.get('dia_cobro')));
+  await supabase.from('finanzas_deudas').insert({
+    user_id: userId,
+    nombre: nombre.slice(0, 80),
+    tipo: esTipoDeuda(texto(datos.get('tipo'))),
+    pendiente,
+    // La foto es de hoy: los pagos que apuntes a partir de ahora la bajan.
+    pendiente_fecha: hoy,
+    cuota: importe(datos.get('cuota')) ?? 0,
+    tae: porcentaje(datos.get('tae')),
+    dia_cobro: Number.isInteger(dia) && dia >= 1 && dia <= 31 ? dia : null,
+    ambito: esAmbito(texto(datos.get('ambito'))),
+    nota: texto(datos.get('nota'))?.slice(0, 200) ?? null,
+  });
+  refrescar();
+}
+
+/**
+ * Corregir una deuda. Si toca el pendiente, la foto vuelve a ser de hoy: esta
+ * diciendo "ahora mismo debo esto", asi que los pagos viejos ya estan dentro.
+ */
+export async function editarDeuda(id: string, datos: FormData) {
+  const { supabase, userId, hoy } = await sesion();
+  const nombre = texto(datos.get('nombre'));
+  const pendiente = importe(datos.get('pendiente'));
+  const cuota = importe(datos.get('cuota'));
+  const dia = Number(texto(datos.get('dia_cobro')));
+
+  await supabase
+    .from('finanzas_deudas')
+    .update({
+      ...(nombre ? { nombre: nombre.slice(0, 80) } : {}),
+      tipo: esTipoDeuda(texto(datos.get('tipo'))),
+      ...(pendiente !== null ? { pendiente, pendiente_fecha: hoy } : {}),
+      ...(cuota !== null ? { cuota } : {}),
+      tae: porcentaje(datos.get('tae')),
+      dia_cobro: Number.isInteger(dia) && dia >= 1 && dia <= 31 ? dia : null,
+      ambito: esAmbito(texto(datos.get('ambito'))),
+      nota: texto(datos.get('nota'))?.slice(0, 200) ?? null,
+    })
+    .eq('id', id)
+    .eq('user_id', userId);
+  refrescar();
+}
+
+export async function cerrarDeuda(id: string, cerrada: boolean) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('finanzas_deudas').update({ cerrada }).eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+export async function borrarDeuda(id: string) {
+  const { supabase, userId } = await sesion();
+  await supabase.from('finanzas_deudas').delete().eq('id', id).eq('user_id', userId);
+  refrescar();
+}
+
+/**
+ * Apuntar la cuota de una deuda. Es un gasto normal atado a la deuda, asi que
+ * al apuntarlo la deuda baja sola: no hay que editar dos sitios.
+ */
+export async function pagarCuota(deudaId: string) {
+  const { supabase, userId, hoy } = await sesion();
+  const { data: deuda } = await supabase
+    .from('finanzas_deudas').select('nombre, cuota, ambito').eq('id', deudaId).eq('user_id', userId).maybeSingle();
+  if (!deuda || !Number(deuda.cuota)) return;
+
+  await supabase.from('finanzas_movimientos').insert({
+    user_id: userId,
+    fecha: hoy,
+    tipo: 'gasto',
+    importe: Number(deuda.cuota),
+    categoria: 'vivienda',
+    descripcion: `Cuota de ${deuda.nombre}`.slice(0, 200),
+    ambito: deuda.ambito,
+    impulsivo: false,
+    deuda_id: deudaId,
+    fuente: 'manual',
+  });
   refrescar();
 }

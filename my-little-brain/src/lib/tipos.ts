@@ -333,6 +333,36 @@ export interface Sobre {
   creado: string;
 }
 
+/** Donde vive el dinero. El saldo es una foto a una fecha, no un saldo vivo. */
+export interface Cuenta {
+  id: string;
+  nombre: string;
+  tipo: 'corriente' | 'ahorro' | 'efectivo' | 'inversion' | 'otro';
+  saldo: number;
+  ahorro: boolean;
+  ambito: AmbitoFinanzas;
+  orden: number;
+  creado: string;
+}
+
+/** Una deuda o prestamo. Lo que pesa no es el total: es la cuota. */
+export interface Deuda {
+  id: string;
+  nombre: string;
+  tipo: 'prestamo' | 'hipoteca' | 'tarjeta' | 'financiacion' | 'personal' | 'otro';
+  /** Lo que quedaba el dia pendiente_fecha; los pagos posteriores se restan solos. */
+  pendiente: number;
+  pendiente_fecha: string;
+  cuota: number;
+  /** TAE en porcentaje: 5.9 son 5,9 %. Opcional. */
+  tae: number | null;
+  dia_cobro: number | null;
+  ambito: AmbitoFinanzas;
+  nota: string | null;
+  cerrada: boolean;
+  creado: string;
+}
+
 export interface Movimiento {
   id: string;
   fecha: string;
@@ -345,6 +375,8 @@ export interface Movimiento {
   fuente: 'manual' | 'chat';
   /** Si va contra un sobre, no cuenta en el presupuesto mensual de su categoria. */
   sobre_id: string | null;
+  /** Si es el pago de una deuda, esa deuda baja sola. */
+  deuda_id: string | null;
   creado: string;
 }
 
