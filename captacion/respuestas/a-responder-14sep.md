@@ -143,3 +143,37 @@ costó la queja de agosto.
 Dos que sí esperan, pero no hoy:
 - **Víctor · AV Energías**: se le contestó el 9-sep. Empujón el jueves si sigue callado.
 - **Carol · Zauma**: dijo que no es prioridad hace cinco días. Se respeta.
+
+---
+
+## EJECUTADO · lunes 14-sep, 12:4x
+
+Los ocho correos salieron por la API de Smartlead, cada uno en su hilo y desde el
+buzón que escribió en su día.
+
+| Quién | Qué se mandó | Estado |
+|---|---|---|
+| Lara | respuesta a la procedencia del dato | enviado |
+| Jelen · My Language Coach | la cifra que pidió hace 35 días | enviado |
+| Antonio Calviño | última oportunidad sobre sus dos webs | enviado |
+| Carvajalinos | petición rebajada a una línea | enviado |
+| Genial Houses | confirmación de supresión | enviado |
+| CCOO Catalunya | confirmación de supresión + expediente 321728 | enviado |
+| Sinergia MSF | confirmación de supresión | enviado |
+| Cortizo | confirmación de supresión | enviado |
+
+Las cuatro direcciones antiguas de quienes avisaron de un cambio de correo quedan
+dadas de baja para no contactarlos dos veces: delpasosolar, evaria (la vieja),
+rialbosan y luksmarbella.
+
+Incidencia del envío: la API responde con texto plano ("Email added to the queue")
+y no con JSON, lo que reventó el primer intento después de mandar el de Lara. Al
+reintentar hubo que comprobar hilo por hilo cuáles habían salido ya para no
+duplicar. El script de envío ahora tolera respuestas no-JSON.
+
+## Lo que toca vigilar
+
+Jelen y Antonio son los dos que pueden contestar. Si Jelen responde, va directa a
+llamada de quince minutos. Si Antonio dice que sí, **hay que hacerle la
+radiografía de verdad antes de volver a escribirle**: ya se le prometió una vez y
+no se le entregó.
