@@ -1,11 +1,13 @@
 {
   "_comentario": "Estructura de cuenta del documento 02 · Plan de medios. Escenario 900 €/mes.",
   "cuenta": {
-    "ad_account_id": "act_PENDIENTE",
-    "page_id": "PENDIENTE",
+    "ad_account_id": "act_1581533106801110",
+    "page_id": "383844784821243",
     "instagram_actor_id": "",
-    "pixel_id": "PENDIENTE",
-    "api_version": "v21.0"
+    "pixel_id": "1002102899517167",
+    "api_version": "v21.0",
+    "dsa_beneficiary": "Antic Barcelona 113",
+    "dsa_payor": "Antic Barcelona 113"
   },
   "landing": "https://antic-barcelona-113.vercel.app",
   "utm": "utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}&utm_id={{campaign.id}}",
@@ -22,14 +24,34 @@
           "billing_event": "IMPRESSIONS",
           "attribution": "7d_click_1d_view",
           "targeting": {
-            "custom_locations": [
-              { "latitude": 41.561, "longitude": 2.0089, "radius": 80, "distance_unit": "kilometer" }
-            ],
             "age_min": 32,
             "age_max": 65,
-            "targeting_automation": { "advantage_audience": 1 }
+            "geo_locations": {
+              "custom_locations": [
+                {
+                  "latitude": 41.561,
+                  "longitude": 2.0089,
+                  "radius": 80,
+                  "distance_unit": "kilometer"
+                }
+              ]
+            },
+            "targeting_automation": {
+              "advantage_audience": 0
+            }
           },
-          "anuncios": ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B"]
+          "anuncios": [
+            "1A",
+            "1B",
+            "2A",
+            "2B",
+            "3A",
+            "3B",
+            "4A",
+            "4B",
+            "5A",
+            "5B"
+          ]
         }
       ]
     },
@@ -46,13 +68,27 @@
           "billing_event": "IMPRESSIONS",
           "_audiencias": "Crear a mano en Públicos: web 180 d, cuestionario abandonado 90 d, IG/FB 365 d, vídeo 50 % 365 d. Excluir conversores 90 d.",
           "targeting": {
-            "custom_locations": [
-              { "latitude": 41.561, "longitude": 2.0089, "radius": 80, "distance_unit": "kilometer" }
-            ],
             "age_min": 32,
-            "age_max": 65
+            "age_max": 65,
+            "geo_locations": {
+              "custom_locations": [
+                {
+                  "latitude": 41.561,
+                  "longitude": 2.0089,
+                  "radius": 80,
+                  "distance_unit": "kilometer"
+                }
+              ]
+            },
+            "targeting_automation": {
+              "advantage_audience": 0
+            }
           },
-          "anuncios": ["4B", "5A", "3A"]
+          "anuncios": [
+            "4B",
+            "5A",
+            "3A"
+          ]
         }
       ]
     }
@@ -138,5 +174,6 @@
       "cta": "LEARN_MORE",
       "destino": "/guia"
     }
-  }
+  },
+  "_decision_targeting": "Advantage+ audience viene ACTIVADO por defecto en OUTCOME_LEADS y es incompatible con edad mínima > 25. Se desactiva (advantage_audience: 0) y se conserva 32-65: con un ticket de 3.000 € gastar en 18-31 es desperdicio, y el público ya es amplio (sin intereses, ~1,5-2,5 M en 80 km), así que el algoritmo tiene margen de sobra sin Advantage+."
 }

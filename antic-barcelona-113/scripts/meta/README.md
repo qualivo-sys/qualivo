@@ -48,3 +48,22 @@ Al terminar con `--apply` deja el mapa de IDs en `ultimo-despliegue.json`.
 - **Verificación de dominio, CAPI ni priorización de eventos (AEM).** Son pasos
   del Business Manager, no de la API de campañas. Ver documento 04.
 - **Activar.** A propósito.
+
+---
+
+## Notas de la primera ejecución real (cuenta AnticBarcelona113)
+
+Cosas que la API rechazó y cómo se resolvieron. Sirven para la próxima cuenta:
+
+| Error | Causa | Solución |
+|---|---|---|
+| `Falta agregar una ubicación` | `custom_locations` al nivel superior de `targeting` | Va anidado dentro de `geo_locations` |
+| `No se indicó ningún anunciante` | Ley de Servicios Digitales (UE) | Añadir `dsa_beneficiary` y `dsa_payor` al conjunto |
+| `edad mínima no puede ser > 25` | Advantage+ audience viene **activado por defecto** en `OUTCOME_LEADS` y es incompatible con el filtro de edad | `targeting_automation: { advantage_audience: 0 }` |
+| `El contenido no debería incluir mejoras estándar` | `standard_enhancements` está obsoleto | Quitarlo; las funciones se desactivan una a una desde el Administrador |
+| `User request limit reached` al **listar** | La cuenta está en nivel `development_access`: `GET /adsets` y `GET /ads` se limitan enseguida, aunque crear sí funcione | La idempotencia no puede depender de consultar a Meta: se apoya en `.state.json` local y la consulta queda como respaldo que nunca aborta |
+| `Ningún método de pago` al crear el **anuncio** | La cuenta no tiene forma de pago | **Bloqueante.** Meta no crea anuncios ni en pausa. Lo tiene que añadir el cliente |
+
+También se cachean los hashes de imagen en `.image-hashes.json`: cada reintento
+se ahorra 10 llamadas, que en nivel `development_access` es la diferencia entre
+completar la pasada o agotar el cupo.
