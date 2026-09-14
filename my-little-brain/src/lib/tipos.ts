@@ -350,8 +350,11 @@ export interface Deuda {
   id: string;
   nombre: string;
   tipo: 'prestamo' | 'hipoteca' | 'tarjeta' | 'financiacion' | 'personal' | 'otro';
-  /** Lo que quedaba el dia pendiente_fecha; los pagos posteriores se restan solos. */
-  pendiente: number;
+  /**
+   * Lo que quedaba el dia pendiente_fecha; los pagos posteriores se restan
+   * solos. null es "aun no se cuanto queda", que no es lo mismo que cero.
+   */
+  pendiente: number | null;
   pendiente_fecha: string;
   cuota: number;
   /** TAE en porcentaje: 5.9 son 5,9 %. Opcional. */

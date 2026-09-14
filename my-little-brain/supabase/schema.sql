@@ -313,7 +313,9 @@ create table if not exists public.finanzas_deudas (
   nombre          text not null,
   tipo            text not null default 'prestamo'
                   check (tipo in ('prestamo','hipoteca','tarjeta','financiacion','personal','otro')),
-  pendiente       numeric(12,2) not null check (pendiente >= 0),
+  -- Puede ser null: "se cuanto pago al mes pero no cuanto queda" es una
+  -- situacion de verdad, y forzar un cero haria que saliera como pagada.
+  pendiente       numeric(12,2) check (pendiente >= 0),
   pendiente_fecha date not null default current_date,
   cuota           numeric(12,2) not null default 0 check (cuota >= 0),
   -- TAE en porcentaje (5.9 = 5,9 %). Opcional: mucha gente no se la sabe.

@@ -10,7 +10,9 @@ import { METRICAS, valorActual } from '../motor/objetivos';
 import { cargarPanel } from '../datos';
 import { MAX_HOY as MAX_TAREAS_HOY } from '../motor/tareas';
 import { emparejarEjercicio } from '../motor/ejercicios';
-import { CATEGORIAS, categoria as categoriaFinanzas, normalizarCategoria as normalizarCategoriaFin } from '../motor/finanzas';
+import {
+  CATEGORIAS, categoria as categoriaFinanzas, mesesParaLiquidar, normalizarCategoria as normalizarCategoriaFin,
+} from '../motor/finanzas';
 import { EMOCIONES, TEMAS as TEMAS_HOJA, temaDe as temaDeTexto } from '../motor/emociones';
 import { alternativas, firmaPerfil, generarPlan, prescripcion } from '../motor/planificador';
 import { ejercicio } from '../motor/ejercicios';
@@ -472,6 +474,47 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         },
       },
       required: [],
+    },
+  },
+  {
+    name: 'anotar_deuda',
+    description:
+      'Apunta una deuda o prestamo: lo que queda, la cuota al mes y, si la sabe, la TAE. Usala cuando te '
+      + 'cuente que debe algo, no registrar_gasto: un prestamo no es un gasto de este mes. Si te suelta varias '
+      + 'de golpe, llama una vez por cada una. Si no sabe cuanto le queda pero si la cuota, deja pendiente sin '
+      + 'poner: la app lo enseña como "sin confirmar" en vez de darla por pagada. La TAE importa mas de lo que '
+      + 'parece: sin ella la cuenta de cuando acaba sale optimista. Impuestos aplazados de Hacienda (IVA, IRPF) '
+      + 'son tipo "otro" y ambito empresa si son de su actividad.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        nombre: { type: 'string', description: 'Como la llama el: "Prestamo del coche", "IVA 2T 2026".' },
+        pendiente: { type: 'number', description: 'Lo que queda HOY, no lo que pidio. Omitelo si no lo sabe.' },
+        cuota: { type: 'number', description: 'Lo que paga al mes. 0 si es un pago unico.' },
+        tipo: { type: 'string', enum: ['prestamo', 'hipoteca', 'tarjeta', 'financiacion', 'personal', 'otro'] },
+        tae: { type: 'number', description: 'En porcentaje: 5.9 son 5,9 %.' },
+        dia_cobro: { type: 'number', description: 'Dia del mes en que se la cobran, 1-31.' },
+        ambito: { type: 'string', enum: ['personal', 'empresa'] },
+        nota: { type: 'string', description: 'El banco, el numero de cuenta, cuando vence: lo que diga.' },
+      },
+      required: ['nombre'],
+    },
+  },
+  {
+    name: 'actualizar_deuda',
+    description:
+      'Corrige una deuda que ya tiene apuntada, buscandola por el nombre: el saldo que queda, la cuota, la TAE, '
+      + 'o darla por pagada con cerrada=true. Poner pendiente es decir "ahora mismo debo esto".',
+    input_schema: {
+      type: 'object',
+      properties: {
+        nombre: { type: 'string', description: 'El nombre de la deuda, o parte de el.' },
+        pendiente: { type: 'number' },
+        cuota: { type: 'number' },
+        tae: { type: 'number' },
+        cerrada: { type: 'boolean', description: 'true cuando ya la ha terminado de pagar.' },
+      },
+      required: ['nombre'],
     },
   },
 ];
@@ -1402,6 +1445,116 @@ async function despachar(
       return {
         texto: `${d.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'} de ${valor} € apuntado en ${etiqueta}${sobreNombre ? ` (${sobreNombre})` : ''}${d.impulsivo ? ' (marcado como impulso)' : ''}.`,
         accion: { herramienta: nombre, resumen: `${d.tipo === 'ingreso' ? '+' : '−'}${valor} € · ${etiqueta}` },
+      };
+    }
+
+    case 'anotar_deuda': {
+      const d = z
+        .object({
+          nombre: z.string(),
+          pendiente: num.optional(),
+          cuota: num.optional(),
+          tipo: z.enum(['prestamo', 'hipoteca', 'tarjeta', 'financiacion', 'personal', 'otro']).optional(),
+          tae: num.optional(),
+          dia_cobro: num.optional(),
+          ambito: z.enum(['personal', 'empresa']).optional(),
+          nota: z.string().optional(),
+        })
+        .parse(entrada);
+
+      const comoLaLlama = d.nombre.trim().slice(0, 80);
+      // Si ya la tiene apuntada se actualiza en vez de duplicarla: contarsela
+      // dos veces al chat no puede dejarle la deuda por partida doble.
+      const { data: previas } = await supabase
+        .from('finanzas_deudas').select('id, nombre').eq('user_id', userId).eq('cerrada', false);
+      const yaEsta = (previas ?? []).find(
+        (x) => (x.nombre as string).toLowerCase() === comoLaLlama.toLowerCase(),
+      );
+
+      const dia = d.dia_cobro !== undefined ? Math.round(d.dia_cobro) : null;
+      const campos = {
+        nombre: comoLaLlama,
+        tipo: d.tipo ?? 'prestamo',
+        // undefined es "no lo se": se guarda null, que la app enseña como sin
+        // confirmar. Un cero diria que esta pagada, que no es lo mismo.
+        pendiente: d.pendiente !== undefined ? Math.round(Math.abs(d.pendiente) * 100) / 100 : null,
+        cuota: d.cuota !== undefined ? Math.round(Math.abs(d.cuota) * 100) / 100 : 0,
+        tae: d.tae !== undefined && d.tae >= 0 && d.tae < 1000 ? Math.round(d.tae * 1000) / 1000 : null,
+        dia_cobro: dia !== null && dia >= 1 && dia <= 31 ? dia : null,
+        ambito: d.ambito ?? 'personal',
+        nota: d.nota?.slice(0, 200) ?? null,
+      };
+
+      if (yaEsta) {
+        const { error } = await supabase
+          .from('finanzas_deudas')
+          .update({ ...campos, pendiente_fecha: ctx.hoy, actualizada: new Date().toISOString() })
+          .eq('id', yaEsta.id).eq('user_id', userId);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('finanzas_deudas').insert({
+          user_id: userId, ...campos, pendiente_fecha: ctx.hoy,
+          actualizada: new Date().toISOString(),
+          // Explicito, no confiando en el valor por defecto de la columna: es
+          // lo que se busca luego para no duplicar.
+          cerrada: false,
+        });
+        if (error) throw error;
+      }
+
+      const meses = campos.pendiente !== null ? mesesParaLiquidar(campos.pendiente, campos.cuota, campos.tae) : null;
+      const cuanto = campos.pendiente !== null ? `${campos.pendiente} €` : 'saldo sin confirmar';
+      const plazo = campos.pendiente === null
+        ? ''
+        : meses === null && campos.cuota > 0
+          ? '. OJO: con esa cuota no cubre ni los intereses, la deuda sube aunque pague'
+          : meses !== null && meses > 0
+            ? `, ${meses} meses para liquidarla`
+            : '';
+      return {
+        texto: `${yaEsta ? 'Actualizada' : 'Apuntada'} la deuda "${comoLaLlama}": ${cuanto}, cuota ${campos.cuota} €/mes${plazo}.`,
+        accion: { herramienta: nombre, resumen: `deuda · ${comoLaLlama}` },
+      };
+    }
+
+    case 'actualizar_deuda': {
+      const d = z
+        .object({
+          nombre: z.string(),
+          pendiente: num.optional(),
+          cuota: num.optional(),
+          tae: num.optional(),
+          cerrada: z.boolean().optional(),
+        })
+        .parse(entrada);
+
+      const { data: todas } = await supabase
+        .from('finanzas_deudas').select('id, nombre').eq('user_id', userId);
+      const buscado = d.nombre.toLowerCase().trim();
+      const encontrada = (todas ?? []).find(
+        (x) => (x.nombre as string).toLowerCase().includes(buscado) || buscado.includes((x.nombre as string).toLowerCase()),
+      );
+      if (!encontrada) return { texto: `No encuentro ninguna deuda que se llame "${d.nombre}".`, accion: null };
+
+      const cambios: Record<string, unknown> = {};
+      if (d.pendiente !== undefined) {
+        cambios.pendiente = Math.round(Math.abs(d.pendiente) * 100) / 100;
+        cambios.pendiente_fecha = ctx.hoy;
+        cambios.actualizada = new Date().toISOString();
+      }
+      if (d.cuota !== undefined) cambios.cuota = Math.round(Math.abs(d.cuota) * 100) / 100;
+      if (d.tae !== undefined) cambios.tae = Math.round(d.tae * 1000) / 1000;
+      if (d.cerrada !== undefined) cambios.cerrada = d.cerrada;
+      if (!Object.keys(cambios).length) return { texto: 'No me has dicho que cambiar de esa deuda.', accion: null };
+
+      const { error } = await supabase
+        .from('finanzas_deudas').update(cambios).eq('id', encontrada.id).eq('user_id', userId);
+      if (error) throw error;
+      return {
+        texto: d.cerrada
+          ? `Cerrada la deuda "${encontrada.nombre}". Una menos.`
+          : `Actualizada la deuda "${encontrada.nombre}".`,
+        accion: { herramienta: nombre, resumen: `deuda · ${encontrada.nombre}` },
       };
     }
 

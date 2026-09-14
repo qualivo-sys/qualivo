@@ -311,8 +311,9 @@ const porcentaje = (valor: FormDataEntryValue | null): number | null => {
 export async function crearDeuda(datos: FormData) {
   const { supabase, userId, hoy } = await sesion();
   const nombre = texto(datos.get('nombre'));
+  // El saldo puede quedarse vacio: "se lo que pago pero no cuanto queda".
   const pendiente = importe(datos.get('pendiente'));
-  if (!nombre || pendiente === null) return;
+  if (!nombre) return;
 
   const dia = Number(texto(datos.get('dia_cobro')));
   await supabase.from('finanzas_deudas').insert({
@@ -348,7 +349,10 @@ export async function editarDeuda(id: string, datos: FormData) {
     .update({
       ...(nombre ? { nombre: nombre.slice(0, 80) } : {}),
       tipo: esTipoDeuda(texto(datos.get('tipo'))),
-      ...(pendiente !== null ? { pendiente, pendiente_fecha: hoy, actualizada: new Date().toISOString() } : {}),
+      // Vaciar el campo es decir "ya no lo se", asi que tiene que poder volver
+      // a null; por eso no se ignora el vacio como en los demas campos.
+      pendiente,
+      ...(pendiente !== null ? { pendiente_fecha: hoy, actualizada: new Date().toISOString() } : {}),
       ...(cuota !== null ? { cuota } : {}),
       tae: porcentaje(datos.get('tae')),
       dia_cobro: Number.isInteger(dia) && dia >= 1 && dia <= 31 ? dia : null,

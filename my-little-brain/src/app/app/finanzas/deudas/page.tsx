@@ -49,7 +49,9 @@ export default async function PaginaDeudas() {
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="rounded-lg bg-muted/40 p-3">
               <div className="text-lg font-semibold tabular-nums">{eur(deudas.pendiente)}</div>
-              <div className="text-xs text-muted-foreground">pendiente</div>
+              <div className="text-xs text-muted-foreground">
+                {deudas.sinConfirmar > 0 ? 'pendiente (al menos)' : 'pendiente'}
+              </div>
             </div>
             <div className="rounded-lg bg-muted/40 p-3">
               <div className="text-lg font-semibold tabular-nums">{eur(deudas.cuotaMes)}</div>
@@ -95,8 +97,17 @@ export default async function PaginaDeudas() {
           <Tarjeta key={d.id}>
             <div className="flex items-baseline justify-between gap-2">
               <TituloTarjeta className="mb-0">{d.emoji} {d.nombre}</TituloTarjeta>
-              <span className="shrink-0 text-lg font-semibold tabular-nums">{eur(d.pendiente)}</span>
+              <span className={`shrink-0 tabular-nums ${d.sinConfirmar ? 'text-sm text-muted-foreground' : 'text-lg font-semibold'}`}>
+                {d.sinConfirmar ? 'saldo sin confirmar' : eur(d.pendiente)}
+              </span>
             </div>
+
+            {d.sinConfirmar && (
+              <p className="mt-2 text-sm text-muted-foreground">
+                Pagas {eur(d.cuota)} al mes, pero aun no has dicho cuanto queda. En cuanto lo pongas te digo cuando la
+                terminas y cuanto te va a costar de intereses.
+              </p>
+            )}
 
             {d.pagado > 0 && (
               <>
@@ -120,13 +131,15 @@ export default async function PaginaDeudas() {
               <div className="rounded-lg bg-muted/40 p-2.5">
                 <dt className="text-xs text-muted-foreground">Te queda</dt>
                 <dd className={`font-semibold ${d.nuncaAcaba ? 'text-destructive' : ''}`}>
-                  {d.nuncaAcaba
-                    ? 'No se acaba'
-                    : d.meses === 0
-                      ? 'Pagada'
-                      : d.meses !== null
-                        ? `${d.meses} ${d.meses === 1 ? 'mes' : 'meses'}`
-                        : 'Pon la cuota'}
+                  {d.sinConfirmar
+                    ? '—'
+                    : d.nuncaAcaba
+                      ? 'No se acaba'
+                      : d.meses === 0
+                        ? 'Pagada'
+                        : d.meses !== null
+                          ? `${d.meses} ${d.meses === 1 ? 'mes' : 'meses'}`
+                          : 'Pon la cuota'}
                 </dd>
               </div>
             </dl>
@@ -178,7 +191,7 @@ export default async function PaginaDeudas() {
                     etiqueta="Queda ahora"
                     name="pendiente"
                     inputMode="decimal"
-                    defaultValue={String(d.pendiente)}
+                    defaultValue={d.sinConfirmar ? '' : String(d.pendiente)}
                     ayuda="Si lo cambias, se toma como lo que debes hoy."
                   />
                   <Campo etiqueta="Cuota al mes" name="cuota" inputMode="decimal" defaultValue={String(d.cuota)} />
@@ -220,7 +233,13 @@ export default async function PaginaDeudas() {
             </Selector>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Campo etiqueta="¿Cuanto queda?" name="pendiente" inputMode="decimal" placeholder="6000" required />
+            <Campo
+              etiqueta="¿Cuanto queda?"
+              name="pendiente"
+              inputMode="decimal"
+              placeholder="6000"
+              ayuda="Si aun no lo sabes, dejalo vacio."
+            />
             <Campo etiqueta="Cuota al mes" name="cuota" inputMode="decimal" placeholder="200" />
           </div>
           <div className="grid grid-cols-2 gap-3">

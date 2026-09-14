@@ -66,12 +66,30 @@ const llamadas = [
   ['anotar_ocio', { titulo: 'Dune', categoria: 'pantalla', ya_hecho: true, valoracion: 5, con_quien: 'Isa' }],
   ['marcar_ocio_hecho', { titulo: 'ruta del cares', valoracion: 4 }],
   ['consultar_historial', { dias: 14 }],
+  ['anotar_deuda', { nombre: 'Prestamo coche', pendiente: 14159.42, cuota: 339.62, tipo: 'prestamo', dia_cobro: 5, nota: 'BBVA ...1048' }],
+  // Sin saldo: tiene que quedarse en null, no en cero
+  ['anotar_deuda', { nombre: 'Younited', cuota: 96.86 }],
+  ['anotar_deuda', { nombre: 'IVA 2T 2026', pendiente: 3765.97, cuota: 313, tipo: 'otro', tae: 4, ambito: 'empresa' }],
+  ['actualizar_deuda', { nombre: 'Prestamo coche', pendiente: 13800 }],
 ];
 
 for (const [nombre, entrada] of llamadas) {
   const resultado = await ejecutarHerramienta(nombre, entrada, ctx);
   const ok = !resultado.texto.startsWith('Error') && !resultado.texto.startsWith('Herramienta desconocida');
   check(`herramienta ${nombre}`, ok, ok ? resultado.texto.split('\n')[0].slice(0, 70) : resultado.texto);
+}
+
+// Tras varios intentos fallidos acabas contandole la misma deuda dos veces.
+// Eso no puede dejarte la deuda apuntada por partida doble.
+{
+  await ejecutarHerramienta('anotar_deuda', { nombre: 'Tarjeta CaixaBank', pendiente: 1422, cuota: 36, tae: 20 }, ctx);
+  const unaVez = (ctx.supabase.db?.tablas?.finanzas_deudas ?? []).filter((d) => d.nombre === 'Tarjeta CaixaBank').length;
+  await ejecutarHerramienta('anotar_deuda', { nombre: 'Tarjeta CaixaBank', pendiente: 1400, cuota: 36, tae: 20 }, ctx);
+  const filas = (ctx.supabase.db?.tablas?.finanzas_deudas ?? []).filter((d) => d.nombre === 'Tarjeta CaixaBank');
+  check('contar la misma deuda dos veces no la duplica', unaVez === 1 && filas.length === 1, `${unaVez} → ${filas.length}`);
+  check('y se queda con lo ultimo que le has dicho', filas[0] && Number(filas[0].pendiente) === 1400, String(filas[0]?.pendiente));
+  const younited = (ctx.supabase.db?.tablas?.finanzas_deudas ?? []).find((d) => d.nombre === 'Younited');
+  check('sin saldo se guarda null, no cero', younited && younited.pendiente === null, String(younited?.pendiente));
 }
 
 check('todas las herramientas declaradas se pueden ejecutar',
@@ -1312,6 +1330,30 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
   const tras = (creado) => resumenDeudas({ deudas: hoyMismo, movimientos: pagoDeHoy(creado), hoy: '2026-09-14' }).deudas[0].pendiente;
   check('pagar el mismo dia que la apuntas si la baja', tras('2026-09-14T18:00:00.000Z') === 2850, String(tras('2026-09-14T18:00:00.000Z')));
   check('pero un pago anterior a decir lo que debes ya estaba dentro', tras('2026-09-14T08:00:00.000Z') === 3000, String(tras('2026-09-14T08:00:00.000Z')));
+
+  // "Se lo que pago al mes pero no cuanto queda" es una situacion de verdad,
+  // y un cero la daria por pagada, que es justo lo contrario.
+  const aMedias = [
+    { id: 's1', nombre: 'Younited', tipo: 'prestamo', pendiente: null, pendiente_fecha: '2026-09-01', actualizada: '2026-09-01T10:00:00.000Z', cuota: 96.86, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+    { id: 's2', nombre: 'Coche', tipo: 'prestamo', pendiente: 14159.42, pendiente_fecha: '2026-09-01', actualizada: '2026-09-01T10:00:00.000Z', cuota: 339.62, tae: null, dia_cobro: 5, ambito: 'personal', nota: null, cerrada: false, creado: '' },
+  ];
+  const rMed = resumenDeudas({ deudas: aMedias, movimientos: [], hoy: '2026-09-14', ingresosMes: 5000, ahorrado: 0 });
+  const sinSaldo = rMed.deudas.find((x) => x.nombre === 'Younited');
+  check('sin saldo confirmado no se da por pagada', sinSaldo.sinConfirmar === true && sinSaldo.meses === null, JSON.stringify({ s: sinSaldo.sinConfirmar, m: sinSaldo.meses }));
+  check('y no se inventa que no se acaba nunca', sinSaldo.nuncaAcaba === false);
+  check('su cuota si cuenta, que esa se paga igual', rMed.cuotaMes === Math.round((96.86 + 339.62) * 100) / 100, String(rMed.cuotaMes));
+  check('el total pendiente solo suma lo que se sabe', rMed.pendiente === 14159.42, String(rMed.pendiente));
+  check('y se sabe que el total esta incompleto', rMed.sinConfirmar === 1, String(rMed.sinConfirmar));
+  check('sin todos los saldos no se promete cuando acabas', rMed.ultimoFin === null, String(rMed.ultimoFin));
+  const avisoMed = insightsPatrimonio(resumenCuentas([], { hoy: '2026-09-14' }), rMed, []);
+  check('y se avisa de que es un minimo', avisoMed.some((a) => /minimo, no el total/.test(a.texto)), JSON.stringify(avisoMed.map((a) => a.texto)));
+
+  // La tarjeta al 20 % pagando poco: 1.422 € acaban costando casi el doble
+  const tarjeta = resumenDeudas({
+    deudas: [{ id: 't', nombre: 'Tarjeta', tipo: 'tarjeta', pendiente: 1422, pendiente_fecha: '2026-09-01', actualizada: '2026-09-01T10:00:00.000Z', cuota: 36, tae: 20, dia_cobro: null, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
+    movimientos: [], hoy: '2026-09-14',
+  }).deudas[0];
+  check('una cuota baja con TAE alta se ve venir', tarjeta.meses === 65 && tarjeta.intereses > 900, JSON.stringify({ m: tarjeta.meses, i: tarjeta.intereses }));
 
   const rdVacio = resumenDeudas({ deudas: [], movimientos: [], hoy: '2026-09-14' });
   check('sin deudas no se inventa nada', rdVacio.alguna === false && rdVacio.pendiente === 0 && rdVacio.pctIngresos === null);

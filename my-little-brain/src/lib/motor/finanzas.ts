@@ -658,6 +658,8 @@ export interface LineaDeuda {
   emoji: string;
   /** Lo que queda hoy: lo que dijiste menos lo que has ido pagando. */
   pendiente: number;
+  /** true si aun no sabe cuanto queda. Pagar no es lo mismo que no saber. */
+  sinConfirmar: boolean;
   /** Lo que dijiste que quedaba, sin descontar pagos. */
   inicial: number;
   pagado: number;
@@ -721,6 +723,12 @@ export interface ResumenDeudas {
   ultimoFin: string | null;
   /** Cual conviene atacar primero: la mas cara, no la mas grande. */
   masCara: LineaDeuda | null;
+  /**
+   * Cuantas deudas tienen el saldo sin confirmar. Si hay alguna, el total
+   * pendiente y el patrimonio se quedan cortos, y hay que decirlo en vez de
+   * dar una cifra redonda que no lo es.
+   */
+  sinConfirmar: number;
   alguna: boolean;
 }
 
@@ -749,17 +757,21 @@ export function resumenDeudas(datos: {
         return Boolean(d.actualizada && m.creado && m.creado > d.actualizada);
       });
       const pagado = Math.round(suma(pagos.map((m) => num(m.importe))) * 100) / 100;
-      const inicial = num(d.pendiente);
-      const pendiente = Math.max(0, Math.round((inicial - pagado) * 100) / 100);
+      // null no es cero: si no sabe cuanto queda, no se puede decir ni lo que
+      // debe ni cuando acaba, y desde luego no que este pagada.
+      const sinConfirmar = d.pendiente === null || d.pendiente === undefined;
+      const inicial = sinConfirmar ? 0 : num(d.pendiente);
+      const pendiente = sinConfirmar ? 0 : Math.max(0, Math.round((inicial - pagado) * 100) / 100);
       const cuota = num(d.cuota);
       const tae = d.tae !== null && d.tae !== undefined ? num(d.tae) : null;
-      const meses = mesesParaLiquidar(pendiente, cuota, tae);
+      const meses = sinConfirmar ? null : mesesParaLiquidar(pendiente, cuota, tae);
       return {
         id: d.id,
         nombre: d.nombre,
         tipo: d.tipo,
         emoji: tipoDeuda(d.tipo).emoji,
         pendiente,
+        sinConfirmar,
         inicial,
         pagado,
         cuota,
@@ -769,7 +781,7 @@ export function resumenDeudas(datos: {
         meses,
         fin: meses !== null && meses > 0 ? mesMas(mesActual, meses) : meses === 0 ? mesActual : null,
         intereses: meses !== null && meses > 0 ? Math.round(cuota * meses - pendiente) : null,
-        nuncaAcaba: meses === null && cuota > 0 && pendiente > 0,
+        nuncaAcaba: !sinConfirmar && meses === null && cuota > 0 && pendiente > 0,
         pagos: pagos.length,
       };
     })
@@ -788,9 +800,10 @@ export function resumenDeudas(datos: {
     patrimonio: datos.ahorrado !== null && datos.ahorrado !== undefined
       ? Math.round((datos.ahorrado - pendiente) * 100) / 100
       : null,
-    ultimoFin: deudas.some((d) => d.nuncaAcaba) || !conFin.length ? null : conFin[conFin.length - 1],
+    ultimoFin: deudas.some((d) => d.nuncaAcaba || d.sinConfirmar) || !conFin.length ? null : conFin[conFin.length - 1],
     // La mas cara por TAE, no la mas grande: es la que mas te cuesta tener viva.
     masCara: deudas.filter((d) => d.tae && d.pendiente > 0).sort((a, b) => (b.tae ?? 0) - (a.tae ?? 0))[0] ?? null,
+    sinConfirmar: deudas.filter((d) => d.sinConfirmar).length,
     alguna: deudas.length > 0,
   };
 }
@@ -838,6 +851,13 @@ export function insightsPatrimonio(
       texto: deudas.patrimonio >= 0
         ? `Ahorro menos deuda: ${eur(deudas.patrimonio)} a favor.`
         : `Ahorro menos deuda: ${eur(deudas.patrimonio)} en contra. Es el numero a mover, no el de la caja.`,
+    });
+  }
+
+  if (deudas.sinConfirmar > 0) {
+    salida.push({
+      tono: 'info',
+      texto: `Te ${deudas.sinConfirmar === 1 ? 'falta' : 'faltan'} el saldo de ${deudas.sinConfirmar} ${deudas.sinConfirmar === 1 ? 'deuda' : 'deudas'}, asi que los ${eur(deudas.pendiente)} son un minimo, no el total.`,
     });
   }
 
