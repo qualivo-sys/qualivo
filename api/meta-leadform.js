@@ -77,6 +77,29 @@ async function traerLead(leadgenId, token) {
   return r.json();
 }
 
+// Respaldo de la lista blanca. Cada vez que hay que corregir el texto de un
+// formulario hay que duplicarlo, porque Meta acepta la edicion de un formulario
+// con leads y la ignora en silencio (devuelve success y no cambia nada). El
+// duplicado trae identificador nuevo, y si nadie se acuerda de actualizar la
+// variable de entorno los leads entran al CRM y no los activa nadie.
+//
+// Por eso, si el identificador no esta en la lista, se mira el nombre: los
+// formularios de esta campana empiezan por este prefijo y los de campanas
+// viejas no. Sigue siendo seguro porque la suscripcion ya es solo de nuestra
+// pagina y el nombre lo ponemos nosotros.
+const PREFIJO_FORM = 'Qualivo_Diagnostico';
+
+async function nombreFormulario(formId) {
+  try {
+    const t = process.env.META_LEADFORM_TOKEN;
+    if (!t || !formId) return '';
+    const r = await fetch(GRAPH + '/' + formId + '?fields=name&access_token=' + encodeURIComponent(t));
+    if (!r.ok) return '';
+    const d = await r.json();
+    return String(d.name || '');
+  } catch (e) { return ''; }
+}
+
 async function guardar(lead) {
   const headers = {
     Authorization: 'Bearer ' + process.env.GHL_API_KEY,
@@ -85,7 +108,16 @@ async function guardar(lead) {
   };
   const permitidos = String(process.env.META_LEADFORM_IDS || '')
     .split(',').map(function (x) { return x.trim(); }).filter(Boolean);
-  const deEstaCampana = permitidos.length > 0 && permitidos.indexOf(String(lead.form_id || '')) !== -1;
+  let deEstaCampana = permitidos.length > 0 && permitidos.indexOf(String(lead.form_id || '')) !== -1;
+  let porNombre = '';
+  if (!deEstaCampana && lead.form_id) {
+    const n = await nombreFormulario(lead.form_id);
+    if (n && n.indexOf(PREFIJO_FORM) === 0) {
+      deEstaCampana = true;
+      porNombre = n;
+      console.warn('[leadform] ' + lead.form_id + ' («' + n + '») no esta en META_LEADFORM_IDS pero coincide con el prefijo. Se activa igual. Conviene anyadirlo a la variable.');
+    }
+  }
 
   const campos = lead.field_data || [];
   const nombre = valor(campos, ['full_name', 'nombre', 'nombre_completo', 'first_name']);
@@ -168,7 +200,7 @@ async function guardar(lead) {
         body: ['Lead del formulario instantáneo de Meta', '',
           inversion ? 'Inversión mensual en captación: ' + inversion : '',
           fuga ? 'Dónde cree que se le escapa: ' + fuga : '',
-          lead.form_id ? 'Formulario: ' + lead.form_id : '',
+          lead.form_id ? 'Formulario: ' + lead.form_id + (porNombre ? ' (' + porNombre + ', reconocido por el nombre)' : '') : '',
           '', new Date().toISOString()].filter(Boolean).join('\n')
       })
     }).catch(function () {});
