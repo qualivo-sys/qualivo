@@ -51,66 +51,53 @@ retraso no cambian nada y hay la mitad de piezas que se pueden romper.
 
 ## Puesta en marcha
 
-### 1. Pegar el código
+Son cuatro pasos y no hay que tocar nada más. El código está repartido en
+varios archivos porque así se lee, pero se entrega junto en uno solo
+(`CRM-completo.gs`, que genera `scripts/crm/juntar.mjs`) para pegar una vez en
+lugar de cuatro.
 
-En la hoja: **Extensiones → Apps Script**. Crear tres archivos y pegar cada uno:
+1. En la hoja: **Extensiones → Apps Script**. Pegar el archivo entero.
+2. Arriba del todo hay un bloque `CONFIG` con **una línea vacía**: el correo
+   donde deben llegar los avisos. Lo demás ya viene puesto.
+3. Elegir la función **`configurar`** y darle al ▶. Pedirá permisos la primera
+   vez — es normal, va a escribir en la hoja y a mandar correos. Crea las
+   pestañas, los desplegables, el panel y los cinco disparadores automáticos.
+   Se puede volver a ejecutar sin miedo: no borra datos ni los duplica.
+4. **Implementar → Nueva implementación → Aplicación web**, ejecutar como
+   *Yo* y acceso para *Cualquier usuario*. Copiar la URL que acaba en `/exec`
+   y pasarla a la agencia.
 
-- `Codigo.gs` — recibe los leads de la web
-- `Crm.gs` — el pipeline, el panel de la hoja y los avisos
-- `MetaLeads.gs` — trae los del formulario de Meta
-- `Api.gs` — lo que consulta la app de Vercel
-
-### 2. Propiedades del script
-
-**Proyecto → Configuración → Propiedades del script**:
-
-| Propiedad | Valor |
-|---|---|
-| `SECRETO` | Una cadena larga inventada. La misma que `LEAD_SHARED_SECRET` en Vercel |
-| `EMAIL_AVISOS` | Dónde llegan los avisos de lead nuevo. Admite varios separados por coma |
-| `EMAIL_AGENCIA` | Correo de Qualivo. Solo recibe el resumen semanal |
-| `META_TOKEN` | Token de usuario de sistema con `leads_retrieval`. No caduca |
-
-### 3. Ejecutar `configurar()` una vez
-
-Seleccionar la función `configurar` y darle a ▶. Pide permisos la primera vez
-(es normal: va a escribir en la hoja y a mandar correos en tu nombre).
-
-Crea las pestañas, los desplegables de estado, el panel y los cinco
-disparadores automáticos. Se puede volver a ejecutar sin miedo: no borra datos
-ni duplica disparadores.
+Ese último paso es el único que no puede hacer la agencia por su cuenta: la
+URL solo existe después de desplegar. Con ella se rellena `LEAD_WEBHOOK_URL`
+en Vercel y el circuito queda cerrado.
 
 Para comprobar que Meta responde: ejecutar `probarConexionMeta()` y mirar el
 registro. Debe listar el formulario «AB113 · Diseña tu pieza».
 
-### 4. Desplegar como app web
+> Al cambiar el código más adelante hay que **editar la implementación
+> existente** y subir la versión, no crear una nueva: una nueva cambia la URL
+> y Vercel seguiría escribiendo en la vieja.
 
-**Implementar → Nueva implementación → Aplicación web**
+### Lo que ya está puesto en Vercel
 
-- Ejecutar como: **Yo**
-- Quién tiene acceso: **Cualquier usuario**
-
-Copiar la URL que acaba en `/exec`.
-
-### 5. Dos variables en Vercel
-
-En el proyecto de Vercel, **Settings → Environment Variables**:
-
-| Variable | Valor |
+| Variable | Estado |
 |---|---|
-| `LEAD_WEBHOOK_URL` | La URL `/exec` del paso anterior |
-| `LEAD_SHARED_SECRET` | La misma cadena que `SECRETO` |
+| `CRM_PASSWORD` | ✅ puesta |
+| `CRM_SESSION_SECRET` | ✅ puesta |
+| `LEAD_SHARED_SECRET` | ✅ puesta, y la misma va dentro del `CONFIG` del script |
+| `LEAD_WEBHOOK_URL` | ⏳ pendiente del paso 4 |
 
-`CRM_PASSWORD` y `CRM_SESSION_SECRET` ya están puestas. La contraseña se puede
-cambiar cuando se quiera desde el mismo panel de Vercel.
+### Generar el archivo único
 
-Y redesplegar para que las coja. Hasta ese momento `/crm` abre y pide la
-contraseña, pero al entrar avisa de que no puede leer la hoja: es lo esperado,
-todavía no sabe dónde está.
+```
+node scripts/crm/juntar.mjs                     # con huecos por rellenar
+SECRETO=... META_TOKEN=... EMAIL_AVISOS=... \
+  node scripts/crm/juntar.mjs --salida /ruta.gs # ya relleno
+```
 
-> Cada vez que se cambie el código hay que **editar la implementación
-> existente** y subir la versión, no crear una nueva: una implementación
-> nueva cambia la URL y Vercel seguiría escribiendo en la vieja.
+La versión rellena lleva el token de Meta dentro, así que **no se guarda en el
+repositorio** (está en `.gitignore`): se genera aparte y se entrega por otro
+canal.
 
 ## Cómo se trabaja el pipeline
 

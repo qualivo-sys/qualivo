@@ -74,6 +74,10 @@ function hojaLeads() {
  * nada: no borra datos y no duplica los disparadores.
  */
 function configurar() {
+  // El archivo de un solo pegado trae un bloque CONFIG arriba: se vuelca a las
+  // propiedades del script para no tener que ir a rellenarlas a mano.
+  if (typeof guardarConfig === 'function') guardarConfig();
+
   var hoja = hojaLeads();
 
   hoja.getRange(1, 1, 1, COLUMNAS.length)
@@ -112,8 +116,12 @@ function configurar() {
   construirPanel();
   instalarDisparadores();
 
+  var props = PropertiesService.getScriptProperties();
+  var faltan = ['SECRETO', 'EMAIL_AVISOS'].filter(function (k) { return !props.getProperty(k); });
   SpreadsheetApp.getActiveSpreadsheet().toast(
-    'CRM listo. Avisos diarios a las 8:00 y resumen semanal los lunes.',
+    faltan.length
+      ? 'Hecho, pero falta rellenar arriba: ' + faltan.join(' y ')
+      : 'CRM listo. Avisos diarios a las 8:00 y resumen semanal los lunes.',
     'Antic Barcelona 113', 8);
 }
 
