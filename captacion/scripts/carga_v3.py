@@ -16,6 +16,12 @@
 #   {"email":"x@y.es","first_name":"Ana","company_name":"Acme","dom":"acme.es",
 #    "puerta":"crm", "v":{"crm":"HubSpot"}}
 # Puertas validas: anuncios, crm, base, multiservicio, mide, direccion, comercial
+#
+# Filtro de buzones de rol (aplicar ANTES de enriquecer en Apollo): quedan fuera
+# info, contacto, hola, admin, ventas, comercial, soporte, marketing, rrhh,
+# secretaria, gestion, DIRECCION y GERENCIA. Los dos ultimos se anadieron el
+# 14-sep: direccion@empleabilidadett.es reboto y ese rebote se paga en
+# reputacion de dominio, no en un lead perdido.
 # Campos de "v" que usa cada puerta:
 #   crm -> crm · base -> anios · multiservicio -> l1,l2,l3 · direccion -> cargo
 import json, sys, urllib.request, urllib.error, time
