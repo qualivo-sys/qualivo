@@ -13,7 +13,12 @@ const F = '-apple-system,Segoe UI,Roboto,sans-serif';
 
 // Umbrales de aviso. Salen del histórico de la cuenta: por debajo de 17 € de CPL
 // es normal, por encima de 35 € algo va mal.
-const CPL_MALO = 35;
+// El CPL medio de la cuenta en los ultimos 90 dias, excluyendo Valldesarroca
+// (nicho local, CPM de 8 EUR que no se parece a nuestro publico), es de 32,8 EUR.
+// Un umbral de 35 saltaria practicamente cada dia normal, y un aviso que salta
+// siempre deja de leerse. 45 deja sitio al ruido diario y solo canta cuando
+// algo va de verdad peor que el historico.
+const CPL_MALO = 45;
 const GASTO_SIN_LEADS = 25;
 
 function eur(n) { return Number(n || 0).toFixed(2).replace('.', ',') + ' €'; }
