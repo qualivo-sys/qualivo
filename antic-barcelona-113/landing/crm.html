@@ -86,7 +86,9 @@ main{max-width:860px;margin:0 auto;padding:16px 16px 90px}
   border:1px solid var(--oak-300);padding:5px 12px;border-radius:999px;font-family:var(--titulo)}
 
 /* ── Panel ────────────────────────────────────────────── */
-.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:22px}
+.cifras{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+/* Son seis: en ancho quedan 3+3, nunca una tarjeta suelta al final de fila. */
+@media(min-width:620px){.cifras{grid-template-columns:repeat(3,1fr)}}
 .cifra{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:14px}
 .cifra b{display:block;font-family:var(--titulo);font-size:28px;font-weight:600;
   color:var(--ink-900);line-height:1.1;letter-spacing:-.02em}
