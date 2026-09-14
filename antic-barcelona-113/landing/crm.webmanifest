@@ -1,0 +1,14 @@
+{
+  "name": "CRM Antic Barcelona 113",
+  "short_name": "Clientes",
+  "description": "Seguimiento de leads de Antic Barcelona 113",
+  "start_url": "/crm",
+  "scope": "/crm",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14100D",
+  "theme_color": "#14100D",
+  "icons": [
+    { "src": "/assets/photos/logo-antic-barcelona-113.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

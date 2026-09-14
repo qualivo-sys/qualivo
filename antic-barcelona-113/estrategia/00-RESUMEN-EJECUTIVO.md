@@ -49,7 +49,7 @@ Y hay un problema técnico que hay que resolver antes de gastar el primer euro:
 El cuestionario que ya está diseñado (6 pasos, scoring HOT/WARM/COLD) no es un formulario:
 es el filtro comercial. Su trabajo no es captar, es decidir a quién llama el cliente primero.
 
-## 4. Números esperados (escenario 900 €/mes)
+## 4. Números esperados (escenario 600 €/mes)
 
 **[SUPUESTO]** — Estimaciones de benchmark para mueble a medida de ticket alto en
 Cataluña. Se recalibran con datos reales a partir de la semana 3.
@@ -67,16 +67,21 @@ Cataluña. Se recalibran con datos reales a partir de la semana 3.
 | Presupuesto → venta | 15-30 % | |
 | **CAC estimado** | **250-600 €** | |
 
-**Lectura honesta:** con 900 €/mes salen **1-2 ventas al mes**. Con un ticket medio
-**[SUPUESTO 3.000 €]** y margen bruto **[SUPUESTO 45 %]**, eso son 1.350-2.700 € de
-margen contra 900 € de medios más el fee de agencia.
+**Lectura honesta:** con 600 €/mes salen **0-1 ventas al mes**. Con un ticket medio
+**[SUPUESTO 3.000 €]** y margen bruto **[SUPUESTO 45 %]**, eso son 0-1.350 € de
+margen contra 578 € de medios más el fee de agencia.
+
+Ese cero del rango es real y hay que decirlo en la reunión: habrá meses sin venta
+atribuida. Por eso el compromiso a 600 € tiene que ser de **cuatro meses** y no de
+tres. El mes 1 no da lectura fiable y juzgar la campaña con un mes de datos a este
+presupuesto es tirar el dinero ya gastado.
 
 - **Mes 1: probablemente en tablas.** Es fase de aprendizaje y construcción de audiencias.
 - **Mes 2-3: positivo**, cuando el retargeting empieza a trabajar sobre una base de
   700-1.000 visitantes acumulados y las creatividades ganadoras están identificadas.
 
 Decir esto en la reunión es lo que hace creíble el resto. Un plan que promete ROAS 4x
-el primer mes con 900 € en mueble a medida no lo cumple nadie.
+el primer mes con 600 € en mueble a medida no lo cumple nadie.
 
 ## 5. Los cinco ángulos creativos
 

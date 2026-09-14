@@ -121,3 +121,38 @@ publicaciones con más alcance de @antic.barcelona113 (128 en total, 123 Reels).
 Las seis primeras se comprobaron una a una contra la API: **todas admiten
 promoción**. Se crea la creatividad con `source_instagram_media_id` más
 `instagram_user_id`, no con `object_story_id`.
+
+## El techo de 600 €/mes
+
+`ajustar-presupuesto.mjs` dejó la cuenta así:
+
+| Campaña | €/día | Estado |
+|---|---|---|
+| `AB113 \| FRIO \| Lead` | 15 | En pausa, lista |
+| `AB113 \| RTG \| Lead` | 4 | En pausa, lista |
+| `AB113 \| FRIO \| Formulario` | 4 | En pausa, en reserva |
+
+**Al arrancar son 19 €/día**, o 589 € en un mes de 31 días. Se eligió 19 y no 20
+justamente por eso: 20 × 31 son 620 €.
+
+Once anuncios quedan encendidos dentro de campañas en pausa (6 en frío, 2 en
+retargeting, 3 en el de formulario). Los otros ocho se apagaron: con 15 €/día,
+trece anuncios se reparten 1,15 € cada uno y ninguno acumula eventos suficientes
+para salir de la fase de aprendizaje. Están ahí para sustituir a un ganador
+cuando lo haya, no borrados.
+
+> **Cuidado al activar.** Si se encendieran las tres campañas a la vez serían
+> 23 €/día = 713 € en un mes de 31 días, por encima del techo. El formulario
+> entra en la semana 5 **quitando del frío**: 15 + 4 pasan a 11 + 4 + 4.
+
+### La única garantía dura
+
+Los presupuestos diarios son una promesa, no un tope. Si se quiere un límite que
+Meta no pueda superar, el campo es el **límite de gasto de la cuenta**
+(Configuración de facturación → Límite de gasto de la cuenta).
+
+Tiene una trampa que hay que conocer antes de ponerlo: **es un tope acumulado,
+no mensual**. Se pone en 600 y, al llegar, Meta pausa *todo* hasta que alguien lo
+suba. Sirve de red de seguridad el primer mes, pero a partir del segundo hay que
+acordarse de subirlo cada mes o la campaña se apaga sola a mitad de mes sin
+avisar. No se ha puesto por eso: es una decisión del cliente, no nuestra.

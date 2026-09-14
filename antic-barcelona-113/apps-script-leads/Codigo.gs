@@ -1,28 +1,28 @@
 /**
- * Receptor de leads — Antic Barcelona 113
+ * Receptor de leads de la web — Antic Barcelona 113
  *
- * Se pega en la hoja de cálculo (Extensiones → Apps Script), se despliega como
- * app web y la URL /exec se mete en Vercel como LEAD_WEBHOOK_URL.
+ * Es una de las dos puertas de entrada al CRM. La otra es MetaLeads.gs, que
+ * trae los del formulario instantáneo. Las dos acaban en la misma hoja.
+ *
+ * Se despliega como app web y la URL /exec se mete en Vercel como
+ * LEAD_WEBHOOK_URL.
  *
  * Qué hace con cada lead:
- *   1. Lo añade como fila en la pestaña "Leads"
+ *   1. Lo añade como fila en la pestaña "Leads" (guardar, en Crm.gs)
  *   2. Si viene de la guía, manda el email con el PDF adjunto
  *   3. Avisa por correo al comercial, marcando en el asunto si es HOT
  *
  * Configuración: Proyecto → Configuración → Propiedades del script
  *   SECRETO        debe coincidir con LEAD_SHARED_SECRET de Vercel
- *   EMAIL_AVISOS   dónde llegan los avisos de lead nuevo
+ *   EMAIL_AVISOS   avisos de lead nuevo (admite varios separados por coma)
+ *   EMAIL_AGENCIA  solo para el resumen semanal
+ *   META_TOKEN     token de sistema con leads_retrieval
  *
  * La guía se descarga de la propia web al enviar el correo, así que no hay
  * que subirla a Drive ni mantener dos copias: el adjunto siempre es la que
  * está publicada.
  */
 var URL_GUIA = 'https://antic-barcelona-113.vercel.app/descargas/guia-mesa-perfecta-antic-barcelona-113.pdf';
-
-var COLUMNAS = ['fecha', 'origen', 'nombre', 'email', 'telefono', 'tier', 'pieza',
-  'espacio', 'medidas', 'estilo', 'presupuesto', 'plazo', 'referencias',
-  'utm_source', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
-  'ip', 'user_agent', 'estado', 'primer_contacto', 'importe', 'resultado'];
 
 function doPost(e) {
   try {
@@ -35,7 +35,16 @@ function doPost(e) {
       if (enviado !== secreto) return json({ ok: false, error: 'no_autorizado' });
     }
 
-    var lead = JSON.parse(e.postData.contents);
+    var cuerpo = JSON.parse(e.postData.contents);
+
+    // El mismo endpoint sirve dos cosas: leads nuevos y las llamadas del CRM
+    // de Vercel. Se distinguen porque las de la API traen "accion".
+    if (cuerpo.accion) {
+      var r = atender(cuerpo);
+      if (r) return json(r);
+    }
+
+    var lead = cuerpo;
     guardar(lead);
 
     if (lead.origen === 'guia') enviarGuia(lead, props);
@@ -49,27 +58,6 @@ function doPost(e) {
 }
 
 function doGet() { return json({ ok: true, servicio: 'leads AB113' }); }
-
-function guardar(lead) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var hoja = ss.getSheetByName('Leads');
-  if (!hoja) {
-    hoja = ss.insertSheet('Leads');
-    hoja.appendRow(COLUMNAS);
-    hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight('bold').setBackground('#F4EFE7');
-    hoja.setFrozenRows(1);
-  }
-  var fila = COLUMNAS.map(function (c) {
-    if (c === 'estado') return 'Nuevo';
-    return lead[c] !== undefined && lead[c] !== null ? lead[c] : '';
-  });
-  hoja.appendRow(fila);
-
-  // Los HOT en rojo suave, para que salten a la vista al abrir la hoja
-  if (lead.tier === 'HOT') {
-    hoja.getRange(hoja.getLastRow(), 1, 1, COLUMNAS.length).setBackground('#FCE8E6');
-  }
-}
 
 function enviarGuia(lead, props) {
   var adjuntos = [];

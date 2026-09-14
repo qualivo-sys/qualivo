@@ -40,7 +40,7 @@ del primer mes.
 ```
 Objetivo:        Ventas (Sales)
 Optimización:    Conversión → Lead
-Presupuesto:     CBO 22 €/día  (73 %)
+Presupuesto:     CBO 15 €/día  (79 %)
 Atribución:      7 días clic / 1 día visualización
 Puja:            Coste más bajo (sin límite) las primeras 2 semanas
 ```
@@ -57,13 +57,13 @@ Puja:            Coste más bajo (sin límite) las primeras 2 semanas
 | Exclusiones | Conversores últimos 90 d · Empleados | Evita gastar en quien ya compró |
 | Idioma | Sin restricción | Castellano y catalán conviven |
 
-> **Por qué público amplio y no intereses.** Con 22 €/día un público de interés de
+> **Por qué público amplio y no intereses.** Con 15 €/día un público de interés de
 > 80.000 personas se satura en semanas (frecuencia > 4) y no da a Meta margen para
 > encontrar patrones. El público amplio (~1,5-2,5 M) deja que el algoritmo use la señal
 > del píxel. **La segmentación real la hace la creatividad**: un anuncio que dice
 > "has diseñado toda la casa, ¿por qué la mesa sale de un catálogo?" se autoselecciona.
 
-**Anuncios:** los 10 (5 conceptos × 2 ejecuciones). Todos en el mismo conjunto, dejando
+**Anuncios:** 6 en el mismo conjunto —tres estáticos y tres Reels orgánicos—, dejando
 que Meta reparta. Ver `03-creatividades-y-copys.md`.
 
 ### CAMPAÑA 02 — Retargeting
@@ -124,7 +124,8 @@ Se monta con **cuatro preguntas de cualificación** (pieza, espacio, medidas,
 plazo) en lugar de los tres campos habituales. Sin ellas la comparación contra
 la landing no mide nada: mediría precio, no valor.
 
-`AB113 | FRIO | Formulario` · 8 €/día · 3 anuncios.
+`AB113 | FRIO | Formulario` · 3 anuncios. Se monta entero y se deja en pausa:
+con el techo de 600 € no hay sitio para sumarlo (ver más abajo).
 
 ### Publicaciones orgánicas de Instagram
 
@@ -152,32 +153,65 @@ cuenta la landing.
 > **Antes de activar:** comprobar uno a uno que los Reels no lleven música
 > licenciada. La API deja crear el anuncio y Meta lo rechaza después en revisión.
 
-### Reparto real resultante
+### Reparto real resultante · techo de 600 €/mes
 
-| Campaña | €/día | Anuncios |
+El cliente fija 600 € al mes. La cuenta está montada así:
+
+| Campaña | €/día | Anuncios activos |
 |---|---|---|
-| `AB113 \| FRIO \| Lead` | 22 | 13 (10 estáticos + 3 Reels orgánicos) |
-| `AB113 \| RTG \| Lead` | 8 | 3 |
-| `AB113 \| FRIO \| Formulario` | 8 | 3 |
-| **Total** | **38 €/día ≈ 1.140 €/mes** | **19** |
+| `AB113 \| FRIO \| Lead` | 15 | 6 (3 estáticos + 3 Reels orgánicos) |
+| `AB113 \| RTG \| Lead` | 4 | 2 |
+| `AB113 \| FRIO \| Formulario` | *(en pausa)* | 3 |
+| **Total al arrancar** | **19 €/día ≈ 578 €/mes** | **8** |
 
-Son 240 € más al mes que el escenario de 900 €. Si el presupuesto es rígido,
-lo que se baja es el frío de 22 a 16 €/día mientras dure el test de formulario:
-tres semanas dan para decidir.
+**Por qué 19 y no 20.** Un mes de 31 días a 20 €/día son 620 €. A 19 son 589 €.
+El techo se respeta también en enero.
+
+**Por qué se apagaron cinco estáticos.** Trece anuncios sobre 15 €/día son 1,15 €
+por anuncio y día: Meta reparte, ninguno acumula eventos suficientes y la fase
+de aprendizaje no termina en ninguno. Con seis, cada uno tiene 2,5 €/día, que
+sigue siendo poco pero ya es medible. Los apagados no se han borrado: están
+listos para entrar en cuanto haya un ganador claro al que sustituir.
+
+Los tres que se quedan cubren ángulos que los Reels no tocan y reparten las dos
+rutas del embudo:
+
+| | Ángulo | Destino |
+|---|---|---|
+| `2A` | La pieza que cierra la reforma | `/cuestionario` |
+| `3A` | «Dinos tus medidas» — la llamada más directa | `/cuestionario` |
+| `5A` | Roble centenario — alimenta la guía | `/guia` |
+
+`5A` no es prescindible aunque sea el de menos intención: la guía es el evento
+de volumen del que come el algoritmo. Sin ninguna creatividad apuntando ahí, el
+conjunto se queda optimizando sobre los pocos cuestionarios que entren y no sale
+del aprendizaje nunca.
+
+**Por qué el retargeting arranca desde el día 1** pese a lo que decía el plan
+original. La nota era «no activar hasta la semana 4: antes no hay audiencia».
+Eso valía cuando la audiencia dependía del tráfico web, pero el público de
+interacción de Instagram **ya existe**: 10.494 seguidores y 128 publicaciones.
+Hay bolsa desde el primer día, es la más barata de convertir, y con un acuerdo
+a comisión las primeras victorias importan más que la pureza del método.
+
+**Qué se sacrifica.** El test de formulario contra landing. Se queda montado y en
+pausa, y entra en la semana 5 **quitando presupuesto del frío, no sumando**: 15 y 4
+pasan a 11 y 4 con 4 para formulario. Antes de eso no hay dinero para dos
+experimentos a la vez, y el que decide es el de creatividad.
 
 ## 5. Reparto por escenario de presupuesto
 
-| | 600 €/mes (20 €/día) | **900 €/mes (30 €/día)** | 1.000 €/mes (33 €/día) |
+| | **600 €/mes (19 €/día)** | 900 €/mes (30 €/día) | 1.000 €/mes (33 €/día) |
 |---|---|---|---|
-| Captación frío | 15 €/día (75 %) | **22 €/día (73 %)** | 24 €/día (73 %) |
-| Retargeting | 5 €/día (25 %) | **8 €/día (27 %)** | 9 €/día (27 %) |
-| Creatividades activas | 6 | **10** | 10 |
+| Captación frío | **15 €/día (79 %)** | 22 €/día (73 %) | 24 €/día (73 %) |
+| Retargeting | **4 €/día (21 %)** | 8 €/día (27 %) | 9 €/día (27 %) |
+| Creatividades activas | **8** | 10 | 10 |
 | Leads guía/mes esperados | 45-70 | **70-110** | 80-120 |
 | Leads cualificados/mes | 12-20 | **20-30** | 22-34 |
 | Presupuestos enviados/mes | 3-5 | **4-8** | 5-9 |
 | Ventas/mes esperadas | 0-1 | **1-2** | 1-3 |
 
-**A 600 €/mes el plan es viable pero frágil**: la fase de aprendizaje se alarga a 3-4
+**Este es el escenario elegido. A 600 €/mes el plan es viable pero frágil**: la fase de aprendizaje se alarga a 3-4
 semanas y hay meses con cero ventas atribuidas. Si el cliente solo puede 600 €,
 recomendamos comprometerse a **cuatro meses** en vez de tres, porque el mes 1 no dará
 lectura fiable.

@@ -1,5 +1,5 @@
 {
-  "_comentario": "Estructura de cuenta del documento 02 · Plan de medios. Escenario 900 €/mes.",
+  "_comentario": "Estructura de cuenta del documento 02 · Plan de medios. Techo de 600 €/mes: 19 €/día cubre incluso el mes de 31 días (589 €).",
   "cuenta": {
     "ad_account_id": "act_1581533106801110",
     "page_id": "383844784821243",
@@ -15,7 +15,7 @@
     {
       "nombre": "AB113 | FRIO | Lead",
       "objetivo": "OUTCOME_LEADS",
-      "presupuesto_diario_eur": 22,
+      "presupuesto_diario_eur": 15,
       "conjuntos": [
         {
           "nombre": "CAT80 | Amplio | Lead",
@@ -41,25 +41,19 @@
             }
           },
           "anuncios": [
-            "1A",
-            "1B",
             "2A",
-            "2B",
             "3A",
-            "3B",
-            "4A",
-            "4B",
-            "5A",
-            "5B"
-          ]
+            "5A"
+          ],
+          "_nota": "Solo 3 estáticos, más los 3 Reels orgánicos que añade build-post-ads.mjs. Con 15 €/día, trece anuncios son 1,15 € cada uno y Meta no aprende con ninguno. 2A cubre la reforma, 3A la llamada directa por medidas y 5A alimenta la guía, que es el evento de volumen del que vive el algoritmo."
         }
       ]
     },
     {
       "nombre": "AB113 | RTG | Lead",
       "objetivo": "OUTCOME_LEADS",
-      "presupuesto_diario_eur": 8,
-      "_nota": "No activar hasta la semana 4: antes no hay audiencia suficiente.",
+      "presupuesto_diario_eur": 4,
+      "_nota": "Se puede activar desde el día 1: la bolsa de interacción de Instagram (10.494 seguidores) ya existe, no hay que esperar a llenarla con tráfico web.",
       "conjuntos": [
         {
           "nombre": "RTG | Web + Social 180d",
@@ -85,7 +79,6 @@
           },
           "anuncios": [
             "4B",
-            "5A",
             "3A"
           ],
           "publicos_incluir": [

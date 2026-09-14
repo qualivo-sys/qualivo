@@ -1,6 +1,6 @@
 # 06 · Calendario de 90 días
 
-Escenario de referencia: **900 €/mes**. Cada fase tiene una condición de salida explícita:
+Escenario de referencia: **600 €/mes** (19 €/día). Cada fase tiene una condición de salida explícita:
 si no se cumple, no se pasa a la siguiente.
 
 ---
@@ -16,8 +16,8 @@ si no se cumple, no se pasa a la siguiente.
 | 5 | Landing publicada con política de privacidad y banner de cookies | Agencia | ✅ |
 | 6 | **Guía PDF terminada y entrega automatizada** | Cliente + Agencia | ✅ |
 | 7 | WhatsApp Business con respuesta rápida configurada | Cliente | ✅ |
-| 8 | Hoja de CRM creada y compartida | Agencia | ✅ |
-| 9 | 10 creatividades subidas a la biblioteca de Meta | Agencia | ✅ |
+| 8 | CRM desplegado (hoja + app en /crm) y Apps Script publicado | Agencia + Cliente | ✅ |
+| 9 | Creatividades subidas y campañas montadas en pausa | Agencia | ✅ |
 | 10 | **Definición del SLA de respuesta y quién lo cubre** | Cliente | ✅ |
 | 11 | Ticket medio y margen confirmados | Cliente | ⚠️ Para el modelo económico |
 | 12 | Recopilación de fotos reales de proyectos entregados | Cliente | ⚠️ Alta prioridad |
@@ -30,8 +30,9 @@ si no se cumple, no se pasa a la siguiente.
 ## SEMANAS 1-2 · Lanzamiento y aprendizaje
 
 **Qué se hace**
-- Se activa `AB113 | FRIO | Lead` con 22 €/día y los 10 anuncios.
-- Retargeting **apagado** — todavía no hay audiencia.
+- Se activa `AB113 | FRIO | Lead` con 15 €/día y sus 6 anuncios.
+- Se activa `AB113 | RTG | Lead` con 4 €/día. A diferencia de lo que decía el plan
+  original, sí hay audiencia el día 1: los 10.494 seguidores de Instagram.
 - Se revisa el panel **una vez al día** para detectar errores técnicos, no rendimiento.
 
 **Qué NO se hace**
@@ -147,7 +148,7 @@ hasta que la ve.
 
 ```
 SEM 0    ████ Preparación técnica · sin gasto
-SEM 1-2  ████████ Frío 22 €/día · NO TOCAR NADA
+SEM 1-2  ████████ Frío 15 €/día + RTG 4 · NO TOCAR NADA
 SEM 3    ████ Poda + diagnóstico + informe 1
 SEM 4    ████ + Retargeting 8 €/día
 MES 2    ████████████████ Iteración creativa + fotos reales

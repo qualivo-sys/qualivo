@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14100D">
+<title>CRM · Antic Barcelona 113</title>
+<link rel="icon" href="/assets/photos/logo-antic-barcelona-113.png">
+<link rel="apple-touch-icon" href="/assets/photos/logo-antic-barcelona-113.png">
+<link rel="manifest" href="/crm.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+:root{
+  --ink-900:#14100D;--ink-800:#1F1913;--ink-700:#332B23;--ink-500:#5B5046;--ink-400:#7C7266;
+  --paper-000:#FBF8F3;--paper-100:#F4EFE7;--paper-200:#EAE3D6;--paper-300:#DED5C6;
+  --oak-600:#8C5E32;--oak-700:#6E4A26;--oak-300:#D9BE9C;
+  --linea:#D6CCBC;--blanco:#fff;
+  --hot:#B3261E;--hot-bg:#FCE8E6;--ok:#1E6B3A;--ok-bg:#E6F4EA;
+  --font:"Open Sans",system-ui,sans-serif;--titulo:"Urbanist",system-ui,sans-serif;
+  --seg:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--paper-100);color:var(--ink-700);
+  font-size:15px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+[hidden]{display:none!important}
+
+/* ── Acceso ───────────────────────────────────────────── */
+#acceso{min-height:100dvh;display:grid;place-items:center;padding:24px;background:var(--ink-900)}
+#acceso form{width:100%;max-width:340px;text-align:center}
+#acceso h1{font-family:var(--titulo);color:var(--paper-100);font-size:26px;
+  font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+#acceso p{color:#A79C8E;font-size:14px;margin-bottom:26px}
+#acceso input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #3A3229;
+  background:#1F1913;color:var(--paper-000);margin-bottom:12px}
+#acceso input:focus{outline:2px solid var(--oak-600);outline-offset:-1px}
+#acceso button{width:100%;padding:14px;border-radius:999px;background:var(--oak-600);
+  color:#fff;font-weight:600;font-family:var(--titulo)}
+#errAcceso{color:#E8A9A2;font-size:13px;min-height:18px;margin-top:12px}
+
+/* ── Cabecera ─────────────────────────────────────────── */
+header{position:sticky;top:0;z-index:30;background:var(--ink-900);color:var(--paper-100);
+  padding:calc(12px + env(safe-area-inset-top)) 16px 0}
+.barra{display:flex;align-items:center;gap:12px;padding-bottom:12px}
+.barra h1{font-family:var(--titulo);font-size:16px;font-weight:600;letter-spacing:.01em;flex:1}
+.barra h1 span{display:block;font-size:11px;color:#A79C8E;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:500}
+.iconbtn{color:#A79C8E;padding:8px;border-radius:10px;font-size:13px}
+.iconbtn:hover{color:var(--paper-100);background:#1F1913}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{white-space:nowrap;padding:10px 14px;font-size:13px;color:#A79C8E;
+  border-bottom:2px solid transparent;font-family:var(--titulo);font-weight:600}
+nav button[aria-selected=true]{color:var(--paper-000);border-bottom-color:var(--oak-600)}
+nav button b{display:inline-block;margin-left:6px;background:#3A3229;color:var(--paper-100);
+  border-radius:999px;padding:1px 7px;font-size:11px;font-weight:600}
+nav button[aria-selected=true] b{background:var(--oak-600);color:#fff}
+
+/* ── Lista ────────────────────────────────────────────── */
+main{max-width:860px;margin:0 auto;padding:16px 16px 90px}
+.vacio{text-align:center;color:var(--ink-400);padding:56px 20px;font-size:14px}
+.tarjeta{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+  padding:14px;margin-bottom:10px;display:block;width:100%;text-align:left;
+  transition:transform .18s var(--seg),box-shadow .18s var(--seg)}
+.tarjeta:active{transform:scale(.99)}
+.tarjeta.hot{border-color:#EFC4BF;background:linear-gradient(var(--hot-bg),var(--blanco) 46px)}
+.tarjeta .fila1{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.tarjeta .nombre{font-family:var(--titulo);font-weight:600;font-size:16px;
+  color:var(--ink-900);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tarjeta .cuando{font-size:12px;color:var(--ink-400);white-space:nowrap}
+.tarjeta .que{font-size:13px;color:var(--ink-500);overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.tarjeta .pie{display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chip{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+  font-family:var(--titulo);padding:3px 9px;border-radius:999px;
+  background:var(--paper-200);color:var(--ink-500)}
+.chip.hot{background:var(--hot-bg);color:var(--hot)}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.tarde{background:#FDECC8;color:#8A5A00}
+.wa{margin-left:auto;font-size:12px;font-weight:600;color:var(--oak-600);
+  border:1px solid var(--oak-300);padding:5px 12px;border-radius:999px;font-family:var(--titulo)}
+
+/* ── Panel ────────────────────────────────────────────── */
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:22px}
+.cifra{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:14px}
+.cifra b{display:block;font-family:var(--titulo);font-size:28px;font-weight:600;
+  color:var(--ink-900);line-height:1.1;letter-spacing:-.02em}
+.cifra span{font-size:12px;color:var(--ink-400);letter-spacing:.04em}
+h2{font-family:var(--titulo);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-400);margin:0 0 10px;font-weight:600}
+.embudo{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+  padding:6px 14px;margin-bottom:22px}
+.paso{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--paper-200)}
+.paso:last-child{border-bottom:0}
+.paso .n{font-family:var(--titulo);font-weight:600;font-size:17px;color:var(--ink-900);
+  min-width:34px;text-align:right}
+.paso .et{flex:1;font-size:14px}
+.paso .bar{height:6px;border-radius:999px;background:var(--oak-600);min-width:3px;
+  transition:width .5s var(--seg)}
+.paso .bar.gris{background:var(--paper-300)}
+/* La tabla es lo único que puede ser más ancho que la pantalla: se le da su
+   propio carril horizontal en vez de dejar que empuje toda la página. */
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;
+  border:1px solid var(--linea);background:var(--blanco)}
+table.creas{width:100%;min-width:400px;border-collapse:collapse;font-size:13px}
+table.creas th{text-align:right;font-family:var(--titulo);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-400);padding:10px 12px;background:var(--paper-000);font-weight:600}
+table.creas th:first-child,table.creas td:first-child{text-align:left}
+table.creas td{padding:10px 12px;text-align:right;border-top:1px solid var(--paper-200)}
+table.creas td:first-child{color:var(--ink-700);max-width:150px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+table.creas th:not(:first-child),table.creas td:not(:first-child){
+  padding-left:8px;padding-right:8px;white-space:nowrap}
+table.creas td.destacada{font-weight:700;color:var(--ink-900)}
+.nota{font-size:12.5px;color:var(--ink-400);margin-top:10px;line-height:1.55}
+
+/* ── Ficha ────────────────────────────────────────────── */
+#ficha{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center}
+#ficha .velo{position:absolute;inset:0;background:rgba(20,16,13,.5);backdrop-filter:blur(3px);
+  animation:aparecer .2s ease}
+#ficha .hoja{position:relative;background:var(--paper-000);width:100%;max-width:560px;
+  max-height:92dvh;overflow-y:auto;border-radius:20px 20px 0 0;
+  padding:18px 18px calc(28px + env(safe-area-inset-bottom));
+  animation:subir .32s var(--seg)}
+@media(min-width:620px){#ficha{align-items:center}#ficha .hoja{border-radius:20px;max-height:86dvh}}
+@keyframes aparecer{from{opacity:0}}
+@keyframes subir{from{transform:translateY(22px);opacity:0}}
+#ficha h3{font-family:var(--titulo);font-size:22px;color:var(--ink-900);
+  font-weight:600;letter-spacing:-.01em}
+#ficha .sub{color:var(--ink-400);font-size:13px;margin:2px 0 16px}
+.campo{margin-bottom:13px}
+.campo label{display:block;font-family:var(--titulo);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-400);margin-bottom:5px;font-weight:600}
+.campo input,.campo select,.campo textarea{width:100%;padding:11px 12px;border-radius:10px;
+  border:1px solid var(--linea);background:var(--blanco);font-size:15px}
+.campo textarea{min-height:76px;resize:vertical;font-family:var(--font)}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:2px solid var(--oak-600);outline-offset:-1px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.datos{background:var(--paper-100);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13.5px}
+.datos div{display:flex;gap:10px;padding:3px 0}
+.datos dt{color:var(--ink-400);min-width:92px;flex-shrink:0}
+.datos dd{color:var(--ink-700)}
+.acciones{display:flex;gap:8px;position:sticky;bottom:0;background:var(--paper-000);
+  padding-top:12px;margin-top:4px}
+.acciones button{flex:1;padding:13px;border-radius:999px;font-family:var(--titulo);
+  font-weight:600;font-size:14px}
+.primario{background:var(--ink-900);color:var(--paper-000)}
+.primario:disabled{opacity:.5}
+.secundario{border:1px solid var(--linea);color:var(--ink-500);flex:0 0 auto!important;padding:13px 20px!important}
+.whatsapp{display:block;text-align:center;background:var(--oak-600);color:#fff;
+  padding:12px;border-radius:999px;font-family:var(--titulo);font-weight:600;
+  text-decoration:none;margin-bottom:16px}
+#aviso{position:fixed;left:50%;bottom:22px;transform:translate(-50%,70px);z-index:60;
+  background:var(--ink-900);color:var(--paper-000);padding:11px 20px;border-radius:999px;
+  font-size:13.5px;transition:transform .3s var(--seg);box-shadow:0 8px 28px rgba(0,0,0,.25)}
+#aviso.ver{transform:translate(-50%,0)}
+.cargando{text-align:center;padding:60px;color:var(--ink-400);font-size:14px}
+</style>
+</head>
+<body>
+
+<section id="acceso">
+  <form id="formAcceso">
+    <h1>Antic Barcelona 113</h1>
+    <p>Seguimiento de clientes</p>
+    <input type="password" id="pass" placeholder="Contraseña" autocomplete="current-password" required>
+    <button type="submit">Entrar</button>
+    <div id="errAcceso" role="alert"></div>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header>
+    <div class="barra">
+      <h1>Antic Barcelona 113<span>Clientes</span></h1>
+      <button class="iconbtn" id="recargar" title="Actualizar">↻</button>
+      <button class="iconbtn" id="salir">Salir</button>
+    </div>
+    <nav id="pestanas" role="tablist"></nav>
+  </header>
+  <main id="lista"><div class="cargando">Cargando…</div></main>
+</div>
+
+<div id="ficha" hidden></div>
+<div id="aviso" role="status" aria-live="polite" hidden></div>
+
+<script src="/assets/js/crm.js"></script>
+</body>
+</html>

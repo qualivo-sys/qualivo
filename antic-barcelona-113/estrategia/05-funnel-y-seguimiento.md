@@ -152,18 +152,71 @@ compra en septiembre.
 > los funnels de ticket alto. Por eso está diseñado con la opción *"Prefiero hablarlo"*.
 > Mantenerla. Quitar esa salida sube el abandono un 15-20 %.
 
-## 6. CRM mínimo viable
+## 6. El CRM — lo que ya está construido
 
-No hace falta comprar nada el primer mes. Hoja de cálculo compartida con estas columnas:
+No se ha comprado nada. Son dos capas, y la separación es deliberada:
 
-`fecha` · `nombre` · `email` · `teléfono` · `tier` · `pieza` · `espacio` · `medidas` ·
-`estilo` · `presupuesto` · `plazo` · `utm_campaign` · `utm_content` · `fbclid` ·
-`primer_contacto` · `estado` · `presupuesto_enviado` · `importe` · `resultado` ·
-`cómo nos conoció`
+**La hoja de cálculo es la base de datos.** Ahí caen los leads, ahí viven los
+avisos automáticos y de ahí se exporta. Con 20-30 leads al mes, una
+suscripción a Pipedrive es un sitio más donde perderlos.
 
-Estados: `Nuevo` → `Contactado` → `Cualificado` → `Presupuesto enviado` → `Ganado` / `Perdido` / `Aplazado`
+**[/crm](https://antic-barcelona-113.vercel.app/crm) es la cara.** Porque el
+comercial va a mirar esto desde el móvil en el taller, y una hoja de cálculo
+en un móvil no se puede usar. Se añade a la pantalla de inicio y se comporta
+como una app. La sesión dura 30 días.
 
-**Mes 3:** migrar a HubSpot free o Pipedrive si el volumen supera los 40 leads/mes.
+Si la app se cayera, los leads seguirían entrando y los avisos saliendo. Esa
+es la razón de no haber montado una base de datos propia.
+
+### Un solo buzón
+
+| Origen | Cómo llega | Retraso |
+|---|---|---|
+| Guía y cuestionario de la web | Vercel → la hoja | Inmediato |
+| Formulario instantáneo de Meta | Se consulta la API cada 15 min | Máx. 15 min |
+
+Sin esto, los leads del formulario se quedarían en el Centro de clientes
+potenciales de Meta y serían un segundo buzón que no abre nadie.
+
+### El pipeline
+
+```
+Nuevo → Contactado → Visita o llamada → Presupuesto enviado → Ganado / Perdido
+```
+
+La única columna que se toca a mano es **estado**. Al cambiarla se sellan solas
+las fechas de primer contacto y de cierre, que son las que dan el tiempo de
+respuesta real.
+
+Cada lead entra con una **próxima acción ya propuesta** según su tier. Al abrir
+el CRM nunca hay que decidir qué hacer, solo hacerlo.
+
+Al marcar **Ganado** hay que poner el **importe**, y al marcar **Perdido**, el
+**motivo**. Tres meses de motivos de pérdida dicen más sobre qué cambiar en los
+anuncios que cualquier métrica de Meta.
+
+### Lo que avisa solo
+
+| Cuándo | Qué |
+|---|---|
+| Cada hora, de 9 a 20 | Un HOT lleva más de 2 h en `Nuevo`. Avisa una vez, no cada hora |
+| Cada día a las 8:00 | Lo que está sin contactar y lo que se pasó de fecha. **Si no hay nada pendiente, no manda nada** |
+| Lunes a las 9:00 | Resumen de la semana a cliente y agencia |
+
+Que el correo diario no salga cuando no hay deberes es lo que evita que se
+convierta en ruido que se archiva sin abrir.
+
+### La tabla que decide dónde va el dinero
+
+El panel desglosa por creatividad, y la columna que importa no es «Leads» sino
+**«A presupuesto»**. Una creatividad con muchos leads y cero presupuestos está
+trayendo gente que no compra: sale más cara que otra con la mitad de leads.
+
+Esa columna es lo que conecta el gasto en Meta con la facturación, y es la
+única forma de saber qué anuncio subir y cuál apagar sin adivinar.
+
+**Cuándo migrar a un CRM de pago:** más de 100 leads al mes, o más de una
+persona vendiendo a la vez. Antes de eso no compensa.
 
 ## 7. La pregunta incómoda para la reunión
 
