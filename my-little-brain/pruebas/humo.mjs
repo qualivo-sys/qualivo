@@ -357,15 +357,15 @@ const movimientos = [
 const presupuestos = [
   { id: '1', categoria: 'restaurantes', importe: 150, activo: true },
   { id: '2', categoria: 'alimentacion', importe: 400, activo: true },
-  { id: '3', categoria: 'ocio', importe: 50, activo: true },
+  { id: '3', categoria: 'deporte', importe: 50, activo: true },
 ];
 const ajustesFin = { user_id: 'u1', caja_inicial: 3000, caja_fecha: '2026-09-01', ahorro_mes: 300, caja_minima: 5000, moneda: 'EUR', activo: true, actualizado: '2026-09-01T00:00:00.000Z' };
 const resFin = resumenFinanzas({ movimientos, presupuestos, ingresosPrevistos: [{ id: 'i1', nombre: 'Nomina', importe: 2040, ambito: 'personal', activo: true }], ajustes: ajustesFin, hoy: '2026-09-10' });
 check('suma gastos e ingresos del mes y el neto', resFin.gastos === 417 && resFin.ingresos === 2040 && resFin.neto === 1623, JSON.stringify({ g: resFin.gastos, i: resFin.ingresos, n: resFin.neto }));
 check('la caja parte de la referencia y suma lo movido despues', resFin.caja === 3000 + 2040 - 417, String(resFin.caja));
-check('no mezcla meses', !resFin.categorias.some((c) => c.id === 'restaurantes' && c.gastado > 172));
+check('no mezcla meses', !resFin.categorias.some((c) => c.id === 'restaurantes' && c.gastado > 197));
 const rest = resFin.categorias.find((c) => c.id === 'restaurantes');
-check('marca en rojo la categoria pasada y calcula lo que sobra', rest.estado === 'pasado' && rest.gastado === 172 && rest.disponible === -22, JSON.stringify(rest));
+check('marca en rojo la categoria pasada y calcula lo que sobra', rest.estado === 'pasado' && rest.gastado === 197 && rest.disponible === -47, JSON.stringify(rest));
 check('separa el gasto impulsivo por categoria', rest.impulsivo === 94 && resFin.gastoImpulsivo === 94);
 check('el cumplimiento es el porcentaje de categorias no pasadas', resFin.cumplimiento === 67, String(resFin.cumplimiento));
 check('formacion cuenta como inversion y sin presupuesto aparece aparte', resFin.sinPresupuesto.some((c) => c.id === 'formacion' && c.gastado === 100));
@@ -381,7 +381,7 @@ const buenas = insightsFinanzas(resumenFinanzas({ movimientos: [mov('2026-09-02'
 check('si va bien, lo dice sin reganar', buenas.every((i) => i.tono !== 'alerta'), buenas.map((i) => i.texto).join(' | '));
 
 const semanaFin = revisionSemana(movimientos, resFin, '2026-08-31', '2026-09-06');
-check('la revision de la semana cuadra', semanaFin.gastado === 417 && semanaFin.categoriaTop.nombre === 'Restaurantes' && semanaFin.impulsivo === 94 && semanaFin.dentroDePresupuesto === false, JSON.stringify(semanaFin));
+check('la revision de la semana cuadra', semanaFin.gastado === 417 && semanaFin.categoriaTop.nombre === 'Restaurantes y ocio' && semanaFin.impulsivo === 94 && semanaFin.dentroDePresupuesto === false, JSON.stringify(semanaFin));
 check('la sugerencia apunta a donde se ha salido', /restaurantes/i.test(semanaFin.sugerencia), semanaFin.sugerencia);
 
 // ── 14. Estado emocional: patrones y estanque ──────────────────────────
@@ -434,7 +434,7 @@ const roma = resSob.sobres.find((s) => s.id === 's1');
 check('el sobre suma solo sus gastos y calcula lo que queda', roma.gastado === 270 && roma.disponible === 130 && roma.pct === 68 && roma.movimientos === 2, JSON.stringify(roma));
 check('cuenta los dias que quedan del sobre', roma.diasRestantes === 2, String(roma.diasRestantes));
 const restSob = resSob.categorias.find((c) => c.id === 'restaurantes');
-check('el gasto del sobre NO come el presupuesto mensual de su categoria', restSob.gastado === 172, String(restSob.gastado));
+check('el gasto del sobre NO come el presupuesto mensual de su categoria', restSob.gastado === 197, String(restSob.gastado));
 check('pero si cuenta en el gasto total y en la caja', resSob.gastos === 417 + 270 && resSob.gastoEnSobres === 270, JSON.stringify({ g: resSob.gastos, s: resSob.gastoEnSobres }));
 const boda = resSob.sobres.find((s) => s.id === 's2');
 check('un sobre cerrado sigue con sus numeros aunque sea de otro mes', boda.cerrado && boda.gastado === 210 && boda.estado === 'pasado', JSON.stringify(boda));
@@ -1169,6 +1169,37 @@ Falso.ultimo.falla('no-speech');
 check('quedarse callado un momento no es un error', err3 === '', err3);
 Falso.ultimo.falla('cualquier-cosa-rara');
 check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test(err3), err3);
+
+// ── 25 bis. Juntar restaurantes y ocio sin romper el historial ────────
+// Los apuntes viejos dicen 'ocio' y esa categoria ya no existe. Tienen que
+// seguir contando en su sitio, no aparecer como una fila fantasma.
+{
+  const { categoria: cat25, normalizarCategoria, CATEGORIAS: CATS25, gastoPorCategoria: gpc25, resumenFinanzas: rf25 } =
+    await import(`${L}/motor/finanzas.js`);
+
+  check('ya no hay dos categorias, hay una', !CATS25.some((c) => c.id === 'ocio'));
+  check('y se llama por las dos cosas', cat25('restaurantes').nombre === 'Restaurantes y ocio', cat25('restaurantes').nombre);
+  check('un apunte viejo de ocio cae en la categoria buena', normalizarCategoria('ocio') === 'restaurantes');
+  check('y se enseña con su nombre, no como desconocida', cat25('ocio').nombre === 'Restaurantes y ocio' && cat25('ocio').emoji !== '📦');
+  check('las demas no se tocan', normalizarCategoria('alimentacion') === 'alimentacion');
+
+  const g = (id, importe) => ({ id: id + importe, fecha: '2026-09-05', tipo: 'gasto', importe, categoria: id, descripcion: null, ambito: 'personal', impulsivo: false, fuente: 'manual', sobre_id: null, deuda_id: null, creado: '2026-09-05T12:00:00.000Z' });
+  const mezclado = [g('restaurantes', 40), g('ocio', 30), g('alimentacion', 10)];
+
+  const porCat = gpc25(mezclado, '2026-09');
+  check('lo viejo y lo nuevo se suman en una sola fila', porCat.lineas.filter((x) => x.id === 'restaurantes').length === 1);
+  check('y suman 70, no 40 y 30 por separado', porCat.lineas.find((x) => x.id === 'restaurantes').gastado === 70, JSON.stringify(porCat.lineas.map((x) => [x.id, x.gastado])));
+  check('no queda ninguna fila fantasma de ocio', !porCat.lineas.some((x) => x.id === 'ocio'));
+
+  // El presupuesto tambien: si tenias uno de ocio, cuenta en el nuevo
+  const conPresu = rf25({
+    movimientos: mezclado, presupuestos: [{ id: 'p', categoria: 'ocio', importe: 100, activo: true }],
+    ingresosPrevistos: [], ajustes: null, hoy: '2026-09-10',
+  });
+  check('un presupuesto viejo de ocio se aplica a la categoria nueva', conPresu.categorias.length === 1 && conPresu.categorias[0].id === 'restaurantes', JSON.stringify(conPresu.categorias.map((c) => c.id)));
+  check('y mide contra el gasto de las dos juntas', conPresu.categorias[0].gastado === 70, String(conPresu.categorias[0].gastado));
+  check('lo de alimentacion sigue sin presupuesto, aparte', conPresu.sinPresupuesto.some((c) => c.id === 'alimentacion'));
+}
 
 // ── 26 bis. La caja y el saldo anotado: no contar dos veces ───────────
 // En su propio bloque: asi sus nombres no pueden chocar con los de otra

@@ -762,3 +762,25 @@ create policy "comidas_propias_insert" on storage.objects for insert
   with check (bucket_id = 'comidas' and (storage.foldername(name))[1] = auth.uid()::text);
 create policy "comidas_propias_delete" on storage.objects for delete
   using (bucket_id = 'comidas' and (storage.foldername(name))[1] = auth.uid()::text);
+
+-- ═══════════════════════════════════════════════════════════════════════
+--  Arreglos de datos que ya se han aplicado. Son no-op al segundo pase.
+-- ═══════════════════════════════════════════════════════════════════════
+
+-- "Alcohol y ocio" se junto dentro de "Restaurantes y ocio". El orden importa:
+-- primero los presupuestos, porque finanzas_presupuestos tiene
+-- unique (user_id, categoria) y quien tuviera los dos chocaria. Se suman los
+-- importes en vez de quedarse con uno: quien tenia 150 en uno y 50 en otro
+-- espera 200, no 150.
+update public.finanzas_presupuestos r
+   set importe = r.importe + o.importe
+  from public.finanzas_presupuestos o
+ where o.user_id = r.user_id and o.categoria = 'ocio' and r.categoria = 'restaurantes';
+
+delete from public.finanzas_presupuestos o
+ where o.categoria = 'ocio'
+   and exists (select 1 from public.finanzas_presupuestos r
+                where r.user_id = o.user_id and r.categoria = 'restaurantes');
+
+update public.finanzas_presupuestos set categoria = 'restaurantes' where categoria = 'ocio';
+update public.finanzas_movimientos  set categoria = 'restaurantes' where categoria = 'ocio';

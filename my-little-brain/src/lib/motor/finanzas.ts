@@ -22,8 +22,7 @@ export interface Categoria {
 
 export const CATEGORIAS: Categoria[] = [
   { id: 'alimentacion', nombre: 'Alimentacion', emoji: '🛒' },
-  { id: 'restaurantes', nombre: 'Restaurantes', emoji: '🍽️' },
-  { id: 'ocio', nombre: 'Alcohol y ocio', emoji: '🍻' },
+  { id: 'restaurantes', nombre: 'Restaurantes y ocio', emoji: '🍽️' },
   { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠' },
   { id: 'transporte', nombre: 'Transporte', emoji: '🚗' },
   { id: 'suscripciones', nombre: 'Suscripciones', emoji: '📺' },
@@ -33,9 +32,24 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'otros', nombre: 'Otros', emoji: '📦' },
 ];
 
+/**
+ * Categorias que se juntaron por el camino. Un apunte viejo de "ocio" tiene
+ * que seguir contando en su sitio: renombrar la etiqueta y dejar el historial
+ * hablando de una categoria que ya no existe seria romperle el pasado.
+ */
+const FUSIONADAS: Record<string, string> = { ocio: 'restaurantes' };
+
+/** El id bueno de una categoria, sea el actual o uno de los que ya se juntaron. */
+export const normalizarCategoria = (id: string): string => FUSIONADAS[id] ?? id;
+
 export function categoria(id: string): Categoria {
-  return CATEGORIAS.find((c) => c.id === id) ?? { id, nombre: id, emoji: '📦' };
+  const bueno = normalizarCategoria(id);
+  return CATEGORIAS.find((c) => c.id === bueno) ?? { id: bueno, nombre: bueno, emoji: '📦' };
 }
+
+/** Deja los apuntes con el id bueno antes de agrupar, o saldrian dos filas. */
+const normalizados = <T extends { categoria: string }>(xs: T[]): T[] =>
+  xs.map((x) => (FUSIONADAS[x.categoria] ? { ...x, categoria: FUSIONADAS[x.categoria] } : x));
 
 /** Categorias que suelen acercar a los objetivos, no alejar: se leen distinto. */
 const INVERSION = new Set(['formacion', 'deporte', 'salud']);
@@ -140,8 +154,8 @@ export function resumenFinanzas(datos: {
   const ambito = datos.ambito ?? 'personal';
   // Lo de la empresa fuera: si entra, el presupuesto personal deja de decir
   // la verdad en cuanto pasa una factura de tres mil euros por delante.
-  const movimientos = datos.movimientos.filter(
-    (m) => ambito === 'todo' || (m.ambito ?? 'personal') === ambito,
+  const movimientos = normalizados(
+    datos.movimientos.filter((m) => ambito === 'todo' || (m.ambito ?? 'personal') === ambito),
   );
   const delMes = movimientos.filter((m) => mesDe(m.fecha) === mes);
   const gastosMes = delMes.filter((m) => m.tipo === 'gasto');
@@ -181,7 +195,7 @@ export function resumenFinanzas(datos: {
   const diaDelMes = mes === mesDe(datos.hoy) ? Number(datos.hoy.slice(8, 10)) : dias;
   const parteDelMes = diaDelMes / dias;
 
-  const activos = datos.presupuestos.filter((p) => p.activo !== false);
+  const activos = normalizados(datos.presupuestos.filter((p) => p.activo !== false));
   // Lo que va a un sobre es gasto planificado aparte: no come el presupuesto del dia a dia.
   const gastosDiaADia = gastosMes.filter((m) => !m.sobre_id);
   const categorias: LineaCategoria[] = activos
@@ -390,7 +404,7 @@ export function revisionSemana(
   desde: string,
   hasta: string,
 ): RevisionSemanalFinanzas {
-  const semana = movimientos.filter((m) => m.tipo === 'gasto' && m.fecha >= desde && m.fecha <= hasta);
+  const semana = normalizados(movimientos.filter((m) => m.tipo === 'gasto' && m.fecha >= desde && m.fecha <= hasta));
   const gastado = Math.round(suma(semana.map((m) => num(m.importe))) * 100) / 100;
   const porCategoria = [...new Set(semana.map((m) => m.categoria))]
     .map((id) => ({ nombre: categoria(id).nombre, gastado: suma(semana.filter((m) => m.categoria === id).map((m) => num(m.importe))) }))
@@ -604,8 +618,8 @@ export function gastoPorCategoria(
   opciones: { ambito?: Ambito; mesAnterior?: string } = {},
 ): { lineas: LineaGasto[]; total: number } {
   const ambito = opciones.ambito ?? 'personal';
-  const suyos = movimientos.filter(
-    (m) => m.tipo === 'gasto' && (ambito === 'todo' || (m.ambito ?? 'personal') === ambito),
+  const suyos = normalizados(
+    movimientos.filter((m) => m.tipo === 'gasto' && (ambito === 'todo' || (m.ambito ?? 'personal') === ambito)),
   );
   const delMes = suyos.filter((m) => mesDe(m.fecha) === mes);
   const anteriorMes = opciones.mesAnterior ?? mesAnteriorA(mes);

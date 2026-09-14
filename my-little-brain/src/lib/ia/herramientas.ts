@@ -10,7 +10,7 @@ import { METRICAS, valorActual } from '../motor/objetivos';
 import { cargarPanel } from '../datos';
 import { MAX_HOY as MAX_TAREAS_HOY } from '../motor/tareas';
 import { emparejarEjercicio } from '../motor/ejercicios';
-import { CATEGORIAS, categoria as categoriaFinanzas } from '../motor/finanzas';
+import { CATEGORIAS, categoria as categoriaFinanzas, normalizarCategoria as normalizarCategoriaFin } from '../motor/finanzas';
 import { EMOCIONES, TEMAS as TEMAS_HOJA, temaDe as temaDeTexto } from '../motor/emociones';
 import { alternativas, firmaPerfil, generarPlan, prescripcion } from '../motor/planificador';
 import { ejercicio } from '../motor/ejercicios';
@@ -447,7 +447,7 @@ export const HERRAMIENTAS: Anthropic.Tool[] = [
         tipo: { type: 'string', enum: ['gasto', 'ingreso'], description: 'Por defecto gasto.' },
         categoria: {
           type: 'string',
-          enum: ['alimentacion', 'restaurantes', 'ocio', 'vivienda', 'transporte', 'suscripciones', 'formacion', 'deporte', 'salud', 'otros'],
+          enum: ['alimentacion', 'restaurantes', 'vivienda', 'transporte', 'suscripciones', 'formacion', 'deporte', 'salud', 'otros'],
         },
         descripcion: { type: 'string', description: 'En pocas palabras: "menu del mediodia".' },
         impulsivo: { type: 'boolean', description: 'true si fue un gasto no previsto o impulsivo.' },
@@ -1364,7 +1364,10 @@ async function despachar(
           fecha: z.string().optional(),
         })
         .parse(entrada);
-      const cat = CATEGORIAS.some((c) => c.id === d.categoria) ? d.categoria : 'otros';
+      // Normalizada: el modelo puede seguir diciendo 'ocio' un tiempo, y unas
+      // cañas tienen que ir a restaurantes y ocio, no a "otros".
+      const cat0 = normalizarCategoriaFin(d.categoria);
+      const cat = CATEGORIAS.some((c) => c.id === cat0) ? cat0 : 'otros';
 
       // Si menciona un presupuesto concreto ("del viaje"), se busca por nombre.
       let sobreId: string | null = null;

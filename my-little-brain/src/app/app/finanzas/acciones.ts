@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { hoy as hoyIso } from '@/lib/fechas';
-import { CATEGORIAS } from '@/lib/motor/finanzas';
+import { CATEGORIAS, normalizarCategoria } from '@/lib/motor/finanzas';
 import { XP_POR_ACCION } from '@/lib/motor/puntuaciones';
 import { clienteServidor } from '@/lib/supabase/servidor';
 
@@ -23,7 +23,12 @@ const importe = (valor: FormDataEntryValue | null): number | null => {
 };
 const texto = (valor: FormDataEntryValue | null): string | null =>
   typeof valor === 'string' && valor.trim() ? valor.trim() : null;
-const esCategoria = (v: string | null) => (v && CATEGORIAS.some((c) => c.id === v) ? v : 'otros');
+const esCategoria = (v: string | null) => {
+  // Normalizado antes de comprobar: un 'ocio' de los de antes vale, y acaba
+  // en su categoria nueva en vez de caer en "otros".
+  const id = v ? normalizarCategoria(v) : null;
+  return id && CATEGORIAS.some((c) => c.id === id) ? id : 'otros';
+};
 const esAmbito = (v: string | null) => (v === 'empresa' ? 'empresa' : 'personal');
 
 function refrescar() {
