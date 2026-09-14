@@ -8,6 +8,12 @@ body{background:#3a3a3a;padding:40px}
 .page.tinta{background:#0A0A0B;color:#F2EEE6}
 .page.tinta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.028) 1px,transparent 1px);background-size:90px 90px}
 .page.crema{background:#F2EEE6;color:#0A0A0B}
+.page.fuego{background:#E8590C;color:#0A0A0B}
+.page.fuego::before{content:'';position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(10,10,11,.09) 1px,transparent 1px);background-size:8px 8px}
+.radar{position:absolute;border-radius:50%;border:2px solid;pointer-events:none}
+.tinta .radar{border-color:rgba(232,89,12,.22)}
+.fuego .radar{border-color:rgba(10,10,11,.16)}
+.punto{position:absolute;width:26px;height:26px;border-radius:50%;background:#0A0A0B}
 .page.crema::before{content:'';position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(10,10,11,.055) 1px,transparent 1px);background-size:7px 7px}
 .in{position:absolute;inset:0;padding:56px 56px 132px;display:flex;flex-direction:column}
 .kick{font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
@@ -49,12 +55,19 @@ body{background:#3a3a3a;padding:40px}
 .dos{display:flex;gap:40px;align-items:flex-start}
 </style>
 
-<div class="page tinta"><div class="num" style="font-size:620px;right:-70px;bottom:-110px">01</div><div class="in">
-  <div class="kick">El sistema que ya tienes</div>
-  <div class="tit">¿Y si tuvieras un agente vigilando <span class="nar">todo el recorrido</span>?</div>
-  <div class="sub mid">No solo tus contactos.<br>No solo tu CRM.<br><b>Todo el camino hasta la venta.</b></div>
-  <div class="pie">Desde que alguien ve tu anuncio hasta que firma. Y también después.</div>
-</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+<div class="page fuego">
+  <div class="radar" style="width:900px;height:900px;right:-330px;top:150px"></div>
+  <div class="radar" style="width:620px;height:620px;right:-190px;top:290px"></div>
+  <div class="radar" style="width:340px;height:340px;right:-50px;top:430px"></div>
+  <div class="punto" style="right:105px;top:588px"></div>
+  <div class="in">
+    <div class="kick" style="color:#0A0A0B">El sistema que ya tienes</div>
+    <div class="tit" style="font-size:118px;margin-top:34px">¿Y si tuvieras<br>un agente<br>vigilando<br><span style="color:#F2EEE6">todo el<br>recorrido</span>?</div>
+    <div class="sub" style="margin-top:auto;font-size:36px;color:#0A0A0B">No solo tus contactos. No solo tu CRM.<br><b style="color:#0A0A0B">Todo el camino hasta la venta.</b></div>
+  </div>
+  <div class="firma" style="color:rgba(10,10,11,.6)">@maikel.echevarria</div>
+  <div class="web" style="color:#0A0A0B">QUALIVO.IO</div>
+</div>
 
 <div class="page crema"><div class="in">
   <div class="kick">El recorrido entero</div>
@@ -76,7 +89,7 @@ body{background:#3a3a3a;padding:40px}
   <div class="pie"><b>¿Qué está pasando aquí ahora mismo?</b></div>
 </div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
-<div class="page tinta"><div class="in">
+<div class="page tinta"><div class="radar" style="width:1000px;height:1000px;left:-420px;bottom:-300px"></div><div class="radar" style="width:700px;height:700px;left:-270px;bottom:-150px"></div><div class="in">
   <div class="kick">Lo que el agente busca</div>
   <div class="tit sm">No mira si ha entrado alguien.<br><span class="nar">Busca señales.</span></div>
   <div class="preg">
