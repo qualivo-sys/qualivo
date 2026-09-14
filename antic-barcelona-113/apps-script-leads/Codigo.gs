@@ -1,16 +1,17 @@
 /**
  * Receptor de leads de la web — Antic Barcelona 113
  *
- * Es una de las dos puertas de entrada al CRM. La otra es MetaLeads.gs, que
- * trae los del formulario instantáneo. Las dos acaban en la misma hoja.
+ * Los leads de la web los escribe Vercel en la hoja por su cuenta. Lo que
+ * llega aquí es solo el aviso de que ha entrado uno, para hacer lo único que
+ * no se puede hacer desde fuera: mandar correos desde una cuenta de Google.
  *
  * Se despliega como app web y la URL /exec se mete en Vercel como
- * LEAD_WEBHOOK_URL.
+ * LEAD_WEBHOOK_URL. Es opcional: sin ella se siguen capturando leads, solo
+ * que sin correo automático.
  *
- * Qué hace con cada lead:
- *   1. Lo añade como fila en la pestaña "Leads" (guardar, en Crm.gs)
- *   2. Si viene de la guía, manda el email con el PDF adjunto
- *   3. Avisa por correo al comercial, marcando en el asunto si es HOT
+ * Qué hace con cada aviso:
+ *   1. Si viene de la guía, manda el email con el PDF adjunto
+ *   2. Avisa por correo al comercial, marcando en el asunto si es HOT
  *
  * Configuración: Proyecto → Configuración → Propiedades del script
  *   SECRETO        debe coincidir con LEAD_SHARED_SECRET de Vercel
@@ -37,19 +38,12 @@ function doPost(e) {
 
     var cuerpo = JSON.parse(e.postData.contents);
 
-    // El mismo endpoint sirve dos cosas: leads nuevos y las llamadas del CRM
-    // de Vercel. Se distinguen porque las de la API traen "accion".
-    if (cuerpo.accion) {
-      var r = atender(cuerpo);
-      if (r) return json(r);
-    }
-
+    // La fila ya la ha escrito Vercel directamente en la hoja. Aquí solo
+    // queda lo que no se puede hacer desde fuera: mandar correos desde una
+    // cuenta de Google.
     var lead = cuerpo;
-    guardar(lead);
-
-    if (lead.origen === 'guia') enviarGuia(lead, props);
+    if (lead.origen === 'guia' && lead.email) enviarGuia(lead, props);
     avisarComercial(lead, props);
-
     return json({ ok: true });
   } catch (err) {
     console.error('Error procesando lead: ' + err);

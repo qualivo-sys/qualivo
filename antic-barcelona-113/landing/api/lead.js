@@ -2,14 +2,20 @@
  * Recepción de leads — Antic Barcelona 113
  *
  * Función serverless de Vercel. Recibe el formulario de la guía y del
- * cuestionario, valida, y reenvía a LEAD_WEBHOOK_URL (una app web de Apps
- * Script que escribe en la hoja de cálculo y manda la guía por email).
+ * cuestionario, valida, y escribe la fila en la hoja de cálculo.
  *
- * Variables de entorno necesarias:
- *   LEAD_WEBHOOK_URL   URL /exec de la app web de Apps Script
- *   LEAD_SHARED_SECRET (opcional) se envía en el cuerpo para que el webhook
- *                      pueda rechazar peticiones que no vengan de aquí
+ * Escribe en la hoja directamente, no a través de Apps Script. Así la
+ * captura de leads funciona sin que nadie tenga que desplegar nada: lo único
+ * que se pierde mientras Apps Script no esté es el correo automático, y un
+ * lead sin correo se recupera; un lead que nunca se guardó, no.
+ *
+ * Variables de entorno:
+ *   GOOGLE_SERVICE_ACCOUNT  JSON de la cuenta de servicio  (obligatoria)
+ *   SHEET_ID                id de la hoja                  (obligatoria)
+ *   LEAD_WEBHOOK_URL        URL /exec de Apps Script       (opcional: correos)
+ *   LEAD_SHARED_SECRET      secreto compartido con el script
  */
+import { anadir } from '../lib/hoja.js';
 
 const LIMITE = new Map();          // control de abuso por IP, en memoria
 
@@ -67,38 +73,41 @@ export default async function handler(req, res) {
     ip, user_agent: texto(req.headers['user-agent'], 255),
   };
 
-  const webhook = process.env.LEAD_WEBHOOK_URL;
-  if (!webhook) {
-    // Sin webhook el lead se perdería. Se registra entero para poder
-    // recuperarlo de los logs y se avisa al cliente de que no se guardó.
-    console.error('[lead] LEAD_WEBHOOK_URL sin configurar. Lead NO guardado:', JSON.stringify(lead));
-    return res.status(200).json({ ok: true, stored: false, motivo: 'webhook_sin_configurar' });
-  }
-
+  // 1. La hoja es el destino de verdad. Si esto falla, se ha perdido un lead.
+  let guardado = false;
   try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 8000);
-    const r = await fetch(webhook, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      // Apps Script no expone las cabeceras personalizadas al script, así que
-      // el secreto viaja en el cuerpo.
-      body: JSON.stringify(
-        process.env.LEAD_SHARED_SECRET
-          ? { ...lead, secret: process.env.LEAD_SHARED_SECRET }
-          : lead
-      ),
-      signal: ctrl.signal,
-    });
-    clearTimeout(t);
-    if (!r.ok) throw new Error(`webhook respondió ${r.status}`);
-    return res.status(200).json({ ok: true, stored: true });
+    lead.lead_id = await anadir(lead);
+    guardado = true;
   } catch (e) {
     // El usuario ya ha hecho su parte: no se le penaliza con un error. Pero el
-    // lead queda íntegro en los logs para no perderlo.
-    console.error('[lead] fallo al reenviar:', e.message, JSON.stringify(lead));
-    return res.status(200).json({ ok: true, stored: false, motivo: 'webhook_fallo' });
+    // lead queda entero en los registros para poder recuperarlo a mano.
+    console.error('[lead] no se pudo escribir en la hoja:', e.message, JSON.stringify(lead));
   }
+
+  // 2. Apps Script, si está desplegado, se encarga del correo con la guía y
+  //    del aviso al comercial. Es opcional a propósito: sin él se siguen
+  //    capturando leads, solo que sin correo automático.
+  const webhook = process.env.LEAD_WEBHOOK_URL;
+  if (webhook) {
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
+      await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // Apps Script no expone las cabeceras personalizadas al script, así que
+        // el secreto viaja en el cuerpo.
+        body: JSON.stringify({ ...lead, accion: 'avisar',
+          secret: process.env.LEAD_SHARED_SECRET || '' }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(t);
+    } catch (e) {
+      console.error('[lead] el aviso por correo falló:', e.message);
+    }
+  }
+
+  return res.status(200).json({ ok: true, stored: guardado });
 }
 
 function safeJson(s) { try { return JSON.parse(s); } catch { return {}; } }

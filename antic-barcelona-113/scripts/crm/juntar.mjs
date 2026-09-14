@@ -18,7 +18,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const ORDEN = ['Codigo.gs', 'Crm.gs', 'MetaLeads.gs', 'Api.gs'];
+const ORDEN = ['Codigo.gs', 'Crm.gs', 'MetaLeads.gs'];
 
 const arg = (n) => {
   const i = process.argv.indexOf(n);
@@ -43,7 +43,9 @@ const cabecera = `/**
  * │       · Quién tiene acceso: Cualquier usuario                        │
  * │  4. Copiar la URL que acaba en /exec y pasársela a Qualivo.          │
  * │                                                                      │
- * │  Y ya está. Lo demás se configura solo.                              │
+ * │  Esto NO es urgente: los leads ya se están guardando. Lo que          │
+ * │  enciende son los correos automáticos y los leads del formulario     │
+ * │  de Meta.                                                            │
  * └──────────────────────────────────────────────────────────────────────┘
  *
  * Generado desde ${ORDEN.join(', ')}. Para cambiar algo, se toca el original

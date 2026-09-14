@@ -1,18 +1,19 @@
 /**
  * CRM — puerta de entrada de la app de Vercel a la hoja.
  *
- * Aquí no hay base de datos: los datos siguen viviendo en la hoja de cálculo
- * y esto es un proxy con sesión. La razón es que si esta función falla, el
- * cliente sigue teniendo sus leads, sus avisos por correo y su hoja. Una base
- * de datos propia habría añadido un sitio más donde perderlos.
+ * Aquí no hay base de datos: los datos viven en la hoja de cálculo y esto
+ * habla con ella. Si esta función falla, el cliente sigue teniendo sus leads
+ * en su hoja. Una base de datos propia habría añadido un sitio más donde
+ * perderlos.
  *
  * Variables de entorno:
- *   LEAD_WEBHOOK_URL     la URL /exec de Apps Script
- *   LEAD_SHARED_SECRET   el mismo SECRETO del script
- *   CRM_PASSWORD         contraseña de acceso al CRM
- *   CRM_SESSION_SECRET   cadena larga para firmar la cookie de sesión
+ *   GOOGLE_SERVICE_ACCOUNT   JSON de la cuenta de servicio
+ *   SHEET_ID                 id de la hoja
+ *   CRM_PASSWORD             contraseña de acceso al CRM
+ *   CRM_SESSION_SECRET       cadena larga para firmar la cookie de sesión
  */
 import crypto from 'node:crypto';
+import { listar, actualizar, ESTADOS } from '../lib/hoja.js';
 
 const DIAS = 30;
 const COOKIE = 'ab113_crm';
@@ -58,27 +59,6 @@ function anotarIntento(ip) {
   intentos.set(ip, [...(intentos.get(ip) || []), Date.now()]);
 }
 
-// ── Hoja ────────────────────────────────────────────────────────────────────
-
-async function hoja(carga) {
-  const url = process.env.LEAD_WEBHOOK_URL;
-  if (!url) throw new Error('LEAD_WEBHOOK_URL sin configurar');
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 15000);
-  try {
-    const r = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...carga, secret: process.env.LEAD_SHARED_SECRET || '' }),
-      signal: ctrl.signal,
-      redirect: 'follow',   // Apps Script responde con un 302 a googleusercontent
-    });
-    const texto = await r.text();
-    try { return JSON.parse(texto); }
-    catch { throw new Error(`la hoja respondió algo que no es JSON (${r.status})`); }
-  } finally { clearTimeout(t); }
-}
-
 // ── Rutas ───────────────────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
@@ -117,10 +97,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const r = await hoja(b.accion === 'listar'
-      ? { accion: 'listar' }
-      : { accion: 'actualizar', lead_id: b.lead_id, campos: b.campos || {} });
-    return res.status(200).json(r);
+    if (b.accion === 'listar') {
+      return res.status(200).json({ ok: true, leads: await listar(), estados: ESTADOS });
+    }
+    const r = await actualizar(b.lead_id, b.campos || {});
+    return res.status(r.ok ? 200 : 404).json(r);
   } catch (e) {
     console.error('[crm]', e.message);
     return res.status(502).json({ ok: false, error: 'hoja_no_responde', detalle: e.message });

@@ -31,15 +31,6 @@ var ESTADOS_ABIERTOS = ['Nuevo', 'Contactado', 'Visita o llamada', 'Presupuesto 
 var MOTIVOS = ['Precio', 'Plazo', 'No contesta', 'Compró en otro sitio',
   'Solo miraba', 'Fuera de zona', 'Otro'];
 
-var COLOR_ESTADO = {
-  'Nuevo': '#FFF4E5',
-  'Contactado': '#FFFFFF',
-  'Visita o llamada': '#F1F5EC',
-  'Presupuesto enviado': '#EAF1F8',
-  'Ganado': '#E6F4EA',
-  'Perdido': '#F3F1EF',
-};
-
 // Horas laborables dentro de las que corre el reloj del SLA
 var HORA_ABRE = 9;
 var HORA_CIERRA = 20;
@@ -73,55 +64,28 @@ function hojaLeads() {
  * el panel y los avisos automáticos. Se puede volver a ejecutar sin romper
  * nada: no borra datos y no duplica los disparadores.
  */
+/**
+ * Se ejecuta UNA vez desde el editor.
+ *
+ * Ya no monta la hoja: las pestañas, los desplegables, los formatos y el
+ * panel los construye scripts/crm/preparar-hoja.mjs desde fuera, con la
+ * cuenta de servicio. Hacerlo allí quita un paso al cliente y permite
+ * comprobar que salió bien antes de entregarlo.
+ *
+ * Lo que queda aquí es lo que solo puede vivir dentro de la cuenta de
+ * Google: guardar la configuración y programar los avisos.
+ */
 function configurar() {
-  // El archivo de un solo pegado trae un bloque CONFIG arriba: se vuelca a las
-  // propiedades del script para no tener que ir a rellenarlas a mano.
   if (typeof guardarConfig === 'function') guardarConfig();
-
-  var hoja = hojaLeads();
-
-  hoja.getRange(1, 1, 1, COLUMNAS.length)
-    .setValues([COLUMNAS])
-    .setFontWeight('bold')
-    .setBackground('#14100D')
-    .setFontColor('#F4EFE7');
-  hoja.setFrozenRows(1);
-  hoja.setFrozenColumns(3);
-
-  var filas = Math.max(hoja.getMaxRows() - 1, 1);
-
-  hoja.getRange(2, idx('estado'), filas, 1).setDataValidation(
-    SpreadsheetApp.newDataValidation().requireValueInList(ESTADOS, true)
-      .setAllowInvalid(false).build());
-
-  hoja.getRange(2, idx('motivo_perdida'), filas, 1).setDataValidation(
-    SpreadsheetApp.newDataValidation().requireValueInList(MOTIVOS, true)
-      .setAllowInvalid(true).build());
-
-  hoja.getRange(2, idx('importe'), filas, 1).setNumberFormat('#,##0 €');
-  hoja.getRange(2, idx('fecha'), filas, 1).setNumberFormat('dd/MM/yyyy HH:mm');
-  hoja.getRange(2, idx('primer_contacto'), filas, 1).setNumberFormat('dd/MM/yyyy HH:mm');
-  hoja.getRange(2, idx('fecha_cierre'), filas, 1).setNumberFormat('dd/MM/yyyy');
-  hoja.getRange(2, idx('fecha_proxima'), filas, 1).setNumberFormat('dd/MM/yyyy');
-
-  // Lo técnico se esconde: estorba para trabajar y no se borra por si hace falta
-  ['utm_source', 'fbclid', 'ip', 'user_agent', 'lead_id', 'sla_avisado']
-    .forEach(function (c) { hoja.hideColumns(idx(c)); });
-
-  hoja.setColumnWidth(idx('notas'), 260);
-  hoja.setColumnWidth(idx('proxima_accion'), 200);
-  hoja.setColumnWidth(idx('medidas'), 140);
-
-  pintarTodo();
-  construirPanel();
+  hojaLeads();
   instalarDisparadores();
 
   var props = PropertiesService.getScriptProperties();
-  var faltan = ['SECRETO', 'EMAIL_AVISOS'].filter(function (k) { return !props.getProperty(k); });
+  var faltan = ['EMAIL_AVISOS'].filter(function (k) { return !props.getProperty(k); });
   SpreadsheetApp.getActiveSpreadsheet().toast(
     faltan.length
       ? 'Hecho, pero falta rellenar arriba: ' + faltan.join(' y ')
-      : 'CRM listo. Avisos diarios a las 8:00 y resumen semanal los lunes.',
+      : 'Listo. Avisos diarios a las 8:00 y resumen semanal los lunes.',
     'Antic Barcelona 113', 8);
 }
 
@@ -166,9 +130,9 @@ function alEditar(e) {
 }
 
 /**
- * Lo que un CRM de pago hace al arrastrar una tarjeta de columna. Lo llaman
- * tanto el disparador de la hoja como la API que usa la app de Vercel, para
- * que dé igual por dónde se cambie el estado.
+ * Lo que un CRM de pago hace al arrastrar una tarjeta de columna: sella las
+ * fechas. Solo hace falta cuando alguien edita el estado dentro de la hoja;
+ * si lo cambia desde /crm, lo sella Vercel.
  */
 function sellarEstado(hoja, fila, estado) {
   var ahora = new Date();
@@ -182,24 +146,9 @@ function sellarEstado(hoja, fila, estado) {
     hoja.getRange(fila, idx('proxima_accion')).clearContent();
     hoja.getRange(fila, idx('fecha_proxima')).clearContent();
   }
-  pintarFila(hoja, fila);
 }
 
-function pintarFila(hoja, fila) {
-  var estado = String(hoja.getRange(fila, idx('estado')).getValue() || 'Nuevo');
-  var tier = String(hoja.getRange(fila, idx('tier')).getValue() || '');
-  hoja.getRange(fila, 1, 1, COLUMNAS.length)
-    .setBackground(COLOR_ESTADO[estado] || '#FFFFFF');
-  // El HOT sin tocar es lo único que grita
-  hoja.getRange(fila, idx('tier')).setBackground(
-    tier === 'HOT' && estado === 'Nuevo' ? '#FCE8E6' : (COLOR_ESTADO[estado] || '#FFFFFF'));
-}
 
-function pintarTodo() {
-  var hoja = hojaLeads();
-  var ultima = hoja.getLastRow();
-  for (var f = 2; f <= ultima; f++) pintarFila(hoja, f);
-}
 
 // ── Panel ───────────────────────────────────────────────────────────────────
 
@@ -517,7 +466,6 @@ function guardar(lead) {
     return lead[c] !== undefined && lead[c] !== null ? lead[c] : '';
   });
   hoja.appendRow(fila);
-  pintarFila(hoja, hoja.getLastRow());
 }
 
 /** El CRM no sirve de nada si al abrirlo hay que decidir qué hacer. */
