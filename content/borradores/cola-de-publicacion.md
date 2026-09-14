@@ -52,3 +52,24 @@ con foto: NO usar flash documental ni editorial claro seguidos.
 - Jueves 10 «un chico que tenemos»: programación en GHL CANCELADA (post borrado, payload guardado en scratchpad/post-jueves-publicar.json con las URLs de las láminas ya subidas).
 - No se programa ni publica NADA en Instagram/LinkedIn hasta que Maikel dé el visto bueno tras la revisión. La rutina diaria de content machine sigue produciendo borradores y blog, pero no sube a GHL.
 - Pendiente de revisión conjunta: jueves (flash documental), viernes «cementerio» (tipográfico, 5 láminas), domingo aspiracional, y la dirección de arte en general.
+
+## 14-sep · carrusel «el agente sobre todo el recorrido» PROGRAMADO
+Maikel levanta la pausa para esta pieza concreta («vale me gusta publicalo»).
+El resto de la pausa del 9-sep sigue vigente hasta que lo diga por escrito.
+
+- Instagram @maikel.echevarria, programado 15-sep 08:00Z (10:00 en Madrid).
+- Post padre `6aa8044dbcdef0170c8207a3`. Seis laminas subidas al CDN de GHL.
+- Formato nuevo: simulacion de pantalla (referencia @consultoriaio que trajo
+  Maikel). Origen en content/carruseles/2026-09-14-agente/maqueta.
+- Sin llamada a la accion, a proposito: la pieza construye categoria.
+- Los paneles llevan cifras de ejemplo y van marcados como tal dentro de la
+  imagen y en el pie.
+
+Aprendido subiendo: las imagenes tienen que estar en el CDN de GHL
+(`medias/upload-file`), no en qualivo.io, y el post padre siempre responde
+`platform: google` y `media: 1` aunque lleve seis. Los hijos por plataforma se
+generan al publicar. No es un fallo, no re-subir por eso.
+
+Conceptos nuevos usados (no repetir): el agente como capa sobre el recorrido ·
+el semaforo de los ocho puntos · las 9:00 de un martes.
+
