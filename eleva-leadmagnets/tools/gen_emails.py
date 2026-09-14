@@ -13,7 +13,7 @@ os.makedirs(OUT, exist_ok=True)
 
 LOGO = "https://blog.elevanails.es/logo.png"
 WA = "https://wa.me/34722792501"
-BOOKING = "https://wa.me/34722792501?text=Hola,%20quiero%20reservar%20mi%20sesión%20de%20orientación"
+BOOKING = "https://api.leadconnectorhq.com/widget/booking/eCV5Hh7t8hXJ4dSiycFZ"  # Calendario "Entrevista Nail Boss General"
 HOT, DEEP, SHD, DARK, BLUSH = "#FF2D9E", "#CC0A78", "#8C0055", "#0D0208", "#FFF8FC"
 
 
@@ -106,7 +106,7 @@ EMAILS.append(("EA_B1_Apertura_D0",
     p("De momento, si tienes cualquier duda, respóndeme a este email o escríbenos por WhatsApp. "
       "Leemos todo."),
     p("Un abrazo,<br><strong>El equipo de Eleva Academy</strong>"),
-    ], "Hablar con nosotras por WhatsApp", WA))
+    ], "Agendar una reunión"))
 
 # B2 · Autoridad (D2)
 EMAILS.append(("EA_B2_Autoridad_D2",
@@ -126,7 +126,7 @@ EMAILS.append(("EA_B2_Autoridad_D2",
       "clientas y a cobrar lo que vales</strong>, que es lo que de verdad convierte un hobby en un trabajo."),
     p("En el próximo email te enseño cómo es la formación por dentro."),
     p("Un abrazo,<br><strong>El equipo de Eleva Academy</strong>"),
-    ], "Quiero ver la formación", BOOKING))
+    ], "Agendar mi reunión", BOOKING))
 
 # B3 · Sistema (D4)
 EMAILS.append(("EA_B3_Sistema_D4",
