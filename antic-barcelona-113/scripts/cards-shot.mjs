@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const p = await (await b.newContext({ viewport:{width:1440,height:1100} })).newPage();
+await p.goto('http://localhost:8123/index.html', { waitUntil:'networkidle' });
+await p.waitForTimeout(2000);
+const el = await p.$('#piezas');
+await el.scrollIntoViewIfNeeded();
+await p.waitForTimeout(2000);
+await el.screenshot({ path:'/tmp/shots/cards.png' });
+await b.close();
+console.log('ok');

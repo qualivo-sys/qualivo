@@ -1,0 +1,142 @@
+{
+  "_comentario": "Estructura de cuenta del documento 02 · Plan de medios. Escenario 900 €/mes.",
+  "cuenta": {
+    "ad_account_id": "act_PENDIENTE",
+    "page_id": "PENDIENTE",
+    "instagram_actor_id": "",
+    "pixel_id": "PENDIENTE",
+    "api_version": "v21.0"
+  },
+  "landing": "https://antic-barcelona-113.vercel.app",
+  "utm": "utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}&utm_id={{campaign.id}}",
+  "campanas": [
+    {
+      "nombre": "AB113 | FRIO | Lead",
+      "objetivo": "OUTCOME_LEADS",
+      "presupuesto_diario_eur": 22,
+      "conjuntos": [
+        {
+          "nombre": "CAT80 | Amplio | Lead",
+          "optimization_goal": "OFFSITE_CONVERSIONS",
+          "custom_event_type": "LEAD",
+          "billing_event": "IMPRESSIONS",
+          "attribution": "7d_click_1d_view",
+          "targeting": {
+            "custom_locations": [
+              { "latitude": 41.561, "longitude": 2.0089, "radius": 80, "distance_unit": "kilometer" }
+            ],
+            "age_min": 32,
+            "age_max": 65,
+            "targeting_automation": { "advantage_audience": 1 }
+          },
+          "anuncios": ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B"]
+        }
+      ]
+    },
+    {
+      "nombre": "AB113 | RTG | Lead",
+      "objetivo": "OUTCOME_LEADS",
+      "presupuesto_diario_eur": 8,
+      "_nota": "No activar hasta la semana 4: antes no hay audiencia suficiente.",
+      "conjuntos": [
+        {
+          "nombre": "RTG | Web + Social 180d",
+          "optimization_goal": "OFFSITE_CONVERSIONS",
+          "custom_event_type": "LEAD",
+          "billing_event": "IMPRESSIONS",
+          "_audiencias": "Crear a mano en Públicos: web 180 d, cuestionario abandonado 90 d, IG/FB 365 d, vídeo 50 % 365 d. Excluir conversores 90 d.",
+          "targeting": {
+            "custom_locations": [
+              { "latitude": 41.561, "longitude": 2.0089, "radius": 80, "distance_unit": "kilometer" }
+            ],
+            "age_min": 32,
+            "age_max": 65
+          },
+          "anuncios": ["4B", "5A", "3A"]
+        }
+      ]
+    }
+  ],
+  "creatividades": {
+    "1A": {
+      "imagen": "creatividades/meta/4x5/AB113_1A_4x5.png",
+      "texto": "Miras catálogos y todas las mesas son la misma mesa.\n\nNosotros fabricamos la tuya en roble recuperado, con las medidas exactas de tu comedor, en nuestro taller de Terrassa. Cada veta es distinta porque cada tronco lo es.\n\nCuéntanos cómo es tu espacio y te decimos qué podemos hacer.",
+      "titular": "Mesas a medida en roble recuperado",
+      "descripcion": "Taller propio en Terrassa · Transporte e instalación incluidos",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "1B": {
+      "imagen": "creatividades/meta/4x5/AB113_1B_4x5.png",
+      "texto": "Esta veta tiene más de cien años y no se repite en ninguna otra mesa del mundo.\n\nTrabajamos con roble centenario recuperado: vigas y tablones que ya tenían una vida antes de llegar a nuestro taller. Los transformamos en la pieza que tu espacio necesita.",
+      "titular": "Roble centenario, no laminado",
+      "descripcion": "Madera recuperada · Fabricación artesanal en Terrassa",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "2A": {
+      "imagen": "creatividades/meta/4x5/AB113_2A_4x5.png",
+      "texto": "Has elegido el suelo. Has elegido la grifería. Has discutido el color de la pared tres veces.\n\nY ahora vas a comprar la misma mesa que tiene todo el mundo.\n\nFabricamos la pieza que cierra tu reforma: medidas exactas, madera noble recuperada, hecha en nuestro taller de Terrassa. Te la llevamos e instalamos.",
+      "titular": "La pieza que cierra tu reforma",
+      "descripcion": "A medida · Roble recuperado · Terrassa",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "2B": {
+      "imagen": "creatividades/meta/4x5/AB113_2B_4x5.png",
+      "texto": "El 90 % de la reforma fue fácil. Lo difícil fue el comedor.\n\nPorque el hueco que te queda no encaja con ninguna medida estándar, y las mesas que sí encajan no te gustan.\n\nEso es exactamente lo que hacemos: una sola pieza de madera maciza, con tus medidas, para ese hueco.",
+      "titular": "Tu hueco exacto, tu mesa exacta",
+      "descripcion": "Diseño, fabricación, transporte e instalación",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "3A": {
+      "imagen": "creatividades/meta/4x5/AB113_3A_4x5.png",
+      "texto": "¿240 × 100? ¿180 y no cabe más? ¿Un hueco raro con una columna en medio?\n\nDinos las medidas de tu espacio y te proponemos la pieza. Sin compromiso y sin catálogo: fabricamos cada mesa para el sitio donde va a estar.\n\nDos minutos de formulario y te respondemos por WhatsApp.",
+      "titular": "Dinos tus medidas, te proponemos la pieza",
+      "descripcion": "Respuesta por WhatsApp · Sin compromiso",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "3B": {
+      "imagen": "creatividades/meta/4x5/AB113_3B_4x5.png",
+      "texto": "Las mesas estándar vienen en tres medidas. Los comedores, en infinitas.\n\nPor eso fabricamos cada pieza para el espacio donde va: el largo que cabe, el ancho que deja pasar, la altura que pide tu silla.\n\nCuéntanos tu espacio en dos minutos.",
+      "titular": "Fabricada para tu espacio",
+      "descripcion": "Madera maciza recuperada · Taller en Terrassa",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "4A": {
+      "imagen": "creatividades/meta/4x5/AB113_4A_4x5.png",
+      "texto": "Antes de ser tu mesa, esta madera fue la viga de una masía.\n\nRecuperamos roble y maderas nobles que iban a acabar tirados, y les damos una segunda vida como piezas de mobiliario. Es artesanía y es economía circular de verdad, no una etiqueta.\n\nVen a ver el material al taller de Terrassa.",
+      "titular": "Madera con cien años de historia",
+      "descripcion": "Recuperación y ebanistería artesanal",
+      "cta": "LEARN_MORE",
+      "destino": "/guia"
+    },
+    "4B": {
+      "imagen": "creatividades/meta/4x5/AB113_4B_4x5.png",
+      "texto": "No somos una tienda que encarga muebles fuera.\n\nTenemos taller propio en Terrassa, ebanistas en plantilla y las máquinas para hacerlo. Puedes venir, ver la madera, tocarla y decidir con la pieza delante.\n\nEso es lo que separa un mueble a medida de un mueble \"personalizable\".",
+      "titular": "Taller propio en Terrassa",
+      "descripcion": "Ven a ver el material antes de decidir",
+      "cta": "LEARN_MORE",
+      "destino": "/cuestionario"
+    },
+    "5A": {
+      "imagen": "creatividades/meta/4x5/AB113_5A_4x5.png",
+      "texto": "Este roble creció durante más de cien años. Después fue estructura de una casa. Ahora es una mesa donde va a comer una familia durante otros cien.\n\nNo es una mesa nueva. Es una mesa con pasado.",
+      "titular": "Roble centenario recuperado",
+      "descripcion": "Piezas únicas · Taller artesanal en Terrassa",
+      "cta": "LEARN_MORE",
+      "destino": "/guia"
+    },
+    "5B": {
+      "imagen": "creatividades/meta/4x5/AB113_5B_4x5.png",
+      "texto": "Una viga de derribo. Un taller en Terrassa. Seis semanas.\n\nY una pieza que no existe en ningún catálogo porque no existe en ningún otro sitio.\n\nTe enseñamos el proceso entero.",
+      "titular": "De viga de masía a mueble de casa",
+      "descripcion": "Madera recuperada · Ebanistería artesanal",
+      "cta": "LEARN_MORE",
+      "destino": "/guia"
+    }
+  }
+}
