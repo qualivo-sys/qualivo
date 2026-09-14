@@ -12,8 +12,12 @@
  * Configuración: Proyecto → Configuración → Propiedades del script
  *   SECRETO        debe coincidir con LEAD_SHARED_SECRET de Vercel
  *   EMAIL_AVISOS   dónde llegan los avisos de lead nuevo
- *   ID_GUIA_PDF    id del PDF de la guía en Drive (opcional)
+ *
+ * La guía se descarga de la propia web al enviar el correo, así que no hay
+ * que subirla a Drive ni mantener dos copias: el adjunto siempre es la que
+ * está publicada.
  */
+var URL_GUIA = 'https://antic-barcelona-113.vercel.app/descargas/guia-mesa-perfecta-antic-barcelona-113.pdf';
 
 var COLUMNAS = ['fecha', 'origen', 'nombre', 'email', 'telefono', 'tier', 'pieza',
   'espacio', 'medidas', 'estilo', 'presupuesto', 'plazo', 'referencias',
@@ -68,11 +72,16 @@ function guardar(lead) {
 }
 
 function enviarGuia(lead, props) {
-  var idPdf = props.getProperty('ID_GUIA_PDF');
   var adjuntos = [];
-  if (idPdf) {
-    try { adjuntos.push(DriveApp.getFileById(idPdf).getAs('application/pdf')); }
-    catch (err) { console.error('No se pudo adjuntar la guía: ' + err); }
+  try {
+    var resp = UrlFetchApp.fetch(URL_GUIA, { muteHttpExceptions: true });
+    if (resp.getResponseCode() === 200) {
+      adjuntos.push(resp.getBlob().setName('Guia-mesa-perfecta-Antic-Barcelona-113.pdf'));
+    } else {
+      console.error('La guía respondió ' + resp.getResponseCode() + '; se envía el correo sin adjunto.');
+    }
+  } catch (err) {
+    console.error('No se pudo descargar la guía: ' + err);
   }
   var nombre = (lead.nombre || '').split(' ')[0];
   MailApp.sendEmail({
@@ -85,6 +94,8 @@ function enviarGuia(lead, props) {
       '<p>Aquí tienes la guía. Son siete apartados con lo que preguntamos a todos ' +
       'nuestros clientes antes de empezar: medidas, comensales, maderas, acabados, ' +
       'qué encarece una pieza y los plazos reales.</p>' +
+      (adjuntos.length ? '' :
+        '<p><a href="' + URL_GUIA + '" style="color:#8C5E32">Descargar la guía en PDF →</a></p>') +
       '<p>Si ya tienes un espacio concreto en la cabeza, cuéntanoslo y te decimos ' +
       'qué encaja:<br>' +
       '<a href="https://antic-barcelona-113.vercel.app/cuestionario" ' +

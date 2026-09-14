@@ -22,7 +22,10 @@ Formulario (landing)
    |---|---|
    | `SECRETO` | una cadena larga al azar; la misma que pondrás en Vercel |
    | `EMAIL_AVISOS` | el correo donde quieres los avisos de lead nuevo |
-   | `ID_GUIA_PDF` | id del PDF de la guía en Drive (se puede dejar para después) |
+
+   La guía no hace falta subirla a ningún sitio: el script la descarga de
+   `antic-barcelona-113.vercel.app` al enviar cada correo, así que el adjunto
+   siempre es la versión publicada.
 
 4. **Implementar → Nueva implementación → Aplicación web**
    - Ejecutar como: **yo**
