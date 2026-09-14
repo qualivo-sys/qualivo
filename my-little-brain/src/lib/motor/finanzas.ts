@@ -780,7 +780,12 @@ export function resumenDeudas(datos: {
         ambito: d.ambito,
         meses,
         fin: meses !== null && meses > 0 ? mesMas(mesActual, meses) : meses === 0 ? mesActual : null,
-        intereses: meses !== null && meses > 0 ? Math.round(cuota * meses - pendiente) : null,
+        // Sin TAE no hay intereses que calcular: cuota x meses - pendiente seria
+        // el resto de redondear la ultima cuota, y enseñarlo como "intereses"
+        // seria inventarse un dato que nadie ha dado.
+        intereses: tae !== null && tae > 0 && meses !== null && meses > 0
+          ? Math.round(cuota * meses - pendiente)
+          : null,
         nuncaAcaba: !sinConfirmar && meses === null && cuota > 0 && pendiente > 0,
         pagos: pagos.length,
       };

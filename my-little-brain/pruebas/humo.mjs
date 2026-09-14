@@ -1353,6 +1353,14 @@ check('un error desconocido no deja al usuario a ciegas', /Prueba otra vez/.test
     deudas: [{ id: 't', nombre: 'Tarjeta', tipo: 'tarjeta', pendiente: 1422, pendiente_fecha: '2026-09-01', actualizada: '2026-09-01T10:00:00.000Z', cuota: 36, tae: 20, dia_cobro: null, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
     movimientos: [], hoy: '2026-09-14',
   }).deudas[0];
+  // Sin TAE no se puede decir cuanto pagara de intereses: lo que salia era el
+  // resto de redondear la ultima cuota, disfrazado de dato.
+  const sinTae = resumenDeudas({
+    deudas: [{ id: 'st', nombre: 'Coche', tipo: 'prestamo', pendiente: 14159.42, pendiente_fecha: '2026-09-01', actualizada: '2026-09-01T10:00:00.000Z', cuota: 339.62, tae: null, dia_cobro: null, ambito: 'personal', nota: null, cerrada: false, creado: '' }],
+    movimientos: [], hoy: '2026-09-14',
+  }).deudas[0];
+  check('sin TAE se dicen los meses pero no los intereses', sinTae.meses === 42 && sinTae.intereses === null, JSON.stringify({ m: sinTae.meses, i: sinTae.intereses }));
+
   check('una cuota baja con TAE alta se ve venir', tarjeta.meses === 65 && tarjeta.intereses > 900, JSON.stringify({ m: tarjeta.meses, i: tarjeta.intereses }));
 
   const rdVacio = resumenDeudas({ deudas: [], movimientos: [], hoy: '2026-09-14' });
