@@ -1,0 +1,107 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../infografias/2026-09-10/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#0A0A0B;font-family:SG;color:#F2EEE6}
+.esc{position:absolute;inset:0;padding:70px 56px 110px;display:flex;flex-direction:column;opacity:0}
+.esc::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.03) 1px,transparent 1px);background-size:90px 90px}
+.kick{font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.big{font-family:Anton;font-size:104px;line-height:.98;text-transform:uppercase;margin-top:26px}
+.nar{color:#E8590C}
+.sub{font-size:32px;line-height:1.45;color:rgba(242,238,230,.82);margin-top:30px}
+
+/* ---- tiempos: e1 0-5 · e2 5-12 · e3 12-19 · e4 19-24 ---- */
+@keyframes v1{0%,2%{opacity:0}6%{opacity:1}19%{opacity:1}22%{opacity:0}100%{opacity:0}}
+@keyframes v2{0%,20%{opacity:0}24%{opacity:1}48%{opacity:1}51%{opacity:0}100%{opacity:0}}
+@keyframes v3{0%,49%{opacity:0}53%{opacity:1}77%{opacity:1}80%{opacity:0}100%{opacity:0}}
+@keyframes v4{0%,78%{opacity:0}82%{opacity:1}100%{opacity:1}}
+.e1{animation:v1 24s linear forwards}
+.e2{animation:v2 24s linear forwards}
+.e3{animation:v3 24s linear forwards}
+.e4{animation:v4 24s linear forwards}
+@keyframes deriva{from{transform:scale(1.05)}to{transform:scale(1)}}
+.esc>.cuerpo{animation:deriva 24s linear forwards;display:flex;flex-direction:column;flex:1}
+
+/* panel */
+.panel{background:#fff;color:#0A0A0B;border-radius:16px;overflow:hidden;margin-top:36px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid #E9E5DD}
+.pt{font-family:Anton;font-size:29px;text-transform:uppercase}
+.hr{font-size:18px;color:#8A8A8A}
+.fila{display:flex;align-items:center;gap:16px;padding:21px 26px;border-bottom:1px solid #F1EEE8;opacity:0;transform:translateX(-14px)}
+@keyframes ent{to{opacity:1;transform:translateX(0)}}
+.q1{animation:ent .4s 6.2s forwards}.q2{animation:ent .4s 6.9s forwards}
+.q3{animation:ent .4s 7.6s forwards}.q4{animation:ent .4s 8.3s forwards}
+.pill{font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;white-space:nowrap}
+.rojo{background:#FDE4D6;color:#C2410C}.ambar{background:#FBE896;color:#8A6500}.verde{background:#DDEEE0;color:#2F6B3C}
+.txt{font-size:22px;line-height:1.35;flex:1}.txt b{font-weight:700}
+.eur{font-family:Anton;font-size:30px}
+@keyframes flash{0%{opacity:0;transform:scaleX(.85)}60%{opacity:1;transform:scaleX(1.02)}100%{opacity:1;transform:scaleX(1)}}
+.acc{background:#E8590C;color:#0A0A0B;padding:21px 26px;display:flex;justify-content:space-between;align-items:center;opacity:0;transform-origin:left center;animation:flash .5s 9.2s forwards}
+.acc .l{font-size:20px;color:rgba(10,10,11,.75)}
+.acc .r{font-family:Anton;font-size:26px;text-transform:uppercase}
+
+/* whatsapp */
+.wa{background:#fff;border-radius:16px;overflow:hidden;margin-top:36px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.wh{background:#075E54;color:#fff;padding:17px 22px;display:flex;align-items:center;gap:14px}
+.av{width:42px;height:42px;border-radius:50%;background:#E8590C;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:20px;color:#0A0A0B}
+.wn{font-size:22px;font-weight:700}.ws{font-size:16px;opacity:.75}
+.chat{background:#ECE5DD;padding:24px 20px;display:flex;flex-direction:column;gap:13px;min-height:430px}
+.bub{max-width:80%;padding:15px 18px;border-radius:14px;font-size:22px;line-height:1.42;color:#0A0A0B;opacity:0;transform:translateY(10px)}
+@keyframes pop{to{opacity:1;transform:translateY(0)}}
+.mio{align-self:flex-end;background:#DCF8C6}.suyo{align-self:flex-start;background:#fff}
+.b1{animation:pop .35s 13.2s forwards}.b2{animation:pop .35s 14.1s forwards}
+.b3{animation:pop .35s 15.4s forwards}.b4{animation:pop .35s 16.4s forwards}
+.h{display:block;font-size:15px;color:#8C8C8C;text-align:right;margin-top:5px}
+
+/* remate */
+.res{font-family:Anton;font-size:158px;line-height:.95;color:#E8590C;opacity:0;animation:pop .5s 19.8s forwards}
+.final{font-family:Anton;font-size:84px;line-height:1.02;margin-top:30px;text-transform:uppercase;opacity:0;animation:pop .5s 20.6s forwards}
+.cierre{font-size:30px;color:rgba(242,238,230,.8);margin-top:26px;opacity:0;animation:pop .5s 21.4s forwards}
+.firma{position:absolute;bottom:42px;left:56px;font-size:22px;color:rgba(242,238,230,.45)}
+.web{position:absolute;bottom:42px;right:56px;font-family:Anton;font-size:26px;color:#E8590C}
+</style>
+
+<div class="esc e1"><div class="cuerpo">
+  <div class="kick">Para empresas de servicios de 5 a 50</div>
+  <div class="big">Mandas el<br>presupuesto<br>y ahí se<br><span class="nar">acaba.</span></div>
+  <div class="sub" style="margin-top:auto">Nadie sabe si lo abrió.<br>Nadie vuelve a llamar.</div>
+</div></div>
+
+<div class="esc e2"><div class="cuerpo">
+  <div class="kick">Las 9:00 del martes siguiente</div>
+  <div class="big" style="font-size:76px">Esto ya estaba<br>en tu CRM.</div>
+  <div class="panel">
+    <div class="ph"><div class="pt">Señales de hoy</div><div class="hr">ejemplo</div></div>
+    <div class="fila q1"><span class="pill rojo">Parado</span><span class="txt"><b>3 presupuestos</b> sin respuesta hace 14 días</span><span class="eur">8.400 €</span></div>
+    <div class="fila q2"><span class="pill rojo">Sin tocar</span><span class="txt">Un contacto de <b>hace 4 días</b> sin llamar</span><span class="eur">1.900 €</span></div>
+    <div class="fila q3"><span class="pill ambar">Enfriándose</span><span class="txt">Dijo «ahora no» en <b>marzo</b></span><span class="eur">3.200 €</span></div>
+    <div class="fila q4"><span class="pill verde">A favor</span><span class="txt">Abrió tu presupuesto <b>tres veces</b> hoy</span><span class="eur">5.100 €</span></div>
+    <div class="acc"><div class="l">Llama primero a</div><div class="r">El que lo abrió 3 veces</div></div>
+  </div>
+</div></div>
+
+<div class="esc e3"><div class="cuerpo">
+  <div class="kick">Y no se queda mirando</div>
+  <div class="big" style="font-size:76px">Escribe él.<br>A las <span class="nar">9:04</span>.</div>
+  <div class="wa">
+    <div class="wh"><div class="av">Q</div><div><div class="wn">Marta · Reformas Vilanova</div><div class="ws">conversación de ejemplo</div></div></div>
+    <div class="chat">
+      <div class="bub mio b1">Marta, buenos días. Te pasamos el presupuesto de la cocina hace dos semanas.<span class="h">9:04</span></div>
+      <div class="bub mio b2">¿Lo dejamos aparcado o te lo ajusto con la encimera más económica?<span class="h">9:04</span></div>
+      <div class="bub suyo b3">Uf, se me había pasado. Ajústamelo y lo miro hoy<span class="h">9:31</span></div>
+      <div class="bub mio b4">Hecho. ¿Te llamo el jueves para cerrarlo?<span class="h">9:33</span></div>
+    </div>
+  </div>
+</div></div>
+
+<div class="esc e4"><div class="cuerpo">
+  <div class="kick">Un presupuesto que ya estaba perdido</div>
+  <div style="margin:auto 0">
+    <div class="res">4.200 €</div>
+    <div class="final">Encontramos la fuga.<br><span class="nar">Ponemos un agente ahí.</span></div>
+    <div class="cierre">Sin contratar a nadie. Sin cambiar de CRM.<br>qualivo.io</div>
+  </div>
+</div></div>
+
+<div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div>
