@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../../infografias/2026-09-10/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.page{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;background:#F2EEE6;color:#0A0A0B}
+.page::before{content:'';position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(10,10,11,.055) 1px,transparent 1px);background-size:7px 7px}
+.in{position:absolute;inset:0;padding:54px 54px 128px;display:flex;flex-direction:column}
+.kick{font-size:21px;letter-spacing:.26em;text-transform:uppercase;color:#E8590C;font-weight:700}
+.tit{font-family:Anton;font-size:66px;line-height:1.2;text-transform:uppercase;margin-top:20px}
+.mark{background:#FBE896;padding:2px 12px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.firma{position:absolute;bottom:44px;left:54px;font-size:22px;color:rgba(10,10,11,.55)}
+.web{position:absolute;bottom:44px;right:54px;font-family:Anton;font-size:25px;color:#E8590C}
+
+/* maqueta de panel */
+.wrap{position:relative;margin:44px 0 0}
+.panel{background:#fff;border-radius:16px;box-shadow:0 18px 44px rgba(10,10,11,.14);overflow:hidden}
+.phead{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;border-bottom:1px solid #E9E5DD}
+.ptit{font-family:Anton;font-size:31px;text-transform:uppercase;letter-spacing:.01em}
+.hora{font-size:19px;color:#8A8A8A}
+.fila{display:flex;align-items:center;gap:18px;padding:21px 26px;border-bottom:1px solid #F1EEE8}
+.fila:last-child{border-bottom:0}
+.pill{font-family:SG;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;white-space:nowrap}
+.rojo{background:#FDE4D6;color:#C2410C}
+.ambar{background:#FBE896;color:#8A6500}
+.verde{background:#DDEEE0;color:#2F6B3C}
+.txt{font-size:23px;line-height:1.35;flex:1}
+.txt b{font-weight:700}
+.eur{font-family:Anton;font-size:32px;color:#0A0A0B;white-space:nowrap}
+.accion{background:#0A0A0B;color:#F2EEE6;padding:20px 26px;display:flex;justify-content:space-between;align-items:center}
+.accion .l{font-size:21px;color:rgba(242,238,230,.72)}
+.accion .r{font-family:Anton;font-size:27px;color:#FF7A33;text-transform:uppercase}
+
+/* nota manuscrita */
+.nota{position:absolute;right:26px;bottom:-196px;width:330px;background:#FBE896;padding:26px 24px;box-shadow:0 12px 26px rgba(10,10,11,.18);transform:rotate(-2.6deg);font-style:italic;font-size:25px;line-height:1.38}
+.cinta{position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);width:96px;height:26px;background:rgba(120,160,210,.45)}
+
+.caja{margin-top:auto;border:2px solid #0A0A0B;border-radius:12px;padding:24px 26px;font-size:24px;line-height:1.45;background:#fff}
+</style>
+
+<div class="page"><div class="in">
+  <div class="kick">Lo que ve el agente</div>
+  <div class="tit">Las 9:00 de un martes<br>en tu <span class="mark">negocio</span></div>
+
+  <div class="wrap">
+    <div class="panel">
+      <div class="phead"><div class="ptit">Señales de hoy</div><div class="hora">martes, 9:00</div></div>
+      <div class="fila"><span class="pill rojo">Parado</span><span class="txt"><b>3 presupuestos</b> llevan 14 días sin respuesta</span><span class="eur">8.400 €</span></div>
+      <div class="fila"><span class="pill rojo">Sin tocar</span><span class="txt">Un contacto de <b>hace 4 días</b> que nadie ha llamado</span><span class="eur">1.900 €</span></div>
+      <div class="fila"><span class="pill ambar">Enfriándose</span><span class="txt">Dijo «ahora no» en <b>marzo</b>. Su web cambió ayer</span><span class="eur">3.200 €</span></div>
+      <div class="fila"><span class="pill verde">A favor</span><span class="txt">Abrió tu presupuesto <b>tres veces</b> esta mañana</span><span class="eur">5.100 €</span></div>
+      <div class="accion"><div class="l">Llama primero a</div><div class="r">El que lo abrió 3 veces</div></div>
+    </div>
+    <div class="nota"><div class="cinta"></div>Nada de esto es nuevo. Ya estaba en tu CRM. Nadie lo había mirado junto.</div>
+  </div>
+
+  <div class="caja">El agente no te trae contactos nuevos. Te enseña <b>los 18.600 € que ya tienes dentro</b> y por cuál empezar esta mañana.</div>
+</div>
+<div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
