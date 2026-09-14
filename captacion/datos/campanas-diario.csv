@@ -32,3 +32,12 @@ fecha,campana,estado,enviados,aperturas,clics,respuestas,rebotes,deposito_sin_em
 2026-09-11,"SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",ACTIVE,0,1,0,0,0,0
 2026-09-11,Inmobiliarias ES · Genérica (volumen),PAUSED,31,8,0,0,0,
 2026-09-11,Solar ES · Genérica (volumen),PAUSED,28,1,0,0,0,
+2026-09-14,V3 · Motor de puertas (copy por lead),ACTIVE,75,0,0,2,2,46
+2026-09-14,ICP10 · Dirección nueva (Brain),ACTIVE,4,1,0,0,0,0
+2026-09-14,ICP08 · CRM sin disciplina (Brain),ACTIVE,15,6,0,0,0,0
+2026-09-14,ICP15 · Base desaprovechada (Brain),PAUSED,17,4,0,0,0,
+2026-09-14,"Solar · con señal (Brain, 8-sep) BORRADOR",ACTIVE,1,0,0,0,0,0
+2026-09-14,Multiservicio · Brain (8-sep) BORRADOR,ACTIVE,8,1,0,0,0,0
+2026-09-14,Gestorías · Piloto (1-sep),COMPLETED,26,14,10,0,0,
+2026-09-14,"SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",COMPLETED,3,1,1,0,0,
+2026-09-14,Solar ES · Genérica (volumen),PAUSED,0,2,0,0,0,
