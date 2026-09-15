@@ -1,0 +1,134 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG}
+#fondo{position:absolute;inset:0;background:#E8590C}
+#tex{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:60}
+.rec{position:absolute;opacity:0;z-index:10}
+.tp{position:absolute;opacity:0;z-index:20}
+.big{font-family:Anton;line-height:.84}
+.pie{position:absolute;bottom:170px;font-size:22px;z-index:30}
+.pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px}
+#paso{position:absolute;left:64px;top:220px;font-family:Anton;font-size:126px;opacity:0;z-index:20}
+#pasoN{position:absolute;left:64px;top:360px;font-family:Anton;font-size:78px;text-transform:uppercase;opacity:0;z-index:20}
+</style>
+<div id="e">
+  <div id="fondo"></div>
+  <img class="rec" id="papeles" src="rec/papeles-rec.png">
+  <img class="rec" id="reloj"   src="rec/reloj-rec.png">
+  <img class="rec" id="movil"   src="rec/movil-rec.png">
+  <img class="rec" id="laptop"  src="rec/laptop-rec.png">
+  <img class="rec" id="lupa"    src="rec/lupa-rec.png">
+  <img class="rec" id="dedo"    src="rec/dedo-rec.png">
+  <img class="rec" id="balanza" src="rec/balanza-rec.png">
+  <img class="rec" id="sobre"   src="rec/sobre-rec.png">
+
+  <div class="tp big" id="t1"></div>
+  <div class="tp" id="t2"></div>
+  <div id="paso"></div><div id="pasoN"></div>
+  <svg id="tex" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="1080" height="1920" filter="url(#n)" opacity="0.30"/></svg>
+  <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
+</div>
+<script>
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.4);
+const back=x=>{const c=1.8,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+const OFF=()=>{['papeles','reloj','movil','laptop','lupa','dedo','balanza','sobre'].forEach(i=>$(i).style.opacity=0);
+  ['t1','t2','paso','pasoN'].forEach(i=>$(i).style.opacity=0);};
+function obj(id,p,css,tr){const n=$(id); if(p<=0){n.style.opacity=0;return;} n.style.cssText=css; n.style.opacity=1; n.style.transform=tr;}
+// bloques de locucion, medidos
+const B=[0.40,5.00,12.30,17.70,26.40,36.50];
+
+window.setT=function(t){
+  OFF();
+  // el fondo alterna para que cada acto se note
+  const cr = (t>=12.3&&t<17.6) || (t>=36.5);
+  $('fondo').style.background = cr ? '#F4F1EB' : '#E8590C';
+  const tinta = cr ? '#0A0A0B' : '#0A0A0B';
+  $('pl').style.color='rgba(10,10,11,.5)'; $('pr').style.color=cr?'#E8590C':'#0A0A0B';
+
+  // ── 1 · el gancho: los papeles y la pregunta
+  if(t<5.0){
+    const p=nm(t,.35,1.0);
+    obj('papeles',p,'position:absolute;width:560px;left:250px;top:780px;z-index:10',
+        `translateY(${(1-back(p))*640}px) rotate(${-5+5*out(p)}deg)`);
+    const a=nm(t,.15,.7);
+    $('t1').style.cssText='position:absolute;left:64px;top:210px;width:960px;font-size:118px;color:'+tinta+';z-index:20';
+    $('t1').innerHTML='¿Cuántas<br>oportunidades<br>tienes?'; $('t1').style.opacity=a;
+    $('t1').style.transform=`translateX(${(1-back(a))*-60}px)`;
+    const c=nm(t,1.5,3.2);
+    $('t2').style.cssText='position:absolute;left:64px;top:1480px;font-family:Anton;font-size:250px;line-height:.8;color:'+tinta+';z-index:20';
+    $('t2').innerHTML=Math.round(out(c)*127)+'<span style="font-family:SG;font-size:46px;font-weight:700;display:block;letter-spacing:.14em">ABIERTAS EN TU CRM</span>';
+    $('t2').style.opacity=nm(t,1.4,1.8);
+  }
+  // ── 2 · los dias: reloj y movil
+  else if(t<12.3){
+    const r=nm(t,5.0,5.7);
+    obj('reloj',r,'position:absolute;width:480px;left:520px;top:300px;z-index:10',
+        `translate(${(1-back(r))*300}px,${(1-back(r))*-190}px) rotate(${(1-out(r))*-150+8}deg) scale(${.5+.5*back(r)})`);
+    const a=nm(t,5.4,6.0);
+    $('t1').style.cssText='position:absolute;left:64px;top:900px;width:960px;font-size:190px;color:#0A0A0B;z-index:20';
+    $('t1').innerHTML='46<span style="font-family:SG;font-size:60px;font-weight:700;display:block;letter-spacing:.06em">DÍAS SIN QUE NADIE LA TOQUE</span>';
+    $('t1').style.opacity=a; $('t1').style.transform=`scale(${.88+.12*back(a)})`;
+    const m=nm(t,8.4,9.1);
+    obj('movil',m,'position:absolute;width:300px;left:140px;top:1340px;z-index:10',
+        `translateX(${(1-back(m))*-360}px) rotate(${-20+8*out(m)}deg)`);
+    const b=nm(t,9.2,9.8);
+    $('t2').style.cssText='position:absolute;left:520px;top:1420px;width:500px;font-size:44px;font-weight:700;line-height:1.25;color:#0A0A0B;z-index:20';
+    $('t2').innerHTML='Cero llamadas.<br>Cero correos.'; $('t2').style.opacity=b;
+    $('t2').style.transform=`translateY(${(1-out(b))*30}px)`;
+  }
+  // ── 3 · el giro, sobre crema
+  else if(t<17.6){
+    const a=nm(t,12.4,13.0);
+    $('t1').style.cssText='position:absolute;left:64px;top:620px;width:960px;font-size:132px;color:#0A0A0B;z-index:20';
+    $('t1').innerHTML='No son<br>contactos malos.'; $('t1').style.opacity=a;
+    $('t1').style.transform=`translateX(${(1-back(a))*-70}px)`;
+    const b=nm(t,14.4,15.1);
+    $('t2').style.cssText='position:absolute;left:64px;top:1080px;width:960px;font-family:Anton;font-size:132px;line-height:.86;color:#E8590C;z-index:20';
+    $('t2').innerHTML='Son clientes<br>que ya habías<br>conseguido.'; $('t2').style.opacity=b;
+    $('t2').style.transform=`translateX(${(1-back(b))*90}px)`;
+  }
+  // ── 4 y 5 · los cinco pasos
+  else if(t<36.4){
+    const PASOS=[
+      {t:17.9,d:'01',n:'Conectamos',  o:'laptop', css:'position:absolute;width:620px;left:230px;top:820px;z-index:10', rot:6},
+      {t:22.1,d:'02',n:'Analizamos',  o:'lupa',   css:'position:absolute;width:480px;left:300px;top:830px;z-index:10', rot:-12},
+      {t:26.6,d:'03',n:'Detectamos',  o:'dedo',   css:'position:absolute;width:700px;left:190px;top:960px;z-index:10', rot:-8},
+      {t:29.9,d:'04',n:'Priorizamos', o:'balanza',css:'position:absolute;width:560px;left:260px;top:800px;z-index:10', rot:5},
+      {t:33.2,d:'05',n:'Actuamos',    o:'sobre',  css:'position:absolute;width:600px;left:240px;top:880px;z-index:10', rot:-14}
+    ];
+    let cur=PASOS[0];
+    for(const p of PASOS) if(t>=p.t) cur=p;
+    const p=nm(t,cur.t,cur.t+0.55);
+    $('paso').textContent=cur.d; $('paso').style.color='#0A0A0B'; $('paso').style.opacity=nm(t,cur.t,cur.t+.3);
+    $('paso').style.transform=`translateX(${(1-back(p))*-50}px)`;
+    $('pasoN').textContent=cur.n; $('pasoN').style.color='#F4F1EB';
+    $('pasoN').style.opacity=nm(t,cur.t+.15,cur.t+.5);
+    $('pasoN').style.transform=`translateX(${(1-back(nm(t,cur.t+.15,cur.t+.7)))*-60}px)`;
+    obj(cur.o,p,cur.css,`translateY(${(1-back(p))*520}px) rotate(${(1-out(p))*(cur.rot*4)+cur.rot}deg) scale(${.7+.3*back(p)})`);
+  }
+  // ── 6 · cierre
+  else {
+    const a=nm(t,36.6,37.2);
+    $('t1').style.cssText='position:absolute;left:64px;top:640px;width:960px;font-size:116px;color:#0A0A0B;z-index:20';
+    $('t1').innerHTML='Antes de buscar<br>más clientes,'; $('t1').style.opacity=a;
+    $('t1').style.transform=`translateY(${(1-back(a))*-50}px)`;
+    const b=nm(t,38.4,39.1);
+    $('t2').style.cssText='position:absolute;left:64px;top:1030px;width:960px;font-family:Anton;font-size:116px;line-height:.9;color:#E8590C;z-index:20';
+    $('t2').innerHTML='mira qué pasa<br>con los que<br>ya tienes.'; $('t2').style.opacity=b;
+    $('t2').style.transform=`translateY(${(1-back(b))*50}px)`;
+    const s=nm(t,40.3,40.9);
+    obj('sobre',s,'position:absolute;width:300px;left:700px;top:1480px;z-index:10',
+        `translateY(${(1-back(s))*260}px) rotate(${-16+6*out(s)}deg)`);
+  }
+};
+window.setT(0);
+</script>
