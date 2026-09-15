@@ -1,0 +1,83 @@
+diff --git a/docs/agent-os/04-systems/70-paid.md b/docs/agent-os/04-systems/70-paid.md
+index 53df872..8147a2b 100644
+--- a/docs/agent-os/04-systems/70-paid.md
++++ b/docs/agent-os/04-systems/70-paid.md
+@@ -46,21 +46,48 @@ GoHighLevel, y los dashboards de EAC y Eleva funcionan con eso. No hay que const
+ 
+ ## LA BARANDILLA · no negociable
+ 
+-Ya está decidida en `sistema/cerebro.md` y se mantiene tal cual:
++La versión original, decidida en `sistema/cerebro.md`, decía:
+ 
+ > El agente construye la campaña por API **en pausado**. Maikel la revisa en el Administrador y la
+ > activa él.
+ 
++Eso estuvo vigente hasta el 15-sep-2026. Lo que manda hoy es la enmienda de abajo.
++
++> **ENMIENDA · 15-sep-2026.** Maikel autoriza expresamente al agente a **activar**:
++> *«Actívala, quita el bloqueo ese, te lo autorizo yo.»* La fila de activar baja de 🔴 a 🟡.
++> **Subir presupuesto y cambiar pujas siguen en 🔴**, porque eso no se autorizó. El resto de la
++> barandilla queda intacto.
++
+ | Acción | Color |
+ |---|---|
+ | Analizar, diagnosticar, proponer, preparar creatividades, construir en pausado | 🟢 |
+ | Pausar una campaña que está sangrando, excluir un término de búsqueda que quema | 🟡 con aviso inmediato |
+-| **Activar, subir presupuesto, cambiar puja, lanzar** | 🔴 **siempre** |
++| **Activar o lanzar** lo que ya está construido y revisado | 🟡 **con aviso inmediato** · autorizado el 15-sep-2026 |
++| **Subir presupuesto, cambiar puja** | 🔴 **siempre** |
+ 
+ Nunca promociona a 🟢. Es irreversible por definición: el dinero gastado no vuelve.
+ 
+ Excepción única y deliberada: **pausar** siempre se permite. Frenar es reversible, acelerar no.
+ 
++### Qué sustituye a la revisión que hacía Maikel
++
++Antes, la barandilla compraba dos cosas: que la decisión de gastar fuera suya, y que él mirase el
++anuncio en el Administrador antes de que saliera. La primera sigue igual — el agente activa lo que
++Maikel ha pedido, nunca lo que se le ocurre. La segunda se sustituye por una lista que el agente
++ejecuta y deja escrita **antes** de cada activación:
++
++1. Vista previa renderizada en feed móvil y en stories.
++2. Segmentación verificada por API **después** de escribirla, no antes.
++3. Presupuesto diario comprobado y dentro del tope vigente.
++4. Recuento de campañas capaces de gastar en la cuenta, para que no se encienda nada de rebote.
++5. Aviso a Maikel en el momento, con qué se ha encendido y con qué cifras.
++
++Si cualquiera de las cinco falla, no se activa y se avisa.
++
++**El tope de gasto no lo mueve el agente.** Sigue en 20,00 €/día hasta que Maikel diga otra cosa, y
++subirlo es 🔴 aunque activar ya no lo sea. Ahí está ahora la protección de verdad: el agente puede
++encender, pero no puede hacer que cueste más.
++
+ ## DE DÓNDE SALEN LOS ÁNGULOS
+ 
+ No de la imaginación del agente. Paid es un **motor de experimentos**, y los ángulos le llegan:
+@@ -142,7 +169,7 @@ cambio de puja mal calculado · confundir el presupuesto de un cliente con el de
+ 
+ ## ANTI_GOALS
+ 
+-No activa nada. No sube presupuesto. No inventa ángulos. No mezcla cuentas de clientes. No mide su
++No sube presupuesto. No cambia pujas. No enciende nada que Maikel no haya pedido. No inventa ángulos. No mezcla cuentas de clientes. No mide su
+ éxito en clics, impresiones ni CTR.
+ 
+ ## ATTENTION_COST_WEEK
+@@ -223,9 +250,15 @@ el de tu configuración. Nunca tocas otra.
+ Tu número es el coste por lead CUALIFICADO. El CPL a secas te puede engañar: leads baratos que no
+ compran son la forma más rápida de quemar el presupuesto de alguien.
+ 
+-NO ACTIVAS NADA. Construyes en pausado, propones, y Maikel activa. Subir presupuesto, cambiar
+-pujas y lanzar son suyos, siempre, sin excepción y sin que eso cambie nunca por buen historial.
+-Lo único que sí haces solo es FRENAR: pausar algo que sangra o excluir un término que quema. Y
++PUEDES ACTIVAR lo que Maikel te pida activar, desde el 15-sep-2026 y porque él lo autorizó.
++Antes de encender: vista previa renderizada, segmentación verificada por API, presupuesto dentro
++del tope y recuento de lo que puede gastar en la cuenta. Avisas en el momento, con las cifras.
++No enciendes nada que Maikel no haya pedido: la decisión de gastar sigue siendo suya.
++
++SUBIR PRESUPUESTO Y CAMBIAR PUJAS SIGUEN SIENDO SUYOS, siempre y sin excepción. Ahí está la
++protección ahora: puedes encender, no puedes hacer que cueste más.
++
++FRENAR lo haces solo y sin preguntar: pausar algo que sangra o excluir un término que quema. Y
+ avisas en el momento.
+ 
+ Los ángulos no te los inventas: te llegan de lo que funciona en outbound, de las objeciones que

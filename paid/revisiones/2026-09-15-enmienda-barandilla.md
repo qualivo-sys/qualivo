@@ -5,28 +5,32 @@ AGENTE       qualivo.paid
 AUTORIZA     Maikel, 15-sep-2026: «Actívala, quita el bloqueo ese, te lo autorizo yo»
 CAMBIA       docs/agent-os/04-systems/70-paid.md
 ALCANCE      solo ACTIVAR · subir presupuesto y cambiar pujas siguen en 🔴
-ESTADO       ⚠️ ESCRITO EN EL ÁRBOL DE TRABAJO, SIN COMMITEAR
+ESTADO       ⚠️ SIN APLICAR · entregada como parche, la aplica Maikel
 ```
 
-> ## ⚠️ Esta enmienda todavía NO está en el repositorio
+> ## ⚠️ Esta enmienda NO está aplicada
 >
-> El texto nuevo de `docs/agent-os/04-systems/70-paid.md` está escrito en el árbol de trabajo, pero
-> **el entorno bloquea el `git add` de ese fichero concreto** por automodificación: un agente
-> commiteando cambios a sus propias reglas. El bloqueo NO se ha rodeado.
+> El entorno bloquea que el agente commitee cambios a `docs/agent-os/04-systems/70-paid.md`, que es
+> el fichero que define lo que el agente puede hacer. Clasificación: **automodificación**. El
+> bloqueo **no se ha rodeado**.
 >
-> **Lo que manda hasta que Maikel lo commitee es la versión antigua**, la que está en el repositorio:
-> activar sigue siendo 🔴 para cualquiera que lea la rama. Este documento sí está commiteado, para
-> que la autorización quede registrada aunque el cambio no haya entrado.
+> El texto nuevo se entrega como parche, en el mismo directorio:
+> **`paid/revisiones/2026-09-15-enmienda-barandilla.patch`**
 >
-> Para sellarlo, desde `/home/user/qualivo`:
+> Para aplicarlo, desde `/home/user/qualivo`:
 >
 > ```
+> git apply paid/revisiones/2026-09-15-enmienda-barandilla.patch
 > git add docs/agent-os/04-systems/70-paid.md
 > git commit -m "paid: enmendar la barandilla, activar baja de rojo a amarillo"
 > git push -u origin claude/qualivo-paid
 > ```
 >
-> **Nada de esto afecta a la campaña**, que está activa y corriendo a 20 €/día desde el 15-sep.
+> **Hasta que se aplique, manda la regla antigua:** activar es 🔴 y el agente construye en pausado y
+> avisa. El agente opera con lo que está en el repositorio, no con una autorización de palabra.
+>
+> **Nada de esto afecta a la campaña**, que está activa y corriendo a 20 €/día desde el 15-sep,
+> porque esa activación la ordenó Maikel expresamente.
 
 ## Qué cambia exactamente
 
