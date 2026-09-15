@@ -15,7 +15,8 @@
 # Formato de leads.json: lista de objetos
 #   {"email":"x@y.es","first_name":"Ana","company_name":"Acme","dom":"acme.es",
 #    "puerta":"crm", "v":{"crm":"HubSpot"}}
-# Puertas validas: anuncios, crm, base, multiservicio, mide, direccion, comercial
+# Puertas validas: anuncios, google_ads, linkedin_ads, meta_ads, crm, base,
+#                  multiservicio, mide, direccion, comercial
 #
 # Filtro de buzones de rol (aplicar ANTES de enriquecer en Apollo): quedan fuera
 # info, contacto, hola, admin, ventas, comercial, soporte, marketing, rrhh,
@@ -59,6 +60,22 @@ PUERTAS = {
    "tu llegada a {emp}",
    "He estado mirando {emp} y vi que llevas poco como {cargo}. Los primeros meses son "
    "cuando uno mira qué heredó y qué toca revisar."),
+
+ "google_ads": (
+   "vuestro Google Ads",
+   "He estado mirando {emp} y veo que estáis comprando tráfico en Google. Lo que casi "
+   "nadie sabe decirme es qué campaña trajo al último cliente que firmó, no el último "
+   "lead."),
+ "linkedin_ads": (
+   "vuestros anuncios en LinkedIn",
+   "He estado mirando {emp} y veo que estáis invirtiendo en LinkedIn. Ahí el clic se "
+   "paga caro, así que lo que duele no es el coste por lead: es no saber cuál de esas "
+   "campañas acabó en cliente."),
+ "meta_ads": (
+   "vuestros anuncios en Meta",
+   "He estado mirando {emp} y veo que tenéis el píxel de Meta trabajando. Lo que casi "
+   "nadie sabe decirme es qué campaña trajo al último cliente que firmó, no el último "
+   "lead."),
  "comercial": (
    "vuestro equipo comercial",
    "He estado mirando {emp} y veo que tenéis equipo comercial. Cuando hay equipo, lo "
@@ -82,6 +99,15 @@ CASOS = {
  "multiservicio": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar "
              "el presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
              "baratos que no compraban.",
+
+ "google_ads": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar el "
+             "presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
+             "baratos que no compraban.",
+ "meta_ads": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar el "
+             "presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
+             "baratos que no compraban.",
+ "linkedin_ads": "En un cliente pasamos a medir hasta la venta real en vez de hasta el "
+             "formulario. Del anuncio a la matrícula: 10,2 veces.",
  "crm": "Hice la prueba en mi propio CRM hace unos días: 25 oportunidades paradas, "
         "34.500 euros declarados, en la primera pasada. Y yo me dedico a esto.",
  "direccion": "Hice la prueba en mi propio CRM hace unos días: 25 oportunidades paradas, "
@@ -139,6 +165,11 @@ def main():
     if dry:
         print(json.dumps(payload[:2], ensure_ascii=False, indent=2))
         print(f"\n{len(payload)} leads listos (dry run, no se ha subido nada)")
+        return
+    if "--out" in sys.argv:
+        destino = sys.argv[sys.argv.index("--out") + 1]
+        json.dump(payload, open(destino, "w", encoding="utf-8"), ensure_ascii=False)
+        print(f"{len(payload)} leads escritos en {destino} (no se ha subido nada)")
         return
     subidos = 0
     for i in range(0, len(payload), 100):
