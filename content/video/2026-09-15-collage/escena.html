@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#E8590C;font-family:SG;color:#0A0A0B}
+#tex{position:absolute;inset:0;opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+.rec{position:absolute;opacity:0}
+#papeles{width:520px;left:110px;top:700px}
+#reloj{width:400px;left:640px;top:380px}
+#movil{width:250px;left:700px;top:1080px;transform-origin:center}
+.tp{position:absolute;opacity:0}
+#big{left:64px;top:150px;font-family:Anton;font-size:280px;line-height:.82;color:#0A0A0B}
+#big small{display:block;font-size:74px;letter-spacing:.04em}
+#l1{left:64px;top:1400px;width:950px;font-size:44px;font-weight:500;line-height:1.3;color:#0A0A0B}
+#l1 b{font-weight:800}
+#l2{left:64px;top:1530px;width:950px;font-family:Anton;font-size:68px;line-height:1;text-transform:uppercase;color:#F4F1EB}
+svg#trazo{position:absolute;left:566px;top:318px;width:600px;height:560px;overflow:visible}
+.pie{position:absolute;bottom:180px;font-size:22px;color:rgba(10,10,11,.5)}
+.pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px;color:#0A0A0B}
+</style>
+<div id="e">
+  <img class="rec" id="papeles" src="rec/papeles-rec.png">
+  <img class="rec" id="reloj" src="rec/reloj-rec.png">
+  <img class="rec" id="movil" src="rec/movil-rec.png">
+  <svg id="trazo"><circle id="cir" cx="270" cy="250" r="235" fill="none" stroke="#F4F1EB" stroke-width="14"
+      stroke-linecap="round" transform="rotate(-96 270 250)"/></svg>
+  <div class="tp" id="big">46<small>días parado</small></div>
+  <div class="tp" id="l1">Lo mandaste. <b>Lo abrió cuatro veces.</b><br>Y ahí sigue.</div>
+  <div class="tp" id="l2">no te falta gente.<br>te falta volver.</div>
+  <svg id="tex" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="1080" height="1920" filter="url(#n)" opacity="0.30"/></svg>
+  <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
+</div>
+<script>
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.4);
+// rebote: entra pasado de rosca y se asienta
+const back=x=>{const c=1.9,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const S=(id,o,tr)=>{const n=document.getElementById(id);n.style.opacity=o;if(tr!==undefined)n.style.transform=tr;};
+const CIR=2*Math.PI*235;
+document.getElementById('cir').style.strokeDasharray=CIR;
+
+window.setT=function(t){
+  // el numero llega de golpe, sin cortesias
+  const b=nm(t,.1,.62);
+  S('big', b>0?1:0, `translate(${(1-back(b))*-70}px,0) scale(${.86+.14*back(b)})`);
+
+  // los papeles caen y rebotan
+  const p=nm(t,.55,1.15);
+  S('papeles', p>0?1:0, `translateY(${(1-back(p))*620}px) rotate(${-4+4*out(p)}deg)`);
+
+  // el reloj entra girando
+  const r=nm(t,1.05,1.7);
+  S('reloj', r>0?1:0, `translate(${(1-back(r))*260}px,${(1-back(r))*-150}px) rotate(${(1-out(r))*-140+9}deg) scale(${.5+.5*back(r)})`);
+
+  // y se le dibuja un circulo a mano alrededor
+  const c=nm(t,1.75,2.5);
+  document.getElementById('cir').style.strokeDashoffset=CIR*(1-out(c));
+  document.getElementById('trazo').style.opacity=c>0?1:0;
+
+  const a1=nm(t,2.5,2.95);
+  S('l1', a1, `translateY(${(1-out(a1))*34}px)`);
+
+  // el movil entra tarde, callado
+  const m=nm(t,3.3,3.9); // el movil, callado, arriba
+  S('movil', m>0?1:0, `translate(${(1-back(m))*-320}px,0) rotate(${-18+6*out(m)}deg)`);
+
+  const a2=nm(t,4.3,4.8);
+  S('l2', a2, `translateY(${(1-out(a2))*40}px)`);
+
+  // latido final del numero
+  if(t>5.2){const q=nm(t,5.2,5.6); S('big',1,`scale(${1+.035*Math.sin(q*Math.PI)})`);}
+};
+window.setT(0);
+</script>
