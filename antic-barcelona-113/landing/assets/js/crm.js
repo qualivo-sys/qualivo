@@ -119,7 +119,7 @@
     var abiertos = leads.filter(function (l) { return ABIERTOS.indexOf(l.estado) >= 0; }).length;
     var tabs = [
       ['hoy', 'Hoy', hoy],
-      ['abiertos', 'En marcha', abiertos],
+      ['tablero', 'Tablero', abiertos],
       ['todos', 'Todos', leads.length],
       ['panel', 'Panel', null],
     ];
@@ -139,9 +139,8 @@
 
   function pintar() {
     if (pestana === 'panel') return pintarPanel();
-    var lista = pestana === 'hoy' ? deHoy()
-      : pestana === 'abiertos' ? leads.filter(function (l) { return ABIERTOS.indexOf(l.estado) >= 0; })
-      : leads;
+    if (pestana === 'tablero') return pintarTablero();
+    var lista = pestana === 'hoy' ? deHoy() : leads;
 
     if (!lista.length) {
       $('#lista').innerHTML = '<div class="vacio">' + (pestana === 'hoy'
@@ -259,6 +258,97 @@
   });
   function euros(v) {
     return (v ? FORMATO_EUROS.format(v) : '0') + ' €';
+  }
+
+  // ── Tablero ───────────────────────────────────────────────────────────────
+  //
+  // Arrastrar es cosa de ratón. En un móvil, arrastrar pelea con el
+  // desplazamiento de la página y se acaba moviendo un lead sin querer, así
+  // que en táctil la tarjeta se toca y el estado se cambia en la ficha.
+  var CON_RATON = !!(window.matchMedia && window.matchMedia('(pointer: fine)').matches);
+
+  function pintarTablero() {
+    $('#lista').innerHTML = '<div class="tablero">' + ESTADOS.map(function (e) {
+      var col = leads.filter(function (l) { return l.estado === e; });
+      var suma = col.reduce(function (a, l) { return a + (Number(l.importe) || 0); }, 0);
+      return '<section class="col" data-estado="' + esc(e) + '">' +
+        '<header><span class="t">' + esc(e) + '</span><span class="n">' + col.length + '</span>' +
+        (suma ? '<span class="eur">' + euros(suma) + '</span>' : '') + '</header>' +
+        '<div class="pila">' + (col.map(tarjetaTablero).join('') || '<p class="nada">—</p>') +
+        '</div></section>';
+    }).join('') + '</div>' +
+      '<p class="nota">' + (CON_RATON
+        ? 'Arrastra una tarjeta de columna para cambiarle el estado. Se guarda solo.'
+        : 'Toca una tarjeta para abrirla y cambiarle el estado.') + '</p>';
+    conectarTablero();
+  }
+
+  function tarjetaTablero(l) {
+    var partes = [l.pieza, l.medidas].filter(Boolean).join(' · ');
+    return '<article class="mini' + (l.tier === 'HOT' ? ' hot' : '') +
+      (haVencido(l) ? ' tarde' : '') + '" data-id="' + esc(l.lead_id) + '"' +
+      (CON_RATON ? ' draggable="true"' : '') + '>' +
+      '<b>' + esc(l.nombre || 'Sin nombre') + '</b>' +
+      (partes ? '<span>' + esc(partes) + '</span>' : '') +
+      '<div class="pie">' + (l.tier ? '<i class="t' + esc(l.tier) + '">' + esc(l.tier) + '</i>' : '') +
+      (Number(l.importe) ? '<u>' + euros(Number(l.importe)) + '</u>' : '') + '</div></article>';
+  }
+
+  function conectarTablero() {
+    var arrastrando = false;
+    Array.prototype.forEach.call($('#lista').querySelectorAll('.mini'), function (t) {
+      t.addEventListener('click', function () { if (!arrastrando) abrirFicha(t.dataset.id); });
+      if (!CON_RATON) return;
+      t.addEventListener('dragstart', function (ev) {
+        arrastrando = true;
+        ev.dataTransfer.effectAllowed = 'move';
+        ev.dataTransfer.setData('text/plain', t.dataset.id);
+        setTimeout(function () { t.classList.add('viajando'); }, 0);
+      });
+      t.addEventListener('dragend', function () {
+        t.classList.remove('viajando');
+        // Tras soltar llega un click igualmente: se ignora una vez.
+        setTimeout(function () { arrastrando = false; }, 60);
+      });
+    });
+    if (!CON_RATON) return;
+    Array.prototype.forEach.call($('#lista').querySelectorAll('.col'), function (c) {
+      c.addEventListener('dragover', function (ev) { ev.preventDefault(); c.classList.add('encima'); });
+      c.addEventListener('dragleave', function () { c.classList.remove('encima'); });
+      c.addEventListener('drop', function (ev) {
+        ev.preventDefault();
+        c.classList.remove('encima');
+        mover(ev.dataTransfer.getData('text/plain'), c.dataset.estado);
+      });
+    });
+  }
+
+  function mover(id, estado) {
+    var l = leads.filter(function (x) { return String(x.lead_id) === String(id); })[0];
+    if (!l || l.estado === estado) return;
+    var previo = l.estado;
+
+    // Se pinta el cambio antes de que conteste el servidor y se deshace si
+    // falla: esperar a la hoja con la tarjeta quieta se siente roto.
+    l.estado = estado;
+    pintarPestanas(); pintar();
+
+    api({ accion: 'actualizar', lead_id: id, campos: { estado: estado } }).then(function (r) {
+      if (!r.cuerpo.ok) {
+        l.estado = previo;
+        pintarPestanas(); pintar();
+        avisar('No se pudo mover. Inténtalo otra vez.');
+        return;
+      }
+      if (r.cuerpo.campos) {
+        Object.keys(r.cuerpo.campos).forEach(function (c) { l[c] = r.cuerpo.campos[c]; });
+        pintarPestanas(); pintar();
+      }
+      // Un perdido sin motivo no sirve dentro de tres meses, que es cuando hay
+      // que decidir qué cambiar en los anuncios.
+      if (estado === 'Perdido') { abrirFicha(id); avisar('¿Por qué se perdió?'); }
+      else avisar(String(l.nombre || '').split(' ')[0] + ' → ' + estado);
+    });
   }
 
   // ── Ficha ─────────────────────────────────────────────────────────────────

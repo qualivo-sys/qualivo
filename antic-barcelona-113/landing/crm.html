@@ -44,11 +44,11 @@ button{cursor:pointer;border:0;background:none}
 #errAcceso{color:#E8A9A2;font-size:13px;min-height:18px;margin-top:12px}
 
 /* ── Cabecera ─────────────────────────────────────────── */
-header{position:sticky;top:0;z-index:30;background:var(--ink-900);color:var(--paper-100);
+#app > header{position:sticky;top:0;z-index:30;background:var(--ink-900);color:var(--paper-100);
   padding:calc(12px + env(safe-area-inset-top)) 16px 0}
-.barra{display:flex;align-items:center;gap:12px;padding-bottom:12px}
-.barra h1{font-family:var(--titulo);font-size:16px;font-weight:600;letter-spacing:.01em;flex:1}
-.barra h1 span{display:block;font-size:11px;color:#A79C8E;letter-spacing:.14em;
+#app > header .barra{display:flex;align-items:center;gap:12px;padding-bottom:12px}
+#app > header .barra h1{font-family:var(--titulo);font-size:16px;font-weight:600;letter-spacing:.01em;flex:1}
+#app > header .barra h1 span{display:block;font-size:11px;color:#A79C8E;letter-spacing:.14em;
   text-transform:uppercase;font-weight:500}
 .iconbtn{color:#A79C8E;padding:8px;border-radius:10px;font-size:13px}
 .iconbtn:hover{color:var(--paper-100);background:#1F1913}
@@ -123,6 +123,55 @@ table.creas th:not(:first-child),table.creas td:not(:first-child){white-space:no
 table.creas td:last-child,table.creas th:last-child{padding-right:12px}
 table.creas td.destacada{font-weight:700;color:var(--ink-900)}
 .nota{font-size:12.5px;color:var(--ink-400);margin-top:10px;line-height:1.55}
+
+/* ── Tablero ──────────────────────────────────────────── */
+/* En móvil una columna por pantalla, con anclaje: un kanban de seis columnas
+   apretadas en 390 px no se lee. En escritorio, las seis a la vez. */
+.tablero{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  margin:0 -16px;padding-left:16px;padding-right:16px}
+.tablero::-webkit-scrollbar{height:8px}
+.tablero::-webkit-scrollbar-thumb{background:var(--paper-300);border-radius:99px}
+.col{flex:0 0 min(86vw,262px);scroll-snap-align:start;background:var(--paper-200);
+  border-radius:14px;padding:10px;display:flex;flex-direction:column;
+  transition:background .15s var(--seg),outline-color .15s var(--seg);
+  outline:2px solid transparent;outline-offset:-2px}
+.col.encima{background:var(--oak-300);outline-color:var(--oak-600)}
+/* Con sitio, las seis columnas se reparten el ancho: un kanban que hay que
+   desplazar para ver «Ganado» esconde justo la columna que se quiere enseñar. */
+@media(min-width:900px){
+  .tablero{overflow-x:visible;scroll-snap-type:none;margin:0;padding-left:0;padding-right:0}
+  .col{flex:1 1 0;min-width:0}
+  .col header .eur{font-size:10px}
+}
+.col header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 7px;padding:2px 4px 10px}
+.col header .t{font-family:var(--titulo);font-weight:600;font-size:13px;
+  color:var(--ink-900);letter-spacing:.01em}
+.col header .n{font-size:11px;font-weight:700;color:var(--ink-500);
+  background:var(--paper-000);border-radius:99px;padding:1px 7px}
+/* Cuando la columna es estrecha, el importe baja a su propia línea en vez de
+   quedarse cortado: un total a medias engaña más que no enseñarlo. */
+.col header .eur{margin-left:auto;font-size:11px;color:var(--ink-400);white-space:nowrap}
+@media(min-width:900px){.col header .t{flex:1 1 100%}.col header .eur{margin-left:0}}
+.pila{display:flex;flex-direction:column;gap:8px;min-height:60px}
+.nada{text-align:center;color:var(--ink-400);padding:14px 0;font-size:20px;line-height:1}
+.mini{background:var(--blanco);border:1px solid var(--linea);border-radius:11px;
+  padding:10px 11px;cursor:pointer;transition:transform .15s var(--seg),box-shadow .15s var(--seg)}
+.mini:hover{box-shadow:0 3px 10px rgba(20,16,13,.09)}
+.mini.viajando{opacity:.35}
+.mini.hot{border-color:#EFC4BF}
+.mini.tarde{box-shadow:inset 3px 0 0 #E0A200}
+.mini b{display:block;font-family:var(--titulo);font-weight:600;font-size:14px;
+  color:var(--ink-900);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini span{display:block;font-size:12px;color:var(--ink-400);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini .pie{display:flex;align-items:center;gap:6px;margin-top:8px}
+.mini .pie:empty{display:none}
+.mini i{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.06em;
+  padding:2px 7px;border-radius:99px;background:var(--paper-200);color:var(--ink-500)}
+.mini i.tHOT{background:var(--hot-bg);color:var(--hot)}
+.mini u{margin-left:auto;text-decoration:none;font-size:12px;font-weight:700;
+  color:var(--ink-700);font-family:var(--titulo)}
 
 /* ── Ficha ────────────────────────────────────────────── */
 #ficha{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center}

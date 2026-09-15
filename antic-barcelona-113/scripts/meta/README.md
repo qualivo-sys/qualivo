@@ -135,11 +135,17 @@ promoción**. Se crea la creatividad con `source_instagram_media_id` más
 **Al arrancar son 19 €/día**, o 589 € en un mes de 31 días. Se eligió 19 y no 20
 justamente por eso: 20 × 31 son 620 €.
 
-Once anuncios quedan encendidos dentro de campañas en pausa (6 en frío, 2 en
-retargeting, 3 en el de formulario). Los otros ocho se apagaron: con 15 €/día,
-trece anuncios se reparten 1,15 € cada uno y ninguno acumula eventos suficientes
-para salir de la fase de aprendizaje. Están ahí para sustituir a un ganador
-cuando lo haya, no borrados.
+Nueve anuncios quedan encendidos dentro de campañas en pausa (4 en frío, 2 en
+retargeting, 3 en el de formulario). Los otros diez se apagaron.
+
+El criterio no es el dinero sino las impresiones. Con 15 €/día y un CPM de
+9-12 € entran unas 1.250-1.650 impresiones al día; para decidir si una
+creatividad sirve hacen falta 8.000-10.000. Con cuatro anuncios toca a
+9.400-12.500 al mes cada uno y ya es un dato; con trece eran 3.000 y no se
+podía concluir nada de ninguno. Los apagados no están borrados: entran en
+cuanto haya un ganador al que sustituir.
+
+Ver `afinar-anuncios.mjs`.
 
 > **Cuidado al activar.** Si se encendieran las tres campañas a la vez serían
 > 23 €/día = 713 € en un mes de 31 días, por encima del techo. El formulario

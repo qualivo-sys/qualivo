@@ -30,7 +30,7 @@ si no se cumple, no se pasa a la siguiente.
 ## SEMANAS 1-2 · Lanzamiento y aprendizaje
 
 **Qué se hace**
-- Se activa `AB113 | FRIO | Lead` con 15 €/día y sus 6 anuncios.
+- Se activa `AB113 | FRIO | Lead` con 15 €/día y sus 4 anuncios.
 - Se activa `AB113 | RTG | Lead` con 4 €/día. A diferencia de lo que decía el plan
   original, sí hay audiencia el día 1: los 10.494 seguidores de Instagram.
 - Se revisa el panel **una vez al día** para detectar errores técnicos, no rendimiento.

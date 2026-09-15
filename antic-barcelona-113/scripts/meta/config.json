@@ -42,10 +42,9 @@
           },
           "anuncios": [
             "2A",
-            "3A",
             "5A"
           ],
-          "_nota": "Solo 3 estáticos, más los 3 Reels orgánicos que añade build-post-ads.mjs. Con 15 €/día, trece anuncios son 1,15 € cada uno y Meta no aprende con ninguno. 2A cubre la reforma, 3A la llamada directa por medidas y 5A alimenta la guía, que es el evento de volumen del que vive el algoritmo."
+          "_nota": "Dos estáticos, más los dos Reels orgánicos que añade build-post-ads.mjs: cuatro anuncios en total. Con 15 €/día y un CPM de 9-12 € entran unas 1.250-1.650 impresiones diarias; repartidas entre cuatro son ~9.000-12.000 al mes por anuncio, que es el mínimo para decidir si una creatividad sirve. Con seis no se llegaba. Los cuatro mantienen el test entero: dos vídeos contra dos estáticos, y dos hacia la guía (el evento de volumen) contra dos hacia el cuestionario."
         }
       ]
     },

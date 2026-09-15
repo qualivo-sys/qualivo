@@ -159,33 +159,54 @@ El cliente fija 600 € al mes. La cuenta está montada así:
 
 | Campaña | €/día | Anuncios activos |
 |---|---|---|
-| `AB113 \| FRIO \| Lead` | 15 | 6 (3 estáticos + 3 Reels orgánicos) |
+| `AB113 \| FRIO \| Lead` | 15 | 4 (2 estáticos + 2 Reels orgánicos) |
 | `AB113 \| RTG \| Lead` | 4 | 2 |
 | `AB113 \| FRIO \| Formulario` | *(en pausa)* | 3 |
-| **Total al arrancar** | **19 €/día ≈ 578 €/mes** | **8** |
+| **Total al arrancar** | **19 €/día ≈ 578 €/mes** | **6** |
 
 **Por qué 19 y no 20.** Un mes de 31 días a 20 €/día son 620 €. A 19 son 589 €.
 El techo se respeta también en enero.
 
-**Por qué se apagaron cinco estáticos.** Trece anuncios sobre 15 €/día son 1,15 €
-por anuncio y día: Meta reparte, ninguno acumula eventos suficientes y la fase
-de aprendizaje no termina en ninguno. Con seis, cada uno tiene 2,5 €/día, que
-sigue siendo poco pero ya es medible. Los apagados no se han borrado: están
-listos para entrar en cuanto haya un ganador claro al que sustituir.
+**Por qué solo cuatro anuncios en frío.** La cuenta no se hace con el dinero
+sino con las impresiones. Con 15 €/día y un CPM de 9-12 € entran unas
+**1.250-1.650 impresiones diarias**. Para decidir si una creatividad sirve hacen
+falta del orden de **8.000-10.000 impresiones** —unos 50-100 clics a un CTR del
+1 %, por debajo de eso el dato es ruido—. Repartidas:
 
-Los tres que se quedan cubren ángulos que los Reels no tocan y reparten las dos
-rutas del embudo:
-
-| | Ángulo | Destino |
+| Anuncios | Impresiones/mes por anuncio | ¿Se puede concluir algo? |
 |---|---|---|
-| `2A` | La pieza que cierra la reforma | `/cuestionario` |
-| `3A` | «Dinos tus medidas» — la llamada más directa | `/cuestionario` |
-| `5A` | Roble centenario — alimenta la guía | `/guia` |
+| 13 | 3.000-3.800 | No |
+| 6 | 6.250-8.300 | Justo por debajo |
+| **4** | **9.400-12.500** | **Sí** |
 
-`5A` no es prescindible aunque sea el de menos intención: la guía es el evento
-de volumen del que come el algoritmo. Sin ninguna creatividad apuntando ahí, el
-conjunto se queda optimizando sobre los pocos cuestionarios que entren y no sale
-del aprendizaje nunca.
+Y eso suponiendo reparto equitativo, que no lo hay: Meta concentra en uno o dos
+y los demás se quedan a cero. Con trece anuncios, a fin de mes no se puede decir
+nada de once de ellos, y haber pagado por ellos no cambia eso.
+
+Los cuatro que quedan mantienen el test entero: **dos vídeos orgánicos contra
+dos estáticos diseñados**, y **dos hacia la guía contra dos hacia el
+cuestionario**. Quitar uno más rompería la comparación.
+
+| | Qué es | Destino |
+|---|---|---|
+| `POST-PROCESO` | Reel de taller, el de más alcance orgánico | `/guia` |
+| `POST-CASA` | Reel de un mueble en una casa real, 43 guardados | `/cuestionario` |
+| `5A` | Estático de roble centenario | `/guia` |
+| `2A` | Estático: la pieza que cierra la reforma | `/cuestionario` |
+
+Las dos rutas importan. La guía es el evento de volumen del que come el
+algoritmo: sin ninguna creatividad apuntando ahí, el conjunto se queda
+optimizando sobre los pocos cuestionarios que entren.
+
+Los nueve apagados no se han borrado. Están listos para entrar en cuanto haya
+un ganador claro al que sustituir.
+
+**Lo que no arregla reducir anuncios.** El conjunto no va a salir de la fase de
+aprendizaje: Meta pide unas 50 conversiones por semana y con este presupuesto
+van a entrar entre 7 y 17. Eso significa que **las decisiones de creatividad
+las vamos a tomar nosotros leyendo el CRM, no el algoritmo**. Es exactamente por
+eso que la tabla «por creatividad» del panel es la pieza central del montaje y
+no un adorno.
 
 **Por qué el retargeting arranca desde el día 1** pese a lo que decía el plan
 original. La nota era «no activar hasta la semana 4: antes no hay audiencia».
@@ -205,7 +226,7 @@ experimentos a la vez, y el que decide es el de creatividad.
 |---|---|---|---|
 | Captación frío | **15 €/día (79 %)** | 22 €/día (73 %) | 24 €/día (73 %) |
 | Retargeting | **4 €/día (21 %)** | 8 €/día (27 %) | 9 €/día (27 %) |
-| Creatividades activas | **8** | 10 | 10 |
+| Creatividades activas | **6** | 10 | 10 |
 | Leads guía/mes esperados | 45-70 | **70-110** | 80-120 |
 | Leads cualificados/mes | 12-20 | **20-30** | 22-34 |
 | Presupuestos enviados/mes | 3-5 | **4-8** | 5-9 |
