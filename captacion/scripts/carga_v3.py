@@ -25,7 +25,7 @@
 # reputacion de dominio, no en un lead perdido.
 # Campos de "v" que usa cada puerta:
 #   crm -> crm · base -> anios · multiservicio -> l1,l2,l3 · direccion -> cargo
-import json, sys, urllib.request, urllib.error, time
+import json, re, sys, urllib.request, urllib.error, time
 
 CAMPANA = 3940264
 CAL = "https://api.leadconnectorhq.com/widget/bookings/qualivo-20"
@@ -122,8 +122,24 @@ CASOS = {
          "formulario. Del anuncio a la matrícula: 10,2 veces.",
 }
 
+def limpia_empresa(n):
+    """Deja el nombre comercial, no el eslogan. Apollo devuelve cosas como
+    'Translinguo Global, Agencia de Traduccion y Localizacion': el email suena
+    a robot si le metes eso dentro de una frase."""
+    n = re.split(r"\s*[|·•☛►≡]\s*", n)[0]
+    n = re.sub(r"\s*\([^)]*\)\s*$", "", n)
+    if len(n) > 30:
+        for sep in (",", " - ", " – "):
+            if sep in n and len(n.split(sep)[0].strip()) >= 4:
+                n = n.split(sep)[0]
+                break
+    n = re.sub(r"[®™©]", "", n)
+    # la forma juridica solo se quita si va suelta: "URBINCASA" no es "URBINCA" + SA
+    n = re.sub(r"[\s,]+(S\.?\s?L\.?U?\.?|S\.?\s?A\.?U?\.?)\s*$", "", n, flags=re.I)
+    return re.sub(r"\s+", " ", n).strip(" .,-")
+
 def render(t, l):
-    d = {"emp": l.get("company_name") or "", "dom": l.get("dom") or "", "nom": l.get("first_name") or ""}
+    d = {"emp": limpia_empresa(l.get("company_name") or ""), "dom": l.get("dom") or "", "nom": l.get("first_name") or ""}
     d.update(l.get("v") or {})
     return t.format(**d)
 
@@ -140,7 +156,7 @@ def construir(l):
           "para contaros el nuestro.\n\n¿Esta semana o la que viene?\n\nMaikel")
     b3 = (f"{saludo}\n\nLo dejo aquí, pero te hago una última pregunta por si te sirve "
           f"a ti.\n\nSi tuvieras que apostar dónde se pierde más negocio en "
-          f"{l.get('company_name') or 'tu empresa'} hoy: ¿captación, conversión o "
+          f"{limpia_empresa(l.get('company_name') or '') or 'tu empresa'} hoy: ¿captación, conversión o "
           "seguimiento?\n\nContéstame con una palabra y te digo si "
           f"coincide con lo que veo desde fuera.\n\nY si lo prefieres en directo: {CAL}"
           "\n\nMaikel")
