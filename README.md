@@ -145,3 +145,13 @@ para que todas las plataformas sean consistentes:
 - **ROAS** = revenue (won €) / inversión total
 
 El budget mensual y la zona horaria se ajustan en `src/Config.gs`.
+
+---
+
+## Otros proyectos en este repo
+
+| Carpeta | Proyecto |
+|---|---|
+| `eac-growth/` | EAC · Motor de Crecimiento (marca, contenido, lead magnets, scoring) |
+| `nuria-pago-pfd/` | Nuria · pasarela de pago |
+| `kill-ramble/` | Don't Kill Rumble · sistema de Creator Acquisition (rol del agente, estrategia, scoring) |

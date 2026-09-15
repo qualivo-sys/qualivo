@@ -1,0 +1,8 @@
+nombre,plataforma,url,idioma,seguidores,engagement_pct,publicaciones_mes,ultimo_post_dias,genero_pct,comparables_nucleo,comparables_adyacentes,indie_pct,email,keymailer,respondio_antes,squad,pide_pago,descartar
+EjemploParty ES,youtube,https://youtube.com/@ejemploparty,es,85000,6.5,10,3,70,4,2,40,contacto@ejemploparty.com,1,0,1,0,0
+ChaosSquad EN,youtube,https://youtube.com/@chaossquad,en,420000,4.2,12,2,55,3,3,25,,0,0,1,0,0
+StreamerMX,twitch,https://twitch.tv/streamermx,es,240,,14,1,35,2,1,50,hola@streamermx.gg,0,1,0,0,0
+BigFPS,youtube,https://youtube.com/@bigfps,en,2100000,3.1,20,1,0,0,0,2,biz@bigfps.com,0,0,0,1,0
+TikTokFisicas,tiktok,https://tiktok.com/@fisicas,es,150000,9,25,2,60,1,2,15,,0,0,0,0,0
+CanalParado,youtube,https://youtube.com/@parado,en,60000,2,1,120,80,3,0,35,x@parado.com,0,0,0,0,0
+Polemico,youtube,https://youtube.com/@polemico,en,300000,5,8,3,50,3,0,30,p@polemico.com,0,0,0,0,1
