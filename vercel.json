@@ -152,6 +152,10 @@
     {
       "path": "/api/informe-paid/",
       "schedule": "0 7,18 * * *"
+    },
+    {
+      "path": "/api/rescate-leads/",
+      "schedule": "15 * * * *"
     }
   ]
 }

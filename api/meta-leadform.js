@@ -143,9 +143,21 @@ async function guardar(lead) {
 
   if (!telefono && !EMAIL_RE.test(email)) return { ok: false, motivo: 'sin_contacto' };
 
+  // Mismo corte que la landing: queda fuera quien todavia no invierte nada en
+  // captacion. Sin eso, el formulario marcaba como cualificado a cualquiera de
+  // la campana y le llamaba el agente de voz, mientras la landing al mismo
+  // perfil le decia con claridad que todavia no. Dos puertas, dos respuestas
+  // distintas al mismo lead.
+  const invierte = !!inversion && String(inversionCruda) !== 'nada' &&
+    !/^nada/i.test(String(inversion));
+
   const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
   const etiquetas = ['leadform'];
-  if (deEstaCampana) {
+  if (deEstaCampana && !invierte) {
+    // Se guarda y se le contesta con honestidad, pero no entra en la cadencia
+    // de llamadas. La secuencia «fuera» es un solo correo, no un nurture eterno.
+    etiquetas.push('diagnostico-landing', 'paid', 'act-fuera');
+  } else if (deEstaCampana) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
       'activacion', 'act-ini-' + sello);
   } else {
@@ -208,7 +220,7 @@ async function guardar(lead) {
 
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
-    email: EMAIL_RE.test(email) ? email : '',
+    email: EMAIL_RE.test(email) ? email : '', invierte: invierte,
     inversion: inversion, fuga: fuga, campos: campos, activar: deEstaCampana
   };
 }
@@ -273,7 +285,7 @@ module.exports = async function handler(req, res) {
         continue;
       }
 
-      if (r.contactId && r.telefono) {
+      if (r.contactId && r.telefono && r.activar && r.invierte) {
         try {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');
@@ -315,3 +327,9 @@ module.exports = async function handler(req, res) {
   parte.recibidos = avisos.length;
   return res.status(200).json({ ok: true, parte: parte });
 };
+
+// Expuesto para el cron de rescate: si el webhook falla una vez, el aviso de
+// Meta no vuelve y el lead se pierde para siempre. El rescate repesca los que
+// faltan usando exactamente esta misma logica, para que un lead recuperado
+// quede igual que uno que entro bien.
+module.exports.guardar = guardar;
