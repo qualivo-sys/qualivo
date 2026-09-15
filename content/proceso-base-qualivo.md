@@ -1,82 +1,85 @@
 # La explicación base de Qualivo
 
-> Fijado por Maikel el 15-sep-2026. Esto no es un guion de una pieza: es **el
-> marco que toda pieza tiene que poder recorrer**, entera o por partes.
+> Fijado por Maikel el 15-sep-2026, en dos pasadas. La segunda corrige la
+> primera: el CRM es el escenario, no la propuesta de valor.
 
-## El problema del creativo, y por qué hacía falta esto
+## La frase nuclear
 
-Una creatividad que solo dice **«tienes fugas»** genera interés y no explica qué
-hacemos. Una que solo dice **«conectamos IA a tu CRM»** explica la tecnología y
-no genera ninguna necesidad. Las dos fallan, y fallan por lo mismo: se quedan en
-un extremo.
+Sale del correo en frío que ya consigue respuestas, no de una teoría creativa:
 
-El punto bueno está en medio, y es un recorrido:
+> **Detectamos dónde se pierden clientes en captación y ventas, y lo
+> arreglamos metiendo IA en el sistema que ya tenéis.**
 
-> Tienes oportunidades que se están quedando paradas → analizamos tu CRM →
-> encontramos dónde y por qué → identificamos qué recuperar → actuamos sobre ello.
+Tiene tres cosas buenas y hay que conservarlas las tres:
 
-## Las tres preguntas
+1. **Captación y ventas** → habla del problema de negocio, no de una función.
+2. **Dónde se pierden clientes** → introduce el diagnóstico.
+3. **IA en el sistema que ya tenéis** → explica el mecanismo y quita el miedo a
+   cambiarlo todo.
 
-Toda creatividad de Qualivo debe responder, **cuando corresponda y sin meterlas
-literalmente**, a estas tres:
+El correo lleva un cuarto elemento —«lo probamos un mes, si no se mueve no
+pagáis el piloto»— que es potentísimo **y no va en un anuncio de awareness**.
+Su sitio es la reunión (`content/propuesta-de-valor-v1.md`, línea 169).
 
-1. **¿Qué problema ve el cliente?**
-2. **¿Qué hacemos exactamente?**
-3. **¿Cómo lo solucionamos?**
+## Lo que NO es Qualivo
 
-Una pieza puede responder solo a la primera si su trabajo es abrir. Pero la
-campaña completa tiene que responder a las tres, y ninguna pieza puede
-contradecirlas.
+**No es «una empresa que analiza CRMs».** Si alguien ve un anuncio y piensa
+eso, el anuncio ha fallado. El CRM es donde encontramos parte del problema;
+hace tangible cómo trabajamos. No es el titular conceptual.
 
-## La situación de entrada
+Lo que tiene que pensar quien lo ve:
 
-**«Tienes un CRM lleno de oportunidades. ¿Qué estás haciendo realmente con
-ellas?»**
+> «Estos detectan dónde estoy perdiendo clientes entre captación y ventas, y
+> lo arreglan dentro de lo que ya tengo.»
 
-Se abre siempre por algo que el dueño reconoce, nunca por una tesis nuestra.
-Tenerlas dentro no significa estar aprovechándolas: unas llevan días sin
-seguimiento, otras tienen un presupuesto enviado y nadie ha vuelto a contactar,
-y en otras alguien pidió información y la conversación se quedó ahí.
+## La propuesta de valor, limpia
 
-## Los cinco pasos
+> Tienes captación. Tienes ventas. Pero estás perdiendo clientes entre ambas.
+> Qualivo detecta dónde ocurre y pone IA a trabajar en ese punto, dentro del
+> sistema que ya tienes.
 
-**01 · Conectamos.**
-Entramos en el CRM que ya utilizas. No hay que cambiar de herramienta ni empezar
-de cero.
+## El recorrido que todo anuncio puede seguir
 
-**02 · Analizamos.**
-Miramos las oportunidades que tienes dentro y todo lo que ha pasado con cada
-una: cuándo entró, qué interacciones ha habido, dónde se ha detenido.
+1. **Captación.** Generas leads. Anuncios, web, formularios.
+2. **Ventas.** Los leads pasan a ventas. Oportunidades, llamadas, reuniones,
+   presupuestos.
+3. **Fuga.** Pero algunos desaparecen entre medias. Lead sin contactar,
+   respuesta tarde, presupuesto sin seguimiento, reunión sin siguiente paso.
+4. **Diagnóstico.** Encontramos exactamente dónde.
+5. **IA.** Ponemos IA a trabajar en ese punto. No como magia: dentro del
+   proceso.
+6. **Sistema existente.** En tu CRM y tus herramientas actuales. Sin cambiar
+   de CRM, sin añadir otra herramienta.
+7. **Resultado.** Más oportunidades que llegan hasta cliente.
 
-**03 · Detectamos.**
-Encontramos los patrones de fuga. Oportunidades sin seguimiento, presupuestos
-parados, respuestas que llegaron tarde, conversaciones sin siguiente paso.
+Una pieza corta toma un tramo. Un explicativo los recorre todos. El orden no
+se altera.
 
-**04 · Priorizamos.**
-Distinguimos cuáles merece la pena recuperar. **No se trata de contactar a todo
-el mundo indiscriminadamente**, se trata de encontrar dónde hay oportunidad real.
-Este es el paso que nos separa de una herramienta de envíos.
+## Las seis comprobaciones del agente revisor
 
-**05 · Actuamos.**
-Activamos el siguiente paso, para que no dependa de que alguien se acuerde de
-hacerlo. Aquí es donde entra la IA, dentro del sistema comercial que ya existe.
+Cuando se revise un creativo de Qualivo, se comprueba en este orden:
 
-## La conclusión
+| # | Pregunta | Si falla |
+|---|---|---|
+| 1 | ¿Habla de **captación y ventas**? | Alerta. |
+| 2 | ¿Habla de **clientes que se pierden**? | Comprobar si hay una buena razón para no hacerlo. |
+| 3 | ¿Explica que **detectamos dónde** ocurre? | Es lo diferencial. Sin esto, es una agencia más. |
+| 4 | ¿Explica que **lo arreglamos**? | No quedarse en el diagnóstico. |
+| 5 | ¿La IA aparece como **mecanismo**, no como protagonista? | Si la IA es el gancho, está mal. |
+| 6 | ¿Queda claro que trabajamos **sobre el sistema que ya tienen**? | Muy importante: mata la objeción de migrar. |
 
-> **No necesitas empezar con más leads. Primero necesitas saber qué estás
-> dejando escapar de los que ya tienes.**
+Una pieza puede responder solo a las dos primeras si su trabajo es abrir. La
+campaña completa responde a las seis. Ninguna pieza las contradice.
 
-## Cómo se usa
+## El tono
 
-- **Una pieza corta** toma la situación de entrada y uno de los cinco pasos.
-- **Un explicativo** los recorre los cinco.
-- **Una página de la web** los recorre los cinco con más detalle en cada uno.
-- **Una reunión** los recorre delante del CRM del cliente.
-
-El orden no se altera y ningún paso se salta. El 04 es el que más tienta saltar
-y el que más hay que defender: sin él, esto parece una máquina de mandar correos.
+Se escribe como habla un dueño, no como escribe una herramienta. Frases
+cortas. «Metes dinero en anuncios» y no «inviertes en captación». «Se te van
+clientes» y no «se produce una fuga de oportunidades». «Tu gente» y no «tu
+equipo comercial». Si una frase la podría decir un asistente de IA, se
+reescribe.
 
 ## Lo que este marco no dice
 
-Ni precio, ni piloto de riesgo compartido, ni catálogo de agentes. Eso vive en la
-reunión, no en abierto (`content/propuesta-de-valor-v1.md`).
+Ni precio, ni piloto de riesgo compartido, ni catálogo de agentes, ni la
+palabra «agentizar» con quien todavía no sabe que tiene un problema.
