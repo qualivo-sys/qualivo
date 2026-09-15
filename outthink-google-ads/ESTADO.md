@@ -658,3 +658,15 @@ Propone excluir móvil y descartar PMax. Contrapropuesta aceptada por ella:
   de "Ponencias, talleres y networking…" (imprecisa: el programa son keynotes y paneles) por
   "Germán Zarama, Manager del Centro de Conducta Empresarial Responsable de la OCDE."
 Pendiente: revisar el informe de ubicaciones cada 2 días y el móvil el 18-09.
+
+## Día 16 (15-09, cierre) — mejor día de la campaña: 4 registros
+Search: 56 clics, 95,75 €, **4 registros**, CPC 1,71 €. Acumulado **1.269 € (63 %), 26
+registros, CPL 48,8 €** (era 60 € el día 14). Restante 731 € / 9 días.
+El ajuste de móvil funciona como se esperaba: desde el −70 %, escritorio 49 clics / 4 registros
+(**CVR 8,2 %**) y móvil solo 7 clics, 0 registros. El presupuesto se ha desplazado a escritorio
+sin perder volumen total.
+Corona de 1 h: 1 clic en Toledo, 0 en el resto. Volumen casi nulo, como se preveía; no resta
+nada porque comparte presupuesto. Se mantiene y se revisa el 17-09.
+Imágenes de Zarama: la horizontal ya ELIGIBLE, la cuadrada PENDING. Los 4 anuncios APPROVED.
+Aplicado: 10 negativas (data science, ntt data, rankia, google madrid, ferias, madrid tech,
+congresos en madrid, business experience, tech events) y presupuesto a 81,22 €/día.
