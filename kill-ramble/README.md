@@ -21,6 +21,7 @@ kill-ramble/
     06-kpis-experimentos.md   KPIs que importan, objetivos a 90 días y experimentos
     07-riesgos-prioridades.md Riesgos, prioridades y siguiente paso recomendado
     08-open-playtest-sep-oct.md Plan de choque para el Open Playtest (14 sep - 5 oct 2026)
+    09-objeciones-y-oferta.md Objeciones del estudio (15 sep), decisiones (solo US, cero producción) y mensaje reescrito
   tools/
     score.mjs                 Scoring de creadores: CSV de entrada → CSV con puntuación, tier y motivo
     yt_aggregate.mjs          Vídeos de Apify (streamers/youtube-scraper) → canales (CSV de entrada del scoring)
