@@ -19,6 +19,8 @@ html,body{background:#000}
 #cap2{font-size:42px;font-weight:600;line-height:1.3;margin-top:26px;color:#0A0A0B;opacity:0}
 #wipe{position:absolute;inset:0;z-index:40;transform:translateX(-100%)}
 #wipeTxt{position:absolute;left:64px;top:780px;width:960px;font-family:Anton;font-size:150px;line-height:.9;text-transform:uppercase;z-index:41;opacity:0}
+#wipeTxt.marca{font-family:SG;font-weight:700;font-size:190px;letter-spacing:-.03em;text-transform:none;line-height:1}
+#wipeSub{position:absolute;left:64px;top:1010px;width:950px;font-size:50px;font-weight:600;line-height:1.3;color:#F4F1EB;z-index:41;opacity:0}
 #tex{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:60}
 .pie{position:absolute;bottom:170px;font-size:22px;z-index:30;color:rgba(10,10,11,.5)}
 .pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px}
@@ -48,14 +50,14 @@ html,body{background:#000}
     <div class="circ" id="h4" style="left:1658px;top:930px">…</div>
   </div>
   <div id="hud"><div id="cap"></div><div id="cap2"></div></div>
-  <div id="wipe"></div><div id="wipeTxt"></div>
+  <div id="wipe"></div><div id="wipeTxt"></div><div id="wipeSub"></div>
   <svg id="tex" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
     <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter>
     <rect width="1080" height="1920" filter="url(#n)" opacity="0.30"/></svg>
   <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
 </div>
 <script>
-const DUR=44.2;
+const DUR=37.5;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
 const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, inq=x=>x*x*x;
 const back=x=>{const c=1.7,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
@@ -65,19 +67,20 @@ const $=id=>document.getElementById(id);
 const P=[
  {w:7,   cap:'Metes dinero en anuncios.', sub:'',                                   cam:[300,1.0, 900,1.0]},
  {w:13,  cap:'Y tu gente se pone con ellos.', sub:'Llamadas, reuniones, presupuestos.', cam:[900,1.0, 2200,.9]},
- {w:6,   cap:'Pero no todos acaban siendo clientes.', sub:'',                       cam:[2200,.9, 1750,.62], wipe:1},
+ {w:6,   cap:'Pero no todos acaban siendo clientes.', sub:'',                       cam:[2200,.9, 1750,.62]},
  {w:19,  cap:'Algunos se quedan por el camino.', sub:'',                            cam:[1750,.62, 2150,.95]},
  {w:11,  cap:'Y ahí se te van clientes.', sub:'Sin que nadie se dé cuenta.',        cam:[2150,.95, 2200,1.0]},
- {w:4,   cap:'Nosotros buscamos exactamente dónde.', sub:'',                        cam:[2200,1.0, 2060,1.15], wipe:1},
- {w:12,  cap:'Miramos todo el recorrido.', sub:'De la captación a la venta.',       cam:[2060,1.15, 1520,.31], wipe:1},
- {w:9,   cap:'Y metemos IA justo en ese punto.', sub:'',                            cam:[1520,.31, 2060,1.0], wipe:1},
+ {w:6,   cap:'Nosotros buscamos exactamente dónde.', sub:'',                        cam:[2200,1.0, 2060,1.15], wipe:1},
+ {w:12,  cap:'Miramos todo el recorrido.', sub:'De la captación a la venta.',       cam:[2060,1.15, 1520,.31]},
+ {w:9,   cap:'Y metemos IA justo en ese punto.', sub:'',                            cam:[1520,.31, 2060,1.0]},
  {w:11,  cap:'En lo que ya usas.', sub:'Sin cambiar de CRM ni añadir otra herramienta.', cam:[2060,1.0, 1340,.88]},
  {w:10,  cap:'Para que más lleguen a cliente.', sub:'',                             cam:[1340,.88, 2780,.85]},
- {w:2,   cap:'Qualivo', sub:'',                                                     cam:[2780,.85, 1520,.31], wipe:1},
- {w:14,  cap:'Qualivo', sub:'Detectamos dónde se te pierden clientes en captación y ventas.<br>Y lo arreglamos con IA, en el sistema que ya tienes.', cam:[1520,.31, 1520,.31]}
+ {w:2,   cap:'Qualivo', sub:'',                                                     cam:[2780,.85, 1520,.31], wipe:2},
+ {w:14,  cap:'Qualivo', sub:'Detectamos dónde se te pierden clientes en captación y ventas.<br>Y lo arreglamos con IA, en el sistema que ya tienes.', cam:[1520,.31, 1520,.31], wipe:2}
 ];
-const LEAD=0.3, tot=P.reduce((a,p)=>a+p.w,0); let acc=LEAD;
-P.forEach(p=>{p.t0=acc; p.d=(DUR-LEAD-0.3)*p.w/tot; acc+=p.d; p.t1=acc;});
+// tiempos reales de la locucion (marcas de ElevenLabs tras recortar pausas); el cierre arranca antes de que se diga "Qualivo"
+const T0=[0.3, 3.59, 7.22, 9.03, 15.64, 18.27, 20.25, 22.76, 25.63, 29.29, 30.4, 31.87];
+P.forEach((p,i)=>{p.t0=T0[i]; p.t1=i<P.length-1?T0[i+1]:DUR; p.d=p.t1-p.t0;});
 const N=[['Anuncios',260],['Web',620],['Lead',980],['CRM',1340],['Contacto',1700],['Reunión',2060],['Presup.',2420],['Cliente',2780]];
 const Y=1180;
 let CX=540, S=1;
@@ -89,7 +92,7 @@ function pon(id,p,x,y,w,rot){const n=$(id); if(p<=0){n.style.opacity=0;return;}
 window.setT=function(t){
   let k=0; for(let i=0;i<P.length;i++) if(t>=P[i].t0) k=i;
   const p=P[k], lt=t-p.t0;
-  const cr=nm(t,P[5].t0,P[5].t0+.3); $('fondo2').style.opacity=cr;
+  const L5=Math.min(1.6,P[5].d*.9), cr=nm(t,P[5].t0+L5*.42,P[5].t0+L5*.5); $('fondo2').style.opacity=cr;
   const TIN='#0A0A0B', NAR='#E8590C'; $('pr').style.color = cr>.5?NAR:TIN;
 
   // camara continua: siempre en movimiento, de donde acabo a donde va
@@ -99,15 +102,27 @@ window.setT=function(t){
 
   // barrido de color con el titulo encima, en los saltos grandes
   const W=$('wipe'), WT=$('wipeTxt');
-  if(p.wipe){ const enter=nm(lt,0,.22), exit=nm(lt,.42,.68);
-    W.style.background = cr>.5 ? NAR : TIN;
-    W.style.transform = exit>0 ? `translateX(${out(exit)*100}%)` : `translateX(${(out(enter)-1)*100}%)`;
-    WT.textContent=p.cap.replace(/<br>/g,' '); WT.style.color = cr>.5 ? '#F4F1EB' : '#FF7A33';
-    const ta=nm(lt,.14,.3), tb=nm(lt,.46,.62); WT.style.opacity=ta*(1-tb); WT.style.transform=`translateX(${(1-back(ta))*-80 + out(tb)*180}px) scale(${.9+.1*back(ta)})`;
-  } else { W.style.transform='translateX(-100%)'; WT.style.opacity=0; }
+  let L=0; const WS=$('wipeSub');
+  if(p.wipe===1){ L=Math.min(1.6, p.d*.9);
+    // cambio de acto: telon de tinta que entra sobre el mundo naranja y, al irse, deja el mundo crema
+    const ein=io(nm(lt,0,L*.4)), eout=io(nm(lt,L*.6,L));
+    const px = eout>0 ? eout*100 : (ein-1)*100;
+    W.style.background = TIN; W.style.transform = `translateX(${px}%)`;
+    WT.className=''; WT.textContent=p.cap.replace(/<br>/g,' '); WT.style.color='#FF7A33';
+    const vis=nm(lt,L*.14,L*.42)*(1-nm(lt,L*.68,L*.92));
+    WT.style.opacity=vis; WT.style.transform=`translateX(${px*10.8*.35}px)`;   // viaja con el panel, mas lento que su borde
+    WS.style.opacity=0;
+  } else if(p.wipe===2){ const t10=P[10].t0, l10=t-t10; L=1.2;
+    // cierre: el naranja de marca entra y se queda como tarjeta final; el logo llega con el y el claim debajo
+    const ein=io(nm(l10,0,.6)), px=(ein-1)*100;
+    W.style.background = NAR; W.style.transform = `translateX(${px}%)`;
+    WT.className='marca'; WT.textContent='Qualivo'; WT.style.color='#F4F1EB';
+    const a=nm(l10,.25,.8); WT.style.opacity=a; WT.style.transform=`translateX(${px*10.8*.35 + (1-out(a))*-40}px)`;
+    const b=nm(t,P[11].t0+.1,P[11].t0+.7); WS.innerHTML=P[11].sub+'<div style="margin-top:70px;font-family:Anton;font-size:46px;letter-spacing:.05em">QUALIVO.IO</div>'; WS.style.opacity=b; WS.style.transform=`translateY(${(1-out(b))*24}px)`;
+  } else { W.style.transform='translateX(-100%)'; WT.style.opacity=0; WS.style.opacity=0; }
 
   // HUD: el titulo entra palabra a palabra
-  const cap=$('cap'); const d0=p.wipe?.5:.05;
+  const cap=$('cap'); const d0=p.wipe===2?1e9:(p.wipe?L*.8:.05);
   if(cap.dataset.k!==String(k)){cap.dataset.k=k; cap.innerHTML=p.cap.split(' ').map(w=>`<span>${w}</span>`).join(' ');}
   cap.style.fontSize = k>=10?'170px':'104px'; cap.style.textTransform = k>=10?'none':'uppercase';
   [...cap.children].forEach((s,j)=>{const a=nm(lt,d0+j*.07,d0+j*.07+.28); s.style.opacity=a; s.style.transform=`translateY(${(1-back(a))*40}px) rotate(${(1-out(a))*-3}deg)`;});
