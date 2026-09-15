@@ -20,6 +20,7 @@ kill-ramble/
     05-herramientas.md        Evaluación de las herramientas propuestas y las que faltan
     06-kpis-experimentos.md   KPIs que importan, objetivos a 90 días y experimentos
     07-riesgos-prioridades.md Riesgos, prioridades y siguiente paso recomendado
+    08-open-playtest-sep-oct.md Plan de choque para el Open Playtest (14 sep - 5 oct 2026)
   tools/
     score.mjs                 Scoring de creadores: CSV de entrada → CSV con puntuación, tier y motivo
   data/
