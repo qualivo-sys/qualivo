@@ -58,7 +58,7 @@ html,body{background:#000}
   <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
 </div>
 <script>
-const DUR=47.5;
+const DUR=48.3;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
 const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, inq=x=>x*x*x;
 const back=x=>{const c=1.7,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
@@ -80,7 +80,7 @@ const P=[
  {w:14,  cap:'Qualivo', sub:'Detectamos dónde se te pierden clientes en captación y ventas.<br>Y lo arreglamos con IA, en el sistema que ya tienes.', cam:[1520,.31, 1520,.31], wipe:2}
 ];
 // tiempos reales de la locucion (marcas de ElevenLabs tras recortar pausas); el cierre arranca antes de que se diga "Qualivo"
-const T0=[0.3, 4.14, 8.33, 10.67, 19.26, 22.75, 25.36, 28.65, 32.61, 37.32, 39.97, 40.81];
+const T0=[0.3, 4.91, 9.1, 11.44, 20.04, 23.53, 26.14, 29.43, 33.38, 38.09, 40.74, 41.58];
 P.forEach((p,i)=>{p.t0=T0[i]; p.t1=i<P.length-1?T0[i+1]:DUR; p.d=p.t1-p.t0;});
 const N=[['Anuncios',260],['Web',620],['Lead',980],['CRM',1340],['Contacto',1700],['Reunión',2060],['Presup.',2420],['Cliente',2780]];
 const Y=1180;
