@@ -1,0 +1,109 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#F2EEE6;color:#0A0A0B;font-family:SG}
+#paso{position:absolute;left:72px;top:250px;font-family:Anton;font-size:150px;line-height:.85;color:#E8590C;opacity:0}
+#tit{position:absolute;left:72px;top:410px;width:940px;font-family:Anton;font-size:82px;line-height:1.02;text-transform:uppercase;opacity:0}
+#sub{position:absolute;left:72px;top:570px;width:880px;font-size:34px;line-height:1.42;color:rgba(10,10,11,.62);opacity:0}
+svg#dib{position:absolute;left:0;top:700px;width:1080px;height:980px}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply}
+.pie{position:absolute;bottom:250px;font-size:22px;color:rgba(10,10,11,.42)}
+.pieL{left:72px}.pieR{right:72px;font-family:Anton;font-size:24px;color:#E8590C}
+</style>
+<div id="e">
+  <div id="paso">02</div>
+  <div id="tit">Analizamos</div>
+  <div id="sub">Miramos todo lo que ha pasado con cada oportunidad. Cuándo entró, qué se habló, dónde se detuvo.</div>
+
+  <svg id="dib" viewBox="0 0 1080 980">
+    <g id="pantalla" opacity="0">
+      <rect x="330" y="60" width="420" height="290" rx="18" fill="none" stroke="#0A0A0B" stroke-width="9"/>
+      <rect x="360" y="95" width="240" height="16" rx="8" fill="#0A0A0B" opacity=".25"/>
+      <rect x="360" y="135" width="360" height="12" rx="6" fill="#0A0A0B" opacity=".14"/>
+      <rect x="360" y="167" width="360" height="12" rx="6" fill="#0A0A0B" opacity=".14"/>
+      <rect x="360" y="199" width="290" height="12" rx="6" fill="#0A0A0B" opacity=".14"/>
+      <rect x="360" y="231" width="330" height="12" rx="6" fill="#0A0A0B" opacity=".14"/>
+      <rect x="360" y="263" width="250" height="12" rx="6" fill="#0A0A0B" opacity=".14"/>
+      <path d="M470 350 l0 46 M420 400 l240 0" stroke="#0A0A0B" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <rect x="470" y="350" width="140" height="46" fill="none"/>
+    </g>
+    <g id="fichas"></g>
+    <g id="lupa" opacity="0">
+      <circle cx="0" cy="0" r="62" fill="none" stroke="#E8590C" stroke-width="11"/>
+      <path d="M44 44 L92 92" stroke="#E8590C" stroke-width="13" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+  <svg id="grain" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+    <rect x="0" y="0" width="1080" height="1920" filter="url(#n)" opacity="0.36"/></svg>
+  <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
+</div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+// seis fichas de oportunidad, cada una con su historia dentro
+const F=[
+ {x:90, y:520, est:'ok'},  {x:330, y:560, est:'mal'}, {x:570, y:520, est:'ok'},
+ {x:810, y:560, est:'mal'},{x:210, y:760, est:'mal'}, {x:690, y:760, est:'ok'}
+];
+const g=document.getElementById('fichas');
+F.forEach((f,i)=>{
+  const el=document.createElementNS(NS,'g'); el.setAttribute('id','f'+i); el.setAttribute('opacity','0');
+  el.innerHTML=`
+    <rect x="-84" y="-58" width="168" height="116" rx="14" fill="#F2EEE6" stroke="#0A0A0B" stroke-width="7"/>
+    <rect x="-60" y="-34" width="80" height="11" rx="5.5" fill="#0A0A0B" opacity=".55"/>
+    <rect x="-60" y="-12" width="112" height="9" rx="4.5" fill="#0A0A0B" opacity=".2"/>
+    <rect x="-60" y="8" width="88" height="9" rx="4.5" fill="#0A0A0B" opacity=".2"/>
+    <g class="marca" opacity="0">
+      <circle cx="48" cy="30" r="19" fill="${f.est==='ok'?'#0A0A0B':'#E8590C'}"/>
+      ${f.est==='ok'
+        ? '<path d="M40 30 l6 7 l12 -14" stroke="#F2EEE6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'
+        : '<path d="M48 21 l0 10 l7 5" stroke="#F2EEE6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}
+    </g>`;
+  g.appendChild(el);
+});
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const S=(id,o,tr)=>{const n=document.getElementById(id);n.setAttribute('opacity',o);if(tr)n.setAttribute('transform',tr);};
+
+window.setT=function(t){
+  document.getElementById('paso').style.opacity=nm(t,.15,.6);
+  const a1=nm(t,.4,.95);
+  const tt=document.getElementById('tit'); tt.style.opacity=a1; tt.style.transform=`translateY(${(1-out(a1))*26}px)`;
+  const a2=nm(t,.75,1.3);
+  const ss=document.getElementById('sub'); ss.style.opacity=a2; ss.style.transform=`translateY(${(1-out(a2))*22}px)`;
+
+  // la pantalla aparece y de ella salen las fichas
+  S('pantalla', nm(t,1.1,1.7));
+  F.forEach((f,i)=>{
+    const p=nm(t, 2.0+i*0.19, 2.0+i*0.19+0.62);
+    const ox=540, oy=300;
+    const x=ox+(f.x-ox)*io(p), y=oy+(f.y-oy)*io(p);
+    const sc=0.35+0.65*io(p), rot=(1-io(p))*(i%2?26:-26);
+    S('f'+i, p, `translate(${x},${y}) rotate(${rot}) scale(${sc})`);
+  });
+
+  // la lupa recorre las fichas una a una y las marca
+  const orden=[0,1,2,3,4,5];
+  let lx=0, ly=0, vis=0;
+  const T0=3.9, DUR=0.78;
+  for(let k=0;k<orden.length;k++){
+    const p=nm(t, T0+k*DUR, T0+k*DUR+DUR);
+    if(p>0){ const i=orden[k]; const j=orden[Math.max(0,k-1)];
+      lx=F[j].x+(F[i].x-F[j].x)*io(p); ly=F[j].y+(F[i].y-F[j].y)*io(p); vis=1; }
+    if(t > T0+k*DUR+DUR*0.75){
+      const m=document.querySelector('#f'+orden[k]+' .marca');
+      const q=nm(t, T0+k*DUR+DUR*0.75, T0+k*DUR+DUR*0.75+0.28);
+      m.setAttribute('opacity', q); m.setAttribute('transform',`scale(${.5+.5*out(q)})`);
+      m.style.transformOrigin='48px 30px';
+    }
+  }
+  const sale=nm(t,9.8,10.4);
+  S('lupa', vis*(1-sale), `translate(${lx},${ly}) scale(${1+ .12*Math.sin(t*7)})`);
+};
+window.setT(0);
+</script>
