@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#0A0A0B;color:#F2EEE6;font-family:SG}
+
+#app{position:absolute;left:48px;top:250px;width:984px;height:1080px;background:#14161B;
+     border-radius:26px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+#app:after{content:'';position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;
+          background:linear-gradient(to bottom,rgba(20,22,27,0),#14161B)}
+#bar{height:104px;background:#191C22;border-bottom:1px solid #23262E;display:flex;align-items:center;padding:0 34px;gap:16px}
+.dot{width:13px;height:13px;border-radius:50%;background:#3A3E48}
+#bar .tt{font-size:27px;font-weight:600;color:#C9CEDA;margin-left:14px}
+#tot{margin-left:auto;text-align:right}
+#tot .n{font-family:Anton;font-size:46px;color:#F2EEE6;line-height:1}
+#tot .l{font-size:18px;color:#6E737F;letter-spacing:.09em;text-transform:uppercase;margin-top:3px}
+.fila{display:flex;align-items:center;padding:23px 34px;border-bottom:1px solid #1E212A;gap:20px;opacity:0}
+.ini{width:52px;height:52px;border-radius:13px;background:#222733;color:#8A90A0;font-weight:700;
+     display:flex;align-items:center;justify-content:center;font-size:21px;flex:none}
+.nm{flex:1;min-width:0}
+.nm .a{font-size:27px;font-weight:600;color:#E6E9F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nm .b{font-size:20px;color:#6E737F;margin-top:5px}
+.imp{font-size:25px;font-weight:700;color:#C9CEDA;white-space:nowrap}
+.est{font-size:18px;font-weight:700;padding:8px 15px;border-radius:999px;white-space:nowrap;
+     background:rgba(45,190,120,.14);color:#35C77F}
+.pill{position:absolute;right:40px;font-family:Anton;font-size:40px;color:#35C77F;opacity:0;
+       text-shadow:0 0 22px rgba(53,199,127,.55)}
+
+#txt{position:absolute;left:60px;top:1400px;width:960px;font-family:Anton;font-size:86px;
+     line-height:1.03;text-transform:uppercase;opacity:0}
+#txt em{font-style:normal;color:#FF7A33}
+.pie{position:absolute;bottom:222px;font-size:22px;color:rgba(242,238,230,.3);opacity:0}
+.pieL{left:60px}.pieR{right:60px;font-family:Anton;font-size:24px;color:rgba(255,122,51,.7)}
+</style>
+
+<div id="e">
+  <div id="app">
+    <div id="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="tt">Oportunidades abiertas</span>
+      <div id="tot"><div class="n" id="totn">0</div><div class="l">en tu CRM</div></div>
+    </div>
+    <div id="lista"></div>
+  </div>
+  <div id="txt">Tienes un CRM<br><em>lleno de oportunidades.</em></div>
+  <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
+</div>
+
+<script>
+const OP=[
+ ['RM','Reforma integral oficinas','Entró hoy','18.400 €'],
+ ['JC','Mantenimiento anual','Entró hoy','7.200 €'],
+ ['AP','Suministro y montaje','Ayer','24.900 €'],
+ ['LG','Proyecto llave en mano','Ayer','41.000 €'],
+ ['MV','Auditoría de instalaciones','Hace 2 días','5.600 €'],
+ ['TS','Ampliación de nave','Hace 2 días','62.300 €'],
+ ['BC','Contrato de soporte','Hace 3 días','9.800 €'],
+ ['NR','Renovación de equipos','Hace 3 días','15.100 €'],
+ ['FD','Obra menor','Hace 4 días','3.400 €'],
+];
+const lista=document.getElementById('lista');
+lista.innerHTML=OP.map((o,i)=>`<div class="fila" id="fl${i}">
+  <div class="ini">${o[0]}</div>
+  <div class="nm"><div class="a">${o[1]}</div><div class="b">${o[2]}</div></div>
+  <div class="imp">${o[3]}</div><div class="est">Abierta</div></div>`).join('');
+const PILLS=[[0.45,'+12',92],[1.05,'+8',92],[1.7,'+17',92],[2.35,'+6',92]];
+const app=document.getElementById('app');
+PILLS.forEach((p,i)=>{const d=document.createElement('div');d.className='pill';d.id='pi'+i;d.textContent=p[1];app.appendChild(d);});
+
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3);
+
+window.setT=function(t){
+  // las oportunidades caen una tras otra, deprisa
+  const T0=0.15, PASO=0.28;
+  let n=0;
+  for(let i=0;i<OP.length;i++){
+    const p=nm(t,T0+i*PASO,T0+i*PASO+0.34);
+    const el=document.getElementById('fl'+i);
+    el.style.opacity=p;
+    el.style.transform=`translateY(${(1-out(p))*-26}px)`;
+    if(p>0.5) n++;
+  }
+  // el contador sube con ellas
+  const base=Math.round(out(nm(t,0.15,3.4))*127);
+  document.getElementById('totn').textContent=base;
+  PILLS.forEach((p,i)=>{
+    const q=nm(t,p[0],p[0]+0.75), el=document.getElementById('pi'+i);
+    el.style.opacity = q>0&&q<1 ? Math.sin(q*Math.PI) : 0;
+    el.style.top = (p[2]-q*58)+'px';
+  });
+  const a=nm(t,0.75,1.25);
+  const txt=document.getElementById('txt');
+  txt.style.opacity=a; txt.style.transform=`translateY(${(1-out(a))*28}px)`;
+  const f=nm(t,0.9,1.5);
+  document.getElementById('pl').style.opacity=f; document.getElementById('pr').style.opacity=f;
+};
+window.setT(0);
+</script>
