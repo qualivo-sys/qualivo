@@ -85,3 +85,33 @@ curl -X POST -H "X-N8N-API-KEY: $K" -H 'Content-Type: application/json' \
 ```
 
 Después, activarlo con `POST /api/v1/workflows/<id>/activate`.
+
+---
+
+# Vigilar la web — n8n
+
+**Flujo:** `Antic Barcelona 113 · Vigilar la web` · `Bkar0vJ79IEHb8dY` · cada 10 min
+
+Comprueba `/cuestionario` y `/guia`, que son las dos páginas a las que llevan
+los anuncios: son las que cuestan dinero si fallan. Si alguna no responde bien,
+manda un correo.
+
+**No basta con mirar el código 200.** El fallo que motivó esto fue un
+despliegue de otro proyecto encima del nuestro: habría devuelto 200 con una web
+ajena y el vigilante habría dicho que todo iba bien. Así que se comprueba
+también que el HTML contenga «Antic Barcelona 113».
+
+## Qué pasó
+
+El proyecto de Vercel estaba conectado a `qualivo-sys/qualivo` con la rama de
+producción puesta en `claude/eac-metrics-dashboard-qx7fkh`, de otro cliente.
+Al empujar a esa rama, Vercel construyó desde la raíz del monorepo —donde no
+está la landing— y sobrescribió el alias de producción. Todas las URLs pasaron
+a 404, incluida la portada, con las campañas gastando.
+
+**Arreglo:** se desconectó el proyecto de git. Ahora solo se despliega desde la
+CLI, con `vercel deploy --prod` desde `landing/`. Si algún día se quiere
+recuperar el despliegue automático, hay que poner el `rootDirectory` del
+proyecto en `antic-barcelona-113/landing` **y** la rama de producción en una
+rama de este proyecto. Con un monorepo compartido entre clientes, cualquiera de
+las dos cosas mal vuelve a tirar la web.
