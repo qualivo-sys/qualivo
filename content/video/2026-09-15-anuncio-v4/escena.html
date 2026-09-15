@@ -1,0 +1,154 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG}
+#fondo{position:absolute;inset:0;background:#E8590C}
+#fondo2{position:absolute;inset:0;background:#F4F1EB;opacity:0}
+#mundo{position:absolute;left:0;top:0;width:3600px;height:1920px;transform-origin:0 0}
+#linea{position:absolute;left:0;top:0;width:3600px;height:1920px;overflow:visible}
+.rec{position:absolute;opacity:0}
+.tarj{position:absolute;background:#0A0A0B;color:#F2EEE6;border-radius:16px;padding:18px 26px;font-size:30px;font-weight:600;white-space:nowrap;opacity:0}
+.tarj b{color:#FF7A33;font-family:Anton;font-weight:400;font-size:34px;margin-left:16px}
+.circ{position:absolute;width:196px;height:196px;border-radius:50%;border:8px solid #0A0A0B;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:32px;color:#0A0A0B;opacity:0}
+#hud{position:absolute;left:64px;top:250px;width:960px;z-index:20}
+#cap{font-family:Anton;font-size:104px;line-height:.92;text-transform:uppercase;color:#0A0A0B}
+#cap span{display:inline-block;opacity:0}
+#cap2{font-size:42px;font-weight:600;line-height:1.3;margin-top:26px;color:#0A0A0B;opacity:0}
+#wipe{position:absolute;inset:0;z-index:40;transform:translateX(-100%)}
+#wipeTxt{position:absolute;left:64px;top:780px;width:960px;font-family:Anton;font-size:150px;line-height:.9;text-transform:uppercase;z-index:41;opacity:0}
+#tex{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:60}
+.pie{position:absolute;bottom:170px;font-size:22px;z-index:30;color:rgba(10,10,11,.5)}
+.pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px}
+</style>
+<div id="e">
+  <div id="fondo"></div><div id="fondo2"></div>
+  <div id="mundo">
+    <svg id="linea" viewBox="0 0 3600 1920"></svg>
+    <img class="rec" id="megafono"   src="rec/megafono-rec.png">
+    <img class="rec" id="monedas"    src="rec/monedas-rec.png">
+    <img class="rec" id="laptop"     src="rec/laptop-rec.png">
+    <img class="rec" id="auricular"  src="rec/auricular-rec.png">
+    <img class="rec" id="calendario" src="rec/calendario-rec.png">
+    <img class="rec" id="papeles"    src="rec/papeles-rec.png">
+    <img class="rec" id="reloj"      src="rec/reloj-rec.png">
+    <img class="rec" id="papelera"   src="rec/papelera-rec.png">
+    <img class="rec" id="lupa"       src="rec/lupa-rec.png">
+    <img class="rec" id="dedo"       src="rec/dedo-rec.png">
+    <img class="rec" id="sobre"      src="rec/sobre-rec.png">
+    <img class="rec" id="laptop2"    src="rec/laptop-rec.png">
+    <div class="tarj" id="c1">Lead sin contactar<b>3 días</b></div>
+    <div class="tarj" id="c2">Reunión sin siguiente paso<b>46 días</b></div>
+    <div class="tarj" id="c3">Presupuesto sin seguimiento<b>27 días</b></div>
+    <div class="circ" id="h1" style="left:1010px;top:930px">HubSpot</div>
+    <div class="circ" id="h2" style="left:1226px;top:930px">Salesforce</div>
+    <div class="circ" id="h3" style="left:1442px;top:930px">Pipedrive</div>
+    <div class="circ" id="h4" style="left:1658px;top:930px">…</div>
+  </div>
+  <div id="hud"><div id="cap"></div><div id="cap2"></div></div>
+  <div id="wipe"></div><div id="wipeTxt"></div>
+  <svg id="tex" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="1080" height="1920" filter="url(#n)" opacity="0.30"/></svg>
+  <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
+</div>
+<script>
+const DUR=44.2;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, inq=x=>x*x*x;
+const back=x=>{const c=1.7,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+
+// frases: peso (palabras del guion nuevo), HUD, y camara CONTINUA: donde empieza es donde acabo la anterior
+const P=[
+ {w:7,   cap:'Metes dinero en anuncios.', sub:'',                                   cam:[300,1.0, 900,1.0]},
+ {w:13,  cap:'Y tu gente se pone con ellos.', sub:'Llamadas, reuniones, presupuestos.', cam:[900,1.0, 2200,.9]},
+ {w:6,   cap:'Pero no todos acaban siendo clientes.', sub:'',                       cam:[2200,.9, 1750,.62], wipe:1},
+ {w:19,  cap:'Algunos se quedan por el camino.', sub:'',                            cam:[1750,.62, 2150,.95]},
+ {w:11,  cap:'Y ahí se te van clientes.', sub:'Sin que nadie se dé cuenta.',        cam:[2150,.95, 2200,1.0]},
+ {w:4,   cap:'Nosotros buscamos exactamente dónde.', sub:'',                        cam:[2200,1.0, 2060,1.15], wipe:1},
+ {w:12,  cap:'Miramos todo el recorrido.', sub:'De la captación a la venta.',       cam:[2060,1.15, 1520,.31], wipe:1},
+ {w:9,   cap:'Y metemos IA justo en ese punto.', sub:'',                            cam:[1520,.31, 2060,1.0], wipe:1},
+ {w:11,  cap:'En lo que ya usas.', sub:'Sin cambiar de CRM ni añadir otra herramienta.', cam:[2060,1.0, 1340,.88]},
+ {w:10,  cap:'Para que más lleguen a cliente.', sub:'',                             cam:[1340,.88, 2780,.85]},
+ {w:2,   cap:'Qualivo', sub:'',                                                     cam:[2780,.85, 1520,.31], wipe:1},
+ {w:14,  cap:'Qualivo', sub:'Detectamos dónde se te pierden clientes en captación y ventas.<br>Y lo arreglamos con IA, en el sistema que ya tienes.', cam:[1520,.31, 1520,.31]}
+];
+const LEAD=0.3, tot=P.reduce((a,p)=>a+p.w,0); let acc=LEAD;
+P.forEach(p=>{p.t0=acc; p.d=(DUR-LEAD-0.3)*p.w/tot; acc+=p.d; p.t1=acc;});
+const N=[['Anuncios',260],['Web',620],['Lead',980],['CRM',1340],['Contacto',1700],['Reunión',2060],['Presup.',2420],['Cliente',2780]];
+const Y=1180;
+let CX=540, S=1;
+function pon(id,p,x,y,w,rot){const n=$(id); if(p<=0){n.style.opacity=0;return;}
+  // si se sale del encuadre, se desvanece en el borde en vez de quedar cortado
+  const sx=540+(x+w/2-CX)*S, half=w*S/2, borde=cl(Math.min(sx+half, 1080-(sx-half))/(half*1.2),0,1);
+  n.style.cssText+=`;left:${x}px;top:${y}px;width:${w}px;transform:rotate(${rot}deg) scale(${.55+.45*back(p)});transform-origin:center;opacity:${borde}`;}
+
+window.setT=function(t){
+  let k=0; for(let i=0;i<P.length;i++) if(t>=P[i].t0) k=i;
+  const p=P[k], lt=t-p.t0;
+  const cr=nm(t,P[5].t0,P[5].t0+.3); $('fondo2').style.opacity=cr;
+  const TIN='#0A0A0B', NAR='#E8590C'; $('pr').style.color = cr>.5?NAR:TIN;
+
+  // camara continua: siempre en movimiento, de donde acabo a donde va
+  const q=io(nm(lt,0,Math.max(.6,p.d*.85)));
+  CX=p.cam[0]+(p.cam[2]-p.cam[0])*q; S=p.cam[1]+(p.cam[3]-p.cam[1])*q;
+  $('mundo').style.transform=`translate(${540-CX*S}px,${1080-Y*S}px) scale(${S})`;
+
+  // barrido de color con el titulo encima, en los saltos grandes
+  const W=$('wipe'), WT=$('wipeTxt');
+  if(p.wipe){ const enter=nm(lt,0,.22), exit=nm(lt,.42,.68);
+    W.style.background = cr>.5 ? NAR : TIN;
+    W.style.transform = exit>0 ? `translateX(${out(exit)*100}%)` : `translateX(${(out(enter)-1)*100}%)`;
+    WT.textContent=p.cap.replace(/<br>/g,' '); WT.style.color = cr>.5 ? '#F4F1EB' : '#FF7A33';
+    const ta=nm(lt,.14,.3), tb=nm(lt,.46,.62); WT.style.opacity=ta*(1-tb); WT.style.transform=`translateX(${(1-back(ta))*-80 + out(tb)*180}px) scale(${.9+.1*back(ta)})`;
+  } else { W.style.transform='translateX(-100%)'; WT.style.opacity=0; }
+
+  // HUD: el titulo entra palabra a palabra
+  const cap=$('cap'); const d0=p.wipe?.5:.05;
+  if(cap.dataset.k!==String(k)){cap.dataset.k=k; cap.innerHTML=p.cap.split(' ').map(w=>`<span>${w}</span>`).join(' ');}
+  cap.style.fontSize = k>=10?'170px':'104px'; cap.style.textTransform = k>=10?'none':'uppercase';
+  [...cap.children].forEach((s,j)=>{const a=nm(lt,d0+j*.07,d0+j*.07+.28); s.style.opacity=a; s.style.transform=`translateY(${(1-back(a))*40}px) rotate(${(1-out(a))*-3}deg)`;});
+  const b=nm(lt,d0+.55,d0+1.0); const c2=$('cap2'); c2.innerHTML=p.sub; c2.style.opacity=p.sub?b:0; c2.style.transform=`translateY(${(1-out(b))*22}px)`; c2.style.fontSize=k===11?'46px':'42px';
+
+  // linea y paradas
+  const lit = k===6 ? Math.floor(out(nm(lt,.5,p.d*.9))*8)-1 : (k>=9 ? Math.floor(out(nm(t,P[9].t0,P[9].t1))*8)-1 : -1);
+  const marca = (k>=5 && k<=7) ? 5 : (k>=9 ? 7 : -1);
+  let sv=`<line x1="260" y1="${Y}" x2="2780" y2="${Y}" stroke="${TIN}" stroke-width="7" opacity=".6"/>`;
+  N.forEach(([l,x],i)=>{const on=i<=lit, m=i===marca && k!==6;
+    sv+=`<circle cx="${x}" cy="${Y}" r="${m?30:20}" fill="${(on||m)?'#FF7A33':TIN}"/>`;
+    sv+=`<text x="${x}" y="${Y+72}" text-anchor="middle" font-family="SG" font-size="33" font-weight="700" fill="${m?(cr>.5?NAR:'#F4F1EB'):TIN}">${l}</text>`;
+    if(m && k===7){const R=.6+.4*Math.abs(Math.sin(lt*6)); for(let j=0;j<8;j++){const an=j*Math.PI/4; sv+=`<line x1="${x+Math.cos(an)*50}" y1="${Y+Math.sin(an)*50}" x2="${x+Math.cos(an)*(50+44*R)}" y2="${Y+Math.sin(an)*(50+44*R)}" stroke="#FF7A33" stroke-width="9" stroke-linecap="round"/>`;}}
+  });
+  // los leads corren por la linea; tres se caen en la fuga
+  const dots=[[0.0,0],[0.5,0],[1.0,1],[1.5,0],[2.0,2],[2.6,0],[3.1,3],[3.6,0]], v=560;
+  dots.forEach(([d0,caeEn])=>{const st=P[0].t0+.3+d0; if(t<st) return; let x=260+(t-st)*v, y=Y, op=1;
+    const nodo=[1700,2060,2420][caeEn-1];
+    if(caeEn && x>=nodo){ const tc=Math.max(P[2].t0+.6, st+(nodo-260)/v); if(t>=tc){const q=nm(t,tc,tc+1.1); x=nodo+q*30; y=Y+q*q*420; op=1-q;} else x=nodo; }
+    if(x>2780){x=2780; op = k>=9?1:0;}
+    if(op>0) sv+=`<circle cx="${x}" cy="${y}" r="14" fill="#FF7A33" opacity="${op}"/><circle cx="${x-24}" cy="${y}" r="9" fill="#FF7A33" opacity="${op*.45}"/>`;
+  });
+  $('linea').innerHTML=sv;
+
+  // objetos
+  ['megafono','monedas','laptop','auricular','calendario','papeles','reloj','papelera','lupa','dedo','sobre','laptop2'].forEach(i=>$(i).style.opacity=0);
+  ['c1','c2','c3','h1','h2','h3','h4'].forEach(i=>$(i).style.opacity=0);
+  if(k<=1){ pon('megafono',nm(t,P[0].t0+.1,P[0].t0+.7),330,700,340,-14); pon('monedas',nm(t,P[0].t0+.9,P[0].t0+1.5),760,1290,260,4); }
+  if(k>=1 && k<=2){ pon('laptop',nm(t,P[1].t0,P[1].t0+.6),1120,760,420,5);
+    pon('auricular',nm(t,P[1].t0+.9,P[1].t0+1.5),1560,780,280,-18); pon('calendario',nm(t,P[1].t0+1.6,P[1].t0+2.2),1930,800,260,8); pon('papeles',nm(t,P[1].t0+2.3,P[1].t0+2.9),2290,790,280,-5); }
+  if(k===3){ pon('reloj',nm(lt,.2,.8),2260,700,260,12);
+    [['c1',1520,1300,.7],['c2',1820,1560,2.0],['c3',2120,1420,3.3]].forEach(([id,x,y,d])=>{const q=nm(lt,d,d+.5); const n=$(id); n.style.left=x+'px'; n.style.top=y+'px'; n.style.opacity=q; n.style.transform=`translateY(${(1-back(q))*-90}px) rotate(${(1-out(q))*-6-2}deg)`;}); }
+  if(k===4){ pon('papelera',nm(lt,.15,.7),2080,1330,300,-3);
+    [['c1',1520,1300],['c2',1820,1560],['c3',2120,1420]].forEach(([id,x,y],j)=>{const q=nm(lt,.6+j*.4,.6+j*.4+.8); const n=$(id); n.style.left=x+'px'; n.style.top=y+'px'; n.style.opacity=1-q*q; n.style.transform=`translate(${(2200-x)*out(q)}px,${(1480-y)*out(q)}px) rotate(${q*60}deg) scale(${1-q*.6})`;}); }
+  if(k===5){ pon('lupa',nm(lt,.45,1.05),1900,930,330,-18); }
+  if(k===7){ pon('dedo',nm(lt,.5,1.1),2140,1000,420,20); }
+  if(k===8){ pon('laptop2',nm(lt,.1,.6),1160,700,380,4);
+    ['h1','h2','h3','h4'].forEach((id,j)=>{const q=nm(lt,.8+j*.22,.8+j*.22+.4); const n=$(id); n.style.opacity=q; n.style.transform=`scale(${.4+.6*back(q)})`;}); }
+  if(k===9){ const q=out(nm(lt,.1,p.d*.92)); const x=1700+q*(2780-1700); pon('sobre',1,x-90,Y-260-Math.sin(q*Math.PI)*140,180,-24+q*40); }
+  // golpe de camara al cambiar de frase
+  const g=nm(lt,0,.14); $('e').style.transform=`translate(${(1-g)*10}px,${(1-g)*-6}px)`;
+};
+window.setT(0);
+</script>
