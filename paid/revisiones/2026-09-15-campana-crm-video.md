@@ -57,7 +57,8 @@ empresarial» junto a «HubSpot» no afina: **diluye**. El resultado medido:
 | Conjunto | Alcance en España |
 |---|---|
 | El que había · 9 intereses con los cuatro amplios | **9.000.000 – 10.600.000** |
-| El nuevo · 7 intereses, solo señal de CRM y captación | **2.800.000 – 3.200.000** |
+| El nuevo · 7 intereses, solo señal de CRM y captación, 25-65 | **2.700.000 – 3.200.000** |
+| El nuevo con edad mínima 30 · **el que queda montado** | **2.400.000 – 2.900.000** |
 
 Se pasa de un público donde el CRM era una minoría a uno donde es toda la señal. Sigue siendo
 grande de sobra para 20 €/día.
@@ -94,7 +95,7 @@ ANUNCIO   —                                                              falta
 | Presupuesto | **20,00 €/día** | el mismo tope que protege tu atención |
 | Objetivo | `LEAD_GENERATION`, destino `ON_AD` | formulario nativo, sin salto a la web |
 | Geografía | España · residentes y recientes | igual que antes, comparable |
-| Edad | 25-65 | igual que antes |
+| Edad | **30-65** | subida de 25 a 30 el 15-sep a peticion de Maikel · quita la franja con menos probabilidad de decidir sobre un CRM |
 | Colocaciones | feed y stories de Facebook e Instagram | sin overlay de Reels, el arreglo que sí funcionó |
 | **Público Advantage+** | **APAGADO** | para que los intereses aten de verdad |
 | Intereses | los 7 del núcleo | CRM, HubSpot, Salesforce, generación de leads, automatización de marketing, conversion marketing, software empresarial |
