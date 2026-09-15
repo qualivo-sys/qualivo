@@ -33,13 +33,14 @@ Objetivo del score: ordenar a quién contactar primero y qué secuencia recibe. 
 | | 3-7 / 4-11 | 6 | |
 | | Menos | 0 | |
 | | Sin actividad en 45 días | tope 34 | Canal parado: no gastar un toque. El score total se limita a 34 (no contactar, revisar en 90 días). |
-| **Historial cubriendo indies** (máx. 15) | ≥ 30 % de vídeos recientes de juegos con < 1.000 reseñas en Steam | 15 | Prueba de que juega demos y juegos sin nombre. Los que solo cubren AAA no cambiarán por nosotros. |
+| **Historial cubriendo indies** (máx. 15) | ≥ 30 % de vídeos recientes de juegos con < 1.000 reseñas en Steam | 15 | Prueba de que juega demos y juegos sin nombre. Los que solo cubren AAA no cambiarán por nosotros. Solo puntúa si hay alguna señal de género o comparables: un canal de humor no es «indie» por no hacer Fortnite. |
 | | 10-29 % | 8 | |
 | | < 10 % | 0 | |
 | **Probabilidad de responder** (máx. 10) | Email de negocio público (About/bio/panel) | +4 | Sin canal directo no hay respuesta. |
 | | Perfil en Keymailer/Lurkit/Woovit o menciona «keys welcome» | +3 | Pide juegos activamente. |
 | | Ha respondido antes a nosotros o al editor | +3 | Relación existente. |
 | **Ajustes** | Idioma español (ES/LatAm) | +5 | Mercado menos saturado, estudio nativo, sesión en su horario. Tope 100. |
+| | Idioma portugués (Brasil) | −5 | Mercado enorme y afín, pero el juego no está localizado. Se reactiva si se añade PT-BR. |
 | | Juega en squad reconocible (aparecen los mismos amigos en sus vídeos) | +5 | Trae a los otros cinco. |
 | | Pide pago explícitamente en la bio para cualquier juego | −10 | No es descarte, pero no es prioridad pre-lanzamiento. |
 | | Contenido no apto / polémico | −100 | Descarte. |

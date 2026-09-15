@@ -55,9 +55,11 @@ export function score(row) {
   const freqMid = platform === 'twitch' ? 4 : 3;
   parts.frecuencia = lastDays > 45 ? 0 : posts >= freqHi ? 10 : posts >= freqMid ? 6 : 0;
 
-  // Historial indie (15)
+  // Historial indie (15). Solo cuenta si hay alguna señal de género o comparables:
+  // un canal de cómics o de humor no es «indie» por no hacer Fortnite.
   const indie = num(row.indie_pct);
-  parts.indie = indie >= 30 ? 15 : indie >= 10 ? 8 : 0;
+  const hasSignal = genre > 0 || core > 0 || adj > 0;
+  parts.indie = !hasSignal ? 0 : indie >= 30 ? 15 : indie >= 10 ? 8 : 0;
 
   // Probabilidad de responder (10)
   let resp = 0;
@@ -70,6 +72,7 @@ export function score(row) {
   let adj_pts = 0;
   const idioma = String(row.idioma || row.language || '').toLowerCase();
   if (idioma.startsWith('es')) adj_pts += 5;
+  if (idioma.startsWith('pt')) adj_pts -= 5; // el juego no está en portugués (aún)
   if (bool(row.squad)) adj_pts += 5;
   if (bool(row.pide_pago ?? row.asks_payment)) adj_pts -= 10;
   if (bool(row.descartar ?? row.disqualify)) adj_pts -= 100;

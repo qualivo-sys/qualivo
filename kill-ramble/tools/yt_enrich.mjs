@@ -45,7 +45,7 @@ function viewsToNum(s) {
 
 async function fetchChannel(url) {
   const u = url.replace(/\/+$/, '') + '/videos';
-  const res = await fetch(u, { headers: { 'user-agent': UA, 'accept-language': 'en-US,en;q=0.9', cookie: 'CONSENT=YES+1; SOCS=CAI' } });
+  const res = await fetch(u, { headers: { 'user-agent': UA, 'accept-language': 'es-419,es;q=0.9,en;q=0.5', cookie: 'CONSENT=YES+1; SOCS=CAI' } });
   if (!res.ok) throw new Error('http ' + res.status);
   const html = await res.text();
   const m = /var ytInitialData = (\{.*?\});<\/script>/s.exec(html);
