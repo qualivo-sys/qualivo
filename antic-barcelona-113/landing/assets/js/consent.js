@@ -50,6 +50,27 @@
   };
 
   /* ---------- Banner ---------- */
+  /**
+   * El aviso va fijo abajo con z-index 9990, así que se comía el botón
+   * «Siguiente» del cuestionario y cualquier otra acción pegada al pie: el
+   * clic lo recibía el aviso y no pasaba nada. En un embudo de pago eso es
+   * pagar por visitas que no pueden avanzar.
+   *
+   * En vez de pelear con z-index, el aviso reserva su altura: el contenido se
+   * aparta y los pies pegajosos suben por encima. Así no hay nada debajo de
+   * él, en ninguna página y en ningún tamaño de pantalla.
+   */
+  function reservarSitio(el) {
+    var alto = el.offsetHeight || 0;
+    document.documentElement.style.setProperty('--cookiebar-h', alto + 'px');
+    document.body.classList.add('con-cookiebar');
+  }
+
+  function liberarSitio() {
+    document.body.classList.remove('con-cookiebar');
+    document.documentElement.style.setProperty('--cookiebar-h', '0px');
+  }
+
   function banner() {
     var el = document.createElement('div');
     el.className = 'cookiebar';
@@ -66,7 +87,8 @@
         '</div>' +
       '</div>';
     document.body.appendChild(el);
-    requestAnimationFrame(function () { el.classList.add('in'); });
+    requestAnimationFrame(function () { el.classList.add('in'); reservarSitio(el); });
+    window.addEventListener('resize', function () { reservarSitio(el); });
     el.addEventListener('click', function (e) {
       var b = e.target.closest('[data-consent]');
       if (!b) return;
@@ -74,6 +96,7 @@
       guardar(si);
       if (si) cargarPixel();
       el.classList.remove('in');
+      liberarSitio();
       setTimeout(function () { el.remove(); }, 500);
     });
   }

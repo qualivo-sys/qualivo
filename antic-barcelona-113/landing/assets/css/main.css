@@ -372,6 +372,10 @@ section{position:relative}
 }
 
 /* ---------- Aviso de cookies ---------- */
+/* Mientras el aviso está en pantalla, reserva su altura para que no quede
+   nada debajo. Lo pone y lo quita consent.js. */
+body.con-cookiebar{padding-bottom:var(--cookiebar-h,0)}
+body.con-cookiebar .q__foot{bottom:var(--cookiebar-h,0)}
 .cookiebar{
   position:fixed;left:0;right:0;bottom:0;z-index:9990;
   background:rgba(20,16,13,.97);backdrop-filter:blur(16px);
