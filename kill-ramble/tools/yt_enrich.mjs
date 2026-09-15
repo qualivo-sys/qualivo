@@ -6,7 +6,8 @@
 import { readFileSync } from 'node:fs';
 
 const CORE = ['gang beasts', 'party animals', 'stick fight', 'pummel party', 'rubber bandits', 'havocado', 'move or die'];
-const ADJ = ['human fall flat', 'fall guys', 'chained together', 'crab game', 'duck game', 'boomerang fu',
+const ADJ = ['meccha chameleon', 'mecha chameleon', 'bombanana', 'mimic party', 'machine party', 'gamble with your friends', 'rv there yet',
+  'human fall flat', 'fall guys', 'chained together', 'crab game', 'duck game', 'boomerang fu',
   'ultimate chicken horse', 'golf with your friends', 'knight squad', 'bopl battle', 'stumble guys', 'peak',
   'content warning', 'lethal company', 'r.e.p.o', 'repo', 'phasmophobia', 'pico park', 'overcooked', 'goose goose duck',
   'among us', 'mario party', 'smash bros', 'brawlhalla', 'rivals of aether', 'nidhogg', 'towerfall', 'speedrunners',

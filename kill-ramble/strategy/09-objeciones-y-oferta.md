@@ -80,3 +80,14 @@ Firma el director de desarrollo. Inglés. Sin promesas de producción.
 **Toque 3 (+7 días):** «Last one. Playtest closes Oct 5. If you'd rather play on your own with your squad, the demo is free ({{steam_utm}}) and I'll send you clips of your best moments after. If it's not your thing, no worries at all.»
 
 Prensa: sin cambios de estructura, cambia el gancho al dato de la semana 2.
+
+## Lo que enseñan las fichas de PEAK y Meccha Chameleon
+
+| Dato | Lección para Don't Kill Rumble |
+|---|---|
+| Meccha Chameleon: un solo desarrollador, sin equipo de marketing, 20 millones de unidades en dos meses (jun-ago 2026), 6 €. | La falta de equipo no es la barrera. El juego era una frase («píntate y escóndete») y los squads de creadores hicieron el resto. Nuestra frase: «sostén la copa, cinco amigos intentan tirarte». |
+| Su ficha de Steam dice literalmente: «streams y vídeos bienvenidos; pon el nombre del juego en el título». | Poner el mismo párrafo en la ficha de Don't Kill Rumble y en el Discord. Es texto en Steamworks, cero producción, y quita la duda del creador sobre si puede publicar. |
+| Meccha: «los streamers pueden jugar fácilmente con sus espectadores; si creas un servidor no privado, cualquiera puede entrar». | Es la solución de diseño al lobby vacío. Si Don't Kill Rumble tiene lobbies públicos o código de sala para que un streamer meta a sus viewers, se dice en el primer email. Si no lo tiene, es la única excepción por la que pediría tiempo de producción. |
+| PEAK: multijugador solo con amigos, 4 jugadores, mapa que rota cada 24 h, editado por Landfall (Stick Fight) y Aggro Crab. | El mapa diario da motivo para volver a grabar. Nosotros no lo tenemos; el equivalente barato es el torneo de creadores como hito. Y la pregunta a Dojo System: qué red de creadores aporta como editor, porque PEAK arrancó con la de Landfall. |
+| «Productos similares» en ambas fichas: Bombanana, Mimic Party, Machine Party, Gamble With Your Friends, RV There Yet, R.E.P.O. | Son los comparables vivos de 2026, más que Gang Beasts (2014). Se añaden al descubrimiento y al scoring. Robleis y Elded ya han grabado Bombanana y Mimic Party: están en la base. |
+| Precio 6-7,5 €. Nuestra demo es gratis. | Fricción cero durante el playtest. Al lanzar, el precio debe estar en esa franja: un party game de 6 a más de 10 € no salta de squad en squad. |

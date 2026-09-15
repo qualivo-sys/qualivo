@@ -6,7 +6,8 @@
 import { readFileSync } from 'node:fs';
 
 const CORE = ['gang beasts', 'party animals', 'stick fight', 'pummel party', 'rubber bandits', 'havocado', 'move or die'];
-const ADJ = ['human fall flat', 'fall guys', 'chained together', 'crab game', 'duck game', 'boomerang fu',
+const ADJ = ['meccha chameleon', 'mecha chameleon', 'bombanana', 'mimic party', 'machine party', 'peak', 'r.e.p.o', 'repo',
+  'human fall flat', 'fall guys', 'chained together', 'crab game', 'duck game', 'boomerang fu',
   'ultimate chicken horse', 'golf with your friends', 'knight squad', 'bopl battle', 'stumble guys'];
 const ES_WORDS = /\b(con amigos|momentos|gracioso|graciosos|divertidos|jugando|partida|amigos|español|latino|risas|locura|el|la|los|las|de|que|para|muy|nos|pero)\b/gi;
 const EN_WORDS = /\b(funny moments|with friends|the|and|we|our|this|that|best|moments|gameplay|hilarious)\b/gi;
