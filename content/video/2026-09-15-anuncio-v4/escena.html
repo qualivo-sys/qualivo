@@ -96,7 +96,7 @@ const P=[
  {w:14,  cap:'Qualivo', sub:'<b>Pide ahora el diagnóstico gratuito de tu sistema.</b>Lo analizamos y te decimos qué parte hay que mejorar.', cam:[1520,.31, 1520,.31], wipe:2}
 ];
 // tiempos reales de la locucion (marcas de ElevenLabs tras recortar pausas); el cierre arranca antes de que se diga "Qualivo"
-const T0=[0.3, 2.56, 7.62, 9.78, 20.6, 23.82, 26.56, 29.84, 33.43, 37.74, 40.27, 40.99];
+const T0=[0.3, 2.56, 7.62, 9.78, 20.6, 23.82, 26.56, 29.84, 33.43, 37.74, 40.27, 41.04];
 const TC=[11.51, 14.14, 16.37, 18.29];   // cuando la voz nombra cada problema
 P.forEach((p,i)=>{p.t0=T0[i]; p.t1=i<P.length-1?T0[i+1]:DUR; p.d=p.t1-p.t0;});
 const N=[['Anuncios',260],['Web',620],['Lead',980],['CRM',1340],['Contacto',1700],['Reunión',2060],['Presup.',2420],['Cliente',2780]];
