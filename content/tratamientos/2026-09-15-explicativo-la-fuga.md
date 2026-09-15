@@ -1,6 +1,6 @@
-# Brief de producción · «¿Qué hay en tu CRM?»
+# Brief de producción · «¿Qué estás haciendo con lo que ya tienes?»
 
-Vídeo explicativo con voz en off · vertical 9:16 · 1 minuto y 36 segundos
+Vídeo explicativo con voz en off · vertical 9:16 · 1 minuto y 32 segundos
 Estado: **pendiente de aprobación**. No se ha generado ni un fotograma.
 
 > Segunda versión. La primera partía de una tesis nuestra («hay una fuga») en
@@ -30,8 +30,12 @@ qué estamos dejando morir.
 
 ## 2 · Big idea
 
-> **Todos miramos cuánto estamos generando. Casi nadie mira qué estamos dejando
-> morir.**
+> **No necesitas empezar con más leads. Primero necesitas saber qué estás
+> dejando escapar de los que ya tienes.**
+
+Sigue el marco fijado en `content/proceso-base-qualivo.md`: situación
+reconocible, los cinco pasos, y la conclusión. La pieza responde a las tres
+preguntas (qué problema ve, qué hacemos, cómo lo solucionamos) sin enunciarlas.
 
 El territorio creativo es una pregunta, no una afirmación: **«¿Qué hay en tu
 CRM?»**. Su propiedad más valiosa es que no parece un anuncio nuestro. Es una
@@ -45,44 +49,45 @@ serie entera de piezas en vez de agotarse en una.
 Voz en off, castellano de España, tono de quien enseña algo, no de quien vende.
 Sin llamada a la acción hablada: el manual la deja en el pie.
 
-**Primer acto · la situación** (0:00–0:34)
+**Primer acto · la situación** (0:00–0:30)
 
 | Tiempo | Locución |
 |---|---|
-| 0:00–0:05 | ¿Cuántas oportunidades tienes ahora mismo en tu CRM? |
-| 0:05–0:10 | Todo parece ir bien. Tu CRM está lleno. |
-| 0:10–0:15 | Pero hay algo que probablemente no estás mirando. |
-| 0:15–0:24 | Sin contactar. Sin seguimiento. Presupuesto enviado, sin respuesta. Reunión hecha, pendiente. Pendiente. Pendiente. |
-| 0:24–0:30 | Una lleva tres días. Otra once. Otra veintisiete. Otra cuarenta y seis. |
-| 0:30–0:34 | No son contactos malos. Son oportunidades que ya habías conseguido. |
+| 0:00–0:04 | Tienes un CRM lleno de oportunidades. |
+| 0:04–0:09 | Leads. Llamadas. Reuniones. Presupuestos. |
+| 0:09–0:14 | Pero tenerlas dentro no significa que las estés aprovechando. |
+| 0:14–0:19 | Algunas llevan días sin seguimiento. |
+| 0:19–0:25 | Otras tienen un presupuesto enviado y nadie ha vuelto a contactar. |
+| 0:25–0:30 | O alguien pidió información y la conversación se quedó ahí. |
 
-**Segundo acto · el insight** (0:34–0:52)
-
-| Tiempo | Locución |
-|---|---|
-| 0:34–0:44 | Cuando una oportunidad entra en tu CRM, la parte cara ya está hecha. Has pagado la publicidad. Has conseguido que alguien pregunte. A lo mejor un comercial ya habló con él. |
-| 0:44–0:47 | Y aun así, se queda ahí. |
-| 0:47–0:52 | El problema no siempre es conseguir más. A veces es aprovechar lo que ya tienes. |
-
-**Tercer acto · esto es lo que hacemos** (0:52–1:24)
+**Bisagra** (0:30–0:34)
 
 | Tiempo | Locución |
 |---|---|
-| 0:52–0:55 | Esto es lo que hacemos. |
-| 0:55–1:01 | **Uno.** Nos conectamos al CRM que ya tienes. No lo cambiamos, no migramos nada. |
-| 1:01–1:08 | **Dos.** Una inteligencia artificial las revisa todas. No una muestra: todas. Y las ordena por lo que valen y por lo que llevan paradas. |
-| 1:08–1:17 | **Tres.** Escribe el seguimiento de cada una con su contexto. Qué pidió, cuándo, qué se le dijo la última vez. Tu comercial lo aprueba y sale. |
-| 1:17–1:24 | **Cuatro.** Lo que conteste vuelve a tu CRM, con la conversación dentro, para que tu equipo la coja donde se quedó. |
+| 0:30–0:34 | Ahí es donde trabajamos. |
 
-**Cierre** (1:24–1:36)
+**Segundo acto · el proceso** (0:34–1:22)
 
 | Tiempo | Locución |
 |---|---|
-| 1:24–1:30 | La primera pasada por el nuestro sacó veinticinco oportunidades paradas. Treinta y cuatro mil quinientos euros. |
-| 1:30–1:36 | Todos miramos cuánto estamos generando. Casi nadie mira qué estamos dejando morir. |
+| 0:34–0:42 | **Uno. Conectamos.** Entramos en el CRM que ya utilizas. No hay que cambiar de herramienta ni empezar de cero. |
+| 0:42–0:52 | **Dos. Analizamos.** Miramos todo lo que ha pasado con cada oportunidad. Cuándo entró, qué se habló, dónde se detuvo. |
+| 0:52–1:01 | **Tres. Detectamos.** Encontramos dónde se están quedando paradas y qué patrones se repiten. |
+| 1:01–1:12 | **Cuatro. Priorizamos.** Y distinguimos cuáles merece la pena recuperar. No se trata de escribir a todo el mundo, se trata de encontrar dónde hay oportunidad de verdad. |
+| 1:12–1:22 | **Cinco. Actuamos.** Activamos el siguiente paso, para que no dependa de que alguien se acuerde de hacerlo. |
 
-Unas 250 palabras, 1 minuto y 36 segundos. Un explicativo aguanta esa duración;
-si hay que apretar para encajar en 90 segundos, se recorta el bloque 0:34–0:44.
+**Cierre** (1:22–1:32)
+
+| Tiempo | Locución |
+|---|---|
+| 1:22–1:32 | Porque antes de conseguir más oportunidades, conviene saber qué está pasando con las que ya tienes. |
+
+Unas 230 palabras, 1 minuto y 32 segundos.
+
+**El dato propio no se locuta.** Aparece como línea de texto en el último plano,
+en cuerpo pequeño bajo la firma: «Primera pasada por nuestro propio CRM: 25
+oportunidades paradas, 34.500 €». Así hay prueba sin que el vídeo hable de
+nosotros, que es la corrección que pidió Maikel.
 
 **Pie de la publicación:** «Abre tu CRM y filtra por última actividad. Lo que te
 salga es la conversación. Si quieres que la miremos juntos, la radiografía son
@@ -92,26 +97,22 @@ quince minutos.»
 
 | # | Dur. | Qué vemos | Qué escuchamos |
 |---|---|---|---|
-| 1 | 0:00–0:05 | Pantalla de CRM en negro, vacía. El cursor se posa en la barra de búsqueda. | La pregunta. |
-| 2 | 0:05–0:10 | Entran tarjetas de arriba con contadores subiendo: **+12 · +8 · +17 · +6**. Ritmo alegre, todo verde. | «Todo parece ir bien.» |
-| 3 | 0:10–0:15 | Freno en seco. La pantalla se queda quieta. Un segundo sin que pase nada. | «Pero hay algo que no estás mirando.» |
-| 4 | 0:15–0:24 | Las mismas tarjetas, ahora se lee su **estado**, que estaba fuera de plano. El verde se apaga a gris. | La letanía de estados. |
-| 5 | 0:24–0:30 | Aparece la columna **días sin actividad**. 3 · 11 · 27 · 46, aterrizando uno a uno. | «Una lleva tres días…» |
-| 6 | 0:30–0:34 | Las paradas se separan y se agrupan en un bloque. | «Son oportunidades que ya habías conseguido.» |
-| 7 | 0:34–0:44 | Sobre cada tarjeta parada caen etiquetas de lo que costó traerla: *anuncio pagado · formulario · llamada de un comercial*, acumulándose encima. | El coste ya pagado. |
-| 8 | 0:44–0:47 | Todo quieto. El bloque de paradas, solo, en el centro. | «Y aun así, se queda ahí.» |
-| 9 | 0:47–0:52 | Dos líneas sobre negro. La primera se atenúa, la segunda se queda. | «El problema no siempre es conseguir más…» |
-| 10 | 0:52–0:55 | Negro. Una sola línea, grande. | «Esto es lo que hacemos.» |
-| 11 | 0:55–1:01 | **Paso 1.** El logo genérico del CRM sigue en su sitio y una pieza se acopla al lado. Nada se mueve de sitio: eso es el mensaje. | «Nos conectamos al CRM que ya tienes…» |
-| 12 | 1:01–1:08 | **Paso 2.** Un barrido recorre la lista entera de arriba abajo marcando **todas** las filas. Luego la lista se reordena sola: las de más valor y más días, arriba. | «Las revisa todas. No una muestra: todas.» |
-| 13 | 1:08–1:17 | **Paso 3.** Se abre una tarjeta. Dentro, el contexto recuperado: *pidió presupuesto el 12 de mayo · se le mandó el 14 · sin respuesta desde entonces*. Debajo se escribe solo un mensaje. Aparece un botón: **Aprobar y enviar**. | «Escribe el seguimiento con su contexto…» |
-| 14 | 1:17–1:24 | **Paso 4.** Llega una respuesta y entra en la ficha del CRM. La tarjeta pasa de gris a verde y sube en la lista. | «Lo que conteste vuelve a tu CRM…» |
-| 15 | 1:24–1:30 | Contador hasta **25**. Debajo aterriza **34.500 €**. Nada más en pantalla. | La cifra. |
-| 16 | 1:30–1:36 | Negro. Dos líneas, la segunda en naranja. Firma. | El remate. |
+| 1 | 0:00–0:09 | Pantalla de CRM. Entran tarjetas de arriba sin parar, con contadores subiendo. Ritmo alegre, todo verde. | «Tienes un CRM lleno… Leads. Llamadas. Reuniones. Presupuestos.» |
+| 2 | 0:09–0:14 | Freno en seco. La pantalla se queda quieta. Un segundo sin que pase nada. | «Pero tenerlas dentro no significa que las estés aprovechando.» |
+| 3 | 0:14–0:19 | Se abre una tarjeta. Contador de días sin actividad: **3**. | «Algunas llevan días sin seguimiento.» |
+| 4 | 0:19–0:25 | Otra tarjeta. *Presupuesto enviado*. Contador: **27**. | «Otras tienen un presupuesto enviado…» |
+| 5 | 0:25–0:30 | Otra. *Pidió información*. Estado: **sin actividad**. El verde ya se ha ido del todo. | «O alguien pidió información…» |
+| 6 | 0:30–0:34 | Negro. Una sola línea grande. | «Ahí es donde trabajamos.» |
+| 7 | 0:34–0:42 | **01 CONECTAR.** El CRM sigue en su sitio, entero, y una pieza se acopla al lado. **Nada se mueve de sitio: ese es el mensaje.** | Paso uno. |
+| 8 | 0:42–0:52 | **02 ANALIZAR.** Una tarjeta se despliega y muestra su historial completo: entrada, correos, llamada, presupuesto, silencio. La línea de tiempo se dibuja y se corta. | Paso dos. |
+| 9 | 0:52–1:01 | **03 DETECTAR.** La lista entera se reagrupa sola en cuatro bloques con etiqueta: *Sin seguimiento · Respuesta tardía · Presupuesto sin respuesta · Estancada*. | Paso tres. |
+| 10 | 1:01–1:12 | **04 PRIORIZAR.** De esos bloques, unas cuantas se iluminan en naranja y suben; el resto se atenúa y baja. **Se ve que se descarta**, que es lo que hace creíble el paso. | Paso cuatro. |
+| 11 | 1:12–1:22 | **05 ACTUAR.** Sobre la primera priorizada se escribe solo un mensaje con su contexto. Botón **Aprobar y enviar**. Llega respuesta, la tarjeta pasa a verde y sube. | Paso cinco. |
+| 12 | 1:22–1:32 | Negro. Dos líneas, la segunda en naranja. Firma. Debajo, en pequeño, el dato propio. | El cierre. |
 
-Los pasos 11 a 14 son el corazón nuevo de la pieza: **no se cuenta el proceso,
-se enseña ocurriendo en pantalla.** Cada paso lleva su número grande en una
-esquina para que se entienda sin audio.
+Los cinco pasos llevan su número grande en esquina y ocurren **en pantalla**, no
+se cuentan. La escena 10 es la más importante de las cinco: es la única que no
+podría enseñar una herramienta de envíos masivos.
 
 ## 5 · Dirección creativa
 
@@ -209,12 +210,12 @@ Saldo disponible: **1.200 créditos** (plan plus).
 | Bloque | Herramienta | Complejidad | Créditos |
 |---|---|---|---|
 | Pruebas de voz (3 candidatas, una frase) | Higgsfield · ElevenLabs | Baja | ~0,9 |
-| Locución completa (16 bloques) | Higgsfield · ElevenLabs | Baja | ~4,8 |
+| Locución completa (14 bloques) | Higgsfield · ElevenLabs | Baja | ~4,2 |
 | Escenas 1–8 (el CRM) | Código + navegador | Alta | 0 |
 | Escenas 9 y 12 (tipografía) | Código | Baja | 0 |
 | Escenas 10 y 11 (barrido y cifra) | Código | Media | 0 |
 | Montaje, sincronía y codificación | ffmpeg | Media | 0 |
-| **Total** | | | **~5,7 de 1.200** |
+| **Total** | | | **~5,1 de 1.200** |
 
 Fuera de presupuesto, a decidir aparte: música y sonido. Sin ellos funciona; con
 ellos, el freno en seco del segundo 11 gana mucho.
