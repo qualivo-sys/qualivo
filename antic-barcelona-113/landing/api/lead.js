@@ -84,24 +84,29 @@ export default async function handler(req, res) {
     console.error('[lead] no se pudo escribir en la hoja:', e.message, JSON.stringify(lead));
   }
 
-  // 2. Apps Script, si está desplegado, se encarga del correo con la guía y
-  //    del aviso al comercial. Es opcional a propósito: sin él se siguen
-  //    capturando leads, solo que sin correo automático.
+  // 2. El aviso por correo. Lo manda n8n, y es opcional a propósito: si el
+  //    webhook falla o no está puesto, el lead ya está guardado. Perder un
+  //    aviso se arregla mirando el CRM; perder un lead, no.
   const webhook = process.env.LEAD_WEBHOOK_URL;
   if (webhook) {
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 8000);
-      await fetch(webhook, {
+      const r = await fetch(webhook, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        // Apps Script no expone las cabeceras personalizadas al script, así que
-        // el secreto viaja en el cuerpo.
+        headers: {
+          'Content-Type': 'application/json',
+          // n8n autentica el webhook por cabecera. El mismo secreto va también
+          // en el cuerpo por si algún día el destino vuelve a ser Apps Script,
+          // que no puede leer cabeceras personalizadas.
+          'x-ab113-secret': process.env.LEAD_SHARED_SECRET || '',
+        },
         body: JSON.stringify({ ...lead, accion: 'avisar',
           secret: process.env.LEAD_SHARED_SECRET || '' }),
         signal: ctrl.signal,
       });
       clearTimeout(t);
+      if (!r.ok) console.error('[lead] el aviso respondió', r.status);
     } catch (e) {
       console.error('[lead] el aviso por correo falló:', e.message);
     }

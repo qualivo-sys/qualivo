@@ -6,7 +6,8 @@ Tres capas, y la separación es deliberada:
 |---|---|---|
 | **La hoja de cálculo** | La base de datos. Ahí viven los leads | Google Sheets |
 | **[/crm](https://antic-barcelona-113.vercel.app/crm)** | La cara. Escribe y lee la hoja directamente | Vercel |
-| **Apps Script** | Correos automáticos y tareas a hora fija | Google, opcional |
+| **n8n** | El correo de aviso por cada lead nuevo | Ya montado |
+| **Apps Script** | La guía por correo y las tareas a hora fija | Google, opcional |
 
 No hay Pipedrive ni HubSpot: con 20-30 leads al mes, una suscripción más es un
 sitio más donde perderlos. Se migra el día que haya más de 100 al mes o más de
@@ -19,11 +20,12 @@ inicio y se comporta como una app.
 ## Lo importante: Apps Script no bloquea nada
 
 Vercel escribe en la hoja con una cuenta de servicio de Google, así que **la
-captura de leads y el CRM funcionan sin desplegar nada**. Apps Script queda
-solo para lo que no se puede hacer desde fuera:
+captura de leads y el CRM funcionan sin desplegar nada**. Y el aviso por correo
+de cada lead nuevo lo manda n8n (ver `n8n/README.md`), que ya está en marcha.
 
-- mandar el correo con la guía en PDF
-- avisar al comercial de cada lead nuevo
+Apps Script queda solo para:
+
+- mandar el correo con la guía en PDF a quien se la descarga
 - el recordatorio de HOT sin contestar, el resumen diario y el semanal
 - traer los leads del formulario instantáneo de Meta
 
