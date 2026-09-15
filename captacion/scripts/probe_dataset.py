@@ -15,7 +15,7 @@ CHAT = {"crisp": "client.crisp.chat", "tawk": "embed.tawk.to", "intercom": "widg
         "smartsupp": "smartsuppchat.com"}
 COLS = ["fecha", "vertical", "dominio", "estado", "bytes", "formularios", "campos_email",
         "gtm", "ga4", "meta_pixel", "linkedin_pixel", "google_ads", "hubspot", "chat",
-        "whatsapp", "mailto_generico", "titulo"]
+        "whatsapp", "whatsapp_num", "mailto_generico", "titulo"]
 
 vistos = set()
 if os.path.exists(DST):
@@ -50,6 +50,14 @@ def sonda(item):
             "hubspot": int("hs-scripts" in low or "hsforms" in low),
             "chat": ",".join(k for k, u in CHAT.items() if u in low),
             "whatsapp": int(bool(re.search(r"wa\.me/|api\.whatsapp\.com/send", low))),
+            # El numero del enlace de WhatsApp es un telefono publicado por la propia
+            # empresa: es la via para tener movil sin gastar creditos de Apollo, que
+            # estan agotados hasta el proximo ciclo. Solo moviles espanoles (6xx/7xx).
+            "whatsapp_num": next((n for n in (
+                re.sub(r"\D", "", re.sub(r"%[0-9a-f]{2}", "", m, flags=re.I))
+                for m in re.findall(
+                    r"(?:wa\.me/|api\.whatsapp\.com/send\?phone=)\+?([0-9 %\-\.]{9,24})", low))
+                if re.fullmatch(r"(?:34)?[67]\d{8}", n)), ""),
             "mailto_generico": int(gen),
             "titulo": (t[0].strip()[:80] if t else "")}
 
