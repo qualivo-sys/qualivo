@@ -6,11 +6,12 @@
 <title>Test: ¿tu perfil es de cabina o de tierra? · EAC</title>
 <meta name="description" content="Ocho preguntas para saber si encajas mejor como TCP volando o trabajando en tierra en el aeropuerto.">
 <meta name="robots" content="noindex">
+<link rel="icon" href="https://escolaeronauticadecatalunya.cat/wp-content/uploads/2023/09/cropped-favicon-eac-1-192x192.png">
 <link rel="stylesheet" href="/assets/eac.css">
 </head>
 <body>
 <div class="bar"><div class="in">
-  <a class="logo" href="/">Escola Aeronàutica <em>de Catalunya</em></a>
+  <a class="logo" href="https://escolaeronauticadecatalunya.cat/" target="_blank" rel="noopener"><img src="https://escolaeronauticadecatalunya.cat/wp-content/uploads/2023/07/Logo-EscolaAeronautica-web.png" alt="Escola Aeronàutica de Catalunya" width="800" height="158" loading="eager"></a>
   <span class="tag">Test de perfil</span>
 </div></div>
 
@@ -26,7 +27,7 @@
   <div id="after"></div>
 </main>
 
-<footer class="f">Escola Aeronàutica de Catalunya · Barcelona</footer>
+<footer class="f"><b>Escola Aeronàutica de Catalunya</b><br>Consell de Cent 489, bajos · 08013 Barcelona<br><a href="tel:+34936671372">936 671 372</a> · <a href="mailto:info@escolaeronauticadecatalunya.cat">info@escolaeronauticadecatalunya.cat</a></footer>
 
 <script src="/assets/eac.js"></script>
 <script>
@@ -65,7 +66,7 @@ EAC.Quiz({questions:QS,onFinish:function(a){
   +'<h1>Tu perfil encaja mejor en <span style="color:var(--red)">'+names[idx].split(' (')[0].toLowerCase()+'</span></h1>'
   +'<p class="lead">'+explica(idx)+'</p>'
   +'<div class="stats">'
-  + s.map(function(v,i){return '<div class="stat" style="border-top-color:'+(i===idx?'#D8232A':'#D3DAE3')+'"><b>'+pct[i]+'%</b><span>'+names[i]+'</span></div>'}).join('')
+  + s.map(function(v,i){return '<div class="stat" style="border-top-color:'+(i===idx?'#CE0E2D':'#D3DAE3')+'"><b>'+pct[i]+'%</b><span>'+names[i]+'</span></div>'}).join('')
   +'</div>'
   +'<p class="small">Es una orientación basada en tus respuestas sobre disponibilidad, trato con público y tipo de trabajo. No es un veredicto: mucha gente empieza en una vía y se mueve a otra.</p>';
   EAC.gate(EAC.$('#after'),{
