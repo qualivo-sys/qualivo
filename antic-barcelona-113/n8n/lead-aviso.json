@@ -1,5 +1,5 @@
 {
-  "name": "Antic Barcelona 113 · Aviso de lead",
+  "name": "Antic Barcelona 113 · Leads",
   "settings": {
     "executionOrder": "v1"
   },
@@ -30,7 +30,7 @@
     },
     {
       "id": "preparar",
-      "name": "Componer el aviso",
+      "name": "Componer los correos",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
@@ -38,7 +38,7 @@
         0
       ],
       "parameters": {
-        "jsCode": "// La autenticación la hace el propio webhook con una credencial de cabecera:\n// n8n Cloud no deja leer variables de entorno desde aquí, y comprobarlo en el\n// nodo de entrada es mejor de todos modos porque rechaza antes de ejecutar.\nconst d = $input.first().json.body || $input.first().json;\n\nconst esc = (s) => String(s == null ? '' : s)\n  .replace(/[&<>\"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\n\nconst caliente = d.tier === 'HOT';\nconst tel = String(d.telefono || '').replace(/\\D/g, '');\nconst ORIGEN = { guia: 'Descargó la guía', cuestionario: 'Rellenó el cuestionario', meta_form: 'Formulario de Meta' };\n\n// El asunto es lo único que se lee desde la pantalla de bloqueo del móvil, así\n// que lleva delante lo que decide si hay que abrirlo ahora o luego.\nconst asunto = (caliente ? '🔥 LEAD HOT · ' : 'Lead nuevo · ')\n  + (d.nombre || 'sin nombre')\n  + (d.pieza ? ' · ' + d.pieza : '')\n  + (d.medidas ? ' ' + d.medidas : '');\n\nconst filas = [\n  ['Teléfono', d.telefono], ['Email', d.email],\n  ['Pieza', d.pieza], ['Dónde va', d.espacio], ['Medidas', d.medidas],\n  ['Estilo', d.estilo], ['Presupuesto', d.presupuesto], ['Plazo', d.plazo],\n  ['Referencias', d.referencias],\n  ['Origen', ORIGEN[d.origen] || d.origen],\n  ['Campaña', d.utm_campaign], ['Anuncio', d.utm_content],\n].filter(([, v]) => v).map(([k, v]) =>\n  `<tr><td style=\"padding:5px 16px 5px 0;color:#7C7266;vertical-align:top;white-space:nowrap\">${esc(k)}</td>`\n  + `<td style=\"padding:5px 0;color:#332B23\"><b>${esc(v)}</b></td></tr>`).join('');\n\nconst html = `<div style=\"font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;line-height:1.55;color:#332B23;max-width:560px\">\n${caliente ? `<p style=\"background:#FCE8E6;border-left:3px solid #B3261E;padding:11px 14px;margin:0 0 18px;border-radius:0 6px 6px 0\">\n<b>Lead HOT.</b> Proyecto definido, presupuesto y plazo cercano.<br>WhatsApp en menos de 2 horas laborables.</p>` : ''}\n<h2 style=\"margin:0 0 2px;font-size:20px;color:#14100D\">${esc(d.nombre || 'Sin nombre')}</h2>\n<p style=\"margin:0 0 18px;color:#7C7266;font-size:13px\">${esc(ORIGEN[d.origen] || d.origen || '')}</p>\n<table style=\"border-collapse:collapse;font-size:14px\">${filas}</table>\n<p style=\"margin:24px 0 0\">\n${tel ? `<a href=\"https://wa.me/${tel}\" style=\"background:#8C5E32;color:#fff;padding:11px 20px;border-radius:999px;text-decoration:none;display:inline-block;font-weight:600\">Escribir por WhatsApp</a>&nbsp;&nbsp;` : ''}\n<a href=\"https://antic-barcelona-113.vercel.app/crm\" style=\"color:#8C5E32;text-decoration:none\">Abrir el CRM →</a></p>\n<p style=\"margin-top:26px;color:#A79C8E;font-size:12px\">Antic Barcelona 113 · aviso automático</p></div>`;\n\nreturn [{ json: { asunto, html, tier: d.tier || '', nombre: d.nombre || '' } }];"
+        "jsCode": "// La autenticación la hace el propio webhook con una credencial de cabecera:\n// n8n Cloud no deja leer variables de entorno desde aquí, y comprobarlo en el\n// nodo de entrada es mejor de todos modos porque rechaza antes de ejecutar.\nconst d = $input.first().json.body || $input.first().json;\n\nconst esc = (s) => String(s == null ? '' : s)\n  .replace(/[&<>\"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\n\nconst caliente = d.tier === 'HOT';\nconst tel = String(d.telefono || '').replace(/\\D/g, '');\nconst ORIGEN = { guia: 'Descargó la guía', cuestionario: 'Rellenó el cuestionario', meta_form: 'Formulario de Meta' };\n\n// ── Aviso al comercial ─────────────────────────────────────────────────────\n// El asunto lleva delante lo que decide si hay que abrirlo ahora o luego: es\n// lo único que se lee desde la pantalla de bloqueo del móvil.\nconst asunto = (caliente ? '\\u{1F525} LEAD HOT · ' : 'Lead nuevo · ')\n  + (d.nombre || 'sin nombre')\n  + (d.pieza ? ' · ' + d.pieza : '')\n  + (d.medidas ? ' ' + d.medidas : '');\n\nconst filas = [\n  ['Teléfono', d.telefono], ['Email', d.email],\n  ['Pieza', d.pieza], ['Dónde va', d.espacio], ['Medidas', d.medidas],\n  ['Estilo', d.estilo], ['Presupuesto', d.presupuesto], ['Plazo', d.plazo],\n  ['Referencias', d.referencias],\n  ['Origen', ORIGEN[d.origen] || d.origen],\n  ['Campaña', d.utm_campaign], ['Anuncio', d.utm_content],\n].filter(([, v]) => v).map(([k, v]) =>\n  `<tr><td style=\"padding:5px 16px 5px 0;color:#7C7266;vertical-align:top;white-space:nowrap\">${esc(k)}</td>`\n  + `<td style=\"padding:5px 0;color:#332B23\"><b>${esc(v)}</b></td></tr>`).join('');\n\nconst html = `<div style=\"font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;line-height:1.55;color:#332B23;max-width:560px\">\n${caliente ? `<p style=\"background:#FCE8E6;border-left:3px solid #B3261E;padding:11px 14px;margin:0 0 18px;border-radius:0 6px 6px 0\">\n<b>Lead HOT.</b> Proyecto definido, presupuesto y plazo cercano.<br>WhatsApp en menos de 2 horas laborables.</p>` : ''}\n<h2 style=\"margin:0 0 2px;font-size:20px;color:#14100D\">${esc(d.nombre || 'Sin nombre')}</h2>\n<p style=\"margin:0 0 18px;color:#7C7266;font-size:13px\">${esc(ORIGEN[d.origen] || d.origen || '')}</p>\n<table style=\"border-collapse:collapse;font-size:14px\">${filas}</table>\n<p style=\"margin:24px 0 0\">\n${tel ? `<a href=\"https://wa.me/${tel}\" style=\"background:#8C5E32;color:#fff;padding:11px 20px;border-radius:999px;text-decoration:none;display:inline-block;font-weight:600\">Escribir por WhatsApp</a>&nbsp;&nbsp;` : ''}\n<a href=\"https://antic-barcelona-113.vercel.app/crm\" style=\"color:#8C5E32;text-decoration:none\">Abrir el CRM →</a></p>\n<p style=\"margin-top:26px;color:#A79C8E;font-size:12px\">Antic Barcelona 113 · aviso automático</p></div>`;\n\n// ── Correo al lead con la guía ───────────────────────────────────────────\n// Lo prometemos en el anuncio: si no llega, hemos pagado por un clic y hemos\n// quedado mal. Va aquí y no en Apps Script para no depender de un despliegue.\nconst nombre = String(d.nombre || '').trim().split(' ')[0];\nconst htmlGuia = `<div style=\"font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.65;color:#332B23;max-width:560px\">\n<p>Hola${nombre ? ' ' + esc(nombre) : ''},</p>\n<p>Aquí tienes la guía. Son siete apartados con lo que preguntamos a todos\nnuestros clientes antes de empezar: medidas, comensales, maderas, acabados,\nqué encarece una pieza de verdad y los plazos reales.</p>\n<p>Si te quedas con una sola cosa, que sea la tabla de medidas del apartado\ndos. Es la que evita el error más caro: encargar una mesa que no deja pasar\npor detrás de las sillas.</p>\n<p>Y si ya tienes un espacio concreto en la cabeza, cuéntanoslo y te decimos\nqué encaja:<br>\n<a href=\"https://antic-barcelona-113.vercel.app/cuestionario\" style=\"color:#8C5E32\">Diseña tu pieza →</a></p>\n<p style=\"color:#7C7266;font-size:14px;margin-top:26px\">Un saludo,<br>\nEl equipo de Antic Barcelona 113<br>\nTaller en Terrassa · +34 665 521 684</p></div>`;\n\nreturn [{ json: {\n  asunto, html,\n  esGuia: d.origen === 'guia' && !!d.email,\n  emailLead: d.email || '',\n  asuntoGuia: 'Tu guía para elegir la mesa perfecta',\n  htmlGuia,\n} }];"
       }
     },
     {
@@ -63,6 +63,87 @@
           "name": "SMTP Gmail · info@maikelechevarria.com"
         }
       }
+    },
+    {
+      "id": "esguia",
+      "name": "¿Viene de la guía?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        280,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "g1",
+              "leftValue": "={{ $json.esGuia }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "bajarpdf",
+      "name": "Descargar la guía",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        180
+      ],
+      "parameters": {
+        "url": "https://antic-barcelona-113.vercel.app/descargas/guia-mesa-perfecta-antic-barcelona-113.pdf",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "enviarguia",
+      "name": "Mandar la guía al lead",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        180
+      ],
+      "parameters": {
+        "fromEmail": "Antic Barcelona 113 <info@maikelechevarria.com>",
+        "toEmail": "={{ $('Componer los correos').item.json.emailLead }}",
+        "subject": "={{ $('Componer los correos').item.json.asuntoGuia }}",
+        "html": "={{ $('Componer los correos').item.json.htmlGuia }}",
+        "options": {
+          "attachments": "data",
+          "replyTo": "info@anticbarcelona113.com"
+        }
+      },
+      "credentials": {
+        "smtp": {
+          "id": "2lt9aBFiTuuZWMV7",
+          "name": "SMTP Gmail · info@maikelechevarria.com"
+        }
+      }
     }
   ],
   "connections": {
@@ -70,18 +151,46 @@
       "main": [
         [
           {
-            "node": "Componer el aviso",
+            "node": "Componer los correos",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Componer el aviso": {
+    "Componer los correos": {
       "main": [
         [
           {
             "node": "Mandar el correo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Viene de la guía?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Viene de la guía?": {
+      "main": [
+        [
+          {
+            "node": "Descargar la guía",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Descargar la guía": {
+      "main": [
+        [
+          {
+            "node": "Mandar la guía al lead",
             "type": "main",
             "index": 0
           }
