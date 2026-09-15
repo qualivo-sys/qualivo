@@ -285,7 +285,8 @@ async function build() {
   );
   const lower = orderNames.map((n) => n.toLowerCase());
   const iLlam = lower.indexOf('leads llamados');
-  const iProp = lower.indexOf('propuesta enviada');
+  // "Propuesta enviada" se renombra a "Entrevistado" en la nueva estructura: aceptamos ambos.
+  const iProp = lower.indexOf('propuesta enviada') >= 0 ? lower.indexOf('propuesta enviada') : lower.indexOf('entrevistado');
 
   // Todas las oportunidades (paginado por cursor)
   let url = `${GHL}/opportunities/search?location_id=${encodeURIComponent(loc)}&limit=100`;
@@ -305,7 +306,8 @@ async function build() {
     const status = (o.status || '').toLowerCase();
     const el = etapa.trim().toLowerCase();
     const descartada = el === 'no cualificada';
-    const matricula = el === 'alumna activa' ? 1 : 0;
+    // "Alumna activa" se renombra a "Alumna matriculada": contamos ambas como matrícula.
+    const matricula = (el === 'alumna activa' || el === 'alumna matriculada') ? 1 : 0;
     const perdido = status === 'lost' ? 1 : 0;
     const abandonado = status === 'abandoned' ? 1 : 0;
     const pendiente = status === 'open' && !matricula ? 1 : 0;
