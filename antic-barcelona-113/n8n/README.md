@@ -62,9 +62,31 @@ Lead nuevo · Sergi Bonet
 Dentro: aviso rojo si es HOT con el SLA de 2 horas, todo lo que contestó,
 botón de WhatsApp que abre la conversación con su número y enlace al CRM.
 
+Va a `info@maikelechevarria.com` y a `info@anticbarcelona113.es`. Para cambiar
+la lista, el campo `toEmail` del nodo **Mandar el correo** admite varios
+separados por coma.
+
 Sale desde la credencial SMTP `info@maikelechevarria.com`, que ya existía en
-el n8n. Para añadir destinatarios, el campo `toEmail` del nodo **Mandar el
-correo** admite varios separados por coma.
+el n8n.
+
+### Reenviar avisos de leads que ya entraron
+
+Sirve para poner al día a alguien que se acaba de añadir a la lista. Se manda
+el mismo cuerpo con `reenvio: true`, y entonces el asunto lleva «Copia ·»
+delante y **no se le vuelve a mandar la guía al lead**, que ya la recibió.
+
+```
+curl -X POST https://qualivo.app.n8n.cloud/webhook/ab113-lead \
+  -H 'Content-Type: application/json' -H "x-ab113-secret: $SECRETO" \
+  -d '{"reenvio":true,"fecha_original":"15/09 a las 16:40",
+       "origen":"guia","nombre":"Silvia","email":"..."}'
+```
+
+### Por qué el webhook responde al recibir
+
+Con dos ramas —el aviso y la guía—, `lastNode` no sabe cuál es la última y
+devolvía 500 aunque los dos correos hubieran salido. Un aviso no necesita
+esperar respuesta, así que contesta 200 al recibir y procesa después.
 
 ## Volver a montarlo
 
