@@ -1,0 +1,161 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG}
+#fondo{position:absolute;inset:0;background:#E8590C}
+#tex{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:60}
+.rec{position:absolute;opacity:0;z-index:10}
+.tp{position:absolute;opacity:0;z-index:20}
+.big{font-family:Anton;line-height:.9;text-transform:uppercase}
+#tl{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:15;overflow:visible}
+#filas{position:absolute;left:72px;top:900px;width:936px;z-index:20}
+.fila{display:flex;justify-content:space-between;align-items:center;background:#0A0A0B;color:#F2EEE6;border-radius:18px;padding:26px 34px;margin-bottom:18px;font-size:34px;font-weight:600;opacity:0}
+.fila b{color:#FF7A33;font-family:Anton;font-size:40px;font-weight:400;white-space:nowrap}
+#circ{position:absolute;left:72px;top:1180px;width:936px;display:flex;justify-content:space-between;z-index:20}
+.c{width:210px;height:210px;border-radius:50%;border:8px solid #0A0A0B;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:36px;color:#0A0A0B;opacity:0}
+.pie{position:absolute;bottom:170px;font-size:22px;z-index:30;color:rgba(10,10,11,.5)}
+.pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px}
+</style>
+<div id="e">
+  <div id="fondo"></div>
+  <img class="rec" id="megafono"   src="rec/megafono-rec.png">
+  <img class="rec" id="monedas"    src="rec/monedas-rec.png">
+  <img class="rec" id="laptop"     src="rec/laptop-rec.png">
+  <img class="rec" id="auricular"  src="rec/auricular-rec.png">
+  <img class="rec" id="calendario" src="rec/calendario-rec.png">
+  <img class="rec" id="papeles"    src="rec/papeles-rec.png">
+  <img class="rec" id="reloj"      src="rec/reloj-rec.png">
+  <img class="rec" id="papelera"   src="rec/papelera-rec.png">
+  <img class="rec" id="lupa"       src="rec/lupa-rec.png">
+  <img class="rec" id="dedo"       src="rec/dedo-rec.png">
+  <img class="rec" id="sobre"      src="rec/sobre-rec.png">
+  <svg id="tl" viewBox="0 0 1080 1920"></svg>
+  <div id="filas"></div>
+  <div id="circ"></div>
+  <div class="tp big" id="t1"></div>
+  <div class="tp" id="t2"></div>
+  <svg id="tex" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="1080" height="1920" filter="url(#n)" opacity="0.30"/></svg>
+  <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
+</div>
+<script>
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.4);
+const back=x=>{const c=1.8,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+const RECS=['megafono','monedas','laptop','auricular','calendario','papeles','reloj','papelera','lupa','dedo','sobre'];
+function obj(id,p,css,tr){const n=$(id); if(p<=0){n.style.opacity=0;return;} n.style.cssText=css; n.style.opacity=1; n.style.transform=tr;}
+function T1(html,css,p,tr){const n=$('t1'); n.innerHTML=html; n.style.cssText=css; n.style.opacity=p; n.style.transform=tr||'';}
+function T2(html,css,p,tr){const n=$('t2'); n.innerHTML=html; n.style.cssText=css; n.style.opacity=p; n.style.transform=tr||'';}
+const T0=[0.40,4.95,7.30,13.05,15.95,24.00,28.50,31.85,36.25,40.40,46.70,50.15], FIN=58.6;
+
+// el recorrido: nodos en linea, con etiquetas, y un nodo marcado
+function timeline(y,labels,opts){
+  const o=Object.assign({lit:-1,marca:-1,arco:0,equis:0,rayos:0,color:'#0A0A0B',show:1,labelColor:'#0A0A0B',marcaLabel:'#FF7A33'},opts||{});
+  if(!o.show){$('tl').innerHTML='';return;}
+  const n=labels.length, x0=110, x1=970, paso=(x1-x0)/(n-1);
+  let s=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="${o.color}" stroke-width="6" opacity=".55"/>`;
+  labels.forEach((l,i)=>{const x=x0+i*paso; const on=i<=o.lit; const m=i===o.marca;
+    s+=`<circle cx="${x}" cy="${y}" r="${m?26:18}" fill="${(on||m)?'#FF7A33':o.color}" ${m?'':''}/>`;
+    s+=`<text x="${x}" y="${y+66}" text-anchor="middle" font-family="SG" font-size="24" font-weight="700" fill="${m?o.marcaLabel:o.labelColor}">${l}</text>`;
+    if(m&&o.rayos>0){const R=o.rayos; for(let k=0;k<6;k++){const a=k*Math.PI/3-Math.PI/2; s+=`<line x1="${x+Math.cos(a)*44}" y1="${y+Math.sin(a)*44}" x2="${x+Math.cos(a)*(44+38*R)}" y2="${y+Math.sin(a)*(44+38*R)}" stroke="#FF7A33" stroke-width="8" stroke-linecap="round"/>`;}}
+  });
+  if(o.arco>0){const xa=x0+1*paso, xb=x0+3*paso+40; const L=900;
+    s+=`<path d="M${xa} ${y-20} C ${xa+150} ${y-260}, ${xb-120} ${y-260}, ${xb} ${y-60}" fill="none" stroke="#FF7A33" stroke-width="9" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-o.arco)}" stroke-linecap="round"/>`;}
+  if(o.equis>0){const xb=x0+3*paso+40, q=o.equis; s+=`<path d="M${xb-34} ${y-94} l ${68*q} ${68*q} M${xb+34} ${y-94} l ${-68*q} ${68*q}" stroke="#FF7A33" stroke-width="12" stroke-linecap="round"/>`;}
+  $('tl').innerHTML=s;
+}
+const FILAS=[['Lead sin contactar','3 días'],['Respuesta tardía','11 días'],['Presupuesto sin seguimiento','27 días'],['Reunión sin siguiente paso','46 días']];
+$('filas').innerHTML=FILAS.map(f=>`<div class="fila"><span>${f[0]}</span><b>${f[1]}</b></div>`).join('');
+$('circ').innerHTML=['HubSpot','Salesforce','Pipedrive','…'].map(c=>`<div class="c">${c}</div>`).join('');
+
+window.setT=function(t){
+  RECS.forEach(i=>$(i).style.opacity=0); $('t1').style.opacity=0; $('t2').style.opacity=0; $('tl').innerHTML='';
+  [...document.querySelectorAll('.fila,.c')].forEach(n=>n.style.opacity=0);
+  let k=0; for(let i=0;i<T0.length;i++) if(t>=T0[i]) k=i;
+  const lt=t-T0[k], dur=(k<T0.length-1?T0[k+1]:FIN)-T0[k];
+  const crema = k===3||k===6||k===11;
+  $('fondo').style.background = crema?'#F4F1EB':'#E8590C';
+  $('pr').style.color = crema?'#E8590C':'#0A0A0B';
+  const TIN='#0A0A0B', NAR='#E8590C';
+  const big=(h,top,size,color,delay)=>{const a=nm(lt,delay||.08,(delay||.08)+.5); T1(h,`position:absolute;left:64px;top:${top}px;width:960px;font-size:${size}px;color:${color||TIN};z-index:20`,a,`translateX(${(1-back(a))*-60}px)`);};
+  const sub=(h,top,delay,color)=>{const a=nm(lt,delay,delay+.45); T2(h,`position:absolute;left:64px;top:${top}px;width:940px;font-size:42px;font-weight:600;line-height:1.3;color:${color||TIN};z-index:20`,a,`translateY(${(1-out(a))*28}px)`);};
+
+  if(k===0){ // metes dinero en anuncios
+    big('Metes dinero<br>en anuncios.',250,132);
+    sub('Anuncios · web · formularios',600,1.4);
+    const m=nm(lt,.5,1.15); obj('megafono',m,'position:absolute;width:520px;left:470px;top:760px;z-index:10',`translate(${(1-back(m))*320}px,${(1-back(m))*-120}px) rotate(${(1-out(m))*-120+12}deg)`);
+    const c=nm(lt,1.9,2.55); obj('monedas',c,'position:absolute;width:400px;left:90px;top:1180px;z-index:10',`translateY(${(1-back(c))*500}px) rotate(${-6+6*out(c)}deg)`);
+  }
+  else if(k===1){ // van a parar a tu CRM
+    big('Van a parar<br>a tu CRM.',250,132);
+    const l=nm(lt,.35,1.0); obj('laptop',l,'position:absolute;width:760px;left:160px;top:760px;z-index:10',`translateY(${(1-back(l))*-700}px) rotate(${(1-out(l))*18+4}deg) scale(${.7+.3*back(l)})`);
+  }
+  else if(k===2){ // tu gente se pone con ellos
+    big('Y tu gente<br>se pone<br>con ellos.',250,124);
+    sub('Llamadas. Reuniones.<br>Presupuestos.',700,2.2);
+    const a=nm(lt,.4,1.0); obj('auricular',a,'position:absolute;width:420px;left:60px;top:900px;z-index:11',`translate(${(1-back(a))*-360}px,0) rotate(${(1-out(a))*-90-14}deg)`);
+    const c=nm(lt,1.2,1.8); obj('calendario',c,'position:absolute;width:380px;left:600px;top:940px;z-index:10',`translate(${(1-back(c))*380}px,0) rotate(${(1-out(c))*40+8}deg)`);
+    const p=nm(lt,2.4,3.0); obj('papeles',p,'position:absolute;width:420px;left:330px;top:1240px;z-index:12',`translateY(${(1-back(p))*420}px) rotate(${-4+4*out(p)}deg)`);
+  }
+  else if(k===3){ // pero no todos, sobre crema
+    big('Pero no todos<br>acaban siendo<br>clientes.',250,124);
+    timeline(1240,['Lead','Contacto','Reunión','Presup.','Cliente'],{arco:out(nm(lt,.9,1.9)),equis:out(nm(lt,1.9,2.25))});
+  }
+  else if(k===4){ // algunos se quedan por el camino
+    big('Algunos<br>se quedan<br>por el camino.',250,118);
+    const r=nm(lt,.3,.9); obj('reloj',r,'position:absolute;width:300px;left:740px;top:560px;z-index:10',`translate(${(1-back(r))*300}px,${(1-back(r))*-150}px) rotate(${(1-out(r))*-140+10}deg)`);
+    [...document.querySelectorAll('.fila')].forEach((f,i)=>{const p=nm(lt,1.3+i*1.15,1.3+i*1.15+.5); f.style.opacity=p; f.style.transform=`translateX(${(1-back(p))*-120}px)`;});
+    $('filas').style.top='900px';
+  }
+  else if(k===5){ // y ahí se te van clientes
+    big('Y ahí<br>se te van<br>clientes.',250,132);
+    sub('Sin que nadie se dé cuenta.',700,2.6);
+    const b=nm(lt,.3,.9); obj('papelera',b,'position:absolute;width:520px;left:280px;top:1040px;z-index:10',`translateY(${(1-back(b))*520}px) rotate(${(1-out(b))*10-3}deg)`);
+    const q=nm(lt,1.2,2.4); if(q>0&&q<1){ obj('papeles',1,'position:absolute;width:300px;left:390px;top:640px;z-index:11',`translateY(${q*q*480}px) rotate(${q*140}deg) scale(${1-q*.5})`); $('papeles').style.opacity=1-q*q; }
+  }
+  else if(k===6){ // nosotros buscamos exactamente dónde, sobre crema
+    big('Nosotros<br>buscamos<br>exactamente<br>dónde.',250,112);
+    timeline(1300,['Captación','Contacto','Ventas','Cierre'],{marca:1});
+    const l=nm(lt,.9,1.6); obj('lupa',l,'position:absolute;width:420px;left:210px;top:920px;z-index:12',`translate(${(1-back(l))*420}px,${(1-back(l))*-260}px) rotate(${(1-out(l))*80-18}deg)`);
+  }
+  else if(k===7){ // miramos todo el recorrido
+    big('Miramos<br>todo el<br>recorrido.',250,132);
+    sub('De la captación a la venta.',760,.9);
+    const l=nm(lt,.4,1.0); obj('laptop',l,'position:absolute;width:420px;left:600px;top:880px;z-index:10',`translate(${(1-back(l))*300}px,0) rotate(${(1-out(l))*20+6}deg)`);
+    const lit=Math.floor(out(nm(lt,1.4,3.6))*4)-1;
+    timeline(1380,['Captación','Contacto','Ventas','Cierre'],{lit:lit});
+  }
+  else if(k===8){ // metemos IA justo en ese punto
+    big('Y metemos IA<br>a trabajar<br>justo<br>en ese punto.',250,112);
+    const r=.6+.4*Math.abs(Math.sin(lt*5.5));
+    timeline(1340,['Captación','Contacto','Ventas','Cierre'],{marca:2,marcaLabel:'#F4F1EB',rayos: lt>1.0? r : 0});
+    const d=nm(lt,.5,1.15); obj('dedo',d,'position:absolute;width:560px;left:560px;top:1010px;z-index:12',`translate(${(1-back(d))*420}px,${(1-back(d))*-60}px) rotate(${(1-out(d))*30+22}deg)`);
+  }
+  else if(k===9){ // en lo que ya usas
+    big('En lo que<br>ya usas.',250,132);
+    sub('Sin cambiar de CRM.<br>Sin otra herramienta más.',600,2.4);
+    const l=nm(lt,.4,1.0); obj('laptop',l,'position:absolute;width:520px;left:280px;top:820px;z-index:10',`translateY(${(1-back(l))*-500}px) scale(${.7+.3*back(l)})`);
+    [...document.querySelectorAll('.c')].forEach((c,i)=>{const p=nm(lt,1.2+i*.22,1.2+i*.22+.4); c.style.opacity=p; c.style.transform=`scale(${.4+.6*back(p)}) rotate(${(1-out(p))*-25}deg)`;});
+    $('circ').style.top='1330px';
+  }
+  else if(k===10){ // para que más lleguen a cliente
+    big('Para que más<br>de los que<br>entran lleguen<br>a cliente.',250,108);
+    const lit=Math.floor(out(nm(lt,.4,2.2))*5)-1;
+    timeline(1440,['Lead','Contacto','Reunión','Presup.','Cliente'],{lit:lit,marca:lit>=4?4:-1,marcaLabel:'#F4F1EB',rayos:lit>=4?.6+.4*Math.abs(Math.sin(lt*6)):0});
+    const s=nm(lt,.3,2.2); obj('sobre',s,'position:absolute;width:260px;left:0;top:1150px;z-index:12',`translate(${100+out(s)*700}px,${Math.sin(s*Math.PI)*-160}px) rotate(${-20+out(s)*40}deg)`);
+  }
+  else { // cierre, sobre crema
+    const a=nm(lt,.2,.7); T1('Qualivo',`position:absolute;left:64px;top:560px;width:960px;font-size:190px;color:${TIN};z-index:20;text-transform:none`,a,`scale(${.9+.1*back(a)})`);
+    const b=nm(lt,1.3,1.9); T2(`Detectamos dónde se te pierden clientes en captación y ventas.<br><br><span style="color:${NAR}">Y lo arreglamos con IA, en el sistema que ya tienes.</span>`,`position:absolute;left:64px;top:830px;width:940px;font-size:50px;font-weight:600;line-height:1.3;color:${TIN};z-index:20`,b,`translateY(${(1-out(b))*30}px)`);
+    const u=out(nm(lt,4.2,5.0)); $('tl').innerHTML=`<path d="M64 1400 C 300 1370, 700 1430, 1016 1390" fill="none" stroke="#E8590C" stroke-width="14" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="${1000*(1-u)}"/>`;
+  }
+  // golpe de camara en cada corte
+  const g=nm(lt,0,.16); $('e').style.transform=`translate(${(1-g)*16}px,${(1-g)*-9}px)`;
+};
+window.setT(0);
+</script>
