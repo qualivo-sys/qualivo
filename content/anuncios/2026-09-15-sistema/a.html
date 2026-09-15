@@ -1,0 +1,103 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#3a3a3a;padding:40px}
+.p{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;margin:0 auto 40px;
+   background:#F2EEE6;color:#0A0A0B;display:flex;flex-direction:column}
+.cuerpo{padding:76px 72px 148px;display:flex;flex-direction:column;height:100%}
+.para{font-size:26px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#E8590C}
+.dolor{font-family:Anton;font-size:112px;line-height:.95;text-transform:uppercase;margin-top:30px}
+.linea{height:9px;background:#E8590C;margin:46px 0 40px;width:210px}
+.hac{font-size:46px;line-height:1.32;font-weight:500;margin-bottom:auto}
+.hac b{font-weight:700;background:#FBE896;color:#0A0A0B;padding:2px 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.ben{font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.2;color:#E8590C}
+.ben span{display:block}
+.marca{position:absolute;bottom:44px;right:72px;font-family:Anton;font-size:28px;color:#E8590C}
+.aut{position:absolute;bottom:44px;left:72px;font-size:24px;color:rgba(10,10,11,.5)}
+
+/* --- simulacion de pantalla --- */
+.top{padding:64px 66px 30px}
+.rotulo{font-size:25px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#E8590C}
+.titu{font-family:Anton;font-size:82px;line-height:.98;text-transform:uppercase;margin-top:20px}
+.p.sim{padding-bottom:112px}
+.pant{margin:0 46px;background:#fff;border-radius:22px;box-shadow:0 26px 60px rgba(0,0,0,.20);overflow:hidden;flex:1}
+.barra{background:#1F2430;padding:20px 26px;display:flex;align-items:center;gap:12px}
+.punto{width:13px;height:13px;border-radius:50%;background:#4A5163}
+.barra .tit{color:#C7CCD8;font-size:23px;margin-left:16px;font-weight:600}
+.fila{display:flex;align-items:center;padding:25px 30px;border-bottom:1px solid #EAEAEA;gap:20px}
+.fila:last-child{border-bottom:none}
+.ini{width:52px;height:52px;border-radius:50%;background:#E9EDF5;color:#5A6377;font-weight:700;
+     display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.nom{font-size:29px;font-weight:600;flex:1;line-height:1.25}
+.nom em{display:block;font-style:normal;font-size:22px;color:#8A8F9C;font-weight:500;margin-top:5px}
+.tag{font-size:22px;font-weight:700;padding:9px 17px;border-radius:999px;white-space:nowrap}
+.rojo{background:#FDE7E2;color:#C2410C}
+.gris{background:#F0F0F0;color:#8A8F9C}
+.pie{padding:34px 66px 0;font-size:40px;line-height:1.3;font-weight:500}
+.pie b{font-weight:700;background:#FBE896;padding:2px 10px}
+.gar{margin:24px 66px 6px;background:#0A0A0B;color:#F2EEE6;border-radius:16px;padding:26px 30px;
+     font-size:30px;line-height:1.35;font-weight:600}
+.gar b{color:#FF7A33}
+</style>
+
+<!-- 1 · la escena del correo que funciono -->
+<div class="p"><div class="cuerpo">
+  <div class="para">Para empresas de servicios de 5 a 50</div>
+  <div class="dolor">Tu CRM está<br>lleno de dinero<br>que nadie<br>ha vuelto<br>a tocar.</div>
+  <div class="linea"></div>
+  <div class="hac">Ponemos un agente dentro del sistema que <b>ya tienes</b>. No cambiamos de herramienta, no migramos nada.</div>
+  <div class="ben">Si el número no se mueve,<span>no pagas el piloto.</span></div>
+  <div class="aut">@maikel.echevarria</div><div class="marca">QUALIVO.IO</div>
+</div></div>
+
+<!-- 2 · simulacion: el CRM con oportunidades muertas -->
+<div class="p sim">
+  <div class="top">
+    <div class="rotulo">Tu CRM ahora mismo</div>
+    <div class="titu">Esto es dinero.<br>Y lleva meses parado.</div>
+  </div>
+  <div class="pant">
+    <div class="barra"><span class="punto"></span><span class="punto"></span><span class="punto"></span>
+      <span class="tit">Oportunidades abiertas</span></div>
+    <div class="fila"><div class="ini">MR</div><div class="nom">Presupuesto reformas<em>Pidió precio el 12 de mayo</em></div><div class="tag rojo">126 días</div></div>
+    <div class="fila"><div class="ini">JC</div><div class="nom">Instalación oficinas<em>«Llámame después del verano»</em></div><div class="tag rojo">98 días</div></div>
+    <div class="fila"><div class="ini">AP</div><div class="nom">Mantenimiento anual<em>Abrió el presupuesto 4 veces</em></div><div class="tag rojo">61 días</div></div>
+    <div class="fila"><div class="ini">LG</div><div class="nom">Proyecto llave en mano<em>Sin actividad</em></div><div class="tag rojo">44 días</div></div>
+    <div class="fila"><div class="ini">+ 37</div><div class="nom">Más oportunidades abiertas<em>Nadie las ha mirado este mes</em></div><div class="tag gris">—</div></div>
+  </div>
+  <div class="pie">Un agente las <b>revisa todas cada día</b> y avisa a quien toca.</div>
+  <div class="gar">Acordamos un número. Si en un mes no se mueve, <b>no pagas el piloto.</b></div>
+  <div class="aut">@maikel.echevarria</div><div class="marca">QUALIVO.IO</div>
+</div>
+
+<!-- 3 · la garantia como titular -->
+<div class="p"><div class="cuerpo">
+  <div class="para">Para empresas de servicios de 5 a 50</div>
+  <div class="dolor">Si no se mueve<br>el número,<br>no pagas.</div>
+  <div class="linea"></div>
+  <div class="hac">Elegimos juntos <b>una cifra concreta</b>. La medimos el día 1 y el día 30. Está por escrito antes de empezar.</div>
+  <div class="ben">Sin permanencia.<span>Sin letra pequeña.</span></div>
+  <div class="aut">@maikel.echevarria</div><div class="marca">QUALIVO.IO</div>
+</div></div>
+
+<!-- 4 · simulacion: la bandeja sin responder -->
+<div class="p sim">
+  <div class="top">
+    <div class="rotulo">Tus formularios de esta semana</div>
+    <div class="titu">Llegaron.<br>Nadie los abrió.</div>
+  </div>
+  <div class="pant">
+    <div class="barra"><span class="punto"></span><span class="punto"></span><span class="punto"></span>
+      <span class="tit">Entrada · sin leer</span></div>
+    <div class="fila"><div class="ini">✉</div><div class="nom">Nuevo contacto desde la web<em>Lunes, 23:41</em></div><div class="tag rojo">sin abrir</div></div>
+    <div class="fila"><div class="ini">✉</div><div class="nom">Nuevo contacto desde la web<em>Martes, 07:12</em></div><div class="tag rojo">sin abrir</div></div>
+    <div class="fila"><div class="ini">✉</div><div class="nom">Solicitud de presupuesto<em>Martes, 19:03</em></div><div class="tag rojo">sin abrir</div></div>
+    <div class="fila"><div class="ini">✉</div><div class="nom">Nuevo contacto desde la web<em>Miércoles, 14:28</em></div><div class="tag rojo">sin abrir</div></div>
+    <div class="fila"><div class="ini">✉</div><div class="nom">Solicitud de presupuesto<em>Jueves, 09:55</em></div><div class="tag rojo">sin abrir</div></div>
+  </div>
+  <div class="pie">Un agente <b>responde en un minuto</b>, a cualquier hora, y te lo deja listo.</div>
+  <div class="gar">Va dentro de tu sistema actual. <b>No hay que cambiar nada.</b></div>
+  <div class="aut">@maikel.echevarria</div><div class="marca">QUALIVO.IO</div>
+</div>
