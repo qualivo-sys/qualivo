@@ -17,6 +17,34 @@ FUENTES     Meta Ads API v21.0 sobre act_3453332464718877 (lectura, 10-sep) ·
 
 ---
 
+## 0 · ESTADO A 15-SEP-2026 · CUENTA APAGADA
+
+> Lo de abajo (secciones 1 en adelante) es la foto del **10-sep** y se conserva como registro.
+> Esta sección es la que manda hoy.
+
+```
+15-sep-2026 16:2x UTC · verificado por API tras el apagado
+CAMPAÑAS CAPACES DE GASTAR ........ 0
+QV_DIAG_LEADFORM_Sep26 ............ PAUSED (grupo y anuncio ACTIVE debajo)
+QV_DIAG_LANDING_Sep26 ............. PAUSED · nunca gastó
+GASTO TOTAL DEL EXPERIMENTO ....... 37,07 €  (14-sep 17,08 · 15-sep 20,01)
+APERTURAS DE FORMULARIO ........... 36
+ENVÍOS DEL FORMULARIO, DE PAGO .... 0
+```
+
+Apagado a petición de Maikel el 15-sep. Es una acción 🟡: frenar es lo único que este agente
+ejecuta solo, y es reversible con un clic sobre la campaña.
+
+**El acta completa, con el cálculo de por qué la hipótesis queda falsada y qué NO se puede
+concluir de 37 €, está en `paid/experimentos/2026-09-15-acta-de-apagado.md`.**
+
+Dos cosas siguen abiertas y ninguna cuesta dinero:
+
+1. **H0.1** · Meta dice `lead: 1`, el formulario dice 0 de pago. Se cierra mirando GoHighLevel.
+2. **El token de Meta sigue sin rotar**, sexto día, con alcance sobre 20+ cuentas de clientes.
+
+---
+
 ## 1 · LA RESPUESTA CORTA
 
 **Hay una sola campaña activa, lleva dos días, ha gastado 17,03 € y ha traído 0 leads.**

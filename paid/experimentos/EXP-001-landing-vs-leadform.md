@@ -4,7 +4,8 @@
 AGENTE       qualivo.paid
 ABIERTO      14-sep-2026
 FECHA DE MUERTE   28-sep-2026 · a los 14 días se mata o se escala
-ESTADO       ESPECIFICADO · pendiente de que Maikel active la rama de landing
+ESTADO       CERRADO SIN CORRER · 15-sep-2026 · la rama B nunca se activó
+CIERRE       ver paid/experimentos/2026-09-15-acta-de-apagado.md
 ```
 
 ## La pregunta
