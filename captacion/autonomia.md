@@ -4,10 +4,17 @@ Orden de Maikel: más autonomía, respuestas propuestas al momento, dejar de
 depender de él para lo rutinario. Esto es la regla que aplico a partir de ahora.
 Si algo de aquí no te encaja, se cambia y punto.
 
-## Salgo sin preguntar
+## Cómo van las respuestas a leads (corregido por Maikel el 15-sep)
 
-**Respuestas a leads**, redactadas y enviadas en el momento, cuando la respuesta
-cabe en una de estas:
+**Todas pasan por el chat antes de salir.** Ninguna se envía sin que Maikel la
+haya visto. Lo que cambia respecto a antes no es quién aprueba: es el reloj.
+
+Antes: la respuesta se trataba en el triaje del día siguiente, doce o veinte horas
+después. Ahora: en cuanto entra una respuesta, el aviso me despierta, redacto y la
+pego aquí en minutos. Maikel dice "va" y sale. La velocidad está en redactar al
+momento, no en saltarse a Maikel.
+
+Redacto sin preguntar nada cuando la respuesta cabe en una de estas:
 
 - Contestar una pregunta cuya respuesta ya está decidida: qué hacemos, qué es un
   agente, cómo empezamos, el precio dentro de la horquilla 1.000-2.500 €/mes,
@@ -18,7 +25,9 @@ cabe en una de estas:
 - Confirmar por escrito una supresión de datos.
 - Agradecer y seguir una derivación con nombre.
 
-**Operación**, sin consultar:
+Y en esos casos el borrador viene ya listo para enviar, sin preguntas previas.
+
+**Operación**, eso sí, sin consultar nada:
 
 - Cargar leads, pausar campañas por rebote o por la regla de las puertas,
   bloquear dominios, ajustar buzones, registrar todo en el CRM, arreglar los
@@ -37,9 +46,13 @@ cabe en una de estas:
 
 ## La regla de fondo
 
-Si para contestar tengo que decidir algo que no está decidido, te lo traigo. Si
-solo tengo que aplicar lo que ya está decidido, salgo. Y te lo cuento después,
-con el texto que mandé, no antes pidiendo permiso.
+Si para contestar tengo que decidir algo que no está decidido, te lo traigo con
+la pregunta. Si solo tengo que aplicar lo que ya está decidido, te lo traigo con
+el texto terminado y un "¿va?". En los dos casos pasa por ti; la diferencia es
+cuánto trabajo tienes que hacer tú.
+
+La operación del día a día no pasa por ti: cargar, pausar, bloquear, registrar y
+arreglar agentes lo hago y te lo cuento en el resumen.
 
 ## Lo que hace que esto funcione de verdad
 
