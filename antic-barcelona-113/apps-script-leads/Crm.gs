@@ -281,11 +281,14 @@ function resumenDiario() {
   var leads = leerLeads();
   var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
 
-  var sinTocar = leads.filter(function (l) { return l.estado === 'Nuevo'; })
-    .sort(function (a, b) { return new Date(a.fecha) - new Date(b.fecha); });
+  // Mismo criterio que la pestaña «Hoy» de /crm: lo que toca hoy, no todo lo
+  // que ha entrado. Un frío de guía tiene fecha a siete días y no sale aquí.
+  var sinTocar = leads.filter(function (l) {
+    return l.estado === 'Nuevo' && (!l.fecha_proxima || new Date(l.fecha_proxima) <= new Date());
+  }).sort(function (a, b) { return new Date(a.fecha) - new Date(b.fecha); });
   var vencidas = leads.filter(function (l) {
-    return ESTADOS_ABIERTOS.indexOf(l.estado) >= 0 && l.fecha_proxima &&
-      new Date(l.fecha_proxima) <= hoy;
+    return l.estado !== 'Nuevo' && ESTADOS_ABIERTOS.indexOf(l.estado) >= 0 &&
+      l.fecha_proxima && new Date(l.fecha_proxima) <= hoy;
   });
 
   if (!sinTocar.length && !vencidas.length) return;  // sin deberes, sin correo

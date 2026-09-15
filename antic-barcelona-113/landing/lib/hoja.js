@@ -163,7 +163,7 @@ export async function anadir(lead) {
   const datos = { ...lead, lead_id: id,
     estado: 'Nuevo',
     proxima_accion: primeraAccion(lead),
-    fecha_proxima: hoy(),
+    fecha_proxima: hoy() + diasDeEspera(lead),
     fecha: aSerie(lead.fecha) };
   const fila = COLUMNAS.map((c) => (datos[c] === undefined || datos[c] === null ? '' : datos[c]));
   // Sin insertDataOption=INSERT_ROWS: escribir en la primera fila libre en vez
@@ -249,6 +249,16 @@ function numero(v) {
   }
   const n = Number(t);
   return Number.isFinite(n) && n !== 0 ? n : '';
+}
+
+/**
+ * Cuándo toca mirarlo. Un frío que se ha descargado la guía no se llama hoy:
+ * si entra en la lista de hoy con todo lo demás, la lista deja de significar
+ * «esto hay que hacerlo» y se convierte en «esto ha entrado».
+ */
+function diasDeEspera(lead) {
+  if (lead.tier === 'HOT' || lead.tier === 'WARM') return 0;
+  return lead.origen === 'guia' ? 7 : 1;
 }
 
 /** El CRM no sirve si al abrirlo hay que decidir qué hacer. */

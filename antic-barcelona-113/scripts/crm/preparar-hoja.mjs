@@ -248,7 +248,7 @@ async function construirPanel(idPanel) {
   F('Coste por lead', `=IFERROR(${INV}/${mesLeads};"—")`);
   F('Coste por lead HOT', `=IFERROR(${INV}/${mesHot};"—")`);
   F('Coste por venta', `=IFERROR(${INV}/${mesVentas};"—")`);
-  F('Retorno sobre la inversión',
+  F('Facturación por euro invertido',
     `=IFERROR(SUMIFS(${c('importe')};${c('estado')};"Ganado";${c('fecha')};">="&${mes})/${INV};"—")`);
   F('');
   F('DE DÓNDE VIENEN', 'Leads', 'Ventas');
@@ -292,7 +292,7 @@ async function construirPanel(idPanel) {
   ['Facturado (ganado)', 'Pipeline abierto', 'Ticket medio ganado', 'Inversión en Meta este mes (€)',
    'Coste por lead', 'Coste por lead HOT', 'Coste por venta'].forEach(eur);
 
-  const iRoi = enc('Retorno sobre la inversión');
+  const iRoi = enc('Facturación por euro invertido');
   peticiones.push({ repeatCell: { range: { sheetId: idPanel, startRowIndex: iRoi, endRowIndex: iRoi + 1, startColumnIndex: 1, endColumnIndex: 2 },
     cell: { userEnteredFormat: { numberFormat: { type: 'NUMBER', pattern: '0.0"×"' } } },
     fields: 'userEnteredFormat.numberFormat' } });

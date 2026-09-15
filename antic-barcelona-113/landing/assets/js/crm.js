@@ -81,6 +81,14 @@
 
   // ── Selección ─────────────────────────────────────────────────────────────
 
+  function esHoy(v) {
+    var d = new Date(v);
+    if (isNaN(d)) return false;
+    var h = new Date();
+    return d.getFullYear() === h.getFullYear() && d.getMonth() === h.getMonth() &&
+      d.getDate() === h.getDate();
+  }
+
   function haVencido(l) {
     if (!l.fecha_proxima || ABIERTOS.indexOf(l.estado) < 0) return false;
     var d = new Date(l.fecha_proxima); d.setHours(23, 59, 59, 999);
@@ -88,10 +96,15 @@
   }
 
   function deHoy() {
-    // Lo que de verdad hay que hacer: lo que nadie ha tocado y lo que se pasó
-    // de fecha. Primero los HOT, y dentro de cada grupo, el que lleva más
-    // tiempo esperando.
-    return leads.filter(function (l) { return l.estado === 'Nuevo' || haVencido(l); })
+    // Lo que de verdad toca hoy: lo que tiene fecha para hoy o antes. Un lead
+    // nuevo entra solo porque se le pone fecha al crearlo, y uno frío que se
+    // bajó la guía entra dentro de siete días, no ahora. Contar todos los
+    // «Nuevo» convertía la lista en «lo que ha entrado» en vez de «lo que hay
+    // que hacer», que es justo lo que hace que nadie la mire.
+    return leads.filter(function (l) {
+      if (ABIERTOS.indexOf(l.estado) < 0) return false;
+      return !l.fecha_proxima || haVencido(l) || esHoy(l.fecha_proxima);
+    })
       .sort(function (a, b) {
         var pa = (a.tier === 'HOT' ? 0 : 1), pb = (b.tier === 'HOT' ? 0 : 1);
         if (pa !== pb) return pa - pb;
@@ -148,11 +161,14 @@
   function tarjeta(l) {
     var tel = String(l.telefono || '').replace(/\D/g, '');
     var hot = l.tier === 'HOT';
+    // Tres etiquetas como mucho: con cuatro la tarjeta se parte en dos líneas
+    // en un móvil y se lee peor justo donde más rápido hay que leerla. El
+    // origen es lo primero que sobra: está en la ficha.
     var chips = [];
     if (hot) chips.push('<span class="chip hot">Hot</span>');
     chips.push('<span class="chip' + (l.estado === 'Ganado' ? ' ok' : '') + '">' + esc(l.estado || 'Nuevo') + '</span>');
     if (haVencido(l)) chips.push('<span class="chip tarde">Vencido</span>');
-    chips.push('<span class="chip">' + esc(ORIGENES[l.origen] || l.origen || '—') + '</span>');
+    if (chips.length < 3) chips.push('<span class="chip">' + esc(ORIGENES[l.origen] || l.origen || '—') + '</span>');
 
     return '<button class="tarjeta' + (hot && l.estado === 'Nuevo' ? ' hot' : '') +
       '" data-id="' + esc(l.lead_id) + '">' +

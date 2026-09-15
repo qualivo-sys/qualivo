@@ -109,15 +109,18 @@ h2{font-family:var(--titulo);font-size:13px;letter-spacing:.14em;text-transform:
    propio carril horizontal en vez de dejar que empuje toda la página. */
 .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;
   border:1px solid var(--linea);background:var(--blanco)}
-table.creas{width:100%;min-width:400px;border-collapse:collapse;font-size:13px}
-table.creas th{text-align:right;font-family:var(--titulo);font-size:11px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-400);padding:10px 12px;background:var(--paper-000);font-weight:600}
+table.creas{width:100%;min-width:330px;border-collapse:collapse;font-size:13px}
+table.creas th{text-align:right;font-family:var(--titulo);font-size:10.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-400);padding:10px 7px;background:var(--paper-000);font-weight:600}
 table.creas th:first-child,table.creas td:first-child{text-align:left}
-table.creas td{padding:10px 12px;text-align:right;border-top:1px solid var(--paper-200)}
-table.creas td:first-child{color:var(--ink-700);max-width:150px;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
-table.creas th:not(:first-child),table.creas td:not(:first-child){
-  padding-left:8px;padding-right:8px;white-space:nowrap}
+table.creas td{padding:10px 7px;text-align:right;border-top:1px solid var(--paper-200)}
+/* El nombre de la creatividad cede sitio: las cuatro cifras de la derecha son
+   lo que se mira, y «Ventas» quedándose fuera de pantalla es perder el dato. */
+table.creas td:first-child{color:var(--ink-700);max-width:118px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;padding-left:12px}
+table.creas th:first-child{padding-left:12px}
+table.creas th:not(:first-child),table.creas td:not(:first-child){white-space:nowrap}
+table.creas td:last-child,table.creas th:last-child{padding-right:12px}
 table.creas td.destacada{font-weight:700;color:var(--ink-900)}
 .nota{font-size:12.5px;color:var(--ink-400);margin-top:10px;line-height:1.55}
 
