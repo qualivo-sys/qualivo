@@ -34,10 +34,24 @@ const ROTOS = [
 // Quince segundos dan para el saludo y poco más.
 const CORTA_SEG = 15;
 
+// Fallos de la telefonía: la llamada NUNCA llegó a sonar. Es distinto de que se
+// rompa a mitad, y confundir las dos cosas sale caro. El 15-sep le escribimos
+// «perdona, se nos ha cortado la llamada» a un lead cuyo teléfono no sonó
+// jamás, porque el troncal no pudo establecer la llamada. Desde su lado, ese
+// mensaje habla de algo que no ha pasado.
+//
+// Aquí no hay nada que disculpar con el contacto: no se ha enterado. El
+// problema es nuestro y el aviso va a Maikel.
+const NO_CONECTO = /failed-to-connect|outbound-call-failed|sip.*(fail|error)|no-answer-machine|provider-fault|cannot-connect/i;
+
 function clasificar(informe) {
   const razon = String(informe.endedReason || '').toLowerCase();
   const seg = Number(informe.durationSeconds || 0);
 
+  // Primero lo que ni siquiera llegó a sonar, antes del cajón genérico de error.
+  if (NO_CONECTO.test(razon)) {
+    return { estado: 'no_conecto', motivo: razon || 'sin_razon' };
+  }
   if (ROTOS.indexOf(razon) !== -1 || /error|failed/.test(razon)) {
     return { estado: 'roto', motivo: razon || 'sin_razon' };
   }
@@ -137,7 +151,28 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, estado: v.estado });
   }
 
-  // A partir de aquí algo se rompió.
+  // La llamada no llegó a establecerse. El contacto no sabe nada, así que no se
+  // le escribe: solo se deja constancia y se avisa a Maikel para que decida si
+  // se reintenta. Escribirle sería disculparse por algo que no ha ocurrido.
+  if (v.estado === 'no_conecto') {
+    if (contacto) {
+      try { await A.etiquetar(contacto.id, ['voz-no-conecto']); } catch (e) { /* no bloquea */ }
+    }
+    await avisar(
+      'Una llamada no llegó a salir' + (numero ? ' (' + numero + ')' : ''),
+      '<p style="font:16px/1.5 system-ui">La telefonía no pudo establecer la llamada. <b>El teléfono del contacto no ha sonado</b>, ' +
+      'así que no se le ha escrito nada.</p>' +
+      '<table style="font:14px/1.6 system-ui;border-collapse:collapse">' +
+      '<tr><td style="padding:4px 12px 4px 0"><b>Motivo</b></td><td>' + escapar(v.motivo) + '</td></tr>' +
+      '<tr><td style="padding:4px 12px 4px 0"><b>Teléfono</b></td><td>' + escapar(numero) + '</td></tr>' +
+      '</table>' +
+      '<p style="font:13px/1.5 system-ui;color:#666">Esto es un problema del número saliente, no del agente. Si se repite, ' +
+      'el sistema de voz está caído aunque el número figure como activo.</p>'
+    );
+    return res.status(200).json({ ok: true, estado: v.estado, motivo: v.motivo });
+  }
+
+  // A partir de aquí la llamada sí se estableció y algo se rompió a mitad.
   const nombre = (contacto && (contacto.firstName || contacto.name)) || '';
   const acciones = [];
 
