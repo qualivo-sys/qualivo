@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
       fields: 'campaign_name,spend,impressions,clicks,ctr,cpc,actions', limit: '25'
     });
     for (const r of (d.data || [])) {
-      if (!/^QV_DIAG/.test(r.campaign_name || '')) continue;
+      if (!/^QV_(DIAG|CRM)/.test(r.campaign_name || '')) continue;
       const acts = {};
       (r.actions || []).forEach(function (a) { acts[a.action_type] = a.value; });
       const leads = Number(acts.lead || acts['onsite_conversion.lead_grouped'] || 0);
@@ -99,7 +99,7 @@ module.exports = async function handler(req, res) {
   }
 
   const tabla = filas.map(function (f) {
-    return '<tr><td style="padding:8px 12px;border-bottom:1px solid #eee">' + f.nombre.replace('QV_DIAG_', '').replace('_Sep26', '') +
+    return '<tr><td style="padding:8px 12px;border-bottom:1px solid #eee">' + f.nombre.replace(/^QV_/, '').replace('_Sep26', '') +
       '</td><td align="right" style="padding:8px 12px;border-bottom:1px solid #eee">' + eur(f.gasto) +
       '</td><td align="right" style="padding:8px 12px;border-bottom:1px solid #eee">' + f.clics +
       '</td><td align="right" style="padding:8px 12px;border-bottom:1px solid #eee">' + Number(f.ctr || 0).toFixed(2) + ' %' +
