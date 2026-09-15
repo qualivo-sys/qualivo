@@ -64,3 +64,69 @@ identidad propia y crea motivo para ver las demás.
 - El dato real que va en el hueco `proof`.
 - Si la campaña es de marca personal o corporativa. Hoy el handle y el dominio
   conviven sin jerarquía resuelta.
+
+---
+
+# Versión de post único
+
+`post-unico.html` · `render-post.mjs` · salidas `qualivo-post-organico.png` y
+`qualivo-post-pago.png`.
+
+Un post suelto no es una pieza de la serie recortada. Cambia el trabajo que
+tiene que hacer la imagen, y por tanto cambian titular y diagrama.
+
+## Qué cambia y por qué
+
+**El titular deja de ser una escena y pasa a ser un reencuadre.** En la serie,
+«te pidió precio a las 23:40» funciona porque las otras cinco piezas cubren al
+resto del público. Sola, esa escena solo le habla a quien tiene la fuga en la
+llamada, o sea a una minoría de quien la ve. El post único necesita un titular
+que le sirva a todos: «Tu dinero no se pierde en el anuncio. Se pierde después.»
+Reencuadra, crea tensión porque contradice donde mira todo el mundo, y prepara
+el diagrama.
+
+**El diagrama deja de localizar la fuga y pasa a ofrecerla.** En la serie se
+enciende un nodo porque la pieza ya ha elegido de qué habla. Aquí se muestran
+los seis, numerados, con los cinco posteriores al clic rotos por abajo y
+goteando. El lector se autodiagnostica. Esa es toda la mecánica del post.
+
+**La numeración no es decorativa.** Da al lector una respuesta de una sola
+pulsación, que es lo que convierte una impresión en conversación.
+
+**La llamada a la acción cambia según el canal.** En orgánico, la acción es
+responder con el número: fricción mínima, nativa del feed y genera conversación
+cualificada. En pago los comentarios no convierten, así que la barra lleva el
+diagnóstico y el dominio. Es la única diferencia entre las dos versiones.
+
+## Texto de acompañamiento, versión orgánica
+
+Los seis titulares de la serie no se pierden: bajan al pie de foto y se
+convierten en el desarrollo del post.
+
+```
+Casi todo el mundo mira el anuncio.
+
+El anuncio es el paso 01 de seis. Los otros cinco no los mira nadie.
+
+02 · La web. Rellena tres campos, ve el cuarto y cierra.
+03 · El contacto. Es el tercer formulario que rellena y para ti son tres personas.
+04 · La llamada. Te pidió precio a las 23:40 y le contestaste a las 10.
+05 · El seguimiento. Te dijo que en marzo no. Nadie ha vuelto a llamarle.
+06 · La venta. Cerraste ocho este mes y no sabes de qué anuncio salió ninguno.
+
+Cada uno de esos pasos gotea. Y nadie mide en cuál.
+
+Nosotros lo encontramos y lo arreglamos dentro del sistema que ya tienes.
+Sin migrar nada.
+
+15 minutos para decirte qué vemos. Un mes para moverlo.
+Si no se mueve, no pagas.
+
+¿En cuál se te va a ti? Dime el número.
+```
+
+## Cuál usar
+
+El post único es mejor primera pieza: instala la categoría y mide qué etapa
+duele más en la audiencia, leyendo los números que responde la gente. La serie
+funciona después, y ese dato decide por cuál de las seis empezar.

@@ -1,0 +1,126 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Qualivo · Post único "Se pierde después"</title>
+<link rel="stylesheet" href="./fonts/fonts.css">
+<style>
+  :root{--bg:#0F0F0F;--cream:#F0EBE1;--orange:#FF6A2B;--grey:#A8A39B;--hair:rgba(240,235,225,.22)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#2a2a2a;font-family:'Poppins',system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:28px;padding:28px}
+  .artboard{width:1080px;height:1350px;flex:0 0 auto;background:var(--bg);color:var(--cream);
+    padding:72px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .sp{flex-grow:1}
+
+  .bar{height:34px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:'Anton';font-size:27px;letter-spacing:.075em;color:var(--orange);line-height:1}
+  .kicker{font-size:15px;font-weight:600;letter-spacing:.16em;color:var(--cream);opacity:.45}
+
+  .head{flex:0 0 auto;display:flex;align-items:flex-start}
+  .head h1{font-family:'Anton';text-transform:uppercase;line-height:.96;font-weight:400;font-size:92px}
+  .head em{font-style:normal;color:var(--orange)}
+
+  /* Diagrama: la cadena entera, numerada y goteando en los cinco pasos posteriores */
+  .pipe{height:176px;display:flex;align-items:flex-start}
+  .node{width:96px;display:flex;flex-direction:column;align-items:center;flex:0 0 auto}
+  .numslot{height:28px;display:flex;align-items:flex-end;justify-content:center}
+  .num{font-family:'Anton';font-size:16px;letter-spacing:.09em;color:var(--orange);opacity:.9;line-height:1}
+  .node.src .num{color:var(--cream);opacity:.45}
+  .ring{height:90px;display:flex;align-items:center;justify-content:center}
+  .circ{width:72px;height:72px;border-radius:50%;border:1.6px solid var(--hair);
+    display:flex;align-items:center;justify-content:center}
+  .circ svg{width:28px;height:28px;stroke:var(--cream);fill:none;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+  .node:not(.src) .circ{border-bottom-color:var(--orange);border-bottom-width:2.6px}
+  .node.src .circ{border-color:rgba(240,235,225,.62)}
+  .node.src .circ svg{opacity:1}
+  .leak{height:30px;width:100%;position:relative}
+  .drop{position:absolute;left:50%;border-radius:50%;background:var(--orange)}
+  .p1{width:7px;height:7px;top:6px;margin-left:-3.5px;opacity:.95}
+  .p2{width:5px;height:5px;top:20px;margin-left:-2.5px;opacity:.55}
+  .label{height:22px;font-size:15px;font-weight:500;color:var(--cream);opacity:.5;
+    line-height:22px;white-space:nowrap}
+  .node.src .label{opacity:.8}
+  .conn{flex:1 1 auto;height:1.6px;background:var(--hair);margin-top:73px}
+
+  .support{height:60px;font-size:28px;font-weight:400;color:var(--grey);line-height:1.38;max-width:930px}
+  .fix{height:90px;font-size:33px;font-weight:600;line-height:1.34;max-width:930px}
+  .fix b{font-weight:600;color:var(--orange)}
+  .risk{height:52px;font-family:'Anton';font-size:47px;text-transform:uppercase;
+    color:var(--orange);line-height:52px}
+  .cta{height:92px;background:var(--orange);border-radius:14px;color:#0F0F0F;
+    display:flex;align-items:center;justify-content:center;gap:16px}
+  .cta .a{font-size:27px;font-weight:700}
+  .cta .b{font-family:'Anton';font-size:27px;letter-spacing:.07em;opacity:.62}
+  .foot{height:24px;display:flex;align-items:center;justify-content:space-between;
+    font-size:17px;color:var(--grey);opacity:.75}
+</style>
+<body></body>
+<script>
+const ICON = {
+  ad:'<svg viewBox="0 0 24 24"><path d="M4 9v6h3l6 4V5L7 9H4z"/><path d="M17.5 9.2a4 4 0 0 1 0 5.6"/><path d="M20 6.8a7.5 7.5 0 0 1 0 10.4"/></svg>',
+  web:'<svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.2"/><path d="M3 9h18"/><circle cx="6.6" cy="6.8" r=".7" fill="currentColor" stroke="none"/></svg>',
+  user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.8 19.5a7.2 7.2 0 0 1 14.4 0"/></svg>',
+  call:'<svg viewBox="0 0 24 24"><path d="M7.2 3.8 9.4 4l1.2 3.3-1.9 1.5a11.5 11.5 0 0 0 5.5 5.5l1.5-1.9 3.3 1.2.2 2.2a2 2 0 0 1-2.2 2.2A15.6 15.6 0 0 1 5 6a2 2 0 0 1 2.2-2.2z"/></svg>',
+  doc:'<svg viewBox="0 0 24 24"><rect x="5" y="3.2" width="14" height="17.6" rx="2.2"/><path d="M8.6 8h6.8M8.6 12h6.8M8.6 16h4.2"/></svg>',
+  chart:'<svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7.5 20v-6M12 20V6M16.5 20v-9"/></svg>'
+};
+const STAGES = [
+  {k:'ad',label:'Anuncio'},{k:'web',label:'Web'},{k:'user',label:'Contacto'},
+  {k:'call',label:'Llamada'},{k:'doc',label:'Seguimiento'},{k:'chart',label:'Venta'}
+];
+
+const HEAD    = 'Tu dinero no se pierde en el anuncio. <em>Se pierde después.</em>';
+const SUPPORT = 'Después del clic hay cinco pasos más. En todos se cae gente.';
+const FIX     = 'Encontramos la fuga y la arreglamos <b>dentro del sistema que ya tienes.</b>';
+const RISK    = 'Si no se mueve, no pagas.';
+
+/* Dos versiones del mismo post. Cambia solo la acción. */
+const VARIANTS = [
+  { slug:'organico', kicker:'DÓNDE SE VA EL DINERO',
+    cta:{a:'¿En cuál se te va a ti? Dime el número', b:'↓'},
+    foot:{l:'@maikel.echevarria', r:'qualivo.io'} },
+  { slug:'pago', kicker:'DÓNDE SE VA EL DINERO',
+    cta:{a:'Diagnóstico de 15 min en', b:'QUALIVO.IO'},
+    foot:{l:'@maikel.echevarria', r:'Un mes. Acordamos un número y lo movemos.'} }
+];
+
+function pipeline(){
+  return STAGES.map((s, n) => {
+    const conn = n > 0 ? '<div class="conn"></div>' : '';
+    const src  = n === 0;
+    return conn + `<div class="node${src ? ' src' : ''}">
+      <div class="numslot"><span class="num">0${n + 1}</span></div>
+      <div class="ring"><div class="circ">${ICON[s.k]}</div></div>
+      <div class="leak">${src ? '' : '<i class="drop p1"></i><i class="drop p2"></i>'}</div>
+      <div class="label">${s.label}</div>
+    </div>`;
+  }).join('');
+}
+
+document.body.innerHTML = VARIANTS.map(v => `
+  <section class="artboard" data-slug="${v.slug}">
+    <div class="bar"><div class="logo">QUALIVO</div><div class="kicker">${v.kicker}</div></div>
+    <div class="sp" style="flex-grow:.85"></div>
+    <div class="head"><h1>${HEAD}</h1></div>
+    <div class="sp" style="flex-grow:.7"></div>
+    <div class="pipe">${pipeline()}</div>
+    <div class="sp" style="flex-grow:.95"></div>
+    <div class="support">${SUPPORT}</div>
+    <div class="sp" style="flex-grow:.55"></div>
+    <div class="fix">${FIX}</div>
+    <div class="sp" style="flex-grow:1.05"></div>
+    <div class="risk">${RISK}</div>
+    <div class="sp" style="flex-grow:.3"></div>
+    <div class="cta"><span class="a">${v.cta.a}</span><span class="b">${v.cta.b}</span></div>
+    <div class="sp" style="flex-grow:.35"></div>
+    <div class="foot"><span>${v.foot.l}</span><span>${v.foot.r}</span></div>
+  </section>`).join('');
+
+document.querySelectorAll('.head').forEach(box => {
+  const h1 = box.querySelector('h1'); const MAX_H = 300; let size = 92;
+  h1.style.fontSize = size + 'px';
+  while (size > 48 && (h1.scrollHeight > MAX_H || h1.scrollWidth > box.clientWidth)){
+    size -= 1; h1.style.fontSize = size + 'px';
+  }
+});
+document.documentElement.dataset.ready = '1';
+</script>
