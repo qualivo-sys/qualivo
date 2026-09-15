@@ -634,3 +634,27 @@ Aplicado (frenos): **grupos AIAct y ComplianceRiesgo pausados**; **sábado y dom
 (reglamento, ley de ia, peligro, openexpo, merodio, 2027…). Listas RMK: 200 / 24.
 Propuesto a Maikel: test de URL directa al formulario en un segundo anuncio de EventosIA;
 empujar canales propios de Adigital (newsletter/LinkedIn) y el test LinkedIn+Meta.
+
+## Día 16 (15-09) — plan aprobado por Aída y aplicado
+Correo de Aída: IT confirma que la versión móvil de espacio.adigital.org no se puede modificar;
+en Analytics solo el 28 % de los usuarios de móvil interactúa con la página (64 % en escritorio).
+Propone excluir móvil y descartar PMax. Contrapropuesta aceptada por ella:
+- **Móvil −70 %** (antes −40 %) en vez de exclusión total: móvil lleva 5 de 20 registros de
+  Search (CVR 2,22 %, CPL 62 € vs 41 € de escritorio) y convirtió el 13 y el 14. Por semanas:
+  escritorio 6,10 → 4,35 → 2,56 %; móvil 4,35 → 0,76 → 4,17 %. El 0,76 % era de la semana 2.
+  Criterio: si en 3 días móvil no registra, se excluye.
+- **PMax descartada** (de acuerdo con Aída): su inventario es sobre todo móvil y en PMax no se
+  puede excluir dispositivo ni desactivar Display (verificado en API). Todo el presupuesto a Search.
+- **Geo ampliada a la corona de 1 h**: Toledo `20296`, Guadalajara `9047046`, Segovia `20292`,
+  Ávila `9047044`, Cuenca `9047058`, junto a Comunidad de Madrid `20282`. Un solo grupo, no uno
+  por ciudad (Google ya desglosa por ubicación; fragmentar impide decidir en 10 días). Aída lo acepta.
+- **Presupuesto Search 79,52 €/día** (817 € / 10 días). Acumulado: 1.182 €, 22 registros, CPL 54 €.
+- **Imágenes de Germán Zarama subidas a Search** como `AD_IMAGE` a nivel de campaña
+  (assets `421433076348` HZ 1200×628 y `421433012262` SQ 1200×1200). Nota API: en v25
+  `AD_IMAGE` sí se acepta en Search (antes fallaba con UNSUPPORTED_FIELD_TYPE);
+  `MARKETING_IMAGE` y `SQUARE_MARKETING_IMAGE` siguen incompatibles.
+- **RSA de EventosIA**: estaba lleno (15 titulares / 4 descripciones). Sustituidos el titular
+  "Cumple la normativa de IA" (27 impr. en 14 días) por "Con Germán Zarama", y la descripción
+  de "Ponencias, talleres y networking…" (imprecisa: el programa son keynotes y paneles) por
+  "Germán Zarama, Manager del Centro de Conducta Empresarial Responsable de la OCDE."
+Pendiente: revisar el informe de ubicaciones cada 2 días y el móvil el 18-09.
