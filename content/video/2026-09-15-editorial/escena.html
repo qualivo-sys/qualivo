@@ -1,0 +1,94 @@
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#F2EEE6;color:#0A0A0B;font-family:SG}
+#grid{position:absolute;inset:0;opacity:0}
+#grid i{position:absolute;background:#0A0A0B;opacity:.07}
+#grid i.v{top:0;bottom:0;width:1px}
+#grid i.h{left:0;right:0;height:1px}
+.kick{position:absolute;left:72px;font-size:26px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:#E8590C}
+#k1{top:250px;opacity:0}
+.mask{position:absolute;left:72px;width:940px;overflow:hidden}
+.mask .in{font-family:Anton;font-size:104px;line-height:1.02;text-transform:uppercase;transform:translateY(110%)}
+#m1{top:320px;height:230px}
+#num{position:absolute;left:72px;top:560px;font-family:Anton;font-size:400px;line-height:.8;letter-spacing:-.02em;opacity:0}
+#numlab{position:absolute;left:78px;top:960px;font-size:30px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#0A0A0B;opacity:0}
+#malla{position:absolute;left:72px;top:1075px;width:940px;display:flex;flex-wrap:wrap;gap:8px}
+.cel{width:50.5px;height:50.5px;background:#0A0A0B;opacity:0}
+#rem{position:absolute;left:72px;top:1075px;width:940px;font-family:Anton;font-size:88px;line-height:1.05;text-transform:uppercase;opacity:0}
+#rem em{font-style:normal;color:#E8590C}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.55;mix-blend-mode:multiply}
+.pie{position:absolute;bottom:250px;font-size:22px;color:rgba(10,10,11,.42);opacity:0}
+.pieL{left:72px}.pieR{right:72px;font-family:Anton;font-size:24px;color:#E8590C}
+</style>
+<div id="e">
+  <div id="grid"></div>
+  <div class="kick" id="k1">Tu sistema comercial</div>
+  <div class="mask" id="m1"><div class="in" id="i1">¿Cuántas<br>oportunidades tienes?</div></div>
+  <div id="num">0</div>
+  <div id="numlab">Abiertas en tu CRM</div>
+  <div id="malla"></div>
+  <div id="rem">De esas,<br><em>43 llevan semanas<br>sin que nadie<br>las toque.</em></div>
+  <svg id="grain" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="none"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>
+    <feColorMatrix type="saturate" values="0"/></filter>
+    <rect x="0" y="0" width="1080" height="1920" filter="url(#n)" opacity="0.38"/></svg>
+  <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
+</div>
+<script>
+const g=document.getElementById('grid'); let gh='';
+for(let x=72;x<=1008;x+=117) gh+=`<i class="v" style="left:${x}px"></i>`;
+for(let y=250;y<=1700;y+=145) gh+=`<i class="h" style="top:${y}px"></i>`;
+g.innerHTML=gh;
+const TOT=127, PARA=43;
+const malla=document.getElementById('malla');
+malla.innerHTML=Array.from({length:TOT},(_,i)=>`<div class="cel" id="c${i}"></div>`).join('');
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
+const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const S=(id,o,tr)=>{const n=document.getElementById(id);n.style.opacity=o;if(tr!==undefined)n.style.transform=tr;};
+// cuales estan paradas: repartidas, no en bloque
+const PAR=new Set(); {let s=7; for(let i=0;i<PARA;i++){ s=(s*31+17)%TOT; while(PAR.has(s)) s=(s+1)%TOT; PAR.add(s);} }
+
+window.setT=function(t){
+  S('grid', nm(t,0,.6)*.9);
+  S('k1', nm(t,.3,.8));
+  // el titular sube desde su propia caja, no aparece
+  document.getElementById('i1').style.transform=`translateY(${(1-out(nm(t,.55,1.35)))*110}%)`;
+  // y se retira hacia arriba cuando entra el numero
+  const sale=io(nm(t,2.5,3.2));
+  document.getElementById('m1').style.transform=`translateY(${-sale*300}px)`;
+  document.getElementById('m1').style.opacity=1-sale;
+  document.getElementById('k1').style.transform=`translateY(${-sale*300}px)`;
+
+  // el numero cuenta y crece
+  const pn=nm(t,2.75,4.1);
+  const val=Math.round(out(pn)*TOT);
+  const n=document.getElementById('num');
+  n.textContent = t<7.0 ? val : Math.round(TOT-(TOT-PARA)*out(nm(t,7.0,8.0)));
+  n.style.opacity=nm(t,2.7,3.0);
+  n.style.transform=`scale(${.82+.18*out(nm(t,2.7,3.6))})`;
+  S('numlab', nm(t,3.3,3.7));
+  document.getElementById('numlab').textContent = t<7.2 ? 'Abiertas en tu CRM' : 'Paradas ahora mismo';
+  document.getElementById('numlab').style.color = t<7.2 ? '#0A0A0B' : '#E8590C';
+
+  // la malla entra en oleada: una celda por oportunidad
+  for(let i=0;i<TOT;i++){
+    const c=document.getElementById('c'+i);
+    const a=nm(t,4.2+i*0.009,4.2+i*0.009+0.22);
+    c.style.opacity=a;
+    const rojo = PAR.has(i) && t>5.9+ (i%13)*0.022;
+    c.style.background = rojo ? '#E8590C' : '#0A0A0B';
+    c.style.transform=`scale(${.6+.4*out(a)})`;
+  }
+  // la malla se va y entra el remate
+  const irse=io(nm(t,8.4,9.0));
+  malla.style.opacity=1-irse;
+  malla.style.transform=`translateY(${irse*40}px)`;
+  S('rem', nm(t,8.8,9.3), `translateY(${(1-io(nm(t,8.8,9.3)))*34}px)`);
+  const f=nm(t,1.0,1.6);
+  S('pl',f*.8); S('pr',f);
+};
+window.setT(0);
+</script>
