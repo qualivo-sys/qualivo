@@ -3,7 +3,7 @@
 // El <style> va embebido en cada post para que se vea bien sin tocar el tema.
 
 export const STYLE = `<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}

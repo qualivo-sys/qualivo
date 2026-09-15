@@ -9,7 +9,7 @@
   <title>EAC · Blog — lote 1 (Qualivo)</title>
   <link>https://escolaeronauticadecatalunya.cat</link>
   <description>15 artículos nuevos optimizados para SEO</description>
-  <pubDate>Tue, 08 Sep 2026 10:01:40 GMT</pubDate>
+  <pubDate>Tue, 15 Sep 2026 10:43:35 GMT</pubDate>
   <language>es-ES</language>
   <wp:wxr_version>1.2</wp:wxr_version>
   <wp:base_site_url>https://escolaeronauticadecatalunya.cat</wp:base_site_url>
@@ -23,12 +23,12 @@
   <item>
     <title>Cómo superar la entrevista de TCP: el proceso de selección de una aerolínea, fase por fase</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/como-superar-entrevista-tcp-aerolinea/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:40 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:35 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-como-superar-entrevista-tcp-aerolinea</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -58,6 +58,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -149,7 +155,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto dura el proceso de selección de una aerolínea?","acceptedAnswer":{"@type":"Answer","text":"Depende de la compañía: desde un assessment day de una jornada hasta un proceso de varias semanas con fases online previas. Lo habitual es entre 2 y 6 semanas desde que envías el CV hasta la oferta."}},{"@type":"Question","name":"¿Puedo presentarme sin el certificado TCP?","acceptedAnswer":{"@type":"Answer","text":"Algunas aerolíneas seleccionan sin certificado y forman después, pero las plazas son muy limitadas y muy competidas. Con el certificado oficial ya obtenido puedes presentarte a cualquier convocatoria y no dependes del curso interno."}},{"@type":"Question","name":"¿Qué nivel de inglés piden realmente?","acceptedAnswer":{"@type":"Answer","text":"La referencia habitual es un B1-B2 funcional: que puedas atender al pasaje, dar instrucciones de seguridad y resolver una incidencia. Se evalúa hablado durante la entrevista, no por el título que pongas en el CV."}},{"@type":"Question","name":"¿Los tatuajes descartan?","acceptedAnswer":{"@type":"Answer","text":"Depende de cada aerolínea. La norma general es que no sean visibles con el uniforme. Algunas compañías han flexibilizado su política en los últimos años; conviene revisar los requisitos concretos de cada convocatoria."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Cómo es el proceso de selección de TCP paso a paso: CV, entrevista en inglés, dinámica de grupo y prueba final. Preguntas reales y errores que descartan.]]></excerpt:encoded>
     <wp:post_id>9000</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[como-superar-entrevista-tcp-aerolinea]]></wp:post_name>
@@ -172,12 +178,12 @@
   <item>
     <title>Cuánto cuesta el curso de TCP en España: precio, qué incluye y cómo saber si es oficial</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/curso-tcp-precio-cuanto-cuesta/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:41 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:36 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-curso-tcp-precio-cuanto-cuesta</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -207,6 +213,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -296,7 +308,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cuesta el curso de azafata de vuelo en España?","acceptedAnswer":{"@type":"Answer","text":"Varía según el centro y lo que incluya el programa. Lo importante no es el importe aislado, sino si incluye la emisión del certificado oficial de TCP, las prácticas reales de evacuación y agua y la preparación del proceso de selección. Pide siempre el desglose por escrito."}},{"@type":"Question","name":"¿El curso de TCP se puede pagar a plazos?","acceptedAnswer":{"@type":"Answer","text":"La mayoría de centros ofrecen fraccionamiento o financiación. Conviene confirmar si hay intereses y si el certificado se emite igualmente al terminar el curso."}},{"@type":"Question","name":"¿El curso de TCP sirve para toda Europa?","acceptedAnswer":{"@type":"Answer","text":"Sí. El certificado de tripulante de cabina de pasajeros emitido conforme a la normativa europea es válido en los Estados miembros, lo que te permite presentarte a aerolíneas de toda la UE."}},{"@type":"Question","name":"¿Hay cursos de TCP del INEM o del SEPE?","acceptedAnswer":{"@type":"Answer","text":"Puntualmente pueden aparecer programas de formación para el empleo, pero no es una vía estable ni generalizada para obtener el certificado oficial de TCP. Lo habitual es cursarlo en un centro de formación aeronáutica."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Cuánto cuesta el curso de azafata de vuelo / TCP en España, qué debe incluir el precio, qué gastos extra existen y cómo detectar un curso que no es oficial de AESA.]]></excerpt:encoded>
     <wp:post_id>9001</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[curso-tcp-precio-cuanto-cuesta]]></wp:post_name>
@@ -319,12 +331,12 @@
   <item>
     <title>Cómo entrar a trabajar en una aerolínea desde cero: todas las vías reales</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/como-entrar-a-trabajar-en-una-aerolinea/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:42 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:37 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-como-entrar-a-trabajar-en-una-aerolinea</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -354,6 +366,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -440,7 +458,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Se puede trabajar en una aerolínea sin experiencia?","acceptedAnswer":{"@type":"Answer","text":"Sí. La mayoría de puestos de entrada (TCP, agente de pasaje, rampa) están pensados para gente sin experiencia previa en el sector. Lo que sí se exige es la formación o certificación específica del puesto."}},{"@type":"Question","name":"¿Qué es más fácil, TCP o trabajar en tierra?","acceptedAnswer":{"@type":"Answer","text":"El acceso a tierra suele ser más rápido por la alta rotación y unos requisitos algo más accesibles. Ser TCP tiene un proceso de selección más competido pero mejores condiciones económicas y proyección."}},{"@type":"Question","name":"¿Hace falta carrera universitaria?","acceptedAnswer":{"@type":"Answer","text":"No. Para TCP, handling y agente de pasaje basta la ESO más la formación específica. La carrera no es un requisito en ninguna de estas vías."}},{"@type":"Question","name":"¿Qué idiomas piden?","acceptedAnswer":{"@type":"Answer","text":"Inglés siempre, a nivel funcional hablado. Cualquier idioma adicional (francés, alemán, italiano, árabe, chino) es un diferencial muy valorado, especialmente en aeropuertos con mucho tráfico internacional."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Todas las vías reales para entrar a trabajar en una aerolínea sin experiencia: TCP, handling, operaciones y despacho de vuelo. Requisitos, plazos y por dónde empezar.]]></excerpt:encoded>
     <wp:post_id>9002</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[como-entrar-a-trabajar-en-una-aerolinea]]></wp:post_name>
@@ -463,12 +481,12 @@
   <item>
     <title>Salidas profesionales de un TCP: qué puedes hacer después de volar</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/salidas-profesionales-tcp-carrera-aviacion/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:43 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:38 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-salidas-profesionales-tcp-carrera-aviacion</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -498,6 +516,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -585,7 +609,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuántos años se tarda en ser sobrecargo?","acceptedAnswer":{"@type":"Answer","text":"Depende de la aerolínea, de su estructura y de las vacantes internas. Influye la antigüedad, la evaluación de desempeño, los idiomas y la formación adicional que hayas acumulado."}},{"@type":"Question","name":"¿Se puede ser TCP toda la vida?","acceptedAnswer":{"@type":"Answer","text":"Sí, es una profesión con recorrido completo. Muchos profesionales vuelan toda su carrera y otros combinan vuelo con instrucción o pasan a puestos de tierra buscando estabilidad horaria."}},{"@type":"Question","name":"¿La experiencia como TCP sirve fuera de la aviación?","acceptedAnswer":{"@type":"Answer","text":"Mucho. La gestión de crisis, los primeros auxilios, el trato con cliente exigente y el trabajo en equipo son competencias muy valoradas en hostelería de alto nivel, eventos, turismo y atención al cliente premium."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Qué salidas tiene un TCP a medio y largo plazo: sobrecargo, instructor, formación, operaciones, tierra o aviación privada. Cómo se promociona en una aerolínea.]]></excerpt:encoded>
     <wp:post_id>9003</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[salidas-profesionales-tcp-carrera-aviacion]]></wp:post_name>
@@ -608,12 +632,12 @@
   <item>
     <title>Curso de TCP gratis: qué hay de verdad y qué es puro reclamo</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/curso-tcp-gratis-existe-realidad/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:44 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:39 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-curso-tcp-gratis-existe-realidad</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -643,6 +667,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -730,7 +760,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿El SEPE o el INEM dan el curso de TCP?","acceptedAnswer":{"@type":"Answer","text":"No de forma estable ni generalizada. Pueden aparecer cursos puntuales relacionados con el sector aeroportuario, pero no suelen incluir el certificado oficial de tripulante de cabina de pasajeros."}},{"@type":"Question","name":"¿Las aerolíneas pagan el curso de TCP?","acceptedAnswer":{"@type":"Answer","text":"Algunas forman a los candidatos que seleccionan. Hay que superar antes todo el proceso, las plazas son limitadas y en ocasiones el coste se descuenta de la nómina o implica un compromiso de permanencia."}},{"@type":"Question","name":"¿Cómo sé si un curso es oficial?","acceptedAnswer":{"@type":"Answer","text":"Pide por escrito qué certificado emiten y bajo qué normativa. Debe ser el certificado de tripulante de cabina de pasajeros conforme a la normativa europea y reconocido por AESA. \"Homologado\" o \"titulación propia\" no es lo mismo."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[¿Existen cursos de TCP gratis, del SEPE o pagados por la aerolínea? Te explicamos qué opciones son reales, cuáles son un reclamo y cómo detectar un curso sin valor.]]></excerpt:encoded>
     <wp:post_id>9004</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[curso-tcp-gratis-existe-realidad]]></wp:post_name>
@@ -753,12 +783,12 @@
   <item>
     <title>Azafato de vuelo: ser hombre y TCP en 2026 (requisitos, sueldo y realidad del sector)</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/ser-azafato-de-vuelo-hombre-tcp/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:45 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:40 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-ser-azafato-de-vuelo-hombre-tcp</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -788,6 +818,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -874,7 +910,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Un hombre puede ser azafato de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Sí. La profesión oficial es tripulante de cabina de pasajeros y no distingue por género. Los requisitos, el certificado y el convenio son los mismos."}},{"@type":"Question","name":"¿Cuánto gana un azafato de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Lo mismo que cualquier TCP de su compañía y antigüedad: salario base más dietas, prima por hora de vuelo y pluses de nocturnidad o festivos. El largo radio suele tener mejores condiciones que el corto radio."}},{"@type":"Question","name":"¿Hay aerolíneas que prefieren mujeres?","acceptedAnswer":{"@type":"Answer","text":"Las convocatorias son abiertas y los requisitos son los mismos para todos los candidatos. Lo que sí varía entre compañías es la política de imagen y uniformidad, que se aplica a toda la tripulación."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[¿Puede un hombre ser azafato de vuelo? Requisitos, sueldo, qué buscan las aerolíneas y por qué cada vez hay más hombres en la tripulación de cabina.]]></excerpt:encoded>
     <wp:post_id>9005</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[ser-azafato-de-vuelo-hombre-tcp]]></wp:post_name>
@@ -897,12 +933,12 @@
   <item>
     <title>Azafata de tierra: qué es, requisitos, sueldo y cómo empezar en el aeropuerto</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/azafata-de-tierra-que-es-requisitos-sueldo/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:46 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:41 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-azafata-de-tierra-que-es-requisitos-sueldo</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -932,6 +968,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1018,7 +1060,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué se necesita para ser azafata de tierra?","acceptedAnswer":{"@type":"Answer","text":"Ser mayor de edad, tener la ESO, inglés a nivel funcional y disponibilidad para turnos rotativos. No se exige carrera universitaria. Una formación específica en operaciones aeroportuarias y handling te posiciona mejor en la selección."}},{"@type":"Question","name":"¿Cuánto cobra una azafata de tierra?","acceptedAnswer":{"@type":"Answer","text":"Depende del convenio de handling y de la empresa. El salario base es moderado y se complementa con nocturnidad, festivos, fines de semana y, en algunos casos, idiomas. La promoción a coordinación o supervisión cambia el tramo salarial."}},{"@type":"Question","name":"¿Es lo mismo azafata de tierra que azafata de vuelo?","acceptedAnswer":{"@type":"Answer","text":"No. La azafata de tierra trabaja en el aeropuerto atendiendo al pasajero; el TCP o auxiliar de vuelo trabaja a bordo del avión y necesita el certificado oficial de tripulante de cabina."}},{"@type":"Question","name":"¿Se puede trabajar de azafata de tierra sin experiencia?","acceptedAnswer":{"@type":"Answer","text":"Sí. Muchas vacantes son de entrada y se cubren con perfiles sin experiencia previa en aviación, especialmente en los picos de temporada. Lo que se valora es la actitud de servicio, los idiomas y la formación específica."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Qué hace una azafata de tierra o agente de pasaje, requisitos reales, sueldo orientativo, turnos y cómo entrar a trabajar en el aeropuerto sin experiencia previa.]]></excerpt:encoded>
     <wp:post_id>9006</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[azafata-de-tierra-que-es-requisitos-sueldo]]></wp:post_name>
@@ -1041,12 +1083,12 @@
   <item>
     <title>Agente de rampa: qué hace, cuánto gana y cómo entrar a trabajar en plataforma</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/agente-de-rampa-que-hace-cuanto-gana/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:47 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:42 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-agente-de-rampa-que-hace-cuanto-gana</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1076,6 +1118,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1162,7 +1210,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué hace un agente de rampa?","acceptedAnswer":{"@type":"Answer","text":"Se encarga de la operativa del avión en plataforma: carga y descarga de equipajes, señalización y estacionamiento, acoplamiento de pasarela o escaleras, push-back y servicios a la aeronave, siempre bajo protocolos estrictos de seguridad."}},{"@type":"Question","name":"¿Cuánto gana un agente de rampa en el aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"Depende del convenio de handling y de la empresa. El salario base es moderado y los complementos de nocturnidad, festivos y habilitaciones específicas tienen mucho peso porque los turnos de rampa concentran madrugadas y fines de semana."}},{"@type":"Question","name":"¿Hace falta carné de conducir para trabajar en rampa?","acceptedAnswer":{"@type":"Answer","text":"En la mayoría de vacantes sí, porque se conducen vehículos y equipos dentro de la plataforma. Las habilitaciones específicas de cada equipo se obtienen ya dentro de la empresa."}},{"@type":"Question","name":"¿Es muy duro el trabajo en rampa?","acceptedAnswer":{"@type":"Answer","text":"Es físico y se desarrolla a la intemperie, con turnos rotativos que incluyen madrugadas. A cambio, es una de las entradas más rápidas al sector y tiene recorrido claro hacia coordinación y supervisión."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Qué hace un agente de rampa en el aeropuerto, sueldo orientativo, requisitos, turnos y diferencias con el agente de pasaje. Cómo entrar a trabajar en plataforma.]]></excerpt:encoded>
     <wp:post_id>9007</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[agente-de-rampa-que-hace-cuanto-gana]]></wp:post_name>
@@ -1185,12 +1233,12 @@
   <item>
     <title>Trabajar en AENA o en el aeropuerto: la diferencia que casi nadie explica</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/trabajar-en-aena-empleo-aeropuerto-guia/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:48 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:43 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-trabajar-en-aena-empleo-aeropuerto-guia</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1220,6 +1268,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1305,7 +1359,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿AENA contrata a todo el personal del aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"No. AENA gestiona la infraestructura aeroportuaria, pero la mayoría de personas que trabajan en una terminal están contratadas por empresas de handling, aerolíneas o concesionarios comerciales."}},{"@type":"Question","name":"¿Cómo se entra a trabajar en AENA?","acceptedAnswer":{"@type":"Answer","text":"A través de sus convocatorias públicas, publicadas en su portal de empleo. Son procesos puntuales, largos y con mucha competencia por plaza."}},{"@type":"Question","name":"¿Cuál es la forma más rápida de trabajar en un aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"Las empresas de handling, que contratan de forma continua para facturación, embarque, equipajes y rampa, especialmente en los picos de temporada. Una formación específica en operaciones aeroportuarias te posiciona mejor."}},{"@type":"Question","name":"¿ENAIRE y AENA son lo mismo?","acceptedAnswer":{"@type":"Answer","text":"No. AENA gestiona los aeropuertos y ENAIRE gestiona la navegación aérea y el control del tráfico. Son organizaciones distintas con procesos de selección diferentes."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[AENA, ENAIRE, handling y aerolíneas: quién contrata realmente en un aeropuerto, cómo son las convocatorias y qué vías tienen salida más rápida.]]></excerpt:encoded>
     <wp:post_id>9008</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[trabajar-en-aena-empleo-aeropuerto-guia]]></wp:post_name>
@@ -1328,12 +1382,12 @@
   <item>
     <title>Trabajar en el aeropuerto de Barcelona-El Prat: puestos, empresas y cómo entrar</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/trabajar-aeropuerto-barcelona-el-prat/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:49 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:44 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-trabajar-aeropuerto-barcelona-el-prat</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1363,6 +1417,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1447,7 +1507,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo puedo trabajar en el aeropuerto de El Prat?","acceptedAnswer":{"@type":"Answer","text":"Inscribiéndote en los procesos de las empresas de handling y de las aerolíneas que operan en el aeropuerto, además de en las convocatorias de AENA si te interesa la vía pública. Los puestos con más entrada son agente de pasaje y agente de rampa."}},{"@type":"Question","name":"¿Cuándo salen las ofertas de empleo del aeropuerto de Barcelona?","acceptedAnswer":{"@type":"Answer","text":"Las campañas grandes se lanzan antes de los picos de tráfico: de marzo a mayo para verano y en otoño para Navidad. Además hay cobertura de rotación durante todo el año."}},{"@type":"Question","name":"¿Piden experiencia para trabajar en El Prat?","acceptedAnswer":{"@type":"Answer","text":"Muchas vacantes son de entrada y no exigen experiencia previa en aviación. Se valora la experiencia de atención al público, los idiomas y una formación específica en operaciones aeroportuarias."}},{"@type":"Question","name":"¿Qué idiomas piden en el aeropuerto de Barcelona?","acceptedAnswer":{"@type":"Answer","text":"Inglés como mínimo, dado el volumen de tráfico internacional. El catalán y el castellano son habituales en el trato con pasaje local, y un cuarto idioma es un diferencial claro."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Cómo entrar a trabajar en el aeropuerto de Barcelona-El Prat: qué empresas contratan, qué puestos hay, cuándo salen las campañas y qué formación te da ventaja.]]></excerpt:encoded>
     <wp:post_id>9009</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[trabajar-aeropuerto-barcelona-el-prat]]></wp:post_name>
@@ -1470,12 +1530,12 @@
   <item>
     <title>Todos los trabajos que hay en un aeropuerto (y cuál encaja contigo)</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/trabajos-en-el-aeropuerto-lista-puestos/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:50 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:45 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-trabajos-en-el-aeropuerto-lista-puestos</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1505,6 +1565,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1594,7 +1660,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué hay que estudiar para trabajar en un aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"Depende del puesto. Para TCP, el certificado oficial de tripulante de cabina. Para pasaje y rampa, formación en operaciones aeroportuarias y handling. Para el centro de operaciones, formación de despachador de vuelo. Ninguna de esas vías exige carrera universitaria."}},{"@type":"Question","name":"¿Qué trabajo del aeropuerto es más fácil de conseguir?","acceptedAnswer":{"@type":"Answer","text":"Los puestos de handling (agente de pasaje y agente de rampa) son los que más contratan, por alta rotación y por los picos de temporada. Son la entrada más rápida al sector."}},{"@type":"Question","name":"¿Se puede trabajar en un aeropuerto sin idiomas?","acceptedAnswer":{"@type":"Answer","text":"En puestos sin trato directo con el pasajero (rampa, carga, servicios) el idioma pesa menos, pero el inglés sigue siendo muy recomendable. En atención al pasajero es imprescindible."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[La lista completa de trabajos que hay en un aeropuerto: cabina, pasaje, rampa, operaciones, seguridad y comercial. Requisitos, turnos y cuál encaja con tu perfil.]]></excerpt:encoded>
     <wp:post_id>9010</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[trabajos-en-el-aeropuerto-lista-puestos]]></wp:post_name>
@@ -1617,12 +1683,12 @@
   <item>
     <title>Cursos para trabajar en el aeropuerto: cuáles sirven de verdad (y cuáles no)</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/cursos-para-trabajar-en-el-aeropuerto-cuales-sirven/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:51 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:46 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-cursos-para-trabajar-en-el-aeropuerto-cuales-sirven</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1652,6 +1718,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1741,7 +1813,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué curso hay que hacer para trabajar en el aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"Depende del puesto: certificado oficial de TCP para volar, formación en operaciones aeroportuarias y handling para pasaje y rampa, y formación de despachador de vuelo para el centro de operaciones."}},{"@type":"Question","name":"¿Hay cursos gratuitos para trabajar en el aeropuerto?","acceptedAnswer":{"@type":"Answer","text":"Los que se anuncian como gratuitos suelen ser sesiones de captación o cursos genéricos sin certificación. Puntualmente existen programas de formación para el empleo, pero no son una vía estable ni cubren el certificado oficial de TCP."}},{"@type":"Question","name":"¿Qué significa que un curso está homologado?","acceptedAnswer":{"@type":"Answer","text":"No es un término regulado de forma uniforme. Lo relevante es qué documento se emite al terminar y quién lo reconoce. Para volar, debe ser el certificado de tripulante de cabina conforme a normativa europea reconocido por AESA."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Qué cursos sirven realmente para trabajar en el aeropuerto y cuáles no aportan nada. Diferencias entre certificado oficial, curso homologado y titulación propia.]]></excerpt:encoded>
     <wp:post_id>9011</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[cursos-para-trabajar-en-el-aeropuerto-cuales-sirven]]></wp:post_name>
@@ -1764,12 +1836,12 @@
   <item>
     <title>TCP o azafata de tierra: cuál elegir según tu vida, tu sueldo y tus objetivos</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/tcp-o-azafata-de-tierra-cual-elegir/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:52 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:47 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-tcp-o-azafata-de-tierra-cual-elegir</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1799,6 +1871,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -1883,7 +1961,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué es mejor, azafata de vuelo o azafata de tierra?","acceptedAnswer":{"@type":"Answer","text":"Depende de tu vida. TCP tiene mejor potencial de ingresos y proyección pero implica noches fuera de casa y turnos irregulares. Tierra da acceso más rápido y base fija, con un sueldo de entrada más contenido."}},{"@type":"Question","name":"¿Se puede pasar de azafata de tierra a azafata de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Sí, y es un camino muy habitual. La experiencia en el aeropuerto se valora en las selecciones de cabina; solo necesitas obtener el certificado oficial de TCP."}},{"@type":"Question","name":"¿Cuál de las dos es más fácil de conseguir?","acceptedAnswer":{"@type":"Answer","text":"Los puestos en tierra, por la alta rotación y la contratación continua de las empresas de handling. Las convocatorias de TCP son más puntuales y competidas."}},{"@type":"Question","name":"¿Puedo formarme en las dos cosas?","acceptedAnswer":{"@type":"Answer","text":"Sí. De hecho, tener formación en operaciones aeroportuarias y el certificado de TCP amplía mucho el abanico de vacantes a las que puedes presentarte."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Comparativa honesta entre TCP y azafata de tierra: requisitos, sueldo, turnos, estilo de vida y proyección. Cuál encaja mejor con tu situación.]]></excerpt:encoded>
     <wp:post_id>9012</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[tcp-o-azafata-de-tierra-cual-elegir]]></wp:post_name>
@@ -1906,12 +1984,12 @@
   <item>
     <title>Curso de despachador de vuelo: qué incluye, a quién le encaja y qué salidas tiene</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/curso-despachador-de-vuelo-que-incluye-salidas/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:53 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:48 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-curso-despachador-de-vuelo-que-incluye-salidas</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -1941,6 +2019,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -2027,7 +2111,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto dura el curso de despachador de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Depende del centro y del formato. Lo relevante es que el programa cubra meteorología, navegación, performance, plan de vuelo, peso y balance, normativa y seguimiento del vuelo, con práctica real de elaboración de planes."}},{"@type":"Question","name":"¿Hay que ser piloto para ser despachador de vuelo?","acceptedAnswer":{"@type":"Answer","text":"No. Es una profesión independiente con su propia formación. Comparte conocimientos técnicos con la aviación, pero no requiere licencia de piloto."}},{"@type":"Question","name":"¿Existe una licencia europea de despachador de vuelo?","acceptedAnswer":{"@type":"Answer","text":"No hay una licencia europea única equivalente a la de piloto. El operador aéreo debe garantizar que su personal de operaciones está formado y cualificado conforme a su manual de operaciones, y completa la formación específica al incorporarte."}},{"@type":"Question","name":"¿Qué salidas tiene el despacho de vuelo?","acceptedAnswer":{"@type":"Answer","text":"Centros de control de operaciones de aerolíneas, empresas de handling con servicios de operaciones, aviación ejecutiva y chárter, coordinación de operaciones aeroportuarias y proveedores de planificación de vuelo."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Qué incluye un curso de despachador de vuelo, qué perfil encaja, cuánto dura y qué salidas laborales tiene en aerolíneas y centros de operaciones.]]></excerpt:encoded>
     <wp:post_id>9013</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[curso-despachador-de-vuelo-que-incluye-salidas]]></wp:post_name>
@@ -2050,12 +2134,12 @@
   <item>
     <title>Despachador de vuelo vs. controlador aéreo: no son lo mismo (y el acceso no se parece en nada)</title>
     <link>https://escolaeronauticadecatalunya.cat/blog/despachador-de-vuelo-vs-controlador-aereo/</link>
-    <pubDate>Tue, 08 Sep 2026 10:01:54 GMT</pubDate>
+    <pubDate>Tue, 15 Sep 2026 10:43:49 GMT</pubDate>
     <dc:creator><![CDATA[EAC]]></dc:creator>
     <guid isPermaLink="false">eac-lote1-despachador-de-vuelo-vs-controlador-aereo</guid>
     <description></description>
     <content:encoded><![CDATA[<style>
-.eac-article{--r:#D8232A;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
+.eac-article{--r:#CE0E2D;--ink:#0E1621;--mut:#5B6675;--mist:#F4F6F9;--line:#E4E8EE;--sky:#1E6FE0;
  max-width:800px;margin:0 auto;padding:0 4px;font-size:18px;line-height:1.75;color:var(--ink);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  -webkit-font-smoothing:antialiased}
@@ -2085,6 +2169,12 @@
  border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(14,22,33,.04)}
 .eac-stat b{display:block;font-size:1.35em;line-height:1.2;font-weight:800;color:var(--ink)}
 .eac-stat span{display:block;font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px}
+.eac-iman{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:2em 0;background:#fff;box-shadow:0 2px 10px rgba(14,22,33,.06)}
+.eac-iman .h{background:linear-gradient(135deg,#0E1621,#1B2A3D);color:#fff;padding:18px 22px}
+.eac-iman .lab{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#F2585E;margin-bottom:6px}
+.eac-iman .h b{display:block;font-size:1.15em;font-weight:800;line-height:1.25}
+.eac-iman .h .d{display:block;color:#BFCEDE;font-size:.92em;margin-top:4px}
+.eac-iman .f{margin:0;padding:10px 22px;font-size:.82em;color:var(--mut);background:var(--mist);border-top:1px solid var(--line)}
 .eac-tw{overflow-x:auto;margin:1.5em 0;border:1px solid var(--line);border-radius:12px}
 .eac-article table.eac-t{width:100%;border-collapse:collapse;font-size:15.5px;margin:0;background:#fff}
 .eac-t th{background:var(--ink);color:#fff;text-align:left;font-weight:700;padding:12px 14px;white-space:nowrap}
@@ -2172,7 +2262,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Es lo mismo un despachador de vuelo que un controlador aéreo?","acceptedAnswer":{"@type":"Answer","text":"No. El despachador trabaja para una aerolínea y planifica y hace seguimiento de sus vuelos desde el centro de operaciones. El controlador trabaja para el proveedor de navegación aérea y gestiona en tiempo real el tráfico de todas las aeronaves de su sector."}},{"@type":"Question","name":"¿Cuál es más fácil de conseguir?","acceptedAnswer":{"@type":"Answer","text":"El despacho de vuelo, con diferencia. Se accede por formación específica y selección privada de la aerolínea, mientras que el control aéreo exige una licencia oficial y un proceso selectivo largo con miles de candidatos por plaza."}},{"@type":"Question","name":"¿El despachador de vuelo habla con los pilotos?","acceptedAnswer":{"@type":"Answer","text":"Sí, coordina con la tripulación antes y durante el vuelo, especialmente ante cambios de ruta, meteorología adversa o incidencias operativas. La comunicación por radio con las aeronaves en vuelo corresponde al controlador."}}]}</script>]]></content:encoded>
     <excerpt:encoded><![CDATA[Diferencias entre despachador de vuelo y controlador aéreo: qué hace cada uno, para quién trabajan, formación, acceso y cuál es más realista según tu perfil.]]></excerpt:encoded>
     <wp:post_id>9014</wp:post_id>
-    <wp:post_date><![CDATA[2026-09-08 10:01:40]]></wp:post_date>
+    <wp:post_date><![CDATA[2026-09-15 10:43:35]]></wp:post_date>
     <wp:comment_status><![CDATA[closed]]></wp:comment_status>
     <wp:ping_status><![CDATA[closed]]></wp:ping_status>
     <wp:post_name><![CDATA[despachador-de-vuelo-vs-controlador-aereo]]></wp:post_name>

@@ -10,7 +10,7 @@ Objetivo: parecer la **referencia formativa del sector aéreo** en España — s
 | Rol | Token | Hex |
 |---|---|---|
 | Tinta / héroe (casi-negro azulado) | `--eac-ink` | `#0E1621` |
-| Rojo EAC (acentos, CTA, subrayados) | `--eac-red` | `#D8232A` |
+| Rojo EAC (acentos, CTA, subrayados) | `--eac-red` | `#CE0E2D` |
 | Azul cielo (enlaces, datos) | `--eac-sky` | `#1E6FE0` |
 | Fondo lectura | `--eac-paper` | `#FFFFFF` |
 | Fondo sección / tarjeta | `--eac-mist` | `#F4F6F9` |

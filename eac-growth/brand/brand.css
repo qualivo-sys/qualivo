@@ -7,8 +7,8 @@
   /* Color — negro + rojo EAC, con azul cielo de apoyo */
   --eac-ink:      #0E1621;   /* casi-negro azulado (cielo de noche) — textos y héroe */
   --eac-ink-2:    #1B2635;   /* superficies oscuras secundarias */
-  --eac-red:      #D8232A;   /* rojo EAC — acentos, CTAs, subrayados */
-  --eac-red-dark: #A81820;   /* hover de CTA */
+  --eac-red:      #CE0E2D;   /* rojo EAC — acentos, CTAs, subrayados */
+  --eac-red-dark: #AC112A;   /* hover de CTA */
   --eac-sky:      #1E6FE0;   /* azul cielo — enlaces, datos */
   --eac-paper:    #FFFFFF;   /* fondo de lectura */
   --eac-mist:     #F4F6F9;   /* fondos de sección / tarjetas */
