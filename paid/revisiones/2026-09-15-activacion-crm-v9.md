@@ -65,7 +65,8 @@ CAMPAÑA   QV_CRM_VIDEO_Sep26                    120245657051570358   ACTIVA
 CONJUNTO  ES 30-65 · CRM y captación · SIN Adv+ 120245657053020358   ACTIVO   20 €/día
 ANUNCIO   AD · CRM v9 · vídeo · lead form       120245657153380358   ACTIVO
 VÍDEO     QV_CRM_v9_Sep26                       1279317837579988     48,8 s
-CREATIVO  CR · QV_CRM_v9                        1797904301551030
+CREATIVO  CR · QV_CRM_v9 · CTA solicitud       1043001498794857
+          (sustituye a 1797904301551030, que llevaba SIGN_UP)
 FORMULARIO Qualivo_Diagnostico_sep2026_v1        1006694072388659
 ```
 
@@ -89,3 +90,25 @@ formulario y envíos **de pago**, más desglose por colocación y por edad si ha
 Si no hay nada que hacer, se dice en una línea y no se abre el Administrador.
 
 El agente puede **frenar** solo si algo sangra. No sube presupuesto ni activa nada nuevo.
+
+---
+
+## 6 · Cambio de CTA · 15-sep, 23:5x CEST
+
+Maikel: «en el CTA deja claro *ver más información* o *enviar solicitud*, no dejes *registrarse*».
+
+Tenía razón y era un error mío. El botón iba con `SIGN_UP`, que en español sale como
+**«Registrarte»**, y eso promete abrir una cuenta. El vídeo dice *«pide ahora el diagnóstico»*: el
+botón tenía que decir lo mismo.
+
+**Cambiado a `APPLY_NOW` → «Enviar solicitud».**
+
+De las dos que planteó, elegí esa y no «Más información» por concordancia con el mensaje: el vídeo
+pide una acción concreta y el botón la nombra igual. «Más información» habría bajado la fricción,
+pero promete información y entrega un formulario — y el número de este agente es el coste por lead
+**cualificado**, no el CPL.
+
+Los creativos de Meta son inmutables, así que el cambio se hizo creando uno nuevo
+(`1043001498794857`) y reapuntando el anuncio. **La campaña no había registrado entrega todavía**,
+así que el cambio no perdió aprendizaje ni un euro. Vistas previas comprobadas otra vez en feed y en
+stories: renderizan.
