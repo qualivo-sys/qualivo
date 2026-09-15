@@ -19,8 +19,9 @@ html,body{background:#000}
 #cap2{font-size:42px;font-weight:600;line-height:1.3;margin-top:26px;color:#0A0A0B;opacity:0}
 #wipe{position:absolute;inset:0;z-index:40;transform:translateX(-100%)}
 #wipeTxt{position:absolute;left:64px;top:780px;width:960px;font-family:Anton;font-size:150px;line-height:.9;text-transform:uppercase;z-index:41;opacity:0}
-#wipeTxt.marca{font-family:SG;font-weight:700;font-size:190px;letter-spacing:-.03em;text-transform:none;line-height:1}
-#wipeSub{position:absolute;left:64px;top:1010px;width:950px;font-size:50px;font-weight:600;line-height:1.3;color:#F4F1EB;z-index:41;opacity:0}
+#wipeTxt.marca{font-family:SG;font-weight:700;font-size:190px;letter-spacing:-.03em;text-transform:none;line-height:1;top:740px}
+#wipeTxt.marca img{width:760px;display:block}
+#wipeSub{position:absolute;left:64px;top:1150px;width:950px;font-size:50px;font-weight:600;line-height:1.3;color:#F4F1EB;z-index:41;opacity:0}
 #tex{position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;z-index:60}
 .pie{position:absolute;bottom:170px;font-size:22px;z-index:30;color:rgba(10,10,11,.5)}
 .pieL{left:64px}.pieR{right:64px;font-family:Anton;font-size:24px}
@@ -57,7 +58,7 @@ html,body{background:#000}
   <div class="pie pieL" id="pl">@maikel.echevarria</div><div class="pie pieR" id="pr">QUALIVO.IO</div>
 </div>
 <script>
-const DUR=37.5;
+const DUR=47.5;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1);
 const out=x=>1-Math.pow(1-x,3.2), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, inq=x=>x*x*x;
 const back=x=>{const c=1.7,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
@@ -79,7 +80,7 @@ const P=[
  {w:14,  cap:'Qualivo', sub:'Detectamos dónde se te pierden clientes en captación y ventas.<br>Y lo arreglamos con IA, en el sistema que ya tienes.', cam:[1520,.31, 1520,.31], wipe:2}
 ];
 // tiempos reales de la locucion (marcas de ElevenLabs tras recortar pausas); el cierre arranca antes de que se diga "Qualivo"
-const T0=[0.3, 3.59, 7.22, 9.03, 15.64, 18.27, 20.25, 22.76, 25.63, 29.29, 30.4, 31.87];
+const T0=[0.3, 4.14, 8.33, 10.67, 19.26, 22.75, 25.36, 28.65, 32.61, 37.32, 39.97, 40.81];
 P.forEach((p,i)=>{p.t0=T0[i]; p.t1=i<P.length-1?T0[i+1]:DUR; p.d=p.t1-p.t0;});
 const N=[['Anuncios',260],['Web',620],['Lead',980],['CRM',1340],['Contacto',1700],['Reunión',2060],['Presup.',2420],['Cliente',2780]];
 const Y=1180;
@@ -116,7 +117,7 @@ window.setT=function(t){
     // cierre: el naranja de marca entra y se queda como tarjeta final; el logo llega con el y el claim debajo
     const ein=io(nm(l10,0,.6)), px=(ein-1)*100;
     W.style.background = NAR; W.style.transform = `translateX(${px}%)`;
-    WT.className='marca'; WT.textContent='Qualivo'; WT.style.color='#F4F1EB';
+    WT.className='marca'; if(!WT.querySelector('img')) WT.innerHTML='<img src="rec/logo-blanco.png">'; WT.style.color='#F4F1EB';
     const a=nm(l10,.25,.8); WT.style.opacity=a; WT.style.transform=`translateX(${px*10.8*.35 + (1-out(a))*-40}px)`;
     const b=nm(t,P[11].t0+.1,P[11].t0+.7); WS.innerHTML=P[11].sub+'<div style="margin-top:70px;font-family:Anton;font-size:46px;letter-spacing:.05em">QUALIVO.IO</div>'; WS.style.opacity=b; WS.style.transform=`translateY(${(1-out(b))*24}px)`;
   } else { W.style.transform='translateX(-100%)'; WT.style.opacity=0; WS.style.opacity=0; }
