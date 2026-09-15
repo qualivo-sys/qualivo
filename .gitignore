@@ -10,3 +10,6 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Render local (symlink a los módulos globales)
+qualivo-creatives/node_modules
