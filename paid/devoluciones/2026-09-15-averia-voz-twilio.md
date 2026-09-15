@@ -92,3 +92,14 @@ avisar, y cuando cae se lleva el número por delante.
 Pendiente de montar: una comprobación diaria del inventario de números y del
 estado del expediente, que avise por correo en cuanto cualquiera de los dos
 cambie. Sale más barato que enterarse por un lead que se quedó sin llamada.
+
+## Parche provisional (15-sep, 00:10)
+
+El bundle v3 seguía en `pending-review` y la campaña del vídeo ya estaba activa,
+así que el agente no podía quedarse sin línea. Se ha comprado un número de EE. UU.
+(`+1 775 363 8742`, no necesita expediente regulatorio), se ha añadido al troncal
+SIP «Qualivo agente voz» y se ha apuntado a él el número de Vapi (mismo `id`, así
+que Vercel no cambia). Raquel vuelve a poder llamar; el lead ve un prefijo +1.
+
+Cuando Twilio apruebe el bundle: comprar el móvil español, añadirlo al mismo
+troncal, cambiar el `number` en Vapi y liberar el número de EE. UU.
