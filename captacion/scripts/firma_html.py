@@ -24,7 +24,8 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126"
       "Content-Type": "application/json"}
 B = "https://server.smartlead.ai/api/v1"
 VERDE = "#0E7C74"   # verde de marca Qualivo
-CAL = "https://api.leadconnectorhq.com/widget/bookings/qualivo-20"
+CAL = "https://qualivo.io/llamada/"   # redirige al mismo calendario zBlsw8...
+CAL_VIEJO = "https://api.leadconnectorhq.com/widget/bookings/qualivo-20"
 DIAG = "https://qualivo.io/diagnostico/"
 
 FIRMA = (
@@ -51,7 +52,7 @@ def a_html(texto, con_enlaces):
     trozos = []
     for p in parrafos:
         # el email 3 lleva el calendario en crudo: se convierte en enlace
-        p = p.replace(f"Y si lo prefieres en directo: {CAL}", "")
+        p = p.replace(f"Y si lo prefieres en directo: {CAL_VIEJO}", "")
         if not p.strip():
             continue
         trozos.append(
