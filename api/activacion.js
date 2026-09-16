@@ -17,7 +17,7 @@ const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
 // y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
 function nombrePila(v) {
-  const limpio = String(v || '').replace(/^\s*(arq|dr|dra|sr|sra|ing|lic|prof|don|doña)\.?\s*/i, '').trim();
+  const limpio = String(v || '').replace(/^\s*(arq|dra|dr|sra|sr|ing|lic|prof|don|doña)(\.\s*|\s+)/i, '').trim();
   const primera = limpio.split(/\s+/)[0] || '';
   return primera ? primera.charAt(0).toUpperCase() + primera.slice(1) : '';
 }
