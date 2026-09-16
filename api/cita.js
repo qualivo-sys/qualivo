@@ -11,12 +11,23 @@
 
 const ZONA = 'Europe/Madrid';
 
-function buscar(obj, claves) {
-  // primer valor no vacío entre varias rutas «a.b.c» del cuerpo
-  for (const ruta of claves) {
-    let v = obj;
-    for (const p of ruta.split('.')) { v = v && typeof v === 'object' ? v[p] : undefined; }
-    if (v !== undefined && v !== null && String(v).trim() !== '') return v;
+function aplanar(obj, prefijo, salida) {
+  // {a:{b:1}} -> {'a.b':1}; también entra en customData, que es donde GHL deja los pares personalizados
+  Object.keys(obj || {}).forEach(function (k) {
+    const v = obj[k], ruta = prefijo ? prefijo + '.' + k : k;
+    if (v && typeof v === 'object' && !Array.isArray(v)) aplanar(v, ruta, salida); else salida[ruta] = v;
+  });
+  return salida;
+}
+
+function buscar(plano, patrones) {
+  // primer valor no vacío cuya clave (sin la ruta) case con alguno de los patrones, en orden de preferencia
+  for (const re of patrones) {
+    for (const ruta of Object.keys(plano)) {
+      const clave = ruta.split('.').pop();
+      const v = plano[ruta];
+      if (re.test(clave) && v !== undefined && v !== null && String(v).trim() !== '') return v;
+    }
   }
   return '';
 }
@@ -66,18 +77,22 @@ module.exports = async function (req, res) {
   let b = req.body || {};
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }
 
-  const nombre = [buscar(b, ['first_name', 'firstName', 'contact.first_name', 'contact.firstName']), buscar(b, ['last_name', 'lastName', 'contact.last_name', 'contact.lastName'])].join(' ').trim() || buscar(b, ['full_name', 'contact.name', 'name']);
-  const email = buscar(b, ['email', 'contact.email']);
-  const telefono = buscar(b, ['phone', 'contact.phone']);
-  const empresa = buscar(b, ['company_name', 'companyName', 'contact.company_name', 'contact.companyName']);
-  const inicio = buscar(b, ['calendar.startTime', 'appointment.startTime', 'startTime', 'calendar.start_time', 'appointment.start_time']);
-  const fin = buscar(b, ['calendar.endTime', 'appointment.endTime', 'endTime']);
-  const calendario = buscar(b, ['calendar.calendarName', 'calendar.name', 'appointment.calendarName', 'calendarName']);
-  const estado = buscar(b, ['calendar.status', 'calendar.appointmentStatus', 'appointment.status', 'appointmentStatus']);
-  const titulo = buscar(b, ['calendar.title', 'appointment.title', 'title']);
-  const origen = buscar(b, ['contact_source', 'contact.source', 'source']);
-  const contactoId = buscar(b, ['contact_id', 'contactId', 'contact.id', 'id']);
-  const locationId = buscar(b, ['location.id', 'locationId']) || process.env.GHL_LOCATION_ID || '';
+  const plano = aplanar(b, '', {});
+  const nombre = buscar(plano, [/^(contact_)?full_?name$/i, /^name$/i]) ||
+    [buscar(plano, [/^(contact_)?first_?name$/i]), buscar(plano, [/^(contact_)?last_?name$/i])].join(' ').trim();
+  const email = buscar(plano, [/^(contact_)?email$/i]);
+  const telefono = buscar(plano, [/^(contact_)?phone$/i]);
+  const empresa = buscar(plano, [/^(contact_)?company_?name$/i]);
+  const inicio = buscar(plano, [/^(appointment_)?start(_?date)?(_?time)?$/i, /^startTime$/i]);
+  const fin = buscar(plano, [/^(appointment_)?end(_?date)?(_?time)?$/i, /^endTime$/i]);
+  const calendario = buscar(plano, [/^calendar_?name$/i, /^calendarName$/i]);
+  const estado = buscar(plano, [/^(appointment_)?status$/i, /^appointmentStatus$/i]);
+  const titulo = buscar(plano, [/^(appointment_)?title$/i]);
+  const notas = buscar(plano, [/^(appointment_)?notes?$/i]);
+  const lugar = buscar(plano, [/^(appointment_)?meeting_?location$/i, /^address$/i]);
+  const origen = buscar(plano, [/^(contact_)?source$/i]);
+  const contactoId = buscar(plano, [/^contact_?id$/i]) || (b.contact && b.contact.id) || '';
+  const locationId = buscar(plano, [/^location_?id$/i]) || (b.location && b.location.id) || process.env.GHL_LOCATION_ID || '';
   const enlace = contactoId && locationId ? 'https://app.gohighlevel.com/v2/location/' + locationId + '/contacts/detail/' + contactoId : '';
 
   const cuando = fechaLegible(inicio);
@@ -88,7 +103,7 @@ module.exports = async function (req, res) {
     '<h2 style="font:800 22px/1.2 system-ui;color:#101319;margin:0 0 18px">' + escapar(nombre || 'Alguien') + ' ha reservado' + (cuando ? ': ' + escapar(cuando) : '') + '</h2>' +
     '<table style="border-collapse:collapse">' +
     fila('Cuándo', cuando + (fin ? ' → ' + new Date(fin).toLocaleTimeString('es-ES', { timeZone: ZONA, hour: '2-digit', minute: '2-digit' }) : '')) +
-    fila('Email', email) + fila('Teléfono', telefono) + fila('Empresa', empresa) + fila('Calendario', calendario || titulo) + fila('Estado', estado) + fila('Origen', origen) +
+    fila('Email', email) + fila('Teléfono', telefono) + fila('Empresa', empresa) + fila('Calendario', calendario || titulo) + fila('Dónde', lugar) + fila('Notas', notas) + fila('Estado', estado) + fila('Origen', origen) +
     '</table>' +
     (enlace ? '<p style="margin:22px 0 0"><a href="' + enlace + '" style="display:inline-block;background:#101319;color:#fff;text-decoration:none;font:700 14px system-ui;padding:12px 18px;border-radius:10px">Abrir el contacto en GoHighLevel</a></p>' : '') +
     '<p style="font:12px/1.5 system-ui;color:#7A7C82;margin:26px 0 0">Aviso automático de qualivo.io/api/cita. Hora en horario de Madrid.</p>' +
