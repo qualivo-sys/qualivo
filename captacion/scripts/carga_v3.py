@@ -15,8 +15,11 @@
 # Formato de leads.json: lista de objetos
 #   {"email":"x@y.es","first_name":"Ana","company_name":"Acme","dom":"acme.es",
 #    "puerta":"crm", "v":{"crm":"HubSpot"}}
-# Puertas validas: anuncios, google_ads, linkedin_ads, meta_ads, crm, base,
-#                  multiservicio, mide, direccion, comercial
+# Puertas validas: anuncios, google_ads, linkedin_ads, meta_ads, crm, lista,
+#                  base, multiservicio, mide, direccion, comercial
+# 'lista' es para Brevo/Mailchimp/ActiveCampaign: son herramientas de email
+# marketing, no CRMs. Ahi no hay oportunidades paradas, hay suscriptores que
+# abren y no compran, que es otra fuga distinta.
 #
 # Filtro de buzones de rol (aplicar ANTES de enriquecer en Apollo): quedan fuera
 # info, contacto, hola, admin, ventas, comercial, soporte, marketing, rrhh,
@@ -24,7 +27,8 @@
 # 14-sep: direccion@empleabilidadett.es reboto y ese rebote se paga en
 # reputacion de dominio, no en un lead perdido.
 # Campos de "v" que usa cada puerta:
-#   crm -> crm · base -> anios · multiservicio -> l1,l2,l3 · direccion -> cargo
+#   crm -> crm · lista -> herramienta · base -> anios · multiservicio -> l1,l2,l3
+#   direccion -> cargo
 import json, re, sys, urllib.request, urllib.error, time
 
 CAMPANA = 3940264
@@ -43,6 +47,12 @@ PUERTAS = {
    "vuestro {crm}",
    "He estado mirando {emp} y veo que trabajáis con {crm}. Lo normal es que ahí dentro "
    "haya oportunidades abiertas que nadie ha vuelto a tocar."),
+ "lista": (
+   "vuestra lista de {herramienta}",
+   # Era la apertura mas larga de todas las puertas y sacaba el email 1 del
+   # limite de palabras. Dice lo mismo en nueve palabras menos.
+   "He estado mirando {emp} y veo que mandáis campañas con {herramienta}. Lo que casi "
+   "nadie tiene atado es cuál de esos suscriptores acabó comprando de verdad."),
  "base": (
    "los {anios} años de {emp}",
    "He estado mirando {emp} y lleváis {anios} años en el mercado. Eso son cientos de "
@@ -131,6 +141,9 @@ CASOS = {
         "34.500 euros declarados, en la primera pasada. Y yo me dedico a esto.",
  "direccion": "Hice la prueba en mi propio CRM hace unos días: 25 oportunidades paradas, "
         "34.500 euros declarados, en la primera pasada. Y yo me dedico a esto.",
+ "lista": "Una clienta tenía años de contactos y nadie detrás. No captamos ni un lead "
+          "nuevo: ordenamos la base, priorizamos y perseguimos con fecha. Recuperó 6,45 "
+          "veces lo que invirtió.",
  "base": "Una clienta tenía años de contactos y nadie detrás. No captamos ni un lead "
          "nuevo: ordenamos la base, priorizamos y perseguimos con fecha. Recuperó 6,45 "
          "veces lo que invirtió.",
