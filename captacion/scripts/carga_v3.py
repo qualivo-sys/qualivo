@@ -92,9 +92,14 @@ PUERTAS = {
    "que suele faltar no son oportunidades: es que lleguen bien repartidas y a tiempo."),
 }
 
-# Texto literal de estrategia/mensajes-v3.md (orden de Maikel del 11-sep).
-# El desriesgo es "un mes sin coste", NO "no pagais el piloto": el piloto no se
-# ofrece en frio (propuesta-valor-v1.md). Corregido el 16-sep.
+# Texto de estrategia/mensajes-v3.md (orden de Maikel del 11-sep).
+#
+# El desriesgo dice lo MISMO que qualivo.io, palabra por palabra: "si no se
+# mueve, no lo pagas". Antes ponia "lo probamos un mes sin coste", y eso no es
+# lo que hay: la web promete un piloto de treinta dias que se paga salvo que el
+# numero acordado no mejore. Quien reservaba leyendo el email llegaba a la
+# llamada esperando algo gratis y se encontraba otra cosa, que es el peor sitio
+# posible para perder la credibilidad. Corregido el 16-sep tras leer la web.
 # Las dos URLs van enteras y a la vista, no escondidas tras un texto: un enlace
 # que tapa su destino es el patron del phishing. Viendo qualivo.io en las dos se
 # lee que hay una empresa detras. Las dos son del mismo dominio desde el 16-sep,
@@ -110,11 +115,10 @@ FIRMA = ("--\n"
          "663 375 205")
 
 COMUN = (
- "Nosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, "
- "y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\n"
+ "Nosotros detectamos dónde se pierden clientes en captación y ventas, y lo "
+ "arreglamos con IA dentro del sistema que ya tenéis.\n\n"
  "El primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo "
- "qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene "
- "sentido seguir.\n\n"
+ "qué veo.\n\n"
  f"Puedes ver cómo funciona aquí: {DIAG}\n"
  f"Y si prefieres que hablemos, son quince minutos: {LLAMADA}\n\n"
  "¿Te va bien esta semana?\n\n"
@@ -183,9 +187,16 @@ def construir(l):
     nom = l.get("first_name") or ""
     saludo = f"Hola {nom}," if nom else "Hola,"
     b1 = f"{saludo}\n\n{render(primera, l)}\n\n{COMUN}"
+    # El piloto se explica AQUI y no en el email 1. En frio no se ofrece
+    # (propuesta-valor-v1.md), y contarlo de entrada costaba veinte palabras
+    # del limite para responder a una pregunta que todavia nadie ha hecho.
+    # El texto es el de qualivo.io, no una version mas blanda.
     b2 = (f"{saludo}\n\nUn ejemplo de lo que te decía.\n\n{CASOS[p]}\n\n"
           "No hace falta que me creas. Los quince minutos son para mirar vuestro caso, no "
-          f"para contaros el nuestro.\n\n¿Esta semana o la que viene?\n\n{FIRMA}")
+          "para contaros el nuestro.\n\n"
+          "Y si de ahí sale algo, acordamos por escrito qué número tiene que moverse y lo "
+          "probamos treinta días. Si no se mueve, no lo pagas.\n\n"
+          f"¿Esta semana o la que viene?\n\n{FIRMA}")
     b3 = (f"{saludo}\n\nLo dejo aquí, pero te hago una última pregunta por si te sirve "
           f"a ti.\n\nSi tuvieras que apostar dónde se pierde más negocio en "
           f"{limpia_empresa(l.get('company_name') or '') or 'tu empresa'} hoy: ¿captación, conversión o "
