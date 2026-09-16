@@ -104,7 +104,7 @@
   }
   el('form').addEventListener('submit',function(e){e.preventDefault();
     var btn=el('submit');btn.disabled=true;btn.textContent='Enviando…';
-    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(function(){var p=new URLSearchParams(location.search),o={};['utm_source','utm_campaign','utm_content','utm_term'].forEach(function(k){if(p.get(k))o[k]=p.get(k)});return o})(),
       nombre:el('nombre').value.trim(),email:el('email').value.trim(),telefono:el('telefono').value.trim(),
       origen:'test-que-curso',source:'Test qué curso (web)',tag:'test-curso',
       detalle:'Perfil: '+window._perfil+' · punto: '+window._start+' · objetivo: '+window._goal+' · tiempo: '+ans[2]+' · modalidad: '+ans[3]

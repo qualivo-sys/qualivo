@@ -141,7 +141,7 @@
   el('material').addEventListener('input',calc);el('tiempo').addEventListener('input',calc);calc();
   el('form').addEventListener('submit',function(e){e.preventDefault();
     var btn=el('submit');btn.disabled=true;btn.textContent='Enviando…';var d=calc();
-    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(function(){var p=new URLSearchParams(location.search),o={};['utm_source','utm_campaign','utm_content','utm_term'].forEach(function(k){if(p.get(k))o[k]=p.get(k)});return o})(),
       nombre:el('nombre').value.trim(),email:el('email').value.trim(),telefono:el('telefono').value.trim(),
       origen:'articulo-cuanto-cobrar',source:'Calculadora precios (web)',tag:'calculadora-precios',
       detalle:'Precio recomendado '+d.precio+'€ · material '+d.mat+'€ · '+d.t+'min · '+d.tHora+'€/h objetivo · beneficio/hora '+d.horaBenef+'€'

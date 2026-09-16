@@ -43,6 +43,20 @@ module.exports = async (req, res) => {
         `Potencial: ${body.potencialMensual ?? '—'} €/mes`
       ].join(' · ');
 
+  // Atribución de anuncio: capturamos las UTM que manda la página (de la URL del anuncio)
+  // y las guardamos en campos personalizados del contacto para verlas en el trato.
+  const clean = (v) => String(v || '').slice(0, 120).trim();
+  const CF = {
+    utm_content: '5k8Qawj9WohFIXx9ZLxZ',   // "Anuncio (utm_content)"
+    utm_campaign: 'gRLU3mBopXvBPII8pST0',   // "Campaña (utm_campaign)"
+    utm_source: 'Z70dykYHxcCrjOBMJujv'      // "Canal (utm_source)"
+  };
+  const customFields = [];
+  for (const [k, id] of Object.entries(CF)) {
+    if (body[k]) customFields.push({ id, value: clean(body[k]) });
+  }
+  const utmNota = body.utm_content ? ` · Anuncio: ${clean(body.utm_content)} (${clean(body.utm_campaign)})` : '';
+
   const payload = {
     locationId,
     firstName: nombre,
@@ -50,9 +64,7 @@ module.exports = async (req, res) => {
     phone: telefono || undefined,
     source: String(body.source || 'Calculadora ingresos (web)').slice(0, 80),
     tags: ['lead-magnet'].concat(body.tag ? [String(body.tag).slice(0, 40)] : ['calculadora-ingresos']),
-    // Guardamos el contexto de la simulación en el primer contacto vía companyName libre-></br>
-    // (si hay campos personalizados creados, se pueden mapear aquí)
-    customFields: []
+    customFields
   };
 
   try {
@@ -84,7 +96,7 @@ module.exports = async (req, res) => {
               'Content-Type': 'application/json',
               'User-Agent': 'eleva-leadmagnet/1.0'
             },
-            body: JSON.stringify({ body: `Calculadora de ingresos → ${notaCampos}` })
+            body: JSON.stringify({ body: `Calculadora de ingresos → ${notaCampos}${utmNota}` })
           });
         } catch { /* la nota es best-effort */ }
       }
