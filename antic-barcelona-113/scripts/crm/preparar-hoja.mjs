@@ -23,7 +23,7 @@ export const COLUMNAS = [
   'pieza', 'espacio', 'medidas', 'estilo', 'presupuesto', 'plazo', 'referencias',
   'primer_contacto', 'fecha_cierre',
   'utm_source', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
-  'ip', 'user_agent', 'lead_id', 'sla_avisado', 'email_enviado',
+  'ip', 'user_agent', 'lead_id', 'sla_avisado', 'email_enviado', 'seguimiento',
 ];
 
 export const ESTADOS = ['Nuevo', 'Contactado', 'Visita o llamada',
@@ -32,7 +32,7 @@ export const MOTIVOS = ['Precio', 'Plazo', 'No contesta', 'Compró en otro sitio
   'Solo miraba', 'Fuera de zona', 'Otro'];
 
 const OCULTAS = ['utm_source', 'fbclid', 'ip', 'user_agent', 'lead_id',
-  'sla_avisado', 'email_enviado'];
+  'sla_avisado', 'email_enviado', 'seguimiento'];
 
 const col = (n) => COLUMNAS.indexOf(n);
 const letra = (n) => {

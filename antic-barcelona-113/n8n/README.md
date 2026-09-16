@@ -137,3 +137,52 @@ recuperar el despliegue automático, hay que poner el `rootDirectory` del
 proyecto en `antic-barcelona-113/landing` **y** la rama de producción en una
 rama de este proyecto. Con un monorepo compartido entre clientes, cualquiera de
 las dos cosas mal vuelve a tirar la web.
+
+---
+
+# Seguimiento de leads de guía — n8n + Vercel
+
+**Flujo:** `Antic Barcelona 113 · Seguimiento diario` · `y1qj6FaPkOpkyRTT` · cada día a las 10:00
+
+De los cinco primeros leads, **cuatro se descargaron la guía y solo uno pasó al
+cuestionario**, y lo hizo por su cuenta. Ese salto es el mayor agujero del
+embudo: un lead de guía no tiene medidas, ni plazo, ni presupuesto, así que el
+comercial no sabe por dónde empezar con él.
+
+```
+n8n (10:00) → GET /api/seguimiento → busca a quien no ha vuelto
+                                   → webhook de leads con seguimiento: 1 ó 2
+                                   → correo al lead + marca la fila
+```
+
+## Quién entra
+
+Leads de origen `guia` que **no** tengan un cuestionario con el mismo correo,
+que no estén cerrados, y que lleven esperando lo suficiente.
+
+| Toque | Cuándo | Qué dice |
+|---|---|---|
+| **#1** | a las 24 h | Una pregunta directa: qué medidas tiene el hueco |
+| **#2** | a los 7 días | El error de los 75 cm por detrás de la silla, y a pedir medidas |
+
+**Se para en dos.** A partir del tercero ya no es seguimiento, es insistir, y
+quema la dirección para cuando esa persona sí tenga un proyecto.
+
+Si alguien se descarga la guía y el mismo día rellena el cuestionario, no
+recibe ninguno: ya está cualificado.
+
+## Detalles que importan
+
+**La marca se escribe después de enviar.** Al revés, un fallo puntual del
+correo dejaría al lead marcado como seguido y no se reintentaría nunca.
+
+**Va del último toque hacia atrás.** Quien lleva ocho días sin volver recibe
+el segundo, no el primero: no tiene sentido mandarle «ayer te enviamos la
+guía» ocho días después.
+
+**Si el proceso falla, avisa.** Un seguimiento roto no se nota —no hay error
+visible, simplemente los leads dejan de recibir nada—, así que el flujo
+comprueba la respuesta y manda un correo si algo va mal.
+
+La columna `seguimiento` de la hoja guarda qué se ha mandado y cuándo
+(`#1 2026-09-16`). Está oculta: es maquinaria, no algo que haya que mirar.

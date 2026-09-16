@@ -79,6 +79,32 @@
     return { tier: 'WARM', note: 'Tiene proyecto pero sigue explorando. Seguimiento a 7 días con proyectos similares.' };
   }
 
+  // ?demo=1 enseña el panel interno. Sin eso, el lead solo ve su pantalla.
+  var DEMO = /(\?|&)demo=1(&|$)/.test(location.search);
+
+  /**
+   * El mensaje ya escrito con lo que acaba de contestar. Un lead que escribe
+   * él mismo convierte mucho mejor que uno que espera a que le llamen, y así
+   * quien lo recibe no tiene que preguntar nada para empezar a presupuestar.
+   */
+  function mensajeWhatsApp(a) {
+    var medidas = a.largo && a.ancho ? a.largo + ' × ' + a.ancho + ' cm'
+      : (a.medidasLibres || '');
+    var trozos = [
+      'Hola, acabo de rellenar el cuestionario de la web.',
+      '',
+      a.pieza ? '· Pieza: ' + a.pieza : '',
+      a.espacio ? '· Para: ' + a.espacio : '',
+      medidas ? '· Medidas: ' + medidas : '',
+      a.comensales ? '· Comensales: ' + a.comensales : '',
+      a.estilo ? '· Estilo: ' + a.estilo : '',
+      a.plazo ? '· Plazo: ' + a.plazo : '',
+      '',
+      '¿Me decís qué encaja?',
+    ].filter(function (t, k) { return t !== '' || k === 1 || k === 8; });
+    return trozos.join('\n');
+  }
+
   /* ---------- Render ---------- */
   function render() {
     if (i >= STEPS.length) return renderDone();
@@ -242,19 +268,27 @@
       '<h2 style="margin-block:14px 14px">Gracias' + (a.nombre ? ', ' + esc(a.nombre.split(' ')[0]) : '') + '.<br><em>Ya sabemos por dónde empezar.</em></h2>' +
       '<p class="sub" style="margin-inline:auto">Te escribimos por WhatsApp para proponerte una pieza para tu espacio y, si encaja, una visita al taller de Terrassa.</p>' +
       '<div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px">' +
-      '<a class="btn btn--inv" href="https://wa.me/34665521684?text=' + encodeURIComponent('Hola, acabo de completar el cuestionario en la web (' + (a.pieza || 'pieza') + ' para ' + (a.espacio || 'mi espacio') + ').') + '" target="_blank" rel="noopener" id="wabtn">Escribir por WhatsApp ahora <span class="arw">→</span></a>' +
+      '<a class="btn btn--inv" href="https://wa.me/34665521684?text=' + encodeURIComponent(mensajeWhatsApp(a)) + '" target="_blank" rel="noopener" id="wabtn">Escribir por WhatsApp ahora <span class="arw">→</span></a>' +
       '<a class="btn btn--ghost" href="/" style="border-color:var(--border-inverse);color:var(--paper-100)">Volver a la web</a></div>' +
 
       '<p id="avisoenvio" style="display:none;background:rgba(180,67,47,.15);border:1px solid rgba(224,138,114,.4);color:#E08A72;padding:12px 16px;border-radius:3px;font-size:13.5px;max-width:52ch;margin:20px auto 0">No hemos podido guardar tus respuestas. Escríbenos por WhatsApp y lo resolvemos al momento.</p>' +
+      // Este panel enseña la puntuación y la nota comercial. Servía para
+      // enseñar el funnel en una reunión, pero en producción lo estaba viendo
+      // el propio lead: el primero que completó el cuestionario leyó que era
+      // «HOT» y que había que llamarle en menos de dos horas. Se queda solo
+      // con ?demo=1 en la dirección.
+      (DEMO ?
       '<div class="peek"><h4>Vista interna — no visible para el usuario final</h4>' +
       '<p style="margin-bottom:16px"><span class="tier ' + q.tier + '">' + q.tier + '</span></p>' +
       '<p style="font-size:13.5px;color:var(--text-inverse-muted);margin-bottom:16px">' + esc(q.note) + '</p>' +
       '<dl>' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1] || '—') + '</dd>'; }).join('') + '</dl>' +
       '<p style="font-size:11.5px;color:var(--ink-400);margin-top:16px;line-height:1.6">Este panel es solo para la demo: muestra cómo llega el lead cualificado al CRM y por qué el comercial sabe a quién llamar primero. En producción se envía al CRM y no se muestra.</p>' +
       '<p style="margin-top:14px"><button class="chip" id="again">Empezar de nuevo</button></p>' +
-      '</div></div>';
+      '</div>' : '') +
+      '</div>';
 
-    document.getElementById('again').addEventListener('click', function () { a = {}; i = 0; foot.style.display = ''; render(); });
+    var again = document.getElementById('again');
+    if (again) again.addEventListener('click', function () { a = {}; i = 0; foot.style.display = ''; render(); });
     document.getElementById('wabtn').addEventListener('click', function () { window.ab113 && ab113.track('Contact', { content_name: 'whatsapp_post_quiz', tier: q.tier }); });
   }
 

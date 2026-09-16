@@ -22,7 +22,7 @@ export const COLUMNAS = [
   'pieza', 'espacio', 'medidas', 'estilo', 'presupuesto', 'plazo', 'referencias',
   'primer_contacto', 'fecha_cierre',
   'utm_source', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
-  'ip', 'user_agent', 'lead_id', 'sla_avisado', 'email_enviado',
+  'ip', 'user_agent', 'lead_id', 'sla_avisado', 'email_enviado', 'seguimiento',
 ];
 
 export const ESTADOS = ['Nuevo', 'Contactado', 'Visita o llamada',
@@ -141,11 +141,18 @@ const aFecha = (v) => {
   return isNaN(d) ? String(v) : d.toISOString();
 };
 
-/** Devuelve los leads, el último arriba. */
-export async function listar() {
+/**
+ * Devuelve los leads, el último arriba.
+ *
+ * Por defecto deja fuera las columnas técnicas, que no hacen falta en
+ * pantalla. Con `todo` vienen todas: lo necesita el seguimiento, que se guía
+ * justamente por una de ellas.
+ */
+export async function listar({ todo = false } = {}) {
   const j = await api(`/values/Leads!A2:${ULTIMA}?valueRenderOption=UNFORMATTED_VALUE`);
   const filas = j.values || [];
-  const fuera = new Set(['ip', 'user_agent', 'fbclid', 'sla_avisado', 'email_enviado']);
+  const fuera = todo ? new Set()
+    : new Set(['ip', 'user_agent', 'fbclid', 'sla_avisado', 'email_enviado', 'seguimiento']);
   return filas.map((fila, i) => {
     const o = { _fila: i + 2 };
     COLUMNAS.forEach((c, k) => {
@@ -238,6 +245,23 @@ export function telefonoE164(valor) {
   // de otro país, y ahí no hay que tocar nada.
   if (d.length === 9 && /^[6789]/.test(d)) d = '34' + d;
   return d.length >= 8 && d.length <= 15 ? d : '';
+}
+
+/**
+ * Escribe una sola celda de un lead, buscándolo por lead_id.
+ *
+ * Aparte de `actualizar`, que es para lo que toca el comercial y por eso
+ * solo deja tocar ciertos campos y sella fechas. Esto es para las marcas que
+ * pone el propio sistema.
+ */
+export async function marcar(leadId, columna, valor) {
+  if (!COLUMNAS.includes(columna)) throw new Error(`columna desconocida: ${columna}`);
+  const j = await api(`/values/Leads!${letra('lead_id')}2:${letra('lead_id')}`);
+  const i = (j.values || []).map((f) => String(f[0] || '')).indexOf(String(leadId));
+  if (i < 0) return false;
+  await api(`/values/Leads!${letra(columna)}${i + 2}?valueInputOption=RAW`, {
+    method: 'PUT', body: JSON.stringify({ values: [[valor]] }) });
+  return true;
 }
 
 // ── Utilidades ──────────────────────────────────────────────────────────────
