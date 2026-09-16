@@ -14,6 +14,14 @@ const S = require('./_secuencias');
 const TOPE = 40;          // contactos procesados por ejecución
 const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
 
+// Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
+// y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
+function nombrePila(v) {
+  const limpio = String(v || '').replace(/^\s*(arq|dr|dra|sr|sra|ing|lic|prof|don|doña)\.?\s*/i, '').trim();
+  const primera = limpio.split(/\s+/)[0] || '';
+  return primera ? primera.charAt(0).toUpperCase() + primera.slice(1) : '';
+}
+
 // Minutos desde que entró, leídos de la etiqueta act-ini-AAAAMMDDHHMM.
 function minutosDesdeInicio(contacto) {
   const t = (contacto.tags || []).map(String).filter(function (x) { return /^act-ini-\d{12}$/.test(x); })[0];
@@ -192,7 +200,7 @@ module.exports = async function handler(req, res) {
     // El primer WhatsApp con la hipótesis textual lo manda el formulario, que es
     // quien la tiene fresca. Si aquel falló, aquí sale la versión sin cita.
     const datos = {
-      nombre: c.firstName || c.contactName || c.name || '',
+      nombre: nombrePila(c.firstName || c.contactName || c.name || ''),
       sector: '', inversion: '',
       origen: esLeadForm(c) ? 'leadform' : 'landing'
     };
