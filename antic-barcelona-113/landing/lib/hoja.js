@@ -161,6 +161,7 @@ export async function listar() {
 export async function anadir(lead) {
   const id = lead.lead_id || `web_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const datos = { ...lead, lead_id: id,
+    telefono: telefonoE164(lead.telefono) || lead.telefono || '',
     estado: 'Nuevo',
     proxima_accion: primeraAccion(lead),
     fecha_proxima: hoy() + diasDeEspera(lead),
@@ -218,6 +219,25 @@ export async function actualizar(leadId, campos) {
       body: JSON.stringify({ valueInputOption: 'RAW', data: rangos }) });
   }
   return { ok: true, lead_id: leadId, campos: datos };
+}
+
+/**
+ * Deja el teléfono en formato internacional, que es el único que entiende
+ * wa.me. La gente escribe «636142591», «0034 628 947 648» o «+34 600 00 00 00»
+ * y los tres tienen que acabar igual.
+ *
+ * Se normaliza al guardar y no solo al pintar el botón: así el número queda
+ * bien en la hoja, en el correo, en el CRM y en cualquier sitio que venga
+ * después, sin repetir esta lógica en cada uno.
+ */
+export function telefonoE164(valor) {
+  let d = String(valor || '').replace(/\D/g, '');
+  if (!d) return '';
+  if (d.startsWith('00')) d = d.slice(2);          // 0034… → 34…
+  // Nueve cifras es un número español sin prefijo. Con más, o ya lo trae o es
+  // de otro país, y ahí no hay que tocar nada.
+  if (d.length === 9 && /^[6789]/.test(d)) d = '34' + d;
+  return d.length >= 8 && d.length <= 15 ? d : '';
 }
 
 // ── Utilidades ──────────────────────────────────────────────────────────────

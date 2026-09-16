@@ -18,6 +18,19 @@
   var leads = [];
   var pestana = 'hoy';
   var $ = function (s) { return document.querySelector(s); };
+  /**
+   * Mismo criterio que lib/hoja.js. Los leads que entraron antes de que se
+   * normalizara al guardar siguen con el número tal cual lo escribieron, así
+   * que también hay que arreglarlo al pintar.
+   */
+  function waTel(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (!d) return '';
+    if (d.indexOf('00') === 0) d = d.slice(2);
+    if (d.length === 9 && /^[6789]/.test(d)) d = '34' + d;
+    return (d.length >= 8 && d.length <= 15) ? d : '';
+  }
+
   var esc = function (s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -158,7 +171,7 @@
   }
 
   function tarjeta(l) {
-    var tel = String(l.telefono || '').replace(/\D/g, '');
+    var tel = waTel(l.telefono);
     var hot = l.tier === 'HOT';
     // Tres etiquetas como mucho: con cuatro la tarjeta se parte en dos líneas
     // en un móvil y se lee peor justo donde más rápido hay que leerla. El
@@ -356,7 +369,7 @@
   function abrirFicha(id) {
     var l = leads.filter(function (x) { return String(x.lead_id) === String(id); })[0];
     if (!l) return;
-    var tel = String(l.telefono || '').replace(/\D/g, '');
+    var tel = waTel(l.telefono);
 
     var detalle = [['Pieza', l.pieza], ['Espacio', l.espacio], ['Medidas', l.medidas],
       ['Estilo', l.estilo], ['Presupuesto', l.presupuesto], ['Plazo', l.plazo],

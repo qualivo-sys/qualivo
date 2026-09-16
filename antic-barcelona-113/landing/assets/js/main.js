@@ -117,9 +117,13 @@
   function contexto() {
     var c = {};
     try {
-      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function (k) {
-        var v = sessionStorage.getItem(k); if (v) c[k] = v;
-      });
+      var g = JSON.parse(localStorage.getItem('_ab113_utm') || '{}');
+      // Pasados 30 días el clic ya no explica la visita de hoy
+      if (g._t && Date.now() - g._t < 30 * 864e5) {
+        ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function (k) {
+          if (g[k]) c[k] = g[k];
+        });
+      }
       var fbc = localStorage.getItem('_fbc');
       if (fbc) c.fbclid = fbc.split('.').pop();
     } catch (e) {}
@@ -160,9 +164,19 @@
   try {
     var q = new URLSearchParams(location.search);
     if (q.get('fbclid')) localStorage.setItem('_fbc', 'fb.1.' + Date.now() + '.' + q.get('fbclid'));
+    // Las UTM iban en sessionStorage, que muere al cerrar la pestaña. Quien
+    // llega por el anuncio, se va y vuelve luego a rellenar el formulario
+    // entraba sin origen: dos de los primeros cinco leads no se pudieron
+    // atribuir. Con localStorage y ventana de 30 días se conserva, que es el
+    // mismo criterio que ya se usaba para el fbclid.
+    var utms = {};
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-      if (q.get(k)) sessionStorage.setItem(k, q.get(k));
+      if (q.get(k)) utms[k] = q.get(k);
     });
+    if (Object.keys(utms).length) {
+      utms._t = Date.now();
+      localStorage.setItem('_ab113_utm', JSON.stringify(utms));
+    }
   } catch (e) {}
 
   // ViewContent al 50 % de scroll
