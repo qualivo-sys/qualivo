@@ -82,12 +82,15 @@ PUERTAS = {
    "que suele faltar no son oportunidades: es que lleguen bien repartidas y a tiempo."),
 }
 
+# Texto literal de estrategia/mensajes-v3.md (orden de Maikel del 11-sep).
+# El desriesgo es "un mes sin coste", NO "no pagais el piloto": el piloto no se
+# ofrece en frio (propuesta-valor-v1.md). Corregido el 16-sep.
 COMUN = (
- "Nosotros detectamos dónde se pierden clientes en captación y ventas, y lo arreglamos "
- "metiendo IA en el sistema que ya tenéis.\n\n"
- "El primer paso son quince minutos: me cuentas cómo lo tenéis montado y te digo qué "
- "veo. Si sale algo claro, acordamos un número que mover y lo probamos un mes. Si no "
- "se mueve, no pagáis el piloto.\n\n"
+ "Nosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, "
+ "y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\n"
+ "El primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo "
+ "qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene "
+ "sentido seguir.\n\n"
  "¿Te va bien esta semana?\n\n"
  "Maikel")
 
