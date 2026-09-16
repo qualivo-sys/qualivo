@@ -80,3 +80,11 @@ if APLICA:
     mal = [c.get("from_email") for c in (api("GET", "/email-accounts/?offset=0&limit=100") or [])
            if (c.get("signature") or "").strip()]
     print("verificacion: " + ("todos vacios" if not mal else f"SIGUEN CON FIRMA: {mal}"))
+    print("\nOJO: esto comprueba el campo GUARDADO, no lo que sale en el correo.\n"
+          "El 16-sep las quince firmas salian vacias al releerlas y el siguiente\n"
+          "envio seguia llevando el bloque HTML, porque Smartlead compone el\n"
+          "cuerpo antes de enviarlo. La comprobacion buena es abrir el\n"
+          "message-history de un envio POSTERIOR al cambio y mirar el final del\n"
+          "cuerpo SENT:\n"
+          "  GET /campaigns/{cid}/leads/{lead_id}/message-history\n"
+          "y confirmar que no aparecen ni 'Fundador de' ni '1F9E94'.")
