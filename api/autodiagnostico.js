@@ -63,6 +63,14 @@ module.exports = async function handler(req, res) {
     const upsert = await upsertRes.json();
     const contactId = upsert && upsert.contact && upsert.contact.id;
 
+    if (contactId) {
+      await require('./_tratos.js').crear({
+        contactId: contactId, nombre: nombre, email: email,
+        origen: 'Autodiagnóstico', fuente: 'qualivo.io — auto-diagnóstico express',
+        detalle: etapaDebil ? 'flojea en ' + etapaDebil : ''
+      });
+    }
+
     const resumen = ETAPAS.map(function (e) {
       return '· ' + e.charAt(0).toUpperCase() + e.slice(1) + ': ' + scores[e] + '/10';
     }).join('\n');

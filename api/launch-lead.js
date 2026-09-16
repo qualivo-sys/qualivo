@@ -51,6 +51,13 @@ module.exports = async function handler(req, res) {
     const contactId = upsert && upsert.contact && upsert.contact.id;
 
     if (contactId) {
+      await require('./_tratos.js').crear({
+        contactId: contactId, nombre: nombre, email: email, empresa: empresa,
+        origen: 'Launch', fuente: 'qualivo.io/launch — cuéntanos tu idea'
+      });
+    }
+
+    if (contactId) {
       const nota = [
         'Interés en Qualivo Launch — qualivo.io/launch',
         '',

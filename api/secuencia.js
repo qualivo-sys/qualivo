@@ -1,7 +1,7 @@
 // Cron diario (vercel.json → 08:00 UTC): envía a cada contacto de la radiografía el
 // correo que le toque (días 1, 3 y 7 desde que dejó el correo; el día 1 solo si no dejó
 // WhatsApp, porque entonces la pregunta va por WhatsApp). Tras el día 7: etiqueta sec-tibio
-// y, si existe, etapa «Tibio» en el pipeline (toque a 30 días por el SDR, sin día 14 automático).
+// y el trato pasa a «Más adelante» en Prospección (toque a 30 días por el SDR, sin día 14 automático).
 // Estado en etiquetas: sec-d1, sec-d3, sec-d7 (enviado), sec-tibio, sec-baja (no quiere más),
 // respondio (contestó: se para todo). Un correo por contacto y día.
 
@@ -11,7 +11,6 @@ const S = require('./_secuencia');
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const PASOS = [1, 3, 7];
-const PIPELINE_ID = '980j4DzvOwp7aDmkk2ZA';
 const MAX_DIAS = 35;   // más antiguo que esto: no se le escribe, la secuencia caducó
 const MAX_ENVIOS = 60; // tope por ejecución
 
@@ -124,19 +123,11 @@ function puntosCuello(c, cuello) {
   return null;
 }
 
-// Fin de la secuencia automática: etiqueta sec-tibio y etapa «Tibio» si existe en el pipeline.
+// Fin de la secuencia automática: etiqueta sec-tibio y el trato de Prospección a «Más adelante».
 async function marcarTibio(c, ghl, locationId) {
   const tags = (c.tags || []).map(String);
   if (tags.includes('sec-tibio')) return;
   await fetch(GHL_BASE + '/contacts/' + c.id + '/tags', { method: 'POST', headers: ghl, body: JSON.stringify({ tags: ['sec-tibio'] }) });
-  const pr = await fetch(GHL_BASE + '/opportunities/pipelines?locationId=' + locationId, { headers: ghl });
-  if (!pr.ok) return;
-  const pl = ((await pr.json()).pipelines || []).filter(function (x) { return x.id === PIPELINE_ID; })[0];
-  const etapa = ((pl && pl.stages) || []).filter(function (st) { return /tibio/i.test(st.name); })[0];
-  if (!etapa) return;
-  const sr = await fetch(GHL_BASE + '/opportunities/search?location_id=' + locationId + '&contact_id=' + c.id + '&pipeline_id=' + PIPELINE_ID, { headers: ghl });
-  if (!sr.ok) return;
-  const op = ((await sr.json()).opportunities || []).filter(function (o) { return o.status === 'open'; })[0];
-  if (!op) return;
-  await fetch(GHL_BASE + '/opportunities/' + op.id, { method: 'PUT', headers: ghl, body: JSON.stringify({ pipelineStageId: etapa.id }) });
+  void locationId;
+  await require('./_tratos.js').mover(c.id, 'masAdelante');
 }

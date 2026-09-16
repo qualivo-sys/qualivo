@@ -24,13 +24,8 @@ const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-// Cada lead de Meta abre también un trato en el pipeline «Prospección», en la
-// etapa «Nuevo Lead», con el nombre precedido de «Meta ·» y la fuente
-// rellenada, para que en el tablero se vea de un vistazo de dónde viene.
-// Identificadores de GHL (pipeline Prospección y su primera etapa).
-const PIPELINE_PROSPECCION = process.env.GHL_PIPELINE_PROSPECCION || 'JaB4LIwUqFn96LLFEhSm';
-const ETAPA_NUEVO_LEAD = process.env.GHL_ETAPA_PROSPECCION_NUEVO || 'b312c2cc-cd51-4a4e-8f9f-ac1e27be5784';
-const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
+// Cada lead de Meta abre también un trato en «Prospección» (api/_tratos.js).
+const T = require('./_tratos.js');
 
 // Las respuestas de las preguntas propias llegan con el nombre convertido en
 // slug por Meta, que no siempre coincide con la clave que le dimos. Se buscan
@@ -106,39 +101,6 @@ async function nombreFormulario(formId) {
     const d = await r.json();
     return String(d.name || '');
   } catch (e) { return ''; }
-}
-
-// Trato en Prospección para el lead de Meta. Si el contacto ya tiene uno
-// abierto en ese pipeline (lead repetido, rescate que repesca lo mismo), no se
-// duplica. Nunca tumba el guardado del lead: si falla, se registra y sigue.
-async function crearTratoProspeccion(o) {
-  const q = '/opportunities/search?location_id=' + encodeURIComponent(o.locationId) +
-    '&contact_id=' + encodeURIComponent(o.contactId) +
-    '&pipeline_id=' + encodeURIComponent(PIPELINE_PROSPECCION) + '&status=open';
-  const sr = await fetch(GHL_BASE + q, { headers: o.headers });
-  if (sr.ok) {
-    const sd = await sr.json().catch(function () { return {}; });
-    if ((sd.opportunities || []).length) return { ok: true, id: sd.opportunities[0].id, existia: true };
-  }
-  const nombre = 'Meta · ' + (o.nombre || o.email || o.telefono || 'Lead') +
-    (o.empresa ? ' (' + o.empresa + ')' : '') +
-    (o.invierte === false ? ' · nada todavía' : '');
-  const r = await fetch(GHL_BASE + '/opportunities/', {
-    method: 'POST', headers: o.headers,
-    body: JSON.stringify({
-      pipelineId: PIPELINE_PROSPECCION,
-      pipelineStageId: ETAPA_NUEVO_LEAD,
-      locationId: o.locationId,
-      contactId: o.contactId,
-      name: nombre,
-      status: 'open',
-      source: 'Meta — formulario instantáneo',
-      assignedTo: USUARIO_MAIKEL
-    })
-  });
-  if (!r.ok) throw new Error('ghl_opportunity ' + r.status + ' ' + (await r.text()).slice(0, 200));
-  const d = await r.json().catch(function () { return {}; });
-  return { ok: true, id: d && d.opportunity ? d.opportunity.id : null, existia: false };
 }
 
 async function guardar(lead) {
@@ -247,16 +209,12 @@ async function guardar(lead) {
     if (!pr.ok) console.error('[leadform] no se pudo completar el contacto', contactId, pr.status);
   }
   if (contactId) {
-    try {
-      const t = await crearTratoProspeccion({
-        headers: headers, locationId: process.env.GHL_LOCATION_ID, contactId: contactId,
-        nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
-        empresa: empresa, invierte: invierte
-      });
-      if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
-    } catch (err) {
-      console.error('[leadform] no se pudo crear el trato en Prospección', contactId, err && err.message);
-    }
+    const t = await T.crear({
+      contactId: contactId, nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
+      empresa: empresa, origen: 'Meta', fuente: 'Meta — formulario instantáneo',
+      detalle: !deEstaCampana ? 'otra campaña' : (invierte ? '' : 'nada todavía')
+    });
+    if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
   }
   if (contactId && (inversion || fuga)) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
@@ -386,4 +344,3 @@ module.exports = async function handler(req, res) {
 // faltan usando exactamente esta misma logica, para que un lead recuperado
 // quede igual que uno que entro bien.
 module.exports.guardar = guardar;
-module.exports.crearTratoProspeccion = crearTratoProspeccion;

@@ -190,6 +190,7 @@ module.exports = async function handler(req, res) {
     }
     if (await A.tieneCitaGHL(c.id)) {
       await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
+      await require('./_tratos.js').mover(c.id, 'reunion');
       resumen.cerrados++;
       continue;
     }
@@ -224,6 +225,7 @@ module.exports = async function handler(req, res) {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         if (await A.tieneCitaGHL(c.id)) {
           await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
+          await require('./_tratos.js').mover(c.id, 'reunion');
           resumen.cerrados++; continue;
         }
         const r = await A.lanzarLlamada({

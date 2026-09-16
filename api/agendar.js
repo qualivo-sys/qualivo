@@ -207,6 +207,10 @@ module.exports = async function handler(req, res) {
     await fetch(GHL_BASE + '/contacts/' + contacto.id + '/tags', {
       method: 'POST', headers: cabeceras(), body: JSON.stringify({ tags: ['act-agendado'] })
     }).catch(function () {});
+    // Y el trato de Prospección pasa a «Reunión agendada» (se crea si no lo tenía).
+    await require('./_tratos.js').mover(contacto.id, 'reunion', {
+      nombre: nombre || contacto.contactName || '', origen: 'Agente de voz', fuente: 'Agente de voz — diagnóstico'
+    });
     if (contexto) {
       await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {
         method: 'POST', headers: cabeceras(),

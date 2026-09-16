@@ -109,6 +109,15 @@ module.exports = async function (req, res) {
     '<p style="font:12px/1.5 system-ui;color:#7A7C82;margin:26px 0 0">Aviso automático de qualivo.io/api/cita. Hora en horario de Madrid.</p>' +
     '</div>';
 
+  // El trato de Prospección pasa a «Reunión agendada» (se crea si no lo tenía,
+  // p. ej. alguien que reserva directo desde /llamada/ sin haber pasado por un formulario).
+  if (contactoId && process.env.GHL_API_KEY) {
+    await require('./_tratos.js').mover(contactoId, 'reunion', {
+      nombre: nombre, email: email, telefono: telefono, empresa: empresa,
+      origen: 'Agenda', fuente: origen || 'Reserva en el calendario'
+    });
+  }
+
   try {
     await enviar(asunto, html);
     return res.status(200).json({ ok: true });

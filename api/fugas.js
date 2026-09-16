@@ -14,17 +14,13 @@ const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-// Pipeline «Qualivo Pipeline» de GoHighLevel: cada lead del diagnóstico entra como
-// oportunidad en «Nuevo Lead»; los prioritarios, directamente en «Contactado».
-const PIPELINE_ID = '980j4DzvOwp7aDmkk2ZA';
-const STAGE_NUEVO = 'fa70d288-c614-40ad-9e67-df04f4da3443';
-const STAGE_CONTACTADO = 'd08bc03a-1b25-4732-9b5f-3cb7295bfd94';
+// Cada lead de la radiografía entra como trato en «Prospección» (api/_tratos.js).
+const T = require('./_tratos.js');
 const RESERVA = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl';
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
 const CAMPO_SENAL = 'Señal · puntuación';   // campo numérico del contacto (se crea si no existe)
 const ICP1_SECTOR = 'Servicios profesionales (asesoría, consultoría, abogados)'; // ICP 1: despachos y servicios profesionales
 let campoSenalId = null;
-let etapasCache = { t: 0, porNombre: {} };
 
 const DIMS = ['captacion', 'conversion', 'seguimiento', 'dependencia', 'control'];
 const SINTOMAS = ['demanda', 'predecible', 'visibilidad', 'velocidad', 'cierre', 'presupuestos',
@@ -325,22 +321,6 @@ async function limpiarResultadoAnterior(contactId, tagsActuales, nuevas, ghlHead
   await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'DELETE', headers: ghlHeaders, body: JSON.stringify({ tags: viejas }) });
 }
 
-// Etapas del pipeline por nombre (Radiografía completada, Tibio…), con caché de 10 minutos.
-async function etapaPorNombre(patron, ghlHeaders, locationId) {
-  if (Date.now() - etapasCache.t > 600000) {
-    const r = await fetch(GHL_BASE + '/opportunities/pipelines?locationId=' + locationId, { headers: ghlHeaders });
-    if (r.ok) {
-      const d = await r.json();
-      const pl = (d.pipelines || []).filter(function (x) { return x.id === PIPELINE_ID; })[0];
-      const m = {};
-      ((pl && pl.stages) || []).forEach(function (st) { m[String(st.name).toLowerCase()] = st.id; });
-      etapasCache = { t: Date.now(), porNombre: m };
-    }
-  }
-  const k = Object.keys(etapasCache.porNombre).filter(function (n) { return patron.test(n); })[0];
-  return k ? etapasCache.porNombre[k] : null;
-}
-
 // Puntuación de señal (0-100) en un campo numérico del contacto: se suma, no se pisa.
 async function sumarSenal(contactId, puntos, locationId, ghlHeaders) {
   if (!campoSenalId) {
@@ -390,21 +370,12 @@ async function crearTareaWhatsApp(t) {
 }
 
 async function crearOportunidad(o) {
-  const etapa = await etapaPorNombre(/radiograf/, o.ghlHeaders, o.locationId).catch(function () { return null; });
-  const r = await fetch(GHL_BASE + '/opportunities/', {
-    method: 'POST',
-    headers: o.ghlHeaders,
-    body: JSON.stringify({
-      pipelineId: PIPELINE_ID,
-      locationId: o.locationId,
-      contactId: o.contactId,
-      name: o.nombre + ' · se rompe en ' + R.NOMBRE[o.cuello] + ' (' + o.nivel + ')',
-      pipelineStageId: etapa || (o.prioritario ? STAGE_CONTACTADO : STAGE_NUEVO),
-      status: 'open',
-      source: 'Diagnóstico de crecimiento'
-    })
+  const t = await T.crear({
+    contactId: o.contactId, nombre: o.nombre,
+    origen: 'Radiografía', fuente: 'Diagnóstico de crecimiento',
+    detalle: (o.prioritario ? 'PRIORITARIO · ' : '') + 'se rompe en ' + R.NOMBRE[o.cuello] + ' (' + o.nivel + ')'
   });
-  if (!r.ok) throw new Error('GHL opportunities respondió ' + r.status + ': ' + (await r.text()).slice(0, 300));
+  if (!t.ok) throw new Error(t.motivo || 'trato no creado');
 }
 
 function esc(s) {

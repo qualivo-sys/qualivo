@@ -99,6 +99,14 @@ module.exports = async function handler(req, res) {
     const contactId = upsert && upsert.contact && upsert.contact.id;
 
     if (contactId) {
+      await require('./_tratos.js').crear({
+        contactId: contactId, nombre: nombre, email: email, telefono: telefono,
+        origen: 'Landing', fuente: 'qualivo.io — landing diagnóstico',
+        detalle: cualificado ? (sector || '') : 'fuera de alcance'
+      });
+    }
+
+    if (contactId) {
       const nota = [
         'Diagnóstico solicitado — landing de pago',
         '',
