@@ -62,4 +62,5 @@ node kill-ramble/tools/score.mjs kill-ramble/data/creators.sample.csv > /tmp/sco
 | Buzones Smartlead | ✅ 15 buzones Qualivo calientes; dominio propio del juego pendiente para lanzamiento |
 | Sesiones | ✅ Open Playtest 14 sep - 5 oct con reserva de franja (falta el enlace) |
 | Descubrimiento YouTube | ✅ 480 vídeos → 381 canales → 153 enriquecidos → 39 en zona de contacto (15 sep) |
-| Descubrimiento Twitch | ⏰ programado en Apify 20:00 y 02:00 UTC hasta el 19 sep |
+| Descubrimiento Twitch | ✅ 1ª noche: 23 en directo, 7 EN (Kohrean el relevante). Recentrado a categorías 2026 (PEAK, R.E.P.O., Meccha Chameleon, Bombanana) a las 20:00, 00:00, 02:00 y 04:00 UTC |
+| Revisión humana EN | ✅ «Vídeo citado» y «Detalle» en los 14 EN de zona de contacto; encajes reales: 8 |
