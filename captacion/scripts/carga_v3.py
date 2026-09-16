@@ -85,14 +85,30 @@ PUERTAS = {
 # Texto literal de estrategia/mensajes-v3.md (orden de Maikel del 11-sep).
 # El desriesgo es "un mes sin coste", NO "no pagais el piloto": el piloto no se
 # ofrece en frio (propuesta-valor-v1.md). Corregido el 16-sep.
+# Las dos URLs van enteras y a la vista, no escondidas tras un texto: un enlace
+# que tapa su destino es el patron del phishing. Viendo qualivo.io en las dos se
+# lee que hay una empresa detras. Las dos son del mismo dominio desde el 16-sep,
+# cuando se monto qualivo.io/llamada (mismo calendario zBlsw8BEKA2zah81YlOl).
+DIAG = "https://qualivo.io/diagnostico/"
+LLAMADA = "https://qualivo.io/llamada/"
+
+# Firma en texto. No lleva logo ni iconos de redes a proposito: son imagenes, y
+# las imagenes en un correo frio cuestan bandeja de entrada.
+FIRMA = ("--\n"
+         "Maikel Echevarría · CEO\n"
+         "Qualivo · qualivo.io\n"
+         "663 375 205")
+
 COMUN = (
  "Nosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, "
  "y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\n"
  "El primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo "
  "qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene "
  "sentido seguir.\n\n"
+ f"Puedes ver cómo funciona aquí: {DIAG}\n"
+ f"Y si prefieres que hablemos, son quince minutos: {LLAMADA}\n\n"
  "¿Te va bien esta semana?\n\n"
- "Maikel")
+ f"{FIRMA}")
 
 # --- Email 2: el caso, por puerta ---------------------------------------------
 CASOS = {
@@ -156,15 +172,18 @@ def construir(l):
     b1 = f"{saludo}\n\n{render(primera, l)}\n\n{COMUN}"
     b2 = (f"{saludo}\n\nUn ejemplo de lo que te decía.\n\n{CASOS[p]}\n\n"
           "No hace falta que me creas. Los quince minutos son para mirar vuestro caso, no "
-          "para contaros el nuestro.\n\n¿Esta semana o la que viene?\n\nMaikel")
+          f"para contaros el nuestro.\n\n¿Esta semana o la que viene?\n\n{FIRMA}")
     b3 = (f"{saludo}\n\nLo dejo aquí, pero te hago una última pregunta por si te sirve "
           f"a ti.\n\nSi tuvieras que apostar dónde se pierde más negocio en "
           f"{limpia_empresa(l.get('company_name') or '') or 'tu empresa'} hoy: ¿captación, conversión o "
           "seguimiento?\n\nContéstame con una palabra y te digo si "
-          f"coincide con lo que veo desde fuera.\n\nY si lo prefieres en directo: {CAL}"
-          "\n\nMaikel")
-    if len(b1.split()) > 110:
-        print(f"  aviso: email 1 largo ({len(b1.split())} palabras) para {l['email']}")
+          f"coincide con lo que veo desde fuera.\n\nY si lo prefieres en directo: {LLAMADA}"
+          f"\n\n{FIRMA}")
+    # el limite de 90 palabras de Maikel es sobre la PROSA: las URLs y la firma
+    # no son texto que nadie lea como frase, y contarlas daba falsos avisos.
+    prosa = b1.split(f"Puedes ver cómo funciona")[0]
+    if len(prosa.split()) > 95:
+        print(f"  aviso: email 1 largo ({len(prosa.split())} palabras) para {l['email']}")
     return render(asunto, l), b1, b2, b3
 
 def main():
