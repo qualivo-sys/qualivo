@@ -59,13 +59,17 @@ def a_html(texto, con_enlaces):
             'font-size:15px;line-height:1.55;color:#222222">'
             + H.escape(p).replace("\n", "<br>") + "</p>")
     if con_enlaces:
+        # La URL va VISIBLE, no escondida detras de un texto. Un enlace cuyo
+        # texto tapa el destino es el patron del phishing y asi lo leen los
+        # filtros y el que lo recibe. Viendo qualivo.io se ve que hay una
+        # empresa detras.
         enlaces = (
             '<p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;'
             'font-size:15px;line-height:1.55;color:#222222">'
-            f'Puedes ver cómo funciona <a href="{DIAG}" '
-            f'style="color:{VERDE}">en este enlace</a>, y si prefieres que '
-            f'hablemos, <a href="{CAL}" style="color:{VERDE}">agendamos '
-            'quince minutos</a>.</p>')
+            f'Puedes ver cómo funciona aquí: <a href="{DIAG}" '
+            f'style="color:{VERDE}">{DIAG}</a><br>'
+            'Y si prefieres que hablemos, son quince minutos: '
+            f'<a href="{CAL}" style="color:{VERDE}">{CAL}</a></p>')
         # los enlaces van ANTES del cierre, no despues: la pregunta final
         # tiene que ser lo ultimo que se lee.
         trozos.insert(max(len(trozos) - 1, 0), enlaces)
