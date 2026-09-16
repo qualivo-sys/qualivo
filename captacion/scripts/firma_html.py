@@ -23,19 +23,19 @@ import importlib.util
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126",
       "Content-Type": "application/json"}
 B = "https://server.smartlead.ai/api/v1"
-NARANJA = "#E14504"
+VERDE = "#0E7C74"   # verde de marca Qualivo
 CAL = "https://api.leadconnectorhq.com/widget/bookings/qualivo-20"
 DIAG = "https://qualivo.io/diagnostico/"
 
 FIRMA = (
     '<div style="margin-top:22px;font-family:Arial,Helvetica,sans-serif;'
     'font-size:14px;line-height:1.5;color:#222222">'
-    f'<div style="border-top:2px solid {NARANJA};width:190px;margin-bottom:10px">'
+    f'<div style="border-top:2px solid {VERDE};width:190px;margin-bottom:10px">'
     '</div>'
     '<div><strong>Maikel Echevarría</strong>'
-    f'<span style="color:{NARANJA}"> · CEO</span></div>'
+    f'<span style="color:{VERDE}"> · CEO</span></div>'
     '<div style="color:#555555">Qualivo · '
-    f'<a href="https://qualivo.io" style="color:{NARANJA};text-decoration:none">'
+    f'<a href="https://qualivo.io" style="color:{VERDE};text-decoration:none">'
     'qualivo.io</a></div>'
     '<div style="color:#555555">663 375 205</div>'
     '</div>'
@@ -63,8 +63,8 @@ def a_html(texto, con_enlaces):
             '<p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;'
             'font-size:15px;line-height:1.55;color:#222222">'
             f'Puedes ver cómo funciona <a href="{DIAG}" '
-            f'style="color:{NARANJA}">en este enlace</a>, y si prefieres que '
-            f'hablemos, <a href="{CAL}" style="color:{NARANJA}">agendamos '
+            f'style="color:{VERDE}">en este enlace</a>, y si prefieres que '
+            f'hablemos, <a href="{CAL}" style="color:{VERDE}">agendamos '
             'quince minutos</a>.</p>')
         # los enlaces van ANTES del cierre, no despues: la pregunta final
         # tiene que ser lo ultimo que se lee.
