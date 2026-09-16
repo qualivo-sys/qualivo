@@ -125,37 +125,71 @@ COMUN = (
  f"{FIRMA}")
 
 # --- Email 2: el caso, por puerta ---------------------------------------------
+# Casos reales publicados en qualivo.io, con su enlace. Antes el email 2 contaba
+# la prueba del CRM propio, que no se puede comprobar en ningun sitio. Un caso
+# con nombre, numeros y pagina propia se verifica en un clic, y eso es lo que
+# separa un dato de una promesa.
 CASOS = {
- "anuncios": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar el "
-             "presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
-             "baratos que no compraban.",
- "multiservicio": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar "
-             "el presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
-             "baratos que no compraban.",
+ "crm": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+         "conseguir más leads, era saber cuáles merecían atención. Montamos la "
+         "priorización y el seguimiento sin subir la inversión: 2.000 euros se "
+         "convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+         "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
+ "lista": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+           "conseguir más leads, era saber cuáles merecían atención. Montamos la "
+           "priorización y el seguimiento sin subir la inversión: 2.000 euros se "
+           "convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+           "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
+ "base": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+          "conseguir más leads, era saber cuáles merecían atención. Montamos la "
+          "priorización y el seguimiento sin subir la inversión: 2.000 euros se "
+          "convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+          "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
+ "comercial": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+               "conseguir más leads, era saber cuáles merecían atención. Montamos la "
+               "priorización y el seguimiento sin subir la inversión: 2.000 euros se "
+               "convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+               "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
+ "direccion": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+               "conseguir más leads, era saber cuáles merecían atención. Montamos la "
+               "priorización y el seguimiento sin subir la inversión: 2.000 euros se "
+               "convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+               "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
 
- "google_ads": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar el "
-             "presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
-             "baratos que no compraban.",
- "meta_ads": "Una cuenta que perdía dinero pasó de 0,1 a 7,6 de retorno sin tocar el "
-             "presupuesto. Solo cambiamos qué se optimizaba: estaban comprando leads "
-             "baratos que no compraban.",
- "linkedin_ads": "En un cliente pasamos a medir hasta la venta real en vez de hasta el "
-             "formulario. Del anuncio a la matrícula: 10,2 veces.",
- "crm": "Hice la prueba en mi propio CRM hace unos días: 25 oportunidades paradas, "
-        "34.500 euros declarados, en la primera pasada. Y yo me dedico a esto.",
- "direccion": "Hice la prueba en mi propio CRM hace unos días: 25 oportunidades paradas, "
-        "34.500 euros declarados, en la primera pasada. Y yo me dedico a esto.",
- "lista": "Una clienta tenía años de contactos y nadie detrás. No captamos ni un lead "
-          "nuevo: ordenamos la base, priorizamos y perseguimos con fecha. Recuperó 6,45 "
-          "veces lo que invirtió.",
- "base": "Una clienta tenía años de contactos y nadie detrás. No captamos ni un lead "
-         "nuevo: ordenamos la base, priorizamos y perseguimos con fecha. Recuperó 6,45 "
-         "veces lo que invirtió.",
- "comercial": "Una clienta tenía años de contactos y nadie detrás. No captamos ni un "
-         "lead nuevo: ordenamos la base, priorizamos y perseguimos con fecha. Recuperó "
-         "6,45 veces lo que invirtió.",
- "mide": "En un cliente pasamos a medir hasta la venta real en vez de hasta el "
-         "formulario. Del anuncio a la matrícula: 10,2 veces.",
+ # Las tres puertas de anuncios duelen por lo mismo: no saber que acabo en
+ # venta. El caso de la EAC es exactamente eso, del anuncio a la matricula.
+ "google_ads": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok "
+                "sin saber qué acababa en matrícula. Conectamos cada euro con la "
+                "matrícula final, segmentado por curso: por cada euro invertido, unos "
+                "diez en matrículas.\n\n"
+                "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
+ "meta_ads": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok "
+              "sin saber qué acababa en matrícula. Conectamos cada euro con la "
+              "matrícula final, segmentado por curso: por cada euro invertido, unos "
+              "diez en matrículas.\n\n"
+              "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
+ "linkedin_ads": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok "
+                  "sin saber qué acababa en matrícula. Conectamos cada euro con la "
+                  "matrícula final, segmentado por curso: por cada euro invertido, unos "
+                  "diez en matrículas.\n\n"
+                  "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
+ "anuncios": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok "
+              "sin saber qué acababa en matrícula. Conectamos cada euro con la "
+              "matrícula final, segmentado por curso: por cada euro invertido, unos "
+              "diez en matrículas.\n\n"
+              "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
+ "mide": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok "
+          "sin saber qué acababa en matrícula. Conectamos cada euro con la "
+          "matrícula final, segmentado por curso: por cada euro invertido, unos "
+          "diez en matrículas.\n\n"
+          "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
+
+ # Multiservicio suele ser obra y reforma: BelloVinilo es de ese mundo.
+ "multiservicio": ("En BelloVinilo no había un sistema que optimizar, había que "
+                   "construirlo: captación, conversión, CRM, seguimiento y medición "
+                   "conectados de punta a punta. 3.600 euros de inversión, 30.000 en "
+                   "ventas.\n\n"
+                   "Lo tienes contado aquí: https://qualivo.io/casos/bellovinilo/"),
 }
 
 def limpia_empresa(n):

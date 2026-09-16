@@ -1,81 +1,73 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Genera el copy de LinkedIn por lead, con la misma logica que el email.
+# Genera el copy de LinkedIn por lead. Formato pedido por Maikel el 16-sep.
 #
-# Lo que hace funcionar al email no es el argumentario, es la senal: "veo que
-# trabajais con Salesforce". La primera version de LinkedIn decia "he estado
-# mirando vuestra empresa", que es lo que escribe todo el mundo y no dice nada.
-# Aqui cada lead lleva su senal real, sacada de su campana de Smartlead.
+# El mensaje NO afirma nada sobre su empresa, pregunta. Tres partes:
+#   1. "{Nombre}, una duda que me ha surgido mirando {Empresa}."
+#   2. La duda, con dos opciones, para que contestar cueste una palabra.
+#   3. Por que se pregunta, que es verdad y se puede decir.
 #
-# Y va mas contenido que el email a proposito. En LinkedIn escribes desde tu
-# perfil con tu cara, y estas frases hunden el mensaje:
+# Dos versiones anteriores se cayeron por sonar a vendedor. Lo que no vuelve:
 #   - "te escribo con una pregunta, no con una presentacion": anunciar que no
 #     vendes es vender, y se nota.
-#   - "casi siempre es donde esta el dinero": hablar de dinero en el primer
-#     mensaje suena a gurú.
-#   - "recupero 6,45 veces lo que invirtio": un numero suelto de un desconocido
-#     no es prueba, es ruido.
-# Lo unico que se deja como prueba es la confesion del CRM propio, que funciona
-# porque va en contra de uno mismo: "y yo me dedico a esto".
+#   - "casi siempre es donde esta el dinero": suena a gurú.
+#   - un numero suelto en el primer contacto: de un desconocido no es prueba,
+#     es ruido. Los numeros van en el segundo mensaje y enlazados a la pagina
+#     del caso, que se comprueba en un clic.
 #
-# Los tres campos van como customUserFields de HeyReach y la secuencia los lee
-# con llaves simples: {nota}, {msg1}, {msg2}.
+# La invitacion va SIN nota: la pregunta entera no cabe en 300 caracteres y
+# partirla la deja coja. Los dos mensajes van como customUserFields de HeyReach
+# y la secuencia los lee con llaves simples: {msg1} y {msg2}.
 #
 # Uso: python3 copy_linkedin.py <senales.json> <candidatos.json> --out <fichero>
 import json
 import re
 import sys
 
-# Primera linea por puerta: el hecho observable, igual que en el email.
-SENAL = {
- "crm":          "veo que en {emp} trabajáis con {var}",
- "google_ads":   "veo que en {emp} estáis comprando tráfico en Google",
- "meta_ads":     "veo que en {emp} tenéis el píxel de Meta trabajando",
- "linkedin_ads": "veo que en {emp} estáis invirtiendo en LinkedIn",
- "lista":        "veo que en {emp} mandáis campañas con {var}",
-}
-
-# Que es lo que suelo encontrar ahi. Observacion, no promesa.
-QUE_VEO = {
- "crm":          "Lo que suelo encontrar en un {var} con unos años es "
-                 "oportunidades abiertas que nadie ha vuelto a tocar. No por "
-                 "dejadez: es que nadie las mira.",
- "google_ads":   "Lo que casi nadie sabe decirme es qué campaña trajo al último "
-                 "cliente que firmó. El último lead sí, el último cliente no.",
- "meta_ads":     "Lo que casi nadie sabe decirme es qué campaña trajo al último "
-                 "cliente que firmó. El último lead sí, el último cliente no.",
- "linkedin_ads": "Ahí el clic se paga caro, así que lo que duele no es el coste "
-                 "por lead: es no saber cuál de esas campañas acabó en cliente.",
- "lista":        "Lo que casi nadie tiene atado es cuál de esos suscriptores "
-                 "acabó comprando de verdad.",
-}
-
+# La pregunta, en el formato que pidio Maikel: una duda concreta, con dos
+# opciones para que contestar cueste poco, y el motivo real de preguntarla.
+# No se afirma nada sobre su empresa, se pregunta. Esa es la diferencia con la
+# version anterior, que sonaba a vendedor.
 PREGUNTA = {
- "crm":          "¿Vosotros sabéis cuántas tenéis así?",
- "google_ads":   "¿Vosotros lo tenéis atado?",
- "meta_ads":     "¿Vosotros lo tenéis atado?",
- "linkedin_ads": "¿Vosotros lo medís hasta la venta?",
- "lista":        "¿Vosotros lo sabéis?",
+ "crm":          "Con {var}, ¿tenéis bastante control sobre las oportunidades que "
+                 "se quedan abiertas sin seguimiento o todavía hay bastante "
+                 "revisión manual?",
+ "google_ads":   "Con lo que movéis en Google, ¿llegáis a ver qué campaña trajo al "
+                 "último cliente que firmó o os quedáis en el lead?",
+ "meta_ads":     "Con el píxel de Meta, ¿llegáis a ver qué campaña trajo al último "
+                 "cliente que firmó o os quedáis en el lead?",
+ "linkedin_ads": "Con lo que invertís en LinkedIn, ¿lo medís hasta la venta o os "
+                 "quedáis en el coste por lead?",
+ "lista":        "Con {var}, ¿sabéis cuál de vuestros suscriptores acabó comprando "
+                 "o eso se queda sin cruzar?",
 }
 
-# Unica prueba que se usa. Va en contra de uno mismo, por eso no suena a venta.
+MOTIVO = ("Te lo pregunto porque es precisamente una de las fugas que estamos "
+          "detectando últimamente.")
+
+# El segundo mensaje no insiste: ofrece el caso publicado y una salida. El
+# enlace es a una pagina real con nombre y numeros, que se comprueba en un clic.
 CIERRE = {
- "crm":          "Una cosa que te sirve aunque no hablemos: hice la prueba en mi "
-                 "propio CRM hace unas semanas y me salieron 25 oportunidades "
-                 "paradas. Y yo me dedico a esto.\n\n"
-                 "Si quieres que mire el vuestro, son quince minutos. Y si no "
-                 "toca, sin problema.",
- "default":      "Lo dejo aquí, que tampoco quiero dar la lata.\n\n"
-                 "Si alguna vez te apetece que lo mire desde fuera y te diga qué "
-                 "veo, son quince minutos. Y si no toca, sin problema.",
+ "crm":      "Por si te sirve aunque no hablemos, este es el caso que más se "
+             "parece: el problema no era conseguir más leads, era saber cuáles "
+             "merecían atención.\n\nhttps://qualivo.io/casos/nuria-roure/\n\n"
+             "Y si en algún momento quieres que mire el vuestro, son quince "
+             "minutos. Si no toca, sin problema.",
+ "lista":    "Por si te sirve aunque no hablemos, este es el caso que más se "
+             "parece: el problema no era conseguir más leads, era saber cuáles "
+             "merecían atención.\n\nhttps://qualivo.io/casos/nuria-roure/\n\n"
+             "Y si en algún momento quieres que mire el vuestro, son quince "
+             "minutos. Si no toca, sin problema.",
+ "default":  "Por si te sirve aunque no hablemos, este es el caso que más se "
+             "parece: de la inversión en anuncios a la matrícula, con todo "
+             "medido.\n\nhttps://qualivo.io/casos/eac/\n\n"
+             "Y si en algún momento quieres que mire el vuestro, son quince "
+             "minutos. Si no toca, sin problema.",
 }
 
-GENERICO_NOTA = ("Hola, soy Maikel. Me dedico a mirar dónde se quedan parados "
-                 "los clientes entre que preguntan y firman. Te conecto por si "
-                 "algún día te viene bien preguntar.")
-GENERICO_MSG1 = ("Gracias por aceptar.\n\nLo que más me encuentro es gente que no "
-                 "sabe qué porcentaje de lo que entra acaba en cliente, ni en qué "
-                 "punto se cae el resto.\n\n¿Vosotros lo tenéis medido?")
+GENERICO_MSG1 = ("Una duda que me ha surgido: cuando entra una petición por "
+                 "vuestra web, ¿sabéis qué porcentaje acaba en cliente o eso se "
+                 "queda sin medir?\n\n" + MOTIVO)
 GENERICO_MSG2 = CIERRE["default"]
 
 
@@ -106,29 +98,21 @@ def variable(puerta, asunto):
 
 
 def construir(nombre, empresa, puerta, asunto):
+    """Devuelve (msg1, msg2). La invitacion va SIN nota a proposito.
+
+    La pregunta entera no cabe en los 300 caracteres de la nota de invitacion, y
+    partirla en dos la deja coja. Ademas las invitaciones sin nota se aceptan
+    mas, asi que la pregunta se manda completa en cuanto aceptan."""
     emp = limpia_empresa(empresa)
     var = variable(puerta, asunto)
-    if puerta not in SENAL or var is None or not emp:
+    if puerta not in PREGUNTA or var is None or not emp:
         return None
-    d = {"emp": emp, "var": var}
     nom = (nombre or "").strip()
-    hola = f"Hola {nom}, " if nom else "Hola, "
-
-    nota = (f"{hola}{SENAL[puerta].format(**d)}. "
-            "Me dedico justo a eso, a mirar qué se queda por el camino. "
-            "Te conecto por si algún día te viene bien preguntar.")
-    # LinkedIn corta la nota de invitacion en 300 caracteres. Si se pasa, se
-    # recorta la parte prescindible en vez de mandar una frase partida.
-    if len(nota) > 300:
-        nota = (f"{hola}{SENAL[puerta].format(**d)}. "
-                "Me dedico justo a eso. Te conecto por si te viene bien.")
-    if len(nota) > 300:
-        nota = GENERICO_NOTA
-
-    msg1 = (f"Gracias por aceptar{', ' + nom if nom else ''}.\n\n"
-            f"{QUE_VEO[puerta].format(**d)}\n\n{PREGUNTA[puerta]}")
+    cabecera = (f"{nom}, una duda que me ha surgido mirando {emp}."
+                if nom else f"Una duda que me ha surgido mirando {emp}.")
+    msg1 = f"{cabecera}\n\n{PREGUNTA[puerta].format(emp=emp, var=var)}\n\n{MOTIVO}"
     msg2 = CIERRE.get(puerta, CIERRE["default"])
-    return nota, msg1, msg2
+    return msg1, msg2
 
 
 def main():
@@ -136,31 +120,25 @@ def main():
     cand = json.load(open(sys.argv[2], encoding="utf-8"))
     out, sin = [], 0
     for x in cand:
-        em = x["email"]
-        s = senales.get(em)
-        r = construir(s["nombre"] if s else x.get("nombre"),
-                      (s or x).get("empresa") or x.get("empresa"),
-                      (s or {}).get("puerta"), (s or {}).get("subject1")) if s else None
+        s = senales.get(x["email"])
+        r = construir(s["nombre"], s["empresa"], s["puerta"], s["subject1"]) if s else None
         if not r:
+            # Sin senal no hay pregunta concreta, y la pregunta ES el mensaje.
+            # Se marcan para dejarlos fuera en vez de mandarles un generico.
             sin += 1
-            nota, msg1, msg2 = GENERICO_NOTA, GENERICO_MSG1, GENERICO_MSG2
-        else:
-            nota, msg1, msg2 = r
-        out.append({**x, "nota": nota, "msg1": msg1, "msg2": msg2})
-    largo = [o for o in out if len(o["nota"]) > 300]
-    print(f"{len(out)} leads · {sin} con copy generico (sin señal) · "
-          f"{len(largo)} notas pasadas de 300 caracteres")
+            continue
+        out.append({**x, "msg1": r[0], "msg2": r[1]})
+    print(f"{len(out)} leads con señal · {sin} descartados por no tenerla")
     if "--out" in sys.argv:
         d = sys.argv[sys.argv.index("--out") + 1]
         json.dump(out, open(d, "w", encoding="utf-8"), ensure_ascii=False)
         print("escrito en", d)
         return
-    for o in out[:3]:
+    for o in out[:6]:
         print("=" * 70)
         print(f"{o['email']} · {o.get('empresa')}")
-        print(f"\n[NOTA {len(o['nota'])} car.]\n{o['nota']}")
-        print(f"\n[MSG 1]\n{o['msg1']}")
-        print(f"\n[MSG 2]\n{o['msg2']}")
+        print(f"\n[MENSAJE 1 · al aceptar]\n{o['msg1']}")
+        print(f"\n[MENSAJE 2 · +4 dias]\n{o['msg2']}")
 
 
 if __name__ == "__main__":
