@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
       fields: 'campaign_name,spend,impressions,clicks,ctr,cpc,actions', limit: '25'
     });
     for (const r of (d.data || [])) {
-      if (!/^QV_(DIAG|CRM)/.test(r.campaign_name || '')) continue;
+      if (!/^QV_/.test(r.campaign_name || '')) continue;
       const acts = {};
       (r.actions || []).forEach(function (a) { acts[a.action_type] = a.value; });
       const leads = Number(acts.lead || acts['onsite_conversion.lead_grouped'] || 0);

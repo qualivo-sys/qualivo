@@ -71,8 +71,10 @@ module.exports = async function handler(req, res) {
     return res.status(401).json({ ok: false, error: 'unauthorized' });
   }
   const token = process.env.META_LEADFORM_TOKEN;
+  const conocidos = Object.keys(require('./meta-leadform.js').FORMULARIOS_SECTOR || {});
   const formularios = String(process.env.META_LEADFORM_IDS || '')
     .split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+  conocidos.forEach(function (id) { if (formularios.indexOf(id) === -1) formularios.push(id); });
   if (!token || !formularios.length) {
     return res.status(500).json({ ok: false, error: 'not_configured' });
   }

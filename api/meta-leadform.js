@@ -377,3 +377,4 @@ module.exports = async function handler(req, res) {
 // faltan usando exactamente esta misma logica, para que un lead recuperado
 // quede igual que uno que entro bien.
 module.exports.guardar = guardar;
+module.exports.FORMULARIOS_SECTOR = FORMULARIOS_SECTOR;
