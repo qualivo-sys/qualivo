@@ -27,3 +27,28 @@ a los 10 s de silencio acumulado. Latencia técnica normal (3,3 s por turno).
 
 **Pendiente de observar:** si la pronunciación de «Máikel» queda natural; si la
 segunda llamada del día siguiente conviene cuando la primera la colgó la persona.
+
+## 17-sep-2026 · dos llamadas, ninguna conversación
+
+**Qué pasó.** 09:10, llamada a un contacto de la base antigua reactivado esa mañana
+(Bigpoma): comunicaba, sin conversación. 10:10, llamada de prueba al número de Maikel:
+Raquel dijo la apertura completa y esperó 45 segundos en silencio hasta que el sistema
+colgó por «silence-timed-out». Es el comportamiento que tendría con un buzón de voz:
+el asistente no detectaba contestadores.
+
+**Cambios aplicados al asistente `Raquel · Landing Diagnóstico`** (copia previa en el
+scratchpad: `vapi-asistente-2026-09-17.json`):
+1. Detección de buzón de voz activada (proveedor Vapi). Si salta el contestador, deja
+   un mensaje corto: «Hola, soy Raquel, del equipo de Máikel Echevarría, de Cuálivo.
+   Te llamaba por el diagnóstico que has pedido. Te escribimos por WhatsApp para
+   buscar un hueco. Hasta luego.» y cuelga.
+2. Silencio máximo antes de colgar: de 45 a 25 segundos. Con la regla de nunca dejar
+   más de 3 segundos sin hablar, 45 era demasiado margen.
+
+**Pendiente de observar.** En la transcripción de la llamada de prueba «Máikel» aparece
+como «Michael»; no se puede saber por el texto si es la voz o el transcriptor. Hay que
+oír la grabación de la próxima llamada real antes de tocar la pronunciación.
+
+**Nota.** El contacto de Bigpoma entró en la cadencia por una reactivación de la base
+de febrero hecha el 17-sep desde otra sesión (etiquetas canal-base-antigua,
+respondio-17sep). No es un lead de las campañas nuevas.
