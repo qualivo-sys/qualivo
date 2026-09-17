@@ -63,3 +63,28 @@ L-V 9-18 hora de Argentina, 20 leads/día. Falta asignar el buzón del remitente
 
 Presupuesto Apify: 3,38 de 5 $ del plan gratuito. Captura de Twitch reducida a una vez al día
 (02:00 UTC) para llegar a fin de mes.
+
+## Anexo 17 sep (2) · el canal real es el mensaje directo
+
+De los ~30 creadores con encaje, solo 11 tienen email público. Los mejores (Kenji, KaraCorvus,
+BookOfKen, TheFancyCat, ItzXngel, purrjectyui) solo se alcanzan por DM en Twitch, X o Discord.
+
+Consecuencia: **el outreach no depende de Smartlead**. Smartlead cubre un tercio de la lista; los
+otros dos tercios los cubre una persona escribiendo a mano, 10 al día por cuenta, desde el perfil
+del Game Director. Eso arranca hoy.
+
+Reparto: Lea escribe a mano a los 6 Tier 1-2 grandes; el resto se reparte entre email (Smartlead) y
+DM manual.
+
+Plantillas de DM (EN/ES) en la sección 12 del Notion.
+
+## Hallazgos sobre la ficha de Steam (17 sep)
+
+1. Sigue en «próximamente» y **no dice que se pueda publicar vídeo**. Meccha Chameleon lo pone
+   explícito en su ficha. Son dos líneas en Steamworks y quitan la duda al creador que llega solo.
+2. Hay una línea de requisitos recomendados en español dentro del bloque en inglés
+   («GPU dedicada con 4 GB de VRAM»).
+3. **No está activado el Steam Playtest**, solo la demo. El Playtest de Steam notifica a todos los
+   que tienen el juego en lista de deseados: tráfico gratis que no se está usando.
+4. El calendario de reservas carga con JavaScript; no se puede auditar la disponibilidad desde
+   fuera. Hay que comprobar qué franjas y qué zonas horarias ve un creador de EE. UU.
