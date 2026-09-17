@@ -5,10 +5,14 @@ AGENTE       qualivo.paid
 PIDE         Maikel, 17-sep: «ponla dentro del mismo ad no hagas uno nuevo tienes que editar
              la ubicación» · «metelo dentro delmismo ad»
 CAMPAÑA      QV_3VERTICALES_Sep26   120245682520090358
-ESTADO       ⚠️ CONSTRUIDO Y VALIDADO · BLOQUEADO por una certificación de cuenta
+ESTADO       ✅ HECHO Y VERIFICADO · 17-sep 19:5x · los cuatro anuncios sirven 4:5 en feed
 ```
 
 ## Qué está hecho
+
+> **Cerrado.** Los cuatro anuncios apuntan ya a su creativo nuevo. Ver *Cómo se desbloqueó*
+> al final para la parte del token.
+
 
 Los cuatro vídeos 4:5 están subidos y procesados, y los cuatro creativos nuevos están creados
 y verificados contra la API. Lo único que falta es enganchar cada creativo a su anuncio, y eso
@@ -79,3 +83,52 @@ vídeos **no** se han publicado en la página.
 En el momento de hacerlo la campaña llevaba **69 impresiones y 2,21 €** (Meta Insights, 17-sep).
 No es cero, como dije antes por error: es calderilla y el aprendizaje no ha arrancado, pero
 conviene no repetirlo cuando sí haya histórico.
+
+## Cómo se desbloqueó
+
+La certificación de no discriminación que firmó Maikel iba a su **perfil personal**
+(`1569066887680025`). La API escribía como **Twin Integration** (`122095940019184700`), un
+usuario de sistema ADMIN del negocio Qualivo. Son dos usuarios distintos y la certificación va
+por usuario, así que firmar no desbloqueaba nada.
+
+Con el token del usuario de sistema quedó bloqueado **todo lo que pone anuncios en circulación**,
+no solo cambiar el creativo:
+
+| Intento con el token de sistema | Resultado |
+|---|---|
+| Cambiar el creativo de un anuncio | ❌ `subcode 2859002` |
+| Cambiarlo y pausar en la misma llamada | ❌ `subcode 2859002` |
+| Crear un anuncio nuevo **en pausado** | ❌ `subcode 2859002` |
+| Copiar un anuncio | ❌ `subcode 2859002` |
+| Reescribir el nombre del mismo anuncio | ✅ `success: true` |
+
+Lo resolvió Maikel generando un token de **usuario** desde su perfil certificado. Con ese, los
+cuatro `POST` pasaron a la primera.
+
+**El callejón del Administrador, para que no se repita:** con personalización por ubicación, la
+interfaz exige una URL de sitio web y **no enseña el campo donde escribirla** en un anuncio de
+formulario instantáneo. Ni en Destino ni en Contenido del anuncio. Por API sí existe:
+`asset_feed_spec.link_urls`. Si vuelve a pasar, no se busca el campo: se hace por API.
+
+## Verificación final · 17-sep
+
+Los cuatro anuncios, leídos después de escribir:
+
+```
+AD · 3V · reformas    ACTIVE   creativo 1385315713721702   form 1061906346738399
+AD · 3V · formacion   ACTIVE   creativo 3193765407499417   form 1786744439184083
+AD · 3V · clinicas    ACTIVE   creativo 2005089564211895   form 1479297290674260
+AD · 3V · asesorias   ACTIVE   creativo 1819169675904697   form 1910722980312589
+```
+
+Los cuatro con las mismas dos reglas: `v45 → fb[feed] ig[stream]` y `v916 → fb[story] ig[story]`.
+Las 16 vistas previas (4 creativos × 4 ubicaciones) renderizan. Conjunto `ACTIVE` a 20,00 €/día,
+sin tocar. Los anuncios pasan a `IN_PROCESS` mientras Meta revisa el creativo nuevo, que es lo
+normal tras una sustitución.
+
+## Nota sobre credenciales
+
+El token de usuario se usó solo en memoria de la sesión. **No está en el repositorio, ni en este
+documento, ni en el bus.** Caduca a las 20:00 del 17-sep. El token de página de Twin Integration
+sigue sin rotar, día 11, y sigue sin poder tocar anuncios hasta que se certifique al usuario de
+sistema o al negocio.
