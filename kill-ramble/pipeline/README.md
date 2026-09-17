@@ -50,3 +50,42 @@ Cron diario, después de la captura de Twitch de las 02:00 UTC:
 ```cron
 30 2 * * *  cd /ruta/al/repo && node kill-ramble/pipeline/run.mjs --since 26h --out ./out --push >> ./out/pipeline.log 2>&1
 ```
+
+## Importar las bases del estudio
+
+El estudio deja sus listas en una carpeta de Drive compartida. Se descargan a una carpeta
+local, se exportan a CSV las que sean Excel o Google Sheets, y:
+
+```bash
+node pipeline/import_partner.mjs --in ./entrantes --base ./out/all_scored.csv --out ./out
+```
+
+**No hace falta plantilla.** El importador detecta las columnas solo (nombre, canal, email,
+seguidores, idioma, notas, en español y en inglés) y, además, rastrea cualquier enlace o email
+que aparezca en cualquier columna, aunque venga sin `https://`.
+
+### Cómo decide si alguien ya está
+
+`identity.mjs` genera las claves con las que se reconoce a una persona y cruza por la primera
+que coincida:
+
+| Clave | Ejemplo | Fuerza |
+|---|---|---|
+| Plataforma y handle | `youtube:thefancycat` | Fuerte. Reconoce `@x`, `/c/x`, `/channel/UC…`, con o sin protocolo, con sufijos como `/videos` |
+| Email normalizado | `email:contactsaparata@gmail.com` | Fuerte. En Gmail ignora puntos y lo que va tras `+` |
+| Nombre | `name:kenji` | Frágil. **Nunca** se usa para descartar: manda a revisión |
+
+### Qué devuelve
+
+| Archivo | Qué contiene |
+|---|---|
+| `partner_nuevos.csv` | Los que no teníamos, ya puntuados y listos para la cola |
+| `partner_ya_estaban.csv` | Los que ya teníamos, con la clave por la que cruzaron y lo que aportan (un email que nos faltaba, notas) |
+| `partner_por_revisar.csv` | Coinciden solo por nombre. Se miran a mano: un falso negativo aquí significa escribir dos veces a alguien |
+| `partner_sin_datos.csv` | Filas sin URL, email ni nombre |
+
+### La regla que no se salta
+
+Si una fila suya dice que **ya han hablado** con esa persona, no entra en la secuencia de
+primer contacto. Escribirle como si no les conociera es peor que no escribirle. Esas filas
+salen marcadas en las notas del informe.
