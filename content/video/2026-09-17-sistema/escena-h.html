@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1920px;height:1080px;position:relative;overflow:hidden;font-family:SG;background:#1FA396;color:#0A0A0B}
+#tex{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:60}
+#reloj{position:absolute;top:52px;left:150px;transform:none;background:#0A0A0B;color:#F4F1EB;border-radius:999px;padding:18px 40px;display:flex;align-items:center;gap:22px;z-index:20;opacity:0;white-space:nowrap}
+#reloj b{font-family:Anton;font-size:56px;letter-spacing:.04em;color:#F4CC38;font-weight:400;line-height:1}
+#reloj span{font-size:24px;font-weight:600;color:rgba(244,241,235,.75)}
+#stage{position:absolute;left:150px;top:120px;width:880px;height:1240px;transform:scale(.68);transform-origin:0 0}
+.sc{position:absolute;inset:0;opacity:0}
+#cap{position:absolute;left:880px;right:100px;top:330px;font-family:Anton;font-size:96px;line-height:.98;text-transform:uppercase;color:#0A0A0B;text-align:left;z-index:30;opacity:0}
+#cap i{font-style:normal;color:#F4F1EB}
+.pie{position:absolute;bottom:60px;font-size:24px;z-index:30;color:rgba(10,10,11,.55)}
+.pieL{left:150px}.pieR{right:100px;font-family:Anton;font-size:26px;letter-spacing:.04em}
+/* hook */
+#s0{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:0 20px}
+#s0 div{font-family:Anton;font-size:190px;line-height:.92;text-transform:uppercase;opacity:0}
+#s0 div.y{color:#F4CC38}
+/* phone */
+.phone{position:absolute;left:60px;top:0;width:760px;height:1240px;background:#0A0A0B;border-radius:64px;padding:22px}
+.screen{width:100%;height:100%;background:#F4F1EB;border-radius:46px;overflow:hidden;position:relative}
+.notch{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:200px;height:34px;background:#0A0A0B;border-radius:20px}
+/* form */
+.form{padding:110px 52px 0}
+.form h3{font-family:Anton;font-size:52px;line-height:1;text-transform:uppercase;margin-bottom:8px}
+.form p{font-size:24px;color:#5A5E66;margin-bottom:30px}
+.f{border:3px solid #0A0A0B;border-radius:18px;padding:16px 22px;margin-bottom:18px;font-size:27px;font-weight:600;position:relative;background:#fff}
+.f small{display:block;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#7A7C82;font-weight:700;margin-bottom:6px}
+.f.big{min-height:150px;line-height:1.35}
+.btn{margin-top:14px;background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:36px;text-transform:uppercase;letter-spacing:.04em;text-align:center;padding:26px;border-radius:18px}
+/* ficha CRM */
+.card{position:absolute;left:0;top:0;width:880px;background:#F4F1EB;border-radius:36px;padding:44px 48px;border:4px solid #0A0A0B}
+.card .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.card .k em{font-style:normal;background:#F4CC38;color:#0A0A0B;padding:6px 14px;border-radius:999px;letter-spacing:.06em}
+.card h2{font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;margin-bottom:26px}
+.row{display:grid;grid-template-columns:230px 1fr;gap:0 20px;padding:18px 0;border-top:2px solid rgba(10,10,11,.12);font-size:29px;line-height:1.3;opacity:0}
+.row b{font-weight:700;color:#7A7C82;font-size:22px;letter-spacing:.1em;text-transform:uppercase;padding-top:6px}
+.bar{height:22px;background:rgba(10,10,11,.12);border-radius:999px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:#0E7C74;width:0}
+.pill{display:inline-block;background:#0A0A0B;color:#F4F1EB;border-radius:999px;padding:8px 18px;font-size:24px;font-weight:700}
+/* whatsapp */
+.wa{position:absolute;inset:0;background:#EFE7DD}
+.wah{background:#0A0A0B;color:#F4F1EB;padding:70px 40px 24px;display:flex;align-items:center;gap:20px}
+.wah .av{width:64px;height:64px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:34px;display:flex;align-items:center;justify-content:center}
+.wah b{font-size:30px;display:block}.wah span{font-size:20px;color:rgba(244,241,235,.6)}
+.bub{position:absolute;left:34px;width:600px;background:#fff;border-radius:26px;border-top-left-radius:8px;padding:24px 26px;font-size:27px;line-height:1.38;box-shadow:0 4px 0 rgba(10,10,11,.08);opacity:0}
+.bub .t{text-align:right;font-size:18px;color:#7A7C82;margin-top:10px}
+.typing{position:absolute;left:34px;width:120px;background:#fff;border-radius:26px;padding:22px 28px;display:flex;gap:10px;opacity:0}
+.typing i{width:14px;height:14px;border-radius:50%;background:#9AA2AE;display:block}
+/* call */
+.call{position:absolute;inset:0;background:#0A0A0B;color:#F4F1EB;display:flex;flex-direction:column;align-items:center;padding-top:150px}
+.call .av{width:220px;height:220px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:120px;display:flex;align-items:center;justify-content:center;margin-bottom:34px;position:relative}
+.call .av::after{content:'';position:absolute;inset:-22px;border-radius:50%;border:4px solid rgba(244,204,56,.5)}
+.call h2{font-family:Anton;font-size:56px;text-transform:uppercase;letter-spacing:.02em}
+.call p{font-size:26px;color:rgba(244,241,235,.6);margin-top:8px}
+.wave{display:flex;gap:10px;align-items:center;height:120px;margin-top:60px}
+.wave i{width:12px;border-radius:6px;background:#F4CC38;display:block;height:20px}
+.sub{position:absolute;left:44px;right:44px;bottom:230px;font-size:34px;line-height:1.35;text-align:center;color:#F4F1EB;font-weight:600}
+.sub i{font-style:normal;color:#F4CC38}
+.cbtn{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:110px;height:110px;border-radius:50%;background:#E5484D}
+.cal{position:absolute;left:0;right:0;bottom:0;background:#F4F1EB;color:#0A0A0B;border-radius:36px 36px 0 0;padding:40px 48px;opacity:0}
+.cal .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:8px}
+.cal h3{font-family:Anton;font-size:60px;line-height:1;text-transform:uppercase}
+.cal p{font-size:27px;margin-top:10px;color:#3D4148}
+.chk{position:absolute;right:44px;top:44px;width:74px;height:74px;border-radius:50%;background:#0E7C74;color:#F4F1EB;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800}
+/* pipeline */
+.board{position:absolute;left:0;top:0;width:880px;height:1240px;background:#F4F1EB;border-radius:36px;border:4px solid #0A0A0B;padding:40px 36px}
+.board .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:22px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;height:760px}
+.col{background:rgba(10,10,11,.06);border-radius:22px;padding:16px 14px;position:relative}
+.col h4{font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:#3D4148;margin-bottom:12px;text-align:center;line-height:1.2}
+.lead{position:absolute;left:14px;width:calc(100% - 28px);background:#fff;border:3px solid #0A0A0B;border-radius:16px;padding:16px 14px;font-size:22px;line-height:1.25;font-weight:700}
+.lead small{display:block;font-size:17px;color:#7A7C82;font-weight:600;margin-top:6px}
+.ghost{background:#fff;border-radius:16px;padding:16px 14px;font-size:20px;color:#9AA2AE;margin-bottom:12px;height:84px}
+.rule{margin-top:26px;font-size:24px;line-height:1.5;color:#3D4148}
+.rule b{color:#0A0A0B}
+.tag{margin-top:22px;display:inline-block;background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:30px;letter-spacing:.03em;padding:14px 22px;border-radius:14px;text-transform:uppercase;opacity:0}
+/* informe */
+.mail{position:absolute;left:0;top:0;width:880px;background:#F4F1EB;border-radius:36px;border:4px solid #0A0A0B;padding:44px 48px}
+.mail .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;display:flex;justify-content:space-between}
+.mail h2{font-family:Anton;font-size:62px;line-height:1;text-transform:uppercase;margin:12px 0 26px}
+.li{display:grid;grid-template-columns:60px 1fr;gap:0 16px;padding:20px 0;border-top:2px solid rgba(10,10,11,.12);font-size:30px;line-height:1.3;opacity:0}
+.li i{font-style:normal;font-family:Anton;font-size:40px;color:#0E7C74;line-height:1}
+.li.bad i{color:#C2410C}
+.li b{font-weight:700}
+.mail .ej{font-size:18px;color:#7A7C82;margin-top:18px;letter-spacing:.06em;text-transform:uppercase}
+/* agentes */
+#s6{padding:0 40px}
+.ag{display:grid;grid-template-columns:84px 1fr;gap:0 26px;align-items:center;height:150px;opacity:.28}
+.ag .n{width:84px;height:84px;border-radius:50%;border:5px solid #0A0A0B;font-family:Anton;font-size:40px;display:flex;align-items:center;justify-content:center;background:transparent}
+.ag .t{font-family:Anton;font-size:60px;text-transform:uppercase;line-height:1}
+.ag .t small{display:block;font-family:SG;font-size:24px;font-weight:600;text-transform:none;color:rgba(10,10,11,.7);margin-top:4px}
+.ag.on{opacity:1}.ag.on .n{background:#F4CC38}
+#s6 .loop{margin-top:30px;font-size:30px;font-weight:700;text-align:center}
+/* fin */
+#s7{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:40px}
+#s7 img{width:640px}
+#s7 .cta{font-family:Anton;font-size:72px;line-height:.98;text-transform:uppercase;color:#0A0A0B}
+#s7 .web{font-family:Anton;font-size:48px;letter-spacing:.06em;color:#F4CC38;margin-top:10px}
+</style>
+<div id="e">
+  <div id="reloj"><span>desde el formulario</span><b id="rt">00:00</b></div>
+  <div id="wide" style="position:absolute;left:150px;right:150px;top:120px;bottom:120px"></div>
+  <div id="stage">
+    <div class="sc" id="s0"><div>Un lead.</div><div>Diez minutos.</div><div class="y">Cero personas.</div></div>
+    <div class="sc" id="s1a"><div class="phone"><div class="screen"><div class="notch"></div><div class="form">
+      <h3>Diagnóstico gratuito</h3><p>Dónde se te escapa el dinero.</p>
+      <div class="f"><small>Nombre</small>Marta Ríos</div>
+      <div class="f"><small>Empresa</small>Reformas Ríos · 9 personas</div>
+      <div class="f"><small>Móvil</small>6•• ••• •••</div>
+      <div class="f big"><small>¿Dónde crees que se te escapa?</small>Mando presupuestos y la mitad no me contesta.</div>
+      <div class="btn" id="btn">Pedir el diagnóstico</div>
+    </div></div></div></div>
+    <div class="sc" id="s1b"><div class="card">
+      <div class="k"><span>Nuevo contacto · CRM</span><em id="hace">hace 8 s</em></div>
+      <h2>Marta Ríos</h2>
+      <div class="row"><b>Origen</b><span>Meta · anuncio B <span class="pill">formulario</span></span></div>
+      <div class="row"><b>Empresa</b><span>Reformas Ríos · 9 personas</span></div>
+      <div class="row"><b>Quiere</b><span>Presupuestos que no contestan</span></div>
+      <div class="row"><b>Prioridad</b><span><span id="pn">0</span> / 100<div class="bar"><i id="pb"></i></div></span></div>
+      <div class="row"><b>Trato</b><span>Prospección → <span class="pill">Nuevo lead</span></span></div>
+      <div class="row"><b>Siguiente</b><span>WhatsApp con sus palabras · en 2 min</span></div>
+    </div></div>
+    <div class="sc" id="s2"><div class="phone"><div class="screen"><div class="wa">
+      <div class="wah"><div class="av">M</div><div><b>Maikel · Qualivo</b><span>en línea</span></div></div>
+      <div class="typing" id="typ" style="top:200px"><i></i><i></i><i></i></div>
+      <div class="bub" id="bub" style="top:200px">Hola Marta, soy Maikel, de Qualivo. Has dejado tus datos en el anuncio del diagnóstico.<br><br>Antes de llamarte te pregunto una cosa: <b>¿cuántos presupuestos del mes pasado siguen hoy sin respuesta?</b><div class="t">10:02 ✓✓</div></div>
+    </div></div></div></div>
+    <div class="sc" id="s3"><div class="phone"><div class="screen"><div class="call">
+      <div class="av">R</div><h2>Raquel · Qualivo</h2><p id="cst">Llamada entrante…</p>
+      <div class="wave" id="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="sub" id="sub"></div>
+      <div class="cbtn"></div>
+      <div class="cal" id="cal"><div class="chk">✓</div><div class="k">Cita en tu calendario</div><h3>Jueves · 10:00</h3><p>Diagnóstico con Marta Ríos · 15 min</p></div>
+    </div></div></div></div>
+    <div class="sc" id="s4"><div class="board">
+      <div class="k">Prospección · se mueve solo</div>
+      <div class="cols">
+        <div class="col"><h4>Nuevo lead</h4><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div></div>
+        <div class="col"><h4>Conversación</h4><div class="ghost"></div><div class="ghost"></div></div>
+        <div class="col"><h4>Reunión agendada</h4><div class="ghost"></div></div>
+        <div class="lead" id="ld">Marta Ríos<small>Meta · anuncio B · 82</small></div>
+      </div>
+      <div class="rule">Presupuesto enviado → <b>3 días</b> sin respuesta → seguimiento → <b>10 días</b> → otro.</div>
+      <div class="tag" id="tag">Seguimiento parado: ha contestado</div>
+    </div></div>
+    <div class="sc" id="s5"><div class="mail">
+      <div class="k"><span>Informe de la mañana</span><span>Jueves · 07:30</span></div>
+      <h2>Qué pasó ayer</h2>
+      <div class="li"><i>B</i><span><b>Anuncio B</b> → reuniones. Es el que trae clientes.</span></div>
+      <div class="li bad"><i>A</i><span><b>Anuncio A</b> → formularios que no cogen el teléfono.</span></div>
+      <div class="li"><i>!</i><span><b>Presupuestos enfriándose:</b> la lista de hoy, por orden.</span></div>
+      <div class="li"><i>→</i><span><b>Propuesta:</b> pausar A. Subir B.</span></div>
+      <div class="ej">Pantalla de ejemplo</div>
+    </div></div>
+    <div class="sc" id="s6">
+      <div class="ag"><div class="n">1</div><div class="t">Captar<small>anuncio y landing que hablan de su problema</small></div></div>
+      <div class="ag"><div class="n">2</div><div class="t">Identificar<small>entra al CRM con origen y prioridad</small></div></div>
+      <div class="ag"><div class="n">3</div><div class="t">Contactar<small>WhatsApp en dos minutos</small></div></div>
+      <div class="ag"><div class="n">4</div><div class="t">Cualificar<small>la voz llama y da hora</small></div></div>
+      <div class="ag"><div class="n">5</div><div class="t">Seguir<small>fecha y siguiente paso, siempre</small></div></div>
+      <div class="ag"><div class="n">6</div><div class="t">Recuperar<small>vuelve a los «ahora no»</small></div></div>
+      <div class="ag"><div class="n">7</div><div class="t">Aprender<small>el informe mejora el siguiente anuncio</small></div></div>
+      <div class="loop">Dentro del CRM que ya tienes.</div>
+    </div>
+    <div class="sc" id="s7"><img src="rec/logo-blanco.png"><div class="cta">Pide ahora el diagnóstico<br>gratuito de tu sistema.</div><div class="web">QUALIVO.IO</div></div>
+  </div>
+  <div id="cap"></div>
+  <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
+  <div id="tex"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+const T={n0:[0,3.11],n1:[3.56,6.3],n2:[10.31,4.86],n3:[15.62,5.15],r0:[21.22,3.5],n4:[25.17,5.25],n5:[30.87,4.73],n6:[36.05,6.71],n7:[43.21,4.26]};
+const DUR=48.82;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3);
+function win(t,a,b,fi=.35,fo=.3){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), nm(b,t,t+fo)===0?1:1-nm(t,b-fo,b)); }
+function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
+const CAPS=[[T.n1[0],T.n2[0],'Entra en tu CRM <i>ordenada.</i>'],[T.n2[0],T.n3[0],'Respuesta en <i>dos minutos.</i> Con sus palabras.'],[T.n3[0],T.r0[0],'Si no contesta, la llama <i>una voz.</i> Y le da hora.'],[T.n4[0],T.n5[0],'Si se enfría, alguien insiste.<br>Si contesta, <i>se para.</i>'],[T.n5[0],T.n6[0],'Cada mañana sabes qué anuncio <i>trae clientes.</i>'],[T.n6[0],T.n7[0],'Siete agentes de IA dentro del <i>CRM que ya tienes.</i>']];
+const RAQ='Hola Marta, soy Raquel, del equipo de Maikel, de Qualivo. Has pedido el diagnóstico en la web. ¿Te viene bien el jueves a las diez?'.split(' ');
+function mmss(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+window.setT=function(t){
+  // reloj
+  let rv=null;
+  if(t>=T.n1[0]+1.1 && t<T.n6[0]-0.4){
+    if(t<T.n2[0]) rv=nm(t,T.n1[0]+1.1,T.n1[0]+2.2)*8;
+    else if(t<T.n3[0]) rv=120+nm(t,T.n2[0],T.n2[0]+1.6)*10;
+    else if(t<T.r0[0]) rv=400;
+    else if(t<T.n4[0]) rv=400+nm(t,T.r0[0],T.n4[0])*25;
+    else if(t<T.n5[0]) rv=425;
+    else rv=null;
+  }
+  const rl=$('reloj'); if(rv===null && t>=T.n5[0] && t<T.n6[0]-0.4){ rl.style.opacity=1; rl.innerHTML='<span>al día siguiente</span><b>07:30</b>'; }
+  else if(rv!==null){ rl.style.opacity=win(t,T.n1[0]+1.1,T.n5[0],.3,.3); rl.innerHTML='<span>desde el formulario</span><b>'+mmss(rv)+'</b>'; }
+  else rl.style.opacity=0;
+  // captions
+  const cap=$('cap'); let c=CAPS.find(x=>t>=x[0]&&t<x[1]); if(c){cap.innerHTML=c[2]; show(cap,win(t,c[0],c[1],.3,.25),18);} else cap.style.opacity=0;
+  // s0 hook
+  const s0=$('s0'); show(s0,win(t,0,T.n1[0]-.1,.2,.3)); [...s0.children].forEach((d,i)=>{const o=nm(t,.15+i*.75,.55+i*.75); show(d,o,40);});
+  // s1a form
+  const a1=T.n1[0]; show($('s1a'),win(t,a1,a1+2.3,.3,.3),30); const pr=nm(t,a1+.9,a1+1.15); $('btn').style.transform=`scale(${1-.06*Math.sin(pr*Math.PI)})`; $('btn').textContent=t>a1+1.2?'Enviado ✓':'Pedir el diagnóstico';
+  // s1b ficha
+  const b1=a1+2.3; show($('s1b'),win(t,b1,T.n2[0]-.05,.35,.3),40); document.querySelectorAll('#s1b .row').forEach((r,i)=>show(r,nm(t,b1+.3+i*.42,b1+.6+i*.42),16));
+  const pv=Math.round(nm(t,b1+1.6,b1+2.5)*82); $('pn').textContent=pv; $('pb').style.width=pv+'%'; $('hace').textContent='hace '+Math.min(8,Math.max(1,Math.round(1+(t-b1)*2)))+' s';
+  // s2 whatsapp
+  const a2=T.n2[0]; show($('s2'),win(t,a2,T.n3[0]-.05,.3,.3),30); const ty=win(t,a2+.4,a2+1.5,.2,.15); show($('typ'),ty); [...$('typ').children].forEach((i,k)=>i.style.transform=`translateY(${-6*Math.max(0,Math.sin((t*6+k*1.1)))}px)`); show($('bub'),nm(t,a2+1.55,a2+1.95),24);
+  // s3 call
+  const a3=T.n3[0]; show($('s3'),win(t,a3,T.n4[0]-.05,.3,.3),30); const con=t>a3+1.8; $('cst').textContent=con?'00:'+String(Math.floor(t-a3-1.8)).padStart(2,'0')+' · en llamada':'Llamada entrante…';
+  [...$('wave').children].forEach((i,k)=>{i.style.height=(con?20+70*Math.abs(Math.sin(t*9+k*.9))*(t<T.r0[0]+3.2?1:.15):16)+'px';});
+  const r0=T.r0[0]; const nw=Math.floor(nm(t,r0,r0+3.4)*RAQ.length); $('sub').innerHTML=t>=r0?RAQ.slice(0,nw).map((w,i)=>i===nw-1?'<i>'+w+'</i>':w).join(' '):'';
+  show($('cal'),nm(t,T.n4[0]-1.35,T.n4[0]-.95),60);
+  // s4 pipeline
+  const a4=T.n4[0]; show($('s4'),win(t,a4,T.n5[0]-.05,.3,.3),30); const mv=out(nm(t,a4+.6,a4+1.7)); const ld=$('ld'); ld.style.top=(150+Math.sin(mv*Math.PI)*-30)+'px'; ld.style.left=(14+mv*(2*(880-72-36)/3+36))+'px'; ld.style.width='calc((100% - 36px)/3 - 28px)'; show($('tag'),nm(t,a4+2.4,a4+2.8),16);
+  // s5 informe
+  const a5=T.n5[0]; show($('s5'),win(t,a5,T.n6[0]-.05,.3,.3),30); document.querySelectorAll('#s5 .li').forEach((r,i)=>show(r,nm(t,a5+.4+i*.6,a5+.7+i*.6),16));
+  // s6 agentes
+  const a6=T.n6[0]; show($('s6'),win(t,a6,T.n7[0]-.05,.3,.3),30); document.querySelectorAll('#s6 .ag').forEach((g,i)=>{g.classList.toggle('on',t>a6+.4+i*.55);});
+  // s7 fin
+  const a7=T.n7[0]; show($('s7'),win(t,a7,DUR+1,.4,1),30);
+};
+// en horizontal, portada y cierre a ancho completo
+const W=$('wide'); W.appendChild($('s0')); W.appendChild($('s7')); $('s0').style.padding='0 40px'; $('s7').style.gap='34px';
+window.setT(0);
+</script>
