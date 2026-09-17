@@ -16,7 +16,27 @@ const CF = {
   fuente_campania:   'CLYQMLrGYZi8iiHRactB',
   iman_captacion:    'Baa3dQNDNsn1egjx5cxE',
   resultado_test:    'UGXJAIaJYIiT8HTOUJSj',
+  // Atribución (creados 17-sep): rellenan el apartado UTM del contacto
+  utm_source:        'yLWQ5KU1cTUHm6kyygbL',
+  utm_medium:        'hXRB6IFVOJKYApaXGNEW',
+  utm_campaign:      '1hboX9nGPzF6cQuk4opF',
+  utm_content:       'zUM4I8S9ZowLWMki13s9',
+  utm_term:          'kpkhY2up9lJfaoTIXV7L',
+  landing_url:       '97NNEbiisZgjEzDxzv4P',
+  click_id:          'vCwr7TZT0lNRvGJS63eQ',
 };
+
+// UTM de la página: las lee de la query del imán (el bloque de GTM copia las del artículo al iframe)
+function utms(q) {
+  const out = {};
+  try {
+    const p = new URLSearchParams(String(q || '').replace(/^\?/, ''));
+    for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) if (p.get(k)) out[k] = p.get(k).slice(0, 200);
+    const cid = p.get('fbclid') || p.get('gclid') || p.get('ttclid');
+    if (cid) out.click_id = cid.slice(0, 300);
+  } catch {}
+  return out;
+}
 
 // Traducción a los valores exactos de cada desplegable del CRM
 const PLAZO   = { '<3': 'En 1-3 meses', '3-6': 'En 3-6 meses', '>6': 'Solo busco info' };
@@ -51,6 +71,7 @@ export default async function handler(req, res) {
 
   const sc = body.scored || {};
   const det = body.detalle || {};
+  const u  = utms(body.utm);
 
   const tags = ['lead-magnet', 'organico-web'];
   if (TAG_IMAN[body.magnet]) tags.push(TAG_IMAN[body.magnet]);
@@ -70,7 +91,14 @@ export default async function handler(req, res) {
       { id: CF.lead_temperature, value: sc.tag || 'Frio' },
       { id: CF.cuando_empezar,   value: PLAZO[body.plazo] || 'Solo busco info' },
       { id: CF.programa_interes, value: PROGRAMA[body.curso] || 'Aun no estoy seguro' },
-      { id: CF.fuente_plataforma,value: 'Organico SEO' },
+      { id: CF.fuente_plataforma,value: u.utm_source ? ({meta:'Meta',facebook:'Meta',google:'Google Ads',tiktok:'TikTok',email:'Email'}[u.utm_source.toLowerCase()] || u.utm_source) : 'Organico SEO' },
+      { id: CF.utm_source,       value: u.utm_source || 'organico' },
+      { id: CF.utm_medium,       value: u.utm_medium || 'seo' },
+      { id: CF.utm_campaign,     value: u.utm_campaign || ('blog · ' + (body.magnet || '')) },
+      { id: CF.utm_content,      value: u.utm_content || '' },
+      { id: CF.utm_term,         value: u.utm_term || '' },
+      { id: CF.landing_url,      value: String(body.url || '').slice(0, 300) },
+      { id: CF.click_id,         value: u.click_id || '' },
       { id: CF.fuente_campania,  value: body.magnet || '' },
       { id: CF.iman_captacion,   value: IMAN[body.magnet] || '' },
       { id: CF.resultado_test,   value: resumen(body, sc, det) },
