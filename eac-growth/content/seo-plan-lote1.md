@@ -6,12 +6,12 @@ al importar `import/eac-blog-lote1.xml` se rellenan solos. Esta tabla es la refe
 
 | # | URL (slug) | Keyword objetivo | Título SEO (Yoast) | Palabras |
 |---|---|---|---|---|
-| 1 | `/blog/como-superar-entrevista-tcp-aerolinea/` | entrevista tcp | Entrevista TCP: cómo superar la selección de una aerolínea | 1166 |
+| 1 | `/blog/como-superar-entrevista-tcp-aerolinea/` | entrevista tcp | Entrevista TCP: cómo superar la selección de una aerolínea | 1164 |
 | 2 | `/blog/curso-tcp-precio-cuanto-cuesta/` | curso tcp precio | Curso de TCP: precio real y qué debe incluir (guía 2026) | 1125 |
 | 3 | `/blog/como-entrar-a-trabajar-en-una-aerolinea/` | trabajar en una aerolínea | Cómo entrar a trabajar en una aerolínea desde cero | 923 |
 | 4 | `/blog/salidas-profesionales-tcp-carrera-aviacion/` | salidas profesionales tcp | Salidas profesionales de un TCP: la carrera después de volar | 862 |
 | 5 | `/blog/curso-tcp-gratis-existe-realidad/` | curso tcp gratis | Curso de TCP gratis: qué es real y qué no (sin rodeos) | 934 |
-| 6 | `/blog/ser-azafato-de-vuelo-hombre-tcp/` | azafato de vuelo | Azafato de vuelo: ser TCP siendo hombre (guía real) | 838 |
+| 6 | `/blog/ser-azafato-de-vuelo-hombre-tcp/` | azafato de vuelo | Azafato de vuelo: ser TCP siendo hombre (guía real) | 839 |
 | 7 | `/blog/azafata-de-tierra-que-es-requisitos-sueldo/` | azafata de tierra | Azafata de tierra: requisitos, sueldo y cómo empezar | 978 |
 | 8 | `/blog/agente-de-rampa-que-hace-cuanto-gana/` | agente de rampa | Agente de rampa: funciones, sueldo y cómo entrar | 928 |
 | 9 | `/blog/trabajar-en-aena-empleo-aeropuerto-guia/` | aena empleo | AENA empleo: cómo se trabaja realmente en un aeropuerto | 868 |
@@ -22,7 +22,7 @@ al importar `import/eac-blog-lote1.xml` se rellenan solos. Esta tabla es la refe
 | 14 | `/blog/curso-despachador-de-vuelo-que-incluye-salidas/` | curso de despachador de vuelo | Curso de despachador de vuelo: contenido y salidas | 931 |
 | 15 | `/blog/despachador-de-vuelo-vs-controlador-aereo/` | despachador de vuelo vs controlador aereo | Despachador de vuelo vs controlador aéreo: diferencias | 989 |
 
-**Total: 15 artículos · 14.224 palabras.**
+**Total: 15 artículos · 14.223 palabras.**
 
 ## Meta descripciones
 - `/como-superar-entrevista-tcp-aerolinea/` → Cómo es el proceso de selección de TCP paso a paso: CV, entrevista en inglés, dinámica de grupo y prueba final. Preguntas reales y errores que descartan.

@@ -6,12 +6,12 @@ Crear una URL nueva canibalizaría el posicionamiento que ya tienen.
 | # | URL a editar | Posición | Impresiones/90d | Keyword objetivo | Palabras |
 |---|---|---|---|---|---|
 | 1 | `/blog/cuanto-cobran-las-azafatas-de-vuelo/` | 6 | 99.000 | cuanto cobra un auxiliar de vuelo | 1078 |
-| 2 | `/blog/requisitos-azafata-vuelo/` | 8 | 75.000 | requisitos azafata de vuelo | 972 |
+| 2 | `/blog/requisitos-azafata-vuelo/` | 8 | 75.000 | requisitos azafata de vuelo | 975 |
 | 3 | `/blog/que-hay-que-estudiar-para-ser-azafata-de-vuelo/` | 11 | 63.000 | que hay que estudiar para ser azafata de vuelo | 990 |
 | 4 | `/blog/sobrecargo-vuelo/` | 6 | 50.000 | sobrecargo de vuelo | 934 |
 | 5 | `/blog/diferencia-azafata-auxiliar-vuelo/` | 7 | 48.000 | diferencia azafata y auxiliar de vuelo | 907 |
 
-**Total: 4881 palabras sobre 335.000 impresiones al trimestre.**
+**Total: 4884 palabras sobre 335.000 impresiones al trimestre.**
 
 ## Cómo publicar cada uno
 
