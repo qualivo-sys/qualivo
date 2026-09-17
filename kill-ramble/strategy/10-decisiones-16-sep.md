@@ -45,3 +45,21 @@ Ver `03-outreach-secuencias.md` para la estructura; el copy vigente del hito 1 (
 1. Conectar el buzón de Lea a Smartlead (o enviar desde Qualivo con su nombre y reply-to).
 2. Confirmación del ámbito de idioma.
 3. Aprobación final de los dos mensajes.
+
+## Anexo 17 sep · el descubrimiento deja de ser el cuello de botella
+
+Cambiar las categorías de Twitch de los comparables clásicos (Gang Beasts, Pummel Party) a los de 2026
+(PEAK, R.E.P.O., Meccha Chameleon, Bombanana, Mimic Party) multiplicó por cinco el resultado:
+de 23 streamers con 7 en inglés a **120 únicos, 79 EN y 17 ES**, con audiencias reales en directo.
+
+Lección para el scoring: en Twitch la afinidad se mide por **qué se está jugando ahora**, no por el
+histórico del género. Las categorías de un juego de 2014 las ocupan comunidades residuales y
+regionales; las de un éxito reciente, los creadores que buscan el siguiente juego. Los comparables
+deben revisarse cada trimestre.
+
+Campañas creadas en Smartlead (sin activar): `DKR · Open Playtest · Creadores EN` (3974838) y
+`… ES` (3974839). Un toque, texto plano, sin tracking de aperturas, parada al responder,
+L-V 9-18 hora de Argentina, 20 leads/día. Falta asignar el buzón del remitente.
+
+Presupuesto Apify: 3,38 de 5 $ del plan gratuito. Captura de Twitch reducida a una vez al día
+(02:00 UTC) para llegar a fin de mes.

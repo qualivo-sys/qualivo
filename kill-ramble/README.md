@@ -62,6 +62,7 @@ node kill-ramble/tools/score.mjs kill-ramble/data/creators.sample.csv > /tmp/sco
 | Base de datos | ✅ Notion (página «Don't Kill Rumble · Creator Acquisition»); esquema alternativo Airtable en `data/airtable-schema.md` |
 | Buzones Smartlead | ✅ 15 buzones Qualivo calientes; dominio propio del juego pendiente para lanzamiento |
 | Sesiones | ✅ Open Playtest desde el 14 sep hasta el lanzamiento (29 oct / 3 nov); reserva por Google Calendar; devs y bots siempre |
-| Descubrimiento YouTube | ✅ 480 vídeos → 381 canales → 153 enriquecidos → 39 en zona de contacto (15 sep) |
-| Descubrimiento Twitch | ✅ 1ª noche: 23 en directo, 7 EN (Kohrean el relevante). Recentrado a categorías 2026 (PEAK, R.E.P.O., Meccha Chameleon, Bombanana) a las 20:00, 00:00, 02:00 y 04:00 UTC |
+| Descubrimiento YouTube | ✅ 480 vídeos → 381 canales → 153 enriquecidos → 56 con señal, 8 encajes EN revisados (15-16 sep) |
+| Descubrimiento Twitch | ✅ Con categorías 2026: 120 streamers únicos, 79 EN, 17 ES (Kenji 2.5k espectadores, KaraCorvus, CaptainSparklez). Top 20 en la base. Captura diaria 02:00 UTC |
+| Campañas Smartlead | ✅ EN (3974838) y ES (3974839) montadas con el mensaje de Lea, sin activar: falta el buzón |
 | Revisión humana EN | ✅ «Vídeo citado» y «Detalle» en los 14 EN de zona de contacto; encajes reales: 8 |
