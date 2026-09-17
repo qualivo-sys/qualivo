@@ -6,8 +6,9 @@
  * un lead de guía no tiene medidas, ni plazo, ni presupuesto, así que el
  * comercial no sabe ni por dónde empezar.
  *
- * Esto lo llama n8n una vez al día. Busca a quien descargó la guía, no ha
- * vuelto y lleva esperando lo suficiente, y le manda un recordatorio.
+ * Esto lo llama n8n una vez al día. Busca a quien descargó la guía, sigue en
+ * «Nuevo» —nadie del taller ha hablado con él— y lleva esperando lo
+ * suficiente, y le manda un recordatorio.
  *
  * Dos toques y se para. A partir del tercero ya no es seguimiento, es
  * insistir, y quema la dirección para cuando de verdad tenga un proyecto.
@@ -47,7 +48,11 @@ export default async function handler(req, res) {
   for (const l of leads) {
     if (l.origen !== 'guia' || !l.email) continue;
     if (cualificados.has(String(l.email).toLowerCase())) continue;
-    if (['Ganado', 'Perdido'].includes(l.estado)) continue;
+    // Solo los que nadie ha tocado. En cuanto el comercial habla con alguien,
+    // el seguimiento automático sobra y además estorba: mandarle «¿qué medidas
+    // tiene el hueco?» a quien ya le has preguntado por WhatsApp le deja en
+    // ridículo delante de su propio cliente.
+    if ((l.estado || 'Nuevo') !== 'Nuevo') continue;
 
     const enviados = String(l.seguimiento || '');
     const dias = (ahora - new Date(l.fecha).getTime()) / 864e5;

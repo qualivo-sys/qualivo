@@ -142,7 +142,11 @@ las dos cosas mal vuelve a tirar la web.
 
 # Seguimiento de leads de guía — n8n + Vercel
 
-**Flujo:** `Antic Barcelona 113 · Seguimiento diario` · `y1qj6FaPkOpkyRTT` · cada día a las 10:00
+**Flujo:** `Antic Barcelona 113 · Seguimiento diario` · `y1qj6FaPkOpkyRTT` · cada día a las 10:00 (hora de Madrid)
+
+Los dos flujos con reloj llevan `settings.timezone` puesto a `Europe/Madrid`.
+Sin eso n8n usa la zona del servidor y un «0 10 * * *» puede acabar saliendo a
+las 12:00 o a las 4:00 de la mañana de Terrassa.
 
 De los cinco primeros leads, **cuatro se descargaron la guía y solo uno pasó al
 cuestionario**, y lo hizo por su cuenta. Ese salto es el mayor agujero del
@@ -157,8 +161,15 @@ n8n (10:00) → GET /api/seguimiento → busca a quien no ha vuelto
 
 ## Quién entra
 
-Leads de origen `guia` que **no** tengan un cuestionario con el mismo correo,
-que no estén cerrados, y que lleven esperando lo suficiente.
+Leads de origen `guia` que sigan en **«Nuevo»** —o sea, con los que nadie del
+taller ha hablado todavía—, que no tengan un cuestionario con el mismo correo,
+y que lleven esperando lo suficiente.
+
+Que baste con que el estado deje de ser «Nuevo» es lo que evita el ridículo:
+mandarle «¿qué medidas tiene el hueco?» a alguien con quien el comercial ya ha
+hablado por WhatsApp le deja mal delante de su propio cliente. En la práctica
+esto convierte el seguimiento en una red de seguridad, no en el motor: mientras
+el taller conteste rápido, no se dispara nunca. Y ese es el orden correcto.
 
 | Toque | Cuándo | Qué dice |
 |---|---|---|
