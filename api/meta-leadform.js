@@ -229,6 +229,20 @@ async function guardar(lead) {
     }).catch(function () {});
   }
 
+  // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
+  // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
+  if (deEstaCampana) {
+    try {
+      await require('./_aviso.js').leadNuevo({
+        nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
+        inversion: inversion, fuga: fuga, cualificado: invierte,
+        origen: 'Formulario instantáneo de Meta', contactId: contactId
+      });
+    } catch (err) {
+      console.error('[leadform] aviso interno no salió:', err && err.message);
+    }
+  }
+
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
     email: EMAIL_RE.test(email) ? email : '', invierte: invierte,

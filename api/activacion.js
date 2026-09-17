@@ -82,6 +82,30 @@ function enviarCorreo(contacto, indice) {
 // Las demás ramas del recorrido: no se presentó, después del diagnóstico, fuera
 // de alcance y el toque al mes. Cada una se dispara con su etiqueta y se apaga
 // sola. Se salta a quien haya respondido o pedido la baja.
+// Avisa a Maikel de que el lead se ha movido. Va aquí y no en un workflow de
+// GHL porque esos avisos no existen: los dos que hay están en borrador desde
+// que se crearon. Se llama SIEMPRE justo después de poner la etiqueta, que es
+// lo que garantiza que suene una sola vez: la vuelta siguiente del reloj ya ve
+// la etiqueta y ni llega hasta aquí.
+//
+// No se pone await sobre su resultado ni se comprueba: si el aviso falla, el
+// lead sigue su camino igual. Un correo que no sale no puede parar la cadencia.
+async function avisar(tipo, c, texto) {
+  try {
+    await require('./_aviso.js').seMovio(tipo, {
+      nombre: c.firstName || c.contactName || c.name || '',
+      empresa: c.companyName || '',
+      email: c.email || '',
+      telefono: c.phone || '',
+      texto: texto || '',
+      contactId: c.id,
+      origen: A.tiene(c, 'leadform') ? 'Formulario de Meta' : 'Landing'
+    });
+  } catch (err) {
+    console.error('[activacion] aviso no salió:', err && err.message);
+  }
+}
+
 async function procesarSecuencias(resumen) {
   for (const sec of S.SECUENCIAS) {
     let lista;
@@ -101,6 +125,7 @@ async function procesarSecuencias(resumen) {
       const rr = await A.revisarRespuesta(c.id, Date.now() - minutos * 60000);
       if (rr.baja || rr.respondio) {
         await A.etiquetar(c.id, [rr.baja ? 'act-baja' : 'act-respondio'], [sec.disparador]);
+        await avisar(rr.baja ? 'baja' : 'respondio', c, rr.texto);
         resumen.cerrados++;
         continue;
       }
@@ -180,17 +205,20 @@ module.exports = async function handler(req, res) {
     if (r.baja) {
       await A.etiquetar(c.id, ['act-baja'], ['activacion']);
       await A.nota(c.id, 'Pide no recibir más contacto: «' + (r.texto || '') + '». Cadencia detenida.');
+      await avisar('baja', c, r.texto);
       resumen.cerrados++;
       continue;
     }
     if (r.respondio) {
       await A.etiquetar(c.id, ['act-respondio'], ['activacion']);
+      await avisar('respondio', c, r.texto);
       resumen.cerrados++;
       continue;
     }
     if (await A.tieneCitaGHL(c.id)) {
       await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
       await require('./_tratos.js').mover(c.id, 'reunion');
+      await avisar('agendado', c, '');
       resumen.cerrados++;
       continue;
     }
@@ -226,6 +254,7 @@ module.exports = async function handler(req, res) {
         if (await A.tieneCitaGHL(c.id)) {
           await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
           await require('./_tratos.js').mover(c.id, 'reunion');
+          await avisar('agendado', c, '');
           resumen.cerrados++; continue;
         }
         const r = await A.lanzarLlamada({

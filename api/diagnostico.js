@@ -130,6 +130,20 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Aviso a Maikel, antes que cualquier otra cosa que pueda tardar. GHL no
+    // avisa de esto (ver api/_aviso.js), asi que si esto no sale nadie se
+    // entera de que ha entrado un lead hasta que alguien abre el CRM.
+    try {
+      await require('./_aviso.js').leadNuevo({
+        nombre: nombre, web: web, email: email, telefono: telefono,
+        sector: sector, equipo: equipo, inversion: inversion,
+        fuga: hipotesis, utm: utm, origen: 'Formulario de /diagnostico/',
+        cualificado: cualificado, contactId: contactId
+      });
+    } catch (err) {
+      console.error('[diagnostico] aviso interno no salió:', err && err.message);
+    }
+
     // Conversions API: el Lead solo cuenta cuando ha pasado el corte.
     if (cualificado) {
       try {
