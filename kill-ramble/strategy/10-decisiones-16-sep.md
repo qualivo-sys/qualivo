@@ -88,3 +88,28 @@ Plantillas de DM (EN/ES) en la sección 12 del Notion.
    que tienen el juego en lista de deseados: tráfico gratis que no se está usando.
 4. El calendario de reservas carga con JavaScript; no se puede auditar la disponibilidad desde
    fuera. Hay que comprobar qué franjas y qué zonas horarias ve un creador de EE. UU.
+
+## Anexo 17 sep (3) · qué se automatiza y qué no
+
+Se ha construido `pipeline/`: un comando lleva de las ejecuciones de Apify a los entregables
+listos para enviar. Recoge datasets, normaliza YouTube y Twitch a un registro común, puntúa,
+deduplica contra Notion por URL, personaliza por reglas y escribe:
+
+- `smartlead_en.csv` y `smartlead_es.csv` con `cited_video`, `video_detail`, `booking_link` y `steam_utm` por creador.
+- `dm_queue.md` con los que no tienen email: por dónde escribirles y el mensaje ya redactado.
+- `all_scored.csv` para auditar.
+
+Programable por cron tras la captura diaria de Twitch.
+
+**Lo que no se automatiza, a propósito:**
+
+1. **El envío de mensajes directos.** Es el canal de dos tercios de esta lista y las plataformas
+   banean las cuentas que mandan mensajes idénticos en ráfaga. El pipeline lo reduce a copiar y
+   pegar, con tope de 10 al día por cuenta.
+2. **La sesión.** El valor de la oferta es que el Game Director esté dentro.
+3. **Tier 1.** Se llega por presentación de quien ya jugó.
+
+La personalización se hace **por reglas, no con IA**: el vídeo citado y el detalle salen de datos
+reales (título, vistas, colaboradores, categoría en directo, espectadores). Es auditable y no
+inventa. Si algún día el volumen lo pide, el punto de enganche para un modelo está en
+`personalize.mjs`, con revisión humana antes de enviar.

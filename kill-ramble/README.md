@@ -23,16 +23,32 @@ kill-ramble/
     08-open-playtest-sep-oct.md Plan de choque para el Open Playtest (14 sep - 5 oct 2026)
     09-objeciones-y-oferta.md Objeciones del estudio (15 sep), decisiones (solo US, cero producción) y mensaje reescrito
     10-decisiones-16-sep.md   Respuestas de Lea (Game Director): playtest hasta el lanzamiento, un email por hito, plan por microhitos
-  tools/
-    score.mjs                 Scoring de creadores: CSV de entrada → CSV con puntuación, tier y motivo
-    yt_aggregate.mjs          Vídeos de Apify (streamers/youtube-scraper) → canales (CSV de entrada del scoring)
-    yt_enrich.mjs             Enriquece canales leyendo su página /videos (últimos 30 vídeos), sin API
+  pipeline/                   Pipeline automatizado (ver pipeline/README.md)
+    run.mjs                   Apify → normalizar → puntuar → deduplicar → personalizar → entregables → Notion
+    lib.mjs                   CSV, Apify y Notion
+    normalize.mjs             Datos crudos de YouTube y Twitch → registro común de creador
+    score.mjs                 Modelo de scoring unificado
+    personalize.mjs           Vídeo citado, detalle, mensaje directo y enlace UTM, por reglas
+  tools/                      Herramientas sueltas (las usa el pipeline o se usan a mano)
+    score.mjs                 Scoring sobre CSV
+    yt_aggregate.mjs          Vídeos de Apify → canales
+    yt_enrich.mjs             Enriquece canales leyendo su página /videos, sin API
   data/
     creators.sample.csv       Ejemplo de entrada para score.mjs
     airtable-schema.md        Esquema de la base (tablas, campos, vistas)
 ```
 
-## Pipeline de descubrimiento (YouTube)
+## Uso
+
+```bash
+export APIFY_TOKEN=...
+node kill-ramble/pipeline/run.mjs --since 2d --out ./out
+```
+
+Devuelve `smartlead_en.csv`, `smartlead_es.csv`, `dm_queue.md` y `all_scored.csv`.
+Detalle en `pipeline/README.md`.
+
+## Pipeline manual paso a paso (YouTube)
 
 ```bash
 # 1. Apify: actor streamers/youtube-scraper con búsquedas de comparables → items.json
