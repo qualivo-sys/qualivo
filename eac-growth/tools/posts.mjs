@@ -92,7 +92,7 @@ export const POSTS = [
   faq: [
     { q: '¿Cuánto dura el proceso de selección de una aerolínea?', a: 'Depende de la compañía: desde un assessment day de una jornada hasta un proceso de varias semanas con fases online previas. Lo habitual es entre 2 y 6 semanas desde que envías el CV hasta la oferta.' },
     { q: '¿Puedo presentarme sin el certificado TCP?', a: 'Algunas aerolíneas seleccionan sin certificado y forman después, pero las plazas son muy limitadas y muy competidas. Con el certificado oficial ya obtenido puedes presentarte a cualquier convocatoria y no dependes del curso interno.' },
-    { q: '¿Qué nivel de inglés piden realmente?', a: 'La referencia habitual es un B1-B2 funcional: que puedas atender al pasaje, dar instrucciones de seguridad y resolver una incidencia. Se evalúa hablado durante la entrevista, no por el título que pongas en el CV.' },
+    { q: '¿Qué nivel de inglés piden realmente?', a: 'Lo que se pide es que puedas atender al pasaje, dar instrucciones de seguridad y resolver una incidencia. Se evalúa hablado durante la entrevista, no por el título que pongas en el CV.' },
     { q: '¿Los tatuajes descartan?', a: 'Depende de cada aerolínea. La norma general es que no sean visibles con el uniforme. Algunas compañías han flexibilizado su política en los últimos años; conviene revisar los requisitos concretos de cada convocatoria.' },
   ],
   related: [
@@ -439,7 +439,7 @@ export const POSTS = [
       ['ul', [
         'Ser mayor de 18 años.',
         'ESO o equivalente. No se exige carrera universitaria.',
-        'Inglés a nivel funcional (referencia habitual B1-B2).',
+        'Conocimientos de inglés: poder comunicarte con el pasaje.',
         'Saber nadar: hay pruebas de supervivencia en el agua.',
         'Certificado médico aeronáutico en centro autorizado.',
         '<strong>Certificado oficial de TCP</strong> conforme a la normativa europea, reconocido por AESA.',

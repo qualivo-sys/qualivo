@@ -113,7 +113,7 @@ export const REFRESH = [
       ['table',['Requisito','Qué se pide exactamente'],[
         ['Edad','Ser mayor de 18 años'],
         ['Estudios','ESO o equivalente. No se exige bachillerato ni carrera'],
-        ['Idiomas','Inglés funcional hablado. La referencia habitual es B1-B2'],
+        ['Idiomas','Inglés hablado: poder comunicarte con el pasaje. No se exige un título concreto'],
         ['Natación','Saber nadar: hay prácticas de supervivencia y evacuación en el agua'],
         ['Aptitud médica','Reconocimiento médico aeronáutico en un centro autorizado'],
         ['Certificado','Certificado de tripulante de cabina de pasajeros conforme a normativa europea, reconocido por AESA'],
@@ -152,7 +152,7 @@ export const REFRESH = [
   recap:'Para ser TCP en España hacen falta seis requisitos: mayor de 18 años, ESO o equivalente, inglés funcional, saber nadar, reconocimiento médico aeronáutico y el certificado oficial reconocido por AESA. Ni altura mínima legal, ni edad máxima, ni carrera universitaria. Lo que varía entre compañías son las políticas de imagen, y lo que de verdad decide la selección es el inglés hablado y la actitud.',
   faq:[
     {q:'¿Hay una altura mínima para ser azafata de vuelo?',a:'No existe un requisito legal universal de altura. Lo que se evalúa es el alcance funcional a los compartimentos superiores de cabina. Algunas aerolíneas publican una referencia orientativa en sus convocatorias.'},
-    {q:'¿Se puede ser TCP sin inglés?',a:'No de forma realista. Casi todas las aerolíneas exigen un nivel funcional equivalente a B1-B2, y se evalúa hablado durante la entrevista.'},
+    {q:'¿Se puede ser TCP sin inglés?',a:'No de forma realista. Casi todas las aerolíneas exigen poder comunicarse en inglés, y se evalúa hablado durante la entrevista.'},
     {q:'¿Hay edad máxima para ser auxiliar de vuelo?',a:'No hay un tope legal. Lo que se exige es cumplir la aptitud psicofísica y tener disponibilidad para la operativa.'},
     {q:'¿Necesito experiencia previa?',a:'No. Es una profesión a la que se accede desde cero. La experiencia de atención al público suma en la selección, pero no es un requisito.'},
   ],
