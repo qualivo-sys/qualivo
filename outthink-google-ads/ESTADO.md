@@ -670,3 +670,31 @@ nada porque comparte presupuesto. Se mantiene y se revisa el 17-09.
 Imágenes de Zarama: la horizontal ya ELIGIBLE, la cuadrada PENDING. Los 4 anuncios APPROVED.
 Aplicado: 10 negativas (data science, ntt data, rankia, google madrid, ferias, madrid tech,
 congresos en madrid, business experience, tech events) y presupuesto a 81,22 €/día.
+
+## Día 18 (17-09) — usuarios de fuera de España: causa y corrección
+Aída detecta en GA4 ciudades de fuera de España (Dubái, Dublín) en `google / cpc`. Investigado:
+
+**Causa raíz (error mío al crear la campaña):** `OT26_Search` quedó con
+`positiveGeoTargetType = PRESENCE_OR_INTEREST`, el valor por defecto de Google, mientras que
+DG y PMax sí se crearon con `PRESENCE`. "Interés" significa que Google muestra el anuncio a
+quien **no está** en la zona pero busca sobre ella.
+
+**Cuantificación** (31-08 → 17-09, `geographic_view` y `user_location_view`):
+
+| Segmento | Clics | Coste | Registros | CPL |
+|---|---|---|---|---|
+| España, dentro de Madrid + corona | 444 | 799,74 € | 15 | 53,3 € |
+| España, fuera de la zona (interés) | 193 | 313,23 € | 9 | 34,8 € |
+| Fuera de España (19 países) | 45 | 62,39 € | 2 | 31,2 € |
+
+Hallazgo contraintuitivo: **el tráfico "por interés" convierte mejor** (35 € frente a 53 €) y
+aporta 11 de los 26 registros. Son en su mayoría españoles fuera de Madrid en ese momento,
+justo el perfil de las "ciudades AVE" que se descartó. Cambiar a `PRESENCE` cortaría 375 € y
+11 registros: **no se hace**.
+
+**Aplicado (freno preciso):** exclusión de 25 países no europeos (LatAm completa, EE. UU.,
+Canadá, Australia, Marruecos, Guinea Ecuatorial y Guinea-Bisáu). Corta el gasto real fuera de
+España (62 €, 3,1 % del total) sin tocar el tráfico español. La segmentación se deja en
+`PRESENCE_OR_INTEREST` con exclusión por `PRESENCE`, que excluye por ubicación física.
+Nota: Dubái y Dublín no aparecen en Google Ads como clics de pago; GA4 geolocaliza por IP y
+una VPN o una IP corporativa los desplaza. Eran 2 usuarios de ~700.
