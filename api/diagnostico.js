@@ -36,6 +36,12 @@ module.exports = async function handler(req, res) {
   const telefono = String(b.telefono || '').trim().slice(0, 40);
   const hipotesis = String(b.hipotesis || '').trim().slice(0, 1200);
   const utm = String(b.utm || '').trim().slice(0, 400);
+  // Que pagina lo ha traido. Sin esto, un lead de /reformas/ y uno del anuncio
+  // de Meta entran en el CRM exactamente iguales y no se puede medir si una
+  // landing de sector vale la pena. Se cae al Referer por si el navegador no
+  // lo manda (formularios viejos en cache).
+  const origen = String(b.origen || '').trim().slice(0, 40) ||
+    ((String(req.headers.referer || '').match(/^https?:\/\/[^/]+\/([^/?#]+)/) || [])[1] || '');
 
   if (!sector || !equipo || !inversion || !web) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
@@ -66,6 +72,7 @@ module.exports = async function handler(req, res) {
     .concat(cualificado ? ['diagnostico-cualificado', 'paid'] : ['diagnostico-fuera-de-alcance']);
   const utmContent = (utm.match(/utm_content=([^&]+)/) || [])[1];
   if (utmContent) etiquetas.push('creativo-' + decodeURIComponent(utmContent).slice(0, 40));
+  if (origen) etiquetas.push('pagina-' + rotulo(origen));
 
   // Contexto que necesita el reloj para escribir el siguiente mensaje, en
   // etiquetas porque es lo único que devuelve la búsqueda de contactos de GHL.
@@ -86,7 +93,9 @@ module.exports = async function handler(req, res) {
         email: email || undefined,
         phone: telefono || undefined,
         website: web,
-        source: 'qualivo.io — landing diagnóstico',
+        // El source es lo que lee la atribucion por canal (origen_tratos.py).
+        // Fijo decia "landing diagnostico" viniera de donde viniera.
+        source: 'qualivo.io — /' + (origen || 'diagnostico') + '/',
         tags: etiquetas
       })
     });
@@ -101,14 +110,14 @@ module.exports = async function handler(req, res) {
     if (contactId) {
       await require('./_tratos.js').crear({
         contactId: contactId, nombre: nombre, email: email, telefono: telefono,
-        origen: 'Landing', fuente: 'qualivo.io — landing diagnóstico',
+        origen: 'Landing', fuente: 'qualivo.io — /' + (origen || 'diagnostico') + '/',
         detalle: cualificado ? (sector || '') : 'fuera de alcance'
       });
     }
 
     if (contactId) {
       const nota = [
-        'Diagnóstico solicitado — landing de pago',
+        'Diagnóstico solicitado — /' + (origen || 'diagnostico') + '/',
         '',
         'Sector: ' + sector,
         'Equipo: ' + equipo,
@@ -137,7 +146,7 @@ module.exports = async function handler(req, res) {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, web: web, email: email, telefono: telefono,
         sector: sector, equipo: equipo, inversion: inversion,
-        fuga: hipotesis, utm: utm, origen: 'Formulario de /diagnostico/',
+        fuga: hipotesis, utm: utm, origen: 'Formulario de /' + (origen || 'diagnostico') + '/',
         cualificado: cualificado, contactId: contactId
       });
     } catch (err) {

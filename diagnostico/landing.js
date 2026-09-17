@@ -149,8 +149,13 @@
   });
 
   function enviar(silencioso) {
+    // El mismo formulario lo usan varias paginas (/diagnostico/, /reformas/ y
+    // las de sector que vengan). Mandar 'diagnostico' fijo hacia que todas
+    // cayeran en el CRM como si fueran la misma, y entonces no hay forma de
+    // saber que pagina trae clientes. Se manda la ruta real.
+    var ruta = (location.pathname || '/').replace(/^\/|\/$/g, '') || 'inicio';
     var cuerpo = JSON.stringify(Object.assign({}, datos, {
-      origen: 'diagnostico',
+      origen: ruta,
       utm: location.search || ''
     }));
     var p = fetch(ENDPOINT, {
