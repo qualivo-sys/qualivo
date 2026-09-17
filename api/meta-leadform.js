@@ -90,7 +90,19 @@ async function traerLead(leadgenId, token) {
 // formularios de esta campana empiezan por este prefijo y los de campanas
 // viejas no. Sigue siendo seguro porque la suscripcion ya es solo de nuestra
 // pagina y el nombre lo ponemos nosotros.
-const PREFIJO_FORM = 'Qualivo_Diagnostico';
+const PREFIJO_FORM = 'Qualivo_';
+
+// Formularios de las campañas por sector (17-sep-2026). Van aquí además de en
+// META_LEADFORM_IDS para que un lead no se quede sin activar porque a nadie le
+// dio tiempo a tocar la variable de entorno. El sector sirve para el primer
+// WhatsApp (la pregunta cambia según el negocio) y para etiquetar.
+const FORMULARIOS_SECTOR = {
+  '1006694072388659': { sector: '' },
+  '1061906346738399': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas' },
+  '1786744439184083': { sector: 'Formación o academia', etiqueta: 'sector-formacion' },
+  '1479297290674260': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas' },
+  '1910722980312589': { sector: 'Servicios profesionales (asesoría, consultoría, abogados)', etiqueta: 'sector-asesorias' }
+};
 
 async function nombreFormulario(formId) {
   try {
@@ -111,7 +123,8 @@ async function guardar(lead) {
   };
   const permitidos = String(process.env.META_LEADFORM_IDS || '')
     .split(',').map(function (x) { return x.trim(); }).filter(Boolean);
-  let deEstaCampana = permitidos.length > 0 && permitidos.indexOf(String(lead.form_id || '')) !== -1;
+  const conocido = FORMULARIOS_SECTOR[String(lead.form_id || '')] || null;
+  let deEstaCampana = !!conocido || (permitidos.length > 0 && permitidos.indexOf(String(lead.form_id || '')) !== -1);
   let porNombre = '';
   if (!deEstaCampana && lead.form_id) {
     const n = await nombreFormulario(lead.form_id);
@@ -127,6 +140,8 @@ async function guardar(lead) {
   const email = valor(campos, ['email', 'correo', 'correo_electronico']);
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
+  const sector = conocido ? conocido.sector : '';
+  const volumen = valor(campos, ['volumen']);
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
@@ -172,6 +187,8 @@ async function guardar(lead) {
       .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30);
   };
   if (inversion) etiquetas.push('inv-' + rotulo(inversion));
+  if (conocido && conocido.etiqueta) etiquetas.push(conocido.etiqueta);
+  if (volumen) etiquetas.push('vol-' + rotulo(volumen));
   if (fuga) etiquetas.push('fuga-' + rotulo(fuga));
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
@@ -221,6 +238,8 @@ async function guardar(lead) {
       method: 'POST', headers: headers,
       body: JSON.stringify({
         body: ['Lead del formulario instantáneo de Meta', '',
+          sector ? 'Sector: ' + sector : '',
+          volumen ? 'Volumen que declara: ' + volumen : '',
           inversion ? 'Inversión mensual en captación: ' + inversion : '',
           fuga ? 'Dónde cree que se le escapa: ' + fuga : '',
           lead.form_id ? 'Formulario: ' + lead.form_id + (porNombre ? ' (' + porNombre + ', reconocido por el nombre)' : '') : '',
@@ -246,7 +265,7 @@ async function guardar(lead) {
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
     email: EMAIL_RE.test(email) ? email : '', invierte: invierte,
-    inversion: inversion, fuga: fuga, campos: campos, activar: deEstaCampana
+    inversion: inversion, fuga: fuga, sector: sector, campos: campos, activar: deEstaCampana
   };
 }
 
@@ -316,7 +335,7 @@ module.exports = async function handler(req, res) {
           const msg = require('./_mensajes.js');
           if (act.enVentana('whatsapp')) {
             const env = await act.enviarMensaje(r.contactId, msg.whatsapp1({
-              nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga
+              nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga, sector: r.sector
             }));
             await act.etiquetar(r.contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
           }
