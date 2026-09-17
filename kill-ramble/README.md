@@ -22,6 +22,7 @@ kill-ramble/
     07-riesgos-prioridades.md Riesgos, prioridades y siguiente paso recomendado
     08-open-playtest-sep-oct.md Plan de choque para el Open Playtest (14 sep - 5 oct 2026)
     09-objeciones-y-oferta.md Objeciones del estudio (15 sep), decisiones (solo US, cero producción) y mensaje reescrito
+    10-decisiones-16-sep.md   Respuestas de Lea (Game Director): playtest hasta el lanzamiento, un email por hito, plan por microhitos
   tools/
     score.mjs                 Scoring de creadores: CSV de entrada → CSV con puntuación, tier y motivo
     yt_aggregate.mjs          Vídeos de Apify (streamers/youtube-scraper) → canales (CSV de entrada del scoring)
@@ -60,7 +61,7 @@ node kill-ramble/tools/score.mjs kill-ramble/data/creators.sample.csv > /tmp/sco
 | Script de scoring | ✅ `tools/score.mjs` |
 | Base de datos | ✅ Notion (página «Don't Kill Rumble · Creator Acquisition»); esquema alternativo Airtable en `data/airtable-schema.md` |
 | Buzones Smartlead | ✅ 15 buzones Qualivo calientes; dominio propio del juego pendiente para lanzamiento |
-| Sesiones | ✅ Open Playtest 14 sep - 5 oct con reserva de franja (falta el enlace) |
+| Sesiones | ✅ Open Playtest desde el 14 sep hasta el lanzamiento (29 oct / 3 nov); reserva por Google Calendar; devs y bots siempre |
 | Descubrimiento YouTube | ✅ 480 vídeos → 381 canales → 153 enriquecidos → 39 en zona de contacto (15 sep) |
 | Descubrimiento Twitch | ✅ 1ª noche: 23 en directo, 7 EN (Kohrean el relevante). Recentrado a categorías 2026 (PEAK, R.E.P.O., Meccha Chameleon, Bombanana) a las 20:00, 00:00, 02:00 y 04:00 UTC |
 | Revisión humana EN | ✅ «Vídeo citado» y «Detalle» en los 14 EN de zona de contacto; encajes reales: 8 |
