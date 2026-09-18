@@ -54,6 +54,40 @@ async function enviarEvento(nombre, d) {
 
 function enviarLead(d) { return enviarEvento('Lead', d); }
 
+// Calidad de un lead del formulario instantáneo, de vuelta a Meta (18-sep-2026).
+// Meta optimiza los anuncios de formulario por «leads», y un lead con número
+// muerto y correo inventado le cuenta igual que Cesar. La integración de CRM
+// de la Conversions API deja mandarle cada etapa del embudo con el id del lead
+// (lead_id): Contacted, Qualified, Converted y también Disqualified. Con eso
+// aprende a quién no traer. Etapas: 'Contacted' | 'Qualified' | 'Disqualified'
+// | 'Converted'. d: { leadgenId, email?, telefono?, contactId?, motivo? }.
+async function calidadLead(etapa, d) {
+  const token = process.env.META_CAPI_TOKEN;
+  if (!token) return 'sin_token';
+  if (!d || !d.leadgenId) throw new Error('sin leadgenId');
+  const userData = {
+    lead_id: Number(d.leadgenId),
+    em: d.email ? [sha(d.email)] : undefined,
+    ph: d.telefono ? [sha(String(d.telefono).replace(/\D/g, ''))] : undefined,
+    external_id: d.contactId ? [sha(d.contactId)] : undefined
+  };
+  const evento = {
+    event_name: etapa,
+    event_time: Math.floor(Date.now() / 1000),
+    event_id: 'lead-' + d.leadgenId + '-' + etapa.toLowerCase(),
+    action_source: 'system_generated',
+    user_data: userData,
+    custom_data: { event_source: 'crm', lead_event_source: 'GoHighLevel', motivo: d.motivo || undefined }
+  };
+  const body = { data: [evento] };
+  if (process.env.META_TEST_EVENT_CODE) body.test_event_code = process.env.META_TEST_EVENT_CODE;
+  const r = await fetch('https://graph.facebook.com/v21.0/' + PIXEL_ID + '/events?access_token=' + encodeURIComponent(token), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error('Meta CAPI ' + r.status + ': ' + (await r.text()).slice(0, 200));
+  return 'enviado';
+}
+
 // Lee _fbp y _fbc de la cabecera Cookie (cookies de primera parte del píxel).
 function cookiesMeta(req) {
   const out = {};
@@ -66,4 +100,4 @@ function cookiesMeta(req) {
   return out;
 }
 
-module.exports = { enviarEvento, enviarLead, cookiesMeta };
+module.exports = { enviarEvento, enviarLead, calidadLead, cookiesMeta };
