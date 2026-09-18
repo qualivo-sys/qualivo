@@ -219,7 +219,8 @@ module.exports = async function handler(req, res) {
     if (await A.tieneCitaGHL(c.id)) {
       // Trato, aviso, evento a Meta y WhatsApp de confirmación, todo en _cita.js.
       const CITA = require('./_cita.js');
-      await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: await CITA.primeraCita(c.id), origen: 'Reloj' });
+      const ev = await CITA.primeraCita(c.id);
+      await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev && ev.startTime, evento: ev, origen: 'Reloj' });
       resumen.cerrados++;
       continue;
     }
@@ -273,7 +274,8 @@ module.exports = async function handler(req, res) {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         if (await A.tieneCitaGHL(c.id)) {
           const CITA = require('./_cita.js');
-          await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: await CITA.primeraCita(c.id), origen: 'Reloj' });
+          const ev = await CITA.primeraCita(c.id);
+          await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev && ev.startTime, evento: ev, origen: 'Reloj' });
           resumen.cerrados++; continue;
         }
         const r = await A.lanzarLlamada({
@@ -336,7 +338,7 @@ module.exports = async function handler(req, res) {
     const CITA = require('./_cita.js');
     const citas = await CITA.citasSinConfirmar(20);
     for (const ev of citas) {
-      const r = await CITA.confirmarCita({ contactId: ev.contactId, inicio: ev.startTime, origen: 'Calendario' });
+      const r = await CITA.confirmarCita({ contactId: ev.contactId, inicio: ev.startTime, evento: ev, origen: 'Calendario' });
       if (r.ok && !r.repetida) resumen.citas = (resumen.citas || 0) + 1;
     }
   } catch (err) {

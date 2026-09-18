@@ -32,11 +32,29 @@ function partesFecha(d) {
 
 // Texto libre (cuando hay ventana de 24 h o para el SMS de respaldo). La
 // plantilla de Meta dice lo mismo con {{1}} {{2}} {{3}}.
-function textoConfirmacion(nombre, dia, hora) {
-  return 'Hola ' + (nombre || '') + ', soy Maikel, de Qualivo. Confirmado: hablamos el ' + dia + ' a las ' + hora + '. ' +
-    'Son quince minutos por videollamada; el enlace está en la invitación que te ha llegado al correo. ' +
+// cuando: 'hoy' | 'mañana' | '' ; enlace: URL de la videollamada si se conoce.
+function textoConfirmacion(nombre, dia, hora, cuando, enlace) {
+  const fecha = (cuando ? cuando + ', ' : 'el ') + dia + ' a las ' + hora;
+  return 'Hola ' + (nombre || '') + ', soy Maikel, de Qualivo. Confirmado: hablamos ' + fecha + '. ' +
+    'Son quince minutos por videollamada' + (enlace ? '. Este es el enlace: ' + enlace + ' (también lo tienes en la invitación del correo). ' : '; el enlace está en la invitación que te ha llegado al correo. ') +
     'Voy a repasar contigo dónde se te está escapando el negocio y te enseño un plan hecho para tu caso. ' +
     'Si te surge algo antes, dímelo por aquí.';
+}
+
+function relativo(d) {
+  const f = function (x) { return new Intl.DateTimeFormat('es-ES', { timeZone: ZONA, year: 'numeric', month: '2-digit', day: '2-digit' }).format(x); };
+  const hoy = f(new Date()), man = f(new Date(Date.now() + 24 * 3600 * 1000));
+  const dd = f(d);
+  return dd === hoy ? 'hoy' : dd === man ? 'mañana' : '';
+}
+
+// El enlace de la videollamada, si la cita lo lleva (campo address o
+// meetingLocation en GHL). Se admite también AGENDA_ENLACE fijo en el entorno
+// (una sala permanente de Meet) para que el mensaje lo lleve siempre.
+function enlaceDe(ev) {
+  const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl, process.env.AGENDA_ENLACE];
+  for (const c of cand) { const m = String(c || '').match(/https?:\/\/\S+/); if (m) return m[0]; }
+  return '';
 }
 
 async function contactoPorId(id) {
@@ -59,6 +77,8 @@ async function confirmarCita(o) {
 
     const inicio = o.inicio ? new Date(o.inicio) : null;
     const f = inicio && !isNaN(inicio.getTime()) ? partesFecha(inicio) : { dia: '', hora: '' };
+    const cuando = inicio && !isNaN(inicio.getTime()) ? relativo(inicio) : '';
+    const enlace = o.enlace || enlaceDe(o.evento);
     const nombre = nombrePila(c.firstName || c.contactName || c.name || '');
 
     // Candado primero: si algo de abajo falla, no se repite el WhatsApp.
@@ -84,7 +104,7 @@ async function confirmarCita(o) {
       }
       if (!salida.ok) {
         try {
-          const env = await A.enviarMensaje(c.id, textoConfirmacion(nombre, f.dia, f.hora));
+          const env = await A.enviarMensaje(c.id, textoConfirmacion(nombre, f.dia, f.hora, cuando, enlace));
           hecho.push('confirmacion_' + (env.canal || 'enviada'));
           if (env.canal === 'sms') await A.etiquetar(c.id, ['act-por-sms']);
         } catch (e) { console.error('[cita] confirmación no salió:', e && e.message); }
@@ -152,8 +172,8 @@ async function primeraCita(contactId) {
     const vivas = (d.events || d.appointments || []).filter(function (e) {
       return !/cancelled|noshow|invalid/i.test(String(e.appointmentStatus || ''));
     }).sort(function (a, b) { return Date.parse(a.startTime) - Date.parse(b.startTime); });
-    return vivas.length ? vivas[0].startTime : null;
+    return vivas.length ? vivas[0] : null;
   } catch (e) { return null; }
 }
 
-module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion };
+module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe };
