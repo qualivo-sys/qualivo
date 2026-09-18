@@ -71,7 +71,9 @@ function whatsappTrasApertura(datos) {
   const n = nombreCorto(datos.nombre);
   const gracias = n ? 'Gracias, ' + n + '. ' : 'Gracias. ';
   const p = pregunta(datos);
-  const P = p ? p.charAt(0).toUpperCase() + p.slice(1) : '';
+  // La pregunta viene en minúscula porque en whatsapp1 va tras dos puntos. Aquí
+  // abre frase, así que se pone en mayúscula (saltando el signo de apertura).
+  const P = p.replace(/^([¿¡]?)(\p{L})/u, function (m, a, b) { return a + b.toUpperCase(); });
   if (datos.hipotesis) {
     return gracias + 'Me ha llamado la atención lo que escribiste:\n\n«' + String(datos.hipotesis).slice(0, 220) + '»\n\n' + P;
   }
