@@ -122,7 +122,10 @@ async function estadoMensaje(messageId) {
     const r = await fetch(GHL_BASE + '/conversations/messages/' + messageId, { headers: cabeceras() });
     if (!r.ok) return '';
     const d = await r.json();
-    return String(((d && d.message) || d || {}).status || '');
+    const m = (d && d.message) || d || {};
+    // GHL a veces rellena «error» antes de cambiar «status».
+    if (m.error) return 'failed';
+    return String(m.status || '');
   } catch (err) {
     return '';
   }
@@ -150,6 +153,48 @@ async function enviarMensaje(contactId, texto) {
   }
   await enviarSMS(contactId, texto);
   return { canal: 'sms', estado: 'enviado' };
+}
+
+// Todos los mensajes de un contacto, de más antiguo a más nuevo.
+async function mensajesDe(contactId) {
+  const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
+    encodeURIComponent(process.env.GHL_LOCATION_ID) + '&contactId=' + contactId, { headers: cabeceras() });
+  if (!r.ok) return [];
+  const d = await r.json().catch(function () { return {}; });
+  const todos = [];
+  for (const c of (d.conversations || [])) {
+    const m = await fetch(GHL_BASE + '/conversations/' + c.id + '/messages?limit=50', { headers: cabeceras() });
+    if (!m.ok) continue;
+    const dm = await m.json().catch(function () { return {}; });
+    const lista = (dm.messages && dm.messages.messages) || dm.messages || [];
+    todos.push.apply(todos, Array.isArray(lista) ? lista : []);
+  }
+  return todos.sort(function (a, b) { return Date.parse(a.dateAdded || 0) - Date.parse(b.dateAdded || 0); });
+}
+
+// El fallo del WhatsApp por la ventana de 24 h no siempre llega en los cinco
+// segundos que espera enviarMensaje. El 17-sep a las 00:12 un lead de reformas
+// se quedó sin nada: el WhatsApp cayó en «failed» siete segundos después de
+// salir, la comprobación ya había pasado, y el SMS de respaldo nunca se envió.
+// Esto lo mira el reloj en cada vuelta: cualquier WhatsApp saliente fallido que
+// no tenga ya el mismo texto enviado por SMS, se manda por SMS.
+async function reenviarFallidos(contactId) {
+  const msgs = await mensajesDe(contactId);
+  const salientes = msgs.filter(function (m) { return String(m.direction) === 'outbound'; });
+  let enviados = 0;
+  for (const m of salientes) {
+    if (!/WHATSAPP/i.test(String(m.messageType || ''))) continue;
+    if (String(m.status || '').toLowerCase() !== 'failed' && !m.error) continue;
+    const cuerpo = String(m.body || '').trim();
+    if (!cuerpo) continue;
+    const yaPorSms = salientes.some(function (x) {
+      return /SMS/i.test(String(x.messageType || '')) && String(x.body || '').trim() === cuerpo;
+    });
+    if (yaPorSms) continue;
+    await enviarSMS(contactId, cuerpo);
+    enviados++;
+  }
+  return enviados;
 }
 
 // Teléfono a E.164 español. Sin prefijo y con nueve dígitos se asume España;
@@ -264,6 +309,6 @@ async function enviarCorreo(email, asunto, html) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

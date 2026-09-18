@@ -115,7 +115,8 @@ async function nombreFormulario(formId) {
   } catch (e) { return ''; }
 }
 
-async function guardar(lead) {
+async function guardar(lead, opts) {
+  opts = opts || {};
   const headers = {
     Authorization: 'Bearer ' + process.env.GHL_API_KEY,
     Version: GHL_VERSION,
@@ -193,6 +194,14 @@ async function guardar(lead) {
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
 
+  // Completar un contacto que ya existía (lo creó la landing porque el webhook
+  // no procesó el aviso de Meta): se añaden los datos del formulario, pero no
+  // se toca la cadencia que ya está en marcha ni se avisa otra vez.
+  const completar = !!opts.completar;
+  const etiquetasFinales = completar
+    ? etiquetas.filter(function (t) { return !/^act-|^activacion$|^diagnostico-|^paid$/.test(t); })
+    : etiquetas;
+
   const up = await fetch(GHL_BASE + '/contacts/upsert', {
     method: 'POST', headers: headers,
     body: JSON.stringify({
@@ -202,8 +211,8 @@ async function guardar(lead) {
       phone: telefono || undefined,
       companyName: empresa || undefined,
       website: web || undefined,
-      source: 'Meta — formulario instantáneo',
-      tags: etiquetas
+      source: completar ? undefined : 'Meta — formulario instantáneo',
+      tags: etiquetasFinales
     })
   });
   if (!up.ok) throw new Error('ghl_upsert ' + up.status + ' ' + (await up.text()).slice(0, 200));
@@ -250,7 +259,7 @@ async function guardar(lead) {
 
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
-  if (deEstaCampana) {
+  if (deEstaCampana && !completar) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,

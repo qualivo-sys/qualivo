@@ -35,6 +35,7 @@ function valor(campos, nombres) {
   return '';
 }
 
+// Devuelve el contacto si existe (por email o teléfono), o null.
 async function existeEnCrm(email, telefono) {
   for (const [campo, val] of [['email', email], ['phone', telefono]]) {
     if (!val) continue;
@@ -47,9 +48,13 @@ async function existeEnCrm(email, telefono) {
     });
     if (!r.ok) continue;
     const d = await r.json().catch(function () { return {}; });
-    if ((d.contacts || []).length) return true;
+    if ((d.contacts || []).length) return d.contacts[0];
   }
-  return false;
+  return null;
+}
+
+function tieneEtiqueta(contacto, etiqueta) {
+  return (contacto.tags || []).some(function (t) { return String(t).toLowerCase() === etiqueta; });
 }
 
 async function avisar(asunto, html) {
@@ -80,8 +85,9 @@ module.exports = async function handler(req, res) {
   }
 
   const desde = Math.floor(Date.now() / 1000) - HORAS * 3600;
-  const parte = { revisados: 0, ya_estaban: 0, rescatados: 0, errores: [] };
+  const parte = { revisados: 0, ya_estaban: 0, rescatados: 0, completados: 0, errores: [] };
   const nuevos = [];
+  const completados = [];
 
   for (const form of formularios) {
     try {
@@ -100,9 +106,28 @@ module.exports = async function handler(req, res) {
         const campos = lead.field_data || [];
         const email = valor(campos, ['email', 'correo']);
         const telefono = valor(campos, ['phone', 'telefono', 'movil']);
-        if (await existeEnCrm(email, telefono)) { parte.ya_estaban++; continue; }
-
+        const existente = await existeEnCrm(email, telefono);
         lead.form_id = lead.form_id || form;
+        if (existente) {
+          // Está en el CRM pero sin rastro del formulario de Meta: lo creó otra
+          // vía (la landing a la que redirige el formulario) y el webhook no
+          // procesó el aviso de Meta. Pasó el 17-sep a las 00:08. Se completan
+          // los datos del formulario sin tocar la cadencia y se avisa, porque
+          // un webhook que falla en silencio es lo que hay que arreglar.
+          if (!tieneEtiqueta(existente, 'leadform') && !tieneEtiqueta(existente, 'form-' + String(lead.form_id).slice(0, 30))) {
+            const g = await guardar(lead, { completar: true });
+            if (g && g.ok) {
+              parte.completados++;
+              completados.push({ nombre: g.nombre || '(sin nombre)', email: email, telefono: telefono, cuando: lead.created_time, form: lead.form_id });
+            } else {
+              parte.errores.push('lead ' + lead.id + ' (completar): ' + ((g && g.motivo) || 'sin_guardar'));
+            }
+          } else {
+            parte.ya_estaban++;
+          }
+          continue;
+        }
+
         const g = await guardar(lead);
         if (g && g.ok) {
           parte.rescatados++;
@@ -116,16 +141,25 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  if (parte.rescatados || parte.errores.length) {
+  if (parte.rescatados || parte.completados || parte.errores.length) {
+    const filasCompletados = completados.map(function (n) {
+      return '<tr><td style="padding:4px 14px 4px 0">' + n.nombre + '</td><td style="padding:4px 14px 4px 0">' +
+        (n.email || '-') + '</td><td style="padding:4px 14px 4px 0">' + (n.telefono || '-') + '</td><td>' + n.cuando + ' · form ' + n.form + '</td></tr>';
+    }).join('');
     const filas = nuevos.map(function (n) {
       return '<tr><td style="padding:4px 14px 4px 0">' + n.nombre + '</td><td style="padding:4px 14px 4px 0">' +
         (n.email || '-') + '</td><td>' + (n.telefono || '-') + '</td></tr>';
     }).join('');
     await avisar(
-      parte.rescatados ? 'Rescatados ' + parte.rescatados + ' leads que el webhook perdió' : 'El rescate de leads da error',
+      parte.rescatados ? 'Rescatados ' + parte.rescatados + ' leads que el webhook perdió'
+        : parte.completados ? 'El webhook de Meta no procesó ' + parte.completados + ' lead(s): completados desde el rescate'
+        : 'El rescate de leads da error',
       '<p style="font:16px/1.5 system-ui">Revisados ' + parte.revisados + ' · ya estaban ' + parte.ya_estaban +
-      ' · <b>rescatados ' + parte.rescatados + '</b></p>' +
+      ' · <b>rescatados ' + parte.rescatados + '</b> · completados ' + parte.completados + '</p>' +
       (filas ? '<table style="font:14px/1.6 system-ui">' + filas + '</table>' : '') +
+      (filasCompletados ? '<p style="font:14px/1.5 system-ui">Ya estaban en el CRM por otra vía (la landing), pero el webhook de Meta no los procesó. ' +
+        'Se les han añadido las etiquetas y la nota del formulario. Conviene mirar el registro de /api/meta-leadform/ en Vercel de esa hora:</p>' +
+        '<table style="font:14px/1.6 system-ui">' + filasCompletados + '</table>' : '') +
       (parte.errores.length ? '<p style="font:13px/1.5 system-ui;color:#C2410C"><b>Errores:</b><br>' +
         parte.errores.map(function (e) { return String(e).replace(/[<>]/g, ''); }).join('<br>') + '</p>' : '') +
       '<p style="font:13px/1.5 system-ui;color:#666">Si esto rescata leads a menudo, el webhook no está haciendo su trabajo ' +

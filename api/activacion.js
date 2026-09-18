@@ -173,7 +173,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ ok: false, error: 'not_configured' });
   }
 
-  const resumen = { revisados: 0, wa: 0, voz: 0, email: 0, cerrados: 0, esperando: 0, errores: 0, sin_vapi: 0 };
+  const resumen = { revisados: 0, wa: 0, sms_rescate: 0, voz: 0, email: 0, cerrados: 0, esperando: 0, errores: 0, sin_vapi: 0 };
   let contactos;
   try {
     contactos = await A.buscarPorEtiqueta('activacion', 400);
@@ -221,6 +221,23 @@ module.exports = async function handler(req, res) {
       await avisar('agendado', c, '');
       resumen.cerrados++;
       continue;
+    }
+
+    // WhatsApps que se quedaron en «failed» después de la comprobación de los
+    // cinco segundos (ventana de 24 h de Meta). Salen por SMS aquí, sin esperar
+    // al siguiente paso: el siguiente paso puede ser la llamada, y llamar a
+    // alguien a quien no le ha llegado nada es empezar con el pie cambiado.
+    if (A.tiene(c, 'act-wa1') || A.tiene(c, 'act-wa2') || A.tiene(c, 'act-wa3')) {
+      try {
+        const n = await A.reenviarFallidos(c.id);
+        if (n) {
+          await A.etiquetar(c.id, ['act-por-sms']);
+          await A.nota(c.id, 'WhatsApp fallido (ventana de 24 h). El mismo texto ha salido por SMS (' + n + ').');
+          resumen.sms_rescate += n;
+        }
+      } catch (err) {
+        console.error('[activacion] rescate por SMS falló en ' + c.id + ':', err.message);
+      }
     }
 
     const paso = siguientePaso(c, minutos);
