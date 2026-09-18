@@ -52,3 +52,12 @@ oír la grabación de la próxima llamada real antes de tocar la pronunciación.
 **Nota.** El contacto de Bigpoma entró en la cadencia por una reactivación de la base
 de febrero hecha el 17-sep desde otra sesión (etiquetas canal-base-antigua,
 respondio-17sep). No es un lead de las campañas nuevas.
+
+## 18-sep-2026 · mañana
+
+- **Número de origen.** Confirmado que todas las llamadas salían desde +1 775 363 8742 (Twilio EE. UU., «provisional» desde el 9-sep). Twilio ha rechazado tres veces el alta de un móvil español (bundles v1-v3, código 18001 en DNI y factura). Los dos números verificados como identificador en Twilio (+34 663 375 205 y +34 647 118 491) sí sirven como origen por la troncal SIP: probado con el móvil de Maikel, llamada completada. Vapi acepta el 663 pero rechaza el 647 («Couldn't Create Phone Number»); pendiente de saber si está en otra cuenta de Vapi. Hoy las llamadas reales salen con el móvil de Maikel (phoneNumberId 2f99f0e4-…), decisión de Maikel.
+- **Agenda.** GHL rechazaba toda cita con «Selected slot duration is not a valid duration option» porque el calendario está en huecos de 30 min y api/agendar.js creaba citas de 15. Raquel decía «el hueco ya no está disponible». Corregido: se lee la duración del calendario. Primera cita real cerrada por Raquel: Grupo Rumy (Cristian), hoy 12:00.
+- **Prompt.** Números con letras, no leer el correo entero (solo el dominio, variable email_dominio), «en el anuncio de reformas» en vez de «en el anuncio del diagnóstico», nombre «Máikel». Resúmenes y datos estructurados en castellano activados en Vapi (analysisPlan).
+- **Registro.** Cada llamada deja nota en el contacto de GHL (vapi-fin.js) y va a la base de Notion «📞 Llamadas de Raquel» con transcripción, audio e hipótesis. Backfill de 32 llamadas hecho a mano.
+- **Trato.** Un trato ya no retrocede de etapa (vapi-fin devolvía «Reunión agendada» a «Conversación abierta»).
+- Pendiente: pronunciación de «Maikel» y «Qualivo» (probar grafías con la voz), no repetir el saludo cuando coge otra persona, rellenar el silencio de la agenda, bajar un punto la velocidad.
