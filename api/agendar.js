@@ -113,7 +113,62 @@ async function buscarContacto(email, telefono) {
   return (d.contacts || [])[0] || null;
 }
 
-module.exports = async function handler(req, res) {
+// Reserva la cita y dispara todo lo que sigue (confirmación, trato, aviso,
+// evento a Meta). La usan Raquel (por el handler de abajo) y el agente de
+// WhatsApp (api/_agente.js). Devuelve { ok, hora } o { ok:false, motivo,
+// libres } donde motivo es 'ocupado' o 'error'.
+async function reservar(o) {
+  const contacto = o.contacto;
+  const inicio = o.inicio;
+  const fin = new Date(inicio.getTime() + (await duracionCalendario()) * 60000);
+  const cita = await fetch(GHL_BASE + '/calendars/events/appointments', {
+    method: 'POST', headers: cabeceras(),
+    body: JSON.stringify({
+      calendarId: process.env.AGENDA_CALENDARIO || CALENDARIO,
+      locationId: process.env.GHL_LOCATION_ID,
+      contactId: contacto.id,
+      startTime: inicio.toISOString(),
+      endTime: fin.toISOString(),
+      // El nombre del CRM manda sobre el que dicta el modelo: en la prueba del
+      // 18-sep la cita se creó como «Michael» porque el modelo copia el nombre
+      // tal como lo transcribe de su propia voz.
+      title: 'Diagnóstico de crecimiento · ' + (contacto.firstName || contacto.contactName || o.nombre || ''),
+      // La sala fija de Meet, para que la invitación del calendario lleve el enlace.
+      address: process.env.AGENDA_ENLACE || require('./_cita.js').ENLACE_FIJO,
+      appointmentStatus: 'confirmed',
+      ignoreFreeSlotValidation: false,
+      toNotify: true
+    })
+  });
+  if (!cita.ok) {
+    const detalle = (await cita.text()).slice(0, 300);
+    console.error('[agendar] GHL rechazó la cita', cita.status, detalle);
+    // Solo es «hueco ocupado» si GHL lo dice; cualquier otro 400 es un fallo
+    // nuestro y no hay que culpar a la agenda delante del lead.
+    const ocupado = /slot|available|disponib|busy|booked|overlap/i.test(detalle) && !/duration/i.test(detalle);
+    if ((cita.status === 400 || cita.status === 422) && ocupado) {
+      return { ok: false, motivo: 'ocupado', libres: await huecosLibres(3) };
+    }
+    return { ok: false, motivo: 'error' };
+  }
+
+  // Se para la cadencia, el trato pasa a «Reunión agendada», se avisa a Maikel,
+  // sale el evento «Schedule» a Meta y el cliente recibe la confirmación por
+  // WhatsApp. Todo en _cita.js; aquí solo se dispara.
+  await require('./_cita.js').confirmarCita({
+    contactId: contacto.id, inicio: inicio, origen: o.origen || 'agenda', fuente: o.fuente || ''
+  });
+  if (o.contexto) {
+    await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {
+      method: 'POST', headers: cabeceras(),
+      body: JSON.stringify({ body: 'Agendado por ' + (o.origen || 'el agente') + '\n\n' + o.contexto + '\n\nHora: ' + inicio.toISOString() })
+    }).catch(function () {});
+  }
+  console.log('[agendar] cita creada', contacto.id, inicio.toISOString());
+  return { ok: true, hora: enPalabras(inicio.toISOString()) };
+}
+
+async function handler(req, res) {
   // El token puede venir en la query ya parseada, en la URL cruda o en cabecera.
   let recibido = (req.query && req.query.k) || req.headers['x-agenda-secret'] || '';
   if (!recibido && req.url) {
@@ -169,7 +224,6 @@ module.exports = async function handler(req, res) {
   if (!inicio) {
     return respuesta(res, toolCallId, 'No me ha quedado clara la hora. Pregúntasela otra vez y dímela con el día.');
   }
-  const fin = new Date(inicio.getTime() + (await duracionCalendario()) * 60000);
 
   try {
     let contacto = await buscarContacto(email, telefono);
@@ -195,62 +249,27 @@ module.exports = async function handler(req, res) {
       return respuesta(res, toolCallId, 'No he podido reservarlo. Pídele el email otra vez, letra por letra.');
     }
 
-    const cita = await fetch(GHL_BASE + '/calendars/events/appointments', {
-      method: 'POST', headers: cabeceras(),
-      body: JSON.stringify({
-        calendarId: process.env.AGENDA_CALENDARIO || CALENDARIO,
-        locationId: process.env.GHL_LOCATION_ID,
-        contactId: contacto.id,
-        startTime: inicio.toISOString(),
-        endTime: fin.toISOString(),
-        // El nombre del CRM manda sobre el que dicta el modelo: en la prueba del
-        // 18-sep la cita se creó como «Michael» porque el modelo copia el nombre
-        // tal como lo transcribe de su propia voz.
-        title: 'Diagnóstico de crecimiento · ' + (contacto.firstName || contacto.contactName || nombre || ''),
-        // La sala fija de Meet, para que la invitación del calendario lleve el enlace.
-        address: process.env.AGENDA_ENLACE || require('./_cita.js').ENLACE_FIJO,
-        appointmentStatus: 'confirmed',
-        ignoreFreeSlotValidation: false,
-        toNotify: true
-      })
+    const r = await reservar({
+      contacto: contacto, inicio: inicio, nombre: nombre, contexto: contexto,
+      origen: 'Raquel', fuente: 'Agente de voz — diagnóstico'
     });
-    if (!cita.ok) {
-      const detalle = (await cita.text()).slice(0, 300);
-      console.error('[agendar] GHL rechazó la cita', cita.status, detalle);
-      // Solo es «hueco ocupado» si GHL lo dice; cualquier otro 400 es un fallo
-      // nuestro y no hay que culpar a la agenda delante del lead.
-      const ocupado = /slot|available|disponib|busy|booked|overlap/i.test(detalle) && !/duration/i.test(detalle);
-      if ((cita.status === 400 || cita.status === 422) && ocupado) {
-        const libres = await huecosLibres(3);
-        if (libres.length) {
-          return respuesta(res, toolCallId, 'Ese hueco no está libre. NO propongas otro a ojo: ' +
-            'ofrécele exactamente uno de estos, que sí lo están: ' + libres.map(enPalabras).join(' · '));
-        }
-        return respuesta(res, toolCallId, 'Ese hueco no está libre y no veo otros. Dile que Maikel le escribe con opciones.');
+    if (!r.ok && r.motivo === 'ocupado') {
+      if (r.libres && r.libres.length) {
+        return respuesta(res, toolCallId, 'Ese hueco no está libre. NO propongas otro a ojo: ' +
+          'ofrécele exactamente uno de estos, que sí lo están: ' + r.libres.map(enPalabras).join(' · '));
       }
-      return respuesta(res, toolCallId, 'No he podido reservarlo ahora. Dile que Maikel le manda el enlace en un momento.');
+      return respuesta(res, toolCallId, 'Ese hueco no está libre y no veo otros. Dile que Maikel le escribe con opciones.');
     }
-
-    // Se para la cadencia, el trato pasa a «Reunión agendada», se avisa a Maikel,
-    // sale el evento «Schedule» a Meta y el cliente recibe la confirmación por
-    // WhatsApp. Todo en _cita.js; aquí solo se dispara.
-    await require('./_cita.js').confirmarCita({
-      contactId: contacto.id, inicio: inicio, origen: 'Raquel', fuente: 'Agente de voz — diagnóstico'
-    });
-    if (contexto) {
-      await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {
-        method: 'POST', headers: cabeceras(),
-        body: JSON.stringify({ body: 'Agendado por el agente de voz\n\n' + contexto + '\n\nHora: ' + inicio.toISOString() })
-      }).catch(function () {});
-    }
-
-    const hora = new Intl.DateTimeFormat('es-ES', {
-      timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'
-    }).format(inicio);
-    console.log('[agendar] cita creada', contacto.id, inicio.toISOString());
-    return respuesta(res, toolCallId, 'Reservado para el ' + hora + '. Confírmaselo y dile que le llega la invitación al correo.');
+    if (!r.ok) return respuesta(res, toolCallId, 'No he podido reservarlo ahora. Dile que Maikel le manda el enlace en un momento.');
+    return respuesta(res, toolCallId, 'Reservado para el ' + r.hora + '. Confírmaselo y dile que le llega la invitación al correo.');
   } catch (err) {
     console.error('[agendar] error inesperado:', err && err.message);
     return respuesta(res, toolCallId, 'No he podido reservarlo ahora. Dile que Maikel le escribe enseguida.');
   }
-};
+}
+
+module.exports = handler;
+module.exports.huecosLibres = huecosLibres;
+module.exports.enPalabras = enPalabras;
+module.exports.corregirFecha = corregirFecha;
+module.exports.reservar = reservar;
