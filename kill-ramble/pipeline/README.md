@@ -89,3 +89,29 @@ que coincida:
 Si una fila suya dice que **ya han hablado** con esa persona, no entra en la secuencia de
 primer contacto. Escribirle como si no les conociera es peor que no escribirle. Esas filas
 salen marcadas en las notas del informe.
+
+## Informe semanal
+
+```bash
+export SMARTLEAD_API_KEY=...
+export NOTION_REPORT_DB=...   # opcional: archiva cada semana como fila
+
+node pipeline/report.mjs --campaigns 3974838,3974839 --out ./out
+```
+
+Saca de Smartlead lo que de verdad pasó y escribe `informe_AAAA-MM-DD.md`, listo para
+pegar en un correo al estudio: contactados, respuestas y tasa de respuesta, rebotes, bajas,
+cola pendiente, el desglose por campaña y **quién ha respondido, con nombre y fecha**.
+
+Si la tasa de rebote pasa del 3 %, el informe abre con un aviso: eso es un problema de lista
+que hay que resolver antes de seguir enviando, no un número para el histórico.
+
+### Por qué no hay tasa de apertura
+
+El seguimiento de aperturas mete un píxel invisible en cada correo. Gmail y Outlook lo
+detectan, y en un buzón recién creado eso es la diferencia entre la bandeja de entrada y
+spam. Preferimos llegar. La apertura, además, no dice nada: nadie juega por abrir un correo.
+
+Lo que decide si esto funciona son cuatro números que no están en Smartlead y se rellenan a
+mano cada semana, desde el calendario de reservas y el informe UTM de Steamworks: franjas
+reservadas, sesiones jugadas, piezas publicadas y wishlists atribuidas.
