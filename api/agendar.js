@@ -13,7 +13,28 @@
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const CALENDARIO = 'zBlsw8BEKA2zah81YlOl';
-const DURACION_MIN = 15;
+// Duración por si no se puede leer el calendario. La cita dura lo que diga el
+// calendario, no lo que diga este archivo: el 18-sep el calendario estaba en
+// huecos de 30 minutos y aquí se pedían 15, GHL contestaba «Selected slot
+// duration is not a valid duration option» (400) y Raquel le decía al lead que
+// el hueco «ya no estaba disponible» aunque acababa de ofrecérselo.
+const DURACION_MIN = 30;
+
+let duracionCache = { valor: 0, hasta: 0 };
+async function duracionCalendario() {
+  if (duracionCache.valor && Date.now() < duracionCache.hasta) return duracionCache.valor;
+  try {
+    const cal = process.env.AGENDA_CALENDARIO || CALENDARIO;
+    const r = await fetch(GHL_BASE + '/calendars/' + cal, { headers: cabeceras() });
+    if (!r.ok) return DURACION_MIN;
+    const d = await r.json();
+    const c = (d && d.calendar) || {};
+    let min = Number(c.slotDuration || 0);
+    if (String(c.slotDurationUnit || 'mins').startsWith('hour')) min = min * 60;
+    if (min > 0) duracionCache = { valor: min, hasta: Date.now() + 10 * 60000 };
+    return min > 0 ? min : DURACION_MIN;
+  } catch (e) { return DURACION_MIN; }
+}
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 function cabeceras() {
@@ -148,7 +169,7 @@ module.exports = async function handler(req, res) {
   if (!inicio) {
     return respuesta(res, toolCallId, 'No me ha quedado clara la hora. Pregúntasela otra vez y dímela con el día.');
   }
-  const fin = new Date(inicio.getTime() + DURACION_MIN * 60000);
+  const fin = new Date(inicio.getTime() + (await duracionCalendario()) * 60000);
 
   try {
     let contacto = await buscarContacto(email, telefono);
@@ -191,8 +212,10 @@ module.exports = async function handler(req, res) {
     if (!cita.ok) {
       const detalle = (await cita.text()).slice(0, 300);
       console.error('[agendar] GHL rechazó la cita', cita.status, detalle);
-      // Casi siempre es que ese hueco no está libre.
-      if (cita.status === 400 || cita.status === 422) {
+      // Solo es «hueco ocupado» si GHL lo dice; cualquier otro 400 es un fallo
+      // nuestro y no hay que culpar a la agenda delante del lead.
+      const ocupado = /slot|available|disponib|busy|booked|overlap/i.test(detalle) && !/duration/i.test(detalle);
+      if ((cita.status === 400 || cita.status === 422) && ocupado) {
         const libres = await huecosLibres(3);
         if (libres.length) {
           return respuesta(res, toolCallId, 'Ese hueco no está libre. NO propongas otro a ojo: ' +
