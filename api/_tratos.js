@@ -138,6 +138,13 @@ async function mover(contactId, etapa, crearSi) {
     }
     if (op.pipelineStageId === ETAPAS[etapa]) return { ok: true, id: op.id, movido: false };
     if (op.pipelineStageId === ETAPAS.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
+    // Nunca hacia atrás: el 18-sep la agenda puso un trato en «Reunión agendada» y
+    // el final de la llamada lo devolvió a «Conversación abierta».
+    const ORDEN = ['nuevo', 'conversacion', 'reunion', 'oferta', 'seguimiento', 'masAdelante', 'cliente'];
+    const actual = Object.keys(ETAPAS).filter(function (k) { return ETAPAS[k] === op.pipelineStageId; })[0];
+    if (actual && ORDEN.indexOf(actual) > ORDEN.indexOf(etapa) && etapa !== 'masAdelante') {
+      return { ok: true, id: op.id, movido: false, motivo: 'no_retrocede' };
+    }
     const r = await fetch(GHL_BASE + '/opportunities/' + op.id, {
       method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: ETAPAS[etapa] })
     });
