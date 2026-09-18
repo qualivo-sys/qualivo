@@ -51,10 +51,9 @@ function relativo(d) {
 // El enlace de la videollamada, si la cita lo lleva (campo address o
 // meetingLocation en GHL). Se admite también AGENDA_ENLACE fijo en el entorno
 // (una sala permanente de Meet) para que el mensaje lo lleve siempre.
-// Sala fija de Meet de los diagnósticos. Vive en un evento del calendario de
-// maikel@qualivo.io («Sala de diagnósticos Qualivo · NO BORRAR», 31-dic-2027):
-// si se borra ese evento, el enlace muere. AGENDA_ENLACE en el entorno manda.
-const ENLACE_FIJO = 'https://meet.google.com/rsh-bsdr-wrf';
+// Sala fija de Meet de los diagnósticos: la creó Maikel el 18-sep-2026 y es la
+// misma que usa él. AGENDA_ENLACE en el entorno manda sobre esta constante.
+const ENLACE_FIJO = 'https://meet.google.com/gom-euxm-btb';
 
 function enlaceDe(ev) {
   const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl, process.env.AGENDA_ENLACE, ENLACE_FIJO];
