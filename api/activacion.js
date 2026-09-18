@@ -230,7 +230,7 @@ module.exports = async function handler(req, res) {
     // alguien a quien no le ha llegado nada es empezar con el pie cambiado.
     if (A.tiene(c, 'act-wa1') || A.tiene(c, 'act-wa2') || A.tiene(c, 'act-wa3')) {
       try {
-        const n = await A.reenviarFallidos(c.id);
+        const n = await A.reenviarFallidos(c.id, inicioMs);
         if (n) {
           await A.etiquetar(c.id, ['act-por-sms']);
           await A.nota(c.id, 'WhatsApp fallido (ventana de 24 h). El mismo texto ha salido por SMS (' + n + ').');

@@ -178,12 +178,16 @@ async function mensajesDe(contactId) {
 // salir, la comprobación ya había pasado, y el SMS de respaldo nunca se envió.
 // Esto lo mira el reloj en cada vuelta: cualquier WhatsApp saliente fallido que
 // no tenga ya el mismo texto enviado por SMS, se manda por SMS.
-async function reenviarFallidos(contactId) {
+// Solo mira los WhatsApp de esta cadencia (desde `desdeMs`): sin ese corte, la
+// primera vuelta reenvió por SMS pruebas fallidas de hace días.
+async function reenviarFallidos(contactId, desdeMs) {
   const msgs = await mensajesDe(contactId);
   const salientes = msgs.filter(function (m) { return String(m.direction) === 'outbound'; });
+  const corte = (desdeMs || 0) - 10 * 60000;
   let enviados = 0;
   for (const m of salientes) {
     if (!/WHATSAPP/i.test(String(m.messageType || ''))) continue;
+    if (Date.parse(m.dateAdded || 0) < corte) continue;
     if (String(m.status || '').toLowerCase() !== 'failed' && !m.error) continue;
     const cuerpo = String(m.body || '').trim();
     if (!cuerpo) continue;
