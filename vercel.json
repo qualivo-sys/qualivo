@@ -81,6 +81,16 @@
   ],
   "redirects": [
     {
+      "source": "/agenda",
+      "destination": "https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl",
+      "permanent": false
+    },
+    {
+      "source": "/agenda/",
+      "destination": "https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl",
+      "permanent": false
+    },
+    {
       "source": "/casos/eleva-academy",
       "destination": "/#casos",
       "permanent": true
