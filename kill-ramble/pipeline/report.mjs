@@ -106,8 +106,10 @@ const { NOTION_API_KEY: nk, NOTION_REPORT_DB: ndb } = process.env;
 if (nk && ndb) {
   const r = await notionCreate(nk, ndb, {
     Semana: P.title(hoy), Contactados: P.num(totals.sent), Respuestas: P.num(totals.replies),
-    'Tasa de respuesta': P.num(totals.sent ? +(totals.replies / totals.sent * 100).toFixed(1) : 0),
+    // Notion formatea el porcentaje: espera la fracción, no 0-100.
+    'Tasa de respuesta': P.num(totals.sent ? +(totals.replies / totals.sent).toFixed(4) : 0),
     Rebotes: P.num(totals.bounces), 'En cola': P.num(totals.leads - totals.sent),
+    Notas: P.text(replies.length ? `Respondieron: ${replies.map((r) => r.creador).join(', ')}` : ''),
   });
   console.error(r.object === 'page' ? 'Archivado en Notion' : 'Notion: ' + (r.message || 'error'));
 }
