@@ -42,7 +42,11 @@
   .ll-caja{ background:#fff; border-radius:20px; padding:18px 14px 8px; box-shadow:0 24px 60px rgba(0,0,0,.35); color:var(--tinta); }
   .ll-caja .t{ font-family:var(--qv-font-display); font-weight:900; font-size:19px; letter-spacing:-.02em; margin:0 6px 4px; }
   .ll-caja .s{ font-size:14px; color:#5A5E66; margin:0 6px 10px; }
-  .ll-caja iframe{ width:100%; height:760px; border:0; display:block; border-radius:12px; }
+  /* La altura la ajusta form_embed.js de GoHighLevel al contenido de cada paso
+     (calendario, formulario, confirmación). Hasta que lo haga, y por si el
+     script no carga, el iframe puede desplazarse: nunca se corta el botón. */
+  .ll-caja iframe{ width:100%; height:760px; min-height:760px; border:0; display:block; border-radius:12px; }
+  @media (max-width:640px){ .ll-caja iframe{ height:1180px; min-height:1180px; } }
 </style>
 </head>
 <body>
@@ -115,9 +119,18 @@
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) { if (u.get(k)) q.push(k + '=' + encodeURIComponent(u.get(k))); });
     var i = document.createElement('iframe');
     i.src = CAL + (q.length ? '?' + q.join('&') : '');
-    i.setAttribute('scrolling', 'no');
+    // 18-sep-2026: con scrolling=no y altura fija, en el móvil el paso del
+    // formulario (más alto que el calendario) se cortaba por debajo del
+    // teléfono y no se llegaba al botón de reservar. El id lo usa
+    // form_embed.js para redimensionar el iframe a cada paso.
+    i.id = 'zBlsw8BEKA2zah81YlOl_' + Date.now();
+    i.setAttribute('scrolling', 'auto');
     i.title = 'Calendario para reservar la llamada';
     document.getElementById('cal').appendChild(i);
+    var s = document.createElement('script');
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
     if (window.qvTrack) window.qvTrack('llamada_calendario_view', {});
   })();
 </script>
