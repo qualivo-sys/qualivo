@@ -10,11 +10,15 @@ reales de la cuenta.
 ## 1 · PROMPT PARA EL ASISTENTE DE IA DE GOHIGHLEVEL
 
 ```
-Crea un workflow llamado "WF4 · Imanes de leads".
+Crea un workflow llamado "WF4 · Secuencias de email".
 
 DISPARADOR
-Cuando se añade a un contacto cualquiera de estas etiquetas:
-lm-test-tcp, lm-calc-sueldo, lm-guia-seleccion, lm-test-perfil, lm-temario-fd
+Dos disparadores, cualquiera de los dos mete al contacto en el workflow:
+  1. Se añade cualquiera de estas etiquetas (leads del blog):
+     lm-test-tcp, lm-calc-sueldo, lm-guia-seleccion, lm-test-perfil, lm-temario-fd
+  2. Se añade la etiqueta "lead-tcp" Y el contacto tiene la etiqueta "lead paid"
+     (leads de anuncios de Meta, TikTok o Google que piden el curso de TCP)
+No permitir que el mismo contacto entre dos veces.
 
 PRIMER FILTRO — leads calientes
 Si el campo personalizado "Lead Temperature" es igual a "Caliente":
@@ -29,12 +33,13 @@ Si no es "Caliente", continúa.
 BIFURCACIÓN POR IMÁN
 Según la etiqueta con la que entró, el contacto va a una de tres ramas:
 
-Rama A — etiquetas lm-test-tcp, lm-calc-sueldo o lm-guia-seleccion
+Rama A — etiquetas lm-test-tcp, lm-calc-sueldo, lm-guia-seleccion, o lead-tcp + lead paid
   Email de entrega según la etiqueta exacta:
     lm-test-tcp      → plantilla "EAC · S1 TCP · D0 · Tu resultado"
     lm-calc-sueldo   → plantilla "EAC · S1 TCP · D0b · Calculadora (entrega)"
     lm-guia-seleccion→ plantilla "EAC · S1 TCP · D0c · Guía de selección (entrega)"
-  Después, para los tres por igual:
+    lead-tcp + lead paid (sin etiqueta lm-*) → plantilla "EAC · S1 TCP · D0p · Bienvenida (anuncios)"
+  Después, para los cuatro por igual:
     esperar 1 día  → "EAC · S1 TCP · D1 · Mitos"
     esperar 2 días → "EAC · S1 TCP · D3 · Sueldo"
     esperar 2 días → "EAC · S1 TCP · D5 · Curso oficial"
@@ -71,11 +76,12 @@ Si un envío cae fuera, esperar a la siguiente franja válida.
 ## 2 · ESPECIFICACIÓN MANUAL (si montas a mano)
 
 **Automatización → Workflows → Crear workflow → Empezar desde cero**
-Nombre: `WF4 · Imanes de leads`
+Nombre: `WF4 · Secuencias de email`
 
-### Disparador
-- Tipo: **Etiqueta añadida al contacto**
-- Etiqueta: `lm-test-tcp` · `lm-calc-sueldo` · `lm-guia-seleccion` · `lm-test-perfil` · `lm-temario-fd`
+### Disparadores
+- **Etiqueta añadida al contacto**: `lm-test-tcp` · `lm-calc-sueldo` · `lm-guia-seleccion` · `lm-test-perfil` · `lm-temario-fd`
+- **Etiqueta añadida al contacto**: `lead-tcp`, con filtro «el contacto tiene la etiqueta `lead paid`»
+  (así entran los leads de anuncios de TCP; los de Despachador y Azafata de tierra ya tienen WF2 y WF3)
 - Reentrada: **no permitir** que el mismo contacto vuelva a entrar
 
 ### Ajustes del workflow
@@ -101,6 +107,7 @@ Tres ramas según la etiqueta de entrada, con los emails y esperas de la tabla:
 | A | `lm-test-tcp` | D0 Tu resultado · D1 · D3 · D5 · D8 · D11 · D14 |
 | A | `lm-calc-sueldo` | D0b Calculadora · D1 · D3 · D5 · D8 · D11 · D14 |
 | A | `lm-guia-seleccion` | D0c Guía · D1 · D3 · D5 · D8 · D11 · D14 |
+| A | `lead-tcp` + `lead paid` (anuncios) | D0p Bienvenida · D1 · D3 · D5 · D8 · D11 · D14 |
 | B | `lm-temario-fd` | S2 D0 · D2 · D5 · D9 |
 | C | `lm-test-perfil` | S3 D0 · D2 · D5 · D9 |
 
@@ -145,8 +152,10 @@ La cuenta ya tiene diez workflows publicados, entre ellos `WF1 · Speed-to-Lead
 Hot TCP`, `WF1 · Speed-to-Lead Hot TCP Orgánico`, `WF2 · Dispacher` y
 `WF3 · Azafata de tierra`.
 
-**Riesgo real:** un lead que entre por un imán puede disparar también uno de
-esos workflows y recibir dos mensajes de bienvenida distintos en minutos.
+**Riesgo real:** un lead que entre por un imán o por un anuncio de TCP puede disparar
+también `WF1 · Speed-to-Lead Hot TCP` y recibir dos mensajes de bienvenida en minutos.
+WF1 manda el WhatsApp/SMS inmediato y WF4 el email: son compatibles, pero revisa que WF1
+**no envíe ningún email** para no duplicar el D0p.
 
 Antes de publicar WF4:
 1. Abre cada uno de esos cuatro workflows y mira su disparador.
