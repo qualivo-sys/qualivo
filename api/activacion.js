@@ -217,9 +217,9 @@ module.exports = async function handler(req, res) {
       continue;
     }
     if (await A.tieneCitaGHL(c.id)) {
-      await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
-      await require('./_tratos.js').mover(c.id, 'reunion');
-      await avisar('agendado', c, '');
+      // Trato, aviso, evento a Meta y WhatsApp de confirmación, todo en _cita.js.
+      const CITA = require('./_cita.js');
+      await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: await CITA.primeraCita(c.id), origen: 'Reloj' });
       resumen.cerrados++;
       continue;
     }
@@ -264,15 +264,16 @@ module.exports = async function handler(req, res) {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
         const texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
-        const env = await A.enviarMensaje(c.id, texto);
-        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
+        const env = paso.tipo === 'wa1'
+          ? await A.primerWhatsApp(c.id, c.phone, { nombre: datos.nombre, cita: datos.fuga || datos.sector || 'el diagnóstico', pregunta: M.pregunta(datos), texto: texto })
+          : await A.enviarMensaje(c.id, texto);
+        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : []));
         resumen.wa++; hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         if (await A.tieneCitaGHL(c.id)) {
-          await A.etiquetar(c.id, ['act-agendado'], ['activacion']);
-          await require('./_tratos.js').mover(c.id, 'reunion');
-          await avisar('agendado', c, '');
+          const CITA = require('./_cita.js');
+          await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: await CITA.primeraCita(c.id), origen: 'Reloj' });
           resumen.cerrados++; continue;
         }
         const r = await A.lanzarLlamada({
@@ -327,6 +328,19 @@ module.exports = async function handler(req, res) {
       resumen.errores++;
       console.error('[activacion] ' + paso.tipo + ' falló en ' + c.id + ':', err.message);
     }
+  }
+
+  // Citas reservadas por otras vías (widget, GHL a mano, /llamada/) que nadie
+  // ha confirmado todavía: trato, aviso, evento a Meta y WhatsApp al cliente.
+  try {
+    const CITA = require('./_cita.js');
+    const citas = await CITA.citasSinConfirmar(20);
+    for (const ev of citas) {
+      const r = await CITA.confirmarCita({ contactId: ev.contactId, inicio: ev.startTime, origen: 'Calendario' });
+      if (r.ok && !r.repetida) resumen.citas = (resumen.citas || 0) + 1;
+    }
+  } catch (err) {
+    console.error('[activacion] rastreo de citas falló:', err && err.message);
   }
 
   await procesarSecuencias(resumen);

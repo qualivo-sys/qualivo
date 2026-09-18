@@ -344,10 +344,12 @@ module.exports = async function handler(req, res) {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');
           if (act.enVentana('whatsapp')) {
-            const env = await act.enviarMensaje(r.contactId, msg.whatsapp1({
-              nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga, sector: r.sector
-            }));
-            await act.etiquetar(r.contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
+            const datosMsg = { nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga, sector: r.sector };
+            const env = await act.primerWhatsApp(r.contactId, r.telefono, {
+              nombre: msg.nombreCorto(r.nombre), cita: r.fuga || 'el diagnóstico',
+              pregunta: msg.pregunta(datosMsg), texto: msg.whatsapp1(datosMsg)
+            });
+            await act.etiquetar(r.contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : []));
           }
         } catch (err) {
           console.error('[leadform] primer WhatsApp no salió:', err && err.message);

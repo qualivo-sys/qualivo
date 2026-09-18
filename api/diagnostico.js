@@ -192,10 +192,12 @@ module.exports = async function handler(req, res) {
       try {
         const act = require('./_activacion.js');
         const msg = require('./_mensajes.js');
-        const env = await act.enviarMensaje(contactId, msg.whatsapp1({
-          nombre: nombre, hipotesis: hipotesis, sector: sector, inversion: inversion, origen: 'landing'
-        }));
-        await act.etiquetar(contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : []));
+        const datosMsg = { nombre: nombre, hipotesis: hipotesis, sector: sector, inversion: inversion, origen: 'landing' };
+        const env = await act.primerWhatsApp(contactId, telefono, {
+          nombre: msg.nombreCorto(nombre), cita: hipotesis ? String(hipotesis).slice(0, 220) : 'el diagnóstico',
+          pregunta: msg.pregunta(datosMsg), texto: msg.whatsapp1(datosMsg)
+        });
+        await act.etiquetar(contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : []));
       } catch (err) {
         console.error('[diagnostico] primer WhatsApp no salió:', err && err.message);
       }

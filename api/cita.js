@@ -112,9 +112,8 @@ module.exports = async function (req, res) {
   // El trato de Prospección pasa a «Reunión agendada» (se crea si no lo tenía,
   // p. ej. alguien que reserva directo desde /llamada/ sin haber pasado por un formulario).
   if (contactoId && process.env.GHL_API_KEY) {
-    await require('./_tratos.js').mover(contactoId, 'reunion', {
-      nombre: nombre, email: email, telefono: telefono, empresa: empresa,
-      origen: 'Agenda', fuente: origen || 'Reserva en el calendario'
+    await require('./_cita.js').confirmarCita({
+      contactId: contactoId, inicio: inicio, origen: 'Calendario', fuente: origen || 'Reserva en el calendario'
     });
   }
 

@@ -155,6 +155,23 @@ async function enviarMensaje(contactId, texto) {
   return { canal: 'sms', estado: 'enviado' };
 }
 
+// Primer WhatsApp a un lead que nunca nos ha escrito. Si la plantilla de Meta
+// está configurada y aprobada, sale por ella (es la única vía que Meta acepta
+// fuera de la ventana de 24 h); si no, por GHL con respaldo SMS como siempre.
+// datos: { nombre, cita (lo que escribió o el tema), pregunta, texto (versión libre) }
+async function primerWhatsApp(contactId, telefono, datos) {
+  try {
+    const WA = require('./_whatsapp.js');
+    if (WA.configurado() && telefono) {
+      const r = await WA.enviarPlantilla(telefono, WA.PLANTILLAS.primerContacto,
+        [datos.nombre || 'hola', datos.cita || 'el diagnóstico', datos.pregunta || '']);
+      if (r.ok) return { canal: 'plantilla', estado: 'enviado', id: r.id };
+      console.warn('[activacion] plantilla primer contacto no salió (' + r.motivo + '); sigo por GHL');
+    }
+  } catch (e) { console.warn('[activacion] plantilla:', e && e.message); }
+  return enviarMensaje(contactId, datos.texto);
+}
+
 // Todos los mensajes de un contacto, de más antiguo a más nuevo.
 async function mensajesDe(contactId) {
   const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
@@ -313,6 +330,6 @@ async function enviarCorreo(email, asunto, html) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

@@ -229,13 +229,11 @@ module.exports = async function handler(req, res) {
       return respuesta(res, toolCallId, 'No he podido reservarlo ahora. Dile que Maikel le manda el enlace en un momento.');
     }
 
-    // Se para la cadencia: quien ya tiene hora no debe recibir más toques.
-    await fetch(GHL_BASE + '/contacts/' + contacto.id + '/tags', {
-      method: 'POST', headers: cabeceras(), body: JSON.stringify({ tags: ['act-agendado'] })
-    }).catch(function () {});
-    // Y el trato de Prospección pasa a «Reunión agendada» (se crea si no lo tenía).
-    await require('./_tratos.js').mover(contacto.id, 'reunion', {
-      nombre: nombre || contacto.contactName || '', origen: 'Agente de voz', fuente: 'Agente de voz — diagnóstico'
+    // Se para la cadencia, el trato pasa a «Reunión agendada», se avisa a Maikel,
+    // sale el evento «Schedule» a Meta y el cliente recibe la confirmación por
+    // WhatsApp. Todo en _cita.js; aquí solo se dispara.
+    await require('./_cita.js').confirmarCita({
+      contactId: contacto.id, inicio: inicio, origen: 'Raquel', fuente: 'Agente de voz — diagnóstico'
     });
     if (contexto) {
       await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {
