@@ -282,7 +282,16 @@ module.exports = async function handler(req, res) {
             nombre: datos.nombre,
             email: c.email || '',
             empresa: c.companyName || '',
-            origen: datos.origen === 'leadform' ? 'el anuncio del diagnóstico' : 'la página del diagnóstico',
+            // Raquel dice «Acabas de pedir el diagnóstico de crecimiento en {{origen}}».
+            // Antes decía «en el anuncio del diagnóstico», que suena a bucle. Ahora:
+            // «en el anuncio de reformas» si viene de un anuncio y se sabe el sector,
+            // «en el anuncio» si no, y «en la web» si entró por la landing sin anuncio.
+            origen: (function () {
+              const deAnuncio = esLeadForm(c) || (c.tags || []).some(function (t) { return String(t).indexOf('creativo-') === 0; });
+              if (!deAnuncio) return 'la web';
+              const corto = datos.sector ? require('./_tratos.js').sectorCorto(datos.sector).toLowerCase() : '';
+              return corto && corto !== datos.sector.toLowerCase() ? 'el anuncio de ' + corto : 'el anuncio';
+            })(),
             fuga: datos.fuga || datos.sector || ''
           }
         });
