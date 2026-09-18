@@ -25,10 +25,10 @@ const PLANTILLAS = {
   // hablemos: {{3}}
   primerContacto: process.env.META_WA_PLANTILLA_PRIMERO || 'qualivo_primer_contacto',
   // Hola {{1}}, soy Maikel, de Qualivo. Confirmado: hablamos el {{2}} a las
-  // {{3}}. Son quince minutos por videollamada; el enlace está en la invitación
-  // que te ha llegado al correo. Voy a repasar contigo dónde se te está
-  // escapando el negocio y te enseño un plan hecho para tu caso. Si te surge
-  // algo antes, dímelo por aquí.
+  // {{3}}. Son quince minutos por videollamada. Este es el enlace: {{4}}
+  // (también lo tienes en la invitación del correo). Voy a repasar contigo
+  // dónde se te está escapando el negocio y te enseño un plan hecho para tu
+  // caso. Si te surge algo antes, dímelo por aquí.
   confirmacionCita: process.env.META_WA_PLANTILLA_CITA || 'qualivo_confirmacion_cita'
 };
 

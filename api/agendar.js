@@ -207,6 +207,8 @@ module.exports = async function handler(req, res) {
         // 18-sep la cita se creó como «Michael» porque el modelo copia el nombre
         // tal como lo transcribe de su propia voz.
         title: 'Diagnóstico de crecimiento · ' + (contacto.firstName || contacto.contactName || nombre || ''),
+        // La sala fija de Meet, para que la invitación del calendario lleve el enlace.
+        address: process.env.AGENDA_ENLACE || require('./_cita.js').ENLACE_FIJO,
         appointmentStatus: 'confirmed',
         ignoreFreeSlotValidation: false,
         toNotify: true

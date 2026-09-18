@@ -51,8 +51,13 @@ function relativo(d) {
 // El enlace de la videollamada, si la cita lo lleva (campo address o
 // meetingLocation en GHL). Se admite también AGENDA_ENLACE fijo en el entorno
 // (una sala permanente de Meet) para que el mensaje lo lleve siempre.
+// Sala fija de Meet de los diagnósticos. Vive en un evento del calendario de
+// maikel@qualivo.io («Sala de diagnósticos Qualivo · NO BORRAR», 31-dic-2027):
+// si se borra ese evento, el enlace muere. AGENDA_ENLACE en el entorno manda.
+const ENLACE_FIJO = 'https://meet.google.com/rsh-bsdr-wrf';
+
 function enlaceDe(ev) {
-  const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl, process.env.AGENDA_ENLACE];
+  const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl, process.env.AGENDA_ENLACE, ENLACE_FIJO];
   for (const c of cand) { const m = String(c || '').match(/https?:\/\/\S+/); if (m) return m[0]; }
   return '';
 }
@@ -99,7 +104,7 @@ async function confirmarCita(o) {
     if (c.phone && f.dia) {
       let salida = { ok: false };
       if (WA.configurado()) {
-        salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', f.dia, f.hora]);
+        salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', (cuando ? cuando + ', ' : '') + f.dia, f.hora, enlace || ENLACE_FIJO]);
         if (salida.ok) hecho.push('whatsapp_plantilla');
       }
       if (!salida.ok) {
@@ -179,4 +184,4 @@ async function primeraCita(contactId) {
   } catch (e) { return null; }
 }
 
-module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe };
+module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, ENLACE_FIJO: ENLACE_FIJO };

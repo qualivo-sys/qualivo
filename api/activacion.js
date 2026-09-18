@@ -378,7 +378,7 @@ module.exports = async function handler(req, res) {
         if (isNaN(d.getTime()) || d.getTime() < Date.now()) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
         const dia = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long' }).format(d);
         const hora = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(d);
-        const r = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombrePila(c.firstName || c.contactName || ''), dia, hora]);
+        const r = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombrePila(c.firstName || c.contactName || ''), dia, hora, CITA.enlaceDe(ev)]);
         if (r.ok) { await A.etiquetar(c.id, ['act-por-plantilla'], ['act-cita-sin-confirmar']); resumen.citas = (resumen.citas || 0) + 1; }
       }
     }
