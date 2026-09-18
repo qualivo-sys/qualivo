@@ -210,6 +210,23 @@ module.exports = async function handler(req, res) {
       continue;
     }
     if (r.respondio) {
+      // El primero salió por una plantilla fija (Meta no deja personalizar fuera
+      // de la ventana de 24 h). Al contestar, la ventana se abre: ahora sí sale
+      // el mensaje con lo que él escribió y la pregunta. Después se para.
+      if (!A.tiene(c, 'act-wa1-personal') && (A.tiene(c, 'act-por-plantilla') || A.tiene(c, 'act-wa1-fallido'))) {
+        try {
+          const v = A.leerCamposWA(c);
+          const d = { nombre: nombrePila(c.firstName || c.contactName || ''), hipotesis: v.loQueEscribio || '', sector: '', inversion: '' };
+          (c.tags || []).forEach(function (t) {
+            const s2 = String(t);
+            if (s2.startsWith('sector-')) d.sector = s2.slice(7).replace(/-/g, ' ');
+            if (s2.startsWith('inv-')) d.inversion = s2.slice(4).replace(/-/g, ' ');
+            if (s2.startsWith('fuga-')) d.fuga = s2.slice(5).replace(/-/g, ' ');
+          });
+          const env = await A.enviarMensaje(c.id, M.whatsappTrasApertura(d));
+          if (env.canal === 'whatsapp') { await A.etiquetar(c.id, ['act-wa1-personal']); resumen.wa++; }
+        } catch (err) { console.error('[activacion] mensaje personalizado tras respuesta:', err.message); }
+      }
       await A.etiquetar(c.id, ['act-respondio'], ['activacion']);
       await require('./_tratos.js').mover(c.id, 'conversacion');
       await avisar('respondio', c, r.texto);

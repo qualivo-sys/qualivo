@@ -63,6 +63,21 @@ function whatsapp1(datos) {
     'Antes de que hablemos te pregunto una cosa: ' + pregunta(datos);
 }
 
+// El primer WhatsApp de un lead que nunca nos ha escrito sale por una plantilla
+// aprobada por Meta, que es fija y no admite personalización (18-sep-2026).
+// En cuanto contesta se abre la ventana de 24 h y entonces sí va el mensaje de
+// verdad: lo que escribió él, y la pregunta que abre la conversación.
+function whatsappTrasApertura(datos) {
+  const n = nombreCorto(datos.nombre);
+  const gracias = n ? 'Gracias, ' + n + '. ' : 'Gracias. ';
+  const p = pregunta(datos);
+  const P = p ? p.charAt(0).toUpperCase() + p.slice(1) : '';
+  if (datos.hipotesis) {
+    return gracias + 'Me ha llamado la atención lo que escribiste:\n\n«' + String(datos.hipotesis).slice(0, 220) + '»\n\n' + P;
+  }
+  return gracias + P;
+}
+
 function whatsapp2(datos) {
   const n = nombreCorto(datos.nombre);
   return (n ? n + ', te' : 'Te') + ' he llamado hace un rato y no he podido localizarte.\n\n' +
@@ -165,4 +180,4 @@ const EMAILS = [
   }
 ];
 
-module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsapp2, whatsapp3, EMAILS };
+module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, EMAILS };

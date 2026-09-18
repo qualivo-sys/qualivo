@@ -19,7 +19,14 @@
 
 const GRAPH = 'https://graph.facebook.com/v21.0';
 
+// Plantillas SIN variables (18-sep-2026). GoHighLevel gestiona el número y no
+// hay forma de mapear las variables de una plantilla desde la API, así que las
+// que se usan de verdad son estas dos: texto fijo, cero variables, cero mapeo.
+// La personalización vuelve en cuanto el lead contesta: ahí se abre la ventana
+// de 24 h y el reloj manda el mensaje con sus palabras (whatsappTrasApertura).
 const PLANTILLAS = {
+  apertura: process.env.META_WA_PLANTILLA_APERTURA || 'qualivo_apertura',
+  citaConfirmada: process.env.META_WA_PLANTILLA_CITA_FIJA || 'qualivo_cita_confirmada',
   // Hola {{1}}, soy Maikel, de Qualivo. Acabas de pedir el diagnóstico y me ha
   // llamado la atención lo que has escrito: «{{2}}». Una pregunta antes de que
   // hablemos: {{3}} Con eso te llamo ya con algo concreto.

@@ -174,6 +174,17 @@ const CAMPOS_WA = {
   citaHora: 'ZyZvyw77Q3FtyGnhK1qO',      // Cita · Hora
   citaEnlace: 'Fm1hDYlKR02hS8khPJ99'     // Cita · Enlace
 };
+// Lee del contacto los valores que guardó camposWA.
+function leerCamposWA(contacto) {
+  const out = {};
+  const campos = (contacto && contacto.customFields) || [];
+  Object.keys(CAMPOS_WA).forEach(function (k) {
+    const f = campos.filter(function (x) { return x && (x.id === CAMPOS_WA[k]); })[0];
+    if (f) out[k] = f.value || f.field_value || '';
+  });
+  return out;
+}
+
 async function camposWA(contactId, valores) {
   const customFields = Object.keys(valores || {}).filter(function (k) { return CAMPOS_WA[k] && valores[k] != null; })
     .map(function (k) { return { id: CAMPOS_WA[k], field_value: String(valores[k]).slice(0, 500) }; });
@@ -368,6 +379,6 @@ async function enviarCorreo(email, asunto, html) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, camposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };
