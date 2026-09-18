@@ -147,6 +147,10 @@ module.exports = async function handler(req, res) {
     if (contacto) {
       const etiqueta = v.estado === 'normal' ? 'voz-completada' : 'voz-sin-respuesta';
       try { await A.etiquetar(contacto.id, [etiqueta]); } catch (e) { /* no bloquea */ }
+      // Una llamada que sí ha sido conversación mueve el trato en el tablero.
+      if (v.estado === 'normal') {
+        try { await require('./_tratos.js').mover(contacto.id, 'conversacion'); } catch (e) { /* no bloquea */ }
+      }
     }
     return res.status(200).json({ ok: true, estado: v.estado });
   }

@@ -237,7 +237,8 @@ async function guardar(lead, opts) {
   if (contactId) {
     const t = await T.crear({
       contactId: contactId, nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
-      empresa: empresa, origen: 'Meta', fuente: 'Meta — formulario instantáneo',
+      empresa: empresa, origen: 'Meta', fuente: 'formulario instantáneo',
+      sector: sector, adId: lead.ad_id,
       detalle: !deEstaCampana ? 'otra campaña' : (invierte ? '' : 'nada todavía')
     });
     if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);

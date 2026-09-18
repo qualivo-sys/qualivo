@@ -211,6 +211,7 @@ module.exports = async function handler(req, res) {
     }
     if (r.respondio) {
       await A.etiquetar(c.id, ['act-respondio'], ['activacion']);
+      await require('./_tratos.js').mover(c.id, 'conversacion');
       await avisar('respondio', c, r.texto);
       resumen.cerrados++;
       continue;

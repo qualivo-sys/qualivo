@@ -80,8 +80,15 @@ module.exports = async function handler(req, res) {
     const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
     etiquetas.push('activacion', 'act-ini-' + sello);
     if (sector) etiquetas.push('sector-' + rotulo(sector));
+    // Y la etiqueta corta («sector-reformas»), que es la que se filtra en GHL y
+    // la misma que pone el formulario de Meta. La larga se queda por compatibilidad.
+    const corto = require('./_tratos.js').sectorCorto(sector);
+    if (corto && corto !== sector) etiquetas.push('sector-' + rotulo(corto));
     if (inversion) etiquetas.push('inv-' + rotulo(inversion));
   }
+  const utmSource = (utm.match(/utm_source=([^&]+)/) || [])[1];
+  const anuncioId = utmSource && /^meta|^facebook|^instagram|^ig$|^fb$/i.test(decodeURIComponent(utmSource)) && /^\d{8,}$/.test(String(utmContent || ''))
+    ? String(utmContent) : '';
 
   try {
     const upsertRes = await fetch(GHL_BASE + '/contacts/upsert', {
@@ -110,8 +117,9 @@ module.exports = async function handler(req, res) {
     if (contactId) {
       await require('./_tratos.js').crear({
         contactId: contactId, nombre: nombre, email: email, telefono: telefono,
-        origen: 'Landing', fuente: 'qualivo.io — /' + (origen || 'diagnostico') + '/',
-        detalle: cualificado ? (sector || '') : 'fuera de alcance'
+        origen: anuncioId ? 'Meta' : 'Landing', fuente: 'landing /' + (origen || 'diagnostico') + '/',
+        sector: cualificado ? (sector || '') : '', adId: anuncioId,
+        detalle: cualificado ? '' : 'fuera de alcance'
       });
     }
 

@@ -45,10 +45,50 @@ async function abierto(contactId) {
   return (d.opportunities || [])[0] || null;
 }
 
+// El sector como se lee en el tablero: «Reformas», no «Reformas, construcción
+// o instalaciones». Devuelve el texto tal cual si no lo reconoce.
+const SECTORES = [
+  [/reforma|construcci|instalaci/i, 'Reformas'],
+  [/formaci|academia|escuela|curso/i, 'Formación'],
+  [/salud|cl[ií]nica|bienestar|dental|fisio/i, 'Clínicas'],
+  [/asesor|consultor|abogad|gestor|servicios profesionales/i, 'Asesorías'],
+  [/inmobil/i, 'Inmobiliaria'],
+  [/ecommerce|tienda/i, 'Ecommerce']
+];
+function sectorCorto(texto) {
+  const t = String(texto || '').trim();
+  for (const par of SECTORES) if (par[0].test(t)) return par[1];
+  return t;
+}
+
+// Nombre del anuncio de Meta a partir de su id (utm_content o ad_id del
+// formulario). Se lee con el token de la página; si falla, se deja el id, que
+// también identifica el anuncio aunque se lea peor.
+const cacheAnuncios = {};
+async function nombreAnuncio(adId) {
+  const id = String(adId || '').replace(/\D/g, '');
+  if (!id) return '';
+  if (cacheAnuncios[id]) return cacheAnuncios[id];
+  const t = process.env.META_LEADFORM_TOKEN;
+  if (!t) return id;
+  try {
+    const r = await fetch('https://graph.facebook.com/v21.0/' + id + '?fields=name&access_token=' + encodeURIComponent(t));
+    if (!r.ok) return id;
+    const d = await r.json();
+    cacheAnuncios[id] = String(d.name || id);
+    return cacheAnuncios[id];
+  } catch (e) { return id; }
+}
+
+// «Meta · Ana García (Reformas Norte) · Reformas · anuncio AD 3V reformas».
+// Todo lo que hace falta para saber de un vistazo de dónde viene y de qué va.
 function titulo(o) {
-  return (o.origen || 'Lead') + ' · ' + (o.nombre || o.email || o.telefono || 'Sin nombre') +
-    (o.empresa ? ' (' + o.empresa + ')' : '') +
-    (o.detalle ? ' · ' + o.detalle : '');
+  const partes = [(o.origen || 'Lead') + ' · ' + (o.nombre || o.email || o.telefono || 'Sin nombre') +
+    (o.empresa ? ' (' + o.empresa + ')' : '')];
+  if (o.sector) partes.push(sectorCorto(o.sector));
+  if (o.anuncio) partes.push('anuncio ' + o.anuncio);
+  if (o.detalle) partes.push(o.detalle);
+  return partes.join(' · ');
 }
 
 // Crea el trato si el contacto no tiene ninguno abierto en Prospección.
@@ -58,6 +98,11 @@ async function crear(o) {
     if (!o || !o.contactId) return { ok: false, motivo: 'sin_contacto' };
     const ya = await abierto(o.contactId);
     if (ya) return { ok: true, id: ya.id, existia: true };
+    if (o.adId && !o.anuncio) o.anuncio = await nombreAnuncio(o.adId);
+    // Si viene de un anuncio, la fuente lo dice aunque haya entrado por la landing.
+    const fuente = o.anuncio
+      ? 'Meta · ' + o.anuncio + (o.fuente && o.origen !== 'Meta' ? ' → ' + o.fuente : '')
+      : (o.fuente || o.origen || '');
     const r = await fetch(GHL_BASE + '/opportunities/', {
       method: 'POST', headers: cabeceras(),
       body: JSON.stringify({
@@ -67,7 +112,7 @@ async function crear(o) {
         contactId: o.contactId,
         name: titulo(o).slice(0, 200),
         status: 'open',
-        source: o.fuente || o.origen || '',
+        source: fuente.slice(0, 200),
         assignedTo: USUARIO_MAIKEL
       })
     });
@@ -104,4 +149,4 @@ async function mover(contactId, etapa, crearSi) {
   }
 }
 
-module.exports = { crear: crear, mover: mover, abierto: abierto, PIPELINE: PIPELINE, ETAPAS: ETAPAS };
+module.exports = { crear: crear, mover: mover, abierto: abierto, sectorCorto: sectorCorto, nombreAnuncio: nombreAnuncio, PIPELINE: PIPELINE, ETAPAS: ETAPAS };
