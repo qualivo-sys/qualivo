@@ -281,6 +281,8 @@ module.exports = async function handler(req, res) {
           contexto: {
             nombre: datos.nombre,
             email: c.email || '',
+            // Raquel no lee el correo entero (la voz lo pronuncia en inglés): solo el dominio.
+            email_dominio: String(c.email || '').split('@')[1] || '',
             empresa: c.companyName || '',
             // Raquel dice «Acabas de pedir el diagnóstico de crecimiento en {{origen}}».
             // Antes decía «en el anuncio del diagnóstico», que suena a bucle. Ahora:
