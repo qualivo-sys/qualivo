@@ -107,6 +107,9 @@ async function confirmarCita(o) {
           const env = await A.enviarMensaje(c.id, textoConfirmacion(nombre, f.dia, f.hora, cuando, enlace));
           hecho.push('confirmacion_' + (env.canal || 'enviada'));
           if (env.canal === 'sms') await A.etiquetar(c.id, ['act-por-sms']);
+          // Sin plantilla y fuera de ventana, Meta lo rechaza. Se marca para que
+          // el reloj lo reintente por plantilla en cuanto exista.
+          if (env.canal === 'whatsapp_fallido') await A.etiquetar(c.id, ['act-cita-sin-confirmar']);
         } catch (e) { console.error('[cita] confirmación no salió:', e && e.message); }
       }
     }

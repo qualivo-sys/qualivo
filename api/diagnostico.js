@@ -197,7 +197,7 @@ module.exports = async function handler(req, res) {
           nombre: msg.nombreCorto(nombre), cita: hipotesis ? String(hipotesis).slice(0, 220) : 'el diagnóstico',
           pregunta: msg.pregunta(datosMsg), texto: msg.whatsapp1(datosMsg)
         });
-        await act.etiquetar(contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : []));
+        await act.etiquetar(contactId, ['act-wa1'].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
       } catch (err) {
         console.error('[diagnostico] primer WhatsApp no salió:', err && err.message);
       }

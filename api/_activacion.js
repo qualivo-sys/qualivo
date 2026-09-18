@@ -138,6 +138,13 @@ function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); 
 // aprobada por Meta, el mensaje se acepta por API y luego queda en «failed»
 // sin avisar a nadie: el lead se pierde en silencio. Por eso se comprueba el
 // estado y, si ha fallado, el mismo texto sale por SMS.
+// Orden de Maikel (18-sep-2026): «por SMS nunca, tiene que ser por WhatsApp».
+// El respaldo por SMS queda apagado salvo que PERMITIR_SMS=1 en el entorno. Si
+// el WhatsApp falla (ventana de 24 h sin plantilla), se devuelve
+// canal 'whatsapp_fallido' y quien llama decide; la salida buena es la plantilla
+// de Meta (api/_whatsapp.js), no el SMS.
+const SMS_PERMITIDO = process.env.PERMITIR_SMS === '1';
+
 async function enviarMensaje(contactId, texto) {
   let idWa = '';
   try {
@@ -149,8 +156,9 @@ async function enviarMensaje(contactId, texto) {
   if (idWa) {
     await esperar(5000);
     const estado = await estadoMensaje(idWa);
-    if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado };
+    if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado, id: idWa };
   }
+  if (!SMS_PERMITIDO) return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
   await enviarSMS(contactId, texto);
   return { canal: 'sms', estado: 'enviado' };
 }
@@ -198,6 +206,7 @@ async function mensajesDe(contactId) {
 // Solo mira los WhatsApp de esta cadencia (desde `desdeMs`): sin ese corte, la
 // primera vuelta reenvió por SMS pruebas fallidas de hace días.
 async function reenviarFallidos(contactId, desdeMs) {
+  if (!SMS_PERMITIDO) return 0;
   const msgs = await mensajesDe(contactId);
   const salientes = msgs.filter(function (m) { return String(m.direction) === 'outbound'; });
   const corte = (desdeMs || 0) - 10 * 60000;

@@ -229,6 +229,22 @@ module.exports = async function handler(req, res) {
     // cinco segundos (ventana de 24 h de Meta). Salen por SMS aquí, sin esperar
     // al siguiente paso: el siguiente paso puede ser la llamada, y llamar a
     // alguien a quien no le ha llegado nada es empezar con el pie cambiado.
+    // Primer WhatsApp que falló por la ventana de 24 h: en cuanto la plantilla de
+    // Meta esté configurada, sale por ella (una sola vez).
+    if (A.tiene(c, 'act-wa1-fallido') && !A.tiene(c, 'act-por-plantilla') && require('./_whatsapp.js').configurado() && c.phone) {
+      try {
+        const WA = require('./_whatsapp.js');
+        const datosP = { nombre: nombrePila(c.firstName || c.contactName || c.name || ''), origen: esLeadForm(c) ? 'leadform' : 'landing', sector: '', inversion: '', fuga: '' };
+        (c.tags || []).forEach(function (t) {
+          const s = String(t);
+          if (s.startsWith('sector-')) datosP.sector = s.slice(7).replace(/-/g, ' ');
+          if (s.startsWith('fuga-')) datosP.fuga = s.slice(5).replace(/-/g, ' ');
+        });
+        const r = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.primerContacto, [datosP.nombre || 'hola', datosP.fuga || datosP.sector || 'el diagnóstico', M.pregunta(datosP)]);
+        if (r.ok) { await A.etiquetar(c.id, ['act-por-plantilla'], ['act-wa1-fallido']); resumen.wa++; }
+      } catch (err) { console.error('[activacion] plantilla de rescate falló en ' + c.id + ':', err.message); }
+    }
+
     if (A.tiene(c, 'act-wa1') || A.tiene(c, 'act-wa2') || A.tiene(c, 'act-wa3')) {
       try {
         const n = await A.reenviarFallidos(c.id, inicioMs);
@@ -268,8 +284,11 @@ module.exports = async function handler(req, res) {
         const env = paso.tipo === 'wa1'
           ? await A.primerWhatsApp(c.id, c.phone, { nombre: datos.nombre, cita: datos.fuga || datos.sector || 'el diagnóstico', pregunta: M.pregunta(datos), texto: texto })
           : await A.enviarMensaje(c.id, texto);
-        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : []));
-        resumen.wa++; hechos++;
+        const extra = env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla']
+          : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
+        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra));
+        if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
+        hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         if (await A.tieneCitaGHL(c.id)) {
@@ -343,6 +362,28 @@ module.exports = async function handler(req, res) {
     }
   } catch (err) {
     console.error('[activacion] rastreo de citas falló:', err && err.message);
+  }
+
+  // Confirmaciones de cita que Meta rechazó por falta de plantilla: en cuanto la
+  // plantilla exista, salen por ella.
+  try {
+    const WA = require('./_whatsapp.js');
+    if (WA.configurado()) {
+      const CITA = require('./_cita.js');
+      const pendientes = await A.buscarPorEtiqueta('act-cita-sin-confirmar', 50);
+      for (const c of pendientes) {
+        const ev = await CITA.primeraCita(c.id);
+        if (!ev || !c.phone) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
+        const d = new Date(ev.startTime);
+        if (isNaN(d.getTime()) || d.getTime() < Date.now()) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
+        const dia = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long' }).format(d);
+        const hora = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(d);
+        const r = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombrePila(c.firstName || c.contactName || ''), dia, hora]);
+        if (r.ok) { await A.etiquetar(c.id, ['act-por-plantilla'], ['act-cita-sin-confirmar']); resumen.citas = (resumen.citas || 0) + 1; }
+      }
+    }
+  } catch (err) {
+    console.error('[activacion] confirmaciones pendientes:', err && err.message);
   }
 
   await procesarSecuencias(resumen);
