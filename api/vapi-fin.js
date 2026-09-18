@@ -141,6 +141,36 @@ module.exports = async function handler(req, res) {
   let contacto = null;
   try { if (numero) contacto = await buscarPorTelefono(numero); } catch (e) { /* seguimos */ }
 
+  // Registro de la llamada en el contacto, pase lo que pase después: qué se
+  // dijo, cuánto duró, cómo acabó y dónde escucharla. Es lo que permite afinar
+  // a Raquel con llamadas reales y no con suposiciones (pedido por Maikel el
+  // 18-sep). El resumen y los datos estructurados los genera Vapi al colgar
+  // (analysisPlan del asistente, en castellano).
+  if (contacto) {
+    try {
+      const callId = (msg.call && msg.call.id) || '';
+      const analisis = msg.analysis || {};
+      const datos = analisis.structuredData || {};
+      const seg = Math.round(Number(informe.durationSeconds || 0));
+      const cuando = new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' });
+      const lineas = [
+        'LLAMADA DE RAQUEL · ' + cuando + ' · ' + seg + ' s · ' + (informe.endedReason || ''),
+        datos.resultado ? 'Resultado: ' + datos.resultado + (datos.cita ? ' (' + datos.cita + ')' : '') : '',
+        datos.quien_cogio ? 'Quién cogió: ' + datos.quien_cogio + (datos.es_el_lead === false ? ' (no es quien pidió el diagnóstico)' : '') : '',
+        datos.fuga_declarada ? 'Lo que cuenta: ' + datos.fuga_declarada : '',
+        datos.objecion ? 'Objeción: ' + datos.objecion : '',
+        datos.mejora_raquel ? 'Mejora para Raquel: ' + datos.mejora_raquel : '',
+        '',
+        (analisis.summary || informe.summary) ? 'RESUMEN\n' + (analisis.summary || informe.summary) : '',
+        '',
+        callId ? 'Escuchar: https://dashboard.vapi.ai/calls/' + callId : '',
+        '',
+        informe.transcript ? 'TRANSCRIPCIÓN\n' + String(informe.transcript).slice(0, 4000) : 'Sin transcripción (no habló nadie).'
+      ].filter(function (l, i, arr) { return !(l === '' && arr[i - 1] === ''); });
+      await A.nota(contacto.id, lineas.join('\n'));
+    } catch (e) { console.error('[vapi-fin] no se pudo anotar la llamada:', e && e.message); }
+  }
+
   // Que no cojan el teléfono es el caso normal: no se toca nada y la cadencia
   // hace su trabajo.
   if (v.estado === 'sin_respuesta' || v.estado === 'normal') {
