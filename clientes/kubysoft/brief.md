@@ -1,8 +1,17 @@
 # Kubysoft · brief del piloto
 
 Estado: **piloto aprobado** (17-sep-2026). Cuestionario enviado por Maikel.
-**Parte 1 de respuestas recibida el 17-sep** (cliente ideal y oferta). Faltan
-bloques marcados como PENDIENTE más abajo.
+**Parte 1 recibida el 17-sep** (cliente ideal y oferta). **Parte 2 recibida de
+Marc el 18-sep** (proceso comercial, datos, herramientas, referencia).
+
+Lo que todavía bloquea el primer mensaje:
+
+1. **A qué cargo se le escribe.** Sigue sin contestar. Marc respondió quién es la
+   referencia por su parte, que es otra pregunta.
+2. **El fichero de exclusiones** (clientes, oportunidades abiertas, nurturing).
+3. **El número contra el que se mide el piloto**, con punto de partida.
+4. **La URL del perfil de LinkedIn de Marc.**
+5. **Ticket medio.**
 
 Este fichero es la fuente de verdad del piloto. Mientras esté a medias, no se
 escribe copy ni se carga un solo lead: un mensaje en frío escrito sin saber a
@@ -33,7 +42,9 @@ España**. Todo lo que se escriba va contra ese subsector.
   albarán/factura → cobro.
 
 - **Ticket medio**: PENDIENTE
-- **Ciclo de venta (de primer contacto a firma)**: PENDIENTE
+- **Ciclo de venta (de primer contacto a firma)**: sin número, pero el camino
+  está descrito en el punto 3: lead → email para agendar → sesión demostrativa →
+  propuesta → seguimiento → cierre o nurturing. Falta cuánto tarda.
 
 ### Diferenciales (en sus palabras)
 
@@ -104,22 +115,73 @@ qué operativa, por qué compraron).
 
 ## 3. Qué les funciona hoy
 
-PENDIENTE (bloque entero)
+- **De dónde salen sus clientes actuales**: casi todo **inbound**. Rellenan un
+  formulario en la web, entra el lead en su CRM.
+- **Han hecho outbound antes**: **no**. Esto es lo primero en frío que hacen.
+  Consecuencia directa: todo su material actual está escrito para alguien que ya
+  ha levantado la mano. En frío no vale ni una línea, se escribe de cero.
+- **Su proceso comercial hoy**:
+  1. Entra el lead por formulario web al CRM.
+  2. Email para que agenden una sesión demostrativa si no la han agendado.
+  3. Demo para entender cómo pueden ayudar.
+  4. Propuesta.
+  5. Emails de seguimiento si no cierran.
+  6. Si cierran, venta. Si no, se cierra el lead y pasa a **nurturing: un email
+     al mes durante 12 meses**.
 
-- De dónde salen sus clientes actuales:
-- Han hecho outbound antes: sí / no. Si sí, qué pasó:
-- Herramientas que ya usan (CRM, calendario, quién contesta):
+> **El nurturing es una lista de exclusión, no un detalle.** Hay gente recibiendo
+> un email al mes de Kubysoft. Si a esa misma persona le llega además un correo
+> en frío nuestro desde un dominio parecido, haciendo como que no la conocemos,
+> queda raro y quema la confianza. Los 12 meses de nurturing entran en la
+> supresión igual que los clientes.
+
+- **Herramientas y entrega del lead**: de momento **no hace falta subcuenta de
+  GHL**. El traspaso acordado es un **email a marc@kubysoft.com con los datos del
+  contacto**. Más adelante lo quieren todo dentro de su propio software.
+- **CTA de las campañas**: el Calendly de Marc,
+  `https://calendly.com/kubysoft-marc`. Encaja con su proceso, donde la sesión
+  demostrativa es el paso que convierte.
+
+### Últimos cierres (para entender el patrón)
+
+Los que ha dado Marc, y ninguno es aire acondicionado:
+
+| empresa | sector SAT |
+|---|---|
+| Varadero Puerto Sotogrande, S.L. | barcos, reparación. Empresas grandes por complejidad y coste operativo |
+| optimizasur.es | grupos de presión |
+| femoac.com | estructuras metálicas |
+
+Marc lo dice él mismo: de 10 cierres, cada uno sería de un sector distinto dentro
+del SAT, y por eso prefiere centrar el piloto en un solo sector y, si funciona,
+atacar decenas después. El razonamiento es bueno.
+
+> **Pero hay un agujero que hay que tapar**: el sector elegido, aire
+> acondicionado, es justo donde menos prueba tienen. De los cinco nombres que han
+> dado, solo Tratamiento y Producción de Aire es de clima. El copy en frío se
+> apoya en "empresas como la tuya", así que o salen 2 o 3 clientes suyos de aire
+> acondicionado, o el mensaje no puede prometer experiencia en el sector y tiene
+> que apoyarse solo en el problema operativo.
 
 ## 4. Qué NO quieren
 
 - **Empresas o competidores que no se tocan**: PENDIENTE. Los competidores
   listados arriba son los que aparecen en conversación, que no es lo mismo que
   una lista de exclusión. Hay que confirmarla.
-- **Clientes actuales que no se pueden contactar en frío**: PENDIENTE. Hace
-  falta su listado de clientes y de oportunidades abiertas para excluirlos. Sin
-  esto se les escribe en frío a sus propios clientes.
+- **Clientes actuales que no se pueden contactar en frío**: Marc responde "ya las
+  tratamos nosotros". La intención está clara, pero eso no es una exclusión: el
+  guardián necesita un fichero, no una intención. **Hace falta un CSV con
+  clientes, oportunidades abiertas y los 12 meses de nurturing.** Sin fichero no
+  hay supresión posible.
 - **Tono o promesas que no quieren ver en su nombre**: parcial. Confirmado que
   no se dice que sean los únicos en hacer algo. El resto, PENDIENTE.
+
+## Persona de referencia en Kubysoft
+
+Marc. marc@kubysoft.com, `https://calendly.com/kubysoft-marc`.
+Falta la URL de su perfil de LinkedIn, que es desde donde saldrían las
+invitaciones. Ojo al cargarla: HeyReach descarta en silencio los perfiles que no
+empiezan por `https`.
 
 ## 5. Qué número tiene que moverse
 
@@ -136,13 +198,36 @@ escrito. Sin esto no hay piloto, hay actividad.
 
 | pieza | estado | detalle |
 |---|---|---|
-| Dominios de envío | pendiente de compra | 2 o 3 parecidos al suyo, NUNCA el corporativo |
+| Dominios de envío | pendiente de compra | 2 o 3 parecidos al suyo, NUNCA el corporativo ni un subdominio suyo |
 | Buzones | pendiente | 2 o 3 por dominio, 20 a 30 envíos al día cada uno |
 | Calentamiento | no iniciado | arranca el día que se compran; dos semanas mínimo |
 | Cliente en Smartlead | no creado | aísla campañas y buzones por `client_id` |
-| Subcuenta de GHL | no creada | hace falta un token que la alcance |
-| Perfil de LinkedIn | pendiente | de alguien de Kubysoft, no de Maikel |
+| Subcuenta de GHL | **no hace falta de momento** | el traspaso es email a marc@kubysoft.com |
+| Perfil de LinkedIn | pendiente | el de Marc. Falta la URL |
 | Sesión del agente | creada | separada de la de Qualivo a propósito |
+
+### El subdominio no sirve, y hay que decírselo a Marc
+
+Marc propone enviar desde `kubysoft.com` y, al ver el riesgo, plantea un
+subdominio como solución intermedia. El instinto es correcto, la solución no.
+
+Un subdominio **no aísla la reputación del dominio raíz**. Los proveedores
+grandes evalúan buena parte de la señal a nivel de dominio organizativo, así que
+las quejas contra `envios.kubysoft.com` llegan igualmente a `kubysoft.com`. Si
+eso pasa, lo que se rompe no es la campaña, es el correo de facturación y de
+soporte de Kubysoft, que es el que no se puede permitir caer.
+
+Lo que sí aísla es un dominio distinto, comprado aparte, parecido al suyo. Es
+exactamente lo que hace Qualivo: `qualivo.io` no manda un solo correo frío.
+
+Candidatos a proponerle (a confirmar disponibilidad y que le encajen de marca):
+
+- `kubysoft.es`
+- `getkubysoft.com`
+- `kubysoft-erp.com`
+
+La firma del correo sí dice Kubysoft y sí enlaza a `kubysoft.com`. Lo que cambia
+es por dónde sale el envío, no quién dice ser.
 
 ## Fuente de leads
 
