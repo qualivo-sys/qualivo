@@ -203,7 +203,10 @@ module.exports = async function handler(req, res) {
         contactId: contacto.id,
         startTime: inicio.toISOString(),
         endTime: fin.toISOString(),
-        title: 'Diagnóstico de crecimiento · ' + (nombre || contacto.contactName || ''),
+        // El nombre del CRM manda sobre el que dicta el modelo: en la prueba del
+        // 18-sep la cita se creó como «Michael» porque el modelo copia el nombre
+        // tal como lo transcribe de su propia voz.
+        title: 'Diagnóstico de crecimiento · ' + (contacto.firstName || contacto.contactName || nombre || ''),
         appointmentStatus: 'confirmed',
         ignoreFreeSlotValidation: false,
         toNotify: true
