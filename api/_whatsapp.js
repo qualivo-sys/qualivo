@@ -8,11 +8,11 @@
 // es una PLANTILLA aprobada por Meta, y GoHighLevel no deja mandarlas por API
 // con variables. Por eso las plantillas salen desde aquí.
 //
-// Configuración (Vercel): META_WA_PHONE_ID (id del número en la cuenta de
-// WhatsApp Business) y META_WA_TOKEN (si no está, se usa META_LEADFORM_TOKEN,
-// que ya tiene permiso whatsapp_business_messaging). Sin META_WA_PHONE_ID este
-// módulo dice «no configurado» y quien lo llama sigue por GHL (WhatsApp y, si
-// falla, SMS): nunca bloquea nada.
+// Configuración: el id del número va fijo abajo (META_WA_PHONE_ID lo
+// sobreescribe) y el token es META_WA_TOKEN o, si no está, META_LEADFORM_TOKEN
+// (usuario de sistema «Twin Integration», con whatsapp_business_messaging).
+// Si una plantilla no está aprobada, Meta la rechaza, se registra y quien
+// llama sigue por GHL: nunca bloquea nada. SMS no: orden de Maikel.
 //
 // Las plantillas y sus variables tienen que coincidir letra por letra con lo
 // aprobado en Meta. Nombres de plantilla en PLANTILLAS.
@@ -32,8 +32,13 @@ const PLANTILLAS = {
   confirmacionCita: process.env.META_WA_PLANTILLA_CITA || 'qualivo_confirmacion_cita'
 };
 
+// Número +34 647 118 491 en la cuenta de WhatsApp Business de Qualivo (WABA
+// 1488236355519674, Cloud API). META_WA_PHONE_ID en el entorno manda.
+const PHONE_ID_FIJO = '842803652246178';
+function phoneId() { return process.env.META_WA_PHONE_ID || PHONE_ID_FIJO; }
+
 function configurado() {
-  return !!(process.env.META_WA_PHONE_ID && (process.env.META_WA_TOKEN || process.env.META_LEADFORM_TOKEN));
+  return !!(phoneId() && (process.env.META_WA_TOKEN || process.env.META_LEADFORM_TOKEN));
 }
 
 // Meta rechaza variables con saltos de línea, tabuladores o más de tres
@@ -71,7 +76,7 @@ async function enviarPlantilla(telefono, nombre, variables, idioma) {
     }
   };
   try {
-    const r = await fetch(GRAPH + '/' + process.env.META_WA_PHONE_ID + '/messages', {
+    const r = await fetch(GRAPH + '/' + phoneId() + '/messages', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
       body: JSON.stringify(cuerpo)
