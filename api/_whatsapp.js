@@ -22,7 +22,8 @@ const GRAPH = 'https://graph.facebook.com/v21.0';
 const PLANTILLAS = {
   // Hola {{1}}, soy Maikel, de Qualivo. Acabas de pedir el diagnóstico y me ha
   // llamado la atención lo que has escrito: «{{2}}». Una pregunta antes de que
-  // hablemos: {{3}}
+  // hablemos: {{3}} Con eso te llamo ya con algo concreto.
+  // (Meta no admite una variable al final de la plantilla.)
   primerContacto: process.env.META_WA_PLANTILLA_PRIMERO || 'qualivo_primer_contacto',
   // Hola {{1}}, soy Maikel, de Qualivo. Confirmado: hablamos el {{2}} a las
   // {{3}}. Son quince minutos por videollamada. Este es el enlace: {{4}}
