@@ -175,6 +175,24 @@
   "functions": {
     "api/wa-agente.js": {
       "maxDuration": 60
+    },
+    "api/meta-leadform.js": {
+      "maxDuration": 60
+    },
+    "api/diagnostico.js": {
+      "maxDuration": 60
+    },
+    "api/rescate-leads.js": {
+      "maxDuration": 60
+    },
+    "api/activacion.js": {
+      "maxDuration": 60
+    },
+    "api/agendar.js": {
+      "maxDuration": 60
+    },
+    "api/cita.js": {
+      "maxDuration": 60
     }
   }
 }
