@@ -163,11 +163,35 @@ async function enviarMensaje(contactId, texto) {
   return { canal: 'sms', estado: 'enviado' };
 }
 
+// Campos personalizados del contacto que usan los workflows de GHL para
+// rellenar las plantillas de WhatsApp (plan B cuando Meta no deja enviar desde
+// nuestra app: el workflow «etiqueta añadida → plantilla» lo manda GHL con
+// estos valores). Ids de la location bHGMuZEGUESZmVoNv9HT, creados el 18-sep.
+const CAMPOS_WA = {
+  loQueEscribio: '3ipqSYlrbxkAEO7RrIPs', // WA · Lo que escribió
+  pregunta: 'Jk5jLEChMdSOe8eQPJLZ',      // WA · Pregunta
+  citaDia: '88tSGYs0YkoeIkrd8JLZ',       // Cita · Día
+  citaHora: 'ZyZvyw77Q3FtyGnhK1qO',      // Cita · Hora
+  citaEnlace: 'Fm1hDYlKR02hS8khPJ99'     // Cita · Enlace
+};
+async function camposWA(contactId, valores) {
+  const customFields = Object.keys(valores || {}).filter(function (k) { return CAMPOS_WA[k] && valores[k] != null; })
+    .map(function (k) { return { id: CAMPOS_WA[k], field_value: String(valores[k]).slice(0, 500) }; });
+  if (!customFields.length) return false;
+  const r = await fetch(GHL_BASE + '/contacts/' + contactId, {
+    method: 'PUT', headers: cabeceras(), body: JSON.stringify({ customFields: customFields })
+  });
+  return r.ok;
+}
+
 // Primer WhatsApp a un lead que nunca nos ha escrito. Si la plantilla de Meta
 // está configurada y aprobada, sale por ella (es la única vía que Meta acepta
 // fuera de la ventana de 24 h); si no, por GHL con respaldo SMS como siempre.
 // datos: { nombre, cita (lo que escribió o el tema), pregunta, texto (versión libre) }
 async function primerWhatsApp(contactId, telefono, datos) {
+  // Los valores de la plantilla se dejan en el contacto pase lo que pase: los
+  // lee el workflow de GHL y sirven para ver qué se le dijo.
+  try { await camposWA(contactId, { loQueEscribio: datos.cita || 'el diagnóstico', pregunta: datos.pregunta || '' }); } catch (e) { /* no bloquea */ }
   try {
     const WA = require('./_whatsapp.js');
     if (WA.configurado() && telefono) {
@@ -177,7 +201,12 @@ async function primerWhatsApp(contactId, telefono, datos) {
       console.warn('[activacion] plantilla primer contacto no salió (' + r.motivo + '); sigo por GHL');
     }
   } catch (e) { console.warn('[activacion] plantilla:', e && e.message); }
-  return enviarMensaje(contactId, datos.texto);
+  const env = await enviarMensaje(contactId, datos.texto);
+  // Meta no deja escribir primero y nuestra app no puede mandar la plantilla:
+  // la etiqueta dispara el workflow de GHL que sí puede (plantilla
+  // qualivo_primer_contacto con los campos WA · …).
+  if (env.canal === 'whatsapp_fallido') await etiquetar(contactId, ['wa-primer-contacto']).catch(function () {});
+  return env;
 }
 
 // Todos los mensajes de un contacto, de más antiguo a más nuevo.
@@ -339,6 +368,6 @@ async function enviarCorreo(email, asunto, html) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, camposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

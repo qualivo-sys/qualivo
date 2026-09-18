@@ -101,6 +101,8 @@ async function confirmarCita(o) {
 
     // 2. WhatsApp de confirmación al cliente (plantilla; si no, GHL y SMS).
     if (c.phone && f.dia) {
+      // Valores para el workflow de GHL (plantilla qualivo_confirmacion_cita).
+      try { await A.camposWA(c.id, { citaDia: (cuando ? cuando + ', ' : '') + f.dia, citaHora: f.hora, citaEnlace: enlace || ENLACE_FIJO }); } catch (e) { /* no bloquea */ }
       let salida = { ok: false };
       if (WA.configurado()) {
         salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', (cuando ? cuando + ', ' : '') + f.dia, f.hora, enlace || ENLACE_FIJO]);
@@ -113,7 +115,8 @@ async function confirmarCita(o) {
           if (env.canal === 'sms') await A.etiquetar(c.id, ['act-por-sms']);
           // Sin plantilla y fuera de ventana, Meta lo rechaza. Se marca para que
           // el reloj lo reintente por plantilla en cuanto exista.
-          if (env.canal === 'whatsapp_fallido') await A.etiquetar(c.id, ['act-cita-sin-confirmar']);
+          // wa-confirmacion-cita dispara el workflow de GHL que manda la plantilla.
+          if (env.canal === 'whatsapp_fallido') await A.etiquetar(c.id, ['act-cita-sin-confirmar', 'wa-confirmacion-cita']);
         } catch (e) { console.error('[cita] confirmación no salió:', e && e.message); }
       }
     }
