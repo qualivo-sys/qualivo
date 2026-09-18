@@ -61,3 +61,25 @@ respondio-17sep). No es un lead de las campañas nuevas.
 - **Registro.** Cada llamada deja nota en el contacto de GHL (vapi-fin.js) y va a la base de Notion «📞 Llamadas de Raquel» con transcripción, audio e hipótesis. Backfill de 32 llamadas hecho a mano.
 - **Trato.** Un trato ya no retrocede de etapa (vapi-fin devolvía «Reunión agendada» a «Conversación abierta»).
 - Pendiente: pronunciación de «Maikel» y «Qualivo» (probar grafías con la voz), no repetir el saludo cuando coge otra persona, rellenar el silencio de la agenda, bajar un punto la velocidad.
+
+## 18-sep-2026 · tarde
+
+**Llamadas del día (9).** Tres pruebas de Maikel (09:20, 09:24, 09:32). Cesar / Cristian, Grupo Rumy, 09:35 (149 s): primera cita real, hoy 12:00. Jordi, Bigpoma, 11:00: buzón. Grupo Rumy 12:06 (59 s): plantón de la reunión de las 12:00, Raquel llama con guion de plantón, coge una persona de la oficina y dice que avisa al encargado; tres minutos después escriben por WhatsApp pidiendo reprogramar. TALKUAL 12:28 (150 s): centralita, buscando a Betlem; la compañera pide nombre y correo para el recado, se pone a anotar y Raquel cuelga por tiempo de silencio con el recado a medias (Betlem contestó por correo esa tarde: reunión jueves 24, 11:00). Francisco, Zenda Seguros, 13:33 y Carmen, Tec, 18:42: no conectaron (Twilio «failed» a los 0 s; otros Vodafone sí entran, así que son números inactivos; los dos con WhatsApp «undeliverable»).
+
+**Lo que enseñaron las grabaciones** (en Notion, con audio):
+1. Silencio de 25 s: en una centralita, con esperas y gente escribiendo, Raquel cuelga antes de tiempo (TALKUAL).
+2. En números de empresa suelta el motivo a quien coge, sin preguntar con quién habla (Rumy 12:06, TALKUAL).
+3. Si le cortan el saludo, vuelve a empezar desde el principio, dos y tres veces (Rumy 12:06, TALKUAL).
+4. Deletrea correos cuando se los piden, y los destroza («bettlem dot antuneid a tal cual foods»); y presenta el número de Maikel como suyo («para que me contacte»).
+5. El recado del buzón promete WhatsApp a quien el WhatsApp no le llega (Jordi, act-por-sms).
+6. El calendario tenía «reservar con 3 días de antelación» contando fines de semana: un viernes por la tarde solo ofrecía hoy. Cambiado a 14 días hábiles (afectaba a Raquel, a la web y al agente de WhatsApp).
+7. Nombres catalanes: «Betlem Antúnez» salió como Bethle Mantúnez, Beldemi, Bettleman Túnez. Y siguen «Michael» y «Cualibo/Coalibo».
+
+**Cambios aplicados al asistente** (copia previa en el scratchpad: `vapi-asistente-2026-09-18b.json`):
+1. Silencio máximo antes de colgar: de 25 a 60 segundos (aplicado a las 12:31, tras la llamada de TALKUAL).
+2. Prompt, apertura: si coge otra persona, pregunta «¿hablo con {{nombre}}?», pide que le pasen, y si no está deja recado «Máikel le escribe por correo» sin explicar nada; si le cortan el saludo, retoma donde estaba en vez de repetirlo.
+3. Prompt, buzón de voz: diez segundos, «Máikel te escribe por correo», sin prometer WhatsApp ni otra llamada.
+4. Prompt, cómo hablas: nunca deletrear correos, tampoco para un recado («Máikel le ha escrito por correo»); el número desde el que llama es el de Máikel («este mismo, que es el de Máikel»), nunca «para que me contacte».
+5. Prompt, agenda: «el calendario pide dos horas de aviso y no abre fines de semana» (antes decía un día).
+
+**Propuesto, no aplicado** (voz/número/cadencia): la segunda llamada de la cadencia (voz2) sigue saliendo desde el +1 775 (Jordi la recibió dos veces desde EE. UU.); grafía fonética para nombres poco comunes o usar solo el nombre de pila; probar grafías de «Máikel» y «Cuálivo» con la voz. Regla «sin canal» (WhatsApp undeliverable + llamada a 0 s = parar llamadas, solo correo, avisar): pendiente del ok de Maikel.
