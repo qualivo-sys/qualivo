@@ -157,8 +157,18 @@ async function nombreFormulario(formId) {
   } catch (e) { return ''; }
 }
 
+// Los leads de prueba de Meta (herramienta de pruebas de lead ads) llegan con
+// «<test lead: dummy data …>» en todos los campos. No son nadie: ni al CRM ni
+// a la cadencia.
+function esLeadDePrueba(lead) {
+  return ((lead && lead.field_data) || []).some(function (f) {
+    return /test lead: dummy data/i.test(String(((f || {}).values || [])[0] || ''));
+  });
+}
+
 async function guardar(lead, opts) {
   opts = opts || {};
+  if (esLeadDePrueba(lead)) return { ok: false, motivo: 'lead_de_prueba' };
   const headers = {
     Authorization: 'Bearer ' + process.env.GHL_API_KEY,
     Version: GHL_VERSION,
@@ -443,5 +453,6 @@ module.exports = async function handler(req, res) {
 // quede igual que uno que entro bien.
 module.exports.guardar = guardar;
 module.exports.FORMULARIOS_SECTOR = FORMULARIOS_SECTOR;
+module.exports.esLeadDePrueba = esLeadDePrueba;
 // Cuerpo sin parsear, para comprobar la firma de Meta sobre los bytes originales.
 module.exports.config = { api: { bodyParser: false } };

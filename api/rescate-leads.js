@@ -100,6 +100,7 @@ module.exports = async function handler(req, res) {
       }
       const d = await r.json();
       for (const lead of (d.data || [])) {
+        if (require('./meta-leadform.js').esLeadDePrueba(lead)) continue;
         const t = Math.floor(new Date(lead.created_time).getTime() / 1000);
         if (t < desde) continue;
         parte.revisados++;
