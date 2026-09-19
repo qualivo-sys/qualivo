@@ -272,6 +272,10 @@ async function reenviarFallidos(contactId, desdeMs) {
   for (const m of salientes) {
     if (!/WHATSAPP/i.test(String(m.messageType || ''))) continue;
     if (Date.parse(m.dateAdded || 0) < corte) continue;
+    // Lo que mandó un workflow de GHL (la plantilla de apertura) no se repite:
+    // el 19-sep Pablo recibió por la pasarela el texto personalizado Y la
+    // plantilla, uno detrás de otro, desde el móvil de Maikel.
+    if (String(m.source || '') === 'workflow') continue;
     if (String(m.status || '').toLowerCase() !== 'failed' && !m.error) continue;
     const cuerpo = String(m.body || '').trim();
     if (!cuerpo) continue;
