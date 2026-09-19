@@ -55,6 +55,11 @@ function respuesta(campos, trozos, valores) {
 function firmaValida(req, crudo) {
   const secreto = process.env.META_APP_SECRET;
   const cabecera = String(req.headers['x-hub-signature-256'] || '');
+  // Relevo por n8n (19-sep-2026): Meta no entregaba a Vercel, así que el aviso
+  // puede llegar reenviado por el flujo «Meta Lead Ads → Qualivo» de n8n, que
+  // se identifica con el mismo secreto que usa Raquel para agendar.
+  const relevo = String(req.headers['x-relevo-secreto'] || '');
+  if (relevo && process.env.AGENDA_SECRET && relevo === process.env.AGENDA_SECRET) return { ok: true, motivo: 'relevo_n8n' };
   if (!secreto) return { ok: true, motivo: 'sin_secreto' };
   if (!cabecera.startsWith('sha256=')) return { ok: false, motivo: 'sin_firma' };
 
