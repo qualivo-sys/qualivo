@@ -234,6 +234,8 @@ async function guardar(lead, opts) {
   if (volumen) etiquetas.push('vol-' + rotulo(volumen));
   if (fuga) etiquetas.push('fuga-' + rotulo(fuga));
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
+  // El id del lead en Meta, para devolverle la calidad (Qualified/Disqualified) más tarde.
+  if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook

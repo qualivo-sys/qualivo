@@ -40,10 +40,13 @@ function siguientePaso(contacto, minutos) {
   const hay = function (t) { return A.tiene(contacto, t); };
   const esperaVoz1 = esLeadForm(contacto) ? 20 : 10;
 
+  // «Sin canal»: el número no coge llamadas ni WhatsApp (lo pone el reloj más
+  // abajo). Se saltan las llamadas y queda solo el correo.
+  const voz = !hay('sin-canal');
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
-  if (!hay('act-voz1') && minutos >= esperaVoz1) return { tipo: 'voz1' };
-  if (!hay('act-wa2') && hay('act-voz1') && minutos >= 120) return { tipo: 'wa2' };
-  if (!hay('act-voz2') && hay('act-wa2') && minutos >= 60 * 24) return { tipo: 'voz2' };
+  if (voz && !hay('act-voz1') && minutos >= esperaVoz1) return { tipo: 'voz1' };
+  if (!hay('act-wa2') && (hay('act-voz1') || !voz) && minutos >= 120) return { tipo: 'wa2' };
+  if (voz && !hay('act-voz2') && hay('act-wa2') && minutos >= 60 * 24) return { tipo: 'voz2' };
 
   for (let i = 0; i < M.EMAILS.length; i++) {
     const e = M.EMAILS[i];
@@ -308,6 +311,21 @@ module.exports = async function handler(req, res) {
         hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
+        // Regla «sin canal» (19-sep-2026, tras Francisco y Carmen): si la
+        // llamada anterior no llegó a sonar y el WhatsApp tampoco entró, el
+        // número está muerto. No se gasta otra llamada: se marca, se avisa a
+        // Maikel, se le dice a Meta que el lead no vale, y sigue solo el correo.
+        if (A.tiene(c, 'voz-no-conecto') && (A.tiene(c, 'act-wa1-fallido') || A.tiene(c, 'act-wa2-fallido'))) {
+          await A.etiquetar(c.id, ['sin-canal', 'act-' + paso.tipo]);
+          await A.nota(c.id, 'SIN CANAL: la llamada anterior no llegó a sonar y el WhatsApp no se entregó. No se llama más; sigue solo el correo.');
+          await avisar('respondio', c, 'SIN CANAL: número que no coge llamadas ni WhatsApp. Solo queda el correo.');
+          try {
+            const idMeta = (c.tags || []).map(String).filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0];
+            if (idMeta) await require('./_meta.js').calidadLead('Disqualified', { leadgenId: idMeta.slice(10), email: c.email, telefono: c.phone, contactId: c.id, motivo: 'sin canal' });
+          } catch (e) { console.error('[activacion] Disqualified:', e && e.message); }
+          resumen.cerrados++; hechos++;
+          continue;
+        }
         if (await A.tieneCitaGHL(c.id)) {
           const CITA = require('./_cita.js');
           const ev = await CITA.primeraCita(c.id);

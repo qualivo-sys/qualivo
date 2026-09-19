@@ -19,6 +19,19 @@
 
 const F = '-apple-system,Segoe UI,Roboto,sans-serif';
 
+// Aviso al móvil de Maikel por WhatsApp (pasarela Wazzap, que en GHL es «SMS»)
+// para los dos momentos que no pueden esperar al correo: lead cualificado
+// nuevo y lead que contesta. Va a su contacto de prueba del CRM (su 663).
+// Se apaga con AVISO_MOVIL=0. Nunca bloquea.
+const MOVIL_CONTACTO = process.env.AVISO_MOVIL_CONTACTO || 'DgkPLaw6fzy4z1bs8HsB';
+async function movil(texto) {
+  if (process.env.AVISO_MOVIL === '0' || !MOVIL_CONTACTO) return false;
+  try {
+    await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 900));
+    return true;
+  } catch (e) { console.error('[aviso] móvil:', e && e.message); return false; }
+}
+
 function escapa(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -47,6 +60,12 @@ function paraMarcar(tel) {
  */
 async function leadNuevo(d) {
   d = d || {};
+  if (d.cualificado !== false) {
+    await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
+      (d.fuga ? '\n«' + String(d.fuga).slice(0, 160) + '»' : '') +
+      (d.telefono ? '\nTel ' + d.telefono : '') + (d.origen ? '\n' + d.origen : '') +
+      '\nRaquel le llama en unos minutos.');
+  }
   const destino = process.env.AVISO_INTERNO_TO || process.env.INFORME_PAID_TO || 'maikel@qualivo.io';
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
 
@@ -146,6 +165,11 @@ async function seMovio(tipo, d) {
   d = d || {};
   const m = MOVIMIENTOS[tipo];
   if (!m) return { ok: false, motivo: 'tipo_desconocido' };
+  if (tipo === 'respondio' || tipo === 'agendado') {
+    await movil((tipo === 'respondio' ? 'HA CONTESTADO · ' : 'HA COGIDO HORA · ') + (d.nombre || d.empresa || d.email || '?') +
+      (d.empresa ? ' · ' + d.empresa : '') + (d.texto ? '\n«' + String(d.texto).slice(0, 200) + '»' : '') +
+      (d.origen ? '\n' + d.origen : '') + (d.telefono ? '\nTel ' + d.telefono : ''));
+  }
   const destino = process.env.AVISO_INTERNO_TO || process.env.INFORME_PAID_TO || 'maikel@qualivo.io';
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
 
@@ -201,5 +225,5 @@ async function seMovio(tipo, d) {
   }
 }
 
-module.exports = { leadNuevo: leadNuevo, seMovio: seMovio };
+module.exports = { leadNuevo: leadNuevo, seMovio: seMovio, movil: movil };
 
