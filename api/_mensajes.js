@@ -51,10 +51,16 @@ function pregunta(datos) {
 // sin citar lo que escribió ni preguntar nada concreto. Es el texto de la
 // plantilla qualivo_apertura aprobada por Meta, con el nombre de pila. Lo
 // concreto lo pregunta el agente cuando contesta (api/_agente.js).
+// En fin de semana no se propone «verlo ahora»: se propone agendar el lunes
+// (Maikel, sábado 19-sep). Entre semana, la pregunta abre conversación.
 function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
+  const dia = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
+  const finde = dia === 'Sat' || dia === 'Sun';
   return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. Acabas de pedir el diagnóstico de crecimiento y he leído lo que me has contado de tu empresa.\n\n' +
-    'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo veamos por aquí un momento?';
+    (finde
+      ? 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo agendemos para el lunes?'
+      : 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo veamos por aquí un momento?');
 }
 
 // El primer WhatsApp de un lead que nunca nos ha escrito sale por una plantilla
