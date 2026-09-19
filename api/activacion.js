@@ -216,7 +216,13 @@ module.exports = async function handler(req, res) {
       // El primero salió por una plantilla fija (Meta no deja personalizar fuera
       // de la ventana de 24 h). Al contestar, la ventana se abre: ahora sí sale
       // el mensaje con lo que él escribió y la pregunta. Después se para.
-      if (!A.tiene(c, 'act-wa1-personal') && (A.tiene(c, 'act-por-plantilla') || A.tiene(c, 'act-wa1-fallido'))) {
+      // Con el agente de WhatsApp activo (clave de Anthropic), contesta él y
+      // lleva la conversación hasta la cita; el mensaje general de aquí sobra.
+      const agenteActivo = !!process.env.ANTHROPIC_API_KEY;
+      if (agenteActivo) {
+        try { await require('./_agente.js').atender(c.id); } catch (err) { console.error('[activacion] agente:', err.message); }
+      }
+      if (!agenteActivo && !A.tiene(c, 'act-wa1-personal') && (A.tiene(c, 'act-por-plantilla') || A.tiene(c, 'act-wa1-fallido') || A.tiene(c, 'act-por-gateway'))) {
         try {
           const v = A.leerCamposWA(c);
           const d = { nombre: nombrePila(c.firstName || c.contactName || ''), hipotesis: v.loQueEscribio || '', sector: '', inversion: '' };

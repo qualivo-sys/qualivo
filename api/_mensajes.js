@@ -47,20 +47,14 @@ function pregunta(datos) {
   return '¿cuántos presupuestos u oportunidades tienes ahora mismo abiertos sin siguiente paso?';
 }
 
+// Primer WhatsApp, genérico (Maikel, 19-sep-2026): el mismo texto para todos,
+// sin citar lo que escribió ni preguntar nada concreto. Es el texto de la
+// plantilla qualivo_apertura aprobada por Meta, con el nombre de pila. Lo
+// concreto lo pregunta el agente cuando contesta (api/_agente.js).
 function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
-  const hola = n ? 'Hola ' + n + ', ' : 'Hola, ';
-  if (datos.origen === 'leadform') {
-    return hola + 'soy Maikel, de Qualivo. Has dejado tus datos en el anuncio del diagnóstico.\n\n' +
-      'Antes de llamarte te pregunto una cosa: ' + pregunta(datos);
-  }
-  if (datos.hipotesis) {
-    return hola + 'soy Maikel, de Qualivo. Acabas de pedir el diagnóstico en la web y me ha llamado la atención lo que has escrito:\n\n' +
-      '«' + String(datos.hipotesis).slice(0, 220) + '»\n\n' +
-      'Una pregunta antes de que hablemos: ' + pregunta(datos);
-  }
-  return hola + 'soy Maikel, de Qualivo. Acabas de pedir el diagnóstico en la web.\n\n' +
-    'Antes de que hablemos te pregunto una cosa: ' + pregunta(datos);
+  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. Acabas de pedir el diagnóstico de crecimiento y he leído lo que me has contado de tu empresa.\n\n' +
+    'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo veamos por aquí un momento?';
 }
 
 // El primer WhatsApp de un lead que nunca nos ha escrito sale por una plantilla

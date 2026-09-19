@@ -157,12 +157,12 @@ function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); 
 // estado y, si ha fallado, el mismo texto sale por la pasarela de WhatsApp
 // (Wazzap), que no tiene ventana de 24 h. El 18-sep se apagó creyendo que era
 // un SMS («por SMS nunca»); el 19-sep Maikel aclaró que es WhatsApp y se
-// volvió a encender… y a las 11:20 pidió pararlo: la pasarela está conectada a
-// su móvil personal y los mensajes a leads los manda él. Así que el envío
-// automático por la pasarela va APAGADO salvo PERMITIR_GATEWAY=1; cuando la
-// API oficial falla, se devuelve canal 'whatsapp_fallido' y Maikel recibe en
-// el móvil el texto listo para reenviarlo con un toque.
-const GATEWAY_PERMITIDO = process.env.PERMITIR_GATEWAY === '1';
+// volvió a encender. A las 11:20 pidió pararla (estaba en su móvil personal) y
+// a las 11:35, con Wazzap ya conectado al número del negocio, pidió que el
+// primer mensaje salga solo y que el agente agende cuando contesten. Va
+// encendida salvo PERMITIR_GATEWAY=0; apagada, la API oficial que falla
+// devuelve 'whatsapp_fallido' y Maikel recibe en el móvil el texto listo.
+const GATEWAY_PERMITIDO = process.env.PERMITIR_GATEWAY !== '0';
 
 // Le deja a Maikel el mensaje que no ha salido, con nombre y teléfono, para que
 // lo mande él desde su WhatsApp. Nunca bloquea.

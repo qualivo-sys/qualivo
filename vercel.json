@@ -170,6 +170,10 @@
     {
       "path": "/api/vigila-voz/",
       "schedule": "30 6 * * *"
+    },
+    {
+      "path": "/api/wa-agente-reloj/",
+      "schedule": "*/2 * * * *"
     }
   ],
   "functions": {
@@ -192,6 +196,9 @@
       "maxDuration": 60
     },
     "api/cita.js": {
+      "maxDuration": 60
+    },
+    "api/wa-agente-reloj.js": {
       "maxDuration": 60
     }
   }
