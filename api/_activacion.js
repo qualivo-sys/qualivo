@@ -157,9 +157,24 @@ function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); 
 // estado y, si ha fallado, el mismo texto sale por la pasarela de WhatsApp
 // (Wazzap), que no tiene ventana de 24 h. El 18-sep se apagó creyendo que era
 // un SMS («por SMS nunca»); el 19-sep Maikel aclaró que es WhatsApp y se
-// volvió a encender. Se apaga con PERMITIR_GATEWAY=0; entonces se devuelve
-// canal 'whatsapp_fallido' y quien llama decide.
-const GATEWAY_PERMITIDO = process.env.PERMITIR_GATEWAY !== '0';
+// volvió a encender… y a las 11:20 pidió pararlo: la pasarela está conectada a
+// su móvil personal y los mensajes a leads los manda él. Así que el envío
+// automático por la pasarela va APAGADO salvo PERMITIR_GATEWAY=1; cuando la
+// API oficial falla, se devuelve canal 'whatsapp_fallido' y Maikel recibe en
+// el móvil el texto listo para reenviarlo con un toque.
+const GATEWAY_PERMITIDO = process.env.PERMITIR_GATEWAY === '1';
+
+// Le deja a Maikel el mensaje que no ha salido, con nombre y teléfono, para que
+// lo mande él desde su WhatsApp. Nunca bloquea.
+async function pasarAMaikel(contactId, texto) {
+  try {
+    const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() });
+    const c = r.ok ? ((await r.json()).contact || {}) : {};
+    const quien = (c.firstName || c.contactName || c.name || 'lead') + (c.companyName ? ' · ' + c.companyName : '');
+    await require('./_aviso.js').movil('PARA ENVIAR TÚ · ' + quien + (c.phone ? ' · ' + c.phone : '') +
+      '\n(el WhatsApp automático no ha salido: fuera de la ventana de 24 h)\n\n' + texto);
+  } catch (e) { console.error('[activacion] pasarAMaikel:', e && e.message); }
+}
 
 async function enviarMensaje(contactId, texto) {
   let idWa = '';
@@ -174,7 +189,10 @@ async function enviarMensaje(contactId, texto) {
     const estado = await estadoMensaje(idWa);
     if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado, id: idWa };
   }
-  if (!GATEWAY_PERMITIDO) return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
+  if (!GATEWAY_PERMITIDO) {
+    await pasarAMaikel(contactId, texto);
+    return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
+  }
   // Fuera de la ventana de 24 h (o número que la API oficial no entrega), el
   // mismo texto sale por la pasarela como WhatsApp normal.
   const g = await enviarPorGateway(contactId, texto);
