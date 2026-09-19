@@ -151,6 +151,14 @@ const MOVIMIENTOS = {
     prefijo: '[baja] ', accion: 'PIDE NO RECIBIR MÁS',
     color: '#B4342B',
     pie: 'Ya no se le escribe más. No hace falta que hagas nada, es para que lo sepas.'
+  },
+  // Maikel, 19-sep: «avísame al email de todo lo que pase». Cada paso del
+  // sistema (WhatsApp enviado, llamada de Raquel, respuesta del agente) deja
+  // un correo corto. Solo correo: al móvil van únicamente los tres de arriba.
+  actividad: {
+    prefijo: '', accion: 'ACTIVIDAD',
+    color: '#3D4148',
+    pie: 'Solo para que lo sepas. No hace falta hacer nada.'
   }
 };
 
@@ -176,12 +184,13 @@ async function seMovio(tipo, d) {
   const quien = d.nombre || d.empresa || d.email || d.telefono || 'Un lead';
   const tel = paraMarcar(d.telefono);
   // En el movil solo se lee el asunto: nombre + que ha hecho, nada mas.
-  const asunto = m.prefijo + quien + ' ' + m.accion.toLowerCase();
+  const accion = d.accion || m.accion;
+  const asunto = m.prefijo + quien + ' · ' + accion.toLowerCase();
 
   const html =
     '<div style="font-family:' + F + ';font-size:16px;line-height:1.55;color:#101319;max-width:560px">' +
     '<p style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:' + m.color +
-    ';margin:0 0 6px">' + escapa(m.accion) + '</p>' +
+    ';margin:0 0 6px">' + escapa(accion) + '</p>' +
     '<h2 style="margin:0 0 4px;font-size:24px;letter-spacing:-.02em">' + escapa(quien) + '</h2>' +
     (d.empresa ? '<p style="margin:0 0 18px;color:#7A7C82">' + escapa(d.empresa) + '</p>' : '') +
     (d.texto

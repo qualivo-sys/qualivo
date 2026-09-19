@@ -181,6 +181,15 @@ module.exports = async function handler(req, res) {
       if (v.estado === 'normal') {
         try { await require('./_tratos.js').mover(contacto.id, 'conversacion'); } catch (e) { /* no bloquea */ }
       }
+      // Maikel, 19-sep: correo por cada llamada, con el resumen.
+      try {
+        await require('./_aviso.js').seMovio('actividad', {
+          nombre: nombre || contacto.firstName || contacto.contactName || '', empresa: contacto.companyName || '', email: contacto.email || '', telefono: numero || contacto.phone || '', contactId: contacto.id,
+          accion: v.estado === 'normal' ? 'Raquel ha hablado con él (' + Math.round(Number(informe.durationSeconds || 0)) + ' s)' : 'Raquel ha llamado y no ha cogido (' + (v.motivo || 'sin respuesta') + ')',
+          texto: String((analisis && analisis.summary) || informe.summary || '').slice(0, 600) + (callId ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + callId : ''),
+          origen: 'Llamada de Raquel'
+        });
+      } catch (e) { /* no bloquea */ }
     }
     return res.status(200).json({ ok: true, estado: v.estado });
   }

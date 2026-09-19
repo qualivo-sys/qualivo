@@ -314,6 +314,10 @@ module.exports = async function handler(req, res) {
           : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
         await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra));
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
+        if (env.canal !== 'whatsapp_fallido') {
+          await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
+            accion: 'WhatsApp enviado (' + paso.tipo + (env.canal === 'gateway' ? ', por Wazzap' : '') + ')', texto: texto, origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
+        }
         hechos++;
       } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
@@ -362,6 +366,8 @@ module.exports = async function handler(req, res) {
         });
         if (r.ok) {
           await A.etiquetar(c.id, ['act-' + paso.tipo]);
+          await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
+            accion: 'Raquel le está llamando (' + paso.tipo + ')', texto: '', origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
           resumen.voz++; hechos++;
         } else if (r.motivo === 'sin_credenciales') {
           // Sin Vapi no se pierde el lead: se anota y la cadencia sigue.

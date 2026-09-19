@@ -312,6 +312,10 @@ async function atender(contactId, opciones) {
     if (decision.texto) {
       const env = await A.enviarMensaje(c.id, decision.texto);
       hecho.canal = env.canal;
+      try {
+        await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
+          accion: 'El agente ha contestado', texto: 'Él: «' + String(ultimo.body).slice(0, 200) + '»\nAgente: «' + decision.texto + '»', origen: 'Agente de WhatsApp' });
+      } catch (e) { /* no bloquea */ }
       if (env.canal === 'whatsapp_fallido') {
         await avisar(c, 'el agente quiso contestar y Meta rechazó el WhatsApp', decision.texto);
       }
