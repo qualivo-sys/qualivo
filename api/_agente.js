@@ -237,14 +237,28 @@ async function contactoPorId(id) {
 
 function esperar(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
 
+// Si el modelo falla (clave inválida, cuota), no se reintenta cada dos minutos
+// ni se avisa a Maikel en cada vuelta: el 19-sep le llegaron veinte WhatsApps
+// seguidos con el mismo error. Se para una hora y se avisa una vez.
+let modeloCaidoHasta = 0;
+let ultimoAvisoError = 0;
+
 // Un mensaje entrante: mira si toca contestar, decide y envía. Devuelve un
 // resumen de lo hecho y nunca lanza. simular=true hace todo menos enviar.
 async function atender(contactId, opciones) {
   opciones = opciones || {};
   const hecho = { contactId: contactId };
+  if (Date.now() < modeloCaidoHasta && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'modelo caído, en pausa' });
   try {
     let c = await contactoPorId(contactId);
     if (!c) return Object.assign(hecho, { accion: 'callar', motivo: 'sin_contacto' });
+    // Solo leads que entraron por el sistema (landing, formulario de Meta o
+    // cadencia). Con la pasarela en el móvil personal de Maikel, TODOS sus
+    // chats entran en GHL: el 19-sep el reloj intentó contestar a un familiar.
+    const esLead = ['diagnostico-landing', 'leadform', 'activacion', 'act-wa1', 'act-respondio', 'act-ini'].some(function (t) {
+      return (c.tags || []).some(function (x) { return String(x).toLowerCase().indexOf(t) === 0; });
+    });
+    if (!esLead) return Object.assign(hecho, { accion: 'callar', motivo: 'no es un lead del sistema' });
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
@@ -321,7 +335,12 @@ async function atender(contactId, opciones) {
     return hecho;
   } catch (e) {
     console.error('[agente]', e && e.message);
-    try { await avisar({ id: contactId }, 'el agente ha fallado: ' + (e && e.message), ''); } catch (x) { /* nada */ }
+    const msg = String((e && e.message) || '');
+    if (/anthropic 4(01|03|29)|anthropic 5\d\d|falta ANTHROPIC/.test(msg)) modeloCaidoHasta = Date.now() + 60 * 60000;
+    if (Date.now() - ultimoAvisoError > 60 * 60000) {
+      ultimoAvisoError = Date.now();
+      try { await avisar({ id: contactId }, 'el agente ha fallado y se para una hora: ' + msg.slice(0, 160), ''); } catch (x) { /* nada */ }
+    }
     try { const c2 = await contactoPorId(contactId); if (c2) await guardarEstado(contactId, Object.assign({}, leerEstado(c2), { candado: 0 })); } catch (x) { /* nada */ }
     return Object.assign(hecho, { accion: 'error', motivo: e && e.message });
   }
