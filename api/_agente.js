@@ -131,7 +131,7 @@ async function fichaDe(c) {
 function turnosDe(mensajes) {
   const turnos = [];
   for (const m of mensajes) {
-    if (!/WHATSAPP/i.test(String(m.messageType || ''))) continue;
+    if (!A.esWhatsApp(m)) continue;
     if (String(m.status || '').toLowerCase() === 'failed') continue;
     const texto = String(m.body || '').trim();
     if (!texto) continue;
@@ -260,16 +260,17 @@ async function atender(contactId, opciones) {
     // Se le da un momento por si sigue escribiendo, y se relee todo.
     if (!opciones.simular) await esperar(ESPERA_MS);
     let mensajes = opciones.mensajes || await A.mensajesDe(c.id);
-    const wa = mensajes.filter(function (m) { return /WHATSAPP/i.test(String(m.messageType || '')) && String(m.status || '').toLowerCase() !== 'failed' && String(m.body || '').trim(); });
+    const wa = mensajes.filter(function (m) { return A.esWhatsApp(m) && String(m.status || '').toLowerCase() !== 'failed' && String(m.body || '').trim(); });
     const ultimo = wa[wa.length - 1];
     if (!ultimo || String(ultimo.direction) !== 'inbound') {
       if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 }));
       return Object.assign(hecho, { accion: 'callar', motivo: 'el último mensaje no es del lead' });
     }
-    // Ventana de 24 h: fuera de ella Meta rechaza el texto libre y no hay nada que hacer aquí.
-    if (Date.now() - Date.parse(ultimo.dateAdded || 0) > 23.5 * 3600 * 1000) {
+    // Un mensaje de hace días no se contesta a destiempo (la respuesta sale por
+    // la pasarela, que no tiene ventana de 24 h, así que el límite es de sentido común).
+    if (Date.now() - Date.parse(ultimo.dateAdded || 0) > 3 * 24 * 3600 * 1000) {
       if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 }));
-      return Object.assign(hecho, { accion: 'callar', motivo: 'fuera de la ventana de 24 h' });
+      return Object.assign(hecho, { accion: 'callar', motivo: 'mensaje de hace más de tres días' });
     }
     // Si Maikel ha escrito él en el hilo (mensaje saliente con usuario), el agente no se mete.
     const primerEntrante = wa.filter(function (m) { return String(m.direction) === 'inbound'; })[0];

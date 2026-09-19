@@ -107,14 +107,31 @@ async function enviarWhatsApp(contactId, texto) {
   return r.json().catch(function () { return {}; });
 }
 
-async function enviarSMS(contactId, texto) {
+// La pasarela de WhatsApp de la cuenta (Wazzap, «WhatsApp Gateway»): en GHL
+// está dada de alta como proveedor de SMS, así que un mensaje de tipo SMS sale
+// por ella COMO WHATSAPP desde el número conectado, sin plantillas ni ventana
+// de 24 h. Hasta el 19-sep se creía que esto era un SMS de verdad y se apagó
+// («por SMS nunca»); Maikel lo desveló ese día y es la vía para el primer
+// mensaje y las confirmaciones. Los mensajes que salen por aquí aparecen en
+// GHL como TYPE_CUSTOM_SMS con este proveedor.
+const GATEWAY_PROVIDER = '67ad23a0cf352d8f5809f0ca';
+
+async function enviarPorGateway(contactId, texto) {
   const r = await fetch(GHL_BASE + '/conversations/messages', {
     method: 'POST',
     headers: cabeceras(),
     body: JSON.stringify({ type: 'SMS', contactId: contactId, message: texto })
   });
-  if (!r.ok) throw new Error('ghl_sms ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  if (!r.ok) throw new Error('ghl_gateway ' + r.status + ' ' + (await r.text()).slice(0, 200));
   return r.json().catch(function () { return {}; });
+}
+const enviarSMS = enviarPorGateway; // nombre antiguo
+
+// Un mensaje de GHL es de WhatsApp si salió por la API oficial o por la pasarela.
+function esWhatsApp(m) {
+  const t = String((m && m.messageType) || '');
+  if (/WHATSAPP/i.test(t)) return true;
+  return /CUSTOM_SMS/i.test(t) && String((m && m.conversationProviderId) || '') === GATEWAY_PROVIDER;
 }
 
 async function estadoMensaje(messageId) {
@@ -137,13 +154,12 @@ function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); 
 // último mensaje del contacto. Fuera de esa ventana, y sin una plantilla
 // aprobada por Meta, el mensaje se acepta por API y luego queda en «failed»
 // sin avisar a nadie: el lead se pierde en silencio. Por eso se comprueba el
-// estado y, si ha fallado, el mismo texto sale por SMS.
-// Orden de Maikel (18-sep-2026): «por SMS nunca, tiene que ser por WhatsApp».
-// El respaldo por SMS queda apagado salvo que PERMITIR_SMS=1 en el entorno. Si
-// el WhatsApp falla (ventana de 24 h sin plantilla), se devuelve
-// canal 'whatsapp_fallido' y quien llama decide; la salida buena es la plantilla
-// de Meta (api/_whatsapp.js), no el SMS.
-const SMS_PERMITIDO = process.env.PERMITIR_SMS === '1';
+// estado y, si ha fallado, el mismo texto sale por la pasarela de WhatsApp
+// (Wazzap), que no tiene ventana de 24 h. El 18-sep se apagó creyendo que era
+// un SMS («por SMS nunca»); el 19-sep Maikel aclaró que es WhatsApp y se
+// volvió a encender. Se apaga con PERMITIR_GATEWAY=0; entonces se devuelve
+// canal 'whatsapp_fallido' y quien llama decide.
+const GATEWAY_PERMITIDO = process.env.PERMITIR_GATEWAY !== '0';
 
 async function enviarMensaje(contactId, texto) {
   let idWa = '';
@@ -158,9 +174,11 @@ async function enviarMensaje(contactId, texto) {
     const estado = await estadoMensaje(idWa);
     if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado, id: idWa };
   }
-  if (!SMS_PERMITIDO) return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
-  await enviarSMS(contactId, texto);
-  return { canal: 'sms', estado: 'enviado' };
+  if (!GATEWAY_PERMITIDO) return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
+  // Fuera de la ventana de 24 h (o número que la API oficial no entrega), el
+  // mismo texto sale por la pasarela como WhatsApp normal.
+  const g = await enviarPorGateway(contactId, texto);
+  return { canal: 'gateway', estado: 'enviado', id: (g && (g.messageId || g.msgId)) || '' };
 }
 
 // Campos personalizados del contacto que usan los workflows de GHL para
@@ -246,7 +264,7 @@ async function mensajesDe(contactId) {
 // Solo mira los WhatsApp de esta cadencia (desde `desdeMs`): sin ese corte, la
 // primera vuelta reenvió por SMS pruebas fallidas de hace días.
 async function reenviarFallidos(contactId, desdeMs) {
-  if (!SMS_PERMITIDO) return 0;
+  if (!GATEWAY_PERMITIDO) return 0;
   const msgs = await mensajesDe(contactId);
   const salientes = msgs.filter(function (m) { return String(m.direction) === 'outbound'; });
   const corte = (desdeMs || 0) - 10 * 60000;
@@ -257,11 +275,11 @@ async function reenviarFallidos(contactId, desdeMs) {
     if (String(m.status || '').toLowerCase() !== 'failed' && !m.error) continue;
     const cuerpo = String(m.body || '').trim();
     if (!cuerpo) continue;
-    const yaPorSms = salientes.some(function (x) {
+    const yaPorGateway = salientes.some(function (x) {
       return /SMS/i.test(String(x.messageType || '')) && String(x.body || '').trim() === cuerpo;
     });
-    if (yaPorSms) continue;
-    await enviarSMS(contactId, cuerpo);
+    if (yaPorGateway) continue;
+    await enviarPorGateway(contactId, cuerpo);
     enviados++;
   }
   return enviados;
@@ -379,6 +397,6 @@ async function enviarCorreo(email, asunto, html) {
 
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

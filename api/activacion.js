@@ -243,7 +243,7 @@ module.exports = async function handler(req, res) {
     }
 
     // WhatsApps que se quedaron en «failed» después de la comprobación de los
-    // cinco segundos (ventana de 24 h de Meta). Salen por SMS aquí, sin esperar
+    // cinco segundos (ventana de 24 h de Meta). Salen por la pasarela aquí, sin esperar
     // al siguiente paso: el siguiente paso puede ser la llamada, y llamar a
     // alguien a quien no le ha llegado nada es empezar con el pie cambiado.
     // Primer WhatsApp que falló por la ventana de 24 h: en cuanto la plantilla de
@@ -266,8 +266,8 @@ module.exports = async function handler(req, res) {
       try {
         const n = await A.reenviarFallidos(c.id, inicioMs);
         if (n) {
-          await A.etiquetar(c.id, ['act-por-sms']);
-          await A.nota(c.id, 'WhatsApp fallido (ventana de 24 h). El mismo texto ha salido por SMS (' + n + ').');
+          await A.etiquetar(c.id, ['act-por-gateway']);
+          await A.nota(c.id, 'WhatsApp oficial fallido (ventana de 24 h). El mismo texto ha salido por la pasarela de WhatsApp (' + n + ').');
           resumen.sms_rescate += n;
         }
       } catch (err) {
@@ -301,7 +301,7 @@ module.exports = async function handler(req, res) {
         const env = paso.tipo === 'wa1'
           ? await A.primerWhatsApp(c.id, c.phone, { nombre: datos.nombre, cita: datos.fuga || datos.sector || 'el diagnóstico', pregunta: M.pregunta(datos), texto: texto })
           : await A.enviarMensaje(c.id, texto);
-        const extra = env.canal === 'sms' ? ['act-por-sms'] : env.canal === 'plantilla' ? ['act-por-plantilla']
+        const extra = env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla']
           : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
         await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra));
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;

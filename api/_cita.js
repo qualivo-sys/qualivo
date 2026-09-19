@@ -112,7 +112,7 @@ async function confirmarCita(o) {
         try {
           const env = await A.enviarMensaje(c.id, textoConfirmacion(nombre, f.dia, f.hora, cuando, enlace));
           hecho.push('confirmacion_' + (env.canal || 'enviada'));
-          if (env.canal === 'sms') await A.etiquetar(c.id, ['act-por-sms']);
+          if (env.canal === 'gateway') await A.etiquetar(c.id, ['act-por-gateway']);
           // Sin plantilla y fuera de ventana, Meta lo rechaza. Se marca para que
           // el reloj lo reintente por plantilla en cuanto exista.
           // wa-confirmacion-cita dispara el workflow de GHL que manda la plantilla.

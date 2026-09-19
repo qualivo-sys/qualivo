@@ -88,7 +88,7 @@ module.exports = async function handler(req, res) {
     enCadencia = (await ghlContactos('activacion')).length;
     agendados = (await ghlContactos('act-agendado')).length;
     respondieron = (await ghlContactos('act-respondio')).length;
-    porSMS = (await ghlContactos('act-por-sms')).length;
+    porSMS = (await ghlContactos('act-por-gateway')).length + (await ghlContactos('act-por-sms')).length;
   } catch (err) {
     avisos.push('No he podido leer el CRM: ' + String(err.message).slice(0, 100));
   }
@@ -118,7 +118,7 @@ module.exports = async function handler(req, res) {
       tabla + '</table>' : '<p>Sin gasto todavía.</p>') +
     '<p style="margin:26px 0 8px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7A7C82">Qué ha pasado después</p>' +
     '<p style="margin:0">' + enCadencia + ' en la cadencia · <b>' + agendados + ' con hora cogida</b> · ' +
-    respondieron + ' han contestado' + (porSMS ? ' · ' + porSMS + ' por SMS porque WhatsApp no pudo' : '') + '</p>' +
+    respondieron + ' han contestado' + (porSMS ? ' · ' + porSMS + ' por la pasarela de WhatsApp porque la API oficial no pudo' : '') + '</p>' +
     (avisos.length
       ? '<div style="margin-top:26px;background:#FFF6E5;border-left:4px solid #E8590C;padding:16px 18px;border-radius:0 10px 10px 0">' +
         '<p style="margin:0 0 8px;font-weight:800">Esto sí pide una decisión</p><ul style="margin:0;padding-left:18px">' +
