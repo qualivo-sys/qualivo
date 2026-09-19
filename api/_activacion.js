@@ -176,7 +176,21 @@ async function pasarAMaikel(contactId, texto) {
   } catch (e) { console.error('[activacion] pasarAMaikel:', e && e.message); }
 }
 
+// Maikel, 19-sep 12:05: «hazlo todo por Wazzap». La pasarela va primero, sin
+// pasar por la API oficial de Meta (ventana de 24 h, plantillas, esperas de
+// cinco segundos). La oficial queda de respaldo si la pasarela falla, y se
+// vuelve a ella con GATEWAY_PRIMERO=0.
+const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
+
 async function enviarMensaje(contactId, texto) {
+  if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO) {
+    try {
+      const g = await enviarPorGateway(contactId, texto);
+      return { canal: 'gateway', estado: 'enviado', id: (g && (g.messageId || g.msgId)) || '' };
+    } catch (err) {
+      console.error('[activacion] pasarela falló, pruebo la API oficial:', err && err.message);
+    }
+  }
   let idWa = '';
   try {
     const r = await enviarWhatsApp(contactId, texto);
@@ -241,7 +255,7 @@ async function primerWhatsApp(contactId, telefono, datos) {
   try { await camposWA(contactId, { loQueEscribio: datos.cita || 'el diagnóstico', pregunta: datos.pregunta || '' }); } catch (e) { /* no bloquea */ }
   try {
     const WA = require('./_whatsapp.js');
-    if (WA.configurado() && telefono) {
+    if (!GATEWAY_PRIMERO && WA.configurado() && telefono) {
       const r = await WA.enviarPlantilla(telefono, WA.PLANTILLAS.primerContacto,
         [datos.nombre || 'hola', datos.cita || 'el diagnóstico', datos.pregunta || '']);
       if (r.ok) return { canal: 'plantilla', estado: 'enviado', id: r.id };
