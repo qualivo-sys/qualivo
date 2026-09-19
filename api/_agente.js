@@ -255,10 +255,9 @@ async function atender(contactId, opciones) {
     // Solo leads que entraron por el sistema (landing, formulario de Meta o
     // cadencia). Con la pasarela en el móvil personal de Maikel, TODOS sus
     // chats entran en GHL: el 19-sep el reloj intentó contestar a un familiar.
-    const esLead = ['diagnostico-landing', 'leadform', 'activacion', 'act-wa1', 'act-respondio', 'act-ini'].some(function (t) {
-      return (c.tags || []).some(function (x) { return String(x).toLowerCase().indexOf(t) === 0; });
-    });
-    if (!esLead) return Object.assign(hecho, { accion: 'callar', motivo: 'no es un lead del sistema' });
+    // Regla de Maikel (19-sep): solo contactos con la etiqueta «paid», que es
+    // la que llevan todos los que entran por la landing o por el formulario.
+    if (!A.tiene(c, 'paid')) return Object.assign(hecho, { accion: 'callar', motivo: 'sin etiqueta paid' });
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
