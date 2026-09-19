@@ -67,17 +67,15 @@ function whatsapp1(datos) {
 // aprobada por Meta, que es fija y no admite personalización (18-sep-2026).
 // En cuanto contesta se abre la ventana de 24 h y entonces sí va el mensaje de
 // verdad: lo que escribió él, y la pregunta que abre la conversación.
+// 19-sep-2026, Maikel: la versión que citaba su frase del formulario entre
+// comillas y soltaba la pregunta calculada «queda muy robotizada». Ahora es un
+// mensaje general, humano, que agradece, dice que se ha leído lo suyo y deja la
+// puerta abierta sin interrogar. Lo concreto se pregunta en la llamada.
 function whatsappTrasApertura(datos) {
   const n = nombreCorto(datos.nombre);
-  const gracias = n ? 'Gracias, ' + n + '. ' : 'Gracias. ';
-  const p = pregunta(datos);
-  // La pregunta viene en minúscula porque en whatsapp1 va tras dos puntos. Aquí
-  // abre frase, así que se pone en mayúscula (saltando el signo de apertura).
-  const P = p.replace(/^([¿¡]?)(\p{L})/u, function (m, a, b) { return a + b.toUpperCase(); });
-  if (datos.hipotesis) {
-    return gracias + 'Me ha llamado la atención lo que escribiste:\n\n«' + String(datos.hipotesis).slice(0, 220) + '»\n\n' + P;
-  }
-  return gracias + P;
+  return (n ? 'Gracias, ' + n + '. ' : 'Gracias. ') +
+    'Lo he leído y me hago una idea de por dónde va. Te preparo la llamada con eso. ' +
+    'Si te apetece contarme algo más por aquí, adelante; si no, lo vemos en los quince minutos.';
 }
 
 function whatsapp2(datos) {
