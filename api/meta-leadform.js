@@ -73,6 +73,23 @@ function firmaValida(req, crudo) {
 // nueve leads del formulario entre el 15 y el 19 de septiembre (los repetidos a
 // mano, con cuerpo compacto, sí pasaban). Por eso el cuerpo se lee crudo
 // (module.exports.config, al final del archivo, desactiva el parseo de Vercel).
+// Sin acceso a los registros de Vercel, cada entrega de Meta deja una nota en
+// un contacto del CRM reservado para ello («Sistema Trazas», sin teléfono y con
+// act-baja para que nada le escriba). Así se ve desde fuera qué llegó y qué
+// pasó con ello. Nunca bloquea: si la nota falla, el lead sigue su camino.
+const TRAZAS_CONTACTO = process.env.LEADFORM_TRAZAS_CONTACTO || '40Blhz3SjxVpMfOVTxQT';
+async function traza(texto) {
+  try {
+    await fetch(GHL_BASE + '/contacts/' + TRAZAS_CONTACTO + '/notes', {
+      method: 'POST', headers: cabecerasGHL(),
+      body: JSON.stringify({ body: '[meta-leadform] ' + new Date().toISOString() + '\n' + String(texto).slice(0, 1500) })
+    });
+  } catch (e) { /* nada */ }
+}
+function cabecerasGHL() {
+  return { Authorization: 'Bearer ' + process.env.GHL_API_KEY, Version: '2021-07-28', 'Content-Type': 'application/json' };
+}
+
 async function cuerpoCrudo(req) {
   if (typeof req.body === 'string') return req.body;
   if (Buffer.isBuffer(req.body)) return req.body.toString('utf8');
@@ -306,6 +323,7 @@ module.exports = async function handler(req, res) {
     if (q['hub.mode'] === 'subscribe' && q['hub.verify_token'] === process.env.META_LEADFORM_VERIFY) {
       return res.status(200).send(String(q['hub.challenge'] || ''));
     }
+    if (q.ping) return res.status(200).json({ ok: true, version: 'trazas-2026-09-19' });
     return res.status(403).json({ ok: false, error: 'forbidden' });
   }
   if (req.method !== 'POST') {
@@ -318,6 +336,8 @@ module.exports = async function handler(req, res) {
   const firma = firmaValida(req, crudo);
   if (!firma.ok) {
     console.error('[leadform] entrega rechazada:', firma.motivo, 'bytes', crudo.length, crudo.slice(0, 200));
+    await traza('RECHAZADA · ' + firma.motivo + ' · cabecera ' + (req.headers['x-hub-signature-256'] ? 'sí' : 'no') +
+      ' · bytes ' + crudo.length + ' · body parseado ' + (req.body && typeof req.body === 'object' ? 'sí' : 'no') + '\n' + crudo.slice(0, 600));
     return res.status(200).json({ ok: false, error: firma.motivo });
   }
   if (!req.body || typeof req.body !== 'object' || !Object.keys(req.body).length) {
@@ -406,6 +426,7 @@ module.exports = async function handler(req, res) {
   }
 
   parte.recibidos = avisos.length;
+  await traza('PROCESADA · ' + JSON.stringify(parte) + ' · leads ' + avisos.map(function (v) { return v.leadgen_id; }).join(','));
   return res.status(200).json({ ok: true, parte: parte });
 };
 
