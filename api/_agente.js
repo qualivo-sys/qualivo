@@ -248,6 +248,8 @@ async function atender(contactId, opciones) {
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
+    // Quien ya tiene cita habla con Maikel, no con el agente (Beatriz, 19-sep).
+    if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) return Object.assign(hecho, { accion: 'callar', motivo: 'ya tiene cita: lo lleva Maikel' });
 
     // Candado: dos webhooks seguidos (el lead manda tres mensajes) no pueden
     // contestar dos veces. Si el candado tiene más de dos minutos, se ignora.
