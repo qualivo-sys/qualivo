@@ -184,9 +184,9 @@ module.exports = async function handler(req, res) {
       // Maikel, 19-sep: correo por cada llamada, con el resumen.
       try {
         await require('./_aviso.js').seMovio('actividad', {
-          nombre: nombre || contacto.firstName || contacto.contactName || '', empresa: contacto.companyName || '', email: contacto.email || '', telefono: numero || contacto.phone || '', contactId: contacto.id,
+          nombre: contacto.firstName || contacto.contactName || contacto.name || '', empresa: contacto.companyName || '', email: contacto.email || '', telefono: numero || contacto.phone || '', contactId: contacto.id,
           accion: v.estado === 'normal' ? 'Raquel ha hablado con él (' + Math.round(Number(informe.durationSeconds || 0)) + ' s)' : 'Raquel ha llamado y no ha cogido (' + (v.motivo || 'sin respuesta') + ')',
-          texto: String((analisis && analisis.summary) || informe.summary || '').slice(0, 600) + (callId ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + callId : ''),
+          texto: String(((msg.analysis || {}).summary) || informe.summary || '').slice(0, 600) + ((msg.call && msg.call.id) ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + msg.call.id : ''),
           origen: 'Llamada de Raquel'
         });
       } catch (e) { /* no bloquea */ }
