@@ -83,3 +83,15 @@ respondio-17sep). No es un lead de las campañas nuevas.
 5. Prompt, agenda: «el calendario pide dos horas de aviso y no abre fines de semana» (antes decía un día).
 
 **Propuesto, no aplicado** (voz/número/cadencia): la segunda llamada de la cadencia (voz2) sigue saliendo desde el +1 775 (Jordi la recibió dos veces desde EE. UU.); grafía fonética para nombres poco comunes o usar solo el nombre de pila; probar grafías de «Máikel» y «Cuálivo» con la voz. Regla «sin canal» (WhatsApp undeliverable + llamada a 0 s = parar llamadas, solo correo, avisar): pendiente del ok de Maikel.
+
+## 19-sep-2026 · sábado
+
+**Llamadas del día (1).** Pablo Martínez, Opoprime (formación), 10:01, 32 s: buzón. Era la primera llamada de la cadencia, 45 minutos después de entrar por el formulario de Meta.
+
+**Lo que enseñó:**
+1. **Salió desde el +1 775 de EE. UU.** El reloj no tenía el móvil de Maikel como número de origen: solo lo tenían las llamadas lanzadas a mano. Corregido: el móvil de Maikel es el origen por defecto (VAPI_PHONE_NUMBER_ID en el entorno manda).
+2. **El recado del buzón seguía con el texto viejo** («te escribimos por WhatsApp»): es un ajuste aparte de Vapi (voicemailMessage), no el prompt. Cambiado a «Máikel te escribe por correo para buscar un hueco» (copia previa: `vapi-asistente-2026-09-19.json`).
+
+**Regla fijada por Maikel (19-sep):** si el lead contesta al WhatsApp, no se le llama. El reloj ya lo hacía (mira la respuesta antes de decidir el paso); queda escrito para que no se toque.
+
+**Cambios del sistema alrededor de Raquel, mismo día:** todo el WhatsApp sale por la pasarela (Wazzap) desde el número de Maikel; el primer mensaje es genérico y en fin de semana propone agendar el lunes; el agente de WhatsApp atiende las respuestas (pendiente de una clave válida de Anthropic); correo a Maikel por cada llamada con resumen y enlace a la grabación.

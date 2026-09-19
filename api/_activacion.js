@@ -5,7 +5,12 @@
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const VAPI_BASE = 'https://api.vapi.ai';
-const NUMERO_SALIENTE = 'b60821ae-39fc-46b3-b8f8-23ee593ee6fd'; // Vapi BYO · +34 647118491
+// Número desde el que llama Raquel cuando VAPI_PHONE_NUMBER_ID no está en el
+// entorno. Hasta el 19-sep era el +1 775 de EE. UU. (b60821ae…): las llamadas
+// lanzadas a mano salían desde el móvil de Maikel, pero las del reloj no, y
+// Pablo recibió un sábado por la mañana una llamada americana que fue al
+// buzón. Decisión de Maikel del 18-sep: su móvil (+34 663 375 205).
+const NUMERO_SALIENTE = '2f99f0e4-5294-4340-9d4a-10bd4553f8ff'; // Vapi · +34 663 375 205 (móvil de Maikel)
 
 function cabeceras() {
   return {
