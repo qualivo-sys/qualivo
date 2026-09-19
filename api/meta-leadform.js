@@ -52,18 +52,38 @@ function respuesta(campos, trozos, valores) {
 // no se puede leer tal cual llegó, queda la segunda barrera: los datos del lead
 // no salen del webhook, se van a buscar a la Graph API con nuestro token, y un
 // identificador inventado no existe allí.
-function firmaValida(req) {
+function firmaValida(req, crudo) {
   const secreto = process.env.META_APP_SECRET;
   const cabecera = String(req.headers['x-hub-signature-256'] || '');
   if (!secreto) return { ok: true, motivo: 'sin_secreto' };
   if (!cabecera.startsWith('sha256=')) return { ok: false, motivo: 'sin_firma' };
 
-  const crudo = req.rawBody || (typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {}));
   const esperada = 'sha256=' + crypto.createHmac('sha256', secreto).update(crudo, 'utf8').digest('hex');
   const a = Buffer.from(cabecera);
   const b = Buffer.from(esperada);
   if (a.length !== b.length) return { ok: false, motivo: 'firma_distinta' };
   return { ok: crypto.timingSafeEqual(a, b), motivo: 'firma_distinta' };
+}
+
+// Meta firma los bytes exactos que envía. Hasta el 19-sep la firma se
+// comprobaba sobre JSON.stringify(req.body), es decir, sobre una re-serialización
+// hecha por Vercel, y bastaba una diferencia de escapado u orden para que no
+// cuadrara: la entrega se rechazaba con 200 (para que Meta no reintentara) y el
+// lead se quedaba fuera hasta el rescate de las :15. Así se perdieron ocho de
+// nueve leads del formulario entre el 15 y el 19 de septiembre (los repetidos a
+// mano, con cuerpo compacto, sí pasaban). Por eso el cuerpo se lee crudo
+// (module.exports.config, al final del archivo, desactiva el parseo de Vercel).
+async function cuerpoCrudo(req) {
+  if (typeof req.body === 'string') return req.body;
+  if (Buffer.isBuffer(req.body)) return req.body.toString('utf8');
+  if (req.body && typeof req.body === 'object' && Object.keys(req.body).length) return JSON.stringify(req.body);
+  return new Promise(function (ok, ko) {
+    let s = '';
+    try { req.setEncoding('utf8'); } catch (e) { /* ya leído */ }
+    req.on('data', function (c) { s += c; });
+    req.on('end', function () { ok(s); });
+    req.on('error', ko);
+  });
 }
 
 function valor(campos, nombres) {
@@ -293,10 +313,15 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
   }
 
-  const firma = firmaValida(req);
+  let crudo = '';
+  try { crudo = await cuerpoCrudo(req); } catch (e) { crudo = ''; }
+  const firma = firmaValida(req, crudo);
   if (!firma.ok) {
-    console.error('[leadform] entrega rechazada:', firma.motivo);
+    console.error('[leadform] entrega rechazada:', firma.motivo, 'bytes', crudo.length, crudo.slice(0, 200));
     return res.status(200).json({ ok: false, error: firma.motivo });
+  }
+  if (!req.body || typeof req.body !== 'object' || !Object.keys(req.body).length) {
+    try { req.body = crudo ? JSON.parse(crudo) : {}; } catch (e) { req.body = {}; }
   }
 
   const token = process.env.META_LEADFORM_TOKEN;
@@ -390,3 +415,5 @@ module.exports = async function handler(req, res) {
 // quede igual que uno que entro bien.
 module.exports.guardar = guardar;
 module.exports.FORMULARIOS_SECTOR = FORMULARIOS_SECTOR;
+// Cuerpo sin parsear, para comprobar la firma de Meta sobre los bytes originales.
+module.exports.config = { api: { bodyParser: false } };
