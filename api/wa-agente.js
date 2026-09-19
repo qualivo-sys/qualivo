@@ -31,6 +31,16 @@ module.exports = async function handler(req, res) {
     console.error('[wa-agente] falta ANTHROPIC_API_KEY: no se contesta a ' + contactId);
     return res.status(200).json({ ok: false, error: 'sin_modelo' });
   }
-  const r = await AGENTE.atender(contactId, { simular: !!b.simular });
+  // En simulación se puede pasar una conversación inventada (mensajes con
+  // direction/body) para probar el tono sin que nadie escriba de verdad.
+  const opciones = { simular: !!b.simular };
+  if (b.simular && Array.isArray(b.mensajes) && b.mensajes.length) {
+    const ahora = Date.now();
+    opciones.mensajes = b.mensajes.map(function (m, i) {
+      return { messageType: 'TYPE_WHATSAPP', direction: m.direction || (i % 2 ? 'inbound' : 'outbound'), status: 'delivered',
+        dateAdded: new Date(ahora - (b.mensajes.length - i) * 60000).toISOString(), body: String(m.body || m.texto || '') };
+    });
+  }
+  const r = await AGENTE.atender(contactId, opciones);
   return res.status(200).json(Object.assign({ ok: r.accion !== 'error' }, r));
 };

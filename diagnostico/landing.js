@@ -203,9 +203,31 @@
     ].join('&');
     var i = document.createElement('iframe');
     i.src = CALENDARIO + '?' + q;
-    i.setAttribute('scrolling', 'no');
+    // 19-sep-2026: con scrolling=no y altura fija, en el iPhone el paso del
+    // formulario de reserva quedaba cortado y no se llegaba al botón (Beatriz,
+    // desde /clinicas/: «no puedo bajar en el calendario»). El id lo usa
+    // form_embed.js de GoHighLevel para ajustar la altura a cada paso; el
+    // desplazamiento queda permitido por si no carga; en pantallas estrechas el
+    // iframe es alto de sobra y, además, hay un botón para abrirlo a pantalla
+    // completa, que es la página propia del calendario y en móvil funciona sola.
+    i.id = 'zBlsw8BEKA2zah81YlOl_' + Date.now();
+    i.setAttribute('scrolling', 'auto');
     i.title = 'Calendario para reservar el diagnóstico';
+    var estrecho = window.innerWidth < 640;
+    i.style.minHeight = estrecho ? '1500px' : '760px';
+    cal.style.overflow = 'visible';
     cal.appendChild(i);
+    if (estrecho) {
+      var abrir = document.createElement('a');
+      abrir.href = i.src;
+      abrir.textContent = '¿No puedes moverte por el calendario? Ábrelo a pantalla completa →';
+      abrir.style.cssText = 'display:block;margin:10px 0 0;padding:14px 16px;border-radius:12px;background:#101319;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;text-align:center;line-height:1.35';
+      cal.parentNode.insertBefore(abrir, cal.nextSibling);
+    }
+    var s = document.createElement('script');
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
     cal.dataset.listo = '1';
   }
 })();
