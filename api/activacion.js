@@ -292,7 +292,8 @@ module.exports = async function handler(req, res) {
     const datos = {
       nombre: nombrePila(c.firstName || c.contactName || c.name || ''),
       sector: '', inversion: '',
-      origen: esLeadForm(c) ? 'leadform' : 'landing'
+      origen: esLeadForm(c) ? 'leadform' : 'landing',
+      entro: c.dateAdded || ''
     };
     // El contexto del lead viaja en las etiquetas que puso el formulario.
     (c.tags || []).forEach(function (t) {
@@ -312,8 +313,18 @@ module.exports = async function handler(req, res) {
           : await A.enviarMensaje(c.id, texto);
         const extra = env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla']
           : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
-        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra));
+        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra), A.tiene(c, 'aviso-movil-pendiente') ? ['aviso-movil-pendiente'] : []);
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
+        // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora,
+        // que es cuando le sale el primer WhatsApp y Maikel puede adelantarse.
+        if (paso.tipo === 'wa1' && A.tiene(c, 'aviso-movil-pendiente')) {
+          try {
+            const entro = c.dateAdded ? new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(c.dateAdded)) : '';
+            await require('./_aviso.js').movil('LEAD NUEVO (entró ' + (entro || 'de noche') + ') · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
+              (datos.fuga ? '\n«' + datos.fuga + '»' : '') + (c.phone ? '\nTel ' + c.phone : '') +
+              '\nLe acaba de salir el primer WhatsApp' + (env.canal === 'whatsapp_fallido' ? ' (ha fallado, revisa el CRM)' : '') + '.');
+          } catch (e) { console.error('[activacion] aviso pendiente no salió:', e && e.message); }
+        }
         if (env.canal !== 'whatsapp_fallido') {
           await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
             accion: 'WhatsApp enviado (' + paso.tipo + (env.canal === 'gateway' ? ', por Wazzap' : '') + ')', texto: texto, origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});

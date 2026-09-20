@@ -23,9 +23,23 @@ const F = '-apple-system,Segoe UI,Roboto,sans-serif';
 // para los dos momentos que no pueden esperar al correo: lead cualificado
 // nuevo y lead que contesta. Va a su contacto de prueba del CRM (su 663).
 // Se apaga con AVISO_MOVIL=0. Nunca bloquea.
+//
+// Solo entre las 8:00 y las 22:00 de Madrid. El 20-sep un lead entró a las
+// 2:10 de la madrugada y el aviso sonó en el móvil de Maikel a esa hora; el
+// correo ya llega igual, y el lead no recibe nada hasta las 8:00, así que el
+// móvil de madrugada no sirve para adelantarse a nada. Lo que llega de noche
+// se apunta (etiqueta aviso-movil-pendiente) y sale cuando sale el primer
+// WhatsApp al lead, por la mañana (api/activacion.js).
 const MOVIL_CONTACTO = process.env.AVISO_MOVIL_CONTACTO || 'DgkPLaw6fzy4z1bs8HsB';
-async function movil(texto) {
+const MOVIL_DESDE = parseInt(process.env.AVISO_MOVIL_DESDE || '8', 10);
+const MOVIL_HASTA = parseInt(process.env.AVISO_MOVIL_HASTA || '22', 10);
+function enHorarioMovil() {
+  const t = require('./_activacion.js').ahoraMadrid();
+  return t.minutos >= MOVIL_DESDE * 60 && t.minutos < MOVIL_HASTA * 60;
+}
+async function movil(texto, opciones) {
   if (process.env.AVISO_MOVIL === '0' || !MOVIL_CONTACTO) return false;
+  if (!(opciones && opciones.forzar) && !enHorarioMovil()) return 'fuera-de-horario';
   try {
     await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 900));
     return true;
@@ -61,10 +75,17 @@ function paraMarcar(tel) {
 async function leadNuevo(d) {
   d = d || {};
   if (d.cualificado !== false) {
-    await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
-      (d.fuga ? '\n«' + String(d.fuga).slice(0, 160) + '»' : '') +
-      (d.telefono ? '\nTel ' + d.telefono : '') + (d.origen ? '\n' + d.origen : '') +
-      '\nRaquel le llama en unos minutos.');
+    if (enHorarioMovil()) {
+      await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
+        (d.fuga ? '\n«' + String(d.fuga).slice(0, 160) + '»' : '') +
+        (d.telefono ? '\nTel ' + d.telefono : '') + (d.origen ? '\n' + d.origen : '') +
+        '\nLe acaba de salir el primer WhatsApp.');
+    } else if (d.contactId) {
+      // De noche no suena el móvil: queda apuntado y se avisa por la mañana,
+      // cuando le sale el primer WhatsApp al lead.
+      try { await require('./_activacion.js').etiquetar(d.contactId, ['aviso-movil-pendiente']); }
+      catch (e) { console.error('[aviso] no pude apuntar el aviso pendiente:', e && e.message); }
+    }
   }
   const destino = process.env.AVISO_INTERNO_TO || process.env.INFORME_PAID_TO || 'maikel@qualivo.io';
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
@@ -234,5 +255,5 @@ async function seMovio(tipo, d) {
   }
 }
 
-module.exports = { leadNuevo: leadNuevo, seMovio: seMovio, movil: movil };
+module.exports = { leadNuevo: leadNuevo, seMovio: seMovio, movil: movil, enHorarioMovil: enHorarioMovil };
 

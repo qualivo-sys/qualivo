@@ -57,7 +57,11 @@ function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
   const dia = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
   const finde = dia === 'Sat' || dia === 'Sun';
-  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. Acabas de pedir el diagnóstico de crecimiento y he leído lo que me has contado de tu empresa.\n\n' +
+  // Si el lead entró de noche, el mensaje sale a las 8:00: «acabas de pedir»
+  // seis horas después suena a robot. Se mira cuánto hace que entró.
+  const hace = datos.entro ? (Date.now() - new Date(datos.entro).getTime()) / 60000 : 0;
+  const cuando = !datos.entro || hace < 90 ? 'Acabas de pedir' : hace < 20 * 60 ? 'Has pedido hace unas horas' : 'Pediste';
+  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. ' + cuando + ' el diagnóstico de crecimiento y he leído lo que me has contado de tu empresa.\n\n' +
     (finde
       ? 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo agendemos para el lunes?'
       : 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo veamos por aquí un momento?');
