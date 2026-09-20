@@ -133,6 +133,28 @@ module.exports = async function handler(req, res) {
         if (g && g.ok) {
           parte.rescatados++;
           nuevos.push({ nombre: g.nombre || '(sin nombre)', email: email, telefono: telefono, cuando: lead.created_time });
+          // Mismo primer WhatsApp que manda el webhook (api/meta-leadform.js).
+          // Como Meta no entrega los avisos, casi todos los leads entran por
+          // aquí, y sin esto el mensaje esperaba al cron de activación: hasta
+          // diez minutos más, con el aviso al móvil ya enviado. El 20-sep a las
+          // 13:30 Elena entró y a las 13:40 seguía sin mensaje.
+          if (g.contactId && g.telefono && g.activar && g.invierte) {
+            try {
+              const act = require('./_activacion.js');
+              const msg = require('./_mensajes.js');
+              if (act.enVentana('whatsapp')) {
+                const datosMsg = { nombre: g.nombre, origen: 'leadform', inversion: g.inversion, fuga: g.fuga, sector: g.sector, entro: lead.created_time };
+                const env = await act.primerWhatsApp(g.contactId, g.telefono, {
+                  nombre: msg.nombreCorto(g.nombre), cita: g.fuga || 'el diagnóstico',
+                  pregunta: msg.pregunta(datosMsg), texto: msg.whatsapp1(datosMsg)
+                });
+                await act.etiquetar(g.contactId, ['act-wa1'].concat(env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
+              }
+            } catch (err) {
+              console.error('[rescate] primer WhatsApp no salió:', err && err.message);
+              parte.errores.push('lead ' + lead.id + ' (whatsapp): ' + String(err && err.message).slice(0, 120));
+            }
+          }
         } else {
           parte.errores.push('lead ' + lead.id + ': ' + ((g && g.motivo) || 'sin_guardar'));
         }
