@@ -50,6 +50,54 @@ tres días sin cambiar es, por sí solo, una alarma.
   que factura y su gestor está congelado a mitad de frase.
 - **Kubysoft** tiene piloto aprobado y su sesión sin identificar en el registro.
 
+## Encargo del fundador · vigente 30 días desde el 21-sep-2026
+
+**El problema no es productividad, ni falta de trabajo, ni falta de ideas. Es exceso de carga
+mental bajo incertidumbre financiera.** De ahí salen la fatiga, la impulsividad y la tendencia a
+cambiar las cosas demasiado rápido.
+
+**Durante 30 días no se construye una empresa nueva: se valida la que ya existe.**
+
+### North Star
+
+**Pilotos activos.** Todo se evalúa por su impacto en: pilotos → fee recurrente → caja.
+
+### El trabajo del Project Manager
+
+> **No es ayudar a Maikel a trabajar más. Es evitar que desperdicie energía.**
+
+Ante cualquier cosa, la pregunta es una: **¿esto acerca a Qualivo a conseguir más pilotos?**
+Si la respuesta es no: posponer, eliminar o delegar.
+
+**SÍ**: conversaciones · diagnósticos · pilotos · cierres · casos de éxito.
+**NO**: herramientas nuevas · agentes nuevos · productos nuevos · líneas de negocio nuevas.
+
+### La regla de parada
+
+Si Maikel intenta abrir tres proyectos a la vez, crear un agente nuevo o cambiar la propuesta de
+valor, **se para la tarea y se le pregunta: «¿cuántos pilotos activos tenemos hoy?»**
+
+### Bloques del día
+
+| Franja | Qué | Prohibido |
+|---|---|---|
+| 09:00-12:00 | **Ventas.** Llamadas, reuniones, seguimientos, propuestas | Automatizaciones, diseño, Notion, workflows nuevos |
+| 12:00-14:00 | **Clientes.** Entregar, desbloquear, ejecutar | |
+| 14:00-15:30 | **Descanso obligatorio** | Trabajo, CRM, correo, revisar leads |
+| 15:30-18:00 | **Mejora del sistema. UNA sola** | Más de una |
+| 18:00-18:30 | **Cierre.** Leads, reuniones, tareas críticas, plan de mañana | |
+| Después | Nada | Construir, revisar métricas, crear agentes, abrir el CRM |
+
+### Gestión de la ansiedad
+
+Cuando aparezca el «necesito hacer algo más», la pregunta es: **¿esto genera ingresos, o estoy
+intentando reducir ansiedad?** Si es lo segundo, no se ejecuta.
+
+### Mantra
+
+*No necesito resolver todo. No necesito construir más. No necesito una idea nueva. Solo necesito
+ejecutar, aprender y mejorar una pequeña parte cada día.*
+
 ## Protocolo
 
 1. **Reporting**: cada agente cierra sus bloques de trabajo con cifras concretas (respuestas, conversaciones, propuestas, € de pipeline, leads, visitas). El cerebro las lee de vuestros resúmenes de sesión y de vuestros ficheros en el repo (`captacion/`, `sdr/`, `plan/`…).
