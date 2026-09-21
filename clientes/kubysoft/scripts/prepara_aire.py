@@ -64,10 +64,21 @@ GRANDE = re.compile(
     r"ikea|pc\s*componentes|pccomponentes|amazon|milar|tien\s*21|expert)\b", re.I)
 
 
+# Talleres de coche. Entran porque "servicio tecnico aire acondicionado" tambien
+# devuelve quien te recarga el clima del coche. No son el ICP de Kubysoft: son
+# taller fijo, no empresa con tecnicos desplazados, avisos y contratos de
+# mantenimiento. En el primer lote eran 6 de 146.
+AUTOMOCION = re.compile(
+    r"\b(automoci[oó]n|autom[oó]vil(es)?|taller(es)?\s|neum[aá]tic|"
+    r"chapa\s*y\s*pintura|valvoline|castrol|midas|norauto|feu\s*vert|"
+    r"aurgi|confortauto|euromaster|rodi\s*motor)\b", re.I)
+
+
 def descarta(nombre, dominio):
     """Devuelve el motivo del descarte, o None si el lead sigue vivo."""
     for etiqueta, patron in (("fabricante", FABRICANTE), ("mayorista", MAYORISTA),
-                             ("portal", PORTAL), ("grande", GRANDE)):
+                             ("portal", PORTAL), ("grande", GRANDE),
+                             ("automocion", AUTOMOCION)):
         if patron.search(nombre) or patron.search(dominio):
             return etiqueta
     return None
