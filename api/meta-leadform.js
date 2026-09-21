@@ -224,13 +224,17 @@ async function guardar(lead, opts) {
 
   const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
   const etiquetas = ['leadform'];
-  if (deEstaCampana && !invierte) {
-    // Se guarda y se le contesta con honestidad, pero no entra en la cadencia
-    // de llamadas. La secuencia «fuera» es un solo correo, no un nurture eterno.
+  // Maikel, 21-sep-2026: a quien marca «nada todavía» también se le escribe y
+  // se le llama («puede ser gente con dinero»). Se guarda la etiqueta
+  // sin-inversion para medirlo aparte, y deja de salir el correo de «fuera».
+  // Benjamín (Talavera) recibió ese correo y lo leyó como «no nos interesa».
+  const llamarSinInversion = process.env.LLAMAR_SIN_INVERSION !== '0';
+  if (deEstaCampana && !invierte && !llamarSinInversion) {
     etiquetas.push('diagnostico-landing', 'paid', 'act-fuera');
   } else if (deEstaCampana) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
       'activacion', 'act-ini-' + sello);
+    if (!invierte) etiquetas.push('sin-inversion');
   } else {
     // Formulario que no es de esta campaña: se guarda y se queda quieto.
     etiquetas.push('leadform-otra-campana');
@@ -318,7 +322,7 @@ async function guardar(lead, opts) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
-        inversion: inversion, fuga: fuga, cualificado: invierte,
+        inversion: inversion, fuga: fuga, cualificado: invierte || process.env.LLAMAR_SIN_INVERSION !== '0',
         origen: 'Formulario instantáneo de Meta', contactId: contactId
       });
     } catch (err) {
@@ -401,7 +405,7 @@ module.exports = async function handler(req, res) {
         continue;
       }
 
-      if (r.contactId && r.telefono && r.activar && r.invierte) {
+      if (r.contactId && r.telefono && r.activar && (r.invierte || process.env.LLAMAR_SIN_INVERSION !== '0')) {
         try {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');

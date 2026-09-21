@@ -138,7 +138,7 @@ module.exports = async function handler(req, res) {
           // aquí, y sin esto el mensaje esperaba al cron de activación: hasta
           // diez minutos más, con el aviso al móvil ya enviado. El 20-sep a las
           // 13:30 Elena entró y a las 13:40 seguía sin mensaje.
-          if (g.contactId && g.telefono && g.activar && g.invierte) {
+          if (g.contactId && g.telefono && g.activar && (g.invierte || process.env.LLAMAR_SIN_INVERSION !== '0')) {
             try {
               const act = require('./_activacion.js');
               const msg = require('./_mensajes.js');
