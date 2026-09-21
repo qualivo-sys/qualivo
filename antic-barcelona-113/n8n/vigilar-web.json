@@ -45,7 +45,8 @@
           },
           "timeout": 15000
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "id": "guia",
@@ -53,8 +54,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        40,
-        90
+        260,
+        0
       ],
       "parameters": {
         "url": "https://antic-barcelona-113.vercel.app/guia",
@@ -67,7 +68,8 @@
           },
           "timeout": 15000
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "id": "juzgar",
@@ -75,11 +77,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        280,
+        480,
         0
       ],
       "parameters": {
-        "jsCode": "// Se comprueban las dos páginas a las que llevan los anuncios, no la portada:\n// son las que cuestan dinero si fallan.\n//\n// Y no basta con el código 200. El fallo que motivó esto fue un despliegue de\n// otro proyecto encima del nuestro: habría respondido 200 con otra web. Así\n// que se mira también que el HTML sea el nuestro.\nconst MARCA = 'Antic Barcelona 113';\nconst paginas = [\n  ['/cuestionario', $('Pedir /cuestionario').first().json],\n  ['/guia', $('Pedir /guia').first().json],\n];\n\nconst fallos = [];\nfor (const [ruta, r] of paginas) {\n  const codigo = r.statusCode;\n  const cuerpo = typeof r.body === 'string' ? r.body : JSON.stringify(r.body || '');\n  if (codigo !== 200) fallos.push(`${ruta} responde ${codigo}`);\n  else if (!cuerpo.includes(MARCA)) fallos.push(`${ruta} responde 200 pero el contenido no es el nuestro`);\n}\n\nreturn [{ json: { caida: fallos.length > 0, fallos, detalle: fallos.join(' · ') } }];"
+        "jsCode": "// Se comprueban las dos páginas a las que llevan los anuncios, no la portada:\n// son las que cuestan dinero si fallan.\n//\n// Y no basta con el código 200. El fallo que motivó esto fue un despliegue de\n// otro proyecto encima del nuestro: habría respondido 200 con otra web. Así\n// que se mira también que el HTML sea el nuestro.\nconst MARCA = 'Antic Barcelona 113';\nconst paginas = [\n  ['/cuestionario', $('Pedir /cuestionario').first().json],\n  ['/guia', $('Pedir /guia').first().json],\n];\n\nconst fallos = [];\nfor (const [ruta, r] of paginas) {\n  const codigo = r.statusCode;\n  // El nodo HTTP de n8n deja el HTML en «data», no en «body». Leyendo la\n  // clave equivocada el cuerpo salía vacío y el vigilante concluía que la web\n  // era de otro: cien avisos de una caída que no existía.\n  const bruto = r.data ?? r.body;\n  const cuerpo = typeof bruto === 'string' ? bruto : JSON.stringify(bruto ?? '');\n  if (codigo !== 200) fallos.push(`${ruta} responde ${codigo}`);\n  else if (!cuerpo.includes(MARCA)) fallos.push(`${ruta} responde 200 pero el contenido no es el nuestro`);\n}\n\nreturn [{ json: { caida: fallos.length > 0, fallos, detalle: fallos.join(' · ') } }];"
       }
     },
     {
@@ -88,7 +90,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        500,
+        700,
         0
       ],
       "parameters": {
@@ -122,7 +124,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        720,
+        920,
         -60
       ],
       "parameters": {
@@ -148,11 +150,6 @@
             "node": "Pedir /cuestionario",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Pedir /guia",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -161,7 +158,7 @@
       "main": [
         [
           {
-            "node": "¿Está en pie?",
+            "node": "Pedir /guia",
             "type": "main",
             "index": 0
           }
