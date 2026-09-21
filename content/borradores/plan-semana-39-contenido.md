@@ -24,7 +24,8 @@ Sacado de la bitácora de Raquel, del código y de los borradores de la semana
 4. El calendario con «3 días de antelación» contando fines de semana: un viernes por la tarde solo ofrecía hoy. Una regla razonable que cerraba la agenda.
 
 **Experimento**
-5. ★ 24 llamadas, 3 citas, 10 buzones, 4 sin conectar, 3 con locución de operadora (118 s cada una). Coste 1,65 $.
+5. ★ 24 llamadas, 3 citas, 10 buzones, 4 sin conectar, 3 con locución de operadora (118 s cada una). Coste 1,65 $. Cada llamada con nota, resumen y grabación en la ficha del CRM.
+5b. ★ Un agente encontró en su primera pasada por mi CRM 25 oportunidades paradas con 34.500 € declarados, quince de ellas entre 57 y 63 días (propuesta V1 §5).
 6. ★ El plantón llamado a los 6 minutos se recupera: WhatsApp pidiendo otra hora 3 minutos después.
 7. La regla de 25 s de silencio, buena contra buzones, colgó a una recepcionista que estaba apuntando el recado.
 8. Los que no invierten entran ahora en cadencia con etiqueta propia (`sin-inversion`): en dos semanas sabremos si convierten peor o igual.
@@ -53,26 +54,35 @@ Sacado de la bitácora de Raquel, del código y de los borradores de la semana
 
 | Pieza | CTA |
 |---|---|
-| Lun LinkedIn, Vie LinkedIn, Mar Instagram, Jue Instagram | Conversación (pregunta) |
+| Lun LinkedIn, Mar Instagram, Jue Instagram | Conversación (pregunta) |
 | Mié LinkedIn, Sáb Instagram | Recurso: «escribe FUGA» y se manda el checklist por mensaje |
-| Jue LinkedIn, Newsletter | Diagnóstico |
+| Jue LinkedIn, Vie LinkedIn, Newsletter | Diagnóstico |
 
 ## La semana en una tabla
 
 | Día | Canal | Serie | Gancho | Dato real | Formato |
 |---|---|---|---|---|---|
-| Lun 21 | LinkedIn | Construyendo Qualivo (diario) | Mi sistema le dijo a un cliente que no encajaba. Y luego le llamó. | 24 llamadas el 21-sep; un lead recibió el correo de «fuera» y la llamada el mismo día; el filtro se quitó ese día | Texto largo, fracaso propio contado entero + decisión |
-| Mar 22 | Instagram | Antes de gastar más (no hagas / haz) | No descartes al que no invierte en anuncios | El filtro de «no invierto nada» tiraba leads; quitado el 21-sep | Infografía tipográfica 1080×1350, molde `no-hagas.html`, fondo crema |
-| Mié 23 | LinkedIn | Buscando la fuga (banderas rojas: dependencia) | Tres banderas rojas de dependencia. Las tres las tenía yo. | 24 llamadas salieron desde mi móvil personal; el 14-sep un lead se perdió y nadie lo supo hasta que miré el panel a mano | Texto con lista roja/verde, un caso propio por bandera |
+| Lun 21 | LinkedIn | Construyendo Qualivo (diario) | Tres reuniones que agendó un agente mientras yo estaba en otra. | 24 llamadas el 21-sep, 3 citas, cada llamada con nota y grabación en el CRM | Texto largo: lo que hizo bien el sistema, con el fallo al final en dos líneas |
+| Mar 22 | Instagram | Antes de gastar más (lista rápida) | Cinco cosas que pasaron en mi empresa sin que yo tocara nada. | WhatsApp al minuto, 24 llamadas, 3 citas, ficha del CRM, correo por paso | Infografía tipográfica 1080×1350, molde `lista-rapida.html`, fondo crema |
+| Mié 23 | LinkedIn | Buscando la fuga (dependencia) | Tres cosas de mi empresa que ya no dependen de mí. | Rescate cada 10 min desde el 19-sep; correo con grabación por llamada; borrador de propuesta por agente. Y lo que había antes | Texto: para cada una, antes (rojo) y ahora (verde) |
 | Jue 24 | LinkedIn | Construyendo Qualivo (diario) | Mi agente llamó seis minutos después del plantón. A los tres minutos escribieron para reprogramar. | 18-sep: cita 12:00, plantón, llamada 12:06 (59 s), WhatsApp a los 3 min; y la centralita que colgó con el recado a medias | Texto largo, un acierto y un fallo del mismo día |
 | Jue 24 | Instagram | Buscando la fuga (Sin humo) | Lo barato es llamar. Lo caro es saber cuándo colgar. | 24 llamadas, 3 citas, 3 veces 118 segundos hablando con la locución de una operadora | Tarjeta tipográfica (frase de realidad), fondo tinta |
 | Jue 24 | Newsletter | Capítulo 1 del diario | 24 llamadas, 3 citas y 118 segundos con una operadora | Los mismos del jueves de Instagram, contados enteros | 430 palabras, un dato, un fallo, remate al diagnóstico |
-| Vie 25 | LinkedIn | Experimento de la semana (hook contrario) | Contestar rápido no es contestar bien. | Lunes 9:00 en punto, llamada al lead del domingo: «te va a venir fatal ahora». Fin de semana capta a la mitad de precio (8 € frente a 22 € de CPL en el histórico de la cuenta) | Una línea que duele + desarrollo corto |
-| Sáb 26 | Instagram | Antes de gastar más (lista rápida) | Cinco fallos de mi agente de voz esta semana. Los cinco los hace también un comercial. | Cinco fallos reales de la bitácora del 21-sep | Infografía tipográfica, molde `lista-rapida.html`, fondo crema |
+| Vie 25 | LinkedIn | Construyendo Qualivo (diario) | Le pedí a un agente que repasara mi propio CRM. Encontró 34.500 € parados. | 25 oportunidades paradas, 34.500 € declarados, quince entre 57 y 63 días (propuesta V1 §5) | Dato propio sorprendente + método regalado |
+| Sáb 26 | Instagram | Antes de gastar más (no hagas / haz) | El filtro que te ahorra tiempo te está costando clientes. | El filtro de «no invierto nada» quitado el 21-sep, contado como mejora | Infografía tipográfica, molde `no-hagas.html`, fondo tinta |
 
 LinkedIn pesa más: cuatro piezas frente a tres. Todas firman Maikel en primera
-persona. Solo dos terminan en el diagnóstico (jueves y newsletter); el resto
+persona. Solo dos terminan en el diagnóstico (jueves y viernes); el resto
 termina en pregunta o en el recurso, como pide el brief.
+
+**Equilibrio (corrección de Maikel, 21-sep noche: «hay que mostrar cosas
+positivas que hace el sistema»).** De las siete piezas, cinco tienen como tesis
+algo que el sistema hace bien (lunes, martes, miércoles, jueves LinkedIn,
+viernes) y en ellas el fallo va después, corto, como prueba de que es verdad.
+Solo dos abren por el fallo (Sin humo del jueves y el filtro del sábado, y esa
+se cuenta como mejora). Regla desde hoy: en el diario, primero lo que
+funcionó con su dato, después lo que salió mal. Nunca una semana con más
+piezas de fallo que de acierto.
 
 ---
 
@@ -112,81 +122,74 @@ una operadora no lo vende nadie por ese precio.»
 
 ---
 
-## LinkedIn · Lunes 21 · Diario · «Mi sistema le dijo a un cliente que no encajaba. Y luego le llamó.»
+## LinkedIn · Lunes 21 · Construyendo Qualivo · «Tres reuniones que agendó un agente mientras yo estaba en otra»
 
-*Serie: Agentizando mi propia empresa. Formato del radar: fracaso propio contado
-entero + decisión drástica. Fuga: captación (el filtro). Dato: bitácora del
-21-sep y cambio en el código el mismo día.*
+*Serie: Construyendo Qualivo. Pilar: experimento real. Tesis: lo que el sistema
+hace bien, con dato. El fallo va al final, corto, y se cuenta entero el jueves.
+Datos: bitácora del 21-sep y recorrido de activación V2. CTA: conversación.*
 
-> Este lunes mi sistema hizo 24 llamadas. Una me enseñó más que las otras 23.
+> Este lunes aparecieron tres reuniones nuevas en mi calendario para el martes.
+> No las agendé yo. No las agendó nadie de mi equipo. Las agendó Raquel, mi
+> agente de voz.
 >
-> Una persona cogió el teléfono y le dijo a mi agente de voz: «me llegó un
-> correo diciendo que esto no me interesaba».
+> Te cuento qué pasa por detrás, porque es lo que monto a mis clientes y lo
+> tenía que probar en mi casa primero.
 >
-> Tenía razón. El correo lo había mandado yo. Bueno, mi sistema.
+> Entra un contacto por un anuncio. Al minuto le llega un WhatsApp con sus
+> propias palabras. A los veinte minutos, si no ha contestado, le llama Raquel.
+> Le pregunta por dónde cree que se le escapa el negocio, le ofrece hueco y, si
+> dice que sí, la cita entra en el calendario con el enlace de la videollamada,
+> el contacto recibe la confirmación por WhatsApp y a mí me llega un correo con
+> el resumen y la grabación.
 >
-> Te cuento el fallo entero, porque el fallo es la parte útil.
+> El lunes hizo 24 llamadas. Tres acabaron en cita. Diez fueron a buzón y dejó
+> un recado de diez segundos. Cuatro no conectaron. Y en dos, la persona que
+> cogió no era quien lo había pedido: lo apuntó y no insistió.
 >
-> En el formulario pregunto cuánto invierte la empresa al mes en conseguir
-> clientes. Quien marcaba «nada todavía» quedaba fuera: un correo educado
-> diciendo que aún no encajábamos, y ahí acababa. Lo puse para no perder el
-> tiempo con quien no tiene sistema que arreglar.
+> Todo eso quedó escrito en la ficha de cada contacto, con la grabación. Yo
+> estaba en una reunión.
 >
-> Pero la llamada salió igual. El agente no sabía nada del correo. Le repitió
-> tres veces la misma pregunta, dijo «no tengo constancia de ese correo» y
-> acabó confirmándole que sí, que quedaba descartado.
+> Hace un mes ese trabajo era mío. Mirar el formulario cuando me acordaba,
+> llamar cuando podía, apuntar a medias, olvidarme de la mitad.
 >
-> Un cliente potencial descartado dos veces en un día por dos piezas del mismo
-> sistema que no se hablaban entre ellas.
+> No todo salió perfecto: tres veces se quedó dos minutos hablando con la
+> locución de una operadora. Lo arreglé esa misma tarde. El jueves lo cuento
+> entero, porque el fallo enseña más que el acierto.
 >
-> Lo primero fue arreglar la incoherencia. Lo segundo fue lo importante: el
-> filtro estaba mal.
+> Lo que me llevo: el sistema no me ha quitado las reuniones. Me ha quitado
+> todo lo que hay antes de la reunión. Y eso es justo lo que nadie hace en una
+> empresa de doce personas, porque nadie tiene tiempo.
 >
-> «No invierto nada en anuncios» no quiere decir «no tengo dinero». Quiere
-> decir que le llegan clientes por otro sitio. Recomendación, cartera, un local
-> bien puesto. Y si pide un diagnóstico es porque algo se le está escapando,
-> aunque no pague por captar.
->
-> Ese mismo día quité el filtro. A quien no invierte también se le escribe y se
-> le llama. El correo de descarte ya no existe.
->
-> Lo que me queda: el filtro que pones para ahorrar tiempo acaba siendo el
-> sitio donde más clientes tiras. Y no te enteras, porque un descartado no se
-> queja. Este se quejó porque le llamamos por error.
->
-> ¿Qué filtro tienes en tu proceso que nadie ha vuelto a revisar desde que se
-> puso? Cuéntamelo abajo. Los filtros ajenos son los que mejor se ven.
+> ¿Cuántas de tus reuniones de esta semana las consiguió alguien que no eras
+> tú?
 
 ---
 
-## Instagram · Martes 22 · No hagas esto / haz esto · fondo crema
+## Instagram · Martes 22 · Antes de gastar más (lista rápida) · fondo crema
 
-*Molde `content/infografias/2026-09-10/no-hagas.html`. Dolor nuevo en el mapa de
-Instagram: el filtro de cualificación que tira clientes. Sin foto generada.*
+*Molde `lista-rapida.html`. Pilar: experimento real. Lo que el sistema hizo bien
+el lunes, en cinco líneas. Dato: bitácora del 21-sep y recorrido de activación
+V2. Fichero: `content/infografias/2026-09-21/lista-sistema.html`. CTA:
+conversación.*
 
-**Kicker:** No hagas esto / haz esto · captación
-**Título:** El filtro que te ahorra tiempo te está costando clientes.
+**Kicker:** Lista rápida · lo que hizo mi sistema el lunes
+**Título:** Cinco cosas que pasaron en mi empresa sin que yo tocara nada.
 
-| No hagas esto | Haz esto |
-|---|---|
-| Descartar al que marca «no invierto en anuncios» | Preguntarle cómo le llegan hoy los clientes |
-| Un correo automático de «todavía no encajas» | Una llamada de dos minutos antes de decidir |
-| Filtrar por lo que gasta | Filtrar por lo que se le escapa |
-| Dar por bueno el filtro porque nadie protesta | Mirar cada mes a quién dejó fuera |
+1. **Cada contacto recibió un WhatsApp al minuto.** Con sus propias palabras del formulario, no una plantilla.
+2. **Un agente de voz hizo 24 llamadas.** Yo estaba en una reunión.
+3. **Tres citas entraron en el calendario.** Con enlace de videollamada y confirmación al cliente.
+4. **Cada llamada quedó en la ficha del CRM.** Resultado, resumen, grabación y transcripción.
+5. **Me llegó un correo por cada paso.** Leí, no vigilé.
 
-**Remate sobre regla naranja:** Me pasó esta semana en mi propia empresa. El
-correo de descarte salió y la llamada también. El descartado se quejó. Los
-otros nunca se quejan: se van. Quité el filtro ese mismo día.
+**Remate sobre regla naranja:** Hace un mes todo esto era yo, cuando me acordaba. El sistema no me quitó las reuniones. Me quitó lo que hay antes.
 
-**Texto del pie (caption):** ¿Qué filtro tienes puesto que nadie revisa desde
-que se puso? El formulario que exige presupuesto, el comercial que decide por
-el nombre, el correo automático. Dime cuál en comentarios.
+**Texto del pie (caption):** ¿Cuántas de estas cinco pasan en tu empresa sin ti? Cuenta y dímelo en comentarios. Si son menos de tres, ya sabes dónde se va tu semana.
 
 **Firma:** @maikel.echevarria · QUALIVO.IO
 
 ---
 
-## LinkedIn · Miércoles 23 · Banderas rojas · «Tres banderas rojas de dependencia del dueño. Las tres las tenía yo.»
+## LinkedIn · Miércoles 23 · Buscando la fuga · «Tres cosas de mi empresa que ya no dependen de mí»
 
 *Serie: Banderas rojas por fuga. Fuga: dependencia del dueño (la única sin
 pieza publicada). Datos: bitácora del 18 y 21-sep, y el comentario del rescate
@@ -194,10 +197,9 @@ de leads en el código (14-sep). No repite el test de dependencia del 17-sep: es
 pregunta, este cuenta lo que me pasó a mí.*
 
 > Llevo dos semanas metiendo agentes en mi propio sistema comercial para que
-> nada dependa de que yo me acuerde.
->
-> Esta semana conté las banderas rojas de dependencia del dueño. En mi empresa.
-> Salieron tres.
+> nada dependa de que yo me acuerde. Esta semana conté qué cosas ya no
+> dependen de mí. Tres. Y para cada una, lo que había antes, que es lo que
+> veo en casi todas las empresas de 5 a 50 personas.
 >
 > **Roja: el teléfono de la empresa es mi móvil.**
 > Mi agente de voz hizo 24 llamadas el lunes. Las 24 salieron desde mi número
@@ -217,15 +219,17 @@ pregunta, este cuenta lo que me pasó a mí.*
 > que dijo el cliente, pero el criterio de qué proponer primero sigue pasando
 > por mí. Esa es la que más va a costar cambiar.
 >
-> Las verdes, que son lo que he montado para cada una:
+> Y lo que hay ahora, que es la parte buena:
 >
-> **Verde:** un número de empresa como origen, pendiente del operador. Mientras
-> tanto, el sistema sabe desde qué número sale cada llamada y lo deja escrito.
-> **Verde:** un rescate cada diez minutos que compara lo que hay en la
-> plataforma de anuncios con lo que hay en el CRM y crea lo que falte. Ya no
-> hace falta que yo mire.
-> **Verde:** cada llamada me llega por correo con resumen y grabación. Yo leo,
-> no vigilo.
+> **Verde:** ningún contacto se pierde en silencio. Un rescate cada diez
+> minutos compara lo que hay en la plataforma de anuncios con lo que hay en el
+> CRM y crea lo que falte. Desde el 19 no hace falta que yo mire.
+> **Verde:** cada llamada me llega por correo con resumen y grabación, y queda
+> en la ficha del contacto. Yo leo, no vigilo. El lunes fueron 24 y no hice
+> ninguna.
+> **Verde:** el primer borrador de cada propuesta lo escribe un agente con lo
+> que el cliente dijo en la reunión, con sus palabras entre comillas. Yo pongo
+> el criterio de qué va primero. Lo demás ya no es mío.
 >
 > La prueba de dependencia no es si trabajas mucho. Es cuántas cosas de tu
 > proceso comercial se paran, o se pierden en silencio, si tú no miras.
@@ -361,70 +365,80 @@ decisión 3.*
 
 ---
 
-## LinkedIn · Viernes 25 · La tesis contraria · «Contestar rápido no es contestar bien»
+## LinkedIn · Viernes 25 · Construyendo Qualivo · «Le pedí a un agente que repasara mi propio CRM. Encontró 34.500 € parados»
 
-*Serie: la tesis contraria. Fuga: conversión. Datos: bitácora del 21-sep
-(llamada a las 9:00 en punto a quien pidió información el domingo) y el
-histórico de la cuenta de anuncios (fin de semana a 8 € de coste por contacto,
-entre semana a 22 €). Cambio de cadencia propuesto, todavía sin aplicar.*
+*Serie: Construyendo Qualivo. Pilar: experimento real. Dato propio
+sorprendente, el formato del radar que mejor rinde y que llevaba desde el
+10-sep en cola sin escribirse. Fuga: seguimiento. Datos: propuesta de valor V1
+§5 y §10 (25 oportunidades, 34.500 € declarados, primera pasada) y estrategia
+de contenidos §4 (quince entre 57 y 63 días). CTA: diagnóstico.*
 
-> Todo el mundo repite que hay que contestar en cinco minutos. Yo también lo
-> repetía. Esta semana mi propio sistema me enseñó la parte que falta.
+> Le pedí a un agente que repasara mi propio CRM. En su primera pasada encontró
+> 25 oportunidades paradas con 34.500 euros declarados.
 >
-> Contestar rápido no es contestar bien.
+> Quince llevaban entre 57 y 63 días sin que nadie volviera a tocarlas.
 >
-> En mi cuenta de anuncios el fin de semana capta a la mitad de precio: 8 euros
-> por contacto frente a 22 entre semana. Así que la gente que más barato me
-> llega pide información un domingo por la noche, en el sofá.
+> Nadie era yo. Lo digo porque es lo incómodo de la historia y porque es la
+> parte que le pasa a todo el mundo.
 >
-> Mi agente de voz no llama los domingos. Bien. Llama el lunes a las 9:00 en
-> punto. Y el lunes a las 9:00 en punto una persona me dijo, literal: «te va a
-> venir fatal ahora».
+> El agente no hace magia. Tiene una lista de reglas por etapa y por días:
+> si pidió precio y lleva más de tres días sin respuesta, si tuvo reunión y no
+> hay propuesta a la semana, si la propuesta salió y en diez días nadie ha
+> vuelto. Recorre todos los tratos, aplica las reglas y deja una tarea por
+> cada uno con el siguiente movimiento propuesto y el mensaje preparado.
 >
-> Tenía razón. A las nueve en punto de un lunes nadie quiere hablar de por dónde
-> se le escapa el negocio. Está entrando por la puerta.
+> Lo que hizo por mí en una pasada fue lo que yo llevaba dos meses sin hacer:
+> mirar la lista entera. No la parte que tenía en la cabeza. La entera.
 >
-> Había cumplido la regla de la velocidad y me había saltado la del sentido
-> común. Rapidez sin criterio es una forma más eficiente de molestar.
+> Y aquí va lo que enseña. Esas 25 oportunidades ya estaban pagadas. Costó
+> atraerlas, atenderlas y calcular el precio. No se perdieron por un «no».
+> Se estaban perdiendo por un olvido. Ningún anuncio nuevo iba a arreglar eso.
 >
-> Lo que cambia: a quien entra en fin de semana se le escribe el domingo mismo
-> diciendo cuándo le llamaremos, y la llamada del lunes sale a partir de las
-> diez, o a la hora que él diga. Sigue siendo rápido. Deja de ser inoportuno.
+> Es la misma escena que vi en un despacho que hizo 6,45 veces lo invertido
+> sin captar un contacto más, solo persiguiendo bien lo que ya tenía.
 >
-> El siguiente paso de tu proceso, ¿lo decide un cronómetro o lo decide lo que
-> sabes del cliente? Me interesa leer cómo lo tienes montado.
+> Antes de subir el presupuesto de anuncios, abre tu CRM y cuenta cuántas
+> oportunidades llevan más de 30 días sin siguiente paso. Ese número es tu
+> fuga número uno.
+>
+> Si quieres que la miremos juntos, con tu CRM delante, son quince minutos:
+> qualivo.io/diagnostico
 
 ---
 
-## Instagram · Sábado 26 · Lista rápida · fondo crema
+## Instagram · Sábado 26 · Antes de gastar más (no hagas / haz) · fondo tinta
 
-*Molde `content/infografias/2026-09-10/lista-rapida.html`. Fracaso propio contado
-entero, en formato de reconocimiento: cada fallo del agente es un fallo que el
-lector ha oído en su oficina. Dato: bitácora del 21-sep, cinco puntos reales.*
+*Molde `no-hagas.html`. Pilar: fuga comercial. La historia del filtro, contada
+como mejora: qué hacía antes y qué hace ahora. Ya renderizada en
+`content/infografias/2026-09-21/no-hagas-filtro.png` (fondo crema; se pasa a
+tinta para alternar con el martes). CTA: recurso.*
 
-**Kicker:** Lista rápida · lo que salió mal esta semana
-**Título:** Cinco fallos de mi agente de voz. Los cinco los hace también un comercial.
+**Kicker:** No hagas esto / haz esto · captación
+**Título:** El filtro que te ahorra tiempo te está costando clientes.
 
-1. **Leyó la opción del formulario tal cual.** «Marcaste “no lo sé”, eso es lo
-   que quiero». Como quien lee la ficha delante del cliente.
-2. **Ofreció dos huecos del mismo día sin preguntar.** «No puedo a ninguna de
-   las dos». Primero se pregunta mañana o tarde.
-3. **Dijo que la cita era por teléfono.** Era videollamada. El cliente se
-   presentó preparado para otra cosa.
-4. **A la cuarta llamada no explicó de qué iba.** «¿De qué tema me habla?» y
-   colgó. Sin contexto, el reintento es una molestia.
-5. **Pidió confirmar el dominio del correo.** Cincuenta segundos de silencio al
-   otro lado. Preguntas que no hacen falta, no se hacen.
+| No hagas esto | Haz esto |
+|---|---|
+| Descartar al que marca «no invierto en anuncios» | Preguntarle cómo le llegan hoy los clientes |
+| Un correo automático de «todavía no encajas» | Una llamada de dos minutos antes de decidir |
+| Filtrar por lo que gasta | Filtrar por lo que se le escapa |
+| Dar por bueno el filtro porque nadie protesta | Mirar cada mes a quién dejó fuera |
 
-**Remate sobre regla naranja:** Los cinco son de guion, no de inteligencia
-artificial. Los arreglé el mismo día porque oigo todas las llamadas. ¿Quién
-oye las de tu equipo?
+**Remate sobre regla naranja:** Me pasó esta semana en mi propia empresa. Lo
+quité ese mismo día: ahora a quien no invierte también se le escribe y se le
+llama, y lo mido aparte.
 
-**Texto del pie (caption):** Los cinco están en una lista de siete cosas que
-reviso antes de subir presupuesto o contratar a nadie. Escribe FUGA y te la
-mando por mensaje.
+**Texto del pie (caption):** Es la cuarta de siete cosas que reviso antes de
+gastar un euro más en captación. Escribe FUGA y te mando la lista.
 
 **Firma:** @maikel.echevarria · QUALIVO.IO
+
+---
+
+## Reserva (no entra esta semana)
+
+**Lista rápida «Cinco fallos de mi agente de voz»** (`lista-fallos.html`, ya
+renderizada). Es buena pieza, pero con el Sin humo del jueves y el fallo del
+plantón ya hay dos piezas de fallo. Entra la semana 40 detrás de una positiva.
 
 ---
 

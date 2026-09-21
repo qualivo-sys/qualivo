@@ -24,6 +24,9 @@ llevar puesto siempre:
 - **CTA:** 50 % conversación, 30 % recurso, 20 % diagnóstico. No cada pieza es
   un anuncio.
 - **Regla del «me pasa a mí»** antes de aprobar cualquier pieza.
+- **Primero lo que el sistema hace bien, con dato; después el fallo, corto**
+  (Maikel, 21-sep noche). El fallo es la prueba de honestidad, no la tesis.
+  Nunca una semana con más piezas de fallo que de acierto.
 - **Proceso semanal:** revisar lo ocurrido, sacar 10-20 aprendizajes,
   agruparlos, elegir 3-5 ideas, producir hook, ángulo, guion, formato y CTA.
 - **La misión:** convertir el trabajo real de Qualivo en una biblioteca pública

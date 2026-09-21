@@ -80,3 +80,15 @@ ser un generador de posts y pasa a ser el sistema editorial de Qualivo.
   grabe: el guion está listo.
 - El recurso se entrega por mensaje directo, a mano o con el agente de WhatsApp.
   Hay que decidir quién contesta a los «FUGA» cuando se levante la pausa.
+
+### Lunes 21 · más tarde · corrección de Maikel: «hay que mostrar cosas positivas que hace el sistema»
+
+Tenía razón: de siete piezas, cinco abrían por un fallo. Cambiado: lunes
+«tres reuniones que agendó un agente mientras yo estaba en otra», martes lista
+rápida de cinco cosas que hizo el sistema sin mí (infografía nueva,
+`lista-sistema.html`), miércoles «tres cosas que ya no dependen de mí» (verdes
+primero), viernes el agente que encontró 34.500 € parados en mi CRM (el dato
+propio sorprendente que llevaba en cola desde el 10-sep). La pieza de la
+velocidad y la lista de cinco fallos pasan a reserva. Regla escrita en el
+brief y en el prompt: primero lo que funciona con dato, después el fallo,
+corto. Nunca más piezas de fallo que de acierto en una semana.
