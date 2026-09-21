@@ -52,10 +52,16 @@ PORTAL = re.compile(
     r"einforma|axesor|iberinform|empresite)\b", re.I)
 
 # Grandes superficies y utilities que tambien instalan clima. No son SAT.
+#
+# electro depot entro en la lista despues de verlo colado como primera fila del
+# primer CSV, con 1451 resenas y una web de localizador de tiendas. Los filtros
+# de cadena solo cogen lo que alguien ha visto antes, asi que esta lista crece
+# mirando la salida, no adivinando.
 GRANDE = re.compile(
     r"\b(leroy\s*merlin|bricodepot|brico\s*depot|bricomart|media\s*markt|worten|"
     r"el\s*corte\s*ingles|carrefour|endesa|iberdrola|naturgy|repsol|holaluz|"
-    r"totalenergies|securitas\s*direct)\b", re.I)
+    r"totalenergies|securitas\s*direct|electro\s*depot|electrodepot|conforama|"
+    r"ikea|pc\s*componentes|pccomponentes|amazon|milar|tien\s*21|expert)\b", re.I)
 
 
 def descarta(nombre, dominio):
@@ -140,6 +146,11 @@ if __name__ == "__main__":
     with cf.ThreadPoolExecutor(12) as ex:
         leidos = list(ex.map(mira, cand))
     caidas = sum(1 for r in leidos if not r["vivo"])
+
+    # Se guarda el crudo leido antes de filtrar correos. Media hora de lectura
+    # de webs no se repite para contestar "y esto por que lo tiraste".
+    json.dump(leidos, open(os.path.join(DATOS, "aire_leidos.json"), "w"),
+              ensure_ascii=False, indent=1)
 
     # 4. el filtro de correos, que es el que quita el correo de la agencia
     buenos, tirados = [], Counter()
