@@ -31,6 +31,21 @@ function minutosDesdeInicio(contacto) {
   return A.minutosDesde(iso);
 }
 
+// Sello de hora AAAAMMDDHHMM en UTC, para etiquetas act-voz1-h-<sello>.
+function selloHora(fecha) {
+  return new Date(fecha || Date.now()).toISOString().replace(/[-:T]/g, '').slice(0, 12);
+}
+
+// Minutos desde la etiqueta <prefijo><sello>. Sin etiqueta (leads anteriores al
+// 21-sep-2026), devuelve un número grande para no bloquear la cadencia.
+function minutosDesdeEtiqueta(contacto, prefijo) {
+  const t = (contacto.tags || []).map(String).filter(function (x) { return x.indexOf(prefijo) === 0 && /\d{12}$/.test(x); })[0];
+  if (!t) return 1e9;
+  const s = t.slice(-12);
+  const iso = s.slice(0, 4) + '-' + s.slice(4, 6) + '-' + s.slice(6, 8) + 'T' + s.slice(8, 10) + ':' + s.slice(10, 12) + ':00Z';
+  return A.minutosDesde(iso);
+}
+
 function esLeadForm(contacto) {
   return A.tiene(contacto, 'leadform');
 }
@@ -46,7 +61,10 @@ function siguientePaso(contacto, minutos) {
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
   if (voz && !hay('act-voz1') && minutos >= esperaVoz1) return { tipo: 'voz1' };
   if (!hay('act-wa2') && (hay('act-voz1') || !voz) && minutos >= 120) return { tipo: 'wa2' };
-  if (voz && !hay('act-voz2') && hay('act-wa2') && minutos >= 60 * 24) return { tipo: 'voz2' };
+  // La segunda llamada espera 24 h desde la entrada y, además, al menos 4 h
+  // desde la primera llamada: si el lead entró el viernes y la primera llamada
+  // fue el lunes a las 9:00, la segunda no puede ser a las 9:20.
+  if (voz && !hay('act-voz2') && hay('act-wa2') && minutos >= 60 * 24 && minutosDesdeEtiqueta(contacto, 'act-voz1-h-') >= 4 * 60) return { tipo: 'voz2' };
 
   for (let i = 0; i < M.EMAILS.length; i++) {
     const e = M.EMAILS[i];
@@ -376,7 +394,9 @@ module.exports = async function handler(req, res) {
           }
         });
         if (r.ok) {
-          await A.etiquetar(c.id, ['act-' + paso.tipo]);
+          // La hora de la llamada va en una etiqueta para que la segunda no salga
+          // veinte minutos después de la primera (pasó el 21-sep a las 9:20).
+          await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-' + paso.tipo + '-h-' + selloHora()]);
           await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
             accion: 'Raquel le está llamando (' + paso.tipo + ')', texto: '', origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
           resumen.voz++; hechos++;
