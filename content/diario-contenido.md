@@ -188,3 +188,25 @@ del contacto, en estado «En revisión», con las ocho láminas subidas, el copy
 de cada una, el pie de foto y las fuentes. Regla: cuando haya tres piezas en
 «En revisión», se lanza el revisor. Prompt también en el repo:
 `content/agentes/prompt-agente-revisor.md`.
+
+### Lunes 21 · noche · primera revisión de Maikel y Qualivo Master Reviewer
+
+Maikel revisó el carrusel en Notion. Lo que funciona: territorio Qualivo,
+historia clara, la prueba propia. Lo que cambia: la portada prometía «te
+cuesta 7 veces más», que no es lo que dice el estudio; ahora «contestar en la
+primera hora multiplica casi por 7 la probabilidad de cualificar al
+contacto». Lámina 3 con la formulación exacta. Lámina 4 «responde mientras la
+intención está caliente». Lámina 5 «¿Y si eso no dependiera de una persona?»
+(la IA como solución, no como protagonista). Lámina 6 con los números enormes:
+24 llamadas, 3 citas, 0 minutos míos. Lámina 7 «antes de gastar más en
+conseguir contactos, mira cuánto tardas en atender los que ya tienes». Cierre
+«guarda esto y mide el tiempo real de respuesta de tu último contacto».
+Regla nueva: un titular no puede decir más que el estudio; si alguien puede
+discutir el dato en comentarios, el dato está mal contado.
+
+El revisor pasa a ser el «Qualivo Master Reviewer» que dictó Maikel (doce
+ángulos, formato de respuesta fijo, veredicto PUBLICAR / PUBLICAR CON CAMBIOS
+/ REHACER). Sustituye al prompt anterior en Notion y en el repo
+(`content/agentes/prompt-qualivo-master-reviewer.md`). La base de revisión
+tiene ahora columnas Veredicto y Versión. La pieza vuelve a «En revisión»
+como versión 2.

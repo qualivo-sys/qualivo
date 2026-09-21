@@ -2,22 +2,22 @@
 
 ## Instagram
 
-Tardar una hora en contestar te cuesta 7 veces más de lo que crees.
+Contestar en la primera hora multiplica casi por 7 la probabilidad de cualificar al contacto. Y casi nadie llega.
 
-Harvard mandó un contacto de prueba a 2.241 empresas y cronometró. Solo el 37 % contestó en la primera hora. El 23 % no contestó nunca. Y las que contestaron en la primera hora cualificaron al contacto siete veces más.
+Harvard mandó un contacto de prueba a 2.241 empresas y cronometró. Solo el 37 % contestó en la primera hora. El 23 % no contestó nunca. Las que respondían en la primera hora tenían casi siete veces más probabilidad de cualificar al contacto.
 
-Un buen comercial ya lo sabe: contesta antes de que la persona escriba al siguiente. Un comercial IA hace lo mismo sin que nadie se acuerde: WhatsApp al minuto, llamada a los veinte. El lunes, 24 llamadas y 3 citas mientras yo estaba en otra reunión.
+Un buen comercial responde mientras la intención está caliente. ¿Y si eso no dependiera de una persona? Un comercial IA: WhatsApp al minuto, llamada si no contesta, cita en la agenda. El lunes, 24 llamadas y 3 citas mientras yo estaba en otra reunión.
 
-Guárdalo para el día que digas «ya le contestaré». Y dime abajo cuánto tardó tu último.
+Antes de gastar más en conseguir contactos, mira cuánto tardas en atender los que ya tienes. Guarda esto y mide el tiempo real de respuesta de tu último contacto. ¿Cuánto tardaste? Dímelo abajo.
 
 #ventas #seguimientocomercial #pymes #automatizacion #agentesdeia
 
 ## LinkedIn (texto, el carrusel como documento)
 
-Tardar una hora en contestar te cuesta 7 veces más de lo que crees.
+Contestar en la primera hora multiplica casi por 7 la probabilidad de cualificar al contacto. Y casi nadie llega.
 
-Harvard Business Review mandó un contacto de prueba a 2.241 empresas y cronometró. El 37 % contestó en la primera hora. El 23 % no contestó nunca. Las que contestaron en la primera hora tenían siete veces más probabilidad de cualificar al contacto.
+Harvard Business Review mandó un contacto de prueba a 2.241 empresas y cronometró. El 37 % contestó en la primera hora. El 23 % no contestó nunca. Las que respondían en la primera hora tenían casi siete veces más probabilidad de cualificar al contacto.
 
-Un buen comercial contesta antes de que la persona escriba al siguiente. Un comercial IA hace exactamente eso, sin depender de que alguien se acuerde: WhatsApp al minuto con sus palabras, llamada a los veinte si no contesta. El lunes: 24 llamadas, 3 citas, y yo en otra reunión.
+Un buen comercial responde mientras la intención está caliente. ¿Y si eso no dependiera de una persona? Un comercial IA hace lo mismo cada vez: WhatsApp al minuto con sus palabras, llamada si no contesta, cita en la agenda. El lunes: 24 llamadas, 3 citas, y yo en otra reunión.
 
-Mide cuánto tardaste con el último. El último, no la media. Dímelo abajo.
+Antes de gastar más en conseguir contactos, mira cuánto tardas en atender los que ya tienes. Ahí puede estar una de tus mayores fugas. ¿Cuánto tardaste con el último? Dímelo abajo.
