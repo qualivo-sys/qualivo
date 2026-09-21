@@ -57,7 +57,10 @@ CIUDADES = [
     "Alicante, Spain",
 ]
 
-POR_BUSQUEDA = 40
+# 30 y no 40 por presupuesto: el 21-sep la bolsa de Apify iba por 6,15 de 19 y
+# es compartida con la captacion de Qualivo. 5 terminos x 8 ciudades x 30 son
+# unos 6 dolares. Si sobra margen se sube.
+POR_BUSQUEDA = 30
 
 
 def corre(termino, ciudad, maximo, tk):
