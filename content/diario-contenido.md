@@ -106,3 +106,15 @@ tarjeta Sin humo pasa a reserva. Carpeta:
 
 Duda escrita: el cliente podría reconocer su propia llamada aunque no haya
 nada que lo identifique. Recomiendo publicar; decide Maikel.
+
+### Lunes 21 · noche · «¿podemos hacerlo con Beatriz, una clínica?»
+
+El carrusel de la llamada de reformas no le convence: es un negocio pequeño
+fuera del ICP y la conversación es plana. Hecho el mismo molde con la clínica
+dental que entró el viernes 19 por la landing sin anuncio: la página, su
+WhatsApp real («no puedo bajar en el calendario»), el fallo arreglado antes de
+comer (11:18 y 12:02, commits del 19-sep), la reunión del lunes 13:30 y el
+remate. Carpeta `content/carruseles/2026-09-21-clinica-real/`. Faltan tres
+cosas que solo tiene Maikel: la frase de ella en la reunión (hueco amarillo en
+la lámina 5), su respuesta por WhatsApp (va resumida, no citada) y el permiso
+para nombre y clínica. El de reformas queda como reserva.
