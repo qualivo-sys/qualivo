@@ -5,23 +5,74 @@
 > hasta que Maikel lo levante por escrito. El blog no está afectado.
 > **Un dato real verificado por pieza.** Cada dato lleva su fuente en la tabla
 > del final. Ningún nombre de lead ni de empresa sin permiso escrito.
+>
+> **Revisado el 21-sep por la noche contra el brief de Maikel**
+> (`content/agentes/brief-head-of-content.md`): series madre, reparto de CTA
+> (50 % conversación, 30 % recurso, 20 % diagnóstico), aprendizajes de la
+> semana extraídos antes de elegir piezas, un recurso real detrás de «escribe
+> FUGA» y un guion de reel a cámara para la idea más fuerte.
+
+## Paso 1 y 2 del proceso semanal · lo que ha ocurrido y lo que enseña
+
+Sacado de la bitácora de Raquel, del código y de los borradores de la semana
+38. Agrupado como pide el brief. Marcadas con ★ las cinco que van a pieza.
+
+**Fuga**
+1. ★ El filtro «no invierte en anuncios» descartaba a gente que había pedido un diagnóstico. Un descartado no se queja: se va.
+2. ★ La velocidad sin criterio molesta: llamada a las 9:00 en punto del lunes al lead del domingo.
+3. Un correo de descarte y una llamada al mismo lead el mismo día: dos piezas del mismo sistema que no se hablan.
+4. El calendario con «3 días de antelación» contando fines de semana: un viernes por la tarde solo ofrecía hoy. Una regla razonable que cerraba la agenda.
+
+**Experimento**
+5. ★ 24 llamadas, 3 citas, 10 buzones, 4 sin conectar, 3 con locución de operadora (118 s cada una). Coste 1,65 $.
+6. ★ El plantón llamado a los 6 minutos se recupera: WhatsApp pidiendo otra hora 3 minutos después.
+7. La regla de 25 s de silencio, buena contra buzones, colgó a una recepcionista que estaba apuntando el recado.
+8. Los que no invierten entran ahora en cadencia con etiqueta propia (`sin-inversion`): en dos semanas sabremos si convierten peor o igual.
+
+**Caso (propio)**
+9. ★ Tres banderas de dependencia del dueño en mi propia empresa: el móvil personal como número de salida, el lead del 14-sep perdido hasta que miré el panel a mano, las propuestas hechas de noche.
+10. El operador rechazó tres veces dar de alta un número español: la solución rápida es siempre el móvil del dueño.
+
+**IA aplicada**
+11. Los cinco fallos del agente del 21-sep son de guion, no de modelo: leer literal la opción, dos huecos sin preguntar, «telefónica» por videollamada, reintento sin contexto, confirmar el dominio del correo.
+12. El rescate de leads cada 10 minutos existe porque un permiso caducado perdió el primer lead real de la campaña en silencio.
+13. Un agente que devuelve «recibido» con cuerpo vacío confirma citas que no existen (11-sep). Un sistema que falla en silencio es peor que uno que se cae.
+
+**Framework**
+14. Siete cosas que reviso antes de subir presupuesto (ya escrito: `content/recursos/antes-de-gastar-mas.md`).
+15. Qué número base medir la primera semana según la fuga (propuesta V1 §8). Pieza para más adelante.
+
+**Opinión (derivada de experiencia)**
+16. Regla de Maikel: «puede ser gente con dinero». El gasto en anuncios no mide el tamaño del negocio.
+17. Oír todas las llamadas cada tarde es lo que casi ninguna empresa hace con sus propios comerciales. Ahí está la ventaja, no en el agente.
+18. Contestar rápido es lo barato. Saber qué decir cuando contestan es lo caro.
+
+**Aprendizajes que NO puedo usar aún** (sin registro en el repositorio): la base antigua de 3.000 contactos con 200 útiles y las cinco reuniones del martes. Si Maikel confirma números, entran la semana 40.
+
+## Reparto de CTA de la semana (regla 50 / 30 / 20)
+
+| Pieza | CTA |
+|---|---|
+| Lun LinkedIn, Vie LinkedIn, Mar Instagram, Jue Instagram | Conversación (pregunta) |
+| Mié LinkedIn, Sáb Instagram | Recurso: «escribe FUGA» y se manda el checklist por mensaje |
+| Jue LinkedIn, Newsletter | Diagnóstico |
 
 ## La semana en una tabla
 
 | Día | Canal | Serie | Gancho | Dato real | Formato |
 |---|---|---|---|---|---|
-| Lun 21 | LinkedIn | Agentizando mi propia empresa | Mi sistema le dijo a un cliente que no encajaba. Y luego le llamó. | 24 llamadas el 21-sep; un lead recibió el correo de «fuera» y la llamada el mismo día; el filtro se quitó ese día | Texto largo, fracaso propio contado entero + decisión |
-| Mar 22 | Instagram | No hagas esto / haz esto | No descartes al que no invierte en anuncios | El filtro de «no invierto nada» tiraba leads; quitado el 21-sep | Infografía tipográfica 1080×1350, molde `no-hagas.html`, fondo crema |
-| Mié 23 | LinkedIn | Banderas rojas por fuga: dependencia del dueño | Tres banderas rojas de dependencia. Las tres las tenía yo. | 24 llamadas salieron desde mi móvil personal; el 14-sep un lead se perdió y nadie lo supo hasta que miré el panel a mano | Texto con lista roja/verde, un caso propio por bandera |
-| Jue 24 | LinkedIn | Agentizando mi propia empresa | Mi agente llamó seis minutos después del plantón. A los tres minutos escribieron para reprogramar. | 18-sep: cita 12:00, plantón, llamada 12:06 (59 s), WhatsApp a los 3 min; y la centralita que colgó con el recado a medias | Texto largo, un acierto y un fallo del mismo día |
-| Jue 24 | Instagram | Sin humo | Lo barato es llamar. Lo caro es saber cuándo colgar. | 24 llamadas, 3 citas, 3 veces 118 segundos hablando con la locución de una operadora | Tarjeta tipográfica (frase de realidad), fondo tinta |
+| Lun 21 | LinkedIn | Construyendo Qualivo (diario) | Mi sistema le dijo a un cliente que no encajaba. Y luego le llamó. | 24 llamadas el 21-sep; un lead recibió el correo de «fuera» y la llamada el mismo día; el filtro se quitó ese día | Texto largo, fracaso propio contado entero + decisión |
+| Mar 22 | Instagram | Antes de gastar más (no hagas / haz) | No descartes al que no invierte en anuncios | El filtro de «no invierto nada» tiraba leads; quitado el 21-sep | Infografía tipográfica 1080×1350, molde `no-hagas.html`, fondo crema |
+| Mié 23 | LinkedIn | Buscando la fuga (banderas rojas: dependencia) | Tres banderas rojas de dependencia. Las tres las tenía yo. | 24 llamadas salieron desde mi móvil personal; el 14-sep un lead se perdió y nadie lo supo hasta que miré el panel a mano | Texto con lista roja/verde, un caso propio por bandera |
+| Jue 24 | LinkedIn | Construyendo Qualivo (diario) | Mi agente llamó seis minutos después del plantón. A los tres minutos escribieron para reprogramar. | 18-sep: cita 12:00, plantón, llamada 12:06 (59 s), WhatsApp a los 3 min; y la centralita que colgó con el recado a medias | Texto largo, un acierto y un fallo del mismo día |
+| Jue 24 | Instagram | Buscando la fuga (Sin humo) | Lo barato es llamar. Lo caro es saber cuándo colgar. | 24 llamadas, 3 citas, 3 veces 118 segundos hablando con la locución de una operadora | Tarjeta tipográfica (frase de realidad), fondo tinta |
 | Jue 24 | Newsletter | Capítulo 1 del diario | 24 llamadas, 3 citas y 118 segundos con una operadora | Los mismos del jueves de Instagram, contados enteros | 430 palabras, un dato, un fallo, remate al diagnóstico |
-| Vie 25 | LinkedIn | La tesis contraria | Contestar rápido no es contestar bien. | Lunes 9:00 en punto, llamada al lead del domingo: «te va a venir fatal ahora». Fin de semana capta a la mitad de precio (8 € frente a 22 € de CPL en el histórico de la cuenta) | Una línea que duele + desarrollo corto |
-| Sáb 26 | Instagram | Lista rápida | Cinco fallos de mi agente de voz esta semana. Los cinco los hace también un comercial. | Cinco fallos reales de la bitácora del 21-sep | Infografía tipográfica, molde `lista-rapida.html`, fondo crema |
+| Vie 25 | LinkedIn | Experimento de la semana (hook contrario) | Contestar rápido no es contestar bien. | Lunes 9:00 en punto, llamada al lead del domingo: «te va a venir fatal ahora». Fin de semana capta a la mitad de precio (8 € frente a 22 € de CPL en el histórico de la cuenta) | Una línea que duele + desarrollo corto |
+| Sáb 26 | Instagram | Antes de gastar más (lista rápida) | Cinco fallos de mi agente de voz esta semana. Los cinco los hace también un comercial. | Cinco fallos reales de la bitácora del 21-sep | Infografía tipográfica, molde `lista-rapida.html`, fondo crema |
 
-LinkedIn pesa más: cuatro piezas frente a tres. Todas las de LinkedIn firman
-Maikel en primera persona y terminan en qualivo.io/diagnostico. Las de Instagram
-rematan con lo que hacemos y firman @maikel.echevarria y QUALIVO.IO.
+LinkedIn pesa más: cuatro piezas frente a tres. Todas firman Maikel en primera
+persona. Solo dos terminan en el diagnóstico (jueves y newsletter); el resto
+termina en pregunta o en el recurso, como pide el brief.
 
 ---
 
@@ -104,10 +155,7 @@ entero + decisión drástica. Fuga: captación (el filtro). Dato: bitácora del
 > queja. Este se quejó porque le llamamos por error.
 >
 > ¿Qué filtro tienes en tu proceso que nadie ha vuelto a revisar desde que se
-> puso?
->
-> Yo miro eso en quince minutos, con tu sistema delante:
-> qualivo.io/diagnostico
+> puso? Cuéntamelo abajo. Los filtros ajenos son los que mejor se ven.
 
 ---
 
@@ -130,9 +178,9 @@ Instagram: el filtro de cualificación que tira clientes. Sin foto generada.*
 correo de descarte salió y la llamada también. El descartado se quejó. Los
 otros nunca se quejan: se van. Quité el filtro ese mismo día.
 
-**Pie:** Miro el proceso entero, de la captación a la venta, y meto un agente
-donde se está escapando el negocio. Sin rehacer nada. Diagnóstico de quince
-minutos en el enlace del perfil.
+**Texto del pie (caption):** ¿Qué filtro tienes puesto que nadie revisa desde
+que se puso? El formulario que exige presupuesto, el comercial que decide por
+el nombre, el correo automático. Dime cuál en comentarios.
 
 **Firma:** @maikel.echevarria · QUALIVO.IO
 
@@ -185,7 +233,8 @@ pregunta, este cuenta lo que me pasó a mí.*
 > ¿Cuántas de las tres tienes? Cuenta la del móvil, que casi todo el mundo la
 > tiene.
 >
-> Quince minutos y te digo dónde está la tuya: qualivo.io/diagnostico
+> Tengo una lista de siete cosas que reviso antes de gastar un euro más en
+> captación, con estas tres dentro. Si la quieres, escribe FUGA y te la mando.
 
 ---
 
@@ -253,8 +302,9 @@ Se produce en minutos, sin foto generada. Dato: bitácora del 21-sep.*
 **Remate en naranja:** Un comercial también se queda escuchando. La diferencia
 es que al agente le cambias la regla una vez y no vuelve a pasar.
 
-**Pie:** Meto agentes donde el negocio se escapa y los reviso cada día, llamada
-a llamada. Diagnóstico de quince minutos en el enlace del perfil.
+**Texto del pie (caption):** ¿Cuánto tiempo pierde tu equipo escuchando lo
+que no es un cliente? Buzones, centralitas, «llámame luego». Dímelo en
+comentarios, que es justo lo que estoy midiendo.
 
 ---
 
@@ -342,9 +392,7 @@ entre semana a 22 €). Cambio de cadencia propuesto, todavía sin aplicar.*
 > diez, o a la hora que él diga. Sigue siendo rápido. Deja de ser inoportuno.
 >
 > El siguiente paso de tu proceso, ¿lo decide un cronómetro o lo decide lo que
-> sabes del cliente?
->
-> Miro eso en quince minutos, con tu sistema delante: qualivo.io/diagnostico
+> sabes del cliente? Me interesa leer cómo lo tienes montado.
 
 ---
 
@@ -372,12 +420,42 @@ lector ha oído en su oficina. Dato: bitácora del 21-sep, cinco puntos reales.*
 artificial. Los arreglé el mismo día porque oigo todas las llamadas. ¿Quién
 oye las de tu equipo?
 
-**Pie:** Meto agentes donde el negocio se escapa y los reviso llamada a
-llamada. Diagnóstico de quince minutos en el enlace del perfil.
+**Texto del pie (caption):** Los cinco están en una lista de siete cosas que
+reviso antes de subir presupuesto o contratar a nadie. Escribe FUGA y te la
+mando por mensaje.
 
 **Firma:** @maikel.echevarria · QUALIVO.IO
 
 ---
+
+## Reel para grabar a cámara · la idea más fuerte de la semana
+
+*Formato preferente del brief: Maikel a cámara, 45-60 s. Sin producción: móvil,
+luz de ventana, un plano. Misma historia que el lunes, contada en voz alta.
+Mezcla de CTA: conversación.*
+
+> **(0-5 s, a cámara, sin saludo)** Esta semana mi sistema le dijo a un cliente
+> que no encajaba. Y luego le llamó.
+>
+> **(5-20 s)** En el formulario pregunto cuánto invierte en captar clientes.
+> Quien marcaba «nada» recibía un correo educado diciendo que aún no
+> encajábamos. Pero la llamada salió igual. Y el hombre le dijo a mi agente:
+> «me ha llegado un correo de que esto no me interesaba».
+>
+> **(20-35 s)** Dos piezas del mismo sistema que no se hablaban. Eso fue lo
+> fácil de arreglar. Lo difícil fue admitir que el filtro estaba mal. Que no
+> invierta en anuncios no quiere decir que no tenga dinero. Quiere decir que le
+> llegan clientes por otro sitio.
+>
+> **(35-50 s)** Lo quité ese mismo día. Y me quedé pensando en cuántos filtros
+> hay en las empresas que nadie ha vuelto a revisar desde que se pusieron. El
+> descartado no se queja. Se va.
+>
+> **(50-58 s, cierre)** ¿Qué filtro tienes tú? Dímelo en comentarios, que los
+> ajenos se ven mejor que los propios.
+
+Rótulos en pantalla: «24 llamadas» · «un correo de descarte + una llamada al
+mismo lead» · «filtro quitado el mismo día».
 
 ## Historias de Instagram, los días de pieza
 

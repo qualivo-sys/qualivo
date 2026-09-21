@@ -49,3 +49,34 @@ newsletter nativa de LinkedIn), publicar coste y herramientas del sistema propio
 preparar la infografía del martes en HTML sobre el molde `no-hagas.html` y
 revisar la bitácora de Raquel por si las reuniones del martes dejan material
 para el lunes 28.
+
+### Lunes 21 · noche · llega el brief de Maikel
+
+**Lo que ha pasado.** Maikel ha entregado el brief del Head of Content (papel,
+posicionamiento sobre el recorrido de diez pasos, cinco pilares con peso, cinco
+series madre, reparto de CTA 50/30/20, proceso semanal en seis pasos y el modo
+de trabajo diario: «¿qué ha ocurrido esta semana que pueda enseñar?» antes que
+«¿qué publico hoy?»). Dice que esa última parte es la clave: el agente deja de
+ser un generador de posts y pasa a ser el sistema editorial de Qualivo.
+
+**Hecho.**
+- `content/agentes/brief-head-of-content.md`: el brief entero, tal cual, con una
+  tabla final de cómo convive con lo anterior (CTA, recursos, Maikel a cámara,
+  series, voz, pausa, datos).
+- Prompt maestro y skill `sistema-contenidos` apuntan al brief como documento
+  que manda.
+- `content/recursos/antes-de-gastar-mas.md`: el primer recurso real, siete
+  preguntas con datos propios, para que «escribe FUGA» tenga algo detrás.
+- Plan de la semana 39 revisado: 18 aprendizajes extraídos y agrupados (paso 2
+  del proceso), series madre en la tabla, CTA repartido (4 conversación, 2
+  recurso, 2 diagnóstico), guion de reel de 58 s a cámara con la historia del
+  filtro.
+
+**Dudas escritas para Maikel.**
+- Voz: sigo con la primera persona de Maikel en redes (el radar lo respalda).
+  El brief usa «nosotros» en los ejemplos. Si prefiere el «nosotros», se cambia.
+- Reel a cámara: el contrabrief del 25-ago decía «nada de gente a cámara». El
+  brief lo pone como formato preferente. Aplico el brief. Necesita que Maikel
+  grabe: el guion está listo.
+- El recurso se entrega por mensaje directo, a mano o con el agente de WhatsApp.
+  Hay que decidir quién contesta a los «FUGA» cuando se levante la pausa.

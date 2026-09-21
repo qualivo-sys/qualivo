@@ -5,6 +5,19 @@ description: Sistema maestro de contenidos de Qualivo. Cargar SIEMPRE antes de i
 
 # Sistema de contenidos de Qualivo — puertas obligatorias
 
+## PUERTA DE ENTRADA · El brief de Maikel del 21-sep manda sobre todo
+
+**Leer primero `content/agentes/brief-head-of-content.md`.** Es el brief del
+Head of Content dictado por Maikel y manda sobre este documento, sobre el
+prompt maestro y sobre las estrategias del 10-sep en lo que diga distinto.
+Resumen: no empezar por «qué publico hoy» sino por «qué ha ocurrido esta
+semana que pueda enseñar» · cinco pilares con peso (fugas 35 %, experimentos
+30 %, auditorías 20 %, IA aplicada 10 %, frameworks 5 %) · cinco series madre
+(Buscando la fuga, Construyendo Qualivo, Experimento de la semana, Antes de
+gastar más, Agentizando una fuga) · CTA 50 % conversación, 30 % recurso, 20 %
+diagnóstico · regla del «me pasa a mí» · nunca una experiencia inventada.
+La tabla final del brief dice cómo convive con lo de abajo.
+
 ## PUERTA CERO · La propuesta de valor manda (10 sep 2026)
 
 **Antes que cualquier otra cosa de este documento, leer
