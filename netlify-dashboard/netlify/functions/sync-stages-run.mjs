@@ -6,6 +6,6 @@ export default async (req) => {
   if (!process.env.DASHBOARD_PASSWORD || pw !== process.env.DASHBOARD_PASSWORD) return new Response('{"error":"unauthorized"}', { status: 401, headers: { 'content-type': 'application/json' } });
   const res = u.searchParams.get('backlog') === '1'
     ? await runBacklog({ apply: u.searchParams.get('apply') === '1', max: Number(u.searchParams.get('max') || 40), slice: Number(u.searchParams.get('slice') || 0) })
-    : await runSync({ apply: u.searchParams.get('apply') === '1', max: Number(u.searchParams.get('max') || 150), hours: u.searchParams.get('full') === '1' ? 0 : Number(u.searchParams.get('hours') || 48) });
+    : await runSync({ apply: u.searchParams.get('apply') === '1', max: Number(u.searchParams.get('max') || 150), budgetMs: Number(u.searchParams.get('budget') || 8500) });
   return new Response(JSON.stringify(res, null, 1), { headers: { 'content-type': 'application/json' } });
 };
