@@ -698,3 +698,43 @@ España (62 €, 3,1 % del total) sin tocar el tráfico español. La segmentaci�
 `PRESENCE_OR_INTEREST` con exclusión por `PRESENCE`, que excluye por ubicación física.
 Nota: Dubái y Dublín no aparecen en Google Ads como clics de pago; GA4 geolocaliza por IP y
 una VPN o una IP corporativa los desplaza. Eran 2 usuarios de ~700.
+
+## Día 22 (21-09, lunes) — recta final: sobra presupuesto y perdemos por RANGO, no por caja
+Acumulado **1.601,47 € (80 %), 32 registros, CPL 50,05 €** (Search 30 reg. / 1.351,29 €;
+PMax 2 / 144,07 €; DG 0 / 106,11 €). **Quedan 398,53 € y 3,5 días** (21, 22, 23 y la mañana
+del 24). Al ritmo actual (81,22 €/día) se quedarían sin gastar ~115 €.
+
+**Por día:** 15-09 95,75 €/4 reg · 16-09 113,95 €/2 · 17-09 104,13 €/0 · 18-09 80,93 €/3 ·
+19-09 **8,45 €**/0 · 20-09 **11,82 €**/1 · 21-09 (08:58) 13,18 €/0.
+
+**Diagnóstico del desplome del fin de semana:** no es falta de presupuesto. Cuota de impresión
+perdida **por presupuesto = 0 %** el 19 y el 20; **perdida por ranking = 80,6 % y 81,2 %**, con
+IS del 19 %. El modificador de sábado y domingo al 50 % (puesto el 14-09) bajó la puja
+(CPC 0,94 € frente a 1,65-2,03 € entre semana) y nos dejó fuera de las subastas. Entre semana
+sí topa presupuesto (perdida por caja 34 % el 16-09 y 34 % el 18-09), así que **subir
+presupuesto sí tiene efecto de lunes a miércoles**.
+
+**Móvil ha dado la vuelta — el criterio del 18-09 se cumple al revés.** Desde el −70 %:
+
+| Dispositivo | Clics | Coste | Registros | CPL | CVR |
+|---|---|---|---|---|---|
+| Escritorio | 184 | 385,35 € | 7 | 55,0 € | 3,8 % |
+| Móvil | 61 | 41,39 € | 3 | **13,8 €** | **4,9 %** |
+
+El 18-09 móvil hizo 2 de los 3 registros del día con 11,07 € de gasto. El acuerdo con Aída era
+excluir móvil si en 3 días no registraba: ha registrado, y es el segmento más barato de toda la
+campaña. **Propuesta: pasar el modificador de móvil de −70 % a −20 %.**
+
+**Aplicado hoy (freno, autónomo):** 9 negativas de eventos de la competencia y ferias ajenas
+que gastaban sin registrar — digimarcon, accenture, intellisys, techshow, e show, global fabric
+day, ifema, ai infra summit, industry x. Total **137 negativas** de campaña.
+
+**Pendiente de OK de Maikel (acelerar, no autónomo):**
+1. Presupuesto Search 81,22 → **130 €/día** para consumir los 398 € restantes en 21-23.
+2. Tope de CPC 3 → **4,50 €**: perdemos el 80 % de la cuota por ranking y no por caja.
+3. Móvil −70 % → **−20 %** (dato de arriba).
+4. Quitar el −50 % de sábado y domingo: ya no quedan fines de semana, no aplica.
+5. El 24-09 el gasto solo tiene sentido hasta el inicio del evento (9:00).
+
+Proyección: 398 € al CPL de los últimos 7 días (55 €) son ~7 registros más → **~39 totales**.
+Con el peso de móvil corregido puede quedar algo por encima.
