@@ -220,6 +220,37 @@ async function decidir(o) {
   return { accion: accion, texto: texto.trim(), detalle: detalle, ficha: ficha };
 }
 
+// Reenganche (Maikel, 21-sep): el lead contestó y luego se calló. Escribe UN
+// mensaje corto que retome la conversación donde se quedó, en su contexto.
+// No envía nada: devuelve { texto, motivo }. Lo llama api/_reenganche.js.
+// o: { contacto, mensajes (GHL), intento (1..3), dias }
+async function reenganchar(o) {
+  const ficha = await fichaDe(o.contacto);
+  let huecos = [];
+  try { huecos = await AG.huecosLibres(4); } catch (e) { huecos = []; }
+  const enPalabras = huecos.map(function (iso) { return AG.enPalabras(iso) + ' (' + iso + ')'; }).join(' · ') || 'ninguno: no propongas hora, haz una pregunta';
+  const sistema = SISTEMA.replace('{{FECHA}}', fechaHoy()).replace('{{HUECOS}}', enPalabras) + '\n\nFICHA DE LA PERSONA:\n' + ficha;
+  const turnos = turnosDe(o.mensajes);
+  if (!turnos.length || turnos[turnos.length - 1].role !== 'assistant') return { texto: '', motivo: 'el último mensaje no es nuestro' };
+  const intento = Number(o.intento || 1);
+  const instruccion = intento >= 3
+    ? 'Es el tercer y último intento: despídete en UNA frase, sin reproche y sin pedir nada, dejando claro que si más adelante quiere revisar cómo le entran los clientes, aquí estás. Nada de «última oportunidad».'
+    : intento === 2
+      ? 'Es el segundo intento: aporta algo nuevo y concreto para su caso (una idea, un dato de un caso parecido si encaja, o lo que suele pasar en su sector) y cierra con una pregunta fácil de contestar con una palabra. No propongas hora todavía salvo que ya hubiera aceptado hablar.'
+      : 'Es el primer intento: retoma exactamente donde se quedó la conversación. Si ya estaba claro qué le pasa, propón dos huecos concretos de la lista; si no, una pregunta fácil. Nunca «¿lo has visto?» ni «te escribía para hacer seguimiento».';
+  const mensajes = turnos.slice(-20).concat([{
+    role: 'user',
+    content: '[Nota interna, no la ha escrito el lead: lleva ' + (o.dias || 1) + ' días sin contestar a tu último mensaje. ' + instruccion +
+      ' Máximo dos frases, una sola pregunta o ninguna, sin saludo si ya os habéis saludado, sin emojis. No uses herramientas. Contesta solo con el texto del mensaje, nada más.]'
+  }]);
+  const d = await llamarModelo(sistema, mensajes);
+  const bloques = d.content || [];
+  if (bloques.some(function (b) { return b.type === 'tool_use'; })) return { texto: '', motivo: 'el modelo quiso usar una herramienta; se deja para Maikel' };
+  const texto = bloques.filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text.trim(); }).join('\n').replace(/^\[.*?\]\s*/s, '').trim();
+  if (!texto || texto.length > 400) return { texto: '', motivo: texto ? 'demasiado largo' : 'sin texto' };
+  return { texto: texto, motivo: '' };
+}
+
 // Estado del agente en el contacto (campo WA · Agente): turnos y candado.
 function leerEstado(c) {
   const f = (c.customFields || []).filter(function (x) { return x && x.id === CAMPO_ESTADO; })[0];
@@ -362,4 +393,4 @@ async function avisar(c, motivo, texto) {
   } catch (e) { console.error('[agente] aviso:', e && e.message); }
 }
 
-module.exports = { atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS };
+module.exports = { atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };

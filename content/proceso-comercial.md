@@ -19,26 +19,29 @@ quién la fijó. Lo que no está aquí no se hace por defecto.
 
 - **Siempre un recordatorio el mismo día, a las 9:00, a todos los que tienen
   cita ese día** (Maikel, 21-sep: «yo los haría a todos el mismo día a las 9»),
-  con el enlace de la videollamada (https://meet.google.com/gom-euxm-btb), por el
-  canal donde esté la conversación del lead (647 → type WhatsApp; gateway → type
-  SMS; sin WhatsApp → correo). Las citas que se agenden después de las 9:00 para
-  ese mismo día no llevan recordatorio aparte: la confirmación ya lleva el enlace. Texto base: «Hola X, soy Maikel. Te recuerdo que hoy a
-  las HH:MM tenemos la videollamada de 15 minutos. Entra por aquí: [enlace]. Si
-  te surge algo, dímelo por aquí y lo movemos.»
+  con la hora, el enlace de la videollamada (https://meet.google.com/gom-euxm-btb)
+  y **qué vamos a ver** (Maikel, 21-sep: «recuerda que tienes tu cita a tal
+  hora, aquí tienes el enlace de Meet, esto es lo que veremos»). Sale por el
+  canal donde esté la conversación del lead (647 → WhatsApp oficial; gateway →
+  pasarela; sin hilo de WhatsApp → correo y WhatsApp por la pasarela). Las citas
+  que se agenden después de las 9:00 para ese mismo día no llevan recordatorio
+  aparte: la confirmación ya lleva el enlace. Texto base: «Hola X, soy Maikel.
+  Te recuerdo que hoy a las HH:MM tenemos la videollamada de 15 minutos. Entra
+  por aquí: [enlace]. Vamos a ver cómo va hoy tu sistema desde que alguien pide
+  información hasta que compra, dónde se pierde y qué automatizamos primero.
+  Sales con un plan escrito. Si te surge algo, dímelo por aquí y lo movemos.»
 - **Si la cita se agendó con dos o más días de antelación**, además un
-  recordatorio la víspera (18:00-19:00) que pide confirmación en una línea
-  («¿sigue en pie mañana a las HH:MM?»). Si no confirma, Raquel llama por la
-  mañana antes de la hora.
-- Si el lead cree que es una llamada telefónica (lo dijo Raquel o lo entendió
-  así), el recordatorio lo aclara: videollamada con enlace, y si prefiere
-  teléfono, Maikel le llama al móvil.
-- Antes de enviar, leer el hilo: si Maikel ya ha mandado el enlace ese día, no
-  se repite. Cada recordatorio se anota en la ficha de GHL.
-- Pendiente de implementar en código (`api/activacion.js`): recordatorio del
-  mismo día automático (9:00) y recordatorio de víspera cuando
-  `cita − agendado ≥ 2 días`, con etiquetas `recordatorio-dia` y
-  `recordatorio-vispera` para no duplicar. Hasta entonces, lo hace el agente de
-  operaciones a mano con recordatorios programados.
+  recordatorio la víspera (18:30) que pide confirmación en una línea («¿sigue en
+  pie?»). Si no confirma, Raquel llama por la mañana antes de la hora.
+- Si el lead cree que es una llamada telefónica (lo cerró Raquel), el
+  recordatorio lo aclara: videollamada con enlace, y si prefiere teléfono,
+  Maikel le llama al móvil.
+- Antes de enviar se lee el hilo: si ese día ya ha salido el enlace o un
+  recordatorio (Maikel a mano, la confirmación de la reserva), no se repite.
+  Cada recordatorio se anota en la ficha de GHL.
+- **En código desde el 21-sep**: `api/recordatorios.js` (cron a las 9:00 y a
+  las 18:30 de Madrid; etiquetas `rec-dia-AAAAMMDD` y `rec-visp-AAAAMMDD` para
+  no duplicar). El agente de operaciones solo comprueba que han salido.
 
 ## 3. Cadencia del lead nuevo (resumen; el detalle está en api/activacion.js)
 
@@ -49,6 +52,32 @@ de su vertical → tarde: segunda llamada (cuatro horas después de la primera) 
 día 2: WhatsApp + llamada → día 3: correo y a «Seguimiento» con fecha.
 Regla de Maikel (19-sep): si el lead contesta al WhatsApp, no se le llama.
 Regla de Maikel (21-sep): los que no invierten también se llaman.
+Regla de Maikel (21-sep): al que no ha respondido el día anterior se le vuelve
+a seguir (WhatsApp y llamada, que es el día 2 de la cadencia).
+
+## 3b. Conversaciones que se quedan paradas (Maikel, 21-sep)
+
+«Los que han contestado pero se ha quedado ahí la cosa: contestar siempre en su
+contexto, que el sistema intente generar cita sin ser invasivo ni pesado, y si
+tras varios intentos no hay manera, se descarta.»
+
+- Entra quien contestó (etiqueta `act-respondio`), el último mensaje del hilo
+  es nuestro, no tiene cita y Maikel no lleva el hilo (`wa-humano`, o el
+  último mensaje lo escribió él).
+- **Tres intentos como mucho**, escritos por el agente de WhatsApp leyendo toda
+  la conversación (nunca plantilla, nunca «¿lo has visto?»): el primero un día
+  después de nuestro último mensaje (retoma donde se quedó; dos huecos si ya
+  está claro qué le pasa), el segundo tres días después (aporta algo nuevo y
+  cierra con una pregunta fácil), el tercero cinco días después (despedida en
+  una frase, sin pedir nada).
+- Cinco días después del tercero sin respuesta: **descartado** (etiqueta
+  `act-descartado`, trato a perdido, nota y aviso). Si más adelante contesta,
+  el agente le atiende igual.
+- Ritmo: uno por vuelta del reloj (cada diez minutos), entre semana, de 9:30 a
+  13:30 y de 16:00 a 19:30, nunca en punto. Cada uno deja nota en GHL y aviso a
+  Maikel.
+- En código: `api/_reenganche.js`, lo llama `api/activacion.js`. Etiquetas
+  `reeng-1`, `reeng-2`, `reeng-3`.
 
 ## 4. Lo que nunca sale sin Maikel
 

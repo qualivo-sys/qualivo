@@ -466,6 +466,16 @@ module.exports = async function handler(req, res) {
 
   await procesarSecuencias(resumen);
 
+  // Conversaciones que se quedaron paradas tras contestar el lead: un
+  // reenganche por vuelta, escrito por el agente en su contexto; tres intentos
+  // y descarte (Maikel, 21-sep). Ver api/_reenganche.js.
+  try {
+    const rg = await require('./_reenganche.js').vuelta();
+    if (rg.enviados || rg.descartados) resumen.reenganche = { enviados: rg.enviados, descartados: rg.descartados };
+  } catch (err) {
+    console.error('[activacion] reenganche falló:', err && err.message);
+  }
+
   console.log('[activacion]', JSON.stringify(resumen));
   return res.status(200).json({ ok: true, resumen: resumen });
 };
