@@ -222,3 +222,23 @@ y con los sectores reales, título arriba en la 8). El octavo es decisión de
 Maikel: si se enseña en la lámina 5 el WhatsApp firmado «soy Maikel» junto a
 «un comercial IA». Revisión completa en
 `content/carruseles/2026-09-22-contacto-7x/revision-master-reviewer-v2.md`.
+
+### Para mañana, martes 22 (pedido de Maikel, 21-sep noche)
+
+Entregar el contenido de la semana 39 rehecho con lo aprendido hoy, en un solo
+documento, con esto dentro:
+1. **Calendario de la semana intercalando formatos**: un día carrusel, otro
+   vídeo, otro post de una imagen, otro vídeo. Cada pieza con gancho, dato
+   verificado, formato y CTA (50 / 30 / 20). Todas pasan por el Master
+   Reviewer antes de darse por listas.
+2. **Propuesta de newsletter** (capítulo 1 rehecho con la regla del dato y el
+   equilibrio acierto/fallo): asunto, texto, a quién va. Ahora hay leads:
+   incluir a los leads de la campaña que han dado correo y no tienen cita,
+   además de la lista de LinkedIn. Comprobar consentimiento y la regla de
+   protección de datos de agosto antes de proponer el envío.
+3. **Guion de vídeo** para grabar a cámara (45-60 s), de la pieza más fuerte
+   de la semana, con rótulos.
+4. Plan de envíos: qué día sale la newsletter, qué día se contesta a los
+   comentarios, qué se le manda a quien escribe «FUGA».
+Todo con la pausa de redes vigente salvo que Maikel la levante por escrito.
+La decisión de la lámina 5 del carrusel del contacto sigue pendiente.
