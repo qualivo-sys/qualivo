@@ -4,21 +4,51 @@
 > Los demás agentes lo leen en su rutina diaria con:
 > `git fetch origin claude/quipu-billing-dashboard-g2s2ap && git show origin/claude/quipu-billing-dashboard-g2s2ap:sistema/cerebro.md`
 >
-> Última actualización: **2026-09-01**
+> Última actualización: **2026-09-21**
 
-## Quién es quién
+## Organigrama · Qualivo funciona como una agencia (fijado por Maikel, 21-sep-2026)
+
+**Maikel** es el CEO: decide el dinero, el precio y qué cliente entra.
+**El cerebro es el Project Manager y Director de Operaciones.** Cada día revisa cómo está cada
+cuenta, decide qué tarea le toca a cada gestor y se la reparte. No hace el trabajo de las cuentas:
+lo coordina.
+
+### Gestores de cuenta · uno por cliente, siempre
+
+Cada cliente tiene su propia sesión, su propia rama y su propio gestor. Es full-stack: hace todo
+lo de su cliente — anuncios, seguimiento, informes — y no lo reparte entre especialistas. Con
+cuatro cuentas y una persona, repartir cuesta más de lo que ahorra.
+
+| Cuenta | Sesión | Rama |
+|---|---|---|
+| **Antic Barcelona 113** | `session_01SQ8PKdGHvYhqFQKGiFMLLo` | `claude/antic-barcelona-campaign-627pq7` |
+| **Adigital · OutThink** | `session_013gUKoxvip9gGi3i133bZMk` | `claude/google-ads-expert-prompt-uqmo9m` |
+| **Escola Aeronàutica (EAC)** | `session_01GVfCM2Ynb4izSapBvMJcGG` | `claude/eac-metrics-dashboard-qx7fkh` |
+| **Kubysoft** | pendiente de identificar | brief en `clientes/kubysoft/` (rama de Outbound) |
+| **Qualivo** (cliente interno) | el cerebro | `claude/quipu-billing-dashboard-g2s2ap` |
+
+Obligación de todo gestor de cuenta: mantener **`clientes/<cliente>/ESTADO.md`** al día **al cerrar
+cada turno**, no cuando se lo pidan. El cerebro lee lo que haya a las 8:00. Un ESTADO.md que lleva
+tres días sin cambiar es, por sí solo, una alarma.
+
+### Equipos de especialidad · sirven a Qualivo, no a las cuentas
 
 | Rol | Sesión | Rama |
 |---|---|---|
-| **Cerebro (CFO/COO)** | Quipu billing dashboard 2025-2026 | `claude/quipu-billing-dashboard-g2s2ap` |
-| Outbound / SDR | Client acquisition strategy | `claude/client-acquisition-ideas-k00f5d` |
-| Landing / Growth / Contenido | Landing Qualivo.io en Vercel | `claude/qualivo-landing-vercel-nubk1i` |
-| Ventas / Closer | Agente de Ventas Qualivo (`session_01EsVfarsm7LwubAYY6Kis9s`) | su propia rama, carpeta `ventas/` |
-| Automatización | Agente de Automatización Qualivo (`session_01DAmUZHTVFxPG37QyuAMQvr`) | su propia rama, carpeta `automatizaciones/` — entrega n8n en borrador, nunca autoenvía a clientes |
-| Eleva | Eleva Academy metrics dashboard | `claude/eleva-academy-metrics-jm8msg` |
-| EAC | EAC metrics dashboard | `claude/eac-metrics-dashboard-qx7fkh` |
+| Outbound / SDR | Agente Outbound (`session_01CQu7vwR41PJkVKgtfbSEo4`) | `claude/client-acquisition-ideas-k00f5d` |
+| Growth / Web / Contenido | Agente growth (`session_01GcrdLXcbaEyggvw8NbrHLL`) | `claude/qualivo-landing-vercel-nubk1i` |
+| Paid | Agente Paid (`session_01U6fb4Lc12iG7egcZNiv5SX`) | `claude/qualivo-paid` |
+| Ventas / Closer | Agente de Ventas (`session_01EsVfarsm7LwubAYY6Kis9s`) | carpeta `ventas/` |
+| Automatización | Agente de Automatización (`session_01DAmUZHTVFxPG37QyuAMQvr`) | carpeta `automatizaciones/` — entrega n8n en borrador, nunca autoenvía a clientes |
 
-El cerebro revisa todas las sesiones cada día laborable a las 9:30 (Europe/Madrid) y prepara el parte para Maikel.
+### Deuda conocida del organigrama
+
+- **Growth hace hoy cuatro papeles**: web, contenido, anuncios y gestión comercial (llamadas,
+  seguimientos, reactivación). Maikel decide el 21-sep dejarlo así porque funciona. Queda escrito
+  como deuda: es la sesión más cara con diferencia y la que más se rompería si se cae.
+- **EAC lleva bloqueada desde el 7 de agosto** esperando una respuesta de Maikel. Es un cliente
+  que factura y su gestor está congelado a mitad de frase.
+- **Kubysoft** tiene piloto aprobado y su sesión sin identificar en el registro.
 
 ## Protocolo
 
@@ -131,6 +161,8 @@ Hito 3, sistema de adquisición: landing publicada, creativos publicados, campa�
 **Charter del cerebro (actualizado por Maikel, 14-sep):** Chief of Staff y Director de Operaciones. Prioridades absolutas en orden: 1) generar ingresos, 2) resultados medibles para clientes, 3) pipeline, 4) estabilidad financiera, 5) salud física y mental. Cada mañana: revisar objetivos semanales, identificar el cuello de botella principal, definir las 3 tareas más importantes del día, bloquear tiempo de ventas **antes** que de construcción, y eliminar lo que no impacte ingresos, resultados o adquisición. Al cerrar el día: qué se consiguió, qué bloquea, qué acción concreta desbloquea mañana, y puntuación de 1 a 10. *"Tu función no es ayudarme a estar ocupado. Es ayudarme a generar evidencia de que Qualivo funciona y puede escalar."*
 
 ## Registro de cambios
+
+- **2026-09-21** · **Organigrama de agencia fijado por Maikel.** El cerebro pasa a ser Project Manager y Director de Operaciones: revisa cada cuenta a diario, decide la tarea de cada gestor y se la reparte por timbre. Cada cliente tiene su gestor de cuenta, full-stack, con sesión y rama propias. Los equipos de especialidad (Outbound, Growth, Paid, Ventas, Automatización) sirven a Qualivo, no a las cuentas. Contrato nuevo: todo gestor mantiene `clientes/<cliente>/ESTADO.md` al cerrar cada turno. Tres deudas registradas: Growth hace cuatro papeles a la vez, EAC lleva bloqueada desde el 7-ago y la sesión de Kubysoft está sin identificar.
 
 - **2026-09-11** · Día de correcciones. (1) Propuesta de valor V2 congelada y propagada a los cuatro agentes. (2) Plan de septiembre escrito (`sistema/plan-septiembre.md`). (3) Escenarios de préstamo con los números reales del Sheet; techo defendible 36.000 €, secuencia validar→pedir confirmada. (4) **Maikel corrigió dos errores del cerebro:** los 27k de liquidación eran 33,4k, y los "3 leads" del píxel no eran leads — no hay ni un registro real en el CRM. Regla de medición de leads escrita arriba. (5) Encontrada la fuga clic→página del 80 % y enviada a Landing. (6) Inventario de credenciales en Notion, trece llaves a rotar. (7) **Borrador del piloto de Kubysoft escrito por el cerebro** (`sistema/piloto-kubysoft.md`) para que Maikel lo edite y lo envíe el lunes 14 antes de las 10:00 — diagnóstico del cerebro: el cuello real del negocio no es el embudo ni la financiación, son las cuatro propuestas sin escribir con cuatro compradores esperando.
 - **2026-09-09 (tarde)** · "Dale caña" de Maikel. Recorrido Radiografía → reunión en `sistema/radiografia-recorrido.md` (regla: no se pide reunión, se le pone número a la fuga). Encargos enviados: Landing (3 cambios en la Radiografía, etapa y workflow GHL, emails día 1/3/7, campaña Meta con UTM alineadas y anuncios 01+06), Outbound (motor de exploración de ICPs §2.7, agente de voz con dos puertas, agente de WhatsApp en copiloto, enlace `?l=<id>`), Ventas (7 mensajes + plantilla plan 48 h en `ventas/radiografia/`), Automatización (secuencia 3-7-14 enchufada; timbre nuevo `trig_01BbyosrYLyxV5km966rguJs`). Tarea Todoist "Cola de aprobaciones del cerebro" para Maikel hoy 17:00.
