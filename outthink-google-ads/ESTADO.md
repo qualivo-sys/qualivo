@@ -780,3 +780,24 @@ el de hoy ya está agotado). Hacen falta **162 €/día**; con los 81,22 €/dí
 **~162 € sin invertir**. La propuesta de subir presupuesto pasa de conveniente a necesaria si
 se quiere consumir el presupuesto comprometido. Hoja «Reunión 21-09» y portada del dashboard
 actualizadas con la nueva fecha de corte y el ritmo recalculado.
+
+### Cambios de la reunión aplicados (21-09, tarde)
+Aída confirma por correo los dos pendientes de la reunión. Aplicados por API y verificados
+leyendo el valor de vuelta (`scripts/aplicar_reunion.py`, valida por defecto, `--apply` ejecuta):
+
+| Cambio | Antes | Ahora | Recurso |
+|---|---|---|---|
+| Tope de CPC | 3,00 € | **4,50 €** | `campaign.target_spend.cpc_bid_ceiling_micros = 4500000` |
+| Modificador de móvil | −70 % | **−40 %** | `campaignCriteria/24182552133~30001`, `bidModifier 0,3 → 0,6` |
+
+El −40 % lo fija Adigital; mi propuesta era −20 %, pero la diferencia es pequeña y el criterio
+de la clienta manda. La estrategia sigue siendo `TARGET_SPEND` (Maximizar clics).
+
+**Lo que NO pide Aída y sigue abierto: el presupuesto.** Sigue en **81,22 €/día**. Con el corte
+del miércoles a las 23:59 solo quedan dos días de servicio para el saldo pendiente, así que a
+ese ritmo se quedará dinero sin invertir. Avisado a Maikel para que lo plantee.
+
+Al cierre de la tarde del 21-09: **1.730,09 € (87 %), 34 registros, CPL 50,88 €**; quedan
+269,91 €, hacen falta ~135 €/día, sobrarían ~107 €. Proyección de cierre: **40 registros**.
+Pestaña «Reunión 21-09»: la sección de propuesta pasa a «Cambios acordados en la reunión ·
+estado», con los tres aplicados marcados y el presupuesto como única decisión pendiente.
