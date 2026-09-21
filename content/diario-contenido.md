@@ -132,3 +132,17 @@ completos (contacto, reunión, seguimiento). Carpeta
 `content/borradores/serie-buscando-la-fuga-por-etapa.md`. Los dos carruseles
 quedan en reserva. Mañana: adaptar el plan de la semana 39 a esta serie si
 Maikel la aprueba.
+
+### Lunes 21 · noche · la idea de Maikel: el estudio, el experto y el agente
+
+Maikel: «según un estudio, una persona tarda tanto en decidir, necesita
+tantos impactos… esto es lo que hace uno de nuestros agentes». Y después:
+«de cada etapa, qué es lo mejor que se tiene que hacer, y luego mostrar que
+un agente también lo hace, porque la gente piensa que la IA no es muy buena».
+Hecho: serie «Lo que hace un experto · lo que hace el agente». Cuatro
+estudios verificados contra la fuente (HBR 2011, RAIN Group, Velocify, BMJ
+Open 2016); descartadas las cifras circulantes sin fuente (el 80 % con cinco
+seguimientos, los siete impactos). Tres piezas renderizadas (contacto,
+seguimiento, reunión) con tres posts de LinkedIn en
+`content/borradores/serie-estudio-vs-agente.md`. Regla escrita: la cifra sale
+de quien la publica, y va en la imagen.
