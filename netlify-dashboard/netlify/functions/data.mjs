@@ -142,11 +142,51 @@ async function metaExtras() {
   return { since, until, ads, regions };
 }
 
-/** Array de inversión diaria unificada (Meta real + Google repartido por días del mes). */
+/* ---------- Google Ads en vivo (API v22, cuenta de servicio como usuario de la cuenta) ---------- */
+// Env: GADS_DEV_TOKEN, GADS_CUSTOMER_ID (cuenta cliente), GADS_LOGIN_CUSTOMER_ID (administrador/MCC, opcional).
+function gadsChannel(name, type) {
+  const n = (name || '').toLowerCase(); const t = (type || '').toUpperCase();
+  if (t === 'PERFORMANCE_MAX' || /pmax|performance/.test(n)) return 'Google · Performance Max';
+  if (t === 'SEARCH' || /search|búsqueda|busqueda/.test(n)) return 'Google · Search';
+  return 'Google · Otro';
+}
+/** Coste/conversiones diarias por campaña de Google Ads. Devuelve null si no hay credenciales o falla. */
+async function fetchGoogleAdsDaily(since, until) {
+  const dev = process.env.GADS_DEV_TOKEN, cid = (process.env.GADS_CUSTOMER_ID || '').replace(/-/g, '');
+  const login = (process.env.GADS_LOGIN_CUSTOMER_ID || '').replace(/-/g, '');
+  if (!dev || !cid) return null;
+  const tok = await googleToken(['https://www.googleapis.com/auth/adwords']);
+  if (!tok) return null;
+  const ver = process.env.GADS_API_VERSION || 'v22';
+  const headers = { authorization: `Bearer ${tok}`, 'developer-token': dev, 'content-type': 'application/json' };
+  if (login) headers['login-customer-id'] = login;
+  const query = `SELECT segments.date, campaign.name, campaign.advertising_channel_type, metrics.cost_micros, metrics.conversions, metrics.clicks, metrics.impressions FROM campaign WHERE segments.date BETWEEN '${since}' AND '${until}' AND metrics.cost_micros > 0`;
+  const out = []; let pageToken = null; let guard = 0;
+  do {
+    const body = { query }; if (pageToken) body.pageToken = pageToken;
+    const r = await fetch(`https://googleads.googleapis.com/${ver}/customers/${cid}/googleAds:search`, { method: 'POST', headers, body: JSON.stringify(body) });
+    if (!r.ok) return null;
+    const d = await r.json();
+    (d.results || []).forEach((x) => out.push({
+      date: x.segments.date, campaign: x.campaign.name, channel: gadsChannel(x.campaign.name, x.campaign.advertisingChannelType),
+      spend: (Number(x.metrics.costMicros) || 0) / 1e6, leads: Number(x.metrics.conversions) || 0,
+      clicks: Number(x.metrics.clicks) || 0, impressions: Number(x.metrics.impressions) || 0
+    }));
+    pageToken = d.nextPageToken || null; guard++;
+  } while (pageToken && guard < 20);
+  return out;
+}
+
+/** Array de inversión diaria unificada (Meta real + Google en vivo; los meses sin API caen al manual). */
 async function buildSpend(since, until) {
   const spend = await metaDaily(since, until);
+  let live = null;
+  try { live = await fetchGoogleAdsDaily(since, until); } catch { live = null; }
+  const liveMonths = new Set((live || []).map((r) => r.date.slice(0, 7)));
+  (live || []).forEach((r) => spend.push({ date: r.date, channel: r.channel, spend: r.spend, leads: r.leads }));
   const g = googleInv();
   Object.keys(g).forEach((mk) => {
+    if (liveMonths.has(mk)) return;   // ese mes ya viene en vivo de la API
     const dim = daysInMonth(mk);
     for (let day = 1; day <= dim; day++) {
       const date = `${mk}-${String(day).padStart(2, '0')}`;
@@ -366,6 +406,8 @@ async function build() {
 
   return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, ga4, email, metaExtra };
 }
+
+export { fetchGoogleAdsDaily };
 
 export default async (req) => {
   const url = new URL(req.url);

@@ -154,7 +154,7 @@
 
   <h2>Inversión y rentabilidad</h2>
   <table id="tRent"></table>
-  <div class="foot">Inversión Meta en vivo + Google manual · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
+  <div class="foot">Inversión Meta y Google Ads en vivo (Google manual solo para meses sin API) · Ingresos = matrículas × <span id="cp">1.500</span> € · ROAS = ingresos / inversión · CPA = inversión / matrículas · Coste/Entrev = inversión / entrevistas. Esta tabla usa <b>solo el rango de fechas</b> (no los filtros de comercial/estado). Fíjate en <b>Meta (subtotal)</b> y <b>TOTAL</b> para la eficiencia más fiable.</div>
 
   <div class="foot"><b>KPIs y embudo</b> — Citas agendadas y Entrevistas se miden por el <b>calendario</b> de GHL (misma fuente que la sección "Citas"), porque el equipo trabaja por calendario y no siempre mueve las etapas del pipeline. Matrícula = etapa "Alumna activa". Tasa de cierre = matrículas / entrevistas realizadas. <br>Las tablas <b>Por etapa / Por comercial / Por procedencia / Vista semanal</b> siguen contando por <b>etapa del pipeline</b> (por eso sus "Contact./Entrev." pueden salir más bajos: reflejan solo lo que se ha movido de etapa).</div>
   </div><!-- /view-comercial -->
@@ -326,7 +326,7 @@ function renderRent(from, to){
     line('Meta · Instantáneo', sp(['Meta · Instantáneo']), fn(['Meta · Instantáneo'])),
     line('Meta · Landing', sp(['Meta · Landing']), fn(['Meta · Landing'])),
     line('Meta (subtotal)', sp(['Meta · Instantáneo','Meta · Landing','Meta · (otro)']), fn(['Meta · Instantáneo','Meta · Landing'])),
-    line('Google Ads', sp(['Google · Performance Max','Google · Search']), fn(['Google Ads'])),
+    line('Google Ads', sp(Object.keys(sc).filter(k => k.startsWith('Google ·'))), fn(['Google Ads'])),
     line('TOTAL', sp(Object.keys(sc)), fn(Object.keys(fp))),
   ];
   $('#tRent').innerHTML = `<thead><tr><th>Canal</th><th>Inversión</th><th>Leads plat.</th><th>CPL</th><th>Entrev.</th><th>Coste/Entrev</th><th>Matríc.</th><th>CPA</th><th>Ingresos</th><th>ROAS</th></tr></thead><tbody>${body.join('')}</tbody>`;

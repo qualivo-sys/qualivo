@@ -38,3 +38,12 @@ actuales a GHL (cacheados 2 min). Solo se vuelve a desplegar si cambia el
 - El acceso es por **contraseña compartida**. Para login por usuario se puede añadir Netlify Identity.
 - v1 = solo datos comerciales (GHL). La inversión/ROAS de Meta+Google se puede añadir después.
 - Estados: Pendiente (nuevos/contactados/agendados/propuesta/negociación) · Ganado (Alumna activa) · Perdido (No interesa/lost) · Abandonado/Inválido.
+
+### Google Ads en vivo (opcional)
+| Variable | Valor |
+|---|---|
+| `GADS_DEV_TOKEN` | Developer token de la API de Google Ads |
+| `GADS_CUSTOMER_ID` | ID de la cuenta cliente (p. ej. `973-246-9235`) |
+| `GADS_LOGIN_CUSTOMER_ID` | ID del administrador/MCC si el acceso es vía MCC (p. ej. `981-298-8446`) |
+
+Requiere `GOOGLE_SA_B64` (la misma cuenta de servicio) añadida como **usuario** de la cuenta de Google Ads. Si faltan, la inversión de Google cae al bloque manual `GOOGLE_INV`.
