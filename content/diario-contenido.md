@@ -176,3 +176,15 @@ tipo Google Calendar, acción para mañana y cierre. Pie de foto para Instagram
 y LinkedIn en `caption.md`.
 
 Maikel: los rótulos de sección encima del titular («Contacto · la primera hora») no aportan y «se nota que es muy Claude». Fuera de todos los moldes. Regla escrita en la guía.
+
+### Lunes 21 · noche · revisión en Notion
+
+Maikel quiere que otro agente revise las piezas: diseño, copy, objetivo, CTA,
+alineación. Montado en Notion, dentro de «Máquina de Contenido · Qualivo»:
+la guía de carruseles y copy (con la lista de quince preguntas), el prompt del
+agente revisor y la base «Revisión de piezas · contenido» con columnas para
+cada pregunta de Maikel, nota global y qué cambiar. Primera fila: el carrusel
+del contacto, en estado «En revisión», con las ocho láminas subidas, el copy
+de cada una, el pie de foto y las fuentes. Regla: cuando haya tres piezas en
+«En revisión», se lanza el revisor. Prompt también en el repo:
+`content/agentes/prompt-agente-revisor.md`.
