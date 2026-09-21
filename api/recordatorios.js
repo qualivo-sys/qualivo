@@ -2,7 +2,7 @@
 //   /api/recordatorios/            → mismo día. Cron a las 7:00 y 8:00 UTC; solo
 //                                    actúa la vuelta que cae a las 9:00 de Madrid
 //                                    (cambio de hora de verano/invierno).
-//   /api/recordatorios/?modo=vispera → cron a las 16:30 y 17:30 UTC; actúa a las 18:30.
+//   /api/recordatorios-vispera/    → víspera. Cron a las 16:30 y 17:30 UTC; actúa a las 18:30.
 //
 // GET ...?dry=1 devuelve lo que haría sin enviar nada (con el secreto).
 
