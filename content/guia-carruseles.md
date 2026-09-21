@@ -100,6 +100,8 @@ redactorfreelance.com, thepower.education) más la guía de voz de casa.
 
 **AIDA** para posts de una imagen: atención (número), interés (el dolor), deseo (lo que cambia), acción (una).
 
+**Sin etiquetas de sección (Maikel, 22-sep).** Nada de «Contacto · la primera hora», «Lo que hace el agente», «Te suena» encima del titular. No aportan y delatan que lo ha escrito una máquina. El titular tiene que aguantar solo. Se quitan de todos los moldes.
+
 **Prohibido en el copy:** empezar por el tema, «hoy os traigo», «en este carrusel», más de una idea por lámina, tres CTA, cifras sin fuente, «no se trata de X sino de Y», raya larga, punto y coma.
 
 **Pantallas:** cuando se enseña una herramienta (calendario, WhatsApp, CRM), se imita la de verdad para que sea creíble: mismo orden de elementos, mismos colores de interfaz, datos reales. Nunca el logotipo de la marca ajena.

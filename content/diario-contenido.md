@@ -174,3 +174,5 @@ lámina 2 el dolor con una conversación de ejemplo, lámina 3 el estudio,
 después experto, agente, calendario del martes con las tres citas en pantalla
 tipo Google Calendar, acción para mañana y cierre. Pie de foto para Instagram
 y LinkedIn en `caption.md`.
+
+Maikel: los rótulos de sección encima del titular («Contacto · la primera hora») no aportan y «se nota que es muy Claude». Fuera de todos los moldes. Regla escrita en la guía.
