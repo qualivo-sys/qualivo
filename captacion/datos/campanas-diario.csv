@@ -106,3 +106,20 @@ fecha,campana,estado,enviados,aperturas,clics,respuestas,rebotes,deposito_sin_em
 2026-09-18,ICP15 · Base desaprovechada (Brain),PAUSED,0,1,0,0,0,
 2026-09-18,"Solar · con señal (Brain, 8-sep) BORRADOR",COMPLETED,1,0,0,0,0,
 2026-09-18,Multiservicio · Brain (8-sep) BORRADOR,COMPLETED,8,3,0,0,0,
+2026-09-21,Asesorías · presupuesto parado (landing 17-se,ACTIVE,15,4,0,0,1,40
+2026-09-21,Clínicas · precio por WhatsApp (landing 17-se,ACTIVE,20,10,0,2,1,62
+2026-09-21,Formación · curso sin cerrar (landing 17-sep),ACTIVE,34,14,0,0,0,3
+2026-09-21,DKR · Open Playtest · Creadores EN,ACTIVE,10,0,0,0,0,22
+2026-09-21,Obra · presupuestos (Maps 5 ciudades),ACTIVE,88,30,0,0,2,103
+2026-09-21,Rescate · Funnel Meta feb 2026,ACTIVE,20,0,0,0,0,0
+2026-09-21,Lista · ActiveCampaign (señal),ACTIVE,36,0,0,1,0,22
+2026-09-21,Lista · Mailchimp (señal),ACTIVE,48,0,0,1,0,31
+2026-09-21,Lista · Brevo (señal),ACTIVE,35,0,0,0,0,21
+2026-09-21,Anuncios · Meta (señal),ACTIVE,35,0,0,0,0,83
+2026-09-21,CRM · Zoho (señal),ACTIVE,38,0,0,0,0,12
+2026-09-21,CRM · Dynamics 365 (señal),ACTIVE,32,0,0,0,0,14
+2026-09-21,CRM · Pipedrive (señal),ACTIVE,36,0,0,0,0,3
+2026-09-21,Anuncios · Google Ads (señal),ACTIVE,40,0,0,0,0,32
+2026-09-21,CRM · Odoo (señal),ACTIVE,47,0,0,0,0,8
+2026-09-21,V3 · Motor de puertas (copy por lead),ACTIVE,0,0,0,1,0,0
+2026-09-21,ICP08 · CRM sin disciplina (Brain),COMPLETED,1,1,0,0,0,
