@@ -210,3 +210,15 @@ El revisor pasa a ser el «Qualivo Master Reviewer» que dictó Maikel (doce
 (`content/agentes/prompt-qualivo-master-reviewer.md`). La base de revisión
 tiene ahora columnas Veredicto y Versión. La pieza vuelve a «En revisión»
 como versión 2.
+
+### Lunes 21 · noche · el Master Reviewer revisa la v2
+
+Nota 6, PUBLICAR CON CAMBIOS. Ocho críticos, todos con motivo y fuente; siete
+aplicados en la v3 (portada con el número enorme y «dos de cada tres no
+llegan», coherencia de horas en la lámina 2, «12 contactos · 3 citas» en vez
+de «0 minutos míos», fallo corto de las locuciones, fuera «cada vez» y «con sus
+palabras», Harvard Business Review en todos los sitios, calendario sin solape
+y con los sectores reales, título arriba en la 8). El octavo es decisión de
+Maikel: si se enseña en la lámina 5 el WhatsApp firmado «soy Maikel» junto a
+«un comercial IA». Revisión completa en
+`content/carruseles/2026-09-22-contacto-7x/revision-master-reviewer-v2.md`.
