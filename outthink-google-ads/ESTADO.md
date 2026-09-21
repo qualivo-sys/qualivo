@@ -738,3 +738,28 @@ day, ifema, ai infra summit, industry x. Total **137 negativas** de campaña.
 
 Proyección: 398 € al CPL de los últimos 7 días (55 €) son ~7 registros más → **~39 totales**.
 Con el peso de móvil corregido puede quedar algo por encima.
+
+### Hoja de métricas para la reunión (21-09)
+Nueva pestaña **«Reunión 21-09»** en el dashboard `Dashboard - Adigital`
+(`1-UKqrxTObh4ME2LHldlD6eREll1EiIqM9x1ozHVA-MA`), generada con
+`scripts/datos_reunion.py` → `scripts/build_sheet.py` → `scripts/fmt_sheet.py`
+(y `scripts/upd_dash.py` para refrescar la portada). Contiene: dónde estamos, por campaña,
+los últimos 9 días con cuota de impresión perdida por presupuesto y por puja, escritorio vs
+móvil (acumulado, por semana y desde el ajuste del 15-09), conversión de Search por semana,
+por grupo de anuncios y la propuesta de cierre. Todos los textos se calculan desde la API,
+no hay cifras escritas a mano. Las credenciales siguen fuera del repositorio: los scripts leen
+`gads_creds.json` y `sa_access_token.txt` del directorio de trabajo.
+
+**Coste por registro por dispositivo** (Search, 31-08 → 21-09): escritorio 48,29 € (536 clics,
+1.062,47 €, 22 reg., CVR 4,1 %); móvil 43,99 € (289 clics, 351,94 €, 8 reg., CVR 2,8 %).
+Por semanas, escritorio 26,64 → 45,52 → 54,71 € y móvil 30,73 → 190,76 → 16,40 €: el móvil
+se hunde la semana 2 y se recupera la 3. Desde el ajuste del 15-09: escritorio 65,11 € /
+CVR 3,3 %, **móvil 14,93 € / CVR 4,6 %**.
+
+**Corrección sobre el análisis de primera hora:** el gasto de hoy no se había quedado corto, la
+lectura de las 07:00 era parcial. A media mañana lleva 85 € y agota el presupuesto del día.
+El problema de gasto era solo el fin de semana. Acumulado real **1.675,27 € (84 %), 32
+registros, CPL 52,35 €**; quedan **324,73 €** para el martes, el miércoles y la mañana del
+jueves → hacen falta ~130 €/día o sobrarán ~122 €. Proyección de cierre: **38 registros**.
+También se cae la lectura de «la conversión sigue bajando»: por semanas va 5,3 % → 2,9 % →
+4,0 %, se ha recuperado tras los frenos.
