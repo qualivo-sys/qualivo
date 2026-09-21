@@ -30,11 +30,12 @@
     return s && s.value !== '' ? parseInt(s.value, 10) : -1;
   }
 
-  // Corte: se queda fuera solo quien no invierte nada todavía. Si invierte,
-  // aunque esté solo, hay sistema que mirar y puede ser cliente. El resto se
-  // decide en la llamada, no en el formulario.
+  // Corte: desde el 21-sep-2026 no se queda nadie fuera por no invertir todavía
+  // (Maikel: «puede ser gente con dinero»). Se guarda la respuesta de inversión
+  // y todo se decide en la llamada, no en el formulario. Para volver al corte
+  // antiguo: return valor('inversion') >= 1;
   function cualifica() {
-    return valor('inversion') >= 1;
+    return valor('inversion') >= 0;
   }
 
   // Medicion de entrada al formulario. El evento diagnostico_paso1 se dispara
