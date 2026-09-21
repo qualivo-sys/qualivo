@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import CompartirApp from '@/components/compartir-app';
 import { Boton, Tarjeta, TituloTarjeta } from '@/components/ui/base';
+import { SITIO_CORTO } from '@/lib/sitio';
 
 export const metadata = { title: 'Instalar My Little Brain' };
 
@@ -26,7 +27,7 @@ export default function PaginaInstalar() {
           <div>
             <p className="font-medium">iPhone (Safari)</p>
             <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-muted-foreground">
-              <li>Abre <span className="text-foreground">my-little-brain.vercel.app</span> en Safari (no vale desde Instagram o WhatsApp: toca &ldquo;abrir en Safari&rdquo;).</li>
+              <li>Abre <span className="text-foreground">{SITIO_CORTO}</span> en Safari (no vale desde Instagram o WhatsApp: toca &ldquo;abrir en Safari&rdquo;).</li>
               <li>Toca el boton de compartir, el cuadrado con la flecha hacia arriba.</li>
               <li>Baja y toca <span className="text-foreground">Anadir a pantalla de inicio</span>, y luego Anadir.</li>
             </ol>
@@ -59,7 +60,7 @@ export default function PaginaInstalar() {
       <Tarjeta>
         <TituloTarjeta>Pasaselo a alguien</TituloTarjeta>
         <CompartirApp variante="secundario" />
-        <p className="mt-2 text-center text-xs text-muted-foreground">O copia el enlace: my-little-brain.vercel.app/instalar</p>
+        <p className="mt-2 text-center text-xs text-muted-foreground">O copia el enlace: {SITIO_CORTO}/instalar</p>
       </Tarjeta>
 
       <p className="text-center text-xs text-muted-foreground">

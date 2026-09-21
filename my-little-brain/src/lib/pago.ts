@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { SITIO } from './sitio';
 
 export function hayPagos(): boolean {
   return Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_PRO);
@@ -11,7 +12,7 @@ export function stripe(): Stripe {
 }
 
 export function urlBase(peticion?: Request): string {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '');
+  if (process.env.NEXT_PUBLIC_SITE_URL) return SITIO;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   if (peticion) return new URL(peticion.url).origin;
   return 'http://localhost:3000';

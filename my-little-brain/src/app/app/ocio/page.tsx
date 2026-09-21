@@ -17,9 +17,10 @@ import { diasEntre, fechaCorta } from '@/lib/fechas';
 import { CATEGORIAS_OCIO, categoriaOcio, insightsOcio, resumenOcio, sugerencias } from '@/lib/motor/ocio';
 import { sesionRequerida } from '@/lib/sesion';
 import type { OcioCompartido } from '@/lib/tipos';
+import { SITIO } from '@/lib/sitio';
 
 /** La direccion publica de la app, para poder dar el enlace entero. */
-const urlBase = process.env.NEXT_PUBLIC_URL_BASE ?? 'https://my-little-brain.vercel.app';
+const urlBase = SITIO;
 
 export const dynamic = 'force-dynamic';
 

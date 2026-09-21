@@ -3,8 +3,9 @@
 import { Check, Copy, Share2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Boton } from '@/components/ui/base';
+import { SITIO } from '@/lib/sitio';
 
-const URL_APP = 'https://my-little-brain.vercel.app/instalar';
+const URL_APP = `${SITIO}/instalar`;
 const TEXTO = 'Estoy usando My Little Brain: un coach de entreno, comida y habitos con IA. Te lo instalas en 1 minuto desde aqui:';
 
 /** Boton de invitar: abre la hoja de compartir del movil o copia el enlace. */
