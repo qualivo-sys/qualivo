@@ -47,6 +47,13 @@ function weekMonday(ds) {
 const COURSE_PRICE = Number(process.env.COURSE_PRICE || 1500);
 // Google Ads manual por mes (editable con la env var GOOGLE_INV en JSON).
 const GOOGLE_INV_DEFAULT = {
+  '2026-09': {
+    // Datos reales de Google Ads (panel), septiembre 2026. Coste exacto por campaña;
+    // los 49 leads (conversiones) se reparten proporcionalmente al gasto (el panel no
+    // desglosa las conversiones por campaña). La fila "Google Ads" del dashboard usa la suma.
+    'Google · Search': { spend: 122.16, leads: 25 },
+    'Google · Performance Max': { spend: 118.89, leads: 24 }
+  },
   '2026-07': {
     'Google · Performance Max': { spend: 200.55, leads: 26 },
     'Google · Search': { spend: 201.61, leads: 20 }
