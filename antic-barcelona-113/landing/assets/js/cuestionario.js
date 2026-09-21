@@ -2,6 +2,28 @@
 (function () {
   'use strict';
 
+  // Tramos de presupuesto. Son opciones de respuesta, no una tarifa: en la
+  // web y en la guía no decimos lo que cuestan sus piezas, y no es este sitio
+  // para empezar a decirlo. Con las horquillas reales del taller este paso
+  // filtraría todavía mejor.
+  var PRESUPUESTOS = [
+    'Menos de 1.500 €',
+    'Entre 1.500 y 3.000 €',
+    'Entre 3.000 y 5.000 €',
+    'Más de 5.000 €',
+    'Prefiero hablarlo',
+  ];
+
+  // De siete pasos a cuatro.
+  //
+  // Con los datos de la primera semana: de cada 100 personas que empezaban a
+  // contestar, 94 se iban antes del final. Siete pantallas son muchas para
+  // alguien que acaba de llegar de un anuncio.
+  //
+  // No se pierde información para puntuar el lead —pieza, espacio, medidas,
+  // presupuesto y plazo siguen estando—, solo se juntan en menos pantallas.
+  // El estilo sale del cuestionario: no entra en la puntuación y es justo el
+  // tipo de cosa que se resuelve mejor hablando por WhatsApp.
   var STEPS = [
     {
       key: 'pieza', label: 'La pieza', title: '¿Qué necesitas?',
@@ -15,38 +37,22 @@
       ]
     },
     {
-      key: 'espacio', label: 'El espacio', title: '¿Dónde irá?',
-      sub: 'La estancia condiciona el material y el acabado.',
-      kind: 'chips', required: true,
-      options: [{ label: 'Salón' }, { label: 'Comedor' }, { label: 'Cocina' }, { label: 'Restaurante' }, { label: 'Otro espacio' }]
-    },
-    {
-      key: 'medidas', label: 'Las medidas', title: '¿Qué medidas?',
+      key: 'medidas', label: 'El espacio', title: '¿Dónde va y qué medidas tiene?',
       sub: 'Aproximadas es suficiente. Las ajustamos contigo.',
-      kind: 'medidas', required: false
+      kind: 'medidas', required: false,
+      chipsExtra: {
+        key: 'espacio', label: '¿En qué estancia?',
+        options: ['Salón', 'Comedor', 'Cocina', 'Restaurante', 'Otro espacio']
+      }
     },
     {
-      key: 'estilo', label: 'El estilo', title: '¿Qué estilo buscas?',
-      sub: 'Si no lo tienes claro, dínoslo con referencias.',
-      kind: 'choice', required: true,
-      options: [
-        { label: 'Rústico', desc: 'Canto natural, veta viva', img: '/assets/photos/mesa-tronco-madera.jpg' },
-        { label: 'Contemporáneo', desc: 'Líneas limpias, madera protagonista', img: '/assets/photos/mesa-madera-encaje.jpg' },
-        { label: 'Industrial', desc: 'Madera + estructura metálica', img: '/assets/photos/mesa-madera-pieza.jpg' },
-        { label: 'Aún no lo sé', desc: 'Nos lo enseñas con referencias', img: '/assets/photos/textura-antic-barcelona.jpg' }
-      ],
-      extra: { key: 'referencias', label: 'Referencias', placeholder: 'Pega enlaces o describe lo que te gusta', multiline: true }
-    },
-    {
-      key: 'presupuesto', label: 'El presupuesto', title: '¿Qué presupuesto tienes en mente?',
-      sub: 'Nos ayuda a proponerte material y medidas acordes. No es un compromiso.',
-      kind: 'presupuesto', required: false
-    },
-    {
-      key: 'plazo', label: 'El plazo', title: '¿Cuándo la necesitas?',
-      sub: 'La fabricación artesanal lleva su tiempo; conviene planificarla.',
-      kind: 'chips', required: true,
-      options: [{ label: 'Lo antes posible' }, { label: 'En los próximos 3 meses' }, { label: 'Más adelante este año' }, { label: 'Solo estoy explorando' }]
+      key: 'presupuesto', label: 'Presupuesto y plazo', title: '¿En qué horquilla te mueves?',
+      sub: 'Una pieza a medida en madera maciza recuperada no juega en la liga del mueble de catálogo. Dinos tu horquilla y te decimos con franqueza si encaja.',
+      kind: 'presupuesto', required: false,
+      chipsExtra: {
+        key: 'plazo', label: '¿Cuándo la necesitas?',
+        options: ['Lo antes posible', 'En los próximos 3 meses', 'Más adelante este año', 'Solo estoy explorando']
+      }
     },
     {
       key: 'contacto', label: 'Contacto', title: '¿Cómo te escribimos?',
@@ -73,7 +79,14 @@
     }
     var definido = a.pieza && a.espacio && (a.largo || a.medidasLibres);
     var cerca = a.plazo === 'Lo antes posible' || a.plazo === 'En los próximos 3 meses';
-    if (definido && cerca && (a.presupuesto || a.presupuestoHablar)) {
+    // Un presupuesto por debajo del suelo del taller no es un lead caliente
+    // por muy definido que esté el proyecto. Pilar entró marcada HOT y se cayó
+    // por precio después de que el comercial le dedicara una conversación:
+    // marcarlo aquí es lo que evita esa llamada.
+    if (a.presupuesto === PRESUPUESTOS[0]) {
+      return { tier: 'COLD', note: 'El presupuesto queda por debajo de lo que cuesta una pieza a medida. Contestar con franqueza y sin dedicarle una visita.' };
+    }
+    if (definido && cerca && a.presupuesto) {
       return { tier: 'HOT', note: 'Proyecto definido, presupuesto y plazo cercano. WhatsApp en menos de 2 h y propuesta de visita al taller.' };
     }
     return { tier: 'WARM', note: 'Tiene proyecto pero sigue explorando. Seguimiento a 7 días con proyectos similares.' };
@@ -97,7 +110,7 @@
       a.espacio ? '· Para: ' + a.espacio : '',
       medidas ? '· Medidas: ' + medidas : '',
       a.comensales ? '· Comensales: ' + a.comensales : '',
-      a.estilo ? '· Estilo: ' + a.estilo : '',
+      a.presupuesto ? '· Presupuesto: ' + a.presupuesto : '',
       a.plazo ? '· Plazo: ' + a.plazo : '',
       '',
       '¿Me decís qué encaja?',
@@ -131,6 +144,20 @@
       }).join('') + '</div>';
     }
 
+    // Bloque de opciones que se añade a un paso de otro tipo. Es lo que
+    // permite juntar dos preguntas en una pantalla sin duplicar código.
+    var chipsExtra = function () {
+      if (!s.chipsExtra) return '';
+      var x = s.chipsExtra;
+      return '<div style="margin-top:30px"><label style="display:block;font-family:var(--font-label);' +
+        'font-size:11px;letter-spacing:var(--tracking-label);text-transform:uppercase;' +
+        'color:var(--text-inverse-muted);margin-bottom:12px">' + esc(x.label) + '</label>' +
+        '<div class="chips">' + x.options.map(function (o) {
+          return '<button class="chip" data-choice="' + esc(x.key) + '" data-val="' + esc(o) +
+            '" aria-pressed="' + (a[x.key] === o) + '">' + esc(o) + '</button>';
+        }).join('') + '</div></div>';
+    };
+
     if (s.kind === 'medidas') {
       h += '<div class="row" style="max-width:640px">' +
         '<div class="field"><label for="largo">Largo (cm)</label><input id="largo" type="number" inputmode="numeric" min="30" max="800" placeholder="240" value="' + esc(a.largo || '') + '"></div>' +
@@ -138,14 +165,22 @@
         '<div class="field"><label for="com">Comensales</label><input id="com" type="number" inputmode="numeric" min="1" max="40" placeholder="8" value="' + esc(a.comensales || '') + '"></div>' +
         '</div>' +
         '<div class="field" style="max-width:640px"><label for="libre">O descríbelo</label>' +
-        '<textarea id="libre" rows="2" placeholder="No sé las medidas: el comedor mide unos 4 metros de largo…">' + esc(a.medidasLibres || '') + '</textarea></div>';
+        '<textarea id="libre" rows="2" placeholder="No sé las medidas: el comedor mide unos 4 metros de largo…">' + esc(a.medidasLibres || '') + '</textarea></div>' +
+        chipsExtra();
     }
 
     if (s.kind === 'presupuesto') {
-      h += '<div class="field" style="max-width:400px"><label for="pres">Presupuesto orientativo (€)</label>' +
-        '<input id="pres" type="number" inputmode="numeric" min="0" step="100" placeholder="Escribe una cifra aproximada" value="' + esc(a.presupuesto || '') + '">' +
-        '<span class="hint">Solo para orientarnos. No es un compromiso ni un precio cerrado.</span></div>' +
-        '<button class="chip" id="hablar" aria-pressed="' + !!a.presupuestoHablar + '" style="margin-top:6px">Prefiero hablarlo</button>';
+      // Tramos en vez de una cifra libre. Escribir un número cuesta y casi
+      // nadie lo hace; elegir una horquilla es un toque. Y sobre todo: dos de
+      // los primeros siete cualificados se cayeron por precio después de que
+      // el comercial les dedicara una conversación. Preguntarlo aquí, antes
+      // del contacto, deja que se descarte quien no encaja.
+      h += '<div class="chips">' + PRESUPUESTOS.map(function (o) {
+        return '<button class="chip" data-choice="presupuesto" data-val="' + esc(o) + '" aria-pressed="' +
+          (a.presupuesto === o) + '">' + esc(o) + '</button>';
+      }).join('') + '</div>' +
+        '<p class="hint" style="margin-top:14px;max-width:52ch">Es orientativo. No es un compromiso ni un precio cerrado.</p>' +
+        chipsExtra();
     }
 
     if (s.kind === 'contacto') {
@@ -185,7 +220,9 @@
         syncNext();
         // avance automático en pasos de una sola elección
         var s = STEPS[i];
-        if (a[k] && (s.kind === 'chips' || (s.kind === 'choice' && !s.extra))) setTimeout(go1, 340);
+        // No se avanza solo si en la misma pantalla queda otra pregunta por
+        // contestar: sería llevarse al usuario a mitad de paso.
+        if (a[k] && !s.chipsExtra && (s.kind === 'chips' || (s.kind === 'choice' && !s.extra))) setTimeout(go1, 340);
       });
     });
 
@@ -195,17 +232,10 @@
     on('com', function (e) { a.comensales = e.target.value; });
     on('libre', function (e) { a.medidasLibres = e.target.value; syncNext(); });
     on('x', function (e) { a.referencias = e.target.value; });
-    on('pres', function (e) { a.presupuesto = e.target.value; if (e.target.value) { a.presupuestoHablar = false; var hb = document.getElementById('hablar'); if (hb) hb.setAttribute('aria-pressed', 'false'); } });
     on('nom', function (e) { a.nombre = e.target.value; syncNext(); });
     on('mail', function (e) { a.email = e.target.value; syncNext(); });
     on('wa', function (e) { a.tel = e.target.value; syncNext(); });
 
-    var hb = document.getElementById('hablar');
-    if (hb) hb.addEventListener('click', function () {
-      a.presupuestoHablar = !a.presupuestoHablar;
-      hb.setAttribute('aria-pressed', String(a.presupuestoHablar));
-      if (a.presupuestoHablar) { a.presupuesto = ''; var p = document.getElementById('pres'); if (p) p.value = ''; }
-    });
     var ck = document.getElementById('ok');
     if (ck) ck.addEventListener('change', function () { a.consent = ck.checked; syncNext(); });
   }
@@ -234,7 +264,11 @@
     foot.style.display = 'none';
     crumbs.innerHTML = STEPS.map(function (s) { return '<span class="done">' + esc(s.label) + '</span>'; }).join('');
 
-    var val = a.presupuesto ? Number(a.presupuesto) : ({ HOT: 3000, WARM: 1500, COLD: 300 })[q.tier];
+    // Valor que se le pasa al píxel. Del tramo se toma el punto medio: sirve
+    // para que Meta compare unos leads con otros, no para facturar.
+    var VALOR = { 'Menos de 1.500 €': 1000, 'Entre 1.500 y 3.000 €': 2250,
+      'Entre 3.000 y 5.000 €': 4000, 'Más de 5.000 €': 6500 };
+    var val = VALOR[a.presupuesto] || ({ HOT: 3000, WARM: 1500, COLD: 300 })[q.tier];
     window.ab113 && ab113.track('CompleteRegistration', {
       content_name: 'cuestionario_particular', tier: q.tier, pieza: a.pieza || '', espacio: a.espacio || '',
       plazo: a.plazo || '', value: val, currency: 'EUR'
@@ -245,9 +279,9 @@
     window.ab113 && ab113.enviarLead({
       origen: 'cuestionario',
       nombre: a.nombre, email: a.email, telefono: a.tel,
-      tier: q.tier, pieza: a.pieza, espacio: a.espacio, estilo: a.estilo,
+      tier: q.tier, pieza: a.pieza, espacio: a.espacio,
       medidas: (a.largo && a.ancho) ? a.largo + 'x' + a.ancho + ' cm' + (a.comensales ? ' · ' + a.comensales + ' comensales' : '') : (a.medidasLibres || ''),
-      presupuesto: a.presupuesto || (a.presupuestoHablar ? 'prefiere hablarlo' : ''),
+      presupuesto: a.presupuesto || '',
       plazo: a.plazo, referencias: a.referencias
     }).catch(function () {
       var av = document.getElementById('avisoenvio');
@@ -257,7 +291,7 @@
     var rows = [
       ['Pieza', a.pieza], ['Espacio', a.espacio],
       ['Medidas', (a.largo && a.ancho) ? a.largo + ' × ' + a.ancho + ' cm' + (a.comensales ? ' · ' + a.comensales + ' comensales' : '') : (a.medidasLibres || '—')],
-      ['Estilo', a.estilo], ['Presupuesto', a.presupuesto ? Number(a.presupuesto).toLocaleString('es-ES') + ' €' : (a.presupuestoHablar ? 'Prefiere hablarlo' : '—')],
+      ['Presupuesto', a.presupuesto || '—'],
       ['Plazo', a.plazo], ['Contacto', (a.nombre || '') + ' · ' + (a.tel || '')]
     ];
 
