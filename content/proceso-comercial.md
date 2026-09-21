@@ -17,10 +17,12 @@ quién la fijó. Lo que no está aquí no se hace por defecto.
 
 ## 2. Recordatorios de cita (Maikel, 21-sep)
 
-- **Siempre un recordatorio el mismo día**, entre 45 y 75 minutos antes, con el
-  enlace de la videollamada (https://meet.google.com/gom-euxm-btb), por el canal
-  donde esté la conversación del lead (647 → type WhatsApp; gateway → type SMS;
-  sin WhatsApp → correo). Texto base: «Hola X, soy Maikel. Te recuerdo que hoy a
+- **Siempre un recordatorio el mismo día, a las 9:00, a todos los que tienen
+  cita ese día** (Maikel, 21-sep: «yo los haría a todos el mismo día a las 9»),
+  con el enlace de la videollamada (https://meet.google.com/gom-euxm-btb), por el
+  canal donde esté la conversación del lead (647 → type WhatsApp; gateway → type
+  SMS; sin WhatsApp → correo). Las citas que se agenden después de las 9:00 para
+  ese mismo día no llevan recordatorio aparte: la confirmación ya lleva el enlace. Texto base: «Hola X, soy Maikel. Te recuerdo que hoy a
   las HH:MM tenemos la videollamada de 15 minutos. Entra por aquí: [enlace]. Si
   te surge algo, dímelo por aquí y lo movemos.»
 - **Si la cita se agendó con dos o más días de antelación**, además un
@@ -33,7 +35,7 @@ quién la fijó. Lo que no está aquí no se hace por defecto.
 - Antes de enviar, leer el hilo: si Maikel ya ha mandado el enlace ese día, no
   se repite. Cada recordatorio se anota en la ficha de GHL.
 - Pendiente de implementar en código (`api/activacion.js`): recordatorio del
-  mismo día automático (T−60 min) y recordatorio de víspera cuando
+  mismo día automático (9:00) y recordatorio de víspera cuando
   `cita − agendado ≥ 2 días`, con etiquetas `recordatorio-dia` y
   `recordatorio-vispera` para no duplicar. Hasta entonces, lo hace el agente de
   operaciones a mano con recordatorios programados.
