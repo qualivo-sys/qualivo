@@ -16,7 +16,7 @@ EXTRA.append(("EA_React_1_Mes1",
     p("Hace unas semanas te interesaste por formarte con nosotras y luego la vida se puso por medio "
       "—nos pasa a todas—. Pero esa idea de <strong>dedicarte a las uñas</strong> sigue ahí, ¿verdad?"),
     p("Te escribo porque acabamos de abrir nuevas fechas y quería que lo supieras antes de que se llenen. "
-      "Nada de presión: solo que no pierdas la oportunidad por no enterarte."),
+      "Solo quería que lo supieras y no perdieras la oportunidad por no enterarte."),
     p("Si te sigue rondando, reserva una llamada corta y lo vemos sin compromiso."),
     p("Un abrazo,<br><strong>El equipo de Eleva Academy</strong>"),
     ], "Retomar mi plaza"))

@@ -162,7 +162,7 @@ EMAILS.append(("EA_B4_Llamada_D6",
         "Te decimos con honestidad si nuestra formación te encaja.",
         "Resolvemos todas tus dudas (fechas, precios, financiación).",
     ]),
-    p("Sin presión y sin venderte nada a la fuerza. Si no es para ti, te lo diremos. Y si lo es, "
+    p("Si no es para ti, te lo diremos con sinceridad. Y si lo es, "
       "saldrás con un plan claro."),
     p("Reserva tu hueco aquí abajo 👇"),
     p("Un abrazo,<br><strong>El equipo de Eleva Academy</strong>"),
