@@ -118,3 +118,17 @@ remate. Carpeta `content/carruseles/2026-09-21-clinica-real/`. Faltan tres
 cosas que solo tiene Maikel: la frase de ella en la reunión (hueco amarillo en
 la lámina 5), su respuesta por WhatsApp (va resumida, no citada) y el permiso
 para nombre y clínica. El de reformas queda como reserva.
+
+### Lunes 21 · noche · «hay que darle una vuelta a todo»
+
+Maikel: ni la llamada de reformas ni la clínica le convencen del todo; lo que
+quiere es enseñar distintas fugas y mejoras en cualquier etapa del recorrido,
+para que el cliente lo vea, y no tanto carrusel: un post sobre algo concreto
+que aporte valor. Hecho: serie «Buscando la fuga», diez piezas de una imagen,
+una por etapa del recorrido del brief, cada una con la fuga, un caso propio
+verificado, la mejora aplicable y lo que se mide. Tres posts de LinkedIn
+completos (contacto, reunión, seguimiento). Carpeta
+`content/infografias/2026-09-22-fuga-por-etapa/` y doc
+`content/borradores/serie-buscando-la-fuga-por-etapa.md`. Los dos carruseles
+quedan en reserva. Mañana: adaptar el plan de la semana 39 a esta serie si
+Maikel la aprueba.
