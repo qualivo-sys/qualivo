@@ -47,3 +47,6 @@ actuales a GHL (cacheados 2 min). Solo se vuelve a desplegar si cambia el
 | `GADS_LOGIN_CUSTOMER_ID` | ID del administrador/MCC si el acceso es vía MCC (p. ej. `981-298-8446`) |
 
 Requiere `GOOGLE_SA_B64` (la misma cuenta de servicio) añadida como **usuario** de la cuenta de Google Ads. Si faltan, la inversión de Google cae al bloque manual `GOOGLE_INV`.
+
+### Motor etiqueta → columna (`sync-stages`)
+`netlify/functions/sync-stages.mjs` corre cada 10 min y recoloca los tratos cuya columna no coincide con sus etiquetas (8 reglas del proceso comercial, con salvaguardas: no toca *Alumna matriculada* ni *Baja*, no retrocede tratos avanzados). **Por defecto solo simula**: para que escriba, añade la variable `SYNC_APPLY=1`. Pasada manual completa: `/.netlify/functions/sync-stages-run?pw=<DASHBOARD_PASSWORD>&full=1&apply=1&max=40` (repetir hasta `remaining: 0`).
