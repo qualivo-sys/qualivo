@@ -78,3 +78,28 @@ todas menos la última. Firma @maikel.echevarria y QUALIVO.IO. Primer ejemplo:
 | 6 | Idea 4: lo que puedes hacer tú mañana | 30 | Pantalla de ejemplo, marcada como ejemplo |
 | 7 | Resumen: tres líneas | 30 | Las tres líneas, sin más |
 | 8 | Una acción | 15 | Pregunta grande |
+
+## 6. Copy: las reglas (añadido el 22-sep a petición de Maikel)
+
+Fuentes: lista de Maikel (raquelmartinsm.com, luzzidigital.com,
+redactorfreelance.com, thepower.education) más la guía de voz de casa.
+
+**Pie de foto (caption), en este orden:**
+1. **Gancho, primera línea.** Una promesa concreta o una pregunta incómoda. Nunca el tema. «Tardar una hora en contestar te cuesta 7 veces más de lo que crees» sí. «Hablemos de velocidad de respuesta» no.
+2. **Cuerpo, uno o dos párrafos cortos.** Una sola idea, un solo dolor, espacios en blanco. Se lee en el móvil sin pulsar «más».
+3. **Una sola acción.** Guardar, comentar una palabra, o ir al enlace. Nunca dos.
+4. **Instagram: de 3 a 5 etiquetas** al final, del sector y de la etapa. LinkedIn: ninguna o una.
+
+**Carrusel, lámina a lámina (PAS: problema, agitar, solución):**
+1. **Portada:** titular magnético + promesa específica. Es el 80 % del resultado. Número o tensión.
+2. **Dolor:** la escena que el lector reconoce, sin rodeos. «Alguien pide precio a las 14:02. Lo ves a las 18:30.»
+3. **Agitar:** el dato que demuestra que duele más de lo que cree (el estudio).
+4-6. **Valor:** una idea por lámina. Lo que hace el mejor, lo que hace el agente, la prueba de casa.
+7. **Clímax:** lo que se lleva. Una acción que puede hacer mañana.
+8. **Cierre:** guardar + una pregunta.
+
+**AIDA** para posts de una imagen: atención (número), interés (el dolor), deseo (lo que cambia), acción (una).
+
+**Prohibido en el copy:** empezar por el tema, «hoy os traigo», «en este carrusel», más de una idea por lámina, tres CTA, cifras sin fuente, «no se trata de X sino de Y», raya larga, punto y coma.
+
+**Pantallas:** cuando se enseña una herramienta (calendario, WhatsApp, CRM), se imita la de verdad para que sea creíble: mismo orden de elementos, mismos colores de interfaz, datos reales. Nunca el logotipo de la marca ajena.

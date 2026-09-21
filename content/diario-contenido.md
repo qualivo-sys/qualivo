@@ -165,3 +165,12 @@ por lámina, menos de 40 palabras, imagen en todas, barra de progreso, fuente en
 la lámina, cierre con una acción. Carpeta
 `content/carruseles/2026-09-22-contacto-7x/`. Lo que no he podido hacer: abrir
 Instagram o LinkedIn y medir carruseles nuevos uno a uno.
+
+Maikel, sobre el carrusel: el diseño le gusta; pide pantallas creíbles (un
+Google Calendar de verdad, no un dibujo) y copy con fórmula. Añadida la
+sección de copy a la guía (gancho, cuerpo, una acción, 3-5 etiquetas; PAS
+lámina a lámina). Carrusel reescrito con PAS: portada con promesa concreta,
+lámina 2 el dolor con una conversación de ejemplo, lámina 3 el estudio,
+después experto, agente, calendario del martes con las tres citas en pantalla
+tipo Google Calendar, acción para mañana y cierre. Pie de foto para Instagram
+y LinkedIn en `caption.md`.
