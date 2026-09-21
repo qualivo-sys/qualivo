@@ -156,7 +156,11 @@ async function llamarModelo(sistema, mensajes) {
   if (!clave) throw new Error('falta ANTHROPIC_API_KEY');
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
+    headers: Object.assign(
+      { 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
+      // Las claves de organización (no ligadas a un workspace) exigen decir en qué workspace se gasta.
+      process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}
+    ),
     body: JSON.stringify({
       model: MODELO,
       max_tokens: 1500,
