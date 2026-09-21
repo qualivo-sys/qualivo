@@ -47,7 +47,9 @@ function enVentana(canal, fecha) {
     // hasta el lunes es tirar el dinero que costó traerlos. Pero llamar a un
     // empresario un domingo, o un sábado por la tarde, es pasarse.
     if (t.dia === 6) return t.minutos >= 10 * 60 && t.minutos < 14 * 60;
-    const manana = t.minutos >= 9 * 60 + 30 && t.minutos < 14 * 60;
+    // Desde las 9:00 entre semana (Maikel, 21-sep): un dueño de reformas o de
+    // academia ya está en marcha a esa hora y la primera tanda no espera media hora.
+    const manana = t.minutos >= 9 * 60 && t.minutos < 14 * 60;
     const tarde = t.minutos >= 16 * 60 && t.minutos < 20 * 60;
     return manana || tarde;
   }
