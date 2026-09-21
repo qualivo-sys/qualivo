@@ -92,3 +92,17 @@ propio sorprendente que llevaba en cola desde el 10-sep). La pieza de la
 velocidad y la lista de cinco fallos pasan a reserva. Regla escrita en el
 brief y en el prompt: primero lo que funciona con dato, después el fallo,
 corto. Nunca más piezas de fallo que de acierto en una semana.
+
+### Lunes 21 · noche · «¿puedes enseñar ejemplos para que la gente lo vea?»
+
+Hecho un carrusel de demostración con una llamada real del lunes (la cita de
+las 10:30): el WhatsApp del minuto uno con el texto real del sistema, la
+transcripción de la llamada, la nota que quedó en el CRM, los 50 segundos de
+silencio que salieron mal y el remate «20 minutos del formulario a la cita».
+Formato de simulación de pantalla del 14-sep. Sin nombre, empresa ni teléfono
+del cliente. Va el jueves 24 en Instagram y como documento en LinkedIn; la
+tarjeta Sin humo pasa a reserva. Carpeta:
+`content/carruseles/2026-09-21-llamada-real/`.
+
+Duda escrita: el cliente podría reconocer su propia llamada aunque no haya
+nada que lo identifique. Recomiendo publicar; decide Maikel.
