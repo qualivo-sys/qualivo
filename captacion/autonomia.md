@@ -17,8 +17,8 @@ momento, no en saltarse a Maikel.
 Redacto sin preguntar nada cuando la respuesta cabe en una de estas:
 
 - Contestar una pregunta cuya respuesta ya está decidida: qué hacemos, qué es un
-  agente, cómo empezamos, el precio dentro de la horquilla 1.000-2.500 €/mes,
-  cómo funciona el piloto, de dónde salió su email.
+  agente, cómo empezamos, el precio (1.200 € de implementación y 750 €/mes, ver
+  `estrategia/precio.md`), cómo funciona el piloto, de dónde salió su email.
 - Pedir el dato que falta para avanzar: el contacto de quien decide, su web, una
   hora concreta.
 - Cerrar limpio a quien dice que no, y sacarlo de todas las campañas.

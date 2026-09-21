@@ -61,7 +61,9 @@ def propuesta(score, accion, t):
     if score == 80: return "Gracias + pedir nombre y correo de quien lo lleva, para escribir directamente y no hacer de intermediario."
     if score == 40: return "Aceptar sin insistir + UN caso que no requiera gastar (base recuperada 6,45x) + puerta abierta."
     if re.search(r"cuanto|cuánto|precio|cobras|coste", b):
-        return "Dar la cifra: 1.000-2.500 EUR/mes segun lo que haya que montar, sin cobrar por lead ni por hora. Y quince minutos antes de nada."
+        return ("Dar la cifra primero y explicar despues: 1.200 EUR de implementacion "
+                "y 750 EUR/mes, y si el primer mes no genera citas cualificadas no se "
+                "cobra. Y quince minutos antes de nada.")
     if re.search(r"mas info|más info|envianos|envíanos", b):
         return "Rebajar la peticion: que digan en una linea que venden y por donde les llega la gente hoy."
     if re.search(r"como crees que|cómo crees que|puedes ayudar", b):

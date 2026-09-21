@@ -20,7 +20,8 @@ reunión, se le pone número a la fuga.
    completo (message-history de Smartlead), la ficha del lead, el probe de su
    web y el Outbound Brain, y redacta el borrador en el estilo validado de
    Maikel (natural, análisis gratis primero, dos salidas: 20 min o por
-   escrito; precios solo si preguntan: 1.000-2.500 €/mes, garantía 30 días).
+   escrito; precios solo si preguntan: 1.200 € de implementación y 750 €/mes,
+   y si el primer mes no genera citas cualificadas no se cobra).
 4. **Copiloto**: el borrador se presenta a Maikel en el chat. Con su ok se
    envía con `POST campaigns/{cid}/reply-email-thread` (mismo buzón, mismo
    hilo). Registro en GHL: oportunidad "Conversación abierta" + nota con el

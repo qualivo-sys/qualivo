@@ -70,8 +70,9 @@ sepa qué línea trae el negocio.
   base de clientes histórica, sector tradicional donde la IA aún suena a ventaja.
 - **Dolor en sus palabras**: "no sabemos de qué línea salió el último cliente";
   "cada área va por su lado"; "todo entra por info@".
-- **Presupuesto típico**: cuota 1.000-2.500 €/mes (la horquilla validada en
-  conversaciones; Equilibrha 1.500 €, Grup Montaner 1.500 € en pipeline).
+- **Precio**: 1.200 € de implementación y 750 €/mes, con garantía de que si el
+  primer mes no genera citas cualificadas no se cobra (Maikel, 21-sep). La
+  horquilla vieja de 1.000-2.500 €/mes queda derogada; manda `estrategia/precio.md`.
 - **Ciclo de venta**: 2-6 semanas, consultivo, 1-2 reuniones + propuesta <48h.
 - **Evidencia**: PRL 2/13 respuestas (15%), gestorías 3/32 (9,4%), Adelantta
   3/66 (4,5%) con 16 clics; fincas 3 clics; reunión y propuesta con Adelantta.
@@ -192,9 +193,9 @@ respuesta en <2h y llamada el mismo día.
 5. **¿Por qué dijo que no Inspyria?** Lead entrante, no pasó por esta máquina y
    no hay rastro en el repo. Dato de encaje valioso: pedir a Maikel el motivo
    en una frase y añadirlo aquí.
-6. **¿Qué precio/paquete convierte mejor?** Horquilla 1.000-2.500 €/mes usada
-   en conversación, pero solo 1 cierre reciente de recurrente (Equipzilla,
-   preexistente). Lo validan las 8-10 propuestas del objetivo de septiembre.
+6. **¿Qué precio/paquete convierte mejor?** Desde el 21-sep hay precio fijo:
+   1.200 € de implementación y 750 €/mes con garantía el primer mes. Lo validan
+   las 8-10 propuestas del objetivo de septiembre.
 7. **¿LinkedIn v2 genera conversaciones o solo aceptaciones?** Primera lectura
    el 15-sep con dos semanas de datos.
 8. **¿El diagnóstico gratis por escrito canibaliza la reunión?** Hoy es el CTA
