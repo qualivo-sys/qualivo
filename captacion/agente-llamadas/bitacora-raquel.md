@@ -95,3 +95,30 @@ respondio-17sep). No es un lead de las campañas nuevas.
 **Regla fijada por Maikel (19-sep):** si el lead contesta al WhatsApp, no se le llama. El reloj ya lo hacía (mira la respuesta antes de decidir el paso); queda escrito para que no se toque.
 
 **Cambios del sistema alrededor de Raquel, mismo día:** todo el WhatsApp sale por la pasarela (Wazzap) desde el número de Maikel; el primer mensaje es genérico y en fin de semana propone agendar el lunes; el agente de WhatsApp atiende las respuestas (pendiente de una clave válida de Anthropic); correo a Maikel por cada llamada con resumen y enlace a la grabación.
+
+## 21-sep-2026 · lunes
+
+**Llamadas del día (24, todas desde el móvil de Maikel):** 3 citas (Angélica 9:00 → martes 10:00; Celso 10:30 → martes 10:30; Elena 18:08 → martes 11:00), 1 «llámame más tarde» (Elena 9:00), 2 «no es el lead» con conversación (Benjamín 12:15, César 17:59), 1 cortada por falta de contexto (César 17:56), 10 buzones (Ana ×2, Pablo ×2, David ×2, Pilar, Elena, César ×2), 3 con locución de operadora + buzón (Raúl ×2, David), 4 sin conectar (Paco ×2, Marcos ×2). Coste aproximado del día: 1,65 $. Registro completo con audio en Notion «📞 Llamadas de Raquel».
+
+**Lo que enseñó:**
+1. **La locución de la operadora la engaña.** «Gracias. No cuelgues, por favor» la trata como una persona («Claro, aquí estoy»), deja el recado dos veces y luego espera 60 s de silencio: 118 s por un buzón, tres veces hoy (Raúl ×2, David).
+2. **Sin contexto, el reintento se cae.** César, cuarta llamada: «la última vez que te llamo, que no quiero ser pesada» y directamente los huecos → «¿de qué tema me habla?» y se corta. Con contexto (quinta, a mano) contestó de verdad: no es el lead.
+3. **No sabe qué hacer con «lo pidió un compañero» ni con «me llegó un correo de que no interesaba».** Con Benjamín repitió tres veces la pregunta de la fuga, dijo «no tengo constancia de un correo» y acabó confirmando el descarte automático. (El descarte automático se desactivó ese mismo día: los que no invierten entran en cadencia.)
+4. **Lee literal la opción del formulario:** «marcaste el tema de no lo sé, eso es lo que quiero» (Celso).
+5. **Pedir confirmar el dominio del correo** («el de Gmail punto com, ¿correcto?») dejó a Celso 50 s en silencio y a Raquel repitiendo el discurso del correo dos veces.
+6. **Dice que la cita es telefónica** cuando es videollamada (Elena).
+7. **Ofrece dos huecos del mismo día sin preguntar disponibilidad** (Angélica: «no puedo a ninguna de las dos»).
+8. Siguen «un 2º», «1º», «Michael», «Cualibó/Qualibo/Quality», y «Hola, citana» por «Hola, Ana». Y «¿hablé Elena?» por «¿hablo con Elena?». El nombre compuesto «Nadia Angélica» venía así del formulario.
+9. La primera llamada de los leads del domingo salió a las 9:00 en punto del lunes (Elena: «te va a venir fatal ahora»).
+
+**Cambios aplicados al asistente** (copia previa en el scratchpad: `vapi-asistente-2026-09-21.json`; prompt nuevo en `vapi-prompt-2026-09-21-nuevo.md`):
+1. Locuciones de operadora: no contestar, esperar al pitido, recado de diez segundos y colgar con endCall. Nunca esperar en silencio tras el recado.
+2. Si quien coge no es quien lo lleva: preguntar nombre, si puede pasar, mejor canal y horario; no seguir con la fuga.
+3. Respuestas fijas nuevas: correo de descarte («salió por un error del sistema, por eso te llamo»), agencia («tu agencia trae la gente; esto va de qué pasa después»), canal («videollamada por Meet; si prefieres teléfono, Máikel te llama»).
+4. Fuga «no lo sé»: no leer la opción literal.
+5. Agenda: preguntar mañana/tarde antes de leer huecos, preferir mañana o pasado a hoy; no pedir confirmar el dominio del correo.
+6. Ordinales con letras («un segundo», «primero»), reforzado.
+
+**Propuesto, no aplicado:** primera llamada de los leads de fin de semana a partir de las 9:30-10:00, no a las 9:00 en punto (cadencia); tras dos buzones el mismo día, no volver a llamar ese día (cadencia); reintentos con apertura de contexto obligatoria en `assistantOverrides.firstMessage` desde `api/activacion.js` (hoy solo se hace a mano); probar grafía «Áना» → «Hola. Ana,» para nombres de tres letras (voz).
+
+**Regla fijada por Maikel (21-sep):** los que no invierten también se llaman («puede ser gente con dinero»); y nada que parezca envío automatizado por WhatsApp desde el 663.
