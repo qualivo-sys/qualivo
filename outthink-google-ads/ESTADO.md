@@ -763,3 +763,20 @@ registros, CPL 52,35 €**; quedan **324,73 €** para el martes, el miércoles 
 jueves → hacen falta ~130 €/día o sobrarán ~122 €. Proyección de cierre: **38 registros**.
 También se cae la lectura de «la conversión sigue bajando»: por semanas va 5,3 % → 2,9 % →
 4,0 %, se ha recuperado tras los frenos.
+
+### Fin de campaña fijado al 23-09 a las 23:59 (decisión de Maikel, 21-09)
+Aplicado por API a las **4 campañas** (`campaigns:mutate`, `updateMask: "endDateTime"`,
+`endDateTime = "2026-09-23 23:59:59"`, zona horaria de la cuenta `Europe/Madrid`). Script
+`scripts/set_fin.py` (valida por defecto, aplica con `--apply`). No corre el día del evento.
+
+Nota API v25: los campos de fecha de campaña son **`campaign.start_date_time` /
+`campaign.end_date_time`**; `campaign.end_date` y `campaign.start_date` dan
+`UNRECOGNIZED_FIELD`. Además, al seleccionar `start_date_time` y `end_date_time` juntos la
+consulta devuelve ambos vacíos; hay que pedir `end_date_time` solo para leer el valor.
+Verificado: `{"name": "OT26_Search", "endDateTime": "2026-09-23 23:59:59"}`.
+
+**Consecuencia sobre el presupuesto:** quedan 324,73 € y solo **dos días de servicio** (22 y 23;
+el de hoy ya está agotado). Hacen falta **162 €/día**; con los 81,22 €/día actuales se quedarían
+**~162 € sin invertir**. La propuesta de subir presupuesto pasa de conveniente a necesaria si
+se quiere consumir el presupuesto comprometido. Hoja «Reunión 21-09» y portada del dashboard
+actualizadas con la nueva fecha de corte y el ritmo recalculado.

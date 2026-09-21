@@ -10,10 +10,10 @@ c7=sum(d["coste"] for d in D["dias"] if d["f"]>="2026-09-15"); v7=sum(d["conv"] 
 cpl7=c7/v7 if v7 else coste/conv
 proy=conv+round(rest/cpl7)
 def n(x): return f"{x:,.2f}".replace(",","@").replace(".",",").replace("@",".")
-vals=[["Actualizado con datos hasta hoy 21/9 a las 09:00"],[],
+vals=[["Actualizado el 21/9 · la campaña se apaga el miércoles 23 a las 23:59"],[],
  ["REGISTROS","","COSTE POR REGISTRO","","INVERTIDO","","PROYECCIÓN","","DÍAS RESTANTES"],
- [conv,"",n(round(coste/conv,2))+" €","",n(coste)+" €","",proy,"",3],
- [f"{round(conv/200*100)} % del objetivo (200)","","objetivo 8-12 €","",f"{round(coste/2000*100)} % de 2.000 €","","si se invierte el resto","","hasta el 24 de septiembre"]]
+ [conv,"",n(round(coste/conv,2))+" €","",n(coste)+" €","",proy,"",2],
+ [f"{round(conv/200*100)} % del objetivo (200)","","objetivo 8-12 €","",f"{round(coste/2000*100)} % de 2.000 €","","si se invierte el resto","","martes 22 y miércoles 23"]]
 r=urllib.request.Request(f"https://sheets.googleapis.com/v4/spreadsheets/{SS}/values/{urllib.parse.quote('Dashboard')}!A2?valueInputOption=USER_ENTERED",
     data=json.dumps({"values":vals}).encode(),headers=H,method="PUT")
 print(json.load(urllib.request.urlopen(r))["updatedRange"], "| registros",conv,"coste",coste,"proy",proy)
