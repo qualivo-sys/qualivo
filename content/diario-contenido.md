@@ -146,3 +146,22 @@ seguimientos, los siete impactos). Tres piezas renderizadas (contacto,
 seguimiento, reunión) con tres posts de LinkedIn en
 `content/borradores/serie-estudio-vs-agente.md`. Regla escrita: la cifra sale
 de quien la publica, y va en la imagen.
+
+Maikel, sobre las tres piezas: «no está mal pero hay mucha información, eso no
+lo va a leer nadie». Rehechas: un número grande, una línea, y dos líneas más
+(un buen comercial / nuestro agente). Post de LinkedIn por debajo de 90
+palabras. Regla nueva para la serie y para el resto: si no cabe en una
+pantalla de móvil sin bajar, sobra.
+
+### Lunes 21 · noche · buenas prácticas de carrusel, y aplicarlas
+
+Maikel: «acompaña con una imagen siempre que puedas, todo tiene que ser
+bastante visual», y «busca primero las mejores prácticas, analiza carruseles
+top y aplícalo después». Hecho: `content/guia-carruseles.md` con las reglas
+de cinco fuentes externas, la lista que pasó Maikel, el radar propio y las dos
+referencias que trajo (neuromark, consultoriaio). Doce reglas y una lista de
+comprobación. Aplicado al carrusel del contacto (7×): ocho láminas, una idea
+por lámina, menos de 40 palabras, imagen en todas, barra de progreso, fuente en
+la lámina, cierre con una acción. Carpeta
+`content/carruseles/2026-09-22-contacto-7x/`. Lo que no he podido hacer: abrir
+Instagram o LinkedIn y medir carruseles nuevos uno a uno.

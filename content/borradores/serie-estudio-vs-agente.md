@@ -40,99 +40,53 @@ oficial, para la pieza de contacto fuera de horario); un estudio de
 reactivación de clientes dormidos con fuente académica (todavía no hay uno
 bueno).
 
-## Las tres primeras piezas
+## Las tres primeras piezas (versión corta, 21-sep noche: «hay mucha información, eso no lo va a leer nadie»)
 
-### 1 · Contacto · «Contestar en una hora o en un día: siete veces más probable cualificar al contacto»
+Molde definitivo: **un número grande, una línea, y dos líneas más**: lo que
+hace un buen comercial y lo que hace nuestro agente. Fuente en pequeño. Nada
+más en la imagen. El post de LinkedIn, por debajo de 90 palabras.
 
-**LinkedIn (texto, sin imagen):**
+### 1 · Contacto · 7×
 
-> Harvard Business Review hizo una cosa sencilla: mandó un contacto de prueba
-> por la web a 2.241 empresas de Estados Unidos y cronometró.
+> Contestar en la primera hora hace siete veces más probable cualificar al
+> contacto. Lo midió Harvard Business Review en 2.241 empresas. El 23 % no
+> contestó nunca.
 >
-> El 37 % contestó en la primera hora. El 23 % no contestó nunca. La media,
-> entre las que contestaron, fue de 42 horas.
+> Un buen comercial contesta antes de que la persona se olvide de que
+> preguntó.
 >
-> Y el dato que importa: las que contactaron en la primera hora tenían casi
-> siete veces más probabilidad de cualificar a ese contacto que las que
-> esperaron más.
+> Nuestro agente hace lo mismo: WhatsApp al minuto con sus palabras, y llamada
+> a los veinte si no contesta. El lunes: 24 llamadas, 3 citas.
 >
-> Siete veces. No por tener mejor producto. Por contestar antes de que la
-> persona se olvidara de que había preguntado.
->
-> Mi sistema está montado sobre eso: un WhatsApp al minuto con sus propias
-> palabras del formulario, un correo en el minuto cero que dice cuándo le
-> escribiremos, y si no contesta, una llamada de voz a los veinte minutos. Si
-> contesta al WhatsApp, no se le llama. El lunes fueron 24 llamadas y 3 citas.
->
-> Lo que puedes hacer tú mañana sin ningún agente: mide cuánto tardaste en
-> contestar al último que preguntó. El último, no la media que dice el
-> equipo. Si es más de una hora, ya sabes cuál es tu primera fuga.
->
-> ¿Cuánto tardó el tuyo?
->
-> Fuente: Oldroyd, McElheran y Elkington, «The Short Life of Online Sales
-> Leads», Harvard Business Review, marzo de 2011.
+> ¿Cuánto tardaste tú en contestar al último? El último, no la media.
 
-### 2 · Seguimiento · «Ocho toques para conseguir una primera reunión. La mayoría lo deja mucho antes»
+### 2 · Seguimiento · 8
 
-**LinkedIn:**
-
-> RAIN Group preguntó a 489 vendedores y a 488 compradores B2B cuántos
-> toques hacen falta para conseguir una primera reunión con alguien nuevo. La
-> media: ocho.
+> Ocho toques hacen falta, de media, para conseguir una primera reunión.
+> RAIN Group, 489 vendedores y 488 compradores. La mayoría lo deja en dos.
 >
-> Velocify, con casi 3,5 millones de contactos analizados, encontró que el
-> 93 % de los que acaban convirtiendo se alcanzan antes de la sexta llamada.
-> A partir de la séptima, el rendimiento cae.
+> Un buen comercial insiste ocho veces, cada una con un motivo distinto, y
+> para en cuanto hay respuesta.
 >
-> O sea: hay que insistir más de lo que insiste casi todo el mundo, y menos
-> de lo que insiste un pesado. La ventana está entre seis y ocho.
->
-> La cadencia de mi sistema son exactamente ocho toques en nueve días: tres
-> WhatsApp, dos llamadas y tres correos, cada uno con un motivo distinto,
-> nunca el mismo mensaje dos veces. Nunca más de dos llamadas. Y todo se
-> para en el momento en que la persona contesta, agenda o pide que no le
-> escriban más.
->
-> Lo que puedes hacer tú mañana: abre tu CRM y cuenta cuántos toques recibe
-> un contacto que no contesta. Si son uno o dos y luego silencio, no tienes
-> un problema de captación. Tienes una fuga de persistencia, y es la más
-> barata de arreglar.
+> Nuestro agente hace lo mismo: ocho toques en nueve días, tres WhatsApp, dos
+> llamadas, tres correos. Y para en cuanto contestas.
 >
 > ¿Cuántos toques da tu equipo antes de rendirse?
->
-> Fuentes: RAIN Group, «Top Performance in Sales Prospecting». Velocify,
-> «The Ultimate Contact Strategy».
 
-### 3 · Reunión · «Un recordatorio por mensaje baja los plantones un 25 %. Varios, todavía más»
+### 3 · Reunión · −25 %
 
-**LinkedIn:**
-
-> El mejor estudio sobre plantones no es de ventas. Es de sanidad.
+> Un recordatorio por mensaje baja los plantones un 25 %. Revisión de 21
+> estudios, 16.000 personas, BMJ Open. Es sanidad, pero la gente se olvida
+> igual en una reforma o en una academia.
 >
-> Una revisión de 21 estudios con más de 16.000 pacientes (BMJ Open, 2016)
-> midió qué pasa cuando la cita se recuerda por mensaje: los plantones bajan
-> un 25 %, del 21 % al 15 %. Y mandar más de un aviso mejora la asistencia
-> todavía más.
+> Una buena recepción confirma en el acto y llama en cuanto alguien no
+> aparece.
 >
-> Es sanidad, pero el mecanismo es el mismo en una reforma, una academia o
-> un despacho: la gente no falta por mala fe. Falta porque se olvida.
->
-> Mi sistema: confirmación por WhatsApp en el acto con día, hora y enlace de
-> la videollamada, recordatorios desde el calendario y, si aun así no
-> aparece, llamada a los seis minutos con un guion propio de plantón. El
-> jueves pasado: plantón a las 12:00, llamada a las 12:06, y a los tres
-> minutos escribieron pidiendo otra hora.
->
-> Lo que puedes hacer tú mañana: confirmación al momento, un recordatorio la
-> víspera, y una decisión escrita sobre qué pasa en los diez minutos
-> siguientes a un plantón. Si la respuesta es «nada», ahí se te van
-> reuniones que ya habías conseguido.
+> Nuestro agente hace lo mismo: confirmación al momento y llamada a los seis
+> minutos del plantón. El jueves: plantón a las 12:00, otra hora pedida a las
+> 12:09.
 >
 > ¿Qué pasa en tu empresa diez minutos después de un plantón?
->
-> Fuente: Robotham et al., «Using digital notifications to improve
-> attendance in clinic: systematic review and meta-analysis», BMJ Open, 2016.
 
 ## Cómo encaja con lo demás
 
