@@ -123,7 +123,12 @@ async function enviarWhatsApp(contactId, texto) {
 // GHL como TYPE_CUSTOM_SMS con este proveedor.
 const GATEWAY_PROVIDER = '67ad23a0cf352d8f5809f0ca';
 
+// PAUSA DE LA PASARELA (22-sep, 16:20): WhatsApp ha restringido el número
+// personal de Maikel (663). Hasta que él lo levante, nada sale por la pasarela:
+// ni cadencia, ni agente, ni rescates. Poner GATEWAY_PAUSA=0 en Vercel para reanudar.
+const GATEWAY_PAUSA = process.env.GATEWAY_PAUSA !== '0';
 async function enviarPorGateway(contactId, texto) {
+  if (GATEWAY_PAUSA) throw new Error('pasarela en pausa (restricción de WhatsApp, 22-sep)');
   const r = await fetch(GHL_BASE + '/conversations/messages', {
     method: 'POST',
     headers: cabeceras(),
@@ -190,7 +195,7 @@ async function pasarAMaikel(contactId, texto) {
 const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
 
 async function enviarMensaje(contactId, texto) {
-  if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO) {
+  if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA) {
     try {
       const g = await enviarPorGateway(contactId, texto);
       return { canal: 'gateway', estado: 'enviado', id: (g && (g.messageId || g.msgId)) || '' };
@@ -210,7 +215,7 @@ async function enviarMensaje(contactId, texto) {
     const estado = await estadoMensaje(idWa);
     if (estado && estado.toLowerCase() !== 'failed') return { canal: 'whatsapp', estado: estado, id: idWa };
   }
-  if (!GATEWAY_PERMITIDO) {
+  if (!GATEWAY_PERMITIDO || GATEWAY_PAUSA) {
     await pasarAMaikel(contactId, texto);
     return { canal: 'whatsapp_fallido', estado: 'failed', id: idWa };
   }
