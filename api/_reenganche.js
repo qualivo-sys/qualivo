@@ -93,6 +93,9 @@ async function vuelta(opciones) {
     if (A.tiene(c, 'wa-humano') || A.tiene(c, 'wa-agente-off')) continue;
     if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) continue;
     if (c.dnd === true) continue;
+    // Regla de Maikel (22-sep): tratos en Negociación, Oferta, Piloto o Cliente, nunca sin su aprobación.
+    const opN = await require('./_tratos.js').abierto(c.id).catch(function () { return null; });
+    if (opN) { const T2 = require('./_tratos.js'); const et = Object.keys(T2.ETAPAS).find(function (k) { return T2.ETAPAS[k] === opN.pipelineStageId; }); if (['seguimiento', 'oferta', 'piloto', 'cliente'].indexOf(et) > -1) continue; }
     const n = intentosHechos(c);
 
     // Filtro barato antes de leer el hilo entero: la conversación de GHL ya

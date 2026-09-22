@@ -298,6 +298,17 @@ async function atender(contactId, opciones) {
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
     // Quien ya tiene cita habla con Maikel, no con el agente (Beatriz, 19-sep).
     if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) return Object.assign(hecho, { accion: 'callar', motivo: 'ya tiene cita: lo lleva Maikel' });
+    // Regla de Maikel (22-sep): con el trato en Negociación, Oferta, Piloto o
+    // Cliente nada sale sin su aprobación. El agente avisa y se calla.
+    try {
+      const T = require('./_tratos.js');
+      const op = await T.abierto(c.id);
+      const etapa = op && Object.keys(T.ETAPAS).find(function (k) { return T.ETAPAS[k] === op.pipelineStageId; });
+      if (['seguimiento', 'oferta', 'piloto', 'cliente'].indexOf(etapa) > -1) {
+        if (!opciones.simular) await avisar(c, 'ha escrito y su trato está en ' + etapa + ': contéstale tú o apruébame el texto', '');
+        return Object.assign(hecho, { accion: 'callar', motivo: 'trato en ' + etapa + ': requiere aprobación de Maikel' });
+      }
+    } catch (e) { /* si el CRM falla, sigue el flujo normal */ }
 
     // Candado: dos webhooks seguidos (el lead manda tres mensajes) no pueden
     // contestar dos veces. Si el candado tiene más de dos minutos, se ignora.

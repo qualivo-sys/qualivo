@@ -105,6 +105,11 @@ antes de enviar.** Entran aquí: el correo de seguimiento después de una
 reunión, cualquier propuesta o resumen de plan, cualquier texto que
 comprometa un número, una garantía o un precio, y cualquier correo a un
 prospecto B2B o a un partner. Se dejan como borrador en Gmail o se pegan en
-el chat, y salen cuando Maikel dice «ok». Lo que sí sale sin preguntar: los
+el chat, y salen cuando Maikel dice «ok». **Y todo lo que se envíe a un
+contacto cuyo trato está en «Negociación» (o en «Oferta enviada», «Piloto» o
+«Cliente») pasa por aprobación previa, sea correo, WhatsApp o llamada de
+Raquel, sin excepción** (Maikel, 22-sep). El agente de WhatsApp y el
+reenganche no escriben a esos contactos: si uno de ellos escribe, se avisa a
+Maikel con el hilo y él contesta o aprueba el texto. Lo que sí sale sin preguntar: los
 mensajes cortos del playbook (recordatorios de cita, respuestas del agente,
 cierres de un no, propuesta de nueva hora, tandas ya aprobadas).
