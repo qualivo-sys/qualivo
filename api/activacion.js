@@ -468,6 +468,15 @@ module.exports = async function handler(req, res) {
 
   await procesarSecuencias(resumen);
 
+  // Puntuación (Maikel, 22-sep): tipología y comportamiento de los leads
+  // tocados en las últimas 24 h; aviso cuando uno pasa a A.
+  try {
+    const sc = await require('./_scoring.js').puntuarTodos({ desdeMs: Date.now() - 24 * 3600 * 1000 });
+    resumen.puntuados = sc.total;
+  } catch (err) {
+    console.error('[activacion] puntuación falló:', err && err.message);
+  }
+
   // Conversaciones que se quedaron paradas tras contestar el lead: un
   // reenganche por vuelta, escrito por el agente en su contexto; tres intentos
   // y descarte (Maikel, 21-sep). Ver api/_reenganche.js.
