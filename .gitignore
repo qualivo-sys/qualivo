@@ -14,3 +14,4 @@ node_modules/
 # Datos con emails de creadores: viven en Notion, no aquí
 kill-ramble/data/*.csv
 !kill-ramble/data/creators.sample.csv
+.claude/settings.local.json
