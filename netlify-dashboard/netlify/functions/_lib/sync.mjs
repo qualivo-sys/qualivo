@@ -64,11 +64,13 @@ export async function runSync(opts = {}) {
   }
   let done = 0, errors = 0;
   if (apply) {
-    for (const m of moves.slice(0, max)) {
-      if (!left()) break;
-      try { await api('PUT', `/opportunities/${m.id}`, { pipelineStageId: name2id[m.to] }); done++; }
-      catch (e) { errors++; console.error('sync move error', m.id, String(e).slice(0, 120)); }
-      await new Promise((r) => setTimeout(r, 50));
+    // Escrituras en lotes pequeños en paralelo (respetando el rate limit de GHL) mientras quede presupuesto.
+    const conc = opts.concurrency || 6; const todo = moves.slice(0, max);
+    for (let i = 0; i < todo.length && left(); i += conc) {
+      const batch = todo.slice(i, i + conc);
+      const res = await Promise.allSettled(batch.map((m) => api('PUT', `/opportunities/${m.id}`, { pipelineStageId: name2id[m.to] })));
+      res.forEach((r) => { if (r.status === 'fulfilled') done++; else { errors++; console.error('sync move error', String(r.reason).slice(0, 120)); } });
+      await new Promise((r) => setTimeout(r, 120));
     }
   }
   return { at: new Date().toISOString(), ms: Date.now() - t0, apply, stage: opts.stage || 'todas', scanned: opps.length, pending: moves.length, applied: done, errors, remaining: Math.max(0, moves.length - done), counts };
