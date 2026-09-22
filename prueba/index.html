@@ -59,6 +59,7 @@
   .estado p{ font-size:15.5px; color:var(--gris); line-height:1.5; margin:0 0 10px; }
   .estado ul{ text-align:left; margin:14px 0 0; padding:0 0 0 18px; font-size:15px; color:var(--tinta); line-height:1.5; }
   .estado ul li{ margin:5px 0; }
+  .btn-wa{ display:flex; align-items:center; justify-content:center; gap:8px; margin:16px 0 0; min-height:52px; padding:0 18px; border-radius:14px; background:#25D366; color:#fff; font-weight:800; font-size:15.5px; text-decoration:none; }
 </style>
 </head>
 <body>
@@ -127,6 +128,8 @@
               <li>Pide cita. Ella te ofrece dos huecos y te la confirma.</li>
               <li>Al colgar, mira el correo: te llega lo que verías tú como dueño.</li>
             </ul>
+            <a class="btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">💬 Escríbele por WhatsApp como si fueras un cliente</a>
+            <p class="s" style="margin:8px 0 0">Te contesta al momento y te cierra la cita, igual que haría con un cliente tuyo.</p>
           </div>
 
           <div class="estado" id="tarde" hidden>
@@ -183,6 +186,10 @@
         .then(function (r) {
           if (r.ok && r.estado === 'llamando') {
             if (r.agente && r.negocio) document.getElementById('ok-txt').textContent = (r.whatsapp ? 'Te escribe por WhatsApp y te llama ' : 'Te llama ') + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
+            // El que prueba escribe primero al número oficial, como haría un cliente: así
+            // no hace falta plantilla y el agente le contesta al momento como su agente.
+            var saludo = 'Hola, quería información' + (r.negocio ? ' sobre ' + r.negocio : '') + '.';
+            document.getElementById('btn-wa').href = 'https://wa.me/34647118491?text=' + encodeURIComponent(saludo);
             ver('ok'); if (window.qvTrack) window.qvTrack('prueba_llamando', {});
           } else if (r.ok && r.estado === 'fuera_horario') {
             document.getElementById('tarde-h').textContent = 'a partir de las ' + (r.desde || 9) + ':00';
