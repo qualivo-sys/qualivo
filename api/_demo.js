@@ -126,8 +126,9 @@ function primeraFrase(b, nombre) {
 async function lanzarLlamada(o) {
   const clave = process.env.VAPI_API_KEY;
   const asistente = process.env.VAPI_ASSISTANT_ID;
-  const numero = process.env.VAPI_PHONE_NUMBER_ID;
-  if (!clave || !asistente || !numero) return { ok: false, motivo: 'sin_credenciales' };
+  // El número español desde el que llama Raquel (id de Vapi, no es un secreto).
+  const numero = process.env.VAPI_PHONE_NUMBER_ID || '2f99f0e4-5294-4340-9d4a-10bd4553f8ff';
+  if (!clave || !asistente) return { ok: false, motivo: 'sin_credenciales' };
   const b = o.brief;
   const nombre = String(o.nombre || '').split(' ')[0] || 'hola';
   const body = {
@@ -138,7 +139,9 @@ async function lanzarLlamada(o) {
       model: { provider: 'openai', model: 'gpt-4o', messages: [{ role: 'system', content: promptLlamada(b, nombre) }], temperature: 0.6 },
       endCallFunctionEnabled: true,
       maxDurationSeconds: 360,
-      variableValues: { demo: '1', nombre: nombre, empresa: b.negocio, email: o.email || '', web: b.web || '' }
+      // La ficha viaja dentro de la llamada: api/vapi-fin.js la recupera al
+      // colgar para montar el correo del dueño sin volver a leer la web.
+      variableValues: { demo: '1', nombre: nombre, nombreCompleto: o.nombre || nombre, empresa: b.negocio, email: o.email || '', web: b.web || '', contactId: o.contactId || '', brief: JSON.stringify(b).slice(0, 6000) }
     }
   };
   const r = await fetch(VAPI + '/call', { method: 'POST', headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
@@ -189,4 +192,26 @@ function correoDueno(o) {
   return { asunto: 'Nuevo ' + b.tipoCliente + ' en ' + b.negocio + (x.cita ? ' · cita ' + x.cita : '') + ' (demo)', html: html };
 }
 
-module.exports = { leerWeb: leerWeb, brief: brief, lanzarLlamada: lanzarLlamada, llamada: llamada, extraer: extraer, correoDueno: correoDueno, promptLlamada: promptLlamada, normalizarUrl: normalizarUrl };
+// Ficha de respaldo cuando el modelo no contesta: lo típico del sector, sin
+// precios ni dirección, y el nombre sacado del dominio.
+function briefSector(o) {
+  const s = SECTORES[o.sector] || { que: 'negocio', cliente: 'cliente', citas: 'primera cita', ejemplos: 'servicios, precios, horarios' };
+  const dominio = String(o.web || '').replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+  const nombre = dominio.split('.')[0].replace(/[-_]/g, ' ').replace(/(^|\s)\S/g, function (m) { return m.toUpperCase(); }) || 'el negocio';
+  return { negocio: nombre, resumen: 'Un ' + s.que + ' que atiende a sus ' + s.cliente + 's por teléfono y con cita previa.', servicios: s.ejemplos.split(', '), horario: '', ubicacion: '', tono: ['cercano', 'claro', 'profesional'], agente: 'Marina', preguntas: [], gancho: '', fuente: 'sector', sector: o.sector || '', web: dominio, tipoCliente: s.cliente, tipoCita: s.citas };
+}
+
+// Correo por Resend (la misma cuenta que los avisos). Devuelve false si no
+// está configurado; nunca lanza.
+async function enviarCorreo(o) {
+  if (!process.env.RESEND_API_KEY) return false;
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: process.env.RADIOGRAFIA_FROM || 'Qualivo <onboarding@resend.dev>', to: [o.para], bcc: o.copia ? [o.copia] : undefined, subject: o.asunto, html: o.html })
+    });
+    return r.ok;
+  } catch (e) { return false; }
+}
+
+module.exports = { briefSector: briefSector, enviarCorreo: enviarCorreo, leerWeb: leerWeb, brief: brief, lanzarLlamada: lanzarLlamada, llamada: llamada, extraer: extraer, correoDueno: correoDueno, promptLlamada: promptLlamada, normalizarUrl: normalizarUrl };

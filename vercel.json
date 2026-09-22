@@ -214,6 +214,12 @@
     },
     "api/recordatorios-vispera.js": {
       "maxDuration": 60
+    },
+    "api/prueba.js": {
+      "maxDuration": 60
+    },
+    "api/vapi-fin.js": {
+      "maxDuration": 60
     }
   }
 }

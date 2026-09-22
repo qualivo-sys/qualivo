@@ -110,6 +110,43 @@ function escapar(t) {
   });
 }
 
+async function finDemo(msg, vv) {
+  const D = require('./_demo');
+  let brief; try { brief = JSON.parse(vv.brief || ''); } catch (e) { brief = null; }
+  if (!brief) brief = D.briefSector({ web: vv.web || '', sector: '' });
+  const llamada = {
+    startedAt: msg.startedAt || (msg.call && msg.call.startedAt), endedAt: msg.endedAt || (msg.call && msg.call.endedAt),
+    recordingUrl: msg.recordingUrl || (msg.artifact && msg.artifact.recordingUrl) || '', summary: msg.summary || ''
+  };
+  const numero = (msg.customer && msg.customer.number) || (msg.call && msg.call.customer && msg.call.customer.number) || '';
+  const datos = { nombre: vv.nombreCompleto || vv.nombre || '', telefono: numero, email: vv.email || '' };
+  const seg = llamada.startedAt && llamada.endedAt ? Math.round((Date.parse(llamada.endedAt) - Date.parse(llamada.startedAt)) / 1000) : 0;
+  const hablo = !!msg.transcript && seg >= 10 && !/did-not-answer|busy|voicemail|no-answer|failed/.test(String(msg.endedReason || ''));
+  let extraido = {};
+  if (hablo) { try { extraido = await D.extraer(brief, msg.transcript); } catch (e) { console.error('[vapi-fin] demo extraer:', e && e.message); } }
+  const acciones = [];
+  if (hablo && datos.email) {
+    const m = D.correoDueno({ brief: brief, datos: datos, extraido: extraido, llamada: llamada });
+    const ok = await D.enviarCorreo({ para: datos.email, copia: process.env.INFORME_PAID_TO || 'maikel@qualivo.io', asunto: m.asunto, html: m.html });
+    acciones.push(ok ? 'correo_enviado' : 'correo_no_enviado');
+  } else acciones.push(hablo ? 'sin_email' : 'no_hablo');
+  if (vv.contactId) {
+    try {
+      await A.etiquetar(vv.contactId, [hablo ? 'demo-hecha' : 'demo-no-cogio']);
+      await A.nota(vv.contactId, 'PRUEBA TU AGENTE · fin · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }) + ' · ' + seg + ' s · ' + (msg.endedReason || '') +
+        (extraido.nivel ? '\nNivel en la demo: ' + extraido.nivel + ' · ' + (extraido.motivo_nivel || '') : '') + (extraido.cita ? '\nCita (ficticia): ' + extraido.cita : '') +
+        '\n' + acciones.join(', ') + ((msg.call && msg.call.id) ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + msg.call.id : '') +
+        (msg.transcript ? '\n\nTRANSCRIPCIÓN\n' + String(msg.transcript).slice(0, 4000) : ''));
+    } catch (e) { /* no bloquea */ }
+  }
+  try {
+    await require('./_aviso.js').seMovio('actividad', { nombre: datos.nombre, empresa: brief.negocio, email: datos.email, telefono: numero, contactId: vv.contactId || '',
+      accion: hablo ? 'Ha probado a su agente (' + seg + ' s)' + (extraido.nivel ? ' · nivel ' + extraido.nivel : '') : 'Pidió la prueba y no cogió la llamada (' + (msg.endedReason || '') + ')',
+      texto: (extraido.resumen || msg.summary || '') + ((msg.call && msg.call.id) ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + msg.call.id : ''), origen: 'Prueba tu agente · ' + (brief.web || '') });
+  } catch (e) { /* no bloquea */ }
+  return { ok: true, demo: true, acciones: acciones };
+}
+
 module.exports = async function handler(req, res) {
   // A Vapi se le contesta siempre 200. Si devolvemos error reintenta, y un
   // reintento aquí significa otro WhatsApp de rescate al mismo lead.
@@ -126,6 +163,14 @@ module.exports = async function handler(req, res) {
   const msg = (req.body && req.body.message) || {};
   if (String(msg.type || '') !== 'end-of-call-report') {
     return res.status(200).json({ ok: true, ignorado: msg.type || 'sin_tipo' });
+  }
+
+  // Llamadas de «prueba tu agente» (qualivo.io/prueba): no son de Raquel ni
+  // entran en la cadencia. Al colgar, el que probó recibe el correo del dueño.
+  const vv = (msg.call && msg.call.assistantOverrides && msg.call.assistantOverrides.variableValues) || (msg.artifact && msg.artifact.variableValues) || {};
+  if (String(vv.demo || '') === '1') {
+    try { return res.status(200).json(await finDemo(msg, vv)); }
+    catch (e) { console.error('[vapi-fin] demo:', e && e.message); return res.status(200).json({ ok: false, demo: true, error: String(e && e.message).slice(0, 200) }); }
   }
 
   const informe = {
