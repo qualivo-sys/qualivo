@@ -242,3 +242,74 @@ documento, con esto dentro:
    comentarios, qué se le manda a quien escribe «FUGA».
 Todo con la pausa de redes vigente salvo que Maikel la levante por escrito.
 La decisión de la lámina 5 del carrusel del contacto sigue pendiente.
+
+## Martes 22 de septiembre de 2026
+
+### Publicado
+- **Blog:** https://qualivo.io/blog/presupuestos-sin-respuesta/ · «Presupuestos sin
+  respuesta: cuánto negocio duerme ahí y cómo despertarlo». Keyword
+  «presupuestos sin respuesta» (fila 10 del calendario SEO del listado
+  maestro). Dato propio: el CRM de Qualivo el 10-sep (30 abiertas, 25 sin
+  siguiente paso, 34.500 € declarados, 15 entre 57 y 63 días, 25 tareas
+  creadas). Tarjeta en el índice del blog (cluster «Funnel y conversión»),
+  sitemap, llms.txt y registro nuevo `content/seo-keywords-usadas.md`.
+- **Reapuntado:** `/blog/auditoria-de-marketing/`. Solo los dos últimos
+  párrafos («Qué cuesta y qué devuelve») y el bloque de cierre. Antes vendía
+  «la auditoría, dos semanas» con dos botones (uno a `/#contacto`). Ahora
+  cierra con los quince minutos del diagnóstico y un solo botón a
+  `/diagnostico/`. Sin tocar título, URL, H1 ni el cuerpo.
+
+### Borradores (pausa vigente, nada publicado en redes)
+- `content/borradores/semana-39-formatos-intercalados.md`: la semana
+  intercalando formatos como pidió Maikel (martes imagen, miércoles carrusel +
+  newsletter, jueves vídeo a cámara + el artículo, viernes texto, sábado reel).
+  Con el guion del vídeo del jueves (45-60 s, rótulos, CTA «escribe FUGA»), la
+  ficha del martes y el plan de envíos y respuestas.
+- `content/newsletter/2026-09-23.md`: capítulo 1 de «Agentizando mi propia
+  empresa», rehecho: primero lo que hizo el sistema (24 llamadas, 12
+  contactos, 3 citas, una a las 10:30 con reformas mientras Maikel estaba en
+  otra reunión), después el fallo, corto. Asunto, preheader, a quién va con la
+  base de cada grupo, el correo individual para los leads sin cita y la lista
+  de antes de enviar.
+- Pieza del día, «Sin humo»: fuera el rótulo de serie de arriba (regla de
+  ayer, sin etiquetas de sección) y «comercial IA» en vez de «agente de voz».
+  Reenderizada.
+
+### Decisiones que le pido a Maikel (con recomendación)
+1. Levantar la pausa y para qué. Recomiendo newsletter y LinkedIn desde el
+   miércoles; Instagram cuando revisemos la estética juntos.
+2. Newsletter: canal y destinatarios. Recomiendo la nativa de LinkedIn como
+   canal principal y, a los leads de campaña sin cita, un correo individual
+   desde su Gmail con el capítulo como posdata. Motivo: la casilla del
+   formulario cubre atender lo que pidieron; no he encontrado en la política
+   de privacidad una mención a envíos periódicos, así que un boletín es otra
+   finalidad. La base antigua, no, hasta que confirme consentimientos (queja
+   de agosto).
+3. Lámina 5 del carrusel «Casi 7×»: sigue pendiente. Recomiendo quitar el
+   WhatsApp firmado «soy Maikel» y dejar la tarjeta de la llamada de Raquel.
+4. La línea del coste (1,65 dólares) en la newsletter y en el martes.
+   Recomiendo que entre, pegada al fallo.
+
+### Descartes
+- Segundo artículo hoy: no. El de presupuestos es largo (unas 1.400 palabras)
+  y la rutina permite dos solo si el primero es corto.
+- Newsletter por correo a la base antigua: no, por la queja de agosto.
+- Mandar el capítulo por WhatsApp a los leads: no (regla del 21-sep: nada que
+  parezca envío automatizado desde el 663).
+- Carrusel para el jueves: no. El jueves lleva vídeo; el carrusel va el
+  miércoles para no repetir formato.
+
+### Dudas que dejo escritas
+- El día de la newsletter: la rutina dice miércoles, el plan del 21 decía
+  jueves. He puesto miércoles 23. Si Maikel prefiere jueves, el fichero se
+  renombra y nada más cambia.
+- Cuántos leads de campaña tienen correo y no tienen cita: no lo tengo
+  cerrado hoy. Se cuenta en GHL el miércoles a primera hora.
+
+### Hipótesis para mañana
+- El artículo de presupuestos y el vídeo del jueves comparten el dato: si el
+  vídeo trae comentarios con «FUGA», el artículo debería recibir visitas desde
+  LinkedIn el jueves y el viernes. Se mira en Vercel el viernes en el ritual.
+- Miércoles: si la pausa sigue, toca la segunda pieza de la serie «Lo que dice
+  el estudio · lo que hace el agente» (seguimiento, 8 toques) en el molde del
+  carrusel, y el blog de la Fuga reunión (plantones) con el dato del BMJ Open.
