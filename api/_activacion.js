@@ -127,8 +127,22 @@ const GATEWAY_PROVIDER = '67ad23a0cf352d8f5809f0ca';
 // personal de Maikel (663). Hasta que él lo levante, nada sale por la pasarela:
 // ni cadencia, ni agente, ni rescates. Poner GATEWAY_PAUSA=0 en Vercel para reanudar.
 const GATEWAY_PAUSA = process.env.GATEWAY_PAUSA !== '0';
+// Tope diario de mensajes por la pasarela (el número personal de Maikel). El
+// 21 y el 22 de septiembre salieron unos sesenta en dos días, muchos iguales, y
+// WhatsApp restringió el número. Se cuenta con la etiqueta gw-AAAAMMDD.
+const GATEWAY_MAX_DIA = parseInt(process.env.GATEWAY_MAX_DIA || '20', 10);
+function etiquetaGatewayHoy() {
+  const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  return 'gw-' + p.replace(/-/g, '');
+}
 async function enviarPorGateway(contactId, texto) {
   if (GATEWAY_PAUSA) throw new Error('pasarela en pausa (restricción de WhatsApp, 22-sep)');
+  const hoy = etiquetaGatewayHoy();
+  try {
+    const deHoy = await buscarPorEtiqueta(hoy, GATEWAY_MAX_DIA + 1);
+    if (deHoy.length >= GATEWAY_MAX_DIA) throw new Error('tope diario de la pasarela (' + GATEWAY_MAX_DIA + ')');
+  } catch (e) { if (/tope diario/.test(String(e && e.message))) throw e; /* si el CRM no cuenta, se envía */ }
+  await etiquetar(contactId, [hoy]).catch(function () {});
   const r = await fetch(GHL_BASE + '/conversations/messages', {
     method: 'POST',
     headers: cabeceras(),
@@ -193,6 +207,8 @@ async function pasarAMaikel(contactId, texto) {
 // cinco segundos). La oficial queda de respaldo si la pasarela falla, y se
 // vuelve a ella con GATEWAY_PRIMERO=0.
 const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
+// ¿El próximo mensaje normal saldría por la pasarela? (para decidir si hay que variarlo)
+function saldriaPorGateway() { return GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA; }
 
 async function enviarMensaje(contactId, texto) {
   if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA) {
@@ -441,7 +457,7 @@ async function enviarCorreo(email, asunto, html) {
 }
 
 module.exports = {
-  GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, enviarCorreo,
+  GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
 };

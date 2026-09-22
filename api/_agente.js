@@ -251,6 +251,36 @@ async function reenganchar(o) {
   return { texto: texto, motivo: '' };
 }
 
+// Regla de Maikel (22-sep, tras la restricción de WhatsApp): por su número
+// personal nunca sale dos veces el mismo texto. Cada mensaje de la cadencia
+// se reescribe para esa persona: misma intención y mismos datos, redacción
+// distinta, con sus palabras. Devuelve { texto } o { texto: '', motivo }.
+// o: { texto (base), contacto, datos: { nombre, sector, fuga, hipotesis, web } }
+async function variar(o) {
+  const d = o.datos || {};
+  const sistema = 'Reescribes mensajes de WhatsApp que manda Maikel Echevarría (Qualivo) a personas que han pedido un diagnóstico gratuito de crecimiento. Te dan el mensaje base y la ficha de la persona. Devuelves UN mensaje nuevo con la misma intención, los mismos datos y el mismo cierre (si el base pide algo, el tuyo pide lo mismo), pero con otra redacción: otro arranque, otro orden, otras palabras, y usando lo que la ficha dice de esa persona (su sector, lo que escribió, su web) sin inventar nada. Misma longitud aproximada o más corto. Tuteas. Sin emojis, sin listas, sin negritas, sin comillas alrededor, sin jerga de marketing. Nunca cambies enlaces, horas, nombres ni cifras. Contesta solo con el texto del mensaje.';
+  const usuario = 'FICHA: nombre ' + (d.nombre || '-') + ' · sector ' + (d.sector || '-') + ' · dónde cree que se le escapa: ' + (d.fuga || d.hipotesis || '-') + (d.web ? ' · web ' + d.web : '') +
+    '\n\nMENSAJE BASE:\n' + String(o.texto || '');
+  const clave = process.env.ANTHROPIC_API_KEY;
+  if (!clave) return { texto: '', motivo: 'falta ANTHROPIC_API_KEY' };
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: Object.assign({ 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
+      process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}),
+    body: JSON.stringify({ model: MODELO, max_tokens: 600, system: sistema, messages: [{ role: 'user', content: usuario }] })
+  });
+  if (!r.ok) return { texto: '', motivo: 'anthropic ' + r.status };
+  const j = await r.json();
+  const texto = (j.content || []).filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text.trim(); }).join('\n').replace(/^«|»$/g, '').trim();
+  const base = String(o.texto || '');
+  if (!texto || texto.length > Math.max(base.length * 1.3, 200)) return { texto: '', motivo: texto ? 'demasiado largo' : 'sin texto' };
+  // Los enlaces del base tienen que seguir ahí tal cual.
+  const enlaces = base.match(/https?:\/\/\S+/g) || [];
+  if (enlaces.some(function (u) { return texto.indexOf(u) === -1; })) return { texto: '', motivo: 'perdió un enlace' };
+  if (texto.replace(/\s+/g, ' ').toLowerCase() === base.replace(/\s+/g, ' ').toLowerCase()) return { texto: '', motivo: 'idéntico al base' };
+  return { texto: texto, motivo: '' };
+}
+
 // Estado del agente en el contacto (campo WA · Agente): turnos y candado.
 function leerEstado(c) {
   const f = (c.customFields || []).filter(function (x) { return x && x.id === CAMPO_ESTADO; })[0];
@@ -498,4 +528,4 @@ async function avisar(c, motivo, texto) {
   } catch (e) { console.error('[agente] aviso:', e && e.message); }
 }
 
-module.exports = { atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };
+module.exports = { variar: variar, atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };

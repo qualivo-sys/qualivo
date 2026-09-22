@@ -250,7 +250,13 @@ module.exports = async function handler(req, res) {
             if (s2.startsWith('inv-')) d.inversion = s2.slice(4).replace(/-/g, ' ');
             if (s2.startsWith('fuga-')) d.fuga = s2.slice(5).replace(/-/g, ' ');
           });
-          const env = await A.enviarMensaje(c.id, M.whatsappTrasApertura(d));
+          let textoTA = M.whatsappTrasApertura(d);
+          if (A.saldriaPorGateway()) {
+            const v = await require('./_agente.js').variar({ texto: textoTA, contacto: c, datos: d }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+            if (!v.texto) throw new Error('sin variante (' + v.motivo + '): no sale por la pasarela');
+            textoTA = v.texto;
+          }
+          const env = await A.enviarMensaje(c.id, textoTA);
           if (env.canal === 'whatsapp') { await A.etiquetar(c.id, ['act-wa1-personal']); resumen.wa++; }
         } catch (err) { console.error('[activacion] mensaje personalizado tras respuesta:', err.message); }
       }
@@ -325,7 +331,15 @@ module.exports = async function handler(req, res) {
     try {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
-        const texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
+        let texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
+        // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
+        // el mismo texto dos veces. Se reescribe para esta persona; si no se
+        // puede, este paso espera a la siguiente vuelta en vez de salir igual.
+        if (A.saldriaPorGateway()) {
+          const v = await require('./_agente.js').variar({ texto: texto, contacto: c, datos: datos }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+          if (!v.texto) { console.warn('[activacion] sin variante para ' + c.id + ' (' + v.motivo + '): no sale por la pasarela'); resumen.esperando++; continue; }
+          texto = v.texto;
+        }
         const env = paso.tipo === 'wa1'
           ? await A.primerWhatsApp(c.id, c.phone, { nombre: datos.nombre, cita: datos.fuga || datos.sector || 'el diagnóstico', pregunta: M.pregunta(datos), texto: texto })
           : await A.enviarMensaje(c.id, texto);
