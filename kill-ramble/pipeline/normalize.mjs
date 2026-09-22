@@ -60,6 +60,18 @@ export function fromYouTube(items) {
   });
 }
 
+// Redes escritas a mano dentro de una biografía. Se normalizan a URL completa para que
+// parseHandle() las reconozca igual que si vinieran de un campo estructurado.
+const SOCIAL = /(?:https?:\/\/)?(?:www\.)?((?:instagram|twitter|x|tiktok|youtube|linktr|beacons|bio)\.(?:com|ee|ai|link)\/[\w.\-@]+)/gi;
+export function socialsFrom(text) {
+  const out = new Set();
+  for (const m of String(text || '').matchAll(SOCIAL)) {
+    const u = m[1].replace(/[.,)]+$/, '');
+    if (!/\/(about|videos|home|featured)$/i.test(u)) out.add('https://' + u);
+  }
+  return [...out];
+}
+
 // Streamers de scrapemint/twitch-streamer-leads -> un registro por canal
 export function fromTwitch(items) {
   const by = new Map();
@@ -70,7 +82,10 @@ export function fromTwitch(items) {
       platform: 'twitch', url: r.url, name: r.displayName || r.login,
       followers: +(r.followers || 0), audience: +(r.liveViewers || 0), engagement: null,
       games: [cat].filter(Boolean),
-      links: (r.socialLinks || []).map((l) => (typeof l === 'object' ? l.url : l)).filter(Boolean),
+      // El actor no devuelve socialLinks: los streamers escriben sus redes dentro de la
+      // biografía, en texto y a menudo sin protocolo. De ahí salen el Instagram y la X
+      // con los que se llega a quien no publica correo, que es la mayoría.
+      links: socialsFrom(`${r.description || ''} ${r.panels || ''}`),
       email: r.businessEmail && String(r.businessEmail) !== 'None' ? r.businessEmail : '',
       lang: (r.language || 'EN').toLowerCase().slice(0, 2),
       partner: !!r.isPartner, affiliate: !!r.isAffiliate, bio: r.description || '',

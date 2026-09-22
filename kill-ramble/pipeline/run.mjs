@@ -103,8 +103,10 @@ const dmMd = ['# Cola de mensajes directos', '',
     c.links?.length ? `Por dónde escribirle: ${c.links.slice(0, 4).join(' · ')}` : 'Sin redes detectadas: probar el chat del canal.',
     '', '> ' + c.dm, '', `UTM: ${c.utm}`, ''].join('\n'))].join('\n');
 writeFileSync(`${outDir}/dm_queue.md`, dmMd);
-writeFileSync(`${outDir}/all_scored.csv`, toCSV(scored.map((c) => ({ ...slRow(c), action: c.action, reason: c.reason, lang: c.lang })),
-  [...slCols, 'action', 'reason', 'lang']));
+// Las redes van en el volcado: son la única vía hacia quien no publica correo, que en
+// Twitch y YouTube es la mayoría. Sin esta columna parecía que no las teníamos.
+writeFileSync(`${outDir}/all_scored.csv`, toCSV(scored.map((c) => ({ ...slRow(c), action: c.action, reason: c.reason, lang: c.lang, links: (c.links || []).join(' | ') })),
+  [...slCols, 'action', 'reason', 'lang', 'links']));
 
 console.error(`\nEntregables en ${outDir}/`);
 console.error(`  smartlead_en.csv  ${withEmail.filter((c) => c.lang !== 'es').length} leads`);
