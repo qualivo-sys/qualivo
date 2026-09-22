@@ -234,6 +234,15 @@ module.exports = async function handler(req, res) {
       await avisar('Llamada fallida a un contacto de baja', '<p>Se ha etiquetado, no se le ha escrito.</p>');
       return res.status(200).json({ ok: true, estado: v.estado, acciones: acciones });
     }
+    // Regla de Maikel (22-sep): si el hilo lo lleva él (wa-humano), tiene cita
+    // o el trato está en negociación, el rescate automático no sale: se le
+    // avisa y decide él. El 22-sep salió un «se nos ha cortado la llamada» a
+    // David (ProAudio) en mitad de una conversación que llevaba Maikel.
+    if (tags.indexOf('wa-humano') !== -1 || tags.indexOf('act-agendado') !== -1 || tags.indexOf('act-cita-confirmada') !== -1) {
+      acciones.push('sin_rescate_lo_lleva_maikel');
+      await avisar('Llamada de Raquel fallida' + (nombre ? ' — ' + nombre : '') + ' (sin mensaje automático: lo llevas tú)', '<p>La llamada ha terminado mal. No se le ha escrito porque el hilo lo llevas tú o ya tiene cita. Si quieres, escríbele.</p>');
+      return res.status(200).json({ ok: true, estado: v.estado, acciones: acciones });
+    }
 
     // Rescate: la llamada se ha caído y del otro lado hay alguien que acaba de
     // hablar con un robot que se ha colgado. Se pide perdón y se le devuelve el
