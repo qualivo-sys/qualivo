@@ -39,9 +39,9 @@ function tipologia(c) {
   else if (/nada/.test(inv)) { p += 0; motivos.push('no invierte'); }
   else { p += 2; }
   const vol = etiqueta(c, 'vol-');
-  if (/mas100|mas-100|50-100/.test(vol)) { p += 3; motivos.push('más de 50 peticiones/mes'); }
-  else if (/20-50/.test(vol)) { p += 2; motivos.push('20-50 peticiones/mes'); }
-  else if (/5-15|15-20/.test(vol)) { p += 1; motivos.push('5-15 peticiones/mes'); }
+  if (/mas|50-100/.test(vol)) { p += 3; motivos.push('más de 50 peticiones/mes'); }
+  else if (/20-50|15-30/.test(vol)) { p += 2; motivos.push('20-50 peticiones/mes'); }
+  else if (/5-15|15-20|10-20/.test(vol)) { p += 1; motivos.push('5-15 peticiones/mes'); }
   else if (/menos/.test(vol)) { p += 0; motivos.push('menos de 5 peticiones/mes'); }
   else { p += 1; }
   const sector = etiqueta(c, 'sector-');
