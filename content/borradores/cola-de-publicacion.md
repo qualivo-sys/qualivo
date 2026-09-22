@@ -73,3 +73,17 @@ generan al publicar. No es un fallo, no re-subir por eso.
 Conceptos nuevos usados (no repetir): el agente como capa sobre el recorrido ·
 el semaforo de los ocho puntos · las 9:00 de un martes.
 
+
+## 22-sep · carrusel «Casi 7×» (contacto) PUBLICADO en Instagram
+Maikel levanta la pausa solo para esta pieza y solo en Instagram («publica en
+insta a ver» · «si publica tu»). LinkedIn sigue en pausa.
+
+- Instagram @maikel.echevarria, publicado el 22-sep a mediodía por el Social
+  Planner de GHL (post creado, traceId 620531b0). Ocho láminas en el CDN de GHL,
+  versión 5 (lámina 5 solo con la llamada de Raquel; lámina 6 sin la frase de
+  las locuciones). Pie de foto: `content/carruseles/2026-09-22-contacto-7x/caption.md`.
+- Cómo se publica desde ahora: `scratchpad/publicar-ig.js` (sube las láminas a
+  `medias/upload-file` y crea el post con `status: published`). Las credenciales
+  de GHL las da Maikel en la sesión; no van al repo.
+- Qué se mide: guardados y comentarios con el tiempo de respuesta de su último
+  contacto. Maikel contesta a los comentarios a las 2 h y a las 20:00.

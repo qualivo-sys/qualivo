@@ -350,3 +350,13 @@ GPT/Claude; siempre un tono humano en los textos». Regla apuntada en la guía
 de voz (sección Anti-ChatGPT) y en el prompt del agente: fuera los lemas y
 nombres de serie que suenan a máquina; cada pieza empieza por lo que pasó. La
 pieza del miércoles se rehace sin ese titular ni ese molde.
+
+### Martes 22 · mediodía · publicado en Instagram
+
+Maikel levantó la pausa para esta pieza en Instagram y me pidió publicarla.
+Sin credenciales de GHL en el entorno no pude; me las dio en el chat y el
+carrusel «Casi 7×» (v5) salió por el Social Planner a @maikel.echevarria. Ocho
+láminas en el CDN de GHL, post creado. Es la primera pieza publicada en redes
+desde la pausa del 9-sep. LinkedIn sigue parado. Regla nueva: las credenciales
+se piden a Maikel en la sesión y viven en el cuaderno de la sesión, nunca en el
+repositorio.
