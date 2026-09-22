@@ -125,6 +125,17 @@
 
     h += '<div class="pane on"><h2>' + s.title + '</h2><p class="sub">' + s.sub + '</p>';
 
+    // Salida hacia la guía.
+    //
+    // Los anuncios ya no llevan a la guía: los nueve leads que trajo no dieron
+    // una sola medida y el comercial no podía presupuestarle a ninguno. Pero
+    // quien llega y no se ve contestando un cuestionario no tiene por qué
+    // perderse del todo: aquí se le ofrece la guía y entra como lead frío,
+    // que es lo que de verdad es.
+    //
+    // No aparece en el último paso: ahí ya está a un campo de convertir y
+    // enseñarle una salida sería tirar piedras contra el propio tejado.
+
     if (s.kind === 'choice') {
       h += '<div class="opts">' + s.options.map(function (o) {
         var on = a[s.key] === o.label;
@@ -191,6 +202,13 @@
         '<div class="field" style="max-width:400px"><label for="wa">WhatsApp</label><input id="wa" type="tel" autocomplete="tel" placeholder="+34 600 000 000" value="' + esc(a.tel || '') + '"><span class="hint">Es por donde te respondemos más rápido.</span><span class="errmsg">Necesitamos un teléfono para escribirte.</span></div>' +
         '<label class="checkline" style="max-width:600px"><input type="checkbox" id="ok"' + (a.consent ? ' checked' : '') + '>' +
         '<span>He leído y acepto la <a href="/privacidad" target="_blank">política de privacidad</a> y consiento que me contactéis sobre mi proyecto.</span></label>';
+    }
+
+    if (s.kind !== 'contacto') {
+      h += '<p style="margin-top:38px;font-size:13.5px;color:var(--text-inverse-muted);max-width:52ch">' +
+        '¿Prefieres informarte primero? ' +
+        '<a href="/guia" style="color:var(--oak-400);text-decoration:underline;text-underline-offset:3px" ' +
+        'id="salida-guia">Descarga la guía para elegir la pieza</a> y escríbenos cuando lo tengas claro.</p>';
     }
 
     h += '</div>';
