@@ -334,3 +334,11 @@ su fichero en `api/`, no el resumen.
 Filas nuevas en la base de Notion «Revisión de piezas · contenido»: el
 artículo (Publicada, v2), la newsletter (En revisión, v2) y el vídeo (En
 revisión, v2), con nota, veredicto y qué cambió.
+
+### Martes 22 · mediodía · Maikel elige el carrusel para hoy
+
+«No me convence este [Sin humo]. Me gustaba más el carrusel de ayer.» El
+carrusel «Casi 7×» pasa al martes; Sin humo pasa al miércoles y se rehace o se
+cambia. Lámina 5 cerrada con mi recomendación: fuera el WhatsApp firmado «soy
+Maikel», queda solo la llamada de Raquel. v4 renderizada y entregada en el chat
+con los dos pies de foto. Publicar sigue dependiendo de que levante la pausa.

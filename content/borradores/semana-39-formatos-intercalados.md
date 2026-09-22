@@ -14,8 +14,8 @@
 
 | Día | Formato | Pieza | Dato que lleva | CTA | Estado |
 |---|---|---|---|---|---|
-| Mar 22 | **Post de una imagen** (IG + LinkedIn) | Sin humo · «Lo barato es llamar. Lo caro es saber cuándo colgar» | 24 llamadas, 3 citas, 3 × 118 s con locución (bitácora 21-sep) | Conversación | Imagen lista, sin rótulo de serie desde hoy |
-| Mié 23 | **Carrusel** (IG + documento LinkedIn) | «Casi 7×» · contestar en la primera hora | HBR 2011, 2.241 empresas; caso propio del lunes | Guardar + pregunta (conversación) | v3 revisada por el Master Reviewer; falta la decisión de la lámina 5 |
+| Mar 22 | **Carrusel** (IG + documento LinkedIn) | «Casi 7×» · contestar en la primera hora | HBR 2011, 2.241 empresas; caso propio del lunes | Guardar + pregunta (conversación) | v4: Maikel prefirió el carrusel para hoy (22-sep, mediodía). Lámina 5 solo con la llamada de Raquel |
+| Mié 23 | **Post de una imagen** (IG + LinkedIn) | Sin humo · «Lo barato es llamar. Lo caro es saber cuándo colgar» | 24 llamadas, 3 citas, 3 × 118 s con locución (bitácora 21-sep) | Conversación | Imagen lista. A Maikel no le convence: se rehace o se cambia por otra antes del miércoles |
 | Mié 23 | **Newsletter** · capítulo 1 | «24 llamadas, 3 citas y dos minutos con una operadora» | Bitácora 21-sep, Notion Llamadas | Diagnóstico | `content/newsletter/2026-09-23.md`, revisada (nota 7, cambios aplicados) |
 | Jue 24 | **Vídeo a cámara** (reel + LinkedIn) | «Le pedí a un agente que repasara mi CRM. Encontró 34.500 € parados» | CRM propio, 10-sep: 25 de 30, 34.500 €, 15 entre 57 y 63 días | Recurso: «escribe FUGA» | Guion abajo, revisado (nota 7, cambios aplicados) |
 | Jue 24 | Blog (ya publicado hoy) | Presupuestos sin respuesta | Los mismos del vídeo | Diagnóstico | `/blog/presupuestos-sin-respuesta/`, publicado 22-sep |
@@ -27,7 +27,7 @@ Reparto de CTA: cuatro de conversación, uno de recurso, dos de diagnóstico
 20 y el recurso va corto porque solo hay un vídeo largo esta semana. La semana
 que viene el recurso entra en el carrusel.
 
-Orden de los formatos: imagen, carrusel, vídeo, texto, vídeo. Ningún formato
+Orden de los formatos: carrusel, imagen, vídeo, texto, vídeo. Ningún formato
 dos días seguidos. Los dos vídeos son a cámara, sin producción: móvil, luz de
 ventana, un plano, rótulos encima.
 
