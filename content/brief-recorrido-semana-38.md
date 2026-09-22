@@ -1,6 +1,6 @@
 # Brief · El recorrido del lead de pago, del clic a la reunión · semana del 18 al 22 de septiembre de 2026
 
-Para el agente que va a analizar el recorrido y proponer mejoras. Todo lo que hay aquí sale de Meta (cuenta act_3453332464718877), del CRM GoHighLevel, de Vapi y del repositorio; nada es estimado. Donde falta un dato se dice.
+Para el agente que va a analizar el recorrido y proponer mejoras. Los leads van con código (CL clínicas, FO formación, RE reformas) porque este repositorio es público; la correspondencia con nombres está en el CRM y en la copia privada de Notion. Todo lo que hay aquí sale de Meta (cuenta act_3453332464718877), del CRM GoHighLevel, de Vapi y del repositorio; nada es estimado. Donde falta un dato se dice.
 
 ## 1. Qué hay diseñado
 
@@ -63,36 +63,36 @@ CPM: clínicas 35,59 €, reformas 23,93 €, formación 26,88 €. Frecuencia e
 
 | Lead | Inversión/mes | Presupuestos/mes | Dónde se le escapa | Qué pasó |
 |---|---|---|---|---|
-| Beatriz · HGC Dental (sáb 19, 08:58, por la landing; escribió «Clínica dental en Terrassa. Se pierden en el seguimiento») | menos de 500 € | más de 50 | seguimiento y presupuestos | reunión hecha el 21, propuesta 1.000 € |
-| Pilar · CPD Ceprovic (dom 20, 15:56) | nada todavía | 10-20 | seguimiento y presupuestos | contestó; plantón el 22 a las 16:00; cita movida al 23 a las 17:45 |
-| Ana · Centro Médico y Dental Ana Claros (lun 21, 04:20) | menos de 500 € | 20-50 | seguimiento y presupuestos | contestó con audio; quiere hablar la semana del 28 |
-| Carlos · Clínica Dental Marín (lun 21, 20:20) | 500-2.000 € | más de 50 | no lo sé | contestó; lo lleva Maikel |
+| CL-1 · clínica dental, Cataluña (sáb 19, 08:58, por la landing; escribió «Se pierden en el seguimiento») | menos de 500 € | más de 50 | seguimiento y presupuestos | reunión hecha el 21, propuesta 1.000 € |
+| CL-2 · laboratorio/centro dental (dom 20, 15:56) | nada todavía | 10-20 | seguimiento y presupuestos | contestó; plantón el 22 a las 16:00; cita movida al 23 a las 17:45 |
+| CL-3 · centro médico y dental (lun 21, 04:20) | menos de 500 € | 20-50 | seguimiento y presupuestos | contestó con audio; quiere hablar la semana del 28 |
+| CL-4 · clínica dental (lun 21, 20:20) | 500-2.000 € | más de 50 | no lo sé | contestó; lo lleva Maikel |
 
 **Formación (8)**
 
 | Lead | Inversión/mes | Solicitudes/mes | Dónde se le escapa | Qué pasó |
 |---|---|---|---|---|
-| Carmen · Tec (vie 18, 18:40) | menos de 500 € | 20-50 | no lo sé | sin canal: el número no conecta ni recibe WhatsApp |
-| ProAudio · Dabid (vie 18, 22:15) | nada todavía | menos de 20 | anuncios y captación | cita, plantón; sin respuesta al nuevo hueco |
-| Pablo · Opoprime (sáb 19, 09:15) | 500-2.000 € | más de 100 | anuncios y captación | 4 buzones; en No responde |
-| Elena · Erai (dom 20, 13:30) | menos de 500 € | 50-100 | tiempo de respuesta | cita, cancelada/plantón |
-| Angélica (dom 20, 23:50) | menos de 500 € | menos de 20 | tiempo de respuesta | cita, plantón |
-| Rafael · Ágape Cuerpo y Arte (mar 22, 10:20) | 500-2.000 € | 50-100 | anuncios y captación | buzón; en cadencia |
-| Noelia · bailaora y profesora de flamenco (mar 22, 16:10) | nada todavía | menos de 20 | no lo sé | cita el 23 a las 17:00 (Raquel) |
-| Renato · Mia University (mar 22, 22:20; escribió «University. Seguimento») | 2.000-5.000 € | más de 100 | seguimiento y presupuestos | entró de noche; WhatsApp fallido (pasarela en pausa), solo aviso |
+| FO-1 · centro de formación (vie 18, 18:40) | menos de 500 € | 20-50 | no lo sé | sin canal: el número no conecta ni recibe WhatsApp |
+| FO-2 · escuela de audio (vie 18, 22:15) | nada todavía | menos de 20 | anuncios y captación | cita, plantón; sin respuesta al nuevo hueco |
+| FO-3 · academia de oposiciones online (sáb 19, 09:15) | 500-2.000 € | más de 100 | anuncios y captación | 4 buzones; en No responde |
+| FO-4 · academia de idiomas (dom 20, 13:30) | menos de 500 € | 50-100 | tiempo de respuesta | cita, cancelada/plantón |
+| FO-5 · formación, autónoma (dom 20, 23:50) | menos de 500 € | menos de 20 | tiempo de respuesta | cita, plantón |
+| FO-6 · escuela de artes, Barcelona (mar 22, 10:20) | 500-2.000 € | 50-100 | anuncios y captación | buzón; en cadencia |
+| FO-7 · profesora de flamenco, autónoma (mar 22, 16:10) | nada todavía | menos de 20 | no lo sé | cita el 23 a las 17:00 (Raquel) |
+| FO-8 · universidad privada (mar 22, 22:20; escribió «University. Seguimento») | 2.000-5.000 € | más de 100 | seguimiento y presupuestos | entró de noche; WhatsApp fallido (pasarela en pausa), solo aviso |
 
 **Reformas (8)**
 
 | Lead | Inversión/mes | Presupuestos/mes | Dónde se le escapa | Qué pasó |
 |---|---|---|---|---|
-| Raúl · Ruben (sáb 19, 08:15) | nada todavía | 5-15 | no lo sé | locución de espera, sin hablar |
-| David Bellmunt (sáb 19, 14:40) | menos de 500 € | más de 30 | no lo sé | contestó; lo lleva Maikel |
-| Paco · «en parte de ejecución» (sáb 19, 18:30) | 500-2.000 € | 5-15 | no lo sé | buzones; No responde |
-| Marcos · Multiservicios Torito (dom 20, 02:10) | menos de 500 € | 5-15 | no lo sé | buzones; No responde |
-| Benjamín · Talavera de la Reina (dom 20, 09:10) | nada todavía | 5-15 | tiempo de respuesta | habló con Raquel: no es quien lo lleva |
-| Celso · COPU (lun 21, 10:10) | 2.000-5.000 € | menos de 5 | no lo sé | cita, plantón el 22 a las 10:30 |
-| Ramón · «empresario» (lun 21, 13:30) | nada todavía | 5-15 | no lo sé | contestó; lo lleva Maikel |
-| Sonia · Al Milímetro reformas (mar 22, 12:30) | menos de 500 € | 5-15 | no lo sé | contestó; cita el 23 a las 10:00 (agente de WhatsApp) |
+| RE-1 · reformas (sáb 19, 08:15) | nada todavía | 5-15 | no lo sé | locución de espera, sin hablar |
+| RE-2 · reformas (sáb 19, 14:40) | menos de 500 € | más de 30 | no lo sé | contestó; lo lleva Maikel |
+| RE-3 · reformas, «en parte de ejecución» (sáb 19, 18:30) | 500-2.000 € | 5-15 | no lo sé | buzones; No responde |
+| RE-4 · multiservicios (dom 20, 02:10) | menos de 500 € | 5-15 | no lo sé | buzones; No responde |
+| RE-5 · reformas, Toledo (dom 20, 09:10) | nada todavía | 5-15 | tiempo de respuesta | habló con Raquel: no es quien lo lleva |
+| RE-6 · constructora (lun 21, 10:10) | 2.000-5.000 € | menos de 5 | no lo sé | cita, plantón el 22 a las 10:30 |
+| RE-7 · «empresario» (lun 21, 13:30) | nada todavía | 5-15 | no lo sé | contestó; lo lleva Maikel |
+| RE-8 · reformas (mar 22, 12:30) | menos de 500 € | 5-15 | no lo sé | contestó; cita el 23 a las 10:00 (agente de WhatsApp) |
 
 Resumen por vertical:
 
@@ -102,7 +102,7 @@ Resumen por vertical:
 | Reformas | 8 | 3 | 3 | 2 | 1 | 2 | 0/2/1/5 |
 | Clínicas | 4 | 3 | 0 | 2 | 0 | 0 | 1/2/1/0 |
 
-Otros datos de la semana: 5 de 20 marcaron «no invierto nada»; 12 marcaron «no lo sé» o menos de 500 €; 8 de 20 entraron de noche o en fin de semana y recibieron el primer contacto a las 9:00 del día siguiente. Todos entraron por el formulario nativo de Meta menos Beatriz (landing /clinicas) y César Ballesteros (landing /reformas, semana anterior, plantón). Raquel: 61 llamadas en la semana, 14 buzones, 11 conversaciones largas, 63 minutos, 6,19 $. Citas de leads de pago: 9; plantones: 5; reunión hecha: 1 (Beatriz); propuesta: 1 (1.000 €). Citas pendientes el 23: Sonia 10:00, Noelia 17:00, Pilar 17:45 (las tres de formulario Meta).
+Otros datos de la semana: 5 de 20 marcaron «no invierto nada»; 12 marcaron «no lo sé» o menos de 500 €; 8 de 20 entraron de noche o en fin de semana y recibieron el primer contacto a las 9:00 del día siguiente. Todos entraron por el formulario nativo de Meta menos CL-1 (landing /clinicas) y un lead de reformas de la semana anterior (landing /reformas, plantón). Raquel: 61 llamadas en la semana, 14 buzones, 11 conversaciones largas, 63 minutos, 6,19 $. Citas de leads de pago: 9; plantones: 5; reunión hecha: 1 (CL-1); propuesta: 1 (1.000 €). Citas pendientes el 23: RE-8 10:00, FO-7 17:00, CL-2 17:45 (las tres de formulario Meta).
 
 ## 4. Dónde se rompe el recorrido
 
@@ -121,7 +121,7 @@ La auditoría de Paid del 19-sep ya decía: primer WhatsApp fallaba 6 de 6, etiq
 3. Una pregunta abierta obligatoria en el formulario filtra a los «no sé» y da a Raquel con qué abrir.
 4. Clínicas merece más presupuesto aunque el CPL sea el doble: es la única con reunión hecha y propuesta.
 5. Reformas: cambiar la oferta («que ningún presupuesto se quede sin respuesta»), no el anuncio; o pausar y pasar el dinero a clínicas.
-6. Formación: problema de asistencia, no de interés. Renato y Pablo son la muestra para probar precio y confirmación.
+6. Formación: problema de asistencia, no de interés. FO-8 y FO-3 son la muestra para probar precio y confirmación.
 7. Raquel contacta a 1 de 3; el guion se ha corregido el 22 (locuciones, «¿eres una máquina?», colgar tras el adiós, base antigua, número de contacto). Lo que el guion no arregla: llamar a las 9:00 en punto a leads del fin de semana.
 
 ## 6. Decisiones pendientes
