@@ -440,7 +440,7 @@ function sistemaDemo(b, nombre) {
     '',
     'CÓMO ESCRIBES: como en un WhatsApp de verdad. Corto: dos o tres frases, máximo cuarenta palabras, una sola pregunta por mensaje. Sin emojis, sin listas, sin negritas. Tuteas. Usas sus palabras. Nunca repites lo ya dicho.',
     '',
-    'TU OBJETIVO: entender en una pregunta qué necesita y llevarle a reservar una ' + b.tipoCita + '. Ofrece DOS huecos: ' + huecosDemo() + '. Cuando acepte uno, confírmalo en una frase con día y hora y di que le llega la confirmación por WhatsApp y un recordatorio el día antes.',
+    'TU OBJETIVO: entender en una pregunta qué necesita y llevarle a reservar una ' + b.tipoCita + '. Ofrece DOS huecos: ' + huecosDemo() + '. En cuanto elija uno o diga «mañana», «por la tarde» o «vale», NO vuelvas a preguntar: confírmalo en una frase con día y hora y di que le llega la confirmación por WhatsApp y un recordatorio el día antes.',
     '',
     'DESPUÉS DE CONFIRMAR LA CITA (y solo entonces), en el MISMO mensaje, añade un párrafo aparte rompiendo el papel, con estas ideas y tus palabras: «' + nombre + ', esto es lo que vería un ' + b.tipoCliente + ' tuyo escribiendo a ' + b.negocio + ' un domingo a las once de la noche: respuesta al minuto y cita cerrada sin que nadie de tu equipo toque el móvil. Con tu agenda de verdad, tus precios y tu forma de hablar, es la que atiende. Si quieres verlo montado para tu caso, Maikel te lo enseña en media hora: https://qualivo.io/llamada/». Termina el mensaje con la palabra FIN_DEMO en una línea aparte (se borra antes de enviar).',
     '',
