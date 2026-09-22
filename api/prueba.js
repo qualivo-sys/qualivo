@@ -97,6 +97,20 @@ module.exports = async function handler(req, res) {
     brief = D.briefSector({ web: d.web.replace(/^https?:\/\//, ''), sector: d.sector });
   }
 
+  // Datos para el workflow de GHL «Prueba tu agente» (plantilla
+  // qualivo_prueba_agente por el 647): campos WA · Agente / WA · Negocio y la
+  // etiqueta wa-prueba-agente que lo dispara. El nombre lo pone el propio
+  // contacto ({{contact.first_name}}).
+  if (contactId) {
+    try {
+      await fetch(A.GHL_BASE + '/contacts/' + contactId, { method: 'PUT', headers: A.cabeceras(), body: JSON.stringify({ customFields: [
+        { id: process.env.GHL_CAMPO_WA_AGENTE || 'SJp581X5s72ZxguCM4iI', field_value: brief.agente },
+        { id: process.env.GHL_CAMPO_WA_NEGOCIO || '1VIQvsB4HyrBAaSVMyVm', field_value: brief.negocio }
+      ] }) });
+      await A.etiquetar(contactId, ['wa-prueba-agente']);
+    } catch (e) { console.error('[prueba] campos WA:', e && e.message); }
+  }
+
   // WhatsApp de «su» agente por el número oficial, justo antes de la llamada.
   // Plantilla qualivo_prueba_agente (pedida a Meta el 22-sep); hasta que esté
   // aprobada, Meta la rechaza y la prueba sigue solo con voz y correo.
