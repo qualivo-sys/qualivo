@@ -18,7 +18,8 @@ const CUENTA = arg('cuenta') || 'qualivo';
 const SECO = process.argv.includes('--seco');
 const TOKEN = process.env.APIFY_TOKEN;
 const HOJA = process.env.SCORING_SHEET_ID || '158tKmIYVhAvrmJEeAU404bIztALIc7JoNZVAk2Pkt6s';
-const ACTOR_SEGUIDORES = process.env.APIFY_ACTOR_SEGUIDORES || 'datadoping~instagram-followers-scraper';
+const ACTOR_SEGUIDORES = process.env.APIFY_ACTOR_SEGUIDORES || 'scraping_solutions~instagram-scraper-followers-following-no-cookies';
+const ULTIMOS = Number(arg('ultimos') || 0); // primera pasada: cualificar también los N más recientes
 const ACTOR_PERFIL = 'apify~instagram-profile-scraper';
 const DIR_ESTADO = path.join(__dirname, '.estado');
 const FICHERO = path.join(DIR_ESTADO, 'seguidores-' + CUENTA + '.json');
@@ -46,7 +47,7 @@ function cualificar(p) {
   else if (/academia|formaci|escuela|curso|oposici|idiomas|educa/.test(bio)) vertical = 'Formación';
   else if (/reforma|construcci|obra|interior|cocina|baño|arquitect/.test(bio)) vertical = 'Reformas';
   else if (/asesor|gestor|abogad|laboral|fiscal|contab/.test(bio)) vertical = 'Asesorías';
-  else if (/agencia|marketing|ads|growth|funnel|automatiz|ia\b|coach/.test(bio)) vertical = 'Agencia / marketing (no cliente)';
+  else if (/agencia|marketing|\bads\b|growth|funnel|automatiz|\bia\b|coach|consultor/.test(bio)) vertical = 'Agencia / marketing (no cliente)';
   const motivos = [];
   let letra = 'descartar';
   if (vertical && !/no cliente/.test(vertical)) { letra = esNegocio || web ? 'A' : 'B'; motivos.push(vertical); }
@@ -85,9 +86,10 @@ async function main() {
   if (!TOKEN) throw new Error('falta APIFY_TOKEN');
   if (!fs.existsSync(DIR_ESTADO)) fs.mkdirSync(DIR_ESTADO);
   const antes = fs.existsSync(FICHERO) ? JSON.parse(fs.readFileSync(FICHERO)) : { usuarios: [], fecha: null };
-  const items = await apify(ACTOR_SEGUIDORES, { username: CUENTA, usernames: [CUENTA], directUrls: ['https://www.instagram.com/' + CUENTA + '/'], maxItems: 5000, resultsLimit: 5000 });
+  const items = await apify(ACTOR_SEGUIDORES, { Account: [CUENTA], resultsLimit: Number(process.env.APIFY_MAX_SEGUIDORES || 3000), dataToScrape: 'Followers' });
   const ahora = items.map(usuarioDe).filter(Boolean);
-  const nuevos = antes.fecha ? ahora.filter(function (u) { return antes.usuarios.indexOf(u) === -1; }) : [];
+  let nuevos = antes.fecha ? ahora.filter(function (u) { return antes.usuarios.indexOf(u) === -1; }) : [];
+  if (!antes.fecha && ULTIMOS) nuevos = ahora.slice(0, ULTIMOS); // la lista viene con los más recientes primero
   console.log('seguidores: ' + ahora.length + ' · nuevos desde ' + (antes.fecha || 'nunca') + ': ' + nuevos.length + (antes.fecha ? '' : ' (primera pasada: solo guardo la foto)'));
   if (!SECO) fs.writeFileSync(FICHERO, JSON.stringify({ usuarios: ahora, fecha: new Date().toISOString() }));
   if (!nuevos.length) return;
