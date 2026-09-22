@@ -61,7 +61,7 @@ def vale(r):
 
 if __name__ == "__main__":
     from collections import Counter
-    for sec in ("clinicas", "asesorias"):
+    for sec in ("clinicas", "asesorias", "formacion"):
         p = os.path.join(S, f"sector_{sec}.json")
         d = json.load(open(p))
         fuera, buenos = Counter(), []

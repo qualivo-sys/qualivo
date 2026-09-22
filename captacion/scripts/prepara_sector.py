@@ -176,7 +176,7 @@ if __name__ == "__main__":
     print(f"con correo util: {len(buenos)} de {len(leidos)} "
           f"(webs caidas: {sum(1 for r in leidos if not r['vivo'])})")
 
-    for sec in ("clinicas", "asesorias"):
+    for sec in ("clinicas", "asesorias", "formacion"):
         lote = [r for r in buenos if r["sector"] == sec]
         p = os.path.join(S, f"sector_{sec}.json")
         json.dump(lote, open(p, "w"), ensure_ascii=False, indent=1)

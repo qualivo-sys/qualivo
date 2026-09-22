@@ -22,7 +22,7 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126"
 B = "https://server.smartlead.ai/api/v1"
 ENVIA = "--envia" in sys.argv
 
-CAMPANAS = {"clinicas": 3976199, "asesorias": 3976201}
+CAMPANAS = {"clinicas": 3976199, "asesorias": 3976201, "formacion": 3976197}
 FIRMA = "\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
 
 TEXTOS = {
@@ -38,6 +38,21 @@ TEXTOS = {
             "matrícula final: por cada euro invertido, unos diez de vuelta.\n\n"
             "Lo tienes contado aquí: https://qualivo.io/casos/eac/"),
    "cierre": "cuántas consultas de precio se están quedando sin cita",
+ },
+ "formacion": {
+   "asunto": "vuestras matrículas",
+   "landing": ("https://qualivo.io/formacion/?utm_source=email&utm_medium=outbound"
+               "&utm_campaign=QV_OUT_FORMACION"),
+   "fuga": ("Cuando alguien pide información de un curso y no se matricula ese "
+            "mismo día, lo que casi nadie tiene atado es cuántos de esos vuelven "
+            "solos, ni por qué se caen los demás."),
+   # Nuria Roure es formacion y servicios online: aqui SI es el caso que toca.
+   "caso": ("Nuria Roure ya tenía captación y ya tenía ventas. Su problema no era "
+            "conseguir más alumnos, era saber cuáles merecían atención. Montamos "
+            "la priorización y el seguimiento sin subir la inversión: 2.000 euros "
+            "se convirtieron en 12.900 en ventas atribuibles al sistema.\n\n"
+            "Lo tienes contado aquí: https://qualivo.io/casos/nuria-roure/"),
+   "cierre": "cuántas solicitudes de información se están quedando sin cerrar",
  },
  "asesorias": {
    "asunto": "vuestros presupuestos",
@@ -64,6 +79,7 @@ RELLENO = {"fiscal", "laboral", "contable", "legal", "juridico", "jurídico",
            "mercantil", "asesoria", "asesoría", "gestoria", "gestoría",
            "consultoria", "consultoría", "abogados", "clinica", "clínica",
            "dental", "dentista", "estetica", "estética", "fisioterapia",
+           "academia", "formacion", "formación", "centro", "escuela", "cursos",
            "odontologia", "odontología", "barcelona", "madrid", "y", "de",
            "en", "para", "empresas", "autonomos", "autónomos", "online"}
 
