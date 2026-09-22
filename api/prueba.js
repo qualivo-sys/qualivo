@@ -113,14 +113,9 @@ module.exports = async function handler(req, res) {
     } catch (e) { console.error('[prueba] campos WA:', e && e.message); }
   }
 
-  // WhatsApp de «su» agente por el número oficial, justo antes de la llamada.
-  // Plantilla qualivo_prueba_agente (pedida a Meta el 22-sep); hasta que esté
-  // aprobada, Meta la rechaza y la prueba sigue solo con voz y correo.
-  let wa = { ok: false, motivo: 'no_configurado' };
-  try {
-    const WA = require('./_whatsapp');
-    wa = await WA.enviarPlantilla(d.telefono, process.env.META_WA_PLANTILLA_PRUEBA || 'qualivo_prueba_agente', [d.nombre.split(' ')[0], brief.agente, brief.negocio]);
-  } catch (e) { wa = { ok: false, motivo: String(e && e.message).slice(0, 120) }; }
+  // Orden que quiere Maikel (22-sep): primero la llamada; el WhatsApp solo si
+  // no lo coge o, al colgar, para confirmar la cita (api/vapi-fin.js, finDemo).
+  const wa = { ok: false, motivo: 'sale tras la llamada' };
 
   const l = await D.lanzarLlamada({ brief: brief, nombre: d.nombre, telefono: d.telefono, email: d.email, contactId: contactId });
   if (contactId) {
