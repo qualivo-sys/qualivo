@@ -106,7 +106,7 @@ la fuga es el gancho.
 - **Construyendo Qualivo** (LinkedIn, lunes y jueves): el diario del sistema,
   antes «Agentizando mi propia empresa», con lo que salió mal incluido.
 - **Buscando la fuga** (miércoles): recorrer un sistema y encontrar dónde se
-  pierde. Moldes: banderas rojas por fuga, Sin humo, test de 30 segundos.
+  pierde. Moldes: banderas rojas por fuga, la frase de una persona (antes «Sin humo», nombre retirado el 22-sep: nada de lemas que suenen a máquina), test de 30 segundos.
 - **Experimento de la semana**: hipótesis → experimento → resultado →
   aprendizaje. Sale cuando hay un experimento cerrado, no por calendario.
 - **Antes de gastar más**: qué revisar antes de subir publicidad, contratar,

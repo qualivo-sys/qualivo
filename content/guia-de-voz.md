@@ -27,6 +27,14 @@ Tecnicismos innecesarios · anglicismos de marketing · lenguaje empresarial · 
 
 Vetadas salvo que digan algo de verdad: "en el mundo actual…", "no se trata de X sino de Y", "la clave está en…", "llevar al siguiente nivel", potenciar, maximizar, impulsar, transformar, revolucionar, disruptivo, innovador, soluciones 360, valor añadido, "en definitiva", "sin duda", "cabe destacar". Test: ¿estoy diciendo algo o rellenando?
 
+**Añadido por Maikel el 22-sep:** nada de rótulos, lemas o nombres de serie que
+suenen a máquina: «Sin humo», «verdades de dueño», «sin filtros», «hablemos
+claro», «la verdad incómoda» y parecidos. Delatan que lo escribió una IA y no
+los diría nadie con una cerveza delante. Una pieza empieza por lo que pasó, no
+por un lema. Y el tono, siempre el de una persona contando algo a otra: si
+suena a titular de agencia o a plantilla, se reescribe. Prueba rápida: leerlo en
+voz alta como si se lo contaras a un amigo; si te da vergüenza, fuera.
+
 ## Antes de escribir
 
 Qué quiero decir · para quién · qué problema tiene · qué quiero conseguir · cuál es el punto que hace pensar "hostia, esto tiene sentido".

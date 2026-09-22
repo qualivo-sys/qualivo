@@ -344,3 +344,9 @@ Maikel», queda solo la llamada de Raquel. v4 renderizada y entregada en el chat
 con los dos pies de foto. Publicar sigue dependiendo de que levante la pausa.
 
 Maikel, 22-sep mediodía: «me gusta, pero lo de las tres locuciones quítalo». Lámina 6 sin la frase del fallo (v5). Regla que anoto: en el carrusel de demostración no va el fallo; el fallo va en el diario y en la newsletter.
+
+Maikel, 22-sep: «no digas cosas como “sin humo” y palabras así, que suena muy
+GPT/Claude; siempre un tono humano en los textos». Regla apuntada en la guía
+de voz (sección Anti-ChatGPT) y en el prompt del agente: fuera los lemas y
+nombres de serie que suenan a máquina; cada pieza empieza por lo que pasó. La
+pieza del miércoles se rehace sin ese titular ni ese molde.
