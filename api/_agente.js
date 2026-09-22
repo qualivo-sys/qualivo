@@ -259,7 +259,12 @@ async function reenganchar(o) {
 async function variar(o) {
   const d = o.datos || {};
   const sistema = 'Reescribes mensajes de WhatsApp que manda Maikel Echevarría (Qualivo) a personas que han pedido un diagnóstico gratuito de crecimiento. Te dan el mensaje base y la ficha de la persona. Devuelves UN mensaje nuevo con la misma intención, los mismos datos y el mismo cierre (si el base pide algo, el tuyo pide lo mismo), pero con otra redacción: otro arranque, otro orden, otras palabras, y usando lo que la ficha dice de esa persona (su sector, lo que escribió, su web) sin inventar nada. Misma longitud aproximada o más corto. Tuteas. Sin emojis, sin listas, sin negritas, sin comillas alrededor, sin jerga de marketing. Nunca cambies enlaces, horas, nombres ni cifras. Contesta solo con el texto del mensaje.';
+  // Un arranque distinto cada vez, para que dos variantes del mismo base no
+  // empiecen igual (en la prueba del 22-sep las dos abrían con «he intentado llamarte»).
+  const arranques = ['sin saludo, directo al grano', 'empezando por lo que la ficha dice de su negocio', 'empezando por la pregunta o la petición del final', 'con un saludo corto y el nombre', 'empezando por el porqué del mensaje, no por lo que hiciste'];
+  const arranque = arranques[Math.floor(Math.random() * arranques.length)];
   const usuario = 'FICHA: nombre ' + (d.nombre || '-') + ' · sector ' + (d.sector || '-') + ' · dónde cree que se le escapa: ' + (d.fuga || d.hipotesis || '-') + (d.web ? ' · web ' + d.web : '') +
+    '\n\nARRANQUE PARA ESTA VERSIÓN: ' + arranque + '.' +
     '\n\nMENSAJE BASE:\n' + String(o.texto || '');
   const clave = process.env.ANTHROPIC_API_KEY;
   if (!clave) return { texto: '', motivo: 'falta ANTHROPIC_API_KEY' };
@@ -267,7 +272,7 @@ async function variar(o) {
     method: 'POST',
     headers: Object.assign({ 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
       process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}),
-    body: JSON.stringify({ model: MODELO, max_tokens: 600, system: sistema, messages: [{ role: 'user', content: usuario }] })
+    body: JSON.stringify({ model: MODELO, max_tokens: 600, temperature: 1, system: sistema, messages: [{ role: 'user', content: usuario }] })
   });
   if (!r.ok) return { texto: '', motivo: 'anthropic ' + r.status };
   const j = await r.json();
