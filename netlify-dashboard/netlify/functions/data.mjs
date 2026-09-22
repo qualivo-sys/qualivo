@@ -355,9 +355,10 @@ async function build() {
     const descartada = el === 'no cualificada';
     // "Alumna activa" se renombra a "Alumna matriculada": contamos ambas como matrícula.
     const matricula = (el === 'alumna activa' || el === 'alumna matriculada') ? 1 : 0;
-    const perdido = status === 'lost' ? 1 : 0;
-    const abandonado = status === 'abandoned' ? 1 : 0;
-    const pendiente = status === 'open' && !matricula ? 1 : 0;
+    // Perdido/abandonado se deducen de la columna del tablero (el motor mueve columnas, no el status de GHL).
+    const perdido = (!matricula && (status === 'lost' || /^(no interesa|baja|entrev\.? ?nula|entrevista nula)$/.test(el))) ? 1 : 0;
+    const abandonado = (!matricula && !perdido && (status === 'abandoned' || /^(inv[áa]lido|ilocalizable)$/.test(el))) ? 1 : 0;
+    const pendiente = (!matricula && !perdido && !abandonado) ? 1 : 0;
     const contactado = iLlam >= 0 && pos >= iLlam && !descartada ? 1 : 0;
     const entrevista = iProp >= 0 && pos >= iProp && !descartada ? 1 : 0;
     const estado = matricula ? 'Ganado' : perdido ? 'Perdido' : abandonado ? 'Abandonado/Inválido' : 'Pendiente';
