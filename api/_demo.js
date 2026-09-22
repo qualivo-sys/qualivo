@@ -136,7 +136,9 @@ async function lanzarLlamada(o) {
     customer: { number: o.telefono, name: o.nombre || '' },
     assistantOverrides: {
       firstMessage: primeraFrase(b, nombre),
-      model: { provider: 'openai', model: 'gpt-4o', messages: [{ role: 'system', content: promptLlamada(b, nombre) }], temperature: 0.6 },
+      // Modelo ligero: en la prueba del 22-sep bajó el turno de 3,2 s a 2,0 s
+      // junto con la voz en flash y nova-3 (esos dos van en el asistente).
+      model: { provider: 'openai', model: process.env.DEMO_MODELO_VOZ || 'gpt-4o-mini', messages: [{ role: 'system', content: promptLlamada(b, nombre) }], temperature: 0.6 },
       endCallFunctionEnabled: true,
       maxDurationSeconds: 360,
       // La ficha viaja dentro de la llamada: api/vapi-fin.js la recupera al
