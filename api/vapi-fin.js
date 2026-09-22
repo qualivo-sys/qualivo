@@ -125,6 +125,7 @@ async function finDemo(msg, vv) {
   let extraido = {};
   if (hablo) { try { extraido = await D.extraer(brief, msg.transcript); } catch (e) { console.error('[vapi-fin] demo extraer:', e && e.message); } }
   const acciones = [];
+  let waOk = false;
   // WhatsApp de «su» agente por el número oficial (plantillas UTILITY pedidas a
   // Meta el 22-sep): si no lo cogió, «te acabo de llamar»; si hablaron, la cita
   // confirmada o una puerta abierta. Si Meta rechaza el envío (permiso del
@@ -136,10 +137,11 @@ async function finDemo(msg, vv) {
     if (!hablo) wa = await WA.enviarPlantilla(numero, process.env.META_WA_PLANTILLA_PRUEBA_NO_COGE || 'qualivo_prueba_no_coge', [nombre, brief.agente, brief.negocio]);
     else wa = await WA.enviarPlantilla(numero, process.env.META_WA_PLANTILLA_PRUEBA_TRAS || 'qualivo_prueba_tras_llamada', [nombre, brief.agente, brief.negocio,
       extraido.cita ? 'Te confirmo la cita del ' + extraido.cita + ' y te mando un recordatorio el día antes.' : 'Cuando quieras retomamos y te reservo la cita en un minuto.']);
-    acciones.push(wa && wa.ok ? 'whatsapp_enviado' : 'whatsapp_no_enviado (' + ((wa && wa.motivo) || '') + ')');
+    waOk = !!(wa && wa.ok);
+    acciones.push(waOk ? 'whatsapp_enviado' : 'whatsapp_no_enviado (' + ((wa && wa.motivo) || '') + ')');
   } catch (e) { acciones.push('whatsapp_error ' + String(e && e.message).slice(0, 80)); }
   if (hablo && datos.email) {
-    const m = D.correoDueno({ brief: brief, datos: datos, extraido: extraido, llamada: llamada });
+    const m = D.correoDueno({ brief: brief, datos: datos, extraido: extraido, llamada: llamada, acciones: { whatsapp: waOk } });
     const ok = await D.enviarCorreo({ para: datos.email, copia: process.env.INFORME_PAID_TO || 'maikel@qualivo.io', asunto: m.asunto, html: m.html });
     acciones.push(ok ? 'correo_enviado' : 'correo_no_enviado');
   } else acciones.push(hablo ? 'sin_email' : 'no_hablo');

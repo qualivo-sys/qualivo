@@ -173,7 +173,7 @@ function lista(a) { return (a || []).length ? '<ul style="margin:6px 0 0 18px;pa
 // El correo del dueño: lo que Maikel recibe hoy con cada lead, maquetado para
 // alguien que lo ve por primera vez.
 function correoDueno(o) {
-  const b = o.brief, d = o.datos, x = o.extraido || {}, L = o.llamada || {};
+  const b = o.brief, d = o.datos, x = o.extraido || {}, L = o.llamada || {}, a = o.acciones || {};
   const dur = L.startedAt && L.endedAt ? Math.round((Date.parse(L.endedAt) - Date.parse(L.startedAt)) / 1000) : 0;
   const cuando = new Date(L.startedAt || Date.now()).toLocaleString('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
   const F = '-apple-system,Segoe UI,Roboto,sans-serif';
@@ -188,7 +188,15 @@ function correoDueno(o) {
     caja('Lo que preguntó', lista(x.preguntas)) +
     caja('Datos que dio', lista(x.datos)) +
     caja('Resumen de la llamada', '<p style="margin:0">' + esc(x.resumen || L.summary || '') + '</p>' + (L.recordingUrl ? '<p style="margin:10px 0 0"><a href="' + esc(L.recordingUrl) + '" style="color:#1a56db">Escuchar la grabación</a></p>' : '')) +
+    caja('Lo que ha hecho el sistema en tu prueba', '<ol style="margin:0 0 0 18px;padding:0">' +
+      '<li style="margin:3px 0">Has pedido la prueba y en unos segundos ha leído ' + esc(b.web || 'tu web') + ' y ha montado a ' + esc(b.agente) + ' con tus servicios' + (b.horario ? ', tu horario' : '') + (b.gancho ? ' y lo que te diferencia' : '') + '.</li>' +
+      '<li style="margin:3px 0">' + (dur ? 'Te ha llamado y habéis hablado ' + dur + ' segundos.' : 'Te ha llamado y no ha podido hablar contigo.') + '</li>' +
+      '<li style="margin:3px 0">' + (a.whatsapp === true ? 'Te ha escrito por WhatsApp ' + (dur ? 'con la cita confirmada.' : 'para retomarlo por escrito.') : 'Por WhatsApp te contesta al momento si le escribes tú (con un cliente real, le escribiría ella primero).') + '</li>' +
+      '<li style="margin:3px 0">Ha puntuado el contacto (abajo) y te ha mandado este correo. Con un cliente real, además, lo habría dejado apuntado en tu CRM con la grabación.</li></ol>') +
+    caja('Puntuación del lead · ' + esc(x.nivel || '—'), '<p style="margin:0 0 8px">' + esc(x.motivo_nivel || 'No hubo conversación suficiente para puntuar.') + '</p>' +
+      '<p style="margin:0;color:#7a7c82;font-size:14px">Cómo se calcula: <b>A</b> quiere cita y ha dado sus datos · <b>B</b> interés claro, sin cita todavía · <b>C</b> curioseaba o pedía solo precio · <b>D</b> no hubo conversación. Con tus clientes reales se suma lo que sabemos de ellos (qué servicio piden, urgencia, si contestan rápido): los A te llegan al móvil al momento; los C y D los sigue el sistema solo, sin quitarte tiempo.</p>') +
     caja('Qué haría el sistema ahora', '<ol style="margin:0 0 0 18px;padding:0"><li style="margin:3px 0">' + esc(x.siguiente_paso || 'Confirmar la cita por WhatsApp.') + '</li><li style="margin:3px 0">Recordatorio el día antes y el mismo día a las 9:00, con lo que se va a ver en la visita.</li><li style="margin:3px 0">Si no viene: llamada de la agente y nuevo hueco, sin que nadie de tu equipo tenga que acordarse.</li><li style="margin:3px 0">Si pide presupuesto y no contesta: seguimiento al día 1, 4 y 10 con su contexto.</li></ol>') +
+    caja('Así funcionaría con tus ' + esc(b.tipoCliente) + 's', '<p style="margin:0">Cada vez que alguien te llama y nadie puede cogerlo, o te escribe por WhatsApp a cualquier hora, ' + esc(b.agente) + ' le atiende con tus servicios y tus precios, le cierra la ' + esc(b.tipoCita) + ' en tu agenda de verdad, le manda la confirmación y los recordatorios, y si no viene o no contesta, le sigue ella. Tú recibes esto mismo por cada uno, con su puntuación, y solo entras cuando hay que decidir.</p>') +
     '<div style="background:#f5f5f7;border-radius:10px;padding:16px 18px;margin:20px 0"><b>Esto ha sido una demostración con tu web.</b> La agente no sabía más que lo que hay publicado en ' + esc(b.web) + (b.fuente === 'sector' ? ' (no se ha podido leer la web, así que ha usado lo típico del sector)' : '') + '. Con tu agenda, tus precios y tu forma de hablar, es la que atiende de verdad. Si quieres verlo montado para tu caso, Maikel te lo enseña en media hora: <a href="https://qualivo.io/agenda" style="color:#1a56db">reserva aquí</a>.</div>' +
     '<p style="color:#7a7c82;font-size:12px">Qualivo · Maikel Echevarría · maikel@qualivo.io</p></div>';
   return { asunto: 'Nuevo ' + b.tipoCliente + ' en ' + b.negocio + (x.cita ? ' · cita ' + x.cita : '') + ' (demo)', html: html };
