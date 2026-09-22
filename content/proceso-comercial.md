@@ -99,3 +99,12 @@ contarlos y para trabajarlos, no para archivarlos.
 
 Precio, descuentos, el piloto en abierto, cualquier mensaje a un cliente actual,
 y publicar en redes.
+
+**Regla de Maikel (22-sep): los correos y mensajes «de fondo» se le enseñan
+antes de enviar.** Entran aquí: el correo de seguimiento después de una
+reunión, cualquier propuesta o resumen de plan, cualquier texto que
+comprometa un número, una garantía o un precio, y cualquier correo a un
+prospecto B2B o a un partner. Se dejan como borrador en Gmail o se pegan en
+el chat, y salen cuando Maikel dice «ok». Lo que sí sale sin preguntar: los
+mensajes cortos del playbook (recordatorios de cita, respuestas del agente,
+cierres de un no, propuesta de nueva hora, tandas ya aprobadas).
