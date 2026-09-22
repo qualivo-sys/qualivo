@@ -18,10 +18,13 @@ const PIPELINE = process.env.GHL_PIPELINE_PROSPECCION || 'JaB4LIwUqFn96LLFEhSm';
 const ETAPAS = {
   nuevo: 'b312c2cc-cd51-4a4e-8f9f-ac1e27be5784',        // Nuevo Lead
   conversacion: '2f7569b8-d95b-4bfe-8120-0a4d206907ce', // Conversación abierta
+  enCadencia: 'b48cf14c-2c0b-4529-81cd-0366f9c3a96d',   // En cadencia (Maikel, 22-sep)
   reunion: 'd491f3eb-2b82-468b-aab9-60e9cdc7368f',      // Reunión agendada
+  noPresentado: 'd04755f9-f94c-4c56-ac14-2c6b6356e1d6', // No presentado (Maikel, 22-sep)
   oferta: '41c3a02d-a63e-4ef5-a402-7b562bbabfa9',       // Oferta enviada
-  seguimiento: '3e12a08f-272b-4817-9bfe-fd83d24ca45e',  // Seguimiento
+  seguimiento: '3e12a08f-272b-4817-9bfe-fd83d24ca45e',  // Negociación (antes «Seguimiento»)
   masAdelante: '515ba6db-2f03-47ab-9c50-fc10f361192a',  // Más adelante
+  piloto: '138c0901-981b-4454-8bc1-63260e87f402',       // Piloto (Maikel, 22-sep)
   cliente: '673ee555-349c-40ea-b4c3-8cc5e4a867b9'       // Cliente
 };
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
@@ -140,7 +143,7 @@ async function mover(contactId, etapa, crearSi) {
     if (op.pipelineStageId === ETAPAS.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
     // Nunca hacia atrás: el 18-sep la agenda puso un trato en «Reunión agendada» y
     // el final de la llamada lo devolvió a «Conversación abierta».
-    const ORDEN = ['nuevo', 'conversacion', 'reunion', 'oferta', 'seguimiento', 'masAdelante', 'cliente'];
+    const ORDEN = ['nuevo', 'enCadencia', 'conversacion', 'reunion', 'noPresentado', 'oferta', 'seguimiento', 'masAdelante', 'piloto', 'cliente'];
     const actual = Object.keys(ETAPAS).filter(function (k) { return ETAPAS[k] === op.pipelineStageId; })[0];
     if (actual && ORDEN.indexOf(actual) > ORDEN.indexOf(etapa) && etapa !== 'masAdelante') {
       return { ok: true, id: op.id, movido: false, motivo: 'no_retrocede' };

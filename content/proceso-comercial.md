@@ -79,6 +79,22 @@ tras varios intentos no hay manera, se descarta.»
 - En código: `api/_reenganche.js`, lo llama `api/activacion.js`. Etiquetas
   `reeng-1`, `reeng-2`, `reeng-3`.
 
+## 3c. No presentados (Maikel, 22-sep)
+
+Etapa «No presentado» en el pipeline de GHL (id d04755f9-…). Entra quien tenía
+cita y no se conectó, y también quien la canceló el mismo día. Sirve para
+contarlos y para trabajarlos, no para archivarlos.
+
+- **Mismo día, a los 10 minutos**: una línea por el canal de su hilo («no te he
+  visto, imagino que se te ha complicado, ¿lo movemos?») con dos huecos
+  concretos; si no contesta en 10 minutos, llamada de Raquel. Etiqueta
+  `no-presentado`, nota con el motivo (no se conectó / canceló el mismo día).
+- **Día 2**: segundo toque con contexto (el agente, o Maikel si el hilo es
+  suyo). **Día 5**: tercero y último, sin pedir nada. Si reserva, vuelve a
+  «Reunión agendada». Si no, a «Más adelante» con motivo.
+- Cada viernes el cuadro de mando cuenta los no presentados de la semana y su
+  destino (reagendó / más adelante / perdido).
+
 ## 4. Lo que nunca sale sin Maikel
 
 Precio, descuentos, el piloto en abierto, cualquier mensaje a un cliente actual,
