@@ -122,3 +122,28 @@ respondio-17sep). No es un lead de las campañas nuevas.
 **Propuesto, no aplicado:** primera llamada de los leads de fin de semana a partir de las 9:30-10:00, no a las 9:00 en punto (cadencia); tras dos buzones el mismo día, no volver a llamar ese día (cadencia); reintentos con apertura de contexto obligatoria en `assistantOverrides.firstMessage` desde `api/activacion.js` (hoy solo se hace a mano); probar grafía «Áना» → «Hola. Ana,» para nombres de tres letras (voz).
 
 **Regla fijada por Maikel (21-sep):** los que no invierten también se llaman («puede ser gente con dinero»); y nada que parezca envío automatizado por WhatsApp desde el 663.
+
+## 22-sep-2026 · martes
+
+**Llamadas del día (27; 23 reales + 4 pruebas de Maikel de la demo «prueba tu agente»).** Lead form Meta (11): 1 cita real (Noelia, 16:30, 300 s: miércoles 23 a las 17:00), 4 buzones (Ana, Rafael, Pilar CPD, Pablo ×1 más: ya van cuatro), 3 sin contestar o comunicando (Carlos, Celso, Benjamín), 1 locución de espera (Raúl), 1 colgó a los 12 s (David, tras el plantón de las 10:00), 1 sin conectar (Carmen, tercer fallo: sin canal). Base antigua (12, llamadas de reactivación de la mañana): 0 citas, 3 recados en recepción (Jorge/Otefisa, Carlos/Madom, Estela/Grupo 2000), 1 recepción que pidió un número y no lo obtuvo (Pilar Vega/CIP, 149 s), 1 «no interesa» (Eva/AYCE: preguntó si era una máquina, Raquel lo negó y colgó), 1 filtro de marketing (Ignasi), 6 cortas o sin conectar. Tres de la base antigua salieron desde el +1 775 de EE. UU. («me llama de Estados Unidos», +34711268234). Registro completo con 8 audios en Notion «📞 Llamadas de Raquel».
+
+**Lo que enseñaron las grabaciones:**
+1. **Negó ser una máquina** (Eva: «No, Eva, soy Raquel» → colgó). Con Noelia dijo «asistente virtual, como si fuera una persona real». No había respuesta fija para esto.
+2. **La locución de la operadora sigue engañándola cuando llega después del saludo** («Gracias. No cuelgues, por favor»): Raúl, Rafael, Pilar CPD, Miguel Martínez, +34711268234 («claro, aquí espero»). La regla del 21-sep cubría la locución antes del saludo, no después.
+3. **Menús IVR** («pulse uno…»): en la llamada a Ignasi leyó en voz alta sus propias instrucciones del guion de reactivación; con CIP y Empatif preguntó «¿hablo con…?» al menú.
+4. **Tras el adiós no cuelga**: Noelia, 300 s hasta el corte por silencio (0,49 $ por una llamada de 2 minutos útiles).
+5. **Base antigua con apertura de lead nuevo**: «acabas de pedir el diagnóstico… en nuestro correo de agosto» y «el diagnóstico que pidió esta mañana» (Jorge, Carlos, Eva, Estela). Nadie de esa base ha pedido nada.
+6. **No sabe dar un número para devolver la llamada**: «no puedo proporcionar el número» ×2 a la recepcionista del CIP, que decía que no le salía en pantalla.
+7. Pronunciación: «Kualifo/Cualibo/Qualibu» por Qualivo; «Michael/Mike/My Le/Maykel» por Máikel en la transcripción (parte es el transcriptor oyendo a la voz; hay que escuchar antes de tocar). «Un 2º» en la transcripción es cómo el transcriptor escribe «un segundo», no un fallo de Raquel.
+8. Latencia: con la configuración nueva de la tarde (voz flash, nova-3, espera 0,5 s) el turno medio bajó de 3,2 s a 2,0 s en las pruebas de Maikel.
+
+**Cambios aplicados** (copia previa en el scratchpad: `vapi-asistente-2026-09-22b.json`; prompt nuevo en `vapi-prompt-2026-09-22-nuevo.md`):
+1. Respuesta fija a «¿eres una máquina / una IA / real?»: «Sí, soy la asistente de IA de Máikel. La reunión es con él, en persona. ¿Te cuadro el hueco?». Nunca negarlo, nunca «como si fuera una persona real».
+2. Menús IVR: no hablar ni leer instrucciones; esperar en silencio hasta veinte segundos y colgar con endCall si sigue el menú.
+3. Locución después del saludo: no decir nada más (ni «¿hablo con…?», ni «aquí espero») hasta que hable una persona o suene el pitido.
+4. Tras la despedida, colgar con endCall en el acto (endCallFunctionEnabled activado en el asistente).
+5. Base antigua: si el origen es el correo de agosto, nunca «acabas de pedir»; recado «Máikel le ha escrito por correo»; si ofrecen un email, aceptarlo.
+6. Si el número no les sale en pantalla, dictar el de Máikel cifra a cifra (es el identificador de llamada que ya ven).
+7. Por la tarde (Maikel, «me gusta»): voz `eleven_flash_v2_5`, transcriptor `nova-3`, espera 0,5 s.
+
+**Propuesto, no aplicado:** las llamadas de reactivación de la base antigua deben salir siempre desde el móvil de Maikel, no desde el +1 775 (revisar el script de las 9:55); tras cuatro buzones (Pablo) o tres fallos de conexión (Carmen), dejar de llamar y pasar a correo; tras un plantón, no llamar en frío (David colgó a los 12 s): mejor WhatsApp con hueco nuevo; probar grafía «Cuálivo» en el prompt y escuchar si «Máikel» suena bien con la voz flash antes de tocar nada más.
