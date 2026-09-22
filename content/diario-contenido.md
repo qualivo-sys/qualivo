@@ -342,3 +342,5 @@ carrusel «Casi 7×» pasa al martes; Sin humo pasa al miércoles y se rehace o 
 cambia. Lámina 5 cerrada con mi recomendación: fuera el WhatsApp firmado «soy
 Maikel», queda solo la llamada de Raquel. v4 renderizada y entregada en el chat
 con los dos pies de foto. Publicar sigue dependiendo de que levante la pausa.
+
+Maikel, 22-sep mediodía: «me gusta, pero lo de las tres locuciones quítalo». Lámina 6 sin la frase del fallo (v5). Regla que anoto: en el carrusel de demostración no va el fallo; el fallo va en el diario y en la newsletter.

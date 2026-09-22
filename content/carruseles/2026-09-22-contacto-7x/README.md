@@ -17,3 +17,5 @@ recomendación pendiente: fuera el WhatsApp firmado «soy Maikel» (regla del
 21-sep: nada que parezca envío automatizado desde el 663); queda solo la
 llamada de Raquel (lunes 21, 10:30, 4 min 33 s, cita martes 10:30). Pie de
 foto ajustado. Sigue sin publicar hasta que Maikel levante la pausa.
+
+v5 (22-sep): Maikel pide quitar de la lámina 6 la frase de las tres locuciones de operadora. Fuera. El fallo se cuenta en la newsletter, no aquí.
