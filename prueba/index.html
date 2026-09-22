@@ -82,12 +82,12 @@
       <div class="pr-grid">
         <div>
           <span class="pr-chip"><i></i>Prueba gratis · 2 minutos</span>
-          <h1>Oye a la agente que atendería a <span>tus clientes.</span> En 30 segundos.</h1>
-          <p class="bajada">Mete tu web y tu móvil. Te escribe por WhatsApp y te llama la agente de tu negocio, con tus servicios y tu forma de hablar. Tú haces de cliente. Al colgar, recibes lo que verías tú como dueño.</p>
+          <h1>Oye a la agente que atendería a <span>tus clientes.</span> En un minuto.</h1>
+          <p class="bajada">Mete tu web y tu móvil. Te llama la agente de voz de tu negocio, con tus servicios y tu forma de hablar, y tú haces de cliente. Si quieres, pruébala también por WhatsApp. Al colgar, recibes el correo que verías tú como dueño.</p>
           <ul class="pr-pasos">
-            <li><span class="n">1</span><span><b>Rellenas cuatro campos.</b> Leemos tu web y montamos a tu agente al vuelo: servicios, horario, lo que preguntan tus clientes.</span></li>
-            <li><span class="n">2</span><span><b>Te escribe y te llama.</b> Primero un WhatsApp, luego la llamada. Pregúntale lo que le preguntaría un cliente: precios, horarios, pide cita. Ella te lleva a reservar.</span></li>
-            <li><span class="n">3</span><span><b>Te llega el correo del dueño.</b> Ficha del lead, lo que preguntó, la cita, el resumen, la grabación y qué haría el sistema después.</span></li>
+            <li><span class="n">1</span><span><b>Rellenas el formulario.</b> Leemos tu web y montamos a tu agente al vuelo: servicios, horario, lo que preguntan tus clientes. Tarda unos treinta segundos.</span></li>
+            <li><span class="n">2</span><span><b>Te suena el móvil.</b> Es ella. Pregúntale lo que le preguntaría un cliente: precios, horarios, pide cita. Te ofrece dos huecos y te la confirma. <b>¿Y por WhatsApp?</b> Le escribes tú al número que verás en pantalla, como haría un cliente, y te contesta al momento.</span></li>
+            <li><span class="n">3</span><span><b>Al colgar, te llega el correo del dueño.</b> Lo que recibirías tú con cada cliente nuevo: su ficha, lo que preguntó, la cita, el resumen, la grabación y qué haría el sistema después.</span></li>
           </ul>
           <div class="pr-quien">
             <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
@@ -98,7 +98,7 @@
         <div class="pr-caja" id="caja">
           <form id="f" novalidate>
             <p class="t">Que me llame mi agente.</p>
-            <p class="s">Gratis y sin compromiso. Solo te llamamos a este número para la prueba.</p>
+            <p class="s">Gratis y sin compromiso. Te llamamos una sola vez, a este número, para la prueba. Nada más.</p>
             <label class="campo"><span>Tu nombre</span><input type="text" name="nombre" autocomplete="given-name" required></label>
             <label class="campo"><span>Tu móvil (te llamamos ahora)</span><input type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX" required></label>
             <label class="campo"><span>Tu email (para el correo del dueño)</span><input type="email" name="email" autocomplete="email" required></label>
@@ -113,7 +113,7 @@
                 <option value="otro">Otro</option>
               </select>
             </label>
-            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me escribáis por WhatsApp y me llaméis a este número para la prueba, y que me mandéis el correo de la demo. <a href="/privacidad/" target="_blank" style="color:var(--verde)">Política de privacidad</a>.</span></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me llaméis a este número para la prueba y me mandéis el correo de la demo. <a href="/privacidad/" target="_blank" style="color:var(--verde)">Política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
             <p class="err" id="err" hidden></p>
             <button type="submit" class="btn-pr" id="b">📞 Que me llame ahora →</button>
@@ -121,15 +121,15 @@
 
           <div class="estado" id="ok" hidden>
             <div class="ico suena">📞</div>
-            <h3>Mira el móvil.</h3>
-            <p id="ok-txt">Estamos leyendo tu web y montando a tu agente. En menos de un minuto te escribe por WhatsApp y te llama.</p>
+            <h3>Te va a sonar el móvil.</h3>
+            <p id="ok-txt">Estamos leyendo tu web y montando a tu agente. En menos de un minuto te llama.</p>
             <ul>
-              <li>Haz de cliente: pregúntale por un servicio, el precio, el horario.</li>
-              <li>Pide cita. Ella te ofrece dos huecos y te la confirma.</li>
-              <li>Al colgar, mira el correo: te llega lo que verías tú como dueño.</li>
+              <li><b>Cuando llame:</b> haz de cliente. Pregúntale por un servicio, el precio, el horario. Pide cita: te ofrece dos huecos y te la confirma.</li>
+              <li><b>Al colgar:</b> mira el correo. Te llega lo que verías tú como dueño.</li>
+              <li><b>¿Quieres probarla también por WhatsApp?</b> Escríbele tú, como haría un cliente. Te contesta al momento y te cierra la cita.</li>
             </ul>
-            <a class="btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">💬 Escríbele por WhatsApp como si fueras un cliente</a>
-            <p class="s" style="margin:8px 0 0">Te contesta al momento y te cierra la cita, igual que haría con un cliente tuyo.</p>
+            <a class="btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">💬 Escribirle por WhatsApp como cliente</a>
+            <p class="s" style="margin:8px 0 0">Se abre WhatsApp con el mensaje ya escrito. Solo tienes que enviarlo.</p>
           </div>
 
           <div class="estado" id="tarde" hidden>
@@ -185,7 +185,7 @@
         .then(function (r) { return r.json(); })
         .then(function (r) {
           if (r.ok && r.estado === 'llamando') {
-            if (r.agente && r.negocio) document.getElementById('ok-txt').textContent = (r.whatsapp ? 'Te escribe por WhatsApp y te llama ' : 'Te llama ') + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
+            if (r.agente && r.negocio) document.getElementById('ok-txt').textContent = 'Te llama ' + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
             // El que prueba escribe primero al número oficial, como haría un cliente: así
             // no hace falta plantilla y el agente le contesta al momento como su agente.
             var saludo = 'Hola, quería información' + (r.negocio ? ' sobre ' + r.negocio : '') + '.';
