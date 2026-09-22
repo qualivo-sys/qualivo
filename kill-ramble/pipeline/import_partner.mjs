@@ -150,8 +150,16 @@ const seenNew = new Map();
 
 for (const f of files) {
   let text = readFileSync(join(inDir, f), 'utf8');
-  if (extname(f).toLowerCase() === '.tsv' || (text.split('\n')[0].includes('\t') && !text.split('\n')[0].includes(','))) {
-    text = text.split('\n').map((l) => l.split('\t').map((c) => (/[",]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(',')).join('\n');
+  // Excel en Europa exporta con punto y coma, y las hojas del estudio llegan así.
+  // Se detecta por la cabecera: gana el separador que parta en más columnas.
+  const head = text.split('\n')[0];
+  const sep = extname(f).toLowerCase() === '.tsv' ? '\t'
+    : [[';', head.split(';').length], ['\t', head.split('\t').length], [',', head.split(',').length]]
+        .sort((a, b) => b[1] - a[1])[0][0];
+  if (sep !== ',') {
+    text = text.split('\n')
+      .map((l) => l.split(sep).map((c) => (/[",]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(','))
+      .join('\n');
   }
   const rows = parseCSV(text);
   if (!rows.length) continue;
