@@ -355,6 +355,16 @@ async function atender(contactId, opciones) {
     hecho.accion = decision.accion; hecho.texto = decision.texto; hecho.detalle = decision.detalle; hecho.motivo = decision.motivo;
     if (opciones.simular) return hecho;
 
+    // Al reservar, la confirmación con el enlace ya sale desde _cita.js: el
+    // texto del agente sobraría (Sonia, 22-sep: dos mensajes seguidos). Solo se
+    // manda si esa confirmación no ha salido.
+    if (decision.accion === 'reservar' && decision.texto) {
+      try {
+        const despues = await A.mensajesDe(c.id);
+        const yaConfirmado = despues.some(function (m) { return String(m.direction) === 'outbound' && /Confirmado: hablamos/.test(String(m.body || '')) && Date.parse(m.dateAdded || 0) > Date.parse(ultimo.dateAdded || 0); });
+        if (yaConfirmado) decision.texto = '';
+      } catch (e) { /* si no se puede comprobar, se manda */ }
+    }
     if (decision.texto) {
       const env = await A.enviarMensaje(c.id, decision.texto);
       hecho.canal = env.canal;
