@@ -313,3 +313,24 @@ La decisión de la lámina 5 del carrusel del contacto sigue pendiente.
 - Miércoles: si la pausa sigue, toca la segunda pieza de la serie «Lo que dice
   el estudio · lo que hace el agente» (seguimiento, 8 toques) en el molde del
   carrusel, y el blog de la Fuga reunión (plantones) con el dato del BMJ Open.
+
+### Martes 22 · mediodía · el Master Reviewer revisa las tres piezas del día
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-22.md`.
+Artículo: nota 6, PUBLICAR CON CAMBIOS, nueve críticos, todos aplicados en
+caliente. Newsletter: nota 7, cinco críticos aplicados. Guion del vídeo: nota
+7, cuatro críticos aplicados y recortado de 187 a 145 palabras. Lo que
+enseñó, y que vale para todo lo que venga: **el agente de seguimientos real
+(`api/seguimientos.js`) detecta oportunidades con más días de la cuenta en su
+etapa y deja a Maikel el siguiente movimiento escrito; no mira actividad, no
+escribe al cliente y no se para por respuesta.** Yo lo había descrito como
+otro agente, en el artículo, en el vídeo y en la infografía 08 de la serie por
+etapa. Corregido en los cuatro sitios. Segunda lección: Nuria Roure no es un
+despacho (formación y servicios online) y el 6,45× viene de cualificación más
+seguimiento, no solo de seguimiento. Corregido en el artículo, la infografía y
+la serie. Regla nueva para mí: antes de describir lo que hace un agente, leer
+su fichero en `api/`, no el resumen.
+
+Filas nuevas en la base de Notion «Revisión de piezas · contenido»: el
+artículo (Publicada, v2), la newsletter (En revisión, v2) y el vídeo (En
+revisión, v2), con nota, veredicto y qué cambió.

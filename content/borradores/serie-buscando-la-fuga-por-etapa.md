@@ -100,15 +100,16 @@ semana y media.
 > El agente no hace magia. Tiene reglas por etapa y por días: si pidió precio
 > y lleva más de tres días sin respuesta, si tuvo reunión y no hay propuesta a
 > la semana, si la propuesta salió y en diez días nadie ha vuelto. Recorre
-> todos los tratos y deja una tarea por cada uno, con el siguiente paso y el
-> mensaje preparado.
+> todos los tratos y deja una tarea por cada uno, con el siguiente paso
+> escrito. No escribe al cliente: te dice a quién tocar, cuándo y con qué.
 >
 > Lo que hizo por mí fue lo que yo llevaba dos meses sin hacer: mirar la lista
 > entera. No la parte que tenía en la cabeza.
 >
 > Puedes hacerlo hoy sin ningún agente: abre el CRM, filtra los tratos sin
-> actividad en 30 días y ponles fecha y nombre. Con eso un despacho hizo 6,45
-> veces lo invertido sin captar un contacto más.
+> actividad en 30 días y ponles fecha y nombre. Con eso, y con una cualificación
+> mejor, un negocio de formación hizo 6,45 veces lo invertido sin captar un
+> contacto más.
 >
 > Lo que se mide: presupuestos abiertos sin siguiente paso. Hoy, y dentro de
 > 30 días.

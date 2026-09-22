@@ -16,8 +16,8 @@
 |---|---|---|---|---|---|
 | Mar 22 | **Post de una imagen** (IG + LinkedIn) | Sin humo · «Lo barato es llamar. Lo caro es saber cuándo colgar» | 24 llamadas, 3 citas, 3 × 118 s con locución (bitácora 21-sep) | Conversación | Imagen lista, sin rótulo de serie desde hoy |
 | Mié 23 | **Carrusel** (IG + documento LinkedIn) | «Casi 7×» · contestar en la primera hora | HBR 2011, 2.241 empresas; caso propio del lunes | Guardar + pregunta (conversación) | v3 revisada por el Master Reviewer; falta la decisión de la lámina 5 |
-| Mié 23 | **Newsletter** · capítulo 1 | «24 llamadas, 3 citas y dos minutos con una operadora» | Bitácora 21-sep, Notion Llamadas | Diagnóstico | `content/newsletter/2026-09-23.md`, en revisión |
-| Jue 24 | **Vídeo a cámara** (reel + LinkedIn) | «Le pedí a un agente que repasara mi CRM. Encontró 34.500 € parados» | CRM propio, 10-sep: 25 de 30, 34.500 €, 15 entre 57 y 63 días | Recurso: «escribe FUGA» | Guion abajo, en revisión |
+| Mié 23 | **Newsletter** · capítulo 1 | «24 llamadas, 3 citas y dos minutos con una operadora» | Bitácora 21-sep, Notion Llamadas | Diagnóstico | `content/newsletter/2026-09-23.md`, revisada (nota 7, cambios aplicados) |
+| Jue 24 | **Vídeo a cámara** (reel + LinkedIn) | «Le pedí a un agente que repasara mi CRM. Encontró 34.500 € parados» | CRM propio, 10-sep: 25 de 30, 34.500 €, 15 entre 57 y 63 días | Recurso: «escribe FUGA» | Guion abajo, revisado (nota 7, cambios aplicados) |
 | Jue 24 | Blog (ya publicado hoy) | Presupuestos sin respuesta | Los mismos del vídeo | Diagnóstico | `/blog/presupuestos-sin-respuesta/`, publicado 22-sep |
 | Vie 25 | **Post de texto** (LinkedIn) + la misma idea en una imagen (IG) | «Mi agente llamó seis minutos después del plantón» | 18-sep: cita 12:00, llamada 12:06 (59 s), WhatsApp a los 3 min | Conversación | Texto en `plan-semana-39-contenido.md` (jueves) y en la serie por etapa (6 · Reunión) |
 | Sáb 26 | **Vídeo corto** (reel) | «Mi sistema le dijo a un cliente que no encajaba. Y luego le llamó» | Filtro de «no invierto» quitado el 21-sep | Conversación | Guion en `plan-semana-39-contenido.md` («Reel para grabar a cámara») |
@@ -70,35 +70,39 @@ vez. CTA de recurso.*
 > parados.
 > *Rótulo: 34.500 € PARADOS*
 >
-> **(4-14 s)** Treinta oportunidades abiertas. Veinticinco sin siguiente paso.
-> Sin fecha, sin tarea, sin nadie a cargo. Quince llevaban dos meses sin que
-> nadie las tocara.
-> *Rótulo: 25 DE 30 SIN SIGUIENTE PASO*
+> **(4-13 s)** Treinta oportunidades abiertas. Veinticinco paradas: más días de
+> la cuenta en la misma etapa, sin que nadie las moviera. Quince llevaban dos
+> meses.
+> *Rótulo: 25 DE 30 PARADAS · 15 · DOS MESES*
 >
-> **(14-24 s)** Y ninguna era culpa de nadie. Eran mías. Yo llevaba el
-> seguimiento en la cabeza, y en la cabeza caben cinco o seis. Las otras veinte
+> **(13-21 s)** Y ninguna era culpa de nadie. Eran mías. El seguimiento lo
+> llevaba en la cabeza, y en la cabeza caben cinco o seis. Las otras veinte
 > dormían.
-> *Rótulo: 15 · MÁS DE 57 DÍAS*
+> *Rótulo: ERAN MÍAS*
 >
-> **(24-38 s)** Lo que hizo el agente no es magia. Recorrió los tratos uno a
-> uno con una regla: si no hay actividad ni tarea, está parado. Y dejó
-> veinticinco tareas con fecha, con nombre y con el mensaje preparado. Lo que yo
-> llevaba dos meses sin hacer: mirar la lista entera.
-> *Rótulo: 25 TAREAS · FECHA · NOMBRE · MENSAJE*
+> **(21-33 s)** El agente recorrió los tratos uno a uno con una regla: cada
+> etapa tiene un plazo, y el que lo pasa está parado. Dejó veinticinco tareas
+> con fecha, con nombre y con el siguiente paso escrito.
+> *Rótulo: 25 TAREAS · FECHA · NOMBRE · SIGUIENTE PASO*
+> *Plano de dos segundos: la lista de tareas en el CRM, sin nombres, o el móvil con una tarea abierta.*
 >
-> **(38-50 s)** Tú puedes hacerlo hoy sin ningún agente. Abre el CRM, filtra
-> los presupuestos sin actividad en treinta días y suma el importe. Si el
+> **(33-45 s)** Tú puedes hacerlo hoy sin ningún agente. Abre el CRM, filtra
+> las oportunidades sin actividad en treinta días y suma el importe. Si el
 > número te sorprende, está bien contado.
 > *Rótulo: SIN ACTIVIDAD EN 30 DÍAS → SUMA*
 >
-> **(50-58 s, cierre)** Tengo la lista de siete cosas que reviso antes de
-> gastar más en conseguir contactos. Esta es la segunda. Escribe FUGA y te la
-> mando.
+> **(45-53 s)** Tengo la lista de siete cosas que reviso antes de gastar más.
+> Esta es la segunda. Escribe FUGA y te la mando.
 > *Rótulo: ESCRIBE «FUGA»*
 
-- **Pie de foto (reel):** Le pedí a un agente que repasara mi CRM. Encontró
-  34.500 € parados en 25 presupuestos sin siguiente paso. Ninguno era culpa de
-  nadie. Eran míos. Cómo contar los tuyos en diez minutos, en el vídeo. Escribe
+Unas 145 palabras: entre 48 y 55 segundos a ritmo natural. La primera versión
+(187 palabras) la recortó el Master Reviewer el 22-sep; no se graba la larga.
+Si un día caen más comentarios «FUGA» de los que Maikel puede contestar en 24
+horas, responde en el comentario «te lo mando esta noche» y lo manda esa noche.
+
+- **Pie de foto (reel):** El 10 de septiembre le pedí a un agente que repasara
+  mi CRM. Encontró 34.500 € declarados parados en 25 oportunidades sin mover.
+  Ninguna era culpa de nadie. Eran mías. Cómo contar los tuyos en diez minutos, en el vídeo. Escribe
   FUGA y te mando la lista de siete cosas que reviso antes de gastar más.
   #ventas #crm #pymes #seguimientocomercial
 - **Fuentes:** propuesta de valor V1 §5 y §10, estrategia de contenidos §4,
@@ -122,8 +126,9 @@ desde el 663. Nada de lo de arriba sale por WhatsApp.
 ## Revisión
 
 Cada pieza pasa por el Qualivo Master Reviewer antes de darse por lista. Hoy
-van al revisor: el artículo del blog (publicado; los cambios críticos se
-aplican en caliente), la newsletter y el guion del vídeo. El carrusel ya tiene
+han pasado: el artículo del blog (nota 6, nueve críticos aplicados en
+caliente), la newsletter (nota 7, cinco críticos aplicados) y el guion del
+vídeo (nota 7, cuatro críticos aplicados y recortado a 145 palabras). El carrusel ya tiene
 su revisión v2 aplicada en la v3. Los resultados quedan en
 `content/borradores/revision-master-reviewer-2026-09-22.md` y en la base de
 Notion «Revisión de piezas · contenido».
