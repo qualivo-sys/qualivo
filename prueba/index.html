@@ -178,7 +178,7 @@
       if (!f.elements.rgpd.checked) return fallo('Necesitamos tu permiso para llamarte.');
       b.disabled = true; b.textContent = 'Montando a tu agente…';
       if (window.qvTrack) window.qvTrack('prueba_enviar', { sector: d.sector });
-      fetch('/api/prueba', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+      fetch('/api/prueba/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
         .then(function (r) { return r.json(); })
         .then(function (r) {
           if (r.ok && r.estado === 'llamando') {
