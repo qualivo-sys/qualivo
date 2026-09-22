@@ -97,11 +97,21 @@ module.exports = async function handler(req, res) {
     brief = D.briefSector({ web: d.web.replace(/^https?:\/\//, ''), sector: d.sector });
   }
 
+  // WhatsApp de «su» agente por el número oficial, justo antes de la llamada.
+  // Plantilla qualivo_prueba_agente (pedida a Meta el 22-sep); hasta que esté
+  // aprobada, Meta la rechaza y la prueba sigue solo con voz y correo.
+  let wa = { ok: false, motivo: 'no_configurado' };
+  try {
+    const WA = require('./_whatsapp');
+    wa = await WA.enviarPlantilla(d.telefono, process.env.META_WA_PLANTILLA_PRUEBA || 'qualivo_prueba_agente', [d.nombre.split(' ')[0], brief.agente, brief.negocio]);
+  } catch (e) { wa = { ok: false, motivo: String(e && e.message).slice(0, 120) }; }
+
   const l = await D.lanzarLlamada({ brief: brief, nombre: d.nombre, telefono: d.telefono, email: d.email, contactId: contactId });
   if (contactId) {
     await A.nota(contactId, 'PRUEBA TU AGENTE · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }) +
       '\nWeb: ' + d.web + ' · sector: ' + d.sector + ' · ficha desde: ' + brief.fuente +
       '\nAgente: ' + brief.agente + ' de ' + brief.negocio +
+      '\nWhatsApp (647): ' + (wa.ok ? 'enviado' : 'no enviado · ' + (wa.motivo || '')) +
       (l.ok ? '\nLlamada: https://dashboard.vapi.ai/calls/' + l.id : '\nLA LLAMADA NO SALIÓ: ' + (l.motivo || '') + ' ' + (l.detalle || ''))).catch(function () {});
   }
   if (!l.ok) {
@@ -109,5 +119,5 @@ module.exports = async function handler(req, res) {
     try { await require('./_aviso.js').seMovio('actividad', { nombre: d.nombre, email: d.email, telefono: d.telefono, contactId: contactId, accion: 'Prueba tu agente: la llamada NO salió (' + (l.motivo || '') + ')', texto: d.web, origen: 'Prueba tu agente' }); } catch (e) { /* nada */ }
     return res.status(200).json({ ok: false, error: 'llamada' });
   }
-  return res.status(200).json({ ok: true, estado: 'llamando', agente: brief.agente, negocio: brief.negocio, fuente: brief.fuente });
+  return res.status(200).json({ ok: true, estado: 'llamando', agente: brief.agente, negocio: brief.negocio, fuente: brief.fuente, whatsapp: !!wa.ok });
 };

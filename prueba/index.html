@@ -82,10 +82,10 @@
         <div>
           <span class="pr-chip"><i></i>Prueba gratis · 2 minutos</span>
           <h1>Oye a la agente que atendería a <span>tus clientes.</span> En 30 segundos.</h1>
-          <p class="bajada">Mete tu web y tu móvil. Te llama la agente de voz de tu negocio, con tus servicios y tu forma de hablar. Tú haces de cliente. Al colgar, recibes lo que verías tú como dueño.</p>
+          <p class="bajada">Mete tu web y tu móvil. Te escribe por WhatsApp y te llama la agente de tu negocio, con tus servicios y tu forma de hablar. Tú haces de cliente. Al colgar, recibes lo que verías tú como dueño.</p>
           <ul class="pr-pasos">
             <li><span class="n">1</span><span><b>Rellenas cuatro campos.</b> Leemos tu web y montamos a tu agente al vuelo: servicios, horario, lo que preguntan tus clientes.</span></li>
-            <li><span class="n">2</span><span><b>Te suena el móvil.</b> Pregúntale lo que le preguntaría un cliente: precios, horarios, pide cita. Ella te lleva a reservar.</span></li>
+            <li><span class="n">2</span><span><b>Te escribe y te llama.</b> Primero un WhatsApp, luego la llamada. Pregúntale lo que le preguntaría un cliente: precios, horarios, pide cita. Ella te lleva a reservar.</span></li>
             <li><span class="n">3</span><span><b>Te llega el correo del dueño.</b> Ficha del lead, lo que preguntó, la cita, el resumen, la grabación y qué haría el sistema después.</span></li>
           </ul>
           <div class="pr-quien">
@@ -112,7 +112,7 @@
                 <option value="otro">Otro</option>
               </select>
             </label>
-            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me llaméis a este número para la prueba y me mandéis el correo de la demo. <a href="/privacidad/" target="_blank" style="color:var(--verde)">Política de privacidad</a>.</span></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me escribáis por WhatsApp y me llaméis a este número para la prueba, y que me mandéis el correo de la demo. <a href="/privacidad/" target="_blank" style="color:var(--verde)">Política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
             <p class="err" id="err" hidden></p>
             <button type="submit" class="btn-pr" id="b">📞 Que me llame ahora →</button>
@@ -120,8 +120,8 @@
 
           <div class="estado" id="ok" hidden>
             <div class="ico suena">📞</div>
-            <h3>Te va a sonar el móvil.</h3>
-            <p id="ok-txt">Estamos leyendo tu web y montando a tu agente. En menos de un minuto te llama.</p>
+            <h3>Mira el móvil.</h3>
+            <p id="ok-txt">Estamos leyendo tu web y montando a tu agente. En menos de un minuto te escribe por WhatsApp y te llama.</p>
             <ul>
               <li>Haz de cliente: pregúntale por un servicio, el precio, el horario.</li>
               <li>Pide cita. Ella te ofrece dos huecos y te la confirma.</li>
@@ -182,7 +182,7 @@
         .then(function (r) { return r.json(); })
         .then(function (r) {
           if (r.ok && r.estado === 'llamando') {
-            if (r.agente && r.negocio) document.getElementById('ok-txt').textContent = 'Te llama ' + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
+            if (r.agente && r.negocio) document.getElementById('ok-txt').textContent = (r.whatsapp ? 'Te escribe por WhatsApp y te llama ' : 'Te llama ') + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
             ver('ok'); if (window.qvTrack) window.qvTrack('prueba_llamando', {});
           } else if (r.ok && r.estado === 'fuera_horario') {
             document.getElementById('tarde-h').textContent = 'a partir de las ' + (r.desde || 9) + ':00';
