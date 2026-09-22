@@ -128,7 +128,46 @@ async function puntuarTodos(opciones) {
   }
   const cuenta = { A: 0, B: 0, C: 0, D: 0 };
   res.forEach(function (r) { if (r.nivel) cuenta[r.nivel]++; });
-  return { total: res.length, cuenta: cuenta, detalle: res };
+  let hoja = null;
+  if (!opciones.seco && !opciones.desdeMs) { try { hoja = await volcarHoja(res, lista); } catch (e) { hoja = { ok: false, motivo: String(e.message).slice(0, 100) }; } }
+  return { total: res.length, cuenta: cuenta, detalle: res, hoja: hoja };
 }
 
-module.exports = { puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };
+// Hoja «Puntuación de leads Qualivo» (Maikel, 22-sep): una fila por lead, se
+// reescribe entera cada vez. Necesita GOOGLE_SA_JSON (el mismo del informe).
+const HOJA = process.env.SCORING_SHEET_ID || '158tKmIYVhAvrmJEeAU404bIztALIc7JoNZVAk2Pkt6s';
+const CAB = ['Nivel', 'Tipología', 'Comportamiento', 'Nombre', 'Empresa', 'Sector', 'Inversión', 'Peticiones/mes', 'Etapa', 'Motivo', 'Alta', 'Última actualización', 'Ficha GHL'];
+
+async function volcarHoja(detalle, contactos) {
+  if (!process.env.GOOGLE_SA_JSON) return { ok: false, motivo: 'sin GOOGLE_SA_JSON' };
+  const G = require('./_google');
+  const T = require('./_tratos.js');
+  const nombreEtapa = {}; Object.keys(T.ETAPAS).forEach(function (k) { nombreEtapa[T.ETAPAS[k]] = k; });
+  const porId = {}; (contactos || []).forEach(function (c) { porId[c.id] = c; });
+  const orden = { A: 0, B: 1, C: 2, D: 3 };
+  const filas = [];
+  for (const r of detalle.filter(function (x) { return x.nivel; }).sort(function (a, b) { return (orden[a.nivel] - orden[b.nivel]) || ((b.tipo + b.comport) - (a.tipo + a.comport)); })) {
+    const c = porId[r.id] || {};
+    let etapa = '';
+    try { const op = await T.abierto(r.id); etapa = op ? (nombreEtapa[op.pipelineStageId] || '') : ''; } catch (e) { etapa = ''; }
+    filas.push([r.nivel, r.tipo, r.comport, r.nombre || '', c.companyName || '', etiqueta(c, 'sector-').replace(/-/g, ' '), etiqueta(c, 'inv-').replace(/-/g, ' '), etiqueta(c, 'vol-').replace(/-/g, ' '), etapa, r.motivo,
+      String(c.dateAdded || '').slice(0, 10), new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), 'https://app.gohighlevel.com/v2/location/' + process.env.GHL_LOCATION_ID + '/contacts/detail/' + r.id]);
+  }
+  const tab = 'Leads';
+  await G.sheets('POST', HOJA + '/values/' + encodeURIComponent("'" + tab + "'!A2:Z") + ':clear', {});
+  await G.sheets('PUT', HOJA + '/values/' + encodeURIComponent("'" + tab + "'!A1") + '?valueInputOption=USER_ENTERED', { values: [CAB].concat(filas) });
+  // Resumen arriba a la derecha de la pestaña Resumen
+  const cuenta = { A: 0, B: 0, C: 0, D: 0 }; detalle.forEach(function (r) { if (r.nivel) cuenta[r.nivel]++; });
+  await G.sheets('PUT', HOJA + '/values/' + encodeURIComponent("'Resumen'!A1") + '?valueInputOption=USER_ENTERED', { values: [
+    ['Actualizado', new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })],
+    ['Nivel', 'Leads', 'Qué significa'],
+    ['A', cuenta.A, 'Encaja y se mueve: prioridad de Maikel, aviso al momento'],
+    ['B', cuenta.B, 'Encaja pero no se mueve: el sistema insiste (cadencia, reenganche)'],
+    ['C', cuenta.C, 'Se mueve pero el ticket es pequeño: se atiende sin dedicarle horas'],
+    ['D', cuenta.D, 'Ni encaja ni se mueve, baja o no responde: se guarda'],
+    ['Total', detalle.filter(function (r) { return r.nivel; }).length, '']
+  ] });
+  return { ok: true, filas: filas.length };
+}
+
+module.exports = { volcarHoja: volcarHoja, puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };
