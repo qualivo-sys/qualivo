@@ -98,6 +98,38 @@ intentando reducir ansiedad?** Si es lo segundo, no se ejecuta.
 *No necesito resolver todo. No necesito construir más. No necesito una idea nueva. Solo necesito
 ejecutar, aprender y mejorar una pequeña parte cada día.*
 
+## Ritual semanal · viernes (fijado por Maikel, 22-sep-2026)
+
+**El propósito:** sacar de la cabeza de Maikel la revisión financiera y comercial que hoy hace a
+las 5:30 de la mañana en la cama, y meterla en un sistema con hora y formato.
+
+**Regla que lo sostiene: Maikel no recopila datos, decide.** El cerebro entrega los bloques 1, 2 y
+4 ya rellenos a las 8:00 del viernes. Sin eso el ritual son 3h30 de administración; con eso es
+1h15 de pensar.
+
+| Bloque | Quién | Qué |
+|---|---|---|
+| **1 · Finanzas** | cerebro prepara · Maikel lee 10 min | Caja, cobros previstos por cliente, gastos por herramienta, deudas, y **runway: ¿cuántos meses aguanto si hoy no entra ningún cliente?** |
+| **2 · Pipeline** | cerebro prepara · Maikel lee 10 min | Leads · conversaciones · reuniones · diagnósticos · propuestas · pilotos · clientes |
+| **3 · Aprendizajes** | **Maikel, 30 min** | Qué objeciones se repitieron · qué perfil compra más fácil · qué mensaje generó más interés |
+| **4 · Marketing** | cerebro prepara · Maikel lee 10 min | **CPL, reuniones y clientes por vertical.** Nunca likes, alcance ni comentarios |
+| **5 · Decisiones** | **Maikel, 15 min** | **Tres decisiones. Ni una más.** El cerebro recuerda las tres de la semana pasada y si se cumplieron |
+
+**Último viernes de mes:** se añade la decisión de financiación, con caja, pipeline, cobros y
+gastos delante. Con datos, no con ansiedad.
+
+### Informe de patrones de las reuniones · tarea fija del cerebro cada viernes
+
+No un resumen: **patrones.** Objeciones que se repiten · sectores que avanzan y sectores que
+desaparecen · **frases exactas** que usan los prospectos · qué les hace confiar · ideas para
+mejorar oferta, anuncios y seguimiento.
+
+Requisito: que las reuniones se graben o transcriban. Sin grabación no hay informe, y el
+volumen de conversaciones es precisamente lo que Qualivo tiene ahora y no tenía hace tres meses.
+
+> **El objetivo de la semana no es «cerrar cinco clientes». Es entender por qué compra la gente.**
+> Cuando eso se entiende, cerrar deja de ser suerte y pasa a ser un proceso.
+
 ## Protocolo
 
 1. **Reporting**: cada agente cierra sus bloques de trabajo con cifras concretas (respuestas, conversaciones, propuestas, € de pipeline, leads, visitas). El cerebro las lee de vuestros resúmenes de sesión y de vuestros ficheros en el repo (`captacion/`, `sdr/`, `plan/`…).
