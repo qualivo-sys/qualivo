@@ -24,6 +24,7 @@ const ETAPAS = {
   oferta: '41c3a02d-a63e-4ef5-a402-7b562bbabfa9',       // Oferta enviada
   seguimiento: '3e12a08f-272b-4817-9bfe-fd83d24ca45e',  // Negociación (antes «Seguimiento»)
   masAdelante: '515ba6db-2f03-47ab-9c50-fc10f361192a',  // Más adelante
+  noResponde: 'fbed9371-d8e1-47a9-a933-2cb32db63c5e',   // No responde (Maikel, 22-sep): cadencia agotada sin reacción
   piloto: '138c0901-981b-4454-8bc1-63260e87f402',       // Piloto (Maikel, 22-sep)
   cliente: '673ee555-349c-40ea-b4c3-8cc5e4a867b9'       // Cliente
 };
@@ -143,7 +144,7 @@ async function mover(contactId, etapa, crearSi) {
     if (op.pipelineStageId === ETAPAS.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
     // Nunca hacia atrás: el 18-sep la agenda puso un trato en «Reunión agendada» y
     // el final de la llamada lo devolvió a «Conversación abierta».
-    const ORDEN = ['nuevo', 'enCadencia', 'conversacion', 'reunion', 'noPresentado', 'oferta', 'seguimiento', 'masAdelante', 'piloto', 'cliente'];
+    const ORDEN = ['nuevo', 'enCadencia', 'conversacion', 'reunion', 'noPresentado', 'oferta', 'seguimiento', 'masAdelante', 'noResponde', 'piloto', 'cliente'];
     const actual = Object.keys(ETAPAS).filter(function (k) { return ETAPAS[k] === op.pipelineStageId; })[0];
     if (actual && ORDEN.indexOf(actual) > ORDEN.indexOf(etapa) && etapa !== 'masAdelante') {
       return { ok: true, id: op.id, movido: false, motivo: 'no_retrocede' };

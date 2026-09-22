@@ -61,7 +61,7 @@ const REGLAS = [
   { patron: /prospecto/, dias: 14, clave: 'prospecto-14', prioridad: false,
     titulo: 'Prospecto sin tocar',
     accion: 'Dos semanas en la lista sin ningún contacto. O se trabaja esta semana o se saca del pipeline: un pipeline con gente muerta miente sobre lo que tienes.' },
-  { patron: /^seguimiento|negociaci|m[aá]s adelante/, dias: 30, clave: 'seguimiento-30', prioridad: false,
+  { patron: /^seguimiento|negociaci|m[aá]s adelante|no responde/, dias: 30, clave: 'seguimiento-30', prioridad: false,
     titulo: 'Toque de los 30 días',
     accion: 'Un mes esperando. Mensaje corto con algo útil y sin pedir nada. Si no contesta, se cierra y pasa a reactivación.' },
   { patron: /tibio/, dias: 30, clave: 'tibio-30', prioridad: false,

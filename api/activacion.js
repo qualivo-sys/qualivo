@@ -421,6 +421,8 @@ module.exports = async function handler(req, res) {
         else { resumen.errores++; console.error('[activacion] correo', c.id, r.motivo); }
       } else if (paso.tipo === 'cerrar') {
         await A.etiquetar(c.id, ['act-fin'], ['activacion']);
+        // Cadencia agotada sin reacción: al tablero, etapa «No responde» (Maikel, 22-sep).
+        try { await require('./_tratos.js').mover(c.id, 'noResponde'); } catch (e) { /* no bloquea */ }
         resumen.cerrados++;
       }
     } catch (err) {

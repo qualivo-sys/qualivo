@@ -371,23 +371,20 @@ async function lanzarLlamada(datos) {
 const BAJA = /\b(baja|d[ae]r?me de baja|no me interesa|no estoy interesad|dejad?me? en paz|stop|unsubscribe|no escrib|no vuelvas a|no quiero)\b/i;
 
 async function revisarRespuesta(contactId, desdeMs) {
+  // Mira TODOS los mensajes desde el arranque, no solo el último de cada
+  // conversación: si Maikel contesta desde el móvil, el último pasa a ser
+  // saliente y la respuesta del lead quedaba tapada (Carlos Cuevas, 21-sep:
+  // contestó «ahora no, acabo de llegar a casa», Maikel le respondió, y la
+  // cadencia le llamó y le escribió a la mañana siguiente).
   try {
-    const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
-      encodeURIComponent(process.env.GHL_LOCATION_ID) + '&contactId=' + contactId,
-      { headers: cabeceras() });
-    if (!r.ok) return { respondio: false };
-    const d = await r.json();
-    const convs = d.conversations || [];
+    const mensajes = await mensajesDe(contactId);
     let respondio = false, texto = '';
-    for (const c of convs) {
-      const fecha = Number(c.lastMessageDate || 0);
-      if (String(c.lastMessageDirection) === 'inbound' && fecha >= (desdeMs || 0)) {
-        respondio = true;
-        texto = String(c.lastMessageBody || '');
-      }
-      // Un WhatsApp entrante posterior al arranque también cuenta como respuesta.
-      const wa = Number(c.lastInboundWhatsappMessageDate || 0);
-      if (wa && wa >= (desdeMs || 0)) respondio = true;
+    for (const m of mensajes) {
+      if (String(m.direction) !== 'inbound') continue;
+      if (Date.parse(m.dateAdded || 0) < (desdeMs || 0)) continue;
+      if (!/SMS|WHATSAPP|EMAIL|CUSTOM/i.test(String(m.messageType || ''))) continue;
+      respondio = true;
+      texto = String(m.body || '') || texto;
     }
     return { respondio: respondio, baja: BAJA.test(texto), texto: texto.slice(0, 200) };
   } catch (err) {
