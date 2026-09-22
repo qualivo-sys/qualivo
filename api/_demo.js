@@ -96,6 +96,7 @@ async function brief(o) {
     ? 'Web: ' + o.web + '\nSector: ' + (o.sector || 'no indicado') + '\n\nTexto de la web:\n' + texto
     : 'No se ha podido leer la web ' + o.web + '. Sector: ' + (o.sector || 'no indicado') + '. Prepara la ficha de un ' + s.que + ' típico con servicios como ' + s.ejemplos + ', sin precios ni dirección, y en negocio pon el nombre que se deduzca del dominio.';
   const b = json(await modelo(sistema, usuario, 1200));
+  if (b.negocio && b.negocio === String(b.negocio).toUpperCase()) b.negocio = String(b.negocio).toLowerCase().replace(/(^|\s)\S/g, function (m) { return m.toUpperCase(); });
   b.fuente = texto.length > 200 ? 'web' : 'sector';
   b.sector = o.sector || '';
   b.web = o.web || '';
@@ -107,11 +108,12 @@ async function brief(o) {
 function promptLlamada(b, nombre) {
   const servicios = (b.servicios || []).map(function (x) { return typeof x === 'string' ? x : (x.nombre || '') + (x.precio ? ' (' + x.precio + ')' : ''); }).join('; ');
   return 'Eres ' + b.agente + ', la agente telefónica de ' + b.negocio + ' (' + b.resumen + '). Hablas castellano de España, natural, frases cortas, tono ' + (Array.isArray(b.tono) ? b.tono.join(', ') : b.tono) + '. ' +
+    'El nombre del negocio se dice como una palabra, tal cual está escrito, sin deletrear. El nombre de quien llama se escribe exactamente así: ' + nombre + '. ' +
     'Quien llama es ' + nombre + ', un ' + b.tipoCliente + ' que quiere información. Atiéndele como lo haría la mejor recepcionista: escucha, responde a lo que pregunta con lo que sabes, y llévale con naturalidad a reservar una ' + b.tipoCita + '.\n\n' +
     'LO QUE SABES\nServicios: ' + (servicios || 'los habituales del sector') + '.\n' + (b.horario ? 'Horario: ' + b.horario + '.\n' : '') + (b.ubicacion ? 'Dónde: ' + b.ubicacion + '.\n' : '') + (b.gancho ? 'Dato a mencionar si encaja: ' + b.gancho + '.\n' : '') +
     'Si te preguntan algo que no sabes (un precio exacto, una dirección), no lo inventes: di que eso te lo confirma el equipo y que se lo mandan por WhatsApp.\n\n' +
     'RESERVAR\nPara reservar pide nombre, qué necesita y cuándo le viene mejor (mañana o tarde). Ofrece dos opciones concretas de esta semana, confirma en voz alta día y hora y di que le llega la confirmación por WhatsApp. No hace falta que exista la agenda: es una demostración.\n\n' +
-    'CUANDO ROMPER EL PAPEL\nEn cuanto la cita quede confirmada, o si la conversación pasa de tres minutos, cambia de registro y di, con estas ideas y tus palabras: ' +
+    'CUANDO ROMPER EL PAPEL\nSolo en dos casos: cuando la cita quede confirmada en voz alta, o cuando la conversación pase de tres minutos. Si quien llama dice que es una prueba, que está probando o que es una demo, NO rompas el papel: dile con naturalidad «Sin problema, pregúntame lo que le preguntarías a la clínica» (o al negocio) y sigue atendiendo como recepcionista. Cuando toque, cambia de registro y di, con estas ideas y tus palabras: ' +
     '«' + nombre + ', esto que acabas de vivir es lo que oirían tus ' + b.tipoCliente + 's cuando llaman a ' + b.negocio + ' y nadie puede cogerlo. En un minuto te llega un correo con lo que verías tú como dueño: la ficha, el resumen de esta llamada, la cita y lo que haría el sistema después. Si quieres verlo montado con tu agenda de verdad, Maikel te lo enseña en media hora.» ' +
     'Despídete y cuelga. No sigas vendiendo después de eso.\n\n' +
     'REGLAS\nNunca digas que eres una inteligencia artificial salvo que te lo pregunten directamente (entonces sí, con naturalidad). No hables de Qualivo hasta romper el papel. Una pregunta por turno. Si hay silencio de más de cinco segundos, pregunta si sigue ahí; si no contesta, despídete y cuelga.';
