@@ -98,14 +98,16 @@ module.exports = async function handler(req, res) {
   }
 
   // Datos para el workflow de GHL «Prueba tu agente» (plantilla
-  // qualivo_prueba_agente por el 647): campos WA · Agente / WA · Negocio y la
+  // qualivo_prueba_agente por el 647): campos WA · Agente demo / WA · Negocio y la
   // etiqueta wa-prueba-agente que lo dispara. El nombre lo pone el propio
   // contacto ({{contact.first_name}}).
   if (contactId) {
     try {
       await fetch(A.GHL_BASE + '/contacts/' + contactId, { method: 'PUT', headers: A.cabeceras(), body: JSON.stringify({ customFields: [
-        { id: process.env.GHL_CAMPO_WA_AGENTE || 'SJp581X5s72ZxguCM4iI', field_value: brief.agente },
-        { id: process.env.GHL_CAMPO_WA_NEGOCIO || '1VIQvsB4HyrBAaSVMyVm', field_value: brief.negocio }
+        { id: process.env.GHL_CAMPO_WA_AGENTE_DEMO || 'hztsF2mgLpsDICYxsXhR', field_value: brief.agente },   // WA · Agente demo
+        { id: process.env.GHL_CAMPO_WA_NEGOCIO || '1VIQvsB4HyrBAaSVMyVm', field_value: brief.negocio },       // WA · Negocio
+        // La ficha entera, para que el agente de WhatsApp conteste como «su» agente si responde (api/_agente.js).
+        { id: process.env.GHL_CAMPO_FICHA_DEMO || 'DJTSLXK1I8tN0OAkAToy', field_value: JSON.stringify(brief).slice(0, 6000) }
       ] }) });
       await A.etiquetar(contactId, ['wa-prueba-agente']);
     } catch (e) { console.error('[prueba] campos WA:', e && e.message); }

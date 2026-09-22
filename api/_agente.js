@@ -292,6 +292,10 @@ async function atender(contactId, opciones) {
     // chats entran en GHL: el 19-sep el reloj intentó contestar a un familiar.
     // Regla de Maikel (19-sep): solo contactos con la etiqueta «paid», que es
     // la que llevan todos los que entran por la landing o por el formulario.
+    // «Prueba tu agente» (qualivo.io/prueba, 22-sep): quien probó contesta al
+    // WhatsApp y el agente le responde como la agente de SU negocio, no como
+    // Maikel. Flujo aparte, sin tocar la agenda real.
+    if (A.tiene(c, 'demo') && !A.tiene(c, 'paid')) return atenderDemo(c, opciones, hecho);
     if (!A.tiene(c, 'paid')) return Object.assign(hecho, { accion: 'callar', motivo: 'sin etiqueta paid' });
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
@@ -401,6 +405,86 @@ async function atender(contactId, opciones) {
       try { await avisar({ id: contactId }, 'el agente ha fallado y se para una hora: ' + msg.slice(0, 160), ''); } catch (x) { /* nada */ }
     }
     try { const c2 = await contactoPorId(contactId); if (c2) await guardarEstado(contactId, Object.assign({}, leerEstado(c2), { candado: 0 })); } catch (x) { /* nada */ }
+    return Object.assign(hecho, { accion: 'error', motivo: e && e.message });
+  }
+}
+
+// ---- Demo: el agente de WhatsApp como recepcionista del negocio del que probó ----
+
+const CAMPO_FICHA_DEMO = process.env.GHL_CAMPO_FICHA_DEMO || 'DJTSLXK1I8tN0OAkAToy'; // WA · Ficha demo
+const MAX_TURNOS_DEMO = 8;
+
+function fichaDemoDe(c) {
+  const f = ((c && c.customFields) || []).find(function (x) { return x.id === CAMPO_FICHA_DEMO; });
+  try { const b = JSON.parse((f && (f.value || f.fieldValue)) || ''); if (b && b.negocio) return b; } catch (e) { /* sin ficha */ }
+  const sector = ((c && c.tags) || []).map(String).find(function (t) { return t.indexOf('sector-') === 0; });
+  return require('./_demo.js').briefSector({ web: c.website || '', sector: sector ? sector.slice(7) : '' });
+}
+
+// Dos huecos ficticios para la demo: el siguiente día laborable por la mañana
+// y por la tarde. No tocan ninguna agenda.
+function huecosDemo() {
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+  const dia = d.toLocaleDateString('es-ES', { timeZone: ZONA, weekday: 'long', day: 'numeric', month: 'long' });
+  return 'el ' + dia + ' a las 10:30 o a las 17:00';
+}
+
+function sistemaDemo(b, nombre) {
+  const servicios = (b.servicios || []).map(function (x) { return typeof x === 'string' ? x : (x.nombre || '') + (x.precio ? ' (' + x.precio + ')' : ''); }).join('; ');
+  return [
+    'Eres ' + b.agente + ', la agente de WhatsApp de ' + b.negocio + ' (' + b.resumen + '). Es una DEMOSTRACIÓN: quien te escribe es ' + nombre + ', el dueño de ese negocio, que ha pedido en qualivo.io probar cómo atenderías tú a sus ' + b.tipoCliente + 's. Él hace de ' + b.tipoCliente + '. Tú le atiendes como la mejor recepcionista del negocio, en serio, sin recordarle que es una prueba.',
+    '',
+    'LO QUE SABES. Servicios: ' + (servicios || 'los habituales del sector') + '.' + (b.horario ? ' Horario: ' + b.horario + '.' : '') + (b.ubicacion ? ' Dónde: ' + b.ubicacion + '.' : '') + (b.gancho ? ' Dato que puedes mencionar si encaja: ' + b.gancho + '.' : ''),
+    'Si pregunta algo que no sabes (un precio exacto, una dirección), no lo inventes: dile que eso te lo confirma el equipo y se lo mandas en un momento.',
+    '',
+    'CÓMO ESCRIBES: como en un WhatsApp de verdad. Corto: dos o tres frases, máximo cuarenta palabras, una sola pregunta por mensaje. Sin emojis, sin listas, sin negritas. Tuteas. Usas sus palabras. Nunca repites lo ya dicho.',
+    '',
+    'TU OBJETIVO: entender en una pregunta qué necesita y llevarle a reservar una ' + b.tipoCita + '. Ofrece DOS huecos: ' + huecosDemo() + '. Cuando acepte uno, confírmalo en una frase con día y hora y di que le llega la confirmación por WhatsApp y un recordatorio el día antes.',
+    '',
+    'DESPUÉS DE CONFIRMAR LA CITA (y solo entonces), en el MISMO mensaje, añade un párrafo aparte rompiendo el papel, con estas ideas y tus palabras: «' + nombre + ', esto es lo que vería un ' + b.tipoCliente + ' tuyo escribiendo a ' + b.negocio + ' un domingo a las once de la noche: respuesta al minuto y cita cerrada sin que nadie de tu equipo toque el móvil. Con tu agenda de verdad, tus precios y tu forma de hablar, es la que atiende. Si quieres verlo montado para tu caso, Maikel te lo enseña en media hora: https://qualivo.io/llamada/». Termina el mensaje con la palabra FIN_DEMO en una línea aparte (se borra antes de enviar).',
+    '',
+    'Si dice que no le interesa o que ya lo ha visto, das las gracias en una frase, le dejas el enlace https://qualivo.io/llamada/ y terminas con FIN_DEMO. Nunca mandes más de un mensaje seguido.',
+    'Hoy es ' + fechaHoy() + '.'
+  ].join('\n');
+}
+
+async function atenderDemo(c, opciones, hecho) {
+  opciones = opciones || {};
+  if (A.tiene(c, 'wa-agente-off') || A.tiene(c, 'wa-humano') || A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'demo cerrada o la lleva Maikel' });
+  let estado = leerEstado(c);
+  if (estado.candado && Date.now() - estado.candado < 120000 && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'otro proceso está contestando' });
+  if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: Date.now() }));
+  try {
+    if (!opciones.simular) await esperar(ESPERA_MS);
+    const mensajes = opciones.mensajes || await A.mensajesDe(c.id);
+    const wa = mensajes.filter(function (m) { return A.esWhatsApp(m) && String(m.status || '').toLowerCase() !== 'failed' && String(m.body || '').trim(); });
+    const ultimo = wa[wa.length - 1];
+    if (!ultimo || String(ultimo.direction) !== 'inbound') { if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); return Object.assign(hecho, { accion: 'callar', motivo: 'el último mensaje no es suyo' }); }
+    const turnos = Number(estado.turnos || 0);
+    if (turnos >= MAX_TURNOS_DEMO) { if (!opciones.simular) { await A.etiquetar(c.id, ['wa-agente-off']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); } return Object.assign(hecho, { accion: 'callar', motivo: 'tope de turnos de la demo' }); }
+
+    const b = fichaDemoDe(c);
+    const nombre = nombrePila(c.firstName || c.contactName || c.name || '');
+    const d = await llamarModelo(sistemaDemo(b, nombre), turnosDe(mensajes).slice(-16));
+    let texto = (d.content || []).filter(function (x) { return x.type === 'text'; }).map(function (x) { return x.text; }).join('\n').trim();
+    const fin = /FIN_DEMO/.test(texto);
+    texto = texto.replace(/\n?\s*FIN_DEMO\s*$/m, '').replace(/FIN_DEMO/g, '').trim();
+    hecho.accion = 'responder'; hecho.texto = texto; hecho.demo = true; hecho.fin = fin;
+    if (opciones.simular) return hecho;
+
+    if (texto) { const env = await A.enviarMensaje(c.id, texto); hecho.canal = env.canal; }
+    await guardarEstado(c.id, { turnos: turnos + (texto ? 1 : 0), ultimo: new Date().toISOString(), candado: 0 });
+    if (fin) await A.etiquetar(c.id, ['wa-agente-off', 'demo-wa-cita']).catch(function () {});
+    await A.nota(c.id, 'AGENTE DE WHATSAPP (demo, como ' + b.agente + ' de ' + b.negocio + ') · ' + new Date().toLocaleString('es-ES', { timeZone: ZONA }) +
+      '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\nYo: «' + (texto || '(nada)') + '»' + (fin ? '\nDemo cerrada: cita ficticia confirmada y enlace a la reunión con Maikel.' : '') + '\nTurno ' + (turnos + 1) + ' de ' + MAX_TURNOS_DEMO).catch(function () {});
+    try {
+      await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: b.negocio, email: c.email || '', telefono: c.phone || '', contactId: c.id,
+        accion: fin ? 'Demo por WhatsApp cerrada con cita ficticia' : 'Ha contestado al WhatsApp de la demo y el agente le ha respondido', texto: 'Él: «' + String(ultimo.body).slice(0, 200) + '»\nAgente: «' + texto + '»', origen: 'Prueba tu agente' });
+    } catch (e) { /* no bloquea */ }
+    return hecho;
+  } catch (e) {
+    try { await guardarEstado(c.id, Object.assign({}, leerEstado(c), { candado: 0 })); } catch (x) { /* nada */ }
     return Object.assign(hecho, { accion: 'error', motivo: e && e.message });
   }
 }
