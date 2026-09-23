@@ -48,15 +48,19 @@ function relativo(d) {
   return dd === hoy ? 'hoy' : dd === man ? 'mañana' : '';
 }
 
-// El enlace de la videollamada, si la cita lo lleva (campo address o
-// meetingLocation en GHL). Se admite también AGENDA_ENLACE fijo en el entorno
-// (una sala permanente de Meet) para que el mensaje lo lleve siempre.
-// Sala fija de Meet de los diagnósticos: la creó Maikel el 18-sep-2026 y es la
-// misma que usa él. AGENDA_ENLACE en el entorno manda sobre esta constante.
-const ENLACE_FIJO = 'https://meet.google.com/gom-euxm-btb';
+// El enlace de la videollamada de ESA cita (campo address o meetingLocation en
+// GHL). Cada cita tiene su propia sala de Meet: el calendario de GHL la crea
+// sola (ubicación «Google Meet» del miembro del equipo).
+// Hasta el 23-sep había una sala fija (gom-euxm-btb) para todas las citas que
+// agendaban Raquel y el agente de WhatsApp. Esa sala nació en la reunión de
+// Grupo Rumy del 18-sep, y cualquiera que entraba veía «Diagnóstico y plan
+// Grupo Rumy»; además dos citas seguidas compartían puerta. Ya no se usa: si
+// una cita no trae enlace, se busca en GHL y, si aun así no hay, el mensaje
+// remite a la invitación del correo.
+const SIN_ENLACE = 'en la invitación que te ha llegado al correo';
 
 function enlaceDe(ev) {
-  const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl, process.env.AGENDA_ENLACE, ENLACE_FIJO];
+  const cand = [ev && ev.address, ev && ev.meetingLocation, ev && ev.meetingUrl];
   for (const c of cand) { const m = String(c || '').match(/https?:\/\/\S+/); if (m) return m[0]; }
   return '';
 }
@@ -82,7 +86,8 @@ async function confirmarCita(o) {
     const inicio = o.inicio ? new Date(o.inicio) : null;
     const f = inicio && !isNaN(inicio.getTime()) ? partesFecha(inicio) : { dia: '', hora: '' };
     const cuando = inicio && !isNaN(inicio.getTime()) ? relativo(inicio) : '';
-    const enlace = o.enlace || enlaceDe(o.evento);
+    let enlace = o.enlace || enlaceDe(o.evento);
+    if (!enlace) { try { enlace = enlaceDe(await primeraCita(c.id)); } catch (e) { enlace = ''; } }
     const nombre = nombrePila(c.firstName || c.contactName || c.name || '');
 
     // Candado primero: si algo de abajo falla, no se repite el WhatsApp.
@@ -102,10 +107,10 @@ async function confirmarCita(o) {
     // 2. WhatsApp de confirmación al cliente (plantilla; si no, GHL y SMS).
     if (c.phone && f.dia) {
       // Valores para el workflow de GHL (plantilla qualivo_confirmacion_cita).
-      try { await A.camposWA(c.id, { citaDia: (cuando ? cuando + ', ' : '') + f.dia, citaHora: f.hora, citaEnlace: enlace || ENLACE_FIJO }); } catch (e) { /* no bloquea */ }
+      try { await A.camposWA(c.id, { citaDia: (cuando ? cuando + ', ' : '') + f.dia, citaHora: f.hora, citaEnlace: enlace || SIN_ENLACE }); } catch (e) { /* no bloquea */ }
       let salida = { ok: false };
       if (WA.configurado()) {
-        salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', (cuando ? cuando + ', ' : '') + f.dia, f.hora, enlace || ENLACE_FIJO]);
+        salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', (cuando ? cuando + ', ' : '') + f.dia, f.hora, enlace || SIN_ENLACE]);
         if (salida.ok) hecho.push('whatsapp_plantilla');
       }
       if (!salida.ok) {
@@ -186,4 +191,4 @@ async function primeraCita(contactId) {
   } catch (e) { return null; }
 }
 
-module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, ENLACE_FIJO: ENLACE_FIJO };
+module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, SIN_ENLACE: SIN_ENLACE };

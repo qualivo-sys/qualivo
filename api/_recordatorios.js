@@ -43,7 +43,7 @@ function horaDe(fecha) {
 const QUE_VEREMOS = 'Vamos a ver cómo va hoy tu sistema desde que alguien pide información hasta que compra, dónde se pierde y qué automatizamos primero. Sales con un plan escrito.';
 
 function textoDia(nombre, hora, enlace, extra) {
-  return 'Hola ' + (nombre || '') + ', soy Maikel. Te recuerdo que hoy a las ' + hora + ' tenemos la videollamada de 15 minutos. Entra por aquí: ' + enlace + '\n' +
+  return 'Hola ' + (nombre || '') + ', soy Maikel. Te recuerdo que hoy a las ' + hora + ' tenemos la videollamada de 15 minutos. ' + (/^https?:/.test(enlace) ? 'Entra por aquí: ' + enlace : 'El enlace está ' + enlace + '.') + '\n' +
     QUE_VEREMOS + (extra ? ' ' + extra : '') + '\n' +
     'Si te surge algo, dímelo por aquí y lo movemos.';
 }
@@ -187,7 +187,7 @@ async function vuelta(modo, opciones) {
           continue;
         }
         const nombre = nombrePila(c.firstName || c.contactName || c.name || '');
-        const enlace = CITA.enlaceDe(ev) || CITA.ENLACE_FIJO;
+        const enlace = CITA.enlaceDe(ev) || CITA.SIN_ENLACE;
         // Si Raquel la cerró como llamada, el lead puede esperar el teléfono.
         const extra = A.tiene(c, 'voz-completada') ? 'Si prefieres por teléfono, te llamo yo al móvil a esa hora.' : '';
         const texto = modo === 'vispera' ? textoVispera(nombre, horaDe(inicio)) : textoDia(nombre, horaDe(inicio), enlace, extra);

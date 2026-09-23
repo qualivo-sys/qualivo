@@ -19,7 +19,7 @@ quién la fijó. Lo que no está aquí no se hace por defecto.
 
 - **Siempre un recordatorio el mismo día, a las 9:00, a todos los que tienen
   cita ese día** (Maikel, 21-sep: «yo los haría a todos el mismo día a las 9»),
-  con la hora, el enlace de la videollamada (https://meet.google.com/gom-euxm-btb)
+  con la hora, el enlace de la videollamada de esa cita (cada cita tiene su propia sala de Meet desde el 23-sep; antes era una sala fija compartida)
   y **qué vamos a ver** (Maikel, 21-sep: «recuerda que tienes tu cita a tal
   hora, aquí tienes el enlace de Meet, esto es lo que veremos»). Sale por el
   canal donde esté la conversación del lead (647 → WhatsApp oficial; gateway →

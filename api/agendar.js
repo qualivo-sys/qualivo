@@ -133,8 +133,9 @@ async function reservar(o) {
       // 18-sep la cita se creó como «Michael» porque el modelo copia el nombre
       // tal como lo transcribe de su propia voz.
       title: 'Diagnóstico de crecimiento · ' + (contacto.firstName || contacto.contactName || o.nombre || ''),
-      // La sala fija de Meet, para que la invitación del calendario lleve el enlace.
-      address: process.env.AGENDA_ENLACE || require('./_cita.js').ENLACE_FIJO,
+      // Sin «address»: así GHL crea una sala de Meet propia para esta cita (la
+      // ubicación del calendario es Google Meet). Hasta el 23-sep aquí iba una
+      // sala fija compartida que enseñaba el título de otra reunión.
       appointmentStatus: 'confirmed',
       ignoreFreeSlotValidation: false,
       toNotify: true
@@ -152,11 +153,15 @@ async function reservar(o) {
     return { ok: false, motivo: 'error' };
   }
 
+  // El enlace de la sala que acaba de crear GHL para esta cita.
+  const creada = await cita.json().catch(function () { return {}; });
+  const enlace = require('./_cita.js').enlaceDe(creada.appointment || creada);
+
   // Se para la cadencia, el trato pasa a «Reunión agendada», se avisa a Maikel,
   // sale el evento «Schedule» a Meta y el cliente recibe la confirmación por
   // WhatsApp. Todo en _cita.js; aquí solo se dispara.
   await require('./_cita.js').confirmarCita({
-    contactId: contacto.id, inicio: inicio, origen: o.origen || 'agenda', fuente: o.fuente || ''
+    contactId: contacto.id, inicio: inicio, origen: o.origen || 'agenda', fuente: o.fuente || '', enlace: enlace
   });
   if (o.contexto) {
     await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {
