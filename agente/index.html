@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marina, la agente de Equipzilla · pruébala</title>
+<meta name="description" content="Marina atiende por teléfono y WhatsApp a quien pide alquiler, renting o compra de maquinaria, cualifica y deja la llamada con un asesor cerrada. Pruébala haciendo de cliente.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="https://equipzilla.com/favicon.ico">
+<style>
+  :root{ --ez:#f3533d; --ez-oscuro:#e03a2b; --negro:#1e1e1e; --tinta:#161616; --gris:#4a4a4a; --crema:#fafafa; --borde:#e3dbdb; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:-apple-system,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif; background:var(--crema); color:var(--tinta); -webkit-font-smoothing:antialiased; line-height:1.5; }
+  img{ max-width:100%; }
+  .container{ max-width:1080px; margin:0 auto; padding:0 20px; }
+  .ez-top{ background:#fff; border-bottom:1px solid var(--borde); }
+  .ez-top .container{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:14px; padding-bottom:14px; }
+  .ez-top img{ height:34px; width:auto; display:block; }
+  .ez-top .tel{ font-size:14px; color:var(--gris); text-decoration:none; font-weight:700; }
+  .ez-hero{ background:var(--negro); color:#fff; padding: clamp(40px,6vw,64px) 0 clamp(48px,7vw,80px); position:relative; overflow:hidden; }
+  .ez-hero::after{ content:''; position:absolute; right:-180px; top:-180px; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle,rgba(243,83,61,.35),transparent 65%); }
+  .ez-hero .container{ position:relative; z-index:1; }
+  .ez-grid{ display:grid; grid-template-columns: minmax(0,1fr); gap:32px; align-items:start; }
+  @media (min-width: 900px){ .ez-grid{ grid-template-columns: minmax(0,1fr) 440px; gap:56px; } }
+  .ez-chip{ display:inline-flex; align-items:center; gap:9px; background:rgba(243,83,61,.16); border:1px solid rgba(243,83,61,.5); color:#ff8d7a; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; padding:8px 14px; border-radius:999px; margin-bottom:22px; }
+  .ez-chip i{ width:8px; height:8px; border-radius:50%; background:var(--ez); display:block; }
+  .ez-hero h1{ font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(34px,5.6vw,58px); margin:0 0 18px; max-width:16ch; }
+  .ez-hero h1 span{ color:var(--ez); }
+  .ez-hero .bajada{ font-size:clamp(17px,2.2vw,20px); color:#d9d2d2; max-width:48ch; line-height:1.5; margin:0 0 26px; }
+  .ez-pasos{ display:grid; gap:12px; margin:0; padding:0; list-style:none; }
+  .ez-pasos li{ display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:#d9d2d2; line-height:1.5; }
+  .ez-pasos b{ color:#fff; }
+  .ez-pasos .n{ flex:none; width:28px; height:28px; border-radius:50%; background:rgba(243,83,61,.22); color:#ff8d7a; font-weight:900; font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+  .ez-caja{ background:#fff; border-radius:20px; padding:22px 20px 18px; box-shadow:0 24px 60px rgba(0,0,0,.4); color:var(--tinta); }
+  .ez-caja .t{ font-weight:800; font-size:20px; letter-spacing:-.02em; margin:0 0 4px; }
+  .ez-caja .s{ font-size:14.5px; color:var(--gris); margin:0 0 16px; line-height:1.45; }
+  .campo{ display:block; margin-bottom:12px; }
+  .campo span{ display:block; font-size:13px; font-weight:700; color:var(--gris); margin-bottom:5px; }
+  .campo input{ width:100%; font:inherit; font-size:16px; padding:13px 14px; border:1.5px solid var(--borde); border-radius:12px; background:#fff; color:var(--tinta); }
+  .campo input:focus{ outline:none; border-color:var(--ez); box-shadow:0 0 0 3px rgba(243,83,61,.18); }
+  .btn-ez{ display:flex; width:100%; align-items:center; justify-content:center; gap:10px; min-height:58px; padding:0 22px; border-radius:14px; background:var(--ez); color:#fff; font-weight:800; font-size:17px; border:none; cursor:pointer; box-shadow:0 12px 32px rgba(243,83,61,.3); margin-top:6px; }
+  .btn-ez:hover{ background:var(--ez-oscuro); }
+  .btn-ez[disabled]{ opacity:.7; cursor:wait; }
+  .rgpd{ display:flex; gap:9px; align-items:flex-start; font-size:12.5px; color:var(--gris); line-height:1.4; margin:10px 0 0; }
+  .rgpd input{ margin-top:3px; }
+  .hp{ position:absolute; left:-9999px; }
+  .err{ color:#B42318; font-size:14px; margin:10px 0 0; font-weight:600; }
+  .estado{ text-align:center; padding:12px 4px 6px; }
+  .estado .ico{ width:72px; height:72px; border-radius:50%; background:rgba(243,83,61,.14); margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:30px; }
+  .estado .ico.suena{ animation: ez-suena 1.2s ease-in-out infinite; }
+  @keyframes ez-suena{ 0%,100%{ transform:rotate(0) } 20%{ transform:rotate(-12deg) } 40%{ transform:rotate(12deg) } 60%{ transform:rotate(-8deg) } 80%{ transform:rotate(8deg) } }
+  .estado h3{ font-weight:800; font-size:22px; letter-spacing:-.02em; margin:0 0 8px; }
+  .estado p{ font-size:15.5px; color:var(--gris); line-height:1.5; margin:0 0 10px; }
+  .estado ul{ text-align:left; margin:14px 0 0; padding:0 0 0 18px; font-size:15px; color:var(--tinta); line-height:1.5; }
+  .estado ul li{ margin:5px 0; }
+  .btn-wa{ display:flex; align-items:center; justify-content:center; gap:8px; margin:16px 0 0; min-height:52px; padding:0 18px; border-radius:14px; background:#25D366; color:#fff; font-weight:800; font-size:15.5px; text-decoration:none; }
+  .ez-sec{ padding: clamp(44px,7vw,80px) 0; }
+  .ez-sec h2{ font-weight:800; letter-spacing:-.03em; font-size:clamp(26px,4vw,40px); margin:0 0 10px; color:var(--negro); line-height:1.05; }
+  .ez-sec .sub{ color:var(--gris); font-size:17px; max-width:60ch; margin:0 0 28px; line-height:1.5; }
+  .ez-cards{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .ez-card{ background:#fff; border:1px solid var(--borde); border-radius:16px; padding:20px; }
+  .ez-card .k{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ez); font-weight:800; margin-bottom:8px; }
+  .ez-card h3{ font-weight:800; font-size:18px; margin:0 0 8px; color:var(--negro); }
+  .ez-card p{ font-size:15px; color:var(--gris); line-height:1.5; margin:0; }
+  .ez-quote{ background:#fff; border-left:4px solid var(--ez); border-radius:0 14px 14px 0; padding:16px 18px; margin:0 0 12px; font-size:15.5px; color:var(--tinta); line-height:1.5; }
+  .ez-quote small{ display:block; color:var(--gris); margin-top:6px; font-size:13px; }
+  footer{ background:var(--negro); color:#9aa2ae; font-size:13px; }
+  footer .container{ padding-top:24px; padding-bottom:24px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; }
+</style>
+</head>
+<body>
+  <header class="ez-top">
+    <div class="container">
+      <a href="https://equipzilla.com"><img src="https://equipzilla.com/_next/static/media/logoSpain.101e4f51.png" alt="Equipzilla"></a>
+      <a class="tel" href="tel:+34911238750">911 238 750</a>
+    </div>
+  </header>
+
+  <section class="ez-hero">
+    <div class="container">
+      <div class="ez-grid">
+        <div>
+          <span class="ez-chip"><i></i>Prueba en vivo · 2 minutos</span>
+          <h1>Marina atiende a los clientes de <span>Equipzilla</span> cuando nadie puede cogerlo.</h1>
+          <p class="bajada">Un cliente pide una plataforma elevadora a las 23:10, o llama mientras todo el equipo está con otra cotización. Marina le atiende, le cualifica y le deja la llamada con un asesor cerrada. Pruébala tú ahora, haciendo de cliente.</p>
+          <ul class="ez-pasos">
+            <li><span class="n">1</span><span><b>Deja tu nombre y tu móvil.</b> Marina ya conoce Equipzilla: alquiler con disponibilidad inmediata, comparativa de precios entre alquiladores, renting, compra y venta de maquinaria.</span></li>
+            <li><span class="n">2</span><span><b>Te suena el móvil en menos de un minuto.</b> Pídele una plataforma elevadora, una excavadora en renting, un precio por semana. Te cualifica y te propone dos huecos con un asesor. <b>¿Y por WhatsApp?</b> Le escribes tú, como haría un cliente, y te contesta al momento.</span></li>
+            <li><span class="n">3</span><span><b>Al colgar, te llega el correo que recibiría el equipo:</b> ficha del cliente, qué máquina y para cuándo, obra y zona, puntuación A/B/C/D, resumen, grabación y siguiente paso.</span></li>
+          </ul>
+        </div>
+
+        <div class="ez-caja" id="caja">
+          <form id="f" novalidate>
+            <p class="t">Que me llame Marina.</p>
+            <p class="s">Te llamamos una sola vez, a este número, para la prueba. Nada más.</p>
+            <label class="campo"><span>Tu nombre</span><input type="text" name="nombre" autocomplete="given-name" required></label>
+            <label class="campo"><span>Tu móvil (te llama ahora)</span><input type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX" required></label>
+            <label class="campo"><span>Tu email (para el correo del equipo)</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me llaméis a este número para la prueba y me mandéis el correo.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+            <p class="err" id="err" hidden></p>
+            <button type="submit" class="btn-ez" id="b">📞 Que me llame ahora →</button>
+          </form>
+
+          <div class="estado" id="ok" hidden>
+            <div class="ico suena">📞</div>
+            <h3>Te va a sonar el móvil.</h3>
+            <p>Marina te llama en menos de un minuto. Cógelo y haz de cliente.</p>
+            <ul>
+              <li><b>Cuando llame:</b> pide una máquina, un precio por semana, disponibilidad para una obra. Deja que te proponga dos huecos con un asesor.</li>
+              <li><b>Al colgar:</b> mira el correo. Es lo que recibiría el equipo con cada cliente.</li>
+              <li><b>¿Quieres probarla también por WhatsApp?</b> Escríbele tú, como haría un cliente. Te contesta al momento.</li>
+            </ul>
+            <a class="btn-wa" href="https://wa.me/34647118491?text=Hola%2C%20quer%C3%ADa%20informaci%C3%B3n%20sobre%20alquiler%20de%20maquinaria%20(Equipzilla)." target="_blank" rel="noopener">💬 Escribirle por WhatsApp como cliente</a>
+            <p class="s" style="margin:8px 0 0">Se abre WhatsApp con el mensaje ya escrito. Solo tienes que enviarlo.</p>
+          </div>
+
+          <div class="estado" id="tarde" hidden>
+            <div class="ico">🌙</div>
+            <h3>Ahora es tarde para llamarte.</h3>
+            <p>Las llamadas de prueba salen de 9:00 a 21:00. Te llamamos <b id="tarde-h">a partir de las 9:00</b>.</p>
+          </div>
+
+          <div class="estado" id="ko" hidden>
+            <div class="ico">✋</div>
+            <h3 id="ko-t">No hemos podido llamarte.</h3>
+            <p id="ko-p">Inténtalo de nuevo en un rato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ez-sec">
+    <div class="container">
+      <h2>Lo que haría Marina en Equipzilla</h2>
+      <p class="sub">No sustituye a los asesores: les pone delante a los clientes ya cualificados, con la máquina, la obra y las fechas anotadas, y se ocupa de todo lo que hoy se pierde entre llamada y llamada.</p>
+      <div class="ez-cards">
+        <div class="ez-card"><div class="k">Teléfono</div><h3>Coge todas las llamadas</h3><p>Cuando los asesores están con otra cotización o es fuera de horario. Entiende qué máquina, para qué obra, dónde y para cuándo. Si urge, avisa a un asesor al momento.</p></div>
+        <div class="ez-card"><div class="k">WhatsApp</div><h3>Contesta al minuto, a cualquier hora</h3><p>Al que escribe a las 23:10 pidiendo una plataforma elevadora le contesta ella, le pide los datos y le cierra la llamada con un asesor para la mañana siguiente.</p></div>
+        <div class="ez-card"><div class="k">Cotizaciones</div><h3>Sigue cada cotización</h3><p>A las 24 horas, a los 4 días y a los 10 días, con el contexto de esa obra. Nadie del equipo tiene que acordarse. Las que se enfrían, las recupera.</p></div>
+        <div class="ez-card"><div class="k">Puntuación</div><h3>Dice a quién llamar primero</h3><p>A: máquina concreta, fecha y obra, quiere asesor. B: interés claro sin fecha. C: solo precio. D: sin conversación. Los A entran al móvil del asesor al momento.</p></div>
+        <div class="ez-card"><div class="k">Renting y compra</div><h3>Detecta la operación grande</h3><p>Cuando la conversación pasa de alquilar una semana a renting o compra, lo marca y lo pasa a la persona adecuada con todo lo hablado.</p></div>
+        <div class="ez-card"><div class="k">Control</div><h3>Todo queda registrado</h3><p>Cada llamada y cada WhatsApp con resumen, grabación y siguiente paso, en el CRM que ya usa el equipo. Se ve de dónde sale cada operación.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ez-sec" style="padding-top:0">
+    <div class="container">
+      <h2>Así suena</h2>
+      <p class="sub">Ejemplos de lo que dice Marina. El tono, los servicios y los precios se ajustan con el equipo antes de encenderla.</p>
+      <div class="ez-quote">"Equipzilla, buenas, soy Marina. ¿Con quién hablo?"<small>Al descolgar</small></div>
+      <div class="ez-quote">"Perfecto. Sí que trabajamos plataformas elevadoras y comparamos entre los alquiladores más cercanos a la obra. ¿Qué altura necesitas y para qué fechas?"<small>Cualificando</small></div>
+      <div class="ez-quote">"El precio exacto te lo confirma un asesor con la disponibilidad delante. Te puede llamar mañana a las 10:30 o a las 17:00, ¿cuál te viene mejor?"<small>Cerrando la llamada con un asesor</small></div>
+      <div class="ez-quote">"Te confirmo la cita del jueves a las 10:30 con un asesor y te mando un recordatorio el día antes. Si necesitas cualquier cosa, escríbeme por aquí."<small>WhatsApp tras la llamada</small></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <span>Equipzilla · alquiler, renting y compra de maquinaria</span>
+      <span>Página de prueba interna · no indexada</span>
+    </div>
+  </footer>
+<script>
+  (function () {
+    var API = 'https://qualivo.io/api/prueba/';
+    var f = document.getElementById('f'), err = document.getElementById('err'), b = document.getElementById('b');
+    function ver(id) { ['f', 'ok', 'tarde', 'ko'].forEach(function (x) { document.getElementById(x).hidden = x !== id; }); }
+    function fallo(t) { err.textContent = t; err.hidden = false; b.disabled = false; b.textContent = '📞 Que me llame ahora →'; }
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault(); err.hidden = true;
+      if (f.elements.website.value) return;
+      var d = { preset: 'equipzilla', nombre: f.elements.nombre.value.trim(), telefono: f.elements.telefono.value.trim(), email: f.elements.email.value.trim(), utm: location.search || '' };
+      if (d.nombre.length < 2) return fallo('Dinos tu nombre.');
+      if (!/^(\+?34)?[\s-]*[67](\s*\d){8}$/.test(d.telefono.replace(/[().-]/g, ''))) return fallo('Necesitamos un móvil español para llamarte.');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return fallo('Ese email no parece correcto.');
+      if (!f.elements.rgpd.checked) return fallo('Necesitamos tu permiso para llamarte.');
+      b.disabled = true; b.textContent = 'Avisando a Marina…';
+      fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          if (r.ok && r.estado === 'llamando') ver('ok');
+          else if (r.ok && r.estado === 'fuera_horario') { document.getElementById('tarde-h').textContent = 'a partir de las ' + (r.desde || 9) + ':00'; ver('tarde'); }
+          else if (r.error === 'ya_hoy') { document.getElementById('ko-t').textContent = 'Hoy ya te ha llamado.'; document.getElementById('ko-p').textContent = 'Una prueba por día y móvil. Mañana puedes volver a probarla.'; ver('ko'); }
+          else if (r.error === 'tope') { document.getElementById('ko-t').textContent = 'Hoy se han acabado las pruebas.'; document.getElementById('ko-p').textContent = 'Vuelve mañana.'; ver('ko'); }
+          else if (r.error === 'telefono') fallo('Necesitamos un móvil español para llamarte.');
+          else if (r.error === 'email') fallo('Ese email no parece correcto.');
+          else ver('ko');
+        })
+        .catch(function () { ver('ko'); });
+    });
+  })();
+</script>
+</body>
+</html>
