@@ -71,3 +71,32 @@ en `.sdr_watch_url` → actualizar el nodo HTTP del workflow n8n `UNBIjWqJl9cYVt
 - WhatsApp día 1: esperando alta del add-on de WhatsApp en GHL (decisión de
   Maikel) y número dedicado.
 - Autorización por tipos de respuesta (regla "plantilla aprobada una vez").
+
+## Correos que salen por Gmail: SIEMPRE en HTML
+
+Comprobado el 23-sep enviando una prueba y leyendo el mensaje guardado.
+
+Si el cuerpo va en **texto plano con URLs desnudas**, Gmail las reescribe al
+enviar y el destinatario recibe esto **como texto visible**:
+
+```
+(https://www.google.com/url?q=https://qualivo.io/casos/eac/&source=gmail&ust=1790187053081000&sa=E)
+```
+
+No es un efecto de como lo ve el remitente: esta dentro del mensaje enviado,
+en la parte de texto y en la de HTML. Parece spam o rastreo y en un correo frio
+se carga la credibilidad de golpe. Les paso a Remi Roman y a Loli Murillo el
+22-sep, que eran dos referencias que habia costado conseguir.
+
+Con **HTML y etiqueta `<a href>`** Gmail sigue metiendo su redirector en el
+enlace interno (eso lo hace con todo correo enviado desde Gmail y no se ve),
+pero el texto visible queda limpio:
+
+```
+Prueba 1, enlace con texto: qualivo.io/casos/eac
+Prueba 2, enlace desnudo:   https://qualivo.io/casos/nuria-roure/
+Prueba 3, dominio:          qualivo.io
+```
+
+Regla: en `send_message` de Gmail se usa `htmlBody`, nunca `body` con URLs
+sueltas. No afecta a Smartlead, que no pasa por Gmail.
