@@ -36,6 +36,19 @@ function provider(s) {
   if (/whatsapp|gener|directo|web/.test(x)) return 'Web / WhatsApp';
   return s ? 'Otro' : '(sin fuente)';
 }
+
+/** Anuncio/campaña de una oportunidad a partir de sus attributions (UTM nativas o pageUrl con utm_*). */
+function adFrom(o) {
+  const out = { anuncio: '', campana: '' };
+  for (const a of (o.attributions || [])) {
+    if (a.utmContent || a.utmCampaign) { out.anuncio = out.anuncio || a.utmContent || ''; out.campana = out.campana || a.utmCampaign || ''; }
+    if ((!out.anuncio || !out.campana) && a.pageUrl) {
+      try { const q = new URL(a.pageUrl).searchParams; out.anuncio = out.anuncio || q.get('utm_content') || ''; out.campana = out.campana || q.get('utm_campaign') || ''; } catch { /* url rara */ }
+    }
+    if (out.anuncio && out.campana) break;
+  }
+  return { anuncio: out.anuncio.trim(), campana: out.campana.trim() };
+}
 function weekMonday(ds) {
   const d = new Date(ds + 'T00:00:00Z');
   const off = (d.getUTCDay() + 6) % 7;
@@ -111,7 +124,7 @@ async function metaAgg(level, breakdowns, since, until) {
   const tok = process.env.META_TOKEN, act = process.env.META_ACT;
   if (!tok || !act) return [];
   const ver = process.env.META_API_VERSION || 'v21.0';
-  const p = new URLSearchParams({ fields: 'campaign_name,spend,actions', limit: '500', time_range: JSON.stringify({ since, until }), access_token: tok });
+  const p = new URLSearchParams({ fields: (level === 'ad' ? 'ad_name,' : '') + 'campaign_name,spend,actions', limit: '500', time_range: JSON.stringify({ since, until }), access_token: tok });
   if (level) p.set('level', level);
   if (breakdowns) p.set('breakdowns', breakdowns);
   let url = `https://graph.facebook.com/${ver}/act_${act}/insights?${p}`;
@@ -124,7 +137,13 @@ async function metaAgg(level, breakdowns, since, until) {
 async function metaExtras() {
   const until = new Date().toISOString().slice(0, 10);
   const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
-  let ads = [], regions = [];
+  let ads = [], regions = [], adsDetail = [];
+  try {
+    const perAd = await metaAgg('ad', null, since, until);
+    const byA = {};
+    perAd.forEach((r) => { const n = (r.ad_name || '(sin nombre)').trim(); (byA[n] ??= { spend: 0, leads: 0, campaign: r.campaign_name || '' }); byA[n].spend += parseFloat(r.spend) || 0; byA[n].leads += metaLeads(r.actions); });
+    adsDetail = Object.entries(byA).map(([name, v]) => ({ name, campaign: v.campaign, spend: v.spend, leads: v.leads })).sort((a, b) => b.leads - a.leads || a.spend - b.spend);
+  } catch { adsDetail = []; }
   try {
     const camp = await metaAgg('campaign', null, since, until);
     const byC = {};
@@ -139,7 +158,7 @@ async function metaExtras() {
     regions = Object.entries(byR).map(([region, v]) => ({ region, leads: v.leads, spend: v.spend }))
       .filter((x) => x.leads > 0).sort((a, b) => b.leads - a.leads);
   } catch { regions = []; }
-  return { since, until, ads, regions };
+  return { since, until, ads, regions, adsDetail };
 }
 
 /* ---------- Google Ads en vivo (API v22, cuenta de servicio como usuario de la cuenta) ---------- */
@@ -366,7 +385,7 @@ async function build() {
     return {
       id: o.id, fecha, semana: fecha ? weekMonday(fecha) : '', mes: fecha.slice(0, 7),
       comercial: users[o.assignedTo] || '(sin asignar)',
-      procedencia: provider(o.source), source: o.source || '',
+      procedencia: provider(o.source), source: o.source || '', ...adFrom(o),
       etapa, estado, contactado, entrevista, matricula, perdido, abandonado, pendiente,
       contacto: (o.contact && o.contact.name) || ''
     };

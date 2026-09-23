@@ -153,6 +153,9 @@
       <table id="tAds"></table>
     </div>
   </div>
+
+  <h2>Rendimiento por anuncio <span class="sub">(Meta: gasto y leads de los últimos 30 días · CRM: leads, entrevistas y matrículas del rango seleccionado, por el anuncio que trae cada trato)</span></h2>
+  <table id="tAdsDetail"></table>
   <div class="foot">Provincias y anuncios salen de <b>Meta Ads</b> (últimos 30 días), que reporta los leads por región. Cubre los leads de campañas de Meta; los de web/orgánico no llevan provincia.</div>
 
   <h2>Inversión y rentabilidad</h2>
@@ -262,6 +265,24 @@ function renderRecorrido(rows){
     <tr><td>Matriculadas</td><td>${fmt(c.matr)}</td><td>${pct(c.matr,N)}</td><td></td></tr></tbody></table></div></div>`;
 }
 
+
+/** Cruce por anuncio: Meta (gasto/leads, 30 días) × CRM (leads, entrevistas, matrículas del rango) usando la atribución de cada trato. */
+function renderAdsDetail(rows){
+  const meta = ((DATA.metaExtra||{}).adsDetail)||[];
+  const key = s => (s||'').trim().toLowerCase();
+  const crm = {};
+  rows.forEach(r => { const k = key(r.anuncio); if(!k) return; (crm[k] ??= {name:r.anuncio, campana:r.campana, leads:0, entr:0, matr:0}); crm[k].leads++; crm[k].entr += r.entrevista; crm[k].matr += r.matricula; });
+  const names = new Set([...meta.map(m=>key(m.name)), ...Object.keys(crm)]);
+  const list = [...names].map(k => { const m = meta.find(x=>key(x.name)===k)||{}; const c = crm[k]||{};
+    return { name: c.name||m.name||k, campana: c.campana||m.campaign||'', spend:m.spend||0, mleads:m.leads||0, leads:c.leads||0, entr:c.entr||0, matr:c.matr||0 }; })
+    .sort((a,b)=> b.matr-a.matr || b.leads-a.leads || b.mleads-a.mleads || b.spend-a.spend);
+  const sinAd = rows.filter(r=>!key(r.anuncio)).length;
+  const eur = v => v ? v.toFixed(2).replace('.',',')+' €' : '—';
+  const body = list.slice(0,40).map(x=>`<tr><td>${x.name}</td><td class="sub">${x.campana}</td><td>${eur(x.spend)}</td><td>${fmt(x.mleads)}</td><td>${x.mleads?eur(x.spend/x.mleads):'—'}</td><td>${fmt(x.leads)}</td><td>${fmt(x.entr)}</td><td>${fmt(x.matr)}</td><td>${x.matr?eur(x.spend/x.matr):'—'}</td></tr>`).join('');
+  $('#tAdsDetail').innerHTML = `<thead><tr><th>Anuncio</th><th>Campaña</th><th>Inversión (Meta)</th><th>Leads (Meta)</th><th>CPL</th><th>Leads CRM</th><th>Entrev.</th><th>Matríc.</th><th>€ / matrícula</th></tr></thead><tbody>${body||'<tr><td colspan="9">(sin datos)</td></tr>'}
+    <tr class="tot"><td colspan="5">Tratos del rango sin anuncio identificado (anteriores a la atribución o de canales sin UTM)</td><td>${fmt(sinAd)}</td><td colspan="3"></td></tr></tbody>`;
+}
+
 function render(){
   const rows = filtered(); const k = agg(rows);
   const citas = citasSummary($('#from').value, $('#to').value, $('#fcom').value).k;
@@ -307,6 +328,8 @@ function render(){
   breakdown('#tPro','Canal', rows, 'procedencia');
   // Provincias y anuncios (Meta, ventana propia de 30 días)
   renderMetaExtra();
+  // Rendimiento por anuncio (Meta × CRM)
+  renderAdsDetail(rows);
   // Inversión y rentabilidad (solo rango de fechas)
   renderRent($('#from').value, $('#to').value);
 }
