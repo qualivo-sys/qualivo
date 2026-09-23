@@ -209,7 +209,7 @@ movido a "agendan y no aparecen" el 22-sep; el brief lo sostiene con los número
 1. **Pregunta abierta en el formulario en vez de la de presupuesto.** Test A/B real,
    14 días, muerte o escala el 7-oct. Métrica: apertura→envío y, sobre todo,
    envío→cita. Es reversible y gratis. **Es la palanca más grande que tengo.**
-2. **Reformas: bajar de 20 € a 10 €/día y mover los 10 € a clínicas.** Reformas es
+2. **Reformas: bajar de 15 € a 10 €/día y mover los 5 € a clínicas.** Reformas es
    el más caro por cita (50,85 €) y el que más D produce (5 de 8); clínicas es el
    único que ha generado dinero. No es una decisión definitiva: es dejar de pagar
    50 € por cita mientras probamos si reformas necesita otra oferta.
@@ -234,6 +234,38 @@ movido a "agendan y no aparecen" el 22-sep; el brief lo sostiene con los número
 8. **Canal de primer contacto:** 647 oficial con token nuevo y plantilla aprobada,
    o llamada + correo mientras tanto. Sin esto, los puntos 6 y 7 no tienen por
    dónde ejecutarse y el reloj de 8 h de latencia sigue corriendo.
+
+### Corrección del 23-sep · los presupuestos no son los que yo decía
+
+Al revisar la cuenta esta mañana encuentro que **los tres conjuntos activos están a
+15 €/día, no a 20 €**, y llevan así desde el 20-sep. La secuencia, sacada de
+`/act_.../activities`:
+
+| cuándo (UTC) | qué | quién |
+|---|---|---|
+| 19-sep 10:06 | formación y clínicas 15 € → **20 €** (lo que pidió Maikel) | Twin Integration |
+| 20-sep 07:33:29 | conjunto asesorías **pausado** | Twin Integration |
+| 20-sep 07:33:31 | clínicas 20 € → **15 €** | Twin Integration |
+| 20-sep 07:33:33 | formación 20 € → **15 €** | Twin Integration |
+| 20-sep 07:33:34 | conjunto 3V (reformas) 20 € → **15 €** | Twin Integration |
+
+Cuatro objetos en cinco segundos: es un script, no una persona. "Twin Integration"
+es el usuario de sistema con el que actúa el token, así que la firma no identifica
+al autor — solo dice que se hizo con ese token. **No lo decidimos nosotros y no hay
+ningún cambio de presupuesto posterior.**
+
+Consecuencias:
+
+- La subida que autorizó Maikel duró **21 horas** y lleva tres días revertida.
+- He estado reportando 20 €/día en el daily y en este mismo documento. Era falso.
+  El gasto real lo confirma: 46,35 € el 22-sep, que es 15+15+15, no 20+20+20.
+- Las tasas y los costes unitarios de este documento **no cambian** (salen de gasto
+  real y eventos reales, no del presupuesto). Lo que cambia es la línea de partida
+  de la propuesta 2.
+
+Pendiente de Maikel, y es lo primero de la sesión: **averiguar qué tiene ese token
+y por qué normaliza a 15 €**, porque mientras exista, cualquier cambio de
+presupuesto que aprobemos puede desaparecer a la mañana siguiente sin avisar.
 
 **Lo único que hago sin preguntar** sigue siendo frenar: si algo sangra, lo pauso y
 lo aviso en el momento. Activar, subir presupuesto y cambiar pujas son de Maikel.
