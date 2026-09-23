@@ -29,8 +29,9 @@ aviso».
 - Con cita: «Hola {{nombre}}, soy Maikel, de Qualivo. Te confirmo la
   videollamada del {{día}} a las {{hora}}: {{enlace}}»
 - Sin cita: «Hola {{nombre}}, soy Maikel, de Qualivo.» + por qué escribimos
-  ahora (te he llamado un par de veces, retomo lo que hablamos, perdona la
-  tardanza…).
+  ahora si hace falta (te he llamado un par de veces, retomo lo que
+  hablamos…). **Nunca «perdona la tardanza»**: la rapidez es lo primero que
+  vendemos (Maikel, 23-sep).
 
 ## A · «No lo sé, eso es lo que quiero averiguar»
 
@@ -51,8 +52,9 @@ Bloque 4:
   nuevo te pide {{petición}}, ¿cuánto tardas en contestarle, más o menos?»
   (Una sola pregunta. Con su respuesta, el siguiente mensaje le da su fuga
   concreta y ahí se propone la videollamada.)
-- Sin cita, si ya ha mostrado interés en hablar: «¿Lo vemos en una
-  videollamada y te digo cuál es la tuya? Tengo el {{hueco 1}} o el {{hueco 2}}.»
+- Sin cita (el que más gustó, 23-sep): «Eso es justo lo que vemos en la
+  llamada: te enseñamos el recorrido que montaríamos en tu caso, tanto en la
+  captación como en el seguimiento. ¿Te va bien el {{hueco 1}} o el {{hueco 2}}?»
 
 ## B · «En los anuncios y la captación»
 
@@ -101,6 +103,6 @@ caso. ¿Me confirmas por aquí que podrás asistir?» (o huecos, sin cita).
   por WhatsApp), eso manda sobre la respuesta del formulario: «Le comentaste a
   Raquel que…», «Comentabas que…».
 - Nada de hallazgos de web salvo probados en navegador.
-- Sin «15 minutos» y sin «lead». Una sola pregunta al final.
+- Sin «15 minutos», sin «lead» y sin disculpas por tardar. Una sola pregunta al final.
 - Mandar por el número donde está su conversación (mirar el campo «to» de su
   último mensaje entrante en GHL: 647 o la pasarela).
