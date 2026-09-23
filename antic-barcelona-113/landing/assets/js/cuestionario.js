@@ -2,15 +2,22 @@
 (function () {
   'use strict';
 
-  // Tramos de presupuesto. Son opciones de respuesta, no una tarifa: en la
-  // web y en la guía no decimos lo que cuestan sus piezas, y no es este sitio
-  // para empezar a decirlo. Con las horquillas reales del taller este paso
-  // filtraría todavía mejor.
+  // Tramos de presupuesto.
+  //
+  // Los primeros iban de 1.500 € para arriba, inventados sin datos. Las
+  // conversaciones reales del taller dieron el suelo: 2.600 € por una mesa de
+  // 2,20 m y «a partir de 3.500 €» por una pieza de 3 m. Con eso, el tramo más
+  // bajo de antes quedaba por debajo de lo que cuesta cualquier pieza.
+  //
+  // Los tramos son la señal de precio. Son opciones de respuesta, no una
+  // tarifa —seguimos sin publicar lo que cobran—, pero quien llega pensando
+  // en 200 € ve en qué liga está antes de dejar su teléfono.
+  var SUELO = 2500;
   var PRESUPUESTOS = [
-    'Menos de 1.500 €',
-    'Entre 1.500 y 3.000 €',
-    'Entre 3.000 y 5.000 €',
-    'Más de 5.000 €',
+    'Menos de 2.500 €',
+    'Entre 2.500 y 4.000 €',
+    'Entre 4.000 y 6.000 €',
+    'Más de 6.000 €',
     'Prefiero hablarlo',
   ];
 
@@ -47,7 +54,7 @@
     },
     {
       key: 'presupuesto', label: 'Presupuesto y plazo', title: '¿En qué horquilla te mueves?',
-      sub: 'Una pieza a medida en madera maciza recuperada no juega en la liga del mueble de catálogo. Dinos tu horquilla y te decimos con franqueza si encaja.',
+      sub: 'Cada pieza se fabrica de una sola vez, en madera maciza y con horas de taller. No juega en la liga del mueble de catálogo. Dinos tu horquilla y te decimos con franqueza si encaja.',
       kind: 'presupuesto', required: false,
       chipsExtra: {
         key: 'plazo', label: '¿Cuándo la necesitas?',
@@ -80,11 +87,19 @@
     var definido = a.pieza && a.espacio && (a.largo || a.medidasLibres);
     var cerca = a.plazo === 'Lo antes posible' || a.plazo === 'En los próximos 3 meses';
     // Un presupuesto por debajo del suelo del taller no es un lead caliente
-    // por muy definido que esté el proyecto. Pilar entró marcada HOT y se cayó
-    // por precio después de que el comercial le dedicara una conversación:
-    // marcarlo aquí es lo que evita esa llamada.
-    if (a.presupuesto === PRESUPUESTOS[0]) {
-      return { tier: 'COLD', note: 'El presupuesto queda por debajo de lo que cuesta una pieza a medida. Contestar con franqueza y sin dedicarle una visita.' };
+    // por muy definido que esté el proyecto.
+    //
+    // De los ocho primeros que rellenaron el cuestionario, cuatro chocaron con
+    // el precio, y declararon entre 200 y 600 € por piezas que cuestan de
+    // 2.600 € para arriba. Dos de ellos entraron marcados HOT y WARM: el
+    // sistema mandaba al comercial a perseguirlos como prioridad.
+    //
+    // Se mira también el número suelto porque los leads anteriores al cambio
+    // escribían una cifra libre, y porque cualquier valor raro debe caer del
+    // lado seguro.
+    var cifra = Number(String(a.presupuesto || '').replace(/[^\d]/g, ''));
+    if (a.presupuesto === PRESUPUESTOS[0] || (cifra > 0 && cifra < SUELO)) {
+      return { tier: 'COLD', note: 'El presupuesto queda por debajo de lo que cuesta una pieza a medida. Contestar con franqueza, sin visita y sin dedicarle tiempo de presupuesto.' };
     }
     if (definido && cerca && a.presupuesto) {
       return { tier: 'HOT', note: 'Proyecto definido, presupuesto y plazo cercano. WhatsApp en menos de 2 h y propuesta de visita al taller.' };
@@ -284,8 +299,8 @@
 
     // Valor que se le pasa al píxel. Del tramo se toma el punto medio: sirve
     // para que Meta compare unos leads con otros, no para facturar.
-    var VALOR = { 'Menos de 1.500 €': 1000, 'Entre 1.500 y 3.000 €': 2250,
-      'Entre 3.000 y 5.000 €': 4000, 'Más de 5.000 €': 6500 };
+    var VALOR = { 'Menos de 2.500 €': 1500, 'Entre 2.500 y 4.000 €': 3250,
+      'Entre 4.000 y 6.000 €': 5000, 'Más de 6.000 €': 7500 };
     var val = VALOR[a.presupuesto] || ({ HOT: 3000, WARM: 1500, COLD: 300 })[q.tier];
     window.ab113 && ab113.track('CompleteRegistration', {
       content_name: 'cuestionario_particular', tier: q.tier, pieza: a.pieza || '', espacio: a.espacio || '',
