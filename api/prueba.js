@@ -48,6 +48,13 @@ async function upsert(d, tags) {
 }
 
 module.exports = async function handler(req, res) {
+  // Las demos por negocio viven en la web del cliente (p. ej. el proyecto de
+  // Equipzilla en Vercel) y llaman aquí desde otro dominio: CORS abierto para
+  // este endpoint; los límites (un intento por móvil y día, tope diario) siguen.
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ ok: false, error: 'method_not_allowed' }); }
   const b = req.body || {};
   if (b.website) return res.status(200).json({ ok: true, estado: 'llamando' }); // trampa para robots
