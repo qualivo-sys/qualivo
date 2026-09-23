@@ -134,7 +134,7 @@
   <h2>Por etapa del pipeline</h2>
   <table id="tEtapa"></table>
 
-  <h2>Recorrido del pipeline <span class="sub">(como el tablero de GHL · % sobre los leads del rango)</span></h2>
+  <h2>Recorrido del pipeline <span class="sub">(leads del rango de fechas seleccionado, por su columna actual)</span></h2>
   <div id="recorrido" class="card" style="padding:16px"></div>
 
   <h2>Por comercial</h2>
@@ -234,53 +234,28 @@ const agg = (rows) => rows.reduce((a,r)=>{
 }, {leads:0,cont:0,entr:0,matr:0,perd:0,aband:0,pend:0});
 
 
-/** Recorrido: cuántos leads han llegado a cada columna activa y cuántos se han caído (y por qué). Usa la columna actual (suelo, no histórico). */
+/** Recorrido (simplificado): leads del rango por columna actual. "Llegaron a" = están en esa columna o más adelante. */
 function renderRecorrido(rows){
   const N = rows.length; if(!N){ $('#recorrido').innerHTML='<div class="sub">Sin leads en el rango.</div>'; return; }
   const lc = r => (r.etapa||'').trim().toLowerCase();
-  const isNuevo = e => e==='nuevo lead (ia)' || e==='leads manual' || e==='lead manual' || e==='nuevo lead';
   const c = { nuevo:0, agend:0, entrev:0, matr:0, inval:0, iloc:0, noint:0, nula:0, baja:0 };
   rows.forEach(r=>{ const e=lc(r);
-    if(isNuevo(e)) c.nuevo++; else if(e==='llamada agendada') c.agend++; else if(e==='entrevistado') c.entrev++;
+    if(e==='llamada agendada') c.agend++; else if(e==='entrevistado') c.entrev++;
     else if(e==='alumna matriculada'||e==='alumna activa') c.matr++; else if(/^inv[áa]lido$/.test(e)) c.inval++;
-    else if(e==='ilocalizable') c.iloc++; else if(e==='no interesa') c.noint++; else if(/entrev/.test(e)&&/nula/.test(e)) c.nula++; else if(e==='baja') c.baja++; });
-  // "llegaron a" = están ahí o más adelante en el camino activo (+ perdidos tras esa fase: No interesa/Entrev. nula tras agendar, Baja tras matricular)
-  const reach = [
-    ['Leads (Nuevo / Manual)', N],
-    ['Llamada agendada', c.agend + c.entrev + c.matr + c.noint + c.nula + c.baja],
-    ['Entrevistado', c.entrev + c.matr + c.noint + c.baja],
-    ['Alumna matriculada', c.matr + c.baja],
-  ];
+    else if(e==='ilocalizable') c.iloc++; else if(e==='no interesa') c.noint++; else if(/entrev/.test(e)&&/nula/.test(e)) c.nula++; else if(e==='baja') c.baja++;
+    else c.nuevo++; });
+  const reach = [['Leads', N], ['Llamada agendada', c.agend + c.entrev + c.matr], ['Entrevistado', c.entrev + c.matr], ['Matriculadas', c.matr]];
   const cols=['var(--f1)','var(--f2)','var(--f3)','var(--f4)'];
-  const bars = reach.map(([n,v],i)=>{ const prev = i? reach[i-1][1] : v; const w=Math.max(v/N*100,2);
-    return `<div class="frow"><div class="name">${n}</div><div class="bar" style="width:${w}%;background:${cols[i]}">${fmt(v)} · ${pct(v,N)}${i?` <small>(${pct(v,prev)} del paso anterior)</small>`:''}</div></div>`; }).join('');
-  const drops = [['Inválido (número erróneo, no existe…)',c.inval,'var(--serious)'],['Ilocalizable (sin respuesta tras intentos)',c.iloc,'var(--serious)'],
-    ['No interesa (tras hablar / entrevista)',c.noint,'var(--critical)'],['Entrevista nula (no asistió / canceló)',c.nula,'var(--critical)'],['Baja (matriculada que se dio de baja)',c.baja,'var(--critical)']];
+  const bars = reach.map(([n,v],i)=>{ const w=Math.max(v/N*100,2);
+    return `<div class="frow"><div class="name">${n}</div><div class="bar" style="width:${w}%;background:${cols[i]}">${fmt(v)} · ${pct(v,N)}</div></div>`; }).join('');
+  const drops = [['Inválido',c.inval,'var(--serious)'],['Ilocalizable',c.iloc,'var(--serious)'],['No interesa',c.noint,'var(--critical)'],['Entrevista nula',c.nula,'var(--critical)'],['Baja',c.baja,'var(--critical)']];
   const caidos = drops.reduce((a,[,v])=>a+v,0); const enCurso = c.nuevo + c.agend + c.entrev;
-  const rowsHtml = drops.map(([n,v,col])=>`<tr><td><span class="pill" style="background:${col}"></span>${n}</td><td>${fmt(v)}</td><td>${pct(v,N)}</td><td>${pct(v,caidos||1)}</td></tr>`).join('');
-  $('#recorrido').innerHTML = `<div class="grid2"><div>${bars}</div><div>
-    <table><thead><tr><th>Motivo de caída</th><th>Nº</th><th>% leads</th><th>% de los caídos</th></tr></thead><tbody>${rowsHtml}
-    <tr class="tot"><td>Total caídos</td><td>${fmt(caidos)}</td><td>${pct(caidos,N)}</td><td>100%</td></tr>
-    <tr><td>En curso (nuevo / agendada / entrevistado)</td><td>${fmt(enCurso)}</td><td>${pct(enCurso,N)}</td><td></td></tr>
-    <tr><td>Matriculadas</td><td>${fmt(c.matr)}</td><td>${pct(c.matr,N)}</td><td></td></tr></tbody></table></div></div>`;
-}
-
-
-/** Cruce por anuncio: Meta (gasto/leads, 30 días) × CRM (leads, entrevistas, matrículas del rango) usando la atribución de cada trato. */
-function renderAdsDetail(rows){
-  const meta = ((DATA.metaExtra||{}).adsDetail)||[];
-  const key = s => (s||'').trim().toLowerCase();
-  const crm = {};
-  rows.forEach(r => { const k = key(r.anuncio); if(!k) return; (crm[k] ??= {name:r.anuncio, campana:r.campana, leads:0, entr:0, matr:0}); crm[k].leads++; crm[k].entr += r.entrevista; crm[k].matr += r.matricula; });
-  const names = new Set([...meta.map(m=>key(m.name)), ...Object.keys(crm)]);
-  const list = [...names].map(k => { const m = meta.find(x=>key(x.name)===k)||{}; const c = crm[k]||{};
-    return { name: c.name||m.name||k, campana: c.campana||m.campaign||'', spend:m.spend||0, mleads:m.leads||0, leads:c.leads||0, entr:c.entr||0, matr:c.matr||0 }; })
-    .sort((a,b)=> b.matr-a.matr || b.leads-a.leads || b.mleads-a.mleads || b.spend-a.spend);
-  const sinAd = rows.filter(r=>!key(r.anuncio)).length;
-  const eur = v => v ? v.toFixed(2).replace('.',',')+' €' : '—';
-  const body = list.slice(0,40).map(x=>`<tr><td>${x.name}</td><td class="sub">${x.campana}</td><td>${eur(x.spend)}</td><td>${fmt(x.mleads)}</td><td>${x.mleads?eur(x.spend/x.mleads):'—'}</td><td>${fmt(x.leads)}</td><td>${fmt(x.entr)}</td><td>${fmt(x.matr)}</td><td>${x.matr?eur(x.spend/x.matr):'—'}</td></tr>`).join('');
-  $('#tAdsDetail').innerHTML = `<thead><tr><th>Anuncio</th><th>Campaña</th><th>Inversión (Meta)</th><th>Leads (Meta)</th><th>CPL</th><th>Leads CRM</th><th>Entrev.</th><th>Matríc.</th><th>€ / matrícula</th></tr></thead><tbody>${body||'<tr><td colspan="9">(sin datos)</td></tr>'}
-    <tr class="tot"><td colspan="5">Tratos del rango sin anuncio identificado (anteriores a la atribución o de canales sin UTM)</td><td>${fmt(sinAd)}</td><td colspan="3"></td></tr></tbody>`;
+  const rowsHtml = drops.map(([n,v,col])=>`<tr><td><span class="pill" style="background:${col}"></span>${n}</td><td>${fmt(v)}</td><td>${pct(v,N)}</td></tr>`).join('');
+  $('#recorrido').innerHTML = `<div class="grid2"><div>${bars}<div class="sub" style="margin-top:8px">Cada barra = leads del rango que están en esa columna o más adelante.</div></div><div>
+    <table><thead><tr><th>Dónde se caen</th><th>Nº</th><th>% leads</th></tr></thead><tbody>${rowsHtml}
+    <tr class="tot"><td>Caídos</td><td>${fmt(caidos)}</td><td>${pct(caidos,N)}</td></tr>
+    <tr><td>En curso</td><td>${fmt(enCurso)}</td><td>${pct(enCurso,N)}</td></tr>
+    <tr><td>Matriculadas</td><td>${fmt(c.matr)}</td><td>${pct(c.matr,N)}</td></tr></tbody></table></div></div>`;
 }
 
 function render(){
