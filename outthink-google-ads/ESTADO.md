@@ -801,3 +801,40 @@ Al cierre de la tarde del 21-09: **1.730,09 € (87 %), 34 registros, CPL 50,88 
 269,91 €, hacen falta ~135 €/día, sobrarían ~107 €. Proyección de cierre: **40 registros**.
 Pestaña «Reunión 21-09»: la sección de propuesta pasa a «Cambios acordados en la reunión ·
 estado», con los tres aplicados marcados y el presupuesto como única decisión pendiente.
+
+## Día 24 (23-09, último día de emisión) — el presupuesto se consume entero
+A las 15:44: **1.980,58 € (99 %), 43 registros, CPL 46,06 €**. La campaña se apaga esta noche
+a las 23:59 por la fecha de finalización puesta el 21.
+
+**Corrección a la previsión del 21-09.** Dije que sin subir el presupuesto se quedarían ~107 €
+sin invertir. Falso: Google puede servir **hasta el doble del presupuesto diario** en días de
+demanda alta, compensando con los días flojos. Con el tope de CPC en 4,50 € y el diario en
+81,22 €, el 21 gastó **164,23 €** y el 22 **162,00 €**. El presupuesto se ha consumido entero
+**sin tocar el diario**: la cuarta decisión que quedaba pendiente con Adigital no hacía falta.
+La lección es que en una campaña con final a fecha fija, el freno que importa no es el
+presupuesto diario sino el tope de CPC.
+
+| Día | Clics | Coste | Registros |
+|---|---|---|---|
+| 19-09 (sáb) | 9 | 8,45 € | 0 |
+| 20-09 (dom) | 12 | 11,82 € | 1 |
+| 21-09 (cambios) | 82 | 164,23 € | 2 |
+| **22-09** | **102** | **162,00 €** | **6** ← mejor día de la campaña |
+| 23-09 (15:44) | 44 | 68,64 € | 1 |
+
+**Los dos cambios de la reunión funcionaron.** Del 21 al 23: 228 clics, 394,87 €, 9 registros
+→ CPL 43,9 €, por debajo de la media de la campaña. Móvil desde el primer ajuste (15-09):
+CPL **18,00 €** y CVR 4,8 %, frente a 47,58 € y 4,3 % de escritorio; desde el paso a −40 %
+(21-09), móvil 22,20 € y escritorio 54,71 €. Excluirlo habría sido un error.
+
+**Por grupo (cierre):** EventosIA 32 reg. / 41,37 € · **Marca 7 reg. / 11,77 €** (el único que
+cumple el objetivo original de 8-12 €, y es demanda que traen los canales de Adigital) ·
+AIAct 2 / 127,30 € (pausado el 14) · ComplianceRiesgo 0 (pausado el 14).
+
+**Aterrizaje previsto:** el 22-09 de las 15:00 en adelante gastó 33,96 €; hoy cerrará en torno
+a 103 € y la campaña en **~2.015 €**, un 0,8 % por encima de los 2.000 comprometidos. No se
+frena: la desviación es ruido y son las horas de víspera, las más valiosas. Si Adigital quiere
+el tope exacto, basta con pausar al llegar a 2.000 €.
+
+Hoja del dashboard renombrada a «Cierre de la campaña de Google Ads», con el resultado de cada
+cambio acordado y el desglose de dispositivo por semana hasta el cierre.
