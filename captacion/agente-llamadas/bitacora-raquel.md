@@ -147,3 +147,35 @@ respondio-17sep). No es un lead de las campañas nuevas.
 7. Por la tarde (Maikel, «me gusta»): voz `eleven_flash_v2_5`, transcriptor `nova-3`, espera 0,5 s.
 
 **Propuesto, no aplicado:** las llamadas de reactivación de la base antigua deben salir siempre desde el móvil de Maikel, no desde el +1 775 (revisar el script de las 9:55); tras cuatro buzones (Pablo) o tres fallos de conexión (Carmen), dejar de llamar y pasar a correo; tras un plantón, no llamar en frío (David colgó a los 12 s): mejor WhatsApp con hueco nuevo; probar grafía «Cuálivo» en el prompt y escuchar si «Máikel» suena bien con la voz flash antes de tocar nada más.
+
+## 23-sep-2026 · revisión diaria
+
+**Llamadas del día (4, todas a leads del formulario de Meta, ninguna con conversación).**
+Rafael (Ágape), 10:20, 48 s: buzón (segunda llamada de la cadencia; por la tarde
+contestó a un WhatsApp y agendó el jueves 24 a las 18:00). Marian (reformas), 11:50: no
+contestó. Noelia (flamenco), 17:06, 30 s: llamada de plantón lanzada a mano con saludo y
+guion propios; buzón. Pilar (CPD Ceprovic), 17:50, 53 s: llamada para que entrara a la
+videollamada; locución de operadora y buzón. Registro en Notion «📞 Llamadas de Raquel»
+(4 filas, sin audio: no hubo conversación).
+
+**Fallo visto:** el mensaje de buzón es un texto fijo del asistente (`voicemailMessage`)
+que decía «te llamaba por el diagnóstico que has pedido… para buscar un hueco». Sonó
+igual en las llamadas de plantón y de aviso de reunión, donde no encaja. El guion que se
+pasa en cada llamada no afecta al buzón.
+
+**Cambiado:** `voicemailMessage` → «Hola, soy Raquel, del equipo de Máikel Echevarría,
+de Cuálivo. Te llamaba por lo del diagnóstico. Máikel te escribe por WhatsApp. Hasta
+luego.» (vale para primera llamada, plantón y confirmación). La sección «Si salta el
+buzón» del prompt decía otro texto y prometía correo: alineada con el mensaje real.
+Copia previa en el scratchpad.
+
+**Aclaración:** en las transcripciones aparece «Michael», pero el texto que dice Raquel
+lleva «Máikel»; es Deepgram quien lo transcribe así. Para saber cómo lo pronuncia la voz
+hay que escuchar el audio, no leer la transcripción.
+
+**Hipótesis nuevas.** (1) En llamadas especiales conviene pasar también un
+`voicemailMessage` propio en `assistantOverrides`. (2) En perfiles que dan clase por la
+tarde, un WhatsApp con valor rinde más que la segunda llamada (Rafael: dos buzones y
+agendó al WhatsApp).
+
+**Propuesto, no aplicado:** nada de voz, modelo, número ni cadencia.
