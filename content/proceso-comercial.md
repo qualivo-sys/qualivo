@@ -86,6 +86,17 @@ tras varios intentos no hay manera, se descarta.»
 - En código: `api/_reenganche.js`, lo llama `api/activacion.js`. Etiquetas
   `reeng-1`, `reeng-2`, `reeng-3`.
 
+## 3d. Dos pipelines (Maikel, 23-sep)
+
+- **Prospección**: solo lo que entra ahora (anuncios, landing, referencias,
+  LinkedIn). Es el tablero de trabajo diario.
+- **Qualivo Pipeline**: la reactivación de la base antigua (correos de Brevo,
+  tandas de septiembre). «Me ensucia bastante el CRM.» El 23-sep se movieron
+  allí 55 tratos (Nuevo Lead → Contactado, Más adelante → Tibio). Desde ese
+  día `api/_tratos.js` lleva ahí cualquier trato nuevo o cambio de etapa de un
+  contacto de reactivación (si agenda, a «Call Agendada»). Si además entró por
+  anuncios, se queda en Prospección.
+
 ## 3c. No presentados (Maikel, 22-sep)
 
 Etapa «No presentado» en el pipeline de GHL (id d04755f9-…). Entra quien tenía

@@ -30,6 +30,41 @@ const ETAPAS = {
 };
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
 
+// Los contactos de reactivación (base antigua: correos de Brevo, tandas de
+// septiembre) no van en «Prospección», que es solo para lo que entra ahora por
+// anuncios, landing o referencias (Maikel, 23-sep: «me ensucia bastante el
+// CRM»). Sus tratos viven en «Qualivo Pipeline», con la etapa equivalente. Si
+// un contacto de reactivación también entró por anuncios (paid, leadform),
+// manda lo de anuncios y se queda en Prospección.
+const PIPELINE_QUALIVO = '980j4DzvOwp7aDmkk2ZA';
+const ETAPAS_QUALIVO = {
+  nuevo: 'fa70d288-c614-40ad-9e67-df04f4da3443',        // Nuevo Lead
+  enCadencia: 'd08bc03a-1b25-4732-9b5f-3cb7295bfd94',   // Contactado
+  conversacion: '25c3d5c9-8427-43be-92d3-7b42a8975dd2', // Tibio
+  reunion: '1ff12e5f-c007-42e6-8a3c-fc0d77dabaa1',      // Call Agendada
+  noPresentado: '25c3d5c9-8427-43be-92d3-7b42a8975dd2', // Tibio
+  oferta: '7e8636a4-7066-4488-b423-40d431e54a9d',       // Propuesta Enviada
+  seguimiento: '7e8636a4-7066-4488-b423-40d431e54a9d',  // Propuesta Enviada
+  masAdelante: '25c3d5c9-8427-43be-92d3-7b42a8975dd2',  // Tibio
+  noResponde: '0143fb88-4fdd-48e8-9b3d-97b7cacd2048',   // Perdido
+  piloto: 'f1ab191d-569b-485e-b4e3-6e2b7a72dfb8',       // Cliente Activo
+  cliente: 'f1ab191d-569b-485e-b4e3-6e2b7a72dfb8'       // Cliente Activo
+};
+function esReactivacion(tags) {
+  const t = (tags || []).map(String);
+  const react = t.some(function (x) { return /^reactivacion|^tanda|^reactivado$|brevo/.test(x); });
+  const anuncios = t.some(function (x) { return /^(paid|leadform|diagnostico-landing)$/.test(x); });
+  return react && !anuncios;
+}
+async function pipelineDe(contactId) {
+  try {
+    const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() });
+    const c = r.ok ? ((await r.json()).contact || {}) : {};
+    if (esReactivacion(c.tags)) return { id: PIPELINE_QUALIVO, etapas: ETAPAS_QUALIVO, reactivacion: true };
+  } catch (e) { /* si no se puede leer, Prospección */ }
+  return { id: PIPELINE, etapas: ETAPAS, reactivacion: false };
+}
+
 function cabeceras() {
   return {
     Authorization: 'Bearer ' + process.env.GHL_API_KEY,
@@ -39,10 +74,10 @@ function cabeceras() {
 }
 
 // Trato abierto del contacto en Prospección, o null.
-async function abierto(contactId) {
+async function abierto(contactId, pipelineId) {
   const q = '/opportunities/search?location_id=' + encodeURIComponent(process.env.GHL_LOCATION_ID) +
     '&contact_id=' + encodeURIComponent(contactId) +
-    '&pipeline_id=' + encodeURIComponent(PIPELINE) + '&status=open';
+    '&pipeline_id=' + encodeURIComponent(pipelineId || PIPELINE) + '&status=open';
   const r = await fetch(GHL_BASE + q, { headers: cabeceras() });
   if (!r.ok) throw new Error('ghl_opportunities_search ' + r.status);
   const d = await r.json().catch(function () { return {}; });
@@ -100,7 +135,8 @@ function titulo(o) {
 async function crear(o) {
   try {
     if (!o || !o.contactId) return { ok: false, motivo: 'sin_contacto' };
-    const ya = await abierto(o.contactId);
+    const pl = await pipelineDe(o.contactId);
+    const ya = await abierto(o.contactId, pl.id);
     if (ya) return { ok: true, id: ya.id, existia: true };
     if (o.adId && !o.anuncio) o.anuncio = await nombreAnuncio(o.adId);
     // Si viene de un anuncio, la fuente lo dice aunque haya entrado por la landing.
@@ -110,8 +146,8 @@ async function crear(o) {
     const r = await fetch(GHL_BASE + '/opportunities/', {
       method: 'POST', headers: cabeceras(),
       body: JSON.stringify({
-        pipelineId: PIPELINE,
-        pipelineStageId: ETAPAS[o.etapa] || ETAPAS.nuevo,
+        pipelineId: pl.id,
+        pipelineStageId: pl.etapas[o.etapa] || pl.etapas.nuevo,
         locationId: process.env.GHL_LOCATION_ID,
         contactId: o.contactId,
         name: titulo(o).slice(0, 200),
@@ -135,10 +171,21 @@ async function crear(o) {
 async function mover(contactId, etapa, crearSi) {
   try {
     if (!contactId || !ETAPAS[etapa]) return { ok: false, motivo: 'parametros' };
-    const op = await abierto(contactId);
+    const pl = await pipelineDe(contactId);
+    const op = await abierto(contactId, pl.id);
     if (!op) {
       if (!crearSi) return { ok: false, motivo: 'sin_trato' };
       return crear(Object.assign({}, crearSi, { contactId: contactId, etapa: etapa }));
+    }
+    if (pl.reactivacion) {
+      // Qualivo Pipeline: se mueve a la etapa equivalente, sin bajar de Cliente Activo.
+      if (op.pipelineStageId === pl.etapas[etapa]) return { ok: true, id: op.id, movido: false };
+      if (op.pipelineStageId === pl.etapas.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
+      const rq = await fetch(GHL_BASE + '/opportunities/' + op.id, {
+        method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: pl.etapas[etapa] })
+      });
+      if (!rq.ok) throw new Error('ghl_opportunity_put ' + rq.status + ' ' + (await rq.text()).slice(0, 200));
+      return { ok: true, id: op.id, movido: true, pipeline: 'qualivo' };
     }
     if (op.pipelineStageId === ETAPAS[etapa]) return { ok: true, id: op.id, movido: false };
     if (op.pipelineStageId === ETAPAS.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
@@ -160,4 +207,4 @@ async function mover(contactId, etapa, crearSi) {
   }
 }
 
-module.exports = { crear: crear, mover: mover, abierto: abierto, sectorCorto: sectorCorto, nombreAnuncio: nombreAnuncio, PIPELINE: PIPELINE, ETAPAS: ETAPAS };
+module.exports = { crear: crear, mover: mover, abierto: abierto, sectorCorto: sectorCorto, nombreAnuncio: nombreAnuncio, esReactivacion: esReactivacion, pipelineDe: pipelineDe, PIPELINE: PIPELINE, ETAPAS: ETAPAS, PIPELINE_QUALIVO: PIPELINE_QUALIVO, ETAPAS_QUALIVO: ETAPAS_QUALIVO };
