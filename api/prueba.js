@@ -12,6 +12,9 @@ const A = require('./_activacion');
 const D = require('./_demo');
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+// Demos preparadas para un negocio concreto (qualivo.io/<negocio>/): la ficha
+// ya está hecha, no se lee la web ni se pide sector. Equipzilla, 23-sep-2026.
+const PRESETS = { equipzilla: require('../content/demo/equipzilla.json') };
 const SECTORES = ['clinicas', 'formacion', 'reformas', 'asesorias', 'otro'];
 const DESDE = parseInt(process.env.DEMO_DESDE || '9', 10);
 const HASTA = parseInt(process.env.DEMO_HASTA || '21', 10);
@@ -49,12 +52,13 @@ module.exports = async function handler(req, res) {
   const b = req.body || {};
   if (b.website) return res.status(200).json({ ok: true, estado: 'llamando' }); // trampa para robots
 
+  const preset = PRESETS[String(b.preset || '').toLowerCase()] || null;
   const d = {
     nombre: String(b.nombre || '').trim().slice(0, 80),
     telefono: telefonoES(b.telefono),
     email: String(b.email || '').trim().toLowerCase().slice(0, 120),
-    web: D.normalizarUrl(String(b.web || '').trim().slice(0, 200)),
-    sector: SECTORES.indexOf(String(b.sector || '')) > -1 ? String(b.sector) : 'otro'
+    web: preset ? D.normalizarUrl(preset.web) : D.normalizarUrl(String(b.web || '').trim().slice(0, 200)),
+    sector: preset ? (preset.sector || 'otro') : (SECTORES.indexOf(String(b.sector || '')) > -1 ? String(b.sector) : 'otro')
   };
   if (d.nombre.length < 2) return res.status(200).json({ ok: false, error: 'nombre' });
   if (!d.telefono) return res.status(200).json({ ok: false, error: 'telefono' });
@@ -77,7 +81,7 @@ module.exports = async function handler(req, res) {
 
   const t = A.ahoraMadrid();
   const enHorario = t.minutos >= DESDE * 60 && t.minutos < HASTA * 60;
-  const tags = ['demo', 'sector-' + d.sector, enHorario ? 'demo-llamada' : 'demo-pendiente', hoy];
+  const tags = ['demo', 'sector-' + d.sector, enHorario ? 'demo-llamada' : 'demo-pendiente', hoy].concat(preset ? ['demo-' + String(b.preset).toLowerCase()] : []);
 
   let contactId = '';
   try { contactId = await upsert(d, tags); } catch (e) { console.error('[prueba] CRM:', e.message); }
@@ -89,7 +93,8 @@ module.exports = async function handler(req, res) {
 
   // La ficha: de su web si se puede leer; si no, del sector (y se dice en el correo).
   let brief;
-  try {
+  if (preset) brief = JSON.parse(JSON.stringify(preset));
+  else try {
     const texto = await D.leerWeb(d.web);
     brief = await D.brief({ web: d.web.replace(/^https?:\/\//, ''), sector: d.sector, nombre: d.nombre, texto: texto });
   } catch (e) {

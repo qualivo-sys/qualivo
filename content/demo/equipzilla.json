@@ -1,0 +1,35 @@
+{
+ "negocio": "Equipzilla",
+ "resumen": "Equipzilla es una plataforma de alquiler, renting, compra y venta de maquinaria pesada que compara ofertas de los alquiladores más cercanos para conseguir el mejor precio. Está dirigida a empresas de construcción, industria y profesionales que necesitan equipos con disponibilidad inmediata, en España y México.",
+ "servicios": [
+  "Alquiler de maquinaria con disponibilidad inmediata y comparativa de precios entre proveedores",
+  "Renting de maquinaria de última generación sin grandes inversiones y con flexibilidad",
+  "Renta de maquinaria en México con cobertura en todo el país",
+  "Compra y venta de maquinaria con proceso seguro y transparente",
+  "ChatBot de asistencia al cliente y gestión de pedidos configurado para cada modelo de negocio",
+  "Servicios integrados en solución SaaS: seguridad, salud de máquinas y facturación",
+  "Catálogo por categorías: miniexcavadoras, excavadoras, dumpers, plataformas elevadoras, carretillas elevadoras, grupos electrógenos, casetas de obra y transpaletas",
+  "Cotización gratuita y asesoramiento de expertos"
+ ],
+ "horario": "",
+ "ubicacion": "",
+ "tono": [
+  "profesional",
+  "cercano",
+  "resolutivo"
+ ],
+ "agente": "Marina",
+ "preguntas": [
+  "¿Tenéis disponible una miniexcavadora para esta semana en mi provincia?",
+  "¿Cuánto cuesta alquilar la máquina y me cobráis algo por el servicio?",
+  "¿El presupuesto final incluye el envío y el montaje?",
+  "¿Sabré quién es el alquilador que me suministra la máquina?"
+ ],
+ "gancho": "Equipzilla compara por ti los precios de los alquiladores más cercanos y te pasa la mejor oferta, con cotización gratuita y sin coste por el servicio de comparación.",
+ "fuente": "web",
+ "sector": "otro",
+ "web": "equipzilla.com",
+ "tipoCliente": "cliente",
+ "tipoCita": "llamada con un asesor para cerrar el presupuesto",
+ "pronunciacion": "e-kip-zi-la"
+}
