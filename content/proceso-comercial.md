@@ -113,3 +113,36 @@ reenganche no escriben a esos contactos: si uno de ellos escribe, se avisa a
 Maikel con el hilo y él contesta o aprueba el texto. Lo que sí sale sin preguntar: los
 mensajes cortos del playbook (recordatorios de cita, respuestas del agente,
 cierres de un no, propuesta de nueva hora, tandas ya aprobadas).
+
+## 5. Cliente que dice que sí en la reunión (Maikel, 23-sep)
+
+Cuando un cliente cierra de palabra en la propia reunión (o justo después),
+el trabajo se prepara ya, pero nada se manda solo.
+
+- **Se prepara en el momento** (no se espera a otro día): correo de
+  confirmación, contrato y primera factura, a partir de las plantillas
+  (`content/plantillas/plantilla-email-cierre-piloto.md` y
+  `plantilla-contrato-prestacion-servicios.md`), con los datos reales del
+  cliente (nombre, NIF, domicilio, precio pactado, día de arranque) y los
+  cuatro pilares ajustados a lo hablado en la reunión.
+- **Carpeta de Drive del cliente**: se crea dentro de la carpeta madre de
+  Qualivo (id `12DS7xlxxcqYOsCEEOxvgImeFjaBZMldj`), con una copia de
+  «Plantilla — Brief de arranque (Qualivo)» renombrada y compartida como
+  «cualquiera con el enlace puede editar», para que el cliente pueda subir
+  material antes del arranque sin que Maikel tenga que darle acceso a mano.
+- **Factura**: se emite con Quipu (cuenta de Maikel; credenciales de la app en
+  el scratchpad, nunca en el repo). Mientras no esté verificada la integración
+  por API, se hace desde el panel de Quipu como siempre.
+- **Nunca se manda nada solo.** El correo, el contrato y la factura se enseñan
+  a Maikel (aquí en el chat o como borrador) y solo salen cuando dice «ok»,
+  igual que cualquier otro correo con precio. Esto no cambia aunque el texto
+  venga de una plantilla ya aprobada antes: cada cliente se revisa suelto.
+- **Ningún dato de cliente (nombre, NIF, domicilio, correo, teléfono, precio
+  cerrado) se sube a este repositorio**, que es público: las plantillas
+  llevan campos `{{ASÍ}}` sin rellenar; el documento ya relleno vive en Drive
+  o se pega en el chat.
+- **Sin plantillas todavía**: contrato de prestación de servicios y correo
+  de cierre, nacidos del cierre de Al Milímetro (23-sep). Carpeta de
+  Drive con brief y materiales, nacida también de Al Milímetro. Factura por
+  API de Quipu: pendiente, falta confirmar el flujo de autenticación (ver
+  nota en el chat del 23-sep).
