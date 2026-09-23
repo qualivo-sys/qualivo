@@ -48,6 +48,32 @@ function relativo(d) {
   return dd === hoy ? 'hoy' : dd === man ? 'mañana' : '';
 }
 
+// Hora de una cita de GHL como Date. Ojo: /contacts/{id}/appointments devuelve
+// «2026-09-28 12:00:00» sin zona, en hora de Madrid (la zona de la location),
+// mientras que /calendars/events y /calendars/events/appointments/{id} la dan
+// en ISO con desfase. Node leía la primera como UTC y la confirmación salía
+// con dos horas de más (Renato: 14:00 en vez de 12:00, 22-sep). Aquí se
+// interpreta siempre en hora de Madrid cuando no trae zona.
+function desfaseMadridMin(d) {
+  const p = new Intl.DateTimeFormat('en-US', { timeZone: ZONA, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    .formatToParts(d).reduce(function (a, x) { a[x.type] = x.value; return a; }, {});
+  const comoUTC = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+  return Math.round((comoUTC - d.getTime()) / 60000);
+}
+function fechaGHL(v) {
+  if (!v) return null;
+  if (v instanceof Date) return v;
+  const s = String(v).trim();
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?(?:\.\d+)?$/);
+  if (m) {
+    const bruto = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +(m[6] || 0));
+    const d1 = new Date(bruto - desfaseMadridMin(new Date(bruto)) * 60000);
+    return new Date(bruto - desfaseMadridMin(d1) * 60000);
+  }
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+}
+
 // El enlace de la videollamada de ESA cita (campo address o meetingLocation en
 // GHL). Cada cita tiene su propia sala de Meet: el calendario de GHL la crea
 // sola (ubicación «Google Meet» del miembro del equipo).
@@ -83,7 +109,7 @@ async function confirmarCita(o) {
     if (A.tiene(c, 'act-cita-confirmada')) return { ok: true, repetida: true, hecho: hecho };
     if (A.tiene(c, 'act-baja')) return { ok: false, motivo: 'baja', hecho: hecho };
 
-    const inicio = o.inicio ? new Date(o.inicio) : null;
+    const inicio = fechaGHL(o.inicio);
     const f = inicio && !isNaN(inicio.getTime()) ? partesFecha(inicio) : { dia: '', hora: '' };
     const cuando = inicio && !isNaN(inicio.getTime()) ? relativo(inicio) : '';
     let enlace = o.enlace || enlaceDe(o.evento);
@@ -186,9 +212,13 @@ async function primeraCita(contactId) {
     const d = await r.json().catch(function () { return {}; });
     const vivas = (d.events || d.appointments || []).filter(function (e) {
       return !/cancelled|noshow|invalid/i.test(String(e.appointmentStatus || ''));
+    }).map(function (e) {
+      // Se devuelve con la hora en ISO real para que nadie la vuelva a leer como UTC.
+      const ini = fechaGHL(e.startTime), fin = fechaGHL(e.endTime);
+      return Object.assign({}, e, { startTime: ini ? ini.toISOString() : e.startTime, endTime: fin ? fin.toISOString() : e.endTime });
     }).sort(function (a, b) { return Date.parse(a.startTime) - Date.parse(b.startTime); });
     return vivas.length ? vivas[0] : null;
   } catch (e) { return null; }
 }
 
-module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, SIN_ENLACE: SIN_ENLACE };
+module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, SIN_ENLACE: SIN_ENLACE, fechaGHL: fechaGHL };

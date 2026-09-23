@@ -153,7 +153,7 @@ async function vuelta(modo, opciones) {
     const objetivo = modo === 'vispera' ? claveDia(new Date(Date.now() + 24 * 3600 * 1000)) : hoy;
     const ini = modo === 'vispera' ? Date.now() + 2 * 3600 * 1000 : Date.now() - 15 * 60000;
     const fin = Date.now() + 48 * 3600 * 1000;
-    const citas = (await citasEntre(ini, fin)).filter(function (e) { return claveDia(new Date(Date.parse(e.startTime))) === objetivo; });
+    const citas = (await citasEntre(ini, fin)).filter(function (e) { return claveDia(CITA.fechaGHL(e.startTime) || new Date(0)) === objetivo; });
     resumen.citas = citas.length;
 
     const porContacto = {};
@@ -161,7 +161,7 @@ async function vuelta(modo, opciones) {
       if (porContacto[ev.contactId]) continue; // dos citas el mismo día: un recordatorio
       porContacto[ev.contactId] = true;
       if (resumen.enviados >= MAX_ENVIOS) break;
-      const inicio = new Date(Date.parse(ev.startTime));
+      const inicio = CITA.fechaGHL(ev.startTime) || new Date(NaN);
       const etiqueta = (modo === 'vispera' ? 'rec-visp-' : 'rec-dia-') + objetivo;
       const fila = { contacto: ev.contactId, hora: horaDe(inicio), titulo: ev.title || '' };
       try {
