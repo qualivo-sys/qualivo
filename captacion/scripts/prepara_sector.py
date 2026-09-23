@@ -11,7 +11,7 @@
 # clinica con quince sedes no es una empresa de 5 a 50 personas y ademas tiene
 # su propio departamento de marketing. Las excluyo por nombre conocido y por
 # dominios que aparecen muchas veces en la propia extraccion.
-import json, os, re, ssl, time, urllib.request
+import html, json, os, re, ssl, time, urllib.request
 import concurrent.futures as cf
 from collections import Counter
 
@@ -34,6 +34,30 @@ CADENA = re.compile(
 ROL_MALO = re.compile(r"^(no-?reply|noreply|postmaster|webmaster|abuse|privacy|"
                       r"rgpd|lopd|protecciondedatos|newsletter|mailer)@", re.I)
 
+# Buzones genericos. No se tiran, pero van los ultimos, y por que:
+#
+# Medido el 23-sep sobre los 329 envios de las cuatro puertas de Maps:
+#   genericos (info@, contacto@, recepcion@...)  163 envios · 11 rebotes · 6,7%
+#   con nombre de persona                        166 envios ·  1 rebote  · 0,6%
+#
+# Once veces peor. Y lo estabamos eligiendo a proposito sin querer: la linea
+# de abajo hacia sorted(propios)[0], o sea orden alfabetico, y el alfabeto
+# pone "administracion@" y "contacto@" por delante de "nuria@". Se escogia el
+# peor buzon de cada web de forma sistematica.
+#
+# Asesorias era 73% genericos y reboto al 22,7%, lo que obligo a pausarla.
+# Formacion es 94% personales y lleva 80 envios con cero rebotes.
+GENERICO = re.compile(r"^(info|contacto|contacte|hola|admin|administracio[nó]|"
+                      r"recepcio[nó]|clinica|cl[ií]nica|cita|citas|comercial|"
+                      r"ventas|general|correo|mail|buzon|oficina|secretaria|"
+                      r"atencion|atencioncliente|consultas|asesoria|gestoria)@",
+                      re.I)
+
+
+def rango(e):
+    """Ordena candidatos: primero el que parece una persona."""
+    return (1 if GENERICO.match(e) else 0, len(e), e)
+
 PISTAS = [
     ("meta_ads", r"connect\.facebook\.net|fbq\s*\(|facebook\.com/tr\?"),
     ("google_ads", r"googleadservices|gtag/js\?id=AW-"),
@@ -50,6 +74,31 @@ PISTAS = [
     ("formulario", r"<form[^>]*|wpcf7|gravityform|elementor-form|hbspt\.forms"),
 ]
 CORREO = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+# Restos de HTML que se pegan por delante del correo cuando no hay espacio
+# entre la entidad y la direccion: "&nbsp;info@x.es" sale como "nbspinfo@x.es"
+# y ">info@x.es" como "u003einfo@x.es". Aparecieron el 23-sep al ampliar
+# el rastreo a /equipo y /nosotros, que llevan mas marcado que /contacto.
+# No llego ninguna a una campana, pero con un prefijo de mas la direccion no
+# existe y el correo rebota.
+# Solo se quitan los restos que NO pueden ser el principio de un nombre real.
+# "gt", "lt", "amp", "quot" y "shy" quedan fuera a proposito: gtalon@,
+# ltorres@, amparo@ y quotient@ son direcciones perfectamente normales y al
+# incluirlas esta limpieza convertia gtalon@ en alon@. Se rompian correos
+# buenos para arreglar cinco malos, que es peor que el problema.
+PEGOTE = re.compile(r"^(?:nbsp|zwnj|zwsp|ensp|emsp|thinsp|"
+                    r"u00[0-9a-fA-F]{2}|#\d{2,5};?)+", re.I)
+
+
+def despega(e):
+    """Quita entidades HTML pegadas por delante y normaliza."""
+    e = html.unescape(e or "").strip().lower()
+    e = re.sub(r"^[\s.,;:<>()\[\]\"'\\/]+", "", e)
+    previo = None
+    while previo != e:
+        previo = e
+        e = PEGOTE.sub("", e)
+    return e.strip(" .,;:")
 BASURA = re.compile(r"@(sentry|wix|wordpress|example|domain|godaddy|squarespace|"
                     r"shopify|jquery|gstatic|googleapis|w3\.org|schema\.org)|"
                     r"\.(png|jpg|jpeg|gif|webp|svg|css|js)$", re.I)
@@ -79,17 +128,21 @@ def mira(r):
             continue
         texto += h
         for e in CORREO.findall(h):
-            e = e.strip(".").lower()
-            if BASURA.search(e) or ROL_MALO.match(e) or len(e) > 70:
+            e = despega(e)
+            if not e or BASURA.search(e) or ROL_MALO.match(e) or len(e) > 70:
+                continue
+            if not CORREO.fullmatch(e):
                 continue
             hall.add(e)
         if hall and pag:
             break
     dom = r["dominio"]
     propios = [e for e in hall if e.split("@")[-1].endswith(dom)]
-    elegido = (sorted(propios) or sorted(hall) or [""])[0]
+    orden = sorted(propios, key=rango) or sorted(hall, key=rango) or [""]
+    elegido = orden[0]
     senales = [k for k, p in PISTAS if re.search(p, texto, re.I)]
-    return {**r, "email": elegido, "otros": sorted(hall - {elegido})[:2],
+    return {**r, "email": elegido, "generico": bool(GENERICO.match(elegido)),
+            "otros": [e for e in orden[1:3]],
             "senales": senales, "vivo": True}
 
 
