@@ -16,7 +16,7 @@
 |---|---|---|---|---|---|
 | Mar 22 | **Carrusel** (IG + documento LinkedIn) | «Casi 7×» · contestar en la primera hora | HBR 2011, 2.241 empresas; caso propio del lunes | Guardar + pregunta (conversación) | v4: Maikel prefirió el carrusel para hoy (22-sep, mediodía). Lámina 5 solo con la llamada de Raquel |
 | Mié 23 | **Post de una imagen** (IG + LinkedIn) | Sin humo · «Lo barato es llamar. Lo caro es saber cuándo colgar» | 24 llamadas, 3 citas, 3 × 118 s con locución (bitácora 21-sep) | Conversación | Imagen lista. A Maikel no le convence: se rehace o se cambia por otra antes del miércoles |
-| Mié 23 | **Newsletter** · capítulo 1 | «24 llamadas, 3 citas y dos minutos con una operadora» | Bitácora 21-sep, Notion Llamadas | Diagnóstico | `content/newsletter/2026-09-23.md`, revisada (nota 7, cambios aplicados) |
+| Jue 24 | **Newsletter** · capítulo 1 | «24 llamadas, 3 citas y dos minutos con una operadora» | Bitácora 21-sep, Notion Llamadas | Diagnóstico | `content/newsletter/2026-09-24.md`, revisada (nota 7, cambios aplicados) |
 | Jue 24 | **Vídeo a cámara** (reel + LinkedIn) | «Le pedí a un agente que repasara mi CRM. Encontró 34.500 € parados» | CRM propio, 10-sep: 25 de 30, 34.500 €, 15 entre 57 y 63 días | Recurso: «escribe FUGA» | Guion abajo, revisado (nota 7, cambios aplicados) |
 | Jue 24 | Blog (ya publicado hoy) | Presupuestos sin respuesta | Los mismos del vídeo | Diagnóstico | `/blog/presupuestos-sin-respuesta/`, publicado 22-sep |
 | Vie 25 | **Post de texto** (LinkedIn) + la misma idea en una imagen (IG) | «Mi agente llamó seis minutos después del plantón» | 18-sep: cita 12:00, llamada 12:06 (59 s), WhatsApp a los 3 min | Conversación | Texto en `plan-semana-39-contenido.md` (jueves) y en la serie por etapa (6 · Reunión) |
@@ -114,7 +114,7 @@ horas, responde en el comentario «te lo mando esta noche» y lo manda esa noche
 
 | Qué | Cuándo | Quién | Cómo |
 |---|---|---|---|
-| Newsletter capítulo 1 | Miércoles 23, 8:30 | Maikel | Newsletter nativa de LinkedIn. A los leads sin cita, correo individual desde Gmail entre 10:00 y 12:00 (ver `content/newsletter/2026-09-23.md`) |
+| Newsletter capítulo 1 | Jueves 24, 8:30 | Maikel | Newsletter nativa de LinkedIn. A los leads sin cita, correo individual desde Gmail entre 10:00 y 12:00 (ver `content/newsletter/2026-09-24.md`) |
 | Pieza del día | 9:00 (IG y LinkedIn el mismo día) | Maikel desde su perfil | Texto y imagen listos para pegar; no se programa desde GHL mientras la pausa siga |
 | Comentarios | Dos pasadas: a las 2 horas de publicar y a las 20:00 | Maikel (yo dejo la respuesta propuesta en el diario si hay una pregunta difícil) | Responder con una pregunta de vuelta, no con un enlace |
 | Quien escribe «FUGA» | En las 24 horas siguientes | Maikel, a mano | Mensaje directo con las siete preguntas de `content/recursos/antes-de-gastar-mas.md` en texto, sin PDF, sin enlace a registro. Y una pregunta: «¿cuál de las siete te ha salido peor?» |
