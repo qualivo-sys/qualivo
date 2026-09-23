@@ -428,3 +428,22 @@ demostración no lleva el fallo dentro (el fallo va al diario y a la newsletter)
 - Jueves: capítulo 1 de la newsletter (ya escrito) y el vídeo a cámara del
   CRM; diario «Agentizando mi propia empresa» en LinkedIn con el «¿eres una
   máquina?» contado como regla nueva.
+
+### Miércoles 23 · mediodía · el Master Reviewer revisa el artículo y la pieza del día
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-23.md`.
+Artículo: nota 6, PUBLICAR CON CAMBIOS, nueve críticos aplicados en caliente.
+Pieza del día: nota 7, tres críticos aplicados y la imagen rehecha (sin
+rótulos «bandera roja / verde», cabecera «lo que hacía · lo que hago ahora»).
+Lo que enseñó: (1) el brief de la semana suma 4 plantones en la tabla y dice 5
+en el total; el de la clínica (22-sep, 16:00, movido al día siguiente) faltaba
+en la fila. Lo he puesto en la tabla del artículo y **Maikel tiene que
+confirmar el recuento**. (2) La fuente dice «citas de leads de pago: 9», no que
+las nueve las cerrara la IA: ahora dice «mi sistema cerró 9 citas». (3) Lo que
+está en prueba (WhatsApp con dos huecos, confirmación la víspera con hueco que
+se libera) iba contado como si ya funcionara; ahora va como prueba. (4) La
+llamada de plantón salió bien el 18 y mal el 22 (llamada en frío, 12 s): las
+dos caras están en el artículo y en el post. Regla que anoto: lo que el brief
+marca «para discutir» no se cuenta como hecho, ni en pasado ni en presente.
+Filas nuevas en Notion: el artículo (Publicada, v2) y la bandera roja (En
+revisión, v2).
