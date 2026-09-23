@@ -22,7 +22,7 @@ const ENTREV = new Set(['entrevistado', 'entrevistada', 'entrevista-realizada'])
 const AGEND = new Set(['calligence: éxito', 'llamada-agendada']);
 
 /** Columna destino según etiquetas y columna actual. null = no tocar. */
-export function target(tags, cur) {
+export function target(tags, cur, ctx = {}) {
   const t = new Set((tags || []).map((x) => String(x).toLowerCase()));
   const lvl = ACTIVE[cur] || 0;                       // 0 = columna inactiva
   const has = (s) => [...s].some((x) => t.has(x));
@@ -37,7 +37,26 @@ export function target(tags, cur) {
   if (has(AGEND) && lvl <= 1) return cur === 'Llamada agendada' ? null : 'Llamada agendada';
   if (has(INV) && lvl <= 1) return cur === 'Inválido' ? null : 'Inválido';
   if (t.has('ilocalizable') && lvl <= 1) return cur === 'Ilocalizable' ? null : 'Ilocalizable';
+  // Documento: "Lead manual" es solo para leads de Instagram/referidos subidos a mano. Los de pago que
+  // acabaron ahí (antigua columna "Leads llamados") vuelven al circuito: viejos sin resultado → Ilocalizable.
+  if ((cur === 'Leads manual' || cur === 'Lead manual') && ctx.paid) return (ctx.ageDays > 30) ? 'Ilocalizable' : 'Nuevo lead (IA)';
   return null;
+}
+
+/* ---------- Etiqueta ↔ columna en sentido inverso (tarjetas movidas a mano) + motivo pendiente ---------- */
+const MOTIVOS = new Set(['no interesa precio', 'no interesa presencial', 'no interesa otro momento', 'no interesa en otro momento', 'no interesa matrícula en otro centro', 'calligence: no interesado']);
+/** Devuelve { add:[], remove:[] } de etiquetas de contacto que deben ajustarse según la columna actual. */
+export function tagFixes(tags, cur) {
+  const t = new Set((tags || []).map((x) => String(x).toLowerCase()));
+  const add = [], remove = [];
+  if (cur === 'Alumna matriculada' && !t.has('venta')) add.push('venta');
+  if (cur === 'Entrevistado' && !['entrevistado', 'entrevistada', 'entrevista-realizada'].some((x) => t.has(x))) add.push('entrevista-realizada');
+  if (cur === 'Baja' && !t.has('baja')) add.push('baja');
+  if (cur === 'Entrev. nula' && !t.has('entrevista nula')) add.push('entrevista nula');
+  const tieneMotivo = [...MOTIVOS].some((x) => t.has(x));
+  if (cur === 'No interesa' && !tieneMotivo && !t.has('motivo pendiente')) add.push('motivo pendiente');
+  if (t.has('motivo pendiente') && (cur !== 'No interesa' || tieneMotivo)) remove.push('motivo pendiente');
+  return { add, remove };
 }
 
 /**
@@ -54,13 +73,21 @@ export async function runSync(opts = {}) {
   if (opts.stage && name2id[opts.stage]) url += `&pipeline_stage_id=${name2id[opts.stage]}`;
   const opps = []; let guard = 0;
   while (url && guard < 400 && left()) { const d = await api('GET', url); opps.push(...(d.opportunities || [])); url = (d.meta && d.meta.nextPageUrl) || null; guard++; }
-  const moves = []; const counts = {};
+  const moves = []; const counts = {}; const tagOps = []; const tagCounts = {};
   for (const o of opps) {
     const cur = id2name[o.pipelineStageId] || '?';
-    const to = target((o.contact && o.contact.tags) || [], cur);
-    if (!to || !name2id[to]) continue;
-    moves.push({ id: o.id, name: o.name, from: cur, to });
-    counts[`${cur} → ${to}`] = (counts[`${cur} → ${to}`] || 0) + 1;
+    const tags = (o.contact && o.contact.tags) || [];
+    const src = (o.source || '').toLowerCase();
+    const paid = /meta|facebook|google|landing/.test(src) || tags.map((x) => String(x).toLowerCase()).includes('paid');
+    const ageDays = o.createdAt ? (Date.now() - Date.parse(o.createdAt)) / 864e5 : 0;
+    const to = target(tags, cur, { paid, ageDays });
+    if (to && name2id[to]) { moves.push({ id: o.id, name: o.name, from: cur, to }); counts[`${cur} → ${to}`] = (counts[`${cur} → ${to}`] || 0) + 1; }
+    const fix = tagFixes(tags, to && name2id[to] ? to : cur);
+    if ((fix.add.length || fix.remove.length) && o.contactId) {
+      tagOps.push({ contactId: o.contactId, ...fix });
+      fix.add.forEach((x) => { tagCounts[`+${x}`] = (tagCounts[`+${x}`] || 0) + 1; });
+      fix.remove.forEach((x) => { tagCounts[`-${x}`] = (tagCounts[`-${x}`] || 0) + 1; });
+    }
   }
   let done = 0, errors = 0;
   if (apply) {
@@ -73,7 +100,22 @@ export async function runSync(opts = {}) {
       await new Promise((r) => setTimeout(r, 120));
     }
   }
-  return { at: new Date().toISOString(), ms: Date.now() - t0, apply, stage: opts.stage || 'todas', scanned: opps.length, pending: moves.length, applied: done, errors, remaining: Math.max(0, moves.length - done), counts };
+  // Ajustes de etiquetas (sentido inverso + motivo pendiente), también en lotes y dentro del presupuesto.
+  let tagsDone = 0, tagErrors = 0;
+  if (apply) {
+    const conc = opts.concurrency || 6; const todo = tagOps.slice(0, max);
+    for (let i = 0; i < todo.length && left(); i += conc) {
+      const batch = todo.slice(i, i + conc);
+      const res = await Promise.allSettled(batch.map(async (op) => {
+        if (op.add.length) await api('POST', `/contacts/${op.contactId}/tags`, { tags: op.add });
+        if (op.remove.length) await api('DELETE', `/contacts/${op.contactId}/tags`, { tags: op.remove });
+      }));
+      res.forEach((r) => { if (r.status === 'fulfilled') tagsDone++; else { tagErrors++; console.error('sync tag error', String(r.reason).slice(0, 120)); } });
+      await new Promise((r) => setTimeout(r, 120));
+    }
+  }
+  return { at: new Date().toISOString(), ms: Date.now() - t0, apply, stage: opts.stage || 'todas', scanned: opps.length, pending: moves.length, applied: done, errors, remaining: Math.max(0, moves.length - done), counts,
+    tagsPending: tagOps.length, tagsApplied: tagsDone, tagErrors, tagCounts };
 }
 
 /* ---------- Modo por columna (para pasadas manuales): mismas reglas, solo una etapa ---------- */
