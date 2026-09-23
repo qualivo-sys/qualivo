@@ -112,6 +112,7 @@ function tipoFuga(fuga) {
   const f = String(fuga || '').toLowerCase();
   if (/anuncio|captaci/.test(f)) return 'captacion';
   if (/seguimiento|presup/.test(f)) return 'seguimiento';
+  if (/respuesta|tiempo/.test(f)) return 'respuesta';
   return 'nolose';
 }
 function ultimoMensaje(datos) {
@@ -124,6 +125,8 @@ function ultimoMensaje(datos) {
     medio = 'Comentabas que se te escapa en la captación. Eso tiene dos caras: sacar más de lo que ya te llega (recomendaciones, gente que preguntó y no volvió) y que te encuentre gente de tu zona que todavía no sabe que existes.';
   } else if (tipo === 'captacion') {
     medio = 'Comentabas que se te escapa en los anuncios y la captación. Trabajamos mucho con ' + v.empresas + ' y muchas veces el anuncio no es el problema: el problema es no saber qué anuncio trae ' + v.cierre + ' y cuál solo trae curiosos, y que lo que el anuncio ya ha pagado se pierde si se tarda en contestar.';
+  } else if (tipo === 'respuesta') {
+    medio = 'Comentabas que se os escapa en el tiempo de respuesta, y con ' + v.empresas + ' es de lo que más cuesta: quien pide ' + v.peticion + ' suele preguntar en varios sitios y se queda con el primero que le contesta. Y ' + v.duda + '.';
   } else if (tipo === 'seguimiento') {
     medio = 'Comentabas que se os escapa en el seguimiento y los presupuestos. Trabajamos mucho con ' + v.empresas + ' y suele pasar lo mismo: el problema no es conseguir más ' + v.clientes + ', sino el recorrido desde que alguien pide ' + v.peticion + '. Quién le responde y cuánto tarda, cómo se consigue el siguiente paso, y quién le vuelve a escribir si se lo piensa.';
   } else {
