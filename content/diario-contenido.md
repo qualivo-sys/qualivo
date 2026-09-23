@@ -360,3 +360,71 @@ láminas en el CDN de GHL, post creado. Es la primera pieza publicada en redes
 desde la pausa del 9-sep. LinkedIn sigue parado. Regla nueva: las credenciales
 se piden a Maikel en la sesión y viven en el cuaderno de la sesión, nunca en el
 repositorio.
+
+## Miércoles 23 de septiembre de 2026
+
+### Lo que pasó ayer después del cierre
+El carrusel «Casi 7×» salió en Instagram (@maikel.echevarria) a mediodía por
+el Social Planner de GHL; esta mañana consta como publicado. Es la primera
+pieza en redes desde la pausa del 9-sep. Maikel dejó dos reglas nuevas: fuera
+los lemas que suenan a máquina («sin humo» y parecidos), y el carrusel de
+demostración no lleva el fallo dentro (el fallo va al diario y a la newsletter).
+
+### Publicado
+- **Blog:** https://qualivo.io/blog/cliente-no-se-presenta-a-la-cita/ · «El
+  cliente no se presenta a la cita: por qué pasa y qué hacer en los diez
+  minutos siguientes». Dato propio: semana del 18 al 22 (20 contactos de
+  anuncios, 9 citas, 5 plantones, 1 reunión con propuesta) del brief del
+  recorrido que dejó el agente de operaciones; el plantón del 18-sep con la
+  llamada de las 12:06; el estudio del BMJ Open. La hipótesis «el plantón es
+  de diseño» va marcada como hipótesis. Tarjeta, sitemap, llms.txt y registro.
+- **Reapuntado:** `/blog/seguimiento-comercial/`. Los dos últimos párrafos y
+  el cierre: un solo botón al diagnóstico (antes dos, uno a `/#contacto`),
+  con el dato del CRM propio y el enlace al artículo de presupuestos.
+
+### Borradores (pausa vigente)
+- Miércoles, bandera roja por fuga (reunión):
+  `content/borradores/2026-09-23-bandera-roja-cita.md` con el texto de
+  LinkedIn, el pie de Instagram y la ficha; imagen
+  `content/infografias/2026-09-23/bandera-roja-cita.png` (5 de 9, tres pares
+  rojo/verde). Enlaza con el artículo de hoy en el primer comentario.
+- Newsletter capítulo 1 movida al jueves 24 (`content/newsletter/2026-09-24.md`),
+  como dice la rutina. Sin cambios de texto salvo la fecha y una línea para
+  enlazar el carrusel del martes.
+
+### Decisiones que le pido a Maikel (con recomendación)
+1. **Publicar la bandera roja de hoy en LinkedIn.** Recomiendo sí: es la
+   pieza que mejor casa con el artículo, y LinkedIn lleva dos semanas sin
+   nada. Si dice que sí, la subo yo (ya tengo las credenciales de GHL en la
+   sesión) o le paso el texto para su perfil.
+2. **La newsletter del jueves:** levantar la pausa para LinkedIn (newsletter
+   nativa) y confirmar el correo individual a los leads sin cita con la
+   cadencia terminada. Recomiendo las dos cosas.
+3. **La tasa de plantones (5 de 9) en abierto.** Recomiendo publicarla: es el
+   dato propio más honesto de la semana y va con la mejora al lado.
+
+### Descartes
+- Segundo artículo: no, el de plantones es largo.
+- Contar en la pieza del día el «¿eres una máquina?» del 22-sep (Raquel lo
+  negó y la señora colgó). Es una historia buena, pero hoy toca bandera roja y
+  la regla es más aciertos que fallos. Queda para el diario del jueves o la
+  newsletter del capítulo 2, con la regla nueva («sí, soy la asistente de IA
+  de Máikel») como acierto.
+- Newsletter hoy: no, la rutina la fija el jueves.
+
+### Dudas que dejo escritas
+- Dos pruebas anunciadas en el artículo (precio antes de reservar,
+  confirmación la víspera con hueco que se libera) están en el brief como
+  «para discutir», no como aplicadas. El artículo dice «en marcha, sin
+  resultado todavía». Si Maikel no las arranca esta semana, hay que
+  corregir esa frase.
+- El nombre que se ve en el CRM del lead de reformas (constructora) no sale
+  en ninguna pieza; en la tabla del artículo va como «una constructora».
+
+### Hipótesis para mañana
+- Si la bandera roja sale en LinkedIn, el artículo de plantones debería
+  recibir más visitas que el de presupuestos en sus primeras 48 horas, por el
+  enlace en el primer comentario. Se mira el viernes en el ritual.
+- Jueves: capítulo 1 de la newsletter (ya escrito) y el vídeo a cámara del
+  CRM; diario «Agentizando mi propia empresa» en LinkedIn con el «¿eres una
+  máquina?» contado como regla nueva.
