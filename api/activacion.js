@@ -331,6 +331,10 @@ module.exports = async function handler(req, res) {
     try {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
+        // El último (wa3) propone dos huecos reales de la agenda, en palabras.
+        if (paso.tipo === 'wa3') {
+          try { const AG = require('./agendar.js'); datos.huecos = (await AG.huecosLibres(2)).map(function (x) { return AG.enPalabras(x).replace(/^(\S+), (\d+) de \S+, (\d{1,2}:\d{2})$/, '$1 $2 a las $3'); }); } catch (e) { datos.huecos = []; }
+        }
         let texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
         // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
         // el mismo texto dos veces. Se reescribe para esta persona; si no se

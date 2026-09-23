@@ -88,11 +88,60 @@ function whatsapp2(datos) {
     'Si te va mejor por aquí, dime y lo vemos por escrito. Y si prefieres coger hueco tú: ' + AGENDA;
 }
 
-function whatsapp3(datos) {
+// Último WhatsApp de la cadencia (día 4), para quien no ha contestado ni a
+// WhatsApp ni a llamadas. Hasta el 23-sep era «última por mi parte, que no
+// quiero ser pesado» con el enlace de la agenda. Desde el 23-sep (Maikel) es
+// el mensaje que le mandó él a un lead de clínica que no contestaba: «imagino
+// que estarás liado, así que te cuento por aquí lo que hacemos», lo que suele
+// pasar según lo que contestó en «¿dónde se te escapa?», lo que hacemos y la
+// llamada con dos huecos. Plantilla: content/plantillas/plantilla-whatsapp-segun-fuga.md
+const VOCABULARIO = {
+  reformas: { empresas: 'empresas de reformas', peticion: 'presupuesto', paso: 'la visita no se llega a cerrar', duda: 'al que recibe el presupuesto y se lo piensa nadie le vuelve a escribir', cierre: 'obras firmadas', cierreUno: 'una obra con muchas opciones', clientes: 'clientes' },
+  formacion: { empresas: 'empresas de formación', peticion: 'información', paso: 'la clase de prueba o la entrevista no se llega a hacer', duda: 'al que dice «ya te digo» nadie le vuelve a escribir', cierre: 'matrículas', cierreUno: 'un alumno con muchas opciones de matricularse', clientes: 'alumnos' },
+  clinicas: { empresas: 'clínicas', peticion: 'cita', paso: 'la primera visita no se llega a cerrar', duda: 'el paciente que se lleva el presupuesto a casa dice «me lo pienso» y nadie le vuelve a llamar', cierre: 'tratamientos aceptados', cierreUno: 'un paciente con muchas opciones de aceptar', clientes: 'pacientes' },
+  otro: { empresas: 'negocios como el tuyo', peticion: 'información', paso: 'la reunión no se llega a cerrar', duda: 'al que se lo piensa nadie le vuelve a escribir', cierre: 'ventas', cierreUno: 'un cliente con muchas opciones', clientes: 'clientes' }
+};
+function vocabularioDe(sector) {
+  const s = String(sector || '').toLowerCase();
+  if (/reforma|construcci|instalaci/.test(s)) return VOCABULARIO.reformas;
+  if (/formaci|academia|escuela|curso/.test(s)) return VOCABULARIO.formacion;
+  if (/salud|cl[ií]nica|dental|fisio|bienestar/.test(s)) return VOCABULARIO.clinicas;
+  return VOCABULARIO.otro;
+}
+function tipoFuga(fuga) {
+  const f = String(fuga || '').toLowerCase();
+  if (/anuncio|captaci/.test(f)) return 'captacion';
+  if (/seguimiento|presup/.test(f)) return 'seguimiento';
+  return 'nolose';
+}
+function ultimoMensaje(datos) {
   const n = nombreCorto(datos.nombre);
-  return (n ? n + ', última' : 'Última') + ' por mi parte, que no quiero ser pesado.\n\n' +
-    'Si sigue interesándote ver dónde se te está escapando el negocio, el hueco de quince minutos está aquí: ' + AGENDA + '\n\n' +
-    'Y si no es el momento, sin problema.';
+  const v = vocabularioDe(datos.sector);
+  const tipo = tipoFuga(datos.fuga);
+  const sinInversion = /nada|sin/.test(String(datos.inversion || '').toLowerCase());
+  let medio;
+  if (tipo === 'captacion' && sinInversion) {
+    medio = 'Comentabas que se te escapa en la captación. Eso tiene dos caras: sacar más de lo que ya te llega (recomendaciones, gente que preguntó y no volvió) y que te encuentre gente de tu zona que todavía no sabe que existes.';
+  } else if (tipo === 'captacion') {
+    medio = 'Comentabas que se te escapa en los anuncios y la captación. Trabajamos mucho con ' + v.empresas + ' y muchas veces el anuncio no es el problema: el problema es no saber qué anuncio trae ' + v.cierre + ' y cuál solo trae curiosos, y que lo que el anuncio ya ha pagado se pierde si se tarda en contestar.';
+  } else if (tipo === 'seguimiento') {
+    medio = 'Comentabas que se os escapa en el seguimiento y los presupuestos. Trabajamos mucho con ' + v.empresas + ' y suele pasar lo mismo: el problema no es conseguir más ' + v.clientes + ', sino el recorrido desde que alguien pide ' + v.peticion + '. Quién le responde y cuánto tarda, cómo se consigue el siguiente paso, y quién le vuelve a escribir si se lo piensa.';
+  } else {
+    medio = 'En el formulario pusiste que no sabías dónde se te escapa, y es lo más habitual: casi nadie lo tiene medido. Trabajamos mucho con ' + v.empresas + ' y suele estar en uno de estos tres sitios: en lo que se tarda en contestar a quien pide ' + v.peticion + ', en que ' + v.paso + ', o en que ' + v.duda + '.';
+  }
+  const hacemos = (tipo === 'captacion' && sinInversion)
+    ? 'Trabajamos las dos cosas: anuncios sencillos para tu zona, y agentes de IA de WhatsApp y voz que contestan por ti mientras trabajas y te dejan la cita cerrada.'
+    : tipo === 'captacion'
+      ? 'Lo trabajamos por los dos lados: anuncios por tipo de servicio y zona, probando varios mensajes para quedarnos con los que traen ' + v.cierre + ', y agentes de IA de WhatsApp y voz que contestan en minutos, con una puntuación de cada contacto para saber a quién atender primero.'
+      : 'Ese recorrido lo trabajamos y en buena parte lo automatizamos con agentes de IA de WhatsApp y voz. Y con una puntuación de cada contacto: cuando entra ' + v.cierreUno + ', te llega un aviso y le atiendes en ese momento.';
+  const h = (datos.huecos || []).filter(Boolean);
+  const cierre = 'Eso es justo lo que vemos en la llamada: te enseño el recorrido que montaríamos en tu caso, tanto en la captación como en el seguimiento. ' +
+    (h.length >= 2 ? '¿Te va bien el ' + h[0] + ' o el ' + h[1] + '?' : 'Si te encaja, coge tú la hora que mejor te venga: ' + agenda(datos));
+  return (n ? 'Buenas ' + n : 'Buenas') + ', imagino que estarás liado, así que te cuento por aquí lo que hacemos.\n\n' + medio + '\n\n' + hacemos + '\n\n' + cierre;
+}
+
+function whatsapp3(datos) {
+  return ultimoMensaje(datos);
 }
 
 function envoltura(cuerpo) {
@@ -184,4 +233,4 @@ const EMAILS = [
   }
 ];
 
-module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, EMAILS };
+module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, ultimoMensaje, vocabularioDe, tipoFuga, EMAILS };
