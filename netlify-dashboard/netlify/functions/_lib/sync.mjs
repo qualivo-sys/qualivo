@@ -18,7 +18,7 @@ async function api(method, path, body) {
 const ACTIVE = { 'Nuevo lead (IA)': 1, 'Leads manual': 1, 'Lead manual': 1, 'Llamada agendada': 2, 'Entrevistado': 3, 'Alumna matriculada': 4 };
 const NOINT = new Set(['no interesa precio', 'no interesa presencial', 'no interesa otro momento', 'no interesa en otro momento', 'no interesa matrícula en otro centro', 'calligence: no interesado']);
 const INV = new Set(['inválido', 'inválido gratis', 'inválido no corresponde', 'inválido no existe', 'inválido no info', 'invalid-wa', 'calligence: inválido']);
-const ENTREV = new Set(['entrevistado', 'entrevistada', 'entrevista-realizada']);
+const ENTREV = new Set(['entrevista-realizada', 'entrevistada', 'entrevistado']);   // las dos últimas solo durante la migración
 const AGEND = new Set(['calligence: éxito', 'llamada-agendada']);
 
 /** Columna destino según etiquetas y columna actual. null = no tocar. */
@@ -50,7 +50,9 @@ export function tagFixes(tags, cur) {
   const t = new Set((tags || []).map((x) => String(x).toLowerCase()));
   const add = [], remove = [];
   if (cur === 'Alumna matriculada' && !t.has('venta')) add.push('venta');
-  if (cur === 'Entrevistado' && !['entrevistado', 'entrevistada', 'entrevista-realizada'].some((x) => t.has(x))) add.push('entrevista-realizada');
+  if (cur === 'Entrevistado' && !t.has('entrevista-realizada')) add.push('entrevista-realizada');
+  // Unificación (petición del cliente): solo existe "entrevista-realizada"; las antiguas se sustituyen.
+  for (const old of ['entrevistada', 'entrevistado']) if (t.has(old)) { if (!t.has('entrevista-realizada') && !add.includes('entrevista-realizada')) add.push('entrevista-realizada'); remove.push(old); }
   if (cur === 'Baja' && !t.has('baja')) add.push('baja');
   if (cur === 'Entrev. nula' && !t.has('entrevista nula')) add.push('entrevista nula');
   const tieneMotivo = [...MOTIVOS].some((x) => t.has(x));
