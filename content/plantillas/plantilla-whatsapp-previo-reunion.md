@@ -29,7 +29,11 @@ cliente: los campos van entre `{{ }}`.
 - Cuatro bloques cortos como máximo. Es WhatsApp, no una propuesta.
 - «Comentabas…» solo con lo que el lead dijo de verdad (formulario, llamada,
   WhatsApp). Si no dijo nada, ese bloque se construye con lo que sí sabemos.
-- Un hallazgo de su web solo si se ha comprobado. Nunca inventado.
+- Por defecto, sin hallazgos de su web: el mensaje que más gustó (23-sep) no
+  los llevaba. Si alguna vez se usa uno, tiene que estar probado en un
+  navegador de verdad, pulsando. El 23-sep se dio como roto un botón que en
+  el código tenía el enlace vacío pero que un script llevaba bien a contacto:
+  mirar solo el código no basta.
 - Negrita de WhatsApp con un asterisco a cada lado, o sin negrita.
 - Sin «lead», «funnel» ni jerga: alumnos, clientes, pacientes, lo que diga él.
 - Cada mensaje lo aprueba Maikel antes de salir.
