@@ -355,10 +355,22 @@ async function atender(contactId, opciones) {
     if (estado.candado && Date.now() - estado.candado < 120000 && !opciones.simular) {
       return Object.assign(hecho, { accion: 'callar', motivo: 'otro proceso está contestando' });
     }
-    if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: Date.now() }));
+    // Ficha propia: desde el 23-sep cada respuesta del lead llega dos veces
+    // (pasarela y API oficial del 647) y puede disparar dos webhooks en el
+    // mismo segundo. Tras la espera se relee el estado: si la ficha ya no es
+    // la nuestra, otro proceso contesta y este se calla.
+    const ficha = Math.random().toString(36).slice(2, 10);
+    if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: Date.now(), ficha: ficha }));
 
     // Se le da un momento por si sigue escribiendo, y se relee todo.
     if (!opciones.simular) await esperar(ESPERA_MS);
+    if (!opciones.simular) {
+      try {
+        const c2 = await contactoPorId(c.id);
+        const e2 = c2 ? leerEstado(c2) : {};
+        if (e2.ficha && e2.ficha !== ficha) return Object.assign(hecho, { accion: 'callar', motivo: 'otro proceso ya está contestando (entrada repetida)' });
+      } catch (e) { /* si no se puede releer, sigue */ }
+    }
     let mensajes = opciones.mensajes || await A.mensajesDe(c.id);
     const wa = mensajes.filter(function (m) { return A.esWhatsApp(m) && String(m.status || '').toLowerCase() !== 'failed' && String(m.body || '').trim(); });
     const ultimo = wa[wa.length - 1];

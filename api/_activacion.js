@@ -146,8 +146,9 @@ function etiquetaGatewayHoy() {
   const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   return 'gw-' + p.replace(/-/g, '');
 }
-async function enviarPorGateway(contactId, texto) {
+async function enviarPorGateway(contactId, texto, opciones) {
   if (GATEWAY_PAUSA) throw new Error('pasarela en pausa (restricción de WhatsApp, 22-sep)');
+  if (!(opciones && opciones.forzar) && await frenoSinRespuesta(contactId, texto)) throw new Error('frenado: demasiados mensajes sin respuesta');
   const hoy = etiquetaGatewayHoy();
   try {
     const deHoy = await buscarPorEtiqueta(hoy, GATEWAY_MAX_DIA + 1);
@@ -222,9 +223,10 @@ const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
 function saldriaPorGateway() { return GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA; }
 
 async function enviarMensaje(contactId, texto) {
+  if (await frenoSinRespuesta(contactId, texto)) return { canal: 'frenado', estado: 'frenado', id: '' };
   if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA) {
     try {
-      const g = await enviarPorGateway(contactId, texto);
+      const g = await enviarPorGateway(contactId, texto, { forzar: true });
       return { canal: 'gateway', estado: 'enviado', id: (g && (g.messageId || g.msgId)) || '' };
     } catch (err) {
       console.error('[activacion] pasarela falló, pruebo la API oficial:', err && err.message);
@@ -248,7 +250,7 @@ async function enviarMensaje(contactId, texto) {
   }
   // Fuera de la ventana de 24 h (o número que la API oficial no entrega), el
   // mismo texto sale por la pasarela como WhatsApp normal.
-  const g = await enviarPorGateway(contactId, texto);
+  const g = await enviarPorGateway(contactId, texto, { forzar: true });
   return { canal: 'gateway', estado: 'enviado', id: (g && (g.messageId || g.msgId)) || '' };
 }
 
@@ -323,7 +325,69 @@ async function mensajesDe(contactId) {
     const lista = (dm.messages && dm.messages.messages) || dm.messages || [];
     todos.push.apply(todos, Array.isArray(lista) ? lista : []);
   }
-  return todos.sort(function (a, b) { return Date.parse(a.dateAdded || 0) - Date.parse(b.dateAdded || 0); });
+  todos.sort(function (a, b) { return Date.parse(a.dateAdded || 0) - Date.parse(b.dateAdded || 0); });
+  return sinDuplicados(todos);
+}
+
+// Desde el 23-sep el 647 está a la vez en Wazzap (pasarela) y en la API
+// oficial de WhatsApp de GHL: cada mensaje queda registrado dos veces, uno
+// como TYPE_CUSTOM_SMS de la pasarela y otro como TYPE_WHATSAPP con
+// source «app», con uno o dos segundos de diferencia. El lead lo recibe una
+// vez, pero quien lea la conversación (el agente, el reenganche, los
+// recordatorios, los recuentos) la vería doble. Se queda el primero de cada
+// pareja: misma dirección, mismo texto y menos de 90 segundos entre ellos.
+function textoPlano(m) {
+  return String((m && m.body) || '').replace(/✅ Sent from another device ✅/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+function sinDuplicados(lista) {
+  const fuera = [];
+  return lista.filter(function (m) {
+    if (/ACTIVITY/i.test(String(m.messageType || ''))) return true;
+    const t = textoPlano(m); const cuando = Date.parse(m.dateAdded || 0);
+    if (!t) return true;
+    const repe = fuera.some(function (k) { return k.dir === m.direction && k.t === t && Math.abs(k.cuando - cuando) < 90000; });
+    fuera.push({ dir: m.direction, t: t, cuando: cuando });
+    return !repe;
+  });
+}
+
+// Freno (Maikel, 23-sep, tras ver ocho mensajes a un lead que no contestaba):
+// si en las últimas 24 horas le hemos escrito tres veces o más por WhatsApp
+// sin que conteste, no sale un cuarto automático y se avisa a Maikel. La
+// cadencia normal manda dos el primer día; primer mensaje + confirmación +
+// recordatorio son tres. El cuarto es el que sobra.
+const TOPE_SIN_RESPUESTA = parseInt(process.env.TOPE_SIN_RESPUESTA || '3', 10);
+async function seguidosSinRespuesta(contactId) {
+  const ms = await mensajesDe(contactId);
+  const desde = Date.now() - 24 * 3600 * 1000;
+  let n = 0;
+  for (let i = ms.length - 1; i >= 0; i--) {
+    const m = ms[i];
+    if (/ACTIVITY/i.test(String(m.messageType || ''))) continue;
+    if (!/WHATSAPP|SMS/i.test(String(m.messageType || ''))) continue;
+    if (String(m.direction) === 'inbound') break;
+    if (Date.parse(m.dateAdded || 0) < desde) break;
+    if (String(m.status || '').toLowerCase() === 'failed') continue;
+    n++;
+  }
+  return n;
+}
+async function frenoSinRespuesta(contactId, texto) {
+  let n = 0;
+  try { n = await seguidosSinRespuesta(contactId); } catch (e) { return false; }
+  if (n < TOPE_SIN_RESPUESTA) return false;
+  const marca = 'tope-aviso-' + new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).replace(/-/g, '');
+  try {
+    const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() });
+    const c = r.ok ? ((await r.json()).contact || {}) : {};
+    if ((c.tags || []).indexOf(marca) === -1) {
+      await etiquetar(contactId, [marca]);
+      await require('./_aviso.js').movil('FRENADO · ' + (c.firstName || c.contactName || 'lead') + (c.phone ? ' · ' + c.phone : '') +
+        '\nYa lleva ' + n + ' WhatsApp nuestros sin contestar en 24 h. No se le manda este:\n\n' + String(texto || '').slice(0, 400));
+    }
+    await nota(contactId, 'FRENADO: ' + n + ' WhatsApp sin respuesta en 24 h. No salió: ' + String(texto || '').slice(0, 300));
+  } catch (e) { /* el aviso no bloquea */ }
+  return true;
 }
 
 // El fallo del WhatsApp por la ventana de 24 h no siempre llega en los cinco
@@ -470,5 +534,6 @@ async function enviarCorreo(email, asunto, html) {
 module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
-  lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA
+  lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
+  sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta
 };

@@ -11,6 +11,13 @@ quién la fijó. Lo que no está aquí no se hace por defecto.
   se lo pase.
 - Mensajes cortos, una sola pregunta, sin párrafos. Nunca dos mensajes seguidos
   sin respuesta. Nunca más de un mensaje cada cuatro horas al mismo lead.
+- **Freno en código (Maikel, 23-sep, tras ver ocho WhatsApp a un lead que
+  no contestaba, con dos enlaces de Meet distintos en cuatro minutos):** si un
+  contacto ya tiene tres WhatsApp nuestros sin respuesta en las últimas 24 h,
+  no sale un cuarto automático; Maikel recibe un aviso con el texto frenado y
+  queda nota en GHL (`api/_activacion.js`, `frenoSinRespuesta`). Lo que se
+  manda a mano desde el móvil no pasa por el freno: antes de escribir a mano,
+  mirar el hilo. En un plantón, un solo mensaje con un solo enlace.
 - Nada que parezca automatizado desde el 663: nunca más de 30 al día, nunca más
   de 5 seguidos, nunca a la misma hora en punto. Cada respuesta se contesta a
   mano o por el agente de WhatsApp, sin plantilla.
