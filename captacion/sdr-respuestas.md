@@ -1,5 +1,32 @@
 # SDR de respuestas · copiloto (v1, 9 sep 2026)
 
+> ## ⛔ EL PASO 2 NUNCA HA FUNCIONADO (comprobado el 23-sep)
+>
+> El router de n8n tiene **cuatro ejecuciones en toda su vida, las cuatro con
+> error**, la última el 16-sep. El nodo "Avisar agente smartlead-reply" recibe
+> siempre un **401 unauthorized** de `api.anthropic.com`.
+>
+> No es un fallo de configuración que se arregle pegando una URL nueva. El
+> webhook de sesión (`watch_url`) devuelve la URL **y una credencial sellada**,
+> y esa credencial dice literalmente que solo la puede abrir el servicio de
+> artefactos y **no es utilizable fuera de la conversación**. n8n no puede
+> firmar esas peticiones, así que no puede autenticarse contra ese extremo.
+> La arquitectura del paso 2 está montada sobre un mecanismo que no admite un
+> tercero.
+>
+> **Lo que sí funciona y es lo que ha estado sosteniendo el canal:** el barrido
+> horario (`trig_01WicDvQNMvVT7YqUJCaUMj8`). Ha encontrado todas las respuestas
+> de esta semana, incluida la de Dataslayer del 22-sep. Una hora de latencia
+> cumple de sobra la regla de responder en menos de dos horas.
+>
+> Nadie se dio cuenta antes porque el workflow falla en silencio: n8n registra
+> el error y Smartlead da la entrega por buena. Conviene revisar el historial de
+> ejecuciones de cualquier workflow que se dé por vivo, no solo que esté ACTIVO.
+>
+> **Decisión pendiente de Maikel y Automatización:** o se busca un extremo que
+> n8n sí pueda autenticar, o se asume el barrido horario como el mecanismo
+> bueno y se retira el paso 2 en vez de dejarlo fallando.
+
 Agente que responde en tiempo casi real a (a) respuestas de campañas Smartlead
 y (b) radiografías completadas, con el objetivo de llevar al lead a una reunión
 de 15-20 min o a un plan por escrito. Regla madre del cerebro: no se pide
