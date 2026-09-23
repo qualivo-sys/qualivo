@@ -161,6 +161,32 @@ async function metaExtras() {
   return { since, until, ads, regions, adsDetail };
 }
 
+
+/** Nombres de campañas y anuncios de Google Ads (para traducir los IDs que llegan en las UTM {campaignid}/{creative}). Caché 1 h. */
+let GNAMES = { at: 0, ads: {}, campaigns: {} };
+async function googleAdsNames() {
+  if (Date.now() - GNAMES.at < 3600e3) return GNAMES;
+  const dev = process.env.GADS_DEV_TOKEN, cid = (process.env.GADS_CUSTOMER_ID || '').replace(/-/g, '');
+  const login = (process.env.GADS_LOGIN_CUSTOMER_ID || '').replace(/-/g, '');
+  if (!dev || !cid) return GNAMES;
+  const tok = await googleToken(['https://www.googleapis.com/auth/adwords']);
+  if (!tok) return GNAMES;
+  const ver = process.env.GADS_API_VERSION || 'v22';
+  const headers = { authorization: `Bearer ${tok}`, 'developer-token': dev, 'content-type': 'application/json' };
+  if (login) headers['login-customer-id'] = login;
+  const q = async (query) => { const r = await fetch(`https://googleads.googleapis.com/${ver}/customers/${cid}/googleAds:search`, { method: 'POST', headers, body: JSON.stringify({ query }) }); return r.ok ? (await r.json()).results || [] : []; };
+  const ads = {}, campaigns = {};
+  try {
+    (await q('SELECT campaign.id, campaign.name FROM campaign')).forEach((x) => { campaigns[String(x.campaign.id)] = x.campaign.name; });
+    (await q('SELECT ad_group_ad.ad.id, ad_group_ad.ad.name, ad_group_ad.ad.type, ad_group.name, campaign.name FROM ad_group_ad')).forEach((x) => {
+      const ad = x.adGroupAd.ad; const tipo = (ad.type || '').replace(/_/g, ' ').toLowerCase();
+      ads[String(ad.id)] = `${x.adGroup.name} · ${ad.name || tipo || 'anuncio'} (Google)`;
+    });
+    GNAMES = { at: Date.now(), ads, campaigns };
+  } catch { /* sin nombres: se muestran los IDs */ }
+  return GNAMES;
+}
+
 /* ---------- Google Ads en vivo (API v22, cuenta de servicio como usuario de la cuenta) ---------- */
 // Env: GADS_DEV_TOKEN, GADS_CUSTOMER_ID (cuenta cliente), GADS_LOGIN_CUSTOMER_ID (administrador/MCC, opcional).
 function gadsChannel(name, type) {
@@ -391,6 +417,15 @@ async function build() {
     };
   });
 
+  // IDs de Google Ads en las UTM ({campaignid}/{creative}) → nombres legibles
+  try {
+    const gn = await googleAdsNames();
+    rows.forEach((r) => {
+      if (/^\d{6,}$/.test(r.anuncio) && gn.ads[r.anuncio]) r.anuncio = gn.ads[r.anuncio];
+      if (/^\d{6,}$/.test(r.campana) && gn.campaigns[r.campana]) r.campana = gn.campaigns[r.campana];
+    });
+  } catch { /* se quedan los IDs */ }
+
   // Inversión: ventana desde la primera oportunidad (o 2026-05-01) hasta hoy
   const dates = rows.map((r) => r.fecha).filter(Boolean).sort();
   const since = dates.length && dates[0] < '2026-05-01' ? dates[0] : '2026-05-01';
@@ -427,7 +462,7 @@ async function build() {
   return { generatedAt: new Date().toISOString(), etapas: orderNames, coursePrice: COURSE_PRICE, spend, appts, rows, seo, ga4, email, metaExtra };
 }
 
-export { fetchGoogleAdsDaily };
+export { fetchGoogleAdsDaily, googleAdsNames };
 
 export default async (req) => {
   const url = new URL(req.url);
