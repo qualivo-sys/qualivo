@@ -121,15 +121,26 @@ async function enviarWhatsApp(contactId, texto) {
 // («por SMS nunca»); Maikel lo desveló ese día y es la vía para el primer
 // mensaje y las confirmaciones. Los mensajes que salen por aquí aparecen en
 // GHL como TYPE_CUSTOM_SMS con este proveedor.
+//
+// El número conectado a Wazzap cambió el 23-sep: hasta entonces era el móvil
+// personal de Maikel (663); desde el 23-sep es el número oficial del negocio
+// (647), que Maikel conectó él mismo a Wazzap. El proveedor y el código no
+// cambian, solo el número que sale al otro lado.
 const GATEWAY_PROVIDER = '67ad23a0cf352d8f5809f0ca';
 
-// PAUSA DE LA PASARELA (22-sep, 16:20): WhatsApp ha restringido el número
-// personal de Maikel (663). Hasta que él lo levante, nada sale por la pasarela:
-// ni cadencia, ni agente, ni rescates. Poner GATEWAY_PAUSA=0 en Vercel para reanudar.
+// PAUSA DE LA PASARELA (22-sep, 16:20 → 23-sep): WhatsApp restringió el móvil
+// personal de Maikel (663) tras un envío masivo de mensajes iguales. Con el
+// número oficial (647) conectado a Wazzap desde el 23-sep, ese riesgo concreto
+// ya no aplica al número que sale; el tope diario y la regla de «nunca
+// mensajes iguales» se mantienen igual, valen para cualquier número que no
+// pase por la API oficial de Meta. Activar/desactivar con GATEWAY_PAUSA en
+// Vercel (0 = activa; cualquier otro valor, o ausente, = en pausa).
 const GATEWAY_PAUSA = process.env.GATEWAY_PAUSA !== '0';
-// Tope diario de mensajes por la pasarela (el número personal de Maikel). El
-// 21 y el 22 de septiembre salieron unos sesenta en dos días, muchos iguales, y
-// WhatsApp restringió el número. Se cuenta con la etiqueta gw-AAAAMMDD.
+// Tope diario de mensajes por la pasarela. El 21 y el 22 de septiembre
+// salieron unos sesenta en dos días por el número personal, muchos iguales, y
+// WhatsApp lo restringió. El tope se mantiene con el número oficial (647) por
+// el mismo motivo: cualquier número no oficial puede ser restringido si el
+// patrón de envío parece automatizado. Se cuenta con la etiqueta gw-AAAAMMDD.
 const GATEWAY_MAX_DIA = parseInt(process.env.GATEWAY_MAX_DIA || '20', 10);
 function etiquetaGatewayHoy() {
   const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
