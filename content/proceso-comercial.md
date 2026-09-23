@@ -141,8 +141,12 @@ el trabajo se prepara ya, pero nada se manda solo.
   cerrado) se sube a este repositorio**, que es público: las plantillas
   llevan campos `{{ASÍ}}` sin rellenar; el documento ya relleno vive en Drive
   o se pega en el chat.
-- **Sin plantillas todavía**: contrato de prestación de servicios y correo
-  de cierre, nacidos del cierre de Al Milímetro (23-sep). Carpeta de
-  Drive con brief y materiales, nacida también de Al Milímetro. Factura por
-  API de Quipu: pendiente, falta confirmar el flujo de autenticación (ver
-  nota en el chat del 23-sep).
+- **Cliente de la API de Quipu en código desde el 23-sep**:
+  `api/_quipu.js` (obtenerToken, buscarContacto, crearContacto,
+  listarSeriesDeNumeracion, crearFactura). Auth probada y funcionando. Falta
+  `QUIPU_OWNER_SLUG` (el de la cuenta de Maikel) para poder llamar a
+  cualquier endpoint que no sea el de token. Cada factura creada por la API
+  consume un número real de la serie elegida: no existe un modo "solo
+  borrador", así que nunca se llama a `crearFactura` sin que Maikel haya
+  visto y aprobado antes el JSON exacto (contacto, concepto, importe, IVA,
+  retención).
