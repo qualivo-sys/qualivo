@@ -1,42 +1,48 @@
 # Revisión · Qualivo Master Reviewer · piezas de plantones (24-sep-2026)
 
-> Tres piezas: carrusel «Te han dado plantón», guía que se manda a quien comenta
-> GUÍA y newsletter propuesta para el 25-sep. Revisadas en su estado del commit
-> `18ad91e` (24-sep, 10:28), que ya aplica la regla de Maikel del 24-sep: **la
-> tasa de plantones propia («5 de 9») no se publica**. Cada cifra contrastada
-> con `content/brief-recorrido-semana-38.md` (secciones 3-5) y con
-> `captacion/agente-llamadas/bitacora-raquel.md` (18-sep tarde y 22-sep).
-> Formato del prompt del 22-sep. La tabla resumen está al final.
+> Tres piezas: carrusel «Te han dado plantón» (8 láminas y pie de foto), guía
+> que se manda a quien comenta GUÍA y newsletter propuesta para el 25-sep.
+> Revisadas en su estado del commit `766395d` (24-sep, 10:37). Formato del
+> prompt del 22-sep, guía de voz (con la regla del 22-sep: nada de lemas ni
+> rótulos que suenen a máquina) y guía de carruseles. La tabla resumen está al
+> final.
 
-**Lo que dicen las fuentes, tal cual, para no repetirlo tres veces:**
+## Lo que dicen las fuentes, tal cual
 
-- Brief §3: «Citas de leads de pago: 9; plantones: 5». Semana del 18 al 22 de
-  septiembre. Ya no aparece en ninguna pieza (regla del 24-sep); queda como
-  contexto de «varios clientes no aparecieron» y «no rescató ninguna».
-- Brief §1.4.5: «Recordatorio a las 9:00 del día con "esto es lo que veremos", y la
-  víspera a las 18:00 si se reservó con dos o más días». Brief §4.4: «el
-  recordatorio de las 9:00 no las rescata».
-- Brief §1.5 y §6: precio antes de reservar y confirmación la víspera con hueco
-  que se libera son **decisiones pendientes de Maikel** (Proceso v2), no pruebas
-  en marcha.
-- Bitácora 18-sep tarde: «Grupo Rumy 12:06 (59 s): plantón de la reunión de las
-  12:00, Raquel llama con guion de plantón, **coge una persona de la oficina** y
-  dice que avisa al encargado; tres minutos después **escriben** por WhatsApp
-  pidiendo reprogramar». No hay cita literal de lo que dijo Raquel.
-- Bitácora 22-sep: «1 colgó a los 12 s (David, tras el plantón de las 10:00)» y,
-  en propuestas: «tras un plantón, no llamar en frío (David colgó a los 12 s)».
-  **No consta la hora de esa llamada.**
-- «47 correos, 12 llamadas, 3 reuniones y dos incendios»: hipérbole de Maikel,
-  sin fuente. Se acepta como recurso literario donde se lea como escena
-  inventada.
-
-Nombres de persona o empresa en las tres piezas: ninguno. Bien. (El README del
-carrusel cita «9 citas, 5 plantones» como fuente; es interno y no se publica,
-pero conviene que diga que la cifra no sale.)
+- **Brief §1.4.5:** «Recordatorio a las 9:00 del día con "esto es lo que
+  veremos", y la víspera a las 18:00 si se reservó con dos o más días».
+  **§1.5:** «Recordatorio de cita sin confirmación ni liberación de hueco».
+  **§4.4:** «el recordatorio de las 9:00 no las rescata».
+- **Brief §3:** «Citas de leads de pago: 9; plantones: 5», semana del 18 al 22
+  de septiembre. **Regla de Maikel del 24-sep: no se publica.** Comprobado: no
+  aparece en ningún texto publicable de las tres piezas (sí en el README del
+  carrusel y en la nota interna de fuentes de la newsletter, que no se publican).
+- **Brief §1.5, §5.1 y §6:** precio antes de reservar y confirmación la víspera
+  con hueco que se libera son **hipótesis y decisiones pendientes de Maikel**
+  («sí o no»), no pruebas en marcha.
+- **Bitácora, 18-sep tarde:** «Grupo Rumy 12:06 (59 s): plantón de la reunión
+  de las 12:00, Raquel llama con guion de plantón, **coge una persona de la
+  oficina** y dice que avisa al encargado; tres minutos después **escriben**
+  por WhatsApp pidiendo reprogramar». No hay cita literal de lo que dijo Raquel.
+  No dice si la llamada salió sola o la lanzó Maikel. La cita se había reservado
+  ese mismo día a las 09:35.
+- **Bitácora, 22-sep:** «1 colgó a los 12 s (David, tras el plantón de las
+  10:00)»; en propuestas, no aplicado: «tras un plantón, no llamar en frío
+  (David colgó a los 12 s): mejor WhatsApp con hueco nuevo». **No consta la
+  hora de esa llamada.**
+- **«te he esperado»** existe, pero es el asunto del primer correo de la
+  secuencia de plantón (`api/_secuencias.js`, `noshow-1`, días 0, 2 y 6), no
+  una frase de la llamada.
+- **«47 correos, 12 llamadas, 3 reuniones y dos incendios»:** hipérbole de
+  Maikel. Se acepta; se señala dónde puede leerse como cifra real.
+- **Nombres de persona o empresa:** ninguno en las tres piezas (ni Rumy, ni
+  David, ni Raquel). Bien. Solo @maikel.echevarria, Maikel y qualivo.io.
 
 ---
 
-# PIEZA 1 · Carrusel «Te han dado plantón» (8 láminas + pie de foto)
+# PIEZA 1 · Carrusel «Te han dado plantón» (8 láminas y pie de foto)
+
+`content/carruseles/2026-09-24-plantones/`
 
 # Nota Global (1-10)
 
@@ -44,504 +50,578 @@ pero conviene que diga que la cifra no sale.)
 
 # Resumen Ejecutivo
 
-Buena pieza de persona, no de agencia: escena reconocible, cinco motivos con
-arreglo, dato propio con horas (12:00 → 12:06 → tres minutos) y una sola acción
-(comenta GUÍA). El esqueleto de Maikel funciona y no se toca. Lo que falla está
-en las frases: el pie de foto dice más de lo que dice la bitácora (cita literal
-inventada y «me escribió» en singular cuando quien cogió fue alguien de la
-oficina), la lámina 8 lista siete motivos cuando la pieza promete cinco, y hay
-un «lo importante no es X: es Y» prohibido por la guía. En diseño: la portada ya
-tiene la imagen y funciona; las láminas 2-8 doblan el máximo de palabras de la
-guía de carruseles, ninguna tiene imagen ni gráfico, y varios cuerpos están por
-debajo de los 34 px. Al quitar «5 de 9», la portada pierde su cifra: ahora vive
-de la imagen y de la pregunta, y aguanta.
+El esqueleto de Maikel funciona: portada con tensión, cinco motivos con su
+arreglo, un sexto que da la vuelta («el problema eres tú, después del
+plantón»), resumen y una sola acción (comenta GUÍA). Es útil, se reconoce en
+un segundo y lleva a una conversación, que es el primer paso hacia un
+diagnóstico. El tono es de persona, no de agencia, casi en todas las láminas.
+
+Falla en tres cosas, todas de frase: (1) el caso del 18-sep está contado en el
+pie de foto con más de lo que dice la bitácora (la IA «le llamó» y él «me
+escribió», cuando cogió la oficina; en LinkedIn, además, una cita literal que
+no existe); (2) la lámina 4 promete que un recordatorio recupera reuniones,
+cuando nuestro propio recordatorio no rescató ninguna; (3) la lámina 8 usa la
+construcción prohibida «no es X: es Y» y va sobrecargada. Además, todas las
+láminas de la 2 a la 8 pasan de 40 palabras (66 a 99) y el cuadro «Qué hacer»
+está a 32 px.
 
 # Lo Mejor
 
-- Portada: la imagen (gorro de fiesta, tarta, mirando el reloj, pantalla con el
-  avatar vacío) cuenta el plantón sin leer. Titular en el 30 % superior, caja
-  con la escena y el giro: «Antes de pensar "qué poca seriedad", hay otra
-  pregunta: ¿por qué no ha venido?».
-- Lámina 7: el dato propio con horas (12:00, 12:06, tres minutos) coincide con la
-  bitácora palabra por palabra en lo que afirma («me escribieron», plural). Es
-  la lámina que vende el sistema sin nombrarlo.
-- Lámina 3: «No vendas la reunión. Vende lo que se lleva de la reunión.» Frase de
-  persona con criterio; se guarda.
-- Un solo CTA, con mecánica de conversación (comentario → mensaje directo). Es el
-  camino más corto de un carrusel a una conversación, y de ahí a un diagnóstico.
+- Portada: «Te han dado plantón.» Una escena que cualquier dueño ha vivido, en
+  tres palabras, sin lema.
+- El giro de la lámina 7: después de cinco motivos del cliente, el sexto es lo
+  que haces tú. Es el punto «hostia, esto tiene sentido» y lleva al dato propio.
+- El dato propio de la lámina 7 está bien contado y es verdad: «plantón a las
+  12:00, llamada a las 12:06, y a los tres minutos me escribieron pidiendo otra
+  hora» (plural, como la bitácora).
+- Frases con voz: «Vale. ¿Y para qué?», «El lunes estaba motivado. El viernes
+  ya no tanto», «Puede que no cancele. Puede que simplemente no aparezca».
+- CTA único y coherente con lo que se entrega (la guía existe y trae lo que
+  promete).
+- Continuidad visual impecable: barra de progreso, numeración 1/8 a 8/8,
+  «Pasa →» en todas menos la última, paleta y rejilla de casa.
 
 # Lo Más Débil
 
-- El pie de foto pone en boca de Raquel una frase que no está en la bitácora y
-  atribuye la respuesta al cliente cuando cogió otra persona.
-- Lámina 8: el resumen tiene siete puntos («El proceso era un lío», «Nadie hizo
-  seguimiento») y el CTA dice «los cinco motivos». El lector que cuenta ve que la
-  pieza se contradice.
-- Densidad: 64-99 palabras por lámina (2-8) frente a las 40 de la guía. Es copy
-  de Maikel y la estructura se respeta, pero en el móvil las láminas 7 y 8 se
-  leen con esfuerzo.
-- Ninguna lámina de la 2 a la 8 tiene imagen, gráfico o pantalla. Un tercio del
-  lienzo queda vacío en la 2, la 5 y la 6.
+- La lámina 4 dice lo contrario de lo que nos pasó con el recordatorio.
+- El pie de foto cambia quién cogió y quién escribió el 18-sep.
+- La lámina 8: 99 palabras, título a 72 px, cuerpo a 31 px, siete motivos en
+  una lista cuando el CTA habla de cinco, y «El proceso era un lío», que no
+  aparece en ninguna lámina anterior.
+- Ninguna lámina de la 2 a la 8 tiene imagen ni gráfico (regla 5 de la guía de
+  carruseles). Es un carrusel de texto.
 
 # Problemas Críticos Detectados
 
-**C1 · Pie de foto (Instagram) — dice más que la fuente.**
-Frase que falla: «A las 12:06 le llamó mi comercial IA con otro guion, y a los
-tres minutos me escribió pidiendo otra hora.»
-Por qué: la bitácora dice que cogió una persona de la oficina y que «escriben»
-(la empresa), no que el cliente escribiera él.
-Frase propuesta: «A las 12:06 le llamó mi comercial IA con guion de plantón.
-Cogió alguien de su oficina, y a los tres minutos me escribieron pidiendo otra
-hora.»
+**C1 · Pie de foto de Instagram, caso del 18-sep (claim que la fuente no dice).**
+La bitácora dice que cogió una persona de la oficina y que tres minutos después
+«escriben». El pie dice que la IA «le llamó» a él y que él «me escribió».
+«Un cliente» además sugiere que era cliente de pago.
 
-**C2 · Pie de foto (LinkedIn) — cita literal que la fuente no contiene.**
-Frase que falla: «A las 12:06 le llamó mi comercial IA con otro guion: "te he
-esperado, ¿te viene mejor otro día?". A los tres minutos me escribió pidiendo
-otra hora.»
-Por qué: no hay transcripción citada en la bitácora; además, quien cogió no era
-el cliente, así que «te he esperado» no pudo decirse a él. Y «me escribió»,
-igual que C1.
-Frase propuesta: «A las 12:06 le llamó mi comercial IA con guion de plantón, no
-de venta. Cogió alguien de su oficina y a los tres minutos me escribieron
-pidiendo otra hora.»
+- Falla: «El 18 de septiembre un cliente no apareció a las 12:00. A las 12:06
+  le llamó mi comercial IA con otro guion, y a los tres minutos me escribió
+  pidiendo otra hora.»
+- Propuesta: «El 18 de septiembre una empresa que había reservado conmigo no
+  apareció a las 12:00. A las 12:06 mi comercial IA llamó a su oficina con un
+  guion de plantón. Cogió un compañero, y a los tres minutos me escribieron
+  pidiendo otra hora.»
 
-**C3 · Lámina 8 — la pieza se contradice (siete puntos, «cinco motivos»).**
-Frase que falla: la línea «El proceso era un lío» de la lista.
-Por qué: no corresponde a ninguna lámina y es la conclusión del párrafo de
-abajo («Está en el proceso»), no un motivo. Con ella, la lista tiene siete
-puntos y el CTA promete cinco.
-Frase propuesta: quitar esa línea. Quedan los cinco motivos más «Nadie hizo
-seguimiento», que es la lámina 7. Cambio de una línea, no de esqueleto.
+**C2 · Pie de foto de LinkedIn, cita literal inventada y mismo cambio de
+sujeto.** «te he esperado, ¿te viene mejor otro día?» no está en la bitácora;
+«te he esperado» es el asunto del correo de plantón, no lo que dijo la llamada.
+Y no se lo pudo decir a él: cogió la oficina.
 
-**C4 · Lámina 8 — patrón «no se trata de X sino de Y», prohibido en la guía de
-voz y en la de carruseles.**
-Frase que falla: «Lo importante no es que nadie te dé plantón: es entender por
-qué pasa y montar un sistema que lo reduzca.»
-Frase propuesta: «Plantones vas a tener siempre. Lo que puedes hacer es entender
-por qué pasan y montar un sistema que los reduzca.»
+- Falla: «El 18 de septiembre un cliente no apareció a las 12:00. A las 12:06
+  le llamó mi comercial IA con otro guion: «te he esperado, ¿te viene mejor
+  otro día?». A los tres minutos me escribió pidiendo otra hora.»
+- Propuesta: «El 18 de septiembre una empresa que había reservado conmigo no
+  apareció a las 12:00. A las 12:06 mi comercial IA llamó a su oficina con un
+  guion de plantón, no de venta. Cogió un compañero, y a los tres minutos me
+  escribieron pidiendo otra hora.»
+
+**C3 · Lámina 4, claim sin respaldo que contradice el dato de casa.** El
+recordatorio de las 9:00 «no las rescata» (brief §4.4) y la guía dice que un
+recordatorio que no pide nada «confirma las citas que iban a pasar de todas
+formas». Las dos piezas se contradicen.
+
+- Falla: «Un recordatorio pequeño recupera reuniones que dabas por perdidas.»
+- Propuesta: «Un recordatorio que pide respuesta te avisa a tiempo de quién no
+  va a venir.»
+
+**C4 · Lámina 8, construcción prohibida («no se trata de X sino de Y»,
+guía de carruseles §6) que además suena a plantilla.**
+
+- Falla: «Lo importante no es que nadie te dé plantón: es entender por qué
+  pasa y montar un sistema que lo reduzca.»
+- Propuesta: «Plantones va a haber siempre. Lo que sí puedes es saber por qué
+  pasan y montar un sistema que los reduzca.»
 
 # Qué Eliminaría
 
-- Rótulo «Y HAY OTRO PROBLEMA» encima del titular de la lámina 7. El titular ya lo
-  dice. Regla de Maikel del 22-sep: nada encima del titular.
-- Rótulo «¿QUIERES MENOS PLANTONES?» en la caja de la lámina 8: es un titular de
-  agencia sobre un CTA que ya se entiende solo. Dejar el texto y «Comenta GUÍA».
-- Lámina 6, «Cuanta menos incertidumbre, menos fricción.»: vocabulario de
-  consultora. Prueba del bar: no. Sustituir por «Cuantas menos dudas le queden,
-  más fácil es que aparezca.»
-- Lámina 4, «Y si tiene sentido, la pregunta»: «si tiene sentido» no dice nada.
-  «Y la pregunta que exige respuesta: "¿sigues disponible para la llamada?"».
+- Lámina 7: el rótulo «Y hay otro problema» encima del titular (regla del 22-sep:
+  sin etiquetas de sección). Que lo diga el titular: «Y cuando te da plantón,
+  no haces nada.»
+- Lámina 8: «El proceso era un lío» de la lista. No es un motivo que se haya
+  contado; es la conclusión, y ya la dice el párrafo. Deja la lista en seis
+  (los cinco y «Nadie hizo seguimiento») para que cuadre con la lámina 7.
+- Lámina 6: «Cuanta menos incertidumbre, menos fricción.» Suena a consultora
+  («fricción») y no añade nada a la frase anterior. Si se quiere cerrar con
+  algo: «Cuantas menos dudas lleve, más fácil que venga.»
+- Lámina 1: el `<br>` del cuadro deja «hora, no aparece.» colgando; con la foto
+  nueva conviene revisar el corte.
 
 # Qué Simplificaría
 
-- «MOTIVO 1» a «MOTIVO 5»: el número ayuda a contar y da progresión; el rótulo
-  es lo que la regla del 22-sep quita. Opción sin cambiar esqueleto: solo el
-  número («1», «2»…) en naranja pequeño, sin la palabra «motivo».
-- Lámina 2: la escena de reformas tiene dos frases que dicen lo mismo («Tiene
-  obras, llamadas, clientes. Y tu reunión desaparece de su radar»). Se puede
-  dejar una.
-- Lámina 7, caja: «No para perseguirle. Para saber qué ha pasado y ponérselo
-  fácil para volver a reservar.» Se entiende, pero a 32 px y con 86 palabras en
-  la lámina, esta segunda frase es la que sobra si hay que recortar.
+Todas las láminas de la 2 a la 8 pasan de 40 palabras (L2 71, L3 79, L4 70,
+L5 66, L6 64, L7 86, L8 99). Sin tocar el esqueleto, recortes de frase:
+
+- L2: «Y tu reunión desaparece de su radar.» → «Y tu reunión se le va de la
+  cabeza.» (menos tópico). «una reunión de cuarenta y cinco» → «una reunión de
+  cuarenta y cinco minutos» (hoy se lee cortado).
+- L3: «la reunión no vale lo suficiente como para aparecer» → «no le compensa
+  aparecer».
+- L4: «Y si tiene sentido, la pregunta:» → «Y una pregunta que pida respuesta:».
+- L7: «Todavía puedes recuperar esa reunión. A mí me pasó el 18 de septiembre:»
+  → «Todavía estás a tiempo. El 18 de septiembre:».
+- L8: con C4 y sin «El proceso era un lío» baja a unas 80 palabras. Para
+  llegar a 40, quitar el párrafo entero y dejar título, lista y CTA: la lista
+  ya es el resumen y el CTA ya dice «revisar tu proceso».
+- Numeración: «Motivo 1» encima del titular es otro rótulo. Si se quiere
+  mantener el número (es parte del esqueleto de Maikel), dentro del titular:
+  «1. No tenía tiempo.»
 
 # Qué Reforzaría
 
-- Lámina 7 es la prueba: merece una pantalla (un WhatsApp con hora 12:09 y «¿lo
-  podemos mover?», imitando la interfaz real, sin nombre) o al menos las tres
-  horas en grande (12:00 · 12:06 · 12:09). Ahora es la única lámina con dato y es
-  la que menos se ve.
-- Coherencia entre protocolo y caso: la caja dice «A los cinco minutos, WhatsApp.
-  A los quince, llamada» y el caso real cuenta una llamada a los seis minutos.
-  No es falso, pero un lector atento lo nota. Una frase lo arregla: «A los cinco
-  minutos, WhatsApp. Si no contesta, llamada antes del cuarto de hora.»
-- Portada: sin la cifra, el «a mí también» ha desaparecido de la lámina 1 y del
-  pie de foto; el lector no sabe que Maikel habla de sí mismo hasta la lámina 7.
-  Una frase corta lo recupera sin dar la tasa: «A mí me pasó la semana pasada.»
+- **El protocolo con la prueba.** La lámina 7 recomienda «A los cinco minutos,
+  WhatsApp. A los quince, llamada», y el caso que se cuenta justo encima es una
+  llamada a los seis minutos que acabó en WhatsApp. Quien lo lea atento lo
+  verá. Propuesta de frase: «A los cinco minutos, llamada con guion de plantón.
+  Si no coge, WhatsApp. Después, seguimiento que salga solo.» (O al revés, pero
+  que el caso y la regla digan lo mismo.)
+- **Lámina 7 como pantalla.** Es la única prueba propia del carrusel y va en
+  texto. Una línea de tiempo simple («12:00 plantón · 12:06 llamada · 3 min
+  después, WhatsApp pidiendo otra hora») la haría la lámina que se guarda. Sin
+  poner «12:09»: la fuente dice «tres minutos después», no la hora.
+- **Pie de Instagram:** «con otro guion» no se entiende sin contexto. «Con un
+  guion de plantón, no de venta» (ya en C1) lo explica en cuatro palabras.
+- **LinkedIn:** «tenía dudas que no me contó» → «que no te contó» (el resto del
+  texto habla en segunda persona).
 
 # Riesgos
 
-- «47 correos, 12 llamadas, 3 reuniones y dos incendios» (lámina 4): en la
-  lámina se lee como escena inventada («Reservó el lunes…»), y así está bien.
-  Ahora que «5 de 9» no está, es la única lámina con cifras además de la 7,
-  que sí es real. Riesgo bajo; no tocar salvo que Maikel quiera evitar la
-  mezcla.
-- La guía se manda a mano; si el carrusel funciona, el cuello de botella es
-  Maikel contestando comentarios. Tener la guía en un texto listo para pegar.
-- Rótulos «Motivo N» y «Qué hacer» en todas las láminas: en conjunto suenan a
-  plantilla. No es crítico porque la estructura es de Maikel, pero es lo primero
-  que delata máquina.
-- La cara de la portada es generada. Que no se parezca a nadie conocido; si
-  Maikel quiere, la próxima con él mismo, que es lo que más para el scroll en un
-  perfil personal.
+- Publicar C1 o C2 tal cual: si alguien de esa empresa lo lee, sabe que no fue
+  así. Y la cita literal no la dijo nadie.
+- La lámina 4 contra la guía: quien comente GUÍA recibe un documento que dice
+  lo contrario que el carrusel.
+- «47 correos, 12 llamadas, 3 reuniones»: en cifras, con número exacto,
+  puede leerse como dato. En la lámina 4 lo salva «y dos incendios» (se ve que
+  es broma). Se acepta; si se quiere blindar, en letras: «cuarenta correos,
+  doce llamadas, tres reuniones y dos incendios».
+- El caso del 18-sep era una cita reservada a las 09:35 para las 12:00. Si se
+  usa en otra pieza para ilustrar «acorta el tiempo» (lámina 5), no sirve:
+  había dos horas y media y aun así no vino.
+- Etiquetas de sección en todas las láminas («Motivo N», «Qué hacer», «Y hay
+  otro problema») contra la regla del 22-sep. Si son de Maikel, que lo decida
+  él; «Y hay otro problema» es la que más se nota.
 
 # Impacto Esperado
 
-Camino a la North Star: comentario GUÍA → mensaje directo → guía con enlace a
-qualivo.io/diagnostico → conversación → diagnóstico. Es un carrusel de
-conversación, no de alcance. Con los cambios críticos, la credibilidad del dato
-propio queda a salvo (que es lo que sostiene todo lo demás). Sin ellos, el día
-que alguien pida oír la llamada, no cuadra.
+Buen carrusel para guardar y comentar: es una lista útil con arreglo concreto
+por punto. El CTA «comenta GUÍA» abre conversaciones por mensaje directo, que
+es la primera métrica que mueve pilotos. El paso siguiente (guía → diagnóstico
+de quince minutos) está en la guía, no en el carrusel, y está bien así. No
+pongo número de comentarios esperado: no hay dato propio de carruseles con CTA
+de palabra clave para compararlo.
 
 # Revisión de Diseño (portada, jerarquía visual, ritmo, legibilidad)
 
-- **Portada:** funciona. Titular Anton a 150 px en el tercio superior, «PLANTÓN.»
-  en naranja sobre la pared clara, imagen que se entiende sin leer (gorro,
-  tarta, reloj, pantalla vacía). Caja oscura abajo con 26 palabras a 31 px: por
-  debajo del mínimo de 34; hay sitio para subirla. «Pasa →» en pastilla negra
-  y «QUALIVO.IO» en naranja: legibles sobre la foto. La barra de progreso y el
-  número «1/8» no se ven sobre la imagen; poco importa en la portada.
-- **Jerarquía (2-8):** correcta y constante: número arriba a la derecha, barra
-  naranja que crece, titular Anton, cuerpo Space Grotesk, caja negra para «qué
-  hacer», «Pasa →» y firma. Continuidad visual bien resuelta.
-- **Ritmo:** plano. Las láminas 2 a 6 son la misma composición; la 7 debería
-  romper (es la prueba) y no rompe. La 8 va cargada: siete puntos, un párrafo y
-  una caja.
-- **Legibilidad:** cuerpo a 34 px (láminas 2-7) cumple; caja «Qué hacer» a 32 px
-  no; lámina 8 cuerpo a 31 px y caja a 30 px, no. Palabras por lámina: 26, 71,
-  79, 70, 66, 64, 86, 99. La guía dice 40. En la 2, la 5 y la 6 sobra un tercio
-  del lienzo vacío abajo que podría llevar un gráfico y permitir subir el cuerpo.
-- **Imagen por lámina:** ninguna de la 2 a la 8. La guía pide una por lámina que
-  se entienda sin leer. Mínimo: la 7 con pantalla o reloj.
+- **Portada (solo encaje del texto, la foto se cambia):** titular a 150 px en
+  el tercio superior, se lee en un segundo. El cuadro negro de abajo (31 px)
+  tapa la mitad inferior de la imagen, justo donde estaba la pantalla vacía de
+  la videollamada, que es lo que cuenta la escena. Con la foto nueva, el
+  elemento clave (pantalla vacía, reloj) tiene que quedar entre el titular y el
+  cuadro, no debajo. Subir el cuadro a 34 px si cabe.
+- **Jerarquía:** titular 82 px en Anton, cuerpo 34 px, cuadro «Qué hacer» a
+  32 px (por debajo del mínimo de 34 de la guía). Lámina 8 a 72 / 31 / 30 px:
+  la más importante es la más apretada.
+- **Aire:** en las láminas 2 a 6 quedan unos 250 px vacíos abajo. Hay sitio de
+  sobra para subir el cuadro a 34-36 px sin tocar el texto.
+- **Imagen o gráfico por lámina:** ninguno de la 2 a la 8 (regla 5). Mínimo, la
+  línea de tiempo de la lámina 7.
+- **Ritmo y continuidad:** barra que crece, numeración, «Pasa →», misma
+  rejilla. Cumple la regla 8. La lista con «✗» de la lámina 8 se lee bien,
+  aunque la cruz sugiere «error del cliente», que es justo lo que el titular
+  niega; un número (1-6) casa mejor con el mensaje.
 
 # Revisión de Copy (hook, claridad, credibilidad, CTA)
 
-- **Hook:** bueno. Escena + giro. Sin la cifra pierde algo de golpe; la imagen
-  lo compensa.
-- **Claridad:** se entiende en cinco segundos cada lámina; la 8 no, por el
-  recuento.
-- **Credibilidad:** láminas correctas; el pie de foto la compromete (C1, C2).
-  Fuera de eso, ningún claim va más allá de la bitácora o el brief.
-- **CTA:** uno solo, claro, con mecánica. «Comenta GUÍA y te la paso» está bien;
-  en LinkedIn «te la mando por mensaje» también.
-- **Voz:** de persona, salvo «Lo importante no es… es» (C4), «incertidumbre /
-  fricción» y los rótulos.
+- **Hook:** bueno. Escena reconocible y una pregunta («¿por qué no ha
+  venido?») que abre el circuito.
+- **Claridad:** alta. Cada motivo, un problema y un arreglo. Se entiende sin
+  releer.
+- **Credibilidad:** el dato propio de la lámina 7 es exacto. Pierden
+  credibilidad C1, C2 y C3.
+- **Frases que suenan a máquina o a agencia:** «Lo importante no es...: es...»
+  (L8, C4), «Cuanta menos incertidumbre, menos fricción» (L6), «desaparece de su
+  radar» (L2, tópico). En el límite, pero con voz: «No vendas la reunión. Vende
+  lo que se lleva de la reunión» (L3). Se queda.
+- **CTA:** una sola acción, clara, coherente con lo que se entrega. Bien.
+- **Pie de foto:** estructura correcta (gancho, un párrafo, una acción, cuatro
+  etiquetas en Instagram, ninguna en LinkedIn). Solo fallan C1 y C2.
 
 # Revisión Estratégica (alineación con Qualivo, alineación con North Star)
 
-Alineada: habla de proceso y sistema, no de herramientas; el agente aparece como
-consecuencia («a los tres minutos me escribieron»), no como producto. El caso
-propio enseña una fuga real de la casa (cita → reunión) y eso es lo que Qualivo
-vende que sabe ver. Acerca a pilotos por la vía correcta: conversación primero.
+- Habla de fugas sin decir «fuga»: la cita que se pierde entre «me interesa» y
+  la reunión, y la que se pierde después del plantón. Es exactamente el tramo
+  que el brief señala como roto (§4.4). Bien alineado.
+- No cae en «IA genérica»: la IA sale una vez, como quien hizo la llamada, y
+  con honestidad («mi comercial IA»).
+- North Star: comenta GUÍA → conversación por mensaje directo → guía con
+  enlace al diagnóstico. Es un camino corto hacia diagnósticos. Falta medirlo
+  (ver experimento).
+- Aviso interno: nuestro recordatorio de las 9:00 ya dice «esto es lo que
+  veremos» (el arreglo del motivo 2) y aun así no rescató los plantones. Lo que
+  nos falta es lo de la lámina 4 (una pregunta que pida respuesta). Buen
+  argumento para la decisión pendiente de Maikel, no para la pieza.
 
 # Versión Mejorada del Hook
 
-Portada, sin tocar la estructura ni dar la tasa: «Reservó la reunión. Parecía
-interesado. Y cuando llega la hora, no aparece. **A mí me pasó la semana
-pasada.** Antes de pensar "qué poca seriedad", hay otra pregunta: ¿por qué no ha
-venido?»
+Titular igual («Te han dado plantón.»). Cuadro de portada:
+
+> Reservó. Parecía interesado. Y a la hora, no aparece.
+> Casi nunca es mala educación. Son cinco motivos, y el sexto depende de ti.
 
 # Próximo Experimento Recomendado
 
-Medir el camino completo, no los guardados: comentarios GUÍA → guías enviadas →
-clics a /diagnostico → diagnósticos reservados. Si en una semana hay más de diez
-GUÍA y cero diagnósticos, la guía está mal enlazada, no el carrusel. Segundo:
-probar la lámina 7 con pantalla de WhatsApp contra la actual solo texto, en
-LinkedIn y en Instagram por separado.
+Publicar con los cambios y contar, durante siete días: comentarios GUÍA →
+guías mandadas → respuestas a la guía → diagnósticos reservados desde ese
+mensaje. Si hay comentarios pero ningún diagnóstico, el problema está en la
+guía, no en el carrusel. Anotarlo en la fila de Notion de la pieza.
 
-# Veredicto
-
-**PUBLICAR CON CAMBIOS** (C1-C4; C1 y C2 son de pie de foto y se corrigen en un
-minuto; C3 y C4 son una línea cada una en la lámina 8).
+# Veredicto: PUBLICAR CON CAMBIOS
 
 ---
 
-# PIEZA 2 · Guía «menos plantones en tus reuniones» (recurso GUÍA)
+# PIEZA 2 · Guía «menos plantones» (recurso para quien comenta GUÍA)
+
+`content/recursos/guia-plantones.md`
 
 # Nota Global (1-10)
 
-**8**
+**7**
 
 # Resumen Ejecutivo
 
-Es lo que promete: corta, concreta, con los dos números que hay que medir, los
-cinco motivos con «qué revisar», el protocolo y el caso propio. Suena a Maikel.
-Un problema: presenta como prueba en marcha («Lo que estoy probando ahora») lo
-que el brief tiene como decisión pendiente. La cifra «5 de 9» ya está fuera
-(regla del 24-sep), y con ella se fue el «esta semana» que habría envejecido
-mal en un recurso que se manda durante semanas.
+Cumple lo que promete el carrusel: los cinco motivos, qué revisar en cada uno
+y el protocolo de después. Añade dos cosas que el carrusel no tiene y que la
+hacen valer la pena: «mide dos números» y el precio antes de reservar. El
+cierre al diagnóstico de quince minutos es el correcto (el diagnóstico dura
+quince minutos en `diagnostico/index.html`) y el «Lo leo yo» suena a persona.
+
+Tiene tres frases que dicen más que las fuentes: que Maikel la está aplicando
+entera en su empresa, que «no estaba mirando el calendario» el 18-sep y que ya
+está probando el precio antes de reservar y la confirmación con hueco que se
+libera. Las dos últimas son decisiones pendientes suyas, según el brief.
 
 # Lo Mejor
 
-- «Casi nadie tiene el segundo. Es el que dice si tienes sistema o suerte.» Frase
-  de criterio, no de plantilla.
-- «Sin precio, reservar es curiosidad, no decisión.» Lo mismo.
-- El protocolo cabe en tres líneas y tiene horas. Es accionable mañana.
-- El caso del 18-sep está contado exactamente como la bitácora: llamada 12:06,
-  «me escribieron» en plural, sin cita inventada.
+- «Mide dos números», con el segundo («cuántas llamaste antes de que pasara una
+  hora») como el que separa sistema de suerte. Es lo más útil de las tres
+  piezas.
+- Cada motivo con una pregunta incómoda («¿Tu enlace dice "reserva una llamada
+  para conocer nuestros servicios"?») y un «Revisa:» concreto.
+- El protocolo de después (día 0, 2 y 6) está respaldado: es la secuencia
+  `noshow` que ya existe en `api/_secuencias.js`.
+- El caso del 18-sep en su versión exacta: «plantón a las 12:00, llamada a las
+  12:06 y a los tres minutos me escribieron pidiendo otra hora».
+- Ningún nombre de persona ni empresa.
 
 # Lo Más Débil
 
-- «Esta es la guía que prometí en el carrusel»: también la va a pedir gente
-  desde la newsletter («responde con la palabra GUÍA»). Para ellos, la frase no
-  cuadra.
-- Cierra con dos acciones (diagnóstico y «responde a este mensaje»). La guía de
-  copy dice una.
-- Protocolo «minuto 15: llamada» frente al caso real «llamada a las 12:06». No es
-  falso, pero conviene alinear.
-- «La estoy aplicando en mi propia empresa.» se queda sin apoyo tras quitar la
-  cifra; sigue siendo verdad (llamadas de plantón del 18 y del 23 en la
-  bitácora), pero ahora es una afirmación sin ejemplo hasta el final del texto.
+- Las tres frases que prometen más de lo que hay (críticos).
+- El protocolo dice «Minuto 15: llamada» y el caso que lo prueba es una
+  llamada al minuto 6.
+- Formato: `##` y `**` no se ven en un mensaje directo de Instagram ni en
+  LinkedIn. Se mandará con asteriscos y almohadillas a la vista.
 
 # Problemas Críticos Detectados
 
-**C1 · «Lo que estoy probando ahora» no está en marcha según la fuente.**
-Frase que falla: «## Lo que estoy probando ahora — Precio antes de reservar, y
-confirmación la víspera con un hueco que se libera si no contesta. Cuando tenga
-el número de dos semanas, lo cuento.»
-Por qué: brief §1.5 («pendiente de cuatro decisiones de Maikel: precio en el
-primer mensaje… liberar hueco sin confirmación») y §6 («Precio y garantía en el
-primer contacto: sí o no. Confirmación obligatoria la víspera con hueco que se
-libera: sí o no»). Es una hipótesis, no una prueba activa. Si Maikel lo ha
-activado después del 22, que lo diga por escrito y se queda.
-Frase propuesta: «## Lo siguiente que voy a probar — Precio antes de reservar, y
-confirmación la víspera con un hueco que se libera si no contesta. Cuando lleve
-dos semanas con ello, cuento el número.»
+**G1 · Claim que la fuente no dice.** El brief dice que el recordatorio es sin
+confirmación ni liberación de hueco (§1.5) y que el precio y la confirmación
+son decisiones pendientes (§6). No está aplicando las cinco cosas.
+
+- Falla: «La estoy aplicando en mi propia empresa.»
+- Propuesta: «Una parte ya la uso en mi empresa. La otra la voy a probar, y
+  abajo te cuento cuál.»
+
+**G2 · Claim que la fuente no dice.** La bitácora no dice dónde estaba Maikel
+ni si la llamada salió sola o la lanzó él. Solo que llamó Raquel.
+
+- Falla: «Yo no estaba mirando el calendario: lo hizo mi comercial IA.»
+- Propuesta: «La llamada no la hice yo: la hizo mi comercial IA.»
+
+**G3 · Prueba que no está en marcha.** Precio antes de reservar y confirmación
+con hueco que se libera son hipótesis (§5.1) y decisiones pendientes (§6).
+
+- Falla: «## Lo que estoy probando ahora / Precio antes de reservar, y
+  confirmación la víspera con un hueco que se libera si no contesta. Cuando
+  tenga el número de dos semanas, lo cuento.»
+- Propuesta: «## Lo siguiente que quiero probar / Precio antes de reservar, y
+  confirmación la víspera con un hueco que se libera si no contesta. Cuando
+  lleve dos semanas probándolo, te cuento el número.»
 
 # Qué Eliminaría
 
-- «que prometí en el carrusel» → «que te prometí».
-- En el motivo 4: «Y si no puedes tú, que le atienda alguien de tu equipo» repite
-  la lámina 5 y en una guía escrita no añade; puede quedarse, pero es lo que
-  sobra si hay que acortar.
+- La nota de cabecera (líneas 3-7) al mandarla: es interna. Que empiece en
+  «Hola, soy Maikel».
+- «Es corta a propósito:». Sobra; se ve que es corta.
 
 # Qué Simplificaría
 
-- Cierre: una acción principal. «Si quieres que miremos tus dos números con tu
-  agenda delante, son quince minutos: qualivo.io/diagnostico.» Y la invitación
-  a responder, como posdata, no como segundo CTA.
-- «Minuto 15: llamada, con guion de plantón, no de venta. La primera frase dice
-  "te he esperado".» → «Minuto 15 como mucho: llamada con guion de plantón, no de
-  venta. Que la primera frase sea "te he esperado".» Así cuadra con la llamada a
-  los seis minutos del caso.
+- «Sin precio, reservar es curiosidad, no decisión.» Es un lema («X, no Y») y
+  una hipótesis del brief contada como verdad. → «Si no sabe lo que cuesta,
+  reservar no le compromete a nada. Y faltar, tampoco.»
+- Los `##` y `**`: pasar a texto plano con mayúsculas o números para mensaje
+  directo, o mandarla como PDF de una página.
+- «Cabe en una pantalla larga de móvil» (nota interna): son unas 500 palabras,
+  tres pantallas. No afecta al lector, pero que nadie la corte creyendo que
+  sobra.
 
 # Qué Reforzaría
 
-- «La estoy aplicando en mi propia empresa.» → «La estoy aplicando en mi propia
-  empresa; al final te cuento lo que pasó el 18 de septiembre.» Abre el circuito
-  sin dar la tasa.
-- Motivo 3: «Un recordatorio que no pide nada confirma las citas que iban a pasar
-  de todas formas» es una tesis contraria en una línea; podría ser el titular de
-  otro carrusel.
+- **Protocolo y caso, alineados.** «Minuto 15: llamada» → «Entre el minuto 5 y
+  el 15: llamada, con guion de plantón, no de venta.» Así el 18-sep (minuto 6)
+  lo demuestra en vez de contradecirlo.
+- **«Si suena a llamada en frío, cuelgan»** gana con el caso, que está en la
+  bitácora del 22-sep: «El martes 22, una llamada con el guion normal a alguien
+  que me acababa de dar plantón duró doce segundos.»
+- **El cierre al diagnóstico** con la palabra que ya usa la guía: «Si quieres
+  que miremos tus dos números con tu agenda delante» está muy bien. Dejarlo
+  como única acción y pasar «responde a este mensaje» a una línea aparte, sin
+  competir.
 
 # Riesgos
 
-- Se manda a mano desde el móvil o el correo de Maikel; el texto tiene unas 600
-  palabras y cabe en «una pantalla larga». Bien. Que no se automatice desde el
-  663 (regla del 21-sep); la cabecera ya lo dice.
-- «Yo no estaba mirando el calendario: lo hizo mi comercial IA.» Verdadero según
-  bitácora. Es la única mención al agente y está donde debe: al final del caso.
-- Si C1 se cambia aquí y no en la newsletter (o al revés), las dos piezas se
-  contradicen sobre si la prueba está en marcha.
+- Mandarla con G1 o G3: la guía se convierte en la promesa más fácil de
+  comprobar («¿y ya lo haces?»). Si alguien reserva el diagnóstico y ve que
+  Qualivo no pide confirmación ni pone precio, se cae la credibilidad justo en
+  el paso que más importa.
+- «Casi nadie tiene el segundo»: generalización sin fuente. Como opinión de
+  Maikel se acepta; no convertirla en dato en otra pieza.
+- Se manda a mano: si hay muchos GUÍA, el retraso en mandarla es un plantón al
+  revés. Decidir antes quién la manda y en cuánto tiempo.
 
 # Impacto Esperado
 
-Es el puente entre comentario y diagnóstico. Con C1 arreglado, la guía aguanta
-que la reenvíen y que la lean en octubre. Sin él, la primera persona que
-pregunte «¿y qué tal el precio antes de reservar?» descubre que no ha empezado.
+Es el puente entre el comentario y el diagnóstico. Si se manda rápido y con un
+cierre claro, cada guía es una conversación abierta con alguien que ya
+reconoció el problema. Es la pieza de las tres más cerca de la North Star.
 
 # Revisión de Diseño (portada, jerarquía visual, ritmo, legibilidad)
 
-Texto plano por mensaje, sin diseño. Jerarquía por encabezados cortos, listas
-numeradas, negritas en el motivo. Se lee de un tirón en el móvil. Correcto para
-el canal.
+No es una pieza visual. Jerarquía clara (dos números, cinco motivos,
+protocolo, lo siguiente, cierre). El único problema de forma es el formato
+Markdown en un canal que no lo pinta (ver «Qué simplificaría»).
 
 # Revisión de Copy (hook, claridad, credibilidad, CTA)
 
-- **Hook:** «Hola, soy Maikel. Esta es la guía que prometí…» cumple; no necesita
-  más en un mensaje que la persona ha pedido.
-- **Claridad:** alta. Cada motivo con su pregunta y su «revisa».
-- **Credibilidad:** cifras correctas (12:00, 12:06, tres minutos); falla la
-  prueba «en marcha» (C1).
-- **CTA:** dos; dejar uno.
+- **Hook:** «Hola, soy Maikel. Esta es la guía que prometí en el carrusel.»
+  Correcto para un mensaje que el lector ha pedido.
+- **Claridad:** alta; cada bloque, pregunta + «Revisa:».
+- **Credibilidad:** fallan G1, G2 y G3. El resto está respaldado.
+- **Suena a máquina o a agencia:** «Sin precio, reservar es curiosidad, no
+  decisión» (lema). «Es el que dice si tienes sistema o suerte» está en el
+  límite, pero tiene gracia y dice algo: se queda.
+- **CTA:** diagnóstico de quince minutos, bien atado a «tus dos números».
 
 # Revisión Estratégica (alineación con Qualivo, alineación con North Star)
 
-Alineada: proceso, no herramienta; mide, revisa, arregla. El diagnóstico aparece
-como consecuencia natural («tus dos números con tu agenda delante»). Es el
-recurso que convierte un comentario en una conversación.
+Muy alineada: mide, detecta dónde se pierde la cita, propone el arreglo y
+ofrece mirarlo juntos en quince minutos. Es un diagnóstico en miniatura. Si
+funciona, es plantilla para otras palabras clave (PRESUPUESTO, SEGUIMIENTO).
 
 # Versión Mejorada del Hook
 
-«Hola, soy Maikel. Esta es la guía que te prometí. Antes de los cinco motivos,
-dos números que casi nadie tiene: cuántas citas se te plantaron el mes pasado y a
-cuántas llamaste antes de una hora.»
+> Hola, soy Maikel. Aquí tienes la guía del carrusel. Antes de los cinco
+> motivos, mira dos números. El segundo casi nadie lo tiene.
 
 # Próximo Experimento Recomendado
 
-Contar cuántas guías enviadas terminan en respuesta (pregunta o diagnóstico). Si
-menos de una de cada diez responde, probar una versión que pida el primer número
-en el mismo mensaje («¿cuántas citas tuviste el mes pasado?») para abrir
-conversación antes del enlace.
+Dos versiones del cierre durante dos semanas, alternando: A, enlace al
+diagnóstico; B, «¿Me dices tus dos números y te digo cuál de los cinco es el
+tuyo?». Medir respuestas y diagnósticos reservados. La B pide menos y abre
+conversación; la A va directa. Con los GUÍA que haya se sabrá cuál acerca más
+pilotos.
 
-# Veredicto
-
-**PUBLICAR CON CAMBIOS** (C1; una frase y un encabezado).
+# Veredicto: PUBLICAR CON CAMBIOS
 
 ---
 
 # PIEZA 3 · Newsletter «Te han dado plantón. ¿Por qué?» (propuesta 25-sep)
 
+`content/newsletter/2026-09-25-plantones.md`
+
 # Nota Global (1-10)
 
 **7**
 
 # Resumen Ejecutivo
 
-El mejor texto de las tres piezas en voz: primera persona, cambio de opinión
-contado («yo pensaba… lo que creo ahora»), dos casos con hora y un fallo propio
-(la llamada en frío del martes). Pero es la pieza que más se aleja de las
-fuentes: inventa la frase literal de Raquel, pone «por la tarde» donde la
-bitácora no da hora y presenta como prueba en marcha una decisión pendiente. Al
-quitar «5 de 9», la apertura («varios clientes… no aparecieron») pierde el
-golpe que tenía; es aceptable, pero el asunto y la primera línea ya no llevan
-número.
+Es la mejor de las tres en voz: empieza por lo que pasó, reconoce un error
+propio («no estaba donde yo creía»), cuenta una hipótesis como hipótesis («Lo
+que creo ahora») y cierra con «Y si no baja, también», que es lo que hace
+creíble a alguien. La escena del domingo, la voz que no conoce y el hueco del
+martes está muy cerca de lo que pasó el 21 y el 22 (bitácora), así que no es
+inventada, aunque se cuente como ejemplo.
+
+Tiene cinco frases que dicen más que las fuentes: la cita literal de la
+llamada del 18-sep (y que la IA «le llamó» a él), «Yo no estaba mirando el
+calendario», la llamada del 22 «por la tarde», «lo que estoy probando ahora» y
+«esta semana varios clientes». Y dos CTA, uno de ellos imposible en LinkedIn
+(«responde a este correo»).
 
 # Lo Mejor
 
-- El párrafo de «el plantón es de diseño»: reconstruye la hipótesis 1 del brief
-  con una escena (domingo, lunes, martes) que cualquiera reconoce.
-- «Guion de plantón o nada.» Conclusión en cuatro palabras, sacada de un dato
-  real (12 s).
-- «Y si no baja, también.» Compromiso de contar el fracaso; refuerza el diario.
-- «No mintió. Es que no había nada en juego.» Voz de persona.
+- Apertura: «Me ha hecho mirar dónde estaba el fallo, y no estaba donde yo
+  creía.» Persona contando algo a otra.
+- «No mintió. Es que no había nada en juego.» La mejor frase de las tres piezas.
+- Los dos casos contrapuestos (18-sep y 22-sep): guion de plantón frente a
+  guion en frío. Es prueba, no opinión.
+- «Y si no baja, también.»
+- La regla del 24-sep está cumplida: «varios», nunca «5 de 9».
 
 # Lo Más Débil
 
-- Tres claims que van más allá de la fuente (abajo).
-- «Esta semana varios clientes… no aparecieron»: el envío no tiene fecha (tres o
-  cuatro días después del capítulo 1, que espera el ok de Maikel). Sin la cifra
-  ya no es un dato falso, pero «esta semana» seguirá siendo mentira si sale en
-  octubre.
-- «Sale a las 9:00 del mismo día para todas las citas» omite que también sale la
-  víspera a las 18:00 cuando se reservó con dos días o más (brief §1.4.5). No es
-  falso, pero un lector del capítulo 1 puede pillarlo.
-- Dos CTA (GUÍA y diagnóstico) en un correo que la guía de voz quiere con «un
-  motivo concreto».
-- Asunto alternativo 1 («Lo que hago a los seis minutos de un plantón») contra el
-  protocolo de la guía (WhatsApp al 5, llamada al 15).
+- Los cinco críticos.
+- Dos CTA (GUÍA y diagnóstico) y el de GUÍA dice «responde a este correo» en
+  una newsletter nativa de LinkedIn, donde no se puede responder a un correo.
+- El párrafo de los cinco motivos repite el carrusel casi entero; para quien
+  vio el carrusel, es el tramo que se salta.
 
 # Problemas Críticos Detectados
 
-**C1 · Cita literal de Raquel que la bitácora no contiene, dicha a quien no
-cogió.**
-Frase que falla: «A las 12:06 mi comercial IA le llamó con otro guion: "te he
-esperado, ¿te viene mejor otro día?". Tres minutos después me escribieron
-pidiendo otra hora.»
-Por qué: no hay transcripción citada; cogió una persona de la oficina, no el
-cliente.
-Frase propuesta: «A las 12:06 mi comercial IA le llamó con guion de plantón, no
-de venta. Cogió alguien de su oficina. Tres minutos después me escribieron
-pidiendo otra hora.»
+**N1 · Cita literal que no está en la fuente y cambio de sujeto.** La
+bitácora no recoge lo que dijo Raquel; «te he esperado» es el asunto del correo
+de plantón. Y cogió una persona de la oficina, no él.
 
-**C2 · «Por la tarde» no está en la fuente.**
-Frase que falla: «a un contacto que se había plantado por la mañana le llamó por
-la tarde con el guion normal, el de llamada en frío. Colgó a los doce segundos.»
-Por qué: la bitácora del 22-sep registra «colgó a los 12 s (David, tras el
-plantón de las 10:00)» sin hora de la llamada.
-Frase propuesta: «a un contacto que se había plantado por la mañana le llamó ese
-mismo día con el guion normal, el de llamada en frío. Colgó a los doce
-segundos.»
+- Falla: «A las 12:06 mi comercial IA le llamó con otro guion: «te he esperado,
+  ¿te viene mejor otro día?». Tres minutos después me escribieron pidiendo otra
+  hora.»
+- Propuesta: «A las 12:06 mi comercial IA llamó a su oficina con un guion de
+  plantón, no de venta. Cogió un compañero. Tres minutos después me escribieron
+  pidiendo otra hora.»
 
-**C3 · Prueba «en marcha» que el brief tiene como decisión pendiente.**
-Frase que falla: «Lo que estoy probando ahora: precio antes de reservar y
-confirmación la víspera con un hueco que se libera si no contestas. En dos
-semanas cuento si el número baja.»
-Por qué: brief §1.5 y §6 (Proceso v2, «sí o no» pendiente de Maikel). Igual que
-en la guía: si ya está activado, ok escrito de Maikel y se queda.
-Frase propuesta: «Lo siguiente que voy a probar: precio antes de reservar y
-confirmación la víspera con un hueco que se libera si no contestas. Cuando lleve
-dos semanas, cuento si el número baja.»
+**N2 · Claim que la fuente no dice.** La bitácora no dice dónde estaba Maikel
+ni si la llamada salió sola.
+
+- Falla: «Yo no estaba mirando el calendario.»
+- Propuesta: «La llamada no la hice yo.»
+
+**N3 · Hora que no consta y sujeto que no cuadra.** La bitácora no da la hora
+de la llamada del 22-sep. Y «probé» (yo) seguido de «le llamó» (ella) no se
+entiende; tampoco fue una prueba.
+
+- Falla: «El martes probé lo contrario sin querer: a un contacto que se había
+  plantado por la mañana le llamó por la tarde con el guion normal, el de
+  llamada en frío.»
+- Propuesta: «El martes pasó lo contrario: a un contacto que me había dado
+  plantón por la mañana, mi comercial IA le llamó más tarde con el guion
+  normal, el de llamada en frío.»
+
+**N4 · Prueba que no está en marcha.** Precio antes de reservar y confirmación
+con hueco que se libera son decisiones pendientes (brief §6).
+
+- Falla: «Lo que estoy probando ahora: precio antes de reservar y confirmación
+  la víspera con un hueco que se libera si no contestas. En dos semanas cuento
+  si el número baja.»
+- Propuesta: «Lo siguiente que quiero probar: precio antes de reservar y
+  confirmación la víspera con un hueco que se libera si no contestas. Cuando
+  lleve dos semanas, cuento si el número baja.»
+
+**N5 · Fecha y sujeto que no cuadran con la fuente.** Los plantones son de la
+semana del 18 al 22; enviada el viernes 25, «esta semana» deja fuera el caso
+del 18 que se cuenta después. Y eran contactos que habían reservado, no
+clientes.
+
+- Falla: «Esta semana varios clientes que habían reservado reunión conmigo no
+  aparecieron.»
+- Propuesta: «Estos días, varias personas que habían reservado reunión conmigo
+  no aparecieron.»
 
 # Qué Eliminaría
 
-- Asunto alternativo 1 («Lo que hago a los seis minutos de un plantón»): choca
-  con el protocolo que la guía enseña.
-- El diagnóstico como segundo CTA en el mismo párrafo. Como posdata, sí.
+- «Guion de plantón o nada.» Lema que cierra un párrafo que ya se entiende, y
+  saca una regla de dos llamadas. → «Con un guion me contestaron en tres
+  minutos. Con el otro, doce segundos y colgó.»
+- De la nota interna de fuentes (línea 69), la cifra «5 de 9»: basta con «la
+  tasa de plantones no se publica». Si alguien copia el bloque entero a
+  LinkedIn, que no viaje la cifra.
+- El segundo CTA (diagnóstico). Ver «Qué reforzaría».
 
 # Qué Simplificaría
 
-- «Esta semana varios clientes que habían reservado reunión conmigo no
-  aparecieron.» → «Hace unos días, varios clientes que habían reservado reunión
-  conmigo no aparecieron.» Vale para cualquier fecha de envío.
-- «Sale a las 9:00 del mismo día para todas las citas. No rescató ninguna.» →
-  «Sale a las 9:00 del día de la cita. No rescató ninguna.» Menos absoluto,
-  igual de claro.
-- Preheader: «No es que el cliente sea malo. Es que la cita nació floja.» Vale
-  como frase, pero es el mismo patrón «no es X, es Y» que la lámina 8. Aquí dice
-  algo («nació floja»), así que se admite; no repetirlo más veces en el texto.
+- «Es de diseño.» → «Es por cómo montamos la cita.» (más hablado).
+- «Reservábamos la cita con la persona menos comprometida» → «Reservamos...».
+  El pasado da a entender que ya no pasa, y el cambio está pendiente.
+- «Sale a las 9:00 del mismo día para todas las citas. No rescató ninguna.»
+  Exacto para el de las 9:00, pero hay otro la víspera a las 18:00 (brief
+  §1.4.5). → «Sale a las 9:00 del mismo día. No evitó ni un plantón.»
+- El párrafo de los cinco motivos: dejarlo en una línea por motivo, sin los
+  ejemplos que ya están en el carrusel, o remitir a la guía.
+- «47 correos y dos incendios»: en un texto lleno de horas y segundos reales,
+  «47» puede leerse como dato. → «cuarenta correos y dos incendios».
+- «Yo pensaba que era cosa del recordatorio»: no está en ninguna fuente; es
+  memoria de Maikel. Que lo confirme él antes de enviarlo.
 
 # Qué Reforzaría
 
-- El párrafo de las cinco cosas es un bloque de 90 palabras. Cortarlo en cinco
-  líneas (una por motivo) ayuda a leer en el móvil y enlaza con la guía.
-- «47 correos y dos incendios»: en el correo va dentro de una lista genérica
-  («suele ser por una de estas cinco cosas»), se lee como imagen y está bien. Si
-  Maikel quiere cero riesgo de que se tome por cifra, «un montón de correos y dos
-  incendios».
-- La apertura sin cifra necesita algo que la sostenga. Sin dar la tasa: «Esta
-  semana varios clientes… no aparecieron. Más de los que me gustaría contar
-  aquí.» Reconoce que hay un número sin publicarlo y suena a persona.
+- **Una sola acción por canal.** En LinkedIn: «Escríbeme GUÍA en comentarios y
+  te la mando.» En el correo a leads: «Responde GUÍA y te la mando.» El
+  diagnóstico ya va dentro de la guía; aquí compite con ella.
+- **Preheader sin lema.** «No es que el cliente sea malo. Es que la cita nació
+  floja.» es la estructura «no es X, es Y». → «Cinco motivos por los que no
+  aparecen, y lo que pasó seis minutos después de un plantón.»
+- **Asunto alternativa 1:** «Lo que hago a los seis minutos de un plantón»
+  sugiere rutina; fue un caso y lo hizo la IA. → «Lo que pasó seis minutos
+  después de un plantón.»
 
 # Riesgos
 
-- Capítulo 2 antes que el capítulo 1: el texto se sostiene solo, pero «mi
-  sistema» y «mi comercial IA» se entienden mejor si el capítulo 1 ya salió.
-  Mantener el orden propuesto.
-- Envío individual desde el Gmail de Maikel a leads con cadencia terminada:
-  incluye a leads que se plantaron. Leer «varios clientes no aparecieron» siendo
-  uno de ellos puede sentar mal o abrir conversación; asumirlo, pero saberlo.
-- La misma corrección de C3 hay que aplicarla en la guía; si una se cambia y la
-  otra no, se contradicen.
-- La cifra «5 de 9» sigue en el artículo del 23, el del 24 y la bandera roja
-  (diario de contenido, 24-sep). Si la newsletter enlaza o se lee junto a
-  ellos, la regla se rompe por otro lado. Decisión de Maikel pendiente.
+- N1: publicar una cita que nadie dijo, en una newsletter que se vende como
+  diario de lo que pasa de verdad («Agentizando mi propia empresa»), es el
+  error más caro de las tres piezas.
+- N4: «En dos semanas cuento si el número baja» compromete una segunda entrega
+  con un número. Si Maikel no aprueba la prueba, esa promesa queda en el aire.
+  Y al contar «el número», cuidado con la regla del 24-sep: se podrá decir si
+  baja, no la tasa.
+- Dos llamadas (una bien, una mal) contadas como regla. Con N3 y «Qué eliminaría»
+  queda como lo que es: dos casos.
 
 # Impacto Esperado
 
-Es el número que más conversación puede abrir de la serie: fallo propio, razón,
-y dos casos con hora. Con los tres críticos arreglados, cada frase se puede
-defender con la bitácora delante. Camino a la North Star: respuesta GUÍA → guía
-→ diagnóstico; y respuesta directa de leads que se reconocen en el plantón.
+A los leads con cadencia terminada les llega un correo personal, útil y sin
+venta; es un buen motivo para que alguno conteste. En LinkedIn, suma al diario
+y lleva a la guía. Con una sola acción, cada respuesta es una conversación.
 
 # Revisión de Diseño (portada, jerarquía visual, ritmo, legibilidad)
 
-Texto plano, sin imagen (correcto para newsletter nativa de LinkedIn y correo
-individual). Párrafos de 3-6 líneas, ritmo bien. El bloque de los cinco motivos
-es el único denso. Asunto de cinco palabras, preheader de dos frases: bien.
+Texto de unas 450 palabras, párrafos cortos, se lee en voz alta sin ahogarse.
+Si va en LinkedIn, una imagen: la portada nueva del carrusel o la línea de
+tiempo del 18-sep. Sin más.
 
 # Revisión de Copy (hook, claridad, credibilidad, CTA)
 
-- **Hook:** «Te han dado plantón. ¿Por qué?» como asunto es correcto y humano;
-  la primera línea, sin cifra, es más floja que antes. Ver «Qué reforzaría».
-- **Claridad:** alta; una idea por párrafo.
-- **Credibilidad:** la más comprometida de las tres piezas por C1-C3. El resto
-  (9:00, 12:00, 12:06, tres minutos, 12 s) cuadra con las fuentes.
-- **CTA:** GUÍA claro; el diagnóstico a posdata.
+- **Hook (asunto):** «Te han dado plantón. ¿Por qué?» Claro y coherente con el
+  carrusel. Funciona.
+- **Claridad:** alta.
+- **Credibilidad:** muy buena en tono; fallan N1 a N5.
+- **Suena a máquina o a agencia:** «Guion de plantón o nada.», «Es de diseño.»,
+  el preheader «No es que... Es que...».
+- **CTA:** dos, y uno imposible en LinkedIn.
 
 # Revisión Estratégica (alineación con Qualivo, alineación con North Star)
 
-Alineada: fuga real (cita → reunión), causa (diseño del proceso), sistema
-(protocolo y agente), prueba (dos casos). El agente aparece haciendo algo que
-Maikel no hacía. Es el relato que convierte un dato malo en motivo de diagnóstico.
+Es Qualivo contado desde dentro: dónde se rompe el recorrido (cita → reunión,
+brief §4.4), qué se cree que lo arregla y qué se va a probar. Encaja con el
+diario «Agentizando mi propia empresa» y con la North Star si la única acción
+es GUÍA, que abre conversación, y la guía lleva al diagnóstico. Recomiendo
+capítulo 2, como propone la pieza.
 
 # Versión Mejorada del Hook
 
-Asunto: «Te han dado plantón. ¿Por qué?» (el recomendado, bien). Primera línea:
-«Hace unos días varios clientes que habían reservado reunión conmigo no
-aparecieron. Más de los que me gustaría contar aquí. Me ha hecho mirar dónde
-estaba el fallo, y no estaba donde yo creía.»
+- Asunto: «Me dieron plantón a las 12:00. Lo que pasó a las 12:06»
+- Primera línea: «Estos días, varias personas que habían reservado reunión
+  conmigo no aparecieron. Me ha hecho mirar dónde estaba el fallo, y no estaba
+  donde yo creía.»
 
 # Próximo Experimento Recomendado
 
-Enviar con un solo CTA (GUÍA) y medir respuestas; comparar con el capítulo 1 en
-respuestas por cada cien envíos. Si la newsletter da más respuestas que el
-carrusel comentarios, el canal del diario es el correo, y el carrusel pasa a ser
-la puerta, no el destino.
+En el correo a los leads con cadencia terminada, mandar la mitad con el asunto
+recomendado y la otra mitad con «Me dieron plantón a las 12:00. Lo que pasó a
+las 12:06». Medir respuestas con GUÍA (no aperturas). Con pocos envíos no dará
+significación: se anota como pista, no como regla.
 
-# Veredicto
-
-**PUBLICAR CON CAMBIOS** (C1-C3; C3 requiere confirmar con Maikel si la prueba
-está activa; si lo está, se queda la frase original y se documenta en el brief).
+# Veredicto: PUBLICAR CON CAMBIOS
 
 ---
 
@@ -549,13 +629,9 @@ está activa; si lo está, se queda la frase original y se documenta en el brief
 
 | Pieza | Nota | Veredicto | Críticos |
 |---|---|---|---|
-| Carrusel «Te han dado plantón» (8 láminas + pie de foto) | 7 | PUBLICAR CON CAMBIOS | 4 (C1, C2 pie de foto; C3, C4 lámina 8) |
-| Guía «menos plantones» (recurso GUÍA) | 8 | PUBLICAR CON CAMBIOS | 1 («lo que estoy probando ahora») |
-| Newsletter «Te han dado plantón. ¿Por qué?» (propuesta 25-sep) | 7 | PUBLICAR CON CAMBIOS | 3 (cita literal; «por la tarde»; «lo que estoy probando ahora») |
+| Carrusel «Te han dado plantón» (8 láminas y pie de foto) | 7 | PUBLICAR CON CAMBIOS | 4 (C1 pie Instagram, C2 pie LinkedIn, C3 lámina 4, C4 lámina 8) |
+| Guía «menos plantones» (recurso GUÍA) | 7 | PUBLICAR CON CAMBIOS | 3 (G1, G2, G3) |
+| Newsletter «Te han dado plantón. ¿Por qué?» (25-sep) | 7 | PUBLICAR CON CAMBIOS | 5 (N1 a N5) |
 
-**Transversal:** el caso del 18-sep hay que contarlo igual en las tres piezas
-(«llamada con guion de plantón, cogió alguien de su oficina, a los tres minutos
-me escribieron»). Hoy la lámina 7 y la guía lo cuentan bien; los dos pies de
-foto y la newsletter dicen más. Y «lo que estoy probando ahora» (guía y
-newsletter) depende de una decisión de Maikel que el brief tiene como pendiente:
-o la confirma por escrito o se cambia en las dos a la vez.
+Regla del 24-sep («5 de 9» no se publica): cumplida en las tres piezas.
+Nombres de persona o empresa en texto publicable: ninguno.
