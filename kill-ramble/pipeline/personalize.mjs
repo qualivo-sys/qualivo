@@ -49,7 +49,7 @@ export function dmText(c, bookingUrl, lang = c.lang) {
     return `Hola ${c.name}, te vi ${c.platform === 'twitch' ? `en directo con ${labelMid(c.games?.[0] || '')}` : `en ${p.cited}`}. `
       + `Soy Lea, hago Don't Kill Rumble, un brawler con físicas de 1 a 6 jugadores. `
       + `Estamos haciendo un playtest abierto con el equipo antes del lanzamiento. ¿Te reservo una hora? `
-      + `Podés venir con tu gente o jugar con nosotros. Sin embargo, grabá lo que quieras. ${bookingUrl}`;
+      + `Podés venir con tu gente o jugar con nosotros, y grabar y publicar lo que quieras. ${bookingUrl}`;
   }
   return `Hey ${c.name}, saw you ${c.platform === 'twitch' ? `live with ${labelMid(c.games?.[0] || '')}` : `in ${p.cited}`}. `
     + `I'm Lea, I make Don't Kill Rumble, a 1-6 player physics brawler. `
