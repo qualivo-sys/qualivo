@@ -30,7 +30,7 @@ if (!KEY && envPath) KEY = (readFileSync(envPath, 'utf8').match(/^YOUTUBE_API_KE
 if (!KEY) { console.error('Falta YOUTUBE_API_KEY'); process.exit(2); }
 
 // Juegos con el mismo público: party brawlers y cooperativos de caos entre amigos.
-const JUEGOS = ['PEAK', 'R.E.P.O.', 'Gang Beasts', 'Party Animals', 'Stick Fight', 'Pummel Party', 'Human Fall Flat',
+const JUEGOS_BASE = ['PEAK', 'R.E.P.O.', 'Gang Beasts', 'Party Animals', 'Stick Fight', 'Pummel Party', 'Human Fall Flat',
   'Mimic Party', 'Meccha Chameleon', 'Bombanana', 'Chained Together', 'Lethal Company', 'Content Warning', 'Rubber Bandits'];
 // «peak» es también jerga en inglés («this is peak»): el juego se busca con contexto y
 // el título tiene que traerlo en mayúsculas, como lo escriben quienes lo juegan.
@@ -39,7 +39,11 @@ const EN_TITULO = (juego, t) => juego === 'PEAK' ? /\bPEAK\b/.test(t) : t.toLowe
 // Recopilatorios de shorts, dibujo y contenido infantil: mucho alcance, nadie que juegue con nosotros.
 const RELLENO = /#shorts|\b(ytp|bluey|drawing|how to draw|my singing monsters|msm|tier list|top \d+|ranking|funny moments \(part)/i;
 // Mercados que decidió el estudio: EE. UU. primero, Europa después. LATAM fuera.
-const REGIONES = ['US', 'GB'];
+const REGIONES_BASE = ['US', 'GB'];
+const lista = (n, base) => (arg(n, null) ? String(arg(n)).split(',').map((x) => x.trim()).filter(Boolean) : base);
+const JUEGOS = lista('games', JUEGOS_BASE);
+const REGIONES = lista('regions', REGIONES_BASE);
+const PAGINAS = +arg('pages', 1);
 const PAISES_OK = new Set(['US', 'CA', 'GB', 'IE', 'AU', 'NZ', 'DE', 'NL', 'SE', 'NO', 'DK', 'FI', 'BE', 'AT', 'CH', 'FR', 'IT', 'PT', 'PL', 'ES']);
 
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-z]{2,24}/gi;
@@ -66,13 +70,18 @@ const videos = new Map(); // channelId -> mejor vídeo encontrado
 let unidades = 0;
 for (const juego of JUEGOS) {
   for (const region of REGIONES) {
+    let token;
+    for (let pag = 0; pag < PAGINAS; pag++) {
     const j = await api('search', { part: 'snippet', q: CONSULTA[juego] || juego, type: 'video', maxResults: 50, order: 'viewCount',
-      publishedAfter: desde, regionCode: region, relevanceLanguage: 'en' });
+      publishedAfter: desde, regionCode: region, relevanceLanguage: 'en', ...(token ? { pageToken: token } : {}) });
     unidades += 100;
+    token = j.nextPageToken;
     for (const it of j.items || []) {
       const t = it.snippet.title;
       if (OTRO_IDIOMA.test(t) || RELLENO.test(t) || !EN_TITULO(juego, t)) continue;
       if (!videos.has(it.snippet.channelId)) videos.set(it.snippet.channelId, { videoId: it.id.videoId, title: t, juego });
+    }
+    if (!token) break;
     }
   }
 }
