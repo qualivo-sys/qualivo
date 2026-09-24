@@ -7,6 +7,10 @@
 > leads sin cita con la cadencia terminada, correo individual desde el Gmail
 > de Maikel. **No se envía hasta que Maikel lo diga por escrito.**
 
+## Maqueta (24-sep)
+
+Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-plantones.html` (imagen: `maqueta/2026-09-25-plantones.png`). Misma portada que el carrusel publicado hoy, lista de los cinco motivos, línea de tiempo del 18-sep (12:00, 12:06, 12:09) y un solo botón: «Responde GUÍA». Si hay diferencias con el texto de abajo, vale la maqueta.
+
 ## Asunto y preheader
 
 - **Asunto (recomendado):** Te han dado plantón. ¿Por qué?
