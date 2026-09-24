@@ -179,3 +179,50 @@ tarde, un WhatsApp con valor rinde más que la segunda llamada (Rafael: dos buzo
 agendó al WhatsApp).
 
 **Propuesto, no aplicado:** nada de voz, modelo, número ni cadencia.
+
+## 24-sep-2026 · revisión de las últimas 24 h
+
+**Llamadas del día (4, todas del lead form Meta, mismo número de origen: móvil de Maikel).**
+Santi (Gil Jiménez, reformas), 23-sep 19:50, 35 s: única con conversación real. Contesta,
+confirma que fue él quien pidió el diagnóstico; Raquel pregunta por atribución de
+campañas («¿sabes qué campaña te trajo tu último cliente?»), Santi empieza a responder
+(«No, vamos a ver,») y la llamada se corta ahí (`customer-ended-call`, 0,065 $) sin llegar
+a proponer cita. Cristina (Magro, formación), 24-sep 17:20, 31 s: buzón, tras dos intentos
+de WhatsApp fallidos. Santi otra vez, 24-sep 19:30, 30 s: segunda llamada de la cadencia,
+buzón también (misma tarde que la primera con conversación real: iba precedida de dos
+WhatsApp fallidos). Marian (reformas), 24-sep 11:30: no contestó, sin transcripción.
+Registro completo en Notion «📞 Llamadas de Raquel» (4 filas; audio subido en Santi 24-sep
+y Cristina — Santi 23-sep se quedó sin audio por un error del lado de Notion al subir el
+archivo, ver más abajo).
+
+**Lo que enseñaron las grabaciones:**
+1. **Patrón WhatsApp fallido → llamada a buzón** en 2 de los 3 leads con ficha revisada a
+   fondo (Santi y Cristina): ambos tienen WhatsApp 1 y WhatsApp 2 marcados como fallidos en
+   GHL antes de que la llamada de voz salte a buzón. Apunta a un problema del canal de
+   WhatsApp (plantilla de Meta sin aprobar, o gateway de respaldo caído) más que a un
+   problema del propio agente de voz — ver tarea abierta «WhatsApp automático: crear
+   plantillas de Meta y activar el envío».
+2. **La llamada de Santi con conversación real se cortó antes de pedir cita.** El guion
+   fue directo a la pregunta de atribución de campañas («¿qué campaña te trajo tu último
+   cliente?») en vez de ir primero a la disponibilidad; con una llamada tan corta
+   (35 s), no llegó a proponer hueco. Hipótesis para revisar con más casos: adelantar la
+   petición de cita antes de profundizar en atribución cuando la persona ya confirmó ser
+   el lead.
+3. **Sigue «Michael Echeverría» y «Cuálibo/Qualibo» en vez de «Máikel Echevarría» y
+   «Qualivo»**, en las tres transcripciones con contenido (Santi ×2, Cristina), pese a que
+   el prompt del asistente ya trae la instrucción explícita de escribir siempre «Máikel»
+   con tilde. Es el mismo hallazgo del 17, 18, 21, 22 y 23-sep: no se puede saber por la
+   transcripción si es un fallo de la voz (TTS) o del transcriptor (Deepgram) leyendo el
+   texto correcto; hace falta oír la grabación de una llamada real y compararla con el
+   texto exacto que se le pasó al modelo antes de tocar el prompt. **No se ha aplicado
+   ningún cambio de guion, voz ni modelo hoy** — sigue sin haber evidencia sólida de que
+   el problema esté en la redacción del prompt.
+
+**Incidencia técnica (Notion, no del agente):** la subida del audio de la llamada de Santi
+23-sep falló tres veces seguidas con `MemcachedCrossCellError` (error 500 del lado de
+Notion) aunque los otros dos audios, de tamaño similar, subieron sin problema. La fila
+quedó registrada igualmente, con transcripción y enlace a la grabación en Vapi, solo sin
+el archivo de audio adjunto.
+
+**Propuesto, no aplicado:** nada de voz, modelo, número ni cadencia — jornada de
+diagnóstico únicamente.
