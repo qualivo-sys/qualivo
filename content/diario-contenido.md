@@ -559,3 +559,5 @@ una sola llamada a la acción en la newsletter y fuera el «no es X: es Y» de l
 lámina 8. Pendiente, a la espera de Maikel: si el carrusel se rehace en torno a
 «la primera cita» (sin sector por lámina), que además resuelve los rótulos
 «Motivo · sector» y el exceso de palabras por lámina que marca el revisor.
+
+Maikel, 24-sep tarde: saltar de sector en cada lámina «queda raro». Rehecho en torno al punto común, la primera cita: sin rótulos de sector, número en el titular, menos de 40 palabras por lámina, los tres sectores nombrados solo en portada y cierre. Lo específico de cada sector queda en la guía.
