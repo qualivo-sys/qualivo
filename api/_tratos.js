@@ -57,12 +57,33 @@ function esReactivacion(tags) {
   return react && !anuncios;
 }
 async function pipelineDe(contactId) {
+  let c = null;
   try {
     const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() });
-    const c = r.ok ? ((await r.json()).contact || {}) : {};
-    if (esReactivacion(c.tags)) return { id: PIPELINE_QUALIVO, etapas: ETAPAS_QUALIVO, reactivacion: true };
+    c = r.ok ? ((await r.json()).contact || {}) : {};
+    if (esReactivacion(c.tags)) return { id: PIPELINE_QUALIVO, etapas: ETAPAS_QUALIVO, reactivacion: true, contacto: c };
   } catch (e) { /* si no se puede leer, Prospección */ }
-  return { id: PIPELINE, etapas: ETAPAS, reactivacion: false };
+  return { id: PIPELINE, etapas: ETAPAS, reactivacion: false, contacto: c };
+}
+
+// Devuelve a Meta la calidad del lead cuando el trato avanza de verdad
+// (24-sep-2026, Maikel: «¿estamos marcando en la API de Facebook lo que vale
+// y lo que no?»). Solo tiene sentido para quien entró por el formulario
+// instantáneo de Meta (lleva la etiqueta meta-lead-<id>); a los demás no se
+// les manda nada porque Meta no tiene ese lead_id para asociarlo.
+// No lanza nunca: si falla, el trato ya se movió y el flujo que llamó a
+// mover() sigue igual.
+const META_POR_ETAPA = { conversacion: 'Contacted', reunion: 'Qualified', piloto: 'Converted', cliente: 'Converted' };
+async function calidadAMeta(contacto, etapa) {
+  try {
+    const evento = META_POR_ETAPA[etapa];
+    if (!evento || !contacto) return;
+    const idMeta = (contacto.tags || []).map(String).filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0];
+    if (!idMeta) return;
+    await require('./_meta.js').calidadLead(evento, {
+      leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id
+    });
+  } catch (e) { console.error('[tratos] calidad a Meta no salió', contacto && contacto.id, etapa, e && e.message); }
 }
 
 function cabeceras() {
@@ -158,6 +179,7 @@ async function crear(o) {
     });
     if (!r.ok) throw new Error('ghl_opportunity ' + r.status + ' ' + (await r.text()).slice(0, 200));
     const d = await r.json().catch(function () { return {}; });
+    if (o.etapa) calidadAMeta(pl.contacto, o.etapa);
     return { ok: true, id: d && d.opportunity ? d.opportunity.id : null, existia: false };
   } catch (err) {
     console.error('[tratos] no se pudo crear el trato', o && o.contactId, err && err.message);
@@ -185,6 +207,7 @@ async function mover(contactId, etapa, crearSi) {
         method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: pl.etapas[etapa] })
       });
       if (!rq.ok) throw new Error('ghl_opportunity_put ' + rq.status + ' ' + (await rq.text()).slice(0, 200));
+      calidadAMeta(pl.contacto, etapa);
       return { ok: true, id: op.id, movido: true, pipeline: 'qualivo' };
     }
     if (op.pipelineStageId === ETAPAS[etapa]) return { ok: true, id: op.id, movido: false };
@@ -200,6 +223,7 @@ async function mover(contactId, etapa, crearSi) {
       method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: ETAPAS[etapa] })
     });
     if (!r.ok) throw new Error('ghl_opportunity_put ' + r.status + ' ' + (await r.text()).slice(0, 200));
+    calidadAMeta(pl.contacto, etapa);
     return { ok: true, id: op.id, movido: true };
   } catch (err) {
     console.error('[tratos] no se pudo mover el trato', contactId, etapa, err && err.message);
