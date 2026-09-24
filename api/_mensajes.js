@@ -26,7 +26,10 @@ function agenda(datos) {
 
 function nombreCorto(nombre) {
   const n = String(nombre || '').trim().split(/\s+/)[0];
-  return n ? n.charAt(0).toUpperCase() + n.slice(1) : '';
+  // 24-sep-2026: si el lead escribió su nombre en mayúsculas en el
+  // formulario («CRISTINA»), antes se quedaba gritando (solo se ponía en
+  // mayúscula la primera letra, sin bajar el resto). Se normaliza a Title Case.
+  return n ? n.charAt(0).toUpperCase() + n.slice(1).toLowerCase() : '';
 }
 
 // Una pregunta, elegida por lo que sabemos del lead. Nunca varias a la vez.
@@ -53,6 +56,13 @@ function pregunta(datos) {
 // concreto lo pregunta el agente cuando contesta (api/_agente.js).
 // En fin de semana no se propone «verlo ahora»: se propone agendar el lunes
 // (Maikel, sábado 19-sep). Entre semana, la pregunta abre conversación.
+//
+// 24-sep-2026, Maikel: la versión anterior («he leído lo que me has contado
+// de tu empresa... una cosa concreta sobre tu caso») no decía qué hacemos ni
+// para qué sirve el siguiente paso. Ahora dice en una frase qué hace Qualivo
+// y por qué la llamada tiene sentido: te enseño dónde está tu fuga y qué
+// haría falta para cerrarla. No se dice «quince minutos» para no achicar lo
+// que se enseña (mismo criterio que el guion de Raquel).
 function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
   const dia = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
@@ -61,10 +71,10 @@ function whatsapp1(datos) {
   // seis horas después suena a robot. Se mira cuánto hace que entró.
   const hace = datos.entro ? (Date.now() - new Date(datos.entro).getTime()) / 60000 : 0;
   const cuando = !datos.entro || hace < 90 ? 'Acabas de pedir' : hace < 20 * 60 ? 'Has pedido hace unas horas' : 'Pediste';
-  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. ' + cuando + ' el diagnóstico de crecimiento y he leído lo que me has contado de tu empresa.\n\n' +
-    (finde
-      ? 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo agendemos para el lunes?'
-      : 'Antes de llamarte quiero preguntarte una cosa concreta sobre tu caso. ¿Te va bien que lo veamos por aquí un momento?');
+  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. Miramos el recorrido completo de un negocio, desde el anuncio hasta el cierre, ' +
+    'y ponemos un agente de IA justo donde se está perdiendo negocio.\n\n' +
+    cuando + ' el diagnóstico de crecimiento — el siguiente paso es que te enseñe, con tu caso delante, dónde está esa fuga y qué haría falta para cerrarla. ' +
+    (finde ? '¿Te va bien que lo agendemos para el lunes?' : '¿Te va bien que lo veamos hoy o mañana?');
 }
 
 // El primer WhatsApp de un lead que nunca nos ha escrito sale por una plantilla
