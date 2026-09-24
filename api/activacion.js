@@ -328,7 +328,7 @@ module.exports = async function handler(req, res) {
     // quien la tiene fresca. Si aquel falló, aquí sale la versión sin cita.
     const datos = {
       nombre: nombrePila(c.firstName || c.contactName || c.name || ''),
-      sector: '', inversion: '',
+      sector: '', inversion: '', volumen: '',
       origen: esLeadForm(c) ? 'leadform' : 'landing',
       entro: c.dateAdded || ''
     };
@@ -338,6 +338,7 @@ module.exports = async function handler(req, res) {
       if (s.startsWith('sector-')) datos.sector = s.slice(7).replace(/-/g, ' ');
       if (s.startsWith('inv-')) datos.inversion = s.slice(4).replace(/-/g, ' ');
       if (s.startsWith('fuga-')) datos.fuga = s.slice(5).replace(/-/g, ' ');
+      if (s.startsWith('vol-')) datos.volumen = s.slice(4).replace(/-/g, ' ');
     });
     if (c.website) datos.web = c.website;
 
@@ -345,15 +346,29 @@ module.exports = async function handler(req, res) {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (WA_CADENCIA_PAUSADA) { continue; }
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
-        // El último (wa3) propone dos huecos reales de la agenda, en palabras.
-        if (paso.tipo === 'wa3') {
+        // wa1 y wa3 proponen dos huecos reales de la agenda, en palabras.
+        if (paso.tipo === 'wa3' || paso.tipo === 'wa1') {
           try { const AG = require('./agendar.js'); datos.huecos = (await AG.huecosLibres(2)).map(function (x) { return AG.enPalabras(x).replace(/^(\S+), (\d+) de \S+, (\d{1,2}:\d{2})$/, '$1 $2 a las $3'); }); } catch (e) { datos.huecos = []; }
         }
-        let texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
+        let texto, esIA = false;
+        // 24-sep-2026, Maikel: el wa1 tiene que construirse de verdad a partir
+        // de las respuestas del formulario, con IA, no ser el mismo texto para
+        // todos. Si falla o no hay huecos reales, cae al texto estático: nunca
+        // se bloquea el envío por esto.
+        if (paso.tipo === 'wa1' && datos.huecos && datos.huecos.length >= 2) {
+          const ia = await require('./_agente.js').mensajePersonalizado({
+            nombre: datos.nombre, sector: datos.sector, fuga: datos.fuga, inversion: datos.inversion, volumen: datos.volumen,
+            horario1: datos.huecos[0], horario2: datos.huecos[1]
+          }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+          if (ia.texto) { texto = ia.texto; esIA = true; }
+          else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');
+        }
+        if (!texto) texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
         // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
         // el mismo texto dos veces. Se reescribe para esta persona; si no se
         // puede, este paso espera a la siguiente vuelta en vez de salir igual.
-        if (A.saldriaPorGateway()) {
+        // El wa1 generado por IA ya es único por persona: no hace falta reescribirlo.
+        if (A.saldriaPorGateway() && !esIA) {
           const v = await require('./_agente.js').variar({ texto: texto, contacto: c, datos: datos }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
           if (!v.texto) { console.warn('[activacion] sin variante para ' + c.id + ' (' + v.motivo + '): no sale por la pasarela'); resumen.esperando++; continue; }
           texto = v.texto;

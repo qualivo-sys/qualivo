@@ -294,6 +294,90 @@ async function variar(o) {
   return { texto: texto, motivo: '' };
 }
 
+// Las 5 respuestas reales del formulario de Meta a «¿dónde crees que se te
+// escapa el negocio?» (api/meta-leadform.js, CLAVES_FUGA). El generador solo
+// ve estas cinco, nunca «conversión» ni «cualificación» sueltas.
+const EJEMPLOS_FUGA = [
+  ['En los anuncios y la captación', 'Comentabas que se os escapa en los anuncios y la captación.'],
+  ['En la web y los formularios', 'Comentabas que la web no acaba de convertir las visitas en contactos.'],
+  ['En el tiempo de respuesta al lead', 'Comentabas que cuesta responder rápido cuando entra un contacto nuevo.'],
+  ['En el seguimiento y los presupuestos', 'Comentabas que el problema está más en lo que pasa después de que entra un contacto.'],
+  ['No lo sé, eso es lo que quiero averiguar', 'Comentabas que no tienes claro dónde se te escapa, y es justo lo que vamos a ver.']
+];
+
+// Primer WhatsApp de verdad, construido por IA a partir de las respuestas del
+// formulario (Maikel, 24-sep-2026, tras ver que el mensaje genérico salía
+// igual para todos y no decía nada de cada caso). Un mensaje por lead, nunca
+// más de uno: si esto falla o no pasa las validaciones, quien llama debe caer
+// al texto estático (M.whatsapp1), nunca bloquear el envío.
+// o: { nombre, sector, fuga (texto crudo del formulario), inversion, volumen,
+//      horario1, horario2 } — horario1/horario2 son cadenas ya formateadas
+// («jueves 25 de septiembre a las 10:00»), reales, sacadas de la agenda.
+async function mensajePersonalizado(o) {
+  const d = o || {};
+  if (!d.horario1 || !d.horario2) return { texto: '', motivo: 'sin horarios' };
+  const sistema = [
+    'Escribes el primer WhatsApp que Maikel Echevarría (Qualivo) manda a alguien que',
+    'acaba de rellenar el formulario de diagnóstico de crecimiento. Tiene que parecer',
+    'escrito por Maikel personalmente, no por un chatbot ni por una empresa.',
+    '',
+    'ESTRUCTURA OBLIGATORIA',
+    '1. Presentación breve, en la línea de: "Hola/Buenas [nombre], soy Maikel, de Qualivo.',
+    '   Imagino que estarás liado, así que te cuento por aquí lo que hacemos."',
+    '2. Recupera su respuesta del formulario sobre dónde cree que se le escapa el negocio.',
+    '   No digas simplemente "has marcado X": interprétala como una observación sobre su',
+    '   situación. Ejemplos de tono (no los copies literales si no coincide su respuesta):',
+    EJEMPLOS_FUGA.map(function (x) { return '   - "' + x[0] + '" → "' + x[1] + '"'; }).join('\n'),
+    '3. Explica qué se suele encontrar en casos parecidos, conectado con esa respuesta,',
+    '   y menciona que es algo que se ve normalmente en su sector. No afirmes que eso',
+    '   pasa EN SU empresa en concreto (no lo sabes); habla de lo que se ve "muchas veces"',
+    '   o "con este tipo de negocios".',
+    '4. Explica en una frase cómo lo trabajamos, conectado con el problema indicado, no',
+    '   una lista suelta de "IA y automatización".',
+    '5. Cierra proponiendo la llamada: qué va a ver en ella (el recorrido que montaríamos',
+    '   en su caso y por dónde atacaría primero), y ofrece los DOS HORARIOS que te dan más',
+    '   abajo, copiados tal cual.',
+    '',
+    'REGLAS',
+    '- Personaliza siempre con los datos que te dan; menciona al menos su respuesta',
+    '  concreta sobre dónde se le escapa, y que eso se ve normalmente en su sector.',
+    '- No inventes ningún dato que no te han dado.',
+    '- No menciones puntuaciones internas: nada de "nivel", letras A/B/C/D, "tipología",',
+    '  "comportamiento", "según nuestro algoritmo", "frío", "caliente" ni "probabilidad de compra".',
+    '- Entre 100 y 160 palabras.',
+    '- Tuteas. Tono directo, cercano, profesional y humano.',
+    '- Sin emojis, sin listas, sin negritas ni asteriscos, sin comillas alrededor de todo el texto.',
+    '- Los dos horarios van exactos, tal cual te los dan, sin cambiar día ni hora.',
+    '- Contesta solo con el texto del mensaje, nada más.'
+  ].join('\n');
+  const usuario = 'FICHA: nombre ' + (d.nombre || '-') + ' · sector ' + (d.sector || '-') +
+    ' · respuesta del formulario sobre dónde se le escapa: «' + (d.fuga || 'no lo sé, eso es lo que quiero averiguar') + '»' +
+    ' · inversión actual: ' + (d.inversion || '-') + ' · peticiones/mes: ' + (d.volumen || '-') +
+    '\n\nHORARIOS A OFRECER (cópialos tal cual): "' + d.horario1 + '" y "' + d.horario2 + '"';
+  const clave = process.env.ANTHROPIC_API_KEY;
+  if (!clave) return { texto: '', motivo: 'falta ANTHROPIC_API_KEY' };
+  let r;
+  try {
+    r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
+        process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}),
+      body: JSON.stringify({ model: MODELO, max_tokens: 700, temperature: 1, system: sistema, messages: [{ role: 'user', content: usuario }] })
+    });
+  } catch (e) { return { texto: '', motivo: 'fetch_' + (e && e.message) }; }
+  if (!r.ok) return { texto: '', motivo: 'anthropic ' + r.status };
+  const j = await r.json();
+  const texto = (j.content || []).filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text.trim(); }).join('\n').replace(/^«|»$/g, '').trim();
+  if (!texto) return { texto: '', motivo: 'sin texto' };
+  const palabras = texto.split(/\s+/).filter(Boolean).length;
+  if (palabras < 70 || palabras > 220) return { texto: '', motivo: 'longitud fuera de rango (' + palabras + ' palabras)' };
+  if (texto.indexOf(d.horario1) === -1 || texto.indexOf(d.horario2) === -1) return { texto: '', motivo: 'no incluyó los dos horarios tal cual' };
+  if (/\bnivel\s*[abcd]\b|tipolog[ií]a|\bfr[ií]o\b|\bcaliente\b|probabilidad de compra|según nuestro algoritmo/i.test(texto)) {
+    return { texto: '', motivo: 'mencionó algo del sistema interno' };
+  }
+  return { texto: texto, motivo: '' };
+}
+
 // Estado del agente en el contacto (campo WA · Agente): turnos y candado.
 function leerEstado(c) {
   const f = (c.customFields || []).filter(function (x) { return x && x.id === CAMPO_ESTADO; })[0];
@@ -553,4 +637,4 @@ async function avisar(c, motivo, texto) {
   } catch (e) { console.error('[agente] aviso:', e && e.message); }
 }
 
-module.exports = { variar: variar, atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };
+module.exports = { variar: variar, mensajePersonalizado: mensajePersonalizado, atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };
