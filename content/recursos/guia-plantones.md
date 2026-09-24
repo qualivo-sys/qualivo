@@ -10,8 +10,8 @@
 
 Hola, soy Maikel. Esta es la guía que prometí en el carrusel. Es corta a
 propósito: son las cinco cosas que reviso cuando alguien no aparece a una
-reunión, y el protocolo de los quince minutos siguientes. La estoy aplicando
-en mi propia empresa.
+reunión, y el protocolo de los quince minutos siguientes. Una parte ya la uso en
+mi empresa. La otra la voy a probar, y abajo te cuento cuál.
 
 ## Antes de nada: mide dos números
 
@@ -66,21 +66,21 @@ respuesta: «¿sigues pudiendo el viernes a las 17:00?».
 
 ## Los quince minutos siguientes (el protocolo)
 
-- **Minuto 5:** WhatsApp. «Te estoy esperando en la videollamada, ¿te viene
+- **Minuto 5 a 10:** llamada o WhatsApp, lo que antes le llegue. A mí la llamada del minuto 6 es la que me ha funcionado. Si va por escrito: «Te estoy esperando en la videollamada, ¿te viene
   bien ahora o prefieres otro día?».
-- **Minuto 15:** llamada, con guion de plantón, no de venta. La primera frase
+- **Si no contesta al primero, el otro**, con guion de plantón, no de venta. La primera frase
   dice «te he esperado». Si suena a llamada en frío, cuelgan.
 - **Después:** tres toques en una semana y silencio. Día 0, la llamada y el
   mensaje. Día 2, lo que ibais a mirar. Día 6, un cierre educado.
 
-Lo que me pasó el 18 de septiembre: plantón a las 12:00, llamada a las 12:06
-y a los tres minutos me escribieron pidiendo otra hora. Yo no estaba mirando
-el calendario: lo hizo mi comercial IA.
+Lo que me pasó el 18 de septiembre: plantón a las 12:00, llamada a su
+oficina a las 12:06, cogió un compañero, y a los tres minutos me escribieron
+pidiendo otra hora. La llamada no la hice yo: la hizo mi comercial IA.
 
-## Lo que estoy probando ahora
+## Lo siguiente que quiero probar
 
 Precio antes de reservar, y confirmación la víspera con un hueco que se libera
-si no contesta. Cuando tenga el número de dos semanas, lo cuento.
+si no contesta. Cuando lleve dos semanas probándolo, te cuento el número.
 
 Si quieres que miremos tus dos números con tu agenda delante, son quince
 minutos: qualivo.io/diagnostico. Y si tienes una pregunta sobre tu caso,

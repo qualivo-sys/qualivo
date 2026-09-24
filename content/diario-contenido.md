@@ -548,3 +548,14 @@ reconozcan. Hecho en el carrusel (cada motivo con su sector: reformas, clínicas
 academias, academias, clínicas), la guía (una parte por sector), el pie de foto
 y la newsletter. Regla que anoto: los ejemplos genéricos («un cliente», «una
 reunión») se cambian por el paciente, el alumno o el cliente de reforma.
+
+Master Reviewer del carrusel de plantones, la guía y la newsletter (24-sep):
+nota 7 en las tres. Aplicado lo que no depende de la estructura: el caso del
+18-sep contado como pasó (llamó a su oficina, cogió un compañero, escribieron
+ellos; sin la frase «te he esperado», que era del correo y no de la llamada),
+las pruebas de precio y confirmación como «lo siguiente que quiero probar», la
+llamada del martes sin hora inventada, los ejemplos por sector en presente,
+una sola llamada a la acción en la newsletter y fuera el «no es X: es Y» de la
+lámina 8. Pendiente, a la espera de Maikel: si el carrusel se rehace en torno a
+«la primera cita» (sin sector por lámina), que además resuelve los rótulos
+«Motivo · sector» y el exceso de palabras por lámina que marca el revisor.
