@@ -541,3 +541,10 @@ esperando solo en la videollamada con gorro de fiesta y tarta),
 carrusel, la guía y la newsletter. Sigue en el artículo del 23, el del 24, la
 bandera roja del 23 y el reapuntado de leads-pero-no-ventas: pendiente de que
 Maikel diga si la quita de ahí también.
+
+Maikel, 24-sep tarde: la portada le gusta; pide que el contenido hable de los
+sectores con los que trabajamos (clínicas, reformas, academias) para que se
+reconozcan. Hecho en el carrusel (cada motivo con su sector: reformas, clínicas,
+academias, academias, clínicas), la guía (una parte por sector), el pie de foto
+y la newsletter. Regla que anoto: los ejemplos genéricos («un cliente», «una
+reunión») se cambian por el paciente, el alumno o el cliente de reforma.

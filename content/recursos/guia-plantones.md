@@ -1,4 +1,4 @@
-# Guía corta: menos plantones en tus reuniones (24-sep-2026)
+# Guía corta: menos plantones en clínicas, reformas y academias (24-sep-2026)
 
 > Recurso para quien comenta «GUÍA» en el carrusel de plantones. Se manda a
 > mano, en texto, por mensaje directo o correo (nada automatizado desde el
@@ -44,6 +44,25 @@ dentro de ocho días. Y si no puedes tú, que le atienda alguien de tu equipo.
 le van a vender algo? Revisa: en la confirmación, para quién es, para quién
 no, qué vais a hacer, cuánto dura y qué puede esperar. Y el precio, o un
 rango, antes de reservar. Sin precio, reservar es curiosidad, no decisión.
+
+## En tu sector, lo primero que miraría
+
+**Clínicas.** El paciente no sabe qué pasa en la primera visita ni cuánto le
+va a costar el tratamiento. Pon en la confirmación qué vais a revisar, que se
+lleva un diagnóstico y un plan por escrito, cuánto dura y un precio
+orientativo. Y deja claro qué no vais a hacer ese día: nadie quiere salir con
+un tratamiento que no pidió.
+
+**Reformas.** La visita de obra a cinco días se pierde entre el trabajo y los
+niños. Resuelve la primera parte por teléfono en diez minutos: medidas, fotos
+por WhatsApp y una idea de precio. La visita, cuando ya sepa que le encajas.
+Y si no puedes ir pronto tú, que vaya alguien del equipo: el otro presupuesto
+viene mañana.
+
+**Academias.** El alumno pide información en tres sitios a la vez y se
+matricula en el que le contesta antes. Llamada de admisión el mismo día o al
+siguiente, no a los ocho días. Y el recordatorio con una pregunta que pida
+respuesta: «¿sigues pudiendo el viernes a las 17:00?».
 
 ## Los quince minutos siguientes (el protocolo)
 

@@ -30,14 +30,15 @@
 > quitarse la llamada de encima, y el martes tiene otra cosa. No mintió. Es
 > que no había nada en juego.
 >
-> Cuando alguien no aparece, suele ser por una de estas cinco cosas. No tenía
-> tiempo: le pediste 45 minutos para algo que se resolvía en 10 por teléfono.
-> No sabía para qué era la reunión: «reserva una llamada para conocer nuestros
-> servicios» no es un motivo. Se le olvidó: reservó el lunes, la reunión era
-> el viernes, y entre medias tuvo 47 correos y dos incendios. Perdió el
-> interés: cuanto más tiempo pasa entre «me interesa» y «hablamos», más se
-> enfría. O tenía dudas y no te las contó: si es para él, cuánto cuesta, si
-> le van a vender algo.
+> Cuando alguien no aparece, suele ser por una de estas cinco cosas, y en
+> cada sector tiene su cara. En una empresa de reformas, no tenía tiempo: la
+> visita era a cinco días y se le cruzó el trabajo, cuando la primera parte
+> se resolvía por teléfono con unas fotos. En una clínica, no sabía para qué
+> era la primera visita, o tenía dudas que no contó: si le va a doler, cuánto
+> le va a costar, si le van a meter un tratamiento que no necesita. En una
+> academia, se le olvidó entre el trabajo y los exámenes, o perdió el
+> interés: pidió información en tres sitios y se matriculó en el que le llamó
+> esa misma tarde.
 >
 > Cada una tiene un arreglo distinto, y casi ninguno está en el cliente. Está
 > en el proceso: el precio antes de reservar, una confirmación que pida
@@ -58,8 +59,8 @@
 > víspera con un hueco que se libera si no contestas. En dos semanas cuento
 > si el número baja. Y si no baja, también.
 >
-> He escrito una guía corta con los cinco motivos, qué revisar en cada uno y
-> el protocolo de los quince minutos siguientes. Responde a este correo con
+> He escrito una guía corta para clínicas, reformas y academias, con qué
+> revisar en cada caso y el protocolo de los quince minutos siguientes. Responde a este correo con
 > la palabra GUÍA y te la mando. Y si prefieres que miremos tus plantones con
 > tu agenda delante, son quince minutos: qualivo.io/diagnostico
 >
