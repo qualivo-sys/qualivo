@@ -561,3 +561,7 @@ lámina 8. Pendiente, a la espera de Maikel: si el carrusel se rehace en torno a
 «Motivo · sector» y el exceso de palabras por lámina que marca el revisor.
 
 Maikel, 24-sep tarde: saltar de sector en cada lámina «queda raro». Rehecho en torno al punto común, la primera cita: sin rótulos de sector, número en el titular, menos de 40 palabras por lámina, los tres sectores nombrados solo en portada y cierre. Lo específico de cada sector queda en la guía.
+
+### Jueves 24 · publicado en Instagram
+
+Carrusel «Te han dado plantón» (v3) publicado en @maikel.echevarria a las 11:06 UTC, con el ok de Maikel. Post en estado «published» en el Social Planner. Quien comente GUÍA recibe la guía a mano. La newsletter de plantones sigue en borrador.

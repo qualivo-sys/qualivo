@@ -87,3 +87,15 @@ insta a ver» · «si publica tu»). LinkedIn sigue en pausa.
   de GHL las da Maikel en la sesión; no van al repo.
 - Qué se mide: guardados y comentarios con el tiempo de respuesta de su último
   contacto. Maikel contesta a los comentarios a las 2 h y a las 20:00.
+
+## 24-sep · carrusel «Te han dado plantón» PUBLICADO en Instagram
+Maikel: «vale me gusta publícalo». Pausa levantada para esta pieza en Instagram.
+
+- Instagram @maikel.echevarria, publicado el 24-sep a las 11:06 UTC por el
+  Social Planner de GHL (post `6ab5042df1c8c329bfc4a629`, estado published).
+  Ocho láminas en el CDN de GHL, versión 3 (en torno a la primera cita).
+  Pie: `content/carruseles/2026-09-24-plantones/caption.md`.
+- CTA «comenta GUÍA»: la guía (`content/recursos/guia-plantones.md`) se manda
+  a mano por mensaje directo, en texto, en las 24 horas siguientes.
+- Qué se mide: comentarios «GUÍA», guardados, y cuántos de los que piden la
+  guía acaban en diagnóstico.
