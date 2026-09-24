@@ -88,6 +88,11 @@ var CREDENTIAL_KEYS = [
   'META_ACCESS_TOKEN',
   'META_AD_ACCOUNT_ID', // sin el prefijo act_, p.ej. 1234567890
   'META_API_VERSION', // opcional, por defecto v21.0
+  // Meta Conversions API (Lead Form HackTheLead → optimización sobre leads reales)
+  'META_CAPI_TOKEN', // access token del dataset/píxel con permiso CAPI
+  'META_DATASET_ID', // id del dataset (píxel) de Qualivo
+  'META_TEST_EVENT_CODE', // opcional: TESTxxxx para el QA en Events Manager
+  'LEAD_WEBHOOK_SECRET', // opcional: protege el Web App (?secret=...)
   // Google Ads API
   'GOOGLE_ADS_DEVELOPER_TOKEN',
   'GOOGLE_ADS_CLIENT_ID',
@@ -125,6 +130,8 @@ function hasCreds(platform) {
       return !!getProp('HUBSPOT_TOKEN');
     case 'GHL':
       return !!getProp('GHL_TOKEN') && !!getProp('GHL_LOCATION_ID');
+    case 'CAPI':
+      return !!getProp('META_CAPI_TOKEN') && !!getProp('META_DATASET_ID');
     default:
       return false;
   }
