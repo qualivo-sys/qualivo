@@ -572,3 +572,5 @@ Maikel, 24-sep: «una cosa es mi Instagram personal y otra la newsletter de Qual
 - **Instagram y LinkedIn de Maikel:** primera persona, su cara, sus casos («mi comercial IA», «mi empresa»), molde de contenido (crema, tinta, naranja).
 - **Newsletter de Qualivo:** marca. La envía Qualivo, habla en «nosotros», firma Maikel como fundador, colores y tipografía de qualivo.io (blanco, #101319, #27BDB1, #0E7C74, lila #EFECFB, Montserrat), sin reutilizar las imágenes del Instagram personal.
 El capítulo 1 «Agentizando mi propia empresa» (`content/newsletter/2026-09-24.md`) es un diario personal de Maikel: si sale, sale como newsletter de LinkedIn de Maikel, no como la de Qualivo.
+
+Prueba de la newsletter de plantones enviada a info@maikelechevarria.com el 24-sep (asunto «[PRUEBA] Le guardaste la hora. No vino.»), desde el Gmail conectado. Versión de correo con tablas y estilos en línea: `content/newsletter/correo/2026-09-25-plantones.html`. El botón GUÍA abre un correo a info@maikelechevarria.com; el de diagnóstico lleva UTM (newsletter / email / plantones).
