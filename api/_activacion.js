@@ -133,9 +133,15 @@ const GATEWAY_PROVIDER = '67ad23a0cf352d8f5809f0ca';
 // número oficial (647) conectado a Wazzap desde el 23-sep, ese riesgo concreto
 // ya no aplica al número que sale; el tope diario y la regla de «nunca
 // mensajes iguales» se mantienen igual, valen para cualquier número que no
-// pase por la API oficial de Meta. Activar/desactivar con GATEWAY_PAUSA en
-// Vercel (0 = activa; cualquier otro valor, o ausente, = en pausa).
-const GATEWAY_PAUSA = process.env.GATEWAY_PAUSA !== '0';
+// pase por la API oficial de Meta.
+//
+// 24-sep-2026: la pausa por defecto («ausente = en pausa») se quedó activa sin
+// que nadie pusiera GATEWAY_PAUSA=0 en Vercel tras el cambio de número, y hoy
+// los WhatsApp de leads reales (Santi, Cristina) han estado cayendo en
+// whatsapp_fallido por eso, aunque los números sí tienen WhatsApp. Maikel:
+// «hazlo todo por whatsapp». Se invierte el valor por defecto: ahora activa
+// sola, y solo se pausa poniendo GATEWAY_PAUSA=1 en Vercel si hace falta.
+const GATEWAY_PAUSA = process.env.GATEWAY_PAUSA === '1';
 // Tope diario de mensajes por la pasarela. El 21 y el 22 de septiembre
 // salieron unos sesenta en dos días por el número personal, muchos iguales, y
 // WhatsApp lo restringió. El tope se mantiene con el número oficial (647) por
