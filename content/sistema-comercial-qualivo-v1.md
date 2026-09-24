@@ -52,22 +52,22 @@ REGLA      cada etapa lleva objetivo, mensaje, estado emocional, fricciones, aut
 
 ```mermaid
 flowchart TD
-  A[1 Captación\nMeta · landing · LinkedIn · referidos] --> B[2 Conversión\nformulario o landing → CRM + ficha de contexto]
-  B --> C[3 Cualificación\ntipología + comportamiento → A/B/C/D]
-  C --> D[4 Activación\nWA con su caso → agente · Raquel · correos]
-  D -->|pide verlo| E[5 Show-Up Engine\nreserva <48h + micro-compromiso + confirmación obligatoria]
+  A[1 Captación<br>Meta · landing · LinkedIn · referidos] --> B[2 Conversión<br>formulario o landing → CRM + ficha de contexto]
+  B --> C[3 Cualificación<br>tipología + comportamiento → A/B/C/D]
+  C --> D[4 Activación<br>WA con su caso → agente · Raquel · correos]
+  D -->|pide verlo| E[5 Show-Up Engine<br>reserva <48h + micro-compromiso + confirmación obligatoria]
   D -->|no responde| N[No responde · toque a 30 días]
-  E -->|confirmada| F[6 Diagnóstico\n10-15 min con Maikel, ficha F delante]
+  E -->|confirmada| F[6 Diagnóstico<br>10-15 min con Maikel, ficha F delante]
   E -->|no confirma| L[Liberada · Más adelante]
   E -->|confirmó y no vino| NS[No presentado · +10 min · día 2 · día 5]
   NS -->|reagenda| E
-  F --> G[7 Propuesta\nmismo día · número del piloto · garantía]
-  G --> H[8 Seguimiento comercial\ndía 1 · 4 · 10 · llamada · Más adelante]
-  H -->|sí| I[9 Onboarding\ncontrato · factura · Drive · arranque]
+  F --> G[7 Propuesta<br>mismo día · número del piloto · garantía]
+  G --> H[8 Seguimiento comercial<br>día 1 · 4 · 10 · llamada · Más adelante]
+  H -->|sí| I[9 Onboarding<br>contrato · factura · Drive · arranque]
   H -->|ahora no| L
-  I --> J[10 Producción\n14 días · número de partida · aprobación de mensajes]
-  J --> K[11 Retención\ninforme semanal · día 30 · conversación de continuidad]
-  K --> M[12 Expansión\nsegundo agente · nueva vertical · referidos · caso]
+  I --> J[10 Producción<br>14 días · número de partida · aprobación de mensajes]
+  J --> K[11 Retención<br>informe semanal · día 30 · conversación de continuidad]
+  K --> M[12 Expansión<br>segundo agente · nueva vertical · referidos · caso]
   M --> A
 ```
 
