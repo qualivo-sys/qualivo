@@ -18,6 +18,15 @@ const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
 // (act-email1/2/3, van desde RADIOGRAFIA_FROM). WhatsApp y llamadas siguen igual.
 const EMAILS_PAUSADOS = true;
 
+// 24-sep-2026, Maikel (tras ver el wa1 genérico salir a leads reales y
+// cruzarse con mensajes que él ya llevaba a mano): el primer WhatsApp tiene
+// que construirse de verdad a partir de las respuestas del formulario, con
+// IA, no ser el mismo texto para todos. Hasta que ese generador esté listo y
+// probado, wa1/wa2/wa3 se saltan por completo (voz, correos ya pausados, y
+// el resto de la cadencia siguen igual). Quitar esta pausa cuando el mensaje
+// personalizado esté en producción.
+const WA_CADENCIA_PAUSADA = true;
+
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
 // y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
 function nombrePila(v) {
@@ -334,6 +343,7 @@ module.exports = async function handler(req, res) {
 
     try {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
+        if (WA_CADENCIA_PAUSADA) { continue; }
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
         // El último (wa3) propone dos huecos reales de la agenda, en palabras.
         if (paso.tipo === 'wa3') {
