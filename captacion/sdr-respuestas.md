@@ -100,3 +100,24 @@ Prueba 3, dominio:          qualivo.io
 
 Regla: en `send_message` de Gmail se usa `htmlBody`, nunca `body` con URLs
 sueltas. No afecta a Smartlead, que no pasa por Gmail.
+
+## Regla de copy en los seguimientos (Maikel, 24-sep)
+
+No basta con pedir "quince minutos". **Siempre hay que decir qué pasa dentro de
+la llamada y qué hacemos**, con estas tres piezas:
+
+1. **El mapeo**: "mapeamos vuestro proceso entero, desde que alguien entra hasta
+   que acaba en reunión o en venta, y vemos por dónde se está cayendo gente".
+2. **Cómo se arregla**: "lo resolvemos con procesos, automatización e IA dentro
+   de lo que ya usáis". Sirve igual en B2B que en B2C (Aparca&Go es el ejemplo
+   de B2C que puso Maikel).
+3. **Que no vamos en blanco**: "llego con ideas concretas ya miradas sobre
+   vuestro caso, no a que me lo contéis todo desde cero".
+
+Y el cierre pregunta la hora directamente. **Nada de puertas de salida** del
+tipo "si prefieres esperar me lo dices" o "si no es el momento lo dejo aquí":
+Maikel las hizo quitar de los dos seguimientos del 24-sep porque le dan al otro
+la excusa hecha.
+
+Ojo con los días de la semana: los dos borradores decían "miércoles 24" y el 24
+era jueves. Se comprueba con la fecha, no de memoria.
