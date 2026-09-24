@@ -14,6 +14,10 @@ const S = require('./_secuencias');
 const TOPE = 40;          // contactos procesados por ejecución
 const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
 
+// 24-sep-2026: Maikel pidió parar los correos de la cadencia de activación
+// (act-email1/2/3, van desde RADIOGRAFIA_FROM). WhatsApp y llamadas siguen igual.
+const EMAILS_PAUSADOS = true;
+
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
 // y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
 function nombrePila(v) {
@@ -429,6 +433,7 @@ module.exports = async function handler(req, res) {
           resumen.errores++; hechos++;
         }
       } else if (paso.tipo === 'email') {
+        if (EMAILS_PAUSADOS) { continue; }
         if (!process.env.RESEND_API_KEY) {
           resumen.errores++;
           console.error('[activacion] falta RESEND_API_KEY: el correo ' + paso.indice + ' no sale para ' + c.id);
