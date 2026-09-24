@@ -1,4 +1,4 @@
-# Newsletter · «Te han dado plantón. ¿Por qué?» · propuesta de envío viernes 25-sep-2026
+# Newsletter · «Le guardaste la hora. No vino.» · propuesta de envío viernes 25-sep-2026
 
 > Pedida por Maikel el 24-sep junto con el carrusel de plantones y la guía.
 > Puede ir como capítulo 2 de «Agentizando mi propia empresa» (si el capítulo
@@ -9,11 +9,13 @@
 
 ## Maqueta (24-sep)
 
-Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-plantones.html` (imagen: `maqueta/2026-09-25-plantones.png`). Misma portada que el carrusel publicado hoy, lista de los cinco motivos, línea de tiempo del 18-sep (12:00, 12:06, 12:09) y un solo botón: «Responde GUÍA». Si hay diferencias con el texto de abajo, vale la maqueta.
+Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-plantones.html` (imagen: `maqueta/2026-09-25-plantones.png`). **v2 (24-sep, Maikel: «más enfocada al dolor del cliente» y «los colores de qualivo.io son diferentes»):** empieza en la escena del lector (le guardaste la hora, no vino), agita con lo que cuesta de verdad (nadie le vuelve a llamar y lo resuelve con otro), cara del problema en clínica, reforma y academia, los cinco motivos, el caso del 18-sep como prueba, tres cosas para esta semana y un solo botón. Colores y tipografía de la web: blanco, tinta #101319, verde azulado #27BDB1 y #0E7C74, lila #EFECFB, Montserrat, logo de Qualivo. El texto de abajo es la versión anterior: vale la maqueta.
 
 ## Asunto y preheader
 
-- **Asunto (recomendado):** Te han dado plantón. ¿Por qué?
+- **Asunto (recomendado, v2):** Le guardaste la hora. No vino.
+- **Preheader (v2):** Y lo más caro no es la hora que perdiste.
+- Anterior: Te han dado plantón. ¿Por qué?
 - Alternativa 1: Lo que hago a los seis minutos de un plantón
 - Alternativa 2: Un plantón no significa que el cliente sea malo
 - **Preheader:** Cinco motivos por los que no aparecen, y qué hacer en los diez minutos siguientes.

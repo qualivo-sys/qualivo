@@ -565,3 +565,5 @@ Maikel, 24-sep tarde: saltar de sector en cada lámina «queda raro». Rehecho e
 ### Jueves 24 · publicado en Instagram
 
 Carrusel «Te han dado plantón» (v3) publicado en @maikel.echevarria a las 11:06 UTC, con el ok de Maikel. Post en estado «published» en el Social Planner. Quien comente GUÍA recibe la guía a mano. La newsletter de plantones sigue en borrador.
+
+Newsletter de plantones v2 (24-sep): Maikel pidió enfocarla al dolor del cliente y usar los colores de la web. Rehecha en orden problema, agitar, solución, con el caso propio solo como prueba; paleta y tipografía de qualivo.io. Regla que anoto: los correos llevan la marca de la web (blanco, #101319, #27BDB1, Montserrat); las piezas de redes siguen con el molde de contenido hasta que Maikel decida si también cambian.

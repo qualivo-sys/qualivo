@@ -1,65 +1,70 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>
-@font-face{font-family:Anton;src:url(../../infografias/2026-09-10/fuentes/anton.ttf)}
-@font-face{font-family:SG;src:url(../../infografias/2026-09-10/fuentes/spacegrotesk.woff2) format('woff2')}
+@font-face{font-family:Montserrat;font-weight:100 900;src:url(../../../assets/fonts/montserrat-latin.woff2) format('woff2')}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#E9E5DC;font-family:Arial,Helvetica,sans-serif;color:#1d1d1f;width:720px}
-.inbox{background:#fff;margin:24px 24px 0;border-radius:14px 14px 0 0;padding:22px 26px 18px;border-bottom:1px solid #eee}
+body{background:#EFECFB;font-family:Montserrat,Arial,sans-serif;color:#101319;width:720px}
+.inbox{background:#fff;margin:24px 24px 0;border-radius:14px 14px 0 0;padding:22px 26px 18px;border-bottom:1px solid #eee;font-family:Arial,Helvetica,sans-serif}
 .subj{font-size:22px;font-weight:700;margin-bottom:14px}
 .from{display:flex;align-items:center;gap:12px}
 .av{width:42px;height:42px;border-radius:50%;background:url(../../../assets/img/maikel.jpg) center/cover}
 .from b{font-size:15px}.from span{display:block;font-size:13px;color:#777}
-.mail{background:#F2EEE6;margin:0 24px 24px;border-radius:0 0 14px 14px;overflow:hidden}
-.hero{height:340px;background:url(portada.png) center 30%/cover;position:relative}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(10,10,11,.75) 100%)}
-.hero h1{position:absolute;left:36px;right:36px;bottom:26px;z-index:2;font-family:Anton;font-size:56px;line-height:1;text-transform:uppercase;color:#F2EEE6}
-.hero h1 span{color:#E8590C}
-.body{padding:34px 40px 40px;font-family:SG;font-size:17px;line-height:1.62;color:#0A0A0B}
+.mail{background:#FFFFFF;margin:0 24px 24px;border-radius:0 0 14px 14px;overflow:hidden}
+.logo{padding:22px 40px 18px;border-bottom:1px solid #EFECFB}.logo img{height:26px;display:block}
+.hero{height:330px;background:url(portada.png) center 30%/cover;position:relative}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,0) 40%,rgba(8,9,12,.82) 100%)}
+.hero h1{position:absolute;left:36px;right:36px;bottom:24px;z-index:2;font-weight:900;font-size:40px;line-height:1.1;letter-spacing:-.02em;color:#fff}
+.hero h1 span{color:#27BDB1}
+.body{padding:34px 40px 40px;font-size:16.5px;line-height:1.65;color:#101319}
 .body p{margin-bottom:18px}
-.body b{font-weight:700}
-.list{background:#fff;border-radius:14px;padding:22px 26px;margin:6px 0 24px}
-.list .t{font-family:Anton;font-size:22px;text-transform:uppercase;color:#E8590C;margin-bottom:10px}
-.list div.i{padding:8px 0;border-top:1px solid #eee;font-size:16px}
+.body b{font-weight:800}
+.list{background:#EFECFB;border-radius:14px;padding:22px 26px;margin:6px 0 24px}
+.list .t{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#0E7C74;margin-bottom:10px}
+.list div.i{padding:9px 0;border-top:1px solid rgba(16,19,25,.08);font-size:15.5px;line-height:1.5}
 .list div.i:first-of-type{border-top:0}
-.list div.i b{display:inline-block;width:26px;color:#E8590C}
+.list div.i b{display:inline-block;width:26px;color:#0E7C74;font-weight:900}
 .tl{display:flex;gap:10px;margin:6px 0 24px}
-.tl div{flex:1;background:#0A0A0B;color:#F2EEE6;border-radius:12px;padding:14px 14px}
-.tl div b{display:block;font-family:Anton;font-size:30px;color:#E8590C;font-weight:400}
-.tl div span{font-size:14px;line-height:1.35;display:block}
-.cta{background:#0A0A0B;color:#F2EEE6;border-radius:14px;padding:24px 28px;margin-top:8px}
-.cta .btn{display:inline-block;margin-top:14px;background:#E8590C;color:#fff;font-weight:700;padding:12px 20px;border-radius:10px;font-size:16px}
+.tl div{flex:1;background:#08090C;color:#fff;border-radius:12px;padding:14px}
+.tl div b{display:block;font-weight:900;font-size:26px;color:#27BDB1;letter-spacing:-.01em}
+.tl div span{font-size:13.5px;line-height:1.4;display:block;color:rgba(255,255,255,.85)}
+.cta{background:#08090C;color:#fff;border-radius:14px;padding:24px 28px;margin-top:8px;font-size:16px;line-height:1.55}
+.cta .btn{display:inline-block;margin-top:16px;background:#27BDB1;color:#04231F;font-weight:800;padding:12px 22px;border-radius:999px;font-size:15.5px}
 .firma{margin-top:26px}
-.pie{font-size:12px;color:#8a857c;text-align:center;padding:0 40px 30px;font-family:SG}
+.pie{font-size:12px;color:#7A7C82;text-align:center;padding:0 40px 30px}
 </style></head><body>
 <div class="inbox">
-  <div class="subj">Te han dado plantón. ¿Por qué?</div>
-  <div class="from"><div class="av"></div><div><b>Maikel Echevarría</b><span>para ti · Cinco motivos por los que no aparecen, y qué hacer en los diez minutos siguientes.</span></div></div>
+  <div class="subj">Le guardaste la hora. No vino.</div>
+  <div class="from"><div class="av"></div><div><b>Maikel Echevarría</b><span>para ti · Y lo más caro no es la hora que perdiste.</span></div></div>
 </div>
 <div class="mail">
-  <div class="hero"><h1>Te han dado<br><span>plantón.</span></h1></div>
+  <div class="logo"><img src="../../../assets/img/qualivo-logo.png" alt="Qualivo"></div>
+  <div class="hero"><h1>Le guardaste la hora.<br><span>No vino.</span></h1></div>
   <div class="body">
-    <p>Estos días, varias personas que habían reservado cita conmigo no aparecieron. Me ha hecho mirar dónde estaba el fallo, y no estaba donde yo creía.</p>
-    <p>Yo pensaba que era cosa del recordatorio. Sale a las 9:00 del mismo día para todas las citas. No rescató ninguna.</p>
-    <p>Lo que creo ahora es que el plantón casi nunca es mala educación. <b>Es de diseño.</b> Alguien deja sus datos un domingo, el lunes le llama una voz que no conoce, dice que sí a un hueco del martes para quitarse la llamada de encima, y el martes tiene otra cosa. No mintió. Es que no había nada en juego.</p>
-    <p>Da igual que sea un paciente, un alumno o alguien que quiere reformar la cocina. Casi siempre es una de estas cinco:</p>
+    <p>Conoces la escena. Tienes la agenda llena y le guardas un hueco a alguien que pidió cita. Preparas lo que le vas a enseñar. Miras el reloj. Diez minutos. Quince. Nadie.</p>
+    <p>Ese hueco se lo podías haber dado a otro. El anuncio que te lo trajo ya está pagado. Y la hora no vuelve.</p>
+    <p><b>Pero lo más caro viene después.</b> Apuntas «no vino», pasas al siguiente y nadie le vuelve a llamar. Esa persona había pedido precio. Tenía el problema. Y lo va a resolver con otro.</p>
+    <p>En una clínica, es el paciente que ya no vuelve a por su tratamiento. En una reforma, la cocina que acaba haciendo el de la competencia. En una academia, el alumno que se matricula en la que le llamó esa misma tarde.</p>
     <div class="list">
       <div class="t">Por qué no aparece</div>
-      <div class="i"><b>1</b>No tenía tiempo: la cita era a cinco días y se le cruzó el trabajo.</div>
-      <div class="i"><b>2</b>No sabía para qué era la cita, ni qué se llevaba de ella.</div>
+      <div class="i"><b>1</b>La cita era a cinco días y se le cruzó el trabajo.</div>
+      <div class="i"><b>2</b>No sabía qué se iba a llevar de esa cita.</div>
       <div class="i"><b>3</b>Se le olvidó, y el recordatorio no le pedía nada.</div>
-      <div class="i"><b>4</b>Se enfrió: preguntó en tres sitios y otro le llamó esa tarde.</div>
-      <div class="i"><b>5</b>Tenía dudas que no te contó: cuánto cuesta, si le van a vender algo.</div>
+      <div class="i"><b>4</b>Preguntó en tres sitios y otro le contestó antes.</div>
+      <div class="i"><b>5</b>Tenía dudas que no te contó: cuánto cuesta, si le vas a vender algo.</div>
     </div>
-    <p>Cada una tiene un arreglo distinto, y casi ninguno está en el cliente. Está en el proceso: el precio antes de reservar, una confirmación que pida respuesta, menos días entre la pregunta y la cita.</p>
-    <p>Y hay una sexta cosa, la que más se nota: <b>lo que haces cuando no viene.</b> Lo normal es apuntar «no vino» y pasar al siguiente. Esto es lo que pasó el 18 de septiembre:</p>
+    <p>Casi nunca es mala educación. Es cómo se reservó la cita: sin precio, a muchos días vista y sin que nadie le dijera qué se iba a llevar. Eso se arregla antes de reservar.</p>
+    <p>Y lo que pasa cuando no viene se arregla en diez minutos. En mi empresa lo hace un comercial IA. Esto fue el 18 de septiembre:</p>
     <div class="tl">
       <div><b>12:00</b><span>La empresa que había reservado no aparece.</span></div>
       <div><b>12:06</b><span>Mi comercial IA llama a su oficina con un guion de plantón.</span></div>
       <div><b>12:09</b><span>Me escriben pidiendo otra hora.</span></div>
     </div>
-    <p>La llamada no la hice yo. Y el martes vi la otra cara: a alguien que se había plantado por la mañana le llamó más tarde con el guion normal, el de llamada en frío. Colgó a los doce segundos. Después de un plantón, la llamada tiene que decir que le esperaste, o no sirve.</p>
-    <p>Lo siguiente que quiero probar: precio antes de reservar y confirmación la víspera con un hueco que se libera si no contestas. Cuando lleve dos semanas, te cuento si el número baja. Y si no baja, también.</p>
-    <div class="cta">He escrito una guía corta para clínicas, reformas y academias: qué revisar en cada caso y qué hacer en los quince minutos siguientes a un plantón.<br><span class="btn">Responde GUÍA y te la mando</span></div>
-    <p class="firma">Un abrazo,<br><b>Maikel</b><br><span style="color:#8a857c">Qualivo · qualivo.io</span></p>
+    <div class="list">
+      <div class="t">Tres cosas para esta semana</div>
+      <div class="i"><b>1</b>Da un precio o un rango antes de dar la cita. Reservar pasa a ser una decisión.</div>
+      <div class="i"><b>2</b>Que el recordatorio pida respuesta: «¿sigues pudiendo el jueves a las 10:00?».</div>
+      <div class="i"><b>3</b>Si no viene, llama o escribe antes de que pasen diez minutos: «te he esperado, ¿te viene mejor otro día?».</div>
+    </div>
+    <div class="cta">Tengo una guía corta para clínicas, reformas y academias, con qué revisar en cada caso y el protocolo de los diez minutos siguientes.<br><span class="btn">Responde GUÍA y te la mando</span></div>
+    <p class="firma">Un abrazo,<br><b>Maikel</b><br><span style="color:#7A7C82">Qualivo · qualivo.io</span></p>
   </div>
   <div class="pie">Recibes esto porque pediste el diagnóstico en qualivo.io. Si no quieres más correos, responde «baja» y no te escribo más.</div>
 </div>
