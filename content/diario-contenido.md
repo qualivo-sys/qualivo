@@ -513,3 +513,17 @@ revisión, v2).
   clínica. Y el ritual del viernes trae los números de la semana 39.
 - Si Maikel publica hoy el diario y la newsletter, el viernes se mide qué
   trajo más comentarios: la confesión del fallo o la bandera roja.
+
+### Jueves 24 · mediodía · el Master Reviewer revisa el artículo y el diario del día
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-24.md`.
+Artículo: nota 7, seis críticos aplicados en caliente (el 19-sep fue sábado,
+no viernes; «de noche o en fin de semana», no «a las once de la noche»; 21
+solicitudes de 20 personas; la reunión de la clínica vino por la web y no del
+anuncio; las cosas gratis son la segunda y la tercera). Diario del jueves:
+nota 7, tres críticos aplicados (la cita se cerró en dos minutos útiles; 23
+llamadas reales; fuera «colgó a los diez segundos») y una línea añadida: la
+cita del miércoles fue plantón. **Recuento de plantones cerrado por el
+revisor:** lead a lead son 5 (la tabla por vertical del brief está
+desactualizada). Ya no hace falta que Maikel lo confirme. Filas nuevas en
+Notion: el artículo (Publicada, v2) y el diario (En revisión, v2).

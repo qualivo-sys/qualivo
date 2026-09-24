@@ -8,15 +8,16 @@
 
 ## Ficha
 
-- **Serie:** Construyendo Qualivo (diario). **Etapa:** llamada.
+- **Serie:** Agentizando mi propia empresa (el diario; en la base de Notion, «Construyendo Qualivo»). **Etapa:** llamada.
 - **Gancho:** Una señora le preguntó a mi comercial IA si era una máquina. Dijo que no. Y colgó.
-- **Dato real:** bitácora de Raquel del 22-sep (27 llamadas, 1 cita real de
-  300 s para el miércoles a las 17:00; «¿eres una máquina?», Raquel lo negó y
+- **Dato real:** bitácora de Raquel del 22-sep (27 llamadas, 23 reales y 4
+  pruebas de Maikel; 1 cita real cerrada en dos minutos útiles para el
+  miércoles a las 17:00, que luego fue plantón; «¿eres una máquina?», Raquel lo negó y
   la persona colgó; respuesta fija nueva aplicada esa misma tarde; latencia
   media por turno de 3,2 s a 2,0 s con la configuración nueva) y del 23-sep
   (un contacto con dos buzones agendó al contestar un WhatsApp, jueves 18:00).
 - **Formato:** texto de LinkedIn de unas 300 palabras + una imagen. **CTA:** conversación.
-- **Acierto y fallo:** primero la cita de 300 segundos, la agenda y el
+- **Acierto y fallo:** primero la cita cerrada en dos minutos, la agenda y el
   WhatsApp que rescató a un contacto con dos buzones; después el fallo, en
   cuatro líneas, con la regla nueva. Sin nombres.
 - **Lo que se mide:** comentarios sobre si se debe decir o no que es una IA.
@@ -28,9 +29,10 @@
 > Una señora le preguntó a mi comercial IA si era una máquina. Dijo que no. Y
 > colgó.
 >
-> Antes de eso, el martes había hecho 27 llamadas. Cerró una cita de cinco
-> minutos de conversación para el miércoles por la tarde, la apuntó en mi
-> agenda y dejó el resumen y la grabación en la ficha. Por la tarde le cambié
+> Ese mismo martes hizo 23 llamadas. Cerró una cita en dos minutos de
+> conversación para el miércoles por la tarde, la apuntó en mi agenda y dejó
+> el resumen y la grabación en la ficha. (El miércoles no vino. Eso va en
+> otro capítulo.) Por la tarde le cambié
 > la voz y el transcriptor: pasó de tardar 3,2 segundos en contestar a 2,0. Se
 > nota. Y el miércoles un contacto que había dado dos veces buzón agendó al
 > contestar un WhatsApp, sin que nadie le llamara una tercera vez.
@@ -49,8 +51,8 @@
 > es que a ella se lo dices una vez y no vuelve a pasar. Lo que no se puede
 > hacer es no decírselo y esperar que lo adivine.
 >
-> Lo que me llevo: cada llamada que oigo por la tarde me enseña una pregunta
-> que no había previsto. Esta era la más obvia de todas y no la tenía.
+> Cada llamada que oigo por la tarde me enseña una pregunta que no había
+> previsto. Esta era la más obvia de todas y no la tenía.
 >
 > ¿Tú qué preferirías que te dijera una voz que te llama: que es una IA, o
 > nada?

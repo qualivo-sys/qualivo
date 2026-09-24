@@ -2,7 +2,7 @@
 
 Seis láminas 1080 × 1350, simulación de pantalla (formato aprobado el 14-sep).
 Serie **Construyendo Qualivo**. Caso real: una clínica dental que entró el
-viernes 19-sep por `qualivo.io/clinicas` sin anuncio, avisó por WhatsApp de que
+sábado 19-sep por `qualivo.io/clinicas` sin anuncio, avisó por WhatsApp de que
 el calendario no se veía en el iPhone («no puedo bajar en el calendario»),
 cerró cita por WhatsApp con Maikel y tuvo el diagnóstico el lunes 21 a las 13:30.
 
