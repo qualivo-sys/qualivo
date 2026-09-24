@@ -567,3 +567,8 @@ Maikel, 24-sep tarde: saltar de sector en cada lámina «queda raro». Rehecho e
 Carrusel «Te han dado plantón» (v3) publicado en @maikel.echevarria a las 11:06 UTC, con el ok de Maikel. Post en estado «published» en el Social Planner. Quien comente GUÍA recibe la guía a mano. La newsletter de plantones sigue en borrador.
 
 Newsletter de plantones v2 (24-sep): Maikel pidió enfocarla al dolor del cliente y usar los colores de la web. Rehecha en orden problema, agitar, solución, con el caso propio solo como prueba; paleta y tipografía de qualivo.io. Regla que anoto: los correos llevan la marca de la web (blanco, #101319, #27BDB1, Montserrat); las piezas de redes siguen con el molde de contenido hasta que Maikel decida si también cambian.
+
+Maikel, 24-sep: «una cosa es mi Instagram personal y otra la newsletter de Qualivo». Regla que anoto y que manda desde hoy:
+- **Instagram y LinkedIn de Maikel:** primera persona, su cara, sus casos («mi comercial IA», «mi empresa»), molde de contenido (crema, tinta, naranja).
+- **Newsletter de Qualivo:** marca. La envía Qualivo, habla en «nosotros», firma Maikel como fundador, colores y tipografía de qualivo.io (blanco, #101319, #27BDB1, #0E7C74, lila #EFECFB, Montserrat), sin reutilizar las imágenes del Instagram personal.
+El capítulo 1 «Agentizando mi propia empresa» (`content/newsletter/2026-09-24.md`) es un diario personal de Maikel: si sale, sale como newsletter de LinkedIn de Maikel, no como la de Qualivo.

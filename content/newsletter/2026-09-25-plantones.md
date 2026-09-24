@@ -9,7 +9,7 @@
 
 ## Maqueta (24-sep)
 
-Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-plantones.html` (imagen: `maqueta/2026-09-25-plantones.png`). **v2 (24-sep, Maikel: «más enfocada al dolor del cliente» y «los colores de qualivo.io son diferentes»):** empieza en la escena del lector (le guardaste la hora, no vino), agita con lo que cuesta de verdad (nadie le vuelve a llamar y lo resuelve con otro), cara del problema en clínica, reforma y academia, los cinco motivos, el caso del 18-sep como prueba, tres cosas para esta semana y un solo botón. Colores y tipografía de la web: blanco, tinta #101319, verde azulado #27BDB1 y #0E7C74, lila #EFECFB, Montserrat, logo de Qualivo. El texto de abajo es la versión anterior: vale la maqueta.
+Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-plantones.html` (imagen: `maqueta/2026-09-25-plantones.png`). **v2 (24-sep, Maikel: «más enfocada al dolor del cliente» y «los colores de qualivo.io son diferentes»):** empieza en la escena del lector (le guardaste la hora, no vino), agita con lo que cuesta de verdad (nadie le vuelve a llamar y lo resuelve con otro), cara del problema en clínica, reforma y academia, los cinco motivos, el caso del 18-sep como prueba, tres cosas para esta semana y un solo botón. Colores y tipografía de la web: blanco, tinta #101319, verde azulado #27BDB1 y #0E7C74, lila #EFECFB, Montserrat, logo de Qualivo. **v3 (24-sep, Maikel: «una cosa es mi Instagram personal y otra la newsletter de Qualivo»):** la envía Qualivo, habla en «nosotros», firma Maikel como fundador y la cabecera es de marca (sin la foto del carrusel del Instagram personal). El texto de abajo es una versión anterior: vale la maqueta.
 
 ## Asunto y preheader
 
