@@ -447,3 +447,69 @@ dos caras están en el artículo y en el post. Regla que anoto: lo que el brief
 marca «para discutir» no se cuenta como hecho, ni en pasado ni en presente.
 Filas nuevas en Notion: el artículo (Publicada, v2) y la bandera roja (En
 revisión, v2).
+
+## Jueves 24 de septiembre de 2026
+
+### Publicado
+- **Blog:** https://qualivo.io/blog/que-poner-en-tu-negocio-para-atraer-clientes/ ·
+  «Qué poner en tu negocio para atraer clientes (y qué lo vacía)». Keyword de
+  110 búsquedas y competencia cero del listado maestro (fila 7). Datos propios
+  de la semana del 18 al 22: 291,90 € en anuncios, 21 contactos a 13,90 €, 8
+  de 20 entraron de noche y no recibieron nada hasta las 9:00, 9 citas, 5
+  plantones; la clínica del iPhone del 19-sep; el CRM propio. Cinco cosas que
+  ponen y cinco que vacían (tabla). Tarjeta, sitemap, llms.txt y registro.
+- **Reapuntado:** `/blog/leads-pero-no-ventas/`. Solo «Por dónde empezar»
+  (los dos últimos párrafos, con el dato propio de la semana y el enlace al
+  artículo de hoy) y el cierre: un solo botón al diagnóstico, antes había dos.
+
+### Borradores (pausa vigente en LinkedIn)
+- Jueves, «Agentizando mi propia empresa»:
+  `content/borradores/2026-09-24-agentizando-eres-una-maquina.md`. Primero lo
+  que hizo el sistema (27 llamadas, una cita de cinco minutos, latencia de
+  3,2 a 2,0 s, un contacto con dos buzones que agendó al WhatsApp), después el
+  fallo en cuatro líneas: una señora preguntó «¿eres una máquina?», Raquel lo
+  negó y colgó; esa tarde, respuesta fija nueva. Imagen
+  `content/infografias/2026-09-24/eres-una-maquina.png` (la pregunta, la
+  respuesta mala tachada, la nueva).
+- La newsletter capítulo 1 (`content/newsletter/2026-09-24.md`) tenía hoy su
+  envío. No hay ok escrito de Maikel: no se envía. Queda lista para cuando lo
+  dé; solo hay que cambiar «el lunes» por la fecha si pasa de semana.
+- El guion del vídeo a cámara del jueves sigue en
+  `semana-39-formatos-intercalados.md`, revisado y recortado. Lo graba Maikel
+  cuando quiera; no depende de la pausa.
+
+### Decisiones que le pido a Maikel (con recomendación)
+1. **Newsletter:** sigue esperando su ok. Recomiendo enviarla hoy mismo por
+   LinkedIn (nativa) y el correo individual a los leads sin cita con la
+   cadencia terminada. Cada día que pasa, el capítulo 1 envejece.
+2. **LinkedIn:** publicar hoy el diario del «¿eres una máquina?» (recomiendo
+   sí: es la historia más humana de la semana y la regla nueva es un
+   acierto) y ayer la bandera roja (sigue en borrador).
+3. **Recuento de plantones:** 4 o 5. Sigue sin cerrar y hoy lo he vuelto a
+   usar como 5 en el artículo, con la clínica dentro. Si son 4, corrijo dos
+   artículos y una imagen.
+
+### Descartes
+- Segundo artículo: no, el de hoy es largo.
+- Contar en el post del jueves la locución de operadora que sigue engañando a
+  Raquel después del saludo (22-sep) o el mensaje de buzón que no encajaba
+  (23-sep): dos fallos más en la misma pieza rompen la regla de más aciertos
+  que fallos. Quedan para la newsletter del capítulo 2.
+- Usar el dato de «conjuntos con exclusión a 13 € frente a 24-50 €» en el
+  artículo: no lo he encontrado en una fuente primaria del repositorio.
+  Fuera hasta que aparezca.
+
+### Dudas que dejo escritas
+- El artículo dice que la frecuencia de reformas llegó a 2,0 «a los cinco
+  días» tal como está en el brief; si el agente de operaciones corrige ese
+  dato, hay que tocar la tabla.
+- La imagen del jueves decía «colgó a los diez segundos»; la bitácora solo
+  dice que colgó. Corregido antes de subirla.
+
+### Hipótesis para mañana
+- Viernes: tesis contraria. Candidata con dato propio: «El coste por
+  contacto es el número que más engaña»: clínicas a 21 € por contacto y
+  reformas a 10 €, y la única reunión que terminó en propuesta fue una
+  clínica. Y el ritual del viernes trae los números de la semana 39.
+- Si Maikel publica hoy el diario y la newsletter, el viernes se mide qué
+  trajo más comentarios: la confesión del fallo o la bandera roja.
