@@ -1,4 +1,4 @@
-# Newsletter · «5 de 9 citas se me plantaron esta semana» · propuesta de envío viernes 25-sep-2026
+# Newsletter · «Te han dado plantón. ¿Por qué?» · propuesta de envío viernes 25-sep-2026
 
 > Pedida por Maikel el 24-sep junto con el carrusel de plantones y la guía.
 > Puede ir como capítulo 2 de «Agentizando mi propia empresa» (si el capítulo
@@ -9,20 +9,19 @@
 
 ## Asunto y preheader
 
-- **Asunto (recomendado):** 5 de 9 citas se me plantaron esta semana
-- Alternativa 1: Te han dado plantón. ¿Por qué?
-- Alternativa 2: Lo que hago a los seis minutos de un plantón
+- **Asunto (recomendado):** Te han dado plantón. ¿Por qué?
+- Alternativa 1: Lo que hago a los seis minutos de un plantón
+- Alternativa 2: Un plantón no significa que el cliente sea malo
 - **Preheader:** No es que el cliente sea malo. Es que la cita nació floja. Cinco motivos y un protocolo.
 
 ## Texto (≈450 palabras)
 
-> Esta semana mi sistema cerró 9 citas con gente que entró por anuncios. Se
-> plantaron 5. Es un número que no le enseñaría a un cliente si no fuera mío.
-> Lo enseño porque me ha hecho mirar dónde estaba el fallo, y no estaba donde
-> yo creía.
+> Esta semana varios clientes que habían reservado reunión conmigo no
+> aparecieron. Me ha hecho mirar dónde estaba el fallo, y no estaba donde yo
+> creía.
 >
 > Yo pensaba que era cosa del recordatorio. Sale a las 9:00 del mismo día
-> para todas las citas. No rescató ninguna de las cinco.
+> para todas las citas. No rescató ninguna.
 >
 > Lo que creo ahora es que el plantón casi nunca es mala educación. Es de
 > diseño. Reservábamos la cita con la persona menos comprometida, en el
@@ -67,8 +66,7 @@
 > Maikel
 
 **Fuentes de cada cifra:** brief del recorrido de la semana 38
-(`content/brief-recorrido-semana-38.md`: 9 citas, 5 plantones confirmados lead
-a lead, recordatorio de las 9:00), bitácora de Raquel del 18-sep (plantón
+(`content/brief-recorrido-semana-38.md`: plantones de la semana, recordatorio de las 9:00; **la cifra 5 de 9 no se publica, regla de Maikel del 24-sep**), bitácora de Raquel del 18-sep (plantón
 12:00, llamada 12:06, WhatsApp a los 3 min) y del 22-sep (llamada en frío tras
 plantón, 12 s). Guía: `content/recursos/guia-plantones.md`.
 

@@ -527,3 +527,17 @@ cita del miércoles fue plantón. **Recuento de plantones cerrado por el
 revisor:** lead a lead son 5 (la tabla por vertical del brief está
 desactualizada). Ya no hace falta que Maikel lo confirme. Filas nuevas en
 Notion: el artículo (Publicada, v2) y el diario (En revisión, v2).
+
+### Jueves 24 · tarde · carrusel de plantones, guía y newsletter (pedido de Maikel)
+
+Maikel trajo el copy entero de un carrusel de plantones (ocho láminas, cinco
+motivos y protocolo) y pidió una portada divertida hecha en Higgsfield, más
+una guía para mandar a quien comente «GUÍA» y una newsletter. Hecho:
+`content/carruseles/2026-09-24-plantones/` (portada: un dueño de negocio
+esperando solo en la videollamada con gorro de fiesta y tarta),
+`content/recursos/guia-plantones.md` y
+`content/newsletter/2026-09-25-plantones.md`. Regla nueva de Maikel, 24-sep:
+**la tasa de plantones propia («5 de 9») no se publica.** Quitada del
+carrusel, la guía y la newsletter. Sigue en el artículo del 23, el del 24, la
+bandera roja del 23 y el reapuntado de leads-pero-no-ventas: pendiente de que
+Maikel diga si la quita de ahí también.

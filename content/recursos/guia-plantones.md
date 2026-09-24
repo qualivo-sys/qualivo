@@ -3,7 +3,7 @@
 > Recurso para quien comenta «GUÍA» en el carrusel de plantones. Se manda a
 > mano, en texto, por mensaje directo o correo (nada automatizado desde el
 > 663). Cabe en una pantalla larga de móvil. Firma Maikel. Datos propios:
-> semana del 18 al 22 de septiembre, 9 citas, 5 plantones; 18-sep, plantón a
+> 18-sep, plantón a
 > las 12:00, llamada a las 12:06, otra hora pedida a los tres minutos.
 
 ---
@@ -11,7 +11,7 @@
 Hola, soy Maikel. Esta es la guía que prometí en el carrusel. Es corta a
 propósito: son las cinco cosas que reviso cuando alguien no aparece a una
 reunión, y el protocolo de los quince minutos siguientes. La estoy aplicando
-en mi propia empresa, donde esta semana se me han plantado 5 de 9.
+en mi propia empresa.
 
 ## Antes de nada: mide dos números
 
