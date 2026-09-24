@@ -576,3 +576,28 @@ El capítulo 1 «Agentizando mi propia empresa» (`content/newsletter/2026-09-24
 Prueba de la newsletter de plantones enviada a info@maikelechevarria.com el 24-sep (asunto «[PRUEBA] Le guardaste la hora. No vino.»), desde el Gmail conectado. Versión de correo con tablas y estilos en línea: `content/newsletter/correo/2026-09-25-plantones.html`. El botón GUÍA abre un correo a info@maikelechevarria.com; el de diagnóstico lleva UTM (newsletter / email / plantones).
 
 Segunda prueba de la newsletter (24-sep): en la primera, el gestor de correo de Maikel se comió los fondos (cajas negras, lilas y botones en blanco, texto claro invisible). Arreglado con el color de fondo también como atributo de cada tabla y celda, botones hechos con celdas y la línea de tiempo en vertical. Regla para los correos: nunca un fondo solo en el estilo; siempre bgcolor más background-color, y botones en celda.
+
+### Jueves 24 · tarde · newsletter en GHL
+
+Maikel: «¿podemos montarlo en GHL y enviarlo de forma automática a la base de
+datos?». Hecho: plantilla de correo creada en GHL (Marketing › Emails ›
+Plantillas, «Newsletter Qualivo · Le guardaste la hora (plantones)»), con el
+HTML de `content/newsletter/correo/2026-09-25-plantones.html`. No se ha
+enviado a nadie.
+
+Recuento de la base (24-sep, solo cifras):
+
+| Grupo | Contactos |
+|---|---|
+| Total en GHL | 1.112 |
+| Con correo | 652 |
+| Pidieron el diagnóstico o entraron por Meta, web o reactivación, con correo y sin baja | 119 |
+| De esos, sin cita | 102 |
+| De esos, entraron hace más de 9 días (cadencia terminada) | 22 |
+| Outbound en frío (Apollo, HubSpot) y base antigua sin consentimiento claro | el resto |
+
+Recomendación: mandarla solo a los 22 (cadencia terminada, sin cita, sin
+baja). Los 80 que siguen dentro de la cadencia de 9 días no, porque Raquel
+les va a volver a llamar (queja de agosto). El outbound frío y la base
+antigua no, porque nunca pidieron recibir correos nuestros. El envío
+automático queda pendiente del sí de Maikel con la audiencia elegida.
