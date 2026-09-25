@@ -41,7 +41,7 @@ async function movil(texto, opciones) {
   if (process.env.AVISO_MOVIL === '0' || !MOVIL_CONTACTO) return false;
   if (!(opciones && opciones.forzar) && !enHorarioMovil()) return 'fuera-de-horario';
   try {
-    await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 900));
+    await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 900), { interno: true });
     return true;
   } catch (e) { console.error('[aviso] móvil:', e && e.message); return false; }
 }

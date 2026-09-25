@@ -67,6 +67,7 @@ function e164(valor) {
 
 // Envía una plantilla. Devuelve { ok, id } o { ok:false, motivo }.
 async function enviarPlantilla(telefono, nombre, variables, idioma) {
+  if (require('./_pausa.js').PAUSA_TOTAL) return { ok: false, motivo: 'pausa_total' };
   if (!configurado()) return { ok: false, motivo: 'no_configurado' };
   const numero = e164(telefono);
   if (!numero) return { ok: false, motivo: 'telefono_invalido' };

@@ -12,6 +12,8 @@ const AGENTE = require('./_agente.js');
 const VENTANA_MIN = 30; // mensajes entrantes de hace más de esto se ignoran (ya los vio otra vuelta o Maikel)
 
 module.exports = async function handler(req, res) {
+  // Pausa general (api/_pausa.js): esta vuelta no hace nada.
+  if (require('./_pausa.js').PAUSA_TOTAL) return res.status(200).json({ ok: true, pausa_total: true });
   const secreto = process.env.CRON_SECRET;
   const auth = String(req.headers.authorization || '');
   if (!secreto || auth !== 'Bearer ' + secreto) return res.status(401).json({ ok: false, error: 'unauthorized' });

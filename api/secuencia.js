@@ -19,6 +19,8 @@ function firma(contactId, secreto) {
 }
 
 module.exports = async function handler(req, res) {
+  // Pausa general (api/_pausa.js): esta vuelta no hace nada.
+  if (require('./_pausa.js').PAUSA_TOTAL) return res.status(200).json({ ok: true, pausa_total: true });
   const secreto = process.env.CRON_SECRET;
   const auth = String(req.headers.authorization || '');
   if (!secreto || auth !== 'Bearer ' + secreto) {

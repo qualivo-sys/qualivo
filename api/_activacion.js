@@ -5,6 +5,7 @@
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const VAPI_BASE = 'https://api.vapi.ai';
+const { PAUSA_TOTAL } = require('./_pausa.js');
 // Número desde el que llama Raquel cuando VAPI_PHONE_NUMBER_ID no está en el
 // entorno. Hasta el 19-sep era el +1 775 de EE. UU. (b60821ae…): las llamadas
 // lanzadas a mano salían desde el móvil de Maikel, pero las del reloj no, y
@@ -105,6 +106,7 @@ async function nota(contactId, texto) {
 // El primer mensaje sale por la API de conversaciones de GHL, con el número de
 // WhatsApp de la location. Las respuestas las atiende el agente ya montado allí.
 async function enviarWhatsApp(contactId, texto) {
+  if (PAUSA_TOTAL) throw new Error('pausa total: no sale nada hacia leads');
   const r = await fetch(GHL_BASE + '/conversations/messages', {
     method: 'POST',
     headers: cabeceras(),
@@ -153,6 +155,8 @@ function etiquetaGatewayHoy() {
   return 'gw-' + p.replace(/-/g, '');
 }
 async function enviarPorGateway(contactId, texto, opciones) {
+  // Los avisos al móvil de Maikel (api/_aviso.js) pasan con { interno: true }.
+  if (PAUSA_TOTAL && !(opciones && opciones.interno)) throw new Error('pausa total: no sale nada hacia leads');
   if (GATEWAY_PAUSA) throw new Error('pasarela en pausa (restricción de WhatsApp, 22-sep)');
   if (!(opciones && opciones.forzar) && await frenoSinRespuesta(contactId, texto)) throw new Error('frenado: demasiados mensajes sin respuesta');
   const hoy = etiquetaGatewayHoy();
@@ -229,6 +233,7 @@ const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
 function saldriaPorGateway() { return GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA; }
 
 async function enviarMensaje(contactId, texto) {
+  if (PAUSA_TOTAL) return { canal: 'pausado', estado: 'pausado', id: '' };
   if (await frenoSinRespuesta(contactId, texto)) return { canal: 'frenado', estado: 'frenado', id: '' };
   if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA) {
     try {
@@ -297,6 +302,10 @@ async function camposWA(contactId, valores) {
 // fuera de la ventana de 24 h); si no, por GHL con respaldo SMS como siempre.
 // datos: { nombre, cita (lo que escribió o el tema), pregunta, texto (versión libre) }
 async function primerWhatsApp(contactId, telefono, datos) {
+  // Se lanza en vez de devolver: los formularios ponen act-wa1 después de
+  // llamar aquí, y con la etiqueta el reloj ya no mandaría el primer
+  // mensaje al reanudar.
+  if (PAUSA_TOTAL) throw new Error('pausa total: no sale nada hacia leads');
   // Los valores de la plantilla se dejan en el contacto pase lo que pase: los
   // lee el workflow de GHL y sirven para ver qué se le dijo.
   try { await camposWA(contactId, { loQueEscribio: datos.cita || 'el diagnóstico', pregunta: datos.pregunta || '' }); } catch (e) { /* no bloquea */ }
@@ -445,6 +454,7 @@ function telefonoE164(valor) {
 // Saliente: el asistente va en cada llamada, así que el mismo número lo pueden
 // usar varias campañas sin pisarse. Los entrantes no se tocan.
 async function lanzarLlamada(datos) {
+  if (PAUSA_TOTAL) return { ok: false, motivo: 'pausa_total' };
   const clave = process.env.VAPI_API_KEY;
   const asistente = process.env.VAPI_ASSISTANT_ID;
   if (!clave || !asistente) return { ok: false, motivo: 'sin_credenciales' };
@@ -520,6 +530,7 @@ function minutosDesde(iso) {
 // correo del minuto cero). Devuelve el motivo en vez de lanzar: quien lo llama
 // esta a mitad de dar de alta un lead y no puede romperse por esto.
 async function enviarCorreo(email, asunto, html) {
+  if (PAUSA_TOTAL) return { ok: false, motivo: 'pausa_total' };
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
   if (!email) return { ok: false, motivo: 'sin_email' };
   try {
@@ -538,6 +549,7 @@ async function enviarCorreo(email, asunto, html) {
 }
 
 module.exports = {
+  PAUSA_TOTAL,
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
