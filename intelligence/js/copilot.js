@@ -22,7 +22,9 @@
       { q: '¿Qué ha cambiado esta semana?', h: 'cambios', obj: ['todo'] },
       { q: '¿Qué campañas están trayendo ' + (T.clientesReales || 'clientes reales') + '?', h: 'campanas', obj: ['captacion', 'ventas', 'todo'] },
       { q: '¿Dónde está la mayor fuga?', h: 'mayorFuga', obj: ['todo', 'captacion', 'conversion'] },
-      { q: '¿Qué debería hacer el equipo hoy?', h: 'equipo', obj: ['todo', 'ventas'] }
+      { q: '¿Qué debería hacer el equipo hoy?', h: 'equipo', obj: ['todo', 'ventas'] },
+      { q: '¿Qué anuncio trae ' + T.ventas + ' y cuál solo trae ' + T.contactos + '?', h: 'anuncios', obj: ['captacion', 'ventas', 'todo'] },
+      { q: '¿Qué le diríamos esta semana a la agencia de anuncios?', h: 'agencia', obj: ['captacion', 'todo'] }
     ];
   }
   function todas() {
@@ -205,6 +207,26 @@
       return out;
     },
 
+    anuncios: function () {
+      const T = E().cfg.t, a = QV.anuncios();
+      const pago = a.filas.filter(function (f) { return f.c.inversion > 0; });
+      const mejor = pago.slice().sort(function (x, y) { return y.roas - x.roas; })[0];
+      const masEntra = pago.slice().sort(function (x, y) { return y.entra - x.entra; })[0];
+      return [
+        texto('**' + masEntra.c.nombre + '** es la que más ' + T.contactos + ' trae (' + M.num(masEntra.entra) + ', a ' + M.euros(masEntra.cpl) + ') y deja ' + plural(masEntra.ventas, T.venta, T.ventas) + '. **' + mejor.c.nombre + '** trae menos y devuelve ' + M.num(mejor.roas, 1) + '× lo invertido.'),
+        { tipo: 'tabla', cols: ['Campaña', T.Ventas, 'Retorno', 'Veredicto'], filas: pago.sort(function (x, y) { return y.roas - x.roas; }).map(function (f) { return { celdas: [f.c.nombre, M.num(f.ventas), M.num(f.roas, 1) + '×', f.ver.txt] }; }) },
+        accion('El sistema no toca las campañas: le devuelve a la agencia qué anuncio acaba en ' + T.venta + ', para que optimice a eso.')
+      ];
+    },
+
+    agencia: function () {
+      return [
+        texto('Esto es lo que le diría esta semana a quien os lleva los anuncios. Sale de unir cada campaña con lo que pasa después en el sistema.'),
+        { tipo: 'borrador', texto: QV.notaAgencia().map(function (l) { return '• ' + l; }).join('\n') },
+        accion('La agencia sigue llevando las campañas. Recibe mejores datos y cada semana una nota como esta.')
+      ];
+    },
+
     equipo: function () {
       const est = E(), T = est.cfg.t;
       const hum = est.contactos.filter(function (c) { return c.x.nba.tipo === 'humano' && c.x.nba.id !== 'asignado'; }).sort(function (a, b) { return b.x.orden - a.x.orden; });
@@ -324,7 +346,8 @@
     [/mayor|más grande|principal/, 'mayorFuga'],
     [/hoy|trabajar|empez|prioriz|primero/, 'trabajar'],
     [/equipo|comercial|ventas hoy|persona/, 'equipo'],
-    [/campañ|anunci|meta|google|canal|invers/, 'campanas'],
+    [/agencia/, 'agencia'],
+    [/anunci|campañ|meta|google|canal|invers|publico/, 'anuncios'],
     [/cambi|novedad|ha pasado|nuevos/, 'cambios'],
     [/seguimiento|olvid|parad|sin contestar|frí/, 'sinSeguimiento'],
     [/atenci|urgent|riesgo/, 'atencion'],
@@ -427,6 +450,15 @@
     if (id === 'caso') return { canal: 'Correo · automatización', texto: 'Asunto: Cómo lo hizo alguien como tú\n\nHola ' + nom + ', te dejo ' + T.casoExito + '. Si te encaja, contéstame a este correo y lo vemos.' };
     return { canal: 'Mensaje', texto: 'Hola ' + nom + ', ¿cómo lo llevas? Si te puedo ayudar en algo con ' + c.prod + ', aquí estoy.' };
   }
+  function agencia() {
+    pregunta('Redacta el correo para la agencia de anuncios');
+    const el = respuestaVacia();
+    setTimeout(function () {
+      const T = E().cfg.t;
+      const txt = 'Asunto: Lo que pasa después de vuestros anuncios · semana del ' + new Date(E().ahora).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' }) + '\n\nHola,\n\nOs paso lo que vemos cruzando cada campaña con lo que pasa después en el sistema:\n\n' + QV.notaAgencia().map(function (l) { return '• ' + l; }).join('\n') + '\n\nSi os encaja, lo vemos 15 minutos el jueves.\n\nUn saludo';
+      rellenar(el, [texto('**Correo para la agencia** · generado de los veredictos de la pantalla Anuncios.'), { tipo: 'borrador', texto: txt }, accion('En esta demo no se envía nada. En el sistema real sale cada lunes, o cuando tú lo decidas.')]);
+    }, 350);
+  }
   function generar(id) {
     const c = QV.contacto(id);
     if (!c) return;
@@ -472,5 +504,5 @@
   });
   $('#formPregunta button').innerHTML = ico('enviar');
 
-  QV.copilot = { reiniciar: reiniciar, preguntarSugerida: preguntarSugerida, preguntarLibre: preguntarLibre, generar: generar, responderDet: responderDet, todas: todas, masParecida: masParecida, contexto: contexto, pintarBloques: pintarBloques, H: H };
+  QV.copilot = { agencia: agencia, reiniciar: reiniciar, preguntarSugerida: preguntarSugerida, preguntarLibre: preguntarLibre, generar: generar, responderDet: responderDet, todas: todas, masParecida: masParecida, contexto: contexto, pintarBloques: pintarBloques, H: H };
 })();

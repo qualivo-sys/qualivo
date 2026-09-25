@@ -30,6 +30,7 @@ Guiones de presentación: `content/intelligence-guiones.md`.
 - `js/motor.js`: el único motor. Calcula encaje, actividad, intención y riesgo (0-100) a partir de los datos de cada contacto, y de ahí saca la prioridad con su porqué, la siguiente acción, las señales y la línea de tiempo. Nada está puesto a mano.
 - `js/app.js`: el estado único y las pantallas.
 - `js/copilot.js`: el Copilot. Las preguntas sugeridas se calculan del estado, al instante y sin red. Las preguntas libres van a `/api/intelligence-copilot` (Claude con herramientas sobre el mismo estado). Si esa llamada tarda más de 9 s o falla, contesta la pregunta sugerida más parecida.
+- Pantalla **Anuncios** (`anuncios()` y `notaAgencia()` en `js/app.js`): cruza cada campaña con los contactos que trajo y da un veredicto (escalar, mantener, revisar público o «no es el anuncio»), los eventos que vuelven a las plataformas y la nota semanal para la agencia. No gestiona campañas: es la capa de inteligencia encima de quien las lleve.
 - `js/demo.js`: el modo demo. Modifica el mismo estado, así que el contacto nuevo aparece en Oportunidades y el Copilot lo conoce.
 - `sectores/*.js`: un archivo por sector con sus términos, recorrido, campañas del mes, KPIs, reglas de encaje, preguntas, historia y contactos.
 

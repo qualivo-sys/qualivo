@@ -36,6 +36,8 @@ Enlace: `qualivo.io/intelligence/?sector=formacion&empresa=Skolae&objetivo=segui
 
 Caso para citar si preguntan por resultados: EAC, 10,2× de anuncio a matrícula. Uno solo.
 
+**Si en la reunión está quien lleva los anuncios, o preguntan por la agencia** (30 s extra): abre **Anuncios**. «Vuestra agencia sigue llevando las campañas. Lo que añadimos es la capa que les falta: qué anuncio acaba en matrícula. El curso de Excel trae más interesados que ninguno y es el que menos devuelve: la plataforma lo premia porque es barato. Y fijaos en la Certificación: no es el anuncio, es que se pierden después. Eso no lo arregla la agencia, lo arreglamos nosotros.» Pulsa «Redactar el correo para la agencia»: «Esto le llega cada lunes».
+
 ---
 
 ## SaaS / Software

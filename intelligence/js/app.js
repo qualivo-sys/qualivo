@@ -28,6 +28,7 @@
     { id: 'oportunidades', txt: 'Oportunidades', ico: 'oportunidades' },
     { id: 'conversaciones', txt: 'Conversaciones', ico: 'conversaciones' },
     { id: 'recorrido', txt: 'Recorrido', ico: 'recorrido' },
+    { id: 'anuncios', txt: 'Anuncios', ico: 'anuncio' },
     { id: 'senales', txt: 'Señales', ico: 'senales' },
     { id: 'agentes', txt: 'Agentes', ico: 'agentes' }
   ];
@@ -206,6 +207,59 @@
     }).join('') + '</div>';
   }
   QV.feed = feed;
+
+  // ---------------------------------------------------------------------------
+  // Capa de inteligencia sobre los anuncios. Qualivo no lleva las campañas: une
+  // cada anuncio con lo que pasa después (encaje, seguimiento, venta) y se lo
+  // devuelve a quien las lleva. Todo sale de las campañas del mes y de los
+  // contactos del estado.
+  // ---------------------------------------------------------------------------
+  function anuncios() {
+    const cfg = estado.cfg, T = cfg.t, M_ = M;
+    const r = cfg.recorrido;
+    const entra = r[1].id, contact = r[2].id, venta = cfg.ventaEtapa;
+    const pago = cfg.campanas.filter(function (c) { return c.inversion > 0; });
+    const inv = pago.reduce(function (a, c) { return a + c.inversion; }, 0);
+    const ing = pago.reduce(function (a, c) { return a + (c.embudo[venta] || 0) * (c.ticket || cfg.ticket); }, 0);
+    const R = ing / Math.max(1, inv);
+    const postTotal = pago.reduce(function (a, c) { return a + (c.embudo[venta] || 0); }, 0) / Math.max(1, pago.reduce(function (a, c) { return a + (c.embudo[contact] || 0); }, 0));
+    const filas = cfg.campanas.map(function (c) {
+      const cs = estado.contactos.filter(function (k) { return k.orig === c.id && k.id !== 'demo'; });
+      const fitMedio = cs.length ? Math.round(cs.reduce(function (a, k) { return a + k.x.fit; }, 0) / cs.length) : null;
+      const bajo = cs.filter(function (k) { return k.x.fit < 40; }).length;
+      const v = c.embudo[venta] || 0, e = c.embudo[entra] || 0;
+      const ingC = v * (c.ticket || cfg.ticket);
+      const roas = c.inversion ? ingC / c.inversion : null;
+      const post = (c.embudo[contact] || 0) ? v / c.embudo[contact] : 0;
+      let ver;
+      if (!c.inversion) ver = { id: 'organico', txt: 'Orgánico', tono: 't-gris', por: 'No tiene inversión. Sirve de referencia de calidad: ' + (fitMedio != null ? 'encaje medio ' + fitMedio + '.' : '') };
+      else if (roas >= R * 1.3) ver = { id: 'escalar', txt: 'Escalar', tono: 't-teal', por: 'Devuelve ' + M_.num(roas, 1) + '× (la media es ' + M_.num(R, 1) + '×). Aquí hay margen para subir presupuesto.' };
+      else if (roas < R * 0.6 && fitMedio != null && fitMedio < 45) ver = { id: 'publico', txt: 'Revisar público', tono: 't-coral', por: 'Trae ' + T.contactos + ' baratos que no encajan (encaje medio ' + fitMedio + ', ' + bajo + ' de ' + cs.length + ' por debajo de 40). El anuncio funciona; el público no.' };
+      else if (roas < R * 0.6) ver = { id: 'despues', txt: 'No es el anuncio', tono: 't-amber', por: 'Lo que trae encaja (encaje medio ' + (fitMedio != null ? fitMedio : '—') + '), pero solo el ' + M_.pct(post) + ' de los contactados acaba en ' + T.venta + ' (media ' + M_.pct(postTotal) + '). Se pierde después: es seguimiento, no campaña.' };
+      else ver = { id: 'mantener', txt: 'Mantener', tono: 't-lila', por: 'Retorno de ' + M_.num(roas, 1) + '×, en línea con la media. Sin cambios.' };
+      return { c: c, entra: e, ventas: v, ingresos: ingC, roas: roas, cpl: c.inversion ? c.inversion / Math.max(1, e) : null, cpv: c.inversion ? c.inversion / Math.max(1, v) : null, fitMedio: fitMedio, n: cs.length, post: post, ver: ver };
+    });
+    // Eventos que se devuelven a las plataformas (conversiones offline)
+    const eventos = r.slice(2).filter(function (e) { return !e.sinFuga || e.id === venta; }).map(function (e) {
+      return { etapa: e.txt, n: pago.reduce(function (a, c) { return a + (c.embudo[e.id] || 0); }, 0), valor: e.id === venta };
+    });
+    const canales = pago.map(function (c) { return c.canal; }).filter(function (x, i, a) { return a.indexOf(x) === i; });
+    return { filas: filas, R: R, inversion: inv, ingresos: ing, eventos: eventos, canales: canales };
+  }
+  QV.anuncios = anuncios;
+
+  // Nota semanal para quien lleva los anuncios (se genera de los veredictos)
+  function notaAgencia() {
+    const T = estado.cfg.t, a = anuncios();
+    const pago = a.filas.filter(function (f) { return f.c.inversion > 0; });
+    const lin = [];
+    pago.filter(function (f) { return f.ver.id === 'escalar'; }).forEach(function (f) { lin.push('Subiría presupuesto en «' + f.c.nombre + '» (' + f.c.canal + '): ' + f.ventas + ' ' + T.ventas + ' y ' + M.num(f.roas, 1) + '× de retorno.'); });
+    pago.filter(function (f) { return f.ver.id === 'publico'; }).forEach(function (f) { lin.push('Revisaría el público de «' + f.c.nombre + '»: el coste por ' + T.contacto + ' es bueno (' + M.euros(f.cpl) + '), pero lo que trae no encaja (encaje medio ' + f.fitMedio + ').'); });
+    pago.filter(function (f) { return f.ver.id === 'despues'; }).forEach(function (f) { lin.push('No tocaría «' + f.c.nombre + '»: sus ' + T.contactos + ' encajan y se pierden en el seguimiento. Eso lo arreglamos nosotros.'); });
+    lin.push('Desde esta semana os llegan a ' + M.unir(a.canales) + ' los eventos de ' + M.unir(a.eventos.map(function (e) { return e.etapa.toLowerCase(); })) + ', con su valor. Si podéis, optimizad al último.');
+    return lin;
+  }
+  QV.notaAgencia = notaAgencia;
 
   // ---------------------------------------------------------------------------
   // Navegación
@@ -430,6 +484,29 @@
         }).join('') || '<p class="vacio">Sin señales en este filtro.</p>') + '</div>';
     },
 
+    anuncios: function () {
+      const cfg = estado.cfg, T = cfg.t, a = anuncios();
+      const peor = a.filas.filter(function (f) { return f.c.inversion > 0; }).sort(function (x, y) { return x.roas - y.roas; })[0];
+      const masEntra = a.filas.filter(function (f) { return f.c.inversion > 0; }).sort(function (x, y) { return y.entra - x.entra; })[0];
+      const filas = a.filas.slice().sort(function (x, y) { return (y.roas || 0) - (x.roas || 0); }).map(function (f) {
+        return '<tr><td style="min-width:170px"><div style="font-weight:700">' + esc(f.c.nombre) + '</div><div class="meta">' + esc(f.c.canal) + (f.c.inversion ? ' · ' + M.euros(f.c.inversion) : ' · sin inversión') + '</div></td>' +
+          '<td class="num">' + M.num(f.entra) + '<div class="meta">' + (f.cpl ? M.euros(f.cpl) + ' c/u' : '—') + '</div></td>' +
+          '<td class="num ocultar-movil">' + (f.fitMedio != null ? '<b>' + f.fitMedio + '</b>' : '—') + '<div class="meta">' + f.n + ' en el sistema</div></td>' +
+          '<td class="num">' + M.num(f.ventas) + '<div class="meta">' + (f.cpv ? M.euros(f.cpv) + ' c/u' : 'orgánico') + '</div></td>' +
+          '<td class="num">' + (f.roas != null ? '<b>' + M.num(f.roas, 1) + '×</b>' : '—') + '</td>' +
+          '<td><span class="pill ' + f.ver.tono + '">' + esc(f.ver.txt) + '</span><div class="meta" style="white-space:normal;max-width:none;margin-top:4px">' + esc(f.ver.por) + '</div></td></tr>';
+      }).join('');
+      const maxEv = Math.max.apply(null, a.eventos.map(function (e) { return e.n; }));
+      return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice a ' + T.laVenta + ' y no al formulario.') +
+        (masEntra && peor ? '<div class="tarjeta" style="margin-bottom:14px;display:flex;gap:14px;align-items:flex-start"><span class="feed-ico t-coral" style="width:34px;height:34px;border-radius:10px;flex:none">' + ico('anuncio') + '</span><p style="font-size:14px"><b>' + esc(masEntra.c.nombre) + '</b> trae más ' + T.contactos + ' que ninguna (' + M.num(masEntra.entra) + ' a ' + M.euros(masEntra.cpl) + ') y ' + M.pl(masEntra.ventas, T.venta, T.ventas) + '. El anuncio más barato no es el que más vende: sin esta capa, la plataforma sigue premiando lo barato.</p></div>' : '') +
+        '<div class="tabla-caja"><table class="tabla"><thead><tr><th>Campaña</th><th class="num">' + esc(T.Contactos) + '</th><th class="num ocultar-movil">Encaje medio</th><th class="num">' + esc(T.Ventas) + '</th><th class="num">Retorno</th><th>Lo que dice el sistema</th></tr></thead><tbody>' + filas + '</tbody></table></div>' +
+        '<div class="rejilla r-2" style="margin-top:14px">' +
+          '<div class="tarjeta"><h3>Lo que vuelve a las plataformas <span class="sub">Últimos 30 días</span></h3><p class="gris" style="font-size:12.5px;margin:4px 0 12px">Cada paso del recorrido se devuelve a ' + esc(M.unir(a.canales)) + ' como conversión, con su valor. Así el algoritmo aprende a buscar gente que ' + esc(T.convierten) + ', no gente que rellena formularios.</p>' +
+            '<div class="embudo">' + a.eventos.map(function (e) { return '<div class="eb-fila"><span class="et">' + esc(e.etapa) + '</span><div class="eb-barra"><i style="width:' + Math.max(3, e.n / maxEv * 100) + '%"></i></div><span class="n">' + M.num(e.n) + '</span><span class="conv gris" style="font-weight:600">' + (e.valor ? '+ €' : '') + '</span></div>'; }).join('') + '</div></div>' +
+          '<div class="tarjeta"><h3>Nota de esta semana para la agencia <span class="sub">Se genera sola</span></h3><ul style="margin:10px 0 12px;padding-left:18px;display:grid;gap:8px;font-size:13px">' + notaAgencia().map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul><button class="btn btn-mini" type="button" data-agencia>Redactar el correo para la agencia</button></div>' +
+        '</div>';
+    },
+
     agentes: function () {
       const T = estado.cfg.t, cs = estado.contactos;
       const abiertos = cs.filter(function (c) { return !c.fin; });
@@ -542,8 +619,9 @@
   // Eventos (delegados)
   // ---------------------------------------------------------------------------
   document.addEventListener('click', function (e) {
-    const t = e.target.closest('[data-sector],[data-objetivo],[data-vista],[data-abrir],[data-cerrar-ficha],[data-filtro],[data-fsenal],[data-conv],[data-asignar],[data-generar],[data-timeline]');
+    const t = e.target.closest('[data-agencia],[data-sector],[data-objetivo],[data-vista],[data-abrir],[data-cerrar-ficha],[data-filtro],[data-fsenal],[data-conv],[data-asignar],[data-generar],[data-timeline]');
     if (!t) return;
+    if (t.hasAttribute('data-agencia')) { if (QV.copilot) { QV.copilot.agencia(); if (window.innerWidth <= 1180) $('#copilot').classList.add('abierto'); } return; }
     if (t.dataset.sector) { eleccion.sector = t.dataset.sector; pintarInicio(); return; }
     if (t.dataset.objetivo) { eleccion.objetivo = t.dataset.objetivo; pintarInicio(); return; }
     if (t.dataset.vista) { cerrarFicha(); irA(t.dataset.vista); if (window.innerWidth <= 1180) $('#copilot').classList.remove('abierto'); return; }
