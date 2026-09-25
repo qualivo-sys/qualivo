@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Informe de cierre · Campaña de captación de registros</title>
+<style>
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin:0; padding:0; width:100%; height:100%; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.6pt;
+       line-height: 1.5; color: #1c2330; margin: 0; }
+:root { --ink:#1c2330; --mut:#697588; --line:#dfe3ea; --acc:#0b4da2; --warm:#c2410c;
+        --good:#047857; --bg:#f4f6f9; }
+
+/* ---------- portada ---------- */
+.cover { position: absolute; top:0; left:0; width: 100%; height: 100%; display: flex;
+         flex-direction: column; justify-content: space-between;
+         padding: 34mm 22mm 20mm; background: #0d2137; color: #fff; page-break-after: always; }
+.cover .kicker { font-size: 9pt; letter-spacing: .22em; text-transform: uppercase; color: #7ea6d8; }
+.cover h1 { font-size: 30pt; line-height: 1.15; margin: 14mm 0 5mm; font-weight: 600; letter-spacing: -.01em; }
+.cover .sub { font-size: 12.5pt; color: #b9c9dc; font-weight: 300; max-width: 120mm; line-height:1.45; }
+.cover .facts { display: flex; gap: 12mm; margin-top: 16mm; }
+.cover .fact .n { font-size: 25pt; font-weight: 600; letter-spacing: -.02em; }
+.cover .fact .l { font-size: 8pt; color: #8fb0d4; text-transform: uppercase; letter-spacing: .12em; margin-top: 2mm; }
+.cover .foot { font-size: 9pt; color: #8fa5bd; padding-top: 5mm;
+               border-top: 1px solid #2b4463; display: flex; justify-content: space-between; }
+
+/* ---------- estructura ---------- */
+h2 { font-size: 14pt; margin: 0 0 1.5mm; color: var(--acc); font-weight: 600; letter-spacing: -.01em;
+     page-break-after: avoid; }
+h2 .num { color: #a9b6c8; font-weight: 400; margin-right: 2.5mm; }
+h3 { font-size: 10.6pt; margin: 6mm 0 2mm; font-weight: 600; page-break-after: avoid; }
+.lead { color: var(--mut); font-size: 9.8pt; margin: 0 0 5mm; padding-bottom: 3mm;
+        border-bottom: 1px solid var(--line); }
+section { page-break-before: always; }
+section.first { page-break-before: avoid; }
+p { margin: 0 0 3mm; }
+ul { margin: 0 0 3.5mm; padding-left: 5mm; } li { margin-bottom: 1.6mm; }
+strong { font-weight: 600; }
+.mut { color: var(--mut); }
+
+/* ---------- tablas ---------- */
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.9pt;
+        page-break-inside: avoid; }
+th { text-align: left; font-size: 7.4pt; text-transform: uppercase; letter-spacing: .07em;
+     color: var(--mut); font-weight: 600; padding: 2mm 2mm; border-bottom: 1.2px solid #c3cbd7;
+     vertical-align: bottom; }
+td { padding: 1.9mm 2mm; border-bottom: 1px solid #eceff4; vertical-align: top; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.tot td { font-weight: 600; border-top: 1.2px solid #c3cbd7; border-bottom: none; background: #f7f9fc; }
+tr.off td { color: #8a95a5; }
+.tag { font-size: 7.2pt; padding: .5mm 1.6mm; border-radius: 2px; background: #eef1f6; color: #66738a;
+       white-space: nowrap; }
+.tag.on { background: #e6f4ee; color: var(--good); }
+
+/* ---------- bloques ---------- */
+.kpis { display: flex; gap: 3mm; margin: 0 0 5mm; }
+.kpi { flex: 1; border: 1px solid var(--line); border-radius: 3px; padding: 3.5mm; background: #fbfcfe; }
+.kpi .n { font-size: 16pt; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+.kpi .l { font-size: 7.4pt; text-transform: uppercase; letter-spacing: .08em; color: var(--mut); margin-top: 1.5mm; }
+.kpi .d { font-size: 8pt; color: var(--mut); margin-top: 1mm; }
+.box { border-left: 3px solid var(--acc); background: var(--bg); padding: 3.5mm 4mm; margin: 3mm 0 4mm;
+       page-break-inside: avoid; }
+.box.warm { border-left-color: var(--warm); background: #fdf6f1; }
+.box.good { border-left-color: var(--good); background: #f1f8f5; }
+.box h4 { margin: 0 0 1.5mm; font-size: 9.6pt; font-weight: 600; }
+.box p:last-child { margin-bottom: 0; }
+.two { display: flex; gap: 6mm; } .two > div { flex: 1; }
+.calc { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.4pt; background: #fbfcfe;
+        border: 1px solid var(--line); border-radius: 3px; padding: 3mm 3.5mm; margin: 2mm 0 4mm; }
+.calc div { display: flex; justify-content: space-between; padding: .9mm 0; }
+.calc div + div { border-top: 1px solid #eef1f5; }
+.calc .res { font-weight: 600; color: var(--acc); border-top: 1.2px solid #c3cbd7 !important; margin-top: 1mm; padding-top: 1.8mm; }
+
+/* ---------- barras ---------- */
+.bars { margin: 2mm 0 4mm; page-break-inside: avoid; }
+.bar { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.6mm; font-size: 8.5pt; }
+.bar .lb { width: 40mm; color: var(--mut); flex-shrink: 0; line-height: 1.25; }
+.bar .tr { display: block; flex: 1; background: #eef1f6; height: 4.5mm; border-radius: 1px; }
+.bar .fl { display: block; height: 100%; background: var(--acc); border-radius: 1px; }
+.bar .fl.w { background: var(--warm); } .bar .fl.g { background: var(--good); }
+.bar .vl { width: 22mm; text-align: right; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.foot-note { font-size: 8pt; color: var(--mut); margin-top: 2mm; }
+</style></head><body>
+
+<div class="cover">
+  <div><div class="kicker">Qualivo · Informe de cierre</div></div>
+  <div>
+    <h1>Campaña de captación<br>de registros</h1>
+    <div class="sub">Google Ads · Adigital<br>31 de agosto – 23 de septiembre de 2026</div>
+    <div class="facts">
+      <div class="fact"><div class="n">2.001,71 €</div><div class="l">Invertido</div></div>
+      <div class="fact"><div class="n">45</div><div class="l">Registros</div></div>
+      <div class="fact"><div class="n">44,48 €</div><div class="l">Coste por registro</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Preparado para Adigital</span><span>25 de septiembre de 2026</span></div>
+</div></body></html>

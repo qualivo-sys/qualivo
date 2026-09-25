@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Informe de cierre · Campaña de captación de registros</title>
+<style>
+@page { size: A4; margin: 17mm 15mm 16mm 15mm; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.6pt;
+       line-height: 1.5; color: #1c2330; margin: 0; }
+:root { --ink:#1c2330; --mut:#697588; --line:#dfe3ea; --acc:#0b4da2; --warm:#c2410c;
+        --good:#047857; --bg:#f4f6f9; }
+
+/* ---------- portada ---------- */
+.cover { width: 210mm; height: 297mm; margin: -17mm -15mm -16mm -15mm; display: flex;
+         flex-direction: column; justify-content: space-between;
+         padding: 34mm 22mm 20mm; background: #0d2137; color: #fff; page-break-after: always; }
+.cover .kicker { font-size: 9pt; letter-spacing: .22em; text-transform: uppercase; color: #7ea6d8; }
+.cover h1 { font-size: 30pt; line-height: 1.15; margin: 14mm 0 5mm; font-weight: 600; letter-spacing: -.01em; }
+.cover .sub { font-size: 12.5pt; color: #b9c9dc; font-weight: 300; max-width: 120mm; line-height:1.45; }
+.cover .facts { display: flex; gap: 12mm; margin-top: 16mm; }
+.cover .fact .n { font-size: 25pt; font-weight: 600; letter-spacing: -.02em; }
+.cover .fact .l { font-size: 8pt; color: #8fb0d4; text-transform: uppercase; letter-spacing: .12em; margin-top: 2mm; }
+.cover .foot { font-size: 9pt; color: #8fa5bd; padding-top: 5mm;
+               border-top: 1px solid #2b4463; display: flex; justify-content: space-between; }
+
+/* ---------- estructura ---------- */
+h2 { font-size: 14pt; margin: 0 0 1.5mm; color: var(--acc); font-weight: 600; letter-spacing: -.01em;
+     page-break-after: avoid; }
+h2 .num { color: #a9b6c8; font-weight: 400; margin-right: 2.5mm; }
+h3 { font-size: 10.6pt; margin: 6mm 0 2mm; font-weight: 600; page-break-after: avoid; }
+.lead { color: var(--mut); font-size: 9.8pt; margin: 0 0 5mm; padding-bottom: 3mm;
+        border-bottom: 1px solid var(--line); }
+section { page-break-before: always; }
+section.first { page-break-before: avoid; }
+p { margin: 0 0 3mm; }
+ul { margin: 0 0 3.5mm; padding-left: 5mm; } li { margin-bottom: 1.6mm; }
+strong { font-weight: 600; }
+.mut { color: var(--mut); }
+
+/* ---------- tablas ---------- */
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.9pt;
+        page-break-inside: avoid; }
+th { text-align: left; font-size: 7.4pt; text-transform: uppercase; letter-spacing: .07em;
+     color: var(--mut); font-weight: 600; padding: 2mm 2mm; border-bottom: 1.2px solid #c3cbd7;
+     vertical-align: bottom; }
+td { padding: 1.9mm 2mm; border-bottom: 1px solid #eceff4; vertical-align: top; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.tot td { font-weight: 600; border-top: 1.2px solid #c3cbd7; border-bottom: none; background: #f7f9fc; }
+tr.off td { color: #8a95a5; }
+.tag { font-size: 7.2pt; padding: .5mm 1.6mm; border-radius: 2px; background: #eef1f6; color: #66738a;
+       white-space: nowrap; }
+.tag.on { background: #e6f4ee; color: var(--good); }
+
+/* ---------- bloques ---------- */
+.kpis { display: flex; gap: 3mm; margin: 0 0 5mm; }
+.kpi { flex: 1; border: 1px solid var(--line); border-radius: 3px; padding: 3.5mm; background: #fbfcfe; }
+.kpi .n { font-size: 16pt; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+.kpi .l { font-size: 7.4pt; text-transform: uppercase; letter-spacing: .08em; color: var(--mut); margin-top: 1.5mm; }
+.kpi .d { font-size: 8pt; color: var(--mut); margin-top: 1mm; }
+.box { border-left: 3px solid var(--acc); background: var(--bg); padding: 3.5mm 4mm; margin: 3mm 0 4mm;
+       page-break-inside: avoid; }
+.box.warm { border-left-color: var(--warm); background: #fdf6f1; }
+.box.good { border-left-color: var(--good); background: #f1f8f5; }
+.box h4 { margin: 0 0 1.5mm; font-size: 9.6pt; font-weight: 600; }
+.box p:last-child { margin-bottom: 0; }
+.two { display: flex; gap: 6mm; } .two > div { flex: 1; }
+.calc { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.4pt; background: #fbfcfe;
+        border: 1px solid var(--line); border-radius: 3px; padding: 3mm 3.5mm; margin: 2mm 0 4mm; }
+.calc div { display: flex; justify-content: space-between; padding: .9mm 0; }
+.calc div + div { border-top: 1px solid #eef1f5; }
+.calc .res { font-weight: 600; color: var(--acc); border-top: 1.2px solid #c3cbd7 !important; margin-top: 1mm; padding-top: 1.8mm; }
+
+/* ---------- barras ---------- */
+.bars { margin: 2mm 0 4mm; page-break-inside: avoid; }
+.bar { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.6mm; font-size: 8.5pt; }
+.bar .lb { width: 40mm; color: var(--mut); flex-shrink: 0; line-height: 1.25; }
+.bar .tr { display: block; flex: 1; background: #eef1f6; height: 4.5mm; border-radius: 1px; }
+.bar .fl { display: block; height: 100%; background: var(--acc); border-radius: 1px; }
+.bar .fl.w { background: var(--warm); } .bar .fl.g { background: var(--good); }
+.bar .vl { width: 22mm; text-align: right; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.foot-note { font-size: 8pt; color: var(--mut); margin-top: 2mm; }
+</style></head><body>
+
+<!-- ============ 1 ============ -->
+<section class="first">
+<h2><span class="num">01</span>Resumen ejecutivo</h2>
+<p class="lead">Qué se hizo, qué resultado dio y qué hemos aprendido para la próxima edición.</p>
+
+<div class="kpis">
+  <div class="kpi"><div class="n">45</div><div class="l">Registros</div><div class="d">43 por Search, 2 por Performance Max</div></div>
+  <div class="kpi"><div class="n">44,48 €</div><div class="l">Coste por registro</div><div class="d">40,73 € en Search</div></div>
+  <div class="kpi"><div class="n">100,1 %</div><div class="l">Presupuesto ejecutado</div><div class="d">2.001,71 € de 2.000 €</div></div>
+  <div class="kpi"><div class="n">2.428</div><div class="l">Clics</div><div class="d">49.098 impresiones · CTR 4,95 %</div></div>
+</div>
+
+<h3>Lo que ha funcionado</h3>
+<ul>
+<li><strong>El presupuesto se ha ejecutado al milímetro</strong>: 2.001,71 € sobre 2.000 comprometidos, una desviación del 0,09 %. Ni un euro sin invertir ni un sobrecoste que justificar.</li>
+<li><strong>Search ha sostenido toda la campaña</strong>: 43 de los 45 registros con un coste unitario de 40,73 € y un CTR del 7,43 %, muy por encima del estándar del sector para eventos B2B (2–3 %). Los anuncios eran relevantes; el problema nunca estuvo ahí.</li>
+<li><strong>Las búsquedas de marca son el canal más eficiente con diferencia</strong>: 9 registros a <strong>10,03 €</strong>, dentro del objetivo original de 8–12 €. Es gente que ve el evento en los canales de Adigital y después lo busca. Vuestra difusión propia genera demanda que la campaña recoge muy barata.</li>
+<li><strong>La optimización mejoró el resultado un 32 %</strong>: el coste por registro pasó de 60,39 € en la segunda semana a 41,61 € en el cierre, después de pausar los grupos que no convertían, corregir la segmentación y ajustar las pujas por dispositivo.</li>
+</ul>
+
+<h3>Lo que no ha funcionado</h3>
+<ul>
+<li><strong>Los canales de descubrimiento no convirtieron</strong>: Demand Gen y Performance Max consumieron 250,11 € y produjeron 2 registros. Se pausaron en cuanto el dato fue concluyente, y el presupuesto se reasignó a Search.</li>
+<li><strong>No se alcanzó el objetivo de 200–300 registros.</strong> El apartado 4 lo analiza en detalle con los números: no era alcanzable con 2.000 € en este mercado, y en la práctica tampoco con más presupuesto mientras la página de registro convirtiera al 4 %.</li>
+</ul>
+
+<div class="box">
+<h4>El dato que más condiciona todo lo demás</h4>
+<p>En 24 días, el mercado total de búsquedas relevantes en la zona fue de <strong>53.405 impresiones</strong>. Capturamos el 26,2 %. Aun comprando la totalidad de ese mercado, el canal daba para <strong>164 registros</strong> y habría costado <strong>6.706 €</strong>. El objetivo de 200–300 registros exigía o bien otros canales, o bien una página de registro que convirtiera al doble.</p>
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+<h2><span class="num">02</span>Resultados</h2>
+<p class="lead">Cifras definitivas del 31 de agosto al 23 de septiembre, extraídas de la API de Google Ads.</p>
+
+<h3>Por campaña</h3>
+<table>
+<thead><tr><th>Campaña</th><th class="n">Impresiones</th><th class="n">Clics</th><th class="n">CTR</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th></tr></thead>
+<tbody>
+<tr><td><strong>Search</strong> <span class="tag on">activa hasta el final</span></td><td class="n">13.992</td><td class="n">1.039</td><td class="n">7,43 %</td><td class="n">1.751,60 €</td><td class="n">43</td><td class="n">40,73 €</td></tr>
+<tr class="off"><td>Performance Max <span class="tag">pausada 14/9</span></td><td class="n">25.258</td><td class="n">1.057</td><td class="n">4,18 %</td><td class="n">144,00 €</td><td class="n">2</td><td class="n">72,00 €</td></tr>
+<tr class="off"><td>Demand Gen Prospecting <span class="tag">pausada 8/9</span></td><td class="n">9.848</td><td class="n">332</td><td class="n">3,37 %</td><td class="n">106,11 €</td><td class="n">0</td><td class="n">—</td></tr>
+<tr class="off"><td>Demand Gen Remarketing <span class="tag">nunca activada</span></td><td class="n">0</td><td class="n">0</td><td class="n">—</td><td class="n">0,00 €</td><td class="n">0</td><td class="n">—</td></tr>
+<tr class="tot"><td>Total</td><td class="n">49.098</td><td class="n">2.428</td><td class="n">4,95 %</td><td class="n">2.001,71 €</td><td class="n">45</td><td class="n">44,48 €</td></tr>
+</tbody></table>
+<p class="foot-note">Performance Max acumula muchas impresiones y clics de Display a coste muy bajo, pero de calidad casi nula: 1.057 clics para 2 registros (0,2 % de conversión).</p>
+
+<h3>Por grupo de anuncios (Search)</h3>
+<table>
+<thead><tr><th>Grupo</th><th class="n">Clics</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th><th>Decisión</th></tr></thead>
+<tbody>
+<tr><td>Eventos de IA</td><td class="n">773</td><td class="n">1.337,17 €</td><td class="n">32</td><td class="n">41,79 €</td><td class="mut">Núcleo de la campaña</td></tr>
+<tr><td><strong>Marca</strong></td><td class="n">88</td><td class="n">90,24 €</td><td class="n">9</td><td class="n"><strong>10,03 €</strong></td><td class="mut">El más eficiente</td></tr>
+<tr class="off"><td>AI Act</td><td class="n">135</td><td class="n">254,60 €</td><td class="n">2</td><td class="n">127,30 €</td><td class="mut">Pausado el 14/9</td></tr>
+<tr class="off"><td>Compliance y riesgo</td><td class="n">43</td><td class="n">69,58 €</td><td class="n">0</td><td class="n">—</td><td class="mut">Pausado el 14/9</td></tr>
+</tbody></table>
+
+<div class="box warm">
+<h4>Una hipótesis del plan que los datos refutaron</h4>
+<p>El brief situaba a los perfiles de <strong>compliance y legal</strong> como la principal hipótesis de conversión, y en torno a ella se construyeron dos grupos de anuncios. Entre los dos gastaron 324,18 € y produjeron 2 registros. Quien busca "AI Act" o "reglamento de IA" quiere entender la norma, no asistir a un evento: es intención informativa, no de asistencia. Ambos se pausaron el 14 de septiembre y el presupuesto se trasladó a las búsquedas de evento, que es donde estaba la intención real.</p>
+</div>
+
+<h3>Evolución semana a semana</h3>
+<table>
+<thead><tr><th>Semana</th><th class="n">Clics</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th><th class="n">Conversión</th><th>Qué pasó</th></tr></thead>
+<tbody>
+<tr><td>31/8 – 6/9</td><td class="n">152</td><td class="n">227,07 €</td><td class="n">8</td><td class="n">27,25 €</td><td class="n">5,5 %</td><td class="mut">Arranque, demanda fresca</td></tr>
+<tr><td>7/9 – 13/9</td><td class="n">340</td><td class="n">603,88 €</td><td class="n">10</td><td class="n">60,39 €</td><td class="n">2,9 %</td><td class="mut">Saturación; búsquedas genéricas</td></tr>
+<tr><td>14/9 – 20/9</td><td class="n">298</td><td class="n">504,59 €</td><td class="n">14</td><td class="n">34,40 €</td><td class="n">4,9 %</td><td class="mut">Frenos y ajuste de dispositivo</td></tr>
+<tr><td>21/9 – 23/9</td><td class="n">249</td><td class="n">416,07 €</td><td class="n">10</td><td class="n">41,61 €</td><td class="n">4,0 %</td><td class="mut">Cierre, se compra tráfico más caro</td></tr>
+</tbody></table>
+<p>La caída de la segunda semana es el patrón típico de un mercado pequeño: agotada la demanda con intención alta, el sistema empieza a comprar consultas cada vez más genéricas. La recuperación de la tercera semana es el resultado directo de las decisiones tomadas el 14 de septiembre.</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+<h2><span class="num">03</span>Qué aprendimos por el camino</h2>
+<p class="lead">Cuatro hallazgos que cambiaron la gestión de la campaña, con el dato que los soporta.</p>
+
+<h3>1. El móvil no había que excluirlo, había que ajustarlo</h3>
+<p>Con los datos de la segunda semana el móvil parecía insalvable: convertía al 0,8 % frente al 4,4 % de escritorio. La opción sobre la mesa era excluirlo. En lugar de eso se le redujo la puja un 70 %, y después se relajó al 40 %.</p>
+<table>
+<thead><tr><th>Dispositivo</th><th class="n">Clics</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th><th class="n">Conversión</th></tr></thead>
+<tbody>
+<tr><td>Escritorio</td><td class="n">677</td><td class="n">1.321,43 €</td><td class="n">32</td><td class="n">41,29 €</td><td class="n">4,7 %</td></tr>
+<tr><td>Móvil</td><td class="n">357</td><td class="n">420,03 €</td><td class="n">11</td><td class="n"><strong>38,18 €</strong></td><td class="n">3,1 %</td></tr>
+<tr class="off"><td>Tableta</td><td class="n">5</td><td class="n">10,15 €</td><td class="n">0</td><td class="n">—</td><td class="n">0,0 %</td></tr>
+</tbody></table>
+<p>Al bajarle la puja, el móvil dejó de competir por las búsquedas genéricas caras y se quedó solo con las de intención alta. <strong>Acabó siendo el dispositivo más barato de la campaña.</strong> En los últimos días registraba a 22 € frente a los 57 € de escritorio. Excluirlo habría costado 11 registros.</p>
+
+<h3>2. El tráfico "por interés" convertía mejor que el de la zona</h3>
+<p>Al revisar la geografía encontramos que la campaña de Search estaba segmentada por <em>presencia o interés</em>, el valor por defecto de Google, y llegaba a personas fuera de la Comunidad de Madrid. Antes de corregirlo medimos el impacto:</p>
+<table>
+<thead><tr><th>Segmento</th><th class="n">Clics</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th></tr></thead>
+<tbody>
+<tr><td>España, dentro de la zona objetivo</td><td class="n">444</td><td class="n">799,74 €</td><td class="n">15</td><td class="n">53,30 €</td></tr>
+<tr><td>España, fuera de la zona (por interés)</td><td class="n">193</td><td class="n">313,23 €</td><td class="n">9</td><td class="n"><strong>34,80 €</strong></td></tr>
+<tr><td>Fuera de España (19 países)</td><td class="n">45</td><td class="n">62,39 €</td><td class="n">2</td><td class="n">31,20 €</td></tr>
+</tbody></table>
+<p>El tráfico de quien no estaba en Madrid en ese momento convertía <strong>un 35 % más barato</strong>: profesionales que se desplazan al evento. Cerrar la segmentación habría eliminado 9 registros. En lugar de eso se excluyeron 25 países no europeos, que era el gasto realmente improductivo (62 €, el 3,1 % del total).</p>
+
+<h3>3. El freno que importa no es el presupuesto diario</h3>
+<p>El fin de semana del 19 y 20 de septiembre la inversión se desplomó a 8 € y 12 € diarios. No era falta de presupuesto: la cuota perdida por presupuesto fue del 0 % y la perdida por puja, del 80 %. Un modificador de fin de semana nos había dejado fuera de las subastas. Al subir el tope de puja a 4,50 €, el lunes y el martes siguientes se invirtieron 164 € y 162 € <em>sin tocar el presupuesto diario</em>: Google reparte por encima del diario en los días de más demanda. El 22 de septiembre fue el mejor día de toda la campaña, con 6 registros.</p>
+
+<h3>4. Higiene continua de términos de búsqueda</h3>
+<p>Se acumularon <strong>137 palabras clave negativas</strong> a lo largo de la campaña. De los 203 términos de búsqueda que recibieron algún clic, solo 10 produjeron un registro. La mayor parte del trabajo diario consistió en identificar y cortar búsquedas de otras ferias y congresos del sector que consumían presupuesto sin aportar nadie.</p>
+
+<h3>Las palabras clave que sostuvieron la campaña</h3>
+<table>
+<thead><tr><th>Palabra clave</th><th>Concordancia</th><th class="n">Clics</th><th class="n">Inversión</th><th class="n">Reg.</th><th class="n">Coste/reg.</th></tr></thead>
+<tbody>
+<tr><td>evento ia madrid</td><td class="mut">Amplia</td><td class="n">366</td><td class="n">630,14 €</td><td class="n">18</td><td class="n">35,01 €</td></tr>
+<tr><td>evento inteligencia artificial madrid</td><td class="mut">Frase</td><td class="n">85</td><td class="n">144,00 €</td><td class="n">5</td><td class="n">28,80 €</td></tr>
+<tr><td>marca + organizador</td><td class="mut">Frase</td><td class="n">11</td><td class="n">19,31 €</td><td class="n">4</td><td class="n"><strong>5,27 €</strong></td></tr>
+<tr><td>eventos inteligencia artificial 2026</td><td class="mut">Frase</td><td class="n">45</td><td class="n">73,11 €</td><td class="n">2</td><td class="n">36,55 €</td></tr>
+<tr class="off"><td>jornada inteligencia artificial</td><td class="mut">Amplia</td><td class="n">60</td><td class="n">114,30 €</td><td class="n">1</td><td class="n">114,30 €</td></tr>
+<tr class="off"><td>conferencia ia españa</td><td class="mut">Amplia</td><td class="n">38</td><td class="n">76,18 €</td><td class="n">1</td><td class="n">76,18 €</td></tr>
+</tbody></table>
+<p class="foot-note">Una sola palabra clave, "evento ia madrid", concentró el 42 % de los registros. Es la formulación exacta con la que busca quien quiere asistir a algo.</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+<h2><span class="num">04</span>Por qué no se llegó a 200 registros</h2>
+<p class="lead">El objetivo del plan era 200–300 registros a 8–12 €. Cerramos con 45 a 44,48 €. Estas son las dos razones, con los números que las sostienen.</p>
+
+<h3>Razón 1 · El mercado de búsqueda no daba para tanto</h3>
+<p>Google informa de la <em>cuota de impresión</em>: qué porcentaje de las subastas en las que podíamos participar acabamos ganando. La nuestra fue del <strong>26,2 %</strong>. De ahí se deduce el tamaño real del mercado:</p>
+<div class="calc">
+<div><span>Impresiones obtenidas en 24 días</span><span>13.992</span></div>
+<div><span>Cuota de impresión conseguida</span><span>26,2 %</span></div>
+<div><span>Mercado total de búsquedas relevantes</span><span>53.405 impresiones</span></div>
+<div><span>Clics si hubiéramos capturado el 100 %</span><span>3.968</span></div>
+<div><span>× conversión de la página de registro (4,14 %)</span><span>164 registros</span></div>
+<div class="res"><span>Coste de comprar ese mercado entero</span><span>6.706 €</span></div>
+</div>
+<p><strong>El techo del canal eran 164 registros, y alcanzarlo habría costado 6.706 €</strong>, más del triple del presupuesto disponible. Con 2.000 € el resultado matemáticamente esperable rondaba los 45–50 registros, que es exactamente donde cerramos. Dicho de otro modo: la campaña rindió lo que el mercado daba de sí.</p>
+<p>Esto no se sabía al planificar porque el token de la cuenta no tenía acceso al Planificador de palabras clave de Google. La estimación de 200–300 registros se hizo sobre supuestos de CPL de mercado general, no sobre el volumen real de "eventos de IA en Madrid", que resultó ser un nicho pequeño.</p>
+
+<h3>Razón 2 · La página de registro convertía a la mitad de lo esperable</h3>
+<p>Con tráfico de intención alta —alguien que busca activamente un evento de IA en Madrid y hace clic— la página convirtió al <strong>4,1 %</strong>. Para un evento gratuito, presencial y con ponentes institucionales de primer nivel, la referencia razonable del sector es <strong>8–12 %</strong>.</p>
+<div class="bars">
+<div class="bar"><span class="lb">Referencia del sector</span><span class="tr"><span class="fl g" style="width:80%"></span></span><span class="vl">8–12 %</span></div>
+<div class="bar"><span class="lb">Página actual, escritorio</span><span class="tr"><span class="fl" style="width:47%"></span></span><span class="vl">4,7 %</span></div>
+<div class="bar"><span class="lb">Página actual, móvil</span><span class="tr"><span class="fl w" style="width:31%"></span></span><span class="vl">3,1 %</span></div>
+<div class="bar"><span class="lb">Tráfico de descubrimiento</span><span class="tr"><span class="fl w" style="width:2%"></span></span><span class="vl">0,2 %</span></div>
+</div>
+<p>Las causas identificadas en el análisis que os compartimos el 10 de septiembre:</p>
+<ul>
+<li><strong>Doble salto en el registro.</strong> La página no contenía formulario: el botón abría una pestaña nueva en otro dominio. Es lo que más penaliza en móvil, donde cambiar de pestaña y de dominio hace perder a mucha gente por el camino.</li>
+<li><strong>Ruptura entre anuncio y página.</strong> Los anuncios prometían entender qué exige el AI Act a tu empresa; la página abría con un claim de marca. Quien llega no reencuentra lo que le trajo.</li>
+<li><strong>Autoridad enterrada.</strong> Secretaría de Estado, AEPD, OCDE y ONU aparecían a mitad de página, en tarjetas que había que girar. Es el argumento más fuerte del evento y no se veía en la primera pantalla.</li>
+<li><strong>Peso de la página.</strong> 5,9 MB en la portada, con fotos de ponentes de entre 1,1 y 1,7 MB cada una.</li>
+</ul>
+
+<div class="box good">
+<h4>Las dos razones combinadas</h4>
+<p>Con los mismos 1.039 clics de Search y una conversión del 8 %, habrían salido <strong>83 registros</strong> en lugar de 43: casi el doble, con el mismo presupuesto y sin tocar la campaña. Y capturando todo el mercado disponible con esa conversión, el objetivo de 200–300 registros sí era alcanzable — serían <strong>317</strong> —, pero habría exigido unos 6.700 € de inversión publicitaria.</p>
+<p>La conclusión operativa es que <strong>el cuello de botella no estaba en la campaña sino en la conversión y en el tamaño del canal</strong>. Es una buena noticia de cara a la próxima edición: es lo más barato de arreglar.</p>
+</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+<h2><span class="num">05</span>Trabajo realizado</h2>
+<p class="lead">Además de la gestión diaria de las campañas, estos son los entregables del proyecto.</p>
+
+<h3>Medición y atribución</h3>
+<p>El registro se completaba en un dominio distinto al de la página de destino, lo que rompe la atribución por defecto. Se implementó medición entre dominios con Google Tag Manager en los dos contenedores, se configuró la conversión de registro y se corrigió una política de seguridad de contenidos que bloqueaba las llamadas de conversión de Google. Sin esto, la campaña habría funcionado a ciegas.</p>
+<p>Se detectó además que, en el contenedor del Observatorio, la etiqueta de conversión de Google Ads se dispara con cualquier envío de formulario sin filtro de URL, por lo que <strong>está contabilizando también los registros de este evento en esa otra cuenta</strong>. No afecta a la medición de esta campaña. La recomendación es añadir al activador la condición de que la URL no contenga la ruta del evento.</p>
+
+<h3>Informe diario y cuadro de mando</h3>
+<p>Se automatizó un informe diario que se ejecuta cada mañana y escribe en una hoja de cálculo compartida con el histórico completo día a día: impresiones, clics, CTR, CPC, inversión, conversiones, coste por registro, acumulado y proyección. Queda operativo y reutilizable para futuras campañas.</p>
+
+<h3>Creatividades</h3>
+<p>Se produjeron los recursos gráficos de las campañas en todos los formatos requeridos, incluidas las piezas de ponente a partir de una fotografía, en versión limpia para Search y con marca para los canales de descubrimiento. Una creatividad fue rechazada por política de Google y se retiró el mismo día.</p>
+
+<h3>Propuesta de página de registro</h3>
+<p>A partir del análisis de conversión se diseñó y publicó una propuesta alternativa de página, orientada a convertir, con el formulario integrado en la primera pantalla. Está disponible como vista previa y sigue en pie para la próxima edición.</p>
+
+<h3>Listas de remarketing</h3>
+<table>
+<thead><tr><th>Lista</th><th class="n">Display</th><th class="n">Search</th><th>Estado</th></tr></thead>
+<tbody>
+<tr><td>Visitantes de la web</td><td class="n">430</td><td class="n">200</td><td class="mut">Por debajo del mínimo de 1.000</td></tr>
+<tr><td>Registro iniciado</td><td class="n">40</td><td class="n">16</td><td class="mut">Por debajo del mínimo</td></tr>
+</tbody></table>
+<p>Las listas empezaron a poblarse el 2 de septiembre, cuando se resolvió el bloqueo técnico de medición. En tres semanas no dio tiempo a alcanzar los 1.000 usuarios que Google exige para activar remarketing en Demand Gen, motivo por el que esa campaña nunca llegó a emitir. <strong>Las listas quedan vivas y se siguen poblando</strong>: son un activo aprovechable para la próxima convocatoria.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+<h2><span class="num">06</span>Recomendaciones para la próxima edición</h2>
+<p class="lead">En orden de impacto esperado sobre el número de registros.</p>
+
+<h3>1 · Página de registro con formulario integrado <span class="mut" style="font-weight:400">— impacto alto, coste bajo</span></h3>
+<p>Es la palanca con mejor relación entre esfuerzo y resultado. Pasar del 4,1 % al 8 % de conversión duplica los registros sin invertir un euro más en publicidad. La propuesta ya está diseñada y publicada: formulario en la primera pantalla, la promesa del anuncio repetida en el titular, las instituciones como primer impacto y agenda visible sin salir de la página. Conviene tenerla lista <strong>antes</strong> de que empiece la inversión, no a mitad de campaña.</p>
+
+<h3>2 · Presupuesto acorde al canal, o abrir el mix <span class="mut" style="font-weight:400">— impacto alto</span></h3>
+<p>Search en este nicho tiene un techo de unos 160–320 registros según la conversión de la página, y comprarlo entero cuesta del orden de 6.700 €. Dos caminos, compatibles:</p>
+<ul>
+<li><strong>Si el objetivo se mantiene en 200–300 registros</strong>, el presupuesto de Search debería situarse en torno a 6.000–7.000 €, con la página de registro corregida.</li>
+<li><strong>Si el presupuesto se mantiene en 2.000 €</strong>, conviene repartirlo: Search cubre la demanda existente con unos 1.200 €, y el resto va a un canal que <em>genere</em> demanda en el perfil objetivo. Para un público de dirección y compliance, LinkedIn por cargo y sector es la opción natural. Se propuso durante la campaña y quedó pendiente de decidir.</li>
+</ul>
+
+<h3>3 · Empezar antes <span class="mut" style="font-weight:400">— impacto medio</span></h3>
+<p>Tres semanas y media no dan para una fase de aprendizaje y otra de escalado. Con 6–8 semanas: las estrategias de puja automáticas llegan a tener datos suficientes, las listas de remarketing superan el mínimo de 1.000 usuarios y Demand Gen de remarketing —que este año no llegó a emitir— entra en juego. El remarketing sobre quien visitó y no se registró es históricamente el tráfico más rentable de una campaña de evento.</p>
+
+<h3>4 · Explotar la marca de forma coordinada <span class="mut" style="font-weight:400">— impacto medio, coste muy bajo</span></h3>
+<p>Las búsquedas por el nombre del evento convirtieron a 10,03 €, cuatro veces más barato que la media. Cada envío de newsletter, publicación en LinkedIn o aparición en prensa genera un pico de búsquedas de marca. Sincronizar el calendario de difusión propia con la campaña —y reservar presupuesto específico para captar esos picos— es prácticamente dinero gratis.</p>
+
+<h3>5 · Descartar los canales de descubrimiento para este caso <span class="mut" style="font-weight:400">— ahorro directo</span></h3>
+<p>Demand Gen y Performance Max costaron 250,11 € y dieron 2 registros. Su inventario es mayoritariamente Display y móvil, y en Performance Max no se puede excluir dispositivo ni desactivar Display. Para un evento presencial, de un día, dirigido a perfiles directivos y con una ventana corta, no compensan. Ese presupuesto rinde más en Search o en LinkedIn.</p>
+
+<div class="box">
+<h4>Escenario sugerido para la próxima edición</h4>
+<p>Página de registro nueva (conversión objetivo 8 %) · 8 semanas de campaña · 2.000 € en Search y 2.000 € en LinkedIn por cargo · remarketing activo desde la tercera semana. Con la conversión corregida, los mismos 2.000 € de Search rendirían del orden de <strong>85–95 registros</strong>, a los que habría que sumar los que aporten LinkedIn y el remarketing.</p>
+</div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+<h2><span class="num">07</span>Anexo · Cronología de decisiones</h2>
+<p class="lead">Registro de los cambios relevantes aplicados durante la campaña.</p>
+<table>
+<thead><tr><th style="width:20mm">Fecha</th><th>Decisión</th><th>Motivo</th></tr></thead>
+<tbody>
+<tr><td>31/8</td><td>Lanzamiento de Search y Demand Gen</td><td class="mut">Inicio de campaña</td></tr>
+<tr><td>2/9</td><td>Corrección de la política de seguridad que bloqueaba la medición</td><td class="mut">Las conversiones no se registraban</td></tr>
+<tr><td>2/9</td><td>Medición entre dominios con Google Tag Manager</td><td class="mut">El registro ocurre en otro dominio</td></tr>
+<tr><td>8/9</td><td>Demand Gen Prospecting pausada</td><td class="mut">106 € y 0 registros</td></tr>
+<tr><td>10/9</td><td>Análisis de conversión de la página y propuesta alternativa</td><td class="mut">Conversión del 4,1 % frente al 8–12 % de referencia</td></tr>
+<tr><td>14/9</td><td>Grupos de AI Act y Compliance pausados</td><td class="mut">324 € y 2 registros</td></tr>
+<tr><td>14/9</td><td>Performance Max pausada</td><td class="mut">Inventario móvil no excluible; 0,2 % de conversión</td></tr>
+<tr><td>15/9</td><td>Puja de móvil reducida un 70 % en lugar de excluirlo</td><td class="mut">El móvil aportaba 5 de 20 registros</td></tr>
+<tr><td>15/9</td><td>Cobertura ampliada a la corona de una hora de Madrid</td><td class="mut">Buscar volumen adicional</td></tr>
+<tr><td>15/9</td><td>Imágenes y mención de ponente añadidas a Search</td><td class="mut">Reforzar el atractivo del anuncio</td></tr>
+<tr><td>17/9</td><td>25 países no europeos excluidos</td><td class="mut">62 € de gasto fuera del público objetivo</td></tr>
+<tr><td>17/9</td><td>Segmentación por interés mantenida</td><td class="mut">Convertía un 35 % más barato que la zona</td></tr>
+<tr><td>21/9</td><td>Tope de puja subido de 3,00 € a 4,50 €</td><td class="mut">80 % de cuota perdida por puja</td></tr>
+<tr><td>21/9</td><td>Puja de móvil relajada del −70 % al −40 %</td><td class="mut">El móvil había pasado a ser el canal más barato</td></tr>
+<tr><td>21/9</td><td>9 negativas de ferias y congresos de la competencia</td><td class="mut">Gasto sin conversión</td></tr>
+<tr><td>21/9</td><td>Fin de campaña programado para el 23/9 a las 23:59</td><td class="mut">No invertir durante el evento</td></tr>
+<tr><td>23/9</td><td>Cierre con el presupuesto ejecutado al 100,1 %</td><td class="mut">—</td></tr>
+</tbody></table>
+
+<h3>Nota metodológica</h3>
+<p class="mut" style="font-size:8.8pt">Todas las cifras proceden de la API de Google Ads (versión 25) sobre la cuenta de Adigital, para el periodo del 31 de agosto al 23 de septiembre de 2026, y se han extraído el 25 de septiembre. La conversión utilizada es el envío del formulario de registro. Los registros atribuidos a la campaña pueden diferir del total de asistentes registrados por Adigital, que incluye los procedentes de canales propios y orgánicos. La cuota de impresión y el tamaño estimado del mercado son métricas que calcula Google sobre las subastas en las que la campaña era elegible.</p>
+</section>
+
+</body></html>
