@@ -410,7 +410,7 @@
     };
     const reloj = setTimeout(respaldo, TIEMPO_MAX);
     const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    fetch('/api/intelligence-copilot', {
+    fetch('/api/intelligence-copilot/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl ? ctl.signal : undefined,
       body: JSON.stringify({ pregunta: txt, contexto: contexto() })
     }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
