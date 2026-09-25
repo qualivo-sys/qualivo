@@ -48,3 +48,27 @@ alcanzable, pero exigía ~6.700 € de inversión.
 `scripts/datos_reunion.py` extrae los datos, `scripts/cierre.py` y `scripts/extra.py` los
 agregan (campañas, grupos, dispositivo, semanas, keywords, cuota de impresión, negativas y
 listas de remarketing). Las credenciales se leen de `gads_creds.json`, fuera del repositorio.
+
+## Versión Gamma
+
+Deck de 19 tarjetas sobre el tema **Qualivo** (`z05hrmn7mkmq7z1`), el mismo de la propuesta
+de Ágape: fondo `#091c27`, turquesa `#23b6b7`, Inter, logo de Qualivo.
+
+- Documento: https://gamma.app/docs/ajgdycypb1n34kv
+
+Cómo se hizo, para repetirlo: la presentación de Ágape **no está guardada como plantilla** en
+el espacio de trabajo (la única que lo está es «PPT Qualivo»), así que `generate_from_template`
+no la acepta. Se usó `generate` pasando su `themeId` y replicando su estructura narrativa en
+`additionalInstructions`: secciones numeradas en mayúsculas, frases cortas, preguntas retóricas
+y frase de cierre. Parámetros que importaron:
+
+- `textMode: "preserve"` y `cardSplit: "inputTextBreaks"` — sin esto Gamma reescribe las cifras.
+  Los separadores `---` del texto de entrada marcan dónde empieza cada tarjeta.
+- `imageOptions.source: "noImages"` — con `themeAccent` la imagen de portada falló al cargar
+  (`loadImageStatus: "error"`) y dejaba un hueco roto en la primera pantalla.
+- `textOptions.tone` y `audience` se ignoran cuando `textMode` es `preserve`; el tono hay que
+  llevarlo en el propio texto de entrada.
+
+Pendiente de ajustar a mano en el editor: en las tablas de 6–7 columnas los valores se parten
+en dos líneas en el PDF exportado (`1.03 / 9`, `49.09 / 8`). Se corrige bajando el tamaño de
+fuente de esas tarjetas. La API de Gamma solo crea, no edita.
