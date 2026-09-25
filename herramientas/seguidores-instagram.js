@@ -88,6 +88,11 @@ async function main() {
   const antes = fs.existsSync(FICHERO) ? JSON.parse(fs.readFileSync(FICHERO)) : { usuarios: [], fecha: null };
   const items = await apify(ACTOR_SEGUIDORES, { Account: [CUENTA], resultsLimit: Number(process.env.APIFY_MAX_SEGUIDORES || 3000), dataToScrape: 'Followers' });
   const ahora = items.map(usuarioDe).filter(Boolean);
+  // Si el actor no devolvió nada (p.ej. NO_BUDGET de Apify) pero ya había una
+  // foto previa, es una corrida fallida: no la guardes como si hoy no hubiera
+  // seguidores, o se pierde la línea base y la próxima corrida cree que TODOS
+  // los seguidores son "nuevos".
+  if (!ahora.length && antes.fecha) { console.log('(0 resultados del actor con foto previa existente: corrida fallida, no toco el estado)'); return; }
   let nuevos = antes.fecha ? ahora.filter(function (u) { return antes.usuarios.indexOf(u) === -1; }) : [];
   if (!antes.fecha && ULTIMOS) nuevos = ahora.slice(0, ULTIMOS); // la lista viene con los más recientes primero
   console.log('seguidores: ' + ahora.length + ' · nuevos desde ' + (antes.fecha || 'nunca') + ': ' + nuevos.length + (antes.fecha ? '' : ' (primera pasada: solo guardo la foto)'));
