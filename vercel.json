@@ -27,6 +27,24 @@
       ]
     },
     {
+      "source": "/intelligence/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/intelligence",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -220,6 +238,9 @@
     },
     "api/vapi-fin.js": {
       "maxDuration": 60
+    },
+    "api/intelligence-copilot.js": {
+      "maxDuration": 30
     }
   }
 }

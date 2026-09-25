@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Qualivo Intelligence</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<noscript>Esta demo necesita JavaScript.</noscript>
+
+<!-- Inicio: elegir sector, objetivo y empresa -->
+<section id="inicio" class="inicio" hidden>
+  <div class="inicio-caja">
+    <img class="inicio-logo" src="/assets/img/qualivo-logo.png" alt="Qualivo" width="132" height="32">
+    <p class="eyebrow">Intelligence System · demo</p>
+    <h1>¿Qué tipo de negocio quieres simular?</h1>
+    <div class="sectores" id="inicioSectores" role="radiogroup" aria-label="Sector"></div>
+    <h2>¿Qué quieres optimizar?</h2>
+    <div class="objetivos" id="inicioObjetivos" role="radiogroup" aria-label="Objetivo"></div>
+    <div class="inicio-empresa">
+      <label for="inicioEmpresa">Nombre de la empresa <span>(opcional)</span></label>
+      <input id="inicioEmpresa" type="text" placeholder="Por ejemplo, Dataslayer" autocomplete="off" maxlength="40">
+    </div>
+    <button class="btn btn-primario btn-grande" id="inicioAbrir" type="button" disabled>Abrir el sistema</button>
+    <p class="inicio-nota">Datos simulados. Así se vería conectado a vuestro CRM, vuestras campañas y vuestras conversaciones.</p>
+  </div>
+</section>
+
+<!-- Aplicación -->
+<div id="app" class="app" hidden>
+  <aside class="lateral" aria-label="Navegación">
+    <div class="marca">
+      <img class="marca-grande" src="/assets/img/qualivo-logo.png" alt="Qualivo" width="104" height="25">
+      <img class="marca-mini" src="/assets/img/favicon.svg" alt="Qualivo" width="28" height="28">
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="lateral-pie">
+      <label class="mini-label" for="selSector">Sector</label>
+      <select id="selSector" class="select"></select>
+      <button class="btn btn-fantasma btn-bloque" id="btnInicio" type="button" title="Cambiar de negocio"><span>Cambiar de negocio</span></button>
+    </div>
+  </aside>
+
+  <main class="principal">
+    <header class="barra">
+      <div class="barra-titulo">
+        <span class="sistema" id="tituloSistema">Intelligence System</span>
+        <span class="chip-sector" id="chipSector"></span>
+      </div>
+      <div class="barra-acciones">
+        <span class="reloj" id="reloj" title="Hora del sistema"></span>
+        <div class="demo-botones" id="demoBotones"></div>
+        <button class="btn btn-icono" id="btnReiniciar" type="button" title="Reiniciar la demo" aria-label="Reiniciar"></button>
+        <button class="btn btn-icono solo-movil" id="btnCopilotMovil" type="button" aria-label="Abrir Copilot"></button>
+      </div>
+    </header>
+    <div class="vista" id="vista" tabindex="-1"></div>
+  </main>
+
+  <aside class="copilot" id="copilot" aria-label="Qualivo Copilot">
+    <header class="copilot-cab">
+      <div>
+        <strong>Qualivo Copilot</strong>
+        <span id="copilotSub">Pregunta lo que quieras sobre el negocio</span>
+      </div>
+      <button class="btn btn-icono solo-movil" id="btnCerrarCopilot" type="button" aria-label="Cerrar Copilot"></button>
+    </header>
+    <div class="copilot-hilo" id="hilo" aria-live="polite"></div>
+    <div class="copilot-sugeridas" id="sugeridas"></div>
+    <form class="copilot-form" id="formPregunta" autocomplete="off">
+      <input id="pregunta" type="text" placeholder="Pregunta sobre tus datos…" maxlength="300" aria-label="Pregunta al Copilot">
+      <button class="btn btn-primario" type="submit" aria-label="Enviar"></button>
+    </form>
+  </aside>
+</div>
+
+<!-- Ficha del contacto -->
+<div class="velo" id="velo" hidden></div>
+<aside class="ficha" id="ficha" aria-label="Ficha del contacto" hidden></aside>
+
+<!-- Modo demo -->
+<div class="demo-panel" id="demoPanel" hidden></div>
+<div class="humano" id="humano" hidden></div>
+<div class="avisos" id="avisos" aria-live="polite"></div>
+
+<script src="js/motor.js"></script>
+<script src="js/iconos.js"></script>
+<script src="js/app.js"></script>
+<script src="js/copilot.js"></script>
+<script src="js/demo.js"></script>
+</body>
+</html>
