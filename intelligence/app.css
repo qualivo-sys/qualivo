@@ -130,6 +130,11 @@ a { color: var(--verde); }
 @keyframes late { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
 @keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .borrador { background: var(--fondo); border: 1px solid var(--borde); border-left: 3px solid var(--verde); border-radius: var(--radio-s); padding: 10px 12px; font-size: 13px; white-space: pre-wrap; }
+.msg-ia .tabla { font-size: 11.5px; }
+.msg-ia .tabla th { padding: 7px 7px; font-size: 10px; letter-spacing: .03em; }
+.msg-ia .tabla td { padding: 7px 7px; }
+.msg-ia .tabla td.num { white-space: normal; text-align: right; }
+.msg-ia .tabla td:first-child { min-width: 92px; }
 .accion-sug { display: flex; align-items: flex-start; gap: 10px; border: 1px solid #CFE8E4; background: var(--verde-bg); border-radius: var(--radio-s); padding: 10px 12px; }
 .accion-sug .ico { color: var(--verde); margin-top: 1px; }
 .accion-sug p { font-size: 12.5px; color: var(--verde-txt); font-weight: 600; }

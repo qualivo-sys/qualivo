@@ -64,6 +64,7 @@
   function iniciar(opts) {
     return cargarSector(opts.sector).then(function (cfg) {
       completarCfg(cfg);
+      M.nombresSenal(cfg.t.senales);
       if (QV.demo) QV.demo.parar(true);
       estado.sectorId = cfg.id;
       estado.cfg = cfg;
@@ -167,7 +168,7 @@
       ingresos: { l: N.ingresos || 'Facturación', v: M.euros(m.ingresos), em: 'Últimos 30 días', clase: 'bien' },
       roas: { l: 'Retorno (ROAS)', v: M.num(ingresosPago / Math.max(1, m.inversion), 1) + '×', em: 'Por cada euro en anuncios', clase: 'bien' }
     };
-    const extra = cfg.kpiCustom ? cfg.kpiCustom(m, cfg, M) : {};
+    const extra = cfg.kpiCustom ? cfg.kpiCustom(m, cfg, M, estado) : {};
     return (cfg.kpis || []).map(function (k) { const d = extra[k] || base[k]; return d ? Object.assign({ id: k }, d) : null; }).filter(Boolean);
   }
   QV.kpis = kpis;
@@ -433,7 +434,7 @@
       const T = estado.cfg.t, cs = estado.contactos;
       const abiertos = cs.filter(function (c) { return !c.fin; });
       const cual = abiertos.filter(function (c) { return c.etapa <= 2; });
-      const seg = cs.filter(function (c) { return c.x.nba.tipo === 'agente' && ['wa', 'wa-seguir', 'reenganche', 'reprogramar', 'propuesta'].indexOf(c.x.nba.id) >= 0; });
+      const seg = cs.filter(function (c) { return c.x.nba.tipo === 'agente' && ['wa', 'wa-seguir', 'reenganche', 'reprogramar', 'propuesta', 'desbloquear'].indexOf(c.x.nba.id) >= 0; });
       const react = cs.filter(function (c) { return c.s.luego || c.x.nba.id === 'nada' || (c.x.k.act > 14 * 1440 && !c.fin); });
       const reactProg = cs.filter(function (c) { return c.x.nba.id === 'esperar' && c.s.luego; });
       const hoy = []; cs.forEach(function (c) { c.x.senales.forEach(function (s) { if (estado.ahora - s.t < 1440 * M.MIN) hoy.push({ s: s, c: c }); }); });

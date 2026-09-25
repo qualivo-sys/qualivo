@@ -99,6 +99,7 @@
       '<div class="botones"><button class="btn btn-primario" type="button" data-abrir="demo">Ver ficha completa</button><button class="btn" type="button" data-demo="preguntar">Preguntar al Copilot</button><button class="btn btn-fantasma" type="button" data-demo="cerrar-humano">Cerrar</button></div>';
     el.hidden = false;
     pintarBotones();
+    pintarPanel(paso);
   }
 
   function pintarPanel(paso) {

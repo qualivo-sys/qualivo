@@ -80,7 +80,7 @@
 
   function abiertos() { return E().contactos.filter(function (c) { return !c.fin; }); }
   function suma(lista) { return lista.reduce(function (a, c) { return a + (c.valor || 0); }, 0); }
-  function plural(n, s, p) { return n + ' ' + (n === 1 ? s : p); }
+  function plural(n, s, p) { return M.pl(n, s, p); }
 
   // ---------------------------------------------------------------------------
   // Manejadores deterministas
@@ -106,7 +106,7 @@
       const T = E().cfg.t;
       const at = QV.atencion();
       return [
-        texto('**' + at.length + ' ' + T.oportunidades + '** requieren atención ahora. Suman ' + M.euros(suma(at)) + '. Están ordenadas por prioridad; la columna de la derecha dice qué va a pasar y quién lo hace.'),
+        texto('**' + at.length + ' ' + T.oportunidades + '** requieren atención ahora. Suman ' + M.euros(suma(at)) + '. Arriba lo más prioritario; la última columna dice qué va a pasar y quién lo hace.'),
         tablaContactos(at, [col.nombre, col.prio, col.valor, col.accion])
       ];
     },
@@ -179,7 +179,7 @@
       const citas = est.contactos.filter(function (c) { return c.s.tCita != null && c.s.tCita > est.ahora; });
       const ganados = est.contactos.filter(function (c) { return c.fin === 'ganado' && c.x.k.act < sem; });
       return [
-        texto('Esta semana han entrado **' + nuevos.length + ' ' + T.contactos + ' nuevos** y el sistema ha detectado **' + sen.length + ' señales**. Lo más importante: ' + (subida.length ? subida.length + ' han subido de intención en los últimos 2 días' : 'nada ha subido de intención') + '.'),
+        texto('Esta semana han entrado **' + plural(nuevos.length, T.contacto, T.contactos) + ' ' + (nuevos.length === 1 ? (T.nuevos === 'nuevas' ? 'nueva' : 'nuevo') : (T.nuevos || 'nuevos')) + '** y el sistema ha detectado **' + plural(sen.length, 'señal', 'señales') + '**. Lo más importante: ' + (subida.length ? (subida.length === 1 ? '1 ha subido' : subida.length + ' han subido') + ' de intención en los últimos 2 días' : 'nada ha subido de intención') + '.'),
         metricas(Object.keys(porTipo).map(function (k) { return { v: porTipo[k], l: M.TIPOS_SENAL[k].txt }; }).slice(0, 4)),
         subida.length ? tarjetas(subida, 2) : null,
         texto(citas.length + ' ' + T.cita + 's agendadas por delante' + (ganados.length ? ' y ' + ganados.length + ' ' + T.clientes + ' que han vuelto a moverse (' + M.unir(ganados.map(function (c) { return c.n.split(' ')[0]; })) + ')' : '') + '.')
@@ -198,7 +198,7 @@
       const mejor = pago.slice().sort(function (a, b) { return b.roas - a.roas; })[0];
       const peor = pago.slice().sort(function (a, b) { return a.roas - b.roas; })[0];
       const out = [
-        texto('La que más ' + T.contactos + ' trae no es la que más vende. **' + masEntra.c.nombre + '** trae ' + masEntra.entra + ' ' + T.contactos + ' y ' + masEntra.v + ' ' + T.ventas + '. **' + mejor.c.nombre + '** es la que más devuelve: ' + M.num(mejor.roas, 1) + '× lo invertido.'),
+        texto('La que más ' + T.contactos + ' trae no es la que más vende. **' + masEntra.c.nombre + '** trae ' + plural(masEntra.entra, T.contacto, T.contactos) + ' y ' + plural(masEntra.v, T.venta, T.ventas) + '. **' + mejor.c.nombre + '** es la que más devuelve: ' + M.num(mejor.roas, 1) + '× lo invertido.'),
         { tipo: 'tabla', cols: ['Campaña', T.Contactos, T.Ventas, 'Coste por ' + T.venta, 'Retorno'], filas: filas.sort(function (a, b) { return (b.roas || 0) - (a.roas || 0); }).map(function (f) { return { celdas: [f.c.canal + ' · ' + f.c.nombre, f.entra, f.v, f.cpv ? M.euros(f.cpv) : 'orgánico', f.roas ? M.num(f.roas, 1) + '×' : '—'] }; }) }
       ];
       if (peor !== mejor) out.push(accion('Movería presupuesto de «' + peor.c.nombre + '» (' + M.num(peor.roas, 1) + '×) a «' + mejor.c.nombre + '». Se optimiza a ' + T.venta + ' real, no a ' + T.contacto + ' barato.'));
@@ -222,7 +222,7 @@
       const T = E().cfg.t;
       const l = abiertos().filter(function (c) { return c.x.fit >= 40; }).sort(function (a, b) { return probabilidad(b) - probabilidad(a); });
       return [
-        texto('Estos son los ' + T.contactos + ' con más probabilidad de ' + (T.verbo || 'comprar') + ' ahora mismo. La probabilidad combina intención, encaje e interés, y resta el riesgo.'),
+        texto('Quién tiene más probabilidad de ' + (T.verbo || 'comprar') + ' ahora mismo. La probabilidad combina intención, encaje y actividad, y resta el riesgo.'),
         tarjetas(l, 3),
         tablaContactos(l.slice(3, 8), [col.nombre, col.prob, col.etapa, col.accion])
       ];
@@ -334,7 +334,11 @@
   const VACIAS = /^(que|quien|quienes|cual|cuales|como|donde|cuando|cuanto|esta|este|estos|estas|tiene|tienen|hay|para|por|con|los|las|del|una|unos|unas|mas|menos|muy|son|ser|estan|debería|deberia|hoy|nos|nuestro|nuestra|todo|todos)$/;
   function masParecida(txt) {
     const t = normal(txt);
-    const lista = todas();
+    const lista = todas().slice();
+    // Respuestas que no están entre las sugeridas pero sirven de respaldo
+    ['probables', 'equipo', 'campanas', 'sinSeguimiento'].forEach(function (h) {
+      if (!lista.some(function (p) { return p.h === h; })) lista.push({ h: h, q: { probables: '¿Quién tiene más probabilidad de comprar?', equipo: '¿Qué debería hacer el equipo hoy?', campanas: '¿Qué campañas traen clientes?', sinSeguimiento: '¿Quién lleva tiempo sin seguimiento?' }[h] });
+    });
     const pal = t.split(/[^a-z0-9ñ]+/).filter(function (w) { return w.length > 3 && !VACIAS.test(w); });
     let mejor = null, max = 0;
     lista.forEach(function (p) {

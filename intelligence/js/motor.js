@@ -74,10 +74,16 @@
   }
   function euros(v) {
     v = Math.round(v || 0);
-    return v.toLocaleString('es-ES') + ' €';
+    return num(v) + ' €';
   }
   function num(v, dec) {
-    return Number(v || 0).toLocaleString('es-ES', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+    // Separador de miles siempre (es-ES no agrupa los números de 4 cifras).
+    const n = Number(v || 0), d = dec || 0;
+    const partes = Math.abs(n).toFixed(d).split('.');
+    const ent = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return (n < 0 ? '−' : '') + ent + (d ? ',' + partes[1] : '');
+  }
+  function pl(n, s, p) { return num(n) + ' ' + (n === 1 ? s : p);
   }
   function pct(v) { return num(v * 100, v < 0.1 ? 1 : 0) + ' %'; }
 
@@ -182,11 +188,11 @@
     const op = 0.35 * x.fit + 0.2 * x.comp + 0.45 * x.int;
     x.oportunidad = Math.round(op);
     if (c.fin === 'ganado') {
-      if ((x.fit >= 60 && x.riesgo >= 55) || c.s.exp) return x.riesgo >= 70 ? 'urgente' : 'alta';
+      if ((x.fit >= 35 && x.riesgo >= 45) || c.s.exp) return x.riesgo >= 70 ? 'urgente' : 'alta';
       return 'baja';
     }
     if (op >= 72 || (x.fit >= 70 && x.int >= 60 && x.riesgo >= 55)) return 'urgente';
-    if (op >= 58 || (x.fit >= 62 && x.riesgo >= 50) || (x.fit >= 50 && x.riesgo >= 65) || (x.k.creado < 180 && x.fit >= 70)) return 'alta';
+    if (op >= 58 || (x.fit >= 62 && x.riesgo >= 50) || (x.fit >= 50 && x.riesgo >= 65) || (x.k.creado < 180 && x.fit >= 70) || (c.s.bloqueo && x.fit >= 60)) return 'alta';
     if (op >= 42) return 'media';
     return 'baja';
   }
@@ -231,7 +237,8 @@
     }
     if (c.fin === 'perdido') return { id: 'nada', accion: 'No hacer nada', quien: 'Sistema', tipo: 'nada', estado: 'cerrado', por: 'Está cerrado como perdido. Si vuelve a dar señales, el sistema lo detecta y lo reabre.' };
     if (c.fin === 'ganado' && c.s.exp) return { id: 'expansion', accion: 'Pasar ' + al(T.cs || T.comercial), quien: T.CS || T.Comercial, tipo: 'humano', estado: 'humano', por: (c.s.expTxt || 'Pide más') + '. Es ' + T.unCliente + ' contento: la conversación la tiene que llevar una persona, con el historial delante.' };
-    if (c.fin === 'ganado' && x.riesgo >= 55) return { id: 'retener', accion: 'Aviso ' + al(T.cs || T.comercial), quien: T.CS || T.Comercial, tipo: 'humano', estado: 'humano', por: 'Hay señales de que se puede ir: ' + unir(x.riesgoM.slice(0, 2).map(function (m) { return m.txt; })) + '. Una llamada ahora vale más que diez correos después.' };
+    if (c.fin === 'ganado' && x.riesgo >= 45) return { id: 'retener', accion: 'Aviso ' + al(T.cs || T.comercial), quien: T.CS || T.Comercial, tipo: 'humano', estado: 'humano', por: 'Hay señales de que se puede ir: ' + unir(x.riesgoM.slice(0, 2).map(function (m) { return m.txt; })) + '. Una llamada ahora vale más que diez correos después.' };
+    if (c.fin === 'ganado' && c.s.revision) return { id: 'recordatorio', accion: 'Recordatorio de revisión', quien: 'Automatización', tipo: 'auto', estado: 'esperando', por: (c.s.revisionTxt || 'Tiene una revisión pendiente') + '. Sale un mensaje con dos huecos para reservarla sin llamar: es la parte del negocio que más se olvida.' };
     if (c.fin === 'ganado') return { id: 'nada', accion: 'Nada que hacer ahora', quien: 'Sistema', tipo: 'nada', estado: 'vigilando', por: 'Ya es ' + T.cliente + '. El sistema sigue mirando por si aparece una oportunidad nueva o un riesgo.' };
     if (x.int >= 78 && x.fit >= 62) {
       return { id: 'comercial', accion: 'Avisar ' + al(T.comercial), quien: T.Comercial, tipo: 'humano', estado: 'humano',
@@ -244,12 +251,20 @@
     const um = ultimoMsg(c);
     if (um && um.de === 'c' && !c.s.luego && (k.ahora - um.t) / MIN < 1440) {
       const m = (k.ahora - um.t) / MIN;
+      if (c.s.tProp != null && c.valor >= (T.valorAlto || 5000)) {
+        return { id: 'comercial', accion: 'Avisar ' + al(T.comercial), quien: T.Comercial, tipo: 'humano', estado: 'humano',
+          por: 'Ha contestado sobre ' + T.propuesta + ' ' + hace(m) + ' («' + um.texto.slice(0, 70) + (um.texto.length > 70 ? '…' : '') + '»). Vale ' + euros(c.valor) + ': esta conversación la tiene que llevar una persona, y hoy.' };
+      }
       if (x.int >= 65 && x.fit >= 55) {
         return { id: 'comercial', accion: 'Avisar ' + al(T.comercial), quien: T.Comercial, tipo: 'humano', estado: 'humano',
           por: 'Escribió ' + hace(m) + ' y ' + unir(x.intM.filter(function (mm) { return mm.pts > 0 && !/^escribió|^conversación/.test(mm.txt); }).slice(0, 2).map(function (mm) { return mm.txt; })) + '. El agente no da precios ni cierra condiciones: pasa el hilo ' + al(T.comercial) + ' con la conversación resumida.' };
       }
       return { id: 'wa-seguir', accion: 'Contestar por ' + (um.canal === 'email' ? 'correo' : 'WhatsApp'), quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
         por: (um.canal === 'email' ? 'Correo' : 'WhatsApp') + ' porque escribió por este canal ' + hace(m) + ' y está esperando respuesta' + (m > 120 ? ' (demasiado tiempo: aquí se enfría)' : '') + '. El agente contesta con su contexto y lleva la conversación hasta ' + T.objetivoPaso + '.' };
+    }
+    if (c.s.bloqueo) {
+      return { id: 'desbloquear', accion: T.accionBloqueo || 'Ayuda para desbloquearse', quien: T.agenteBloqueo || 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
+        por: (c.s.bloqueoTxt || 'Se ha quedado atascado') + '. Una ayuda concreta en el momento en que se atasca vale más que cualquier secuencia de correos.' };
     }
     if (c.s.noshow) {
       return { id: 'reprogramar', accion: 'Reprogramar por WhatsApp', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
@@ -306,8 +321,16 @@
     baja: { txt: 'Riesgo de baja', ico: 'alerta', tono: 'rojo' },
     expansion: { txt: 'Expansión', ico: 'sube', tono: 'teal' },
     bloqueo: { txt: 'Bloqueado', ico: 'alerta', tono: 'amber' },
-    propuesta: { txt: 'Propuesta enfriándose', ico: 'pausa', tono: 'amber' }
+    propuesta: { txt: 'Propuesta enfriándose', ico: 'pausa', tono: 'amber' },
+    revision: { txt: 'Revisión pendiente', ico: 'calendario', tono: 'lila' }
   };
+
+  // Cada sector puede renombrar señales (p. ej. «Presupuesto enfriándose»).
+  const TXT_SENAL = {};
+  Object.keys(TIPOS_SENAL).forEach(function (k) { TXT_SENAL[k] = TIPOS_SENAL[k].txt; });
+  function nombresSenal(mapa) {
+    Object.keys(TIPOS_SENAL).forEach(function (k) { TIPOS_SENAL[k].txt = (mapa && mapa[k]) || TXT_SENAL[k]; });
+  }
 
   function accionTomada(nba, T) {
     if (nba.tipo === 'humano') return 'Aviso enviado ' + (nba.quien === T.Comercial ? al(T.comercial) : al(nba.quien.charAt(0).toLowerCase() + nba.quien.slice(1)));
@@ -319,6 +342,7 @@
     if (nba.id === 'propuesta') return 'Recuperación en marcha';
     if (nba.id === 'esperar') return 'Reactivación programada';
     if (nba.id === 'caso') return 'Caso enviado por correo';
+    if (nba.id === 'desbloquear') return 'Ayuda enviada';
     return 'En observación';
   }
 
@@ -335,7 +359,8 @@
       if (c.s.tProp != null && k.toque > 2880 && !c.fin) add('propuesta', c.tToque, T.Propuesta + ' de ' + euros(c.valor) + (c.s.propVista ? ' vista ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : ' sin abrir') + ', sin respuesta', 'Es dinero casi ganado: ya se hizo el trabajo de preparar ' + T.propuesta + '.');
       if (c.s.noshow || (c.s.tCita != null && !c.s.citaOk && k.cita > 0 && k.cita < 2880)) add('noshow', c.s.noshow ? c.tAct : c.tAct, c.s.noshow ? 'No se presentó a ' + T.laCita : T.Cita + ' ' + dentroDe(k.cita) + ' sin confirmar', c.s.noshow ? 'Tenía interés suficiente para reservar. Se recupera con un mensaje, no con una llamada fría.' : 'Las citas sin confirmar son las que más fallan. El recordatorio del mismo día lo evita.');
       if (c.s.luego && !c.fin) add('reactivar', c.tAct, 'Dijo que ' + (c.s.luegoTxt || 'lo retomaría más adelante') + ' (' + c.s.luego + ')', 'No es un no. El sistema le vuelve a escribir en el momento que él mismo dijo.');
-      if (c.fin === 'ganado' && x.riesgo >= 55) add('baja', c.tAct, x.riesgoM.slice(0, 2).map(function (m) { return m.txt; }).join(' · '), 'Perder a ' + T.unCliente + ' cuesta más que captar uno nuevo. Se detecta antes de que avise.');
+      if (c.fin === 'ganado' && x.riesgo >= 45) add('baja', c.tAct, x.riesgoM.slice(0, 2).map(function (m) { return m.txt; }).join(' · '), 'Perder a ' + T.unCliente + ' cuesta más que captar uno nuevo. Se detecta antes de que avise.');
+      if (c.s.revision) add('revision', c.tAct, c.s.revisionTxt || 'Revisión pendiente', 'Quien ya confía en vosotros vuelve si se lo recuerdan en el momento justo.');
       if (c.s.exp) add('expansion', c.tAct, c.s.expTxt || 'Señales de que necesita más', 'Crecer con quien ya confía en vosotros es la venta más barata.');
       if (c.s.bloqueo) add('bloqueo', c.tAct, c.s.bloqueoTxt || 'Se ha quedado atascado', 'Si no desbloquea pronto, se va sin haber visto el valor.');
     }
@@ -427,7 +452,7 @@
     const out = [];
     for (let i = 1; i < r.length; i++) {
       const a = m.tot[r[i - 1].id], b = m.tot[r[i].id];
-      if (!a || r[i].sinFuga || r[i - 1].sinFuga) continue;
+      if (!a || r[i].sinFuga || i === 1) continue;
       const conv = b / a;
       const ref = (cfg.referencia && cfg.referencia[r[i].id]) || conv;
       const perdidos = a - b;
@@ -440,7 +465,7 @@
 
   QV.motor = {
     preparar: preparar, evaluar: evaluar, evaluarTodos: evaluarTodos, timeline: timeline, mes: mes, fugas: fugas,
-    hace: hace, duracion: duracion, duracionLarga: duracionLarga, dentroDe: dentroDe, hora: hora, fechaCorta: fechaCorta, euros: euros, num: num, pct: pct,
-    unir: unir, al: al, contesto: contesto, ultimoMsg: ultimoMsg, ultimoDe: ultimoDe, desde: desde, PRIO: PRIO, ESTADOS: ESTADOS, TIPOS_SENAL: TIPOS_SENAL, MIN: MIN, nbaGenerica: nbaGenerica
+    pl: pl, hace: hace, duracion: duracion, duracionLarga: duracionLarga, dentroDe: dentroDe, hora: hora, fechaCorta: fechaCorta, euros: euros, num: num, pct: pct,
+    unir: unir, al: al, nombresSenal: nombresSenal, contesto: contesto, ultimoMsg: ultimoMsg, ultimoDe: ultimoDe, desde: desde, PRIO: PRIO, ESTADOS: ESTADOS, TIPOS_SENAL: TIPOS_SENAL, MIN: MIN, nbaGenerica: nbaGenerica
   };
 })();
