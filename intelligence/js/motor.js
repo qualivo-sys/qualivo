@@ -276,7 +276,7 @@
     }
     if (c.s.tProp != null && k.toque > 2880) {
       return { id: 'propuesta', accion: 'Recuperar ' + T.propuesta, quien: c.valor >= (T.valorAlto || 5000) ? T.Comercial : 'Agente de WhatsApp', tipo: c.valor >= (T.valorAlto || 5000) ? 'humano' : 'agente', estado: c.valor >= (T.valorAlto || 5000) ? 'humano' : 'trabajando',
-        por: (c.s.propVista ? 'Ha abierto ' + T.propuesta + ' ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : T.Propuesta + ' sigue sin abrir') + ' y nadie le ha escrito en ' + duracion(k.toque) + '. ' + (c.valor >= (T.valorAlto || 5000) ? 'Vale ' + euros(c.valor) + ': mejor una llamada de ' + T.comercial + ' que un mensaje automático.' : 'Un mensaje del agente con la duda más habitual lo reactiva sin presionar.') };
+        por: (c.s.propVista ? 'Ha abierto ' + T.propuesta + ' ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : T.Propuesta + ' sigue sin abrir') + ' y nadie le ha escrito en ' + duracion(k.toque) + '. ' + (c.valor >= (T.valorAlto || 5000) ? 'Vale ' + euros(c.valor) + ': mejor una llamada ' + (/^el /.test(T.comercial) ? 'del ' + T.comercial.slice(3) : 'de ' + T.comercial) + ' que un mensaje automático.' : 'Un mensaje del agente con la duda más habitual lo reactiva sin presionar.') };
     }
     if (k.creado < 90 && contesto(c) === 0) {
       if (c.canal === 'tel') return { id: 'voz', accion: 'Llamada de la agente de voz', quien: 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + ') y dejó el teléfono como forma de contacto. Llamar en los primeros 5 minutos multiplica las opciones de hablar con él.' };
