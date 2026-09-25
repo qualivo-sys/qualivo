@@ -23,8 +23,8 @@
       { q: '¿Qué campañas están trayendo ' + (T.clientesReales || 'clientes reales') + '?', h: 'campanas', obj: ['captacion', 'ventas', 'todo'] },
       { q: '¿Dónde está la mayor fuga?', h: 'mayorFuga', obj: ['todo', 'captacion', 'conversion'] },
       { q: '¿Qué debería hacer el equipo hoy?', h: 'equipo', obj: ['todo', 'ventas'] },
-      { q: '¿Qué anuncio trae ' + T.ventas + ' y cuál solo trae ' + T.contactos + '?', h: 'anuncios', obj: ['captacion', 'ventas', 'todo'] },
-      { q: '¿Qué le diríamos esta semana a la agencia de anuncios?', h: 'agencia', obj: ['captacion', 'todo'] }
+      { q: '¿Qué anuncio trae ' + (T.recorrido || T).ventas + ' y cuál solo trae ' + (T.recorrido || T).contactos + '?', h: 'anuncios', obj: ['captacion', 'ventas', 'todo'] },
+      { q: T.preguntaNota || '¿Qué le diríamos esta semana a la agencia de anuncios?', h: 'agencia', obj: ['captacion', 'todo'] }
     ];
   }
   function todas() {
@@ -71,7 +71,7 @@
     nombre: ['Nombre', function (c) { return c.n; }],
     prio: ['Prioridad', function (c) { return { pill: c.x.prio }; }],
     valor: ['Valor', function (c) { return M.euros(c.valor); }],
-    etapa: ['Etapa', function (c) { return E().cfg.etapaTxt(c.etapa); }],
+    etapa: ['Etapa', function (c) { return c.etapaTxt || E().cfg.etapaTxt(c.etapa); }],
     accion: ['Siguiente acción', function (c) { return c.x.nba.accion; }],
     prob: ['Prob.', function (c) { return probabilidad(c) + ' %'; }],
     sinSeg: ['Sin seguimiento', function (c) { return M.duracion(c.x.k.toque); }],
@@ -125,7 +125,7 @@
     },
 
     fugas: function () {
-      const cfg = E().cfg, T = cfg.t, m = M.mes(cfg);
+      const cfg = E().cfg, T = QV.TA(), m = M.mes(cfg);
       const fg = M.fugas(cfg);
       const f = fg[0];
       const nombres = cfg.nombresFuga || {};
@@ -151,7 +151,7 @@
     },
 
     mayorFuga: function () {
-      const cfg = E().cfg, T = cfg.t, m = M.mes(cfg);
+      const cfg = E().cfg, T = QV.TA(), m = M.mes(cfg);
       const f = M.fugas(cfg)[0];
       const n = (cfg.nombresFuga || {})[f.a.id] || { txt: f.a.txt, exp: '' };
       // Cuántas ventas más, si el resto del recorrido convierte igual que hoy
@@ -189,7 +189,7 @@
     },
 
     campanas: function () {
-      const cfg = E().cfg, T = cfg.t;
+      const cfg = E().cfg, T = QV.TA();
       const filas = cfg.campanas.map(function (c) {
         const v = c.embudo[cfg.ventaEtapa] || 0, entra = c.embudo[cfg.recorrido[1].id] || 0;
         const ing = v * (c.ticket || cfg.ticket);
@@ -208,7 +208,7 @@
     },
 
     anuncios: function () {
-      const T = E().cfg.t, a = QV.anuncios();
+      const T = QV.TA(), a = QV.anuncios();
       const pago = a.filas.filter(function (f) { return f.c.inversion > 0; });
       const mejor = pago.slice().sort(function (x, y) { return y.roas - x.roas; })[0];
       const masEntra = pago.slice().sort(function (x, y) { return y.entra - x.entra; })[0];
@@ -221,7 +221,7 @@
 
     agencia: function () {
       return [
-        texto('Esto es lo que le diría esta semana a quien os lleva los anuncios. Sale de unir cada campaña con lo que pasa después en el sistema.'),
+        texto(E().cfg.t.notaIntro || 'Esto es lo que le diría esta semana a quien os lleva los anuncios. Sale de unir cada campaña con lo que pasa después en el sistema.'),
         { tipo: 'borrador', texto: QV.notaAgencia().map(function (l) { return '• ' + l; }).join('\n') },
         accion('La agencia sigue llevando las campañas. Recibe mejores datos y cada semana una nota como esta.')
       ];
@@ -279,7 +279,7 @@
   function tarjetaContacto(c) {
     const T = E().cfg.t, x = c.x, us = QV.ultimaSenal(c);
     const humano = x.nba.tipo === 'humano';
-    return '<div class="ccard"><div class="cab"><span class="etiq-sm">' + QV.pillPrio(x.prio) + '</span><span class="cifras"><span>ENCAJE <b>' + x.fit + '</b></span><span>INTENCIÓN <b>' + x.int + '</b></span></span></div>' +
+    return '<div class="ccard"><div class="cab"><span class="etiq-sm">' + QV.pillPrio(x.prio) + '</span><span class="cifras"><span>ENCAJE <b>' + x.fit + '</b></span>' + (c.fin === 'ganado' ? '<span>RIESGO <b>' + x.riesgo + '</b></span>' : '<span>INTENCIÓN <b>' + x.int + '</b></span>') + '</span></div>' +
       '<div><div class="nombre">' + esc(c.n) + '</div><div class="meta">' + esc(QV.metaContacto(c)) + '</div></div>' +
       '<div class="linea">Última señal: <b>' + esc(us.txt) + '</b> · ' + M.hace(M.desde(us.t, E().ahora)) + '</div>' +
       '<div class="porque"><span class="etiq-sm">Por qué · </span>' + esc(x.porque.replace(/^Prioridad \w+ porque /, '').replace(/^./, function (z) { return z.toUpperCase(); })) + '</div>' +
@@ -451,12 +451,12 @@
     return { canal: 'Mensaje', texto: 'Hola ' + nom + ', ¿cómo lo llevas? Si te puedo ayudar en algo con ' + c.prod + ', aquí estoy.' };
   }
   function agencia() {
-    pregunta('Redacta el correo para la agencia de anuncios');
+    pregunta(E().cfg.t.notaBoton || 'Redacta el correo para la agencia de anuncios');
     const el = respuestaVacia();
     setTimeout(function () {
       const T = E().cfg.t;
-      const txt = 'Asunto: Lo que pasa después de vuestros anuncios · semana del ' + new Date(E().ahora).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' }) + '\n\nHola,\n\nOs paso lo que vemos cruzando cada campaña con lo que pasa después en el sistema:\n\n' + QV.notaAgencia().map(function (l) { return '• ' + l; }).join('\n') + '\n\nSi os encaja, lo vemos 15 minutos el jueves.\n\nUn saludo';
-      rellenar(el, [texto('**Correo para la agencia** · generado de los veredictos de la pantalla Anuncios.'), { tipo: 'borrador', texto: txt }, accion('En esta demo no se envía nada. En el sistema real sale cada lunes, o cuando tú lo decidas.')]);
+      const txt = (E().cfg.t.notaAsunto || 'Asunto: Lo que pasa después de vuestros anuncios') + ' · semana del ' + new Date(E().ahora).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' }) + '\n\nHola,\n\nOs paso lo que vemos cruzando cada campaña con lo que pasa después en el sistema:\n\n' + QV.notaAgencia().map(function (l) { return '• ' + l; }).join('\n') + '\n\nSi os encaja, lo vemos 15 minutos el jueves.\n\nUn saludo';
+      rellenar(el, [texto('**' + (E().cfg.t.notaCorreo || 'Correo para la agencia') + '** · generado de los veredictos de la pantalla Anuncios.'), { tipo: 'borrador', texto: txt }, accion('En esta demo no se envía nada. En el sistema real sale cada lunes, o cuando tú lo decidas.')]);
     }, 350);
   }
   function generar(id) {

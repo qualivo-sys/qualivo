@@ -115,7 +115,7 @@
       '<div class="l1"><small>Modo demo · paso ' + (d.paso + 1) + ' de ' + n + '</small><span style="font-size:12px;color:#9AA2AE">' + esc(c.n) + ' · ' + M.hora(E().ahora) + '</span></div>' +
       '<h4>' + esc(paso.txt) + '</h4>' +
       '<div class="progreso">' + h.pasos.map(function (p, i) { return '<i class="' + (i < d.paso ? 'hecho' : i === d.paso ? (paso.humano ? 'hecho' : 'actual') : '') + '" style="--dur:' + ((p.dur || 6) * VEL) + 's"></i>'; }).join('') + '</div>' +
-      '<div class="dsc"><div><span>Encaje</span>' + val('fit', c.x.fit) + '</div><div><span>Actividad</span>' + val('comp', c.x.comp) + '</div><div><span>Intención</span>' + val('int', c.x.int) + '</div><div><span>Prioridad</span><b style="font-size:13px;padding-top:4px">' + M.PRIO[c.x.prio].txt + '</b></div></div>' +
+      '<div class="dsc"><div><span>Encaje</span>' + val('fit', c.x.fit) + '</div><div><span>Actividad</span>' + val('comp', c.x.comp) + '</div>' + (h.riesgo ? '<div><span>Riesgo</span>' + val('riesgo', c.x.riesgo, true) + '</div>' : '<div><span>Intención</span>' + val('int', c.x.int) + '</div>') + '<div><span>Prioridad</span><b style="font-size:13px;padding-top:4px">' + M.PRIO[c.x.prio].txt + '</b></div></div>' +
       '<div class="ctrl">' + (d.fin ? '<button class="btn" type="button" data-demo="empezar">' + ico('reinicio') + 'Repetir</button>' : '<button class="btn" type="button" data-demo="' + (d.pausado ? 'reanudar' : 'pausar') + '">' + ico(d.pausado ? 'play' : 'pausa') + (d.pausado ? 'Reanudar' : 'Pausar') + '</button>') +
       '<button class="btn" type="button" data-abrir="demo">Ver ficha</button><span style="flex:1"></span><button class="btn" type="button" data-demo="salir">Salir</button></div>';
   }

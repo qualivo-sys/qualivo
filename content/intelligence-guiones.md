@@ -98,6 +98,21 @@ Misma estructura. Enlaces:
 
 ---
 
+## Vista para agencias (reunión con una agencia de anuncios como socia)
+
+Enlace: `qualivo.io/intelligence/?sector=agencias&empresa=NOMBRE-DE-LA-AGENCIA`
+
+| Momento | Qué enseñas | Qué dices |
+|---|---|---|
+| 0:00 | Resumen | «Esta es tu cartera: nueve cuentas, 14.600 € al mes gestionados. Y el dato que ninguna agencia tiene: tus clientes solo atienden el 76 % de los contactos que les traes.» |
+| 0:30 | Copilot → «¿En qué cuentas el problema no es el anuncio?» | «Academia Nexo y Estética Lumen no atienden más del 40 %. Luego te dicen que los contactos son malos. La campaña funciona; se pierde después.» |
+| 1:00 | Ficha de **Iván Rueda** (Academia Nexo) | «Retorno de 7,9× a 4,8×, renueva en 30 días y ya se queja. El sistema te dice qué hacer: proponerle la capa de seguimiento, no tocar la campaña.» |
+| 1:30 | Anuncios | «Cuenta a cuenta: escalar, mantener, revisar campaña o "no es el anuncio". Y cuando sí es la campaña, como en la Asesoría Fiscal, lo sabes tú antes que el cliente.» |
+| 2:00 | **Iniciar demo** | Cuenta nueva, se conecta su CRM, el sistema detecta que no atienden el 41 %, el cliente se queja y el retorno baja. |
+| 2:50 | Aviso «Llama a Iker antes de que culpe a la campaña» | «No venimos a quitarte clientes: venimos a que no los pierdas por algo que no depende de ti. Y te da un servicio más que vender.» |
+
+La otra demo de agencia (`sector=marketing`) enseña una agencia captando sus propios clientes, como cualquier negocio de servicios.
+
 ## Frase de cierre (todas)
 
 > «Qualivo conecta todo vuestro recorrido, entiende qué pasa con cada oportunidad, detecta cuándo hay que actuar y hace solo todo lo que no necesita a una persona. Y cuando la necesita, os entrega la oportunidad correcta, en el momento correcto y con todo el contexto.»

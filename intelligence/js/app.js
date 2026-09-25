@@ -16,6 +16,8 @@
     { id: 'clinica', txt: 'Clínica', desc: 'Dental, estética, fisioterapia', ico: 'clinica' },
     { id: 'inmobiliaria', txt: 'Inmobiliaria', desc: 'Compraventa, alquiler y obra nueva', ico: 'inmobiliaria' },
     { id: 'reformas', txt: 'Reformas / Construcción', desc: 'Presupuestos, visitas y obras', ico: 'reformas' },
+    { id: 'marketing', txt: 'Agencia de marketing', desc: 'Una agencia que capta sus propios clientes', ico: 'sube' },
+    { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' }
   ];
   const OBJETIVOS = [
@@ -60,6 +62,11 @@
   // ---------------------------------------------------------------------------
   // Estado
   // ---------------------------------------------------------------------------
+  // Términos del recorrido y los anuncios. En casi todos los sectores son los
+  // mismos; en la vista de agencias los «contactos» del sistema son las cuentas
+  // de clientes y los del recorrido son los que traen sus anuncios.
+  function TA() { const T = estado.cfg.t; return T.recorrido ? Object.assign({}, T, T.recorrido) : T; }
+  QV.TA = function () { return TA(); };
   const estado = QV.estado = { vista: 'resumen', filtro: 'atencion', filtroSenal: 'todas', convSel: null };
 
   function iniciar(opts) {
@@ -215,7 +222,7 @@
   // contactos del estado.
   // ---------------------------------------------------------------------------
   function anuncios() {
-    const cfg = estado.cfg, T = cfg.t, M_ = M;
+    const cfg = estado.cfg, T = TA(), M_ = M;
     const r = cfg.recorrido;
     const entra = r[1].id, contact = r[2].id, venta = cfg.ventaEtapa;
     const pago = cfg.campanas.filter(function (c) { return c.inversion > 0; });
@@ -231,8 +238,9 @@
       const ingC = v * (c.ticket || cfg.ticket);
       const roas = c.inversion ? ingC / c.inversion : null;
       const post = (c.embudo[contact] || 0) ? v / c.embudo[contact] : 0;
-      let ver;
-      if (!c.inversion) ver = { id: 'organico', txt: 'Orgánico', tono: 't-gris', por: 'No tiene inversión. Sirve de referencia de calidad: ' + (fitMedio != null ? 'encaje medio ' + fitMedio + '.' : '') };
+      let ver = cfg.veredictoAnuncio ? cfg.veredictoAnuncio({ c: c, roas: roas, R: R, post: post, postTotal: postTotal }, M_, T) : null;
+      if (ver) { /* veredicto propio del sector */ }
+      else if (!c.inversion) ver = { id: 'organico', txt: 'Orgánico', tono: 't-gris', por: 'No tiene inversión. Sirve de referencia de calidad: ' + (fitMedio != null ? 'encaje medio ' + fitMedio + '.' : '') };
       else if (roas >= R * 1.3) ver = { id: 'escalar', txt: 'Escalar', tono: 't-teal', por: 'Devuelve ' + M_.num(roas, 1) + '× (la media es ' + M_.num(R, 1) + '×). Aquí hay margen para subir presupuesto.' };
       else if (roas < R * 0.6 && fitMedio != null && fitMedio < 45) ver = { id: 'publico', txt: 'Revisar público', tono: 't-coral', por: 'Trae ' + T.contactos + ' baratos que no encajan (encaje medio ' + fitMedio + ', ' + bajo + ' de ' + cs.length + ' por debajo de 40). El anuncio funciona; el público no.' };
       else if (roas < R * 0.6) ver = { id: 'despues', txt: 'No es el anuncio', tono: 't-amber', por: 'Lo que trae encaja (encaje medio ' + (fitMedio != null ? fitMedio : '—') + '), pero solo el ' + M_.pct(post) + ' de los contactados acaba en ' + T.venta + ' (media ' + M_.pct(postTotal) + '). Se pierde después: es seguimiento, no campaña.' };
@@ -250,7 +258,8 @@
 
   // Nota semanal para quien lleva los anuncios (se genera de los veredictos)
   function notaAgencia() {
-    const T = estado.cfg.t, a = anuncios();
+    const T = TA(), a = anuncios();
+    if (estado.cfg.notaAnuncios) return estado.cfg.notaAnuncios(a, T, M);
     const pago = a.filas.filter(function (f) { return f.c.inversion > 0; });
     const lin = [];
     pago.filter(function (f) { return f.ver.id === 'escalar'; }).forEach(function (f) { lin.push('Subiría presupuesto en «' + f.c.nombre + '» (' + f.c.canal + '): ' + f.ventas + ' ' + T.ventas + ' y ' + M.num(f.roas, 1) + '× de retorno.'); });
@@ -326,7 +335,7 @@
       const dest = DESTACADO[estado.objetivo] || [];
       const fg = M.fugas(cfg)[0];
       const hoyTxt = at.length ? '<b>' + at.length + ' ' + T.oportunidades + '</b> requieren atención hoy. Solo <b>' + humanos + '</b> necesitan a una persona.' : 'Hoy no hay nada urgente. El sistema sigue trabajando.';
-      return '<div class="hoy"><div class="hoy-frase"><h2>' + hoyTxt + '</h2><p>' + estado.contactos.length + ' ' + T.contactos + ' abiertos en el sistema · actualizado a las ' + M.hora(estado.ahora) + '</p></div>' +
+      return '<div class="hoy"><div class="hoy-frase"><h2>' + hoyTxt + '</h2><p>' + estado.contactos.length + ' ' + T.contactos + ' en el sistema · actualizado a las ' + M.hora(estado.ahora) + '</p></div>' +
         '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + M.euros(enJuego) + ' en juego</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="agentes"><span>El sistema está moviendo</span><strong>' + trabajando + '</strong><em>sin que nadie tenga que acordarse</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="senales"><span>Necesitan a una persona</span><strong style="color:var(--coral)">' + humanos + '</strong><em>con todo el contexto</em></button></div>' +
@@ -338,7 +347,7 @@
           '<div class="tarjeta"><h3>Requieren atención <span class="sub">¿Dónde hay que actuar ahora?</span></h3><div class="lista" style="margin-top:8px">' + (at.slice(0, 6).map(filaContacto).join('') || '<p class="vacio">Nada urgente.</p>') + '</div>' +
           (at.length > 6 ? '<button class="btn btn-fantasma btn-mini" data-vista="oportunidades" style="margin-top:6px">Ver las ' + at.length + '</button>' : '') + '</div>' +
           '<div class="rejilla">' +
-            (fg ? '<div class="tarjeta fuga-grande" data-vista="recorrido" style="cursor:pointer"><h3>Dónde se pierde más <span class="sub">Últimos 30 días</span></h3><div class="cifra">' + M.num(fg.recuperables) + ' ' + T.contactos + '</div><p class="gris">Se quedan entre <b>' + esc(fg.de.txt) + '</b> y <b>' + esc(fg.a.txt) + '</b>: solo pasa el ' + M.pct(fg.conv) + ', cuando con un buen seguimiento pasa el ' + M.pct(fg.ref) + '.</p></div>' : '') +
+            (fg ? '<div class="tarjeta fuga-grande" data-vista="recorrido" style="cursor:pointer"><h3>Dónde se pierde más <span class="sub">Últimos 30 días</span></h3><div class="cifra">' + M.num(fg.recuperables) + ' ' + TA().contactos + '</div><p class="gris">Se quedan entre <b>' + esc(fg.de.txt) + '</b> y <b>' + esc(fg.a.txt) + '</b>: solo pasa el ' + M.pct(fg.conv) + ', cuando con un buen seguimiento pasa el ' + M.pct(fg.ref) + '.</p></div>' : '') +
             '<div class="tarjeta"><h3>Qué está haciendo el sistema <span class="sub">Piloto automático</span></h3><div style="margin-top:6px">' + pintaFeed(feed(6)) + '</div></div>' +
           '</div>' +
         '</div>';
@@ -402,7 +411,7 @@
         lista.map(function (c) {
           const us = ultimaSenal(c);
           return '<tr class="clic' + (estado.nuevos[c.id] ? ' nuevo' : '') + '" data-abrir="' + c.id + '"><td><div class="quien-fila">' + avatar(c) + '<div style="min-width:0"><div class="nombre">' + esc(c.n) + '</div><div class="meta">' + esc(metaContacto(c)) + '</div></div></div></td>' +
-            '<td class="ocultar-movil"><div style="font-weight:600;white-space:nowrap">' + esc(cfg.etapaTxt(c.etapa)) + '</div><div class="meta" style="max-width:150px">' + esc(c.prod) + '</div></td>' +
+            '<td class="ocultar-movil"><div style="font-weight:600;white-space:nowrap">' + esc(c.etapaTxt || cfg.etapaTxt(c.etapa)) + '</div><div class="meta" style="max-width:150px">' + esc(c.prod) + '</div></td>' +
             '<td class="ocultar-movil">' + miniScores(c.x) + '</td><td>' + pillPrio(c.x.prio) + '</td>' +
             '<td class="ocultar-movil"><div class="nba-corta">' + ico(icoAccion(c.x.nba.tipo)) + '<span>' + esc(c.x.nba.accion) + '</span></div><div class="meta">' + esc(us.txt) + ' · ' + M.hace(M.desde(us.t, estado.ahora)) + '</div></td></tr>';
         }).join('') + '</tbody></table>' + (lista.length ? '' : '<p class="vacio">No hay ' + T.contactos + ' en este filtro.</p>') + '</div>';
@@ -433,7 +442,7 @@
     },
 
     recorrido: function () {
-      const cfg = estado.cfg, T = cfg.t, m = M.mes(cfg);
+      const cfg = estado.cfg, T = TA(), m = M.mes(cfg);
       const fg = M.fugas(cfg);
       const peor = fg[0];
       const max = Math.max.apply(null, cfg.recorrido.filter(function (e, i) { return i > 0; }).map(function (e) { return m.tot[e.id] || 0; }));
@@ -461,7 +470,7 @@
         '<div class="rejilla r-2"><div class="tarjeta"><h3>Últimos 30 días <span class="sub">% que pasa de la etapa anterior</span></h3><div class="embudo" style="margin-top:12px">' + filas + '</div></div>' +
         '<div class="tarjeta"><h3>Fugas, de mayor a menor</h3><div class="tabla-caja" style="margin-top:10px;border:0"><table class="tabla"><thead><tr><th>Fuga</th><th class="num">Hoy</th><th class="num">Bien hecho</th><th class="num">Al mes</th></tr></thead><tbody>' + tablaFugas + '</tbody></table></div>' +
         (peor ? '<p class="gris" style="font-size:12.5px;margin-top:10px">La mayor: <b style="color:var(--tinta)">' + esc((nombres[peor.a.id] || {}).exp || '') + '</b>.</p>' : '') + '</div></div>' +
-        '<p class="pregunta-guia" style="margin:20px 0 8px">Hoy en el sistema, por etapa</p><div class="columnas">' + cols + '</div>';
+        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">Hoy en el sistema, por etapa</p><div class="columnas">' + cols + '</div>');
     },
 
     senales: function () {
@@ -485,7 +494,7 @@
     },
 
     anuncios: function () {
-      const cfg = estado.cfg, T = cfg.t, a = anuncios();
+      const cfg = estado.cfg, T = TA(), a = anuncios();
       const peor = a.filas.filter(function (f) { return f.c.inversion > 0; }).sort(function (x, y) { return x.roas - y.roas; })[0];
       const masEntra = a.filas.filter(function (f) { return f.c.inversion > 0; }).sort(function (x, y) { return y.entra - x.entra; })[0];
       const filas = a.filas.slice().sort(function (x, y) { return (y.roas || 0) - (x.roas || 0); }).map(function (f) {
@@ -497,13 +506,13 @@
           '<td><span class="pill ' + f.ver.tono + '">' + esc(f.ver.txt) + '</span><div class="meta" style="white-space:normal;max-width:none;margin-top:4px">' + esc(f.ver.por) + '</div></td></tr>';
       }).join('');
       const maxEv = Math.max.apply(null, a.eventos.map(function (e) { return e.n; }));
-      return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice a ' + T.laVenta + ' y no al formulario.') +
+      return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', T.anunciosIntro || 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice a ' + T.laVenta + ' y no al formulario.') +
         (masEntra && peor ? '<div class="tarjeta" style="margin-bottom:14px;display:flex;gap:14px;align-items:flex-start"><span class="feed-ico t-coral" style="width:34px;height:34px;border-radius:10px;flex:none">' + ico('anuncio') + '</span><p style="font-size:14px"><b>' + esc(masEntra.c.nombre) + '</b> trae más ' + T.contactos + ' que ninguna (' + M.num(masEntra.entra) + ' a ' + M.euros(masEntra.cpl) + ') y ' + M.pl(masEntra.ventas, T.venta, T.ventas) + '. El anuncio más barato no es el que más vende: sin esta capa, la plataforma sigue premiando lo barato.</p></div>' : '') +
         '<div class="tabla-caja"><table class="tabla"><thead><tr><th>Campaña</th><th class="num">' + esc(T.Contactos) + '</th><th class="num ocultar-movil">Encaje medio</th><th class="num">' + esc(T.Ventas) + '</th><th class="num">Retorno</th><th>Lo que dice el sistema</th></tr></thead><tbody>' + filas + '</tbody></table></div>' +
         '<div class="rejilla r-2" style="margin-top:14px">' +
           '<div class="tarjeta"><h3>Lo que vuelve a las plataformas <span class="sub">Últimos 30 días</span></h3><p class="gris" style="font-size:12.5px;margin:4px 0 12px">Cada paso del recorrido se devuelve a ' + esc(M.unir(a.canales)) + ' como conversión, con su valor. Así el algoritmo aprende a buscar gente que ' + esc(T.convierten) + ', no gente que rellena formularios.</p>' +
             '<div class="embudo">' + a.eventos.map(function (e) { return '<div class="eb-fila"><span class="et">' + esc(e.etapa) + '</span><div class="eb-barra"><i style="width:' + Math.max(3, e.n / maxEv * 100) + '%"></i></div><span class="n">' + M.num(e.n) + '</span><span class="conv gris" style="font-weight:600">' + (e.valor ? '+ €' : '') + '</span></div>'; }).join('') + '</div></div>' +
-          '<div class="tarjeta"><h3>Nota de esta semana para la agencia <span class="sub">Se genera sola</span></h3><ul style="margin:10px 0 12px;padding-left:18px;display:grid;gap:8px;font-size:13px">' + notaAgencia().map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul><button class="btn btn-mini" type="button" data-agencia>Redactar el correo para la agencia</button></div>' +
+          '<div class="tarjeta"><h3>' + esc(T.notaTitulo || 'Nota de esta semana para la agencia') + ' <span class="sub">Se genera sola</span></h3><ul style="margin:10px 0 12px;padding-left:18px;display:grid;gap:8px;font-size:13px">' + notaAgencia().map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul><button class="btn btn-mini" type="button" data-agencia>' + esc(T.notaBoton || 'Redactar el correo para la agencia') + '</button></div>' +
         '</div>';
     },
 
@@ -554,7 +563,7 @@
     const tl = M.timeline(c, cfg, estado.ahora);
     const icoTl = { origen: 'anuncio', web: 'web', form: 'formulario', respuesta: 'whatsapp', sistema: 'auto' };
     const camp = cfg.campana(c.orig);
-    const datos = [['Etapa', cfg.etapaTxt(c.etapa)], [T.Producto || 'Interés', c.prod], ['Valor', M.euros(c.valor)], ['Origen', camp ? camp.canal + ' · ' + camp.nombre : 'Web'], ['Ciudad', c.ciudad], ['Canal preferido', c.canal === 'email' ? 'Correo' : c.canal === 'tel' ? 'Teléfono' : 'WhatsApp']];
+    const datos = [['Etapa', c.etapaTxt || cfg.etapaTxt(c.etapa)], [T.Producto || 'Interés', c.prod], ['Valor', M.euros(c.valor)], ['Origen', camp ? camp.canal + ' · ' + camp.nombre : 'Web'], ['Ciudad', c.ciudad], ['Canal preferido', c.canal === 'email' ? 'Correo' : c.canal === 'tel' ? 'Teléfono' : 'WhatsApp']];
     const nba = x.nba;
     $('#ficha').innerHTML =
       '<div class="ficha-cab"><div class="l1">' + avatar(c) + '<div><h2>' + esc(c.n) + '</h2><div class="meta" style="font-size:13px">' + esc(metaContacto(c)) + '</div></div>' + pillPrio(x.prio) + '<button class="btn btn-icono" type="button" data-cerrar-ficha aria-label="Cerrar">' + ico('cerrar') + '</button></div>' +

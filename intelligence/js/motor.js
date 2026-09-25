@@ -205,6 +205,12 @@
   }
 
   function porque(x, c, T) {
+    // Clientes actuales: lo que importa es el riesgo o la ampliación
+    if (c.fin === 'ganado' && (x.riesgo >= 45 || c.s.exp)) {
+      const r = x.riesgoM.filter(function (mm) { return mm.pts >= 12; }).slice(0, 2).map(function (mm) { return mm.txt; });
+      const ex = c.s.exp ? [(c.s.expTxt || 'pide más').replace(/^./, function (z) { return z.toLowerCase(); })] : [];
+      return 'Prioridad ' + PRIO[x.prio].txt.toLowerCase() + ' porque ' + unir(r.concat(ex).slice(0, 3)) + '.';
+    }
     const partes = [];
     if (x.fit >= 70) partes.push('buen encaje' + (x.fitM[0] ? ' (' + x.fitM[0].txt + ')' : ''));
     else if (x.fit < 40) partes.push('encaje bajo' + (x.fitM.filter(function (m) { return m.pts < 0; })[0] ? ' (' + x.fitM.filter(function (m) { return m.pts < 0; })[0].txt + ')' : ''));
@@ -376,9 +382,13 @@
     const ev = [];
     const camp = cfg.campanas.filter(function (x) { return x.id === c.orig; })[0];
     const t0 = c.tCreado;
-    if (camp) ev.push({ t: t0 - 2 * MIN, tipo: 'origen', texto: 'Anuncio · ' + camp.canal + ' · ' + camp.nombre });
-    ev.push({ t: t0 - 1 * MIN, tipo: 'web', texto: 'Visita ' + T.paginaVisitas });
-    ev.push({ t: t0, tipo: 'form', texto: 'Formulario enviado · ' + c.prod });
+    if (cfg.timelineSinOrigen) {
+      ev.push({ t: t0, tipo: 'sistema', texto: 'Alta en el sistema · ' + (c.etapaTxt || c.prod) });
+    } else {
+      if (camp) ev.push({ t: t0 - 2 * MIN, tipo: 'origen', texto: 'Anuncio · ' + camp.canal + ' · ' + camp.nombre });
+      ev.push({ t: t0 - 1 * MIN, tipo: 'web', texto: 'Visita ' + T.paginaVisitas });
+      ev.push({ t: t0, tipo: 'form', texto: 'Formulario enviado · ' + c.prod });
+    }
     c.conv.forEach(function (m) {
       const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? 'Agente' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
       const tipo = m.de === 'c' ? 'respuesta' : 'sistema';
