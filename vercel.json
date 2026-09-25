@@ -203,6 +203,9 @@
     }
   ],
   "functions": {
+    "api/intelligence-datos.js": {
+      "maxDuration": 60
+    },
     "api/wa-agente.js": {
       "maxDuration": 60
     },

@@ -103,6 +103,7 @@
   function recalcular() { M.evaluarTodos(estado); }
 
   function guardarUrl() {
+    if (estado.cfg.real) { try { history.replaceState(null, '', '?sector=qualivo&modo=real'); } catch (e) { /* nada */ } return; }
     const p = new URLSearchParams();
     p.set('sector', estado.sectorId);
     if (estado.empresa) p.set('empresa', estado.empresa);
@@ -277,7 +278,7 @@
   function pintarNav() {
     const nAt = atencion().length;
     const nSen = estado.contactos.reduce(function (a, c) { return a + c.x.senales.filter(function (s) { return s.humano; }).length; }, 0);
-    $('#nav').innerHTML = VISTAS.map(function (v) {
+    $('#nav').innerHTML = (estado.cfg.vistasExtra || []).concat(VISTAS).map(function (v) {
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
@@ -286,12 +287,13 @@
   }
   function pintarBarra() {
     $('#tituloSistema').innerHTML = tituloSistema();
-    const sec = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0];
+    const sec = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0] || { txt: estado.cfg.nombre };
     const obj = OBJETIVOS.filter(function (o) { return o.id === estado.objetivo; })[0];
     $('#chipSector').textContent = sec.txt + (obj && obj.id !== 'todo' ? ' · ' + obj.txt : '');
     $('#reloj').innerHTML = '<i></i>' + M.hora(estado.ahora);
     $('#selSector').innerHTML = SECTORES.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
     if (QV.demo) QV.demo.pintarBotones();
+    if (estado.cfg.real && QV.real) QV.real.pintarBarra();
   }
   function pintarTodo() {
     pintarNav();
@@ -337,7 +339,7 @@
       const fg = M.fugas(cfg)[0];
       const hoyTxt = at.length ? '<b>' + at.length + ' ' + T.oportunidades + '</b> requieren atención hoy. Solo <b>' + humanos + '</b> necesitan a una persona.' : 'Hoy no hay nada urgente. El sistema sigue trabajando.';
       return '<div class="hoy"><div class="hoy-frase"><h2>' + hoyTxt + '</h2><p>' + estado.contactos.length + ' ' + T.contactos + ' en el sistema · actualizado a las ' + M.hora(estado.ahora) + '</p></div>' +
-        '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + M.euros(enJuego) + ' en juego</em></button>' +
+        '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + (enJuego ? M.euros(enJuego) + ' en juego' : 'ordenadas por prioridad') + '</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="agentes"><span>El sistema está moviendo</span><strong>' + trabajando + '</strong><em>sin que nadie tenga que acordarse</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="senales"><span>Necesitan a una persona</span><strong style="color:var(--coral)">' + humanos + '</strong><em>con todo el contexto</em></button></div>' +
         '<p class="pregunta-guia" style="margin:18px 0 8px">Últimos 30 días</p>' +
@@ -656,6 +658,7 @@
   });
   $('#btnReiniciar').innerHTML = ico('reinicio');
   $('#btnReiniciar').addEventListener('click', function () {
+    if (estado.cfg && estado.cfg.real && QV.real) { QV.real.recargar(); return; }
     iniciar({ sector: estado.sectorId, objetivo: estado.objetivo, empresa: estado.empresa, historia: estado.historia }).then(function () { aviso('Demo reiniciada', 'reinicio'); });
   });
   $('#btnCopilotMovil').innerHTML = ico('chat');
@@ -664,12 +667,13 @@
   $('#btnCerrarCopilot').addEventListener('click', function () { $('#copilot').classList.remove('abierto'); });
 
   // Exponer lo que usan el Copilot y el modo demo
-  Object.assign(QV, { esc: esc, avatar: avatar, pillPrio: pillPrio, metaContacto: metaContacto, icoAccion: icoAccion, ultimaSenal: ultimaSenal, contacto: contacto, atencion: atencion, recalcular: recalcular, aviso: aviso, pintarVista: pintarVista, pintarNav: pintarNav, pintarBarra: pintarBarra, iniciar: iniciar, SECTORES: SECTORES });
+  Object.assign(QV, { esc: esc, avatar: avatar, pillPrio: pillPrio, metaContacto: metaContacto, icoAccion: icoAccion, ultimaSenal: ultimaSenal, contacto: contacto, atencion: atencion, recalcular: recalcular, aviso: aviso, pintarVista: pintarVista, pintarNav: pintarNav, pintarBarra: pintarBarra, iniciar: iniciar, SECTORES: SECTORES, VISTA_FN: VISTA_FN, cargarSector: cargarSector, cabecera: cabecera, irA: irA, mostrarInicio: mostrarInicio });
 
   // Arranque: enlace preparado o pantalla de inicio
   window.addEventListener('DOMContentLoaded', function () {
     const p = new URLSearchParams(location.search);
     const sector = p.get('sector');
+    if (sector === 'qualivo' && p.get('modo') === 'real' && QV.real) { QV.real.arrancar(); return; }
     if (sector && SECTORES.some(function (s) { return s.id === sector; })) {
       iniciar({ sector: sector, empresa: p.get('empresa') || '', objetivo: p.get('objetivo') || 'todo', historia: p.get('historia') || '', vista: p.get('vista') || 'resumen' })
         .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar(); })

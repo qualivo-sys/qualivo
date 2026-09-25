@@ -383,7 +383,7 @@
     const camp = cfg.campanas.filter(function (x) { return x.id === c.orig; })[0];
     const t0 = c.tCreado;
     if (cfg.timelineSinOrigen) {
-      ev.push({ t: t0, tipo: 'sistema', texto: 'Alta en el sistema · ' + (c.etapaTxt || c.prod) });
+      ev.push({ t: t0, tipo: 'sistema', texto: cfg.textoAlta ? cfg.textoAlta(c) : 'Alta en el sistema · ' + (c.etapaTxt || c.prod) });
     } else {
       if (camp) ev.push({ t: t0 - 2 * MIN, tipo: 'origen', texto: 'Anuncio · ' + camp.canal + ' · ' + camp.nombre });
       ev.push({ t: t0 - 1 * MIN, tipo: 'web', texto: 'Visita ' + T.paginaVisitas });

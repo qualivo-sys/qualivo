@@ -98,7 +98,7 @@
       at.slice(3).forEach(function (c) { tipos[c.x.nba.quien] = (tipos[c.x.nba.quien] || 0) + 1; });
       const reparto = Object.keys(tipos).map(function (k) { return tipos[k] + ' con ' + k.toLowerCase(); });
       return [
-        texto('Hay **' + plural(at.length, T.oportunidades.replace(/s$/, ''), T.oportunidades) + ' que requieren atención** (' + M.euros(suma(at)) + ' en juego). Yo empezaría por estas 3.'),
+        texto('Hay **' + plural(at.length, T.oportunidades.replace(/s$/, ''), T.oportunidades) + ' que requieren atención**' + (suma(at) ? ' (' + M.euros(suma(at)) + ' en juego)' : '') + '. Yo empezaría por estas 3.'),
         tarjetas(at, 3),
         texto(resto > 0 ? 'Las otras ' + resto + ' ya las está moviendo el sistema: ' + M.unir(reparto) + '. ' + (hum.length ? 'De todas, **' + hum.length + ' necesitan a una persona** hoy.' : '') : (hum.length ? '**' + hum.length + ' necesitan a una persona** hoy.' : ''))
       ];
@@ -376,6 +376,7 @@
   // Resumen compacto del estado para Claude (solo datos simulados de la demo)
   function contexto() {
     const est = E(), cfg = est.cfg, T = cfg.t, m = M.mes(cfg);
+    if (cfg.real) return contextoReal();
     return {
       sector: cfg.nombre, empresa: est.empresa || '', objetivo: est.objetivo, hora: M.hora(est.ahora),
       terminos: { contacto: T.contacto, contactos: T.contactos, venta: T.venta, ventas: T.ventas, cita: T.cita, comercial: T.comercial, producto: T.producto },
@@ -398,6 +399,28 @@
     };
   }
 
+  // Modo real: a Claude solo va lo necesario. Sin empresa, ciudad, correo,
+  // teléfono ni texto de los mensajes; el nombre, solo nombre e inicial.
+  function contextoReal() {
+    const est = E(), cfg = est.cfg, T = cfg.t;
+    return {
+      sector: 'Qualivo (datos reales)', empresa: 'Qualivo', objetivo: 'todo', hora: M.hora(est.ahora),
+      terminos: { contacto: T.contacto, contactos: T.contactos, venta: T.venta, ventas: T.ventas, cita: T.cita, comercial: T.comercial, producto: T.producto },
+      recorrido: [], fugas: M.fugas(cfg).map(function (f) { return { de: f.de.txt, a: f.a.txt, hoy: Math.round(f.conv * 100), bienHecho: Math.round(f.ref * 100) }; }),
+      campanas: [], kpis: QV.kpis().map(function (k) { return k.l + ': ' + k.v; }),
+      contactos: est.contactos.map(function (c) {
+        const x = c.x, p = c.n.split(/\s+/);
+        return {
+          id: c.id, nombre: p[0] + (p[1] ? ' ' + p[1].charAt(0) + '.' : ''), sector: c.f.sector || '', nivel: c.f.nivel || '', inversion: c.f.inv || '', potente: !!c.f.potente,
+          etapa: c.etapaTxt || cfg.etapaTxt(c.etapa), estado: c.fin || 'abierto', encaje: x.fit, interes: x.comp, intencion: x.int, riesgo: x.riesgo, prioridad: x.prio,
+          probabilidad: probabilidad(c), siguienteAccion: x.nba.accion, quien: x.nba.quien, senales: x.senales.map(function (s) { return M.TIPOS_SENAL[s.tipo].txt; }),
+          requiereAtencion: x.atencion, altaHace: M.hace(x.k.creado), ultimaActividad: M.hace(x.k.act), sinSeguimiento: M.duracion(x.k.toque),
+          esperaRespuestaNuestra: c.s.esperaDesde != null ? M.duracion(c.s.esperaDesde) : '', cita: c.s.tCita ? M.fechaCorta(c.s.tCita, est.ahora) : ''
+        };
+      })
+    };
+  }
+
   function preguntarLibre(txt) {
     pregunta(txt);
     const el = respuestaVacia();
@@ -412,7 +435,7 @@
     const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     fetch('/api/intelligence-copilot/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl ? ctl.signal : undefined,
-      body: JSON.stringify({ pregunta: txt, contexto: contexto() })
+      body: JSON.stringify({ pregunta: txt, modo: E().cfg.real ? 'real' : 'demo', contexto: contexto() })
     }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (hecho) return;
       if (!d || !Array.isArray(d.bloques) || !d.bloques.length) return respaldo();

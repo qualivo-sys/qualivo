@@ -16,6 +16,9 @@
 // La llamada al modelo va por HTTP directo, como el resto de /api (sin package.json).
 
 const MODELO = process.env.ANTHROPIC_MODEL || 'claude-opus-5';
+const SESION = require('./_intel-sesion.js');
+// Modo real: solo estos campos de cada contacto llegan a Claude (aunque el navegador mande más)
+const CAMPOS_REAL = ['id', 'nombre', 'sector', 'nivel', 'inversion', 'potente', 'etapa', 'estado', 'encaje', 'interes', 'intencion', 'riesgo', 'prioridad', 'probabilidad', 'siguienteAccion', 'quien', 'senales', 'requiereAtencion', 'altaHace', 'ultimaActividad', 'sinSeguimiento', 'esperaRespuestaNuestra', 'cita'];
 const MAX_POR_IP = Number(process.env.INTELLIGENCE_MAX_IP || 30);       // al día
 const MAX_TOTAL = Number(process.env.INTELLIGENCE_MAX_DIA || 400);      // al día, por instancia
 const PLAZO_MS = 8500;
@@ -83,7 +86,7 @@ const HERRAMIENTAS = [
 function sistema(ctx) {
   const t = ctx.terminos || {};
   return [
-    'Eres Qualivo Copilot dentro de una demo comercial. La empresa' + (ctx.empresa ? ' se llama ' + ctx.empresa : '') + ' es del sector ' + ctx.sector + '. Todos los datos son simulados, pero hablas de ellos como si fueran los suyos.',
+    (ctx.real ? 'Eres Qualivo Copilot con los datos reales de Qualivo de hoy. Hablas con Maikel, el fundador. Los nombres van abreviados a propósito.' : 'Eres Qualivo Copilot dentro de una demo comercial. La empresa' + (ctx.empresa ? ' se llama ' + ctx.empresa : '') + ' es del sector ' + ctx.sector + '. Todos los datos son simulados, pero hablas de ellos como si fueran los suyos.'),
     'Qualivo mira el recorrido completo (anuncio → ' + (t.venta || 'venta') + '), detecta dónde se escapan las oportunidades y pone agentes (WhatsApp y voz) y automatizaciones; cuando hace falta una persona, le pasa el contacto con todo el contexto. Acciones reales que puede proponer: WhatsApp del agente, llamada de la agente de voz, aviso ' + (t.comercial ? 'a ' + t.comercial : 'al comercial') + ', recordatorio de ' + (t.cita || 'cita') + ', recuperación de propuestas, reenganche, esperar y reactivar en la fecha que dijo.',
     'Reglas: responde en español de España, tuteando, claro y breve (como se lo dirías a un director en una reunión). Usa los términos del sector: ' + (t.contactos || 'contactos') + ', ' + (t.ventas || 'ventas') + '. Nunca inventes contactos, cifras ni campañas: usa solo lo que está en el estado o lo que devuelven las herramientas. Si algo no está en los datos, dilo. Cita contactos por su id en bloques «contactos» (máx. 3) o en filas de tabla con «id».',
     'Termina SIEMPRE llamando a la herramienta «responder». Si el estado de abajo ya basta, llama a «responder» directamente, sin otras herramientas: la respuesta tiene que llegar en pocos segundos.',
@@ -171,8 +174,14 @@ module.exports = async function (req, res) {
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = null; } }
   const pregunta = body && String(body.pregunta || '').trim().slice(0, 300);
   const ctx = body && body.contexto;
-  if (!pregunta || !ctx || !Array.isArray(ctx.contactos) || ctx.contactos.length > 80 || JSON.stringify(ctx).length > 150000) {
+  const real = body && body.modo === 'real';
+  if (real && !SESION.valida(req)) return res.status(401).json({ error: 'sin sesión' });
+  if (!pregunta || !ctx || !Array.isArray(ctx.contactos) || ctx.contactos.length > (real ? 400 : 80) || JSON.stringify(ctx).length > (real ? 400000 : 150000)) {
     return res.status(400).json({ error: 'petición no válida' });
+  }
+  if (real) {
+    ctx.contactos = ctx.contactos.map(function (c) { const o = {}; CAMPOS_REAL.forEach(function (k) { if (c[k] !== undefined) o[k] = c[k]; }); return o; });
+    ctx.campanas = []; ctx.recorrido = []; ctx.real = true;
   }
 
   const inicio = Date.now();

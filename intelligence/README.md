@@ -57,3 +57,14 @@ El motor, el Copilot y el modo demo no se tocan.
 ## Función del Copilot
 
 `api/intelligence-copilot.js` usa `ANTHROPIC_API_KEY` (ya está en Vercel) y `ANTHROPIC_MODEL` (por defecto `claude-opus-5`). Topes de uso, en memoria de cada instancia: 30 preguntas al día por IP (`INTELLIGENCE_MAX_IP`) y 400 en total (`INTELLIGENCE_MAX_DIA`), con 1.500 tokens por respuesta. Devuelve bloques (texto, tarjetas de contacto, tabla, métricas, acción) y descarta cualquier contacto que no exista en el dataset.
+
+## Modo real de Qualivo (privado)
+
+`/intelligence/?sector=qualivo&modo=real` pide contraseña y enseña los datos de verdad de nuestro GHL con el mismo motor y las mismas pantallas del sector `qualivo`, más la pantalla **Hoy**. Sin la contraseña no se ve nada y el resto de la demo sigue igual.
+
+- Contraseña: variable de entorno `INTELLIGENCE_CLAVE` en Vercel. Al cambiarla se cierran todas las sesiones.
+- `api/intelligence-datos.js` es la única que lee datos reales. Responde 401 sin sesión y siempre con `Cache-Control: no-store`. Sesión: cookie firmada, HttpOnly, 12 horas. 8 intentos fallidos cada 15 minutos por IP.
+- Solo lectura: todas las llamadas a GHL y a Meta son GET. No envía, no llama y no escribe nada.
+- Lee los leads `paid`/`leadform` de los últimos 30 días (sin `demo`), sus etiquetas de activación, conversaciones, oportunidades de los dos pipelines y citas. No devuelve emails ni teléfonos. Caché de 5 minutos; el botón de reinicio fuerza una lectura nueva.
+- Si `PAUSA_TOTAL` está activa, sale el aviso de automatizaciones en pausa y la siguiente acción pasa a Maikel.
+- En el Copilot, en modo real, a Claude solo le llegan los campos de la lista `CAMPOS_REAL` de `api/intelligence-copilot.js`: nombre de pila con inicial, nivel, etapa y puntuaciones. Nada de empresa, ciudad ni textos de mensajes.
