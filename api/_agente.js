@@ -310,50 +310,86 @@ const EJEMPLOS_FUGA = [
 // igual para todos y no decía nada de cada caso). Un mensaje por lead, nunca
 // más de uno: si esto falla o no pasa las validaciones, quien llama debe caer
 // al texto estático (M.whatsapp1), nunca bloquear el envío.
-// o: { nombre, sector, fuga (texto crudo del formulario), inversion, volumen,
-//      horario1, horario2 } — horario1/horario2 son cadenas ya formateadas
-// («jueves 25 de septiembre a las 10:00»), reales, sacadas de la agenda.
+//
+// 25-sep-2026: estilo afinado con los dos mensajes que Maikel reescribió y
+// mandó (Lisandra, clínica; Joan, reformas). Días en palabras («esta tarde»,
+// «el lunes por la tarde»), nunca fechas ni horas; tardes, porque las
+// mañanas son para clientes; sin explicar de más ni prometer una solución
+// concreta antes del diagnóstico; sin suponer nada que el lead no haya dicho.
+// o: { nombre, empresa, sector, fuga (texto crudo del formulario), inversion,
+//      volumen, opcion1, opcion2 } — opcion1/opcion2 salen de opcionesTarde().
+const EJEMPLOS_MAIKEL = [
+  'Hola Lisandra, soy Maikel, de Qualivo. Imagino que estarás liada con la clínica, así que te cuento por aquí.\n\n' +
+  'Comentabas que donde más se os escapa es en el seguimiento y los presupuestos. Es algo que vemos bastante en clínicas: el paciente recibe el presupuesto, dice que se lo piensa y muchas veces ahí se queda. No ha dicho que no, pero con el día a día nadie vuelve a retomar esa conversación.\n\n' +
+  'Nosotros trabajamos justo ese recorrido: que cada paciente tenga un siguiente paso y que el seguimiento se haga automáticamente por WhatsApp, voz o email cuando tenga sentido, sin depender de que alguien se acuerde.\n\n' +
+  'En la llamada puedo enseñarte cómo lo plantearía para Marítima Dental y por dónde empezaría en vuestro caso.\n\n' +
+  '¿Te viene mejor esta tarde o el lunes por la tarde?',
+  'Joan, soy Maikel, de Qualivo. Imagino que estarás liado, así que te cuento por aquí.\n\n' +
+  'En el formulario pusiste que no tienes claro dónde se te escapa, y es lo más normal: casi nadie lo tiene medido. En reformas suele estar en uno de tres sitios: en lo que se tarda en contestar a quien pide presupuesto, en la visita que no se llega a cerrar, o en el presupuesto que se envía y nadie vuelve a llamar.\n\n' +
+  'Nosotros trabajamos justo ese recorrido: que cada persona que pide presupuesto tenga una respuesta rápida y un siguiente paso, y que el seguimiento se haga solo por WhatsApp, voz o email cuando tenga sentido.\n\n' +
+  'En la llamada miramos cómo os llegan hoy los trabajos y te digo por dónde empezaría en Shekinah.\n\n' +
+  '¿Te viene mejor esta tarde o el lunes por la tarde?'
+];
+
+// Las dos tardes que se ofrecen, en palabras. Laborables; «esta tarde» solo si
+// aún es antes de las 15:00 en Madrid. La hora exacta se cierra cuando conteste.
+function opcionesTarde(fecha) {
+  const A = require('./_activacion');
+  const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const t = A.ahoraMadrid(fecha);
+  const lab = function (d) { return d >= 1 && d <= 5; };
+  const out = [];
+  if (lab(t.dia) && t.hora < 15) out.push({ salto: 0, txt: 'esta tarde' });
+  for (let k = 1; out.length < 2 && k < 8; k++) {
+    const d = (t.dia + k) % 7;
+    if (!lab(d)) continue;
+    out.push({ salto: k, txt: k === 1 ? 'mañana por la tarde' : 'el ' + DIAS[d] + ' por la tarde' });
+  }
+  // «mañana por la tarde o el jueves por la tarde» suena raro si son seguidos: se nombra el día.
+  if (out[1] && out[0].salto >= 1 && out[1].salto === out[0].salto + 1 && out[1].txt.indexOf('mañana') === -1) {
+    out[1].txt = 'el ' + DIAS[(t.dia + out[1].salto) % 7] + ' por la tarde';
+  }
+  return out.map(function (x) { return x.txt; });
+}
+
 async function mensajePersonalizado(o) {
   const d = o || {};
-  if (!d.horario1 || !d.horario2) return { texto: '', motivo: 'sin horarios' };
+  const op1 = d.opcion1, op2 = d.opcion2;
+  if (!op1 || !op2) return { texto: '', motivo: 'sin opciones de tarde' };
   const sistema = [
     'Escribes el primer WhatsApp que Maikel Echevarría (Qualivo) manda a alguien que',
     'acaba de rellenar el formulario de diagnóstico de crecimiento. Tiene que parecer',
-    'escrito por Maikel personalmente, no por un chatbot ni por una empresa.',
+    'escrito por Maikel a mano, no por un chatbot ni por una empresa.',
     '',
-    'ESTRUCTURA OBLIGATORIA',
-    '1. Presentación breve, en la línea de: "Hola/Buenas [nombre], soy Maikel, de Qualivo.',
-    '   Imagino que estarás liado, así que te cuento por aquí lo que hacemos."',
-    '2. Recupera su respuesta del formulario sobre dónde cree que se le escapa el negocio.',
-    '   No digas simplemente "has marcado X": interprétala como una observación sobre su',
-    '   situación. Ejemplos de tono (no los copies literales si no coincide su respuesta):',
-    EJEMPLOS_FUGA.map(function (x) { return '   - "' + x[0] + '" → "' + x[1] + '"'; }).join('\n'),
-    '3. Explica qué se suele encontrar en casos parecidos, conectado con esa respuesta,',
-    '   y menciona que es algo que se ve normalmente en su sector. No afirmes que eso',
-    '   pasa EN SU empresa en concreto (no lo sabes); habla de lo que se ve "muchas veces"',
-    '   o "con este tipo de negocios".',
-    '4. Explica en una frase cómo lo trabajamos, conectado con el problema indicado, no',
-    '   una lista suelta de "IA y automatización".',
-    '5. Cierra proponiendo la llamada: qué va a ver en ella (el recorrido que montaríamos',
-    '   en su caso y por dónde atacaría primero), y ofrece los DOS HORARIOS que te dan más',
-    '   abajo, copiados tal cual.',
+    'ESTOS DOS MENSAJES LOS ESCRIBIÓ MAIKEL. Son el modelo de tono, longitud y estructura:',
+    '',
+    '--- EJEMPLO 1 ---', EJEMPLOS_MAIKEL[0], '', '--- EJEMPLO 2 ---', EJEMPLOS_MAIKEL[1], '---',
+    '',
+    'ESTRUCTURA (la de los ejemplos, en cinco párrafos cortos)',
+    '1. «[Hola] [nombre], soy Maikel, de Qualivo. Imagino que estarás liado/a[, con X], así que te cuento por aquí.»',
+    '   Solo añade «con X» si el sector lo deja claro (la clínica, la escuela…). Si no, sin nada.',
+    '2. Lo que puso en el formulario sobre dónde se le escapa, dicho con naturalidad («Comentabas que…»,',
+    '   «En el formulario pusiste que…»), y lo que se ve a menudo en su sector, explicado con un ejemplo',
+    '   concreto del día a día. Nunca afirmes que le pasa a él: habla de lo que se ve «bastante» o «muchas veces».',
+    '   Dónde se le escapa, respuestas posibles y cómo recogerlas:',
+    EJEMPLOS_FUGA.map(function (x) { return '   - «' + x[0] + '» → «' + x[1] + '»'; }).join('\n'),
+    '3. «Nosotros trabajamos justo ese recorrido: …» en una frase, conectada con su problema.',
+    '4. Qué verá en la llamada: cómo lo plantearíamos en su caso y por dónde empezaríamos. Si tienes el nombre',
+    '   de su empresa, úsalo aquí.',
+    '5. Una sola pregunta final, exactamente: «¿Te viene mejor ' + op1 + ' o ' + op2 + '?»',
     '',
     'REGLAS',
-    '- Personaliza siempre con los datos que te dan; menciona al menos su respuesta',
-    '  concreta sobre dónde se le escapa, y que eso se ve normalmente en su sector.',
-    '- No inventes ningún dato que no te han dado.',
-    '- No menciones puntuaciones internas: nada de "nivel", letras A/B/C/D, "tipología",',
-    '  "comportamiento", "según nuestro algoritmo", "frío", "caliente" ni "probabilidad de compra".',
-    '- Entre 100 y 160 palabras.',
-    '- Tuteas. Tono directo, cercano, profesional y humano.',
-    '- Sin emojis, sin listas, sin negritas ni asteriscos, sin comillas alrededor de todo el texto.',
-    '- Los dos horarios van exactos, tal cual te los dan, sin cambiar día ni hora.',
-    '- Contesta solo con el texto del mensaje, nada más.'
+    '- No inventes nada que no esté en la ficha: ni a qué se dedica en concreto, ni cifras, ni herramientas.',
+    '- No prometas una solución concreta ni resultados: eso sale del diagnóstico.',
+    '- No expliques de más. Entre 90 y 150 palabras.',
+    '- Nunca fechas, días del mes ni horas concretas: solo las dos opciones de la pregunta final.',
+    '- Nada del sistema interno: ni «nivel», ni letras A/B/C/D, ni puntuaciones, ni «frío/caliente», ni «lead».',
+    '- Tuteas. Sin emojis, sin listas, sin negritas ni asteriscos, sin comillas alrededor del texto.',
+    '- Contesta solo con el texto del mensaje.'
   ].join('\n');
-  const usuario = 'FICHA: nombre ' + (d.nombre || '-') + ' · sector ' + (d.sector || '-') +
+  const usuario = 'FICHA: nombre ' + (d.nombre || '-') + (d.empresa ? ' · empresa ' + d.empresa : '') + ' · sector ' + (d.sector || '-') +
     ' · respuesta del formulario sobre dónde se le escapa: «' + (d.fuga || 'no lo sé, eso es lo que quiero averiguar') + '»' +
-    ' · inversión actual: ' + (d.inversion || '-') + ' · peticiones/mes: ' + (d.volumen || '-') +
-    '\n\nHORARIOS A OFRECER (cópialos tal cual): "' + d.horario1 + '" y "' + d.horario2 + '"';
+    ' · inversión actual en anuncios: ' + (d.inversion || '-') + ' · peticiones al mes: ' + (d.volumen || '-');
   const clave = process.env.ANTHROPIC_API_KEY;
   if (!clave) return { texto: '', motivo: 'falta ANTHROPIC_API_KEY' };
   let r;
@@ -362,7 +398,7 @@ async function mensajePersonalizado(o) {
       method: 'POST',
       headers: Object.assign({ 'Content-Type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' },
         process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}),
-      body: JSON.stringify({ model: MODELO, max_tokens: 700, temperature: 1, system: sistema, messages: [{ role: 'user', content: usuario }] })
+      body: JSON.stringify({ model: MODELO, max_tokens: 700, system: sistema, messages: [{ role: 'user', content: usuario }] })
     });
   } catch (e) { return { texto: '', motivo: 'fetch_' + (e && e.message) }; }
   if (!r.ok) return { texto: '', motivo: 'anthropic ' + r.status };
@@ -370,9 +406,10 @@ async function mensajePersonalizado(o) {
   const texto = (j.content || []).filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text.trim(); }).join('\n').replace(/^«|»$/g, '').trim();
   if (!texto) return { texto: '', motivo: 'sin texto' };
   const palabras = texto.split(/\s+/).filter(Boolean).length;
-  if (palabras < 70 || palabras > 220) return { texto: '', motivo: 'longitud fuera de rango (' + palabras + ' palabras)' };
-  if (texto.indexOf(d.horario1) === -1 || texto.indexOf(d.horario2) === -1) return { texto: '', motivo: 'no incluyó los dos horarios tal cual' };
-  if (/\bnivel\s*[abcd]\b|tipolog[ií]a|\bfr[ií]o\b|\bcaliente\b|probabilidad de compra|según nuestro algoritmo/i.test(texto)) {
+  if (palabras < 70 || palabras > 180) return { texto: '', motivo: 'longitud fuera de rango (' + palabras + ' palabras)' };
+  if (texto.indexOf(op1) === -1 || texto.indexOf(op2) === -1) return { texto: '', motivo: 'no ofreció las dos tardes tal cual' };
+  if (/\b\d{1,2} de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b|\b\d{1,2}:\d{2}\b/i.test(texto)) return { texto: '', motivo: 'puso una fecha u hora' };
+  if (/\bnivel\s*[abcd]\b|tipolog[ií]a|\bfr[ií]o\b|\bcaliente\b|probabilidad de compra|según nuestro algoritmo|\blead\b/i.test(texto)) {
     return { texto: '', motivo: 'mencionó algo del sistema interno' };
   }
   return { texto: texto, motivo: '' };
@@ -637,4 +674,4 @@ async function avisar(c, motivo, texto) {
   } catch (e) { console.error('[agente] aviso:', e && e.message); }
 }
 
-module.exports = { variar: variar, mensajePersonalizado: mensajePersonalizado, atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };
+module.exports = { variar: variar, mensajePersonalizado: mensajePersonalizado, opcionesTarde: opcionesTarde, atender: atender, decidir: decidir, turnosDe: turnosDe, fichaDe: fichaDe, SISTEMA: SISTEMA, MAX_TURNOS: MAX_TURNOS, reenganchar: reenganchar };

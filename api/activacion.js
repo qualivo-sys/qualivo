@@ -357,10 +357,13 @@ module.exports = async function handler(req, res) {
         // de las respuestas del formulario, con IA, no ser el mismo texto para
         // todos. Si falla o no hay huecos reales, cae al texto estático: nunca
         // se bloquea el envío por esto.
-        if (paso.tipo === 'wa1' && datos.huecos && datos.huecos.length >= 2) {
-          const ia = await require('./_agente.js').mensajePersonalizado({
-            nombre: datos.nombre, sector: datos.sector, fuga: datos.fuga, inversion: datos.inversion, volumen: datos.volumen,
-            horario1: datos.huecos[0], horario2: datos.huecos[1]
+        // 25-sep: el wa1 ofrece dos tardes en palabras («esta tarde o el lunes por la tarde»); la hora se cierra al contestar.
+        if (paso.tipo === 'wa1') {
+          const AGT = require('./_agente.js');
+          const tardes = AGT.opcionesTarde();
+          const ia = await AGT.mensajePersonalizado({
+            nombre: datos.nombre, empresa: c.companyName || '', sector: datos.sector, fuga: datos.fuga, inversion: datos.inversion, volumen: datos.volumen,
+            opcion1: tardes[0], opcion2: tardes[1]
           }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
           if (ia.texto) { texto = ia.texto; esIA = true; }
           else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');
