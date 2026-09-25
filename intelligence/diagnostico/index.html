@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Diagnóstico en vivo · Qualivo</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../app.css">
+<!-- Diagnóstico en vivo (Maikel, 25-sep-2026): en la reunión Maikel comparte
+     pantalla, hace estas pocas preguntas y las rellena él. Sale el recorrido con
+     las fugas y lo que cuestan al mes, y desde ahí se abre la demo de
+     /intelligence con su sector y su empresa. Todo en el navegador: no guarda
+     nada ni escribe en GHL. El enlace para compartir lleva las respuestas en ?r=. -->
+<style>
+  body { font-size: 14px; }
+  .dx { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
+  .dx-cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
+  .dx-cab img { height: 28px; width: auto; }
+  .dx-cab .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gris-2); }
+  h1 { font-size: 28px; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 6px; }
+  .sub { color: var(--gris); font-size: 15px; margin-bottom: 26px; }
+  .caja { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); box-shadow: var(--sombra); padding: 24px; }
+  .preguntas { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
+  .p { display: flex; flex-direction: column; gap: 8px; }
+  .p.ancha { grid-column: 1 / -1; }
+  .p label, .p .lab { font-weight: 600; font-size: 14px; }
+  .p .ayuda { color: var(--gris-2); font-size: 12.5px; margin-top: -4px; }
+  .p input, .p select { height: 42px; border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 0 12px; background: #fff; font-size: 15px; }
+  .p input:focus, .p select:focus { outline: 2px solid var(--verde-2); outline-offset: 0; border-color: transparent; }
+  .opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+  .op { border: 1px solid var(--borde); background: #fff; border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: 13px; cursor: pointer; }
+  .op[aria-checked="true"] { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+  .acciones-form { display: flex; justify-content: flex-end; margin-top: 24px; gap: 10px; }
+  .res { display: none; }
+  .res.visible { display: block; }
+  .res-cab { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .gran { background: var(--tinta); color: #fff; border-radius: var(--radio); padding: 24px; }
+  .gran .num { font-size: 40px; font-weight: 700; letter-spacing: -.02em; color: #FFB08A; line-height: 1.1; }
+  .gran p { color: #D6D7DA; margin-top: 8px; font-size: 14.5px; }
+  .gran .anual { color: #fff; font-weight: 600; }
+  .hoy { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .hoy .fila { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--borde-2); padding-bottom: 8px; }
+  .hoy .fila:last-child { border: 0; padding: 0; }
+  .hoy .fila span { color: var(--gris); }
+  .hoy .fila b { font-size: 15px; }
+  h2 { font-size: 16px; margin: 26px 0 12px; }
+  .recorrido { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .paso { background: #fff; border: 1px solid var(--borde); border-radius: var(--radio); padding: 16px; border-top: 4px solid var(--gris-3); }
+  .paso.ok { border-top-color: var(--verde-2); }
+  .paso.medio { border-top-color: var(--ambar); }
+  .paso.mal { border-top-color: var(--rojo); }
+  .paso .n { font-size: 11.5px; color: var(--gris-2); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .paso h3 { font-size: 14.5px; margin: 4px 0 6px; }
+  .paso p { color: var(--gris); font-size: 13px; }
+  .paso .estado { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--hover); color: var(--gris); }
+  .paso.ok .estado { background: var(--verde-bg); color: var(--verde-txt); }
+  .paso.medio .estado { background: var(--ambar-bg); color: var(--ambar); }
+  .paso.mal .estado { background: var(--rojo-bg); color: var(--rojo); }
+  .fugas { display: flex; flex-direction: column; gap: 10px; }
+  .fuga { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: start; background: #fff; border: 1px solid var(--borde); border-radius: var(--radio); padding: 16px 18px; }
+  .fuga h3 { font-size: 15px; }
+  .fuga .eur { font-size: 20px; font-weight: 700; color: var(--coral); text-align: right; white-space: nowrap; }
+  .fuga .eur small { display: block; font-size: 12px; color: var(--gris-2); font-weight: 600; }
+  .fuga p { color: var(--gris); grid-column: 1 / -1; font-size: 13.5px; }
+  .fuga .haria { grid-column: 1 / -1; background: var(--verde-bg); color: var(--verde-txt); border-radius: var(--radio-s); padding: 10px 12px; font-size: 13.5px; }
+  .fuga .haria b { color: var(--verde-txt); }
+  .cuenta { margin-top: 14px; font-size: 12.5px; color: var(--gris); background: var(--superficie); border: 1px dashed var(--borde); border-radius: var(--radio-s); padding: 12px 14px; }
+  .final { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 26px; background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 18px 20px; }
+  .final p { font-weight: 600; font-size: 15px; }
+  .final .botones { display: flex; gap: 10px; flex-wrap: wrap; }
+  #verdemo { text-decoration: none; }
+  .copiado { color: var(--verde); font-weight: 600; font-size: 13px; }
+  @media (max-width: 760px) {
+    .preguntas, .res-cab { grid-template-columns: 1fr; }
+    .recorrido { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+<main class="dx">
+  <div class="dx-cab">
+    <img src="/assets/img/qualivo-logo.png" alt="Qualivo" width="132" height="32">
+    <span class="eyebrow">Diagnóstico en vivo</span>
+  </div>
+
+  <section id="form">
+    <h1 id="titulo">¿Dónde se os escapan las ventas?</h1>
+    <p class="sub">Seis preguntas sobre cómo funciona hoy. Con vuestros números, no con medias del sector.</p>
+    <div class="caja">
+      <div class="preguntas">
+        <div class="p">
+          <label for="sector">Tipo de negocio</label>
+          <select id="sector"></select>
+        </div>
+        <div class="p">
+          <label for="empresa">Empresa</label>
+          <input id="empresa" type="text" maxlength="40" autocomplete="off" placeholder="Nombre de la empresa">
+        </div>
+        <div class="p">
+          <label for="contactos" id="lab-contactos">¿Cuántos contactos nuevos os llegan al mes?</label>
+          <input id="contactos" type="number" min="0" inputmode="numeric" placeholder="Por ejemplo, 60">
+        </div>
+        <div class="p">
+          <label for="valor" id="lab-valor">¿Cuánto vale de media un cliente?</label>
+          <input id="valor" type="number" min="0" inputmode="numeric" placeholder="En euros">
+          <span class="ayuda" id="ayuda-valor">Lo que factura de media cada venta.</span>
+        </div>
+        <div class="p ancha">
+          <span class="lab" id="lab-cierre">De cada 10 que piden información, ¿cuántos acaban comprando?</span>
+          <div class="opciones" data-campo="cierre"></div>
+        </div>
+        <div class="p ancha">
+          <span class="lab">Cuando llega alguien nuevo, ¿cuánto se tarda en responderle?</span>
+          <div class="opciones" data-campo="respuesta"></div>
+        </div>
+        <div class="p ancha">
+          <span class="lab" id="lab-seguimiento">Si alguien no compra a la primera, ¿qué pasa?</span>
+          <div class="opciones" data-campo="seguimiento"></div>
+        </div>
+        <div class="p ancha">
+          <span class="lab">¿Quién responde y hace ese seguimiento?</span>
+          <div class="opciones" data-campo="quien"></div>
+        </div>
+      </div>
+      <div class="acciones-form">
+        <button class="btn btn-primario btn-grande" id="calcular" type="button" disabled>Ver el diagnóstico</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="res" class="res" aria-live="polite">
+    <h1 id="res-titulo"></h1>
+    <p class="sub" id="res-sub"></p>
+
+    <div class="res-cab">
+      <div class="gran">
+        <div class="num" id="r-fuga"></div>
+        <p id="r-fuga-txt"></p>
+      </div>
+      <div class="caja hoy" id="r-hoy"></div>
+    </div>
+
+    <h2>El recorrido, paso a paso</h2>
+    <div class="recorrido" id="r-recorrido"></div>
+
+    <h2>Dónde se pierde y qué haríamos</h2>
+    <div class="fugas" id="r-fugas"></div>
+    <div class="cuenta" id="r-cuenta"></div>
+
+    <div class="final">
+      <p id="r-final"></p>
+      <div class="botones">
+        <button class="btn" id="editar" type="button">Cambiar respuestas</button>
+        <button class="btn" id="compartir" type="button">Copiar enlace</button>
+        <a class="btn btn-verde btn-grande" id="verdemo" href="../">Ver cómo funcionaría</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var fmt = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 });
+  var miles = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+  var eur = function (n) { return miles(Math.round(n / 10) * 10) + ' €'; };
+  var esc = function (s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  // Palabras de cada sector (mismos ids que /intelligence).
+  var SECTORES = {
+    formacion:    { txt: 'Formación', contactos: 'interesados', cliente: 'alumno', clientes: 'alumnos', compran: 'se matriculan', compra1: 'se matricula', compra: 'matrícula', valor: '¿Cuánto vale de media un alumno?', ayuda: 'Lo que factura de media cada matrícula.', parados: 'los interesados que se quedaron a medias' },
+    clinica:      { txt: 'Clínica', contactos: 'pacientes que consultan', cliente: 'paciente', clientes: 'pacientes', compran: 'aceptan el tratamiento', compra1: 'acepta el tratamiento', compra: 'tratamiento', valor: '¿Cuánto vale de media un tratamiento?', ayuda: 'Lo que factura de media cada tratamiento aceptado.', parados: 'los presupuestos que se quedaron parados' },
+    reformas:     { txt: 'Reformas / Construcción', contactos: 'contactos que piden presupuesto', cliente: 'cliente', clientes: 'obras', compran: 'contratan la obra', compra1: 'contrata la obra', compra: 'obra', valor: '¿Cuánto vale de media una obra?', ayuda: 'Lo que factura de media cada obra contratada.', parados: 'los presupuestos que se quedaron parados' },
+    b2b:          { txt: 'Servicios B2B', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'contrato', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada cliente nuevo (el primer año, si es recurrente).', parados: 'las propuestas que se quedaron paradas' },
+    saas:         { txt: 'SaaS / Software', contactos: 'altas o demos', cliente: 'cliente', clientes: 'clientes', compran: 'pasan a pago', compra1: 'pasa a pago', compra: 'cliente de pago', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las pruebas y demos que se quedaron paradas' },
+    inmobiliaria: { txt: 'Inmobiliaria', contactos: 'contactos', cliente: 'cliente', clientes: 'operaciones', compran: 'cierran una operación', compra1: 'cierra', compra: 'operación', valor: '¿Cuánto os deja de media una operación?', ayuda: 'Los honorarios de media por operación cerrada.', parados: 'las visitas que no avanzaron' },
+    marketing:    { txt: 'Agencia de marketing', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'cliente', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las propuestas que se quedaron paradas' },
+    otro:         { txt: 'Otro', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'compran', compra1: 'compra', compra: 'venta', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada venta.', parados: 'los presupuestos que se quedaron parados' }
+  };
+
+  // Supuestos prudentes: qué parte de las ventas de hoy se recuperaría
+  // arreglando cada fuga. Se enseñan tal cual en «Cómo lo hemos calculado».
+  var OPC = {
+    cierre: [['0.5', 'Menos de 1'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5 o más']],
+    respuesta: [['5min', 'Menos de 5 minutos', 0], ['1h', 'Menos de una hora', 0.10], ['dia', 'El mismo día', 0.20], ['mas', 'Más de un día', 0.30]],
+    seguimiento: [['sistema', 'Se le sigue con un proceso fijo', 0], ['aveces', 'Se le escribe alguna vez, si hay tiempo', 0.15], ['nadie', 'Normalmente nadie vuelve a escribirle', 0.25]],
+    quien: [['dueno', 'Yo (el dueño)'], ['persona', 'Una persona del equipo'], ['equipo', 'Un equipo comercial']]
+  };
+  var TOPE = 0.40; // nunca se promete más de un 40 % sobre lo que ya se vende
+
+  var r = { sector: 'formacion', empresa: '', contactos: '', valor: '', cierre: '', respuesta: '', seguimiento: '', quien: '' };
+
+  function peso(campo, id) { var o = OPC[campo].filter(function (x) { return x[0] === id; })[0]; return o ? (o[2] || 0) : 0; }
+  function etiqueta(campo, id) { var o = OPC[campo].filter(function (x) { return x[0] === id; })[0]; return o ? o[1] : ''; }
+
+  function pintarOpciones() {
+    document.querySelectorAll('.opciones').forEach(function (el) {
+      var campo = el.dataset.campo;
+      el.innerHTML = OPC[campo].map(function (o) {
+        return '<button type="button" class="op" role="radio" aria-checked="' + (r[campo] === o[0]) + '" data-v="' + o[0] + '">' + esc(o[1]) + '</button>';
+      }).join('');
+    });
+  }
+
+  function pintarTextos() {
+    var S = SECTORES[r.sector] || SECTORES.otro;
+    $('#lab-contactos').textContent = '¿Cuántos ' + S.contactos + ' nuevos os llegan al mes?';
+    $('#lab-valor').textContent = S.valor;
+    $('#ayuda-valor').textContent = S.ayuda;
+    $('#lab-cierre').textContent = 'De cada 10 ' + S.contactos + ', ¿cuántos ' + S.compran + '?';
+    $('#lab-seguimiento').textContent = 'Si alguien no ' + S.compra1 + ' a la primera, ¿qué pasa?';
+  }
+
+  function completo() { return r.sector && +r.contactos > 0 && +r.valor > 0 && r.cierre && r.respuesta && r.seguimiento && r.quien; }
+  function actualizarBoton() { $('#calcular').disabled = !completo(); }
+
+  function codificar() { try { return btoa(unescape(encodeURIComponent(JSON.stringify(r)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); } catch (e) { return ''; } }
+  function decodificar(s) { try { s = s.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(escape(atob(s)))); } catch (e) { return null; } }
+
+  function calcular() {
+    var S = SECTORES[r.sector] || SECTORES.otro;
+    var L = +r.contactos, V = +r.valor, c = (+r.cierre) / 10;
+    var ventasMes = L * c, factMes = ventasMes * V;
+    var fr = peso('respuesta', r.respuesta), fs = peso('seguimiento', r.seguimiento);
+    var total = Math.min(TOPE, fr + fs);
+    var escala = (fr + fs) > 0 ? total / (fr + fs) : 0;
+    var eurR = factMes * fr * escala, eurS = factMes * fs * escala, eurT = eurR + eurS;
+    var empresa = r.empresa ? esc(r.empresa) : 'vuestro negocio';
+
+    $('#res-titulo').innerHTML = 'Diagnóstico · ' + empresa;
+    $('#res-sub').textContent = S.txt + ' · ' + fmt.format(L) + ' ' + S.contactos + ' al mes · ' + eur(V) + ' por ' + S.compra;
+
+    if (eurT > 0) {
+      $('#r-fuga').textContent = eur(eurT) + ' al mes';
+      $('#r-fuga-txt').innerHTML = 'Es lo que se queda por el camino entre que alguien pregunta y que ' + S.compran + '. <span class="anual">' + eur(eurT * 12) + ' al año</span>, sin gastar un euro más en anuncios.';
+    } else {
+      $('#r-fuga').textContent = 'Recorrido sano';
+      $('#r-fuga-txt').textContent = 'Respondéis al momento y seguís a todos. Aquí la palanca está en traer más ' + S.contactos + ' y en medir qué campañas traen ' + S.clientes + ' de verdad.';
+    }
+
+    $('#r-hoy').innerHTML =
+      '<div class="fila"><span>' + cap(S.clientes) + ' al mes hoy</span><b>' + fmt.format(Math.round(ventasMes * 10) / 10) + '</b></div>' +
+      '<div class="fila"><span>Facturación al mes hoy</span><b>' + eur(factMes) + '</b></div>' +
+      '<div class="fila"><span>Arreglando el recorrido</span><b>' + eur(factMes + eurT) + '</b></div>';
+
+    var pasoR = r.respuesta === '5min' ? 'ok' : r.respuesta === '1h' ? 'medio' : 'mal';
+    var pasoS = r.seguimiento === 'sistema' ? 'ok' : r.seguimiento === 'aveces' ? 'medio' : 'mal';
+    var pasoQ = r.quien === 'dueno' ? 'medio' : 'ok';
+    var txtE = { ok: 'Bien', medio: 'Mejorable', mal: 'Fuga' };
+    $('#r-recorrido').innerHTML = [
+      ['1', 'Llega el contacto', fmt.format(L) + ' ' + S.contactos + ' al mes.', 'neutro', 'Entrada'],
+      ['2', 'Primera respuesta', etiqueta('respuesta', r.respuesta) + '.', pasoR, txtE[pasoR]],
+      ['3', 'Seguimiento', etiqueta('seguimiento', r.seguimiento) + '.', pasoS, txtE[pasoS]],
+      ['4', 'Cierre', r.cierre === '0.5' ? 'Menos de 1 de cada 10 ' + S.compran + '.' : r.cierre + ' de cada 10 ' + S.compran + '.' + (r.quien === 'dueno' ? ' Todo pasa por el dueño.' : ''), pasoQ, r.quien === 'dueno' ? 'Depende de ti' : 'Resultado']
+    ].map(function (p) {
+      return '<div class="paso ' + p[3] + '"><div class="n">Paso ' + p[0] + '</div><h3>' + p[1] + '</h3><p>' + esc(p[2]) + '</p><span class="estado">' + p[4] + '</span></div>';
+    }).join('');
+
+    var fugas = [];
+    if (fr > 0) fugas.push({ eur: eurR, t: 'Se tarda en responder', p: 'Quien pregunta suele estar mirando varias opciones a la vez. Si la respuesta llega ' + (r.respuesta === '1h' ? 'en una hora' : r.respuesta === 'dia' ? 'horas después' : 'al día siguiente') + ', una parte ya ha hablado con otro.', h: '<b>Qué haríamos:</b> un agente de WhatsApp que responde en menos de 2 minutos, a cualquier hora, y una agente de voz que llama a los que no contestan.' });
+    if (fs > 0) fugas.push({ eur: eurS, t: 'Nadie sigue a quien no ' + S.compra1 + ' a la primera', p: 'Casi nadie decide en el primer contacto. Sin un seguimiento fijo, el que dijo «me lo pienso» o no contestó se pierde, aunque estuviera interesado.', h: '<b>Qué haríamos:</b> seguimiento automático en los días clave por WhatsApp, correo y llamada, y recuperación de ' + S.parados + '.' });
+    fugas.sort(function (a, b) { return b.eur - a.eur; });
+    if (r.quien === 'dueno') fugas.push({ eur: null, t: 'Todo depende de ti', p: 'Mientras responder y perseguir pase por ti, el crecimiento está limitado a tus horas.', h: '<b>Qué haríamos:</b> cada contacto con su puntuación. El sistema hace el trabajo repetitivo y te avisa solo cuando hay alguien listo para hablar contigo, con todo el contexto.' });
+    if (!fugas.length) fugas.push({ eur: null, t: 'El recorrido aguanta', p: 'Con esta forma de trabajar, la mejora está en medir qué campañas traen ' + S.clientes + ' de verdad y en llevar más ' + S.contactos + ' al mismo proceso.', h: '<b>Qué haríamos:</b> un panel que une anuncios, CRM y conversaciones para saber qué funciona y escalarlo.' });
+    $('#r-fugas').innerHTML = fugas.slice(0, 3).map(function (f) {
+      return '<div class="fuga"><h3>' + esc(f.t) + '</h3>' + (f.eur ? '<div class="eur">' + eur(f.eur) + '<small>al mes</small></div>' : '<div></div>') + '<p>' + esc(f.p) + '</p><div class="haria">' + f.h + '</div></div>';
+    }).join('');
+
+    $('#r-cuenta').innerHTML = '<b>Cómo lo hemos calculado:</b> ' + fmt.format(L) + ' ' + S.contactos + ' × ' + (r.cierre === '0.5' ? '0,5' : r.cierre) + ' de cada 10 × ' + eur(V) + ' = ' + eur(factMes) + ' al mes hoy. ' +
+      'Suponemos, de forma prudente, que respondiendo al momento se recupera un ' + Math.round(fr * 100) + ' % más de ventas y que con seguimiento fijo otro ' + Math.round(fs * 100) + ' %' +
+      (fr + fs > TOPE ? ', con un tope del ' + Math.round(TOPE * 100) + ' % en total' : '') + '. Son estimaciones sobre vuestros números: si alguno cambia, el resultado se ajusta.';
+
+    $('#r-final').textContent = r.empresa ? 'Así funcionaría para ' + r.empresa + ':' : 'Así funcionaría en vuestro caso:';
+    var obj = fugas[0] && fugas[0].t === 'Se tarda en responder' ? 'conversion' : fs > 0 ? 'seguimiento' : 'todo';
+    var q = new URLSearchParams({ sector: r.sector, objetivo: obj });
+    if (r.empresa) q.set('empresa', r.empresa);
+    $('#verdemo').href = '../?' + q.toString();
+
+    history.replaceState(null, '', '?r=' + codificar());
+    $('#form').style.display = 'none';
+    $('#res').classList.add('visible');
+    window.scrollTo(0, 0);
+  }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // Arranque: ?r= (enlace compartido) o ?sector=&empresa= (preparado para una reunión)
+  var q = new URLSearchParams(location.search);
+  $('#sector').innerHTML = Object.keys(SECTORES).map(function (k) { return '<option value="' + k + '">' + SECTORES[k].txt + '</option>'; }).join('');
+  var guardado = q.get('r') && decodificar(q.get('r'));
+  if (guardado) Object.keys(r).forEach(function (k) { if (guardado[k] != null) r[k] = String(guardado[k]); });
+  else { if (SECTORES[q.get('sector')]) r.sector = q.get('sector'); if (q.get('empresa')) r.empresa = q.get('empresa').slice(0, 40); }
+  $('#sector').value = r.sector; $('#empresa').value = r.empresa; $('#contactos').value = r.contactos; $('#valor').value = r.valor;
+  pintarOpciones(); pintarTextos(); actualizarBoton();
+  if (guardado && completo()) calcular();
+
+  $('#sector').addEventListener('change', function (e) { r.sector = e.target.value; pintarTextos(); actualizarBoton(); });
+  ['empresa', 'contactos', 'valor'].forEach(function (id) { $('#' + id).addEventListener('input', function (e) { r[id] = e.target.value.trim(); actualizarBoton(); }); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.op'); if (!b) return;
+    r[b.parentNode.dataset.campo] = b.dataset.v; pintarOpciones(); actualizarBoton();
+  });
+  $('#calcular').addEventListener('click', function () { if (completo()) calcular(); });
+  $('#editar').addEventListener('click', function () { $('#res').classList.remove('visible'); $('#form').style.display = ''; window.scrollTo(0, 0); });
+  $('#compartir').addEventListener('click', function () {
+    var url = location.href;
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () {
+      var b = $('#compartir'); b.textContent = 'Enlace copiado'; setTimeout(function () { b.textContent = 'Copiar enlace'; }, 2000);
+    }).catch(function () { prompt('Copia el enlace:', url); });
+  });
+})();
+</script>
+</body>
+</html>
