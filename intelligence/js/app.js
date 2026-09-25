@@ -14,6 +14,7 @@
     { id: 'saas', txt: 'SaaS / Software', desc: 'Producto con prueba gratis o versión free', ico: 'saas' },
     { id: 'b2b', txt: 'Servicios B2B', desc: 'Consultoría, agencias y servicios profesionales', ico: 'b2b' },
     { id: 'clinica', txt: 'Clínica', desc: 'Dental, estética, fisioterapia', ico: 'clinica' },
+    { id: 'osteopatia', txt: 'Osteopatía y escuela', desc: 'Clínica, osteopatía canina y escuela de formación', ico: 'clinica' },
     { id: 'inmobiliaria', txt: 'Inmobiliaria', desc: 'Compraventa, alquiler y obra nueva', ico: 'inmobiliaria' },
     { id: 'reformas', txt: 'Reformas / Construcción', desc: 'Presupuestos, visitas y obras', ico: 'reformas' },
     { id: 'marketing', txt: 'Agencia de marketing', desc: 'Una agencia que capta sus propios clientes', ico: 'sube' },
@@ -29,6 +30,7 @@
     { id: 'resumen', txt: 'Resumen', ico: 'resumen' },
     { id: 'inteligencia', txt: 'Inteligencia', ico: 'inteligencia' },
     { id: 'oportunidades', txt: 'Oportunidades', ico: 'oportunidades' },
+    { id: 'agenda', txt: 'Agenda', ico: 'calendario' },
     { id: 'conversaciones', txt: 'Conversaciones', ico: 'conversaciones' },
     { id: 'recorrido', txt: 'Recorrido', ico: 'recorrido' },
     { id: 'anuncios', txt: 'Anuncios', ico: 'anuncio' },
@@ -56,6 +58,7 @@
     cfg.campanaNombre = function (id) { const c = cfg.campanas.filter(function (x) { return x.id === id; })[0]; return c ? c.nombre : ''; };
     cfg.campana = function (id) { return cfg.campanas.filter(function (x) { return x.id === id; })[0] || null; };
     cfg.etapaTxt = function (i) { return (cfg.recorrido[i] || {}).txt || ''; };
+    if (!cfg.real && cfg.historias && !cfg.historias.voz && cfg.historiaGenerica !== false) { const hv = QV.voz.historiaGenerica(cfg); if (hv) cfg.historias.voz = hv; }
     cfg._ok = true;
     return cfg;
   }
@@ -83,11 +86,13 @@
       const d = new Date(); d.setSeconds(0, 0);
       estado.t0 = d.getTime();
       estado.ahora = estado.t0;
-      estado.contactos = cfg.contactos.map(function (c) { return M.preparar(c, estado.t0); });
+      estado.contactos = cfg.contactos.map(function (c) { const p = M.preparar(c, estado.t0); QV.voz.preparar(c, p, estado.t0); return p; });
+      QV.voz.completar(estado);
       estado.feed = [];
       estado.nuevos = {};
       estado.filtro = 'atencion';
       estado.convSel = null;
+      estado.agendaOff = null;
       recalcular();
       $('#inicio').hidden = true;
       $('#app').hidden = false;
@@ -101,8 +106,10 @@
   }
 
   function recalcular() { M.evaluarTodos(estado); }
+  QV.guardarUrl = function () { guardarUrl(); };
 
   function guardarUrl() {
+    if (estado.cfg.real) { try { history.replaceState(null, '', '?sector=qualivo&modo=real'); } catch (e) { /* nada */ } return; }
     const p = new URLSearchParams();
     p.set('sector', estado.sectorId);
     if (estado.empresa) p.set('empresa', estado.empresa);
@@ -198,6 +205,10 @@
         const quien = m.de === 'a' ? 'agente' : m.de === 'v' ? 'agente de voz' : 'equipo';
         items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
       });
+      (c.llamadas || []).forEach(function (l) {
+        if (estado.ahora - l.t > ventana || l.t > estado.ahora) return;
+        items.push({ t: l.t, ico: 'voz', tono: l.res === 'agendo' ? 't-teal' : 't-lila', titulo: 'Llamada ' + QV.voz.deVoz(T) + ' · ' + QV.voz.RES[l.res].txt.toLowerCase(), quien: c.n, id: c.id, detalle: l.resumen.length > 90 ? l.resumen.slice(0, 88) + '…' : l.resumen });
+      });
       c.x.senales.forEach(function (s) {
         if (estado.ahora - s.t > ventana || s.t > estado.ahora) return;
         const ts = M.TIPOS_SENAL[s.tipo];
@@ -277,7 +288,7 @@
   function pintarNav() {
     const nAt = atencion().length;
     const nSen = estado.contactos.reduce(function (a, c) { return a + c.x.senales.filter(function (s) { return s.humano; }).length; }, 0);
-    $('#nav').innerHTML = VISTAS.map(function (v) {
+    $('#nav').innerHTML = (estado.cfg.vistasExtra || []).concat(VISTAS).map(function (v) {
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
@@ -286,12 +297,13 @@
   }
   function pintarBarra() {
     $('#tituloSistema').innerHTML = tituloSistema();
-    const sec = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0];
+    const sec = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0] || { txt: estado.cfg.nombre };
     const obj = OBJETIVOS.filter(function (o) { return o.id === estado.objetivo; })[0];
     $('#chipSector').textContent = sec.txt + (obj && obj.id !== 'todo' ? ' · ' + obj.txt : '');
     $('#reloj').innerHTML = '<i></i>' + M.hora(estado.ahora);
     $('#selSector').innerHTML = SECTORES.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
     if (QV.demo) QV.demo.pintarBotones();
+    if (estado.cfg.real && QV.real) QV.real.pintarBarra();
   }
   function pintarTodo() {
     pintarNav();
@@ -321,6 +333,10 @@
     return '<div class="titulo-vista"><div><p class="pregunta-guia">' + esc(pregunta) + '</p><h1>' + esc(titulo) + '</h1>' + (sub ? '<p>' + sub + '</p>' : '') + '</div></div>';
   }
 
+  function filaMini(c, txt) {
+    return '<div class="fila fila-mini" data-abrir="' + c.id + '"><div class="quien-fila">' + avatar(c) + '<div style="min-width:0"><div class="nombre">' + esc(c.n) + '</div><div class="meta">' + esc(txt) + '</div></div></div></div>';
+  }
+
   function filaContacto(c) {
     return '<div class="fila" data-abrir="' + c.id + '"><div class="quien-fila">' + avatar(c) + '<div style="min-width:0"><div class="nombre">' + esc(c.n) + '</div><div class="meta">' + esc(metaContacto(c)) + '</div></div></div>' +
       '<div class="nba-corta">' + ico(icoAccion(c.x.nba.tipo)) + '<span>' + esc(c.x.nba.accion) + '</span></div>' + pillPrio(c.x.prio) + '</div>';
@@ -337,7 +353,7 @@
       const fg = M.fugas(cfg)[0];
       const hoyTxt = at.length ? '<b>' + at.length + ' ' + T.oportunidades + '</b> requieren atención hoy. Solo <b>' + humanos + '</b> necesitan a una persona.' : 'Hoy no hay nada urgente. El sistema sigue trabajando.';
       return '<div class="hoy"><div class="hoy-frase"><h2>' + hoyTxt + '</h2><p>' + estado.contactos.length + ' ' + T.contactos + ' en el sistema · actualizado a las ' + M.hora(estado.ahora) + '</p></div>' +
-        '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + M.euros(enJuego) + ' en juego</em></button>' +
+        '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + (enJuego ? M.euros(enJuego) + ' en juego' : 'ordenadas por prioridad') + '</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="agentes"><span>El sistema está moviendo</span><strong>' + trabajando + '</strong><em>sin que nadie tenga que acordarse</em></button>' +
         '<button class="hoy-dato" type="button" data-vista="senales"><span>Necesitan a una persona</span><strong style="color:var(--coral)">' + humanos + '</strong><em>con todo el contexto</em></button></div>' +
         '<p class="pregunta-guia" style="margin:18px 0 8px">Últimos 30 días</p>' +
@@ -351,6 +367,63 @@
             (fg ? '<div class="tarjeta fuga-grande" data-vista="recorrido" style="cursor:pointer"><h3>Dónde se pierde más <span class="sub">Últimos 30 días</span></h3><div class="cifra">' + M.num(fg.recuperables) + ' ' + TA().contactos + '</div><p class="gris">Se quedan entre <b>' + esc(fg.de.txt) + '</b> y <b>' + esc(fg.a.txt) + '</b>: solo pasa el ' + M.pct(fg.conv) + ', cuando con un buen seguimiento pasa el ' + M.pct(fg.ref) + '.</p></div>' : '') +
             '<div class="tarjeta"><h3>Qué está haciendo el sistema <span class="sub">Piloto automático</span></h3><div style="margin-top:6px">' + pintaFeed(feed(6)) + '</div></div>' +
           '</div>' +
+        '</div>';
+    },
+
+    agenda: function () {
+      const cfg = estado.cfg, T = cfg.t;
+      const ag = QV.voz.agenda(estado);
+      const fin = new Date(ag.dias[ag.dias.length - 1].t);
+      const semTxt = (ag.off === 0 ? 'Esta semana' : ag.off === 1 ? 'La semana que viene' : ag.off === -1 ? 'La semana pasada' : 'Semana') + ' · del ' + new Date(ag.l0).getDate() + ' al ' + fin.getDate() + ' de ' + fin.toLocaleDateString('es-ES', { month: 'long' });
+      const voz = QV.voz.nombreVoz(T), vozT = QV.voz.tituloVoz(T);
+      const EST = { confirmada: 'Confirmada', sinconfirmar: 'Sin confirmar', asistio: 'Asistió', planton: 'Plantón', recuperando: 'Plantón · recuperando' };
+      const POR = { voz: ['voz', vozT], wa: ['whatsapp', 'Agente de WhatsApp'], persona: ['persona', 'Una persona'] };
+      const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      const mapa = {};
+      ag.items.forEach(function (it) { mapa[it.dia + ':' + it.h] = it; });
+      const cab = '<div class="ag-h"></div>' + ag.dias.map(function (d) {
+        return '<div class="ag-h' + (d.i === ag.hoyI ? ' es-hoy' : '') + '">' + DIAS[d.i] + ' <b>' + new Date(d.t).getDate() + '</b>' + (d.i === ag.hoyI ? ' <small>hoy</small>' : '') + '</div>';
+      }).join('');
+      const filas = ag.slots.map(function (h) {
+        return '<div class="ag-hora">' + h + ':00</div>' + ag.dias.map(function (d) {
+          const it = mapa[d.i + ':' + h];
+          const cls = 'ag-celda' + (d.i === ag.hoyI ? ' es-hoy' : '') + (ag.pasado(d.i, h) ? ' pasada' : '');
+          if (!it) return '<div class="' + cls + '">' + (ag.pasado(d.i, h) ? '' : '<span class="ag-libre">Libre</span>') + '</div>';
+          const p = POR[it.por] || POR.persona;
+          return '<div class="' + cls + '"><div class="ag-cita e-' + it.estado + (it.relleno ? ' relleno' : '') + (it.riesgo ? ' riesgo' : '') + (it.c && estado.nuevos[it.c.id] ? ' destacada' : '') + '"' + (it.c ? ' data-abrir="' + it.c.id + '"' : '') + ' title="' + esc((it.c ? it.c.n : it.tipo) + ' · ' + EST[it.estado] + ' · agendada por ' + p[1]) + '">' +
+            '<b>' + esc(it.c ? it.c.n : it.tipo) + '</b><small>' + ico(p[0]) + esc(EST[it.estado]) + '</small></div></div>';
+        }).join('');
+      }).join('');
+      const riesgoC = ag.riesgo.filter(function (it) { return it.c; });
+      const riesgoR = ag.riesgo.length - riesgoC.length;
+      const plantC = estado.contactos.filter(function (c) { return c.s.noshow && !c.fin; });
+      const ll = QV.voz.llamadasDe(estado, 7);
+      const cuenta = function (r) { return ll.filter(function (x) { return x.l.res === r; }).length; };
+      const cogieron = ll.filter(function (x) { return x.l.res !== 'nocontesta'; }).length;
+      const kp = function (l, v, em, cls) { return '<div class="kpi"><span>' + esc(l) + '</span><strong>' + v + '</strong><em class="' + (cls || '') + '">' + esc(em || '') + '</em></div>'; };
+      return cabecera('Agenda', '¿Cómo está la agenda esta semana?', 'Cada ' + T.cita + ' con quién la agendó y si está confirmada. El sistema confirma, recuerda y recupera los plantones sin que nadie tenga que acordarse.') +
+        '<div class="kpis ag-kpis">' +
+          kp(T.Cita + 's', M.num(ag.total), ag.porDelante + ' por delante') +
+          kp('Asistencia', ag.asistencia == null ? '—' : M.pct(ag.asistencia), ag.plantones ? M.pl(ag.plantones, 'plantón', 'plantones') : 'sin plantones', ag.plantones ? 'mal' : '') +
+          kp(vozT, M.num(ag.voz), ag.total ? M.pct(ag.voz / ag.total) + ' del total' : '') +
+          kp('Sin confirmar', M.num(ag.riesgo.length), ag.riesgo.length ? 'en las próximas 48 h' : 'todo confirmado', ag.riesgo.length ? 'mal' : '') +
+          kp('Huecos libres', M.num(ag.libres.length), ag.off > 0 ? 'en toda la semana' : 'de aquí al ' + DIAS[ag.dias.length - 1].toLowerCase()) +
+        '</div>' +
+        '<div class="ag-semana"><button class="btn btn-mini btn-icono" type="button" data-semana="-1" aria-label="Semana anterior">‹</button><b>' + esc(semTxt) + '</b><button class="btn btn-mini btn-icono" type="button" data-semana="1" aria-label="Semana siguiente">›</button>' + (ag.off !== QV.voz.semanaDefecto(estado.ahora) ? '<button class="btn btn-mini btn-fantasma" type="button" data-semana="0">Volver a hoy</button>' : '') + '</div>' +
+        '<div class="ag-leyenda"><span>' + ico('voz') + esc(vozT) + '</span><span>' + ico('whatsapp') + 'Agente de WhatsApp</span><span>' + ico('persona') + 'Una persona</span><span class="lg e-confirmada">Confirmada</span><span class="lg e-sinconfirmar">Sin confirmar</span><span class="lg e-asistio">Asistió</span><span class="lg e-planton">Plantón</span>' + (cfg.real ? '' : '<span class="gris">En gris, el resto de ' + T.cita + 's de la semana</span>') + '</div>' +
+        '<div class="tarjeta ag-cal"><div class="ag-scroll"><div class="ag-grid" style="grid-template-columns:52px repeat(' + ag.dias.length + ',minmax(118px,1fr))">' + cab + filas + '</div></div></div>' +
+        '<div class="rejilla r-3" style="margin-top:14px">' +
+          '<div class="tarjeta"><h3>Riesgo de plantón <span class="sub">Sin confirmar en las próximas 48 h</span></h3><div class="lista" style="margin-top:8px">' +
+            (riesgoC.map(function (it) { return filaMini(it.c, M.fechaCorta(it.t, estado.ahora) + ' · sin confirmar'); }).join('') || (riesgoR ? '' : '<p class="vacio">Todo confirmado.</p>')) +
+            (riesgoR ? '<p class="gris" style="margin-top:8px">' + (riesgoC.length ? 'Y ' : '') + M.pl(riesgoR, T.cita + ' más', T.cita + 's más') + ' sin confirmar: el recordatorio del mismo día sale solo.</p>' : '') + '</div></div>' +
+          '<div class="tarjeta"><h3>Plantones y recuperación <span class="sub">No vinieron, pero el interés era real</span></h3><div class="lista" style="margin-top:8px">' +
+            (plantC.map(function (c) { return filaMini(c, c.x.nba.accion); }).join('') || '<p class="vacio">Ningún plantón pendiente.</p>') + '</div></div>' +
+          '<div class="tarjeta"><h3>' + esc(vozT) + ' esta semana <span class="sub">' + M.pl(ll.length, 'llamada', 'llamadas') + '</span></h3>' +
+            '<div class="ag-voz"><div><b>' + cogieron + '</b><span>cogieron</span></div><div><b>' + cuenta('agendo') + '</b><span>agendaron</span></div><div><b>' + cuenta('luego') + '</b><span>más tarde</span></div><div><b>' + cuenta('nocontesta') + '</b><span>no cogieron</span></div></div>' +
+            '<div class="lista">' + (ll.slice(0, 5).map(function (x) {
+              const r = QV.voz.RES[x.l.res];
+              return '<div class="fila" data-abrir="' + x.c.id + '"><div class="quien-fila">' + avatar(x.c) + '<div style="min-width:0"><div class="nombre">' + esc(x.c.n) + '</div><div class="meta">' + M.fechaCorta(x.l.t, estado.ahora) + (x.l.dur ? ' · ' + QV.voz.duracionTxt(x.l.dur) : '') + '</div></div></div><span></span><span class="ll-res r-' + r.tono + '">' + esc(r.txt) + '</span></div>';
+            }).join('') || '<p class="vacio">Sin llamadas esta semana.</p>') + '</div></div>' +
         '</div>';
     },
 
@@ -556,13 +629,24 @@
   }
   QV.scoresHtml = scoresHtml;
 
+  function llamadasHtml(c) {
+    const ll = (c.llamadas || []).filter(function (l) { return l.t <= estado.ahora; }).slice().reverse();
+    if (!ll.length) return '';
+    const T = estado.cfg.t;
+    return '<div><p class="bloque-t">Llamadas ' + esc(QV.voz.deVoz(T)) + '</p><div class="llamadas">' + ll.map(function (l) {
+      const r = QV.voz.RES[l.res] || { txt: l.res, tono: 'gris' };
+      return '<div class="llamada"><div class="ll-cab">' + ico('voz') + '<b>' + M.fechaCorta(l.t, estado.ahora) + '</b><span class="ll-dur">' + (l.dur ? QV.voz.duracionTxt(l.dur) : l.res === 'nocontesta' ? 'sin respuesta' : '') + '</span><span class="ll-res r-' + r.tono + '">' + esc(r.txt) + '</span></div>' +
+        '<p>' + esc(l.resumen) + '</p>' + (l.dijo && l.dijo.length ? '<div class="ll-dijo">' + l.dijo.map(function (d) { return '<span>' + esc(d) + '</span>'; }).join('') + '</div>' : '') + '</div>';
+    }).join('') + '</div></div>';
+  }
+
   function abrirFicha(id, foco) {
     const c = contacto(id);
     if (!c) return;
     estado.fichaId = id;
     const cfg = estado.cfg, T = cfg.t, x = c.x;
     const tl = M.timeline(c, cfg, estado.ahora);
-    const icoTl = { origen: 'anuncio', web: 'web', form: 'formulario', respuesta: 'whatsapp', sistema: 'auto' };
+    const icoTl = { origen: 'anuncio', web: 'web', form: 'formulario', respuesta: 'whatsapp', sistema: 'auto', voz: 'voz' };
     const camp = cfg.campana(c.orig);
     const datos = [['Etapa', c.etapaTxt || cfg.etapaTxt(c.etapa)], [T.Producto || 'Interés', c.prod], ['Valor', M.euros(c.valor)], ['Origen', camp ? camp.canal + ' · ' + camp.nombre : 'Web'], ['Ciudad', c.ciudad], ['Canal preferido', c.canal === 'email' ? 'Correo' : c.canal === 'tel' ? 'Teléfono' : 'WhatsApp']];
     const nba = x.nba;
@@ -576,8 +660,9 @@
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
           '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
           (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>' +
+        llamadasHtml(c) +
         '<div id="fichaTl"><p class="bloque-t">Línea de tiempo</p><div class="tarjeta"><div class="tl">' + tl.map(function (e) {
-          return '<div class="tl-item ' + e.tipo + '"><time>' + M.fechaCorta(e.t, estado.ahora) + '</time><span class="dot">' + ico(icoTl[e.tipo] || 'auto') + '</span><p>' + esc(e.texto) + (e.detalle ? '<small>«' + esc(e.detalle) + '»</small>' : '') + '</p></div>';
+          return '<div class="tl-item ' + e.tipo + '"><time>' + M.fechaCorta(e.t, estado.ahora) + '</time><span class="dot">' + ico(icoTl[e.tipo] || 'auto') + '</span><p>' + esc(e.texto) + (e.detalle ? '<small>«' + esc(e.detalle) + '»</small>' : '') + (e.nota ? '<small>' + esc(e.nota) + '</small>' : '') + '</p></div>';
         }).join('') + '</div></div></div>' +
       '</div>';
     $('#ficha').hidden = false;
@@ -629,13 +714,14 @@
   // Eventos (delegados)
   // ---------------------------------------------------------------------------
   document.addEventListener('click', function (e) {
-    const t = e.target.closest('[data-agencia],[data-sector],[data-objetivo],[data-vista],[data-abrir],[data-cerrar-ficha],[data-filtro],[data-fsenal],[data-conv],[data-asignar],[data-generar],[data-timeline]');
+    const t = e.target.closest('[data-semana],[data-agencia],[data-sector],[data-objetivo],[data-vista],[data-abrir],[data-cerrar-ficha],[data-filtro],[data-fsenal],[data-conv],[data-asignar],[data-generar],[data-timeline]');
     if (!t) return;
     if (t.hasAttribute('data-agencia')) { if (QV.copilot) { QV.copilot.agencia(); if (window.innerWidth <= 1180) $('#copilot').classList.add('abierto'); } return; }
     if (t.dataset.sector) { eleccion.sector = t.dataset.sector; pintarInicio(); return; }
     if (t.dataset.objetivo) { eleccion.objetivo = t.dataset.objetivo; pintarInicio(); return; }
     if (t.dataset.vista) { cerrarFicha(); irA(t.dataset.vista); if (window.innerWidth <= 1180) $('#copilot').classList.remove('abierto'); return; }
     if (t.hasAttribute('data-cerrar-ficha')) { cerrarFicha(); return; }
+    if (t.dataset.semana != null) { const v = +t.dataset.semana; estado.agendaOff = v === 0 ? null : QV.voz.agenda(estado).off + v; pintarVista(); return; }
     if (t.dataset.filtro) { estado.filtro = t.dataset.filtro; pintarVista(); return; }
     if (t.dataset.fsenal) { estado.filtroSenal = t.dataset.fsenal; pintarVista(); return; }
     if (t.dataset.conv) { estado.convSel = t.dataset.conv; pintarVista(); return; }
@@ -656,6 +742,7 @@
   });
   $('#btnReiniciar').innerHTML = ico('reinicio');
   $('#btnReiniciar').addEventListener('click', function () {
+    if (estado.cfg && estado.cfg.real && QV.real) { QV.real.recargar(); return; }
     iniciar({ sector: estado.sectorId, objetivo: estado.objetivo, empresa: estado.empresa, historia: estado.historia }).then(function () { aviso('Demo reiniciada', 'reinicio'); });
   });
   $('#btnCopilotMovil').innerHTML = ico('chat');
@@ -664,12 +751,13 @@
   $('#btnCerrarCopilot').addEventListener('click', function () { $('#copilot').classList.remove('abierto'); });
 
   // Exponer lo que usan el Copilot y el modo demo
-  Object.assign(QV, { esc: esc, avatar: avatar, pillPrio: pillPrio, metaContacto: metaContacto, icoAccion: icoAccion, ultimaSenal: ultimaSenal, contacto: contacto, atencion: atencion, recalcular: recalcular, aviso: aviso, pintarVista: pintarVista, pintarNav: pintarNav, pintarBarra: pintarBarra, iniciar: iniciar, SECTORES: SECTORES });
+  Object.assign(QV, { esc: esc, avatar: avatar, pillPrio: pillPrio, metaContacto: metaContacto, icoAccion: icoAccion, ultimaSenal: ultimaSenal, contacto: contacto, atencion: atencion, recalcular: recalcular, aviso: aviso, pintarVista: pintarVista, pintarNav: pintarNav, pintarBarra: pintarBarra, iniciar: iniciar, SECTORES: SECTORES, VISTA_FN: VISTA_FN, cargarSector: cargarSector, cabecera: cabecera, irA: irA, mostrarInicio: mostrarInicio });
 
   // Arranque: enlace preparado o pantalla de inicio
   window.addEventListener('DOMContentLoaded', function () {
     const p = new URLSearchParams(location.search);
     const sector = p.get('sector');
+    if (sector === 'qualivo' && p.get('modo') === 'real' && QV.real) { QV.real.arrancar(); return; }
     if (sector && SECTORES.some(function (s) { return s.id === sector; })) {
       iniciar({ sector: sector, empresa: p.get('empresa') || '', objetivo: p.get('objetivo') || 'todo', historia: p.get('historia') || '', vista: p.get('vista') || 'resumen' })
         .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar(); })

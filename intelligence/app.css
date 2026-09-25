@@ -508,3 +508,72 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Llamadas del agente de voz ---------- */
+.llamadas { display: flex; flex-direction: column; gap: 8px; }
+.llamada { border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 10px 12px; background: var(--superficie); }
+.llamada p { margin-top: 6px; color: var(--tinta-2); }
+.ll-cab { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+.ll-cab .ico { width: 16px; height: 16px; color: var(--lila-txt); }
+.ll-dur { color: var(--gris); }
+.ll-res { margin-left: auto; font-size: 11.5px; font-weight: 700; padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.r-verde { background: var(--verde-bg); color: var(--verde-txt); }
+.r-azul { background: var(--azul-bg); color: var(--azul); }
+.r-ambar { background: var(--ambar-bg); color: var(--ambar); }
+.r-gris { background: var(--hover); color: var(--gris); }
+.r-rojo { background: var(--rojo-bg); color: var(--rojo); }
+.ll-dijo { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ll-dijo span { font-size: 11.5px; background: var(--lila); color: var(--lila-txt); padding: 3px 8px; border-radius: 6px; }
+.tl-item small + small { font-style: normal; }
+
+/* ---------- Agenda ---------- */
+.ag-kpis { margin-bottom: 10px; }
+.ag-leyenda { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 12px; color: var(--gris); margin: 4px 0 10px; }
+.ag-leyenda span { display: inline-flex; align-items: center; gap: 5px; }
+.ag-leyenda .ico { width: 14px; height: 14px; }
+.ag-leyenda .lg::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--gris-3)); }
+.lg.e-confirmada { --c: var(--verde-2); } .lg.e-sinconfirmar { --c: var(--ambar); } .lg.e-asistio { --c: var(--gris-3); } .lg.e-planton { --c: var(--coral); }
+.ag-cal { padding: 0; overflow: hidden; }
+.ag-scroll { overflow-x: auto; }
+.ag-grid { display: grid; min-width: 640px; }
+.ag-h { padding: 10px 8px; font-size: 12px; font-weight: 600; color: var(--gris); border-bottom: 1px solid var(--borde); text-align: center; }
+.ag-h b { color: var(--tinta); font-size: 14px; }
+.ag-h.es-hoy { color: var(--verde-txt); background: var(--verde-bg); }
+.ag-h small { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; }
+.ag-hora { font-size: 11px; color: var(--gris-2); padding: 6px 6px 0 0; text-align: right; border-top: 1px solid var(--borde-2); }
+.ag-celda { min-height: 54px; padding: 3px; border-top: 1px solid var(--borde-2); border-left: 1px solid var(--borde-2); }
+.ag-celda.es-hoy { background: #F7FBFA; }
+.ag-celda.pasada { background: repeating-linear-gradient(135deg, transparent 0 6px, rgba(16,19,25,.018) 6px 12px); }
+.ag-libre { display: block; font-size: 11px; color: var(--gris-3); padding: 4px 6px; }
+.ag-cita { height: 100%; border-radius: 6px; padding: 5px 7px; border-left: 3px solid var(--c, var(--gris-3)); background: var(--bg, var(--hover)); cursor: pointer; min-width: 0; }
+.ag-cita.relleno { cursor: default; opacity: .72; }
+.ag-cita b { display: block; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag-cita small { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--gris); white-space: nowrap; overflow: hidden; }
+.ag-cita small .ico { width: 13px; height: 13px; flex: none; }
+.ag-cita.e-confirmada { --c: var(--verde-2); --bg: var(--verde-bg); }
+.ag-cita.e-sinconfirmar { --c: var(--ambar); --bg: var(--ambar-bg); }
+.ag-cita.e-asistio { --c: var(--gris-3); --bg: var(--hover); }
+.ag-cita.e-planton { --c: var(--coral); --bg: var(--coral-bg); }
+.ag-cita.e-recuperando { --c: var(--coral); --bg: var(--lila); }
+.ag-cita.relleno.e-confirmada, .ag-cita.relleno.e-sinconfirmar { --bg: #F4F4F1; }
+.ag-cita.riesgo { box-shadow: inset 0 0 0 1px var(--ambar); }
+.ag-voz { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 10px 0 6px; }
+.ag-voz div { background: var(--fondo); border-radius: var(--radio-s); padding: 8px; text-align: center; }
+.ag-voz b { display: block; font-size: 20px; font-weight: 800; }
+.ag-voz span { font-size: 11px; color: var(--gris); }
+
+/* Demo: transcripción de la llamada */
+.trans { margin: 8px 0 4px; display: flex; flex-direction: column; gap: 5px; max-height: 190px; overflow-y: auto; }
+.trans p { font-size: 12.5px; line-height: 1.35; padding: 6px 9px; border-radius: 8px; max-width: 92%; opacity: 0; animation: aparece .35s forwards; animation-delay: var(--d); }
+.trans p.v { background: rgba(255,255,255,.1); align-self: flex-start; }
+.trans p.c { background: rgba(39,189,177,.22); align-self: flex-end; }
+.trans p small { display: block; font-size: 10.5px; opacity: .7; }
+@keyframes aparece { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) { .ag-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ag-voz b { font-size: 17px; } }
+.demo-hist { width: auto; max-width: 250px; height: 34px; }
+@media (max-width: 760px) { .demo-hist { max-width: 120px; } }
+.ag-semana { display: flex; align-items: center; gap: 8px; margin: 2px 0 8px; font-size: 13px; }
+.ag-semana .btn-icono { width: 28px; font-size: 16px; }
+.fila.fila-mini { grid-template-columns: minmax(0, 1fr); }
+.ag-cita.destacada { box-shadow: 0 0 0 2px var(--verde-2), 0 6px 18px rgba(14,124,116,.25); animation: latido 1.4s ease-in-out 3; }
+@keyframes latido { 50% { transform: scale(1.04); } }

@@ -4,6 +4,7 @@
   const H = 60, D = 1440;
   const tieneRol = function (c, re) { return re.test(c.rol || ''); };
 
+  const Q = window.QV.voz;
   window.QV_SECTORES = window.QV_SECTORES || {};
   window.QV_SECTORES.formacion = {
     id: 'formacion',
@@ -124,6 +125,23 @@
           { dur: 7, min: 3, txt: 'Javier acepta y pide pago a plazos', feed: 'Intención alta · pide pago a plazos', cambio: { s: { urg: true, urgTxt: 'quiere empezar en octubre', financia: true }, conv: ['c', 'wa', 'Sí, mejor mañana por la tarde. ¿La parte que pague yo se puede hacer a plazos?'] }, act: true },
           { dur: 6, min: 1, txt: 'El agente agenda la entrevista', feed: 'Entrevista agendada · mañana 18:00', cambio: { etapa: 4, s: { cita: 1320, citaOk: true }, conv: ['a', 'wa', 'Sí, en diez plazos sin intereses. Te dejo la entrevista mañana a las 18:00 con Elena, la directora. Te llega el enlace al correo.'] }, toque: true },
           { dur: 0, min: 1, txt: 'Aviso a una persona: Javier está listo para hablar', feed: 'Aviso enviado a admisiones', humano: { titulo: 'Javier está listo para hablar', texto: 'Quiere pasar a responsable de RR. HH. · convocatoria de octubre · su empresa paga una parte (bonificable) · el resto a plazos. Entrevista mañana a las 18:00.' } }
+        ]
+      },
+      voz: {
+        titulo: 'No contesta al WhatsApp y le llama el agente de voz',
+        contacto: { id: 'demo', n: 'Nuria Blasco', rol: 'Técnica de RR. HH.', seg: 'particular', ciudad: '—', prod: 'Máster en Dirección de Personas', orig: 'c1', canal: 'wa', etapa: 1, valor: 3900, creado: 0, act: 0, f: {}, s: {}, conv: [] },
+        pasos: [
+          { dur: 5, min: 0, txt: 'Entra una solicitud nueva desde un anuncio de Meta', feed: 'Nueva solicitud · Máster en Dirección de Personas', cambio: {} },
+          { dur: 5, min: 1, txt: 'El agente completa la ficha con lo que dejó en el formulario', feed: 'Ficha completada · 4 años en RR. HH.', cambio: { ciudad: 'Madrid', f: { exp: 4 } } },
+          { dur: 6, min: 1, txt: 'El agente de WhatsApp contesta en el minuto uno', feed: 'WhatsApp enviado en 49 segundos', cambio: { conv: ['a', 'wa', 'Hola Nuria, soy Lucía, de admisiones. Te escribo por el Máster en Dirección de Personas. ¿Te va bien que te llamemos dos minutos y te cuento fechas y precio?'] }, toque: true },
+          { dur: 5, min: 9, txt: 'Diez minutos sin respuesta: la cadencia pasa a voz', feed: 'Sin respuesta al WhatsApp · llamada programada', cambio: { s: { intentos: 1 } } },
+          { dur: 16, min: 1, txt: 'El agente de voz le llama y cualifica en la llamada', feed: 'Llamada del agente de voz · 5 min · agendó la entrevista', act: true,
+            llamada: { dur: 290, res: 'agendo', resumen: 'Cogió a la primera: estaba en una reunión y no había visto el WhatsApp. 4 años en RR. HH., quiere pasar a HRBP. Su empresa le paga la mitad. Agendó la entrevista del ' + Q.hueco(17).txt + ' a las 17:00.', dijo: ['Objetivo: pasar a HRBP este año', 'Su empresa paga la mitad (bonificable)', 'Pregunta por pago a plazos'],
+              trans: [['v', 'Hola Nuria, soy Lucía, de admisiones. Te llamo por el máster que pediste. ¿Tienes un minuto?'], ['c', 'Sí, perdona, estaba en una reunión y no había visto el WhatsApp.'], ['v', 'Sin problema. ¿Lo buscas para dar el salto a otro puesto?'], ['c', 'Sí, quiero pasar a HRBP. Mi empresa me paga la mitad. ¿Cuándo empieza?'], ['v', 'El 19 de octubre, online en directo, y tu parte se puede pagar a plazos. ¿Lo vemos con Elena, la directora, el ' + Q.hueco(17).txt + ' a las 17:00?'], ['c', 'Perfecto, apúntame.']] },
+            cambio: { etapa: 3, f: { empresaPaga: true }, s: { precio: true, financia: true, conv: true, urg: true, urgTxt: 'quiere pasar a HRBP este año' } } },
+          { dur: 7, min: 4, txt: 'La entrevista aparece en la Agenda, confirmada por WhatsApp', feed: 'Entrevista agendada por el agente de voz · ' + Q.hueco(17).txt + ' 17:00', vista: 'agenda', toque: true,
+            cambio: { etapa: 4, s: { cita: Q.hueco(17).min - 16, citaOk: true }, conv: ['a', 'wa', 'Nuria, te confirmo la entrevista con Elena el ' + Q.hueco(17).txt + ' a las 17:00. Te dejo aquí el plan de estudios y la bonificación de tu empresa.'] } },
+          { dur: 0, min: 1, txt: 'Aviso a una persona: Nuria está lista para la entrevista', feed: 'Aviso enviado a admisiones', humano: { titulo: 'Nuria está lista para la entrevista', texto: 'Quiere pasar a HRBP · su empresa paga la mitad (bonificable) · el resto a plazos · convocatoria de octubre. Entrevista con Elena el ' + Q.hueco(17).txt + ' a las 17:00, agendada por el agente de voz.' } }
         ]
       }
     },

@@ -17,8 +17,11 @@
     const el = $('#demoBotones');
     if (!el) return;
     if (!historia()) { el.innerHTML = ''; return; }
-    if (!d) el.innerHTML = '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('play') + '<span>Iniciar demo</span></button>';
-    else if (d.fin) el.innerHTML = '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('reinicio') + '<span>Repetir demo</span></button>';
+    const hs = E().cfg.historias || {};
+    const ids = Object.keys(hs);
+    const sel = ids.length > 1 && (!d || d.fin) ? '<select class="select demo-hist" data-demo-historia aria-label="Historia del modo demo">' + ids.map(function (k) { return '<option value="' + k + '"' + (k === (E().historia || E().cfg.historiaDefecto) ? ' selected' : '') + '>' + esc(hs[k].titulo) + '</option>'; }).join('') + '</select>' : '';
+    if (!d) el.innerHTML = sel + '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('play') + '<span>Iniciar demo</span></button>';
+    else if (d.fin) el.innerHTML = sel + '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('reinicio') + '<span>Repetir demo</span></button>';
     else el.innerHTML = '<button class="btn" type="button" data-demo="' + (d.pausado ? 'reanudar' : 'pausar') + '">' + ico(d.pausado ? 'play' : 'pausa') + '<span>' + (d.pausado ? 'Reanudar' : 'Pausar') + '</span></button>';
   }
 
@@ -49,7 +52,7 @@
     Object.keys(k).forEach(function (key) {
       if (key === 's' || key === 'f') {
         c[key] = Object.assign(c[key] || {}, k[key]);
-        if (key === 's' && k.s.cita != null) c.s.tCita = est.ahora + k.s.cita * M.MIN;
+        if (key === 's' && k.s.cita != null) c.s.tCita = Math.round((est.ahora + k.s.cita * M.MIN) / 3600000) * 3600000; // en punto
       } else if (key === 'conv') {
         c.conv.push({ t: est.ahora, de: k.conv[0], canal: k.conv[1], texto: k.conv[2] });
         if (k.conv[0] === 'c') c.tAct = est.ahora; else c.tToque = est.ahora;
@@ -57,17 +60,27 @@
         c[key] = k[key];
       }
     });
+    if (paso.llamada) {
+      const l = paso.llamada;
+      c.llamadas = (c.llamadas || []).concat([{ t: est.ahora, dur: l.dur, res: l.res, resumen: l.resumen, dijo: l.dijo || [] }]);
+    }
     if (paso.toque) c.tToque = est.ahora;
     if (paso.act) c.tAct = est.ahora;
-    if (!k.conv && d.paso > 0) c.ev.push({ t: est.ahora, tipo: /visita|página|web/i.test(paso.feed) ? 'web' : 'sistema', texto: paso.feed });
-    est.feed.push({ t: est.ahora, ico: paso.humano ? 'persona' : k.conv ? (k.conv[0] === 'c' ? 'conversaciones' : 'whatsapp') : d.paso === 0 ? 'nueva' : 'auto', tono: paso.humano ? 't-coral' : 't-teal', titulo: paso.feed, quien: c.n, id: c.id, nuevo: true });
+    if (!k.conv && !paso.llamada && d.paso > 0) c.ev.push({ t: est.ahora, tipo: /visita|página|web/i.test(paso.feed) ? 'web' : 'sistema', texto: paso.feed });
+    est.feed.push({ t: est.ahora, ico: paso.humano ? 'persona' : paso.llamada ? 'voz' : k.conv ? (k.conv[0] === 'c' ? 'conversaciones' : 'whatsapp') : d.paso === 0 ? 'nueva' : 'auto', tono: paso.humano ? 't-coral' : 't-teal', titulo: paso.feed, quien: c.n, id: c.id, nuevo: true });
   }
 
   function siguiente() {
     if (!d) return;
     d.paso++;
     const pasos = d.historia.pasos;
-    if (d.paso >= pasos.length) return;
+    if (d.paso >= pasos.length) {
+      d.paso = pasos.length - 1;
+      d.fin = true;
+      pintarBotones();
+      pintarPanel(pasos[d.paso]);
+      return;
+    }
     const paso = pasos[d.paso];
     const c0 = demoC();
     d.antes = c0 && c0.x ? { fit: c0.x.fit, comp: c0.x.comp, int: c0.x.int, riesgo: c0.x.riesgo } : null;
@@ -76,7 +89,8 @@
     E().nuevos = { demo: true };
     QV.pintarNav();
     QV.pintarBarra();
-    QV.pintarVista();
+    if (paso.vista === 'agenda' && c0 && demoC().s.tCita) E().agendaOff = QV.voz.semanaDe(demoC().s.tCita, E().ahora);
+    if (paso.vista) QV.irA(paso.vista); else QV.pintarVista();
     if (E().fichaId === 'demo') QV.abrirFicha('demo');
     pintarPanel(paso);
     if (paso.humano) return final(paso);
@@ -114,6 +128,7 @@
     $('#demoPanel').innerHTML =
       '<div class="l1"><small>Modo demo · paso ' + (d.paso + 1) + ' de ' + n + '</small><span style="font-size:12px;color:#9AA2AE">' + esc(c.n) + ' · ' + M.hora(E().ahora) + '</span></div>' +
       '<h4>' + esc(paso.txt) + '</h4>' +
+      (paso.llamada && paso.llamada.trans ? '<div class="trans">' + paso.llamada.trans.map(function (t, i) { return '<p class="' + t[0] + '" style="--d:' + (d.fin || d.pausado ? 0 : (i * 1.6 + 0.4)) + 's"><small>' + esc(t[0] === 'v' ? QV.voz.tituloVoz(E().cfg.t) : c.n.split(' ')[0]) + '</small>' + esc(t[1]) + '</p>'; }).join('') + '</div>' : '') +
       '<div class="progreso">' + h.pasos.map(function (p, i) { return '<i class="' + (i < d.paso ? 'hecho' : i === d.paso ? (paso.humano ? 'hecho' : 'actual') : '') + '" style="--dur:' + ((p.dur || 6) * VEL) + 's"></i>'; }).join('') + '</div>' +
       '<div class="dsc"><div><span>Encaje</span>' + val('fit', c.x.fit) + '</div><div><span>Actividad</span>' + val('comp', c.x.comp) + '</div>' + (h.riesgo ? '<div><span>Riesgo</span>' + val('riesgo', c.x.riesgo, true) + '</div>' : '<div><span>Intención</span>' + val('int', c.x.int) + '</div>') + '<div><span>Prioridad</span><b style="font-size:13px;padding-top:4px">' + M.PRIO[c.x.prio].txt + '</b></div></div>' +
       '<div class="ctrl">' + (d.fin ? '<button class="btn" type="button" data-demo="empezar">' + ico('reinicio') + 'Repetir</button>' : '<button class="btn" type="button" data-demo="' + (d.pausado ? 'reanudar' : 'pausar') + '">' + ico(d.pausado ? 'play' : 'pausa') + (d.pausado ? 'Reanudar' : 'Pausar') + '</button>') +
@@ -160,6 +175,12 @@
       if (window.innerWidth <= 1180) $('#copilot').classList.add('abierto');
       QV.copilot.preguntarSugerida(p);
     }
+  });
+  document.addEventListener('change', function (e) {
+    const s = e.target.closest('[data-demo-historia]');
+    if (!s) return;
+    E().historia = s.value;
+    if (QV.guardarUrl) QV.guardarUrl();
   });
   // Barra espaciadora: pausar / reanudar (cómodo al presentar)
   document.addEventListener('keydown', function (e) {

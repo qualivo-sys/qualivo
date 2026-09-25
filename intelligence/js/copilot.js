@@ -19,6 +19,8 @@
       { q: '¿Dónde estamos perdiendo oportunidades?', h: 'fugas', obj: ['todo', 'captacion', 'conversion'] },
       { q: '¿Qué ' + T.contactos + ' necesitan atención?', h: 'atencion', obj: ['todo', 'seguimiento'] },
       { q: '¿Qué oportunidades llevan demasiado tiempo sin seguimiento?', h: 'sinSeguimiento', obj: ['seguimiento', 'todo'] },
+      { q: '¿Cómo va la agenda esta semana?', h: 'agenda', obj: ['todo', 'seguimiento', 'conversion'] },
+      { q: '¿Qué ha conseguido esta semana ' + (T.agenteVoz ? T.agenteVoz.replace(/\s*\(.*\)$/, '') : 'el agente de voz') + '?', h: 'voz', obj: ['todo', 'conversion', 'seguimiento'] },
       { q: '¿Qué ha cambiado esta semana?', h: 'cambios', obj: ['todo'] },
       { q: '¿Qué campañas están trayendo ' + (T.clientesReales || 'clientes reales') + '?', h: 'campanas', obj: ['captacion', 'ventas', 'todo'] },
       { q: '¿Dónde está la mayor fuga?', h: 'mayorFuga', obj: ['todo', 'captacion', 'conversion'] },
@@ -87,7 +89,58 @@
   // ---------------------------------------------------------------------------
   // Manejadores deterministas
   // ---------------------------------------------------------------------------
+  function agendaResumen() {
+    const ag = QV.voz.agenda(E());
+    const ll = QV.voz.llamadasDe(E(), 7);
+    const n = function (r) { return ll.filter(function (x) { return x.l.res === r; }).length; };
+    return { citasSemana: ag.total, agendadasPorVoz: ag.voz, asistenciaPct: ag.asistencia == null ? null : Math.round(ag.asistencia * 100), plantones: ag.plantones, plantonesRecuperandose: ag.recuperando, sinConfirmar48h: ag.riesgo.length, huecosLibres: ag.libres.length,
+      llamadasSemana: ll.length, llamadasAgendaron: n('agendo'), llamadasHablaron: n('hablo'), llamadasMasTarde: n('luego'), llamadasNoCogieron: n('nocontesta'), llamadasNoInteresa: n('nointeresa') };
+  }
+  function ultimaLlamada(c) {
+    const l = (c.llamadas || []).filter(function (x) { return x.t <= E().ahora; }).slice(-1)[0];
+    return l ? QV.voz.RES[l.res].txt.toLowerCase() + (l.dur ? ' (' + QV.voz.duracionTxt(l.dur) + ')' : '') + ' ' + M.hace((E().ahora - l.t) / M.MIN) : '';
+  }
+
   const H = {
+    agenda: function () {
+      const T = E().cfg.t, est = E();
+      const ag = QV.voz.agenda(est);
+      const voz = QV.voz.nombreVoz(T);
+      const riesgo = ag.riesgo.filter(function (it) { return it.c; }).map(function (it) { return it.c; });
+      const plant = est.contactos.filter(function (c) { return c.s.noshow && !c.fin; });
+      const out = [
+        metricas([
+          { l: T.Cita + 's esta semana', v: M.num(ag.total) },
+          { l: 'Asistencia', v: ag.asistencia == null ? '—' : M.pct(ag.asistencia) },
+          { l: 'Agendadas por ' + voz, v: M.num(ag.voz) },
+          { l: 'Huecos libres', v: M.num(ag.libres.length) }
+        ]),
+        texto('Esta semana hay **' + M.pl(ag.total, T.cita, T.cita + 's') + '**' + (ag.total ? ', ' + M.pct(ag.voz / ag.total) + ' agendadas por teléfono por ' + voz : '') + '. ' +
+          (ag.plantones ? 'Ha habido **' + M.pl(ag.plantones, 'plantón', 'plantones') + '** y ' + M.pl(ag.recuperando, 'ya se está recuperando', 'ya se están recuperando') + '. ' : 'Sin plantones por ahora. ') +
+          (ag.riesgo.length ? '**' + M.pl(ag.riesgo.length, T.cita + ' sigue', T.cita + 's siguen') + ' sin confirmar** en las próximas 48 horas: son las que más fallan.' : 'Todo lo de las próximas 48 horas está confirmado.'))
+      ];
+      if (riesgo.length) out.push(tarjetas(riesgo, 3));
+      if (plant.length) out.push(texto('Plantones a recuperar: ' + M.unir(plant.map(function (c) { return c.n.split(' ')[0]; })) + '. El agente les propone dos huecos nuevos; no hace falta llamar en frío.'));
+      out.push(accion(ag.libres.length ? (ag.libres.length === 1 ? 'Queda 1 hueco libre' : 'Quedan ' + ag.libres.length + ' huecos libres') + ' esta semana: el agente los ofrece primero a quien está más caliente.' : 'La semana está llena: las nuevas ' + T.cita + 's se ofrecen para la siguiente.'));
+      return out;
+    },
+
+    voz: function () {
+      const T = E().cfg.t;
+      const voz = QV.voz.nombreVoz(T);
+      const ll = QV.voz.llamadasDe(E(), 7);
+      if (!ll.length) return [texto(QV.voz.tituloVoz(T) + ' no ha hecho llamadas esta semana.')];
+      const n = function (r) { return ll.filter(function (x) { return x.l.res === r; }).length; };
+      const cogieron = ll.length - n('nocontesta');
+      const vistos = {};
+      const ult = ll.filter(function (x) { if (vistos[x.c.id]) return false; vistos[x.c.id] = true; return true; });
+      return [
+        metricas([{ l: 'Llamadas', v: M.num(ll.length) }, { l: 'Cogieron', v: M.num(cogieron) }, { l: 'Agendaron', v: M.num(n('agendo')) }]),
+        texto('Esta semana ' + voz + ' ha hecho **' + M.pl(ll.length, 'llamada', 'llamadas') + '** a quien no contestaba por escrito o pidió teléfono. Cogieron ' + cogieron + ' y **' + M.pl(n('agendo'), 'agendó', 'agendaron') + ' ' + T.cita + '** en la misma llamada. ' + (n('luego') ? M.pl(n('luego'), 'pidió', 'pidieron') + ' que le' + (n('luego') > 1 ? 's' : '') + ' llamaran más tarde y la rellamada ya está programada. ' : '') + (n('nocontesta') ? (n('nocontesta') === 1 ? 'El intento sin respuesta sigue' : 'Los ' + n('nocontesta') + ' intentos sin respuesta siguen') + ' por WhatsApp.' : '')),
+        { tipo: 'tabla', cols: ['Nombre', 'Resultado', 'Duración', 'Lo que dijo'], filas: ult.slice(0, 8).map(function (x) { return { id: x.c.id, celdas: [x.c.n, QV.voz.RES[x.l.res].txt, x.l.dur ? QV.voz.duracionTxt(x.l.dur) : '—', (x.l.dijo || [])[0] || '—'] }; }) }
+      ];
+    },
+
     trabajar: function () {
       const T = E().cfg.t;
       const at = QV.atencion();
@@ -98,7 +151,7 @@
       at.slice(3).forEach(function (c) { tipos[c.x.nba.quien] = (tipos[c.x.nba.quien] || 0) + 1; });
       const reparto = Object.keys(tipos).map(function (k) { return tipos[k] + ' con ' + k.toLowerCase(); });
       return [
-        texto('Hay **' + plural(at.length, T.oportunidades.replace(/s$/, ''), T.oportunidades) + ' que requieren atención** (' + M.euros(suma(at)) + ' en juego). Yo empezaría por estas 3.'),
+        texto('Hay **' + plural(at.length, T.oportunidades.replace(/s$/, ''), T.oportunidades) + ' que requieren atención**' + (suma(at) ? ' (' + M.euros(suma(at)) + ' en juego)' : '') + '. Yo empezaría por estas 3.'),
         tarjetas(at, 3),
         texto(resto > 0 ? 'Las otras ' + resto + ' ya las está moviendo el sistema: ' + M.unir(reparto) + '. ' + (hum.length ? 'De todas, **' + hum.length + ' necesitan a una persona** hoy.' : '') : (hum.length ? '**' + hum.length + ' necesitan a una persona** hoy.' : ''))
       ];
@@ -342,6 +395,8 @@
 
   // Parecido entre la pregunta libre y las sugeridas (para la respuesta de respaldo)
   const CLAVES = [
+    [/agenda|calendario|citas?\b|plant[oó]n|huecos?|asistencia|no.?show/, 'agenda'],
+    [/llam|voz|tel[eé]fono|raquel/, 'voz'],
     [/fuga|perd|escap|se nos va|se pierde/, 'fugas'],
     [/mayor|más grande|principal/, 'mayorFuga'],
     [/hoy|trabajar|empez|prioriz|primero/, 'trabajar'],
@@ -376,13 +431,14 @@
   // Resumen compacto del estado para Claude (solo datos simulados de la demo)
   function contexto() {
     const est = E(), cfg = est.cfg, T = cfg.t, m = M.mes(cfg);
+    if (cfg.real) return contextoReal();
     return {
       sector: cfg.nombre, empresa: est.empresa || '', objetivo: est.objetivo, hora: M.hora(est.ahora),
       terminos: { contacto: T.contacto, contactos: T.contactos, venta: T.venta, ventas: T.ventas, cita: T.cita, comercial: T.comercial, producto: T.producto },
       recorrido: cfg.recorrido.map(function (e) { return { etapa: e.txt, ultimos30dias: m.tot[e.id] }; }),
       fugas: M.fugas(cfg).map(function (f) { return { de: f.de.txt, a: f.a.txt, hoy: Math.round(f.conv * 100), bienHecho: Math.round(f.ref * 100), recuperablesMes: f.recuperables }; }),
       campanas: cfg.campanas.map(function (c) { return { nombre: c.canal + ' · ' + c.nombre, inversion: c.inversion, entran: c.embudo[cfg.recorrido[1].id], ventas: c.embudo[cfg.ventaEtapa], ticket: c.ticket || cfg.ticket }; }),
-      kpis: QV.kpis().map(function (k) { return k.l + ': ' + k.v; }),
+      kpis: QV.kpis().map(function (k) { return k.l + ': ' + k.v; }), agenda: agendaResumen(),
       contactos: est.contactos.map(function (c) {
         const x = c.x;
         const u = c.conv.filter(function (mm) { return mm.de === 'c'; }).slice(-1)[0];
@@ -392,7 +448,30 @@
           porque: x.porque, siguienteAccion: x.nba.accion, quien: x.nba.quien, porQueAccion: x.nba.por,
           senales: x.senales.map(function (s) { return M.TIPOS_SENAL[s.tipo].txt; }), requiereAtencion: x.atencion,
           altaHace: M.hace(x.k.creado), ultimaActividad: M.hace(x.k.act), sinSeguimiento: M.duracion(x.k.toque),
-          masAdelante: c.s.luego ? (c.s.luegoTxt || c.s.luego) : '', ultimoMensaje: u ? u.texto : ''
+          masAdelante: c.s.luego ? (c.s.luegoTxt || c.s.luego) : '', ultimoMensaje: u ? u.texto : '',
+          llamada: ultimaLlamada(c), cita: c.s.tCita ? M.fechaCorta(c.s.tCita, est.ahora) + (c.s.citaOk ? ' (confirmada)' : ' (sin confirmar)') : ''
+        };
+      })
+    };
+  }
+
+  // Modo real: a Claude solo va lo necesario. Sin empresa, ciudad, correo,
+  // teléfono ni texto de los mensajes; el nombre, solo nombre e inicial.
+  function contextoReal() {
+    const est = E(), cfg = est.cfg, T = cfg.t;
+    return {
+      sector: 'Qualivo (datos reales)', empresa: 'Qualivo', objetivo: 'todo', hora: M.hora(est.ahora),
+      terminos: { contacto: T.contacto, contactos: T.contactos, venta: T.venta, ventas: T.ventas, cita: T.cita, comercial: T.comercial, producto: T.producto },
+      recorrido: [], fugas: M.fugas(cfg).map(function (f) { return { de: f.de.txt, a: f.a.txt, hoy: Math.round(f.conv * 100), bienHecho: Math.round(f.ref * 100) }; }),
+      campanas: [], kpis: QV.kpis().map(function (k) { return k.l + ': ' + k.v; }), agenda: agendaResumen(),
+      contactos: est.contactos.map(function (c) {
+        const x = c.x, p = c.n.split(/\s+/);
+        return {
+          id: c.id, nombre: p[0] + (p[1] ? ' ' + p[1].charAt(0) + '.' : ''), sector: c.f.sector || '', nivel: c.f.nivel || '', inversion: c.f.inv || '', potente: !!c.f.potente,
+          etapa: c.etapaTxt || cfg.etapaTxt(c.etapa), estado: c.fin || 'abierto', encaje: x.fit, interes: x.comp, intencion: x.int, riesgo: x.riesgo, prioridad: x.prio,
+          probabilidad: probabilidad(c), siguienteAccion: x.nba.accion, quien: x.nba.quien, senales: x.senales.map(function (s) { return M.TIPOS_SENAL[s.tipo].txt; }),
+          requiereAtencion: x.atencion, altaHace: M.hace(x.k.creado), ultimaActividad: M.hace(x.k.act), sinSeguimiento: M.duracion(x.k.toque),
+          esperaRespuestaNuestra: c.s.esperaDesde != null ? M.duracion(c.s.esperaDesde) : '', cita: c.s.tCita ? M.fechaCorta(c.s.tCita, est.ahora) : '', llamada: ultimaLlamada(c)
         };
       })
     };
@@ -410,9 +489,9 @@
     };
     const reloj = setTimeout(respaldo, TIEMPO_MAX);
     const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    fetch('/api/intelligence-copilot', {
+    fetch('/api/intelligence-copilot/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl ? ctl.signal : undefined,
-      body: JSON.stringify({ pregunta: txt, contexto: contexto() })
+      body: JSON.stringify({ pregunta: txt, modo: E().cfg.real ? 'real' : 'demo', contexto: contexto() })
     }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (hecho) return;
       if (!d || !Array.isArray(d.bloques) || !d.bloques.length) return respaldo();
