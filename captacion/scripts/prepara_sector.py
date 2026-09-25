@@ -47,10 +47,17 @@ ROL_MALO = re.compile(r"^(no-?reply|noreply|postmaster|webmaster|abuse|privacy|"
 #
 # Asesorias era 73% genericos y reboto al 22,7%, lo que obligo a pausarla.
 # Formacion es 94% personales y lleva 80 envios con cero rebotes.
-GENERICO = re.compile(r"^(info|contacto|contacte|hola|admin|administracio[nó]|"
-                      r"recepcio[nó]|clinica|cl[ií]nica|cita|citas|comercial|"
-                      r"ventas|general|correo|mail|buzon|oficina|secretaria|"
-                      r"atencion|atencioncliente|consultas|asesoria|gestoria)@",
+# Ampliada el 25-sep: al reprocesar las 400 fichas de Maps, "paciente@",
+# "alumni@" y "hey@" se colaron como si fueran personas y no lo son. El sector
+# manda en esto: en una clinica "paciente@" es el buzon general, y en formacion
+# lo son "alumni@" y "matriculas@".
+GENERICO = re.compile(r"^(info|contacto|contacte|contacta|escribenos|hola|hey|"
+                      r"admin|administracio[nó]|recepcio[nó]|clinica|cl[ií]nica|"
+                      r"cita|citas|reservas|comercial|ventas|general|correo|mail|"
+                      r"buzon|oficina|secretaria|atencion|atencioncliente|"
+                      r"consultas|asesoria|gestoria|paciente|pacientes|alumni|"
+                      r"alumno|alumnos|matricula|matriculas|admisiones|soporte|"
+                      r"ayuda|team|equipo|hello|contact|support)@",
                       re.I)
 
 
@@ -91,12 +98,16 @@ PEGOTE = re.compile(r"^(?:nbsp|zwnj|zwsp|ensp|emsp|thinsp|"
 
 
 def despega(e):
-    """Quita entidades HTML pegadas por delante y normaliza."""
+    """Quita entidades HTML y espacios codificados pegados por delante."""
     e = html.unescape(e or "").strip().lower()
-    e = re.sub(r"^[\s.,;:<>()\[\]\"'\\/]+", "", e)
     previo = None
     while previo != e:
         previo = e
+        # %20 y compania: el correo venia dentro de un href con espacios
+        # codificados. El 25-sep se colo "%20info@miquelrevert..." hasta la
+        # lista de candidatos, y esa direccion no existe.
+        e = re.sub(r"^(?:%20|%09|%0a|%0d|%c2%a0)+", "", e)
+        e = re.sub(r"^[\s.,;:<>()\[\]\"'\\/]+", "", e)
         e = PEGOTE.sub("", e)
     return e.strip(" .,;:")
 BASURA = re.compile(r"@(sentry|wix|wordpress|example|domain|godaddy|squarespace|"
