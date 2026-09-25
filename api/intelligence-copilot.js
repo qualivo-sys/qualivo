@@ -18,7 +18,7 @@
 const MODELO = process.env.ANTHROPIC_MODEL || 'claude-opus-5';
 const SESION = require('./_intel-sesion.js');
 // Modo real: solo estos campos de cada contacto llegan a Claude (aunque el navegador mande más)
-const CAMPOS_REAL = ['id', 'nombre', 'sector', 'nivel', 'inversion', 'potente', 'etapa', 'estado', 'encaje', 'interes', 'intencion', 'riesgo', 'prioridad', 'probabilidad', 'siguienteAccion', 'quien', 'senales', 'requiereAtencion', 'altaHace', 'ultimaActividad', 'sinSeguimiento', 'esperaRespuestaNuestra', 'cita'];
+const CAMPOS_REAL = ['id', 'nombre', 'sector', 'nivel', 'inversion', 'potente', 'etapa', 'estado', 'encaje', 'interes', 'intencion', 'riesgo', 'prioridad', 'probabilidad', 'siguienteAccion', 'quien', 'senales', 'requiereAtencion', 'altaHace', 'ultimaActividad', 'sinSeguimiento', 'esperaRespuestaNuestra', 'cita', 'llamada'];
 const MAX_POR_IP = Number(process.env.INTELLIGENCE_MAX_IP || 30);       // al día
 const MAX_TOTAL = Number(process.env.INTELLIGENCE_MAX_DIA || 400);      // al día, por instancia
 const PLAZO_MS = 8500;
@@ -92,12 +92,12 @@ function sistema(ctx) {
     'Termina SIEMPRE llamando a la herramienta «responder». Si el estado de abajo ya basta, llama a «responder» directamente, sin otras herramientas: la respuesta tiene que llegar en pocos segundos.',
     '',
     'ESTADO (hora ' + ctx.hora + '):',
-    JSON.stringify({ recorrido: ctx.recorrido, fugas: ctx.fugas, campanas: ctx.campanas, kpis: ctx.kpis }),
+    JSON.stringify({ recorrido: ctx.recorrido, fugas: ctx.fugas, campanas: ctx.campanas, kpis: ctx.kpis, agendaSemana: ctx.agenda || null }),
     'CONTACTOS (resumen):',
     JSON.stringify((ctx.contactos || []).map(function (c) {
-      return [c.id, c.nombre, c.empresa || c.rol, c.producto, c.etapa, c.valor, c.estado, c.prioridad, 'E' + c.encaje + '/A' + c.interes + '/I' + c.intencion + '/R' + c.riesgo, c.siguienteAccion, (c.senales || []).join('|'), c.masAdelante || ''];
+      return [c.id, c.nombre, c.empresa || c.rol, c.producto, c.etapa, c.valor, c.estado, c.prioridad, 'E' + c.encaje + '/A' + c.interes + '/I' + c.intencion + '/R' + c.riesgo, c.siguienteAccion, (c.senales || []).join('|'), c.masAdelante || '', c.llamada || '', c.cita || ''];
     })),
-    'Columnas: id, nombre, empresa o rol, producto, etapa, valor €, estado, prioridad, Encaje/Actividad/Intención/Riesgo, siguiente acción, señales, «más adelante».'
+    'Columnas: id, nombre, empresa o rol, producto, etapa, valor €, estado, prioridad, Encaje/Actividad/Intención/Riesgo, siguiente acción, señales, «más adelante», última llamada del agente de voz, cita.'
   ].join('\n');
 }
 
@@ -182,6 +182,9 @@ module.exports = async function (req, res) {
   if (real) {
     ctx.contactos = ctx.contactos.map(function (c) { const o = {}; CAMPOS_REAL.forEach(function (k) { if (c[k] !== undefined) o[k] = c[k]; }); return o; });
     ctx.campanas = []; ctx.recorrido = []; ctx.real = true;
+    // De la agenda solo pasan números
+    const ag = ctx.agenda && typeof ctx.agenda === 'object' ? ctx.agenda : {};
+    ctx.agenda = {}; Object.keys(ag).forEach(function (k) { if (typeof ag[k] === 'number') ctx.agenda[k] = ag[k]; });
   }
 
   const inicio = Date.now();

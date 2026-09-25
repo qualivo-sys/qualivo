@@ -86,7 +86,13 @@
       return [hace(m.t, ahora), m.de, m.canal, m.texto + extra];
     });
     const ev = [];
-    if (s.voz1 && s.vozCuando) ev.push([hace(s.vozCuando, ahora), 'sistema', 'Llamada de Raquel' + (s.vozRes ? ' · ' + s.vozRes : '')]);
+    // La llamada de Raquel, tal cual la dicen las etiquetas (sin duración ni resumen: GHL no los guarda)
+    const llamadas = [];
+    if (s.voz1 && s.vozCuando) {
+      const res = s.vozRes === 'completada' ? (s.agendado ? 'agendo' : 'hablo') : s.vozRes ? 'nocontesta' : null;
+      if (res) llamadas.push([hace(s.vozCuando, ahora), 0, res, s.vozRes === 'completada' ? 'Llamada completada' + (s.agendado ? '; tiene la reunión reservada.' : '.') : s.vozRes === 'fallo' ? 'La llamada falló.' : 'No cogió.', []]);
+      else ev.push([hace(s.vozCuando, ahora), 'sistema', 'Llamada de Raquel programada']);
+    }
     if (s.wa1Fallido) ev.push([hace(r.creado, ahora) - 1, 'sistema', 'Primer WhatsApp fallido']);
     if (s.manualWa) ev.push([hace(r.creado, ahora) - 2, 'sistema', 'WhatsApp a mano (Maikel)']);
     if (s.manualVoz) ev.push([hace(r.creado, ahora) - 3, 'sistema', 'Llamada a mano (Maikel)']);
@@ -107,7 +113,7 @@
         wa1: s.wa1, wa1Fallido: s.wa1Fallido, wa2: s.wa2, voz1: s.voz1, vozRes: s.vozRes, manualWa: s.manualWa, manualVoz: s.manualVoz,
         agendado: s.agendado, actFin: s.actFin, primeraRespuestaMin: s.primeraRespuestaMin, esperaDesde: s.esperaDesde ? hace(s.esperaDesde, ahora) : null
       },
-      conv: conv, ev: ev
+      conv: conv, ev: ev, llamadas: llamadas
     };
   }
 
@@ -155,7 +161,7 @@
     }
     const resp = mediana(leads.map(function (r) { return r.s.primeraRespuestaMin; }));
     const cfg = Object.assign({}, base, {
-      id: 'qualivoReal', nombre: 'Qualivo · datos reales', real: true, _ok: false,
+      id: 'qualivoReal', nombre: 'Qualivo · datos reales', real: true, _ok: false, vozAuto: false,
       historias: null, historiaDefecto: null,
       campanas: campanas,
       mesDatos: { respuestaAntes: resp || 0, respuestaAhora: resp || 0, agendadas: embudoDe(leads).diagnostico },

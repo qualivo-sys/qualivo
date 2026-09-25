@@ -116,6 +116,8 @@
   function ultimoDe(c, de) { const l = c.conv.filter(function (m) { return m.de === de; }); return l[l.length - 1] || null; }
   function ultimoMsg(c) { return c.conv[c.conv.length - 1] || null; }
   function contesto(c) { return c.conv.filter(function (m) { return m.de === 'c'; }).length; }
+  function llamadas(c, res) { return (c.llamadas || []).filter(function (l) { return !res || l.res === res; }); }
+  function hablo(c) { return (c.llamadas || []).filter(function (l) { return l.dur >= 45 && l.res !== 'nointeresa'; }); }
   function canalTxt(canal) { return canal === 'wa' ? 'WhatsApp' : canal === 'email' ? 'correo' : canal === 'tel' ? 'teléfono' : canal === 'voz' ? 'llamada' : canal; }
 
   const R = {
@@ -127,7 +129,8 @@
       [function (c) { return (c.s.visitas || 0) > 0 && c.s.visitas < 3; }, 10, function (c, k, T) { return 'ha visitado ' + T.paginaVisitas; }],
       [function (c) { return (c.s.emails || 0) >= 2; }, 10, function (c) { return 'ha abierto ' + c.s.emails + ' correos'; }],
       [function (c) { return contesto(c) > 0; }, 20, function (c) { const u = c.conv.filter(function (m) { return m.de === 'c'; }); return 'respondió por ' + canalTxt(u[u.length - 1].canal); }],
-      [function (c) { return contesto(c) >= 3; }, 10, function () { return 'conversación de varios mensajes'; }]
+      [function (c) { return contesto(c) >= 3; }, 10, function () { return 'conversación de varios mensajes'; }],
+      [function (c) { return hablo(c).length > 0; }, 16, function (c, k, T) { const l = hablo(c).slice(-1)[0]; return 'habló ' + Math.max(1, Math.round(l.dur / 60)) + ' min por teléfono con ' + (T.agenteVoz || 'el agente de voz').replace(/\s*\(.*\)$/, ''); }]
     ],
     intencion: [
       [function (c) { return !!c.s.precio; }, 20, function (c, k, T) { return T.txtPrecio || 'preguntó por el precio'; }],
@@ -140,7 +143,9 @@
       [function (c, k) { const u = ultimoDe(c, 'c'); return u && (k.ahora - u.t) / MIN < 1440; }, 12, function (c, k) { return 'escribió ' + hace((k.ahora - ultimoDe(c, 'c').t) / MIN); }],
       [function (c, k) { return k.creado < 180 && !c.fin; }, 14, function (c, k) { return 'acaba de pedir información (' + hace(k.creado) + ')'; }],
       [function (c) { return !!c.s.luego; }, -18, function (c) { return 'dijo «más adelante» (' + c.s.luego + ')'; }],
-      [function (c) { return c.s.ppto === 'no'; }, -16, function () { return 'no tiene presupuesto ahora'; }]
+      [function (c) { return c.s.ppto === 'no'; }, -16, function () { return 'no tiene presupuesto ahora'; }],
+      [function (c) { return llamadas(c, 'agendo').length > 0; }, 6, function () { return 'cualificado por teléfono'; }],
+      [function (c) { return llamadas(c, 'nointeresa').length > 0; }, -28, function () { return 'dijo por teléfono que no le interesa'; }]
     ],
     riesgo: [
       [function (c, k) { return contesto(c) === 0 && k.creado > 2880 && !c.fin; }, 32, function (c, k) { return 'no responde desde hace ' + duracion(k.creado); }],
@@ -152,7 +157,8 @@
       [function (c, k) { return c.s.tProp != null && c.s.propVista > 0 && k.toque > 4320 && !c.fin; }, 24, function (c, k, T) { return T.propuesta + ' vista y sin respuesta'; }],
       [function (c, k) { return k.act > 20160 && !c.fin; }, 16, function (c, k) { return 'sin actividad desde hace ' + duracion(k.act); }],
       [function (c, k) { return c.s.tCita != null && !c.s.citaOk && k.cita < 2880 && k.cita > 0; }, 22, function (c, k, T) { return T.cita + ' ' + dentroDe(k.cita) + ' sin confirmar'; }],
-      [function (c) { return !!c.s.luego; }, 10, function () { return 'decisión aplazada'; }]
+      [function (c) { return !!c.s.luego; }, 10, function () { return 'decisión aplazada'; }],
+      [function (c) { return contesto(c) === 0 && llamadas(c, 'nocontesta').length >= 2 && !c.fin; }, 10, function (c) { return 'no coge el teléfono (' + llamadas(c, 'nocontesta').length + ' llamadas)'; }]
     ]
   };
 
@@ -250,6 +256,9 @@
       return { id: 'comercial', accion: 'Avisar ' + al(T.comercial), quien: T.Comercial, tipo: 'humano', estado: 'humano',
         por: 'Está listo para hablar con una persona: ' + unir(x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt; })) + '. El agente ya ha hecho la parte que no necesita a nadie; ahora le toca a ' + T.comercial + ', con todo el contexto.' };
     }
+    if (llamadas(c, 'nointeresa').length && !c.fin) {
+      return { id: 'nada', accion: 'No insistir', quien: 'Sistema', tipo: 'nada', estado: 'cerrado', por: 'Dijo por teléfono que no le interesa. Se respeta: queda guardado por si vuelve a dar señales.' };
+    }
     if (x.fit < 25) {
       return { id: 'cerrar', accion: 'Respuesta amable y cerrar', quien: 'Automatización', tipo: 'auto', estado: 'cerrado',
         por: 'No encaja (' + ((x.fitM.filter(function (m) { return m.pts < 0; })[0] || {}).txt || 'perfil fuera de lo que buscáis') + '). Se le contesta con amabilidad y no se gasta tiempo del equipo.' };
@@ -285,7 +294,7 @@
         por: (c.s.propVista ? 'Ha abierto ' + T.propuesta + ' ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : T.Propuesta + ' sigue sin abrir') + ' y nadie le ha escrito en ' + duracion(k.toque) + '. ' + (c.valor >= (T.valorAlto || 5000) ? 'Vale ' + euros(c.valor) + ': mejor una llamada ' + (/^el /.test(T.comercial) ? 'del ' + T.comercial.slice(3) : 'de ' + T.comercial) + ' que un mensaje automático.' : 'Un mensaje del agente con la duda más habitual lo reactiva sin presionar.') };
     }
     if (k.creado < 90 && contesto(c) === 0) {
-      if (c.canal === 'tel') return { id: 'voz', accion: T.llamadaVoz || 'Llamada de la agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + ') y dejó el teléfono como forma de contacto. Llamar en los primeros 5 minutos multiplica las opciones de hablar con él.' };
+      if (c.canal === 'tel') return { id: 'voz', accion: T.llamadaVoz || 'Llamada del agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + ') y dejó el teléfono como forma de contacto. Llamar en los primeros 5 minutos multiplica las opciones de hablar con él.' };
       return { id: 'wa', accion: 'WhatsApp del agente', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + '). La respuesta en el minuto uno, con sus palabras, es donde más ' + T.contactos + ' se pierden.' };
     }
     if (c.s.luego) {
@@ -306,7 +315,9 @@
     }
     if (contesto(c) === 0 && k.creado >= 90) {
       if ((c.s.visitas || 0) >= 2) return { id: 'caso', accion: 'Enviar ' + T.casoExito + ' por correo', quien: 'Automatización', tipo: 'auto', estado: 'esperando', por: 'No contesta a los mensajes pero ha vuelto a mirar ' + T.paginaVisitas + '. Le interesa y todavía no se fía: un caso parecido al suyo pesa más que otro mensaje.' };
-      return { id: 'voz', accion: T.llamadaVoz || 'Llamada de la agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'No ha contestado al WhatsApp (' + ((c.s.intentos || 1)) + (c.s.intentos === 1 ? ' intento' : ' intentos') + '). La cadencia pasa a voz dentro de su franja: mucha gente no lee, pero coge el teléfono.' };
+      const nc = llamadas(c, 'nocontesta').length;
+      if (nc) return { id: 'voz', accion: 'Rellamada en otra franja', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'No contesta al WhatsApp y ' + (nc === 1 ? 'no cogió la primera llamada' : 'no ha cogido ' + nc + ' llamadas') + '. La siguiente va en otra franja horaria; si tampoco coge, un último WhatsApp y se le deja tranquilo.' };
+      return { id: 'voz', accion: T.llamadaVoz || 'Llamada del agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'No ha contestado al WhatsApp ('+ ((c.s.intentos || 1)) + (c.s.intentos === 1 ? ' intento' : ' intentos') + '). La cadencia pasa a voz dentro de su franja: mucha gente no lee, pero coge el teléfono.' };
     }
     if (contesto(c) === 0 && k.creado >= 20160) {
       return { id: 'nada', accion: 'No hacer nada', quien: 'Sistema', tipo: 'nada', estado: 'cerrado', por: 'Tres intentos sin respuesta. Insistir más cuesta y molesta; queda guardado por si vuelve a dar señales.' };
@@ -396,6 +407,10 @@
       ev.push({ t: m.t, tipo: tipo, texto: canal + (m.de === 'c' ? ' recibido de ' + quien : ' enviado · ' + quien), detalle: m.texto });
     });
     (c.ev || []).forEach(function (e) { ev.push({ t: e.t, tipo: e.tipo, texto: e.texto }); });
+    const RES = { agendo: 'agendó ' + T.laCita, hablo: 'habló', luego: 'pidió que le llamaran más tarde', nocontesta: 'no contestó', nointeresa: 'no le interesa' };
+    (c.llamadas || []).forEach(function (l) {
+      ev.push({ t: l.t, tipo: 'voz', texto: 'Llamada ' + (T.agenteVoz ? 'de ' + T.agenteVoz.replace(/\s*\(.*\)$/, '') : 'del agente de voz') + (l.dur ? ' · ' + (l.dur < 60 ? l.dur + ' s' : Math.round(l.dur / 60) + ' min') : '') + ' · ' + (RES[l.res] || l.res), nota: l.resumen });
+    });
     if (c.s.tProp != null) ev.push({ t: c.s.tProp, tipo: 'sistema', texto: T.Propuesta + ' enviada · ' + euros(c.valor) });
     ev.sort(function (a, b) { return a.t - b.t; });
     return ev.filter(function (e) { return e.t <= ahora; });
@@ -476,6 +491,6 @@
   QV.motor = {
     preparar: preparar, evaluar: evaluar, evaluarTodos: evaluarTodos, timeline: timeline, mes: mes, fugas: fugas,
     pl: pl, hace: hace, duracion: duracion, duracionLarga: duracionLarga, dentroDe: dentroDe, hora: hora, fechaCorta: fechaCorta, euros: euros, num: num, pct: pct,
-    unir: unir, al: al, nombresSenal: nombresSenal, contesto: contesto, ultimoMsg: ultimoMsg, ultimoDe: ultimoDe, desde: desde, PRIO: PRIO, ESTADOS: ESTADOS, TIPOS_SENAL: TIPOS_SENAL, MIN: MIN, nbaGenerica: nbaGenerica
+    unir: unir, al: al, llamadas: llamadas, nombresSenal: nombresSenal, contesto: contesto, ultimoMsg: ultimoMsg, ultimoDe: ultimoDe, desde: desde, PRIO: PRIO, ESTADOS: ESTADOS, TIPOS_SENAL: TIPOS_SENAL, MIN: MIN, nbaGenerica: nbaGenerica
   };
 })();
