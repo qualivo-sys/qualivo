@@ -14,11 +14,12 @@ Todos los datos son ficticios. La demo no envía mensajes, no llama y no toca GH
 /intelligence/?sector=inmobiliaria  ·  ?sector=reformas  ·  ?sector=otro
 /intelligence/?sector=marketing&empresa=NOMBRE      (agencia que capta sus propios clientes)
 /intelligence/?sector=agencias&empresa=NOMBRE       (vista para agencias: su cartera de clientes)
+/intelligence/?sector=qualivo&empresa=Qualivo       (Qualivo usando su propio sistema; datos inventados)
 ```
 
 Parámetros:
 
-- `sector`: formacion, saas, b2b, clinica, inmobiliaria, reformas, marketing, agencias u otro. Sin él sale la pantalla de inicio.
+- `sector`: formacion, saas, b2b, clinica, inmobiliaria, reformas, marketing, agencias, qualivo u otro. Sin él sale la pantalla de inicio.
 - `empresa`: aparece en la cabecera («Intelligence System · Skolae») y en el Copilot.
 - `objetivo`: captacion, conversion, seguimiento, ventas, retencion, expansion o todo. Ordena las preguntas sugeridas y resalta los KPI.
 - `historia`: la historia del modo demo, si el sector tiene varias (formación: `empresa` o `alumno`).

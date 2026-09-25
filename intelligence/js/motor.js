@@ -285,7 +285,7 @@
         por: (c.s.propVista ? 'Ha abierto ' + T.propuesta + ' ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : T.Propuesta + ' sigue sin abrir') + ' y nadie le ha escrito en ' + duracion(k.toque) + '. ' + (c.valor >= (T.valorAlto || 5000) ? 'Vale ' + euros(c.valor) + ': mejor una llamada ' + (/^el /.test(T.comercial) ? 'del ' + T.comercial.slice(3) : 'de ' + T.comercial) + ' que un mensaje automático.' : 'Un mensaje del agente con la duda más habitual lo reactiva sin presionar.') };
     }
     if (k.creado < 90 && contesto(c) === 0) {
-      if (c.canal === 'tel') return { id: 'voz', accion: 'Llamada de la agente de voz', quien: 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + ') y dejó el teléfono como forma de contacto. Llamar en los primeros 5 minutos multiplica las opciones de hablar con él.' };
+      if (c.canal === 'tel') return { id: 'voz', accion: T.llamadaVoz || 'Llamada de la agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + ') y dejó el teléfono como forma de contacto. Llamar en los primeros 5 minutos multiplica las opciones de hablar con él.' };
       return { id: 'wa', accion: 'WhatsApp del agente', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando', por: 'Acaba de entrar (' + hace(k.creado) + '). La respuesta en el minuto uno, con sus palabras, es donde más ' + T.contactos + ' se pierden.' };
     }
     if (c.s.luego) {
@@ -306,7 +306,7 @@
     }
     if (contesto(c) === 0 && k.creado >= 90) {
       if ((c.s.visitas || 0) >= 2) return { id: 'caso', accion: 'Enviar ' + T.casoExito + ' por correo', quien: 'Automatización', tipo: 'auto', estado: 'esperando', por: 'No contesta a los mensajes pero ha vuelto a mirar ' + T.paginaVisitas + '. Le interesa y todavía no se fía: un caso parecido al suyo pesa más que otro mensaje.' };
-      return { id: 'voz', accion: 'Llamada de la agente de voz', quien: 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'No ha contestado al WhatsApp (' + ((c.s.intentos || 1)) + (c.s.intentos === 1 ? ' intento' : ' intentos') + '). La cadencia pasa a voz dentro de su franja: mucha gente no lee, pero coge el teléfono.' };
+      return { id: 'voz', accion: T.llamadaVoz || 'Llamada de la agente de voz', quien: T.agenteVoz || 'Agente de voz', tipo: 'voz', estado: 'trabajando', por: 'No ha contestado al WhatsApp (' + ((c.s.intentos || 1)) + (c.s.intentos === 1 ? ' intento' : ' intentos') + '). La cadencia pasa a voz dentro de su franja: mucha gente no lee, pero coge el teléfono.' };
     }
     if (contesto(c) === 0 && k.creado >= 20160) {
       return { id: 'nada', accion: 'No hacer nada', quien: 'Sistema', tipo: 'nada', estado: 'cerrado', por: 'Tres intentos sin respuesta. Insistir más cuesta y molesta; queda guardado por si vuelve a dar señales.' };
@@ -390,7 +390,7 @@
       ev.push({ t: t0, tipo: 'form', texto: 'Formulario enviado · ' + c.prod });
     }
     c.conv.forEach(function (m) {
-      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? 'Agente' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
+      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? 'Agente' : m.de === 'v' ? (T.agenteVoz || 'Agente de voz') : 'Equipo';
       const tipo = m.de === 'c' ? 'respuesta' : 'sistema';
       const canal = m.canal === 'wa' ? 'WhatsApp' : m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal;
       ev.push({ t: m.t, tipo: tipo, texto: canal + (m.de === 'c' ? ' recibido de ' + quien : ' enviado · ' + quien), detalle: m.texto });
