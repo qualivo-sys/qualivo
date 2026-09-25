@@ -601,3 +601,34 @@ baja). Los 80 que siguen dentro de la cadencia de 9 días no, porque Raquel
 les va a volver a llamar (queja de agosto). El outbound frío y la base
 antigua no, porque nunca pidieron recibir correos nuestros. El envío
 automático queda pendiente del sí de Maikel con la audiencia elegida.
+
+## Viernes 25 de septiembre de 2026
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/coste-por-lead/ («Coste por lead: el número que te engaña si lo miras solo»). Dato real: anuncios del 18 al 22-sep por sector (brief de la semana 38). Reformas y formación salen casi al mismo coste por lead (10,00 € y 10,85 €), pero formación sacó cinco citas y reformas dos, así que la cita cuesta unos 17 € en uno y unos 45 € en el otro. Caso EAC como prueba de medir hasta la venta. Tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+- **Reorientado:** `blog/como-captar-clientes/`. Los dos últimos párrafos del paso 5 llevan ahora el dato del coste por lead contra el coste por cita, con enlace al artículo nuevo. La llamada a la acción es un solo botón al diagnóstico. dateModified a 25-sep.
+
+### Borradores (sin publicar)
+
+- **Viernes, tesis contraria:** «Una automatización que falla en silencio sale más cara que no tenerla». Imagen `content/infografias/2026-09-25/falla-en-silencio.png`, texto de LinkedIn y pie de Instagram en `content/borradores/2026-09-25-tesis-falla-en-silencio.md`. Dato: el primer mensaje automático a los contactos nuevos estuvo casi dos días sin salir (22 a 24-sep) con la etiqueta de «enviado» puesta, y lo vio Maikel por una captura (daily de Growth del 24-sep). Se deja fuera, a propósito, que el mensaje es un WhatsApp (regla del 663) y el mensaje cruzado a otro contacto (datos de un tercero).
+
+### Decisiones que dejo tomadas
+
+- Hoy no toca capítulo de newsletter (solo los miércoles). La de plantones sigue en la plantilla de GHL, sin enviar.
+- La tesis sale con el fallo propio porque es lo que la hace creíble. El arreglo va detrás, con una regla que cualquiera puede aplicar sin tener agentes: «no le preguntes si lo hizo, mira si pasó».
+
+### Descartes
+
+- Un artículo sobre «cuánto cuesta un lead en clínicas». Con cuatro leads y una cita que entró por la web, no por el anuncio, no da para una cifra por sector que se sostenga. En el artículo de hoy clínicas aparece solo en la tabla.
+
+### Pendiente de Maikel
+
+1. Newsletter de plantones: ¿se envía a los 22 (cadencia terminada, sin cita, sin baja)? ¿La mandas tú desde GHL o la mando yo con tu ok?
+2. ¿Quito el «5 de 9» de los artículos del 23 y 24-sep y del borrador de bandera roja? Recomiendo que sí, por tu regla del 24-sep.
+3. LinkedIn sigue en pausa. Hay tres piezas listas (bandera roja, «¿eres una máquina?», falla en silencio).
+4. Borradores de Gmail para Betlem y Patrizia, esperando tu envío. Falta confirmar la hora de Renato y cancelar la reserva duplicada de Armando.
+
+### Hipótesis
+
+- El coste por cita separa mejor los sectores que el coste por lead. Lo comprobaré con la semana 39 cuando haya más citas por sector.
