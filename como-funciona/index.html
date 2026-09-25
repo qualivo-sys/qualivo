@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo funciona Qualivo · Mira qué pasa con cada cliente que se te escapa</title>
+<meta name="description" content="Qualivo conecta tus anuncios, tu WhatsApp y tu CRM: responde en dos minutos, sigue a cada contacto y te avisa cuando alguien está listo para hablar contigo. Míralo funcionando.">
+<link rel="canonical" href="https://qualivo.io/como-funciona/">
+<!-- Borrador del 25-sep-2026: fuera de Google y sin enlazar hasta que Maikel lo apruebe -->
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Mira qué pasa con cada cliente que se te escapa">
+<meta property="og:description" content="Responde en dos minutos, sigue a cada contacto y te avisa cuando alguien está listo para hablar contigo. Míralo funcionando.">
+<meta property="og:image" content="https://qualivo.io/como-funciona/img/poster.jpg">
+<link rel="icon" href="/assets/img/favicon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --tinta:#101319; --negro:#08090C; --crema:#FAF7F0; --blanco:#FFFFFF;
+  --naranja:#0E7C74; --naranja-claro:#27BDB1; --amarillo:#F4CC38; /* el acento pasa del naranja al verde de marca (16-sep) */
+  --teal:#0E7C74; --teal-claro:#27BDB1; --lila:#EFECFB;
+  --gris:#5A5E66; --gris-claro:#7A7C82;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(56px,8vw,104px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1}
+h1{font-size:clamp(38px,7.2vw,80px)}
+h2{font-size:clamp(30px,5.4vw,56px);letter-spacing:-.032em;line-height:1.02}
+h3{font-size:clamp(20px,3vw,26px);letter-spacing:-.02em;line-height:1.15}
+p{font-size:clamp(16.5px,2.2vw,19px)}
+.na{color:var(--naranja)} .am{color:var(--amarillo)} .te{color:var(--teal-claro)}
+
+/* barra fina superior, sin menú: una sola cosa que hacer */
+.top{background:var(--negro);color:#fff;padding:14px 0;font-size:14px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top img{height:22px;width:auto}
+.top span{color:#9AA2AE}
+.top b{color:var(--amarillo);font-weight:700}
+
+/* hero */
+.hero{background:var(--negro);color:#fff;padding:clamp(52px,8vw,92px) 0 clamp(60px,9vw,110px);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.32),transparent 65%)}
+.hero .wrap{position:relative;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:9px;background:rgba(39,189,177,.14);border:1px solid rgba(39,189,177,.45);color:var(--teal-claro);
+  font-size:13.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;border-radius:999px;margin-bottom:26px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--teal-claro);display:block}
+.hero h1{max-width:15ch}
+.hero .bajada{font-size:clamp(17.5px,2.6vw,22px);color:#C6CBD3;margin:26px 0 0;max-width:50ch;line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;
+  background:var(--amarillo);color:var(--tinta);font-weight:900;font-size:clamp(16px,2.2vw,19px);text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 12px 32px rgba(244,204,56,.26);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(244,204,56,.34)}
+.btn.grande{min-height:68px;padding:0 38px}
+.hero .cta{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hero .cta small{color:#8E96A2;font-size:14.5px;line-height:1.5}
+.tres{display:flex;gap:10px 30px;flex-wrap:wrap;margin-top:42px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14)}
+.tres div{font-size:15px;color:#C6CBD3;display:flex;align-items:center;gap:9px;font-weight:600}
+.tres b{color:#fff;font-weight:800}
+
+/* problema */
+.dicho{background:var(--lila)}
+.dicho .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.dicho .caja{background:#fff;border-radius:16px;padding:26px 28px}
+.dicho .caja.mal{border:1px solid rgba(16,19,25,.1)}
+.dicho .caja.bien{background:var(--tinta);color:#fff}
+.dicho .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:14px}
+.dicho .mal .lbl{color:var(--gris-claro)} .dicho .bien .lbl{color:var(--amarillo)}
+.dicho li{list-style:none;font-size:17px;line-height:1.5;padding:10px 0;border-top:1px solid rgba(16,19,25,.08)}
+.dicho .bien li{border-color:rgba(255,255,255,.14)}
+.dicho li:first-child{border-top:none}
+@media(max-width:700px){.dicho .par{grid-template-columns:1fr}}
+
+/* qué analizamos */
+.mapa{background:var(--crema)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:44px}
+.card{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px 24px 22px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--naranja)}
+.card:nth-child(3n+2)::before{background:var(--teal)}
+.card:nth-child(3n+3)::before{background:var(--amarillo)}
+.card .n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:10px}
+.card h3{margin-bottom:8px}
+.card p{font-size:16px;color:var(--gris);line-height:1.45}
+
+/* pasos */
+.pasos{background:var(--tinta);color:#fff}
+.pasos h2{color:#fff}
+.escalera{margin-top:46px;display:grid;gap:12px}
+.paso{display:grid;grid-template-columns:92px 1fr;gap:22px;align-items:start;background:rgba(255,255,255,.05);border-radius:16px;padding:26px 28px;border:1px solid rgba(255,255,255,.1)}
+.paso .num{font-size:clamp(38px,6vw,54px);font-weight:900;line-height:.9;letter-spacing:-.04em;color:rgba(255,255,255,.22)}
+.paso h3{color:#fff;margin-bottom:8px}
+.paso p{color:#AEB5BF;font-size:17px;line-height:1.5}
+.paso.destacado{background:var(--amarillo);border-color:var(--amarillo)}
+.paso.destacado .num{color:rgba(16,19,25,.3)}
+.paso.destacado h3,.paso.destacado p{color:var(--tinta)}
+.paso.destacado p{opacity:.82}
+@media(max-width:600px){.paso{grid-template-columns:1fr;gap:8px}}
+
+/* garantía */
+.garantia{background:var(--amarillo);color:var(--tinta)}
+.garantia .caja{text-align:center;max-width:760px;margin:0 auto}
+.garantia h2{font-size:clamp(32px,6vw,62px)}
+.garantia p{max-width:52ch;margin:26px auto 0;font-size:clamp(17px,2.4vw,20px);color:rgba(16,19,25,.78)}
+
+/* para quién */
+.quien .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.quien .caja{border-radius:16px;padding:28px 30px}
+.quien .si{background:rgba(14,124,116,.08);border:1px solid rgba(14,124,116,.28)}
+.quien .no{background:#fff;border:1px solid rgba(16,19,25,.1)}
+.quien h3{margin-bottom:16px}
+.quien .si h3{color:var(--teal)} .quien .no h3{color:var(--gris)}
+.quien li{list-style:none;font-size:16.5px;line-height:1.45;padding:11px 0 11px 30px;position:relative;color:var(--gris)}
+.quien .si li::before{content:'✓';position:absolute;left:0;top:10px;color:var(--teal);font-weight:900}
+.quien .no li::before{content:'✕';position:absolute;left:0;top:10px;color:var(--naranja);font-weight:900}
+@media(max-width:700px){.quien .par{grid-template-columns:1fr}}
+
+/* faq */
+.faq details{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:22px 26px;font-weight:800;font-size:17.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:26px;font-weight:700;color:var(--naranja);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 26px 24px;color:var(--gris);font-size:16.5px;line-height:1.6}
+
+/* formulario */
+.form{background:var(--negro);color:#fff}
+.form h2{color:#fff;max-width:16ch}
+.form .bajada{color:#AEB5BF;margin:20px 0 0;max-width:44ch}
+.form .caja{background:#fff;color:var(--tinta);border-radius:20px;padding:clamp(26px,4vw,38px);margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,56px);align-items:start}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--naranja);margin-bottom:8px}
+.campo{display:block;margin-bottom:18px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:8px}
+.campo input,.campo select,.campo textarea{width:100%;min-height:54px;padding:14px 16px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;
+  font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)}
+.campo textarea{min-height:96px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--teal-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:6px 0 18px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
+.err{color:#C2410C;font-weight:700;font-size:14.5px;margin:0 0 14px}
+.hp{position:absolute;left:-9999px}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera{background:var(--lila);border-radius:14px;padding:26px 28px}
+.fuera h3{margin-bottom:12px}
+.fuera p{font-size:16.5px;color:var(--gris);margin-bottom:18px}
+.btn-sec{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:12px;background:var(--tinta);color:#fff;
+  font-weight:800;font-size:16px;text-decoration:none}
+.pie{background:var(--negro);color:#6C7480;padding:28px 0 40px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+[hidden]{display:none !important}
+
+/* logos y casos */
+.logos{background:#fff;padding:clamp(36px,5vw,56px) 0}
+.logos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);text-align:center;margin-bottom:26px}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px clamp(26px,4vw,48px);opacity:.75}
+.casos{background:var(--tinta);color:#fff;padding:clamp(40px,6vw,64px) 0}
+.casos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--amarillo);text-align:center;margin-bottom:26px}
+.casos .rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px 18px;text-align:center;align-items:center}
+.casos .n{white-space:nowrap;font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo)}
+.casos p{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:#AEB5BF}
+.casos p b{color:#fff;font-weight:700}
+.casos .lg{display:block;height:34px;width:auto;margin:14px auto 0;filter:brightness(0) invert(1);opacity:.85}
+.casos .destacado .lg{filter:grayscale(1) brightness(.45) contrast(1.6);opacity:1;height:60px}
+.casos .destacado{background:var(--amarillo);border-radius:16px;padding:18px 14px 16px;color:var(--tinta)}
+.casos .destacado .n{color:var(--tinta)}
+.casos .destacado p{color:rgba(16,19,25,.8)}
+.casos .destacado p b{color:var(--tinta)}
+
+/* los ocho */
+.ocho{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px}
+.ocho div{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;padding:18px 18px 16px}
+.ocho b{display:block;font-size:12px;letter-spacing:.16em;color:var(--naranja);font-weight:800;margin-bottom:6px}
+.ocho h3{font-size:18px;margin-bottom:4px}
+.ocho p{font-size:14.5px;color:var(--gris);line-height:1.4}
+@media(max-width:860px){.ocho{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.ocho{grid-template-columns:1fr}}
+
+/* fuga → agente */
+.agente{background:var(--negro);color:#fff}
+.agente h2{color:#fff}
+.filas{margin-top:40px;border-top:1px solid rgba(255,255,255,.14)}
+.fila-a{display:grid;grid-template-columns:200px 40px 1fr;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.fila-a .f{font-weight:900;font-size:19px;color:var(--naranja);letter-spacing:-.01em}
+.fila-a .fl{color:var(--amarillo);font-weight:900;font-size:22px;text-align:center}
+.fila-a .a{font-size:16.5px;color:#D5D9E0;line-height:1.45}
+.fila-a .a b{color:var(--amarillo)}
+@media(max-width:600px){.fila-a{grid-template-columns:1fr;gap:4px}.fila-a .fl{display:none}}
+.sines{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.sines div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px 22px}
+.sines h3{color:#fff;font-size:19px;margin-bottom:6px}
+.sines p{font-size:15.5px;color:#AEB5BF;line-height:1.45}
+@media(max-width:700px){.sines{grid-template-columns:1fr}}
+.remate{margin-top:36px;font-size:clamp(22px,3.4vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+
+/* botón de WhatsApp, fijo abajo a la derecha */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;
+  background:#25D366;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.28);transition:transform .16s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:26px;height:26px;flex-shrink:0}
+@media(max-width:600px){.wa{padding:0;width:58px;height:58px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}}
+
+/* casos publicados */
+.pub{background:var(--tinta);color:#fff;padding:clamp(56px,7vw,84px) 0}
+.pub h2{color:#fff;margin-bottom:34px;max-width:22ch}
+.pub .rej2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.pub a{display:block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:26px 26px 24px;text-decoration:none;transition:border-color .16s ease,transform .16s ease}
+.pub a:hover{border-color:rgba(244,204,56,.55);transform:translateY(-2px)}
+.pub .m{font-family:var(--display);font-size:clamp(32px,4.4vw,44px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo);margin-bottom:6px}
+.pub .ms{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#8E96A2;margin-bottom:14px}
+.pub .ti{font-size:17px;line-height:1.35;font-weight:800;color:#fff;margin-bottom:10px}
+.pub .su{font-size:14px;line-height:1.45;color:#8E96A2;margin-bottom:14px}
+.pub .le{font-size:14.5px;font-weight:800;color:var(--amarillo)}
+
+/* vídeo de 48 s justo debajo del hero: misma paleta, continúa el fondo oscuro */
+.video{background:var(--negro);padding:0 0 clamp(40px,6vw,64px)}
+.video .caja{max-width:920px;margin:0 auto;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.45);aspect-ratio:16/9}
+.video video{width:100%;height:100%;display:block;object-fit:cover}
+.video .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);text-align:center;margin:0 0 16px}
+
+/* cómo funciona: cuatro pasos con pantallas reales */
+.cuatro{display:flex;flex-direction:column;gap:clamp(40px,6vw,72px);margin-top:44px}
+.cuatro .pz{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(24px,4vw,56px);align-items:center}
+.cuatro .pz:nth-child(even) .tx{order:2}
+.cuatro .n{font-size:14px;font-weight:800;letter-spacing:.1em;color:var(--teal-claro)}
+.cuatro h3{margin:8px 0 12px}
+.cuatro p{color:#B9BEC7;font-size:17px}
+.cuatro .pant{background:#fff;border:1px solid #E6E5E0;border-radius:14px;box-shadow:0 12px 40px rgba(16,19,25,.10);overflow:hidden}
+.cuatro .pant img{display:block;width:100%;height:auto}
+.cuatro .dato{margin-top:14px;font-size:15px;font-weight:700;color:#fff}
+.video video{width:100%;display:block}
+.fugas3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.fugas3 div{background:#fff;border:1px solid #E6E5E0;border-radius:14px;padding:22px}
+.fugas3 b{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#C9372C;margin-bottom:8px}
+.fugas3 p{font-size:16px;color:var(--gris)}
+@media(max-width:820px){.cuatro .pz{grid-template-columns:1fr}.cuatro .pz:nth-child(even) .tx{order:0}.fugas3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" onerror="this.outerHTML='<strong style=&quot;font-weight:900;letter-spacing:-.02em&quot;>Qualivo</strong>'">
+    <span>Clínicas · diagnóstico gratuito · <b>15 minutos</b></span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="chip"><i></i>Cómo funciona Qualivo</div>
+    <h1>Mira qué pasa con cada cliente <span class="te">que se te escapa.</span></h1>
+    <p class="bajada">Conectamos tus anuncios, tu WhatsApp y tu CRM. El sistema responde en dos minutos, sigue a cada contacto sin que nadie tenga que acordarse y te avisa cuando alguien está listo para hablar contigo, con todo el contexto.</p>
+    <div class="cta">
+      <a href="#reservar" class="btn grande">Verlo con mi negocio · 15 minutos&nbsp;→</a>
+      <small>Te enseñamos cuánto se te escapa, con tus números, y cómo funcionaría en tu caso.</small>
+    </div>
+    <div class="tres">
+      <div><b>1 · Responde</b> En dos minutos, a cualquier hora.</div>
+      <div><b>2 · Sigue</b> A cada contacto, hasta que hay respuesta.</div>
+      <div><b>3 · Te avisa</b> Solo cuando hace falta una persona.</div>
+    </div>
+  </div>
+</header>
+
+
+<section class="video" aria-label="Vídeo: el sistema funcionando">
+  <div class="wrap">
+    <p class="lbl">El sistema funcionando en una escuela de formación · 69 segundos</p>
+    <div class="caja">
+      <video autoplay muted loop playsinline controls preload="metadata" poster="/como-funciona/img/poster.jpg">
+        <source src="/como-funciona/demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p style="text-align:center;font-size:13.5px;color:#8E96A2;margin:14px 0 0">Entra una solicitud, el agente responde por WhatsApp en un minuto, cualifica, agenda y avisa al asesor. Datos de ejemplo; el panel es el que montamos.</p>
+  </div>
+</section>
+
+<section class="logos">
+  <div class="wrap">
+    <p class="lbl">Proyectos con los que hemos trabajado</p>
+    <div class="fila">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:56px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:48px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:34px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:44px;width:auto;filter:grayscale(1) brightness(.5) contrast(1.6)">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:34px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:32px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:34px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:32px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:40px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:28px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:24px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:14px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:28px;width:auto;filter:brightness(0)">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:38px;width:auto;filter:brightness(0)">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:26px;width:auto">
+      <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:40px;width:auto">
+    </div>
+  </div>
+</section>
+
+
+
+<section class="sec mapa">
+  <div class="wrap">
+    <h2>El problema casi nunca es que falten clientes.</h2>
+    <p style="margin-top:20px;max-width:56ch;color:var(--gris)">Es lo que pasa desde que alguien pregunta hasta que compra. En casi todos los negocios que miramos, la fuga está en uno de estos tres sitios.</p>
+    <div class="fugas3">
+      <div><b>Se tarda en responder</b><p>Pregunta a tres a la vez y se queda con quien contesta primero. Si respondes horas después, ya ha hablado con otro.</p></div>
+      <div><b>Nadie hace seguimiento</b><p>Dice «me lo pienso» o no contesta, y con el día a día nadie vuelve a escribirle. No dijo que no.</p></div>
+      <div><b>No sabes qué anuncio vende</b><p>Mides clics y formularios, no clientes. Parte del presupuesto se va en campañas que no traen a nadie que compre.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec agente">
+  <div class="wrap">
+    <h2>Cómo funciona.<br>Cuatro pasos, con las pantallas reales.</h2>
+    <div class="cuatro">
+      <div class="pz">
+        <div class="tx"><div class="n">01 · CAPTA</div><h3>Cada anuncio, medido por los clientes que trae.</h3><p>No por clics. Ves qué campaña trae gente que compra y cuál solo llena el formulario, y el presupuesto va a lo que funciona.</p></div>
+        <div class="pant"><img loading="lazy" src="/como-funciona/img/anuncios.jpg" alt="Pantalla de anuncios: cada campaña con sus interesados, su encaje medio, sus ventas y su retorno"></div>
+      </div>
+      <div class="pz">
+        <div class="tx"><div class="n">02 · RESPONDE</div><h3>Un agente contesta en dos minutos, a cualquier hora.</h3><p>Por WhatsApp, con lo que la persona ha preguntado, no con una plantilla. Si no contesta, le llama una agente de voz. Todo queda en el CRM.</p><p class="dato">De horas a dos minutos.</p></div>
+        <div class="pant"><img loading="lazy" src="/como-funciona/img/conversaciones.jpg" alt="Pantalla de conversaciones: el agente responde por WhatsApp y cualifica"></div>
+      </div>
+      <div class="pz">
+        <div class="tx"><div class="n">03 · SIGUE</div><h3>Cada contacto con su puntuación y su siguiente paso.</h3><p>El sistema sabe quién encaja, qué está haciendo y cuánta intención tiene. Ordena por prioridad y hace el seguimiento de todo lo que no necesita a una persona.</p></div>
+        <div class="pant"><img loading="lazy" src="/como-funciona/img/oportunidades.jpg" alt="Pantalla de oportunidades ordenadas por prioridad con su siguiente acción"></div>
+      </div>
+      <div class="pz">
+        <div class="tx"><div class="n">04 · TE AVISA</div><h3>Cuando alguien está listo, te llega con todo el contexto.</h3><p>Por qué es prioritario, qué ha hecho y qué hay que decirle. Tú entras solo cuando hace falta una persona, en el momento justo.</p><p class="dato">El sistema hace lo repetitivo. Tú, lo que vende.</p></div>
+        <div class="pant"><img loading="lazy" src="/como-funciona/img/ficha.jpg" alt="Ficha de un contacto: puntuaciones, por qué es prioritario, siguiente acción y línea de tiempo"></div>
+      </div>
+    </div>
+    <p class="remate">No sustituimos tu sistema. <span class="am">Lo agentizamos.</span></p>
+  </div>
+</section>
+
+<section class="sec pasos">
+  <div class="wrap">
+    <h2>Cómo va.</h2>
+    <div class="escalera">
+      <div class="paso">
+        <div class="num">01</div>
+        <div><h3>Diagnóstico. Quince minutos.</h3><p>Repasamos el recorrido con tus números delante: cuántos contactos entran, cuánto tardáis en contestar, qué pasa con los que no compran a la primera. Sales sabiendo cuánto se te escapa. Sin presentación comercial.</p></div>
+      </div>
+      <div class="paso">
+        <div class="num">02</div>
+        <div><h3>Plan. Por escrito en 48 horas.</h3><p>Las tres fugas por impacto, qué agente va en cada una y qué número tiene que moverse. Lo hagas con nosotros o no.</p></div>
+      </div>
+      <div class="paso destacado">
+        <div class="num">03</div>
+        <div><h3>Primer agente en dos semanas. Primer número en cuatro.</h3><p>Montamos el primer agente sobre lo que ya tienes, medimos el número el día uno y lo volvemos a medir a las cuatro semanas. <strong>Antes y después, con tus datos.</strong></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="pub">
+  <div class="wrap">
+    <h2>Casos publicados, con números reales.</h2>
+    <div class="rej2">
+      <a href="/casos/bellovinilo/">
+        <div class="m">8,3×</div><div class="ms">Retorno sobre la inversión</div>
+        <div class="ti">No había un sistema que optimizar. Tuvimos que construirlo.</div>
+        <div class="su">BelloVinilo · B2B · Reformas y revestimientos</div>
+        <div class="le">Leer el caso →</div>
+      </a>
+      <a href="/casos/eac/">
+        <div class="m">10,2×</div><div class="ms">Del anuncio a la matrícula</div>
+        <div class="ti">De la inversión publicitaria a la matrícula, con todo medido.</div>
+        <div class="su">Escola Aeronàutica de Catalunya · Formación</div>
+        <div class="le">Leer el caso →</div>
+      </a>
+      <a href="/casos/focus-practical/">
+        <div class="m">−53 %</div><div class="ms">Coste por contacto</div>
+        <div class="ti">Contactos interesados en el curso de electricista a 3 €, con todo automatizado.</div>
+        <div class="su">Focus Practical · Formación de oficios</div>
+        <div class="le">Leer el caso →</div>
+      </a>
+      <a href="/casos/nuria-roure/">
+        <div class="m">6,45×</div><div class="ms">Retorno · mismos contactos</div>
+        <div class="ti">Más negocio sin comprar más demanda: 6,45 veces lo invertido sin captar un lead más.</div>
+        <div class="su">Nuria Roure · Formación y servicios online</div>
+        <div class="le">Leer el caso →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec quien">
+  <div class="wrap">
+    <h2>Esto no es para todo el mundo.</h2>
+    <div class="par">
+      <div class="caja si">
+        <h3>Tiene sentido si…</h3>
+        <ul>
+          <li>Ya te entran contactos, aunque sean pocos.</li>
+          <li>Sois entre 5 y 50 personas y alguien atiende lo que entra.</li>
+          <li>Podéis atender más clientes de los que atendéis hoy.</li>
+          <li>Lo que vendes aguanta una conversación y un seguimiento.</li>
+        </ul>
+      </div>
+      <div class="caja no">
+        <h3>No lo tiene si…</h3>
+        <ul>
+          <li>Todavía no te entra demanda: ahí lo primero es otra cosa, y te lo diremos.</li>
+          <li>Buscas quien te lleve las redes.</li>
+          <li>Quieres más contactos sin tocar nada de lo que pasa después.</li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq">
+  <div class="wrap">
+    <h2>Lo que suelen preguntar.</h2>
+    <div style="margin-top:36px;max-width:760px">
+      <details><summary>¿Tengo que cambiar de CRM?</summary><p>No. Entramos en el que ya usas. Si no tienes ninguno, te decimos cuál poner, gratis, y no es el más caro.</p></details>
+      <details><summary>¿Quién habla con mis clientes?</summary><p>Los agentes hacen el primer contacto y el seguimiento con tu nombre y tus reglas: qué se dice, cuándo y qué no se promete. La visita, el presupuesto y la obra son tuyos.</p></details>
+      <details><summary>¿Cuánto tarda?</summary><p>Diagnóstico de quince minutos. Plan por escrito en 48 horas. Primer agente funcionando en dos semanas. Primer número, antes y después, en cuatro.</p></details>
+      <details><summary>¿Cuánto cuesta el diagnóstico?</summary><p>Nada. Quince minutos y el plan por escrito, lo hagas con nosotros o no. Si vemos que no podemos ayudarte, te lo decimos en la misma llamada.</p></details>
+      <details><summary>¿Y la protección de datos?</summary><p>El sistema trabaja dentro de tu CRM y con el consentimiento que ya recoges. Tus datos se quedan en tus herramientas.</p></details>
+      <details><summary>¿Y si ya trabajo con una agencia?</summary><p>No hace falta sustituirla. Nosotros entramos donde se pierde el cliente, que casi nunca es en el anuncio: es en lo que pasa después.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec form" id="reservar">
+  <div class="wrap">
+    <div class="grid2">
+      <div>
+        <h2>Reserva tus quince minutos.</h2>
+        <p class="bajada" id="form-bajada">Cuatro preguntas para saber si tiene sentido en tu caso, y eliges hora. Si no lo tiene, te lo decimos aquí mismo.</p>
+        <div class="tres" style="border-top-color:rgba(255,255,255,.14)">
+          <div><b>Sin compromiso</b></div><div><b>Sin presentación comercial</b></div><div><b>Plan por escrito</b></div>
+        </div>
+      </div>
+
+      <div class="caja">
+        <form id="f" novalidate>
+          <div id="p1">
+            <div class="paso-n">Paso 1 de 2</div>
+            <h3 style="margin-bottom:20px">¿Tiene sentido para tu caso?</h3>
+            <label class="campo"><span>¿A qué se dedica tu empresa?</span>
+              <select name="sector" required>
+                <option value="">Elige una opción</option>
+                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
+                <option>Reformas, construcción o instalaciones</option>
+                <option>Salud, clínica o bienestar</option>
+                <option>Formación o academia</option>
+                <option>Industria, taller o fabricación</option>
+                <option>Agencia o estudio</option>
+                <option>Comercio o tienda</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuántas personas sois?</span>
+              <select name="equipo" data-valor required>
+                <option value="">Elige una opción</option>
+                <option value="0">Solo yo</option>
+                <option value="1">De 2 a 4</option>
+                <option value="2">De 5 a 15</option>
+                <option value="2">De 16 a 50</option>
+                <option value="2">Más de 50</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuánto invertís al mes en conseguir clientes?</span>
+              <select name="inversion" data-valor required>
+                <option value="">Elige una opción</option>
+                <option value="0">Nada todavía</option>
+                <option value="1">Menos de 500 €</option>
+                <option value="2">Entre 500 y 2.000 €</option>
+                <option value="2">Entre 2.000 y 5.000 €</option>
+                <option value="2">Más de 5.000 €</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuál es tu web?</span>
+              <input type="text" name="web" placeholder="tuempresa.com" required>
+            </label>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar →</button>
+          </div>
+
+          <div id="p2" hidden>
+            <div class="paso-n">Paso 2 de 2</div>
+            <h3 style="margin-bottom:8px">Perfecto. Vamos a verlo.</h3>
+            <p style="font-size:16px;color:var(--gris);margin-bottom:22px">Con esto preparo la llamada antes de que entres, para no gastar tus quince minutos en preguntas obvias.</p>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <label class="campo"><span>¿A qué os dedicáis exactamente y dónde crees que se pierde?</span>
+              <textarea name="hipotesis" placeholder="Por ejemplo: escuela de formación en Valencia. Se pierde en los interesados que piden información y no vuelven."></textarea>
+            </label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Pedir el diagnóstico&nbsp;→</button>
+          </div>
+
+          <div id="p3" hidden>
+            <div class="paso-n" id="p3-n">Último paso</div>
+            <h3 style="margin-bottom:8px" id="p3-t">Coge el hueco que te venga bien.</h3>
+            <p style="font-size:16px;color:var(--gris);margin-bottom:20px">Quince minutos. Reviso tu web y lo que me has contado antes de la llamada.</p>
+            <div id="cal"></div>
+          </div>
+
+          <div id="p4" hidden>
+            <div class="fuera">
+              <h3>Sinceramente: todavía no.</h3>
+              <p>Un diagnóstico completo tiene sentido cuando ya entran oportunidades y hay algo montado detrás. En tu caso te costaría más tiempo del que te devolvería, y prefiero decírtelo ahora.</p>
+              <p>Cuando eso cambie, escríbenos a <a href="mailto:hola@qualivo.io" style="color:var(--teal);font-weight:700">hola@qualivo.io</a> y lo miramos.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20c%C3%B3mo%20funciona%20y%20quiero%20ver%20d%C3%B3nde%20est%C3%A1%20la%20fuga." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" onclick="window.qvTrack&&qvTrack('diagnostico_whatsapp',{})">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 0 1 5.3 16C5.3 10.1 10.1 5.3 16 5.3S26.7 10.1 26.7 16 21.9 26.7 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="/assets/consent.js" defer></script>
+<script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=como-funciona");}</script>
+<script src="/diagnostico/landing.js" defer></script>
+</body>
+</html>
