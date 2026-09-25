@@ -25,6 +25,8 @@
   .preguntas { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
   .p { display: flex; flex-direction: column; gap: 8px; }
   .p.ancha { grid-column: 1 / -1; }
+  .etapa { grid-column: 1 / -1; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--verde); border-top: 1px solid var(--borde-2); padding-top: 18px; margin-bottom: -8px; }
+  .etapa:first-of-type { border-top: 0; padding-top: 0; }
   .p label, .p .lab { font-weight: 600; font-size: 14px; }
   .p .ayuda { color: var(--gris-2); font-size: 12.5px; margin-top: -4px; }
   .p input, .p select { height: 42px; border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 0 12px; background: #fff; font-size: 15px; }
@@ -46,7 +48,7 @@
   .hoy .fila span { color: var(--gris); }
   .hoy .fila b { font-size: 15px; }
   h2 { font-size: 16px; margin: 26px 0 12px; }
-  .recorrido { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .recorrido { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
   .paso { background: #fff; border: 1px solid var(--borde); border-radius: var(--radio); padding: 16px; border-top: 4px solid var(--gris-3); }
   .paso.ok { border-top-color: var(--verde-2); }
   .paso.medio { border-top-color: var(--ambar); }
@@ -74,7 +76,7 @@
   .copiado { color: var(--verde); font-weight: 600; font-size: 13px; }
   @media (max-width: 760px) {
     .preguntas, .res-cab { grid-template-columns: 1fr; }
-    .recorrido { grid-template-columns: 1fr 1fr; }
+    .recorrido { grid-template-columns: 1fr; }
     h1 { font-size: 23px; }
   }
 </style>
@@ -88,7 +90,7 @@
 
   <section id="form">
     <h1 id="titulo">¿Dónde se os escapan las ventas?</h1>
-    <p class="sub">Seis preguntas sobre cómo funciona hoy. Con vuestros números, no con medias del sector.</p>
+    <p class="sub">Todo el recorrido, desde el anuncio hasta después de la venta. Con vuestros números, no con medias del sector.</p>
     <div class="caja">
       <div class="preguntas">
         <div class="p">
@@ -99,19 +101,26 @@
           <label for="empresa">Empresa</label>
           <input id="empresa" type="text" maxlength="40" autocomplete="off" placeholder="Nombre de la empresa">
         </div>
+
+        <div class="etapa">1 · Captación</div>
+        <div class="p ancha">
+          <span class="lab" id="lab-origen">¿De dónde os llegan sobre todo los contactos?</span>
+          <div class="opciones" data-campo="origen"></div>
+        </div>
         <div class="p">
           <label for="contactos" id="lab-contactos">¿Cuántos contactos nuevos os llegan al mes?</label>
           <input id="contactos" type="number" min="0" inputmode="numeric" placeholder="Por ejemplo, 60">
         </div>
         <div class="p">
-          <label for="valor" id="lab-valor">¿Cuánto vale de media un cliente?</label>
-          <input id="valor" type="number" min="0" inputmode="numeric" placeholder="En euros">
-          <span class="ayuda" id="ayuda-valor">Lo que factura de media cada venta.</span>
+          <label for="inversion">¿Cuánto invertís al mes en anuncios?</label>
+          <input id="inversion" type="number" min="0" inputmode="numeric" placeholder="En euros (0 si nada)">
         </div>
         <div class="p ancha">
-          <span class="lab" id="lab-cierre">De cada 10 que piden información, ¿cuántos acaban comprando?</span>
-          <div class="opciones" data-campo="cierre"></div>
+          <span class="lab" id="lab-medicion">¿Sabéis qué campañas o canales os traen clientes, no solo contactos?</span>
+          <div class="opciones" data-campo="medicion"></div>
         </div>
+
+        <div class="etapa">2 · Respuesta y seguimiento</div>
         <div class="p ancha">
           <span class="lab">Cuando llega alguien nuevo, ¿cuánto se tarda en responderle?</span>
           <div class="opciones" data-campo="respuesta"></div>
@@ -123,6 +132,21 @@
         <div class="p ancha">
           <span class="lab">¿Quién responde y hace ese seguimiento?</span>
           <div class="opciones" data-campo="quien"></div>
+        </div>
+
+        <div class="etapa">3 · Venta y después</div>
+        <div class="p ancha">
+          <span class="lab" id="lab-cierre">De cada 10 que piden información, ¿cuántos acaban comprando?</span>
+          <div class="opciones" data-campo="cierre"></div>
+        </div>
+        <div class="p">
+          <label for="valor" id="lab-valor">¿Cuánto vale de media un cliente?</label>
+          <input id="valor" type="number" min="0" inputmode="numeric" placeholder="En euros">
+          <span class="ayuda" id="ayuda-valor">Lo que factura de media cada venta.</span>
+        </div>
+        <div class="p">
+          <span class="lab" id="lab-despues">Después de la venta, ¿hacéis algo para que repita o os recomiende?</span>
+          <div class="opciones" data-campo="despues"></div>
         </div>
       </div>
       <div class="acciones-form">
@@ -172,14 +196,14 @@
 
   // Palabras de cada sector (mismos ids que /intelligence).
   var SECTORES = {
-    formacion:    { txt: 'Formación', contactos: 'interesados', cliente: 'alumno', clientes: 'alumnos', compran: 'se matriculan', compra1: 'se matricula', compra: 'matrícula', valor: '¿Cuánto vale de media un alumno?', ayuda: 'Lo que factura de media cada matrícula.', parados: 'los interesados que se quedaron a medias' },
-    clinica:      { txt: 'Clínica', contactos: 'pacientes que consultan', cliente: 'paciente', clientes: 'pacientes', compran: 'aceptan el tratamiento', compra1: 'acepta el tratamiento', compra: 'tratamiento', valor: '¿Cuánto vale de media un tratamiento?', ayuda: 'Lo que factura de media cada tratamiento aceptado.', parados: 'los presupuestos que se quedaron parados' },
-    reformas:     { txt: 'Reformas / Construcción', contactos: 'contactos que piden presupuesto', cliente: 'cliente', clientes: 'obras', compran: 'contratan la obra', compra1: 'contrata la obra', compra: 'obra', valor: '¿Cuánto vale de media una obra?', ayuda: 'Lo que factura de media cada obra contratada.', parados: 'los presupuestos que se quedaron parados' },
-    b2b:          { txt: 'Servicios B2B', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'contrato', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada cliente nuevo (el primer año, si es recurrente).', parados: 'las propuestas que se quedaron paradas' },
-    saas:         { txt: 'SaaS / Software', contactos: 'altas o demos', cliente: 'cliente', clientes: 'clientes', compran: 'pasan a pago', compra1: 'pasa a pago', compra: 'cliente de pago', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las pruebas y demos que se quedaron paradas' },
-    inmobiliaria: { txt: 'Inmobiliaria', contactos: 'contactos', cliente: 'cliente', clientes: 'operaciones', compran: 'cierran una operación', compra1: 'cierra', compra: 'operación', valor: '¿Cuánto os deja de media una operación?', ayuda: 'Los honorarios de media por operación cerrada.', parados: 'las visitas que no avanzaron' },
-    marketing:    { txt: 'Agencia de marketing', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'cliente', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las propuestas que se quedaron paradas' },
-    otro:         { txt: 'Otro', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'compran', compra1: 'compra', compra: 'venta', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada venta.', parados: 'los presupuestos que se quedaron parados' }
+    formacion:    { txt: 'Formación', contactos: 'interesados', cliente: 'alumno', clientes: 'alumnos', compran: 'se matriculan', compra1: 'se matricula', compra: 'matrícula', valor: '¿Cuánto vale de media un alumno?', ayuda: 'Lo que factura de media cada matrícula.', parados: 'los interesados que se quedaron a medias', postventa: 'el siguiente curso o que os recomiende' },
+    clinica:      { txt: 'Clínica', contactos: 'pacientes que consultan', cliente: 'paciente', clientes: 'pacientes', compran: 'aceptan el tratamiento', compra1: 'acepta el tratamiento', compra: 'tratamiento', valor: '¿Cuánto vale de media un tratamiento?', ayuda: 'Lo que factura de media cada tratamiento aceptado.', parados: 'los presupuestos que se quedaron parados', postventa: 'las revisiones, los tratamientos pendientes y las recomendaciones' },
+    reformas:     { txt: 'Reformas / Construcción', contactos: 'contactos que piden presupuesto', cliente: 'cliente', clientes: 'obras', compran: 'contratan la obra', compra1: 'contrata la obra', compra: 'obra', valor: '¿Cuánto vale de media una obra?', ayuda: 'Lo que factura de media cada obra contratada.', parados: 'los presupuestos que se quedaron parados', postventa: 'las recomendaciones y la siguiente obra' },
+    b2b:          { txt: 'Servicios B2B', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'contrato', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada cliente nuevo (el primer año, si es recurrente).', parados: 'las propuestas que se quedaron paradas', postventa: 'ampliar el servicio y las recomendaciones' },
+    saas:         { txt: 'SaaS / Software', contactos: 'altas o demos', cliente: 'cliente', clientes: 'clientes', compran: 'pasan a pago', compra1: 'pasa a pago', compra: 'cliente de pago', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las pruebas y demos que se quedaron paradas', postventa: 'ampliar el plan y las recomendaciones' },
+    inmobiliaria: { txt: 'Inmobiliaria', contactos: 'contactos', cliente: 'cliente', clientes: 'operaciones', compran: 'cierran una operación', compra1: 'cierra', compra: 'operación', valor: '¿Cuánto os deja de media una operación?', ayuda: 'Los honorarios de media por operación cerrada.', parados: 'las visitas que no avanzaron', postventa: 'las recomendaciones y la próxima operación' },
+    marketing:    { txt: 'Agencia de marketing', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'contratan', compra1: 'contrata', compra: 'cliente', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media un cliente el primer año.', parados: 'las propuestas que se quedaron paradas', postventa: 'ampliar servicios y las recomendaciones' },
+    otro:         { txt: 'Otro', contactos: 'contactos', cliente: 'cliente', clientes: 'clientes', compran: 'compran', compra1: 'compra', compra: 'venta', valor: '¿Cuánto vale de media un cliente?', ayuda: 'Lo que factura de media cada venta.', parados: 'los presupuestos que se quedaron parados', postventa: 'que repita y os recomiende' }
   };
 
   // Supuestos prudentes: qué parte de las ventas de hoy se recuperaría
@@ -188,11 +212,16 @@
     cierre: [['0.5', 'Menos de 1'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5 o más']],
     respuesta: [['5min', 'Menos de 5 minutos', 0], ['1h', 'Menos de una hora', 0.10], ['dia', 'El mismo día', 0.20], ['mas', 'Más de un día', 0.30]],
     seguimiento: [['sistema', 'Se le sigue con un proceso fijo', 0], ['aveces', 'Se le escribe alguna vez, si hay tiempo', 0.15], ['nadie', 'Normalmente nadie vuelve a escribirle', 0.25]],
-    quien: [['dueno', 'Yo (el dueño)'], ['persona', 'Una persona del equipo'], ['equipo', 'Un equipo comercial']]
+    quien: [['dueno', 'Yo (el dueño)'], ['persona', 'Una persona del equipo'], ['equipo', 'Un equipo comercial']],
+    origen: [['anuncios', 'Anuncios (Meta, Google)'], ['web', 'Web y buscadores'], ['recomendacion', 'Recomendación'], ['redes', 'Redes sociales'], ['varios', 'De varios sitios']],
+    // Parte del gasto en anuncios que se va en campañas que no traen clientes
+    medicion: [['si', 'Sí, lo medimos', 0], ['masomenos', 'Más o menos', 0.10], ['no', 'No', 0.20]],
+    // Ventas extra por repetición y recomendación, sobre lo que ya se factura
+    despues: [['sistema', 'Sí, con un sistema', 0], ['aveces', 'Alguna vez', 0.05], ['nada', 'No', 0.10]]
   };
   var TOPE = 0.40; // nunca se promete más de un 40 % sobre lo que ya se vende
 
-  var r = { sector: 'formacion', empresa: '', contactos: '', valor: '', cierre: '', respuesta: '', seguimiento: '', quien: '' };
+  var r = { sector: 'formacion', empresa: '', origen: '', contactos: '', inversion: '', medicion: '', respuesta: '', seguimiento: '', quien: '', cierre: '', valor: '', despues: '' };
 
   function peso(campo, id) { var o = OPC[campo].filter(function (x) { return x[0] === id; })[0]; return o ? (o[2] || 0) : 0; }
   function etiqueta(campo, id) { var o = OPC[campo].filter(function (x) { return x[0] === id; })[0]; return o ? o[1] : ''; }
@@ -212,10 +241,11 @@
     $('#lab-valor').textContent = S.valor;
     $('#ayuda-valor').textContent = S.ayuda;
     $('#lab-cierre').textContent = 'De cada 10 ' + S.contactos + ', ¿cuántos ' + S.compran + '?';
+    $('#lab-medicion').textContent = '¿Sabéis qué campañas o canales os traen ' + S.clientes + ', no solo contactos?';
     $('#lab-seguimiento').textContent = 'Si alguien no ' + S.compra1 + ' a la primera, ¿qué pasa?';
   }
 
-  function completo() { return r.sector && +r.contactos > 0 && +r.valor > 0 && r.cierre && r.respuesta && r.seguimiento && r.quien; }
+  function completo() { return r.sector && r.origen && +r.contactos > 0 && r.inversion !== '' && +r.inversion >= 0 && r.medicion && r.respuesta && r.seguimiento && r.quien && r.cierre && +r.valor > 0 && r.despues; }
   function actualizarBoton() { $('#calcular').disabled = !completo(); }
 
   function codificar() { try { return btoa(unescape(encodeURIComponent(JSON.stringify(r)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); } catch (e) { return ''; } }
@@ -228,7 +258,10 @@
     var fr = peso('respuesta', r.respuesta), fs = peso('seguimiento', r.seguimiento);
     var total = Math.min(TOPE, fr + fs);
     var escala = (fr + fs) > 0 ? total / (fr + fs) : 0;
-    var eurR = factMes * fr * escala, eurS = factMes * fs * escala, eurT = eurR + eurS;
+    var eurR = factMes * fr * escala, eurS = factMes * fs * escala;
+    var I = +r.inversion || 0, fc = peso('medicion', r.medicion), fp = peso('despues', r.despues);
+    var eurC = I * fc, eurP = factMes * fp;
+    var eurT = eurC + eurR + eurS + eurP;
     var empresa = r.empresa ? esc(r.empresa) : 'vuestro negocio';
 
     $('#res-titulo').innerHTML = 'Diagnóstico · ' + empresa;
@@ -236,7 +269,7 @@
 
     if (eurT > 0) {
       $('#r-fuga').textContent = eur(eurT) + ' al mes';
-      $('#r-fuga-txt').innerHTML = 'Es lo que se queda por el camino entre que alguien pregunta y que ' + S.compran + '. <span class="anual">' + eur(eurT * 12) + ' al año</span>, sin gastar un euro más en anuncios.';
+      $('#r-fuga-txt').innerHTML = 'Es lo que se queda por el camino en todo el recorrido, desde el anuncio hasta después de la venta. <span class="anual">' + eur(eurT * 12) + ' al año</span>, sin gastar un euro más en anuncios.';
     } else {
       $('#r-fuga').textContent = 'Recorrido sano';
       $('#r-fuga-txt').textContent = 'Respondéis al momento y seguís a todos. Aquí la palanca está en traer más ' + S.contactos + ' y en medir qué campañas traen ' + S.clientes + ' de verdad.';
@@ -245,37 +278,47 @@
     $('#r-hoy').innerHTML =
       '<div class="fila"><span>' + cap(S.clientes) + ' al mes hoy</span><b>' + fmt.format(Math.round(ventasMes * 10) / 10) + '</b></div>' +
       '<div class="fila"><span>Facturación al mes hoy</span><b>' + eur(factMes) + '</b></div>' +
+      (I > 0 && ventasMes > 0 ? '<div class="fila"><span>Coste en anuncios por ' + S.cliente + '</span><b>' + eur(I / ventasMes) + '</b></div>' : '') +
       '<div class="fila"><span>Arreglando el recorrido</span><b>' + eur(factMes + eurT) + '</b></div>';
 
+    var pasoC = I > 0 ? (r.medicion === 'si' ? 'ok' : r.medicion === 'masomenos' ? 'medio' : 'mal') : (r.origen === 'recomendacion' ? 'medio' : r.medicion === 'si' ? 'ok' : 'medio');
     var pasoR = r.respuesta === '5min' ? 'ok' : r.respuesta === '1h' ? 'medio' : 'mal';
     var pasoS = r.seguimiento === 'sistema' ? 'ok' : r.seguimiento === 'aveces' ? 'medio' : 'mal';
     var pasoQ = r.quien === 'dueno' ? 'medio' : 'ok';
+    var pasoP = r.despues === 'sistema' ? 'ok' : r.despues === 'aveces' ? 'medio' : 'mal';
     var txtE = { ok: 'Bien', medio: 'Mejorable', mal: 'Fuga' };
     $('#r-recorrido').innerHTML = [
-      ['1', 'Llega el contacto', fmt.format(L) + ' ' + S.contactos + ' al mes.', 'neutro', 'Entrada'],
+      ['1', 'Captación', fmt.format(L) + ' ' + S.contactos + ' al mes, sobre todo por ' + ({ anuncios: 'anuncios', web: 'la web y buscadores', recomendacion: 'recomendación', redes: 'redes sociales', varios: 'varios canales' }[r.origen] || '') + '. ' + (I > 0 ? eur(I) + ' al mes en anuncios.' : 'Sin inversión en anuncios.'), pasoC, txtE[pasoC]],
       ['2', 'Primera respuesta', etiqueta('respuesta', r.respuesta) + '.', pasoR, txtE[pasoR]],
       ['3', 'Seguimiento', etiqueta('seguimiento', r.seguimiento) + '.', pasoS, txtE[pasoS]],
-      ['4', 'Cierre', r.cierre === '0.5' ? 'Menos de 1 de cada 10 ' + S.compran + '.' : r.cierre + ' de cada 10 ' + S.compran + '.' + (r.quien === 'dueno' ? ' Todo pasa por el dueño.' : ''), pasoQ, r.quien === 'dueno' ? 'Depende de ti' : 'Resultado']
+      ['4', 'Cierre', (r.cierre === '0.5' ? 'Menos de 1' : r.cierre) + ' de cada 10 ' + S.compran + '.' + (r.quien === 'dueno' ? ' Todo pasa por el dueño.' : ''), pasoQ, r.quien === 'dueno' ? 'Depende de ti' : 'Resultado'],
+      ['5', 'Después de la venta', r.despues === 'sistema' ? 'Hay un sistema para repetir y recomendar.' : r.despues === 'aveces' ? 'Alguna vez, sin sistema.' : 'No se hace nada.', pasoP, txtE[pasoP]]
     ].map(function (p) {
       return '<div class="paso ' + p[3] + '"><div class="n">Paso ' + p[0] + '</div><h3>' + p[1] + '</h3><p>' + esc(p[2]) + '</p><span class="estado">' + p[4] + '</span></div>';
     }).join('');
 
     var fugas = [];
-    if (fr > 0) fugas.push({ eur: eurR, t: 'Se tarda en responder', p: 'Quien pregunta suele estar mirando varias opciones a la vez. Si la respuesta llega ' + (r.respuesta === '1h' ? 'en una hora' : r.respuesta === 'dia' ? 'horas después' : 'al día siguiente') + ', una parte ya ha hablado con otro.', h: '<b>Qué haríamos:</b> un agente de WhatsApp que responde en menos de 2 minutos, a cualquier hora, y una agente de voz que llama a los que no contestan.' });
-    if (fs > 0) fugas.push({ eur: eurS, t: 'Nadie sigue a quien no ' + S.compra1 + ' a la primera', p: 'Casi nadie decide en el primer contacto. Sin un seguimiento fijo, el que dijo «me lo pienso» o no contestó se pierde, aunque estuviera interesado.', h: '<b>Qué haríamos:</b> seguimiento automático en los días clave por WhatsApp, correo y llamada, y recuperación de ' + S.parados + '.' });
+    if (fr > 0) fugas.push({ k: 'conversion', eur: eurR, t: 'Se tarda en responder', p: 'Quien pregunta suele estar mirando varias opciones a la vez. Si la respuesta llega ' + (r.respuesta === '1h' ? 'en una hora' : r.respuesta === 'dia' ? 'horas después' : 'al día siguiente') + ', una parte ya ha hablado con otro.', h: '<b>Qué haríamos:</b> un agente de WhatsApp que responde en menos de 2 minutos, a cualquier hora, y una agente de voz que llama a los que no contestan.' });
+    if (fs > 0) fugas.push({ k: 'seguimiento', eur: eurS, t: 'Nadie sigue a quien no ' + S.compra1 + ' a la primera', p: 'Casi nadie decide en el primer contacto. Sin un seguimiento fijo, el que dijo «me lo pienso» o no contestó se pierde, aunque estuviera interesado.', h: '<b>Qué haríamos:</b> seguimiento automático en los días clave por WhatsApp, correo y llamada, y recuperación de ' + S.parados + '.' });
+    if (eurC > 0) fugas.push({ k: 'captacion', eur: eurC, t: 'No sabéis qué anuncios traen ' + S.clientes, p: 'Se mide por contactos o clics, no por ' + S.clientes + '. Parte del presupuesto se va en campañas que traen contactos que nunca compran.', h: '<b>Qué haríamos:</b> unir anuncios, CRM y ventas para medir cada campaña por los ' + S.clientes + ' que trae, y mover el presupuesto a lo que funciona.' });
+    if (eurP > 0) fugas.push({ k: 'retencion', eur: eurP, t: 'Después de la venta no pasa nada', p: 'El ' + S.cliente + ' contento es el contacto más barato que tenéis, y sin un sistema se desaprovecha: ' + S.postventa + '.', h: '<b>Qué haríamos:</b> mensajes automáticos en el momento justo después de la venta para ' + S.postventa + ', y aviso cuando alguien está listo para repetir.' });
     fugas.sort(function (a, b) { return b.eur - a.eur; });
+    if (I === 0 && r.origen === 'recomendacion') fugas.push({ k: 'captacion', eur: null, t: 'La entrada depende del boca a boca', p: 'Funciona, pero no lo controláis: no podéis decidir cuántos ' + S.contactos + ' entran el mes que viene.', h: '<b>Qué haríamos:</b> campañas pequeñas y medidas por ' + S.clientes + ' para tener una entrada predecible, con el mismo seguimiento detrás.' });
     if (r.quien === 'dueno') fugas.push({ eur: null, t: 'Todo depende de ti', p: 'Mientras responder y perseguir pase por ti, el crecimiento está limitado a tus horas.', h: '<b>Qué haríamos:</b> cada contacto con su puntuación. El sistema hace el trabajo repetitivo y te avisa solo cuando hay alguien listo para hablar contigo, con todo el contexto.' });
     if (!fugas.length) fugas.push({ eur: null, t: 'El recorrido aguanta', p: 'Con esta forma de trabajar, la mejora está en medir qué campañas traen ' + S.clientes + ' de verdad y en llevar más ' + S.contactos + ' al mismo proceso.', h: '<b>Qué haríamos:</b> un panel que une anuncios, CRM y conversaciones para saber qué funciona y escalarlo.' });
-    $('#r-fugas').innerHTML = fugas.slice(0, 3).map(function (f) {
+    $('#r-fugas').innerHTML = fugas.slice(0, 5).map(function (f) {
       return '<div class="fuga"><h3>' + esc(f.t) + '</h3>' + (f.eur ? '<div class="eur">' + eur(f.eur) + '<small>al mes</small></div>' : '<div></div>') + '<p>' + esc(f.p) + '</p><div class="haria">' + f.h + '</div></div>';
     }).join('');
 
     $('#r-cuenta').innerHTML = '<b>Cómo lo hemos calculado:</b> ' + fmt.format(L) + ' ' + S.contactos + ' × ' + (r.cierre === '0.5' ? '0,5' : r.cierre) + ' de cada 10 × ' + eur(V) + ' = ' + eur(factMes) + ' al mes hoy. ' +
       'Suponemos, de forma prudente, que respondiendo al momento se recupera un ' + Math.round(fr * 100) + ' % más de ventas y que con seguimiento fijo otro ' + Math.round(fs * 100) + ' %' +
-      (fr + fs > TOPE ? ', con un tope del ' + Math.round(TOPE * 100) + ' % en total' : '') + '. Son estimaciones sobre vuestros números: si alguno cambia, el resultado se ajusta.';
+      (fr + fs > TOPE ? ' (con un tope del ' + Math.round(TOPE * 100) + ' % entre los dos)' : '') +
+      (eurC > 0 ? '; que un ' + Math.round(fc * 100) + ' % de la inversión en anuncios se va en campañas que no traen ' + S.clientes : '') +
+      (eurP > 0 ? '; y que después de la venta se puede sumar un ' + Math.round(fp * 100) + ' % por repetición y recomendación' : '') +
+      '. Son estimaciones sobre vuestros números: si alguno cambia, el resultado se ajusta.';
 
     $('#r-final').textContent = r.empresa ? 'Así funcionaría para ' + r.empresa + ':' : 'Así funcionaría en vuestro caso:';
-    var obj = fugas[0] && fugas[0].t === 'Se tarda en responder' ? 'conversion' : fs > 0 ? 'seguimiento' : 'todo';
+    var obj = (fugas[0] && fugas[0].eur && fugas[0].k) || 'todo';
     var q = new URLSearchParams({ sector: r.sector, objetivo: obj });
     if (r.empresa) q.set('empresa', r.empresa);
     $('#verdemo').href = '../?' + q.toString();
@@ -293,12 +336,12 @@
   var guardado = q.get('r') && decodificar(q.get('r'));
   if (guardado) Object.keys(r).forEach(function (k) { if (guardado[k] != null) r[k] = String(guardado[k]); });
   else { if (SECTORES[q.get('sector')]) r.sector = q.get('sector'); if (q.get('empresa')) r.empresa = q.get('empresa').slice(0, 40); }
-  $('#sector').value = r.sector; $('#empresa').value = r.empresa; $('#contactos').value = r.contactos; $('#valor').value = r.valor;
+  $('#sector').value = r.sector; $('#empresa').value = r.empresa; $('#contactos').value = r.contactos; $('#inversion').value = r.inversion; $('#valor').value = r.valor;
   pintarOpciones(); pintarTextos(); actualizarBoton();
   if (guardado && completo()) calcular();
 
   $('#sector').addEventListener('change', function (e) { r.sector = e.target.value; pintarTextos(); actualizarBoton(); });
-  ['empresa', 'contactos', 'valor'].forEach(function (id) { $('#' + id).addEventListener('input', function (e) { r[id] = e.target.value.trim(); actualizarBoton(); }); });
+  ['empresa', 'contactos', 'inversion', 'valor'].forEach(function (id) { $('#' + id).addEventListener('input', function (e) { r[id] = e.target.value.trim(); actualizarBoton(); }); });
   document.addEventListener('click', function (e) {
     var b = e.target.closest('.op'); if (!b) return;
     r[b.parentNode.dataset.campo] = b.dataset.v; pintarOpciones(); actualizarBoton();
