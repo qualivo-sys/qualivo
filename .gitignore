@@ -10,3 +10,7 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Cache de Python: se regenera solo en cada ejecucion
+__pycache__/
+*.pyc

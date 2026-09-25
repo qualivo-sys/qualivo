@@ -1,0 +1,442 @@
+[
+ {
+  "email": "nico@saishoart.com",
+  "first_name": "Nicolas",
+  "last_name": "Fournie",
+  "company_name": "Saisho",
+  "dom": "saishoart.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "oto@somoswoko.com",
+  "first_name": "Oto",
+  "last_name": "Whitehead",
+  "company_name": "woko | The Behavioral Lab",
+  "dom": "somoswoko.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "ignacio.gonzalez@consultiatravel.com",
+  "first_name": "Ignacio",
+  "last_name": "Gonzalez",
+  "company_name": "Consultia Travel",
+  "dom": "consultiatravel.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jjmartin@openhr.cloud",
+  "first_name": "Jose",
+  "last_name": "Juan Martin",
+  "company_name": "OpenHR",
+  "dom": "openhr.cloud",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "agb@keepcoding.io",
+  "first_name": "Adriana",
+  "last_name": "Botelho",
+  "company_name": "KeepCoding",
+  "dom": "keepcoding.io",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "daniel.rubio@fonia.ai",
+  "first_name": "Daniel",
+  "last_name": "Rubio Lopez",
+  "company_name": "Fonia",
+  "dom": "fonia.ai",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jbuitrago@jscingenium.com",
+  "first_name": "Juan Carlos",
+  "last_name": "Buitrago",
+  "company_name": "JSC Ingenium",
+  "dom": "jscingenium.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "lcrespo@genotipia.com",
+  "first_name": "Loreto",
+  "last_name": "Crespo Vila",
+  "company_name": "Genotipia",
+  "dom": "genotipia.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jonathan.sielva@voltaic.es",
+  "first_name": "Jonathan",
+  "last_name": "Sielva Gonzalez",
+  "company_name": "Voltaic Renovables",
+  "dom": "voltaic.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "david.perea@plenitas.com",
+  "first_name": "David",
+  "last_name": "Perea Blanquer",
+  "company_name": "Plenitas",
+  "dom": "plenitas.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "derek@onparallel.com",
+  "first_name": "Derek",
+  "last_name": "Lou",
+  "company_name": "Parallel",
+  "dom": "onparallel.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jordib@candam.eu",
+  "first_name": "Jordi",
+  "last_name": "Berguinzo Martinez",
+  "company_name": "Candam Tech",
+  "dom": "candam.eu",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "cponce@apoloenergies.es",
+  "first_name": "Carlos",
+  "last_name": "Ponce",
+  "company_name": "Apolo Energies",
+  "dom": "apoloenergies.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "didac@senseistalent.com",
+  "first_name": "Didac",
+  "last_name": "Angulo Montserrat",
+  "company_name": "SenseisTalent",
+  "dom": "senseistalent.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "julio@orga-ai.com",
+  "first_name": "Julio",
+  "last_name": "Roldan Moreno",
+  "company_name": "Orga AI",
+  "dom": "orga-ai.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "marcos.martin@idavinci.es",
+  "first_name": "Marcos",
+  "last_name": "Martin Hernandez",
+  "company_name": "IDavinci-Consultora de Innovación",
+  "dom": "idavinci.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "manel@besana.energy",
+  "first_name": "Manel",
+  "last_name": "Pujol Olivares",
+  "company_name": "Besana",
+  "dom": "besana.energy",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "esamper@lifelength.com",
+  "first_name": "Enrique",
+  "last_name": "Samper",
+  "company_name": "Life Length",
+  "dom": "lifelength.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "sgrabulosa@energy-tools.net",
+  "first_name": "Sandra",
+  "last_name": "Grabulosa Triadu",
+  "company_name": "Energy Tools",
+  "dom": "energy-tools.net",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "carlos.valenzuela@mecides.es",
+  "first_name": "Carlos",
+  "last_name": "Valenzuela Salafranca",
+  "company_name": "MECIDES - The Tax Lease Company",
+  "dom": "mecides.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jose@be-ambassador.com",
+  "first_name": "Jose",
+  "last_name": "Olarreaga Yeregui",
+  "company_name": "BeAmbassador",
+  "dom": "be-ambassador.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "antonio.flores@strategicplatform.com",
+  "first_name": "Antonio",
+  "last_name": "Flores",
+  "company_name": "Strategic Platform",
+  "dom": "strategicplatform.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "antonio.alvarez@redi.es",
+  "first_name": "Antonio",
+  "last_name": "Alvarez",
+  "company_name": "REDI | Ibérica de Redes",
+  "dom": "redi.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jordi.mercader@inbestme.com",
+  "first_name": "Jordi",
+  "last_name": "Mercader",
+  "company_name": "inbestMe",
+  "dom": "inbestme.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "toni@thesalesinstitute.es",
+  "first_name": "Toni",
+  "last_name": "Perez Navarro",
+  "company_name": "The Sales Institute",
+  "dom": "thesalesinstitute.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "federico@g-stock.es",
+  "first_name": "Federico",
+  "last_name": "Fritzsch Ingles",
+  "company_name": "Gstock",
+  "dom": "g-stock.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "fdavilaponce@crowmie.com",
+  "first_name": "Fernando",
+  "last_name": "De Leon Gamez",
+  "company_name": "Crowmie",
+  "dom": "crowmie.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "sisco@lleida.net",
+  "first_name": "Sisco",
+  "last_name": "Sapena",
+  "company_name": "Lleida.net",
+  "dom": "lleida.net",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "plaplana@aslagreensolutions.com",
+  "first_name": "Patrizia",
+  "last_name": "Laplana",
+  "company_name": "Asla Green Solutions",
+  "dom": "aslagreensolutions.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "enrique.almohalla@icariatechnology.com",
+  "first_name": "Enrique",
+  "last_name": "Almohalla",
+  "company_name": "icaria Technology",
+  "dom": "icariatechnology.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "roberto.prado@proqio.com",
+  "first_name": "Roberto",
+  "last_name": "Prado Garcia",
+  "company_name": "Proqio",
+  "dom": "proqio.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "alfredo@stemdo.io",
+  "first_name": "Alfredo",
+  "last_name": "Montilla Alvaro",
+  "company_name": "STEMDO",
+  "dom": "stemdo.io",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "mireia.badia@stockcrowdin.com",
+  "first_name": "Mireia",
+  "last_name": "Badia",
+  "company_name": "StockCrowd IN",
+  "dom": "stockcrowdin.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "m.herranz@pangeanic.com",
+  "first_name": "Manuel",
+  "last_name": "Herranz",
+  "company_name": "Pangeanic",
+  "dom": "pangeanic.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "alfonso.campos@wayops.eu",
+  "first_name": "Alfonso",
+  "last_name": "Campos",
+  "company_name": "WayOps",
+  "dom": "wayops.eu",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "chris@yinius.io",
+  "first_name": "Christakis",
+  "last_name": "Theodorou Villalta",
+  "company_name": "yinius.io",
+  "dom": "yinius.io",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "cpascual@mediktor.com",
+  "first_name": "Cristian",
+  "last_name": "Pascual",
+  "company_name": "Mediktor",
+  "dom": "mediktor.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "sebastian@biharbatteries.com",
+  "first_name": "Sebastian",
+  "last_name": "Fernandez-Medrano",
+  "company_name": "Bihar Batteries",
+  "dom": "biharbatteries.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "quim@paymefy.com",
+  "first_name": "Quim",
+  "last_name": "Zurano Gallart",
+  "company_name": "Paymefy",
+  "dom": "paymefy.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "gv@bnext.es",
+  "first_name": "Guillermo",
+  "last_name": "Vicandi",
+  "company_name": "Bnext",
+  "dom": "bnext.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ }
+]
