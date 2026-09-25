@@ -606,12 +606,19 @@ automático queda pendiente del sí de Maikel con la audiencia elegida.
 
 ### Publicado
 
-- **Artículo nuevo:** https://qualivo.io/blog/coste-por-lead/ («Coste por lead: el número que te engaña si lo miras solo»). Dato real: anuncios del 18 al 22-sep por sector (brief de la semana 38). Reformas y formación salen casi al mismo coste por lead (10,00 € y 10,85 €), pero formación sacó cinco citas y reformas dos, así que la cita cuesta unos 17 € en uno y unos 45 € en el otro. Caso EAC como prueba de medir hasta la venta. Tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+- **Artículo nuevo:** https://qualivo.io/blog/coste-por-lead/ («Coste por lead: el número que te engaña si lo miras solo»). Dato real: anuncios del 18 al 22-sep por sector (brief de la semana 38). Reformas y formación salen casi al mismo coste por lead (10,00 € y 10,85 €), pero formación sacó cuatro citas y reformas dos, así que la cita cuesta unos 22 € en uno y unos 45 € en el otro. Caso EAC como prueba de medir hasta la venta. Tarjeta en el blog, sitemap, llms.txt y registro de keywords.
 - **Reorientado:** `blog/como-captar-clientes/`. Los dos últimos párrafos del paso 5 llevan ahora el dato del coste por lead contra el coste por cita, con enlace al artículo nuevo. La llamada a la acción es un solo botón al diagnóstico. dateModified a 25-sep.
 
 ### Borradores (sin publicar)
 
 - **Viernes, tesis contraria:** «Una automatización que falla en silencio sale más cara que no tenerla». Imagen `content/infografias/2026-09-25/falla-en-silencio.png`, texto de LinkedIn y pie de Instagram en `content/borradores/2026-09-25-tesis-falla-en-silencio.md`. Dato: el primer mensaje automático a los contactos nuevos estuvo casi dos días sin salir (22 a 24-sep) con la etiqueta de «enviado» puesta, y lo vio Maikel por una captura (daily de Growth del 24-sep). Se deja fuera, a propósito, que el mensaje es un WhatsApp (regla del 663) y el mensaje cruzado a otro contacto (datos de un tercero).
+
+### Master Reviewer (25-sep)
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-25.md`. El artículo sacó un 6 y el post un 7, las dos piezas con veredicto «publicar con cambios». Aplicados todos los críticos:
+- **Artículo.** Los 291,90 € eran de cuatro sectores; ahora se explica que asesorías se paró sin contactos. Una de las dos citas de clínicas entró por la web. Formación tiene 4 citas y no 5: el resumen del brief dice 5, pero el detalle lead a lead da 4, y me quedo con lo que se puede comprobar, así que la cita sale a unos 22 € y no a 17 €. Además: fuera el enlace al artículo que publica el «5 de 9», la etiqueta descrita como es de verdad (el anuncio va apuntado en el contacto), el panel en lugar de un «informe de la mañana» que no da ese dato, fuera «lo agentizamos», el caso EAC dicho como lo cuenta su página y el schema de la FAQ igual que la FAQ visible. Corregida también la línea de llms.txt.
+- **Post.** Fuera el «lo peor no es eso», «captura del CRM», remate corregido y «un mensaje automático de mi sistema» en texto e imagen, para que nadie lo lea como WhatsApp automatizado desde el 663. Imagen regenerada.
+- **Queda para otro día (fuera del alcance de hoy).** El «5 de 9» del artículo del 23-sep, que depende de la decisión de Maikel. La fila 9 de `serie-buscando-la-fuga-por-etapa.md`, que tiene el mismo error de la etiqueta. El enlace desde el pilar de métricas. El resumen del brief, que no cuadra con su propio detalle.
 
 ### Decisiones que dejo tomadas
 

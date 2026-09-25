@@ -22,6 +22,7 @@
 - **Acierto y fallo:** el fallo es el centro, porque es una tesis contraria.
   El acierto va detrás: detectado y arreglado el mismo día, y la regla nueva
   que cualquiera puede aplicar mañana.
+- **Revisión (25-sep):** Master Reviewer, nota 7, publicar con cambios. Aplicados los 4 críticos: fuera el «lo peor no es eso», «captura del CRM» (la fuente no dice «por otra cosa»), remate corregido (el mensaje no salió, no es que no llegara) y «un mensaje automático de mi sistema» en lugar de «el primer mensaje a los contactos nuevos», para que nadie lo lea como WhatsApp automatizado desde el número de Maikel.
 - **Formato:** una imagen 1080 × 1350 + texto de LinkedIn. **CTA:** conversación.
 - **Lo que se mide:** comentarios con «a mí me pasó…».
 
@@ -29,14 +30,14 @@
 
 > Una automatización que falla en silencio sale más cara que no tenerla.
 >
-> Lo digo por lo que me pasó esta semana. El primer mensaje que reciben los
-> contactos nuevos en mi empresa estuvo casi dos días sin salir. Un
+> Lo digo por lo que me pasó esta semana. Uno de los mensajes automáticos de
+> mi sistema comercial estuvo casi dos días sin salir. Un
 > interruptor se quedó en pausa después de un cambio y nadie lo volvió a
 > encender.
 >
-> Lo peor no es eso. Lo peor es que el sistema apuntaba «enviado» igual. El
+> Y encima el sistema apuntaba «enviado» igual. El
 > panel decía que todo iba bien. No saltó ninguna alerta. Me di cuenta yo,
-> mirando una captura por otra cosa.
+> al ver una captura del CRM.
 >
 > Si ese mensaje lo mandara una persona, al segundo día alguien habría
 > preguntado por qué nadie contesta. Con una máquina, nadie pregunta. Por eso
@@ -45,19 +46,19 @@
 > Lo arreglé ese mismo día. El envío ahora está activo por defecto y solo se
 > para si alguien lo pide a propósito. Y me llevo una regla que vale para
 > cualquier automatización, la tengas en una hoja de cálculo o en un agente:
-> no le preguntes si lo hizo, mira si pasó. «Enviado» no es lo mismo que
-> «recibido».
+> no le preguntes si lo hizo, mira si pasó. Que ponga «enviado» no quiere
+> decir que haya salido.
 >
 > ¿Cuándo fue la última vez que comprobaste a mano que tu automatización hace
 > lo que dice?
 
 ## Pie para Instagram (misma imagen)
 
-> Dos días casi enteros sin salir el primer mensaje a los contactos nuevos. Y
+> Dos días casi enteros sin salir un mensaje automático de mi sistema. Y
 > el panel decía que todo iba bien.
 >
 > Un interruptor se quedó en pausa y el sistema apuntaba «enviado» igual. Sin
-> alertas. Me di cuenta por una captura. Lo arreglé ese día, y me quedo con
+> alertas. Me di cuenta por una captura del CRM. Lo arreglé ese día, y me quedo con
 > una regla: no le preguntes a tu automatización si lo hizo, mira si pasó.
 >
 > ¿Cuándo comprobaste a mano la tuya por última vez? Dímelo abajo.
