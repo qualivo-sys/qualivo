@@ -44,12 +44,18 @@ const lista = (n, base) => (arg(n, null) ? String(arg(n)).split(',').map((x) => 
 const JUEGOS = lista('games', JUEGOS_BASE);
 const REGIONES = lista('regions', REGIONES_BASE);
 const PAGINAS = +arg('pages', 1);
-const PAISES_OK = new Set(['US', 'CA', 'GB', 'IE', 'AU', 'NZ', 'DE', 'NL', 'SE', 'NO', 'DK', 'FI', 'BE', 'AT', 'CH', 'FR', 'IT', 'PT', 'PL', 'ES']);
+// Idioma de la pasada: en (por defecto), es o pt. Lea abrió Latinoamérica el 25 sep.
+const LANG = arg('lang', 'en');
+const PAISES_OK = new Set(LANG === 'en'
+  ? ['US', 'CA', 'GB', 'IE', 'AU', 'NZ', 'DE', 'NL', 'SE', 'NO', 'DK', 'FI', 'BE', 'AT', 'CH', 'FR', 'IT', 'PT', 'PL', 'ES']
+  : LANG === 'es' ? ['ES', 'MX', 'CO', 'AR', 'CL', 'PE', 'UY', 'EC', 'VE', 'US'] : ['BR', 'PT']);
 
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-z]{2,24}/gi;
 const AJENO = /(noreply|no-reply|example\.|epidemicsound|nordvpn|gamersupps|manscaped|raidshadow|audible|squarespace|expressvpn|surfshark|youtube\.com|google\.com)/i;
 // Títulos en idiomas que no trabajamos: se descartan antes de gastar cuota en el canal.
-const OTRO_IDIOMA = /[Ѐ-ӿ؀-ۿऀ-෿฀-๿぀-ヿ一-鿿가-힯]|\b(jogando|jugando|amigos|mit freunden|avec|zagrałem)\b/i;
+const OTRO_IDIOMA = LANG === 'en'
+  ? /[Ѐ-ӿ؀-ۿऀ-෿฀-๿぀-ヿ一-鿿가-힯]|\b(jogando|jugando|amigos|mit freunden|avec|zagrałem)\b/i
+  : /[Ѐ-ӿ؀-ۿऀ-෿฀-๿぀-ヿ一-鿿가-힯]|\b(mit freunden|avec|zagrałem)\b/i;
 
 const api = async (path, params) => {
   const u = new URL(`https://www.googleapis.com/youtube/v3/${path}`);
@@ -73,7 +79,7 @@ for (const juego of JUEGOS) {
     let token;
     for (let pag = 0; pag < PAGINAS; pag++) {
     const j = await api('search', { part: 'snippet', q: CONSULTA[juego] || juego, type: 'video', maxResults: 50, order: 'viewCount',
-      publishedAfter: desde, regionCode: region, relevanceLanguage: 'en', ...(token ? { pageToken: token } : {}) });
+      publishedAfter: desde, regionCode: region, relevanceLanguage: LANG, ...(token ? { pageToken: token } : {}) });
     unidades += 100;
     token = j.nextPageToken;
     for (const it of j.items || []) {
@@ -105,7 +111,7 @@ for (let i = 0; i < vids.length; i += 50) {
   for (const v of j.items || []) vistas.set(v.id, +v.statistics.viewCount || 0);
 }
 
-const nf = new Intl.NumberFormat('en-US');
+const nf = new Intl.NumberFormat(LANG === 'en' ? 'en-US' : LANG === 'es' ? 'es-ES' : 'pt-BR');
 const leads = [];
 for (const c of canales) {
   const subs = +c.statistics.subscriberCount || 0;
@@ -121,8 +127,10 @@ for (const c of canales) {
   leads.push({
     email: correos[0], first_name: c.snippet.title, company_name: v.juego,
     website: c.snippet.customUrl ? `https://www.youtube.com/${c.snippet.customUrl}` : `https://www.youtube.com/channel/${c.id}`,
-    cited_video: `your video "${corto}"`,
-    video_detail: views >= 50000 ? `the one that hit ${nf.format(views)} views` : `the ${v.juego} part`,
+    cited_video: LANG === 'es' ? `tu vídeo «${corto}»` : LANG === 'pt' ? `seu vídeo "${corto}"` : `your video "${corto}"`,
+    video_detail: views >= 50000
+      ? (LANG === 'es' ? `el que se fue a ${nf.format(views)} vistas` : LANG === 'pt' ? `aquele que passou de ${nf.format(views)} visualizações` : `the one that hit ${nf.format(views)} views`)
+      : (LANG === 'es' ? `la parte de ${v.juego}` : LANG === 'pt' ? `a parte do ${v.juego}` : `the ${v.juego} part`),
     comparable_game: v.juego, platform: 'youtube', followers: subs, country: pais,
   });
 }
