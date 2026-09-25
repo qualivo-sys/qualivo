@@ -9,6 +9,10 @@
 const A = require('./_activacion');
 const R = require('./_recordatorios.js');
 
+// 25-sep-2026, Maikel: parar el recordatorio del mismo día (el de las 9:00),
+// sin tocar el de la víspera (18:30), que sigue funcionando igual.
+const DIA_PAUSADO = true;
+
 module.exports = async function handler(req, res) {
   const secreto = process.env.CRON_SECRET;
   const auth = String(req.headers.authorization || '');
@@ -18,6 +22,7 @@ module.exports = async function handler(req, res) {
   const q = req.query || {};
   const modo = String(q.modo || '') === 'vispera' ? 'vispera' : 'dia';
   const seco = String(q.dry || '') === '1';
+  if (modo === 'dia' && DIA_PAUSADO && !seco) return res.status(200).json({ ok: true, pausado: true, modo: modo });
   const t = A.ahoraMadrid();
   const horaBuena = modo === 'vispera' ? t.hora === 18 : t.hora === 9;
   if (!horaBuena && !seco) return res.status(200).json({ ok: true, esperando: 'no es la hora de Madrid (' + t.hora + ':' + String(t.minuto).padStart(2, '0') + ')', modo: modo });
