@@ -226,3 +226,33 @@ el archivo de audio adjunto.
 
 **Propuesto, no aplicado:** nada de voz, modelo, número ni cadencia — jornada de
 diagnóstico únicamente.
+
+## 25-sep-2026 · revisión diaria
+
+**Llamadas (3, todas manuales y aprobadas por Maikel, desde su móvil):** Lisandra (Marítima
+Dental) 11:25, no contesta. Gastón Santacecilia (OsteoCan) 14:02, 56 s: «ahora no», elige
+«esta tarde, después de las seis» y acepta las 18:30 → cita, se conectó y le encantó el
+diagnóstico, pero no es su momento (trato en «Más adelante»). Lisandra 15:30, 14 s: cuelga
+durante el saludo; no se la vuelve a llamar. Registradas en Notion «📞 Llamadas de Raquel».
+
+**Fallos de guion vistos:**
+1. Gastón dijo «esta tarde, después de las seis» y Raquel le propuso el lunes; tuvo que
+   corregirla dos veces antes de llegar a las 18:30.
+2. «Así miro el mensaje» era ambiguo (¿llámame luego o videollamada?) y no lo aclaró.
+3. «Perfecto. Perfecto.» encadenado.
+4. El saludo de la segunda llamada a Lisandra dura ~12 s antes de la primera pregunta y se
+   trastabilla; colgó a los 14 s.
+5. Sigue «Michael Echeverría» en la transcripción, también en la frase fija de apertura
+   que se le pasa escrita «Máikel». Para saber si es la voz o el transcriptor hay que
+   escuchar los primeros 5 s de la grabación de Gastón (enlace en Notion).
+
+**Aplicado hoy al asistente (copia previa en el scratchpad, raquel_backup_2026-09-25.json):**
+- «Si quiere agendar»: si la persona ya ha dicho cuándo le va bien, se le ofrece una hora
+  dentro de ese momento y no otro día; y si añade «así miro el mensaje» / «llámame luego»,
+  pregunta una vez si prefiere que la llamemos a esa hora o videollamada con Máikel.
+- «Estilo»: no encadenar «perfecto» dos veces.
+
+**Propuesto, no aplicado:** en las llamadas manuales de segunda vuelta (scripts del
+scratchpad), abrir con una frase y una pregunta («Hola Lisandra, soy Raquel, del equipo de
+Máikel, de Qualivo. ¿Te pillo en mal momento?») y solo después el contexto. Latencia media
+por turno en la de Gastón: 1,66 s; sin silencios de más de 3 s.
