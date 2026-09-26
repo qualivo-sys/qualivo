@@ -94,3 +94,28 @@ Para lanzarlo a mano: botón *Execute workflow* en la interfaz.
    `$('Google Ads · campañas').all()`.
 4. **Objeto anidado hacia Sheets**: el nodo recibía `{html, asunto, fila}` y no habría
    mapeado columnas. Añadido el nodo «Fila para el dashboard» que aplana la fila.
+
+## Apagado tras el cierre de la campaña (26-09)
+
+La campaña terminó el 23-09 a las 23:59, pero el flujo siguió ejecutándose a las 08:00 del
+24, el 25 y el 26, enviando correos sin datos: desde el corte no hay ni una impresión, así
+que el informe sale a cero. **`REPORT_TO` incluye `asanchez@adigital.org`**, de modo que esos
+correos vacíos también llegan al cliente.
+
+Para pararlo: `n8n/parar_n8n.py`, que necesita `N8N_KEY` en el entorno.
+
+```sh
+N8N_KEY='...' python3 outthink-google-ads/n8n/parar_n8n.py           # solo consulta
+N8N_KEY='...' python3 outthink-google-ads/n8n/parar_n8n.py --apply   # desactiva
+```
+
+O a mano, que es más rápido: abrir https://qualivo.app.n8n.cloud/workflow/t6g8nV3pQXqYLpuN
+y quitar el interruptor **Active** de la esquina superior derecha.
+
+La clave de la API de n8n nunca se ha guardado en el repositorio ni en disco; se pasaba por
+variable de entorno y no sobrevive al fin de la sesión. Es intencionado.
+
+**Lección para la próxima campaña:** un flujo con fecha de caducidad conocida debería llevar
+el corte dentro. Basta un nodo IF después del disparador que compare la fecha con la del fin
+de campaña y detenga la ejecución, o un `Schedule Trigger` con fecha de fin. Así el apagado no
+depende de que alguien se acuerde.
