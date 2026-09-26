@@ -44,6 +44,9 @@ const lista = (n, base) => (arg(n, null) ? String(arg(n)).split(',').map((x) => 
 const JUEGOS = lista('games', JUEGOS_BASE);
 const REGIONES = lista('regions', REGIONES_BASE);
 const PAGINAS = +arg('pages', 1);
+// viewCount saca a los grandes (ya los tenemos tras la primera pasada); date saca a
+// los que acaban de subir vídeo, más pequeños y más propensos a contestar.
+const ORDEN = arg('order', 'viewCount');
 // Idioma de la pasada: en (por defecto), es o pt. Lea abrió Latinoamérica el 25 sep.
 const LANG = arg('lang', 'en');
 const PAISES_OK = new Set(LANG === 'en'
@@ -74,12 +77,22 @@ if (excludePath && existsSync(excludePath)) {
 const desde = new Date(Date.now() - days * 864e5).toISOString();
 const videos = new Map(); // channelId -> mejor vídeo encontrado
 let unidades = 0;
+let cortado = false;
 for (const juego of JUEGOS) {
+  if (cortado) break;
   for (const region of REGIONES) {
+    if (cortado) break;
     let token;
     for (let pag = 0; pag < PAGINAS; pag++) {
-    const j = await api('search', { part: 'snippet', q: CONSULTA[juego] || juego, type: 'video', maxResults: 50, order: 'viewCount',
+    let j;
+    try {
+    j = await api('search', { part: 'snippet', q: CONSULTA[juego] || juego, type: 'video', maxResults: 50, order: ORDEN,
       publishedAfter: desde, regionCode: region, relevanceLanguage: LANG, ...(token ? { pageToken: token } : {}) });
+    } catch (e) {
+      // Sin cuota a mitad de pasada: se aprovecha lo ya recogido en vez de perderlo todo.
+      console.error(`Búsqueda cortada (${e.message.slice(0, 80)}); sigo con lo recogido`);
+      cortado = true; break;
+    }
     unidades += 100;
     token = j.nextPageToken;
     for (const it of j.items || []) {
