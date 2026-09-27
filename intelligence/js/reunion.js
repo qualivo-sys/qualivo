@@ -40,7 +40,9 @@
     const emp = empresaCliente();
 
     const quien = [c.rol, c.emp, c.tam ? c.tam + ' ' + (T.empleados || 'empleados') : '', c.ciudad && c.ciudad !== '—' ? c.ciudad : ''].filter(Boolean).join(' · ');
-    const resumen = cap(quien || c.n) + '. Le interesa ' + (c.prod ? '«' + c.prod + '»' : T.producto) + (c.valor ? ', ' + M.euros(c.valor) : '') + '. Llegó por ' + (camp ? camp.canal + ' («' + camp.nombre + '»)' : 'la web') + '.';
+    const resumen = cfg.real
+      ? cap(quien || c.n) + '. Llegó por ' + (camp ? camp.canal + ' («' + camp.nombre + '»)' : (c.prod || 'la web')) + (c.valor ? '. Trato de ' + M.euros(c.valor) : '') + '.'
+      : cap(quien || c.n) + '. Le interesa ' + (c.prod ? '«' + c.prod + '»' : T.producto) + (c.valor ? ', ' + M.euros(c.valor) : '') + '. Llegó por ' + (camp ? camp.canal + ' («' + camp.nombre + '»)' : 'la web') + '.';
 
     const apertura = ult
       ? '«' + nombre + ', antes de nada: me dijiste que «' + corto(ult.texto, 90) + '». ¿Sigue siendo lo más importante para ti?»'
@@ -81,7 +83,9 @@
       '<div><p class="bloque-t">Cómo abrir</p><div class="nba-caja"><p><b>Romper el hielo:</b> ' + esc(apertura) + '</p><p style="margin-top:8px"><b>Presentación:</b> ' + esc(presentacion) + '</p><p style="margin-top:8px"><b>Después, calla y escucha.</b> Lo que conteste es lo que le vas a ofrecer.</p></div></div>' +
       '<div><p class="bloque-t">Qué preguntar</p>' + lista(preguntas.slice(0, 4)) + '</div>' +
       '<div><p class="bloque-t">Objeciones probables</p>' + objeciones.slice(0, 3).map(function (o) { return '<div class="rd-obj"><b>' + esc(o[0]) + '</b><p>' + esc(o[1]) + '</p></div>'; }).join('') + '</div>' +
-      '<div><p class="bloque-t">Qué ofrecer</p><div class="porque-caja">' + esc(cap(c.prod || T.producto)) + (c.valor ? ' · ' + M.euros(c.valor) : '') + '. Si pregunta por resultados, ' + esc(T.casoExito || 'un caso parecido') + '.</div></div>' +
+      '<div><p class="bloque-t">Qué ofrecer</p><div class="porque-caja">' + (cfg.real
+        ? 'Diagnóstico en vivo con sus números, demo de su sector y, si encaja, arranque con fecha: implantación y primer mes, y después desde 750 €/mes, sin permanencia. Caso para citar: EAC (10,2×, 44.000 € en un mes) o Nuria Roure (6,45×).'
+        : esc(cap(c.prod || T.producto)) + (c.valor ? ' · ' + M.euros(c.valor) : '') + '. Si pregunta por resultados, ' + esc(T.casoExito || 'un caso parecido') + '.') + '</div></div>' +
       '<div><p class="bloque-t">Qué tienes que conseguir</p><div class="nba-caja humano rd-meta">' + QV.ico('diana') + '<p>' + md(objetivo) + '</p></div></div>' +
       '<div class="rd-despues" id="rdDespues"><p class="bloque-t">Después de la reunión</p>' +
         '<p class="gris" style="font-size:13px;margin-bottom:8px">Escribe dos líneas. El agente actualiza la ficha, la etapa y las tareas, y te deja el mensaje de seguimiento redactado.</p>' +

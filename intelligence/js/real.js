@@ -100,12 +100,15 @@
     if (r.f.nivel) partes.push('Nivel ' + r.f.nivel);
     if (r.f.sector) partes.push(SECTOR_TXT[r.f.sector] || r.f.sector);
     if (r.f.inv) partes.push(INV_TXT[r.f.inv]);
+    if (r.f.cuando) partes.push({ 'este-mes': 'Empezar este mes', '1-3-meses': 'Empezar en 1-3 meses', 'mirando': 'Solo mirando' }[r.f.cuando] || r.f.cuando);
+    if (r.f.precio) partes.push({ si: 'Le encaja el precio', depende: 'Precio: depende', no: 'Precio: ahora no' }[r.f.precio] || r.f.precio);
+    if (r.f.ruta) partes.push({ maikel: 'Llamada de Maikel', raquel: 'Llamada de Raquel', 'solo-wa': 'Solo WhatsApp' }[r.f.ruta] || r.f.ruta);
     return {
       id: r.id, n: r.n, rol: partes.join(' · '), emp: r.emp, seg: 'lead', ciudad: r.ciudad, prod: r.origen,
       orig: r.campana || 'otros', canal: r.canal, etapa: r.etapa, etapaTxt: r.etapaNombre || '', valor: r.valor || 0,
       creado: hace(r.creado, ahora), act: hace(r.act, ahora), toque: r.toque ? hace(r.toque, ahora) : null,
       fin: r.fin || undefined,
-      f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente },
+      f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente, cuando: r.f.cuando, precio: r.f.precio, ruta: r.f.ruta },
       s: {
         raquel: s.raquel, noshow: s.noshow, intentos: s.intentos, luego: s.luego ? 'su momento' : '', luegoTxt: s.luego ? 'lo retomaría más adelante' : '',
         cita: s.cita ? (s.cita - ahora) / MIN : undefined, citaOk: s.citaOk,
