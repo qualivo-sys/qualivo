@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#0A0A0B;font-family:SG;color:#fff}
+.lay{position:absolute;inset:0;opacity:0;overflow:hidden}
+.full{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;transform-origin:50% 50%}
+.grad{position:absolute;left:0;right:0;bottom:0;height:900px;background:linear-gradient(to top,rgba(10,10,11,.92) 0%,rgba(10,10,11,.75) 40%,rgba(10,10,11,0) 100%)}
+.gradT{position:absolute;left:0;right:0;top:0;height:700px;background:linear-gradient(to bottom,rgba(10,10,11,.55),rgba(10,10,11,0))}
+.cap{position:absolute;left:60px;right:60px;text-align:center;font-family:Anton;text-transform:uppercase;color:#fff;line-height:.95;text-shadow:0 6px 28px rgba(0,0,0,.55)}
+.cap .y{display:block;font-family:SG;font-weight:700;font-style:italic;text-transform:none;color:#F4CC38;font-size:.62em;margin-top:14px;letter-spacing:-.01em}
+.w{display:inline-block;opacity:0}
+/* móvil: bloqueo */
+.lock{position:absolute;inset:0;background:#101319}
+.lock .bg{position:absolute;inset:-40px;background:url(cap/v-oportunidades.png) center/cover;filter:blur(26px) brightness(.45)}
+.clock{position:absolute;top:250px;left:0;right:0;text-align:center;font-family:SG;font-weight:300;font-size:250px;letter-spacing:-.04em;color:#fff}
+.date{position:absolute;top:220px;left:0;right:0;text-align:center;font-size:40px;font-weight:600;color:rgba(255,255,255,.85)}
+.noti{position:absolute;left:70px;right:70px;top:640px;background:rgba(244,241,235,.94);color:#0A0A0B;border-radius:44px;padding:36px 40px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.noti .h{display:flex;align-items:center;gap:18px;font-size:30px;font-weight:700;color:#5A5E66;margin-bottom:14px}
+.noti .h i{width:54px;height:54px;border-radius:14px;background:#1FA396;display:block}
+.noti .h span{margin-left:auto;font-weight:500}
+.noti b{font-size:40px;display:block;margin-bottom:6px}
+.noti p{font-size:34px;line-height:1.3;color:#2A2D33}
+/* whatsapp */
+.wa{position:absolute;inset:0;background:#EFE7DD}
+.wah{position:absolute;left:0;right:0;top:0;background:#0A0A0B;color:#F4F1EB;padding:120px 56px 40px;display:flex;align-items:center;gap:28px}
+.wah .av{width:96px;height:96px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:50px;display:flex;align-items:center;justify-content:center}
+.wah b{font-size:44px;display:block}.wah span{font-size:30px;color:rgba(244,241,235,.6)}
+.bub{position:absolute;max-width:820px;border-radius:40px;padding:34px 38px;font-size:40px;line-height:1.36;color:#0A0A0B;box-shadow:0 5px 0 rgba(10,10,11,.08);opacity:0}
+.bub.in{left:50px;background:#fff;border-top-left-radius:10px}
+.bub.out{right:50px;background:#D9FDD3;border-top-right-radius:10px}
+.bub .t{text-align:right;font-size:28px;color:#7A7C82;margin-top:12px}
+/* llamada */
+.call{position:absolute;inset:0;background:#0A0A0B;display:flex;flex-direction:column;align-items:center;padding-top:300px}
+.call .av{width:330px;height:330px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:170px;display:flex;align-items:center;justify-content:center;position:relative}
+.ring{position:absolute;inset:0;border-radius:50%;border:6px solid #F4CC38}
+.call h2{font-family:Anton;font-size:84px;text-transform:uppercase;margin-top:60px;letter-spacing:.01em}
+.call p{font-size:40px;color:rgba(244,241,235,.65);margin-top:12px}
+.wave{display:flex;gap:16px;align-items:center;height:180px;margin-top:70px}
+.wave i{width:18px;border-radius:9px;background:#F4CC38;display:block;height:30px}
+/* resalte */
+.hl{position:absolute;border:8px solid #F4CC38;border-radius:30px;opacity:0;box-shadow:0 0 0 2000px rgba(10,10,11,.35)}
+/* cierre */
+.stack{position:absolute;left:0;right:0;top:470px;text-align:center;font-family:Anton;font-size:250px;line-height:.9;text-transform:uppercase;color:#fff;text-shadow:0 8px 36px rgba(0,0,0,.6)}
+.stack div{opacity:0}
+.stack .yy{color:#F4CC38}
+.url{position:absolute;left:0;right:0;bottom:250px;text-align:center;opacity:0}
+.url b{display:inline-block;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:64px;letter-spacing:.02em;padding:20px 46px;border-radius:999px}
+.url p{font-size:40px;font-weight:600;margin-top:24px;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.6)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+</style>
+<div id="e">
+  <!-- 1 · Maikel + gancho -->
+  <div class="lay" id="L1"><img class="full mk" id="mk1" src="mk/m001.jpg"><div class="grad"></div>
+    <div class="cap" style="top:1040px;font-size:150px"><span class="w">Ningún</span> <span class="w">alumno</span><br><span class="w">sin respuesta</span><span class="y w" id="y1">ni a las 23:04</span></div></div>
+  <!-- A · captación -->
+  <div class="lay" id="LA"><img class="full" id="imgA" src="cap/v-anuncios.png"><div class="hl" id="hlA" style="left:40px;top:640px;width:1000px;height:345px"></div><div class="grad"></div>
+    <div class="cap" style="top:1330px;font-size:128px"><span class="w">Atraemos a</span><br><span class="w">los que compran</span><span class="y w">no a los curiosos</span></div></div>
+  <!-- 2 · llega la solicitud -->
+  <div class="lay" id="L2"><div class="lock"><div class="bg"></div>
+    <div class="date">Martes, 23:04</div><div class="clock">23:04</div>
+    <div class="noti" id="noti"><div class="h"><i></i>Tu escuela · CRM<span>ahora</span></div><b>Nueva solicitud · Marta Ruiz</b><p>Máster en Marketing Digital · desde el anuncio de Instagram</p></div></div>
+    <div class="grad" style="height:700px"></div>
+    <div class="cap" style="top:1420px;font-size:128px"><span class="w">23:04</span><span class="y w">pide información</span></div></div>
+  <!-- 3 · responde -->
+  <div class="lay" id="L3"><div class="wa"><div class="wah"><div class="av">M</div><div><b>Marta Ruiz</b><span>en línea</span></div></div>
+    <div class="bub in" id="b1" style="top:330px">Hola, ¿el máster es 100% online? ¿Cuándo empieza?<div class="t">23:04</div></div>
+    <div class="bub out" id="b2" style="top:580px">¡Hola Marta! Sí, 100% online y a tu ritmo. La próxima edición empieza el 19 de octubre. ¿Lo quieres para cambiar de trabajo o para crecer en el tuyo?<div class="t">23:05 ✓✓</div></div></div>
+    <div class="grad" style="height:760px"></div>
+    <div class="cap" style="top:1420px;font-size:128px"><span class="w">23:05</span><span class="y w">ya tiene respuesta</span></div></div>
+  <!-- 4 · llamada -->
+  <div class="lay" id="L4"><div class="call"><div class="av">M<div class="ring" id="ring"></div></div><h2>Marta Ruiz</h2><p>Asistente de admisiones · llamando…</p><div class="wave" id="wave"></div></div>
+    <div class="grad" style="height:700px"></div>
+    <div class="cap" style="top:1420px;font-size:128px"><span class="w">9:00</span><span class="y w">la llamamos</span></div></div>
+  <!-- 5 · ficha -->
+  <div class="lay" id="L5"><img class="full" id="img5" src="cap/ficha-1.png"><div class="hl" id="hl5" style="left:20px;top:520px;width:680px;height:520px"></div><div class="grad"></div>
+    <div class="cap" style="top:1330px;font-size:128px"><span class="w">Sabe quién</span><br><span class="w">está listo</span><span class="y w">y por qué</span></div></div>
+  <!-- 6 · aviso -->
+  <div class="lay" id="L6"><img class="full" id="img6" src="cap/demo-06.png"><div class="hl" id="hl6" style="left:25px;top:60px;width:1030px;height:470px"></div><div class="grad"></div>
+    <div class="cap" style="top:1330px;font-size:128px"><span class="w">Y te avisa</span><br><span class="w">a ti</span><span class="y w">solo cuando hace falta</span></div></div>
+  <!-- 7 · montaje -->
+  <div class="lay" id="L7"><img class="full" id="m7a" src="cap/v-resumen.png"><img class="full" id="m7b" src="cap/v-conversaciones.png"><img class="full" id="m7c" src="cap/v-agentes.png"><div class="grad"></div>
+    <div class="cap" style="top:1300px;font-size:128px"><span class="w">Nosotros nos</span><br><span class="w">encargamos</span><span class="y w">de todo</span></div></div>
+  <!-- 8 · cierre -->
+  <div class="lay" id="L8"><img class="full mk" id="mk2" src="mk/m100.jpg"><div class="gradT" style="height:1920px;background:rgba(10,10,11,.45)"></div>
+    <div class="stack"><div>Capta</div><div>Entiende</div><div class="yy">Actúa</div></div>
+    <div class="url" id="url"><b>qualivo.io</b><p>Te lo enseñamos en 15 minutos</p></div></div>
+  <div id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const eo=x=>1-Math.pow(1-clamp(x,0,1),3);
+const SC=[['L1',0,2],['LA',2,3.75],['L2',3.75,5.5],['L3',5.5,7.25],['L4',7.25,8.75],['L5',8.75,10.5],['L6',10.5,12.25],['L7',12.25,14],['L8',14,16.1]];
+const INI={}; SC.forEach(([id,a])=>INI[id]=a);
+const wave=$('wave'); for(let i=0;i<22;i++){const s=document.createElement('i');wave.appendChild(s);}
+function palabras(lay,t,t0,paso){
+  lay.querySelectorAll('.w').forEach((w,i)=>{const k=eo((t-t0-i*paso)/0.18); w.style.opacity=k; w.style.transform='translateY('+((1-k)*40)+'px) scale('+(1+(1-k)*.25)+')';});
+}
+window.setT=function(t){
+  let fl=0, cur=null;
+  SC.forEach(([id,a,b],n)=>{const L=$(id); const on=t>=a&&t<b; L.style.opacity=on?1:0; if(on){cur=id; const lt=t-a; const p=1+Math.max(0,.07*(1-lt/0.25)); L.style.transform='scale('+p+')'; if(n>0) fl=Math.max(fl,.55*(1-lt/0.12));}});
+  $('flash').style.opacity=clamp(fl,0,1);
+  const lt=cur?t-INI[cur]:0;
+  if(cur==='L1'){ $('mk1').src='mk/m'+String(1+Math.floor(t*25)).padStart(3,'0')+'.jpg'; palabras($('L1'),lt,0.15,0.22); }
+  if(cur==='LA'){ $('imgA').style.transform='scale('+(1+lt*.04)+')'; const k=eo((lt-0.2)/0.3); $('hlA').style.opacity=k; palabras($('LA'),lt,0.3,0.25); }
+  if(cur==='L2'){ const k=eo((lt-0.15)/0.3); $('noti').style.transform='translateY('+(-(1-k)*260)+'px)'; $('noti').style.opacity=k; palabras($('L2'),lt,0.45,0.28); }
+  if(cur==='L3'){ [['b1',0.05],['b2',0.45]].forEach(([id,d])=>{const k=eo((lt-d)/0.25);$(id).style.opacity=k;$(id).style.transform='translateY('+((1-k)*50)+'px)';}); palabras($('L3'),lt,0.65,0.28); }
+  if(cur==='L4'){ const r=(lt*1.6)%1; $('ring').style.transform='scale('+(1+r*.5)+')'; $('ring').style.opacity=1-r; wave.querySelectorAll('i').forEach((s,i)=>{s.style.height=(30+110*Math.abs(Math.sin(lt*9+i*.7))*(.4+.6*Math.abs(Math.sin(i*1.3))))+'px';}); palabras($('L4'),lt,0.25,0.28); }
+  if(cur==='L5'){ $('img5').style.transform='scale('+(1+lt*.05)+') translateY('+(lt*18)+'px)'; const k=eo((lt-0.3)/0.3); $('hl5').style.opacity=k; palabras($('L5'),lt,0.4,0.25); }
+  if(cur==='L6'){ $('img6').style.transform='scale('+(1.02+lt*.05)+')'; const k=eo((lt-0.25)/0.3); $('hl6').style.opacity=k; palabras($('L6'),lt,0.4,0.25); }
+  if(cur==='L7'){ const i=Math.min(2,Math.floor(lt/0.58)); ['m7a','m7b','m7c'].forEach((m,j)=>{$(m).style.opacity=j===i?1:0; $(m).style.transform='scale('+(1.02+(lt-j*0.58)*.06)+')';}); palabras($('L7'),lt,0.2,0.28); }
+  if(cur==='L8'){ $('mk2').src='mk/m'+String(100+Math.floor(lt*25)).padStart(3,'0')+'.jpg';
+    document.querySelectorAll('.stack div').forEach((d,i)=>{const k=eo((lt-0.1-i*0.3)/0.16); d.style.opacity=k; d.style.transform='scale('+(1+(1-k)*.5)+')';});
+    const k=eo((lt-1.1)/0.3); $('url').style.opacity=k; $('url').style.transform='translateY('+((1-k)*40)+'px)'; }
+};
+window.setT(0);
+</script>
+</html>
