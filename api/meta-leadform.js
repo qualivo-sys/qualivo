@@ -142,6 +142,8 @@ const FORMULARIOS_SECTOR = {
   '1006694072388659': { sector: '' },
   '1061906346738399': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas' },
   '1786744439184083': { sector: 'Formación o academia', etiqueta: 'sector-formacion' },
+  // 27-sep-2026: formación con «¿cuándo?» y «desde 750 €/mes, ¿encaja?».
+  '1089963670593608': { sector: 'Formación o academia', etiqueta: 'sector-formacion' },
   '1479297290674260': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas' },
   '1910722980312589': { sector: 'Servicios profesionales (asesoría, consultoría, abogados)', etiqueta: 'sector-asesorias' }
 };

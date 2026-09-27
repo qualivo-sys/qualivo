@@ -11,4 +11,8 @@
 // Para reanudar: poner false, commit y despliegue. Se deja como constante en
 // el código, no como variable de entorno, para que no se quede puesta sin que
 // nadie lo sepa (pasó con GATEWAY_PAUSA del 22 al 24-sep).
-module.exports = { PAUSA_TOTAL: true };
+// 27-sep-2026, Maikel: «hazlo ahora y reactivemos». Se quita la pausa con la
+// cadencia nueva (api/activacion.js): WhatsApp IA, una llamada de Raquel o
+// aviso a Maikel según el nivel, D+1 y D+3, respuestas en modo copiloto.
+// Correos, secuencias de correo y reenganche automático siguen apagados.
+module.exports = { PAUSA_TOTAL: false };

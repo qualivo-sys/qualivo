@@ -46,7 +46,15 @@ const WA_CADENCIA_PAUSADA = false;
 // Solo entra en esta cadencia quien llegó después de CADENCIA_DESDE. Los
 // anteriores los llevó Maikel a mano durante la pausa del 25 al 28-sep y no
 // pueden recibir de golpe un primer WhatsApp de hace días.
-const CADENCIA_DESDE = Date.parse('2026-09-28T07:00:00Z');
+// Encendido el domingo 27-sep por la tarde (Maikel: «hazlo ahora y reactivemos»).
+const CADENCIA_DESDE = Date.parse('2026-09-27T17:16:00Z');
+
+// 27-sep, al quitar la pausa general: los correos de las otras ramas (no-show,
+// toque al mes…) y el reenganche automático de conversaciones paradas siguen
+// apagados. Primero medimos WhatsApp + Raquel solos, y las respuestas van en
+// modo copiloto.
+const SECUENCIAS_PAUSADAS = true;
+const REENGANCHE_PAUSADO = true;
 const ESPERA_PASO2_MIN = 150;
 
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
@@ -556,7 +564,7 @@ async function handler(req, res) {
     console.error('[activacion] confirmaciones pendientes:', err && err.message);
   }
 
-  await procesarSecuencias(resumen);
+  if (!SECUENCIAS_PAUSADAS) await procesarSecuencias(resumen);
 
   // Puntuación (Maikel, 22-sep): tipología y comportamiento de los leads
   // tocados en las últimas 24 h; aviso cuando uno pasa a A.
@@ -573,7 +581,7 @@ async function handler(req, res) {
   // reenganche por vuelta, escrito por el agente en su contexto; tres intentos
   // y descarte (Maikel, 21-sep). Ver api/_reenganche.js.
   try {
-    const rg = await require('./_reenganche.js').vuelta();
+    const rg = REENGANCHE_PAUSADO ? {} : await require('./_reenganche.js').vuelta();
     if (rg.enviados || rg.descartados) resumen.reenganche = { enviados: rg.enviados, descartados: rg.descartados };
   } catch (err) {
     console.error('[activacion] reenganche falló:', err && err.message);
@@ -584,9 +592,7 @@ async function handler(req, res) {
 };
 
 // Se exporta para poder probar la cadencia sin tocar el CRM.
-module.exports.siguientePaso = siguientePaso;
-module.exports.minutosDesdeInicio = minutosDesdeInicio;
-
 module.exports = handler;
 module.exports.siguientePaso = siguientePaso;
+module.exports.minutosDesdeInicio = minutosDesdeInicio;
 module.exports.nivelAhora = nivelAhora;
