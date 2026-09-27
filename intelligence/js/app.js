@@ -618,6 +618,8 @@
       const hoy = []; cs.forEach(function (c) { c.x.senales.forEach(function (s) { if (estado.ahora - s.t < 1440 * M.MIN) hoy.push({ s: s, c: c }); }); });
       const voz = cs.filter(function (c) { return c.x.nba.id === 'voz'; });
       const auto = cs.filter(function (c) { return c.x.nba.tipo === 'auto' && c.x.nba.estado !== 'cerrado'; });
+      const reun = cs.filter(function (c) { return !c.fin && c.s.tCita != null && c.x.k.cita > 0; }).sort(function (a, b) { return a.x.k.cita - b.x.k.cita; });
+      const nut = abiertos.filter(function (c) { return c.etapa <= 3 && c.email !== false && !(c.s.tCita != null && c.x.k.cita > 0) && !c.conv.some(function (m) { return m.de === 'c' && estado.ahora - m.t < 2 * 1440 * M.MIN; }); });
       const li = function (lista, txt) { return '<ul>' + lista.slice(0, 3).map(function (c) { return '<li data-abrir="' + c.id + '"><b style="font-weight:600">' + esc(c.n) + '</b><span>' + esc(txt(c)) + '</span></li>'; }).join('') + '</ul>'; };
       const card = function (icono, tono, nombre, n, unidad, que, lista) {
         return '<div class="tarjeta agente"><div class="cab-ag"><span class="feed-ico ' + tono + '">' + ico(icono) + '</span><h3>' + nombre + '</h3><span class="estado"><i></i>Activo</span></div><div class="grande">' + n + '<span>' + unidad + '</span></div><p class="que">' + que + '</p>' + lista + '</div>';
@@ -630,6 +632,8 @@
           card('senales', 't-amber', 'Inteligencia de ' + T.cliente, hoy.length, 'señales nuevas hoy', 'Vigila cambios de comportamiento: intención que sube, silencios, riesgo de no-show.', '<ul>' + hoy.slice(0, 3).map(function (x) { return '<li data-abrir="' + x.c.id + '"><b style="font-weight:600">' + esc(x.c.n) + '</b><span>' + esc(M.TIPOS_SENAL[x.s.tipo].txt.toLowerCase()) + '</span></li>'; }).join('') + '</ul>') +
           card('voz', 't-coral', 'Agente de voz', voz.length, 'llamadas programadas', 'Llama a quien no contesta por escrito, siempre dentro de su franja horaria. Si coge, cualifica y agenda.', li(voz, function (c) { return c.canal === 'tel' ? 'prefiere teléfono' : 'no contesta al WhatsApp'; })) +
           card('auto', 't-gris', 'Automatizaciones', auto.length, 'en cola', 'Recordatorios de ' + T.cita + ', casos de éxito y respuestas de cierre. Lo que no necesita pensar, pero sí hacerse siempre.', li(auto, function (c) { return c.x.nba.accion.toLowerCase(); })) +
+          card('persona', 't-coral', 'Agente de reuniones', reun.length, T.citas + ' preparadas', 'Antes de cada ' + T.cita + ', un documento con quién es, qué ha dicho, cómo abrir, qué preguntar y qué conseguir. Después, con dos líneas tuyas, actualiza la ficha, las tareas y deja el seguimiento redactado.', '<ul>' + reun.slice(0, 3).map(function (c) { return '<li data-reunion="' + c.id + '"><b style="font-weight:600">' + esc(c.n) + '</b><span>' + M.dentroDe(c.x.k.cita) + '</span></li>'; }).join('') + '</ul>') +
+          card('correo', 't-lila', 'Correos de valor', nut.length, T.contactos + ' en seguimiento por correo', 'Desde el primer momento, y nunca el mismo día que un WhatsApp: un dato útil, un caso, su diagnóstico. Sin presión. Se para en cuanto contesta o reserva.', li(nut, function (c) { return c.x.k.toque > 7 * 1440 ? 'correo de caso' : 'correo de bienvenida'; })) +
         '</div>' +
         '<div class="tarjeta" style="margin-top:14px"><h3>Piloto automático <span class="sub">Últimas 48 horas</span></h3><div style="margin-top:6px">' + pintaFeed(feed(14)) + '</div></div>';
     }
@@ -676,6 +680,7 @@
         '<div><p class="bloque-t">Por qué</p><div class="porque-caja">' + esc(x.porque) + '</div></div>' +
         '<div><p class="bloque-t">Siguiente mejor acción</p><div class="nba-caja' + (nba.tipo === 'humano' ? ' humano' : '') + '"><h3>' + ico(icoAccion(nba.tipo)) + esc(nba.accion) + '</h3><p>' + esc(nba.por) + '</p>' +
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
+          '<button class="btn btn-mini" type="button" data-reunion="' + c.id + '">Preparar la reunión</button>' +
           '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
           (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>' +
         llamadasHtml(c) +

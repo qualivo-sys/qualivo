@@ -58,7 +58,7 @@
       { id: 'alta', txt: 'Alta empezada' },
       { id: 'primera', txt: 'Primera caja' },
       { id: 'segunda', txt: 'Segunda caja' },
-      { id: 'recurrente', txt: 'Recurrente (4+ cajas)' },
+      { id: 'recurrente', txt: 'Recurrente' },
       { id: 'fiel', txt: 'Fiel (3+ meses)', sinFuga: true }
     ],
     ventaEtapa: 'recurrente',
@@ -67,7 +67,7 @@
     nombresFuga: {
       primera: { txt: 'Alta sin terminar', exp: 'gente que empieza el alta y se queda a medias (día de reparto, código postal o el pago)' },
       segunda: { txt: 'Baja tras la primera caja', exp: 'suscriptores que prueban una caja y no repiten: nadie les pregunta qué tal llegó ni les ayuda a aprovecharla' },
-      recurrente: { txt: 'Pausas que no vuelven', exp: 'suscriptores que pausan tras dos o tres cajas y no vuelven a activarla' }
+      recurrente: { txt: 'Pausas que no vuelven', exp: 'suscriptores que pausan tras dos o tres cajas y no llegan a la cuarta: nadie les escribe para volver' }
     },
     remedioFuga: {
       segunda: 'Agente de retención: dos días después de la primera caja pregunta qué tal llegó, manda dos recetas con lo que traía y, si algo no encaja (tamaño, frecuencia o calidad), lo ajusta antes de que se dé de baja. Si hay una queja, avisa a atención al cliente con todo el contexto.',
@@ -120,11 +120,11 @@
         altas: { l: 'Altas empezadas', v: Mo.num(m.tot.alta), em: Mo.euros(m.inversion) + ' invertidos' },
         primeraK: { l: 'Primeras cajas', v: Mo.num(m.tot.primera), em: Mo.pct(m.tot.primera / m.tot.alta) + ' de las altas' },
         segundaK: { l: 'Repiten 2.ª caja', v: Mo.pct(m.tot.segunda / m.tot.primera), em: 'Referencia: 80 %', clase: 'mal' },
-        recurrentes: { l: 'Nuevos recurrentes', v: Mo.num(m.tot.recurrente), em: Mo.pct(m.tot.recurrente / m.tot.primera) + ' de los que prueban' },
+        recurrentes: { l: 'Nuevos recurrentes', v: Mo.num(m.tot.recurrente), em: Mo.pct(m.tot.recurrente / m.tot.primera) + ' llega a 4 cajas' },
         churn: { l: 'Con señales de baja', v: Mo.num(md.senalesBaja), em: riesgo.length + ' urgentes hoy', clase: 'mal' },
         retencion: { l: 'Siguen a los 3 meses', v: Mo.pct(md.ret3), em: 'Tras la primera caja' },
         pausas: { l: 'Cajas en pausa', v: Mo.num(md.pausas), em: Mo.num(md.pausasSinFecha) + ' sin fecha de vuelta', clase: 'mal' },
-        cpr: { l: 'Coste por recurrente', v: Mo.euros(m.inversion / Math.max(1, recPago)), em: recPago + ' de campañas de pago' },
+        cpr: { l: 'Coste por recurrente', v: Mo.euros(m.inversion / Math.max(1, recPago)), em: 'Solo campañas de pago' },
         expansion: { l: 'Ampliaciones', v: exp.length, em: Mo.euros(exp.reduce(function (a, c) { return a + (c.s.expValor || 0); }, 0)) + ' al año', clase: 'bien' }
       };
     },
@@ -161,7 +161,7 @@
       ],
       intencion: [
         [function (c) { return c.s.personasDia; }, 8, function (c) { return c.s.personasDia + ' personas al día en la oficina'; }],
-        [function (c) { return (c.s.oficinas || 0) >= 2; }, 10, function (c) { return 'fruta para ' + c.s.oficinas + ' oficinas'; }]
+        [function (c) { return (c.s.oficinas || 0) >= 2; }, 10, function (c) { return 'quiere fruta en ' + c.s.oficinas + ' centros'; }]
       ],
       riesgo: [
         [function (c) { return suscr(c) && (c.s.cancelar || 0) >= 1; }, 30, function (c) { return c.s.cancelar > 1 ? 'ha visitado la página de cancelar ' + c.s.cancelar + ' veces' : 'ha visitado la página de cancelar'; }],
@@ -281,14 +281,15 @@
         riesgo: true,
         contacto: { id: 'demo', n: 'Marta Ibáñez', rol: 'Hogar de 2 personas · Sant Andreu', emp: '', seg: 'hogar', ciudad: 'Barcelona', prod: 'Caja mediana · semanal', orig: 'c2', canal: 'wa', etapa: 5, valor: 1508, fin: 'ganado',
           creado: 98 * D, act: 8 * D, toque: 30 * D, f: { zona: 'ok', hogar: 2, frec: 'semanal', antidesperdicio: true }, s: { cajas: 11, saltos: 1 },
-          conv: [[97 * D, 'a', 'wa', 'Hola Marta, bienvenida. Tu primera caja llega el martes entre las 9 y las 14 h. Cualquier cosa, por aquí.'], [96 * D, 'c', 'wa', '¡Ya ha llegado! Todo con una pinta estupenda.'], [30 * D, 'a', 'wa', 'Esta semana la caja trae las primeras granadas y calabaza de Lleida. ¿Quieres añadir algo?']],
+          conv: [[30 * D, 'a', 'wa', 'Hola Marta, esta semana la caja trae las primeras granadas y calabaza de Lleida. ¿Quieres añadir algo?']],
           ev: [[8 * D, 'sistema', 'Salta el envío de la semana']] },
         pasos: [
           { dur: 6, min: 0, txt: 'Marta lleva 14 semanas con la caja mediana cada semana', feed: 'Suscriptora · 11 cajas · caja mediana semanal', cambio: {} },
           { dur: 6, min: 2, txt: 'Salta el envío de esta semana: el segundo seguido', feed: 'Envío saltado · segundo seguido', cambio: { s: { saltos: 2 } }, act: true },
           { dur: 8, min: 3, txt: 'Visita la página de cancelar: el sistema detecta el riesgo de baja', feed: 'Visita la página de cancelar la suscripción', cambio: { s: { cancelar: 1 } }, act: true, vista: 'senales' },
-          { dur: 8, min: 1, txt: 'El agente le escribe por WhatsApp en su contexto, sin descuentos', feed: 'WhatsApp del agente de retención', vista: 'conversaciones',
-            cambio: { conv: ['a', 'wa', 'Hola Marta, he visto que has saltado las dos últimas cajas. ¿Ha pasado algo? Si algo no te ha encajado, prefiero saberlo y ajustarlo antes que perderte.'] }, toque: true },
+          { dur: 8, min: 1, txt: 'El agente le escribe por WhatsApp en su contexto, sin descuentos', feed: 'WhatsApp del agente de retención', vista: 'conversaciones', toque: true,
+            // Al pasar a Conversaciones se abre el hilo de Marta, aunque antes se haya mirado otro
+            get cambio() { if (window.QV && window.QV.estado) window.QV.estado.convSel = 'demo'; return { conv: ['a', 'wa', 'Hola Marta, he visto que has saltado las dos últimas cajas. ¿Ha pasado algo? Si algo no te ha encajado, prefiero saberlo y ajustarlo antes que perderte.'] }; } },
           { dur: 8, min: 6, txt: 'Marta contesta: la caja es grande para dos y la fruta llegó muy madura', feed: 'Respuesta de Marta',
             cambio: { conv: ['c', 'wa', 'Pues sí. Somos dos y la caja nos sobra: acabo tirando fruta, que es justo lo que no quiero. Y en la última los plátanos y los melocotones llegaron pasadísimos.'] }, act: true },
           { dur: 9, min: 1, txt: 'El agente propone la caja pequeña cada 15 días y registra la queja', feed: 'Propuesta: caja pequeña quincenal · queja registrada',
@@ -406,9 +407,9 @@
       { id: 'e02', n: 'Jorge Llorens', rol: 'Office Manager', emp: 'Nubia Software', seg: 'empresa', tam: 90, ciudad: 'Valencia', prod: 'Fruta para la oficina', orig: 'c5', canal: 'email', etapa: 1, etapaTxt: 'Pide información', valor: 3000, creado: 2 * D, act: 20 * H, toque: 2 * D - 20,
         f: {}, s: { precio: true, visitas: 2 },
         conv: [[2 * D - 20, 'a', 'email', 'Hola Jorge, gracias por tu mensaje. ¿Para cuántas personas sería la fruta?'], [20 * H, 'c', 'email', 'Para unas 60 al día. ¿Cuánto sale por persona y al mes? Lo tengo que presentar el viernes.']] },
-      { id: 'e03', n: 'Carlos Ibarra', rol: 'Director de Operaciones', emp: 'Logística Montsant', seg: 'empresa', tam: 320, ciudad: 'Martorell', prod: 'Fruta para 2 centros', orig: 'c5', canal: 'email', etapa: 1, etapaTxt: 'Propuesta enviada', valor: 7200, creado: 20 * D, act: 3 * D, toque: 3 * D,
+      { id: 'e03', n: 'Carlos Ibarra', rol: 'Director de Operaciones', emp: 'Logística Montsant', seg: 'empresa', tam: 320, ciudad: 'Martorell', prod: 'Fruta para 2 centros', orig: 'c5', canal: 'email', etapa: 1, etapaTxt: 'Propuesta enviada', valor: 7200, creado: 20 * D, act: 4 * D, toque: 4 * D,
         f: {}, s: { prop: 9 * D, propVista: 2, oficinas: 2 },
-        llamadas: [[3 * D, 240, 'hablo', 'Habló 4 minutos: la propuesta le encaja, pero la tiene que aprobar la dirección financiera y le preocupa la entrega en la nave, que abre a las 6:00.', ['Aprobación: dirección financiera', 'Duda: entrega en la nave a primera hora']]],
+        llamadas: [[4 * D, 240, 'hablo', 'Habló 4 minutos: la propuesta le encaja, pero la tiene que aprobar la dirección financiera y le preocupa la entrega en la nave, que abre a las 6:00.', ['Aprobación: dirección financiera', 'Duda: entrega en la nave a primera hora']]],
         conv: [[18 * D, 'c', 'email', 'Nos interesa para las oficinas y para la nave: unas 200 personas entre las dos.'], [9 * D, 'h', 'email', 'Carlos, te adjunto la propuesta para los dos centros: 600 € al mes, entrega los lunes.']] },
       { id: 'e04', n: 'Ana Beltrán', rol: 'People & Culture', emp: 'Editorial Faro Norte', seg: 'empresa', tam: 140, ciudad: 'Madrid', prod: 'Fruta para la oficina · lunes', orig: 'c5', canal: 'email', etapa: 5, etapaTxt: 'Cliente · 8 meses', valor: 3600, fin: 'ganado', creado: 240 * D, act: 6 * H, toque: 30 * D,
         f: {}, s: { exp: true, expTxt: 'Quiere la fruta también en su oficina nueva de Valencia (60 personas)', expValor: 3000 },

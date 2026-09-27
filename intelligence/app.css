@@ -577,3 +577,20 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .fila.fila-mini { grid-template-columns: minmax(0, 1fr); }
 .ag-cita.destacada { box-shadow: 0 0 0 2px var(--verde-2), 0 6px 18px rgba(14,124,116,.25); animation: latido 1.4s ease-in-out 3; }
 @keyframes latido { 50% { transform: scale(1.04); } }
+
+/* Agente de reuniones (js/reunion.js) */
+.doc-reunion .rd-aviso { display: flex; gap: 10px; align-items: flex-start; background: var(--superficie); border: 1px dashed var(--borde); border-radius: 12px; padding: 10px 12px; font-size: 12.5px; color: var(--gris); }
+.doc-reunion .rd-aviso svg { flex: none; width: 18px; height: 18px; }
+.rd-lista { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.45; }
+.rd-cita { margin: 0 0 8px; padding: 10px 14px; border-left: 3px solid var(--acento, #1FA396); background: var(--superficie); border-radius: 0 10px 10px 0; font-size: 14px; line-height: 1.45; }
+.rd-cita small { display: block; margin-top: 4px; font-size: 11.5px; color: var(--gris-2); }
+.rd-obj { background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; }
+.rd-obj b { display: block; font-size: 13px; margin-bottom: 4px; }
+.rd-obj p { font-size: 13.5px; line-height: 1.45; color: var(--tinta-2); }
+.rd-despues textarea { width: 100%; font: inherit; font-size: 14px; padding: 10px 12px; border: 1px solid var(--borde); border-radius: 10px; background: var(--superficie); color: inherit; resize: vertical; }
+.rd-msg { background: #D9FDD3; color: #0A0A0B; border-radius: 12px; padding: 10px 12px; }
+.agente li[data-reunion] { cursor: pointer; }
+.rd-obj .rd-lista b, .rd-lista b { display: inline; margin: 0; font-size: inherit; }
+.rd-meta { display: flex; gap: 10px; align-items: flex-start; }
+.rd-meta svg { flex: none; width: 20px; height: 20px; margin-top: 2px; }
+.rd-meta p { font-size: 15px; line-height: 1.45; font-weight: 600; }

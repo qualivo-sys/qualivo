@@ -110,7 +110,7 @@
     // La intención ya está en lo alto: el motor lo manda a una persona.
     const el = $('#humano');
     el.innerHTML = '<span class="humano-tag">' + ico('persona') + 'Requiere persona · ' + esc(c.x.nba.quien) + '</span><h3>' + esc(paso.humano.titulo) + '</h3><p>' + esc(paso.humano.texto) + '</p>' +
-      '<div class="botones"><button class="btn btn-primario" type="button" data-abrir="demo">Ver ficha completa</button><button class="btn" type="button" data-demo="preguntar">Preguntar al Copilot</button><button class="btn btn-fantasma" type="button" data-demo="cerrar-humano">Cerrar</button></div>';
+      '<div class="botones"><button class="btn btn-primario" type="button" data-reunion="demo">Preparar la reunión</button><button class="btn" type="button" data-abrir="demo">Ver ficha completa</button><button class="btn" type="button" data-demo="preguntar">Preguntar al Copilot</button><button class="btn btn-fantasma" type="button" data-demo="cerrar-humano">Cerrar</button></div>';
     el.hidden = false;
     pintarBotones();
     pintarPanel(paso);
