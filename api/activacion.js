@@ -25,7 +25,29 @@ const EMAILS_PAUSADOS = true;
 // probado, wa1/wa2/wa3 se saltan por completo (voz, correos ya pausados, y
 // el resto de la cadencia siguen igual). Quitar esta pausa cuando el mensaje
 // personalizado esté en producción.
-const WA_CADENCIA_PAUSADA = true;
+const WA_CADENCIA_PAUSADA = false;
+
+// Cadencia del 28-sep-2026 (Maikel, tras el debate con Paid):
+//   1. WhatsApp personalizado con IA en cuanto entra (en horario).
+//   2. Si a las 2 h 30 no ha contestado, según el nivel (api/_scoring.js), que
+//      se recalcula en cada vuelta:
+//        A   → aviso al móvil de Maikel para que llame él (ruta-maikel)
+//        B/C → una sola llamada de Raquel, en horario de voz (ruta-raquel)
+//        D   → sin llamada, solo WhatsApp (ruta-solo-wa)
+//   3. D+1: WhatsApp de conversación, sin enlace.
+//   4. D+3: WhatsApp con la agenda.
+//   5. D+7: se cierra («No responde»).
+// Los plazos cuentan desde que salió el primer WhatsApp (act-wa1-h-<sello>),
+// no desde que entró: quien entra a las 23:00 recibe el primero a las 8:00 y
+// la llamada no puede salir a las 8:01. Sin segunda llamada ni correos.
+// Las respuestas no las contesta el agente solo: redacta y avisa a Maikel
+// (modo copiloto, api/_agente.js).
+//
+// Solo entra en esta cadencia quien llegó después de CADENCIA_DESDE. Los
+// anteriores los llevó Maikel a mano durante la pausa del 25 al 28-sep y no
+// pueden recibir de golpe un primer WhatsApp de hace días.
+const CADENCIA_DESDE = Date.parse('2026-09-28T07:00:00Z');
+const ESPERA_PASO2_MIN = 150;
 
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
 // y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
@@ -66,30 +88,20 @@ function esLeadForm(contacto) {
 // Qué paso toca. Devuelve null si no hay nada pendiente todavía.
 function siguientePaso(contacto, minutos) {
   const hay = function (t) { return A.tiene(contacto, t); };
-  const esperaVoz1 = esLeadForm(contacto) ? 20 : 10;
-
-  // «Sin canal»: el número no coge llamadas ni WhatsApp (lo pone el reloj más
-  // abajo). Se saltan las llamadas y queda solo el correo.
-  const voz = !hay('sin-canal');
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
-  if (voz && !hay('act-voz1') && minutos >= esperaVoz1) return { tipo: 'voz1' };
-  if (!hay('act-wa2') && (hay('act-voz1') || !voz) && minutos >= 120) return { tipo: 'wa2' };
-  // La segunda llamada espera 24 h desde la entrada y, además, al menos 4 h
-  // desde la primera llamada: si el lead entró el viernes y la primera llamada
-  // fue el lunes a las 9:00, la segunda no puede ser a las 9:20.
-  if (voz && !hay('act-voz2') && hay('act-wa2') && minutos >= 60 * 24 && minutosDesdeEtiqueta(contacto, 'act-voz1-h-') >= 4 * 60) return { tipo: 'voz2' };
-
-  for (let i = 0; i < M.EMAILS.length; i++) {
-    const e = M.EMAILS[i];
-    if (!hay(e.etiqueta) && minutos >= e.dias * 24 * 60) {
-      // El WhatsApp final se cuela entre el primer y el segundo correo.
-      if (i === 1 && !hay('act-wa3') && minutos >= 4 * 24 * 60) return { tipo: 'wa3' };
-      return { tipo: 'email', indice: i };
-    }
-  }
-  if (!hay('act-wa3') && minutos >= 4 * 24 * 60) return { tipo: 'wa3' };
-  if (hay('act-email3')) return { tipo: 'cerrar' };
+  const desdeWa1 = minutosDesdeEtiqueta(contacto, 'act-wa1-h-');
+  if (!hay('act-paso2') && desdeWa1 >= ESPERA_PASO2_MIN) return { tipo: 'paso2', desdeWa1: desdeWa1 };
+  if (!hay('act-wa2') && hay('act-paso2') && desdeWa1 >= 24 * 60) return { tipo: 'wa2' };
+  if (!hay('act-wa3') && hay('act-wa2') && desdeWa1 >= 3 * 24 * 60) return { tipo: 'wa3' };
+  if (hay('act-wa3') && desdeWa1 >= 7 * 24 * 60) return { tipo: 'cerrar' };
   return null;
+}
+
+// Nivel actual, calculado en el momento con las etiquetas (quien ha contestado
+// ya no llega aquí: la cadencia se para antes).
+function nivelAhora(c) {
+  const S = require('./_scoring.js');
+  return S.nivel(S.tipologia(c).puntos, S.comportamiento(c, []).puntos, c);
 }
 
 async function correo(contacto, asunto, html) {
@@ -197,7 +209,7 @@ async function procesarSecuencias(resumen) {
   }
 }
 
-module.exports = async function handler(req, res) {
+async function handler(req, res) {
   // Pausa general (api/_pausa.js): esta vuelta no hace nada.
   if (require('./_pausa.js').PAUSA_TOTAL) return res.status(200).json({ ok: true, pausa_total: true });
   const secreto = process.env.CRON_SECRET;
@@ -231,6 +243,7 @@ module.exports = async function handler(req, res) {
     }
 
     const minutos = minutosDesdeInicio(c);
+    if (Date.now() - minutos * 60000 < CADENCIA_DESDE) { resumen.anteriores = (resumen.anteriores || 0) + 1; continue; }
 
     // Antes de tocar nada: ¿ha contestado, ha cogido hora o ha pedido la baja?
     // Se mira aquí y no en un workflow de GHL para que no dependa de que ese
@@ -348,8 +361,8 @@ module.exports = async function handler(req, res) {
       if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
         if (WA_CADENCIA_PAUSADA) { continue; }
         if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
-        // wa1 y wa3 proponen dos huecos reales de la agenda, en palabras.
-        if (paso.tipo === 'wa3' || paso.tipo === 'wa1') {
+        // El wa1 propone dos huecos reales de la agenda, en palabras.
+        if (paso.tipo === 'wa1') {
           try { const AG = require('./agendar.js'); datos.huecos = (await AG.huecosLibres(2)).map(function (x) { return AG.enPalabras(x).replace(/^(\S+), (\d+) de \S+, (\d{1,2}:\d{2})$/, '$1 $2 a las $3'); }); } catch (e) { datos.huecos = []; }
         }
         let texto, esIA = false;
@@ -368,7 +381,7 @@ module.exports = async function handler(req, res) {
           if (ia.texto) { texto = ia.texto; esIA = true; }
           else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');
         }
-        if (!texto) texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsapp2(datos) : M.whatsapp3(datos);
+        if (!texto) texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsappDia1(datos) : M.whatsappDia3(datos);
         // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
         // el mismo texto dos veces. Se reescribe para esta persona; si no se
         // puede, este paso espera a la siguiente vuelta en vez de salir igual.
@@ -383,7 +396,8 @@ module.exports = async function handler(req, res) {
           : await A.enviarMensaje(c.id, texto);
         const extra = env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla']
           : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
-        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra), A.tiene(c, 'aviso-movil-pendiente') ? ['aviso-movil-pendiente'] : []);
+        const sellos = paso.tipo === 'wa1' ? ['act-wa1-h-' + selloHora()] : [];
+        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra, sellos), A.tiene(c, 'aviso-movil-pendiente') ? ['aviso-movil-pendiente'] : []);
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
         // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora,
         // que es cuando le sale el primer WhatsApp y Maikel puede adelantarse.
@@ -400,14 +414,37 @@ module.exports = async function handler(req, res) {
             accion: 'WhatsApp enviado (' + paso.tipo + (env.canal === 'gateway' ? ', por Wazzap' : '') + ')', texto: texto, origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
         }
         hechos++;
-      } else if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
+      } else if (paso.tipo === 'paso2') {
+        const nivel = nivelAhora(c);
+        const tarde = paso.desdeWa1 > 26 * 60;
+        if (nivel === 'A') {
+          // Lo llama Maikel. Si el móvil está fuera de horario, espera a la
+          // siguiente vuelta en vez de gastar el aviso de madrugada.
+          if (!require('./_aviso.js').enHorarioMovil() && !tarde) { resumen.esperando++; continue; }
+          const tel = c.phone || '';
+          await require('./_aviso.js').movil('LLÁMALE · nivel A · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
+            '\nNo ha contestado al WhatsApp en 2 h 30.' + (datos.fuga ? '\nDónde se le escapa: ' + datos.fuga : '') + (tel ? '\nTel ' + tel : ''), { forzar: tarde });
+          await A.etiquetar(c.id, ['act-paso2', 'ruta-maikel']);
+          await A.nota(c.id, 'CADENCIA · nivel A sin respuesta a las 2 h 30: aviso a Maikel para que llame él (no llama Raquel).');
+          resumen.aviso_a = (resumen.aviso_a || 0) + 1; hechos++;
+          continue;
+        }
+        if (nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal') || tarde) {
+          await A.etiquetar(c.id, ['act-paso2', 'ruta-solo-wa']);
+          if (tarde && nivel !== 'D') await A.nota(c.id, 'CADENCIA · la llamada de Raquel no encontró hueco de voz en 26 h: sigue solo por WhatsApp.');
+          continue;
+        }
+        paso.tipo = 'voz1';
+        paso.ruta = 'ruta-raquel';
+      }
+      if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         // Regla «sin canal» (19-sep-2026, tras Francisco y Carmen): si la
         // llamada anterior no llegó a sonar y el WhatsApp tampoco entró, el
         // número está muerto. No se gasta otra llamada: se marca, se avisa a
         // Maikel, se le dice a Meta que el lead no vale, y sigue solo el correo.
         if (A.tiene(c, 'voz-no-conecto') && (A.tiene(c, 'act-wa1-fallido') || A.tiene(c, 'act-wa2-fallido'))) {
-          await A.etiquetar(c.id, ['sin-canal', 'act-' + paso.tipo]);
+          await A.etiquetar(c.id, ['sin-canal', 'act-' + paso.tipo].concat(paso.ruta ? ['act-paso2', 'ruta-solo-wa'] : []));
           await A.nota(c.id, 'SIN CANAL: la llamada anterior no llegó a sonar y el WhatsApp no se entregó. No se llama más; sigue solo el correo.');
           await avisar('respondio', c, 'SIN CANAL: número que no coge llamadas ni WhatsApp. Solo queda el correo.');
           try {
@@ -448,17 +485,17 @@ module.exports = async function handler(req, res) {
         if (r.ok) {
           // La hora de la llamada va en una etiqueta para que la segunda no salga
           // veinte minutos después de la primera (pasó el 21-sep a las 9:20).
-          await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-' + paso.tipo + '-h-' + selloHora()]);
+          await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-' + paso.tipo + '-h-' + selloHora()].concat(paso.ruta ? ['act-paso2', paso.ruta] : []));
           await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
             accion: 'Raquel le está llamando (' + paso.tipo + ')', texto: '', origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
           resumen.voz++; hechos++;
         } else if (r.motivo === 'sin_credenciales') {
           // Sin Vapi no se pierde el lead: se anota y la cadencia sigue.
-          await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-voz-pendiente']);
+          await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-voz-pendiente'].concat(paso.ruta ? ['act-paso2', 'ruta-solo-wa'] : []));
           await A.nota(c.id, 'Llamada ' + paso.tipo + ' pendiente: falta VAPI_API_KEY o VAPI_ASSISTANT_ID en el entorno.');
           resumen.sin_vapi++; hechos++;
         } else {
-          await A.etiquetar(c.id, ['act-' + paso.tipo]);
+          await A.etiquetar(c.id, ['act-' + paso.tipo].concat(paso.ruta ? ['act-paso2', 'ruta-solo-wa'] : []));
           await A.nota(c.id, 'Llamada ' + paso.tipo + ' no salió: ' + r.motivo + ' ' + (r.detalle || ''));
           resumen.errores++; hechos++;
         }
@@ -549,3 +586,7 @@ module.exports = async function handler(req, res) {
 // Se exporta para poder probar la cadencia sin tocar el CRM.
 module.exports.siguientePaso = siguientePaso;
 module.exports.minutosDesdeInicio = minutosDesdeInicio;
+
+module.exports = handler;
+module.exports.siguientePaso = siguientePaso;
+module.exports.nivelAhora = nivelAhora;
