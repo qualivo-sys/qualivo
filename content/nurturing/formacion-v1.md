@@ -1,30 +1,65 @@
-# Nurturing por correo · formación · v1 (27-sep-2026)
+# Nurturing por correo · formación · v2 (27-sep-2026, empieza al entrar)
 
 Estado: **borrador para aprobar**. No hay nada encendido.
 
 ## A quién le llega y cuándo
 
-Empieza donde acaba el WhatsApp, para no mezclar canales en los mismos días y poder
-medir cada uno:
+**Cambio del 27-sep (Maikel): el nurturing empieza en el primer momento**, en paralelo
+con el WhatsApp, no cuando termina. Para que no se pisen, el correo nunca sale el mismo
+día que un WhatsApp de la cadencia (día 0 va 15 minutos después del primer WhatsApp y
+con otro papel: preparar la llamada, no pedirla).
 
-- Quien termina la cadencia sin contestar (día 7, etiqueta `act-fin`).
-- Nivel D (no le llama nadie) desde el día 3.
-- Quien marca «Solo estoy mirando» en el formulario, desde el día 3.
+| Día | Correo | Mientras tanto por WhatsApp |
+|---|---|---|
+| 0 (15 min tras entrar) | 0 · Bienvenida y qué vamos a mirar | Primer WhatsApp IA |
+| 2 | 1 · Lo que pasa en la primera hora | (día 1: WhatsApp de conversación) |
+| 5 | 2 · El caso EAC | (día 3: agenda) |
+| 8 | 3 · Tu cifra en tres minutos | cadencia cerrada el día 7 |
+| 12 | 4 · 23:04, 23:05, 9:00 | |
+| 20 | 5 · ¿Lo dejamos aquí? | |
 
-Se para en cuanto contesta, reserva, abre el diagnóstico o pide la baja. Quien contesta
-vuelve al copiloto: el borrador de respuesta le llega a Maikel.
+A todos los contactos del formulario con correo (A, B, C y D). Se para en cuanto
+contesta por cualquier canal, reserva o pide la baja; si reserva, deja de recibir
+nurturing y recibe solo la confirmación y el recordatorio. Quien contesta al correo
+vuelve al copiloto: el borrador le llega a Maikel.
 
 Remitente: Maikel Echevarría <maikel@qualivo.io>. Texto plano, sin plantilla de
 boletín, un solo enlace por correo, firma corta y línea de baja.
 
-Medición: etiquetas `nut-1` … `nut-5` al enviar y `nut-vuelve` si contesta o reserva
-desde un correo. En el panel semanal va aparte de WhatsApp y Raquel.
+Medición: etiquetas `nut-0` … `nut-5` al enviar, y apertura y clic por correo. Así se ve
+qué correo precede a cada reunión, aparte de lo que traen WhatsApp y Raquel.
 
 Variables: `{{nombre}}`, `{{empresa}}` (si no hay, la frase se reescribe sin ella).
 
 ---
 
-## 1 · Día 8 · «Lo que pasa en la primera hora»
+## 0 · Día 0 · Bienvenida
+
+**Asunto:** lo que vamos a mirar en {{empresa}}
+
+Hola {{nombre}}:
+
+Soy Maikel, de Qualivo. Gracias por pedir el diagnóstico. Te acabo de escribir por
+WhatsApp para buscar un hueco; te dejo aquí lo que vamos a hacer, para que sepas qué
+esperar.
+
+En 15 minutos dibujamos vuestro recorrido, desde que alguien pide información hasta que
+se matricula, y vemos dónde se están quedando alumnos por el camino. Si tiene sentido, te
+enseño cómo lo resolveríamos en vuestro caso. Si no lo tiene, te lo digo igual.
+
+Una cosa que ayuda mucho: si puedes, ven con un dato, cuántas solicitudes os llegaron el
+mes pasado. Con eso ya sale una cifra.
+
+Si prefieres elegir tú la hora: qualivo.io/llamada
+
+Maikel
+Qualivo · qualivo.io
+
+_Si prefieres que no te escriba más, respóndeme «baja» y listo._
+
+---
+
+## 1 · Día 2 · «Lo que pasa en la primera hora»
 
 **Asunto:** lo que pasa en la primera hora
 
@@ -51,7 +86,7 @@ _Si prefieres que no te escriba más, respóndeme «baja» y listo._
 
 ---
 
-## 2 · Día 12 · Un caso real
+## 2 · Día 5 · Un caso real
 
 **Asunto:** 559 interesados, 10 matrículas y qué cambió
 
@@ -75,7 +110,7 @@ _Si prefieres que no te escriba más, respóndeme «baja» y listo._
 
 ---
 
-## 3 · Día 17 · Su cifra en tres minutos
+## 3 · Día 8 · Su cifra en tres minutos
 
 **Asunto:** ¿cuánto se os queda por el camino?
 
@@ -97,7 +132,7 @@ _Si prefieres que no te escriba más, respóndeme «baja» y listo._
 
 ---
 
-## 4 · Día 23 · Cómo funciona por dentro
+## 4 · Día 12 · Cómo funciona por dentro
 
 **Asunto:** 23:04, 23:05, 9:00
 
@@ -121,7 +156,7 @@ _Si prefieres que no te escriba más, respóndeme «baja» y listo._
 
 ---
 
-## 5 · Día 30 · ¿Lo dejamos aquí?
+## 5 · Día 20 · ¿Lo dejamos aquí?
 
 **Asunto:** ¿lo dejamos aquí?
 

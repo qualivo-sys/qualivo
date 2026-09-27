@@ -61,6 +61,21 @@
     cfg.campanaNombre = function (id) { const c = cfg.campanas.filter(function (x) { return x.id === id; })[0]; return c ? c.nombre : ''; };
     cfg.campana = function (id) { return cfg.campanas.filter(function (x) { return x.id === id; })[0] || null; };
     cfg.etapaTxt = function (i) { return (cfg.recorrido[i] || {}).txt || ''; };
+    // Plural de la cita («reunión» → «reuniones», «primera visita» → «primeras
+    // visitas»). Antes se hacía con + 's' y salía «reunións».
+    if (cfg.t && !cfg.t.citas) {
+      const plu = function (w) {
+        const partes = String(w || '').split(' '); let fin = false;
+        return partes.map(function (x) {
+          if (fin || /^(de|del|con|a)$/i.test(x)) { fin = true; return x; }
+          if (/ón$/i.test(x)) return x.slice(0, -2) + 'ones';
+          if (/[aeiouáéó]$/i.test(x)) return x + 's';
+          return x + 'es';
+        }).join(' ');
+      };
+      cfg.t.citas = plu(cfg.t.cita);
+      cfg.t.Citas = cfg.t.citas.charAt(0).toUpperCase() + cfg.t.citas.slice(1);
+    }
     if (!cfg.real && cfg.historias && !cfg.historias.voz && cfg.historiaGenerica !== false) { const hv = QV.voz.historiaGenerica(cfg); if (hv) cfg.historias.voz = hv; }
     cfg._ok = true;
     return cfg;
@@ -180,7 +195,7 @@
       cpl: { l: 'Coste por ' + T.contacto, v: M.euros(m.inversion / Math.max(1, sum(pago, primera))), em: 'Solo campañas de pago' },
       respuesta: { l: 'Tiempo de respuesta', v: md.respuestaAntes ? M.duracionLarga(md.respuestaAntes) : '—', em: 'Con el agente: ' + (md.respuestaAhora || 1) + ' min', clase: 'mal' },
       cualificados: { l: N.cualificados || 'Cualificados', v: M.num(m.tot[et.cualificados]), em: M.pct(m.tot[et.cualificados] / Math.max(1, m.tot[primera])) + ' de los que entran' },
-      entrevistas: { l: N.entrevistas || T.Cita + 's', v: M.num(m.tot[et.entrevistas]), em: md.agendadas ? md.agendadas + ' agendadas' : '' },
+      entrevistas: { l: N.entrevistas || T.Citas, v: M.num(m.tot[et.entrevistas]), em: md.agendadas ? md.agendadas + ' agendadas' : '' },
       show: { l: 'Asistencia (show rate)', v: md.agendadas ? M.pct(m.tot[et.entrevistas] / md.agendadas) : '—', em: md.agendadas ? (md.agendadas - m.tot[et.entrevistas]) + ' no se presentaron' : '', clase: 'mal' },
       ventas: { l: N.ventas || T.Ventas, v: M.num(m.tot[cfg.ventaEtapa]), em: M.pct(m.tot[cfg.ventaEtapa] / Math.max(1, m.tot[primera])) + ' de los que entran' },
       cpv: { l: N.cpv || 'Coste por ' + T.venta, v: M.euros(m.inversion / Math.max(1, ventasPago)), em: ventasPago + ' ' + T.ventas + ' de pago' },
@@ -406,19 +421,19 @@
       const kp = function (l, v, em, cls) { return '<div class="kpi"><span>' + esc(l) + '</span><strong>' + v + '</strong><em class="' + (cls || '') + '">' + esc(em || '') + '</em></div>'; };
       return cabecera('Agenda', '¿Cómo está la agenda esta semana?', 'Cada ' + T.cita + ' con quién la agendó y si está confirmada. El sistema confirma, recuerda y recupera los plantones sin que nadie tenga que acordarse.') +
         '<div class="kpis ag-kpis">' +
-          kp(T.Cita + 's', M.num(ag.total), ag.porDelante + ' por delante') +
+          kp(T.Citas, M.num(ag.total), ag.porDelante + ' por delante') +
           kp('Asistencia', ag.asistencia == null ? '—' : M.pct(ag.asistencia), ag.plantones ? M.pl(ag.plantones, 'plantón', 'plantones') : 'sin plantones', ag.plantones ? 'mal' : '') +
           kp(vozT, M.num(ag.voz), ag.total ? M.pct(ag.voz / ag.total) + ' del total' : '') +
           kp('Sin confirmar', M.num(ag.riesgo.length), ag.riesgo.length ? 'en las próximas 48 h' : 'todo confirmado', ag.riesgo.length ? 'mal' : '') +
           kp('Huecos libres', M.num(ag.libres.length), ag.off > 0 ? 'en toda la semana' : 'de aquí al ' + DIAS[ag.dias.length - 1].toLowerCase()) +
         '</div>' +
         '<div class="ag-semana"><button class="btn btn-mini btn-icono" type="button" data-semana="-1" aria-label="Semana anterior">‹</button><b>' + esc(semTxt) + '</b><button class="btn btn-mini btn-icono" type="button" data-semana="1" aria-label="Semana siguiente">›</button>' + (ag.off !== QV.voz.semanaDefecto(estado.ahora) ? '<button class="btn btn-mini btn-fantasma" type="button" data-semana="0">Volver a hoy</button>' : '') + '</div>' +
-        '<div class="ag-leyenda"><span>' + ico('voz') + esc(vozT) + '</span><span>' + ico('whatsapp') + 'Agente de WhatsApp</span><span>' + ico('persona') + 'Una persona</span><span class="lg e-confirmada">Confirmada</span><span class="lg e-sinconfirmar">Sin confirmar</span><span class="lg e-asistio">Asistió</span><span class="lg e-planton">Plantón</span>' + (cfg.real ? '' : '<span class="gris">En gris, el resto de ' + T.cita + 's de la semana</span>') + '</div>' +
+        '<div class="ag-leyenda"><span>' + ico('voz') + esc(vozT) + '</span><span>' + ico('whatsapp') + 'Agente de WhatsApp</span><span>' + ico('persona') + 'Una persona</span><span class="lg e-confirmada">Confirmada</span><span class="lg e-sinconfirmar">Sin confirmar</span><span class="lg e-asistio">Asistió</span><span class="lg e-planton">Plantón</span>' + (cfg.real ? '' : '<span class="gris">En gris, el resto de ' + T.citas + ' de la semana</span>') + '</div>' +
         '<div class="tarjeta ag-cal"><div class="ag-scroll"><div class="ag-grid" style="grid-template-columns:52px repeat(' + ag.dias.length + ',minmax(118px,1fr))">' + cab + filas + '</div></div></div>' +
         '<div class="rejilla r-3" style="margin-top:14px">' +
           '<div class="tarjeta"><h3>Riesgo de plantón <span class="sub">Sin confirmar en las próximas 48 h</span></h3><div class="lista" style="margin-top:8px">' +
             (riesgoC.map(function (it) { return filaMini(it.c, M.fechaCorta(it.t, estado.ahora) + ' · sin confirmar'); }).join('') || (riesgoR ? '' : '<p class="vacio">Todo confirmado.</p>')) +
-            (riesgoR ? '<p class="gris" style="margin-top:8px">' + (riesgoC.length ? 'Y ' : '') + M.pl(riesgoR, T.cita + ' más', T.cita + 's más') + ' sin confirmar: el recordatorio del mismo día sale solo.</p>' : '') + '</div></div>' +
+            (riesgoR ? '<p class="gris" style="margin-top:8px">' + (riesgoC.length ? 'Y ' : '') + M.pl(riesgoR, T.cita + ' más', T.citas + ' más') + ' sin confirmar: el recordatorio del mismo día sale solo.</p>' : '') + '</div></div>' +
           '<div class="tarjeta"><h3>Plantones y recuperación <span class="sub">No vinieron, pero el interés era real</span></h3><div class="lista" style="margin-top:8px">' +
             (plantC.map(function (c) { return filaMini(c, c.x.nba.accion); }).join('') || '<p class="vacio">Ningún plantón pendiente.</p>') + '</div></div>' +
           '<div class="tarjeta"><h3>' + esc(vozT) + ' esta semana <span class="sub">' + M.pl(ll.length, 'llamada', 'llamadas') + '</span></h3>' +
@@ -444,7 +459,7 @@
         ['SEÑALES', sen, 'cambios que piden actuar'],
         ['DECISIÓN', cs.length, 'siguientes acciones con su porqué'],
         ['ACCIÓN', solas, 'las hace el sistema solo; ' + hum + ' van a una persona'],
-        ['RESULTADO', citas, T.cita + 's agendadas'],
+        ['RESULTADO', citas, T.citas + ' agendadas'],
         ['APRENDIZAJE', ganados, 'cierres que recalibran el modelo']
       ];
       // Mapa encaje × intención

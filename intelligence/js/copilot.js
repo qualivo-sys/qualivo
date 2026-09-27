@@ -110,18 +110,18 @@
       const plant = est.contactos.filter(function (c) { return c.s.noshow && !c.fin; });
       const out = [
         metricas([
-          { l: T.Cita + 's esta semana', v: M.num(ag.total) },
+          { l: T.Citas + ' esta semana', v: M.num(ag.total) },
           { l: 'Asistencia', v: ag.asistencia == null ? '—' : M.pct(ag.asistencia) },
           { l: 'Agendadas por ' + voz, v: M.num(ag.voz) },
           { l: 'Huecos libres', v: M.num(ag.libres.length) }
         ]),
-        texto('Esta semana hay **' + M.pl(ag.total, T.cita, T.cita + 's') + '**' + (ag.total ? ', ' + M.pct(ag.voz / ag.total) + ' agendadas por teléfono por ' + voz : '') + '. ' +
+        texto('Esta semana hay **' + M.pl(ag.total, T.cita, T.citas) + '**' + (ag.total ? ', ' + M.pct(ag.voz / ag.total) + ' agendadas por teléfono por ' + voz : '') + '. ' +
           (ag.plantones ? 'Ha habido **' + M.pl(ag.plantones, 'plantón', 'plantones') + '** y ' + M.pl(ag.recuperando, 'ya se está recuperando', 'ya se están recuperando') + '. ' : 'Sin plantones por ahora. ') +
-          (ag.riesgo.length ? '**' + M.pl(ag.riesgo.length, T.cita + ' sigue', T.cita + 's siguen') + ' sin confirmar** en las próximas 48 horas: son las que más fallan.' : 'Todo lo de las próximas 48 horas está confirmado.'))
+          (ag.riesgo.length ? '**' + M.pl(ag.riesgo.length, T.cita + ' sigue', T.citas + ' siguen') + ' sin confirmar** en las próximas 48 horas: son las que más fallan.' : 'Todo lo de las próximas 48 horas está confirmado.'))
       ];
       if (riesgo.length) out.push(tarjetas(riesgo, 3));
       if (plant.length) out.push(texto('Plantones a recuperar: ' + M.unir(plant.map(function (c) { return c.n.split(' ')[0]; })) + '. El agente les propone dos huecos nuevos; no hace falta llamar en frío.'));
-      out.push(accion(ag.libres.length ? (ag.libres.length === 1 ? 'Queda 1 hueco libre' : 'Quedan ' + ag.libres.length + ' huecos libres') + ' esta semana: el agente los ofrece primero a quien está más caliente.' : 'La semana está llena: las nuevas ' + T.cita + 's se ofrecen para la siguiente.'));
+      out.push(accion(ag.libres.length ? (ag.libres.length === 1 ? 'Queda 1 hueco libre' : 'Quedan ' + ag.libres.length + ' huecos libres') + ' esta semana: el agente los ofrece primero a quien está más caliente.' : 'La semana está llena: las nuevas ' + T.citas + ' se ofrecen para la siguiente.'));
       return out;
     },
 
@@ -237,7 +237,7 @@
         texto('Esta semana han entrado **' + plural(nuevos.length, T.contacto, T.contactos) + ' ' + (nuevos.length === 1 ? (T.nuevos === 'nuevas' ? 'nueva' : 'nuevo') : (T.nuevos || 'nuevos')) + '** y el sistema ha detectado **' + plural(sen.length, 'señal', 'señales') + '**. Lo más importante: ' + (subida.length ? (subida.length === 1 ? '1 ha subido' : subida.length + ' han subido') + ' de intención en los últimos 2 días' : 'nada ha subido de intención') + '.'),
         metricas(Object.keys(porTipo).map(function (k) { return { v: porTipo[k], l: M.TIPOS_SENAL[k].txt }; }).slice(0, 4)),
         subida.length ? tarjetas(subida, 2) : null,
-        texto(citas.length + ' ' + T.cita + 's agendadas por delante' + (ganados.length ? ' y ' + ganados.length + ' ' + T.clientes + ' que han vuelto a moverse (' + M.unir(ganados.map(function (c) { return c.n.split(' ')[0]; })) + ')' : '') + '.')
+        texto(citas.length + ' ' + T.citas + ' agendadas por delante' + (ganados.length ? ' y ' + ganados.length + ' ' + T.clientes + ' que han vuelto a moverse (' + M.unir(ganados.map(function (c) { return c.n.split(' ')[0]; })) + ')' : '') + '.')
       ].filter(Boolean);
     },
 
@@ -256,7 +256,7 @@
         texto('La que más ' + T.contactos + ' trae no es la que más vende. **' + masEntra.c.nombre + '** trae ' + plural(masEntra.entra, T.contacto, T.contactos) + ' y ' + plural(masEntra.v, T.venta, T.ventas) + '. **' + mejor.c.nombre + '** es la que más devuelve: ' + M.num(mejor.roas, 1) + '× lo invertido.'),
         { tipo: 'tabla', cols: ['Campaña', T.Contactos, T.Ventas, 'Coste por ' + T.venta, 'Retorno'], filas: filas.sort(function (a, b) { return (b.roas || 0) - (a.roas || 0); }).map(function (f) { return { celdas: [f.c.canal + ' · ' + f.c.nombre, f.entra, f.v, f.cpv ? M.euros(f.cpv) : 'orgánico', f.roas ? M.num(f.roas, 1) + '×' : '—'] }; }) }
       ];
-      if (peor !== mejor) out.push(accion('Movería presupuesto de «' + peor.c.nombre + '» (' + M.num(peor.roas, 1) + '×) a «' + mejor.c.nombre + '». Se optimiza a ' + T.venta + ' real, no a ' + T.contacto + ' barato.'));
+      if (peor !== mejor) out.push(accion('Movería presupuesto de «' + peor.c.nombre + '» (' + M.num(peor.roas, 1) + '×) a «' + mejor.c.nombre + '». Se optimiza a ' + T.venta + ' real, no a lo más barato.'));
       return out;
     },
 
