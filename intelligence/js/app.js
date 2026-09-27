@@ -19,6 +19,9 @@
     { id: 'reformas', txt: 'Reformas / Construcción', desc: 'Presupuestos, visitas y obras', ico: 'reformas' },
     { id: 'marketing', txt: 'Agencia de marketing', desc: 'Una agencia que capta sus propios clientes', ico: 'sube' },
     { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
+    { id: 'consultoria', txt: 'Consultoría de alto valor', desc: 'Proyectos grandes, ciclos largos y clientes que repiten', ico: 'b2b' },
+    { id: 'masters', txt: 'Másteres online', desc: 'Escuela online con alumnos de varios países', ico: 'formacion' },
+    { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
   ];
