@@ -34,12 +34,29 @@
     if (c.fin || c.s.luego) return null;
     if (sinContestar(c) && minDesde(c.tCreado) >= 45) return c.tCreado;
     const u = Mo().ultimoMsg(c);
-    if (u && u.de === 'c' && minDesde(u.t) >= 120 && minDesde(u.t) < 5 * D) return u.t;
+    if (u && u.de === 'c' && /\?/.test(u.texto) && minDesde(u.t) >= 120 && minDesde(u.t) < 36 * H) return u.t;
     return null;
   }
-  // Huecos de las historias (en punto, hora de España) y su hora en Bogotá.
-  const h17 = Q.hueco(17), h12 = Q.hueco(12);
-  const bogota17 = horaEn('America/Bogota', T0 + h17.min * MS) || '10:00';
+  // Hueco de la historia de empresa (en punto, hora de España).
+  const h12 = Q.hueco(12);
+
+  // Historia de Valentina: el reloj de la demo salta a las 2:10 de la
+  // madrugada y la entrevista queda ese mismo día a las 17:00 de España
+  // (primera hora de la mañana en Bogotá). Todo se calcula en el momento.
+  function minHasta(h, m, desde) {
+    const d = new Date(desde);
+    d.setHours(h, m, 0, 0);
+    if (d.getTime() <= desde) d.setDate(d.getDate() + 1);
+    return Math.round((d.getTime() - desde) / MS);
+  }
+  function citaV() {
+    const d = new Date(E().ahora);
+    d.setHours(17, 0, 0, 0);
+    while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+    return d.getTime();
+  }
+  const diaV = function () { return new Date(citaV()).toLocaleDateString('es-ES', { weekday: 'long' }); };
+  const bogV = function () { return horaEn('America/Bogota', citaV()) || '10:00'; };
 
   const MKT = 'Máster en Marketing Digital', IA = 'Máster en Inteligencia Artificial y Machine Learning',
     MBA = 'MBA online', ESG = 'Máster en Sostenibilidad y ESG', CIB = 'Máster en Ciberseguridad';
@@ -190,9 +207,9 @@
         intro: function (l, T, M) {
           const noche = l.filter(function (c) { return deNoche(esperando(c)); }).length;
           const latam = l.filter(function (c) { return c.f && c.f.pais && c.f.pais !== 'España'; }).length;
-          return '**' + l.length + ' solicitudes** llevan horas esperando respuesta. ' + noche + ' entraron de noche, hora de España, y ' + latam + ' son de Latinoamérica, donde a esa hora es media tarde. Este mes, la primera respuesta tarda de media ' + M.duracionLarga(E().cfg.mesDatos.respuestaAntes) + '; con el agente, un minuto.';
+          return '**' + l.length + ' solicitudes** llevan horas esperando respuesta. ' + noche + ' escribieron de noche, hora de España, y ' + latam + ' son de Latinoamérica, donde a esa hora todavía es la tarde o el principio de la noche. Este mes, la primera respuesta tarda de media ' + M.duracionLarga(E().cfg.mesDatos.respuestaAntes) + '; con el agente, un minuto.';
         },
-        cols: ['nombre', ['Entró', function (c) { return Mo().fechaCorta(esperando(c), E().ahora); }], ['Esperando', function (c) { return Mo().duracion(minDesde(esperando(c))); }], ['Desde', function (c) { return c.ciudad; }], 'accion'], vista: 'tabla',
+        cols: ['nombre', ['Escribió', function (c) { return Mo().fechaCorta(esperando(c), E().ahora); }], ['Esperando', function (c) { return Mo().duracion(minDesde(esperando(c))); }], ['Desde', function (c) { return c.ciudad; }], 'accion'], vista: 'tabla',
         cierre: 'El agente de WhatsApp contesta a cualquier hora, hace una sola pregunta para cualificar y deja la entrevista agendada para el día siguiente.' },
       { q: '¿Qué admitidos no han reservado plaza?', h: 'lista', obj: ['seguimiento', 'ventas', 'conversion', 'todo'],
         filtro: function (c) { return c.etapa === 4 && !c.fin; }, orden: 'valor', suma: true,
@@ -220,14 +237,23 @@
         titulo: 'Una solicitud desde Bogotá a las 2:10 de la madrugada',
         contacto: { id: 'demo', n: 'Valentina Arboleda', rol: 'Solicitud de información', seg: 'particular', ciudad: '—', prod: MKT, orig: 'c2', canal: 'wa', etapa: 1, valor: P[MKT], creado: 0, act: 0, f: {}, s: {}, conv: [] },
         pasos: [
-          { dur: 6, min: 0, txt: 'Son las 2:10 en España (19:10 en Bogotá). Valentina pide información del Máster en Marketing Digital', feed: 'Nueva solicitud · Meta Latinoamérica · Máster en Marketing Digital', cambio: {} },
+          { dur: 7, get min() { return minHasta(2, 10, E().ahora); },
+            get txt() { return 'Son las 2:10 en España (' + horaEn('America/Bogota', E().ahora) + ' en Bogotá). Valentina pide información del Máster en Marketing Digital'; },
+            feed: 'Nueva solicitud · Meta Latinoamérica · Máster en Marketing Digital',
+            cambio: { get tCreado() { return E().ahora; }, get tAct() { return E().ahora; } } },
           { dur: 6, min: 0, txt: 'El agente completa la ficha con lo que dejó en el formulario', feed: 'Ficha completada · licenciada en Comunicación · 4 años de experiencia', cambio: { rol: 'Community manager', ciudad: 'Bogotá', f: { titulo: 'Comunicación Social', exp: 4, pais: 'Colombia', tz: 'America/Bogota' } } },
-          { dur: 7, min: 1, txt: 'El agente de WhatsApp le contesta en un minuto. Admisiones está durmiendo', feed: 'WhatsApp enviado en 58 segundos', cambio: { conv: ['a', 'wa', '¡Hola, Valentina! Soy Sara, del equipo de admisiones. Vi que pediste información del Máster en Marketing Digital. ¿Te cuento cómo funciona o tienes alguna duda concreta?'] }, toque: true },
+          { dur: 7, min: 1, txt: 'El agente de WhatsApp le contesta en un minuto. En admisiones no hay nadie hasta las 9:00', feed: 'WhatsApp enviado en 58 segundos', cambio: { conv: ['a', 'wa', '¡Hola, Valentina! Soy Sara, del equipo de admisiones. Vi que pediste información del Máster en Marketing Digital. ¿Te cuento cómo funciona o tienes alguna duda concreta?'] }, toque: true },
           { dur: 7, min: 3, txt: 'Valentina pregunta si el título es oficial y si hay becas', feed: 'Respuesta recibida · pregunta por el título y las becas', cambio: { etapa: 2, s: { oficial: true, beca: true, visitas: 2 }, conv: ['c', 'wa', 'Hola! Dos cosas: ¿el título es oficial? ¿Y tienen becas para Colombia?'] }, act: true },
           { dur: 8, min: 1, txt: 'El agente responde y hace una sola pregunta para cualificar', feed: 'Dudas resueltas · pregunta de cualificación', cambio: { conv: ['a', 'wa', 'Es un título propio de la escuela, de 60 ECTS, y las empresas con las que trabajamos en Colombia lo conocen bien. Becas: sí, hasta el 25 % para Latinoamérica, y se asignan en la entrevista de admisión. Para orientarte: ¿qué te gustaría conseguir con el máster y cuándo querrías empezar?'] }, toque: true },
           { dur: 8, min: 4, txt: 'Valentina quiere empezar en la próxima edición y pregunta por financiación', feed: 'Intención alta · próxima edición · pide pagar en cuotas', cambio: { s: { conv: true, financia: true, precio: true, urg: true, urgTxt: 'quiere empezar en la próxima edición' }, f: { objetivo: 'pasar a responsable de marketing digital' }, conv: ['c', 'wa', 'Quiero pasar de community manager a responsable de marketing digital. Me gustaría empezar en la próxima edición. ¿Se puede pagar en cuotas? En pesos me sale caro de una vez.'] }, act: true },
-          { dur: 8, min: 1, txt: 'El agente agenda la entrevista de admisión a una hora buena para Bogotá', feed: 'Entrevista agendada · ' + h17.txt + ' 17:00 en España (' + bogota17 + ' en Bogotá)', cambio: { etapa: 3, s: { cita: h17.min - 15, citaOk: true }, conv: ['a', 'wa', 'Sí: hasta 12 cuotas sin intereses, y la beca se descuenta antes. Te dejo la entrevista de admisión el ' + h17.txt + ' a las ' + bogota17 + ' de Bogotá (17:00 en España) con Marcos, asesor de admisiones para Latinoamérica: revisa tu perfil, la beca y el plan de pagos. Te llega el enlace por correo.'] }, toque: true },
-          { dur: 0, min: 1, txt: 'Aviso a una persona: Valentina está lista para hablar', feed: 'Aviso enviado a admisiones', humano: { titulo: 'Valentina está lista para hablar', texto: 'Bogotá · comunicadora con 4 años como community manager · quiere pasar a responsable de marketing digital · próxima edición · pregunta por beca para Colombia y pago en cuotas. Entrevista con Marcos el ' + h17.txt + ' a las 17:00 (' + bogota17 + ' en Bogotá). Se le contestó en 1 minuto, a las 2:11 de la madrugada.' } }
+          { dur: 8, min: 1, txt: 'El agente agenda la entrevista de admisión a una hora buena para Bogotá',
+            get feed() { return 'Entrevista agendada · ' + diaV() + ' 17:00 en España (' + bogV() + ' en Bogotá)'; },
+            cambio: { etapa: 3,
+              s: { get cita() { return Math.round((citaV() - E().ahora) / MS); }, citaOk: true },
+              get conv() { return ['a', 'wa', 'Sí: hasta 12 cuotas sin intereses, y la beca se descuenta antes. Te dejo la entrevista de admisión el ' + diaV() + ' a las ' + bogV() + ' de Bogotá (17:00 en España) con Marcos, asesor de admisiones para Latinoamérica: revisa tu perfil, la beca y el plan de pagos. Te llega el enlace por correo.']; } },
+            toque: true },
+          { dur: 0, min: 1, txt: 'Aviso a una persona: Valentina está lista para hablar', feed: 'Aviso enviado a admisiones',
+            humano: { titulo: 'Valentina está lista para hablar', get texto() { return 'Bogotá · comunicadora con 4 años como community manager · quiere pasar a responsable de marketing digital · próxima edición · pregunta por beca para Colombia y pago en cuotas. Entrevista con Marcos el ' + diaV() + ' a las 17:00 (' + bogV() + ' en Bogotá). Se le contestó en un minuto, a las 2:11 de la madrugada.'; } } }
         ]
       },
       empresa: {
@@ -328,13 +354,13 @@
 
       // --- Encaje bajo
       { id: 'm23', n: 'Kevin Rojas', rol: 'Estudiante de Administración', seg: 'particular', ciudad: 'Ciudad de México', prod: MKT, orig: 'c2', canal: 'wa', etapa: 2, valor: P[MKT], creado: 5 * D, act: 5 * D - 640, toque: 5 * D - 600,
-        f: { gratis: true, sinGrado: true, pais: 'México', tz: 'America/Mexico_City' }, s: { beca: true },
+        f: { gratis: true, sinGrado: true, pais: 'México', tz: 'America/Mexico_City' }, llamadas: [], s: { beca: true },
         conv: [[5 * D - 600, 'h', 'wa', 'Hola Kevin, soy Marcos, de admisiones. ¿Te cuento cómo es el máster?'], [5 * D - 640, 'c', 'wa', 'Hola, vi lo de la beca en el anuncio, ¿el máster sale gratis? Todavía voy en 3.er semestre.']] },
       { id: 'm24', n: 'Lucas Martín', rol: 'Estudiante de bachillerato', seg: 'particular', ciudad: 'Valencia', prod: IA, orig: 'c1', canal: 'wa', etapa: 2, valor: P[IA], creado: 2 * D, act: 2 * D - 200, toque: 2 * D - 180,
-        f: { menor: true, sinGrado: true, pais: 'España' }, s: {},
+        f: { menor: true, sinGrado: true, pais: 'España' }, llamadas: [], s: {},
         conv: [[2 * D - 180, 'h', 'wa', 'Hola Lucas, soy Clara, de admisiones. ¿El máster lo buscas para tu trabajo actual?'], [2 * D - 200, 'c', 'wa', 'Tengo 17 años, ¿me puedo apuntar ya o tengo que esperar a la uni?']] },
       { id: 'm25', n: 'Brenda Jiménez', rol: 'Asistente administrativa', seg: 'particular', ciudad: 'Guadalajara', prod: MKT, orig: 'c2', canal: 'wa', etapa: 1, valor: P[MKT], creado: 18 * D, act: 18 * D, toque: 12 * D,
-        f: { gratis: true, exp: 1, pais: 'México', tz: 'America/Mexico_City' }, s: { intentos: 3 },
+        f: { gratis: true, exp: 1, pais: 'México', tz: 'America/Mexico_City' }, llamadas: [], s: { intentos: 3 },
         conv: [[18 * D - 700, 'h', 'wa', 'Hola Brenda, soy Marcos, de admisiones. ¿Te cuento cómo es el máster?']] },
 
       // --- Matriculados
@@ -356,4 +382,24 @@
         conv: [[26 * D - 650, 'h', 'wa', 'Hola Valeria, soy Marcos, de admisiones. ¿Te cuento cómo es el máster?']] }
     ]
   };
+
+  // Copilot: en este sector la campaña con peor retorno no se recorta, porque
+  // se pierde en la respuesta y no en el anuncio. Solo cambia la recomendación
+  // final de «¿Qué campañas están trayendo matrículas de verdad?», y solo aquí.
+  const C = window.QV.copilot;
+  if (C && C.H && C.H.campanas && !C.H.campanas._masters) {
+    const orig = C.H.campanas;
+    const envuelta = function (p) {
+      const out = orig(p);
+      const est = E();
+      if (!est || !est.cfg || est.cfg.id !== 'masters' || !window.QV.anuncios) return out;
+      const a = window.QV.anuncios();
+      const desp = a.filas.filter(function (f) { return f.ver.id === 'despues'; })[0];
+      const esc = a.filas.filter(function (f) { return f.ver.id === 'escalar'; })[0];
+      if (!desp) return out;
+      return out.filter(function (b) { return b.tipo !== 'accion'; }).concat([{ tipo: 'accion', texto: 'No recortaría «' + desp.c.nombre + '»: trae perfiles que encajan y se pierden porque escriben de noche y nadie contesta hasta la mañana. Primero, respuesta en el minuto uno' + (esc ? '; después, más presupuesto en «' + esc.c.nombre + '»' : '') + '.' }]);
+    };
+    envuelta._masters = true;
+    C.H.campanas = envuelta;
+  }
 })();

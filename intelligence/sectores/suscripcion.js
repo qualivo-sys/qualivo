@@ -23,7 +23,7 @@
       embudo: { anuncio: 4600, alta: 290, primera: 205, segunda: 142, recurrente: 98, fiel: 74 } },
     { id: 'c4', canal: 'Recomendación', nombre: 'Código amigo', inversion: 0, ticket: 124,
       embudo: { anuncio: 1100, alta: 240, primera: 212, segunda: 184, recurrente: 156, fiel: 131 } },
-    { id: 'c5', canal: 'LinkedIn', nombre: 'Fruta para oficinas (LinkedIn y correo)', inversion: 800, ticket: 310, b2b: true,
+    { id: 'c5', canal: 'LinkedIn', nombre: 'Empresas (anuncio y correo)', inversion: 800, ticket: 310, b2b: true,
       embudo: { anuncio: 1500, alta: 32, primera: 12, segunda: 10, recurrente: 9, fiel: 8 } }
   ];
   const camp = function (id) { return CAMPANAS.filter(function (x) { return x.id === id; })[0]; };
@@ -46,8 +46,8 @@
       clientesReales: 'clientes recurrentes', empleados: 'empleados', nuevos: 'nuevos',
       pasoHumano: 'resolver su caso y dejarle la caja como la quiere',
       accionBloqueo: 'Ayuda para terminar el alta', agenteBloqueo: 'Agente de altas',
-      senales: { nueva: 'Solicitud nueva', bloqueo: 'Alta a medias', expansion: 'Caja más grande o extras', revision: 'Vuelta de la pausa', noshow: 'Llamada sin confirmar' },
-      recorrido: { convierten: 'se queda más allá de la primera caja' },
+      senales: { nueva: 'Solicitud nueva', bloqueo: 'Alta a medias', expansion: 'Ampliación', revision: 'Vuelta de la pausa', noshow: 'Llamada sin confirmar' },
+      recorrido: { contacto: 'suscriptor', contactos: 'suscriptores', Contactos: 'Altas', venta: 'cliente recurrente', ventas: 'clientes recurrentes', Ventas: 'Recurrentes', convierten: 'se queda más allá de la primera caja' },
       anunciosIntro: 'Las campañas las sigue llevando vuestro equipo. El sistema une cada anuncio con lo que pasa después de la primera caja (quién repite, quién pausa, quién se da de baja) y se lo devuelve a las plataformas, para optimizar a suscriptores que se quedan y no a altas baratas.',
       notaTitulo: 'Nota de esta semana para el equipo de campañas', notaBoton: 'Redactar la nota para campañas',
       notaIntro: 'Esto es lo que cambiaría esta semana en las campañas. Sale de cruzar cada una con lo que pasa después de la primera caja.',
@@ -116,16 +116,16 @@
       const pago = cfg.campanas.filter(function (c) { return c.inversion > 0; });
       const recPago = pago.reduce(function (a, c) { return a + c.embudo.recurrente; }, 0);
       return {
-        activos: { l: 'Suscriptores activos', v: Mo.num(md.activos), em: Mo.num(md.cajasSemana) + ' cajas a la semana', clase: 'bien' },
+        activos: { l: 'Suscriptores activos', v: Mo.num(md.activos), em: Mo.num(md.cajasSemana) + ' cajas/semana', clase: 'bien' },
         altas: { l: 'Altas empezadas', v: Mo.num(m.tot.alta), em: Mo.euros(m.inversion) + ' invertidos' },
-        primeraK: { l: 'Reciben la primera caja', v: Mo.num(m.tot.primera), em: Mo.pct(m.tot.primera / m.tot.alta) + ' de las altas' },
-        segundaK: { l: 'Repiten la segunda caja', v: Mo.pct(m.tot.segunda / m.tot.primera), em: 'Referencia: 80 %', clase: 'mal' },
-        recurrentes: { l: 'Nuevos recurrentes (4+ cajas)', v: Mo.num(m.tot.recurrente), em: Mo.pct(m.tot.recurrente / m.tot.primera) + ' de los que prueban' },
-        churn: { l: 'Con señales de baja', v: Mo.num(md.senalesBaja), em: riesgo.length + ' urgentes hoy, con nombre', clase: 'mal' },
-        retencion: { l: 'Siguen a los 3 meses', v: Mo.pct(md.ret3), em: 'De los que reciben la primera caja' },
+        primeraK: { l: 'Primeras cajas', v: Mo.num(m.tot.primera), em: Mo.pct(m.tot.primera / m.tot.alta) + ' de las altas' },
+        segundaK: { l: 'Repiten 2.ª caja', v: Mo.pct(m.tot.segunda / m.tot.primera), em: 'Referencia: 80 %', clase: 'mal' },
+        recurrentes: { l: 'Nuevos recurrentes', v: Mo.num(m.tot.recurrente), em: Mo.pct(m.tot.recurrente / m.tot.primera) + ' de los que prueban' },
+        churn: { l: 'Con señales de baja', v: Mo.num(md.senalesBaja), em: riesgo.length + ' urgentes hoy', clase: 'mal' },
+        retencion: { l: 'Siguen a los 3 meses', v: Mo.pct(md.ret3), em: 'Tras la primera caja' },
         pausas: { l: 'Cajas en pausa', v: Mo.num(md.pausas), em: Mo.num(md.pausasSinFecha) + ' sin fecha de vuelta', clase: 'mal' },
-        cpr: { l: 'Coste por recurrente', v: Mo.euros(m.inversion / Math.max(1, recPago)), em: recPago + ' recurrentes de campañas de pago' },
-        expansion: { l: 'Cajas más grandes y extras', v: exp.length, em: Mo.euros(exp.reduce(function (a, c) { return a + (c.s.expValor || 0); }, 0)) + ' al año', clase: 'bien' }
+        cpr: { l: 'Coste por recurrente', v: Mo.euros(m.inversion / Math.max(1, recPago)), em: recPago + ' de campañas de pago' },
+        expansion: { l: 'Ampliaciones', v: exp.length, em: Mo.euros(exp.reduce(function (a, c) { return a + (c.s.expValor || 0); }, 0)) + ' al año', clase: 'bien' }
       };
     },
     clienteSinIntencion: true,
@@ -205,6 +205,10 @@
         return { id: 'calidad', accion: 'Revisar la queja de calidad', quien: T.CS, tipo: 'humano', estado: 'humano',
           por: 'Queja de calidad: ' + c.s.quejaTxt + '. La resuelve una persona: reponer la fruta en la próxima caja y revisar el lote con el almacén. El agente no promete compensaciones.' };
       }
+      if (c.s.exp && x.riesgo < 45) {
+        return { id: 'wa', accion: c.s.expAccion || 'Proponer la caja grande', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
+          por: c.s.expTxt + '. Se le propone en su momento, con lo que ya compra y sin tocar nada que no haya pedido.' };
+      }
       if (um && um.de === 'c' && (k.ahora - um.t) / MIN < 1440) {
         return { id: 'wa-seguir', accion: 'Contestar por WhatsApp', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
           por: 'Escribió ' + Mo.hace((k.ahora - um.t) / MIN) + ' y está esperando respuesta. El agente contesta con su contexto (su caja, su día de reparto, lo que ha pedido antes) y solo pasa a una persona si hay una queja.' };
@@ -224,12 +228,8 @@
           por: 'Pausa con fecha (' + (c.s.pausaTxt || 'vuelve ' + c.s.vuelta) + '). El sistema le escribe dos días antes con lo que trae la caja de esa semana; antes no se le molesta.' };
       }
       if (x.riesgo >= 45) {
-        return { id: 'wa', accion: 'WhatsApp: preguntar qué ha pasado', quien: 'Agente de retención', tipo: 'agente', estado: 'trabajando',
+        return { id: 'wa', accion: 'Preguntar qué ha pasado', quien: 'Agente de retención', tipo: 'agente', estado: 'trabajando',
           por: 'Señales de baja: ' + Mo.unir(x.riesgoM.slice(0, 2).map(function (m) { return m.txt; })) + '. El agente le escribe en su contexto, sin un descuento genérico: pregunta qué ha pasado y propone el ajuste que encaje (caja más pequeña, cada 15 días o una pausa con fecha).' };
-      }
-      if (c.s.exp) {
-        return { id: 'wa', accion: c.s.expAccion || 'Proponer la caja grande', quien: 'Agente de WhatsApp', tipo: 'agente', estado: 'trabajando',
-          por: c.s.expTxt + '. Se le propone en su momento, con lo que ya compra y sin tocar nada que no haya pedido.' };
       }
       if (c.etapa === 2) {
         return { id: 'wa', accion: 'Mensaje tras la primera caja', quien: 'Agente de retención', tipo: 'agente', estado: 'trabajando',
@@ -341,7 +341,7 @@
         f: { zona: 'ok', hogar: 3, frec: 'semanal' }, s: { cajas: 7, pausa: true, pausaDias: 28, sinAbrir: 3 },
         conv: [[28 * D, 'c', 'wa', 'Pausadme la caja unas semanas, que tenemos lío.'], [28 * D - 20, 'a', 'wa', 'Hecho, Elena. Cuando quieras volver, me escribes por aquí.']], ev: [] },
       { id: 'h06', n: 'Marc Soler', rol: 'Hogar de 4 personas · Sant Cugat', emp: '', seg: 'hogar', ciudad: 'Sant Cugat del Vallès', prod: 'Caja grande · semanal', orig: 'c4', canal: 'wa', etapa: 5, valor: 1820, fin: 'ganado', creado: 260 * D, act: 12 * D, toque: 12 * D,
-        f: { zona: 'ok', hogar: 4, frec: 'semanal' }, s: { cajas: 33, amigos: 1, pausa: true, pausaDias: 12, vuelta: 'la semana que viene', pausaTxt: 'se fue de viaje tres semanas y vuelve la semana que viene', revision: true, revisionTxt: 'Pausa por viaje: vuelve la semana que viene' },
+        f: { zona: 'ok', hogar: 4, frec: 'semanal' }, s: { cajas: 33, amigos: 1, pausa: true, pausaDias: 12, vuelta: 'la semana que viene', pausaTxt: 'se fue de viaje tres semanas y vuelve la semana que viene', luego: 'octubre', luegoTxt: 'vuelve de viaje la semana que viene', revision: true, revisionTxt: 'Pausa por viaje: vuelve la semana que viene' },
         conv: [[12 * D, 'c', 'wa', 'Nos vamos tres semanas de viaje. ¿Me pausáis la caja hasta la vuelta?'], [12 * D - 15, 'a', 'wa', 'Claro, Marc. Pausada hasta tu vuelta. Dos días antes te escribo con lo que trae la caja de esa semana.']] },
       { id: 'h07', n: 'Carmen Ruiz', rol: 'Hogar de 2 personas · Carabanchel', emp: '', seg: 'hogar', ciudad: 'Madrid', prod: 'Caja pequeña · semanal', orig: 'c1', canal: 'wa', etapa: 4, valor: 988, fin: 'ganado', creado: 90 * D, act: 45 * D, toque: 3 * D,
         f: { zona: 'ok', hogar: 2, frec: 'semanal' }, s: { cajas: 5, pausa: true, pausaDias: 45, sinAbrir: 5, intentos: 2 },
@@ -371,9 +371,9 @@
       { id: 'h14', n: 'Silvia Prats', rol: 'Hogar de 3 personas · Gràcia', emp: '', seg: 'hogar', ciudad: 'Barcelona', prod: 'Caja mediana · semanal', orig: 'c4', canal: 'wa', etapa: 5, valor: 1508, fin: 'ganado', creado: 300 * D, act: 2 * D, toque: 30 * D,
         f: { zona: 'ok', hogar: 3, frec: 'semanal', antidesperdicio: true }, s: { cajas: 41, amigos: 3 },
         ev: [[2 * D, 'sistema', 'Su código amigo trae un alta nueva (la tercera)']], conv: [] },
-      { id: 'h15', n: 'Tomás Aguilar', rol: 'Hogar de 4 personas · Salamanca', emp: '', seg: 'hogar', ciudad: 'Madrid', prod: 'Caja grande · semanal', orig: 'c3', canal: 'wa', etapa: 5, valor: 1820, fin: 'ganado', creado: 380 * D, act: 4 * D, toque: 45 * D,
+      { id: 'h15', n: 'Tomás Aguilar', rol: 'Hogar de 4 personas · Salamanca', emp: '', seg: 'hogar', ciudad: 'Madrid', prod: 'Caja grande · semanal', orig: 'c3', canal: 'wa', etapa: 5, valor: 1820, fin: 'ganado', creado: 380 * D, act: 9 * D, toque: 45 * D,
         f: { zona: 'ok', hogar: 4, frec: 'semanal' }, s: { cajas: 52 }, conv: [] },
-      { id: 'h16', n: 'Clara Benet', rol: 'Hogar de 2 personas · Eixample', emp: '', seg: 'hogar', ciudad: 'Barcelona', prod: 'Caja pequeña · semanal', orig: 'c4', canal: 'wa', etapa: 5, valor: 988, fin: 'ganado', creado: 140 * D, act: 5 * D, toque: 60 * D,
+      { id: 'h16', n: 'Clara Benet', rol: 'Hogar de 2 personas · Eixample', emp: '', seg: 'hogar', ciudad: 'Barcelona', prod: 'Caja pequeña · semanal', orig: 'c4', canal: 'wa', etapa: 5, valor: 988, fin: 'ganado', creado: 140 * D, act: 10 * D, toque: 60 * D,
         f: { zona: 'ok', hogar: 2, frec: 'semanal' }, s: { cajas: 19, amigos: 1 }, conv: [] },
       { id: 'h17', n: 'Iván Castillo', rol: 'Hogar de 3 personas · Campanar', emp: '', seg: 'hogar', ciudad: 'Valencia', prod: 'Caja mediana · semanal', orig: 'c2', canal: 'wa', etapa: 3, valor: 1508, fin: 'ganado', creado: 16 * D, act: 2 * D, toque: 9 * D,
         f: { zona: 'ok', hogar: 3, frec: 'semanal', antidesperdicio: true }, s: { cajas: 2 },
@@ -413,7 +413,7 @@
       { id: 'e04', n: 'Ana Beltrán', rol: 'People & Culture', emp: 'Editorial Faro Norte', seg: 'empresa', tam: 140, ciudad: 'Madrid', prod: 'Fruta para la oficina · lunes', orig: 'c5', canal: 'email', etapa: 5, etapaTxt: 'Cliente · 8 meses', valor: 3600, fin: 'ganado', creado: 240 * D, act: 6 * H, toque: 30 * D,
         f: {}, s: { exp: true, expTxt: 'Quiere la fruta también en su oficina nueva de Valencia (60 personas)', expValor: 3000 },
         conv: [[6 * H, 'c', 'email', 'Abrimos oficina en Valencia en noviembre, unas 60 personas. ¿Podéis llevar también allí la fruta los lunes?']] },
-      { id: 'e05', n: 'Laia Puig', rol: 'Responsable de Oficina', emp: 'Asesoría Roure', seg: 'empresa', tam: 60, ciudad: 'Girona', prod: 'Fruta para la oficina · martes', orig: 'c5', canal: 'email', etapa: 5, etapaTxt: 'Cliente · 1 año', valor: 2400, fin: 'ganado', creado: 400 * D, act: 5 * D, toque: 40 * D, f: {}, s: {}, conv: [] },
+      { id: 'e05', n: 'Laia Puig', rol: 'Responsable de Oficina', emp: 'Asesoría Roure', seg: 'empresa', tam: 60, ciudad: 'Girona', prod: 'Fruta para la oficina · martes', orig: 'c5', canal: 'email', etapa: 5, etapaTxt: 'Cliente · 1 año', valor: 2400, fin: 'ganado', creado: 400 * D, act: 12 * D, toque: 40 * D, f: {}, s: {}, conv: [] },
       { id: 'e06', n: 'Rebeca Soto', rol: 'Directora de Operaciones', emp: 'Gimnasios Forma Urbana', seg: 'empresa', tam: 85, ciudad: 'Madrid', prod: 'Fruta para 3 centros', orig: 'c5', canal: 'email', etapa: 1, etapaTxt: 'Perdida', valor: 4800, fin: 'perdido', creado: 45 * D, act: 25 * D, toque: 25 * D, f: {}, s: {},
         conv: [[25 * D, 'c', 'email', 'Al final nos quedamos con otro proveedor, más barato. Gracias igualmente.']],
         ev: [[25 * D, 'sistema', 'Perdida · motivo: otro proveedor más barato']] },
