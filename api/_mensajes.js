@@ -157,6 +157,32 @@ function whatsapp3(datos) {
   return ultimoMensaje(datos);
 }
 
+// Cadencia del 28-sep-2026 (Maikel): D+1 busca conversación, sin enlace; el
+// enlace de la agenda llega en el D+3. Por la pasarela se reescriben con
+// variar() para que nunca salga el mismo texto dos veces.
+function temaCorto(datos) {
+  const tipo = tipoFuga(datos.fuga);
+  const s = String(datos.sector || '').toLowerCase();
+  const donde = /reforma|construcci|instalaci/.test(s) ? ' en las obras'
+    : /formaci|academia|escuela|curso/.test(s) ? ' en la academia'
+    : /salud|cl[ií]nica|dental|fisio|bienestar/.test(s) ? ' en la clínica'
+    : /asesor|despacho|abogad|consultor/.test(s) ? ' en el despacho' : '';
+  if (tipo === 'seguimiento') return 'lo del seguimiento' + donde;
+  if (tipo === 'respuesta') return 'lo de responder rápido' + donde;
+  if (tipo === 'captacion') return 'lo de la captación' + donde;
+  return 'lo de dónde se os escapan los clientes' + donde;
+}
+function whatsappDia1(datos) {
+  const n = nombreCorto(datos.nombre);
+  return (n ? n + ', te' : 'Te') + ' escribí ayer por ' + temaCorto(datos) + '. No sé si llegaste a verlo.\n\n' +
+    'Si te parece, podemos mirar vuestro recorrido en 15 minutos y te enseño dónde empezaría yo. ¿Te viene mejor esta semana o la que viene?';
+}
+function whatsappDia3(datos) {
+  const n = nombreCorto(datos.nombre);
+  return (n ? n + ', por' : 'Por') + ' si te va mejor elegir tú la hora, aquí tienes mi agenda: qualivo.io/llamada\n\n' +
+    'Y si ahora no es el momento, dímelo sin problema y no te escribo más.';
+}
+
 function envoltura(cuerpo) {
   return '<div style="font-family:' + F + ';font-size:16px;line-height:1.6;color:#101319;max-width:560px">' +
     cuerpo +
@@ -246,4 +272,4 @@ const EMAILS = [
   }
 ];
 
-module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, ultimoMensaje, vocabularioDe, tipoFuga, EMAILS };
+module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, whatsappDia1, whatsappDia3, temaCorto, ultimoMensaje, vocabularioDe, tipoFuga, EMAILS };

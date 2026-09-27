@@ -206,6 +206,10 @@ async function decidir(o) {
       const inicio = AG.corregirFecha((uso.input || {}).slot);
       if (!inicio) {
         resultado = 'No entiendo la fecha. Pregúntale de nuevo el día y la hora.';
+      } else if (o.copiloto) {
+        // Modo copiloto: no se reserva nada. Queda como propuesta para Maikel.
+        accion = 'proponer_cita'; detalle = { hora: AG.enPalabras(inicio), inicio: inicio.toISOString() };
+        resultado = 'Modo borrador: no se ha reservado todavía, lo confirma Maikel. Escribe el mensaje como si ese hueco quedara reservado y dile que le llega la invitación al correo.';
       } else {
         const r = await AG.reservar({
           contacto: o.contacto, inicio: inicio, contexto: (uso.input || {}).contexto || '',
@@ -322,12 +326,12 @@ const EJEMPLOS_MAIKEL = [
   'Hola Lisandra, soy Maikel, de Qualivo. Imagino que estarás liada con la clínica, así que te cuento por aquí.\n\n' +
   'Comentabas que donde más se os escapa es en el seguimiento y los presupuestos. Es algo que vemos bastante en clínicas: el paciente recibe el presupuesto, dice que se lo piensa y muchas veces ahí se queda. No ha dicho que no, pero con el día a día nadie vuelve a retomar esa conversación.\n\n' +
   'Nosotros trabajamos justo ese recorrido: que cada paciente tenga un siguiente paso y que el seguimiento se haga automáticamente por WhatsApp, voz o email cuando tenga sentido, sin depender de que alguien se acuerde.\n\n' +
-  'En la llamada puedo enseñarte cómo lo plantearía para Marítima Dental y por dónde empezaría en vuestro caso.\n\n' +
+  'En la llamada dibujamos vuestro recorrido actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en Marítima Dental.\n\n' +
   '¿Te viene mejor esta tarde o el lunes por la tarde?',
   'Joan, soy Maikel, de Qualivo. Imagino que estarás liado, así que te cuento por aquí.\n\n' +
   'En el formulario pusiste que no tienes claro dónde se te escapa, y es lo más normal: casi nadie lo tiene medido. En reformas suele estar en uno de tres sitios: en lo que se tarda en contestar a quien pide presupuesto, en la visita que no se llega a cerrar, o en el presupuesto que se envía y nadie vuelve a llamar.\n\n' +
   'Nosotros trabajamos justo ese recorrido: que cada persona que pide presupuesto tenga una respuesta rápida y un siguiente paso, y que el seguimiento se haga solo por WhatsApp, voz o email cuando tenga sentido.\n\n' +
-  'En la llamada miramos cómo os llegan hoy los trabajos y te digo por dónde empezaría en Shekinah.\n\n' +
+  'En la llamada dibujamos vuestro recorrido actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en Shekinah.\n\n' +
   '¿Te viene mejor esta tarde o el lunes por la tarde?'
 ];
 
@@ -374,8 +378,9 @@ async function mensajePersonalizado(o) {
     '   Dónde se le escapa, respuestas posibles y cómo recogerlas:',
     EJEMPLOS_FUGA.map(function (x) { return '   - «' + x[0] + '» → «' + x[1] + '»'; }).join('\n'),
     '3. «Nosotros trabajamos justo ese recorrido: …» en una frase, conectada con su problema.',
-    '4. Qué verá en la llamada: cómo lo plantearíamos en su caso y por dónde empezaríamos. Si tienes el nombre',
-    '   de su empresa, úsalo aquí.',
+    '4. Qué verá en la llamada, con esta promesa (28-sep, Maikel): «En la llamada dibujamos vuestro recorrido',
+    '   actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en [empresa o «vuestro caso»].»',
+    '   Si tienes el nombre de su empresa, úsalo aquí.',
     '5. Una sola pregunta final, exactamente: «¿Te viene mejor ' + op1 + ' o ' + op2 + '?»',
     '',
     'REGLAS',
@@ -439,6 +444,12 @@ function esperar(ms) { return new Promise(function (ok) { setTimeout(ok, ms); })
 // Si el modelo falla (clave inválida, cuota), no se reintenta cada dos minutos
 // ni se avisa a Maikel en cada vuelta: el 19-sep le llegaron veinte WhatsApps
 // seguidos con el mismo error. Se para una hora y se avisa una vez.
+// Modo copiloto (Maikel, 27-sep-2026): el agente lee la respuesta del lead,
+// redacta la contestación y se la manda a Maikel al móvil; no envía nada al
+// lead ni reserva citas. Cada borrador aprobado o corregido es material para
+// el piloto automático más adelante. Poner false para volver a que conteste solo.
+const COPILOTO = true;
+
 let modeloCaidoHasta = 0;
 let ultimoAvisoError = 0;
 
@@ -516,7 +527,7 @@ async function atender(contactId, opciones) {
     // Si Maikel ha escrito él en el hilo (mensaje saliente con usuario), el agente no se mete.
     const primerEntrante = wa.filter(function (m) { return String(m.direction) === 'inbound'; })[0];
     const humano = wa.some(function (m) { return String(m.direction) === 'outbound' && m.userId && Date.parse(m.dateAdded || 0) > Date.parse(primerEntrante.dateAdded || 0); });
-    if (humano) {
+    if (humano && !COPILOTO) {
       if (!opciones.simular) { await A.etiquetar(c.id, ['wa-humano']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); }
       return Object.assign(hecho, { accion: 'callar', motivo: 'Maikel ya está escribiendo en este hilo' });
     }
@@ -531,9 +542,27 @@ async function atender(contactId, opciones) {
     }
 
     const huecos = await AG.huecosLibres(4);
-    const decision = await decidir({ contacto: c, mensajes: mensajes, huecos: huecos });
+    const decision = await decidir({ contacto: c, mensajes: mensajes, huecos: huecos, copiloto: COPILOTO || !!opciones.simular });
     hecho.accion = decision.accion; hecho.texto = decision.texto; hecho.detalle = decision.detalle; hecho.motivo = decision.motivo;
     if (opciones.simular) return hecho;
+
+    if (COPILOTO) {
+      const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
+      const cita = decision.detalle && decision.detalle.hora ? '\n\nPropone la cita: ' + decision.detalle.hora + ' (no está reservada: resérvala tú si le dices que sí).' : '';
+      const aviso = decision.accion === 'pasar'
+        ? 'TE LO PASO · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\nMotivo: ' + ((decision.detalle && decision.detalle.motivo) || 'mejor que lo lleves tú') + (decision.texto ? '\n\nBorrador:\n' + decision.texto : '')
+        : 'BORRADOR · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\n\nPropuesta:\n' + (decision.texto || '(nada que contestar)') + cita + '\n\nSi te vale, cópialo y mándalo tú.';
+      try { await require('./_aviso.js').movil(aviso); } catch (e) { /* sigue el correo */ }
+      await avisar(c, 'borrador del copiloto (' + decision.accion + ')', 'Él: «' + String(ultimo.body).slice(0, 200) + '»\nBorrador: «' + (decision.texto || '') + '»' + cita);
+      await guardarEstado(c.id, { turnos: turnos + 1, ultimo: new Date().toISOString(), candado: 0 });
+      if (decision.accion === 'pasar') await A.etiquetar(c.id, ['wa-humano']);
+      else { try { await require('./_tratos.js').mover(c.id, 'conversacion', { nombre: c.contactName || c.firstName || '', email: c.email || '', telefono: c.phone || '', empresa: c.companyName || '', origen: 'WhatsApp', fuente: 'Copiloto de WhatsApp' }); } catch (e) { /* no bloquea */ } }
+      await A.nota(c.id, 'COPILOTO DE WHATSAPP · ' + new Date().toLocaleString('es-ES', { timeZone: ZONA }) +
+        '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»' +
+        '\nBorrador para Maikel (no enviado): «' + (decision.texto || '(nada)') + '»' +
+        '\nAcción propuesta: ' + decision.accion + (decision.detalle && decision.detalle.hora ? ' · cita ' + decision.detalle.hora : '')).catch(function () {});
+      return Object.assign(hecho, { copiloto: true });
+    }
 
     // Al reservar, la confirmación con el enlace ya sale desde _cita.js: el
     // texto del agente sobraría (Sonia, 22-sep: dos mensajes seguidos). Solo se

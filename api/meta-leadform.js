@@ -211,6 +211,17 @@ async function guardar(lead, opts) {
   const fugaCruda = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios', 'web', 'respuesta', 'seguimiento', 'no lo s']);
   const inversion = CLAVES_INV[inversionCruda] || inversionCruda;
   const fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
+  // Formulario del 28-sep-2026: «¿Cuándo te gustaría empezar?» y «Nuestros
+  // proyectos empiezan desde 750 €/mes. ¿Encaja con lo que buscas?». Entran
+  // como etiquetas cuando-* y precio-* y las lee la puntuación (api/_scoring.js).
+  const cuandoCruda = respuesta(campos, ['cuando', 'empezar'], null).toLowerCase();
+  const precioCruda = respuesta(campos, ['encaja', 'precio', '750'], null).toLowerCase();
+  const cuando = /este|mes$|^este_mes/.test(cuandoCruda) && !/1|3/.test(cuandoCruda) ? 'este-mes'
+    : /1.?3|1_3|meses/.test(cuandoCruda) ? '1-3-meses'
+    : /mirando|mirar/.test(cuandoCruda) ? 'mirando' : '';
+  const precio = /depende/.test(precioCruda) ? 'depende'
+    : /^no|ahora mismo no|ahora_no/.test(precioCruda) ? 'no'
+    : /^s[ií]/.test(precioCruda) ? 'si' : '';
 
   if (!telefono && !EMAIL_RE.test(email)) return { ok: false, motivo: 'sin_contacto' };
 
@@ -234,7 +245,8 @@ async function guardar(lead, opts) {
   } else if (deEstaCampana) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
       'activacion', 'act-ini-' + sello);
-    if (!invierte) etiquetas.push('sin-inversion');
+    // Sin pregunta de inversión (formulario nuevo), el precio hace de capacidad.
+    if (!invierte && !(precio === 'si' || precio === 'depende')) etiquetas.push('sin-inversion');
   } else {
     // Formulario que no es de esta campaña: se guarda y se queda quieto.
     etiquetas.push('leadform-otra-campana');
@@ -247,6 +259,8 @@ async function guardar(lead, opts) {
   if (conocido && conocido.etiqueta) etiquetas.push(conocido.etiqueta);
   if (volumen) etiquetas.push('vol-' + rotulo(volumen));
   if (fuga) etiquetas.push('fuga-' + rotulo(fuga));
+  if (cuando) etiquetas.push('cuando-' + cuando);
+  if (precio) etiquetas.push('precio-' + precio);
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
   // El id del lead en Meta, para devolverle la calidad (Qualified/Disqualified) más tarde.
   if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));

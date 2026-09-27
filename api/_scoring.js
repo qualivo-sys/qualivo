@@ -9,6 +9,16 @@
 //   C · tipología < 6 y comportamiento ≥ 5 → se atiende, sin dedicarle horas
 //   D · el resto, o baja / no responde       → se guarda
 //
+// 28-sep-2026 (Maikel): el formulario nuevo pregunta «¿Cuándo te gustaría
+// empezar?» y «Nuestros proyectos empiezan desde 750 €/mes. ¿Encaja?». El
+// precio es capacidad y cuenta en la tipología (si no hay inversión declarada
+// o si puntúa más); «Depende de lo que incluya» casi no penaliza. El cuándo es
+// intención declarada y cuenta en el comportamiento, así que un lead puede
+// entrar ya como A sin haber contestado. Y un encaje muy alto (tipología ≥ 9)
+// con algo de intención (comportamiento ≥ 1) también es A. El nivel se
+// recalcula en cada vuelta: contestar, coger cita o no presentarse lo mueven,
+// y con él cambia el recorrido (api/activacion.js).
+//
 // Se escribe en los campos «Score · Tipología / Comportamiento / Nivel /
 // Motivo» del contacto y en la etiqueta nivel-a|b|c|d. Cuando un contacto pasa
 // a A por primera vez, se avisa a Maikel (etiqueta score-aviso-a para no
@@ -32,12 +42,20 @@ function etiqueta(c, prefijo) {
 function tipologia(c) {
   const motivos = [];
   let p = 0;
+  // Capacidad: lo mejor entre la inversión declarada y el encaje con el precio.
   const inv = etiqueta(c, 'inv-');
-  if (/mas-de-2|2-000-y|mas-2000|entre-2-000/.test(inv)) { p += 5; motivos.push('invierte más de 2.000 €'); }
-  else if (/entre-500|500-y-2/.test(inv)) { p += 4; motivos.push('invierte 500-2.000 €'); }
-  else if (/menos-de-500|menos-500/.test(inv)) { p += 2; motivos.push('invierte menos de 500 €'); }
-  else if (/nada/.test(inv)) { p += 0; motivos.push('no invierte'); }
-  else { p += 2; }
+  let pInv = -1, mInv = '';
+  if (/mas-de-2|2-000-y|mas-2000|entre-2-000|mas-de-5/.test(inv)) { pInv = 5; mInv = 'invierte más de 2.000 €'; }
+  else if (/entre-500|500-y-2/.test(inv)) { pInv = 4; mInv = 'invierte 500-2.000 €'; }
+  else if (/menos-de-500|menos-500/.test(inv)) { pInv = 2; mInv = 'invierte menos de 500 €'; }
+  else if (/nada/.test(inv)) { pInv = 0; mInv = 'no invierte'; }
+  let pPre = -1, mPre = '';
+  if (A.tiene(c, 'precio-si')) { pPre = 4; mPre = 'le encaja el precio'; }
+  else if (A.tiene(c, 'precio-depende')) { pPre = 3; mPre = 'precio: depende de lo que incluya'; }
+  else if (A.tiene(c, 'precio-no')) { pPre = 0; mPre = 'ahora mismo no le encaja el precio'; }
+  if (pInv < 0 && pPre < 0) { p += 2; }
+  else if (pPre > pInv) { p += pPre; motivos.push(mPre); if (mInv) motivos.push(mInv); }
+  else { p += pInv; motivos.push(mInv); if (mPre) motivos.push(mPre); }
   const vol = etiqueta(c, 'vol-');
   if (/mas|50-100/.test(vol)) { p += 3; motivos.push('más de 50 peticiones/mes'); }
   else if (/20-50|15-30/.test(vol)) { p += 2; motivos.push('20-50 peticiones/mes'); }
@@ -66,6 +84,10 @@ function comportamiento(c, mensajes) {
     }
     if (entrantes.length >= 3) { p += 1; motivos.push('conversación de varios mensajes'); }
   }
+  // Intención declarada en el formulario.
+  if (tiene('cuando-este-mes')) { p += 3; motivos.push('quiere empezar este mes'); }
+  else if (tiene('cuando-1-3-meses')) { p += 1; motivos.push('quiere empezar en 1-3 meses'); }
+  else if (tiene('cuando-mirando')) { p -= 1; motivos.push('solo está mirando'); }
   if (tiene('voz-completada')) { p += 2; motivos.push('habló con Raquel'); }
   if (tiene('act-agendado') || tiene('act-cita-confirmada') || tiene('reunion-reservada.')) { p += 4; motivos.push('cogió cita'); }
   if (tiene('reunion-celebrada')) { p += 1; motivos.push('vino a la reunión'); }
@@ -78,6 +100,7 @@ function comportamiento(c, mensajes) {
 function nivel(tipo, comp, c) {
   if (A.tiene(c, 'act-baja') || A.tiene(c, 'no-responde') || A.tiene(c, 'act-descartado')) return 'D';
   if (tipo >= 6 && comp >= 5) return 'A';
+  if (tipo >= 9 && comp >= 1) return 'A';
   if (tipo >= 6) return 'B';
   if (comp >= 5) return 'C';
   return 'D';
@@ -170,4 +193,4 @@ async function volcarHoja(detalle, contactos) {
   return { ok: true, filas: filas.length };
 }
 
-module.exports = { volcarHoja: volcarHoja, puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };
+module.exports = { leerNivel: leerNivel, volcarHoja: volcarHoja, puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };
