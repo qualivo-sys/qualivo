@@ -126,7 +126,8 @@ async function fichaDe(c) {
   const fuga = de('fuga-');
   if (fuga && !wa.loQueEscribio) lineas.push('Dónde cree que se le escapa (formulario): ' + fuga);
   if (wa.pregunta) lineas.push('La pregunta que ya le hicimos por WhatsApp: «' + wa.pregunta + '»');
-  if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) lineas.push('YA TIENE CITA RESERVADA con Maikel. No propongas otra: si pregunta por ella, confírmasela y remítele a la invitación del correo. Si quiere cambiarla, usa pasar_a_maikel.');
+  if (A.tiene(c, 'no-presentado') || A.tiene(c, 'cita-cancelada-lead')) lineas.push('TUVO UNA CITA QUE NO SE CELEBRÓ (no vino o la canceló). No se lo reproches: si quiere retomarlo, ofrécele dos huecos nuevos de la lista y reserva cuando acepte uno.');
+  else if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) lineas.push('YA TIENE CITA RESERVADA con Maikel. No propongas otra: si pregunta por ella, confírmasela y remítele a la invitación del correo. Si quiere cambiarla, usa pasar_a_maikel.');
   if (A.tiene(c, 'voz-completada')) lineas.push('Raquel, del equipo, ya habló con él por teléfono (mira las notas).');
   // Precualificar (28-sep): lead con poca señal de encaje; primero se habla, luego la cita.
   const pq = require('./_scoring.js').precualificar(c);
@@ -482,7 +483,10 @@ async function atender(contactId, opciones) {
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
     // Quien ya tiene cita habla con Maikel, no con el agente (Beatriz, 19-sep).
-    if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) return Object.assign(hecho, { accion: 'callar', motivo: 'ya tiene cita: lo lleva Maikel' });
+    // Con cita, lo lleva Maikel. Salvo (28-sep) que Maikel haya activado el agente para esta persona
+    // o que la cita ya pasó sin que viniera (no presentado / la canceló): entonces hay que reagendar.
+    const citaViva = (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) && !A.tiene(c, 'no-presentado') && !A.tiene(c, 'cita-cancelada-lead');
+    if (citaViva && !A.tiene(c, 'agente-auto')) return Object.assign(hecho, { accion: 'callar', motivo: 'ya tiene cita: lo lleva Maikel' });
     // Regla de Maikel (22-sep): con el trato en Negociación, Oferta, Piloto o
     // Cliente nada sale sin su aprobación. El agente avisa y se calla.
     try {
@@ -536,7 +540,7 @@ async function atender(contactId, opciones) {
     // «agente-auto» (28-sep): Maikel lo activa desde la ficha de Intelligence para
     // que el agente conteste solo a esta persona, sin pasar por borrador.
     const copiloto = COPILOTO && !A.tiene(c, 'agente-auto');
-    if (humano && !copiloto) {
+    if (humano && !copiloto && !A.tiene(c, 'agente-auto')) {
       if (!opciones.simular) { await A.etiquetar(c.id, ['wa-humano']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); }
       return Object.assign(hecho, { accion: 'callar', motivo: 'Maikel ya está escribiendo en este hilo' });
     }
