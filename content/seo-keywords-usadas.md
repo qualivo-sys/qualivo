@@ -11,11 +11,13 @@
 | 2026-09-23 | `/blog/cliente-no-se-presenta-a-la-cita/` | el cliente no se presenta a la cita | plantón cita comercial · no show citas · recordatorio de cita · recuperar una cita perdida | Funnel y conversión · pilar `/blog/funnel-de-ventas/` | Semana 18-22 sep: 20 contactos, 9 citas, 5 plantones (`content/brief-recorrido-semana-38.md`); 18-sep plantón 12:00, llamada 12:06 (bitácora); BMJ Open 2016 |
 | 2026-09-24 | `/blog/que-poner-en-tu-negocio-para-atraer-clientes/` | qué poner en tu negocio para atraer clientes (110, comp 0) | cómo atraer clientes a mi negocio · atraer clientes · captar clientes | Captación · pilar `/blog/como-captar-clientes/` | Anuncios 18-22 sep (291,90 €, 21 leads, CPL por vertical, frecuencia 2,0) y recorrido (8 de 20 de noche, 9 citas, 5 plantones): `content/brief-recorrido-semana-38.md`; clínica del 19-sep: `diagnostico/landing.js` |
 | 2026-09-25 | `/blog/coste-por-lead/` | coste por lead | CPL · cuánto cuesta un lead · coste por cita · coste por cliente | Métricas · pilar `/blog/metricas-de-marketing/` | Anuncios 18-22 sep por sector (gasto, contactos, CPL) y citas por sector: `content/brief-recorrido-semana-38.md` §2 y §3; EAC 10,2× y 44.000 €: `casos/eac/` |
+| 2026-09-28 | `/blog/formulario-de-facebook-o-landing-page/` | formulario de Facebook o landing page | formulario instantáneo de Facebook · lead ads o landing · preguntas del formulario de Facebook · cualificar contactos en el formulario | Captación · pilar `/blog/captacion-de-leads/` | Daily de Growth 27-sep (`bus/out/demand.jsonl`): 14 citas de pago, 12 formulario y 2 landing; formulario nuevo con «cuándo» y precio (`api/meta-leadform.js`); 20 primeros contactos contados lead a lead (`content/brief-recorrido-semana-38.md` §3) |
 
 ## Reapuntados al diagnóstico (solo dos últimos párrafos + CTA)
 
 | Fecha | Artículo | Qué cambió |
 |---|---|---|
+| 2026-09-28 | `/blog/captacion-de-leads/` | Los dos últimos párrafos (error 3 y el destacado) y el cierre: un solo botón a `/diagnostico/` (antes dos, uno a `/#contacto`); enlace al artículo de hoy |
 | 2026-09-25 | `/blog/como-captar-clientes/` | Paso 5 (los dos últimos párrafos antes de las FAQ) con el dato propio de coste por contacto frente a citas y enlace al artículo de hoy; cierre con un solo botón a `/diagnostico/` (antes calculadora y `/#contacto`) |
 | 2026-09-24 | `/blog/leads-pero-no-ventas/` | «Por dónde empezar»: los dos últimos párrafos y el cierre, un solo botón a `/diagnostico/`; enlace al artículo de hoy |
 | 2026-09-23 | `/blog/seguimiento-comercial/` | Los dos últimos párrafos («El último mensaje», «Compruébalo hoy») y el cierre: un solo botón a `/diagnostico/`, enlace al artículo de presupuestos sin respuesta |

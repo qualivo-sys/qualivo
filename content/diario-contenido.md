@@ -639,3 +639,40 @@ Informe en `content/borradores/revision-master-reviewer-2026-09-25.md`. El artí
 ### Hipótesis
 
 - El coste por cita separa mejor los sectores que el coste por lead. Lo comprobaré con la semana 39 cuando haya más citas por sector.
+
+## Lunes 28 de septiembre de 2026
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/formulario-de-facebook-o-landing-page/ («Formulario de Facebook o landing page: qué trae más citas»).
+  - Dato real, del daily de Growth del 27-sep: de 14 citas de anuncios, 12 entraron por el formulario y 2 por la web.
+  - Lo cuento con la advertencia de que casi todo el gasto iba al formulario, así que eso no demuestra que sea mejor.
+  - Lo que sí cambia el resultado son las preguntas: las dos nuevas del 27-sep (cuándo y precio de entrada).
+  - Registrado en la tarjeta del blog, el sitemap, llms.txt y el registro de keywords.
+- **Reorientado:** `blog/captacion-de-leads/`. Error 3 y destacado reescritos con enlace al artículo nuevo. Cierre con un solo botón al diagnóstico. dateModified a 28-sep.
+- **Corregida** la tarjeta del artículo del viernes en el índice del blog: decía «más del doble» y son el doble (4 citas frente a 2 tras la revisión).
+
+### Borradores (sin publicar)
+
+- **Lunes, «Agentizando mi propia empresa»: «Dos preguntas antes de la llamada».**
+  - Imagen: `content/infografias/2026-09-28/dos-preguntas.png`.
+  - Texto y ficha: `content/borradores/2026-09-28-agentizando-dos-preguntas.md`.
+  - Dato: el formulario nuevo y las rutas por nivel a las 2 h 30 (A llama Maikel, B y C una llamada del comercial IA, D nadie), sacadas del código (`api/activacion.js`, `api/_scoring.js`).
+
+### Decisiones que dejo tomadas
+
+- **Precio de entrada:** no pongo la cifra en el blog ni en el post, aunque ya aparece en el formulario del anuncio. La pieza se sostiene sin ella y así no se convierte en el tema.
+- **Primeros 20 contactos:** uso el recuento lead a lead y no el resumen del brief. La tabla da 6 que no invertían nada y el resumen dice 5. Con 14 de 20 por debajo de 500 € o en cero, la frase es la misma de todas formas.
+- **Dato propio que falta:** no publico cuántas reuniones se celebraron por cada vía. Deja deducir la tasa de plantones, regla de Maikel.
+
+### Pendiente de Maikel
+
+1. **Precio en redes y blog:** ¿se dice la cifra en redes o en el blog? Recomiendo que no, de momento.
+2. **Pendientes de la semana pasada:**
+   - Newsletter de plantones: ¿a los 22, desde GHL o con mi envío?
+   - Quitar el «5 de 9» del artículo del 23-sep.
+   - Levantar la pausa de LinkedIn. Ya hay cuatro piezas listas.
+
+### Hipótesis
+
+- **Formulario nuevo:** las dos preguntas bajan el volumen, pero suben las reuniones celebradas. Se comprueba el lunes 5 de octubre con el dato de Growth, y ese mismo día sale la segunda parte del post, con el resultado, sea el que sea.
