@@ -39,6 +39,11 @@ module.exports = async function handler(req, res) {
   const evento = EVENTOS[String(q.evento || '')];
   if (!evento) return res.status(400).json({ ok: false, error: 'evento_desconocido' });
 
+  // 28-sep: las citas ya las manda api/_cita.js a Meta (todas: agente, Raquel, widget y las
+  // reservadas en GHL, que recoge el repaso del calendario). Si el workflow de GHL también
+  // manda «Schedule», con otro id, Meta cuenta la cita dos veces (31 para ~12 citas en diez días).
+  if (evento === 'Schedule') return res.status(200).json({ ok: true, evento: evento, meta: 'lo_manda_cita' });
+
   let b = req.body || {};
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }
 
