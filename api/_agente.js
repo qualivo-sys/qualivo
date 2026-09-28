@@ -44,6 +44,9 @@ const SISTEMA = [
   '2. Proponer la videollamada con DOS huecos concretos de los que te doy abajo (día y hora, en palabras). Nunca inventes un hueco que no esté en la lista.',
   '3. Cuando acepte uno, reserva con la herramienta reservar_cita. Su correo ya lo tenemos: no se lo pidas. Después de reservar, confirma en una frase y di que le llega la invitación al correo.',
   '',
+  'CUANDO LA FICHA DICE «PRECUALIFICAR» (Maikel, 28-sep: no invierte nada, pocas peticiones o no sabe dónde se le escapa): antes de ofrecer la videollamada, averigua si tiene sentido con una o dos preguntas, de una en una y con naturalidad: a qué se dedica exactamente y de qué tamaño son sus trabajos (en reformas: integrales, cocinas, baños, locales; más o menos cuánto vale un trabajo), cuántos clientes o presupuestos mueve al mes y de dónde le llegan hoy. Si encaja (negocio en marcha, varios trabajos al mes y de cierto valor), ofreces los dos huecos. Si no encaja todavía (empieza de cero, uno o dos trabajos al mes, o busca algo gratis), NO ofreces videollamada: en una frase le recomiendas empezar por el diagnóstico de tres minutos, qualivo.io/intelligence/diagnostico, y usas pasar_a_maikel con el motivo «no encaja todavía» y un resumen de lo que ha contado. Nunca le digas que no encaja, ni hables de presupuesto mínimo o de precios.',
+  '«Luego» en España casi siempre quiere decir «hoy, más tarde»: si dice «luego si puedes, mañana no puedo», está proponiendo hoy.',
+  '',
   'CUANDO TE PIDE QUE SE LO CUENTES POR AQUÍ («dime», «cuéntame», «qué hacéis», «ahora no puedo hablar», o está liado), contesta con UN mensaje de hasta noventa palabras en tres partes, sin listas (Maikel, 23-sep):',
   'a) Lo que dijo él de dónde se le escapa, con sus palabras, y lo que suele pasar en su sector. Si dijo «no lo sé»: casi nadie lo tiene medido y suele estar en uno de tres sitios: lo que se tarda en contestar a quien pide presupuesto (o información, o cita), el siguiente paso que no se llega a cerrar (la visita, la clase de prueba, la primera visita) y el que se lo piensa y nadie le vuelve a escribir. Si dijo captación: muchas veces el anuncio no es el problema, sino no saber qué anuncio trae clientes de verdad y perder lo que ya se ha pagado por tardar en contestar; si no invierte nada, que tiene dos caras: sacar más de lo que ya le llega y que le encuentre gente de su zona. Si dijo seguimiento: el problema no es conseguir más clientes sino el recorrido desde que alguien deja sus datos.',
   'b) Lo que hacemos: ese recorrido lo trabajamos y en buena parte lo automatizamos con agentes de IA de WhatsApp y voz, y con una puntuación de cada contacto: cuando entra uno con muchas opciones, le llega un aviso y le atiende en ese momento. A un autónomo o a quien da clase él mismo, díselo en su idioma: un agente que contesta por ti mientras trabajas.',
@@ -125,6 +128,13 @@ async function fichaDe(c) {
   if (wa.pregunta) lineas.push('La pregunta que ya le hicimos por WhatsApp: «' + wa.pregunta + '»');
   if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) lineas.push('YA TIENE CITA RESERVADA con Maikel. No propongas otra: si pregunta por ella, confírmasela y remítele a la invitación del correo. Si quiere cambiarla, usa pasar_a_maikel.');
   if (A.tiene(c, 'voz-completada')) lineas.push('Raquel, del equipo, ya habló con él por teléfono (mira las notas).');
+  // Precualificar (28-sep): lead con poca señal de encaje; primero se habla, luego la cita.
+  const motivos = [];
+  if (A.tiene(c, 'sin-inversion') || tags.some(function (t) { return /^inv-nada/.test(t); })) motivos.push('no invierte nada en captación');
+  if (tags.some(function (t) { return /^vol-(0|1-5|menos|5-15)/.test(t); })) motivos.push('pocas peticiones al mes (' + de('vol-') + ')');
+  if (tags.some(function (t) { return /^fuga-no-lo-s/.test(t); })) motivos.push('no sabe dónde se le escapa');
+  if (!c.companyName || /^(madrid|barcelona|valencia|sevilla|m[aá]laga)$/i.test(String(c.companyName).trim())) motivos.push('no ha dado nombre de empresa');
+  if (motivos.length >= 2 && !A.tiene(c, 'act-agendado')) lineas.push('PRECUALIFICAR: ' + motivos.join(', ') + '. Antes de ofrecer la videollamada, averigua si encaja (mira las instrucciones).');
   try {
     const r = await fetch(A.GHL_BASE + '/contacts/' + c.id + '/notes', { headers: A.cabeceras() });
     const d = r.ok ? await r.json() : {};
