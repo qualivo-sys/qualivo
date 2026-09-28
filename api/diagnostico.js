@@ -192,12 +192,7 @@ module.exports = async function handler(req, res) {
       try {
         const act = require('./_activacion.js');
         const msg = require('./_mensajes.js');
-        const datosMsg = { nombre: nombre, hipotesis: hipotesis, sector: sector, inversion: inversion, origen: 'landing' };
-        const env = await act.primerWhatsApp(contactId, telefono, {
-          nombre: msg.nombreCorto(nombre), cita: hipotesis ? String(hipotesis).slice(0, 220) : 'el diagnóstico',
-          pregunta: msg.pregunta(datosMsg), texto: msg.whatsapp1(datosMsg)
-        });
-        await act.etiquetar(contactId, ['act-wa1'].concat(env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
+        await act.primerWhatsAppCompleto(contactId, telefono, { nombre: nombre, hipotesis: hipotesis ? String(hipotesis).slice(0, 220) : '', sector: sector, inversion: inversion, origen: 'landing' });
       } catch (err) {
         console.error('[diagnostico] primer WhatsApp no salió:', err && err.message);
       }

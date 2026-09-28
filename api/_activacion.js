@@ -326,6 +326,28 @@ async function primerWhatsApp(contactId, telefono, datos) {
   return env;
 }
 
+// Primer WhatsApp completo, el mismo desde cualquier puerta (formulario de Meta, rescate de
+// leads, landing del diagnóstico y reloj de activación). 28-sep: las puertas mandaban el texto
+// genérico y marcaban act-wa1 SIN la hora de envío (act-wa1-h-…); sin esa hora la cadencia
+// daba por pasados los plazos y a Antonio le salieron D+0, D+1 y D+3 en cincuenta minutos.
+// d: { nombre, empresa, sector, fuga, inversion, volumen, entro, hipotesis, origen }.
+async function primerWhatsAppCompleto(contactId, telefono, d) {
+  d = d || {};
+  const M = require('./_mensajes.js'), AGT = require('./_agente.js');
+  let pq = false;
+  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) pq = require('./_scoring.js').precualificar((await r.json()).contact || {}).si; } catch (e) { /* sin ficha: mensaje normal */ }
+  const tardes = AGT.opcionesTarde();
+  const ia = await AGT.mensajePersonalizado({ nombre: M.nombreCorto(d.nombre), empresa: d.empresa || '', sector: d.sector, fuga: d.fuga || d.hipotesis, inversion: d.inversion, volumen: d.volumen,
+    opcion1: tardes[0], opcion2: tardes[1], precualificar: pq }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+  const datosMsg = { nombre: d.nombre, origen: d.origen, inversion: d.inversion, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis, entro: d.entro, precualificar: pq };
+  const texto = ia.texto || M.whatsapp1(datosMsg);
+  const env = await primerWhatsApp(contactId, telefono, { nombre: M.nombreCorto(d.nombre), cita: d.fuga || d.hipotesis || 'el diagnóstico', pregunta: M.pregunta(datosMsg), texto: texto });
+  const sello = 'act-wa1-h-' + new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
+  await etiquetar(contactId, ['act-wa1', sello].concat(env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
+  try { const r2 = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r2.ok) await require('./_scoring.js').puntuar((await r2.json()).contact, { mensajes: [] }); } catch (e) { /* no bloquea */ }
+  return Object.assign({}, env, { ia: !!ia.texto, precualificar: pq });
+}
+
 // Todos los mensajes de un contacto, de más antiguo a más nuevo.
 async function mensajesDe(contactId) {
   const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
@@ -551,7 +573,7 @@ async function enviarCorreo(email, asunto, html) {
 module.exports = {
   PAUSA_TOTAL,
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
   sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta
 };

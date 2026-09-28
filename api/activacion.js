@@ -97,7 +97,10 @@ function esLeadForm(contacto) {
 function siguientePaso(contacto, minutos) {
   const hay = function (t) { return A.tiene(contacto, t); };
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
-  const desdeWa1 = minutosDesdeEtiqueta(contacto, 'act-wa1-h-');
+  let desdeWa1 = minutosDesdeEtiqueta(contacto, 'act-wa1-h-');
+  // Sin la hora del primer WhatsApp se cuenta desde que entró, nunca «hace mucho»:
+  // el 28-sep a Antonio le salieron D+0, D+1 y D+3 en cincuenta minutos por esto.
+  if (desdeWa1 >= 1e9 && (contacto.tags || []).some(function (x) { return /^act-ini-\d{12}$/.test(String(x)); })) desdeWa1 = minutosDesdeInicio(contacto);
   if (!hay('act-paso2') && desdeWa1 >= ESPERA_PASO2_MIN) return { tipo: 'paso2', desdeWa1: desdeWa1 };
   if (!hay('act-wa2') && hay('act-paso2') && desdeWa1 >= 24 * 60) return { tipo: 'wa2' };
   if (!hay('act-wa3') && hay('act-wa2') && desdeWa1 >= 3 * 24 * 60) return { tipo: 'wa3' };
@@ -353,7 +356,8 @@ async function handler(req, res) {
       nombre: nombrePila(c.firstName || c.contactName || c.name || ''),
       sector: '', inversion: '', volumen: '',
       origen: esLeadForm(c) ? 'leadform' : 'landing',
-      entro: c.dateAdded || ''
+      entro: c.dateAdded || '',
+      precualificar: require('./_scoring.js').precualificar(c).si
     };
     // El contexto del lead viaja en las etiquetas que puso el formulario.
     (c.tags || []).forEach(function (t) {
@@ -384,7 +388,7 @@ async function handler(req, res) {
           const tardes = AGT.opcionesTarde();
           const ia = await AGT.mensajePersonalizado({
             nombre: datos.nombre, empresa: c.companyName || '', sector: datos.sector, fuga: datos.fuga, inversion: datos.inversion, volumen: datos.volumen,
-            opcion1: tardes[0], opcion2: tardes[1]
+            opcion1: tardes[0], opcion2: tardes[1], precualificar: datos.precualificar
           }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
           if (ia.texto) { texto = ia.texto; esIA = true; }
           else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');

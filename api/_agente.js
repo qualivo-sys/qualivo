@@ -366,7 +366,7 @@ function opcionesTarde(fecha) {
 async function mensajePersonalizado(o) {
   const d = o || {};
   const op1 = d.opcion1, op2 = d.opcion2;
-  if (!op1 || !op2) return { texto: '', motivo: 'sin opciones de tarde' };
+  if ((!op1 || !op2) && !d.precualificar) return { texto: '', motivo: 'sin opciones de tarde' };
   const sistema = [
     'Escribes el primer WhatsApp que Maikel Echevarría (Qualivo) manda a alguien que',
     'acaba de rellenar el formulario de diagnóstico de crecimiento. Tiene que parecer',
@@ -388,13 +388,15 @@ async function mensajePersonalizado(o) {
     '4. Qué verá en la llamada, con esta promesa (28-sep, Maikel): «En la llamada dibujamos vuestro recorrido',
     '   actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en [empresa o «vuestro caso»].»',
     '   Si tienes el nombre de su empresa, úsalo aquí.',
-    '5. Una sola pregunta final, exactamente: «¿Te viene mejor ' + op1 + ' o ' + op2 + '?»',
+    (d.precualificar
+      ? '5. SIN ofrecer reunión ni horas (Maikel, 28-sep: con scoring bajo siempre se precualifica antes). Cierra con una sola pregunta sencilla, que se conteste con un número y que sirva para ver si encaja, por ejemplo «Para ir con algo preparado: ¿cuántas peticiones de presupuesto os entran al mes, más o menos, y cuántas acabáis cerrando?». Adáptala a su sector (alumnos o matrículas en formación, pacientes en clínicas). En el punto 4 no hables de «la llamada»: di «si encaja, te enseño…».'
+      : '5. Una sola pregunta final, exactamente: «¿Te viene mejor ' + op1 + ' o ' + op2 + '?»'),
     '',
     'REGLAS',
     '- No inventes nada que no esté en la ficha: ni a qué se dedica en concreto, ni cifras, ni herramientas.',
     '- No prometas una solución concreta ni resultados: eso sale del diagnóstico.',
     '- No expliques de más. Entre 90 y 150 palabras.',
-    '- Nunca fechas, días del mes ni horas concretas: solo las dos opciones de la pregunta final.',
+    '- Nunca fechas, días del mes ni horas concretas' + (d.precualificar ? '.' : ': solo las dos opciones de la pregunta final.'),
     '- Nada del sistema interno: ni «nivel», ni letras A/B/C/D, ni puntuaciones, ni «frío/caliente», ni «lead».',
     '- Tuteas. Sin emojis, sin listas, sin negritas ni asteriscos, sin comillas alrededor del texto.',
     '- Contesta solo con el texto del mensaje.'
@@ -419,7 +421,8 @@ async function mensajePersonalizado(o) {
   if (!texto) return { texto: '', motivo: 'sin texto' };
   const palabras = texto.split(/\s+/).filter(Boolean).length;
   if (palabras < 70 || palabras > 180) return { texto: '', motivo: 'longitud fuera de rango (' + palabras + ' palabras)' };
-  if (texto.indexOf(op1) === -1 || texto.indexOf(op2) === -1) return { texto: '', motivo: 'no ofreció las dos tardes tal cual' };
+  if (!d.precualificar && (texto.indexOf(op1) === -1 || texto.indexOf(op2) === -1)) return { texto: '', motivo: 'no ofreció las dos tardes tal cual' };
+  if (d.precualificar && ((op1 && texto.indexOf(op1) > -1) || (op2 && texto.indexOf(op2) > -1) || !/\?\s*$/.test(texto))) return { texto: '', motivo: 'precualificar: ofreció hora o no acaba en pregunta' };
   if (/\b\d{1,2} de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b|\b\d{1,2}:\d{2}\b/i.test(texto)) return { texto: '', motivo: 'puso una fecha u hora' };
   if (/\bnivel\s*[abcd]\b|tipolog[ií]a|\bfr[ií]o\b|\bcaliente\b|probabilidad de compra|según nuestro algoritmo|\blead\b/i.test(texto)) {
     return { texto: '', motivo: 'mencionó algo del sistema interno' };

@@ -74,7 +74,8 @@ function whatsapp1(datos) {
   return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. Miramos el recorrido completo de un negocio, desde el anuncio hasta el cierre, ' +
     'y ponemos un agente de IA justo donde se está perdiendo negocio.\n\n' +
     cuando + ' el diagnóstico de crecimiento — el siguiente paso es que te enseñe, con tu caso delante, dónde está esa fuga y qué haría falta para cerrarla. ' +
-    (finde ? '¿Te va bien que lo agendemos para el lunes?' : '¿Te va bien que lo veamos hoy o mañana?');
+    (datos.precualificar ? 'Para ir con algo preparado: ¿cuántas peticiones os entran al mes, más o menos, y cuántas acabáis cerrando?'
+      : finde ? '¿Te va bien que lo agendemos para el lunes?' : '¿Te va bien que lo veamos hoy o mañana?');
 }
 
 // El primer WhatsApp de un lead que nunca nos ha escrito sale por una plantilla
@@ -172,13 +173,25 @@ function temaCorto(datos) {
   if (tipo === 'captacion') return 'lo de la captación' + donde;
   return 'lo de dónde se os escapan los clientes' + donde;
 }
+// 28-sep (Maikel: «son un poco repetitivos y no sé si tienen sentido entre ellos»): los tres
+// mensajes cuentan una sola historia. El de ayer no se describe (no sabemos qué tema tocó el
+// primero, que lo escribe la IA), sin «15 minutos» y sin repetir la pregunta de agenda.
+// Con scoring bajo (precualificar) no se empuja la reunión: se pide un dato y luego el diagnóstico.
 function whatsappDia1(datos) {
   const n = nombreCorto(datos.nombre);
-  return (n ? n + ', te' : 'Te') + ' escribí ayer por ' + temaCorto(datos) + '. No sé si llegaste a verlo.\n\n' +
-    'Si te parece, podemos mirar vuestro recorrido en 15 minutos y te enseño dónde empezaría yo. ¿Te viene mejor esta semana o la que viene?';
+  if (datos.precualificar) {
+    return (n ? n + ', por' : 'Por') + ' si se te pasó mi mensaje de ayer: con saber más o menos cuántas peticiones os entran al mes y cuántas acabáis cerrando, ' +
+      'te digo si tiene sentido que lo veamos o no. Me vale un número aproximado.';
+  }
+  return (n ? n + ', te' : 'Te') + ' escribí ayer por lo del diagnóstico, por si se te pasó.\n\n' +
+    'Si me dices qué día te va bien, lo vemos con tu caso delante y te digo por dónde empezaría yo.';
 }
 function whatsappDia3(datos) {
   const n = nombreCorto(datos.nombre);
+  if (datos.precualificar) {
+    return (n ? n + ', te' : 'Te') + ' dejo aquí el diagnóstico de tres minutos, para que veas por tu cuenta dónde se os escapa más negocio: qualivo.io/intelligence/diagnostico\n\n' +
+      'Si después quieres que lo miremos juntos, me dices. Y si ahora no es el momento, dímelo y no te escribo más.';
+  }
   return (n ? n + ', por' : 'Por') + ' si te va mejor elegir tú la hora, aquí tienes mi agenda: qualivo.io/llamada\n\n' +
     'Y si ahora no es el momento, dímelo sin problema y no te escribo más.';
 }
