@@ -4,7 +4,8 @@
 import os, html
 D = os.path.dirname(os.path.abspath(__file__))
 TINTA, TEAL, TEAL_OSC, GRIS, FONDO, LILA = '#101319', '#27BDB1', '#0E7C74', '#7A7C82', '#F4F5F7', '#EFECFB'
-F = "font-family:Montserrat,Arial,Helvetica,sans-serif;"
+# Fuente del sistema: Gmail y Outlook ignoran las fuentes web (28-sep).
+F = "font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
 
 def p(t, extra=''):
     return f'<p style="margin:0 0 16px;{F}font-size:16px;line-height:1.65;color:{TINTA};{extra}">{t}</p>'
@@ -24,22 +25,34 @@ def caja(filas, titulo=''):
             f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">{rows}</table></td></tr></table>')
 
 def cifras(items):
-    celdas = ''.join(
-        f'<td align="center" bgcolor="{TINTA}" style="background-color:{TINTA};padding:16px 6px;">'
-        f'<div style="{F}font-weight:900;font-size:24px;line-height:1.1;color:{TEAL};">{n}</div>'
-        f'<div style="{F}font-size:12px;line-height:1.3;color:#C9CED6;margin-top:4px;">{l}</div></td>'
-        for n, l in items)
-    return (f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="{TINTA}" style="background-color:{TINTA};border-radius:12px;margin:4px 0 20px;"><tr>{celdas}</tr></table>')
+    # 2 × 2 (28-sep): en una fila de cuatro, «44.000 €» se partía en dos líneas en el móvil.
+    celda = lambda n, l: (f'<td align="center" width="50%" bgcolor="{TINTA}" style="background-color:{TINTA};padding:14px 6px;">'
+        f'<div style="{F}font-weight:800;font-size:22px;line-height:1.1;color:{TEAL};white-space:nowrap;">{n}</div>'
+        f'<div style="{F}font-size:12px;line-height:1.3;color:#C9CED6;margin-top:4px;">{l}</div></td>')
+    filas = ''.join('<tr>' + ''.join(celda(n, l) for n, l in items[i:i + 2]) + '</tr>' for i in range(0, len(items), 2))
+    return (f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="{TINTA}" style="background-color:{TINTA};border-radius:12px;margin:4px 0 20px;">{filas}</table>')
 
 FIRMA = (f'<table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 0;"><tr>'
          f'<td valign="middle" style="padding-right:12px;"><img src="https://qualivo.io/assets/img/maikel-echevarria.jpg" width="44" height="44" alt="Maikel" style="display:block;width:44px;height:44px;border-radius:50%;border:0;"></td>'
          f'<td valign="middle" style="{F}font-size:14px;line-height:1.4;color:{TINTA};"><b>Maikel Echevarría</b><br><span style="color:{GRIS};">Fundador de Qualivo · <a href="https://qualivo.io" style="color:{GRIS};">qualivo.io</a></span></td>'
          f'</tr></table>')
+# Firma de texto para los correos «personales» (día 0 y día 20), que tienen que parecer escritos a mano.
+FIRMA_PLANA = p('Maikel<br><span style="color:' + GRIS + ';">Qualivo · qualivo.io</span>', 'margin-top:4px;')
 BAJA = f'<p style="margin:24px 0 0;{F}font-size:12px;line-height:1.5;color:{GRIS};">Si prefieres que no te escriba más, respóndeme «baja» y listo.</p>'
 
-def correo(asunto, preheader, cuerpo, baja=True):
-    return f'''<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(asunto)}</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet"></head>
+def correo(asunto, preheader, cuerpo, baja=True, plano=False):
+    if plano:
+        # Casi texto plano: sin tarjeta, sin línea de color, sin foto.
+        return f'''<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(asunto)}</title></head>
+<body style="margin:0;padding:0;background-color:#FFFFFF;">
+<div style="display:none;max-height:0;overflow:hidden;">{html.escape(preheader)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:20px 16px;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;"><tr><td>
+{cuerpo}
+{FIRMA_PLANA}
+{BAJA if baja else ''}
+</td></tr></table></td></tr></table></body></html>'''
+    return f'''<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(asunto)}</title></head>
 <body bgcolor="{FONDO}" style="margin:0;padding:0;background-color:{FONDO};">
 <div style="display:none;max-height:0;overflow:hidden;">{html.escape(preheader)}</div>
 <table bgcolor="{FONDO}" role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:{FONDO};"><tr><td align="center" style="padding:24px 12px;">
@@ -55,11 +68,9 @@ CORREOS = [
   pre='Qué hacemos en los 15 minutos y un dato que ayuda mucho.',
   cuerpo=p('Hola {{nombre}}:') +
    p('Soy Maikel, de Qualivo. Gracias por pedir el diagnóstico. Te acabo de escribir por WhatsApp para buscar un hueco; te dejo aquí lo que vamos a hacer, para que sepas qué esperar.') +
-   caja([('15 min','Dibujamos vuestro recorrido, desde que alguien pide información hasta que se matricula.'),
-         ('Después','Vemos dónde se están quedando alumnos por el camino.'),
-         ('Y al final','Si tiene sentido, te enseño cómo lo resolveríamos. Si no lo tiene, te lo digo igual.')], 'Lo que vamos a hacer') +
+   p('En 15 minutos dibujamos vuestro recorrido, desde que alguien pide información hasta que se matricula, y vemos dónde se están quedando alumnos por el camino. Si tiene sentido, te enseño cómo lo resolveríamos. Si no lo tiene, te lo digo igual.') +
    p('Una cosa que ayuda mucho: si puedes, ven con un dato, <b>cuántas solicitudes os llegaron el mes pasado</b>. Con eso ya sale una cifra.') +
-   enlace('Si prefieres elegir tú la hora', 'https://qualivo.io/llamada/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-0')),
+   p('Si prefieres elegir tú la hora: <a href="https://qualivo.io/llamada/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-0" style="color:' + TEAL_OSC + ';">qualivo.io/llamada</a>'), plano=True),
  dict(n=1, dia='Día 2', cuando='', asunto='lo que pasa en la primera hora',
   pre='Una sola idea, por si te sirve aunque no hablemos.',
   cuerpo=p('Hola {{nombre}}:') +
@@ -101,17 +112,15 @@ CORREOS = [
   cuerpo=p('Hola {{nombre}}:') +
    p('No quiero llenarte la bandeja, así que te pregunto directamente: ¿mejorar cómo respondéis y seguís a los interesados es algo que queréis mover en los próximos meses, o ahora mismo no toca?') +
    p('Con una palabra me vale:') +
-   caja([('«Ahora»','Te propongo dos huecos para vernos esta semana.'),
-         ('«Más adelante»','Dime cuándo y te escribo entonces, no antes.'),
-         ('«No»','Te borro de mi lista y tan amigos.')]), baja=False),
+   p('– «Ahora»: te propongo dos huecos para vernos esta semana.<br>– «Más adelante»: dime cuándo y te escribo entonces, no antes.<br>– «No»: te borro de mi lista y tan amigos.'), baja=False, plano=True),
 ]
 for c in CORREOS:
-    open(os.path.join(D, f"formacion-{c['n']}.html"), 'w').write(correo(c['asunto'], c['pre'], c['cuerpo'], c.get('baja', True)))
+    open(os.path.join(D, f"formacion-{c['n']}.html"), 'w').write(correo(c['asunto'], c['pre'], c['cuerpo'], c.get('baja', True), c.get('plano', False)))
 
 # Vista previa: los seis correos en columna, con su día y asunto.
 tarjetas = ''
 for c in CORREOS:
-    cuerpo = c['cuerpo'] + FIRMA + (BAJA if c.get('baja', True) else '')
+    cuerpo = c['cuerpo'] + (FIRMA_PLANA if c.get('plano') else FIRMA) + (BAJA if c.get('baja', True) else '')
     tarjetas += f'''<section class="it"><div class="meta"><span class="dia">{c['dia']}</span><span class="n">Correo {c['n']}</span></div>
 <div class="bandeja"><div class="de"><b>Maikel Echevarría</b> &lt;maikel@qualivo.io&gt;</div><div class="as">{html.escape(c['asunto'])}</div><div class="pre">{html.escape(c['pre'])}</div></div>
 <div class="mail">{cuerpo}</div></section>'''
