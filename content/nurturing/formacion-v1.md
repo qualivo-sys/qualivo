@@ -23,8 +23,10 @@ contesta por cualquier canal, reserva o pide la baja; si reserva, deja de recibi
 nurturing y recibe solo la confirmación y el recordatorio. Quien contesta al correo
 vuelve al copiloto: el borrador le llega a Maikel.
 
-Remitente: Maikel Echevarría <maikel@qualivo.io>. Texto plano, sin plantilla de
-boletín, un solo enlace por correo, firma corta y línea de baja.
+Remitente: Maikel Echevarría <maikel@qualivo.io>. Sin plantilla de boletín, un solo
+enlace por correo, firma corta y línea de baja.
+
+**Maquetación (28-sep):** versión HTML ligera en `content/nurturing/correo/` (`formacion-0.html` … `formacion-5.html`, apta para correo: tablas, estilos en línea, fondos con bgcolor). Parece un correo personal de Maikel, no un boletín: tarjeta blanca con filete turquesa, una caja lila o una franja de cifras por correo para lo que se tiene que ver de un vistazo, enlace en texto y firma con foto. Vista previa de los seis en `content/nurturing/correo/vista-previa.html`. Se regenera con `python3 content/nurturing/correo/generar.py`. Cambios de texto al maquetar: el correo 2 ya no dice «lo que me contaste» (le llega también a quien no ha hablado con nadie) y el 4 deja un solo enlace (el vídeo), y para la llamada se pide que responda al correo.
 
 Medición: etiquetas `nut-0` … `nut-5` al enviar, y apertura y clic por correo. Así se ve
 qué correo precede a cada reunión, aparte de lo que traen WhatsApp y Raquel.
@@ -92,7 +94,7 @@ _Si prefieres que no te escriba más, respóndeme «baja» y listo._
 
 Hola {{nombre}}:
 
-Te cuento un caso, porque se parece a lo que me contaste.
+Te cuento un caso de formación, por si se parece al vuestro.
 
 Una escuela aeronáutica de Cataluña invertía en Meta, Google y TikTok para tres cursos
 muy distintos. Tenían interesados de sobra, pero no sabían qué anuncio acababa en
@@ -148,7 +150,8 @@ Esto no sustituye a tu equipo ni a tu agencia. Hace lo repetitivo (contestar al
 momento, recordar, volver a escribir al que se lo piensa) y les pasa a ellos lo que
 vende.
 
-Si quieres verlo con los datos de {{empresa}}, son 15 minutos: qualivo.io/llamada
+Si quieres verlo con los datos de {{empresa}}, son 15 minutos: responde a este correo
+y te propongo hora.
 
 Maikel
 
