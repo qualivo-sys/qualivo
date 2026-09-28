@@ -68,6 +68,23 @@ function tipologia(c) {
   return { puntos: Math.min(10, p), motivos: motivos };
 }
 
+// Precualificar (Maikel, 28-sep): lead con poca señal de encaje. Antes de darle una
+// reunión con Maikel, el agente de WhatsApp hace una o dos preguntas para ver si encaja.
+// Lo usan la puntuación (etiqueta «precualificar»), el agente, los avisos e Intelligence.
+function precualificar(c) {
+  const tags = (c.tags || []).map(String);
+  const t = function (re) { return tags.some(function (x) { return re.test(x); }); };
+  const motivos = [];
+  if (A.tiene(c, 'sin-inversion') || t(/^inv-nada/)) motivos.push('no invierte nada en captación');
+  if (t(/^vol-(0|1-5|menos|5-15)/)) motivos.push('pocas peticiones al mes (' + etiqueta(c, 'vol-').replace(/-/g, ' ') + ')');
+  if (t(/^fuga-no-lo-s/)) motivos.push('no sabe dónde se le escapa');
+  if (A.tiene(c, 'precio-no')) motivos.push('dice que ahora no le encaja el precio');
+  if (t(/^cuando-mirando/)) motivos.push('solo está mirando');
+  if (!c.companyName || /^(madrid|barcelona|valencia|sevilla|m[aá]laga|bilbao|zaragoza|-|\.)$/i.test(String(c.companyName).trim())) motivos.push('no ha dado nombre de empresa');
+  const agendado = A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada') || A.tiene(c, 'reunion-celebrada');
+  return { si: motivos.length >= 2 && !agendado, motivos: motivos };
+}
+
 function comportamiento(c, mensajes) {
   const motivos = [];
   let p = 0;
@@ -116,7 +133,8 @@ async function puntuar(c, opciones) {
   const mensajes = opciones.mensajes || await A.mensajesDe(c.id);
   const t = tipologia(c), k = comportamiento(c, mensajes);
   const n = nivel(t.puntos, k.puntos, c);
-  const motivo = [].concat(t.motivos, k.motivos).join(' · ');
+  const pq = precualificar(c);
+  const motivo = [].concat(t.motivos, k.motivos, pq.si ? ['PRECUALIFICAR: ' + pq.motivos.join(', ')] : []).join(' · ');
   const anterior = leerNivel(c);
   if (!opciones.seco) {
     await fetch(A.GHL_BASE + '/contacts/' + c.id, {
@@ -128,6 +146,8 @@ async function puntuar(c, opciones) {
     });
     const quitar = ['nivel-a', 'nivel-b', 'nivel-c', 'nivel-d'].filter(function (x) { return x !== 'nivel-' + n.toLowerCase() && A.tiene(c, x); });
     await A.etiquetar(c.id, ['nivel-' + n.toLowerCase()], quitar.length ? quitar : null);
+    if (pq.si && !A.tiene(c, 'precualificar')) await A.etiquetar(c.id, ['precualificar']);
+    else if (!pq.si && A.tiene(c, 'precualificar')) await A.etiquetar(c.id, [], ['precualificar']);
     if (n === 'A' && !A.tiene(c, 'score-aviso-a')) {
       await A.etiquetar(c.id, ['score-aviso-a']);
       try {
@@ -136,7 +156,7 @@ async function puntuar(c, opciones) {
       } catch (e) { /* no bloquea */ }
     }
   }
-  return { id: c.id, nombre: c.contactName || c.firstName || '', tipo: t.puntos, comport: k.puntos, nivel: n, antes: anterior, motivo: motivo };
+  return { id: c.id, nombre: c.contactName || c.firstName || '', tipo: t.puntos, comport: k.puntos, nivel: n, antes: anterior, motivo: motivo, precualificar: pq.si };
 }
 
 // Puntúa todos los leads del sistema (etiqueta paid). opciones.seco no escribe.
@@ -193,4 +213,4 @@ async function volcarHoja(detalle, contactos) {
   return { ok: true, filas: filas.length };
 }
 
-module.exports = { leerNivel: leerNivel, volcarHoja: volcarHoja, puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };
+module.exports = { precualificar: precualificar, leerNivel: leerNivel, volcarHoja: volcarHoja, puntuar: puntuar, puntuarTodos: puntuarTodos, tipologia: tipologia, comportamiento: comportamiento, nivel: nivel, CAMPOS: CAMPOS };

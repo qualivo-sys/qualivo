@@ -407,6 +407,8 @@ async function handler(req, res) {
         const sellos = paso.tipo === 'wa1' ? ['act-wa1-h-' + selloHora()] : [];
         await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra, sellos), A.tiene(c, 'aviso-movil-pendiente') ? ['aviso-movil-pendiente'] : []);
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
+        // Nivel y «precualificar» desde el primer minuto (28-sep), sin esperar a la pasada de puntuación
+        if (paso.tipo === 'wa1') { try { await require('./_scoring.js').puntuar(c, { mensajes: [] }); } catch (e) { console.error('[activacion] puntuar al entrar:', e && e.message); } }
         // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora,
         // que es cuando le sale el primer WhatsApp y Maikel puede adelantarse.
         if (paso.tipo === 'wa1' && A.tiene(c, 'aviso-movil-pendiente')) {

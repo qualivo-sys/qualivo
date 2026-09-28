@@ -270,6 +270,7 @@
     if (r.f.inv) partes.push(INV_TXT[r.f.inv]);
     if (r.f.cuando) partes.push({ 'este-mes': 'Empezar este mes', '1-3-meses': 'Empezar en 1-3 meses', 'mirando': 'Solo mirando' }[r.f.cuando] || r.f.cuando);
     if (r.f.precio) partes.push({ si: 'Le encaja el precio', depende: 'Precio: depende', no: 'Precio: ahora no' }[r.f.precio] || r.f.precio);
+    if (r.f.precual) partes.push('Precualificar');
     if (r.f.ruta) partes.push({ maikel: 'Llamada de Maikel', raquel: 'Llamada de Raquel', 'solo-wa': 'Solo WhatsApp' }[r.f.ruta] || r.f.ruta);
     return {
       id: r.id, n: r.n, rol: partes.join(' · '), emp: r.emp, seg: 'lead', ciudad: r.ciudad, prod: r.origen,
@@ -278,7 +279,7 @@
       tel: r.tel || '', email: r.email || '', web: r.web || '', ghl: r.ghl || '',
       creado: hace(r.creado, ahora), act: hace(r.act, ahora), toque: r.toque ? hace(r.toque, ahora) : null,
       fin: r.fin || undefined,
-      f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente, cuando: r.f.cuando, precio: r.f.precio, ruta: r.f.ruta },
+      f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente, cuando: r.f.cuando, precio: r.f.precio, ruta: r.f.ruta, precual: r.f.precual || null },
       s: {
         raquel: s.raquel, noshow: s.noshow, intentos: s.intentos, luego: s.luego ? 'su momento' : '', luegoTxt: s.luego ? 'lo retomaría más adelante' : '',
         cita: s.cita ? (s.cita - ahora) / MIN : undefined, citaOk: s.citaOk,
@@ -366,6 +367,12 @@
     // Con la pausa puesta, lo que haría un agente lo hace Maikel a mano
     const nbaBase = base.nba;
     cfg.nba = function (c, k, x, T, Mo) {
+      // Poca señal de encaje y sin cita: antes de dar reunión, se precualifica por WhatsApp
+      if (c.f && c.f.precual && !c.fin && c.s.tCita == null && c.etapa <= 2) {
+        return { id: 'precualificar', tipo: 'agente', estado: c.s.esperaDesde != null ? 'trabajando' : 'esperando', quien: 'Agente de WhatsApp',
+          accion: 'Precualificar antes de dar reunión',
+          por: 'Poca señal de encaje: ' + c.f.precual.join(', ') + '. Una o dos preguntas (qué trabajos hace, de qué tamaño, cuántos al mes) para saber si merece una reunión contigo. Si no encaja, se le manda el diagnóstico de la web.' };
+      }
       const r = (nbaBase && nbaBase(c, k, x, T, Mo)) || Mo.nbaGenerica(c, k, x, T);
       if (!d.pausa || ['agente', 'voz', 'auto'].indexOf(r.tipo) < 0 || r.estado === 'cerrado' && r.id !== 'cerrar') return r;
       const aMano = { wa: 'Escribirle por WhatsApp', 'wa-seguir': 'Contestarle por WhatsApp', voz: 'Llamarle', reenganche: 'Retomar la conversación', reprogramar: 'Proponerle otra hora', recordatorio: 'Recordarle la cita', propuesta: 'Recuperar el plan', caso: 'Mandarle un caso parecido', cerrar: 'Contestar y cerrar' }[r.id];

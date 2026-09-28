@@ -129,12 +129,8 @@ async function fichaDe(c) {
   if (A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada')) lineas.push('YA TIENE CITA RESERVADA con Maikel. No propongas otra: si pregunta por ella, confírmasela y remítele a la invitación del correo. Si quiere cambiarla, usa pasar_a_maikel.');
   if (A.tiene(c, 'voz-completada')) lineas.push('Raquel, del equipo, ya habló con él por teléfono (mira las notas).');
   // Precualificar (28-sep): lead con poca señal de encaje; primero se habla, luego la cita.
-  const motivos = [];
-  if (A.tiene(c, 'sin-inversion') || tags.some(function (t) { return /^inv-nada/.test(t); })) motivos.push('no invierte nada en captación');
-  if (tags.some(function (t) { return /^vol-(0|1-5|menos|5-15)/.test(t); })) motivos.push('pocas peticiones al mes (' + de('vol-') + ')');
-  if (tags.some(function (t) { return /^fuga-no-lo-s/.test(t); })) motivos.push('no sabe dónde se le escapa');
-  if (!c.companyName || /^(madrid|barcelona|valencia|sevilla|m[aá]laga)$/i.test(String(c.companyName).trim())) motivos.push('no ha dado nombre de empresa');
-  if (motivos.length >= 2 && !A.tiene(c, 'act-agendado')) lineas.push('PRECUALIFICAR: ' + motivos.join(', ') + '. Antes de ofrecer la videollamada, averigua si encaja (mira las instrucciones).');
+  const pq = require('./_scoring.js').precualificar(c);
+  if (pq.si) lineas.push('PRECUALIFICAR: ' + pq.motivos.join(', ') + '. Antes de ofrecer la videollamada, averigua si encaja (mira las instrucciones).');
   try {
     const r = await fetch(A.GHL_BASE + '/contacts/' + c.id + '/notes', { headers: A.cabeceras() });
     const d = r.ok ? await r.json() : {};
@@ -562,9 +558,10 @@ async function atender(contactId, opciones) {
     if (copiloto) {
       const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
       const cita = decision.detalle && decision.detalle.hora ? '\n\nPropone la cita: ' + decision.detalle.hora + ' (no está reservada: resérvala tú si le dices que sí).' : '';
-      const aviso = decision.accion === 'pasar'
+      const pqA = require('./_scoring.js').precualificar(c);
+      const aviso = (pqA.si ? '⚠️ PRECUALIFICAR: ' + pqA.motivos.join(', ') + '\n' : '') + (decision.accion === 'pasar'
         ? 'TE LO PASO · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\nMotivo: ' + ((decision.detalle && decision.detalle.motivo) || 'mejor que lo lleves tú') + (decision.texto ? '\n\nBorrador:\n' + decision.texto : '')
-        : 'BORRADOR · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\n\nPropuesta:\n' + (decision.texto || '(nada que contestar)') + cita + '\n\nSi te vale, cópialo y mándalo tú.';
+        : 'BORRADOR · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\n\nPropuesta:\n' + (decision.texto || '(nada que contestar)') + cita + '\n\nSi te vale, cópialo y mándalo tú.');
       try { await require('./_aviso.js').movil(aviso); } catch (e) { /* sigue el correo */ }
       await avisar(c, 'borrador del copiloto (' + decision.accion + ')', 'Él: «' + String(ultimo.body).slice(0, 200) + '»\nBorrador: «' + (decision.texto || '') + '»' + cita);
       await guardarEstado(c.id, { turnos: turnos + 1, ultimo: new Date().toISOString(), candado: 0 });
@@ -709,6 +706,8 @@ async function atenderDemo(c, opciones, hecho) {
 
 async function avisar(c, motivo, texto) {
   try {
+    const pq = require('./_scoring.js').precualificar(c);
+    if (pq.si) texto = '⚠️ PRECUALIFICAR antes de darle reunión: ' + pq.motivos.join(', ') + '.\n' + String(texto || '');
     await require('./_aviso.js').seMovio('respondio', {
       nombre: c.contactName || c.firstName || '', empresa: c.companyName || '', email: c.email || '',
       telefono: c.phone || '', contactId: c.id, origen: 'Agente de WhatsApp · ' + motivo, texto: String(texto || '').slice(0, 300)

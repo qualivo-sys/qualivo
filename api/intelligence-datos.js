@@ -364,7 +364,9 @@ function convertir(c, msgs, citasC, trato, ahora, campanas) {
     valor: trato ? trato.valor : 0,
     f: { inv: inversion(tags), vol: volumen(tags), sector: sector(tags), fuga: fuga(tags), nivel: (primera(tags, 'nivel-') || '').toUpperCase(), potente: tiene('lead-potente'),
       // Formulario y cadencia del 28-sep: cuándo quiere empezar, encaje con el precio y camino seguido.
-      cuando: primera(tags, 'cuando-'), precio: primera(tags, 'precio-'), ruta: primera(tags, 'ruta-') },
+      cuando: primera(tags, 'cuando-'), precio: primera(tags, 'precio-'), ruta: primera(tags, 'ruta-'),
+      // 28-sep: poca señal de encaje → primero se precualifica por WhatsApp (api/_scoring.js)
+      precual: (function () { try { const pq = require('./_scoring.js').precualificar(c); return pq.si ? pq.motivos : null; } catch (e) { return null; } })() },
     s: {
       wa1: tiene('act-wa1'), wa1Fallido: tiene('act-wa1-fallido'), wa2: tiene('act-wa2'), voz1: tiene('act-voz1'),
       vozCuando: fechaEtiqueta(tags, 'act-voz1-h-'), vozRes: resVoz, raquel: resVoz === 'completada',
