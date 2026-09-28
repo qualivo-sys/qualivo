@@ -404,8 +404,12 @@ async function build() {
     const perdido = (!matricula && (status === 'lost' || /^(no interesa|baja|entrev\.? ?nula|entrevista nula)$/.test(el))) ? 1 : 0;
     const abandonado = (!matricula && !perdido && (status === 'abandoned' || /^(inv[áa]lido|ilocalizable)$/.test(el))) ? 1 : 0;
     const pendiente = (!matricula && !perdido && !abandonado) ? 1 : 0;
-    const contactado = iLlam >= 0 && pos >= iLlam && !descartada ? 1 : 0;
-    const entrevista = iProp >= 0 && pos >= iProp && !descartada ? 1 : 0;
+    // Contactado = hubo conversación (cualquier columna posterior a Nuevo lead/Lead manual salvo Inválido e Ilocalizable).
+    // Entrevista = la entrevista se hizo (Entrevistado, Alumna matriculada o Baja). Antes se contaban también las
+    // columnas de perdidos por ir después en el orden del pipeline, lo que inflaba las entrevistas.
+    const contactado = /^(llamada agendada|entrevistado|alumna matriculada|alumna activa|no interesa|entrev\.? ?nula|entrevista nula|baja)$/.test(el) ? 1 : 0;
+    const entrevista = /^(entrevistado|alumna matriculada|alumna activa|baja)$/.test(el) ? 1 : 0;
+    void iLlam; void iProp; void pos; void descartada;
     const estado = matricula ? 'Ganado' : perdido ? 'Perdido' : abandonado ? 'Abandonado/Inválido' : 'Pendiente';
     const fecha = (o.createdAt || '').slice(0, 10);
     return {
