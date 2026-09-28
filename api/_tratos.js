@@ -73,15 +73,18 @@ async function pipelineDe(contactId) {
 // les manda nada porque Meta no tiene ese lead_id para asociarlo.
 // No lanza nunca: si falla, el trato ya se movió y el flujo que llamó a
 // mover() sigue igual.
-const META_POR_ETAPA = { conversacion: 'Contacted', reunion: 'Qualified', piloto: 'Converted', cliente: 'Converted' };
-async function calidadAMeta(contacto, etapa) {
+// 28-sep: con await (en Vercel una promesa sin esperar muere al responder: en diez días a Meta le
+// llegaron 2 «Contacted» y ningún «Qualified»). Oferta y Negociación también son «Qualified»: el
+// event_id es el mismo por etapa, así que Meta no lo cuenta dos veces.
+const META_POR_ETAPA = { conversacion: 'Contacted', reunion: 'Qualified', oferta: 'Qualified', seguimiento: 'Qualified', piloto: 'Converted', cliente: 'Converted', noEncaja: 'Disqualified' };
+async function calidadAMeta(contacto, etapa, motivo) {
   try {
     const evento = META_POR_ETAPA[etapa];
     if (!evento || !contacto) return;
     const idMeta = (contacto.tags || []).map(String).filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0];
     if (!idMeta) return;
     await require('./_meta.js').calidadLead(evento, {
-      leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id
+      leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id, motivo: motivo
     });
   } catch (e) { console.error('[tratos] calidad a Meta no salió', contacto && contacto.id, etapa, e && e.message); }
 }
@@ -179,7 +182,7 @@ async function crear(o) {
     });
     if (!r.ok) throw new Error('ghl_opportunity ' + r.status + ' ' + (await r.text()).slice(0, 200));
     const d = await r.json().catch(function () { return {}; });
-    if (o.etapa) calidadAMeta(pl.contacto, o.etapa);
+    if (o.etapa) await calidadAMeta(pl.contacto, o.etapa);
     return { ok: true, id: d && d.opportunity ? d.opportunity.id : null, existia: false };
   } catch (err) {
     console.error('[tratos] no se pudo crear el trato', o && o.contactId, err && err.message);
@@ -207,7 +210,7 @@ async function mover(contactId, etapa, crearSi) {
         method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: pl.etapas[etapa] })
       });
       if (!rq.ok) throw new Error('ghl_opportunity_put ' + rq.status + ' ' + (await rq.text()).slice(0, 200));
-      calidadAMeta(pl.contacto, etapa);
+      await calidadAMeta(pl.contacto, etapa);
       return { ok: true, id: op.id, movido: true, pipeline: 'qualivo' };
     }
     if (op.pipelineStageId === ETAPAS[etapa]) return { ok: true, id: op.id, movido: false };
@@ -223,7 +226,7 @@ async function mover(contactId, etapa, crearSi) {
       method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: ETAPAS[etapa] })
     });
     if (!r.ok) throw new Error('ghl_opportunity_put ' + r.status + ' ' + (await r.text()).slice(0, 200));
-    calidadAMeta(pl.contacto, etapa);
+    await calidadAMeta(pl.contacto, etapa);
     return { ok: true, id: op.id, movido: true };
   } catch (err) {
     console.error('[tratos] no se pudo mover el trato', contactId, etapa, err && err.message);
@@ -231,4 +234,4 @@ async function mover(contactId, etapa, crearSi) {
   }
 }
 
-module.exports = { crear: crear, mover: mover, abierto: abierto, sectorCorto: sectorCorto, nombreAnuncio: nombreAnuncio, esReactivacion: esReactivacion, pipelineDe: pipelineDe, PIPELINE: PIPELINE, ETAPAS: ETAPAS, PIPELINE_QUALIVO: PIPELINE_QUALIVO, ETAPAS_QUALIVO: ETAPAS_QUALIVO };
+module.exports = { crear: crear, mover: mover, calidadAMeta: calidadAMeta, abierto: abierto, sectorCorto: sectorCorto, nombreAnuncio: nombreAnuncio, esReactivacion: esReactivacion, pipelineDe: pipelineDe, PIPELINE: PIPELINE, ETAPAS: ETAPAS, PIPELINE_QUALIVO: PIPELINE_QUALIVO, ETAPAS_QUALIVO: ETAPAS_QUALIVO };

@@ -622,6 +622,11 @@ async function atender(contactId, opciones) {
     if (decision.accion === 'pasar') {
       await A.etiquetar(c.id, ['wa-humano']);
       await avisar(c, decision.detalle.motivo || 'te lo paso', ultimo.body);
+      // Precualificación que sale «no encaja todavía»: Meta aprende a no traer este perfil (28-sep).
+      if (/no encaja/i.test(String(decision.detalle.motivo || ''))) {
+        await A.etiquetar(c.id, ['no-encaja']).catch(function () {});
+        await require('./_tratos.js').calidadAMeta(c, 'noEncaja', 'precualificación: no encaja todavía');
+      }
     } else if (decision.accion === 'responder') {
       // Que el trato refleje que hay conversación viva.
       try { await require('./_tratos.js').mover(c.id, 'conversacion', { nombre: c.contactName || c.firstName || '', email: c.email || '', telefono: c.phone || '', empresa: c.companyName || '', origen: 'WhatsApp', fuente: 'Agente de WhatsApp' }); } catch (e) { /* no bloquea */ }
