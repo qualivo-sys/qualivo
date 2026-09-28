@@ -256,3 +256,29 @@ durante el saludo; no se la vuelve a llamar. Registradas en Notion «📞 Llamad
 scratchpad), abrir con una frase y una pregunta («Hola Lisandra, soy Raquel, del equipo de
 Máikel, de Qualivo. ¿Te pillo en mal momento?») y solo después el contexto. Latencia media
 por turno en la de Gastón: 1,66 s; sin silencios de más de 3 s.
+
+## 28-sep (lunes)
+
+**Llamadas:** 2, las dos lanzadas a mano por Maikel desde Intelligence (móvil de Maikel).
+Rafael (Ágape), 19:01, 31 s: la da Vapi como buzón. Suena una locución del operador («Gracias.
+No cuelgues, por favor»), Raquel repite la presentación, se oye un «Hola,» y Raquel cierra con
+el mensaje de buzón. ProAudio (David), 19:05: error SIP 480 del destino, no llegó a sonar; David
+ya tiene cita el martes 29 a las 16:00 (la reservó el agente de WhatsApp). Registradas en Notion,
+con el audio de Rafael.
+
+**Hipótesis:**
+1. La detección de buzón puede estar cortando a personas que cogen después de una locución del
+   operador (el «Hola,» de Rafael llega justo antes del cierre). Confirmar escuchando el audio.
+2. Las llamadas desde Intelligence salían con origen «el diagnóstico» y Raquel decía «te llamaba
+   por lo del diagnóstico» a gente del anuncio. Corregido en Intelligence: «el anuncio» / «la web».
+3. En ProAudio nombre y empresa vienen cruzados en el formulario («ProAudio» / «Dabid»): Raquel
+   habría saludado a la empresa.
+
+**Aplicado hoy al asistente:** nada (copia previa en el scratchpad,
+vapi-asistente-2026-09-28-antes.json). El prompt ya trata «No cuelgues, por favor» como
+locución del operador; el corte viene de la detección de buzón, que no se toca sin proponerlo.
+
+**Propuesto, no aplicado:**
+- Guion aparte para los no presentados (reagendar, sin volver a presentar Qualivo desde cero).
+- Si se confirma la hipótesis 1, revisar la detección de buzón (esperar a la primera voz humana
+  tras una locución del operador).
