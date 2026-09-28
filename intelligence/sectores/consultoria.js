@@ -107,6 +107,18 @@
         filtro: function (c) { return c.s.tProp != null && !c.fin && c.x.k.toque > 2 * 1440; }, orden: 'valor', suma: true,
         intro: function (l, T, M) { return l.length + ' propuestas llevan más de 2 días sin seguimiento. Suman **' + M.euros(l.reduce(function (a, c) { return a + c.valor; }, 0)) + '**. Las de más de 20.000 € las llama la socia; el resto las retoma el agente con la duda más habitual.'; },
         cols: ['nombre', ['Abierta', function (c) { return (c.s.propVista || 0) + (c.s.propVista === 1 ? ' vez' : ' veces'); }], 'valor', 'accion'], vista: 'tabla' },
+      { q: '¿A qué cuentas nuevas deberíamos escribir esta semana?', h: 'prospeccion', obj: ['captacion', 'seguimiento', 'ventas', 'todo'],
+        intro: 'Hay **6 cuentas** que hoy no están en el CRM y tienen un motivo para hablar con vosotros ahora: una licencia concedida, una compra de edificio o la obligación de reportar CSRD. Suman unos **138.000 €** en proyectos posibles. No es mandar mil correos: es escribir a quien tiene el problema esta semana.',
+        cuentas: [
+          { cuenta: 'Residencial Arganzuela', tipo: 'promotora', senal: 'Licencia concedida para 96 viviendas en Madrid hace 9 días', canal: 'Correo', valor: 28000 },
+          { cuenta: 'Iberia Real Estate Partners', tipo: 'fondo', senal: 'Ha comprado un edificio de oficinas de 12.000 m² en Barcelona', canal: 'LinkedIn', valor: 32000 },
+          { cuenta: 'Levante Logística', tipo: 'industrial', senal: 'Nave de 40.000 m² en obra; su inquilino exige BREEAM', canal: 'Correo', valor: 24000 },
+          { cuenta: 'Gestora Atalaya', tipo: 'gestora', senal: 'Reporta CSRD por primera vez el año que viene', canal: 'Correo', valor: 18000 },
+          { cuenta: 'Hoteles Mirador', tipo: 'hotelero', senal: 'Anuncia la reforma integral de dos hoteles en Málaga', canal: 'LinkedIn', valor: 22000 },
+          { cuenta: 'Centro Comercial Vía Norte', tipo: 'retail', senal: 'El BREEAM En Uso caduca en febrero', canal: 'Correo', valor: 14000 }
+        ],
+        ejemplo: 'Asunto: las 96 viviendas de Arganzuela\n\nHola Andrea:\n\nHe visto que os han concedido la licencia de Arganzuela. Enhorabuena. En promociones de este tamaño, el fondo comprador suele pedir BREEAM y conviene decidirlo antes del proyecto de ejecución, no después.\n\nHicimos lo mismo con una promoción de 84 viviendas en Getafe. Si te sirve, te cuento en 20 minutos qué implicaría en la vuestra.\n\nCarlota',
+        cierre: 'Si contestan, entran en el mismo seguimiento que el resto: el agente cualifica, la socia solo entra en la reunión y ninguna propuesta se queda sin siguiente paso.' },
       { q: '¿Cuánto pipeline está en riesgo?', h: 'lista', obj: ['ventas', 'seguimiento', 'todo'],
         filtro: function (c) { return !c.fin && c.etapa >= 4 && c.x.riesgo >= 45; }, orden: 'valor', suma: true,
         intro: function (l, T, M) {

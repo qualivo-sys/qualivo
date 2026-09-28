@@ -303,6 +303,21 @@
       ];
     },
 
+    // Prospección con señal: cuentas que hoy no están en el CRM, con el motivo para escribirles ahora
+    // y un primer mensaje que sale solo con aprobación. Los datos vienen del sector (p.cuentas).
+    prospeccion: function (p) {
+      const l = p.cuentas || [];
+      if (!l.length) return [texto('Ahora mismo no hay cuentas con señal.')];
+      const out = [texto(p.intro)];
+      l.forEach(function (c) { out.push(texto('**' + c.cuenta + '** · ' + c.tipo + ' · ' + M.euros(c.valor) + '\n' + c.senal + ' · ' + c.canal)); });
+      if (p.ejemplo) {
+        out.push(texto('Primer mensaje para **' + l[0].cuenta + '** (sale con tu nombre y solo si lo apruebas):'));
+        out.push({ tipo: 'borrador', texto: p.ejemplo });
+      }
+      if (p.cierre) out.push(accion(p.cierre));
+      return out;
+    },
+
     lista: function (p) {
       const T = E().cfg.t;
       let l = E().contactos.filter(p.filtro);
