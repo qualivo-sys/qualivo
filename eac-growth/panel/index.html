@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel comercial EAC</title>
+<style>
+  :root{
+    --rojo:#CE0E2D; --tinta:#14181d; --papel:#f6f7f8; --blanco:#fff;
+    --linea:#e3e6ea; --suave:#6b7480; --ok:#0f7b52; --mal:#b3261e; --avi:#8a5a00;
+    --fondo-avi:#fff8e6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+       font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px 64px}
+  header{background:var(--tinta);color:#fff;padding:18px 0;margin-bottom:22px}
+  header .wrap{padding-bottom:0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  header h1{margin:0;font-size:19px;letter-spacing:.2px}
+  header .sub{color:#9aa4b0;font-size:13px}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.6px;color:var(--suave);
+     margin:30px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--linea)}
+  .card{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:14px 16px;margin-bottom:14px}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .scroll table{min-width:520px}
+  .emb{min-width:0!important}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linea);vertical-align:top}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--suave);font-weight:600}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr.tot td{font-weight:700;border-top:2px solid var(--tinta);border-bottom:none}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .kpi{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:12px 14px}
+  .kpi .v{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.15}
+  .kpi .l{font-size:12px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+  .kpi .x{font-size:12px;color:var(--suave);margin-top:4px}
+  .kpi.alerta{border-left:4px solid var(--mal)}
+  .kpi.bien{border-left:4px solid var(--ok)}
+  .barra{height:22px;background:var(--rojo);border-radius:3px;min-width:2px}
+  .emb td:nth-child(2){width:52%}
+  .mal{color:var(--mal);font-weight:600}
+  .ok{color:var(--ok);font-weight:600}
+  .avisos{background:var(--fondo-avi);border:1px solid #f0dca8;border-left:4px solid var(--avi);
+          border-radius:8px;padding:12px 16px;margin-bottom:18px;font-size:14px}
+  .avisos b{color:var(--avi)}
+  .avisos ul{margin:8px 0 0;padding-left:20px}
+  .filtros{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px}
+  .filtros label{font-size:12px;color:var(--suave);display:block;text-transform:uppercase;letter-spacing:.4px}
+  input,select,button{font:inherit;padding:7px 9px;border:1px solid var(--linea);border-radius:6px;background:#fff;color:inherit}
+  button{background:var(--rojo);color:#fff;border-color:var(--rojo);cursor:pointer;font-weight:600}
+  #gate{max-width:340px;margin:12vh auto;text-align:center}
+  #gate input{width:100%;margin:10px 0;text-align:center}
+  #gate button{width:100%}
+  .nota{font-size:12.5px;color:var(--suave);margin-top:8px}
+  .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:99px;background:#eef1f4;color:var(--suave)}
+  @media(max-width:620px){.kpi .v{font-size:22px} th,td{padding:7px 6px}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h1 style="font-size:18px">Panel comercial · EAC</h1>
+  <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password">
+  <button onclick="entrar()">Entrar</button>
+  <div class="nota" id="gerr"></div>
+</div>
+
+<div id="app" hidden>
+  <header><div class="wrap">
+    <h1>Panel comercial · EAC</h1>
+    <span class="sub" id="sello"></span>
+  </div></header>
+
+  <div class="wrap">
+    <div id="avisos"></div>
+
+    <div class="filtros">
+      <div><label for="f1">Desde</label><input type="date" id="f1"></div>
+      <div><label for="f2">Hasta</label><input type="date" id="f2"></div>
+      <div><label for="fc">Canal</label><select id="fc"></select></div>
+      <div><label for="fm">Comercial</label><select id="fm"></select></div>
+      <button onclick="pintar()">Aplicar</button>
+      <button onclick="mesActual()" style="background:#fff;color:var(--tinta);border-color:var(--linea)">Este mes</button>
+    </div>
+
+    <div id="cuerpo"></div>
+  </div>
+</div>
+
+<script>
+let D=null, PW='';
+const eur=(n)=>'€'+(Number(n)||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+const num=(n)=>(Number(n)||0).toLocaleString('es-ES');
+const pct=(a,b)=>b?((a/b*100).toFixed(1)+'%'):'—';
+const esc=(s)=>String(s??'').replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const el=(id)=>document.getElementById(id);
+
+async function entrar(){
+  PW=el('pw').value;
+  el('gerr').textContent='Cargando…';
+  try{
+    const r=await fetch('/api/data?pw='+encodeURIComponent(PW));
+    if(r.status===401){el('gerr').textContent='Contraseña incorrecta';return}
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    D=await r.json();
+    if(D.error) throw new Error(D.error);
+    el('gate').hidden=true; el('app').hidden=false;
+    arranque();
+  }catch(e){ el('gerr').textContent='No se pudo cargar: '+e.message }
+}
+
+function arranque(){
+  el('sello').textContent='datos de '+new Date(D.generatedAt).toLocaleString('es-ES')+' · desde '+D.desde;
+  const canales=[...new Set(D.filas.map(r=>r.procedencia))].sort();
+  const coms=[...new Set(D.filas.map(r=>r.comercial))].sort();
+  el('fc').innerHTML='<option value="">Todos</option>'+canales.map(c=>`<option>${esc(c)}</option>`).join('');
+  el('fm').innerHTML='<option value="">Todos</option>'+coms.map(c=>`<option>${esc(c)}</option>`).join('');
+  renderAvisos();
+  mesActual();
+}
+function mesActual(){
+  const hoy=new Date().toISOString().slice(0,10);
+  el('f1').value=hoy.slice(0,7)+'-01'; el('f2').value=hoy;
+  pintar();
+}
+
+function renderAvisos(){
+  const a=D.avisos||{}; const L=[];
+  if(a.sinColumnaMatricula) L.push('<b>El pipeline no tiene columna de matrícula.</b> Sin ella no se puede medir ni matrículas ni retorno: la economía de este panel se cierra en <b>coste por entrevista</b>. Crear una columna «Matriculado» es el cambio que más valor añadiría a este panel.');
+  if(a.citasSinMarcar) L.push(`<b>${a.citasSinMarcar} citas pasadas sin marcar</b> como Plantón o Entrevistado. Ese porcentaje del embudo es desconocido: los % de plantón se calculan solo sobre las citas marcadas.`);
+  if(a.citasSinTrato) L.push(`${a.citasSinTrato} citas sin trato asociado en el CRM.`);
+  if(a.statusFueraDeColumna) L.push(`<b>${a.statusFueraDeColumna} de los ${D.filas.length} tratos cargados tienen el estado de GHL en desacuerdo con su columna</b> (marcados perdido/abandonado pero sentados en columnas vivas). El panel los cuenta como cerrados; si el equipo trabaja solo el tablero, revisar de dónde sale ese estado.`);
+  if(!a.gadsLive) L.push('Google Ads no responde por API: su inversión no está en estas cifras.');
+  if(!D.seo) L.push('Search Console sin datos: falta dar acceso a la cuenta que lee la API.');
+  el('avisos').innerHTML = L.length ? '<div class="avisos"><b>Avisos sobre la calidad del dato</b><ul>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>' : '';
+}
+
+/* ---------- filtrado ---------- */
+function sel(){
+  const a=el('f1').value||'0000-00-00', b=el('f2').value||'9999-99-99';
+  const c=el('fc').value, m=el('fm').value;
+  const filas=D.filas.filter(r=>r.fecha>=a&&r.fecha<=b&&(!c||r.procedencia===c)&&(!m||r.comercial===m));
+  const citas=D.citas.filter(x=>x.date>=a&&x.date<=b&&(!c||x.canal===c)&&(!m||x.comercial===m));
+  // La inversión no entiende de comercial: solo respeta fechas y canal.
+  const gasto=D.spend.filter(x=>x.date>=a&&x.date<=b&&(!c||canalGasto(x.channel)===c));
+  return {a,b,c,m,filas,citas,gasto};
+}
+// Une los canales de inversión con los de procedencia del CRM
+function canalGasto(ch){ return ch; }
+const sum=(arr,f)=>arr.reduce((s,x)=>s+(f(x)||0),0);
+
+function pintar(){
+  const S=sel();
+  el('cuerpo').innerHTML=[
+    renderKPIs(S), renderEmbudo(S), renderPlanton(S), renderModalidad(S),
+    renderCanales(S), renderCampanas(S), renderAnuncios(S),
+    renderSemanas(S), renderEtapas(S), renderSEO(S)
+  ].join('');
+}
+
+function renderKPIs(S){
+  const F=S.filas;
+  const leads=F.length, cont=sum(F,r=>r.contactado), cita=sum(F,r=>r.cita), ent=sum(F,r=>r.entrevista);
+  const inv=sum(S.gasto,x=>x.spend);
+  // Las citas se miden sobre el PERIODO (citas que había en el rango), no sobre la
+  // cohorte de leads. Mezclar las dos cosas es lo que hace que un mes en curso
+  // parezca siempre peor de lo que es: sus leads aún no han tenido tiempo de madurar.
+  const pas=S.citas.filter(c=>c.resultado!=='cancelada'&&c.resultado!=='futura');
+  const pres=pas.filter(c=>c.resultado==='se presentó').length;
+  const pla=pas.filter(c=>c.resultado==='plantón').length;
+  const marc=pres+pla;
+  const k=(v,l,x,cls)=>`<div class="kpi ${cls||''}"><div class="v">${v}</div><div class="l">${l}</div>${x?`<div class="x">${x}</div>`:''}</div>`;
+  return '<h2>De los leads que entraron en el periodo</h2><div class="kpis">'+[
+    k(num(leads),'Leads',eur(leads?inv/leads:0)+' por lead'),
+    k(num(cont),'Contactados',pct(cont,leads)+' de los leads'),
+    k(num(cita),'Consiguen cita',pct(cita,leads)+' de los leads', cita/Math.max(leads,1)<0.2?'alerta':''),
+    k(num(ent),'Ya entrevistados',pct(ent,leads)+' de los leads'),
+    k(eur(inv),'Inversión','Meta + Google + TikTok')
+  ].join('')+'</div><div class="nota">Cohorte: se sigue a los leads que entraron en estas fechas, miren donde miren hoy. Los periodos recientes salen siempre bajos porque sus leads aún no han madurado.</div>'
+  +'<h2>De las citas que había en el periodo</h2><div class="kpis">'+[
+    k(num(pas.length),'Citas pasadas','sin contar canceladas ni futuras'),
+    k(num(pres),'Se presentaron',pct(pres,marc)+' de las marcadas'),
+    k(marc?((pla/marc)*100).toFixed(0)+'%':'—','Plantón',`${pla} de ${marc} citas marcadas`, pla/Math.max(marc,1)>0.35?'alerta':'bien'),
+    k(pres?eur(inv/pres):'—','Coste por entrevista','inversión ÷ entrevistas hechas','bien')
+  ].join('')+'</div><div class="nota">Periodo: citas cuya fecha cae en el rango, vengan del lead que vengan. Este es el bloque que hay que mirar para juzgar el plantón.</div>';
+}
+
+function renderEmbudo(S){
+  const F=S.filas;
+  const pasos=[['Leads',F.length],['Contactados',sum(F,r=>r.contactado)],
+               ['Consiguen cita',sum(F,r=>r.cita)],['Se presentan (entrevista)',sum(F,r=>r.entrevista)]];
+  const max=pasos[0][1]||1;
+  return '<h2>Embudo</h2><div class="card"><table class="emb"><tbody>'+pasos.map(([n,v],i)=>{
+    const prev=i?pasos[i-1][1]:v;
+    return `<tr><td>${n}</td><td><div class="barra" style="width:${Math.max(v/max*100,0.5)}%"></div></td>
+      <td class="n">${num(v)}</td><td class="n">${pct(v,max)}</td>
+      <td class="n">${i?`<span class="${v/Math.max(prev,1)<0.5?'mal':''}">${pct(v,prev)} del paso anterior</span>`:''}</td></tr>`;
+  }).join('')+'</tbody></table></div><div class="nota">Cada paso se lee por el nombre de la columna del tablero, nunca por su posición. «Se presentan» = columna Entrevistado.</div></div>';
+}
+
+function renderPlanton(S){
+  const by={};
+  S.citas.forEach(c=>{
+    if(c.resultado==='cancelada'||c.resultado==='futura')return;
+    (by[c.canal]??={t:0,s:0,p:0,x:0}); by[c.canal].t++;
+    if(c.resultado==='se presentó')by[c.canal].s++;
+    else if(c.resultado==='plantón')by[c.canal].p++; else by[c.canal].x++;
+  });
+  const ent=Object.entries(by).sort((a,b)=>b[1].t-a[1].t);
+  if(!ent.length) return '';
+  const T={t:0,s:0,p:0,x:0}; ent.forEach(([,v])=>{for(const k in T)T[k]+=v[k]});
+  const fila=(n,v)=>{const m=v.s+v.p;const r=m?v.p/m:0;
+    return `<tr><td>${esc(n)}</td><td class="n">${v.t}</td><td class="n">${v.s}</td><td class="n">${v.p}</td>
+      <td class="n">${v.x||''}</td><td class="n"><span class="${r>0.6?'mal':r<0.4?'ok':''}">${m?(r*100).toFixed(0)+'%':'—'}</span></td></tr>`;};
+  return '<h2>Plantón por canal</h2><div class="card"><div class="scroll"><table><thead><tr><th>Canal</th><th class="n">Citas</th>'
+    +'<th class="n">Se presentó</th><th class="n">Plantón</th><th class="n">Sin marcar</th><th class="n">% plantón</th></tr></thead><tbody>'
+    +ent.map(([n,v])=>fila(n,v)).join('')
+    +`<tr class="tot"><td>TOTAL</td><td class="n">${T.t}</td><td class="n">${T.s}</td><td class="n">${T.p}</td><td class="n">${T.x||''}</td><td class="n">${T.s+T.p?((T.p/(T.s+T.p))*100).toFixed(0)+'%':'—'}</td></tr>`
+    +'</tbody></table></div><div class="nota">Solo citas ya pasadas y no canceladas. El % se calcula sobre las citas marcadas; las «sin marcar» quedan fuera del cálculo.</div></div>';
+}
+
+function renderModalidad(S){
+  const by={};
+  S.citas.forEach(c=>{
+    if(c.resultado==='cancelada'||c.resultado==='futura')return;
+    (by[c.curso]??={t:0,s:0,p:0}); by[c.curso].t++;
+    if(c.resultado==='se presentó')by[c.curso].s++; else if(c.resultado==='plantón')by[c.curso].p++;
+  });
+  const ent=Object.entries(by).sort((a,b)=>b[1].t-a[1].t);
+  if(!ent.length) return '';
+  return '<h2>Plantón por curso y modalidad</h2><div class="card"><div class="scroll"><table><thead><tr><th>Calendario</th>'
+    +'<th class="n">Citas</th><th class="n">Se presentó</th><th class="n">Plantón</th><th class="n">% plantón</th></tr></thead><tbody>'
+    +ent.map(([n,v])=>{const m=v.s+v.p,r=m?v.p/m:0;
+      return `<tr><td>${esc(n)}</td><td class="n">${v.t}</td><td class="n">${v.s}</td><td class="n">${v.p}</td>
+        <td class="n"><span class="${r>0.6?'mal':r<0.4?'ok':''}">${m?(r*100).toFixed(0)+'%':'—'}</span></td></tr>`}).join('')
+    +'</tbody></table></div><div class="nota">Comparar presencial contra online: si la presencial planta mucho más, ofrecer online por defecto es la palanca más barata que existe.</div></div>';
+}
+
+function renderCanales(S){
+  const by={};
+  S.filas.forEach(r=>{(by[r.procedencia]??={l:0,c:0,e:0,p:0,g:0}); const b=by[r.procedencia];
+    b.l++; b.c+=r.cita; b.e+=r.entrevista; b.p+=r.noshow;});
+  S.gasto.forEach(x=>{ const k=canalCRM(x.channel); (by[k]??={l:0,c:0,e:0,p:0,g:0}); by[k].g+=x.spend; });
+  const ent=Object.entries(by).sort((a,b)=>b[1].g-a[1].g||b[1].l-a[1].l);
+  const T={l:0,c:0,e:0,p:0,g:0}; ent.forEach(([,v])=>{for(const k in T)T[k]+=v[k]});
+  const fila=(n,v)=>`<tr><td>${esc(n)}</td><td class="n">${v.g?eur(v.g):'—'}</td><td class="n">${v.l||'—'}</td>
+    <td class="n">${v.l&&v.g?eur(v.g/v.l):'—'}</td><td class="n">${v.c||'—'}</td><td class="n">${pct(v.c,v.l)}</td>
+    <td class="n">${v.e||'—'}</td><td class="n">${v.e&&v.g?eur(v.g/v.e):'—'}</td></tr>`;
+  return '<h2>Por canal: de la inversión a la entrevista</h2><div class="card"><div class="scroll"><table><thead><tr><th>Canal</th>'
+    +'<th class="n">Inversión</th><th class="n">Leads</th><th class="n">€/lead</th><th class="n">Citas</th>'
+    +'<th class="n">Lead→cita</th><th class="n">Entrev.</th><th class="n">€/entrevista</th></tr></thead><tbody>'
+    +ent.map(([n,v])=>fila(n,v)).join('')
+    +`<tr class="tot"><td>TOTAL</td><td class="n">${eur(T.g)}</td><td class="n">${T.l}</td><td class="n">${T.l?eur(T.g/T.l):'—'}</td>
+      <td class="n">${T.c}</td><td class="n">${pct(T.c,T.l)}</td><td class="n">${T.e}</td><td class="n">${T.e?eur(T.g/T.e):'—'}</td></tr>`
+    +'</tbody></table></div><div class="nota">La inversión de un canal y sus leads del CRM no siempre se corresponden uno a uno: un lead que entra por landing puede guardarse con el nombre del formulario. Por eso los € por entrevista de esta tabla son orientativos y la fuente fina es la tabla de campañas.</div></div>';
+}
+// Traduce el canal de inversión al nombre de procedencia del CRM
+function canalCRM(ch){
+  if(/^Meta/.test(ch)) return ch;
+  if(/^Google/.test(ch)) return 'Google Ads';
+  if(/TikTok/.test(ch)) return 'TikTok';
+  return ch;
+}
+
+function renderCampanas(S){
+  const camp=(D.metaExtra&&D.metaExtra.campaigns)||[];
+  if(!camp.length) return '';
+  // leads y entrevistas del CRM por nombre de campaña (de attributions[].campaign)
+  const crm={};
+  S.filas.forEach(r=>{ if(!r.campana)return; const k=r.campana.toLowerCase();
+    (crm[k]??={l:0,c:0,e:0}); crm[k].l++; crm[k].c+=r.cita; crm[k].e+=r.entrevista; });
+  const fila=(c)=>{ const m=crm[(c.name||'').toLowerCase()]||{l:0,c:0,e:0};
+    return `<tr><td>${esc(c.name)}</td><td class="n">${eur(c.spend)}</td><td class="n">${num(c.leads)}</td>
+      <td class="n">${c.cpl?eur(c.cpl):'—'}</td><td class="n">${m.l||'—'}</td><td class="n">${m.e||'—'}</td>
+      <td class="n">${m.e?eur(c.spend/m.e):'—'}</td></tr>`;};
+  return '<h2>Campañas de Meta</h2><div class="card"><div class="scroll"><table><thead><tr><th>Campaña</th><th class="n">Inversión</th>'
+    +'<th class="n">Leads Meta</th><th class="n">CPL</th><th class="n">Leads CRM</th><th class="n">Entrev.</th>'
+    +'<th class="n">€/entrevista</th></tr></thead><tbody>'+camp.filter(c=>c.spend>0).map(fila).join('')
+    +'</tbody></table></div><div class="nota">«Leads Meta» es lo que declara la plataforma; «Leads CRM» los que trajeron esa campaña en la UTM. Si la segunda columna está vacía, a esa campaña le falta la UTM (ver el playbook de atribución).</div></div>';
+}
+
+function renderAnuncios(S){
+  const ads=(D.metaExtra&&D.metaExtra.ads)||[];
+  if(!ads.length) return '';
+  const crm={};
+  S.filas.forEach(r=>{ if(!r.anuncio)return; const k=r.anuncio.toLowerCase();
+    (crm[k]??={l:0,e:0}); crm[k].l++; crm[k].e+=r.entrevista; });
+  return '<h2>Anuncios de Meta</h2><div class="card"><div class="scroll"><table><thead><tr><th>Anuncio</th><th>Campaña</th>'
+    +'<th class="n">Inversión</th><th class="n">Leads</th><th class="n">CPL</th><th class="n">Entrev. CRM</th></tr></thead><tbody>'
+    +ads.filter(a=>a.spend>0).slice(0,25).map(a=>{const m=crm[(a.name||'').toLowerCase()]||{l:0,e:0};
+      return `<tr><td>${esc(a.name)}</td><td><span class="pill">${esc(a.campaign||'')}</span></td>
+        <td class="n">${eur(a.spend)}</td><td class="n">${num(a.leads)}</td>
+        <td class="n">${a.cpl?eur(a.cpl):'—'}</td><td class="n">${m.e||'—'}</td></tr>`}).join('')
+    +'</tbody></table></div></div>';
+}
+
+function renderSemanas(S){
+  const by={};
+  S.filas.forEach(r=>{(by[r.semana]??={l:0,c:0,e:0,p:0}); by[r.semana].l++; by[r.semana].c+=r.cita; by[r.semana].e+=r.entrevista; by[r.semana].p+=r.noshow;});
+  const ks=Object.keys(by).sort();
+  if(!ks.length) return '';
+  return '<h2>Semana a semana</h2><div class="card"><div class="scroll"><table><thead><tr><th>Semana del</th><th class="n">Leads</th>'
+    +'<th class="n">Citas</th><th class="n">Lead→cita</th><th class="n">Entrev.</th><th class="n">Plantón</th></tr></thead><tbody>'
+    +ks.map(k=>{const v=by[k];
+      return `<tr><td>${k}</td><td class="n">${v.l}</td><td class="n">${v.c}</td><td class="n">${pct(v.c,v.l)}</td>
+        <td class="n">${v.e}</td><td class="n">${v.p}</td></tr>`}).join('')
+    +'</tbody></table></div><div class="nota">Cohorte por fecha de entrada del lead: las semanas recientes siempre parecen peores porque sus leads aún no han madurado.</div></div>';
+}
+
+function renderEtapas(S){
+  const by={};
+  S.filas.forEach(r=>{by[r.etapa]=(by[r.etapa]||0)+1});
+  const orden=(D.etapas||[]).filter(e=>by[e]);
+  Object.keys(by).forEach(e=>{if(!orden.includes(e))orden.push(e)});
+  const max=Math.max(...Object.values(by),1);
+  return '<h2>Dónde están ahora</h2><div class="card"><table class="emb"><tbody>'
+    +orden.map(e=>`<tr><td>${esc(e)}</td><td><div class="barra" style="width:${by[e]/max*100}%"></div></td>
+      <td class="n">${by[e]}</td><td class="n">${pct(by[e],S.filas.length)}</td></tr>`).join('')
+    +'</tbody></table></div><div class="nota">Foto de hoy, no del periodo: un lead de agosto que ya se entrevistó aparece en Entrevistado.</div></div>';
+}
+
+function renderSEO(){
+  let h='';
+  if(D.ga4) h+='<h2>Web (GA4, 28 días)</h2><div class="card"><div class="scroll"><table><tbody>'
+    +`<tr><td>Usuarios</td><td class="n">${num(D.ga4.totals.users)}</td></tr>`
+    +`<tr><td>Sesiones</td><td class="n">${num(D.ga4.totals.sessions)}</td></tr>`
+    +(D.ga4.channels||[]).map(c=>`<tr><td>${esc(c.channel)}</td><td class="n">${num(c.sessions)}</td></tr>`).join('')
+    +'</tbody></table></div></div>';
+  if(D.seo) h+=`<h2>SEO (Search Console, ${D.seo.start} a ${D.seo.end})</h2><div class="card">`
+    +`<div class="kpis"><div class="kpi"><div class="v">${num(D.seo.totals.clicks)}</div><div class="l">Clics</div></div>`
+    +`<div class="kpi"><div class="v">${num(D.seo.totals.impressions)}</div><div class="l">Impresiones</div></div>`
+    +`<div class="kpi"><div class="v">${D.seo.totals.ctr}%</div><div class="l">CTR</div></div>`
+    +`<div class="kpi"><div class="v">${D.seo.totals.position}</div><div class="l">Posición media</div></div></div>`
+    +'<div class="scroll"><table style="margin-top:12px"><thead><tr><th>Consulta</th><th class="n">Clics</th><th class="n">Impr.</th><th class="n">Pos.</th></tr></thead><tbody>'
+    +(D.seo.queries||[]).map(q=>`<tr><td>${esc(q.q)}</td><td class="n">${num(q.clicks)}</td><td class="n">${num(q.impressions)}</td><td class="n">${q.position}</td></tr>`).join('')
+    +'</tbody></table></div></div>';
+  return h;
+}
+
+el('pw').addEventListener('keydown',(e)=>{if(e.key==='Enter')entrar()});
+</script>
+</body>
+</html>

@@ -274,3 +274,61 @@ número con una captura del panel antes de enviarlo al cliente.
 | Celdas vacías en Notion | `≈`, `~`, `<` en Markdown | palabras ("aprox.", "menos de") |
 | Lead de prueba no crea atribución | GHL deduplica por email **y** teléfono | email y teléfono nuevos; borrar después |
 | `renderX is not defined` | función borrada al simplificar otra | script de validación + captura Playwright antes de enviar |
+
+---
+
+## 9. Segundo cliente: EAC (Escola Aeronàutica de Catalunya)
+
+Replicado en `eac-growth/panel/` (Vercel, no Netlify): `api/data.js` + `index.html`.
+Panel vivo en `https://eac-panel.vercel.app`. Lo que hubo que cambiar de verdad, y por qué:
+
+| Lo que asume el playbook | Lo que pasa en EAC | Qué se hizo |
+|---|---|---|
+| `appointmentStatus` es la fuente fiable de entrevistas | Las 161 citas están **todas** como `confirmed`: nadie usa showed/noshow | El resultado se lee de las columnas **Plantón** / **Entrevistado**, uniendo la cita al trato por `contactId` |
+| Cuenta de servicio para Google Ads, GSC y GA4 | La SA da `NOT_ADS_USER` y en Search Console solo ve qualivo.io y elevanails.es | **OAuth con refresh token** (scopes `adwords` + `webmasters.readonly`) para Ads y GSC; la SA se queda solo para GA4 |
+| Hay columna de matrícula → ingresos, ROAS, CPA | EAC **no tiene** columna de matrícula (0 `won` en septiembre) | Sin ingresos ni ROAS: la economía se cierra en **coste por entrevista**, y el panel lo dice en los avisos |
+| Netlify (`netlify/functions`, `netlify.toml`) | EAC ya vive en Vercel | `api/data.js` con `export default async function handler(req, res)` y `vercel.json`; el resto del motor es idéntico |
+
+### Lo que costó caro y no estaba en el playbook
+
+1. **Contar los `source` ANTES de escribir `provider()` no es opcional.** El playbook lo
+   menciona de pasada y me lo salté: asumí que `source` traía el nombre de campaña. En EAC
+   el valor real es `«Meta Lead Ads»` (329 de 557), y el nombre de campaña vive en
+   `attributions[].campaign`. Con la suposición equivocada, 329 leads caían en «Meta · (otro)».
+   **Primer comando de cualquier réplica**: contar los `source` distintos y mirarlos.
+
+2. **Separar cohorte de periodo en los propios KPIs, no solo en las notas.** Mezclarlos
+   produce dos números de plantón distintos en la misma pantalla (45% arriba, 55% en la
+   tabla) y nadie sabe cuál creer. El panel de EAC tiene dos bloques de KPIs con título
+   explícito: «De los leads que entraron en el periodo» (cohorte) y «De las citas que había
+   en el periodo» (periodo). Es el error que más informes ha estropeado; conviene que la
+   estructura de la página lo haga imposible.
+
+3. **El status de GHL y la columna del tablero se contradicen.** En EAC hay **690 tratos**
+   con status `lost`/`abandoned` sentados en columnas vivas. El panel los cuenta como
+   cerrados (criterio conservador, el mismo del playbook) pero **avisa de cuántos son**,
+   porque cambia por completo la lectura de «cuántos leads siguen vivos».
+
+4. **Las cifras manuales de un canal necesitan acotar los días que cubren.** `TIKTOK_INV`
+   admite `{"2026-09":{"spend":138.02,"leads":11,"days":8}}`: sin `days` el gasto se reparte
+   entre los 30 días del mes y el total del rango sale corto (€128,82 en vez de €138,02).
+
+5. **Tablas con `overflow-x` propio.** Sin `.scroll` alrededor de cada tabla, la página se
+   iba 848 px de ancho en un móvil de 390. Se comprueba con Playwright comparando
+   `scrollWidth` contra `innerWidth`, no a ojo.
+
+### Avisos de calidad del dato como sección de primera clase
+
+En vez de esconder lo que no se sabe, el panel de EAC abre con una caja amarilla que dice:
+cuántas citas pasadas nadie marcó (35), cuántos tratos tienen el estado en desacuerdo con su
+columna (690), que no hay columna de matrícula, y qué fuente de datos está caída. Es lo primero
+que pregunta el cliente cuando un número no le cuadra, y adelantarse ahorra la conversación.
+
+### Validación contra el análisis a mano
+
+Antes de enseñar nada, se cuadró el motor contra el análisis manual del mismo día:
+leads 557 = 557 · consiguen cita 75 = 75 · entrevistas 41 = 41 · plantón 34 = 34 ·
+inversión €3.549 contra €3.548 (0,04% por sumar días contra pedir el agregado).
+Las dos diferencias que aparecieron estaban bien explicadas y se documentaron en vez de taparse:
+«no localizados» 215 = 156 en la columna + 59 con status `abandoned`, y
+«perdidos» 119 = 24 en la columna + 95 con status `lost`.
