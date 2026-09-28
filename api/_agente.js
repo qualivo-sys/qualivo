@@ -546,8 +546,21 @@ async function atender(contactId, opciones) {
       if (!opciones.simular) { await A.etiquetar(c.id, ['wa-humano']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); }
       return Object.assign(hecho, { accion: 'callar', motivo: 'Maikel ya está escribiendo en este hilo' });
     }
+    // El reloj repasa cada pocos minutos los hilos cuyo último mensaje es del lead. En copiloto
+    // nada sale, así que el mismo mensaje se redactaba una y otra vez (Fran, 28-sep: cinco borradores
+    // en ocho minutos). Un borrador por mensaje del lead.
+    const idUltimo = String(ultimo.id || ultimo.dateAdded || '');
+    if (copiloto && idUltimo && estado.borrador === idUltimo) {
+      if (!opciones.simular) await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 }));
+      return Object.assign(hecho, { accion: 'callar', motivo: 'ya hay borrador para este mensaje' });
+    }
     const turnos = Number(estado.turnos || 0);
     if (turnos >= MAX_TURNOS) {
+      // Ya se le pasó a Maikel: el reloj no le repite el aviso en cada vuelta.
+      if (A.tiene(c, 'wa-humano') && !opciones.simular) {
+        await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 }));
+        return Object.assign(hecho, { accion: 'callar', motivo: 'tope de turnos: ya avisado' });
+      }
       if (!opciones.simular) {
         await A.etiquetar(c.id, ['wa-humano']);
         await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 }));
@@ -570,7 +583,9 @@ async function atender(contactId, opciones) {
         : 'BORRADOR · ' + quien + '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»\n\nPropuesta:\n' + (decision.texto || '(nada que contestar)') + cita + '\n\nSi te vale, cópialo y mándalo tú.');
       try { await require('./_aviso.js').movil(aviso); } catch (e) { /* sigue el correo */ }
       await avisar(c, 'borrador del copiloto (' + decision.accion + ')', 'Él: «' + String(ultimo.body).slice(0, 200) + '»\nBorrador: «' + (decision.texto || '') + '»' + cita);
-      await guardarEstado(c.id, { turnos: turnos + 1, ultimo: new Date().toISOString(), candado: 0 });
+      // Un borrador no es un turno: el tope cuenta solo lo que el agente ha enviado de verdad
+      // (con los borradores repetidos, Fran llegó al tope sin un solo mensaje del agente).
+      await guardarEstado(c.id, { turnos: turnos, ultimo: new Date().toISOString(), candado: 0, borrador: idUltimo });
       if (decision.accion === 'pasar') await A.etiquetar(c.id, ['wa-humano']);
       else { try { await require('./_tratos.js').mover(c.id, 'conversacion', { nombre: c.contactName || c.firstName || '', email: c.email || '', telefono: c.phone || '', empresa: c.companyName || '', origen: 'WhatsApp', fuente: 'Copiloto de WhatsApp' }); } catch (e) { /* no bloquea */ } }
       await A.nota(c.id, 'COPILOTO DE WHATSAPP · ' + new Date().toLocaleString('es-ES', { timeZone: ZONA }) +

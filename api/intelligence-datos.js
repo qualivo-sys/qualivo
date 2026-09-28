@@ -531,6 +531,12 @@ async function agenteWa(b) {
   try {
     await fetch(GHL + '/contacts/' + encodeURIComponent(id) + '/tags', { method: 'DELETE', headers: Object.assign({}, cabGHL(), { 'Content-Type': 'application/json' }), body: JSON.stringify({ tags: ['wa-humano', 'wa-agente-off'] }) });
   } catch (e) { /* no bloquea */ }
+  // Contador de turnos del agente a cero (1 si sale ya el primer mensaje): los borradores del
+  // copiloto de antes no cuentan, o el agente llegaría al tope sin haber hablado (Fran, 28-sep).
+  try {
+    await fetch(GHL + '/contacts/' + encodeURIComponent(id), { method: 'PUT', headers: Object.assign({}, cabGHL(), { 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ customFields: [{ id: 'SJp581X5s72ZxguCM4iI', field_value: JSON.stringify({ turnos: b.texto ? 1 : 0, ultimo: new Date().toISOString(), candado: 0 }) }] }) });
+  } catch (e) { /* no bloquea */ }
   await A.nota(id, 'AGENTE DE WHATSAPP ACTIVADO desde Intelligence (Maikel): contesta solo a esta persona, sin pasar por borrador.').catch(function () {});
   return { ok: true };
 }
