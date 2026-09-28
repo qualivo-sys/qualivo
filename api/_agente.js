@@ -480,7 +480,7 @@ async function atender(contactId, opciones) {
     if (A.tiene(c, 'demo') && !A.tiene(c, 'paid')) return atenderDemo(c, opciones, hecho);
     if (!A.tiene(c, 'paid') && !A.tiene(c, 'agente-auto')) return Object.assign(hecho, { accion: 'callar', motivo: 'sin etiqueta paid' });
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
-    if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
+    if (A.tiene(c, 'wa-humano') && !A.tiene(c, 'agente-auto')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
     // Quien ya tiene cita habla con Maikel, no con el agente (Beatriz, 19-sep).
     // Con cita, lo lleva Maikel. Salvo (28-sep) que Maikel haya activado el agente para esta persona
@@ -539,7 +539,9 @@ async function atender(contactId, opciones) {
     const humano = wa.some(function (m) { return String(m.direction) === 'outbound' && m.userId && Date.parse(m.dateAdded || 0) > Date.parse(primerEntrante.dateAdded || 0); });
     // «agente-auto» (28-sep): Maikel lo activa desde la ficha de Intelligence para
     // que el agente conteste solo a esta persona, sin pasar por borrador.
-    const copiloto = COPILOTO && !A.tiene(c, 'agente-auto');
+    // Y (Maikel, 28-sep) a los leads «precualificar» les habla el agente solo: Maikel no pierde
+    // tiempo con ellos hasta que el agente vea que encajan.
+    const copiloto = COPILOTO && !A.tiene(c, 'agente-auto') && !require('./_scoring.js').precualificar(c).si;
     if (humano && !copiloto && !A.tiene(c, 'agente-auto')) {
       if (!opciones.simular) { await A.etiquetar(c.id, ['wa-humano']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); }
       return Object.assign(hecho, { accion: 'callar', motivo: 'Maikel ya está escribiendo en este hilo' });
