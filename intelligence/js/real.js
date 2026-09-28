@@ -160,10 +160,34 @@
       if (!window.confirm('¿Lanzar ahora la llamada de Raquel a ' + nombreDe(id) + '?')) return;
       estadoCaja('<p class="nota-ar">Lanzando la llamada…</p>');
       post('llamar', { contactId: id })
-        .then(function () { estadoCaja('<p class="ok-ar">Raquel está llamando a ' + esc(nombreDe(id)) + '. El resultado quedará en GHL al colgar.</p>'); })
+        .then(function (d) { seguirLlamada(d.id, id, Date.now()); })
         .catch(function (err) { estadoCaja('<p class="err-ar">' + esc(err.message) + '</p>'); });
     }
   }, true);
+
+  // Seguimiento en directo: pregunta a Vapi cada 4 segundos hasta que cuelga (máximo 8 minutos).
+  function seguirLlamada(callId, contactId, desde) {
+    const quien = esc(nombreDe(contactId));
+    const mmss = function (s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    if (!callId) { estadoCaja('<p class="ok-ar">Raquel está llamando a ' + quien + '. El resultado quedará en GHL al colgar.</p>'); return; }
+    post('estado-llamada', { id: callId }).then(function (d) {
+      const el = caja();
+      if (!el) return; // se ha cerrado la ficha: el resultado queda igualmente en GHL
+      if (d.estado === 'ended') {
+        el.innerHTML = '<p class="ok-ar">Llamada terminada · ' + mmss(d.segundos) + ' · ' + esc(d.fin) + '</p>' +
+          (d.resumen ? '<p class="nota-ar" style="margin-top:6px">' + esc(d.resumen) + '</p>' : '') +
+          '<div class="fila">' + (d.grabacion ? '<a class="btn btn-mini" href="' + esc(d.grabacion) + '" target="_blank" rel="noopener">Escuchar la llamada</a>' : '') +
+          '<button class="btn btn-mini" type="button" data-real="cerrar">Cerrar</button></div>' +
+          '<p class="nota-ar" style="margin-top:8px">La nota con el resumen ya está en GHL. Pulsa ↻ arriba para verla en la línea de tiempo.</p>';
+        return;
+      }
+      const txt = d.estado === 'in-progress' ? '<b>Hablando</b> · ' + mmss(d.segundos) : d.estado === 'ringing' ? 'Sonando…' : 'Marcando…';
+      el.innerHTML = '<p class="ok-ar"><span class="punto-vivo"></span>Raquel · ' + quien + ' · ' + txt + '</p><p class="nota-ar">Se actualiza solo. Puedes cerrar la ficha: el resultado queda en GHL.</p>';
+      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(callId, contactId, desde); }, 4000);
+    }).catch(function () {
+      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(callId, contactId, desde); }, 6000);
+    });
+  }
 
   function moverEtapa(contactId, etapaId) {
     const est = QV.estado;

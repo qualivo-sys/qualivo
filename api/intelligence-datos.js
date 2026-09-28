@@ -536,11 +536,31 @@ async function llamar(b) {
   const c = await contactoGhl(id);
   if (!c.phone) throw new Error('No tiene teléfono en GHL.');
   const nombre = c.firstName || c.contactName || '';
-  const r = await A.lanzarLlamada({ telefono: c.phone, nombre: nombre, contexto: { nombre: nombre, email: c.email || '', email_dominio: String(c.email || '').split('@')[1] || '', empresa: c.companyName || '', origen: 'el diagnóstico', fuga: '' } });
+  const r = await A.lanzarLlamada({ telefono: c.phone, nombre: nombre, contexto: { nombre: nombre, email: c.email || '', email_dominio: String(c.email || '').split('@')[1] || '', empresa: c.companyName || '',
+    // Raquel dice «Acabas de pedir el diagnóstico de crecimiento en {{origen}}»
+    origen: (c.tags || []).some(function (t) { return t === 'paid' || t === 'leadform'; }) ? 'el anuncio' : 'la web', fuga: '' } });
   if (!r.ok) throw new Error('No se ha podido lanzar la llamada (' + (r.motivo || '') + ').');
   await A.etiquetar(id, ['voz-intelligence']).catch(function () {});
   await A.nota(id, 'LLAMADA DE RAQUEL lanzada desde Intelligence (Maikel) · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })).catch(function () {});
   return { ok: true, id: r.id };
+}
+
+// Estado en directo de una llamada de Raquel (Vapi): sonando, en curso o terminada con su resumen.
+async function estadoLlamada(b) {
+  const id = String(b.id || '').slice(0, 60);
+  if (!/^[A-Za-z0-9-]+$/.test(id)) throw new Error('Llamada no válida.');
+  const r = await fetch('https://api.vapi.ai/call/' + encodeURIComponent(id), { headers: { Authorization: 'Bearer ' + process.env.VAPI_API_KEY } });
+  if (!r.ok) throw new Error('Vapi no responde (' + r.status + ').');
+  const c = await r.json();
+  const ini = fecha(c.startedAt), fin = fecha(c.endedAt);
+  const RES = { voicemail: 'Buzón: ha dejado el mensaje', 'customer-did-not-answer': 'No lo ha cogido', 'customer-busy': 'Comunicaba', 'customer-ended-call': 'Colgó la otra persona', 'assistant-ended-call': 'Raquel terminó la llamada', 'silence-timed-out': 'Silencio: se cortó', 'exceeded-max-duration': 'Llegó al tiempo máximo' };
+  return {
+    estado: String(c.status || ''),
+    segundos: ini ? Math.round(((fin || Date.now()) - ini) / 1000) : 0,
+    fin: c.status === 'ended' ? (RES[c.endedReason] || String(c.endedReason || 'Terminada')) : '',
+    resumen: String((c.analysis && c.analysis.summary) || c.summary || '').slice(0, 600),
+    grabacion: String(c.recordingUrl || (c.artifact && c.artifact.recordingUrl) || '')
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -576,13 +596,13 @@ module.exports = async function (req, res) {
     try { return res.status(200).json(await mover(body || {})); }
     catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 120) }); }
   }
-  if (req.method === 'POST' && (accion === 'redactar' || accion === 'enviar-wa' || accion === 'llamar' || accion === 'agente-wa')) {
+  if (req.method === 'POST' && (accion === 'redactar' || accion === 'enviar-wa' || accion === 'llamar' || accion === 'agente-wa' || accion === 'estado-llamada')) {
     // 28-sep: acciones desde la ficha. Solo con sesión y siempre por un clic de Maikel.
     if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
     let body = req.body;
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     try {
-      const fn = { redactar: redactar, 'enviar-wa': enviarWa, llamar: llamar, 'agente-wa': agenteWa }[accion];
+      const fn = { redactar: redactar, 'enviar-wa': enviarWa, llamar: llamar, 'agente-wa': agenteWa, 'estado-llamada': estadoLlamada }[accion];
       return res.status(200).json(await fn(body || {}));
     } catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 160) }); }
   }

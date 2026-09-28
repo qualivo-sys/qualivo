@@ -294,6 +294,8 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .acciones-real { margin-top: 8px; gap: 6px; flex-wrap: wrap; }
 .acciones-real .btn svg { width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; }
 #accionReal:empty { display: none; }
+.punto-vivo { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); margin-right: 6px; animation: latido 1.2s infinite; }
+@keyframes latido { 50% { opacity: .25; } }
 #accionReal { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 12px; }
 #accionReal textarea { width: 100%; min-height: 110px; font: inherit; font-size: 13.5px; line-height: 1.5; padding: 10px; border: 1px solid var(--borde); border-radius: 8px; resize: vertical; background: var(--superficie); color: var(--tinta); }
 #accionReal .fila { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
