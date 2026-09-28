@@ -160,6 +160,31 @@ function etapaDe(nombre) {
   return { i: 1 };
 }
 
+// 28-sep: el modo real no puede quedarse solo con lo que entra por anuncios. Las
+// reuniones que llegan por correo en frío, agenda directa o recomendación
+// (Patrizia, Sergi, Talkual…) también son el negocio.
+const REUNION_TAGS = ['reunion-reservada', 'reunion-reservada.', 'act-agendado', 'reunion-agendada', 'reunion-celebrada', 'propuesta-enviada', 'segunda-reunion'];
+const MAX_TRATOS_EXTRA = 40;
+// Trato «vivo» a partir de la reunión: agendada, confirmada, no presentado, oferta, segunda reunión, negociación, piloto o cliente.
+function tratoVivo(tr) {
+  if (!tr) return false;
+  if (/lost|abandon/.test(String(tr.estado || ''))) return false;
+  const et = etapaDe(tr.etapa);
+  return et.i >= 3 || /confirm/i.test(tr.etapa || '');
+}
+// «patrizia laplana bigott» → «Patrizia Laplana Bigott» (los formularios llegan en minúsculas)
+function nombrePropio(s) {
+  return String(s).split(/\s+/).map(function (w) { return w && w === w.toLowerCase() ? w.charAt(0).toUpperCase() + w.slice(1) : w; }).join(' ');
+}
+function origenDe(tags) {
+  const t = function (x) { return tags.indexOf(x) >= 0; };
+  if (t('leadform')) return 'Formulario de Meta';
+  if (t('paid')) return 'Anuncio · web';
+  if (t('email-frio') || t('canal-email-frio')) return 'Correo en frío';
+  if (tags.some(function (x) { return /^abm|linkedin/.test(x); })) return 'Prospección directa';
+  return 'Directo o recomendación';
+}
+
 function normal(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
 
 // ---------------------------------------------------------------------------
@@ -183,7 +208,9 @@ async function contactosRecientes(desde, hasta) {
   return todos.filter(function (c) {
     const tags = (c.tags || []).map(String);
     if (tags.indexOf('demo') >= 0) return false;
-    if (tags.indexOf('paid') < 0 && tags.indexOf('leadform') < 0) return false;
+    const deAnuncio = tags.indexOf('paid') >= 0 || tags.indexOf('leadform') >= 0;
+    const conReunion = REUNION_TAGS.some(function (t) { return tags.indexOf(t) >= 0; });
+    if (!deAnuncio && !conReunion) return false;
     const t = fechaEtiqueta(tags, 'act-ini-') || fecha(c.dateAdded);
     return t && t >= desde;
   });
@@ -289,11 +316,11 @@ function convertir(c, msgs, citasC, trato, ahora, campanas) {
 
   return {
     id: c.id,
-    n: [c.firstName, c.lastName].filter(Boolean).join(' ').trim() || c.contactName || 'Sin nombre',
+    n: nombrePropio([c.firstName, c.lastName].filter(Boolean).join(' ').trim() || c.contactName || 'Sin nombre'),
     emp: c.companyName || '',
     ciudad: c.city || '',
     canal: c.phone ? 'wa' : 'email',
-    origen: tiene('leadform') ? 'Formulario de Meta' : 'Anuncio · web',
+    origen: origenDe(tags),
     campana: camp ? camp.id : '',
     creado: creado,
     act: suyos.length ? suyos[suyos.length - 1].t : creado,
@@ -328,14 +355,27 @@ async function recoger() {
   let campanas = [];
   try { campanas = await anuncios(); } catch (e) { avisos.push('No se ha podido leer Meta (' + String(e.message).slice(0, 40) + ').'); }
   const leads = await contactosRecientes(desde, hasta);
-  leads.sort(function (a, b) { return (fecha(b.dateAdded) || 0) - (fecha(a.dateAdded) || 0); });
   let porTrato = {};
   try { porTrato = await tratos(hasta); } catch (e) { avisos.push('No se han podido leer los tratos.'); }
+  // Contactos con un trato vivo en el pipeline que no han entrado por la lista de recientes
+  // (más antiguos que 30 días o sin etiqueta de anuncio).
+  const yaEstan = {};
+  leads.forEach(function (c) { yaEstan[c.id] = true; });
+  const extra = Object.keys(porTrato).filter(function (id) { return !yaEstan[id] && tratoVivo(porTrato[id]); }).slice(0, MAX_TRATOS_EXTRA);
+  if (extra.length) {
+    const traidos = await enParalelo(extra, 5, function (id) { return ghl('/contacts/' + encodeURIComponent(id)).then(function (d) { return d.contact || null; }); }, hasta - 12000);
+    traidos.forEach(function (c) {
+      if (!c || (c.tags || []).indexOf('demo') >= 0) return;
+      if (/\b(prueba|test)\b/i.test([c.firstName, c.lastName, c.contactName].join(' '))) return;
+      leads.push(c);
+    });
+  }
+  leads.sort(function (a, b) { return (fecha(b.dateAdded) || 0) - (fecha(a.dateAdded) || 0); });
   const msgs = await enParalelo(leads, 5, function (c) { return mensajes(c.id); }, hasta - 8000);
   const conCita = leads.map(function (c, i) { return i; }).filter(function (i) {
     const tags = (leads[i].tags || []).map(String);
     const tr = porTrato[leads[i].id];
-    return tags.indexOf('act-agendado') >= 0 || tags.indexOf('reunion-reservada') >= 0 || (tr && /reuni|agendad|presentado/i.test(tr.etapa));
+    return REUNION_TAGS.some(function (t) { return tags.indexOf(t) >= 0; }) || tratoVivo(tr);
   });
   const citasPor = {};
   const cs = await enParalelo(conCita, 5, function (i) { return citas(leads[i].id); }, hasta - 3000);
