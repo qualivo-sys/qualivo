@@ -29,7 +29,7 @@ let cache = null; // { t, datos }
 let enCurso = null;
 
 // ---------------------------------------------------------------------------
-// Lectura: la única salida hacia fuera. Solo GET.
+// Lectura: todo es GET, salvo mover un trato de etapa desde el tablero (acción «mover»).
 // ---------------------------------------------------------------------------
 function cabGHL() {
   return {
@@ -208,6 +208,7 @@ async function contactosRecientes(desde, hasta) {
   return todos.filter(function (c) {
     const tags = (c.tags || []).map(String);
     if (tags.indexOf('demo') >= 0) return false;
+    if (/\b(prueba|test)\b/i.test([c.firstName, c.lastName, c.contactName].join(' '))) return false;
     const deAnuncio = tags.indexOf('paid') >= 0 || tags.indexOf('leadform') >= 0;
     const conReunion = REUNION_TAGS.some(function (t) { return tags.indexOf(t) >= 0; });
     if (!deAnuncio && !conReunion) return false;
@@ -241,13 +242,22 @@ async function citas(contactId) {
   }).filter(function (e) { return e.t; });
 }
 
-async function tratos(hasta) {
+// Etapas del embudo de Prospección, en orden: son las columnas del tablero del modo real.
+async function etapasCrm() {
   const loc = encodeURIComponent(process.env.GHL_LOCATION_ID);
-  const etapas = {};
-  try {
-    const p = await ghl('/opportunities/pipelines?locationId=' + loc);
-    (p.pipelines || []).forEach(function (pl) { (pl.stages || []).forEach(function (s) { etapas[s.id] = s.name; }); });
-  } catch (e) { /* sin nombres de etapa */ }
+  const p = await ghl('/opportunities/pipelines?locationId=' + loc);
+  const todas = {};
+  let prosp = [];
+  (p.pipelines || []).forEach(function (pl) {
+    (pl.stages || []).forEach(function (s) { todas[s.id] = s.name; });
+    if (pl.id === EMBUDOS[0]) prosp = (pl.stages || []).slice().sort(function (a, b) { return (a.position || 0) - (b.position || 0); }).map(function (s) { return { id: s.id, txt: s.name }; });
+  });
+  return { todas: todas, prosp: prosp };
+}
+
+async function tratos(hasta, etapasInfo) {
+  const loc = encodeURIComponent(process.env.GHL_LOCATION_ID);
+  const etapas = (etapasInfo && etapasInfo.todas) || {};
   const porContacto = {};
   for (const emb of EMBUDOS) {
     for (let page = 1; page <= 10 && Date.now() < hasta; page++) {
@@ -259,7 +269,7 @@ async function tratos(hasta) {
         const prev = porContacto[cid];
         // Manda Prospección (lo que entra por anuncios) sobre Qualivo Pipeline
         if (prev && prev.embudo === EMBUDOS[0] && emb !== EMBUDOS[0]) return;
-        porContacto[cid] = { embudo: emb, etapa: etapas[o.pipelineStageId] || '', etapaId: o.pipelineStageId, estado: o.status, valor: Number(o.monetaryValue || 0) };
+        porContacto[cid] = { id: o.id, embudo: emb, etapa: etapas[o.pipelineStageId] || '', etapaId: o.pipelineStageId, estado: o.status, valor: Number(o.monetaryValue || 0) };
       });
       if (lista.length < 100) break;
     }
@@ -327,6 +337,8 @@ function convertir(c, msgs, citasC, trato, ahora, campanas) {
     toque: nuestros.length ? nuestros[nuestros.length - 1].t : null,
     etapa: etapa,
     etapaNombre: trato ? trato.etapa : '',
+    tratoId: trato ? trato.id : '',
+    etapaId: trato && trato.embudo === EMBUDOS[0] && !/lost|abandon/.test(String(trato.estado || '')) ? trato.etapaId : '',
     fin: et && et.fin ? et.fin : (trato && /lost/.test(String(trato.estado)) ? 'perdido' : ''),
     valor: trato ? trato.valor : 0,
     f: { inv: inversion(tags), vol: volumen(tags), sector: sector(tags), fuga: fuga(tags), nivel: (primera(tags, 'nivel-') || '').toUpperCase(), potente: tiene('lead-potente'),
@@ -356,7 +368,9 @@ async function recoger() {
   try { campanas = await anuncios(); } catch (e) { avisos.push('No se ha podido leer Meta (' + String(e.message).slice(0, 40) + ').'); }
   const leads = await contactosRecientes(desde, hasta);
   let porTrato = {};
-  try { porTrato = await tratos(hasta); } catch (e) { avisos.push('No se han podido leer los tratos.'); }
+  let etapasInfo = { todas: {}, prosp: [] };
+  try { etapasInfo = await etapasCrm(); } catch (e) { avisos.push('No se han podido leer las etapas del CRM.'); }
+  try { porTrato = await tratos(hasta, etapasInfo); } catch (e) { avisos.push('No se han podido leer los tratos.'); }
   // Contactos con un trato vivo en el pipeline que no han entrado por la lista de recientes
   // (más antiguos que 30 días o sin etiqueta de anuncio).
   const yaEstan = {};
@@ -385,7 +399,42 @@ async function recoger() {
   const contactos = leads.map(function (c, i) { return convertir(c, msgs[i] || [], citasPor[c.id], porTrato[c.id], ahora, campanas); });
   let pausa = false;
   try { pausa = !!require('./_pausa.js').PAUSA_TOTAL; } catch (e) { pausa = false; }
-  return { generado: ahora, pausa: pausa, parcial: faltan > 0, avisos: avisos, contactos: contactos, campanas: campanas };
+  return { generado: ahora, pausa: pausa, parcial: faltan > 0, avisos: avisos, contactos: contactos, campanas: campanas, etapasCrm: etapasInfo.prosp };
+}
+
+async function mover(b) {
+  const contactId = String(b.contactId || '').slice(0, 40);
+  const etapaId = String(b.etapaId || '').slice(0, 60);
+  if (!/^[A-Za-z0-9]+$/.test(contactId) || !/^[A-Za-z0-9-]+$/.test(etapaId)) throw new Error('Datos no válidos.');
+  const info = await etapasCrm();
+  const etapa = info.prosp.filter(function (s) { return s.id === etapaId; })[0];
+  if (!etapa) throw new Error('Esa etapa no es del embudo de Prospección.');
+  const cab = Object.assign({}, cabGHL(), { 'Content-Type': 'application/json' });
+  // El trato de Prospección de este contacto, si lo tiene (el que llega del tablero no se da por bueno)
+  const loc = encodeURIComponent(process.env.GHL_LOCATION_ID);
+  const d = await ghl('/opportunities/search?location_id=' + loc + '&pipeline_id=' + EMBUDOS[0] + '&contact_id=' + encodeURIComponent(contactId) + '&limit=5');
+  const trato = (d.opportunities || [])[0];
+  let r;
+  if (trato) {
+    r = await fetch(GHL + '/opportunities/' + encodeURIComponent(trato.id), { method: 'PUT', headers: cab, body: JSON.stringify({ pipelineStageId: etapaId, status: 'open' }) });
+  } else {
+    const c = await ghl('/contacts/' + encodeURIComponent(contactId));
+    const ct = c.contact || {};
+    const nombre = [ct.firstName, ct.lastName].filter(Boolean).join(' ') || ct.contactName || 'Contacto';
+    r = await fetch(GHL + '/opportunities/', { method: 'POST', headers: cab, body: JSON.stringify({ locationId: process.env.GHL_LOCATION_ID, pipelineId: EMBUDOS[0], pipelineStageId: etapaId, contactId: contactId, name: nombre + (ct.companyName ? ' (' + ct.companyName + ')' : ''), status: 'open' }) });
+  }
+  if (!r.ok) throw new Error('GHL no ha aceptado el cambio (' + r.status + ').');
+  const j = await r.json().catch(function () { return {}; });
+  // Que la próxima lectura no enseñe la etapa vieja
+  if (cache && cache.datos) {
+    cache.datos.contactos.forEach(function (x) {
+      if (x.id !== contactId) return;
+      x.etapaId = etapaId; x.etapaNombre = etapa.txt;
+      const et = etapaDe(etapa.txt); x.etapa = et.i; x.fin = et.fin || '';
+      if (!x.tratoId) x.tratoId = (j.opportunity && j.opportunity.id) || '';
+    });
+  }
+  return { ok: true, etapaId: etapaId, etapa: etapa.txt, creado: !trato };
 }
 
 // ---------------------------------------------------------------------------
@@ -411,6 +460,15 @@ module.exports = async function (req, res) {
   if (req.method === 'POST' && accion === 'salir') {
     res.setHeader('Set-Cookie', S.cookieBorrar());
     return res.status(200).json({ ok: true });
+  }
+  if (req.method === 'POST' && accion === 'mover') {
+    // 28-sep: mover una oportunidad de etapa desde el tablero. Solo toca el CRM
+    // (la etapa del trato); no envía mensajes a nadie.
+    if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+    let body = req.body;
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
+    try { return res.status(200).json(await mover(body || {})); }
+    catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 120) }); }
   }
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });

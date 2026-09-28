@@ -339,6 +339,21 @@
   }
   QV.irA = irA;
 
+  // Modo real: las columnas son las etapas del embudo de Prospección de GHL y las
+  // tarjetas se arrastran de una a otra (real.js guarda el cambio en el CRM).
+  function columnasCrm(etapas) {
+    const sin = estado.contactos.filter(function (c) { return !c.etapaId && c.fin !== 'perdido'; });
+    const col = function (id, txt, cs, nota) {
+      return '<div class="columna" data-etapa-crm="' + esc(id) + '"><h4><span>' + esc(txt) + '</span><span class="gris-2">' + cs.length + '</span></h4>' +
+        (nota ? '<p class="gris" style="font-size:11px;margin:-4px 0 8px">' + esc(nota) + '</p>' : '') +
+        cs.map(function (c) {
+          return '<div class="chipc" draggable="true" data-mover="' + c.id + '" data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
+        }).join('') + '</div>';
+    };
+    return col('', 'Sin trato en el CRM', sin, 'Arrástralo a una etapa para crearle el trato') +
+      etapas.map(function (e) { return col(e.id, e.txt, estado.contactos.filter(function (c) { return c.etapaId === e.id; })); }).join('');
+  }
+
   function pintarVista() {
     const f = VISTA_FN[estado.vista] || VISTA_FN.resumen;
     $('#vista').innerHTML = f();
@@ -552,7 +567,7 @@
         const n = nombres[f.a.id] || { txt: f.a.txt, exp: '' };
         return '<tr><td><b>' + esc(n.txt) + '</b><div class="meta">hasta ' + esc(f.a.txt.toLowerCase()) + '</div></td><td class="num">' + M.pct(f.conv) + '</td><td class="num gris">' + M.pct(f.ref) + '</td><td class="num" style="color:' + (f.recuperables > 0 ? 'var(--coral)' : 'inherit') + ';font-weight:700">' + (f.recuperables > 0 ? '+' + M.num(f.recuperables) : '—') + '</td></tr>';
       }).join('');
-      const cols = cfg.recorrido.slice(1).map(function (e, i) {
+      const cols = cfg.columnasCrm && cfg.columnasCrm.length ? columnasCrm(cfg.columnasCrm) : cfg.recorrido.slice(1).map(function (e, i) {
         const idx = i + 1;
         const cs = estado.contactos.filter(function (c) { return c.etapa === idx && c.fin !== 'perdido'; });
         return '<div class="columna"><h4><span>' + esc(e.txt) + '</span><span class="gris-2">' + cs.length + '</span></h4>' + cs.map(function (c) {
@@ -563,7 +578,7 @@
         '<div class="rejilla r-2"><div class="tarjeta"><h3>Últimos 30 días <span class="sub">% que pasa de la etapa anterior</span></h3><div class="embudo" style="margin-top:12px">' + filas + '</div></div>' +
         '<div class="tarjeta"><h3>Fugas, de mayor a menor</h3><div class="tabla-caja" style="margin-top:10px;border:0"><table class="tabla"><thead><tr><th>Fuga</th><th class="num">Hoy</th><th class="num">Bien hecho</th><th class="num">Al mes</th></tr></thead><tbody>' + tablaFugas + '</tbody></table></div>' +
         (peor ? '<p class="gris" style="font-size:12.5px;margin-top:10px">La mayor: <b style="color:var(--tinta)">' + esc((nombres[peor.a.id] || {}).exp || '') + '</b>.</p>' : '') + '</div></div>' +
-        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">Hoy en el sistema, por etapa</p><div class="columnas">' + cols + '</div>');
+        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">' + (cfg.columnasCrm && cfg.columnasCrm.length ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa en GHL</span>' : 'Hoy en el sistema, por etapa') + '</p><div class="columnas' + (cfg.columnasCrm && cfg.columnasCrm.length ? ' columnas-crm' : '') + '">' + cols + '</div>');
     },
 
     senales: function () {

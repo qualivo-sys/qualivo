@@ -38,7 +38,7 @@
         '<p id="claveError" style="color:var(--coral);font-size:13px;min-height:20px;margin-top:8px">' + esc(mensaje || '') + '</p>' +
         '<button class="btn btn-primario btn-grande" type="submit" style="width:100%">Entrar</button>' +
       '</form>' +
-      '<p class="inicio-nota">Solo lectura: esta pantalla no envía mensajes ni toca el CRM. Sin contraseña, <a href="/intelligence/">la demo</a> sigue igual.</p></div>';
+      '<p class="inicio-nota">Esta pantalla no envía mensajes a nadie. Lo único que cambia en el CRM es la etapa de un trato, cuando tú lo arrastras en el tablero. Sin contraseña, <a href="/intelligence/">la demo</a> sigue igual.</p></div>';
     $('#clave').focus();
     $('#formClave').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -62,6 +62,59 @@
     el.innerHTML = '<div class="inicio-caja" style="max-width:420px"><img class="inicio-logo" src="/assets/img/qualivo-logo.png" alt="Qualivo" width="132" height="32">' +
       '<p class="eyebrow">Intelligence System · datos reales</p><h1 style="font-size:24px">' + esc(txt) + '</h1><p class="inicio-nota">Leyendo GHL y Meta. La primera vez tarda unos segundos; después se guarda 5 minutos.</p></div>';
   }
+
+  // ---------------------------------------------------------------------------
+  // Tablero: arrastrar una tarjeta a otra etapa la mueve en GHL
+  // ---------------------------------------------------------------------------
+  let arrastrado = null;
+  document.addEventListener('dragstart', function (e) {
+    const t = e.target.closest && e.target.closest('[data-mover]');
+    if (!t) return;
+    arrastrado = t.getAttribute('data-mover');
+    t.classList.add('arrastrando');
+    try { e.dataTransfer.setData('text/plain', arrastrado); e.dataTransfer.effectAllowed = 'move'; } catch (err) { /* nada */ }
+  });
+  document.addEventListener('dragend', function (e) {
+    const t = e.target.closest && e.target.closest('[data-mover]');
+    if (t) t.classList.remove('arrastrando');
+    document.querySelectorAll('.columna.soltar').forEach(function (c) { c.classList.remove('soltar'); });
+  });
+  document.addEventListener('dragover', function (e) {
+    const col = arrastrado && e.target.closest && e.target.closest('[data-etapa-crm]');
+    if (!col || !col.getAttribute('data-etapa-crm')) return;
+    e.preventDefault();
+    document.querySelectorAll('.columna.soltar').forEach(function (c) { if (c !== col) c.classList.remove('soltar'); });
+    col.classList.add('soltar');
+  });
+  document.addEventListener('drop', function (e) {
+    const col = arrastrado && e.target.closest && e.target.closest('[data-etapa-crm]');
+    if (!col) return;
+    e.preventDefault();
+    const id = arrastrado; arrastrado = null;
+    col.classList.remove('soltar');
+    moverEtapa(id, col.getAttribute('data-etapa-crm'));
+  });
+
+  function moverEtapa(contactId, etapaId) {
+    const est = QV.estado;
+    const c = (est.contactos || []).filter(function (x) { return x.id === contactId; })[0];
+    const etapa = (est.cfg.columnasCrm || []).filter(function (x) { return x.id === etapaId; })[0];
+    if (!c || !etapa || c.etapaId === etapaId) return;
+    const antes = { etapaId: c.etapaId, etapaTxt: c.etapaTxt };
+    c.etapaId = etapaId; c.etapaTxt = etapa.txt;
+    QV.pintarTodo();
+    const chip = document.querySelector('[data-mover="' + contactId + '"]');
+    if (chip) chip.classList.add('guardando');
+    fetch(API + '?accion=mover', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contactId: contactId, etapaId: etapaId }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || ('Error ' + r.status)); return d; }); })
+      .then(function () { const ch = document.querySelector('[data-mover="' + contactId + '"]'); if (ch) ch.classList.remove('guardando'); })
+      .catch(function (err) {
+        c.etapaId = antes.etapaId; c.etapaTxt = antes.etapaTxt;
+        QV.pintarTodo();
+        window.alert('No se ha podido mover a «' + etapa.txt + '»: ' + err.message);
+      });
+  }
+  QV.moverEtapa = moverEtapa;
 
   function cargar(fresco) {
     cargando('Leyendo los datos de hoy…');
@@ -106,6 +159,7 @@
     return {
       id: r.id, n: r.n, rol: partes.join(' · '), emp: r.emp, seg: 'lead', ciudad: r.ciudad, prod: r.origen,
       orig: r.campana || 'otros', canal: r.canal, etapa: r.etapa, etapaTxt: r.etapaNombre || '', valor: r.valor || 0,
+      tratoId: r.tratoId || '', etapaId: r.etapaId || '',
       creado: hace(r.creado, ahora), act: hace(r.act, ahora), toque: r.toque ? hace(r.toque, ahora) : null,
       fin: r.fin || undefined,
       f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente, cuando: r.f.cuando, precio: r.f.precio, ruta: r.f.ruta },
@@ -165,6 +219,7 @@
     const resp = mediana(leads.map(function (r) { return r.s.primeraRespuestaMin; }));
     const cfg = Object.assign({}, base, {
       id: 'qualivoReal', nombre: 'Qualivo · datos reales', real: true, _ok: false, vozAuto: false,
+      columnasCrm: d.etapasCrm || [],
       historias: null, historiaDefecto: null,
       campanas: campanas,
       mesDatos: { respuestaAntes: resp || 0, respuestaAhora: resp || 0, agendadas: embudoDe(leads).diagnostico },

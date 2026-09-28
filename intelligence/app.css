@@ -291,6 +291,11 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 
 /* Recorrido: columnas */
 .columnas { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.columnas-crm { grid-auto-columns: minmax(180px, 200px); }
+.columnas-crm .chipc { cursor: grab; }
+.columnas-crm .chipc.arrastrando { opacity: .45; }
+.columnas-crm .columna.soltar { outline: 2px dashed var(--verde); outline-offset: -2px; }
+.columnas-crm .chipc.guardando { opacity: .6; pointer-events: none; }
 .columna { background: #EFEEEA; border-radius: var(--radio); padding: 10px; min-height: 120px; }
 .columna h4 { font-size: 12px; font-weight: 700; display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--tinta-2); }
 .chipc { background: var(--superficie); border: 1px solid var(--borde); border-radius: 8px; padding: 7px 9px; margin-bottom: 6px; cursor: pointer; font-size: 12px; }
