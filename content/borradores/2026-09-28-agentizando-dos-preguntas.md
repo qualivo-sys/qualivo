@@ -18,39 +18,39 @@
   - Nombres de leads ni de la clienta que dijo que sí.
   - El canal del primer mensaje (regla del 663).
 - **Decisión para Maikel:** ¿se dice la cifra del precio de entrada? En el formulario real aparece. Mi recomendación es no ponerla en LinkedIn todavía: la pieza funciona igual y el precio no se convierte en el tema de los comentarios.
+- **Revisión (28-sep):** Master Reviewer, nota 7, publicar con cambios. Aplicados los 5 críticos: fechas, «el formulario trae citas», fuera el «no es X, es Y», la nota como criterio (no la respuesta sola) y la pregunta real del precio en la imagen, con la cifra tapada.
 - **CTA:** conversación. **Formato:** imagen 1080 × 1350 + texto.
 - **Qué se mide:** comentarios de gente que pregunta el precio en el formulario, o que no se atreve a hacerlo.
 
 ## Texto para LinkedIn
 
-> Esta semana he puesto el precio en el formulario de mis anuncios.
+> El domingo 27 puse el precio en el formulario de mis anuncios.
 >
 > Parece lo contrario de lo que hay que hacer. Todo el mundo te dice que el
 > formulario sea corto y fácil, para que entren más contactos.
 >
-> Y el formulario me funciona. De las 14 citas que han salido de mis anuncios,
-> 12 entraron por el formulario de Facebook.
+> Y el formulario trae citas. De las 14 que han salido de mis anuncios, 12
+> entraron por él.
 >
 > Pero también entra mucha gente que solo está mirando. De los primeros 20
 > contactos, 14 invertían menos de 500 € al mes en captación, o nada.
 >
-> Así que el domingo cambié dos cosas. El formulario pregunta ahora cuándo
+> Así que cambié dos cosas. El formulario pregunta ahora cuándo
 > quiere empezar (este mes, en uno a tres meses, o solo estoy mirando) y si le
 > encaja el precio de entrada.
 >
-> Lo interesante no es la pregunta. Es lo que hace el sistema con la
-> respuesta. Las dos suben o bajan la nota del contacto. Y si a las dos horas y
+> Lo que me gusta es lo que hace el sistema con las respuestas. Las dos suben o bajan la nota del contacto. Y si a las dos horas y
 > media no ha contestado:
 >
 > A → me avisa a mí y le llamo yo.
 > B y C → le llama mi comercial IA, una vez.
 > D → nadie le llama. Recibe mensajes y ya está.
 >
-> Antes llamábamos a todos igual. Ahora mi tiempo va a quien dijo «este mes» y
-> «sí».
+> Antes llamábamos a todos igual. Ahora mi tiempo va a los que tienen la nota
+> más alta. Decir «este mes» y «sí» la sube.
 >
 > No sé si va a funcionar. La regla es no tocar nada en siete días y contar
-> las reuniones que se celebran, no los contactos. Os lo cuento el lunes que
-> viene, salga como salga.
+> las reuniones que se celebran, no los contactos. Os lo cuento cuando
+> pasen los siete días, salga como salga.
 >
 > ¿Tú pones el precio antes de la primera llamada, o te lo guardas?

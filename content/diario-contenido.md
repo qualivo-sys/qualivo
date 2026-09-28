@@ -665,12 +665,41 @@ Informe en `content/borradores/revision-master-reviewer-2026-09-25.md`. El artí
 - **Primeros 20 contactos:** uso el recuento lead a lead y no el resumen del brief. La tabla da 6 que no invertían nada y el resumen dice 5. Con 14 de 20 por debajo de 500 € o en cero, la frase es la misma de todas formas.
 - **Dato propio que falta:** no publico cuántas reuniones se celebraron por cada vía. Deja deducir la tasa de plantones, regla de Maikel.
 
+### Master Reviewer (28-sep)
+
+Informe completo en `content/borradores/revision-master-reviewer-2026-09-28.md`.
+
+| Pieza | Nota | Veredicto |
+|---|---|---|
+| Artículo | 6 | publicar con cambios |
+| Reorientación de captación | 8 | publicar |
+| Post | 7 | publicar con cambios |
+
+Aplicados todos los críticos.
+
+- **Artículo:**
+  - Fuera el «no es X, es Y» del arranque y de la regla.
+  - Lo que no he podido comparar va como opinión o hipótesis, no como hecho: formulario frente a landing, «dos toques».
+  - La nota se explica como es. «Este mes» y «sí» suben la nota, pero no llevan solos a la llamada de Maikel.
+  - La medición es por nivel y por ruta, no «por vía con el mismo anuncio».
+  - El «Sigue leyendo» ya no enlaza a un artículo que publica la tasa de plantones.
+- **Post:**
+  - Fechas corregidas.
+  - La nota como criterio.
+  - En la imagen, la pregunta real del precio con la cifra tapada.
+- **Otros ficheros:**
+  - `llms.txt` sin la construcción prohibida.
+  - Schema de captación sin «no es X sino Y».
+  - `coste-por-lead` en pasado («el formulario preguntaba cuánto invertía»), para que no contradiga el de hoy.
+
+**Aviso importante del revisor.** La cifra de citas y plantones de la semana 38 («9 citas, 5 plantones») sigue publicada en cinco sitios: `blog/que-poner-en-tu-negocio-para-atraer-clientes/`, `blog/leads-pero-no-ventas/`, `blog/cliente-no-se-presenta-a-la-cita/`, `blog/index.html` y `llms.txt`. Va contra la regla de Maikel. No lo toco sin su ok, porque cambia tres artículos publicados. Lo añado a la pregunta pendiente del «5 de 9».
+
 ### Pendiente de Maikel
 
 1. **Precio en redes y blog:** ¿se dice la cifra en redes o en el blog? Recomiendo que no, de momento.
 2. **Pendientes de la semana pasada:**
    - Newsletter de plantones: ¿a los 22, desde GHL o con mi envío?
-   - Quitar el «5 de 9» del artículo del 23-sep.
+   - Quitar la tasa de plantones («5 de 9», «9 citas, 5 plantones») de los cinco sitios donde aparece. Recomiendo que sí, hoy mismo: tu regla lo pide y son cambios de una frase.
    - Levantar la pausa de LinkedIn. Ya hay cuatro piezas listas.
 
 ### Hipótesis
