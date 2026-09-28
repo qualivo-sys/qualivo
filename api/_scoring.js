@@ -82,7 +82,12 @@ function precualificar(c) {
   if (t(/^cuando-mirando/)) motivos.push('solo está mirando');
   if (!c.companyName || /^(madrid|barcelona|valencia|sevilla|m[aá]laga|bilbao|zaragoza|-|\.)$/i.test(String(c.companyName).trim())) motivos.push('no ha dado nombre de empresa');
   const agendado = A.tiene(c, 'act-agendado') || A.tiene(c, 'act-cita-confirmada') || A.tiene(c, 'reunion-celebrada');
-  return { si: motivos.length >= 2 && !agendado, motivos: motivos };
+  // Regla de Maikel (28-sep): si el scoring da bajo, SIEMPRE se precualifica. Bajo = tipología
+  // por debajo de 6 (niveles C y D: encaja poco aunque conteste rápido). Antes hacían falta dos
+  // señales de las de arriba y se colaban leads flojos (Antonio, 28-sep: nivel D sin precualificar).
+  const tipo = tipologia(c).puntos;
+  if (tipo < 6) motivos.unshift('scoring bajo (tipología ' + tipo + '/10)');
+  return { si: (tipo < 6 || motivos.length >= 2) && !agendado, motivos: motivos };
 }
 
 function comportamiento(c, mensajes) {
