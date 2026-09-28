@@ -318,6 +318,7 @@
     const sec = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0] || { txt: estado.cfg.nombre };
     const obj = OBJETIVOS.filter(function (o) { return o.id === estado.objetivo; })[0];
     $('#chipSector').textContent = sec.txt + (obj && obj.id !== 'todo' ? ' · ' + obj.txt : '');
+    $('#chipSimulado').hidden = !!estado.cfg.real;
     $('#reloj').innerHTML = '<i></i>' + M.hora(estado.ahora);
     $('#selSector').innerHTML = SECTORES.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
     if (QV.demo) QV.demo.pintarBotones();

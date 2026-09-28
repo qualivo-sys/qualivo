@@ -98,6 +98,8 @@ a { color: var(--verde); }
 .barra-titulo { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .sistema { font-weight: 800; font-size: 15px; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sistema b { color: var(--verde); font-weight: 800; }
+.chip-simulado { font-size: 11px; font-weight: 700; color: #9a5b00; background: #fff4e0; border: 1px solid #f3d9a8; padding: 3px 8px; border-radius: 999px; white-space: nowrap; margin-left: 6px; }
+.chip-simulado[hidden] { display: none; }
 .chip-sector { font-size: 11.5px; font-weight: 700; color: var(--gris); background: var(--hover); padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
 .barra-acciones { display: flex; align-items: center; gap: 8px; }
 .reloj { font-weight: 700; color: var(--gris); font-size: 12.5px; padding: 0 6px; display: inline-flex; align-items: center; gap: 6px; }
