@@ -697,8 +697,13 @@
         '<div><p class="bloque-t">Siguiente mejor acción</p><div class="nba-caja' + (nba.tipo === 'humano' ? ' humano' : '') + '"><h3>' + ico(icoAccion(nba.tipo)) + esc(nba.accion) + '</h3><p>' + esc(nba.por) + '</p>' +
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
           '<button class="btn btn-mini" type="button" data-reunion="' + c.id + '">Preparar la reunión</button>' +
-          '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
-          (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>' +
+          (estado.cfg.real
+            // Modo real: acciones de verdad sobre GHL (real.js), siempre con confirmación
+            ? '</div><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
+              '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
+              '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div id="accionReal"></div></div></div>'
+            : '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
+              (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>') +
         llamadasHtml(c) +
         '<div id="fichaTl"><p class="bloque-t">Línea de tiempo</p><div class="tarjeta"><div class="tl">' + tl.map(function (e) {
           return '<div class="tl-item ' + e.tipo + '"><time>' + M.fechaCorta(e.t, estado.ahora) + '</time><span class="dot">' + ico(icoTl[e.tipo] || 'auto') + '</span><p>' + esc(e.texto) + (e.detalle ? '<small>«' + esc(e.detalle) + '»</small>' : '') + (e.nota ? '<small>' + esc(e.nota) + '</small>' : '') + '</p></div>';

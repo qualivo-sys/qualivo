@@ -99,6 +99,9 @@
     c.tAct = abs(c.act != null ? c.act : c.creado);
     c.tToque = abs(c.toque);
     if (c.s.cita != null) c.s.tCita = t0 + c.s.cita * MIN; // la cita es futura (min hasta la cita)
+    // Modo real: todas las citas del calendario (pasadas y futuras), en minutos desde t0
+    // (redondeado a 5 minutos: t0 y la hora de lectura difieren unos segundos y una cita de las 10:00 caía en las 9:59)
+    if (Array.isArray(c.s.citas)) c.s.tCitas = c.s.citas.map(function (e) { return { t: Math.round((t0 + e.m * MIN) / (5 * MIN)) * 5 * MIN, estado: e.estado }; });
     if (c.s.prop != null) c.s.tProp = abs(c.s.prop);
     c.conv = (c.conv || []).map(function (m) { return { t: abs(m[0]), de: m[1], canal: m[2], texto: m[3] }; });
     c.ev = (c.ev || []).map(function (e) { return { t: abs(e[0]), tipo: e[1], texto: e[2] }; });

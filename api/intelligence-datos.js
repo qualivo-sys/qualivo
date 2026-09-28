@@ -235,6 +235,24 @@ async function mensajes(contactId) {
   });
 }
 
+// 28-sep: todas las citas de los calendarios de GHL en dos llamadas (una por calendario),
+// en vez de una por contacto: así no se acaba el tiempo y la agenda sale completa.
+async function citasCalendario(desde, hastaCitas) {
+  const loc = encodeURIComponent(process.env.GHL_LOCATION_ID);
+  const cals = await ghl('/calendars/?locationId=' + loc);
+  const porContacto = {};
+  for (const cal of (cals.calendars || [])) {
+    const d = await ghl('/calendars/events?locationId=' + loc + '&calendarId=' + encodeURIComponent(cal.id) + '&startTime=' + desde + '&endTime=' + hastaCitas);
+    (d.events || []).forEach(function (e) {
+      const cid = e.contactId;
+      const t = fecha(e.startTime);
+      if (!cid || !t) return;
+      (porContacto[cid] = porContacto[cid] || []).push({ t: t, estado: String(e.appointmentStatus || e.status || '').toLowerCase(), titulo: String(e.title || '').slice(0, 80) });
+    });
+  }
+  return porContacto;
+}
+
 async function citas(contactId) {
   const d = await ghl('/contacts/' + encodeURIComponent(contactId) + '/appointments');
   return (d.events || d.appointments || []).map(function (e) {
@@ -350,6 +368,7 @@ function convertir(c, msgs, citasC, trato, ahora, campanas) {
       manualWa: tiene('wa1-manual-maikel'), manualVoz: tiene('voz-manual-maikel'),
       agendado: tiene('act-agendado') || tiene('reunion-reservada'), actFin: tiene('act-fin'),
       cita: proxima ? proxima.t : null, citaOk: proxima ? /confirm/.test(proxima.estado) : false,
+      citas: (citasC || []).filter(function (e) { return !/cancel|invalid/.test(e.estado); }).map(function (e) { return { t: e.t, estado: e.estado }; }),
       noshow: !!(et && et.noshow) || pasadaNoShow || tiene('no-presentado'),
       luego: et && et.luego ? 'más adelante' : '', intentos: et && et.agotado ? 3 : intentos,
       primeraRespuestaMin: primeroNuestro ? Math.max(0, Math.round((primeroNuestro.t - creado) / 60000)) : null,
@@ -385,15 +404,25 @@ async function recoger() {
     });
   }
   leads.sort(function (a, b) { return (fecha(b.dateAdded) || 0) - (fecha(a.dateAdded) || 0); });
+  // El calendario va antes que las conversaciones: son dos llamadas y, si esperan al
+  // final, GHL ya está limitando (429) y la agenda sale vacía.
+  let citasPrevias = null;
+  for (let intento = 0; intento < 2 && !citasPrevias; intento++) {
+    try { citasPrevias = await citasCalendario(desde, ahora + 45 * 86400000); }
+    catch (e) { if (intento) avisos.push('No se ha podido leer el calendario de GHL.'); else await new Promise(function (r) { setTimeout(r, 1500); }); }
+  }
   const msgs = await enParalelo(leads, 5, function (c) { return mensajes(c.id); }, hasta - 8000);
   const conCita = leads.map(function (c, i) { return i; }).filter(function (i) {
     const tags = (leads[i].tags || []).map(String);
     const tr = porTrato[leads[i].id];
     return REUNION_TAGS.some(function (t) { return tags.indexOf(t) >= 0; }) || tratoVivo(tr);
   });
-  const citasPor = {};
-  const cs = await enParalelo(conCita, 5, function (i) { return citas(leads[i].id); }, hasta - 3000);
-  conCita.forEach(function (i, k) { citasPor[leads[i].id] = cs[k] || []; });
+  let citasPor = citasPrevias;
+  if (!citasPor) {
+    citasPor = {};
+    const cs = await enParalelo(conCita, 5, function (i) { return citas(leads[i].id); }, hasta - 3000);
+    conCita.forEach(function (i, k) { citasPor[leads[i].id] = cs[k] || []; });
+  }
   const faltan = msgs.filter(function (m) { return m === null; }).length;
   if (faltan) avisos.push('GHL tardaba: ' + faltan + ' conversaciones no se han leído en esta pasada.');
   const contactos = leads.map(function (c, i) { return convertir(c, msgs[i] || [], citasPor[c.id], porTrato[c.id], ahora, campanas); });
@@ -438,6 +467,83 @@ async function mover(b) {
 }
 
 // ---------------------------------------------------------------------------
+// Acciones de la ficha (modo real). Nada sale sin un clic de Maikel en la pantalla.
+// ---------------------------------------------------------------------------
+function idValido(id) {
+  const s = String(id || '').slice(0, 40);
+  if (!/^[A-Za-z0-9]+$/.test(s)) throw new Error('Contacto no válido.');
+  return s;
+}
+async function contactoGhl(id) {
+  const d = await ghl('/contacts/' + encodeURIComponent(id));
+  if (!d.contact) throw new Error('No encuentro el contacto en GHL.');
+  return d.contact;
+}
+
+// Borrador con IA a partir de la conversación real: si el último mensaje es suyo,
+// la respuesta; si es nuestro, un reenganche que retoma donde se quedó.
+async function redactar(b) {
+  const A = require('./_activacion.js'), AGT = require('./_agente.js');
+  const id = idValido(b.contactId);
+  const c = await contactoGhl(id);
+  const msgs = await A.mensajesDe(id);
+  const wa = msgs.filter(function (m) { return A.esWhatsApp(m) && String(m.status || '').toLowerCase() !== 'failed' && String(m.body || '').trim(); })
+    .sort(function (x, y) { return fecha(x.dateAdded) - fecha(y.dateAdded); });
+  const ultimo = wa[wa.length - 1];
+  if (!ultimo) throw new Error('No hay conversación de WhatsApp con esta persona: no tengo de dónde partir. Escríbele tú o activa la llamada.');
+  if (String(ultimo.direction) === 'inbound') {
+    let huecos = [];
+    try { huecos = await require('./agendar.js').huecosLibres(4); } catch (e) { huecos = []; }
+    const d = await AGT.decidir({ contacto: c, mensajes: wa, huecos: huecos, copiloto: true });
+    if (!d.texto) throw new Error('El agente no ha encontrado nada que contestar.');
+    return { texto: d.texto, tipo: 'respuesta', nota: d.accion === 'pasar' ? 'El agente cree que esto lo tienes que llevar tú.' : d.accion === 'proponer_cita' ? 'Propone una cita: si le dice que sí, resérvala tú.' : '' };
+  }
+  const dias = Math.max(1, Math.round((Date.now() - fecha(ultimo.dateAdded)) / 86400000));
+  const r = await AGT.reenganchar({ contacto: c, mensajes: wa, intento: 1, dias: dias });
+  if (!r.texto) throw new Error('No se ha podido redactar (' + (r.motivo || 'sin texto') + ').');
+  return { texto: r.texto, tipo: 'reenganche', nota: 'Lleva ' + dias + (dias === 1 ? ' día' : ' días') + ' sin contestar.' };
+}
+
+async function enviarWa(b) {
+  const A = require('./_activacion.js');
+  const id = idValido(b.contactId);
+  const texto = String(b.texto || '').trim();
+  if (!texto || texto.length > 1000) throw new Error('El mensaje está vacío o es demasiado largo.');
+  await A.enviarPorGateway(id, texto, { forzar: true });
+  await A.nota(id, 'WHATSAPP ENVIADO DESDE INTELLIGENCE (Maikel) · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }) + '\n' + texto).catch(function () {});
+  await A.etiquetar(id, ['wa-intelligence']).catch(function () {});
+  return { ok: true };
+}
+
+// «Activar agente de WhatsApp»: envía el mensaje aprobado y deja al agente contestar
+// solo a esta persona (etiqueta agente-auto, que salta el modo copiloto en _agente.js).
+async function agenteWa(b) {
+  const A = require('./_activacion.js');
+  const id = idValido(b.contactId);
+  if (b.texto) await enviarWa(b);
+  await A.etiquetar(id, ['agente-auto']);
+  // Quitar los frenos que harían callar al agente con esta persona
+  try {
+    await fetch(GHL + '/contacts/' + encodeURIComponent(id) + '/tags', { method: 'DELETE', headers: Object.assign({}, cabGHL(), { 'Content-Type': 'application/json' }), body: JSON.stringify({ tags: ['wa-humano', 'wa-agente-off'] }) });
+  } catch (e) { /* no bloquea */ }
+  await A.nota(id, 'AGENTE DE WHATSAPP ACTIVADO desde Intelligence (Maikel): contesta solo a esta persona, sin pasar por borrador.').catch(function () {});
+  return { ok: true };
+}
+
+async function llamar(b) {
+  const A = require('./_activacion.js');
+  const id = idValido(b.contactId);
+  const c = await contactoGhl(id);
+  if (!c.phone) throw new Error('No tiene teléfono en GHL.');
+  const nombre = c.firstName || c.contactName || '';
+  const r = await A.lanzarLlamada({ telefono: c.phone, nombre: nombre, contexto: { nombre: nombre, email: c.email || '', email_dominio: String(c.email || '').split('@')[1] || '', empresa: c.companyName || '', origen: 'el diagnóstico', fuga: '' } });
+  if (!r.ok) throw new Error('No se ha podido lanzar la llamada (' + (r.motivo || '') + ').');
+  await A.etiquetar(id, ['voz-intelligence']).catch(function () {});
+  await A.nota(id, 'LLAMADA DE RAQUEL lanzada desde Intelligence (Maikel) · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })).catch(function () {});
+  return { ok: true, id: r.id };
+}
+
+// ---------------------------------------------------------------------------
 module.exports = async function (req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
@@ -469,6 +575,16 @@ module.exports = async function (req, res) {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     try { return res.status(200).json(await mover(body || {})); }
     catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 120) }); }
+  }
+  if (req.method === 'POST' && (accion === 'redactar' || accion === 'enviar-wa' || accion === 'llamar' || accion === 'agente-wa')) {
+    // 28-sep: acciones desde la ficha. Solo con sesión y siempre por un clic de Maikel.
+    if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+    let body = req.body;
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
+    try {
+      const fn = { redactar: redactar, 'enviar-wa': enviarWa, llamar: llamar, 'agente-wa': agenteWa }[accion];
+      return res.status(200).json(await fn(body || {}));
+    } catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 160) }); }
   }
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });

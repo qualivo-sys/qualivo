@@ -471,7 +471,7 @@ async function atender(contactId, opciones) {
     // WhatsApp y el agente le responde como la agente de SU negocio, no como
     // Maikel. Flujo aparte, sin tocar la agenda real.
     if (A.tiene(c, 'demo') && !A.tiene(c, 'paid')) return atenderDemo(c, opciones, hecho);
-    if (!A.tiene(c, 'paid')) return Object.assign(hecho, { accion: 'callar', motivo: 'sin etiqueta paid' });
+    if (!A.tiene(c, 'paid') && !A.tiene(c, 'agente-auto')) return Object.assign(hecho, { accion: 'callar', motivo: 'sin etiqueta paid' });
     if (A.tiene(c, 'act-baja')) return Object.assign(hecho, { accion: 'callar', motivo: 'baja' });
     if (A.tiene(c, 'wa-humano')) return Object.assign(hecho, { accion: 'callar', motivo: 'lo lleva Maikel' });
     if (A.tiene(c, 'wa-agente-off')) return Object.assign(hecho, { accion: 'callar', motivo: 'agente apagado en este contacto' });
@@ -527,7 +527,10 @@ async function atender(contactId, opciones) {
     // Si Maikel ha escrito él en el hilo (mensaje saliente con usuario), el agente no se mete.
     const primerEntrante = wa.filter(function (m) { return String(m.direction) === 'inbound'; })[0];
     const humano = wa.some(function (m) { return String(m.direction) === 'outbound' && m.userId && Date.parse(m.dateAdded || 0) > Date.parse(primerEntrante.dateAdded || 0); });
-    if (humano && !COPILOTO) {
+    // «agente-auto» (28-sep): Maikel lo activa desde la ficha de Intelligence para
+    // que el agente conteste solo a esta persona, sin pasar por borrador.
+    const copiloto = COPILOTO && !A.tiene(c, 'agente-auto');
+    if (humano && !copiloto) {
       if (!opciones.simular) { await A.etiquetar(c.id, ['wa-humano']); await guardarEstado(c.id, Object.assign({}, estado, { candado: 0 })); }
       return Object.assign(hecho, { accion: 'callar', motivo: 'Maikel ya está escribiendo en este hilo' });
     }
@@ -542,11 +545,11 @@ async function atender(contactId, opciones) {
     }
 
     const huecos = await AG.huecosLibres(4);
-    const decision = await decidir({ contacto: c, mensajes: mensajes, huecos: huecos, copiloto: COPILOTO || !!opciones.simular });
+    const decision = await decidir({ contacto: c, mensajes: mensajes, huecos: huecos, copiloto: copiloto || !!opciones.simular });
     hecho.accion = decision.accion; hecho.texto = decision.texto; hecho.detalle = decision.detalle; hecho.motivo = decision.motivo;
     if (opciones.simular) return hecho;
 
-    if (COPILOTO) {
+    if (copiloto) {
       const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
       const cita = decision.detalle && decision.detalle.hora ? '\n\nPropone la cita: ' + decision.detalle.hora + ' (no está reservada: resérvala tú si le dices que sí).' : '';
       const aviso = decision.accion === 'pasar'

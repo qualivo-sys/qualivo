@@ -95,6 +95,76 @@
     moverEtapa(id, col.getAttribute('data-etapa-crm'));
   });
 
+  // ---------------------------------------------------------------------------
+  // Acciones de la ficha: generar mensaje, agente de WhatsApp y llamada de Raquel.
+  // Todo pasa por una confirmación; nada sale solo.
+  // ---------------------------------------------------------------------------
+  function post(accion, cuerpo) {
+    return fetch(API + '?accion=' + accion, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || ('Error ' + r.status)); return d; }); });
+  }
+  function caja() { return document.getElementById('accionReal'); }
+  function nombreDe(id) { const c = QV.contacto(id); return c ? c.n : 'esta persona'; }
+
+  function pintarBorrador(id, d, modo) {
+    const el = caja(); if (!el) return;
+    const agente = modo === 'agente';
+    el.innerHTML = '<p class="nota-ar">' + esc(agente ? 'Así empezaría el agente. Revísalo: al enviarlo, el agente contesta solo a ' + nombreDe(id) + ' a partir de ahora (si ya tiene cita, lo sigues llevando tú).' : 'Borrador del agente con su conversación real. Edítalo si quieres.') + (d.nota ? ' ' + esc(d.nota) : '') + '</p>' +
+      '<textarea id="arTexto">' + esc(d.texto) + '</textarea>' +
+      '<div class="fila">' +
+        (agente ? '<button class="btn btn-mini btn-primario" type="button" data-real="agente-enviar" data-id="' + id + '">Enviar y activar el agente</button>'
+                : '<button class="btn btn-mini btn-primario" type="button" data-real="enviar" data-id="' + id + '">Enviar por WhatsApp</button>') +
+        '<button class="btn btn-mini" type="button" data-real="copiar">Copiar</button>' +
+        '<button class="btn btn-mini" type="button" data-real="cerrar">Descartar</button>' +
+      '</div>';
+  }
+  function estadoCaja(html) { const el = caja(); if (el) el.innerHTML = html; }
+
+  document.addEventListener('click', function (e) {
+    const b = e.target.closest && e.target.closest('[data-real]');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const accion = b.getAttribute('data-real'), id = b.getAttribute('data-id');
+    if (accion === 'cerrar') { estadoCaja(''); return; }
+    if (accion === 'copiar') {
+      const t = document.getElementById('arTexto');
+      if (t) { try { navigator.clipboard.writeText(t.value); b.textContent = 'Copiado'; } catch (err) { t.select(); } }
+      return;
+    }
+    if (accion === 'redactar' || accion === 'agente') {
+      estadoCaja('<p class="nota-ar">Leyendo la conversación y redactando…</p>');
+      post('redactar', { contactId: id })
+        .then(function (d) { pintarBorrador(id, d, accion); })
+        .catch(function (err) {
+          if (accion === 'agente' && /No hay conversación/.test(err.message)) {
+            if (!window.confirm('No hay conversación de WhatsApp con ' + nombreDe(id) + '. ¿Activo igualmente el agente para que conteste solo cuando escriba?')) { estadoCaja(''); return; }
+            post('agente-wa', { contactId: id }).then(function () { estadoCaja('<p class="ok-ar">Agente activado para ' + esc(nombreDe(id)) + '.</p>'); }).catch(function (e2) { estadoCaja('<p class="err-ar">' + esc(e2.message) + '</p>'); });
+            return;
+          }
+          estadoCaja('<p class="err-ar">' + esc(err.message) + '</p>');
+        });
+      return;
+    }
+    if (accion === 'enviar' || accion === 'agente-enviar') {
+      const t = document.getElementById('arTexto');
+      const texto = t ? t.value.trim() : '';
+      if (!texto) return;
+      if (!window.confirm((accion === 'enviar' ? '¿Enviar este WhatsApp a ' : '¿Enviar y dejar que el agente conteste solo a ') + nombreDe(id) + '? Sale desde el número de Qualivo.')) return;
+      b.disabled = true; b.textContent = 'Enviando…';
+      post(accion === 'enviar' ? 'enviar-wa' : 'agente-wa', { contactId: id, texto: texto })
+        .then(function () { estadoCaja('<p class="ok-ar">' + (accion === 'enviar' ? 'Enviado. Queda la nota en GHL.' : 'Enviado y agente activado. Queda la nota en GHL.') + '</p>'); })
+        .catch(function (err) { b.disabled = false; b.textContent = 'Reintentar'; estadoCaja(caja().innerHTML + '<p class="err-ar">' + esc(err.message) + '</p>'); });
+      return;
+    }
+    if (accion === 'llamar') {
+      if (!window.confirm('¿Lanzar ahora la llamada de Raquel a ' + nombreDe(id) + '?')) return;
+      estadoCaja('<p class="nota-ar">Lanzando la llamada…</p>');
+      post('llamar', { contactId: id })
+        .then(function () { estadoCaja('<p class="ok-ar">Raquel está llamando a ' + esc(nombreDe(id)) + '. El resultado quedará en GHL al colgar.</p>'); })
+        .catch(function (err) { estadoCaja('<p class="err-ar">' + esc(err.message) + '</p>'); });
+    }
+  }, true);
+
   function moverEtapa(contactId, etapaId) {
     const est = QV.estado;
     const c = (est.contactos || []).filter(function (x) { return x.id === contactId; })[0];
@@ -166,6 +236,7 @@
       s: {
         raquel: s.raquel, noshow: s.noshow, intentos: s.intentos, luego: s.luego ? 'su momento' : '', luegoTxt: s.luego ? 'lo retomaría más adelante' : '',
         cita: s.cita ? (s.cita - ahora) / MIN : undefined, citaOk: s.citaOk,
+        citas: (s.citas || []).map(function (e) { return { m: (e.t - ahora) / MIN, estado: e.estado }; }),
         // lo que usa la pantalla Hoy
         wa1: s.wa1, wa1Fallido: s.wa1Fallido, wa2: s.wa2, voz1: s.voz1, vozRes: s.vozRes, manualWa: s.manualWa, manualVoz: s.manualVoz,
         agendado: s.agendado, actFin: s.actFin, primeraRespuestaMin: s.primeraRespuestaMin, esperaDesde: s.esperaDesde ? hace(s.esperaDesde, ahora) : null

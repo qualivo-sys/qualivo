@@ -209,6 +209,15 @@
     }
     const idxCita = cfg.recorrido.map(function (e) { return e.id; }).indexOf(a.etapa || (cfg.kpiEtapas || {}).entrevistas);
     estado.contactos.forEach(function (c) {
+      // Modo real: cada cita del calendario de GHL con su estado
+      if (cfg.real && c.s.tCitas && c.s.tCitas.length) {
+        c.s.tCitas.forEach(function (e) {
+          const futura = e.t >= ahora;
+          const est = /noshow|no_show/.test(e.estado) ? 'planton' : futura ? (/confirm/.test(e.estado) ? 'confirmada' : 'sinconfirmar') : 'asistio';
+          colocar(e.t, { c: c, por: porDe(c), estado: est, riesgo: futura && est === 'sinconfirmar' && e.t - ahora < 2880 * MIN });
+        });
+        return;
+      }
       if (c.s.tCita != null) {
         const riesgo = !c.s.citaOk && c.s.tCita - ahora < 2880 * MIN;
         colocar(c.s.tCita, { c: c, por: porDe(c), estado: c.s.tCita < ahora ? 'asistio' : c.s.citaOk ? 'confirmada' : 'sinconfirmar', riesgo: riesgo });

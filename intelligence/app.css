@@ -291,6 +291,15 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 
 /* Recorrido: columnas */
 .columnas { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.acciones-real { margin-top: 8px; gap: 6px; flex-wrap: wrap; }
+.acciones-real .btn svg { width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; }
+#accionReal:empty { display: none; }
+#accionReal { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 12px; }
+#accionReal textarea { width: 100%; min-height: 110px; font: inherit; font-size: 13.5px; line-height: 1.5; padding: 10px; border: 1px solid var(--borde); border-radius: 8px; resize: vertical; background: var(--superficie); color: var(--tinta); }
+#accionReal .fila { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+#accionReal .nota-ar { font-size: 12px; color: var(--gris); margin: 0 0 6px; }
+#accionReal .ok-ar { font-size: 13px; color: var(--verde); font-weight: 600; }
+#accionReal .err-ar { font-size: 13px; color: var(--coral); }
 .columnas-crm { grid-auto-columns: minmax(180px, 200px); }
 .columnas-crm .chipc { cursor: grab; }
 .columnas-crm .chipc.arrastrando { opacity: .45; }
