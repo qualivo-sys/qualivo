@@ -150,7 +150,8 @@ function etapaDe(nombre) {
   const n = String(nombre || '').toLowerCase();
   if (/cliente|piloto/.test(n)) return { i: 6, fin: 'ganado' };
   if (/perdido/.test(n)) return { i: 1, fin: 'perdido' };
-  if (/oferta|propuesta|negociaci/.test(n)) return { i: 5 };
+  // «Segunda reunión» (28-sep) va después de la oferta: no es un diagnóstico agendado.
+  if (/oferta|propuesta|negociaci|segunda/.test(n)) return { i: 5 };
   if (/no presentado/.test(n)) return { i: 3, noshow: true };
   if (/reuni|call agendada|agendad/.test(n)) return { i: 3 };
   if (/más adelante|mas adelante/.test(n)) return { i: 2, luego: true };
