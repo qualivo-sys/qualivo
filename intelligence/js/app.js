@@ -340,16 +340,41 @@
   QV.irA = irA;
 
   // Modo real: datos de contacto con accesos directos (WhatsApp, llamar, correo, GHL)
+  // En la demo, datos de contacto inventados y coherentes con el contacto (los botones no abren nada).
+  function contactoDemo(c) {
+    let h = 0; String(c.id).split('').forEach(function (ch) { h = (h * 31 + ch.charCodeAt(0)) % 100000000; });
+    const num = '+34 6' + String(10000000 + h % 90000000).replace(/(\d{2})(\d{3})(\d{3})/, '$1 $2 $3');
+    const limpio = function (t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ''); };
+    const dom = limpio(c.emp) ? limpio(c.emp).slice(0, 18) + '.es' : 'correo.es';
+    return { tel: num, email: limpio(c.n.split(' ')[0]) + '@' + dom, web: c.emp ? 'www.' + dom : '', ghl: '#' };
+  }
   function contactoRealHtml(c) {
-    if (!estado.cfg.real) return '';
-    const dig = String(c.tel || '').replace(/[^0-9]/g, '');
+    const real = estado.cfg.real;
+    const d = real ? c : contactoDemo(c);
+    const dig = String(d.tel || '').replace(/[^0-9]/g, '');
+    const a = function (href, cont, nueva) { return real ? '<a class="btn btn-mini" href="' + esc(href) + '"' + (nueva ? ' target="_blank" rel="noopener"' : '') + '>' + cont + '</a>' : '<a class="btn btn-mini" href="#" data-demo-enlace>' + cont + '</a>'; };
     const l = [];
-    if (c.tel) l.push('<a class="btn btn-mini" href="https://wa.me/' + dig + '" target="_blank" rel="noopener">' + ico('whatsapp') + 'WhatsApp · ' + esc(c.tel) + '</a>');
-    if (c.tel) l.push('<a class="btn btn-mini" href="tel:' + esc(c.tel) + '">' + ico('voz') + 'Llamar</a>');
-    if (c.email) l.push('<a class="btn btn-mini" href="mailto:' + esc(c.email) + '">' + ico('correo') + esc(c.email) + '</a>');
-    if (c.web) l.push('<a class="btn btn-mini" href="' + esc(/^https?:/.test(c.web) ? c.web : 'https://' + c.web) + '" target="_blank" rel="noopener">' + ico('web') + 'Web</a>');
-    if (c.ghl) l.push('<a class="btn btn-mini" href="' + esc(c.ghl) + '" target="_blank" rel="noopener">Abrir en GHL</a>');
+    if (d.tel) l.push(a('https://wa.me/' + dig, ico('whatsapp') + 'WhatsApp · ' + esc(d.tel), true));
+    if (d.tel) l.push(a('tel:' + d.tel, ico('voz') + 'Llamar'));
+    if (d.email) l.push(a('mailto:' + d.email, ico('correo') + esc(d.email)));
+    if (d.web) l.push(a(/^https?:/.test(d.web) ? d.web : 'https://' + d.web, ico('web') + 'Web', true));
+    if (d.ghl) l.push(a(d.ghl, real ? 'Abrir en GHL' : 'Abrir en el CRM', true));
     return l.length ? '<div class="contacto-real">' + l.join('') + '</div>' : '';
+  }
+  // En la demo, «lo que respondió en el formulario» sale de los datos del propio contacto.
+  const PREG_DEMO = { inv: '¿Cuánto invertís al mes en conseguir clientes?', vol: '¿Cuántas solicitudes os llegan al mes?', fuga: '¿Dónde crees que se os escapa el negocio?', tipo: 'Tipo de cliente', licencia: 'Situación del proyecto', sector: 'Sector', cuando: '¿Cuándo queréis empezar?', precio: '¿Os encaja el precio?', curso: 'Curso que le interesa', tratamiento: 'Tratamiento que le interesa', plazas: 'Plazas', zona: 'Zona', cerca: 'Distancia a la clínica', seguro: 'Seguro', edad: 'Edad', empresa: 'Empresa' };
+  const VAL_DEMO = { menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €', '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €', nada: 'Nada todavía' };
+  function formularioDemoHtml(c) {
+    const filas = [[estado.cfg.t.Producto || 'Qué le interesa', c.prod]];
+    Object.keys(c.f || {}).forEach(function (k) {
+      const v = c.f[k];
+      if (v == null || v === '' || typeof v === 'object' || typeof v === 'boolean') return;
+      filas.push([PREG_DEMO[k] || (k.charAt(0).toUpperCase() + k.slice(1)), VAL_DEMO[v] || String(v)]);
+    });
+    const primero = (c.conv || []).filter(function (m) { return m.de === 'c'; })[0];
+    if (primero) filas.push(['Lo que escribió', '«' + primero.texto.slice(0, 160) + (primero.texto.length > 160 ? '…' : '') + '»']);
+    return '<div class="form-real tarjeta"><dl class="form-dl">' + filas.filter(function (f) { return f[1]; }).map(function (f) { return '<dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd>'; }).join('') + '</dl>' +
+      '<p class="gris" style="font-size:11.5px;margin-top:6px">Formulario · ' + esc(c.prod || '') + ' · datos de ejemplo</p></div>';
   }
   // Modo real: generar mensaje, agente de WhatsApp y llamada de Raquel (real.js hace el resto)
   function accionesRealHtml(c) {
@@ -556,14 +581,14 @@
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
-        hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + (cfg.real ? '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' : '') +
+        hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
             const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? 'Agente de WhatsApp' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
           '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
-          (cfg.real ? '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div>' : '') + '</div>';
+          '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div></div>';
       }
       return cabecera('Conversaciones', '¿Qué está haciendo el sistema?', 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
         '<div class="conv-caja"><div class="conv-lista">' + lado + '</div>' + hilo + '</div>';
@@ -590,15 +615,15 @@
       const cols = cfg.columnasCrm && cfg.columnasCrm.length ? columnasCrm(cfg.columnasCrm) : cfg.recorrido.slice(1).map(function (e, i) {
         const idx = i + 1;
         const cs = estado.contactos.filter(function (c) { return c.etapa === idx && c.fin !== 'perdido'; });
-        return '<div class="columna"><h4><span>' + esc(e.txt) + '</span><span class="gris-2">' + cs.length + '</span></h4>' + cs.map(function (c) {
-          return '<div class="chipc" data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
+        return '<div class="columna" data-etapa-demo="' + idx + '"><h4><span>' + esc(e.txt) + '</span><span class="gris-2">' + cs.length + '</span></h4>' + cs.map(function (c) {
+          return '<div class="chipc" draggable="true" data-mover-demo="' + c.id + '" data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
         }).join('') + '</div>';
       }).join('');
       return cabecera('Recorrido', '¿Dónde se pierde el negocio?', 'Del anuncio a ' + T.laVenta + '. Cada salto compara lo que pasa hoy con lo que pasa cuando el seguimiento está bien hecho.') +
         '<div class="rejilla r-2"><div class="tarjeta"><h3>Últimos 30 días <span class="sub">% que pasa de la etapa anterior</span></h3><div class="embudo" style="margin-top:12px">' + filas + '</div></div>' +
         '<div class="tarjeta"><h3>Fugas, de mayor a menor</h3><div class="tabla-caja" style="margin-top:10px;border:0"><table class="tabla"><thead><tr><th>Fuga</th><th class="num">Hoy</th><th class="num">Bien hecho</th><th class="num">Al mes</th></tr></thead><tbody>' + tablaFugas + '</tbody></table></div>' +
         (peor ? '<p class="gris" style="font-size:12.5px;margin-top:10px">La mayor: <b style="color:var(--tinta)">' + esc((nombres[peor.a.id] || {}).exp || '') + '</b>.</p>' : '') + '</div></div>' +
-        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">' + (cfg.columnasCrm && cfg.columnasCrm.length ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa en GHL</span>' : 'Hoy en el sistema, por etapa') + '</p><div class="columnas' + (cfg.columnasCrm && cfg.columnasCrm.length ? ' columnas-crm' : '') + '">' + cols + '</div>');
+        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">' + (cfg.columnasCrm && cfg.columnasCrm.length ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa en GHL</span>' : 'Hoy en el sistema, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa</span>') + '</p><div class="columnas columnas-crm">' + cols + '</div>');
     },
 
     senales: function () {
@@ -714,15 +739,13 @@
       '<div class="ficha-cuerpo">' +
         '<div><p class="bloque-t">Inteligencia</p>' + scoresHtml(x) + '</div>' +
         '<div><p class="bloque-t">Por qué</p><div class="porque-caja">' + esc(x.porque) + '</div></div>' +
-        (estado.cfg.real ? '<div><p class="bloque-t">Lo que respondió en el formulario</p><div class="form-real tarjeta" data-form-real="' + c.id + '"><p class="gris" style="font-size:13px">Cargando…</p></div></div>' : '') +
+        '<div><p class="bloque-t">Lo que respondió en el formulario</p>' + (estado.cfg.real ? '<div class="form-real tarjeta" data-form-real="' + c.id + '"><p class="gris" style="font-size:13px">Cargando…</p></div>' : formularioDemoHtml(c)) + '</div>' +
         '<div><p class="bloque-t">Siguiente mejor acción</p><div class="nba-caja' + (nba.tipo === 'humano' ? ' humano' : '') + '"><h3>' + ico(icoAccion(nba.tipo)) + esc(nba.accion) + '</h3><p>' + esc(nba.por) + '</p>' +
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
           '<button class="btn btn-mini" type="button" data-reunion="' + c.id + '">Preparar la reunión</button>' +
-          (estado.cfg.real
-            // Modo real: acciones de verdad sobre GHL (real.js), siempre con confirmación
-            ? '</div>' + accionesRealHtml(c) + '</div></div>'
-            : '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
-              (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>') +
+          // Acciones: en real las hace real.js sobre GHL; en la demo, acciones-demo.js las simula
+          (!estado.cfg.real && nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') +
+          '</div>' + accionesRealHtml(c) + '</div></div>' +
         llamadasHtml(c) +
         '<div id="fichaTl"><p class="bloque-t">Línea de tiempo</p><div class="tarjeta"><div class="tl">' + tl.map(function (e) {
           return '<div class="tl-item ' + e.tipo + '"><time>' + M.fechaCorta(e.t, estado.ahora) + '</time><span class="dot">' + ico(icoTl[e.tipo] || 'auto') + '</span><p>' + esc(e.texto) + (e.detalle ? '<small>«' + esc(e.detalle) + '»</small>' : '') + (e.nota ? '<small>' + esc(e.nota) + '</small>' : '') + '</p></div>';

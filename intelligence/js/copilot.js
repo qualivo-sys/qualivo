@@ -598,5 +598,5 @@
   });
   $('#formPregunta button').innerHTML = ico('enviar');
 
-  QV.copilot = { agencia: agencia, reiniciar: reiniciar, preguntarSugerida: preguntarSugerida, preguntarLibre: preguntarLibre, generar: generar, responderDet: responderDet, todas: todas, masParecida: masParecida, contexto: contexto, pintarBloques: pintarBloques, H: H };
+  QV.copilot = { borrador: borrador, agencia: agencia, reiniciar: reiniciar, preguntarSugerida: preguntarSugerida, preguntarLibre: preguntarLibre, generar: generar, responderDet: responderDet, todas: todas, masParecida: masParecida, contexto: contexto, pintarBloques: pintarBloques, H: H };
 })();

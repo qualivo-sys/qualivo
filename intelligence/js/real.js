@@ -123,7 +123,7 @@
 
   document.addEventListener('click', function (e) {
     const b = e.target.closest && e.target.closest('[data-real]');
-    if (!b) return;
+    if (!b || !(QV.estado.cfg && QV.estado.cfg.real)) return; // en la demo lo simula acciones-demo.js
     e.preventDefault(); e.stopPropagation();
     const accion = b.getAttribute('data-real'), id = b.getAttribute('data-id');
     const box = cajaDe(b);

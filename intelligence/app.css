@@ -628,3 +628,5 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .rd-meta { display: flex; gap: 10px; align-items: flex-start; }
 .rd-meta svg { flex: none; width: 20px; height: 20px; margin-top: 2px; }
 .rd-meta p { font-size: 15px; line-height: 1.45; font-weight: 600; }
+.toast-demo { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--tinta); color: #fff; font-size: 13px; padding: 10px 16px; border-radius: 10px; max-width: min(520px, calc(100vw - 32px)); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 200; }
+.toast-demo.visible { opacity: 1; transform: translate(-50%, 0); }
