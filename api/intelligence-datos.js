@@ -305,7 +305,7 @@ async function anuncios() {
 }
 
 // ---------------------------------------------------------------------------
-// Un contacto de GHL → lo que necesita el motor (sin correo ni teléfono)
+// Un contacto de GHL → lo que necesita el motor (con teléfono y correo solo porque la pantalla va con contraseña)
 // ---------------------------------------------------------------------------
 function convertir(c, msgs, citasC, trato, ahora, campanas) {
   const tags = (c.tags || []).map(String);
@@ -356,6 +356,9 @@ function convertir(c, msgs, citasC, trato, ahora, campanas) {
     etapa: etapa,
     etapaNombre: trato ? trato.etapa : '',
     tratoId: trato ? trato.id : '',
+    // 28-sep: con sesión, la ficha enseña cómo contactar (WhatsApp, llamar, correo) y el enlace a GHL
+    tel: c.phone || '', email: c.email || '', web: c.website || '',
+    ghl: 'https://app.gohighlevel.com/v2/location/' + encodeURIComponent(process.env.GHL_LOCATION_ID || '') + '/contacts/detail/' + encodeURIComponent(c.id),
     etapaId: trato && trato.embudo === EMBUDOS[0] && !/lost|abandon/.test(String(trato.estado || '')) ? trato.etapaId : '',
     fin: et && et.fin ? et.fin : (trato && /lost/.test(String(trato.estado)) ? 'perdido' : ''),
     valor: trato ? trato.valor : 0,
@@ -545,6 +548,46 @@ async function llamar(b) {
   return { ok: true, id: r.id };
 }
 
+// Lo que respondió en el formulario de Meta, con las preguntas y respuestas tal como las vio
+// (se lee del propio lead en Meta; si no se puede, de las etiquetas que dejó meta-leadform).
+async function formulario(b) {
+  const id = idValido(b.contactId);
+  const c = await contactoGhl(id);
+  const tags = (c.tags || []).map(String);
+  const idLead = (tags.filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0] || '').slice(10);
+  const idForm = (tags.filter(function (t) { return /^form-\d+$/.test(t); })[0] || '').slice(5);
+  const token = process.env.META_LEADFORM_TOKEN || process.env.META_ADS_TOKEN || '';
+  const filas = [];
+  if (idLead && token) {
+    try {
+      const lead = await meta('/' + idLead, { fields: 'created_time,field_data,ad_name' });
+      let preguntas = {};
+      if (idForm) {
+        try {
+          const f = await meta('/' + idForm, { fields: 'name,questions' });
+          (f.questions || []).forEach(function (q) {
+            const ops = {};
+            (q.options || []).forEach(function (o) { ops[o.key] = o.value; });
+            preguntas[q.key] = { label: q.label || '', ops: ops };
+          });
+        } catch (e) { preguntas = {}; }
+      }
+      const BASICOS = { full_name: 'Nombre', email: 'Correo', phone_number: 'Teléfono', company_name: 'Empresa', website: 'Web', city: 'Ciudad' };
+      (lead.field_data || []).forEach(function (fd) {
+        const q = preguntas[fd.name] || {};
+        const v = (fd.values || []).map(function (x) { return (q.ops && q.ops[x]) || x; }).join(', ');
+        filas.push({ p: BASICOS[fd.name] || q.label || String(fd.name).replace(/_/g, ' '), r: v, basico: !!BASICOS[fd.name] });
+      });
+      return { origen: 'Formulario de Meta', fecha: lead.created_time || '', anuncio: lead.ad_name || '', filas: filas };
+    } catch (e) { /* sigue con las etiquetas */ }
+  }
+  const de = function (pref) { const t = tags.filter(function (x) { return x.indexOf(pref) === 0; }).sort(function (a, b2) { return a.length - b2.length; })[0]; return t ? t.slice(pref.length).replace(/-/g, ' ') : ''; };
+  [['Sector', 'sector-'], ['Inversión en anuncios', 'inv-'], ['Solicitudes al mes', 'vol-'], ['Dónde cree que se le escapa', 'fuga-'], ['Cuándo quiere empezar', 'cuando-'], ['¿Le encaja el precio?', 'precio-']].forEach(function (x) {
+    const v = de(x[1]); if (v && !/^\d+$/.test(v)) filas.push({ p: x[0], r: v });
+  });
+  return { origen: filas.length ? 'Etiquetas del CRM' : '', filas: filas };
+}
+
 // Estado en directo de una llamada de Raquel (Vapi): sonando, en curso o terminada con su resumen.
 async function estadoLlamada(b) {
   const id = String(b.id || '').slice(0, 60);
@@ -596,13 +639,13 @@ module.exports = async function (req, res) {
     try { return res.status(200).json(await mover(body || {})); }
     catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 120) }); }
   }
-  if (req.method === 'POST' && (accion === 'redactar' || accion === 'enviar-wa' || accion === 'llamar' || accion === 'agente-wa' || accion === 'estado-llamada')) {
+  if (req.method === 'POST' && (accion === 'redactar' || accion === 'enviar-wa' || accion === 'llamar' || accion === 'agente-wa' || accion === 'estado-llamada' || accion === 'formulario')) {
     // 28-sep: acciones desde la ficha. Solo con sesión y siempre por un clic de Maikel.
     if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
     let body = req.body;
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     try {
-      const fn = { redactar: redactar, 'enviar-wa': enviarWa, llamar: llamar, 'agente-wa': agenteWa, 'estado-llamada': estadoLlamada }[accion];
+      const fn = { redactar: redactar, 'enviar-wa': enviarWa, llamar: llamar, 'agente-wa': agenteWa, 'estado-llamada': estadoLlamada, formulario: formulario }[accion];
       return res.status(200).json(await fn(body || {}));
     } catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 160) }); }
   }

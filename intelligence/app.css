@@ -293,7 +293,23 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .columnas { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
 .acciones-real { margin-top: 8px; gap: 6px; flex-wrap: wrap; }
 .acciones-real .btn svg { width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; }
-#accionReal:empty { display: none; }
+#accionReal:empty, .accion-real-caja:empty { display: none; }
+.accion-real-caja { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 12px; }
+.accion-real-caja textarea { width: 100%; min-height: 110px; font: inherit; font-size: 13.5px; line-height: 1.5; padding: 10px; border: 1px solid var(--borde); border-radius: 8px; resize: vertical; background: var(--superficie); color: var(--tinta); }
+.accion-real-caja .fila { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.accion-real-caja .nota-ar { font-size: 12px; color: var(--gris); margin: 0 0 6px; }
+.accion-real-caja .ok-ar { font-size: 13px; color: var(--verde); font-weight: 600; }
+.accion-real-caja .err-ar { font-size: 13px; color: var(--coral); }
+.form-real { padding: 12px 14px; }
+.form-dl { margin: 0; display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 6px 12px; font-size: 13px; }
+.form-dl dt { color: var(--gris); }
+.form-dl dd { margin: 0; font-weight: 600; }
+.contacto-real a { text-decoration: none; }
+.contacto-real { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.contacto-real .btn svg, .acciones-real .btn svg { width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; }
+.hilo-contacto { padding: 0 16px 8px; border-bottom: 1px solid var(--borde); }
+.hilo-contacto .contacto-real { margin-top: 0; }
+.hilo-acciones { padding: 10px 16px 14px; border-top: 1px solid var(--borde); }
 .punto-vivo { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); margin-right: 6px; animation: latido 1.2s infinite; }
 @keyframes latido { 50% { opacity: .25; } }
 #accionReal { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 12px; }

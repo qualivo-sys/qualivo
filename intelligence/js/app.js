@@ -339,6 +339,25 @@
   }
   QV.irA = irA;
 
+  // Modo real: datos de contacto con accesos directos (WhatsApp, llamar, correo, GHL)
+  function contactoRealHtml(c) {
+    if (!estado.cfg.real) return '';
+    const dig = String(c.tel || '').replace(/[^0-9]/g, '');
+    const l = [];
+    if (c.tel) l.push('<a class="btn btn-mini" href="https://wa.me/' + dig + '" target="_blank" rel="noopener">' + ico('whatsapp') + 'WhatsApp · ' + esc(c.tel) + '</a>');
+    if (c.tel) l.push('<a class="btn btn-mini" href="tel:' + esc(c.tel) + '">' + ico('voz') + 'Llamar</a>');
+    if (c.email) l.push('<a class="btn btn-mini" href="mailto:' + esc(c.email) + '">' + ico('correo') + esc(c.email) + '</a>');
+    if (c.web) l.push('<a class="btn btn-mini" href="' + esc(/^https?:/.test(c.web) ? c.web : 'https://' + c.web) + '" target="_blank" rel="noopener">' + ico('web') + 'Web</a>');
+    if (c.ghl) l.push('<a class="btn btn-mini" href="' + esc(c.ghl) + '" target="_blank" rel="noopener">Abrir en GHL</a>');
+    return l.length ? '<div class="contacto-real">' + l.join('') + '</div>' : '';
+  }
+  // Modo real: generar mensaje, agente de WhatsApp y llamada de Raquel (real.js hace el resto)
+  function accionesRealHtml(c) {
+    return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
+      '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
+      '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div class="accion-real-caja"></div></div>';
+  }
+
   // Modo real: las columnas son las etapas del embudo de Prospección de GHL y las
   // tarjetas se arrastran de una a otra (real.js guarda el cambio en el CRM).
   function columnasCrm(etapas) {
@@ -537,13 +556,14 @@
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
-        hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' +
+        hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + (cfg.real ? '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' : '') +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
             const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? 'Agente de WhatsApp' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
-          '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div></div>';
+          '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
+          (cfg.real ? '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div>' : '') + '</div>';
       }
       return cabecera('Conversaciones', '¿Qué está haciendo el sistema?', 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
         '<div class="conv-caja"><div class="conv-lista">' + lado + '</div>' + hilo + '</div>';
@@ -690,18 +710,17 @@
     const nba = x.nba;
     $('#ficha').innerHTML =
       '<div class="ficha-cab"><div class="l1">' + avatar(c) + '<div><h2>' + esc(c.n) + '</h2><div class="meta" style="font-size:13px">' + esc(metaContacto(c)) + '</div></div>' + pillPrio(x.prio) + '<button class="btn btn-icono" type="button" data-cerrar-ficha aria-label="Cerrar">' + ico('cerrar') + '</button></div>' +
-      '<div class="datos">' + datos.filter(function (d) { return d[1] && d[1] !== '—'; }).map(function (d) { return '<span>' + esc(d[0]) + ': <b>' + esc(d[1]) + '</b></span>'; }).join('') + '</div></div>' +
+      '<div class="datos">' + datos.filter(function (d) { return d[1] && d[1] !== '—'; }).map(function (d) { return '<span>' + esc(d[0]) + ': <b>' + esc(d[1]) + '</b></span>'; }).join('') + '</div>' + contactoRealHtml(c) + '</div>' +
       '<div class="ficha-cuerpo">' +
         '<div><p class="bloque-t">Inteligencia</p>' + scoresHtml(x) + '</div>' +
         '<div><p class="bloque-t">Por qué</p><div class="porque-caja">' + esc(x.porque) + '</div></div>' +
+        (estado.cfg.real ? '<div><p class="bloque-t">Lo que respondió en el formulario</p><div class="form-real tarjeta" data-form-real="' + c.id + '"><p class="gris" style="font-size:13px">Cargando…</p></div></div>' : '') +
         '<div><p class="bloque-t">Siguiente mejor acción</p><div class="nba-caja' + (nba.tipo === 'humano' ? ' humano' : '') + '"><h3>' + ico(icoAccion(nba.tipo)) + esc(nba.accion) + '</h3><p>' + esc(nba.por) + '</p>' +
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
           '<button class="btn btn-mini" type="button" data-reunion="' + c.id + '">Preparar la reunión</button>' +
           (estado.cfg.real
             // Modo real: acciones de verdad sobre GHL (real.js), siempre con confirmación
-            ? '</div><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
-              '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
-              '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div id="accionReal"></div></div></div>'
+            ? '</div>' + accionesRealHtml(c) + '</div></div>'
             : '<button class="btn btn-mini" type="button" data-generar="' + c.id + '">Generar mensaje</button>' +
               (nba.id !== 'asignado' && !c.fin ? '<button class="btn btn-mini btn-primario" type="button" data-asignar="' + c.id + '">Asignar ' + esc(M.al(T.comercial)) + '</button>' : '') + '</div></div></div>') +
         llamadasHtml(c) +

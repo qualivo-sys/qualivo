@@ -103,14 +103,16 @@
     return fetch(API + '?accion=' + accion, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || ('Error ' + r.status)); return d; }); });
   }
-  function caja() { return document.getElementById('accionReal'); }
   function nombreDe(id) { const c = QV.contacto(id); return c ? c.n : 'esta persona'; }
+  // Cada bloque de acciones (ficha o conversación) tiene su propia caja de resultado.
+  function cajaDe(el) { const b = el && el.closest && el.closest('[data-bloque-real]'); return b ? b.querySelector('.accion-real-caja') : null; }
+  function pintar(box, html) { if (box) box.innerHTML = html; }
 
-  function pintarBorrador(id, d, modo) {
-    const el = caja(); if (!el) return;
+  function pintarBorrador(box, id, d, modo) {
+    if (!box) return;
     const agente = modo === 'agente';
-    el.innerHTML = '<p class="nota-ar">' + esc(agente ? 'Así empezaría el agente. Revísalo: al enviarlo, el agente contesta solo a ' + nombreDe(id) + ' a partir de ahora (si ya tiene cita, lo sigues llevando tú).' : 'Borrador del agente con su conversación real. Edítalo si quieres.') + (d.nota ? ' ' + esc(d.nota) : '') + '</p>' +
-      '<textarea id="arTexto">' + esc(d.texto) + '</textarea>' +
+    box.innerHTML = '<p class="nota-ar">' + esc(agente ? 'Así empezaría el agente. Revísalo: al enviarlo, el agente contesta solo a ' + nombreDe(id) + ' a partir de ahora (si ya tiene cita, lo sigues llevando tú).' : 'Borrador del agente con su conversación real. Edítalo si quieres.') + (d.nota ? ' ' + esc(d.nota) : '') + '</p>' +
+      '<textarea class="ar-texto">' + esc(d.texto) + '</textarea>' +
       '<div class="fila">' +
         (agente ? '<button class="btn btn-mini btn-primario" type="button" data-real="agente-enviar" data-id="' + id + '">Enviar y activar el agente</button>'
                 : '<button class="btn btn-mini btn-primario" type="button" data-real="enviar" data-id="' + id + '">Enviar por WhatsApp</button>') +
@@ -118,63 +120,62 @@
         '<button class="btn btn-mini" type="button" data-real="cerrar">Descartar</button>' +
       '</div>';
   }
-  function estadoCaja(html) { const el = caja(); if (el) el.innerHTML = html; }
 
   document.addEventListener('click', function (e) {
     const b = e.target.closest && e.target.closest('[data-real]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
     const accion = b.getAttribute('data-real'), id = b.getAttribute('data-id');
-    if (accion === 'cerrar') { estadoCaja(''); return; }
+    const box = cajaDe(b);
+    if (accion === 'cerrar') { pintar(box, ''); return; }
     if (accion === 'copiar') {
-      const t = document.getElementById('arTexto');
+      const t = box && box.querySelector('.ar-texto');
       if (t) { try { navigator.clipboard.writeText(t.value); b.textContent = 'Copiado'; } catch (err) { t.select(); } }
       return;
     }
     if (accion === 'redactar' || accion === 'agente') {
-      estadoCaja('<p class="nota-ar">Leyendo la conversación y redactando…</p>');
+      pintar(box, '<p class="nota-ar">Leyendo la conversación y redactando…</p>');
       post('redactar', { contactId: id })
-        .then(function (d) { pintarBorrador(id, d, accion); })
+        .then(function (d) { pintarBorrador(box, id, d, accion); })
         .catch(function (err) {
           if (accion === 'agente' && /No hay conversación/.test(err.message)) {
-            if (!window.confirm('No hay conversación de WhatsApp con ' + nombreDe(id) + '. ¿Activo igualmente el agente para que conteste solo cuando escriba?')) { estadoCaja(''); return; }
-            post('agente-wa', { contactId: id }).then(function () { estadoCaja('<p class="ok-ar">Agente activado para ' + esc(nombreDe(id)) + '.</p>'); }).catch(function (e2) { estadoCaja('<p class="err-ar">' + esc(e2.message) + '</p>'); });
+            if (!window.confirm('No hay conversación de WhatsApp con ' + nombreDe(id) + '. ¿Activo igualmente el agente para que conteste solo cuando escriba?')) { pintar(box, ''); return; }
+            post('agente-wa', { contactId: id }).then(function () { pintar(box, '<p class="ok-ar">Agente activado para ' + esc(nombreDe(id)) + '.</p>'); }).catch(function (e2) { pintar(box, '<p class="err-ar">' + esc(e2.message) + '</p>'); });
             return;
           }
-          estadoCaja('<p class="err-ar">' + esc(err.message) + '</p>');
+          pintar(box, '<p class="err-ar">' + esc(err.message) + '</p>');
         });
       return;
     }
     if (accion === 'enviar' || accion === 'agente-enviar') {
-      const t = document.getElementById('arTexto');
+      const t = box && box.querySelector('.ar-texto');
       const texto = t ? t.value.trim() : '';
       if (!texto) return;
       if (!window.confirm((accion === 'enviar' ? '¿Enviar este WhatsApp a ' : '¿Enviar y dejar que el agente conteste solo a ') + nombreDe(id) + '? Sale desde el número de Qualivo.')) return;
       b.disabled = true; b.textContent = 'Enviando…';
       post(accion === 'enviar' ? 'enviar-wa' : 'agente-wa', { contactId: id, texto: texto })
-        .then(function () { estadoCaja('<p class="ok-ar">' + (accion === 'enviar' ? 'Enviado. Queda la nota en GHL.' : 'Enviado y agente activado. Queda la nota en GHL.') + '</p>'); })
-        .catch(function (err) { b.disabled = false; b.textContent = 'Reintentar'; estadoCaja(caja().innerHTML + '<p class="err-ar">' + esc(err.message) + '</p>'); });
+        .then(function () { pintar(box, '<p class="ok-ar">' + (accion === 'enviar' ? 'Enviado. Queda la nota en GHL.' : 'Enviado y agente activado. Queda la nota en GHL.') + '</p>'); })
+        .catch(function (err) { b.disabled = false; b.textContent = 'Reintentar'; if (box) box.insertAdjacentHTML('beforeend', '<p class="err-ar">' + esc(err.message) + '</p>'); });
       return;
     }
     if (accion === 'llamar') {
       if (!window.confirm('¿Lanzar ahora la llamada de Raquel a ' + nombreDe(id) + '?')) return;
-      estadoCaja('<p class="nota-ar">Lanzando la llamada…</p>');
+      pintar(box, '<p class="nota-ar">Lanzando la llamada…</p>');
       post('llamar', { contactId: id })
-        .then(function (d) { seguirLlamada(d.id, id, Date.now()); })
-        .catch(function (err) { estadoCaja('<p class="err-ar">' + esc(err.message) + '</p>'); });
+        .then(function (d) { seguirLlamada(box, d.id, id, Date.now()); })
+        .catch(function (err) { pintar(box, '<p class="err-ar">' + esc(err.message) + '</p>'); });
     }
   }, true);
 
   // Seguimiento en directo: pregunta a Vapi cada 4 segundos hasta que cuelga (máximo 8 minutos).
-  function seguirLlamada(callId, contactId, desde) {
+  function seguirLlamada(box, callId, contactId, desde) {
     const quien = esc(nombreDe(contactId));
     const mmss = function (s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
-    if (!callId) { estadoCaja('<p class="ok-ar">Raquel está llamando a ' + quien + '. El resultado quedará en GHL al colgar.</p>'); return; }
+    if (!callId) { pintar(box, '<p class="ok-ar">Raquel está llamando a ' + quien + '. El resultado quedará en GHL al colgar.</p>'); return; }
     post('estado-llamada', { id: callId }).then(function (d) {
-      const el = caja();
-      if (!el) return; // se ha cerrado la ficha: el resultado queda igualmente en GHL
+      if (!box || !box.isConnected) return; // se ha cerrado la vista: el resultado queda igualmente en GHL
       if (d.estado === 'ended') {
-        el.innerHTML = '<p class="ok-ar">Llamada terminada · ' + mmss(d.segundos) + ' · ' + esc(d.fin) + '</p>' +
+        box.innerHTML = '<p class="ok-ar">Llamada terminada · ' + mmss(d.segundos) + ' · ' + esc(d.fin) + '</p>' +
           (d.resumen ? '<p class="nota-ar" style="margin-top:6px">' + esc(d.resumen) + '</p>' : '') +
           '<div class="fila">' + (d.grabacion ? '<a class="btn btn-mini" href="' + esc(d.grabacion) + '" target="_blank" rel="noopener">Escuchar la llamada</a>' : '') +
           '<button class="btn btn-mini" type="button" data-real="cerrar">Cerrar</button></div>' +
@@ -182,12 +183,32 @@
         return;
       }
       const txt = d.estado === 'in-progress' ? '<b>Hablando</b> · ' + mmss(d.segundos) : d.estado === 'ringing' ? 'Sonando…' : 'Marcando…';
-      el.innerHTML = '<p class="ok-ar"><span class="punto-vivo"></span>Raquel · ' + quien + ' · ' + txt + '</p><p class="nota-ar">Se actualiza solo. Puedes cerrar la ficha: el resultado queda en GHL.</p>';
-      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(callId, contactId, desde); }, 4000);
+      box.innerHTML = '<p class="ok-ar"><span class="punto-vivo"></span>Raquel · ' + quien + ' · ' + txt + '</p><p class="nota-ar">Se actualiza solo. Si cambias de pantalla, el resultado queda en GHL.</p>';
+      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(box, callId, contactId, desde); }, 4000);
     }).catch(function () {
-      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(callId, contactId, desde); }, 6000);
+      if (Date.now() - desde < 8 * 60000) setTimeout(function () { seguirLlamada(box, callId, contactId, desde); }, 6000);
     });
   }
+
+  // Respuestas del formulario en la ficha: se piden al abrirla (una vez por contacto)
+  const formCache = {};
+  function pintarFormulario(el, d) {
+    if (!d || !d.filas || !d.filas.length) { el.innerHTML = '<p class="gris" style="font-size:13px">No entró por un formulario, o no hay respuestas guardadas.</p>'; return; }
+    const propias = d.filas.filter(function (f) { return !f.basico; });
+    const basicas = d.filas.filter(function (f) { return f.basico; });
+    el.innerHTML = (propias.length ? '<dl class="form-dl">' + propias.map(function (f) { return '<dt>' + esc(f.p) + '</dt><dd>' + esc(f.r || '—') + '</dd>'; }).join('') + '</dl>' : '') +
+      (basicas.length ? '<p class="gris" style="font-size:12px;margin-top:8px">' + basicas.map(function (f) { return esc(f.p) + ': ' + esc(f.r); }).join(' · ') + '</p>' : '') +
+      '<p class="gris" style="font-size:11.5px;margin-top:6px">' + esc(d.origen) + (d.fecha ? ' · ' + esc(new Date(d.fecha).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })) : '') + (d.anuncio ? ' · anuncio «' + esc(d.anuncio) + '»' : '') + '</p>';
+  }
+  new MutationObserver(function () {
+    document.querySelectorAll('[data-form-real]:not([data-cargado])').forEach(function (el) {
+      el.setAttribute('data-cargado', '1');
+      const id = el.getAttribute('data-form-real');
+      if (formCache[id]) { pintarFormulario(el, formCache[id]); return; }
+      post('formulario', { contactId: id }).then(function (d) { formCache[id] = d; pintarFormulario(el, d); })
+        .catch(function (err) { el.innerHTML = '<p class="err-ar" style="font-size:13px">' + esc(err.message) + '</p>'; });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
 
   function moverEtapa(contactId, etapaId) {
     const est = QV.estado;
@@ -254,6 +275,7 @@
       id: r.id, n: r.n, rol: partes.join(' · '), emp: r.emp, seg: 'lead', ciudad: r.ciudad, prod: r.origen,
       orig: r.campana || 'otros', canal: r.canal, etapa: r.etapa, etapaTxt: r.etapaNombre || '', valor: r.valor || 0,
       tratoId: r.tratoId || '', etapaId: r.etapaId || '',
+      tel: r.tel || '', email: r.email || '', web: r.web || '', ghl: r.ghl || '',
       creado: hace(r.creado, ahora), act: hace(r.act, ahora), toque: r.toque ? hace(r.toque, ahora) : null,
       fin: r.fin || undefined,
       f: { inv: r.f.inv, vol: r.f.vol, sector: r.f.sector, fuga: r.f.fuga, nivel: r.f.nivel, potente: r.f.potente, cuando: r.f.cuando, precio: r.f.precio, ruta: r.f.ruta },
