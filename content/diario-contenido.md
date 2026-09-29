@@ -723,17 +723,28 @@ En Todoist, las dos tareas que dependían del experimento cambian a la versión 
 ### Publicado
 
 - **Artículo nuevo:** https://qualivo.io/blog/ahora-no-es-el-momento/ («"Ahora no es el momento": qué hacer cuando un cliente te lo dice»).
-  - Dato real: tres objeciones de las reuniones de la semana pasada (dailies de Growth del 27 y el 28-sep). Una no era su momento. Otra dijo sí con el arranque y el cobro movidos al 13-oct. La tercera no había entendido el servicio.
+  - Dato real: tres objeciones de conversaciones con clientes (dailies de Growth del 27 y el 28-sep). Una no era su momento. Otra fue un sí de palabra con arranque el 13-oct y el cobro alineado con él. La tercera no había entendido el servicio.
   - Sin nombres.
   - Registrado en la tarjeta, el sitemap, llms.txt y las keywords.
-- **Reorientado:** `blog/embudo-de-ventas/`. El último párrafo antes de las FAQ, dividido en dos: la fuga de los «ahora no» sin fecha en la flecha de reunión a cliente, con enlace al artículo de hoy y al diagnóstico. Cierre con un solo botón.
+- **Reorientado:** `blog/embudo-de-ventas/`. El último párrafo antes de las FAQ, dividido en dos: la fuga de los «ahora no» sin fecha en la flecha de oportunidad a venta, con enlace al artículo de hoy y al diagnóstico. Cierre con un solo botón.
 
 ### Borradores (sin publicar)
 
 - **Martes, «la objeción de la semana»** (la serie que antes se llamaba «Sin humo», un nombre que ya no se usa): «Sí. Pero más tarde.».
   - Imagen: `content/infografias/2026-09-29/si-pero.png`.
   - Texto y ficha: `content/borradores/2026-09-29-objecion-si-pero-mas-tarde.md`.
-  - El acierto: el sí se resolvió sin tocar el precio, alineando el cobro con el arranque.
+    - El acierto: el sí se resolvió sin tocar el precio, alineando el cobro con el arranque.
+
+### Master Reviewer (29-sep)
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-29.md`. Notas: artículo 6, reorientación 8, borrador 6 y corrección de ayer 6. Las cuatro salen con «publicar con cambios». Aplicados los 30 críticos. Lo importante:
+
+- **Un sí de palabra.** No se cuenta como hecho cerrado. Tampoco se dice quién propuso alinear el cobro, porque la fuente no lo dice.
+- **Nada inventado.** Fuera «le encajaba todo» y «me dolió más». Fuera las citas entre comillas que no están en la fuente.
+- **El copiloto, como es de verdad.** Redacta respuestas a lo que escribe el contacto, y las mando yo. No prepara mensajes por fecha.
+- **El formulario con precio, con toda la historia.** El lunes llegó a montarse aparte, a 15 € al día, y después se pausó. Motivo real: el formulario de antes es por el que entró el único sí. Ya no se dice «jugarme lo que funcionaba», que era inventado.
+- **Embudo.** La flecha correcta es de oportunidad a venta. Y el eyebrow «Conceptos, sin humo» pasa a «Conceptos».
+- **Imagen del martes.** Sin rótulo de serie: «Lo que no se tocó: el precio / Lo que se movió: el arranque y el cobro».
 
 ### Decisiones que dejo tomadas
 

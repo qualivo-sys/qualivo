@@ -64,23 +64,22 @@
 
 ## Versión 2 (29-sep) · «Puse el precio en el formulario. Lo quité al día siguiente.»
 
-> El domingo puse el precio en el formulario de mis anuncios. El lunes lo quité.
+> El domingo puse el precio en el formulario de uno de mis anuncios. El lunes lo quité.
 >
-> La idea era buena, o eso creo todavía. El formulario me trae citas: de las 14
+> El formulario me trae citas: de las 14
 > que han salido de mis anuncios, 12 entraron por él. Pero también entra mucha
 > gente que solo está mirando. De los primeros 20 contactos, 14 invertían menos
 > de 500 € al mes en captación, o nada.
 >
-> Así que añadí dos preguntas: cuándo quiere empezar y si le encaja el precio
-> de entrada. Con las respuestas, el sistema sube o baja la nota del contacto,
+> Así que cambié la pregunta de cuánto invierte por dos nuevas: cuándo quiere
+> empezar y si le encaja el precio de entrada. Con las respuestas, el sistema sube o baja la nota del contacto,
 > y la nota decide quién le llama: yo, mi comercial IA o nadie.
 >
 > ¿Por qué lo quité? Porque el anuncio con el formulario de antes era el que
-> estaba trayendo reuniones. Cambiarle las preguntas en mitad de la semana era
-> jugarme lo que funcionaba para probar una idea.
+> funcionaba: el único sí que ha salido de mis anuncios entró por él.
 >
-> La prueba buena es otra: el mismo anuncio con los dos formularios a la vez,
-> cada uno con su dinero, y contar las reuniones que se celebran. Eso es lo
-> que haré.
+> El mismo lunes llegué a montarlo al lado: el formulario nuevo en un conjunto
+> aparte, con el mismo anuncio y 15 € al día. Poco después lo pausé también y
+> lo dejé todo como la semana anterior. Ahora está en pausa.
 >
 > ¿Tú cambias lo que funciona para probar algo, o lo pruebas al lado?

@@ -9,25 +9,26 @@
 - **Acierto primero:** el sí, y cómo se resolvió la objeción sin tocar el precio.
 - **Lo que NO se cuenta:** el nombre, el sector concreto y el importe.
 - **Riesgo que dejo escrito:** es un sí verbal. Si se cae antes del 13-oct, la pieza no sale, o sale contando que se cayó.
+- **Revisión (29-sep):** Master Reviewer, nota 6, publicar con cambios. Aplicados los 7 críticos: sí de palabra, fuera «le encajaba todo», el miedo como lo dice la fuente, sin decir quién propuso alinear el cobro, «esta vez» en lugar de «casi siempre», y la imagen sin el rótulo de serie.
 - **CTA:** conversación. **Qué se mide:** comentarios con otras formas de alinear cobro y arranque.
 - **Enlaza con** el artículo del día: /blog/ahora-no-es-el-momento/.
 
 ## Texto para LinkedIn
 
-> «Sí. Pero más tarde.»
+> Sí, pero más tarde.
 >
-> Así acabó una de mis reuniones de la semana pasada. Le encajaba todo lo que
-> le enseñé. Lo que la frenaba no era la fecha. Era pagar antes de verlo
-> funcionar.
+> Así acabó una de mis reuniones de la semana pasada: un sí de palabra, con el
+> arranque más tarde. Lo que pesaba era el miedo a pagar antes de tenerlo
+> claro.
 >
 > Cuando notamos que alguien duda, casi todos hacemos lo mismo: ofrecer algo.
 > Un descuento, un mes gratis.
 >
-> Pero no me lo había pedido. Me había pedido otra cosa: que el cobro empezara
-> con el trabajo.
+> Aquí el precio se quedó como estaba, la propuesta de siempre. Lo que se
+> movió fue el cobro, alineado con el arranque.
 >
-> Así que movimos las dos cosas juntas. Arranque el 13 de octubre, y el cobro
-> también el 13 de octubre.
+> Arranca el 13 de octubre, con el cobro alineado con ese arranque. De momento
+> es un sí de palabra.
 >
 > Si le hubiera bajado el precio, habría resuelto un problema que no tenía y
 > dejado el que sí tenía.
@@ -35,19 +36,19 @@
 > Me llevo una pregunta para la próxima vez que alguien me diga «ahora no»:
 > ¿qué tendría que pasar para que sí fuera el momento?
 >
-> Casi siempre la respuesta no tiene nada que ver con el precio.
+> Esta vez no tenía que ver con el precio.
 >
 > ¿Qué es lo último que te pidieron para decir que sí, y no era un descuento?
 
 ## Pie para Instagram (misma imagen)
 
-> «Sí. Pero más tarde.» Le encajaba todo. Lo que frenaba era pagar antes de
-> verlo funcionar.
+> Sí, pero más tarde. Así acabó una reunión de la semana pasada. Lo que pesaba
+> era el miedo a pagar antes de tenerlo claro.
 >
-> No pedía un descuento. Pedía que el cobro empezara con el trabajo. Movimos
-> las dos cosas al 13 de octubre.
+> El precio, el de siempre. Lo que se movió fue el cobro, alineado con un
+> arranque el 13 de octubre.
 >
 > La próxima vez que alguien te diga «ahora no», pregúntale qué tendría que
-> pasar para que sí. Casi nunca es el precio.
+> pasar para que sí. Esta vez no era el precio.
 >
 > #ventas #pymes #objeciones #negocios
