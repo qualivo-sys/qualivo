@@ -1,5 +1,12 @@
 # Lunes 28 · Agentizando mi propia empresa · «Dos preguntas antes de la llamada»
 
+> **EN PAUSA (29-sep).** El formulario con precio se paró el 28-sep: Maikel
+> volvió al anuncio y el formulario de la semana anterior («pon 20 en la que
+> funcionaba», «déjalo todo como estaba la semana pasada», bus de Growth
+> 28-sep). El texto de abajo ya no vale tal cual: dice que el experimento
+> sigue siete días. La versión 2, al final, cuenta lo que pasó de verdad. La
+> imagen sigue valiendo si se quita «desde el 27 de septiembre».
+>
 > Pieza del día (lunes: «Agentizando mi propia empresa», LinkedIn). Imagen:
 > `content/infografias/2026-09-28/dos-preguntas.png`. **Sin publicar**, porque
 > LinkedIn sigue en pausa.
@@ -54,3 +61,26 @@
 > pasen los siete días, salga como salga.
 >
 > ¿Tú pones el precio antes de la primera llamada, o te lo guardas?
+
+## Versión 2 (29-sep) · «Puse el precio en el formulario. Lo quité al día siguiente.»
+
+> El domingo puse el precio en el formulario de mis anuncios. El lunes lo quité.
+>
+> La idea era buena, o eso creo todavía. El formulario me trae citas: de las 14
+> que han salido de mis anuncios, 12 entraron por él. Pero también entra mucha
+> gente que solo está mirando. De los primeros 20 contactos, 14 invertían menos
+> de 500 € al mes en captación, o nada.
+>
+> Así que añadí dos preguntas: cuándo quiere empezar y si le encaja el precio
+> de entrada. Con las respuestas, el sistema sube o baja la nota del contacto,
+> y la nota decide quién le llama: yo, mi comercial IA o nadie.
+>
+> ¿Por qué lo quité? Porque el anuncio con el formulario de antes era el que
+> estaba trayendo reuniones. Cambiarle las preguntas en mitad de la semana era
+> jugarme lo que funcionaba para probar una idea.
+>
+> La prueba buena es otra: el mismo anuncio con los dos formularios a la vez,
+> cada uno con su dinero, y contar las reuniones que se celebran. Eso es lo
+> que haré.
+>
+> ¿Tú cambias lo que funciona para probar algo, o lo pruebas al lado?

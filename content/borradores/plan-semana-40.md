@@ -15,7 +15,7 @@ Redes siguen en pausa. Todo lo de redes se queda en borrador.
 | Mié 30 | Recordatorio de cita que funciona (la víspera y la mañana) | Bandera roja: la cita a cinco días sin confirmar + capítulo de newsletter del jueves | Recordatorio de la víspera encendido (daily 27-sep), brief §1.4 |
 | Jue 1 | Responder a un lead: borrador para ti, no respuesta automática | Agentizando: el copiloto que me escribe el borrador y yo lo envío | Cadencia 28-sep: «respuestas en copiloto, borrador a Maikel, nada automático» |
 | Vie 2 | Pagar antes de tenerlo claro: cómo alinear el cobro con el arranque | Tesis contraria: «más leads no arregla una agenda de plantones» (sin la tasa propia) | Daily 27-sep: arranque con el cobro alineado |
-| Lun 5 | Segunda parte del formulario | Agentizando: qué pasó con las dos preguntas, salga como salga | Dato de Growth a 7 días |
+| Lun 5 | Coste por reunión celebrada por sector (revisión de Growth) | Agentizando: lo que cambia cuando mides reuniones y no contactos | Revisión del 5-oct |
 
 Fuera de la rutina, esta semana:
 - **Quitar la tasa de plantones** de los cinco sitios donde aparece. Espera el ok de Maikel.
@@ -25,3 +25,5 @@ Fuera de la rutina, esta semana:
 - **Perfil de empresa:** subir la portada y la descripción.
 
 Lo que necesito de Maikel cada día: una frase por reunión con la objeción o la duda que salió. Sin nombres. Con eso se escribe la semana 41.
+
+**Cambio del 29-sep:** el formulario con precio se paró el 28-sep (Maikel volvió a la semana anterior). El artículo del lunes quedó corregido y el post del lunes pasa a su versión 2. Las objeciones nuevas del daily del 28-sep entran en la semana: «no sé si es lo que me encaja», el cliente que pide 6 o 7 presupuestos y busca lo barato, y el agente como generador de borradores que aprueba una persona.

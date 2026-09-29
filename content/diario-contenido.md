@@ -705,3 +705,51 @@ Aplicados todos los críticos.
 ### Hipótesis
 
 - **Formulario nuevo:** las dos preguntas bajan el volumen, pero suben las reuniones celebradas. Se comprueba el lunes 5 de octubre con el dato de Growth, y ese mismo día sale la segunda parte del post, con el resultado, sea el que sea.
+
+## Martes 29 de septiembre de 2026
+
+### Corrección de lo de ayer (lo primero)
+
+El formulario con precio se paró el 28-sep, un día después de empezar. Maikel volvió al anuncio y al formulario de la semana anterior («pon 20 en la que funcionaba», «déjalo todo como estaba la semana pasada»; bus de Growth del 28-sep).
+
+El artículo del lunes decía que el experimento seguía siete días. Está corregido:
+- una sección nueva, «Lo que probé el 27 de septiembre (y por qué lo paré al día siguiente)»;
+- el «En 30 segundos», llms.txt y el sitemap, con fecha del 29-sep.
+
+El borrador del lunes queda EN PAUSA, con una versión 2 que cuenta lo que pasó: «Puse el precio en el formulario. Lo quité al día siguiente.».
+
+En Todoist, las dos tareas que dependían del experimento cambian a la versión 2.
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/ahora-no-es-el-momento/ («"Ahora no es el momento": qué hacer cuando un cliente te lo dice»).
+  - Dato real: tres objeciones de las reuniones de la semana pasada (dailies de Growth del 27 y el 28-sep). Una no era su momento. Otra dijo sí con el arranque y el cobro movidos al 13-oct. La tercera no había entendido el servicio.
+  - Sin nombres.
+  - Registrado en la tarjeta, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/embudo-de-ventas/`. El último párrafo antes de las FAQ, dividido en dos: la fuga de los «ahora no» sin fecha en la flecha de reunión a cliente, con enlace al artículo de hoy y al diagnóstico. Cierre con un solo botón.
+
+### Borradores (sin publicar)
+
+- **Martes, «la objeción de la semana»** (la serie que antes se llamaba «Sin humo», un nombre que ya no se usa): «Sí. Pero más tarde.».
+  - Imagen: `content/infografias/2026-09-29/si-pero.png`.
+  - Texto y ficha: `content/borradores/2026-09-29-objecion-si-pero-mas-tarde.md`.
+  - El acierto: el sí se resolvió sin tocar el precio, alineando el cobro con el arranque.
+
+### Decisiones que dejo tomadas
+
+- **El formulario con precio no se vende como experimento en marcha.** Contarlo como «lo probé y lo paré» es más honesto y además da mejor pieza.
+- **El sí del 13-oct se cuenta sin nombre, sector ni importe.** Si se cae antes del arranque, la pieza no sale o sale contándolo.
+
+### Descartes
+
+- Un artículo sobre «el cliente que pide 6 o 7 presupuestos y busca lo barato» (objeción de reformas del 28-sep). Es un solo caso, y el lead todavía no ha tenido la reunión (miércoles 30). Queda para cuando haya reunión.
+
+### Pendiente de Maikel
+
+1. **Tasa de plantones publicada en cinco sitios:** ¿la quito? Recomiendo que sí.
+2. **Versión 2 del post del lunes y borrador del martes:** aprobarlos cuando se levante la pausa de LinkedIn.
+3. **Nurturing:** falta el enlace del vídeo y el ok. Newsletter de plantones: decidir si sale a los 22.
+
+### Hipótesis
+
+- La objeción de encaje («yo quería otra cosa») apunta a cómo se explica Qualivo en la web y en el anuncio. Si se repite esta semana, propongo una pieza sobre «qué hace un agente en cada punto del recorrido», con un ejemplo por sector.
