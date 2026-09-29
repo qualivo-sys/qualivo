@@ -65,6 +65,8 @@ module.exports = async function handler(req, res) {
     'Content-Type': 'application/json'
   };
 
+  const etiquetas = ['qualivo-recursos', 'lm-' + recurso]
+    .concat(inversion ? [inversion[0]] : [], volumen ? [volumen[0]] : []);
   try {
     const upsertRes = await fetch(GHL_BASE + '/contacts/upsert', {
       method: 'POST',
@@ -73,9 +75,8 @@ module.exports = async function handler(req, res) {
         locationId: locationId,
         name: nombre || undefined,
         email: email,
-        source: 'qualivo.io — recurso ' + recurso,
-        tags: ['qualivo-recursos', 'lm-' + recurso]
-          .concat(inversion ? [inversion[0]] : [], volumen ? [volumen[0]] : [])
+        source: 'qualivo.io — recurso ' + recurso
+        // 30-sep: sin «tags» en el upsert: si el contacto ya existía, GHL SUSTITUYE sus etiquetas (se perdían nivel, paid, meta-lead…). Se añaden después con el endpoint que suma.
       })
     });
     if (!upsertRes.ok) {
@@ -85,6 +86,10 @@ module.exports = async function handler(req, res) {
     }
     const upsert = await upsertRes.json();
     const contactId = upsert && upsert.contact && upsert.contact.id;
+    if (contactId && etiquetas.length) {
+      const tg = await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ tags: etiquetas }) });
+      if (!tg.ok) console.error('[recurso] etiquetas no se pusieron', contactId, tg.status);
+    }
 
     if (contactId) {
       const nota = [

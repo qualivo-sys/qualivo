@@ -39,12 +39,18 @@ async function upsert(d, tags) {
     body: JSON.stringify({
       locationId: process.env.GHL_LOCATION_ID,
       firstName: d.nombre.split(' ')[0], name: d.nombre, phone: d.telefono, email: d.email,
-      website: d.web, source: 'Prueba tu agente', tags: tags
+      website: d.web, source: 'Prueba tu agente'
+      // 30-sep: sin «tags» en el upsert: si el contacto ya existía, GHL SUSTITUYE sus etiquetas (se perdían nivel, paid, meta-lead…). Se añaden después con el endpoint que suma.
     })
   });
   if (!r.ok) throw new Error('ghl upsert ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json().catch(function () { return {}; });
-  return (j.contact && j.contact.id) || (j.contact && j.contact.contact && j.contact.contact.id) || '';
+  const id = (j.contact && j.contact.id) || (j.contact && j.contact.contact && j.contact.contact.id) || '';
+  if (id && tags && tags.length) {
+    const tg = await fetch(A.GHL_BASE + '/contacts/' + id + '/tags', { method: 'POST', headers: A.cabeceras(), body: JSON.stringify({ tags: tags }) });
+    if (!tg.ok) console.error('[prueba] etiquetas no se pusieron', id, tg.status);
+  }
+  return id;
 }
 
 module.exports = async function handler(req, res) {

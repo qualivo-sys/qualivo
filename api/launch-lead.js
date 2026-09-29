@@ -39,8 +39,8 @@ module.exports = async function handler(req, res) {
         name: nombre,
         email: email,
         companyName: empresa || undefined,
-        source: 'qualivo.io/launch — cuéntanos tu idea',
-        tags: ['qualivo-landing', 'launch-interes']
+        source: 'qualivo.io/launch — cuéntanos tu idea'
+        // 30-sep: sin «tags» en el upsert: si el contacto ya existía, GHL SUSTITUYE sus etiquetas (se perdían nivel, paid, meta-lead…). Se añaden después con el endpoint que suma.
       })
     });
     if (!upsertRes.ok) {
@@ -49,6 +49,11 @@ module.exports = async function handler(req, res) {
     }
     const upsert = await upsertRes.json();
     const contactId = upsert && upsert.contact && upsert.contact.id;
+    const etiquetas = ['qualivo-landing', 'launch-interes'];
+    if (contactId && etiquetas.length) {
+      const tg = await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ tags: etiquetas }) });
+      if (!tg.ok) console.error('[launch] etiquetas no se pusieron', contactId, tg.status);
+    }
 
     if (contactId) {
       await require('./_tratos.js').crear({

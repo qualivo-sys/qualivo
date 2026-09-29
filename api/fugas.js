@@ -179,8 +179,8 @@ module.exports = async function handler(req, res) {
         name: nombre,
         email: email,
         phone: telefono || undefined,
-        source: 'qualivo.io — dónde se rompe tu crecimiento',
-        tags: tags
+        source: 'qualivo.io — dónde se rompe tu crecimiento'
+        // 30-sep: sin «tags» en el upsert: si el contacto ya existía, GHL SUSTITUYE sus etiquetas (se perdían nivel, paid, meta-lead…). Se añaden después con el endpoint que suma.
       })
     });
     if (!upsertRes.ok) {
@@ -192,6 +192,10 @@ module.exports = async function handler(req, res) {
     // ¿Ya había hecho la radiografía otro día? (etiqueta dx-AAAAMMDD anterior a hoy)
     const yaHizo = (((upsert || {}).contact || {}).tags || []).some(function (t) { return /^dx-\d{8}$/.test(String(t)) && String(t) !== 'dx-' + hoy; });
     if (contactId) await limpiarResultadoAnterior(contactId, ((upsert || {}).contact || {}).tags, tags, ghlHeaders).catch(function () {});
+    if (contactId && tags.length) {
+      const tg = await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'POST', headers: ghlHeaders, body: JSON.stringify({ tags: tags }) });
+      if (!tg.ok) console.error('[dx] etiquetas no se pusieron', contactId, tg.status);
+    }
 
     if (contactId) {
       const detalle = DIMS.map(function (e) {
