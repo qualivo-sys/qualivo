@@ -334,8 +334,15 @@ async function primerWhatsApp(contactId, telefono, datos) {
 async function primerWhatsAppCompleto(contactId, telefono, d) {
   d = d || {};
   const M = require('./_mensajes.js'), AGT = require('./_agente.js');
-  let pq = false;
-  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) pq = require('./_scoring.js').precualificar((await r.json()).contact || {}).si; } catch (e) { /* sin ficha: mensaje normal */ }
+  let pq = false, ficha = null;
+  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) { ficha = (await r.json()).contact || {}; pq = require('./_scoring.js').precualificar(ficha).si; } } catch (e) { /* sin ficha: mensaje normal */ }
+  // 29-sep (Anna Guasch): entró por la landing /formacion/ y por el formulario de Meta con
+  // cuatro minutos de diferencia, las dos puertas mandaron el primer WhatsApp y ninguna dejó
+  // act-wa1. Antes de escribir se mira la ficha (act-wa1, o un envío en curso) y la conversación
+  // (cualquier mensaje nuestro en las últimas 24 h), y se marca el envío en curso al momento.
+  const ya = await yaTienePrimerWhatsApp(contactId, ficha);
+  if (ya) return { ok: false, canal: 'ninguno', motivo: ya };
+  await etiquetar(contactId, ['act-wa1-enviando-' + new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12)]);
   const tardes = AGT.opcionesTarde();
   const ia = await AGT.mensajePersonalizado({ nombre: M.nombreCorto(d.nombre), empresa: d.empresa || '', sector: d.sector, fuga: d.fuga || d.hipotesis, inversion: d.inversion, volumen: d.volumen,
     opcion1: tardes[0], opcion2: tardes[1], precualificar: pq }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
@@ -349,6 +356,26 @@ async function primerWhatsAppCompleto(contactId, telefono, d) {
 }
 
 // Todos los mensajes de un contacto, de más antiguo a más nuevo.
+// Motivo para no mandar el primer WhatsApp, o '' si se puede. El envío en curso caduca a los
+// 15 minutos: si la función murió a medias, el reloj de activación puede volver a intentarlo.
+async function yaTienePrimerWhatsApp(contactId, ficha) {
+  const tags = ((ficha && ficha.tags) || []).map(String);
+  if (tags.indexOf('act-wa1') > -1) return 'ya_marcado';
+  const enCurso = tags.filter(function (t) { return /^act-wa1-enviando-\d{12}$/.test(t); }).some(function (t) {
+    const s = t.slice(-12);
+    return minutosDesde(s.slice(0, 4) + '-' + s.slice(4, 6) + '-' + s.slice(6, 8) + 'T' + s.slice(8, 10) + ':' + s.slice(10, 12) + ':00Z') < 15;
+  });
+  if (enCurso) return 'enviando';
+  try {
+    const hace24h = Date.now() - 24 * 3600 * 1000;
+    const nuestros = (await mensajesDe(contactId)).filter(function (m) {
+      return m.direction === 'outbound' && !/ACTIVITY|EMAIL/i.test(String(m.messageType || '')) && Date.parse(m.dateAdded || 0) > hace24h;
+    });
+    if (nuestros.length) return 'ya_escrito';
+  } catch (e) { /* sin conversación legible: se sigue con las etiquetas */ }
+  return '';
+}
+
 async function mensajesDe(contactId) {
   const r = await fetch(GHL_BASE + '/conversations/search?locationId=' +
     encodeURIComponent(process.env.GHL_LOCATION_ID) + '&contactId=' + contactId, { headers: cabeceras() });
@@ -573,7 +600,7 @@ async function enviarCorreo(email, asunto, html) {
 module.exports = {
   PAUSA_TOTAL,
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
   sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta
 };

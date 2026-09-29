@@ -96,6 +96,8 @@ function esLeadForm(contacto) {
 // Qué paso toca. Devuelve null si no hay nada pendiente todavía.
 function siguientePaso(contacto, minutos) {
   const hay = function (t) { return A.tiene(contacto, t); };
+  // Si una puerta (landing, formulario de Meta) está mandando el primer WhatsApp, se espera.
+  if (!hay('act-wa1') && minutosDesdeEtiqueta(contacto, 'act-wa1-enviando-') < 15) return null;
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
   let desdeWa1 = minutosDesdeEtiqueta(contacto, 'act-wa1-h-');
   // Sin la hora del primer WhatsApp se cuenta desde que entró, nunca «hace mucho»:
