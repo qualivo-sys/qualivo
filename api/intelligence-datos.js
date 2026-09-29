@@ -621,6 +621,55 @@ async function estadoLlamada(b) {
 }
 
 // ---------------------------------------------------------------------------
+// Finanzas (29-sep): lee la pestaña «FINANZAS · panel» del Sheet financiero, que genera
+// dashboard/finanzas.py (rama quipu-billing-dashboard) con cinco columnas fijas:
+// bloque | concepto | importe | estado | nota. Aquí solo se lee: ningún número vive en el
+// código (el repo es público) y solo se sirve con sesión. Cache corta para no leer la hoja
+// en cada clic.
+const FINANZAS_SHEET = process.env.FINANZAS_SHEET_ID || '1nO_3TfBuXHMIzQP2ChCX58xxlbd1o75b90Pla0_H7i0';
+const FINANZAS_TAB = 'FINANZAS · panel';
+let cacheFin = null;
+async function finanzas(fresco) {
+  if (cacheFin && !fresco && Date.now() - cacheFin.t < 5 * 60000) return cacheFin.d;
+  const G = require('./_google.js');
+  const v = (await G.sheets('GET', FINANZAS_SHEET + '/values/' + encodeURIComponent(FINANZAS_TAB) + '!A1:E600?valueRenderOption=UNFORMATTED_VALUE')).values || [];
+  const filas = [];
+  let generado = '';
+  v.slice(1).forEach(function (r) {
+    const bloque = String(r[0] || '').trim(), concepto = String(r[1] || '').trim();
+    if (!bloque) { if (/^Generado/.test(concepto)) generado = concepto.replace(/^Generado por [^·]+·\s*/, ''); return; }
+    const imp = typeof r[2] === 'number' ? r[2] : null;
+    filas.push({ bloque: bloque, concepto: concepto, importe: imp, estado: String(r[3] || '').trim(), nota: String(r[4] || '').trim() });
+  });
+  const de = function (b) { return filas.filter(function (f) { return f.bloque === b; }); };
+  const total = function (b, re) { const f = de(b).filter(function (x) { return re.test(x.concepto); })[0]; return f ? f.importe : null; };
+  const suma = function (lista) { return lista.reduce(function (a, f) { return a + (f.importe || 0); }, 0); };
+  const caja = de('CAJA');
+  const disponible = suma(caja.filter(function (f) { return f.estado === 'disponible'; }));
+  const reservado = suma(caja.filter(function (f) { return f.estado === 'reservado'; }));
+  const impuestos = suma(caja.filter(function (f) { return /impuesto/i.test(f.concepto); }));
+  const salida = total('PAGOS', /SALIDA TOTAL/i);
+  const deudaMes = total('PAGOS', /Deuda \/ mes/i);
+  const mrr = total('MRR', /^TOTAL/i);
+  const cobros = suma(de('COBROS'));
+  const gastos = suma(de('GASTOS'));
+  const neto = mrr != null && salida != null ? mrr - salida : null;
+  const d = {
+    generado: generado,
+    resumen: {
+      cajaTotal: total('CAJA', /^TOTAL/i), disponible: disponible, reservado: reservado, impuestos: impuestos,
+      salidaMes: salida, deudaMes: deudaMes, gastosMes: gastos, deudaTotal: total('DEUDAS', /^TOTAL/i),
+      mrr: mrr, cobrosPendientes: cobros, netoMes: neto,
+      // Meses que aguanta lo disponible (sin tocar las huchas) si el mes sigue en negativo.
+      mesesMargen: neto != null && neto < 0 ? Math.round((disponible / -neto) * 10) / 10 : null
+    },
+    filas: filas
+  };
+  cacheFin = { t: Date.now(), d: d };
+  return d;
+}
+
+// ---------------------------------------------------------------------------
 module.exports = async function (req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
@@ -665,6 +714,10 @@ module.exports = async function (req, res) {
   }
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+  if (accion === 'finanzas') {
+    try { return res.status(200).json(await finanzas(String((req.query && req.query.fresco) || '') === '1')); }
+    catch (e) { return res.status(502).json({ error: 'No se ha podido leer la hoja de finanzas: ' + String(e.message || e).slice(0, 120) }); }
+  }
   if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) return res.status(503).json({ error: 'Faltan las claves de GHL en Vercel.' });
 
   try {
