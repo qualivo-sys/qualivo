@@ -24,3 +24,4 @@ tome su vídeo como pista principal y meta los planos como cortes.
 - `v2_build.py A B` monta las dos variantes A/B con voz IA a partir de `guion-v2-lineas.txt` (una línea de voz = una escena; la B es la A sin la línea 0).
 - `maikel_build.py` monta la versión con la toma de Maikel a cámara: su voz entera, su cara como plano principal e inserts de B-roll e Intelligence.
 - Los clips, voces y la toma de Maikel no se suben al repo (repo público); viven en el scratchpad de la sesión.
+- `v3_build.py A B` (29-sep, versión aprobada en ritmo): toda la voz en UNA toma (sin cortes entre frases), escenas atadas al inicio de cada frase según la transcripción por palabras, guion recortado (<60 s) y música a ~123 BPM (catálogo de HeyGen, `musica2/a.wav`).

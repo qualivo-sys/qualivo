@@ -55,8 +55,8 @@ def escenas_de(tiempos):
             T(0.9, estilo='sub', y=1250, texto='Laura pide información de un curso'),
         ]})
         E.append({'inicio': t0(1) + b, 'tipo': 'plano', 'src': 'clips/3.mp4', 'transicion': tr('fade', .35), 'textos': [
-            T(0, estilo='etiqueta', y=150, texto='Lunes · 09:00'),
-            T(0.5, estilo='etiqueta-turquesa', y=250, texto='34 horas después'),
+            T(0, estilo='etiqueta', y=150, texto='Lunes · 11:00'),
+            T(0.5, estilo='etiqueta-turquesa', y=250, texto='12 horas después'),
             T(0.3, (d(1) - b) * 0.5, estilo='sub', y=1250, texto='Le contestan el lunes.'),
             T((d(1) - b) * 0.5, estilo='sub-turquesa', y=1250, texto='Ya está hablando con otro centro.'),
         ]})
