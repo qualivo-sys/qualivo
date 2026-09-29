@@ -208,6 +208,8 @@ async function contactosRecientes(desde, hasta) {
   return todos.filter(function (c) {
     const tags = (c.tags || []).map(String);
     if (tags.indexOf('demo') >= 0) return false;
+    // 29-sep (Maikel: «descártalos, no los quiero ver más»): los descartados no salen en Intelligence.
+    if (tags.indexOf('descartado') >= 0) return false;
     if (/\b(prueba|test)\b/i.test([c.firstName, c.lastName, c.contactName].join(' '))) return false;
     const deAnuncio = tags.indexOf('paid') >= 0 || tags.indexOf('leadform') >= 0;
     const conReunion = REUNION_TAGS.some(function (t) { return tags.indexOf(t) >= 0; });
