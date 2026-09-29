@@ -61,20 +61,30 @@ Sonda a las webs de las empresas que SÍ generaron reunión o respuesta este mes
 
 (anticbarcelona113.es, kybos.es y kubysoft.com bloquean la sonda; no entran en el recuento.)
 
-**GTM en 5 de 5. Formularios ≤1 en 4 de 5. Google Ads en 0 de 5. Píxel de Meta en solo 2 de 5.**
+> ⛔ **CORREGIDO el mismo 29-sep por la regla de evidencia del 31-ago.** Ver errata abajo.
+> La conclusión original de este apartado no es sostenible.
 
-Eso es exactamente la puerta **"Mide pero no captura" (ICP12): gtm/ga4 presente y formularios ≤1.**
-Miden su tráfico y no tienen por dónde capturarlo. Es la fuga que mejor sabemos nombrar y la que
-más se parece a las empresas que nos cogen el teléfono.
+**GTM presente en 5 de 5.** Esa es la única afirmación válida de la tabla: es detección positiva.
 
-Y es la puerta con **8 leads/día asignados**, mientras "Anuncios" tiene 20-25/día y solo 2 de 5
-ganadoras llevan píxel de Meta.
+### ERRATA · lo que había escrito aquí y retiro
 
-### Límite honesto de este hallazgo
-Son 5 empresas. La regla del propio sistema es 7 días y 100 envíos antes de decidir por puerta.
-Esto no prueba nada todavía: es una hipótesis lo bastante fuerte como para merecer el volumen
-que hoy se lleva otra puerta. Además, 9 de las 15 reservas del mes entraron con correo personal
-(gmail/yahoo) y no tienen dominio que sondear — de esas no sabemos nada y son la mayoría.
+Escribí "formularios ≤1 en 4 de 5" y "Google Ads en 0 de 5", y sobre eso propuse mover volumen a
+la puerta "Mide pero no captura" (ICP12). **No es admisible.** La regla del 31-ago establece que,
+con GTM presente, la ausencia de píxeles o GA4 **no es afirmable** por sonda estática, y que
+**HubSpot inyecta los formularios por JavaScript**. Dataslayer salió con 0 formularios y lleva
+HubSpot: el falso negativo exacto que la regla anticipa.
+
+**Retirada la recomendación de reasignar volumen a ICP12.** No hay evidencia que la sostenga.
+
+### Lo que sí queda en pie
+
+Las 5 empresas que generaron reunión tienen **la web instrumentada**. Eso no señala una puerta
+concreta: respalda el filtro de la V1 ("piezas visibles"), que ya estaba escrito.
+
+### Límite del hallazgo
+Son 5 empresas, y 9 de las 15 reservas del mes entraron con correo personal (gmail/yahoo) sin
+dominio que sondear. De la mayoría no sabemos nada. La regla del sistema son 7 días y 100 envíos
+antes de decidir por puerta; esto no llega ni de lejos.
 
 ## 4. Tensión de ICP que hay que resolver
 
@@ -95,7 +105,7 @@ material para el informe de patrones del viernes.**
 
 ## Qué propongo para hoy
 
-1. Reabrir **dos** puertas, no siete: "Mide pero no captura" y "CRM". Concentrar los 525/día de
+1. Reabrir **dos** puertas, no siete (cuáles, lo decide Maikel: la sonda no puede elegirlas). Concentrar los 525/día de
    Qualivo ahí en vez de repartir entre siete campañas que no llegan a 100 envíos ninguna.
 2. Sondar antes de enriquecer (palanca 2), que es el cuello declarado. Sin gastar un crédito de
    Apollo hasta que la sonda diga que el dominio tiene GTM y ≤1 formulario.
