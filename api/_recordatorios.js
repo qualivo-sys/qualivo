@@ -20,6 +20,18 @@ const ZONA = 'Europe/Madrid';
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
 const MAX_ENVIOS = 25;
 
+// Correos de recordatorio v2 (29-sep-2026): el correo de la víspera y el del
+// mismo día dejan de ser el texto del WhatsApp en párrafos y pasan a ser un
+// correo con qué vamos a ver, los cuatro números y lo que contestó en el
+// formulario (api/_correo-cita.js; vistas previas en content/correos/).
+// APAGADO: se enciende cuando Maikel apruebe los textos. Con false todo sale
+// exactamente como hasta ahora. Los WhatsApp no cambian en ningún caso.
+const CORREO_CITA_V2 = false;
+// Con v2 encendido: true = el correo sale también a quien tiene hilo de
+// WhatsApp (la videollamada se suele abrir desde el ordenador, donde está el
+// correo); false = solo a quien no tiene WhatsApp, como hoy. Lo decide Maikel.
+const V2_CORREO_TAMBIEN_CON_WHATSAPP = true;
+
 function nombrePila(v) {
   const limpio = String(v || '').replace(/^\s*(arq|dra|dr|sra|sr|ing|lic|prof|don|doña)(\.\s*|\s+)/i, '').trim();
   const p = limpio.split(/\s+/)[0] || '';
@@ -110,7 +122,8 @@ function leerHilo(mensajes, hoy) {
   return { canal: canal, yaHoy: yaHoy };
 }
 
-async function enviar(contacto, canal, texto, asunto) {
+// correoV2: { asunto, html } o null. Con null, el correo es el de siempre.
+async function enviar(contacto, canal, texto, asunto, correoV2) {
   const hecho = [];
   if (contacto.phone) {
     if (canal === 'whatsapp') {
@@ -134,6 +147,13 @@ async function enviar(contacto, canal, texto, asunto) {
   }
   // Sin hilo de WhatsApp (o sin teléfono): también por correo, que es donde
   // tiene la invitación.
+  if (correoV2) {
+    if (contacto.email && (V2_CORREO_TAMBIEN_CON_WHATSAPP || !canal || !contacto.phone)) {
+      const r = await A.enviarCorreo(contacto.email, correoV2.asunto, correoV2.html);
+      hecho.push(r.ok ? 'correo v2' : 'correo v2 fallido (' + r.motivo + ')');
+    }
+    return hecho;
+  }
   if ((!canal || !contacto.phone) && contacto.email) {
     const r = await A.enviarCorreo(contacto.email, asunto, htmlDe(texto));
     hecho.push(r.ok ? 'correo' : 'correo fallido (' + r.motivo + ')');
@@ -195,7 +215,15 @@ async function vuelta(modo, opciones) {
         if (seco) { resumen.enviados++; resumen.detalle.push(fila); continue; }
 
         const asunto = modo === 'vispera' ? 'Mañana a las ' + horaDe(inicio) + ' · videollamada con Qualivo' : 'Hoy a las ' + horaDe(inicio) + ' · enlace de la videollamada';
-        const hecho = await enviar(c, hilo.canal, texto, asunto);
+        let correoV2 = null;
+        if (CORREO_CITA_V2) {
+          try {
+            const CC = require('./_correo-cita.js');
+            const datosCita = { hora: horaDe(inicio), enlace: CITA.enlaceDe(ev), porTelefono: !!extra };
+            correoV2 = modo === 'vispera' ? CC.vispera(CC.datosDe(c), datosCita) : CC.dia(CC.datosDe(c), datosCita);
+          } catch (e) { correoV2 = null; console.error('[recordatorios] correo v2:', e && e.message); }
+        }
+        const hecho = await enviar(c, hilo.canal, texto, asunto, correoV2);
         fila.enviado = hecho.join(', ');
         await A.etiquetar(c.id, [etiqueta]);
         await A.nota(c.id, 'RECORDATORIO DE CITA (' + (modo === 'vispera' ? 'víspera' : 'mismo día') + ') · ' + ahora.toLocaleString('es-ES', { timeZone: ZONA }) +
@@ -215,4 +243,4 @@ async function vuelta(modo, opciones) {
   return resumen;
 }
 
-module.exports = { vuelta: vuelta, textoDia: textoDia, textoVispera: textoVispera, citasEntre: citasEntre, claveDia: claveDia };
+module.exports = { CORREO_CITA_V2: CORREO_CITA_V2, vuelta: vuelta, textoDia: textoDia, textoVispera: textoVispera, citasEntre: citasEntre, claveDia: claveDia };

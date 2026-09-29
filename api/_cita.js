@@ -18,6 +18,14 @@ const WA = require('./_whatsapp');
 
 const ZONA = 'Europe/Madrid';
 
+// Correo de confirmación v2 (29-sep-2026): nada más reservar, un correo al lead
+// con qué vamos a ver, los cuatro números que conviene traer y lo que contestó
+// en el formulario (api/_correo-cita.js; vista previa en
+// content/correos/confirmacion-cita-v2.html).
+// APAGADO: se enciende cuando Maikel apruebe los textos. Con false no cambia
+// nada de lo que hace este fichero.
+const CORREO_CITA_V2 = false;
+
 function nombrePila(v) {
   const limpio = String(v || '').replace(/^\s*(arq|dra|dr|sra|sr|ing|lic|prof|don|doña)(\.\s*|\s+)/i, '').trim();
   const p = limpio.split(/\s+/)[0] || '';
@@ -152,6 +160,16 @@ async function confirmarCita(o) {
       }
     }
 
+    // 2b. Correo de confirmación v2. Solo con CORREO_CITA_V2 encendido.
+    if (CORREO_CITA_V2 && c.email && f.dia && c.dnd !== true) {
+      try {
+        const CC = require('./_correo-cita.js');
+        const correo = CC.confirmacion(CC.datosDe(c), { dia: f.dia, hora: f.hora, cuando: cuando, enlace: enlace });
+        const r = await A.enviarCorreo(c.email, correo.asunto, correo.html);
+        hecho.push(r.ok ? 'correo_confirmacion_v2' : 'correo_confirmacion_v2_fallido (' + r.motivo + ')');
+      } catch (e) { console.error('[cita] correo de confirmación v2:', e && e.message); }
+    }
+
     // 3. Aviso a Maikel y evento «Schedule» a Meta.
     try {
       await require('./_aviso.js').seMovio('agendado', {
@@ -221,4 +239,4 @@ async function primeraCita(contactId) {
   } catch (e) { return null; }
 }
 
-module.exports = { confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, SIN_ENLACE: SIN_ENLACE, fechaGHL: fechaGHL };
+module.exports = { CORREO_CITA_V2: CORREO_CITA_V2, confirmarCita: confirmarCita, citasSinConfirmar: citasSinConfirmar, primeraCita: primeraCita, textoConfirmacion: textoConfirmacion, enlaceDe: enlaceDe, SIN_ENLACE: SIN_ENLACE, fechaGHL: fechaGHL };
