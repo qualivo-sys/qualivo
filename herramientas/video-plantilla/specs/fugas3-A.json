@@ -3,91 +3,91 @@
  "voz": "voz-fugas3-A.mp3",
  "musica": "musica3/2-deephouse-norm.wav",
  "musica_volumen": 1.0,
- "duracion": 52.94,
+ "duracion": 56.81,
  "tiempos_voz": {
   "0": [
    0.0,
-   3.438,
+   3.511,
    1.0
   ],
   "1": [
-   3.721,
-   8.396,
+   4.151,
+   8.924,
    1.0
   ],
   "3": [
-   8.637,
-   11.479,
+   9.522,
+   12.423,
    1.0
   ],
   "4": [
-   11.596,
-   13.208,
+   12.794,
+   14.439,
    1.0
   ],
   "5": [
-   13.554,
-   15.958,
+   15.044,
+   17.498,
    1.0
   ],
   "6": [
-   16.429,
-   18.438,
+   18.38,
+   20.43,
    1.0
   ],
   "7": [
-   18.429,
-   20.542,
+   20.422,
+   22.579,
    1.0
   ],
   "8": [
-   20.825,
-   21.833,
+   23.169,
+   24.198,
    1.0
   ],
   "9": [
-   22.075,
-   24.562,
+   24.446,
+   26.985,
    1.0
   ],
   "10": [
-   25.512,
-   28.25,
+   27.946,
+   30.74,
    1.0
   ],
   "11": [
-   28.762,
-   31.458,
+   31.265,
+   34.017,
    1.0
   ],
   "12": [
-   31.617,
-   33.542,
+   34.18,
+   36.145,
    1.0
   ],
   "13": [
-   33.888,
-   36.021,
+   36.499,
+   38.677,
    1.0
   ],
   "14": [
-   36.429,
-   40.583,
+   39.445,
+   43.686,
    1.0
   ],
   "17": [
-   41.054,
-   45.604,
+   44.168,
+   48.814,
    1.0
   ],
   "15": [
-   45.846,
-   47.75,
+   49.362,
+   51.305,
    1.0
   ],
   "16": [
-   48.033,
-   50.979,
+   51.846,
+   54.853,
    1.0
   ]
  },
@@ -139,7 +139,7 @@
      ]
     },
     {
-     "desde": 1.99404,
+     "desde": 2.03638,
      "bloques": [
       {
        "estilo": "grande",
@@ -152,7 +152,7 @@
    ]
   },
   {
-   "inicio": 3.721,
+   "inicio": 4.151,
    "tipo": "plano",
    "src": "clips/0.mp4",
    "transicion": {
@@ -183,7 +183,7 @@
    ]
   },
   {
-   "inicio": 5.396000000000001,
+   "inicio": 6.63296,
    "tipo": "plano",
    "src": "clips/3.mp4",
    "transicion": {
@@ -220,10 +220,10 @@
        "texto": "Le contestan el lunes."
       }
      ],
-     "hasta": 1.5
+     "hasta": 1.1455199999999999
     },
     {
-     "desde": 1.5,
+     "desde": 1.1455199999999999,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -235,7 +235,7 @@
    ]
   },
   {
-   "inicio": 8.637,
+   "inicio": 9.522,
    "tipo": "plano",
    "src": "clips/2.mp4",
    "transicion": {
@@ -283,7 +283,7 @@
      ]
     },
     {
-     "desde": 1.5630999999999995,
+     "desde": 1.59555,
      "bloques": [
       {
        "estilo": "fuga",
@@ -295,7 +295,7 @@
    ]
   },
   {
-   "inicio": 11.596,
+   "inicio": 12.794,
    "tipo": "plano",
    "src": "clips/5.mp4",
    "transicion": {
@@ -315,7 +315,7 @@
      ]
     },
     {
-     "desde": 0.6448,
+     "desde": 0.6579999999999999,
      "bloques": [
       {
        "estilo": "fuga",
@@ -327,7 +327,7 @@
    ]
   },
   {
-   "inicio": 13.554,
+   "inicio": 15.044,
    "tipo": "plano",
    "src": "clips/7.mp4",
    "transicion": {
@@ -347,7 +347,7 @@
      ]
     },
     {
-     "desde": 1.0818,
+     "desde": 1.1043000000000003,
      "bloques": [
       {
        "estilo": "fuga",
@@ -360,7 +360,7 @@
    ]
   },
   {
-   "inicio": 16.429,
+   "inicio": 18.38,
    "tipo": "tarjeta",
    "fondo": "#F2F3F5",
    "transicion": {
@@ -381,7 +381,7 @@
      ]
     },
     {
-     "desde": 1.1049500000000003,
+     "desde": 1.1275000000000004,
      "bloques": [
       {
        "estilo": "grande",
@@ -395,7 +395,7 @@
    ]
   },
   {
-   "inicio": 18.429,
+   "inicio": 20.422,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -432,10 +432,10 @@
        ]
       }
      ],
-     "hasta": 0.6972900000000011
+     "hasta": 0.71181
     },
     {
-     "desde": 0.6972900000000011,
+     "desde": 0.71181,
      "bloques": [
       {
        "estilo": "cadena",
@@ -458,10 +458,10 @@
        ]
       }
      ],
-     "hasta": 1.5213600000000023
+     "hasta": 1.55304
     },
     {
-     "desde": 1.5213600000000023,
+     "desde": 1.55304,
      "bloques": [
       {
        "estilo": "cadena",
@@ -484,7 +484,7 @@
      ]
     },
     {
-     "desde": 1.5213600000000023,
+     "desde": 1.55304,
      "bloques": [
       {
        "estilo": "grande",
@@ -497,7 +497,7 @@
    ]
   },
   {
-   "inicio": 20.825,
+   "inicio": 23.169,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -557,7 +557,7 @@
    ]
   },
   {
-   "inicio": 22.075,
+   "inicio": 24.446,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "transicion": {
@@ -623,7 +623,7 @@
      ]
     },
     {
-     "desde": 2.1309400000000007,
+     "desde": 2.17,
      "bloques": [
       {
        "estilo": "medidor",
@@ -633,10 +633,10 @@
        "fraccion": 0.3
       }
      ],
-     "hasta": 2.330940000000001
+     "hasta": 2.37
     },
     {
-     "desde": 2.330940000000001,
+     "desde": 2.37,
      "bloques": [
       {
        "estilo": "medidor",
@@ -646,10 +646,10 @@
        "fraccion": 0.6
       }
      ],
-     "hasta": 2.5309400000000006
+     "hasta": 2.57
     },
     {
-     "desde": 2.5309400000000006,
+     "desde": 2.57,
      "bloques": [
       {
        "estilo": "medidor",
@@ -661,7 +661,7 @@
      ]
     },
     {
-     "desde": 2.6309400000000007,
+     "desde": 2.67,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -674,7 +674,7 @@
    ]
   },
   {
-   "inicio": 25.512,
+   "inicio": 27.946,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 29.0,
@@ -713,7 +713,7 @@
    ]
   },
   {
-   "inicio": 28.762,
+   "inicio": 31.265,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -761,10 +761,10 @@
        ]
       }
      ],
-     "hasta": 0.6739999999999995
+     "hasta": 0.6880000000000006
     },
     {
-     "desde": 0.6739999999999995,
+     "desde": 0.6880000000000006,
      "bloques": [
       {
        "estilo": "linea",
@@ -793,10 +793,10 @@
        ]
       }
      ],
-     "hasta": 1.347999999999999
+     "hasta": 1.3760000000000012
     },
     {
-     "desde": 1.347999999999999,
+     "desde": 1.3760000000000012,
      "bloques": [
       {
        "estilo": "linea",
@@ -826,10 +826,10 @@
        ]
       }
      ],
-     "hasta": 2.0219999999999985
+     "hasta": 2.064000000000002
     },
     {
-     "desde": 2.0219999999999985,
+     "desde": 2.064000000000002,
      "bloques": [
       {
        "estilo": "linea",
@@ -875,7 +875,7 @@
    ]
   },
   {
-   "inicio": 31.617,
+   "inicio": 34.18,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 36.5,
@@ -914,7 +914,7 @@
    ]
   },
   {
-   "inicio": 33.888,
+   "inicio": 36.499,
    "tipo": "plano",
    "src": "clips/4.mp4",
    "brillo": -0.08,
@@ -942,10 +942,10 @@
        "texto": "Cuando está preparado para hablar…"
       }
      ],
-     "hasta": 1.1731500000000015
+     "hasta": 1.1978999999999986
     },
     {
-     "desde": 1.1731500000000015,
+     "desde": 1.1978999999999986,
      "bloques": [
       {
        "estilo": "grande",
@@ -958,7 +958,7 @@
    ]
   },
   {
-   "inicio": 36.429,
+   "inicio": 39.445,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 43.9,
@@ -993,10 +993,10 @@
        "texto": "Qué pasa con cada oportunidad"
       }
      ],
-     "hasta": 1.7446799999999985
+     "hasta": 1.7812199999999998
     },
     {
-     "desde": 1.7446799999999985,
+     "desde": 1.7812199999999998,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -1005,10 +1005,10 @@
        "texto": "Desde qué anuncio llegó…"
       }
      ],
-     "hasta": 2.990879999999997
+     "hasta": 3.05352
     },
     {
-     "desde": 2.990879999999997,
+     "desde": 3.05352,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -1021,7 +1021,7 @@
    ]
   },
   {
-   "inicio": 41.054,
+   "inicio": 44.168,
    "tipo": "plano",
    "src": "clips/intel-anuncios.mp4",
    "desde": 0.0,
@@ -1056,10 +1056,10 @@
        "texto": "Analizamos cada anuncio con esos datos"
       }
      ],
-     "hasta": 2.2749999999999986
+     "hasta": 2.3230000000000004
     },
     {
-     "desde": 2.2749999999999986,
+     "desde": 2.3230000000000004,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -1070,7 +1070,7 @@
      ]
     },
     {
-     "desde": 2.8209999999999984,
+     "desde": 2.8805200000000006,
      "bloques": [
       {
        "estilo": "sub",
@@ -1083,7 +1083,7 @@
    ]
   },
   {
-   "inicio": 45.846,
+   "inicio": 49.362,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -1133,7 +1133,7 @@
    ]
   },
   {
-   "inicio": 48.033,
+   "inicio": 51.846,
    "tipo": "tarjeta",
    "fondo": "#27BDB1",
    "textos": [

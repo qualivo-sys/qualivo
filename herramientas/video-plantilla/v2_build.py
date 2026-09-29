@@ -49,7 +49,7 @@ def escenas_de(tiempos):
             T(d(0) * 0.58, estilo='grande', y=1150, tam=92, texto='*SE PERDIÓ DESPUÉS'),
         ]})
     if hay(1):   # LAURA · domingo 22:40 → lunes
-        b = min(4.9 / tiempos[1][2], d(1) - 3.0)
+        b = d(1) * 0.52   # corte del domingo al lunes justo cuando la voz dice «Le contestaron»
         E.append({'inicio': t0(1), 'tipo': 'plano', 'src': 'clips/0.mp4', 'transicion': tr('smoothleft', .45), 'textos': [
             T(0, estilo='etiqueta', y=150, texto='Domingo · 22:40'),
             T(0.9, estilo='sub', y=1250, texto='Laura pide información de un curso'),

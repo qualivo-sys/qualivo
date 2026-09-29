@@ -226,19 +226,25 @@ def escena(e, dur, tmp, n):
         base = '[0:v]fps=%d,trim=duration=%.3f,setpts=PTS-STARTPTS[v0]' % (FPS, dur)
         entradas = ['-f', 'lavfi', '-i', 'color=c=%s:s=%dx%d:d=%.3f' % (e.get('fondo', '#101319'), W, H, dur)]
     filtro, ult = [base], 'v0'
+    finales = [b for (_, _, b) in capas]
     for i, (p, a, b) in enumerate(capas):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', p]
-        filtro.append("[%d:v]format=rgba,fade=t=in:st=%.3f:d=0.18:alpha=1[t%d]" % (i + 1, a, i + 1))
-        filtro.append("[%s][t%d]overlay=x=0:y='if(lt(t,%.3f),26*(1-max(t-%.3f,0)/0.22),0)':enable='between(t,%.3f,%.3f)'[v%d]"
-                      % (ult, i + 1, a + 0.22, a, a, b, i + 1))
+        sustituye = a > 0.01 and any(abs(f - a) < 0.06 for f in finales)
+        if sustituye:   # cambia a la vez que otro texto se va: corte limpio, sin fundido (evita el parpadeo)
+            filtro.append("[%s][%d:v]overlay=0:0:enable='gte(t,%.3f)*lt(t,%.3f)'[v%d]" % (ult, i + 1, a, b, i + 1))
+        else:           # aparece por primera vez: fundido corto + sube 26 px
+            filtro.append("[%d:v]format=rgba,fade=t=in:st=%.3f:d=0.18:alpha=1[t%d]" % (i + 1, a, i + 1))
+            filtro.append("[%s][t%d]overlay=x=0:y='if(lt(t,%.3f),26*(1-max(t-%.3f,0)/0.22),0)':enable='gte(t,%.3f)*lt(t,%.3f)'[v%d]"
+                          % (ult, i + 1, a + 0.22, a, a, b, i + 1))
         ult = 'v%d' % (i + 1)
     if e.get('marco'):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', os.path.join(AQUI, 'marco.png')]
         filtro[0] = filtro[0].replace('[%d:v]overlay' % 99, '[%d:v]overlay' % (len(capas) + 1))
     if e['tipo'] == 'tarjeta' and e.get('zoom', True):
         # Zoom lento (5 % a lo largo de la escena) para que la tarjeta respire.
-        N = int(dur * FPS)
-        filtro.append("[%s]zoompan=z='1+0.05*on/%d':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=%dx%d:fps=%d[vz]" % (ult, N, W, H, FPS))
+        K = '(1+0.04*t/%.3f)' % dur
+        filtro.append("[%s]scale=w='trunc(%d*%s/2)*2':h='trunc(%d*%s/2)*2':eval=frame:flags=bicubic,"
+                      "crop=%d:%d:x='(%d*%s-%d)/2':y='(%d*%s-%d)/2'[vz]" % (ult, W, K, H, K, W, H, W, K, W, H, K, H))
         ult = 'vz'
     # Misma cadencia y misma base de tiempos en todas las escenas: xfade lo exige.
     filtro.append('[%s]fps=%d,settb=AVTB,format=yuv420p[vf]' % (ult, FPS))

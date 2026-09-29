@@ -4,9 +4,9 @@ guion recortado para quedar por debajo de 60 s y música más animada. Las escen
 de cada frase, que se saca de la transcripción con marcas por palabra (voz-v3/t0.json)."""
 import json, subprocess, sys, unicodedata, imageio_ffmpeg, montar, v2_build
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-TEMPO = 0.96          # un pelín más pausada que la toma original
+TEMPO = 0.94          # algo más pausada que la toma original
 COLA = 1.8
-PAUSAS = {10: 0.5}   # segundos de silencio que se meten justo antes de esa frase
+PAUSAS = {1: 0.35, 3: 0.35, 4: 0.25, 5: 0.25, 6: 0.4, 8: 0.3, 10: 0.5, 14: 0.35, 15: 0.3, 16: 0.25}   # segundos de silencio que se meten justo antes de esa frase
 # índice de escena (mismos que v2_build) -> primeras palabras de su frase
 INICIOS = [(0, 'este lead'), (1, 'laura'), (3, 'uno no'), (4, 'otro reserva'), (5, 'otro recibe'), (6, 'y al final'),
            (7, 'pero mira'), (8, 'por eso'), (9, 'el anuncio filtra'), (10, 'quien pide'), (11, 'si no contesta'),
@@ -59,7 +59,7 @@ def construir(variante):
             'escenas': v2_build.escenas_de(tiempos)}
     json.dump(spec, open(f'fugas3-{variante}.json', 'w'), ensure_ascii=False, indent=1)
     print(variante, 'dur', spec['duracion'], 'escenas', len(spec['escenas']))
-    montar.montar(f'fugas3-{variante}.json', f'out-fugas5/{nombre}.mp4')
+    montar.montar(f'fugas3-{variante}.json', f'out-fugas6/{nombre}.mp4')
 
 if __name__ == '__main__':
     for v in sys.argv[1:]: construir(v)
