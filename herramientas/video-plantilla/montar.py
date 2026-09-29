@@ -2,13 +2,18 @@
 """Montador de la plantilla de vídeo «Antes / Con el sistema» de Qualivo.
 
 Lee un JSON con las escenas (planos de vídeo o tarjetas de color), los textos
-con sus tiempos y la voz, y saca un MP4 vertical 1080x1920. Cada variante nueva
-es otro JSON: se cambian los huecos (gancho, sector, contacto, planos, voz) y
-se vuelve a montar.
+con sus tiempos, la voz y opcionalmente una música, y saca un MP4 vertical
+1080x1920. Cada variante nueva es otro JSON.
 
     python3 montar.py variante.json salida.mp4
+
+Escena: { inicio, tipo: plano|tarjeta, src|fondo, textos: [{desde, hasta, bloques}],
+          transicion: { tipo, dur } }   # cómo se pasa a la escena siguiente
+Tipos de transición (xfade de ffmpeg): fade, fadeblack, fadegrays, wipeleft, wipeup,
+smoothleft, smoothup, circleopen, dissolve… Sin «transicion», corte seco.
+Las tarjetas llevan un zoom lento para que no queden como una foto fija.
 """
-import json, os, subprocess, sys, tempfile
+import json, os, re, subprocess, sys, tempfile
 from PIL import Image, ImageDraw, ImageFont
 
 import imageio_ffmpeg
@@ -18,7 +23,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 
 COL = {
     'tinta': (16, 19, 25), 'blanco': (255, 255, 255), 'turquesa': (39, 189, 177),
-    'gris': (90, 94, 102), 'grisclaro': (242, 243, 245), 'turquesa-oscuro': (31, 158, 148),
+    'gris': (120, 125, 134), 'coral': (226, 84, 74), 'grisclaro': (242, 243, 245), 'turquesa-oscuro': (31, 158, 148),
 }
 
 def fuente(peso, tam):
@@ -50,10 +55,11 @@ def capa(bloques):
                 d.text((x, y), ln, font=f, fill=COL['tinta']); y += 100
         elif est == 'grande':
             f = fuente(800, b.get('tam', 96)); color = COL[b.get('color', 'blanco')]
-            for ln in partir(b['texto'], f, W - 160):
-                if ln.startswith('*'):
-                    ln = ln[1:]; w = f.getlength(ln); x = (W - w) / 2
-                    d.rounded_rectangle([x - 18, y - 6, x + w + 18, y + 118], radius=10, fill=COL['turquesa'])
+            todo = b['texto'].startswith('*'); texto = b['texto'][1:] if todo else b['texto']
+            for ln in partir(texto, f, W - 200):
+                if todo or ln.startswith('*'):
+                    ln = ln.lstrip('*'); w = f.getlength(ln); x = (W - w) / 2
+                    d.rounded_rectangle([x - 18, y - 6, x + w + 18, y + int(b.get('tam', 96) * 1.2)], radius=10, fill=COL['turquesa'])
                     d.text((x, y), ln, font=f, fill=COL['tinta'])
                 else:
                     w = f.getlength(ln); d.text(((W - w) / 2, y), ln, font=f, fill=color)
@@ -74,15 +80,95 @@ def capa(bloques):
                 d.line([(114, cy), (126, cy + 13), (147, cy - 12)], fill=COL['tinta'], width=8)
         elif est == 'boton':
             f = fuente(700, 50); w = f.getlength(b['texto']); x = (W - w) / 2
-            d.rounded_rectangle([x - 50, y, x + w + 50, y + 110], radius=55, fill=COL['tinta'])
-            d.text((x, y + 26), b['texto'], font=f, fill=COL['blanco'])
+            fondo = COL[b.get('color', 'tinta')]; tinta = COL['tinta'] if fondo != COL['tinta'] else COL['blanco']
+            d.rounded_rectangle([x - 50, y, x + w + 50, y + 110], radius=55, fill=fondo)
+            d.text((x, y + 26), b['texto'], font=f, fill=tinta)
+        elif est == 'hueco':
+            # Hueco para el plano de Maikel a cámara: marco discontinuo + rótulo. Se sustituye en edición.
+            alto = b.get('alto', 900); x0, x1 = 90, W - 90
+            for (ax, ay, bx, by) in [(x0, y, x1, y), (x0, y + alto, x1, y + alto), (x0, y, x0, y + alto), (x1, y, x1, y + alto)]:
+                largo = (bx - ax) if by == ay else (by - ay); n = int(largo / 36)
+                for k in range(n):
+                    if k % 2: continue
+                    if by == ay: d.line([(ax + k * 36, ay), (ax + (k + 1) * 36, ay)], fill=COL['gris'], width=6)
+                    else: d.line([(ax, ay + k * 36), (ax, ay + (k + 1) * 36)], fill=COL['gris'], width=6)
+            f = fuente(700, 38); t = b.get('texto', 'PLANO A CÁMARA').upper(); w = f.getlength(t)
+            d.text(((W - w) / 2, y + alto / 2 - 24), t, font=f, fill=COL['gris'])
+            if b.get('nota'):
+                f2 = fuente(600, 32); yy = y + alto / 2 + 40
+                for ln in partir(b['nota'], f2, W - 320):
+                    w2 = f2.getlength(ln); d.text(((W - w2) / 2, yy), ln, font=f2, fill=COL['gris']); yy += 44
+        elif est == 'pasos':
+            # Línea del recorrido: ANUNCIO ✓ → LEAD ✓ → RESPUESTA ✕
+            tam = b.get('tam', 34); items = b['pasos']
+            while True:
+                f = fuente(700, tam); sep = int(tam * 0.6); icono = int(tam * 1.25)
+                anchos = [f.getlength(t) + 36 + icono for t, _ in items]
+                total = sum(anchos) + sep * (len(items) - 1)
+                if total <= W - 100 or tam <= 20: break
+                tam -= 1
+            x = (W - total) / 2
+            for (t, ok), an in zip(items, anchos):
+                d.rounded_rectangle([x, y, x + an, y + 76], radius=38, fill=(16, 19, 25, 225))
+                d.text((x + 20, y + 38 - tam * 0.6), t, font=f, fill=COL['blanco'])
+                cx, cy = x + an - 22 - icono / 2, y + 38
+                if ok == 'ok':
+                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], fill=COL['turquesa'])
+                    d.line([(cx - 9, cy), (cx - 2, cy + 8), (cx + 10, cy - 8)], fill=COL['tinta'], width=5)
+                elif ok == 'ko':
+                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], fill=COL['coral'])
+                    d.line([(cx - 8, cy - 8), (cx + 8, cy + 8)], fill=COL['blanco'], width=5)
+                    d.line([(cx - 8, cy + 8), (cx + 8, cy - 8)], fill=COL['blanco'], width=5)
+                else:
+                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], outline=COL['gris'], width=4)
+                x += an
+                if (t, ok) != items[-1]:
+                    d.line([(x + 4, y + 38), (x + sep - 4, y + 38)], fill=COL['blanco'], width=4); x += sep
+        elif est == 'fuga':
+            # Etiqueta grande centrada: FUGA #1 · SIN SEGUIMIENTO
+            f = fuente(800, b.get('tam', 50)); t = b['texto'].upper(); w = f.getlength(t)
+            x = (W - w) / 2; fondo = COL[b.get('color', 'coral')]
+            d.rounded_rectangle([x - 40, y, x + w + 40, y + 104], radius=18, fill=fondo)
+            d.text((x, y + 22), t, font=f, fill=COL['blanco'] if b.get('color', 'coral') == 'coral' else COL['tinta'])
+        elif est == 'cadena':
+            # Cadena vertical ANUNCIO ↓ LEAD ↓ … ↓ VENTA
+            f = fuente(800, b.get('tam', 60)); paso = b.get('paso', 128); color = COL[b.get('color', 'blanco')]
+            marcados = set(b.get('marcar', [])); apagados = set(b.get('apagar', []))
+            for i, t in enumerate(b['items']):
+                w = f.getlength(t); x = (W - w) / 2; yy = y + i * paso
+                if i in marcados:
+                    d.rounded_rectangle([x - 22, yy - 8, x + w + 22, yy + int(b.get('tam', 60) * 1.25)], radius=12, fill=COL['turquesa'])
+                    d.text((x, yy), t, font=f, fill=COL['tinta'])
+                else:
+                    d.text((x, yy), t, font=f, fill=COL['gris'] if i in apagados else color)
+                if i < len(b['items']) - 1:
+                    ay = yy + int(b.get('tam', 60) * 1.25) + 12; cx = W / 2
+                    d.line([(cx, ay), (cx, ay + 28)], fill=COL['gris'], width=5)
+                    d.polygon([(cx - 11, ay + 24), (cx + 11, ay + 24), (cx, ay + 40)], fill=COL['gris'])
+        elif est == 'linea':
+            # Fila de hitos: DÍA 0 · WhatsApp   DÍA 1 · Llamada   DÍA 3 · WhatsApp
+            f1 = fuente(800, 34); f2 = fuente(600, 34); items = b['items']; n = len(items)
+            ancho = (W - 160) / n; hechos = set(b.get('hechos', range(n)))
+            d.line([(80 + ancho / 2, y + 30), (W - 80 - ancho / 2, y + 30)], fill=COL['gris'], width=4)
+            for i, (a, c) in enumerate(items):
+                cx = 80 + ancho * i + ancho / 2
+                d.ellipse([cx - 22, y + 8, cx + 22, y + 52], fill=COL['turquesa'] if i in hechos else COL['gris'])
+                if i in hechos: d.line([(cx - 10, y + 30), (cx - 3, y + 38), (cx + 11, y + 22)], fill=COL['tinta'], width=5)
+                w1 = f1.getlength(a); d.text((cx - w1 / 2, y + 74), a, font=f1, fill=COL['blanco'])
+                w2 = f2.getlength(c); d.text((cx - w2 / 2, y + 122), c, font=f2, fill=COL['grisclaro'])
     return im
 
 def run(args):
-    subprocess.run([FF, '-hide_banner', '-loglevel', 'error', '-y'] + args, check=True)
+    r = subprocess.run([FF, '-hide_banner', '-loglevel', 'error', '-y'] + args, capture_output=True, text=True)
+    if r.returncode: raise RuntimeError('ffmpeg: ' + r.stderr[-1500:])
+
+def duracion_de(src):
+    info = subprocess.run([FF, '-i', src], capture_output=True, text=True).stderr
+    m = re.search(r'Duration: (\d+):(\d+):([\d.]+)', info)
+    return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))
 
 def escena(e, dur, tmp, n):
-    """Devuelve la ruta de un mp4 sin audio de duración dur."""
+    """Devuelve la ruta de un mp4 sin audio de duración dur (ya incluye la cola de transición)."""
     capas = []
     for i, t in enumerate(e.get('textos', [])):
         p = os.path.join(tmp, 'c%d_%d.png' % (n, i)); capa(t['bloques']).save(p)
@@ -90,15 +176,19 @@ def escena(e, dur, tmp, n):
     salida = os.path.join(tmp, 'e%02d.mp4' % n)
     if e['tipo'] == 'plano':
         src = os.path.join(AQUI, e['src'])
-        info = subprocess.run([FF, '-i', src], capture_output=True, text=True).stderr
-        import re
-        m = re.search(r'Duration: (\d+):(\d+):([\d.]+)', info)
-        dsrc = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))
-        velocidad = max(1.0, dur / dsrc)  # si el plano es corto, se ralentiza
-        base = ('[0:v]setpts=%.4f*PTS,scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d,fps=%d,'
-                'eq=brightness=%.2f:saturation=%.2f,trim=duration=%.3f,setpts=PTS-STARTPTS[v0]'
-                % (velocidad, W, H, W, H, FPS, e.get('brillo', -0.06), e.get('saturacion', 0.9), dur))
-        entradas = ['-i', src]
+        desde = float(e.get('desde', 0))
+        velocidad = max(1.0, dur / (duracion_de(src) - desde))  # si el plano es corto, se ralentiza
+        if e.get('marco'):
+            # Grabación de pantalla: la app dentro de un marco con esquinas redondeadas sobre fondo tinta.
+            base = ('[0:v]setpts=%.4f*PTS,scale=960:1706:force_original_aspect_ratio=increase,crop=960:1706,fps=%d,'
+                    'pad=%d:%d:60:107:#101319,trim=duration=%.3f,setpts=PTS-STARTPTS[v00];'
+                    "[v00][%d:v]overlay=0:0[v0]" % (velocidad, FPS, W, H, dur, 99))
+            entradas = ['-ss', '%.3f' % desde, '-i', src]
+        else:
+            base = ('[0:v]setpts=%.4f*PTS,scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d,fps=%d,'
+                    'eq=brightness=%.2f:saturation=%.2f,trim=duration=%.3f,setpts=PTS-STARTPTS[v0]'
+                    % (velocidad, W, H, W, H, FPS, e.get('brillo', -0.06), e.get('saturacion', 0.9), dur))
+            entradas = ['-ss', '%.3f' % desde, '-i', src]
     else:
         base = '[0:v]fps=%d,trim=duration=%.3f,setpts=PTS-STARTPTS[v0]' % (FPS, dur)
         entradas = ['-f', 'lavfi', '-i', 'color=c=%s:s=%dx%d:d=%.3f' % (e.get('fondo', '#101319'), W, H, dur)]
@@ -107,23 +197,59 @@ def escena(e, dur, tmp, n):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', p]
         filtro.append("[%s][%d:v]overlay=0:0:enable='between(t,%.3f,%.3f)'[v%d]" % (ult, i + 1, a, b, i + 1))
         ult = 'v%d' % (i + 1)
-    run(entradas + ['-filter_complex', ';'.join(filtro), '-map', '[%s]' % ult, '-t', '%.3f' % dur,
+    if e.get('marco'):
+        entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', os.path.join(AQUI, 'marco.png')]
+        filtro[0] = filtro[0].replace('[%d:v]overlay' % 99, '[%d:v]overlay' % (len(capas) + 1))
+    if e['tipo'] == 'tarjeta' and e.get('zoom', True):
+        # Zoom lento (5 % a lo largo de la escena) para que la tarjeta respire.
+        N = int(dur * FPS)
+        filtro.append("[%s]zoompan=z='1+0.05*on/%d':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=%dx%d:fps=%d[vz]" % (ult, N, W, H, FPS))
+        ult = 'vz'
+    # Misma cadencia y misma base de tiempos en todas las escenas: xfade lo exige.
+    filtro.append('[%s]fps=%d,settb=AVTB,format=yuv420p[vf]' % (ult, FPS))
+    run(entradas + ['-filter_complex', ';'.join(filtro), '-map', '[vf]', '-t', '%.3f' % dur, '-r', str(FPS),
                     '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'veryfast', '-crf', '20', salida])
     return salida
 
 def montar(spec_path, salida):
     spec = json.load(open(spec_path))
     tmp = tempfile.mkdtemp(prefix='plantilla-')
-    partes = []
     esc = spec['escenas']
+    partes, duras, trans = [], [], []
     for n, e in enumerate(esc):
         fin = esc[n + 1]['inicio'] if n + 1 < len(esc) else spec['duracion']
-        partes.append(escena(e, fin - e['inicio'], tmp, n))
-    lista = os.path.join(tmp, 'lista.txt')
-    open(lista, 'w').write(''.join("file '%s'\n" % p for p in partes))
-    run(['-f', 'concat', '-safe', '0', '-i', lista, '-i', os.path.join(AQUI, spec['voz']),
-         '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k',
-         '-t', '%.3f' % spec['duracion'], '-movflags', '+faststart', salida])
+        dur = fin - e['inicio']
+        tr = e.get('transicion') if n + 1 < len(esc) else None
+        cola = tr['dur'] if tr else 0.0
+        partes.append(escena(e, dur + cola, tmp, n)); duras.append(dur); trans.append(tr)
+    # Cadena de transiciones: cada escena lleva cola de T segundos y la siguiente empieza
+    # en su frontera, así los textos siguen sincronizados con la voz.
+    entradas = []
+    for p in partes: entradas += ['-i', p]
+    filtro, ult, acum = [], 'i0', 0.0
+    for n in range(len(partes)): filtro.append('[%d:v]settb=AVTB,fps=%d[i%d]' % (n, FPS, n))
+    for n in range(len(partes) - 1):
+        acum += duras[n]; tr = trans[n]
+        if tr:
+            filtro.append('[%s][i%d]xfade=transition=%s:duration=%.3f:offset=%.3f[x%d]' % (ult, n + 1, tr['tipo'], tr['dur'], acum, n + 1))
+        else:
+            filtro.append('[%s][i%d]concat=n=2:v=1:a=0,settb=AVTB,fps=%d[x%d]' % (ult, n + 1, FPS, n + 1))
+        ult = 'x%d' % (n + 1)
+    filtro.append('[%s]format=yuv420p[vout]' % ult)
+    # Audio: voz + música por debajo, que baja sola cuando habla la voz.
+    iv = len(partes); entradas += ['-i', os.path.join(AQUI, spec['voz'])]
+    if spec.get('musica'):
+        im = iv + 1; entradas += ['-stream_loop', '-1', '-i', os.path.join(AQUI, spec['musica'])]
+        vol = spec.get('musica_volumen', 0.16); fin = spec['duracion']
+        filtro.append('[%d:a]aformat=sample_rates=44100:channel_layouts=stereo,volume=%.2f,afade=t=in:d=1.5,afade=t=out:st=%.2f:d=2.5[m0]' % (im, vol, fin - 2.5))
+        filtro.append('[%d:a]aformat=sample_rates=44100:channel_layouts=stereo,asplit[va][vb]' % iv)
+        filtro.append('[m0][vb]sidechaincompress=threshold=0.03:ratio=5:attack=40:release=500[md]')
+        filtro.append('[va][md]amix=inputs=2:duration=first:normalize=0,apad=pad_dur=3[aout]')
+    else:
+        filtro.append('[%d:a]apad=pad_dur=3[aout]' % iv)
+    run(entradas + ['-filter_complex', ';'.join(filtro), '-map', '[vout]', '-map', '[aout]',
+                    '-t', '%.3f' % spec['duracion'], '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '19',
+                    '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', salida])
     print('ok', salida)
 
 if __name__ == '__main__':

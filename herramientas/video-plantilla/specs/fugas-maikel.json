@@ -1,0 +1,820 @@
+{
+ "nombre": "03_Qualivo_Fugas_Maikel-camara_9x16",
+ "voz": "maikel/voz.mp3",
+ "musica": "musica.mp3",
+ "musica_volumen": 0.07,
+ "duracion": 61.1,
+ "escenas": [
+  {
+   "inicio": 0.0,
+   "tipo": "plano",
+   "src": "maikel/cara.mp4",
+   "desde": 0.0,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 200,
+       "tam": 70,
+       "texto": "Antes de decir que tus leads son malos…"
+      }
+     ]
+    },
+    {
+     "desde": 3.3,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 470,
+       "tam": 76,
+       "texto": "*haz una cosa"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 4.6,
+   "tipo": "plano",
+   "src": "maikel/cara-zoom.mp4",
+   "desde": 4.6,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.1,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 200,
+       "tam": 72,
+       "texto": "Coge tus últimos"
+      }
+     ]
+    },
+    {
+     "desde": 0.9,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 310,
+       "tam": 86,
+       "texto": "*20 leads"
+      }
+     ]
+    },
+    {
+     "desde": 2.7,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 58,
+       "texto": "¿Qué pasó con cada uno?"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 9.1,
+   "tipo": "plano",
+   "src": "clips/0.mp4",
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Lead #1"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "Pidió info a las 20:00"
+      }
+     ],
+     "hasta": 2.3
+    },
+    {
+     "desde": 2.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "Contestaste al día siguiente"
+      }
+     ]
+    },
+    {
+     "desde": 2.6,
+     "bloques": [
+      {
+       "estilo": "fuga",
+       "y": 1300,
+       "texto": "Fuga · Respuesta tarde"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 13.6,
+   "tipo": "plano",
+   "src": "clips/2.mp4",
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Lead #2"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "Respondió al primer WhatsApp"
+      }
+     ],
+     "hasta": 2.2
+    },
+    {
+     "desde": 2.2,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "…y no volviste a escribirle"
+      }
+     ]
+    },
+    {
+     "desde": 2.5,
+     "bloques": [
+      {
+       "estilo": "fuga",
+       "y": 1300,
+       "texto": "Fuga · Sin seguimiento"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 17.4,
+   "tipo": "plano",
+   "src": "clips/5.mp4",
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Lead #3"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "Reservó una reunión"
+      }
+     ],
+     "hasta": 1.9
+    },
+    {
+     "desde": 1.9,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "No apareció. Fin."
+      }
+     ]
+    },
+    {
+     "desde": 2.1,
+     "bloques": [
+      {
+       "estilo": "fuga",
+       "y": 1300,
+       "texto": "Fuga · No-show"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 21.4,
+   "tipo": "plano",
+   "src": "clips/6.mp4",
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Lead #4"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "Recibió tu presupuesto"
+      }
+     ],
+     "hasta": 1.9
+    },
+    {
+     "desde": 1.9,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 52,
+       "texto": "…hace tres semanas"
+      }
+     ]
+    },
+    {
+     "desde": 2.1,
+     "bloques": [
+      {
+       "estilo": "fuga",
+       "y": 1300,
+       "tam": 46,
+       "texto": "Fuga · Oferta olvidada"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 24.7,
+   "tipo": "plano",
+   "src": "maikel/cara.mp4",
+   "desde": 24.7,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 200,
+       "tam": 80,
+       "texto": "¿Esos 4 eran malos?"
+      }
+     ]
+    },
+    {
+     "desde": 2.4,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 420,
+       "tam": 66,
+       "texto": "*¿O estamos mirando mal el problema?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 29.35,
+   "tipo": "plano",
+   "src": "maikel/cara-zoom.mp4",
+   "desde": 29.35,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.1,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1520,
+       "tam": 56,
+       "texto": "Pagar por conseguir un lead…"
+      }
+     ],
+     "hasta": 2.0
+    },
+    {
+     "desde": 2.0,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1520,
+       "tam": 56,
+       "texto": "…y dejar el seguimiento al azar"
+      }
+     ]
+    },
+    {
+     "desde": 3.9,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 230,
+       "tam": 92,
+       "texto": "*SALE CARO"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 34.9,
+   "tipo": "plano",
+   "src": "maikel/cara.mp4",
+   "desde": 34.9,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0.4,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 290,
+       "tam": 70,
+       "texto": "Cada oportunidad tiene un"
+      }
+     ]
+    },
+    {
+     "desde": 1.6,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 490,
+       "tam": 80,
+       "texto": "*siguiente paso"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 38.4,
+   "tipo": "plano",
+   "src": "clips/intel.mp4",
+   "desde": 29.0,
+   "marco": true,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Acaba de entrar"
+      }
+     ]
+    },
+    {
+     "desde": 0.9,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 60,
+       "texto": "→ Respuesta"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 40.45,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": false,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "No contesta"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "DÍA 0",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 1",
+         "Llamada"
+        ],
+        [
+         "DÍA 3",
+         "WhatsApp"
+        ]
+       ],
+       "hechos": [
+        0
+       ]
+      }
+     ],
+     "hasta": 0.5
+    },
+    {
+     "desde": 0.5,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "DÍA 0",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 1",
+         "Llamada"
+        ],
+        [
+         "DÍA 3",
+         "WhatsApp"
+        ]
+       ],
+       "hechos": [
+        0,
+        1
+       ]
+      }
+     ],
+     "hasta": 1.0
+    },
+    {
+     "desde": 1.0,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "DÍA 0",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 1",
+         "Llamada"
+        ],
+        [
+         "DÍA 3",
+         "WhatsApp"
+        ]
+       ],
+       "hechos": [
+        0,
+        1,
+        2
+       ]
+      }
+     ]
+    },
+    {
+     "desde": 0.9,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1250,
+       "tam": 60,
+       "texto": "→ Seguimiento"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 42.2,
+   "tipo": "plano",
+   "src": "clips/intel.mp4",
+   "desde": 36.5,
+   "marco": true,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Tiene cita"
+      }
+     ]
+    },
+    {
+     "desde": 0.9,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 60,
+       "texto": "→ Recordatorio"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 44.1,
+   "tipo": "plano",
+   "src": "clips/intel-form-recorrido.mp4",
+   "desde": 13.3,
+   "marco": true,
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Recibió una oferta"
+      }
+     ]
+    },
+    {
+     "desde": 1.7,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 60,
+       "texto": "→ No desaparece"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 46.95,
+   "tipo": "plano",
+   "src": "maikel/cara-zoom.mp4",
+   "desde": 46.95,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 230,
+       "tam": 66,
+       "texto": "Y cuando está preparado para comprar…"
+      }
+     ]
+    },
+    {
+     "desde": 2.3,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 520,
+       "tam": 86,
+       "texto": "*entra tu equipo"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 50.3,
+   "tipo": "plano",
+   "src": "maikel/cara.mp4",
+   "desde": 50.3,
+   "brillo": 0.0,
+   "saturacion": 1.0,
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 220,
+       "tam": 66,
+       "texto": "Antes de invertir más en conseguir leads…"
+      }
+     ],
+     "hasta": 2.6
+    },
+    {
+     "desde": 2.6,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 220,
+       "tam": 66,
+       "texto": "asegúrate de no perder"
+      }
+     ]
+    },
+    {
+     "desde": 3.2,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 320,
+       "tam": 74,
+       "texto": "*los que ya tienes"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 55.8,
+   "tipo": "plano",
+   "src": "clips/intel-form-recorrido.mp4",
+   "desde": 7.3,
+   "marco": true,
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Qualivo Intelligence"
+      }
+     ]
+    },
+    {
+     "desde": 0.8,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 56,
+       "texto": "Analizamos contigo todo el recorrido"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 59.2,
+   "tipo": "tarjeta",
+   "fondo": "#27BDB1",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 380,
+       "tam": 84,
+       "color": "tinta",
+       "texto": "¿Dónde estás perdiendo tus leads?"
+      }
+     ]
+    },
+    {
+     "desde": 0.4,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 820,
+       "tam": 58,
+       "color": "tinta",
+       "texto": "Diagnóstico gratuito · 30 minutos"
+      }
+     ]
+    },
+    {
+     "desde": 0.8,
+     "bloques": [
+      {
+       "estilo": "boton",
+       "y": 1060,
+       "texto": "Ver mis fugas"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 1560,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Qualivo"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
