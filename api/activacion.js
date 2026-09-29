@@ -96,6 +96,8 @@ function esLeadForm(contacto) {
 // Qué paso toca. Devuelve null si no hay nada pendiente todavía.
 function siguientePaso(contacto, minutos) {
   const hay = function (t) { return A.tiene(contacto, t); };
+  // Lead A o B retenido para Maikel (29-sep): nada automático hasta que él lo suelte.
+  if (hay('act-espera-maikel')) return null;
   // Si una puerta (landing, formulario de Meta) está mandando el primer WhatsApp, se espera.
   if (!hay('act-wa1') && minutosDesdeEtiqueta(contacto, 'act-wa1-enviando-') < 15) return null;
   if (!hay('act-wa1')) return minutos >= 0 ? { tipo: 'wa1' } : null;
@@ -396,6 +398,11 @@ async function handler(req, res) {
           else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');
         }
         if (!texto) texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsappDia1(datos) : M.whatsappDia3(datos);
+        // A y B: el primer mensaje lo ve Maikel antes (29-sep). Se retiene y se le avisa.
+        if (paso.tipo === 'wa1' && !A.tiene(c, 'act-soltado')) {
+          const nv = nivelAhora(c);
+          if (nv === 'A' || nv === 'B') { await A.retenerParaMaikel(c, texto, nv); resumen.espera_maikel = (resumen.espera_maikel || 0) + 1; continue; }
+        }
         // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
         // el mismo texto dos veces. Se reescribe para esta persona; si no se
         // puede, este paso espera a la siguiente vuelta en vez de salir igual.

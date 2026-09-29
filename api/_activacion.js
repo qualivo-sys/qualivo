@@ -347,7 +347,15 @@ async function primerWhatsAppCompleto(contactId, telefono, d) {
   const ia = await AGT.mensajePersonalizado({ nombre: M.nombreCorto(d.nombre), empresa: d.empresa || '', sector: d.sector, fuga: d.fuga || d.hipotesis, inversion: d.inversion, volumen: d.volumen,
     opcion1: tardes[0], opcion2: tardes[1], precualificar: pq }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
   const datosMsg = { nombre: d.nombre, origen: d.origen, inversion: d.inversion, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis, entro: d.entro, precualificar: pq };
-  const texto = ia.texto || M.whatsapp1(datosMsg);
+  const texto = d.texto || ia.texto || M.whatsapp1(datosMsg);
+  // A y B no reciben nada sin que Maikel lo vea antes (d.soltar = ya lo ha aprobado). De noche
+  // no se avisa: el reloj de activación lo retiene y avisa a partir de las 8:00.
+  const n = ficha ? nivelDe(ficha) : '';
+  if ((n === 'A' || n === 'B') && !d.soltar) {
+    if (!enVentana('whatsapp')) return { ok: false, canal: 'ninguno', motivo: 'espera_maikel_de_noche', nivel: n };
+    await retenerParaMaikel(ficha, texto, n);
+    return { ok: false, canal: 'espera_maikel', nivel: n, borrador: texto };
+  }
   const env = await primerWhatsApp(contactId, telefono, { nombre: M.nombreCorto(d.nombre), cita: d.fuga || d.hipotesis || 'el diagnóstico', pregunta: M.pregunta(datosMsg), texto: texto });
   const sello = 'act-wa1-h-' + new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
   await etiquetar(contactId, ['act-wa1', sello].concat(env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
@@ -356,6 +364,32 @@ async function primerWhatsAppCompleto(contactId, telefono, d) {
 }
 
 // Todos los mensajes de un contacto, de más antiguo a más nuevo.
+// 29-sep, Maikel: «cuando sean leads de categoría A o B, que el sistema me notifique a mí antes
+// de escribirles». Se deja el borrador en una nota, se le avisa al móvil y por correo, y la
+// cadencia de ese contacto se para (act-espera-maikel) hasta que él lo suelte: o escribe él, o
+// da el ok y sale el borrador con primerWhatsAppCompleto(..., { soltar: true, texto }).
+function nivelDe(c) {
+  const S = require('./_scoring.js');
+  return S.nivel(S.tipologia(c).puntos, S.comportamiento(c, []).puntos, c);
+}
+async function retenerParaMaikel(c, texto, n) {
+  if ((c.tags || []).indexOf('act-espera-maikel') > -1) return false;
+  await etiquetar(c.id, ['act-espera-maikel', 'nivel-' + String(n).toLowerCase()]);
+  const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
+  await nota(c.id, 'NIVEL ' + n + ' · NO SE LE HA ESCRITO: la regla de Maikel (29-sep) es que los A y B los vea él antes. ' +
+    'Cadencia parada (act-espera-maikel) hasta que escriba él o dé el ok al borrador.\n\nBorrador del primer WhatsApp:\n' + texto);
+  const Av = require('./_aviso.js');
+  try {
+    await Av.movil('LEAD ' + n + ' · NO LE HE ESCRITO, espero tu ok\n' + quien + (c.phone ? '\nTel ' + c.phone : '') +
+      '\n\nBorrador del primer WhatsApp:\n' + texto);
+  } catch (e) { console.error('[activacion] aviso A/B al móvil:', e && e.message); }
+  try {
+    await Av.seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
+      accion: 'LEAD ' + n + ' · espera tu ok antes del primer WhatsApp', texto: texto, origen: 'Cadencia' });
+  } catch (e) { console.error('[activacion] aviso A/B por correo:', e && e.message); }
+  return true;
+}
+
 // Motivo para no mandar el primer WhatsApp, o '' si se puede. El envío en curso caduca a los
 // 15 minutos: si la función murió a medias, el reloj de activación puede volver a intentarlo.
 async function yaTienePrimerWhatsApp(contactId, ficha) {
@@ -600,7 +634,7 @@ async function enviarCorreo(email, asunto, html) {
 module.exports = {
   PAUSA_TOTAL,
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
-  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
+  etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, retenerParaMaikel, nivelDe, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
   sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta
 };
