@@ -3,7 +3,7 @@
  "voz": "voz-fugas-A.mp3",
  "musica": "musica.mp3",
  "musica_volumen": 0.12,
- "duracion": 63.73,
+ "duracion": 69.66,
  "tiempos_voz": {
   "0": [
    0.0,
@@ -80,23 +80,29 @@
    54.088,
    1.16
   ],
-  "15": [
+  "17": [
    54.388,
-   56.709,
+   59.974,
+   1.16
+  ],
+  "15": [
+   60.324,
+   62.645,
    1.06
   ],
   "16": [
-   57.059,
-   62.128,
+   62.995,
+   68.064,
    1.16
   ]
  },
  "escenas": [
   {
    "inicio": 0,
-   "tipo": "tarjeta",
-   "fondo": "#101319",
-   "zoom": false,
+   "tipo": "plano",
+   "src": "clips/1.mp4",
+   "brillo": -0.2,
+   "saturacion": 0.8,
    "transicion": {
     "tipo": "fade",
     "dur": 0.4
@@ -106,22 +112,10 @@
      "desde": 0,
      "bloques": [
       {
-       "estilo": "hueco",
-       "y": 330,
-       "alto": 820,
-       "texto": "Maikel a cámara",
-       "nota": "«Este lead no se perdió por culpa del anuncio. Se perdió después.»"
-      }
-     ]
-    },
-    {
-     "desde": 0,
-     "bloques": [
-      {
        "estilo": "grande",
-       "y": 120,
-       "tam": 60,
-       "texto": "ESTE LEAD NO SE PERDIÓ AQUÍ"
+       "y": 330,
+       "tam": 78,
+       "texto": "Este lead no se perdió en el anuncio"
       }
      ]
     },
@@ -130,8 +124,8 @@
      "bloques": [
       {
        "estilo": "pasos",
-       "y": 1220,
-       "tam": 36,
+       "y": 760,
+       "tam": 40,
        "pasos": [
         [
          "ANUNCIO",
@@ -140,6 +134,10 @@
         [
          "LEAD",
          "ok"
+        ],
+        [
+         "RESPUESTA",
+         ""
         ]
        ]
       }
@@ -150,8 +148,8 @@
      "bloques": [
       {
        "estilo": "grande",
-       "y": 1360,
-       "tam": 76,
+       "y": 1150,
+       "tam": 92,
        "texto": "*SE PERDIÓ DESPUÉS"
       }
      ]
@@ -895,9 +893,9 @@
   },
   {
    "inicio": 45.801,
-   "tipo": "tarjeta",
-   "fondo": "#101319",
-   "zoom": false,
+   "tipo": "plano",
+   "src": "clips/4.mp4",
+   "brillo": -0.08,
    "transicion": {
     "tipo": "fade",
     "dur": 0.4
@@ -914,24 +912,23 @@
      ]
     },
     {
-     "desde": 0,
+     "desde": 0.2,
      "bloques": [
       {
-       "estilo": "hueco",
-       "y": 330,
-       "alto": 820,
-       "texto": "Maikel a cámara",
-       "nota": "«…entras tú.»"
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Cuando está preparado para hablar…"
       }
-     ]
+     ],
+     "hasta": 1.2457500000000004
     },
     {
      "desde": 1.2457500000000004,
      "bloques": [
       {
        "estilo": "grande",
-       "y": 1330,
-       "tam": 84,
+       "y": 1230,
+       "tam": 96,
        "texto": "*ENTRAS TÚ"
       }
      ]
@@ -945,7 +942,7 @@
    "desde": 43.9,
    "marco": true,
    "transicion": {
-    "tipo": "fade",
+    "tipo": "smoothleft",
     "dur": 0.4
    },
    "textos": [
@@ -960,7 +957,7 @@
      ]
     },
     {
-     "desde": 0.4,
+     "desde": 0.2,
      "bloques": [
       {
        "estilo": "sub",
@@ -968,33 +965,11 @@
        "tam": 52,
        "texto": "Qué pasa con cada oportunidad"
       }
-     ]
-    }
-   ]
-  },
-  {
-   "inicio": 50.79824,
-   "tipo": "plano",
-   "src": "clips/intel-anuncios.mp4",
-   "desde": 0.0,
-   "marco": true,
-   "transicion": {
-    "tipo": "fade",
-    "dur": 0.4
-   },
-   "textos": [
-    {
-     "desde": 0,
-     "bloques": [
-      {
-       "estilo": "etiqueta-turquesa",
-       "y": 150,
-       "texto": "Qualivo Intelligence"
-      }
-     ]
+     ],
+     "hasta": 2.3822400000000017
     },
     {
-     "desde": 0,
+     "desde": 2.3822400000000017,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -1003,10 +978,10 @@
        "texto": "Desde qué anuncio llegó…"
       }
      ],
-     "hasta": 1.7016000000000013
+     "hasta": 4.083840000000003
     },
     {
-     "desde": 1.7016000000000013,
+     "desde": 4.083840000000003,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -1014,35 +989,69 @@
        "tam": 52,
        "texto": "…hasta si terminó comprando"
       }
-     ],
-     "hasta": 1.9897600000000026
-    },
-    {
-     "desde": 1.9897600000000026,
-     "bloques": [
-      {
-       "estilo": "grande",
-       "y": 1440,
-       "tam": 58,
-       "texto": "*TODO EL RECORRIDO."
-      }
-     ]
-    },
-    {
-     "desde": 1.9897600000000026,
-     "bloques": [
-      {
-       "estilo": "grande",
-       "y": 1550,
-       "tam": 58,
-       "texto": "*UNA PANTALLA."
-      }
      ]
     }
    ]
   },
   {
    "inicio": 54.388,
+   "tipo": "plano",
+   "src": "clips/intel-anuncios.mp4",
+   "desde": 0.0,
+   "marco": true,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.4
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Después · tus anuncios"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1480,
+       "tam": 52,
+       "texto": "Analizamos cada anuncio con esos datos"
+      }
+     ],
+     "hasta": 2.7929999999999993
+    },
+    {
+     "desde": 2.7929999999999993,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1480,
+       "tam": 52,
+       "texto": "Cuáles traen ventas"
+      }
+     ]
+    },
+    {
+     "desde": 3.463319999999999,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1580,
+       "tam": 52,
+       "texto": "no solo interesados"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 60.324,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -1055,16 +1064,31 @@
      "desde": 0,
      "bloques": [
       {
-       "estilo": "hueco",
-       "y": 330,
-       "alto": 820,
-       "texto": "Maikel a cámara",
-       "nota": "«…es solo el principio. Si quieres saber dónde estás perdiendo los tuyos…»"
+       "estilo": "cadena",
+       "y": 230,
+       "tam": 56,
+       "paso": 118,
+       "items": [
+        "ANUNCIO",
+        "RESPUESTA",
+        "SEGUIMIENTO",
+        "CITA",
+        "ASISTENCIA",
+        "VENTA"
+       ],
+       "marcar": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+       ]
       }
      ]
     },
     {
-     "desde": 0.9,
+     "desde": 0.5,
      "bloques": [
       {
        "estilo": "grande",
@@ -1077,7 +1101,7 @@
    ]
   },
   {
-   "inicio": 59.0866,
+   "inicio": 62.995,
    "tipo": "tarjeta",
    "fondo": "#27BDB1",
    "textos": [

@@ -6,7 +6,7 @@ Las escenas van atadas a cada línea de voz, así que quitar una línea quita su
 import json, re, subprocess, sys, imageio_ffmpeg, montar
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 LINEAS = [l.strip() for l in open('guion-v2-lineas.txt', encoding='utf-8') if l.strip()]
-GAP = {0: .4, 1: .3, 2: .2, 3: .22, 4: .22, 5: .32, 6: .3, 7: .38, 8: .25, 9: .2, 10: .2, 11: .2, 12: .2, 13: .35, 14: .3, 15: .35, 16: 0}
+GAP = {17: .35, 0: .4, 1: .3, 2: .2, 3: .22, 4: .22, 5: .32, 6: .3, 7: .38, 8: .25, 9: .2, 10: .2, 11: .2, 12: .2, 13: .35, 14: .3, 15: .35, 16: 0}
 COLA = 1.6   # pantalla final tras la última palabra
 
 def dur(f):
@@ -42,12 +42,11 @@ def escenas_de(tiempos):
     def d(i): return tiempos[i][1] - tiempos[i][0]
     def hay(i): return i in tiempos
     tr = lambda tipo='fade', dur=0.35: {'tipo': tipo, 'dur': dur}
-    if hay(0):   # HOOK A · Maikel a cámara
-        E.append({'inicio': 0, 'tipo': 'tarjeta', 'fondo': '#101319', 'zoom': False, 'transicion': tr('fade', .4), 'textos': [
-            T(0, estilo='hueco', y=330, alto=820, texto='Maikel a cámara', nota='«Este lead no se perdió por culpa del anuncio. Se perdió después.»'),
-            T(0, estilo='grande', y=120, tam=60, texto='ESTE LEAD NO SE PERDIÓ AQUÍ'),
-            T(0.4, estilo='pasos', y=1220, tam=36, pasos=[['ANUNCIO', 'ok'], ['LEAD', 'ok']]),
-            T(d(0) * 0.58, estilo='grande', y=1360, tam=76, texto='*SE PERDIÓ DESPUÉS'),
+    if hay(0):   # HOOK A · sin cara: manos escribiendo, texto encima
+        E.append({'inicio': 0, 'tipo': 'plano', 'src': 'clips/1.mp4', 'brillo': -0.2, 'saturacion': 0.8, 'transicion': tr('fade', .4), 'textos': [
+            T(0, estilo='grande', y=330, tam=78, texto='Este lead no se perdió en el anuncio'),
+            T(0.4, estilo='pasos', y=760, tam=40, pasos=[['ANUNCIO', 'ok'], ['LEAD', 'ok'], ['RESPUESTA', '']]),
+            T(d(0) * 0.58, estilo='grande', y=1150, tam=92, texto='*SE PERDIÓ DESPUÉS'),
         ]})
     if hay(1):   # LAURA · domingo 22:40 → lunes
         b = min(4.9 / tiempos[1][2], d(1) - 3.0)
@@ -128,33 +127,33 @@ def escenas_de(tiempos):
             T(0, estilo='etiqueta-turquesa', y=150, texto='4 · Agendar'),
             T(0.6, estilo='sub', y=1560, tam=52, texto='Cita cerrada + recordatorios'),
         ]})
-    if hay(13):  # 5 · VENDER · entras tú
-        E.append({'inicio': t0(13), 'tipo': 'tarjeta', 'fondo': '#101319', 'zoom': False, 'transicion': tr('fade', .4), 'textos': [
+    if hay(13):  # 5 · VENDER · entras tú (sin cara: aula)
+        E.append({'inicio': t0(13), 'tipo': 'plano', 'src': 'clips/4.mp4', 'brillo': -0.08, 'transicion': tr('fade', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='5 · Vender'),
-            T(0, estilo='hueco', y=330, alto=820, texto='Maikel a cámara', nota='«…entras tú.»'),
-            T(d(13) * 0.55, estilo='grande', y=1330, tam=84, texto='*ENTRAS TÚ'),
+            T(0.2, d(13) * 0.55, estilo='sub', y=1250, texto='Cuando está preparado para hablar…'),
+            T(d(13) * 0.55, estilo='grande', y=1230, tam=96, texto='*ENTRAS TÚ'),
         ]})
-    if hay(14):  # INTELLIGENCE
-        a, b, c = d(14) * 0.42, d(14) * 0.72, d(14) - 1.3
-        E.append({'inicio': t0(14), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 43.9, 'marco': True, 'transicion': tr('fade', .4), 'textos': [
+    if hay(14):  # INTELLIGENCE · todo el recorrido (vista Recorrido)
+        E.append({'inicio': t0(14), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 43.9, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='Qualivo Intelligence'),
-            T(0.4, estilo='sub', y=1560, tam=52, texto='Qué pasa con cada oportunidad'),
+            T(0.2, d(14) * 0.42, estilo='sub', y=1560, tam=52, texto='Qué pasa con cada oportunidad'),
+            T(d(14) * 0.42, d(14) * 0.72, estilo='sub-turquesa', y=1560, tam=52, texto='Desde qué anuncio llegó…'),
+            T(d(14) * 0.72, estilo='sub-turquesa', y=1560, tam=52, texto='…hasta si terminó comprando'),
         ]})
-        E.append({'inicio': t0(14) + a, 'tipo': 'plano', 'src': 'clips/intel-anuncios.mp4', 'desde': 0.0, 'marco': True, 'transicion': tr('fade', .4), 'textos': [
-            T(0, estilo='etiqueta-turquesa', y=150, texto='Qualivo Intelligence'),
-            T(0, b - a, estilo='sub-turquesa', y=1560, tam=52, texto='Desde qué anuncio llegó…'),
-            T(b - a, c - a, estilo='sub-turquesa', y=1560, tam=52, texto='…hasta si terminó comprando'),
-            T(c - a, estilo='grande', y=1440, tam=58, texto='*TODO EL RECORRIDO.'),
-            T(c - a, estilo='grande', y=1550, tam=58, texto='*UNA PANTALLA.'),
+    if hay(17):  # DESPUÉS · analizamos los anuncios
+        E.append({'inicio': t0(17), 'tipo': 'plano', 'src': 'clips/intel-anuncios.mp4', 'desde': 0.0, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
+            T(0, estilo='etiqueta-turquesa', y=150, texto='Después · tus anuncios'),
+            T(0.3, d(17) * 0.5, estilo='sub', y=1480, tam=52, texto='Analizamos cada anuncio con esos datos'),
+            T(d(17) * 0.5, estilo='sub-turquesa', y=1480, tam=52, texto='Cuáles traen ventas'),
+            T(d(17) * 0.62, estilo='sub', y=1580, tam=52, texto='no solo interesados'),
         ]})
-    if hay(15):  # CIERRE a cámara
+    if hay(15):  # CIERRE · sin cara: la cadena completa
         E.append({'inicio': t0(15), 'tipo': 'tarjeta', 'fondo': '#101319', 'zoom': False, 'transicion': tr('fade', .4), 'textos': [
-            T(0, estilo='hueco', y=330, alto=820, texto='Maikel a cámara', nota='«Porque conseguir el lead es solo el principio.»'),
-            T(0.9, estilo='grande', y=1330, tam=64, texto='*EL LEAD ES SOLO EL PRINCIPIO'),
+            T(0, estilo='cadena', y=230, tam=56, paso=118, items=['ANUNCIO', 'RESPUESTA', 'SEGUIMIENTO', 'CITA', 'ASISTENCIA', 'VENTA'], marcar=[0, 1, 2, 3, 4, 5]),
+            T(0.5, estilo='grande', y=1330, tam=64, texto='*EL LEAD ES SOLO EL PRINCIPIO'),
         ]})
     if hay(16):  # CTA
-        corte = t0(16) + d(16) * 0.4 if hay(15) else t0(16)
-        if hay(15): E[-1]['textos'][0]['bloques'][0]['nota'] = '«…es solo el principio. Si quieres saber dónde estás perdiendo los tuyos…»'
+        corte = t0(16)
         E.append({'inicio': corte, 'tipo': 'tarjeta', 'fondo': '#27BDB1', 'textos': [
             T(0, estilo='grande', y=380, tam=84, color='tinta', texto='¿Dónde estás perdiendo tus leads?'),
             T(1.2, estilo='grande', y=820, tam=58, color='tinta', texto='Diagnóstico gratuito · 30 minutos'),
@@ -164,7 +163,8 @@ def escenas_de(tiempos):
     return E
 
 def construir(variante):
-    indices = list(range(17)) if variante == 'A' else list(range(1, 17))
+    orden = list(range(15)) + [17, 15, 16]
+    indices = orden if variante == 'A' else orden[1:]
     nombre = '01_Qualivo_Fugas_Hook-Anuncio_9x16' if variante == 'A' else '02_Qualivo_Fugas_Hook-Laura_9x16'
     tiempos, fin = voz(indices, f'voz-fugas-{variante}.mp3')
     spec = {'nombre': nombre, 'voz': f'voz-fugas-{variante}.mp3', 'musica': 'musica.mp3', 'musica_volumen': 0.12,

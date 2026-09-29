@@ -3,7 +3,7 @@
  "voz": "voz-fugas-B.mp3",
  "musica": "musica.mp3",
  "musica_volumen": 0.12,
- "duracion": 59.68,
+ "duracion": 65.61,
  "tiempos_voz": {
   "1": [
    0.0,
@@ -75,14 +75,19 @@
    50.037,
    1.16
   ],
-  "15": [
+  "17": [
    50.337,
-   52.658,
+   55.923,
+   1.16
+  ],
+  "15": [
+   56.273,
+   58.594,
    1.06
   ],
   "16": [
-   53.008,
-   58.077,
+   58.944,
+   64.013,
    1.16
   ]
  },
@@ -824,9 +829,9 @@
   },
   {
    "inicio": 41.75,
-   "tipo": "tarjeta",
-   "fondo": "#101319",
-   "zoom": false,
+   "tipo": "plano",
+   "src": "clips/4.mp4",
+   "brillo": -0.08,
    "transicion": {
     "tipo": "fade",
     "dur": 0.4
@@ -843,24 +848,23 @@
      ]
     },
     {
-     "desde": 0,
+     "desde": 0.2,
      "bloques": [
       {
-       "estilo": "hueco",
-       "y": 330,
-       "alto": 820,
-       "texto": "Maikel a cámara",
-       "nota": "«…entras tú.»"
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Cuando está preparado para hablar…"
       }
-     ]
+     ],
+     "hasta": 1.2457500000000004
     },
     {
      "desde": 1.2457500000000004,
      "bloques": [
       {
        "estilo": "grande",
-       "y": 1330,
-       "tam": 84,
+       "y": 1230,
+       "tam": 96,
        "texto": "*ENTRAS TÚ"
       }
      ]
@@ -874,7 +878,7 @@
    "desde": 43.9,
    "marco": true,
    "transicion": {
-    "tipo": "fade",
+    "tipo": "smoothleft",
     "dur": 0.4
    },
    "textos": [
@@ -889,7 +893,7 @@
      ]
     },
     {
-     "desde": 0.4,
+     "desde": 0.2,
      "bloques": [
       {
        "estilo": "sub",
@@ -897,33 +901,11 @@
        "tam": 52,
        "texto": "Qué pasa con cada oportunidad"
       }
-     ]
-    }
-   ]
-  },
-  {
-   "inicio": 46.74724,
-   "tipo": "plano",
-   "src": "clips/intel-anuncios.mp4",
-   "desde": 0.0,
-   "marco": true,
-   "transicion": {
-    "tipo": "fade",
-    "dur": 0.4
-   },
-   "textos": [
-    {
-     "desde": 0,
-     "bloques": [
-      {
-       "estilo": "etiqueta-turquesa",
-       "y": 150,
-       "texto": "Qualivo Intelligence"
-      }
-     ]
+     ],
+     "hasta": 2.3822399999999986
     },
     {
-     "desde": 0,
+     "desde": 2.3822399999999986,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -932,10 +914,10 @@
        "texto": "Desde qué anuncio llegó…"
       }
      ],
-     "hasta": 1.7015999999999991
+     "hasta": 4.083839999999998
     },
     {
-     "desde": 1.7015999999999991,
+     "desde": 4.083839999999998,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -943,35 +925,69 @@
        "tam": 52,
        "texto": "…hasta si terminó comprando"
       }
-     ],
-     "hasta": 1.9897599999999986
-    },
-    {
-     "desde": 1.9897599999999986,
-     "bloques": [
-      {
-       "estilo": "grande",
-       "y": 1440,
-       "tam": 58,
-       "texto": "*TODO EL RECORRIDO."
-      }
-     ]
-    },
-    {
-     "desde": 1.9897599999999986,
-     "bloques": [
-      {
-       "estilo": "grande",
-       "y": 1550,
-       "tam": 58,
-       "texto": "*UNA PANTALLA."
-      }
      ]
     }
    ]
   },
   {
    "inicio": 50.337,
+   "tipo": "plano",
+   "src": "clips/intel-anuncios.mp4",
+   "desde": 0.0,
+   "marco": true,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.4
+   },
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Después · tus anuncios"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1480,
+       "tam": 52,
+       "texto": "Analizamos cada anuncio con esos datos"
+      }
+     ],
+     "hasta": 2.7929999999999993
+    },
+    {
+     "desde": 2.7929999999999993,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1480,
+       "tam": 52,
+       "texto": "Cuáles traen ventas"
+      }
+     ]
+    },
+    {
+     "desde": 3.463319999999999,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1580,
+       "tam": 52,
+       "texto": "no solo interesados"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 56.273,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -984,16 +1000,31 @@
      "desde": 0,
      "bloques": [
       {
-       "estilo": "hueco",
-       "y": 330,
-       "alto": 820,
-       "texto": "Maikel a cámara",
-       "nota": "«…es solo el principio. Si quieres saber dónde estás perdiendo los tuyos…»"
+       "estilo": "cadena",
+       "y": 230,
+       "tam": 56,
+       "paso": 118,
+       "items": [
+        "ANUNCIO",
+        "RESPUESTA",
+        "SEGUIMIENTO",
+        "CITA",
+        "ASISTENCIA",
+        "VENTA"
+       ],
+       "marcar": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+       ]
       }
      ]
     },
     {
-     "desde": 0.9,
+     "desde": 0.5,
      "bloques": [
       {
        "estilo": "grande",
@@ -1006,7 +1037,7 @@
    ]
   },
   {
-   "inicio": 55.0356,
+   "inicio": 58.944,
    "tipo": "tarjeta",
    "fondo": "#27BDB1",
    "textos": [
