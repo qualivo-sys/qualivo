@@ -294,3 +294,39 @@ Maikel: las reuniones se van casi a la hora y se le cruzan con la siguiente («c
   scratchpad de la sesión (raquel-29sep-antes.json).
 - Calendario GHL: huecos de 30 min + 30 de colchón (la hora entera), uno por hora; nombre, título,
   descripción y mensaje de gracias dicen 30 minutos (Maikel: «pon treinta minutos mejor»).
+
+## 29-sep · revisión diaria (13 llamadas del 28-sep 19:53 al 29-sep 12:06)
+
+**Qué pasó.** 4 conversaciones reales: Fran (412 s, cita mié 30 16:00), Marian (363 s, cita mié 30
+16:30), Cristina (56 s, colgó al saber que era una IA) e Izaskun (41 s, llamada de «te estamos
+esperando» que recuperó la reunión). El resto: 5 buzones, 1 silencio, 1 no contesta y 4 errores
+SIP desde el 663 (480 temporarily unavailable / failed to connect). Todo registrado en la base
+«Llamadas de Raquel» con audio en las cuatro conversaciones.
+
+**Fallos de guion vistos.**
+- Marian: propuso «jueves a las 10» y «jueves a las 4» sin mirar el calendario cuando ninguno de
+  los dos huecos le venía; el calendario lo rechazó y rectificó en la misma llamada.
+- Cristina: a «¿eres una máquina?» dijo la verdad, pero la frase salió enredada y no ofreció que la
+  llamara Maikel. Había escrito «Llámame»: esperaba a una persona.
+- Fran: silencios de 12,5 s y 13,9 s tras respuestas largas (dijo «¿hola?»). Ofreció el miércoles sin
+  preguntar disponibilidad.
+- Joan leído como «Joanne» en el buzón.
+- Marian: la invitación cayó en spam (Yahoo): es el DNS de qualivo.io (SPF sin Google, sin DMARC).
+
+**Aplicado en el asistente (copia previa en el scratchpad, raquel-29/asistente-antes.json).**
+1. Respuesta a «¿eres una máquina?»: sigue siendo sí sin rodeos, pero ahora ofrece en la misma
+   frase que la llame Maikel («si prefieres hablar directamente con él, le digo que te llame») y,
+   si lo prefiere, cierra con «se lo digo ahora mismo» y cuelga.
+2. Regla nueva: si ninguno de los dos huecos le va, no propone otro de su cabeza; pregunta día y
+   franja, dice «un segundo, que lo miro» y vuelve a llamar a `huecos_disponibles`.
+
+**Propuesto, no aplicado (decide Maikel).**
+- Cuando el lead escribe «llámame», que la llamada la haga Maikel, o que Raquel abra con «te llamo
+  para cuadrar la llamada con Máikel» y no con preguntas de diagnóstico.
+- Muletilla de escucha («te sigo») o revisar endpointing: con hablantes que se extienden hay
+  silencios de más de 10 s (latencia del transcriptor 1,5 s de media en las llamadas de la mañana).
+- Pista de pronunciación en {{nombre}} para nombres catalanes o cortos (Joan → «Yoan»).
+- El precio: Raquel sigue dando la oferta antigua del piloto de 30 días (pendiente de la política
+  única de precio).
+- Automatizar la llamada de «te estamos esperando» a los 5 minutos de la cita si no ha entrado.
+- Los errores SIP desde el 663: cuatro en trece llamadas.
