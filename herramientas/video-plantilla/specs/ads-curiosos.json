@@ -1,0 +1,405 @@
+{
+ "nombre": "curiosos",
+ "voz": "voz-ads/curiosos-final.mp3",
+ "musica": "musica3/2-deephouse-norm.wav",
+ "musica_volumen": 1.0,
+ "duracion": 35.09,
+ "tiempos_voz": {
+  "0": [
+   0,
+   3.604
+  ],
+  "2": [
+   4.033,
+   9.396
+  ],
+  "3": [
+   10.217,
+   12.35
+  ],
+  "4": [
+   13.367,
+   18.771
+  ],
+  "5": [
+   19.242,
+   23.25
+  ],
+  "6": [
+   23.596,
+   26.625
+  ],
+  "7": [
+   27.571,
+   32.933
+  ]
+ },
+ "escenas": [
+  {
+   "inicio": 0,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Tu anuncio"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 430,
+       "tam": 240,
+       "texto": "5 €"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 900,
+       "tam": 58,
+       "texto": "por lead"
+      }
+     ]
+    },
+    {
+     "desde": 2.1624,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1040,
+       "tam": 58,
+       "texto": "Parece una ganga"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 4.033,
+   "tipo": "plano",
+   "src": "clips/k5.mp4",
+   "textos": [
+    {
+     "desde": 1.0726000000000002,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1060,
+       "tam": 54,
+       "texto": "Solo quería mirar"
+      }
+     ]
+    },
+    {
+     "desde": 2.4133500000000003,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1170,
+       "tam": 54,
+       "texto": "No tiene presupuesto"
+      }
+     ]
+    },
+    {
+     "desde": 3.7541,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1280,
+       "tam": 54,
+       "texto": "Ni recuerda haberlo pedido"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 10.217,
+   "tipo": "tarjeta",
+   "fondo": "#F2F3F5",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 600,
+       "tam": 84,
+       "color": "tinta",
+       "texto": "Un lead barato que no compra"
+      }
+     ]
+    },
+    {
+     "desde": 1.0664999999999996,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 900,
+       "tam": 70,
+       "color": "tinta",
+       "texto": "*es el más caro de todos"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "wipeup",
+    "dur": 0.4
+   }
+  },
+  {
+   "inicio": 13.367,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": false,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0.05,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 275,
+       "tam": 50,
+       "texto": "Filtramos antes de que hables con nadie"
+      }
+     ]
+    },
+    {
+     "desde": 1.0808,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 500,
+       "texto": "¿Qué quieres estudiar?",
+       "respuesta": "Máster en RR. HH.",
+       "senal": "Interés concreto"
+      }
+     ]
+    },
+    {
+     "desde": 2.1616,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 740,
+       "texto": "¿Cuándo te gustaría empezar?",
+       "respuesta": "Este mes",
+       "senal": "Urgencia"
+      }
+     ]
+    },
+    {
+     "desde": 3.2424,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 980,
+       "texto": "¿Cómo lo pagarías?",
+       "respuesta": "Mi empresa lo bonifica",
+       "senal": "Capacidad"
+      }
+     ]
+    },
+    {
+     "desde": 4.3232,
+     "bloques": [
+      {
+       "estilo": "medidor",
+       "y": 1290,
+       "texto": "Intención de compra",
+       "valor": "ALTA",
+       "fraccion": 0.92
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 19.242,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 520,
+       "tam": 72,
+       "texto": "Meta aprende de"
+      }
+     ]
+    },
+    {
+     "desde": 1.4027999999999996,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 680,
+       "tam": 88,
+       "texto": "*quién se matricula"
+      }
+     ]
+    },
+    {
+     "desde": 2.4047999999999994,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1000,
+       "tam": 46,
+       "texto": "no de quién rellena un formulario"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "src": "clips/intel-anuncios.mp4",
+   "desde": 0.0,
+   "marco": true,
+   "foco": {
+    "k": 1.18,
+    "cx": 360,
+    "cy": 700
+   },
+   "inicio": 23.596,
+   "tipo": "plano",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Qualivo Intelligence"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 54,
+       "texto": "Qué anuncio trae alumnos"
+      }
+     ],
+     "hasta": 1.66595
+    },
+    {
+     "desde": 1.66595,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1560,
+       "tam": 54,
+       "texto": "no solo interesados"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 27.571,
+   "tipo": "tarjeta",
+   "fondo": "#27BDB1",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 360,
+       "tam": 78,
+       "color": "tinta",
+       "texto": "¿Tu centro ya invierte en anuncios?"
+      }
+     ]
+    },
+    {
+     "desde": 1.0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 760,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Te enseñamos cuánto te cuesta de verdad cada alumno"
+      }
+     ]
+    },
+    {
+     "desde": 1.8,
+     "bloques": [
+      {
+       "estilo": "boton",
+       "y": 1120,
+       "texto": "Diagnóstico gratuito · 30 min"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 1600,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Qualivo"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

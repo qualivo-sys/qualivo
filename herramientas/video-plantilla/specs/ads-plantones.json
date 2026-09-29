@@ -1,0 +1,407 @@
+{
+ "nombre": "plantones",
+ "voz": "voz-ads/plantones-final.mp3",
+ "musica": "musica3/2-deephouse-norm.wav",
+ "musica_volumen": 1.0,
+ "duracion": 42.59,
+ "tiempos_voz": {
+  "0": [
+   0,
+   3.708
+  ],
+  "1": [
+   4.283,
+   5.479
+  ],
+  "2": [
+   6.221,
+   8.062
+  ],
+  "3": [
+   8.742,
+   13.708
+  ],
+  "4": [
+   14.729,
+   24.321
+  ],
+  "5": [
+   25.125,
+   28.363
+  ],
+  "6": [
+   28.313,
+   31.988
+  ],
+  "7": [
+   32.758,
+   40.433
+  ]
+ },
+ "escenas": [
+  {
+   "inicio": 0,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 420,
+       "tam": 260,
+       "texto": "10"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 900,
+       "tam": 58,
+       "texto": "reservaron una llamada"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.25
+   }
+  },
+  {
+   "inicio": 4.283,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 420,
+       "tam": 260,
+       "texto": "4"
+      }
+     ]
+    },
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 900,
+       "tam": 58,
+       "texto": "se presentaron"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 6.221,
+   "tipo": "plano",
+   "src": "clips/k3.mp4",
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Seis reuniones para nadie"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 8.742,
+   "tipo": "plano",
+   "src": "clips/2.mp4",
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1180,
+       "tam": 56,
+       "texto": "Pagaste por esos leads"
+      }
+     ],
+     "hasta": 2.4829999999999997
+    },
+    {
+     "desde": 2.4829999999999997,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1180,
+       "tam": 56,
+       "texto": "…y nadie volvió a escribirles"
+      }
+     ]
+    },
+    {
+     "desde": 2.7312999999999996,
+     "bloques": [
+      {
+       "estilo": "fuga",
+       "y": 1310,
+       "texto": "Fuga · Plantón sin recuperar"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 14.729,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": false,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "VÍSPERA",
+         "Confirma"
+        ],
+        [
+         "EL DÍA",
+         "Recordatorio"
+        ],
+        [
+         "+3 MIN",
+         "Te llamamos"
+        ]
+       ],
+       "hechos": [
+        0
+       ]
+      }
+     ],
+     "hasta": 3.165360000000001
+    },
+    {
+     "desde": 3.165360000000001,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "VÍSPERA",
+         "Confirma"
+        ],
+        [
+         "EL DÍA",
+         "Recordatorio"
+        ],
+        [
+         "+3 MIN",
+         "Te llamamos"
+        ]
+       ],
+       "hechos": [
+        0,
+        1
+       ]
+      }
+     ],
+     "hasta": 6.330720000000002
+    },
+    {
+     "desde": 6.330720000000002,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "VÍSPERA",
+         "Confirma"
+        ],
+        [
+         "EL DÍA",
+         "Recordatorio"
+        ],
+        [
+         "+3 MIN",
+         "Te llamamos"
+        ]
+       ],
+       "hechos": [
+        0,
+        1,
+        2
+       ]
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "tam": 48,
+       "texto": "Le recordamos lo que vais a ver"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 25.125,
+   "tipo": "plano",
+   "src": "clips/k4.mp4",
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1250,
+       "tam": 52,
+       "texto": "Nueva hora esa misma mañana"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "src": "clips/intel.mp4",
+   "desde": 36.5,
+   "marco": true,
+   "foco": {
+    "k": 1.45,
+    "cx": 320,
+    "cy": 860
+   },
+   "inicio": 28.313,
+   "tipo": "plano",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 54,
+       "texto": "Gente que viene de verdad"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 32.758,
+   "tipo": "tarjeta",
+   "fondo": "#27BDB1",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 360,
+       "tam": 78,
+       "color": "tinta",
+       "texto": "¿Tu centro ya invierte en anuncios?"
+      }
+     ]
+    },
+    {
+     "desde": 1.0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 760,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Te enseñamos cuántas citas se te caen y cómo recuperarlas"
+      }
+     ]
+    },
+    {
+     "desde": 1.8,
+     "bloques": [
+      {
+       "estilo": "boton",
+       "y": 1120,
+       "texto": "Diagnóstico gratuito · 30 min"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 1600,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Qualivo"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

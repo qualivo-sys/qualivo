@@ -1,0 +1,480 @@
+{
+ "nombre": "velocidad",
+ "voz": "voz-ads/velocidad-final.mp3",
+ "musica": "musica3/2-deephouse-norm.wav",
+ "musica_volumen": 1.0,
+ "duracion": 33.71,
+ "tiempos_voz": {
+  "0": [
+   0,
+   2.271
+  ],
+  "1": [
+   2.513,
+   4.042
+  ],
+  "2": [
+   4.575,
+   7.104
+  ],
+  "3": [
+   7.675,
+   10.975
+  ],
+  "4": [
+   11.617,
+   18.062
+  ],
+  "5": [
+   18.346,
+   21.833
+  ],
+  "6": [
+   22.096,
+   25.438
+  ],
+  "7": [
+   26.238,
+   31.558
+  ]
+ },
+ "escenas": [
+  {
+   "inicio": 0,
+   "tipo": "plano",
+   "src": "clips/k1.mp4",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Domingo · 23:00"
+      }
+     ]
+    },
+    {
+     "desde": 0.6,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "tam": 54,
+       "texto": "Pide información de un curso"
+      }
+     ]
+    }
+   ],
+   "brillo": -0.02,
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 2.513,
+   "tipo": "plano",
+   "src": "clips/3.mp4",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Lunes · 10:00"
+      }
+     ]
+    },
+    {
+     "desde": 0.4,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 250,
+       "texto": "11 horas después"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Le contestas"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.3
+   }
+  },
+  {
+   "inicio": 4.575,
+   "tipo": "plano",
+   "src": "clips/k2.mp4",
+   "textos": [
+    {
+     "desde": 0.2,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1250,
+       "texto": "Ya habló con otros dos centros"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 7.675,
+   "tipo": "tarjeta",
+   "fondo": "#F2F3F5",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 600,
+       "tam": 84,
+       "color": "tinta",
+       "texto": "No lo perdiste por el precio."
+      }
+     ]
+    },
+    {
+     "desde": 1.65,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 920,
+       "tam": 92,
+       "color": "tinta",
+       "texto": "*Lo perdiste por llegar tarde."
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "wipeup",
+    "dur": 0.4
+   }
+  },
+  {
+   "src": "clips/intel.mp4",
+   "desde": 29.0,
+   "marco": true,
+   "foco": {
+    "k": 1.22,
+    "cx": 360,
+    "cy": 800
+   },
+   "inicio": 11.617,
+   "tipo": "plano",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1560,
+       "tam": 56,
+       "texto": "Respuesta en minutos"
+      }
+     ],
+     "hasta": 3.5447500000000005
+    },
+    {
+     "desde": 3.5447500000000005,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 50,
+       "texto": "De noche y en fin de semana"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 18.346,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "zoom": false,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Si no contesta"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "MINUTO 1",
+         "WhatsApp"
+        ],
+        [
+         "+2 H",
+         "Llamada"
+        ],
+        [
+         "DÍA 1",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 3",
+         "Llamada"
+        ]
+       ],
+       "hechos": [
+        0
+       ]
+      }
+     ],
+     "hasta": 0.8717499999999996
+    },
+    {
+     "desde": 0.8717499999999996,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "MINUTO 1",
+         "WhatsApp"
+        ],
+        [
+         "+2 H",
+         "Llamada"
+        ],
+        [
+         "DÍA 1",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 3",
+         "Llamada"
+        ]
+       ],
+       "hechos": [
+        0,
+        1
+       ]
+      }
+     ],
+     "hasta": 1.7434999999999992
+    },
+    {
+     "desde": 1.7434999999999992,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "MINUTO 1",
+         "WhatsApp"
+        ],
+        [
+         "+2 H",
+         "Llamada"
+        ],
+        [
+         "DÍA 1",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 3",
+         "Llamada"
+        ]
+       ],
+       "hechos": [
+        0,
+        1,
+        2
+       ]
+      }
+     ],
+     "hasta": 2.6152499999999987
+    },
+    {
+     "desde": 2.6152499999999987,
+     "bloques": [
+      {
+       "estilo": "linea",
+       "y": 760,
+       "items": [
+        [
+         "MINUTO 1",
+         "WhatsApp"
+        ],
+        [
+         "+2 H",
+         "Llamada"
+        ],
+        [
+         "DÍA 1",
+         "WhatsApp"
+        ],
+        [
+         "DÍA 3",
+         "Llamada"
+        ]
+       ],
+       "hechos": [
+        0,
+        1,
+        2,
+        3
+       ]
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "tam": 56,
+       "texto": "El sistema insiste por ti"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "smoothleft",
+    "dur": 0.35
+   }
+  },
+  {
+   "src": "clips/intel.mp4",
+   "desde": 36.5,
+   "marco": true,
+   "foco": {
+    "k": 1.45,
+    "cx": 320,
+    "cy": 860
+   },
+   "inicio": 22.096,
+   "tipo": "plano",
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con Qualivo"
+      }
+     ]
+    },
+    {
+     "desde": 0.3,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1560,
+       "tam": 54,
+       "texto": "Cita ya en tu agenda"
+      }
+     ]
+    }
+   ],
+   "transicion": {
+    "tipo": "fade",
+    "dur": 0.35
+   }
+  },
+  {
+   "inicio": 26.238,
+   "tipo": "tarjeta",
+   "fondo": "#27BDB1",
+   "zoom": true,
+   "textos": [
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 360,
+       "tam": 78,
+       "color": "tinta",
+       "texto": "¿Tu centro ya invierte en anuncios?"
+      }
+     ]
+    },
+    {
+     "desde": 1.0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 760,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Te enseñamos cuántos alumnos se te enfrían por el camino"
+      }
+     ]
+    },
+    {
+     "desde": 1.8,
+     "bloques": [
+      {
+       "estilo": "boton",
+       "y": 1120,
+       "texto": "Diagnóstico gratuito · 30 min"
+      }
+     ]
+    },
+    {
+     "desde": 0,
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 1600,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Qualivo"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
