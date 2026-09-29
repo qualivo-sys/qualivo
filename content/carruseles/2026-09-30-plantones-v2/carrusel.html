@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Carrusel · Plantones v2 (30-sep-2026)</title>
+<link rel="stylesheet" href="base.css"><style>
+/* calendario tipo agenda */
+.cal{width:960px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 26px 60px rgba(10,10,11,.18);font-family:Roboto,"Segoe UI",Arial,sans-serif;color:#3c4043;position:relative}
+.cal .top{display:flex;align-items:center;gap:18px;padding:18px 26px;border-bottom:1px solid #dadce0;font-size:26px}
+.cal .top .dia{width:62px;height:62px;border-radius:50%;background:#1a73e8;color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center}
+.cal .top small{display:block;font-size:17px;color:#1a73e8;font-weight:600;letter-spacing:.06em}
+.cal .grid{position:relative;height:360px}
+.cal .hr{position:absolute;left:0;right:0;border-top:1px solid #e8eaed;font-size:18px;color:#70757a}
+.cal .hr span{position:absolute;left:22px;top:-11px;background:#fff;padding-right:8px}
+.cal .ev{position:absolute;left:110px;right:40px;background:#1a73e8;color:#fff;border-radius:10px;padding:14px 18px;font-size:24px;line-height:1.3;border-left:6px solid #185abc}
+.cal .ev b{display:block;font-size:26px}
+.sello{position:absolute;right:70px;top:150px;transform:rotate(-9deg);font-family:Anton;font-size:84px;color:#D93025;border:8px solid #D93025;border-radius:18px;padding:4px 26px;background:rgba(255,255,255,.85);letter-spacing:.04em}
+/* recorrido pagado */
+.pag{width:960px;display:flex;flex-direction:column;gap:14px}
+.pag div{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:18px;padding:22px 30px;font-size:32px;box-shadow:0 8px 24px rgba(10,10,11,.08)}
+.pag div b{font-family:Anton;font-weight:400;font-size:36px;text-transform:uppercase;letter-spacing:.02em}
+.pag div.no{background:#0A0A0B;color:#F2EEE6}
+.pag div.no b{color:#FF7A33}
+/* semana */
+.wk{width:960px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.wk>div{height:300px;border-radius:20px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:26px 12px;box-shadow:0 8px 24px rgba(10,10,11,.08)}
+.wk>div b{font-family:Anton;font-weight:400;font-size:44px}
+.wk>div span{font-size:26px;font-weight:700;text-align:center;line-height:1.25}
+.wk>div.si{background:#0A0A0B;color:#F2EEE6}.wk>div.si span{color:#FF7A33}
+.wk>div.mute{background:repeating-linear-gradient(135deg,#ECE7DD 0 14px,#F4F0E8 14px 28px);box-shadow:none;color:rgba(10,10,11,.45)}
+.wk>div.q{border:4px dashed #E8590C;background:transparent;box-shadow:none}
+.wk>div.q span{color:#E8590C}
+.wk .ic{font-size:64px;line-height:1}
+/* llamada */
+.call{width:560px;background:linear-gradient(180deg,#2B2B2E,#111113);border-radius:62px;padding:90px 40px 80px;color:#fff;text-align:center;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;box-shadow:0 30px 70px rgba(0,0,0,.35);border:14px solid #000}
+.call small{font-size:24px;opacity:.7}
+.call b{display:block;font-size:52px;font-weight:500;margin:12px 0 6px}
+.call .av{width:150px;height:150px;border-radius:50%;background:#E8590C;margin:30px auto;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:700}
+.call .bt{display:flex;justify-content:center;gap:90px;margin-top:20px}
+.call .bt i{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:44px}
+.call .bt .r{background:#FF3B30}.call .bt .m{background:rgba(255,255,255,.18)}
+/* línea de pasos del resumen */
+.pasos{width:960px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.pasos div{background:#fff;border-radius:22px;padding:30px 30px;box-shadow:0 8px 24px rgba(10,10,11,.08);font-size:36px;line-height:1.22;font-weight:700;min-height:230px}
+.pasos div i{display:block;font-style:normal;font-family:Anton;font-size:70px;line-height:1;color:#E8590C;margin-bottom:14px}
+</style></head><body>
+
+<!-- 1 · portada -->
+<div class="page crema"><div class="prog"><i style="width:11%"></i></div><div class="n">1/9</div>
+<div class="in">
+  <div class="h" style="font-size:118px;line-height:.98">Reservan la visita. <span class="nar">Y no aparecen.</span></div>
+  <div class="t" style="font-size:40px">Y lo apuntas como mala suerte. Casi nunca lo es.</div>
+  <div class="vis"><div class="cal">
+    <div class="top"><div class="dia">9</div><div><small>JUEVES</small>Agenda de admisiones</div></div>
+    <div class="grid">
+      <div class="hr" style="top:30px"><span>17:00</span></div>
+      <div class="hr" style="top:150px"><span>18:00</span></div>
+      <div class="hr" style="top:270px"><span>19:00</span></div>
+      <div class="ev" style="top:152px;height:110px"><b>Visita · Marta</b>Información del curso de octubre</div>
+      <div class="sello">NO VINO</div>
+    </div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 2 · ya estaba pagado -->
+<div class="page crema"><div class="prog"><i style="width:22%"></i></div><div class="n">2/9</div>
+<div class="in">
+  <div class="h">Esa silla vacía <span class="nar">ya la habías pagado.</span></div>
+  <div class="t">Cuando Marta no aparece, todo lo anterior ya ha pasado. Y la tarde de admisiones, esperando.</div>
+  <div class="vis"><div class="pag">
+    <div><b>Anuncio</b><span>pagado ✓</span></div>
+    <div><b>Formulario</b><span>rellenado ✓</span></div>
+    <div><b>Llamada para darle cita</b><span>hecha ✓</span></div>
+    <div class="no"><b>Visita</b><span>no vino ✕</span></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 3 · días de silencio -->
+<div class="page crema"><div class="prog"><i style="width:33%"></i></div><div class="n">3/9</div>
+<div class="in">
+  <div class="h">Entre la reserva y la visita <span class="nar">hay días de silencio.</span></div>
+  <div class="t">Reserva el lunes con ganas. El jueves ya no se acuerda de para qué era. O le ha surgido algo y le da apuro decirlo.</div>
+  <div class="vis"><div class="wk">
+    <div class="si"><b>LUN</b><div class="ic">✓</div><span>Reserva</span></div>
+    <div class="mute"><b>MAR</b><div class="ic">…</div><span>Nada</span></div>
+    <div class="mute"><b>MIÉ</b><div class="ic">…</div><span>Nada</span></div>
+    <div class="q"><b>JUE</b><div class="ic" style="color:#E8590C">?</div><span>Visita</span></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 4 · confirmar pidiendo respuesta -->
+<div class="page crema"><div class="prog"><i style="width:44%"></i></div><div class="n">4/9</div>
+<div class="in">
+  <div class="h"><span class="nar">1.</span> Confirmar <span class="nar">pidiendo respuesta.</span></div>
+  <div class="t">No un «te recordamos tu cita». Una pregunta. Si no contesta, ya sabes algo, y aún tienes tiempo.</div>
+  <div class="vis"><div class="phone"><div class="scr"><div class="sb"><span>10:00</span><span>●●● ▮</span></div>
+  <div class="wah"><span class="back">‹</span><div class="av">M</div><div><b>Marta</b><small>en línea</small></div></div>
+  <div class="wall"><div class="day">martes</div>
+    <div class="bub mio">Hola, Marta. ¿Sigues pudiendo el jueves a las 18:00? Contesta SÍ o dime otra hora que te venga mejor.<span class="hh">10:00 <span class="tick az">✓✓</span></span></div>
+    <div class="bub suyo">Sí, allí estaré<span class="hh">10:14</span></div>
+  </div></div></div><div style="margin-top:22px"><span class="ej">Ejemplo</span></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 5 · recordar lo que va a ver -->
+<div class="page crema"><div class="prog"><i style="width:55%"></i></div><div class="n">5/9</div>
+<div class="in">
+  <div class="h"><span class="nar">2.</span> Recordar <span class="nar">lo que va a ver.</span></div>
+  <div class="t">Cuesta más faltar a algo que te resuelve las dudas que tienes. Dile qué se va a llevar.</div>
+  <div class="vis"><div class="phone"><div class="scr"><div class="sb"><span>18:00</span><span>●●● ▮</span></div>
+  <div class="wah"><span class="back">‹</span><div class="av">M</div><div><b>Marta</b><small>en línea</small></div></div>
+  <div class="wall"><div class="day">miércoles</div>
+    <div class="bub mio">Mañana a las 18:00 vemos tres cosas: el horario del grupo de octubre, las prácticas y las formas de pago. Si te surge otra duda, apúntala y la vemos.<span class="hh">18:00 <span class="tick az">✓✓</span></span></div>
+    <div class="bub suyo">Genial, justo quería preguntar por las prácticas<span class="hh">18:21</span></div>
+  </div></div></div><div style="margin-top:22px"><span class="ej">Ejemplo</span></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 6 · llamar si no entra -->
+<div class="page crema"><div class="prog"><i style="width:66%"></i></div><div class="n">6/9</div>
+<div class="in">
+  <div class="h"><span class="nar">3.</span> Si no llega, <span class="nar">llamar a los cinco minutos.</span></div>
+  <div class="t">No para reñirle. Para preguntar si le ha surgido algo y darle otra hora.</div>
+  <div class="vis"><div class="call"><small>Jueves · 18:05</small><b>Marta</b><small>llamando…</small><div class="av">M</div><div class="bt"><i class="m">···</i><i class="r">✆</i></div></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 7 · recuperar el mismo día -->
+<div class="page crema"><div class="prog"><i style="width:77%"></i></div><div class="n">7/9</div>
+<div class="in">
+  <div class="h"><span class="nar">4.</span> Recuperarla <span class="nar">el mismo día.</span></div>
+  <div class="t">Quien falta hoy todavía tiene el interés fresco. Cada día que dejas pasar, se enfría un poco más.</div>
+  <div class="vis"><div class="phone"><div class="scr"><div class="sb"><span>18:08</span><span>●●● ▮</span></div>
+  <div class="wah"><span class="back">‹</span><div class="av">M</div><div><b>Marta</b><small>en línea</small></div></div>
+  <div class="wall"><div class="day">jueves</div>
+    <div class="bub mio">Sin problema, Marta. ¿Te va mejor el sábado a las 11:00 o el lunes a las 18:00?<span class="hh">18:07 <span class="tick az">✓✓</span></span></div>
+    <div class="bub suyo">El sábado mejor. Perdona lo de hoy<span class="hh">18:08</span></div>
+  </div></div></div><div style="margin-top:22px"><span class="ej">Ejemplo</span></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 8 · resumen -->
+<div class="page crema"><div class="prog"><i style="width:88%"></i></div><div class="n">8/9</div>
+<div class="in">
+  <div class="h">Nada de esto depende <span class="nar">de que alguien se acuerde.</span></div>
+  <div class="vis"><div class="pasos">
+    <div><i>1</i>Confirma con una pregunta</div>
+    <div><i>2</i>Recuerda qué va a ver</div>
+    <div><i>3</i>Llama si no llega</div>
+    <div><i>4</i>Otra hora el mismo día</div>
+  </div></div>
+  <div class="t" style="margin-top:0">Lo hace un asistente con IA, por WhatsApp y teléfono. Tu equipo solo ve las visitas confirmadas y a quién hay que recuperar.</div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 9 · CTA -->
+<div class="page fuego"><div class="prog"><i style="width:100%"></i></div><div class="n">9/9</div>
+<div class="in">
+  <div class="h" style="font-size:96px">¿Cuántas sillas vacías <span class="nar">tuviste este mes?</span></div>
+  <div class="t" style="font-size:40px;color:#0A0A0B">Si tu centro ya invierte en anuncios, te enseñamos dónde estás perdiendo oportunidades entre el lead y la venta. Diagnóstico gratuito de 30 minutos.</div>
+  <div class="vis"><div class="ruta"><span class="ok">Anuncio</span><em>→</em><span class="ok">Interesado</span><em>→</em><span class="ok">Cita</span><em>→</em><span class="aqui">Visita ?</span><em>→</em><span>Matrícula</span></div></div>
+  <div class="cta" style="margin-top:0">Escríbeme por privado<br><b>DIAGNÓSTICO</b></div>
+</div>
+<div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+</body></html>

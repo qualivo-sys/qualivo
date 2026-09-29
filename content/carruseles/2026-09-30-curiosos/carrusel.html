@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Carrusel · Curiosos y lead barato (30-sep-2026)</title>
+<link rel="stylesheet" href="base.css"><style>
+/* en este carrusel el acento del titular es el subrayado amarillo, no el naranja */
+.mk{background:linear-gradient(transparent 58%,#FBE896 58%,#FBE896 94%,transparent 94%);padding:0 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.crema .h .nar{color:#0A0A0B}
+/* panel de anuncios */
+.adm{width:960px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 26px 60px rgba(10,10,11,.25);font-family:Roboto,"Segoe UI",Arial,sans-serif;color:#1c1e21}
+.adm .top{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-bottom:1px solid #e4e6eb;font-size:26px;font-weight:700}
+.adm .row{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid #f0f2f5;font-size:30px}
+.adm .row:last-child{border-bottom:0}
+.adm .row .ar{font-weight:700;font-size:28px}
+.up{color:#2F6B3C}.dn{color:#2F6B3C}
+/* lista de interesados */
+.lst{width:960px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 44px rgba(10,10,11,.14)}
+.lst .it{display:flex;align-items:center;gap:18px;padding:17px 28px;border-bottom:1px solid #F1EEE8;font-size:28px}
+.lst .it:last-child{border-bottom:0}
+.lst .av{width:50px;height:50px;border-radius:50%;background:#EDEAE4;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:#6A6A6A;flex:none}
+.lst .it span.nm{flex:1}
+/* iceberg */
+.ice{width:960px;position:relative}
+.ice .sup{margin:0 auto;width:360px;background:#fff;border-radius:18px 18px 0 0;padding:22px;text-align:center;font-family:Anton;font-size:40px;text-transform:uppercase;box-shadow:0 8px 24px rgba(10,10,11,.08)}
+.ice .linea{border-top:4px dashed #E8590C;position:relative;margin-top:0}
+.ice .linea span{position:absolute;right:0;top:-44px;font-size:24px;font-weight:700;color:#E8590C}
+.ice .bajo{background:#0A0A0B;color:#F2EEE6;border-radius:0 0 30px 30px;padding:28px 34px;display:flex;flex-direction:column;gap:14px}
+.ice .bajo div{font-size:32px;padding-left:44px;position:relative}
+.ice .bajo div::before{content:'';position:absolute;left:0;top:12px;width:20px;height:20px;border-radius:50%;background:#FF7A33}
+/* flujo */
+.flu{width:960px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.flu div{width:100%;background:#fff;border-radius:20px;padding:24px 30px;font-size:32px;box-shadow:0 8px 24px rgba(10,10,11,.08);display:flex;justify-content:space-between;align-items:center}
+.flu div small{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#6A6A6A}
+.flu div b{font-family:Anton;font-weight:400;font-size:40px;text-transform:uppercase}
+.flu div.fin{background:#0A0A0B;color:#F2EEE6}.flu div.fin small{color:rgba(242,238,230,.6)}.flu div.fin b{color:#FF7A33}
+.flu em{font-style:normal;font-family:Anton;font-size:40px;color:#E8590C;line-height:1}
+/* formulario */
+.frm{width:900px;background:#fff;border-radius:22px;padding:30px 34px;box-shadow:0 18px 44px rgba(10,10,11,.14);font-family:Roboto,"Segoe UI",Arial,sans-serif}
+.frm .q{font-size:29px;font-weight:700;color:#1c1e21;margin-bottom:14px}
+.frm .op{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.frm .op span{border:2px solid #ccd0d5;border-radius:12px;padding:12px 18px;font-size:26px;color:#1c1e21}
+.frm .op span.sel{border-color:#E8590C;background:#FDE4D6;font-weight:700}
+.frm .op span.fr{border-style:dashed;color:#6A6A6A}
+/* panel intelligence */
+.int{width:960px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 26px 60px rgba(10,10,11,.2)}
+.int .top{display:flex;justify-content:space-between;align-items:center;padding:22px 30px;border-bottom:1px solid #E9E5DD}
+.int .top b{font-family:Anton;font-weight:400;font-size:32px;text-transform:uppercase}
+.int .cab,.int .ln{display:grid;grid-template-columns:1.6fr 1fr 1fr;align-items:center;padding:18px 30px;gap:10px}
+.int .cab{font-size:20px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#6A6A6A;border-bottom:1px solid #F1EEE8}
+.int .ln{font-size:29px;border-bottom:1px solid #F1EEE8}
+.int .ln:last-child{border-bottom:0}
+.int .ln b{font-family:Anton;font-weight:400;font-size:44px}
+.int .ln.best{background:#FFF6DA}
+.int .ln .m{color:#E8590C}
+/* cambio de métrica */
+.swap{display:flex;align-items:center;gap:20px}
+.swap div{border-radius:18px;padding:22px 26px;font-family:Anton;font-size:40px;text-transform:uppercase}
+.swap .old{border:3px solid rgba(10,10,11,.3);color:rgba(10,10,11,.45);text-decoration:line-through;text-decoration-thickness:4px}
+.swap .new{background:#0A0A0B;color:#FF7A33}
+.swap em{font-style:normal;font-family:Anton;font-size:44px;color:#E8590C}
+</style></head><body>
+
+<!-- 1 · portada -->
+<div class="page fuego"><div class="prog"><i style="width:11%"></i></div><div class="n">1/9</div>
+<div class="in">
+  <div class="h" style="font-size:124px;line-height:1.06">El lead barato <span class="nar">te sale carísimo.</span></div>
+  <div class="t" style="font-size:42px;color:#0A0A0B;font-weight:500">Tus anuncios traen curiosos, no alumnos.</div>
+  <div class="vis"><div class="adm">
+    <div class="top"><span>Resumen de la campaña</span><span class="ej">Ejemplo</span></div>
+    <div class="row"><span>Formularios</span><span class="ar up">↑ subiendo</span></div>
+    <div class="row"><span>Coste por lead</span><span class="ar dn">↓ bajando</span></div>
+    <div class="row"><span>Matrículas</span><span class="pill rojo">¿?</span></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 2 · la escena -->
+<div class="page crema"><div class="prog"><i style="width:22%"></i></div><div class="n">2/9</div>
+<div class="in">
+  <div class="h">Si te entran 30 interesados al mes, <span class="mk">tu equipo llama a 30.</span></div>
+  <div class="t">Unos no cogen. Otros solo querían saber el precio. Alguno ni se acuerda de haber rellenado nada.</div>
+  <div class="vis"><div class="lst">
+    <div class="it"><div class="av">A</div><span class="nm">Andrea</span><span class="pill gris">No coge</span></div>
+    <div class="it"><div class="av">J</div><span class="nm">Javier</span><span class="pill ambar">Solo mirando</span></div>
+    <div class="it"><div class="av">R</div><span class="nm">Rocío</span><span class="pill gris">No recuerda el formulario</span></div>
+    <div class="it"><div class="av">D</div><span class="nm">David</span><span class="pill gris">No coge</span></div>
+    <div class="it"><div class="av">S</div><span class="nm">Sara</span><span class="pill verde">Quiere empezar ya</span></div>
+    <div class="it"><div class="av">P</div><span class="nm">Pablo</span><span class="pill ambar">Solo el precio</span></div>
+  </div><div style="margin-top:18px"><span class="ej">Ejemplo</span></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 3 · lo caro viene detrás -->
+<div class="page crema"><div class="prog"><i style="width:33%"></i></div><div class="n">3/9</div>
+<div class="in">
+  <div class="h">Lo barato es el formulario. <span class="mk">Lo caro viene detrás.</span></div>
+  <div class="t">Cada curioso se come el tiempo que necesitaba alguien que sí quería matricularse.</div>
+  <div class="vis"><div class="ice">
+    <div class="sup">Formulario</div>
+    <div class="linea"><span>lo que ves en Meta</span></div>
+    <div class="bajo">
+      <div>Llamadas que nadie coge</div>
+      <div>Mensajes sin respuesta</div>
+      <div>Horas de admisiones</div>
+      <div>Visitas que no vienen</div>
+      <div>Seguimientos a quien nunca iba a venir</div>
+    </div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 4 · por qué pasa -->
+<div class="page crema"><div class="prog"><i style="width:44%"></i></div><div class="n">4/9</div>
+<div class="in">
+  <div class="h">Meta te trae <span class="mk">lo que le pides.</span></div>
+  <div class="t">Si le pides formularios, busca a gente que rellena formularios. No a gente que se matricula.</div>
+  <div class="vis"><div class="flu">
+    <div><small>Tú le pides</small><b>Formularios</b></div><em>↓</em>
+    <div><small>Meta busca</small><b>Quien rellena rápido</b></div><em>↓</em>
+    <div class="fin"><small>Te llegan</small><b>Curiosos</b></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 5 · preguntar antes de hablar -->
+<div class="page crema"><div class="prog"><i style="width:55%"></i></div><div class="n">5/9</div>
+<div class="in">
+  <div class="h"><span class="nar" style="color:#E8590C">1.</span> Preguntar <span class="mk">antes de hablar.</span></div>
+  <div class="t">Dos o tres preguntas separan al que quiere empezar este mes del que solo mira precios.</div>
+  <div class="vis"><div class="frm">
+    <div class="q">¿Cuándo te gustaría empezar?</div>
+    <div class="op"><span class="sel">Este mes</span><span>En 2 o 3 meses</span><span class="fr">Solo estoy mirando</span></div>
+    <div class="q">¿Qué horario podrías hacer?</div>
+    <div class="op"><span>Mañanas</span><span class="sel">Tardes</span><span>Online</span></div>
+    <div class="q">¿Quién pagaría el curso?</div>
+    <div class="op" style="margin-bottom:0"><span class="sel">Yo</span><span>Mi empresa</span><span class="fr">Busco algo gratis</span></div>
+  </div><div style="margin-top:18px"><span class="ej">Ejemplo</span></div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 6 · que Meta aprenda -->
+<div class="page crema"><div class="prog"><i style="width:66%"></i></div><div class="n">6/9</div>
+<div class="in">
+  <div class="h"><span class="nar" style="color:#E8590C">2.</span> Que Meta aprenda <span class="mk">de quién se matricula.</span></div>
+  <div class="t">Cuando alguien se matricula, se lo cuentas a Meta. Deja de buscar a quien rellena y busca a gente parecida a tus alumnos.</div>
+  <div class="vis"><div class="flu">
+    <div><small>1 · Anuncio</small><b>Pide información</b></div><em>↓</em>
+    <div><small>2 · Tu centro</small><b>Se matricula</b></div><em>↓</em>
+    <div class="fin"><small>3 · Aviso a Meta</small><b>Busca más como este ↺</b></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 7 · qué anuncio trae matrículas -->
+<div class="page crema"><div class="prog"><i style="width:77%"></i></div><div class="n">7/9</div>
+<div class="in">
+  <div class="h"><span class="nar" style="color:#E8590C">3.</span> Saber qué anuncio <span class="mk">trae matrículas.</span></div>
+  <div class="t">El que más interesados trae no siempre es el que trae alumnos. Si no lo ves, apagas el bueno.</div>
+  <div class="vis"><div class="int">
+    <div class="top"><b>Anuncios del mes</b><span class="ej">Datos de ejemplo</span></div>
+    <div class="cab"><span>Anuncio</span><span>Interesados</span><span>Matrículas</span></div>
+    <div class="ln"><span>Vídeo del aula</span><b>40</b><b class="m">1</b></div>
+    <div class="ln"><span>Descuento de octubre</span><b>32</b><b class="m">0</b></div>
+    <div class="ln best"><span>Una alumna cuenta su caso</span><b>15</b><b class="m">4</b></div>
+  </div></div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 8 · resumen -->
+<div class="page crema"><div class="prog"><i style="width:88%"></i></div><div class="n">8/9</div>
+<div class="in">
+  <div class="h">Deja de comprar formularios. <span class="mk">Compra matrículas.</span></div>
+  <div class="res">
+    <p><i>1</i>Pregunta antes de hablar.</p>
+    <p><i>2</i>Enséñale a Meta quién se matricula.</p>
+    <p><i>3</i>Mira qué anuncio trae alumnos, no interesados.</p>
+  </div>
+  <div class="vis"><div class="swap"><div class="old">Coste por lead</div><em>→</em><div class="new">Coste por matrícula</div></div></div>
+  <div class="t" style="margin-top:0">Las preguntas las hace un asistente con IA. El panel lo miras tú.</div>
+</div>
+<div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<!-- 9 · CTA -->
+<div class="page fuego"><div class="prog"><i style="width:100%"></i></div><div class="n">9/9</div>
+<div class="in">
+  <div class="h" style="font-size:96px">¿Qué anuncio te trae <span class="nar">alumnos de verdad?</span></div>
+  <div class="t" style="font-size:40px;color:#0A0A0B">Si tu centro ya invierte en anuncios, te enseñamos dónde estás perdiendo oportunidades entre el lead y la venta. Diagnóstico gratuito de 30 minutos.</div>
+  <div class="vis"><div class="ruta"><span class="aqui">Anuncio ?</span><em>→</em><span>Interesado</span><em>→</em><span>Cita</span><em>→</em><span>Visita</span><em>→</em><span>Matrícula</span></div></div>
+  <div class="cta" style="margin-top:0">Escríbeme por privado<br><b>DIAGNÓSTICO</b></div>
+</div>
+<div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+</body></html>
