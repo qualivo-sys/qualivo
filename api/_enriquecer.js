@@ -21,7 +21,7 @@ const MODELO = process.env.ENRIQUECER_MODEL || 'claude-opus-5-5';
 // Las funciones que llegan aquí tienen 60 s (vercel.json): el aviso sale como mucho a los 30 s,
 // con o sin resumen, y la nota puede llegar después (hasta los 45 s).
 const ESPERA_MS = parseInt(process.env.ENRIQUECER_MS || '45000', 10);
-const AVISO_MS = parseInt(process.env.ENRIQUECER_AVISO_MS || '30000', 10);
+const AVISO_MS = parseInt(process.env.ENRIQUECER_AVISO_MS || '20000', 10); // 20 s: el webhook del formulario tiene 60 s en total y antes genera el WhatsApp con IA
 const ETIQUETA = 'ficha-investigada';
 
 // Dominios de correo gratuitos: de ahí no se saca la empresa.
