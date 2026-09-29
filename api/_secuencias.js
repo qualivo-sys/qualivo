@@ -54,7 +54,7 @@ const SECUENCIAS = [
         asunto: function (d) { return (nom(d) ? nom(d) + ', ' : '') + 'te he esperado'; },
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'abíamos quedado hoy y no has podido entrar. Sin problema, pasa continuamente.</p>' +
-            '<p>Si sigue interesándote, coge otro hueco cuando quieras. Son 45 minutos y el calendario está abierto.</p>' +
+            '<p>Si sigue interesándote, coge otro hueco cuando quieras. Son 30 minutos y el calendario está abierto.</p>' +
             boton('Coger otro hueco', agendaCon(d)));
         }
       },
@@ -146,7 +146,7 @@ const SECUENCIAS = [
         asunto: function () { return 'Ha pasado un mes'; },
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'ace un mes me dijiste que no era el momento. Te escribo una sola vez por si ahora lo es.</p>' +
-            '<p>Nada ha cambiado por mi parte: 45 minutos, los ocho puntos, un plan por escrito. Si sigue sin ser el momento, ignora este correo y no vuelvo a escribirte.</p>' +
+            '<p>Nada ha cambiado por mi parte: 30 minutos, los ocho puntos, un plan por escrito. Si sigue sin ser el momento, ignora este correo y no vuelvo a escribirte.</p>' +
             boton('Reservar el diagnóstico', agendaCon(d)));
         }
       }

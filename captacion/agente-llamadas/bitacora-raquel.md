@@ -283,14 +283,14 @@ locución del operador; el corte viene de la detección de buzón, que no se toc
 - Si se confirma la hipótesis 1, revisar la detección de buzón (esperar a la primera voz humana
   tras una locución del operador).
 
-## 29-sep · la llamada dura 45 minutos, no quince
+## 29-sep · la llamada se anuncia de 30 minutos, no de quince
 
 Maikel: las reuniones se van casi a la hora y se le cruzan con la siguiente («cámbialo mejor sí»).
-- Prompt: donde decía «Nunca digas cuánto dura: "quince minutos" se queda corto», ahora: no venderla
-  como algo corto y, si pregunta, «unos cuarenta y cinco minutos: primero te pregunta cómo lo tenéis
+- Prompt: donde decía «Nunca digas cuánto dura: "quince minutos" se queda corto», ahora,
+  si pregunta, «unos treinta minutos: primero te pregunta cómo lo tenéis
   montado y luego te enseña cómo quedaría en tu caso».
-- Herramienta agendar_diagnostico: «diagnóstico de 45 minutos».
+- Herramienta agendar_diagnostico: «diagnóstico de 30 minutos».
 - No se ha tocado nada más (voz, modelo, número, primer mensaje ni cadencia). Copia previa en el
   scratchpad de la sesión (raquel-29sep-antes.json).
-- Calendario GHL: huecos de 45 min + 15 de colchón, uno por hora; nombre, título de la invitación,
-  descripción y mensaje de gracias dicen ya 45 minutos.
+- Calendario GHL: huecos de 30 min + 30 de colchón (la hora entera), uno por hora; nombre, título,
+  descripción y mensaje de gracias dicen 30 minutos (Maikel: «pon treinta minutos mejor»).

@@ -62,7 +62,8 @@ function pregunta(datos) {
 // para qué sirve el siguiente paso. Ahora dice en una frase qué hace Qualivo
 // y por qué la llamada tiene sentido: te enseño dónde está tu fuga y qué
 // haría falta para cerrarla. No se da la duración aquí; cuando se da, son unos
-// 45 minutos (29-sep: se decía «quince» y la llamada dura casi una hora).
+// 30 minutos (29-sep: se decía «quince»; el calendario reserva la hora entera
+// porque las reuniones se alargan).
 function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
   const dia = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
@@ -223,7 +224,7 @@ function boton(texto, datos) {
 function emailBienvenida(datos) {
   const n = nombreCorto(datos && datos.nombre);
   return {
-    asunto: n ? n + ', recibido: tu diagnóstico de 45 minutos' : 'Recibido: tu diagnóstico de 45 minutos',
+    asunto: n ? n + ', recibido: tu diagnóstico de 30 minutos' : 'Recibido: tu diagnóstico de 30 minutos',
     html: envoltura(
       '<p>' + (n ? n + ', h' : 'H') + 'e recibido tu solicitud. Soy Maikel, de Qualivo.</p>' +
       // El WhatsApp no sale de madrugada. Prometer «en unos minutos» a alguien
@@ -234,7 +235,7 @@ function emailBienvenida(datos) {
       ', para llegar a la llamada sabiendo algo de ti y no perder tiempo en presentaciones.</p>' +
       '<p>Si prefieres ir al grano y coger hueco tú mismo, aquí lo tienes:</p>' +
       boton('Elegir mi hora', datos) +
-      '<p style="color:#5A5E66">Son 45 minutos. Repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre, con tus números delante. ' +
+      '<p style="color:#5A5E66">Son 30 minutos. Repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre, con tus números delante. ' +
       'Te mando el plan por escrito en 24 horas, lo hagas con nosotros o no.</p>')
   };
 }
@@ -248,7 +249,7 @@ const EMAILS = [
       const n = nombreCorto(d.nombre);
       return envoltura(
         '<p>' + (n ? n + ', p' : 'P') + 'ediste el diagnóstico y todavía no hemos hablado. Te cuento en un minuto qué es exactamente, para que decidas con la información delante.</p>' +
-        '<p>Son 45 minutos en los que repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre:</p>' +
+        '<p>Son 30 minutos en los que repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre:</p>' +
         '<p style="color:#3D4148">Anuncios · la web · formularios · el lead · tiempo de respuesta · seguimientos · presupuestos · el cierre.</p>' +
         '<p>La fuga casi nunca está en un solo sitio, y casi nunca está donde uno cree. De ahí sale un plan por escrito con qué arreglar primero. Es tuyo, lo hagas con nosotros o no.</p>' +
         boton('Reservar mi diagnóstico', d));
