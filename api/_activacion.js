@@ -378,9 +378,15 @@ async function retenerParaMaikel(c, texto, n) {
   const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
   await nota(c.id, 'NIVEL ' + n + ' · NO SE LE HA ESCRITO: la regla de Maikel (29-sep) es que los A y B los vea él antes. ' +
     'Cadencia parada (act-espera-maikel) hasta que escriba él o dé el ok al borrador.\n\nBorrador del primer WhatsApp:\n' + texto);
+  // 29-sep, Maikel: «que en el CRM pueda tener la máxima información de los leads». Se investiga
+  // el negocio en internet (api/_enriquecer.js): nota «FICHA INVESTIGADA» + etiqueta
+  // ficha-investigada, y el resumen en tres líneas va en el aviso al móvil. El aviso no espera
+  // más de ENRIQUECER_AVISO_MS: si la ficha tarda, sale como siempre y la nota llega después.
+  const inv = await require('./_enriquecer.js').paraElAviso(c);
   const Av = require('./_aviso.js');
   try {
     await Av.movil('LEAD ' + n + ' · NO LE HE ESCRITO, espero tu ok\n' + quien + (c.phone ? '\nTel ' + c.phone : '') +
+      (inv && inv.resumen ? '\n\nLo que se ve de su negocio:\n' + inv.resumen + (inv.guardada ? '\n(ficha completa en las notas del CRM)' : '') : '') +
       '\n\nBorrador del primer WhatsApp:\n' + texto);
   } catch (e) { console.error('[activacion] aviso A/B al móvil:', e && e.message); }
   try {
