@@ -89,17 +89,26 @@ def recoger(tok):
                 dentro = False; continue
             v = num(r[2]) if len(r) > 2 else None
             est = str(r[3]).strip() if len(r) > 3 else ""
-            if v is not None and c:
+            # «COBRADO ✓» ya no es un cobro pendiente: contarlo infla la
+            # previsión de caja con dinero que ya está dentro.
+            if v is not None and c and "COBRADO" not in est.upper():
                 add("COBROS", c, v, est)
 
     # --- GASTOS fijos mensuales ---
+    # La pestaña trae DOS listas de gastos: la de arriba, que cuadra hasta
+    # «SALIDA TOTAL / MES», y otra debajo que repite conceptos con otro nombre
+    # (Comida/Supermercado, Ocio/Restaurantes, Gasolina dos veces). Sumar las
+    # dos duplica ~1.020 €/mes. Se corta en la salida total.
     for r in leer(tok, "Gastos mensuales", "A1:G60"):
         c = str(r[1] if len(r) > 1 else "").strip()
         v = num(r[2]) if len(r) > 2 else None
+        if c.startswith("🔴"):
+            add("PAGOS", c.lstrip("🔴 "), v, "total")
+            break
         if v is None or not c or c.startswith(("Subtotal", "SUBTOTAL", "→")):
             continue
-        if c.startswith(("💳", "🔴")):
-            add("PAGOS", c.lstrip("💳🔴 "), v, "total")
+        if c.startswith("💳"):
+            add("PAGOS", c.lstrip("💳 "), v, "total")
         else:
             add("GASTOS", c, v)
 
@@ -109,7 +118,8 @@ def recoger(tok):
         saldo = num(r[2]) if len(r) > 2 else None
         cuota = num(r[3]) if len(r) > 3 else None
         vence = str(r[4]).strip() if len(r) > 4 else ""
-        if not c or c.startswith(("Deuda", "🎯")):
+        # Se salta la cabecera de la pestaña y su línea de instrucciones.
+        if not c or c.startswith(("Deuda", "🎯", "PLAN DE LIQUIDACIÓN", "Ordenado por")):
             continue
         est = "TOTAL" if c.startswith("TOTAL") else ("cuota " + f"{cuota:.0f} €/mes" if cuota else "sin cuota")
         add("DEUDAS", c, saldo, est, vence[:60])
