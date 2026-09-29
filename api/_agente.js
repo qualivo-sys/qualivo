@@ -5,7 +5,7 @@
 // dijera después lo leía Maikel cuando podía. Cesar contestó a las 8:30 y
 // nadie le respondió hasta que Maikel lo vio. Esto lo tapa: lee toda la
 // conversación y la ficha, contesta en el tono de Maikel, y su único objetivo
-// es entender la fuga en dos o tres mensajes y cerrar los quince minutos.
+// es entender la fuga en dos o tres mensajes y cerrar la videollamada.
 //
 // Reglas que no se negocian (están en el prompt y en el código):
 //   - Nunca da precio ni promete cifras. Precio, «quiero hablar con Maikel»,
@@ -55,7 +55,7 @@ const SISTEMA = [
   '',
   'LO QUE NUNCA HACES:',
   '- Pedir perdón por tardar en contestar: la rapidez es lo primero que vendemos.',
-  '- Decir cuánto dura la videollamada («quince minutos» se queda corto para lo que se enseña).',
+  '- Venderla como algo corto: la videollamada dura unos 45 minutos (primero Maikel pregunta, luego enseña el sistema montado para su caso). Si pregunta cuánto dura, díselo así (Maikel, 29-sep).',
   '- Dar precios, rangos de precio, «desde», ni hablar de garantías o de pilotos. Si pregunta cuánto cuesta, dile en una frase que eso depende de lo que salga en la videollamada y que se lo cuentas ahí; si insiste, usa pasar_a_maikel.',
   '- Prometer resultados con cifras para su caso.',
   '- Hablar mal de otras agencias o de su web.',
@@ -686,7 +686,7 @@ function sistemaDemo(b, nombre) {
     '',
     'TU OBJETIVO: entender en una pregunta qué necesita y llevarle a reservar una ' + b.tipoCita + '. Ofrece DOS huecos: ' + huecosDemo() + '. En cuanto elija uno o diga «mañana», «por la tarde» o «vale», NO vuelvas a preguntar: confírmalo en una frase con día y hora y di que le llega la confirmación por WhatsApp y un recordatorio el día antes.',
     '',
-    'DESPUÉS DE CONFIRMAR LA CITA (y solo entonces), en el MISMO mensaje, añade un párrafo aparte rompiendo el papel, con estas ideas y tus palabras: «' + nombre + ', esto es lo que vería un ' + b.tipoCliente + ' tuyo escribiendo a ' + b.negocio + ' un domingo a las once de la noche: respuesta al minuto y cita cerrada sin que nadie de tu equipo toque el móvil. Con tu agenda de verdad, tus precios y tu forma de hablar, es la que atiende. Si quieres verlo montado para tu caso, Maikel te lo enseña en media hora: https://qualivo.io/llamada/». Termina el mensaje con la palabra FIN_DEMO en una línea aparte (se borra antes de enviar).',
+    'DESPUÉS DE CONFIRMAR LA CITA (y solo entonces), en el MISMO mensaje, añade un párrafo aparte rompiendo el papel, con estas ideas y tus palabras: «' + nombre + ', esto es lo que vería un ' + b.tipoCliente + ' tuyo escribiendo a ' + b.negocio + ' un domingo a las once de la noche: respuesta al minuto y cita cerrada sin que nadie de tu equipo toque el móvil. Con tu agenda de verdad, tus precios y tu forma de hablar, es la que atiende. Si quieres verlo montado para tu caso, Maikel te lo enseña en una videollamada: https://qualivo.io/llamada/». Termina el mensaje con la palabra FIN_DEMO en una línea aparte (se borra antes de enviar).',
     '',
     'Si dice que no le interesa o que ya lo ha visto, das las gracias en una frase, le dejas el enlace https://qualivo.io/llamada/ y terminas con FIN_DEMO. Nunca mandes más de un mensaje seguido.',
     'Hoy es ' + fechaHoy() + '.'

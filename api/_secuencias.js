@@ -54,7 +54,7 @@ const SECUENCIAS = [
         asunto: function (d) { return (nom(d) ? nom(d) + ', ' : '') + 'te he esperado'; },
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'abíamos quedado hoy y no has podido entrar. Sin problema, pasa continuamente.</p>' +
-            '<p>Si sigue interesándote, coge otro hueco cuando quieras. Son quince minutos y el calendario está abierto.</p>' +
+            '<p>Si sigue interesándote, coge otro hueco cuando quieras. Son 45 minutos y el calendario está abierto.</p>' +
             boton('Coger otro hueco', agendaCon(d)));
         }
       },
@@ -65,7 +65,7 @@ const SECUENCIAS = [
           return envoltura('<p>' + (nom(d) ? nom(d) + ', t' : 'T') + 'e dejo por escrito lo que iba a repasar contigo, por si te sirve aunque no lleguemos a hablar.</p>' +
             '<p>Los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre: anuncios, la web, formularios, el lead, el tiempo de respuesta, los seguimientos, los presupuestos y el cierre.</p>' +
             '<p>La pregunta que más cosas destapa suele ser la más tonta: <strong>¿cuántos presupuestos del mes pasado siguen hoy sin respuesta?</strong> Si no sabes el número, ahí ya hay algo.</p>' +
-            boton('Si quieres, lo vemos en quince minutos', agendaCon(d)));
+            boton('Si quieres, lo vemos en una videollamada', agendaCon(d)));
         }
       },
       {
@@ -88,7 +88,7 @@ const SECUENCIAS = [
         etiqueta: 'post-1', dias: 1,
         asunto: function (d) { return (nom(d) ? nom(d) + ', ' : '') + 'tu plan, por escrito'; },
         html: function (d) {
-          return envoltura('<p>' + (nom(d) ? nom(d) + ', g' : 'G') + 'racias por los quince minutos. Te mando lo que hablamos por escrito, para que lo tengas aunque no hagas nada con ello.</p>' +
+          return envoltura('<p>' + (nom(d) ? nom(d) + ', g' : 'G') + 'racias por la llamada. Te mando lo que hablamos por escrito, para que lo tengas aunque no hagas nada con ello.</p>' +
             '<p>Va lo mismo que te dije en la llamada: dónde se está escapando el negocio, qué arreglaría primero y qué número tendría que moverse para saber si ha funcionado.</p>' +
             '<p>Si quieres que lo montemos, el piloto es de treinta días sobre ese proceso concreto. El número se acuerda antes de empezar, se mide el día 1 y se vuelve a medir el día 30. Si no mejora, no lo pagas.</p>' +
             '<p>Y si prefieres hacerlo por tu cuenta, el plan es tuyo igual.</p>');
@@ -146,8 +146,8 @@ const SECUENCIAS = [
         asunto: function () { return 'Ha pasado un mes'; },
         html: function (d) {
           return envoltura('<p>' + (nom(d) ? nom(d) + ', h' : 'H') + 'ace un mes me dijiste que no era el momento. Te escribo una sola vez por si ahora lo es.</p>' +
-            '<p>Nada ha cambiado por mi parte: quince minutos, los ocho puntos, un plan por escrito. Si sigue sin ser el momento, ignora este correo y no vuelvo a escribirte.</p>' +
-            boton('Coger quince minutos', agendaCon(d)));
+            '<p>Nada ha cambiado por mi parte: 45 minutos, los ocho puntos, un plan por escrito. Si sigue sin ser el momento, ignora este correo y no vuelvo a escribirte.</p>' +
+            boton('Reservar el diagnóstico', agendaCon(d)));
         }
       }
     ]

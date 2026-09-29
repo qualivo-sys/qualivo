@@ -61,8 +61,8 @@ function pregunta(datos) {
 // de tu empresa... una cosa concreta sobre tu caso») no decía qué hacemos ni
 // para qué sirve el siguiente paso. Ahora dice en una frase qué hace Qualivo
 // y por qué la llamada tiene sentido: te enseño dónde está tu fuga y qué
-// haría falta para cerrarla. No se dice «quince minutos» para no achicar lo
-// que se enseña (mismo criterio que el guion de Raquel).
+// haría falta para cerrarla. No se da la duración aquí; cuando se da, son unos
+// 45 minutos (29-sep: se decía «quince» y la llamada dura casi una hora).
 function whatsapp1(datos) {
   const n = nombreCorto(datos.nombre);
   const dia = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
@@ -90,7 +90,7 @@ function whatsappTrasApertura(datos) {
   const n = nombreCorto(datos.nombre);
   return (n ? 'Gracias, ' + n + '. ' : 'Gracias. ') +
     'Lo he leído y me hago una idea de por dónde va. Te preparo la llamada con eso. ' +
-    'Si te apetece contarme algo más por aquí, adelante; si no, lo vemos en los quince minutos.';
+    'Si te apetece contarme algo más por aquí, adelante; si no, lo vemos en la videollamada.';
 }
 
 function whatsapp2(datos) {
@@ -223,7 +223,7 @@ function boton(texto, datos) {
 function emailBienvenida(datos) {
   const n = nombreCorto(datos && datos.nombre);
   return {
-    asunto: n ? n + ', recibido: tu diagnóstico de quince minutos' : 'Recibido: tu diagnóstico de quince minutos',
+    asunto: n ? n + ', recibido: tu diagnóstico de 45 minutos' : 'Recibido: tu diagnóstico de 45 minutos',
     html: envoltura(
       '<p>' + (n ? n + ', h' : 'H') + 'e recibido tu solicitud. Soy Maikel, de Qualivo.</p>' +
       // El WhatsApp no sale de madrugada. Prometer «en unos minutos» a alguien
@@ -231,10 +231,10 @@ function emailBienvenida(datos) {
       '<p>' + (datos && datos.waAhora === false
         ? 'Mañana por la mañana te escribo por WhatsApp con una pregunta'
         : 'Te escribo por WhatsApp en unos minutos con una pregunta') +
-      ', para llegar a la llamada sabiendo algo de ti y no gastar los quince minutos en presentaciones.</p>' +
+      ', para llegar a la llamada sabiendo algo de ti y no perder tiempo en presentaciones.</p>' +
       '<p>Si prefieres ir al grano y coger hueco tú mismo, aquí lo tienes:</p>' +
       boton('Elegir mi hora', datos) +
-      '<p style="color:#5A5E66">Son quince minutos. Repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre, con tus números delante. ' +
+      '<p style="color:#5A5E66">Son 45 minutos. Repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre, con tus números delante. ' +
       'Te mando el plan por escrito en 24 horas, lo hagas con nosotros o no.</p>')
   };
 }
@@ -243,15 +243,15 @@ const EMAILS = [
   {
     etiqueta: 'act-email1',
     dias: 2,
-    asunto: function (d) { return (nombreCorto(d.nombre) ? nombreCorto(d.nombre) + ', ' : '') + 'qué miramos en esos quince minutos'; },
+    asunto: function (d) { return (nombreCorto(d.nombre) ? nombreCorto(d.nombre) + ', ' : '') + 'qué miramos en la llamada'; },
     html: function (d) {
       const n = nombreCorto(d.nombre);
       return envoltura(
         '<p>' + (n ? n + ', p' : 'P') + 'ediste el diagnóstico y todavía no hemos hablado. Te cuento en un minuto qué es exactamente, para que decidas con la información delante.</p>' +
-        '<p>Son quince minutos en los que repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre:</p>' +
+        '<p>Son 45 minutos en los que repasamos los ocho puntos por donde se escapa el negocio entre el anuncio y el cierre:</p>' +
         '<p style="color:#3D4148">Anuncios · la web · formularios · el lead · tiempo de respuesta · seguimientos · presupuestos · el cierre.</p>' +
         '<p>La fuga casi nunca está en un solo sitio, y casi nunca está donde uno cree. De ahí sale un plan por escrito con qué arreglar primero. Es tuyo, lo hagas con nosotros o no.</p>' +
-        boton('Coger mis quince minutos', d));
+        boton('Reservar mi diagnóstico', d));
     }
   },
   {
@@ -278,7 +278,7 @@ const EMAILS = [
       const n = nombreCorto(d.nombre);
       return envoltura(
         '<p>' + (n ? n + ', t' : 'T') + 'e escribí porque pediste el diagnóstico y no hemos llegado a hablar. Cierro el tema por mi parte, que no quiero ser de esos que insisten.</p>' +
-        '<p>Si en algún momento te pica la duda de por dónde se te está yendo el dinero entre el anuncio y el cierre, el hueco sigue estando ahí y sigue siendo de quince minutos.</p>' +
+        '<p>Si en algún momento te pica la duda de por dónde se te está yendo el dinero entre el anuncio y el cierre, el hueco sigue estando ahí.</p>' +
         boton('Cogerlo cuando quieras', d) +
         '<p style="color:#5A5E66">Y si lo que pasa es que no es el momento, también me vale saberlo. Responde a este correo y lo dejo apuntado.</p>');
     }

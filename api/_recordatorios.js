@@ -43,13 +43,13 @@ function horaDe(fecha) {
 const QUE_VEREMOS = 'Vamos a ver cómo va hoy tu sistema desde que alguien pide información hasta que compra, dónde se pierde y qué automatizamos primero. Sales con un plan escrito.';
 
 function textoDia(nombre, hora, enlace, extra) {
-  return 'Hola ' + (nombre || '') + ', soy Maikel. Te recuerdo que hoy a las ' + hora + ' tenemos la videollamada de 15 minutos. ' + (/^https?:/.test(enlace) ? 'Entra por aquí: ' + enlace : 'El enlace está ' + enlace + '.') + '\n' +
+  return 'Hola ' + (nombre || '') + ', soy Maikel. Te recuerdo que hoy a las ' + hora + ' tenemos la videollamada (unos 45 minutos). ' + (/^https?:/.test(enlace) ? 'Entra por aquí: ' + enlace : 'El enlace está ' + enlace + '.') + '\n' +
     QUE_VEREMOS + (extra ? ' ' + extra : '') + '\n' +
     'Si te surge algo, dímelo por aquí y lo movemos.';
 }
 
 function textoVispera(nombre, hora) {
-  return 'Hola ' + (nombre || '') + ', soy Maikel. Mañana a las ' + hora + ' tenemos la videollamada de 15 minutos: ' +
+  return 'Hola ' + (nombre || '') + ', soy Maikel. Mañana a las ' + hora + ' tenemos la videollamada (unos 45 minutos): ' +
     QUE_VEREMOS.charAt(0).toLowerCase() + QUE_VEREMOS.slice(1) + '\n¿Sigue en pie?';
 }
 

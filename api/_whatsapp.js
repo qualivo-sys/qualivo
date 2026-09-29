@@ -33,7 +33,7 @@ const PLANTILLAS = {
   // (Meta no admite una variable al final de la plantilla.)
   primerContacto: process.env.META_WA_PLANTILLA_PRIMERO || 'qualivo_primer_contacto',
   // Hola {{1}}, soy Maikel, de Qualivo. Confirmado: hablamos el {{2}} a las
-  // {{3}}. Son quince minutos por videollamada. Este es el enlace: {{4}}
+  // {{3}}. Es por videollamada y dura unos 45 minutos. Este es el enlace: {{4}}
   // (también lo tienes en la invitación del correo). Voy a repasar contigo
   // dónde se te está escapando el negocio y te enseño un plan hecho para tu
   // caso. Si te surge algo antes, dímelo por aquí.

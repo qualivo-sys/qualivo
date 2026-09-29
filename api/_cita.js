@@ -36,7 +36,7 @@ function partesFecha(d) {
 function textoConfirmacion(nombre, dia, hora, cuando, enlace) {
   const fecha = (cuando ? cuando + ', ' : 'el ') + dia + ' a las ' + hora;
   return 'Hola ' + (nombre || '') + ', soy Maikel, de Qualivo. Confirmado: hablamos ' + fecha + '. ' +
-    'Son quince minutos por videollamada' + (enlace ? '. Este es el enlace: ' + enlace + ' (también lo tienes en la invitación del correo). ' : '; el enlace está en la invitación que te ha llegado al correo. ') +
+    'Es por videollamada y dura unos 45 minutos' + (enlace ? '. Este es el enlace: ' + enlace + ' (también lo tienes en la invitación del correo). ' : '; el enlace está en la invitación que te ha llegado al correo. ') +
     'Voy a repasar contigo dónde se te está escapando el negocio y te enseño un plan hecho para tu caso. ' +
     'Si te surge algo antes, dímelo por aquí.';
 }
