@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Pendiente del ok de Maikel: noindex y sin enlaces desde menús, sitemap ni otras páginas. -->
+<meta name="robots" content="noindex">
+<title>Simulador del embudo para academias + guía de las 5 fugas · Qualivo</title>
+<meta name="description" content="Para academias que ya invierten en anuncios: mete seis números de un mes normal y mira cuánto te deja cada euro, cuánto te cuesta cada alumno y en qué paso se te queda más gente. Simulador en Excel + guía de las 5 fugas.">
+<link rel="canonical" href="https://qualivo.io/recursos/simulador-embudo/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/recursos/simulador-embudo/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Mira cuánto dinero se te queda entre el anuncio y la matrícula">
+<meta property="og:description" content="Simulador del embudo en Excel + guía de las 5 fugas entre el anuncio y la matrícula. Para academias que ya invierten en anuncios.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<style>
+  .chk{border:2px solid rgba(16,19,25,.12); border-radius:16px; padding:26px 28px; margin:0 0 16px; background:#fff}
+  .chk .paso{display:flex; gap:16px; align-items:flex-start}
+  .chk .num{font-family:ui-monospace,Menlo,monospace; font-weight:700; color:#0E7C74; font-size:20px; flex:0 0 auto; padding-top:2px}
+  .chk h3{margin:0 0 8px; font-size:19px}
+  .chk p{margin:0; font-size:15.5px; line-height:1.6; color:#3D4148}
+  .dos{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0 16px}
+  .dos .chk{margin:0}
+  .dos ul{margin:0; padding-left:20px}
+  .dos li{font-size:15px; line-height:1.6; margin:0 0 4px}
+  .ej{background:#101319; color:#fff; border-radius:20px; padding:28px 30px; margin:28px 0}
+  .ej .tag{display:inline-block; background:rgba(255,255,255,.1); color:#FFD2B8; font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; border-radius:6px; padding:5px 10px; margin:0 0 16px}
+  .ej .embudo{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:14.5px; color:rgba(255,255,255,.8); margin:0 0 18px}
+  .ej .embudo b{color:#fff}
+  .ej .embudo span.f{color:#27BDB1; font-weight:800}
+  .ej .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+  .ej .kpi{background:rgba(255,255,255,.07); border-radius:12px; padding:14px 16px}
+  .ej .kpi span{display:block; font-size:12.5px; color:rgba(255,255,255,.65); font-weight:600}
+  .ej .kpi b{display:block; font-size:24px; letter-spacing:-.02em; color:#7FE3D8; margin-top:2px}
+  .ej .fuga{margin:16px 0 0; color:#fff; background:#E8590C; border-radius:12px; padding:14px 16px; font-size:15px; font-weight:700; line-height:1.5}
+  .ej .esc{margin:12px 0 0; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.8)}
+  .ej .esc b{color:#7FE3D8}
+  .ej .pie{margin:14px 0 0; font-size:12.5px; color:rgba(255,255,255,.5)}
+  .fugas{list-style:none; padding:0 !important; margin:0 0 8px}
+  .fugas li{display:flex; gap:14px; border-top:1px solid rgba(16,19,25,.1); padding:14px 0; font-size:16px !important; line-height:1.5 !important}
+  .fugas li:last-child{border-bottom:1px solid rgba(16,19,25,.1)}
+  .fugas .n{font-family:ui-monospace,Menlo,monospace; color:#0E7C74; font-weight:700; flex:0 0 28px}
+  .lm-form{background:#101319; border-radius:20px; padding:36px 34px; color:#fff; margin-top:36px}
+  .lm-form label{display:block; font-size:13.5px; font-weight:700; margin:0 0 6px; color:rgba(255,255,255,.85)}
+  .lm-form input[type=text],.lm-form input[type=email],.lm-form select{width:100%; box-sizing:border-box; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06); color:#fff; border-radius:10px; padding:12px 14px; font-size:15px; margin-bottom:16px; font-family:inherit}
+  .lm-form select{appearance:none; -webkit-appearance:none; background-image:linear-gradient(45deg,transparent 50%,#7CE8DD 50%),linear-gradient(135deg,#7CE8DD 50%,transparent 50%); background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%; background-size:5px 5px,5px 5px; background-repeat:no-repeat; padding-right:40px}
+  .lm-form select option{color:#101319; background:#fff}
+  .lm-form .fila2{display:grid; grid-template-columns:1fr 1fr; gap:0 16px}
+  .lm-form .rgpd{display:flex; gap:10px; align-items:flex-start; font-size:13px; color:rgba(255,255,255,.65); margin:0 0 18px}
+  .lm-form button{background:#27BDB1; color:#04231F; border:0; border-radius:10px; padding:14px 26px; font-weight:800; font-size:15.5px; cursor:pointer}
+  .lm-form button:disabled{opacity:.6; cursor:wait}
+  .lm-ok{display:none; background:#0E7C74; border-radius:20px; padding:36px 34px; color:#fff; margin-top:36px}
+  .lm-ok .bots{display:flex; flex-wrap:wrap; gap:12px}
+  .lm-ok .bots a{display:inline-block; background:#fff; color:#04231F; border-radius:10px; padding:14px 22px; font-weight:800; font-size:15px; text-decoration:none}
+  .lm-ok .bots a.sec{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.6)}
+  @media (max-width:640px){
+    .dos,.lm-form .fila2{grid-template-columns:1fr}
+    .ej{padding:24px 20px}
+    .ej .kpis{grid-template-columns:1fr}
+    .lm-form,.lm-ok{padding:28px 22px}
+    .chk{padding:22px 20px}
+    .lm-ok .bots a{display:block; width:100%; box-sizing:border-box; text-align:center}
+  }
+</style>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Agentes de IA para tu sistema comercial</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/recursos/" class="nav-link">Recursos</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">Recurso gratuito · Academias y centros de formación</p>
+    <h1>Mira cuánto dinero se te queda entre el anuncio y la matrícula.</h1>
+    <p class="post-meta">Simulador en Excel + guía en PDF · 10 minutos con tus números</p>
+
+    <p class="post-lede">Si ya inviertes en anuncios, pagas cada solicitud de información. Y casi nunca el problema es que no lleguen: es lo que pasa entre que llegan y se matriculan. Una respuesta que llega al día siguiente, una cita que nadie recuerda, una visita que se va con un «me lo pienso». Con seis números de un mes normal, el simulador te dice cuánto te está costando.</p>
+
+    <div class="dos">
+      <div class="chk">
+        <h3>Lo que metes</h3>
+        <ul>
+          <li>Inversión en anuncios al mes</li>
+          <li>Solicitudes de información que entran</li>
+          <li>Cuántos hablan contigo o agendan</li>
+          <li>Cuántos se presentan a la cita</li>
+          <li>Cuántos se matriculan</li>
+          <li>Lo que vale de media un alumno</li>
+        </ul>
+      </div>
+      <div class="chk">
+        <h3>Lo que ves</h3>
+        <ul>
+          <li>Lo que factura hoy cada euro que inviertes</li>
+          <li>Lo que te cuesta cada alumno matriculado</li>
+          <li>En qué paso se te queda más gente</li>
+          <li>Lo que vale un punto de mejora en cada paso</li>
+          <li>Qué pasa si mejoras las etapas, con la misma inversión</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ej" aria-label="Ejemplo del simulador">
+      <span class="tag">Ejemplo · números inventados</span>
+      <div class="embudo">
+        <b>1.000&nbsp;€</b> en anuncios <span class="f">→</span> <b>30</b> solicitudes <span class="f">→</span> <b>25</b> hablan contigo <span class="f">→</span> <b>10</b> se presentan <span class="f">→</span> <b>1</b> se matricula · <b>1.500&nbsp;€</b> por alumno
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span>Facturación al mes</span><b>1.500&nbsp;€</b></div>
+        <div class="kpi"><span>Cada € invertido devuelve</span><b>1,50&nbsp;€</b></div>
+        <div class="kpi"><span>Coste por alumno</span><b>1.000&nbsp;€</b></div>
+      </div>
+      <p class="fuga">Dónde más pierde: de hablar contigo a presentarse a la cita. Se quedan 15 de cada 30 solicitudes.</p>
+      <p class="esc">Con un escenario prudente (10 puntos más de solicitudes que hablan contigo, asistencia × 1,5 y la misma tasa de matrícula) pasaría de 1 a 1,7 alumnos al mes: <b>+1.020&nbsp;€ al mes</b> con la misma inversión.</p>
+      <p class="pie">Es un ejemplo para que veas cómo funciona. Tus números serán otros.</p>
+    </div>
+
+    <h2>Y la guía: las 5 fugas entre el anuncio y la matrícula</h2>
+    <p>Ocho páginas. Para cada fuga: cómo detectarla con tus propios números, lo que cuesta (con el ejemplo del simulador) y tres arreglos que puedes hacer esta semana sin comprar ninguna herramienta.</p>
+    <ul class="fugas">
+      <li><span class="n">01</span><span><strong>Respuesta tardía.</strong> La solicitud entra de noche y se contesta al día siguiente, cuando ya ha preguntado en otros dos centros.</span></li>
+      <li><span class="n">02</span><span><strong>Sin seguimiento.</strong> Una llamada, un mensaje y, si no contesta, al limbo.</span></li>
+      <li><span class="n">03</span><span><strong>Plantones.</strong> Citas sin confirmar ni recordar, y nadie llama al que no aparece.</span></li>
+      <li><span class="n">04</span><span><strong>Propuesta sin fecha.</strong> La visita termina en «me lo pienso» y nadie vuelve a llamar.</span></li>
+      <li><span class="n">05</span><span><strong>No saber qué anuncio trae matrículas.</strong> Premias la campaña con el coste por solicitud más bajo, aunque no matricule.</span></li>
+    </ul>
+
+    <div class="lm-form" id="lmform">
+      <p style="margin:0 0 6px; color:#fff; font-family:var(--qv-font-display); font-weight:900; font-size:clamp(20px,3.4vw,27px); letter-spacing:-.02em">Llévate el simulador y la guía</p>
+      <p style="margin:0 0 22px; font-size:14.5px; color:rgba(255,255,255,.7)">El Excel (funciona en Excel, Google Sheets y LibreOffice) y la guía en PDF. Las dos preguntas sobre anuncios y solicitudes nos ayudan a mandarte material que te sirva; no hay llamadas sorpresa.</p>
+      <form id="f-recurso" novalidate>
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="fila2">
+          <div>
+            <label for="lm-nombre">Nombre (opcional)</label>
+            <input type="text" id="lm-nombre" name="nombre" autocomplete="name">
+          </div>
+          <div>
+            <label for="lm-email">Correo</label>
+            <input type="email" id="lm-email" name="email" required autocomplete="email">
+          </div>
+        </div>
+        <label for="lm-inversion">¿Cuánto invertís al mes en anuncios?</label>
+        <select id="lm-inversion" name="inversion" required>
+          <option value="" selected disabled>Elige una opción</option>
+          <option value="nada">Nada todavía</option>
+          <option value="menos-600">Menos de 600 €</option>
+          <option value="600-2000">600–2.000 €</option>
+          <option value="mas-2000">Más de 2.000 €</option>
+        </select>
+        <label for="lm-volumen">¿Cuántas solicitudes de información os llegan al mes?</label>
+        <select id="lm-volumen" name="volumen" required>
+          <option value="" selected disabled>Elige una opción</option>
+          <option value="menos-20">Menos de 20</option>
+          <option value="20-50">Entre 20 y 50</option>
+          <option value="50-150">Entre 51 y 150</option>
+          <option value="mas-150">Más de 150</option>
+          <option value="no-lo-se">No lo sé</option>
+        </select>
+        <div class="rgpd">
+          <input type="checkbox" id="lm-rgpd" required style="margin-top:2px">
+          <label for="lm-rgpd" style="font-weight:400; margin:0">Acepto la <a href="/privacidad/" style="color:#7CE8DD">política de privacidad</a>. Usaremos tu correo para enviarte este recurso y, de vez en cuando, material del mismo estilo. Ni spam ni cesiones: te das de baja con un clic.</label>
+        </div>
+        <button type="submit" id="lm-btn">Descargar el simulador y la guía →</button>
+        <p id="lm-err" style="display:none; color:#FCA5A5; font-size:13.5px; margin:12px 0 0"></p>
+      </form>
+    </div>
+
+    <div class="lm-ok" id="lmok">
+      <p style="margin:0 0 8px; color:#fff; font-family:var(--qv-font-display); font-weight:900; font-size:clamp(20px,3.4vw,27px)">Hecho. Aquí los tienes:</p>
+      <p style="margin:0 0 18px; font-size:14.5px; color:rgba(255,255,255,.85)">Empieza por el simulador: cambia las celdas amarillas de la hoja «Tu embudo» por tus números y mira la celda «Dónde más pierdes». Luego abre la guía por esa fuga.</p>
+      <div class="bots">
+        <a href="/recursos/simulador-embudo/simulador-embudo-academias.xlsx" download>Descargar el simulador (Excel)</a>
+        <a class="sec" href="/recursos/simulador-embudo/guia-5-fugas-academias.pdf" download>Descargar la guía (PDF)</a>
+      </div>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:32px 0 6px; font-weight:700">El siguiente paso natural</p>
+    <p style="font-size:15px; line-height:1.8; margin:0">Si el simulador te destapa una fuga y quieres una segunda opinión con tus números, <a href="/diagnostico/">así funciona nuestro diagnóstico</a>: 30 minutos, del anuncio a la matrícula.</p>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+(function(){
+  var form = document.getElementById('f-recurso');
+  var btn = document.getElementById('lm-btn');
+  var err = document.getElementById('lm-err');
+  var TXT_BTN = 'Descargar el simulador y la guía →';
+  function fallo(t){ err.textContent = t; err.style.display = 'block'; }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    err.style.display = 'none';
+    var email = document.getElementById('lm-email').value.trim();
+    var inversion = document.getElementById('lm-inversion').value;
+    var volumen = document.getElementById('lm-volumen').value;
+    var rgpd = document.getElementById('lm-rgpd').checked;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fallo('Revisa el correo — no parece válido.'); return; }
+    if (!inversion) { fallo('Dinos cuánto invertís al mes en anuncios (aunque sea «nada todavía»).'); return; }
+    if (!volumen) { fallo('Dinos cuántas solicitudes os llegan al mes (vale «no lo sé»).'); return; }
+    if (!rgpd) { fallo('Necesitamos el consentimiento para enviarte el recurso.'); return; }
+    btn.disabled = true; btn.textContent = 'Un segundo…';
+    fetch('/api/recurso/', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        nombre: document.getElementById('lm-nombre').value.trim(),
+        email: email,
+        recurso: 'simulador-embudo',
+        inversion: inversion,
+        volumen: volumen,
+        rgpd: true,
+        website: form.website.value
+      })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if (d && d.ok) {
+        document.getElementById('lmform').style.display = 'none';
+        document.getElementById('lmok').style.display = 'block';
+        if (window.va) window.va('event', { name: 'recurso_descargado', data: { recurso: 'simulador-embudo', inversion: inversion, volumen: volumen } });
+      } else { throw new Error('api'); }
+    }).catch(function(){
+      btn.disabled = false; btn.textContent = TXT_BTN;
+      fallo('No hemos podido registrarte. Prueba de nuevo o escríbenos a maikel@qualivo.io.');
+    });
+  });
+})();
+</script>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

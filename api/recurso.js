@@ -8,8 +8,30 @@ const GHL_VERSION = '2021-07-28';
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // Solo recursos publicados: evita tags arbitrarios desde el cliente.
 const RECURSOS = {
-  'auditoria-funnel': 'Checklist · Auditoría de funnel en una tarde'
+  'auditoria-funnel': 'Checklist · Auditoría de funnel en una tarde',
+  'simulador-embudo': 'Simulador del embudo + guía de las 5 fugas'
 };
+// Preguntas de cualificación opcionales (hoy solo las manda /recursos/simulador-embudo/).
+// Valor del formulario → [tag en GHL, texto para la nota]. Lo que no esté aquí se ignora,
+// así un recurso que no las mande sigue funcionando igual.
+const INVERSION = {
+  'nada': ['lm-inversion-nada', 'Nada todavía'],
+  'menos-600': ['lm-inversion-menos-600', 'Menos de 600 €'],
+  '600-2000': ['lm-inversion-600-2000', '600–2.000 €'],
+  'mas-2000': ['lm-inversion-mas-2000', 'Más de 2.000 €']
+};
+const VOLUMEN = {
+  'menos-20': ['lm-volumen-menos-20', 'Menos de 20'],
+  '20-50': ['lm-volumen-20-50', '20–50'],
+  '50-150': ['lm-volumen-50-150', '51–150'],
+  'mas-150': ['lm-volumen-mas-150', 'Más de 150'],
+  'no-lo-se': ['lm-volumen-no-lo-se', 'No lo sé']
+};
+
+// Solo claves propias del objeto (que «constructor» o «toString» no cuelen).
+function elegir(mapa, clave) {
+  return Object.prototype.hasOwnProperty.call(mapa, clave) ? mapa[clave] : null;
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,8 +52,10 @@ module.exports = async function handler(req, res) {
   const nombre = String(b.nombre || '').trim();
   const email = String(b.email || '').trim();
   const recurso = String(b.recurso || '').trim();
+  const inversion = elegir(INVERSION, String(b.inversion || '').trim());
+  const volumen = elegir(VOLUMEN, String(b.volumen || '').trim());
 
-  if (!EMAIL_RE.test(email) || !RECURSOS[recurso] || b.rgpd !== true) {
+  if (!EMAIL_RE.test(email) || !elegir(RECURSOS, recurso) || b.rgpd !== true) {
     return res.status(400).json({ ok: false, error: 'invalid_payload' });
   }
 
@@ -51,6 +75,7 @@ module.exports = async function handler(req, res) {
         email: email,
         source: 'qualivo.io — recurso ' + recurso,
         tags: ['qualivo-recursos', 'lm-' + recurso]
+          .concat(inversion ? [inversion[0]] : [], volumen ? [volumen[0]] : [])
       })
     });
     if (!upsertRes.ok) {
@@ -67,6 +92,8 @@ module.exports = async function handler(req, res) {
         '',
         'Recurso: ' + RECURSOS[recurso] + ' (' + recurso + ')',
         nombre ? 'Nombre: ' + nombre : null,
+        inversion ? 'Inversión al mes en anuncios: ' + inversion[1] : null,
+        volumen ? 'Solicitudes de información al mes: ' + volumen[1] : null,
         'Consentimiento RGPD: sí · ' + new Date().toISOString()
       ].filter(Boolean).join('\n');
       const noteRes = await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
