@@ -63,7 +63,7 @@
       {
        "estilo": "sub",
        "y": 1250,
-       "texto": "Laura pregunta por inglés para adultos"
+       "texto": "Laura pide información de un curso"
       }
      ]
     }
@@ -136,7 +136,7 @@
       {
        "estilo": "sub-turquesa",
        "y": 1300,
-       "texto": "en otra academia."
+       "texto": "en otro centro."
       }
      ]
     }
@@ -203,7 +203,7 @@
        "estilo": "lista",
        "y": 930,
        "check": true,
-       "texto": "Prueba de nivel reservada"
+       "texto": "Cita cerrada"
       }
      ]
     },
@@ -237,7 +237,7 @@
       {
        "estilo": "sub-turquesa",
        "y": 1250,
-       "texto": "El martes, está en clase."
+       "texto": "El martes, empieza."
       }
      ]
     },
