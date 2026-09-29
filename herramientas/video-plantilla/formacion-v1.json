@@ -1,0 +1,299 @@
+{
+ "nombre": "PLT-formacion-respuesta-raquel-v1",
+ "voz": "voz.mp3",
+ "duracion": 39.9,
+ "escenas": [
+  {
+   "inicio": 0,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 640,
+       "tam": 100,
+       "texto": "¿Te preguntan por los cursos y luego"
+      },
+      {
+       "estilo": "grande",
+       "y": 1030,
+       "tam": 110,
+       "texto": "*desaparecen?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 3.4,
+   "tipo": "plano",
+   "src": "clips/0.mp4",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Hoy"
+      },
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "tam": 70,
+       "texto": "Domingo · 22:40"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 5.45,
+   "tipo": "plano",
+   "src": "clips/1.mp4",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Hoy"
+      },
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Laura pregunta por inglés para adultos"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 7.85,
+   "tipo": "plano",
+   "src": "clips/2.mp4",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Mitad 1 · el anuncio"
+      },
+      {
+       "estilo": "sub",
+       "y": 1200,
+       "texto": "Entraron 40 contactos."
+      },
+      {
+       "estilo": "sub-turquesa",
+       "y": 1300,
+       "texto": "La mitad, solo mirando."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 13.45,
+   "tipo": "plano",
+   "src": "clips/3.mp4",
+   "textos": [
+    {
+     "hasta": 3.3,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Mitad 2 · el sistema"
+      },
+      {
+       "estilo": "sub",
+       "y": 1200,
+       "texto": "Le contestan"
+      },
+      {
+       "estilo": "sub-turquesa",
+       "y": 1300,
+       "texto": "el lunes a las 11."
+      }
+     ]
+    },
+    {
+     "desde": 3.3,
+     "bloques": [
+      {
+       "estilo": "etiqueta",
+       "y": 150,
+       "texto": "Mitad 2 · el sistema"
+      },
+      {
+       "estilo": "sub",
+       "y": 1200,
+       "texto": "Ya se ha apuntado"
+      },
+      {
+       "estilo": "sub-turquesa",
+       "y": 1300,
+       "texto": "en otra academia."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 19.75,
+   "tipo": "tarjeta",
+   "fondo": "#F2F3F5",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 780,
+       "tam": 92,
+       "color": "tinta",
+       "texto": "Y parece que los leads son malos."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 21.95,
+   "tipo": "tarjeta",
+   "fondo": "#101319",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con el sistema"
+      }
+     ]
+    },
+    {
+     "desde": 0.1,
+     "bloques": [
+      {
+       "estilo": "lista",
+       "y": 560,
+       "check": true,
+       "texto": "El anuncio filtra a quien solo mira"
+      }
+     ]
+    },
+    {
+     "desde": 3.85,
+     "bloques": [
+      {
+       "estilo": "lista",
+       "y": 780,
+       "check": true,
+       "texto": "Respuesta en 2 minutos"
+      }
+     ]
+    },
+    {
+     "desde": 6.0,
+     "bloques": [
+      {
+       "estilo": "lista",
+       "y": 930,
+       "check": true,
+       "texto": "Prueba de nivel reservada"
+      }
+     ]
+    },
+    {
+     "desde": 7.9,
+     "bloques": [
+      {
+       "estilo": "lista",
+       "y": 1080,
+       "check": true,
+       "texto": "Recordatorio la víspera"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 32.5,
+   "tipo": "plano",
+   "src": "clips/4.mp4",
+   "brillo": -0.02,
+   "textos": [
+    {
+     "hasta": 1.6,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con el sistema"
+      },
+      {
+       "estilo": "sub-turquesa",
+       "y": 1250,
+       "texto": "El martes, está en clase."
+      }
+     ]
+    },
+    {
+     "desde": 1.6,
+     "bloques": [
+      {
+       "estilo": "etiqueta-turquesa",
+       "y": 150,
+       "texto": "Con el sistema"
+      },
+      {
+       "estilo": "sub",
+       "y": 1250,
+       "texto": "Y lo llevamos contigo cada semana."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "inicio": 35.95,
+   "tipo": "tarjeta",
+   "fondo": "#27BDB1",
+   "textos": [
+    {
+     "bloques": [
+      {
+       "estilo": "grande",
+       "y": 640,
+       "tam": 104,
+       "color": "tinta",
+       "texto": "Diagnóstico gratuito"
+      },
+      {
+       "estilo": "grande",
+       "y": 900,
+       "tam": 104,
+       "color": "tinta",
+       "texto": "30 minutos"
+      },
+      {
+       "estilo": "boton",
+       "y": 1180,
+       "texto": "Reservar"
+      },
+      {
+       "estilo": "grande",
+       "y": 1500,
+       "tam": 56,
+       "color": "tinta",
+       "texto": "Qualivo"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
