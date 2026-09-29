@@ -3,86 +3,86 @@
  "voz": "voz-fugas3-B.mp3",
  "musica": "musica3/2-deephouse-norm.wav",
  "musica_volumen": 1.0,
- "duracion": 53.09,
+ "duracion": 52.74,
  "tiempos_voz": {
   "1": [
    0.0,
-   5.201,
+   4.851,
    1.0
   ],
   "3": [
-   5.799,
-   8.7,
+   5.449,
+   8.35,
    1.0
   ],
   "4": [
-   9.07,
-   10.716,
+   8.72,
+   10.366,
    1.0
   ],
   "5": [
-   11.32,
-   13.774,
+   10.97,
+   13.424,
    1.0
   ],
   "6": [
-   14.656,
-   16.706,
+   14.306,
+   16.356,
    1.0
   ],
   "7": [
-   16.699,
-   18.855,
+   16.349,
+   18.505,
    1.0
   ],
   "8": [
-   19.446,
-   20.474,
+   19.096,
+   20.124,
    1.0
   ],
   "9": [
-   20.722,
-   23.262,
+   20.372,
+   22.912,
    1.0
   ],
   "10": [
-   24.222,
-   27.017,
+   23.872,
+   26.667,
    1.0
   ],
   "11": [
-   27.541,
-   30.294,
+   27.191,
+   29.944,
    1.0
   ],
   "12": [
-   30.456,
-   32.421,
+   30.106,
+   32.071,
    1.0
   ],
   "13": [
-   32.776,
-   34.953,
+   32.426,
+   34.603,
    1.0
   ],
   "14": [
-   35.721,
-   39.963,
+   35.371,
+   39.613,
    1.0
   ],
   "17": [
-   40.445,
-   45.09,
+   40.095,
+   44.74,
    1.0
   ],
   "15": [
-   45.638,
-   47.582,
+   45.288,
+   47.232,
    1.0
   ],
   "16": [
-   48.122,
-   51.13,
+   47.772,
+   50.78,
    1.0
   ]
  },
@@ -119,7 +119,7 @@
    ]
   },
   {
-   "inicio": 2.70452,
+   "inicio": 2.52252,
    "tipo": "plano",
    "src": "clips/3.mp4",
    "transicion": {
@@ -156,10 +156,10 @@
        "texto": "Le contestan el lunes."
       }
      ],
-     "hasta": 1.2482399999999998
+     "hasta": 1.16424
     },
     {
-     "desde": 1.2482399999999998,
+     "desde": 1.16424,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -171,7 +171,7 @@
    ]
   },
   {
-   "inicio": 5.799,
+   "inicio": 5.449,
    "tipo": "plano",
    "src": "clips/2.mp4",
    "transicion": {
@@ -219,7 +219,7 @@
      ]
     },
     {
-     "desde": 1.5955499999999996,
+     "desde": 1.59555,
      "bloques": [
       {
        "estilo": "fuga",
@@ -231,7 +231,7 @@
    ]
   },
   {
-   "inicio": 9.07,
+   "inicio": 8.72,
    "tipo": "plano",
    "src": "clips/5.mp4",
    "transicion": {
@@ -263,7 +263,7 @@
    ]
   },
   {
-   "inicio": 11.32,
+   "inicio": 10.97,
    "tipo": "plano",
    "src": "clips/7.mp4",
    "transicion": {
@@ -296,7 +296,7 @@
    ]
   },
   {
-   "inicio": 14.656,
+   "inicio": 14.306,
    "tipo": "tarjeta",
    "fondo": "#F2F3F5",
    "transicion": {
@@ -317,7 +317,7 @@
      ]
     },
     {
-     "desde": 1.1274999999999995,
+     "desde": 1.1275000000000015,
      "bloques": [
       {
        "estilo": "grande",
@@ -331,7 +331,7 @@
    ]
   },
   {
-   "inicio": 16.699,
+   "inicio": 16.349,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -433,7 +433,7 @@
    ]
   },
   {
-   "inicio": 19.446,
+   "inicio": 19.096,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -493,7 +493,7 @@
    ]
   },
   {
-   "inicio": 20.722,
+   "inicio": 20.372,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "transicion": {
@@ -610,7 +610,7 @@
    ]
   },
   {
-   "inicio": 24.222,
+   "inicio": 23.872,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 29.0,
@@ -649,7 +649,7 @@
    ]
   },
   {
-   "inicio": 27.541,
+   "inicio": 27.191,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -811,7 +811,7 @@
    ]
   },
   {
-   "inicio": 30.456,
+   "inicio": 30.106,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 36.5,
@@ -850,7 +850,7 @@
    ]
   },
   {
-   "inicio": 32.776,
+   "inicio": 32.426,
    "tipo": "plano",
    "src": "clips/4.mp4",
    "brillo": -0.08,
@@ -894,7 +894,7 @@
    ]
   },
   {
-   "inicio": 35.721,
+   "inicio": 35.371,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 43.9,
@@ -929,10 +929,10 @@
        "texto": "Qué pasa con cada oportunidad"
       }
      ],
-     "hasta": 1.7816400000000019
+     "hasta": 1.7816399999999988
     },
     {
-     "desde": 1.7816400000000019,
+     "desde": 1.7816399999999988,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -941,10 +941,10 @@
        "texto": "Desde qué anuncio llegó…"
       }
      ],
-     "hasta": 3.054240000000003
+     "hasta": 3.054239999999998
     },
     {
-     "desde": 3.054240000000003,
+     "desde": 3.054239999999998,
      "bloques": [
       {
        "estilo": "sub-turquesa",
@@ -957,7 +957,7 @@
    ]
   },
   {
-   "inicio": 40.445,
+   "inicio": 40.095,
    "tipo": "plano",
    "src": "clips/intel-anuncios.mp4",
    "desde": 0.0,
@@ -1019,7 +1019,7 @@
    ]
   },
   {
-   "inicio": 45.638,
+   "inicio": 45.288,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -1069,7 +1069,7 @@
    ]
   },
   {
-   "inicio": 48.122,
+   "inicio": 47.772,
    "tipo": "tarjeta",
    "fondo": "#27BDB1",
    "textos": [

@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import imageio_ffmpeg
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-W, H, FPS = 1080, 1920, 30
+W, H, FPS = 1080, 1920, int(os.environ.get('FPS', 24))   # 24: los planos generados vienen a 24 fps; así no se repiten fotogramas
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
 COL = {
@@ -189,6 +189,11 @@ def duracion_de(src):
     m = re.search(r'Duration: (\d+):(\d+):([\d.]+)', info)
     return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))
 
+def fps_de(src):
+    info = subprocess.run([FF, '-i', src], capture_output=True, text=True).stderr
+    m = re.search(r'(\d+(?:\.\d+)?) fps', info)
+    return float(m.group(1)) if m else 30.0
+
 def escena(e, dur, tmp, n):
     """Devuelve la ruta de un mp4 sin audio de duración dur (ya incluye la cola de transición)."""
     capas = []
@@ -199,7 +204,8 @@ def escena(e, dur, tmp, n):
     if e['tipo'] == 'plano':
         src = os.path.join(AQUI, e['src'])
         desde = float(e.get('desde', 0))
-        velocidad = max(1.0, dur / (duracion_de(src) - desde))  # si el plano es corto, se ralentiza
+        # si el plano es corto, se ralentiza
+        velocidad = max(1.0, dur / (duracion_de(src) - desde))
         if e.get('marco'):
             # Grabación de pantalla: la app dentro de un marco con esquinas redondeadas sobre fondo tinta.
             fo = e.get('foco')
