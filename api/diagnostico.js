@@ -102,8 +102,9 @@ module.exports = async function handler(req, res) {
         website: web,
         // El source es lo que lee la atribucion por canal (origen_tratos.py).
         // Fijo decia "landing diagnostico" viniera de donde viniera.
-        source: 'qualivo.io — /' + (origen || 'diagnostico') + '/',
-        tags: etiquetas
+        source: 'qualivo.io — /' + (origen || 'diagnostico') + '/'
+        // Sin «tags» aquí (29-sep): si el contacto ya existía, el upsert SUSTITUYE sus etiquetas
+        // (se perdían «paid», meta-lead-…, act-…). Se añaden justo después, que suma y no borra.
       })
     });
     if (!upsertRes.ok) {
@@ -113,6 +114,10 @@ module.exports = async function handler(req, res) {
     }
     const upsert = await upsertRes.json();
     const contactId = upsert && upsert.contact && upsert.contact.id;
+    if (contactId && etiquetas && etiquetas.length) {
+      const tg = await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'POST', headers: headers, body: JSON.stringify({ tags: etiquetas }) });
+      if (!tg.ok) console.error('[diagnostico] etiquetas no se pusieron', contactId, tg.status);
+    }
 
     if (contactId) {
       await require('./_tratos.js').crear({

@@ -286,12 +286,19 @@ async function guardar(lead, opts) {
       companyName: empresa || undefined,
       website: web || undefined,
       source: completar ? undefined : 'Meta — formulario instantáneo',
-      tags: etiquetasFinales
+      // 29-sep: sin «tags» en el upsert. Si el contacto ya existía (entró antes por la landing),
+      // GHL SUSTITUYE sus etiquetas por estas: Izaskun y Armando perdieron «paid», el agente dejó
+      // de contestarles y a Izaskun le salió la confirmación de la cita dos veces. Se añaden
+      // después con el endpoint de etiquetas, que suma y no borra.
     })
   });
   if (!up.ok) throw new Error('ghl_upsert ' + up.status + ' ' + (await up.text()).slice(0, 200));
   const d = await up.json().catch(function () { return {}; });
   const contactId = d && d.contact ? d.contact.id : null;
+  if (contactId && etiquetasFinales.length) {
+    const tg = await fetch(GHL_BASE + '/contacts/' + contactId + '/tags', { method: 'POST', headers: headers, body: JSON.stringify({ tags: etiquetasFinales }) });
+    if (!tg.ok) console.error('[leadform] no se pudieron poner las etiquetas', contactId, tg.status);
+  }
 
   // El upsert empareja por email y no rellena los campos que el contacto ya
   // tenía vacíos. Si el lead trae teléfono y en el CRM no hay, se completa: sin
