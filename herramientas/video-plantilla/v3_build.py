@@ -43,12 +43,12 @@ def construir(variante):
     if variante == 'B': tiempos[1] = (0.0, tiempos[1][1], 1.0)
     dur_voz = (fin - corte) / TEMPO
     nombre = '01_Qualivo_Fugas_Hook-Anuncio_9x16' if variante == 'A' else '02_Qualivo_Fugas_Hook-Laura_9x16'
-    spec = {'nombre': nombre, 'voz': voz, 'musica': 'musica2/a.wav', 'musica_volumen': 0.085,
+    spec = {'nombre': nombre, 'voz': voz, 'musica': 'musica3/2-deephouse-norm.wav', 'musica_volumen': 1.0,
             'duracion': round(dur_voz + COLA, 2), 'tiempos_voz': {str(k): v for k, v in tiempos.items()},
             'escenas': v2_build.escenas_de(tiempos)}
     json.dump(spec, open(f'fugas3-{variante}.json', 'w'), ensure_ascii=False, indent=1)
     print(variante, 'dur', spec['duracion'], 'escenas', len(spec['escenas']))
-    montar.montar(f'fugas3-{variante}.json', f'out-fugas3/{nombre}.mp4')
+    montar.montar(f'fugas3-{variante}.json', f'out-fugas4/{nombre}.mp4')
 
 if __name__ == '__main__':
     for v in sys.argv[1:]: construir(v)

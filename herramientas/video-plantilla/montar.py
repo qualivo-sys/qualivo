@@ -99,31 +99,32 @@ def capa(bloques):
                 for ln in partir(b['nota'], f2, W - 320):
                     w2 = f2.getlength(ln); d.text(((W - w2) / 2, yy), ln, font=f2, fill=COL['gris']); yy += 44
         elif est == 'pasos':
-            # Línea del recorrido: ANUNCIO ✓ → LEAD ✓ → RESPUESTA ✕
+            # Línea del recorrido: ANUNCIO ✓ – LEAD ✓ – RESPUESTA ✕
             tam = b.get('tam', 34); items = b['pasos']
             while True:
-                f = fuente(700, tam); sep = int(tam * 0.6); icono = int(tam * 1.25)
-                anchos = [f.getlength(t) + 36 + icono for t, _ in items]
+                f = fuente(700, tam); r = int(tam * 0.55); sep = int(tam * 0.7); alto = int(tam * 2.1)
+                anchos = [20 + f.getlength(t) + 12 + 2 * r + 14 for t, _ in items]
                 total = sum(anchos) + sep * (len(items) - 1)
-                if total <= W - 100 or tam <= 20: break
+                if total <= W - 90 or tam <= 20: break
                 tam -= 1
             x = (W - total) / 2
-            for (t, ok), an in zip(items, anchos):
-                d.rounded_rectangle([x, y, x + an, y + 76], radius=38, fill=(16, 19, 25, 225))
-                d.text((x + 20, y + 38 - tam * 0.6), t, font=f, fill=COL['blanco'])
-                cx, cy = x + an - 22 - icono / 2, y + 38
+            for n, ((t, ok), an) in enumerate(zip(items, anchos)):
+                d.rounded_rectangle([x, y, x + an, y + alto], radius=alto // 2, fill=(16, 19, 25, 225))
+                d.text((x + 20, y + alto / 2 - tam * 0.62), t, font=f, fill=COL['blanco'])
+                cx, cy = x + an - 14 - r, y + alto / 2
                 if ok == 'ok':
-                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], fill=COL['turquesa'])
-                    d.line([(cx - 9, cy), (cx - 2, cy + 8), (cx + 10, cy - 8)], fill=COL['tinta'], width=5)
+                    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=COL['turquesa'])
+                    d.line([(cx - r * .5, cy), (cx - r * .12, cy + r * .42), (cx + r * .55, cy - r * .42)], fill=COL['tinta'], width=max(3, r // 4))
                 elif ok == 'ko':
-                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], fill=COL['coral'])
-                    d.line([(cx - 8, cy - 8), (cx + 8, cy + 8)], fill=COL['blanco'], width=5)
-                    d.line([(cx - 8, cy + 8), (cx + 8, cy - 8)], fill=COL['blanco'], width=5)
+                    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=COL['coral'])
+                    k = r * .42
+                    d.line([(cx - k, cy - k), (cx + k, cy + k)], fill=COL['blanco'], width=max(3, r // 4))
+                    d.line([(cx - k, cy + k), (cx + k, cy - k)], fill=COL['blanco'], width=max(3, r // 4))
                 else:
-                    d.ellipse([cx - 18, cy - 18, cx + 18, cy + 18], outline=COL['gris'], width=4)
+                    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=COL['gris'], width=3)
                 x += an
-                if (t, ok) != items[-1]:
-                    d.line([(x + 4, y + 38), (x + sep - 4, y + 38)], fill=COL['blanco'], width=4); x += sep
+                if n < len(items) - 1:
+                    d.line([(x + 5, y + alto / 2), (x + sep - 5, y + alto / 2)], fill=COL['blanco'], width=3); x += sep
         elif est == 'fuga':
             # Etiqueta grande centrada: FUGA #1 · SIN SEGUIMIENTO
             f = fuente(800, b.get('tam', 50)); t = b['texto'].upper(); w = f.getlength(t)
@@ -180,9 +181,20 @@ def escena(e, dur, tmp, n):
         velocidad = max(1.0, dur / (duracion_de(src) - desde))  # si el plano es corto, se ralentiza
         if e.get('marco'):
             # Grabación de pantalla: la app dentro de un marco con esquinas redondeadas sobre fondo tinta.
-            base = ('[0:v]setpts=%.4f*PTS,scale=960:1706:force_original_aspect_ratio=increase,crop=960:1706,fps=%d,'
+            fo = e.get('foco')
+            if fo:
+                # Zoom lento hacia lo que cuenta la voz (coordenadas de la grabación 720x1280).
+                k0, k1, cx, cy = fo.get('k0', 1.0), fo['k'], fo['cx'], fo['cy']
+                u = 'min(t/%.3f,1)' % dur
+                K = '(%.4f+%.4f*(3*pow(%s,2)-2*pow(%s,3)))' % (k0, k1 - k0, u, u)
+                zoom = ("scale=720:1280,fps=%d,scale=w='trunc(960*%s/2)*2':h='trunc(1706*%s/2)*2':eval=frame:flags=bicubic,"
+                        "crop=960:1706:x='max(0,min(960*%s-960,%.1f*1.33333*%s-480))':y='max(0,min(1706*%s-1706,%.1f*1.33333*%s-853))'"
+                        % (FPS, K, K, K, cx, K, K, cy, K))
+            else:
+                zoom = 'scale=960:1706:force_original_aspect_ratio=increase,crop=960:1706,fps=%d' % FPS
+            base = ('[0:v]setpts=%.4f*PTS,%s,'
                     'pad=%d:%d:60:107:#101319,trim=duration=%.3f,setpts=PTS-STARTPTS[v00];'
-                    "[v00][%d:v]overlay=0:0[v0]" % (velocidad, FPS, W, H, dur, 99))
+                    "[v00][%d:v]overlay=0:0[v0]" % (velocidad, zoom, W, H, dur, 99))
             entradas = ['-ss', '%.3f' % desde, '-i', src]
         else:
             base = ('[0:v]setpts=%.4f*PTS,scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d,fps=%d,'
@@ -195,7 +207,9 @@ def escena(e, dur, tmp, n):
     filtro, ult = [base], 'v0'
     for i, (p, a, b) in enumerate(capas):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', p]
-        filtro.append("[%s][%d:v]overlay=0:0:enable='between(t,%.3f,%.3f)'[v%d]" % (ult, i + 1, a, b, i + 1))
+        filtro.append("[%d:v]format=rgba,fade=t=in:st=%.3f:d=0.18:alpha=1[t%d]" % (i + 1, a, i + 1))
+        filtro.append("[%s][t%d]overlay=x=0:y='if(lt(t,%.3f),26*(1-max(t-%.3f,0)/0.22),0)':enable='between(t,%.3f,%.3f)'[v%d]"
+                      % (ult, i + 1, a + 0.22, a, a, b, i + 1))
         ult = 'v%d' % (i + 1)
     if e.get('marco'):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', os.path.join(AQUI, 'marco.png')]

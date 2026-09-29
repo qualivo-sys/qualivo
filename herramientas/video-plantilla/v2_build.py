@@ -65,21 +65,19 @@ def escenas_de(tiempos):
             T(0, estilo='sub', y=1250, texto='Y no es la única.')]})
     if hay(3):   # FUGA 1
         E.append({'inicio': t0(3), 'tipo': 'plano', 'src': 'clips/2.mp4', 'transicion': tr('smoothleft', .4), 'textos': [
-            T(0.2, estilo='pasos', y=1130, pasos=[['ANUNCIO', 'ok'], ['LEAD', 'ok'], ['RESPUESTA', 'ok'], ['SEGUIMIENTO', 'ko']]),
+            T(0.2, estilo='pasos', y=1120, tam=36, pasos=[['ANUNCIO', 'ok'], ['LEAD', 'ok'], ['RESPUESTA', 'ok'], ['SEGUIMIENTO', 'ko']]),
             T(1.0, estilo='sub', y=980, tam=56, texto='Nadie vuelve a escribirle'),
             T(d(3) * 0.55, estilo='fuga', y=1260, texto='Fuga #1 · Sin seguimiento'),
         ]})
     if hay(4):   # FUGA 2
         E.append({'inicio': t0(4), 'tipo': 'plano', 'src': 'clips/5.mp4', 'transicion': tr('smoothleft', .4), 'textos': [
-            T(0.2, estilo='pasos', y=1130, pasos=[['LEAD', 'ok'], ['CITA', 'ok'], ['ASISTE', 'ko']]),
-            T(0.6, estilo='sub', y=980, tam=56, texto='Reserva… y no aparece'),
-            T(d(4) * 0.5, estilo='fuga', y=1260, texto='Fuga #2 · No-show'),
+            T(0.2, estilo='sub', y=1080, tam=60, texto='Reserva… y no aparece'),
+            T(d(4) * 0.4, estilo='fuga', y=1230, texto='Fuga #2 · No-show'),
         ]})
     if hay(5):   # FUGA 3
         E.append({'inicio': t0(5), 'tipo': 'plano', 'src': 'clips/7.mp4', 'transicion': tr('fade', .45), 'textos': [
-            T(0.2, estilo='pasos', y=1130, pasos=[['CITA', 'ok'], ['REUNIÓN', 'ok'], ['SEGUIMIENTO', 'ko']]),
-            T(0.8, estilo='sub', y=980, tam=56, texto='Recibe la información… y ahí se queda'),
-            T(d(5) * 0.58, estilo='fuga', y=1260, tam=44, texto='Fuga #3 · Oportunidad olvidada'),
+            T(0.2, estilo='sub', y=1080, tam=60, texto='Nadie le hace seguimiento'),
+            T(d(5) * 0.45, estilo='fuga', y=1230, tam=44, texto='Fuga #3 · Oportunidad olvidada'),
         ]})
     if hay(6):   # GIRO 1 · los leads son malos
         E.append({'inicio': t0(6), 'tipo': 'tarjeta', 'fondo': '#F2F3F5', 'transicion': tr('wipeup', .45), 'textos': [
@@ -102,14 +100,14 @@ def escenas_de(tiempos):
             T(0.4, estilo='sub-turquesa', y=1500, tam=54, texto='Todo el recorrido, conectado'),
         ]})
     if hay(9):   # 1 · FILTRAR
-        E.append({'inicio': t0(9), 'tipo': 'plano', 'src': 'clips/intel-form-recorrido.mp4', 'desde': 2.0, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
+        E.append({'inicio': t0(9), 'tipo': 'plano', 'src': 'clips/intel-form-recorrido.mp4', 'desde': 2.0, 'marco': True, 'foco': {'k': 1.15, 'cx': 360, 'cy': 640}, 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='1 · Filtrar'),
             T(0.7, estilo='sub', y=1560, tam=52, texto='El anuncio filtra: solo entra quien encaja'),
         ]})
     if hay(10):  # 2 · RESPONDER
-        E.append({'inicio': t0(10), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 29.0, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
+        E.append({'inicio': t0(10), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 29.0, 'marco': True, 'foco': {'k': 1.22, 'cx': 360, 'cy': 800}, 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='2 · Responder'),
-            T(0.8, estilo='sub', y=1560, tam=52, texto='Respuesta en minutos, no el lunes'),
+            T(0.8, estilo='sub', y=1560, tam=52, texto='Respuesta en minutos'),
         ]})
     if hay(11):  # 3 · SEGUIR
         items = [['DÍA 0', 'WhatsApp'], ['DÍA 1', 'Llamada'], ['DÍA 3', 'WhatsApp'], ['DÍA 5', 'Llamada']]
@@ -123,7 +121,7 @@ def escenas_de(tiempos):
             T(0.5, estilo='sub', y=1250, tam=52, texto='Si no contesta, el sistema insiste por ti'),
         ]})
     if hay(12):  # 4 · AGENDAR
-        E.append({'inicio': t0(12), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 36.5, 'marco': True, 'transicion': tr('fade', .35), 'textos': [
+        E.append({'inicio': t0(12), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 36.5, 'marco': True, 'foco': {'k': 1.45, 'cx': 320, 'cy': 860}, 'transicion': tr('fade', .35), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='4 · Agendar'),
             T(0.6, estilo='sub', y=1560, tam=52, texto='Cita cerrada + recordatorios'),
         ]})
@@ -134,14 +132,14 @@ def escenas_de(tiempos):
             T(d(13) * 0.55, estilo='grande', y=1230, tam=96, texto='*ENTRAS TÚ'),
         ]})
     if hay(14):  # INTELLIGENCE · todo el recorrido (vista Recorrido)
-        E.append({'inicio': t0(14), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 43.9, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
+        E.append({'inicio': t0(14), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 43.9, 'marco': True, 'foco': {'k': 1.25, 'cx': 340, 'cy': 560}, 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='Qualivo Intelligence'),
             T(0.2, d(14) * 0.42, estilo='sub', y=1560, tam=52, texto='Qué pasa con cada oportunidad'),
             T(d(14) * 0.42, d(14) * 0.72, estilo='sub-turquesa', y=1560, tam=52, texto='Desde qué anuncio llegó…'),
             T(d(14) * 0.72, estilo='sub-turquesa', y=1560, tam=52, texto='…hasta si terminó comprando'),
         ]})
     if hay(17):  # DESPUÉS · analizamos los anuncios
-        E.append({'inicio': t0(17), 'tipo': 'plano', 'src': 'clips/intel-anuncios.mp4', 'desde': 0.0, 'marco': True, 'transicion': tr('smoothleft', .4), 'textos': [
+        E.append({'inicio': t0(17), 'tipo': 'plano', 'src': 'clips/intel-anuncios.mp4', 'desde': 0.0, 'marco': True, 'foco': {'k': 1.18, 'cx': 360, 'cy': 700}, 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='Después · tus anuncios'),
             T(0.3, d(17) * 0.5, estilo='sub', y=1480, tam=52, texto='Analizamos cada anuncio con esos datos'),
             T(d(17) * 0.5, estilo='sub-turquesa', y=1480, tam=52, texto='Cuáles traen ventas'),

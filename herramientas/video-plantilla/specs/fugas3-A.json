@@ -1,8 +1,8 @@
 {
  "nombre": "01_Qualivo_Fugas_Hook-Anuncio_9x16",
  "voz": "voz-fugas3-A.mp3",
- "musica": "musica2/a.wav",
- "musica_volumen": 0.085,
+ "musica": "musica3/2-deephouse-norm.wav",
+ "musica_volumen": 1.0,
  "duracion": 52.44,
  "tiempos_voz": {
   "0": [
@@ -248,7 +248,8 @@
      "bloques": [
       {
        "estilo": "pasos",
-       "y": 1130,
+       "y": 1120,
+       "tam": 36,
        "pasos": [
         [
          "ANUNCIO",
@@ -306,42 +307,19 @@
      "desde": 0.2,
      "bloques": [
       {
-       "estilo": "pasos",
-       "y": 1130,
-       "pasos": [
-        [
-         "LEAD",
-         "ok"
-        ],
-        [
-         "CITA",
-         "ok"
-        ],
-        [
-         "ASISTE",
-         "ko"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "desde": 0.6,
-     "bloques": [
-      {
        "estilo": "sub",
-       "y": 980,
-       "tam": 56,
+       "y": 1080,
+       "tam": 60,
        "texto": "Reserva… y no aparece"
       }
      ]
     },
     {
-     "desde": 0.806,
+     "desde": 0.6448,
      "bloques": [
       {
        "estilo": "fuga",
-       "y": 1260,
+       "y": 1230,
        "texto": "Fuga #2 · No-show"
       }
      ]
@@ -361,42 +339,19 @@
      "desde": 0.2,
      "bloques": [
       {
-       "estilo": "pasos",
-       "y": 1130,
-       "pasos": [
-        [
-         "CITA",
-         "ok"
-        ],
-        [
-         "REUNIÓN",
-         "ok"
-        ],
-        [
-         "SEGUIMIENTO",
-         "ko"
-        ]
-       ]
-      }
-     ]
-    },
-    {
-     "desde": 0.8,
-     "bloques": [
-      {
        "estilo": "sub",
-       "y": 980,
-       "tam": 56,
-       "texto": "Recibe la información… y ahí se queda"
+       "y": 1080,
+       "tam": 60,
+       "texto": "Nadie le hace seguimiento"
       }
      ]
     },
     {
-     "desde": 1.3943199999999998,
+     "desde": 1.0818,
      "bloques": [
       {
        "estilo": "fuga",
-       "y": 1260,
+       "y": 1230,
        "tam": 44,
        "texto": "Fuga #3 · Oportunidad olvidada"
       }
@@ -607,6 +562,11 @@
    "src": "clips/intel-form-recorrido.mp4",
    "desde": 2.0,
    "marco": true,
+   "foco": {
+    "k": 1.15,
+    "cx": 360,
+    "cy": 640
+   },
    "transicion": {
     "tipo": "smoothleft",
     "dur": 0.4
@@ -641,6 +601,11 @@
    "src": "clips/intel.mp4",
    "desde": 29.0,
    "marco": true,
+   "foco": {
+    "k": 1.22,
+    "cx": 360,
+    "cy": 800
+   },
    "transicion": {
     "tipo": "smoothleft",
     "dur": 0.4
@@ -663,7 +628,7 @@
        "estilo": "sub",
        "y": 1560,
        "tam": 52,
-       "texto": "Respuesta en minutos, no el lunes"
+       "texto": "Respuesta en minutos"
       }
      ]
     }
@@ -837,6 +802,11 @@
    "src": "clips/intel.mp4",
    "desde": 36.5,
    "marco": true,
+   "foco": {
+    "k": 1.45,
+    "cx": 320,
+    "cy": 860
+   },
    "transicion": {
     "tipo": "fade",
     "dur": 0.35
@@ -915,6 +885,11 @@
    "src": "clips/intel.mp4",
    "desde": 43.9,
    "marco": true,
+   "foco": {
+    "k": 1.25,
+    "cx": 340,
+    "cy": 560
+   },
    "transicion": {
     "tipo": "smoothleft",
     "dur": 0.4
@@ -973,6 +948,11 @@
    "src": "clips/intel-anuncios.mp4",
    "desde": 0.0,
    "marco": true,
+   "foco": {
+    "k": 1.18,
+    "cx": 360,
+    "cy": 700
+   },
    "transicion": {
     "tipo": "smoothleft",
     "dur": 0.4
