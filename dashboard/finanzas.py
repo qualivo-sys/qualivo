@@ -139,14 +139,14 @@ def recoger(tok):
     # --- MRR: clientes recurrentes (se mantiene a mano, es una decisión no un dato) ---
     for nombre, importe, estado in [
         ("Equipzilla (nómina)", 2040, "activo · sube a 2.850 en octubre"),
-        ("Escola Aeronàutica (EAC)", 800, "activo · subida a 1.200 pendiente de enviar"),
-        ("Eleva Academy", 500, "activo · confirmar si sigue facturando"),
-        ("Kubysoft", 500, "piloto · suelo, decide el 13-oct"),
+        ("Escola Aeronàutica (EAC)", 450, "activo · Maikel corrige el 29-sep: son 450, no 800"),
+        ("Eleva Academy", 500, "activo · factura de 530 EUR emitida el 23-sep"),
+        ("Kubysoft", 0, "piloto SIN facturar · decide el 13-oct"),
         ("Antic Barcelona", 0, "sin facturación viva"),
         ("Don't Kill Rumble", 0, "sin decisión de continuidad"),
     ]:
         add("MRR", nombre, importe, estado)
-    add("MRR", "TOTAL recurrente", 3840, "total", "objetivo: 10.000 €/mes")
+    add("MRR", "TOTAL recurrente", 2990, "total", "objetivo: 10.000 €/mes")
     return filas
 
 
