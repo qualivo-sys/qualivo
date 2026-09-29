@@ -125,6 +125,27 @@ def capa(bloques):
                 x += an
                 if n < len(items) - 1:
                     d.line([(x + 5, y + alto / 2), (x + sep - 5, y + alto / 2)], fill=COL['blanco'], width=3); x += sep
+        elif est == 'pregunta':
+            # Tarjeta de pregunta del formulario con la respuesta marcada
+            x0, x1 = 90, W - 90; alto = b.get('alto', 200)
+            d.rounded_rectangle([x0, y, x1, y + alto], radius=26, fill=COL['blanco'])
+            fq = fuente(700, b.get('tam', 42)); d.text((x0 + 40, y + 30), b['texto'], font=fq, fill=COL['tinta'])
+            fa = fuente(800, 40); t = b['respuesta']; wa = fa.getlength(t); ya = y + alto - 92
+            d.rounded_rectangle([x0 + 40, ya, x0 + 40 + 64 + wa + 34, ya + 64], radius=32, fill=COL['turquesa'])
+            cx, cy = x0 + 40 + 34, ya + 32
+            d.line([(cx - 12, cy), (cx - 3, cy + 10), (cx + 13, cy - 10)], fill=COL['tinta'], width=6)
+            d.text((x0 + 40 + 64, ya + 10), t, font=fa, fill=COL['tinta'])
+            if b.get('senal'):
+                fs = fuente(700, 32); ts = b['senal']; ws = fs.getlength(ts)
+                d.text((x1 - 40 - ws, ya + 16), ts, font=fs, fill=COL['turquesa-oscuro'])
+        elif est == 'medidor':
+            # Barra de intención: etiqueta, valor y relleno
+            x0, x1 = 90, W - 90; f = fuente(800, 40)
+            d.text((x0, y), b['texto'].upper(), font=f, fill=COL['blanco'])
+            v = b.get('valor', ''); wv = f.getlength(v); d.text((x1 - wv, y), v, font=f, fill=COL['turquesa'])
+            d.rounded_rectangle([x0, y + 70, x1, y + 110], radius=20, fill=(60, 64, 72))
+            fr = max(0.04, min(1.0, b.get('fraccion', 0.5)))
+            d.rounded_rectangle([x0, y + 70, x0 + (x1 - x0) * fr, y + 110], radius=20, fill=COL['turquesa'])
         elif est == 'fuga':
             # Etiqueta grande centrada: FUGA #1 · SIN SEGUIMIENTO
             f = fuente(800, b.get('tam', 50)); t = b['texto'].upper(); w = f.getlength(t)

@@ -99,10 +99,21 @@ def escenas_de(tiempos):
             T(0, estilo='cadena', y=230, tam=56, paso=118, items=['ANUNCIO', 'RESPUESTA', 'SEGUIMIENTO', 'CITA', 'ASISTENCIA', 'VENTA'], marcar=[0, 1, 2, 3, 4, 5]),
             T(0.4, estilo='sub-turquesa', y=1500, tam=54, texto='Todo el recorrido, conectado'),
         ]})
-    if hay(9):   # 1 · FILTRAR
-        E.append({'inicio': t0(9), 'tipo': 'plano', 'src': 'clips/intel-form-recorrido.mp4', 'desde': 2.0, 'marco': True, 'foco': {'k': 1.15, 'cx': 360, 'cy': 640}, 'transicion': tr('smoothleft', .4), 'textos': [
+    if hay(9):   # 1 · FILTRAR · preguntas que detectan intención de compra
+        D9 = t0(10) - t0(9) if hay(10) else d(9)
+        q = [dict(estilo='pregunta', y=440, texto='¿Qué quieres estudiar?', respuesta='Máster en RR. HH.', senal='Interés concreto'),
+             dict(estilo='pregunta', y=680, texto='¿Cuándo te gustaría empezar?', respuesta='Este mes', senal='Urgencia'),
+             dict(estilo='pregunta', y=920, texto='¿Cómo lo pagarías?', respuesta='Mi empresa lo bonifica', senal='Capacidad')]
+        pasos = [0.25, 0.75, 1.25]
+        med = D9 * 0.62
+        E.append({'inicio': t0(9), 'tipo': 'tarjeta', 'fondo': '#101319', 'transicion': tr('smoothleft', .4), 'textos': [
             T(0, estilo='etiqueta-turquesa', y=150, texto='1 · Filtrar'),
-            T(0.7, estilo='sub', y=1560, tam=52, texto='El anuncio filtra: solo entra quien encaja'),
+            T(0.05, estilo='grande', y=275, tam=50, texto='Preguntas que detectan intención'),
+            T(pasos[0], **q[0]), T(pasos[1], **q[1]), T(pasos[2], **q[2]),
+            T(med, med + 0.2, estilo='medidor', y=1230, texto='Intención de compra', valor='', fraccion=0.3),
+            T(med + 0.2, med + 0.4, estilo='medidor', y=1230, texto='Intención de compra', valor='', fraccion=0.6),
+            T(med + 0.4, estilo='medidor', y=1230, texto='Intención de compra', valor='ALTA', fraccion=0.92),
+            T(med + 0.5, estilo='sub-turquesa', y=1450, tam=54, texto='Lead listo · pasa a tu equipo'),
         ]})
     if hay(10):  # 2 · RESPONDER
         E.append({'inicio': t0(10), 'tipo': 'plano', 'src': 'clips/intel.mp4', 'desde': 29.0, 'marco': True, 'foco': {'k': 1.22, 'cx': 360, 'cy': 800}, 'transicion': tr('smoothleft', .4), 'textos': [

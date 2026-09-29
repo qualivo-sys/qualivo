@@ -3,7 +3,7 @@
  "voz": "voz-fugas3-B.mp3",
  "musica": "musica3/2-deephouse-norm.wav",
  "musica_volumen": 1.0,
- "duracion": 48.79,
+ "duracion": 49.29,
  "tiempos_voz": {
   "1": [
    0.0,
@@ -46,43 +46,43 @@
    1.0
   ],
   "10": [
-   21.367,
-   24.104,
+   21.867,
+   24.604,
    1.0
   ],
   "11": [
-   24.617,
-   27.312,
+   25.117,
+   27.812,
    1.0
   ],
   "12": [
-   27.471,
-   29.396,
+   27.971,
+   29.896,
    1.0
   ],
   "13": [
-   29.742,
-   31.875,
+   30.242,
+   32.375,
    1.0
   ],
   "14": [
-   32.283,
-   36.438,
+   32.783,
+   36.938,
    1.0
   ],
   "17": [
-   36.908,
-   41.458,
+   37.408,
+   41.958,
    1.0
   ],
   "15": [
-   41.7,
-   43.604,
+   42.2,
+   44.104,
    1.0
   ],
   "16": [
-   43.888,
-   46.833,
+   44.388,
+   47.333,
    1.0
   ]
  },
@@ -494,15 +494,8 @@
   },
   {
    "inicio": 18.429,
-   "tipo": "plano",
-   "src": "clips/intel-form-recorrido.mp4",
-   "desde": 2.0,
-   "marco": true,
-   "foco": {
-    "k": 1.15,
-    "cx": 360,
-    "cy": 640
-   },
+   "tipo": "tarjeta",
+   "fondo": "#101319",
    "transicion": {
     "tipo": "smoothleft",
     "dur": 0.4
@@ -519,20 +512,105 @@
      ]
     },
     {
-     "desde": 0.7,
+     "desde": 0.05,
      "bloques": [
       {
-       "estilo": "sub",
-       "y": 1560,
-       "tam": 52,
-       "texto": "El anuncio filtra: solo entra quien encaja"
+       "estilo": "grande",
+       "y": 275,
+       "tam": 50,
+       "texto": "Preguntas que detectan intención"
+      }
+     ]
+    },
+    {
+     "desde": 0.25,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 440,
+       "texto": "¿Qué quieres estudiar?",
+       "respuesta": "Máster en RR. HH.",
+       "senal": "Interés concreto"
+      }
+     ]
+    },
+    {
+     "desde": 0.75,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 680,
+       "texto": "¿Cuándo te gustaría empezar?",
+       "respuesta": "Este mes",
+       "senal": "Urgencia"
+      }
+     ]
+    },
+    {
+     "desde": 1.25,
+     "bloques": [
+      {
+       "estilo": "pregunta",
+       "y": 920,
+       "texto": "¿Cómo lo pagarías?",
+       "respuesta": "Mi empresa lo bonifica",
+       "senal": "Capacidad"
+      }
+     ]
+    },
+    {
+     "desde": 2.1315600000000017,
+     "bloques": [
+      {
+       "estilo": "medidor",
+       "y": 1230,
+       "texto": "Intención de compra",
+       "valor": "",
+       "fraccion": 0.3
+      }
+     ],
+     "hasta": 2.331560000000002
+    },
+    {
+     "desde": 2.331560000000002,
+     "bloques": [
+      {
+       "estilo": "medidor",
+       "y": 1230,
+       "texto": "Intención de compra",
+       "valor": "",
+       "fraccion": 0.6
+      }
+     ],
+     "hasta": 2.5315600000000016
+    },
+    {
+     "desde": 2.5315600000000016,
+     "bloques": [
+      {
+       "estilo": "medidor",
+       "y": 1230,
+       "texto": "Intención de compra",
+       "valor": "ALTA",
+       "fraccion": 0.92
+      }
+     ]
+    },
+    {
+     "desde": 2.6315600000000017,
+     "bloques": [
+      {
+       "estilo": "sub-turquesa",
+       "y": 1450,
+       "tam": 54,
+       "texto": "Lead listo · pasa a tu equipo"
       }
      ]
     }
    ]
   },
   {
-   "inicio": 21.367,
+   "inicio": 21.867,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 29.0,
@@ -571,7 +649,7 @@
    ]
   },
   {
-   "inicio": 24.617,
+   "inicio": 25.117,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -733,7 +811,7 @@
    ]
   },
   {
-   "inicio": 27.471,
+   "inicio": 27.971,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 36.5,
@@ -772,7 +850,7 @@
    ]
   },
   {
-   "inicio": 29.742,
+   "inicio": 30.242,
    "tipo": "plano",
    "src": "clips/4.mp4",
    "brillo": -0.08,
@@ -816,7 +894,7 @@
    ]
   },
   {
-   "inicio": 32.283,
+   "inicio": 32.783,
    "tipo": "plano",
    "src": "clips/intel.mp4",
    "desde": 43.9,
@@ -879,7 +957,7 @@
    ]
   },
   {
-   "inicio": 36.908,
+   "inicio": 37.408,
    "tipo": "plano",
    "src": "clips/intel-anuncios.mp4",
    "desde": 0.0,
@@ -941,7 +1019,7 @@
    ]
   },
   {
-   "inicio": 41.7,
+   "inicio": 42.2,
    "tipo": "tarjeta",
    "fondo": "#101319",
    "zoom": false,
@@ -991,7 +1069,7 @@
    ]
   },
   {
-   "inicio": 43.888,
+   "inicio": 44.388,
    "tipo": "tarjeta",
    "fondo": "#27BDB1",
    "textos": [
