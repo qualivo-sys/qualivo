@@ -60,18 +60,12 @@
     kpiEtapas: { interesados: 'info', cualificados: 'cualificado', entrevistas: 'entrevista' },
 
     reglas: {
-      fitBase: 22,
+      fitBase: 55,
       fit: [
-        [function (c) { return c.seg === 'empresa' && c.tam >= 50; }, 30, function (c) { return 'empresa de ' + c.tam + ' empleados'; }, 'Empresa de 50 empleados o más'],
-        [function (c) { return c.seg === 'empresa' && c.tam >= 10 && c.tam < 50; }, 16, function (c) { return 'empresa de ' + c.tam + ' empleados'; }, 'Empresa de 10 a 49 empleados'],
-        [function (c) { return c.seg === 'empresa' && tieneRol(c, /forma|rrhh|personas|talento|people|director|gerente|ceo/i); }, 14, function (c) { return 'decide la formación (' + c.rol + ')'; }, 'Su puesto decide la formación'],
-        [function (c) { return c.seg === 'particular' && (c.f && c.f.exp >= 3); }, 22, function (c) { return c.f.exp + ' años de experiencia en el área'; }, 'Particular con 3 años o más en el área'],
-        [function (c) { return c.seg === 'particular' && (c.f && c.f.exp > 0 && c.f.exp < 3); }, 10, function (c) { return 'perfil junior en el área'; }],
-        [function (c) { return c.f && c.f.empresaPaga; }, 14, 'su empresa le paga la formación'],
-        [function (c) { return c.valor >= 3000; }, 8, 'programa de ticket alto'],
-        [function (c) { return c.f && c.f.estudiante; }, -14, 'todavía estudiando, sin experiencia'],
-        [function (c) { return c.f && c.f.fuera; }, -26, 'fuera de España, sin bonificación posible'],
-        [function (c) { return c.f && c.f.gratis; }, -22, 'busca formación gratuita']
+        [function (c) { return /madre|padre|familia/i.test(c.rol || ''); }, 12, 'familia que busca clases para su hijo o hija'],
+        [function (c) { return /adulto|examen|cambio|quiere ser|recién/i.test(c.rol || ''); }, 10, 'adulto con un objetivo concreto'],
+        [function (c) { return c.valor >= 800; }, 8, 'curso completo'],
+        [function (c) { return c.f && c.f.gratis; }, -22, 'busca algo gratuito']
       ],
       intencion: [
         [function (c) { return c.s.conv; }, 14, 'preguntó por la próxima convocatoria'],

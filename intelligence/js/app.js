@@ -21,6 +21,7 @@
     { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
     { id: 'consultoria', txt: 'Consultoría de alto valor', desc: 'Proyectos grandes, ciclos largos y clientes que repiten', ico: 'b2b' },
     { id: 'aviacion', txt: 'Escuela de aviación', desc: 'TCP, azafata de tierra y despachador de vuelo', ico: 'formacion' },
+    { id: 'academia', txt: 'Academia de idiomas y apoyo', desc: 'Inglés para niños y adultos, apoyo escolar y prueba de nivel', ico: 'formacion' },
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
     { id: 'masters', txt: 'Másteres online', desc: 'Escuela online con alumnos de varios países', ico: 'formacion' },
     { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
@@ -221,9 +222,9 @@
     estado.contactos.forEach(function (c) {
       c.conv.forEach(function (m) {
         if (m.de === 'c' || estado.ahora - m.t > ventana || m.t > estado.ahora) return;
-        const canal = m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : 'WhatsApp';
+        const canal = m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal === 'ig' ? 'Mensaje de Instagram' : 'WhatsApp';
         const quien = m.de === 'a' ? 'agente' : m.de === 'v' ? 'agente de voz' : 'equipo';
-        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
+        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
       });
       (c.llamadas || []).forEach(function (l) {
         if (estado.ahora - l.t > ventana || l.t > estado.ahora) return;
@@ -586,7 +587,7 @@
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
             const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? 'Agente de WhatsApp' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
-            const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : 'whatsapp';
+            const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
           '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
@@ -733,7 +734,7 @@
     const tl = M.timeline(c, cfg, estado.ahora);
     const icoTl = { origen: 'anuncio', web: 'web', form: 'formulario', respuesta: 'whatsapp', sistema: 'auto', voz: 'voz' };
     const camp = cfg.campana(c.orig);
-    const datos = [['Etapa', c.etapaTxt || cfg.etapaTxt(c.etapa)], [T.Producto || 'Interés', c.prod], ['Valor', M.euros(c.valor)], ['Origen', camp ? camp.canal + ' · ' + camp.nombre : 'Web'], ['Ciudad', c.ciudad], ['Canal preferido', c.canal === 'email' ? 'Correo' : c.canal === 'tel' ? 'Teléfono' : 'WhatsApp']];
+    const datos = [['Etapa', c.etapaTxt || cfg.etapaTxt(c.etapa)], [T.Producto || 'Interés', c.prod], ['Valor', M.euros(c.valor)], ['Origen', camp ? camp.canal + ' · ' + camp.nombre : 'Web'], ['Ciudad', c.ciudad], ['Canal preferido', c.canal === 'email' ? 'Correo' : c.canal === 'tel' ? 'Teléfono' : c.canal === 'ig' ? 'Instagram' : 'WhatsApp']];
     const nba = x.nba;
     $('#ficha').innerHTML =
       '<div class="ficha-cab"><div class="l1">' + avatar(c) + '<div><h2>' + esc(c.n) + '</h2><div class="meta" style="font-size:13px">' + esc(metaContacto(c)) + '</div></div>' + pillPrio(x.prio) + '<button class="btn btn-icono" type="button" data-cerrar-ficha aria-label="Cerrar">' + ico('cerrar') + '</button></div>' +
