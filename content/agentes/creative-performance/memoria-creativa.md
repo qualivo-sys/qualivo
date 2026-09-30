@@ -163,7 +163,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 **Decisión:** coste por A/B a los 150 € por anuncio.
 
 ### 08 · S1_VEL_v2 · «Siete horas»
-- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
+- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
 - **Vertical:** formación.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad.
@@ -181,7 +181,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 09 · S1_PLA_v2 · «Vinieron cuatro»
-- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
+- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
 - **Vertical:** formación.
 - **Etapa:** cita y no-show.
 - **Dolor:** plantón.
@@ -198,7 +198,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 10 · S1_CUR_v2 · «Leads a cinco euros»
-- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
+- **Estado:** montado el 30-sep con la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). 
 - **Vertical:** formación.
 - **Etapa:** captación y cualificación.
 - **Dolor:** leads baratos que no se matriculan.
@@ -217,10 +217,10 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 
 ## Octubre 2026 · test de dolor en clínicas (borrador, pendiente del ok de Maikel)
 
-Mismo molde que el de formación, con vocabulario de clínica y la música F. El CTA común termina en «…dónde se te escapan los pacientes entre el anuncio y la primera visita». Detalle en `2026-10-clinicas-test-creativo.md`. Maquetas con huecos para los 5 planos nuevos (c1-c5).
+Mismo molde que el de formación, con vocabulario de clínica y la música H (urbano, ElevenLabs Music). El CTA común termina en «…dónde se te escapan los pacientes entre el anuncio y la primera visita». Detalle en `2026-10-clinicas-test-creativo.md`. Maquetas con huecos para los 5 planos nuevos (c1-c5).
 
 ### 11 · CLI_VEL_v1 · «Siete horas y media»
-- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F. Duración: 43 s. Sin subir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Duración: 43 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad (el WhatsApp de recepción).
@@ -229,7 +229,7 @@ Mismo molde que el de formación, con vocabulario de clínica y la música F. El
 - **Mecanismo:** WhatsApp en minutos, llamada si no contesta, mensaje al día siguiente, y cita con el tratamiento.
 
 ### 12 · CLI_HUE_v1 · «El gabinete, preparado»
-- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F. Duración: 38 s. Sin subir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Duración: 38 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** cita y no-show.
 - **Dolor:** la primera visita no viene.
@@ -238,7 +238,7 @@ Mismo molde que el de formación, con vocabulario de clínica y la música F. El
 - **Mecanismo:** confirmación al reservar, recordatorio la víspera y llamada si no aparece.
 
 ### 13 · CLI_PRI_v1 · «Implante o limpieza»
-- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música F. Duración: 41 s. Sin subir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de David (ElevenLabs v3; antes Javier, descartado por sonar robótico) y la música H (urbano, ElevenLabs Music). Duración: 41 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** cualificación.
 - **Dolor:** todos reciben la misma llamada, por orden de llegada.

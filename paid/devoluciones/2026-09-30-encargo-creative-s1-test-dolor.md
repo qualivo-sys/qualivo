@@ -6,7 +6,7 @@
 
 ## Qué hay que montar
 
-Tres anuncios de vídeo 9:16, listos, con la voz de David (ElevenLabs) y la música F:
+Tres anuncios de vídeo 9:16, listos, con la voz de David (ElevenLabs) y la música H (urbano, generada con ElevenLabs Music):
 
 | Nombre del anuncio en Meta | Archivo | Duración | Dolor |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Guiones, hipótesis y criterio de decisión: `content/agentes/creative-performan
 
 ## Antes de activar (checklist)
 
-- [ ] Licencia de la música F comprobada. Sale del catálogo de HeyGen (Astral Generated Music, id `25be1b745a6343058755d7ca88ef79d9`) y la licencia para anuncios de pago **no está comprobada**. Si no se puede usar, se remonta con otra en un minuto.
+- [ ] Música: la H se generó con ElevenLabs Music en la cuenta de Maikel (plan Creator). Confirmar que el plan cubre el uso comercial en anuncios.
 - [ ] El formulario sigue diciendo «desde 750 €/mes», precio viejo. No lo cambies en esta campaña: si cambia a mitad del test, se estropea la lectura. Díselo a Maikel igualmente.
 - [ ] Growth confirma que el nombre del anuncio llega al CRM en cada lead.
 - [ ] Solapamiento: la audiencia es la misma que la del conjunto actual de formación. Las dos campañas pujarán por la misma gente. Si Maikel prefiere evitarlo, hay que decidir si el conjunto actual baja mientras dura el test. **No lo toques sin su ok.**
