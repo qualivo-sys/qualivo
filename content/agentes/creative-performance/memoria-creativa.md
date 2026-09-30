@@ -220,7 +220,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 Mismo molde que el de formación, con vocabulario de clínica y la música F. El CTA común termina en «…dónde se te escapan los pacientes entre el anuncio y la primera visita». Detalle en `2026-10-clinicas-test-creativo.md`. Maquetas con huecos para los 5 planos nuevos (c1-c5).
 
 ### 11 · CLI_VEL_v1 · «Siete horas y media»
-- **Estado:** guion y maqueta, sin producir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de Javier (toma b) y la música F. Duración: 43 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad (el WhatsApp de recepción).
@@ -229,7 +229,7 @@ Mismo molde que el de formación, con vocabulario de clínica y la música F. El
 - **Mecanismo:** WhatsApp en minutos, llamada si no contesta, mensaje al día siguiente, y cita con el tratamiento.
 
 ### 12 · CLI_HUE_v1 · «El gabinete, preparado»
-- **Estado:** guion y maqueta, sin producir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de Javier (toma d) y la música F. Duración: 38 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** cita y no-show.
 - **Dolor:** la primera visita no viene.
@@ -238,7 +238,7 @@ Mismo molde que el de formación, con vocabulario de clínica y la música F. El
 - **Mecanismo:** confirmación al reservar, recordatorio la víspera y llamada si no aparece.
 
 ### 13 · CLI_PRI_v1 · «Implante o limpieza»
-- **Estado:** guion y maqueta, sin producir.
+- **Estado:** montado el 30-sep con los planos de Kling (c1-c5), la voz de Javier (toma a) y la música F. Duración: 41 s. Sin subir.
 - **Vertical:** clínicas.
 - **Etapa:** cualificación.
 - **Dolor:** todos reciben la misma llamada, por orden de llegada.
@@ -269,7 +269,7 @@ Una fila por anuncio y semana:
 - **Desempate:** reuniones celebradas (revisión a los 14 días).
 
 ## Pendiente
-- Clínicas: los 5 planos de Kling están generados (c1-c5). Faltan las voces de Javier (6 tomas, unos 25 créditos), pendientes del ok a los guiones.
+- Clínicas: montados los 3 anuncios (`finales/clinicas-octubre/`). Se pautan cuando haya lectura de formación, con el mismo encargo a Growth.
 - Horario nocturno: sigue de 8:00 a 21:30 (Velocidad va con la versión de día).
 - Música: se recomienda A (electrónica minimalista), con licencia comprobada.
 - Paid y Growth: que cada lead entre en el CRM con el nombre exacto del anuncio. Pedir a Paid el desglose por creativo de septiembre.

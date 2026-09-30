@@ -57,7 +57,7 @@ GUIONES = {
    'Casi nunca es mala suerte.',
    'Reservó hace dos semanas y nadie volvió a hablar con ella.',
    'Con Qualivo, la cita se confirma al reservar.',
-   'La víspera le llega un recordatorio.',
+   'La víspera recibe un recordatorio.',
    'Y si no aparece, le llamamos.',
    CTA_VOZ]),
  'cpri': ('Clinicas-Prioridad', [

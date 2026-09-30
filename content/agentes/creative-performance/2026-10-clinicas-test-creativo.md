@@ -93,7 +93,7 @@ Escrito el 30-sep-2026 por el agente Creative Performance. **Borrador para Maike
    - C · contrarian: «Una agenda llena no es una agenda aprovechada.»
    - D · número: «Tres primeras visitas esta semana. No vino ninguna.» (dicho como ejemplo)
 7. **Guion (voz, unas 85 palabras, unos 35 s):**
-   > Martes, diez y media. El gabinete, preparado. La primera visita no viene. No avisó. No coge el teléfono. Y ese hueco ya lo habías pagado: el anuncio, la llamada y la hora del profesional. Casi nunca es mala suerte. Reservó hace dos semanas y nadie volvió a hablar con ella. Con Qualivo, la cita se confirma al reservar. La víspera le llega un recordatorio. Y si no aparece, le llamamos. Si tu clínica ya invierte en anuncios, te enseñamos en treinta minutos dónde se te escapan los pacientes entre el anuncio y la primera visita.
+   > Martes, diez y media. El gabinete, preparado. La primera visita no viene. No avisó. No coge el teléfono. Y ese hueco ya lo habías pagado: el anuncio, la llamada y la hora del profesional. Casi nunca es mala suerte. Reservó hace dos semanas y nadie volvió a hablar con ella. Con Qualivo, la cita se confirma al reservar. La víspera recibe un recordatorio. Y si no aparece, le llamamos. Si tu clínica ya invierte en anuncios, te enseñamos en treinta minutos dónde se te escapan los pacientes entre el anuncio y la primera visita.
    - Mismo mecanismo que Plantones en formación, con la corrección de Maikel: el recordatorio no cuenta «lo que va a ver».
 8. **Storyboard** (maqueta: `CLI_HUE_v1_MAQUETA_9x16.mp4`):
 
