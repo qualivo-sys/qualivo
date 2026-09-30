@@ -19,6 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 import imageio_ffmpeg
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 W, H, FPS = 1080, 1920, int(os.environ.get('FPS', 24))   # 24: los planos generados vienen a 24 fps; así no se repiten fotogramas
+QUIETO = os.environ.get('QUIETO') == '1'   # sin zoom en tarjetas ni pantallas: el zoom por fotograma hacía temblar las letras
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
 COL = {
@@ -212,6 +213,7 @@ def escena(e, dur, tmp, n):
             if fo:
                 # Zoom lento hacia lo que cuenta la voz (coordenadas de la grabación 720x1280).
                 k0, k1, cx, cy = fo.get('k0', 1.0), fo['k'], fo['cx'], fo['cy']
+                if QUIETO: k0 = k1   # encuadre fijo en el punto de interés
                 u = 'min(t/%.3f,1)' % dur
                 K = '(%.4f+%.4f*(3*pow(%s,2)-2*pow(%s,3)))' % (k0, k1 - k0, u, u)
                 zoom = ("scale=720:1280,fps=%d,scale=w='trunc(960*%s/2)*2':h='trunc(1706*%s/2)*2':eval=frame:flags=bicubic,"
@@ -246,7 +248,7 @@ def escena(e, dur, tmp, n):
     if e.get('marco'):
         entradas += ['-loop', '1', '-t', '%.3f' % dur, '-i', os.path.join(AQUI, 'marco.png')]
         filtro[0] = filtro[0].replace('[%d:v]overlay' % 99, '[%d:v]overlay' % (len(capas) + 1))
-    if e['tipo'] == 'tarjeta' and e.get('zoom', True):
+    if e['tipo'] == 'tarjeta' and e.get('zoom', True) and not QUIETO:
         # Zoom lento (5 % a lo largo de la escena) para que la tarjeta respire.
         K = '(1+0.04*t/%.3f)' % dur
         filtro.append("[%s]scale=w='trunc(%d*%s/2)*2':h='trunc(%d*%s/2)*2':eval=frame:flags=bicubic,"
