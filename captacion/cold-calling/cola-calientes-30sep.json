@@ -1,0 +1,502 @@
+[
+ {
+  "email": "rim@efisio.es",
+  "empresa": "eFISIO Carabanchel Usera",
+  "ciudad": "Madrid",
+  "telefono": "+34910052363",
+  "campana": "3976199",
+  "leadId": 4591888239,
+  "senales": [
+   "meta_ads",
+   "analitica",
+   "whatsapp",
+   "cita_online",
+   "formulario"
+  ],
+  "inversion_confirmada": true,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "eFISIO Carabanchel Usera",
+   "categoria": "clínicas de fisioterapia",
+   "ciudad": "Madrid",
+   "asunto_correo": "vuestras citas",
+   "fuga": "los pacientes que preguntan o piden hora y no acaban viniendo",
+   "pregunta": "Cuando alguien pregunta precio o pide hora y al final no viene, ¿qué pasa con ese contacto después?",
+   "email_dominio": "efisio.es"
+  }
+ },
+ {
+  "email": "recepcion@logikclinic.com",
+  "empresa": "Logik Clinic Barcelona",
+  "ciudad": "Barcelona",
+  "telefono": "+34937544071",
+  "campana": "3976199",
+  "leadId": 4591888123,
+  "senales": [
+   "meta_ads",
+   "analitica",
+   "whatsapp",
+   "formulario"
+  ],
+  "inversion_confirmada": true,
+  "toques_gastados": 1,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "Logik Clinic Barcelona",
+   "categoria": "clínicas",
+   "ciudad": "Barcelona",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "logikclinic.com"
+  }
+ },
+ {
+  "email": "datos@magister.com",
+  "empresa": "Academia MAGISTER (oficina central en Madrid)",
+  "ciudad": "Madrid",
+  "telefono": "+34919332744",
+  "campana": "3976197",
+  "leadId": 4599964352,
+  "senales": [
+   "meta_ads",
+   "google_ads",
+   "analitica",
+   "formulario"
+  ],
+  "inversion_confirmada": true,
+  "toques_gastados": 1,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Academia MAGISTER (oficina central en Madrid)",
+   "categoria": "centros de formación",
+   "ciudad": "Madrid",
+   "asunto_correo": "vuestras matrículas",
+   "fuga": "los que piden información de un curso y no acaban matriculándose",
+   "pregunta": "De los que piden información este mes, ¿cuántos acaban hablando por teléfono con alguien de ahí?",
+   "email_dominio": "magister.com"
+  }
+ },
+ {
+  "email": "pep@plastic.es",
+  "empresa": "Plastic Academia",
+  "ciudad": "",
+  "telefono": "+34715001019",
+  "campana": "3976197",
+  "leadId": 4572879307,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Plastic Academia",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en Plastic Academia",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "plastic.es"
+  }
+ },
+ {
+  "email": "elena@gokoan.com",
+  "empresa": "GoKoan",
+  "ciudad": "",
+  "telefono": "+34623194293",
+  "campana": "3976197",
+  "leadId": 4572879352,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "GoKoan",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en GoKoan",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "gokoan.com"
+  }
+ },
+ {
+  "email": "famydent@famydent.com",
+  "empresa": "Famydent",
+  "ciudad": "Zaragoza",
+  "telefono": "+34727697421",
+  "campana": "3976199",
+  "leadId": 4599964193,
+  "senales": [
+   "analitica",
+   "formulario"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "Famydent",
+   "categoria": "clínicas",
+   "ciudad": "Zaragoza",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "famydent.com"
+  }
+ },
+ {
+  "email": "consulta@esteticamusa.com",
+  "empresa": "Clínica MUSA",
+  "ciudad": "Valencia",
+  "telefono": "+34641006348",
+  "campana": "3976199",
+  "leadId": 4599964137,
+  "senales": [
+   "analitica",
+   "formulario"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "Clínica MUSA",
+   "categoria": "clínicas",
+   "ciudad": "Valencia",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "esteticamusa.com"
+  }
+ },
+ {
+  "email": "albert@foxize.com",
+  "empresa": "Foxize School",
+  "ciudad": "",
+  "telefono": "+34674660000",
+  "campana": "3976197",
+  "leadId": 4559039981,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Foxize School",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en Foxize School",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "foxize.com"
+  }
+ },
+ {
+  "email": "miguel@mope.es",
+  "empresa": "Mope Formación",
+  "ciudad": "",
+  "telefono": "+34639212002",
+  "campana": "3976197",
+  "leadId": 4435343900,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Mope Formación",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en Mope Formación",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "mope.es"
+  }
+ },
+ {
+  "email": "academia@ascastilla.com",
+  "empresa": "Academia de Seguridad Castilla",
+  "ciudad": "Madrid",
+  "telefono": "+34979621438",
+  "campana": "3976197",
+  "leadId": 4599964356,
+  "senales": [
+   "analitica",
+   "mailchimp",
+   "formulario"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Academia de Seguridad Castilla",
+   "categoria": "centros de formación",
+   "ciudad": "Madrid",
+   "asunto_correo": "vuestras matrículas",
+   "fuga": "los que piden información de un curso y no acaban matriculándose",
+   "pregunta": "De los que piden información este mes, ¿cuántos acaban hablando por teléfono con alguien de ahí?",
+   "email_dominio": "ascastilla.com"
+  }
+ },
+ {
+  "email": "clinica@martinezcanut.com",
+  "empresa": "Clínica Dental Martínez Canut",
+  "ciudad": "Valencia",
+  "telefono": "+34963518689",
+  "campana": "3976199",
+  "leadId": 4599964128,
+  "senales": [
+   "analitica",
+   "whatsapp"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 1,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "Clínica Dental Martínez Canut",
+   "categoria": "clínicas",
+   "ciudad": "Valencia",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "martinezcanut.com"
+  }
+ },
+ {
+  "email": "jmedel@europeanopen.es",
+  "empresa": "European Open Business School",
+  "ciudad": "",
+  "telefono": "+34911989523",
+  "campana": "3976197",
+  "leadId": 4572879298,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 1,
+  "estado": "llamable",
+  "motivo": "",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "European Open Business School",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en European Open Business School",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "europeanopen.es"
+  }
+ },
+ {
+  "email": "kalu@kaluinstitute.org",
+  "empresa": "KALU Institute",
+  "ciudad": "",
+  "telefono": "",
+  "campana": "3976197",
+  "leadId": 4572879598,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "revisar-numero",
+  "motivo": "numero no valido en Espana: hay que sacarlo de su web",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "KALU Institute",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en KALU Institute",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "kaluinstitute.org"
+  }
+ },
+ {
+  "email": "admisiones-bcn@brotherad.com",
+  "empresa": "Brother Escuela de Creatividad",
+  "ciudad": "Barcelona",
+  "telefono": "",
+  "campana": "3976197",
+  "leadId": 4599964282,
+  "senales": [
+   "analitica",
+   "whatsapp",
+   "formulario"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "revisar-numero",
+  "motivo": "numero no valido en Espana: hay que sacarlo de su web",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Brother Escuela de Creatividad",
+   "categoria": "centros de formación",
+   "ciudad": "Barcelona",
+   "asunto_correo": "vuestras matrículas",
+   "fuga": "los que piden información de un curso y no acaban matriculándose",
+   "pregunta": "De los que piden información este mes, ¿cuántos acaban hablando por teléfono con alguien de ahí?",
+   "email_dominio": "brotherad.com"
+  }
+ },
+ {
+  "email": "mgarcia@indiceformacion.com",
+  "empresa": "ÍNDICE CONSULTORÍA Y FORMACIÓN",
+  "ciudad": "",
+  "telefono": "",
+  "campana": "3976197",
+  "leadId": 4138224132,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "revisar-numero",
+  "motivo": "numero no valido en Espana: hay que sacarlo de su web",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "ÍNDICE CONSULTORÍA Y FORMACIÓN",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en ÍNDICE CONSULTORÍA Y FORMACIÓN",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "indiceformacion.com"
+  }
+ },
+ {
+  "email": "mcerver@taesformacion.es",
+  "empresa": "TAES Formación",
+  "ciudad": "",
+  "telefono": "",
+  "campana": "3976197",
+  "leadId": 4138224575,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "revisar-numero",
+  "motivo": "numero no valido en Espana: hay que sacarlo de su web",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "TAES Formación",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en TAES Formación",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "taesformacion.es"
+  }
+ },
+ {
+  "email": "cita@dentallorente.com",
+  "empresa": "Clínica dental Dr. Lorente (Av. Francia)",
+  "ciudad": "Valencia",
+  "telefono": "+34963312771",
+  "campana": "3976199",
+  "leadId": 4599964129,
+  "senales": [
+   "analitica",
+   "whatsapp"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 1,
+  "estado": "FUERA: suprimido",
+  "motivo": "dijo \"no nos interesa, ya colaboramos con una empresa\" el 30-sep. Un no es un no, aunque la llamada estuviera rota",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "Clínica dental Dr. Lorente (Av. Francia)",
+   "categoria": "clínicas",
+   "ciudad": "Valencia",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "dentallorente.com"
+  }
+ },
+ {
+  "email": "ignasi.benavent@microfusa.com",
+  "empresa": "MICROFUSA",
+  "ciudad": "",
+  "telefono": "+34917024592",
+  "campana": "3976197",
+  "leadId": 4138223919,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 2,
+  "estado": "FUERA: agotado",
+  "motivo": "dos toques gastados: 22-sep (centralita sin salida) y 30-sep",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "MICROFUSA",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en MICROFUSA",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "microfusa.com"
+  }
+ },
+ {
+  "email": "amartinez@padelmba.com",
+  "empresa": "Padelmba",
+  "ciudad": "",
+  "telefono": "",
+  "campana": "3976197",
+  "leadId": 4572879426,
+  "senales": [],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "FUERA: sin numero",
+  "motivo": "no hay telefono",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "empresa": "Padelmba",
+   "categoria": "centros de formación",
+   "ciudad": "",
+   "asunto_correo": "Una cosa que miraría en Padelmba",
+   "fuga": "la gente que pidió información de un curso y nadie volvió a llamar",
+   "pregunta": "De la gente que pidió información de un curso y no se matriculó, ¿quién les vuelve a escribir?",
+   "email_dominio": "padelmba.com"
+  }
+ },
+ {
+  "email": "privacidad@cbclinic.com",
+  "empresa": "CB Clinic I Medicina Estética I Médico Estético",
+  "ciudad": "Barcelona",
+  "telefono": "+34950635027",
+  "campana": "3976199",
+  "leadId": 4591888115,
+  "senales": [
+   "analitica",
+   "mailchimp",
+   "formulario"
+  ],
+  "inversion_confirmada": false,
+  "toques_gastados": 0,
+  "estado": "FUERA: excluido",
+  "motivo": "buzon de privacidad: llamar ahi es pedir una queja LOPD",
+  "variableValues": {
+   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "empresa": "CB Clinic I Medicina Estética I Médico Estético",
+   "categoria": "clínicas",
+   "ciudad": "Barcelona",
+   "asunto_correo": "vuestras citas",
+   "fuga": "la gente que pregunta precio por WhatsApp y no acaba pidiendo cita",
+   "pregunta": "Cuando alguien os pregunta el precio por WhatsApp y no acaba pidiendo cita, ¿qué pasa con ese contacto después?",
+   "email_dominio": "cbclinic.com"
+  }
+ }
+]
