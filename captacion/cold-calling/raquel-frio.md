@@ -124,6 +124,65 @@ Brother, Índice y TAES, con el mismo problema.
 Y si sigue en vigor la regla de `diseno.md` de que a los de ocho aperturas o más los llama
 Máikel en persona, **Kalu es de Máikel, no de Raquel**.
 
+## ARREGLO DE SEGURIDAD aplicado tras la respuesta de Growth
+
+La respuesta de Growth
+(`captacion/agente-llamadas/respuesta-a-cold-calling-30sep.md`, rama de la
+landing) trae un aviso que me afectaba ya:
+
+**`api/vapi-fin.js` manda un WhatsApp de rescate al contacto** cuando una llamada
+acaba «rota» — `silence-timed-out`, o cualquier razón con «error» o «failed» —.
+El texto es *«perdona, se nos ha cortado la llamada. Soy Maikel, de Qualivo…»*.
+Solo se salta si el contacto tiene `act-baja`, `wa-humano`, `act-agendado` o
+`act-cita-confirmada`.
+
+El clon heredaba ese `server.url`. Y los 20 leads de campaña están probablemente
+en GHL. **Una llamada como la de Magister —que murió por silencio en una
+centralita, sin que hablara nadie— le habría mandado a ese lead un WhatsApp
+disculpándose por una llamada que él no recibió.** Es el mismo error que ya se
+cometió el 15-sep con un lead cuyo teléfono nunca sonó.
+
+**Aplicado ya sobre el clon:**
+
+```
+server:         null      (antes: qualivo.io/api/vapi-fin)
+serverMessages: []
+maxDurationSeconds: 240   (antes 300)
+```
+
+Sin `server` no hay rescate automático, no hay nota automática en GHL y no hay
+aviso a Máikel si una llamada se rompe. Eso lo cubro yo: leo los resultados por
+`GET /call` y escribo la NOTA PARA CRM a mano, que es lo que pide el punto 19 del
+rol de todas formas.
+
+**Es un apaño, no la solución.** La buena es la opción (b) de Growth: mandar
+`origen=frio` en `variableValues` y poner una guarda en `vapi-fin.js` que no
+rescate ni etiquete cuando sea frío — una línea, igual que la que ya existe para
+`vv.demo === '1'`. Eso toca código de producción de la landing, así que lo decide
+Máikel. Yo también prefiero la (b): así los fallos de voz del frío sí avisan a
+Máikel.
+
+### Donde no coincido con Growth: la duración y el silencio
+
+Propone `maxDurationSeconds` 120 y `silenceTimeoutSeconds` 20-25. He puesto **240
+y he dejado el silencio en 60**, y el motivo es concreto:
+
+- **120 s mataría llamadas buenas.** La primera cita real que cerró Raquel (Grupo
+  Rumy, 18-sep) duró 149 s. Una llamada en frío que llega a discovery y a agenda
+  no cabe en dos minutos.
+- **Bajar el silencio a 25 s reabre un incidente real.** Los 60 s se pusieron el
+  18-sep precisamente porque con 25 se colgó encima de una compañera de TALKUAL
+  que estaba apuntando el recado. En frío los recados son frecuentes. No cambio
+  un daño real y conocido por ahorrar treinta céntimos.
+- **Y el silencio no es el que acota una centralita.** Magister duró 211 s con el
+  silencio ya en 45, porque el otro bot no paraba de hablar: nunca hubo 45 s
+  seguidos de silencio. Lo que acota eso es la regla del prompt —callar ante un
+  menú y colgar con `endCall`, y colgar a la segunda vez si contesta otra
+  máquina— más el tope de duración como red. La regla ya está en el clon.
+
+Si tras la primera tanda una centralita se sigue comiendo más de un minuto, bajo
+la duración. Pero no toco el silencio.
+
 ## Lo que NO se ha tocado
 
 - **`Qualivo SDR` sigue existiendo.** No lo retiro hasta que el agente de Growth confirme
@@ -145,3 +204,21 @@ Máikel en persona, **Kalu es de Máikel, no de Raquel**.
 4. **Grafía de la marca, sin decidir.** El asistente de landing escribe «Cuálivo» con
    tilde en su mensaje de buzón; la v5 del repo dice «Cualivo» sin tilde. He usado
    «Cuálivo», que es la más reciente y la que está en producción. Se cierra escuchando.
+5. **Etiquetar la cita como fría en GHL** si Raquel cierra alguna, para no mezclar
+   métricas con los leads de pago. Lo pide Growth y tiene razón.
+6. **Añadir la opción `frío` al select «Campaña»** de la base de Notion «📞 Llamadas
+   de Raquel», y rellenarla yo. Growth rellena esa base a mano en su revisión diaria
+   y dice que si yo pongo mis filas con `Campaña = frío`, él no las duplica.
+
+## El riesgo que señala Growth y que no es técnico
+
+**Asistencia a las citas: 54 % en septiembre.** No se procesa la confirmación de la
+víspera, el recordatorio del mismo día está en pausa, y los correos de qualivo.io caen
+en spam porque a SPF le falta Google y no hay DMARC. Una cita que cierre en frío
+recibe confirmación y recordatorio de víspera, pero **el riesgo real no es cerrarla,
+es que se presenten**. Su recomendación, que comparto: recordatorio por WhatsApp
+además del correo.
+
+Dicho de otro modo: cerrar reuniones en frío sin arreglar el spam de qualivo.io y el
+recordatorio es llenar un cubo con un agujero. Y el agujero es de Máikel: SPF y
+DMARC.

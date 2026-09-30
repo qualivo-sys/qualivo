@@ -55,6 +55,29 @@ Y explica el defecto del 22-sep que se atribuyó a «se cree falsos nombres»:
 cuando preguntó por «Diga» no estaba creyéndose un nombre, estaba rellenando un
 hueco vacío con lo último que había oído.
 
+### Lo que iba dentro de las variables, y el accidente afortunado
+
+Las `variableValues` **sí se mandaron**, y no eran pocas. La de Dr. Lorente
+llevaba esto en `dato_concreto`:
+
+> «abrio seis veces el correo que le mandamos sobre las peticiones de cita que
+> llegan por WhatsApp y no se cierran. **Esta persona NO es un contacto frio: ha
+> abierto nuestro correo varias veces y no ha contestado. Reconocelo en la
+> primera frase.** […] NUNCA digas en voz alta una instruccion…»
+
+Y `n_aperturas: "6"` aparte.
+
+Dos cosas que hay que decir de eso:
+
+1. **Le estábamos pidiendo a la voz que violara el punto 2 del rol.** «Reconócelo
+   en la primera frase» sobre un correo abierto seis veces es exactamente lo que
+   el rol prohíbe: *«nunca digas "he visto que abriste nuestro correo cinco
+   veces"»*. **El fallo de las llaves simples impidió que eso saliera por el
+   altavoz.** El bug que rompió las seis llamadas evitó algo peor que romperlas.
+2. **El diseño es del revés.** Se estaban metiendo instrucciones dentro de una
+   variable de datos. Las instrucciones van en el prompt; las variables llevan
+   datos y nada más. En `Raquel · Frío` está hecho así, y `n_aperturas` no existe.
+
 ### Segundo efecto: el primer turno se tira a la basura
 
 ```
@@ -367,9 +390,14 @@ AI:   Hola, buenos días. ¿Podría hablar con la persona que lleva la parte de
 | tools / functions | **vacío** ← no existe `agendar` |
 | server (fin de llamada) | webhook de n8n `agente-llamadas-resultados` |
 
-> El `phoneNumberId` que pasó Máikel (`2f99f0e4-…`) no es el de
-> `traspaso-a-otra-sesion.md` (`b60821ae-…`), y **el bueno es el de Máikel**: la
-> bitácora de Growth del 18-sep lo explica. Twilio rechazó tres veces el alta de
-> un móvil español (bundles v1-v3, código 18001), así que las llamadas salen con
-> el móvil de Máikel verificado como identificador sobre la troncal SIP. El
-> `traspaso` está desactualizado en ese punto.
+> **Corrección (30-sep, tarde).** Escribí que el número bueno era el móvil de
+> Máikel (`2f99f0e4-…`). Es falso para esta tanda: los objetos de llamada dicen
+> `phoneNumberId: b60821ae-39fc-46b3-b8f8-23ee593ee6fd`, o sea **el 647, el
+> número del negocio**, el que figura en `traspaso-a-otra-sesion.md`. El
+> `2f99f0e4` (móvil de Máikel, el 663) es el que usa `api/_activacion.js` para la
+> cadencia de leads de pago.
+>
+> Hay dos números en juego y cada canal usa uno distinto. Para frío **el 647 es
+> el correcto**, y conviene que siga así: el 663 es un móvil personal y, con
+> volumen de frío, los operadores lo pueden marcar como spam. Lo avisa el propio
+> agente de Growth.
