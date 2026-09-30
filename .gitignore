@@ -6,6 +6,22 @@
 .env
 *.local
 
+# Claves de los scripts de captacion. Los scripts las leen de su propia
+# carpeta, que esta DENTRO del repo (captacion/scripts/.vapi_key y compañia),
+# asi que sin estas lineas un `git add -A` las publicaria.
+.vapi_key
+.vapi_assistant_id
+.vapi_phone_id
+.ghl_key
+.ghl_loc
+.ghl_calendar
+.smartlead_key
+.apify_key
+.apollo_key
+.heyreach_key
+.elevenlabs_key
+.twilio_*
+
 # OS / editor
 .DS_Store
 Thumbs.db

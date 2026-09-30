@@ -40,37 +40,37 @@ empeoran cuanto más larga es la llamada. Pedirle discovery a una voz que todav�
 razonamiento en alto es subir la apuesta con el problema sin arreglar. Pero es decisión de Máikel y
 **no se toca el asistente de producción sin su ok**.
 
-## Bloqueado · las transcripciones de las 6 llamadas de hoy
+## Las 6 llamadas de hoy · recuperadas y analizadas
 
-No las he podido recuperar. **Falta la clave de Vapi.**
+Máikel pasó las claves. El parte completo, con las seis transcripciones
+literales, está en **`captacion/agente-llamadas/pruebas-30sep.md`**.
 
-- `api.vapi.ai` sí es alcanzable desde este contenedor: devuelve 401 limpio sin cabecera de
-  autorización, o sea que la red no es el problema.
-- La clave vive en el scratchpad de la sesión de Outbound y los scratchpads no se comparten. Está
-  escrito así a propósito en `herramientas.md` y en `traspaso-a-otra-sesion.md`.
-- No tengo canal de mensajes con la sesión de Outbound desde aquí.
+Resultado: **cero conversaciones con un decisor, cero reuniones, cinco de seis
+colgaron ellos.** Y la causa no es el guion:
 
-Cuando lleguen: **pide también las grabaciones.** La transcripción no sirve para juzgar la
-pronunciación; Deepgram escribe «Michael» sobre un «Máikel» bien dicho, y el 21-sep se concluyó al
-revés sobre esa base.
+1. **El briefing nunca ha llegado a Raquel.** El prompt escribe los huecos con
+   llave simple (`{nombre}`) y Vapi solo sustituye `{{doble}}`. Cero
+   placeholders correctos en todo el prompt. Todo lo mandado en `variableValues`,
+   desde siempre, se ha descartado en silencio, y se oye a Raquel leyendo el
+   hueco en voz alta: *«¿Podrías hablar con nombre de la persona?»*
+2. **`firstMessage` es `"Hola, buenos días. {{apertura}}"` y `apertura` no se
+   manda nunca.** El primer turno va vacío, el otro contesta «¿hola?» y Raquel
+   repite el saludo. Pasa en las seis, por construcción.
+3. **`agendar` no existe.** `tools: []`, `functions: []`. El asistente cuyo
+   objetivo declarado es «no vendes: agendas» no tiene forma de agendar.
+4. **Corre la v4**, no la v5 (`updatedAt` 2026-09-22).
 
-### Lo que sí se puede decir de esas 6 llamadas sin las transcripciones
+Esto corrige dos cosas que yo escribí antes atribuyéndolas al modelo y que eran
+configuración: el bucle de «¿hola?», y lo de «creerse falsos nombres» del
+22-sep. Cuando preguntó por «Diga» no se estaba creyendo un nombre: estaba
+rellenando un hueco vacío con lo último que había oído.
 
-Que salieron con **tres de los cuatro defectos del 22-sep abiertos**, y contra la decisión escrita
-ese día de no volver a marcar hasta cerrarlos:
-
-| Defecto del 22-sep | ¿Cerrado hoy? |
-|---|---|
-| Sin DTMF: no sabe marcar un dígito en una centralita | **No** |
-| Narra su razonamiento en voz alta | **No** — volvió a pasar el 29-sep |
-| Se cree falsos nombres («Diga») | **No** — no está en la v5 |
-| Repite la apertura palabra por palabra | **No** — no está en la v5 |
-
-Y un caso concreto: **Microfusa ya se llamó el 22-sep** y acabó en una centralita sin salida. La de
-hoy es su segundo toque, el máximo: esa ficha está agotada.
-
-Lo más probable es que las transcripciones confirmen esos defectos, no que revelen otros. El
-problema no está en el guion.
+Y una corrección sobre la pronunciación: **el prompt en producción ya escribe
+«Máikel Echevarría» con tilde y «Cualivo» con C**, y las transcripciones siguen
+diciendo «Michael» y «Qualibo». O la transcripción miente —el aviso del
+22-sep— o la grafía en el prompt no basta, porque GPT-4o **genera** la frase en
+vez de copiarla y lo que llega a ElevenLabs es lo que generó el modelo. Se
+decide escuchando las grabaciones, y solo así.
 
 ## Hallazgos del día, sobre los datos
 
@@ -94,15 +94,22 @@ problema no está en el guion.
 
 ## Pendiente de Máikel, por orden
 
-1. **Las claves**, que él pegue en esta sesión: `.vapi_key`, `.vapi_assistant_id`,
-   `.vapi_phone_id`, `.smartlead_key`, y `.ghl_key` / `.ghl_loc` / `.ghl_calendar` para registrar.
-   Sin la de Smartlead no puedo leer el correo literal que recibió cada lead, y sin eso la frase
-   «Máikel te escribió porque…» sería inventada.
-2. **La decisión de arriba**: opción 1 o opción 2.
-3. **Aplicar o no la v5 en el asistente de Vapi.** Escrita desde el 29-sep y **sin aplicar**.
+1. **Ok a las cuatro correcciones del asistente**, por orden de impacto y
+   detalladas en `pruebas-30sep.md`: llaves dobles · `apertura` · la tool
+   `agendar` · aplicar la v5. Las tres primeras son minutos; `agendar` es medio
+   día con el webhook de n8n. **No toco el asistente de producción sin su ok.**
+2. **Confirmar el número emisor.** El `phoneNumberId` que pasó (`2f99f0e4-…`) no
+   es el de `traspaso-a-otra-sesion.md` (`b60821ae-…`).
+3. **La decisión de arriba**: opción 1 o opción 2.
 4. **Ok al bloque de Lorente** tal como está, o correcciones.
 5. **Ok a llamar**, y a qué banda de la cola.
 6. **¿Se extraen clínicas de Madrid y Barcelona?** El script ya está escrito para esas ciudades.
+
+Claves: ya están. Viven en el scratchpad de esta sesión y **no van al repo**.
+Falta solo `.ghl_calendar` (qualivo-20 es `zBlsw8BEKA2zah81YlOl` según el
+traspaso, sin confirmar). El `.gitignore` ya cubre los nombres de fichero que
+usan los scripts: antes no, y `captacion/scripts/` está dentro del repo, así que
+un `git add -A` las habría publicado.
 
 ## Preguntas de criterio que el rol no resuelve
 
