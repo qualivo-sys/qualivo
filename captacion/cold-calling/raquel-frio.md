@@ -183,6 +183,51 @@ y he dejado el silencio en 60**, y el motivo es concreto:
 Si tras la primera tanda una centralita se sigue comiendo más de un minuto, bajo
 la duración. Pero no toco el silencio.
 
+## 30-sep 16:42 · primera llamada de prueba: FALLA POR CUOTA DE VOZ
+
+```
+callId        01a0f2c4-1b3f-7ccf-a732-dc86a1a67d49
+destino       +34 663 375 205 (móvil de Máikel)
+duración      0,4 s
+final         pipeline-error-eleven-labs-quota-exceeded
+transcripción vacía · no llegó a sonar nada
+```
+
+**La cuenta de ElevenLabs se ha quedado sin crédito.** No es el asistente, no es
+el guion y no es el número: es el proveedor de voz.
+
+Cuándo pasó, según el listado de llamadas de la cuenta:
+
+| | |
+|---|---|
+| 30-sep 09:19 · las 6 llamadas en frío | la voz funcionaba |
+| 30-sep 14:42 · esta prueba | cuota agotada |
+
+O sea que se agotó **hoy, entre las 11:19 y las 16:41 de Madrid**. Las seis
+llamadas de la mañana fueron de las últimas que salieron con voz.
+
+### Qué significa
+
+**No se puede llamar a nadie hasta que Máikel recargue ElevenLabs.** Ni la tanda
+de diez, ni una sola. Cualquier llamada que se lance ahora muere en cuatro
+décimas de segundo sin que suene el teléfono.
+
+Lo bueno: costó 0,0008 USD averiguarlo, y se averiguó con una llamada a su propio
+móvil en vez de quemando diez leads buenos. Si la tanda hubiera salido sin esta
+prueba, habríamos gastado los dos toques de diez empresas en llamadas que no
+suenan, y `eFISIO` —el mejor lead de la lista, con cero toques— se habría quedado
+con un toque gastado a cambio de nada.
+
+### Regla nueva, y es barata
+
+**La primera llamada de cada tanda va al móvil de Máikel, siempre.** Cuesta menos
+de un céntimo, tarda cuatro décimas si algo va mal, y detecta de golpe la cuota de
+voz, el número emisor caído, el expediente de Twilio rechazado y el asistente mal
+configurado. Ninguna de esas cuatro cosas se ve desde el repo.
+
+Es lo mismo que ya dice `diseno.md` («día 1 del piloto: 3 llamadas supervisadas»),
+solo que aplicado a cada tanda y no solo al primer día.
+
 ## Lo que NO se ha tocado
 
 - **`Qualivo SDR` sigue existiendo.** No lo retiro hasta que el agente de Growth confirme
