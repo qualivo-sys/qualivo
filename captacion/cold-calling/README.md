@@ -56,9 +56,31 @@ colgaron ellos.** Y la causa no es el guion:
 2. **`firstMessage` es `"Hola, buenos días. {{apertura}}"` y `apertura` no se
    manda nunca.** El primer turno va vacío, el otro contesta «¿hola?» y Raquel
    repite el saludo. Pasa en las seis, por construcción.
-3. **`agendar` no existe.** `tools: []`, `functions: []`. El asistente cuyo
-   objetivo declarado es «no vendes: agendas» no tiene forma de agendar.
+3. **`agendar` no existe en ese asistente.** `tools: []`, `functions: []`.
 4. **Corre la v4**, no la v5 (`updatedAt` 2026-09-22).
+
+### Y la causa de la causa: llamamos con el asistente equivocado
+
+Hay **cinco asistentes en Vapi** y dos importan. `Raquel · Landing Diagnóstico`
+(`af978111-…`), que el agente de Growth mantiene a diario desde el 16-sep, tiene
+las llaves dobles bien, las tools `agendar_diagnostico` y `huecos_disponibles`,
+`server` a `qualivo.io/api/vapi-fin`, y silencio a 60 s. `Qualivo SDR`
+(`fe2ed34d-…`), el que hizo las 6 llamadas, no tiene nada de eso y lleva
+congelado desde el 22-sep.
+
+`api/agendar.js` **está escrito y en producción** desde el 18-sep, con su primera
+cita real cerrada. Así que **corrijo lo que dije**: crear `agendar` no era medio
+día de trabajo, ya existe. Lo que falta es dejar de llamar por el asistente
+abandonado.
+
+Propuesta: **clonar `Raquel · Landing Diagnóstico` como `Raquel · Frío`**,
+cambiarle apertura (rama de gatekeeper, que en frío no hay nombre de persona) y
+variables, y retirar `Qualivo SDR`. Preguntas abiertas enviadas al agente de
+Growth el 30-sep; contestará en un fichero de su rama.
+
+Y el aprendizaje de fondo: **dos sesiones llevaban ocho días trabajando el mismo
+canal de voz sin verse**, con el repo señalando el asistente congelado como «el
+saliente». Los arreglos de Growth nunca llegaron a las llamadas en frío.
 
 Esto corrige dos cosas que yo escribí antes atribuyéndolas al modelo y que eran
 configuración: el bucle de «¿hola?», y lo de «creerse falsos nombres» del

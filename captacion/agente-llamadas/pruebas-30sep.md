@@ -73,7 +73,7 @@ primer turno va vacío por construcción.
 
 ---
 
-## EL BLOQUEANTE · Raquel no puede agendar
+## EL BLOQUEANTE · este asistente no puede agendar, pero otro sí
 
 El prompt dice *«usa la tool `agendar` con el hueco elegido»*. En el asistente:
 
@@ -83,12 +83,45 @@ functions: []
 toolIds:   null
 ```
 
-**La herramienta no existe.** El asistente cuyo objetivo declarado es «no
-vendes: agendas» no tiene forma de agendar. Aunque una llamada saliera perfecta
-y el prospecto dijera sí, no habría cita.
+**La herramienta no existe en «Qualivo SDR».** El asistente cuyo objetivo
+declarado es «no vendes: agendas» no tiene forma de agendar. Aunque una llamada
+saliera perfecta y el prospecto dijera sí, no habría cita.
 
-Esto por sí solo explica por qué el canal no ha producido reuniones por esta
-vía: no podía.
+### Y aquí está lo importante: hay DOS asistentes, y llamamos con el malo
+
+En la cuenta de Vapi hay cinco asistentes. Dos importan:
+
+| | `Raquel · Landing Diagnóstico` | `Qualivo SDR` ← el de hoy |
+|---|---|---|
+| id | `af978111-4c4e-4373-ba7b-91827bd3efde` | `fe2ed34d-82e9-4c6b-b351-8acf90d9dcce` |
+| actualizado | **29-sep** | 22-sep |
+| tools | `agendar_diagnostico` · `huecos_disponibles` | **ninguna** |
+| `firstMessage` | `Hola, ¿{{nombre}}? Soy Raquel…` | `Hola, buenos días. {{apertura}}` |
+| variables `{{dobles}}` | `nombre` `email` `email_dominio` `fuga` `origen` | **ninguna** |
+| huecos `{simples}` muertos | ninguno | **6** |
+| `server` | `qualivo.io/api/vapi-fin` | el webhook de n8n |
+| buzón / silencio | sí / 60 s | sí / 45 s |
+
+El asistente de la izquierda lo mantiene el agente de Growth a diario desde el
+16-sep, y tiene resuelto casi todo lo que este documento enumera como abierto:
+llaves dobles, tool de agenda, registro de fin de llamada, no repetir el saludo
+cuando coge otra persona, preguntar «¿hablo con {{nombre}}?», mensajes de
+relleno mientras consulta huecos, duración leída del calendario.
+
+Y el endpoint de agenda **está escrito y desplegado**:
+`api/agendar.js` en la rama `claude/qualivo-landing-vercel-nubk1i`, sobre el
+calendario `zBlsw8BEKA2zah81YlOl`. Su propio comentario de cabecera dice por qué
+existe: *«el workflow de n8n al que apuntaba el asistente contesta 200 con el
+cuerpo vacío, y Vapi entonces registra "No result returned"»*. Es exactamente el
+webhook al que sigue apuntando «Qualivo SDR».
+
+**Corrección de lo que escribí antes en este mismo fichero:** dije que crear
+`agendar` era «medio día con el webhook de n8n». No lo es. Está hecho, probado y
+en producción desde el 18-sep, con su primera cita real cerrada (Grupo Rumy). Lo
+que falta no es construirlo, es dejar de llamar por el asistente abandonado.
+
+La bitácora de todo eso está en `captacion/agente-llamadas/bitacora-raquel.md`,
+en la rama de Growth. Merece leerse entera antes de tocar nada de voz.
 
 ---
 
@@ -178,17 +211,46 @@ Dos cosas que hay que tocar:
 
 ---
 
-## Las cuatro correcciones, por orden de impacto
+## La corrección, que ya no son cuatro sino una
 
-| # | Qué | Coste | Sin esto… |
-|---|---|---|---|
-| 1 | Cambiar `{simple}` por `{{doble}}` en las 6 variables del prompt | 5 min | el briefing nunca llega y Raquel lee los huecos en voz alta |
-| 2 | Mandar `apertura` en `variableValues`, o quitarlo del `firstMessage` | 5 min | el primer turno va vacío y se provoca el bucle de «¿hola?» |
-| 3 | Crear la tool `agendar` y engancharla al asistente | medio día con el webhook de n8n | no puede haber reuniones por teléfono |
-| 4 | Aplicar la v5 (REGLA CERO + buzones) | 10 min | sigue en producción el guion que dijo «Colgar sin dejar mensaje» |
+Lo que hay que hacer **no es arreglar «Qualivo SDR»**. Es partir del asistente
+que ya funciona.
 
-Las cuatro son cambios en el asistente de producción y **ninguna se toca sin el
-ok de Máikel**.
+**Propuesta: clonar `Raquel · Landing Diagnóstico` como `Raquel · Frío`**, y
+cambiarle solo lo que el frío necesita:
+
+1. **La apertura.** La suya asume entrada caliente («acabas de pedir el
+   diagnóstico»). En frío no hay nada pedido, y en las 604 fichas de Maps y los
+   20 leads de campaña **no hay nombre de persona**: contesta recepción. Hace
+   falta la rama de gatekeeper y la respuesta a «¿de qué se trata?».
+2. **Las variables.** Las suyas son de landing (`fuga`, `origen`,
+   `email_dominio`). El frío necesita empresa, categoría, ciudad y el dato del
+   correo previo si existe. Todas con `{{doble}}`.
+3. **Retirar «Qualivo SDR»** para que nadie vuelva a lanzar por ahí.
+
+Y una que no depende del asistente: **el guion v5 del repo se queda como
+documento de criterio**, porque el asistente vivo ya lleva por delante casi
+todo lo que la v5 arregla. Aplicar la v5 sobre «Qualivo SDR» sería pulir el
+coche que no vamos a conducir.
+
+Nada de esto se toca sin el ok de Máikel, y hay preguntas abiertas para el
+agente de Growth (si el clon puede reutilizar `agendar_diagnostico` y
+`huecos_disponibles` con el mismo token, si algo sigue apuntando a «Qualivo
+SDR», y qué se concluyó de la pronunciación).
+
+## Lo que esto enseña, y es lo más caro del día
+
+El fallo de las llaves simples y el `{{apertura}}` sin enviar **se habrían visto
+en la primera llamada leyendo una transcripción entera**. Se leyeron para juzgar
+la pronunciación, que es justo lo que una transcripción no puede decir, y no para
+comprobar si el dato del lead había llegado, que es justo lo que sí puede decir.
+
+Y el segundo, mayor: **dos sesiones han estado trabajando sobre el mismo canal
+de voz sin verse.** Growth iteraba a diario sobre un asistente; el outbound
+lanzaba por otro, congelado el 22-sep, con la documentación del repo
+(`traspaso-a-otra-sesion.md`) señalando el congelado como «el asistente
+saliente Raquel». Ocho días de arreglos no han llegado a las llamadas en frío
+porque nadie comprobó que apuntaban al mismo sitio.
 
 Y una que no es de guion: **el `{{apertura}}` mal enganchado y las llaves
 simples se habrían visto en la primera llamada de prueba si alguien hubiera
@@ -305,6 +367,9 @@ AI:   Hola, buenos días. ¿Podría hablar con la persona que lleva la parte de
 | tools / functions | **vacío** ← no existe `agendar` |
 | server (fin de llamada) | webhook de n8n `agente-llamadas-resultados` |
 
-> El `phoneNumberId` que pasó Máikel (`2f99f0e4-…`) **no es** el que figura en
-> `traspaso-a-otra-sesion.md` (`b60821ae-…`). Conviene confirmar cuál es el
-> número emisor vivo antes de la siguiente tanda.
+> El `phoneNumberId` que pasó Máikel (`2f99f0e4-…`) no es el de
+> `traspaso-a-otra-sesion.md` (`b60821ae-…`), y **el bueno es el de Máikel**: la
+> bitácora de Growth del 18-sep lo explica. Twilio rechazó tres veces el alta de
+> un móvil español (bundles v1-v3, código 18001), así que las llamadas salen con
+> el móvil de Máikel verificado como identificador sobre la troncal SIP. El
+> `traspaso` está desactualizado en ese punto.
