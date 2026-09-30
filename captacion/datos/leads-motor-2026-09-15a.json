@@ -1,0 +1,112 @@
+[
+ {
+  "email": "oriol.aldoma@talkualfoods.com",
+  "first_name": "Oriol",
+  "last_name": "Aldoma Pubill",
+  "company_name": "TALKUAL",
+  "dom": "talkualfoods.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "marc@hubtype.com",
+  "first_name": "Marc",
+  "last_name": "Caballe May",
+  "company_name": "Hubtype",
+  "dom": "hubtype.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "diego@affilired.com",
+  "first_name": "Diego",
+  "last_name": "Gomila Bellot",
+  "company_name": "Affilired",
+  "dom": "affilired.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "pclavel@curapath.com",
+  "first_name": "Philippe",
+  "last_name": "Clavel",
+  "company_name": "Curapath",
+  "dom": "curapath.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "carles@easypromosapp.com",
+  "first_name": "Carles",
+  "last_name": "Bonfill",
+  "company_name": "Easypromos",
+  "dom": "easypromosapp.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "sofia@libeen.com",
+  "first_name": "Sofia",
+  "last_name": "Iturbe",
+  "company_name": "LIBEEN Smart Housing",
+  "dom": "libeen.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "cyril.pierre@aplanet.org",
+  "first_name": "Cyril",
+  "last_name": "Pierre",
+  "company_name": "APLANET",
+  "dom": "aplanet.org",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "djust@cerium.es",
+  "first_name": "Daniel",
+  "last_name": "Just",
+  "company_name": "CERIUM Tecnologías",
+  "dom": "cerium.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "viola@vdbluxuryproperties.com",
+  "first_name": "Viola",
+  "last_name": "De Bellis",
+  "company_name": "VDB Luxury Properties",
+  "dom": "vdbluxuryproperties.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "spaz@dosespacios.com",
+  "first_name": "Santiago",
+  "last_name": "Paz Noya",
+  "company_name": "DOS ESPACIOS",
+  "dom": "dosespacios.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ }
+]
