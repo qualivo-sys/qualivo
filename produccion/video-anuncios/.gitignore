@@ -4,3 +4,9 @@ __pycache__/
 ads-*.json
 out-clinicas/
 muestras-voz/
+voz-ads/vel-*
+voz-ads/pla-*
+voz-ads/cur-*
+voz-ads/cvel-*
+voz-ads/chue-*
+voz-ads/cpri-*
