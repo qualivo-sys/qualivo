@@ -14,7 +14,7 @@
 //
 // Casos: solo las cifras aprobadas (Nuria Roure 6,45 veces lo invertido; una
 // academia de formación 1.160 leads y 21 matrículas en cuatro meses; Antic
-// Barcelona 113 visitas agendadas en menos de 24 horas). No se inventa ninguna.
+// Barcelona 113 —el 113 es parte del nombre—: visitas agendadas en menos de 24 horas). No se inventa ninguna.
 
 const F = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
 const TINTA = '#101319';
@@ -111,7 +111,7 @@ const SECTOR = {
     n3: 'Cuántas visitas llegáis a hacer.',
     n4: 'Cuánto vale de media una obra.', ventas: 'obras firmadas',
     duda: 'quien recibe el presupuesto y se lo piensa',
-    caso: 'Con Antic Barcelona, empresa de reformas, fueron 113 visitas agendadas en menos de 24 horas.'
+    caso: 'Con Antic Barcelona 113, carpintería a medida, las visitas se agendan en menos de 24 horas desde que el cliente pide presupuesto.'
   },
   otro: {
     persona: 'persona', contactos: 'contactos nuevos', piden: 'pide información',

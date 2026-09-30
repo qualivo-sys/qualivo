@@ -605,7 +605,7 @@ parecido:
 |---|---|
 | Formación | «Una academia de formación: 1.160 solicitudes y 21 matrículas en cuatro meses.» |
 | Clínica | «Nuria Roure: 6,45 veces lo invertido.» |
-| Reformas | «Antic Barcelona: 113 visitas agendadas en menos de 24 horas.» |
+| Reformas | «Antic Barcelona 113 (carpintería a medida): visitas agendadas en menos de 24 horas desde que el cliente pide presupuesto.» |
 
 ## Lo que tiene que producirse (resumen)
 

@@ -93,7 +93,7 @@ Enlace: `qualivo.io/intelligence/?sector=clinica&empresa=NOMBRE&objetivo=seguimi
 Misma estructura. Enlaces:
 
 - `qualivo.io/intelligence/?sector=inmobiliaria&empresa=NOMBRE`: la mayor fuga está entre la visita y la oferta. Demo: una pareja pide visita desde Idealista (Irene Castaño).
-- `qualivo.io/intelligence/?sector=reformas&empresa=NOMBRE`: la mayor fuga está entre contestar y agendar la visita técnica. Demo: una familia pide presupuesto de cocina y baño (Nerea Olmedo). Caso para citar: Antic Barcelona 113, visitas agendadas en menos de 24 horas.
+- `qualivo.io/intelligence/?sector=reformas&empresa=NOMBRE`: la mayor fuga está entre contestar y agendar la visita técnica. Demo: una familia pide presupuesto de cocina y baño (Nerea Olmedo). Caso para citar: Antic Barcelona 113 (carpintería a medida; el 113 es parte del nombre, no una cifra): visitas agendadas en menos de 24 horas desde que el cliente pide presupuesto.
 - `qualivo.io/intelligence/?sector=otro&empresa=NOMBRE`: negocio de servicios genérico. Demo: una empresa pide información desde Google (Sofía Herrero).
 
 ---

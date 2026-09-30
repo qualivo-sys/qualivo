@@ -461,7 +461,7 @@ Solo uno, del sector más parecido, y con estas cifras exactas. No hay otras.
 - **Clínica:** «Nuria Roure: 6,45 veces lo invertido.»
 - **Formación:** «Una academia de formación: 1.160 leads y 21 matrículas en
   cuatro meses.»
-- **Reformas:** «Antic Barcelona: 113 visitas agendadas en menos de 24 horas.»
+- **Reformas:** «Antic Barcelona 113 (carpintería a medida): visitas agendadas en menos de 24 horas desde que el cliente pide presupuesto.»
 
 ### 19-22 · Qué incluye
 
