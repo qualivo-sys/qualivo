@@ -1,28 +1,59 @@
 # Cómo priorizar las 612 fichas de Maps para llamar · 30-sep-2026
 
-> **No he visto el fichero.** `maps_pool.json` está en el scratchpad de la
-> sesión de Outbound, no en el repo. Esto es el criterio y los comandos para
-> aplicarlo en cuanto esté; los recuentos por banda solo se pueden dar después
-> de pasarlo.
+Recuentos reales sobre `captacion/datos/maps-pool-612.json`, no estimados.
 
-## Por qué esto importa más de lo que parece
+## El titular: el pool útil es la mitad de lo que parece
 
-604 fichas con teléfono. El piloto de voz va a **5–8 llamadas al día**
-(`captacion/agente-llamadas/diseno.md`). Eso son **entre 75 y 120 días
-laborables** para agotar la lista.
+| | fichas |
+|---|---:|
+| Total | 612 |
+| Sin teléfono | 8 |
+| **Reformas, carpintería, construcción, muebles y afines** | **315** |
+| Salud y estética (dental, fisio, estética, médico) | 204 |
+| Formación (centros, academias, escuelas de negocio) | 93 |
+| **En juego: salud/estética + formación, con teléfono** | **293** |
 
-Dicho de otra forma: el orden de esta cola decide a quién se llama hasta
-enero. No es un ejercicio de limpieza, es la decisión comercial del trimestre.
+**315 de 612 fichas, el 51 %, son de los sectores que hay que aparcar.** Reformas tiene 14
+diagnósticos y cero nivel A (`estrategia/mapa-sectores-29sep.md`); carpintería no tiene ninguna
+evidencia y el perfil típico es de una a tres personas, fuera del ICP.
 
-Y el margen es real: en septiembre, 100 llamadas dieron 7 reuniones (7%)
-frente a 3.065 correos con 26 respuestas (0,85%). Si la lista se ordena mal,
-se gasta el canal bueno en las empresas malas.
+Eso cambia la aritmética: no son 604 fichas a 5-8 llamadas al día (120 días laborables), son
+**293 a 5-8 al día, unos 37-58 días**. Sigue siendo un trimestre, pero es abarcable.
+
+Las 8 sin teléfono, para que no se busquen: Clínica Estética Eranza · Clinica Cosmos Medicina
+Estética · Clínica Dental Dr. Cerezuela · Academia SEO Local Tribu Local · AlKofer Sevilla ·
+Reformando Zaragoza · Sg Multiservicios · Atelier Nogal.
+
+## El sector y la ciudad son la misma variable en este pool
+
+| Grupo | Sevilla | València | Zaragoza | Málaga | Madrid | Barcelona |
+|---|---:|---:|---:|---:|---:|---:|
+| Salud / estética | 71 | 63 | 33 | 28 | 0 | 0 |
+| Formación | 0 | 0 | 0 | 0 | 49 | 43 |
+
+La extracción se hizo sector por ciudad y no se solapan. Dos consecuencias prácticas:
+
+1. **Agrupar por ciudad y agrupar por vertical es lo mismo.** Simplifica las tandas.
+2. **No hay ni una clínica de Madrid o Barcelona en el pool.** Y son los dos mercados donde el
+   ticket de un tratamiento dental supera el suelo de 1.000 € con más holgura. Es un hueco de la
+   extracción, no del sector: si clínicas es la vertical de mejor calidad medida (50 % de nivel A),
+   falta justamente donde mejor pagaría. **Merece una extracción de clínicas en Madrid y
+   Barcelona** con `captacion/scripts/maps_sector.py`, que ya está escrito para esas dos ciudades.
+
+## Comprobaciones de higiene, ya hechas
+
+- **Dominios bloqueados en el pool: cero.** Comprobados los seis contra las 612 fichas.
+- **Dominios repetidos dentro del pool: cero.** El dedupe interno está bien hecho.
+- **El cruce con la lista de calientes NO está hecho, y hace falta.** Clínica Dental Dr. Lorente
+  está en las dos listas, con dos teléfonos distintos (963312771 en el lead de campaña,
+  961143957 en la ficha de Maps como sede «Alameda»). Sin cruzar, esa clínica recibe dos llamadas
+  frías como si fuera dos empresas. Se cruza por dominio antes de montar ninguna cola.
 
 ---
 
 ## La regla que manda: la inversión, no el sector
 
-Está medido y escrito en `estrategia/mapa-sectores-29sep.md`:
+Está medido en `estrategia/mapa-sectores-29sep.md`:
 
 | Sector | Diagnósticos | Nivel A | Tasa |
 |---|---|---|---|
@@ -30,65 +61,67 @@ Está medido y escrito en `estrategia/mapa-sectores-29sep.md`:
 | Formación | 12 | 5 | **42 %** |
 | Reformas | 14 | **0** | **0 %** |
 
-Y la conclusión que sacó el propio mapa: *«el filtro no es el sector, es la
-inversión»*. 21 de 30 diagnósticos venían por debajo del suelo de 500 €/mes.
-
-Así que el orden se construye con **la señal de inversión por delante** y el
-sector como desempate, no al revés.
+Y su conclusión: *«el filtro no es el sector, es la inversión»*. 21 de 30 diagnósticos venían por
+debajo del suelo de 500 €/mes. Así que la señal de inversión va por delante y el sector desempata.
 
 ---
 
-## Capa 0 · exclusiones duras (gratis, instantáneo, antes de nada)
+## Capa 0 · exclusiones duras (gratis, antes de nada)
 
-Se quitan de la cola de teléfono, sin discusión:
+1. Las **8 fichas sin teléfono**.
+2. Los **seis dominios bloqueados** (ya comprobado: ninguno está en el pool).
+3. **Las fichas sin web.** En este pool no hay ninguna: las 612 traen dominio.
+4. **Las 315 de reformas, carpintería y construcción**, aparcadas para frío hasta que una dé un
+   nivel A.
+5. **Cualquier ficha ya tocada.** Cruce contra los leads de Smartlead, contra
+   `captacion/datos/calientes-30sep.json` y contra
+   `captacion/agente-llamadas/historial_llamadas.json`. **No es opcional:** el incidente de
+   reenvíos de agosto (`captacion/incidente-reenvios-smartlead-2026-08.md`) costó una queja LOPD
+   por repetir contacto. Repetirlo ahora por no cruzar dos JSON sería peor, porque sería a mano.
 
-1. **Las 8 fichas sin teléfono.** No sirven para este canal.
-2. **Los seis dominios bloqueados**: growitschool.com ·
-   growthhackingcourse.io · anticbarcelona113.es · formacion.ninja ·
-   kubysoft.com · escolaeronauticadecatalunya.cat. Clientes y ex clientes.
-3. **Las fichas sin web.** El ICP V1 exige «web o campañas» como una de las
-   tres piezas. Sin web no hay ninguna de las dos. No es un juicio de valor:
-   es el propio criterio.
-4. **Cualquier ficha ya tocada**, por correo o por teléfono. Se cruza contra
-   los leads de Smartlead y contra
-   `captacion/agente-llamadas/historial_llamadas.json`. **Este cruce no es
-   opcional**: el incidente de reenvíos de agosto
-   (`captacion/incidente-reenvios-smartlead-2026-08.md`) costó una queja LOPD
-   por repetir contacto por fallo de sistema. Repetirlo ahora por no cruzar un
-   fichero sería peor, porque sería a mano.
-5. **Reformas y carpintería, aparcadas para frío.** Reformas: 14
-   diagnósticos, cero nivel A. Carpintería: ninguna evidencia, y el perfil
-   típico de la ficha es de 1 a 3 personas, que queda fuera del ICP. Que
-   sigan entrando por anuncios si son baratas, pero no se les gasta una
-   llamada hasta que una dé un nivel A.
-
-Quedan en juego: **clínica dental, fisioterapia, estética, centros de
-formación y escuelas de negocio.**
+Quedan **293**.
 
 ---
 
-## Capa 1 · la sonda que ya tenemos, sobre los dominios (gratis)
+## Capa 1 · la sonda que ya existe, sobre los 293 dominios (gratis)
 
-No hace falta inventar nada: `captacion/scripts/probe_dataset.py` ya devuelve
-exactamente las señales que necesitamos, cuesta cero créditos y deduplica
-contra lo ya sondeado.
+`captacion/scripts/probe_dataset.py` devuelve exactamente las señales que hacen falta, cuesta cero
+créditos y deduplica contra lo ya sondeado.
 
 ```bash
-# 1. maps_pool.json -> [{"web": "dominio.es", "v": "clinicas"}, ...]
-# 2. sondear (acumula y deduplica en el CSV de siempre)
+python3 - <<'PY'
+import json
+d = json.load(open('captacion/datos/maps-pool-612.json'))
+# filtrar a los 293 y volcar como [{"web": dom, "v": grupo}]
+PY
 python3 captacion/scripts/probe_dataset.py captacion/datos/maps-webs.json
 ```
 
-Columnas que devuelve y que usamos: `formularios`, `campos_email`, `gtm`,
-`ga4`, `meta_pixel`, `linkedin_pixel`, `google_ads`, `hubspot`, `chat`,
-`whatsapp`, `mailto_generico`, `estado`.
+### ARREGLAR LA SONDA ANTES DE PUNTUAR
+
+`probe_dataset.py` da `estado: OK` con solo pasar de 2.500 bytes. Una pantalla de Cloudflare pesa
+más que eso, así que cuela como web buena con todas las señales a cero.
+
+Lo encontré en la primera web que sondé: `dentallorente.com` devuelve 12.054 bytes de «One moment,
+please…». Leído tal cual, esa clínica parece no medir ni invertir nada.
+
+Prevalencia sobre `captacion/datos/probe-dataset.csv`, 2.532 filas en `OK`:
+
+| | filas |
+|---|---:|
+| Título de WAF (Cloudflare, «Just a moment…», «Attention Required») | **15** · falso negativo seguro |
+| Todas las señales a cero por otro motivo | 285 · a revisar |
+
+Arreglo, dos líneas: marcar `BLOQUEADA_O_CAIDA` si el cuerpo o el título contiene *one moment ·
+just a moment · checking your browser · attention required · access denied*.
+
+Y la regla que ya está escrita en `herramientas.md` y aquí se ve por qué: **una señal positiva de
+la sonda es un hecho; una negativa no es nada.** Nunca se descarta una empresa por lo que la sonda
+NO vio.
 
 ### La puntuación
 
-Tres bloques, y el de inversión pesa el doble que los otros porque es el que
-predice el nivel A.
-
-**Inversión (lo que más pesa)**
+**Inversión (pesa el doble, es lo que predice el nivel A)**
 
 | Señal | Puntos |
 |---|---:|
@@ -114,107 +147,123 @@ predice el nivel A.
 
 | Señal | Puntos |
 |---|---:|
-| 0 formularios, 0 píxeles y solo `mailto_generico` | **−2** |
-| `estado` = `BLOQUEADA_O_CAIDA` | no puntúa · va a «revisar a mano» |
+| 0 formularios, 0 píxeles y solo `mailto_generico`, con la web leída de verdad | **−2** |
+| WAF o web caída | no puntúa · a «revisar a mano», **nunca descartada** |
 
-Una web escaparate con un `info@` y nada más es, casi siempre, una empresa de
-una a tres personas. Es la antiseñal más fiable que da la sonda.
+Una web escaparate con un `info@` y nada más es, casi siempre, una empresa de una a tres personas.
+Es la antiseñal más fiable que da la sonda — **siempre que la sonda haya leído la web**.
 
 ---
 
-## Capa 2 · tamaño, y solo sobre los que ya puntúan
+## Capa 2 · tamaño, solo sobre los que ya puntúan
 
-El ICP pide 5–50 personas y la ficha de Maps no lo dice. Se resuelve con
-Apollo, pero **solo para los que salen de la capa 1 con 4 puntos o más**, para
-no quemar créditos en fichas que ya no van a llamarse.
+El ICP pide 5-50 personas y la ficha de Maps no lo dice. Se resuelve con Apollo, pero **solo para
+los que salgan de la capa 1 con 4 puntos o más**.
 
-Hay un punto importante aquí: **lo que falló hoy con Apollo fue el correo de
-personas, no el dato de empresa.** De 10 decisores enriquecidos, 8 volvieron
-con `email_status: unavailable`. El tamaño de plantilla por dominio es otro
-endpoint (`organizations_enrich`), y ese sí responde. No se puede concluir del
-fallo de los correos que Apollo no sirva para esto.
+Lo que falló el 30-sep con Apollo fue **el correo de personas, no el dato de empresa**: 8 de 10
+volvieron `email_status: unavailable`. El tamaño de plantilla por dominio es otro endpoint. Y
+`apollo_organizations_lookup` es **gratis** según `herramientas.md`: se empieza por ahí y solo se
+paga `mixed_companies_search` si el lookup no lo trae.
 
-Créditos disponibles: 2.467 hasta el 14 de octubre. De sobra.
+Filtro: fuera los de 1-4 empleados y los de más de 50.
 
-Filtro: **fuera los de 1–4 empleados y los de más de 50.** Los de más de 50
-no son ICP tampoco, aunque duela descartarlos.
+Si Apollo no tiene la empresa, **no se descarta**: se marca `tamano-desconocido` y se comprueba en
+la propia llamada («¿quién lleva eso ahí, tienes a alguien llamando o lo lleváis entre todos?»).
 
-Si Apollo no tiene la empresa, no se descarta: se marca `tamano-desconocido` y
-se comprueba en la propia llamada con la pregunta «¿y quién lleva eso ahí,
-tienes a alguien llamando o lo lleváis entre todos?». Esa pregunta ya está en
-el guion.
+Dos pistas de tamaño gratis que no dan ni la sonda ni Apollo:
+
+- **Varios teléfonos o varias sedes publicadas** en la misma web o en varias fichas de Maps del
+  mismo dominio. Dr. Lorente tiene dos números y dos sedes: es la mejor pista de que pasa el suelo
+  de 5 personas.
+- **El propio nombre de la ficha**: «Dentista» y «Fisioterapeuta» como categoría (14 y 1 fichas)
+  apuntan a consulta individual mucho más que «Clínica dental».
 
 ---
 
 ## Capa 3 · el orden de marcado
 
-**Antes de cualquier ficha fría van los 15 leads calientes** de
-`captacion/llamadas-calientes-30sep.md`. Ya recibieron correo y lo abrieron
-tres veces o más: ninguna ficha fría vale lo que uno de esos. (Menos los que
-ya llevan dos toques: Microfusa ya está agotada, ver más abajo.)
+**Antes de cualquier ficha fría van los leads calientes.** Ya recibieron correo y lo abrieron tres
+veces o más. Pero la lista de calientes necesita tres arreglos primero, ver la sección siguiente.
 
-Después, las fichas frías en cuatro bandas:
+| Banda | Quién entra | Cuántos hay | Por qué |
+|---|---|---:|---|
+| **1** | Salud y estética con píxel de anuncios y 5-50 empleados | de los 195 | 50 % de nivel A medido + inversión confirmada |
+| **2** | Formación y escuelas de negocio con píxel y 5-50 empleados | de los 92 | 42 % de nivel A; la parte alta invierte de verdad (5.000 €/mes en un caso medido) |
+| **3** | Cualquiera de esos que mide (`gtm`+`ga4`) pero sin píxel de anuncios | — | tiene la pieza de medición y puede invertir sin píxel en la portada |
+| **4** | El resto con formulario, y los `tamano-desconocido` | — | solo si sobra capacidad |
+| **Revisar** | WAF y webs caídas | — | **no se descartan**, se miran a mano |
+| **Aparcado** | Reformas · carpintería · construcción · muebles · sin teléfono | 315 + 8 | no se marcan |
 
-| Banda | Quién entra | Por qué primero |
-|---|---|---|
-| **1** | Clínica dental · estética · fisio, con píxel de anuncios y 5–50 empleados | mejor tasa de nivel A medida (50 %) y señal de inversión confirmada |
-| **2** | Formación y escuelas de negocio, con píxel de anuncios y 5–50 empleados | 42 % de nivel A, y la parte alta del sector invierte de verdad (5.000 €/mes en un caso medido) |
-| **3** | Cualquiera de esas cinco categorías que mide (`gtm`+`ga4`) pero no tiene píxel de anuncios | tiene la pieza de medición y puede estar invirtiendo sin píxel en la home |
-| **4** | El resto con web y formulario, y los `tamano-desconocido` | solo si sobra capacidad |
-| **Aparcado** | Reformas · carpintería · sin web · sin teléfono · webs caídas | no se marcan |
+Los recuentos por banda solo se pueden cerrar después de pasar la sonda arreglada sobre los 293.
 
-Dentro de cada banda, **ordenar por puntuación descendente y, a igualdad, por
-ciudad**, agrupando Barcelona y Madrid en tandas separadas: así el que llama
-entra en contexto de un mercado a la vez y las horas punta de recepción se
-parecen entre fichas.
+Dentro de cada banda: puntuación descendente, y tandas de una ciudad a la vez (que aquí es lo
+mismo que una vertical a la vez).
+
+---
+
+## Tres arreglos en la lista de calientes, antes de marcarla
+
+### 1 · Kalu Institute tiene 18 aperturas y está enterrado
+
+`calientes-30sep.json` lo trae con **18 aperturas**, más del triple que el siguiente. Es la señal
+de intención más fuerte de todo el material. Y está en la pila de «prefijo raro» porque su número,
+790697761, no es válido en España.
+
+**18 aperturas no se aparcan: se les busca el número.** Es media hora de mirar su web.
+
+### 2 · Los cinco «prefijos raros» son números mal leídos
+
+790697761 · 803708600 · 815875657 · 790086174: ninguno es un móvil ni un fijo español válido.
+Encaja con el fallo del 22-sep, cuando cuatro de ocho números reconstruidos desde una tabla
+estaban mal porque la tabla recortaba por la derecha. **Se vuelve a la web, uno a uno.** Marcarlos
+como están es llamar a desconocidos.
+
+### 3 · Ocho de los veinte son buzones de rol, y uno no se debe llamar
+
+`cita@` · `recepcion@` · `clinica@` · `famydent@` · `academia@` · `datos@` · `consulta@` ·
+`privacidad@`. Y `herramientas.md` §6 dice «descartar siempre: buzones de rol».
+
+Para llamar sirven igual — el teléfono es de la empresa, no del buzón. Pero **las aperturas de un
+buzón de rol no prueban interés de un decisor**: pueden ser de recepción, de varias personas o de
+un escáner de correo. Se usan para ordenar, no como prueba.
+
+Y uno hay que sacarlo: **`privacidad@cbclinic.com`, con 4 aperturas.** Un buzón de privacidad
+abriendo un correo frío cuatro veces no es intención de compra. Llamar ahí es pedir una queja
+LOPD. Fuera de la cola.
+
+### Y Microfusa está agotada
+
+Aparece con 6 aperturas y en las 6 llamadas de prueba de hoy. Pero ya se la llamó el **22-sep**:
+acabó en una centralita con menú, la asistente no supo marcar un dígito y terminó en «mándennos un
+correo al departamento de marketing» (`captacion/raquel-estado-22sep.md`). Con la de hoy son **dos
+toques**, el máximo. Sale de la cola de teléfono.
 
 ---
 
 ## Lo que hay que medir desde la primera tanda
 
-Sin esto, dentro de un mes no sabremos si funcionó el guion o funcionó la
-lista. Dos cosas, y son baratas:
+Del punto 20 del rol, y ninguna cuesta dinero:
 
-1. **Anotar en cada llamada el resultado, el número que dijo el prospecto y
-   qué pregunta se le hizo** (la tabla de resultados está en
-   `guion-cold-calling-v1.md`).
-2. **Repartir las primeras 40 llamadas a propósito entre franjas horarias**
-   —10:00–11:30, 11:30–13:30, 16:00–18:00— con la misma mezcla de bandas en
-   cada franja. No tengo dato de a qué hora coge mejor el teléfono una
-   recepción de clínica, y no me lo voy a inventar: se mide en la primera
-   tanda y se ordena el resto con eso.
+- llamadas · contactos reales · conversaciones de más de 30 s · conversaciones con decisor ·
+  problemas detectados · reuniones propuestas · agendadas · celebradas · motivos de rechazo.
+- **Y la combinación** que pide el rol: vertical + email + señal + apertura + problema + pregunta.
+  Sin anotar qué pregunta se hizo, esa tabla no se puede construir nunca.
 
-### La regla de parada, que ya existe y se respeta
+**Repartir las primeras 40 llamadas a propósito entre franjas** —10:00-11:30, 11:30-13:30,
+16:00-18:00— con la misma mezcla de bandas en cada una. No tengo dato de a qué hora coge mejor el
+teléfono una recepción de clínica y no me lo voy a inventar: se mide en la primera tanda.
 
-De `diseno.md`: **si tras 40–50 llamadas no hay 2 o más reuniones, se para y
-se revisa el guion.** Se aplica por banda, no al total: una banda 1 que no
-convierte dice algo muy distinto de una banda 3 que no convierte.
+### La regla de parada, que ya existe
 
----
-
-## Dos avisos concretos sobre la lista de hoy
-
-1. **Microfusa está agotada, no es un lead.** Aparece en la lista de calientes
-   del 30-sep con 6 aperturas, y en las 6 llamadas de prueba de hoy. Pero ya
-   se la llamó el **22-sep**: la llamada acabó en una centralita con menú, la
-   asistente no supo marcar un dígito y terminó en «mándennos un correo al
-   departamento de marketing» (`captacion/raquel-estado-22sep.md`). Con la de
-   hoy son **dos toques**, que es el máximo. Sale de la cola de teléfono.
-2. **Los cinco «prefijos raros» de la lista de calientes no son prefijos
-   raros, son números mal leídos.** 790697761, 803708600, 815875657,
-   790086174: ninguno es un móvil ni un fijo español válido. Encaja
-   exactamente con el fallo del 22-sep, cuando cuatro de ocho números
-   reconstruidos desde una tabla de un informe estaban mal porque la tabla
-   recortaba por la derecha. **Antes de marcarlos hay que volver a la ficha o
-   a la web**, uno a uno. Si se marcan como están, se llama a desconocidos.
+De `diseno.md`: **si tras 40-50 llamadas no hay 2 o más reuniones, se para y se revisa el guion.**
+Se aplica por banda, no al total: una banda 1 que no convierte dice algo muy distinto de una banda
+3 que no convierte.
 
 ---
 
-## Lo que necesito para ejecutar esto
+## Lo que necesito para ejecutar
 
-1. **`maps_pool.json` en el repo.** Lo pasa la sesión de Outbound o lo pego yo
-   si me lo das. Sin él, esto es criterio sin lista.
-2. **El ok a gastar créditos de Apollo** en `organizations_enrich` sobre los
-   que pasen la capa 1 (estimo 80–150 dominios, muy por debajo de los 2.467
-   disponibles).
-3. **El ok a llamar**, y a qué banda. Yo no marco nada hasta entonces.
+1. **Clave de Smartlead** para cruzar los leads ya tocados. Sin el cruce no monto cola.
+2. **Ok a Apollo**: `organizations_lookup` es gratis; solo pediría créditos si hace falta
+   `mixed_companies_search` (estimo menos de 100 dominios de los 2.467 disponibles).
+3. **Ok a llamar, y a qué banda.** Yo no marco nada hasta entonces.

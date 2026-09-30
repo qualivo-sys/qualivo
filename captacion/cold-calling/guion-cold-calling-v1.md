@@ -1,15 +1,26 @@
-# Guion de cold calling · v1 (30-sep-2026)
+# Capa operativa de las llamadas · v1 (30-sep-2026)
 
-> Guion propio del agente de Cold Calling. **No sustituye a
-> `captacion/agente-llamadas/guion-raquel-v5.txt`**: ese es el guion de Raquel
-> para leads que YA recibieron correo y lo abrieron. Este sirve para los dos
-> casos, incluido el frío puro de las fichas de Google Maps, a las que nunca se
-> les ha escrito nada.
+> **Qué es esto y qué no es.** Escrito antes de tener el rol completo, cuando
+> el que llevaba en el system prompt estaba cortado. Ya está el rol entero en
+> `captacion/agente-llamadas/rol-cold-calling-agent.md` y **ese manda**.
 >
-> **Nadie marca con esto hasta que Máikel lo apruebe.** No está aplicado en
-> Vapi. Si se aplica en Vapi, léase antes la sección «Límites del agente de
-> voz» del final: hay tres defectos abiertos del 22-sep que este guion NO
-> arregla porque no se arreglan con texto.
+> El rol es explícito: *«No produces guiones de sector. Produces el guion de
+> esa llamada concreta»*, con el contrato del punto 19. Así que este documento
+> **no es un guion de llamada** y las preguntas por vertical de aquí no
+> sustituyen a las del punto 9 del rol.
+>
+> Lo que sí es, y el rol no cubre: **la mecánica de marcar.** Detectar un
+> contestador antes de saludar, qué hacer ante una centralita, la lista negra
+> de falsos nombres, el chequeo previo, las respuestas obligatorias de RGPD y
+> de «¿eres una máquina?», la tabla de resultados y las prohibiciones de
+> pronunciación. Eso se aplica a todas las llamadas, sea cual sea el guion.
+>
+> Ejemplo del contrato del punto 19 ya montado sobre un lead real:
+> `llamada-lorente-30sep.md`.
+>
+> **Nadie marca hasta que Máikel lo apruebe.** Nada de esto está aplicado en
+> Vapi. Léase antes la sección «Límites del agente de voz» del final: hay dos
+> defectos del 22-sep que no se arreglan con texto.
 
 ---
 
