@@ -32,12 +32,39 @@ Hecho a mano a propósito, antes de automatizar nada.
 2. **Dos números publicados = probablemente dos sedes.** Es la mejor pista de tamaño que tenemos
    de esta empresa, y apunta a que pasa el suelo de 5 personas del ICP. No está confirmado.
 
-### Lo que NO se ha podido verificar
+### El correo que recibieron · YA VERIFICADO (Smartlead, 30-sep)
 
-- **El cuerpo literal del correo que recibieron.** Hace falta
-  `GET /campaigns/<id>/leads/<leadId>/message-history` de Smartlead y **no tengo la clave**. Por
-  eso la apertura de abajo NO afirma de qué iba el correo: dice que Máikel escribió, que es un
-  hecho, y deja que lo diga el otro. El punto 16 del rol prohíbe inventar y el 19 lo repite.
+Campaña **«Clínicas · precio por WhatsApp (landing 17-sep)»**, id `3976199`, lead
+`4599964129`. Ya no hay que suponer nada:
+
+- **Asunto:** «vuestras citas»
+- **Nombre de la empresa en el lead:** «Clínica dental Dr. Lorente (Av. Francia)» — ojo,
+  **una tercera sede**: el lead es Av. Francia, la ficha de Maps es Alameda.
+- **Cuerpo, literal:**
+
+> Hola,
+>
+> He visto la ficha de Clínica dental Dr. Lorente (Av. Francia) en Google: 254 reseñas y 4,5 de
+> media en Valencia. Eso no se consigue sin que entre gente.
+>
+> Por eso os escribo. Cuando alguien pregunta precio por WhatsApp o deja sus datos en la web, lo
+> que casi nadie tiene atado es cuántos de esos acaban pidiendo cita, ni por qué se caen los demás.
+>
+> Nosotros detectamos dónde se pierden clientes en captación y ventas, y lo arreglamos con IA
+> dentro del sistema que ya tenéis.
+>
+> El primer paso es una llamada corta: me contáis cómo lo lleváis ahora y os digo qué veo.
+>
+> Puedes ver cómo funciona aquí: https://qualivo.io/clinicas/…
+>
+> ¿Os va bien esta semana?
+
+El lead trae además los campos `ciudad` y `senales`, o sea que la señal verificada que exige
+`mensajes-v3` sí está escrita en el lead.
+
+**Consecuencia para la llamada:** la apertura ya puede decir de qué iba el correo sin inventar
+nada, porque el correo lo dice. Y **tres sedes publicadas** (Av. Francia, Alameda, y el número del
+título de la web) es la mejor prueba de tamaño que tenemos: pasa el suelo de 5 personas del ICP.
 - **Las señales de su web.** La sonda devuelve `OK` pero lo que ha leído es una pantalla de
   Cloudflare («One moment, please…»), no su web. Cero señales aquí significa «no he podido
   mirar», no «no invierten». Detalle y arreglo al final.
@@ -57,13 +84,12 @@ La que vamos a comprobar, una sola:
 > Llegan peticiones de precio por WhatsApp, se contesta el precio, y quien no pide cita en ese
 > momento se queda sin que nadie vuelva a escribirle.
 
-De dónde sale: es el ángulo declarado de la campaña «Clinicas WhatsApp», escrito en
-`captacion/scripts/llamadas.py` («que muchos que preguntan precio por WhatsApp no acaban pidiendo
-cita») y en `estrategia/mapa-sectores-29sep.md` («Clínicas · precio por WhatsApp»).
+De dónde sale: **es literalmente lo que les escribió el correo** (verificado arriba). No es una
+inferencia del nombre de la campaña.
 
-**Es hipótesis, no hecho**, por dos motivos: no he leído el correo literal, y el ángulo de la
-campaña no es lo mismo que el problema de esta clínica. Si en la llamada resulta que no usan
-WhatsApp, la hipótesis cae y hay rama preparada para eso.
+**Sigue siendo hipótesis, no hecho**, y por un solo motivo: el correo dice que eso pasa «casi
+siempre» en el sector, no que pase en esta clínica. La llamada sirve para comprobarlo. Si resulta
+que no usan WhatsApp, la hipótesis cae y hay rama preparada para eso.
 
 ---
 
@@ -74,8 +100,7 @@ Todo lo que va entre comillas se pronuncia. Todo lo que no, no.
 ### A · quien coge el teléfono (es el caso real: no tenemos nombre)
 
 > «Hola, buenos días. Soy Raquel, del equipo de Máikel Echevarría, de Cualivo. Máikel os escribió
-> hace unos días por correo sobre cómo lleváis las peticiones de pacientes nuevos. ¿Quién lleva
-> ahí esa parte?»
+> hace unos días por correo, con el asunto "vuestras citas". ¿Quién lleva ahí esa parte?»
 
 Y callar.
 
@@ -92,7 +117,8 @@ entero si puedes volver a llamar.
 
 ### B · ya tienes a la persona
 
-> «Máikel te escribió hace unos días por correo. No sé si llegaste a verlo.»
+> «Máikel te escribió hace unos días por correo, el del asunto "vuestras citas". No sé si llegaste
+> a verlo.»
 
 Y callar. **No continuar hablando.**
 
