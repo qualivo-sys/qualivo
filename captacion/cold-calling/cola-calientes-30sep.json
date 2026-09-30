@@ -18,7 +18,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "eFISIO Carabanchel Usera",
    "categoria": "clínicas de fisioterapia",
    "ciudad": "Madrid",
@@ -46,7 +46,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "Logik Clinic Barcelona",
    "categoria": "clínicas",
    "ciudad": "Barcelona",
@@ -74,7 +74,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Academia MAGISTER (oficina central en Madrid)",
    "categoria": "centros de formación",
    "ciudad": "Madrid",
@@ -97,7 +97,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Plastic Academia",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -120,7 +120,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "GoKoan",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -146,7 +146,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "Famydent",
    "categoria": "clínicas",
    "ciudad": "Zaragoza",
@@ -172,7 +172,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "Clínica MUSA",
    "categoria": "clínicas",
    "ciudad": "Valencia",
@@ -195,7 +195,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Foxize School",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -218,7 +218,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Mope Formación",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -245,7 +245,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Academia de Seguridad Castilla",
    "categoria": "centros de formación",
    "ciudad": "Madrid",
@@ -271,7 +271,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "Clínica Dental Martínez Canut",
    "categoria": "clínicas",
    "ciudad": "Valencia",
@@ -294,7 +294,7 @@
   "estado": "llamable",
   "motivo": "",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "European Open Business School",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -317,7 +317,7 @@
   "estado": "revisar-numero",
   "motivo": "numero no valido en Espana: hay que sacarlo de su web",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "KALU Institute",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -344,7 +344,7 @@
   "estado": "revisar-numero",
   "motivo": "numero no valido en Espana: hay que sacarlo de su web",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Brother Escuela de Creatividad",
    "categoria": "centros de formación",
    "ciudad": "Barcelona",
@@ -367,7 +367,7 @@
   "estado": "revisar-numero",
   "motivo": "numero no valido en Espana: hay que sacarlo de su web",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "ÍNDICE CONSULTORÍA Y FORMACIÓN",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -390,7 +390,7 @@
   "estado": "revisar-numero",
   "motivo": "numero no valido en Espana: hay que sacarlo de su web",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "TAES Formación",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -416,7 +416,7 @@
   "estado": "FUERA: suprimido",
   "motivo": "dijo \"no nos interesa, ya colaboramos con una empresa\" el 30-sep. Un no es un no, aunque la llamada estuviera rota",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "Clínica dental Dr. Lorente (Av. Francia)",
    "categoria": "clínicas",
    "ciudad": "Valencia",
@@ -439,7 +439,7 @@
   "estado": "FUERA: agotado",
   "motivo": "dos toques gastados: 22-sep (centralita sin salida) y 30-sep",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "MICROFUSA",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -462,7 +462,7 @@
   "estado": "FUERA: sin numero",
   "motivo": "no hay telefono",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de admisiones o de captación de alumnos?",
+   "saludo": "Perdona, ¿con quién puedo hablar de admisiones?",
    "empresa": "Padelmba",
    "categoria": "centros de formación",
    "ciudad": "",
@@ -489,7 +489,7 @@
   "estado": "FUERA: excluido",
   "motivo": "buzon de privacidad: llamar ahi es pedir una queja LOPD",
   "variableValues": {
-   "saludo": "¿Quién lleva ahí la parte de captación de pacientes?",
+   "saludo": "Perdona, ¿con quién puedo hablar de la captación de pacientes?",
    "empresa": "CB Clinic I Medicina Estética I Médico Estético",
    "categoria": "clínicas",
    "ciudad": "Barcelona",

@@ -343,3 +343,78 @@ un transcriptor con los números. No se puede concluir nada del texto.
 
 Un toque gastado de dos. No dijo que no le interese: no llegó a saber a qué
 llamábamos. Queda un intento, y con la regla nueva vale la pena gastarlo.
+
+## 30-sep 18:20 · tres llamadas más, y el patrón aparece
+
+| Empresa | Duración | Final |
+|---|---:|---|
+| Clínica MUSA · Valencia | 32 s | **buzón** · dejó el mensaje y colgó, correcto |
+| Famydent · Zaragoza | — | **no conectó** (`sip-outbound-call-failed-to-connect`) |
+| Foxize School | **13,5 s** | **«no nos interesa»**, cortando la primera pregunta |
+
+### El patrón, sobre las cuatro llamadas reales de hoy
+
+**Nadie ha llegado a la pregunta de la fuga.** Ni una. Se cae siempre en el mismo
+sitio: **la apertura**.
+
+```
+eFISIO  : colgaron en el segundo turno de Raquel
+Foxize  : colgaron ANTES de que terminara la primera frase
+```
+
+Foxize es el dato limpio: cortó a Raquel a mitad de la pregunta de apertura con
+«no, no, muchas gracias, no nos interesa». No le dio tiempo ni a oír de qué iba.
+**Eso no es una objeción al mensaje: es un rechazo al formato de la llamada.**
+
+### Los dos fallos de la apertura, y los dos están arreglados
+
+**1 · «Buenos días» a las siete de la tarde.**
+
+El `firstMessage` tenía la hora del día escrita a fuego: «Hola, buenos días.»
+Las cuatro llamadas de hoy salieron **después de las 18:00**, así que las cuatro
+empezaron dando los buenos días por la tarde. Quien lo oye sabe en medio segundo
+que es una grabación, y ya no escucha el resto.
+
+Arreglado: **«Hola, buenas»**, que vale a cualquier hora.
+
+**2 · Veintitrés palabras antes de preguntar nada.**
+
+La apertura era:
+
+> «Hola, buenos días. Soy Raquel, del equipo de Máikel Echevarría, de Cuálivo.
+> ¿Quién lleva ahí la parte de captación de pacientes?»
+
+Tres nombres que a una recepcionista no le dicen absolutamente nada —Raquel,
+Máikel Echevarría, Cuálivo— antes de la pregunta. Para cuando llega la pregunta,
+ya te ha clasificado como comercial.
+
+Arreglado. Ahora es:
+
+> «Hola, buenas. Perdona, ¿con quién puedo hablar de la captación de pacientes?»
+
+Doce palabras, ningún nombre desconocido, y suena a alguien que busca su
+departamento, no a alguien que vende. **La presentación se da en cuanto la
+piden**, y entonces entera. Nunca se oculta quién eres si te lo preguntan, y
+nunca se finge otra cosa: simplemente deja de ir por delante.
+
+### Lo que sí confirman estas tres
+
+- **El buzón funciona bien.** MUSA saltó a contestador, Raquel dejó el mensaje
+  corto y colgó. Sin narrar instrucciones, sin quedarse en silencio. El incidente
+  del 29-sep está cerrado.
+- **Famydent no conecta.** `+34 727 697 421` da fallo de troncal a los cero
+  segundos, igual que los dos del 29-sep. Se marca `numero-erroneo`: hay que
+  volver a la web.
+
+### Estado de la lista después de hoy
+
+| | |
+|---|---|
+| eFISIO | 1 toque · queda 1 |
+| Clínica MUSA | 1 toque (buzón) · queda 1 |
+| Foxize School | **fuera** · dijo «no nos interesa» |
+| Famydent | número a revisar, no gastó toque |
+
+Quedan **9 llamables**, y los dos mejores —Logik Clinic y Magister, los únicos con
+píxel de anuncios— **siguen sin tocar por esta vía**, con un toque disponible cada
+uno. Están guardados a propósito para cuando el guion aguante una conversación.
