@@ -177,6 +177,7 @@
         <p class="veredicto" id="r-veredicto"></p>
       </div>
       <div class="caja coste">
+        <div class="fila"><span>Facturación al mes hoy</span><b id="r-fact-hoy">—</b></div>
         <div class="fila"><span>Facturación al mes con el sistema</span><b id="r-fact">—</b></div>
         <div class="fila"><span>Cada € invertido en anuncios</span><b id="r-roas">—</b></div>
         <div class="fila"><span>Qualivo al mes</span><b id="r-cuota">—</b></div>
@@ -313,7 +314,8 @@
     var extra = r10(fact2 - fact), neto = r10(fact2 - fact - d.cuota);
     $('#r-extra').textContent = (extra >= 0 ? '+' : '') + eur(extra) + ' al mes';
     $('#r-extra').className = 'num' + (neto < 0 ? ' neg' : '');
-    $('#r-extra-txt').textContent = 'Pasas de ' + uno(d.compran) + ' a ' + uno(v2) + ' ' + sec.clientes + ' al mes con la misma inversión y los mismos leads.';
+    $('#r-extra-txt').textContent = 'Pasas de ' + uno(d.compran) + ' a ' + uno(v2) + ' ' + sec.clientes + ' al mes (de ' + eur(r10(fact)) + ' a ' + eur(r10(fact2)) + ' de facturación) con la misma inversión y los mismos leads.';
+    $('#r-fact-hoy').textContent = eur(r10(fact));
     $('#r-fact').textContent = eur(r10(fact2));
     $('#r-roas').textContent = d.inversion > 0 ? uno(fact2 / d.inversion) + ' €' : '—';
     $('#r-cuota').textContent = eur(d.cuota);
