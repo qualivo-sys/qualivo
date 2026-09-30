@@ -22,6 +22,7 @@ carpetas con la que se montaron. Los scripts funcionan desde esta carpeta:
 | `voz-v3/` | Locución de «Las fugas» V2 (t0 y t1) con su transcripción. |
 | `musica3/2-deephouse-norm.mp3` | La música de ahora (deep house), normalizada a −27 LUFS. |
 | `musica4/*-norm.mp3` | Alternativas (A electrónica minimalista, B lo-fi, C afro house), normalizadas igual y en bucle a 90 s. La B dura 43 s de origen: el empalme puede notarse. |
+| `musica5/*-norm.mp3` | Alternativas nuevas del 30-sep, más sobrias (catálogo de HeyGen, licencia sin comprobar): D downtempo, E latido, F reloj, H lo-fi oscuro, I lo-fi íntimo. Normalizadas igual y en bucle a 90 s. H e I duran 40 y 36 s de origen. |
 | `finales/` | Los MP4 montados. `anuncios-30sep/`: los 3 anuncios (no subir). `fugas-v2/`: gancho del anuncio, gancho de Laura y la versión de Maikel. `opciones-musica/`: plantones con A, B y C. |
 | `fonts/` · `marco.png` | Montserrat 600/700/800 y el marco de móvil para los planos. |
 
