@@ -134,7 +134,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
   - → v2 (08).
 - **06 Plantones:**
   - Se conserva el gancho «Diez… Vinieron cuatro».
-  - Se quitan «hora nueva esa misma mañana», «a la hora le llamamos» y «tu agenda se llena».
+  - Se quitan «hora nueva esa misma mañana», «a la hora le llamamos», «tu agenda se llena» y «el recordatorio le cuenta lo que vais a ver».
   - → v2 (09).
 - **07 Curiosos:**
   - «Quién se matricula» pasa a «quién era un buen contacto».
@@ -192,7 +192,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
   - «Esa silla vacía ya la habías pagado.»
   - «Una agenda llena no es una buena semana…»
   - «Jueves, seis y diez…»
-- **Mecanismo:** confirmación al reservar, recordatorio la víspera con lo que va a ver, y llamada si no aparece (sin decir que es automática).
+- **Mecanismo:** confirmación al reservar, recordatorio la víspera y llamada si no aparece (sin decir que es automática). No se dice «lo que va a ver»: eso son los correos nuevos de cita, apagados hasta el ok de Maikel (corrección del 30-sep).
 - **CTA:** el común.
 - **Duración:** unos 35 s.
 - **Resultados:** pendientes.

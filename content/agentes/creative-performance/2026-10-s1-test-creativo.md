@@ -56,7 +56,7 @@ Criterios: 0-3 s, 3-10 s, guion, visual, ritmo, voz, texto, mecanismo, credibili
 
 **Se conserva:** el gancho, la pausa y «ya los habías pagado».
 
-**Se cambia:** el mecanismo queda así: «Con Qualivo, la cita se confirma al reservar. La víspera le llega un recordatorio con lo que va a ver. Y si no aparece, le llamamos.»
+**Se cambia:** el mecanismo queda así: «Con Qualivo, la cita se confirma al reservar. La víspera le llega un recordatorio. Y si no aparece, le llamamos.» (Corregido el 30-sep por Maikel: el recordatorio de hoy no cuenta «lo que va a ver»; eso son los correos nuevos de cita, que están apagados.)
 
 ### 07 · Curiosos (35 s)
 
@@ -180,7 +180,7 @@ Criterios: 0-3 s, 3-10 s, guion, visual, ritmo, voz, texto, mecanismo, credibili
    - C · contrarian: «Una agenda llena no es una buena semana. Mira cuántos vinieron.»
    - D · hora concreta: «Jueves, seis y diez. La visita de las seis no ha llegado.»
 7. **Guion final (voz, unas 90 palabras, unos 35 s):**
-   > Diez personas reservaron una visita esta semana. (pausa) Vinieron cuatro. Seis huecos en tu agenda para nadie. Y esas seis ya las habías pagado: el anuncio, el formulario y la llamada para darles cita. Casi nunca es mala suerte. Reservaron a varios días vista, nadie volvió a hablar con ellos y el jueves se les cruzó algo. Con Qualivo, la cita se confirma al reservar. La víspera le llega un recordatorio con lo que va a ver. Y si no aparece, le llamamos. Si tu centro ya invierte en anuncios, te enseñamos en treinta minutos dónde se te escapan los alumnos entre el anuncio y la matrícula.
+   > Diez personas reservaron una visita esta semana. (pausa) Vinieron cuatro. Seis huecos en tu agenda para nadie. Y esas seis ya las habías pagado: el anuncio, el formulario y la llamada para darles cita. Casi nunca es mala suerte. Reservaron a varios días vista, nadie volvió a hablar con ellos y el jueves se les cruzó algo. Con Qualivo, la cita se confirma al reservar. La víspera le llega un recordatorio. Y si no aparece, le llamamos. Si tu centro ya invierte en anuncios, te enseñamos en treinta minutos dónde se te escapan los alumnos entre el anuncio y la matrícula.
 8. **Storyboard:**
 
 | Seg. | Imagen | Texto en pantalla | Movimiento / interfaz / transición |
@@ -192,7 +192,7 @@ Criterios: 0-3 s, 3-10 s, guion, visual, ritmo, voz, texto, mecanismo, credibili
 | 11-14 | Calendario: LUN reserva → MAR, MIÉ en blanco → JUE 18:00 | RESERVA A 4 DÍAS | Los días en blanco se quedan en gris |
 | 14-17 | Plano de Kling: reloj de pared de recepción, 18:10 | NADIE VOLVIÓ A HABLAR CON ÉL | Corte al compás |
 | 17-21 | WhatsApp: confirmación de la cita al reservar (EJEMPLO) | 1 · CONFIRMADA AL RESERVAR | Deslizamiento |
-| 21-25 | WhatsApp la víspera, 18:30: horario, prácticas y formas de pago (EJEMPLO) | 2 · LA VÍSPERA, QUÉ VA A VER | La cabecera cambia de día |
+| 21-25 | Línea: al reservar → la víspera → si no viene | 2 · RECORDATORIO LA VÍSPERA | Se marca el segundo hito |
 | 25-28 | Pantalla de llamada saliente | 3 · SI NO VIENE, LE LLAMAMOS | Sin reloj en pantalla (para no sugerir que es automático al minuto) |
 | 28-32 | Recorrido ANUNCIO → CITA → VISITA ? → MATRÍCULA | ¿TU CENTRO YA INVIERTE EN ANUNCIOS? | «VISITA» parpadea |
 | 32-35 | Pantalla final común | ¿DÓNDE SE TE ESCAPAN? · DIAGNÓSTICO GRATUITO · 30 MIN · REVISAR MIS FUGAS → | Fija 2 s |
@@ -310,9 +310,14 @@ Se actualiza el viernes 9 (datos de Meta) y el viernes 16 (citas y reuniones).
 ## 4. Producción (no se gasta nada sin tu ok)
 
 1. Tú apruebas los guiones, la música y el presupuesto.
-2. Voz de Javier: una toma por anuncio con los textos de arriba (Higgsfield, 3 generaciones de audio).
-3. Planos de Kling: se reutilizan los de septiembre si me pasas los clips. Si no, unos 4 planos nuevos por anuncio (12 en total).
-4. Montaje con `anuncios3_build.py` (las escenas se atan a la locución).
+2. Voz de Javier: 2-3 tomas por anuncio del guion entero (Higgsfield, referencia en `produccion/video-anuncios/README.md`). Se transcriben con faster-whisper a `produccion/video-anuncios/voz-s1/<vel|pla|cur>-<toma>.json`.
+3. **Planos: no hace falta generar ninguno.** Todo sale de `produccion/video-anuncios/clips/`:
+   - **Velocidad:** `2` (móvil en la mesa, de día), `3` (mano con móvil y papeles), `k2` (chica en el sofá), el chat y la agenda de `intel`.
+   - **Plantones:** `5` (silla vacía ante la mesa) y `k3` (hombre esperando). El reloj de las 18:10 pasa a tarjeta (LUN → MAR → MIÉ → JUE 18:00).
+   - **Curiosos:** `k5` (hombre frustrado al teléfono) y `intel-anuncios` con la etiqueta «DATOS DE EJEMPLO».
+4. **Montaje:** `produccion/video-anuncios/anuncios_s1_build.py` (mismo molde que `anuncios3_build.py`, con el CTA común). La música por defecto es la A.
+   - Con voz: `python3 anuncios_s1_build.py vel:a pla:a cur:a`.
+   - Sin voz, como maqueta: `MAQUETA=1 python3 anuncios_s1_build.py vel pla cur`.
 5. Te paso los 3 MP4. Con tu ok, Paid los sube.
 
 ---
