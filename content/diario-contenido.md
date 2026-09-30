@@ -764,3 +764,53 @@ Informe en `content/borradores/revision-master-reviewer-2026-09-29.md`. Notas: a
 ### Hipótesis
 
 - La objeción de encaje («yo quería otra cosa») apunta a cómo se explica Qualivo en la web y en el anuncio. Si se repite esta semana, propongo una pieza sobre «qué hace un agente en cada punto del recorrido», con un ejemplo por sector.
+
+## Miércoles 30 de septiembre de 2026
+
+### Coordinación con la otra sesión de contenido
+
+Esta noche otra sesión ha dejado mucho contenido de octubre:
+- el calendario (`content/calendario-contenidos-octubre-2026.md`);
+- tres carruseles, guiones de voz y anuncios con IA;
+- los correos de la semana y el playbook del lead A/B;
+- un simulador del embudo como imán de leads.
+
+**Lo sigo, no lo duplico.** El capítulo de la newsletter del jueves (tarea D) ya está: el correo «Lo que vamos a hacer en octubre», en `content/newsletter/2026-10/`. No escribo otro.
+
+Tres choques de reglas que dejo escritos para Maikel:
+1. **Resultados de clientes en redes.** El calendario recuerda la regla de agosto (`content/growth-os.md`): sin resultados de clientes en contenido editorial, ni anonimizados. Mi borrador del martes («Sí. Pero más tarde», un sí de palabra de un cliente) se acerca a esa línea. **Lo retengo** hasta que Maikel decida. El artículo «ahora no es el momento» cuenta objeciones de clientes sin cifras ni resultados. Lo dejo publicado, pero lo señalo.
+2. **Cámara.** El calendario dice «Maikel no sale a cámara en octubre». Su instrucción del plan de octubre pide probar «Maikel a cámara vs voz IA/demo», y en Todoist hay una tarea para grabar un vídeo a cámara. Hay que saber cuál manda.
+3. **Precio.** El calendario dice ni precio ni garantía en ningún contenido. Ya lo cumplíamos: el precio iba tapado en la imagen del lunes.
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/primera-reunion-con-un-cliente/ («Primera reunión con un cliente: cómo prepararla para que acabe en un siguiente paso»).
+  - Dato real, del daily de Growth del 29-sep: el diagnóstico pasó de 15 a 30 minutos, con huecos de hora en hora, porque las reuniones se alargaban. Y una llamada de «te estamos esperando» recuperó una reunión en el momento.
+  - Estructura, sacada del guion de venta v1.
+  - Registrado en la tarjeta del blog, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/cliente-ideal-b2b/`.
+  - El error 3 y un párrafo nuevo llevan el ICP a la primera reunión, con enlace al artículo de hoy y al diagnóstico.
+  - El error 2 pierde el «no es un perfil: es una esperanza».
+  - El cierre queda en un solo botón.
+
+### Borradores (sin publicar)
+
+- **Miércoles, bandera roja:** «Mis reuniones de 15 minutos se alargaban».
+  - Imagen: `content/infografias/2026-09-30/reuniones-15.png`.
+  - Texto y ficha: `content/borradores/2026-09-30-bandera-roja-reuniones.md`.
+  - Solo habla de cómo trabaja Qualivo, sin clientes.
+
+### Descartes
+
+- **Un artículo sobre el recordatorio de cita.** Se come la keyword secundaria del artículo del 23-sep («recordatorio de cita»). Va mejor como pieza de la semana 1 (plantones), empujando ese artículo, como propone el calendario.
+- **Bandera roja con «el lead que no recuerda haber pedido el diagnóstico»** (daily del 29-sep). Es un solo caso y no sé cuánto tardamos en contactarle. No puedo atribuir la causa.
+
+### Pendiente de Maikel
+
+1. **Regla de agosto** (sin resultados de clientes en redes): ¿sigue en pie? Si sí, retiro del todo el borrador del martes. Recomiendo mantenerla hasta que haya un cliente que autorice su caso.
+2. **Cámara en octubre:** ¿sí o no? Hace falta la respuesta antes de la semana 2 (anuncios).
+3. **Tasa de plantones publicada:** ¿se quita? Sigue siendo lo más urgente.
+
+### Hipótesis
+
+- Si el diagnóstico de 30 minutos reduce las reuniones sin siguiente paso, se verá en la semana 4 (días de propuesta a decisión). Hay que apuntar desde ya, en cada reunión, si acabó con fecha.
