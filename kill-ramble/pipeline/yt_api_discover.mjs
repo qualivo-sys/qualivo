@@ -126,14 +126,21 @@ for (let i = 0; i < vids.length; i += 50) {
 
 const nf = new Intl.NumberFormat(LANG === 'en' ? 'en-US' : LANG === 'es' ? 'es-ES' : 'pt-BR');
 const leads = [];
+// Los que encajan pero no publican correo: daily.mjs los sigue hasta su Instagram.
+const sinCorreo = [];
 for (const c of canales) {
   const subs = +c.statistics.subscriberCount || 0;
   const pais = c.snippet.country || '';
   if (subs < minSubs || subs > maxSubs) continue;
   if (pais && !PAISES_OK.has(pais)) continue;
   const correos = [...new Set((c.snippet.description.match(EMAIL) || []).map((e) => e.toLowerCase()))].filter((e) => !AJENO.test(e));
-  if (!correos.length || excluidos.has(correos[0])) continue;
   const v = videos.get(c.id);
+  if (!correos.length) {
+    sinCorreo.push({ channel_id: c.id, first_name: c.snippet.title, website: c.snippet.customUrl ? `https://www.youtube.com/${c.snippet.customUrl}` : `https://www.youtube.com/channel/${c.id}`,
+      video_title: v.title, comparable_game: v.juego, followers: subs, country: pais, lang: LANG });
+    continue;
+  }
+  if (excluidos.has(correos[0])) continue;
   const views = vistas.get(v.videoId) || 0;
   const titulo = v.title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/[\u{1F000}-\u{1FAFF}☀-➿️‍]/gu, '').replace(/\s{2,}/g, ' ').trim();
   const corto = titulo.length > 70 ? titulo.slice(0, 69) + '…' : titulo;
@@ -151,4 +158,5 @@ for (const c of canales) {
 mkdirSync(outDir, { recursive: true });
 leads.sort((a, b) => b.followers - a.followers);
 writeFileSync(`${outDir}/yt_api_leads.csv`, toCSV(leads, ['email', 'first_name', 'company_name', 'website', 'cited_video', 'video_detail', 'comparable_game', 'platform', 'followers', 'country']));
+writeFileSync(`${outDir}/yt_api_sin_correo.csv`, toCSV(sinCorreo.sort((a, b) => b.followers - a.followers), ['channel_id', 'first_name', 'website', 'video_title', 'comparable_game', 'followers', 'country', 'lang']));
 console.error(`${canales.length} canales leídos · ${leads.length} con correo y en mercado · ~${unidades} unidades de cuota → ${outDir}/yt_api_leads.csv`);

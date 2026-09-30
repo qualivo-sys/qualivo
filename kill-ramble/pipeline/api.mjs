@@ -65,4 +65,5 @@ try {
 } catch {
   console.log(text);
 }
-process.exit(res.ok ? 0 : 1);
+// exitCode y no exit(): con exit() una respuesta grande se corta antes de llegar entera a la tubería.
+process.exitCode = res.ok ? 0 : 1;
