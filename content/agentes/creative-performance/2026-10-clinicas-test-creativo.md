@@ -162,7 +162,7 @@ Igual que en formación (`2026-10-s1-test-creativo.md`, sección 3):
 
 ## 7. Producción: qué falta y cuánto cuesta
 
-**Planos nuevos (Kling 3.0, 9:16, 5 s, unos 10 créditos cada uno, 5 planos ≈ 50 créditos).** Sin caras reconocibles, sin pantallas legibles, sin texto y con ambiente español:
+**Planos nuevos: generados el 30-sep en Kling 3.0 (5 × 10 créditos), guardados en `produccion/video-anuncios/clips/c1…c5.mp4`.** Sin caras reconocibles, sin pantallas legibles, sin texto y con ambiente español:
 
 | Id | Plano | Prompt (inglés) |
 |---|---|---|

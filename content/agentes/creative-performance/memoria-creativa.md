@@ -269,7 +269,7 @@ Una fila por anuncio y semana:
 - **Desempate:** reuniones celebradas (revisión a los 14 días).
 
 ## Pendiente
-- Clínicas: guiones y maquetas listos (11-13); falta el ok de Maikel para generar 5 planos y 6 voces (unos 75 créditos).
+- Clínicas: los 5 planos de Kling están generados (c1-c5). Faltan las voces de Javier (6 tomas, unos 25 créditos), pendientes del ok a los guiones.
 - Horario nocturno: sigue de 8:00 a 21:30 (Velocidad va con la versión de día).
 - Música: se recomienda A (electrónica minimalista), con licencia comprobada.
 - Paid y Growth: que cada lead entre en el CRM con el nombre exacto del anuncio. Pedir a Paid el desglose por creativo de septiembre.
