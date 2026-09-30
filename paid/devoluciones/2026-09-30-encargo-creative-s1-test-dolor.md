@@ -1,8 +1,8 @@
-# Encargo de Creative Performance para Paid (y Growth) · test de dolor en formación
+# Encargo de Creative Performance para el agente de Growth · test de dolor en formación
 
 30-sep-2026. Escrito por el agente Creative Performance.
 
-**Autoriza Maikel:** «probemos con la F, adaptalos todos con esa musica y después pasaselo a al agente de paid o de growth que lo monten sobre todo en algo nuevo que no afecte a lo que ya tenemos».
+**Autoriza Maikel:** «Pásale el encargo con todo a él y dile cómo lo montaría, pero no pongas 30 euros al día. Yo pondría de momento 15 o 20, que él lo decida». Antes: «probemos con la F, adaptalos todos con esa musica y después pasaselo a al agente de paid o de growth que lo monten sobre todo en algo nuevo que no afecte a lo que ya tenemos».
 
 ## Qué hay que montar
 
@@ -28,16 +28,17 @@ Guiones, hipótesis y criterio de decisión: `content/agentes/creative-performan
 4. **Botón:** «Más información».
 5. **Nombre del anuncio exactamente** como en la tabla. Growth lo necesita para cruzar cada lead con su creativo.
 
-## Presupuesto: pendiente de confirmar con Maikel
+## Presupuesto: 15 o 20 €/día por conjunto (lo decide Growth)
 
-- Propuesta: unos **30 €/día por conjunto** durante 5-7 días (450-630 € en total). Se lee a los 150 € por anuncio.
-- Maikel todavía no ha dado la cifra.
-- Se monta todo **en pausa**. Paid le confirma el presupuesto antes de activar.
-- Fecha prevista de arranque: lunes 5-oct.
+- **Maikel (30-sep):** «no pongas 30 euros al día. Yo pondría de momento 15 o 20, que él lo decida». La cifra la eliges tú dentro de ese margen.
+- **Qué implica cada una:**
+  - A 15 €/día, llegar a 150 € por anuncio lleva unos 10 días.
+  - A 20 €/día, unos 7,5 días.
+- **Lectura:** a los 150 € por anuncio o a los 10 días, lo que llegue antes. Si a los 7 días hay un anuncio claramente peor (el doble de coste por A/B), se puede parar antes.
+- **Arranque:** el lunes 5-oct, o cuando esté montado.
 
 ## Antes de activar (checklist)
 
-- [ ] Maikel confirma el presupuesto.
 - [ ] Licencia de la música F comprobada. Sale del catálogo de HeyGen (Astral Generated Music, id `25be1b745a6343058755d7ca88ef79d9`) y la licencia para anuncios de pago **no está comprobada**. Si no se puede usar, se remonta con otra en un minuto.
 - [ ] El formulario sigue diciendo «desde 750 €/mes», precio viejo. No lo cambies en esta campaña: si cambia a mitad del test, se estropea la lectura. Díselo a Maikel igualmente.
 - [ ] Growth confirma que el nombre del anuncio llega al CRM en cada lead.

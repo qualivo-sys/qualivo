@@ -163,7 +163,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 **Decisión:** coste por A/B a los 150 € por anuncio.
 
 ### 08 · S1_VEL_v2 · «Siete horas»
-- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado a Paid el 30-sep, en campaña nueva y en pausa hasta confirmar el presupuesto. Duración real: 41 s.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). Duración real: 41 s.
 - **Vertical:** formación.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad.
@@ -181,7 +181,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 09 · S1_PLA_v2 · «Vinieron cuatro»
-- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado a Paid el 30-sep, en campaña nueva y en pausa hasta confirmar el presupuesto. Duración real: 34 s.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). Duración real: 34 s.
 - **Vertical:** formación.
 - **Etapa:** cita y no-show.
 - **Dolor:** plantón.
@@ -198,7 +198,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 10 · S1_CUR_v2 · «Leads a cinco euros»
-- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado a Paid el 30-sep, en campaña nueva y en pausa hasta confirmar el presupuesto. Duración real: 41 s.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b) y la música F (reloj). Encargado al agente de Growth el 30-sep: campaña nueva, 15-20 €/día por anuncio (lo decide Growth). Duración real: 41 s.
 - **Vertical:** formación.
 - **Etapa:** captación y cualificación.
 - **Dolor:** leads baratos que no se matriculan.
@@ -239,7 +239,7 @@ Una fila por anuncio y semana:
 
 ## Pendiente
 - Después de formación: el mismo test de dolor para **clínicas** (lo pidió Maikel el 30-sep).
-- Ok de Maikel: qué entra, presupuesto (unos 30 €/día por anuncio) y horario nocturno.
+- Horario nocturno: sigue de 8:00 a 21:30 (Velocidad va con la versión de día).
 - Música: se recomienda A (electrónica minimalista), con licencia comprobada.
 - Paid y Growth: que cada lead entre en el CRM con el nombre exacto del anuncio. Pedir a Paid el desglose por creativo de septiembre.
 - Confirmar con Maikel el seguimiento de ofertas para clientes (lo citan «Las fugas» y la toma a cámara).
