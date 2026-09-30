@@ -267,3 +267,79 @@ además del correo.
 Dicho de otro modo: cerrar reuniones en frío sin arreglar el spam de qualivo.io y el
 recordatorio es llenar un cubo con un agujero. Y el agujero es de Máikel: SPF y
 DMARC.
+
+## 30-sep 18:09 · primera llamada en frío de verdad · eFISIO
+
+```
+callId    01a0f314-694b-7339-b6ab-823dbb58ab60
+desde     +34 663 375 205 (móvil de Máikel) · español, no el +1 775
+a         +34 910 052 363 · eFISIO Carabanchel Usera
+duración  30 s · 0,057 USD
+final     customer-ended-call · colgaron ellos
+resultado GATEKEEPER
+```
+
+### Lo primero, y es mío: la llamada salió FUERA DE HORARIO
+
+A las **18:09**, y la regla es 10:00–18:00. La lancé sin mirar el reloj: el
+comando devolvió la hora en la misma salida en la que ya había salido el POST.
+No hubo daño práctico —una clínica de fisioterapia está abierta hasta las ocho o
+las nueve— pero es la regla que llevo todo el día citando y me la salté yo.
+
+Las tres llamadas restantes de la tanda se dejan para mañana a primera hora.
+
+### Transcripción
+
+```
+AI:   Hola, buenos días. Soy Raquel, del equipo de Michael Echeverría, de
+      Cuálibo. ¿Quién lleva ahí la parte de captación de pacientes?
+User: Adelantado en nuestra web. Efisio punto es.
+AI:   Gracias por la información. Hablando con clínicas de fisioterapia de
+      Madrid, sobre los pacientes que preguntan o piden hora y no acaban
+      viniendo. Es una pregunta concreta, 30 segundos, y no es para venderos
+      nada, ¿Podrías pasarme
+```
+
+### El defecto, y es nuevo
+
+La recepcionista contestó algo que Raquel **no entendió** —la transcripción lo
+recoge como «Adelantado en nuestra web. Efisio punto es.», que no responde a lo
+que se le había preguntado—. Y Raquel hizo dos cosas mal seguidas:
+
+1. **Dijo «Gracias por la información»** a una frase que no había entendido. Eso
+   suena a máquina que no escucha, y es el momento exacto en el que se decidió el
+   cuelgue.
+2. **Soltó la explicación de «de qué se trata» sin que se la hubieran pedido**, y
+   recitando la fórmula entera. Un discurso encima de alguien que solo quería
+   saber quién llamaba.
+
+**Arreglado en el asistente** (`081d9e7b`), regla nueva en el prompt:
+
+> Si no has entendido lo que te han dicho, dilo: «Perdona, no te he entendido
+> bien. ¿Me lo repites?». Nunca digas «gracias por la información» a una frase
+> que no te ha quedado clara. Y no sueltes la explicación de «de qué se trata»
+> si no te la han pedido.
+
+### Lo que sí funcionó
+
+- **Salió desde un número español.** Es la primera llamada en frío de Qualivo que
+  no sale del +1 775 de Estados Unidos.
+- **Las variables llegaron.** «clínicas de fisioterapia», «Madrid» y la fuga
+  aparecen en la frase: `{{categoria}}`, `{{ciudad}}` y `{{fuga}}` se
+  sustituyeron. Es la primera vez que el briefing de un lead llega a la voz.
+- **El primer turno iba lleno**, no un «Hola, buenos días» a secas.
+- **Ningún WhatsApp raro**: sin `server`, no se disparó nada hacia el contacto.
+
+### La pronunciación, que sigue sin cerrarse
+
+La transcripción vuelve a decir «Michael Echeverría» y «Cuálibo». Y **sigue sin
+valer como prueba**: Deepgram normaliza. En esta misma llamada escribió «30
+segundos» donde el prompt dice «treinta segundos», que es exactamente lo que hace
+un transcriptor con los números. No se puede concluir nada del texto.
+
+**Hay grabación.** Se cierra escuchándola, y solo así.
+
+### Estado de eFISIO
+
+Un toque gastado de dos. No dijo que no le interese: no llegó a saber a qué
+llamábamos. Queda un intento, y con la regla nueva vale la pena gastarlo.
