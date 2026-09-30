@@ -79,7 +79,7 @@ Plantilla:
 - **Nota:** pasa de los 45 s; comprobar la regla de los 10 segundos.
 
 ### 05 · Velocidad (30-sep)
-- **Estado:** borrador, sin subir.
+- **Estado:** sustituido por la v2 (08) el 30-sep.
 - **Vertical:** formación.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad.
@@ -93,7 +93,7 @@ Plantilla:
 - **⚠️ Promesa falsa:** dice «también de noche y en fin de semana», y hoy no escribimos antes de las 8:00. Corregir antes de subir o que Maikel cambie el horario.
 
 ### 06 · Plantones (30-sep)
-- **Estado:** borrador, sin subir.
+- **Estado:** sustituido por la v2 (09) el 30-sep.
 - **Vertical:** formación.
 - **Etapa:** cita y no-show.
 - **Dolor:** plantón.
@@ -109,7 +109,7 @@ Plantilla:
 - **Alternativas de música** (sobre este anuncio): A electrónica minimalista, B lo-fi y C afro house. Maikel aún no ha elegido.
 
 ### 07 · Curiosos (30-sep)
-- **Estado:** borrador, sin subir.
+- **Estado:** sustituido por la v2 (10) el 30-sep.
 - **Vertical:** formación.
 - **Etapa:** captación y cualificación.
 - **Dolor:** leads baratos que no compran.
@@ -123,7 +123,123 @@ Plantilla:
 
 ---
 
-## Pendiente de la semana 1 (5-9 oct)
-- Decidir qué borradores entran al test, corrigiendo antes las promesas marcadas con ⚠️.
-- Mismo conjunto, mismo formulario y mismo presupuesto. Se decide por coste por lead A/B y reuniones celebradas, no por CPL.
-- Pedir a Paid el desglose por creativo de septiembre para rellenar los «falta dato».
+## Revisión del 30-sep (agente Creative Performance)
+
+Detalle completo en `2026-10-s1-test-creativo.md`.
+
+- **05 Velocidad:**
+  - Se conserva «No lo perdiste por el precio. Lo perdiste por llegar tarde».
+  - Se quita «también de noche y en fin de semana».
+  - El gancho pasa a un día laborable mientras siga el horario de 8:00 a 21:30.
+  - → v2 (08).
+- **06 Plantones:**
+  - Se conserva el gancho «Diez… Vinieron cuatro».
+  - Se quitan «hora nueva esa misma mañana», «a la hora le llamamos» y «tu agenda se llena».
+  - → v2 (09).
+- **07 Curiosos:**
+  - «Quién se matricula» pasa a «quién era un buen contacto».
+  - La atribución se dice como «revisamos qué anuncio trae alumnos», sin panel en vivo.
+  - → v2 (10).
+- **04 Las fugas:**
+  - Fuera del test de dolor (otro formato, 57 s).
+  - Gancho A: es abstracto, se propone un texto concreto.
+  - Gancho B (Laura): se pasa a mediodía.
+  - Intelligence solo con «DATOS DE EJEMPLO».
+  - Falta confirmar con Maikel el seguimiento de ofertas.
+- **02 (activo):** sugiere respuesta de madrugada. Se propone pararlo al arrancar el test (lo ejecuta Paid con el ok de Maikel).
+- **03 Veam:** misma promesa nocturna y CTA con el precio viejo. Se queda en borrador.
+
+## Octubre 2026 · test de dolor, semana 1 (5-9 oct, pendiente del ok de Maikel)
+
+**Fijo en los tres:**
+- Formación, el mismo conjunto y el mismo formulario nativo.
+- 9:16 de 33-37 s, voz de Javier, una sola música.
+- La misma estructura, un gancho de tipo «situación con número u hora» y el mismo presupuesto.
+- **CTA común:** «Si tu centro ya invierte en anuncios, te enseñamos en treinta minutos dónde se te escapan los alumnos entre el anuncio y la matrícula.»
+- **Pantalla final:** ¿DÓNDE SE TE ESCAPAN? · DIAGNÓSTICO GRATUITO · 30 MIN · REVISAR MIS FUGAS →
+
+**Variable:** el dolor.
+
+**Decisión:** coste por A/B a los 150 € por anuncio.
+
+### 08 · S1_VEL_v2 · «Siete horas»
+- **Estado:** guion listo, sin producir.
+- **Vertical:** formación.
+- **Etapa:** respuesta.
+- **Dolor:** velocidad.
+- **Ángulo:** competencia y hora concreta.
+- **Formato:** historia con interfaz y chat.
+- **Hook:** «Te pidió información el martes a las doce y diez. Le contestaste a las siete de la tarde.»
+- **Hooks de reserva:**
+  - «Ese alumno no se fue por el precio. Se fue porque otro centro le contestó antes.»
+  - «Tus leads no son malos. Les contestas tarde.»
+  - «Siete horas…»
+  - «¿Cuánto tardasteis en contestar…?»
+- **Mecanismo:** WhatsApp en minutos con sus palabras, llamada si no contesta, mensaje al día siguiente, y cita con ficha.
+- **CTA:** el común.
+- **Duración:** unos 36 s.
+- **Resultados:** pendientes.
+
+### 09 · S1_PLA_v2 · «Vinieron cuatro»
+- **Estado:** guion listo, sin producir.
+- **Vertical:** formación.
+- **Etapa:** cita y no-show.
+- **Dolor:** plantón.
+- **Ángulo:** pérdida.
+- **Formato:** historia con agenda.
+- **Hook:** «Diez personas reservaron una visita esta semana. Vinieron cuatro.»
+- **Hooks de reserva:**
+  - «Esa silla vacía ya la habías pagado.»
+  - «Una agenda llena no es una buena semana…»
+  - «Jueves, seis y diez…»
+- **Mecanismo:** confirmación al reservar, recordatorio la víspera con lo que va a ver, y llamada si no aparece (sin decir que es automática).
+- **CTA:** el común.
+- **Duración:** unos 35 s.
+- **Resultados:** pendientes.
+
+### 10 · S1_CUR_v2 · «Leads a cinco euros»
+- **Estado:** guion listo, sin producir.
+- **Vertical:** formación.
+- **Etapa:** captación y cualificación.
+- **Dolor:** leads baratos que no se matriculan.
+- **Ángulo:** contrarian y dinero.
+- **Formato:** historia con interfaz.
+- **Hook:** «Tu anuncio te trae leads a cinco euros. Parece una ganga.»
+- **Hooks de reserva:**
+  - «Tu coste por lead baja. Tus matrículas, no.»
+  - «Tu lead de cinco euros te está saliendo carísimo.»
+  - «Treinta interesados…»
+  - «¿Sabes qué anuncio te trajo las matrículas…?»
+- **Mecanismo:** preguntas por WhatsApp antes de hablar, decirle a Meta quién era un buen contacto, y revisar qué anuncio trae alumnos (tabla con «DATOS DE EJEMPLO»).
+- **CTA:** el común.
+- **Duración:** unos 37 s.
+- **Resultados:** pendientes.
+
+## Resultados por creativo
+
+Una fila por anuncio y semana:
+- Los datos de Meta los da Paid, por anuncio.
+- Nivel, citas y asistencia los da Growth, por lead y con el nombre del anuncio. El nivel es el del día de entrada.
+- Retención = reproducciones de 3 s / impresiones.
+
+| Semana | Anuncio | Gasto | Impr. | Retención 3 s | CTR | Clic→form. | Leads | CPL | A/B | % A/B | Coste A/B | Citas | Celebradas | Coste/celebrada | ¿Concepto, gancho o ejecución? |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| sep | 01 · 02 | falta dato | | | | | | | | | | | | | |
+| S1 | 08 VEL | | | | | | | | | | | | | | |
+| S1 | 09 PLA | | | | | | | | | | | | | | |
+| S1 | 10 CUR | | | | | | | | | | | | | | |
+
+**Criterio:**
+- **Escalar:** coste A/B más bajo, con 4 A/B o más.
+- **Mantener:** como máximo 1,3 veces el mejor.
+- **Iterar el gancho:** % A/B bueno con retención o CTR bajos.
+- **Mirar el formulario:** CTR bueno y clic→formulario por debajo del 14 %.
+- **Parar:** el doble o más que el mejor, o 0 A/B con 150 €.
+- **Desempate:** reuniones celebradas (revisión a los 14 días).
+
+## Pendiente
+- Ok de Maikel: qué entra, presupuesto (unos 30 €/día por anuncio) y horario nocturno.
+- Música: se recomienda A (electrónica minimalista), con licencia comprobada.
+- Paid y Growth: que cada lead entre en el CRM con el nombre exacto del anuncio. Pedir a Paid el desglose por creativo de septiembre.
+- Confirmar con Maikel el seguimiento de ofertas para clientes (lo citan «Las fugas» y la toma a cámara).
+- Aclarar si «mejores leads» es la semana 1 (encargo y `contexto.md`) o la 2 (`plan-octubre-2026.md`).
