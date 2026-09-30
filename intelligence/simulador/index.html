@@ -150,8 +150,8 @@
   <section class="caja esc" aria-labelledby="h-esc">
     <h2 id="h-esc">Con Qualivo: mismas inversión y leads, mejores etapas</h2>
     <div class="presets">
-      <button class="btn" type="button" data-preset="prudente">Escenario prudente</button>
-      <button class="btn" type="button" data-preset="asistencia">Solo asistencia +50 %</button>
+      <button class="btn" type="button" data-preset="prudente" id="b-prudente">Escenario prudente</button>
+      <button class="btn" type="button" data-preset="asistencia" id="b-asistencia">Solo asistencia</button>
       <button class="btn btn-fantasma" type="button" data-preset="hoy">Como hoy</button>
     </div>
     <div class="sl">
@@ -240,12 +240,17 @@
   }
   function tasasHoy(d) { return { contacto: tasa(d.hablan, d.leads), asistencia: tasa(d.presentan, d.hablan), cierre: tasa(d.compran, d.presentan) }; }
 
-  // Escenarios. Prudente = +10 puntos de contacto y asistencia ×1,5 (con topes); el cierre no se toca.
+  // Escenarios en puntos sobre sus propios porcentajes (más fácil de explicar: «del 50 % al 70 %»).
+  // Prudente = +10 puntos de contacto y +20 de asistencia (con topes); el cierre no se toca.
+  function objetivos(t) {
+    var c = t.contacto * 100, a = t.asistencia * 100;
+    return { c: Math.min(95, Math.max(c, c + 10)), a: Math.min(85, Math.max(a, a + 20)) };
+  }
   function preset(nombre) {
     var t = tasasHoy(datos());
-    var c = t.contacto * 100, a = t.asistencia * 100, k = t.cierre * 100;
-    if (nombre === 'prudente') { c = Math.min(95, Math.max(c, c + 10)); a = Math.min(85, Math.max(a, a * 1.5)); }
-    if (nombre === 'asistencia') { a = Math.min(90, a * 1.5); }
+    var c = t.contacto * 100, a = t.asistencia * 100, k = t.cierre * 100, o = objetivos(t);
+    if (nombre === 'prudente') { c = o.c; a = o.a; }
+    if (nombre === 'asistencia') { a = o.a; }
     ponSliders(c, a, k);
   }
   function ponSliders(c, a, k) {
@@ -278,6 +283,12 @@
       el.className = 'pct' + (k === debil ? ' debil' : '');
     });
     $('#pc-leads').textContent = d.inversion > 0 && d.leads > 0 ? eur(d.inversion / d.leads) + '/lead' : '';
+    // Los botones dicen el cambio con sus números: «asistencia del 50 % al 70 %».
+    if (d.leads > 0) {
+      var o = objetivos(t), r = function (x) { return Math.round(x) + ' %'; };
+      $('#b-prudente').textContent = 'Prudente: hablan ' + pct(t.contacto) + ' → ' + r(o.c) + ' · asisten ' + pct(t.asistencia) + ' → ' + r(o.a);
+      $('#b-asistencia').textContent = 'Solo asistencia: ' + pct(t.asistencia) + ' → ' + r(o.a);
+    } else { $('#b-prudente').textContent = 'Escenario prudente'; $('#b-asistencia').textContent = 'Solo asistencia'; }
 
     var avisos = [];
     if (d.hablan > d.leads || d.presentan > d.hablan || d.compran > d.presentan) avisos.push('Cada etapa tiene que ser igual o menor que la anterior.');
