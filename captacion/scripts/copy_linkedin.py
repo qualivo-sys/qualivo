@@ -47,6 +47,20 @@ MOTIVO = ("Te lo pregunto porque es precisamente una de las fugas que estamos "
 
 # El segundo mensaje no insiste: ofrece el caso publicado y una salida. El
 # enlace es a una pagina real con nombre y numeros, que se comprueba en un clic.
+#
+# 30-sep: corregido un fallo que llevaba semanas enviando el caso equivocado.
+# Solo "crm" y "lista" tenian cierre propio; las tres puertas de anuncios caian
+# en "default", que es el caso de EAC y habla de MATRICULAS. Resultado: 35
+# empresas ajenas a la formacion (BASQUEVOLT, CrowdFarming, Lleida.net,
+# Hospital Capilar, Perelada Chivite...) recibieron un caso de matriculas.
+# Es el mismo error que la lista "Academias": una plantilla de un sector
+# enviada a otro.
+#
+# El arreglo no es esconder el sector, es nombrarlo. La seccion 19 del rol
+# prohibe dar a entender que hemos trabajado con empresas identicas, asi que
+# el cierre de anuncios dice que el caso es de una escuela de formacion y deja
+# que el lector juzgue el mecanismo, no la etiqueta. mensajes-v3 ya asignaba
+# un caso por puerta para email; esto alinea LinkedIn con esa tabla.
 CIERRE = {
  "crm":      "Por si te sirve aunque no hablemos, este es el caso que más se "
              "parece: el problema no era conseguir más leads, era saber cuáles "
@@ -58,17 +72,40 @@ CIERRE = {
              "merecían atención.\n\nhttps://qualivo.io/casos/nuria-roure/\n\n"
              "Y si en algún momento quieres que mire el vuestro, son quince "
              "minutos. Si no toca, sin problema.",
- "default":  "Por si te sirve aunque no hablemos, este es el caso que más se "
-             "parece: de la inversión en anuncios a la matrícula, con todo "
-             "medido.\n\nhttps://qualivo.io/casos/eac/\n\n"
+ # Las tres puertas de anuncios comparten cierre: el caso es el mismo y el
+ # sector se dice en voz alta para no dar a entender lo que no es.
+ "anuncios": "Por si te sirve aunque no hablemos. El caso que mejor explica lo "
+             "que hacemos es de una escuela de formación, así que el sector no "
+             "es el vuestro, pero el problema sí: medían hasta el lead y "
+             "pasaron a medir hasta la venta real.\n\n"
+             "https://qualivo.io/casos/eac/\n\n"
              "Y si en algún momento quieres que mire el vuestro, son quince "
              "minutos. Si no toca, sin problema.",
+}
+
+# Que cierre le toca a cada puerta. Explicito a proposito: si manana aparece
+# una puerta nueva, este diccionario falla en alto en vez de mandar en silencio
+# el caso de otro sector, que es justo lo que paso en septiembre.
+CIERRE_POR_PUERTA = {
+ "crm":          "crm",
+ "lista":        "lista",
+ "google_ads":   "anuncios",
+ "meta_ads":     "anuncios",
+ "linkedin_ads": "anuncios",
 }
 
 GENERICO_MSG1 = ("Una duda que me ha surgido: cuando entra una petición por "
                  "vuestra web, ¿sabéis qué porcentaje acaba en cliente o eso se "
                  "queda sin medir?\n\n" + MOTIVO)
-GENERICO_MSG2 = CIERRE["default"]
+# Tercer sitio donde vivia el mismo fallo: el lead sin senal detectada tambien
+# recibia el caso de matriculas. Se usa el cierre de anuncios porque es el unico
+# que no da por supuesto nada del destinatario: dice de que sector es el caso y
+# deja que juzgue el mecanismo.
+#
+# Aun asi, esto es una red de seguridad, no una via normal: herramientas.md dice
+# "sin senal verificada el lead no entra". Si este texto se esta usando mucho,
+# el problema esta antes, en la carga.
+GENERICO_MSG2 = CIERRE["anuncios"]
 
 
 def limpia_empresa(n):
@@ -111,7 +148,15 @@ def construir(nombre, empresa, puerta, asunto):
     cabecera = (f"{nom}, una duda que me ha surgido mirando {emp}."
                 if nom else f"Una duda que me ha surgido mirando {emp}.")
     msg1 = f"{cabecera}\n\n{PREGUNTA[puerta].format(emp=emp, var=var)}\n\n{MOTIVO}"
-    msg2 = CIERRE.get(puerta, CIERRE["default"])
+    clave = CIERRE_POR_PUERTA.get(puerta)
+    if clave is None:
+        # Sin cierre asignado no se manda nada: antes caia en el caso de EAC
+        # y por eso 35 empresas sin relacion con la formacion recibieron un
+        # caso de matriculas.
+        raise SystemExit(
+            f"puerta sin cierre asignado: {puerta!r}. "
+            "Anadela a CIERRE_POR_PUERTA antes de generar copy.")
+    msg2 = CIERRE[clave]
     return msg1, msg2
 
 
