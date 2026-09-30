@@ -6,13 +6,13 @@
 
 ## Qué hay que montar
 
-Tres anuncios de vídeo 9:16, listos, con la voz de Javier y la música F:
+Tres anuncios de vídeo 9:16, listos, con la voz de David (ElevenLabs) y la música F:
 
 | Nombre del anuncio en Meta | Archivo | Duración | Dolor |
 |---|---|---|---|
-| `S1_VEL_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_VEL_v2_9x16.mp4` | 41 s | Velocidad |
-| `S1_PLA_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_PLA_v2_9x16.mp4` | 34 s | Plantones |
-| `S1_CUR_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_CUR_v2_9x16.mp4` | 41 s | Curiosos |
+| `S1_VEL_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_VEL_v2_9x16.mp4` | 39 s | Velocidad |
+| `S1_PLA_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_PLA_v2_9x16.mp4` | 41 s | Plantones |
+| `S1_CUR_v2_9x16` | `produccion/video-anuncios/finales/s1-octubre/S1_CUR_v2_9x16.mp4` | 45 s | Curiosos |
 
 Guiones, hipótesis y criterio de decisión: `content/agentes/creative-performance/2026-10-s1-test-creativo.md`.
 
