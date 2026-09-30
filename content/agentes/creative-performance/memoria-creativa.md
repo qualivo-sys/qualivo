@@ -163,7 +163,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 **Decisión:** coste por A/B a los 150 € por anuncio.
 
 ### 08 · S1_VEL_v2 · «Siete horas»
-- **Estado:** guion listo, sin producir.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b), falta elegir la música final. Sin subir. Duración real: 41 s.
 - **Vertical:** formación.
 - **Etapa:** respuesta.
 - **Dolor:** velocidad.
@@ -181,7 +181,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 09 · S1_PLA_v2 · «Vinieron cuatro»
-- **Estado:** guion listo, sin producir.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b), falta elegir la música final. Sin subir. Duración real: 34 s.
 - **Vertical:** formación.
 - **Etapa:** cita y no-show.
 - **Dolor:** plantón.
@@ -198,7 +198,7 @@ Detalle completo en `2026-10-s1-test-creativo.md`.
 - **Resultados:** pendientes.
 
 ### 10 · S1_CUR_v2 · «Leads a cinco euros»
-- **Estado:** guion listo, sin producir.
+- **Estado:** montado el 30-sep con la voz de Javier (toma b), falta elegir la música final. Sin subir. Duración real: 41 s.
 - **Vertical:** formación.
 - **Etapa:** captación y cualificación.
 - **Dolor:** leads baratos que no se matriculan.
