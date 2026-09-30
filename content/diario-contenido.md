@@ -800,6 +800,29 @@ Tres choques de reglas que dejo escritos para Maikel:
   - Texto y ficha: `content/borradores/2026-09-30-bandera-roja-reuniones.md`.
   - Solo habla de cómo trabaja Qualivo, sin clientes.
 
+### Master Reviewer (30-sep)
+
+Informe en `content/borradores/revision-master-reviewer-2026-09-30.md`.
+
+| Pieza | Nota | Veredicto | Qué he hecho |
+|---|---|---|---|
+| Artículo | 6 | Publicar con cambios | Aplicados los 13 críticos |
+| Reorientación | 7 | Publicar con cambios | Aplicado el único crítico |
+| Bandera roja | 4 | Rehacer | Rehecha con sus 7 críticos |
+
+- **Artículo:**
+  - Fuera los «siempre» y «casi siempre».
+  - Fuera «la siguiente persona esperaba».
+  - Fuera «una demo de veinte minutos».
+  - La tarjeta del blog y la og:description están corregidas.
+- **Bandera roja:**
+  - Fuera la causa inventada («si se alarga es que interesa»).
+  - Fuera el consejo de dar más tiempo a la reunión. Contradecía lo que hace Qualivo: anuncia 30 minutos y reserva la hora.
+  - Fuera «lo cambié en los mensajes y en el agente», que dejaba leer mensajes automáticos desde el número de Maikel.
+  - Imagen regenerada, sin rótulo.
+
+El revisor recomienda no publicar más contenido sobre plantones hasta que Maikel decida sobre la tasa publicada. Lo aplico desde hoy.
+
 ### Descartes
 
 - **Un artículo sobre el recordatorio de cita.** Se come la keyword secundaria del artículo del 23-sep («recordatorio de cita»). Va mejor como pieza de la semana 1 (plantones), empujando ese artículo, como propone el calendario.
