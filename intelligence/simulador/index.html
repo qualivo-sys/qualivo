@@ -148,10 +148,11 @@
   </div>
 
   <section class="caja esc" aria-labelledby="h-esc">
-    <h2 id="h-esc">Con Qualivo: mismas inversión y leads, mejores etapas</h2>
+    <h2 id="h-esc">Con Qualivo: mejores etapas y, cuando esté montado, más inversión</h2>
     <div class="presets">
       <button class="btn" type="button" data-preset="prudente" id="b-prudente">Escenario prudente</button>
       <button class="btn" type="button" data-preset="asistencia" id="b-asistencia">Solo asistencia</button>
+      <button class="btn" type="button" data-preset="escalar" id="b-escalar">Prudente y doble inversión</button>
       <button class="btn btn-fantasma" type="button" data-preset="hoy">Como hoy</button>
     </div>
     <div class="sl">
@@ -169,6 +170,11 @@
       <input type="range" id="s-cierre" min="0" max="80" step="1" aria-labelledby="nom-cierre">
       <div class="val" id="v-cierre"></div>
     </div>
+    <div class="sl">
+      <div class="nom" id="nom-escala">Inversión en anuncios<small>con el sistema montado, más inversión = más leads (mismo coste por lead; al escalar suele subir algo)</small></div>
+      <input type="range" id="s-escala" min="1" max="3" step="0.1" value="1" aria-labelledby="nom-escala">
+      <div class="val" id="v-escala"></div>
+    </div>
 
     <div class="resultado">
       <div class="gran">
@@ -180,6 +186,7 @@
         <div class="fila"><span>Facturación al mes hoy</span><b id="r-fact-hoy">—</b></div>
         <div class="fila"><span>Facturación al mes con el sistema</span><b id="r-fact">—</b></div>
         <div class="fila"><span>Cada € invertido en anuncios</span><b id="r-roas">—</b></div>
+        <div class="fila"><span>Inversión en anuncios al mes</span><b id="r-inv">—</b></div>
         <div class="fila"><span>Qualivo al mes</span><b id="r-cuota">—</b></div>
         <div class="fila"><span>Lo que te queda de más al mes</span><b id="r-neto">—</b></div>
         <div class="fila"><span>La entrada se recupera en</span><b id="r-meses">—</b></div>
@@ -249,8 +256,9 @@
   function preset(nombre) {
     var t = tasasHoy(datos());
     var c = t.contacto * 100, a = t.asistencia * 100, k = t.cierre * 100, o = objetivos(t);
-    if (nombre === 'prudente') { c = o.c; a = o.a; }
+    if (nombre === 'prudente' || nombre === 'escalar') { c = o.c; a = o.a; }
     if (nombre === 'asistencia') { a = o.a; }
+    $('#s-escala').value = nombre === 'escalar' ? '2' : '1';
     ponSliders(c, a, k);
   }
   function ponSliders(c, a, k) {
@@ -305,15 +313,19 @@
     } else { $('#fuga-hoy').textContent = ''; }
 
     // Escenario con Qualivo.
-    var c = +sliders.contacto.value / 100, a = +sliders.asistencia.value / 100, k = +sliders.cierre.value / 100;
-    var h2 = d.leads * c, p2 = h2 * a, v2 = p2 * k, fact2 = v2 * d.ticket;
+    // Si el deslizador está en el valor de hoy, se usa la tasa exacta (el deslizador redondea a enteros).
+    var exacta = function (s, hoy) { return +s.value === Math.round(hoy * 100) ? hoy : +s.value / 100; };
+    var c = exacta(sliders.contacto, t.contacto), a = exacta(sliders.asistencia, t.asistencia), k = exacta(sliders.cierre, t.cierre);
+    var escala = Math.max(1, +$('#s-escala').value || 1), inv2 = d.inversion * escala, leads2 = d.leads * escala;
+    var h2 = leads2 * c, p2 = h2 * a, v2 = p2 * k, fact2 = v2 * d.ticket;
+    $('#v-escala').innerHTML = eur(d.inversion) + ' → <b>' + eur(inv2) + '</b> · ' + uno(d.leads) + ' → <b>' + uno(leads2) + '</b> leads';
     $('#v-contacto').innerHTML = pct(t.contacto) + ' → <b>' + Math.round(c * 100) + ' %</b>';
     $('#v-asistencia').innerHTML = pct(t.asistencia) + ' → <b>' + Math.round(a * 100) + ' %</b>';
     $('#v-cierre').innerHTML = pct(t.cierre) + ' → <b>' + Math.round(k * 100) + ' %</b>';
 
     // Barras: hoy frente a con el sistema, en proporción a los leads.
     var filas = [[sec.hablan, d.hablan, h2], [sec.presentan, d.presentan, p2], [sec.compran, d.compran, v2]];
-    var base = Math.max(d.leads, 1);
+    var base = Math.max(leads2, d.leads, 1);
     $('#barras').innerHTML = filas.map(function (f) {
       return '<div class="br"><div class="t"><span>' + esc(f[0]) + '</span></div>' +
         '<div class="fila"><span>Hoy</span><div class="pista"><div class="rel" style="width:' + Math.min(100, f[1] / base * 100) + '%"></div></div><b>' + uno(f[1]) + '</b></div>' +
@@ -322,24 +334,26 @@
 
     // Estimaciones: redondeadas a decenas para no dar una precisión que no tienen.
     var r10 = function (n) { return Math.round(n / 10) * 10; };
-    var extra = r10(fact2 - fact), neto = r10(fact2 - fact - d.cuota);
+    var masInv = inv2 - d.inversion;
+    var extra = r10(fact2 - fact), neto = r10(fact2 - fact - d.cuota - masInv);
     $('#r-extra').textContent = (extra >= 0 ? '+' : '') + eur(extra) + ' al mes';
     $('#r-extra').className = 'num' + (neto < 0 ? ' neg' : '');
-    $('#r-extra-txt').textContent = 'Pasas de ' + uno(d.compran) + ' a ' + uno(v2) + ' ' + sec.clientes + ' al mes (de ' + eur(r10(fact)) + ' a ' + eur(r10(fact2)) + ' de facturación) con la misma inversión y los mismos leads.';
+    $('#r-extra-txt').textContent = 'Pasas de ' + uno(d.compran) + ' a ' + uno(v2) + ' ' + sec.clientes + ' al mes (de ' + eur(r10(fact)) + ' a ' + eur(r10(fact2)) + ' de facturación) ' + (escala > 1 ? 'invirtiendo ' + eur(inv2) + ' al mes en anuncios (unos ' + uno(leads2) + ' leads, al mismo coste por lead).' : 'con la misma inversión y los mismos leads.');
     $('#r-fact-hoy').textContent = eur(r10(fact));
     $('#r-fact').textContent = eur(r10(fact2));
-    $('#r-roas').textContent = d.inversion > 0 ? uno(fact2 / d.inversion) + ' €' : '—';
+    $('#r-roas').textContent = inv2 > 0 ? uno(fact2 / inv2) + ' €' : '—';
+    $('#r-inv').textContent = eur(inv2) + (masInv > 0 ? ' (+' + eur(masInv) + ')' : '');
     $('#r-cuota').textContent = eur(d.cuota);
     $('#r-neto').textContent = eur(neto);
     var meses = neto > 0 ? d.entrada / neto : Infinity;
     $('#r-meses').textContent = neto <= 0 ? '—' : meses <= 1 ? 'el primer mes' : meses > 24 ? 'más de 2 años' : uno(meses) + ' meses';
     var margen = d.cuota * 0.1;   // por debajo de un 10 % de la cuota, «queda justo»
-    var faltan = d.ticket > 0 ? (d.cuota - (fact2 - fact)) / d.ticket : 0;
+    var faltan = d.ticket > 0 ? (d.cuota + masInv - (fact2 - fact)) / d.ticket : 0;
     $('#r-veredicto').textContent = neto >= margen
       ? 'Con este escenario, el sistema se paga solo y te deja ' + eur(neto) + ' más al mes.'
       : neto > -margen
         ? 'Con este escenario queda justo: cubre la cuota, pero casi sin margen.'
-        : 'Con este escenario todavía no se paga: harían falta ' + uno(Math.max(faltan, 0)) + ' ' + sec.clientes + ' más al mes para cubrir la cuota.';
+        : 'Con este escenario todavía no se paga: harían falta ' + uno(Math.max(faltan, 0)) + ' ' + sec.clientes + ' más al mes para cubrir la cuota' + (masInv > 0 ? ' y la inversión extra.' : '.');
 
     // Objetivo a 90 días: la etapa que más mejora de las que controla el sistema.
     var mejoraC = t.contacto > 0 ? c / t.contacto : 0, mejoraA = t.asistencia > 0 ? a / t.asistencia : 0;
@@ -364,7 +378,7 @@
   // Estado en la URL (?r=) para compartir el enlace después de la reunión.
   function aURL() {
     var o = {}; campos.forEach(function (k) { o[k] = $('#' + k).value; });
-    o.sc = sliders.contacto.value; o.sa = sliders.asistencia.value; o.sk = sliders.cierre.value;
+    o.sc = sliders.contacto.value; o.sa = sliders.asistencia.value; o.sk = sliders.cierre.value; o.se = $('#s-escala').value;
     return location.origin + location.pathname + '?r=' + encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(o)))));
   }
   function deURL() {
@@ -395,6 +409,8 @@
   $('#copiar-obj').addEventListener('click', function () { copia($('#r-objetivo').textContent, 'Objetivo copiado'); });
   $('#compartir').addEventListener('click', function () { copia(aURL(), 'Enlace copiado'); });
 
+  $('#s-escala').addEventListener('input', pinta);
+  if (guardado.se != null) $('#s-escala').value = guardado.se;
   if (guardado.sc != null) ponSliders(+guardado.sc, +guardado.sa, +guardado.sk); else preset('prudente');
 })();
 </script>
