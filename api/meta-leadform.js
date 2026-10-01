@@ -441,9 +441,8 @@ module.exports = async function handler(req, res) {
         try {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');
-          if (act.enVentana('whatsapp')) {
-            await act.primerWhatsAppCompleto(r.contactId, r.telefono, { nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga, sector: r.sector, volumen: r.volumen, empresa: r.empresa });
-          }
+          // De 21:30 a 8:00 no sale: queda programado para las 8:00 (quiet_hours).
+          await act.primerWhatsAppCompleto(r.contactId, r.telefono, { nombre: r.nombre, origen: 'leadform', inversion: r.inversion, fuga: r.fuga, sector: r.sector, volumen: r.volumen, empresa: r.empresa });
         } catch (err) {
           console.error('[leadform] primer WhatsApp no salió:', err && err.message);
         }

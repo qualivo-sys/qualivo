@@ -40,7 +40,11 @@ function ahoraMadrid(fecha) {
 // tiene la ventana más estrecha y solo entre semana.
 function enVentana(canal, fecha) {
   const t = ahoraMadrid(fecha);
-  if (canal === 'whatsapp') return t.minutos >= 8 * 60 && t.minutos <= 21 * 60 + 30;
+  // 1-oct-2026: WhatsApp y voz con las ventanas aprobadas (api/_horario.js).
+  const HH = require('./_horario.js');
+  const ms = fecha ? new Date(fecha).getTime() : Date.now();
+  if (canal === 'whatsapp') return HH.ventanaWhatsApp(ms);
+  if (canal === 'voz') return HH.ventanaVoz(ms);
   if (canal === 'voz') {
     if (t.dia === 0) return false;                       // domingo nunca
     // Sábado solo por la mañana. El histórico de la cuenta dice que el fin de
@@ -326,74 +330,265 @@ async function primerWhatsApp(contactId, telefono, datos) {
   return env;
 }
 
-// Primer WhatsApp completo, el mismo desde cualquier puerta (formulario de Meta, rescate de
-// leads, landing del diagnóstico y reloj de activación). 28-sep: las puertas mandaban el texto
-// genérico y marcaban act-wa1 SIN la hora de envío (act-wa1-h-…); sin esa hora la cadencia
-// daba por pasados los plazos y a Antonio le salieron D+0, D+1 y D+3 en cincuenta minutos.
-// d: { nombre, empresa, sector, fuga, inversion, volumen, entro, hipotesis, origen }.
-async function primerWhatsAppCompleto(contactId, telefono, d) {
-  d = d || {};
-  const M = require('./_mensajes.js'), AGT = require('./_agente.js');
-  let pq = false, ficha = null;
-  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) { ficha = (await r.json()).contact || {}; pq = require('./_scoring.js').precualificar(ficha).si; } } catch (e) { /* sin ficha: mensaje normal */ }
-  // 29-sep (Anna Guasch): entró por la landing /formacion/ y por el formulario de Meta con
-  // cuatro minutos de diferencia, las dos puertas mandaron el primer WhatsApp y ninguna dejó
-  // act-wa1. Antes de escribir se mira la ficha (act-wa1, o un envío en curso) y la conversación
-  // (cualquier mensaje nuestro en las últimas 24 h), y se marca el envío en curso al momento.
-  const ya = await yaTienePrimerWhatsApp(contactId, ficha);
-  if (ya) return { ok: false, canal: 'ninguno', motivo: ya };
-  await etiquetar(contactId, ['act-wa1-enviando-' + new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12)]);
-  const tardes = AGT.opcionesTarde();
-  const ia = await AGT.mensajePersonalizado({ nombre: M.nombreCorto(d.nombre), empresa: d.empresa || '', sector: d.sector, fuga: d.fuga || d.hipotesis, inversion: d.inversion, volumen: d.volumen,
-    opcion1: tardes[0], opcion2: tardes[1], precualificar: pq }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
-  const datosMsg = { nombre: d.nombre, origen: d.origen, inversion: d.inversion, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis, entro: d.entro, precualificar: pq };
-  const texto = d.texto || ia.texto || M.whatsapp1(datosMsg);
-  // A y B no reciben nada sin que Maikel lo vea antes (d.soltar = ya lo ha aprobado). De noche
-  // no se avisa: el reloj de activación lo retiene y avisa a partir de las 8:00.
-  const n = ficha ? nivelDe(ficha) : '';
-  if ((n === 'A' || n === 'B') && !d.soltar) {
-    if (!enVentana('whatsapp')) return { ok: false, canal: 'ninguno', motivo: 'espera_maikel_de_noche', nivel: n };
-    await retenerParaMaikel(ficha, texto, n);
-    return { ok: false, canal: 'espera_maikel', nivel: n, borrador: texto };
-  }
-  const env = await primerWhatsApp(contactId, telefono, { nombre: M.nombreCorto(d.nombre), cita: d.fuga || d.hipotesis || 'el diagnóstico', pregunta: M.pregunta(datosMsg), texto: texto });
-  const sello = 'act-wa1-h-' + new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
-  await etiquetar(contactId, ['act-wa1', sello].concat(env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []));
-  try { const r2 = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r2.ok) await require('./_scoring.js').puntuar((await r2.json()).contact, { mensajes: [] }); } catch (e) { /* no bloquea */ }
-  return Object.assign({}, env, { ia: !!ia.texto, precualificar: pq });
+// ---------------------------------------------------------------------------
+// Primer WhatsApp · Bloque 1 «speed-to-lead» (decisiones de Maikel del 1-oct-2026)
+// ---------------------------------------------------------------------------
+//   · WhatsApp solo de 8:00 a 21:30 (api/_horario.js). Fuera, el lead entra en
+//     el CRM igual y el primer WhatsApp queda programado para las 8:00
+//     (act-wa1-prog-<sello> + act-wa1-motivo-quiet). Lo manda el reloj.
+//   · A y B dentro de la supervisión de Maikel (L-V laborables 9:00-19:00): se
+//     genera el borrador al momento, se le avisa («sale automáticamente a las
+//     HH:MM si no haces nada») y espera ESPERA_A_B_MIN. Si Maikel escribe al
+//     lead antes, o pone la etiqueta wa1-cancelar, no sale nada automático.
+//     Si no, sale solo (soltarRetenidos, cada 2 min). Nunca indefinido.
+//   · A y B fuera de su supervisión pero en hora de WhatsApp: sale al momento.
+//   · Un candado (tomarCandado) evita dos envíos aunque el webhook, el rescate
+//     y los relojes lleguen a la vez.
+//   · Trazabilidad por etiquetas: act-ini (entrada), act-wa1-prog (programado),
+//     act-wa1-h (enviado), act-wa1-motivo-<quiet|supervision>,
+//     act-wa1-modo-<auto|auto10|humano|cancelado>, wa1-v-<corto|largo>,
+//     wa1-ctx-<supervision|fuera|noche>.
+const H = require('./_horario.js');
+const ESPERA_A_B_MIN = 10;
+// A/B del primer WhatsApp (P0.2): corto frente a largo, mitad y mitad. Las 15
+// preguntas del corto las aprobó Maikel el 1-oct. false = todos al largo.
+const WA1_CORTO = true;
+const CANDADO_MS = parseInt(process.env.CANDADO_MS || '1500', 10);
+
+function etiquetaCon(tags, prefijo) {
+  return (tags || []).map(String).filter(function (t) { return t.indexOf(prefijo) === 0 && /\d{12}$/.test(t); })[0] || '';
 }
 
-// Todos los mensajes de un contacto, de más antiguo a más nuevo.
-// 29-sep, Maikel: «cuando sean leads de categoría A o B, que el sistema me notifique a mí antes
-// de escribirles». Se deja el borrador en una nota, se le avisa al móvil y por correo, y la
-// cadencia de ese contacto se para (act-espera-maikel) hasta que él lo suelte: o escribe él, o
-// da el ok y sale el borrador con primerWhatsAppCompleto(..., { soltar: true, texto }).
+// Candado distribuido con etiquetas: cada proceso deja su marca, espera un
+// momento, relee el contacto y solo sigue el de la marca más antigua (y, en
+// empate, la menor). Las marcas de más de 15 min se ignoran.
+async function tomarCandado(contactId, clave) {
+  const ahora = Date.now();
+  const mia = clave + '-' + new Date(ahora).toISOString().replace(/[-:T.Z]/g, '').slice(0, 17) + '-' + Math.random().toString(36).slice(2, 8);
+  await etiquetar(contactId, [mia]);
+  await esperar(CANDADO_MS);
+  let tags = [];
+  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) tags = (((await r.json()).contact || {}).tags || []).map(String); } catch (e) { tags = []; }
+  const vivas = tags.filter(function (t) {
+    if (t.indexOf(clave + '-') !== 0) return false;
+    const m = t.slice(clave.length + 1).match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/);
+    if (!m) return false;
+    return ahora - Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]) < 15 * 60000;
+  }).sort();
+  if (vivas.indexOf(mia) === -1 && tags.length) return null; // no se ve la propia marca: mejor no seguir
+  if (vivas.length && vivas[0] !== mia) { await etiquetar(contactId, null, [mia]).catch(function () {}); return null; }
+  return mia;
+}
+async function soltarCandado(contactId, mia) { if (mia) await etiquetar(contactId, null, [mia]).catch(function () {}); }
+
+async function fichaDe(contactId) {
+  try { const r = await fetch(GHL_BASE + '/contacts/' + contactId, { headers: cabeceras() }); if (r.ok) return (await r.json()).contact || null; } catch (e) { /* nada */ }
+  return null;
+}
+
+// Hora de entrada del lead: act-ini-<sello>, la que pase la puerta, o la del CRM.
+function entradaDe(ficha, d) {
+  const t = etiquetaCon(ficha && ficha.tags, 'act-ini-');
+  if (t) return H.msDeSello(t);
+  const e = Date.parse((d && d.entro) || (ficha && ficha.dateAdded) || 0);
+  return e || Date.now();
+}
+
+// Texto del primer WhatsApp según variante y contexto horario.
+async function textoWa1(d, ficha, variante, ctx, pq) {
+  const M = require('./_mensajes.js'), AGT = require('./_agente.js');
+  const datosMsg = { nombre: d.nombre, origen: d.origen, inversion: d.inversion, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis, entro: d.entro, precualificar: pq };
+  if (variante === 'corto') return { texto: M.whatsappCorto(datosMsg, ctx), ia: false, datosMsg: datosMsg };
+  const tardes = AGT.opcionesTarde();
+  const ia = await AGT.mensajePersonalizado({ nombre: M.nombreCorto(d.nombre), empresa: d.empresa || '', sector: d.sector, fuga: d.fuga || d.hipotesis, inversion: d.inversion, volumen: d.volumen,
+    opcion1: tardes[0], opcion2: tardes[1], precualificar: pq, ctx: ctx }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+  return { texto: ia.texto || M.whatsapp1(datosMsg), ia: !!ia.texto, datosMsg: datosMsg };
+}
+
+// Primer WhatsApp completo, el mismo desde cualquier puerta (formulario de Meta,
+// rescate, landing y reloj de activación). Nunca lanza por la parte horaria.
+// d: { nombre, empresa, sector, fuga, inversion, volumen, entro, hipotesis, origen,
+//      soltar (sale el borrador retenido), texto, variante, ctx, modo }
+async function primerWhatsAppCompleto(contactId, telefono, d) {
+  d = d || {};
+  const M = require('./_mensajes.js');
+  let ficha = await fichaDe(contactId);
+  const tags0 = ((ficha && ficha.tags) || []).map(String);
+  const ahora = Date.now();
+  // 1. Horario: con el WhatsApp cerrado no se escribe; se deja programado.
+  if (!H.ventanaWhatsApp(ahora)) {
+    if (!etiquetaCon(tags0, 'act-wa1-prog-') && tags0.indexOf('act-wa1') === -1) {
+      await etiquetar(contactId, ['act-wa1-prog-' + H.sello(H.siguienteWhatsApp(ahora)), 'act-wa1-motivo-quiet']).catch(function () {});
+    }
+    return { ok: false, canal: 'ninguno', motivo: 'quiet_hours', programado: H.siguienteWhatsApp(ahora) };
+  }
+  // 2. ¿Ya salió o está saliendo? (29-sep, Anna: dos puertas a la vez.)
+  const ya = await yaTienePrimerWhatsApp(contactId, ficha);
+  if (ya) return { ok: false, canal: 'ninguno', motivo: ya };
+  if (tags0.indexOf('act-espera-maikel') > -1 && !d.soltar) return { ok: false, canal: 'ninguno', motivo: 'retenido' };
+  // 3. Candado: solo un proceso sigue a partir de aquí.
+  const candado = await tomarCandado(contactId, 'act-lock-wa1');
+  if (!candado) return { ok: false, canal: 'ninguno', motivo: 'otro_proceso' };
+  try {
+    ficha = (await fichaDe(contactId)) || ficha;
+    const ya2 = await yaTienePrimerWhatsApp(contactId, ficha);
+    if (ya2) return { ok: false, canal: 'ninguno', motivo: ya2 };
+    const tags = ((ficha && ficha.tags) || []).map(String);
+    if (tags.indexOf('act-espera-maikel') > -1 && !d.soltar) return { ok: false, canal: 'ninguno', motivo: 'retenido' };
+    const pq = ficha ? require('./_scoring.js').precualificar(ficha).si : false;
+    const entro = entradaDe(ficha, d);
+    const ctx = d.ctx || H.contextoWa1(ahora, entro);
+    const variante = d.variante || (WA1_CORTO ? M.varianteWa1(contactId) : 'largo');
+    const n = ficha ? nivelDe(ficha) : '';
+    const t = d.texto ? { texto: d.texto, ia: false, datosMsg: { nombre: d.nombre, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis } } : await textoWa1(d, ficha, variante, ctx, pq);
+    const traza = ['wa1-v-' + variante, 'wa1-ctx-' + ctx.ctx];
+    // 4. A y B en horario de supervisión: borrador, aviso y 10 minutos.
+    if ((n === 'A' || n === 'B') && !d.soltar && H.supervision(ahora)) {
+      await retenerParaMaikel(ficha, t.texto, n, traza);
+      return { ok: false, canal: 'espera_maikel', nivel: n, borrador: t.texto, sale: ahora + ESPERA_A_B_MIN * 60000 };
+    }
+    // 5. Envío.
+    await etiquetar(contactId, ['act-wa1-enviando-' + H.sello(ahora)]);
+    const env = await primerWhatsApp(contactId, telefono, { nombre: M.nombreCorto(d.nombre), cita: d.fuga || d.hipotesis || 'el diagnóstico', pregunta: M.pregunta(t.datosMsg), texto: t.texto });
+    const modo = d.modo || (d.soltar ? 'auto10' : 'auto');
+    const quitar = d.soltar ? ['act-espera-maikel'].concat(tags.filter(function (x) { return x.indexOf('act-espera-maikel-h-') === 0; })) : [];
+    await etiquetar(contactId, ['act-wa1', 'act-wa1-h-' + H.sello(), 'act-wa1-modo-' + modo].concat(traza,
+      env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla'] : env.canal === 'whatsapp_fallido' ? ['act-wa1-fallido'] : []), quitar);
+    try { const f2 = await fichaDe(contactId); if (f2) await require('./_scoring.js').puntuar(f2, { mensajes: [] }); } catch (e) { /* no bloquea */ }
+    return Object.assign({}, env, { ok: env.canal !== 'whatsapp_fallido' && env.canal !== 'frenado' && env.canal !== 'pausado', ia: !!t.ia, precualificar: pq, variante: variante, ctx: ctx.ctx, modo: modo, texto: t.texto });
+  } finally {
+    await soltarCandado(contactId, candado);
+  }
+}
+
 function nivelDe(c) {
   const S = require('./_scoring.js');
   return S.nivel(S.tipologia(c).puntos, S.comportamiento(c, []).puntos, c);
 }
-async function retenerParaMaikel(c, texto, n) {
+
+// A/B en supervisión: queda el borrador en una nota y Maikel recibe el aviso.
+async function retenerParaMaikel(c, texto, n, traza) {
   if ((c.tags || []).indexOf('act-espera-maikel') > -1) return false;
-  await etiquetar(c.id, ['act-espera-maikel', 'nivel-' + String(n).toLowerCase()]);
+  const ahora = Date.now();
+  const sale = ahora + ESPERA_A_B_MIN * 60000;
+  await etiquetar(c.id, ['act-espera-maikel', 'act-espera-maikel-h-' + H.sello(ahora), 'act-wa1-prog-' + H.sello(sale),
+    'act-wa1-motivo-supervision', 'nivel-' + String(n).toLowerCase()].concat(traza || []));
   const quien = (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '');
-  await nota(c.id, 'NIVEL ' + n + ' · NO SE LE HA ESCRITO: la regla de Maikel (29-sep) es que los A y B los vea él antes. ' +
-    'Cadencia parada (act-espera-maikel) hasta que escriba él o dé el ok al borrador.\n\nBorrador del primer WhatsApp:\n' + texto);
-  // 29-sep, Maikel: «que en el CRM pueda tener la máxima información de los leads». Se investiga
-  // el negocio en internet (api/_enriquecer.js): nota «FICHA INVESTIGADA» + etiqueta
-  // ficha-investigada, y el resumen en tres líneas va en el aviso al móvil. El aviso no espera
-  // más de ENRIQUECER_AVISO_MS: si la ficha tarda, sale como siempre y la nota llega después.
+  await nota(c.id, 'NIVEL ' + n + ' · PRIMER WHATSAPP EN ESPERA ' + ESPERA_A_B_MIN + ' MIN (regla de Maikel del 1-oct). ' +
+    'Sale automáticamente a las ' + H.horaTexto(sale) + ' si Maikel no le escribe antes ni pone la etiqueta wa1-cancelar.\n\nBorrador del primer WhatsApp:\n' + texto);
+  // La ficha investigada (api/_enriquecer.js) acompaña al aviso si llega a tiempo.
   const inv = await require('./_enriquecer.js').paraElAviso(c);
   const Av = require('./_aviso.js');
   try {
-    await Av.movil('LEAD ' + n + ' · NO LE HE ESCRITO, espero tu ok\n' + quien + (c.phone ? '\nTel ' + c.phone : '') +
+    await Av.movil('LEAD ' + n + ' · Sale automáticamente a las ' + H.horaTexto(sale) + ' si no haces nada\n' + quien + (c.phone ? '\nTel ' + c.phone : '') +
       (inv && inv.resumen ? '\n\nLo que se ve de su negocio:\n' + inv.resumen + (inv.guardada ? '\n(ficha completa en las notas del CRM)' : '') : '') +
-      '\n\nBorrador del primer WhatsApp:\n' + texto);
+      '\n\nBorrador del primer WhatsApp:\n' + texto +
+      '\n\nSi le escribes tú antes, no sale este. Para que no salga nada: etiqueta wa1-cancelar en el CRM.', { forzar: true });
   } catch (e) { console.error('[activacion] aviso A/B al móvil:', e && e.message); }
   try {
     await Av.seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
-      accion: 'LEAD ' + n + ' · espera tu ok antes del primer WhatsApp', texto: texto, origen: 'Cadencia' });
+      accion: 'LEAD ' + n + ' · primer WhatsApp sale automáticamente a las ' + H.horaTexto(sale), texto: texto, origen: 'Cadencia' });
   } catch (e) { console.error('[activacion] aviso A/B por correo:', e && e.message); }
   return true;
+}
+
+// El borrador que se le enseñó a Maikel (la nota de retenerParaMaikel).
+async function borradorRetenido(contactId) {
+  try {
+    const r = await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', { headers: cabeceras() });
+    if (!r.ok) return '';
+    const notas = ((await r.json()).notes || []).slice().sort(function (a, b) { return Date.parse(b.dateAdded || 0) - Date.parse(a.dateAdded || 0); });
+    const marca = 'Borrador del primer WhatsApp:\n';
+    const n = notas.filter(function (x) { return /^NIVEL [AB] · /.test(String(x.body || '')) && String(x.body).indexOf(marca) > -1; })[0];
+    return n ? String(n.body).slice(String(n.body).indexOf(marca) + marca.length).trim() : '';
+  } catch (e) { return ''; }
+}
+
+// Cada 2 minutos (api/wa-agente-reloj.js) y de respaldo cada 10 (api/activacion.js).
+// Resuelve los A/B retenidos: humano, cancelado, respondió, o sale solo a los 10 min.
+async function soltarRetenidos(opciones) {
+  opciones = opciones || {};
+  const res = { revisados: 0, enviados: 0, humano: 0, cancelados: 0, respondio: 0, esperando: 0, limpiados: 0, errores: 0, detalle: [] };
+  if (PAUSA_TOTAL) return res;
+  let lista = [];
+  try { lista = await buscarPorEtiqueta('act-espera-maikel', 50); } catch (e) { res.errores++; return res; }
+  for (const c of lista) {
+    res.revisados++;
+    const tags = (c.tags || []).map(String);
+    const selloEspera = tags.filter(function (t) { return /^act-espera-maikel-h-\d{12}$/.test(t); })[0] || '';
+    const quitar = ['act-espera-maikel'].concat(selloEspera ? [selloEspera] : []);
+    const fila = { id: c.id, nombre: c.firstName || c.contactName || '' };
+    try {
+      if (tags.indexOf('act-wa1') > -1) { // ya salió por otra vía: solo se limpia
+        fila.accion = 'limpiar'; await etiquetar(c.id, null, quitar); res.limpiados++; res.detalle.push(fila); continue;
+      }
+      if (tags.indexOf('wa1-cancelar') > -1) {
+        fila.accion = 'cancelado';
+        await etiquetar(c.id, ['act-wa1-cancelado', 'act-wa1-modo-cancelado'], quitar.concat(['wa1-cancelar']));
+        await nota(c.id, 'PRIMER WHATSAPP CANCELADO por Maikel (etiqueta wa1-cancelar). No sale nada automático: lo lleva él.');
+        res.cancelados++; res.detalle.push(fila); continue;
+      }
+      if (!selloEspera) { // retenido antes de esta versión: el reloj de 10 min empieza ahora
+        fila.accion = 'sellar'; await etiquetar(c.id, ['act-espera-maikel-h-' + H.sello()]); res.esperando++; res.detalle.push(fila); continue;
+      }
+      const desde = H.msDeSello(selloEspera);
+      const msgs = (await mensajesDe(c.id)).filter(function (m) {
+        return Date.parse(m.dateAdded || 0) >= desde - 60000 && !/ACTIVITY/i.test(String(m.messageType || ''));
+      });
+      const suyo = msgs.filter(function (m) { return String(m.direction) === 'inbound'; })[0];
+      if (suyo) { // contestó antes de que saliera nada (al correo, por ejemplo): sigue el agente
+        fila.accion = 'respondio'; await etiquetar(c.id, ['act-wa1-modo-respondio-antes'], quitar);
+        await nota(c.id, 'PRIMER WHATSAPP NO ENVIADO: el lead escribió antes de que saliera («' + String(suyo.body || '').slice(0, 160) + '»).');
+        res.respondio++; res.detalle.push(fila); continue;
+      }
+      const nuestro = msgs.filter(function (m) { return String(m.direction) === 'outbound' && !/EMAIL/i.test(String(m.messageType || '')); })[0];
+      if (nuestro) { // Maikel le escribió él: su mensaje es el primero
+        fila.accion = 'humano';
+        await etiquetar(c.id, ['act-wa1', 'act-wa1-h-' + H.sello(Date.parse(nuestro.dateAdded || 0) || Date.now()), 'act-wa1-modo-humano'], quitar);
+        await nota(c.id, 'PRIMER WHATSAPP: lo escribió Maikel antes de los ' + ESPERA_A_B_MIN + ' min. No sale el automático.');
+        res.humano++; res.detalle.push(fila); continue;
+      }
+      const min = (Date.now() - desde) / 60000;
+      if (min < ESPERA_A_B_MIN || !H.ventanaWhatsApp(Date.now())) { fila.accion = 'esperando'; res.esperando++; res.detalle.push(fila); continue; }
+      if (!c.phone) { fila.accion = 'sin_telefono'; await etiquetar(c.id, ['act-wa1-modo-sin-telefono'], quitar); res.errores++; res.detalle.push(fila); continue; }
+      if (opciones.seco) { fila.accion = 'enviaria'; res.detalle.push(fila); continue; }
+      const texto = await borradorRetenido(c.id);
+      const v = (tags.filter(function (t) { return /^wa1-v-/.test(t); })[0] || '').slice(6) || undefined;
+      const ctxTag = (tags.filter(function (t) { return /^wa1-ctx-/.test(t); })[0] || '').slice(8);
+      const sector = (tags.filter(function (t) { return /^sector-/.test(t); }).sort(function (a, b) { return a.length - b.length; })[0] || '').slice(7).replace(/-/g, ' ');
+      const fuga = (tags.filter(function (t) { return /^fuga-/.test(t); })[0] || '').slice(5).replace(/-/g, ' ');
+      const env = await primerWhatsAppCompleto(c.id, c.phone, {
+        nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', sector: sector, fuga: fuga,
+        soltar: true, texto: texto || undefined, variante: v, ctx: ctxTag ? { ctx: ctxTag } : undefined, modo: 'auto10',
+        origen: tags.indexOf('leadform') > -1 ? 'leadform' : 'landing'
+      });
+      fila.accion = env.ok === false ? 'no_salio:' + (env.motivo || env.canal) : 'enviado';
+      if (env.ok === false && env.motivo === 'ya_escrito') { // alguien escribió justo ahora: cuenta como humano
+        await etiquetar(c.id, ['act-wa1', 'act-wa1-h-' + H.sello(), 'act-wa1-modo-humano'], quitar); res.humano++;
+      } else if (env.ok === false) { res.errores++; }
+      else {
+        res.enviados++;
+        try { await require('./_aviso.js').movil('Ha salido solo el primer WhatsApp a ' + (c.firstName || c.contactName || 'un lead') + (c.companyName ? ' · ' + c.companyName : '') + ' (no lo tocaste en ' + ESPERA_A_B_MIN + ' min).', { forzar: true }); } catch (e) { /* no bloquea */ }
+      }
+      res.detalle.push(fila);
+    } catch (e) {
+      res.errores++; fila.error = String(e && e.message).slice(0, 160); res.detalle.push(fila);
+    }
+  }
+  return res;
+}
+
+// Siguiente acción para Maikel con fecha: ahora si está en su horario de
+// supervisión, o al empezar el siguiente. Tarea en GHL asignada a él.
+const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
+async function siguienteAccion(c, titulo, cuerpo) {
+  const vence = H.siguienteSupervision(Date.now()) || Date.now();
+  const r = await fetch(GHL_BASE + '/contacts/' + c.id + '/tasks', {
+    method: 'POST', headers: cabeceras(),
+    body: JSON.stringify({ title: titulo + ' · ' + (c.firstName || c.contactName || ''), body: String(cuerpo || '').slice(0, 2000), dueDate: new Date(vence).toISOString(), completed: false, assignedTo: USUARIO_MAIKEL })
+  });
+  await nota(c.id, 'SIGUIENTE ACCIÓN para Maikel · ' + titulo + ' · para el ' + H.cuandoTexto(vence)).catch(function () {});
+  return r.ok;
 }
 
 // Motivo para no mandar el primer WhatsApp, o '' si se puede. El envío en curso caduca a los
@@ -579,15 +774,16 @@ async function revisarRespuesta(contactId, desdeMs) {
   // cadencia le llamó y le escribió a la mañana siguiente).
   try {
     const mensajes = await mensajesDe(contactId);
-    let respondio = false, texto = '';
+    let respondio = false, texto = '', primeraMs = 0;
     for (const m of mensajes) {
       if (String(m.direction) !== 'inbound') continue;
       if (Date.parse(m.dateAdded || 0) < (desdeMs || 0)) continue;
       if (!/SMS|WHATSAPP|EMAIL|CUSTOM/i.test(String(m.messageType || ''))) continue;
       respondio = true;
+      if (!primeraMs) primeraMs = Date.parse(m.dateAdded || 0) || 0;
       texto = String(m.body || '') || texto;
     }
-    return { respondio: respondio, baja: BAJA.test(texto), texto: texto.slice(0, 200) };
+    return { respondio: respondio, baja: BAJA.test(texto), texto: texto.slice(0, 200), primeraMs: primeraMs };
   } catch (err) {
     return { respondio: false };
   }
@@ -642,5 +838,6 @@ module.exports = {
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, retenerParaMaikel, nivelDe, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
-  sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta
+  sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta,
+  soltarRetenidos, siguienteAccion, tomarCandado, borradorRetenido, ESPERA_A_B_MIN, WA1_CORTO
 };

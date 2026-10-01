@@ -23,7 +23,7 @@ const A = require('./_activacion');
 const AG = require('./agendar.js');
 
 const MAX_TURNOS = 5;
-const ESPERA_MS = 8000; // el lead suele mandar dos o tres mensajes seguidos
+const ESPERA_MS = parseInt(process.env.WA_AGENTE_ESPERA_MS || '8000', 10); // el lead suele mandar dos o tres mensajes seguidos
 const CAMPO_ESTADO = 'SJp581X5s72ZxguCM4iI'; // WA · Agente (location bHGMuZEGUESZmVoNv9HT)
 const ZONA = 'Europe/Madrid';
 
@@ -62,7 +62,7 @@ const SISTEMA = [
   '- Presionar: si dice que no le interesa o que no es el momento, lo aceptas a la primera, das las gracias en una frase y usas pasar_a_maikel con motivo «no le interesa».',
   '- Mandar más de un mensaje seguido: contestas con UN mensaje.',
   '',
-  'CUÁNDO USAS pasar_a_maikel (y entonces contestas solo con una frase de puente, tipo «Te contesto yo en un rato a esto»): pide precio dos veces, pide hablar con una persona o con Maikel, se queja de algo (un SMS raro, una llamada, un correo), pregunta algo técnico que no sabes, dice que ya es cliente o que ya habló con nosotros, o la conversación se va a un sitio donde no sabes qué decir. Más vale pasar de más que contestar mal.',
+  'CUÁNDO USAS pasar_a_maikel (y entonces contestas solo con una frase de puente natural, sin prometer plazos: «Esto prefiero mirarlo con calma; te digo algo en cuanto pueda»): pide precio dos veces, quiere negociar, pide descuento o un precio especial, pregunta por garantías distintas de las de siempre, pide algo que no está en lo que hacemos (alcance fuera de catálogo), pregunta por una integración técnica compleja que no puedes confirmar, plantea una objeción delicada, pide hablar con una persona o con Maikel, se queja de algo (un SMS raro, una llamada, un correo), dice que ya es cliente o que ya habló con nosotros, o no estás seguro de la respuesta. Nunca inventes para salir del paso: más vale pasar de más que contestar mal.',
   '',
   'Hoy es {{FECHA}}. Los huecos libres reales del calendario de Maikel son: {{HUECOS}}. Ofrece dos, uno de mañana y otro de tarde o de otro día. Si te pide otra hora que no está en la lista, di que esa no la tienes y ofrécele las dos más cercanas.'
 ].join('\n');
@@ -377,7 +377,13 @@ async function mensajePersonalizado(o) {
     '--- EJEMPLO 1 ---', EJEMPLOS_MAIKEL[0], '', '--- EJEMPLO 2 ---', EJEMPLOS_MAIKEL[1], '---',
     '',
     'ESTRUCTURA (la de los ejemplos, en cinco párrafos cortos)',
-    '1. «[Hola] [nombre], soy Maikel, de Qualivo. Imagino que estarás liado/a[, con X], así que te cuento por aquí.»',
+    // 1-oct-2026 (Bloque 1): el arranque se adapta a la hora igual que en el
+    // mensaje corto, para que el A/B compare longitud y enfoque y no la hora.
+    (d.ctx && d.ctx.ctx === 'noche'
+      ? '1. Exactamente: «Hola [nombre], soy Maikel, de Qualivo. ' + ((d.ctx.cuando === 'esta mañana') ? 'Esta mañana' : 'Anoche') + ' nos dejaste tus datos, así que te cuento por aquí y me contestas cuando puedas.» (no digas que «acabas de» ni que estás liado/a)'
+      : d.ctx && d.ctx.ctx === 'fuera'
+        ? '1. Exactamente: «Hola [nombre], soy Maikel, de Qualivo. He visto que acabas de dejarnos tus datos, así que te cuento por aquí y me contestas cuando puedas.»'
+        : '1. «[Hola] [nombre], soy Maikel, de Qualivo. Imagino que estarás liado/a[, con X], así que te cuento por aquí.»'),
     '   Solo añade «con X» si el sector lo deja claro (la clínica, la escuela…). Si no, sin nada.',
     '2. Lo que puso en el formulario sobre dónde se le escapa, dicho con naturalidad («Comentabas que…»,',
     '   «En el formulario pusiste que…»), y lo que se ve a menudo en su sector, explicado con un ejemplo',
@@ -458,7 +464,13 @@ function esperar(ms) { return new Promise(function (ok) { setTimeout(ok, ms); })
 // redacta la contestación y se la manda a Maikel al móvil; no envía nada al
 // lead ni reserva citas. Cada borrador aprobado o corregido es material para
 // el piloto automático más adelante. Poner false para volver a que conteste solo.
-const COPILOTO = true;
+// 1-oct-2026 (Bloque 1, decisión de Maikel): fuera del primer WhatsApp no hay
+// ventana de 10 minutos ni borrador. Cuando el lead ya conversa, el agente
+// contesta solo dentro de su perímetro (conversar, cualificar, aclarar lo que
+// hacemos, proponer agenda) y escala a Maikel con pasar_a_maikel, que deja una
+// siguiente acción con fecha. Maikel pasa a ser capa de escalado, no un paso
+// obligatorio. Volver a true restaura el modo borrador.
+const COPILOTO = false;
 
 let modeloCaidoHasta = 0;
 let ultimoAvisoError = 0;
@@ -469,6 +481,9 @@ async function atender(contactId, opciones) {
   opciones = opciones || {};
   const hecho = { contactId: contactId };
   if (Date.now() < modeloCaidoHasta && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'modelo caído, en pausa' });
+  // De 21:30 a 8:00 no se escribe a nadie (1-oct). La respuesta la recoge el
+  // reloj a primera hora (api/wa-agente-reloj.js mira las de la noche).
+  if (!A.enVentana('whatsapp') && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'fuera de horario de WhatsApp' });
   try {
     let c = await contactoPorId(contactId);
     if (!c) return Object.assign(hecho, { accion: 'callar', motivo: 'sin_contacto' });
@@ -625,6 +640,12 @@ async function atender(contactId, opciones) {
     if (decision.accion === 'pasar') {
       await A.etiquetar(c.id, ['wa-humano']);
       await avisar(c, decision.detalle.motivo || 'te lo paso', ultimo.body);
+      // Siguiente acción para Maikel con fecha: ahora si está en su horario, o
+      // al empezar el siguiente (api/_horario.js).
+      try {
+        await A.siguienteAccion(c, 'Escalado del agente · ' + (decision.detalle.motivo || 'revisar conversación'),
+          'Él: «' + String(ultimo.body).slice(0, 400) + '»\nLe he contestado: «' + (decision.texto || '(nada)') + '»\nMotivo: ' + (decision.detalle.motivo || '-'));
+      } catch (e) { console.error('[agente] siguiente acción:', e && e.message); }
       // Precualificación que sale «no encaja todavía»: Meta aprende a no traer este perfil (28-sep).
       if (/no encaja/i.test(String(decision.detalle.motivo || ''))) {
         await A.etiquetar(c.id, ['no-encaja']).catch(function () {});

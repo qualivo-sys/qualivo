@@ -12,7 +12,7 @@ const M = require('./_mensajes');
 const S = require('./_secuencias');
 
 const TOPE = 40;          // contactos procesados por ejecución
-const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin'];
+const PARADAS = ['act-agendado', 'act-respondio', 'act-baja', 'act-fin', 'act-wa1-cancelado'];
 
 // 24-sep-2026: Maikel pidió parar los correos de la cadencia de activación
 // (act-email1/2/3, van desde RADIOGRAFIA_FROM). WhatsApp y llamadas siguen igual.
@@ -106,6 +106,9 @@ function siguientePaso(contacto, minutos) {
   // el 28-sep a Antonio le salieron D+0, D+1 y D+3 en cincuenta minutos por esto.
   if (desdeWa1 >= 1e9 && (contacto.tags || []).some(function (x) { return /^act-ini-\d{12}$/.test(String(x)); })) desdeWa1 = minutosDesdeInicio(contacto);
   if (!hay('act-paso2') && desdeWa1 >= ESPERA_PASO2_MIN) return { tipo: 'paso2', desdeWa1: desdeWa1 };
+  // Llamada de Raquel que cayó fuera de su ventana (1-oct): sale en la siguiente.
+  const prog = (contacto.tags || []).map(String).filter(function (x) { return /^act-voz1-prog-\d{12}$/.test(x); })[0];
+  if (prog && !hay('act-voz1') && Date.now() >= require('./_horario.js').msDeSello(prog)) return { tipo: 'voz1', ruta: 'ruta-raquel', programada: true };
   if (!hay('act-wa2') && hay('act-paso2') && desdeWa1 >= 24 * 60) return { tipo: 'wa2' };
   if (!hay('act-wa3') && hay('act-wa2') && desdeWa1 >= 3 * 24 * 60) return { tipo: 'wa3' };
   if (hay('act-wa3') && desdeWa1 >= 7 * 24 * 60) return { tipo: 'cerrar' };
@@ -245,6 +248,11 @@ async function handler(req, res) {
     return res.status(502).json({ ok: false, error: 'crm_error' });
   }
 
+  // Respaldo del reloj de 2 minutos (api/wa-agente-reloj.js): los A/B retenidos
+  // salen solos a los 10 min. El candado de primerWhatsAppCompleto evita dobles.
+  try { const sr = await A.soltarRetenidos(); if (sr.revisados) resumen.retenidos = { enviados: sr.enviados, humano: sr.humano, cancelados: sr.cancelados, esperando: sr.esperando }; }
+  catch (err) { console.error('[activacion] soltar retenidos:', err && err.message); }
+
   let hechos = 0;
   for (const c of contactos) {
     resumen.revisados++;
@@ -303,7 +311,7 @@ async function handler(req, res) {
           if (env.canal === 'whatsapp') { await A.etiquetar(c.id, ['act-wa1-personal']); resumen.wa++; }
         } catch (err) { console.error('[activacion] mensaje personalizado tras respuesta:', err.message); }
       }
-      await A.etiquetar(c.id, ['act-respondio'], ['activacion']);
+      await A.etiquetar(c.id, ['act-respondio'].concat(r.primeraMs ? ['act-respondio-h-' + selloHora(r.primeraMs)] : []), ['activacion']);
       await require('./_tratos.js').mover(c.id, 'conversacion');
       await avisar('respondio', c, r.texto);
       resumen.cerrados++;
@@ -374,57 +382,25 @@ async function handler(req, res) {
     if (c.website) datos.web = c.website;
 
     try {
-      if (paso.tipo === 'wa1' || paso.tipo === 'wa2' || paso.tipo === 'wa3') {
+      if (paso.tipo === 'wa1') {
         if (WA_CADENCIA_PAUSADA) { continue; }
-        if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
-        // El wa1 propone dos huecos reales de la agenda, en palabras.
-        if (paso.tipo === 'wa1') {
-          try { const AG = require('./agendar.js'); datos.huecos = (await AG.huecosLibres(2)).map(function (x) { return AG.enPalabras(x).replace(/^(\S+), (\d+) de \S+, (\d{1,2}:\d{2})$/, '$1 $2 a las $3'); }); } catch (e) { datos.huecos = []; }
+        // 1-oct-2026 (Bloque 1): el primer WhatsApp del reloj pasa por la misma
+        // función que las puertas (api/_activacion.js primerWhatsAppCompleto):
+        // horario, A/B con 10 min de supervisión, variante corta/larga, arranque
+        // según la hora, candado contra dobles envíos y trazabilidad.
+        const env = await A.primerWhatsAppCompleto(c.id, c.phone, {
+          nombre: datos.nombre, empresa: c.companyName || '', sector: datos.sector, fuga: datos.fuga,
+          inversion: datos.inversion, volumen: datos.volumen, entro: c.dateAdded || '', origen: datos.origen
+        });
+        if (env.ok === false) {
+          if (env.canal === 'espera_maikel') resumen.espera_maikel = (resumen.espera_maikel || 0) + 1;
+          else resumen.esperando++;
+          if (env.canal === 'espera_maikel' || env.motivo === 'quiet_hours') hechos++;
+          continue;
         }
-        let texto, esIA = false;
-        // 24-sep-2026, Maikel: el wa1 tiene que construirse de verdad a partir
-        // de las respuestas del formulario, con IA, no ser el mismo texto para
-        // todos. Si falla o no hay huecos reales, cae al texto estático: nunca
-        // se bloquea el envío por esto.
-        // 25-sep: el wa1 ofrece dos tardes en palabras («esta tarde o el lunes por la tarde»); la hora se cierra al contestar.
-        if (paso.tipo === 'wa1') {
-          const AGT = require('./_agente.js');
-          const tardes = AGT.opcionesTarde();
-          const ia = await AGT.mensajePersonalizado({
-            nombre: datos.nombre, empresa: c.companyName || '', sector: datos.sector, fuga: datos.fuga, inversion: datos.inversion, volumen: datos.volumen,
-            opcion1: tardes[0], opcion2: tardes[1], precualificar: datos.precualificar
-          }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
-          if (ia.texto) { texto = ia.texto; esIA = true; }
-          else console.warn('[activacion] wa1 sin IA para ' + c.id + ' (' + ia.motivo + '): cae al texto estático');
-        }
-        if (!texto) texto = paso.tipo === 'wa1' ? M.whatsapp1(datos) : paso.tipo === 'wa2' ? M.whatsappDia1(datos) : M.whatsappDia3(datos);
-        // A y B: el primer mensaje lo ve Maikel antes (29-sep). Se retiene y se le avisa.
-        if (paso.tipo === 'wa1' && !A.tiene(c, 'act-soltado')) {
-          const nv = nivelAhora(c);
-          if (nv === 'A' || nv === 'B') { await A.retenerParaMaikel(c, texto, nv); resumen.espera_maikel = (resumen.espera_maikel || 0) + 1; continue; }
-        }
-        // Regla de Maikel (22-sep): por la pasarela (su número personal) nunca
-        // el mismo texto dos veces. Se reescribe para esta persona; si no se
-        // puede, este paso espera a la siguiente vuelta en vez de salir igual.
-        // El wa1 generado por IA ya es único por persona: no hace falta reescribirlo.
-        if (A.saldriaPorGateway() && !esIA) {
-          const v = await require('./_agente.js').variar({ texto: texto, contacto: c, datos: datos }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
-          if (!v.texto) { console.warn('[activacion] sin variante para ' + c.id + ' (' + v.motivo + '): no sale por la pasarela'); resumen.esperando++; continue; }
-          texto = v.texto;
-        }
-        const env = paso.tipo === 'wa1'
-          ? await A.primerWhatsApp(c.id, c.phone, { nombre: datos.nombre, cita: datos.fuga || datos.sector || 'el diagnóstico', pregunta: M.pregunta(datos), texto: texto })
-          : await A.enviarMensaje(c.id, texto);
-        const extra = env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla']
-          : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
-        const sellos = paso.tipo === 'wa1' ? ['act-wa1-h-' + selloHora()] : [];
-        await A.etiquetar(c.id, ['act-' + paso.tipo].concat(extra, sellos), A.tiene(c, 'aviso-movil-pendiente') ? ['aviso-movil-pendiente'] : []);
-        if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
-        // Nivel y «precualificar» desde el primer minuto (28-sep), sin esperar a la pasada de puntuación
-        if (paso.tipo === 'wa1') { try { await require('./_scoring.js').puntuar(c, { mensajes: [] }); } catch (e) { console.error('[activacion] puntuar al entrar:', e && e.message); } }
-        // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora,
-        // que es cuando le sale el primer WhatsApp y Maikel puede adelantarse.
-        if (paso.tipo === 'wa1' && A.tiene(c, 'aviso-movil-pendiente')) {
+        if (A.tiene(c, 'aviso-movil-pendiente')) {
+          await A.etiquetar(c.id, null, ['aviso-movil-pendiente']);
+          // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora.
           try {
             const entro = c.dateAdded ? new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(c.dateAdded)) : '';
             await require('./_aviso.js').movil('LEAD NUEVO (entró ' + (entro || 'de noche') + ') · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
@@ -432,29 +408,62 @@ async function handler(req, res) {
               '\nLe acaba de salir el primer WhatsApp' + (env.canal === 'whatsapp_fallido' ? ' (ha fallado, revisa el CRM)' : '') + '.');
           } catch (e) { console.error('[activacion] aviso pendiente no salió:', e && e.message); }
         }
+        if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
+        if (env.canal !== 'whatsapp_fallido') {
+          await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
+            accion: 'WhatsApp enviado (wa1 · ' + (env.variante || '') + ' · ' + (env.modo || '') + (env.canal === 'gateway' ? ', por Wazzap' : '') + ')', texto: env.texto || '', origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
+        }
+        hechos++;
+      } else if (paso.tipo === 'wa2' || paso.tipo === 'wa3') {
+        if (WA_CADENCIA_PAUSADA) { continue; }
+        if (!A.enVentana('whatsapp')) { resumen.esperando++; continue; }
+        let texto = paso.tipo === 'wa2' ? M.whatsappDia1(datos) : M.whatsappDia3(datos);
+        // Regla de Maikel (22-sep): por la pasarela nunca el mismo texto dos
+        // veces. Se reescribe para esta persona; si no se puede, este paso
+        // espera a la siguiente vuelta en vez de salir igual.
+        if (A.saldriaPorGateway()) {
+          const v = await require('./_agente.js').variar({ texto: texto, contacto: c, datos: datos }).catch(function (e) { return { texto: '', motivo: e && e.message }; });
+          if (!v.texto) { console.warn('[activacion] sin variante para ' + c.id + ' (' + v.motivo + '): no sale por la pasarela'); resumen.esperando++; continue; }
+          texto = v.texto;
+        }
+        const env = await A.enviarMensaje(c.id, texto);
+        const extra = env.canal === 'gateway' ? ['act-por-gateway'] : env.canal === 'plantilla' ? ['act-por-plantilla']
+          : env.canal === 'whatsapp_fallido' ? ['act-' + paso.tipo + '-fallido'] : [];
+        await A.etiquetar(c.id, ['act-' + paso.tipo, 'act-' + paso.tipo + '-h-' + selloHora()].concat(extra));
+        if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;
         if (env.canal !== 'whatsapp_fallido') {
           await require('./_aviso.js').seMovio('actividad', { nombre: c.firstName || c.contactName || '', empresa: c.companyName || '', email: c.email || '', telefono: c.phone || '', contactId: c.id,
             accion: 'WhatsApp enviado (' + paso.tipo + (env.canal === 'gateway' ? ', por Wazzap' : '') + ')', texto: texto, origen: esLeadForm(c) ? 'Formulario de Meta' : 'Landing' }).catch(function () {});
         }
         hechos++;
       } else if (paso.tipo === 'paso2') {
+        const HH = require('./_horario.js');
         const nivel = nivelAhora(c);
-        const tarde = paso.desdeWa1 > 26 * 60;
         if (nivel === 'A') {
-          // Lo llama Maikel. Si el móvil está fuera de horario, espera a la
-          // siguiente vuelta en vez de gastar el aviso de madrugada.
-          if (!require('./_aviso.js').enHorarioMovil() && !tarde) { resumen.esperando++; continue; }
+          // Lo llama Maikel. En su horario de supervisión, aviso al móvil; fuera,
+          // siguiente acción con fecha para el siguiente tramo (1-oct).
           const tel = c.phone || '';
-          await require('./_aviso.js').movil('LLÁMALE · nivel A · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
-            '\nNo ha contestado al WhatsApp en 2 h 30.' + (datos.fuga ? '\nDónde se le escapa: ' + datos.fuga : '') + (tel ? '\nTel ' + tel : ''), { forzar: tarde });
+          const texto = 'LLÁMALE · nivel A · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
+            '\nNo ha contestado al WhatsApp en 2 h 30.' + (datos.fuga ? '\nDónde se le escapa: ' + datos.fuga : '') + (tel ? '\nTel ' + tel : '');
+          if (HH.supervision(Date.now())) await require('./_aviso.js').movil(texto, { forzar: true });
+          else await A.siguienteAccion(c, 'Llamar · nivel A sin respuesta', texto);
           await A.etiquetar(c.id, ['act-paso2', 'ruta-maikel']);
-          await A.nota(c.id, 'CADENCIA · nivel A sin respuesta a las 2 h 30: aviso a Maikel para que llame él (no llama Raquel).');
+          await A.nota(c.id, 'CADENCIA · nivel A sin respuesta a las 2 h 30: le llama Maikel (no Raquel)' + (HH.supervision(Date.now()) ? ', aviso al móvil.' : ', tarea para el siguiente tramo de supervisión.'));
           resumen.aviso_a = (resumen.aviso_a || 0) + 1; hechos++;
           continue;
         }
-        if (nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal') || tarde) {
+        if (nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal')) {
           await A.etiquetar(c.id, ['act-paso2', 'ruta-solo-wa']);
-          if (tarde && nivel !== 'D') await A.nota(c.id, 'CADENCIA · la llamada de Raquel no encontró hueco de voz en 26 h: sigue solo por WhatsApp.');
+          continue;
+        }
+        // B y C: llamada de Raquel. Fuera de su ventana (L-V 9:30-14:00 y
+        // 16:00-19:30, sin festivos) se programa para la siguiente y la cadencia
+        // de WhatsApp sigue mientras tanto.
+        if (!HH.ventanaVoz(Date.now())) {
+          const cuando = HH.siguienteVoz(Date.now());
+          await A.etiquetar(c.id, ['act-paso2', 'ruta-raquel', 'act-voz1-prog-' + selloHora(cuando), 'act-voz-motivo-fuera-ventana']);
+          await A.nota(c.id, 'CADENCIA · llamada de Raquel fuera de su ventana: programada para el ' + HH.cuandoTexto(cuando) + '.');
+          resumen.voz_programada = (resumen.voz_programada || 0) + 1; hechos++;
           continue;
         }
         paso.tipo = 'voz1';

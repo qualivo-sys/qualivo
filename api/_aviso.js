@@ -79,7 +79,7 @@ async function leadNuevo(d) {
       await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
         (d.fuga ? '\n«' + String(d.fuga).slice(0, 160) + '»' : '') +
         (d.telefono ? '\nTel ' + d.telefono : '') + (d.origen ? '\n' + d.origen : '') +
-        '\nLe sale el primer WhatsApp ahora mismo.');
+        '\nPrimer WhatsApp: al momento; si es A o B en tu horario, te llega el borrador y sale solo a los 10 min.');
     } else if (d.contactId) {
       // De noche no suena el móvil: queda apuntado y se avisa por la mañana,
       // cuando le sale el primer WhatsApp al lead.

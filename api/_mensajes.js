@@ -197,6 +197,67 @@ function whatsappDia3(datos) {
     'Y si ahora no es el momento, dímelo sin problema y no te escribo más.';
 }
 
+// Primer WhatsApp corto (Bloque 1, aprobado por Maikel el 1-oct-2026): su único
+// objetivo es conseguir una respuesta útil. 40-60 palabras, una sola pregunta
+// fácil de contestar, parte de lo que marcó en el formulario, sin explicar
+// Qualivo, sin vender la reunión y sin agenda. [fuga, pregunta] por vertical.
+const CORTO = {
+  formacion: {
+    respuesta: ['el tiempo de respuesta como lo que más se os escapa', 'cuando alguien os pide información de un curso, ¿cuánto tardáis normalmente en contestarle?'],
+    seguimiento: ['el seguimiento como lo que más se os escapa', 'cuando alguien pide información y no se matricula a la primera, ¿alguien le vuelve a escribir después?'],
+    captacion: ['los anuncios y la captación como lo que más se os escapa', '¿sabéis qué anuncio os ha traído las últimas matrículas?'],
+    web: ['la web y los formularios como lo que más se os escapa', '¿os llegan solicitudes por la web cada semana, o casi todo os llega por otros sitios?'],
+    nolose: ['que todavía no tenéis claro dónde se os escapan alumnos', 'de cada 10 personas que piden información, ¿cuántas acaban matriculándose, más o menos?']
+  },
+  clinicas: {
+    respuesta: ['el tiempo de respuesta como lo que más se os escapa', 'cuando un paciente escribe para pedir cita, ¿cuánto tardáis normalmente en contestarle?'],
+    seguimiento: ['el seguimiento de los presupuestos como lo que más se os escapa', 'cuando un paciente se lleva el presupuesto y dice que se lo piensa, ¿alguien le vuelve a llamar?'],
+    captacion: ['los anuncios y la captación como lo que más se os escapa', '¿sabéis qué anuncio os ha traído los últimos pacientes que han empezado tratamiento?'],
+    web: ['la web y los formularios como lo que más se os escapa', '¿os llegan peticiones de cita por la web cada semana, o casi todo entra por teléfono y WhatsApp?'],
+    nolose: ['que todavía no tenéis claro dónde se os escapan pacientes', 'de cada 10 personas que piden cita o precio, ¿cuántas acaban empezando tratamiento, más o menos?']
+  },
+  otro: {
+    respuesta: ['el tiempo de respuesta como lo que más se os escapa', 'cuando os entra un contacto nuevo, ¿cuánto tardáis normalmente en contestarle?'],
+    seguimiento: ['el seguimiento de los presupuestos como lo que más se os escapa', 'cuando mandáis un presupuesto y el cliente no contesta, ¿alguien le vuelve a llamar?'],
+    captacion: ['los anuncios y la captación como lo que más se os escapa', '¿sabéis qué anuncio os ha traído vuestro último cliente?'],
+    web: ['la web y los formularios como lo que más se os escapa', '¿os llegan contactos por la web cada semana, o casi todo entra por otros sitios?'],
+    nolose: ['que todavía no tenéis claro dónde se os escapan clientes', 'de cada 10 personas que os piden información, ¿cuántas acaban comprando, más o menos?']
+  }
+};
+function claveFugaCorta(fuga) {
+  const f = String(fuga || '').toLowerCase();
+  if (/web|formular/.test(f)) return 'web';
+  const t = tipoFuga(f);
+  return t === 'nolose' ? 'nolose' : t;
+}
+// ctx: { ctx: 'supervision' | 'fuera' | 'noche', cuando: 'anoche' | 'esta mañana' }
+// (api/_horario.js contextoWa1). Las tres variantes cambian solo el arranque.
+function arranqueCorto(ctx, fugaTxt) {
+  const c = (ctx && ctx.ctx) || 'supervision';
+  if (c === 'noche') {
+    const cuando = (ctx && ctx.cuando) === 'esta mañana' ? 'Esta mañana' : 'Anoche';
+    return cuando + ' nos dejaste tus datos y marcaste ' + fugaTxt + '. Te dejo una pregunta por aquí y me contestas cuando puedas: ';
+  }
+  if (c === 'fuera') return 'He visto que acabas de dejarnos tus datos y que marcaste ' + fugaTxt + '. Te dejo una pregunta por aquí y me contestas cuando puedas: ';
+  return 'He visto que en el formulario marcaste ' + fugaTxt + '. Una pregunta rápida: ';
+}
+function whatsappCorto(datos, ctx) {
+  const d = datos || {};
+  const n = nombreCorto(d.nombre);
+  const s = String(d.sector || '').toLowerCase();
+  const v = /formaci|academia|escuela|curso/.test(s) ? CORTO.formacion : /salud|cl[ií]nica|dental|fisio|bienestar/.test(s) ? CORTO.clinicas : CORTO.otro;
+  const par = v[claveFugaCorta(d.fuga)];
+  return (n ? 'Hola ' + n + ', soy' : 'Hola, soy') + ' Maikel, de Qualivo. ' + arranqueCorto(ctx, par[0]) + par[1];
+}
+
+// Variante del A/B del primer WhatsApp, fija por contacto (mitad y mitad).
+function varianteWa1(contactId) {
+  let h = 0;
+  const s = String(contactId || '');
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h % 2 === 0 ? 'corto' : 'largo';
+}
+
 function envoltura(cuerpo) {
   return '<div style="font-family:' + F + ';font-size:16px;line-height:1.6;color:#101319;max-width:560px">' +
     cuerpo +
@@ -286,4 +347,4 @@ const EMAILS = [
   }
 ];
 
-module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappTrasApertura, whatsapp2, whatsapp3, whatsappDia1, whatsappDia3, temaCorto, ultimoMensaje, vocabularioDe, tipoFuga, EMAILS };
+module.exports = { AGENDA, agenda, emailBienvenida, nombreCorto, pregunta, whatsapp1, whatsappCorto, varianteWa1, CORTO, whatsappTrasApertura, whatsapp2, whatsapp3, whatsappDia1, whatsappDia3, temaCorto, ultimoMensaje, vocabularioDe, tipoFuga, EMAILS };
