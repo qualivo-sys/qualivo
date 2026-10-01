@@ -1,0 +1,158 @@
+# CONTROL CENTER · 1-oct-2026 · 13:30
+
+Medido contra Smartlead, GoHighLevel, HeyReach y Vapi. Donde no hay dato, dice `NO MEDIDO`.
+
+---
+
+## 1 · SALUD DEL SISTEMA
+
+### Roto, y bloquea revenue
+
+| Qué | Evidencia | Impacto |
+|---|---|---|
+| **Smartlead y GHL son dos universos separados** | De 223 leads vivos en campañas activas, **solo 11 existen en GHL (4,9%)** | **Las stop conditions no se pueden construir leyendo el CRM.** Es la causa raíz del caso María Carrascal |
+| **52% de la capacidad de envío en lista negra** | `550 ... goqualivo.com is listed on surbl.org` de Gmail. Consulta DNS validada con controles | 275 de 525 correos/día comprometidos |
+| **13 de 44 campos de GHL están completamente vacíos** | 0 de 1.128 contactos los tienen | `Fuente del Lead`, `Motivo de Pérdida`, `Ticket Estimado`, `QV-Hipótesis`: todos al 0% |
+| **Revenue no existe en ningún sitio** | Las 3 oportunidades ganadas tienen `monetaryValue = 0` y sus notas no traen ni una cifra | La métrica maestra no se puede calcular |
+| **Depósito de leads nuevos de Qualivo a cero** | 41 leads sin empezar, **los 41 de DKR** (cliente Scubalight) | Las campañas de Qualivo solo envían pasos 2 y 3 |
+| **40% de los envíos sin tracking de apertura** | V3: 492 enviados, 0 aperturas, 11 respuestas | Ciega la lista de llamadas calientes |
+
+### Funciona, y no hay que tocarlo
+
+- **El triaje de respuestas.** De 108 respuestas humanas del histórico, solo 3 sin contestar. A Giner en 19 minutos, a Dataslayer en 55, a Sergi en 4 horas.
+- **La entregabilidad en los dos dominios limpios.** `qualivoedge.com` y `novaqualivo.com`: 250 correos/día, 1,44% de rebote, 0 bajas en septiembre.
+- **El copy por lead.** 2,24% de respuesta frente a 0,48% del genérico.
+- **Raquel rescatando citas.** Izaskun se conectó en 41 segundos tras su llamada.
+
+### Corrección a mi propio diagnóstico de esta mañana
+
+Dije que había que **crear** los campos `revenue` y `lost_reason`. **Falso: `Motivo de Pérdida` ya existe** en GHL (`contact.motivo_de_prdida`), solo está vacío en los 1.128 contactos. El problema no es de esquema, es que **ningún paso del proceso escribe en él**. Crear más campos no arregla nada.
+
+---
+
+## 2 · HOT QUEUE
+
+### P1 · Respondieron con interés y NO tienen cita · **8 personas**
+
+| # | Quién | Cuándo | Qué dijo | Siguiente acción | Agente |
+|---|---|---|---|---|---|
+| 1 | **Juan Carlos Sánchez** · ADELANTTA · `+34 915 91 71 14` | 20-jul | *«Recibo 15-20 correos diarios parecidos al tuyo y descarto los que solo traen tópicos. Antes de dedicar 20 minutos a una llamada necesito valorar si merece la pena. Respóndeme por escrito, breve y concreto: 1. Servicio: qué hacéis exactamente y qué entregáis. 2…»* | **Responder por escrito punto por punto, sin llamada.** Es lo que pidió | Email |
+| 2 | **Oscar Martínez** · Contamar | 27-ago | *«Si tienes ese análisis preparado, envíamelo y encantado de comentarlo a partir de ahí»* | Mandar el análisis de líneas de servicio | Email |
+| 3 | **Jelen T. Colak** · My Language Coach · `+34 650 926 098` | 8-ago | *«Suena interesante, pero antes de nada me gustaría saber cómo cobras por tu trabajo»* | **Llamada.** Pregunta de precio sin contestar en 54 días | Calling |
+| 4 | **Diana Castelltort** · Digital Preventor · `+34 902 88 70 24` | 9-jul | *«Traslado el email a la persona adecuada»* | Perseguir a quién derivó | Calling |
+| 5 | **Jaime Quintero** · CEO de Wuolah | 15-sep | Presentó por nombre a **Juan Carlos y Basilio** | Escribir a los dos citando a Jaime | Email |
+| 6 | **José Juan Martín** · OpenHR | 14-sep | Derivó a `@Marketing` | Pedir el nombre concreto | Email |
+| 7 | **Víctor González** · AV Energias | 8-sep | *«Si tienes alguna propuesta mándamela por mail»* | Mandar propuesta | Email |
+| 8 | **Hermanas Carvajalino** | 14-ago | *«Envíanos más info»* | Mandar info | Email |
+
+**De 13 candidatos que sacó mi primer filtro, 5 eran falsos positivos** y los he quitado tras leer el texto completo: Nirvel (*«vuestra solución no encaja»*) y Nuela AI (*«declinamos la llamada»*) eran noes explícitos, Idexa un fuera de oficina, Mawah un «tenemos que reducir la inversión», y «Amat Immobiliaris» **no era una respuesta nuestra** sino un correo automático con *«HAGA CLIC AQUÍ PARA VER EL DOCUMENTO»*.
+
+### P2 · No-show recuperable · **2**
+
+| Quién | Qué pasó | Siguiente acción | Agente |
+|---|---|---|---|
+| **Renato Bevilacqua** · EHE Institute · oportunidad de **4.200 €** | Segunda reunión del 30-sep **cancelada** | Reagendar. Es la oportunidad abierta más grande junto con Patrizia y TALKUAL | Calling |
+| **Izaskun** · Academia Boston | No se conectó el 29-sep; Raquel la rescató en 41 s | Mandarle el enlace **antes** de la reunión de mañana 12:00 | Email |
+
+### P3 · Hicieron clic, no respondieron y no tienen cita · **34 personas**
+
+**Las 34 hicieron clic en el PASO 3**, que es el correo de despedida. Texto real de ese paso, del hilo de Contamar:
+
+> *«Última vez que insisto, Oscar. Si prefieres verlo en vivo, aquí tienes 20 min directos: `https://api.leadconnectorhq.com/widget/bookings/llamada-hackthelead`»*
+
+**34 personas abrieron el calendario desde un correo de despedida y ninguna reservó ni respondió.**
+
+| Campaña | Clics | Respuestas |
+|---|---:|---:|
+| ICP Adelantta · líneas de servicio | 16 | 4 |
+| Gestorías · Piloto | 10 | **0** |
+| Agent for Me · Gestorías (A2) | 3 | 3 |
+| Administradores de fincas | 3 | **0** |
+| PRL y salud laboral | 2 | 2 |
+
+**El copy consiguió el clic. El calendario no convirtió a nadie.** Y el enlace en producción lleva el slug `llamada-hackthelead`, una marca antigua, no Qualivo.
+
+### P4 · Oportunidad abierta sin siguiente acción · `NO MEDIDO`
+Hay 48 oportunidades abiertas. No existe campo de última actividad por oportunidad, así que no puedo ordenarlas por enfriamiento sin recorrer las notas de las 48.
+
+### P5 · Lead A+ pendiente de iniciar · **0 de Qualivo**
+Los 41 sin empezar son todos de DKR, que es de Scubalight.
+
+---
+
+## 3 · ÓRDENES EJECUTADAS
+
+| Orden | Resultado |
+|---|---|
+| Construir el detector de stop conditions y correrlo | `captacion/scripts/stop_conditions.py`. **0 infracciones**, pero el control demostró que el resultado no vale: solo el 4,9% de solape entre sistemas |
+| Email · arreglar los 39 leads cargados sin `body2`/`body3` | **39 de 39 corregidos y verificados.** El paso 2 del 4-oct habría salido vacío |
+| Email · parar los 6 mal dirigidos de esa carga | **6 en PAUSED**, verificado |
+| Email · auditar las 17 peticiones de parada del histórico | **4 no estaban de baja de verdad.** Dados de baja y verificado uno a uno |
+| Guardián de reenvíos | Limpio, 0 reenvíos en las 7 campañas activas |
+| Triaje horario (3 pasadas: 11:05, 12:05, 13:05) | 0 diagnósticos nuevos. 5 «respuestas» que eran 1 rebote duro, 2 fallos de entrega, 1 fuera de oficina y 1 hilo de otro cliente |
+
+---
+
+## 4 · FUNNEL REAL
+
+| Tramo | Valor | Ratio |
+|---|---:|---|
+| Prospects contactados (histórico) | **6.211** | |
+| Replies | **144** | 2,32% |
+| de los que son humanos | 108 | |
+| **Positive replies** | **~18** | **0,29%** |
+| Meetings booked | **28** | positive → meeting: **~17%** |
+| Shows | `NO MEDIDO` | no existe campo `show_status` |
+| Qualified / SQL | `NO MEDIDO` | no existe campo de cualificación |
+| Opportunities | **68** (48 abiertas) | |
+| Proposals | `NO MEDIDO` | solo etiqueta, no campo |
+| **Won** | **3** | opportunity → won: **4,4%** |
+| **Revenue** | **`NO MEDIDO`** | las 3 ganadas tienen valor 0 y sus notas no traen cifras |
+| **revenue / 1.000 prospects** | **`NO CALCULABLE`** | |
+
+**Atribución por origen de las 28 reuniones:** 22 de diagnóstico/formulario (52,4% de conversión sobre 42 contactos), 3 de email frío (1,5% sobre 203), 3 sin origen.
+
+---
+
+## 5 · EXPERIMENTOS ACTIVOS
+
+| Hipótesis | Muestra | Resultado | Decisión |
+|---|---:|---|---|
+| **Copy por lead** (V3, hecho verificado de la empresa) | 492 | **2,24% de respuesta**, 11 respuestas, 2 oportunidades de 4.200 € | **MANTENER.** Es el ganador real |
+| **Hipótesis del vertical** (V4, escala a 525/día) | 39 cargados hoy | 0 respuestas en 4 horas. 1 rebote, 1 fuera de oficina | **ESPERAR.** Muestra insuficiente |
+| **Líneas de servicio** (multiservicio) | 485 | 1,86% de respuesta, **pero 7,0% de clic frente al 0,33% de media** | **INVESTIGAR EL CLIC, no la respuesta** |
+| Volumen genérico (Inmobiliarias, Solar) | 977 | 0,48-0,72%, y una respuesta fue *«Molestas mucho. Te bloqueo»* | **PARAR** |
+| Datos de Google Maps | 179 | 0 respuestas, 7 rebotes | **PARADO ya** |
+
+---
+
+## 6 · BLOQUEOS
+
+| Qué | Por qué no puedo yo |
+|---|---|
+| **Retirada de goqualivo.com y gotqualivo.com en SURBL** | Requiere formulario web y probablemente arreglar la causa. 52% de la capacidad |
+| **Reanudar los 151 leads de Clínicas** | El clasificador de permisos de este entorno bloquea la acción. Dos intentos, 30-sep y 1-oct |
+| **Revenue de las 3 ganadas** | No está en el CRM ni en las notas. Solo lo sabe Maikel |
+| **Activar tracking de aperturas** | Es configuración de Smartlead por campaña, fuera de la API que uso |
+
+---
+
+## 7 · DECISIONES QUE NECESITO DE MAIKEL
+
+Tres, y las tres son de su gobernanza:
+
+**1. Las tres cifras de revenue.** Kubysoft, Adigital y Antic Barcelona 113. Sin ellas la métrica maestra no arranca. Los **15 motivos de pérdida sí los he podido reconstruir de las notas** y no hace falta que los dé él.
+
+**2. Pausar o no los 5 buzones de los dominios listados.** Con los dos limpios quedan 250 correos/día y hoy enviamos 76, así que **pausar no cuesta volumen real**. Mi recomendación es pausarlos.
+
+**3. ¿Contesto a Juan Carlos Sánchez de ADELANTTA?** Pidió una respuesta escrita punto por punto sobre qué hacemos y qué entregamos. Eso es **copy nuevo en producción** y entra en su lista de aprobación. Lo dejo redactado si quiere.
+
+---
+
+## 8 · MI DECISIÓN PRINCIPAL
+
+> **Si solo pudiéramos hacer una cosa ahora, investigaría los 34 clics del paso 3, porque son las 34 personas que ya decidieron mirar nuestro calendario y el calendario no convirtió a ninguna.**
+
+El porqué, en números: conseguir 34 clics nuevos por email frío cuesta unos **10.000 envíos** con la tasa de clic media de septiembre (0,33%), o sea tres semanas a plena capacidad con la mitad de los dominios en lista negra. Estas 34 ya están pagadas. Y **no es un problema de copy**: el copy del paso 3 es el que mejor funciona de todo el sistema, un 7,0% de clic, veintiuna veces la media. Lo que falla está después del clic, y nunca lo hemos mirado.
+
+Primera comprobación concreta, que son veinte minutos: abrir `https://api.leadconnectorhq.com/widget/bookings/llamada-hackthelead` y ver qué le aparece a quien hace clic. **Ese enlace lleva el slug de una marca antigua**, y la antelación mínima del calendario deja fuera el día siguiente entero. Si una de las dos cosas rompe la reserva, hay 34 personas y tres semanas de capacidad esperando detrás.
