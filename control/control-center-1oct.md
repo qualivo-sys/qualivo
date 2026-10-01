@@ -54,23 +54,31 @@ Dije que había que **crear** los campos `revenue` y `lost_reason`. **Falso: `Mo
 | **Renato Bevilacqua** · EHE Institute · oportunidad de **4.200 €** | Segunda reunión del 30-sep **cancelada** | Reagendar. Es la oportunidad abierta más grande junto con Patrizia y TALKUAL | Calling |
 | **Izaskun** · Academia Boston | No se conectó el 29-sep; Raquel la rescató en 41 s | Mandarle el enlace **antes** de la reunión de mañana 12:00 | Email |
 
-### P3 · Hicieron clic, no respondieron y no tienen cita · **34 personas**
+### P3 · Clics sin reserva · **RETIRADA. Los clics no son de personas**
 
-**Las 34 hicieron clic en el PASO 3**, que es el correo de despedida. Texto real de ese paso, del hilo de Contamar:
+Las 34 filas existen, pero **no son una cohorte trabajable.** Test decisivo: un escáner de
+seguridad hace clic en segundos; una persona tarda minutos u horas.
 
-> *«Última vez que insisto, Oscar. Si prefieres verlo en vivo, aquí tienes 20 min directos: `https://api.leadconnectorhq.com/widget/bookings/llamada-hackthelead`»*
+| | |
+|---|---:|
+| Clics con hora medible | 34 |
+| **Clics en menos de 2 minutos desde el envío** | **26 (76%)** |
+| Mediana del desfase envío → clic | **1,2 minutos** |
+| Plausiblemente humanos | **2** |
 
-**34 personas abrieron el calendario desde un correo de despedida y ninguna reservó ni respondió.**
+Ejemplos del grupo de 1 minuto: `jbarrios@otefisa.com` 26 s · `agallardo@galeraco.com` 30 s ·
+`mdominguez@laverconsultores.com` 34 s · `perelopez@agora-sa.com` 43 s. Son **pasarelas de seguridad
+del correo corporativo que abren todos los enlaces para comprobarlos**, no decisores mirando el
+calendario.
 
-| Campaña | Clics | Respuestas |
-|---|---:|---:|
-| ICP Adelantta · líneas de servicio | 16 | 4 |
-| Gestorías · Piloto | 10 | **0** |
-| Agent for Me · Gestorías (A2) | 3 | 3 |
-| Administradores de fincas | 3 | **0** |
-| PRL y salud laboral | 2 | 2 |
+Los dos únicos con desfase humano:
 
-**El copy consiguió el clic. El calendario no convirtió a nadie.** Y el enlace en producción lleva el slug `llamada-hackthelead`, una marca antigua, no Qualivo.
+- `jrius@idential.es` — 15,1 minutos. Dudoso.
+- `estela@grupo2000.es` — **19,8 horas**, el único claramente humano. Y su compañera
+  **Irene Sánchez, de Marketing en la misma empresa, había pedido la baja de «su lista de difusión»**.
+  La he dado de baja también: es protector, reversible, y esa empresa ya se quejó una vez.
+
+**Queda una persona en esta prioridad, y es dudosa.** P3 no existe como cohorte.
 
 ### P4 · Oportunidad abierta sin siguiente acción · `NO MEDIDO`
 Hay 48 oportunidades abiertas. No existe campo de última actividad por oportunidad, así que no puedo ordenarlas por enfriamiento sin recorrer las notas de las 48.
@@ -120,7 +128,7 @@ Los 41 sin empezar son todos de DKR, que es de Scubalight.
 |---|---:|---|---|
 | **Copy por lead** (V3, hecho verificado de la empresa) | 492 | **2,24% de respuesta**, 11 respuestas, 2 oportunidades de 4.200 € | **MANTENER.** Es el ganador real |
 | **Hipótesis del vertical** (V4, escala a 525/día) | 39 cargados hoy | 0 respuestas en 4 horas. 1 rebote, 1 fuera de oficina | **ESPERAR.** Muestra insuficiente |
-| **Líneas de servicio** (multiservicio) | 485 | 1,86% de respuesta, **pero 7,0% de clic frente al 0,33% de media** | **INVESTIGAR EL CLIC, no la respuesta** |
+| **Líneas de servicio** (multiservicio) | 485 | 1,86% de respuesta. El 7,0% de clic que defendí **es de escáneres**: 76% de los clics en menos de 2 minutos | **SIN APOYO.** Ni respuestas ni clics humanos. No escalar |
 | Volumen genérico (Inmobiliarias, Solar) | 977 | 0,48-0,72%, y una respuesta fue *«Molestas mucho. Te bloqueo»* | **PARAR** |
 | Datos de Google Maps | 179 | 0 respuestas, 7 rebotes | **PARADO ya** |
 
@@ -151,8 +159,37 @@ Tres, y las tres son de su gobernanza:
 
 ## 8 · MI DECISIÓN PRINCIPAL
 
-> **Si solo pudiéramos hacer una cosa ahora, investigaría los 34 clics del paso 3, porque son las 34 personas que ya decidieron mirar nuestro calendario y el calendario no convirtió a ninguna.**
+### Primero, retiro la que había escrito hace una hora
 
-El porqué, en números: conseguir 34 clics nuevos por email frío cuesta unos **10.000 envíos** con la tasa de clic media de septiembre (0,33%), o sea tres semanas a plena capacidad con la mitad de los dominios en lista negra. Estas 34 ya están pagadas. Y **no es un problema de copy**: el copy del paso 3 es el que mejor funciona de todo el sistema, un 7,0% de clic, veintiuna veces la media. Lo que falla está después del clic, y nunca lo hemos mirado.
+Escribí que lo único que haría serían *«los 34 clics del paso 3, porque son 34 personas que ya
+decidieron mirar nuestro calendario»*. **Era falso.** El 76% de esos clics ocurrió en menos de dos
+minutos desde el envío, con mediana de 1,2 minutos: son escáneres de seguridad, no personas.
 
-Primera comprobación concreta, que son veinte minutos: abrir `https://api.leadconnectorhq.com/widget/bookings/llamada-hackthelead` y ver qué le aparece a quien hace clic. **Ese enlace lleva el slug de una marca antigua**, y la antelación mínima del calendario deja fuera el día siguiente entero. Si una de las dos cosas rompe la reserva, hay 34 personas y tres semanas de capacidad esperando detrás.
+Lo encontró el Orchestrator por otra vía —vio que las dos campañas afectadas salieron al 100% por los
+dos dominios en SURBL— y al comprobarlo con el desfase temporal salió esto. **No lo tomé por bueno
+sin verificarlo y no debí dar la recomendación sin verificarla primero.**
+
+Y hay una consecuencia mayor: **el 7,0% de clic de «líneas de servicio» tampoco es una señal real.**
+Está inflado por escáneres. Esta mañana defendí ese 7% como «la señal más fuerte que hay en los
+datos» y lo escribí en la auditoría de Notion. Hay que corregirlo allí también. El patrón ganador del
+Outbound Brain queda sin apoyo por los dos lados: **1,86% de respuesta y clics que no son humanos.**
+
+### La decisión, ahora
+
+> **Si solo pudiéramos hacer una cosa ahora, recuperaría la segunda reunión cancelada de Renato
+> Bevilacqua, porque es una oportunidad de 4.200 € con la propuesta ya enviada y es el único sitio del
+> sistema donde hay dinero a una llamada de distancia.**
+
+El porqué, comparado con todo lo demás de este documento: generar una oportunidad nueva de 4.200 €
+por email frío cuesta, con las tasas medidas, del orden de **1.500 envíos para una reunión** y luego
+pasar por diagnóstico y propuesta. Renato ya ha hecho todo ese camino: reunión celebrada, propuesta
+enviada, segunda reunión agendada, **cancelada el 30-sep**. Recuperarla cuesta una llamada.
+
+Detrás, por este orden: **Juan Carlos Sánchez de ADELANTTA**, que pidió por escrito una respuesta
+concreta punto por punto y lleva **73 días sin contestación**, y **Jelen Colak de My Language Coach**,
+que preguntó el precio hace 54 días. Son dos personas reales con una pregunta abierta, y eso es más
+de lo que hay en el resto del sistema junto.
+
+**Lo que ya no recomiendo:** mirar el calendario por los clics. El calendario puede estar bien o mal,
+pero no hay 34 personas esperando detrás. Si se mira, que sea por los `llamada-hackthelead` del slug
+antiguo, que es higiene de marca, no una fuga de revenue.
