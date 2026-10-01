@@ -198,36 +198,51 @@ escrito. Sin esto no hay piloto, hay actividad.
 
 | pieza | estado | detalle |
 |---|---|---|
-| Dominios de envío | pendiente de compra | 2 o 3 parecidos al suyo, NUNCA el corporativo ni un subdominio suyo |
-| Buzones | pendiente | 2 o 3 por dominio, 20 a 30 envíos al día cada uno |
-| Calentamiento | no iniciado | arranca el día que se compran; dos semanas mínimo |
+| Dominios de envío | **kubysoft.es, listo el 1-oct** | uno solo, no los 2 o 3 que pedimos. Riesgo aceptado por Maikel |
+| Buzones | **hola@kubysoft.es** | uno solo. Tope ~30 al día una vez caliente. Clave en el scratchpad |
+| Calentamiento | arranca el 1-oct | caliente hacia el 15-oct. Ese es el día 1 del piloto |
 | Cliente en Smartlead | no creado | aísla campañas y buzones por `client_id` |
 | Subcuenta de GHL | **no hace falta de momento** | el traspaso es email a marc@kubysoft.com |
 | Perfil de LinkedIn | pendiente | el de Marc. Falta la URL |
 | Sesión del agente | creada | separada de la de Qualivo a propósito |
 
-### El subdominio no sirve, y hay que decírselo a Marc
+### El dominio de envío: resuelto el 1-oct
 
-Marc propone enviar desde `kubysoft.com` y, al ver el riesgo, plantea un
-subdominio como solución intermedia. El instinto es correcto, la solución no.
+Marc plantó el tema bien. Propuso enviar desde `kubysoft.com`, vio el riesgo y
+propuso un subdominio. Se le explicó que un subdominio **no aísla la reputación
+del dominio raíz**, porque los proveedores grandes evalúan buena parte de la
+señal a nivel de dominio organizativo: las quejas contra `envios.kubysoft.com`
+llegan igualmente a `kubysoft.com`, y entonces lo que se rompe no es la campaña,
+es su correo de facturación y de soporte.
 
-Un subdominio **no aísla la reputación del dominio raíz**. Los proveedores
-grandes evalúan buena parte de la señal a nivel de dominio organizativo, así que
-las quejas contra `envios.kubysoft.com` llegan igualmente a `kubysoft.com`. Si
-eso pasa, lo que se rompe no es la campaña, es el correo de facturación y de
-soporte de Kubysoft, que es el que no se puede permitir caer.
+Compró **`kubysoft.es`**, que es un dominio distinto y parecido al suyo. Es la
+solución correcta y `kubysoft.com` se queda limpio.
 
-Lo que sí aísla es un dominio distinto, comprado aparte, parecido al suyo. Es
-exactamente lo que hace Qualivo: `qualivo.io` no manda un solo correo frío.
+DNS comprobado el 1-oct:
 
-Candidatos a proponerle (a confirmar disponibilidad y que le encajen de marca):
-
-- `kubysoft.es`
-- `getkubysoft.com`
-- `kubysoft-erp.com`
+| registro | valor | veredicto |
+|---|---|---|
+| MX | `mx00.ionos.es`, `mx01.ionos.es` | correcto |
+| SPF | `v=spf1 include:_spf-eu.ionos.com ~all` | correcto |
+| DMARC | `v=DMARC1; p=none;` | correcto para dominio nuevo. No subir a quarantine durante el piloto |
+| DKIM | no verificable sin el selector | Ionos lo pone solo; confirmar en el panel |
 
 La firma del correo sí dice Kubysoft y sí enlaza a `kubysoft.com`. Lo que cambia
 es por dónde sale el envío, no quién dice ser.
+
+### Dos cosas de este montaje que hay que vigilar
+
+**Un solo dominio y un solo buzón.** Pedimos 2 o 3 de cada. El volumen del
+piloto cabe (tanda de 60 por 3 correos en 14 días son unos 13 envíos al día,
+dentro del tope de 30 de un buzón caliente), pero no hay red: si
+`hola@kubysoft.es` se marca, el canal de correo se cae entero y no hay segundo
+por donde seguir. Riesgo asumido a propósito para no retrasar más el arranque.
+
+**El buzón vuelca a su CRM.** Marc lo ha cableado para que todo lo que entre en
+`hola@kubysoft.es` cree un lead en su CRM. Para las respuestas de verdad está
+bien. El problema son los rebotes, las respuestas automáticas, los fuera de
+oficina y las bajas, que en frío son mayoría y le van a llenar el CRM de basura.
+Hay que filtrarlo antes de que empiece a enviar, no después.
 
 ## Fuente de leads
 
