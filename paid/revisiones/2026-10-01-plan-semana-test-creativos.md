@@ -168,3 +168,34 @@ Notas de ejecución:
   1080×1350 y 1080×1920, misma duración por pareja.
 - Los 4:5 originales subidos a la cuenta: 865409043307626, 1640439994349768,
   2157828358209139, 1439779907529032, 1872157110813816, 2662822967508827.
+
+### Corrección del montaje (1-oct, 12:35 CEST): dentro del mismo anuncio, no como anuncios nuevos
+
+Maikel: *"no tienes que ponerlo como otro anuncio sino dentro del mismo
+anuncio en su parte correspondiente, sino serán 6 nuevos"*. Hecho así: los
+seis anuncios que ya estaban en circulación se han apuntado al creativo
+nuevo (4:5 en feed + 9:16 en stories, mismo formulario). Los seis
+duplicados pausados de la tabla anterior se han **borrado**. Verificado por
+GET tras el cambio: los seis `ACTIVE`, creativo nuevo, formulario intacto,
+las dos piezas presentes.
+
+| anuncio (mismo id de antes) | creativo nuevo |
+|---|---|
+| S1_PLA `120245892933780358` | 1449455777040581 |
+| S1_CUR `120245892934550358` | 1806092807209353 |
+| S1_VEL `120245892935420358` | 1094200826435710 |
+| CLI_HUE `120245892935740358` | 1650298406772632 |
+| CLI_VEL `120245892936080358` | 2393123361425796 |
+| CLI_PRI `120245892936260358` | 3759163654232379 |
+
+**T0 del test = 1-oct 12:33 CEST.** Los seis han vuelto a revisión de Meta
+(`IN_PROCESS`); los dos anuncios viejos no se han tocado. Rescate previsto:
+sábado 4 a las 08:05 (≈ 68 h); se adelanta al viernes 3 si a las 08:05 los
+nuevos siguen por debajo del 5 % del gasto de su conjunto.
+
+Nota sobre el estado de hoy a las 12:20 (antes del cambio): los seis nuevos
+sumaban 1,45 € y 58 impresiones frente a 13,81 € de los dos viejos; tres de
+ellos con 0 impresiones. Es el reparto esperado en un conjunto mixto, no
+una avería. Señal aparte: 0 envíos desde el 29-sep, 52,15 € sin lead
+(probabilidad ~5 % al coste medio de 17,74 €/envío); si el 1-oct cierra
+también a cero se revisa formulario y webhook antes que los anuncios.
