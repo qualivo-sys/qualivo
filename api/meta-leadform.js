@@ -145,7 +145,15 @@ const FORMULARIOS_SECTOR = {
   // 27-sep-2026: formación con «¿cuándo?» y «desde 750 €/mes, ¿encaja?».
   '1089963670593608': { sector: 'Formación o academia', etiqueta: 'sector-formacion' },
   '1479297290674260': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas' },
-  '1910722980312589': { sector: 'Servicios profesionales (asesoría, consultoría, abogados)', etiqueta: 'sector-asesorias' }
+  '1910722980312589': { sector: 'Servicios profesionales (asesoría, consultoría, abogados)', etiqueta: 'sector-asesorias' },
+  // 1-oct-2026: un formulario propio por anuncio del test de dolor (mismas
+  // preguntas), para saber qué ángulo trae cada lead.
+  '2554711344941279': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'velocidad' },
+  '1117304254006220': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'plantones' },
+  '2076998082916565': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'curiosos' },
+  '1491348962802729': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'velocidad' },
+  '1110031651473942': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'huecos' },
+  '1077322415038373': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'prioridad' }
 };
 
 async function nombreFormulario(formId) {
@@ -264,6 +272,7 @@ async function guardar(lead, opts) {
   if (cuando) etiquetas.push('cuando-' + cuando);
   if (precio) etiquetas.push('precio-' + precio);
   if (lead.form_id) etiquetas.push('form-' + String(lead.form_id).slice(0, 30));
+  if (conocido && conocido.angulo) etiquetas.push('angulo-' + conocido.angulo);
   // El id del lead en Meta, para devolverle la calidad (Qualified/Disqualified) más tarde.
   if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
