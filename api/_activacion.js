@@ -11,7 +11,10 @@ const { PAUSA_TOTAL } = require('./_pausa.js');
 // lanzadas a mano salían desde el móvil de Maikel, pero las del reloj no, y
 // Pablo recibió un sábado por la mañana una llamada americana que fue al
 // buzón. Decisión de Maikel del 18-sep: su móvil (+34 663 375 205).
-const NUMERO_SALIENTE = '2f99f0e4-5294-4340-9d4a-10bd4553f8ff'; // Vapi · +34 663 375 205 (móvil de Maikel)
+// 1-oct: el mismo registro de Vapi muestra ahora el 647 (+34 647 118 491), el
+// número del WhatsApp: el lead ve un solo número para mensajes y llamadas.
+// Verificado en Twilio el 9-sep; prueba a su móvil el 1-oct, completada.
+const NUMERO_SALIENTE = '2f99f0e4-5294-4340-9d4a-10bd4553f8ff'; // Vapi · +34 647 118 491 (antes 663)
 
 function cabeceras() {
   return {
