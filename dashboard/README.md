@@ -37,8 +37,15 @@ privada de finanzas de Qualivo Intelligence.
 pestañas: `CONTROL TOWER`, `INPUTS`, `DEUDA`, `FUNNEL`, `PLAN 12 MESES`, `CAPITAL`
 y `ESCENARIOS`.
 
+`escenario_cartera.py` construye `PLAN · cartera y caja`, el escenario de cartera
+a dieciocho meses. Lee los costes fijos de `INPUTS` para no duplicarlos, y se
+mueve con dos palancas: **vida media del cliente** y **altas por mes**. Incluye el
+reparto del capital —qué deudas se liquidan— con una columna `LIQUIDAR` validada
+a SÍ/NO.
+
 ```bash
 python3 dashboard/modelo_financiero.py
+python3 dashboard/escenario_cartera.py
 ```
 
 Borra y recrea las siete pestañas en cada ejecución, así que **los `gid` cambian**:
