@@ -199,3 +199,66 @@ ellos con 0 impresiones. Es el reparto esperado en un conjunto mixto, no
 una avería. Señal aparte: 0 envíos desde el 29-sep, 52,15 € sin lead
 (probabilidad ~5 % al coste medio de 17,74 €/envío); si el 1-oct cierra
 también a cero se revisa formulario y webhook antes que los anuncios.
+
+---
+
+## Revisión del plan (1-oct, 15:00 CEST): 1.200 €/mes y conjuntos separados
+
+Maikel fija el presupuesto en **1.200 €/mes (40 €/día de media)** y objeta, con
+razón, meter los tres anuncios nuevos en el conjunto del anuncio que funcionaba:
+añadir anuncios es una edición significativa para Meta y el conjunto mixto ni
+protege al viejo ni prueba a los nuevos. Propuesta de Maikel: **viejo 15 € +
+nuevos 20 € por vertical = 70 €/día hasta el lunes 6; el lunes se quedan los
+ganadores y se baja; una semana mirando calidad; después otras hipótesis.**
+
+### Montado en pausado (15:00 CEST), verificado por GET
+
+| conjunto nuevo (PAUSADO) | id | presupuesto | anuncios (PAUSADOS, en revisión) |
+|---|---|---|---|
+| `formacion · NUEVOS S1 (3 videos)` | 120245897452530358 | 20 €/día | S1_PLA 120245897454950358 · S1_CUR 120245897456010358 · S1_VEL 120245897456250358 |
+| `clinicas · NUEVOS CLI (3 videos)` | 120245897456500358 | 20 €/día | CLI_HUE 120245897458170358 · CLI_VEL 120245897458850358 · CLI_PRI 120245897459220358 |
+
+Copias de los conjuntos vivos (misma audiencia ES 25-65 abierta, mismo objetivo
+`QUALITY_LEAD`, misma campaña QV_VERTICALES_Sep26, así que el mismo tope las
+gobierna). Los anuncios apuntan a los creativos 4:5+9:16 ya aprobados, cada uno
+con su formulario propio: la atribución en GHL por `form-<id>` no cambia.
+
+### Lo que queda de Maikel para arrancar
+1. Activar los dos conjuntos NUEVOS.
+2. Bajar los conjuntos viejos de 30 a **15 €/día** (o autorizarlo).
+3. Autorizar pausar las seis copias nuevas que siguen dentro de los conjuntos
+   viejos (120245892933780358, …934550358, …935420358, …935740358, …936080358,
+   …936260358), para que cada vídeo corra en un solo sitio.
+4. Tope de QV_VERTICALES_Sep26: 800 → **1.575 €** (414,64 gastados + 1.160 de
+   octubre).
+
+### Aritmética de octubre con 1.200 €
+```
+1-oct (hoy, día partido)              ≈  40 €
+2–6 oct · 70 €/día × 5 días           = 350 €
+7–31 oct · ≈ 32 €/día × 25 días       ≈ 810 €
+                                       ─────
+                                      ≈ 1.200 €
+```
+Si la activación es el 2-oct a primera hora, el lunes 6 a las 08:05 hay **4 días
+completos** (jue–dom): ≈ 80 € por conjunto de prueba, ≈ 27 € por creativo si el
+reparto fuese igual (no lo será). Con eso **el lunes se descarta, no se corona**:
+se puede quitar al que tenga CTR claramente peor con ≥ 500 impresiones y señalar
+al que lleva mejor coste por apertura; la calidad (cita confirmada, nivel, asistencia)
+llega 3-7 días después del envío y es lo que mira la semana del 7 al 13.
+
+### Regla del lunes 6 (08:05)
+- Por vertical quedan **como mucho 2 de los 3 nuevos**. Se descarta el de peor CTR
+  con ≥ 500 impresiones. El que tenga menos de 10 € de gasto es "no probado" y
+  se aparca para otro turno, no se declara malo.
+- Los que quedan pasan al conjunto del viejo (viejo + supervivientes) y el
+  presupuesto baja a ≈ 16 € formación + ≈ 16 € clínicas = 32 €/día. La medición
+  por formulario sigue funcionando aunque compartan conjunto.
+- Semana del 7 al 13: calidad por formulario en GHL (wa1, cita confirmada, nivel A,
+  reunión). Veredicto de creativos el **lunes 13**; ese día se decide la siguiente
+  hipótesis (landing frente a formulario, reencuadre 4:5 nativo del ganador,
+  reformas con creativo nuevo, audiencia por intereses).
+
+H-CREATIVO-02 se mantiene como hipótesis, con fecha de muerte **13-oct** en vez
+del 11 (el veredicto de calidad necesita la semana completa). El calendario de
+72 h / rescate del sábado 4 queda sustituido por lo anterior.
