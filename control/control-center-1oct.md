@@ -32,20 +32,30 @@ Dije que había que **crear** los campos `revenue` y `lost_reason`. **Falso: `Mo
 
 ## 2 · HOT QUEUE
 
-### P1 · Respondieron con interés y NO tienen cita · **8 personas**
+### P1 · **CORREGIDA a las 15:20. Era 8 y es 1.**
 
-| # | Quién | Cuándo | Qué dijo | Siguiente acción | Agente |
-|---|---|---|---|---|---|
-| 1 | **Juan Carlos Sánchez** · ADELANTTA · `+34 915 91 71 14` | 20-jul | *«Recibo 15-20 correos diarios parecidos al tuyo y descarto los que solo traen tópicos. Antes de dedicar 20 minutos a una llamada necesito valorar si merece la pena. Respóndeme por escrito, breve y concreto: 1. Servicio: qué hacéis exactamente y qué entregáis. 2…»* | **Responder por escrito punto por punto, sin llamada.** Es lo que pidió | Email |
-| 2 | **Oscar Martínez** · Contamar | 27-ago | *«Si tienes ese análisis preparado, envíamelo y encantado de comentarlo a partir de ahí»* | Mandar el análisis de líneas de servicio | Email |
-| 3 | **Jelen T. Colak** · My Language Coach · `+34 650 926 098` | 8-ago | *«Suena interesante, pero antes de nada me gustaría saber cómo cobras por tu trabajo»* | **Llamada.** Pregunta de precio sin contestar en 54 días | Calling |
-| 4 | **Diana Castelltort** · Digital Preventor · `+34 902 88 70 24` | 9-jul | *«Traslado el email a la persona adecuada»* | Perseguir a quién derivó | Calling |
-| 5 | **Jaime Quintero** · CEO de Wuolah | 15-sep | Presentó por nombre a **Juan Carlos y Basilio** | Escribir a los dos citando a Jaime | Email |
-| 6 | **José Juan Martín** · OpenHR | 14-sep | Derivó a `@Marketing` | Pedir el nombre concreto | Email |
-| 7 | **Víctor González** · AV Energias | 8-sep | *«Si tienes alguna propuesta mándamela por mail»* | Mandar propuesta | Email |
-| 8 | **Hermanas Carvajalino** | 14-ago | *«Envíanos más info»* | Mandar info | Email |
+Di esta lista a las 13:45 con 8 nombres y **estaba mal**. La construí leyendo **solo el primer
+mensaje recibido de cada persona**, no el hilo completo. Al leer los 8 hilos enteros:
 
-**De 13 candidatos que sacó mi primer filtro, 5 eran falsos positivos** y los he quitado tras leer el texto completo: Nirvel (*«vuestra solución no encaja»*) y Nuela AI (*«declinamos la llamada»*) eran noes explícitos, Idexa un fuera de oficina, Mawah un «tenemos que reducir la inversión», y «Amat Immobiliaris» **no era una respuesta nuestra** sino un correo automático con *«HAGA CLIC AQUÍ PARA VER EL DOCUMENTO»*.
+| Quién | Lo que dije | Lo que pasó de verdad |
+|---|---|---|
+| **Juan Carlos Sánchez** · ADELANTTA | *«73 días sin contestación»*, prioridad nº 1 | **Falso.** Maikel le respondió los 6 puntos el **5-ago**. Él contestó el mismo día pasándole a su responsable de Marketing: *«Necesita apoyo como el vuestro»*. **Hay reunión agendada con Laura Martelo el 11-ago a las 11:00.** Queda por saber si se celebró |
+| **Jelen Colak** · My Language Coach | *«pregunta de precio sin contestar en 54 días»* | **Falso.** Contestada el **14-sep** con el precio (1.000-2.500 €/mes), y encima reconociendo el desajuste: *«me preguntaste una cosa muy concreta y te contesté otra»*. 17 días de silencio después, que no justifican llamada |
+| **Oscar Martínez** · Contamar | *«pidió el análisis, mandárselo»* | **Se le mandó.** Y el 28-ago lo rechazó: *«son observaciones genéricas sobre la web que hoy se obtienen de manera sencilla, y alguna de ellas no es del todo coherente ni se ajusta a nuestra realidad. Las que sí aplican ya las teníamos identificadas»* |
+| **Víctor González** · AV Energias | *«mandar propuesta»* | **Es un NO.** 16-sep: *«tenemos a una persona interna que se encarga de aplicarnos todas esas automatizaciones e implementaciones con IA en Go High Level… esa parte la tenemos cubierta»* |
+| **José Juan Martín** · OpenHR | *«derivó a Marketing, pedir nombre»* | **Es un NO por ahora.** Juan Luis contestó el 17-sep: *«de cara a este último cuatrimestre del año no tenemos previsto incorporar nuevos servicios de este tipo»*. Ya cerrado con un «volvemos a hablar» |
+| **Jaime Quintero** · Wuolah | *«escribir a Juan Carlos y Basilio»* | **Se escribió** el 16-sep. Sin respuesta en 15 días |
+| **Hermanas Carvajalino** | *«mandar info»* | **Se persiguió** dos veces. Última nuestra el 14-sep, sin respuesta |
+| **Diana Castelltort** · Digital Preventor · `+34 902 88 70 24` | *«perseguir a quién derivó»* | ✅ **La única correcta.** 9-jul: *«Traslado el email a la persona adecuada»* y el hilo **termina ahí, con 2 mensajes en total.** Nadie persiguió nunca a esa persona |
+
+**P1 real: 1 persona.** Y es el mismo patrón de error que ya me he apuntado tres veces hoy: medí
+sobre una parte y lo conté como el total. Aquí además di órdenes sobre esa lista, y he tenido que
+cancelarlas.
+
+**Lo que esto cambia en el diagnóstico general:** el sistema no tiene un pozo de gente caliente sin
+trabajar. Entre esto, el pozo inexistente de LinkedIn y los clics que eran escáneres, **las tres
+reservas de valor que creía haber encontrado hoy eran falsas las tres.** Lo que hay es lo que está en
+el pipeline: 48 oportunidades abiertas y las reuniones de esta semana.
 
 ### P2 · No-show recuperable · **2**
 
