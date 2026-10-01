@@ -20,6 +20,7 @@
     { id: 'marketing', txt: 'Agencia de marketing', desc: 'Una agencia que capta sus propios clientes', ico: 'sube' },
     { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
     { id: 'consultoria', txt: 'Consultoría de alto valor', desc: 'Proyectos grandes, ciclos largos y clientes que repiten', ico: 'b2b' },
+    { id: 'fp', txt: 'Centro de FP', desc: 'Ciclos de grado medio y superior: alumnos, familias y visita al centro', ico: 'formacion' },
     { id: 'aviacion', txt: 'Escuela de aviación', desc: 'TCP, azafata de tierra y despachador de vuelo', ico: 'formacion' },
     { id: 'academia', txt: 'Academia de idiomas y apoyo', desc: 'Inglés para niños y adultos, apoyo escolar y prueba de nivel', ico: 'formacion' },
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
