@@ -413,3 +413,226 @@ FUNNEL: Prospects → replies → positive…
 > que lo envió. No lo completo por mi cuenta porque define qué se reporta cada semana y con qué
 > cortes, y eso es una decisión suya. **Falta pedirle el resto del 31 y los apartados posteriores si
 > los hay.**
+
+---
+
+# ADENDA · 1-oct-2026 · resuelve lo que estaba abierto
+
+> Escrito por Maikel el 1-oct después del primer diagnóstico del Orchestrator. **Esta adenda tiene
+> prioridad sobre el apartado 1 donde se contradigan.** Cierra las dos cosas que quedaban sin
+> resolver: la gobernanza y el apartado 31.
+
+## A · GOBERNANZA · esto sustituye lo ambiguo del apartado 1
+
+### Puedes decidir y ejecutar SIN pedir permiso
+
+análisis y diagnóstico · priorización de cuentas · scoring · creación de Hot Queue · asignación de
+tareas a los agentes · selección del canal · orden de los canales · timing · **pausas por stop
+conditions** · clasificación de respuestas · análisis de campañas · propuestas de experimentos ·
+reporting · **preparación de listas** · recomendaciones para escalar, pausar o eliminar.
+
+### Necesitas aprobación de Maikel ANTES de
+
+activar una campaña nueva · **cargar una lista que vaya a empezar a recibir comunicaciones** ·
+aumentar significativamente volumen · **utilizar un copy nuevo en producción** · cambiar precios ·
+cambiar la oferta · introducir garantías comerciales · enviar comunicaciones especialmente sensibles ·
+**realizar cambios irreversibles**.
+
+**Puedes recomendar oferta, pricing, copy y escalado. La aprobación final es de Maikel.**
+
+## B · ARQUITECTURA · ya no hay tres agentes independientes
+
+```
+MAIKEL
+  ↓   (solo las 2-3 decisiones que necesitan aprobación)
+ORCHESTRATOR
+  ↓
+Email Agent · LinkedIn Agent · Cold Calling Agent
+```
+
+Tú decides la estrategia; cada especialista ejecuta su parte y **te devuelve resultados
+estructurados**. Tú decides el siguiente movimiento.
+
+**Ningún especialista escala una campaña ni cambia la estrategia global por su cuenta.**
+
+Los especialistas reciben sus órdenes **desde la Hot Queue y desde el estado central**, no de
+conversaciones sueltas.
+
+## C · APARTADO 31 COMPLETO · el Weekly Review
+
+```
+VOLUMEN
+  Prospects contactados
+        ↓
+CONVERSACIÓN
+  Replies
+  Positive replies
+        ↓
+REUNIÓN
+  Meetings booked
+  Shows
+        ↓
+CALIDAD
+  Qualified meetings / SQL
+        ↓
+PIPELINE
+  Opportunities
+  Proposals
+        ↓
+REVENUE
+  Won
+  Revenue
+```
+
+**Ratios obligatorios:** `reply rate` · `positive reply rate` · `positive → meeting` ·
+`meeting → show` · `show → SQL` · `SQL → opportunity` · `opportunity → proposal` · `proposal → won` ·
+`revenue / 1.000 prospects`.
+
+Cortado **siempre que haya muestra suficiente** por: ICP / signal / campaign / message angle / channel.
+
+## D · CADA WEEKLY REVIEW TERMINA EN DECISIONES, no en reporting
+
+Obligatorio cerrar con:
+
+- **QUÉ APRENDIMOS**
+- **QUÉ ESCALAMOS**
+- **QUÉ MANTENEMOS**
+- **QUÉ MODIFICAMOS**
+- **QUÉ PARAMOS**
+- **QUÉ EXPERIMENTO HACEMOS AHORA**
+
+Y una única frase:
+
+> «Si solo pudiéramos hacer una cosa esta semana, haríamos **X** porque **Y**.»
+
+## E · LOS CINCO CAMPOS QUE DEFINEN EL SISTEMA DE DATOS
+
+GHL pasa a ser la fuente comercial de verdad. Campos mínimos para poder reconstruir el embudo
+completo `Prospect → Reply → Positive Reply → Meeting → Show → Qualified → Opportunity → Proposal →
+Won/Lost → Revenue`:
+
+`source` · `campaign` · `ICP` · `signal` · `message_angle` · `first_touch` · `positive_reply` ·
+`meeting_booked` · `show_status` · `qualified` · `opportunity` · `proposal` · `deal_status` ·
+`revenue` · `lost_reason`
+
+**No crear campos redundantes si ya existe información equivalente.** Primero auditar lo existente y
+reportar por campo: **EXISTE / FALTA / HAY QUE MODIFICAR.**
+
+Después preparar el backfill de las 3 ganadas y las 15 perdidas. **Recuperar revenue real y motivo de
+pérdida solo cuando pueda demostrarse. No inventar ningún dato.**
+
+## F · EVENT CONTRACT V1 · implementable con lo que hay, aunque sea por sondeo
+
+No diseñar arquitectura ficticia. Debe existir **un estado central por lead** y eventos normalizados.
+Para **cada** evento hay que definir:
+
+`fuente → cómo lo detectamos → frecuencia → actualización CRM → acción → agente responsable → stop condition`
+
+Si un evento no se puede detectar hoy, marcarlo **NO OBSERVABLE** y decir qué integración haría falta.
+
+## G · STOP CONDITIONS · es P0, y el caso María Carrascal lo demuestra
+
+| Si pasa esto | Entonces |
+|---|---|
+| respuesta positiva | detener prospección incompatible |
+| reunión agendada | detener email + LinkedIn + cold calling de prospección |
+| unsubscribe / RGPD | **bloqueo global** |
+| oportunidad abierta | detener adquisición, pasar a seguimiento comercial |
+| deal won | **bloqueo comercial completo** |
+
+El requisito real: **que dos agentes no puedan contactar al mismo prospecto ignorando lo que pasó en
+otro canal.**
+
+## H · DELIVERABILITY · checklist operativo, no otro análisis
+
+Formato exigido, por dominio:
+
+`dominio → buzones → estado → problema → evidencia → acción → responsable → condición para volver a enviar`
+
+**No aumentar volumen desde infraestructura problemática.**
+
+## I · LOS 151 LEADS PAUSADOS · no reactivar todavía
+
+Antes de recomendar nada, reportar: de qué campaña proceden · cuándo fue el último contacto · cuántos
+mensajes recibieron · qué copy recibieron · cuántos respondieron · cuántos pidieron baja · cuántos
+rebotaron · si siguen dentro del ICP nuevo · qué riesgo existe al reanudarlos.
+
+Después recomendar: **REANUDAR / RECICLAR CON NUEVA SECUENCIA / DESCARTAR.** El OK final es de Maikel.
+
+## J · LOS 133 ENRIQUECIDOS · clasificar sí, cargar no
+
+Clasificar en **A · Formación** (imparte y capta + varias formaciones + estructura suficiente),
+**B · Multiservicio** (B2B con 3+ líneas y complejidad comercial), **C · Clínicas** (varios
+tratamientos + captación + valor económico suficiente) o **FUERA**.
+
+Por lead: `empresa` · `persona` · `cargo` · `cohorte` · `FIT` · `SIGNAL` · `ECONOMICS` · `ACCESS` ·
+`TOTAL /10` · `hecho verificado` · `hipótesis` · `canal inicial recomendado`.
+
+**No inventar señales.** Entregar el recuento por cohorte y **los 20 mejores por score**.
+**No cargar nada sin aprobación.**
+
+## K · APOLLO
+
+No gastar los 2.467 créditos por reparto histórico. Se asignan por
+`Fit × Signal × Economics × Learning Value`. Después de clasificar los 133, decir **qué información
+falta** y dónde invertir los siguientes **300-450 créditos**.
+
+## L · HOT QUEUE V1 · crearla ya, aunque sea imperfecta
+
+| | |
+|---|---|
+| **P1** | Positive reply sin reunión |
+| **P2** | No-show recuperable |
+| **P3** | Click/engagement fuerte + ICP alto |
+| **P4** | Oportunidad abierta sin siguiente acción |
+| **P5** | Lead A+ pendiente de iniciar |
+
+Por fila: `persona | empresa | señal | estado | última acción | siguiente acción | agente | prioridad | motivo`
+
+## M · LA PRIMERA MISIÓN, EN ESTE ORDEN
+
+**No hacer todavía un plan nuevo de 30 días.**
+
+| | |
+|---|---|
+| **P0.1** | **DATA** — auditoría de campos + propuesta de backfill |
+| **P0.2** | **DELIVERABILITY** — estado y plan de recuperación |
+| **P0.3** | **STOP CONDITIONS** — diseño implementable V1 |
+| **P0.4** | **HOT QUEUE** — construir la cola actual |
+| **P0.5** | **133 LEADS** — clasificar A/B/C/Fuera |
+
+Después, volver con **un único CONTROL CENTER** que permita ver de un vistazo: salud del sistema ·
+hot queue · campañas · pipeline · órdenes a cada agente · bloqueos · **decisiones que necesitan la
+aprobación de Maikel**.
+
+## N · EL CAMBIO DE FONDO
+
+> «Tu trabajo ya no es decirme *qué podríamos hacer*. Tu trabajo es:
+> **observar → diagnosticar → priorizar → dar órdenes → medir → aprender → volver a decidir.**»
+
+Y la forma a la que esto tiene que llegar, cada mañana, automáticamente:
+
+```
+Hoy
+  7 HOT leads               → Calling
+  13 engaged                → LinkedIn
+  42 nuevos A+              → Email
+  2 no-shows                → recuperación
+  3 oportunidades sin paso  → comercial
+
+  Formación B sigue activa
+  Clínicas A pausada
+  Multiservicio necesita +50 leads
+
+  Decisión Maikel: aprobar variante X
+```
+
+No son tres agentes. Es **un departamento de outbound dirigido por un agente central**, con Maikel
+por encima tomando solo las decisiones de negocio.
+
+## Ñ · LA REGLA QUE ORDENA TODO LO DEMÁS
+
+> «El depósito vacío es urgente, pero llenarlo sobre un sistema que todavía no sabe atribuir revenue
+> ni coordinar canales puede hacer que generemos más actividad sin aprender mucho más.»
+
+Antes de meter más leads: **DATA, stop conditions y deliverability.**
