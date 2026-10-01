@@ -129,3 +129,42 @@ sustituyen las nuevas), subir presupuesto, mover topes, cambiar pujas.
 insights 1-oct 10:29 CEST); GHL (tags, análisis del 1-oct); costes por
 envío y asistencia del documento `2026-10-01-analisis-por-vertical.md`.
 Sin PII.*
+
+---
+
+## Anexo · montaje del 1-oct (11:20 CEST): los seis anuncios 4:5 + 9:16, en pausado
+
+Hecho con los 4:5 entregados por Creative. Verificado por GET después de
+crear: cada anuncio tiene las dos piezas (4:5 → feed de Facebook e
+Instagram; 9:16 → stories), la misma duración exacta entre ambas, y **el
+mismo formulario que su versión solo-9:16**, así que la medición por
+formulario no se rompe al cambiar de anuncio.
+
+| anuncio nuevo (PAUSADO) | id | sustituye a | formulario | conjunto |
+|---|---|---|---|---|
+| `AD · VERT · S1_PLA · 45+916 · form propio` | 120245893309010358 | 120245892933780358 | 1117304254006220 | formación |
+| `AD · VERT · S1_CUR · 45+916 · form propio` | 120245893310460358 | 120245892934550358 | 2076998082916565 | formación |
+| `AD · VERT · S1_VEL · 45+916 · form propio` | 120245893311900358 | 120245892935420358 | 2554711344941279 | formación |
+| `AD · VERT · CLI_HUE · 45+916 · form propio` | 120245893313550358 | 120245892935740358 | 1110031651473942 | clínicas |
+| `AD · VERT · CLI_VEL · 45+916 · form propio` | 120245893314930358 | 120245892936080358 | 1491348962802729 | clínicas |
+| `AD · VERT · CLI_PRI · 45+916 · form propio` | 120245893315720358 | 120245892936260358 | 1077322415038373 | clínicas |
+
+Estado al crear: PAUSED; revisión de Meta en curso (`PENDING_REVIEW` /
+`IN_PROCESS`). Las seis versiones solo-9:16 **siguen activas**: pausarlas
+es parte de la activación y la hace Maikel (o la autoriza).
+
+Notas de ejecución:
+- La subida de vídeo (`/advideos`) con el token de página falla con error
+  genérico (código 1), igual que el 17-sep. Con el token de usuario sube a la
+  primera. Anotado: para subir vídeo y crear anuncios hace falta el token de
+  usuario; el de página sirve para leer y editar.
+- Meta exige `link_urls` en creativos con personalización por colocación
+  (subcódigo 1885800). El primer intento creó seis creativos sin enlace que
+  no se pueden usar en anuncios; quedan huérfanos en la biblioteca
+  (1395994695515342, 1458302986221751, 1703516967386379, 1504027408447965,
+  966306786523674, 2328186697993726). No afectan a nada.
+- Meta vuelve a copiar los vídeos a ids nuevos dentro del creativo (ya
+  conocido); comprobadas duración y dimensiones de las doce copias:
+  1080×1350 y 1080×1920, misma duración por pareja.
+- Los 4:5 originales subidos a la cuenta: 865409043307626, 1640439994349768,
+  2157828358209139, 1439779907529032, 1872157110813816, 2662822967508827.
