@@ -6,49 +6,102 @@
 >
 > Última actualización: **2026-09-21**
 
-## Organigrama · Qualivo funciona como una agencia (fijado por Maikel, 21-sep-2026)
+## Organigrama · Qualivo funciona como una agencia (rehecho por Maikel, 1-oct-2026)
 
 **Maikel** es el CEO: decide el dinero, el precio y qué cliente entra.
-**El cerebro es el Project Manager y Director de Operaciones.** Cada día revisa cómo está cada
-cuenta, decide qué tarea le toca a cada gestor y se la reparte. No hace el trabajo de las cuentas:
-lo coordina.
+**El cerebro es el Project Manager y Director de Operaciones.** No hace el trabajo: lo coordina.
+
+El 1-oct Maikel añade una capa intermedia, **dos team leads**, porque con diecisiete agentes
+activos y unos 970 commits en diez días él era el cuello de botella de cada decisión.
+
+```
+Maikel · CEO
+└── Cerebro · PM y CFO
+    ├── Lead de ADQUISICIÓN ······· su número: coste por reunión celebrada
+    │     ├── Paid ················ la cuenta de Meta
+    │     └── Creative Performance · anuncios, voces, música
+    ├── Lead de OUTBOUND ·········· su número: reuniones celebradas desde outbound
+    │     ├── Email / Smartlead ··· buzones, dominios, secuencias
+    │     ├── Llamadas / Raquel ··· Vapi
+    │     └── LinkedIn
+    ├── Growth ···················· mano derecha comercial de Maikel
+    └── Gestores de cuenta ········ uno por cliente
+```
+
+### Qué es un team lead, y qué no
+
+Un lead **lee y decide**; no produce. Entrega **una línea al día** al cerebro y **un número a la
+semana**, no commits. *El día que un lead empieza a commitear código, ha dejado de ser lead.*
+
+| | Decide sin preguntar | Propone, no ejecuta |
+|---|---|---|
+| **Lead de Adquisición** | qué creatividad se produce, qué ángulo se prueba, qué se le recomienda a Paid | **encender, pausar o mover presupuesto en Meta** |
+| **Lead de Outbound** | qué listas se cargan, qué secuencias salen, a quién se llama | comprar buzones o dominios (es gasto), tocar la lista negra |
+
+### La cuenta de Meta · regla sin excepciones (Maikel, 30-sep y 1-oct)
+
+**Ningún agente enciende, apaga ni mueve presupuesto en Meta. Ninguno.** Paid analiza, mide y
+recomienda; **Maikel ejecuta**. Paid es el único que lee la cuenta y el único interlocutor sobre
+ella, pero no tiene el dedo en el interruptor.
+
+Está escrito así porque el 29-sep Paid pausó clínicas por su cuenta, otro agente la reactivó a
+15 €/día, y la campaña reactivada reprodujo el mismo coste por el que se había pausado. Nadie
+hizo nada malo: no había dueño.
+
+**Presupuesto de octubre: 250 €/mes.** Ningún agente lo cambia.
+
+### Growth · mano derecha comercial, no fábrica
+
+Growth **deja de ser un equipo de producción** y pasa a apoyar a Maikel directamente:
+estrategia, preparar reuniones, las demos, analizar las respuestas de los clientes y
+recomendar ángulos y vídeos. Puede recomendar creatividades a Adquisición; no las ejecuta.
+
+Esto salda la deuda registrada el 21-sep de que Growth hacía cuatro papeles a la vez.
 
 ### Gestores de cuenta · uno por cliente, siempre
 
-Cada cliente tiene su propia sesión, su propia rama y su propio gestor. Es full-stack: hace todo
-lo de su cliente — anuncios, seguimiento, informes — y no lo reparte entre especialistas. Con
-cuatro cuentas y una persona, repartir cuesta más de lo que ahorra.
+Full-stack: hace todo lo de su cliente y no lo reparte. **Nunca toca activos de Qualivo**, y
+ningún agente de Qualivo toca los de un cliente.
 
-| Cuenta | Sesión | Rama |
+| Cuenta | Rama |
+|---|---|
+| **Escola Aeronàutica (EAC)** | `claude/eac-metrics-dashboard-qx7fkh` |
+| **Eleva Academy** | `claude/eleva-academy-metrics-jm8msg` |
+| **Antic Barcelona 113** | `claude/antic-barcelona-campaign-627pq7` |
+| **Adigital · OutThink** | `claude/google-ads-expert-prompt-uqmo9m` |
+| **Kubysoft** | brief en `clientes/kubysoft/` |
+| **Don't Kill Rumble** | `claude/kill-ramble-creator-strategy-knzcwu` |
+| **Qualivo** (cliente interno) | el cerebro · `claude/quipu-billing-dashboard-g2s2ap` |
+
+Obligación: mantener **`clientes/<cliente>/ESTADO.md`** al cerrar cada turno, no cuando se pida.
+Un ESTADO.md con tres días sin cambiar es una alarma por sí solo.
+
+### Un dueño por activo compartido
+
+| Activo | Dueño único | Los demás |
 |---|---|---|
-| **Antic Barcelona 113** | `session_01SQ8PKdGHvYhqFQKGiFMLLo` | `claude/antic-barcelona-campaign-627pq7` |
-| **Adigital · OutThink** | `session_013gUKoxvip9gGi3i133bZMk` | `claude/google-ads-expert-prompt-uqmo9m` |
-| **Escola Aeronàutica (EAC)** | `session_01GVfCM2Ynb4izSapBvMJcGG` | `claude/eac-metrics-dashboard-qx7fkh` |
-| **Kubysoft** | pendiente de identificar | brief en `clientes/kubysoft/` (rama de Outbound) |
-| **Qualivo** (cliente interno) | el cerebro | `claude/quipu-billing-dashboard-g2s2ap` |
+| Cuenta de Meta | Paid (lee y recomienda) · **ejecuta Maikel** | proponen a Paid |
+| GoHighLevel de Qualivo | Paid | proponen |
+| qualivo.io, web y contenido | Growth | proponen |
+| Buzones, dominios y Smartlead | Lead de Outbound | proponen |
+| Sheet financiero, Quipu y Todoist | el cerebro | proponen |
+| Cada cuenta de cliente | su gestor | nadie más entra |
 
-Obligación de todo gestor de cuenta: mantener **`clientes/<cliente>/ESTADO.md`** al día **al cerrar
-cada turno**, no cuando se lo pidan. El cerebro lee lo que haya a las 8:00. Un ESTADO.md que lleva
-tres días sin cambiar es, por sí solo, una alarma.
+### Puerta de entrada para agentes nuevos
 
-### Equipos de especialidad · sirven a Qualivo, no a las cuentas
+Antes de abrir un agente: **¿a qué métrica del embudo sirve?** Si no se puede atar a una —más
+oportunidades cualificadas, más respuesta, más citas, más show, más propuestas, más cierre, más
+ticket, menos CAC, menos días hasta cobro, más retención— va al backlog de 2027.
 
-| Rol | Sesión | Rama |
-|---|---|---|
-| Outbound / SDR | Agente Outbound (`session_01CQu7vwR41PJkVKgtfbSEo4`) | `claude/client-acquisition-ideas-k00f5d` |
-| Growth / Web / Contenido | Agente growth (`session_01GcrdLXcbaEyggvw8NbrHLL`) | `claude/qualivo-landing-vercel-nubk1i` |
-| Paid | Agente Paid (`session_01U6fb4Lc12iG7egcZNiv5SX`) | `claude/qualivo-paid` |
-| Ventas / Closer | Agente de Ventas (`session_01EsVfarsm7LwubAYY6Kis9s`) | carpeta `ventas/` |
-| Automatización | Agente de Automatización (`session_01DAmUZHTVFxPG37QyuAMQvr`) | carpeta `automatizaciones/` — entrega n8n en borrador, nunca autoenvía a clientes |
+Entre el 21-sep y el 1-oct se abrieron cuatro agentes nuevos sin pasar por esta puerta.
 
 ### Deuda conocida del organigrama
 
-- **Growth hace hoy cuatro papeles**: web, contenido, anuncios y gestión comercial (llamadas,
-  seguimientos, reactivación). Maikel decide el 21-sep dejarlo así porque funciona. Queda escrito
-  como deuda: es la sesión más cara con diferencia y la que más se rompería si se cae.
-- **EAC lleva bloqueada desde el 7 de agosto** esperando una respuesta de Maikel. Es un cliente
-  que factura y su gestor está congelado a mitad de frase.
-- **Kubysoft** tiene piloto aprobado y su sesión sin identificar en el registro.
+- **Los dos leads no existen todavía como sesión.** Hay que crearlos y darles el encargo.
+- **El trabajo está repartido al revés del negocio.** En diez días: Creative Performance 253
+  commits, Landing 251, Intelligence 136; y EAC, que factura 450 €/mes y se queja de
+  trazabilidad, **4**. Paid, que gestiona el dinero que se gasta, **21**.
+- **Kubysoft** tiene piloto con decisión el 13-oct y su sesión sin identificar.
 
 ## Encargo del fundador · vigente 30 días desde el 21-sep-2026
 
@@ -241,6 +294,8 @@ Hito 3, sistema de adquisición: landing publicada, creativos publicados, campa�
 **Charter del cerebro (actualizado por Maikel, 14-sep):** Chief of Staff y Director de Operaciones. Prioridades absolutas en orden: 1) generar ingresos, 2) resultados medibles para clientes, 3) pipeline, 4) estabilidad financiera, 5) salud física y mental. Cada mañana: revisar objetivos semanales, identificar el cuello de botella principal, definir las 3 tareas más importantes del día, bloquear tiempo de ventas **antes** que de construcción, y eliminar lo que no impacte ingresos, resultados o adquisición. Al cerrar el día: qué se consiguió, qué bloquea, qué acción concreta desbloquea mañana, y puntuación de 1 a 10. *"Tu función no es ayudarme a estar ocupado. Es ayudarme a generar evidencia de que Qualivo funciona y puede escalar."*
 
 ## Registro de cambios
+
+- **2026-10-01** · **Organigrama rehecho: dos team leads.** Maikel añade una capa intermedia entre él y los diecisiete agentes activos: Lead de Adquisición (Paid + Creative) y Lead de Outbound (email, llamadas, LinkedIn). Un lead lee y decide, no produce: entrega una línea al día y un número a la semana. Growth deja de ser fábrica y pasa a ser mano derecha comercial de Maikel (estrategia, reuniones, demos, respuestas de clientes). **Regla sin excepciones: ningún agente enciende, apaga ni mueve presupuesto en Meta; Paid recomienda y Maikel ejecuta.** Se escribe tras pausar Paid la campaña de clínicas por su cuenta y reactivarla otro agente a 15 €/día. Un dueño único por activo compartido, y puerta de entrada para agentes nuevos.
 
 - **2026-09-21** · **Organigrama de agencia fijado por Maikel.** El cerebro pasa a ser Project Manager y Director de Operaciones: revisa cada cuenta a diario, decide la tarea de cada gestor y se la reparte por timbre. Cada cliente tiene su gestor de cuenta, full-stack, con sesión y rama propias. Los equipos de especialidad (Outbound, Growth, Paid, Ventas, Automatización) sirven a Qualivo, no a las cuentas. Contrato nuevo: todo gestor mantiene `clientes/<cliente>/ESTADO.md` al cerrar cada turno. Tres deudas registradas: Growth hace cuatro papeles a la vez, EAC lleva bloqueada desde el 7-ago y la sesión de Kubysoft está sin identificar.
 
