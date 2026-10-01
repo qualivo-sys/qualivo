@@ -15,6 +15,7 @@
 
 const A = require('./_activacion');
 const CITA = require('./_cita.js');
+const CI = require('./_citas.js');
 
 const ZONA = 'Europe/Madrid';
 const USUARIO_MAIKEL = 'nXgGkRbPWcDpdydQ06ns';
@@ -183,7 +184,8 @@ async function vuelta(modo, opciones) {
       if (resumen.enviados >= MAX_ENVIOS) break;
       const inicio = CITA.fechaGHL(ev.startTime) || new Date(NaN);
       const etiqueta = (modo === 'vispera' ? 'rec-visp-' : 'rec-dia-') + objetivo;
-      const fila = { contacto: ev.contactId, hora: horaDe(inicio), titulo: ev.title || '' };
+      const cual = modo === 'vispera' ? 'vispera' : 'dia';
+      const fila = { contacto: ev.contactId, cita: ev.id, hora: horaDe(inicio), titulo: ev.title || '' };
       try {
         // Víspera solo si se reservó con dos o más días de antelación. Si no
         // sabemos cuándo se reservó, se manda (mejor un «¿sigue en pie?» de más).
@@ -194,7 +196,17 @@ async function vuelta(modo, opciones) {
         const c = await contactoPorId(ev.contactId);
         if (!c) { fila.motivo = 'sin contacto'; resumen.saltados++; resumen.detalle.push(fila); continue; }
         fila.nombre = c.contactName || c.firstName || '';
-        if (A.tiene(c, etiqueta)) { fila.motivo = 'ya enviado'; resumen.saltados++; resumen.detalle.push(fila); continue; }
+        // Bloque 2: solo el diagnóstico recibe recordatorios. Segunda reunión y
+        // cualquier otra cita, nada (mejor silencio que un mensaje incorrecto).
+        const regs = (await CI.registrosDe(c.id)) || {};
+        const reg = regs[ev.id] || null;
+        const tipo = CI.tipoDe(ev, c, reg);
+        fila.tipo = tipo.tipo;
+        if (tipo.tipo !== 'diagnostico') { fila.motivo = 'no es diagnóstico (' + tipo.motivo + ')'; resumen.saltados++; resumen.detalle.push(fila); continue; }
+        if (reg && reg.resultado) { fila.motivo = 'cita con resultado (' + reg.resultado + ')'; resumen.saltados++; resumen.detalle.push(fila); continue; }
+        // Un envío por cita y hora: el registro de la cita manda (las etiquetas
+        // rec-* antiguas se siguen respetando, ya no se ponen).
+        if ((reg && reg.reminder_sent_at && reg.reminder_sent_at[cual]) || A.tiene(c, etiqueta)) { fila.motivo = 'ya enviado'; resumen.saltados++; resumen.detalle.push(fila); continue; }
         if (A.tiene(c, 'act-baja') || c.dnd === true) { fila.motivo = 'baja'; resumen.saltados++; resumen.detalle.push(fila); continue; }
 
         const mensajes = await A.mensajesDe(c.id);
@@ -203,7 +215,8 @@ async function vuelta(modo, opciones) {
         if (hilo.yaHoy) {
           fila.motivo = 'hoy ya salió el enlace o un recordatorio';
           resumen.saltados++; resumen.detalle.push(fila);
-          if (!seco) await A.etiquetar(c.id, [etiqueta]);
+          if (!seco && reg) await CI.marcarRecordatorio(c.id, ev.id, cual);
+          else if (!seco) await A.etiquetar(c.id, [etiqueta]);
           continue;
         }
         const nombre = nombrePila(c.firstName || c.contactName || c.name || '');
@@ -225,7 +238,8 @@ async function vuelta(modo, opciones) {
         }
         const hecho = await enviar(c, hilo.canal, texto, asunto, correoV2);
         fila.enviado = hecho.join(', ');
-        await A.etiquetar(c.id, [etiqueta]);
+        // Sin registro de la cita (aún no la ha visto el rastreo) queda la etiqueta antigua.
+        if (reg) await CI.marcarRecordatorio(c.id, ev.id, cual); else await A.etiquetar(c.id, [etiqueta]);
         await A.nota(c.id, 'RECORDATORIO DE CITA (' + (modo === 'vispera' ? 'víspera' : 'mismo día') + ') · ' + ahora.toLocaleString('es-ES', { timeZone: ZONA }) +
           '\nCita: ' + inicio.toLocaleString('es-ES', { timeZone: ZONA }) + ' · por ' + fila.enviado + '\n«' + texto + '»').catch(function () {});
         resumen.enviados++;

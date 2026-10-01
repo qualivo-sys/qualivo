@@ -20,8 +20,10 @@ const ETAPAS = {
   conversacion: '2f7569b8-d95b-4bfe-8120-0a4d206907ce', // Conversación abierta
   enCadencia: 'b48cf14c-2c0b-4529-81cd-0366f9c3a96d',   // En cadencia (Maikel, 22-sep)
   reunion: 'd491f3eb-2b82-468b-aab9-60e9cdc7368f',      // Reunión agendada
+  confirmado: '2a1a8f78-0b94-4577-9267-28969d6e0efe',   // Confirmado (manual en GHL)
   noPresentado: 'd04755f9-f94c-4c56-ac14-2c6b6356e1d6', // No presentado (Maikel, 22-sep)
   oferta: '41c3a02d-a63e-4ef5-a402-7b562bbabfa9',       // Oferta enviada
+  segunda: 'b853294d-a4fe-4ce8-8fed-e46723ab4540',      // Segunda reunión (Bloque 2: sin evento a Meta)
   seguimiento: '3e12a08f-272b-4817-9bfe-fd83d24ca45e',  // Negociación (antes «Seguimiento»)
   masAdelante: '515ba6db-2f03-47ab-9c50-fc10f361192a',  // Más adelante
   noResponde: 'fbed9371-d8e1-47a9-a933-2cb32db63c5e',   // No responde (Maikel, 22-sep): cadencia agotada sin reacción
@@ -193,7 +195,11 @@ async function crear(o) {
 // Mueve el trato abierto del contacto a la etapa indicada. Si no hay trato y
 // se pasa `crearSi` ({ nombre, origen, fuente, empresa? }), lo crea ya en esa
 // etapa. No baja nunca desde «Cliente».
-async function mover(contactId, etapa, crearSi) {
+// opciones (Bloque 2): { reagenda: true } deja volver a «Reunión agendada»
+// desde No presentado, Más adelante o No responde (alguien que vuelve a coger
+// hora); { sinMeta: true } no manda evento de calidad a Meta.
+async function mover(contactId, etapa, crearSi, opciones) {
+  opciones = opciones || {};
   try {
     if (!contactId || !ETAPAS[etapa]) return { ok: false, motivo: 'parametros' };
     const pl = await pipelineDe(contactId);
@@ -203,6 +209,7 @@ async function mover(contactId, etapa, crearSi) {
       return crear(Object.assign({}, crearSi, { contactId: contactId, etapa: etapa }));
     }
     if (pl.reactivacion) {
+      if (!pl.etapas[etapa]) return { ok: true, id: op.id, movido: false, motivo: 'sin_equivalente' };
       // Qualivo Pipeline: se mueve a la etapa equivalente, sin bajar de Cliente Activo.
       if (op.pipelineStageId === pl.etapas[etapa]) return { ok: true, id: op.id, movido: false };
       if (op.pipelineStageId === pl.etapas.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
@@ -210,23 +217,27 @@ async function mover(contactId, etapa, crearSi) {
         method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: pl.etapas[etapa] })
       });
       if (!rq.ok) throw new Error('ghl_opportunity_put ' + rq.status + ' ' + (await rq.text()).slice(0, 200));
-      await calidadAMeta(pl.contacto, etapa);
+      if (!opciones.sinMeta) await calidadAMeta(pl.contacto, etapa);
       return { ok: true, id: op.id, movido: true, pipeline: 'qualivo' };
     }
     if (op.pipelineStageId === ETAPAS[etapa]) return { ok: true, id: op.id, movido: false };
     if (op.pipelineStageId === ETAPAS.cliente) return { ok: true, id: op.id, movido: false, motivo: 'ya_cliente' };
     // Nunca hacia atrás: el 18-sep la agenda puso un trato en «Reunión agendada» y
     // el final de la llamada lo devolvió a «Conversación abierta».
-    const ORDEN = ['nuevo', 'enCadencia', 'conversacion', 'reunion', 'noPresentado', 'oferta', 'seguimiento', 'masAdelante', 'noResponde', 'piloto', 'cliente'];
+    const ORDEN = ['nuevo', 'enCadencia', 'conversacion', 'reunion', 'confirmado', 'noPresentado', 'oferta', 'segunda', 'seguimiento', 'masAdelante', 'noResponde', 'piloto', 'cliente'];
     const actual = Object.keys(ETAPAS).filter(function (k) { return ETAPAS[k] === op.pipelineStageId; })[0];
-    if (actual && ORDEN.indexOf(actual) > ORDEN.indexOf(etapa) && etapa !== 'masAdelante') {
+    // Etapa que el código no conoce (creada a mano en GHL): no se toca, salvo
+    // para cerrar como piloto o cliente. Antes caía a cualquier etapa pedida.
+    if (!actual && etapa !== 'piloto' && etapa !== 'cliente') return { ok: true, id: op.id, movido: false, motivo: 'etapa_desconocida' };
+    const sube = opciones.reagenda && etapa === 'reunion' && ['noPresentado', 'masAdelante', 'noResponde'].indexOf(actual) > -1;
+    if (actual && !sube && ORDEN.indexOf(actual) > ORDEN.indexOf(etapa) && etapa !== 'masAdelante') {
       return { ok: true, id: op.id, movido: false, motivo: 'no_retrocede' };
     }
     const r = await fetch(GHL_BASE + '/opportunities/' + op.id, {
       method: 'PUT', headers: cabeceras(), body: JSON.stringify({ pipelineStageId: ETAPAS[etapa] })
     });
     if (!r.ok) throw new Error('ghl_opportunity_put ' + r.status + ' ' + (await r.text()).slice(0, 200));
-    await calidadAMeta(pl.contacto, etapa);
+    if (!opciones.sinMeta) await calidadAMeta(pl.contacto, etapa);
     return { ok: true, id: op.id, movido: true };
   } catch (err) {
     console.error('[tratos] no se pudo mover el trato', contactId, etapa, err && err.message);

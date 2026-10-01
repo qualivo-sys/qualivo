@@ -236,9 +236,11 @@ const GATEWAY_PRIMERO = process.env.GATEWAY_PRIMERO !== '0';
 // ¿El próximo mensaje normal saldría por la pasarela? (para decidir si hay que variarlo)
 function saldriaPorGateway() { return GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA; }
 
-async function enviarMensaje(contactId, texto) {
+// opciones.transaccional (Bloque 2): confirmación de cita y enlace del día. No
+// pasan por el freno de 3 sin respuesta: los pidió la propia reserva del lead.
+async function enviarMensaje(contactId, texto, opciones) {
   if (PAUSA_TOTAL) return { canal: 'pausado', estado: 'pausado', id: '' };
-  if (await frenoSinRespuesta(contactId, texto)) return { canal: 'frenado', estado: 'frenado', id: '' };
+  if (!(opciones && opciones.transaccional) && await frenoSinRespuesta(contactId, texto)) return { canal: 'frenado', estado: 'frenado', id: '' };
   if (GATEWAY_PERMITIDO && GATEWAY_PRIMERO && !GATEWAY_PAUSA) {
     try {
       const g = await enviarPorGateway(contactId, texto, { forzar: true });
@@ -839,5 +841,5 @@ module.exports = {
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, retenerParaMaikel, nivelDe, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,
   sinDuplicados, seguidosSinRespuesta, frenoSinRespuesta,
-  soltarRetenidos, siguienteAccion, tomarCandado, borradorRetenido, ESPERA_A_B_MIN, WA1_CORTO
+  soltarRetenidos, siguienteAccion, tomarCandado, soltarCandado, borradorRetenido, ESPERA_A_B_MIN, WA1_CORTO
 };

@@ -155,13 +155,15 @@ async function reservar(o) {
 
   // El enlace de la sala que acaba de crear GHL para esta cita.
   const creada = await cita.json().catch(function () { return {}; });
-  const enlace = require('./_cita.js').enlaceDe(creada.appointment || creada);
+  const evCreada = creada.appointment || creada;
+  const enlace = require('./_cita.js').enlaceDe(evCreada);
 
   // Se para la cadencia, el trato pasa a «Reunión agendada», se avisa a Maikel,
   // sale el evento «Schedule» a Meta y el cliente recibe la confirmación por
   // WhatsApp. Todo en _cita.js; aquí solo se dispara.
   await require('./_cita.js').confirmarCita({
-    contactId: contacto.id, inicio: inicio, origen: o.origen || 'agenda', fuente: o.fuente || '', enlace: enlace
+    contactId: contacto.id, inicio: inicio, origen: o.origen || 'agenda', fuente: o.fuente || '', enlace: enlace,
+    evento: evCreada && evCreada.id ? Object.assign({ contactId: contacto.id, calendarId: process.env.AGENDA_CALENDARIO || CALENDARIO, startTime: inicio.toISOString() }, evCreada) : null
   });
   if (o.contexto) {
     await fetch(GHL_BASE + '/contacts/' + contacto.id + '/notes', {

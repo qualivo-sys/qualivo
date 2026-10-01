@@ -319,11 +319,14 @@ async function handler(req, res) {
     }
     if (await A.tieneCitaGHL(c.id)) {
       // Trato, aviso, evento a Meta y WhatsApp de confirmación, todo en _cita.js.
+      // Solo cuenta una cita FUTURA: con una pasada, la cadencia sigue (Bloque 2).
       const CITA = require('./_cita.js');
       const ev = await CITA.primeraCita(c.id);
-      await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev && ev.startTime, evento: ev, origen: 'Reloj' });
-      resumen.cerrados++;
-      continue;
+      if (ev) {
+        await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev.startTime, evento: ev, origen: 'Reloj' });
+        resumen.cerrados++;
+        continue;
+      }
     }
 
     // WhatsApps que se quedaron en «failed» después de la comprobación de los
@@ -489,8 +492,10 @@ async function handler(req, res) {
         if (await A.tieneCitaGHL(c.id)) {
           const CITA = require('./_cita.js');
           const ev = await CITA.primeraCita(c.id);
-          await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev && ev.startTime, evento: ev, origen: 'Reloj' });
-          resumen.cerrados++; continue;
+          if (ev) {
+            await CITA.confirmarCita({ contactId: c.id, contacto: c, inicio: ev.startTime, evento: ev, origen: 'Reloj' });
+            resumen.cerrados++; continue;
+          }
         }
         const r = await A.lanzarLlamada({
           telefono: c.phone,
@@ -553,15 +558,13 @@ async function handler(req, res) {
     }
   }
 
-  // Citas reservadas por otras vías (widget, GHL a mano, /llamada/) que nadie
-  // ha confirmado todavía: trato, aviso, evento a Meta y WhatsApp al cliente.
+  // Bloque 2: todas las citas de la agenda, una a una por su id. Registra las
+  // nuevas, detecta cambios de hora y de estado y confirma los diagnósticos
+  // pendientes (widget, GHL a mano, /llamada/, reagendas).
   try {
-    const CITA = require('./_cita.js');
-    const citas = await CITA.citasSinConfirmar(20);
-    for (const ev of citas) {
-      const r = await CITA.confirmarCita({ contactId: ev.contactId, inicio: ev.startTime, evento: ev, origen: 'Calendario' });
-      if (r.ok && !r.repetida) resumen.citas = (resumen.citas || 0) + 1;
-    }
+    const rc = await require('./_cita.js').revisarCitas({ presupuestoMs: 25000 });
+    resumen.citas = (resumen.citas || 0) + rc.confirmadas;
+    resumen.citasRevisadas = rc;
   } catch (err) {
     console.error('[activacion] rastreo de citas falló:', err && err.message);
   }
@@ -577,7 +580,7 @@ async function handler(req, res) {
         const ev = await CITA.primeraCita(c.id);
         if (!ev || !c.phone) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
         const d = new Date(ev.startTime);
-        if (isNaN(d.getTime()) || d.getTime() < Date.now()) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
+        if (isNaN(d.getTime()) || d.getTime() < Date.now() || !CITA.enlaceDe(ev)) { await A.etiquetar(c.id, null, ['act-cita-sin-confirmar']); continue; }
         const dia = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long' }).format(d);
         const hora = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(d);
         const r = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombrePila(c.firstName || c.contactName || ''), dia, hora, CITA.enlaceDe(ev)]);

@@ -619,7 +619,7 @@ async function atender(contactId, opciones) {
     if (decision.accion === 'reservar' && decision.texto) {
       try {
         const despues = await A.mensajesDe(c.id);
-        const yaConfirmado = despues.some(function (m) { return String(m.direction) === 'outbound' && /Confirmado: hablamos/.test(String(m.body || '')) && Date.parse(m.dateAdded || 0) > Date.parse(ultimo.dateAdded || 0); });
+        const yaConfirmado = despues.some(function (m) { return String(m.direction) === 'outbound' && /Confirmado: hablamos|Cambiada: ahora hablamos/.test(String(m.body || '')) && Date.parse(m.dateAdded || 0) > Date.parse(ultimo.dateAdded || 0); });
         if (yaConfirmado) decision.texto = '';
       } catch (e) { /* si no se puede comprobar, se manda */ }
     }
