@@ -330,3 +330,32 @@ SIP desde el 663 (480 temporarily unavailable / failed to connect). Todo registr
   única de precio).
 - Automatizar la llamada de «te estamos esperando» a los 5 minutos de la cita si no ha entrado.
 - Los errores SIP desde el 663: cuatro en trece llamadas.
+
+## 1-oct-2026 · revisión diaria (llamadas del 30-sep 19:39 al 1-oct 19:39)
+
+Cuatro llamadas, registradas en Notion (📞 Llamadas de Raquel).
+
+- Eva (Escuela Giner), 11:06 y 11:07: rescate tras no entrar a la reunión. Ninguna conectó
+  (SIP 480). Su número es un fijo; las dos salieron con el 663 como identificador.
+- Prueba interna a Maikel, 18:29: primera llamada con el 647 como identificador. Twilio la registra
+  completada desde +34 647 118 491 y Maikel confirma que veía el 647. Desde aquí Raquel llama con
+  el 647 (mismo registro de Vapi 2f99f0e4, número cambiado).
+- Javier (lead form Meta, clínicas), 18:32: a los 30 min del primer WhatsApp, por orden de Maikel.
+  Buzón; Raquel dejó el mensaje.
+
+**Observado.**
+- La transcripción escribe «Michael Echeverría», «Cuálibo» y «¿De te pillo…?», pero el texto que
+  manda el asistente ya dice «Máikel», «Cuálivo» y «¿Te pillo…?». En la prueba, el texto enviado
+  decía «Maikel» y también salió «Michael». Apunta al transcriptor, no a la voz; sin escuchar el
+  audio no se puede asegurar.
+- Errores SIP con el 663 en las últimas 25 llamadas: 7 de 18; con el número de EE. UU., 0 de 7.
+
+**Aplicado:** nada en el guion (no hay fallo de guion con evidencia).
+
+**Propuesto, no aplicado (decide Maikel).**
+- Confirmar de oído en la llamada de prueba si la voz dice «Máikel» o «Michael». Si es la voz,
+  diccionario de pronunciación en ElevenLabs para Máikel y Qualivo.
+- Vigilar los fallos de conexión con el 647. Si siguen, la causa es la salida internacional por
+  Twilio con número español, y hace falta un número de un operador español.
+- Llamada de B/C a los 30 min del primer WhatsApp en vez de a las 2 h 30 (Maikel lo ha hecho a mano
+  con Javier; falta decidir si pasa a regla).
