@@ -8,7 +8,7 @@
 //     en días laborables de 9:00 a 19:00 y nunca el mismo día que un WhatsApp
 //     de la cadencia.
 //   - Sustituye al correo de bienvenida en formación y clínicas (el 0 hace ese
-//     papel). Si la bienvenida ya salió, o el lead entró hace más de 3 h, se
+//     papel). Si la bienvenida ya salió, o el primer WhatsApp salió hace más de 1 h, se
 //     empieza por el 1.
 //   - Se para si contesta por cualquier canal, reserva, pide la baja, Maikel lo
 //     coge (wa-humano) o le pone la etiqueta nut-stop.
@@ -19,8 +19,8 @@ const A = require('./_activacion');
 const H = require('./_horario');
 const CORREOS = require('./_nurturing-correos.json');
 
-// Clínicas se enciende cuando Maikel apruebe sus textos (1-oct: vista previa enviada).
-const CLINICAS_APROBADO = false;
+// Clínicas aprobada por Maikel el 1-oct («dale caña, déjalo montado»).
+const CLINICAS_APROBADO = true;
 const ACTIVO = {
   formacion: process.env.NURTURING_FORMACION !== '0',
   clinicas: CLINICAS_APROBADO && process.env.NURTURING_CLINICAS !== '0'
@@ -100,7 +100,7 @@ function siguiente(c, ahora) {
       if (!tiene(c, 'act-wa1')) return ahora - entro > 24 * 3600 * 1000 ? { n: 0, saltar: true, vertical: v } : null;
       base = wa ? H.msDeSello(wa) : entro;
     }
-    if (ahora - base > 3 * 3600 * 1000) return { n: 0, saltar: true, vertical: v }; // ya no es «acabo de»
+    if (ahora - base > 3600 * 1000) return { n: 0, saltar: true, vertical: v }; // pasada 1 h ya no es «acabo de»
     if (ahora - base < 15 * 60000 || !H.ventanaWhatsApp(ahora)) return null;
     return { n: 0, vertical: v };
   }
@@ -111,7 +111,7 @@ function siguiente(c, ahora) {
   return { n: n, vertical: v };
 }
 
-async function enviar(c, vertical, n) {
+async function enviar(c, vertical, n, prefijo) {
   if (A.PAUSA_TOTAL) return { ok: false, motivo: 'pausa_total' };
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
   const m = componer(vertical, n, c);
@@ -121,7 +121,7 @@ async function enviar(c, vertical, n) {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: FROM, to: [c.email], reply_to: RESPONDER_A, subject: m.asunto, html: m.html,
+        from: FROM, to: [c.email], reply_to: RESPONDER_A, subject: (prefijo || '') + m.asunto, html: m.html,
         headers: { 'List-Unsubscribe': '<mailto:' + RESPONDER_A + '?subject=baja>' },
         // Las mismas etiquetas que lee api/resend-evento.js (aperturas y clics).
         tags: [{ name: 'paso', value: 'nut-' + vertical + '-' + n }, { name: 'contacto', value: String(c.id).replace(/[^A-Za-z0-9_-]/g, '') }]
@@ -131,12 +131,36 @@ async function enviar(c, vertical, n) {
   } catch (e) { return { ok: false, motivo: 'fetch_' + (e && e.message) }; }
 }
 
+// Prueba: un contacto con la etiqueta nut-prueba hace que lleguen los doce
+// correos a Maikel (solo a PRUEBA_A, nunca al contacto), con datos de ejemplo.
+const PRUEBA_A = process.env.NURTURING_PRUEBA_A || 'maikel@qualivo.io';
+const EJEMPLO = { formacion: { firstName: 'Laura', companyName: 'Academia Delta' }, clinicas: { firstName: 'Marta', companyName: 'Clínica Dental Sol' } };
+async function pruebas(res) {
+  let lista = [];
+  try { lista = await A.buscarPorEtiqueta('nut-prueba', 5); } catch (e) { return; }
+  for (const c of lista) {
+    const candado = await A.tomarCandado(c.id, 'qv-nutp'); // una sola tanda aunque haya dos vueltas
+    if (!candado) continue;
+    const fresca = await fetch(A.GHL_BASE + '/contacts/' + c.id, { headers: A.cabeceras() }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (d) { return d.contact || null; }).catch(function () { return null; });
+    if (!fresca || !tiene(fresca, 'nut-prueba')) { await A.soltarCandado(c.id, candado); continue; }
+    await A.etiquetar(c.id, null, ['nut-prueba']);
+    await A.soltarCandado(c.id, candado);
+    for (const v of ['formacion', 'clinicas']) {
+      for (let n = 0; n < CORREOS.dias.length; n++) {
+        const r = await enviar(Object.assign({ id: c.id, email: PRUEBA_A }, EJEMPLO[v]), v, n, '[Prueba · ' + (v === 'formacion' ? 'Formación' : 'Clínicas') + ' · día ' + CORREOS.dias[n] + '] ');
+        if (r.ok) res.pruebas = (res.pruebas || 0) + 1; else res.errores++;
+      }
+    }
+  }
+}
+
 // Una vuelta (la llama el reloj de activación cada 10 min).
 async function vuelta(opciones) {
   opciones = opciones || {};
   const ahora = Date.now();
   const limite = ahora + (opciones.presupuestoMs || 15000);
   const res = { altas: 0, enviados: 0, saltados: 0, terminados: 0, errores: 0, detalle: [] };
+  if (!opciones.seco) await pruebas(res);
   if (!ACTIVO.formacion && !ACTIVO.clinicas) return res;
   // Altas: leads en cadencia, de formación o clínicas, con correo, que entraron desde DESDE.
   try {

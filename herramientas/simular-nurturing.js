@@ -104,14 +104,13 @@ const formacion = function (iniIso, waIso) { return ['leadform', 'activacion', '
     if (de('l1').length || de('l2').length) return 'mandó el 0';
     return C.l1.tags.indexOf('nut-0') > -1 && C.l2.tags.indexOf('nut-0') > -1 ? true : 'no saltó';
   });
-  await caso('Clínicas (pendiente de aprobación), reformas, sin correo y leads antiguos: nada', async function () {
+  await caso('Reformas, sin correo y leads antiguos: nada', async function () {
     fijar('2026-10-05T08:00:00Z');
-    lead('c1', ['leadform', 'activacion', 'sector-clinicas', 'act-ini-' + sello('2026-10-05T08:00:00Z'), 'act-wa1', 'act-wa1-h-' + sello('2026-10-05T08:00:00Z')]);
     lead('r1', ['leadform', 'activacion', 'sector-reformas', 'act-ini-' + sello('2026-10-05T08:00:00Z'), 'act-wa1']);
     lead('s1', formacion('2026-10-05T08:00:00Z', '2026-10-05T08:00:00Z'), { email: '' });
     lead('v1', formacion('2026-09-20T08:00:00Z', '2026-09-20T08:00:00Z'));
     fijar('2026-10-05T08:20:00Z'); await N.vuelta();
-    return correos.length === 0 && !N.ACTIVO.clinicas && N.sustituyeBienvenida('Formación o academia') && !N.sustituyeBienvenida('Salud, clínica o bienestar') ? true : 'correos ' + correos.length;
+    return correos.length === 0 && N.sustituyeBienvenida('Formación o academia') && N.sustituyeBienvenida('Salud, clínica o bienestar') && !N.sustituyeBienvenida('Reformas, construcción o instalaciones') ? true : 'correos ' + correos.length;
   });
   await caso('Sin nombre ni empresa: «Hola:» y «vuestro centro»; clínicas compone su texto', async function () {
     const m = N.componer('formacion', 0, { firstName: '', companyName: '' });
@@ -120,6 +119,17 @@ const formacion = function (iniIso, waIso) { return ['leadform', 'activacion', '
     return /Hola Javier:/.test(k.html) && /Nuria Roure/.test(k.html) && !/\{\{/.test(k.html + m.html) ? true : 'clínicas';
   });
 
+  await caso('Clínicas: correo 0 con su texto', async function () {
+    fijar('2026-10-05T08:00:00Z'); lead('c1', ['leadform', 'activacion', 'sector-clinicas', 'act-ini-' + sello('2026-10-05T08:00:00Z'), 'act-wa1', 'act-wa1-h-' + sello('2026-10-05T08:00:00Z')], { companyName: 'Dentotec' });
+    fijar('2026-10-05T08:20:00Z'); await N.vuelta();
+    const e = de('c1'); return e.length === 1 && e[0].paso === 'nut-clinicas-0' && /pregunta por un tratamiento/.test(e[0].html) ? true : JSON.stringify(e.map(function (x) { return x.paso; }));
+  });
+  await caso('Prueba: nut-prueba manda los 12 a Maikel una sola vez y nada al contacto', async function () {
+    fijar('2026-10-05T08:00:00Z'); lead('m1', ['nut-prueba'], { email: 'otro@ejemplo.es' });
+    await Promise.all([N.vuelta(), N.vuelta()]); await N.vuelta();
+    const a = correos.filter(function (x) { return x.to === 'maikel@qualivo.io'; });
+    return a.length === 12 && correos.length === 12 && /^\[Prueba · Clínicas · día 20\] /.test(a[11].asunto) ? true : 'correos ' + correos.length + ' ' + (a[0] || {}).asunto;
+  });
   let fallos = 0;
   resultados.forEach(function (r) { if (r[0] !== 'OK ') fallos++; console.log(r[0] + ' · ' + r[1] + (r[2] ? '\n      → ' + r[2] : '')); });
   console.log('\n' + (resultados.length - fallos) + '/' + resultados.length + ' OK');
