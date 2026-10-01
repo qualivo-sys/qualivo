@@ -81,3 +81,70 @@ mecanismo existe y volverá a aparecer.
    pausar hoy protege el envío de las próximas semanas.
 4. **Revisar si los otros tres dominios están listados**, con el mismo método (web
    de surbl.org, no DNS desde aquí).
+
+---
+
+# AMPLIACIÓN (misma mañana) · son DOS dominios, no uno
+
+## Primero: mi comprobación anterior tampoco valía, por otro motivo
+
+Arriba escribí que no podía consultar SURBL desde aquí. La causa real era más tonta:
+**`dig` no está instalado en este contenedor** y el error se lo comía la redirección, así que todas
+las consultas devolvían vacío y yo lo leía como "limpio". Instalando `dnspython` y consultando por
+la librería, las listas responden perfectamente.
+
+La lección es la misma que ya me costó un informe: **una comprobación sin entrada de control no es
+una comprobación.** Ahora las pongo siempre.
+
+## La consulta buena, con sus controles
+
+```
+CONTROLES POSITIVOS (deben salir listados)
+  test.surbl.org.multi.surbl.org      -> 127.0.0.254   OK, la consulta funciona
+  dbltest.com.dbl.spamhaus.org        -> NXDOMAIN      FALLA: Spamhaus no se puede consultar
+CONTROL NEGATIVO (debe salir limpio)
+  google.com.multi.surbl.org          -> NXDOMAIN      OK, no da falsos positivos
+
+NUESTROS DOMINIOS EN SURBL
+  goqualivo.com     -> 127.0.0.64   LISTADO
+  gotqualivo.com    -> 127.0.0.64   LISTADO
+  qualivoedge.com   -> NXDOMAIN     limpio
+  novaqualivo.com   -> NXDOMAIN     limpio
+  qualivo.io        -> NXDOMAIN     limpio
+```
+
+Sobre Spamhaus **no puedo afirmar nada**: su entrada de control falla, así que ese "limpio" no vale.
+Lo que sigue se refiere solo a SURBL, donde los controles salen bien.
+
+El código devuelto es `127.0.0.64` en los dos casos. Qué sublista significa exactamente ese bit hay
+que mirarlo en surbl.org; **no lo doy por sabido.**
+
+## El alcance real
+
+| dominio | buzones | correos/día | SURBL |
+|---|---:|---:|---|
+| goqualivo.com | 3 | 165 | **LISTADO** |
+| gotqualivo.com | 2 | 110 | **LISTADO** |
+| qualivoedge.com | 5 | 150 | limpio |
+| novaqualivo.com | 5 | 100 | limpio |
+| **total** | **15** | **525** | **275 listados = 52%** |
+
+**Más de la mitad de la capacidad de envío de Qualivo sale por dominios que están en una lista negra
+de URLs**, y Smartlead mete en cada correo un enlace de seguimiento y de baja con el dominio del
+buzón emisor, así que no hay forma de enviar desde ahí sin llevar la URL listada dentro.
+
+## El segundo rechazo de hoy, que NO es esto
+
+El mismo barrido trajo un `450 4.1.8 Sender address rejected: Domain not found` desde
+gotqualivo.com. Eso **no** es el listado: es un fallo **temporal** del servidor receptor
+(clinicasw.com) y Gmail avisó de que reintentaría 46 horas. El DNS de gotqualivo.com está correcto,
+comprobado con control: MX a `smtp.google.com` y SPF `v=spf1 include:_spf.google.com ~all`, igual
+que los otros tres. No hay que tocar nada por eso.
+
+## Qué hacer
+
+1. **Pedir la retirada de los dos dominios en surbl.org**, no solo de goqualivo.com.
+2. Decidir sobre los 5 buzones de esos dos dominios. Mi recomendación sigue siendo pausarlos: con
+   los otros dos dominios limpios quedan **250 correos/día**, que es más de lo que estamos enviando
+   hoy (37). **Pausar no cuesta volumen real ahora mismo** y evita acumular rechazos.
+3. Averiguar por qué están listados antes de pedir la retirada, o volverán a entrar.
