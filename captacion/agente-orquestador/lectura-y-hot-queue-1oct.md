@@ -1,153 +1,59 @@
 # Orchestrator · primera lectura y Hot Queue · 1-oct-2026
 
-Leídos: el rol (31 apartados), el anexo de realidad medida, el ICP Operating System, los roles de
-llamadas y LinkedIn con sus herramientas, el análisis de septiembre, la alerta SURBL, y la auditoría
-de Notion de principio a fin.
+Leídos: el rol (31 apartados), **la adenda del 1-oct**, el anexo de realidad medida, el ICP Operating
+System, los roles de llamadas y LinkedIn con sus herramientas, el análisis de septiembre, la alerta
+SURBL y la auditoría de Notion de principio a fin.
 
-**No se ha activado nada ni se ha escrito a nadie.** Todo lo que sigue necesita el OK de Maikel.
+**No se ha activado nada ni se ha escrito a nadie.**
 
 **Lo que no he podido medir yo mismo:** esta sesión no tiene claves en el scratchpad, así que no he
 consultado Smartlead, GHL, HeyReach ni Vapi. Todo lo que afirmo sale de los documentos del repo y de
-la auditoría de Notion, y donde hace falta una consulta a la API lo digo en vez de rellenarlo.
+la auditoría de Notion; donde hace falta una consulta a la API, lo digo en vez de rellenarlo.
 
 ---
 
-## PARTE 1 · Dónde empezaría el lunes, en orden
+## 0 · La adenda resuelve lo que iba a preguntar, y corrige mi orden
 
-El anexo propone seis pasos para la primera semana. Estoy de acuerdo con cinco de los seis en el
-*qué*. Discrepo en el **orden**, y añado uno que no está. Lo que sigue es mi orden, con el motivo de
-cada cosa.
+Escribí la primera versión de esto antes de leer la adenda. Dos de sus puntos la cambian:
 
-### 1 · Una sola lista de supresión, consultada antes de cualquier envío en cualquier herramienta
+**La gobernanza está cerrada** (apartado A) y coincide con lo que iba a proponer: decido
+priorización, canal, orden, timing, paradas por stop conditions, clasificación y preparación de
+listas; **recomiendo** oferta, precio, copy y escalado, y la aprobación es suya. Ya no hay pregunta
+que hacer. **El apartado 31 está completo** (apartado C): embudo, nueve ratios obligatorios y cierre
+en seis decisiones. Tampoco hay que pedir nada.
 
-El anexo pone esto en el puesto 6. Va primero, y el motivo es la asimetría del coste de
-equivocarse.
+**Y retiro mi reordenación.** Mi primera versión ponía la lista de supresión por delante de DATA,
+con el argumento de que el daño se acumula mientras trabajamos en otra cosa. Ese argumento no se
+sostiene cuando lo miro bien, por dos motivos:
 
-Que falte el campo `revenue` cuesta un trimestre de aprendizaje. Que falte la lista de supresión
-cuesta otra persona quemada y, visto el historial, posiblemente otro expediente: ya hay uno abierto
-(CCOO Catalunya, expediente 321728), cuatro escalados y **17 peticiones de parada de 108 respuestas
-humanas**. Y el dato que lo decide: al auditarlas ayer, **4 de las 17 no estaban dadas de baja de
-verdad**. No es un riesgo teórico; es un fallo que seguía vivo anteayer, con siete campañas activas.
+1. Las 4 bajas que faltaban de las 17 **ya están aplicadas y verificadas una a una** (auditoría, §6).
+   La fuga aguda está tapada a mano; lo que queda es el mecanismo, que es diseño.
+2. P0.1, P0.2 y P0.3 son **tres documentos, no tres ejecuciones**: auditoría de campos, checklist de
+   dominios y diseño V1. Ninguno envía nada, el depósito está vacío y cargar necesita su OK. Así que
+   **no hay riesgo acumulándose** mientras se escriben, que es justo lo que yo estaba valorando.
 
-El caso de María Carrascal no fue un fallo de arquitectura. Fue que una promesa hecha en LinkedIn no
-existía en ningún sitio que Smartlead leyera. Para que no se repita no hace falta el bus de eventos
-que el apartado 5 describe y que hoy no se puede construir: hace falta **un fichero** con una fila
-por persona a la que se ha prometido no contactar o que ha pedido parar, en cualquier canal, y una
-comprobación contra él antes de cargar un lead o lanzar una llamada. Un día de trabajo.
+El orden del apartado M se mantiene: **P0.1 DATA → P0.2 DELIVERABILITY → P0.3 STOP CONDITIONS →
+P0.4 HOT QUEUE → P0.5 los 133.** Lo único que conservo de mi versión es cuál es la primera fila que
+hay que construir dentro de P0.3, y resulta que ya está escrita en el apartado G: que una promesa
+hecha en un canal bloquee en todos.
 
-Esto es, además, la única parte del apartado 7 que se puede implementar sin webhooks, y por eso va
-antes que el resto del Event Contract.
-
-### 2 · Revelar los créditos de Apollo antes del 14-oct · **aquí discrepo del anexo**
-
-El anexo (§8) concluye que sobra presupuesto de enriquecimiento y que **el cuello no es Apollo**. En
-volumen tiene razón: tres cohortes son 300-450 créditos de 2.467. Pero esa lectura deja fuera el
-dato que la auditoría de Notion sí recoge: **los 2.467 créditos caducan el 14 de octubre.** Desde el
-lunes son siete días laborables.
-
-En el orden del anexo los créditos se gastan después de arreglar datos y entregabilidad, es decir,
-probablemente nunca. Y esas dos cosas no están en conflicto, porque son decisiones distintas:
-
-- **Revelar un email no envía nada.** Un email revelado es inventario en un fichero.
-- **Cargar un lead en una campaña sí envía.** Eso es lo que el apartado 27 prohíbe mientras DATA y
-  DELIVERABILITY estén roto.
-
-Así que: revelar antes del 14-oct, cargar cero hasta que el sensor y la lista de supresión estén.
-El apartado 25 dice que los créditos son capital. Capital que caduca en siete días laborables no se
-administra, se usa o se pierde.
-
-Con el reparto de las tres cohortes del apartado 13 y la nota del propio anexo de que Clínicas solo
-tiene 553 decisores en toda España, una cohorte de 150 ahí se come el 27% del vertical. Eso hay que
-decidirlo sabiéndolo.
-
-### 3 · SURBL en los dos dominios
-
-Coincido con el anexo, en este puesto y no antes, por una razón práctica: la retirada **no la puedo
-hacer yo**. Requiere el formulario web de surbl.org y, antes, averiguar por qué están listados, o
-vuelven a entrar. Es de Maikel y es el paso 2 del cuello del apartado 27.
-
-Lo que sí recomiendo decidir el lunes y no más tarde: **pausar los 5 buzones de goqualivo.com y
-gotqualivo.com.** Son 275 de 525 correos/día, el 52% de la capacidad nominal, pero con los otros dos
-dominios limpios quedan 250/día y hoy se envían 37. **Pausar no cuesta volumen real**, y cada rechazo
-que acumulamos hace más difícil la retirada.
-
-Y una corrección que hay que escribir en el repo: `estrategia/analisis-septiembre-outbound.md` §6
-sigue diciendo *«La entregabilidad… No hay problema de dominio, de calentamiento ni de spam»*. Eso
-es falso desde ayer y es exactamente la frase que haría que alguien no actuara. La tasa de rebote no
-podía verlo porque **los 550 entraban en Smartlead contados como respuestas, no como rebotes**. Ese
-fichero necesita una errata.
-
-### 4 · El sensor: tracking de aperturas en todas las campañas y canal como campo obligatorio
-
-Coincido con el anexo y con el apartado 28. Coste cero, es configuración. El 40% de los envíos sin
-medir aperturas y el 82% de las citas sin canal son la razón por la que ninguna comparación de coste
-por cita que hemos hecho está demostrada.
-
-Pero hay una consecuencia que el anexo no saca, y vale una decisión gratis el mismo lunes: **la lista
-de llamadas calientes se construye con «3 o más aperturas»**, y la apertura es la señal más débil de
-la jerarquía del propio Brain (*«nunca tratar una apertura como intención»*), además de no existir en
-el 40% de la base. Hay 34 clics medidos. **Un clic vale más que tres aperturas y además se mide
-bien.** Lo que haría el lunes es repuntar la capacidad de llamada de la lista de 20 aperturas a la
-cohorte de clics. No cuesta nada y es decisión de routing, que ya es mía.
-
-### 5 · Hot Queue con P1 y P3, que son las dos que tienen datos
-
-Coincido sin reservas. Está en la Parte 3.
-
-Una precisión sobre P1 que cambia el trabajo: el anexo y el encargo lo llaman *«~15 respuestas
-positivas sin reunión»*, y se lee como un atasco de correo sin contestar. **No lo es.** La auditoría
-mide que de 108 respuestas humanas **solo 3 quedaron sin contestar**, y las calientes se contestaron
-rápido (Giner en 19 minutos, Dataslayer en 55). El triaje no es el problema.
-
-P1 es gente **a la que sí se contestó** y que aun así nunca llegó a un calendario. Eso apunta al
-paso 5 del apartado 19 —reducir fricción, proponer hueco concreto— y no a «responder más rápido». Y
-en tres casos concretos (Alejandra Higueras, Alexandra Dalmau, Santiago Paz Noya) el seguimiento
-**ya está escrito y lleva días parado porque el borrador no convenció**. Esa parte de P1 no es un
-fallo del sistema: es una cola de tres aprobaciones.
-
-### 6 · Los campos `revenue` y `lost_reason` en GHL, con los 18 registros hacia atrás
-
-El anexo lo pone primero. Lo pongo sexto, y no porque no importe: sin esos dos campos los apartados
-21, 22, 23 y 26 no tienen materia prima y la métrica maestra no se calcula. Son 3 ganadas con
-`monetaryValue = 0` y 15 perdidas sin motivo, 18 registros, una tarde.
-
-Va sexto porque es **aprendizaje retrospectivo**: cambia lo que sabremos en noviembre, no lo que le
-pasa a una persona esta semana. Los cinco puntos de arriba sí.
-
-Un dato del anexo que conviene no perder al rellenarlo: **14 de las 15 perdidas empiezan por
-«Meta ·»**, o sea vienen de anuncios y se concentran en Reformas y Formación. Las pérdidas no están
-repartidas por canal, y eso es una hipótesis con la que entrar a los 15 motivos en vez de con una
-lista en blanco.
-
-### 7 · El Event Contract como tabla de estado derivada por sondeo
-
-Último, y de acuerdo con el anexo en la forma: no hay webhooks, las respuestas se detectan sondeando
-cada hora, y `NO_SHOW` no se detecta de ninguna manera. Escribirlo como tabla de estado y no
-prometer tiempo real. Pero esto es construcción, y los seis puntos anteriores son decisiones y
-configuración.
+La Hot Queue va aquí entregada por delante de su turno porque se pidió hoy, y porque es el único de
+los cinco que produce trabajo para una persona esta semana.
 
 ---
 
-## PARTE 2 · Donde discrepo del anexo, resumido
+## 1 · Lo que aporto sobre el anexo
 
-| | El anexo dice | Mi lectura |
-|---|---|---|
-| **Orden** | `revenue`/`lost_reason` primero, stop conditions sexto | Invertido. La supresión impide daño esta semana; los dos campos cambian lo que sabremos en noviembre. 4 de 17 bajas seguían sin aplicar ayer |
-| **Apollo** | *«Sobra presupuesto. El cuello no es Apollo»* | Cierto en volumen, incompleto en plazo: **2.467 créditos caducan el 14-oct**. Revelar ≠ cargar. En su orden, caducan |
-| **Los 13 clics** | El problema está después del clic; landing, calendario, fricción, confianza, timing | Falta el primer sospechoso: **el dominio emisor**. Ver abajo |
-| **Mensaje** | Paso 4 del cuello: *«funciona»* (2,24% vs 0,48%) | De acuerdo, y por eso no lo toco. Pero el 2,24% es la Capa A, con techo de 15 leads/día. Lo que no tiene datos es la Capa B, que es lo único que escala |
-| **Capacidad de llamada** | No lo trata | Hoy apunta a 20 aperturas. Debería apuntar a 34 clics. Gratis, el lunes |
-| **LinkedIn** | No lo trata en la primera semana | El propio rol de LinkedIn sigue ordenando como acción nº1 *«las 84 conversaciones dormidas»*. **La auditoría retiró ese dato: son 5 y una es un bloqueo.** El repo lleva una orden retirada como si estuviera viva |
+Coincido con el anexo en el fondo. Tres cosas donde discrepo o añado, por orden de cuánto valen.
 
-### La discrepancia que más vale: los 13 clics y el dominio emisor
+### 1.1 · Los 13 clics con 0 respuestas: falta el primer sospechoso
 
 El anexo (§6) lo llama *«la señal más fuerte que hay en los datos de Qualivo ahora mismo»* y tiene
 razón. Y tanto el anexo como la auditoría concluyen lo mismo: el copy consiguió el clic, el problema
 está después, y es calendario o landing. **A las dos les falta preguntar si el enlace era
 alcanzable.**
 
-Cruzando los documentos de despliegue con la alerta SURBL, las siete campañas de líneas de servicio
-quedan así:
+Cruzando los documentos de despliegue con la alerta SURBL, las siete campañas de líneas de servicio:
 
 | Campaña | Envíos | Clics | Resp | Tasa | Buzones emisores | SURBL |
 |---|---:|---:|---:|---:|---|---|
@@ -160,157 +66,165 @@ quedan así:
 | Asesorías · presupuesto parado | 30 | — | 0 | 0% | sin confirmar | — |
 | **Total** | **485** | **34** | **9** | **1,86%** | | |
 
-Sobre dominio listado: **375 envíos, 7 respuestas, 1,87%.**
-Sobre dominio limpio: **35 envíos, 2 respuestas, 5,71%.**
+Sobre dominio listado: **375 envíos, 7 respuestas, 1,87%.** Sobre dominio limpio: **35 envíos, 2
+respuestas, 5,71%.** Y las dos campañas con clics y cero respuestas son las dos que salieron **al
+100% por los dos dominios confirmados en SURBL**.
 
-Y las dos campañas con clics y cero respuestas son las dos que salieron **al 100% por los dos
-dominios que ahora están confirmados en SURBL**.
-
-El mecanismo es el que ya está escrito en la propia alerta: **Smartlead construye el píxel de
-seguimiento y el enlace de baja con el dominio del buzón emisor**. El calendario del email 3 de esas
-campañas *es* una URL de goqualivo.com o gotqualivo.com. SURBL es una lista negra **de URLs**, y la
-consumen filtros web y de correo corporativos. El patrón observado —clic registrado, ninguna
-reserva, ninguna respuesta— es exactamente lo que produce un redirect que el filtro de su empresa
-corta después de que Smartlead cuente el clic.
+El mecanismo ya está escrito en la propia alerta: **Smartlead construye el píxel de seguimiento y el
+enlace de baja con el dominio del buzón emisor.** El calendario del email 3 de esas campañas *es* una
+URL de goqualivo.com o gotqualivo.com. SURBL es una lista negra **de URLs** y la consumen filtros web
+y de correo corporativos. Clic registrado, ninguna reserva, ninguna respuesta es exactamente lo que
+produce un redirect que el filtro de su empresa corta **después** de que Smartlead cuente el clic.
 
 Y la comprobación de agosto que lo descartó no vale: `clics-calendario-adelantta.md` dice *«El enlace
-carga bien (HTTP 200)»*, medido desde nuestra propia máquina. Lo he repetido hoy desde este
-contenedor y los cuatro dominios devuelven 200. **No prueba nada sobre lo que hace el filtro de un
-despacho.** Es el mismo error de «comprobación sin entrada de control» que este equipo ya se ha
-señalado tres veces.
+carga bien (HTTP 200)»*, medido desde nuestra propia máquina. Repetido hoy desde este contenedor, los
+cuatro dominios devuelven 200. **No prueba nada sobre el filtro de un despacho.** Es el mismo error
+de «comprobación sin entrada de control» que este equipo ya se ha señalado tres veces.
 
 **Dos cosas en contra, que digo yo mismo:**
 
 1. **No sé desde cuándo están listados los dos dominios.** Si entraron a finales de septiembre, no
-   pueden explicar el comportamiento de agosto. Esto hay que fecharlo antes de dar la hipótesis por
-   buena.
+   explican el comportamiento de agosto. Hay que fecharlo antes de dar la hipótesis por buena.
 2. La auditoría prueba que **los 550 se registran como respuestas con `reply_time`**. Gestorías ·
-   Piloto tiene literalmente 0 respuestas, así que probablemente **no** hubo rechazos duros en esa
-   campaña. Por eso mi hipótesis es sobre **el destino del clic**, no sobre la entrega.
+   Piloto tiene literalmente 0 respuestas, así que probablemente **no** hubo rechazos duros ahí. Por
+   eso la hipótesis es sobre **el destino del clic**, no sobre la entrega.
 
-Es falsable y cuesta poco: fechar el listado, mirar el redirect real del enlace de seguimiento de un
-lead de cada campaña, y comparar reserva por dominio emisor. Va antes de rediseñar el calendario o
-la landing, porque si el enlace no llega, rediseñar lo que hay detrás no cambia nada.
+Falsable y barata: fechar el listado, mirar el redirect real del enlace de un lead por campaña, y
+comparar reserva por dominio emisor. Entra en P0.2, en la columna `evidencia` del formato del
+apartado H, y va **antes** de rediseñar calendario o landing: si el enlace no llega, lo que haya
+detrás da igual.
+
+### 1.2 · Los créditos de Apollo caducan el 14-oct · recomendación, no objeción
+
+El apartado K dice que después de clasificar los 133 diga **dónde invertir los siguientes 300-450
+créditos**, y el anexo (§8) concluye que sobra presupuesto y que el cuello no es Apollo. Las dos
+cosas son ciertas en volumen. Lo que ninguna de las dos recoge: **los 2.467 créditos caducan el
+14-oct**, siete días laborables desde el lunes.
+
+El número en crudo: si se invierten 300-450, **expiran unos 2.000.**
+
+Y son dos decisiones distintas, que conviene no pegar:
+
+- **Revelar un email no envía nada.** Es inventario en un fichero, y la adenda sitúa la aprobación en
+  *«cargar una lista que vaya a empezar a recibir comunicaciones»*, no en revelar.
+- **Cargar sí envía**, y eso espera a DATA, stop conditions y deliverability, como dice la regla Ñ.
+
+**Mi recomendación:** decidir antes del 14-oct cuántos créditos se revelan, aunque la carga se quede
+en cero hasta que los P0 estén. Si la respuesta es «solo 300-450», que sea una decisión tomada y no
+el resultado de que se acabe el plazo. El apartado 25 dice que los créditos son capital; capital que
+caduca en siete días laborables no se administra, se usa o se pierde.
+
+### 1.3 · La capacidad de llamada apunta a la señal más débil
+
+La lista de llamadas calientes se construye con *«3 o más aperturas»*. La apertura es la señal más
+débil de la jerarquía del propio Brain (*«nunca tratar una apertura como intención»*) y **no existe en
+el 40% de la base**. Hay 34 clics medidos, y un clic está por encima de una apertura en esa misma
+jerarquía.
+
+Repuntar la capacidad de llamada de las 20 aperturas a la cohorte de clics es selección de canal y
+prioridad, así que por el apartado A **lo decido yo**. Lo hago en P0.4 y queda en la columna `agente`
+de la cola. No cuesta nada.
+
+### 1.4 · Dos erratas que dejan órdenes retiradas como si estuvieran vivas
+
+- `estrategia/analisis-septiembre-outbound.md` §6 sigue diciendo *«La entregabilidad… No hay problema
+  de dominio, de calentamiento ni de spam»*. Es falso desde ayer, y es exactamente la frase que haría
+  que alguien no actuara sobre SURBL. La tasa de rebote no podía verlo porque **los 550 contaban como
+  respuestas, no como rebotes**.
+- `captacion/agente-linkedin/rol-linkedin-outbound.md`, nota de adaptación §4, ordena como acción nº1
+  *«las 84 conversaciones dormidas, antes de invitar a nadie nuevo»*. **La auditoría retiró ese dato:
+  son 5 y una es un bloqueo.** Quien abra ese fichero el lunes empieza por un pozo que no existe.
+
+Las dos son correcciones de fichero, sin decisión detrás. Entran en P0.1.
 
 ---
 
-## PARTE 3 · HOT QUEUE · 1-oct-2026
+## 2 · HOT QUEUE V1 · 1-oct-2026
 
-Solo P1 y P3. P2 son 2 casos y se trabajan con los nombres que ya están en el repo (Renato,
-Izaskun). **P4 no se puede construir**: depende del scoring unificado, que no existe —y que será el
-tercer sistema, así que antes hay que remapear las etiquetas o `nivel-a` seguirá sin significar
-nada. **P5** necesita una consulta de última actividad por oportunidad sobre las 48 abiertas.
+Formato del apartado L. P1 y P3 son las dos únicas con datos hoy; **P4** necesita una consulta de
+última actividad sobre las 48 oportunidades abiertas y **P5** sale de los 133 una vez clasificados
+(P0.5). P2 son dos casos ya nombrados en el repo (Renato cancelado el 30-sep, Izaskun rescatada con
+llamada).
 
-**Capacidad real de Maikel hoy:** Giner a las 11:00 (primera, diagnóstico) y el **cierre de Asla a
-las 12:00**. Así que la cola de hoy no son 20 filas que trabajar: son **tres aprobaciones y una
-decisión de precio**. El resto es para el lunes.
+**Capacidad real de Maikel hoy:** Giner a las 11:00 y **el cierre de Asla a las 12:00**. La cola de
+hoy no son 20 filas: son **tres aprobaciones y una decisión de precio**. El resto es del lunes.
 
-### P1 · Respuesta positiva sin reunión
+### P1 · Positive reply sin reunión
 
-Ordenado por fuerza de intención × frescura. Nada de esto se manda sin OK.
+Corrección de marco: el anexo lo llama *«~15 respuestas positivas sin reunión»* y se lee como un
+atasco de correo sin contestar. **No lo es.** La auditoría mide que de 108 respuestas humanas **solo
+3 quedaron sin contestar**, y las calientes se contestaron en minutos (Giner 19', Dataslayer 55').
+El triaje no es el problema. P1 es gente **a la que sí se contestó** y que nunca llegó a un
+calendario — o sea el paso 5 del apartado 19, **reducir fricción**, no «responder más rápido».
 
-| # | Quién | La señal, literal | Estado | Siguiente acción |
-|---|---|---|---|---|
-| **A1** | **Alejandra Higueras** · clínica dental | pidió precio 21-sep 10:18 | se le mandó el mismo día 15:21; silencio 10 días. **Seguimiento escrito y parado** | **Aprobar o rehacer el borrador.** Antes: decidir si la garantía es «primer mes» (lo que ella tiene por escrito) o «catorce días» (texto posterior). Son dos garantías |
-| **A2** | **Víctor González** · AV Energías | *«Si tienes alguna propuesta mándamela por mail»* 8-sep | contestado 9-sep; el empujón previsto «el jueves» no consta | Invitó una propuesta y no se le mandó. Mandarla |
-| **A3** | **Jelen Colak** · My Language Coach | pidió precio; 35 días de silencio antes | se le dio **1.000-2.500 €/mes** el 14-sep | **Esa cifra ya no es el precio** (`precio.md`, 21-sep: 1.200 + 750). Cualquier recontacto corrige el número |
-| **A4** | **Alexandra Dalmau** · Aparca&Go | preguntó si lo hablaban ya o esperaban; se dijo «ahora» | silencio desde 21-sep. **Seguimiento escrito y parado** | Aprobar o rehacer |
-| **B1** | **Antonio Calviño** · academiakaizen.net, dojoikigai.com | nos dio sus dos webs para que las miráramos | 48 días. Se le prometió el análisis **dos veces** y no se entregó | **Hacer la radiografía de verdad antes de volver a escribirle.** Ya le fallamos |
-| **B2** | **Carvajalinos** | *«Envíanos más info»* | petición rebajada a una línea el 14-sep; silencio | Cerrar o mandar algo de valor |
-| **C1** | **Manuel Martín** · Gala Formación | pasó la propuesta a Dirección Comercial | nadie contactó a esa persona | Multi-threading. Identificar al derivado. LinkedIn, apartado 16 |
-| **C2** | **Diana** · Digital Preventor | la trasladó a la persona adecuada | igual | Igual |
-| **C3** | **Felipe Colsa** · Gestionet | dijo que no es decisor y preguntó cuántos somos | sin seguir | Contestar su pregunta y pedir al decisor |
-| **D1** | **Mónica** · Mawah Assessors | *«Me parece razonable, pero tenemos que reducir la inversión»* | timing, no rechazo | Nurture con fecha. No empujar |
-| **D2** | **Carol** · Zauma | dijo que no es prioridad | se respetó | Dejar. Revisar fin de Q4 |
-| **E1** | **Jose Luis González** (CMO) · Grup Montaner | **2 clics** en calendario 24-ago | **7 correos, 0 respuestas**, dos de ellos decían ser el último | **Email cerrado aquí.** Teléfono o LinkedIn, con OK |
-| **E2** | **Miguel Cervera** · equilibrha | **1 clic** en calendario 24-ago | **7 correos, 0 respuestas**, idem | Igual |
+| Persona | Empresa | Señal | Estado | Última acción | Siguiente acción | Agente | Pri | Motivo |
+|---|---|---|---|---|---|---|---|---|
+| Alejandra Higueras | clínica dental | pidió precio 21-sep 10:18 | silencio 10d | precio enviado 21-sep 15:21 | aprobar o rehacer el borrador parado | Maikel | P1 | pidió precio y se le dio; **antes decidir si la garantía es «primer mes» o «catorce días»** |
+| Víctor González | AV Energías | *«si tienes alguna propuesta mándamela por mail»* | el empujón previsto no consta | contestado 9-sep | mandar la propuesta que invitó | Email | P1 | invitó una propuesta y no se le mandó |
+| Jelen Colak | My Language Coach | pidió precio | silencio desde 14-sep | se le dio **1.000-2.500 €/mes** | recontactar **corrigiendo la cifra** | Email | P1 | esa horquilla ya no es el precio (`precio.md`, 21-sep) |
+| Alexandra Dalmau | Aparca&Go | preguntó si hablaban ya o esperaban | silencio desde 21-sep | se dijo «ahora» 21-sep 18:03 | aprobar o rehacer el borrador parado | Maikel | P1 | borrador escrito y parado |
+| Antonio Calviño | academiakaizen.net · dojoikigai.com | nos dio sus dos webs para que las miráramos | 48 días | último intento 14-sep | **hacer la radiografía de verdad antes de escribir** | Orchestrator | P2 | se le prometió el análisis dos veces y no se entregó |
+| Carvajalinos | — | *«Envíanos más info»* | silencio | petición rebajada 14-sep | mandar algo de valor o cerrar | Email | P3 | pidió info y seguimos sin dársela |
+| Manuel Martín | Gala Formación | pasó la propuesta a Dirección Comercial | derivación sin seguir | — | identificar al derivado, multi-threading | LinkedIn | P2 | nos abrió la puerta y no entramos |
+| Diana | Digital Preventor | la trasladó a la persona adecuada | derivación sin seguir | — | identificar al derivado | LinkedIn | P2 | igual |
+| Felipe Colsa | Gestionet | no es decisor; preguntó cuántos somos | sin seguir | — | contestar su pregunta y pedir al decisor | Email | P3 | pregunta sin responder |
+| Mónica | Mawah Assessors | *«razonable, pero tenemos que reducir la inversión»* | timing, no rechazo | — | nurture con fecha, no empujar | Orchestrator | P4 | bloqueo declarado de presupuesto |
+| Carol | Zauma | dijo que no es prioridad | respetado | — | revisar fin de Q4 | Orchestrator | P5 | lo dijo ella |
+| Jose Luis González (CMO) | Grup Montaner | **2 clics en calendario** 24-ago | **7 correos, 0 respuestas** | 2 de ellos decían ser el último | **email cerrado aquí** → teléfono o LinkedIn | Calling | P1 | también P3; el canal está agotado, no la cuenta |
+| Miguel Cervera | equilibrha | **1 clic en calendario** 24-ago | **7 correos, 0 respuestas** | idem | **email cerrado aquí** → teléfono o LinkedIn | Calling | P1 | idem |
 
-**Fuera de P1 a propósito:** Lara (pregunta de procedencia del dato, contestada; recontactar es
-riesgo legal, no oportunidad) y todo lo que esté en los 19 dominios bloqueados o en las 17
-peticiones de parada.
+**Fuera de P1 a propósito:** Lara (pregunta de procedencia del dato, ya contestada; recontactar es
+riesgo legal, no oportunidad) y todo lo que esté en los 19 dominios bloqueados o en las 17 peticiones
+de parada.
 
-**Lo que P1 dice del sistema:** la mitad de esta cola no está parada por falta de proceso. Está
-parada en tres borradores sin aprobar y en dos cuentas donde se insistió siete veces por el único
-canal que ya había demostrado no funcionar. El apartado 19 pide *«responder rápido»* y eso ya se
-hace bien. Lo que falta es el paso 5, **reducir fricción**: hueco concreto en vez de calendario, y
-cambiar de canal cuando el canal está agotado.
+**Lo que P1 dice del sistema:** la mitad no está parada por falta de proceso. Está parada en **tres
+borradores sin aprobar** y en dos cuentas donde se insistió **siete veces** por el único canal que ya
+había demostrado no funcionar.
 
-### P3 · Clic sin reserva · 34 clics en 485 envíos (7,0% frente al 0,33% de media)
+### P3 · Click/engagement fuerte + ICP alto · 34 clics en 485 envíos (7,0% vs 0,33% de media)
 
-**Con nombre, de los documentos del repo** (los 7 de ICP Adelantta, 24-25 ago):
+Con nombre, de los documentos del repo (los 7 de ICP Adelantta, 24-25 ago):
 
-| Persona | Empresa | Clics | Cuándo |
-|---|---|---:|---|
-| Jose Luis González (CMO) | Grup Montaner | 2 | 24-ago 12:04 |
-| Joan Montaner | Grup Montaner | 1 | 24-ago 13:05 |
-| Miguel Cervera | equilibrha | 1 | 24-ago 12:04 |
-| Beatriz Sánchez | equilibrha | 1 | 24-ago 13:06 |
-| Estela García | Grupo2000 | 1 | 25-ago 07:27 |
-| Iban Montanés | Temporal Transfer | 1 | 25-ago 09:24 |
-| Eva García | AYCE Laborytax | 1 | 25-ago 09:23 |
+| Persona | Empresa | Clics | Cuándo | Siguiente acción | Agente | Pri |
+|---|---|---:|---|---|---|---|
+| Jose Luis González (CMO) | Grup Montaner | 2 | 24-ago 12:04 | cambio de canal · cuenta | Calling | P1 |
+| Joan Montaner | Grup Montaner | 1 | 24-ago 13:05 | multi-threading en la misma cuenta | LinkedIn | P2 |
+| Miguel Cervera | equilibrha | 1 | 24-ago 12:04 | cambio de canal · cuenta | Calling | P1 |
+| Beatriz Sánchez | equilibrha | 1 | 24-ago 13:06 | multi-threading en la misma cuenta | LinkedIn | P2 |
+| Estela García | Grupo2000 | 1 | 25-ago 07:27 | verificar el enlace antes de tocar | Orchestrator | P3 |
+| Iban Montanés | Temporal Transfer | 1 | 25-ago 09:24 | idem · líneas sin verificar | Orchestrator | P3 |
+| Eva García | AYCE Laborytax | 1 | 25-ago 09:23 | idem · líneas sin verificar | Orchestrator | P3 |
 
 **En dos cuentas clicaron dos personas distintas con una hora de diferencia.** Eso es alguien
-reenviando el correo dentro de la empresa, no curiosidad individual. **Grup Montaner y equilibrha
-son las dos cuentas más fuertes de toda la cohorte** —y son exactamente las dos donde el email está
-agotado (E1 y E2 de P1). Se trabajan **como cuenta**, multi-threading y cambio de canal, no como dos
-contactos sueltos.
+reenviando el correo dentro de la empresa, no curiosidad individual. **Grup Montaner y equilibrha son
+las dos cuentas más fuertes de toda la cohorte** — y son exactamente las dos donde el email está
+agotado. Se trabajan **como cuenta**, no como contactos sueltos.
 
 **Sin nombre · requiere consulta a Smartlead, que esta sesión no puede hacer sin claves:**
-
-- **Gestorías · Piloto (3887259): 10 clics, 0 respuestas** en 78 envíos
-- **Administradores de fincas (3817065): 3 clics, 0 respuestas** en 39 envíos
-- los clics de Adelantta posteriores al 25-ago (la campaña pasó de 132 a 172 envíos)
-- Gestorías A2, PRL, Multiservicio y Asesorías: clics sin desglosar
-
-Por cada clicador hace falta lo que pide el apartado 18: qué email recibió, qué enlace, **si el
-redirect resolvió**, si llegó al calendario, qué hizo después, si respondió luego.
+Gestorías · Piloto (10 clics / 0 resp / 78 envíos) · Administradores de fincas (3 / 0 / 39) · los
+clics de Adelantta posteriores al 25-ago (la campaña pasó de 132 a 172 envíos) · Gestorías A2, PRL,
+Multiservicio y Asesorías sin desglosar. Por cada clicador hace falta lo del apartado 18: qué email,
+qué enlace, **si el redirect resolvió**, si llegó al calendario, qué hizo después.
 
 ### Lo que NO hay que hacer con P3, y es lo primero que uno haría
 
-**No mandar el nudge de agosto otra vez.** Ya se mandó, a los 7 de Adelantta, el mismo día 25-ago:
+**No mandar el nudge de agosto otra vez.** Ya se mandó, a los 7 de Adelantta, el 25-ago:
 
-> *«Vi que echaste un ojo al calendario. Si no te cuadra la agenda, no hace falta reunión. Te
-> preparo el análisis por escrito…»*
+> *«Vi que echaste un ojo al calendario. Si no te cuadra la agenda, no hace falta reunión. Te preparo
+> el análisis por escrito…»*
 
 Resultado medido: **Grup Montaner y equilibrha recibieron después siete correos cada uno con cero
-respuestas.** La oferta de análisis por escrito no es una idea sin probar en esta cohorte. Es una
-idea **probada y fallida** en ella.
-
-El apartado 18 avisa de no asumir que el problema es el copy. De acuerdo. Pero tampoco es seguro que
-sea el calendario: **antes de rediseñar nada, verificar que el enlace llegaba**, por lo de la Parte 2.
+respuestas.** La oferta de análisis por escrito no es una idea sin probar en esta cohorte: es una
+idea **probada y fallida** en ella. El apartado 18 avisa de no asumir que el problema es el copy;
+tampoco es seguro que sea el calendario. Verificar el enlace primero.
 
 ---
 
-## PARTE 4 · Lo que es de Maikel y me bloquea
+## 3 · Lo que recomiendo y espera su aprobación
 
-### 1 · El apartado 31 está cortado
+Por el apartado A, esto es recomendación mía y la decisión es suya.
 
-El rol se corta a mitad de *«FUNNEL · Prospects → replies → positive…»*. Define qué se reporta cada
-semana y con qué cortes. **No lo completo por mi cuenta.** Hace falta el resto del 31 y los
-apartados posteriores si los hay, antes de montar el weekly review.
-
-### 2 · El conflicto de gobernanza · más estrecho de lo que parece
-
-El apartado 1 me da *«qué oferta utilizar»*, *«qué canal utilizar»* y *«cuándo escalar»*. La regla
-vigente del Outbound Brain dice, literal:
-
-> *«Maikel decide posicionamiento, ICPs nuevos, activación de copies, tono, estrategia y canales
-> nuevos. El agente decide priorización de señales, personalización, selección de patrón,
-> clasificación de respuestas, routing y propuesta de experimentos.»*
-
-Puesto al lado, el Brain **ya me concede** casi todo el apartado 1: priorización, routing,
-clasificación, secuencia, experimentos. Los solapamientos reales son **tres**: oferta, escalado de
-volumen y canal nuevo. Y el Brain **no menciona el precio en ninguna parte** — eso viene de
-`precio.md` y de las rutinas.
-
-Mi propuesta, para que la confirmes o la corrijas, y luego se escribe:
-
-- **Yo decido sin preguntar:** qué cuenta se trabaja antes, por qué canal de los ya activos, en qué
-  orden, qué secuencia, cuándo se para y cuándo se cambia de canal.
-- **Tú decides:** precio, oferta nueva, copy nuevo, canal nuevo, y subir volumen.
-
-**No tomo ninguna decisión de precio.** Y hay que tomar una esta semana, porque el registro de
-precios dice que es único y no lo es:
+### 3.1 · El registro de precios dice que es único y no lo es
 
 | Dónde | Entrada | Recurrente |
 |---|---|---|
@@ -320,28 +234,50 @@ precios dice que es único y no lo es:
 | Alpha Media · nota 22-sep | **1.500 €** | 750 €/mes |
 | Alpha Media · Gamma 21-sep, **la que él tiene abierta** | **1.200 €** | 750 €/mes |
 
-Tres cuotas vivas contra una «fuente única» que dice 750. Y tres garantías distintas: «primer mes»
-(`precio.md` y lo que tiene Alejandra), «catorce días» (texto posterior) y «3 meses más» (Asla).
+Tres cuotas vivas contra una fuente única que dice 750. Y tres garantías: «primer mes» (`precio.md` y
+lo que tiene Alejandra por escrito), «catorce días» (texto posterior) y «3 meses más» (Asla).
 
-**Sergi ve la demo mañana a las 10:00 con su equipo y con Rosa.** Si se dice 1.500 y él abre el
-Gamma de 1.200, el problema deja de ser el precio.
+**Sergi ve la demo mañana a las 10:00 con su equipo y con Rosa.** Si se dice 1.500 y él abre el Gamma
+de 1.200, el problema deja de ser el precio. **Recomiendo fijar 1.200 + 750 y una sola garantía antes
+de esa hora**, y que `precio.md` recoja las excepciones ya comprometidas en lugar de contradecirlas.
 
-### 3 · Lo demás que bloquea y no es mío
+### 3.2 · Pausar los 5 buzones de los dominios listados
 
-- Retirada de **goqualivo.com** y **gotqualivo.com** en surbl.org, y antes, por qué están listados
-- Pausar o no los 5 buzones de esos dominios (52% de capacidad nominal, 0% de volumen real)
-- Reanudar los **151 leads de Clínicas** (bloqueado por el clasificador de permisos del entorno).
-  Dato nuevo: los buzones de rol de esa campaña rebotan al 3,23% y dieron **las dos únicas
-  respuestas**; los nominales inferidos rebotan al 12%
+275 de 525 correos/día, el 52% de la capacidad **nominal**. Pero con los otros dos dominios limpios
+quedan 250/día y hoy se envían 37: **pausar no cuesta volumen real**, y cada rechazo que acumulamos
+hace más difícil la retirada. La retirada en surbl.org es suya: requiere el formulario web y,
+antes, saber por qué están listados.
+
+### 3.3 · Lo demás que bloquea y no es mío
+
+- Reanudar los **151 de Clínicas** — pero antes el informe que pide el apartado I. Dato que cambia la
+  premisa: los buzones de rol de esa campaña rebotan al **3,23%** y dieron **las dos únicas
+  respuestas**; los nominales inferidos rebotan al **12%**. La regla «descartar buzones de rol» está
+  al revés para clínicas pequeñas
 - Clínicas · precio por WhatsApp está activa al 5,63% de rebote. Su propia regla dice pausarla; la
-  orden de ayer era empujarla. No se ha tocado
+  orden de ayer era empujarla. **No se ha tocado**
 - Confirmar los 7 dominios de cliente pendientes: Nuria Roure, BelloVinilo, Equipzilla, Eleva
   Academy, Miquel Baixas, Emprende Aprendiendo, Escuela de Nuevos Negocios
-- **2.467 créditos de Apollo, caducan el 14-oct** · siete días laborables desde el lunes
-- Raquel: ¿appointment setter (guion v5 en producción) o discovery (lo que pide el rol nuevo)? Sin
-  eso no se toca el asistente de Vapi
-- Recargar la cuota de ElevenLabs
-- Confirmar si entra la socia de Ana Claros el lunes
+- **Cuántos de los 2.467 créditos de Apollo se revelan antes del 14-oct** (ver 1.2)
+- Raquel: ¿appointment setter (guion v5, en producción) o discovery (lo que pide su rol nuevo)? Sin
+  eso no se toca el asistente de Vapi. La evidencia favorece lo primero: rescatando a Izaskun
+  funcionó en 41 segundos; abriendo en frío, de 6 llamadas salió 1 conversación
+- Recargar la cuota de ElevenLabs · confirmar si entra la socia de Ana Claros el lunes
+
+---
+
+## 4 · Siguiente entrega
+
+Por el orden del apartado M, y sin plan de 30 días:
+
+**P0.1 DATA** — auditoría campo a campo de los 15 del apartado E con el veredicto EXISTE / FALTA /
+HAY QUE MODIFICAR, sin crear nada redundante, más la propuesta de backfill de las 3 ganadas y las 15
+perdidas. Con el límite que marca él: recuperar revenue y motivo **solo cuando pueda demostrarse**.
+Pista de partida: 14 de las 15 perdidas empiezan por «Meta ·» y se concentran en Reformas y
+Formación — las pérdidas no están repartidas por canal.
+
+**Necesito las claves de GHL y Smartlead en el scratchpad para P0.1 y P0.2.** Sin ellas la auditoría
+de campos es una lectura de documentos, no una medición, y los 13 clics sin nombre siguen sin nombre.
 
 ---
 
