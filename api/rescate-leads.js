@@ -103,6 +103,9 @@ module.exports = async function handler(req, res) {
         if (require('./meta-leadform.js').esLeadDePrueba(lead)) continue;
         const t = Math.floor(new Date(lead.created_time).getTime() / 1000);
         if (t < desde) continue;
+        // Con el rescate cada 2 min (1-oct): al webhook se le da un minuto de
+        // ventaja para que no entren los dos a la vez con el mismo lead.
+        if (Date.now() / 1000 - t < 60) continue;
         parte.revisados++;
         const campos = lead.field_data || [];
         const email = valor(campos, ['email', 'correo']);
@@ -149,6 +152,21 @@ module.exports = async function handler(req, res) {
               parte.errores.push('lead ' + lead.id + ' (whatsapp): ' + String(err && err.message).slice(0, 120));
             }
           }
+          // Mismo correo de bienvenida que manda el webhook. Faltaba aquí: el
+          // 1-oct Javier entró por el rescate y no lo recibió. Solo si el lead
+          // es reciente: el correo dice «te escribo por WhatsApp en unos minutos».
+          if (g.contactId && g.activar && email && Date.now() / 1000 - t < 30 * 60) {
+            try {
+              const act = require('./_activacion.js');
+              const e = require('./_mensajes.js').emailBienvenida({ nombre: g.nombre, email: email, telefono: g.telefono,
+                waAhora: !!(g.telefono && act.enVentana('whatsapp')) });
+              const env = await act.enviarCorreo(email, e.asunto, e.html);
+              if (env.ok) await act.etiquetar(g.contactId, ['act-email0']);
+              else parte.errores.push('lead ' + lead.id + ' (bienvenida): ' + env.motivo);
+            } catch (err) {
+              parte.errores.push('lead ' + lead.id + ' (bienvenida): ' + String(err && err.message).slice(0, 120));
+            }
+          }
         } else {
           parte.errores.push('lead ' + lead.id + ': ' + ((g && g.motivo) || 'sin_guardar'));
         }
@@ -158,7 +176,9 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  if (parte.rescatados || parte.completados || parte.errores.length) {
+  // Cada 2 min: un error que se repite avisa una vez por hora, no en cada vuelta.
+  const avisarError = parte.errores.length && new Date().getUTCMinutes() < 2;
+  if (parte.rescatados || parte.completados || avisarError) {
     const filasCompletados = completados.map(function (n) {
       return '<tr><td style="padding:4px 14px 4px 0">' + n.nombre + '</td><td style="padding:4px 14px 4px 0">' +
         (n.email || '-') + '</td><td style="padding:4px 14px 4px 0">' + (n.telefono || '-') + '</td><td>' + n.cuando + ' · form ' + n.form + '</td></tr>';

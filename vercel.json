@@ -183,7 +183,7 @@
     },
     {
       "path": "/api/rescate-leads/",
-      "schedule": "*/10 * * * *"
+      "schedule": "*/2 * * * *"
     },
     {
       "path": "/api/vigila-voz/",
