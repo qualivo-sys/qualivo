@@ -837,3 +837,65 @@ El revisor recomienda no publicar más contenido sobre plantones hasta que Maike
 ### Hipótesis
 
 - Si el diagnóstico de 30 minutos reduce las reuniones sin siguiente paso, se verá en la semana 4 (días de propuesta a decisión). Hay que apuntar desde ya, en cada reunión, si acabó con fecha.
+
+## Jueves 1 de octubre de 2026
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/cualificar-leads/ («Cualificar leads: por qué el formulario no basta»).
+  - Dato real: dos reuniones del 30-sep (daily y meta-capi de Growth). En las dos, el formulario prometía más encaje del que había. Un contacto de nivel A no encajaba. Otro marcó de 500 a 2.000 € al mes y vivía del boca a boca.
+  - Se cualifica en tres capas (formulario, primera conversación, comportamiento) y se le devuelve a Meta quién encajó.
+  - Va sin nombres.
+  - Registrado en la tarjeta, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/que-es-un-lead/`. Sus dos últimos párrafos enlazan ahora a coste-por-lead y al artículo de hoy, y he quitado la raya larga. Cierre con un solo botón.
+
+### Borradores (sin publicar)
+
+- **Jueves, «Agentizando»:** «Le digo a Meta quién encajó».
+  - Imagen: `content/infografias/2026-10-01/le-digo-a-meta.png`.
+  - Texto y ficha: `content/borradores/2026-10-01-agentizando-le-digo-a-meta.md`.
+  - El acierto: el sistema devuelve contactado, cualificado y descartado, también después de la reunión.
+  - El fallo, corto: diez días sin que llegara casi nada a Meta.
+
+### Master Reviewer (1-oct)
+
+Informe en `content/borradores/revision-master-reviewer-2026-10-01.md`.
+
+| Pieza | Nota | Veredicto | Críticos aplicados |
+|---|---|---|---|
+| Artículo | 6 | Publicar con cambios | 16 |
+| Reorientación | 7 | Publicar con cambios | 3 |
+| Borrador | 6 | Publicar con cambios | 6 |
+
+Lo importante:
+
+- **Las dos preguntas** («cómo os llegan los clientes», «quién lo va a usar») no son lo que hacemos hoy. Van como hipótesis sin medir.
+- **Las campañas siguen optimizando por leads.** El cambio a calidad es una propuesta para el 5-oct. Por eso fuera «así Meta busca más contactos como los buenos».
+- **El servicio, como consta:** puntuación de contactos sobre tus herramientas, con una nota que se mueve.
+- **El fallo, con su cifra:** 2 «contactado» y 0 «cualificado» en diez días.
+- **Tarjeta del blog y llms.txt:** corregidas igual.
+
+**Duda para Growth.** La entrada meta-capi de las 15:20 del 30-sep, la del lead de reformas que marcó 500-2.000 € y vivía del boca a boca, lleva un id distinto al de Fran. El daily de las 19:50 aún daba la reunión de Fran como pendiente. El caso se sostiene porque está escrito en esa entrada, pero antes de reutilizarlo hay que saber de qué lead es.
+
+### Decisiones que dejo tomadas
+
+- **Dato que no publico:** el «36 de 37 entraron por el formulario y tienen 8 reuniones celebradas» (daily del 30-sep). Junto con las citas ya publicadas, deja deducir la tasa de plantones.
+- **Clínicas:** Maikel la reactivó el 30-sep porque, aunque el contacto sea caro, sus leads tenían buena pinta. Encaja con el artículo de coste por lead, pero no lo cuento en redes hasta que la decisión tenga resultado.
+
+### Descartes
+
+- **Una pieza sobre los tests de dolor de formación y clínicas** (montados en pausa el 30-sep, salida prevista el 1-oct con el ok de Maikel). Es un experimento sin empezar y no se publica nada hasta que termine. Regla del análisis del 30-sep.
+
+### Pendiente de Maikel (sin cambios desde ayer)
+
+1. **Las cuatro reglas por decidir:**
+   - resultados de clientes en redes;
+   - cámara en octubre;
+   - precio en el contenido;
+   - quitar la tasa de plantones.
+2. **LinkedIn:** levantar la pausa. Ya hay seis borradores listos de esta semana y la anterior.
+3. **DNS de qualivo.io:** arreglarlo. Y el ok a los UTM del blog (análisis del 30-sep).
+
+### Hipótesis
+
+- Si el lead A que no encaja se repite, la pregunta que falta en el formulario es quién va a usar el sistema. Lo apunto para el test de formularios de Growth (12 al 25-oct).
