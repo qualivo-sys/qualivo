@@ -843,7 +843,7 @@ El revisor recomienda no publicar más contenido sobre plantones hasta que Maike
 ### Publicado
 
 - **Artículo nuevo:** https://qualivo.io/blog/cualificar-leads/ («Cualificar leads: por qué el formulario no basta»).
-  - Dato real: dos reuniones del 30-sep (daily y meta-capi de Growth). En las dos, el formulario prometía más encaje del que había. Un contacto con la nota más alta no encajaba. Otro marcó inversión en anuncios y vivía del boca a boca.
+  - Dato real: dos reuniones del 30-sep (daily y meta-capi de Growth). En las dos, el formulario prometía más encaje del que había. Un contacto de nivel A no encajaba. Otro marcó de 500 a 2.000 € al mes y vivía del boca a boca.
   - Se cualifica en tres capas (formulario, primera conversación, comportamiento) y se le devuelve a Meta quién encajó.
   - Va sin nombres.
   - Registrado en la tarjeta, el sitemap, llms.txt y las keywords.
@@ -856,6 +856,26 @@ El revisor recomienda no publicar más contenido sobre plantones hasta que Maike
   - Texto y ficha: `content/borradores/2026-10-01-agentizando-le-digo-a-meta.md`.
   - El acierto: el sistema devuelve contactado, cualificado y descartado, también después de la reunión.
   - El fallo, corto: diez días sin que llegara casi nada a Meta.
+
+### Master Reviewer (1-oct)
+
+Informe en `content/borradores/revision-master-reviewer-2026-10-01.md`.
+
+| Pieza | Nota | Veredicto | Críticos aplicados |
+|---|---|---|---|
+| Artículo | 6 | Publicar con cambios | 16 |
+| Reorientación | 7 | Publicar con cambios | 3 |
+| Borrador | 6 | Publicar con cambios | 6 |
+
+Lo importante:
+
+- **Las dos preguntas** («cómo os llegan los clientes», «quién lo va a usar») no son lo que hacemos hoy. Van como hipótesis sin medir.
+- **Las campañas siguen optimizando por leads.** El cambio a calidad es una propuesta para el 5-oct. Por eso fuera «así Meta busca más contactos como los buenos».
+- **El servicio, como consta:** puntuación de contactos sobre tus herramientas, con una nota que se mueve.
+- **El fallo, con su cifra:** 2 «contactado» y 0 «cualificado» en diez días.
+- **Tarjeta del blog y llms.txt:** corregidas igual.
+
+**Duda para Growth.** La entrada meta-capi de las 15:20 del 30-sep, la del lead de reformas que marcó 500-2.000 € y vivía del boca a boca, lleva un id distinto al de Fran. El daily de las 19:50 aún daba la reunión de Fran como pendiente. El caso se sostiene porque está escrito en esa entrada, pero antes de reutilizarlo hay que saber de qué lead es.
 
 ### Decisiones que dejo tomadas
 
