@@ -28,22 +28,47 @@ import sys
 # opciones para que contestar cueste poco, y el motivo real de preguntarla.
 # No se afirma nada sobre su empresa, se pregunta. Esa es la diferencia con la
 # version anterior, que sonaba a vendedor.
+# LA REGLA QUE SALIO DEL 1-OCT, Y QUE COSTO UNA RESPUESTA
+#
+# A Rafa Calle (magnettu) le llego: "Con lo que invertis en LinkedIn, lo medis
+# hasta la venta o os quedais en el coste por lead?". Contesto:
+#
+#   "Hola Maikel, supongo que es la prospeccion con IA la que ha sacado la
+#    conclusion. No invertimos 1 euro en LinkedIn"
+#
+# Tenia razon. La sonda de apify_senal.py busca snap.licdn.com y
+# _linkedin_partner_id: eso es el INSIGHT TAG de LinkedIn, que se instala para
+# medir visitas y armar publicos. No prueba que se gaste un euro en anuncios.
+# Lo mismo con el pixel de Meta, que lo lleva medio internet sin campanas
+# detras, y en menor medida con los tags de Google, que sobreviven anos a la
+# campana que los puso.
+#
+# Es el error de la sonda estatica del que avisa herramientas.md, del reves:
+# alli afirmamos una ausencia mirando el HTML (dijimos "no usan Google Ads" y
+# era Dataslayer cargando por JS); aqui afirmamos un gasto mirando un tag.
+#
+# REGLA: la sonda solo demuestra que el tag ESTA PUESTO. Nunca que haya gasto,
+# ni que la herramienta este en uso. El copy dice lo que se vio, no lo que se
+# dedujo.
+#
+# Y la pregunta se escribe con las dos salidas abiertas, de forma que "eso no
+# lo usamos" sea una respuesta valida y util en vez de dejarnos en evidencia.
 PREGUNTA = {
- "crm":          "Con {var}, ¿tenéis bastante control sobre las oportunidades que "
-                 "se quedan abiertas sin seguimiento o todavía hay bastante "
-                 "revisión manual?",
- "google_ads":   "Con lo que movéis en Google, ¿llegáis a ver qué campaña trajo al "
-                 "último cliente que firmó o os quedáis en el lead?",
- "meta_ads":     "Con el píxel de Meta, ¿llegáis a ver qué campaña trajo al último "
-                 "cliente que firmó o os quedáis en el lead?",
- "linkedin_ads": "Con lo que invertís en LinkedIn, ¿lo medís hasta la venta o os "
-                 "quedáis en el coste por lead?",
- "lista":        "Con {var}, ¿sabéis cuál de vuestros suscriptores acabó comprando "
-                 "o eso se queda sin cruzar?",
+ "crm":          "Veo rastro de {var} en vuestra web. ¿Lo lleváis como CRM de "
+                 "verdad o está puesto para poco más que los formularios?",
+ "google_ads":   "Tenéis puesto el tag de conversión de Google Ads. ¿Sigue "
+                 "habiendo campañas detrás o es de una época y nadie lo quitó?",
+ "meta_ads":     "Tenéis el píxel de Meta instalado. ¿Hay campañas vivas "
+                 "detrás o quedó puesto de antes?",
+ "linkedin_ads": "Tenéis el Insight Tag de LinkedIn puesto. ¿Lo usáis para "
+                 "algo hoy o quedó ahí de alguna prueba?",
+ "lista":        "Veo rastro de {var} en vuestra web. ¿Lo usáis para mandar de "
+                 "verdad o está parado?",
 }
 
-MOTIVO = ("Te lo pregunto porque es precisamente una de las fugas que estamos "
-          "detectando últimamente.")
+MOTIVO = ("Te lo pregunto porque las dos respuestas me sirven: si está vivo, "
+          "lo que miro es si se mide hasta la venta y no hasta el lead. Y si "
+          "está parado, casi siempre hay medición montada que no usa nadie.")
 
 # El segundo mensaje no insiste: ofrece el caso publicado y una salida. El
 # enlace es a una pagina real con nombre y numeros, que se comprueba en un clic.
