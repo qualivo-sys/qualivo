@@ -262,3 +262,23 @@ llega 3-7 días después del envío y es lo que mira la semana del 7 al 13.
 H-CREATIVO-02 se mantiene como hipótesis, con fecha de muerte **13-oct** en vez
 del 11 (el veredicto de calidad necesita la semana completa). El calendario de
 72 h / rescate del sábado 4 queda sustituido por lo anterior.
+
+### Activación (1-oct, 15:48 CEST) · "Vale venga dale caña"
+
+Ejecutado en una sola tanda con autorización explícita de Maikel, verificado por
+GET inmediatamente después:
+
+| qué | resultado |
+|---|---|
+| Pausadas las 6 copias nuevas dentro de los conjuntos viejos | PAUSED las seis |
+| Conjuntos viejos de formación y clínicas | 30 → **15 €/día**, renombrados `· VIEJO ·` |
+| `formacion · NUEVOS S1 (3 videos)` 120245897452530358 | **ACTIVE, 20 €/día**, 3 anuncios activos (en revisión) |
+| `clinicas · NUEVOS CLI (3 videos)` 120245897456500358 | **ACTIVE, 20 €/día**, 3 anuncios activos (en revisión) |
+
+**T0 del test = 1-oct 15:48 CEST. Total activo: 70 €/día.** Hoy cuenta como día
+parcial. Nadie toca nada hasta el lunes 6 a las 08:05; el sábado 4 a las 08:05
+hay revisión sin decisiones (entrega de los seis, primer lead de cada formulario
+en GHL con etiqueta y cadencia, ritmo de gasto).
+
+Pendiente de Maikel: tope de QV_VERTICALES_Sep26 800 → 1.575 € y fondos en la
+tarjeta (≈ 390 € hasta el lunes, ≈ 810 € más hasta el 31).
