@@ -309,8 +309,23 @@
       const l = p.cuentas || [];
       if (!l.length) return [texto('Ahora mismo no hay cuentas con señal.')];
       const out = [texto(p.intro)];
-      l.forEach(function (c) { out.push(texto('**' + c.cuenta + '** · ' + c.tipo + ' · ' + M.euros(c.valor) + '\n' + c.senal + ' · ' + c.canal)); });
-      if (p.ejemplo) {
+      // Firma, caso de referencia y empresa vienen del enlace de la demo (?firma=…&caso=…&empresa=…).
+      const q = new URLSearchParams(location.search);
+      const rellena = function (t) {
+        return t.replace(/\{\{firma\}\}/g, q.get('firma') || 'Tu nombre')
+          .replace(/\{\{caso\}\}/g, q.get('caso') || 'nuestro último proyecto de referencia')
+          .replace(/\{\{empresa\}\}/g, q.get('empresa') || 'nuestro estudio');
+      };
+      l.forEach(function (c) {
+        const extra = c.valor != null ? M.euros(c.valor) : 'prioridad ' + c.prioridad;
+        out.push(texto('**' + c.cuenta + '** · ' + c.tipo + ' · ' + extra + '\n' + c.senal + ' · ' + c.canal + (c.a ? ' · a ' + c.a : '') + (c.fuente ? ' · [noticia](' + c.fuente + ')' : '')));
+      });
+      const conMensaje = l.filter(function (c) { return c.mensaje; }).slice(0, p.borradores || 3);
+      conMensaje.forEach(function (c) {
+        out.push(texto('Primer mensaje para **' + c.cuenta + '** (' + c.canal + ', sale con tu nombre y solo si lo apruebas):'));
+        out.push({ tipo: 'borrador', texto: rellena(c.mensaje) });
+      });
+      if (!conMensaje.length && p.ejemplo) {
         out.push(texto('Primer mensaje para **' + l[0].cuenta + '** (sale con tu nombre y solo si lo apruebas):'));
         out.push({ tipo: 'borrador', texto: p.ejemplo });
       }
@@ -342,7 +357,8 @@
   // Pintado de bloques
   // ---------------------------------------------------------------------------
   function md(s) {
-    return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   }
   function tarjetaContacto(c) {
     const T = E().cfg.t, x = c.x, us = QV.ultimaSenal(c);
