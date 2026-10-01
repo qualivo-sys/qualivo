@@ -199,9 +199,9 @@ escrito. Sin esto no hay piloto, hay actividad.
 | pieza | estado | detalle |
 |---|---|---|
 | Dominios de envío | **kubysoft.es, listo el 1-oct** | uno solo, no los 2 o 3 que pedimos. Riesgo aceptado por Maikel |
-| Buzones | **hola@kubysoft.es** | uno solo. Tope ~30 al día una vez caliente. Clave en el scratchpad |
-| Calentamiento | arranca el 1-oct | caliente hacia el 15-oct. Ese es el día 1 del piloto |
-| Cliente en Smartlead | no creado | aísla campañas y buzones por `client_id` |
+| Buzones | **hola@kubysoft.es**, de alta el 1-oct | `email_account_id` 24080396. SMTP e IMAP validados. Tope 30 al día. Clave en el scratchpad |
+| Calentamiento | **ACTIVE desde el 1-oct** | 30 al día, rampa de 3. Reputación 0% al arrancar. Caliente hacia el 15-oct, que es el día 1 del piloto |
+| Cliente en Smartlead | **creado**, `client_id` 596297 | aísla campañas y buzones. Los 15 buzones de Qualivo van con `client_id` a null |
 | Subcuenta de GHL | **no hace falta de momento** | el traspaso es email a marc@kubysoft.com |
 | Perfil de LinkedIn | pendiente | el de Marc. Falta la URL |
 | Sesión del agente | creada | separada de la de Qualivo a propósito |
