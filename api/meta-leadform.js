@@ -452,7 +452,10 @@ module.exports = async function handler(req, res) {
       // arriba no sale de madrugada, asi que un lead que entra a las 23:00 se
       // quedaba sin nada hasta la manana siguiente. Un correo a esa hora no
       // molesta a nadie y le confirma que su peticion ha llegado.
-      if (r.contactId && r.email) {
+      // En formación y clínicas la bienvenida es el correo 0 del nurturing (api/_nurturing.js).
+      const conNurturing = require('./_nurturing.js').sustituyeBienvenida(r.sector);
+      if (r.contactId && r.email && conNurturing) { try { await require('./_activacion.js').etiquetar(r.contactId, ['nut-on']); } catch (e) { /* lo da de alta el reloj */ } }
+      if (r.contactId && r.email && !conNurturing) {
         try {
           const act = require('./_activacion.js');
           const msg = require('./_mensajes.js');

@@ -591,6 +591,10 @@ async function handler(req, res) {
     console.error('[activacion] confirmaciones pendientes:', err && err.message);
   }
 
+  // Nurturing por correo de formación y clínicas (1-oct). Ver api/_nurturing.js.
+  try { resumen.nurturing = await require('./_nurturing.js').vuelta({ presupuestoMs: 12000 }); }
+  catch (err) { console.error('[activacion] nurturing:', err && err.message); }
+
   if (!SECUENCIAS_PAUSADAS) await procesarSecuencias(resumen);
 
   // Puntuación (Maikel, 22-sep): tipología y comportamiento de los leads

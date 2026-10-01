@@ -155,7 +155,9 @@ module.exports = async function handler(req, res) {
           // Mismo correo de bienvenida que manda el webhook. Faltaba aquí: el
           // 1-oct Javier entró por el rescate y no lo recibió. Solo si el lead
           // es reciente: el correo dice «te escribo por WhatsApp en unos minutos».
-          if (g.contactId && g.activar && email && Date.now() / 1000 - t < 30 * 60) {
+          const conNurturing = require('./_nurturing.js').sustituyeBienvenida(g.sector);
+          if (g.contactId && g.activar && email && conNurturing) { try { await require('./_activacion.js').etiquetar(g.contactId, ['nut-on']); } catch (e) { /* lo da de alta el reloj */ } }
+          if (g.contactId && g.activar && email && Date.now() / 1000 - t < 30 * 60 && !conNurturing) {
             try {
               const act = require('./_activacion.js');
               const e = require('./_mensajes.js').emailBienvenida({ nombre: g.nombre, email: email, telefono: g.telefono,

@@ -1,7 +1,8 @@
-# Genera los correos de nurturing de formación (v2) en HTML apto para correo
-# (tablas, estilos en línea, bgcolor + background-color) y una página de vista
-# previa con los seis. Uso: python3 generar.py
-import os, html
+# Genera los correos de nurturing (formación y clínicas, v3 del 1-oct) en HTML
+# apto para correo (tablas, estilos en línea, bgcolor + background-color), la
+# vista previa con los doce y api/_nurturing-correos.json, que es lo que envía
+# el reloj (api/_nurturing.js). Uso: python3 generar.py
+import os, html, json
 D = os.path.dirname(os.path.abspath(__file__))
 TINTA, TEAL, TEAL_OSC, GRIS, FONDO, LILA = '#101319', '#27BDB1', '#0E7C74', '#7A7C82', '#F4F5F7', '#EFECFB'
 # Fuente del sistema: Gmail y Outlook ignoran las fuentes web (28-sep).
@@ -63,12 +64,12 @@ def correo(asunto, preheader, cuerpo, baja=True, plano=False):
 {BAJA if baja else ''}
 </td></tr></table></td></tr></table></body></html>'''
 
-CORREOS = [
+FORMACION = [
  dict(n=0, dia='Día 0', cuando='15 min tras entrar', asunto='lo que vamos a mirar en {{empresa}}',
-  pre='Qué hacemos en los 15 minutos y un dato que ayuda mucho.',
+  pre='Qué hacemos en los 30 minutos y un dato que ayuda mucho.',
   cuerpo=p('Hola {{nombre}}:') +
    p('Soy Maikel, de Qualivo. Gracias por pedir el diagnóstico. Te acabo de escribir por WhatsApp para buscar un hueco; te dejo aquí lo que vamos a hacer, para que sepas qué esperar.') +
-   p('En 15 minutos dibujamos vuestro recorrido, desde que alguien pide información hasta que se matricula, y vemos dónde se están quedando alumnos por el camino. Si tiene sentido, te enseño cómo lo resolveríamos. Si no lo tiene, te lo digo igual.') +
+   p('En 30 minutos dibujamos vuestro recorrido, desde que alguien pide información hasta que se matricula, y vemos dónde se están quedando alumnos por el camino. Si tiene sentido, te enseño cómo lo resolveríamos. Si no lo tiene, te lo digo igual.') +
    p('Una cosa que ayuda mucho: si puedes, ven con un dato, <b>cuántas solicitudes os llegaron el mes pasado</b>. Con eso ya sale una cifra.') +
    p('Si prefieres elegir tú la hora: <a href="https://qualivo.io/llamada/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-0" style="color:' + TEAL_OSC + ';">qualivo.io/llamada</a>'), plano=True),
  dict(n=1, dia='Día 2', cuando='', asunto='lo que pasa en la primera hora',
@@ -105,8 +106,8 @@ CORREOS = [
          ('23:05','Ya tiene respuesta, con su nombre y sobre el curso que preguntó.'),
          ('9:00','Le llamamos. Y admisiones solo entra cuando está listo para hablar, con la conversación resumida.')]) +
    p('Esto no sustituye a tu equipo ni a tu agencia. Hace lo repetitivo (contestar al momento, recordar, volver a escribir al que se lo piensa) y les pasa a ellos lo que vende.') +
-   enlace('Verlo funcionar en 16 segundos', '{{enlace_video}}') +
-   p('Si quieres verlo con los datos de {{empresa}}, son 15 minutos: responde a este correo y te propongo hora.')),
+   enlace('Verlo en 48 segundos', 'https://qualivo.io/video/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-4') +
+   p('Si quieres verlo con los datos de {{empresa}}, son 30 minutos: responde a este correo y te propongo hora.')),
  dict(n=5, dia='Día 20', cuando='', asunto='¿lo dejamos aquí?',
   pre='Con una palabra me vale.',
   cuerpo=p('Hola {{nombre}}:') +
@@ -114,17 +115,79 @@ CORREOS = [
    p('Con una palabra me vale:') +
    p('– «Ahora»: te propongo dos huecos para vernos esta semana.<br>– «Más adelante»: dime cuándo y te escribo entonces, no antes.<br>– «No»: te borro de mi lista y tan amigos.'), baja=False, plano=True),
 ]
-for c in CORREOS:
-    open(os.path.join(D, f"formacion-{c['n']}.html"), 'w').write(correo(c['asunto'], c['pre'], c['cuerpo'], c.get('baja', True), c.get('plano', False)))
+
+CLINICAS = [
+ dict(n=0, dia='Día 0', cuando='15 min tras entrar', asunto='lo que vamos a mirar en {{empresa}}',
+  pre='Qué hacemos en los 30 minutos y un dato que ayuda mucho.',
+  cuerpo=p('Hola {{nombre}}:') +
+   p('Soy Maikel, de Qualivo. Gracias por pedir el diagnóstico. Te acabo de escribir por WhatsApp para buscar un hueco; te dejo aquí lo que vamos a hacer, para que sepas qué esperar.') +
+   p('En 30 minutos dibujamos vuestro recorrido, desde que alguien pregunta por un tratamiento hasta que acepta el presupuesto, y vemos dónde se están quedando pacientes por el camino. Si tiene sentido, te enseño cómo lo resolveríamos. Si no lo tiene, te lo digo igual.') +
+   p('Una cosa que ayuda mucho: si puedes, ven con un dato, <b>cuántas consultas de pacientes nuevos os llegaron el mes pasado</b>. Con eso ya sale una cifra.') +
+   p('Si prefieres elegir tú la hora: <a href="https://qualivo.io/llamada/?utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-0" style="color:' + TEAL_OSC + ';">qualivo.io/llamada</a>'), plano=True),
+ dict(n=1, dia='Día 2', cuando='', asunto='lo que pasa en la primera hora',
+  pre='Una sola idea, por si te sirve aunque no hablemos.',
+  cuerpo=p('Hola {{nombre}}:') +
+   p('Te escribo una sola idea, por si te sirve aunque no hablemos.') +
+   p('Un estudio de Harvard Business Review sobre más de 2.000 empresas vio que quien responde a una solicitud <b>en la primera hora</b> tiene casi siete veces más probabilidades de cualificarla que quien tarda algo más.') +
+   p('En clínicas se nota todavía más: quien pregunta por un tratamiento suele preguntar en dos o tres clínicas a la vez, y se queda con la primera que le contesta con sentido.') +
+   caja([('Mañana','Mira las diez últimas consultas (formulario, WhatsApp, Instagram) y apunta cuánto tardó alguien en contestar a cada una.'),
+         ('Si ves…','alguna que pasó la noche o el fin de semana sin respuesta, ahí hay pacientes.')], 'Una prueba de cinco minutos') +
+   p('Si quieres, te digo cómo lo arreglaríamos en {{empresa}} sin contratar a nadie. Basta con que respondas a este correo.')),
+ dict(n=2, dia='Día 5', cuando='', asunto='2.000 € invertidos, 12.900 € en ventas y qué cambió',
+  pre='Mismo tráfico, sistema distinto.',
+  cuerpo=p('Hola {{nombre}}:') +
+   p('Te cuento un caso de salud, por si se parece al vuestro.') +
+   p('Nuria Roure es psicóloga y doctora en medicina del sueño. Le entraban contactos, pero no sabía cuáles merecían atención primero, y los que no contestaban a la primera se quedaban sin seguimiento.') +
+   p('No subimos la inversión en anuncios. Recogimos mejor la información de cada persona, la usamos para priorizar a quién llamar antes y reordenamos el seguimiento para que nadie interesante se quedara sin respuesta. El resultado:') +
+   cifras([('2.000 €','invertidos'),('12.900 €','en ventas atribuidas'),('6,45×','de retorno'),('0 €','más en anuncios')]) +
+   p('Mismo tráfico, sistema distinto. A veces la fuga no está en los anuncios, sino en lo que pasa después.') +
+   enlace('El caso completo, si te apetece', 'https://qualivo.io/casos/nuria-roure/?utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-2')),
+ dict(n=3, dia='Día 8', cuando='', asunto='¿cuánto se os queda por el camino?',
+  pre='Una calculadora de tres minutos, sin correo ni teléfono.',
+  cuerpo=p('Hola {{nombre}}:') +
+   p('Casi nadie sabe cuánto pierde entre que un paciente pregunta y acepta el tratamiento. Lo he convertido en una calculadora de tres minutos.') +
+   caja([('9','preguntas: cuántas consultas os llegan, cuánto tardáis en contestar, qué pasa con el que dice «me lo pienso».'),
+         ('1','cifra al mes, con el cálculo a la vista.'),
+         ('0','datos personales: no te pide correo ni teléfono.')]) +
+   enlace('Calcular lo que se os queda por el camino', 'https://qualivo.io/intelligence/diagnostico/?sector=clinica&utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-3') +
+   p('Si la cifra te sorprende, contéstame con ella y te digo por dónde empezaría.')),
+ dict(n=4, dia='Día 12', cuando='', asunto='22:00, 22:01, 9:00',
+  pre='Cómo funciona por dentro, en tres horas del reloj.',
+  cuerpo=p('Hola {{nombre}}:') +
+   caja([('22:00','Una paciente pregunta por implantes desde Instagram.'),
+         ('22:01','Ya tiene respuesta, con su nombre y sobre el tratamiento que preguntó.'),
+         ('9:00','La llamamos. Y recepción solo entra cuando está lista para pedir cita, con la conversación resumida.')]) +
+   p('Esto no sustituye a tu equipo ni a tu agencia. Hace lo repetitivo (contestar al momento, recordar, volver a escribir a quien se lo piensa) y les pasa a ellos lo que acaba en cita.') +
+   enlace('Verlo en 48 segundos', 'https://qualivo.io/video/?utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-4') +
+   p('Si quieres verlo con los datos de {{empresa}}, son 30 minutos: responde a este correo y te propongo hora.')),
+ dict(n=5, dia='Día 20', cuando='', asunto='¿lo dejamos aquí?',
+  pre='Con una palabra me vale.',
+  cuerpo=p('Hola {{nombre}}:') +
+   p('No quiero llenarte la bandeja, así que te pregunto directamente: ¿mejorar cómo respondéis y seguís a los pacientes que preguntan es algo que queréis mover en los próximos meses, o ahora mismo no toca?') +
+   p('Con una palabra me vale:') +
+   p('– «Ahora»: te propongo dos huecos para vernos esta semana.<br>– «Más adelante»: dime cuándo y te escribo entonces, no antes.<br>– «No»: te borro de mi lista y tan amigos.'), baja=False, plano=True),
+]
+VERTICALES = [('formacion', 'Formación', FORMACION), ('clinicas', 'Clínicas', CLINICAS)]
+DIAS = [0, 2, 5, 8, 12, 20]
+salida = {'dias': DIAS}
+for clave, _, lista in VERTICALES:
+    salida[clave] = []
+    for c in lista:
+        cuerpo_html = correo(c['asunto'], c['pre'], c['cuerpo'], c.get('baja', True), c.get('plano', False))
+        open(os.path.join(D, f"{clave}-{c['n']}.html"), 'w').write(cuerpo_html)
+        salida[clave].append({'n': c['n'], 'asunto': c['asunto'], 'html': cuerpo_html})
+open(os.path.join(D, '..', '..', '..', 'api', '_nurturing-correos.json'), 'w').write(json.dumps(salida, ensure_ascii=False))
 
 # Vista previa: los seis correos en columna, con su día y asunto.
 tarjetas = ''
-for c in CORREOS:
+for clave, nombre_v, lista in VERTICALES:
+  tarjetas += f'<h2 class="vert">{nombre_v}</h2>'
+  for c in lista:
     cuerpo = c['cuerpo'] + (FIRMA_PLANA if c.get('plano') else FIRMA) + (BAJA if c.get('baja', True) else '')
     tarjetas += f'''<section class="it"><div class="meta"><span class="dia">{c['dia']}</span><span class="n">Correo {c['n']}</span></div>
 <div class="bandeja"><div class="de"><b>Maikel Echevarría</b> &lt;maikel@qualivo.io&gt;</div><div class="as">{html.escape(c['asunto'])}</div><div class="pre">{html.escape(c['pre'])}</div></div>
 <div class="mail">{cuerpo}</div></section>'''
-open(os.path.join(D, 'vista-previa.html'), 'w').write(f'''<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nurturing formación</title>
+open(os.path.join(D, 'vista-previa.html'), 'w').write(f'''<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nurturing por correo</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>body{{margin:0;background:{FONDO};font-family:Montserrat,Arial,sans-serif;color:{TINTA}}}
 header{{background:#08090C;color:#fff;padding:40px 24px 32px;text-align:center}}header h1{{margin:0;font-weight:900;font-size:30px;letter-spacing:-.02em}}header p{{margin:10px 0 0;color:#B7C0CC;font-size:15px}}
@@ -132,8 +195,8 @@ header{{background:#08090C;color:#fff;padding:40px 24px 32px;text-align:center}}
 main{{max-width:600px;margin:0 auto;padding:28px 16px 60px}}.it{{margin-bottom:34px}}.meta{{display:flex;gap:10px;align-items:center;margin-bottom:10px}}
 .dia{{background:{TEAL};color:#04231F;font-weight:800;font-size:13px;border-radius:999px;padding:5px 12px}}.n{{font-size:13px;color:{GRIS};font-weight:700}}
 .bandeja{{background:#fff;border-radius:14px 14px 0 0;padding:14px 20px;border-bottom:1px solid #ECEDF0;font-size:14px}}.de{{color:{GRIS}}}.as{{font-weight:800;font-size:16px;margin:4px 0 2px}}.pre{{color:{GRIS};font-size:13px}}
-.mail{{background:#fff;border-radius:0 0 14px 14px;padding:26px 28px;border-top:4px solid {TEAL}}}</style></head><body>
-<header><h1>Nurturing por correo · formación</h1><p>Seis correos desde que entra el contacto. Se para si contesta, reserva o pide la baja.</p>
+.vert{{font-weight:900;font-size:24px;margin:36px 0 18px;padding-top:12px;border-top:2px solid #DDE0E5}}.mail{{background:#fff;border-radius:0 0 14px 14px;padding:26px 28px;border-top:4px solid {TEAL}}}</style></head><body>
+<header><h1>Nurturing por correo · formación y clínicas</h1><p>Seis correos por vertical desde que entra el contacto. Se para si contesta, reserva o pide la baja.</p>
 <div class="linea"><span>Día 0</span><span>Día 2</span><span>Día 5</span><span>Día 8</span><span>Día 12</span><span>Día 20</span></div></header>
 <main>{tarjetas}</main></body></html>''')
-print('ok', len(CORREOS))
+print('ok', len(FORMACION) + len(CLINICAS))
