@@ -121,9 +121,10 @@ def inputs(tok):
 
     h.val("A19", [["CAPTACIÓN · presupuesto mensual (€)"]])
     h.val("B20", [MESES])
-    h.val("B21", [[1200, 1200, 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+    h.val("B21", [[1200] * 12])
     h.val("A21", [["Presupuesto"]])
-    h.val("A22", [["Desde enero es 0 a propósito: cada mes es una decisión, no un automatismo."]])
+    h.val("A22", [["Sostenido los 12 meses. Es lo que hay que defender: sin captación no entra nadie, "
+                   "y con el churn actual la cartera se vacía sola."]])
 
     h.val("A24", [["FUNNEL COMERCIAL"]])
     h.val("A25", [["Escenario activo", "BASE", "🔵", "PRUDENTE / BASE / ACELERADO"]])
@@ -143,11 +144,11 @@ def inputs(tok):
     h.val("A37", [
         ["MRR inicial (€)", 1010.87, "⚪", "EAC 480,87 + Eleva 530"],
         ["Clientes activos hoy", 2, "⚪", "EAC y Eleva"],
-        ["Ticket medio (€/mes)", 1093, "⚪", "media real de 35 clientes desde 2025"],
+        ["Ticket medio (€/mes)", 679, "⚪", "media real de los 19 clientes RECURRENTES"],
         ["Setup medio por cliente (€)", 0, "🔵", "0 por defecto: no hay dato fiable"],
-        ["Churn mensual (%)", 0.27, "⚪", "1 ÷ 3,7 meses de duración media real"],
+        ["Churn mensual (%)", 0.184, "⚪", "1 ÷ 5,4 meses · solo los 19 recurrentes"],
         ["Duración media objetivo (meses)", 12, "🎯", "OBJETIVO del plan a 12 meses"],
-        ["Proyectos puntuales (€/mes)", 0, "🔵", "no recurrente, se presupone 0"],
+        ["Proyectos puntuales (€/mes)", 650, "🔵", "mitad de la mediana de abr-sep: 1 proyecto cada 2 meses"],
         ["Nómina Equipzilla (€/mes)", 2850, "⚪", "ingreso del hogar. Sube de 2.040 a 2.850 en octubre"],
         ["Cobros puntuales oct (€)", 1028.50, "⚪", "Adigital, factura emitida y vencida el 10-oct"],
         ["Cobros puntuales nov (€)", 1200, "🟡", "Scubalight · SIN FACTURAR todavía"],
@@ -313,8 +314,10 @@ def plan(tok):
         COL["J"].append(f"=I{r}*INPUTS!$B$39"); COL["K"].append(f"=D{r}*INPUTS!$B$41")
         COL["L"].append(f"=D{r}+J{r}-K{r}");    COL["M"].append(f"=I{r}*INPUTS!$B$40")
         COL["N"].append("=INPUTS!$B$43")
-        pun = "+INPUTS!$B$45" if i == 0 else ("+INPUTS!$B$52x" if i == 1 else "")
-        COL["O"].append(f"=L{r}+M{r}+N{r}+INPUTS!$B$44" + ("+INPUTS!$B$45" if i == 0 else ""))
+        # Los cobros puntuales son de un mes concreto: Adigital en octubre (B45) y
+        # Scubalight en noviembre (B46). Faltaba el de noviembre.
+        pun = {0: "+INPUTS!$B$45", 1: "+INPUTS!$B$46"}.get(i, "")
+        COL["O"].append(f"=L{r}+M{r}+N{r}+INPUTS!$B$44" + pun)
         COL["P"].append(f'=IF(AND({r}-4>=INPUTS!$B$50;{r}-4<INPUTS!$B$50+INPUTS!$B$51);INPUTS!$B$49;0)')
         COL["Q"].append(f'=IF(AND(INPUTS!$B$55>0;{r}-4>=INPUTS!$B$55);INPUTS!$B$52;0)')
         COL["R"].append("=INPUTS!$B$69"); COL["S"].append("=INPUTS!$B$73+INPUTS!$B$74")
@@ -385,27 +388,33 @@ def escenarios(tok):
                  ["CAC · coste por cliente (€)", "", "", "", "CPL ÷ conversión"],
                  ["Clientes nuevos en 12 meses", "", "", "", "con el presupuesto de captación actual"],
                  ["MRR añadido (€)", "", "", "", "clientes × ticket medio"],
-                 ["Meses de payback del CAC", "", "", "", "CAC ÷ ticket medio"]])
+                 ["Meses de payback del CAC", "", "", "", "CAC ÷ ticket medio"],
+                 ["LTV por cliente (€)", "", "", "", "ticket medio ÷ churn"],
+                 ["LTV / CAC", "", "", "", "por debajo de 1 la captación destruye caja"]])
     for j, col in enumerate("BCD"):
         h.lote([(f"{col}5", [[f"=INPUTS!{col}28"],
                              [f"=INPUTS!{col}29*INPUTS!{col}30*INPUTS!{col}31*INPUTS!{col}32*INPUTS!{col}33"],
                              [f"=IFERROR({col}5/{col}6;0)"],
                              [f"=IFERROR(SUM(INPUTS!B21:M21)/{col}7;0)"],
                              [f"={col}8*INPUTS!$B$39"],
-                             [f"=IFERROR({col}7/INPUTS!$B$39;0)"]])])
-    h.val("A13", [["TEST DE ESFUERZO · CERO CLIENTES NUEVOS"],
-                  ["La línea roja: invertimos en captación, pagamos comercial y deuda, y no entra nadie."]])
-    h.val("B15", [MESES]); h.val("A15", [["Concepto"]])
-    h.val("A16", [["MRR (solo churn, sin altas)"], ["Facturación"], ["Gastos"],
+                             [f"=IFERROR({col}7/INPUTS!$B$39;0)"],
+                             [f"=IFERROR(INPUTS!$B$39/INPUTS!$B$41;0)"],
+                             [f"=IFERROR({col}11/{col}7;0)"]])])
+    h.val("A15", [["TEST DE ESFUERZO · CERO CLIENTES NUEVOS"],
+                  ["NO es la previsión del plan: es la línea roja. Invertimos en captación, pagamos "
+                   "comercial y deuda, y no entra nadie. La previsión está en PLAN 12 MESES."]])
+    h.val("B17", [MESES]); h.val("A17", [["Concepto"]])
+    h.val("A18", [["MRR (solo churn, sin altas)"], ["Facturación"], ["Gastos"],
                   ["Cash flow"], ["Caja operativa libre"]])
-    h.lote([("B16", [[("=INPUTS!$B$37" if i == 0 else f"={chr(65+i)}16*(1-INPUTS!$B$41)") for i in range(N)]]),
-            ("B17", [[f"={chr(66+i)}16+INPUTS!$B$44" + ("+INPUTS!$B$45" if i == 0 else "") for i in range(N)]]),
-            ("B18", [[f"='PLAN 12 MESES'!X{5+i}" for i in range(N)]]),
-            ("B19", [[f"={chr(66+i)}17+IF({i+1}=INPUTS!$B$11;INPUTS!$B$6-INPUTS!$B$14;0)-{chr(66+i)}18" for i in range(N)]]),
-            ("B20", [[("=INPUTS!$B$84+B19-INPUTS!$B$79" if i == 0 else f"={chr(65+i)}20+{chr(66+i)}19")
+    h.lote([("B18", [[("=INPUTS!$B$37" if i == 0 else f"={chr(65+i)}18*(1-INPUTS!$B$41)") for i in range(N)]]),
+            ("B19", [[f"={chr(66+i)}18+INPUTS!$B$43+INPUTS!$B$44"
+                      + {0: "+INPUTS!$B$45", 1: "+INPUTS!$B$46"}.get(i, "") for i in range(N)]]),
+            ("B20", [[f"='PLAN 12 MESES'!X{5+i}" for i in range(N)]]),
+            ("B21", [[f"={chr(66+i)}19+IF({i+1}=INPUTS!$B$11;INPUTS!$B$6-INPUTS!$B$14;0)-{chr(66+i)}20" for i in range(N)]]),
+            ("B22", [[("=INPUTS!$B$84+B21-INPUTS!$B$79" if i == 0 else f"={chr(65+i)}22+{chr(66+i)}21")
                       for i in range(N)]])])
-    h.val("A22", [["Mes en que la caja operativa llega a cero"]])
-    h.fx("B22", [['=IFERROR(INDEX(B15:M15;MATCH(TRUE;B20:M20<0;0));"no se agota en 12 meses")']])
+    h.val("A24", [["Mes en que la caja operativa llega a cero"]])
+    h.fx("B24", [['=IFERROR(INDEX(B17:M17;MATCH(TRUE;B22:M22<0;0));"no se agota en 12 meses")']])
     return h
 
 
@@ -436,7 +445,25 @@ def torre(tok):
             ("D15", [["=DEUDA!B14-DEUDA!J14+INPUTS!B6"]]),
             ("F15", [['=IFERROR(INDEX(\'PLAN 12 MESES\'!A5:A16;MATCH(TRUE;\'PLAN 12 MESES\'!AB5:AB16<0;0));"no se agota")']])])
     h.val("A8", [["⚠️ Las huchas están a cero. La reserva fiscal de 6.900 € se crea el día que entre la financiación, no antes."]])
-    h.val("A17", [["ALERTAS"]])
+
+    # El número que de verdad manda. Sobrevivir doce meses quemando el préstamo no
+    # es un plan: el plan es dejar de perder caja antes de que se acabe.
+    h.val("A17", [["EL PUNTO DE EQUILIBRIO · cuánto MRR hace falta para dejar de perder caja"]])
+    h.val("A18", [["MRR de equilibrio", "", "MRR previsto a 12 meses", "", "Lo que falta", ""],
+                  ["Clientes que faltan", "", "Captación necesaria (€/mes)", "",
+                   "La misma, con vida media de 12 meses", ""]])
+    CH12 = "1/INPUTS!B42"
+    nec = ("=IFERROR(($B$18-INPUTS!B37*POWER(1-{c};12))*({c})"
+           "/(1-POWER(1-{c};12))/INPUTS!B39*ESCENARIOS!C7;0)")
+    h.lote([("B18", [["='PLAN 12 MESES'!X16-INPUTS!B43-INPUTS!B44"]]),
+            ("D18", [["='PLAN 12 MESES'!L16"]]), ("F18", [["=B18-D18"]]),
+            ("B19", [["=IFERROR(F18/INPUTS!B39;0)"]]),
+            ("D19", [[nec.format(c="INPUTS!B41")]]),
+            ("F19", [[nec.format(c=CH12)]])])
+    h.val("A21", [["La captación compra clientes; la retención decide cuántos se quedan. "
+                   "Compara D19 con F19: es lo que cuesta no arreglar el churn."]])
+
+    h.val("A23", [["ALERTAS"]])
     AL = [["Caja operativa por debajo de 5.000 €", "", "umbral de seguridad"],
           ["Runway por debajo de 3 meses", "", "en el mes actual"],
           ["CAC por encima de 3 meses de ticket", "", "payback demasiado largo"],
@@ -445,8 +472,8 @@ def torre(tok):
           ["El MRR cae respecto al mes anterior", "", ""],
           ["Se intenta contratar PM demasiado pronto", "", "trigger: MRR ≥ 5.000 € o 5 clientes"],
           ["La reinversión no suma 100 %", "", ""]]
-    h.val("A18", AL)
-    h.lote([("B18", [
+    h.val("A24", AL)
+    h.lote([("B24", [
         ['=IF(F5<5000;"🔴 SÍ";"🟢 no")'],
         ['=IF(N(\'PLAN 12 MESES\'!AC5)>0;IF(N(\'PLAN 12 MESES\'!AC5)<3;"🔴 SÍ";"🟢 no");"⚠️ revisar")'],
         ['=IF(ESCENARIOS!C7>INPUTS!B39*3;"🟠 SÍ";"🟢 no")'],
@@ -455,22 +482,22 @@ def torre(tok):
         ['=IF(\'PLAN 12 MESES\'!L6<\'PLAN 12 MESES\'!L5;"🟠 SÍ";"🟢 no")'],
         ['=IF(INPUTS!B55>0;IF(INDIRECT("\'PLAN 12 MESES\'!L"&(4+INPUTS!B55))<INPUTS!B53;"🔴 SÍ";"🟢 no");"🟢 no")'],
         ['=IF(ROUND(INPUTS!B91;4)<>1;"🔴 SÍ";"🟢 no")']])])
-    h.val("A28", [["STAGE GATES · las seis preguntas que decide este modelo"]])
+    h.val("A34", [["STAGE GATES · las seis preguntas que decide este modelo"]])
     G = [["GATE 1 · ¿La captación genera clientes?", "", "al menos 1 cliente en los 3 primeros meses"],
          ["GATE 2 · ¿El CAC y el payback son aceptables?", "", "payback por debajo de 3 meses de ticket"],
          ["GATE 3 · ¿MRR ≥ 5.000 €?", "", "objetivo del plan a 12 meses"],
          ["GATE 4 · ¿Hace falta ya un PM?", "", "MRR ≥ 5.000 € o 5 clientes activos"],
          ["GATE 5 · ¿Podemos escalar la captación?", "", "caja libre > 10.000 € y gate 1 superado"],
          ["GATE 6 · ¿Podemos amortizar más deuda?", "", "caja libre > 15.000 €"]]
-    h.val("A29", G)
-    h.lote([("B29", [
+    h.val("A35", G)
+    h.lote([("B35", [
         ['=IF(SUM(\'PLAN 12 MESES\'!I5:I7)>=1;"✅ SÍ";"❌ todavía no")'],
         ['=IF(ESCENARIOS!C10<3;"✅ SÍ";"❌ no")'],
         ['=IF(\'PLAN 12 MESES\'!L16>=5000;"✅ SÍ";"❌ no · falta "&TEXT(5000-\'PLAN 12 MESES\'!L16;"#,##0")&" €")'],
         ['=IF(OR(\'PLAN 12 MESES\'!L16>=INPUTS!B53;\'PLAN 12 MESES\'!AD16>=INPUTS!B54);"✅ recomendado";"❌ todavía no")'],
         ['=IF(AND(\'PLAN 12 MESES\'!AB5>10000;SUM(\'PLAN 12 MESES\'!I5:I7)>=1);"✅ SÍ";"❌ no")'],
         ['=IF(\'PLAN 12 MESES\'!AB5>15000;"✅ SÍ";"❌ no")']])])
-    h.val("A36", [["Este modelo no predice. Ayuda a decidir: cada lunes se actualizan cinco números reales y las alertas y los gates responden solos."]])
+    h.val("A42", [["Este modelo no predice. Ayuda a decidir: cada lunes se actualizan cinco números reales y las alertas y los gates responden solos."]])
     return h
 
 
@@ -565,12 +592,13 @@ def formato(tok, gids, dims=None):
             R(g, 14, 14, 1, 1, bg=C(.90, .96, .92), bold=True, ha="LEFT", font="Inter"),
             R(g, 9, 13, 2, 14, num="0.0", font="Roboto Mono", ha="RIGHT")]
     g = gids["ESCENARIOS"]
-    req += [R(g, 15, 15, 1, 14, bg=C(.13, .19, .17), fg=BLANCO, bold=True, size=9, ha="CENTER"),
+    req += [R(g, 17, 17, 1, 14, bg=C(.13, .19, .17), fg=BLANCO, bold=True, size=9, ha="CENTER"),
             R(g, 6, 6, 2, 4, num=PCT, font="Roboto Mono", ha="RIGHT"),
             R(g, 8, 8, 2, 4, num="0.0", font="Roboto Mono", ha="RIGHT"),
             R(g, 10, 10, 2, 4, num="0.0", font="Roboto Mono", ha="RIGHT"),
-            R(g, 20, 20, 1, 14, bg=C(.90, .96, .92), bold=True, num=EUR, font="Roboto Mono", ha="RIGHT"),
-            R(g, 20, 20, 1, 1, bg=C(.90, .96, .92), bold=True, ha="LEFT", font="Inter")]
+            R(g, 12, 12, 2, 4, num="0.00", font="Roboto Mono", ha="RIGHT"),
+            R(g, 22, 22, 1, 14, bg=C(.90, .96, .92), bold=True, num=EUR, font="Roboto Mono", ha="RIGHT"),
+            R(g, 22, 22, 1, 1, bg=C(.90, .96, .92), bold=True, ha="LEFT", font="Inter")]
 
     g = gids["PLAN 12 MESES"]
     req += [W(g, 1, 1, 86), W(g, 2, 30, 94),
@@ -610,12 +638,46 @@ def formato(tok, gids, dims=None):
             R(g, 14, 15, 2, 2, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
             R(g, 14, 15, 4, 4, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
             R(g, 14, 15, 6, 6, bold=True, font="Roboto Mono", ha="RIGHT"),
-            R(g, 18, 25, 2, 2, bold=True, ha="LEFT"), R(g, 29, 34, 2, 2, bold=True, ha="LEFT"),
-            R(g, 18, 25, 3, 3, fg=GRIS, size=9), R(g, 29, 34, 3, 3, fg=GRIS, size=9),
+            R(g, 24, 31, 2, 2, bold=True, ha="LEFT"), R(g, 35, 40, 2, 2, bold=True, ha="LEFT"),
+            R(g, 24, 31, 3, 3, fg=GRIS, size=9), R(g, 35, 40, 3, 3, fg=GRIS, size=9),
+            R(g, 18, 18, 2, 2, bold=True, size=14, font="Roboto Mono", ha="RIGHT", num=EUR),
+            R(g, 18, 18, 4, 6, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
+            R(g, 19, 19, 2, 2, bold=True, font="Roboto Mono", ha="RIGHT", num="0.0"),
+            R(g, 19, 19, 4, 6, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
+            R(g, 21, 21, 1, 10, fg=GRIS, size=9),
             R(g, 8, 8, 1, 10, fg=C(.60, .39, .06), bold=True, size=10)]
-    for r in (4, 9, 13, 17, 28):
+    for r in (4, 9, 13, 17, 23, 34):
         req.append(R(g, r, r, 1, 10, bg=C(.92, .95, .94), fg=VERDE, bold=True, size=12))
     req = [r for r in req if r]
     for i in range(0, len(req), 60):
         api("POST", SHEET + ":batchUpdate", tok, {"requests": req[i:i + 60]})
     return len(req)
+
+
+# ------------------------------------------------------------------ MAIN ----
+def construir():
+    """Reconstruye las siete pestañas y les aplica el formato.
+
+    Cada `Hoja` borra y recrea su pestaña, así que los gid cambian en cada
+    ejecución. El panel de Intelligence busca las pestañas por nombre, no por
+    gid, de modo que no se rompe; los enlaces con `#gid=` sí caducan.
+    """
+    tok = token()
+    gids, dims = {}, {}
+    for f in (inputs, deuda, funnel, plan, capital, escenarios, torre):
+        h = f(tok)
+        gids[h.t] = h.gid
+        print(f"  · {h.t}")
+    meta = api("GET", SHEET + "?fields=sheets.properties(title,sheetId,gridProperties)", tok)
+    for s in meta["sheets"]:
+        p = s["properties"]
+        dims[p["sheetId"]] = (p["gridProperties"]["rowCount"], p["gridProperties"]["columnCount"])
+    n = formato(tok, gids, dims)
+    print(f"  · formato: {n} peticiones")
+    return gids
+
+
+if __name__ == "__main__":
+    print("Construyendo el modelo financiero a 12 meses…")
+    for t, g in construir().items():
+        print(f"  {t:<28} gid={g}")

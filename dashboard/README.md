@@ -28,6 +28,31 @@ python3 dashboard/actualizar.py 2026-09-17 # un dia concreto
 
 Ninguna credencial vive en el repositorio.
 
+## Los otros dos scripts
+
+`finanzas.py` genera la pestaña `FINANZAS · panel`, que es la que lee la pantalla
+privada de finanzas de Qualivo Intelligence.
+
+`modelo_financiero.py` construye el modelo de tesorería a doce meses en siete
+pestañas: `CONTROL TOWER`, `INPUTS`, `DEUDA`, `FUNNEL`, `PLAN 12 MESES`, `CAPITAL`
+y `ESCENARIOS`.
+
+```bash
+python3 dashboard/modelo_financiero.py
+```
+
+Borra y recrea las siete pestañas en cada ejecución, así que **los `gid` cambian**:
+el panel las busca por nombre y no se rompe, pero los enlaces con `#gid=` caducan.
+
+Todas las hipótesis viven en `INPUTS`; el resto son fórmulas. Dos que conviene no
+olvidar, porque condicionan todo lo demás:
+
+- **El churn es `1 ÷ duración media`, y la duración media hay que calcularla solo
+  sobre los clientes recurrentes.** Mezclar los proyectos de uno o dos meses, que
+  duran poco por diseño, infla el churn y hace que el modelo se coma la cartera.
+- **El `close rate` no está validado.** Las demás tasas del funnel salen del CRM;
+  esa es una hipótesis, y es la que más mueve el resultado.
+
 ## Tres trampas que ya costaron su rato, para no repetirlas
 
 1. **Cloudflare 1010.** Smartlead y GoHighLevel rechazan clientes sin User-Agent de
