@@ -287,6 +287,22 @@ const md = function (ms) { return new RealDate(ms).toLocaleString('es-ES', { tim
     const t = niv(['sector-reformas', 'inv-entre-500-y-2-000', 'vol-15-30', 'fuga-en-el-seguimiento-y-los-pre']);
     return (a === 'B' && i === 'D' && t === 'B') ? true : [a, i, t].join(' ');
   });
+  // 17. La protección de 24 h solo frena dobles WA1: no impide que el agente conteste.
+  await caso('12:00 WA1 → 12:07 responde → 12:08 el agente contesta; y otra vez a las 12:20', async function () {
+    fijar('2026-10-02T10:00:00Z'); entrar('g1', TAGS_C);   // vie 12:00
+    await A.primerWhatsAppCompleto('g1', C.g1.phone, { nombre: 'Jorge', sector: 'Formación o academia', fuga: 'No lo sé' });
+    if (enviadosA('g1').length !== 1) return 'WA1 no salió';
+    fijar('2026-10-02T10:07:00Z'); msg('g1', 'inbound', 'Hola, unas 30 al mes');
+    fijar('2026-10-02T10:08:00Z'); await cron();      // el reloj de la cadencia ve la respuesta y llama al agente
+    await cronAgente();                                // y el de 2 minutos no debe contestar dos veces
+    if (enviadosA('g1').length !== 2) return 'tras la 1.ª respuesta, envíos: ' + enviadosA('g1').length;
+    fijar('2026-10-02T10:20:00Z'); msg('g1', 'inbound', '¿Y cómo funciona lo vuestro?');
+    const h = await AGENTE.atender('g1');
+    if (h.accion !== 'responder' || enviadosA('g1').length !== 3) return 'tras la 2.ª: ' + JSON.stringify(h) + ' envíos ' + enviadosA('g1').length;
+    // y un WA1 tardío (rescate) en ese momento no debe salir
+    const r = await A.primerWhatsAppCompleto('g1', C.g1.phone, { nombre: 'Jorge', sector: 'Formación o academia', fuga: 'No lo sé' });
+    return (enviadosA('g1').length === 3 && r.ok === false) ? true : 'WA1 duplicado: ' + JSON.stringify(r);
+  });
   // 14. Textos: corto y largo con el arranque del contexto; corto entre 40 y 60 palabras.
   await caso('Las 45 combinaciones del corto (15 × 3 arranques): máximo 60 palabras y una sola pregunta', async function () {
     const M = require('../api/_mensajes.js'); const malos = []; let minimo = 999, maximo = 0;
