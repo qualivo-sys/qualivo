@@ -60,15 +60,15 @@ DEUDA = [
 
 # Filas de la hoja. Se nombran para no contar a mano al cambiar el diseño.
 R_PAL   = 5                       # palancas: 5..12
-R_CALC  = 15                      # calculado: 15..21
-R_LECT  = 25                      # las tres lecturas: 25..28
-R_DEU   = 32                      # inventario de deuda: 32..40
+R_CALC  = 16                      # calculado: 16..22
+R_LECT  = 26                      # las tres lecturas: 26..29
+R_DEU   = 33                      # inventario de deuda: 33..41
 R_DEUT  = R_DEU + len(DEUDA)      # total de la deuda = 39
-R_PLAN  = 45                      # primer mes del plan
+R_PLAN  = 47                      # primer mes del plan
 R_PLANF = R_PLAN + N - 1          # último mes = 60
-R_RES   = 65                      # resultado a 12 meses
-R_COND  = 69                      # las tres condiciones: 69..71
-R_SENS  = 75                      # sensibilidad: 75..80
+R_RES   = 67                      # resultado a 12 meses
+R_COND  = 71                      # las tres condiciones: 71..73
+R_SENS  = 77                      # sensibilidad: 77..82
 
 
 def token():
@@ -119,7 +119,7 @@ class Hoja:
 
 
 def construir(tok):
-    h = Hoja(tok, TITULO)
+    h = Hoja(tok, TITULO, filas=90, cols=26)
     V, F = [], []   # bloques de valores (RAW) y de fórmulas (USER_ENTERED)
 
     V.append(("A1", [
@@ -139,6 +139,8 @@ def construir(tok):
         ["Capital del préstamo (€)", 25000, "🔵", "de tu padre"],
         ["TIN del préstamo (anual)", 0.07, "🟡", "PENDIENTE de confirmar las condiciones reales"],
         ["Plazo del préstamo (meses)", 60, "🟡", "PENDIENTE"],
+        ["Tipo de IRPF sobre el beneficio", 0.30, "🔵",
+         "con la nómina de Equipzilla encima, tu marginal está en el 37 %"],
     ]))
 
     V.append((f"A{R_CALC - 1}", [["CALCULADO", "", "", ""]]))
@@ -196,13 +198,14 @@ def construir(tok):
     CAB = ["Mes", "Clientes", "MRR inicial", "MRR nuevo", "MRR perdido", "MRR final",
            "Factura clientes", "Nómina + proyectos", "Cobros puntuales", "INGRESOS",
            "Captación", "Software", "Estructura", "Personal", "Comercial",
-           "Cuotas de deuda", "Cuota del préstamo", "Impuestos", "GASTOS",
+           "Cuotas de deuda", "Cuota del préstamo", "Impuestos atrasados",
+           "Beneficio de autónomo", "IRPF sobre el beneficio", "GASTOS",
            "CASH FLOW", "CAJA", "Runway (meses)"]
     V.append((f"A{R_PLAN - 2}", [["PLAN MES A MES"]]))
     V.append((f"A{R_PLAN - 1}", [CAB]))
     V.append((f"A{R_PLAN}", [[m] for m in MESES]))
 
-    COL = {c: [] for c in "BCDEFGHIJKLMNOPQRSTUV"}
+    COL = {c: [] for c in "BCDEFGHIJKLMNOPQRSTUVWX"}
     for i in range(N):
         r, p = R_PLAN + i, R_PLAN + i - 1
         # El mes 1 arranca de los datos reales de INPUTS; los demás, del mes anterior.
@@ -228,14 +231,23 @@ def construir(tok):
                         f"*($D${R_DEU}:$D${R_DEUT-1}>={i+1})*$C${R_DEU}:$C${R_DEUT-1})")
         COL["Q"].append(f"=$B${R_CALC+1}")
         COL["R"].append(f"=INPUTS!{chr(66+i)}78" if i < 12 else "=0")
-        COL["S"].append(f"=SUM(K{r}:R{r})")
-        COL["T"].append(f"=J{r}-S{r}")
+        # Beneficio de autónomo: lo que factura Qualivo menos el gasto deducible.
+        # Los gastos personales y el principal de las cuotas NO lo son. Tampoco
+        # se descuentan aquí los intereses, que sí serían deducibles: el IRPF
+        # sale por tanto algo alto, que es el lado prudente.
+        COL["S"].append(f"=G{r}+INPUTS!$B$43-K{r}-L{r}-M{r}-O{r}")
+        # El modelo 130 es acumulado y trimestral. Aquí se devenga mes a mes
+        # sobre el beneficio acumulado, que es la misma carga mejor repartida.
+        COL["T"].append(f"=MAX(0;$B${R_PAL+8}*S{r})" if i == 0 else
+                        f"=MAX(0;$B${R_PAL+8}*SUM($S${R_PLAN}:S{r})-SUM($T${R_PLAN}:T{p}))")
+        COL["U"].append(f"=SUM(K{r}:R{r})+T{r}")
+        COL["V"].append(f"=J{r}-U{r}")
         # Octubre arranca con el banco más el capital, menos la reserva fiscal y
         # menos lo que se va en liquidar deuda.
-        COL["U"].append(f"=INPUTS!$B$84+$B${R_PAL+5}-INPUTS!$B$79-$B${R_CALC+2}+T{r}"
-                        if i == 0 else f"=U{p}+T{r}")
-        COL["V"].append(f'=IFERROR(IFS(U{r}<=0;"SIN CAJA";T{r}>=0;"no se agota";'
-                        f"TRUE;ROUND(U{r}/-T{r};1));\"nd\")")
+        COL["W"].append(f"=INPUTS!$B$84+$B${R_PAL+5}-INPUTS!$B$79-$B${R_CALC+2}+V{r}"
+                        if i == 0 else f"=W{p}+V{r}")
+        COL["X"].append(f'=IFERROR(IFS(W{r}<=0;"SIN CAJA";V{r}>=0;"no se agota";'
+                        f"TRUE;ROUND(W{r}/-V{r};1));\"nd\")")
     F += [(f"{c}{R_PLAN}", [[v] for v in vals]) for c, vals in COL.items()]
 
     # ---------------------------------------------------------- resultado ----
@@ -247,11 +259,11 @@ def construir(tok):
         ["Caja mínima de los 18 meses", "", "Cuándo", "", "Mes en que se queda sin caja", "",
          "MRR en régimen", ""],
     ]))
-    F.append((f"B{R_RES}", [[f"=ROUND(B{r12};1)", "", f"=F{r12}", "", f"=U{r12}", "", f"=T{r12}"]]))
+    F.append((f"B{R_RES}", [[f"=ROUND(B{r12};1)", "", f"=F{r12}", "", f"=W{r12}", "", f"=V{r12}"]]))
     F.append((f"B{R_RES + 1}", [
-        [f"=MIN(U{R_PLAN}:U{R_PLANF})", "",
-         f"=INDEX(A{R_PLAN}:A{R_PLANF};MATCH(MIN(U{R_PLAN}:U{R_PLANF});U{R_PLAN}:U{R_PLANF};0))", "",
-         f'=IFERROR(INDEX(A{R_PLAN}:A{R_PLANF};MATCH(TRUE;U{R_PLAN}:U{R_PLANF}<0;0));'
+        [f"=MIN(W{R_PLAN}:W{R_PLANF})", "",
+         f"=INDEX(A{R_PLAN}:A{R_PLANF};MATCH(MIN(W{R_PLAN}:W{R_PLANF});W{R_PLAN}:W{R_PLANF};0))", "",
+         f'=IFERROR(INDEX(A{R_PLAN}:A{R_PLANF};MATCH(TRUE;W{R_PLAN}:W{R_PLANF}<0;0));'
          f'"🟢 no se queda sin caja")', "",
          f"=$B${R_PAL+1}*$B${R_PAL+3}*$B${R_PAL}"]]))
 
@@ -295,7 +307,7 @@ def construir(tok):
 
 
 # ---------------------------------------------------------------- formato ----
-def formato(tok, gid, filas=90, cols=24):
+def formato(tok, gid, filas=90, cols=26):
     C = lambda r, g, b: {"red": r, "green": g, "blue": b}
     VERDE, BLANCO, GRIS = C(.06, .42, .36), C(1, 1, 1), C(.47, .54, .52)
     AZUL, TINTA, ROJO = C(.09, .35, .55), C(.08, .13, .12), C(.64, .17, .14)
@@ -332,23 +344,25 @@ def formato(tok, gid, filas=90, cols=24):
         "properties": {"pixelSize": px}, "fields": "pixelSize"}}
 
     req = [
-        W(1, 1, 300), W(2, 2, 110), W(3, 3, 110), W(4, 4, 150), W(5, 8, 150), W(9, 24, 108),
+        W(1, 1, 300), W(2, 2, 110), W(3, 3, 110), W(4, 4, 150), W(5, 8, 150), W(9, 26, 108),
         # portada
         R(1, 1, 1, 10, bg=VERDE, fg=BLANCO, bold=True, size=15),
         R(2, 2, 1, 10, fg=GRIS, size=10, italic=True),
         # palancas: el bloque editable, en crema para que se vea a la primera
-        R(R_PAL, R_PAL + 7, 1, 1, bold=True, ha="LEFT"),
-        R(R_PAL, R_PAL + 7, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
+        R(R_PAL, R_PAL + 8, 1, 1, bold=True, ha="LEFT"),
+        R(R_PAL, R_PAL + 8, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
           font="Roboto Mono", ha="RIGHT", num=EUR),
         R(R_PAL, R_PAL + 1, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
           font="Roboto Mono", ha="RIGHT", num=DEC),
         R(R_PAL + 6, R_PAL + 6, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
           font="Roboto Mono", ha="RIGHT", num=PCT),
+        R(R_PAL + 8, R_PAL + 8, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
+          font="Roboto Mono", ha="RIGHT", num=PCT),
         # el plazo son meses, no euros
         R(R_PAL + 7, R_PAL + 7, 2, 2, bg=CREMA, fg=AZUL, bold=True, size=13,
           font="Roboto Mono", ha="RIGHT", num="0"),
-        R(R_PAL, R_PAL + 7, 3, 3, ha="CENTER"),
-        R(R_PAL, R_PAL + 7, 4, 8, fg=GRIS, size=9),
+        R(R_PAL, R_PAL + 8, 3, 3, ha="CENTER"),
+        R(R_PAL, R_PAL + 8, 4, 8, fg=GRIS, size=9),
         # calculado
         R(R_CALC, R_CALC + 6, 1, 1, ha="LEFT"),
         R(R_CALC, R_CALC + 6, 2, 2, bg=SUAVE, bold=True, font="Roboto Mono",
@@ -377,18 +391,19 @@ def formato(tok, gid, filas=90, cols=24):
         R(R_DEUT, R_DEUT, 1, 8, bg=SUAVE, bold=True),
         R(R_DEUT + 1, R_DEUT + 1, 1, 10, fg=GRIS, size=9, italic=True),
         # plan
-        R(R_PLAN - 1, R_PLAN - 1, 1, 22, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
+        R(R_PLAN - 1, R_PLAN - 1, 1, 24, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
           size=9, ha="CENTER", wrap="WRAP"),
         R(R_PLAN, R_PLANF, 1, 1, bold=True, ha="LEFT"),
         R(R_PLAN, R_PLANF, 2, 2, font="Roboto Mono", ha="RIGHT", num=DEC),
-        R(R_PLAN, R_PLANF, 3, 19, font="Roboto Mono", ha="RIGHT", num=EUR),
-        R(R_PLAN, R_PLANF, 20, 21, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
-        R(R_PLAN, R_PLANF, 22, 22, font="Roboto Mono", ha="RIGHT"),
+        R(R_PLAN, R_PLANF, 3, 21, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_PLAN, R_PLANF, 22, 23, bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_PLAN, R_PLANF, 24, 24, font="Roboto Mono", ha="RIGHT"),
         R(R_PLAN, R_PLANF, 10, 10, bg=SUAVE, bold=True, font="Roboto Mono",
           ha="RIGHT", num=EUR),
-        R(R_PLAN, R_PLANF, 19, 19, bg=SUAVE, bold=True, font="Roboto Mono",
+        R(R_PLAN, R_PLANF, 19, 20, bg=CREMA, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_PLAN, R_PLANF, 21, 21, bg=SUAVE, bold=True, font="Roboto Mono",
           ha="RIGHT", num=EUR),
-        R(R_PLAN, R_PLANF, 21, 21, bg=C(.92, .96, .94), fg=VERDE, bold=True,
+        R(R_PLAN, R_PLANF, 23, 23, bg=C(.92, .96, .94), fg=VERDE, bold=True,
           font="Roboto Mono", ha="RIGHT", num=EUR),
         # resultado
         R(R_RES, R_RES + 1, 1, 8, bold=True),
@@ -423,7 +438,7 @@ def formato(tok, gid, filas=90, cols=24):
     # cabeceras de sección
     for r in (R_PAL - 1, R_CALC - 1, R_LECT - 2, R_DEU - 2, R_PLAN - 2,
               R_RES - 1, R_COND - 1, R_SENS - 2):
-        req.append(R(r, r, 1, 22, bg=C(.92, .95, .94), fg=VERDE, bold=True, size=12))
+        req.append(R(r, r, 1, 24, bg=C(.92, .95, .94), fg=VERDE, bold=True, size=12))
 
     req += [
         {"updateSheetProperties": {"properties": {"sheetId": gid, "gridProperties": {
@@ -432,7 +447,7 @@ def formato(tok, gid, filas=90, cols=24):
         # el rojo salta solo donde importa: caja, cash flow y la caja mínima
         {"addConditionalFormatRule": {"rule": {
             "ranges": [{"sheetId": gid, "startRowIndex": R_PLAN - 1, "endRowIndex": R_PLANF,
-                        "startColumnIndex": 19, "endColumnIndex": 21}],
+                        "startColumnIndex": 21, "endColumnIndex": 23}],
             "booleanRule": {"condition": {"type": "NUMBER_LESS",
                                           "values": [{"userEnteredValue": "0"}]},
                             "format": {"backgroundColor": C(.98, .87, .86),
