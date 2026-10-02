@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Escuela Giner · demo del recorrido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: demo guiada en pestañas (anuncio, landing, WhatsApp, seguimiento, panel); cada pestaña es una pantalla. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#16202B; --muted:#5A6676; --line:#D9DFE7;
+  --accent:#2F5BEA; --good:#13795B; --warn:#B4541A; --tint:#EAF0FF;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --brand:#E8654A; --brand-soft:#FDEDE6;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#F27F66; --brand-soft:#33231F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#F27F66; --brand-soft:#33231F; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:20px 64px}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:66ch;margin-top:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;position:sticky;top:0;background:var(--bg);z-index:3;padding-top:8px}
+nav.tabs button{font:inherit;font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.tabs button[aria-selected="true"] span{color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:70ch}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.cols > *{min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* Anuncios */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ig .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:600}
+.ig .h i{width:28px;height:28px;border-radius:50%;background:var(--brand);display:inline-block}
+.ig .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ig .v{width:100%;aspect-ratio:4/5;display:grid;align-content:end;padding:18px;color:#fff;position:relative;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1}
+.ig .v.va{background:linear-gradient(160deg,#2B2440 0%,#6B3A5C 55%,#E8654A 100%)}
+.ig .v.vb{background:linear-gradient(160deg,#0F5C4E 0%,#2F7D6B 60%,#F6C453 100%)}
+.ig .v .play{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;font-weight:500;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}
+.ig .v small{display:block;font-family:var(--body);font-weight:600;font-size:14px;margin-top:8px;opacity:.95}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.ig .cta b{color:var(--accent)}
+.ig .t{padding:10px 12px;font-size:14px}
+.gg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.gg .q{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px}
+.gg .r small{font-size:12px;color:var(--muted)}
+.gg .r a{display:block;color:var(--accent);font-size:18px;text-decoration:none;margin:2px 0}
+.gg .r p{font-size:14px;color:var(--muted)}
+.gg .sl{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--accent)}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* Landing */
+.phone{width:min(390px,100%);height:760px;border:10px solid #1d1d1f;border-radius:36px;overflow:hidden;background:#fff;margin-inline:auto}
+.phone iframe{width:100%;height:100%;border:0;display:block}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:var(--brand);display:inline-block}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:82%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line)}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:620px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* Seguimiento */
+.seq{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 14px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl b{display:block;font-size:14px}
+.tl details{margin-top:4px}
+.tl summary{cursor:pointer;font-size:13px;color:var(--muted)}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px}
+/* Panel */
+.dash{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:16px;align-items:start}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.ficha dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0;font-size:14px}
+.ficha dt{color:var(--muted)}
+.ficha dd{margin:0}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 8px;background:var(--tint);color:var(--accent)}
+.pill.g{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.pill.w{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)}
+.score{display:flex;align-items:baseline;gap:8px}
+.score b{font-family:var(--display);font-size:34px;color:var(--good)}
+.next{background:var(--tint);border-radius:10px;padding:10px 12px;font-size:14px}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.tasks li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;font-size:14px}
+.tasks li:last-child{border-bottom:0}
+.tasks small{color:var(--muted);white-space:nowrap}
+.funnel{display:grid;gap:6px}
+.funnel div{display:grid;grid-template-columns:150px 1fr 36px;align-items:center;gap:10px;font-size:14px}
+.funnel span.bar{height:14px;border-radius:4px;background:var(--accent);display:block}
+.funnel em{font-style:normal;font-family:var(--mono);font-size:13px;text-align:right}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px}
+.ask .qq{font-weight:600}
+.ask .aa{color:var(--muted);font-size:14px;background:var(--bg);border-radius:10px;padding:10px 12px}
+footer{font-size:13px;color:var(--muted)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq{grid-template-columns:1fr}.two,.dash{grid-template-columns:1fr}.wa{height:560px}.funnel div{grid-template-columns:120px 1fr 32px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Demo para la Escuela Giner · Grado Superior en Educación Infantil</p>
+  <h1>El recorrido completo, de un anuncio a una alumna matriculada</h1>
+  <p class="lead">Así vería el proceso una chica de 19 años que busca estudiar Educación Infantil, y así lo veríais vosotros. Pasad por las pestañas en orden; en la de WhatsApp podéis elegir las respuestas.</p>
+</header>
+
+<p class="note">Demo preparada por Qualivo con lo que nos contasteis el 2 de octubre. Los nombres, mensajes y cifras son de ejemplo; los textos finales y los requisitos de la beca los validáis vosotros. <a href="../">Volver al plan</a></p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncio</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>2</span>Landing</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>4</span>Seguimiento</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>5</span>Lo que veis vosotros</button>
+</nav>
+
+<!-- 1 · ANUNCIO -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · Lucía ve un anuncio</h2><p>Tres anuncios distintos a la vez. A las dos o tres semanas se quedan los que traen visitas al centro, no los que traen más clics.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Instagram · vídeo de 20 s</p>
+      <div class="ig">
+        <div class="h"><i></i><div>escuelaginer<small>Publicidad</small></div></div>
+        <div class="v va"><span class="play">▶ 0:20</span>Desde fuera parecemos un centro más.<small>Entra y verás.</small></div>
+        <div class="cta"><span>Enviar mensaje</span><b>›</b></div>
+        <p class="t"><b>escuelaginer</b> Grado Superior en Educación Infantil en Campamento. Te ayudamos con la beca, paso a paso. Ven a conocernos.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> es vuestro argumento más fuerte: quien entra se queda. El vídeo enseña aulas, prácticas y a la profesora del ciclo.</div>
+    </div>
+    <div>
+      <p class="cap">Instagram · historia</p>
+      <div class="ig">
+        <div class="h"><i></i><div>escuelaginer<small>Publicidad</small></div></div>
+        <div class="v vb">¿Quieres ser técnica en Educación Infantil y te preocupa el precio?<small>En 2 minutos te decimos si puedes pedir la beca.</small></div>
+        <div class="cta"><span>Más información</span><b>›</b></div>
+      </div>
+      <div class="why"><b>Por qué:</b> ataca la objeción que nos contasteis, el precio, y lleva a la landing con la pregunta de la beca. También se enseña a madres y padres.</div>
+    </div>
+    <div>
+      <p class="cap">Google · búsqueda</p>
+      <div class="gg">
+        <div class="q">grado superior educación infantil con beca madrid</div>
+        <div class="r"><small>Patrocinado · escuelaginer.com</small><a href="../educacion-infantil/">Educación Infantil con beca · Escuela Giner</a><p>Grado Superior presencial o a distancia. Te decimos en 2 minutos si puedes pedir la beca. Visita el centro.</p></div>
+        <div class="sl"><span>¿Puedo pedir la beca?</span><span>Visita el centro</span><span>A distancia</span></div>
+      </div>
+      <div class="why"><b>Por qué:</b> para quien ya está buscando. Solo en vuestra zona de Madrid y solo en temporada (marzo a mayo y septiembre), para no gastar cuando nadie decide.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="landing">Siguiente: la landing ›</button></div>
+</section>
+
+<!-- 2 · LANDING -->
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>2 · Llega a una página pensada solo para esto</h2><p>Una sola cosa que hacer: saber si puede pedir la beca. Tres preguntas que se contestan con un toque, y el WhatsApp como alternativa.</p></header>
+  <div class="two">
+    <div class="phone"><iframe src="../educacion-infantil/" title="Maqueta de la landing en un móvil" loading="lazy"></iframe></div>
+    <div class="list">
+      <div><h3>Lo que pregunta el formulario</h3><p>Estudios (Bachillerato, Grado Medio o ninguno), turno y para cuándo. Con eso ya sabemos si accede directo o necesita la prueba de acceso (y vuestro curso para prepararla).</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Nada de la renta ni datos personales sensibles: eso va después, por WhatsApp y con calma.</p></div>
+      <div><h3>Lo que responde a las dudas</h3><p>¿Cuánto cuesta? ¿Y si me deniegan la beca? ¿Puedo verlo antes? Las tres que más os frenan, contestadas arriba.</p></div>
+      <div><h3>Lo que medimos</h3><p>Qué anuncio trajo a cada persona y qué contestó, para ver cuál trae visitas.</p></div>
+      <div><a class="btnl" href="../educacion-infantil/" target="_blank" rel="noopener">Abrir la landing a pantalla completa</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Un minuto después, le llega un WhatsApp</h2><p>Sois Lucía: elegid las respuestas. A la derecha, lo que va pasando por detrás en vuestro sistema.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i></i><div><b>Escuela Giner</b><small>Asistente · responde al momento</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">El asistente dice siempre que es un asistente. Pasa a una persona cuando preguntan el precio, piden visitar el centro o cuentan algo que no encaja. Vosotros veis la conversación en vuestro WhatsApp y podéis entrar en cualquier momento: en cuanto escribís, el asistente se calla.</p>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: el seguimiento ›</button></div>
+</section>
+
+<!-- 4 · SEGUIMIENTO -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>4 · Nadie se queda sin siguiente paso</h2><p>Tres secuencias que se ponen en marcha solas. Cualquier respuesta las para y pasa a una persona. Pulsad «ver mensaje» para leer el texto.</p></header>
+  <div class="seq">
+    <div>
+      <h3>Si no contesta</h3>
+      <p>Para quien pidió información y no responde al primer WhatsApp.</p>
+      <ol class="tl">
+        <li><span class="w">Minuto 1</span><b>Primer WhatsApp</b></li>
+        <li><span class="w">+2 h, en horario</span><b>Llamada de la profesora del ciclo</b><details><summary>ver guion</summary><blockquote>«Hola, Lucía, soy Marta, profesora de Educación Infantil en la Escuela Giner. Te llamo porque pediste información: ¿te pillo bien un minuto?»</blockquote></details></li>
+        <li><span class="w">Día 1</span><b>WhatsApp corto</b><details><summary>ver mensaje</summary><blockquote>Lucía, te escribí ayer por lo del ciclo de Educación Infantil, por si se te pasó. ¿Te cuento en dos minutos si puedes pedir la beca?</blockquote></details></li>
+        <li><span class="w">Día 3</span><b>Correo con el ciclo y las preguntas frecuentes</b><details><summary>ver asunto</summary><blockquote>Asunto: Educación Infantil en la Escuela Giner: horarios, beca y prácticas</blockquote></details></li>
+        <li><span class="w">Día 7</span><b>Último mensaje</b><details><summary>ver mensaje</summary><blockquote>Lucía, no te escribo más por ahora. Si quieres, te aviso cuando abra el plazo de matrícula. ¿Te aviso?</blockquote></details></li>
+        <li class="stop"><span class="w">Después</span><b>Lista de la temporada siguiente</b></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Papeles de la beca</h3>
+      <p>Para quien cumple los requisitos. Es donde hoy se pierden becas.</p>
+      <ol class="tl">
+        <li><span class="w">Día 0</span><b>Lista de documentos y enlace para subirlos</b></li>
+        <li><span class="w">Día 2</span><b>Recordatorio si no ha subido nada</b><details><summary>ver mensaje</summary><blockquote>Lucía, ¿cómo vas con los papeles de la beca? Si te atasca alguno, dime cuál y te ayudamos.</blockquote></details></li>
+        <li><span class="w">Día 5</span><b>Aviso a la profesora para llamarla</b></li>
+        <li><span class="w">3 días antes del plazo</span><b>WhatsApp con la fecha límite</b><details><summary>ver mensaje</summary><blockquote>Lucía, el plazo de la beca acaba el viernes. Te faltan el empadronamiento y la renta. ¿Te ayudamos a sacarlos?</blockquote></details></li>
+        <li class="stop"><span class="w">Al completar</span><b>La profesora lo revisa antes de presentar</b></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Visita al centro</h3>
+      <p>Lo más importante: quien entra se queda.</p>
+      <ol class="tl">
+        <li><span class="w">Al agendar</span><b>Confirmación con día, hora y cómo llegar</b></li>
+        <li><span class="w">La víspera</span><b>Recordatorio</b><details><summary>ver mensaje</summary><blockquote>Lucía, mañana a las 17:30 te esperamos en la Escuela Giner. ¿Sigue en pie?</blockquote></details></li>
+        <li><span class="w">2 h antes</span><b>Dirección y a quién preguntar</b></li>
+        <li><span class="w">+15 min sin llegar</span><b>Otra fecha, sin reproches</b><details><summary>ver mensaje</summary><blockquote>Lucía, ¿te ha surgido algo? No pasa nada. Tengo el jueves a las 11:00 o el lunes a las 17:30. ¿Cuál te guardo?</blockquote></details></li>
+        <li><span class="w">Días 2 y 7 tras la visita</span><b>Si no se ha matriculado, la profesora retoma</b></li>
+        <li class="stop"><span class="w">Matrícula</span><b>Se para todo</b></li>
+      </ol>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: lo que veis vosotros ›</button></div>
+</section>
+
+<!-- 5 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>5 · Lo que veis vosotros cada mañana</h2><p>La ficha de cada persona con todo lo que ha pasado, lo que toca hacer hoy y cómo va la temporada. Datos de ejemplo, no previsiones.</p></header>
+  <div class="dash">
+    <div class="box ficha">
+      <p class="cap">Ficha</p>
+      <h3>Lucía García · 19 años</h3>
+      <div class="score"><b>82</b><span>encaje alto · <span class="pill g">cumple la beca</span></span></div>
+      <dl>
+        <dt>Vino de</dt><dd>Anuncio «Entra y verás» · Instagram</dd>
+        <dt>Estudios</dt><dd>Bachillerato · acceso directo</dd>
+        <dt>Turno</dt><dd>Tarde</dd>
+        <dt>Beca</dt><dd>Documentos 3 de 5 <span class="pill w">faltan 2</span></dd>
+        <dt>Visita</dt><dd>Martes 17:30 <span class="pill g">confirmada</span></dd>
+        <dt>Conversación</dt><dd>WhatsApp, 6 mensajes. Preguntó si hay prácticas en escuelas infantiles.</dd>
+      </dl>
+      <div class="next"><b>Siguiente acción:</b> recordarle empadronamiento y renta · el jueves · Marta</div>
+    </div>
+    <div class="box">
+      <p class="cap">Para hoy</p>
+      <ul class="tasks">
+        <li><span>Llamar a Andrea P.: preguntó el precio</span><small>antes de las 12</small></li>
+        <li><span>Revisar los papeles de Sara M.</span><small>hoy</small></li>
+        <li><span>Visita de Nerea R., confirmada</span><small>17:30</small></li>
+        <li><span>Carla T. no vino ayer: ya tiene otra fecha propuesta</span><small>hecho solo</small></li>
+      </ul>
+      <p class="cap" style="margin-top:8px">Temporada de primavera · ejemplo</p>
+      <div class="funnel" id="funnel"></div>
+    </div>
+  </div>
+  <div class="ask">
+    <p class="cap">Preguntadle al sistema</p>
+    <p class="qq">«¿Quién vino a ver el centro el año pasado y no se matriculó?»</p>
+    <p class="aa">Te salen con su ficha, lo que habló cada una y por qué no siguió. Desde ahí les mandas un WhatsApp o se los pasas a la profesora para que llame.</p>
+  </div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan por temporadas</a></div>
+</section>
+
+<footer>Qualivo · qualivo.io · Demo preparada el 2 de octubre de 2026 para la Escuela Giner. No es una página de la escuela; nombres, mensajes y cifras son de ejemplo.</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'landing', 'whatsapp', 'seguimiento', 'panel'];
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Funnel de ejemplo
+  var F = [['Piden información', 40], ['Cumplen la beca', 28], ['Visita agendada', 20], ['Visita hecha', 15], ['Matrícula', 13]];
+  document.getElementById('funnel').innerHTML = F.map(function (r) {
+    return '<div><span>' + r[0] + '</span><span class="bar" style="width:' + Math.round(r[1] / F[0][1] * 100) + '%"></span><em>' + r[1] + '</em></div>';
+  }).join('');
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var started = false, reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 47;
+  function hora() { minuto++; return '21:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls;
+    d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 900);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 400); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var N = {
+    q1: function () {
+      bot(['¡Hola, Lucía! Soy el asistente de la Escuela Giner. Has pedido información del Grado Superior en Educación Infantil.',
+           'Para decirte si puedes pedir la beca, te hago tres preguntas rápidas. ¿Vives en la Comunidad de Madrid?'],
+        function () { choices([['Sí', 'q2'], ['No, vivo fuera', 'fuera'], ['Solo estoy mirando', 'mirando']]); });
+    },
+    q2: function () {
+      apunta('Requisito 1: reside en Madrid', 'se guarda en su ficha');
+      bot(['Perfecto. ¿Has empezado antes este mismo ciclo en otro centro?'],
+        function () { choices([['No, sería la primera vez', 'q3'], ['Sí, lo dejé a medias', 'repite']]); });
+    },
+    q3: function () {
+      apunta('Requisito 2: no ha cursado el ciclo', 'se guarda en su ficha');
+      bot(['Última: ¿sabes si los ingresos de tu casa están por debajo del límite de la beca? Si no lo sabes, no pasa nada: lo calculamos contigo.'],
+        function () { choices([['Creo que sí', 'cumple'], ['No lo sé', 'cumple'], ['¿Cuánto cuesta el ciclo?', 'precio']]); });
+    },
+    cumple: function () {
+      apunta('Nota de encaje: 82 · cumple la beca', 'pasa a «Cumple requisitos»', 'g');
+      apunta('Secuencia «Papeles de la beca» en marcha', 'recordatorios el día 2 y el 5');
+      bot(['¡Tiene muy buena pinta, Lucía! Te mando por aquí la lista de documentos de la beca y un enlace para subirlos cuando los tengas. Si alguno te atasca, nos dices y te ayudamos.',
+           'Y lo mejor es que vengas a ver el centro y conozcas a Marta, la profesora del ciclo. ¿Te va bien el martes a las 17:30 o el jueves a las 11:00?'],
+        function () { choices([['Martes 17:30', 'martes'], ['Jueves 11:00', 'jueves'], ['Prefiero que me llaméis', 'llamada']]); });
+    },
+    martes: function () { visita('el martes a las 17:30'); },
+    jueves: function () { visita('el jueves a las 11:00'); },
+    llamada: function () {
+      apunta('Tarea para Marta: llamar a Lucía', 'mañana por la mañana', 'h');
+      bot(['Perfecto. Mañana te llama Marta, la profesora del ciclo. ¿A qué hora te pillo mejor?'],
+        function () { choices([['Antes de las 12', 'apuntada'], ['Por la tarde', 'apuntada']]); });
+    },
+    apuntada: function () {
+      apunta('Hora preferida guardada en la tarea', 'Marta lo ve en su lista de hoy', 'g');
+      bot(['Apuntado. Hasta mañana, Lucía.'], fin);
+    },
+    precio: function () {
+      apunta('Pregunta el precio → pasa a una persona', 'aviso a Marta con la conversación', 'h');
+      bot(['Buena pregunta. El precio depende de la beca y eso te lo explica mejor Marta, la profesora del ciclo. Le paso nuestra conversación y te escribe ella mañana a primera hora, ¿vale?'],
+        function () { choices([['Vale, gracias', 'gracias']]); });
+    },
+    gracias: function () { apunta('El asistente se para', 'sigue Marta por el mismo WhatsApp'); bot(['¡A ti! Que descanses.'], fin); },
+    repite: function () {
+      apunta('Puede afectar a la beca → pasa a una persona', 'tarea para Marta', 'h');
+      bot(['Gracias por contármelo. Eso puede cambiar cómo se pide la beca, así que mejor lo ves con Marta, la profesora del ciclo. Mañana te escribe ella, ¿te parece?'],
+        function () { choices([['Perfecto', 'gracias']]); });
+    },
+    fuera: function () {
+      apunta('No reside en Madrid → se le ofrece la modalidad a distancia', 'y pasa a una persona', 'h');
+      bot(['Gracias. Entonces la beca de Madrid seguramente no te sirva, pero tenemos el ciclo también a distancia y otras opciones. ¿Quieres que Marta te lo cuente mañana?'],
+        function () { choices([['Sí, que me escriba', 'gracias'], ['No, gracias', 'baja']]); });
+    },
+    mirando: function () {
+      apunta('Solo mirando → lista de la temporada', 'sin insistir');
+      bot(['¡Sin problema! Te dejo aquí la información del ciclo. Si quieres, te aviso cuando abra el plazo de matrícula, y así no se te pasa. ¿Te aviso?'],
+        function () { choices([['Sí, avísame', 'avisar'], ['No hace falta', 'baja']]); });
+    },
+    avisar: function () {
+      apunta('«Avisar al abrir el plazo» con fecha', 'vuelve sola en marzo', 'g');
+      bot(['Hecho. Te escribo cuando abra el plazo. ¡Gracias, Lucía!'], fin);
+    },
+    baja: function () {
+      apunta('No quiere más mensajes', 'no se le vuelve a escribir', 'g');
+      bot(['Entendido, no te escribimos más. Si algún día te interesa, aquí estamos.'], fin);
+    }
+  };
+  function visita(cuando) {
+    apunta('Visita en la agenda: ' + cuando, 'en el calendario de Marta', 'g');
+    apunta('Recordatorios programados', 'la víspera y 2 h antes; si no viene, otra fecha');
+    bot(['¡Hecho! Te esperamos ' + cuando + ' en la Escuela Giner. La víspera te lo recuerdo por aquí. Si te surge algo, escríbeme y lo cambiamos.'], fin);
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 47; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Lucía rellenó la landing a las 21:47 · Bachillerato · tarde · lo antes posible');
+    apunta('Ficha creada en vuestro sistema', 'origen: anuncio «Entra y verás»');
+    apunta('Primer WhatsApp en menos de un minuto', 'también a las 21:47 de un domingo');
+    go('q1');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
