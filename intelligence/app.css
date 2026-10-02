@@ -640,3 +640,21 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .tabla tr.fin-total td { font-weight: 800; background: #FBFBF9; }
 .fin-pie { font-size: 12px; margin: 4px 2px 20px; }
 @media (max-width: 1000px) { .fin-rejilla { grid-template-columns: minmax(0, 1fr); } .fin-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fin-kpis .kpi:last-child { grid-column: 1 / -1; } }
+
+/* ---------- Informes ---------- */
+.inf-ctrl { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 12px; }
+.inf-sel { width: auto; max-width: 260px; height: 28px; font-size: 12px; }
+.inf-tabla { padding: 0; overflow: hidden; }
+.inf-tabla .tabla-caja { overflow-x: auto; }
+.inf-tabla table { min-width: 640px; }
+.inf-tabla th[scope="row"] { text-align: left; font-weight: 600; white-space: nowrap; }
+.inf-tabla td.num, .inf-tabla th.num { text-align: right; white-space: nowrap; }
+.inf-tabla th small { display: block; font-weight: 500; font-size: 10.5px; color: var(--verde-txt); }
+.inf-actual { background: #F7FBFA; }
+.inf-grupo td { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-2); background: var(--fondo); }
+.inf-nm { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; color: var(--ambar); }
+.inf-r { color: var(--lila-txt); font-weight: 700; margin-left: 2px; cursor: help; }
+.inf-aviso { background: var(--ambar-bg); color: var(--ambar); border-radius: var(--radio-s); padding: 8px 12px; margin: 0 0 10px; font-size: 12.5px; }
+.inf-nota { font-size: 12px; margin: 8px 2px 0; }
+.inf-tabla th[scope="row"] { text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--tinta); background: var(--superficie); }
+.inf-tabla td small { font-size: 11px; }
