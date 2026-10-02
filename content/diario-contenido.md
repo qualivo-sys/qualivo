@@ -899,3 +899,54 @@ Lo importante:
 ### Hipótesis
 
 - Si el lead A que no encaja se repite, la pregunta que falta en el formulario es quién va a usar el sistema. Lo apunto para el test de formularios de Growth (12 al 25-oct).
+
+## Viernes 2 de octubre de 2026
+
+### Novedades de la operación que afectan a contenido
+
+- **Nurturing por correo encendido** el 1-oct (otra sesión, commits 4ec9c22 y 71f876d):
+  - formación y clínicas;
+  - solo para leads nuevos;
+  - 6 toques: días 0, 2, 5, 8, 12 y 20;
+  - sustituye a la bienvenida.
+  - Las versiones que maqueté el 28-sep son la base.
+  - **Pendiente de comprobar:** si el DNS (SPF y DMARC) ya está arreglado. Si no, esos correos pueden caer en spam. Lo dejo escrito para Maikel.
+- **Raquel llama ahora desde el 647**, el mismo número del WhatsApp. No cambia nada del contenido publicado.
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/origen-de-los-leads/ («Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron»).
+  - Dato real, del daily de Growth del 1-oct: 36 de 38 contactos de pago aparecían como entrados por la web, porque la etiqueta la ponía también el formulario de Facebook. Además, el CRM guarda la primera fuente.
+  - Registrado en la tarjeta del blog, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/metricas-de-marketing/`.
+  - Tras la lista «Cómo construirlo», el caso del origen mal etiquetado, con enlace al artículo de hoy.
+  - Raya larga quitada.
+  - Cierre con un solo botón.
+
+### Borradores (sin publicar)
+
+- **Viernes, tesis contraria:** «Tener el dato no sirve de nada si la etiqueta dice dos cosas».
+  - Imagen: `content/infografias/2026-10-02/etiqueta-miente.png`.
+  - Texto y ficha: `content/borradores/2026-10-02-tesis-etiqueta.md`.
+
+### Decisiones que dejo tomadas
+
+- **Sin citas ni reuniones por vía.** Del mismo daily solo uso el reparto entre web y formulario. Junto a lo ya publicado, dejarían deducir la tasa de plantones.
+
+### Descartes
+
+- **El fallo de llamadas con el 663** (7 de 18 con error de conexión) como pieza. Toca el número personal de Maikel y la regla del 663.
+
+### Pendiente de Maikel
+
+1. **¿Está arreglado el DNS?** Ahora que el nurturing está encendido, es lo más urgente.
+2. **Las cuatro reglas por decidir:**
+   - resultados de clientes en redes;
+   - cámara;
+   - precio;
+   - quitar la tasa de plantones.
+3. **LinkedIn:** levantar la pausa. Hay siete borradores listos.
+
+### Hipótesis
+
+- La etiqueta de entrada única que propone Growth permitirá el lunes 5 contestar de verdad «web o formulario». Si se aprueba, el artículo de hoy tendrá una segunda parte con el dato bien medido.

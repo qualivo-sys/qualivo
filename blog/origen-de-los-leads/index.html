@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron · Qualivo</title>
+<meta name="description" content="Cómo registrar el origen de cada lead en el CRM para que la etiqueta diga por dónde entró de verdad. El caso de nuestro propio CRM el 1 de octubre: 36 de 38 contactos de pago aparecían como entrados por la web, y casi todos habían entrado por el formulario.">
+<link rel="canonical" href="https://qualivo.io/blog/origen-de-los-leads/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/blog/origen-de-los-leads/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron">
+<meta property="og:description" content="En nuestro CRM, 36 de 38 contactos de pago aparecían como entrados por la web. Casi todos habían entrado por el formulario de Facebook. Por qué pasa y cómo se evita.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron",
+      "description": "Cómo registrar el origen de cada lead en el CRM para que la etiqueta diga por dónde entró de verdad. El caso de nuestro propio CRM el 1 de octubre: 36 de 38 contactos de pago aparecían como entrados por la web, y casi todos habían entrado por el formulario.",
+      "url": "https://qualivo.io/blog/origen-de-los-leads/",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-10-02",
+      "inLanguage": "es",
+      "image": "https://qualivo.io/assets/img/og-image.png",
+      "author": { "@type": "Person", "name": "Maikel Echevarría", "url": "https://qualivo.io/#maikel" },
+      "publisher": { "@id": "https://qualivo.io/#organizacion" },
+      "about": ["origen de los leads", "atribución de leads", "fuente del lead en el CRM", "etiquetas del CRM", "medir canales de captación"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cómo sé de dónde viene cada lead?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Apuntándolo en el momento en que entra, con un campo que solo diga una cosa: por dónde entró. Canal, campaña y, si puede ser, el anuncio. Y que lo ponga el sistema, no una persona después." } },
+        { "@type": "Question", "name": "¿Por qué el origen del lead sale mal en el CRM?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Casi siempre por etiquetas que significan dos cosas a la vez, o porque el CRM guarda solo la primera fuente cuando alguien entra por dos sitios. El dato existe, pero no responde a la pregunta que le haces." } },
+        { "@type": "Question", "name": "¿Qué campos de origen necesito en el CRM?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tres: canal (anuncios, web, recomendación, outbound), campaña o anuncio, y mecanismo de entrada (formulario de la plataforma o formulario de tu web). Cada uno con un solo significado." } },
+        { "@type": "Question", "name": "¿Qué pasa si alguien entra por dos vías?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Decide una regla y apúntala: la primera, la última o las dos en campos separados. Lo que no vale es que cada herramienta haga una cosa distinta sin que nadie lo sepa." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Qualivo", "item": "https://qualivo.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://qualivo.io/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Origen de los leads", "item": "https://qualivo.io/blog/origen-de-los-leads/" }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://qualivo.io/#organizacion",
+  "name": "Qualivo",
+  "url": "https://qualivo.io/",
+  "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+  "description": "Qualivo es una consultora de growth B2B con sede en España, fundada por Maikel Echevarría, que diagnostica sistemas de captación y ventas: encuentra dónde se pierden oportunidades y dinero, prioriza por impacto y construye sistemas que se pueden medir.",
+  "areaServed": "ES",
+  "founder": { "@type": "Person", "@id": "https://qualivo.io/#maikel", "name": "Maikel Echevarría", "url": "https://qualivo.io/sobre/", "sameAs": ["https://maikelechevarria.com"] },
+  "sameAs": ["https://maikelechevarria.com"]
+}
+</script>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Agentes de IA para tu sistema comercial</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/servicios/" class="nav-link">Servicios</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contacto" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">Métricas</p>
+    <h1>Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron.</h1>
+    <p style="font-size:14.5px; color:#7A7C82; margin:-20px 0 24px">Parte de la guía sobre <a href="/blog/metricas-de-marketing/" style="font-weight:700">métricas de marketing</a>.</p>
+
+    <p class="post-lede"><strong>Saber por dónde entra cada contacto es lo que te deja decidir dónde poner el dinero.</strong> Y es fácil tener ese dato en el CRM y que diga otra cosa de lo que pasó.</p>
+
+    <p>Nos pasó a nosotros esta semana, y lo cuento porque es de los errores que no se ven hasta que alguien hace la pregunta.</p>
+
+    <div class="post-resumen">
+      <p class="rl">En 30 segundos</p>
+      <ul>
+        <li>El 1 de octubre quisimos saber cuántos contactos de pago entraron por la web y cuántos por el formulario de Facebook.</li>
+        <li>Según las etiquetas del CRM, 36 de 38 habían entrado por la web. Casi todos habían entrado por el formulario.</li>
+        <li>La causa: la etiqueta de «web» la ponía también el formulario. Y cuando alguien entraba por las dos vías, el CRM se quedaba con la primera.</li>
+        <li>El arreglo: un campo de origen con un solo significado, que pone el sistema en el momento en que entra el contacto.</li>
+      </ul>
+    </div>
+
+    <h2>Lo que nos pasó el 1 de octubre</h2>
+    <p>Teníamos una pregunta sencilla: ¿traen más reuniones los contactos que entran por nuestra web o los que entran por el formulario de Facebook? De la respuesta dependía si movíamos dinero de un lado a otro.</p>
+    <p>Fuimos al CRM. Según las etiquetas, de 38 contactos de pago, 36 habían entrado por la web y 2 por el formulario. Casi al revés de lo que había pasado.</p>
+    <p>La etiqueta que debía decir «entró por la web» la ponía también el formulario de Facebook, porque los dos acababan en el mismo proceso. Y los pocos que entraron por las dos vías aparecían con la que llegó primero. El dato estaba ahí. Solo que respondía a otra pregunta.</p>
+    <p>Lo vimos a tiempo porque otra parte del equipo, mirando los anuncios, veía justo lo contrario. Cuando dos personas miran el mismo dato y ven cosas opuestas, el problema suele estar en el dato.</p>
+
+    <div class="post-destacado"><p>Una etiqueta que significa dos cosas no mide ninguna de las dos.</p></div>
+
+    <h2>Cómo registrar el origen para que no te pase</h2>
+
+    <h2><span class="pnum">1</span>Un campo, un significado</h2>
+    <p>Separa tres cosas que se suelen mezclar: el canal (anuncios, web, recomendación, outbound), la campaña o el anuncio concreto, y el mecanismo de entrada (el formulario de la plataforma o el formulario de tu web). Cada una en su campo, y cada campo con un solo significado.</p>
+
+    <h2><span class="pnum">2</span>Que lo ponga el sistema al entrar</h2>
+    <p>El origen se apunta en el momento en que el contacto entra, y lo pone el sistema, no una persona después. Lo que se rellena a mano días más tarde se rellena mal o no se rellena.</p>
+
+    <h2><span class="pnum">3</span>Decide qué pasa cuando entra por dos sitios</h2>
+    <p>Hay gente con tanto interés que rellena el formulario de Facebook y, minutos después, el de tu web. Decide una regla y apúntala: la primera vía, la última, o las dos en campos separados. Lo que no vale es que cada herramienta haga una cosa distinta sin que nadie lo sepa.</p>
+
+    <h2><span class="pnum">4</span>Pruébalo con una pregunta antes de fiarte</h2>
+    <p>Antes de decidir nada con un dato de origen, hazle una pregunta cuya respuesta ya conozcas. Si sabes que casi todo tu dinero fue al formulario y el CRM dice que casi todos entraron por la web, el CRM está mal, no tu memoria.</p>
+
+    <div class="post-regla"><span class="ico">Regla</span><p>No muevas dinero de un canal a otro por un dato de origen que no has comprobado. Primero mira cómo se pone la etiqueta. Después, decide.</p></div>
+
+    <h2>Qué hacemos nosotros con esto</h2>
+    <p>Revisamos cómo se registra el origen de cada contacto en tu CRM, desde el formulario hasta la venta, y lo dejamos para que cada campo diga una sola cosa. Es lo que permite calcular el coste por cita y por cliente de cada canal, que explico en <a href="/blog/coste-por-lead/">coste por lead</a>.</p>
+    <p>Si quieres saber si tu CRM te dice la verdad sobre de dónde vienen tus clientes, en <a href="/diagnostico/">media hora</a> lo miramos con tus números delante.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <details class="faq-item"><summary>¿Cómo sé de dónde viene cada lead?</summary><p>Apuntándolo en el momento en que entra, con un campo que solo diga una cosa: por dónde entró. Canal, campaña y, si puede ser, el anuncio. Y que lo ponga el sistema, no una persona después.</p></details>
+    <details class="faq-item"><summary>¿Por qué el origen del lead sale mal en el CRM?</summary><p>Casi siempre por etiquetas que significan dos cosas a la vez, o porque el CRM guarda solo la primera fuente cuando alguien entra por dos sitios. El dato existe, pero no responde a la pregunta que le haces.</p></details>
+    <details class="faq-item"><summary>¿Qué campos de origen necesito en el CRM?</summary><p>Tres: canal (anuncios, web, recomendación, outbound), campaña o anuncio, y mecanismo de entrada (formulario de la plataforma o formulario de tu web). Cada uno con un solo significado.</p></details>
+    <details class="faq-item"><summary>¿Qué pasa si alguien entra por dos vías?</summary><p>Decide una regla y apúntala: la primera, la última o las dos en campos separados. Lo que no vale es que cada herramienta haga una cosa distinta sin que nadie lo sepa.</p></details>
+
+    <div class="post-cta">
+      <p class="titulo">¿Tu CRM sabe de dónde vienen tus clientes?</p>
+      <p class="sub">Media hora con tus números delante. Salimos con qué dato de origen te puedes creer y cuál no, y el plan por escrito te lo quedas en 24 horas.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px">
+        <a href="/diagnostico/" class="btn-dark btn-nav" style="background:#27BDB1; color:#04231F">Pedir el diagnóstico</a>
+      </div>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:28px 0 6px; font-weight:700">Sigue leyendo</p>
+    <p style="font-size:15px; line-height:1.9; margin:0 0 8px">
+      <a href="/blog/coste-por-lead/">Coste por lead: por qué el número que más miras es el que más engaña</a><br>
+      <a href="/blog/formulario-de-facebook-o-landing-page/">Formulario de Facebook o landing page: qué trae más citas</a><br>
+      <a href="/blog/como-calcular-cac/">Cómo calcular el coste de adquisición de cliente (CAC) sin engañarte</a>
+    </p>
+
+    <div class="post-autor">
+      <img loading="lazy" decoding="async" src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+      <div>
+        <p class="n">Maikel Echevarría</p>
+        <p class="r">Fundador de Qualivo. Construye y diagnostica sistemas de captación y ventas para empresas de formación, servicios y B2B.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
