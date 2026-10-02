@@ -204,6 +204,9 @@ escrito. Sin esto no hay piloto, hay actividad.
 | Cliente en Smartlead | **creado**, `client_id` 596297 | aísla campañas y buzones. Los 15 buzones de Qualivo van con `client_id` a null |
 | Subcuenta de GHL | **no hace falta de momento** | el traspaso es email a marc@kubysoft.com |
 | Perfil de LinkedIn | pendiente | el de Marc. Falta la URL |
+| Campaña en Smartlead | **creada y vacía**, id 4071068 | "Kubysoft · clima ES · tanda A". Horario y topes puestos. Secuencia pendiente de aprobar |
+| Copy | **borrador** en `copy/secuencia.md` | las dos versiones de cargo. Sin aprobar |
+| Filtro de ruido | **escrito**, `scripts/respuestas_aire.py` | probado contra la API. Falta que Marc apague el volcado de su CRM |
 | Sesión del agente | creada | separada de la de Qualivo a propósito |
 
 ### El dominio de envío: resuelto el 1-oct
@@ -229,6 +232,26 @@ DNS comprobado el 1-oct:
 
 La firma del correo sí dice Kubysoft y sí enlaza a `kubysoft.com`. Lo que cambia
 es por dónde sale el envío, no quién dice ser.
+
+### La campaña, montada el 2-oct
+
+Vacía a propósito. El orden no se invierte: campaña, luego secuencia, luego
+leads. Un POST de secuencia sobre una campaña que ya tiene leads dentro
+reinicia los envíos y a todos les vuelve a llegar el email 1.
+
+| ajuste | valor | por qué |
+|---|---|---|
+| Horario | Europe/Madrid, lunes a viernes, 08:00 a 17:00 | el SAT empieza temprano |
+| Leads nuevos al día | 10 | la tanda A son 60 leads por 3 correos. Si entran los 60 el día 1, el buzón se pasa de su tope de 30. A 10 al día entran en 6 y el pico se queda sobre 25 |
+| Minutos entre correos | 20 | por defecto, sirve |
+| Parar al responder | sí | la secuencia se corta sola, también las llamadas |
+| Autopausa por rebotes | 3% | con un solo buzón y sin red, esto es el freno de emergencia. Va como cadena, no como número, o la API lo rechaza |
+| Fuera de oficina | no cuenta como respuesta, y reactiva a los 7 días | arreglo nativo de parte del ruido del CRM de Marc |
+| `send_as_plain_text` | false, y así se queda | hace falta HTML para que el píxel mida aperturas. Por API responde ok y no cambia nada, así que si alguien lo toca hay que apagarlo a mano en la interfaz |
+
+`autoCategorizeOOO` y `autoReactivateOOO` son mutuamente excluyentes en
+Smartlead. Elegido reactivar, que es lo que encaja con el "reintentar a la
+vuelta" del clasificador.
 
 ### Dos cosas de este montaje que hay que vigilar
 
