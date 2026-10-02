@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Escuela Giner · plan de temporada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: informe de una columna: lo que nos contasteis, dónde se pierde, lo que montaríamos, anuncios, temporada y medidas. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#16202B; --muted:#5A6676; --line:#D9DFE7;
+  --accent:#2F5BEA; --warn:#B4541A; --good:#13795B; --tint:#EAF0FF;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --warn:#F09A63; --good:#4CC59A; --tint:#1B2740; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --warn:#F09A63; --good:#4CC59A; --tint:#1B2740; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:960px;margin-inline:auto;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5.5vw,52px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.6vw,34px);font-weight:800}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:20px;color:var(--muted);max-width:60ch;margin-top:14px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+section{display:grid;gap:18px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.flow .k{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.flow p{font-size:15px;color:var(--muted);margin-top:6px}
+.flow .bad{border-color:var(--warn)}
+.flow .bad h3{color:var(--warn)}
+.flow .goodc{border-color:var(--good)}
+.flow .goodc h3{color:var(--good)}
+.gaps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gaps > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.gaps b{font-family:var(--display)}
+.gaps p{color:var(--muted);font-size:15px;margin-top:6px}
+.q{font-weight:600;color:var(--ink)!important}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;max-width:640px}
+.msg{padding:10px 14px;border-radius:12px;max-width:85%;font-size:15px}
+.in{background:var(--bg);justify-self:start}
+.out{background:var(--tint);justify-self:end}
+.msg small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:2px}
+.cos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.co{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.co .why{font-size:15px;color:var(--muted)}
+.co .prog{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.co blockquote{margin:0;background:var(--tint);border-radius:10px;padding:12px;font-size:15px}
+.co a{color:var(--accent);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+.next{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:22px}
+.next p{color:var(--muted);margin-top:8px}
+footer{font-size:13px;color:var(--muted)}
+.cal{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.cal > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.cal .k{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.cal p{font-size:14px;color:var(--muted);margin-top:6px}
+.cal .on{border:2px solid var(--accent)}
+.cal .off{opacity:.7}
+.big{font-family:var(--display);font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stats > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.stats p{font-size:14px;color:var(--muted);margin-top:4px}
+@media (max-width:820px){.cal,.stats{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.cal,.stats{grid-template-columns:1fr}}
+@media (max-width:820px){.flow,.cos{grid-template-columns:1fr}.gaps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Para Eva Adrián y Jesús · Escuela Giner · 2 de octubre de 2026</p>
+  <h1>Que más gente pida información de Educación Infantil, y que llegue al centro con la beca encarrilada</h1>
+  <p class="lead">Lo que nos contasteis el viernes, dónde vemos que se pierden alumnos y cómo lo montaríamos por temporadas, que es como trabajáis vosotros.</p>
+</header>
+
+<p class="note">Documento de trabajo de Qualivo, hecho a partir de la reunión y de vuestra web pública. No es una página de la Escuela Giner. Los mensajes y anuncios son ejemplos para que veáis el tono; los textos finales los validáis vosotros.</p>
+
+<section>
+  <h2>Lo que nos contasteis</h2>
+  <div class="stats">
+    <div><span class="big">~4</span><p>personas piden información de Educación Infantil en los meses fuertes</p></div>
+    <div><span class="big">½</span><p>o menos llegan a visitar el centro</p></div>
+    <div><span class="big">Casi todas</span><p>las que lo visitan se acaban matriculando</p></div>
+    <div><span class="big">~3.000 €</span><p>deja cada alumno, a través de la beca</p></div>
+  </div>
+  <p>Vuestro punto fuerte es la atención personal: <b>«desde fuera damos un aspecto, pero cuando entras hay otro mucho más positivo; necesitamos que entren»</b>. Y la temporada son dos momentos, abril y septiembre.</p>
+</section>
+
+<section>
+  <h2>Dónde se pierden alumnos hoy</h2>
+  <div class="gaps">
+    <div><b>Llegan muy pocas personas</b><p>No hay anuncios y en vuestra web no hay ni píxel de Meta ni etiqueta de Google, así que nadie vuelve a ver a quien entró y se fue.</p></div>
+    <div><b>La mitad no llega a la visita</b><p>Entre la llamada y el día de la visita no pasa nada que la sostenga: ni confirmación ni recordatorio.</p></div>
+    <div><b>La beca se cae por papeles</b><p>Casi todos cumplen los requisitos, pero muchos presentan la solicitud incompleta y se la deniegan.</p></div>
+    <div><b>Fuera de horario no contesta nadie</b><p>La secretaría atiende de 10 a 13 y de 17 a 19, y agosto está cerrada. «Solicita información» de la web no tiene formulario: solo correo y teléfono.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Lo que montaríamos</h2>
+  <div class="flow">
+    <div class="goodc"><span class="k">1 · Anuncio</span><h3>Pide información</h3><p>Desde Instagram, Facebook o Google, a una página con un formulario corto o directamente a WhatsApp.</p></div>
+    <div class="goodc"><span class="k">2 · Minuto 1</span><h3>¿Cumples la beca?</h3><p>Un WhatsApp le hace las preguntas de los requisitos, de una en una, a cualquier hora.</p></div>
+    <div class="goodc"><span class="k">3 · Días 1 a 7</span><h3>Papeles completos</h3><p>Le pasamos la lista de documentos y un enlace para subirlos. Si faltan, se lo recordamos con el plazo.</p></div>
+    <div class="goodc"><span class="k">4 · Visita</span><h3>Entra en el centro</h3><p>Se agenda la visita, se le recuerda el día antes y, si no viene, se le ofrece otro día.</p></div>
+  </div>
+  <div class="chat" aria-label="Ejemplo de conversación">
+    <div class="msg out"><small>Escuela Giner · 21:47</small>¡Hola, Lucía! Soy el asistente de la Escuela Giner. Nos pides información del Grado Superior en Educación Infantil. Para decirte si puedes pedir la beca, te hago tres preguntas rápidas. ¿Vives en la Comunidad de Madrid?</div>
+    <div class="msg in"><small>Lucía · 21:49</small>Sí, en Carabanchel desde siempre</div>
+    <div class="msg out"><small>Escuela Giner · 21:49</small>Perfecto. ¿Has empezado antes este mismo ciclo en otro centro?</div>
+    <div class="msg in"><small>Lucía · 21:50</small>No, sería la primera vez</div>
+    <div class="msg out"><small>Escuela Giner · 21:50</small>Genial, con lo que me cuentas tiene buena pinta. Mañana te llama nuestra profesora del ciclo para explicarte la beca y enseñarte el centro. ¿Te va mejor por la mañana o por la tarde?</div>
+  </div>
+  <p class="note">El asistente dice siempre que es un asistente, para y pasa a una persona cuando preguntan el precio, piden visitar el centro o cuentan algo que no encaja en las preguntas. Vosotros veis todas las conversaciones y podéis entrar en cualquier momento. Los requisitos exactos de la beca los fijáis vosotros.</p>
+</section>
+
+<section>
+  <h2>Cómo serían los anuncios</h2>
+  <div class="cos">
+    <div class="co">
+      <h3>«Entra y verás»</h3>
+      <p class="why">Vídeo corto dentro del centro: aulas, prácticas con los peques, una profesora explicando. Vuestro argumento más fuerte.</p>
+      <p class="prog">Instagram y Facebook · 17-30 años · Madrid sur</p>
+      <blockquote>Desde fuera parecemos un centro más. Entra y verás. Grado Superior en Educación Infantil en Campamento, desde 1980 formando en FP. Te ayudamos con la beca, paso a paso.</blockquote>
+    </div>
+    <div class="co">
+      <h3>«¿Cumples la beca?»</h3>
+      <p class="why">Imagen o carrusel con los requisitos en lenguaje claro y un botón a WhatsApp.</p>
+      <p class="prog">Instagram y Facebook · también a sus madres y padres</p>
+      <blockquote>¿Quieres ser técnica en Educación Infantil y te preocupa el precio? En dos minutos por WhatsApp te decimos si puedes pedir la beca y te ayudamos a presentarla bien.</blockquote>
+    </div>
+    <div class="co">
+      <h3>Búsqueda en Google</h3>
+      <p class="why">Para quien ya está buscando. Solo en la zona y solo en temporada.</p>
+      <p class="prog">«grado superior educación infantil madrid» · «técnico educación infantil beca» · «FP educación infantil Carabanchel»</p>
+      <blockquote>Educación Infantil con beca · Escuela Giner. Grado Superior presencial o a distancia. Te ayudamos a tramitar la beca. Visita el centro.</blockquote>
+    </div>
+  </div>
+  <p class="note">Los ángulos se prueban a la vez y cada dos o tres semanas se quedan los que traen visitas, no los que traen más clics.</p>
+</section>
+
+<section>
+  <h2>Por temporadas, no todo el año</h2>
+  <p class="lead" style="margin-top:0">Lo que nos dijisteis: nadie piensa en el curso siguiente en noviembre. Así que trabajaríamos solo cuando tiene sentido.</p>
+  <div class="cal">
+    <div><span class="k">Enero y febrero</span><h3>Preparar</h3><p>Página, mensajes, anuncios y el asistente, validados con vosotros.</p></div>
+    <div class="on"><span class="k">Marzo a mayo</span><h3>Temporada fuerte</h3><p>Anuncios activos, visitas al centro y papeles de la beca encarrilados.</p></div>
+    <div><span class="k">Junio</span><h3>Admisión</h3><p>Recordatorios de plazos a quien visitó y no ha formalizado.</p></div>
+    <div class="off"><span class="k">Julio y agosto</span><h3>Pausa</h3><p>Sin anuncios. El asistente responde y deja la visita para septiembre.</p></div>
+    <div class="on"><span class="k">Septiembre</span><h3>Última llamada</h3><p>Matrícula de última hora y modalidad a distancia.</p></div>
+  </div>
+  <p class="note">Las fechas de admisión de FP del curso 2027-28 aún no están publicadas. En 2026-27 la solicitud de Grado Superior fue del 25 de junio al 2 de julio, y la de modalidad virtual del 1 al 7 de septiembre.</p>
+</section>
+
+<section>
+  <h2>Qué mediríamos cada semana</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Medida</th><th>Por qué importa</th></tr></thead>
+    <tbody>
+      <tr><td>Personas que piden información, por anuncio</td><td>Saber qué anuncio trae gente, no clics.</td></tr>
+      <tr><td>Cuántas cumplen los requisitos de la beca</td><td>Separar a quien puede matricularse de quien no.</td></tr>
+      <tr><td>Documentación completa</td><td>Que ninguna beca se caiga por un papel.</td></tr>
+      <tr><td>Visitas al centro agendadas y hechas</td><td>Es la medida que más importa: en vuestro caso, quien entra se queda.</td></tr>
+      <tr><td>Matrículas y coste por matrícula</td><td>Lo que ha costado cada alumno frente a los ~3.000 € que deja.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<div class="next">
+  <h2>Siguiente paso</h2>
+  <p>El lunes nos decís si os encajan los números. Si os sirve, lo vemos 20 minutos con el presupuesto que tengáis en el plan de calidad y lo ajustamos a la temporada de abril.</p>
+</div>
+
+<footer>Qualivo · qualivo.io · Datos de la reunión del 2 de octubre de 2026 y de fuentes públicas consultadas ese día: escuelaginer.com y el portal de admisión de FP de la Comunidad de Madrid.</footer>
+</div>
+</body>
+</html>
