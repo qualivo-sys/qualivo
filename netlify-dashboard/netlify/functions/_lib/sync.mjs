@@ -40,6 +40,11 @@ export function target(tags, cur, ctx = {}) {
   // Documento: "Lead manual" es solo para leads de Instagram/referidos subidos a mano. Los de pago que
   // acabaron ahí (antigua columna "Leads llamados") vuelven al circuito: viejos sin resultado → Ilocalizable.
   if ((cur === 'Leads manual' || cur === 'Lead manual') && ctx.paid) return (ctx.ageDays > 30) ? 'Ilocalizable' : 'Nuevo lead (IA)';
+  // Ilocalizable por antigüedad: Calligence nunca pone la etiqueta "ilocalizable" (solo llamar/éxito/inválido/no interesado).
+  // Un lead en "Nuevo lead (IA)" al que ya se ha llamado (calligence: llamar) y sigue sin resultado tras N días
+  // (ILOCALIZABLE_DAYS, 10 por defecto; 0 desactiva) pasa a Ilocalizable para que el tablero refleje la realidad.
+  const days = Number(process.env.ILOCALIZABLE_DAYS ?? 10);
+  if (days > 0 && cur === 'Nuevo lead (IA)' && t.has('calligence: llamar') && ctx.ageDays > days) return 'Ilocalizable';
   return null;
 }
 
@@ -55,6 +60,7 @@ export function tagFixes(tags, cur) {
   for (const old of ['entrevistada', 'entrevistado']) if (t.has(old)) { if (!t.has('entrevista-realizada') && !add.includes('entrevista-realizada')) add.push('entrevista-realizada'); remove.push(old); }
   if (cur === 'Baja' && !t.has('baja')) add.push('baja');
   if (cur === 'Entrev. nula' && !t.has('entrevista nula')) add.push('entrevista nula');
+  if (cur === 'Ilocalizable' && !t.has('ilocalizable')) add.push('ilocalizable');
   const tieneMotivo = [...MOTIVOS].some((x) => t.has(x));
   if (cur === 'No interesa' && !tieneMotivo && !t.has('motivo pendiente')) add.push('motivo pendiente');
   if (t.has('motivo pendiente') && (cur !== 'No interesa' || tieneMotivo)) remove.push('motivo pendiente');
