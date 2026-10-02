@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Academia Boston · maqueta de landing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: una sola columna de venta con el formulario arriba a la derecha; barra fija de WhatsApp en móvil. */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#13203A; --muted:#55627A; --line:#DCE2EC;
+  --accent:#F2B705; --accent-ink:#13203A; --tram:#0E7C74; --soft:#FFF6D6;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#17203A; --ink:#EEF2F8; --muted:#A7B2C6; --line:#2A3654;
+  --accent:#F5C531; --accent-ink:#13203A; --tram:#3CC2B6; --soft:#2A2A1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#17203A; --ink:#EEF2F8; --muted:#A7B2C6; --line:#2A3654;
+  --accent:#F5C531; --accent-ink:#13203A; --tram:#3CC2B6; --soft:#2A2A1C; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);padding-inline:16px;padding-block:0 96px}
+.wrap{max-width:1080px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.01em}
+h3{font-size:20px;font-weight:600}
+p{margin:0}
+.demo{background:var(--soft);color:var(--ink);border:1px dashed var(--accent);border-radius:10px;padding:8px 12px;font-size:13px;margin-block:12px 0;text-align:center}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:20px}
+.brand small{display:block;font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tel{font-weight:700;font-variant-numeric:tabular-nums}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start;padding-block:24px 48px}
+.hero > *{min-width:0}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-weight:700;font-size:14px;color:var(--tram);margin-bottom:14px}
+.kicker i{width:10px;height:10px;border-radius:50%;background:var(--tram);display:inline-block}
+.lead{font-size:20px;color:var(--muted);margin-top:16px;max-width:34ch}
+.proof{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;font-size:15px}
+.proof b{font-family:var(--display);font-size:22px;display:block;line-height:1}
+.ladder{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
+.ladder p{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.steps{display:flex;flex-wrap:wrap;gap:6px}
+.steps span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:600}
+.steps span em{font-style:normal;color:var(--muted);font-weight:400;margin-left:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 18px 40px -28px rgba(19,32,58,.35)}
+.card h2{font-size:24px}
+.card .sub{color:var(--muted);font-size:15px;margin-top:6px}
+form{display:grid;gap:14px;margin-top:18px}
+label{font-weight:700;font-size:14px;display:grid;gap:6px}
+input,select{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:13px;color:var(--muted)}
+.check input{width:auto;margin-top:4px}
+.btn{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:12px;padding:14px 18px;cursor:pointer;background:var(--accent);color:var(--accent-ink);width:100%}
+.btn:hover{filter:brightness(.96)}
+.btn.wa{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.small{font-size:13px;color:var(--muted)}
+.ok{background:var(--soft);border-radius:12px;padding:16px;margin-top:16px}
+section.block{padding-block:48px;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.grid > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.grid .age{font-family:var(--display);font-weight:800;font-size:28px;color:var(--tram)}
+.grid p{color:var(--muted);font-size:15px;margin-top:6px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;counter-reset:s}
+.how > div{min-width:0}
+.how > div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-weight:800;margin-bottom:12px}
+.how p{color:var(--muted);margin-top:6px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+blockquote p{font-size:17px}
+blockquote footer{margin-top:12px;font-size:14px;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:2px 6px;margin-bottom:10px}
+details{border-bottom:1px solid var(--line);padding-block:14px}
+summary{cursor:pointer;font-weight:700;font-size:18px}
+details p{color:var(--muted);margin-top:8px;max-width:65ch}
+.final{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.final > *{min-width:0}
+.where{color:var(--muted);margin-top:12px}
+footer.foot{padding-block:32px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);display:none;gap:10px;z-index:5}
+.bar .btn{padding:12px}
+@media (max-width:860px){
+  .hero,.final{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .how,.quotes{grid-template-columns:1fr}
+  .bar{display:flex}
+}
+@media (prefers-reduced-motion:no-preference){.btn{transition:filter .15s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="demo">Maqueta de ejemplo preparada por Qualivo para Academia Boston. No es su web: el formulario no envía nada.</p>
+
+  <header class="top">
+    <div class="brand">Academia Boston<small>Inglés en Vitoria-Gasteiz</small></div>
+    <div class="tel">945 288 655</div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <div class="kicker"><i></i>Al lado de la parada del tranvía, en el centro de Vitoria</div>
+      <h1>Inglés para niños de 3 a 18 años, en el grupo que le toca de verdad</h1>
+      <p class="lead">Le hacemos una prueba de nivel, te decimos su grupo y su horario, y sigues cada clase desde la app de la academia.</p>
+      <div class="proof">
+        <div><b>14</b>años enseñando inglés</div>
+        <div><b>1.000</b>estudiantes</div>
+        <div><b>12</b>profesores</div>
+      </div>
+      <div class="ladder">
+        <p>El camino hasta certificar Cambridge</p>
+        <div class="steps">
+          <span>Starters<em>7-8</em></span><span>Movers<em>8-10</em></span><span>Flyers<em>10-12</em></span><span>A2 Key<em>12+</em></span><span>B1 Preliminary</span><span>B2 First</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="reserva">
+      <h2>Reserva su prueba de nivel</h2>
+      <p class="sub">Tres datos y te escribimos por WhatsApp en un minuto, también en fin de semana.</p>
+      <form id="f" novalidate>
+        <label for="nombre">Tu nombre<input id="nombre" name="nombre" autocomplete="given-name" placeholder="Marta" required></label>
+        <label for="tel">Tu WhatsApp<input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="600 000 000" required></label>
+        <label for="quien">¿Para quién son las clases?
+          <select id="quien" name="quien" required>
+            <option value="">Elige una opción</option>
+            <option>Mi hijo/a de 3 a 7 años</option>
+            <option>Mi hijo/a de 8 a 11 años</option>
+            <option>Mi hijo/a de 12 a 18 años</option>
+            <option>Para mí</option>
+          </select></label>
+        <label for="busca">¿Qué buscáis?
+          <select id="busca" name="busca" required>
+            <option value="">Elige una opción</option>
+            <option>Inglés general</option>
+            <option>Preparar Cambridge</option>
+            <option>Apoyo escolar</option>
+          </select></label>
+        <label class="check" for="priv"><input id="priv" type="checkbox" required>Acepto que Academia Boston me escriba sobre las clases. Puedo darme de baja cuando quiera.</label>
+        <button class="btn" type="submit">Quiero la prueba de nivel</button>
+        <div class="or">o</div>
+        <button class="btn wa" type="button" id="wa1">Escríbenos por WhatsApp</button>
+        <p class="small">Sin compromiso. Te decimos su nivel y su grupo antes de apuntarte.</p>
+      </form>
+      <div class="ok" id="ok" hidden role="status"><b>¡Listo!</b> En la web real, aquí sale: «En un minuto te escribimos por WhatsApp desde el 945 288 655 para reservar la prueba de nivel».</div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>Un grupo para cada edad</h2>
+    <div class="grid">
+      <div><div class="age">3-7</div><h3>Primeros pasos</h3><p>Juegos, canciones y rutinas en inglés desde el primer día.</p></div>
+      <div><div class="age">8-11</div><h3>Primaria</h3><p>Leer, escribir y hablar, con los exámenes Starters, Movers y Flyers.</p></div>
+      <div><div class="age">11-18</div><h3>ESO y Bachillerato</h3><p>Nivel para el instituto y preparación de A2 Key, B1 y B2 First.</p></div>
+      <div><div class="age">+18</div><h3>Adultos</h3><p>En grupo, individual u online. Para el trabajo o para viajar.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Cómo funciona</h2>
+    <div class="how">
+      <div><h3>Prueba de nivel</h3><p>Unos minutos en la academia para saber dónde está de verdad, no solo por el curso.</p></div>
+      <div><h3>Su grupo y su horario</h3><p>Te proponemos el grupo de su nivel en las tardes que te vienen bien.</p></div>
+      <div><h3>Sigues cada clase</h3><p>Con la app de la academia hablas con su profesor y ves qué han hecho.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Lo que cuentan las familias</h2>
+    <div class="quotes">
+      <blockquote><span class="tag">Testimonio de ejemplo</span><p>«Venía obligado y ahora es la clase que no quiere perderse. En junio sacó el Movers.»</p><footer>Madre de Iker, 9 años</footer></blockquote>
+      <blockquote><span class="tag">Testimonio de ejemplo</span><p>«Lo que más valoro es la app: sé qué ha hecho cada día sin tener que preguntarle.»</p><footer>Padre de Nora, 12 años</footer></blockquote>
+      <blockquote><span class="tag">Testimonio de ejemplo</span><p>«Me dijeron su nivel real el primer día y la pusieron en el grupo justo.»</p><footer>Madre de Ane, 15 años</footer></blockquote>
+    </div>
+    <p class="small" style="margin-top:12px">Se sustituyen por testimonios reales grabados con familias de la academia.</p>
+  </section>
+
+  <section class="block">
+    <h2>Preguntas de las familias</h2>
+    <details><summary>¿Cuánto cuesta?</summary><p>Depende del grupo y de las horas a la semana. Te lo decimos con la prueba de nivel, cuando sepamos qué grupo le toca. [A confirmar con la academia: precio visible o tras la prueba.]</p></details>
+    <details><summary>¿Cuántos alumnos hay por grupo?</summary><p>[A confirmar con la academia.]</p></details>
+    <details><summary>¿Qué horarios tenéis?</summary><p>Tardes de lunes a viernes. Te proponemos dos opciones en el WhatsApp según su grupo. [Franjas a confirmar.]</p></details>
+    <details><summary>¿Y si no le gusta?</summary><p>Lo hablamos contigo y buscamos otro grupo u horario que le encaje.</p></details>
+    <details><summary>¿Hay clases online?</summary><p>Sí, para adultos y para preparar Cambridge.</p></details>
+  </section>
+
+  <section class="block final">
+    <div>
+      <h2>¿Empezamos con su prueba de nivel?</h2>
+      <p class="where">Estamos en el centro de Vitoria, al lado de la parada del tranvía. Teléfono 945 288 655.</p>
+    </div>
+    <div><a class="btn" href="#reserva" style="display:block;text-align:center;text-decoration:none">Reservar la prueba de nivel</a></div>
+  </section>
+
+  <footer class="foot">Maqueta de ejemplo de Qualivo · datos de la academia tomados de su web (14 años, 1.000 estudiantes, 12 profesores) · lo marcado entre corchetes se confirma con la academia.</footer>
+</div>
+
+<div class="bar">
+  <a class="btn" href="#reserva" style="text-align:center;text-decoration:none">Prueba de nivel</a>
+  <button class="btn wa" type="button" id="wa2">WhatsApp</button>
+</div>
+
+<script>
+(function(){
+  var f=document.getElementById('f'), ok=document.getElementById('ok');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var falta=[].slice.call(f.querySelectorAll('[required]')).filter(function(x){return x.type==='checkbox'?!x.checked:!x.value.trim();});
+    f.querySelectorAll('[required]').forEach(function(x){x.style.borderColor='';});
+    if(falta.length){falta.forEach(function(x){x.style.borderColor='var(--accent)';});falta[0].focus();return;}
+    ok.hidden=false; ok.scrollIntoView({block:'nearest'});
+  });
+  ['wa1','wa2'].forEach(function(id){document.getElementById(id).addEventListener('click',function(){
+    ok.hidden=false; ok.innerHTML='<b>WhatsApp</b> En la web real, este botón abre un chat con el 945 288 655 y el agente contesta al momento con la primera pregunta: «¿Las clases son para tu hijo/a o para ti?».';
+    document.getElementById('reserva').scrollIntoView({block:'nearest'});
+  });});
+})();
+</script>
+</body>
+</html>

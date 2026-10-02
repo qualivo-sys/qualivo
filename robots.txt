@@ -38,3 +38,4 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://qualivo.io/sitemap.xml
+Disallow: /propuestas/
