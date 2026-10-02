@@ -227,3 +227,40 @@ Asunto:
 Vista previa:
 Cuerpo:
 ```
+
+---
+
+## 9 · WF11 · Recordatorios de cita (24 h y 2 h)
+
+La medida pendiente con más impacto: el plantón lleva dos meses entre el 55 % y
+el 58 %, y en el formulario instantáneo de Meta llega al 75 %. Los recordatorios
+son la palanca estándar contra eso y no cuestan nada.
+
+```
+Create a workflow named "WF11 · Recordatorios de cita".
+
+Trigger: Appointment Status is "Confirmed", on all calendars. Allow re-entry.
+
+Then, as a straight line:
+  Wait until 24 hours before the appointment start time
+  Send SMS/WhatsApp to the contact with this text:
+    "Hola {{contact.first_name}}, te recordamos tu entrevista con la Escola
+     Aeronàutica mañana a las {{appointment.start_time}}. Si no te va bien,
+     respóndenos a este mensaje y la cambiamos sin problema."
+  Wait until 2 hours before the appointment start time
+  Send SMS/WhatsApp to the contact with this text:
+    "{{contact.first_name}}, tu entrevista es hoy a las {{appointment.start_time}}.
+     Te esperamos. Si surge algo, respóndenos aquí."
+  End workflow.
+
+Add a Goal that ends the workflow if the appointment status changes to
+Cancelled, No Show or Showed, so nobody gets a reminder for an appointment
+that no longer applies.
+```
+
+**Por qué pedir que respondan y no solo avisar:** quien contesta «no puedo»
+libera el hueco y se puede reagendar. Hoy ese plantón se pierde entero y además
+ocupa una franja que nadie aprovecha.
+
+**Para la cita presencial, además**, conviene mandar en el de 24 h la dirección
+exacta y cómo llegar: la presencial planta al 74 % contra el 44 % de la online.
