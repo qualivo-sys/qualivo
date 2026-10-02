@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Sistema comercial para equipos de ventas · Qualivo</title>
+<meta name="description" content="Una capa de IA sobre tu CRM: cada contacto con su siguiente acción, cada comercial con su tarea y dirección con su panel. Genera cómo quedaría en tu equipo.">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<style>
+/* Layout: landing de una columna para direcciones comerciales; el generador ocupa el centro y pinta el sistema aplicado a su empresa. */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/montserrat-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/montserrat-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0}
+:root{
+  --ink:#101319; --soft:#3D4148; --muted:#5A5E66; --line:#E3E5EA; --bg:#FFFFFF; --panel:#F6F7F9;
+  --teal:#0E7C74; --teal-b:#27BDB1; --teal-p:#E3F7F5; --coral:#E8590C; --lilac:#EFECFB;
+  --font:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#EEF0F3; --soft:#C9CDD3; --muted:#9AA0A8; --line:#2A2F37; --bg:#0D1014; --panel:#151A20;
+  --teal:#3CC9BD; --teal-b:#27BDB1; --teal-p:#123430; --coral:#FF8A4C; --lilac:#211E33; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#EEF0F3; --soft:#C9CDD3; --muted:#9AA0A8; --line:#2A2F37; --bg:#0D1014; --panel:#151A20;
+  --teal:#3CC9BD; --teal-b:#27BDB1; --teal-p:#123430; --coral:#FF8A4C; --lilac:#211E33; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+h1,h2,h3{line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(32px,5.4vw,56px);font-weight:800}
+h2{font-size:clamp(25px,3.6vw,38px);font-weight:800}
+h3{font-size:18px;font-weight:700}
+p{margin:0}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:16px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:12px}
+.logo{font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+.logo span{color:var(--teal)}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:16px;border:0;border-radius:12px;padding:13px 20px;cursor:pointer;text-decoration:none;text-align:center;background:var(--teal);color:#fff}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,label:focus-within{outline:3px solid var(--teal-b);outline-offset:2px}
+.hero{padding-block:40px 64px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero > *{min-width:0}
+.kicker{font-weight:700;font-size:14px;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.lead{font-size:19px;color:var(--soft);margin-top:18px;max-width:46ch}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.heroCard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:12px}
+.task{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.task small{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.task b{font-size:15px}
+.task span{font-size:14px;color:var(--soft)}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--teal-p);color:var(--teal)}
+.pill.c{background:color-mix(in srgb,var(--coral) 14%,transparent);color:var(--coral)}
+section{padding-block:64px;border-top:1px solid var(--line)}
+.sub{color:var(--soft);margin-top:12px;max-width:62ch;font-size:17px}
+.pains{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.pains > div{background:var(--panel);border-radius:14px;padding:18px;min-width:0}
+.pains b{display:block;font-size:16px;margin-bottom:6px}
+.pains p{color:var(--soft);font-size:14px}
+/* Generador */
+.gen{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:24px;margin-top:28px;align-items:start}
+form.g{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:16px;position:sticky;top:12px}
+.f{display:grid;gap:6px;font-weight:700;font-size:14px}
+.f input[type=text],.f select{font:inherit;font-size:16px;font-weight:500;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
+legend{font-weight:700;font-size:14px;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 11px;font-size:14px;font-weight:500;cursor:pointer}
+.chips input{accent-color:var(--teal)}
+.chips label:has(input:checked){border-color:var(--teal);background:var(--teal-p)}
+.range{display:flex;align-items:center;gap:12px}
+.range input{flex:1;accent-color:var(--teal)}
+.range output{font-weight:800;font-size:20px;min-width:2ch;text-align:right;color:var(--teal)}
+.out{display:grid;gap:16px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
+.card .lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.big{font-size:clamp(20px,2.4vw,26px);font-weight:800;line-height:1.25}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:stretch}
+.flow > div{background:var(--panel);border-radius:12px;padding:12px;font-size:13px;min-width:0;position:relative}
+.flow > div b{display:block;font-size:14px;margin-bottom:4px}
+.flow > div:not(:last-child)::after{content:'›';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:800}
+.flow .hl{background:var(--teal-p)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.metrics > div{background:var(--panel);border-radius:10px;padding:10px 12px;font-size:13px;min-width:0}
+.metrics b{display:block;font-size:14px}
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.weeks > div{border-left:3px solid var(--teal);padding:2px 0 2px 10px;font-size:13px;min-width:0}
+.weeks b{display:block;font-size:14px}
+.note{font-size:13px;color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:16px;padding:28px;color:var(--muted);text-align:center}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:28px;counter-reset:s}
+.steps > div{min-width:0}
+.steps > div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;margin-bottom:12px}
+.steps p{color:var(--soft);font-size:15px;margin-top:6px}
+.semi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.semi > div{border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.semi p{color:var(--soft);font-size:15px;margin-top:6px}
+details{border-bottom:1px solid var(--line);padding-block:16px}
+summary{cursor:pointer;font-weight:700;font-size:17px}
+details p{color:var(--soft);margin-top:8px;max-width:70ch}
+.final{background:var(--ink);color:var(--bg);border-radius:22px;padding:40px;display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;margin-block:64px}
+.final p{color:color-mix(in srgb,var(--bg) 75%,var(--ink));margin-top:10px}
+.final .btn{background:var(--teal-b);color:#04231F}
+footer{padding-block:28px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.draft{background:var(--lilac);font-size:13px;text-align:center;padding:6px 12px}
+@media (max-width:900px){.hero,.gen,.final{grid-template-columns:1fr}form.g{position:static}.pains,.steps{grid-template-columns:1fr 1fr}.semi{grid-template-columns:1fr}.flow,.weeks{grid-template-columns:1fr 1fr}.flow > div:not(:last-child)::after{display:none}.metrics{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.pains,.steps,.flow,.weeks,.metrics{grid-template-columns:1fr}.final{padding:26px}}
+
+/* v2 · efectos: hero oscuro animado, antes/después y demo semiautomática */
+.xhero{position:relative;overflow:hidden;background:#08090C;color:#EEF0F3}
+.xhero .glow{position:absolute;right:-220px;top:-260px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.30),rgba(39,189,177,0) 62%);pointer-events:none}
+.xhero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.xhero .wrap{position:relative}
+.xhero .logo img{display:block;height:40px;width:auto}
+.xhero .kicker{color:#7CE8DD}
+.xhero h1{color:#fff}
+.xhero .hl{color:#27BDB1}
+.xhero .lead{color:#B7C0CC}
+.btn.ghost.dark{color:#EEF0F3;border-color:rgba(255,255,255,.25)}
+.glowbtn{background:#27BDB1;color:#04231F;box-shadow:0 0 0 0 rgba(39,189,177,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(39,189,177,.55)}70%{box-shadow:0 0 0 16px rgba(39,189,177,0)}100%{box-shadow:0 0 0 0 rgba(39,189,177,0)}}
+.machine{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:16px;display:grid;gap:10px;backdrop-filter:blur(6px);min-height:470px;align-content:start}
+.mhead{display:flex;align-items:center;gap:6px;font-size:13px;color:#B7C0CC}
+.mhead b{margin-left:6px;font-weight:700;color:#EEF0F3}
+.dot{width:10px;height:10px;border-radius:50%}.dot.r{background:#FF5F57}.dot.y{background:#FEBC2E}.dot.g{background:#28C840}
+.live{margin-left:auto;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#27BDB1;display:inline-flex;align-items:center;gap:6px}
+.live::before{content:'';width:7px;height:7px;border-radius:50%;background:#27BDB1;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.inbox,.tasks{display:grid;gap:8px;min-height:120px;align-content:start}
+.chip{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px 12px;font-size:13.5px;color:#D8DDE4;animation:inl .5s ease both}
+.chip i{font-style:normal;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;padding:2px 7px;background:rgba(255,255,255,.1);color:#fff;flex:none}
+.chip.out{animation:outd .5s ease both}
+@keyframes inl{from{opacity:0;transform:translateX(-24px) rotate(-1.5deg)}to{opacity:1;transform:none}}
+@keyframes outd{to{opacity:0;transform:translateY(46px) scale(.9)}}
+.layer{position:relative;height:30px;border-radius:999px;background:linear-gradient(90deg,rgba(39,189,177,.08),rgba(39,189,177,.35),rgba(39,189,177,.08));background-size:200% 100%;animation:scan 2.2s linear infinite;display:grid;place-items:center;font-size:12px;font-weight:700;color:#7CE8DD;letter-spacing:.04em}
+@keyframes scan{to{background-position:-200% 0}}
+.tk{background:#fff;color:#101319;border-radius:12px;padding:10px 12px;display:grid;gap:2px;animation:pop .45s cubic-bezier(.2,1.4,.4,1) both;border-left:4px solid #27BDB1}
+.tk small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#0E7C74}
+.tk b{font-size:14px}
+@keyframes pop{from{opacity:0;transform:scale(.85) translateY(-10px)}to{opacity:1;transform:none}}
+.kpi{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.12);padding-top:10px;font-size:13px;color:#B7C0CC}
+.kpi b{font-size:28px;font-weight:900;color:#FF8A4C;transition:color .4s}
+.kpi b.zero{color:#27BDB1}
+.note.dark{color:#7A808A}
+/* antes / después */
+.ba{position:relative;margin-top:28px;border-radius:18px;overflow:hidden;border:1px solid var(--line);height:360px;user-select:none}
+.ba-pane{position:absolute;inset:0;display:grid;place-items:center;padding:24px}
+.before{background:#F3F1EC}
+.after{background:#08090C;clip-path:inset(0 0 0 var(--x))}
+.sheet{width:min(560px,100%);background:#fff;border:1px solid #D9D6CE;font-family:Calibri,Arial,sans-serif;color:#333;font-size:14px;transform:rotate(-1deg);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.sh-h{background:#1D6F42;color:#fff;padding:6px 10px;font-size:12px}
+.sheet table{width:100%;border-collapse:collapse}.sheet th,.sheet td{border:1px solid #E1E1E1;padding:7px 8px;text-align:left}.sheet th{background:#F2F2F2}
+.sheet td:last-child{color:#B23B1E;font-style:italic}
+.sh-f{padding:6px 10px;font-size:12px;color:#888}
+.panel{width:min(560px,100%);color:#EEF0F3;display:grid;gap:12px}
+.pn-h{display:flex;justify-content:space-between;align-items:center}.pn-h b{font-size:17px}
+.pn-row{display:grid;grid-template-columns:70px 1fr 190px;align-items:center;gap:12px;font-size:14px}
+.pn-row i{height:10px;border-radius:99px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+.pn-row i::after{content:'';position:absolute;inset:0;width:var(--w);background:#27BDB1;border-radius:99px}
+.pn-row.warn i::after{background:#FF8A4C}
+.pn-row em{font-style:normal;color:#B7C0CC;font-size:13px}
+.pn-f{font-size:13px;color:#FF8A4C;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--x);width:3px;background:#27BDB1;transform:translateX(-50%);pointer-events:none}
+.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#27BDB1;color:#04231F;font-weight:900;border-radius:999px;padding:8px 12px;font-size:14px;white-space:nowrap;box-shadow:0 0 0 6px rgba(39,189,177,.25)}
+.ba-lab{position:absolute;top:12px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:999px;pointer-events:none}
+.ba-lab.l{left:12px;background:#fff;color:#B23B1E}.ba-lab.r{right:12px;background:#27BDB1;color:#04231F}
+/* demo semiautomática */
+.demoSec{background:var(--panel)}
+.demo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px;margin-top:28px;align-items:start}
+.crm{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;box-shadow:0 20px 50px rgba(16,19,25,.08)}
+.crm-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px}.crm-h span{font-size:13px;color:var(--muted)}
+.msg{border-radius:14px;padding:12px 14px;font-size:15px;max-width:92%;display:grid;gap:4px}
+.msg small{font-size:12px;color:var(--muted);font-weight:600}
+.msg.in{background:var(--panel)}
+.msg.draft{justify-self:end;background:var(--teal-p);border:2px dashed var(--teal);transition:all .4s}
+.msg.draft.sent{border-style:solid;background:var(--teal);color:#fff}
+.msg.draft.sent small,.msg.draft.sent .badge{color:#fff}
+.msg.draft.paused{opacity:.45;border-color:var(--muted);text-decoration:line-through}
+.msg.human{justify-self:end;background:var(--ink);color:var(--bg)}
+.msg.human small{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.badge{font-weight:800;color:var(--teal)}
+.caret{display:inline-block;width:2px;height:1em;background:currentColor;vertical-align:-2px;margin-left:2px;animation:blink 1s infinite}
+.sys{font-size:13px;font-weight:700;color:var(--teal);background:var(--teal-p);border-radius:10px;padding:10px 12px;animation:pop .4s both}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.acts .btn{font-size:14px;padding:10px 14px}
+.acts .btn:disabled{opacity:.4;cursor:default}
+.reset{justify-self:start;background:none;border:0;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;padding:0}
+.hidden{display:none}
+.rules{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:r}
+.rules li{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:14px 16px 14px 52px;position:relative;color:var(--soft);font-size:15px;transition:all .35s}
+.rules li::before{counter-increment:r;content:counter(r);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--ink);font-weight:800;font-size:13px;transition:all .35s}
+.rules li b{color:var(--ink)}
+.rules li.on{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-p);transform:translateX(-4px)}
+.rules li.on::before{background:var(--teal);color:#fff}
+@media (max-width:900px){.demo{grid-template-columns:1fr}.machine{min-height:0}.pn-row{grid-template-columns:60px 1fr}.pn-row em{grid-column:1/-1}.ba{height:430px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<p class="draft">Borrador v2 (efectos) para revisión de Maikel · no indexada</p>
+<div class="xhero">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="top">
+      <a class="logo" href="/"><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" height="30"></a>
+      <a class="btn ghost dark" href="/llamada/">Hablar 30 minutos</a>
+    </header>
+    <div class="hero">
+      <div>
+        <p class="kicker">Para direcciones comerciales</p>
+        <h1>Cada cliente con su siguiente paso. <span class="hl">Sin cambiar de CRM.</span></h1>
+        <p class="lead">Una capa de IA encima de tu Zoho, HubSpot u Odoo. Nada sale sin vuestro ok.</p>
+        <div class="ctas">
+          <a class="btn glowbtn" href="#demo">Probar cómo funciona</a>
+          <a class="btn ghost dark" href="#generador">Verlo con mi equipo</a>
+        </div>
+      </div>
+      <div class="machine" aria-label="Animación: los mensajes que llegan se convierten en tareas con fecha">
+        <div class="mhead"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><b>Lo que entra hoy</b><span class="live">en directo</span></div>
+        <div class="inbox" id="inbox"></div>
+        <div class="layer"><span>capa de IA · ordena, apunta y avisa</span></div>
+        <div class="tasks" id="tasks"></div>
+        <div class="kpi"><span>Propuestas sin siguiente paso</span><b id="kpi">7</b></div>
+        <p class="note dark">Ejemplo con datos inventados.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Lo que nos cuentan los directores comerciales</h2>
+    <p class="sub">El CRM está. El trabajo pasa fuera de él.</p>
+    <div class="pains">
+      <div><b>El seguimiento vive en el correo</b><p>Nadie sabe qué toca hoy con cada cliente.</p></div>
+      <div><b>Las fichas se copian a mano</b><p>Cuando alguien puede.</p></div>
+      <div><b>Las propuestas se quedan sin respuesta</b><p>Nadie vuelve a escribir.</p></div>
+      <div><b>Dirección pide informes a mano</b><p>Cada lunes, en una hoja.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>El lunes de dirección, antes y después</h2>
+    <p class="sub">Arrastra la barra.</p>
+    <div class="ba" id="ba" style="--x:50%">
+      <div class="ba-pane before" aria-hidden="true">
+        <div class="sheet">
+          <div class="sh-h"><span>informe_semana_FINAL_v3.xlsx</span></div>
+          <table><tr><th>Comercial</th><th>Llamadas</th><th>Reuniones</th><th>Notas</th></tr>
+          <tr><td>Marta</td><td>¿?</td><td>3</td><td>pendiente pasar del correo</td></tr>
+          <tr><td>Jordi</td><td>12</td><td>¿?</td><td>«lo tengo en el móvil»</td></tr>
+          <tr><td>Lucía</td><td>—</td><td>—</td><td>no ha enviado</td></tr>
+          <tr><td>Pablo</td><td>8</td><td>1</td><td>revisar</td></tr></table>
+          <p class="sh-f">Actualizado: el viernes, a mano</p>
+        </div>
+      </div>
+      <div class="ba-pane after" aria-hidden="true">
+        <div class="panel">
+          <div class="pn-h"><b>Equipo comercial · esta semana</b><span class="pill">al día, solo</span></div>
+          <div class="pn-row"><span>Marta</span><i style="--w:86%"></i><em>todas con siguiente paso</em></div>
+          <div class="pn-row"><span>Jordi</span><i style="--w:64%"></i><em>2 propuestas sin respuesta</em></div>
+          <div class="pn-row warn"><span>Lucía</span><i style="--w:38%"></i><em>3 clientes sin tarea</em></div>
+          <div class="pn-row"><span>Pablo</span><i style="--w:72%"></i><em>1 reunión mañana</em></div>
+          <p class="pn-f">Aviso: 3 clientes sin siguiente paso. Asignados a Lucía.</p>
+        </div>
+      </div>
+      <input type="range" min="0" max="100" value="50" id="baRange" aria-label="Comparar antes y después">
+      <div class="ba-handle" aria-hidden="true"><span>‹ ›</span></div>
+      <span class="ba-lab l">Antes</span><span class="ba-lab r">Después</span>
+    </div>
+    <p class="note">Ejemplo con datos inventados.</p>
+  </div>
+</section>
+
+<section id="generador">
+  <div class="wrap">
+    <h2>Mira cómo quedaría en tu equipo</h2>
+    <p class="sub">Seis datos y lo ves aplicado a tu empresa. No guardamos nada.</p>
+    <div class="gen">
+      <form class="g" id="g" novalidate>
+        <label class="f">Nombre de tu empresa<input type="text" name="empresa" placeholder="Tu empresa" autocomplete="organization" maxlength="60"></label>
+        <label class="f">Sector
+          <select name="sector">
+            <option value="medios">Medios y publicidad</option>
+            <option value="formacion">Formación para empresas</option>
+            <option value="distribucion">Distribución y venta a empresas</option>
+            <option value="industrial">Servicios industriales</option>
+            <option value="software">Software y tecnología</option>
+            <option value="consultoria">Consultoría y servicios profesionales</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <div class="f">Comerciales en el equipo
+          <div class="range"><input type="range" name="comerciales" min="2" max="40" value="8" aria-label="Número de comerciales"><output id="nOut">8</output></div>
+        </div>
+        <label class="f">Tu CRM
+          <select name="crm">
+            <option>Zoho</option><option>HubSpot</option><option>Pipedrive</option><option>Odoo</option><option>Salesforce</option><option value="ninguno">Excel o ninguno</option>
+          </select>
+        </label>
+        <fieldset>
+          <legend>Por dónde te entran los clientes</legend>
+          <div class="chips">
+            <label><input type="checkbox" name="canal" value="web" checked> Web y formularios</label>
+            <label><input type="checkbox" name="canal" value="telefono" checked> Teléfono</label>
+            <label><input type="checkbox" name="canal" value="google"> Google Ads</label>
+            <label><input type="checkbox" name="canal" value="linkedin"> LinkedIn</label>
+            <label><input type="checkbox" name="canal" value="ferias"> Ferias y eventos</label>
+            <label><input type="checkbox" name="canal" value="recomendacion"> Recomendación</label>
+            <label><input type="checkbox" name="canal" value="prospeccion"> Prospección de los comerciales</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Lo que más te duele hoy</legend>
+          <div class="chips">
+            <label><input type="radio" name="dolor" value="crm" checked> El equipo no usa el CRM</label>
+            <label><input type="radio" name="dolor" value="propuestas"> Propuestas sin seguimiento</label>
+            <label><input type="radio" name="dolor" value="vision"> No veo qué hace cada comercial</label>
+            <label><input type="radio" name="dolor" value="canal"> No sé qué canal trae ventas</label>
+          </div>
+        </fieldset>
+      </form>
+      <div class="out" id="out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Cómo se pone en marcha</h2>
+    <div class="steps">
+      <div><h3>Sesión de diseño</h3><p>Hora y media con dirección.</p></div>
+      <div><h3>Conexión en unos 14 días</h3><p>CRM, correo y canales.</p></div>
+      <div><h3>Pruebas con el equipo</h3><p>Con clientes reales.</p></div>
+      <div><h3>Mejoras cada mes</h3><p>Con los números delante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo" class="demoSec">
+  <div class="wrap">
+    <h2>La IA no sustituye a tus comerciales. Pruébalo.</h2>
+    <p class="sub">Un cliente escribe. Tú decides. Pulsa los botones.</p>
+    <div class="demo">
+      <div class="crm">
+        <div class="crm-h"><b>Grupo Norte</b><span>Ficha en tu CRM</span></div>
+        <div class="msg in"><small>Cliente · 9:41</small>Hola, ¿nos podéis mandar la propuesta actualizada con la zona centro? La necesitamos para el jueves.</div>
+        <div class="msg draft" id="draft"><small><span class="badge" id="badge">Borrador · pendiente de tu ok</span></small><span id="draftText"></span></div>
+        <div class="msg human hidden" id="human"><small>Marta (comercial) · 9:58</small>Te llamo en diez minutos y lo cerramos.</div>
+        <div class="sys hidden" id="sys"></div>
+        <div class="acts" id="acts">
+          <button class="btn" id="ok" type="button">Aprobar y enviar</button>
+          <button class="btn ghost" id="edit" type="button">Editar</button>
+          <button class="btn ghost" id="takeover" type="button">Escribe una persona</button>
+        </div>
+        <button class="reset" id="reset" type="button">Volver a empezar</button>
+      </div>
+      <ol class="rules">
+        <li id="r1"><b>La IA prepara.</b> No envía nada sola.</li>
+        <li id="r2"><b>Tu comercial decide.</b> Aprueba, edita o descarta.</li>
+        <li id="r3"><b>Si entra una persona, se aparta.</b> Y le deja la ficha preparada.</li>
+        <li id="r4"><b>Todo queda en tu CRM.</b> Los datos son vuestros.</li>
+      </ol>
+    </div>
+    <p class="note">Ejemplo con datos inventados.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Tengo que cambiar de CRM?</summary><p>No. Trabajamos encima del que ya tenéis. Si hoy no usáis ninguno, os ayudamos a elegir y montarlo.</p></details>
+        <details><summary>¿Cuánto tarda?</summary><p>Unos 14 días desde la sesión de diseño hasta tenerlo conectado, y después unas semanas de pruebas con el equipo.</p></details>
+    <details><summary>¿Qué pasa con los datos de mis clientes?</summary><p>Firmamos un contrato de encargado del tratamiento. Los datos se quedan en vuestras herramientas.</p></details>
+      </div>
+</section>
+
+<div class="wrap">
+  <div class="final">
+    <div>
+      <h2>¿Lo vemos con tu CRM abierto?</h2>
+      <p>30 minutos con quien dirige el equipo.</p>
+    </div>
+    <a class="btn" href="/llamada/">Reservar 30 minutos</a>
+  </div>
+</div>
+
+<footer><div class="wrap">Qualivo · qualivo.io · maikel@qualivo.io</div></footer>
+
+<script>
+(function () {
+  var f = document.getElementById('g'), out = document.getElementById('out'), nOut = document.getElementById('nOut');
+  var SECTOR = {
+    medios: { nombre: 'medios y publicidad', criterio: 'Anunciante con campañas en tu zona o en tus soportes', vende: 'campañas', b2b: 'b2b' },
+    formacion: { nombre: 'formación para empresas', criterio: 'Empresa con plantilla en España y crédito de formación', vende: 'programas', b2b: 'formacion' },
+    distribucion: { nombre: 'distribución', criterio: 'Cliente que compra de forma recurrente o tiene varias sedes', vende: 'pedidos', b2b: 'b2b' },
+    industrial: { nombre: 'servicios industriales', criterio: 'Planta o instalación en tu zona de servicio', vende: 'contratos', b2b: 'b2b' },
+    software: { nombre: 'software', criterio: 'Empresa del tamaño de tus mejores clientes y con la herramienta que integras', vende: 'licencias', b2b: 'saas' },
+    consultoria: { nombre: 'consultoría', criterio: 'Empresa con un cambio en marcha: crecimiento, normativa, fusión', vende: 'proyectos', b2b: 'b2b' },
+    otro: { nombre: 'tu sector', criterio: 'Se parece a tus tres mejores clientes', vende: 'ventas', b2b: 'b2b' }
+  };
+  var CANAL = {
+    web: ['Web y formularios', 'Entra un formulario', 'La ficha se crea sola con el origen y la nota de encaje. Tarea «Llamar» al comercial de su zona', 'en 2 h laborables'],
+    telefono: ['Teléfono', 'Entra una llamada', 'Quien atiende rellena dos campos; el resto se completa solo. Tarea «Enviar información» al comercial', 'mismo día'],
+    google: ['Google Ads', 'Entra un contacto de Google Ads', 'La ficha guarda la campaña y la palabra que buscó. Tarea «Llamar» con prioridad', 'en 1 h laborable'],
+    linkedin: ['LinkedIn', 'Alguien responde en LinkedIn', 'Se crea o actualiza la ficha y se propone el siguiente mensaje', 'en 24 h'],
+    ferias: ['Ferias y eventos', 'Se cargan los contactos de una feria', 'Cada uno recibe nota de encaje; los de encaje alto van al comercial con un mensaje preparado', 'en 48 h'],
+    recomendacion: ['Recomendación', 'Llega una recomendación', 'Ficha con quién recomienda. Tarea «Llamar» al comercial que lleva a ese cliente', 'mismo día'],
+    prospeccion: ['Prospección', 'Una empresa da una señal', 'Ficha con la señal y su fuente, y primer mensaje escrito para que el comercial lo apruebe', 'cada lunes']
+  };
+  var DOLOR = {
+    crm: ['El equipo no usa el CRM', 'Las tareas llegan donde ya trabajan (correo y CRM) y las fichas se rellenan solas. Usarlo deja de ser trabajo extra.'],
+    propuestas: ['Propuestas sin seguimiento', 'Cada propuesta enviada crea seguimientos a los 2, 5 y 10 días. Si nadie actúa, dirección recibe el aviso.'],
+    vision: ['No ves qué hace cada comercial', 'Cada lunes tienes llamadas, reuniones, propuestas y tareas vencidas por comercial, sin pedir informes.'],
+    canal: ['No sabes qué canal trae ventas', 'Cada ficha guarda su origen desde el primer contacto. El panel cruza canal con propuestas y cierres.']
+  };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pinta() {
+    var d = new FormData(f);
+    var emp = (d.get('empresa') || '').trim() || 'Tu empresa';
+    var s = SECTOR[d.get('sector')] || SECTOR.otro;
+    var n = Number(d.get('comerciales')) || 8;
+    var crm = d.get('crm') === 'ninguno' ? 'el CRM que montemos' : d.get('crm');
+    var canales = d.getAll('canal'); if (!canales.length) canales = ['web'];
+    var dolor = DOLOR[d.get('dolor')] || DOLOR.crm;
+    nOut.textContent = n;
+    var demo = '/intelligence/?sector=' + encodeURIComponent(s.b2b) + '&empresa=' + encodeURIComponent(emp) + '&objetivo=ventas&demo=1';
+    var filas = canales.map(function (k) { var c = CANAL[k]; return '<tr><td><b>' + esc(c[1]) + '</b></td><td>' + esc(c[2]) + '</td><td>' + esc(c[3]) + '</td></tr>'; }).join('');
+    var origen = canales.map(function (k) { return esc(CANAL[k][0]); }).join(' · ');
+    var reparto = n > 12 ? 'por zona o cartera, con aviso a jefe de equipo si una tarea vence' : 'al comercial que ya lleva al cliente, o por turno si es nuevo';
+    out.innerHTML =
+      '<div class="card"><p class="lbl">' + esc(emp) + ' · ' + esc(s.nombre) + '</p>' +
+      '<p class="big">' + n + ' comerciales trabajando en ' + esc(crm) + ', cada cliente con su siguiente paso y dirección viéndolo todo.</p>' +
+      '<p class="note">Lo primero que resolveríamos: <b>' + esc(dolor[0].toLowerCase()) + '</b>. ' + esc(dolor[1]) + '</p></div>' +
+      '<div class="card"><p class="lbl">El recorrido de cada contacto</p><div class="flow">' +
+      '<div><b>Entra</b>' + origen + '</div>' +
+      '<div><b>Ficha y nota</b>Se crea sola en ' + esc(crm) + ' con origen y nota de encaje</div>' +
+      '<div class="hl"><b>Siguiente acción</b>Una tarea con fecha para un comercial, repartida ' + esc(reparto) + '</div>' +
+      '<div><b>Panel</b>Dirección lo ve cada lunes, por comercial y por canal</div></div></div>' +
+      '<div class="card"><p class="lbl">Qué tarea se crea en cada momento</p><div class="tw"><table><thead><tr><th>Cuando pasa esto</th><th>El sistema hace</th><th>Plazo</th></tr></thead><tbody>' + filas +
+      '<tr><td><b>Se envía una propuesta</b></td><td>Seguimientos preparados a los 2, 5 y 10 días; el comercial los aprueba o los manda</td><td>automático</td></tr>' +
+      '<tr><td><b>Una tarea vence sin hacerse</b></td><td>Recordatorio al comercial y, al día siguiente, aviso a dirección</td><td>24 h</td></tr>' +
+      '<tr><td><b>El cliente dice «más adelante»</b></td><td>Se guarda la fecha y vuelve solo a la lista de ese día</td><td>la que diga</td></tr></tbody></table></div></div>' +
+      '<div class="card"><p class="lbl">Nota de encaje, primera versión</p><div class="tw"><table><tbody>' +
+      '<tr><td>' + esc(s.criterio) + '</td><td>suma</td></tr>' +
+      '<tr><td>Empresa del tamaño de tus mejores clientes</td><td>suma</td></tr>' +
+      '<tr><td>Cargo que decide la compra</td><td>suma</td></tr>' +
+      '<tr><td>Actividad reciente: abre, responde, pide propuesta</td><td>suma según lo reciente</td></tr>' +
+      '<tr><td>Demasiado pequeña o fuera de tu zona</td><td>resta</td></tr></tbody></table></div>' +
+      '<p class="note">Los puntos exactos se fijan en la sesión de diseño con tus datos de ' + esc(s.vende) + ' ganados y perdidos.</p></div>' +
+      '<div class="card"><p class="lbl">Panel de dirección · cada lunes</p><div class="metrics">' +
+      '<div><b>Llamadas</b>por comercial</div><div><b>Reuniones</b>agendadas y hechas</div><div><b>Propuestas</b>enviadas y con seguimiento</div>' +
+      '<div><b>En negociación</b>número e importe</div><div><b>Tareas vencidas</b>quién y cuáles</div><div><b>Origen</b>qué canal trae ' + esc(s.vende) + '</div></div>' +
+      '<p class="note">Para ' + n + ' comerciales, en una pantalla y sin que nadie prepare un informe.</p></div>' +
+      '<div class="card"><p class="lbl">Tu primer mes</p><div class="weeks">' +
+      '<div><b>Semana 1</b>Sesión de diseño y accesos</div><div><b>Semanas 2 y 3</b>Conexión con ' + esc(crm) + ', campos y tareas</div><div><b>Semana 4</b>Pruebas con el equipo y panel</div><div><b>Después</b>Mejoras mes a mes</div></div></div>' +
+      '<div class="card"><p class="lbl">Siguiente paso</p><p>Míralo funcionando con el nombre de ' + esc(emp) + ' en la demo, o lo vemos juntos con tu CRM abierto.</p>' +
+      '<div class="ctas" style="margin-top:4px"><a class="btn" href="' + demo + '" target="_blank" rel="noopener">Ver la demo de ' + esc(emp) + '</a><a class="btn ghost" href="/llamada/">Hablar 30 minutos</a></div>' +
+      '<p class="note">La demo usa datos inventados de una empresa como la tuya.</p></div>';
+  }
+  f.addEventListener('input', pinta);
+  f.addEventListener('change', pinta);
+  f.addEventListener('submit', function (e) { e.preventDefault(); });
+  pinta();
+})();
+</script>
+<script>
+// v2 · hero: entran mensajes, pasan por la capa de IA y salen como tareas con fecha.
+(function(){
+  var inbox=document.getElementById('inbox'),tasks=document.getElementById('tasks'),kpi=document.getElementById('kpi');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var flujo=[
+    ['Correo','Re: propuesta zona centro, ¿novedades?','Hoy · 12:00','Responder a Grupo Norte con la propuesta'],
+    ['PDF','Pedido_marzo_firmado.pdf','Hoy · 13:30','Pasar pedido a ficha y avisar a almacén'],
+    ['Llamada','Perdida · 2 min · cliente de Valencia','Hoy · 16:00','Devolver llamada a Ferrer Hnos.'],
+    ['WhatsApp','«¿Al final cuándo nos veis?»','Mañana · 10:00','Cerrar visita con Talleres Ruiz'],
+    ['Formulario','Solicitud web: 40 puestos, urgente','Hoy · antes de las 12:00','Llamar: encaje alto'],
+    ['Correo','Sin respuesta desde hace 9 días','Hoy · 17:00','Seguimiento a Distribuciones Sol']
+  ];
+  var n=7,i=0;
+  function chip(f){var c=document.createElement('div');c.className='chip';c.innerHTML='<i>'+f[0]+'</i><span>'+f[1]+'</span>';c._f=f;return c}
+  for(;i<3;i++)inbox.append(chip(flujo[i]));
+  function paso(){
+    var viejo=inbox.lastElementChild;
+    inbox.prepend(chip(flujo[i%flujo.length]));i++;
+    if(!viejo)return;
+    viejo.classList.add('out');
+    setTimeout(function(){var f=viejo._f;viejo.remove();
+      var t=document.createElement('div');t.className='tk';t.innerHTML='<small>'+f[2]+'</small><b>'+f[3]+'</b>';
+      tasks.prepend(t);while(tasks.children.length>3)tasks.lastChild.remove();
+      n=n>0?n-1:7;kpi.textContent=n;kpi.classList.toggle('zero',n===0);
+    },480);
+  }
+  if(reduce){flujo.slice(0,3).forEach(function(f){var t=document.createElement('div');t.className='tk';t.innerHTML='<small>'+f[2]+'</small><b>'+f[3]+'</b>';tasks.append(t)});kpi.textContent='0';kpi.classList.add('zero');return}
+  paso();setInterval(paso,2200);
+})();
+// Antes / después
+(function(){var r=document.getElementById('baRange'),b=document.getElementById('ba');
+  function set(v){r.value=v;b.style.setProperty('--x',v+'%')}
+  r.addEventListener('input',function(){set(r.value)});
+  // Al aparecer, un barrido de lado a lado para que se vea que se arrastra.
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var hecho=false;new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting||hecho)return;hecho=true;
+    var pasos=[[0,90],[700,12],[1500,50]],t0=performance.now(),de=50;
+    (function anim(t){var dt=t-t0,k=0;while(k<pasos.length-1&&dt>pasos[k+1][0])k++;
+      if(k>=pasos.length-1){set(50);return}
+      var a=pasos[k],b2=pasos[k+1],u=(dt-a[0])/(b2[0]-a[0]);u=u<0?0:u>1?1:u;u=u*u*(3-2*u);
+      set(Math.round(a[1]+(b2[1]-a[1])*u));requestAnimationFrame(anim)})(t0);
+  })},{threshold:.5}).observe(b);})();
+// Demo semiautomática
+(function(){
+  var texto='Hola, te la mando hoy con la zona centro incluida. ¿Te viene bien que lo veamos el miércoles a las 11:00 para tenerlo antes del jueves?';
+  var d=document.getElementById('draft'),dt=document.getElementById('draftText'),badge=document.getElementById('badge'),
+      ok=document.getElementById('ok'),ed=document.getElementById('edit'),to=document.getElementById('takeover'),
+      hu=document.getElementById('human'),sys=document.getElementById('sys'),rs=document.getElementById('reset');
+  var R=[1,2,3,4].map(function(k){return document.getElementById('r'+k)});
+  var timer;
+  function on(k){R.forEach(function(e,ix){e.classList.toggle('on',ix===k)})}
+  function escribir(cb){clearInterval(timer);var k=0;dt.innerHTML='<span class="caret"></span>';
+    timer=setInterval(function(){k+=2;dt.innerHTML=texto.slice(0,k)+'<span class="caret"></span>';if(k>=texto.length){clearInterval(timer);dt.textContent=texto;cb&&cb()}},18)}
+  function inicio(){d.className='msg draft';badge.textContent='Borrador · pendiente de tu ok';hu.classList.add('hidden');sys.classList.add('hidden');
+    ok.disabled=ed.disabled=to.disabled=true;on(0);escribir(function(){ok.disabled=ed.disabled=to.disabled=false;on(1)})}
+  ok.onclick=function(){d.classList.add('sent');badge.textContent='Enviado por Marta · aprobado por ella';ok.disabled=ed.disabled=to.disabled=true;
+    sys.textContent='Guardado en la ficha de Grupo Norte. Tarea creada: «Reunión miércoles 11:00».';sys.classList.remove('hidden');on(3)};
+  ed.onclick=function(){var e=prompt('Edita el borrador antes de enviarlo:',dt.textContent);if(e){dt.textContent=e;badge.textContent='Borrador editado · pendiente de tu ok'}};
+  to.onclick=function(){d.classList.add('paused');badge.textContent='Descartado: ha entrado una persona';hu.classList.remove('hidden');ok.disabled=ed.disabled=to.disabled=true;
+    sys.textContent='El asistente se ha apartado. Ficha preparada para Marta: última propuesta, zona centro, fecha límite el jueves.';sys.classList.remove('hidden');on(2)};
+  rs.onclick=inicio;
+  var visto=false;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!visto){visto=true;inicio()}})},{threshold:.35}).observe(document.getElementById('demo'));
+})();
+</script>
+</body>
+</html>
