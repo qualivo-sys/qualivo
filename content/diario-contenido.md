@@ -916,7 +916,7 @@ Lo importante:
 ### Publicado
 
 - **Artículo nuevo:** https://qualivo.io/blog/origen-de-los-leads/ («Origen de los leads: cuando tu CRM te dice que entraron por donde no entraron»).
-  - Dato real, del daily de Growth del 1-oct: 36 de 38 contactos de pago aparecían como entrados por la web, porque la etiqueta la ponía también el formulario de Facebook. Además, el CRM guarda la primera fuente.
+  - Dato real, de los dailies de Growth del 1-oct y del 30-sep. Las etiquetas daban 36 de 38 contactos de pago entrados por la web, porque la etiqueta de web la ponía también el formulario. Otro recuento del mismo CRM daba 36 de 37 por el formulario. Además, el CRM guarda la primera fuente.
   - Registrado en la tarjeta del blog, el sitemap, llms.txt y las keywords.
 - **Reorientado:** `blog/metricas-de-marketing/`.
   - Tras la lista «Cómo construirlo», el caso del origen mal etiquetado, con enlace al artículo de hoy.
@@ -928,6 +928,24 @@ Lo importante:
 - **Viernes, tesis contraria:** «Tener el dato no sirve de nada si la etiqueta dice dos cosas».
   - Imagen: `content/infografias/2026-10-02/etiqueta-miente.png`.
   - Texto y ficha: `content/borradores/2026-10-02-tesis-etiqueta.md`.
+
+### Master Reviewer (2-oct)
+
+Informe en `content/borradores/revision-master-reviewer-2026-10-02.md`.
+
+| Pieza | Nota | Veredicto | Críticos |
+|---|---|---|---|
+| Artículo | 6 | publicar con cambios | 8 |
+| Reorientación | 7 | publicar con cambios | 1 |
+| Tesis | 5 | publicar con cambios | 5 |
+
+Aplicados todos. Los cifras del CRM cuadraban con el bus. Lo que fallaba era la historia de cómo se vio el error:
+- **Quién preguntó y cuándo.** La pregunta la hizo Paid y venía de días atrás. No la hizo Maikel ni fue «esta semana».
+- **De dónde sale «casi todos por el formulario».** Viene de otro recuento, el 36 de 37 de septiembre, y ahora se dice así.
+- **De dónde salía la lectura contraria.** Salía del mismo CRM, no «de los anuncios».
+- **«Antes de mover un euro».** Pasa a «nadie movió tráfico a la web», porque esos días sí se movió dinero por otros motivos.
+
+Imagen regenerada con «36 de 37».
 
 ### Decisiones que dejo tomadas
 
