@@ -35,7 +35,7 @@ const excludePath = arg('exclude', null);
 const outDir = arg('out', './out_diario');
 const dia = +arg('dia', Math.floor(Date.now() / 864e5));
 const conApify = !process.argv.includes('--sin-apify');
-const maxInstagram = +arg('max-instagram', 120);
+const maxInstagram = +arg('max-instagram', 200);
 mkdirSync(outDir, { recursive: true });
 
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-z]{2,24}/gi;
@@ -148,9 +148,18 @@ for (const t of twitch.values()) {
 log(`Twitch: ${twitch.size} canales en directo con 1.500+ seguidores, ${[...twitch.values()].filter((t) => t.email).length} con correo`);
 
 // ---------- 4. Instagram: biografía de los perfiles encontrados (Apify) ----------
+// Quien no enlaza Instagram suele tener el mismo usuario que en su canal: se prueba ese
+// nombre y solo se acepta si el perfil enlaza a YouTube o Twitch o lleva su nombre
+// (prueba del 2 oct: 23 de 66 eran el mismo creador y 5 traían correo).
+const usuarioCanal = (url) => ((url || '').match(/(?:youtube\.com\/@|twitch\.tv\/)([A-Za-z0-9_.]{4,30})/) || [])[1];
+const deducido = (c, platform) => { const u = usuarioCanal(c.website); return u ? { ...c, platform, redes: { ...(c.redes || {}), Instagram: `https://www.instagram.com/${u}` }, deducido: true } : null; };
+// Canales cuyo correo salió de Instagram: ya van por correo, no a mensaje directo.
+const conCorreoInstagram = new Set();
 const perfiles = [
   ...conRedes.filter((c) => c.redes.Instagram).map((c) => ({ ...c, platform: 'youtube' })),
   ...[...twitch.values()].filter((t) => !t.email && t.redes.Instagram).map((t) => ({ ...t, platform: 'twitch' })),
+  ...sinCorreo.filter((c) => !c.redes?.Instagram).map((c) => deducido(c, 'youtube')).filter(Boolean),
+  ...[...twitch.values()].filter((t) => !t.email && !t.redes.Instagram).map((t) => deducido(t, 'twitch')).filter(Boolean),
 ].slice(0, maxInstagram);
 if (conApify && perfiles.length) {
   const usernames = perfiles.map((p) => p.redes.Instagram.split('/').pop());
@@ -162,10 +171,15 @@ if (conApify && perfiles.length) {
     let n = 0;
     for (const p of perfiles) {
       const it = bio.get(p.redes.Instagram.split('/').pop().toLowerCase());
+      if (it && p.deducido) {
+        const txt = `${it.biography || ''} ${JSON.stringify(it.externalUrls || '')} ${it.externalUrl || ''} ${it.fullName || ''}`.toLowerCase();
+        const nombre = String(p.first_name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (!/youtube|twitch/.test(txt) && !(nombre.length >= 5 && txt.replace(/[^a-z0-9]/g, '').includes(nombre))) continue;
+      }
       const e = it && correos([it.biography, it.businessEmail, it.publicEmail].join(' '))[0];
       if (!e) continue;
       n++;
-      p.email_instagram = e;
+      conCorreoInstagram.add(p.website);
       conCorreo.push({ email: e, first_name: p.first_name, company_name: p.comparable_game, website: p.website, cited_video: '',
         video_detail: '', video_title: p.video_title || '', comparable_game: p.comparable_game, platform: p.platform,
         followers: p.followers, country: p.country || '', lang: p.lang, fuente: 'instagram' });
@@ -179,9 +193,9 @@ const unicos = [...new Map(conCorreo.filter((r) => r.email && !excluidos.has(r.e
 writeFileSync(`${outDir}/con_correo.csv`, toCSV(unicos, ['email', 'first_name', 'company_name', 'website', 'cited_video', 'video_detail',
   'video_title', 'comparable_game', 'platform', 'followers', 'country', 'lang', 'fuente']));
 const dm = [
-  ...conRedes.filter((c) => !c.email_instagram).map((c) => ({ nombre: c.first_name, plataforma: 'youtube', seguidores: +c.followers, idioma: c.lang,
+  ...conRedes.filter((c) => !conCorreoInstagram.has(c.website)).map((c) => ({ nombre: c.first_name, plataforma: 'youtube', seguidores: +c.followers, idioma: c.lang,
     canal: c.website, juego: c.comparable_game, video: c.video_title, redes: Object.entries(c.redes).map(([tipo, url]) => ({ tipo, url })) })),
-  ...[...twitch.values()].filter((t) => !t.email && Object.keys(t.redes).length).map((t) => ({ nombre: t.first_name, plataforma: 'twitch',
+  ...[...twitch.values()].filter((t) => !t.email && !conCorreoInstagram.has(t.website) && Object.keys(t.redes).length).map((t) => ({ nombre: t.first_name, plataforma: 'twitch',
     seguidores: t.followers, idioma: t.lang, canal: t.website, juego: t.comparable_game, video: '', redes: Object.entries(t.redes).map(([tipo, url]) => ({ tipo, url })) })),
 ];
 writeFileSync(`${outDir}/para_dm.json`, JSON.stringify(dm, null, 1));
