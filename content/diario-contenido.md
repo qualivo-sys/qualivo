@@ -939,7 +939,7 @@ Informe en `content/borradores/revision-master-reviewer-2026-10-02.md`.
 | Reorientación | 7 | publicar con cambios | 1 |
 | Tesis | 5 | publicar con cambios | 5 |
 
-Aplicados todos. Los cifras del CRM cuadraban con el bus. Lo que fallaba era la historia de cómo se vio el error:
+Aplicados todos. Las cifras del CRM cuadraban con el bus. Lo que fallaba era la historia de cómo se vio el error:
 - **Quién preguntó y cuándo.** La pregunta la hizo Paid y venía de días atrás. No la hizo Maikel ni fue «esta semana».
 - **De dónde sale «casi todos por el formulario».** Viene de otro recuento, el 36 de 37 de septiembre, y ahora se dice así.
 - **De dónde salía la lectura contraria.** Salía del mismo CRM, no «de los anuncios».
