@@ -1,0 +1,26 @@
+{
+  "slug": "ejemplo",
+  "empresa": "Empresa de ejemplo",
+  "segmento": "medios",
+  "fecha": "2 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "comerciales": 12,
+  "crm": "Zoho",
+  "vimos": [
+    { "texto": "Para pedir una campaña, vuestra web lleva a un formulario genérico que no pregunta zona, soporte ni fechas. Quien lo recibe tiene que llamar para saber lo básico.", "fuente": "vuestra web, página de contacto", "url": "" },
+    { "texto": "Tenéis una oferta abierta para dos comerciales de zona. Cuando entra gente nueva, lo que suele romperse es el reparto de las peticiones que ya estaban abiertas.", "fuente": "oferta publicada el 24 de septiembre", "url": "" },
+    { "texto": "La página de soportes muestra 14 ubicaciones, pero no hay forma de pedir presupuesto por ubicación: todo entra por el mismo formulario.", "fuente": "vuestra web, catálogo de soportes", "url": "" }
+  ],
+  "no_sabemos": "Cuántas peticiones recibís al mes, cómo las repartís y en qué CRM las apuntáis. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "¿Quién decide hoy a qué comercial va cada petición que entra, y cuánto tarda en llegarle?",
+    "Cuando un anunciante pide propuesta y no contesta, ¿quién vuelve a escribirle y cuándo?",
+    "¿Dirección ve cada lunes cuántas propuestas están abiertas y cuáles llevan más de una semana sin seguimiento?"
+  ],
+  "canales": ["Formulario de la web", "Teléfono de los soportes", "Comerciales en calle", "Recomendación de clientes"],
+  "mensaje_ejemplo": {
+    "quien": "Laura, de Empresa de ejemplo",
+    "para": "un anunciante que pidió propuesta hace 6 días",
+    "texto": "Hola, Marta. Te mandé la propuesta de las vallas de la zona centro el martes. Si os encaja la fecha de noviembre, os guardo las dos ubicaciones hasta el viernes. ¿Lo vemos 10 minutos mañana?"
+  }
+}
