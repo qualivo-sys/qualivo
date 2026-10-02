@@ -31,9 +31,9 @@ function pagina(f) {
   const demo = '/intelligence/?sector=' + encodeURIComponent(seg.demo) + '&empresa=' + encodeURIComponent(f.empresa) + '&objetivo=' + seg.objetivo + '&demo=1';
   const vimos = (f.vimos || []).map(function (v, i) {
     const fuente = v.url ? '<a href="' + esc(v.url) + '" target="_blank" rel="noopener">' + esc(v.fuente) + '</a>' : esc(v.fuente);
-    return '<div><span class="n">' + (i + 1) + '</span><p>' + esc(v.texto) + '</p><small>Fuente: ' + fuente + '</small></div>';
+    return '<div class="rv" style="--d:' + (i * 120) + 'ms"><span class="n">' + (i + 1) + '</span><span class="tag">Hecho comprobado</span><p>' + esc(v.texto) + '</p><small>Fuente: ' + fuente + '</small></div>';
   }).join('');
-  const preguntas = (f.preguntas || []).map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('');
+  const preguntas = (f.preguntas || []).map(function (p, i) { return '<li class="rv" style="--d:' + (i * 120) + 'ms"><span class="tag h">Hipótesis</span>' + esc(p) + '</li>'; }).join('');
   const canales = (f.canales || []).map(esc).join(' · ');
   const pasos = seg.recorrido.map(function (p, i) { return '<div><b>' + (i + 1) + '</b><p>' + esc(i === 0 && canales ? p + ': ' + canales : p) + '</p></div>'; }).join('');
   const m = f.mensaje_ejemplo || {};
@@ -91,17 +91,59 @@ ol.preg{margin:18px 0 0;padding-left:22px;display:grid;gap:10px;font-size:17px}
 .final{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center}
 .note{font-size:13px;color:var(--muted)}
 footer{padding-block:24px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+/* Efectos (oct-2026): portada oscura con el nombre de la cuenta, aparición al hacer scroll, recorrido que se enciende, borrador con aprobación y barra fija de reserva. */
+.xh{position:relative;overflow:hidden;background:#08090C;color:#EEF0F3;margin-inline:-16px;padding:0 16px 56px}
+.xh::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.xh .glow{position:absolute;right:-200px;top:-240px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.32),rgba(39,189,177,0) 62%);pointer-events:none}
+.xh .wrap{position:relative}
+.xh .logo img{display:block;height:36px;width:auto}
+.xh .btn.ghost{color:#EEF0F3;border-color:rgba(255,255,255,.25)}
+.xh .kicker{color:#7CE8DD}
+.xh h1{color:#fff;margin-top:6px}
+.xh .acc{display:block;color:#27BDB1;font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-.03em;margin-bottom:10px}
+.xh .acc .cur{display:inline-block;width:.08em;height:.85em;background:#27BDB1;margin-left:.06em;vertical-align:-.05em;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.xh .lead{color:#B7C0CC}
+.stamp{display:inline-flex;align-items:center;gap:8px;margin-top:22px;border:1px solid rgba(124,232,221,.35);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;color:#7CE8DD}
+.stamp::before{content:'';width:8px;height:8px;border-radius:50%;background:#27BDB1;box-shadow:0 0 0 0 rgba(39,189,177,.6);animation:pu 2s infinite}
+@keyframes pu{70%{box-shadow:0 0 0 10px rgba(39,189,177,0)}100%{box-shadow:0 0 0 0 rgba(39,189,177,0)}}
+.tag{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;padding:2px 8px;background:var(--teal-p);color:var(--teal);margin-bottom:6px}
+.tag.h{background:color-mix(in srgb,var(--coral) 14%,transparent);color:var(--coral);margin-right:8px;vertical-align:2px}
+ol.preg{list-style:none;padding-left:0}
+ol.preg li{background:var(--panel);border-radius:12px;padding:14px 16px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease var(--d,0ms),transform .6s ease var(--d,0ms)}
+.rv.in{opacity:1;transform:none}
+.pasos > div{transition:background .4s,box-shadow .4s}
+.pasos > div.on{background:var(--teal-p);box-shadow:inset 0 0 0 2px var(--teal)}
+.pasos > div.on b{background:var(--teal);color:#fff}
+.msg .b{transition:all .4s}
+.msg .b.ok{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-p)}
+.aprob{display:flex;gap:8px;flex-wrap:wrap}
+.aprob .btn{font-size:14px;padding:9px 14px}
+.aprob .btn:disabled{opacity:.45;cursor:default}
+.estado{font-size:13px;font-weight:700;color:var(--teal);min-height:1.2em}
+.sticky{position:fixed;left:12px;right:12px;bottom:12px;z-index:9;display:flex;gap:12px;align-items:center;justify-content:space-between;background:#08090C;color:#EEF0F3;border-radius:16px;padding:10px 10px 10px 16px;box-shadow:0 12px 40px rgba(0,0,0,.35);transform:translateY(140%);transition:transform .45s cubic-bezier(.2,1.2,.4,1);max-width:640px;margin-inline:auto}
+.sticky.show{transform:none}
+.sticky span{font-size:14px;font-weight:700}
+.sticky .btn{background:#27BDB1;color:#04231F;padding:10px 16px;font-size:15px;white-space:nowrap}
+footer{padding-bottom:84px}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.xh .acc .cur,.stamp::before{animation:none}.sticky{transition:none}}
 @media (max-width:760px){.pasos{grid-template-columns:1fr 1fr}.demo,.final{grid-template-columns:1fr}.demo{padding:24px}}
 @media (max-width:460px){.pasos{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="xh"><div class="glow" aria-hidden="true"></div>
 <div class="wrap">
-  <header class="top"><a class="logo" href="/">qual<span>ivo</span></a><a class="btn ghost" href="/llamada/">Hablar 30 minutos</a></header>
+  <header class="top"><a class="logo" href="/"><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" height="36"></a><a class="btn ghost" href="/llamada/">Hablar 30 minutos</a></header>
 
-  <p class="kicker">Para el equipo comercial de ${esc(f.empresa)} · ${esc(f.fecha)}</p>
-  <h1>Lo que vimos desde fuera en ${esc(f.empresa)}, y cómo quedaría resuelto</h1>
-  <p class="lead">Hemos mirado vuestra web y lo que se ve públicamente, como lo haría ${esc(seg.quien)} que os encuentra. Tres cosas comprobadas, tres preguntas y cómo lo dejaríamos. Nada de esto se ha enviado a nadie más.</p>
+  <p class="kicker">Preparado para el equipo comercial de</p>
+  <h1><span class="acc" id="acc" data-t="${esc(f.empresa)}">${esc(f.empresa)}</span>Lo que vimos desde fuera, y cómo quedaría resuelto</h1>
+  <p class="lead">Lo que ve ${esc(seg.quien)} que os encuentra. Tres hechos, tres preguntas y cómo lo dejaríamos.</p>
+  <p class="stamp">Página hecha solo para vosotros · ${esc(f.fecha)}</p>
+</div>
+</div>
+<div class="wrap">
 
   <section>
     <h2>Lo que vimos</h2>
@@ -119,7 +161,7 @@ footer{padding-block:24px;color:var(--muted);font-size:13px;border-top:1px solid
     <h2>Cómo quedaría en ${esc(f.empresa)}</h2>
     <p class="sub">Una capa encima de lo que ya usáis: cada contacto con su siguiente paso, ${esc(equipo)} con su tarea y dirección viéndolo sin pedir informes. Todo queda ${crm}.</p>
     <div class="pasos">${pasos}</div>
-    ${m.texto ? '<div class="msg"><small>Ejemplo de seguimiento, preparado por el sistema y enviado por ' + esc(m.quien || 'vuestro comercial') + ' a ' + esc(m.para || 'un cliente') + '</small><div class="b">' + esc(m.texto) + '</div><p class="note">El comercial lo aprueba o lo cambia antes de que salga. Nada se envía solo al principio.</p></div>' : ''}
+    ${m.texto ? '<div class="msg"><small>Ejemplo de seguimiento, preparado por el sistema y enviado por ' + esc(m.quien || 'vuestro comercial') + ' a ' + esc(m.para || 'un cliente') + '</small><div class="b">' + esc(m.texto) + '</div><div class="aprob"><button class="btn" type="button" id="apr">Aprobar y enviar</button><button class="btn ghost" type="button" id="cam">Lo escribo yo</button></div><p class="estado" id="est">Borrador · pendiente del ok del comercial</p><p class="note">El comercial lo aprueba o lo cambia antes de que salga. Nada se envía solo al principio.</p></div>' : ''}
   </section>
 
   <section>
@@ -134,6 +176,8 @@ footer{padding-block:24px;color:var(--muted);font-size:13px;border-top:1px solid
     <div><h2>¿Lo vemos con vuestro CRM abierto?</h2><p class="sub">30 minutos con ${esc(f.cargo_decisor || 'quien dirige el equipo')}. Os decimos dónde se está quedando negocio y cómo quedaría. Si hay alguien más que participe en una decisión así, mejor que esté desde el principio.</p></div>
     <a class="btn" href="/llamada/">Reservar 30 minutos</a>
   </section>
+
+  <div class="sticky" id="sticky" aria-hidden="true"><span>¿Lo vemos con vuestro CRM abierto?</span><a class="btn" href="/llamada/" tabindex="-1">Reservar 30 min</a></div>
 
   <footer>Qualivo · qualivo.io · maikel@qualivo.io · Página preparada para ${esc(f.empresa)} con datos públicos consultados el ${esc(f.fecha)}. No es una página de ${esc(f.empresa)}.</footer>
 </div>
@@ -153,6 +197,31 @@ footer{padding-block:24px;color:var(--muted);font-size:13px;border-top:1px solid
   document.getElementById('demo').addEventListener('click', function () { demo = true; manda(true); });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') manda(true); });
   window.addEventListener('pagehide', function () { manda(true); });
+})();
+</script>
+<script>
+// Efectos de la página (no tocan la baliza de arriba).
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var acc = document.getElementById('acc');
+  if (acc && !reduce) { var t = acc.getAttribute('data-t'), k = 0; acc.textContent = '';
+    var cur = document.createElement('span'); cur.className = 'cur';
+    (function esc1() { acc.textContent = t.slice(0, k); acc.appendChild(cur); if (k++ < t.length) setTimeout(esc1, 55); })(); }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .2 });
+  document.querySelectorAll('.rv').forEach(function (el) { if (reduce) el.classList.add('in'); else io.observe(el); });
+  var pasos = document.querySelectorAll('.pasos > div');
+  if (pasos.length && !reduce) { var j = 0, vivo = false;
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !vivo) { vivo = true;
+      setInterval(function () { pasos.forEach(function (p, ix) { p.classList.toggle('on', ix === j); }); j = (j + 1) % pasos.length; }, 1300); } }, { threshold: .4 }).observe(document.querySelector('.pasos')); }
+  var apr = document.getElementById('apr'), cam = document.getElementById('cam'), est = document.getElementById('est');
+  if (apr) { var b = document.querySelector('.msg .b');
+    apr.onclick = function () { b.classList.add('ok'); est.textContent = 'Enviado por el comercial · guardado en la ficha del cliente'; apr.disabled = cam.disabled = true; };
+    cam.onclick = function () { est.textContent = 'El sistema se aparta y deja la ficha preparada para el comercial'; apr.disabled = cam.disabled = true; }; }
+  var st = document.getElementById('sticky'), fin = document.querySelector('.final'), dm = document.querySelector('.demo');
+  function chk() { var y = window.scrollY, h = document.documentElement.clientHeight, r = fin.getBoundingClientRect(), d = dm.getBoundingClientRect();
+    var demoVisible = d.top < h && d.bottom > 0;
+    st.classList.toggle('show', y > h * .8 && r.top > h * .9 && !demoVisible); }
+  window.addEventListener('scroll', chk, { passive: true });
 })();
 </script>
 </body>
