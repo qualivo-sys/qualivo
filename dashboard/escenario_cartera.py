@@ -64,11 +64,14 @@ R_CALC  = 16                      # calculado: 16..22
 R_LECT  = 26                      # las tres lecturas: 26..29
 R_DEU   = 33                      # inventario de deuda: 33..41
 R_DEUT  = R_DEU + len(DEUDA)      # total de la deuda = 39
-R_PLAN  = 47                      # primer mes del plan
+R_SCH   = 45                      # cuadro de amortización: 45..70
+R_SALDO = R_SCH + 3               # saldo pendiente por deuda: 48..56
+R_CUOTA = R_SALDO + len(DEUDA) + 2  # cuota pagada por deuda: 59..67
+R_PLAN  = 73                      # primer mes del plan
 R_PLANF = R_PLAN + N - 1          # último mes = 60
-R_RES   = 67                      # resultado a 12 meses
-R_COND  = 71                      # las tres condiciones: 71..73
-R_SENS  = 77                      # sensibilidad: 77..82
+R_RES   = 93                      # resultado a 12 meses
+R_COND  = 97                      # las tres condiciones: 97..99
+R_SENS  = 103                     # sensibilidad: 103..108
 
 
 def token():
@@ -119,7 +122,7 @@ class Hoja:
 
 
 def construir(tok):
-    h = Hoja(tok, TITULO, filas=90, cols=26)
+    h = Hoja(tok, TITULO, filas=120, cols=26)
     V, F = [], []   # bloques de valores (RAW) y de fórmulas (USER_ENTERED)
 
     V.append(("A1", [
@@ -184,15 +187,56 @@ def construir(tok):
         [f"REPARTO DEL CAPITAL · pon SÍ en la columna F para liquidar esa deuda en octubre"]]))
     V.append((f"A{R_DEU - 1}", [
         ["Deuda", "Saldo", "Cuota/mes", "Último mes con cuota", "TIN",
-         "LIQUIDAR", "Payback (meses)", "Notas"]]))
+         "LIQUIDAR", "Payback (meses)", "Notas", "Mes en que se liquida"]]))
     V.append((f"A{R_DEU}", [[d[0], d[1], d[2], d[3], (d[4] if d[4] is not None else ""),
-                             d[5], "", d[6]] for d in DEUDA]))
+                             d[5], "", d[6], 1] for d in DEUDA]))
     F.append((f"G{R_DEU}", [[f"=IFERROR(B{R_DEU + i}/C{R_DEU + i};0)"] for i in range(len(DEUDA))]))
-    V.append((f"A{R_DEUT}", [["TOTAL", "", "", "", "", "", "", ""]]))
+    V.append((f"A{R_DEUT}", [["TOTAL", "", "", "", "", "", "", "", ""]]))
     F.append((f"B{R_DEUT}", [[f"=SUM(B{R_DEU}:B{R_DEUT-1})", f"=SUM(C{R_DEU}:C{R_DEUT-1})"]]))
     V.append((f"A{R_DEUT + 1}", [
         ["Un payback por encima del plazo que le queda significa que se extingue sola antes de "
          "amortizarse: liquidarla solo adelanta cuotas que ibas a dejar de pagar igual."]]))
+
+
+    # ------------------------------------------ cuadro de amortización ----
+    # Cómo se vacía cada deuda, mes a mes. Tres comportamientos distintos:
+    #   · aplazamiento de la AEAT (tiene «último mes»): baja lineal hasta cero
+    #     en ese mes, que es justo lo que hace un aplazamiento.
+    #   · deuda con TIN conocido: baja por cuota menos intereses del saldo vivo.
+    #   · deuda SIN TIN: baja por la cuota entera. Es optimista a propósito y se
+    #     corrige solo el día que se rellene el TIN en la columna E.
+    V.append((f"A{R_SCH}", [["DEUDA · CÓMO QUEDA MES A MES"]]))
+    V.append((f"A{R_SCH + 1}", [["Deuda"] + MESES]))
+    V.append((f"A{R_SCH + 2}", [["SALDO PENDIENTE AL CIERRE DEL MES"]]))
+    V.append((f"A{R_SALDO}", [[d[0]] for d in DEUDA]))
+    V.append((f"A{R_SALDO + len(DEUDA)}", [["TOTAL DEUDA VIVA"]]))
+    V.append((f"A{R_CUOTA - 1}", [["CUOTA QUE SE PAGA EN EL MES"]]))
+    V.append((f"A{R_CUOTA}", [[d[0]] for d in DEUDA]))
+    V.append((f"A{R_CUOTA + len(DEUDA)}", [["TOTAL CUOTA DEL MES"]]))
+
+    for j in range(len(DEUDA)):
+        d, rs, rc = R_DEU + j, R_SALDO + j, R_CUOTA + j
+        saldos, cuotas = [], []
+        for i in range(N):
+            c, p_ = chr(66 + i), chr(65 + i)
+            ant = f"$B${d}" if i == 0 else f"{p_}{rs}"
+            # lo que amortiza este mes
+            amort = (f"IF($D${d}<90;$B${d}/$D${d};"
+                     f'IF($E${d}<>"";MAX(0;$C${d}-{ant}*$E${d}/12);$C${d}))')
+            saldos.append(f'=IF(AND($F${d}="SÍ";$I${d}<={i+1});0;'
+                          f"IF({ant}<=0;0;MAX(0;{ant}-{amort})))")
+            cuotas.append(f'=IF(AND($F${d}="SÍ";$I${d}<={i+1});0;'
+                          f"IF({ant}<=0;0;IF({i+1}>$D${d};0;$C${d})))")
+        F.append((f"B{rs}", [saldos]))
+        F.append((f"B{rc}", [cuotas]))
+    F.append((f"B{R_SALDO + len(DEUDA)}",
+              [[f"=SUM({chr(66+i)}{R_SALDO}:{chr(66+i)}{R_SALDO+len(DEUDA)-1})" for i in range(N)]]))
+    F.append((f"B{R_CUOTA + len(DEUDA)}",
+              [[f"=SUM({chr(66+i)}{R_CUOTA}:{chr(66+i)}{R_CUOTA+len(DEUDA)-1})" for i in range(N)]]))
+    V.append((f"A{R_CUOTA + len(DEUDA) + 2}", [
+        ["La columna I del inventario dice en qué mes se liquida cada deuda: pon SÍ en F y el "
+         "número de mes en I (1 = oct-26). Las deudas sin TIN bajan más rápido de lo real: "
+         "rellena la columna E y el cuadro se corrige solo."]]))
 
     # -------------------------------------------------------- plan mensual ----
     CAB = ["Mes", "Clientes", "MRR inicial", "MRR nuevo", "MRR perdido", "MRR final",
@@ -227,8 +271,7 @@ def construir(tok):
         COL["O"].append(f"=IF(AND({i+1}>=INPUTS!$B$50;{i+1}<INPUTS!$B$50+INPUTS!$B$51);"
                         f"INPUTS!$B$49;0)")
         # Cuota viva: la deuda no liquidada a la que aún le quedan meses de cuota.
-        COL["P"].append(f'=SUMPRODUCT(($F${R_DEU}:$F${R_DEUT-1}<>"SÍ")'
-                        f"*($D${R_DEU}:$D${R_DEUT-1}>={i+1})*$C${R_DEU}:$C${R_DEUT-1})")
+        COL["P"].append(f"={chr(66+i)}{R_CUOTA + len(DEUDA)}")
         COL["Q"].append(f"=$B${R_CALC+1}")
         COL["R"].append(f"=INPUTS!{chr(66+i)}78" if i < 12 else "=0")
         # Beneficio de autónomo: lo que factura Qualivo menos el gasto deducible.
@@ -307,7 +350,7 @@ def construir(tok):
 
 
 # ---------------------------------------------------------------- formato ----
-def formato(tok, gid, filas=90, cols=26):
+def formato(tok, gid, filas=120, cols=26):
     C = lambda r, g, b: {"red": r, "green": g, "blue": b}
     VERDE, BLANCO, GRIS = C(.06, .42, .36), C(1, 1, 1), C(.47, .54, .52)
     AZUL, TINTA, ROJO = C(.09, .35, .55), C(.08, .13, .12), C(.64, .17, .14)
@@ -380,15 +423,31 @@ def formato(tok, gid, filas=90, cols=26):
         R(R_LECT + 1, R_LECT + 1, 1, 6, bold=True),
         R(R_LECT + 3, R_LECT + 3, 1, 6, fg=AZUL, bold=True),
         # deuda
-        R(R_DEU - 1, R_DEU - 1, 1, 8, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
+        R(R_DEU - 1, R_DEU - 1, 1, 9, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
           size=9, ha="CENTER", wrap="WRAP"),
+        R(R_DEU, R_DEUT - 1, 9, 9, bg=CREMA, fg=AZUL, bold=True, ha="CENTER", num="0"),
         R(R_DEU, R_DEUT, 2, 3, font="Roboto Mono", ha="RIGHT", num=EUR),
         R(R_DEU, R_DEUT - 1, 4, 4, font="Roboto Mono", ha="CENTER", num="0"),
         R(R_DEU, R_DEUT - 1, 5, 5, font="Roboto Mono", ha="CENTER", num=PCT),
         R(R_DEU, R_DEUT - 1, 6, 6, bg=CREMA, fg=AZUL, bold=True, ha="CENTER"),
         R(R_DEU, R_DEUT - 1, 7, 7, font="Roboto Mono", ha="RIGHT", num=DEC),
         R(R_DEU, R_DEUT - 1, 8, 8, fg=GRIS, size=9),
-        R(R_DEUT, R_DEUT, 1, 8, bg=SUAVE, bold=True),
+        R(R_DEUT, R_DEUT, 1, 9, bg=SUAVE, bold=True),
+        # cuadro de amortización
+        R(R_SCH + 1, R_SCH + 1, 1, 19, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
+          size=9, ha="CENTER"),
+        R(R_SCH + 2, R_SCH + 2, 1, 19, bg=C(.90, .93, .92), fg=VERDE, bold=True, size=10),
+        R(R_CUOTA - 1, R_CUOTA - 1, 1, 19, bg=C(.90, .93, .92), fg=VERDE, bold=True, size=10),
+        R(R_SALDO, R_SALDO + len(DEUDA), 1, 1, ha="LEFT"),
+        R(R_CUOTA, R_CUOTA + len(DEUDA), 1, 1, ha="LEFT"),
+        R(R_SALDO, R_SALDO + len(DEUDA) - 1, 2, 19, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_CUOTA, R_CUOTA + len(DEUDA) - 1, 2, 19, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_SALDO + len(DEUDA), R_SALDO + len(DEUDA), 1, 19, bg=C(.92, .96, .94), fg=VERDE,
+          bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_CUOTA + len(DEUDA), R_CUOTA + len(DEUDA), 1, 19, bg=C(.92, .96, .94), fg=VERDE,
+          bold=True, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_CUOTA + len(DEUDA) + 2, R_CUOTA + len(DEUDA) + 2, 1, 12, fg=GRIS, size=9,
+          italic=True),
         R(R_DEUT + 1, R_DEUT + 1, 1, 10, fg=GRIS, size=9, italic=True),
         # plan
         R(R_PLAN - 1, R_PLAN - 1, 1, 24, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
@@ -436,7 +495,7 @@ def formato(tok, gid, filas=90, cols=26):
         R(R_SENS + 7, R_SENS + 7, 1, 10, fg=GRIS, size=9, italic=True),
     ]
     # cabeceras de sección
-    for r in (R_PAL - 1, R_CALC - 1, R_LECT - 2, R_DEU - 2, R_PLAN - 2,
+    for r in (R_PAL - 1, R_CALC - 1, R_LECT - 2, R_DEU - 2, R_SCH, R_PLAN - 2,
               R_RES - 1, R_COND - 1, R_SENS - 2):
         req.append(R(r, r, 1, 24, bg=C(.92, .95, .94), fg=VERDE, bold=True, size=12))
 
@@ -460,6 +519,15 @@ def formato(tok, gid, filas=90, cols=26):
                                           "values": [{"userEnteredValue": "5000"}]},
                             "format": {"backgroundColor": C(.98, .87, .86),
                                        "textFormat": {"foregroundColor": ROJO, "bold": True}}}},
+            "index": 0}},
+        {"addConditionalFormatRule": {"rule": {
+            "ranges": [{"sheetId": gid, "startRowIndex": R_SALDO - 1,
+                        "endRowIndex": R_SALDO + len(DEUDA) - 1,
+                        "startColumnIndex": 1, "endColumnIndex": 19}],
+            "booleanRule": {"condition": {"type": "NUMBER_EQ",
+                                          "values": [{"userEnteredValue": "0"}]},
+                            "format": {"backgroundColor": C(.93, .97, .94),
+                                       "textFormat": {"foregroundColor": C(.70, .76, .74)}}}},
             "index": 0}},
         # validación: la columna LIQUIDAR solo admite SÍ o NO
         {"setDataValidation": {
