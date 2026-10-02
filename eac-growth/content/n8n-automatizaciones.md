@@ -101,3 +101,66 @@ antes de que lo notara el cliente.
 - Pasar las reglas de requisitos de Javier y los nombres reales de los campos.
 - Crear la columna «Matriculado»: sin ella el evento de más valor nunca se dispara,
   y es justo el que mejor enseñaría a Meta a quién buscar.
+
+---
+
+## Los dos workflows de GHL que disparan todo esto
+
+Para el asistente de IA de GoHighLevel. En inglés porque obedece mejor, con los
+nombres de etapa en español y literales: los busca tal cual en la cuenta.
+
+### A · `WF9 · Avisar a Meta de la calidad del lead`
+
+```
+Create a workflow named "WF9 · Avisar a Meta de la calidad del lead".
+
+Trigger: Opportunity Stage Changed, in pipeline "Pipeline".
+Allow re-entry (a contact can move through several stages).
+
+Single action, no conditions — a Webhook:
+  Method: POST
+  URL: https://qualivo.app.n8n.cloud/webhook/eac-calidad-lead
+  Content type: JSON
+  Body:
+    contactId  → the contact id
+    stage      → the new pipeline stage name
+    email      → the contact email
+    phone      → the contact phone
+    campaign   → the contact attribution campaign, if available
+    ad         → the contact attribution ad content, if available
+
+End workflow.
+```
+
+El filtrado lo hace n8n: si la etapa no es Cita Programada, Entrevistado o
+Matriculado, no envía nada. No hace falta poner condiciones en GHL.
+
+### B · `WF10 · Precalificar lead nuevo`
+
+```
+Create a workflow named "WF10 · Precalificar lead nuevo".
+
+Trigger: Opportunity Created, in pipeline "Pipeline". No re-entry.
+
+Single action, no conditions — a Webhook:
+  Method: POST
+  URL: https://qualivo.app.n8n.cloud/webhook/eac-precalificacion
+  Content type: JSON
+  Body:
+    contactId      → the contact id
+    opportunityId  → the opportunity id
+    firstName, lastName
+    programa       → the custom field with the course they asked about
+    provincia      → the contact city or state
+    nivel_ingles   → the English level custom field
+    estudios       → the studies custom field
+    edad           → the age custom field
+    cuando_empezar → the "when do you want to start" custom field
+    source         → the contact source
+
+End workflow.
+```
+
+> Los nombres de campo de la derecha hay que mapearlos a los campos
+> personalizados reales de la cuenta. Si alguno no existe, se deja fuera: el
+> scoring funciona con lo que llegue, solo que con menos precisión.
