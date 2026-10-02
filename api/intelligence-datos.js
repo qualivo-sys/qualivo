@@ -27,6 +27,7 @@ const PLAZO_MS = 40000;
 
 let cache = null; // { t, datos }
 let enCurso = null;
+let cacheInf = null, infEnCurso = null;
 
 // ---------------------------------------------------------------------------
 // Lectura: todo es GET, salvo mover un trato de etapa desde el tablero (acción «mover»).
@@ -721,6 +722,18 @@ module.exports = async function (req, res) {
     catch (e) { return res.status(502).json({ error: 'No se ha podido leer la hoja de finanzas: ' + String(e.message || e).slice(0, 120) }); }
   }
   if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) return res.status(503).json({ error: 'Faltan las claves de GHL en Vercel.' });
+  if (accion === 'informe') {
+    // 2-oct: Informes por mes, semana y vertical (api/_intel-informe.js). Solo lectura. Cache de 10 min.
+    try {
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      if (!cacheInf || Date.now() - cacheInf.t > 10 * 60000 || (fresco && Date.now() - cacheInf.t > 60000)) {
+        if (!infEnCurso) infEnCurso = require('./_intel-informe.js').informe({ ghl: ghl, meta: meta, leer: leer, fecha: fecha, fechaEtiqueta: fechaEtiqueta, origenDe: origenDe, enParalelo: enParalelo })
+          .then(function (d) { cacheInf = { t: Date.now(), d: d }; return d; }).finally(function () { infEnCurso = null; });
+        await infEnCurso;
+      }
+      return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheInf.t) / 1000) }, cacheInf.d));
+    } catch (e) { return res.status(502).json({ error: 'No se ha podido preparar el informe: ' + String(e.message || e).slice(0, 100) }); }
+  }
 
   try {
     const fresco = String((req.query && req.query.fresco) || '') === '1';

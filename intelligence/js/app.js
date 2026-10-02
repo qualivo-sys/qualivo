@@ -41,6 +41,7 @@
     { id: 'conversaciones', txt: 'Conversaciones', ico: 'conversaciones' },
     { id: 'recorrido', txt: 'Recorrido', ico: 'recorrido' },
     { id: 'anuncios', txt: 'Anuncios', ico: 'anuncio' },
+    { id: 'informes', txt: 'Informes', ico: 'resumen' },
     { id: 'senales', txt: 'Señales', ico: 'senales' },
     { id: 'agentes', txt: 'Agentes', ico: 'agentes' }
   ];
