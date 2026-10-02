@@ -68,19 +68,52 @@ GRANDE = re.compile(
 # devuelve quien te recarga el clima del coche. No son el ICP de Kubysoft: son
 # taller fijo, no empresa con tecnicos desplazados, avisos y contratos de
 # mantenimiento. En el primer lote eran 6 de 146.
+# La primera version de esta lista solo cogia "taller" y "automocion", y en las
+# ciudades de la fase 2 se colaron Danara Motor, INTER AUTO ANDALUCIA y
+# ATLANTICO AUTOCENTROS: ninguno dice taller. Van tambien auto, motor y
+# autocentro, que es como se llaman de verdad.
+# Ojo con los limites de palabra: la primera version llevaba "\bautocentro\b" y
+# ATLANTICO AUTOCENTROS se colaba igual, porque el plural rompe el limite. Los
+# prefijos van sin limite por detras a proposito.
 AUTOMOCION = re.compile(
-    r"\b(automoci[oó]n|autom[oó]vil(es)?|taller(es)?\s|neum[aá]tic|"
-    r"chapa\s*y\s*pintura|valvoline|castrol|midas|norauto|feu\s*vert|"
-    r"aurgi|confortauto|euromaster|rodi\s*motor)\b", re.I)
+    r"\bautomoci[oó]n|\bautom[oó]vil|\btaller(es)?\s|\bneum[aá]tic|"
+    r"\bautocent|\bauto\b|\bautos\b|chapa\s*y\s*pintura|"
+    r"\b(valvoline|castrol|midas|norauto|feu\s*vert|aurgi|confortauto|"
+    r"euromaster|rodi)\b", re.I)
+
+# "motor" va aparte y con seguro. Caza bien a Danara Motor y Reser Motor, pero
+# tambien mataria a una "Climatizacion y Motores del Sur", que es un nombre
+# perfectamente posible en el oficio. Asi que motor solo descarta cuando el
+# nombre NO dice ya que son de clima. Los 44 talleres del lote del 2-oct caen
+# igual, porque todos llevan taller, auto o una marca de neumaticos.
+MOTOR = re.compile(r"\bmotor(es)?\b", re.I)
+ES_CLIMA = re.compile(r"\bclima|\baire|\bfr[ií]o\b|refriger|calefacc|"
+                      r"aerotermia|ventilac|\bcalder", re.I)
+
+# Gimnasios y centros deportivos. Salen por "empresa climatizacion", porque
+# tienen instalaciones de clima enormes y hablan de ellas en su web. Son el
+# cliente del instalador, no el instalador.
+DEPORTE = re.compile(
+    r"\b(gofit|go-?fit|forus|gym|gimnasio|fitness|basic\s*fit|altafit|"
+    r"viva\s*gym|polideportiv|piscina\s*municipal|club\s*deportiv)\b", re.I)
+
+# Centros de formacion. Tambien aparecen por clima: dan cursos de instalador.
+FORMACION = re.compile(
+    r"\b(campus\s*training|centro\s*de\s*formaci[oó]n|academia|"
+    r"formaci[oó]n\s+(profesional|online)|cursos\s+de|instituto|fp\s*online)\b",
+    re.I)
 
 
 def descarta(nombre, dominio):
     """Devuelve el motivo del descarte, o None si el lead sigue vivo."""
     for etiqueta, patron in (("fabricante", FABRICANTE), ("mayorista", MAYORISTA),
                              ("portal", PORTAL), ("grande", GRANDE),
-                             ("automocion", AUTOMOCION)):
+                             ("automocion", AUTOMOCION), ("deporte", DEPORTE),
+                             ("formacion", FORMACION)):
         if patron.search(nombre) or patron.search(dominio):
             return etiqueta
+    if (MOTOR.search(nombre) or MOTOR.search(dominio)) and not ES_CLIMA.search(nombre):
+        return "automocion"
     return None
 
 

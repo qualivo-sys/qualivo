@@ -53,9 +53,11 @@ casos que dan los datos de los 139:
 
 | cubo | cuántos | de dónde sale |
 |---|---|---|
-| **WhatsApp** | 41 | tienen `wa.me` o la API de WhatsApp puesta en la web como canal de contacto |
-| **CRM** | 2 | se les detecta HubSpot u Odoo |
-| **Ficha de Google** | 96 | el resto. Se usan reseñas y nota, que es lo único verificable que tenemos |
+| **WhatsApp** | 70 | tienen `wa.me` o la API de WhatsApp puesta en la web como canal de contacto |
+| **CRM** | 3 | se les detecta HubSpot u Odoo |
+| **Ficha de Google** | 201 | el resto. Se usan reseñas y nota, que es lo único verificable que tenemos |
+
+Sobre 274 leads en 14 ciudades, tras la ampliación del 2-oct.
 
 Variables disponibles por lead: `{{empresa}}`, `{{ciudad}}`, `{{resenas}}`,
 `{{nota}}`, `{{nombre}}` (cuando se consiga; si no, el correo va sin nombre y
@@ -288,10 +290,10 @@ Salen de la lista que mandó Kubysoft. Ninguna respuesta discute: todas pregunta
 
 # Lo que no cubre este borrador
 
-- **El nombre del contacto.** Los 139 leads tienen correo de empresa, casi todos
+- **El nombre del contacto.** Los 274 leads tienen correo de empresa, casi todos
   `info@`. Si no se enriquece el nombre, los correos van con "Buenas" a secas, que
   en negocio local es normal y no chirría. Enriquecer con Apollo gastaría créditos
   de la bolsa de Qualivo, así que es decisión de Maikel.
-- **El cubo CRM son 2 leads.** Está escrito porque es el mejor mensaje de los
+- **El cubo CRM son 3 leads.** Está escrito porque es el mejor mensaje de los
   tres, pero mueve poco volumen.
 - **Sin aprobar.** Falta Maikel y falta Marc.

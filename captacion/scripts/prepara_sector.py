@@ -31,8 +31,13 @@ CADENA = re.compile(
 # Buzones de rol que NO valen aunque sean el unico publicado en la web. Ojo:
 # en negocio local info@ ES el buzon del duenyo muchas veces, asi que aqui la
 # lista es mas corta que en Apollo y solo tira lo que de verdad no lee nadie.
+# dpo@ y dpd@ entraron el 2-oct: en la fase 2 de Kubysoft salio dpo@forus.es
+# como correo elegido. Es el delegado de proteccion de datos, que ya aparecio
+# en el lote del 26-sep por otra via. A ese buzon no se le escribe en frio
+# nunca: no es quien decide y es quien sabe como denunciarlo.
 ROL_MALO = re.compile(r"^(no-?reply|noreply|postmaster|webmaster|abuse|privacy|"
-                      r"rgpd|lopd|protecciondedatos|newsletter|mailer)@", re.I)
+                      r"rgpd|lopd|protecciondedatos|dpo|dpd|delegado|"
+                      r"newsletter|mailer)@", re.I)
 
 # Buzones genericos. No se tiran, pero van los ultimos, y por que:
 #

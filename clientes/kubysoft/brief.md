@@ -267,6 +267,25 @@ bien. El problema son los rebotes, las respuestas automáticas, los fuera de
 oficina y las bajas, que en frío son mayoría y le van a llenar el CRM de basura.
 Hay que filtrarlo antes de que empiece a enviar, no después.
 
+## La lista
+
+| | fase 1 (21-sep) | tras ampliar (2-oct) |
+|---|---|---|
+| Ciudades | 8 | **14** |
+| Fichas de Maps | 1.170 | **2.035** |
+| Empresas únicas | 446 | **789** |
+| Con correo bueno | 139 | **274** |
+
+Fuera se quedan 121 multisede, 44 de automoción, 28 fabricantes, 8 mayoristas,
+8 grandes superficies, 3 portales, 2 gimnasios y 1 centro de formación. Y 98
+webs caídas, que dice bastante del nivel de digitalización del sector.
+
+Lo que se le puede enseñar a Marc: **3 de 274 tienen un CRM detectable**, 242 no
+tienen ninguna señal de automatización, 70 publican WhatsApp como canal y 272 de
+274 tienen teléfono.
+
+Con 274 las dos tandas pasan de 60 y 79 a unas 137 cada una.
+
 ## Fuente de leads
 
 Kubysoft es software, pero **a quién le vende no lo es**. El piloto va contra
