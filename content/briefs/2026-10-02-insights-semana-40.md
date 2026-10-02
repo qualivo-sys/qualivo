@@ -4,7 +4,7 @@
 
 ## Resumen
 
-Del 28 de septiembre al 2 de octubre hubo 8 reuniones con empresas distintas y **un cierre: Alpha Media Group, 750 € el primer mes y después cuota mensual**. Nadie dijo que el sistema no le sirviera. Lo que frenó fue el dinero y el momento, y eso apunta a que estamos haciendo la misma oferta a tres tipos de cliente muy distintos.
+Del 28 de septiembre al 2 de octubre hubo 8 reuniones con empresas distintas y **un cierre: Alpha Media Group, 1.200 € el primer mes y después cuota mensual** (corrección de Maikel, 2-oct: son 1.200 €, no 750 €). Además, Al Milímetro dijo que sí la semana anterior: 1.200 € y 800 € el segundo mes. Dos cierres en dos semanas. Nadie dijo que el sistema no le sirviera. Lo que frenó fue el dinero y el momento, y eso apunta a que estamos haciendo la misma oferta a tres tipos de cliente muy distintos.
 
 | Estado | Quién |
 | --- | --- |
@@ -29,7 +29,7 @@ Tres decisiones desbloquean la semana que viene: una sola tabla de precios por t
 | Betlem · Talkual | 1.200 € + 1.000 €/mes | no cobrar si no se llega al objetivo (quedó en el aire) |
 | Ana Claros | 1.200 € + 800 €/mes | no se cobra el mes si no se cumple |
 | Armando | 750 € en dos pagos + 800 €/mes | no se cobra el mes |
-| Sergi · Alpha | 1.200 € + 800 €/mes, luego 750 € el primer mes | — |
+| Sergi · Alpha | 1.200 € + 800 €/mes (Maikel confirma 1.200 € el primer mes; el 750 € de la reunión no aplica) | — |
 | Izaskun | 750 € + 800 €/mes, sin IVA | 3 meses gratis si no se duplica lo invertido |
 | Eva · Giner | 1.200 € + 1.000 €/mes (con anuncios) u 800 €/mes (sin anuncios) | 3 meses gratis si no se cubre lo invertido |
 | Remi · Skolae | tres planes: 1.200 + 800, 1.200 + 1.000, 1.500/mes | 3 meses gratis si no se duplica lo invertido |
