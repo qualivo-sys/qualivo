@@ -353,3 +353,59 @@ no lo usamos"* sea una respuesta válida y útil en vez de dejarnos en evidencia
 Las cinco puertas reescritas y probadas. La de CRM también afirmaba de más ("Con Zoho,…"
 cuando el regex puede haber visto un formulario de Zoho): ahora dice "Veo rastro de Zoho
 en vuestra web".
+
+## A.5 · 2-oct · pausar no cambia el copy
+
+La campaña 605109 **ya estaba pausada** al mirarla hoy; la paró alguien entre el 30-sep y
+el 1-oct. No hay ninguna campaña `IN_PROGRESS` en la cuenta. Nada está saliendo.
+
+Lo que salió entre el aviso del 30-sep y la pausa: **41 invitaciones y 25 conversaciones
+nuevas.** Entre ellas la de Rafa, el 1-oct.
+
+### El "Interested" es un falso positivo
+
+La campaña tiene una sola autoetiqueta `Interested` en toda su vida, del 1-oct. Es **Rafa
+Calle**. Lo que escribió fue una corrección, no interés. **No debe entrar en ninguna cola
+de cualificados.** El autoetiquetador de HeyReach lee que hay respuesta, no lo que dice.
+
+Un apunte que importa: Rafa es **CEO & Co-Founder de magnettu**, así que `filtro_fit.py`
+lo habría aceptado, y bien. El objetivo era correcto. Lo que falló fue lo que le dijimos.
+
+### Pausar no arregla nada por sí solo
+
+`msg1` y `msg2` **no viven en la secuencia de la campaña: viven como `customFields` de
+cada lead**, congelados el día de la carga. Arreglar `copy_linkedin.py` no toca un solo
+lead ya cargado. Si alguien reanuda sin regenerar, sale el texto viejo tal cual.
+
+Los 377 de la lista, con el texto viejo dentro:
+
+| Puerta | Leads | Qué afirma |
+|---|---:|---|
+| `crm` | 305 | *"Con HubSpot, ¿tenéis bastante control…"* — da por hecho que lo usan |
+| `google_ads` | 33 | *"con lo que movéis en Google"* — da por hecho el gasto |
+| `meta_ads` | 20 | *"con el píxel de Meta"* — da por hecho actividad |
+| `linkedin_ads` | 19 | *"con lo que invertís en LinkedIn"* — **la frase que Rafa desmintió** |
+
+Y **72 llevan el caso de matrículas** en el `msg2`.
+
+**83 ya lo recibieron. 294 siguen en cola.** De esos 294, cincuenta y uno llevan una
+afirmación sobre anuncios.
+
+### Lo que está preparado y no subido
+
+`captacion/scripts/regenera_msgs.py` lee la lista, deduce la puerta y la herramienta del
+propio `msg1` viejo (así no hay que volver a sondear ninguna web, no se gastan créditos de
+Apify, y nadie recibe un mensaje distinto porque la sonda vea hoy otra cosa) y regenera
+los dos mensajes con el copy corregido.
+
+Ejecutado sobre los que **aún no han recibido nada**: **292 regenerados, 0 que afirmen
+gasto o uso.** Dos descartados por no poder reconstruir su puerta, marcados en vez de
+rellenados con un genérico. A los 83 que ya recibieron el viejo no se les toca: el
+mensaje ya salió y reescribirlo en su ficha no lo borra de su bandeja.
+
+**No se ha subido nada a HeyReach.** El fichero queda listo para quien tenga el ok de
+Maikel. Cambiar copy es decisión suya.
+
+Queda una cosa que el script no cubre: el `fallbackMessage` de la propia secuencia de la
+campaña sigue teniendo el texto viejo del caso de matrículas. Eso se edita en HeyReach, es
+una escritura sobre la campaña, y también es de Maikel.
