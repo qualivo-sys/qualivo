@@ -46,20 +46,35 @@ TERMINOS = [
 
 # Espana, repartido. No solo Madrid y Barcelona: en clima el negocio esta muy
 # vivo en el arco mediterraneo y en el sur, donde la temporada es mas larga.
-CIUDADES = [
-    "Madrid, Spain",
-    "Barcelona, Spain",
-    "Valencia, Spain",
-    "Sevilla, Spain",
-    "Malaga, Spain",
-    "Murcia, Spain",
-    "Zaragoza, Spain",
-    "Alicante, Spain",
-]
+#
+# Dos fases porque el presupuesto de Apify es compartido con Qualivo y se paga
+# por ficha: la fase 1 corrio el 21-sep y dejo 139 leads con correo, que en dos
+# tandas se quedaban en 60 y 79. La fase 2 amplia sin repetir lo ya pagado.
+FASES = {
+    "fase1": [
+        "Madrid, Spain",
+        "Barcelona, Spain",
+        "Valencia, Spain",
+        "Sevilla, Spain",
+        "Malaga, Spain",
+        "Murcia, Spain",
+        "Zaragoza, Spain",
+        "Alicante, Spain",
+    ],
+    # Norte, islas, noroeste y Andalucia interior: lo que faltaba del mapa.
+    "fase2": [
+        "Bilbao, Spain",
+        "Palma, Spain",
+        "Las Palmas de Gran Canaria, Spain",
+        "Vigo, Spain",
+        "Granada, Spain",
+        "Cordoba, Spain",
+    ],
+}
 
-# 30 y no 40 por presupuesto: el 21-sep la bolsa de Apify iba por 6,15 de 19 y
-# es compartida con la captacion de Qualivo. 5 terminos x 8 ciudades x 30 son
-# unos 6 dolares. Si sobra margen se sube.
+# 30 y no 40 por presupuesto. El 2-oct la bolsa iba por 19,93 de 30 y Qualivo
+# tira de ella a diario, asi que la fase 2 son 6 ciudades y no 8: unos 3,5
+# dolares en vez de 4,7, y le queda margen a nuestra propia captacion.
 POR_BUSQUEDA = 30
 
 
@@ -82,10 +97,13 @@ def corre(termino, ciudad, maximo, tk):
 
 
 if __name__ == "__main__":
+    fase = sys.argv[1] if len(sys.argv) > 1 else "fase1"
+    if fase not in FASES:
+        sys.exit(f"Fase desconocida: {fase}. Son {list(FASES)}")
     tk = token()
     os.makedirs(DATOS, exist_ok=True)
     todo = []
-    for ciudad in CIUDADES:
+    for ciudad in FASES[fase]:
         for t in TERMINOS:
             try:
                 r = corre(t, ciudad, POR_BUSQUEDA, tk)
@@ -96,9 +114,12 @@ if __name__ == "__main__":
                 x["_sector"] = "aire_acondicionado"
                 x["_ciudad"] = ciudad.split(",")[0]
                 x["_termino"] = t
+                x["_fase"] = fase
             todo.extend(r)
-            print(f"  {ciudad.split(',')[0]:12} {t:36} {len(r):4}")
+            print(f"  {ciudad.split(',')[0]:14} {t:36} {len(r):4}")
             time.sleep(2)
-    destino = os.path.join(DATOS, "maps_aire_crudo.json")
+    # Un fichero por fase. prepara_aire.py los junta, asi que relanzar una fase
+    # no pisa lo que ya se pago en la otra.
+    destino = os.path.join(DATOS, f"maps_aire_crudo_{fase}.json")
     json.dump(todo, open(destino, "w"), ensure_ascii=False)
     print(f"\n{len(todo)} fichas -> {destino}")

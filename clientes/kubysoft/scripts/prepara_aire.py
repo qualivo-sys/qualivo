@@ -108,7 +108,17 @@ def exclusiones():
 
 
 if __name__ == "__main__":
-    crudo = json.load(open(os.path.join(DATOS, "maps_aire_crudo.json")))
+    # Junta todas las fases que haya en disco. maps_aire.py escribe un fichero
+    # por fase para que relanzar una no pise lo que ya se pago en la otra.
+    import glob
+    fuentes = sorted(glob.glob(os.path.join(DATOS, "maps_aire_crudo*.json")))
+    if not fuentes:
+        sys.exit("No hay fichas crudas. Corre antes maps_aire.py")
+    crudo = []
+    for f in fuentes:
+        lote = json.load(open(f))
+        crudo.extend(lote)
+        print(f"  {os.path.basename(f)}: {len(lote)} fichas")
     excl, hay_excl = exclusiones()
     if not hay_excl:
         print("AVISO: no hay excluidos_kubysoft.csv. La lista se genera para "

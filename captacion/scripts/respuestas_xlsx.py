@@ -23,36 +23,14 @@ TH = Font(name="Arial", bold=True, color="FFFFFF", size=10)
 BORDE = Border(bottom=Side(style="thin", color="D9D9D9"))
 
 # --- puntuacion -------------------------------------------------------------
-# 100 quiere hablar o pregunta algo concreto · 80 deriva con nombre
-# 60 pide informacion · 40 no es ahora · 20 autorespuesta · 0 no
-def puntuar(t, clase):
-    b = (t or "").lower()
-    if clase in ("CABREO / LEGAL",) or re.search(r"lopd|rgpd|ilegal|denunc|bórre|borrar|no me escrib|elimin", b):
-        return 0, "Descartar · pidio no ser contactado"
-    if re.search(r"no me interesa|no estamos interesad|no nos interesa|no necesito|ya lo tenemos|"
-                 r"todo ya organizado|lo tenemos todo|ya lo hacemos|no encaja|no es el momento|"
-                 r"prefiero no seguir|no seguir adelante|tenemos todas las necesidades|no vendemos|"
-                 r"no tenemos problem|declinamos|no procede", b):
-        return 0, "Descartar · no interesado"
-    if re.search(r"vacacion|vacaci|vacances|ferias|fuera de la oficina|out of office|estare fuera|estaré fuera|"
-                 r"tancat|tancad|romandra|romandrà|de baja|cerrados por|cerrado por|estoy fuera|estic fora|"
-                 r"absent|ausente|fora de|no estoy disponible|no me encuentro disponible", b):
-        return 20, "Autoreply · reintentar a la vuelta"
-    if re.search(r"ha cambiado a|nueva direccion de correo|nueva dirección|dejara de estar activa|dejará de estar activa|mi nueva direccion", b):
-        return 20, "Actualizar email y recontactar"
-    # OJO: "gracias por contactar con nosotros" aparece en casi toda respuesta
-    # educada. La derivacion exige que nos manden a ALGUIEN concreto.
-    if re.search(r"pongo en contacto|te pido que contactes|por favor contactar con|contacta con|"
-                 r"responsable de marketing|persona adecuada|traslado el email|traslado tu|he derivado|"
-                 r"derivado a|project manager (de la empresa )?es|no soy decisor|no soy quien decide|"
-                 r"habla con|escribe a|dirigete a|dirígete a", b):
-        return 80, "Seguir la derivacion · pedir nombre y correo"
-    if re.search(r"cuanto|cuánto|precio|cobras|coste|como crees que|cómo crees que|en que consiste|en qué consiste|mas info|más info|envianos|envíanos|quiero saber|me gustaria saber|me gustaría saber|reunion|reunión|llamada|agenda|\?", b):
-        return 100, "Contestar hoy · pregunta abierta"
-    if re.search(r"mas adelante|más adelante|ahora no|no es prioridad|reducir la inversion|reducir la inversión|en el futuro", b):
-        return 40, "Timing · guardar y retomar"
-    return 60, "Revisar"
+# El clasificador vive en clasifica_respuestas.py desde el 2-oct, porque lo
+# necesitaba tambien el filtro de ruido de Kubysoft. Mismo criterio para los
+# dos: si se afina una expresion, se afina en los dos sitios a la vez.
+from clasifica_respuestas import puntuar  # noqa: E402
 
+
+# propuesta() se queda aqui y NO se comparte: lleva dentro el precio de Qualivo
+# y su caso de exito, y eso es copy, que no se hereda entre clientes.
 def propuesta(score, accion, t):
     b = (t or "").lower()
     if score == 0: return "No se contesta. Dominio bloqueado."
