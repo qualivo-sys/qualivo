@@ -147,7 +147,7 @@ footer{padding-block:24px;color:var(--muted);font-size:13px;border-top:1px solid
     if (!demo && seg < 20) return;
     enviado = true;
     var body = JSON.stringify({ cuenta: ${JSON.stringify(f.slug)}, segundos: seg, scroll: maxScroll, demo: demo });
-    try { navigator.sendBeacon('/api/visita', new Blob([body], { type: 'application/json' })); } catch (e) {}
+    try { navigator.sendBeacon('/api/visita/', new Blob([body], { type: 'application/json' })); } catch (e) {}
   }
   window.addEventListener('scroll', pct, { passive: true });
   document.getElementById('demo').addEventListener('click', function () { demo = true; manda(true); });
