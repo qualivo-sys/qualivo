@@ -164,14 +164,33 @@ if __name__ == "__main__":
     print(f"candidatos tras filtro: {len(cand)} · fuera {dict(fuera)}")
 
     # 3. ahora si, a leer webs (correo + senales)
-    with cf.ThreadPoolExecutor(12) as ex:
-        leidos = list(ex.map(mira, cand))
-    caidas = sum(1 for r in leidos if not r["vivo"])
+    #
+    # El resultado se va guardando por tandas y se reanuda: leer 700 webs son
+    # 40 minutos y el 2-oct perdimos una corrida de Maps por guardar solo al
+    # final. Esto no cuesta dinero, pero cuesta tiempo, y el tiempo tambien se
+    # acaba. Para releer una web a proposito, se borra aire_leidos.json.
+    cache_p = os.path.join(DATOS, "aire_leidos.json")
+    cache = {}
+    if os.path.exists(cache_p):
+        for r in json.load(open(cache_p)):
+            cache[r["dominio"]] = r
+        print(f"ya leidas antes: {len(cache)} webs")
 
-    # Se guarda el crudo leido antes de filtrar correos. Media hora de lectura
-    # de webs no se repite para contestar "y esto por que lo tiraste".
-    json.dump(leidos, open(os.path.join(DATOS, "aire_leidos.json"), "w"),
-              ensure_ascii=False, indent=1)
+    pendientes = [c for c in cand if c["dominio"] not in cache]
+    print(f"webs por leer: {len(pendientes)}")
+    LOTE = 60
+    for i in range(0, len(pendientes), LOTE):
+        trozo = pendientes[i:i + LOTE]
+        with cf.ThreadPoolExecutor(12) as ex:
+            for r in ex.map(mira, trozo):
+                cache[r["dominio"]] = r
+        tmp = cache_p + ".tmp"
+        json.dump(list(cache.values()), open(tmp, "w"), ensure_ascii=False, indent=1)
+        os.replace(tmp, cache_p)
+        print(f"  leidas {min(i + LOTE, len(pendientes))}/{len(pendientes)}")
+
+    leidos = [cache[c["dominio"]] for c in cand if c["dominio"] in cache]
+    caidas = sum(1 for r in leidos if not r["vivo"])
 
     # 4. el filtro de correos, que es el que quita el correo de la agencia
     buenos, tirados = [], Counter()
