@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Skolae Formación · lo que vimos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: informe de una columna que va de «lo que pasa hoy» a «lo que montaríamos», con tarjetas de empresa abajo. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#16202B; --muted:#5A6676; --line:#D9DFE7;
+  --accent:#2F5BEA; --warn:#B4541A; --good:#13795B; --tint:#EAF0FF;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --warn:#F09A63; --good:#4CC59A; --tint:#1B2740; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --warn:#F09A63; --good:#4CC59A; --tint:#1B2740; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:960px;margin-inline:auto;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5.5vw,52px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.6vw,34px);font-weight:800}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:20px;color:var(--muted);max-width:60ch;margin-top:14px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+section{display:grid;gap:18px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.flow .k{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.flow p{font-size:15px;color:var(--muted);margin-top:6px}
+.flow .bad{border-color:var(--warn)}
+.flow .bad h3{color:var(--warn)}
+.flow .goodc{border-color:var(--good)}
+.flow .goodc h3{color:var(--good)}
+.gaps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gaps > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.gaps b{font-family:var(--display)}
+.gaps p{color:var(--muted);font-size:15px;margin-top:6px}
+.q{font-weight:600;color:var(--ink)!important}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;max-width:640px}
+.msg{padding:10px 14px;border-radius:12px;max-width:85%;font-size:15px}
+.in{background:var(--bg);justify-self:start}
+.out{background:var(--tint);justify-self:end}
+.msg small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:2px}
+.cos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.co{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.co .why{font-size:15px;color:var(--muted)}
+.co .prog{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.co blockquote{margin:0;background:var(--tint);border-radius:10px;padding:12px;font-size:15px}
+.co a{color:var(--accent);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+.next{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:22px}
+.next p{color:var(--muted);margin-top:8px}
+footer{font-size:13px;color:var(--muted)}
+@media (max-width:820px){.flow,.cos{grid-template-columns:1fr}.gaps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Para Remi Román · Skolae Formación · 2 de octubre de 2026</p>
+  <h1>Lo que le pasa hoy a una empresa que os pide propuesta, y lo que podría pasarle</h1>
+  <p class="lead">Lo hemos mirado desde fuera, como lo haría un responsable de formación que llega a vuestra web. Todo sale de datos públicos; lo que no hemos podido comprobar lo decimos.</p>
+</header>
+
+<p class="note">Documento de trabajo de Qualivo para la reunión. No es una página de Skolae.</p>
+
+<section>
+  <h2>Hoy: el camino de una empresa que pide propuesta</h2>
+  <div class="flow">
+    <div><span class="k">1 · Web</span><h3>Encuentra un curso</h3><p>339 fichas en skolae-formacion.es, sin precio y sin fechas de convocatoria.</p></div>
+    <div><span class="k">2 · Botón</span><h3>«¡Pídenos una propuesta!»</h3><p>Le lleva a un formulario genérico en otra web (Odoo).</p></div>
+    <div class="bad"><span class="k">3 · Formulario</span><h3>Se pierde el curso</h3><p>El formulario no guarda de qué curso venía ni promete un plazo de respuesta.</p></div>
+    <div class="bad"><span class="k">4 · Después</span><h3>No sabemos</h3><p>Quién contesta, en cuánto tiempo y qué pasa si no responde: lo preguntamos hoy.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Cuatro cosas que vimos</h2>
+  <div class="gaps">
+    <div><b>Los casos de éxito no abren</b><p>Los botones de Coca-Cola, Leroy Merlin, Auchan y Zurich de la home llevan a un dominio de pruebas que esta mañana daba error 503.</p><p class="q">¿La web la mantiene el equipo de Portugal?</p></div>
+    <div><b>El formulario no sabe de qué curso vienen</b><p>Quien atiende tiene que volver a preguntar qué quería la empresa.</p><p class="q">¿Cuánto tarda hoy la primera respuesta y quién la da?</p></div>
+    <div><b>Las fechas solo están en LinkedIn</b><p>Ni calendario de convocatorias ni catálogo descargable en la web (por ejemplo, Copilot el 27 y 28 de octubre).</p><p class="q">¿Cómo se entera la empresa que quiere formar a una o dos personas?</p></div>
+    <div><b>Nadie vuelve a quien mira y se va</b><p>En la web solo está Google Analytics: sin píxel de Meta, de LinkedIn ni de Google Ads.</p><p class="q">¿Qué pasa con quien visita un curso y no escribe?</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Lo que montaríamos</h2>
+  <div class="flow">
+    <div class="goodc"><span class="k">Minuto 0</span><h3>Respuesta con el curso</h3><p>La solicitud llega con el curso de origen y se contesta en menos de 5 minutos.</p></div>
+    <div class="goodc"><span class="k">Minuto 1-5</span><h3>Cuatro preguntas</h3><p>Cuántas personas, para cuándo, si quieren bonificar con FUNDAE y modalidad.</p></div>
+    <div class="goodc"><span class="k">Mismo día</span><h3>Al comercial, con ficha</h3><p>Cristian o Martha reciben la empresa, el contacto, lo que pide y la siguiente acción.</p></div>
+    <div class="goodc"><span class="k">Días 1, 4 y 10</span><h3>Propuesta seguida</h3><p>Cada propuesta enviada tiene su siguiente contacto con fecha. Ninguna se queda en el correo.</p></div>
+  </div>
+  <div class="chat" aria-label="Ejemplo de conversación">
+    <div class="msg out"><small>Skolae · 09:42</small>Hola Laura, soy Martha, de Skolae Formación. Me llega tu solicitud del curso «Rapid Training para Managers». Para prepararte la propuesta: ¿cuántas personas serían y para cuándo lo necesitáis?</div>
+    <div class="msg in"><small>Laura · RR. HH. · 09:51</small>Unas 12, nuevos jefes de tienda. Antes de diciembre.</div>
+    <div class="msg out"><small>Skolae · 09:52</small>Perfecto. ¿Lo queréis bonificar con FUNDAE? Si es así, nosotros gestionamos todo el trámite. Te mando la propuesta hoy y la vemos 15 minutos el jueves a las 10:00 o el viernes a las 12:00.</div>
+  </div>
+  <p class="note">Conversación de ejemplo para enseñar el tono. Los nombres de vuestro equipo salen de vuestra página de equipo.</p>
+</section>
+
+<section>
+  <h2>Y salir a buscar: tres empresas con un motivo para formar ahora</h2>
+  <p class="lead" style="margin-top:0">Cada semana, empresas que encajan con vuestro cliente (RR. HH. y Formación de empresas medianas y grandes) y que tienen una razón pública y con fecha para formar, con el mensaje listo para vuestro comercial.</p>
+  <div class="cos">
+    <div class="co">
+      <h3>N26</h3>
+      <p class="why">Abrió en marzo de 2026 su sede en Madrid y desde aquí lleva la atención al cliente de 24 países. La Ley 10/2025 de atención a la clientela obliga a adaptarse antes del 28 de diciembre.</p>
+      <p class="prog">Atención al cliente · Formación de formadores</p>
+      <blockquote>Hola, [nombre]: vi que en marzo estrenasteis sede en Madrid y que desde aquí vais a llevar la atención al cliente de 24 países. Con tanta gente nueva y la ley de atención a la clientela a la vuelta de la esquina, lo que suele faltar es que quienes forman a los nuevos tengan método. ¿Te cuento en 15 minutos cómo lo hicimos con Auchan?</blockquote>
+      <a href="https://www.rrhhdigital.com/secciones/empresa/790720/n26-abre-su-nueva-sede-en-espana-en-el-centro-de-madrid/" target="_blank" rel="noopener">Fuente: RRHH Digital</a>
+    </div>
+    <div class="co">
+      <h3>McDonald's España</h3>
+      <p class="why">El 29 de abril de 2026 anunció que quiere superar los 30.000 empleados a finales de año, y que muchos de sus gerentes empezaron en el equipo base.</p>
+      <p class="prog">Rapid Training para Managers · Formación de formadores</p>
+      <blockquote>Hola, Alberto: leí que queréis cerrar el año con más de 30.000 personas y que muchos de vuestros gerentes empezaron en el equipo base. Ese salto de compañero a jefe es donde más gente se atasca. Tenemos un programa corto para nuevos responsables, bonificable por FUNDAE. ¿Te paso el programa?</blockquote>
+      <a href="https://www.eldiariodemadrid.es/articulo/empresas/mcdonalds-espana-empleo-30000-trabajadores-2026-campana-mycrew/20260429103934128903.html" target="_blank" rel="noopener">Fuente: El Diario de Madrid</a>
+    </div>
+    <div class="co">
+      <h3>ING</h3>
+      <p class="why">Su hub tecnológico de Madrid sumará más de 1.000 empleos en tecnología, datos, operaciones y riesgos hasta 2029.</p>
+      <p class="prog">Liderazgo · Agile · IA para equipos de TI</p>
+      <blockquote>Hola, [nombre]: vi que el hub de Madrid va a sumar más de mil personas de tecnología y datos de aquí a 2029. Cuando entra tanta gente a la vez, lo difícil es que los nuevos jefes de equipo lideren bien desde el primer mes. Hacemos formación in company en liderazgo, Agile e IA, bonificable por FUNDAE. ¿Hablamos la semana que viene?</blockquote>
+      <a href="https://www.cio.com/article/4073682/ing-abre-un-centro-tecnologico-en-madrid-para-impulsar-su-transformacion-digital-global.html" target="_blank" rel="noopener">Fuente: CIO España</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Qué mediríamos cada semana</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Medida</th><th>Por qué importa</th></tr></thead>
+    <tbody>
+      <tr><td>Tiempo hasta la primera respuesta</td><td>La empresa que pide propuesta suele pedirla a dos o tres proveedores.</td></tr>
+      <tr><td>Solicitudes por curso y por origen</td><td>Saber qué cursos y qué canales traen empresas, no visitas.</td></tr>
+      <tr><td>Propuestas enviadas, seguidas y cerradas</td><td>Que ninguna propuesta se quede sin siguiente paso.</td></tr>
+      <tr><td>Empresas nuevas contactadas y reuniones</td><td>Lo que aporta salir a buscar, separado de lo que entra solo.</td></tr>
+      <tr><td>Euros en propuestas abiertas</td><td>Lo que está en juego cada semana.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<div class="next">
+  <h2>Siguiente paso</h2>
+  <p>Si os encaja, preparamos la propuesta para vuestro caso, con vuestros cursos y vuestro equipo comercial, y la vemos en 30 minutos la semana que viene.</p>
+</div>
+
+<footer>Qualivo · qualivo.io · Datos públicos consultados el 2 de octubre de 2026: skolae-formacion.es, su página de equipo, su formulario de contacto y su LinkedIn. Las empresas y sus motivos salen de las fuentes enlazadas.</footer>
+</div>
+</body>
+</html>
