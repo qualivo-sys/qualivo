@@ -215,3 +215,60 @@ reversible con `resume_campaign`.
   Smartlead ni contra los 4.778 dominios cargados. La coincidencia de Santiago Noya la encontré por
   el repo; podría haber más que no veo.
 - **Quién creó esta campaña y con qué aprobación.** No está en ningún documento del repo.
+
+---
+
+# ACTUALIZACIÓN · 2-oct-2026 · parada confirmada
+
+Comprobado en HeyReach el 2-oct.
+
+## Estado
+
+| | |
+|---|---|
+| Campaña 605109 | **PAUSED** |
+| Actividad del 2-oct | **0 invitaciones · 0 mensajes · 0 respuestas** |
+| Campañas en IN_PROGRESS en toda la cuenta | **ninguna** |
+
+La pausa ya estaba puesta cuando lo intenté hoy: la API devolvió *«You cannot pause an inactive
+campaign»*. La puso Maikel entre el informe de ayer y esta mañana. **El canal de LinkedIn está parado
+por completo**: las nueve campañas están PAUSED o FINISHED.
+
+Lo último que salió fueron los 13 mensajes y 18 invitaciones del 1-oct por la mañana, antes del
+informe. Después, nada.
+
+## Los que contestaron ya estaban protegidos, por la secuencia
+
+Intenté cerrar individualmente a los tres que respondieron y la API contestó *«Cannot perform the
+action because the workflow is already finished»*. Es correcto y es bueno: la secuencia tiene una
+rama `respuesta → END`, así que **HeyReach cierra solo a quien contesta** y ninguno de los tres
+recibiría el `{msg2}` si se reanuda. Esa parte del diseño funciona.
+
+## Santiago Noya, cerrado a mano
+
+Él **no** respondió por LinkedIn —respondió por email— así que seguía en curso y un «resume» le
+habría mandado el seguimiento. **Detenido en la campaña** (`stop_lead_in_campaign`, 2-oct). Es el
+único de los 377 que cruzaba con alguien con respuesta previa o seguimiento congelado.
+
+## Lo que la pausa NO arregla
+
+**El copy sigue escrito en los 377 leads**, en sus campos `msg1` y `msg2` de la lista 943342: 160
+«Con HubSpot», 48 Salesforce, 33 «lo que movéis en Google», y así. Pausar detiene el envío; no borra
+la premisa. **Si alguien reanuda 605109 tal cual, vuelve a mandar exactamente lo mismo a los 294 que
+quedan.**
+
+Para que cambiar el mensaje sirva hay que tocar dos sitios, no uno:
+
+1. **Los campos `msg1`/`msg2` de los 377 leads** — ahí vive el mensaje real.
+2. **El `fallbackMessage` de la secuencia**, que hoy dice «una duda que me ha surgido mirando vuestra
+   empresa» sin nombre de empresa. No está disparando porque los 377 tienen los campos rellenos,
+   pero sigue ahí para la próxima carga.
+
+## Pendiente de Maikel
+
+- **El copy nuevo.** Es decisión suya por el apartado A. Mi recomendación sigue siendo la del punto 8:
+  quitar la premisa afirmada y entrar por la hipótesis del vertical, sin atribuir herramienta.
+- **Jaume Feliu (PymeLegal), Delegado de Protección de Datos.** No lo he detenido porque es una
+  valoración de riesgo mía, no una stop condition, y con la campaña pausada no le llega nada.
+  Recomiendo sacarlo antes de cualquier reanudación.
+- **Pasar la lista por FIT** antes de reanudar. Eso sí puedo hacerlo yo: es preparación de lista.
