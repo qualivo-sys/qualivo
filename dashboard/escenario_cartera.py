@@ -61,17 +61,20 @@ DEUDA = [
 # Filas de la hoja. Se nombran para no contar a mano al cambiar el diseño.
 R_PAL   = 5                       # palancas: 5..12
 R_CALC  = 16                      # calculado: 16..22
-R_LECT  = 26                      # las tres lecturas: 26..29
-R_DEU   = 33                      # inventario de deuda: 33..41
+R_CART  = 25                      # cartera cliente a cliente: 25..37
+R_CARTC = R_CART + 2              # primera fila de cliente: 27
+R_CARTT = R_CARTC + 10            # total de la cartera: 37
+R_LECT  = 41                      # las tres lecturas: 41..44
+R_DEU   = 48                      # inventario de deuda: 48..56
 R_DEUT  = R_DEU + len(DEUDA)      # total de la deuda = 39
-R_SCH   = 45                      # cuadro de amortización: 45..70
+R_SCH   = 60                      # cuadro de amortización: 60..85
 R_SALDO = R_SCH + 3               # saldo pendiente por deuda: 48..56
 R_CUOTA = R_SALDO + len(DEUDA) + 2  # cuota pagada por deuda: 59..67
-R_PLAN  = 73                      # primer mes del plan
+R_PLAN  = 88                      # primer mes del plan
 R_PLANF = R_PLAN + N - 1          # último mes = 60
-R_RES   = 93                      # resultado a 12 meses
-R_COND  = 97                      # las tres condiciones: 97..99
-R_SENS  = 103                     # sensibilidad: 103..108
+R_RES   = 108                      # resultado a 12 meses
+R_COND  = 112                     # las tres condiciones: 112..114
+R_SENS  = 118                     # sensibilidad: 118..123
 
 
 def token():
@@ -122,7 +125,7 @@ class Hoja:
 
 
 def construir(tok):
-    h = Hoja(tok, TITULO, filas=120, cols=26)
+    h = Hoja(tok, TITULO, filas=140, cols=26)
     V, F = [], []   # bloques de valores (RAW) y de fórmulas (USER_ENTERED)
 
     V.append(("A1", [
@@ -163,6 +166,41 @@ def construir(tok):
         [f'=SUMPRODUCT(($F${R_DEU}:$F${R_DEUT-1}="SÍ")*$C${R_DEU}:$C${R_DEUT-1})'],
         [f"=B{R_PAL+5}-B{R_CALC+2}-B{R_PAL+4}*12"],
     ]))
+
+
+    # --------------------------------------------------- cartera actual ----
+    # Los clientes con nombre, y un interruptor por cliente. Lo que no está
+    # firmado se puede quitar del modelo poniendo NO en la columna D sin
+    # borrar la fila, para ver cuánto depende el plan de una palabra dada.
+    V.append((f"A{R_CART}", [["CARTERA ACTUAL · cliente a cliente"]]))
+    V.append((f"A{R_CART + 1}", [
+        ["Cliente", "MRR €/mes", "Cuota de alta", "¿Cuenta en el modelo?",
+         "¿Alta ya cobrada?", "Estado", "Origen"]]))
+    V.append((f"A{R_CARTC}", [
+        ["Escola Aeronàutica de Catalunya", 480.87, 0, "SÍ", "SÍ",
+         "⚪ cliente vivo", "histórico"],
+        ["Elevacademy", 530, 0, "SÍ", "SÍ", "⚪ cliente vivo", "histórico"],
+        ["Alpha Media Group · Sergi", 800, 1200, "SÍ", "NO",
+         "🟢 CERRADO el 2-oct", "Outbound · email"],
+        ["Al milímetro · Sonia Lyssi", 800, 1200, "SÍ", "NO",
+         "🟠 sí VERBAL, sin firmar", "Meta · publicidad"],
+        ["", "", "", "NO", "NO", "", ""],
+        ["", "", "", "NO", "NO", "", ""],
+        ["", "", "", "NO", "NO", "", ""],
+        ["", "", "", "NO", "NO", "", ""],
+        ["", "", "", "NO", "NO", "", ""],
+        ["", "", "", "NO", "NO", "", ""],
+    ]))
+    V.append((f"A{R_CARTT}", [["TOTAL QUE CUENTA", "", "", "", "", "", ""]]))
+    F.append((f"B{R_CARTT}", [[
+        f'=SUMIF($D${R_CARTC}:$D${R_CARTT-1};"SÍ";$B${R_CARTC}:$B${R_CARTT-1})',
+        f'=SUMIFS($C${R_CARTC}:$C${R_CARTT-1};$D${R_CARTC}:$D${R_CARTT-1};"SÍ";'
+        f'$E${R_CARTC}:$E${R_CARTT-1};"NO")',
+        f'=COUNTIFS($D${R_CARTC}:$D${R_CARTT-1};"SÍ";$B${R_CARTC}:$B${R_CARTT-1};">0")']]))
+    V.append((f"E{R_CARTT}", [["← clientes que cuentan"]]))
+    V.append((f"A{R_CARTT + 1}", [
+        ["La columna C del total son las altas que cuentan y aún NO se han cobrado: "
+         "entran como cobro en octubre. Factúralas antes de empezar a trabajar."]]))
 
     # ------------------------------------------------------- las lecturas ----
     V.append((f"A{R_LECT - 2}", [
@@ -253,15 +291,15 @@ def construir(tok):
     for i in range(N):
         r, p = R_PLAN + i, R_PLAN + i - 1
         # El mes 1 arranca de los datos reales de INPUTS; los demás, del mes anterior.
-        COL["B"].append(f"=INPUTS!$B$38*(1-$B${R_CALC})+$B${R_PAL+1}" if i == 0
+        COL["B"].append(f"=$D${R_CARTT}*(1-$B${R_CALC})+$B${R_PAL+1}" if i == 0
                         else f"=B{p}*(1-$B${R_CALC})+$B${R_PAL+1}")
-        COL["C"].append("=INPUTS!$B$37" if i == 0 else f"=F{p}")
+        COL["C"].append(f"=$B${R_CARTT}" if i == 0 else f"=F{p}")
         COL["D"].append(f"=$B${R_PAL+1}*$B${R_PAL+3}")
         COL["E"].append(f"=C{r}*$B${R_CALC}")
         COL["F"].append(f"=C{r}+D{r}-E{r}")
         COL["G"].append(f"=F{r}+$B${R_PAL+1}*($B${R_PAL+2}-$B${R_PAL+3})")
         COL["H"].append("=INPUTS!$B$44+INPUTS!$B$43")
-        COL["I"].append("=INPUTS!$B$45" if i == 0 else
+        COL["I"].append(f"=INPUTS!$B$45+$C${R_CARTT}" if i == 0 else
                         ("=INPUTS!$B$46" if i == 1 else "=0"))
         COL["J"].append(f"=G{r}+H{r}+I{r}")
         COL["K"].append(f"=IF({i+1}<=12;$B${R_PAL+4};0)")
@@ -350,7 +388,7 @@ def construir(tok):
 
 
 # ---------------------------------------------------------------- formato ----
-def formato(tok, gid, filas=120, cols=26):
+def formato(tok, gid, filas=140, cols=26):
     C = lambda r, g, b: {"red": r, "green": g, "blue": b}
     VERDE, BLANCO, GRIS = C(.06, .42, .36), C(1, 1, 1), C(.47, .54, .52)
     AZUL, TINTA, ROJO = C(.09, .35, .55), C(.08, .13, .12), C(.64, .17, .14)
@@ -415,6 +453,17 @@ def formato(tok, gid, filas=120, cols=26):
         R(R_CALC, R_CALC, 2, 2, bg=SUAVE, bold=True, font="Roboto Mono", ha="RIGHT", num=PCT),
         R(R_CALC, R_CALC + 6, 3, 3, ha="CENTER"),
         R(R_CALC, R_CALC + 6, 4, 8, fg=GRIS, size=9),
+        # cartera
+        R(R_CART + 1, R_CART + 1, 1, 7, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
+          size=9, ha="CENTER", wrap="WRAP"),
+        R(R_CARTC, R_CARTT, 1, 1, bold=True, ha="LEFT"),
+        R(R_CARTC, R_CARTT, 2, 3, font="Roboto Mono", ha="RIGHT", num=EUR),
+        R(R_CARTC, R_CARTT - 1, 4, 5, bg=CREMA, fg=AZUL, bold=True, ha="CENTER"),
+        R(R_CARTC, R_CARTT - 1, 6, 7, size=10),
+        R(R_CARTT, R_CARTT, 1, 7, bg=C(.92, .96, .94), fg=VERDE, bold=True),
+        R(R_CARTT, R_CARTT, 4, 4, bg=C(.92, .96, .94), fg=VERDE, bold=True,
+          font="Roboto Mono", ha="RIGHT", num="0.0"),
+        R(R_CARTT + 1, R_CARTT + 1, 1, 12, fg=GRIS, size=9, italic=True),
         # lecturas
         R(R_LECT - 1, R_LECT - 1, 1, 6, bg=C(.13, .19, .17), fg=BLANCO, bold=True,
           size=9, ha="CENTER"),
@@ -495,7 +544,7 @@ def formato(tok, gid, filas=120, cols=26):
         R(R_SENS + 7, R_SENS + 7, 1, 10, fg=GRIS, size=9, italic=True),
     ]
     # cabeceras de sección
-    for r in (R_PAL - 1, R_CALC - 1, R_LECT - 2, R_DEU - 2, R_SCH, R_PLAN - 2,
+    for r in (R_PAL - 1, R_CALC - 1, R_CART, R_LECT - 2, R_DEU - 2, R_SCH, R_PLAN - 2,
               R_RES - 1, R_COND - 1, R_SENS - 2):
         req.append(R(r, r, 1, 24, bg=C(.92, .95, .94), fg=VERDE, bold=True, size=12))
 
@@ -530,6 +579,13 @@ def formato(tok, gid, filas=120, cols=26):
                                        "textFormat": {"foregroundColor": C(.70, .76, .74)}}}},
             "index": 0}},
         # validación: la columna LIQUIDAR solo admite SÍ o NO
+        {"setDataValidation": {
+            "range": {"sheetId": gid, "startRowIndex": R_CARTC - 1, "endRowIndex": R_CARTT - 1,
+                      "startColumnIndex": 3, "endColumnIndex": 5},
+            "rule": {"condition": {"type": "ONE_OF_LIST",
+                                   "values": [{"userEnteredValue": "SÍ"},
+                                              {"userEnteredValue": "NO"}]},
+                     "showCustomUi": True, "strict": True}}},
         {"setDataValidation": {
             "range": {"sheetId": gid, "startRowIndex": R_DEU - 1, "endRowIndex": R_DEUT - 1,
                       "startColumnIndex": 5, "endColumnIndex": 6},
