@@ -63,3 +63,41 @@ resultado**. El ajuste decía 0. El sistema enviaba.
 
 Para los topes de buzón, la comprobación válida no es leer el campo. Es contar de qué dominio
 salieron los correos del día siguiente.
+
+---
+
+## EJECUTADO el 2-oct a las 17:00, con el «métele caña» de Maikel
+
+El tope a 1 no bastaba: seguían saliendo 5 correos al día con una URL listada. Hecho el arreglo
+de verdad, que es quitar los buzones de las campañas.
+
+| Paso | Qué | Resultado |
+|---|---|---|
+| 1 | `DELETE /campaigns/{id}/email-accounts` con los 5 ids, en las **5 campañas ACTIVE** | `{"ok":true,"result":5}` · 10 buzones limpios en cada una |
+| 2 | Lo mismo en las pausadas y cerradas donde quedaba al menos un buzón limpio | **51 campañas** |
+| 3 | Las **11** donde *todos* los buzones eran de SURBL: primero adjuntar los 10 limpios (`POST`, aditivo), después quitar los 5 | 11 campañas, las dos llamadas con `ok:true` |
+
+**Verificación global, leyendo de vuelta campaña por campaña: 0 campañas de Qualivo con un buzón
+de SURBL adjunto.** 62 campañas tocadas en total.
+
+Las 11 del paso 3 eran la trampa peor del lote: en COMPLETED o STOPPED, así que hoy no envían,
+pero con el 100% de sus buzones listados. Reanudar una habría enviado todo por un dominio en la
+lista negra.
+
+Las campañas de DKR (cliente) no se han tocado: tienen su propia infraestructura.
+
+### Lo que queda, y es el único hilo suelto
+
+Los pasos 2 y 3 de las secuencias responden en el hilo y sin asunto. Unos **15 leads** recibieron
+el paso 1 desde goqualivo o gotqualivo y van a recibir el paso 2 desde otro dominio, así que su
+hilo se rompe: les llegará como un correo nuevo sin asunto.
+
+Es el coste de haberlo hecho, y lo asumo a cambio de no mandar más URLs listadas. Está apuntado
+para no sorprenderse si alguno de esos 15 contesta «¿de qué me hablas?».
+
+### La comprobación del lunes sigue pendiente, y ahora es más fácil
+
+El lunes 5, contar los dominios emisores de los envíos del día con el método de arriba (historial
+de mensajes lead a lead, no la fila de estadística). **Lo esperado ahora es cero**, no «menos».
+Si sale cualquier cosa distinta de cero, el problema no es el tope ni el adjunto y hay que
+buscarlo en otro sitio.

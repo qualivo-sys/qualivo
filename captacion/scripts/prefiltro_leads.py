@@ -51,6 +51,20 @@ ROL = re.compile(r'^(info|hola|contacto|contact|admin|ventas|comercial|marketing
 
 BANDA_MIN, BANDA_MAX, TECHO_DURO = 5, 50, 150
 
+# Descartes manuales: dominios ya rechazados a mano, con fecha y motivo.
+# Existe porque el pool de Apollo devuelve lo ya rechazado: el 2-oct volvio a
+# salir Lizarte, descartado a mano el 1-oct por ser fabricacion.
+DESCARTES = 'captacion/datos/descartes-manuales.json'
+
+
+def descartes_manuales(ruta=DESCARTES):
+    try:
+        return json.load(open(ruta))
+    except Exception:
+        print(f"AVISO: no encuentro {ruta}. Sin el, el prefiltro vuelve a "
+              f"proponer lo que ya se rechazo a mano.")
+        return {}
+
 
 def emails_en_smartlead(key):
     """Todos los emails que ya existen en Smartlead, en cualquier campana."""
@@ -79,9 +93,15 @@ def emails_en_smartlead(key):
     return emails, dominios
 
 
-def revisar(leads, ya_emails, ya_dominios):
-    """Anota en cada lead la lista de puertas que no pasa. No decide por si solo:
-    el encaje de sector lo mira una persona sobre los que sobreviven."""
+def revisar(leads, ya_emails, ya_dominios, descartados=None):
+    """Anota en cada lead lo que no pasa. Distingue dos cosas:
+
+    - `fallos`: puertas duras. El lead no sale, y no es opinable.
+    - `avisos`: cosas que hay que mirar a mano. El lead sigue vivo.
+
+    El encaje de sector NO lo decide este script.
+    """
+    descartados = descartados if descartados is not None else descartes_manuales()
     por_dominio = collections.Counter(l.get('dominio', '') for l in leads)
     vistos = set()
     for l in leads:
@@ -101,9 +121,18 @@ def revisar(leads, ya_emails, ya_dominios):
             f.append('DOMINIO-YA-TOCADO')
         if ROL.match(e):
             f.append('BUZON-DE-ROL')
+        avisos = []
+        if d in descartados:
+            dd = descartados[d]
+            f.append(f"DESCARTE-MANUAL[{dd.get('fecha','?')}]")
         m = COMPETIDOR.search(texto)
         if m and not NO_COMPETIDOR.search(texto):
-            f.append(f'COMPETIDOR[{m.group(0)}]')
+            # NO es un fallo. Corregido el 2-oct: el unico cierre de la semana
+            # (Alpha Media Group, 14 comerciales y Zoho) es una agencia de
+            # medios. El discriminante del tipo A es tener de 3 a 30 personas
+            # en ventas, no el sector. Este script no puede medir eso, asi que
+            # avisa y lo mira una persona.
+            avisos.append(f'AGENCIA[{m.group(0)}]·comprobar equipo comercial 3-30')
         if emp and emp > TECHO_DURO:
             f.append(f'TAMANO-{emp}p')
         elif emp and not (BANDA_MIN <= emp <= BANDA_MAX):
@@ -114,6 +143,7 @@ def revisar(leads, ya_emails, ya_dominios):
         if por_dominio[d] > 1:
             f.append(f'MISMO-DOMINIO-x{por_dominio[d]}')
         l['fallos'] = f
+        l['avisos'] = avisos
     return leads
 
 
@@ -132,10 +162,15 @@ def main():
     leads = revisar(leads, ya_e, ya_d)
     limpios = [l for l in leads if not l['fallos']]
     c = collections.Counter(z.split('[')[0] for l in leads for z in l['fallos'])
+    av = collections.Counter(z.split('[')[0] for l in leads for z in l.get('avisos', []))
 
     print("\n=== PUERTAS QUE NO PASAN ===")
     for k, v in c.most_common():
         print(f"  {k:24} {v}")
+    if av:
+        print("\n=== AVISOS (el lead sigue vivo, pero hay que mirarlo) ===")
+        for k, v in av.most_common():
+            print(f"  {k:24} {v}")
     print(f"\npasan el prefiltro: {len(limpios)} de {len(leads)}")
     print("El prefiltro NO verifica encaje de sector ni que inviertan en")
     print("captacion. Eso se revisa a mano sobre estos, antes de cargar.")

@@ -1,0 +1,110 @@
+{
+ "altostratus.es": {
+  "empresa": "Altostratus | Part of Telefónica Tech",
+  "fecha": "2026-10-02",
+  "motivo": "140 empleados y es parte de Telefonica Tech: no hay dueno que decida",
+  "quien": "outbound"
+ },
+ "bist.eu": {
+  "empresa": "Barcelona Institute of Science and Technology (BIST)",
+  "fecha": "2026-10-02",
+  "motivo": "centro de investigacion de siete institutos catalanes: financiacion publica, no compra captacion",
+  "quien": "outbound"
+ },
+ "brutalmedia.tv": {
+  "empresa": "Brutal Media | Grupo BBC Studios",
+  "fecha": "2026-10-02",
+  "motivo": "100 empleados y es parte de BBC Studios",
+  "quien": "outbound"
+ },
+ "bse.eu": {
+  "empresa": "Barcelona School of Economics",
+  "fecha": "2026-10-01",
+  "motivo": "demasiado grande, decision por comite",
+  "quien": "outbound"
+ },
+ "digittal.es": {
+  "empresa": "",
+  "fecha": "2026-10-02",
+  "motivo": "registro roto: sin empresa, sin cargo, sin empleados",
+  "quien": "outbound"
+ },
+ "ebiseducation.com": {
+  "empresa": "EBIS Business Techschool",
+  "fecha": "2026-10-02",
+  "motivo": "140 empleados",
+  "quien": "outbound"
+ },
+ "featurit.com": {
+  "empresa": "FeaturIT",
+  "fecha": "2026-10-02",
+  "motivo": "3 empleados (suelo 5) y el email es de LambdaLoopers, otra entidad",
+  "quien": "outbound"
+ },
+ "fictionexpress.com": {
+  "empresa": "Fiction Express",
+  "fecha": "2026-10-01",
+  "motivo": "plataforma de lectura: proveedor de colegios, no el colegio",
+  "quien": "outbound"
+ },
+ "gcngroup.org": {
+  "empresa": "GCN Group",
+  "fecha": "2026-10-02",
+  "motivo": "98 empleados y la web devuelve 503: no verificable",
+  "quien": "outbound"
+ },
+ "ie.edu": {
+  "empresa": "IE",
+  "fecha": "2026-10-01",
+  "motivo": "demasiado grande, decision por comite",
+  "quien": "outbound"
+ },
+ "lizarte.com": {
+  "empresa": "Lizarte",
+  "fecha": "2026-10-01",
+  "motivo": "fabricacion, no venta consultiva con equipo. Volvio a salir del pool de Apollo el 2-oct",
+  "quien": "outbound"
+ },
+ "mundoposgrado.com": {
+  "empresa": "Mundo Posgrado",
+  "fecha": "2026-10-02",
+  "motivo": "Mundo Posgrado vende leads a escuelas: es proveedor de lo que nosotros vendemos",
+  "quien": "outbound"
+ },
+ "proyectosyseguros.com": {
+  "empresa": "Proyectos y Seguros S.A.",
+  "fecha": "2026-10-02",
+  "motivo": "110 empleados",
+  "quien": "outbound"
+ },
+ "qatrogroup.com": {
+  "empresa": "QATRO",
+  "fecha": "2026-10-02",
+  "motivo": "110 empleados",
+  "quien": "outbound"
+ },
+ "rinolbolivia.com": {
+  "empresa": "RCR Industrial Flooring",
+  "fecha": "2026-10-02",
+  "motivo": "97 empleados y el dominio Apollo es rinolbolivia.com (Bolivia)",
+  "quien": "outbound"
+ },
+ "tekmaneducation.com": {
+  "empresa": "tekman education",
+  "fecha": "2026-10-01",
+  "motivo": "editorial educativa: proveedor de colegios",
+  "quien": "outbound"
+ },
+ "tlteducation.com": {
+  "empresa": "The Lemon Tree",
+  "fecha": "2026-10-01",
+  "motivo": "agencia de ano escolar en el extranjero, no imparte",
+  "quien": "outbound"
+ },
+ "tutellus.com": {
+  "empresa": "Tutellus",
+  "fecha": "2026-10-01",
+  "motivo": "ya no es formacion, es Web3 y tokenizacion",
+  "quien": "outbound"
+ }
+}
