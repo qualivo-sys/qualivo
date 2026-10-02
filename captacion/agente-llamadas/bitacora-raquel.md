@@ -359,3 +359,28 @@ Cuatro llamadas, registradas en Notion (📞 Llamadas de Raquel).
   Twilio con número español, y hace falta un número de un operador español.
 - Llamada de B/C a los 30 min del primer WhatsApp en vez de a las 2 h 30 (Maikel lo ha hecho a mano
   con Javier; falta decidir si pasa a regla).
+
+## 2-oct-2026 · revisión diaria (llamadas del 1-oct 19:39 al 2-oct 19:39)
+
+Una llamada, registrada en Notion (📞 Llamadas de Raquel).
+
+- Javier (lead form Meta, clínicas, nivel B), 15:23: segunda llamada en menos de 24 h, por orden
+  de Maikel («si no contesta en una hora que lo vuelva a llamar Raquel») tras el segundo WhatsApp
+  de las 14:20. Buzón otra vez; Raquel dejó el mismo mensaje que el 1-oct. Cuarto toque sin
+  respuesta (WA1, voz1, WA2, voz2). Desde el 647, conectó sin error SIP.
+
+**Observado.**
+- El mensaje de buzón es el mismo en la primera y en la segunda llamada. Quien lo escucha dos veces
+  en un día oye a un robot que insiste.
+- La transcripción sigue escribiendo «Michael Echeverría» y «Cuálibo»; el texto del asistente dice
+  «Máikel Echevarría» y «Cuálivo» (comprobado en la configuración). Sigue sin escucharse el audio.
+
+**Aplicado:** nada en el guion. No hay conversación real de la que sacar un fallo de guion.
+
+**Propuesto, no aplicado (decide Maikel).**
+- Segundo buzón al mismo lead: mensaje distinto que cierre el bucle («te dejo esto y no insisto
+  más por teléfono; si te interesa, contesta al WhatsApp»), o no dejar mensaje. Vapi solo admite
+  un texto de buzón por asistente, así que habría que pasarlo como variable desde el lanzador
+  según el número de intentos previos.
+- En clínicas, si el primer buzón es por la tarde, probar el segundo intento a primera hora
+  (9:00-9:30) antes de dar el lead por no contactable.
