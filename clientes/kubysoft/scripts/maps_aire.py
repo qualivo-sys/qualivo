@@ -96,15 +96,41 @@ def corre(termino, ciudad, maximo, tk):
         return json.loads(f.read().decode())
 
 
+def guarda(todo, destino):
+    """Escribe por fichero temporal y renombra, para no dejar medio JSON si
+    nos matan justo al escribir."""
+    tmp = destino + ".tmp"
+    json.dump(todo, open(tmp, "w"), ensure_ascii=False)
+    os.replace(tmp, destino)
+
+
 if __name__ == "__main__":
     fase = sys.argv[1] if len(sys.argv) > 1 else "fase1"
     if fase not in FASES:
         sys.exit(f"Fase desconocida: {fase}. Son {list(FASES)}")
     tk = token()
     os.makedirs(DATOS, exist_ok=True)
-    todo = []
+
+    # Un fichero por fase. prepara_aire.py los junta, asi que relanzar una fase
+    # no pisa lo que ya se pago en la otra.
+    destino = os.path.join(DATOS, f"maps_aire_crudo_{fase}.json")
+
+    # SE GUARDA DESPUES DE CADA BUSQUEDA, y se reanuda saltando las que ya
+    # estan. El 2-oct la fase 2 se corto a las 23 busquedas de 30 por un limite
+    # de tiempo y, como solo se guardaba al final, en disco no quedo nada
+    # mientras Apify ya habia cobrado. Se recuperaron de los datasets, pero el
+    # fallo era este: no volver a juntar en memoria media hora de trabajo
+    # pagado sin tocar el disco.
+    todo = json.load(open(destino)) if os.path.exists(destino) else []
+    hechas = {(x.get("_ciudad"), x.get("_termino")) for x in todo}
+    if hechas:
+        print(f"reanudando: {len(todo)} fichas y {len(hechas)} busquedas ya en disco")
+
     for ciudad in FASES[fase]:
         for t in TERMINOS:
+            if (ciudad.split(",")[0], t) in hechas:
+                print(f"  {ciudad.split(',')[0]:14} {t:36}  (ya estaba)")
+                continue
             try:
                 r = corre(t, ciudad, POR_BUSQUEDA, tk)
             except Exception as e:
@@ -116,10 +142,8 @@ if __name__ == "__main__":
                 x["_termino"] = t
                 x["_fase"] = fase
             todo.extend(r)
+            guarda(todo, destino)
             print(f"  {ciudad.split(',')[0]:14} {t:36} {len(r):4}")
             time.sleep(2)
-    # Un fichero por fase. prepara_aire.py los junta, asi que relanzar una fase
-    # no pisa lo que ya se pago en la otra.
-    destino = os.path.join(DATOS, f"maps_aire_crudo_{fase}.json")
-    json.dump(todo, open(destino, "w"), ensure_ascii=False)
+
     print(f"\n{len(todo)} fichas -> {destino}")
