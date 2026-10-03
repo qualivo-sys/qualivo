@@ -282,3 +282,26 @@ en GHL con etiqueta y cadencia, ritmo de gasto).
 
 Pendiente de Maikel: tope de QV_VERTICALES_Sep26 800 → 1.575 € y fondos en la
 tarjeta (≈ 390 € hasta el lunes, ≈ 810 € más hasta el 31).
+
+### Recorte del sábado 3-oct (16:37 CEST) · "dejar el nuevo con los dos"
+
+Maikel decide quedarse con los dos vídeos viejos y **un solo nuevo: CLI_PRI** (la
+priorización, clínicas), el único que en dos días ha superado al viejo en algo:
+CTR 6,18 % frente a 4,49 % y un envío a 8,74 € (259 impresiones, no es veredicto).
+Ejecutado con su OK y verificado por GET:
+
+| conjunto | estado | presupuesto |
+|---|---|---|
+| formación · VIEJO | activo, solo el vídeo viejo | 15 €/día |
+| formación · NUEVOS S1 | **pausado entero** (S1_PLA, S1_VEL, S1_CUR guardados con sus formularios) | — |
+| clínicas · VIEJO | activo, solo el vídeo viejo | 15 €/día |
+| clínicas · NUEVOS · solo CLI_PRI | activo; CLI_HUE y CLI_VEL **pausados** | 20 €/día |
+
+**Total: 50 €/día.** Lunes 6, 08:05: si CLI_PRI sigue por encima del viejo en coste
+por apertura, pasa junto al viejo de clínicas a 16 €/día y el total baja a 32;
+si no, se pausa y quedan los dos viejos. Lo que queda del test: S1_PLA 20,95 € /
+592 impr / 1 clic (descartado); S1_VEL, S1_CUR, CLI_VEL no probados (< 200 impr);
+CLI_HUE 23,39 € / 705 impr / 2,60 €/apertura, peor que el viejo (2,23).
+
+Sigue pendiente de Maikel: tope de campaña (800 → 1.604 €; gastado 566,95 a las
+08:05) y la exclusión de Facebook Stories.
