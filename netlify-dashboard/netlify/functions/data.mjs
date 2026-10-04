@@ -30,6 +30,7 @@ async function ghl(pathOrUrl) {
 function provider(s) {
   const x = (s || '').toLowerCase();
   if (x.includes('google')) return 'Google Ads';
+  if (x.includes('propio negocio')) return 'Landing · Negocio (test)';
   if (x.includes('landing')) return 'Meta · Landing';
   if (/facebook|lead form|instant|formulario|meta/.test(x)) return 'Meta · Instantáneo';
   if (/calculadora|test qu|lead[\s-]?magnet/.test(x)) return 'Lead magnet · Blog';

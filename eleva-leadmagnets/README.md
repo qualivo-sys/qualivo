@@ -41,3 +41,19 @@ Se desplegó vía la API de Vercel (archivos inline). Para redeplegar se puede:
   un lead repetido se trata como éxito (no se muestra error al usuario).
 - Protección de despliegue de Vercel (SSO) **desactivada** para que sea público.
 - Pendiente: conectar subdominio propio (ej. `recursos.elevanails.es`) vía DNS.
+
+## Landing alternativa "propio negocio" (prueba B de octubre)
+
+`public/negocio.html` → `https://blog.elevanails.es/negocio` (noindex). Formulario propio (no el iframe de GHL):
+prefijo +34 fijo, validación de 9 cifras que empiecen por 6/7, pregunta "¿Cuándo querrías empezar?" y UTMs.
+`POST /api/lead` con `opportunity:true` crea el contacto **y el trato en "Nuevo lead (IA)"** (source
+`Landing propio negocio (web)`, tag `landing-negocio`, campo "¿Cuándo te gustaría empezar?"). Píxel de Meta
+incluido (PageView + Lead). `?precio=1` muestra el bloque de anclaje de precio (texto "Desde X €/mes" a rellenar
+cuando Eleva decida). En el panel aparece como procedencia "Landing · Negocio (test)".
+
+## CTAs del blog
+
+`tools/add_ctas.py` añade a cada artículo un CTA intermedio (tras el 2.º H2) y uno final, ambos a `/calculadora`
+con `utm_source=blog&utm_campaign=<slug>`, más WhatsApp. Idempotente. Los leads entran con source
+"Calculadora ingresos (web)" y se ven en el panel como "Lead magnet · Blog".
+
