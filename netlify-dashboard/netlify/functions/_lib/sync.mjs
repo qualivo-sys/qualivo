@@ -44,7 +44,8 @@ export function target(tags, cur, ctx = {}) {
   // Un lead en "Nuevo lead (IA)" al que ya se ha llamado (calligence: llamar) y sigue sin resultado tras N días
   // (ILOCALIZABLE_DAYS, 10 por defecto; 0 desactiva) pasa a Ilocalizable para que el tablero refleje la realidad.
   const days = Number(process.env.ILOCALIZABLE_DAYS ?? 10);
-  if (days > 0 && cur === 'Nuevo lead (IA)' && t.has('calligence: llamar') && ctx.ageDays > days) return 'Ilocalizable';
+  const llamado = t.has('calligence: llamar') || t.has('calligence-llamar') || t.has('no-responde');
+  if (days > 0 && cur === 'Nuevo lead (IA)' && llamado && ctx.ageDays > days) return 'Ilocalizable';
   return null;
 }
 
