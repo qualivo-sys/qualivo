@@ -137,3 +137,13 @@ input[type=range]{width:100%;accent-color:var(--hot);height:6px}
 .wa-fab{position:fixed;bottom:24px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 16px rgba(37,211,102,.45),0 2px 6px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s}
 .wa-fab:hover{transform:translateY(-3px) scale(1.05)}
 .wa-fab svg{width:32px;height:32px}
+
+/* CTAs del blog (medibles: utm_source=blog) */
+.blogcta{background:linear-gradient(135deg,var(--blush),#fff);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;margin:28px 0;box-shadow:var(--shadow)}
+.blogcta .t{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.02em;color:var(--deep);margin-bottom:6px}
+.blogcta p{margin:0 0 14px;color:var(--ink)}
+.blogcta .ctabtn{width:auto;display:inline-block;padding:14px 22px}
+.blogcta .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.blogcta .ctawa{display:inline-block;padding:13px 20px;border-radius:999px;border:2px solid var(--deep);color:var(--deep);font-weight:800;text-decoration:none}
+.blogcta .ctawa:hover{background:var(--deep);color:#fff}
+@media (max-width:560px){.blogcta .ctabtn,.blogcta .ctawa{width:100%;text-align:center}}
