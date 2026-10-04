@@ -1,0 +1,36 @@
+{
+  "slug": "inventium",
+  "empresa": "INVENTIUM",
+  "segmento": "b2b",
+  "fecha": "4 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "vimos": [
+    {
+      "texto": "La dirección comercial es nueva desde abril de 2026, tras ocho años en una gran consultora de I+D. En financiación alternativa y ayudas, cada operación depende de documentación del cliente, y ahí es donde se para.",
+      "fuente": "perfil público de la dirección comercial",
+      "url": ""
+    },
+    {
+      "texto": "La web presenta financiación alternativa y consultoría de I+D+i, con un «Fondo de Anticipo de Subvenciones». Son expedientes largos, con plazos de convocatoria que no esperan.",
+      "fuente": "vuestra web",
+      "url": "https://www.inventium.es"
+    },
+    {
+      "texto": "Unas 37 personas en plantilla, con sede en Madrid. Un equipo corto donde una operación parada esperando al cliente se queda fácilmente sin dueño.",
+      "fuente": "ficha pública de empresa",
+      "url": ""
+    }
+  ],
+  "no_sabemos": "Qué CRM usáis, cuántas operaciones tenéis abiertas a la vez y cómo se decide cuál retomar. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "Cuando una operación se queda esperando documentación del cliente, ¿quién la retoma, cuándo y con qué mensaje?",
+    "¿Cómo se decide qué operación parada merece una llamada hoy y cuál puede esperar?",
+    "¿Dirección ve cuántas operaciones llevan más de dos semanas esperando al cliente?"
+  ],
+  "canales": [],
+  "mensaje_ejemplo": {
+    "quien": "un consultor de INVENTIUM",
+    "para": "un cliente que lleva 12 días sin mandar las cuentas anuales",
+    "texto": "Hola, Carlos. Para presentar el expediente antes del cierre de la convocatoria del día 30 me faltan las cuentas de 2025. Si me las pasas esta semana, lo tenéis presentado el 24. ¿Te lo recuerdo el jueves o te viene mejor que lo pidamos a tu gestoría directamente?"
+  }
+}

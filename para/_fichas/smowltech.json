@@ -1,0 +1,36 @@
+{
+  "slug": "smowltech",
+  "empresa": "Smowltech",
+  "segmento": "b2b",
+  "fecha": "4 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "vimos": [
+    {
+      "texto": "La dirección comercial es nueva desde septiembre de 2026, y la plantilla ha crecido más de un 50 % en el último año. Cuando un equipo crece tan rápido, lo que suele romperse es el seguimiento de los interesados que no decidieron en su momento.",
+      "fuente": "perfil público de la dirección comercial y ficha de empresa",
+      "url": ""
+    },
+    {
+      "texto": "La web describe la supervisión de exámenes en línea para universidades y centros de formación. Es una venta por convocatoria: el centro decide en una ventana concreta del año, y fuera de ella casi nadie compra.",
+      "fuente": "vuestra web",
+      "url": "https://smowl.net"
+    },
+    {
+      "texto": "Fundada en 2012, con sede en San Sebastián y unas 56 personas. Diez años de interesados que pidieron información en algún momento.",
+      "fuente": "ficha pública de empresa",
+      "url": ""
+    }
+  ],
+  "no_sabemos": "Qué CRM usáis, cuántos centros tenéis en conversación y cómo guardáis la fecha en la que cada uno vuelve a decidir. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "Cuando un centro pide información fuera de su ventana de decisión, ¿quién vuelve a escribirle cuando llega la convocatoria, y cómo se acuerda?",
+    "¿Dónde queda apuntada la fecha en la que cada centro vuelve a decidir?",
+    "¿Quién ve cada semana los interesados cuya ventana se acerca?"
+  ],
+  "canales": [],
+  "mensaje_ejemplo": {
+    "quien": "una comercial de Smowltech",
+    "para": "una universidad que pidió información en febrero y dijo «lo vemos para el curso que viene»",
+    "texto": "Hola, Elena. En febrero me dijiste que lo veríais para el curso 26-27. Con la convocatoria de octubre abierta, te paso cómo lo han montado dos universidades parecidas a la vuestra. ¿Lo vemos 15 minutos antes de que cierre el plazo?"
+  }
+}

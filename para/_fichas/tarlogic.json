@@ -1,0 +1,36 @@
+{
+  "slug": "tarlogic",
+  "empresa": "Tarlogic",
+  "segmento": "b2b",
+  "fecha": "4 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "vimos": [
+    {
+      "texto": "La dirección comercial es nueva desde mayo de 2026, y viene de otra empresa de ciberseguridad. Cuando cambia quien dirige la venta, lo primero que suele revisarse es qué propuestas abiertas tienen siguiente paso y cuáles no.",
+      "fuente": "perfil público de la dirección comercial",
+      "url": ""
+    },
+    {
+      "texto": "La web se presenta como «Experts in cybersecurity and cyber intelligence»: servicios que se venden por proyecto, con propuesta, varias reuniones y una firma al final.",
+      "fuente": "vuestra web, página principal",
+      "url": "https://www.tarlogic.com"
+    },
+    {
+      "texto": "Unas 130 personas en plantilla, con sede en Madrid. A ese tamaño, el seguimiento de cada propuesta ya no cabe en la cabeza de una sola persona.",
+      "fuente": "ficha pública de empresa",
+      "url": ""
+    }
+  ],
+  "no_sabemos": "Qué CRM usáis, cuántas personas venden y cómo se decide hoy el siguiente paso de una propuesta enviada. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "Cuando sale una propuesta, ¿quién fija el siguiente paso y la fecha, y dónde queda apuntado?",
+    "¿Quién se entera, y cuándo, de que una propuesta lleva dos semanas sin respuesta?",
+    "¿Dirección ve cada lunes cuántas propuestas abiertas hay sin siguiente paso?"
+  ],
+  "canales": [],
+  "mensaje_ejemplo": {
+    "quien": "una comercial de Tarlogic",
+    "para": "un cliente que recibió la propuesta hace 9 días",
+    "texto": "Hola, Andrés. Te mandé la propuesta del test de intrusión el lunes pasado. Si os encaja arrancar en noviembre, os guardo las dos semanas de equipo. ¿Lo vemos 10 minutos esta semana?"
+  }
+}

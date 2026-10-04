@@ -1,0 +1,36 @@
+{
+  "slug": "hotelverse",
+  "empresa": "Hotelverse",
+  "segmento": "b2b",
+  "fecha": "4 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "vimos": [
+    {
+      "texto": "La dirección comercial global es nueva desde abril de 2026. Vender a cadenas hoteleras significa varias personas al otro lado: revenue, operaciones, dirección. La cuenta avanza cuando alguien la empuja y se para cuando nadie lo hace.",
+      "fuente": "perfil público de la dirección comercial",
+      "url": ""
+    },
+    {
+      "texto": "La web lo resume así: «Maximiza el TrevPAR con upgrades, pujas, venta por atributos y elección exacta de habitación». Es una venta con demo, prueba y decisión en varios pasos.",
+      "fuente": "vuestra web, página principal",
+      "url": "https://hotelverse.tech"
+    },
+    {
+      "texto": "Unas 60 personas en plantilla, con sede en Palma. A ese tamaño el equipo comercial es corto y cada cuenta a medias pesa.",
+      "fuente": "ficha pública de empresa",
+      "url": ""
+    }
+  ],
+  "no_sabemos": "Qué CRM usáis, cuántas cuentas tenéis abiertas a la vez y quién retoma una demo que no tuvo siguiente paso. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "Con tres o cuatro interlocutores en una cadena, ¿quién retoma la cuenta cuando la última reunión no dejó siguiente paso?",
+    "¿Cuánto tarda en saberse que una demo de hace tres semanas no ha avanzado?",
+    "¿Quién ve cada semana las cuentas que están a medias, y con qué criterio se decide cuál empujar hoy?"
+  ],
+  "canales": [],
+  "mensaje_ejemplo": {
+    "quien": "una comercial de Hotelverse",
+    "para": "el responsable de revenue de una cadena que vio la demo hace 3 semanas",
+    "texto": "Hola, Jordi. Después de la demo del día 12 quedamos en que lo verías con dirección. Si os ayuda, os preparo el cálculo con vuestros datos de un hotel para esa reunión. ¿Me dices cuál y te lo mando esta semana?"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "grupo-isonor",
+  "empresa": "Grupo Isonor",
+  "segmento": "b2b",
+  "fecha": "4 de octubre de 2026",
+  "cargo_decisor": "Dirección comercial",
+  "vimos": [
+    {
+      "texto": "La web describe una consultoría integral con muchas líneas bajo la misma marca: prevención, vigilancia de la salud, formación, protección de datos, jurídico, recursos humanos, seguridad alimentaria, web, software, marketing, subvenciones y obras.",
+      "fuente": "vuestra web, servicios",
+      "url": "https://www.grupoisonor.es"
+    },
+    {
+      "texto": "La dirección comercial de sistemas de gestión es nueva desde septiembre de 2026, después de llevar una dirección territorial dentro del propio grupo.",
+      "fuente": "perfil público de la dirección comercial",
+      "url": ""
+    },
+    {
+      "texto": "Unas 220 personas en plantilla, con sede en Santiago de Compostela. Con tantas líneas, un cliente de una de ellas es casi siempre una oportunidad para otra.",
+      "fuente": "ficha pública de empresa",
+      "url": ""
+    }
+  ],
+  "no_sabemos": "Qué CRM usáis, si cada línea lleva sus oportunidades aparte y de qué línea salió el último cliente nuevo. Es lo primero que preguntaríamos.",
+  "preguntas": [
+    "¿De qué línea salió el último cliente nuevo, y quién lo sabe sin preguntar?",
+    "Cuando un cliente de prevención pide formación o protección de datos, ¿quién lo recoge y cuánto tarda en llegar a la otra línea?",
+    "¿Hay una vista común de las oportunidades abiertas de todas las líneas, o cada una mira la suya?"
+  ],
+  "canales": [],
+  "mensaje_ejemplo": {
+    "quien": "un comercial de Grupo Isonor",
+    "para": "un cliente de prevención que preguntó por formación hace 6 días",
+    "texto": "Hola, Marta. Me dijiste el martes que queríais formar al equipo en manipulación de alimentos antes de fin de año. Te paso dos fechas con plaza en noviembre; si te encaja alguna, la dejo reservada hoy. ¿Cuál te viene mejor?"
+  }
+}
