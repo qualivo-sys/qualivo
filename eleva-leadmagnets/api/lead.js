@@ -55,6 +55,9 @@ module.exports = async (req, res) => {
   for (const [k, id] of Object.entries(CF)) {
     if (body[k]) customFields.push({ id, value: clean(body[k]) });
   }
+  // Pregunta de cualificación de la landing "propio negocio" → campo "¿Cuándo te gustaría empezar?" (alimenta el lead scoring).
+  const CUANDO = ['Cuanto antes', 'En 1-3 meses', 'Solo me informo'];
+  if (body.cuando && CUANDO.includes(String(body.cuando))) customFields.push({ id: 'UQYIi11lcJoTwn1C86M6', value: String(body.cuando) });
   const utmNota = body.utm_content ? ` · Anuncio: ${clean(body.utm_content)} (${clean(body.utm_campaign)})` : '';
 
   const payload = {
@@ -85,7 +88,22 @@ module.exports = async (req, res) => {
     if (r.ok || /duplicat/i.test(txt)) {
       // Añadimos una nota con la simulación si tenemos el contactId
       let contactId = null;
-      try { contactId = (JSON.parse(txt).contact || {}).id || null; } catch {}
+      try { const j = JSON.parse(txt); contactId = (j.contact || {}).id || (j.meta || {}).contactId || null; } catch {}
+      // Landings de captación (opportunity:true): el lead entra en el tablero en "Nuevo lead (IA)" para que Calligence lo llame.
+      if (contactId && body.opportunity === true) {
+        try {
+          await fetch(`${GHL}/opportunities/`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}`, Version: '2021-07-28', 'Content-Type': 'application/json', 'User-Agent': 'eleva-leadmagnet/1.0' },
+            body: JSON.stringify({
+              pipelineId: '8um6r1caOUAVBbhHkDbZ',                 // "Formacion Profesional Unas con IA"
+              pipelineStageId: '1c4da4bc-a4f5-4669-85e4-4e94c5fe14dd', // "Nuevo lead (IA)"
+              locationId, contactId, status: 'open',
+              name: nombre, source: payload.source
+            })
+          });
+        } catch { /* best-effort: el contacto ya existe en el CRM */ }
+      }
       if (contactId) {
         try {
           await fetch(`${GHL}/contacts/${contactId}/notes`, {
@@ -96,7 +114,7 @@ module.exports = async (req, res) => {
               'Content-Type': 'application/json',
               'User-Agent': 'eleva-leadmagnet/1.0'
             },
-            body: JSON.stringify({ body: `Calculadora de ingresos → ${notaCampos}${utmNota}` })
+            body: JSON.stringify({ body: `${body.origen === 'landing-negocio' ? 'Landing propio negocio' : 'Calculadora de ingresos'} → ${notaCampos}${utmNota}` })
           });
         } catch { /* la nota es best-effort */ }
       }
