@@ -27,6 +27,7 @@
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
     { id: 'masters', txt: 'Másteres online', desc: 'Escuela online con alumnos de varios países', ico: 'formacion' },
     { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
+    { id: 'retiros', txt: 'Marketplace de retiros', desc: 'Retiros de yoga, meditación y silencio: base de datos, plazas y reservas', ico: 'otro' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
   ];
