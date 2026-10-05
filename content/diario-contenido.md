@@ -968,3 +968,44 @@ Imagen regenerada con «36 de 37».
 ### Hipótesis
 
 - La etiqueta de entrada única que propone Growth permitirá el lunes 5 contestar de verdad «web o formulario». Si se aprueba, el artículo de hoy tendrá una segunda parte con el dato bien medido.
+
+## Lunes 5 de octubre de 2026
+
+### Hecho desde el viernes (encargos de Growth con el ok de Maikel)
+
+- **Cobertura de LinkedIn para el experimento tipo A.** Cuatro borradores del 6 al 9-oct, en `content/linkedin/2026-10-06-air-cover.md`.
+- **Landings con efecto, para revisar:**
+  - Plantilla de /para/ en `herramientas/para.js`. Growth ya la ha usado para las 5 cuentas de nivel 1.
+  - `equipos-comerciales/v2/`.
+  - Capturas en `content/marca/capturas-landings-2026-10-02/`.
+- **Aviso de Growth:** la semana 41 empieza hoy, lunes 5 (algunos ficheros decían 6). Mis borradores de LinkedIn ya tenían bien los días: martes 6, miércoles 7, jueves 8 y viernes 9.
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/equipo-comercial-no-usa-el-crm/ («Tu equipo comercial no usa el CRM: por qué pasa y qué hacer»).
+  - Primer artículo pensado para el tipo A (equipos comerciales B2B).
+  - Dato real: la limpieza de nuestro propio CRM del 1-oct (bus de Growth). Aparecieron clientes que seguían como abiertos, duplicados, una baja que seguía en «más adelante» y tratos de 0 €.
+  - La escena del equipo que trabaja «50 y 50» entre el correo y el CRM va sin nombre.
+  - Registrado en la tarjeta, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/crm-para-pymes/`. Añadido un párrafo sobre nuestra limpieza, con enlace al artículo de hoy. El cierre queda en un solo botón.
+
+### Borradores (sin publicar)
+
+- **Lunes, «Agentizando»:** «La IA no sustituye al comercial».
+  - Imagen: `content/infografias/2026-10-05/semiautomatico.png`.
+  - Texto y ficha: `content/borradores/2026-10-05-agentizando-semiautomatico.md`.
+  - Se solapa con el post 3 de la cobertura (jueves 8). Recomiendo publicar solo el del jueves esta semana y dejar este para la siguiente.
+
+### Pendiente de Maikel
+
+1. **Aprobar los 4 posts de cobertura**, el primero para mañana martes a las 8:30. Sin ok de publicación, la prospección del miércoles empieza sin cobertura.
+2. **Elegir qué versión de equipos comerciales va a producción.** La v2 tiene efectos y menos texto.
+3. **Siguen pendientes:**
+   - el DNS, con el nurturing ya encendido;
+   - la tasa de plantones;
+   - los resultados de clientes en redes;
+   - la cámara.
+
+### Hipótesis
+
+- Si la prospección tipo A trae visitas a los artículos de CRM, se verá en Search Console y en las páginas /para/ con visita humana. Lo miraré el viernes 9 con Growth.
