@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Test · NutriPsicoSalud (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Maqueta de test de 3 preguntas para móvil: una pregunta por pantalla, resultado con programa recomendado y paso a WhatsApp. */
+:root{--bg:#F7F3EE;--surface:#FFFFFF;--ink:#24302A;--muted:#5E6B64;--line:#E2DCD3;--accent:#3E8E6B;--accent-ink:#FFFFFF;--soft:#E4F3EC;--warm:#D9925B;
+  --display:"Fraunces",Georgia,serif;--body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121815;--surface:#1A221E;--ink:#E7EEEA;--muted:#A5B3AB;--line:#2A3530;--accent:#5FBF93;--accent-ink:#0E1A14;--soft:#1C2E26;--warm:#E2A574;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121815;--surface:#1A221E;--ink:#E7EEEA;--muted:#A5B3AB;--line:#2A3530;--accent:#5FBF93;--accent-ink:#0E1A14;--soft:#1C2E26;--warm:#E2A574;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:18px 40px}
+.wrap{max-width:460px;margin-inline:auto;display:grid;gap:18px}
+.brand{font-weight:600;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.brand b{color:var(--ink)}
+h1,h2{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:30px}
+h2{font-size:23px}
+p{margin:0}
+.sub{color:var(--muted)}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.step{display:none;gap:12px}
+.step.on{display:grid}
+.opt{font:inherit;font-weight:600;text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px}
+.tag{display:inline-block;font-size:12px;font-weight:600;background:var(--soft);color:var(--accent);border-radius:99px;padding:2px 10px;width:max-content}
+label{font-size:14px;font-weight:600;display:grid;gap:4px}
+input{font:inherit;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink)}
+.go{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:14px;padding:14px;cursor:pointer}
+.wa{font:inherit;font-weight:600;text-align:center;border:1.5px solid var(--accent);color:var(--accent);border-radius:14px;padding:12px;text-decoration:none}
+.faq{display:grid;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{color:var(--muted);font-size:15px;margin-top:6px}
+.note{font-size:12px;color:var(--muted);text-align:center}
+.back{font:inherit;font-size:14px;background:none;border:0;color:var(--muted);cursor:pointer;justify-self:start;padding:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><b>NutriPsicoSalud</b><span>Madrid y online</span></div>
+
+  <section class="step on" id="s0">
+    <h1>¿Comes por ansiedad, estás siempre cansada o tu digestión no va bien?</h1>
+    <p class="sub">Responde tres preguntas y te decimos qué programa encaja contigo y por dónde empezar. Son dos minutos.</p>
+    <button class="go" data-next="s1">Empezar el test</button>
+    <div class="faq">
+      <details><summary>¿Quién está detrás?</summary><p>Una consulta que trabaja la nutrición y la parte emocional a la vez. Primero entendemos qué te pasa; luego decidimos juntas el plan.</p></details>
+      <details><summary>¿Tengo que pagar algo para hacer el test?</summary><p>No. El test es gratis y no te compromete a nada.</p></details>
+      <details><summary>¿Es solo presencial?</summary><p>No. Todos los programas se pueden hacer online.</p></details>
+    </div>
+  </section>
+
+  <section class="step" id="s1">
+    <div class="bar"><i style="width:33%"></i></div>
+    <h2>¿Qué es lo que más te preocupa ahora?</h2>
+    <button class="opt" data-k="motivo" data-v="ansiedad" data-next="s2">Como por ansiedad o por emociones</button>
+    <button class="opt" data-k="motivo" data-v="peso" data-next="s2">Quiero perder peso y que dure</button>
+    <button class="opt" data-k="motivo" data-v="intestino" data-next="s2">Hinchazón, digestiones, falta de energía<small>intestino y energía</small></button>
+    <button class="opt" data-k="motivo" data-v="hormonas" data-next="s2">Ciclo, estrés, sueño<small>hormonas</small></button>
+    <button class="opt" data-k="motivo" data-v="otro" data-next="s2">Otra cosa: dolor, defensas, ánimo</button>
+  </section>
+
+  <section class="step" id="s2">
+    <div class="bar"><i style="width:66%"></i></div>
+    <h2>¿Desde cuándo te pasa?</h2>
+    <button class="opt" data-k="tiempo" data-v="meses" data-next="s3">Desde hace unos meses</button>
+    <button class="opt" data-k="tiempo" data-v="anos" data-next="s3">Más de un año</button>
+    <button class="opt" data-k="tiempo" data-v="siempre" data-next="s3">Desde siempre, ya he probado de todo</button>
+    <button class="back" data-next="s1">‹ Atrás</button>
+  </section>
+
+  <section class="step" id="s3">
+    <div class="bar"><i style="width:100%"></i></div>
+    <h2>¿Cómo prefieres empezar?</h2>
+    <button class="opt" data-k="modo" data-v="individual" data-next="s4">Acompañamiento uno a uno<small>sesiones individuales y seguimiento por WhatsApp</small></button>
+    <button class="opt" data-k="modo" data-v="grupo" data-next="s4">En un grupo pequeño<small>sesión semanal en grupo y menús</small></button>
+    <button class="opt" data-k="modo" data-v="nose" data-next="s4">No lo sé, que me aconsejen</button>
+    <button class="back" data-next="s2">‹ Atrás</button>
+  </section>
+
+  <section class="step" id="s4">
+    <div class="card">
+      <span class="tag">Tu resultado</span>
+      <h2 id="prog">Programa Ganbaru · 90 días</h2>
+      <p class="sub" id="porque">Trabaja la comida y la parte emocional a la vez, que es justo lo que cuentas.</p>
+    </div>
+    <p>Déjanos tu WhatsApp y en un minuto te escribimos para contarte cómo es y, si encaja, buscar hueco para una primera valoración.</p>
+    <label>Nombre<input autocomplete="given-name" placeholder="Tu nombre"></label>
+    <label>WhatsApp<input inputmode="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
+    <button class="go" type="button">Que me escriban por WhatsApp</button>
+    <a class="wa" href="#" onclick="return false">Prefiero escribir yo</a>
+    <p class="note">Maqueta para la demo: el formulario no envía nada.</p>
+  </section>
+</div>
+<script>
+(function () {
+  var r = {};
+  var P = {
+    ansiedad: ['Programa Ganbaru · 90 días', 'Trabaja la comida y la parte emocional a la vez, que es justo lo que cuentas.'],
+    peso: ['Programa Ganbaru · 90 días', 'Menús, acompañamiento emocional y seguimiento diario para que el cambio dure.'],
+    intestino: ['Equilibrio Intestinal & Energía Total', 'Plan para la digestión y la microbiota, con el sistema nervioso en cuenta.'],
+    hormonas: ['Hormonas en Armonía', 'Alimentación adaptada al ciclo, sueño y manejo del estrés.'],
+    otro: ['Primera valoración', 'Lo vemos contigo en la primera sesión y te decimos qué programa encaja.']
+  };
+  document.querySelectorAll('[data-next]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.k) r[b.dataset.k] = b.dataset.v;
+      if (b.dataset.next === 's4') {
+        var p = P[r.motivo] || P.otro;
+        document.getElementById('prog').textContent = r.modo === 'grupo' ? 'Grupo de ' + (r.motivo === 'ansiedad' ? 'comer por ansiedad' : 'cuatro semanas') : p[0];
+        document.getElementById('porque').textContent = r.modo === 'grupo' ? 'Una sesión en grupo a la semana y los menús. Empieza el próximo grupo.' : p[1];
+      }
+      document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', s.id === b.dataset.next); });
+      window.scrollTo({ top: 0 });
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>NutriPsicoSalud · demo del recorrido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: demo guiada en pestañas (anuncio, landing, WhatsApp, seguimiento, panel); cada pestaña es una pantalla. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#16202B; --muted:#5A6676; --line:#D9DFE7;
+  --accent:#2F5BEA; --good:#13795B; --warn:#B4541A; --tint:#EAF0FF;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --brand:#3E8E6B; --brand-soft:#E4F3EC;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#5FBF93; --brand-soft:#1C2E26; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#5FBF93; --brand-soft:#1C2E26; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:20px 64px}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:66ch;margin-top:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;position:sticky;top:0;background:var(--bg);z-index:3;padding-top:8px}
+nav.tabs button{font:inherit;font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.tabs button[aria-selected="true"] span{color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:70ch}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.cols > *{min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* Anuncios */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ig .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:600}
+.ig .h i{width:28px;height:28px;border-radius:50%;background:var(--brand);display:inline-block}
+.ig .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ig .v{width:100%;aspect-ratio:4/5;display:grid;align-content:end;padding:18px;color:#fff;position:relative;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1}
+.ig .v.va{background:linear-gradient(160deg,#2E2A24 0%,#7A4E3A 55%,#D9925B 100%)}
+.ig .v.vc{background:linear-gradient(160deg,#1F3B4D 0%,#3E6E8E 60%,#A9D3C4 100%)}
+.ig .v.vb{background:linear-gradient(160deg,#0F5C4E 0%,#2F7D6B 60%,#F6C453 100%)}
+.ig .v .play{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;font-weight:500;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}
+.ig .v small{display:block;font-family:var(--body);font-weight:600;font-size:14px;margin-top:8px;opacity:.95}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.ig .cta b{color:var(--accent)}
+.ig .t{padding:10px 12px;font-size:14px}
+.gg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.gg .q{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px}
+.gg .r small{font-size:12px;color:var(--muted)}
+.gg .r a{display:block;color:var(--accent);font-size:18px;text-decoration:none;margin:2px 0}
+.gg .r p{font-size:14px;color:var(--muted)}
+.gg .sl{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--accent)}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* Landing */
+.phone{width:min(390px,100%);height:760px;border:10px solid #1d1d1f;border-radius:36px;overflow:hidden;background:#fff;margin-inline:auto}
+.phone iframe{width:100%;height:100%;border:0;display:block}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:var(--brand);display:inline-block}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:82%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line)}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:620px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* Seguimiento */
+.seq{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 14px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl b{display:block;font-size:14px}
+.tl details{margin-top:4px}
+.tl summary{cursor:pointer;font-size:13px;color:var(--muted)}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px}
+/* Panel */
+.dash{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:16px;align-items:start}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.ficha dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0;font-size:14px}
+.ficha dt{color:var(--muted)}
+.ficha dd{margin:0}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 8px;background:var(--tint);color:var(--accent)}
+.pill.g{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.pill.w{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)}
+.score{display:flex;align-items:baseline;gap:8px}
+.score b{font-family:var(--display);font-size:34px;color:var(--good)}
+.next{background:var(--tint);border-radius:10px;padding:10px 12px;font-size:14px}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.tasks li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;font-size:14px}
+.tasks li:last-child{border-bottom:0}
+.tasks small{color:var(--muted);white-space:nowrap}
+.funnel{display:grid;gap:6px}
+.funnel div{display:grid;grid-template-columns:150px 1fr 36px;align-items:center;gap:10px;font-size:14px}
+.funnel span.bar{height:14px;border-radius:4px;background:var(--accent);display:block}
+.funnel em{font-style:normal;font-family:var(--mono);font-size:13px;text-align:right}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px}
+.ask .qq{font-weight:600}
+.ask .aa{color:var(--muted);font-size:14px;background:var(--bg);border-radius:10px;padding:10px 12px}
+footer{font-size:13px;color:var(--muted)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq{grid-template-columns:1fr}.two,.dash{grid-template-columns:1fr}.wa{height:560px}.funnel div{grid-template-columns:120px 1fr 32px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Demo para NutriPsicoSalud · nutrición y psicoterapia</p>
+  <h1>De más de 100 peticiones al mes a una agenda que no te desborda</h1>
+  <p class="lead">Así vería el proceso una persona que te descubre en un anuncio, y así lo verías tú. La idea de fondo: que nadie se quede sin respuesta, que a tu consulta lleguen las personas que encajan con un programa individual, y que el resto tenga un sitio, el grupo o la academia, en vez de perderse.</p>
+</header>
+
+<p class="note">Demo preparada por Qualivo con lo que se ve en tu web y lo que nos contaste por WhatsApp. Nombres, mensajes y cifras son de ejemplo; los textos finales, los precios y lo que se dice de cada programa lo decides tú. El asistente nunca da consejo de salud: cualquier pregunta clínica pasa a ti.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncio</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>2</span>Test</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>4</span>Seguimiento</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>5</span>Lo que ves tú</button>
+</nav>
+
+<!-- 1 · ANUNCIO -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · Marta ve un anuncio</h2><p>Tres anuncios a la vez, cada uno para un motivo distinto de consulta. A las dos o tres semanas se quedan los que traen personas que acaban en programa, no los que traen más mensajes.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Instagram · reel de 20 s</p>
+      <div class="ig">
+        <div class="h"><i></i><div>comidayemociones<small>Publicidad</small></div></div>
+        <div class="v va"><span class="play">▶ 0:20</span>No es falta de fuerza de voluntad.<small>Cuando comes por ansiedad, el problema no está en el plato.</small></div>
+        <div class="cta"><span>Hacer el test</span><b>›</b></div>
+        <p class="t"><b>comidayemociones</b> Nutrición y psicoterapia juntas, en Madrid y online. Haz el test de 2 minutos y te decimos por dónde empezar.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> es tu sello, comida y emociones. Hablas tú a cámara, sin fotos de antes y después: Meta las restringe en salud y peso, y además atraen al curioso.</div>
+    </div>
+    <div>
+      <p class="cap">Instagram · historia</p>
+      <div class="ig">
+        <div class="h"><i></i><div>comidayemociones<small>Publicidad</small></div></div>
+        <div class="v vc">¿Hinchazón, cansancio, digestiones pesadas?<small>Tres preguntas y te decimos qué programa encaja contigo.</small></div>
+        <div class="cta"><span>Más información</span><b>›</b></div>
+      </div>
+      <div class="why"><b>Por qué:</b> lleva al programa de intestino y energía, que es un motivo de consulta claro y con decisión rápida. El test filtra antes de que llegue a tu agenda.</div>
+    </div>
+    <div>
+      <p class="cap">Google · búsqueda</p>
+      <div class="gg">
+        <div class="q">nutricionista ansiedad por comer madrid</div>
+        <div class="r"><small>Patrocinado · nutripsicosalud.es</small><a href="../test/">Nutrición y psicoterapia · NutriPsicoSalud</a><p>Comer por ansiedad tiene solución. Test de 2 minutos y primera valoración. Madrid y online.</p></div>
+        <div class="sl"><span>Hacer el test</span><span>Programas</span><span>Online</span></div>
+      </div>
+      <div class="why"><b>Por qué:</b> para quien ya está buscando ayuda. Solo Madrid para presencial y España para online, y solo palabras con intención de consulta, nada de «dieta gratis».</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="landing">Siguiente: el test ›</button></div>
+</section>
+
+<!-- 2 · TEST -->
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>2 · Llega a un test, no a tu calendario</h2><p>Hoy la primera sesión gratis es la puerta para todo el mundo, y por eso te llegan más de las que puedes atender. El test hace de filtro: tres preguntas de un toque y el WhatsApp.</p></header>
+  <div class="two">
+    <div class="phone"><iframe src="../test/" title="Maqueta del test en un móvil" loading="lazy"></iframe></div>
+    <div class="list">
+      <div><h3>Lo que pregunta</h3><p>Qué le pasa (comer por ansiedad, peso, hormonas, intestino, dolor, cabeza), desde cuándo, y si quiere acompañamiento uno a uno o prefiere empezar en grupo.</p></div>
+      <div><h3>Para qué sirve cada respuesta</h3><p>Con eso ya sabemos qué programa encaja: Ganbaru, Hormonas en Armonía, Equilibrio Intestinal, RESET, Sana tu Mente… y si va a consulta o al grupo.</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Nada de diagnósticos, medicación ni historial: eso lo hablas tú en la valoración.</p></div>
+      <div><h3>Lo que medimos</h3><p>Qué anuncio trajo a cada persona y en qué acabó: valoración, programa, grupo o nada. Así se paga solo el anuncio que llena tu consulta.</p></div>
+      <div><a class="btnl" href="../test/" target="_blank" rel="noopener">Abrir el test a pantalla completa</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Un minuto después, le llega un WhatsApp</h2><p>Eres Marta: elige las respuestas. A la derecha, lo que va pasando por detrás. Fíjate en que a ti solo te llega lo que necesita una persona.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i></i><div><b>NutriPsicoSalud</b><small>Asistente · responde al momento</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">El asistente dice siempre que es un asistente y no da consejos de salud. Pasa a ti cuando preguntan el precio, cuentan algo clínico o algo no encaja. Tú ves la conversación en tu WhatsApp y puedes entrar cuando quieras: en cuanto escribes, el asistente se calla.</p>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: el seguimiento ›</button></div>
+</section>
+
+<!-- 4 · SEGUIMIENTO -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>4 · Nadie se queda sin siguiente paso</h2><p>Tres secuencias que se ponen en marcha solas. Cualquier respuesta las para y pasa a ti. Pulsa «ver mensaje» para leer el texto.</p></header>
+  <div class="seq">
+    <div>
+      <h3>Si no contesta</h3>
+      <p>Para quien hizo el test y no responde al primer WhatsApp.</p>
+      <ol class="tl">
+        <li><span class="w">Minuto 1</span><b>Primer WhatsApp</b></li>
+        <li><span class="w">Día 1</span><b>Mensaje corto con lo que contestó</b><details><summary>ver mensaje</summary><blockquote>Marta, ayer nos dijiste que comes por ansiedad desde hace meses. No hace falta que lo resuelvas sola. ¿Te cuento en dos minutos cómo lo trabajamos?</blockquote></details></li>
+        <li><span class="w">Día 3</span><b>Un audio o vídeo corto tuyo sobre su motivo</b><details><summary>ver idea</summary><blockquote>Grabas una vez un minuto por cada programa y se manda el que toca. Tu voz convence más que cualquier texto.</blockquote></details></li>
+        <li><span class="w">Día 7</span><b>Último mensaje</b><details><summary>ver mensaje</summary><blockquote>Marta, no te escribo más por ahora. Si quieres, te aviso cuando abra el próximo grupo. ¿Te aviso?</blockquote></details></li>
+        <li class="stop"><span class="w">Después</span><b>Lista del próximo grupo o de la academia</b></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Después de la valoración</h3>
+      <p>Para quien hizo la primera sesión y no ha empezado programa. Es donde hoy se pierde más.</p>
+      <ol class="tl">
+        <li><span class="w">Mismo día</span><b>Resumen de la sesión y el programa recomendado</b></li>
+        <li><span class="w">Día 2</span><b>Pregunta abierta, sin presión</b><details><summary>ver mensaje</summary><blockquote>Marta, ¿cómo te quedaste después de la sesión del martes? Si te ha surgido alguna duda con el programa, dímela y te la contesto.</blockquote></details></li>
+        <li><span class="w">Día 5</span><b>Aviso a ti para llamarla</b></li>
+        <li><span class="w">Día 10</span><b>Alternativa: el grupo</b><details><summary>ver mensaje</summary><blockquote>Marta, si ahora no es momento para el programa individual, el próximo grupo empieza el día 20 y trabaja lo mismo en grupo y a otro precio. ¿Te paso la información?</blockquote></details></li>
+        <li class="stop"><span class="w">Al empezar</span><b>Se para todo</b></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Durante el programa</h3>
+      <p>Para quien ya está dentro. Tú das el acompañamiento; el sistema se encarga de que nadie se descuelgue.</p>
+      <ol class="tl">
+        <li><span class="w">Cada semana</span><b>Menú y recordatorio de la sesión</b></li>
+        <li><span class="w">Si no responde en 3 días</span><b>Aviso a ti: alguien se está descolgando</b></li>
+        <li><span class="w">Día 45</span><b>Pregunta de mitad de programa</b><details><summary>ver mensaje</summary><blockquote>Marta, vas por la mitad. Del 1 al 10, ¿cómo te sientes con la comida respecto al primer día?</blockquote></details></li>
+        <li><span class="w">Día 85</span><b>Siguiente paso: mantenimiento o grupo</b></li>
+        <li class="stop"><span class="w">Al terminar</span><b>Petición de reseña y de recomendación</b></li>
+      </ol>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: lo que ves tú ›</button></div>
+</section>
+
+<!-- 5 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>5 · Lo que ves tú cada mañana</h2><p>La ficha de cada persona con lo que ha pasado, lo que toca hoy y cómo va el mes. Datos de ejemplo, no previsiones.</p></header>
+  <div class="dash">
+    <div class="box ficha">
+      <p class="cap">Ficha</p>
+      <h3>Marta R. · 42 años · Madrid</h3>
+      <div class="score"><b>78</b><span>encaje alto · <span class="pill g">programa individual</span></span></div>
+      <dl>
+        <dt>Vino de</dt><dd>Reel «No es falta de fuerza de voluntad» · Instagram</dd>
+        <dt>Motivo</dt><dd>Come por ansiedad · desde hace más de un año</dd>
+        <dt>Prefiere</dt><dd>Uno a uno, presencial</dd>
+        <dt>Programa</dt><dd>Ganbaru 90 días <span class="pill">recomendado</span></dd>
+        <dt>Valoración</dt><dd>Martes 18:00 <span class="pill g">confirmada</span></dd>
+        <dt>Conversación</dt><dd>WhatsApp, 7 mensajes. Preguntó si se puede hacer online si viaja.</dd>
+      </dl>
+      <div class="next"><b>Siguiente acción:</b> valoración el martes · después, resumen y programa el mismo día</div>
+    </div>
+    <div class="box">
+      <p class="cap">Para hoy</p>
+      <ul class="tasks">
+        <li><span>Llamar a Carmen L.: preguntó el precio del programa</span><small>antes de las 12</small></li>
+        <li><span>Elena P. lleva 3 días sin contestar en su programa</span><small>hoy</small></li>
+        <li><span>Valoración de Sonia T., confirmada</span><small>18:00</small></li>
+        <li><span>4 personas al grupo de noviembre, sin pasar por tu agenda</span><small>hecho solo</small></li>
+      </ul>
+      <p class="cap" style="margin-top:8px">Un mes · ejemplo</p>
+      <div class="funnel" id="funnel"></div>
+    </div>
+  </div>
+  <div class="ask">
+    <p class="cap">Pregúntale al sistema</p>
+    <p class="qq">«¿Quién hizo la valoración en los últimos tres meses y no empezó ningún programa?»</p>
+    <p class="aa">Te salen con su ficha, lo que contaron y por qué no siguieron. Desde ahí les mandas un WhatsApp o les ofreces el próximo grupo.</p>
+  </div>
+</section>
+
+<footer>Qualivo · qualivo.io · Demo preparada el 5 de octubre de 2026 para NutriPsicoSalud. No es una página de NutriPsicoSalud; nombres, mensajes y cifras son de ejemplo.</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'landing', 'whatsapp', 'seguimiento', 'panel'];
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Funnel de ejemplo
+  var F = [['Piden información', 100], ['Contestan al WhatsApp', 70], ['Valoración agendada', 30], ['Valoración hecha', 25], ['Programa individual', 10], ['Grupo o academia', 12]];
+  document.getElementById('funnel').innerHTML = F.map(function (r) {
+    return '<div><span>' + r[0] + '</span><span class="bar" style="width:' + Math.round(r[1] / F[0][1] * 100) + '%"></span><em>' + r[1] + '</em></div>';
+  }).join('');
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var started = false, reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 22;
+  function hora() { minuto++; return '23:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls;
+    d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 900);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 400); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var N = {
+    q1: function () {
+      bot(['¡Hola, Marta! Soy el asistente de NutriPsicoSalud. He visto tu test: dices que comes por ansiedad desde hace más de un año.',
+           'Antes de nada: aquí no juzgamos a nadie, es de lo más habitual. ¿Te pasa sobre todo por la tarde y la noche, o a cualquier hora?'],
+        function () { choices([['Sobre todo por la noche', 'q2'], ['A cualquier hora', 'q2'], ['Solo quería información', 'mirando']]); });
+    },
+    q2: function () {
+      apunta('Motivo: comer por ansiedad · más de 1 año', 'se guarda en su ficha');
+      bot(['Gracias por contarlo. ¿Has probado antes alguna dieta o terapia para esto?'],
+        function () { choices([['Muchas dietas, ninguna dura', 'q3'], ['Terapia, pero sin la parte de comida', 'q3'], ['Nada todavía', 'q3']]); });
+    },
+    q3: function () {
+      apunta('Historial guardado para la valoración', 'lo lee la terapeuta antes de la sesión');
+      bot(['Última: ¿prefieres acompañamiento uno a uno o empezar en un grupo pequeño?'],
+        function () { choices([['Uno a uno', 'individual'], ['En grupo', 'grupo'], ['¿Cuánto cuesta?', 'precio']]); });
+    },
+    individual: function () {
+      apunta('Encaje 78 · programa recomendado: Ganbaru 90 días', 'pasa a «Valoración»', 'g');
+      bot(['Tiene todo el sentido. Lo que cuentas encaja con el programa Ganbaru, que trabaja la comida y la parte emocional a la vez, durante 90 días.',
+           'El primer paso es una valoración de 30 minutos con la terapeuta. ¿Te va mejor el martes a las 18:00 o el jueves a las 10:00?'],
+        function () { choices([['Martes 18:00', 'martes'], ['Jueves 10:00', 'jueves'], ['¿Se puede online?', 'online']]); });
+    },
+    martes: function () { cita('el martes a las 18:00'); },
+    jueves: function () { cita('el jueves a las 10:00'); },
+    online: function () {
+      apunta('Prefiere online · se guarda en la ficha', 'la valoración será por videollamada');
+      bot(['Sí, se puede hacer todo online. ¿Te guardo el martes a las 18:00 por videollamada?'],
+        function () { choices([['Sí, perfecto', 'martes'], ['Mejor el jueves 10:00', 'jueves']]); });
+    },
+    grupo: function () {
+      apunta('Prefiere grupo → al grupo de noviembre', 'sin pasar por la agenda de la terapeuta', 'g');
+      bot(['Genial. El próximo grupo empieza el 20 de noviembre: cuatro semanas, una sesión en grupo a la semana y los menús. Te mando la información y te guardo plaza sin compromiso hasta el viernes, ¿vale?'],
+        function () { choices([['Vale, guárdamela', 'plaza'], ['Prefiero pensarlo', 'mirando']]); });
+    },
+    plaza: function () {
+      apunta('Plaza reservada en el grupo · recordatorio el jueves', 'si no confirma, se libera sola', 'g');
+      bot(['Hecho, Marta. El jueves te escribo para confirmar. ¡Gracias!'], fin);
+    },
+    precio: function () {
+      apunta('Pregunta el precio → pasa a la terapeuta', 'aviso con la conversación', 'h');
+      bot(['Buena pregunta. Depende del programa y de si es individual o en grupo, y eso te lo explica mejor la terapeuta. Le paso nuestra conversación y te escribe hoy, ¿vale?'],
+        function () { choices([['Vale, gracias', 'gracias']]); });
+    },
+    gracias: function () { apunta('El asistente se para', 'sigue la terapeuta por el mismo WhatsApp'); bot(['¡A ti, Marta!'], fin); },
+    mirando: function () {
+      apunta('Solo mirando → lista del próximo grupo', 'sin insistir');
+      bot(['¡Sin problema! Te dejo aquí un audio corto de la terapeuta sobre comer por ansiedad. Si quieres, te aviso cuando abra el próximo grupo. ¿Te aviso?'],
+        function () { choices([['Sí, avísame', 'avisar'], ['No hace falta', 'baja']]); });
+    },
+    avisar: function () {
+      apunta('«Avisar del próximo grupo» con fecha', 'vuelve sola en noviembre', 'g');
+      bot(['Hecho. Te escribo cuando abra. ¡Gracias, Marta!'], fin);
+    },
+    baja: function () {
+      apunta('No quiere más mensajes', 'no se le vuelve a escribir', 'g');
+      bot(['Entendido, no te escribimos más. Si algún día lo necesitas, aquí estamos.'], fin);
+    }
+  };
+  function cita(cuando) {
+    apunta('Valoración en la agenda: ' + cuando, 'en el calendario de la terapeuta', 'g');
+    apunta('Recordatorios programados', 'la víspera y 2 h antes; si no viene, otra fecha');
+    apunta('Resumen para la terapeuta antes de la sesión', 'motivo, historial y lo que preguntó');
+    bot(['¡Hecho! Te espero ' + cuando + '. La víspera te lo recuerdo por aquí. Si te surge algo, escríbeme y lo cambiamos.'], fin);
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 22; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Marta hizo el test a las 23:22 de un miércoles · come por ansiedad · más de 1 año');
+    apunta('Ficha creada en tu sistema', 'origen: reel «No es falta de fuerza de voluntad»');
+    apunta('Primer WhatsApp en menos de un minuto', 'a las 23:22, sin que tú estés');
+    go('q1');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
