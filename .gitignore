@@ -14,3 +14,7 @@ node_modules/
 # Cache de Python: se regenera solo en cada ejecucion
 __pycache__/
 *.pyc
+
+# Salida del generador de carga: lleva correos personales, se reconstruye
+# con captacion/scripts/preparar_carga_29.py
+captacion/datos/carga-29-listos*.json
