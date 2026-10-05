@@ -388,6 +388,9 @@
     var submitBtn = document.getElementById('submit-btn');
     var backBtn = document.getElementById('back-btn');
     var loadedAt = Date.now();
+    // Textos de los desplegables, para que al CRM llegue «500k–1M €» y no «1».
+    var FACT_LABELS = { '0': 'Menos de 500k €', '1': '500k–1M €', '2': '1M–3M €', '3': '3M–10M €', '4': '+10M €' };
+    var QUIEN_LABELS = { interno: 'Equipo interno', agencia: 'Agencia', freelance: 'Freelancers', mixto: 'Agencia + equipo interno', direccion: 'Fundador / equipo directivo', otro: 'Otro' };
 
     function showError(msg) {
       errorEl.textContent = msg;
