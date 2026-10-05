@@ -18,3 +18,4 @@ __pycache__/
 # Salida del generador de carga: lleva correos personales, se reconstruye
 # con captacion/scripts/preparar_carga_29.py
 captacion/datos/carga-29-listos*.json
+captacion/datos/exp-c01-listos.json
