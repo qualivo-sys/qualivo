@@ -68,3 +68,42 @@ Lo que se puede hacer es leer las respuestas una a una y ver si la hipótesis ge
 **No subir volumen mañana porque hoy salieron 86 y ninguno por los dominios problemáticos.** Orden
 expresa de Maikel: primero se ven la entregabilidad y las respuestas de esta cohorte durante unos
 días.
+
+---
+
+## Primera respuesta de la cohorte · 5-oct 14:58
+
+**Nazareth Rodrigáñez, CEO de Tetuan Valley** (estrato FUERTE, GA4 detectado):
+
+> *«Hola Maikel, muchas gracias, pero somos una asociación pequeña y no tenemos presupuesto para
+> esto. Gracias de todos modos!!»*
+
+Un no cortés, **por presupuesto, no por el mensaje.** No se le responde.
+
+### Lo que enseña, que es más que el no
+
+Al clasificarla yo mismo escribí como motivo del C: *«46p; es una aceleradora o hub, no sé si
+compra captación»*. Su respuesta contesta exactamente esa duda. **Era una incógnita real y ahora es
+un hecho.** Añadida a `descartes-manuales.json` con su frase literal.
+
+Y deja ver que **el estrato no es el eje que importa aquí.** Tetuan Valley entró como FUERTE porque
+la sonda le encontró GA4. Pero el bloqueo no era de medición: es que una asociación sin presupuesto
+no compra, y eso **ninguna etiqueta de la web lo puede decir.**
+
+### Predicción registrada ANTES del resultado
+
+Buscando el mismo patrón en los 133, hay **un segundo caso dentro de la cohorte**:
+
+**IEF · Institut d'Estudis Financers** (estrato FUERTE, etiqueta de Google Ads, 81 empleados). Su
+web se describe como *«el hub financiero referente»* y mi propio motivo del C fue *«instituto
+financiero con patronato bancario»*. Es la misma figura: entidad con patronato, no empresa con
+presupuesto comercial.
+
+**No lo saco de la cohorte**, porque la regla dice copy y composición congelados durante la tanda.
+Lo que hago es dejar la predicción por escrito: **si IEF contesta, predigo que será un no de la
+misma naturaleza, por estructura y no por mensaje.** Si acierta, son dos de dos y el filtro que
+falta no es técnico, es «¿tiene presupuesto comercial propio?». Si falla, la hipótesis se cae y
+mejor saberlo.
+
+(El tercer resultado del patrón, **Knox Media Hub**, es un falso positivo de mi búsqueda: «Hub» está
+en el nombre de su producto, un gestor de activos de medios. Es una empresa, no una asociación.)
