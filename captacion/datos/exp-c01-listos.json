@@ -1,0 +1,290 @@
+[
+ {
+  "email": "jordialpiste@grupo360rh.com",
+  "first_name": "Jordi",
+  "company_name": "360 Recursos Humanos",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en 360 Recursos Humanos",
+   "body1": "Hola Jordi,\n\nhe visto que en la web de 360 Recursos Humanos tenéis Google Tag Manager instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Jordi,\n\nTe la paso igual, que es corta.\n\nTenéis Google Tag Manager instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Jordi,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "Google Tag Manager",
+  "_empleados": 81,
+  "_motivo_c": "81 empleados, por encima de la banda 5-50; consultora RRHH independiente"
+ },
+ {
+  "email": "xdiego@grupo-essentia.com",
+  "first_name": "Xavier",
+  "company_name": "Grup Essentia",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Grup Essentia",
+   "body1": "Hola Xavier,\n\nhe visto que en la web de Grup Essentia tenéis 5 formularios.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Xavier,\n\nTe la paso igual, que es corta.\n\nTenéis 5 formularios en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Xavier,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "5 formularios",
+  "_empleados": 30,
+  "_motivo_c": "sin instrumentacion detectada y la web del email no responde: no puedo verificar gasto en "
+ },
+ {
+  "email": "dfontecha@previtalia.es",
+  "first_name": "David",
+  "company_name": "PREVITALIA",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en PREVITALIA",
+   "body1": "Hola David,\n\nhe visto que en la web de PREVITALIA tenéis el teléfono directo.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola David,\n\nTe la paso igual, que es corta.\n\nTenéis el teléfono directo en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola David,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "el teléfono directo",
+  "_empleados": 15,
+  "_motivo_c": "15p encaja, pero cero instrumentacion: ninguna senal de que inviertan en captacion"
+ },
+ {
+  "email": "jf.pedrosa@grupodaboconsulting.com",
+  "first_name": "Juan",
+  "company_name": "PRV Prevención",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en PRV Prevención",
+   "body1": "Hola Juan,\n\nhe visto que en la web de PRV Prevención tenéis 2 formularios.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Juan,\n\nTe la paso igual, que es corta.\n\nTenéis 2 formularios en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Juan,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "2 formularios",
+  "_empleados": 28,
+  "_motivo_c": "28p encaja; sin instrumentacion. El email es del grupo matriz (Dabo), no de PRV"
+ },
+ {
+  "email": "rlopez@robotnik.es",
+  "first_name": "Rafael",
+  "company_name": "Robotnik Automation",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Robotnik Automation",
+   "body1": "Hola Rafael,\n\nhe visto que en la web de Robotnik Automation tenéis Google Tag Manager instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Rafael,\n\nTe la paso igual, que es corta.\n\nTenéis Google Tag Manager instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Rafael,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "Google Tag Manager",
+  "_empleados": 55,
+  "_motivo_c": "55p, roza la banda por arriba; robotica industrial, ciclo de venta largo"
+ },
+ {
+  "email": "agarcia@triskellsoftware.com",
+  "first_name": "Angel",
+  "company_name": "Triskell Software",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Triskell Software",
+   "body1": "Hola Angel,\n\nhe visto que en la web de Triskell Software tenéis Google Tag Manager instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Angel,\n\nTe la paso igual, que es corta.\n\nTenéis Google Tag Manager instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Angel,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "Google Tag Manager",
+  "_empleados": 51,
+  "_motivo_c": "51p, software PPM enterprise; comprador corporativo, no dueno"
+ },
+ {
+  "email": "jsolero@wre.es",
+  "first_name": "Jose",
+  "company_name": "TALVION",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en TALVION",
+   "body1": "Hola Jose,\n\nhe visto que en la web de TALVION tenéis GA4 instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Jose,\n\nTe la paso igual, que es corta.\n\nTenéis GA4 instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Jose,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "GA4",
+  "_empleados": 28,
+  "_motivo_c": "28p, GTM+GA4, pero no se entiende que venden (\"Rethink Value\", holding de inversion)"
+ },
+ {
+  "email": "alberto.sanchez@gridfy.ai",
+  "first_name": "Alberto",
+  "company_name": "Gridfy",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Gridfy",
+   "body1": "Hola Alberto,\n\nhe visto que en la web de Gridfy tenéis el teléfono directo.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Alberto,\n\nTe la paso igual, que es corta.\n\nTenéis el teléfono directo en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Alberto,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "el teléfono directo",
+  "_empleados": 11,
+  "_motivo_c": "11p, sin instrumentacion; digitalizacion de redes electricas, comprador utility"
+ },
+ {
+  "email": "cgallego@formatelia.com",
+  "first_name": "Clara",
+  "company_name": "Formatelia",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Formatelia",
+   "body1": "Hola Clara,\n\nhe visto que en la web de Formatelia tenéis el teléfono directo.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Clara,\n\nTe la paso igual, que es corta.\n\nTenéis el teléfono directo en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Clara,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "el teléfono directo",
+  "_empleados": 11,
+  "_motivo_c": "11p, centro de formacion; cero instrumentacion"
+ },
+ {
+  "email": "inaki.letamendia@lacunza.es",
+  "first_name": "Inaki",
+  "company_name": "Lacunza - ih San Sebastian",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Lacunza - ih San Sebastian",
+   "body1": "Hola Inaki,\n\nhe visto que en la web de Lacunza - ih San Sebastian tenéis GA4 instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Inaki,\n\nTe la paso igual, que es corta.\n\nTenéis GA4 instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Inaki,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "GA4",
+  "_empleados": 75,
+  "_motivo_c": "75 empleados, fuera de banda; escuela de idiomas"
+ },
+ {
+  "email": "nazareth@tetuanvalley.com",
+  "first_name": "Nazareth",
+  "company_name": "Tetuan Valley",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Tetuan Valley",
+   "body1": "Hola Nazareth,\n\nhe visto que en la web de Tetuan Valley tenéis GA4 instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Nazareth,\n\nTe la paso igual, que es corta.\n\nTenéis GA4 instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Nazareth,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "GA4",
+  "_empleados": 46,
+  "_motivo_c": "46p; es una aceleradora/hub, no se si compra captacion"
+ },
+ {
+  "email": "lorenzo@cybertix.tech",
+  "first_name": "Lorenzo",
+  "company_name": "Cybertix Simulation Technologies",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Cybertix Simulation Technologies",
+   "body1": "Hola Lorenzo,\n\nhe visto que en la web de Cybertix Simulation Technologies tenéis un formulario.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Lorenzo,\n\nTe la paso igual, que es corta.\n\nTenéis un formulario en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Lorenzo,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "un formulario",
+  "_empleados": 16,
+  "_motivo_c": "16p, ciberseguridad; sin instrumentacion"
+ },
+ {
+  "email": "josepsoler@iefweb.org",
+  "first_name": "Josep",
+  "company_name": "IEF - Institut d'Estudis Financers",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en IEF - Institut d'Estudis Financers",
+   "body1": "Hola Josep,\n\nhe visto que en la web de IEF - Institut d'Estudis Financers tenéis la etiqueta de Google Ads instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Josep,\n\nTe la paso igual, que es corta.\n\nTenéis la etiqueta de Google Ads instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Josep,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "la etiqueta de Google Ads",
+  "_empleados": 81,
+  "_motivo_c": "81 empleados; instituto financiero con patronato bancario"
+ },
+ {
+  "email": "eperalta@grupcief.com",
+  "first_name": "Esther",
+  "company_name": "Grup CIEF",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Grup CIEF",
+   "body1": "Hola Esther,\n\nhe visto que en la web de Grup CIEF tenéis Google Tag Manager instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Esther,\n\nTe la paso igual, que es corta.\n\nTenéis Google Tag Manager instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Esther,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "Google Tag Manager",
+  "_empleados": 94,
+  "_motivo_c": "94 empleados"
+ },
+ {
+  "email": "mrios@hackbysecurity.com",
+  "first_name": "Miguel",
+  "company_name": "Hack by Security",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Hack by Security",
+   "body1": "Hola Miguel,\n\nhe visto que en la web de Hack by Security tenéis un formulario.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide información de un curso y no se matricula a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada persona?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Miguel,\n\nTe la paso igual, que es corta.\n\nTenéis un formulario en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide información hasta que acaba matriculándose.\n\nCon la Escola Aeronàutica de Catalunya trabajamos precisamente esa conexión entre captación, seguimiento y matrícula final. Te dejo el caso aquí: https://qualivo.io/casos/eac/\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Miguel,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud y una matrícula, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "un formulario",
+  "_empleados": 18,
+  "_motivo_c": "18p, formacion en ciberseguridad; sin instrumentacion"
+ },
+ {
+  "email": "flleches@idelabingenieria.com",
+  "first_name": "Francesc",
+  "company_name": "IDELAB Ingeniería SL",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en IDELAB Ingeniería SL",
+   "body1": "Hola Francesc,\n\nhe visto que en la web de IDELAB Ingeniería SL tenéis un formulario.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Francesc,\n\nTe la paso igual, que es corta.\n\nTenéis un formulario en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Francesc,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "un formulario",
+  "_empleados": 15,
+  "_motivo_c": "15p, ingenieria de seguridad industrial; sin instrumentacion"
+ },
+ {
+  "email": "srs@excem.com",
+  "first_name": "Santiago",
+  "company_name": "Excem Technologies",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en Excem Technologies",
+   "body1": "Hola Santiago,\n\nhe visto que en la web de Excem Technologies tenéis Google Tag Manager instalado.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Santiago,\n\nTe la paso igual, que es corta.\n\nTenéis Google Tag Manager instalado. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Santiago,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "FUERTE",
+  "_hecho": "Google Tag Manager",
+  "_empleados": 53,
+  "_motivo_c": "53p, defensa y ciberseguridad; comprador publico"
+ },
+ {
+  "email": "manuel.montes@iscal.net",
+  "first_name": "Manuel",
+  "company_name": "ISCAL – Instrumentación y Servicios de Calibración",
+  "custom_fields": {
+   "subject1": "vuestro seguimiento en ISCAL – Instrumentación y Servicios de Calibrac",
+   "body1": "Hola Manuel,\n\nhe visto que en la web de ISCAL – Instrumentación y Servicios de Calibración tenéis el teléfono directo.\n\nLo que desde fuera no puedo saber es qué pasa después. Cuando alguien pide presupuesto y no cierra a la primera, ¿tenéis definido qué seguimiento recibe o depende de cada comercial?\n\nEstoy trabajando justo esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body2": "Hola Manuel,\n\nTe la paso igual, que es corta.\n\nTenéis el teléfono directo en la web. La parte que desde fuera no puedo saber es si podéis seguir el recorrido completo: desde que alguien pide presupuesto hasta que acaba firmando.\n\nCon una empresa que ya tenía CRM nos encontramos 25 oportunidades abiertas sin siguiente paso. No les faltaban clientes: nadie estaba volviendo a ellas.\n\n¿Vosotros podéis ver hoy ese recorrido de principio a fin?\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205",
+   "body3": "Hola Manuel,\n\nCierro por aquí.\n\nSi en algún momento queréis revisar qué ocurre entre una solicitud de presupuesto y una firma, es decir la respuesta, el seguimiento y la recuperación de quien no decide a la primera, tengo el esquema preparado.\n\nSi te interesa verlo, dime y te lo mando.\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+  },
+  "_cohorte": "EXP-C-01",
+  "_estrato": "DEBIL",
+  "_hecho": "el teléfono directo",
+  "_empleados": 51,
+  "_motivo_c": "51p, calibracion industrial; sin instrumentacion"
+ }
+]
