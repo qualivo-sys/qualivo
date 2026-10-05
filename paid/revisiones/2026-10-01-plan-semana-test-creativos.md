@@ -305,3 +305,52 @@ CLI_HUE 23,39 € / 705 impr / 2,60 €/apertura, peor que el viejo (2,23).
 
 Sigue pendiente de Maikel: tope de campaña (800 → 1.604 €; gastado 566,95 a las
 08:05) y la exclusión de Facebook Stories.
+
+---
+
+## Corte del lunes 6-oct (hecho el lunes 5-oct, 08:05 CEST)
+
+> Nota de calendario: el plan decía "lunes 6"; el lunes es el 5. El corte es hoy.
+
+### Resultado del test, acumulado desde T0 (1-oct 15:48) hasta 5-oct 08:05
+
+| anuncio | gasto | impr | CTR | clics | €/apertura | envíos (formulario) | €/envío | en GHL |
+|---|---|---|---|---|---|---|---|---|
+| formación viejo | 66,53 € | 2.673 | 3,03 % | 37 | **1,80** | **3** (+1 hoy 07:03) | 22,18 | 1 nivel A cita confirmada · 1 nivel B · 1 nivel D (hoy, "nada") |
+| clínicas viejo | 67,24 € | 1.944 | 3,86 % | 26 | 2,59 | 2 | 33,62 | 1 nivel A cita confirmada · 1 nivel B |
+| CLI_PRI (nuevo) | 42,41 € | 1.127 | 2,40 % | 9 | 4,71 | 2 | 21,21 | 1 descartado como falso · 1 nivel B |
+| S1_PLA / S1_VEL / S1_CUR / CLI_HUE / CLI_VEL | pausados el sáb 3 | | | | | 0 | | |
+
+Meta cuenta 4 / 2 / 2 "leads"; los formularios dicen 3 / 2 / 2 (atribución de ventana).
+
+**Veredicto parcial de H-CREATIVO-02:** ningún vídeo nuevo supera al viejo de su
+vertical. CLI_PRI arrancó mejor (CTR 6 % el primer día) y ha ido cayendo
+(0,92 % ayer); en coste por apertura está al doble del viejo (4,71 frente a 2,59)
+y sus dos envíos no han dado ni un nivel A. Los dos nivel A con cita confirmada
+de la semana son de los viejos. Con 1.127 impresiones no es definitivo, pero no
+hay dato que justifique quitarle presupuesto al viejo para dárselo.
+
+Facebook Stories, corregido: desde T0 19,96 € en 98 impresiones **y 7 clics**
+(2,85 €/clic, CTR 7 %). El CPM es absurdo (204 €) pero el coste por clic no es
+peor que el del resto. Deja de ser prioritario excluirla; se vigila.
+
+### Propuesta de reparto (32 €/día, la hace o la autoriza Maikel)
+
+| conjunto | hoy | propuesto |
+|---|---|---|
+| formación · VIEJO | 15 | **14** |
+| clínicas · VIEJO | 15 | **12** |
+| clínicas · CLI_PRI | 20 | **6** |
+| **total** | 50 | **32** |
+
+CLI_PRI se queda vivo a mínimos una semana como recambio y para ver si alguno
+de sus leads llega a cita; el **lunes 12** (o el 13) se decide con GHL si se
+pausa. Los otros cuatro vídeos siguen guardados. Octubre: 323 € a 5-oct 08:05;
+a 32 €/día cierra en ≈ 1.155 €.
+
+### Pendiente de Maikel
+- OK a 14 / 12 / 6.
+- Tope de QV_VERTICALES_Sep26: 800 → 1.604 €. **Lleva 668,65 €: a 50 €/día salta
+  mañana martes; a 32, el jueves.**
+- Las dos citas confirmadas de ayer (formación >100 solicitudes; clínicas >50 y
+  2.000-5.000 €) son lo más valioso que ha traído el paid: prioridad de agenda.
