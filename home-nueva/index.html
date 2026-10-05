@@ -278,6 +278,16 @@
   .cierre-card li a { font-weight: 800; color: var(--qv-teal); text-decoration: underline; text-underline-offset: 3px; }
 
   .faq-item summary:focus-visible { outline-offset: 2px; }
+  /* Captación: cuatro canales, claro sobre blanco */
+  .canales { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+  .canal { background: #fff; border: 1px solid var(--qv-line); border-radius: 16px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .canal__k { margin: 0; font-family: var(--qv-font-mono); font-size: 11.5px; color: var(--qv-teal); font-weight: 700; }
+  .canal h3 { margin: 0; font-family: var(--qv-font-display); font-weight: 900; font-size: 20px; letter-spacing: -.015em; color: #101319; }
+  .canal p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--qv-ink-soft); }
+  .canal__m { margin-top: auto !important; padding-top: 10px; border-top: 1px dashed var(--qv-line); font-size: 13.5px !important; color: #101319 !important; }
+  .canal__m b { color: var(--qv-teal); }
+  .medida { margin: 28px 0 0; padding: 18px 20px; border-radius: 14px; background: #101319; color: #fff; font-size: 16px; line-height: 1.55; }
+  .medida strong { color: #7CE8DD; }
 </style>
 </head>
 <body>
@@ -291,6 +301,7 @@
         <span class="brand-tagline">Agentes de IA para tu sistema de captación y ventas</span>
       </a>
       <nav class="site-nav" aria-label="Principal">
+        <a href="#captacion" class="nav-link">Captación</a>
         <a href="#recorrido" class="nav-link">El recorrido</a>
         <a href="#crm" class="nav-link">El CRM</a>
         <a href="#casos" class="nav-link">Casos</a>
@@ -307,13 +318,13 @@
     <div class="container hero">
       <div>
         <h1>Montamos y operamos tu sistema de captación y ventas.</h1>
-        <p class="sub">Desde que alguien pide información hasta que compra y repite. <strong>Agentes de IA que trabajan dentro de tu CRM, con una persona revisando.</strong></p>
+        <p class="sub">Te traemos a la gente que encaja, con anuncios, prospección y tu propia base de datos, y nos aseguramos de que nadie se pierda hasta que compra. <strong>Agentes de IA que trabajan dentro de tu CRM, con una persona revisando.</strong></p>
         <ul class="sectores" aria-label="Para quién">
           <li>Clínicas</li><li>Formación</li><li>Consultoras</li><li>Servicios B2B</li>
         </ul>
         <div class="ctas">
           <a href="/diagnostico/" class="btn-primary">Reservar el diagnóstico gratis&nbsp;→</a>
-          <a href="#recorrido" class="btn-ghost">Ver cómo funciona</a>
+          <a href="#captacion" class="btn-ghost">Ver cómo funciona</a>
         </div>
         <p class="nota">30 minutos. Miramos dónde se te escapan las ventas y te mandamos el plan por escrito. ¿Prefieres probarlo antes? <a href="/prueba/">Te llama la agente de voz de tu negocio</a> y haces de cliente.</p>
       </div>
@@ -363,13 +374,29 @@
   <!-- 2 · CIFRAS (banda de la home actual) -->
   <section class="on-dark" style="background:#101319" aria-label="Resultados de clientes">
     <div class="container" style="padding-top:48px; padding-bottom:48px">
-      <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#B7F0EA; font-weight:800; margin:0 0 26px; text-align:center">No siempre hacen falta más leads. A veces hace falta ver dónde pierdes los que ya tienes.</p>
+      <p style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#B7F0EA; font-weight:800; margin:0 0 26px; text-align:center">Captación que se mide en ventas, no en clics.</p>
       <div class="stats">
         <div><p class="stat-num" style="margin:0; font-size:clamp(34px,5vw,52px); font-weight:700; color:#7CE8DD">6,45×</p><p style="margin:6px 0 0; font-size:14px; line-height:1.45; color:#9AA2AE">lo invertido <strong style="color:#B7F0EA; font-weight:700">sin captar un lead más</strong></p><img loading="lazy" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="display:block; height:32px; width:auto; margin:12px auto 0; filter:brightness(0) invert(1); opacity:.85"></div>
         <div><p class="stat-num" style="margin:0; font-size:clamp(34px,5vw,52px); font-weight:700; color:#7CE8DD">1.160</p><p style="margin:6px 0 0; font-size:14px; line-height:1.45; color:#9AA2AE">leads y <strong style="color:#B7F0EA; font-weight:700">21 matrículas</strong> en cuatro meses, partiendo de cero</p><img loading="lazy" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="display:block; height:52px; width:auto; margin:10px auto 0; filter:grayscale(1) brightness(1.75) contrast(.95); opacity:.9"></div>
         <div><p class="stat-num" style="margin:0; font-size:clamp(34px,5vw,52px); font-weight:700; color:#7CE8DD">10,2×</p><p style="margin:6px 0 0; font-size:14px; line-height:1.45; color:#9AA2AE">del anuncio a la matrícula</p><img loading="lazy" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="display:block; height:40px; width:auto; margin:12px auto 0; filter:brightness(0) invert(1); opacity:.85"></div>
         <div><p class="stat-num" style="margin:0; font-size:clamp(34px,5vw,52px); font-weight:700; color:#7CE8DD">0,1 → 7,6</p><p style="margin:6px 0 0; font-size:14px; line-height:1.45; color:#9AA2AE">ROAS, rescatando una cuenta que perdía dinero</p><img loading="lazy" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="display:block; height:88px; width:auto; margin:0 auto; filter:brightness(0) invert(1); opacity:.85"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- 2b · CAPTACIÓN -->
+  <section id="captacion" style="background:#F7F8FA; border-top:1px solid rgba(16,19,25,.06)">
+    <div class="container section-pad" style="padding-top:84px; padding-bottom:84px">
+      <p class="eyebrow">Captación</p>
+      <h2 class="h2">Primero, que te entre la gente que encaja.</h2>
+      <p class="lede">Cuatro fuentes. Elegimos contigo las que tienen sentido para tu negocio y las llevamos nosotros, de punta a punta.</p>
+      <ul class="canales">
+        <li class="canal"><p class="canal__k">anuncios · Meta y Google</p><h3>Anuncios que traen clientes</h3><p>Creatividades, landing y test por servicio. Las campañas aprenden de quién acaba comprando, no de quién deja el teléfono más barato.</p><p class="canal__m"><b>Para ti si</b> ya inviertes en anuncios y no sabes cuál te trae ventas.</p></li>
+        <li class="canal"><p class="canal__k">prospección · email y LinkedIn</p><h3>Cuentas con un motivo para hablar ahora</h3><p>Cada semana, empresas que encajan y tienen una señal: una compra, una obra, un cargo nuevo. Con el primer mensaje redactado; sale con tu nombre cuando lo apruebas.</p><p class="canal__m"><b>Para ti si</b> vendes a empresas y hoy todo te llega por recomendación.</p></li>
+        <li class="canal"><p class="canal__k">tu base de datos</p><h3>Lo que ya tienes</h3><p>Quien pidió información y no compró, presupuestos que se quedaron en el cajón y clientes a los que les toca repetir. Un mensaje con un motivo concreto para cada uno.</p><p class="canal__m"><b>Para ti si</b> tienes cientos de contactos a los que nadie escribe.</p></li>
+        <li class="canal"><p class="canal__k">contenido · LinkedIn y web</p><h3>Que te conozcan antes de escribirte</h3><p>Publicaciones a partir de tus casos y de tu forma de trabajar, y mensajes a quien interactúa y encaja.</p><p class="canal__m"><b>Para ti si</b> tu nombre vende y no tienes tiempo de publicar.</p></li>
+      </ul>
+      <p class="medida">Cada fuente se mide hasta la venta: <strong>de dónde viene cada cliente, cuánto ha costado y cuánto ha facturado</strong>. Lo que no trae ventas se apaga, aunque traiga muchos contactos.</p>
     </div>
   </section>
 
@@ -384,8 +411,8 @@
       <ol class="rec">
         <li class="paso">
           <span class="paso__n" aria-hidden="true">01</span>
-          <div class="paso__t"><h3>Pide información</h3><p>Desde un anuncio, la web, un formulario o WhatsApp.</p></div>
-          <div class="paso__q paso__ag"><b>Agente</b>Crea el contacto en el CRM y apunta de dónde viene.</div>
+          <div class="paso__t"><h3>Pide información</h3><p>Desde un anuncio, una campaña de prospección, tu base de datos, la web o WhatsApp.</p></div>
+          <div class="paso__q paso__ag"><b>Agente</b>Crea el contacto en el CRM y apunta de qué anuncio o campaña viene.</div>
           <div class="paso__q paso__pe"><b>Persona</b>Nada todavía.</div>
         </li>
         <li class="paso">
@@ -522,14 +549,15 @@
   <section id="agentes" class="on-dark" style="background:#101319">
     <div class="container section-pad" style="padding-top:84px; padding-bottom:84px">
       <p class="eyebrow" style="color:#B7F0EA">Los agentes</p>
-      <h2 class="h2" style="color:#fff">Cinco agentes. Cada uno con un trabajo.</h2>
+      <h2 class="h2" style="color:#fff">Seis agentes. Cada uno con un trabajo.</h2>
       <p class="lede" style="color:#B9C0CB">Trabajan dentro de tu CRM, sobre los mismos contactos. Ninguno sustituye a tu equipo: le quitan lo que se repite.</p>
       <ul class="agentes">
+        <li class="agente"><p class="agente__k">agente: prospección</p><h3>Cuentas de la semana</h3><p>Busca empresas que encajan y tienen una señal para escribirles ahora, y te deja el primer mensaje listo para aprobar.</p></li>
         <li class="agente"><p class="agente__k">agente: whatsapp</p><h3>Primera respuesta</h3><p>Contesta en el primer minuto, a cualquier hora. Hace las preguntas de cualificación y propone cita.</p></li>
         <li class="agente"><p class="agente__k">agente: voz</p><h3>Llamadas</h3><p>Llama a quien no contesta y confirma citas. Deja el resumen y el siguiente paso en el CRM.</p></li>
         <li class="agente"><p class="agente__k">agente: seguimiento</p><h3>Presupuestos parados</h3><p>Encuentra presupuestos y propuestas sin respuesta y prepara el siguiente mensaje.</p></li>
         <li class="agente"><p class="agente__k">agente: reactivación</p><h3>Base de datos</h3><p>Vuelve a escribir a contactos antiguos y a quien dijo «más adelante», cuando toca.</p></li>
-        <li class="agente"><p class="agente__k">agente: copiloto</p><h3>Qué hacer hoy</h3><p>Cada mañana, la lista de lo que hay que hacer, ordenada y con el porqué de cada cosa.</p></li>
+        <li class="agente"><p class="agente__k">agente: copiloto</p><h3>Qué hacer hoy</h3><p>Cada mañana, la lista de lo que hay que hacer, ordenada y con el porqué. Y cada semana, qué cambiar en las campañas según lo que vende.</p></li>
       </ul>
       <div class="semi">
         <p class="semi__t">Empezamos en semiautomático.</p>
