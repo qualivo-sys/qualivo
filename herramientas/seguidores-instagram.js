@@ -96,7 +96,11 @@ async function main() {
   let nuevos = antes.fecha ? ahora.filter(function (u) { return antes.usuarios.indexOf(u) === -1; }) : [];
   if (!antes.fecha && ULTIMOS) nuevos = ahora.slice(0, ULTIMOS); // la lista viene con los más recientes primero
   console.log('seguidores: ' + ahora.length + ' · nuevos desde ' + (antes.fecha || 'nunca') + ': ' + nuevos.length + (antes.fecha ? '' : ' (primera pasada: solo guardo la foto)'));
-  if (!SECO) fs.writeFileSync(FICHERO, JSON.stringify({ usuarios: ahora, fecha: new Date().toISOString() }));
+  // La foto guardada acumula a todos los vistos alguna vez: el actor devuelve una muestra
+  // distinta cada día (5-oct: 143 «nuevos» de los que 12 ya estaban en la hoja), y si solo se
+  // guardara la muestra de hoy, mañana volverían a salir como nuevos los que hoy no entraron.
+  const vistos = Array.from(new Set((antes.usuarios || []).concat(ahora)));
+  if (!SECO) fs.writeFileSync(FICHERO, JSON.stringify({ usuarios: vistos, fecha: new Date().toISOString() }));
   if (!nuevos.length) return;
 
   const perfiles = await apify(ACTOR_PERFIL, { usernames: nuevos.slice(0, 60) });
