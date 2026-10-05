@@ -354,3 +354,19 @@ a 32 €/día cierra en ≈ 1.155 €.
   mañana martes; a 32, el jueves.**
 - Las dos citas confirmadas de ayer (formación >100 solicitudes; clínicas >50 y
   2.000-5.000 €) son lo más valioso que ha traído el paid: prioridad de agenda.
+
+### Ejecutado (lunes 5-oct, 13:46 CEST) · "déjalo en 30 al día"
+
+Con OK de Maikel ("vale haz eso, déjalo en 30 al día, ahora pondré saldo"):
+- Conjunto `clinicas · NUEVOS · solo CLI_PRI` **pausado** (queda guardado con su formulario).
+- Viejos sin cambios: formación 15 + clínicas 15 = **30 €/día**.
+- **Tope de QV_VERTICALES_Sep26: 800 → 1.604 €** (gastado 680,42 al subirlo).
+  Octubre queda limitado a 1.200 € aunque alguien toque un presupuesto; el 1-nov
+  se vuelve a fijar.
+Verificado por GET. Próximo punto de decisión: lunes 12-oct, 08:05. Hasta
+entonces, nada se toca.
+
+H-CREATIVO-02 queda **falsada en esta ronda**: ninguno de los seis vídeos superó
+al viejo de su vertical en coste por apertura ni en calidad de lead. Aprendizaje
+para Creative: los ganchos nuevos abren bien (CTR 5-7 % el primer día) y no
+aguantan; el vídeo viejo, con Maikel a cámara, sostiene 3-4 % durante semanas.
