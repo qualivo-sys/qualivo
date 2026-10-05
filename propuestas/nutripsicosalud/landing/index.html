@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>NutriPsicoSalud · landing (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<style>
+/* Maqueta de landing para la reunión: filtra con un test de 3 preguntas y deriva a valoración 1:1 o a grupo. */
+:root{--bg:#F7F3EE;--surface:#FFFFFF;--ink:#24302A;--muted:#5E6B64;--line:#E2DCD3;--accent:#3E8E6B;--accent-ink:#FFFFFF;--soft:#E4F3EC;--warm:#D9925B;--warm-soft:#F8E6D6;
+  --display:"Fraunces",Georgia,serif;--body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;--shadow:0 1px 2px rgba(36,48,42,.06),0 8px 24px rgba(36,48,42,.06)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121815;--surface:#1A221E;--ink:#E7EEEA;--muted:#A5B3AB;--line:#2A3530;--accent:#5FBF93;--accent-ink:#0E1A14;--soft:#1C2E26;--warm:#E2A574;--warm-soft:#2E241C;--shadow:none;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121815;--surface:#1A221E;--ink:#E7EEEA;--muted:#A5B3AB;--line:#2A3530;--accent:#5FBF93;--accent-ink:#0E1A14;--soft:#1C2E26;--warm:#E2A574;--warm-soft:#2E241C;--shadow:none;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);overflow-x:hidden;padding-bottom:84px}
+@media (min-width:760px){body{padding-bottom:0}}
+.wrap{max-width:1040px;margin-inline:auto;padding-inline:16px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(32px,8.4vw,54px)}
+h2{font-size:clamp(26px,6vw,36px)}
+h3{font-size:20px}
+p{margin:0}
+.sub{color:var(--muted)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+section{padding-block:56px}
+@media (min-width:760px){section{padding-block:80px}}
+.head{display:grid;gap:10px;max-width:640px;margin-bottom:28px}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
+
+/* Cabecera */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:16px;font-size:14px;color:var(--muted);gap:12px}
+.top b{color:var(--ink);font-family:var(--display);font-size:19px;font-weight:700}
+.demo{font-size:12px;font-weight:600;background:var(--warm-soft);color:var(--ink);border:1px solid var(--warm);border-radius:99px;padding:3px 10px;white-space:nowrap}
+
+/* Botones */
+.btn{font:inherit;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:14px 22px;cursor:pointer;text-decoration:none;border:1.5px solid transparent;min-height:50px;text-align:center}
+.btn-main{background:var(--accent);color:var(--accent-ink)}
+.btn-main:hover{filter:brightness(1.06)}
+.btn-line{background:transparent;color:var(--accent);border-color:var(--accent)}
+.btn-line:hover{background:var(--soft)}
+.btn-warm{background:var(--warm);color:#2A1A0E}
+
+/* Hero */
+.hero{position:relative;padding-block:20px 56px;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(2px);z-index:0;pointer-events:none}
+.hero::before{width:420px;height:420px;right:-160px;top:-60px;background:radial-gradient(circle at 40% 40%,var(--soft),transparent 70%)}
+.hero::after{width:320px;height:320px;left:-140px;bottom:-120px;background:radial-gradient(circle at 50% 50%,var(--warm-soft),transparent 70%)}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;gap:32px;align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:48px}.hero{padding-block:40px 96px}}
+.hero-copy{display:grid;gap:18px}
+.hero-copy .lead{font-size:18px;color:var(--muted);max-width:34em}
+.hero-copy .lead strong{color:var(--ink)}
+.ctas{display:grid;gap:10px}
+@media (min-width:520px){.ctas{grid-template-columns:auto auto;justify-content:start}}
+.trust{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);padding:0;margin:4px 0 0;list-style:none}
+.trust li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:1px}
+
+/* Tarjeta de chat en el hero */
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);display:grid;gap:10px;max-width:420px;width:100%;justify-self:center}
+.chat-top{display:flex;align-items:center;gap:10px;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.dot{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--warm));flex:none}
+.chat-top small{display:block;color:var(--muted);font-size:12px}
+.msg{font-size:15px;padding:10px 14px;border-radius:16px;max-width:88%;line-height:1.45}
+.msg.in{background:var(--soft);border-bottom-left-radius:4px}
+.msg.out{background:var(--warm-soft);justify-self:end;border-bottom-right-radius:4px}
+.chat-note{font-size:12px;color:var(--muted);text-align:center}
+
+/* Por qué no funcionan las dietas */
+.why{display:grid;gap:14px}
+@media (min-width:760px){.why{grid-template-columns:repeat(3,1fr);gap:18px}}
+.why article{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start}
+.num{font-family:var(--display);font-weight:700;font-size:15px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--accent)}
+.why article:nth-child(2) .num{background:var(--warm-soft);color:var(--warm)}
+
+/* Programas */
+.band{background:linear-gradient(180deg,transparent,var(--soft) 30%,var(--soft) 70%,transparent)}
+.progs{display:grid;gap:14px}
+@media (min-width:640px){.progs{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.progs{grid-template-columns:repeat(3,1fr)}}
+.prog{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden}
+.prog::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--accent);opacity:.7}
+.prog:nth-child(even)::before{background:var(--warm)}
+.prog.star{border-color:var(--accent);box-shadow:var(--shadow)}
+@media (min-width:960px){.prog.star{grid-column:span 2}}
+.tag{display:inline-block;font-size:12px;font-weight:600;background:var(--soft);color:var(--accent);border-radius:99px;padding:2px 10px;width:max-content}
+.prog p{color:var(--muted);font-size:15px}
+.prog ul{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:2px}
+.small{font-size:13px;color:var(--muted)}
+
+/* Cómo funciona */
+.steps{display:grid;gap:14px;counter-reset:s;padding:0;margin:0;list-style:none}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:18px}}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start;position:relative}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--display);font-weight:700;font-size:28px;color:var(--warm);line-height:1}
+.steps li p{color:var(--muted);font-size:15px}
+
+/* Test */
+.test-box{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow);max-width:620px;margin-inline:auto}
+@media (min-width:760px){.test-box{padding:32px}}
+.test-head{text-align:center;display:grid;gap:8px;margin-bottom:24px;justify-items:center}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.step{display:none;gap:12px}
+.step.on{display:grid}
+.step h3{font-size:22px}
+.opt{font:inherit;font-weight:600;text-align:left;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.card{background:var(--soft);border-radius:16px;padding:16px;display:grid;gap:8px}
+.card .tag{background:var(--surface)}
+label{font-size:14px;font-weight:600;display:grid;gap:4px}
+input{font:inherit;font-weight:400;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);width:100%}
+.go{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:14px;padding:14px;cursor:pointer;min-height:50px}
+.wa{font:inherit;font-weight:600;text-align:center;border:1.5px solid var(--accent);color:var(--accent);border-radius:14px;padding:12px;text-decoration:none}
+.note{font-size:12px;color:var(--muted);text-align:center}
+.back{font:inherit;font-size:14px;background:none;border:0;color:var(--muted);cursor:pointer;justify-self:start;padding:4px 0}
+.ok{display:none;background:var(--soft);color:var(--ink);border-radius:12px;padding:10px 14px;font-size:14px}
+.ok.on{display:block}
+
+/* Grupo */
+.group{border-radius:24px;padding:24px;background:linear-gradient(135deg,var(--warm-soft),var(--soft));display:grid;gap:24px;align-items:center;border:1px solid var(--line)}
+@media (min-width:860px){.group{grid-template-columns:1.1fr .9fr;padding:40px}}
+.group-copy{display:grid;gap:14px}
+.group-copy p{color:var(--muted)}
+.group-card{background:var(--surface);border-radius:18px;padding:20px;display:grid;gap:12px;border:1px solid var(--line)}
+.group-card dl{margin:0;display:grid;gap:10px}
+.group-card dl div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px;font-size:15px}
+.group-card dt{color:var(--muted)}
+.group-card dd{margin:0;font-weight:600;text-align:right}
+
+/* Testimonios */
+.quotes{display:grid;gap:14px}
+@media (min-width:760px){.quotes{grid-template-columns:repeat(3,1fr);gap:18px}}
+.quote{background:var(--surface);border:1.5px dashed var(--line);border-radius:18px;padding:22px;display:grid;gap:12px;align-content:start}
+.quote blockquote{margin:0;font-family:var(--display);font-size:18px;line-height:1.35;color:var(--muted)}
+.quote .who{font-size:13px;color:var(--muted)}
+.ph{font-size:12px;font-weight:600;color:var(--ink);background:var(--warm-soft);border-radius:99px;padding:2px 10px;width:max-content}
+
+/* FAQ */
+.faq{display:grid;gap:10px;max-width:760px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);font-size:15px;margin-top:8px}
+
+/* Cierre y pie */
+.final{text-align:center;display:grid;gap:16px;justify-items:center}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:13px;color:var(--muted)}
+footer .wrap{display:grid;gap:6px}
+
+/* Barra fija en móvil */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);transition:transform .25s}
+.sticky .btn{width:100%}
+.sticky.hide{transform:translateY(110%)}
+@media (min-width:760px){.sticky{display:none}}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <b>NutriPsicoSalud</b>
+  <span class="demo">Maqueta · no es la web real</span>
+</header>
+
+<main>
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Comida y emociones</span>
+        <h1 id="h-hero">Si comes por ansiedad, no es falta de fuerza de voluntad.</h1>
+        <p class="lead"><strong>Nutrición y psicoterapia juntas, en Madrid y online.</strong> Trabajamos lo que comes y lo que sientes a la vez, porque una mente sana y un cuerpo nutrido van de la mano.</p>
+        <div class="ctas">
+          <a class="btn btn-main" href="#test">Haz el test (2 minutos)</a>
+          <a class="btn btn-line" href="#" onclick="return false">Escríbenos por WhatsApp</a>
+        </div>
+        <ul class="trust">
+          <li>Presencial en Madrid u online</li>
+          <li>Acompañamiento entre sesiones</li>
+        </ul>
+      </div>
+      <div class="chat" aria-label="Ejemplo de conversación por WhatsApp">
+        <div class="chat-top"><span class="dot" aria-hidden="true"></span><div><b>NutriPsicoSalud</b><small>Asistente · ejemplo de mensaje</small></div></div>
+        <p class="msg in">Hola, soy el asistente de NutriPsicoSalud. He visto tu test: te preocupa comer por ansiedad desde hace más de un año.</p>
+        <p class="msg in">¿Te viene bien una valoración de 30 minutos con la terapeuta? Tengo hueco el jueves por la tarde.</p>
+        <p class="msg out">Sí, el jueves me va bien.</p>
+        <p class="chat-note">Así sería el primer mensaje, un minuto después del test.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Por qué no funcionan las dietas -->
+  <section aria-labelledby="h-why">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Por qué no funcionan las dietas</span>
+        <h2 id="h-why">Si ya has probado de todo, no es culpa tuya</h2>
+        <p class="sub">Una dieta sola se queda corta cuando la comida tiene que ver con cómo te sientes.</p>
+      </div>
+      <div class="why">
+        <article><span class="num">1</span><h3>Comida y emociones a la vez</h3><p class="sub">No separamos el plato de lo que te pasa por dentro. Nutrición y psicoterapia en el mismo plan.</p></article>
+        <article><span class="num">2</span><h3>Acompañamiento entre sesiones</h3><p class="sub">Lo difícil pasa entre consulta y consulta. Por eso seguimos contigo por WhatsApp.</p></article>
+        <article><span class="num">3</span><h3>Un plan para tu caso</h3><p class="sub">No te damos una dieta genérica. Empezamos por entender qué te pasa y luego decidimos el plan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Programas -->
+  <section class="band" id="programas" aria-labelledby="h-progs">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Programas</span>
+        <h2 id="h-progs">Siete programas, un mismo enfoque</h2>
+        <p class="sub">Si no sabes cuál es el tuyo, el test te lo dice en dos minutos.</p>
+      </div>
+      <div class="progs">
+        <article class="prog star">
+          <span class="tag">90 días</span>
+          <h3>Ganbaru</h3>
+          <p>Dieta mediterránea baja en carbohidratos con acompañamiento emocional:</p>
+          <ul>
+            <li>Menús semanales con recetas</li>
+            <li>Hipnosis clínica</li>
+            <li>Acompañamiento emocional diario por WhatsApp</li>
+            <li>Sesiones individuales y de grupo</li>
+          </ul>
+        </article>
+        <article class="prog"><h3>Hormonas en Armonía</h3><p>Ciclo y estrés adrenal: alimentación adaptada al ciclo, el sueño y el estrés.</p></article>
+        <article class="prog"><h3>Equilibrio Intestinal y Energía Total</h3><p>Para las digestiones pesadas, la hinchazón y la falta de energía.</p></article>
+        <article class="prog"><h3>Inmunidad Fuerte y Cronicidad Bajo Control</h3><p>Para cuidar las defensas y las molestias que se alargan en el tiempo.</p></article>
+        <article class="prog"><h3>Dolor Crónico y Fibromialgia</h3><p>Abordaje desde la psiconeuroinmunología (PNI) del dolor crónico y la fibromialgia.</p></article>
+        <article class="prog"><h3>RESET: Mente y Cuerpo</h3><p>Un programa para trabajar la mente y el cuerpo a la vez.</p></article>
+        <article class="prog"><h3>Sana tu Mente</h3><p>Nutrición y psicoterapia para cuidar la salud mental.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Cómo funciona -->
+  <section aria-labelledby="h-how">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2 id="h-how">Tres pasos y ya sabes por dónde empezar</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Haces el test</h3><p>Tres preguntas, dos minutos. Sin compromiso.</p></li>
+        <li><h3>Te escribimos por WhatsApp en un minuto</h3><p>Te contamos qué programa encaja contigo y resolvemos tus dudas.</p></li>
+        <li><h3>Valoración de 30 minutos</h3><p>Con la terapeuta, en Madrid u online. O, si encaja mejor, una plaza en el próximo grupo.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Test -->
+  <section id="test" aria-labelledby="h-test" style="scroll-margin-top:8px">
+    <div class="wrap">
+      <div class="test-box">
+        <div class="test-head">
+          <span class="eyebrow">El test</span>
+          <h2 id="h-test">¿Qué programa encaja contigo?</h2>
+          <p class="sub">Responde tres preguntas y te decimos por dónde empezar.</p>
+        </div>
+
+        <div class="step on" id="s1">
+          <div class="bar"><i style="width:33%"></i></div>
+          <h3>¿Qué es lo que más te preocupa ahora?</h3>
+          <button type="button" class="opt" data-k="motivo" data-v="ansiedad" data-next="s2">Como por ansiedad o por emociones</button>
+          <button type="button" class="opt" data-k="motivo" data-v="peso" data-next="s2">Quiero perder peso y que dure</button>
+          <button type="button" class="opt" data-k="motivo" data-v="intestino" data-next="s2">Hinchazón, digestiones, falta de energía<small>intestino y energía</small></button>
+          <button type="button" class="opt" data-k="motivo" data-v="hormonas" data-next="s2">Ciclo, estrés, sueño<small>hormonas</small></button>
+          <button type="button" class="opt" data-k="motivo" data-v="otro" data-next="s2">Otra cosa: dolor, defensas, ánimo</button>
+        </div>
+
+        <div class="step" id="s2">
+          <div class="bar"><i style="width:66%"></i></div>
+          <h3>¿Desde cuándo te pasa?</h3>
+          <button type="button" class="opt" data-k="tiempo" data-v="meses" data-next="s3">Desde hace unos meses</button>
+          <button type="button" class="opt" data-k="tiempo" data-v="anos" data-next="s3">Más de un año</button>
+          <button type="button" class="opt" data-k="tiempo" data-v="siempre" data-next="s3">Desde siempre, ya he probado de todo</button>
+          <button type="button" class="back" data-next="s1">‹ Atrás</button>
+        </div>
+
+        <div class="step" id="s3">
+          <div class="bar"><i style="width:100%"></i></div>
+          <h3>¿Cómo prefieres empezar?</h3>
+          <button type="button" class="opt" data-k="modo" data-v="individual" data-next="s4">Acompañamiento uno a uno<small>sesiones individuales y seguimiento por WhatsApp</small></button>
+          <button type="button" class="opt" data-k="modo" data-v="grupo" data-next="s4">En un grupo pequeño<small>sesión semanal en grupo y menús</small></button>
+          <button type="button" class="opt" data-k="modo" data-v="nose" data-next="s4">No lo sé, que me aconsejen</button>
+          <button type="button" class="back" data-next="s2">‹ Atrás</button>
+        </div>
+
+        <div class="step" id="s4" aria-live="polite">
+          <div class="card">
+            <span class="tag">Tu resultado</span>
+            <h3 id="prog">Programa Ganbaru · 90 días</h3>
+            <p class="sub" id="porque">Trabaja la comida y la parte emocional a la vez, que es justo lo que cuentas.</p>
+          </div>
+          <p id="siguiente">Déjanos tu WhatsApp y en un minuto te escribimos para contarte cómo es y, si encaja, buscar hueco para una primera valoración.</p>
+          <label>Nombre<input autocomplete="given-name" placeholder="Tu nombre"></label>
+          <label>WhatsApp<input inputmode="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
+          <button class="go" type="button" id="send">Que me escriban por WhatsApp</button>
+          <p class="ok" id="sent" role="status">Listo. En la versión real, el asistente te escribiría ahora por WhatsApp.</p>
+          <a class="wa" href="#" onclick="return false">Prefiero escribir yo</a>
+          <button type="button" class="back" data-next="s1" data-reset="1">‹ Volver a empezar</button>
+          <p class="note">Maqueta para la demo: el formulario no envía nada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Grupo -->
+  <section id="grupo" aria-labelledby="h-group">
+    <div class="wrap">
+      <div class="group">
+        <div class="group-copy">
+          <span class="eyebrow">¿Prefieres empezar en grupo?</span>
+          <h2 id="h-group">Grupo de 4 semanas, una sesión a la semana y los menús</h2>
+          <p>Para quien quiere empezar con compañía y a su ritmo. Grupos pequeños, online, con los menús de cada semana y una sesión semanal con la terapeuta.</p>
+          <div><button type="button" class="btn btn-main" id="aviso">Avísame del próximo grupo</button></div>
+          <p class="ok" id="aviso-ok" role="status">Hecho. En la versión real te avisaríamos por WhatsApp cuando abra el grupo.</p>
+        </div>
+        <div class="group-card" aria-label="Próximo grupo (fechas de ejemplo)">
+          <span class="ph">Fechas de ejemplo</span>
+          <dl>
+            <div><dt>Empieza</dt><dd>Lunes 2 de noviembre</dd></div>
+            <div><dt>Duración</dt><dd>4 semanas</dd></div>
+            <div><dt>Sesiones</dt><dd>1 a la semana, en grupo</dd></div>
+            <div><dt>Incluye</dt><dd>Menús semanales</dd></div>
+            <div><dt>Formato</dt><dd>Online</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Testimonios -->
+  <section aria-labelledby="h-quotes">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Opiniones</span>
+        <h2 id="h-quotes">Lo que cuentan quienes ya han pasado por consulta</h2>
+        <p class="ph">Ejemplo: aquí van opiniones reales de tus pacientes</p>
+      </div>
+      <div class="quotes">
+        <figure class="quote"><span class="ph">Ejemplo</span><blockquote>[Opinión de una paciente del programa Ganbaru]</blockquote><figcaption class="who">[Nombre o iniciales, con su permiso]</figcaption></figure>
+        <figure class="quote"><span class="ph">Ejemplo</span><blockquote>[Opinión de una paciente de Equilibrio Intestinal]</blockquote><figcaption class="who">[Nombre o iniciales, con su permiso]</figcaption></figure>
+        <figure class="quote"><span class="ph">Ejemplo</span><blockquote>[Opinión de una persona que empezó en el grupo]</blockquote><figcaption class="who">[Nombre o iniciales, con su permiso]</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2 id="h-faq">Lo que suelen preguntarnos</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Es presencial u online?</summary><p>Las dos cosas. Puedes venir a la consulta en Madrid o hacerlo todo online.</p></details>
+        <details><summary>¿La primera valoración tiene coste?</summary><p>Te lo explicamos por WhatsApp, junto con cómo es la valoración y qué programa encaja contigo.</p></details>
+        <details><summary>¿Me va a contestar un robot?</summary><p>Te escribe un asistente que se presenta como asistente, para responder rápido y buscarte hueco. Cualquier tema de salud lo lleva la terapeuta.</p></details>
+        <details><summary>¿Cuánto dura un programa?</summary><p>Ganbaru dura 90 días. La duración del resto la vemos contigo en la valoración, según tu caso.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section aria-labelledby="h-final">
+    <div class="wrap final">
+      <h2 id="h-final">Una mente sana y un cuerpo nutrido son la clave para una vida plena</h2>
+      <p class="sub">Empieza por el test. Son dos minutos.</p>
+      <a class="btn btn-main" href="#test">Haz el test (2 minutos)</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Maqueta preparada por Qualivo para NutriPsicoSalud · 5 de octubre de 2026.</p>
+    <p>No es la web de NutriPsicoSalud; textos e imágenes de ejemplo.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><a class="btn btn-main" href="#test">Haz el test</a></div>
+
+<script>
+(function () {
+  var r = {};
+  var P = {
+    ansiedad: ['Programa Ganbaru · 90 días', 'Trabaja la comida y la parte emocional a la vez, que es justo lo que cuentas.'],
+    peso: ['Programa Ganbaru · 90 días', 'Menús, acompañamiento emocional y seguimiento diario para que el cambio dure.'],
+    intestino: ['Equilibrio Intestinal & Energía Total', 'Plan para la digestión y la microbiota, con el sistema nervioso en cuenta.'],
+    hormonas: ['Hormonas en Armonía', 'Alimentación adaptada al ciclo, sueño y manejo del estrés.'],
+    otro: ['Primera valoración', 'Lo vemos contigo en la primera sesión y te decimos qué programa encaja.']
+  };
+  var box = document.getElementById('test');
+  document.querySelectorAll('#test [data-next]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.reset) { r = {}; document.getElementById('sent').classList.remove('on'); }
+      if (b.dataset.k) r[b.dataset.k] = b.dataset.v;
+      if (b.dataset.next === 's4') {
+        var p = P[r.motivo] || P.otro;
+        var grupo = r.modo === 'grupo';
+        document.getElementById('prog').textContent = grupo ? 'Grupo de ' + (r.motivo === 'ansiedad' ? 'comer por ansiedad' : 'cuatro semanas') : p[0];
+        document.getElementById('porque').textContent = grupo ? 'Una sesión en grupo a la semana y los menús. Empieza el próximo grupo.' : p[1];
+        document.getElementById('siguiente').textContent = grupo
+          ? 'Déjanos tu WhatsApp y te escribimos con las fechas del próximo grupo y cómo apuntarte.'
+          : 'Déjanos tu WhatsApp y en un minuto te escribimos para contarte cómo es y, si encaja, buscar hueco para una primera valoración.';
+      }
+      document.querySelectorAll('#test .step').forEach(function (s) { s.classList.toggle('on', s.id === b.dataset.next); });
+      var top = box.getBoundingClientRect().top;
+      if (top < 0) box.scrollIntoView({ block: 'start' });
+    });
+  });
+  document.getElementById('send').addEventListener('click', function () { document.getElementById('sent').classList.add('on'); });
+  document.getElementById('aviso').addEventListener('click', function () { document.getElementById('aviso-ok').classList.add('on'); });
+
+  var sticky = document.getElementById('sticky');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { sticky.classList.toggle('hide', e.isIntersecting); });
+    }, { threshold: 0.15 }).observe(box);
+  }
+})();
+</script>
+</body>
+</html>
