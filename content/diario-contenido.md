@@ -991,10 +991,33 @@ Imagen regenerada con «36 de 37».
 
 ### Borradores (sin publicar)
 
-- **Lunes, «Agentizando»:** «La IA no sustituye al comercial».
-  - Imagen: `content/infografias/2026-10-05/semiautomatico.png`.
-  - Texto y ficha: `content/borradores/2026-10-05-agentizando-semiautomatico.md`.
-  - Se solapa con el post 3 de la cobertura (jueves 8). Recomiendo publicar solo el del jueves esta semana y dejar este para la siguiente.
+- **Lunes, «Agentizando»: RETIRADO.** «La IA no sustituye al comercial» (`content/borradores/2026-10-05-agentizando-semiautomatico.md`).
+  - El Master Reviewer le puso un 3 y pidió rehacerlo.
+  - Describía el WhatsApp como funcionaba el 29-sep. Desde el 1-oct, el primer mensaje a los A/B sale solo a los 10 minutos y el copiloto está apagado.
+  - No se reescribe: el post 3 de la cobertura cubre el tema.
+
+### Master Reviewer (5-oct)
+
+Informe en `content/borradores/revision-master-reviewer-2026-10-05.md`.
+
+| Pieza | Nota | Veredicto | Qué he hecho |
+|---|---|---|---|
+| Artículo | 5 | Publicar con cambios | Aplicados los 15 críticos |
+| Reorientación | 7 | Publicar con cambios | Aplicado el único crítico |
+| Borrador | 3 | Rehacer | Retirado |
+
+En el artículo:
+- **Quién hizo la limpieza y por qué.** La hizo Growth con el ok de Maikel, porque había que pasar a Meta la calidad de los leads.
+- **Cantidades exactas.** 3 clientes, 2 duplicados y 2 tratos de 0 €.
+- **Fuera la baja que seguía en «más adelante».** Riesgo de protección de datos, por la queja de agosto.
+- **El «50 y 50» va atribuido a «un director comercial».** Sin nombre.
+- **Fuera el enlace a /equipos-comerciales/.** Es un borrador sin indexar.
+
+Corregido también, fuera de las piezas revisadas:
+- **`blog/ahora-no-es-el-momento/`.** Decía que el agente le redacta las respuestas a Maikel y él las manda. Con el copiloto apagado, ya no es verdad. Quitada esa frase.
+- **La propuesta de la semana 41.** Lleva un aviso: la pieza «semiautomático» ya no se publica tal cual.
+
+**Para Maikel:** desde el 1-oct, a los leads A/B el primer WhatsApp les sale solo a los 10 minutos desde la pasarela de tu número personal. Va contra la regla de no enviar nada automático desde el 663. No es tema de contenido, pero lo dejo escrito para que lo veas con Growth.
 
 ### Pendiente de Maikel
 

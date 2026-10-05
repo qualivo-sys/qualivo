@@ -1,5 +1,15 @@
-# Lunes 5-oct · Agentizando mi propia empresa · «La IA no sustituye al comercial»
+# ⛔ RETIRADO · Lunes 5-oct · Agentizando mi propia empresa · «La IA no sustituye al comercial»
 
+> **RETIRADO el 5-oct tras el Master Reviewer (nota 3, rehacer).** Describe el
+> WhatsApp como funcionaba el 29-sep, y desde el 1-oct ya no es así: el primer
+> WhatsApp a los A/B sale solo a los 10 minutos si Maikel no hace nada
+> (`api/_activacion.js`), y el copiloto está apagado (`COPILOTO = false` en
+> `api/_agente.js`). Publicarlo sería decir algo falso, y además choca con la
+> regla del WhatsApp desde el número de Maikel. La pieza no se reescribe: el
+> post 3 de la cobertura (jueves 8) cubre el tema hablando del producto, no
+> del sistema interno de Qualivo, y el fallo de «¿eres una máquina?» ya está
+> en el borrador del 24-sep.
+>
 > Pieza del lunes de «Agentizando», con la imagen `content/infografias/2026-10-05/semiautomatico.png`.
 > Es la pieza 4 de la propuesta de Contenido para la semana 41 (`content/propuestas-areas/2026-10-05-contenido.md`).
 > **Sin publicar.** LinkedIn sigue en pausa.

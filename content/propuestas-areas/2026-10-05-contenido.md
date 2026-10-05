@@ -84,6 +84,8 @@ Los otros tres siguen con el plan de octubre.
 
 ## 4. La pieza «semiautomático: la IA no sustituye al comercial»
 
+> **Aviso del 5-oct:** el texto de abajo describe el WhatsApp como funcionaba el 29-sep. Desde el 1-oct, el primer mensaje a los A/B sale solo a los 10 minutos si Maikel no actúa, y el copiloto está apagado. Esta versión **no se publica**. El tema lo cubre el post 3 de `content/linkedin/2026-10-06-air-cover.md`, que habla del producto y no del sistema interno.
+
 **Ficha**
 - **Dato real:**
   - El miedo se repitió en cuatro reuniones de la semana 40 (brief del 2-oct, punto 6).
