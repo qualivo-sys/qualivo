@@ -302,3 +302,21 @@ fecha,pipeline,etapa,oportunidades,valor_eur
 2026-10-02,Qualivo Pipeline,Contactado,28,0
 2026-10-02,Qualivo Pipeline,Perdido (lost),1,0
 2026-10-02,Qualivo Pipeline,Tibio,23,0
+2026-10-05,Prospección,Conversación abierta,9,1750
+2026-10-05,Prospección,Conversación abierta (lost),1,0
+2026-10-05,Prospección,En cadencia (lost),1,0
+2026-10-05,Prospección,Más adelante,8,10500
+2026-10-05,Prospección,No presentado,4,0
+2026-10-05,Prospección,No presentado (lost),4,0
+2026-10-05,Prospección,No responde (lost),5,0
+2026-10-05,Prospección,Nuevo Lead,3,0
+2026-10-05,Prospección,Nuevo Lead (lost),3,0
+2026-10-05,Prospección,Oferta enviada,5,5200
+2026-10-05,Prospección,Oferta enviada (lost),1,0
+2026-10-05,Prospección,Piloto,1,0
+2026-10-05,Prospección,Reunión agendada,4,0
+2026-10-05,Prospección,Reunión agendada (abandoned),1,0
+2026-10-05,Prospección,Reunión agendada (lost),1,0
+2026-10-05,Prospección,Segunda reunión,2,7800
+2026-10-05,Qualivo Pipeline,Contactado,28,0
+2026-10-05,Qualivo Pipeline,Tibio,19,0
