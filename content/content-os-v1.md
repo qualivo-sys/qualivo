@@ -17,7 +17,7 @@
 
 - **El problema no es producir.** Está en distribuir, medir y conectar el contenido con la cartera de oportunidades. Medición 2/10, distribución 3/10 (diagnóstico del 6-oct).
 - **Una obsesión comercial por semana.** De cada tema salen todas las piezas. Se acabó el artículo diario.
-- **El marco que lo une todo: el Revenue Journey.** Captación → respuesta → cualificación → seguimiento → cita → venta → medición. Qualivo encuentra dónde se rompe ese recorrido y construye lo que lo arregla.
+- **El marco que lo une todo: el Revenue Journey.** Captación → respuesta → cualificación → seguimiento → cita → venta → reactivación, con Intelligence midiendo todo el recorrido. Qualivo encuentra dónde se rompe ese recorrido y construye lo que lo arregla.
 - **Dos capas de marca.** Maikel pone la persona, la opinión y la experiencia. Qualivo pone el sistema, los datos y el método.
 - **Antes de producir más, se mide.** UTM en todo, la pregunta «¿cómo nos conociste?» en los formularios y un panel semanal que va del contenido a los euros en cartera.
 - **Un solo Head of Content decide qué historia cuenta Qualivo cada semana.** Los especialistas deciden cómo se cuenta en cada canal. El Master Reviewer revisa. Maikel aprueba.
@@ -41,7 +41,10 @@ encontrando, midiendo y arreglando, en su casa y en la de sus clientes.
 | Seguimiento | «Ahora no» sin fecha, propuestas sin respuesta | Siguiente acción con fecha, CRM |
 | Cita | Plantones, reuniones que se alargan | Confirmación, recuperación en 10 minutos |
 | Venta | Quien decide no está, no hay material el mismo día | Guion de reunión, página con demo |
-| Medición | Origen mal etiquetado, no se sabe qué canal vende | Panel, Intelligence, atribución |
+| Reactivación | «Más adelante» que nadie retoma, clientes a los que les toca repetir | Toques con motivo, base de datos |
+| **Medición (encima de todo)** | Origen mal etiquetado, no se sabe qué canal vende, no se ve qué oportunidad está en riesgo | **Intelligence**, atribución, panel |
+
+*Ajuste del 6-oct, tras la revisión de la web V2 (`content/web-v2/decisiones-p0.md`).* Son siete etapas, que acaban en la reactivación. La medición deja de ser la última etapa y pasa a ser la capa que mira todo el recorrido, y esa capa es Intelligence.
 
 **Reglas de uso:**
 - Toda pieza se sitúa en una etapa y lo dice en su ficha.
