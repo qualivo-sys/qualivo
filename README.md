@@ -99,6 +99,7 @@ Tras subir el código, recarga el Sheet. Aparecerá el menú **EAC Dashboard**.
 | **TikTok** | `TIKTOK_ACCESS_TOKEN`, `TIKTOK_ADVERTISER_ID` | App de TikTok Marketing API aprobada. |
 | **HubSpot** | `HUBSPOT_TOKEN`, `HUBSPOT_STATUS_PROP` | Private App token. `STATUS_PROP` = propiedad de estado del lead (por defecto `hs_lead_status`). |
 | **GoHighLevel** | `GHL_TOKEN`, `GHL_LOCATION_ID` | Token v2 con `opportunities.readonly`. |
+| **Meta CAPI** (Lead Form HackTheLead) | `META_CAPI_TOKEN`, `META_DATASET_ID`, `META_TEST_EVENT_CODE`, `LEAD_WEBHOOK_SECRET` | Conversions API para devolver a Meta el lead **cualificado**. Ver `docs/qualivo-htl-meta-ghl.md`. |
 
 > El CRM usa **GHL** si hay credenciales; si no, **HubSpot**. EAC migró de
 > HubSpot a GHL en mayo de 2026, por eso ambos conectores están disponibles.
