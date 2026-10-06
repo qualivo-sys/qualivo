@@ -40,15 +40,24 @@ function provider(s) {
 
 /** Anuncio/campaña de una oportunidad a partir de sus attributions (UTM nativas o pageUrl con utm_*). */
 function adFrom(o) {
-  const out = { anuncio: '', campana: '' };
+  const out = { anuncio: '', campana: '', landing: '' };
   for (const a of (o.attributions || [])) {
+    // Variante de landing del test A/B/C (elevanails.es/, /inicio-b, /inicio-c, /inicio-b1, /inicio-c1, blog /negocio).
+    if (!out.landing && a.pageUrl) {
+      try { const path = new URL(a.pageUrl).pathname.replace(/\/+$/, '').toLowerCase();
+        const m = path.match(/\/inicio-([a-z])(\d?)$/);
+        if (m) out.landing = m[1].toUpperCase() + (m[2] ? ' (Google)' : '');
+        else if (/\/negocio$/.test(path)) out.landing = 'Negocio (blog)';
+        else if (path === '' || path === '/' || path === '/inicio') out.landing = 'A (actual)';
+      } catch { /* url rara */ }
+    }
     if (a.utmContent || a.utmCampaign) { out.anuncio = out.anuncio || a.utmContent || ''; out.campana = out.campana || a.utmCampaign || ''; }
     if ((!out.anuncio || !out.campana) && a.pageUrl) {
       try { const q = new URL(a.pageUrl).searchParams; out.anuncio = out.anuncio || q.get('utm_content') || ''; out.campana = out.campana || q.get('utm_campaign') || ''; } catch { /* url rara */ }
     }
     if (out.anuncio && out.campana) break;
   }
-  return { anuncio: out.anuncio.trim(), campana: out.campana.trim() };
+  return { anuncio: out.anuncio.trim(), campana: out.campana.trim(), landing: out.landing };
 }
 function weekMonday(ds) {
   const d = new Date(ds + 'T00:00:00Z');

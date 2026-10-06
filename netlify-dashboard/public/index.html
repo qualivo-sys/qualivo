@@ -143,6 +143,9 @@
   <h2>Por procedencia (canal)</h2>
   <table id="tPro"></table>
 
+  <h2>Por landing <span class="sub">(test A/B/C: variante de página que trajo cada trato, según la URL del formulario)</span></h2>
+  <table id="tLanding"></table>
+
   <div class="grid2">
     <div>
       <h2>Provincias de los leads <span class="sub" id="regWin"></span></h2>
@@ -320,6 +323,7 @@ function render(){
   // Por comercial y por procedencia
   breakdown('#tCom','Comercial', rows, 'comercial');
   breakdown('#tPro','Canal', rows, 'procedencia');
+  breakdown('#tLanding','Landing', rows.map(r=>({...r, landing: r.landing || '(sin dato)'})), 'landing');
   // Provincias y anuncios (Meta, ventana propia de 30 días)
   renderMetaExtra();
   // Rendimiento por anuncio (Meta × CRM)
