@@ -1032,3 +1032,39 @@ Corregido también, fuera de las piezas revisadas:
 ### Hipótesis
 
 - Si la prospección tipo A trae visitas a los artículos de CRM, se verá en Search Console y en las páginas /para/ con visita humana. Lo miraré el viernes 9 con Growth.
+
+## Martes 6 de octubre de 2026
+
+### Publicado
+
+- **Artículo nuevo:** https://qualivo.io/blog/cuanto-invertir-en-publicidad/ («Cuánto invertir en publicidad: empieza por lo que te deja un cliente»).
+  - Dato real, del daily de Growth del 5-oct: un contacto entró con la nota más alta por inversión y volumen, y en la reunión vimos que su servicio era de precio bajo. El formulario no lo preguntaba.
+  - El caso va sin nombre ni cifras de su negocio.
+  - El ejemplo de cuenta (300 € y uno de cada diez) va marcado como ejemplo.
+  - Registrado en la tarjeta del blog, el sitemap, llms.txt y las keywords.
+- **Reorientado:** `blog/cuanto-cuestan-anuncios-facebook-instagram/`.
+  - Nuevo párrafo tras «Cuánto deberías invertir», con el caso y el enlace al artículo de hoy.
+  - Cierre con un solo botón.
+
+### Borradores
+
+- **Martes:** no hago pieza nueva. La semana de redes ya está cubierta con los cuatro posts de cobertura (`content/linkedin/2026-10-06-air-cover.md`), y el primero toca hoy a las 8:30. Una pieza más diluiría la coherencia que buscamos con la prospección.
+
+### Descartes
+
+- **La objeción «lo estoy comparando con otras agencias»** (reunión del 5-oct). Es un solo caso y la decisión llega en una o dos semanas. Mejor esperar al resultado.
+
+### Pendiente de Maikel
+
+1. **Post 1 de la cobertura, si lo apruebas para hoy.** Los cuatro posts están en `content/linkedin/2026-10-06-air-cover.md`.
+2. **Ojo con la sección de captación de `/home-nueva/`:** dice que las campañas aprenden de quién compra, y hoy no es así.
+3. **Siguen abiertos:**
+   - el WhatsApp automático desde tu número para los leads A/B;
+   - el DNS;
+   - la tasa de plantones publicada;
+   - si se cuentan resultados de clientes;
+   - si sales a cámara.
+
+### Hipótesis
+
+- Si se añade al formulario la pregunta de cuánto cobra la empresa por su servicio principal, bajarán los leads de nivel A que luego no encajan por precio. Se podrá medir con el test de formularios del 12 al 25-oct.
