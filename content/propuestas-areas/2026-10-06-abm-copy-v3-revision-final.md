@@ -86,7 +86,7 @@ creciendo: Apollo da −16,7% de plantilla a doce meses.
 >
 > vi que llevas la dirección comercial global de Hotelverse desde abril, y que vendéis a cadenas hoteleras.
 >
-> Estoy trabajando una forma de ver, en ventas donde por cada cuenta intervienen varias personas, qué oportunidades necesitan movimiento y cuál es el siguiente paso, sin cambiar las herramientas que ya usa el equipo.
+> Estoy trabajando una forma de ver, en ventas donde intervienen varias personas en una misma cuenta, qué oportunidades necesitan movimiento y cuál es el siguiente paso, sin cambiar las herramientas que ya usa el equipo.
 >
 > He hecho un ejemplo aplicado a Hotelverse para que se entienda mejor.
 >
@@ -134,10 +134,11 @@ Isonor`.
 >
 > Maikel
 
-## 6 · Llamada D8 · base de Maikel, adaptada por cuenta
+## 6 · Llamada D8 · GUIA de 20 segundos, no guion literal
 
-Fuera «ya tienen su CRM». La primera parte es igual en las cuatro; la segunda cambia la
-frase de contexto.
+Fuera «ya tienen su CRM». **Esto no se memoriza palabra por palabra**: son veinte segundos
+para decir por qué llamas, y a partir de ahí conversación. La frase de contexto cambia por
+cuenta.
 
 > «{Nombre}, soy Maikel de Qualivo. Es una llamada en frío; te digo en veinte segundos por qué te llamo y tú me dices si tiene sentido.»
 >
@@ -147,7 +148,7 @@ frase de contexto.
 |---|---|
 | Tarlogic | «En servicios de seguridad que se venden por proyecto. No sé si esto tiene relevancia para vosotros» |
 | Isonor | «En grupos con varias líneas bajo la misma marca. No sé si esto tiene relevancia para vosotros» |
-| Hotelverse | «En ventas donde por cada cuenta intervienen varias personas. No sé si esto tiene relevancia para vosotros» |
+| Hotelverse | «En ventas donde intervienen varias personas en una misma cuenta. No sé si esto tiene relevancia para vosotros» |
 | INVENTIUM | «En operaciones que se cierran por expediente. No sé si esto tiene relevancia para vosotros» |
 
 Teléfonos de ficha de empresa: Tarlogic +34 912 91 93 19 · Isonor +34 981 06 25 90 ·
@@ -172,11 +173,11 @@ colada de serie.
 
 > Te lo dejo aquí: {asset}.
 >
-> La idea no es cambiar lo que ya uséis. La capa detecta qué oportunidades necesitan movimiento y deja preparado el siguiente paso para el comercial.
+> La idea es añadir una capa que ayude a detectar qué oportunidades necesitan movimiento y deje más claro cuál debería ser el siguiente paso.
 >
 > He usado vuestro caso como ejemplo; desde fuera no puedo saber si eso se parece a cómo trabajáis.
 >
-> Si lo miras, dime en qué se parece y en qué no.
+> Échale un vistazo y, si tiene sentido para vosotros, seguimos desde ahí.
 
 El objetivo sigue siendo conversación, no calendario.
 
@@ -207,3 +208,90 @@ No es una contradicción, son dos experimentos distintos y está bien que lo sea
 **no se pueden leer juntos**: si una responde mejor que la otra, no sabremos si fue la
 estructura o el tipo de cuenta. Los mido por separado y no comparo las tasas entre
 cohortes.
+
+---
+
+# EJECUTADO · 6-oct 17:28 · con el GO de Maikel
+
+Aplicados sus tres cambios: la frase de Hotelverse, la del branch («la idea es añadir
+una capa que ayude a…» en vez de «la capa detecta…») y el cierre («échale un vistazo
+y, si tiene sentido para vosotros, seguimos desde ahí»). D8 queda marcado como guía de
+veinte segundos, no guion literal.
+
+## La campaña
+
+**Smartlead `4090069` · «ABM Type A · L1 · semana 1 (6-oct)» · ACTIVE.**
+
+| Ajuste | Valor | Por qué |
+|---|---|---|
+| horario | L-V 09:00-17:00 Europe/Madrid | el de siempre |
+| buzones | `maikel@qualivoedge.com` · `maikel.echevarria@qualivoedge.com` · `maikel@novaqualivo.com` | solo infraestructura limpia, reputación 100%, repartido entre los dos dominios |
+| secuencia | paso 1 día 0 · paso 2 **+6 días** | D6 del fallback |
+| asunto paso 2 | vacío | encadena en el mismo hilo |
+| `stop_lead_settings` | `REPLY_TO_AN_EMAIL` | responde y se para todo lo demás |
+| `track_settings` | `DONT_EMAIL_OPEN` + `DONT_LINK_CLICK` | no medimos aperturas ni clics, así que no los rastreamos. Quita además el ruido de los escáneres |
+| baja | «responde BAJA y te saco al momento» | sin enlace, que el primer contacto va sin enlaces |
+| `max_leads_per_day` | 3 | los tres salen el mismo día |
+
+Sin `{{signature}}`: las firmas de los buzones están vacías, pero no quiero que un token
+meta un enlace en el correo 1.
+
+**Comprobado antes de arrancar**, no solo guardado: los 3 leads tienen `subject1`,
+`body1` y `body2` poblados (379/461/403 y ~353 caracteres), 0 bloqueados, 0 duplicados,
+0 correos inválidos, y ningún cuerpo menciona CRM. Pasó también un filtro de frases
+prohibidas: CRM, «se quedan a medias», «nadie retoma», «ocho años», FI Group, Aiuken,
+«La capa detecta».
+
+**Primer envío: mañana miércoles 7-oct a las 09:00.** Se arrancó a las 17:28 y la
+ventana cierra a las 17:00, así que hoy no sale nada. Hay toda la noche para pararlo.
+
+## Isonor · persona resuelta, página bloqueada
+
+**Mariluz Pérez Grandas**, Subdirectora General, `mariluzperez@grupoisonor.es`, correo
+**verificado** y no catchall. 1 crédito consumido, saldo 2.311.
+
+Encaja mejor que el CEO y mejor de lo que esperábamos: además de la subdirección general
+desde sep-2023, **sigue siendo Directora de Desarrollo Territorial Nacional del grupo
+desde 2018**, los dos puestos en vigor. Su propio titular dice *«Subdirección general en
+GRUPO ISONOR / Cumplimiento Normativo y Desarrollo de negocio»*. Desarrollo de negocio
+transversal, dicho por ella.
+
+Supresión repasada para el contacto nuevo: **libre en Smartlead** (y cero leads en todo
+`grupoisonor.es`), **sin contacto en GHL**, no está en la lista de clientes ni en
+`descartes-manuales.json`.
+
+**Lo que la bloquea no es el copy ni la persona: es la página.** El `Hecho comprobado 2`
+de `qualivo.io/para/grupo-isonor/` dice:
+
+> «La dirección comercial de sistemas de gestión es nueva desde septiembre de 2026,
+> después de llevar una dirección territorial dentro del propio grupo.»
+
+Ese hecho es de Eduardo. Si el correo va a Mariluz, la página presenta como hecho
+verificado algo que no es de ella, y además lo haría justo en el momento de máxima
+confianza, cuando ha contestado «sí, pásamelo».
+
+Tiene arreglo fácil y con un hecho mejor, porque el de la dirección territorial **sí es
+suyo**: sustituir ese hecho por «la subdirección general compagina el puesto con la
+dirección de desarrollo territorial nacional del grupo, en vigor desde 2018; fuente:
+perfil público». Pero **las páginas viven en el repo de la landing, que no tengo en esta
+sesión** (solo tengo `qualivo-sys/qualivo`). Lo tiene que hacer Growth.
+
+Mientras eso no esté, Isonor queda cargada y sin enviar.
+
+## Una cosa de las páginas que conviene mirar, no solo en Isonor
+
+La página dice *«Una capa encima de lo que ya usáis… Todo queda en vuestro CRM»*, y en
+el mismo bloque admite *«Lo que no sabemos: qué CRM usáis»*. Afirmar que tienen un CRM
+cuando figura como NO COMPROBADO choca con el punto 8 de la decisión. No lo toco porque
+no es mi repo, pero si pasa en las cinco páginas, es el mismo defecto que acabamos de
+quitar de los correos.
+
+## Congelado
+
+Copy congelado durante la tanda. No se cambia un mensaje porque los dos primeros no
+contesten. Lo que se mide: `delivered → human reply → positive reply → conversation →
+meeting`. Aperturas y clics no se miden, y ahora además no se rastrean.
+
+Y una regla que hoy ha costado 36 leads: **no desenganchar ningún buzón de esta campaña
+mientras tenga leads en curso.** Smartlead manda cada seguimiento desde el buzón que
+abrió el hilo; si se quita, el lead se queda colgado y en silencio.
