@@ -67,7 +67,7 @@ Cada pieza lleva su ficha con etapa (cualificación), dato y fuente, reglas que 
 ## 5. Distribución
 
 - **El artículo:**
-  - se enlaza desde los posts B y C, en los comentarios;
+  - se enlaza desde el post B, en un comentario;
   - desde `blog/formulario-de-facebook-o-landing-page/`;
   - desde `blog/que-es-un-lead/`.
 - **El carrusel** se sube también como documento de LinkedIn.
