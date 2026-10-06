@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Natural Fit · landing (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Maqueta de landing de captación para NATURAL FIT body contouring®. Textos de ejemplo: los valida el doctor. */
+:root{--bg:#F6F1EB;--surface:#FFFDF9;--ink:#2B2622;--muted:#6E645B;--line:#E4DACE;--accent:#8A6A4F;--accent-ink:#FFFDF9;--soft:#EEE4D8;--sand:#E3D5C4;--wa:#2F6B4F;
+  --display:"Cormorant Garamond",Georgia,serif;--body:"Jost","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171412;--surface:#1F1B18;--ink:#EFE8E0;--muted:#B3A79B;--line:#352E28;--accent:#C9A585;--accent-ink:#1A1512;--soft:#2A241F;--sand:#3A3029;--wa:#7CC3A0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171412;--surface:#1F1B18;--ink:#EFE8E0;--muted:#B3A79B;--line:#352E28;--accent:#C9A585;--accent-ink:#1A1512;--soft:#2A241F;--sand:#3A3029;--wa:#7CC3A0;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.65 var(--body);overflow-x:hidden;padding-bottom:84px}
+@media (min-width:760px){body{padding-bottom:0}}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:16px}
+@media (min-width:760px){.wrap{padding-inline:40px}}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,10.5vw,72px);letter-spacing:-.01em}
+h2{font-size:clamp(32px,7.5vw,48px)}
+h3{font-size:25px;font-weight:600}
+p{margin:0}
+strong{font-weight:500}
+.sub{color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+section{padding-block:72px}
+@media (min-width:760px){section{padding-block:112px}}
+.head{display:grid;gap:14px;max-width:620px;margin-bottom:40px}
+.band{background:var(--surface);border-block:1px solid var(--line)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Aviso y cabecera */
+.notice{background:var(--soft);color:var(--muted);font-size:12px;text-align:center;padding:7px 16px;letter-spacing:.02em}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:20px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-size:21px;font-weight:600;line-height:1.1}
+.brand small{display:block;font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.top-link{font-size:14px;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;white-space:nowrap;display:none}
+@media (min-width:640px){.top-link{display:inline}}
+
+/* Botones */
+.btn{font:inherit;font-weight:400;font-size:16px;letter-spacing:.02em;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:14px 28px;cursor:pointer;text-decoration:none;border:1px solid transparent;min-height:52px;text-align:center}
+.btn-main{background:var(--accent);color:var(--accent-ink)}
+.btn-main:hover{filter:brightness(1.07)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-line:hover{background:var(--soft)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* Marcadores de foto */
+.ph{position:relative;background:linear-gradient(160deg,var(--sand),var(--soft));border-radius:4px;display:grid;place-items:center;overflow:hidden;color:var(--muted)}
+.ph svg{width:46%;max-width:180px;height:auto;opacity:.5}
+.ph span{position:absolute;left:12px;bottom:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--surface);color:var(--ink);padding:5px 10px;border-radius:99px}
+
+/* Hero */
+.hero{padding-block:48px 72px}
+.hero-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:64px}.hero{padding-block:88px 120px}}
+.hero-copy{display:grid;gap:22px}
+.hero-copy .lead{font-size:19px;color:var(--muted);max-width:32em}
+.ctas{display:grid;gap:12px}
+@media (min-width:520px){.ctas{grid-template-columns:auto auto;justify-content:start}}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--muted);padding:0;margin:6px 0 0;list-style:none}
+.facts li::before{content:"";display:inline-block;width:14px;height:1px;background:var(--accent);margin-right:10px;vertical-align:4px}
+.hero .ph{aspect-ratio:4/5}
+
+/* Para quién */
+.who{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (min-width:760px){.who{grid-template-columns:repeat(3,1fr)}}
+.who article{background:var(--bg);padding:32px 26px;display:grid;gap:12px;align-content:start}
+.band .who article{background:var(--surface)}
+.who .n{font-family:var(--display);font-style:italic;font-size:22px;color:var(--accent)}
+
+/* Proceso */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+@media (min-width:860px){.steps{grid-template-columns:repeat(4,1fr);gap:28px}}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:4px 16px;padding-block:22px;border-top:1px solid var(--line)}
+@media (min-width:860px){.steps li{grid-template-columns:1fr;gap:12px;padding-block:26px 0}}
+.steps .k{font-family:var(--display);font-size:34px;line-height:1;color:var(--accent);grid-row:span 2}
+.steps h3{font-size:23px}
+.steps p{color:var(--muted);font-size:16px}
+
+/* Doctor */
+.doc{display:grid;gap:36px;align-items:center}
+@media (min-width:860px){.doc{grid-template-columns:.85fr 1.15fr;gap:72px}}
+.doc .ph{aspect-ratio:4/5}
+.doc-copy{display:grid;gap:18px}
+.doc-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:0}
+.doc-list li{padding-block:14px;border-top:1px solid var(--line);display:flex;gap:14px;align-items:baseline}
+.doc-list b{font-family:var(--display);font-size:24px;font-weight:600;color:var(--accent);min-width:56px}
+.small{font-size:13px;color:var(--muted)}
+
+/* Galería */
+.gal{display:grid;gap:16px}
+@media (min-width:760px){.gal{grid-template-columns:repeat(3,1fr);gap:20px}}
+.gal figure{margin:0;display:grid;gap:10px}
+.gal .ph{aspect-ratio:1/1}
+.gal figcaption{font-size:14px;color:var(--muted)}
+
+/* Test */
+.test-box{background:var(--surface);border:1px solid var(--line);padding:32px 20px;max-width:640px;margin-inline:auto;display:grid;gap:24px}
+@media (min-width:640px){.test-box{padding:48px}}
+.test-head{display:grid;gap:10px;text-align:center}
+.step{display:none;gap:10px}
+.step.on{display:grid}
+.bar{height:2px;background:var(--line);margin-bottom:12px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.step h3{margin-bottom:6px}
+.opt{font:inherit;text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:15px 18px;cursor:pointer;min-height:52px;border-radius:4px}
+.opt:hover{border-color:var(--accent)}
+.back{font:inherit;font-size:14px;background:none;border:0;color:var(--muted);cursor:pointer;justify-self:start;padding:8px 0;text-decoration:underline}
+.step label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.step input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);padding:13px 14px;border-radius:4px;width:100%}
+.done-title{font-family:var(--display);font-size:30px;line-height:1.1}
+.ok{display:none;background:var(--soft);padding:12px 14px;font-size:15px}
+.ok.on{display:block}
+.note{font-size:12px;color:var(--muted);border:1px dashed var(--line);padding:10px 12px}
+
+/* FAQ */
+.faq{display:grid;max-width:760px}
+.faq details{border-top:1px solid var(--line);padding-block:6px}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;font-family:var(--display);font-size:24px;font-weight:500;padding-block:14px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-family:var(--body);font-weight:300}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);padding-bottom:16px;max-width:40em}
+
+/* Cierre y pie */
+.final{text-align:center;display:grid;gap:18px;justify-items:center;max-width:680px}
+footer{border-top:1px solid var(--line);padding-block:32px;font-size:13px;color:var(--muted)}
+footer .wrap{display:grid;gap:4px}
+
+/* Barra fija móvil */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sticky .btn{padding:12px 10px;min-height:48px;font-size:15px}
+.sticky .wa{background:var(--wa);color:var(--accent-ink)}
+@media (min-width:760px){.sticky{display:none}}
+</style>
+</head>
+<body>
+
+<div class="notice">Maqueta para la propuesta · los textos finales los valida el doctor</div>
+
+<header class="wrap top">
+  <div class="brand">Dr. Martín Gastón Álvarez<small>Cirugía plástica y estética · Barcelona</small></div>
+  <a class="top-link" href="#test">Reservar valoración</a>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">NATURAL FIT body contouring®</span>
+        <h1 id="h-hero">Un contorno corporal natural y proporcionado.</h1>
+        <p class="lead">Un tratamiento pensado para tu cuerpo, no para un molde. Empieza con una valoración con el doctor en la consulta de Pg. de la Bonanova.</p>
+        <div class="ctas">
+          <a class="btn btn-main" href="#test">Reservar valoración</a>
+          <a class="btn btn-line" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19.1L4 20z"/></svg>Escribir por WhatsApp</a>
+        </div>
+        <ul class="facts">
+          <li>Más de 18 años de trayectoria</li>
+          <li>Sarrià-Sant Gervasi, Barcelona</li>
+        </ul>
+      </div>
+      <div class="ph" role="img" aria-label="Marcador: foto real del doctor en consulta">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="50" cy="36" r="16"/><path d="M18 92c4-20 18-30 32-30s28 10 32 30"/></svg>
+        <span>Foto real del doctor</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para quién es -->
+  <section class="band" aria-labelledby="h-who">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Para quién es</span>
+        <h2 id="h-who">Quizá te reconozcas en alguno de estos casos</h2>
+        <p class="sub">Si encaja contigo o no, lo decide el doctor en la valoración.</p>
+      </div>
+      <div class="who">
+        <article><span class="n">i.</span><h3>Después de uno o varios embarazos</h3><p class="sub">Tu cuerpo ha cambiado y quieres recuperar una silueta con la que te sientas tú.</p></article>
+        <article><span class="n">ii.</span><h3>Grasa localizada que no se va</h3><p class="sub">Cuidas la dieta y haces ejercicio, pero hay zonas que no cambian.</p></article>
+        <article><span class="n">iii.</span><h3>Buscas un resultado natural</h3><p class="sub">No quieres un cambio exagerado. Quieres un contorno proporcionado, acorde con tu cuerpo.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section aria-labelledby="h-how">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Cómo es el proceso</span>
+        <h2 id="h-how">Cuatro pasos, sin sorpresas</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="k">01</span><h3>Valoración con el doctor</h3><p>Te escucha, te explora y te dice con claridad si el tratamiento es para ti.</p></li>
+        <li><span class="k">02</span><h3>Plan y presupuesto cerrado</h3><p>Sales con un plan para tu caso y un presupuesto cerrado, por escrito.</p></li>
+        <li><span class="k">03</span><h3>Intervención</h3><p>Antes, el doctor te explica cada paso y resuelve tus dudas.</p></li>
+        <li><span class="k">04</span><h3>Seguimiento y revisiones</h3><p>Te acompañamos después, con las revisiones que marque el doctor.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Doctor -->
+  <section class="band" aria-labelledby="h-doc">
+    <div class="wrap doc">
+      <div class="ph" role="img" aria-label="Marcador: foto real del doctor">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="50" cy="36" r="16"/><path d="M18 92c4-20 18-30 32-30s28 10 32 30"/></svg>
+        <span>Foto real del doctor</span>
+      </div>
+      <div class="doc-copy">
+        <span class="eyebrow">Quién te atiende</span>
+        <h2 id="h-doc">Dr. Martín Gastón Álvarez</h2>
+        <p class="sub">Cirujano plástico y estético en Barcelona.</p>
+        <ul class="doc-list">
+          <li><b>18+</b><span>Más de 18 años de trayectoria en cirugía plástica y estética.</span></li>
+          <li><b>TV</b><span>Ha aparecido en televisión y en prensa hablando de cirugía estética.</span></li>
+          <li><b>BCN</b><span>Consulta en Pg. de la Bonanova, en Sarrià-Sant Gervasi.</span></li>
+        </ul>
+        <p class="small">Maqueta: trayectoria y apariciones en medios según drmartingastonalvarez.com. El texto final lo valida el doctor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section aria-labelledby="h-gal">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Casos</span>
+        <h2 id="h-gal">Casos reales de la consulta</h2>
+        <p class="sub">Solo con el consentimiento de cada paciente. Cada cuerpo es distinto y cada resultado también.</p>
+      </div>
+      <div class="gal">
+        <figure><div class="ph" role="img" aria-label="Marcador: caso real con consentimiento"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M38 10c-6 20-6 34 0 44s4 24-2 36M62 10c6 20 6 34 0 44s-4 24 2 36"/></svg><span>Caso real con consentimiento</span></div><figcaption>Abdomen y flancos · antes y después</figcaption></figure>
+        <figure><div class="ph" role="img" aria-label="Marcador: caso real con consentimiento"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M38 10c-6 20-6 34 0 44s4 24-2 36M62 10c6 20 6 34 0 44s-4 24 2 36"/></svg><span>Caso real con consentimiento</span></div><figcaption>Piernas · antes y después</figcaption></figure>
+        <figure><div class="ph" role="img" aria-label="Marcador: caso real con consentimiento"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M38 10c-6 20-6 34 0 44s4 24-2 36M62 10c6 20 6 34 0 44s-4 24 2 36"/></svg><span>Caso real con consentimiento</span></div><figcaption>Brazos · antes y después</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test -->
+  <section class="band" id="test" aria-labelledby="h-test" style="scroll-margin-top:8px">
+    <div class="wrap">
+      <div class="test-box">
+        <div class="test-head">
+          <span class="eyebrow">Antes de la valoración</span>
+          <h2 id="h-test">Tres preguntas</h2>
+          <p class="sub">Así el doctor llega a tu valoración sabiendo qué buscas.</p>
+        </div>
+
+        <div class="step on" id="s1">
+          <div class="bar"><i style="width:33%"></i></div>
+          <h3>¿Qué zona te gustaría tratar?</h3>
+          <button type="button" class="opt" data-k="zona" data-v="abdomen" data-next="s2">Abdomen y flancos</button>
+          <button type="button" class="opt" data-k="zona" data-v="piernas" data-next="s2">Piernas</button>
+          <button type="button" class="opt" data-k="zona" data-v="brazos" data-next="s2">Brazos</button>
+          <button type="button" class="opt" data-k="zona" data-v="varias" data-next="s2">Varias zonas</button>
+        </div>
+
+        <div class="step" id="s2">
+          <div class="bar"><i style="width:66%"></i></div>
+          <h3>¿Cuándo te gustaría hacerlo?</h3>
+          <button type="button" class="opt" data-k="cuando" data-v="pronto" data-next="s3">Antes de 3 meses</button>
+          <button type="button" class="opt" data-k="cuando" data-v="medio" data-next="s3">En 3-6 meses</button>
+          <button type="button" class="opt" data-k="cuando" data-v="sinprisa" data-next="s3">Sin prisa</button>
+          <button type="button" class="back" data-next="s1">‹ Atrás</button>
+        </div>
+
+        <div class="step" id="s3">
+          <div class="bar"><i style="width:100%"></i></div>
+          <h3>¿Te interesa financiar el tratamiento?</h3>
+          <button type="button" class="opt" data-k="financiar" data-v="si" data-next="s4">Sí</button>
+          <button type="button" class="opt" data-k="financiar" data-v="no" data-next="s4">No</button>
+          <button type="button" class="opt" data-k="financiar" data-v="nose" data-next="s4">No lo sé</button>
+          <button type="button" class="back" data-next="s2">‹ Atrás</button>
+        </div>
+
+        <div class="step" id="s4" aria-live="polite">
+          <p class="done-title">Te escribimos por WhatsApp en un minuto</p>
+          <p class="sub">Déjanos tu nombre y tu teléfono. Te escribimos para buscar hueco para la valoración con el doctor.</p>
+          <label>Nombre<input autocomplete="given-name" placeholder="Tu nombre"></label>
+          <label>Teléfono<input type="tel" inputmode="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
+          <button class="btn btn-main" type="button" id="send">Que me escriban por WhatsApp</button>
+          <p class="ok" id="sent" role="status">Listo. En la versión real, la consulta te escribiría ahora por WhatsApp.</p>
+          <button type="button" class="back" data-next="s1" data-reset="1">‹ Volver a empezar</button>
+          <p class="note">Maqueta: este formulario no envía nada ni guarda ningún dato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2 id="h-faq">Lo que más nos preguntan</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Cuánto cuesta?</summary><p>Depende de la zona y de tu caso. Se cierra en la valoración, con un presupuesto por escrito.</p></details>
+        <details><summary>¿Cómo es la recuperación? ¿Necesito baja?</summary><p>Depende de cada caso. Lo concreta el doctor en la valoración.</p></details>
+        <details><summary>¿Se puede financiar?</summary><p>Sí. Te lo explicamos en la valoración.</p></details>
+        <details><summary>¿Dónde está la consulta?</summary><p>En Pg. de la Bonanova, en el barrio de Sarrià-Sant Gervasi, en Barcelona. Te enviamos la dirección exacta al confirmar la cita.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="band" aria-labelledby="h-final">
+    <div class="wrap final">
+      <span class="eyebrow">NATURAL FIT body contouring®</span>
+      <h2 id="h-final">El primer paso es hablar con el doctor</h2>
+      <p class="sub">Una valoración para saber si el tratamiento es para ti.</p>
+      <a class="btn btn-main" href="#test">Reservar valoración</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Maqueta preparada por Qualivo · octubre de 2026.</p>
+    <p>No es la web de la consulta. Textos de ejemplo e imágenes de marcador. Fuente de datos: drmartingastonalvarez.com.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn wa" href="#" onclick="return false">WhatsApp</a>
+  <a class="btn btn-main" href="#test">Reservar</a>
+</div>
+
+<script>
+(function () {
+  var r = {};
+  var box = document.getElementById('test');
+  document.querySelectorAll('#test [data-next]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.reset) { r = {}; document.getElementById('sent').classList.remove('on'); }
+      if (b.dataset.k) r[b.dataset.k] = b.dataset.v;
+      document.querySelectorAll('#test .step').forEach(function (s) { s.classList.toggle('on', s.id === b.dataset.next); });
+      if (box.getBoundingClientRect().top < 0) box.scrollIntoView({ block: 'start' });
+    });
+  });
+  document.getElementById('send').addEventListener('click', function () { document.getElementById('sent').classList.add('on'); });
+})();
+</script>
+</body>
+</html>
