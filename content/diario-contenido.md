@@ -1148,3 +1148,25 @@ Maikel pidió ver las piezas de la semana. Están en la página de Notion «Piez
 - un preheader con «no es X».
 
 Mi propuesta es arreglarla y enviarla en la semana 45, la de citas.
+
+### Martes 6-oct · noche · lo que no necesita ok (Content OS §13)
+
+Maikel: «ves haciendo todo lo que consideres que no tenga que ir aceptando». Hecho:
+
+- **`content/casos-permisos.md`.** Registro vacío para la R6, con códigos de cliente y sin datos personales, porque el repo es público.
+- **Master Reviewer.** Nuevo §13 con las reglas R1 a R18 y la etapa del Revenue Journey. No he tocado el texto que dictó Maikel.
+- **Newsletter de plantones corregida:**
+  - fuera «Casi nunca es mala educación», que no tenía fuente;
+  - el consejo de dar precio antes de la cita pasa a ser «da la cita lo más cerca que puedas», porque nuestro test con precio no tiene conclusión;
+  - el preheader con «no es X» pasa a ser «Y la cuenta de verdad llega después».
+- **`/home-nueva/v1/`.** La frase «las campañas aprenden de quién acaba comprando, no de…» pasa a ser «Le contamos a Meta qué contactos acaban encajando…». Es lo que hace Growth desde el 28-sep con la API de conversiones.
+- **Brief de la semana 42 (cualificación)**, en `content/briefs/2026-10-12-brief-semana-42.md`:
+  - el dato sale de `api/_scoring.js` y del daily del 5-oct, anonimizado;
+  - 8 piezas, con medición el viernes 16.
+- **Señales del Content OS:**
+  - una puerta cero en la skill `sistema-contenidos`;
+  - un aviso de «histórico» en 13 documentos;
+  - el calendario de octubre pasa a ser un banco de piezas;
+  - una nota en el brief del Head of Content.
+
+**Pendiente de Maikel:** D1 (LinkedIn), D4 (rutina) y D7 (WhatsApp).

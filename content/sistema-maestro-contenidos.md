@@ -1,5 +1,7 @@
 # SISTEMA MAESTRO DE CONTENIDOS QUALIVO
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Dictado por Maikel el 26-ago-2026. Documento rector del contenido de Qualivo.
 > Está POR ENCIMA de la estrategia v3 y de los planes semanales: toda pieza
 > nueva nace de este sistema. Convive con el contrabrief (posicionamiento y

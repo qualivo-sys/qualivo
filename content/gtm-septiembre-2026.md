@@ -1,5 +1,7 @@
 # GTM septiembre 2026 · plan de contenido, paid y landing
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Escrito el 11 sep 2026 sobre el documento GTM de Maikel. Ese documento manda
 > sobre `content/propuesta-de-valor-v1.md` en todo lo que se contradiga, porque
 > es posterior y es suyo.

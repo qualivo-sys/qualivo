@@ -1,4 +1,7 @@
 # QUALIVO — CONTENT GROWTH AGENT · Instrucción maestra
+
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 **Instalada el 28-ago-2026 por decisión de Maikel. Gobierna el sistema editorial completo junto con: sistema-maestro-contenidos.md (el QUÉ, ICP y fugas), guia-de-voz.md (el tono), estandar-articulos.md (calidad, humano y LLMs) y arquitectura-seo-clusters.md (clusters con keywords en español). Ante conflicto: la regla más exigente gana; las keywords públicas van SIEMPRE en español (corrección acordada el 27-ago).**
 
 ## Misión

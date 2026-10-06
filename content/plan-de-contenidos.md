@@ -1,5 +1,7 @@
 # PLAN DE CONTENIDOS v2 · bajo el contrabrief
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Reescrito el 25-ago tras el contrabrief (`contrabrief-qualivo.md`), que
 > prevalece. Cambio de fondo: la fuga deja de ser la categoría y pasa a ser una
 > herramienta narrativa. Lo que se vende es CONTROL; el enemigo, la complejidad

@@ -1,5 +1,7 @@
 # Brief de Maikel · Agente de contenido (Head of Content) · 21-sep-2026
 
+> **Content OS v1 (6-oct-2026):** este brief sigue en vigor en pilares, hooks, fórmula y principio editorial. Las series (§13) y el reparto de CTA (§14) pasan a regirse por el §5 y la R15 de `content/content-os-v1.md`, que manda si hay conflicto.
+
 > Texto de Maikel, tal cual lo entregó. **Manda sobre el prompt maestro y sobre
 > las estrategias de contenido y redes del 10-sep** en todo lo que diga distinto.
 > Al final hay un apartado con cómo convive con lo anterior y las dudas que

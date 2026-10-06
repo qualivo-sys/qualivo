@@ -1,4 +1,7 @@
 # BRIEF · AGENTE DE CONTENIDO QUALIVO
+
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Documento autocontenido para construir un agente (Codex o cualquier asistente).
 > Pégalo como instrucciones de sistema. Todo lo que necesita saber está aquí.
 

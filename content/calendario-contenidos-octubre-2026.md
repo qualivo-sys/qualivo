@@ -1,5 +1,7 @@
 # Calendario de contenidos · octubre 2026
 
+> **Content OS v1 (6-oct-2026):** este calendario queda como **banco de piezas**. Qué sale cada semana lo decide el brief semanal (`content/briefs/`), según el §5.3 de `content/content-os-v1.md`.
+
 > Escrito el 29-sep-2026. Baja a días y horas la tabla de contenido del
 > `content/plan-octubre-2026.md` (sección 10). **Si algo de aquí choca con ese
 > plan, manda el plan** y este calendario se corrige.

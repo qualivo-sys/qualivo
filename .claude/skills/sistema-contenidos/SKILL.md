@@ -5,6 +5,18 @@ description: Sistema maestro de contenidos de Qualivo. Cargar SIEMPRE antes de i
 
 # Sistema de contenidos de Qualivo — puertas obligatorias
 
+## PUERTA CERO · Content OS v1 (6-oct-2026) manda sobre todo lo de abajo
+
+**Leer primero `content/content-os-v1.md`.** Es la fuente de verdad del contenido desde el 6-oct, con el ok de Maikel. Lo que cambia respecto a lo de abajo:
+
+- **Las reglas son R1 a R18 (§3).** Están numeradas, y la pieza que se salta una no sale.
+- **Se trabaja una obsesión comercial por semana (§5)**, y de ella salen las piezas. Ya no hay calendario independiente. El brief de la semana está en `content/briefs/`.
+- **El calendario de octubre pasa a ser un banco de piezas.**
+- **Un solo Head of Content decide el tema.** Las demás sesiones producen contra su brief.
+- **Resultados de clientes:** solo con fila en `content/casos-permisos.md` (R6).
+- **Todo enlace propio lleva UTM (§9).**
+- **La pausa de redes sigue** hasta que Maikel confirme la R16 (publicar pieza a pieza con su ok).
+
 ## PUERTA DE ENTRADA · El brief de Maikel del 21-sep manda sobre todo
 
 **Leer primero `content/agentes/brief-head-of-content.md`.** Es el brief del

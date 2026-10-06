@@ -1,5 +1,7 @@
 # Estrategia de contenidos · alineada con la propuesta de valor V1
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > 10 sep 2026. Sustituye a cualquier plan editorial anterior. Se gobierna por
 > `content/propuesta-de-valor-v1.md`, que manda sobre este documento.
 >

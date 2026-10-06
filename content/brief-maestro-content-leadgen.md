@@ -1,4 +1,7 @@
 # BRIEF MAESTRO — CONTENT & LEAD GENERATION QUALIVO
+
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Versión canónica entregada por Maikel el 11-ago-2026. Sustituye a brief-redes.md en lo que contradiga. Cambio clave: **los casos de éxito quedan FUERA del calendario editorial** — viven solo en la web como prueba comercial.
 
 [Contenido íntegro del brief — ver mensaje original de Maikel del 11-ago-2026. Puntos de gobierno:]

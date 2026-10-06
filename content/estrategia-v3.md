@@ -1,5 +1,7 @@
 # ESTRATEGIA DE CONTENIDO v3 — VERSIÓN FINAL PARA CIERRE
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Entregable completo según la instrucción del 25-ago. Sin prompts y sin
 > producción: esto cierra posicionamiento → territorios → criterios → top 10 →
 > calendario. Gobernado por `contrabrief-qualivo.md`.

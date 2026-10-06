@@ -1,5 +1,7 @@
 # LA MÁQUINA DE CONTENIDO QUALIVO (v1 · 27-ago-2026)
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > El sistema operativo semanal. Complementa: sistema-maestro (qué decir),
 > estandar-visual (cómo se ve), listado-maestro-busquedas (qué buscan),
 > contrabrief (posicionamiento), guia-de-voz (tono).

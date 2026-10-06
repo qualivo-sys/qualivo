@@ -1,5 +1,7 @@
 # Content Intelligence Engine — Qualivo (+ Agent for Me)
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Cómo se decide QUÉ publicar. **Cómo se escribe TODO: `guia-de-voz.md` (la prueba del bar, sin anglicismos, ritmo, nada de gurú) — prevalece sobre cualquier texto.** Complementa `growth-os.md` (que define para qué) y la regla editorial vigente (sin resultados de clientes en contenido — evidencia solo en la web).
 
 ## Idea central

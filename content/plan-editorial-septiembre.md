@@ -1,5 +1,7 @@
 # PLAN EDITORIAL · SEPTIEMBRE 2026 (v1)
 
+> **HISTÓRICO (Content OS v1, 6-oct-2026).** Este documento queda como contexto y ya no manda. La fuente de verdad del contenido es `content/content-os-v1.md`.
+
 > Primera ejecución completa de la máquina (content/maquina-de-contenido.md).
 > Todo pasa por el ok de Maikel en el paquete del lunes. Newsletter con nombre
 > provisional «La Fuga» (pendiente de confirmar).
