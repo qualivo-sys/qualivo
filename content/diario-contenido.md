@@ -1089,3 +1089,26 @@ Maikel compartió el diagnóstico de Notion «Diagnóstico de contenido y nuevo 
 - **`blog/que-poner-en-tu-negocio-para-atraer-clientes/`.** Fuera las cifras de plantones.
 - **`blog/index.html` y `llms.txt`.** Quitadas también.
 - **Lo que se queda.** Las cifras de citas que no dejan deducir la tasa: 14 citas, 12 por el formulario, y el reparto por sector del artículo de coste por lead.
+
+### Martes 6-oct · noche · Content OS v1
+
+Con el ok de Maikel, queda escrito `content/content-os-v1.md`. Desde hoy es la fuente de verdad de contenido. Recoge:
+
+- el diagnóstico de Notion;
+- el plan de octubre;
+- el brief del Head of Content;
+- la guía de voz;
+- el análisis de septiembre.
+
+Lo principal:
+
+- **Revenue Journey** como marco de marca.
+- **Dos capas de marca:** Maikel y Qualivo.
+- **18 reglas en un solo sitio.** La de resultados de clientes cambia: se pueden usar con permiso escrito.
+- **Una obsesión comercial por semana** en vez del artículo diario.
+- **SEO por autoridad temática**, con el pilar «cómo gestionar un lead».
+- **Convención de UTM.**
+- **Gobernanza con un solo Head of Content.**
+- **La lista de documentos** que quedan como históricos.
+
+**Pendiente de Maikel:** las ocho decisiones de su §12. La que más urge es la D1, levantar la pausa de LinkedIn pieza a pieza.
