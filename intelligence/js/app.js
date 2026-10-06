@@ -14,6 +14,7 @@
     { id: 'saas', txt: 'SaaS / Software', desc: 'Producto con prueba gratis o versión free', ico: 'saas' },
     { id: 'b2b', txt: 'Servicios B2B', desc: 'Consultoría, agencias y servicios profesionales', ico: 'b2b' },
     { id: 'clinica', txt: 'Clínica', desc: 'Dental, estética, fisioterapia', ico: 'clinica' },
+    { id: 'cirugia', txt: 'Cirugía y medicina estética', desc: 'Body contouring, cirugía y medicina estética: valoración, presupuesto y financiación', ico: 'clinica' },
     { id: 'nutricion', txt: 'Nutrición y psicoterapia', desc: 'Consulta individual, programas y grupo o academia', ico: 'clinica' },
     { id: 'osteopatia', txt: 'Osteopatía y escuela', desc: 'Clínica, osteopatía canina y escuela de formación', ico: 'clinica' },
     { id: 'inmobiliaria', txt: 'Inmobiliaria', desc: 'Compraventa, alquiler y obra nueva', ico: 'inmobiliaria' },

@@ -12,6 +12,7 @@ Todos los datos son ficticios. La demo no envía mensajes, no llama y no toca GH
 /intelligence/?sector=b2b&empresa=NOMBRE&objetivo=ventas
 /intelligence/?sector=clinica&empresa=NOMBRE&objetivo=seguimiento
 /intelligence/?sector=nutricion&empresa=NOMBRE&objetivo=seguimiento   (consulta de nutrición y psicoterapia: programa individual o grupo)
+/intelligence/?sector=cirugia&empresa=NOMBRE&objetivo=seguimiento     (cirugía plástica y medicina estética: valoración, presupuesto, financiación)
 /intelligence/?sector=retiros&empresa=NOMBRE&objetivo=retencion       (marketplace de retiros: base de datos, plazas guardadas y reservas; sin anuncios)
 /intelligence/?sector=inmobiliaria  ·  ?sector=reformas  ·  ?sector=otro
 /intelligence/?sector=marketing&empresa=NOMBRE      (agencia que capta sus propios clientes)
