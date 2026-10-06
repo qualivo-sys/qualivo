@@ -1119,3 +1119,13 @@ Lo principal:
 - **Cómo llega el dato.** El formulario de `/diagnostico/` ya mandaba `location.search` al CRM. Ahora cada lead que viene del blog llega con el artículo del que sale.
 - **Ojo:** `api/diagnostico.js` convierte `utm_content` en la etiqueta `creativo-<slug>`. En el blog, esa etiqueta es el artículo, no un anuncio.
 - **Para los artículos nuevos:** la regla queda apuntada en `content/estandar-articulos.md`.
+
+### Martes 6-oct · noche · DNS resuelto
+
+Maikel confirma que el DMARC está hecho y que qualivo.io ya envía el nurturing. Lo he comprobado en el DNS público:
+
+- **SPF** de Google en la raíz y de Resend en `send.qualivo.io`.
+- **DKIM** de Google y de Resend.
+- **DMARC** con `p=none`.
+
+En el Content OS, la D8 queda cerrada y la R17 ya no bloquea la newsletter por el DNS. Cada envío sigue necesitando el ok de Maikel.

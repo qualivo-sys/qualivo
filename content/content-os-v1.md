@@ -105,7 +105,7 @@ la guía de voz y el diario. Cada regla tiene un número para poder citarla.
 ### Publicación
 
 - **R16 · Redes.** Se publican piezas aprobadas una a una por Maikel. Desde el 6-oct, la pausa general queda sustituida por esta regla. *Pendiente de su ok explícito, §12.*
-- **R17 · Envíos de correo.** Ningún envío masivo sin autorización escrita de Maikel con la audiencia cerrada. Y ninguno mientras SPF y DMARC no estén bien configurados.
+- **R17 · Envíos de correo.** Ningún envío masivo sin autorización escrita de Maikel con la audiencia cerrada. *SPF, DKIM y DMARC de qualivo.io comprobados el 6-oct.*
 - **R18 · Revisión.** Todo pasa por el Master Reviewer (`content/agentes/prompt-qualivo-master-reviewer.md`) antes de darse por bueno. Los críticos se aplican siempre. Una pieza con nota menor de 5 se rehace o se retira.
 
 ## 4. Gobernanza
@@ -226,7 +226,7 @@ Lo que cambia:
 | LinkedIn de Maikel | **Prioritario.** Cobertura del outbound: quien recibe un correo y mira el perfil encuentra su problema | 2-3 posts por semana |
 | Instagram de Maikel | Secundario: carruseles y vídeo del tema semanal | 1 carrusel y 1 vídeo por semana |
 | Blog | Autoridad temática y SEO (§7) | 1 pilar o actualización por semana |
-| Newsletter de Qualivo | Base con permiso. Marca Qualivo, «nosotros» | Quincenal, en cuanto el DNS esté bien (R17) |
+| Newsletter de Qualivo | Base con permiso. Marca Qualivo, «nosotros» | Quincenal, con el ok de Maikel a cada envío (R17) |
 | Nurturing | Leads nuevos de formación y clínicas, 6 toques | Encendido. Lo lleva Growth y contenido revisa los textos |
 | /para/ y outbound | Capa personalizada por cuenta | Lo genera Growth con la plantilla de contenido |
 | Web | Historia única (§6) | Cambios con aprobación |
@@ -257,7 +257,7 @@ Lo que cambia:
 **Prioridad cero, antes de producir más:**
 1. UTM en los botones del blog. Lo hace contenido.
 2. «¿Cómo nos conociste?». Lo hace Growth.
-3. SPF y DMARC. Lo hace Maikel.
+3. ~~SPF y DMARC.~~ Hecho (6-oct).
 
 ## 10. Proceso de publicación
 
@@ -299,7 +299,7 @@ Lo que cambia:
 | D5 | Arquitectura de la web (§6) y versión de equipos comerciales | v2 de equipos comerciales a producción. La home, después de cerrar la arquitectura |
 | D6 | Un solo Head of Content: las demás sesiones producen contra brief | **Sí** |
 | D7 | Que el WhatsApp automático desde su número cumpla R9 | Hablarlo con Growth antes de levantar la pausa (choca con lo que contamos) |
-| D8 | SPF y DMARC | Hoy mismo. El nurturing ya está encendido |
+| D8 | SPF y DMARC | **Hecho** (6-oct). Más adelante, pasar el DMARC de `p=none` a `quarantine` cuando los informes salgan limpios |
 
 ## 13. Próximos pasos del Head of Content (sin necesidad de ok)
 
