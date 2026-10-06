@@ -1129,3 +1129,22 @@ Maikel confirma que el DMARC está hecho y que qualivo.io ya envía el nurturing
 - **DMARC** con `p=none`.
 
 En el Content OS, la D8 queda cerrada y la R17 ya no bloquea la newsletter por el DNS. Cada envío sigue necesitando el ok de Maikel.
+
+### Martes 6-oct · noche · piezas de la semana 41 en Notion
+
+Maikel pidió ver las piezas de la semana. Están en la página de Notion «Piezas de la semana 41 · 5-11 oct», debajo del Content OS, con una casilla de aprobación en cada una.
+
+**Fechas que propongo:**
+- **LinkedIn de cobertura:** el post 1 el miércoles 7, el 2 el jueves 8 y el 4 el viernes 9.
+- **El post 3 espera** a que se hable con Growth del WhatsApp automático (R2 y R9).
+
+**Corregido hoy:**
+- **Carrusel de plantones v2.** Fuera «Casi nunca lo es» de la lámina 1, porque no tenía fuente. Del pie de foto quito «casi nunca» y «casi siempre», que tampoco la tenían, y un «no es X, es Y».
+- **Newsletter de plantones.** «Quince minutos» pasa a «unos 30 minutos», que es lo que dura la llamada.
+
+**Recomiendo no enviar la newsletter esta semana.** Le quedan tres cosas:
+- un «casi nunca» sin fuente;
+- el consejo de dar precio antes de la cita, cuando nuestro propio test con precio sigue sin conclusión;
+- un preheader con «no es X».
+
+Mi propuesta es arreglarla y enviarla en la semana 45, la de citas.
