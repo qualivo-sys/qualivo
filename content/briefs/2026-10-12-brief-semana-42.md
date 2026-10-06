@@ -30,7 +30,7 @@
 
 **Lo que NO se usa:**
 - Nuestro precio, ni el que aparece en el formulario (R10).
-- El 49 € ni cualquier otra cifra de un cliente.
+- Ninguna cifra de un cliente, tampoco lo que cobra a los suyos.
 - Cuántos A/B/C/D tuvimos en septiembre. El plan dice «unos 14 de 37, a verificar», así que no está verificado (R1).
 
 ## 3. El mensaje
