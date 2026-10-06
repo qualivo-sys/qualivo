@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Natural Fit · demo del recorrido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: demo guiada en pestañas (anuncios, test, WhatsApp, seguimiento, panel); cada pestaña es una pantalla. */
+:root{
+  --bg:#F5F4F2; --surface:#FFFFFF; --ink:#1B1E24; --muted:#5E6470; --line:#DEDBD6;
+  --accent:#2F5BEA; --good:#13795B; --warn:#B4541A; --tint:#EAF0FF;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --brand:#8A6E55; --brand-soft:#F1EBE4;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#C2A68C; --brand-soft:#2A241F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161F2B; --ink:#E8EDF3; --muted:#A1ACBB; --line:#273344;
+  --accent:#7B9BFF; --good:#4CC59A; --warn:#F09A63; --tint:#1B2740;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#C2A68C; --brand-soft:#2A241F; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:20px 64px}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px}
+.wrap > *{min-width:0}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:66ch;margin-top:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;position:sticky;top:0;background:var(--bg);z-index:3;padding-top:8px}
+nav.tabs button{font:inherit;font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.tabs button[aria-selected="true"] span{color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > *{min-width:0}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:70ch}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.cols > *{min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* Anuncios */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ig .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:600}
+.ig .h i{width:28px;height:28px;border-radius:50%;background:var(--brand);display:inline-block;flex:none}
+.ig .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ig .v{width:100%;aspect-ratio:4/5;display:grid;align-content:end;padding:18px;color:#fff;position:relative;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1}
+.ig .v.va{background:linear-gradient(160deg,#2B2622 0%,#5E4A3C 55%,#B89478 100%)}
+.ig .v.vc{background:linear-gradient(160deg,#23303A 0%,#4F6470 60%,#C9B8A6 100%)}
+.ig .v .play{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;font-weight:500;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}
+.ig .v .ph{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;font-weight:500;border:1px dashed rgba(255,255,255,.7);padding:3px 8px;border-radius:6px;max-width:60%}
+.ig .v small{display:block;font-family:var(--body);font-weight:600;font-size:14px;margin-top:8px;opacity:.95}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.ig .cta b{color:var(--accent)}
+.ig .t{padding:10px 12px;font-size:14px}
+.script{margin:0;padding:10px 12px 12px 30px;font-size:13px;color:var(--muted);display:grid;gap:4px}
+.gg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.gg .q{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px}
+.gg .r small{font-size:12px;color:var(--muted)}
+.gg .r a{display:block;color:var(--accent);font-size:18px;text-decoration:none;margin:2px 0}
+.gg .r p{font-size:14px;color:var(--muted)}
+.gg .sl{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--accent)}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* Test */
+.quiz{width:min(390px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-height:460px;align-content:start}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:var(--accent);transition:width .3s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:600;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer}
+.quiz .qopts button:hover{border-color:var(--accent)}
+.quiz .done{text-align:center;display:grid;gap:10px;padding-top:30px}
+.quiz .done b{font-family:var(--display);font-size:24px}
+.quiz .done p{color:var(--muted)}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:var(--brand);display:inline-block;flex:none}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:82%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:620px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* Seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 14px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--warn)}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl b{display:block;font-size:14px}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px}
+/* Panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+tfoot td{font-weight:700;border-bottom:0}
+td.num,th.num{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px}
+.kpi b{font-family:var(--display);font-size:30px;line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.alert{border-color:var(--warn)}
+.kpi.alert b{color:var(--warn)}
+footer{font-size:13px;color:var(--muted);display:grid;gap:8px}
+footer a{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq{grid-template-columns:1fr}.two{grid-template-columns:1fr}.wa{height:560px}.kpis{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Ejemplo · Demo para NATURAL FIT body contouring® · Dr. Martín Gastón Álvarez</p>
+  <h1>Del anuncio a la valoración con el doctor, sin que se pierda nadie por el camino</h1>
+  <p class="lead">Así vería el proceso una paciente que descubre la consulta en un anuncio, y así lo veríais vosotros. Consulta de cirugía plástica y estética en Pg. de la Bonanova, Sarrià-Sant Gervasi, Barcelona. Más de 18 años de trayectoria y presencia en televisión y prensa.</p>
+</header>
+
+<p class="note"><span class="ej">Ejemplo</span> Demo preparada por Qualivo. Todo lo que se ve es de ejemplo: anuncios, mensajes, nombres y cifras. Los textos finales los aprueba el doctor. La asistente nunca da consejo médico ni precios cerrados: eso se concreta en la valoración.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span>Test</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>4</span>Seguimiento</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>5</span>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIOS -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · Anuncios de ejemplo <span class="ej">Ejemplo</span></h2><p>Tres anuncios, cada uno para un momento distinto. Sin precios, sin promesas de resultados. Las imágenes son marcadores: en la versión real va material grabado en la consulta.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Meta · reel de 20 s · Ejemplo</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Dr. Martín Gastón · NATURAL FIT<small>Publicidad · Ejemplo</small></div></div>
+        <div class="v va"><span class="ph">[ Vídeo: el doctor a cámara en la consulta ]</span><span class="play">▶ 0:20</span>Así es una valoración de body contouring.<small>Contorno natural y proporcionado. Lo vemos juntos.</small></div>
+        <div class="cta"><span>Enviar mensaje</span><b>›</b></div>
+        <p class="t"><b>NATURAL FIT body contouring®</b> ¿Te planteas mejorar el contorno corporal? En la valoración el Dr. Martín Gastón te explica qué opciones tienes según tu caso. Consulta en Bonanova, Barcelona. Escríbenos y te contamos cómo es.</p>
+        <ol class="script">
+          <li>0-5 s · «Soy el Dr. Martín Gastón. Te explico cómo es la valoración.»</li>
+          <li>5-12 s · «Miramos la zona, tu historia y lo que te gustaría cambiar.»</li>
+          <li>12-17 s · «Buscamos un contorno natural y proporcionado a tu cuerpo.»</li>
+          <li>17-20 s · «Si te encaja, escríbenos y buscamos fecha.»</li>
+        </ol>
+      </div>
+      <div class="why"><b>Por qué:</b> el doctor a cámara transmite confianza. Explica el proceso, no promete un resultado. El botón abre WhatsApp directamente.</div>
+    </div>
+    <div>
+      <p class="cap">Instagram · historia · Ejemplo</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Dr. Martín Gastón · NATURAL FIT<small>Publicidad · Ejemplo</small></div></div>
+        <div class="v vc"><span class="ph">[ Imagen: consulta, luz natural ]</span>¿Grasa localizada que no se va con dieta ni ejercicio?<small>Tres preguntas y te contamos cómo es la valoración.</small></div>
+        <div class="cta"><span>Hacer el test</span><b>›</b></div>
+      </div>
+      <div class="why"><b>Por qué:</b> habla de lo que la persona vive, no del procedimiento. El test filtra antes de llegar a la agenda del doctor.</div>
+    </div>
+    <div>
+      <p class="cap">Google · búsqueda · Ejemplo</p>
+      <div class="gg">
+        <div class="q">cirujano plástico barcelona</div>
+        <div class="r"><small>Patrocinado · Ejemplo</small><a href="../landing/">Cirujano plástico en Barcelona · Valoración con el doctor</a>
+          <p>Dr. Martín Gastón Álvarez. Más de 18 años de trayectoria en cirugía plástica y estética.</p>
+          <p>Body contouring con NATURAL FIT®. Valoración personal en Pg. de la Bonanova.</p></div>
+        <div class="sl"><span>Valoración</span><span>Casos</span><span>Financiación</span><span>Dónde estamos</span></div>
+      </div>
+      <div class="why"><b>Por qué:</b> para quien ya busca cirujano. Solo Barcelona y alrededores, y solo búsquedas con intención de consulta.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="test">Siguiente: el test ›</button></div>
+</section>
+
+<!-- 2 · TEST -->
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · Un test de tres preguntas <span class="ej">Ejemplo</span></h2><p>Tres toques y listo. Pruébalo: responde como si fueras una paciente.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div><h3>Lo que pregunta</h3><p>Qué zona le preocupa, cuándo le gustaría hacerlo y si le interesa financiar.</p></div>
+      <div><h3>Para qué sirve</h3><p>Clara ya escribe sabiendo la zona y el plazo. La coordinadora ve quién tiene prisa y quién no.</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Nada de historial médico ni fotos. Eso se ve con el doctor en la valoración.</p></div>
+      <div><h3>Lo que medimos</h3><p>Qué anuncio trajo a cada persona y en qué acabó: valoración, presupuesto, intervención o nada.</p></div>
+      <div><a class="btnl" href="../landing/" target="_blank" rel="noopener">Ver la landing</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Un minuto después, le escribe Clara <span class="ej">Ejemplo</span></h2><p>Eres Laura. Elige un camino. A la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i></i><div><b>Clara · consulta del Dr. Martín Gastón</b><small>Asistente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Clara no da consejo médico ni precios cerrados. Lo clínico lo concreta el doctor en la valoración. La coordinadora ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Clara se calla.</p>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: el seguimiento ›</button></div>
+</section>
+
+<!-- 4 · SEGUIMIENTO -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>4 · Ningún presupuesto se queda olvidado <span class="ej">Ejemplo</span></h2><p>Mensajes que salen solos. Cualquier respuesta los para y pasa a la coordinadora.</p></header>
+  <div class="seq">
+    <div>
+      <h3>Seguimiento del presupuesto</h3>
+      <p>Para quien hizo la valoración y tiene el presupuesto en la mano.</p>
+      <ol class="tl">
+        <li><span class="w">Día 0</span><b>Presupuesto entregado en la valoración</b></li>
+        <li><span class="w">Día 2</span><b>¿Te quedó alguna duda?</b><blockquote>Hola, Laura. Soy Clara, de la consulta del doctor. ¿Te quedó alguna duda después de la valoración? Si quieres, te la resolvemos por aquí.</blockquote></li>
+        <li><span class="w">Día 5</span><b>Financiación</b><blockquote>Laura, por si te sirve: la intervención se puede financiar en cómodos plazos. Si quieres, te enviamos las opciones sin compromiso.</blockquote></li>
+        <li><span class="w">Día 10</span><b>¿Más adelante o reservamos?</b><blockquote>Laura, ¿lo dejamos para más adelante o prefieres que reservemos fecha? Las dos opciones están bien. Dinos y lo anotamos.</blockquote></li>
+        <li class="alert"><span class="w">Día 11</span><b>Aviso a la coordinadora</b><blockquote>Laura M. · abdomen y flancos · presupuesto de hace 11 días · sin respuesta. Mejor una llamada.</blockquote></li>
+        <li class="stop"><span class="w">Si responde</span><b>Se para todo y sigue la coordinadora</b></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Después de la intervención</h3>
+      <p>Para quien ya se ha operado. El cuidado médico lo lleva el doctor; esto solo se encarga de que no se olvide nada.</p>
+      <ol class="tl">
+        <li><span class="w">Víspera de la revisión</span><b>Recordatorio de revisión postoperatoria</b><blockquote>Hola, Laura. Te recordamos tu revisión con el doctor mañana a las 17:00 en Pg. de la Bonanova. Si necesitas cambiarla, escríbenos.</blockquote></li>
+        <li><span class="w">Si no confirma</span><b>Aviso a la coordinadora</b></li>
+        <li><span class="w">Tras la última revisión</span><b>Petición de reseña</b><blockquote>Laura, gracias por confiar en la consulta. Si te apetece, nos ayudaría mucho que contaras tu experiencia en Google. Aquí tienes el enlace.</blockquote></li>
+        <li class="stop"><span class="w">Después</span><b>Fin de la secuencia</b></li>
+      </ol>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel ›</button></div>
+</section>
+
+<!-- 5 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>5 · El panel de la consulta <span class="ej">Datos de ejemplo</span></h2><p>Qué campaña trae valoraciones e intervenciones, y no solo mensajes. Cifras redondas inventadas, no previsiones.</p></header>
+  <div class="kpis">
+    <div class="kpi"><b>105</b><span>valoraciones este mes · datos de ejemplo</span></div>
+    <div class="kpi"><b>36</b><span>intervenciones este mes · datos de ejemplo</span></div>
+    <div class="kpi alert"><b>90.000 €</b><span>presupuestos abiertos sin seguimiento · datos de ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap">Por campaña · un mes · Datos de ejemplo</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Campaña</th><th class="num">Consultas</th><th class="num">Valoraciones</th><th class="num">Presupuestos</th><th class="num">Intervenciones</th><th class="num">Coste por valoración</th></tr></thead>
+        <tbody>
+          <tr><td>Body contouring Meta</td><td class="num">120</td><td class="num">30</td><td class="num">25</td><td class="num">10</td><td class="num">60 €</td></tr>
+          <tr><td>Pecho Meta</td><td class="num">90</td><td class="num">20</td><td class="num">15</td><td class="num">6</td><td class="num">70 €</td></tr>
+          <tr><td>Google cirujano plástico</td><td class="num">60</td><td class="num">20</td><td class="num">15</td><td class="num">8</td><td class="num">50 €</td></tr>
+          <tr><td>Medicina estética</td><td class="num">80</td><td class="num">25</td><td class="num">20</td><td class="num">10</td><td class="num">30 €</td></tr>
+          <tr><td>Orgánico</td><td class="num">40</td><td class="num">10</td><td class="num">5</td><td class="num">2</td><td class="num">—</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="num">390</td><td class="num">105</td><td class="num">80</td><td class="num">36</td><td class="num"></td></tr></tfoot>
+      </table>
+    </div>
+    <p class="note">Datos de ejemplo. En la versión real se rellena solo con cada conversación, cita y presupuesto.</p>
+  </div>
+  <div class="navnext"><a class="btnl" href="../plan/">Ver el plan ›</a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../plan/">Plan</a><a class="btnl" href="../landing/">Landing</a><a class="btnl" href="https://qualivo.io/intelligence/?sector=cirugia&amp;empresa=Natural%20Fit&amp;objetivo=seguimiento&amp;demo=1" target="_blank" rel="noopener">Demo del panel</a></div>
+  <p>Qualivo · qualivo.io · Ejemplo preparado en octubre de 2026 para NATURAL FIT body contouring®. No es una página de la consulta; anuncios, mensajes, nombres y cifras son de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'test', 'whatsapp', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Test de ejemplo
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué zona te preocupa?', ['Abdomen y flancos', 'Piernas', 'Brazos', 'Varias zonas']],
+    ['¿Cuándo te gustaría hacerlo?', ['Antes de 3 meses', 'En 3-6 meses', 'Sin prisa']],
+    ['¿Te interesa financiarlo?', ['Sí', 'No', 'No lo sé']]
+  ];
+  var resp = [];
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · pregunta ' + Math.min(n + 1, 3) + ' de 3');
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / 3 * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n >= Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var d = el('div', 'done');
+      d.appendChild(el('b', null, 'Te escribimos por WhatsApp en un minuto'));
+      d.appendChild(el('p', null, 'Clara, de la consulta del doctor, te cuenta cómo es la valoración. Tus respuestas: ' + resp.join(' · ') + '.'));
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)';
+      r.addEventListener('click', function () { resp = []; paso(0); });
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.justifyContent = 'center'; row.style.flexWrap = 'wrap';
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 14;
+  function hora() { minuto++; return '19:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls;
+    d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 800);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 350); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var zona = 'zona por concretar', plazo = 'plazo por concretar';
+  var N = {
+    inicio: function () {
+      bot(['Hola, Laura. Soy Clara, de la consulta del Dr. Martín Gastón. Gracias por escribirnos.',
+           '¿En qué te puedo ayudar?'],
+        function () { choices([['Quiero una valoración', 'v1'], ['¿Cuánto cuesta?', 'precio'], ['Me da miedo la recuperación', 'miedo']]); });
+    },
+    v1: function () {
+      apunta('Camino: quiere valoración', 'pasa a «Valoración»');
+      bot(['Perfecto. ¿Qué zona te gustaría valorar?'],
+        function () { choices([['Abdomen y flancos', 'v2a'], ['Piernas', 'v2b'], ['Brazos', 'v2c'], ['Varias zonas', 'v2d']]); });
+    },
+    v2a: function () { zona = 'abdomen y flancos'; N.v2(); },
+    v2b: function () { zona = 'piernas'; N.v2(); },
+    v2c: function () { zona = 'brazos'; N.v2(); },
+    v2d: function () { zona = 'varias zonas'; N.v2(); },
+    v2: function () {
+      apunta('Zona: ' + zona, 'se guarda en su ficha');
+      bot(['Anotado. ¿Y cuándo te gustaría hacerlo, más o menos?'],
+        function () { choices([['Antes de 3 meses', 'v3a'], ['En 3-6 meses', 'v3b'], ['Sin prisa', 'v3c']]); });
+    },
+    v3a: function () { plazo = 'antes de 3 meses'; N.v3(); },
+    v3b: function () { plazo = 'en 3-6 meses'; N.v3(); },
+    v3c: function () { plazo = 'sin prisa'; N.v3(); },
+    v3: function () {
+      apunta('Plazo: ' + plazo, plazo === 'antes de 3 meses' ? 'prioridad alta' : 'prioridad normal', plazo === 'antes de 3 meses' ? 'g' : '');
+      bot(['Gracias. El primer paso es la valoración con el doctor, en la consulta de Pg. de la Bonanova.',
+           'Tengo hueco el jueves a las 17:00 o el sábado a las 11:00. ¿Cuál te va mejor?'],
+        function () { choices([['Jueves 17:00', 'jueves'], ['Sábado 11:00', 'sabado']]); });
+    },
+    jueves: function () { cita('el jueves a las 17:00'); },
+    sabado: function () { cita('el sábado a las 11:00'); },
+    precio: function () {
+      apunta('Camino: pregunta el precio', 'Clara no da cifras cerradas', 'h');
+      bot(['Es normal preguntarlo. El precio depende de la zona y de cada caso, así que se cierra en la valoración con el doctor.',
+           'Y si te interesa, se puede financiar.',
+           '¿Quieres que te reserve una valoración? Tengo el jueves a las 17:00 o el sábado a las 11:00.'],
+        function () { choices([['Jueves 17:00', 'jueves'], ['Sábado 11:00', 'sabado'], ['Ahora no, gracias', 'mas']]); });
+    },
+    miedo: function () {
+      apunta('Camino: miedo a la recuperación', 'pregunta clínica: no se responde por WhatsApp', 'h');
+      bot(['Te entiendo, es una duda muy habitual.',
+           'Eso te lo concreta el doctor en la valoración según tu caso. Ahí te explica cómo sería todo, con calma.',
+           '¿Te reservo una valoración? Tengo el jueves a las 17:00 o el sábado a las 11:00.'],
+        function () { choices([['Jueves 17:00', 'jueves'], ['Sábado 11:00', 'sabado'], ['Lo pienso', 'mas']]); });
+    },
+    mas: function () {
+      apunta('No reserva por ahora', 'aviso a la coordinadora · nuevo mensaje en 5 días');
+      bot(['Sin problema, Laura. Aquí estamos cuando quieras. Que vaya bien.'], fin);
+    }
+  };
+  function cita(cuando) {
+    apunta('Valoración reservada: ' + cuando, 'en la agenda del doctor', 'g');
+    apunta('Aviso a la coordinadora', 'Laura M. · ' + zona + ' · ' + plazo + '\nValoración ' + cuando + ' · vino del reel de body contouring', 'g');
+    apunta('Recordatorios programados', 'la víspera y 2 h antes');
+    bot(['Reservada, Laura. Te esperamos ' + cuando + ' en Pg. de la Bonanova.',
+         'La víspera te lo recordamos por aquí. Si te surge algo, escríbenos y lo cambiamos.'], fin);
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 14; zona = 'zona por concretar'; plazo = 'plazo por concretar';
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Laura escribe desde el reel de body contouring');
+    apunta('Ficha creada', 'origen: reel de body contouring · Meta');
+    apunta('Respuesta en menos de un minuto', 'aunque la consulta esté cerrada');
+    go('inicio');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
