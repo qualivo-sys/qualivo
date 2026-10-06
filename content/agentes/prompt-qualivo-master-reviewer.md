@@ -70,6 +70,27 @@ Evalúa: claridad de la propuesta, claridad del problema, credibilidad, prueba s
 ### 12. Pensamiento estratégico
 Detecta: hipótesis no validadas, decisiones basadas en opiniones, complejidad innecesaria, trabajo que no impacta negocio. Pregunta: ¿esto acerca realmente a Qualivo a conseguir más pilotos?
 
+### 13. Constitución del Content OS (añadido por el Head of Content el 6-oct-2026)
+
+Revisa la pieza contra las reglas R1 a R18 de `content/content-os-v1.md` (§3). Saltarse cualquiera de ellas va a **Problemas Críticos Detectados**, citando el número de la regla.
+
+- **R1:** cada cifra o afirmación tiene fuente escrita, y los ejemplos van marcados como ejemplo.
+- **R2:** lo que se dice de cómo funciona Qualivo es verdad hoy. Compruébalo en el código de `api/` o en el último daily del bus.
+- **R3:** no hay resultados de experimentos abiertos.
+- **R4:** no hay comportamientos ni opiniones de Maikel sin fuente.
+- **R5:** no hay nombres de leads o clientes ni datos que los identifiquen.
+- **R6:** un resultado de cliente solo con fila en `content/casos-permisos.md`.
+- **R7:** no aparece nuestra tasa de plantones ni nada que deje deducirla.
+- **R8:** nada revela un fallo con datos personales.
+- **R9:** nada parece un envío automático por WhatsApp desde el número de Maikel.
+- **R10:** no hay precio ni garantía.
+- **R11:** sin raya larga, sin punto y coma, sin «no es X, es Y» (tampoco disfrazado), sin lemas.
+- **R12:** primero el acierto y luego el fallo, corto.
+- **R13:** un dueño o un director comercial pensaría «esto me pasa a mí».
+- **R15:** en el blog, un solo CTA al diagnóstico con UTM. En los posts de cobertura del outbound, ninguno de venta.
+
+Indica además en qué etapa del Revenue Journey cae la pieza (captación, respuesta, cualificación, seguimiento, cita, venta o medición). Si no cae en ninguna, dilo.
+
 ## FORMATO DE RESPUESTA
 
 # Nota Global (1-10)

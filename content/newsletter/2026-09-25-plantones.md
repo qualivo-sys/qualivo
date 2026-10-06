@@ -14,7 +14,7 @@ Versión de correo, la que manda: `content/newsletter/maqueta/2026-09-25-planton
 ## Asunto y preheader
 
 - **Asunto (recomendado, v2):** Le guardaste la hora. No vino.
-- **Preheader (v2):** Y lo más caro no es la hora que perdiste.
+- **Preheader (v2):** Y la cuenta de verdad llega después.
 - Anterior: Te han dado plantón. ¿Por qué?
 - Alternativa 1: Lo que hago a los seis minutos de un plantón
 - Alternativa 2: Un plantón no significa que el cliente sea malo
