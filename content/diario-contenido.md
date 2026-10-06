@@ -1112,3 +1112,10 @@ Lo principal:
 - **La lista de documentos** que quedan como históricos.
 
 **Pendiente de Maikel:** las ocho decisiones de su §12. La que más urge es la D1, levantar la pausa de LinkedIn pieza a pieza.
+
+### Martes 6-oct · noche · UTM en el blog (primer paso del Content OS)
+
+- **Los 79 botones al diagnóstico de los 47 artículos llevan ya UTM.** Todos con `utm_source=blog`, `utm_medium=organic` y `utm_campaign=articulo`. En `utm_content` va el nombre de cada artículo.
+- **Cómo llega el dato.** El formulario de `/diagnostico/` ya mandaba `location.search` al CRM. Ahora cada lead que viene del blog llega con el artículo del que sale.
+- **Ojo:** `api/diagnostico.js` convierte `utm_content` en la etiqueta `creativo-<slug>`. En el blog, esa etiqueta es el artículo, no un anuncio.
+- **Para los artículos nuevos:** la regla queda apuntada en `content/estandar-articulos.md`.

@@ -62,3 +62,12 @@ El artículo debe ser citable por ChatGPT, Perplexity y Gemini, no solo rankeabl
 4. ¿Tiene su elemento visual y se lee sin fatiga en el móvil?
 5. ¿Está tejido al cluster (pilar + 2-3 enlaces contextuales)?
 6. ¿El CTA conecta con el problema del artículo?
+
+## Enlaces al diagnóstico (desde el 6-oct-2026)
+
+Todos los botones al diagnóstico llevan UTM, según el Content OS (`content/content-os-v1.md`, §9):
+
+`/diagnostico/?utm_source=blog&amp;utm_medium=organic&amp;utm_campaign=articulo&amp;utm_content=<slug>`
+
+- El formulario de `/diagnostico/` manda `location.search` a `api/diagnostico.js`.
+- El origen queda apuntado en la nota del contacto en GHL.
