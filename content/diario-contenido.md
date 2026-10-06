@@ -1079,3 +1079,13 @@ Informe en `content/borradores/revision-master-reviewer-2026-10-06.md`. Nota 5 a
 ### Hipótesis
 
 - Si se añade al formulario la pregunta de cuánto cobra la empresa por su servicio principal, bajarán los leads de nivel A que luego no encajan por precio. Se podrá medir con el test de formularios del 12 al 25-oct.
+
+### Martes 6-oct · tarde · tasa de plantones retirada (P0 del diagnóstico)
+
+Maikel compartió el diagnóstico de Notion «Diagnóstico de contenido y nuevo Content OS · 6 oct 2026». Su P0 es retirar las cifras de plantones publicadas. Hecho:
+
+- **`blog/cliente-no-se-presenta-a-la-cita/`.** Sin «5 de 9» ni «cinco plantones». La tabla se queda solo con «sector / qué pasó».
+- **`blog/leads-pero-no-ventas/`.** Fuera las cifras de plantones.
+- **`blog/que-poner-en-tu-negocio-para-atraer-clientes/`.** Fuera las cifras de plantones.
+- **`blog/index.html` y `llms.txt`.** Quitadas también.
+- **Lo que se queda.** Las cifras de citas que no dejan deducir la tasa: 14 citas, 12 por el formulario, y el reparto por sector del artículo de coste por lead.
