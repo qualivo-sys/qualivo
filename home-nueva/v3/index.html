@@ -176,11 +176,12 @@
     .ficha__n { font-size:16px; flex-wrap:nowrap; }
     .ficha__n .ej { font-size:9px; padding:2px 6px; }
     .ficha__s { font-size:10px; padding:3px 8px; white-space:nowrap; }
-    .ficha__rows .fr:not(.keep) { display:none; }
+    .ficha__rows { display:none; }
     .ficha__next { margin-top:10px; padding:10px 12px; font-size:13.5px; }
     .stage { min-height:auto; padding:34px 0; opacity:1; }
     .duo { grid-template-columns:1fr; }
     .app { grid-template-columns:1fr; }
+    #dec { order:-1; }
     .scores { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
     .sc { padding:10px; } .sc__v { font-size:21px; }
     .opp__d { display:none; }
@@ -202,7 +203,7 @@
       <nav class="site-nav" aria-label="Principal">
         <a href="#recorrido" class="nav-link">Cómo funciona</a>
         <a href="#intelligence" class="nav-link">Intelligence</a>
-        <a href="/casos/nuria-roure/" class="nav-link">Casos</a>
+        <a href="/#casos" class="nav-link">Casos</a>
         <a href="/blog/" class="nav-link">Recursos</a>
         <a href="/diagnostico/" class="btn-dark btn-nav">Diagnóstico · 30 min</a>
       </nav>
@@ -226,7 +227,7 @@
           <div class="sys__who">
             <div class="sys__av" aria-hidden="true">L</div>
             <div>
-              <div class="sys__name">Lucía · academia de idiomas</div>
+              <div class="sys__name">Laura · academia de idiomas</div>
               <div class="sys__meta">Pidió información desde un anuncio</div>
             </div>
           </div>
@@ -234,8 +235,8 @@
         </div>
         <div class="track">
           <div class="track__line"><div class="track__fill" id="fill"></div></div>
-          <div class="st" data-i="0"><div class="st__dot">1</div><div class="st__k">Entra</div><div class="st__v">Domingo, 23:47</div></div>
-          <div class="st" data-i="1"><div class="st__dot">2</div><div class="st__k">Respuesta</div><div class="st__v">WhatsApp en minutos</div></div>
+          <div class="st" data-i="0"><div class="st__dot">1</div><div class="st__k">Entra</div><div class="st__v">Domingo, 19:40</div></div>
+          <div class="st" data-i="1"><div class="st__dot">2</div><div class="st__k">Respuesta</div><div class="st__v">WhatsApp a los 10 minutos</div></div>
           <div class="st" data-i="2"><div class="st__dot">3</div><div class="st__k">Cualificación</div><div class="st__v">Encaje 82 · intención alta</div></div>
           <div class="st" data-i="3"><div class="st__dot">4</div><div class="st__k">Cita</div><div class="st__v">Martes 10:00, confirmada</div></div>
           <div class="st human" data-i="4"><div class="st__dot">5</div><div class="st__k">Tu equipo</div><div class="st__v">Llamar antes de las 13:00</div></div>
@@ -246,7 +247,7 @@
           <div class="sys__msg" id="msg">Entra una petición desde un anuncio. El sistema crea la ficha y apunta de qué campaña viene.</div>
         </div>
       </div>
-      <p class="hero__note">El agente hace lo que se repite. Tu equipo decide lo que importa.</p>
+      <p class="hero__note">En este ejemplo, el agente contesta, cualifica y da la cita. Llamar y cerrar la venta lo hace tu equipo.</p>
     </div>
   </section>
 
@@ -254,7 +255,7 @@
   <section id="recorrido">
     <div class="wrap prob">
       <p class="eyebrow">El recorrido</p>
-      <h2>Un lead no se pierde de golpe. <span>Se pierde en algún punto del recorrido.</span></h2>
+      <h2>Cada lead se escapa en un punto concreto del recorrido. <span>Te enseñamos cuál.</span></h2>
       <p class="lead">Son siete momentos, del anuncio a la siguiente compra. En cada uno te enseñamos dónde se suele romper, qué hace el agente y qué sigue decidiendo tu equipo.</p>
     </div>
     <div class="wrap jr">
@@ -262,7 +263,7 @@
         <div class="rail" id="rail"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="ficha">
           <div class="ficha__h">
-            <div class="ficha__n">Lucía · academia <span class="ej">Ejemplo</span></div>
+            <div class="ficha__n">Laura · academia <span class="ej">Ejemplo</span></div>
             <span class="ficha__s" id="f-st">Nuevo</span>
           </div>
           <dl class="ficha__rows">
@@ -272,7 +273,7 @@
             <div class="fr"><dt>Cita</dt><dd id="f-ci">Sin cita</dd></div>
             <div class="fr"><dt>Valor</dt><dd id="f-va">Por estimar</dd></div>
           </dl>
-          <div class="ficha__next"><b>Siguiente acción</b><span id="f-nx">Contestar en minutos, por WhatsApp.</span></div>
+          <div class="ficha__next"><b>Siguiente acción</b><span id="f-nx">Escribirle por WhatsApp a partir de lo que puso en el formulario.</span></div>
         </div>
       </aside>
 
@@ -281,43 +282,43 @@
           <p class="stage__n">01 · Captación</p>
           <h3>Que entre la gente que encaja</h3>
           <p class="rompe">Entran contactos que nunca iban a comprar, y el coste por lead lo esconde.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Apunta de qué anuncio o campaña viene cada contacto, para saber cuál trae ventas.</div><div class="pe"><b>Lo decide tu equipo</b>Qué es un buen cliente y dónde se invierte.</div></div>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Apunta de qué anuncio o campaña viene cada contacto, para saber cuál trae ventas.</div><div class="pe"><b>Tu equipo</b>Qué es un buen cliente y dónde se invierte.</div></div>
         </article>
         <article class="stage" data-s="1">
           <p class="stage__n">02 · Respuesta</p>
           <h3>Contestar mientras aún tiene el móvil en la mano</h3>
-          <p class="rompe">Nadie contesta a tiempo, y a las tres horas ya ha hablado con otro.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Contesta por WhatsApp en minutos, con los mensajes que tú has aprobado, y resuelve las dudas básicas.</div><div class="pe"><b>Lo decide tu equipo</b>Qué puede decir el agente y qué no.</div></div>
+          <p class="rompe">Nadie contesta a tiempo, y cuando le escribes ya ha hablado con otro.</p>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Contesta por WhatsApp en minutos, dentro de tu horario, con un primer mensaje hecho a partir de lo que puso en el formulario, y resuelve las dudas básicas.</div><div class="pe"><b>Tu equipo</b>Qué puede decir el agente, qué no y a qué horas escribe.</div></div>
         </article>
         <article class="stage" data-s="2">
           <p class="stage__n">03 · Cualificación</p>
           <h3>Saber si encaja antes de dedicarle una hora</h3>
           <p class="rompe">El formulario dice que encaja, y en la reunión descubres que no.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Hace las preguntas que faltan y deja en la ficha su nota de encaje y el motivo.</div><div class="pe"><b>Lo decide tu equipo</b>Revisa los casos dudosos.</div></div>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Hace las preguntas que faltan y deja en la ficha su nota de encaje y el motivo.</div><div class="pe"><b>Tu equipo</b>Revisa los casos dudosos.</div></div>
         </article>
         <article class="stage" data-s="3">
           <p class="stage__n">04 · Seguimiento</p>
           <h3>Que ninguna oportunidad se quede sin fecha</h3>
           <p class="rompe">«Ahora no» sin fecha, presupuestos sin respuesta y nadie que vuelva a escribir.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Escribe cuando toca y avisa cuando una oportunidad lleva demasiado tiempo quieta.</div><div class="pe"><b>Lo decide tu equipo</b>Cuándo llamar y qué ofrecer.</div></div>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Avisa a tu equipo cuando una oportunidad lleva demasiado tiempo quieta y le deja escrito el siguiente paso.</div><div class="pe"><b>Tu equipo</b>Cuándo llamar y qué ofrecer.</div></div>
         </article>
         <article class="stage" data-s="4">
           <p class="stage__n">05 · Cita</p>
           <h3>Que la cita se celebre</h3>
-          <p class="rompe">Reservan, no aparecen, y nadie le vuelve a llamar.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Confirma con una pregunta que pide respuesta y, si no llega, le ofrece otra hora ese mismo día.</div><div class="pe"><b>Lo decide tu equipo</b>Llega a la cita sabiendo qué busca y qué contestó.</div></div>
+          <p class="rompe">Reservan, no aparecen, y nadie les vuelve a llamar.</p>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Confirma la cita en cuanto se reserva, el mismo día le recuerda la hora y, si reservó con días de antelación, la víspera le pide que confirme.</div><div class="pe"><b>Tu equipo</b>Llega a la cita sabiendo qué busca y qué contestó.</div></div>
         </article>
         <article class="stage" data-s="5">
           <p class="stage__n">06 · Venta</p>
           <h3>Que quien decide tenga lo que necesita</h3>
           <p class="rompe">Quien decide no estaba en la reunión, y nadie le manda nada ese día.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Prepara el resumen de la reunión para quien no estuvo y recuerda el siguiente paso.</div><div class="pe"><b>Lo decide tu equipo</b>Negocia y cierra.</div></div>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Deja en la ficha lo que contó en cada paso, para que tu equipo se lo pueda pasar a quien decide, y avisa si la propuesta se queda sin respuesta.</div><div class="pe"><b>Tu equipo</b>Negocia y cierra.</div></div>
         </article>
         <article class="stage" data-s="6">
           <p class="stage__n">07 · Reactivación</p>
           <h3>Volver cuando llega el momento</h3>
           <p class="rompe">«Más adelante» se convierte en nunca, y el cliente que podía repetir se va con otro.</p>
-          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Vuelve a escribir cuando toca, con un motivo concreto para cada uno.</div><div class="pe"><b>Lo decide tu equipo</b>A quién se escribe y con qué propuesta.</div></div>
+          <div class="duo"><div class="ag"><b>Lo hace el agente</b>Encuentra a quien merece un segundo intento y le deja preparado el mensaje, con un motivo distinto según lo que pasó.</div><div class="pe"><b>Tu equipo</b>A quién se escribe y con qué propuesta.</div></div>
         </article>
       </div>
     </div>
@@ -328,7 +329,7 @@
     <div class="wrap">
       <p class="eyebrow">Qualivo Intelligence</p>
       <h2>Ahora mismo hay oportunidades que necesitan atención. Te decimos cuáles y por qué.</h2>
-      <p class="lead">Qué está pasando, qué importa y qué hacer después. En una pantalla, encima del CRM que ya tienes.</p>
+      <p class="lead">Qué está pasando, qué importa y qué hacer después. En una pantalla.</p>
 
       <div class="app">
         <div class="app__panel">
@@ -336,9 +337,9 @@
           <ul class="opps" id="opps"></ul>
           <p class="toast" id="toast" aria-live="polite"></p>
         </div>
-        <div class="app__panel" id="dec" aria-live="polite">
+        <div class="app__panel" id="dec">
           <div class="dec__top">
-            <div><div class="dec__n" id="d-n"></div><div class="dec__m" id="d-m"></div></div>
+            <div><div class="dec__n" id="d-n"></div><div class="dec__m" id="d-m"></div><span class="ej" style="margin-top:8px">Ejemplo</span></div>
             <div class="dec__v" id="d-v"></div>
           </div>
           <div class="scores">
@@ -355,7 +356,7 @@
         </div>
       </div>
       <div class="intel__foot">
-        <span>Encaje, intención y riesgo van de 0 a 100 y se calculan con lo que hace cada contacto.</span>
+        <span>Datos de ejemplo. Encaje, intención y riesgo van de 0 a 100. El encaje sale de cómo es cada contacto, y la intención y el riesgo, de lo que hace.</span>
         <a href="/intelligence/?sector=formacion&amp;demo=1">Abrir la demo completa →</a>
       </div>
     </div>
@@ -388,11 +389,11 @@
 
   /* 1 · Hero: la oportunidad avanza por el sistema */
   var pasos = [
-    { h: '23:47', m: 'Entra una petición desde un anuncio. El sistema crea la ficha y apunta de qué campaña viene.' },
-    { h: '23:51', m: '<span class="who who--a">Agente</span>Le contesta por WhatsApp con un mensaje aprobado y le pregunta qué curso busca y cuándo quiere empezar.' },
-    { h: '23:58', m: '<span class="who who--a">Agente</span>Con sus respuestas, <b>encaje 82 e intención alta</b>. Le ofrece huecos de la agenda.' },
-    { h: 'Lun 9:02', m: '<span class="who who--a">Agente</span>Ha cogido cita el martes a las 10:00. Le confirma con una pregunta que pide respuesta, y contesta que sí.' },
-    { h: 'Mar 11:20', m: '<span class="who who--p">Tu equipo</span>Ha abierto el presupuesto tres veces. <b>Siguiente acción: llamar antes de las 13:00.</b>' },
+    { h: '19:40', m: 'Entra una petición desde un anuncio. El sistema crea la ficha y apunta de qué campaña viene.' },
+    { h: '19:50', m: '<span class="who who--a">Agente</span>Le escribe por WhatsApp a partir de lo que puso en el formulario y le pregunta qué curso busca y cuándo quiere empezar.' },
+    { h: '19:56', m: '<span class="who who--a">Agente</span>Con sus respuestas, <b>encaje 82 e intención alta</b>. Le ofrece huecos de la agenda.' },
+    { h: 'Lun 9:02', m: '<span class="who who--a">Agente</span>Ha cogido cita para el martes a las 10:00. Le llega la confirmación al momento.' },
+    { h: 'Mar 11:20', m: '<span class="who who--p">Tu equipo</span>Después de la cita ha escrito para preguntar por la financiación. <b>Siguiente acción: llamar antes de las 13:00.</b>' },
     { h: 'Mar 12:40', m: 'Matrícula de octubre cerrada. La venta queda unida al anuncio del que vino.' }
   ];
   var sts = document.querySelectorAll('.st'), fill = document.getElementById('fill');
@@ -407,7 +408,7 @@
   else {
     var i = 0, timer = null;
     var sys = document.getElementById('sys');
-    function tick() { pinta(i); i = (i + 1) % pasos.length; timer = setTimeout(tick, i === 0 ? 4200 : 2300); }
+    function tick() { pinta(i); i = (i + 1) % pasos.length; timer = setTimeout(tick, i === 0 ? 6500 : 4500); }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting && !timer) tick(); else if (!e.isIntersecting && timer) { clearTimeout(timer); timer = null; } });
@@ -417,7 +418,7 @@
 
   /* 2 · Recorrido: la ficha cambia con cada etapa */
   var fichas = [
-    { st: 'Nuevo', et: 'Captación', or: 'Anuncio · curso de octubre', en: 'Sin calcular', ci: 'Sin cita', va: 'Por estimar', nx: 'Contestar en minutos, por WhatsApp.' },
+    { st: 'Nuevo', et: 'Captación', or: 'Anuncio · curso de octubre', en: 'Sin calcular', ci: 'Sin cita', va: 'Por estimar', nx: 'Escribirle por WhatsApp a partir de lo que puso en el formulario.' },
     { st: 'Respondido', et: 'Respuesta', or: 'Anuncio · curso de octubre', en: 'Sin calcular', ci: 'Sin cita', va: 'Por estimar', nx: 'Preguntar qué curso busca y cuándo quiere empezar.' },
     { st: 'Cualificado', et: 'Cualificación', or: 'Anuncio · curso de octubre', en: '82 · intención alta', ci: 'Sin cita', va: '1.450 €', nx: 'Ofrecerle dos huecos de la agenda.' },
     { st: 'En seguimiento', et: 'Seguimiento', or: 'Anuncio · curso de octubre', en: '82 · intención alta', ci: 'Sin cita', va: '1.450 €', nx: 'Volver a escribir el jueves si no contesta.' },
@@ -447,25 +448,25 @@
 
   /* 3 · Intelligence: lista priorizada y ficha de decisión */
   var opps = [
-    { id: 'a', n: 'Marta · academia', m: 'Propuesta enviada hace 2 días', v: 2400, p: 'alta', fit: 87, int: 91, rie: 64,
-      sig: ['Ha abierto el presupuesto 3 veces desde ayer', 'Preguntó por la financiación', 'Nadie de tu equipo le ha escrito desde el lunes'],
-      a: 'Llamar antes de las 13:00', w: '<b>Por qué:</b> intención muy alta y el presupuesto revisado, pero lleva dos días sin respuesta de una persona.' },
-    { id: 'b', n: 'Jorge · clínica dental', m: 'Cita mañana a las 17:00', v: 1800, p: 'media', fit: 78, int: 70, rie: 41,
-      sig: ['No ha contestado a la confirmación', 'Reservó hace 6 días', 'Vino desde la campaña de implantes'],
+    { id: 'a', n: 'Marta · curso intensivo', m: 'Propuesta enviada hace 2 días', v: 2400, p: 'alta', fit: 87, int: 91, rie: 64,
+      sig: ['Ha escrito dos veces desde ayer', 'Preguntó por la financiación', 'Nadie de tu equipo le ha escrito desde el lunes'],
+      a: 'Llamar antes de las 13:00', w: '<b>Por qué:</b> intención muy alta y ha vuelto a escribir, pero lleva dos días sin respuesta de una persona.' },
+    { id: 'b', n: 'Jorge · curso de empresa', m: 'Cita mañana a las 17:00', v: 1800, p: 'media', fit: 78, int: 70, rie: 41,
+      sig: ['No ha contestado a la confirmación', 'Reservó hace 6 días', 'Vino desde la campaña para empresas'],
       a: 'Mandar la confirmación con otra hora', w: '<b>Por qué:</b> la cita es mañana y no ha confirmado. Si no va a venir, mejor saberlo hoy y darle otra hora.' },
-    { id: 'c', n: 'Sara · consultoría', m: 'Dijo «más adelante» en septiembre', v: 3200, p: 'media', fit: 82, int: 38, rie: 30,
-      sig: ['Pidió que volviéramos a hablar en octubre', 'Ha visitado la página de precios esta semana'],
+    { id: 'c', n: 'Sara · curso anual', m: 'Dijo «más adelante» en septiembre', v: 3200, p: 'media', fit: 82, int: 38, rie: 30,
+      sig: ['Pidió que volviéramos a hablar en octubre', 'Dio el motivo: esperar al presupuesto de octubre'],
       a: 'Escribirle con el motivo que dio', w: '<b>Por qué:</b> encaja bien, ha vuelto a la web y ya es la fecha que ella pidió.' },
-    { id: 'd', n: 'Iván · reformas', m: 'Entró hace 20 minutos', v: 900, p: 'baja', fit: 41, int: 55, rie: 20,
-      sig: ['Ha contestado al primer WhatsApp', 'Presupuesto pequeño para lo que hacéis'],
+    { id: 'd', n: 'Iván · clase suelta', m: 'Entró hace 20 minutos', v: 900, p: 'baja', fit: 41, int: 55, rie: 20,
+      sig: ['Ha contestado al primer WhatsApp', 'Busca una clase suelta, sin curso'],
       a: 'Dejar que el agente termine de cualificar', w: '<b>Por qué:</b> todavía no hay datos para dedicarle una llamada. El agente hace las dos preguntas que faltan.' }
   ];
-  var nuevo = { id: 'e', n: 'Laura · academia', m: 'Acaba de pedir información', v: 1450, p: 'alta', fit: 84, int: 88, rie: 22,
+  var nuevo = { id: 'e', n: 'Laura · curso de octubre', m: 'Acaba de pedir información', v: 1450, p: 'alta', fit: 84, int: 88, rie: 22,
       sig: ['Ha respondido en 2 minutos al WhatsApp', 'Busca empezar este mes', 'Viene del anuncio del curso de octubre'],
       a: 'Ofrecerle cita para mañana', w: '<b>Por qué:</b> encaja, tiene prisa y está contestando ahora. Es el mejor momento para darle hora.' };
   var ul = document.getElementById('opps'), sel = 'a', toast = document.getElementById('toast');
   var eur = function (x) { return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; };
-  var pr = { alta: 'A', media: 'B', baja: 'C' };
+  var pr = { alta: '1', media: '2', baja: '3' };
   function lista() {
     ul.innerHTML = '';
     opps.forEach(function (o) {
@@ -495,7 +496,7 @@
   if (!reduce) {
     var intel = document.getElementById('intelligence');
     var arrancar = function () {
-      if (ciclo) return;
+      if (ciclo || movil()) return;
       ciclo = setInterval(function () {
         paso++;
         if (paso === 3 && !opps.some(function (x) { return x.id === 'e'; })) {

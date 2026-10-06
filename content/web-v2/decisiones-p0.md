@@ -29,7 +29,7 @@
 | «Laura Martínez · 2.400 €», «Fit 87», «Presupuesto abierto ×3» | **R1.** Son datos inventados | Valen como **ejemplo etiquetado**, igual que la demo de Intelligence (`intelligence/README.md`: «Todos los datos son ficticios»). Nombre claramente de ejemplo |
 | «6,45×» en grande, con el contexto por explicar | **R1 y R6.** Es el caso Nuria Roure. Hay que decir qué mide y tener el permiso escrito para usarlo fuera de las páginas de caso | Se usa con su frase: «6,45 veces lo invertido, con los mismos contactos». Se registra en `content/casos-permisos.md` antes de llevarlo a la home nueva |
 | «No necesitas otro dashboard. Necesitas saber qué está pasando…» | **R11.** Es un «no es X, es Y» | «Qué está pasando, qué importa y qué hacer después. En una pantalla.» |
-| «IA cuando aporta velocidad. Humano cuando aporta criterio.» | **R11.** Lema de máquina | «El agente hace lo que se repite. Tu equipo decide lo que importa.» |
+| «IA cuando aporta velocidad. Humano cuando aporta criterio.» | **R11.** Lema de máquina | Se dice qué hace cada uno: «El agente contesta, cualifica y da la cita. Llamar y cerrar la venta lo hace tu equipo». También se descarta «Un lead no se pierde de golpe…», que es un «no es X» disfrazado (Master Reviewer, 6-oct) |
 | Lista «Qué NO es Qualivo» | Sirve como guía interna. En la web suena a «no es X» | Se queda solo como guía interna. En la web, la sección «Para quién es y para quién no» |
 | Formulario corto: nombre, empresa, contacto y problema | Choca con el test de formularios de Growth y Paid (13 al 25-oct) y con la puntuación (`api/_scoring.js`, que usa inversión, volumen y sector) | **No se toca el formulario hasta el 25-oct.** Después se decide con el dato del test |
 | CTA «Auditar mi sistema», página «Auditoría» | Todo el blog (79 botones con UTM), las landings y el CRM usan «diagnóstico» y `/diagnostico/`. Cambiarlo rompe la medición | La palabra y la URL siguen siendo «diagnóstico». El texto del botón puede cambiar (ver §3) |
@@ -56,9 +56,9 @@
 | Pilar | Mensaje para la web | Prueba que tenemos (fuente) |
 |---|---|---|
 | **Problema** | Pagas por oportunidades que se pierden antes de llegar a ventas | Blog y diagnóstico (fugas por etapa). Cada fuga contada lleva su dato (R1) |
-| **Insight** | Un lead no se pierde de golpe. Se pierde en algún punto del recorrido | Calculadora de fugas (`/calculadora-de-fugas/`) |
+| **Insight** | Cada lead se escapa en un punto concreto del recorrido. Te enseñamos cuál | Calculadora de fugas (`/calculadora-de-fugas/`) |
 | **Solución** | Conectamos captación, respuesta, cualificación, seguimiento, cita, venta y reactivación en un solo sistema | Las cuatro páginas de caso (`/casos/<nombre>/`) |
-| **Mecanismo** | El agente hace lo que se repite. Tu equipo decide lo que importa | La demo de WhatsApp y el agente de voz. **Cuidado con R2 y R9:** no describir nuestro WhatsApp interno como «nada sale sin tu ok» mientras salga solo a los 10 minutos |
+| **Mecanismo** | El agente contesta, cualifica y da la cita. Llamar y cerrar la venta lo hace tu equipo | La demo de WhatsApp y el agente de voz. **Cuidado con R2 y R9:** no describir nuestro WhatsApp interno como «nada sale sin tu ok» mientras salga solo a los 10 minutos |
 | **Control** | Qué está pasando, qué importa y qué hacer después. En una pantalla | Demo de Intelligence (`/intelligence/`, datos de ejemplo) |
 | **Siguiente paso** | Te enseñamos dónde estás perdiendo oportunidades. Diagnóstico de 30 minutos | La llamada es de 30 minutos (cambio del 29-sep). Sin precio ni garantía en la web (R10) |
 
