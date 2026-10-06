@@ -51,3 +51,15 @@ No es un problema de captación. **La captación funcionó.** Es que nadie recog
 Que Lea mande las keys. Y si no da tiempo a atenderlos, **pausar las cuatro campañas de DKR**
 antes de generar más respuestas que nadie va a contestar. Hoy esas campañas tienen 129 leads en
 curso: van a producir más.
+
+## Actualizacion 6-oct 18:05
+
+Han entrado **dos respuestas mas**, las dos positivas y las dos pidiendo key de Steam:
+
+- **MrYours** (Lethal Company), 15:34: *«Sure let's check it out»*. Es respuesta al bump que le ofrecia la key.
+- **Nick Arg** (Fall Guys), 16:01: *«I would love to learn more about your game and make some content on it with a key»*.
+
+Con esto son **12 respuestas sin contestar, 11 positivas**, y la mas antigua lleva 14 dias.
+Ninguna de las dos pide baja ni invoca el RGPD, asi que no hay obligacion legal por nuestra
+parte. Maikel dijo el 6-oct que las cosas de clientes no las toque, asi que quedan marcadas
+como vistas y sin accion. Siguen necesitando llegarle a Lea.
