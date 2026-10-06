@@ -1170,3 +1170,36 @@ Maikel: «ves haciendo todo lo que consideres que no tenga que ir aceptando». H
   - una nota en el brief del Head of Content.
 
 **Pendiente de Maikel:** D1 (LinkedIn), D4 (rutina) y D7 (WhatsApp).
+
+### Martes 6-oct · noche · revisión de la web V2 (ChatGPT) y arreglos que no necesitan ok
+
+Maikel compartió la revisión de ChatGPT de la web V2 y dijo «podemos ir haciendo lo que consideres».
+
+**Documentos:**
+- **`content/web-copy-actual-2026-10-06.md`.** El copy de 39 páginas, palabra por palabra, con avisos contra R1 a R18. Se sube a Notion debajo de la revisión.
+- **`content/web-v2/decisiones-p0.md`**, también en Notion. Recoge:
+  - el posicionamiento;
+  - la message house ajustada a nuestras reglas;
+  - el CTA único;
+  - la arquitectura;
+  - qué es Intelligence;
+  - la evidencia que podemos afirmar;
+  - lo que no cogemos de la revisión (los segundos de respuesta como promesa, los lemas, el CTA «Auditoría»).
+- **Content OS.** El recorrido pasa a 7 etapas, que acaban en la reactivación, con Intelligence como capa de medición.
+
+**Arreglos en la web publicada:**
+- **Botones.** 82 páginas interiores mandaban «Solicitar diagnóstico» a `/#contacto`. Ahora van a `/diagnostico/`. En el blog, con UTM: 159 botones en total.
+- **Caso mal atribuido.** En `/consultoria-ia/`, «8 seg del anuncio al CRM» pasa de EAC a Focus Practical, que es de quien es.
+- **`sitemap.xml`:**
+  - fuera `/hola/`, que es noindex;
+  - fuera las URL repetidas;
+  - dentro clínicas, reformas y asesorías.
+- **Blog:**
+  - fuera la tarjeta repetida de «Cuánto cuesta Google Ads»;
+  - «Conceptos, sin humo» pasa a ser «Conceptos» en 7 páginas.
+
+**No lo he tocado, es de Maikel o de Growth:**
+- las promesas de respuesta «en dos minutos» y «de noche» (R2), que hay que confirmar con Growth para los sistemas de los clientes;
+- la garantía visible;
+- los logos y resultados fuera de las páginas de caso;
+- el banner de borrador de equipos comerciales.
