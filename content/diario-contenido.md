@@ -1046,6 +1046,17 @@ Corregido también, fuera de las piezas revisadas:
   - Nuevo párrafo tras «Cuánto deberías invertir», con el caso y el enlace al artículo de hoy.
   - Cierre con un solo botón.
 
+### Master Reviewer (6-oct)
+
+Informe en `content/borradores/revision-master-reviewer-2026-10-06.md`. Nota 5 al artículo y 8 a la reorientación, las dos para publicar con cambios. He aplicado los 13 críticos. Lo importante:
+
+- **Quién propuso añadir la pregunta.** Fue Growth, a Paid, y la decisión sigue pendiente. No es «nuestro equipo la ha añadido».
+- **Cómo funciona la nota.** Va de la A a la D y decide quién llama si el contacto no contesta. No decide a quién se llama primero.
+- **Construcciones «no es X, es Y» disfrazadas:** fuera.
+- **Paso 4 añadido** (presupuesto del mes), para que el artículo esté completo frente al de Meta.
+
+**Decisión propia, por prudencia.** El contacto sigue abierto: compara agencias y tiene llamada el 15-oct. He quitado la fecha y he dejado de decir que su precio es «bajo». Ahora pone «el precio de su servicio cambiaba toda la cuenta». Si leyera el artículo, no encontraría un juicio sobre su negocio. Maikel puede pedirme que quite el caso entero.
+
 ### Borradores
 
 - **Martes:** no hago pieza nueva. La semana de redes ya está cubierta con los cuatro posts de cobertura (`content/linkedin/2026-10-06-air-cover.md`), y el primero toca hoy a las 8:30. Una pieza más diluiría la coherencia que buscamos con la prospección.
