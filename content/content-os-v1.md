@@ -227,7 +227,7 @@ Lo que cambia:
 | Instagram de Maikel | Secundario: carruseles y vídeo del tema semanal | 1 carrusel y 1 vídeo por semana |
 | Blog | Autoridad temática y SEO (§7) | 1 pilar o actualización por semana |
 | Newsletter de Qualivo | Base con permiso. Marca Qualivo, «nosotros» | Quincenal, en cuanto el DNS esté bien (R17) |
-| Nurturing | Leads nuevos de formación y clínicas, 6 toques | Encendido. Lo dueña Growth y contenido revisa los textos |
+| Nurturing | Leads nuevos de formación y clínicas, 6 toques | Encendido. Lo lleva Growth y contenido revisa los textos |
 | /para/ y outbound | Capa personalizada por cuenta | Lo genera Growth con la plantilla de contenido |
 | Web | Historia única (§6) | Cambios con aprobación |
 
