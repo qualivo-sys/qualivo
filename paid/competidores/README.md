@@ -28,3 +28,4 @@ supervivencia del anuncio · tracking que llevan.
 - `uptail.md` · plataforma SaaS de agentes IA para educación (vecino, no agencia).
 - `solumize.md` · agencia IA Madrid, SDR de IA desde 280 €/mes (vecino barato).
 - `aurora-inbox.md` · SaaS de chatbot WhatsApp para clínicas (vecino barato).
+- `impulso-business-lab.md` · programa high-ticket para emprendedores; referencia de formulario con precio y forma de pago (no competidor directo).
