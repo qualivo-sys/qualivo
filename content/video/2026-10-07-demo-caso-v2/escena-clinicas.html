@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Demo-caso v2 · clínicas (encargo de Paid, 7-oct). Mismo lenguaje que los QV_3V del 17-sep:
+     verde Qualivo, Anton, pantallas simuladas, reloj con marcas de tiempo, sin personas ni imagen de archivo.
+     ?f=916 da 1080x1920; sin parámetro, 1080x1350 (4:5). Tiempos en T (se rehacen con la locución). -->
+<link rel="stylesheet" href="base.css">
+<style>
+#e.v916{height:1920px}
+#stage{left:157px;top:140px;transform:scale(.78)}
+#e.v916 #stage{top:250px;left:100px;transform:scale(1)}
+#e.v916 #cap{bottom:200px;font-size:62px}
+#e.v916 #hook h1{font-size:122px}
+#e.v916 #reloj{top:80px}#e.v916 #ej{top:102px}
+#hook .quien{font-family:Anton;font-size:40px;letter-spacing:.06em;text-transform:uppercase;color:#F4CC38;opacity:0}
+#hook h1{position:relative}
+#hook .h2{position:absolute;left:80px;right:80px;font-family:Anton;font-size:112px;line-height:.95;text-transform:uppercase;color:#F4CC38;opacity:0}
+.q{border:3px solid #0A0A0B;border-radius:18px;padding:16px 22px;margin-bottom:18px;background:#fff;opacity:0}
+.q small{display:block;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:#7A7C82;font-weight:700;margin-bottom:10px}
+.ops{display:flex;flex-wrap:wrap;gap:10px}
+.op{border:3px solid #0A0A0B;border-radius:999px;padding:8px 18px;font-size:24px;font-weight:700}
+.op.sel{background:#0A0A0B;color:#F4CC38}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.tri .col{height:640px}
+.tri .col h4{font-family:Anton;font-size:30px;letter-spacing:.03em;color:#0A0A0B}
+.tri .col.ok h4{color:#0E7C74}.tri .col.ko h4{color:#C2410C}
+.tri .lead{opacity:0}
+.camino{position:absolute;left:0;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:36px 44px;opacity:0}
+.camino .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.camino.ko .k{color:#C2410C}.camino.ok .k{color:#0E7C74}
+.camino h3{font-family:Anton;font-size:56px;line-height:1.02;text-transform:uppercase}
+.camino p{font-size:28px;line-height:1.4;color:#3D4148;margin-top:12px}
+.paso{display:grid;grid-template-columns:70px 1fr;gap:0 18px;align-items:center;padding:18px 0;border-top:2px solid rgba(10,10,11,.12);font-size:30px;line-height:1.3;opacity:0}
+.paso i{font-style:normal;width:62px;height:62px;border-radius:50%;background:#0E7C74;color:#F4F1EB;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800}
+.paso small{display:block;font-size:20px;color:#7A7C82;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.meta{position:absolute;left:0;top:90px;width:880px;background:#0A0A0B;color:#F4F1EB;border-radius:36px;padding:44px 48px}
+.meta .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#F4CC38;margin-bottom:16px}
+.meta h2{font-family:Anton;font-size:62px;line-height:1;text-transform:uppercase;margin-bottom:22px}
+.meta .dato{border-top-color:rgba(244,241,235,.15)}.meta .dato b{color:rgba(244,241,235,.55)}
+.flecha{font-family:Anton;font-size:40px;color:#F4CC38;margin-top:24px;opacity:0;line-height:1.1;text-transform:uppercase}
+#s9 .t1{font-family:Anton;font-size:78px;line-height:.98;text-transform:uppercase;color:#0A0A0B}
+#s9 .t2{font-family:Anton;font-size:78px;line-height:.98;text-transform:uppercase;color:#F4F1EB}
+#s9 .btn2{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:26px 44px;border-radius:20px}
+#s9 .sub2{font-family:Anton;font-size:46px;text-transform:uppercase;color:#0A0A0B}
+#s9{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;padding:0 20px}
+#s9 img{width:420px}
+#s9 .web{font-family:Anton;font-size:40px;letter-spacing:.06em;color:#F4CC38}
+</style>
+<div id="e">
+  <div id="hook"><div class="quien" id="hq">Tu recepción:</div><h1 id="h1">«Los pacientes de Instagram <i>solo preguntan precio.</i>»</h1><div class="h2" id="h2">Mira el anuncio que los trajo.</div></div>
+  <div id="ej">Caso de ejemplo · Clínica Dental Sur</div>
+  <div id="reloj"><span>desde el anuncio</span><b>00:00</b></div>
+  <div id="stage">
+    <div class="sc" id="s1"><div class="phone"><div class="screen"><div class="ig">
+      <div class="igh"><div class="av"></div><div><b>Clínica Dental Sur</b><span>Patrocinado</span></div></div>
+      <div class="igi"><h4>¿Te falta una pieza y quieres empezar este mes?</h4><p>Implantes en Sevilla. Valoración con el doctor, 30 minutos. Si no es para ti, te lo decimos.</p></div>
+      <div class="igb">Reservar valoración</div>
+    </div></div></div></div>
+    <div class="sc" id="s2"><div class="phone"><div class="screen"><div class="form">
+      <h3>Antes de reservar</h3><p>Tres preguntas. Así te atiende quien toca.</p>
+      <div class="q"><small>¿Qué te interesa?</small><div class="ops"><span class="op" data-s="1">Implante</span><span class="op">Ortodoncia</span><span class="op">Limpieza</span><span class="op">Otro</span></div></div>
+      <div class="q"><small>¿Cuándo quieres empezar?</small><div class="ops"><span class="op" data-s="1">Este mes</span><span class="op">En 3 meses</span><span class="op">Solo miro</span></div></div>
+      <div class="q"><small>¿Ya te han valorado en otra clínica?</small><div class="ops"><span class="op" data-s="1">Sí</span><span class="op">No</span></div></div>
+      <div class="btn">Ver horas libres</div>
+    </div></div></div></div>
+    <div class="sc" id="s3"><div class="board"><div class="k">Entrada · se clasifica sola</div>
+      <div class="tri">
+        <div class="col ok"><h4>Encaja</h4><div class="lead" style="top:70px">Carla R.<small>Implante · este mes</small></div><div class="lead" style="top:190px">Jorge M.<small>Ortodoncia · este mes</small></div></div>
+        <div class="col"><h4>Necesita info</h4><div class="lead" style="top:70px">Lucía P.<small>Implante · en 3 meses</small></div></div>
+        <div class="col ko"><h4>No encaja</h4><div class="lead" style="top:70px">Pablo S.<small>Limpieza · solo mira</small></div><div class="lead" style="top:190px">Ana G.<small>Vive en otra provincia</small></div></div>
+      </div>
+      <div class="rule">Con las respuestas del formulario. <b>Antes de que nadie descuelgue.</b></div>
+    </div></div>
+    <div class="sc" id="s4"><div class="camino ko" style="top:40px"><div class="k">No encaja · Pablo</div><h3>«Todavía no.»</h3><p>Te decimos por qué y la puerta queda abierta.</p></div>
+      <div class="camino ok" id="s4b" style="top:420px"><div class="k">Encaja · Carla</div>
+        <div class="paso"><i>✓</i><span>Reserva su valoración<small>en el mismo momento</small></span></div>
+        <div class="paso"><i>✓</i><span>Confirmación por WhatsApp<small>jueves · 18:00</small></span></div>
+        <div class="paso"><i>✓</i><span>Recordatorio<small>la víspera</small></span></div>
+      </div></div>
+    <div class="sc" id="s5"><div class="meta"><div class="k">Señal de vuelta al anuncio</div><h2>Carla encaja.<br>Vino a la valoración.</h2>
+      <div class="dato"><b>Anuncio</b><span>Implantes · este mes</span></div>
+      <div class="dato"><b>Se avisa a</b><span>Meta</span></div>
+      <div class="flecha" id="fl5">→ Busca más como ella.</div></div></div>
+    <div class="sc" id="s6"><div class="mail" style="top:70px"><div class="k"><span>Informe de la mañana</span><span>07:30</span></div><h2>Lo que necesitas saber</h2>
+      <div class="li"><i>42</i><span>solicitudes esta semana</span></div>
+      <div class="li"><i>17</i><span><b>encajan</b></span></div>
+      <div class="li"><i>9</i><span>valoraciones <b>reservadas</b></span></div>
+      <div class="li bad"><i>1</i><span>anuncio trae <b>solo preguntas de precio</b></span></div>
+      <div class="li"><i>→</i><span><b>Prioridad de hoy:</b> los 3 que necesitan info.</span></div>
+      <div class="ej">Datos de ejemplo</div>
+    </div></div>
+    <div class="sc" id="s7"><div id="mapa"><svg width="880" height="1240" viewBox="0 0 880 1240" id="msvg"></svg>
+      <div id="centro"><img src="rec/logo-blanco.png"></div>
+      <div class="base">Anuncio · formulario · WhatsApp · agenda · CRM</div>
+    </div></div>
+  </div>
+  <div id="wide" style="position:absolute;left:80px;right:80px;top:100px;bottom:120px"><div class="sc" id="s9">
+    <div class="t1">¿Tu clínica ya invierte en anuncios?</div><div class="t2">¿Y no te compran?</div>
+    <div class="sub2">Dónde falla tu recorrido</div><div class="btn2">Revisar mis fugas →</div>
+    <img src="rec/logo-blanco.png"><div class="web">QUALIVO.IO</div></div></div>
+  <div id="cap"></div>
+  <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
+  <div id="tex"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const V916=new URLSearchParams(location.search).get('f')==='916'; if(V916) $('e').classList.add('v916');
+const H=V916?1920:1350;
+$('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="'+H+'"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+// inicio de cada bloque (s); se sustituye por los tiempos de la locución
+const T=window.TIEMPOS||{hook:0,giro:2.2,s1:4.2,s2:8.2,s3:13.2,s4:19.2,s4b:22.0,s5:27.5,s6:32.5,s7:38.5,s9:42.5}; const DUR=window.DURACION||48;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3);
+function win(t,a,b,fi=.35,fo=.3){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
+function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
+const S={hook:[0,T.s1], s1:[T.s1,T.s2], s2:[T.s2,T.s3], s3:[T.s3,T.s4], s4:[T.s4,T.s5], s5:[T.s5,T.s6], s6:[T.s6,T.s7], s7:[T.s7,T.s9], s9:[T.s9,DUR+1]};
+const CAPS=[[S.s1,'Un anuncio que le habla <i>a quien sí quieres.</i>'],[S.s2,'El formulario pregunta <i>lo que importa.</i>'],[S.s3,'Cada contacto, <i>en su sitio.</i>'],[S.s4,'Dos caminos. <i>Ninguno se queda colgado.</i>'],[S.s5,'Le decimos a Meta quién era un buen contacto, <i>para que busque más como ese.</i>'],[S.s6,'Cada mañana: <i>qué anuncio trae pacientes.</i>'],[S.s7,'No son siete automatizaciones. <i>Es un sistema.</i>']];
+const RELOJ=[[S.s1,'desde el anuncio','00:00'],[S.s2,'en el formulario','00:40'],[S.s3,'al enviarlo','00:01'],[[T.s4,T.s4b],'al enviarlo','00:01'],[[T.s4b,T.s5],'reserva','00:02'],[S.s5,'después de la valoración','+3 días'],[S.s6,'a la mañana siguiente','07:30']];
+(function(){const NOD=[['Anuncio','01'],['Formulario','02'],['Clasifica','03'],['Reserva','04'],['Recuerda','05'],['Avisa a Meta','06'],['Informe','07']]; const m=$('mapa'); let sv=''; NOD.forEach((n,i)=>{const a=-Math.PI/2+i*2*Math.PI/7; const x=440+Math.cos(a)*360, y=620+Math.sin(a)*360; const d=document.createElement('div'); d.className='nodo'; d.id='nd'+i; d.style.left=x+'px'; d.style.top=y+'px'; d.innerHTML='<small>'+n[1]+'</small>'+n[0]; m.appendChild(d); sv+=`<line x1="440" y1="620" x2="${x}" y2="${y}" stroke="#0A0A0B" stroke-width="5" opacity=".35"/>`;}); sv+=`<circle cx="440" cy="620" r="360" fill="none" stroke="#0A0A0B" stroke-width="5" stroke-dasharray="14 14" opacity=".45"/>`; $('msvg').innerHTML=sv;})();
+window.setT=function(t){
+  const hk=$('hook'); hk.style.opacity=win(t,0,S.hook[1],.01,.4);
+  show($('hq'),nm(t,.05,.35),20); show($('h1'),nm(t,.15,.6)*(1-nm(t,T.giro,T.giro+.25)),30);
+  show($('h2'),nm(t,T.giro+.2,T.giro+.55),30); $('h2').style.top=(V916?820:560)+'px';
+  $('ej').style.opacity=(t>S.s1[0]&&t<S.s7[0])?1:0;
+  const r=RELOJ.find(x=>t>=x[0][0]&&t<x[0][1]); const rl=$('reloj'); if(r){rl.style.opacity=win(t,r[0][0],r[0][1],.3,.3); rl.innerHTML='<span>'+r[1]+'</span><b>'+r[2]+'</b>';} else rl.style.opacity=0;
+  const cap=$('cap'); const c=CAPS.find(x=>t>=x[0][0]&&t<x[0][1]); if(c){cap.innerHTML=c[1]; show(cap,win(t,c[0][0],c[0][1],.3,.25),18);} else cap.style.opacity=0;
+  show($('s1'),win(t,S.s1[0],S.s1[1]-.05,.3,.3),30);
+  const a2=S.s2[0]; show($('s2'),win(t,a2,S.s2[1]-.05,.3,.3),30); document.querySelectorAll('#s2 .q').forEach((q,i)=>{show(q,nm(t,a2+.4+i*1.1,a2+.7+i*1.1),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>a2+1.0+i*1.1));});
+  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),40); document.querySelectorAll('#s3 .lead').forEach((d,i)=>show(d,nm(t,a3+.6+i*.55,a3+.9+i*.55),-30));
+  const a4=S.s4[0]; show($('s4'),win(t,a4,S.s4[1]-.05,.3,.3),1); show($('s4').querySelector('.ko'),nm(t,a4+.1,a4+.45),30); show($('s4b'),nm(t,T.s4b,T.s4b+.35),30); document.querySelectorAll('#s4 .paso').forEach((d,i)=>show(d,nm(t,T.s4b+.4+i*1.1,T.s4b+.7+i*1.1),14));
+  const a5=S.s5[0]; show($('s5'),win(t,a5,S.s5[1]-.05,.3,.3),40); document.querySelectorAll('#s5 .dato').forEach((d,i)=>show(d,nm(t,a5+.8+i*.5,a5+1.1+i*.5),14)); show($('fl5'),nm(t,a5+2.2,a5+2.6),14);
+  const a6=S.s6[0]; show($('s6'),win(t,a6,S.s6[1]-.05,.3,.3),40); document.querySelectorAll('#s6 .li').forEach((d,i)=>show(d,nm(t,a6+.5+i*.7,a6+.8+i*.7),14));
+  const a7=S.s7[0]; show($('s7'),win(t,a7,S.s7[1]-.05,.3,.3),30); for(let i=0;i<7;i++) $('nd'+i).classList.toggle('on',t>a7+.3+i*.4);
+  const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); const k=$('s9').children; for(let i=0;i<k.length;i++) show(k[i],nm(t,a9+[0,1.0,2.0,2.4,0,0][i],a9+[0,1.0,2.0,2.4,0,0][i]+.3),16);
+};
+window.setT(0);
+</script>
