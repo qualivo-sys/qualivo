@@ -62,3 +62,56 @@ embebido. Reseñas en plataforma verificada externa.
   cliente B (clínica, escuela) desconfía de ese tono; el lead nivel A de clínicas
   dijo literalmente que Meta es "escaparate" por anuncios así.
 - 1 h 15 de "sesión gratuita": es una llamada de venta disfrazada.
+
+## Segundo embudo, recorrido entero por Maikel (7-oct) · "Solicitar una plaza"
+Distinto del de la sesión estratégica. Capturas de Maikel, los dos caminos.
+
+**Página**: *"Solo para negocios digitales que venden programas, formación o
+servicios"* · botón "Solicitar una plaza" · logos de clientes · *"Responde en menos
+de 3 minutos, descubre si podemos garantizarte el éxito y agenda tu auditoría"*.
+Bloque "Qué incluye el sistema": montado desde el día 1 ("tú solo abres la agenda
+y atiendes llamadas"), oferta "que vende sola a desconocidos", +300 negocios /
++1,2 M€, **"si en 30 días no vendes, no nos pagas. Sin letra pequeña: si no
+generas mínimo 7.000 €/mes, no nos debes nada"**, caso 2k→21k en 90 días,
+"10-30 €/día en anuncios es todo lo que necesitas", ROAS x7-x12.
+
+**Formulario de dos pasos, tres preguntas abiertas** (no desplegables):
+1. Datos personales + consentimiento comercial.
+2. *¿De qué trata tu negocio y qué quieres conseguir?* · *¿Cuál ha sido tu
+   facturación media en los últimos 3 meses?* · *¿Cuándo quieres tomar acción?*
+
+**Dos salidas, decididas al instante**:
+- **"Todavía no encajamos."** *"Nuestro sistema está diseñado para coaches,
+  consultores, infoproductores y agencias digitales. Con tu tipo de negocio no
+  podríamos garantizarte resultados, y preferimos decírtelo antes de que pierdas
+  el tiempo en una llamada. Si tu negocio cambia de modelo, vuelve por aquí."*
+  (Maikel entró como marketplace de maquinaria, 7k/mes, "esta semana": fuera.)
+- **"ENCAJAS."** *"Elige el día y la hora de tu auditoría. Al tocar una hora queda
+  agendada al instante."* Calendario con 5 días y 4 huecos, confirmación por
+  email, "puedes cambiar o cancelar cuando quieras", "sin tarjeta ni compromiso".
+
+**Lectura**: la clasificación es automática (probablemente por palabras clave del
+tipo de negocio y por la facturación) y el rechazo está escrito con respeto y
+deja la puerta abierta. El que encaja reserva sin hablar con nadie. El "no
+encajas" es, además, prueba social: demuestra que seleccionan.
+
+**Contradicción**: la garantía de esta página ("sin letra pequeña, 30 días,
+7.000 €/mes") no es la de las condiciones publicadas (12 semanas, 5 grabaciones,
+5 guiones, "no automática"). Dos promesas distintas en el mismo dominio.
+
+### Qué nos llevamos de este recorrido
+- **La pantalla de "no encajas" con el porqué.** Hoy nuestro C recibe el mismo
+  WhatsApp que un A. Un "todavía no encajamos, y te decimos por qué" ahorra
+  cadencia, respeta al lead y vende selección. Para nosotros, el criterio es
+  tamaño (solicitudes/mes, personas, ticket), no tipo de negocio.
+- **Reserva al instante para el que encaja**, sin esperar al WhatsApp. Es el
+  test de landing del 12-oct: si el B reserva solo, la cadencia queda para el
+  medio y el C.
+- **Preguntas abiertas en vez de tramos**: "¿de qué trata tu negocio y qué
+  quieres conseguir?" da el dolor con sus palabras (lo que Ops dice que mejor
+  predice la reunión). Coste: hay que clasificar con IA o a mano; en GHL se puede.
+- "Responde en menos de 3 minutos" como promesa de esfuerzo acotado.
+
+### Qué no
+- Garantías incoherentes entre páginas; "+1,2 M€", "ROAS x7-x12" sin fuente.
+  Nuestro comprador B lo lee como humo.
