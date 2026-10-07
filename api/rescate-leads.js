@@ -36,9 +36,24 @@ function valor(campos, nombres) {
 }
 
 // Devuelve el contacto si existe (por email o teléfono), o null.
+// El CRM guarda el correo en minúsculas y el teléfono con prefijo (+34...), y
+// Meta entrega el correo tal como lo escribió el lead y el móvil sin prefijo.
+// Sin normalizar, un lead con mayúsculas en el correo o sin +34 no se encontraba
+// nunca y el rescate lo volvía a crear en cada vuelta (7-oct: Fred, un aviso a
+// Maikel cada 2 minutos y una etiqueta y una nota nuevas cada vez).
 async function existeEnCrm(email, telefono) {
-  for (const [campo, val] of [['email', email], ['phone', telefono]]) {
-    if (!val) continue;
+  const correo = String(email || '').trim().toLowerCase();
+  const tel = String(telefono || '').replace(/[\s().-]/g, '');
+  const telefonos = [];
+  if (tel) {
+    telefonos.push(tel);
+    if (/^\d{9}$/.test(tel)) telefonos.push('+34' + tel);
+    else if (/^34\d{9}$/.test(tel)) telefonos.push('+' + tel);
+  }
+  const candidatos = [];
+  if (correo) candidatos.push(['email', correo]);
+  telefonos.forEach(function (t) { candidatos.push(['phone', t]); });
+  for (const [campo, val] of candidatos) {
     const r = await fetch(GHL_BASE + '/contacts/search', {
       method: 'POST', headers: cabeceras(),
       body: JSON.stringify({
