@@ -23,3 +23,11 @@ Medición: UTM del anuncio en cada contacto (`utm_content` = anuncio) y `origen=
 - Rangos de «valor de un cliente» y de volumen (propuesta del 7-oct, sección 14).
 - Si se muestran datos de nuestro propio embudo como prueba.
 - Que el «no encaja» y el precio visibles queden para V2.
+
+## V2 (7-oct-2026) · `/recorrido/v2/`
+
+Propuesta del Head of Content, más corta (44 % menos en móvil): gancho del anuncio 08 → «¿Cuáles te pasan?» (marcar rellena la pregunta del formulario) → qué te llevas de los 30 minutos + filtro en una línea → formulario con tres dudas al lado (cuánto cuesta, qué preparo, con quién hablo). Foto y nombre de Maikel en el hero, CTA fijo en móvil.
+
+Quitado de la V1: la sección de datos propios (daba la tasa de plantones, regla R7), el enlace de salida a la demo de Intelligence, el bloque largo de reencuadre y el FAQ separado. Sin precio ni garantía. El formulario sigue sin enviarse; el cableado pendiente es el mismo que el de la V1.
+
+Compromiso a confirmar por Maikel antes de publicar: «plan por escrito en 24 h».

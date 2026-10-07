@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR V2 de la landing «¿Dónde se pierden tus oportunidades?» (7-oct-2026, Head of Content).
+     Propuesta de mejora de /recorrido/ (V1): mismo gancho del anuncio 08, más corta, oferta clara,
+     autodiagnóstico que rellena el formulario y CTA fijo en móvil. Recortada a 4 bloques (7-oct, petición de Maikel). Sin datos propios (R7), sin precio,
+     sin garantía, sin resultados de clientes. noindex. El formulario NO se envía (igual que la V1). -->
+<meta name="robots" content="noindex,nofollow">
+<title>Borrador V2 · ¿Dónde se pierden tus oportunidades? · Qualivo</title>
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --tinta:#101319; --negro:#08090C; --crema:#FAF7F0; --blanco:#FFFFFF;
+  --teal:#0E7C74; --teal-claro:#27BDB1; --amarillo:#F4CC38; --lila:#EFECFB;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --rojo:#C2410C;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--teal-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(56px,7vw,92px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(30px,4.8vw,50px);max-width:20ch}
+h3{font-size:clamp(19px,2.6vw,23px);letter-spacing:-.02em;line-height:1.15}
+p{font-size:clamp(16.5px,2.1vw,18.5px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:14px}
+.borrador{background:var(--amarillo);color:var(--tinta);text-align:center;font-weight:800;font-size:13px;padding:8px 16px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 30px;border-radius:14px;
+  background:var(--amarillo);color:var(--tinta);font-weight:900;font-size:clamp(16px,2.1vw,18.5px);text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 12px 32px rgba(244,204,56,.26);transition:transform .16s ease,box-shadow .16s ease;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(244,204,56,.36)}
+.btn-top{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+
+/* barra superior */
+.top{background:var(--negro);color:#fff;padding:12px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top img{height:22px;width:auto;display:block}
+
+/* hero */
+.hero{background:var(--negro);color:#fff;padding:clamp(40px,6vw,76px) 0 clamp(48px,7vw,88px);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-200px;top:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.28),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.grid-h{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,64px);align-items:center}
+.chip{display:inline-flex;align-items:center;gap:9px;background:rgba(39,189,177,.14);border:1px solid rgba(39,189,177,.45);color:var(--teal-claro);
+  font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px;margin-bottom:22px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--teal-claro);display:block}
+.hero h1{font-size:clamp(32px,4.6vw,54px);line-height:1.04;max-width:18ch}
+.hero h1 span{color:var(--amarillo)}
+.hero .bajada{font-size:clamp(17px,2.3vw,20.5px);color:#C6CBD3;margin:22px 0 0;max-width:48ch;line-height:1.5}
+.hero .cta{margin-top:30px}
+.micro{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:16px;font-size:14.5px;color:#AEB5BF;font-weight:600}
+.micro b{color:#fff}
+.micro span::before{content:'✓';color:var(--teal-claro);font-weight:900;margin-right:7px}
+.quien-hace{display:flex;align-items:center;gap:14px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12)}
+.quien-hace img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.2)}
+.quien-hace p{font-size:14.5px;color:#AEB5BF;line-height:1.45}
+.quien-hace b{color:#fff}
+
+/* camino del contacto (hero) */
+.camino{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:20px 20px 16px}
+.camino .lbl{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);margin-bottom:12px;display:flex;justify-content:space-between}
+.camino .lbl em{font-style:normal;color:#8E96A2}
+.et{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.07);
+  font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E6E9EE}
+.flecha{height:18px;padding-left:16px;color:#6C7480;font-size:13px;line-height:18px}
+.no{font-size:11.5px;font-weight:900;letter-spacing:.04em;color:#FF9B7A;background:rgba(255,120,80,.12);border:1px solid rgba(255,120,80,.35);padding:3px 9px;border-radius:999px;white-space:nowrap;
+  opacity:0;transform:translateX(8px);transition:opacity .4s ease,transform .4s ease}
+.camino.on .no{opacity:1;transform:none}
+.camino.on .no:nth-of-type(1){transition-delay:.2s}
+.et.ult{background:var(--amarillo);color:var(--tinta)}
+.camino .nota-c{margin-top:12px;font-size:13px;color:#8E96A2;line-height:1.4}
+.camino .nota-c b{color:#fff}
+
+/* autodiagnóstico */
+.reconoce{background:var(--crema)}
+.reconoce .sub{color:var(--gris);margin-top:14px;max-width:46ch}
+.frases{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:34px}
+.frase{display:flex;gap:14px;align-items:flex-start;text-align:left;background:#fff;border:1.5px solid rgba(16,19,25,.1);border-radius:16px;padding:20px 22px;cursor:pointer;
+  font-family:inherit;color:inherit;transition:border-color .16s ease,background .16s ease,transform .16s ease;width:100%}
+.frase:hover{border-color:rgba(14,124,116,.45)}
+.frase .box{flex:0 0 26px;height:26px;border-radius:8px;border:2px solid rgba(16,19,25,.22);display:grid;place-items:center;font-weight:900;font-size:15px;color:#fff;margin-top:2px;transition:all .16s ease}
+.frase q{display:block;font-weight:900;font-size:clamp(18px,2.3vw,20.5px);letter-spacing:-.02em;line-height:1.2;quotes:none;margin-bottom:6px}
+.frase span.d{display:block;font-size:15.5px;color:var(--gris);line-height:1.45}
+.frase[aria-pressed="true"]{border-color:var(--teal);background:#F2FBFA}
+.frase[aria-pressed="true"] .box{background:var(--teal);border-color:var(--teal)}
+.veredicto{margin-top:22px;border-radius:16px;padding:20px 24px;background:var(--tinta);color:#fff;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.veredicto p{font-size:17px;font-weight:700;max-width:52ch}
+.veredicto p b{color:var(--amarillo)}
+.veredicto .btn{min-height:52px;font-size:16px;padding:0 22px}
+
+/* qué te llevas */
+.llevas{background:var(--lila)}
+.tres3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:36px}
+.t3{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px}
+.t3 .n{width:36px;height:36px;border-radius:10px;background:var(--amarillo);display:grid;place-items:center;font-weight:900;margin-bottom:14px}
+.t3 h3{margin-bottom:8px}
+.t3 p{font-size:16px;color:var(--gris);line-height:1.5}
+.filtro{margin-top:18px;font-size:15.5px;color:var(--gris)}
+.filtro b{color:var(--tinta)}
+@media(max-width:800px){.tres3,.frases{grid-template-columns:1fr}}
+
+/* formulario */
+.form{background:var(--negro);color:#fff}
+.form h2{color:#fff;max-width:16ch}
+.form .bajada{color:#AEB5BF;margin:18px 0 0;max-width:44ch}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,56px);align-items:start}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.dudas{margin-top:28px;display:grid;gap:14px}
+.dudas div{font-size:15.5px;color:#AEB5BF;line-height:1.5;padding-left:16px;border-left:2px solid rgba(39,189,177,.5)}
+.dudas b{color:#fff;display:block}
+.caja-f{background:#fff;color:var(--tinta);border-radius:20px;padding:clamp(24px,4vw,34px)}
+.prog{height:6px;border-radius:6px;background:#ECEDEF;overflow:hidden;margin-bottom:18px}
+.prog i{display:block;height:100%;width:50%;background:var(--teal);border-radius:6px;transition:width .35s ease}
+.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:8px}
+.campo{display:block;margin-bottom:16px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:7px}
+.campo input,.campo select{width:100%;min-height:52px;padding:13px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--teal-claro)}
+.campo.ok select{border-color:var(--teal)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.preview-cal{border:1.5px dashed rgba(16,19,25,.25);border-radius:14px;min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--gris);font-size:15.5px;line-height:1.5}
+.preview-nota{margin-top:12px;background:var(--lila);border-radius:12px;padding:13px 15px;font-size:14px;color:var(--gris);line-height:1.5}
+[hidden]{display:none !important}
+
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+
+/* CTA fijo en móvil */
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+@media(max-width:760px){.fijo{display:block}.top .btn-top{display:none}}
+
+@media(max-width:860px){.grid-h{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;scroll-behavior:auto !important}.no{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR V2 · propuesta de mejora de /recorrido/ · el formulario no se envía</div>
+
+<div class="top">
+  <div class="wrap">
+    <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo">
+    <a class="btn btn-top" href="#reservar">Reservar diagnóstico</a>
+  </div>
+</div>
+
+<!-- 1 · HERO: continúa el gancho del anuncio 08 -->
+<header class="hero">
+  <div class="wrap">
+    <div class="grid-h">
+      <div>
+        <div class="chip"><i></i>Si ya inviertes en anuncios</div>
+        <h1>¿No contestan, no vienen o llegan sin dinero? <span>Mira quién está entrando.</span></h1>
+        <p class="bajada">En 30 minutos repasamos contigo el camino entero, del anuncio a la venta, y te digo dónde se pierde el negocio.</p>
+        <div class="cta"><a class="btn" href="#reservar" data-cta="hero">Quiero ver dónde se pierde&nbsp;→</a></div>
+        <div class="micro"><span>Gratis</span><span>30 minutos</span><span>Plan por escrito en 24&nbsp;h</span></div>
+        <div class="quien-hace">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+          <p>La llamada la hago yo, <b>Maikel Echevarría</b>, fundador de Qualivo.</p>
+        </div>
+      </div>
+      <div class="camino" id="camino" aria-label="Ejemplo: el camino de un contacto y dónde se pierde">
+        <div class="lbl"><span>El camino de un contacto</span><em>Ejemplo</em></div>
+        <div class="et">Anuncio</div><div class="flecha">↓</div>
+        <div class="et">Formulario <span class="no">✕ No encaja</span></div><div class="flecha">↓</div>
+        <div class="et">Respuesta <span class="no">✕ No contesta</span></div><div class="flecha">↓</div>
+        <div class="et">Reunión <span class="no">✕ No viene</span></div><div class="flecha">↓</div>
+        <div class="et">Propuesta <span class="no">✕ Sin presupuesto</span></div><div class="flecha">↓</div>
+        <div class="et ult">Venta</div>
+        <p class="nota-c">Cada <b>✕</b> es un punto donde se puede perder un cliente. En la llamada buscamos cuál te cuesta más.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2 · AUTODIAGNÓSTICO: marca las que te pasan (rellena el formulario) -->
+<section class="sec reconoce">
+  <div class="wrap">
+    <h2>¿Cuáles te pasan?</h2>
+    <p class="sub">Marca las que te suenen.</p>
+    <div class="frases" id="frases">
+      <button type="button" class="frase" aria-pressed="false" data-p="Muchos no responden"><span class="box">✓</span><span><q>«No me contestan.»</q><span class="d">Pagas el contacto, le escribes y silencio.</span></span></button>
+      <button type="button" class="frase" aria-pressed="false" data-p="Reservan y no se presentan"><span class="box">✓</span><span><q>«Reservan y no vienen.»</q><span class="d">La agenda parece llena; el día de la llamada, no.</span></span></button>
+      <button type="button" class="frase" aria-pressed="false" data-p="Llegan sin presupuesto"><span class="box">✓</span><span><q>«Llegan sin presupuesto.»</q><span class="d">Lo descubres en la reunión, cuando ya es tarde.</span></span></button>
+      <button type="button" class="frase" aria-pressed="false" data-p="No sé dónde está el problema"><span class="box">✓</span><span><q>«No sé dónde se pierden.»</q><span class="d">Marketing culpa a ventas, ventas a los contactos.</span></span></button>
+    </div>
+    <div class="veredicto" id="veredicto" aria-live="polite">
+      <p id="vtxt">Si te pasa alguna, la llamada te dice en qué punto se pierde el negocio.</p>
+      <a class="btn" href="#reservar" data-cta="autodiagnostico">Verlo en 30 minutos&nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · QUÉ TE LLEVAS DE LOS 30 MINUTOS -->
+<section class="sec llevas">
+  <div class="wrap">
+    <h2>Qué te llevas de los 30 minutos.</h2>
+    <div class="tres3">
+      <div class="t3"><div class="n">1</div><h3>Tu recorrido, con números</h3><p>Del anuncio a la venta: cuántos entran, contestan, vienen y compran.</p></div>
+      <div class="t3"><div class="n">2</div><h3>La fuga que más te cuesta</h3><p>En qué punto se pierde más negocio y por qué.</p></div>
+      <div class="t3"><div class="n">3</div><h3>Qué arreglaría primero</h3><p>Una sola cosa, por escrito en 24 horas. Lo hagas con nosotros o no.</p></div>
+    </div>
+    <p class="filtro"><b>Todavía no es para ti</b> si estás empezando y aún no tienes clientes ni anuncios.</p>
+  </div>
+</section>
+
+<!-- 8 · FORMULARIO (vista previa: no se envía) -->
+<section class="sec form" id="reservar">
+  <div class="wrap">
+    <div class="grid2">
+      <div>
+        <p class="eyebrow" style="color:var(--teal-claro)">Reserva tu diagnóstico</p>
+        <h2>Vamos a ver dónde se pierde tu negocio.</h2>
+        <p class="bajada">Cinco preguntas y eliges hora. Con tus respuestas preparo la llamada.</p>
+        <div class="dudas">
+          <div><b>¿Cuánto cuesta?</b> Nada.</div>
+          <div><b>¿Qué preparo?</b> Tres números aproximados: contactos al mes, cuántos compran y cuánto vale un cliente.</div>
+          <div><b>¿Con quién hablo?</b> Conmigo, Maikel. Si no tiene sentido para vosotros, te lo digo en la llamada.</div>
+        </div>
+      </div>
+      <div class="caja-f">
+        <form id="f" novalidate>
+          <div class="prog" aria-hidden="true"><i id="barra"></i></div>
+          <div id="p1">
+            <div class="paso-n">Paso 1 de 2 · tu negocio</div>
+            <label class="campo"><span>¿A qué se dedica tu empresa?</span>
+              <select name="sector" required>
+                <option value="">Elige una opción</option>
+                <option>Formación o academia</option>
+                <option>Salud, clínica o bienestar</option>
+                <option>Reformas, construcción o instalaciones</option>
+                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
+                <option>Otro servicio</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuántos contactos comerciales recibes al mes?</span>
+              <select name="volumen" required>
+                <option value="">Elige una opción</option>
+                <option>Menos de 20</option>
+                <option>De 20 a 49</option>
+                <option>De 50 a 99</option>
+                <option>De 100 a 250</option>
+                <option>Más de 250</option>
+              </select>
+            </label>
+            <label class="campo" id="c-problema"><span>¿Qué te pasa sobre todo con ellos?</span>
+              <select name="problema" required>
+                <option value="">Elige una opción</option>
+                <option>Muchos no responden</option>
+                <option>Reservan y no se presentan</option>
+                <option>Llegan sin presupuesto</option>
+                <option>El seguimiento es irregular</option>
+                <option>No entran los suficientes</option>
+                <option>No sé dónde está el problema</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuánto vale, más o menos, un cliente nuevo?</span>
+              <select name="valor" required>
+                <option value="">Elige una opción</option>
+                <option>Menos de 300 €</option>
+                <option>Entre 300 y 1.000 €</option>
+                <option>Entre 1.000 y 3.000 €</option>
+                <option>Entre 3.000 y 10.000 €</option>
+                <option>Más de 10.000 €</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Para cuándo quieres arreglarlo?</span>
+              <select name="cuando" required>
+                <option value="">Elige una opción</option>
+                <option>Este mes</option>
+                <option>En 1 a 3 meses</option>
+                <option>Más adelante</option>
+                <option>Solo estoy explorando</option>
+              </select>
+            </label>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
+            <p class="seguro">Un minuto. Sin compromiso.</p>
+          </div>
+          <div id="p2" hidden>
+            <div class="paso-n">Paso 2 de 2 · dónde te aviso</div>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <label class="campo"><span>Web de tu empresa (opcional)</span><input type="text" name="web" placeholder="tuempresa.com"></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%">Elegir hora&nbsp;→</button>
+            <p class="seguro">Tus datos solo se usan para preparar la llamada.</p>
+          </div>
+          <div id="p3" hidden>
+            <div class="paso-n">Último paso</div>
+            <h3 style="margin-bottom:8px">Coge el hueco que te venga bien.</h3>
+            <p style="font-size:16px;color:var(--gris);margin-bottom:18px">30 minutos. Reviso lo que me has contado antes de la llamada.</p>
+            <div class="preview-cal">Aquí iría el calendario real de 30 minutos (el mismo de /diagnostico/). En la vista previa no se carga, para no reservar huecos por error.</div>
+            <div class="preview-nota"><b>Vista previa:</b> al enviar, las respuestas se guardarían en el CRM y el contacto seguiría la cadencia actual.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<div class="fijo" id="fijo"><a class="btn" href="#reservar" data-cta="fijo">Quiero ver dónde se pierde&nbsp;→</a></div>
+
+<script>
+(function(){
+  'use strict';
+  /* el camino del hero: las ✕ aparecen al cargar */
+  var camino=document.getElementById('camino');
+  setTimeout(function(){ camino.classList.add('on'); }, 300);
+  var noes=camino.querySelectorAll('.no'); noes.forEach(function(n,i){ n.style.transitionDelay=(0.35+i*0.35)+'s'; });
+
+  /* autodiagnóstico */
+  var f=document.getElementById('f');
+  var botones=document.querySelectorAll('#frases .frase'), vtxt=document.getElementById('vtxt');
+  function veredicto(){
+    var marcadas=[].filter.call(botones,function(b){return b.getAttribute('aria-pressed')==='true';});
+    var n=marcadas.length;
+    if(n===0) vtxt.innerHTML='Si te pasa alguna, la llamada te dice en qué punto se pierde el negocio.';
+    else if(n===1) vtxt.innerHTML='Te pasa <b>1</b>. En la llamada vemos si es algo puntual o hay más detrás.';
+    else vtxt.innerHTML='Te pasan <b>'+n+'</b>. Probablemente hay más de una fuga. Merece la pena mirarlo.';
+    /* la primera marcada rellena «¿Qué te pasa?» del formulario */
+    var sel=f.elements.problema;
+    if(n>0){ sel.value=marcadas[0].getAttribute('data-p'); document.getElementById('c-problema').classList.add('ok'); }
+  }
+  botones.forEach(function(b){ b.addEventListener('click',function(){ b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); veredicto(); }); });
+
+  /* formulario en dos pasos (vista previa: no se envía) */
+  var p1=document.getElementById('p1'), p2=document.getElementById('p2'), p3=document.getElementById('p3');
+  var e1=document.getElementById('e1'), e2=document.getElementById('e2'), barra=document.getElementById('barra');
+  function ver(el,pct){ [p1,p2,p3].forEach(function(x){x.hidden=x!==el;}); barra.style.width=pct+'%'; window.scrollTo({top:f.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'}); }
+  function falta(n){ return n.filter(function(k){ var c=f.elements[k]; return !c || !String(c.value||'').trim(); }); }
+  document.getElementById('b1').addEventListener('click',function(){
+    var m=falta(['sector','volumen','problema','valor','cuando']);
+    if(m.length){ e1.textContent='Te falta'+(m.length>1?'n ':' ')+m.length+' pregunta'+(m.length>1?'s':'')+' por contestar.'; e1.hidden=false; return; }
+    e1.hidden=true; ver(p2,85);
+  });
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var m=falta(['nombre','email','telefono']);
+    if(m.length||!f.elements.rgpd.checked){ e2.textContent='Rellena nombre, email y teléfono y acepta la política de privacidad.'; e2.hidden=false; return; }
+    e2.hidden=true; ver(p3,100);
+    /* VISTA PREVIA: no se envía nada. Cableado a /api/diagnostico pendiente (ver recorrido/README.md). */
+  });
+
+  /* CTA fijo en móvil: aparece tras el hero y se esconde al llegar al formulario */
+  var fijo=document.getElementById('fijo'), hero=document.querySelector('.hero'), form=document.getElementById('reservar');
+  if('IntersectionObserver' in window){
+    var heroVis=true, formVis=false;
+    function pinta(){ fijo.classList.toggle('on', !heroVis && !formVis); }
+    new IntersectionObserver(function(e){ heroVis=e[0].isIntersecting; pinta(); }).observe(hero);
+    new IntersectionObserver(function(e){ formVis=e[0].isIntersecting; pinta(); },{threshold:.1}).observe(form);
+  }
+})();
+</script>
+</body>
+</html>
