@@ -4,12 +4,14 @@
 
 ## Ficha
 
+- **Revisión (7-oct):** Master Reviewer, nota 6, publicar con cambios. Aplicados sus 6 críticos: fecha (el 6-oct fue martes), lo hizo el agente, siete tareas y no siete tratos, fuera «ninguna manda nada sola», fuera «con su motivo», imagen con la pareja «ahora no → más adelante» y pie como consejo.
+
 - **Tema de la semana (Content OS §5.3):** semana 41, siguiente paso y CRM.
 - **Etapa del Revenue Journey:** seguimiento.
 - **Dato real:** daily de Growth del 6-oct (`bus/out/demand.jsonl`). Ese día se crearon tareas con fecha para todos los tratos abiertos: 7 tareas, sin acción en cadencias. El cambio de Meta del mismo día cuenta que los leads buenos que ahora no pueden empezar pasan a «Más adelante» en vez de descartados.
 - **Reglas que toca:**
   - **R5:** sin nombres.
-  - **R7:** no da tasas propias. Siete es el número de tratos abiertos, no una tasa.
+  - **R7:** no da tasas propias. Siete es el número de tareas creadas, no una tasa.
   - **R9:** la tarea es para una persona y no manda mensajes sola, así que no da a entender ningún envío automático.
   - **R12:** primero el acierto.
 - **Acierto primero:** cada trato tiene escrito qué toca y qué día. **Fallo:** ninguno que contar. La pieza es práctica.
@@ -21,14 +23,14 @@
 
 ## Texto para LinkedIn
 
-> El lunes le pusimos una tarea con fecha a cada trato abierto de mi empresa.
+> El 6 de octubre, en mi empresa, el agente que lleva el CRM le puso una
+> tarea con fecha a cada trato abierto.
 >
-> Siete tratos, siete tareas. Cada una dice qué toca hacer y qué día. Ninguna
-> manda nada sola: es para una persona.
+> Siete tareas, cada una con su fecha. Cada una le dice a una persona qué
+> toca hacer y qué día.
 >
 > Ese mismo día movimos a «más adelante» a varios contactos que encajan pero
-> que ahora no pueden empezar. Con su motivo apuntado, para saber cuándo
-> volver a escribirles.
+> que ahora no pueden empezar, en vez de darlos por perdidos.
 >
 > La bandera roja de un CRM es una ficha que solo cuenta lo que ya pasó: la
 > última llamada, la propuesta enviada. Nada de lo que toca después.
@@ -38,8 +40,8 @@
 
 ## Pie para Instagram (misma imagen)
 
-> El lunes le pusimos una tarea con fecha a cada trato abierto de mi empresa.
-> Siete tratos, siete tareas.
+> El 6 de octubre, en mi empresa, el agente que lleva el CRM le puso una
+> tarea con fecha a cada trato abierto. Siete tareas, cada una con su fecha.
 >
 > Si tu CRM solo cuenta lo que ya pasó, no te va a avisar cuando una
 > oportunidad se pare.

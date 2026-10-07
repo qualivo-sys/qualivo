@@ -1203,3 +1203,31 @@ Maikel compartió la revisión de ChatGPT de la web V2 y dijo «podemos ir hacie
 - la garantía visible;
 - los logos y resultados fuera de las páginas de caso;
 - el banner de borrador de equipos comerciales.
+
+### Miércoles 7-oct · trabajo del día
+
+**Publicado:**
+- **[/blog/pipeline-de-ventas/](https://qualivo.io/blog/pipeline-de-ventas/).** Tema de la semana 41. El dato viene del daily de Growth del 6-oct: siete tareas con fecha, una en cada trato abierto, y los leads buenos que ahora no pueden empezar pasan a «más adelante». Va con tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+- **Re-apunte de [/blog/crm-gratis-para-pymes/](https://qualivo.io/blog/crm-gratis-para-pymes/).**
+  - Los dos últimos párrafos, sin un «no es X, es Y» y sin cifras de terceros sin fuente.
+  - Enlace al artículo nuevo.
+  - Un solo CTA al diagnóstico, sin el botón de la calculadora.
+
+**Borrador:** `content/borradores/2026-10-07-bandera-roja-tratos-sin-fecha.md`, con la imagen `content/infografias/2026-10-07/tratos-con-fecha.png`. Es para Instagram, o para LinkedIn el jueves 15 si hoy sale el post 1 de cobertura.
+
+**Revisión del Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-07.md`): artículo 5, re-apunte 8 y bandera roja 6. Aplicados todos los críticos:
+- **El día:** el 6-oct fue martes, no lunes.
+- **Las cifras:** «siete tareas», no «siete tratos».
+- **Quién lo hizo:** el agente, no Maikel.
+- **Lo que no tiene fuente:** fuera «casi nunca» y «casi siempre», y «lo que funciona» pasa a «lo que recomendamos».
+- **Voz:** fuera dos «no es X, es Y» disfrazados y el lema en espejo del destacado.
+- **El ancla a seguimiento-comercial**, que era un «no es X, es Y» literal. El H1 de ese artículo queda pendiente.
+
+**Descartado:** el capítulo de newsletter del jueves (punto D de la rutina). Con el Content OS la newsletter pasa a quincenal, y el próximo envío previsto es la semana 45, con la de plantones ya corregida. Escribir uno cada semana choca con eso. Se recupera si Maikel mantiene la rutina actual (D4).
+
+**Decisiones para Maikel:**
+1. **D1, LinkedIn:** publicar hoy el post 1 de cobertura. Recomendación: sí, coincide con las primeras conexiones de Growth.
+2. **D4:** cambiar la rutina de las 7:15 al modelo semanal. Recomendación: sí, porque hoy la rutina y el Content OS se contradicen (artículo diario y newsletter semanal).
+3. **D7:** el WhatsApp automático desde su número. Recomendación: hablarlo con Growth antes del post 3.
+
+**Hipótesis para mañana:** si el post 1 sale hoy, las cuentas A que reciben la conexión de Growth miran el perfil y alguna lo comenta o lo menciona al responder. Se mide el viernes con Growth.
