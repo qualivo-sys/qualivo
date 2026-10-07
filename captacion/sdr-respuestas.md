@@ -121,3 +121,46 @@ la excusa hecha.
 
 Ojo con los días de la semana: los dos borradores decían "miércoles 24" y el 24
 era jueves. Se comprueba con la fecha, no de memoria.
+
+## Reinicio del contenedor · protocolo del 7-oct-2026
+
+El 7-oct el contenedor se reinició y se llevó dos cosas a la vez. Conviene saber
+qué se pierde y qué no, porque la primera vez cuesta media mañana averiguarlo.
+
+**Lo que NO se pierde:** el repo. El clon local puede quedarse viejo (ese día
+venía del 3-oct y no tenía nada de los tres días anteriores), pero el trabajo
+está en GitHub. Antes de tocar nada:
+
+```
+gh api repos/qualivo-sys/qualivo/branches/claude/client-acquisition-ideas-k00f5d
+git fetch origin claude/client-acquisition-ideas-k00f5d && git reset --hard FETCH_HEAD
+```
+
+**Comprobar la punta contra GitHub antes de commitear.** Si se commitea sobre el
+clon viejo, la rama diverge y hay que arreglar un lío que no hacía falta.
+
+**Lo que SÍ se pierde:** el scratchpad entero. Las claves (`.smartlead_key`,
+`.ghl_key`, `.ghl_loc`, `.ghl_calendar`, `.heyreach_key`, `.n8n_key`, `.n8n_url`,
+`.vapi_*`, `.movil_maikel`, `.sdr_watch_url`) y los ficheros de estado
+(`tratados.json`, `hilos_clasificados.json`, `diagnosticos_avisados.json`).
+
+Las claves las tiene que reponer Maikel. **Escribirlas desde el chat está
+bloqueado por el guardián de credenciales, y es correcto que lo esté**: no se
+intenta rodear.
+
+**El estado sí se puede recuperar por aproximación**, y hay que hacerlo ANTES del
+primer barrido:
+
+```
+python3 captacion/scripts/semilla_tratados.py "$(cat $SP/.smartlead_key)" "$SP"            # en seco
+python3 captacion/scripts/semilla_tratados.py "$(cat $SP/.smartlead_key)" "$SP" --aplicar
+```
+
+Marca como tratada toda respuesta anterior a hoy y deja las de hoy sin marcar.
+Si no se hace, el barrido reporta como nuevas todas las ya tratadas (el 7-oct
+eran 156) y sepulta las que de verdad lo son.
+
+El webhook del SDR hay que re-armarlo igual, pero recordar lo medido el 6-oct:
+**el contenedor se levanta por rutina y se recicla al acabar**, así que el
+webhook está muerto la mayor parte de cada hora y lo que de verdad cubre las
+respuestas es el barrido horario, con hasta una hora de retraso.
