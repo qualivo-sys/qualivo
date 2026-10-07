@@ -123,6 +123,23 @@ Plantilla:
 
 ---
 
+## Octubre 2026
+
+### 08 · «Quién está entrando» (7-oct)
+- **Estado:** borrador para aprobar. No subido. Paso 1 del test por patas (primero el anuncio, luego landing y preparación de la reunión).
+- **Vertical:** formación, clínicas y reformas (sin variante por sector todavía).
+- **Etapa:** captación y cualificación (calidad de entrada).
+- **Dolor:** contactos que no contestan, no vienen o llegan sin dinero.
+- **Ángulo:** pérdida y contrarian («puede que el problema no sea tu equipo, sino quién entra»).
+- **Formato:** Maikel a cámara y pantallas reales (WhatsApp, agenda, ficha). 9:16, 42 s y versión de 25-30 s.
+- **Hooks:** 1 «Si los que te piden información no contestan, no vienen o llegan a la llamada sin dinero… puede que el problema no sea tu equipo.» · 2 «Diez personas reservaron una llamada contigo. Vinieron cuatro. Y dos te dijeron que ahora no tenían dinero.» (ejemplo, rotulado) · 3 «No es que te lleguen contactos malos. Es que estás pagando por gente que nunca iba a comprar.» · 4 «El contacto más caro puede ser el que te cuesta cinco euros.»
+- **Mecanismo que enseña:** respuesta en minutos, preguntas que filtran, seguimiento y llamada si no contesta, ficha antes de la reunión. Sin Intelligence ni «qué anuncio trajo al lead» (no hay panel real; origen en el CRM incoherente).
+- **CTA:** «Si ya inviertes en anuncios y te entran contactos cada semana, pero demasiados no avanzan, reserva un diagnóstico de 30 minutos». Filtro visible: «si todavía no tienes anuncios ni clientes, esto aún no es para ti».
+- **Fuente:** guion de Maikel del 7-oct, ajustado a `contexto.md` sección 5. Brief completo en Notion («Anuncio 08 · Quién está entrando · paso 1 del test»).
+- **Hipótesis de test:** menos contactos pero más A/B y más reuniones celebradas que el control, con el mismo formulario, audiencia y presupuesto.
+- **Pendiente:** el formulario aún dice «desde 750 €/mes»; decidir antes de subir. Medir con UTM y anuncio identificado.
+- **Resultados:** falta dato (no lanzado).
+
 ## Pendiente de la semana 1 (5-9 oct)
 - Decidir qué borradores entran al test, corrigiendo antes las promesas marcadas con ⚠️.
 - Mismo conjunto, mismo formulario y mismo presupuesto. Se decide por coste por lead A/B y reuniones celebradas, no por CPL.
