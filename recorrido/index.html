@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR de la landing V1 «¿Dónde se pierden tus oportunidades?». Paso 2 del test por patas (después del anuncio 08).
+     No indexar, no enlazar, no enviar tráfico. El formulario NO se envía: es solo la vista previa.
+     Pendiente de aprobación: texto, sección de datos propios, rangos de las preguntas, y el cableado a /api/diagnostico. -->
+<meta name="robots" content="noindex,nofollow">
+<title>Borrador · ¿Dónde se pierden tus oportunidades? · Qualivo</title>
+<link rel="icon" href="/assets/img/favicon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --tinta:#101319; --negro:#08090C; --crema:#FAF7F0; --blanco:#FFFFFF;
+  --naranja:#0E7C74; --naranja-claro:#27BDB1; --amarillo:#F4CC38; /* el acento pasa del naranja al verde de marca (16-sep) */
+  --teal:#0E7C74; --teal-claro:#27BDB1; --lila:#EFECFB;
+  --gris:#5A5E66; --gris-claro:#7A7C82;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(56px,8vw,104px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1}
+h1{font-size:clamp(38px,7.2vw,80px)}
+h2{font-size:clamp(30px,5.4vw,56px);letter-spacing:-.032em;line-height:1.02}
+h3{font-size:clamp(20px,3vw,26px);letter-spacing:-.02em;line-height:1.15}
+p{font-size:clamp(16.5px,2.2vw,19px)}
+.na{color:var(--naranja)} .am{color:var(--amarillo)} .te{color:var(--teal-claro)}
+
+/* barra fina superior, sin menú: una sola cosa que hacer */
+.top{background:var(--negro);color:#fff;padding:14px 0;font-size:14px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top img{height:22px;width:auto}
+.top span{color:#9AA2AE}
+.top b{color:var(--amarillo);font-weight:700}
+
+/* hero */
+.hero{background:var(--negro);color:#fff;padding:clamp(52px,8vw,92px) 0 clamp(60px,9vw,110px);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.32),transparent 65%)}
+.hero .wrap{position:relative;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:9px;background:rgba(39,189,177,.14);border:1px solid rgba(39,189,177,.45);color:var(--teal-claro);
+  font-size:13.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;border-radius:999px;margin-bottom:26px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--teal-claro);display:block}
+.hero h1{max-width:15ch}
+.hero .bajada{font-size:clamp(17.5px,2.6vw,22px);color:#C6CBD3;margin:26px 0 0;max-width:50ch;line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;
+  background:var(--amarillo);color:var(--tinta);font-weight:900;font-size:clamp(16px,2.2vw,19px);text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 12px 32px rgba(244,204,56,.26);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(244,204,56,.34)}
+.btn.grande{min-height:68px;padding:0 38px}
+.hero .cta{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hero .cta small{color:#8E96A2;font-size:14.5px;line-height:1.5}
+.tres{display:flex;gap:10px 30px;flex-wrap:wrap;margin-top:42px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14)}
+.tres div{font-size:15px;color:#C6CBD3;display:flex;align-items:center;gap:9px;font-weight:600}
+.tres b{color:#fff;font-weight:800}
+
+/* problema */
+.dicho{background:var(--lila)}
+.dicho .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.dicho .caja{background:#fff;border-radius:16px;padding:26px 28px}
+.dicho .caja.mal{border:1px solid rgba(16,19,25,.1)}
+.dicho .caja.bien{background:var(--tinta);color:#fff}
+.dicho .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:14px}
+.dicho .mal .lbl{color:var(--gris-claro)} .dicho .bien .lbl{color:var(--amarillo)}
+.dicho li{list-style:none;font-size:17px;line-height:1.5;padding:10px 0;border-top:1px solid rgba(16,19,25,.08)}
+.dicho .bien li{border-color:rgba(255,255,255,.14)}
+.dicho li:first-child{border-top:none}
+@media(max-width:700px){.dicho .par{grid-template-columns:1fr}}
+
+/* qué analizamos */
+.mapa{background:var(--crema)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:44px}
+.card{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px 24px 22px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--naranja)}
+.card:nth-child(3n+2)::before{background:var(--teal)}
+.card:nth-child(3n+3)::before{background:var(--amarillo)}
+.card .n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:10px}
+.card h3{margin-bottom:8px}
+.card p{font-size:16px;color:var(--gris);line-height:1.45}
+
+/* pasos */
+.pasos{background:var(--tinta);color:#fff}
+.pasos h2{color:#fff}
+.escalera{margin-top:46px;display:grid;gap:12px}
+.paso{display:grid;grid-template-columns:92px 1fr;gap:22px;align-items:start;background:rgba(255,255,255,.05);border-radius:16px;padding:26px 28px;border:1px solid rgba(255,255,255,.1)}
+.paso .num{font-size:clamp(38px,6vw,54px);font-weight:900;line-height:.9;letter-spacing:-.04em;color:rgba(255,255,255,.22)}
+.paso h3{color:#fff;margin-bottom:8px}
+.paso p{color:#AEB5BF;font-size:17px;line-height:1.5}
+.paso.destacado{background:var(--amarillo);border-color:var(--amarillo)}
+.paso.destacado .num{color:rgba(16,19,25,.3)}
+.paso.destacado h3,.paso.destacado p{color:var(--tinta)}
+.paso.destacado p{opacity:.82}
+@media(max-width:600px){.paso{grid-template-columns:1fr;gap:8px}}
+
+/* garantía */
+.garantia{background:var(--amarillo);color:var(--tinta)}
+.garantia .caja{text-align:center;max-width:760px;margin:0 auto}
+.garantia h2{font-size:clamp(32px,6vw,62px)}
+.garantia p{max-width:52ch;margin:26px auto 0;font-size:clamp(17px,2.4vw,20px);color:rgba(16,19,25,.78)}
+
+/* para quién */
+.quien .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.quien .caja{border-radius:16px;padding:28px 30px}
+.quien .si{background:rgba(14,124,116,.08);border:1px solid rgba(14,124,116,.28)}
+.quien .no{background:#fff;border:1px solid rgba(16,19,25,.1)}
+.quien h3{margin-bottom:16px}
+.quien .si h3{color:var(--teal)} .quien .no h3{color:var(--gris)}
+.quien li{list-style:none;font-size:16.5px;line-height:1.45;padding:11px 0 11px 30px;position:relative;color:var(--gris)}
+.quien .si li::before{content:'✓';position:absolute;left:0;top:10px;color:var(--teal);font-weight:900}
+.quien .no li::before{content:'✕';position:absolute;left:0;top:10px;color:var(--naranja);font-weight:900}
+@media(max-width:700px){.quien .par{grid-template-columns:1fr}}
+
+/* faq */
+.faq details{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:22px 26px;font-weight:800;font-size:17.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:26px;font-weight:700;color:var(--naranja);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 26px 24px;color:var(--gris);font-size:16.5px;line-height:1.6}
+
+/* formulario */
+.form{background:var(--negro);color:#fff}
+.form h2{color:#fff;max-width:16ch}
+.form .bajada{color:#AEB5BF;margin:20px 0 0;max-width:44ch}
+.form .caja{background:#fff;color:var(--tinta);border-radius:20px;padding:clamp(26px,4vw,38px);margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,56px);align-items:start}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--naranja);margin-bottom:8px}
+.campo{display:block;margin-bottom:18px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:8px}
+.campo input,.campo select,.campo textarea{width:100%;min-height:54px;padding:14px 16px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;
+  font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)}
+.campo textarea{min-height:96px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--teal-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:6px 0 18px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
+.err{color:#C2410C;font-weight:700;font-size:14.5px;margin:0 0 14px}
+.hp{position:absolute;left:-9999px}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera{background:var(--lila);border-radius:14px;padding:26px 28px}
+.fuera h3{margin-bottom:12px}
+.fuera p{font-size:16.5px;color:var(--gris);margin-bottom:18px}
+.btn-sec{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:12px;background:var(--tinta);color:#fff;
+  font-weight:800;font-size:16px;text-decoration:none}
+.pie{background:var(--negro);color:#6C7480;padding:28px 0 40px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+[hidden]{display:none !important}
+
+/* logos y casos */
+.logos{background:#fff;padding:clamp(36px,5vw,56px) 0}
+.logos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);text-align:center;margin-bottom:26px}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px clamp(26px,4vw,48px);opacity:.75}
+.casos{background:var(--tinta);color:#fff;padding:clamp(40px,6vw,64px) 0}
+.casos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--amarillo);text-align:center;margin-bottom:26px}
+.casos .rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px 18px;text-align:center;align-items:center}
+.casos .n{white-space:nowrap;font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo)}
+.casos p{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:#AEB5BF}
+.casos p b{color:#fff;font-weight:700}
+.casos .lg{display:block;height:34px;width:auto;margin:14px auto 0;filter:brightness(0) invert(1);opacity:.85}
+.casos .destacado .lg{filter:grayscale(1) brightness(.45) contrast(1.6);opacity:1;height:60px}
+.casos .destacado{background:var(--amarillo);border-radius:16px;padding:18px 14px 16px;color:var(--tinta)}
+.casos .destacado .n{color:var(--tinta)}
+.casos .destacado p{color:rgba(16,19,25,.8)}
+.casos .destacado p b{color:var(--tinta)}
+
+/* los ocho */
+.ocho{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px}
+.ocho div{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;padding:18px 18px 16px}
+.ocho b{display:block;font-size:12px;letter-spacing:.16em;color:var(--naranja);font-weight:800;margin-bottom:6px}
+.ocho h3{font-size:18px;margin-bottom:4px}
+.ocho p{font-size:14.5px;color:var(--gris);line-height:1.4}
+@media(max-width:860px){.ocho{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.ocho{grid-template-columns:1fr}}
+
+/* fuga → agente */
+.agente{background:var(--negro);color:#fff}
+.agente h2{color:#fff}
+.filas{margin-top:40px;border-top:1px solid rgba(255,255,255,.14)}
+.fila-a{display:grid;grid-template-columns:200px 40px 1fr;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.fila-a .f{font-weight:900;font-size:19px;color:var(--naranja);letter-spacing:-.01em}
+.fila-a .fl{color:var(--amarillo);font-weight:900;font-size:22px;text-align:center}
+.fila-a .a{font-size:16.5px;color:#D5D9E0;line-height:1.45}
+.fila-a .a b{color:var(--amarillo)}
+@media(max-width:600px){.fila-a{grid-template-columns:1fr;gap:4px}.fila-a .fl{display:none}}
+.sines{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.sines div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px 22px}
+.sines h3{color:#fff;font-size:19px;margin-bottom:6px}
+.sines p{font-size:15.5px;color:#AEB5BF;line-height:1.45}
+@media(max-width:700px){.sines{grid-template-columns:1fr}}
+.remate{margin-top:36px;font-size:clamp(22px,3.4vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+
+/* botón de WhatsApp, fijo abajo a la derecha */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;
+  background:#25D366;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.28);transition:transform .16s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:26px;height:26px;flex-shrink:0}
+@media(max-width:600px){.wa{padding:0;width:58px;height:58px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}}
+
+/* casos publicados */
+.pub{background:var(--tinta);color:#fff;padding:clamp(56px,7vw,84px) 0}
+.pub h2{color:#fff;margin-bottom:34px;max-width:22ch}
+.pub .rej2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.pub a{display:block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:26px 26px 24px;text-decoration:none;transition:border-color .16s ease,transform .16s ease}
+.pub a:hover{border-color:rgba(244,204,56,.55);transform:translateY(-2px)}
+.pub .m{font-family:var(--display);font-size:clamp(32px,4.4vw,44px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo);margin-bottom:6px}
+.pub .ms{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#8E96A2;margin-bottom:14px}
+.pub .ti{font-size:17px;line-height:1.35;font-weight:800;color:#fff;margin-bottom:10px}
+.pub .su{font-size:14px;line-height:1.45;color:#8E96A2;margin-bottom:14px}
+.pub .le{font-size:14.5px;font-weight:800;color:var(--amarillo)}
+
+/* vídeo de 48 s justo debajo del hero: misma paleta, continúa el fondo oscuro */
+.video{background:var(--negro);padding:0 0 clamp(40px,6vw,64px)}
+.video .caja{max-width:920px;margin:0 auto;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.45);aspect-ratio:16/9}
+.video video{width:100%;height:100%;display:block;object-fit:cover}
+.video .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);text-align:center;margin:0 0 16px}
+
+/* ====== recorrido V1 (borrador) ====== */
+.borrador{background:#F4CC38;color:#101319;text-align:center;font-weight:800;font-size:13.5px;padding:9px 16px;letter-spacing:.02em}
+.hero h1{max-width:20ch;font-size:clamp(32px,4.9vw,56px);line-height:1.06}
+.hero .grid-h{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(28px,5vw,60px);align-items:center}
+@media(max-width:860px){.hero .grid-h{grid-template-columns:1fr}}
+.camino{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:22px 22px 18px}
+.camino .lbl{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);margin-bottom:14px;display:flex;justify-content:space-between;gap:10px}
+.camino .lbl em{font-style:normal;color:#8E96A2}
+.camino .et{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.07);
+  font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#E6E9EE}
+.camino .et + .flecha{height:22px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;color:#6C7480;font-size:15px}
+.camino .no{font-size:11.5px;font-weight:900;letter-spacing:.06em;color:#FF9B7A;background:rgba(255,120,80,.12);border:1px solid rgba(255,120,80,.35);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.camino .ult{background:var(--amarillo);color:var(--tinta)}
+.reconoce{background:var(--crema)}
+.reconoce .sub{max-width:44ch;margin-top:16px;color:var(--gris)}
+.frases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:40px}
+.frase{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px 24px 22px}
+.frase q{display:block;font-weight:900;font-size:clamp(19px,2.6vw,23px);letter-spacing:-.025em;line-height:1.15;quotes:none;margin-bottom:10px}
+.frase p{font-size:16px;color:var(--gris);line-height:1.5}
+.cierre-reconoce{margin-top:34px;font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-.03em;line-height:1.15;max-width:34ch}
+.reencuadre{background:var(--lila)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+@media(max-width:760px){.dos{grid-template-columns:1fr}}
+.dos .col{border-radius:16px;padding:26px 28px}
+.dos .a{background:#fff;border:1px solid rgba(16,19,25,.1)}
+.dos .b{background:var(--tinta);color:#fff}
+.dos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:14px}
+.dos .a .lbl{color:var(--gris-claro)} .dos .b .lbl{color:var(--amarillo)}
+.dos ol{list-style:none;counter-reset:n}
+.dos li{counter-increment:n;padding:11px 0 11px 36px;position:relative;font-size:16.5px;line-height:1.45;border-top:1px solid rgba(16,19,25,.08)}
+.dos .b li{border-color:rgba(255,255,255,.14)}
+.dos li:first-child{border-top:none}
+.dos li::before{content:counter(n);position:absolute;left:0;top:10px;width:24px;height:24px;border-radius:50%;background:rgba(16,19,25,.08);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.dos .b li::before{background:rgba(255,255,255,.14);color:var(--amarillo)}
+.dos .a li::before{content:'✕';background:rgba(194,65,12,.1);color:#C2410C}
+.frase-clave{margin-top:34px;font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-.03em;line-height:1.15;max-width:36ch}
+.propios{background:var(--tinta);color:#fff}
+.propios h2{color:#fff;max-width:20ch}
+.propios .nota-ap{display:inline-block;margin-top:14px;background:rgba(244,204,56,.14);border:1px solid rgba(244,204,56,.4);color:var(--amarillo);font-size:12.5px;font-weight:800;padding:6px 12px;border-radius:999px}
+.hechos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:36px}
+.hecho{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px}
+.hecho .n{font-size:clamp(32px,4.6vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo);margin-bottom:10px}
+.hecho p{font-size:16px;color:#C6CBD3;line-height:1.45}
+.pie-datos{margin-top:22px;font-size:13.5px;color:#8E96A2;max-width:70ch}
+.demo-i{background:var(--crema)}
+.demo-i .caja-i{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:18px;padding:clamp(24px,4vw,36px);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.demo-i h3{margin-bottom:8px}
+.demo-i p{color:var(--gris);font-size:16.5px;max-width:52ch}
+.demo-i .ej{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--naranja);margin-bottom:8px}
+.preview-cal{border:1.5px dashed rgba(16,19,25,.25);border-radius:14px;min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;color:var(--gris);font-size:16px;line-height:1.5}
+.preview-nota{margin-top:14px;background:var(--lila);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--gris);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR · vista previa de la landing V1 · el formulario no se envía</div>
+
+<div class="top">
+  <div class="wrap">
+    <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" onerror="this.outerHTML='<strong style=&quot;font-weight:900;letter-spacing:-.02em&quot;>Qualivo</strong>'">
+    <span>Diagnóstico de <b>30 minutos</b></span>
+  </div>
+</div>
+
+<!-- 1 · HERO: continúa literalmente el gancho del anuncio 08 -->
+<header class="hero">
+  <div class="wrap">
+    <div class="grid-h">
+      <div>
+        <div class="chip"><i></i>Para empresas que ya invierten en anuncios</div>
+        <h1>Si no contestan, no vienen o llegan sin dinero, puede que el problema no sea tu equipo.</h1>
+        <p class="bajada">Puede que esté en quién está entrando. Miro el camino entero, del anuncio a la venta, y te enseño en qué punto se pierde el negocio.</p>
+        <div class="cta">
+          <a class="btn grande" href="#reservar">Ver dónde pierdo oportunidades&nbsp;→</a>
+          <small>30 minutos · Sin compromiso<br>Te digo qué corregiría primero</small>
+        </div>
+      </div>
+      <div class="camino" aria-hidden="true">
+        <div class="lbl"><span>El camino de un contacto</span><em>Ejemplo</em></div>
+        <div class="et">Anuncio</div><div class="flecha">↓</div>
+        <div class="et">Formulario <span class="no">✕ No encaja</span></div><div class="flecha">↓</div>
+        <div class="et">Respuesta <span class="no">✕ No responde</span></div><div class="flecha">↓</div>
+        <div class="et">Reunión <span class="no">✕ Plantón</span></div><div class="flecha">↓</div>
+        <div class="et">Propuesta <span class="no">✕ Sin presupuesto</span></div><div class="flecha">↓</div>
+        <div class="et ult">Venta</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2 · ¿TE PASA ESTO? -->
+<section class="sec reconoce">
+  <div class="wrap">
+    <h2>Te llegan contactos. <span class="na">¿Cuántos acaban comprando?</span></h2>
+    <p class="sub">Si te suena alguna de estas, sigue leyendo.</p>
+    <div class="frases">
+      <div class="frase"><q>«No me contestan.»</q><p>Pagas por conseguir el contacto. Entra, le escribes y silencio.</p></div>
+      <div class="frase"><q>«Reservan y luego no vienen.»</q><p>La agenda parece llena. El día de la llamada se presentan bastantes menos.</p></div>
+      <div class="frase"><q>«Mi equipo dice que son malos.»</q><p>Mucho curioso, gente comparando y otros que todavía no están preparados.</p></div>
+      <div class="frase"><q>«Llegamos a la reunión y no tienen presupuesto.»</q><p>Lo descubres tarde. Se podía haber visto antes.</p></div>
+      <div class="frase"><q>«No sé dónde está el problema.»</q><p>Marketing culpa a ventas, ventas culpa a los contactos y tú sigues pagando.</p></div>
+    </div>
+    <p class="cierre-reconoce">Si te suenan dos o tres, conseguir más contactos puede no ser lo primero que necesitas.</p>
+  </div>
+</section>
+
+<!-- 3 · REENCUADRE -->
+<section class="sec reencuadre">
+  <div class="wrap">
+    <h2>El problema puede empezar antes de que exista el contacto.</h2>
+    <div class="dos">
+      <div class="col a">
+        <div class="lbl">Lo habitual</div>
+        <ol>
+          <li>Un anuncio que le habla a todo el mundo</li>
+          <li>Un formulario que acepta a cualquiera</li>
+          <li>Todos acaban en la agenda</li>
+          <li>El comercial intenta salvar lo que llega</li>
+        </ol>
+      </div>
+      <div class="col b">
+        <div class="lbl">Lo que miro contigo</div>
+        <ol>
+          <li>¿Entra la persona adecuada?</li>
+          <li>¿Sabemos quién merece avanzar?</li>
+          <li>¿Responde y tiene un siguiente paso?</li>
+          <li>¿Reserva y llega preparada a la reunión?</li>
+          <li>¿Cada oportunidad llega a una decisión?</li>
+        </ol>
+      </div>
+    </div>
+    <p class="frase-clave">Si atraes a la persona equivocada arriba, ninguna automatización arregla el problema abajo.</p>
+  </div>
+</section>
+
+<!-- 4 · DATOS PROPIOS (pendiente de aprobación de Maikel: si no se aprueba, se quita la sección) -->
+<section class="sec propios">
+  <div class="wrap">
+    <h2>Esto es lo que encontramos al medir nuestro propio embudo.</h2>
+    <span class="nota-ap">BORRADOR · sección pendiente de aprobación</span>
+    <div class="hechos">
+      <div class="hecho"><div class="n">Casi la mitad</div><p>de las citas que se reservaban no llegaba a celebrarse.</p></div>
+      <div class="hecho"><div class="n">Más del doble</div><p>de reuniones salían de los contactos que contaban más peticiones al mes que de los que contaban pocas.</p></div>
+      <div class="hecho"><div class="n">Casi todos</div><p>los «no» de las últimas reuniones eran de dinero o de momento, no del producto.</p></div>
+    </div>
+    <p class="pie-datos">Datos de nuestro embudo de anuncios, del 15 de septiembre al 7 de octubre de 2026. Son muestras pequeñas: sirven para orientar, no para concluir. No son resultados de clientes.</p>
+  </div>
+</section>
+
+<!-- 5 · FILTRO ANTES DEL FORMULARIO -->
+<section class="sec quien">
+  <div class="wrap">
+    <h2>Esto no es para todo el mundo.</h2>
+    <div class="par">
+      <div class="caja si">
+        <h3>Tiene sentido si…</h3>
+        <ul>
+          <li>Ya recibes oportunidades o inviertes en anuncios.</li>
+          <li>Tu servicio deja margen suficiente.</li>
+          <li>Hay una persona o un equipo que atiende cada contacto.</li>
+          <li>Te importa la calidad, no solo conseguir formularios baratos.</li>
+          <li>Quieres saber qué pasa desde el anuncio hasta la venta.</li>
+        </ul>
+      </div>
+      <div class="caja no">
+        <h3>Probablemente todavía no si…</h3>
+        <ul>
+          <li>Estás empezando y aún no tienes clientes.</li>
+          <li>Solo buscas que te llevemos las redes.</li>
+          <li>Tu único objetivo es el contacto más barato posible.</li>
+          <li>No quieres medir lo que pasa después del contacto.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · INTELLIGENCE como enlace a la demo con datos de ejemplo -->
+<section class="sec demo-i">
+  <div class="wrap">
+    <div class="caja-i">
+      <div>
+        <div class="ej">Datos de ejemplo</div>
+        <h3>Así se ve un recorrido medido, del anuncio al resultado.</h3>
+        <p>Un panel de muestra con contactos inventados: qué anuncio trae negocio, quién se queda por el camino y por qué.</p>
+      </div>
+      <a class="btn-sec" href="/intelligence/?sector=otro&amp;empresa=Ejemplo" target="_blank" rel="noopener">Ver el panel de ejemplo</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · FAQ -->
+<section class="sec faq">
+  <div class="wrap">
+    <h2 style="margin-bottom:30px">Tres dudas habituales.</h2>
+    <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No. Si ya usas HubSpot, Pipedrive, Odoo, Zoho o GoHighLevel, se conecta o se mejora solo la parte que haga falta. Lo que funciona se queda.</p></details>
+    <details><summary>¿La IA habla sola con mis clientes?</summary><p>Los mensajes, los límites y el momento en que pasa a una persona se acuerdan contigo antes de empezar. La IA es una herramienta del proceso, no quien decide.</p></details>
+    <details><summary>¿Esto sustituye a mi equipo o a mi agencia?</summary><p>No. Puede convivir con los dos. Si ya tienes agencia, nos coordinamos con ella y se reparten claramente las responsabilidades.</p></details>
+  </div>
+</section>
+
+<!-- 8 · FORMULARIO DE DIAGNÓSTICO (vista previa: no se envía) -->
+<section class="sec form" id="reservar">
+  <div class="wrap">
+    <div class="grid2">
+      <div>
+        <h2>Vamos a ver dónde se pierde tu negocio.</h2>
+        <p class="bajada">Cuéntame cómo funciona ahora, en cinco preguntas. Con eso preparo el diagnóstico antes de la llamada, y elegir hora lleva un minuto.</p>
+        <div class="tres" style="border-top-color:rgba(255,255,255,.14)">
+          <div><b>30 minutos</b></div><div><b>Sin compromiso</b></div><div><b>Te digo qué corregiría primero</b></div>
+        </div>
+      </div>
+
+      <div class="caja">
+        <form id="f" novalidate>
+          <div id="p1">
+            <div class="paso-n">Paso 1 de 2</div>
+            <h3 style="margin-bottom:20px">Cuéntame cómo funciona ahora</h3>
+            <label class="campo"><span>¿A qué se dedica tu empresa?</span>
+              <select name="sector" required>
+                <option value="">Elige una opción</option>
+                <option>Formación o academia</option>
+                <option>Salud, clínica o bienestar</option>
+                <option>Reformas, construcción o instalaciones</option>
+                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
+                <option>Otro servicio</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuántas solicitudes o contactos comerciales recibes al mes, más o menos?</span>
+              <select name="volumen" required>
+                <option value="">Elige una opción</option>
+                <option>Menos de 20</option>
+                <option>De 20 a 49</option>
+                <option>De 50 a 99</option>
+                <option>De 100 a 250</option>
+                <option>Más de 250</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Qué te pasa sobre todo con esos contactos?</span>
+              <select name="problema" required>
+                <option value="">Elige una opción</option>
+                <option>Muchos no responden</option>
+                <option>Reservan y no se presentan</option>
+                <option>Llegan sin presupuesto</option>
+                <option>El seguimiento es irregular</option>
+                <option>No entran los suficientes</option>
+                <option>No sé dónde está el problema</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Cuánto vale, más o menos, un cliente nuevo para ti?</span>
+              <!-- Rangos por validar con Maikel y Paid (propuesta 7-oct, sección 14) -->
+              <select name="valor" required>
+                <option value="">Elige una opción</option>
+                <option>Menos de 300 €</option>
+                <option>Entre 300 y 1.000 €</option>
+                <option>Entre 1.000 y 3.000 €</option>
+                <option>Entre 3.000 y 10.000 €</option>
+                <option>Más de 10.000 €</option>
+              </select>
+            </label>
+            <label class="campo"><span>¿Para cuándo quieres arreglarlo?</span>
+              <select name="cuando" required>
+                <option value="">Elige una opción</option>
+                <option>Este mes</option>
+                <option>En 1 a 3 meses</option>
+                <option>Más adelante</option>
+                <option>Solo estoy explorando</option>
+              </select>
+            </label>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar →</button>
+          </div>
+
+          <div id="p2" hidden>
+            <div class="paso-n">Paso 2 de 2</div>
+            <h3 style="margin-bottom:8px">Perfecto. Vamos a verlo.</h3>
+            <p style="font-size:16px;color:var(--gris);margin-bottom:22px">Con esto preparo la llamada antes de que entres, para no perder tiempo en preguntas obvias.</p>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <label class="campo"><span>Web de tu empresa (opcional)</span><input type="text" name="web" placeholder="tuempresa.com"></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Elegir hora&nbsp;→</button>
+          </div>
+
+          <div id="p3" hidden>
+            <div class="paso-n">Último paso</div>
+            <h3 style="margin-bottom:8px">Coge el hueco que te venga bien.</h3>
+            <p style="font-size:16px;color:var(--gris);margin-bottom:20px">30 minutos. Reviso lo que me has contado antes de la llamada.</p>
+            <div class="preview-cal">Aquí iría el calendario real de 30 minutos (el mismo de /diagnostico/). En la vista previa no se carga, para no reservar huecos por error.</div>
+            <div class="preview-nota"><b>Vista previa:</b> al enviar, las respuestas se guardarían en el CRM y el contacto seguiría la cadencia actual. Todavía no hay pantalla de «ahora no es tu caso»; eso es V2 y necesita aprobación.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var f=document.getElementById('f'), p1=document.getElementById('p1'), p2=document.getElementById('p2'), p3=document.getElementById('p3');
+  var e1=document.getElementById('e1'), e2=document.getElementById('e2');
+  function ver(el){ [p1,p2,p3].forEach(function(x){x.hidden=x!==el;}); window.scrollTo({top:f.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'}); }
+  function falta(nombres){ return nombres.filter(function(n){ var c=f.elements[n]; return !c || !String(c.value||'').trim(); }); }
+  document.getElementById('b1').addEventListener('click',function(){
+    var m=falta(['sector','volumen','problema','valor','cuando']);
+    if(m.length){ e1.textContent='Faltan por contestar: '+m.length+' pregunta'+(m.length>1?'s':'')+'.'; e1.hidden=false; return; }
+    e1.hidden=true; ver(p2);
+  });
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var m=falta(['nombre','email','telefono']);
+    if(m.length||!f.elements.rgpd.checked){ e2.textContent='Rellena nombre, email y teléfono y acepta la política de privacidad.'; e2.hidden=false; return; }
+    e2.hidden=true;
+    /* VISTA PREVIA: no se envía nada. El cableado a /api/diagnostico queda pendiente de aprobación. */
+    ver(p3);
+  });
+})();
+</script>
+</body>
+</html>
