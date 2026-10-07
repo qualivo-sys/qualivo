@@ -36,7 +36,7 @@ hipótesis sin dato a favor, y los dos datos que tenemos van en contra.
 ### 1.1 ¿Qué parte puede testearse sin contaminar experimentos actuales?
 
 Estado de la cuenta (7-oct): solo dos conjuntos activos (formación VIEJO 15 €/día,
-clínicas VIEJO 15 €/día), vídeos de Maikel a cámara, formulario nativo de Meta.
+clínicas VIEJO 15 €/día), los dos vídeos demo-caso por vertical (70 s, sin personas), formulario nativo de Meta.
 Ningún experimento en marcha: el test de creativos (H-CREATIVO-02) se cerró
 **falsado** el 5-oct. Es decir, la cuenta está limpia para un experimento nuevo.
 
@@ -103,8 +103,10 @@ vez, el test está muerto.
 
 Datos que tenemos sobre creatividad (cuenta Qualivo, 15-sep→5-oct):
 
-- Maikel a cámara sostiene CTR 3-4 % varias semanas; los seis ganchos nuevos
-  sin cara abrieron a 5-7 % y cayeron en 48 h (H-CREATIVO-02, falsada 5-oct).
+- El vídeo demo-caso por vertical (paso a paso del sistema sobre un alumno / un
+  paciente, sin personas) sostiene CTR 3-4 % varias semanas; los seis ganchos de
+  dolor sobre imagen de archivo abrieron a 5-7 % y cayeron en 48 h (H-CREATIVO-02,
+  falsada 5-oct). Corrección 7-oct: antes decía "Maikel a cámara"; era falso.
 - Lo que trae B hoy es el **anuncio por vertical** (formación 38 % B, clínicas
   33 % B). El anuncio de "leads curiosos" nunca llegó a gastar.
 - Nuestra propia cuenta es el ejemplo del ángulo D: optimizamos a "formulario
@@ -115,8 +117,8 @@ Prioridad de Paid, con esa evidencia:
 1. **Ángulo D ("Meta aprende del lead equivocado") vestido de vertical.** Es el
    encargo a Creative ya redactado: *"tus anuncios de la clínica traen gente que
    no puede pagar el tratamiento"* / *"más de 100 solicitudes al mes y tu equipo
-   no llega"*. Mismo dolor, concreto, con Maikel a cámara, condición de
-   inversión en los primeros 3 s. Es el que repele C en el gancho.
+   no llega"*. Mismo dolor, concreto, en el formato demo-caso de los viejos,
+   condición de inversión en los primeros 3 s. Es el que repele C en el gancho.
 2. **Ángulo A ("no necesitas más leads")** como segundo anuncio, dirigido al que
    ya invierte. Contraintuitivo, bueno para parar el scroll, pero sin vertical
    puede traer agencias y consultores (no es nuestro ICP). Probarlo **dentro del
@@ -243,7 +245,7 @@ De Ops:
 - Estados "oportunidad cualificada" y "ganada / perdida con motivo" en GHL.
 
 De Creative:
-- Los dos vídeos del encargo (ángulo D por vertical, Maikel a cámara) para la
+- Los dos vídeos del encargo (ángulo D por vertical, formato demo-caso, sin personas) para la
   semana del 19; el vídeo pre-call de 90 s a 3 min con el guion de §20.
 
 Paid no toca nada hasta el OK. Siguiente corte: lunes 12-oct 08:05.

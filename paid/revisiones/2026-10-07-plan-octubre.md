@@ -28,7 +28,7 @@ periodo de gracia de la cuenta. Preparar en pausado todo lo del 12.
    cliente? · ¿cuántas personas atienden? · ¿decides tú la contratación? Fuera
    "inversión" y "¿dónde se te escapa?". Teléfono validado. Esperado: −10-20 %
    de envíos, mitad de ilocalizables, cada lead clasificado A/B/C al entrar.
-2. **Un anuncio nuevo por vertical con Maikel a cámara**, ángulo de tamaño:
+2. **Un anuncio nuevo por vertical en el formato de los viejos (demo del sistema sobre un caso, sin personas a cámara)**, ángulo de tamaño:
    formación *"más de 100 solicitudes al mes y nadie responde la primera hora"*;
    clínicas *"tus anuncios traen gente que no puede pagar el tratamiento"*
    (frase casi literal de un lead nivel A). Encargo a Creative esta semana.
@@ -64,5 +64,5 @@ reunión B. Un solo criterio de "reunión" acordado con Ops.
 - [ ] Regla A/B/C y tabla de precios (sin precio, la pregunta del ticket no clasifica).
 - [ ] OK a las cuatro preguntas y a la fecha del 12.
 - [ ] OK al test de landing 10/5 en formación (12 → 26).
-- [ ] Encargo a Creative: dos vídeos con Maikel a cámara, ángulo de tamaño.
+- [x] Encargo a Creative (7-oct): dos vídeos en el formato demo-caso de los viejos, gancho "tu comercial dice que los leads de Meta son malos", filtro de tamaño. Sin Maikel a cámara (decisión de Maikel, 7-oct; y los datos nunca apoyaron lo contrario: corrección en `2026-10-01-plan-semana-test-creativos.md`).
 - [ ] Tope de cuenta 14.723 €.

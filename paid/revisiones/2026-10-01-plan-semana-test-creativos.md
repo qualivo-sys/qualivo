@@ -369,4 +369,11 @@ entonces, nada se toca.
 H-CREATIVO-02 queda **falsada en esta ronda**: ninguno de los seis vídeos superó
 al viejo de su vertical en coste por apertura ni en calidad de lead. Aprendizaje
 para Creative: los ganchos nuevos abren bien (CTR 5-7 % el primer día) y no
-aguantan; el vídeo viejo, con Maikel a cámara, sostiene 3-4 % durante semanas.
+aguantan; el vídeo viejo sostiene 3-4 % durante semanas.
+
+> **Corrección del 7-oct.** Aquí decía "con Maikel a cámara". Es falso: los vídeos viejos
+> (`QV_3V_formacion_45`, `QV_3V_clinicas_45`, 70 s) no llevan a nadie a cámara. Son una
+> demostración paso a paso del sistema sobre un caso concreto del vertical ("¿qué pasa con
+> un alumno cuando pide información?" / "¿qué pasa con un paciente cuando pide precio?"),
+> tipografía sobre diseño, con marcas de tiempo. Lo que cayó en 48 h fueron los ganchos de
+> dolor sobre imagen de archivo. Verificado el 7-oct sobre los ficheros originales.

@@ -33,10 +33,13 @@ nunca llegó a gastar (< 200 impresiones, pausado el 3-oct).
 - CTA al que ya invierte: es lo que Maikel pidió el 6-oct.
 
 ## Lo que choca con lo medido
-1. **No sale Maikel.** Es exactamente el formato que falsamos el 5-oct: seis vídeos
-   de texto sobre imagen de archivo abrieron a 5-7 % de CTR y se hundieron en
-   48 h; el único que sostiene 3-4 % semanas es Maikel a cámara. Estas dos piezas
-   son texto sobre archivo.
+1. **Es el formato que falsamos el 5-oct**: texto sobre imagen de archivo con un
+   dolor abstracto. Los seis vídeos de ese formato abrieron a 5-7 % de CTR y se
+   hundieron en 48 h. Lo que sostiene 3-4 % durante semanas es el vídeo viejo:
+   una **demostración paso a paso del sistema sobre un caso del vertical**, con
+   marcas de tiempo, sin personas (corrección del 7-oct: antes decía "Maikel a
+   cámara"; era falso, verificado sobre los ficheros). REC_A y REC_B son la
+   familia que cayó, no la que aguanta.
 2. **Sin vertical.** "¿Ya inviertes en anuncios?" no dice a quién. Meta no puede
    segmentar "empresas que invierten"; lo más parecido (intereses de publicidad,
    administradores de página) trae agencias y marketers, no dueños de clínica. El
@@ -56,9 +59,11 @@ nunca llegó a gastar (< 200 impresiones, pausado el 3-oct).
   formación...") aunque el vídeo sea común: dos anuncios con el mismo vídeo y
   distinto copy, uno en cada conjunto de vertical, es más barato que una
   campaña nueva.
-- **Pedir a Creative una variante de 15-20 s con Maikel diciendo a cámara la
-  frase del comercial** y luego las mismas tarjetas. Es la combinación que los
-  datos apoyan: gancho B + cara + vertical en el copy.
+- **Pedir a Creative el gancho de B dentro del formato de los viejos**: la frase
+  del comercial como apertura y, detrás, el caso del vertical paso a paso con el
+  filtro "encaja / no encaja" y "le decimos a Meta quién era bueno". Sin personas
+  a cámara (Maikel no quiere salir, y los datos no lo piden). Encargo enviado el
+  7-oct: `paid/encargos/2026-10-07-creative-demo-caso-v2.md`.
 - Presupuesto: hasta que entre dinero, 30 €/día es el tope y está repartido
   15/15. Un tercer conjunto a 10 €/día son ~5 leads en dos semanas: suficiente
   para leer CTR y coste por lead (≥ 2.000 impresiones), no para leer reuniones.
