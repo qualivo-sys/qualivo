@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR V3 de la landing madre «Diagnóstico del recorrido comercial» (7-oct-2026, Head of Content).
+     Sobre la V2 (/recorrido/v2/) con la revisión de Maikel del 7-oct y la arquitectura de oferta del mismo día:
+     tesis madre en el hero, cinco etapas ATTRACT→CLOSE, autodiagnóstico de seis dolores (pain_declared),
+     30 días, prueba con casos ya publicados en /casos/, precio del Sprint, formulario en ventana con
+     contacto primero y routing (encaja / dudoso / no encaja). noindex. El formulario NO se envía:
+     el payload y el cableado están en recorrido/README.md. -->
+<meta name="robots" content="noindex,nofollow">
+<title>Borrador V3 · ¿Dónde se te escapa el negocio? · Qualivo</title>
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --tinta:#101319; --negro:#08090C; --crema:#FAF7F0; --blanco:#FFFFFF;
+  --teal:#0E7C74; --teal-claro:#27BDB1; --amarillo:#F4CC38; --lila:#EFECFB;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --rojo:#C2410C;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+body.bloq{overflow:hidden}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--teal-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(56px,7vw,88px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(30px,4.6vw,48px);max-width:20ch}
+h3{font-size:clamp(19px,2.5vw,22px);letter-spacing:-.02em;line-height:1.18}
+p{font-size:clamp(16.5px,2.1vw,18px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:14px}
+.sub{color:var(--gris);margin-top:14px;max-width:52ch}
+.borrador{background:var(--amarillo);color:var(--tinta);text-align:center;font-weight:800;font-size:13px;padding:8px 16px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 30px;border-radius:14px;
+  background:var(--amarillo);color:var(--tinta);font-weight:900;font-size:clamp(16px,2.1vw,18px);text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 12px 32px rgba(244,204,56,.26);transition:transform .16s ease,box-shadow .16s ease;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(244,204,56,.36)}
+.btn-top{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+.btn-sec{background:transparent;color:inherit;border:1.5px solid currentColor;box-shadow:none}
+.btn-sec:hover{box-shadow:none}
+
+.top{background:var(--negro);color:#fff;padding:12px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top img{height:22px;width:auto;display:block}
+
+/* 1 · hero */
+.hero{background:var(--negro);color:#fff;padding:clamp(40px,6vw,72px) 0 clamp(48px,7vw,84px);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-200px;top:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.26),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.grid-h{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,60px);align-items:center}
+.chip{display:inline-flex;align-items:center;gap:9px;background:rgba(39,189,177,.14);border:1px solid rgba(39,189,177,.45);color:var(--teal-claro);
+  font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px;margin-bottom:22px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--teal-claro);display:block;flex:0 0 8px}
+.hero h1{font-size:clamp(34px,4.9vw,58px);max-width:16ch}
+.hero h1 span{color:var(--amarillo)}
+.hero .bajada{font-size:clamp(17px,2.2vw,20px);color:#C6CBD3;margin:22px 0 0;max-width:50ch;line-height:1.5}
+.hero .cta{margin-top:30px}
+.micro{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:16px;font-size:14.5px;color:#AEB5BF;font-weight:600}
+.micro span::before{content:'✓';color:var(--teal-claro);font-weight:900;margin-right:7px}
+.quien-hace{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12)}
+.quien-hace img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.2)}
+.quien-hace p{font-size:14.5px;color:#AEB5BF;line-height:1.45}
+.quien-hace b{color:#fff}
+
+/* recorrido de cinco etapas (hero) */
+.camino{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px 18px 16px}
+.camino .lbl{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);margin-bottom:12px;display:flex;justify-content:space-between}
+.camino .lbl em{font-style:normal;color:#8E96A2}
+.et{display:grid;grid-template-columns:92px 1fr auto;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.07)}
+.et .k{font-size:11.5px;font-weight:900;letter-spacing:.12em;color:var(--teal-claro)}
+.et .q{font-size:13.5px;font-weight:700;color:#E6E9EE}
+.flecha{height:14px;padding-left:18px;color:#6C7480;font-size:12px;line-height:14px}
+.no{font-size:11px;font-weight:900;letter-spacing:.04em;color:#FF9B7A;background:rgba(255,120,80,.12);border:1px solid rgba(255,120,80,.35);padding:3px 9px;border-radius:999px;white-space:nowrap;
+  opacity:0;transform:translateX(8px);transition:opacity .4s ease,transform .4s ease}
+.camino.on .no{opacity:1;transform:none}
+.et.ult{grid-template-columns:1fr;background:var(--amarillo);color:var(--tinta);font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.camino .nota-c{margin-top:12px;font-size:13px;color:#8E96A2;line-height:1.45}
+.camino .nota-c b{color:#fff}
+
+/* 2 · autodiagnóstico */
+.frases{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:32px}
+.frase{display:flex;gap:14px;align-items:center;text-align:left;background:#fff;border:1.5px solid rgba(16,19,25,.1);border-radius:16px;padding:18px 20px;cursor:pointer;
+  font-family:inherit;color:inherit;transition:border-color .16s ease,background .16s ease;width:100%}
+.frase:hover{border-color:rgba(14,124,116,.45)}
+.frase .box{flex:0 0 26px;height:26px;border-radius:8px;border:2px solid rgba(16,19,25,.22);display:grid;place-items:center;font-weight:900;font-size:15px;color:#fff;transition:all .16s ease}
+.frase q{display:block;font-weight:800;font-size:clamp(16.5px,2.1vw,18.5px);letter-spacing:-.015em;line-height:1.3;quotes:none}
+.frase[aria-pressed="true"]{border-color:var(--teal);background:#F2FBFA}
+.frase[aria-pressed="true"] .box{background:var(--teal);border-color:var(--teal)}
+.veredicto{margin-top:20px;border-radius:16px;padding:18px 22px;background:var(--tinta);color:#fff;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.veredicto p{font-size:16.5px;font-weight:700;max-width:56ch}
+.veredicto p b{color:var(--amarillo)}
+.veredicto .btn{min-height:52px;font-size:16px;padding:0 22px}
+
+/* 3 · qué te llevas */
+.llevas{background:var(--lila)}
+.tres3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.t3{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px}
+.t3 .n{width:36px;height:36px;border-radius:10px;background:var(--amarillo);display:grid;place-items:center;font-weight:900;margin-bottom:14px}
+.t3 h3{margin-bottom:8px}
+.t3 p{font-size:16px;color:var(--gris);line-height:1.5}
+.escrito{margin-top:16px;font-size:clamp(17px,2.2vw,20px);font-weight:900;letter-spacing:-.015em}
+.escrito span{background:linear-gradient(transparent 62%,rgba(244,204,56,.6) 62%)}
+
+/* 4 · 30 días */
+.semanas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:34px}
+.sem{border-top:4px solid var(--teal);background:#fff;border-radius:0 0 14px 14px;padding:20px 18px;border-left:1px solid rgba(16,19,25,.08);border-right:1px solid rgba(16,19,25,.08);border-bottom:1px solid rgba(16,19,25,.08)}
+.sem .k{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:8px}
+.sem h3{font-size:19px;margin-bottom:6px}
+.sem p{font-size:15px;color:var(--gris);line-height:1.5}
+.conviven{margin-top:18px;font-size:15.5px;color:var(--gris);max-width:70ch}
+.conviven b{color:var(--tinta)}
+
+/* 5 · prueba */
+.prueba{background:var(--negro);color:#fff}
+.prueba h2{color:#fff}
+.prueba .sub{color:#AEB5BF}
+.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.caso{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px;display:flex;flex-direction:column}
+.caso .s{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);margin-bottom:14px}
+.caso .cifra{font-size:clamp(34px,4.4vw,44px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo)}
+.caso .cifra-l{font-size:14px;color:#AEB5BF;margin:6px 0 16px}
+.caso p{font-size:15.5px;color:#D5DAE1;line-height:1.5;flex:1}
+.caso a{margin-top:16px;font-size:14px;font-weight:800;color:var(--teal-claro);text-decoration:none}
+.caso a:hover{text-decoration:underline}
+.prueba .aviso{margin-top:16px;font-size:13px;color:#7F8794}
+
+/* 6 · precio y para quién */
+.precio-g{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;margin-top:34px;align-items:stretch}
+.precio{background:#fff;border:2px solid var(--tinta);border-radius:18px;padding:28px}
+.precio .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--teal)}
+.precio .cifra{font-size:clamp(40px,5vw,54px);font-weight:900;letter-spacing:-.04em;margin:8px 0 4px}
+.precio .cifra small{font-size:18px;color:var(--gris);font-weight:700;letter-spacing:0}
+.precio p{font-size:16px;color:var(--gris);line-height:1.55;margin-top:10px}
+.precio p b{color:var(--tinta)}
+.aun{background:rgba(16,19,25,.04);border-radius:18px;padding:28px}
+.aun h3{margin-bottom:10px}
+.aun p{font-size:16px;color:var(--gris);line-height:1.55}
+
+/* 7 · cierre */
+.cierre{background:var(--negro);color:#fff;text-align:center}
+.cierre h2{color:#fff;margin:0 auto}
+.cierre .sub{color:#AEB5BF;margin:16px auto 0}
+.cierre .btn{margin-top:28px}
+.dudas{margin:40px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left;max-width:900px}
+.dudas div{font-size:15px;color:#AEB5BF;line-height:1.5;padding-left:14px;border-left:2px solid rgba(39,189,177,.5)}
+.dudas b{color:#fff;display:block;margin-bottom:2px}
+
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+
+/* ventana del formulario */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,9,12,.72);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .2s ease}
+.modal.on{opacity:1;pointer-events:auto}
+.caja-f{position:relative;background:#fff;color:var(--tinta);border-radius:20px;padding:clamp(24px,4vw,34px);width:100%;max-width:520px;max-height:calc(100vh - 40px);overflow:auto;
+  transform:translateY(14px);transition:transform .2s ease}
+.modal.on .caja-f{transform:none}
+.cerrar{position:absolute;right:14px;top:12px;width:40px;height:40px;border:none;background:transparent;font-size:26px;cursor:pointer;color:var(--gris);border-radius:10px}
+.cerrar:hover{background:rgba(16,19,25,.06)}
+.prog{height:6px;border-radius:6px;background:#ECEDEF;overflow:hidden;margin:0 44px 18px 0}
+.prog i{display:block;height:100%;width:40%;background:var(--teal);border-radius:6px;transition:width .35s ease}
+.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:6px}
+.caja-f h3{font-size:24px;margin-bottom:6px}
+.caja-f .intro{font-size:15px;color:var(--gris);margin-bottom:18px;line-height:1.5}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.campo input,.campo select{width:100%;min-height:50px;padding:12px 14px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--teal-claro)}
+.campo.ok select{border-color:var(--teal)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.res-ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:24px;font-weight:900;margin-bottom:14px}
+.res-ico.si{background:rgba(14,124,116,.12);color:var(--teal)}
+.res-ico.duda{background:rgba(244,204,56,.3);color:var(--tinta)}
+.res-ico.no{background:rgba(16,19,25,.07);color:var(--gris)}
+.porque{background:var(--crema);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--gris);line-height:1.5;margin:14px 0 18px}
+.porque b{color:var(--tinta)}
+.preview-cal{border:1.5px dashed rgba(16,19,25,.25);border-radius:14px;min-height:240px;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;color:var(--gris);font-size:15px;line-height:1.5}
+.preview-nota{margin-top:12px;background:var(--lila);border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--gris);line-height:1.5}
+.recursos{display:grid;gap:8px;margin-top:4px}
+.recursos a{display:block;border:1.5px solid rgba(16,19,25,.12);border-radius:12px;padding:13px 15px;text-decoration:none;font-weight:800;font-size:15px}
+.recursos a:hover{border-color:var(--teal)}
+.recursos a span{display:block;font-weight:500;font-size:13.5px;color:var(--gris);margin-top:2px}
+[hidden]{display:none !important}
+
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+
+@media(max-width:900px){.grid-h,.precio-g{grid-template-columns:1fr}.semanas{grid-template-columns:1fr 1fr}.casos,.dudas{grid-template-columns:1fr}}
+@media(max-width:760px){.fijo{display:block}.top .btn-top{display:none}.frases,.tres3{grid-template-columns:1fr}
+  .modal{padding:0;align-items:flex-end}.caja-f{max-width:none;border-radius:20px 20px 0 0;max-height:94vh}}
+@media(max-width:480px){.semanas{grid-template-columns:1fr}.dos{grid-template-columns:1fr}.et{grid-template-columns:78px 1fr auto}}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;scroll-behavior:auto !important}.no{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR V3 · landing madre · el formulario no se envía</div>
+
+<div class="top">
+  <div class="wrap">
+    <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo">
+    <button type="button" class="btn btn-top" data-abrir="top">Analizar mi recorrido</button>
+  </div>
+</div>
+
+<!-- 1 · HERO: tesis madre + recorrido de cinco etapas -->
+<header class="hero">
+  <div class="wrap">
+    <div class="grid-h">
+      <div>
+        <div class="chip"><i></i>Para empresas que ya generan oportunidades</div>
+        <h1>¿Dónde se te escapa el negocio <span>entre el primer clic y la venta?</span></h1>
+        <p class="bajada">Si ya generas oportunidades pero demasiadas no encajan, no responden, no aparecen o se quedan sin seguimiento, en 30 minutos reconstruimos el recorrido y vemos dónde actuar primero.</p>
+        <div class="cta"><button type="button" class="btn" data-abrir="hero">Analizar mi recorrido&nbsp;→</button></div>
+        <div class="micro"><span>Llamada gratis</span><span>30 minutos</span><span>Plan por escrito en 24&nbsp;h</span></div>
+        <div class="quien-hace">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+          <p>La llamada la hago yo, <b>Maikel Echevarría</b>, fundador de Qualivo.</p>
+        </div>
+      </div>
+      <div class="camino" id="camino" aria-label="El recorrido de una oportunidad en cinco etapas y dónde se pierde">
+        <div class="lbl"><span>El recorrido de una oportunidad</span><em>Ejemplo</em></div>
+        <div class="et"><span class="k">ATTRACT</span><span class="q">Anuncio o entrada</span><span></span></div><div class="flecha">↓</div>
+        <div class="et"><span class="k">FILTER</span><span class="q">¿Encaja?</span><span class="no">✕ No encaja</span></div><div class="flecha">↓</div>
+        <div class="et"><span class="k">CONVERT</span><span class="q">¿Responde?</span><span class="no">✕ No responde</span></div><div class="flecha">↓</div>
+        <div class="et"><span class="k">PREPARE</span><span class="q">¿Viene preparado?</span><span class="no">✕ No aparece</span></div><div class="flecha">↓</div>
+        <div class="et"><span class="k">CLOSE</span><span class="q">¿Decide?</span><span class="no">✕ No decide</span></div><div class="flecha">↓</div>
+        <div class="et ult">Venta</div>
+        <p class="nota-c">Una fuga en cualquier etapa hace que <b>pagar más por captación no lo arregle</b>. En la llamada buscamos cuál te cuesta más.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2 · AUTODIAGNÓSTICO: seis dolores = pain_declared (se guarda con el lead) -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Antes de seguir</p>
+    <h2>¿Cuáles te pasan?</h2>
+    <p class="sub">Marca las que te suenen. Las tendré delante cuando hablemos.</p>
+    <div class="frases" id="frases">
+      <button type="button" class="frase" aria-pressed="false" data-pain="no-encajan" data-p="calidad"><span class="box">✓</span><q>«Me entran leads, pero muchos no encajan.»</q></button>
+      <button type="button" class="frase" aria-pressed="false" data-pain="no-contestan" data-p="respuesta"><span class="box">✓</span><q>«Me entran, pero muchos no contestan.»</q></button>
+      <button type="button" class="frase" aria-pressed="false" data-pain="no-vienen" data-p="citas"><span class="box">✓</span><q>«Reservan y no vienen.»</q></button>
+      <button type="button" class="frase" aria-pressed="false" data-pain="propuestas-frias" data-p="propuestas"><span class="box">✓</span><q>«Enviamos propuestas o presupuestos y se enfrían.»</q></button>
+      <button type="button" class="frase" aria-pressed="false" data-pain="crm-parado" data-p="propuestas"><span class="box">✓</span><q>«Tengo CRM, pero no sé qué oportunidades están paradas.»</q></button>
+      <button type="button" class="frase" aria-pressed="false" data-pain="no-se-donde" data-p="no-se"><span class="box">✓</span><q>«No sé exactamente dónde se pierde el negocio.»</q></button>
+    </div>
+    <div class="veredicto" aria-live="polite">
+      <p id="vtxt">Si te pasa alguna, la llamada te dice en qué etapa se pierde el negocio.</p>
+      <button type="button" class="btn" data-abrir="autodiagnostico">Analizar mi recorrido&nbsp;→</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · QUÉ TE LLEVAS -->
+<section class="sec llevas">
+  <div class="wrap">
+    <p class="eyebrow">La llamada de 30 minutos</p>
+    <h2>Qué te llevas.</h2>
+    <div class="tres3">
+      <div class="t3"><div class="n">1</div><h3>Tu recorrido</h3><p>Qué ocurre desde que entra una oportunidad hasta que compra.</p></div>
+      <div class="t3"><div class="n">2</div><h3>La fuga prioritaria</h3><p>Dónde parece estar el mayor coste o bloqueo.</p></div>
+      <div class="t3"><div class="n">3</div><h3>El primer movimiento</h3><p>Qué tocaríamos primero y cómo mediríamos si funciona.</p></div>
+    </div>
+    <p class="escrito"><span>Te lo llevas por escrito en 24 h, trabajemos juntos o no.</span></p>
+  </div>
+</section>
+
+<!-- 4 · CÓMO FUNCIONA QUALIVO: 30 DÍAS -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Si decidimos trabajar juntos</p>
+    <h2>Primero medimos. Después intervenimos donde está la fuga.</h2>
+    <div class="semanas">
+      <div class="sem"><div class="k">Semana 1</div><h3>Entender</h3><p>Mapa del recorrido, datos, punto de partida y la fuga priorizada.</p></div>
+      <div class="sem"><div class="k">Semana 2</div><h3>Intervenir</h3><p>Una primera mejora funcionando, probada de principio a fin.</p></div>
+      <div class="sem"><div class="k">Semana 3</div><h3>Medir</h3><p>La mejora en marcha con oportunidades reales.</p></div>
+      <div class="sem"><div class="k">Semana 4</div><h3>Decidir</h3><p>Qué cambió, qué se mantiene y qué toca el mes siguiente.</p></div>
+    </div>
+    <p class="conviven"><b>No sustituimos lo que funciona.</b> Si ya usas HubSpot, Pipedrive, Odoo, Zoho o GoHighLevel, o tienes equipo comercial o agencia, trabajamos sobre eso.</p>
+  </div>
+</section>
+
+<!-- 5 · PRUEBA: solo casos ya publicados en /casos/ -->
+<section class="sec prueba">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--teal-claro)">Prueba</p>
+    <h2>Ya lo hemos aplicado en sistemas reales.</h2>
+    <p class="sub">Tres casos con números, contados completos en su página.</p>
+    <div class="casos">
+      <div class="caso">
+        <div class="s">Formación · escuela aeronáutica</div>
+        <div class="cifra">10,2×</div>
+        <div class="cifra-l">de retorno sobre la publicidad en un mes</div>
+        <p>Campañas por curso y el recorrido medido de lead a matrícula: 573 oportunidades en el CRM y 10 matrículas cerradas en el mes.</p>
+        <a href="/casos/eac/" target="_blank" rel="noopener">Ver el caso →</a>
+      </div>
+      <div class="caso">
+        <div class="s">Servicios y formación online</div>
+        <div class="cifra">6,45×</div>
+        <div class="cifra-l">2.000 € invertidos, 12.900 € en ventas atribuibles</div>
+        <p>El problema no era conseguir más leads, sino saber cuáles merecían atención: cualificación, puntuación y seguimiento.</p>
+        <a href="/casos/nuria-roure/" target="_blank" rel="noopener">Ver el caso →</a>
+      </div>
+      <div class="caso">
+        <div class="s">Motor comercial desde cero</div>
+        <div class="cifra">8,3×</div>
+        <div class="cifra-l">3.600 € invertidos, 30.000 € en ventas</div>
+        <p>No había sistema que optimizar: captación, landing, CRM, seguimiento y medición construidos desde el principio.</p>
+        <a href="/casos/bellovinilo/" target="_blank" rel="noopener">Ver el caso →</a>
+      </div>
+    </div>
+    <p class="aviso">Resultados de esos proyectos. Cada negocio parte de números distintos; en la llamada vemos los tuyos.</p>
+  </div>
+</section>
+
+<!-- 6 · PRECIO DEL SPRINT + PARA QUIÉN TODAVÍA NO -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Sin sorpresas</p>
+    <h2>Cuánto cuesta trabajar con Qualivo.</h2>
+    <div class="precio-g">
+      <div class="precio">
+        <div class="k">Sprint inicial · 30 días</div>
+        <div class="cifra">1.200 € <small>+ IVA</small></div>
+        <p>Diagnóstico, una primera mejora funcionando y la medición. Después decides si seguimos operando el sistema contigo o te lo dejamos preparado para tu equipo.</p>
+        <p><b>La llamada de diagnóstico no cuesta nada.</b> Y si vemos que tiene sentido trabajar juntos, te explico el precio antes de proponerte nada.</p>
+      </div>
+      <div class="aun">
+        <h3>Probablemente todavía no sea para ti si…</h3>
+        <p>aún estás validando qué vender, no tienes una forma clara de generar oportunidades o una inversión de 1.200 € no tiene sentido ahora para tu negocio.</p>
+        <p style="margin-top:12px">En ese caso, te lo diré en el formulario, antes de que reserves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · CIERRE -->
+<section class="sec cierre">
+  <div class="wrap">
+    <h2>Vamos a ver dónde se te escapa el negocio.</h2>
+    <p class="sub">Un minuto de formulario y eliges hora. Con tus respuestas preparo la llamada.</p>
+    <button type="button" class="btn" data-abrir="cierre">Analizar mi recorrido&nbsp;→</button>
+    <div class="dudas">
+      <div><b>¿Cuánto cuesta la llamada?</b>Nada. 30 minutos por videollamada.</div>
+      <div><b>¿Qué preparo?</b>Tres números aproximados: oportunidades al mes, ventas al mes y cuánto vale un cliente.</div>
+      <div><b>¿Con quién hablo?</b>Conmigo, Maikel. Si no tiene sentido para vosotros, te lo digo en la llamada.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<div class="fijo" id="fijo"><button type="button" class="btn" data-abrir="fijo">Analizar mi recorrido&nbsp;→</button></div>
+
+<!-- VENTANA DEL FORMULARIO (vista previa: no se envía) -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-titulo" aria-hidden="true">
+  <div class="caja-f">
+    <button type="button" class="cerrar" id="cerrar" aria-label="Cerrar">×</button>
+    <form id="f" novalidate>
+      <div class="prog" aria-hidden="true"><i id="barra"></i></div>
+
+      <div id="p1">
+        <div class="paso-n">Paso 1 de 2</div>
+        <h3 id="m-titulo">Cuéntame lo mínimo</h3>
+        <p class="intro">Para saber a quién preparo la llamada.</p>
+        <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+        <label class="campo"><span>Empresa</span><input type="text" name="empresa" autocomplete="organization" required></label>
+        <div class="dos">
+          <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+        </div>
+        <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
+        <p class="err" id="e1" hidden></p>
+        <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
+        <p class="seguro">Solo para preparar la llamada. Sin compromiso.</p>
+      </div>
+
+      <div id="p2" hidden>
+        <div class="paso-n">Paso 2 de 2</div>
+        <h3>Para preparar la llamada</h3>
+        <p class="intro">Cuatro preguntas. Aproximado vale.</p>
+        <label class="campo"><span>¿Cuántas oportunidades os entran al mes, aproximadamente?</span>
+          <select name="volumen" required>
+            <option value="">Elige una opción</option>
+            <option value="menos-20">Menos de 20</option>
+            <option value="20-49">De 20 a 49</option>
+            <option value="50-99">De 50 a 99</option>
+            <option value="100-250">De 100 a 250</option>
+            <option value="mas-250">Más de 250</option>
+          </select>
+        </label>
+        <label class="campo"><span>¿Cuánto vale, aproximadamente, un cliente cuando compra?</span>
+          <select name="valor" required>
+            <option value="">Elige una opción</option>
+            <option value="menos-300">Menos de 300 €</option>
+            <option value="300-1000">Entre 300 y 1.000 €</option>
+            <option value="1000-3000">Entre 1.000 y 3.000 €</option>
+            <option value="3000-10000">Entre 3.000 y 10.000 €</option>
+            <option value="mas-10000">Más de 10.000 €</option>
+          </select>
+        </label>
+        <label class="campo" id="c-problema"><span>¿Dónde crees que está el principal problema?</span>
+          <select name="problema" required>
+            <option value="">Elige una opción</option>
+            <option value="conseguir">Conseguir oportunidades</option>
+            <option value="calidad">Que encajen: entran perfiles que no son</option>
+            <option value="respuesta">Que respondan y avancen</option>
+            <option value="citas">Citas y plantones</option>
+            <option value="propuestas">Seguimiento de propuestas o presupuestos</option>
+            <option value="no-se">No lo sé</option>
+          </select>
+        </label>
+        <label class="campo"><span>¿Cuándo querrías solucionarlo?</span>
+          <select name="cuando" required>
+            <option value="">Elige una opción</option>
+            <option value="este-mes">Este mes</option>
+            <option value="1-3-meses">En 1 a 3 meses</option>
+            <option value="mas-adelante">Más adelante</option>
+            <option value="explorando">Solo estoy explorando</option>
+          </select>
+        </label>
+        <p class="err" id="e2" hidden></p>
+        <button type="submit" class="btn" style="width:100%">Ver si tiene sentido&nbsp;→</button>
+      </div>
+
+      <!-- ROUTING · encaja -->
+      <div id="r-fit" hidden>
+        <div class="res-ico si">✓</div>
+        <h3>Por lo que nos has contado, merece la pena verlo.</h3>
+        <p class="intro">Elige la hora que te venga bien. 30 minutos; antes reviso lo que me has contado.</p>
+        <div class="preview-cal">Aquí va el calendario real de 30 minutos (el mismo de /diagnostico/). En la vista previa no se carga, para no reservar huecos por error.</div>
+        <div class="preview-nota"><b>Vista previa:</b> al reservar, la persona iría a la página de confirmación: <a href="/recorrido/v3/confirmado/" style="color:var(--teal)">ver cómo queda</a>.</div>
+      </div>
+
+      <!-- ROUTING · dudoso -->
+      <div id="r-duda" hidden>
+        <div class="res-ico duda">?</div>
+        <h3>Antes de hacerte perder 30 minutos, quiero aclarar una cosa.</h3>
+        <div class="porque" id="duda-porque"></div>
+        <p class="intro">Te escribo por WhatsApp para preguntártelo. Si encaja, te paso hora para la llamada. Si es de noche, te escribo a primera hora.</p>
+        <div class="preview-nota"><b>Vista previa:</b> el contacto entraría marcado para precualificar, como hoy.</div>
+      </div>
+
+      <!-- ROUTING · no encaja ahora -->
+      <div id="r-no" hidden>
+        <div class="res-ico no">–</div>
+        <h3>Por lo que nos has contado, ahora mismo probablemente no tendría sentido que pagaras por Qualivo.</h3>
+        <div class="porque" id="no-porque"></div>
+        <p class="intro">Prefiero decírtelo ahora que en la llamada. Mientras tanto, esto te puede servir:</p>
+        <div class="recursos">
+          <a href="/calculadora-de-fugas/" target="_blank" rel="noopener">Calculadora de fugas<span>Pon tus números y mira cuánto se pierde en cada etapa.</span></a>
+          <a href="/blog/" target="_blank" rel="noopener">Artículos del blog<span>Cómo medir y arreglar cada etapa por tu cuenta.</span></a>
+        </div>
+        <p class="seguro" style="text-align:left;margin-top:16px">¿Crees que me equivoco? Escríbeme a <a href="mailto:hola@qualivo.io" style="color:var(--teal)">hola@qualivo.io</a> y lo miro.</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  /* recorrido del hero: las ✕ aparecen escalonadas */
+  var camino=document.getElementById('camino');
+  camino.querySelectorAll('.no').forEach(function(n,i){ n.style.transitionDelay=(0.3+i*0.3)+'s'; });
+  setTimeout(function(){ camino.classList.add('on'); }, 200);
+
+  var f=document.getElementById('f');
+
+  /* autodiagnóstico → pain_declared + primera opción del paso 2 */
+  var botones=[].slice.call(document.querySelectorAll('#frases .frase')), vtxt=document.getElementById('vtxt');
+  function marcadas(){ return botones.filter(function(b){ return b.getAttribute('aria-pressed')==='true'; }); }
+  function veredicto(){
+    var m=marcadas(), n=m.length;
+    if(n===0) vtxt.innerHTML='Si te pasa alguna, la llamada te dice en qué etapa se pierde el negocio.';
+    else if(n===1) vtxt.innerHTML='Te pasa <b>1</b>. En la llamada vemos si es algo puntual o hay más detrás.';
+    else vtxt.innerHTML='Te pasan <b>'+n+'</b>. Probablemente hay más de una fuga. Merece la pena mirarlo.';
+    if(n>0){ f.elements.problema.value=m[0].getAttribute('data-p'); document.getElementById('c-problema').classList.add('ok'); }
+  }
+  botones.forEach(function(b){ b.addEventListener('click',function(){ b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); veredicto(); }); });
+
+  /* ventana del formulario: cualquier CTA la abre */
+  var modal=document.getElementById('modal'), ultimoFoco=null, ctaOrigen='';
+  function abrir(origen){
+    ctaOrigen=origen||''; ultimoFoco=document.activeElement;
+    modal.classList.add('on'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('bloq');
+    setTimeout(function(){ var v=modal.querySelector('#p1:not([hidden]) input'); if(v) v.focus(); }, 60);
+  }
+  function cerrar(){
+    modal.classList.remove('on'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('bloq');
+    if(ultimoFoco) ultimoFoco.focus();
+  }
+  document.querySelectorAll('[data-abrir]').forEach(function(b){ b.addEventListener('click',function(){ abrir(b.getAttribute('data-abrir')); }); });
+  document.getElementById('cerrar').addEventListener('click',cerrar);
+  modal.addEventListener('click',function(e){ if(e.target===modal) cerrar(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && modal.classList.contains('on')) cerrar(); });
+
+  /* pasos */
+  var pantallas=['p1','p2','r-fit','r-duda','r-no'].map(function(id){ return document.getElementById(id); });
+  var barra=document.getElementById('barra'), e1=document.getElementById('e1'), e2=document.getElementById('e2');
+  function ver(id,pct){ pantallas.forEach(function(x){ x.hidden=x.id!==id; }); barra.style.width=pct+'%'; modal.querySelector('.caja-f').scrollTop=0; }
+  function vacio(k){ var c=f.elements[k]; return !c || !String(c.value||'').trim(); }
+  document.getElementById('b1').addEventListener('click',function(){
+    var falta=['nombre','empresa','email','telefono'].filter(vacio);
+    if(falta.length || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.elements.email.value) || !f.elements.rgpd.checked){
+      e1.textContent='Rellena nombre, empresa, email y teléfono, y acepta la política de privacidad.'; e1.hidden=false; return;
+    }
+    e1.hidden=true; ver('p2',75);
+    /* CABLEADO PENDIENTE: aquí se mandaría el paso 1 (contacto parcial), como en /diagnostico/. */
+  });
+
+  /* ROUTING (umbrales del doc de arquitectura de oferta, §8; ajustables aquí) */
+  var VOL={'menos-20':0,'20-49':1,'50-99':2,'100-250':3,'mas-250':4};
+  var VAL={'menos-300':0,'300-1000':1,'1000-3000':2,'3000-10000':3,'mas-10000':4};
+  function routing(r){
+    var v=VOL[r.volumen], e=VAL[r.valor], porque=[];
+    /* no encaja: el Sprint de 1.200 € no se recupera con estos números */
+    if(e===0){ return {ruta:'no', porque:'Con clientes de <b>menos de 300 €</b>, harían falta muchas ventas nuevas solo para cubrir el Sprint de 1.200 €.'}; }
+    if(v===0 && e<3){ return {ruta:'no', porque:'Con <b>menos de 20 oportunidades al mes</b> y ese valor por cliente, optimizar el recorrido todavía no compensa lo que cuesta. Antes hace falta más entrada.'}; }
+    /* encaje económico */
+    var encaja=(v>=2 && e>=2) || (v===1 && e>=3) || (v>=3 && e>=1);
+    if(!encaja){
+      if(v===0) porque.push('Con <b>menos de 20 oportunidades al mes</b>, quiero entender si el valor de cada cliente lo justifica.');
+      else porque.push('Con <b>'+(v===1?'20 a 49':'ese volumen de')+' oportunidades</b> y ese valor por cliente, quiero comprobar que la cuenta sale antes de proponerte nada.');
+    }
+    var intencion=(r.cuando==='este-mes' || r.cuando==='1-3-meses');
+    if(!intencion) porque.push('Me dices que es para <b>'+(r.cuando==='explorando'?'explorar':'más adelante')+'</b>: quiero saber si tiene sentido vernos ya o mejor más cerca de la fecha.');
+    if(encaja && intencion) return {ruta:'fit', porque:''};
+    return {ruta:'duda', porque:porque.join('<br>')};
+  }
+
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var falta=['volumen','valor','problema','cuando'].filter(vacio);
+    if(falta.length){ e2.textContent='Te falta'+(falta.length>1?'n ':' ')+falta.length+' pregunta'+(falta.length>1?'s':'')+' por contestar.'; e2.hidden=false; return; }
+    e2.hidden=true;
+    var r={volumen:f.elements.volumen.value, valor:f.elements.valor.value, problema:f.elements.problema.value, cuando:f.elements.cuando.value};
+    var res=routing(r);
+    /* PAYLOAD que se mandaría (ver recorrido/README.md). VISTA PREVIA: no se envía nada. */
+    window.__qvPayload={
+      version:'recorrido-v3', origen:'recorrido', cta:ctaOrigen,
+      nombre:f.elements.nombre.value.trim(), empresa:f.elements.empresa.value.trim(),
+      email:f.elements.email.value.trim(), telefono:f.elements.telefono.value.trim(),
+      volumen:r.volumen, valor:r.valor, problema:r.problema, cuando:r.cuando,
+      pain_declared:marcadas().map(function(b){ return b.getAttribute('data-pain'); }),
+      ruta:res.ruta, utm:location.search
+    };
+    if(res.ruta==='fit') ver('r-fit',100);
+    else if(res.ruta==='duda'){ document.getElementById('duda-porque').innerHTML=res.porque; ver('r-duda',100); }
+    else { document.getElementById('no-porque').innerHTML=res.porque; ver('r-no',100); }
+  });
+
+  /* CTA fijo en móvil: tras el hero, se esconde en el cierre */
+  var fijo=document.getElementById('fijo'), hero=document.querySelector('.hero'), cierreS=document.querySelector('.cierre');
+  if('IntersectionObserver' in window){
+    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
+    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
+    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.1}).observe(cierreS);
+  }
+})();
+</script>
+</body>
+</html>
