@@ -1,4 +1,4 @@
-# QV_3V2 · clínicas · demo-caso v2 · guion y storyboard (7-oct-2026)
+# QV_3V2 · demo-caso v2 (clínicas y formación) · guion y storyboard (7-oct-2026)
 
 Encargo de Paid: `paid/encargos/2026-10-07-creative-demo-caso-v2.md` (rama `claude/qualivo-paid`).
 Mismo lenguaje que `QV_3V_clinicas_45` (17-sep): verde Qualivo, Anton, pantallas simuladas, reloj con
@@ -15,7 +15,7 @@ Escena: `escena-clinicas.html` (4:5 por defecto, `?f=916` para 9:16). Grabación
 | 1 · Anuncio | Móvil con el anuncio de la clínica: «¿Te falta una pieza y quieres empezar este mes?» · reloj *desde el anuncio 00:00* | Este anuncio no le habla a todo el mundo: le habla a quien quiere empezar un implante este mes. | Un anuncio que le habla a quien sí quieres. |
 | 2 · Formulario | Tres preguntas que se marcan: qué te interesa / cuándo quieres empezar / si ya te han valorado · *00:40* | El formulario pregunta tres cosas: qué le interesa, cuándo quiere empezar y si ya le han valorado en otra clínica. | El formulario pregunta lo que importa. |
 | 3 · Clasificación | Tablero Encaja / Necesita info / No encaja; caen cinco contactos · *al enviarlo 00:01* | Con eso, cada contacto cae en su sitio antes de que nadie descuelgue. | Cada contacto, en su sitio. |
-| 4 · Dos caminos | No encaja: «Todavía no. Te decimos por qué y la puerta queda abierta.» · Encaja: reserva en el momento, confirmación por WhatsApp, recordatorio la víspera · *reserva 00:02* | Si no encaja, se lo decimos claro y la puerta queda abierta. Si encaja, reserva su valoración en el momento, le llega la confirmación y, la víspera, un recordatorio. | Dos caminos. Ninguno se queda colgado. |
+| 4 · Dos caminos | No encaja: «Todavía no. No ocupa una hora de tu agenda. Y la puerta queda abierta.» · Encaja: reserva en el momento, confirmación por WhatsApp, recordatorio la víspera · *reserva 00:02* | Si no encaja, no ocupa una hora de tu agenda, y la puerta queda abierta. Si encaja, reserva su valoración en el momento, le llega la confirmación y, la víspera, un recordatorio. | Dos caminos. Ninguno se queda colgado. |
 | 5 · Meta | Tarjeta negra «Carla encaja. Vino a la valoración.» → «Busca más como ella.» · *+3 días* | Y cuando viene, le decimos a Meta quién era un buen contacto, para que busque más como ese. | Le decimos a Meta quién era un buen contacto, para que busque más como ese. |
 | 6 · Informe | Informe de la mañana: 42 solicitudes · 17 encajan · 9 valoraciones · 1 anuncio solo trae preguntas de precio · **Datos de ejemplo** · *07:30* | Cada mañana sabes qué anuncio te trae pacientes y cuál solo preguntas. | Cada mañana: qué anuncio trae pacientes. |
 | 7 · Sistema | Mapa de 7 pasos: anuncio, formulario, clasifica, reserva, recuerda, avisa a Meta, informe | No son siete automatizaciones. Es un sistema. | No son siete automatizaciones. Es un sistema. |
@@ -29,9 +29,27 @@ Escena: `escena-clinicas.html` (4:5 por defecto, `?f=916` para 9:16). Grabación
    equivalente es de encaje: tratamiento, cuándo quiere empezar y si ya la han valorado. Sin dinero ni
    presupuesto, como pide Paid.
 2. **Capacidades por confirmar antes de montar** (no se promete nada que el sistema no haga hoy):
-   - «No encaja → te decimos por qué»: ¿sale hoy ese mensaje automático al contacto que no encaja?
-   - «Le decimos a Meta quién era un buen contacto»: ¿está activo el envío de conversiones a Meta?
-     (Ya salía en S1_CUR.)
+   - «No encaja»: no se le dice que no encaja (regla de Maikel, 28-sep, `api/_agente.js`): no se le
+     ofrece reunión y la puerta queda abierta. Por eso la tarjeta dice «no ocupa una hora de tu agenda».
+   - «Le decimos a Meta quién era un buen contacto»: activo (`calidadAMeta` en `api/_tratos.js`).
    - Reserva en el momento, confirmación y recordatorio la víspera: sí existen. El del mismo día está
      en pausa y no sale.
 3. Todos los números llevan «Datos de ejemplo». Nombres ficticios. Sin «IA» ni «automatización 360».
+
+## Formación (mismo esqueleto) · `escena-formacion.html`
+
+Caso de ejemplo: Escuela Norte (ficticia), curso de electricista que empieza en noviembre.
+Gancho: «Tu comercial: "Los leads de Meta no se matriculan."» → «Mira el anuncio que los trajo.»
+Formulario: qué curso, cuándo quiere empezar, si puede venir por las tardes. Encaja → reserva su llamada
+de admisión, confirmación, recordatorio la víspera. Informe: 38 solicitudes · 15 encajan · 8 llamadas
+reservadas · 1 anuncio trae solo curiosos (datos de ejemplo). Cierre: «¿Tu centro ya invierte en anuncios?».
+Locución completa en `voz.py` (GUIONES['formacion']).
+
+## Producción
+
+```
+ELEVENLABS_API_KEY=... python3 voz.py clinicas voz      # voz/clinicas.mp3 + .json
+python3 voz.py clinicas tiempos                         # tiempos-clinicas.js (la escena lo lee)
+NODE_PATH=$(npm root -g) node graba.js escena-clinicas.html 45 video out/muda.mp4   # 916 para vertical
+python3 voz.py clinicas mezcla out/muda.mp4 out/QV_3V2_clinicas_45.mp4             # voz + música H
+```
