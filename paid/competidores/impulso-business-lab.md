@@ -115,3 +115,74 @@ encajas" es, además, prueba social: demuestra que seleccionan.
 ### Qué no
 - Garantías incoherentes entre páginas; "+1,2 M€", "ROAS x7-x12" sin fuente.
   Nuestro comprador B lo lee como humo.
+
+## Tras la reserva: página de gracias y vídeo de prellamada (recorrido de Maikel, 7-oct)
+
+Maikel completó el recorrido "encajas" y reservó una auditoría (viernes 9-oct). Lo que
+pasa después, por orden de aparición en `go.impulsobusinesslab.com/gracias`:
+
+1. **Confirmación con nombre, día y hora** y aviso de "revisa spam".
+2. **Vídeo de prellamada de 11 minutos** (grabado de pantalla sobre un tablero de
+   Figma, él en burbuja). Marcado como "Importante"; sin audio transcrito, lo
+   leído en los rótulos:
+   - "¡Felicidades por este paso!" → "Cómo funciona nuestro programa Impulso360".
+   - Recorre el **entregable completo** como un mapa: embudo de autoridad a tráfico
+     frío (landing con taller de 10 min), webs "100 %", CRM y dashboard en tiempo
+     real, *social funnel* (12 guiones de reels + 2 posts cebo), guiones de
+     conversación y de cierre, **set-up de la primera campaña + 3 anuncios
+     ganadores + 3 estáticos** (enseña su propio Ads Manager, campañas
+     `TOFU_TEST_ANGULOS_*`), 12 emails, automatizaciones "seguimiento infinito".
+   - Enseña **un dashboard de ventas real de un cliente** (ingresos netos, gráfico
+     de 30 días) como prueba.
+   - Cierra con las **condiciones para la llamada**: lugar tranquilo, tiempo
+     suficiente, **acompañado de tu socio si hace falta**, "buena actitud, en
+     disposición de aprender y recibir ayuda".
+3. **Siete vídeos cortos de objeciones, bloqueados** hasta ver la mitad del vídeo
+   principal: qué tienes que hacer tú · cuánto tardamos en montarlo · ¿debes
+   invertir en publicidad? · por qué tenemos este precio · qué es realmente
+   Impulso · qué pasa si no avanzas o no consigues resultados · tasa de éxito real.
+4. Muro de **reseñas verificadas** (dominio propio de opiniones), 120 vídeos de
+   opinión en YouTube, y una sección **"¿Somos estafadores?"** con capturas de
+   Stripe (333 pagos, 3 disputas) y Hotmart (307 registros, 12 reembolsos).
+5. Checklist "Para que la llamada valga la pena": acepta la invitación, **ten a
+   mano tus números (facturación 3 meses, clientes activos)**, piensa cifra
+   objetivo y plazo, sitio tranquilo.
+
+**Lectura**: toda la página trabaja la **tasa de asistencia** y la **venta en la
+llamada**, no la captación. Hace tres cosas: (a) enseña el producto entero antes
+de la llamada, así la llamada es de decisión, no de descubrimiento; (b) contesta
+por adelantado las siete objeciones que matan el cierre, en el orden en que
+aparecen; (c) pide al lead que llegue con sus números y con quien decide. El
+candado de los vídeos cortos es un compromiso: si has visto la mitad, has
+invertido 5 min y vendrás.
+
+### Qué nos llevamos
+- **Página de gracias que prepara la reunión**, no solo la confirma. Hoy nuestro
+  lead pasa de formulario a WhatsApp sin saber qué va a pasar. Un vídeo de
+  Maikel de 2-3 min ("esto es lo que vamos a ver, trae estos tres números") sube
+  asistencia y sube la calidad de la conversación. Es el vídeo largo del encargo
+  a Creative, con otro uso.
+- **"Trae tus números y a quien decide."** Pedirlo explícitamente filtra al que no
+  tiene números (C) y evita la reunión con el que no decide (el problema de
+  "decisor" que ya vimos en Intelligent Syndicate).
+- **Las siete objeciones como lista de trabajo para Ops/Creative**: para clínicas y
+  formación serían: ¿cuánto cuesta? · ¿qué tengo que hacer yo? · ¿cuánto tarda en
+  entrar el primer lead? · ¿tengo que poner más presupuesto en anuncios? · ¿qué
+  pasa si no entran reuniones? · ¿por qué 1.000 €/mes? · ¿con quién ha
+  funcionado? Grabadas una vez, sirven en gracias, en la cadencia y en la
+  propuesta.
+- **Prueba social verificable** (pagos y reembolsos de plataformas) convence más
+  que "+279 negocios". Nuestra versión posible: reuniones celebradas y clientes
+  activos, con fecha y fuente, nada más.
+
+### Qué no
+- Once minutos de vídeo para un dueño de clínica es demasiado; el nuestro, 2-3.
+- "8 de cada 10 duplican su inversión" y "+279 negocios en 2025" sin fuente, al
+  lado de un bloque que presume de transparencia. Nosotros, cifra con fuente o
+  nada.
+- Candado de contenido: para infoproductores funciona; a un empresario le
+  parece un truco. Lo dejaría abierto.
+
+Fuente: página de gracias y vídeo de prellamada reenviados por Maikel el 7-oct
+(fotogramas en scratchpad, sin audio transcrito); listado de los 7 vídeos tal como
+aparece en la página.
