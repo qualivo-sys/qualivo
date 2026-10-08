@@ -49,9 +49,17 @@ def cargar(ruta):
                  f"Copia {AQUI / 'datos_plan.example.json'} a datos_plan.json y "
                  f"pon tus cifras, o apunta PLAN_DATOS a otro fichero.")
     d = json.loads(ruta.read_text())
-    if len(d["reparto"]["lineas"]) != 4:
-        sys.exit("reparto.lineas debe tener 4 entradas: préstamo, lo que se "
-                 "liquida, el depósito y la caja de arranque.")
+    r = d["reparto"]
+    etq = [n for n, _, _ in r["salidas"]]
+    if r["bloqueada"] not in etq:
+        sys.exit(f"reparto.bloqueada ({r['bloqueada']!r}) no es ninguna de las "
+                 f"salidas: {etq}")
+    for n in r["disponibles"]:
+        if n not in etq:
+            sys.exit(f"reparto.disponibles contiene {n!r}, que no es una salida.")
+    if r["bloqueada"] in r["disponibles"]:
+        sys.exit("la hucha bloqueada no puede estar también en disponibles: es "
+                 "lo único que la hace bloqueada.")
     if len(d["palancas"]) != 7:
         sys.exit("palancas debe tener 7 entradas, en este orden: altas/mes, alta "
                  "única, cuota del cliente nuevo, vida media, umbral de la hucha, "
@@ -71,10 +79,21 @@ IVA_TRIM = {int(k): v for k, v in D["iva_trimestral"].items()}
 PUERTAS  = [tuple(x) for x in D["puertas"]]   # (nombre, cuándo, qué, si bien, si mal)
 NO_HACER = [tuple(x) for x in D["no_se_hace"]]  # (qué, por qué)
 
+SALIDAS = [tuple(x) for x in REPARTO["salidas"]]   # (nombre, importe, por qué)
+
 # ------------------------------------------------------------- filas -------
-R_REP  = 5                                   # el reparto del día 1: 5..11
-R_PAL  = 15                                  # palancas: 15..22
-R_MES  = 26                                  # fila con los nombres de los meses
+R_REP   = 5                                  # lo que hay en el banco hoy
+R_SAL   = R_REP + 1                           # una fila por hucha y por deuda que se liquida
+R_CAJA  = R_SAL + len(SALIDAS)                # = lo que queda en la cuenta corriente
+R_HUCHA = R_CAJA + 1                          # = la suma de las huchas de las que se puede tirar
+# la fila de cada hucha, buscada por su etiqueta: así el orden del fichero de
+# datos puede cambiar sin que se desplace ninguna fórmula
+FILA_H  = {n: R_SAL + j for j, (n, _, _) in enumerate(SALIDAS)}
+R_DEPO  = FILA_H[REPARTO["bloqueada"]]
+R_DISP  = [FILA_H[n] for n in REPARTO["disponibles"]]
+
+R_PAL  = R_HUCHA + 3                         # palancas, 8 filas
+R_MES  = R_PAL + 10                           # fila con los nombres de los meses
 R_ING  = 28                                  # ingresos, uno por línea
 R_CNT  = R_ING + len(INGRESOS)                # nº de clientes nuevos vivos
 R_CNA  = R_CNT + 1                            # clientes nuevos · altas
@@ -181,27 +200,32 @@ def construir():
         ["PRÉSTAMO · PLAN 12 MESES · dónde va el dinero, línea a línea"] + [""] * 13,
         [D["subtitulo"]] + [""] * 13]))
 
-    # ------------------------------------------- el reparto del día 1 ------
-    filas = [["EL REPARTO DEL DÍA 1", "€", "", "por qué"] + [""] * 10]
-    filas += [[n, v, "", nt] + [""] * 10 for n, v, nt in REPARTO["lineas"]]
-    filas += [["= A LA HUCHA", "", "", REPARTO["hucha_nota"]] + [""] * 10,
-              ["Caja en el banco antes del préstamo", REPARTO["caja_previa"][0], "",
-               REPARTO["caja_previa"][1]] + [""] * 10,
-              ["= CAJA OPERATIVA EL DÍA 1", "", "", REPARTO["caja_nota"]] + [""] * 10]
-    vals.append((f"A4:N{R_REP + 6}", filas))
-    # la hucha es el resto: préstamo menos lo que se liquida, el depósito y el arranque
-    forms.append((f"B{R_REP + 4}",
-                  [[f"=B{R_REP}-B{R_REP+1}-B{R_REP+2}-B{R_REP+3}"]]))
-    forms.append((f"B{R_REP + 6}", [[f"=B{R_REP+3}+B{R_REP+5}"]]))
+    # --------------------------------------- el reparto en huchas ----------
+    filas = [["EL REPARTO EN HUCHAS", "€", "", "por qué ese importe y no otro"]
+             + [""] * 10,
+             [REPARTO["entrada"][0], REPARTO["entrada"][1], "",
+              REPARTO["entrada"][2]] + [""] * 10]
+    filas += [[n, v, "", nt] + [""] * 10 for n, v, nt in SALIDAS]
+    filas += [["= CAJA OPERATIVA · cuenta corriente", "", "",
+               REPARTO["caja_nota"]] + [""] * 10,
+              ["= HUCHA DISPONIBLE", "", "", REPARTO["hucha_nota"]] + [""] * 10]
+    vals.append((f"A4:N{R_HUCHA}", filas))
+    # lo que queda en la corriente es el resto: todo lo que no se ha metido en
+    # una hucha ni se ha ido a liquidar deuda
+    forms.append((f"B{R_CAJA}",
+                  [[f"=B{R_REP}-SUM(B{R_SAL}:B{R_SAL + len(SALIDAS) - 1})"]]))
+    # y la hucha del plan son solo las de las que se puede tirar: la Reserva
+    # queda fuera a propósito, porque si entra aquí deja de ser una reserva
+    forms.append((f"B{R_HUCHA}", [["=" + "+".join(f"B{f}" for f in R_DISP)]]))
 
     # ------------------------------------------------------- palancas ------
     filas = [["PALANCAS · cambia estos ocho números y el plan entero se mueve",
               "valor", "", "procedencia"] + [""] * 10]
     filas += [[n, v, "", nt] + [""] * 10 for n, v, _, nt in PALANCAS]
-    filas += [["Depósito a plazo (€)", "", "",
+    filas += [["Reserva empresa · bloqueada (€)", "", "",
                "espejo del reparto · no entra en el flujo del mes"] + [""] * 10]
-    vals.append((f"A14:N{R_PAL + 7}", filas))
-    forms.append((f"B{R_PAL + 7}", [[f"=B{R_REP+2}"]]))
+    vals.append((f"A{R_PAL - 1}:N{R_PAL + 7}", filas))
+    forms.append((f"B{R_PAL + 7}", [[f"=B{R_DEPO}"]]))
 
     # ------------------------------------------------- fila de los meses ---
     vals.append((f"A{R_MES}:N{R_MES}", [["EL MES A MES"] + MESES + ["nota"]]))
@@ -296,7 +320,7 @@ def construir():
         ["Entra"], ["Sale · negocio"], ["Sale · personal"], ["Sale · deuda"],
         ["Sale · impuestos"], ["TOTAL QUE SALE"], ["RESULTADO DEL MES"],
         ["Caja antes de tirar de la hucha"], ["Sale de la hucha"],
-        ["CAJA OPERATIVA al cierre"], ["HUCHA al cierre"], ["DEPÓSITO"],
+        ["CAJA OPERATIVA al cierre"], ["HUCHA al cierre"], ["RESERVA EMPRESA"],
         ["TOTAL DISPONIBLE"]]))
     vals.append((f"N{R_RES + 6}:N{R_RES + 12}", [
         ["si es negativo, ese mes se come colchón"], [""],
@@ -304,14 +328,14 @@ def construir():
          f"objetivo (B{R_PAL+5})"],
         ["lo que hay en la cuenta para operar"],
         ["el colchón que queda · si llega a 0, el plan se ha roto"],
-        ["bloqueado a plazo · fuera del flujo a propósito"],
-        ["caja + hucha + depósito"]]))
+        ["bloqueada · fuera del flujo del mes a propósito"],
+        ["caja + hucha + reserva"]]))
 
     bl = {R_RES + k: [] for k in range(13)}
     for i, c in enumerate(COLS):
         ant       = COLS[i - 1]
-        caja_ant  = f"$B${R_REP + 6}" if i == 0 else f"{ant}{R_RES + 9}"
-        hucha_ant = f"$B${R_REP + 4}" if i == 0 else f"{ant}{R_RES + 10}"
+        caja_ant  = f"$B${R_CAJA}" if i == 0 else f"{ant}{R_RES + 9}"
+        hucha_ant = f"$B${R_HUCHA}" if i == 0 else f"{ant}{R_RES + 10}"
         bl[R_RES + 0].append(f"={c}{R_INGT}")
         bl[R_RES + 1].append(f"={c}{R_QVT}")
         bl[R_RES + 2].append(f"={c}{R_PERT}")
@@ -347,7 +371,7 @@ def construir():
     time.sleep(1)
     h.formato(formatos(h.gid))
     print(f"{TITULO}: listo · {FILAS} filas")
-    print(f"  entra {R_ING}-{R_INGT} · software {R_SW}-{R_SWT} · "
+    print(f"  huchas {R_SAL}-{R_HUCHA} · entra {R_ING}-{R_INGT} · software {R_SW}-{R_SWT} · "
           f"personal {R_PER}-{R_PERT} · deuda {R_DEU}-{R_DEUT} · "
           f"resumen {R_RES}-{R_RES + 12}")
 
@@ -372,7 +396,7 @@ def formatos(gid):
         {"repeatCell": {"range": rango(gid, R_MES, R_MES),
                         "cell": {"userEnteredFormat": cab},
                         "fields": "userEnteredFormat(backgroundColor,textFormat)"}},
-        {"repeatCell": {"range": rango(gid, R_REP, R_REP + 6, 1, 2),
+        {"repeatCell": {"range": rango(gid, R_REP, R_HUCHA, 1, 2),
                         "cell": {"userEnteredFormat": {"numberFormat": eur(2)}},
                         "fields": "userEnteredFormat.numberFormat"}},
         {"repeatCell": {"range": rango(gid, R_ING, R_RES + 13, 1, 13),
@@ -398,12 +422,12 @@ def formatos(gid):
             "range": rango(gid, R_PAL + j, R_PAL + j, 1, 2),
             "cell": {"userEnteredFormat": {"numberFormat": PATRON[fmt]}},
             "fields": "userEnteredFormat.numberFormat"}})
-    for f in (4, 14, R_ING - 1, R_SW - 1, R_PER - 1, R_DEU - 1, R_IMP - 1,
+    for f in (4, R_PAL - 1, R_ING - 1, R_SW - 1, R_PER - 1, R_DEU - 1, R_IMP - 1,
               R_RES - 1, R_GATE - 1, R_NO - 1):
         p.append({"repeatCell": {"range": rango(gid, f, f),
                                  "cell": {"userEnteredFormat": cab},
                                  "fields": "userEnteredFormat(backgroundColor,textFormat)"}})
-    for f in (R_REP + 4, R_REP + 6, R_INGT, R_SWT, R_QVT, R_PERT, R_DEUT,
+    for f in (R_CAJA, R_HUCHA, R_INGT, R_SWT, R_QVT, R_PERT, R_DEUT,
               R_IMPT, R_RES + 5, R_RES + 6, R_RES + 9, R_RES + 10, R_RES + 12):
         p.append({"repeatCell": {"range": rango(gid, f, f),
                                  "cell": {"userEnteredFormat": tot},

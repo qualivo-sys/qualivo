@@ -1,34 +1,52 @@
 {
   "_": "Plantilla. Copia a datos_plan.json y pon tus cifras. datos_plan.json está en .gitignore a propósito.",
   "reparto": {
-    "lineas": [
-      [
-        "Préstamo recibido",
-        10000,
-        "dónde entra"
-      ],
+    "entrada": [
+      "Lo que hay en el banco hoy",
+      10000.0,
+      "fecha de la foto"
+    ],
+    "salidas": [
       [
         "Liquidar la deuda más cara",
-        0,
+        0.0,
         "solo la que cueste más que el préstamo nuevo"
       ],
       [
-        "Al depósito a plazo",
-        6000,
-        "bloqueado · no se toca para gasto corriente"
+        "Hucha · Reserva",
+        6000.0,
+        "los meses que quieras cubrir del ingreso del que dependes"
       ],
       [
-        "A caja operativa de arranque",
-        1000,
-        "para no arrancar el mes 1 a cero"
+        "Hucha · Gasto variable",
+        1500.0,
+        "solo hasta la primera puerta de decisión"
+      ],
+      [
+        "Hucha · Operaciones",
+        1000.0,
+        "dos meses de coste fijo y el peor mes del plan"
+      ],
+      [
+        "Hucha · Impuestos",
+        500.0,
+        "lo ya devengado · se rellena cada mes, no de aquí"
+      ],
+      [
+        "Hucha · Beneficios",
+        0.0,
+        "a cero hasta que haya un mes que cierre en positivo de verdad"
       ]
     ],
-    "hucha_nota": "lo que queda · el colchón del que se tira si un mes falla",
-    "caja_previa": [
-      0,
-      "lo que había en el banco antes"
+    "bloqueada": "Hucha · Reserva",
+    "disponibles": [
+      "Hucha · Gasto variable",
+      "Hucha · Operaciones",
+      "Hucha · Impuestos",
+      "Hucha · Beneficios"
     ],
-    "caja_nota": "arranque + lo que ya había"
+    "caja_nota": "lo que queda en la corriente para operar el mes",
+    "hucha_nota": "las huchas de las que sí se puede tirar · la Reserva queda fuera"
   },
   "palancas": [
     [
