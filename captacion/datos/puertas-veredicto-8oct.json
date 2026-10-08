@@ -1,0 +1,551 @@
+{
+  "puertas": {
+    "sin-clasificar": {
+      "envios": 9498,
+      "respuestas": 143,
+      "campanas": [
+        {
+          "id": 4090069,
+          "nombre": "ABM Type A · L1 · semana 1 (6-oct)",
+          "estado": "ACTIVE",
+          "envios": 3,
+          "respuestas": 1
+        },
+        {
+          "id": 4071068,
+          "nombre": "Kubysoft · clima ES · tanda A",
+          "estado": "ACTIVE",
+          "envios": 24,
+          "respuestas": 0
+        },
+        {
+          "id": 4025816,
+          "nombre": "DKR · Open Playtest · Criadores BR",
+          "estado": "ACTIVE",
+          "envios": 30,
+          "respuestas": 0
+        },
+        {
+          "id": 4018188,
+          "nombre": "DKR · Open Playtest · Criadores PT",
+          "estado": "COMPLETED",
+          "envios": 12,
+          "respuestas": 0
+        },
+        {
+          "id": 4001007,
+          "nombre": "DKR · Open Playtest · Creadores UK (lista del estudio)",
+          "estado": "PAUSED",
+          "envios": 20,
+          "respuestas": 0
+        },
+        {
+          "id": 3976201,
+          "nombre": "Asesorías · presupuesto parado (landing 17-sep)",
+          "estado": "PAUSED",
+          "envios": 30,
+          "respuestas": 0
+        },
+        {
+          "id": 3976199,
+          "nombre": "Clínicas · precio por WhatsApp (landing 17-sep)",
+          "estado": "PAUSED",
+          "envios": 239,
+          "respuestas": 2
+        },
+        {
+          "id": 3974839,
+          "nombre": "DKR · Open Playtest · Creadores ES",
+          "estado": "ACTIVE",
+          "envios": 75,
+          "respuestas": 2
+        },
+        {
+          "id": 3974838,
+          "nombre": "DKR · Open Playtest · Creadores EN",
+          "estado": "ACTIVE",
+          "envios": 315,
+          "respuestas": 12
+        },
+        {
+          "id": 3974666,
+          "nombre": "Obra · presupuestos (Maps 5 ciudades)",
+          "estado": "PAUSED",
+          "envios": 179,
+          "respuestas": 0
+        },
+        {
+          "id": 3940264,
+          "nombre": "V3 · Motor de puertas (copy por lead)",
+          "estado": "COMPLETED",
+          "envios": 492,
+          "respuestas": 11
+        },
+        {
+          "id": 3918872,
+          "nombre": "ICP10 · Dirección nueva (Brain)",
+          "estado": "COMPLETED",
+          "envios": 12,
+          "respuestas": 0
+        },
+        {
+          "id": 3918858,
+          "nombre": "ICP08 · CRM sin disciplina (Brain)",
+          "estado": "COMPLETED",
+          "envios": 45,
+          "respuestas": 0
+        },
+        {
+          "id": 3918857,
+          "nombre": "ICP15 · Base desaprovechada (Brain)",
+          "estado": "PAUSED",
+          "envios": 55,
+          "respuestas": 0
+        },
+        {
+          "id": 3918549,
+          "nombre": "Solar · con señal (Brain, 8-sep) BORRADOR",
+          "estado": "COMPLETED",
+          "envios": 12,
+          "respuestas": 0
+        },
+        {
+          "id": 3918544,
+          "nombre": "Multiservicio · Brain (8-sep) BORRADOR",
+          "estado": "COMPLETED",
+          "envios": 45,
+          "respuestas": 0
+        },
+        {
+          "id": 3887259,
+          "nombre": "Gestorías · Piloto (1-sep)",
+          "estado": "COMPLETED",
+          "envios": 78,
+          "respuestas": 0
+        },
+        {
+          "id": 3885638,
+          "nombre": "Vuelta al curso · Re-enganche (1-sep)",
+          "estado": "COMPLETED",
+          "envios": 219,
+          "respuestas": 6
+        },
+        {
+          "id": 3885628,
+          "nombre": "SDR · Septiembre w1 (Cirera, Monlab, Vunkers)",
+          "estado": "COMPLETED",
+          "envios": 9,
+          "respuestas": 0
+        },
+        {
+          "id": 3885627,
+          "nombre": "Vuelta al curso · Academias (1-sep)",
+          "estado": "COMPLETED",
+          "envios": 42,
+          "respuestas": 2
+        },
+        {
+          "id": 3867619,
+          "nombre": "SDR · Growth (27-ago)",
+          "estado": "COMPLETED",
+          "envios": 6,
+          "respuestas": 0
+        },
+        {
+          "id": 3858902,
+          "nombre": "Fugues · Andorra i Lleida (27-ago)",
+          "estado": "COMPLETED",
+          "envios": 17,
+          "respuestas": 0
+        },
+        {
+          "id": 3848494,
+          "nombre": "SDR · Expansión y contenido (25-ago)",
+          "estado": "COMPLETED",
+          "envios": 6,
+          "respuestas": 0
+        },
+        {
+          "id": 3835362,
+          "nombre": "SDR · Señales de crecimiento (21-ago)",
+          "estado": "COMPLETED",
+          "envios": 18,
+          "respuestas": 0
+        },
+        {
+          "id": 3817065,
+          "nombre": "Administradores de fincas · líneas de servicio",
+          "estado": "COMPLETED",
+          "envios": 39,
+          "respuestas": 0
+        },
+        {
+          "id": 3817064,
+          "nombre": "PRL y salud laboral · líneas de servicio",
+          "estado": "COMPLETED",
+          "envios": 35,
+          "respuestas": 2
+        },
+        {
+          "id": 3817054,
+          "nombre": "Agent for Me · Gestorías (A2)",
+          "estado": "COMPLETED",
+          "envios": 86,
+          "respuestas": 3
+        },
+        {
+          "id": 3812488,
+          "nombre": "ICP Adelantta · líneas de servicio · ago2026",
+          "estado": "COMPLETED",
+          "envios": 172,
+          "respuestas": 4
+        },
+        {
+          "id": 3804379,
+          "nombre": "Agent to Me · contratando administrativo (A1)",
+          "estado": "COMPLETED",
+          "envios": 60,
+          "respuestas": 0
+        },
+        {
+          "id": 3785391,
+          "nombre": "Infoproducto ES · creadores (Mailerfind)",
+          "estado": "PAUSED",
+          "envios": 152,
+          "respuestas": 4
+        },
+        {
+          "id": 3784821,
+          "nombre": "Señales ES · contratando comerciales",
+          "estado": "COMPLETED",
+          "envios": 205,
+          "respuestas": 3
+        },
+        {
+          "id": 3784421,
+          "nombre": "Señales ES · contratando comerciales",
+          "estado": "PAUSED",
+          "envios": 161,
+          "respuestas": 0
+        },
+        {
+          "id": 3783604,
+          "nombre": "SaaS ES · Lanzadera PERSONALIZADA",
+          "estado": "COMPLETED",
+          "envios": 36,
+          "respuestas": 0
+        },
+        {
+          "id": 3777287,
+          "nombre": "Formación ES · Radiografía PERSONALIZADA",
+          "estado": "COMPLETED",
+          "envios": 24,
+          "respuestas": 0
+        },
+        {
+          "id": 3772188,
+          "nombre": "Solar ES · Radiografía PERSONALIZADA",
+          "estado": "STOPPED",
+          "envios": 72,
+          "respuestas": 0
+        },
+        {
+          "id": 3772173,
+          "nombre": "Inmobiliarias ES · Genérica (volumen)",
+          "estado": "PAUSED",
+          "envios": 1407,
+          "respuestas": 12
+        },
+        {
+          "id": 3772073,
+          "nombre": "Construcción ES · Radiografía PERSONALIZADA",
+          "estado": "COMPLETED",
+          "envios": 54,
+          "respuestas": 0
+        },
+        {
+          "id": 3767479,
+          "nombre": "Solar ES · Genérica (volumen)",
+          "estado": "PAUSED",
+          "envios": 1086,
+          "respuestas": 9
+        },
+        {
+          "id": 3767478,
+          "nombre": "Inmobiliarias ES · Q3 (banco)",
+          "estado": "STOPPED",
+          "envios": 85,
+          "respuestas": 0
+        },
+        {
+          "id": 3766939,
+          "nombre": "Clínicas ES · Radiografía PERSONALIZADA (test)",
+          "estado": "STOPPED",
+          "envios": 79,
+          "respuestas": 0
+        },
+        {
+          "id": 3715571,
+          "nombre": "Clínicas ES · Q3 · estética/dental",
+          "estado": "PAUSED",
+          "envios": 659,
+          "respuestas": 4
+        },
+        {
+          "id": 3715161,
+          "nombre": "Construcción ES · Q3 · cerrar obras",
+          "estado": "PAUSED",
+          "envios": 1028,
+          "respuestas": 11
+        },
+        {
+          "id": 3613565,
+          "nombre": "Qualivo · Prospección por ofertas (señales de contratación)",
+          "estado": "COMPLETED",
+          "envios": 16,
+          "respuestas": 0
+        },
+        {
+          "id": 3608540,
+          "nombre": "Academias ES · Q3 2026 · voz Maikel",
+          "estado": "PAUSED",
+          "envios": 2059,
+          "respuestas": 55
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "1.5%, por debajo del 2%",
+      "tasa": 1.51
+    },
+    "curso-abierto": {
+      "envios": 264,
+      "respuestas": 3,
+      "campanas": [
+        {
+          "id": 3976197,
+          "nombre": "Formación · curso sin cerrar (landing 17-sep)",
+          "estado": "ACTIVE",
+          "envios": 264,
+          "respuestas": 3
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "1.1%, por debajo del 2%",
+      "tasa": 1.14
+    },
+    "google-ads": {
+      "envios": 221,
+      "respuestas": 3,
+      "campanas": [
+        {
+          "id": 3963336,
+          "nombre": "Anuncios · Google Ads (señal)",
+          "estado": "ACTIVE",
+          "envios": 221,
+          "respuestas": 3
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "1.4%, por debajo del 2%",
+      "tasa": 1.36
+    },
+    "activecampaign": {
+      "envios": 177,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3967649,
+          "nombre": "Lista · ActiveCampaign (señal)",
+          "estado": "ACTIVE",
+          "envios": 177,
+          "respuestas": 1
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.6%, por debajo del 2%",
+      "tasa": 0.56
+    },
+    "meta-ads": {
+      "envios": 156,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3967855,
+          "nombre": "Rescate · Funnel Meta feb 2026",
+          "estado": "PAUSED",
+          "envios": 46,
+          "respuestas": 1
+        },
+        {
+          "id": 3964316,
+          "nombre": "Anuncios · Meta (señal)",
+          "estado": "ACTIVE",
+          "envios": 110,
+          "respuestas": 0
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.6%, por debajo del 2%",
+      "tasa": 0.64
+    },
+    "dynamics": {
+      "envios": 137,
+      "respuestas": 0,
+      "campanas": [
+        {
+          "id": 3964312,
+          "nombre": "CRM · Dynamics 365 (señal)",
+          "estado": "PAUSED",
+          "envios": 137,
+          "respuestas": 0
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.0%, por debajo del 2%",
+      "tasa": 0.0
+    },
+    "zoho": {
+      "envios": 132,
+      "respuestas": 2,
+      "campanas": [
+        {
+          "id": 3964313,
+          "nombre": "CRM · Zoho (señal)",
+          "estado": "ACTIVE",
+          "envios": 132,
+          "respuestas": 2
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "1.5%, por debajo del 2%",
+      "tasa": 1.52
+    },
+    "salesforce": {
+      "envios": 130,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3963217,
+          "nombre": "CRM · Salesforce (señal)",
+          "estado": "ACTIVE",
+          "envios": 130,
+          "respuestas": 1
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.8%, por debajo del 2%",
+      "tasa": 0.77
+    },
+    "pipedrive": {
+      "envios": 125,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3964076,
+          "nombre": "CRM · Pipedrive (señal)",
+          "estado": "PAUSED",
+          "envios": 125,
+          "respuestas": 1
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.8%, por debajo del 2%",
+      "tasa": 0.8
+    },
+    "intelligence": {
+      "envios": 123,
+      "respuestas": 6,
+      "campanas": [
+        {
+          "id": 4042995,
+          "nombre": "Servicios B2B · Intelligence (29-sep)",
+          "estado": "ACTIVE",
+          "envios": 32,
+          "respuestas": 0
+        },
+        {
+          "id": 4042994,
+          "nombre": "Formación · Intelligence (29-sep)",
+          "estado": "ACTIVE",
+          "envios": 84,
+          "respuestas": 5
+        },
+        {
+          "id": 4042992,
+          "nombre": "Clínica · Intelligence (29-sep)",
+          "estado": "ACTIVE",
+          "envios": 7,
+          "respuestas": 1
+        }
+      ],
+      "decision": "una-semana-mas",
+      "motivo": "4.9%, cambiar el angulo antes de volver a medir",
+      "tasa": 4.88
+    },
+    "mailchimp": {
+      "envios": 115,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3967647,
+          "nombre": "Lista · Mailchimp (señal)",
+          "estado": "PAUSED",
+          "envios": 115,
+          "respuestas": 1
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.9%, por debajo del 2%",
+      "tasa": 0.87
+    },
+    "brevo": {
+      "envios": 111,
+      "respuestas": 0,
+      "campanas": [
+        {
+          "id": 3967646,
+          "nombre": "Lista · Brevo (señal)",
+          "estado": "PAUSED",
+          "envios": 111,
+          "respuestas": 0
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.0%, por debajo del 2%",
+      "tasa": 0.0
+    },
+    "odoo": {
+      "envios": 107,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3963237,
+          "nombre": "CRM · Odoo (señal)",
+          "estado": "PAUSED",
+          "envios": 107,
+          "respuestas": 1
+        }
+      ],
+      "decision": "cerrar",
+      "motivo": "0.9%, por debajo del 2%",
+      "tasa": 0.93
+    },
+    "linkedin-ads": {
+      "envios": 60,
+      "respuestas": 1,
+      "campanas": [
+        {
+          "id": 3964077,
+          "nombre": "Anuncios · LinkedIn Ads (señal)",
+          "estado": "ACTIVE",
+          "envios": 60,
+          "respuestas": 1
+        }
+      ],
+      "decision": "insuficiente",
+      "motivo": "solo 60 envios, la regla pide 100",
+      "tasa": 1.67
+    }
+  },
+  "aviso": "respuestas = filas con reply_time, que incluye autorespondedores. En el triaje del 11-sep 36 de 108 respuestas eran ausencias automaticas, o sea un tercio. Trata estas tasas como techo."
+}
