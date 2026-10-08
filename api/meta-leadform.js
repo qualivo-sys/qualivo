@@ -117,7 +117,8 @@ function valor(campos, nombres) {
 }
 
 async function traerLead(leadgenId, token) {
-  const r = await fetch(GRAPH + '/' + leadgenId + '?access_token=' + encodeURIComponent(token));
+  // Sin «fields» la Graph API no devuelve ad_id, y sin él el contacto no lleva la etiqueta creativo-* (8-oct: primer lead del funnel v2).
+  const r = await fetch(GRAPH + '/' + leadgenId + '?fields=id,created_time,ad_id,adset_id,campaign_id,form_id,is_organic,field_data&access_token=' + encodeURIComponent(token));
   if (!r.ok) throw new Error('graph ' + r.status + ' ' + (await r.text()).slice(0, 200));
   return r.json();
 }
@@ -226,7 +227,7 @@ async function guardar(lead, opts) {
   const inversionCruda = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
   const fugaCruda = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios', 'web', 'respuesta', 'seguimiento', 'no lo s']);
   const inversion = CLAVES_INV[inversionCruda] || inversionCruda;
-  const fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
+  let fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
   // Formulario del 28-sep-2026: «¿Cuándo te gustaría empezar?» y «Nuestros
   // proyectos empiezan desde 750 €/mes. ¿Encaja con lo que buscas?». Entran
   // como etiquetas cuando-* y precio-* y las lee la puntuación (api/_scoring.js).
@@ -250,6 +251,12 @@ async function guardar(lead, opts) {
   // (la pregunta quedó falsada), así que su ausencia no puede tratarse como
   // «nada todavía». Modo sombra: solo se añaden etiquetas; ver api/_funnel-v2.js.
   const v2 = require('./_funnel-v2.js').desdeCampos(campos);
+  // Formularios del funnel v2: no preguntan «dónde se escapa», preguntan «qué te pasa»; sin esto el primer
+  // WhatsApp decía «no tienes claro dónde se te escapa» a quien había marcado que entran y no compran.
+  if (v2 && !fuga) {
+    const dol = (v2.etiquetas.filter(function (t) { return /^dolor-/.test(t); })[0] || '').slice(6);
+    fuga = dol === 'seguimiento' ? CLAVES_FUGA.seguimiento : (dol === 'captacion' || dol === 'calidad') ? CLAVES_FUGA.anuncios : dol === 'nose' ? CLAVES_FUGA.nose : '';
+  }
   const invierte = v2 ? true : (!!inversion && String(inversionCruda) !== 'nada' &&
     !/^nada/i.test(String(inversion)));
 

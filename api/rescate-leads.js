@@ -106,7 +106,7 @@ module.exports = async function handler(req, res) {
 
   for (const form of formularios) {
     try {
-      const r = await fetch(GRAPH + '/' + form + '/leads?limit=50&access_token=' + encodeURIComponent(token));
+      const r = await fetch(GRAPH + '/' + form + '/leads?limit=50&fields=id,created_time,ad_id,adset_id,campaign_id,is_organic,field_data&access_token=' + encodeURIComponent(token));
       if (!r.ok) {
         const t = (await r.text()).slice(0, 200);
         // Un token caducado es justo lo que provoco la perdida. Que se vea.
