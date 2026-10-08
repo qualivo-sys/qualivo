@@ -52,7 +52,32 @@ def main():
     key, nombre, fichero, tope = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
     leads = json.load(open(fichero, encoding="utf-8"))
 
-    cuentas = [c["id"] for c in api("GET", "/email-accounts/?offset=0&limit=100", key)]
+    # Dominios que NO pueden enviar. goqualivo y gotqualivo estan en la lista
+    # negra de URLs SURBL desde antes del 1-oct-2026.
+    #
+    # Por que existe este filtro: hasta hoy esta linea cogia TODOS los buzones.
+    # Las campanas de puerta nacieron el 16-sep con los 15, asi que mas de la
+    # mitad de su capacidad salio por dominios listados. Cuando el 8-oct medi
+    # esas puertas y vi tasas del 0,0% al 1,5%, no estaba midiendo la senal:
+    # estaba midiendo la entregabilidad. Cerre nueve puertas con ese dato y
+    # tuve que retirar el veredicto.
+    #
+    # Si algun dia hay que volver a enviar por un dominio de esta lista, se
+    # quita de aqui a mano y se escribe por que. Nunca por defecto.
+    DOMINIOS_VETADOS = ("goqualivo.com", "gotqualivo.com")
+
+    todas = api("GET", "/email-accounts/?offset=0&limit=100", key)
+    cuentas, vetadas = [], []
+    for c in todas:
+        correo = str(c.get("from_email") or "").lower()
+        if any(correo.endswith("@" + d) for d in DOMINIOS_VETADOS):
+            vetadas.append(correo)
+        else:
+            cuentas.append(c["id"])
+    if vetadas:
+        print(f"  {len(vetadas)} buzones excluidos por dominio vetado: {', '.join(vetadas)}")
+    if not cuentas:
+        sys.exit("ningun buzon utilizable: todos estan en la lista de vetados")
 
     cid = api("POST", "/campaigns/create", key, {"name": nombre})["id"]
     print(f"campana creada: {cid} · {nombre}")
