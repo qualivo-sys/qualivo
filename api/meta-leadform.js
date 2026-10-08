@@ -240,8 +240,12 @@ async function guardar(lead, opts) {
   // la campana y le llamaba el agente de voz, mientras la landing al mismo
   // perfil le decia con claridad que todavia no. Dos puertas, dos respuestas
   // distintas al mismo lead.
-  const invierte = !!inversion && String(inversionCruda) !== 'nada' &&
-    !/^nada/i.test(String(inversion));
+  // Funnel v2 (8-oct-2026): los formularios nuevos no preguntan por la inversión
+  // (la pregunta quedó falsada), así que su ausencia no puede tratarse como
+  // «nada todavía». Modo sombra: solo se añaden etiquetas; ver api/_funnel-v2.js.
+  const v2 = require('./_funnel-v2.js').desdeCampos(campos);
+  const invierte = v2 ? true : (!!inversion && String(inversionCruda) !== 'nada' &&
+    !/^nada/i.test(String(inversion)));
 
   const sello = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
   const etiquetas = ['leadform'];
@@ -256,7 +260,7 @@ async function guardar(lead, opts) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
       'activacion', 'act-ini-' + sello);
     // Sin pregunta de inversión (formulario nuevo), el precio hace de capacidad.
-    if (!invierte && !(precio === 'si' || precio === 'depende')) etiquetas.push('sin-inversion');
+    if (!v2 && !invierte && !(precio === 'si' || precio === 'depende')) etiquetas.push('sin-inversion');
   } else {
     // Formulario que no es de esta campaña: se guarda y se queda quieto.
     etiquetas.push('leadform-otra-campana');
@@ -276,6 +280,7 @@ async function guardar(lead, opts) {
   // El id del lead en Meta, para devolverle la calidad (Qualified/Disqualified) más tarde.
   if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
+  if (v2) v2.etiquetas.forEach(function (t) { etiquetas.push(t); });
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook
   // no procesó el aviso de Meta): se añaden los datos del formulario, pero no
@@ -332,6 +337,12 @@ async function guardar(lead, opts) {
       detalle: !deEstaCampana ? 'otra campaña' : (invierte ? '' : 'nada todavía')
     });
     if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
+  }
+  if (contactId && v2) {
+    await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+      method: 'POST', headers: headers,
+      body: JSON.stringify({ body: v2.nota + (lead.form_id ? '\nFormulario: ' + lead.form_id : '') + '\n\n' + new Date().toISOString() })
+    }).catch(function () {});
   }
   if (contactId && (inversion || fuga)) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
