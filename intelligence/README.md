@@ -14,6 +14,7 @@ Todos los datos son ficticios. La demo no envía mensajes, no llama y no toca GH
 /intelligence/?sector=nutricion&empresa=NOMBRE&objetivo=seguimiento   (consulta de nutrición y psicoterapia: programa individual o grupo)
 /intelligence/?sector=cirugia&empresa=NOMBRE&objetivo=seguimiento     (cirugía plástica y medicina estética: valoración, presupuesto, financiación)
 /intelligence/?sector=retiros&empresa=NOMBRE&objetivo=retencion       (marketplace de retiros: base de datos, plazas guardadas y reservas; sin anuncios)
+/intelligence/?sector=maritima&empresa=NOMBRE&objetivo=seguimiento  (formación marítima homologada: renovación de certificados para embarcar y formación para flotas, náuticas y puertos; casi sin anuncios)
 /intelligence/?sector=inmobiliaria  ·  ?sector=reformas  ·  ?sector=otro
 /intelligence/?sector=marketing&empresa=NOMBRE      (agencia que capta sus propios clientes)
 /intelligence/?sector=agencias&empresa=NOMBRE       (vista para agencias: su cartera de clientes)
@@ -22,7 +23,7 @@ Todos los datos son ficticios. La demo no envía mensajes, no llama y no toca GH
 
 Parámetros:
 
-- `sector`: formacion, saas, b2b, clinica, nutricion, inmobiliaria, reformas, marketing, agencias, qualivo u otro. Sin él sale la pantalla de inicio.
+- `sector`: formacion, maritima, saas, b2b, clinica, nutricion, inmobiliaria, reformas, marketing, agencias, qualivo u otro. Sin él sale la pantalla de inicio.
 - `empresa`: aparece en la cabecera («Intelligence System · Skolae») y en el Copilot.
 - `objetivo`: captacion, conversion, seguimiento, ventas, retencion, expansion o todo. Ordena las preguntas sugeridas y resalta los KPI.
 - `historia`: la historia del modo demo, si el sector tiene varias (formación: `empresa` o `alumno`).

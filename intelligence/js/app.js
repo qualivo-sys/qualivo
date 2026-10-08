@@ -28,6 +28,7 @@
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
     { id: 'masters', txt: 'Másteres online', desc: 'Escuela online con alumnos de varios países', ico: 'formacion' },
     { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
+    { id: 'maritima', txt: 'Formación marítima', desc: 'Formación homologada: certificados para embarcar y cursos para flotas, náuticas y puertos', ico: 'formacion' },
     { id: 'retiros', txt: 'Marketplace de retiros', desc: 'Retiros de yoga, meditación y silencio: base de datos, plazas y reservas', ico: 'otro' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
@@ -668,7 +669,7 @@
       }).join('');
       const maxEv = Math.max.apply(null, a.eventos.map(function (e) { return e.n; }));
       return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', T.anunciosIntro || 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice a ' + T.laVenta + ' y no al formulario.') +
-        (masEntra && peor ? '<div class="tarjeta" style="margin-bottom:14px;display:flex;gap:14px;align-items:flex-start"><span class="feed-ico t-coral" style="width:34px;height:34px;border-radius:10px;flex:none">' + ico('anuncio') + '</span><p style="font-size:14px"><b>' + esc(masEntra.c.nombre) + '</b> trae más ' + T.contactos + ' que ninguna (' + M.num(masEntra.entra) + ' a ' + M.euros(masEntra.cpl) + ') y ' + M.pl(masEntra.ventas, T.venta, T.ventas) + '. El anuncio más barato no es el que más vende: sin esta capa, la plataforma sigue premiando lo barato.</p></div>' : '') +
+        (masEntra && peor && cfg.bannerAnuncios !== false ? '<div class="tarjeta" style="margin-bottom:14px;display:flex;gap:14px;align-items:flex-start"><span class="feed-ico t-coral" style="width:34px;height:34px;border-radius:10px;flex:none">' + ico('anuncio') + '</span><p style="font-size:14px"><b>' + esc(masEntra.c.nombre) + '</b> trae más ' + T.contactos + ' que ninguna (' + M.num(masEntra.entra) + ' a ' + M.euros(masEntra.cpl) + ') y ' + M.pl(masEntra.ventas, T.venta, T.ventas) + '. El anuncio más barato no es el que más vende: sin esta capa, la plataforma sigue premiando lo barato.</p></div>' : '') +
         '<div class="tabla-caja"><table class="tabla"><thead><tr><th>Campaña</th><th class="num">' + esc(T.Contactos) + '</th><th class="num ocultar-movil">Encaje medio</th><th class="num">' + esc(T.Ventas) + '</th><th class="num">Retorno</th><th>Lo que dice el sistema</th></tr></thead><tbody>' + filas + '</tbody></table></div>' +
         '<div class="rejilla r-2" style="margin-top:14px">' +
           '<div class="tarjeta"><h3>Lo que vuelve a las plataformas <span class="sub">Últimos 30 días</span></h3><p class="gris" style="font-size:12.5px;margin:4px 0 12px">Cada paso del recorrido se devuelve a ' + esc(M.unir(a.canales)) + ' como conversión, con su valor. Así el algoritmo aprende a buscar gente que ' + esc(T.convierten) + ', no gente que rellena formularios.</p>' +
