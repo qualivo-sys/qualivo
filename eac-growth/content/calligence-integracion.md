@@ -136,7 +136,64 @@ precalificación de n8n, así que las dos piezas encajan sin trabajo extra.
 
 ---
 
-## 5 · Lo que falta
+---
+
+## 5 · Respuestas a lo que preguntó Andrés (8-oct)
+
+### ¿El calendario es de una persona o round robin?
+
+**Round robin, los cuatro.** Cada uno reparte al 50 % entre dos personas:
+
+| Calendario | Reparto |
+|---|---|
+| TCP Online · `ioHhQzGFWSDrTZ5wiWJK` | Cursos EAC 50 % · Ludmila Mia 50 % |
+| TCP Presencial · `xQnPRSCwFBsyaNyuLx6g` | igual |
+| Azafata de Tierra · `ZUGucAyo260mo68ieXB7` | igual |
+| Despachador · `NOOzpOmm1qgvr0LA2kKv` | igual |
+
+Son IDs de calendario, no de grupo.
+
+### El campo del curso
+
+Existe: **`Programa interes`**, id `nNHjlcQ0uABOGPQDwfI6`, tipo opción única.
+
+**Pero estaba relleno en el 2 % de los contactos.** Sobre 300 revisados, solo 5
+lo tenían; los 189 que vienen de Facebook, ninguno. Meta no lo manda, así que
+Calligence habría leído vacío casi siempre.
+
+Resuelto en n8n: el workflow de precalificación **deduce el curso** del nombre
+de la campaña (`attributionSource.campaign`) o del formulario de la web, y lo
+escribe antes de que el lead salga hacia Calligence. Verificado:
+
+| Origen | Deduce |
+|---|---|
+| `[AD] Clientes Potenciales (Intereses)` | TCP / Auxiliar de vuelo |
+| `Despachador de vuelo web` | Flight Dispatcher |
+| `Auxiliar de vuelo web` | TCP / Auxiliar de vuelo |
+| TikTok, sin campaña reconocible | Aun no estoy seguro |
+
+> ⚠️ **El campo no tiene opción para «Azafata de tierra».** Sus opciones son
+> TCP / Auxiliar de vuelo, Piloto comercial, Flight Dispatcher, Marketing aereo
+> y Aun no estoy seguro. Mientras ATO siga pausada no molesta, pero si se
+> reactiva hay que añadir la opción o esos leads irán mal etiquetados.
+
+---
+
+## 6 · El envío, montado en n8n
+
+`EAC · Enviar lead a Calligence` (`FF3vkBcZWMM7Ubmg`), inactivo.
+
+Recibe un `contactId`, se trae el contacto de GHL y antes de mandar nada
+comprueba dos cosas: que hay **teléfono válido** (Calligence va a llamar: sin
+número gastaríamos un lead de su cuota) y que **no se ha enviado ya**. Después
+marca el contacto con `enviado-calligence`.
+
+La URL del webhook vive **solo dentro de n8n**, nunca en este repo: Andrés pidió
+tratarla como una contraseña.
+
+---
+
+## 7 · Lo que falta
 
 - [ ] Crear el Private Integration token dedicado y mandárselo a Andrés
 - [ ] Confirmarle el `calendar_id` que elijamos
