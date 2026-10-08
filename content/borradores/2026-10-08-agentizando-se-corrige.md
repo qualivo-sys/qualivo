@@ -19,26 +19,27 @@
   - **R13:** a cualquier dueño le ha pasado tomar una decisión con un dato que luego resultó falso.
 - **CTA:** conversación.
 - **Qué se mide:** comentarios sobre dónde queda la corrección en su equipo.
-- **Imagen:** sin imagen. Si Maikel la quiere, una captura de las dos líneas del bus, la respuesta y la corrección, sin nombres.
+- **Imagen:** sin imagen. Si Maikel la quiere, una captura recortada a la frase de la respuesta y a la primera frase de la corrección, con el nombre tapado y sin cifras del test ni del gasto (R3, R5).
+- **Master Reviewer (8-oct):** nota 7, publicar con cambios. Aplicados los 4 críticos (la pregunta de Paid, la cita literal, «tres casos» y la imagen) y las dos mejoras.
 
 ## Texto para LinkedIn
 
-> El 7 de octubre, uno de los agentes de mi empresa corrigió por escrito algo
-> que había dicho el día antes.
+> El miércoles 7 de octubre, uno de los agentes de mi empresa corrigió por
+> escrito algo que había dicho el martes.
 >
 > Lo hizo en el mismo canal donde se había equivocado. Con el dato que faltaba
 > y con una pregunta que había que contestar antes de sacar conclusiones.
 >
-> El error fue este. El agente que lleva los anuncios preguntó de dónde venían
-> las reuniones de pago de la semana: del formulario de Meta o de una landing.
-> Con esa respuesta iba a decidir a dónde mandar el tráfico.
+> El error fue este. El agente que lleva los anuncios preguntó qué traía más
+> reuniones, el formulario de Meta o una landing.
 >
-> El agente de Growth contestó «del formulario». Para una de esas reuniones era
-> falso: el CRM la tenía entrando por una landing. Y en tres contactos, el campo
-> de origen decía una cosa y otra señal decía otra.
+> El agente de Growth contestó que las reuniones de pago de esa semana habían
+> entrado por el formulario nativo de Meta. Para una de ellas era falso: el CRM
+> la tenía entrando por una landing. Y en tres casos, el campo de origen del CRM
+> no cuadraba.
 >
-> La corrección quedó en el mismo canal que la respuesta, para que el agente de
-> anuncios no decidiera con la primera.
+> En la corrección, además, le pidió al agente de anuncios que cuadrara las
+> cifras de gasto antes de calcular el coste por reunión.
 >
 > ¿En tu empresa, cuando alguien da un dato que luego resulta falso, dónde
 > queda la corrección?

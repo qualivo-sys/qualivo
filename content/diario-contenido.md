@@ -1231,3 +1231,43 @@ Maikel compartió la revisión de ChatGPT de la web V2 y dijo «podemos ir hacie
 3. **D7:** el WhatsApp automático desde su número. Recomendación: hablarlo con Growth antes del post 3.
 
 **Hipótesis para mañana:** si el post 1 sale hoy, las cuentas A que reciben la conexión de Growth miran el perfil y alguna lo comenta o lo menciona al responder. Se mide el viernes con Growth.
+
+### Jueves 8-oct · trabajo del día
+
+**Publicado:**
+- **[/blog/objecion-de-precio/](https://qualivo.io/blog/objecion-de-precio/)** («Objeción de precio: qué hacer cuando el cliente dice que no tiene presupuesto»).
+  - Tema de la semana 41: siguiente paso. Prepara la 42: cualificación.
+  - **Dato real, del daily de Growth del 6-oct:** de los cinco «no» de la semana, cuatro fueron por presupuesto o por momento, y la objeción que más se repetía era la cuota mensual. Ese día se preparó la oferta en dos formas.
+  - **Sin nombres ni sector,** porque hay un contacto abierto.
+  - Va con tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+- **Re-apunte de [/blog/ahora-no-es-el-momento/](https://qualivo.io/blog/ahora-no-es-el-momento/).**
+  - El primer párrafo de «Qué hacemos nosotros con esto» lleva el dato y enlaza al artículo nuevo.
+  - Un solo botón, como ya tenía.
+  - Fuera también un «Casi nunca» sin fuente en una FAQ.
+- **Registro de keywords:** apuntado también el re-apunte del 7-oct (`crm-gratis-para-pymes`), que faltaba.
+
+**Borrador:** `content/borradores/2026-10-08-agentizando-se-corrige.md` («Un agente que se corrige por escrito»).
+- **Dato:** el 6-oct, Growth respondió a Paid de dónde venían las reuniones de pago, y el 7-oct se corrigió por escrito. Una de ellas venía de una landing y el origen no cuadraba en tres casos.
+- **Sin tasas del test**, que sigue abierto (R3), y sin nombres.
+- **Cuándo va:** hoy en LinkedIn toca el post 2 de la cobertura si el post 1 salió ayer. Si es así, este queda para el lunes 12.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-08.md`): artículo 6, re-apunte 6 y LinkedIn 7. Aplicados los 12 críticos. Lo importante:
+- la cifra literal es «los cinco «no» de esa semana», no «nuestros últimos cinco» ni «reuniones»;
+- el destacado ya no da a entender que cambiar la forma de pago cambie el «no», porque un caso con la versión sin cuota siguió en «no»;
+- lo que se propuso añadir al formulario fue solo la pregunta de cuánto cobra la empresa, y sigue pendiente;
+- en LinkedIn, la pregunta de Paid y la respuesta de Growth van tal como están en el bus.
+
+**Descartado:** el capítulo de newsletter. Hoy es jueves, no toca (punto D), y además la newsletter va quincenal con el Content OS.
+
+**Decisiones para Maikel:**
+1. **D1, LinkedIn:** ¿salió ayer el post 1 de la cobertura? Recomendación: si salió, hoy el post 2 y el borrador de «Agentizando» el lunes 12.
+2. **Cifra del artículo:** confirmar con Growth el «4 de 5». Un daily del mismo 6-oct apunta a un sexto contacto como «momento». Recomendación: dejarlo publicado, porque es el literal del daily que nombra los cuatro, y corregirlo si Growth dice otra cosa.
+3. **D4:** la rutina diaria frente al modelo semanal del Content OS. Recomendación: pasar al semanal desde el lunes 12, con el brief de la semana 42 ya escrito.
+4. **Landing madre /recorrido/v3/:** las decisiones de ayer siguen abiertas:
+   - cableado con Growth;
+   - el precio visible como prueba;
+   - casos fuera de /casos/;
+   - el vídeo de la página de confirmación.
+
+**Hipótesis para mañana:** si la cuota mensual es la objeción que más se repite, los leads que piden la versión sin cuota tienen que aparecer ya en el formulario como «precio: depende». Se puede mirar con Growth en el scoring (`precio-depende`) el viernes 16.
+
