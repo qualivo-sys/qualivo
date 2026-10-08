@@ -164,7 +164,10 @@ def eur(dec=0):
     return {"type": "NUMBER", "pattern": '#,##0.00 "€"' if dec else '#,##0 "€"'}
 
 
-PATRON = {"eur": eur(), "num": {"type": "NUMBER", "pattern": "0,0"},
+# Los patrones de la API se escriben siempre con el punto como separador decimal
+# y la coma como separador de miles: es el locale de la hoja el que los traduce.
+# "0,0" no es «un decimal», es «entero con separador de miles», y 0,5 sale «01».
+PATRON = {"eur": eur(), "num": {"type": "NUMBER", "pattern": "0.0"},
           "pct": {"type": "PERCENT", "pattern": "0 %"}}
 
 
