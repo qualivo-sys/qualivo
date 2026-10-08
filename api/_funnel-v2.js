@@ -141,7 +141,12 @@ function desdeCampos(campos) {
   if (vol) { etiquetas.push('vol-' + LEGADO[vol], 'vol2-' + vol); }
   if (tic) etiquetas.push('ticket-' + tic);
   if (dec) etiquetas.push('decisor-' + dec);
-  if (mom) etiquetas.push('momento-' + mom);
+  if (mom) {
+    etiquetas.push('momento-' + mom);
+    // La puntuación y el agente actuales leen cuando-* (formularios de septiembre). Se traduce para
+    // que el contacto nuevo reciba el mismo trato: «este mes» suma intención y «solo mirando» pasa a precualificar.
+    etiquetas.push('cuando-' + (mom === 'mes' ? 'este-mes' : mom === '1-3' ? '1-3-meses' : 'mirando'));
+  }
   if (dol) etiquetas.push('dolor-' + dol);
   if (paid) etiquetas.push('fit-paid-' + paid);
   if (dinero) etiquetas.push('fit-dinero-' + dinero);
