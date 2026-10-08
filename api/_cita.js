@@ -43,12 +43,21 @@ function partesFecha(d) {
 // Texto libre (cuando hay ventana de 24 h o para el SMS de respaldo). La
 // plantilla de Meta dice lo mismo con {{1}} {{2}} {{3}}.
 // cuando: 'hoy' | 'mañana' | '' ; enlace: URL de la videollamada si se conoce.
-function textoConfirmacion(nombre, dia, hora, cuando, enlace) {
+function textoConfirmacion(nombre, dia, hora, cuando, enlace, prep) {
   const fecha = (cuando ? cuando + ', ' : 'el ') + dia + ' a las ' + hora;
   return 'Hola ' + (nombre || '') + ', soy Maikel, de Qualivo. Confirmado: hablamos ' + fecha + '. ' +
     'Es por videollamada y dura unos 30 minutos' + (enlace ? '. Este es el enlace: ' + enlace + ' (también lo tienes en la invitación del correo). ' : '; el enlace está en la invitación que te ha llegado al correo. ') +
     'Voy a repasar contigo dónde se te está escapando el negocio y te enseño un plan hecho para tu caso. ' +
+    (prep ? 'Para que la aproveches, mira esto antes (dos minutos): ' + prep + ' ' : '') +
     'Si te surge algo antes, dímelo por aquí.';
+}
+
+// Funnel v2 (8-oct-2026): solo para quien entró por los formularios nuevos
+// (etiqueta funnel-v2), la confirmación lleva el enlace a la página de
+// preparación. El resto de contactos recibe exactamente el mismo texto de siempre.
+function enlacePrep(f) {
+  const may = function (t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; };
+  return 'https://qualivo.io/confirmado/?dia=' + encodeURIComponent(may(f.dia)) + '&hora=' + encodeURIComponent(f.hora);
 }
 
 function relativo(d) {
@@ -207,11 +216,13 @@ async function procesarCita(ev, o) {
           // Se apunta ANTES de enviar: si algo falla después, no se repite.
           reg.confirmation_sent_at = new Date().toISOString(); reg.confirmation_start_at = reg.start_at; reg.confirmation_canal = 'enviando';
           await CI.guardar(reg);
-          const texto = cambio ? textoCambio(nombre, f.dia, f.hora, cuando, enlace) : textoConfirmacion(nombre, f.dia, f.hora, cuando, enlace);
+          const prep = (!cambio && A.tiene(c, 'funnel-v2')) ? enlacePrep(f) : '';
+          const texto = cambio ? textoCambio(nombre, f.dia, f.hora, cuando, enlace) : textoConfirmacion(nombre, f.dia, f.hora, cuando, enlace, prep);
           let salida = { ok: false };
           // Plantilla oficial solo si hay enlace y es la primera confirmación
           // (su texto dice «Confirmado: hablamos el {{2}}»: {{2}} va sin «hoy/mañana»).
-          if (!cambio && enlace && WA.configurado()) {
+          // Con enlace de preparación (funnel-v2) va el texto libre, porque la plantilla de Meta es fija y no lo lleva.
+          if (!cambio && enlace && !prep && WA.configurado()) {
             try { await A.camposWA(c.id, { citaDia: f.dia, citaHora: f.hora, citaEnlace: enlace }); } catch (e) { /* no bloquea */ }
             salida = await WA.enviarPlantilla(c.phone, WA.PLANTILLAS.confirmacionCita, [nombre || 'hola', f.dia, f.hora, enlace]);
             if (salida.ok) { reg.confirmation_canal = 'plantilla'; hecho.push('whatsapp_plantilla'); }
