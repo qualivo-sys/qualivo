@@ -11,7 +11,8 @@ capital por adelantado para ahorrar cuotas después. Cortar un gasto cuesta
 cero y libera lo mismo desde el primer mes. Por eso la escalera empieza por lo
 gratis y lo que toca capital queda fuera.
 
-Lee las mismas cifras que el plan: dashboard/datos_plan.json, ignorado por git.
+Las cifras y los textos NO están aquí: este repositorio es público. Salen de
+dashboard/datos_plan.json, ignorado por git, igual que en el plan.
 
 Uso:  python3 dashboard/contingencia.py
 """
@@ -19,72 +20,38 @@ import json, os, pathlib, sys, time
 
 AQUI = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI))
-from plan_prestamo import (DEUDA, PERSONAL, QUALIVO, REPARTO, SOFTWARE, SHEET,
-                           Hoja, api, rango, token, eur, INGRESOS)
+from plan_prestamo import (D, DEUDA, INGRESOS, PERSONAL, QUALIVO, REPARTO,
+                           SHEET, SOFTWARE, Hoja, eur, rango, token)
 
 TITULO = "CONTINGENCIA · si no entra nadie"
 
 SW  = {n: v for n, v, _, _ in SOFTWARE}
 QV  = {n: v for n, v, _, _ in QUALIVO}
 PER = {n: v for n, v, _, _ in PERSONAL}
+TABLA = {"software": SW, "qualivo": QV, "personal": PER}
 
-# El escenario que dispara todo esto: Sonia no firma y no entra nadie más.
+C = D["contingencia"]
+# El escenario que dispara todo: se cae el ingreso dudoso y no entra nadie más.
 ENTRA = sum(v for n, v, cuando, _, _ in INGRESOS
-            if cuando is None and "milímetro" not in n)
+            if cuando is None and C["excluir_ingreso"] not in n)
 SALE  = sum(SW.values()) + sum(QV.values()) + sum(PER.values()) \
         + sum(c for _, c, u, _, _ in DEUDA if u > 0)
 
-# (peldaño, € que libera al mes, € de caja que cuesta, por qué, qué se pierde)
-ESCALERA = [
-    ("1 · Cortar la publicidad en Meta", QV["Publicidad en Meta"], 0,
-     "si en tres meses no ha firmado nadie por ahí, es que no cierra",
-     "el canal de pago · se puede reencender en un día"),
-    ("2 · Cortar Smartlead y HeyReach", SW["Smartlead"] + SW["HeyReach"], 0,
-     "solo si el frío tampoco ha dado nada. Es el canal que cerró Alpha Media",
-     "el outbound entero · recuperar los buzones calientes cuesta semanas"),
-    ("3 · Ocio y comida a 600 € entre los dos",
-     PER["Ocio y restaurantes"] + PER["Comida y supermercado"] - 600, 0,
-     "de 975 a 600 · es el recorte más grande que no toca el negocio",
-     "calidad de vida · se recupera en cuanto entre un cliente"),
-    ("4 · Cortar GoHighLevel", SW["GoHighLevel · CRM"], 0,
-     "sin clientes nuevos no hay CRM que llenar",
-     "el histórico del pipeline · exportar antes de cancelar"),
-    ("5 · Re-aplazar la deuda de Hacienda", 400.00, 0,
-     "mismo saldo repartido en más meses · lo contrario de pagarla",
-     "unos intereses al 4 % · es el precio de ganar tiempo"),
-    ("6 · Cortar Claude, n8n, Vercel y Canva",
-     SW["Claude · Anthropic"] + SW["n8n · vía Paddle"] + SW["Vercel"] + SW["Canva"], 0,
-     "este es el peldaño en el que Qualivo deja de poder operar",
-     "la capacidad de entregar · a partir de aquí no hay agencia"),
-]
 
-NO_SE_HACE = [
-    ("PAGAR toda la deuda de Hacienda", 1161.00, 12149.36,
-     "12.149 € de caja para ahorrar 243 € de intereses, y se extingue sola "
-     "entre abr-27 y oct-27. Tarda 10,5 meses en devolverte lo que cuesta"),
-    ("Cancelar el micro de CaixaBank", 240.00, 6431.03,
-     "está al 0 % bonificado · pagarlo es regalar 6.431 € de liquidez a cambio de nada"),
-    ("Amortizar los dos BBVA", 647.93, 21619.78,
-     "7,00 % y 6,90 % contra el 5,65 % del préstamo nuevo · la diferencia "
-     "real son 35 €/mes"),
-]
+def libera(p):
+    """Lo que ahorra un peldaño. Apunta a líneas de gasto por su nombre, así
+    que cambiar un importe en el fichero de datos lo recalcula solo."""
+    if "fijo" in p:
+        return float(p["fijo"])
+    v = sum(TABLA[t][n] for t, n in p["libera"])
+    return v - p.get("menos", 0)
 
-DISPARADORES = [
-    ("31-dic-2026", "¿ha firmado alguien venido de Meta desde octubre?",
-     "si no → peldaño 1"),
-    ("31-dic-2026", "¿ha firmado alguien venido del correo frío desde octubre?",
-     "si no → peldaño 2 · ojo, Alpha Media vino de ahí"),
-    ("31-ene-2027", "¿el MRR sigue por debajo de 2.500 €?",
-     "si sí → peldaños 3 y 4"),
-    ("31-mar-2027", "¿la hucha disponible ha bajado de 3.000 €?",
-     "si sí → peldaño 5, y se habla con el gestor ese mismo mes"),
-    ("30-jun-2027", "¿Qualivo sigue sin cubrir su propio gasto?",
-     "si sí → esto ya no es un problema de caja. Es la decisión de seguir o no"),
-]
 
-# El bloque del escenario se escribe desde la fila 5 y ocupa 6 filas: cabecera,
-# el supuesto, una en blanco y las tres cifras. R_ESC es la fila en blanco, así
-# que las cifras caen en R_ESC+1, +2 y +3.
+ESCALERA = [(p["titulo"], libera(p), 0, p["por_que"], p["pierdes"])
+            for p in C["escalera"]]
+NO_SE_HACE   = [tuple(x) for x in C["no_se_hace"]]
+DISPARADORES = [tuple(x) for x in C["disparadores"]]
+
 R_ESC   = 7                                   # el escenario: cifras en 8, 9 y 10
 R_DIS   = R_ESC + 6                           # disparadores
 R_LAD   = R_DIS + len(DISPARADORES) + 3       # la escalera
@@ -111,11 +78,11 @@ def construir():
     # ------------------------------------------------- el escenario malo ---
     vals.append((f"A5:H{R_ESC + 3}", [
         ["EL ESCENARIO QUE DISPARA ESTO", "€/mes", "", "supuesto"] + [""] * 4,
-        ["Sonia no firma y no entra ningún cliente nuevo", "", "",
+        [C["escenario"], "", "",
          "el peor caso realista, no el catastrófico"] + [""] * 4,
         ["", "", "", ""] + [""] * 4,
         ["Entra cada mes", ENTRA, "",
-         "nómina + EAC + Eleva + Alpha Media + puntuales"] + [""] * 4,
+         "los ingresos recurrentes que quedan, sin el dudoso"] + [""] * 4,
         ["Sale cada mes (sin impuestos)", SALE, "",
          "software + publi + cuotas + personal + deuda"] + [""] * 4,
         ["DÉFICIT MENSUAL", "", "", "lo que te come la hucha cada mes si no haces nada"]

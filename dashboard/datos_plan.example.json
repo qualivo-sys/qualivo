@@ -268,5 +268,108 @@
       "No se toca el depósito salvo en la Puerta 2",
       "es lo que hace que esto no sea un agujero"
     ]
-  ]
+  ],
+  "contingencia": {
+    "_": "Mismo formato. 'libera' apunta a líneas de software/qualivo/personal por su nombre.",
+    "excluir_ingreso": "Cliente recurrente B",
+    "escenario": "no entra ningún cliente nuevo y se pierde el que estaba a medias",
+    "escalera": [
+      {
+        "titulo": "1 · Cortar el gasto variable",
+        "libera": [
+          [
+            "qualivo",
+            "Publicidad"
+          ]
+        ],
+        "por_que": "si el canal no ha cerrado a nadie en tres meses, no cierra",
+        "pierdes": "el canal de pago · se reenciende en un día"
+      },
+      {
+        "titulo": "2 · Cortar las herramientas de captación",
+        "libera": [
+          [
+            "software",
+            "Herramienta A"
+          ]
+        ],
+        "por_que": "solo si ese canal tampoco ha dado nada",
+        "pierdes": "el canal entero · recuperarlo cuesta semanas"
+      },
+      {
+        "titulo": "3 · Bajar el gasto personal discrecional",
+        "libera": [
+          [
+            "personal",
+            "Ocio"
+          ],
+          [
+            "personal",
+            "Comida"
+          ]
+        ],
+        "menos": 400,
+        "por_que": "el recorte más grande que no toca el negocio",
+        "pierdes": "calidad de vida · se recupera con el primer cliente"
+      },
+      {
+        "titulo": "4 · Re-aplazar la deuda con Hacienda",
+        "fijo": 200.0,
+        "por_que": "mismo saldo en más meses · lo contrario de pagarla",
+        "pierdes": "unos intereses · es el precio de ganar tiempo"
+      },
+      {
+        "titulo": "5 · Cortar el resto de herramientas",
+        "libera": [
+          [
+            "software",
+            "Herramienta B"
+          ]
+        ],
+        "por_que": "el peldaño en el que el negocio deja de poder operar",
+        "pierdes": "la capacidad de entregar"
+      }
+    ],
+    "no_se_hace": [
+      [
+        "Amortizar la deuda que se extingue sola",
+        500.0,
+        6000.0,
+        "cuesta capital hoy para ahorrar cuotas que iban a desaparecer igual"
+      ],
+      [
+        "Cancelar la deuda al 0 %",
+        200.0,
+        4000.0,
+        "regalar liquidez a cambio de cero intereses ahorrados"
+      ]
+    ],
+    "disparadores": [
+      [
+        "mes 3",
+        "¿ha firmado alguien por el canal de pago?",
+        "si no → peldaño 1"
+      ],
+      [
+        "mes 3",
+        "¿ha firmado alguien por el canal orgánico?",
+        "si no → peldaño 2"
+      ],
+      [
+        "mes 4",
+        "¿el MRR sigue por debajo del objetivo?",
+        "si sí → peldaño 3"
+      ],
+      [
+        "mes 6",
+        "¿el colchón ha bajado del umbral?",
+        "si sí → peldaño 4"
+      ],
+      [
+        "mes 9",
+        "¿el negocio sigue sin cubrir su propio gasto?",
+        "si sí → ya no es un problema de caja"
+      ]
+    ]
+  }
 }
