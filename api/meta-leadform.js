@@ -153,7 +153,13 @@ const FORMULARIOS_SECTOR = {
   '2076998082916565': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'curiosos' },
   '1491348962802729': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'velocidad' },
   '1110031651473942': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'huecos' },
-  '1077322415038373': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'prioridad' }
+  '1077322415038373': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'prioridad' },
+  // 8-oct-2026: formularios nuevos del funnel v2 (cuatro preguntas de negocio + dolor). Sin esta
+  // entrada el lead se activa por el prefijo Qualivo_, pero entra SIN sector: el scoring le daría
+  // un punto de menos, el primer WhatsApp y el nurturing saldrían genéricos y no tendría etiqueta
+  // sector-*. Los dos anteriores (V2_, con pregunta abierta obligatoria) están archivados.
+  '1068055576128365': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'funnel-v2' },
+  '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' }
 };
 
 async function nombreFormulario(formId) {
