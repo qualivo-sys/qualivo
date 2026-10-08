@@ -1,0 +1,254 @@
+{
+  "_": "Plantilla. Copia a datos_plan.json y pon tus cifras. datos_plan.json está en .gitignore a propósito.",
+  "reparto": {
+    "lineas": [
+      [
+        "Préstamo recibido",
+        10000,
+        "dónde entra"
+      ],
+      [
+        "Liquidar la deuda más cara",
+        0,
+        "solo la que cueste más que el préstamo nuevo"
+      ],
+      [
+        "Al depósito a plazo",
+        6000,
+        "bloqueado · no se toca para gasto corriente"
+      ],
+      [
+        "A caja operativa de arranque",
+        1000,
+        "para no arrancar el mes 1 a cero"
+      ]
+    ],
+    "hucha_nota": "lo que queda · el colchón del que se tira si un mes falla",
+    "caja_previa": [
+      0,
+      "lo que había en el banco antes"
+    ],
+    "caja_nota": "arranque + lo que ya había"
+  },
+  "palancas": [
+    [
+      "Altas nuevas al mes",
+      0.5,
+      "num",
+      "🟡 supuesto · pon aquí el histórico si lo tienes"
+    ],
+    [
+      "Alta · pago único (€)",
+      1000,
+      "eur",
+      ""
+    ],
+    [
+      "Cuota mensual del cliente nuevo (€)",
+      500,
+      "eur",
+      ""
+    ],
+    [
+      "Vida media del cliente (meses)",
+      6.0,
+      "num",
+      "⚪ 1 / churn mensual, solo sobre recurrentes"
+    ],
+    [
+      "Umbral de la hucha (€)",
+      2000,
+      "eur",
+      "🔵 por debajo de esto la hucha repone"
+    ],
+    [
+      "Objetivo al reponer (€)",
+      4000,
+      "eur",
+      "🔵 hasta dónde repone"
+    ],
+    [
+      "IRPF a provisionar (%)",
+      0.3,
+      "pct",
+      "🔵 sobre el margen del negocio, no sobre la nómina"
+    ]
+  ],
+  "ingresos": [
+    [
+      "Nómina o sueldo fijo",
+      2000,
+      null,
+      "⚪",
+      ""
+    ],
+    [
+      "Cliente recurrente A",
+      500,
+      null,
+      "⚪",
+      ""
+    ],
+    [
+      "Cliente recurrente B",
+      500,
+      null,
+      "⚪",
+      ""
+    ],
+    [
+      "Cobro pendiente",
+      800,
+      [
+        0
+      ],
+      "🔴",
+      "una factura emitida sin cobrar"
+    ],
+    [
+      "Proyectos puntuales",
+      200,
+      null,
+      "⚪",
+      ""
+    ]
+  ],
+  "software": [
+    [
+      "Herramienta A",
+      100,
+      "⚪",
+      ""
+    ],
+    [
+      "Herramienta B",
+      50,
+      "⚪",
+      ""
+    ]
+  ],
+  "qualivo": [
+    [
+      "Publicidad",
+      500,
+      "🔵",
+      ""
+    ],
+    [
+      "Cuota de autónomos",
+      330,
+      "⚪",
+      ""
+    ]
+  ],
+  "personal": [
+    [
+      "Alquiler",
+      600,
+      "⚪",
+      ""
+    ],
+    [
+      "Comida",
+      400,
+      "🔵",
+      ""
+    ],
+    [
+      "Ocio",
+      300,
+      "🔵",
+      ""
+    ],
+    [
+      "Suministros",
+      100,
+      "⚪",
+      ""
+    ]
+  ],
+  "deuda": [
+    [
+      "Préstamo 1",
+      300,
+      99,
+      9000,
+      "ejemplo"
+    ],
+    [
+      "Aplazamiento con Hacienda",
+      250,
+      8,
+      2000,
+      "se extingue al mes 8"
+    ],
+    [
+      "PRÉSTAMO NUEVO",
+      148,
+      99,
+      10000,
+      "el que se pide"
+    ]
+  ],
+  "iva_trimestral": {
+    "0": 500,
+    "3": 500,
+    "6": 500,
+    "9": 500
+  },
+  "subtitulo": "Importe · banco · TIN · plazo · cuota · fecha. Cada celda del mes es editable.",
+  "nota_deuda": "qué cuotas se apagan solas y cuándo",
+  "nota_iva": "los meses en que toca liquidación",
+  "puertas": [
+    [
+      "Puerta 1 · el canal",
+      "mes 3",
+      "¿ha cerrado alguien por el canal nuevo?",
+      "subir inversión",
+      "cortar el canal y mandar ese dinero a la hucha"
+    ],
+    [
+      "Puerta 2 · la hucha",
+      "mes 6",
+      "¿queda colchón por encima del umbral?",
+      "seguir sin tocar nada",
+      "gasto variable a 0 y romper el depósito"
+    ],
+    [
+      "Puerta 3 · el MRR",
+      "mes 9",
+      "¿el MRR llega al objetivo?",
+      "contratar la primera ayuda",
+      "el negocio no se sostiene solo todavía"
+    ],
+    [
+      "Puerta 4 · la salida",
+      "mes 12",
+      "¿el negocio cubre el gasto personal y la deuda?",
+      "ya es un negocio",
+      "replantear a fondo"
+    ]
+  ],
+  "no_se_hace": [
+    [
+      "No se amortiza una deuda que se extingue sola",
+      "adelantar pagos no es amortizar: solo ahorra si el tipo es mayor que el del préstamo nuevo"
+    ],
+    [
+      "No se cancela deuda al 0 %",
+      "no ahorra nada y a veces cuesta comisión"
+    ],
+    [
+      "No se sube el gasto variable antes de la Puerta 1",
+      "primero hay que saber si el canal cierra"
+    ],
+    [
+      "No se contrata antes de llegar al MRR objetivo",
+      "la pagaría la hucha, no el negocio"
+    ],
+    [
+      "No se toca el depósito salvo en la Puerta 2",
+      "es lo que hace que esto no sea un agujero"
+    ]
+  ]
+}

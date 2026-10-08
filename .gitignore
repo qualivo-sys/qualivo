@@ -18,3 +18,6 @@ node_modules/
 # Python
 __pycache__/
 *.pyc
+
+# Las cifras del plan: el repositorio es público, los importes no van aquí
+dashboard/datos_plan.json
