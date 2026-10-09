@@ -12,6 +12,12 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
   text-shadow:0 2px 10px rgba(0,0,0,.65),0 0 2px rgba(0,0,0,.9);z-index:50}
 #sub b{color:#27BDB1;font-weight:800}
 #e.split #sub{left:40px;right:1000px;font-size:36px}
+/* tarjeta flotante sobre la pared (ya no se parte la pantalla) */
+#met,#comp{left:1040px!important;top:120px!important;width:800px!important;height:800px!important;border-radius:30px;box-shadow:0 30px 80px rgba(10,15,26,.35)}
+#cards{left:70px!important;right:70px!important;top:90px!important}
+#pregunta{left:70px!important;right:70px!important;top:520px!important}
+#met .ej,#comp .ej{left:70px!important;bottom:40px!important}
+#comp{padding:90px 70px 0!important}
 .clave{left:50%;top:110px;background:#0A0F1A;color:#fff;font-weight:800;font-size:58px;padding:22px 42px;border-radius:14px;white-space:nowrap;
   box-shadow:0 18px 50px rgba(0,0,0,.35);z-index:40}
 .clave i{font-style:normal;color:#27BDB1}
@@ -76,6 +82,15 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
 .post .bt{height:40px;margin:10px 14px 16px;border-radius:10px;background:#0A0F1A;opacity:.85}
 #feed .lado{position:absolute;font-size:54px;line-height:1.1;font-weight:800;color:#fff;width:560px}
 #feed .lado i{font-style:normal;color:#27BDB1}
+/* pantallas completas donde la voz regrabada puede no casar con la boca */
+#pfull,#ffull{inset:0;background:#0A0F1A;display:flex;flex-direction:column;align-items:center;padding-top:150px}
+.fila{display:flex;gap:28px;margin-bottom:70px}
+.mini{background:#141B2B;border:2px solid #24304A;border-radius:18px;padding:22px 30px;min-width:330px;opacity:0}
+.mini span{display:block;font-size:24px;color:#B9C2D3;font-weight:600;margin-bottom:6px}.mini b{font-size:46px;color:#fff;font-weight:800}
+.mini.c{border-color:#27BDB1}.mini .q{color:#FF8A4C}
+.grande{font-size:84px;font-weight:800;color:#fff;text-align:center;line-height:1.05;opacity:0}
+.grande i{font-style:normal;color:#FF8A4C}.grande.t i{color:#27BDB1}
+#pfull .ej,#ffull .ej{left:50%;transform:translateX(-50%);bottom:150px}
 </style>
 <div id="e" style="position:absolute;inset:0">
   <div class="l clave" id="k1">Miles de € <i>en publicidad</i></div>
@@ -101,6 +116,10 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
     <div class="camp" id="cb"><small>CAMPAÑA B</small><div class="p">20 € / lead</div><div class="r">Clientes: <b>?</b></div></div>
     <div class="ej">Ejemplo ilustrativo</div></div>
   <div class="l" id="final">¿Cuál genera <i>mejores clientes?</i></div>
+  <div class="l" id="pfull"><div class="fila"><div class="mini m1"><span>Coste por lead</span><b>12 €</b></div><div class="mini m1"><span>Formularios</span><b>340</b></div><div class="mini m1"><span>Inversión</span><b>4.100 €</b></div></div>
+    <div class="grande" id="pg">¿Cuántos se convierten<br><i>en clientes?</i></div><div class="ej">Datos de ejemplo</div></div>
+  <div class="l" id="ffull"><div class="fila"><div class="mini m2"><span>Campaña A</span><b>5 € / lead</b><span class="q">Clientes: ?</span></div><div class="mini m2"><span>Campaña B</span><b>20 € / lead</b><span class="q">Clientes: ?</span></div></div>
+    <div class="grande t" id="fg">¿Cuál genera<br><i>mejores clientes?</i></div><div class="ej">Ejemplo ilustrativo</div></div>
   <div class="l" id="nombre"><b>Maikel Echevarría</b><span>Fundador de Qualivo</span></div>
   <div class="l" id="sub"></div>
 </div>
@@ -147,6 +166,12 @@ window.setT=function(t){
   show($('comp'),win(t,TL.comp[0],TL.comp[1],.45,.35),0,'',1);
   show($('ca'),nm(t,TL.ca,TL.ca+.45),30); show($('cb'),nm(t,TL.cb,TL.cb+.45),30);
   show($('final'),win(t,TL.final[0],TL.final[1],.5,.4),-24,'translateX(-50%)');
+  show($('pfull'),win(t,TL.pfull[0],TL.pfull[1],.45,.35),0,'',1);
+  document.querySelectorAll('.m1').forEach((d,i)=>show(d,nm(t,TL.pfull[0]+.1+i*.12,TL.pfull[0]+.5+i*.12),20));
+  show($('pg'),nm(t,TL.pfull[0]+.5,TL.pfull[0]+1.0),30);
+  show($('ffull'),win(t,TL.ffull[0],TL.ffull[1],.45,.5),0,'',1);
+  document.querySelectorAll('.m2').forEach((d,i)=>show(d,nm(t,TL.ffull[0]+.1+i*.15,TL.ffull[0]+.5+i*.15),20));
+  show($('fg'),nm(t,TL.ffull[0]+.6,TL.ffull[0]+1.1),30);
   show($('nombre'),win(t,TL.nombre[0],TL.nombre[1],.45,.4),20,'',1);
   const s=TL.subs.find(x=>t>=x[0]&&t<x[1]); const sb=$('sub'); if(s){sb.innerHTML=s[2]; sb.style.opacity=1;} else sb.style.opacity=0;
 };

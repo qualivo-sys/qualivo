@@ -28,12 +28,16 @@ g.PLANOS = [(1.05, 7.95, 'zoom'),
             (61.62, 67.45, 'cerrado')]
 T = g.nuevo
 
-def zoom(d, z0, z1, cx, fy):
-    """Zoom lento de z0 a z1 sobre el 4K (3840x2160); cx = centro horizontal, fy = altura de la cara (0-1 del encuadre)."""
-    n = max(1, round(d * FPS))
-    return (f"scale=3840:2160,zoompan=z='{z0}+({z1}-{z0})*on/{n}':"
-            f"x='max(0,min(iw-iw/zoom,{cx}-iw/zoom/2))':y='max(0,min(ih-ih/zoom,570-ih/zoom*{fy}))':"
-            f"d=1:s=1920x1080:fps={FPS}")
+def zoom(d, region, k1, fx, fy, ancla=.40):
+    """Zoom lento sin zoompan (desplazaba los tiempos): recorte fijo del 4K, escala que crece por fotograma
+    de 1 a k1 y recorte 1920x1080 que sigue la cara. region = (w, h, x, y) en el 4K; fx, fy = cara (0-1 de la región)."""
+    w, h, x, y = region
+    K = f"(1+({k1}-1)*min(t/{d:.3f},1))"
+    return (f"crop={w}:{h}:{x}:{y},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
+            f"crop=1920:1080:x='max(0,min(iw-1920,{fx}*iw-960))':y='max(0,min(ih-1080,{fy}*ih-{ancla}*1080))'")
+
+# Encuadre «de lado»: entero, cara al 35 % del ancho, pared libre a la derecha para la tarjeta de datos.
+LADO = (2400, 1350, 1440, 0)
 
 def tiempos():
     total = g.tiempos()                       # subtítulos de V1 (texto del guion)
@@ -43,12 +47,12 @@ def tiempos():
         if sb[0] == T(25.45): sb[1] = T(32.03)
     TL = {'subs': subs,
           'k1': [T(2.40), T(4.60)],
-          'met': [T(8.36), T(20.00)], 'cards': [T(8.50), T(13.95), T(15.70)], 'preg': T(17.20),
+          'met': [T(8.36), T(17.17)], 'pfull': [T(17.17), T(20.00)], 'cards': [T(8.50), T(13.95), T(15.70)], 'preg': T(30.0),
           'flujo': [T(23.40), T(32.03)], 'k3': [T(25.60), T(32.03)],
           'nombre': [T(30.70), T(34.80)],
           'ads': [T(39.40), T(48.30)], 'adA': T(39.60), 'adB': T(44.00), 'msg': T(45.20), 'paso': T(47.60),
           'comp': [T(48.75), T(61.30)], 'ca': T(51.80), 'cb': T(57.40),
-          'final': [T(61.62), total], 'feed': [T(21.72), T(23.40)]}
+          'final': [total + 1, total + 2], 'ffull': [T(61.62), total], 'feed': [T(21.72), T(23.40)]}
     open(os.path.join(AQUI, 'tiempos-v2.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     # planos de apoyo: (archivo, desde, hasta) en el montaje
     return total, [(T(4.30), T(7.95))]
@@ -57,10 +61,10 @@ def base(bruto, trabajo, total, voz):
     fil, vs, as_ = [], [], []
     for i, (a, b, enc) in enumerate(g.PLANOS):
         d = b - a
-        if enc == 'zoom': v = zoom(d, 1.15, 1.42, 2240, .30)
-        elif enc == 'zoom2': v = zoom(d, 1.62, 1.78, 2280, .36)
+        if enc == 'zoom': v = zoom(d, (3300, 1856, 540, 0), 1.25, (2280 - 540) / 3300, 570 / 1856)
+        elif enc == 'zoom2': v = zoom(d, g.CERRADO, 1.08, .5, (570 - 90) / 1260, .38)
         elif enc == 'partido':
-            w, h, x, y = g.PARTIDO; v = f'crop={w}:{h}:{x}:{y},scale=960:1080,pad=1920:1080:0:0:#0A0F1A'
+            w, h, x, y = LADO; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
         else:
             w, h, x, y = g.ABIERTO if enc == 'abierto' else g.CERRADO; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
         fil.append(f'[0:v]trim={a}:{b},setpts=PTS-STARTPTS,{v},fps={FPS},setsar=1[v{i}];')
