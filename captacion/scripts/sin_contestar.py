@@ -94,6 +94,40 @@ def main():
         cid, nombre = c.get("id"), c.get("name") or ""
         if not cid:
             continue
+
+        # De donde salen los que han contestado.
+        #
+        # Esto estaba mal hasta el 9-oct-2026 y fallaba en silencio. El codigo
+        # recorria /leads y se saltaba a todo el que no trajera "reply_time".
+        # Comprobado hoy: /leads NO devuelve ese campo, ni en la fila ni dentro
+        # del objeto "lead". Sus claves son campaign_lead_map_id, created_at,
+        # lead, lead_category_id y status, y nada mas. Asi que la condicion se
+        # cumplia SIEMPRE y el bucle descartaba el 100% de los leads.
+        #
+        # Resultado: el script imprimia "sin contestar: 0" sin haber mirado un
+        # solo hilo, y lo hacia con cara de haber trabajado. Es el mismo fallo
+        # que dejo la BAJA de Clara Onraita 24 horas en el aire: una respuesta
+        # negativa que viene de no haber mirado, no de no haber nada.
+        #
+        # Lo que si trae reply_time es /statistics, con lead_email. Se saca de
+        # ahi la lista de correos que han contestado y luego se cruza contra
+        # /leads para resolver el id, que es justo lo que ya hacian nuevas.py y
+        # lee_nuevas.py por la misma razon.
+        quien_contesto = set()
+        off = 0
+        while off <= 20000:
+            st = get(f"{API}/campaigns/{cid}/statistics"
+                     f"?api_key={key}&offset={off}&limit=1000") or {}
+            filas = st.get("data") or []
+            if not filas:
+                break
+            for f in filas:
+                if f.get("reply_time") and f.get("lead_email"):
+                    quien_contesto.add(str(f["lead_email"]).lower())
+            off += 1000
+        if not quien_contesto:
+            continue
+
         off = 0
         while off <= 5000:
             p = get(f"{API}/campaigns/{cid}/leads"
@@ -104,8 +138,7 @@ def main():
             for fila in ds:
                 lead = fila.get("lead") or fila
                 lid = lead.get("id") or fila.get("lead_id")
-                # Solo nos interesan los que han contestado alguna vez.
-                if not fila.get("reply_time") and not lead.get("reply_time"):
+                if str(lead.get("email") or "").lower() not in quien_contesto:
                     continue
                 if not lid:
                     continue
