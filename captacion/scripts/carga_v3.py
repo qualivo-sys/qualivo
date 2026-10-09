@@ -112,7 +112,10 @@ LLAMADA = "https://qualivo.io/llamada/"
 FIRMA = ("--\n"
          "Maikel Echevarría · CEO\n"
          "Qualivo · qualivo.io\n"
-         "663 375 205")
+         "663 375 205\n\n"
+         "Tus datos de contacto profesional los trato por interés legítimo\n"
+         "(art. 19 LOPDGDD). Si no quieres más correos míos, responde BAJA\n"
+         "y te saco al momento.")
 
 COMUN = (
  "Nosotros detectamos dónde se pierden clientes en captación y ventas, y lo "

@@ -23,7 +23,8 @@ B = "https://server.smartlead.ai/api/v1"
 ENVIA = "--envia" in sys.argv
 
 CAMPANAS = {"clinicas": 3976199, "asesorias": 3976201, "formacion": 3976197}
-FIRMA = "\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+FIRMA = ("\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+         "\n\nTus datos de contacto profesional los trato por interés legítimo (art. 19 LOPDGDD). Si no quieres más correos míos, responde BAJA y te saco al momento.")
 
 TEXTOS = {
  "clinicas": {

@@ -21,7 +21,8 @@ CLAS = 'captacion/datos/clasificacion-133-2oct.json'
 FUENTE = 'captacion/datos/apollo-nuevos-1oct.json'
 SALIDA = 'captacion/datos/carga-29-listos.json'
 
-FIRMA = "\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+FIRMA = ("\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+         "\n\nTus datos de contacto profesional los trato por interés legítimo (art. 19 LOPDGDD). Si no quieres más correos míos, responde BAJA y te saco al momento.")
 
 CASOS = {
     # El enlace del caso de Equipzilla esta vacio a proposito: comprobado el
@@ -61,6 +62,31 @@ def senal(x):
     return t
 
 
+def posdata(segundo):
+    """Posdata que abre un segundo hilo en la misma empresa.
+
+    Robado el 9-oct-2026 de un correo de prospeccion que le llego a Maikel de
+    Reachflow. Ataca nuestro fallo mejor documentado: en 6 de 11 propuestas el
+    que decidia no estaba en la reunion (Skolae "se lo trasladare a direccion
+    comercial", Musica de los Rios "con tu socio", TALKUAL "al equipo"). El
+    unico cierre que tenemos, Alpha Media, es el unico donde el correo final
+    fue a dos personas.
+
+    Decirlo en voz alta es lo que lo hace aceptable en vez de ir por detras.
+    Sin genero en la frase: Apollo no da el genero y equivocarlo es peor que
+    no personalizar.
+
+    Coste: cero creditos. La busqueda de Apollo ya devuelve el nombre de pila
+    de los demas contactos de la empresa sin revelar el correo. Hoy los
+    tiramos: en la cosecha de esta manana eran 24 personas en 11 empresas y
+    nos quedamos con una por empresa.
+    """
+    if not segundo:
+        return ""
+    return (f"\n\nPD: se lo mando tambien a {segundo}, por si es quien lleva "
+            f"esto en vuestro equipo.")
+
+
 def construir():
     S = json.load(open(CLAS))
     L = {l['dominio']: l for l in json.load(open(FUENTE))}
@@ -90,10 +116,15 @@ def construir():
         if i in FORMACION:
             fuga = 'formacion'
 
+        # El cierre pide permiso, no una hora. Se contesta con un si de una palabra
+        # y no compromete a nada. Es la estructura que Maikel ya puso en la cohorte
+        # ABM del 5-oct ("¿Te la paso?") y la misma que usa el correo de Reachflow
+        # que le llego el 9-oct. La version vieja, "¿Te va bien esta semana?", pedia
+        # una reunion en el primer contacto: mas caro de conceder, y lleva 3,6%.
         b1 = (ini + "\n\nDetectamos dónde se pierden clientes en la captación y en la venta, y lo "
-              "arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una "
-              "llamada corta. Si sale algo claro, lo probamos un mes sin coste y luego decidís."
-              "\n\n¿Te va bien esta semana?")
+              "arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEstoy trabajando justo "
+              "esa parte y tengo una idea aplicada a vuestro caso.\n\n¿Te la paso?"
+              + posdata(src.get('segundo')))
 
         caso, url = CASOS[fuga]
         b2 = (f"{h}\n\nUn ejemplo de lo que te decía.\n\n{caso}"

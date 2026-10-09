@@ -17,7 +17,8 @@
 import json
 import sys
 
-FIRMA = ("\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205")
+FIRMA = ("\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
+         "\n\nTus datos de contacto profesional los trato por interés legítimo (art. 19 LOPDGDD). Si no quieres más correos míos, responde BAJA y te saco al momento.")
 DIAG = "https://qualivo.io/diagnostico/"
 LLAMADA = "https://qualivo.io/llamada/"
 
