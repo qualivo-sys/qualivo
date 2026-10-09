@@ -1271,3 +1271,38 @@ Maikel compartió la revisión de ChatGPT de la web V2 y dijo «podemos ir hacie
 
 **Hipótesis para mañana:** si la cuota mensual es la objeción que más se repite, los leads que piden la versión sin cuota tienen que aparecer ya en el formulario como «precio: depende». Se puede mirar con Growth en el scoring (`precio-depende`) el viernes 16.
 
+### Viernes 9-oct · trabajo del día
+
+**Publicado:**
+- **[/blog/quien-decide-la-compra/](https://qualivo.io/blog/quien-decide-la-compra/)** («Quién decide la compra: qué hacer cuando a la reunión no viene el que decide»).
+  - Abre la semana 42, la de cualificación.
+  - **Dato real, del daily de Growth del 8-oct:** «lo veo con el equipo y te digo» y que a la reunión no llega quien decide estaban entre las objeciones que se repetían.
+  - **Del funnel v2 de Growth:** los formularios preparados para la prueba prevista el lunes 12 preguntan quién decide (yo, yo con un socio u otra persona). Además, `/confirmado/` deja preparado un correo para avisar a quien decide.
+  - **Sin nombres ni sector,** y sin la reunión del 8-oct, porque es un contacto abierto.
+  - Va con tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+- **Re-apunte de [/blog/primera-reunion-con-un-cliente/](https://qualivo.io/blog/primera-reunion-con-un-cliente/).**
+  - El primer párrafo de «Qué hacemos nosotros con esto» lleva el dato y enlaza al artículo nuevo.
+  - Sale la frase de la «herramienta propia para rellenar el diagnóstico en directo», que no he podido verificar (R2).
+
+**Borrador:** `content/borradores/2026-10-09-tesis-quien-decide.md`, tesis contraria: «Antes de preguntar cuánto invierte, pregunta quién decide».
+- **Necesita tu ok a la tesis** (R4). Se apoya en tu mensaje del 7-oct: la inversión declarada es una señal bastante mala.
+- **Cuándo va:** si la cobertura de LinkedIn empezó el miércoles, hoy toca el post 4 y esta pieza pasa al viernes 16.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-09.md`): artículo 6, re-apunte 7 y tesis 5. Aplicados los críticos. Lo importante:
+- **R5:** fuera la reunión del 8-oct.
+- **R2/R3:** la prueba del lunes se cuenta como «prevista», porque los anuncios están pausados, el presupuesto está pendiente y el saldo de Meta sin confirmar.
+- **R1:** fuera los «suele» y las causas sin fuente.
+- **Tesis:** el caso del 5-oct se cuenta como lo que fue, que faltaba saber lo que cobraba el contacto.
+
+**Lo he visto en el bus y afecta a la landing de ayer:** Growth ha publicado `/gracias/` (calendario y prueba de precio A/B por día) y `/confirmado/` (preparación), dentro del funnel v2. `/confirmado/` cubre lo que propuse en `/recorrido/v3/confirmado/`, así que la mía queda como borrador de referencia y no hay que mantener dos. El precio visible de `/gracias/` es decisión tuya (R10 queda en excepción para esa prueba).
+
+**Descartado:** el capítulo de newsletter. Es viernes, no toca.
+
+**Decisiones para Maikel:**
+1. **Tesis del viernes (R4):** ¿suscribes «antes de preguntar cuánto invierte, pregunta quién decide»? Recomendación: sí, y publicarla el viernes 16 con la semana 42.
+2. **D1, LinkedIn:** dime qué posts de la cobertura han salido, para cuadrar el banco. Recomendación: post 4 hoy si salieron el 1 y el 2.
+3. **D4:** pasar la rutina al modelo semanal desde el lunes 12. Recomendación: sí. El brief de la semana 42 ya está y hoy he abierto su tema.
+4. **Landing /recorrido/v3/:** ahora que existen `/gracias/` y `/confirmado/`, decidir si la v3 se monta encima de esas dos páginas o se archiva. Recomendación: decidirlo después del primer cohorte del funnel v2.
+
+**Hipótesis para la semana que viene:** con la pregunta de quién decide en el formulario nuevo, los contactos con «otra persona» llegarán a la reunión más veces sin quien decide que los de «yo». Se puede contar con Growth el viernes 16 cruzando la etiqueta `decisor-*` con las reuniones, sin publicar tasas (R3) mientras dure la prueba.
+

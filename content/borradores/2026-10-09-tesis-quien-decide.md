@@ -7,8 +7,9 @@
 ## Ficha
 
 - **Serie:** tesis contraria.
-- **Etapa del Revenue Journey:** filtrar (FILTER).
+- **Etapa del Revenue Journey:** cualificación.
 - **Tesis:** antes de preguntar cuánto invierte un contacto, pregunta quién decide. Va contra la costumbre de cualificar empezando por el presupuesto.
+- **R4 · necesita el ok de Maikel a la tesis.** La base es su mensaje del 7-oct en la sesión de contenido, al revisar la landing: la inversión declarada es una señal bastante mala. Si no la suscribe tal cual, la pieza no sale.
 - **Datos reales:**
   - **Daily de Growth del 8-oct** (`bus/out/demand.jsonl`, `objecion_que_se_repite`): «lo veo con el equipo y te digo; a la reunión no llega quien decide».
   - **Funnel v2** (`bus/out/demand.jsonl`, 8-oct, `solicitud-montaje`): los formularios nuevos preguntan quién decide (yo / yo con un socio / otra persona). Activación prevista el lunes 12.
@@ -21,23 +22,26 @@
   - **R13:** a cualquiera que venda B2B le han dicho «lo veo con el equipo».
 - **CTA:** conversación.
 - **Qué se mide:** comentarios con cuántas reuniones tuvieron a quien decide.
-- **Enlaza con:** `/blog/quien-decide-la-compra/`, en un comentario.
+- **Enlaza con:** `/blog/quien-decide-la-compra/?utm_source=linkedin&utm_medium=organic&utm_campaign=articulo&utm_content=tesis-quien-decide`, en un comentario.
+- **Si pasa al viernes 16:** reescribir «una prueba que empezará el lunes». Para entonces estará en marcha y sigue sin poder darse ningún resultado (R3).
+- **Master Reviewer (9-oct):** nota 5, publicar con cambios. Aplicados los 6 críticos. Queda el R4: el ok de Maikel a la tesis.
 
 ## Texto para LinkedIn
 
 > Antes de preguntar cuánto invierte un contacto, pregunta quién decide.
 >
-> Los formularios nuevos que hemos preparado en mi empresa para la prueba del
-> lunes preguntan eso: quién decide. Yo, yo con un socio u otra persona.
+> En mi empresa hemos preparado formularios nuevos para una prueba que
+> empezará el lunes. Una de las preguntas es esa: quién decide. Yo, yo con un
+> socio u otra persona.
 >
-> Lo hemos añadido por lo que se repetía en nuestras reuniones esta semana:
-> «lo veo con el equipo y te digo». Y que a la reunión no llegaba quien decide.
+> En nuestras reuniones se repite «lo veo con el equipo y te digo». Y a la
+> reunión no llega quien decide.
 >
-> La inversión ya la preguntábamos. A principios de mes, un contacto entró con
-> nuestra nota más alta por lo que invertía y por volumen. En la reunión vimos
-> que el precio de su servicio cambiaba toda la cuenta.
+> La inversión ya la preguntábamos. Hace poco, un contacto entró con nuestra
+> nota más alta por lo que invertía y por volumen. En la reunión vimos que nos
+> faltaba otro dato: lo que cobra por su servicio.
 >
-> Lo que invierte te dice cuánto gasta. Para saber si quien está en la llamada
-> puede decir que sí, hace falta otra pregunta.
+> Lo que invierte un contacto no te dice si quien está en la llamada puede
+> decir que sí.
 >
 > En tus cinco últimas reuniones, ¿cuántas veces estaba la persona que decide?
