@@ -111,7 +111,7 @@ def final(trabajo):
     subprocess.run([FF, '-y', '-loglevel', 'error', '-i', f'{trabajo}/base.mp4', '-framerate', str(FPS),
                     '-i', f'{trabajo}/capas/f%04d.png', '-filter_complex', '[0:v][1:v]overlay=0:0:shortest=1[v]',
                     '-map', '[v]', '-map', '0:a', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
-                    '-c:a', 'copy', salida], check=True)
+                    '-c:a', 'aac', '-ar', '48000', '-b:a', '192k', salida], check=True)
     print('ok', salida)
 
 if __name__ == '__main__':
