@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """VSL Qualivo · V2 del primer minuto (brief de Maikel, 9-oct), 16:9.
 
-   python3 vsl_v2.py <bruto.mov> <carpeta_trabajo> <voz_limpia.mp3> <broll_panel.mp4> <broll_scroll.mp4>
+   python3 vsl_v2.py <bruto.mov> <carpeta_trabajo> <voz_limpia.mp3> <broll_panel.mp4>
 
-Sobre V1: zoom digital suave en el gancho y en la presentación, dos planos de apoyo de Higgsfield (Kling) y una
+Sobre V1: zoom digital suave en el gancho y en la presentación, un plano de apoyo de Higgsfield (Kling, desenfocado) y un móvil con feed animado propio y una
 capa nueva (capas_v2.html): métricas que se reducen ante la pregunta, flujo de contactos, anuncio genérico frente a
 anuncio para el cliente ideal, y comparación neutra 5 €/20 € que acaba en pregunta.
 El bruto y la voz no van al repo (es público).
@@ -43,10 +43,10 @@ def tiempos():
           'nombre': [T(30.70), T(34.80)],
           'ads': [T(39.40), T(48.30)], 'adA': T(39.60), 'adB': T(44.00), 'msg': T(45.20), 'paso': T(47.60),
           'comp': [T(48.75), T(61.30)], 'ca': T(51.80), 'cb': T(57.40),
-          'final': [T(61.62), total]}
+          'final': [T(61.62), total], 'feed': [T(21.72), T(23.40)]}
     open(os.path.join(AQUI, 'tiempos-v2.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     # planos de apoyo: (archivo, desde, hasta) en el montaje
-    return total, [(T(4.30), T(7.95)), (T(21.72), T(23.40))]
+    return total, [(T(4.30), T(7.95))]
 
 def base(bruto, trabajo, total, voz):
     fil, vs, as_ = [], [], []
@@ -97,8 +97,9 @@ def final(trabajo, apoyos, clips):
     ent, fil, ult = ['-i', f'{trabajo}/base_v2.mp4'], [], '0:v'
     for j, ((a, b), c) in enumerate(zip(apoyos, clips)):
         ent += ['-i', c]
+        # desenfoque suave: los modelos de vídeo dibujan letras inventadas en las pantallas
         fil.append(f'[{j + 1}:v]trim=0:{b - a:.2f},setpts=PTS-STARTPTS+{a}/TB,scale=1920:1080:force_original_aspect_ratio=increase,'
-                   f'crop=1920:1080,fps={FPS},format=yuv420p[b{j}];'
+                   f'crop=1920:1080,gblur=sigma=7,fps={FPS},format=yuv420p[b{j}];'
                    f"[{ult}][b{j}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b})'[o{j}];")
         ult = f'o{j}'
     k = len(clips) + 1
@@ -110,7 +111,7 @@ def final(trabajo, apoyos, clips):
     print('ok', salida)
 
 if __name__ == '__main__':
-    bruto, trabajo, voz, c1, c2 = sys.argv[1:6]
+    bruto, trabajo, voz, c1 = sys.argv[1:5]
     total, apoyos = tiempos(); print('duración', total, 'apoyos', apoyos)
     if os.environ.get('SOLO') != 'capas': base(bruto, trabajo, total, voz)
-    capas(trabajo, total); final(trabajo, apoyos, [c1, c2])
+    capas(trabajo, total); final(trabajo, apoyos, [c1])

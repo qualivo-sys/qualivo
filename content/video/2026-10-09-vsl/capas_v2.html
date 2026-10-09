@@ -63,6 +63,19 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
 #nombre{left:110px;bottom:190px;background:#fff;border-left:10px solid #27BDB1;padding:18px 30px 18px 26px;border-radius:6px}
 #nombre b{display:block;font-size:40px;font-weight:800;color:#0A0F1A}
 #nombre span{font-size:26px;font-weight:600;color:#4A5568}
+/* móvil propio con el feed (sustituye al plano de IA, que dibujaba letras inventadas) */
+#feed{inset:0;background:#0A0F1A;display:flex;align-items:center;justify-content:center}
+#feed .tel2{width:380px;height:740px;margin-bottom:150px;border-radius:52px;border:14px solid #1E2638;background:#F2F4F8;overflow:hidden;position:relative}
+#lista{position:absolute;left:0;right:0;top:0}
+.post{margin:18px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 0 rgba(10,15,26,.06)}
+.post .h{display:flex;align-items:center;gap:12px;padding:14px}
+.post .h i{width:38px;height:38px;border-radius:50%;display:block}
+.post .h u{height:12px;width:140px;border-radius:6px;background:#D5DAE3;display:block}
+.post .im{height:230px}
+.post .ln{height:12px;margin:12px 14px;border-radius:6px;background:#E2E6EE}
+.post .bt{height:40px;margin:10px 14px 16px;border-radius:10px;background:#0A0F1A;opacity:.85}
+#feed .lado{position:absolute;font-size:54px;line-height:1.1;font-weight:800;color:#fff;width:560px}
+#feed .lado i{font-style:normal;color:#27BDB1}
 </style>
 <div id="e" style="position:absolute;inset:0">
   <div class="l clave" id="k1">Miles de € <i>en publicidad</i></div>
@@ -74,6 +87,8 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
     <div class="ej">Datos de ejemplo</div></div>
   <div class="l full" id="flujo"><div class="rot" style="left:150px">CONTACTOS</div><div class="rot" style="left:1480px">OPORTUNIDADES</div>
     <div class="puerta"></div><div class="pt">¿Encaja?</div><div id="dots"></div></div>
+  <div class="l full" id="feed"><div class="tel2"><div id="lista"></div></div>
+    <div class="lado" style="left:110px;top:330px">Un anuncio<br><i>para todo el mundo</i></div></div>
   <div class="l clave coral" id="k3">Contactos <i>≠ oportunidades</i></div>
   <div class="l full" id="ads">
     <div class="ad a" id="adA"><div class="tag">Mensaje genérico</div><div class="tel"><div class="th"><i></i><div><b>Tu empresa</b><span>Publicidad</span></div></div>
@@ -99,7 +114,11 @@ function show(el,op,dy=0,base='',s0=.96){ el.style.opacity=op; const e=out(op); 
 // puntos del flujo: 36 contactos, pasan 5
 const N=40, PASA=new Set([3,11,18,27,35]); const D=$('dots'); for(let i=0;i<N;i++){const d=document.createElement('div'); d.className='dot'; D.appendChild(d);}
 let np=0; const orden={}; [...PASA].forEach(i=>orden[i]=np++);
+const L=$('lista'); const COL=['#E8590C','#27BDB1','#7C5CFF','#F2B705','#3B82F6','#EF4444','#10B981','#F97316','#8B5CF6','#06B6D4','#EAB308','#EC4899'];
+COL.forEach((c,i)=>{const p=document.createElement('div'); p.className='post'; p.innerHTML=`<div class="h"><i style="background:${c}"></i><u></u></div><div class="im" style="background:${c};opacity:.85"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="bt"></div>`; L.appendChild(p);});
 window.setT=function(t){
+  show($('feed'),win(t,TL.feed[0],TL.feed[1],.35,.35),0,'',1);
+  $('lista').style.transform=`translateY(${-io(nm(t,TL.feed[0],TL.feed[1]))*2600}px)`;
   const sp=(t>=TL.met[0]&&t<TL.met[1])||(t>=TL.comp[0]&&t<TL.comp[1]); $('e').className=sp?'split':'';
   show($('k1'),win(t,TL.k1[0],TL.k1[1]),-24,'translateX(-50%)');
   // métricas: entran escalonadas y se reducen al llegar la pregunta
