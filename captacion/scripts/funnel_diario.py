@@ -21,7 +21,29 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126"
 COLS = ["fecha", "canal", "volumen", "aperturas", "clics", "respuestas",
         "conversaciones", "reuniones", "notas"]
 
+# Las claves se leen primero de una variable de entorno y solo despues del
+# fichero del scratchpad. El scratchpad muere con el contenedor, que se
+# reinicia en casi cada disparo de rutina, asi que el fichero casi nunca esta.
+#
+# Cuando faltaba, clave() devolvia cadena vacia, la peticion salia con
+# api_key= y Smartlead contestaba 401. El guion no se caia: anotaba el error
+# en una nota al pie e imprimia la fila del canal a CERO. El 9-oct-2026 el
+# informe diario dijo "email frio: 0 enviados" un dia en que habian salido 20
+# correos. Un cero que viene de no haber podido mirar, otra vez.
+ENTORNO = {
+    ".smartlead_key": "SMARTLEAD_API_KEY",
+    ".ghl_key": "GHL_API_KEY",
+    ".ghl_loc": "GHL_LOCATION_ID",
+    ".ghl_calendar": "GHL_CALENDAR_ID",
+    ".vapi_key": "VAPI_API_KEY",
+    ".heyreach_key": "HEYREACH_API_KEY",
+}
+
+
 def clave(f):
+    v = os.environ.get(ENTORNO.get(f, ""), "").strip()
+    if v:
+        return v
     p = os.path.join(SP, f)
     return open(p).read().strip() if os.path.exists(p) else ""
 
@@ -35,6 +57,26 @@ def curl(u, headers):
     cmd = ["curl", "-s", "--max-time", "60", "-A", UA["User-Agent"], u]
     for k, v in headers.items(): cmd += ["-H", f"{k}: {v}"]
     return json.loads(subprocess.run(cmd, capture_output=True).stdout)
+
+# Campanas que son de CLIENTE y no de Qualivo. Comparten la cuenta de
+# Smartlead pero no son nuestra captacion, y Maikel lo dijo claro: si son de
+# clientes, fuera del informe.
+#
+# Por que esto importa y no es cosmetico: el 9-oct-2026 el embudo conto 39
+# correos "nuestros" cuando habian salido 20; los otros 19 eran de DKR y
+# Kubysoft. Y la unica respuesta del dia era de DKR, asi que el informe habria
+# dicho "1 respuesta" en un dia en el que nosotros tuvimos cero. Inflar el
+# volumen es feo; inventar una respuesta es peor, porque la respuesta es la
+# metrica con la que se decide si una puerta vive o muere.
+#
+# Siguen saliendo en la tabla por campana, marcadas, para que se vean. Lo que
+# no hacen es sumar en las vistas DIARIA, SEMANA y MES.
+CLIENTES = ("kubysoft", "dkr")
+
+
+def es_cliente(nombre):
+    return any(x in (nombre or "").lower() for x in CLIENTES)
+
 
 # --- 1. EMAIL FRIO (Smartlead) ------------------------------------------------
 def email_frio():
@@ -57,14 +99,21 @@ def email_frio():
                 if (r.get("reply_time") or "")[:10] == HOY: k["resp"] += 1
             if len(rows) < 500: break
             off += 500
-        n.update(k)
+        if not es_cliente(c.get("name")):
+            n.update(k)
         dep = ""
         if c["status"] == "ACTIVE":
             a = req(f"https://server.smartlead.ai/api/v1/campaigns/{c['id']}/analytics?api_key={KEY}")
             dep = int((a.get("campaign_lead_stats") or {}).get("notStarted") or 0)
-            deposito += dep
+            # El deposito que se vigila es el NUESTRO. El de un cliente no nos
+            # da ni un dia mas de envio y falsea la alerta de los 40 leads.
+            if not es_cliente(c.get("name")):
+                deposito += dep
         if sum(k.values()) or c["status"] == "ACTIVE":
-            por_camp.append([HOY, c["name"][:45], c["status"], k["env"], k["ap"], k["clic"],
+            etiqueta = c["name"][:45]
+            if es_cliente(c.get("name")):
+                etiqueta = "[cliente] " + c["name"][:34]
+            por_camp.append([HOY, etiqueta, c["status"], k["env"], k["ap"], k["clic"],
                              k["resp"], k["reb"], dep])
     hist = []
     if os.path.exists(CSV_CAMPS):

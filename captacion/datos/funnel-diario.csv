@@ -119,3 +119,9 @@ fecha,canal,volumen,aperturas,clics,respuestas,conversaciones,reuniones,notas
 2026-10-06,linkedin,0,,,0,,,
 2026-10-06,radiografia,0,,,,,,tag diagnostico-completo (Landing)
 2026-10-06,web-blog,,,,,,,pendiente de que Landing publique web-diario.csv
+2026-10-09,email-frio,20,7,0,0,,,deposito sin empezar: 9
+2026-10-09,whatsapp,0,,,0,0,,
+2026-10-09,voz,0,,,,0,0,sin contar pruebas
+2026-10-09,linkedin,,,,,,,sin datos (HTTPError)
+2026-10-09,radiografia,,,,,,,tag diagnostico-completo (Landing)
+2026-10-09,web-blog,,,,,,,pendiente de que Landing publique web-diario.csv
