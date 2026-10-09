@@ -19,7 +19,9 @@ FPS = 30
 # Mismos cortes que V1; el gancho va en un solo plano con zoom, y la presentación con un zoom más leve.
 g.PLANOS = [(1.05, 7.95, 'zoom'),
             (8.36, 10.16, 'partido'), (13.80, 16.88, 'partido'), (17.17, 20.00, 'partido'),
-            (20.00, 21.20, 'cerrado'), (21.72, 25.16, 'abierto'), (25.45, 29.55, 'abierto'),
+            (20.00, 21.20, 'cerrado'), (21.72, 25.16, 'abierto'),
+            # bajo la animación a pantalla completa: dura lo que dura la frase en la voz regrabada (más lenta)
+            (25.45, 32.03, 'abierto'),
             (30.50, 36.95, 'zoom2'),
             (37.05, 41.95, 'abierto'), (42.35, 48.30, 'cerrado'),
             (48.75, 52.62, 'partido'), (52.86, 54.60, 'partido'), (55.05, 61.30, 'partido'),
@@ -36,10 +38,13 @@ def zoom(d, z0, z1, cx, fy):
 def tiempos():
     total = g.tiempos()                       # subtítulos de V1 (texto del guion)
     subs = json.loads(open(os.path.join(AQUI, 'tiempos-gancho.js')).read()[len('window.TL='):-2])['subs']
+    for sb in subs:   # la regrabación dice «aquí» y alarga la frase de los contactos
+        sb[2] = sb[2].replace('Y ahí está el problema.', 'Y aquí está el problema.')
+        if sb[0] == T(25.45): sb[1] = T(32.03)
     TL = {'subs': subs,
           'k1': [T(2.40), T(4.60)],
           'met': [T(8.36), T(20.00)], 'cards': [T(8.50), T(13.95), T(15.70)], 'preg': T(17.20),
-          'flujo': [T(23.40), T(29.55)], 'k3': [T(25.60), T(29.55)],
+          'flujo': [T(23.40), T(32.03)], 'k3': [T(25.60), T(32.03)],
           'nombre': [T(30.70), T(34.80)],
           'ads': [T(39.40), T(48.30)], 'adA': T(39.60), 'adB': T(44.00), 'msg': T(45.20), 'paso': T(47.60),
           'comp': [T(48.75), T(61.30)], 'ca': T(51.80), 'cb': T(57.40),
@@ -59,10 +64,10 @@ def base(bruto, trabajo, total, voz):
         else:
             w, h, x, y = g.ABIERTO if enc == 'abierto' else g.CERRADO; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
         fil.append(f'[0:v]trim={a}:{b},setpts=PTS-STARTPTS,{v},fps={FPS},setsar=1[v{i}];')
-        fil.append(f'[2:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={d - 0.03:.3f}:d=0.03[a{i}];')
-        vs.append(f'[v{i}]'); as_.append(f'[a{i}]')
+        vs.append(f'[v{i}]')
     n = len(g.PLANOS)
-    fil.append(''.join(f'{vs[i]}{as_[i]}' for i in range(n)) + f'concat=n={n}:v=1:a=1[vb][ab];')
+    # la voz llega ya montada (sincroniza_voz.py, tiempo del montaje)
+    fil.append(''.join(vs) + f'concat=n={n}:v=1:a=0[vb];[2:a]atrim=0:{total},asetpts=PTS-STARTPTS[ab];')
     fil.append('[ab]acompressor=threshold=0.1:ratio=2.5:attack=10:release=200,'
                'aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voz][vsc];')
     fil.append(f'[1:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=0:{total},asetpts=PTS-STARTPTS,'
