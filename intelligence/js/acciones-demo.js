@@ -41,7 +41,7 @@
   // del negocio puede venir en el enlace (?web=nuriaroure.com) para no pedirla, o
   // una ficha ya hecha (?preset=nuria, api/_fichas/nuria.json).
   const SECTOR_PRUEBA = { clinica: 'clinicas', cirugia: 'clinicas', nutricion: 'clinicas', osteopatia: 'clinicas', reformas: 'reformas', inmobiliaria: 'asesorias', b2b: 'asesorias', consultoria: 'asesorias', agencias: 'asesorias', marketing: 'asesorias', formacion: 'formacion', fp: 'formacion', aviacion: 'formacion', academia: 'formacion', musica: 'formacion', masters: 'formacion', maritima: 'formacion', lanzamientos: 'formacion', sueno: 'formacion' };
-  const ERR_PRUEBA = { nombre: 'Falta tu nombre.', telefono: 'Ese móvil no es válido: tiene que ser un móvil español.', email: 'Ese correo no es válido.', web: 'Falta la web del negocio.', ya_hoy: 'Ese móvil ya ha recibido una llamada de prueba hoy. Mañana puedes repetir.', tope: 'Hoy ya se han hecho todas las llamadas de prueba. Mañana vuelve a estar disponible.', llamada: 'La llamada no ha podido salir. Avisamos al equipo; prueba en unos minutos.' };
+  const ERR_PRUEBA = { nombre: 'Falta tu nombre.', telefono: 'Ese móvil no es válido: tiene que ser un móvil español.', email: 'Ese correo no es válido.', web: 'Falta la web del negocio.', ya_hoy: 'Ese móvil ya ha hecho hoy todas las llamadas de prueba permitidas. Mañana puedes repetir.', tope: 'Hoy ya se han hecho todas las llamadas de prueba. Mañana vuelve a estar disponible.', llamada: 'La llamada no ha podido salir. Avisamos al equipo; prueba en unos minutos.' };
   const param = function (k) { try { return new URLSearchParams(location.search).get(k) || ''; } catch (e) { return ''; } };
 
   function elegirLlamada(box, c) {
@@ -54,7 +54,7 @@
   function formLlamada(box, c) {
     const web = param('web') || param('preset');
     const campo = function (k, ph, tipo, extra) { return '<input class="ar-campo" data-campo="' + k + '" type="' + tipo + '" placeholder="' + esc(ph) + '" ' + (extra || '') + ' style="width:100%;font:inherit;font-size:13.5px;padding:9px 10px;margin-top:6px;border:1px solid var(--borde);border-radius:8px;background:var(--superficie);color:var(--tinta)">'; };
-    pintar(box, '<p class="nota-ar">Te llama Raquel en menos de un minuto desde un número español, como si fueras ' + esc(nombre(c)) + '. Al colgar te llega al correo lo que verías como dueño: ficha, resumen, grabación y siguiente paso. Una prueba por móvil y día, de 9:00 a 21:00.</p>' +
+    pintar(box, '<p class="nota-ar">Te llama Raquel en menos de un minuto desde un número español, como si fueras ' + esc(nombre(c)) + '. Al colgar te llega al correo lo que verías como dueño: ficha, resumen, grabación y siguiente paso. Hasta cinco pruebas por móvil y día, de 9:00 a 21:00.</p>' +
       campo('nombre', 'Tu nombre', 'text', 'autocomplete="given-name"') +
       campo('telefono', 'Tu móvil (6XX XXX XXX)', 'tel', 'autocomplete="tel"') +
       campo('email', 'Tu correo (te llega el resumen)', 'email', 'autocomplete="email"') +

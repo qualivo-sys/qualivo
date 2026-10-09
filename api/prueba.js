@@ -19,6 +19,8 @@ const SECTORES = ['clinicas', 'formacion', 'reformas', 'asesorias', 'otro'];
 const DESDE = parseInt(process.env.DEMO_DESDE || '9', 10);
 const HASTA = parseInt(process.env.DEMO_HASTA || '21', 10);
 const MAX_DIA = parseInt(process.env.DEMO_MAX_DIA || '30', 10);
+// 9-oct: Maikel tiene que poder repetir la llamada (demos y Looms): hasta 5 por móvil y día.
+const MAX_MOVIL = parseInt(process.env.DEMO_MAX_MOVIL || '5', 10);
 
 function telefonoES(t) {
   t = String(t || '').replace(/[\s\-().]/g, '');
@@ -99,7 +101,9 @@ module.exports = async function handler(req, res) {
     const r = await fetch(A.GHL_BASE + '/contacts/search', { method: 'POST', headers: A.cabeceras(), body: JSON.stringify({ locationId: process.env.GHL_LOCATION_ID, pageLimit: 1, filters: [{ field: 'phone', operator: 'eq', value: d.telefono }] }) });
     if (r.ok) contacto = ((await r.json()).contacts || [])[0] || null;
   } catch (e) { /* si el CRM no contesta, seguimos */ }
-  if (contacto && A.tiene(contacto, hoy)) return res.status(200).json({ ok: false, error: 'ya_hoy' });
+  // Intentos de hoy de este móvil: la primera deja «demo-AAAAMMDD», las siguientes «demo-AAAAMMDD-2», «-3»…
+  const previas = contacto ? (contacto.tags || []).filter(function (t) { t = String(t).toLowerCase(); return t === hoy || t.indexOf(hoy + '-') === 0; }).length : 0;
+  if (previas >= MAX_MOVIL) return res.status(200).json({ ok: false, error: 'ya_hoy' });
   try {
     const deHoy = await A.buscarPorEtiqueta(hoy, MAX_DIA + 1);
     if (deHoy.length >= MAX_DIA) return res.status(200).json({ ok: false, error: 'tope' });
@@ -107,7 +111,7 @@ module.exports = async function handler(req, res) {
 
   const t = A.ahoraMadrid();
   const enHorario = t.minutos >= DESDE * 60 && t.minutos < HASTA * 60;
-  const tags = ['demo', 'sector-' + d.sector, enHorario ? 'demo-llamada' : 'demo-pendiente', hoy].concat(preset ? ['demo-' + String(b.preset).toLowerCase()] : []);
+  const tags = ['demo', 'sector-' + d.sector, enHorario ? 'demo-llamada' : 'demo-pendiente', previas ? hoy + '-' + (previas + 1) : hoy].concat(preset ? ['demo-' + String(b.preset).toLowerCase()] : []);
 
   let contactId = '';
   try { contactId = await upsert(d, tags); } catch (e) { console.error('[prueba] CRM:', e.message); }
