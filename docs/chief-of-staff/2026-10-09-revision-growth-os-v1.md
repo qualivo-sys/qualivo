@@ -119,3 +119,33 @@ La prueba valida coordinación, no rentabilidad ni rendimiento estadístico de c
 La aprobación identifica acción, sistemas y recursos afectados, responsable, ventana, prueba de éxito y recuperación. Aprobar la revisión documental no equivale a autorizar rotación, envíos, gasto, archivo, migración o despliegue.
 
 Esta rama añade exclusivamente esta propuesta. No implementa gobernanza ni modifica la configuración de los agentes.
+
+
+## Traspaso concreto de CFO a coordinación pendiente de aplicación
+
+Fuente documental: [cerebro.md](https://github.com/qualivo-sys/qualivo/blob/e2471f86fe22d4220b3d1ef4df3b4bcf73b277b9/sistema/cerebro.md), commit e2471f86fe22d4220b3d1ef4df3b4bcf73b277b9, apartados Ritual semanal, Protocolo y Qualivo OS. Esto verifica instrucciones escritas, no configuración viva de rutinas.
+
+| Función documentada | Responsable propuesto | Evidencia de aceptación |
+|---|---|---|
+| Bloque financiero semanal y previsión de caja | Agente CFO | Fuente financiera, fecha de corte y explicación de variaciones. |
+| Recopilar pipeline y marketing | CoS, con aportes de Growth, Outbound y Paid | Datos con fuente, periodo y definición; discrepancias visibles. |
+| Patrones de reuniones | Growth prepara; CoS incorpora los hallazgos | Transcripciones disponibles y conclusiones vinculadas a evidencia. Si faltan, marcar no evaluado. |
+| Registrar y asignar tareas y experimentos existentes | CoS | Cada elemento con responsable, próximo paso y autorización cuando corresponda. |
+| Seguimiento de las decisiones semanales | CoS | Decisión anterior, estado y evidencia o bloqueo. |
+| Aprobar dinero y campañas | Maikel | Mantener la autoridad actual. |
+
+### Orden de transición
+
+1. Leer la configuración real de las rutinas diaria, semanal y financiera del CFO y sus destinos. No deducir horarios actuales a partir del documento.
+2. Preparar el texto exacto de las rutinas afectadas y su estado anterior para recuperación, sin incluir secretos.
+3. Mantener el seguimiento actual hasta aceptar el primer informe manual del CoS; evitar un segundo resumen paralelo a Maikel.
+4. Aprobar la reasignación concreta y cambiar únicamente las rutinas existentes necesarias. No crear nuevas.
+5. Actualizar las secciones de Protocolo y Qualivo OS de cerebro.md de forma coherente con la fuente elegida; no basta renombrar CEO como CFO.
+6. Confirmar que las alertas antes dirigidas a [PARA CEREBRO] siguen llegando al responsable acordado antes de retirar ese destino.
+7. Si se pierde seguimiento, recuperar la asignación anterior y detener la migración.
+
+Hay discrepancia entre la hora de preparación del viernes escrita en cerebro.md y la hora UTC de ejecución citada en el inventario. Verificar programación, zona horaria y finalidad de cada evento antes de cambiar horarios. La ausencia de acceso a la consola de Claude impide declarar completada esta comprobación.
+
+### Exclusión expresa de alcance
+
+Alpha queda bajo gestión íntegra de Maikel. No forma parte del seguimiento operativo, reasignación de responsables ni prueba de coordinación de esta revisión. Su sesión, rutinas, documentación y sistemas no se modificarán desde este trabajo.
