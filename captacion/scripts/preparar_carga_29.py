@@ -24,8 +24,15 @@ SALIDA = 'captacion/datos/carga-29-listos.json'
 FIRMA = "\n\n--\nMaikel Echevarría · CEO\nQualivo · qualivo.io\n663 375 205"
 
 CASOS = {
+    # El enlace del caso de Equipzilla esta vacio a proposito: comprobado el
+    # 9-oct-2026, https://qualivo.io/casos/equipzilla/ devuelve 404. El texto con
+    # el numero si vale, que es el que aprobo Maikel para la fuga de captacion.
+    # Nunca se llego a enviar porque esta cohorte cayo en el caso de seguimiento,
+    # pero habria salido en el primer lead clasificado como 'captacion'.
+    # Si se quiere enlace aqui, hay que publicar esa pagina o decidir otra: la de
+    # bellovinilo si responde 200 y ya se cita en carga_v3.py y carga_sector.py.
     'captacion': ("Equipzilla pasó de 0,1 a 7,6 de retorno en anuncios sin tocar el presupuesto.",
-                  'https://qualivo.io/casos/equipzilla/'),
+                  ''),
     'seguimiento': ("Una empresa con CRM propio tenía 25 oportunidades paradas, 34.500 euros, "
                     "que nadie estaba tocando.", ''),
     'formacion': ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok sin saber "
