@@ -115,6 +115,13 @@ module.exports = async function handler(req, res) {
     brief = D.briefSector({ web: d.web.replace(/^https?:\/\//, ''), sector: d.sector });
   }
 
+  // Desde la demo de Intelligence (9-oct): la llamada la hace Raquel en nombre del
+  // negocio de la demo (?empresa=), aunque la ficha salga de su web.
+  const agente = String(b.agente || '').trim();
+  if (/^[A-Za-zÁÉÍÓÚÑáéíóúñ]{2,20}$/.test(agente)) brief.agente = agente;
+  const negocio = String(b.negocio || '').replace(/[<>{}]/g, '').trim().slice(0, 60);
+  if (negocio.length >= 2) brief.negocio = negocio;
+
   // Datos para el workflow de GHL «Prueba tu agente» (plantilla
   // qualivo_prueba_agente por el 647): campos WA · Agente demo / WA · Negocio y la
   // etiqueta wa-prueba-agente que lo dispara. El nombre lo pone el propio
