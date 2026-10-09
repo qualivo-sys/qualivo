@@ -45,7 +45,7 @@
   const param = function (k) { try { return new URLSearchParams(location.search).get(k) || ''; } catch (e) { return ''; } };
 
   function elegirLlamada(box, c) {
-    pintar(box, '<p class="nota-ar">Raquel puede llamar a ' + esc(nombre(c)) + ' (simulado, sin sonido) o llamarte a ti ahora, de verdad, como recepcionista de ' + esc(param('empresa') || 'este negocio') + '. Tú haces de cliente.</p>' +
+    pintar(box, '<p class="nota-ar">Raquel puede llamar a ' + esc(nombre(c)) + ' (simulado, sin sonido) o llamarte a ti ahora, de verdad: te llama como si fueras ' + esc(nombre(c)) + ', con lo que dice el CRM (' + esc(etapaDe(c)) + '). Tú haces de ' + esc(nombre(c)) + '.</p>' +
       '<div class="fila"><button class="btn btn-mini btn-primario" type="button" data-real="llamar-yo" data-id="' + c.id + '">Que me llame a mí</button>' +
       '<button class="btn btn-mini" type="button" data-real="llamar-sim" data-id="' + c.id + '">Ver la simulación</button>' +
       '<button class="btn btn-mini" type="button" data-real="cerrar">Cerrar</button></div>');
@@ -54,7 +54,7 @@
   function formLlamada(box, c) {
     const web = param('web') || param('preset');
     const campo = function (k, ph, tipo, extra) { return '<input class="ar-campo" data-campo="' + k + '" type="' + tipo + '" placeholder="' + esc(ph) + '" ' + (extra || '') + ' style="width:100%;font:inherit;font-size:13.5px;padding:9px 10px;margin-top:6px;border:1px solid var(--borde);border-radius:8px;background:var(--superficie);color:var(--tinta)">'; };
-    pintar(box, '<p class="nota-ar">Te llama Raquel en menos de un minuto desde un número español. Al colgar te llega al correo lo que verías como dueño: ficha, resumen, grabación y siguiente paso. Una prueba por móvil y día, de 9:00 a 21:00.</p>' +
+    pintar(box, '<p class="nota-ar">Te llama Raquel en menos de un minuto desde un número español, como si fueras ' + esc(nombre(c)) + '. Al colgar te llega al correo lo que verías como dueño: ficha, resumen, grabación y siguiente paso. Una prueba por móvil y día, de 9:00 a 21:00.</p>' +
       campo('nombre', 'Tu nombre', 'text', 'autocomplete="given-name"') +
       campo('telefono', 'Tu móvil (6XX XXX XXX)', 'tel', 'autocomplete="tel"') +
       campo('email', 'Tu correo (te llega el resumen)', 'email', 'autocomplete="email"') +
@@ -65,19 +65,31 @@
       '<button class="btn btn-mini" type="button" data-real="cerrar">Cancelar</button></div>');
   }
 
-  function enviarLlamada(box, b) {
+  function etapaDe(c) { return c.etapaTxt || (E().cfg.etapaTxt ? E().cfg.etapaTxt(c.etapa) : '') || ''; }
+  // Lo que Raquel sabe del contacto al llamar: lo mismo que se ve en la ficha.
+  function contextoDe(c) {
+    if (!c) return null;
+    const x = c.x || {}, nba = x.nba || {};
+    let hist = [];
+    try { hist = M.timeline(c, E().cfg, E().ahora).slice(-6).map(function (h) { return h.texto; }); } catch (e) { /* sin historial */ }
+    const suyo = (c.conv || []).filter(function (m) { return m.de === 'c'; }).slice(-1)[0];
+    return { contacto: nombre(c), etapa: etapaDe(c), interes: c.prod || '', porque: x.porque || '', accion: [nba.accion, nba.por].filter(Boolean).join(': '),
+      historial: hist, escribio: suyo ? suyo.texto : '', objetivo: (E().cfg.t && E().cfg.t.objetivoPaso) || '' };
+  }
+
+  function enviarLlamada(box, b, c) {
     const v = function (k) { const el = box.querySelector('[data-campo="' + k + '"]'); return el ? (el.type === 'checkbox' ? el.checked : el.value.trim()) : ''; };
     const err = box.querySelector('[data-error]');
     const fallo = function (t) { if (err) { err.textContent = t; err.hidden = false; } b.disabled = false; b.textContent = 'Llamadme ahora'; };
     if (!v('acepto')) return fallo('Marca la casilla para que podamos llamarte.');
-    const datos = { nombre: v('nombre'), telefono: v('telefono'), email: v('email'), web: param('web') || v('web'), preset: param('preset'), sector: SECTOR_PRUEBA[E().cfg.id] || 'otro', agente: 'Raquel', negocio: param('empresa') };
+    const datos = { nombre: v('nombre'), telefono: v('telefono'), email: v('email'), web: param('web') || v('web'), preset: param('preset'), sector: SECTOR_PRUEBA[E().cfg.id] || 'otro', agente: 'Raquel', negocio: param('empresa'), contexto: contextoDe(c) };
     b.disabled = true; b.textContent = 'Llamando…';
     fetch('/api/prueba/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (j.ok && j.estado === 'llamando') {
           pintar(box, '<p class="ok-ar"><span class="punto-vivo"></span>Te está llamando ' + esc(j.agente || 'Raquel') + ' de ' + esc(j.negocio || datos.negocio || 'el negocio') + '. Coge el móvil.</p>' +
-            '<p class="nota-ar" style="margin-top:6px">Pregúntale lo que le preguntaría un cliente. Al colgar te llega el correo con la ficha, el resumen y la grabación.</p><div class="fila"><button class="btn btn-mini" type="button" data-real="cerrar">Cerrar</button></div>');
+            '<p class="nota-ar" style="margin-top:6px">Haz de ' + esc(datos.contexto ? datos.contexto.contacto : 'cliente') + ': Raquel ya sabe en qué punto estás. Al colgar te llega el correo con la ficha, el resumen y la grabación.</p><div class="fila"><button class="btn btn-mini" type="button" data-real="cerrar">Cerrar</button></div>');
         } else if (j.ok && j.estado === 'fuera_horario') {
           pintar(box, '<p class="ok-ar">Apuntado. Las llamadas de prueba salen de ' + (j.desde || 9) + ':00 a 21:00; vuelve a probar en ese horario.</p>');
         } else fallo(ERR_PRUEBA[j.error] || 'No se ha podido lanzar la llamada.');
@@ -129,7 +141,7 @@
     const box = cajaDe(b);
     const c = id ? QV.contacto(id) : null;
     if (accion === 'cerrar') { pintar(box, ''); return; }
-    if (accion === 'llamar-yo-enviar') { enviarLlamada(box, b); return; }
+    if (accion === 'llamar-yo-enviar') { enviarLlamada(box, b, id ? QV.contacto(id) : null); return; }
     if (accion === 'copiar') { const t = box && box.querySelector('.ar-texto'); if (t) { try { navigator.clipboard.writeText(t.value); b.textContent = 'Copiado'; } catch (err) { t.select(); } } return; }
     if (!c) return;
     if (accion === 'redactar' || accion === 'agente') {

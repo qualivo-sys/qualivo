@@ -28,6 +28,19 @@ function telefonoES(t) {
   return /^\+34[67]\d{8}$/.test(t) ? t : '';
 }
 
+// Lo que manda la demo de Intelligence sobre el contacto de la ficha: solo texto
+// corto y sin llaves ni etiquetas, para que no se cuele nada raro en el guion.
+function limpiarContexto(x) {
+  if (!x || typeof x !== 'object') return null;
+  const t = function (v, n) { return String(v || '').replace(/[<>{}]/g, '').replace(/\s+/g, ' ').trim().slice(0, n); };
+  const c = {
+    contacto: t(x.contacto, 30), etapa: t(x.etapa, 80), interes: t(x.interes, 120), porque: t(x.porque, 300),
+    accion: t(x.accion, 300), escribio: t(x.escribio, 200), objetivo: t(x.objetivo, 120),
+    historial: (Array.isArray(x.historial) ? x.historial : []).slice(-6).map(function (h) { return t(h, 140); }).filter(Boolean)
+  };
+  return c.contacto ? c : null;
+}
+
 function fechaTag() {
   const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   return 'demo-' + p.replace(/-/g, '');
@@ -142,7 +155,9 @@ module.exports = async function handler(req, res) {
   // no lo coge o, al colgar, para confirmar la cita (api/vapi-fin.js, finDemo).
   const wa = { ok: false, motivo: 'sale tras la llamada' };
 
-  const l = await D.lanzarLlamada({ brief: brief, nombre: d.nombre, telefono: d.telefono, email: d.email, contactId: contactId });
+  // Contexto de una ficha del CRM de la demo de Intelligence: llamada saliente a ese contacto.
+  const contexto = limpiarContexto(b.contexto);
+  const l = await D.lanzarLlamada({ brief: brief, nombre: d.nombre, telefono: d.telefono, email: d.email, contactId: contactId, contexto: contexto });
   if (contactId) {
     await A.nota(contactId, 'PRUEBA TU AGENTE · ' + new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }) +
       '\nWeb: ' + d.web + ' · sector: ' + d.sector + ' · ficha desde: ' + brief.fuente +

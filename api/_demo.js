@@ -123,6 +123,32 @@ function primeraFrase(b, nombre) {
   return b.negocio + ', buenas, soy ' + b.agente + '. ¿Con quién hablo?';
 }
 
+// Llamada SALIENTE con el contexto de una ficha del CRM de la demo de Intelligence
+// (9-oct): Raquel llama ella a un contacto que se ha quedado a medias (p. ej. vio
+// el directo y no pidió la llamada de admisión) y quien coge el teléfono hace de
+// ese contacto. ctx = { contacto, etapa, interes, porque, accion, historial[], escribio, objetivo }.
+function promptSaliente(b, nombre, ctx) {
+  const servicios = (b.servicios || []).map(function (x) { return typeof x === 'string' ? x : (x.nombre || ''); }).join('; ');
+  const quien = ctx.contacto || 'la persona';
+  return 'Eres ' + b.agente + ', del equipo de ' + b.negocio + ' (' + b.resumen + '). Hablas castellano de España, natural, frases cortas, tono ' + (Array.isArray(b.tono) ? b.tono.join(', ') : b.tono) + '. ' +
+    'El nombre del negocio se dice como una palabra, tal cual está escrito, sin deletrear' + (b.pronunciacion ? ' (se pronuncia «' + b.pronunciacion + '»)' : '') + '.\n\n' +
+    'ESTA LLAMADA LA HACES TÚ. Llamas a ' + quien + ' porque el CRM dice que se ha quedado a medias. Quien coge el teléfono hace el papel de ' + quien + ': síguele el juego y trátale como ' + quien + ' aunque te diga otro nombre.\n\n' +
+    'LO QUE SABES DE ' + quien.toUpperCase() + ' (del CRM)\n' +
+    (ctx.etapa ? 'Dónde está: ' + ctx.etapa + '.\n' : '') +
+    (ctx.interes ? 'Qué le interesa: ' + ctx.interes + '.\n' : '') +
+    (ctx.historial && ctx.historial.length ? 'Lo último que ha pasado: ' + ctx.historial.join(' / ') + '.\n' : '') +
+    (ctx.escribio ? 'Lo que escribió: «' + ctx.escribio + '».\n' : '') +
+    (ctx.porque ? 'Por qué hay que llamarle ahora: ' + ctx.porque + '\n' : '') +
+    (ctx.accion ? 'Siguiente paso recomendado: ' + ctx.accion + '\n' : '') +
+    '\nCÓMO LLEVARLA\nPregunta si es buen momento. Menciona con naturalidad lo concreto que sabes (por ejemplo, que se apuntó, que vio el directo o que no pudo entrar) sin sonar a ficha leída ni dar datos de más. Escucha, resuelve sus dudas con lo que sabes y lleva la conversación a ' + (ctx.objetivo || ('reservar una ' + b.tipoCita)) + ': ofrece dos opciones concretas de esta semana, confirma en voz alta día y hora y di que le llega la confirmación por WhatsApp. No hace falta que exista la agenda: es una demostración. Si no le interesa, respétalo, pregunta qué le frena y despídete con amabilidad.\n\n' +
+    'LO QUE SABES DEL NEGOCIO\nServicios: ' + (servicios || 'los habituales') + '.\n' + (b.gancho ? 'Dato a tener en cuenta: ' + b.gancho + '\n' : '') +
+    'Si te preguntan algo que no sabes (un precio exacto, una fecha), no lo inventes: di que eso se lo confirma el equipo por WhatsApp.\n\n' +
+    'CUANDO ROMPER EL PAPEL\nSolo cuando la cita quede confirmada en voz alta o la conversación pase de tres minutos. Si dice que es una prueba o una demo, NO rompas el papel: sigue como si fuera ' + quien + '. Cuando toque, cambia de registro y di, con estas ideas y tus palabras: ' +
+    '«' + nombre + ', esto es lo que haría Raquel con cada persona de tu CRM que se queda a medias: llamarla con lo que ya sabe de ella, en el momento justo. En un minuto te llega un correo con lo que verías tú: el resumen de esta llamada y el siguiente paso. Si quieres verlo con tus datos de verdad, Maikel te lo enseña en media hora.» ' +
+    'Despídete y cuelga.\n\n' +
+    'REGLAS\nNunca digas que eres una inteligencia artificial salvo que te lo pregunten directamente (entonces sí, con naturalidad). No hables de Qualivo hasta romper el papel. Una pregunta por turno. Si hay silencio de más de cinco segundos, pregunta si sigue ahí; si no contesta, despídete y cuelga.';
+}
+
 async function lanzarLlamada(o) {
   const clave = process.env.VAPI_API_KEY;
   const asistente = process.env.VAPI_ASSISTANT_ID;
@@ -135,10 +161,10 @@ async function lanzarLlamada(o) {
     assistantId: asistente, phoneNumberId: numero,
     customer: { number: o.telefono, name: o.nombre || '' },
     assistantOverrides: {
-      firstMessage: primeraFrase(b, nombre),
+      firstMessage: o.contexto ? 'Hola, ¿hablo con ' + (o.contexto.contacto || nombre) + '? Soy ' + b.agente + ', del equipo de ' + b.negocio + '.' : primeraFrase(b, nombre),
       // Modelo ligero: en la prueba del 22-sep bajó el turno de 3,2 s a 2,0 s
       // junto con la voz en flash y nova-3 (esos dos van en el asistente).
-      model: { provider: 'openai', model: process.env.DEMO_MODELO_VOZ || 'gpt-4o-mini', messages: [{ role: 'system', content: promptLlamada(b, nombre) }], temperature: 0.6 },
+      model: { provider: 'openai', model: process.env.DEMO_MODELO_VOZ || 'gpt-4o-mini', messages: [{ role: 'system', content: o.contexto ? promptSaliente(b, nombre, o.contexto) : promptLlamada(b, nombre) }], temperature: 0.6 },
       endCallFunctionEnabled: true,
       maxDurationSeconds: 360,
       // La ficha viaja dentro de la llamada: api/vapi-fin.js la recupera al
