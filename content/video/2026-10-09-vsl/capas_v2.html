@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- VSL Qualivo · V2 del primer minuto · capa de gráficos (fondo transparente), 1920x1080.
+     Identidad de la web: Montserrat, navy #0A0F1A, turquesa #27BDB1, coral #E8590C.
+     Entradas y salidas de 0,3-0,6 s, solo desplazamiento y escala. Tiempos en window.TL (vsl_v2.py). -->
+<style>
+@font-face{font-family:M;src:url(../../../assets/fonts/montserrat-latin.woff2) format('woff2');font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font-family:M,sans-serif}
+.l{position:absolute;opacity:0}
+.full{inset:0;background:#0A0F1A}
+#sub{left:260px;right:260px;bottom:64px;text-align:center;font-size:40px;font-weight:600;line-height:1.3;color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.65),0 0 2px rgba(0,0,0,.9);z-index:50}
+#sub b{color:#27BDB1;font-weight:800}
+#e.split #sub{left:40px;right:1000px;font-size:36px}
+.clave{left:50%;top:110px;background:#0A0F1A;color:#fff;font-weight:800;font-size:58px;padding:22px 42px;border-radius:14px;white-space:nowrap;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);z-index:40}
+.clave i{font-style:normal;color:#27BDB1}
+.clave.coral i{color:#FF8A4C}
+/* métricas */
+#met{left:960px;top:0;width:960px;height:1080px;background:#0A0F1A}
+#cards{position:absolute;left:110px;right:110px;top:170px;transform-origin:50% 0}
+#met .k{font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:#27BDB1;font-weight:700;margin-bottom:30px}
+.card{background:#141B2B;border:2px solid #24304A;border-radius:18px;padding:26px 32px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;opacity:0}
+.card span{font-size:30px;color:#B9C2D3;font-weight:600}.card b{font-size:46px;color:#fff;font-weight:800}
+#pregunta{position:absolute;left:110px;right:110px;top:640px;background:#2A1710;border:2px solid #E8590C;border-radius:20px;padding:30px 34px;
+  font-size:44px;font-weight:800;color:#fff;line-height:1.15;opacity:0}
+#pregunta i{font-style:normal;color:#FF8A4C}
+.ej{position:absolute;left:110px;bottom:60px;font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:#6B7690;font-weight:700}
+/* flujo de contactos */
+#flujo .rot{position:absolute;top:220px;font-size:26px;letter-spacing:.2em;font-weight:800;color:#B9C2D3}
+#flujo .puerta{position:absolute;left:930px;top:260px;width:60px;height:560px;border-radius:30px;border:3px dashed #27BDB1;opacity:.7}
+#flujo .pt{position:absolute;left:880px;top:840px;width:160px;text-align:center;font-size:24px;font-weight:700;color:#27BDB1}
+.dot{position:absolute;width:44px;height:44px;border-radius:50%;background:#55627E;margin:-22px 0 0 -22px}
+#k3{top:90px}
+/* anuncios */
+#ads{display:flex;justify-content:center;align-items:flex-start;gap:110px;padding-top:70px}
+.ad{width:520px;opacity:0;transform-origin:50% 30%}
+.ad .tag{font-size:24px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;text-align:center}
+.ad.a .tag{color:#8A94AA}.ad.b .tag{color:#27BDB1}
+.tel{background:#fff;border-radius:34px;border:10px solid #1E2638;overflow:hidden}
+.ad.b .tel{border-color:#27BDB1}
+.th{display:flex;align-items:center;gap:14px;padding:18px 22px}
+.th i{width:46px;height:46px;border-radius:50%;background:#C9CFDA;display:block}
+.ad.b .th i{background:#27BDB1}
+.th b{font-size:22px;color:#0A0F1A}.th span{display:block;font-size:17px;color:#7A8296}
+.img{height:300px;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center}
+.ad.a .img{background:#E9ECF2}.ad.b .img{background:#0A0F1A}
+.img p{font-size:36px;font-weight:800;line-height:1.15}
+.ad.a .img p{color:#8A94AA}.ad.b .img p{color:#fff}
+.ad.b .img p em{font-style:normal;color:#27BDB1;transition:none}
+.btn{margin:18px 22px 22px;border:2px solid #0A0F1A;border-radius:12px;padding:16px;text-align:center;font-size:22px;font-weight:800;color:#0A0F1A}
+.ad.b .btn{background:#0A0F1A;color:#27BDB1}
+#ads .ej{left:50%;transform:translateX(-50%);bottom:150px}
+/* comparación */
+#comp{left:960px;top:0;width:960px;height:1080px;background:#0A0F1A;padding:150px 100px 0}
+.camp{border-radius:20px;padding:30px 36px;margin-bottom:30px;opacity:0;background:#141B2B;border:2px solid #24304A}
+.camp small{display:block;font-size:22px;letter-spacing:.18em;font-weight:800;color:#B9C2D3;margin-bottom:10px}
+.camp .p{font-size:56px;font-weight:800;color:#fff}
+.camp .r{margin-top:14px;font-size:30px;font-weight:700;color:#8A94AA}
+.camp .r b{color:#FF8A4C}
+#final{left:50%;top:120px;background:#0A0F1A;border:3px solid #27BDB1;color:#fff;font-weight:800;font-size:64px;padding:26px 48px;border-radius:18px;white-space:nowrap;z-index:40}
+#final i{font-style:normal;color:#27BDB1}
+#nombre{left:110px;bottom:190px;background:#fff;border-left:10px solid #27BDB1;padding:18px 30px 18px 26px;border-radius:6px}
+#nombre b{display:block;font-size:40px;font-weight:800;color:#0A0F1A}
+#nombre span{font-size:26px;font-weight:600;color:#4A5568}
+</style>
+<div id="e" style="position:absolute;inset:0">
+  <div class="l clave" id="k1">Miles de € <i>en publicidad</i></div>
+  <div class="l" id="met"><div id="cards"><div class="k">Lo que sí saben</div>
+      <div class="card" id="c1"><span>Coste por lead</span><b>12 €</b></div>
+      <div class="card" id="c2"><span>Formularios</span><b>340</b></div>
+      <div class="card" id="c3"><span>Inversión</span><b>4.100 €</b></div></div>
+    <div id="pregunta">¿Cuántos se convierten <i>en clientes?</i></div>
+    <div class="ej">Datos de ejemplo</div></div>
+  <div class="l full" id="flujo"><div class="rot" style="left:150px">CONTACTOS</div><div class="rot" style="left:1480px">OPORTUNIDADES</div>
+    <div class="puerta"></div><div class="pt">¿Encaja?</div><div id="dots"></div></div>
+  <div class="l clave coral" id="k3">Contactos <i>≠ oportunidades</i></div>
+  <div class="l full" id="ads">
+    <div class="ad a" id="adA"><div class="tag">Mensaje genérico</div><div class="tel"><div class="th"><i></i><div><b>Tu empresa</b><span>Publicidad</span></div></div>
+      <div class="img"><p>¿Quieres más clientes? Escríbenos.</p></div><div class="btn">Más información</div></div></div>
+    <div class="ad b" id="adB"><div class="tag">Mensaje para tu cliente ideal</div><div class="tel"><div class="th"><i></i><div><b>Tu empresa</b><span>Publicidad</span></div></div>
+      <div class="img"><p>¿Tu clínica ya invierte en anuncios y <em id="emB">solo llegan preguntas de precio?</em></p></div><div class="btn" id="btnB">Siguiente paso: reservar</div></div></div>
+    <div class="ej">Anuncios ilustrativos</div></div>
+  <div class="l" id="comp">
+    <div class="camp" id="ca"><small>CAMPAÑA A</small><div class="p">5 € / lead</div><div class="r">Clientes: <b>?</b></div></div>
+    <div class="camp" id="cb"><small>CAMPAÑA B</small><div class="p">20 € / lead</div><div class="r">Clientes: <b>?</b></div></div>
+    <div class="ej">Ejemplo ilustrativo</div></div>
+  <div class="l" id="final">¿Cuál genera <i>mejores clientes?</i></div>
+  <div class="l" id="nombre"><b>Maikel Echevarría</b><span>Fundador de Qualivo</span></div>
+  <div class="l" id="sub"></div>
+</div>
+<script src="tiempos-v2.js"></script>
+<script>
+const $=id=>document.getElementById(id); const TL=window.TL;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3); const io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function win(t,a,b,fi=.4,fo=.35){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi),1-nm(t,b-fo,b)); }
+// entrada con desplazamiento y escala suave
+function show(el,op,dy=0,base='',s0=.96){ el.style.opacity=op; const e=out(op); el.style.transform=`${base} translateY(${(1-e)*dy}px) scale(${s0+(1-s0)*e})`; }
+// puntos del flujo: 36 contactos, pasan 5
+const N=40, PASA=new Set([3,11,18,27,35]); const D=$('dots'); for(let i=0;i<N;i++){const d=document.createElement('div'); d.className='dot'; D.appendChild(d);}
+let np=0; const orden={}; [...PASA].forEach(i=>orden[i]=np++);
+window.setT=function(t){
+  const sp=(t>=TL.met[0]&&t<TL.met[1])||(t>=TL.comp[0]&&t<TL.comp[1]); $('e').className=sp?'split':'';
+  show($('k1'),win(t,TL.k1[0],TL.k1[1]),-24,'translateX(-50%)');
+  // métricas: entran escalonadas y se reducen al llegar la pregunta
+  show($('met'),win(t,TL.met[0],TL.met[1],.45,.35),0,'',1);
+  ['c1','c2','c3'].forEach((c,i)=>show($(c),nm(t,TL.cards[i],TL.cards[i]+.45),30));
+  const r=io(nm(t,TL.preg,TL.preg+.5)); $('cards').style.transform=`scale(${1-.22*r}) translateY(${-40*r}px)`; $('cards').style.opacity=1-.35*r;
+  show($('pregunta'),nm(t,TL.preg+.15,TL.preg+.6),30);
+  // flujo de contactos
+  show($('flujo'),win(t,TL.flujo[0],TL.flujo[1],.45,.4),0,'',1);
+  [...D.children].forEach((d,i)=>{
+    const t0=TL.flujo[0]+.4+i*.085, u=nm(t,t0,t0+1.1), lane=300+(i%8)*68;
+    let x=150+u*810, y=lane, op=u>0?1:0, col='#55627E';
+    if(PASA.has(i)){ const v=nm(t,t0+1.1,t0+1.9); x=960+io(v)*600; y=lane+(330+orden[i]*90-lane)*io(v); col=u>=1?'#27BDB1':col; }
+    else{ const v=nm(t,t0+1.1,t0+1.7); y=lane+io(v)*180; op=u>0?1-v*.9:0; }
+    d.style.left=x+'px'; d.style.top=y+'px'; d.style.opacity=op; d.style.background=col;
+  });
+  show($('k3'),win(t,TL.k3[0],TL.k3[1]),-24,'translateX(-50%)');
+  // anuncios: genérico frente a cliente ideal
+  show($('ads'),win(t,TL.ads[0],TL.ads[1],.45,.4),0,'',1);
+  const a=nm(t,TL.adA,TL.adA+.5), b=nm(t,TL.adB,TL.adB+.5);
+  $('adA').style.opacity=out(a)*(1-.55*out(b)); $('adA').style.transform=`translateY(${(1-out(a))*40}px) scale(${1-.08*out(b)})`;
+  $('adB').style.opacity=out(b); $('adB').style.transform=`translateY(${(1-out(b))*40}px) scale(${.96+.08*out(b)})`;
+  $('emB').style.background=t>TL.msg?'rgba(39,189,177,.18)':'transparent';
+  const pb=nm(t,TL.paso,TL.paso+.4); $('btnB').style.transform=`scale(${1+.06*Math.sin(pb*Math.PI)})`; $('btnB').style.background=t>TL.paso?'#27BDB1':'#0A0F1A'; $('btnB').style.color=t>TL.paso?'#0A0F1A':'#27BDB1';
+  // comparación neutra
+  show($('comp'),win(t,TL.comp[0],TL.comp[1],.45,.35),0,'',1);
+  show($('ca'),nm(t,TL.ca,TL.ca+.45),30); show($('cb'),nm(t,TL.cb,TL.cb+.45),30);
+  show($('final'),win(t,TL.final[0],TL.final[1],.5,.4),-24,'translateX(-50%)');
+  show($('nombre'),win(t,TL.nombre[0],TL.nombre[1],.45,.4),20,'',1);
+  const s=TL.subs.find(x=>t>=x[0]&&t<x[1]); const sb=$('sub'); if(s){sb.innerHTML=s[2]; sb.style.opacity=1;} else sb.style.opacity=0;
+};
+window.setT(0);
+</script>
