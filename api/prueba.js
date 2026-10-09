@@ -14,7 +14,7 @@ const D = require('./_demo');
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // Demos preparadas para un negocio concreto (qualivo.io/<negocio>/): la ficha
 // ya está hecha, no se lee la web ni se pide sector. Equipzilla, 23-sep-2026.
-const PRESETS = { equipzilla: require('../content/demo/equipzilla.json'), nuria: require('../content/demo/nuria.json') };
+const PRESETS = { equipzilla: require('./_fichas/equipzilla.json'), nuria: require('./_fichas/nuria.json') };
 const SECTORES = ['clinicas', 'formacion', 'reformas', 'asesorias', 'otro'];
 const DESDE = parseInt(process.env.DEMO_DESDE || '9', 10);
 const HASTA = parseInt(process.env.DEMO_HASTA || '21', 10);
