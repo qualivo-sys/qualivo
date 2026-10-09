@@ -172,10 +172,49 @@ escribe antes de que el lead salga hacia Calligence. Verificado:
 | `Auxiliar de vuelo web` | TCP / Auxiliar de vuelo |
 | TikTok, sin campaña reconocible | Aun no estoy seguro |
 
-> ⚠️ **El campo no tiene opción para «Azafata de tierra».** Sus opciones son
-> TCP / Auxiliar de vuelo, Piloto comercial, Flight Dispatcher, Marketing aereo
-> y Aun no estoy seguro. Mientras ATO siga pausada no molesta, pero si se
-> reactiva hay que añadir la opción o esos leads irán mal etiquetados.
+**Opción «Azafata de Tierra» añadida** al campo el 9-oct, que faltaba. Opciones
+actuales: TCP / Auxiliar de vuelo · Piloto comercial · Flight Dispatcher ·
+**Azafata de Tierra** · Marketing aereo · Aun no estoy seguro. El workflow ya
+la deduce, comprobando ATO **antes** que TCP porque «azafata de vuelo» es TCP
+y «azafata de tierra» no.
+
+> Detalle de la API de GHL que costó un rato: al **leer** un campo de opciones
+> devuelve `picklistOptions`, pero al **escribir** solo acepta `options`.
+> Mandar `picklistOptions` en el PUT da 422.
+
+### El otro dato que Calligence necesita: el nombre
+
+El curso no basta — el agente también dice el nombre en voz alta. Y sobre 100
+contactos recientes: **el 89 % no trae apellido y el 11 % llega con el nombre en
+caracteres que no se pueden leer**, del estilo `𝐖aqas`, `𝒜𝓎𝒶`, `♡_Løvëpɽeėʈ_♡`
+o `Violeta Zafirova ✿`. Son nombres de Facebook con unicode decorativo.
+
+El workflow de precalificación los normaliza antes de que el lead salga:
+`NFKD` convierte los caracteres matemáticos en letras y `NFC` vuelve a componer
+para **no perder las tildes** (María sigue siendo María, no Maria). Si no quedan
+al menos dos letras latinas, lo deja vacío en vez de hacer que el agente lea
+basura.
+
+**Solo toca los nombres sospechosos.** Un nombre ya correcto no se reescribe:
+verificado con `Alex Rodríguez` y `Ludmia Prueba`, que quedaron intactos.
+
+| Antes | Después |
+|---|---|
+| `♡_Løvëpɽeėʈ_♡` | `Løvëpɽeėʈ` |
+| `Violeta Zafirova ✿` | `Violeta Zafirova` |
+| `~Aymane Sbai~` | `Aymane Sbai` |
+| `𝐖aqas` | `Waqas` |
+| `.` / `M` | *(vacío)* |
+
+Límite conocido: un nombre en alfabeto no latino (`ملاك`) se queda como está —
+GHL no acepta vaciar el nombre. Calligence lo recibirá tal cual.
+
+### Dónde está el curso, resumen para Calligence
+
+| Fuente | Qué tiene | Fiabilidad |
+|---|---|---|
+| Campo `Programa interes` · `nNHjlcQ0uABOGPQDwfI6` | TCP / FD / ATO / Piloto | **La buena**, una vez activo el workflow |
+| Prefijo del nombre de la oportunidad | `TCP · Nombre`, `FD · Nombre`, `AT · Nombre` | De respaldo: en el 9 % pone `ORGÁNICO`, que es canal, no curso |
 
 ---
 
