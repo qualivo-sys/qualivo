@@ -105,6 +105,64 @@ def registros(directorio):
                 yield p
 
 
+# Cargos que hacen bueno a un segundo contacto para la posdata de multi-hilo.
+# Si hay varios companeros, se prefiere al que suena a quien decide sobre
+# captacion y ventas, no al primero que devuelva la lista.
+SEGUNDO_BUENO = ("comercial", "ventas", "sales", "marketing", "director",
+                 "gerente", "ceo", "fundador", "founder", "owner", "propietari")
+
+
+def companeros(directorio):
+    """Nombres de pila de los demas contactos de cada empresa, de la BUSQUEDA.
+
+    La busqueda de Apollo no cuesta creditos y ya devuelve el nombre de pila
+    aunque oculte el apellido y no de el correo. Hasta hoy tirabamos a esa
+    gente: en la cosecha del 9-oct-2026 eran 24 personas en 11 empresas y nos
+    quedabamos con una por empresa.
+
+    Sirve para la posdata de multi-hilo de preparar_carga_29.py, robada el
+    9-oct de un correo de Reachflow. Ataca nuestro fallo mejor documentado:
+    en 6 de 11 propuestas el que decidia no estaba en la reunion.
+    """
+    por_dominio = {}
+    for nombre in sorted(os.listdir(directorio)):
+        if "search" not in nombre or "bulk_match" in nombre:
+            continue
+        ruta = os.path.join(directorio, nombre)
+        try:
+            raw = open(ruta, encoding="utf-8").read()
+            d = json.loads(raw[raw.find("{"):])
+        except Exception as exc:
+            print(f"  aviso: no se pudo leer {nombre}: {exc}", file=sys.stderr)
+            continue
+        for persona in (d.get("people") or d.get("contacts") or []):
+            if not persona:
+                continue
+            org = persona.get("organization") or {}
+            dom = (org.get("primary_domain") or "").lower().lstrip("www.")
+            pila = (persona.get("first_name") or "").strip()
+            # Apollo ofusca el apellido antes de revelar, pero el nombre de
+            # pila viene limpio. Un nombre con mayusculas sueltas o puntos es
+            # basura ofuscada y no se pone en un correo.
+            if not dom or not pila or "." in pila or len(pila) < 2:
+                continue
+            por_dominio.setdefault(dom, []).append(
+                (pila, (persona.get("title") or "").lower()))
+    return por_dominio
+
+
+def elegir_segundo(companias, dominio_lead, nombre_lead):
+    """El mejor companero para la posdata, o cadena vacia si no hay."""
+    otros = [(n, t) for n, t in companias.get(dominio_lead, [])
+             if n.lower() != (nombre_lead or "").lower()]
+    if not otros:
+        return ""
+    for nom, cargo in otros:
+        if any(k in cargo for k in SEGUNDO_BUENO):
+            return nom
+    return otros[0][0]
+
+
 def main():
     if len(sys.argv) < 4:
         print(__doc__)
@@ -169,6 +227,14 @@ def main():
             "vertical": vertical,
             "apollo_id": p.get("id") or "",
         })
+
+    # Segundo contacto de la misma empresa para la posdata de multi-hilo.
+    # Sale de la busqueda, que es gratis: no gasta ni un credito mas.
+    compas = companeros(directorio)
+    for b in buenos:
+        b["segundo"] = elegir_segundo(compas, b["dominio"], b["nombre"])
+    con_segundo = sum(1 for b in buenos if b["segundo"])
+    print(f"con segundo contacto para la posdata: {con_segundo} de {len(buenos)}")
 
     with open(salida, "w", encoding="utf-8") as fh:
         json.dump(buenos, fh, ensure_ascii=False, indent=1)

@@ -83,8 +83,9 @@ def posdata(segundo):
     """
     if not segundo:
         return ""
-    return (f"\n\nPD: se lo mando tambien a {segundo}, por si es quien lleva "
-            f"esto en vuestro equipo.")
+    # Corta a proposito: con la version larga el correo 1 se iba a 91 palabras
+    # y el limite de V3 son 90. Asi queda en 87 y dice lo mismo.
+    return f"\n\nPD: se lo mando también a {segundo}, por si es quien lo lleva."
 
 
 def construir():
