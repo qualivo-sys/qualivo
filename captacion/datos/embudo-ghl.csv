@@ -1,0 +1,341 @@
+fecha,pipeline,etapa,oportunidades,valor_eur
+2026-09-09,ABM,Respondió,15,30000
+2026-09-09,Prospección,Conversación abierta,3,1500
+2026-09-09,Prospección,Más adelante,1,1000
+2026-09-09,Prospección,Nuevo Lead,3,3000
+2026-09-09,Prospección,Oferta enviada,1,0
+2026-09-09,Prospección,Reunión agendada,3,0
+2026-09-09,Prospección,Seguimiento,1,0
+2026-09-09,Qualivo Pipeline,Call Agendada,1,0
+2026-09-09,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-09,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-09,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-09,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-09,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-10,ABM,Respondió,15,30000
+2026-09-10,Prospección,Conversación abierta,3,1500
+2026-09-10,Prospección,Más adelante,1,1000
+2026-09-10,Prospección,Nuevo Lead,3,3000
+2026-09-10,Prospección,Oferta enviada,1,0
+2026-09-10,Prospección,Reunión agendada,3,0
+2026-09-10,Prospección,Seguimiento,1,0
+2026-09-10,Qualivo Pipeline,Call Agendada,1,0
+2026-09-10,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-10,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-10,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-10,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-10,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-10,Qualivo Pipeline,Radiografía completada,1,0
+2026-09-11,ABM,Respondió,15,30000
+2026-09-11,Prospección,Conversación abierta,3,1500
+2026-09-11,Prospección,Más adelante,1,1000
+2026-09-11,Prospección,Nuevo Lead,3,3000
+2026-09-11,Prospección,Oferta enviada,1,0
+2026-09-11,Prospección,Reunión agendada,1,0
+2026-09-11,Prospección,Seguimiento,3,0
+2026-09-11,Qualivo Pipeline,Call Agendada,1,0
+2026-09-11,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-11,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-11,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-11,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-11,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-11,Qualivo Pipeline,Radiografía completada,1,0
+2026-09-14,ABM,Respondió,15,30000
+2026-09-14,Prospección,Conversación abierta,3,1500
+2026-09-14,Prospección,Más adelante,1,1000
+2026-09-14,Prospección,Nuevo Lead,3,3000
+2026-09-14,Prospección,Oferta enviada,1,0
+2026-09-14,Prospección,Reunión agendada,1,0
+2026-09-14,Prospección,Seguimiento,3,0
+2026-09-14,Qualivo Pipeline,Call Agendada,1,0
+2026-09-14,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-14,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-14,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-14,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-14,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-14,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-14,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-14,Qualivo Pipeline,Radiografía completada,1,0
+2026-09-15,ABM,Respondió,15,30000
+2026-09-15,Prospección,Conversación abierta,11,1500
+2026-09-15,Prospección,Más adelante,1,1000
+2026-09-15,Prospección,Nuevo Lead,3,3000
+2026-09-15,Prospección,Oferta enviada,1,0
+2026-09-15,Prospección,Reunión agendada,1,0
+2026-09-15,Prospección,Seguimiento,3,0
+2026-09-15,Qualivo Pipeline,Call Agendada,1,0
+2026-09-15,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-15,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-15,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-15,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-15,Qualivo Pipeline,Nuevo Lead,1,0
+2026-09-15,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-15,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-15,Qualivo Pipeline,Radiografía completada,1,0
+2026-09-16,ABM,Respondió,15,30000
+2026-09-16,Prospección,Cliente,2,0
+2026-09-16,Prospección,Conversación abierta,38,1500
+2026-09-16,Prospección,Más adelante,2,1000
+2026-09-16,Prospección,Nuevo Lead,2,3000
+2026-09-16,Prospección,Oferta enviada,1,0
+2026-09-16,Prospección,Reunión agendada,1,0
+2026-09-16,Prospección,Seguimiento,1,0
+2026-09-16,Qualivo Pipeline,Call Agendada,1,0
+2026-09-16,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-16,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-16,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-16,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-16,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-16,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-16,Qualivo Pipeline,Tibio,2,0
+2026-09-17,ABM,Respondió,15,30000
+2026-09-17,Prospección,Cliente,3,0
+2026-09-17,Prospección,Conversación abierta,35,1500
+2026-09-17,Prospección,Conversación abierta (lost),1,0
+2026-09-17,Prospección,Más adelante,2,1000
+2026-09-17,Prospección,Nuevo Lead,2,3000
+2026-09-17,Prospección,Oferta enviada,1,0
+2026-09-17,Prospección,Reunión agendada,1,0
+2026-09-17,Prospección,Seguimiento,3,0
+2026-09-17,Qualivo Pipeline,Call Agendada,1,0
+2026-09-17,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-17,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-17,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-17,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-17,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-17,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-17,Qualivo Pipeline,Tibio,2,0
+2026-09-18,ABM,Respondió,15,30000
+2026-09-18,Prospección,Cliente,3,0
+2026-09-18,Prospección,Conversación abierta,34,1500
+2026-09-18,Prospección,Conversación abierta (lost),1,0
+2026-09-18,Prospección,Más adelante,3,1000
+2026-09-18,Prospección,Nuevo Lead,2,3000
+2026-09-18,Prospección,Oferta enviada,1,0
+2026-09-18,Prospección,Reunión agendada,4,0
+2026-09-18,Prospección,Seguimiento,3,0
+2026-09-18,Qualivo Pipeline,Call Agendada,1,0
+2026-09-18,Qualivo Pipeline,Call Agendada (lost),1,0
+2026-09-18,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-18,Qualivo Pipeline,Contactado (abandoned),5,0
+2026-09-18,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-18,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-18,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-18,Qualivo Pipeline,Tibio,2,0
+2026-09-21,ABM,Respondió,15,30000
+2026-09-21,Prospección,Cliente,3,0
+2026-09-21,Prospección,Conversación abierta,15,2250
+2026-09-21,Prospección,Conversación abierta (lost),1,0
+2026-09-21,Prospección,En cadencia,1,0
+2026-09-21,Prospección,Más adelante,30,4000
+2026-09-21,Prospección,Negociación,1,0
+2026-09-21,Prospección,Nuevo Lead,6,0
+2026-09-21,Prospección,Nuevo Lead (lost),1,0
+2026-09-21,Prospección,Oferta enviada,1,1000
+2026-09-21,Prospección,Oferta enviada (lost),1,0
+2026-09-21,Prospección,Reunión agendada,6,0
+2026-09-21,Prospección,Reunión agendada (lost),1,0
+2026-09-21,Qualivo Pipeline,Call Agendada,1,0
+2026-09-21,Qualivo Pipeline,Call Realizada (abandoned),1,0
+2026-09-21,Qualivo Pipeline,Contactado (abandoned),4,0
+2026-09-21,Qualivo Pipeline,Contactado (lost),2,0
+2026-09-21,Qualivo Pipeline,Nuevo Lead (abandoned),7,0
+2026-09-21,Qualivo Pipeline,Nuevo Lead (won),1,0
+2026-09-21,Qualivo Pipeline,Tibio,2,0
+2026-09-22,Prospección,Cliente,1,0
+2026-09-22,Prospección,Conversación abierta,17,2250
+2026-09-22,Prospección,Conversación abierta (lost),1,0
+2026-09-22,Prospección,Más adelante,31,4000
+2026-09-22,Prospección,Negociación,2,1000
+2026-09-22,Prospección,No presentado,6,0
+2026-09-22,Prospección,No responde,4,0
+2026-09-22,Prospección,Nuevo Lead,30,0
+2026-09-22,Prospección,Oferta enviada,1,1000
+2026-09-22,Prospección,Oferta enviada (lost),1,0
+2026-09-22,Prospección,Reunión agendada,3,0
+2026-09-22,Prospección,Reunión agendada (lost),1,0
+2026-09-22,Qualivo Pipeline,Tibio,2,0
+2026-09-23,Prospección,Confirmado,2,0
+2026-09-23,Prospección,Conversación abierta,13,750
+2026-09-23,Prospección,Conversación abierta (lost),1,0
+2026-09-23,Prospección,En cadencia (lost),1,0
+2026-09-23,Prospección,Más adelante,2,0
+2026-09-23,Prospección,Negociación,3,1000
+2026-09-23,Prospección,No presentado,5,0
+2026-09-23,Prospección,No presentado (lost),1,0
+2026-09-23,Prospección,No responde,5,0
+2026-09-23,Prospección,Nuevo Lead,2,0
+2026-09-23,Prospección,Nuevo Lead (lost),1,0
+2026-09-23,Prospección,Oferta enviada,1,1000
+2026-09-23,Prospección,Oferta enviada (lost),1,0
+2026-09-23,Prospección,Reunión agendada,4,0
+2026-09-23,Prospección,Reunión agendada (lost),1,0
+2026-09-23,Qualivo Pipeline,Contactado,28,0
+2026-09-23,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-23,Qualivo Pipeline,Tibio,28,0
+2026-09-24,Prospección,Confirmado,2,0
+2026-09-24,Prospección,Conversación abierta,14,750
+2026-09-24,Prospección,En cadencia (lost),1,0
+2026-09-24,Prospección,Más adelante,1,0
+2026-09-24,Prospección,Negociación,3,1000
+2026-09-24,Prospección,No presentado,5,0
+2026-09-24,Prospección,No presentado (lost),1,0
+2026-09-24,Prospección,No responde,5,0
+2026-09-24,Prospección,Nuevo Lead,3,0
+2026-09-24,Prospección,Nuevo Lead (lost),1,0
+2026-09-24,Prospección,Oferta enviada,1,1000
+2026-09-24,Prospección,Oferta enviada (lost),1,0
+2026-09-24,Prospección,Reunión agendada,6,0
+2026-09-24,Prospección,Reunión agendada (lost),1,0
+2026-09-24,Qualivo Pipeline,Contactado,28,0
+2026-09-24,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-24,Qualivo Pipeline,Tibio,26,0
+2026-09-25,Prospección,Confirmado,2,0
+2026-09-25,Prospección,Conversación abierta,11,750
+2026-09-25,Prospección,En cadencia (lost),1,0
+2026-09-25,Prospección,Más adelante,1,0
+2026-09-25,Prospección,Negociación,3,1000
+2026-09-25,Prospección,No presentado,5,0
+2026-09-25,Prospección,No presentado (lost),1,0
+2026-09-25,Prospección,No responde,5,0
+2026-09-25,Prospección,Nuevo Lead,5,0
+2026-09-25,Prospección,Nuevo Lead (lost),1,0
+2026-09-25,Prospección,Oferta enviada,1,1000
+2026-09-25,Prospección,Oferta enviada (lost),1,0
+2026-09-25,Prospección,Reunión agendada,7,0
+2026-09-25,Prospección,Reunión agendada (lost),1,0
+2026-09-25,Qualivo Pipeline,Contactado,28,0
+2026-09-25,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-25,Qualivo Pipeline,Tibio,26,0
+2026-09-28,Prospección,Confirmado,2,0
+2026-09-28,Prospección,Conversación abierta,10,750
+2026-09-28,Prospección,En cadencia (lost),1,0
+2026-09-28,Prospección,Más adelante,2,0
+2026-09-28,Prospección,Negociación,3,1000
+2026-09-28,Prospección,No presentado,5,0
+2026-09-28,Prospección,No presentado (lost),1,0
+2026-09-28,Prospección,No responde,5,0
+2026-09-28,Prospección,Nuevo Lead,6,0
+2026-09-28,Prospección,Nuevo Lead (lost),1,0
+2026-09-28,Prospección,Oferta enviada,1,1000
+2026-09-28,Prospección,Oferta enviada (lost),1,0
+2026-09-28,Prospección,Reunión agendada,6,0
+2026-09-28,Prospección,Reunión agendada (lost),1,0
+2026-09-28,Qualivo Pipeline,Contactado,28,0
+2026-09-28,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-28,Qualivo Pipeline,Tibio,26,0
+2026-09-29,Prospección,Conversación abierta,12,1750
+2026-09-29,Prospección,En cadencia (lost),1,0
+2026-09-29,Prospección,Más adelante,4,4200
+2026-09-29,Prospección,Negociación,1,0
+2026-09-29,Prospección,No presentado,3,0
+2026-09-29,Prospección,No presentado (lost),1,0
+2026-09-29,Prospección,No responde (lost),4,0
+2026-09-29,Prospección,Nuevo Lead,3,0
+2026-09-29,Prospección,Nuevo Lead (lost),3,0
+2026-09-29,Prospección,Oferta enviada,3,8350
+2026-09-29,Prospección,Oferta enviada (lost),1,0
+2026-09-29,Prospección,Reunión agendada,8,0
+2026-09-29,Prospección,Segunda reunión,3,10950
+2026-09-29,Qualivo Pipeline,Contactado,28,0
+2026-09-29,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-29,Qualivo Pipeline,Tibio,24,0
+2026-09-30,Prospección,Conversación abierta,11,1750
+2026-09-30,Prospección,En cadencia (lost),1,0
+2026-09-30,Prospección,Más adelante,4,4200
+2026-09-30,Prospección,Negociación,1,0
+2026-09-30,Prospección,No presentado,3,0
+2026-09-30,Prospección,No presentado (lost),1,0
+2026-09-30,Prospección,No responde (lost),4,0
+2026-09-30,Prospección,Nuevo Lead,3,0
+2026-09-30,Prospección,Nuevo Lead (lost),3,0
+2026-09-30,Prospección,Oferta enviada,4,8350
+2026-09-30,Prospección,Oferta enviada (lost),1,0
+2026-09-30,Prospección,Reunión agendada,7,0
+2026-09-30,Prospección,Reunión agendada (lost),1,0
+2026-09-30,Prospección,Segunda reunión,3,10950
+2026-09-30,Qualivo Pipeline,Contactado,28,0
+2026-09-30,Qualivo Pipeline,Perdido (lost),1,0
+2026-09-30,Qualivo Pipeline,Tibio,24,0
+2026-10-01,Prospección,Conversación abierta,10,1750
+2026-10-01,Prospección,Conversación abierta (lost),1,0
+2026-10-01,Prospección,En cadencia (lost),1,0
+2026-10-01,Prospección,Más adelante,3,4200
+2026-10-01,Prospección,Más adelante (lost),1,0
+2026-10-01,Prospección,No presentado,6,0
+2026-10-01,Prospección,No presentado (lost),3,0
+2026-10-01,Prospección,No responde (lost),4,0
+2026-10-01,Prospección,Nuevo Lead,3,0
+2026-10-01,Prospección,Nuevo Lead (lost),3,0
+2026-10-01,Prospección,Oferta enviada,4,8350
+2026-10-01,Prospección,Oferta enviada (lost),1,0
+2026-10-01,Prospección,Piloto,1,0
+2026-10-01,Prospección,Reunión agendada,1,0
+2026-10-01,Prospección,Reunión agendada (abandoned),1,0
+2026-10-01,Prospección,Reunión agendada (lost),1,0
+2026-10-01,Prospección,Segunda reunión,3,10950
+2026-10-01,Qualivo Pipeline,Contactado,28,0
+2026-10-01,Qualivo Pipeline,Perdido (lost),1,0
+2026-10-01,Qualivo Pipeline,Tibio,24,0
+2026-10-02,Prospección,Conversación abierta,10,1750
+2026-10-02,Prospección,Conversación abierta (lost),1,0
+2026-10-02,Prospección,En cadencia (lost),1,0
+2026-10-02,Prospección,Más adelante,4,7350
+2026-10-02,Prospección,Más adelante (lost),1,0
+2026-10-02,Prospección,No presentado,6,0
+2026-10-02,Prospección,No presentado (lost),3,0
+2026-10-02,Prospección,No responde (lost),4,0
+2026-10-02,Prospección,Nuevo Lead,3,0
+2026-10-02,Prospección,Nuevo Lead (lost),3,0
+2026-10-02,Prospección,Oferta enviada,6,8350
+2026-10-02,Prospección,Oferta enviada (lost),1,0
+2026-10-02,Prospección,Piloto,1,0
+2026-10-02,Prospección,Reunión agendada (abandoned),1,0
+2026-10-02,Prospección,Reunión agendada (lost),1,0
+2026-10-02,Prospección,Segunda reunión,2,7800
+2026-10-02,Qualivo Pipeline,Contactado,28,0
+2026-10-02,Qualivo Pipeline,Perdido (lost),1,0
+2026-10-02,Qualivo Pipeline,Tibio,23,0
+2026-10-05,Prospección,Conversación abierta,9,1750
+2026-10-05,Prospección,Conversación abierta (lost),1,0
+2026-10-05,Prospección,En cadencia (lost),1,0
+2026-10-05,Prospección,Más adelante,8,10500
+2026-10-05,Prospección,No presentado,4,0
+2026-10-05,Prospección,No presentado (lost),4,0
+2026-10-05,Prospección,No responde (lost),5,0
+2026-10-05,Prospección,Nuevo Lead,3,0
+2026-10-05,Prospección,Nuevo Lead (lost),3,0
+2026-10-05,Prospección,Oferta enviada,5,5200
+2026-10-05,Prospección,Oferta enviada (lost),1,0
+2026-10-05,Prospección,Piloto,1,0
+2026-10-05,Prospección,Reunión agendada,4,0
+2026-10-05,Prospección,Reunión agendada (abandoned),1,0
+2026-10-05,Prospección,Reunión agendada (lost),1,0
+2026-10-05,Prospección,Segunda reunión,2,7800
+2026-10-05,Qualivo Pipeline,Contactado,28,0
+2026-10-05,Qualivo Pipeline,Tibio,19,0
+2026-10-06,Prospección,Conversación abierta,9,1750
+2026-10-06,Prospección,Conversación abierta (lost),1,0
+2026-10-06,Prospección,En cadencia (lost),1,0
+2026-10-06,Prospección,Más adelante,9,11500
+2026-10-06,Prospección,No presentado,4,0
+2026-10-06,Prospección,No presentado (lost),4,0
+2026-10-06,Prospección,No responde,1,0
+2026-10-06,Prospección,No responde (lost),5,0
+2026-10-06,Prospección,Nuevo Lead,2,0
+2026-10-06,Prospección,Nuevo Lead (lost),3,0
+2026-10-06,Prospección,Oferta enviada,5,4200
+2026-10-06,Prospección,Oferta enviada (lost),1,0
+2026-10-06,Prospección,Piloto,1,0
+2026-10-06,Prospección,Reunión agendada,3,0
+2026-10-06,Prospección,Reunión agendada (abandoned),1,0
+2026-10-06,Prospección,Reunión agendada (lost),1,0
+2026-10-06,Prospección,Segunda reunión,2,7800
+2026-10-06,Qualivo Pipeline,Contactado,28,0
+2026-10-06,Qualivo Pipeline,Tibio,19,0
