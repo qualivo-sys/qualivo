@@ -30,6 +30,7 @@
     { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
     { id: 'maritima', txt: 'Formación marítima', desc: 'Formación homologada: certificados para embarcar y cursos para flotas, náuticas y puertos', ico: 'formacion' },
     { id: 'lanzamientos', txt: 'Lanzamientos', desc: 'Lanzamientos con audioclase, directo, carrito abierto y llamada de admisión para un programa de ticket alto', ico: 'formacion' },
+    { id: 'sueno', txt: 'Formación del sueño', desc: 'Especialista en sueño que vende por lanzamientos: webinar en directo, carrito abierto y llamada de admisión', ico: 'formacion' },
     { id: 'retiros', txt: 'Marketplace de retiros', desc: 'Retiros de yoga, meditación y silencio: base de datos, plazas y reservas', ico: 'otro' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
@@ -701,7 +702,7 @@
       return cabecera('Agentes', '¿Qué está haciendo el sistema?', 'No son personajes: son procesos que trabajan en segundo plano, cada uno con una tarea concreta y un límite claro de hasta dónde llega.') +
         '<div class="rejilla r-3">' +
           card('diana', 't-teal', 'Cualificación', cual.length, T.contactos + ' analizando', 'Completa la ficha, calcula el encaje y decide si merece tiempo del equipo.', li(cual, function (c) { return 'encaje ' + c.x.fit; })) +
-          card('whatsapp', 't-teal', 'Seguimiento', seg.length, 'conversaciones activas', 'Contesta en el minuto uno, retoma conversaciones paradas y recupera ' + T.propuesta.replace(/^la /, '') + 's. Nunca da precios: eso lo lleva una persona.', li(seg, function (c) { return c.x.nba.accion.toLowerCase(); })) +
+          card('whatsapp', 't-teal', 'Seguimiento', seg.length, 'conversaciones activas', 'Contesta en el minuto uno, retoma conversaciones paradas y recupera ' + (T.propuestas || T.propuesta.replace(/^la /, '') + 's') + '. Nunca da precios: eso lo lleva una persona.', li(seg, function (c) { return c.x.nba.accion.toLowerCase(); })) +
           card('ciclo', 't-lila', 'Reactivación', react.length, 'contactos analizados', reactProg.length + ' reactivaciones programadas en la fecha que dijeron. Al resto no se le molesta.', li(reactProg.length ? reactProg : react, function (c) { return c.s.luego ? 'en ' + c.s.luego : 'guardado'; })) +
           card('senales', 't-amber', 'Inteligencia de ' + T.cliente, hoy.length, 'señales nuevas hoy', 'Vigila cambios de comportamiento: intención que sube, silencios, riesgo de no-show.', '<ul>' + hoy.slice(0, 3).map(function (x) { return '<li data-abrir="' + x.c.id + '"><b style="font-weight:600">' + esc(x.c.n) + '</b><span>' + esc(M.TIPOS_SENAL[x.s.tipo].txt.toLowerCase()) + '</span></li>'; }).join('') + '</ul>') +
           card('voz', 't-coral', 'Agente de voz', voz.length, 'llamadas programadas', 'Llama a quien no contesta por escrito, siempre dentro de su franja horaria. Si coge, cualifica y agenda.', li(voz, function (c) { return c.canal === 'tel' ? 'prefiere teléfono' : 'no contesta al WhatsApp'; })) +

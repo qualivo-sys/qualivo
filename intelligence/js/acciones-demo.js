@@ -40,7 +40,7 @@
   // de recepcionista del negocio, y al colgar llega el correo del dueño). La web
   // del negocio puede venir en el enlace (?web=nuriaroure.com) para no pedirla, o
   // una ficha ya hecha (?preset=nuria, api/_fichas/nuria.json).
-  const SECTOR_PRUEBA = { clinica: 'clinicas', cirugia: 'clinicas', nutricion: 'clinicas', osteopatia: 'clinicas', reformas: 'reformas', inmobiliaria: 'asesorias', b2b: 'asesorias', consultoria: 'asesorias', agencias: 'asesorias', marketing: 'asesorias', formacion: 'formacion', fp: 'formacion', aviacion: 'formacion', academia: 'formacion', musica: 'formacion', masters: 'formacion', maritima: 'formacion', lanzamientos: 'formacion' };
+  const SECTOR_PRUEBA = { clinica: 'clinicas', cirugia: 'clinicas', nutricion: 'clinicas', osteopatia: 'clinicas', reformas: 'reformas', inmobiliaria: 'asesorias', b2b: 'asesorias', consultoria: 'asesorias', agencias: 'asesorias', marketing: 'asesorias', formacion: 'formacion', fp: 'formacion', aviacion: 'formacion', academia: 'formacion', musica: 'formacion', masters: 'formacion', maritima: 'formacion', lanzamientos: 'formacion', sueno: 'formacion' };
   const ERR_PRUEBA = { nombre: 'Falta tu nombre.', telefono: 'Ese móvil no es válido: tiene que ser un móvil español.', email: 'Ese correo no es válido.', web: 'Falta la web del negocio.', ya_hoy: 'Ese móvil ya ha recibido una llamada de prueba hoy. Mañana puedes repetir.', tope: 'Hoy ya se han hecho todas las llamadas de prueba. Mañana vuelve a estar disponible.', llamada: 'La llamada no ha podido salir. Avisamos al equipo; prueba en unos minutos.' };
   const param = function (k) { try { return new URLSearchParams(location.search).get(k) || ''; } catch (e) { return ''; } };
 

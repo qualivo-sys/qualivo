@@ -150,7 +150,7 @@
       ['Anuncios', 'Leads (plataforma)', m(function (x) { return M.num(x.leadsMeta); }, 'meta')],
       ['Anuncios', 'Leads (CRM)', m(function (x) { return M.num(x.leadsCrm); }, 'crm')],
       ['Anuncios', 'CPL', m(function (x) { return x.leadsMeta ? eur2(x.inv / x.leadsMeta) : '—'; }, 'meta')],
-      ['Reuniones', (D.demo ? T.Cita + 's agendadas' : 'Diagnósticos agendados') + ' de pago', cita(function (x) { return M.num(x.agPago); })],
+      ['Reuniones', (D.demo ? (T.Citas || T.Cita + 's') + ' agendadas' : 'Diagnósticos agendados') + ' de pago', cita(function (x) { return M.num(x.agPago); })],
       ['Reuniones', 'Agendados outbound y referidos', cita(function (x) { return M.num(x.agOtros); })],
       // De pago, que es lo que se compara con la inversión; el total con outbound y referidos, al lado.
       ['Reuniones', 'Efectivos (pago)', cita(function (x) { return M.num(x.efPago) + (x.ef !== x.efPago ? ' <small class="gris">· ' + x.ef + ' en total</small>' : '') + (x.pend ? ' <small class="gris">+' + x.pend + ' por venir</small>' : ''); })],
