@@ -143,9 +143,9 @@
     if (estado.empresa) p.set('empresa', estado.empresa);
     if (estado.objetivo && estado.objetivo !== 'todo') p.set('objetivo', estado.objetivo);
     if (estado.historia && estado.historia !== estado.cfg.historiaDefecto) p.set('historia', estado.historia);
-    // La web del negocio, para la llamada de prueba de Raquel (acciones-demo.js).
-    const web = new URLSearchParams(location.search).get('web');
-    if (web) p.set('web', web);
+    // La web o la ficha del negocio, para la llamada de prueba de Raquel (acciones-demo.js).
+    const q = new URLSearchParams(location.search);
+    ['web', 'preset'].forEach(function (k) { if (q.get(k)) p.set(k, q.get(k)); });
     try { history.replaceState(null, '', '?' + p.toString()); } catch (e) { /* nada */ }
   }
 
