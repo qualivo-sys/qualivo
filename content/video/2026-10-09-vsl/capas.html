@@ -38,6 +38,22 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
 #nombre{left:110px;bottom:190px;background:#fff;border-left:10px solid #27BDB1;padding:18px 30px 18px 26px;border-radius:6px}
 #nombre b{display:block;font-size:40px;font-weight:800;color:#0A0F1A}
 #nombre span{font-size:26px;font-weight:600;color:#4A5568}
+/* tres pasos */
+#pasos{inset:0;background:#0A0F1A;display:flex;align-items:center;justify-content:center;gap:34px;padding-bottom:120px}
+.paso{width:470px;background:#141B2B;border:2px solid #24304A;border-radius:22px;padding:40px 36px;opacity:0}
+.paso small{display:block;font-size:22px;letter-spacing:.18em;color:#27BDB1;font-weight:800;margin-bottom:14px}
+.paso b{font-size:46px;color:#fff;font-weight:800;line-height:1.1}
+.flecha{font-size:56px;color:#27BDB1;font-weight:800;opacity:0}
+/* comparación de campañas */
+#panel2{left:960px;top:0;width:960px;height:1080px;background:#0A0F1A;padding:130px 100px 0}
+.camp{border-radius:20px;padding:30px 36px;margin-bottom:30px;opacity:0;background:#141B2B;border:2px solid #24304A}
+.camp small{display:block;font-size:22px;letter-spacing:.18em;font-weight:800;color:#B9C2D3;margin-bottom:10px}
+.camp .p{font-size:52px;font-weight:800;color:#fff}
+.camp .r{margin-top:14px;font-size:32px;font-weight:700;opacity:0}
+.camp.a .r{color:#FF8A4C}.camp.b .r{color:#27BDB1}
+.camp.b{border-color:#27BDB1}
+#panel2 .ej{position:absolute;left:100px;bottom:60px;font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:#6B7690;font-weight:700}
+.clave s{text-decoration-thickness:6px;text-decoration-color:#FF8A4C}
 </style>
 <div id="e" style="position:absolute;inset:0">
   <div class="l" id="panel"><div class="k">Lo que sí saben</div>
@@ -49,6 +65,16 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
   <div class="l" id="todos"><h2>Un anuncio para todo el mundo</h2><h3>…atrae a todo el mundo.</h3><div id="gente"></div></div>
   <div class="l clave" id="k1">¿Qué anuncios <i>generan negocio?</i></div>
   <div class="l clave coral" id="k2">Leads baratos <i>≠ buenos clientes</i></div>
+  <div class="l" id="pasos">
+    <div class="paso" id="p1"><small>01</small><b>Personas adecuadas</b></div><div class="flecha" id="f1">→</div>
+    <div class="paso" id="p2"><small>02</small><b>Mensaje adecuado</b></div><div class="flecha" id="f2">→</div>
+    <div class="paso" id="p3"><small>03</small><b>Siguiente paso</b></div></div>
+  <div class="l" id="panel2">
+    <div class="camp a" id="ca"><small>CAMPAÑA A</small><div class="p">5 € por contacto</div><div class="r" id="ra">Ninguno compra</div></div>
+    <div class="camp b" id="cb"><small>CAMPAÑA B</small><div class="p">20 € por contacto</div><div class="r" id="rb">Oportunidades mucho mejores</div></div>
+    <div class="ej">Cifras ilustrativas</div></div>
+  <div class="l clave coral" id="k3"><s>Lanzar anuncios. Leads baratos.</s></div>
+  <div class="l clave coral" id="k4">Solo coste por lead → <i>decisiones equivocadas</i></div>
   <div class="l" id="nombre"><b>Maikel Echevarría</b><span>Fundador de Qualivo</span></div>
   <div class="l" id="sub"></div>
 </div>
@@ -60,7 +86,15 @@ function win(t,a,b,fi=.25,fo=.2){ if(t<a||t>b) return 0; return Math.min(nm(t,a,
 function show(el,op,dy=0,base=''){ el.style.opacity=op; el.style.transform=base+` translateY(${(1-out(op))*dy}px)`; }
 const G=$('gente'); const OK=new Set([5,22,41,58,71]); for(let i=0;i<80;i++){const d=document.createElement('i'); if(OK.has(i)) d.className='ok'; G.appendChild(d);}
 window.setT=function(t){
-  const sp=t>=TL.split[0]&&t<TL.split[1]; $('e').className=sp?'split':'';
+  const sp2=TL.split2&&t>=TL.split2[0]&&t<TL.split2[1];
+  const sp=(t>=TL.split[0]&&t<TL.split[1])||sp2; $('e').className=sp?'split':'';
+  if(TL.split2){ show($('panel2'),win(t,TL.split2[0],TL.split2[1],.3,.25),0);
+    show($('ca'),nm(t,TL.camp[0],TL.camp[0]+.35),24); show($('ra'),nm(t,TL.camp[1],TL.camp[1]+.35),10);
+    show($('cb'),nm(t,TL.camp[2],TL.camp[2]+.35),24); show($('rb'),nm(t,TL.camp[3],TL.camp[3]+.35),10);
+    show($('pasos'),win(t,TL.pasos[0],TL.pasos[1],.3,.3),0);
+    ['p1','f1','p2','f2','p3'].forEach((id,i)=>show($(id),nm(t,TL.pasosT[Math.ceil(i/2)]-(i%2?.15:0),TL.pasosT[Math.ceil(i/2)]+.3),20));
+    show($('k3'),win(t,TL.k3[0],TL.k3[1],.25,.25),-20,'translateX(-50%)');
+    show($('k4'),win(t,TL.k4[0],TL.k4[1],.25,.25),-20,'translateX(-50%)'); }
   show($('panel'),win(t,TL.split[0],TL.split[1],.3,.25),0);
   ['c1','c2','c3','c4'].forEach((c,i)=>show($(c),nm(t,TL.cards[i],TL.cards[i]+.35),24));
   const tw=win(t,TL.todos[0],TL.todos[1],.3,.3); show($('todos'),tw,0);
