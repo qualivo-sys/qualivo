@@ -107,6 +107,8 @@ Criterio de clasificación: **VIGENTE** (manda hoy), **VIGENTE PARCIAL** (manda 
 
 Fuente: lista de sesiones y de rutinas de la cuenta (56 sesiones, 53 rutinas: 47 activas, 6 desactivadas; 25 con cron, el resto timbres o avisos únicos). Un «agente» aquí es una sesión de Claude Code con rama y, normalmente, rutinas. **Entre despertares no ocurre nada**: no son procesos siempre encendidos.
 
+**Perímetro real (confirmado por Maikel, 9-oct):** las sesiones con las que habla habitualmente son trece: Agente CFO, Agente Outbound, Agente growt, Agente de contenido Qualivo, Agente Paid, Agente Creative Performance, Qualivo Intelligence · demo comercial, Alpha Media Group · proyecto, Kill & Ramble, Agente EAC, Campaña Antic Barcelona, Agente Eleva y Equipzilla · CRM inteligente sobre Pipedrive. Las otras 43 sesiones de la cuenta no las abre, incluidas las que los organigramas presentan como capas de dirección (Orchestrator, leads) y las fichadas con encargo (Ventas, Automatización).
+
 ### 2.1 Qualivo interno · operando (con rutinas que se ejecutan)
 
 | Agente (sesión) | Rama | Modelo | Rutinas cron (hora UTC) | Posee hoy | Observación |
