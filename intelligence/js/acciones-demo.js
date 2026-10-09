@@ -71,7 +71,7 @@
     if (!v('acepto')) return fallo('Marca la casilla para que podamos llamarte.');
     const datos = { nombre: v('nombre'), telefono: v('telefono'), email: v('email'), web: param('web') || v('web'), sector: SECTOR_PRUEBA[E().cfg.id] || 'otro', agente: 'Raquel', negocio: param('empresa') };
     b.disabled = true; b.textContent = 'Llamando…';
-    fetch('/api/prueba', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
+    fetch('/api/prueba/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (j.ok && j.estado === 'llamando') {
