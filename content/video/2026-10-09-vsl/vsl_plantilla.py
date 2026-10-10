@@ -213,42 +213,51 @@ def zoom_f(d, off, D, k1=1.25):
             f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
 
 def base(bruto, trabajo, planos, total, apoyos=()):
-    """Vídeo con cortes, encuadres y planos de apoyo ya dentro (como un plano más; superponerlos al final atascaba ffmpeg)."""
-    fil, vpz, apz = [], [], []
+    """Imagen por trozos (un ffmpeg por plano, con número exacto de fotogramas) y audio aparte; luego se juntan.
+    Hacerlo en un solo grafo con el 4K agotaba la memoria."""
+    from concurrent.futures import ThreadPoolExecutor
     zs = [(a, b) for a, b, e in planos if e == 'zoom']; z0 = zs[0][0] if zs else 0; D = (zs[-1][1] - z0) if zs else 1
-    ent = ['-i', bruto, '-i', MUSICA]
-    for c in sorted({c for _, _, c, _, _ in apoyos}): ent += ['-i', os.path.join(REC, c)]
-    idx = {c: 2 + i for i, c in enumerate(sorted({c for _, _, c, _, _ in apoyos}))}
-    k = 0
-    for i, (a, b, enc) in enumerate(planos):
-        d = b - a
-        fil.append(f'[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={max(0, d - 0.03):.3f}:d=0.03[a{i}];')
-        apz.append(f'[a{i}]')
+    tz = os.path.join(trabajo, 'trozos'); os.makedirs(tz, exist_ok=True)
+    trabajos, o = [], 0.0
+    for a, b, enc in planos:
         cortes = sorted({a, b} | {x for wa, wb, *_ in apoyos for x in (wa, wb) if a < x < b})
         for pa, pb in zip(cortes, cortes[1:]):
+            f0, f1 = round(o * FPS), round((o + pb - pa) * FPS); o += pb - pa
+            if f1 <= f0: continue
             ap = next((x for x in apoyos if x[0] <= (pa + pb) / 2 < x[1]), None)
             if ap:
                 wa, wb, c, blur, off = ap
-                fil.append(f'[{idx[c]}:v]trim={off + pa - wa:.3f}:{off + pb - wa:.3f},setpts=PTS-STARTPTS,'
-                           f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,gblur=sigma={blur},fps={FPS},setsar=1,format=yuv420p[v{k}];')
+                ent = ['-ss', f'{off + pa - wa:.3f}', '-i', os.path.join(REC, c)]
+                vf = f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,gblur=sigma={blur}'
             else:
-                if enc == 'zoom': v = zoom_f(pb - pa, pa - z0, D)
+                ent = ['-ss', f'{pa:.3f}', '-i', bruto]
+                if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
                 else:
-                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
-                fil.append(f'[0:v]trim={pa}:{pb},setpts=PTS-STARTPTS,{v},fps={FPS},setsar=1,format=yuv420p[v{k}];')
-            vpz.append(f'[v{k}]'); k += 1
-    fil.append(''.join(vpz) + f'concat=n={len(vpz)}:v=1:a=0[vb];' + ''.join(apz) + f'concat=n={len(apz)}:v=0:a=1[ab];')
-    # voz original: limpieza suave y algo más de volumen; música H muy baja
+                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; vf = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
+            trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
+    def hacer(tj):
+        i, ent, vf, n = tj
+        subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-vf', vf, '-frames:v', str(n), '-an', '-c:v', 'libx264',
+                        '-crf', '18', '-preset', 'fast', '-r', str(FPS), f'{tz}/t{i:04d}.mp4'], check=True, stdin=subprocess.DEVNULL)
+    with ThreadPoolExecutor(3) as ex: list(ex.map(hacer, trabajos))
+    open(f'{tz}/lista.txt', 'w').write(''.join(f"file 't{i:04d}.mp4'\n" for i, *_ in trabajos))
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', f'{tz}/lista.txt', '-c', 'copy',
+                    f'{trabajo}/imagen.mp4'], check=True, stdin=subprocess.DEVNULL)
+    # audio: voz original con limpieza suave y algo más de volumen; música H muy baja
+    fil = [f'[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={max(0, b - a - 0.03):.3f}:d=0.03[a{i}];'
+           for i, (a, b, _) in enumerate(planos)]
+    fil.append(''.join(f'[a{i}]' for i in range(len(planos))) + f'concat=n={len(planos)}:v=0:a=1[ab];')
     fil.append('[ab]highpass=f=80,afftdn=nf=-30,acompressor=threshold=0.1:ratio=2.5:attack=10:release=200,'
                'aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voz][vsc];')
     fil.append(f'[1:a]aformat=sample_rates=48000:channel_layouts=stereo,aloop=loop=-1:size=2e9,atrim=0:{total},asetpts=PTS-STARTPTS,'
                f'afade=t=in:d=0.8,afade=t=out:st={total - 2.5}:d=2.5,volume=0.18[m];'
                '[m][vsc]sidechaincompress=threshold=0.03:ratio=5:attack=30:release=600[md];'
                '[voz][md]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=8,aresample=48000[a]')
-    open(f'{trabajo}/filtro_base.txt', 'w').write(''.join(fil))
-    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-filter_complex_script', f'{trabajo}/filtro_base.txt',
-                    '-map', '[vb]', '-map', '[a]', '-c:v', 'libx264', '-crf', '18', '-preset', 'fast',
-                    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', f'{trabajo}/base_full.mp4'], check=True, stdin=subprocess.DEVNULL)
+    open(f'{trabajo}/filtro_audio.txt', 'w').write(''.join(fil))
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-vn', '-i', bruto, '-i', MUSICA, '-filter_complex_script', f'{trabajo}/filtro_audio.txt',
+                    '-map', '[a]', '-c:a', 'aac', '-b:a', '192k', f'{trabajo}/audio.m4a'], check=True, stdin=subprocess.DEVNULL)
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', f'{trabajo}/imagen.mp4', '-i', f'{trabajo}/audio.m4a', '-c', 'copy',
+                    '-shortest', f'{trabajo}/base_full.mp4'], check=True, stdin=subprocess.DEVNULL)
 
 def capas(trabajo, total, partes=3):
     n = int(round(FPS * total)); os.makedirs(f'{trabajo}/capasF', exist_ok=True)
