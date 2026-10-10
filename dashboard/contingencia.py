@@ -34,8 +34,11 @@ C = D["contingencia"]
 # El escenario que dispara todo: se cae el ingreso dudoso y no entra nadie más.
 ENTRA = sum(v for n, v, cuando, _, _ in INGRESOS
             if cuando is None and C["excluir_ingreso"] not in n)
+# Solo las cuotas que siguen vivas pasados tres meses: la contingencia se
+# dispara a los tres meses, así que una deuda que se liquida antes no forma
+# parte del gasto mensual que hay que recortar.
 SALE  = sum(SW.values()) + sum(QV.values()) + sum(PER.values()) \
-        + sum(c for _, c, u, _, _ in DEUDA if u > 0)
+        + sum(c for _, c, u, _, _ in DEUDA if u > 3)
 
 
 def libera(p):
