@@ -204,7 +204,7 @@ def construir(palabras, bruto, trabajo):
     for i in range(len(SUBS) - 1): SUBS[i][1] = min(SUBS[i][1], SUBS[i + 1][0])
     TL = {'esc': ests, 'subs': SUBS, 'nombre': [T(nombre[0]), T(nombre[1])]}
     open(os.path.join(AQUI, 'tiempos-plantilla.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
-    return planos, total, [(T(a), T(b), c, bl, off) for a, b, c, bl, off in apoyos]
+    return planos, total, apoyos
 
 def zoom_f(d, off, D, k1=1.25):
     K = f"(1+({k1}-1)*min((t+{off:.3f})/{D:.3f},1))"
@@ -212,19 +212,32 @@ def zoom_f(d, off, D, k1=1.25):
     return (f"crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
             f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
 
-def base(bruto, trabajo, planos, total):
-    fil, vs, as_ = [], [], []
+def base(bruto, trabajo, planos, total, apoyos=()):
+    """Vídeo con cortes, encuadres y planos de apoyo ya dentro (como un plano más; superponerlos al final atascaba ffmpeg)."""
+    fil, vpz, apz = [], [], []
     zs = [(a, b) for a, b, e in planos if e == 'zoom']; z0 = zs[0][0] if zs else 0; D = (zs[-1][1] - z0) if zs else 1
+    ent = ['-i', bruto, '-i', MUSICA]
+    for c in sorted({c for _, _, c, _, _ in apoyos}): ent += ['-i', os.path.join(REC, c)]
+    idx = {c: 2 + i for i, c in enumerate(sorted({c for _, _, c, _, _ in apoyos}))}
+    k = 0
     for i, (a, b, enc) in enumerate(planos):
         d = b - a
-        if enc == 'zoom': v = zoom_f(d, a - z0, D)
-        else:
-            w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
-        fil.append(f'[0:v]trim={a}:{b},setpts=PTS-STARTPTS,{v},fps={FPS},setsar=1[v{i}];')
         fil.append(f'[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={max(0, d - 0.03):.3f}:d=0.03[a{i}];')
-        vs.append(f'[v{i}][a{i}]')
-    n = len(planos)
-    fil.append(''.join(vs) + f'concat=n={n}:v=1:a=1[vb][ab];')
+        apz.append(f'[a{i}]')
+        cortes = sorted({a, b} | {x for wa, wb, *_ in apoyos for x in (wa, wb) if a < x < b})
+        for pa, pb in zip(cortes, cortes[1:]):
+            ap = next((x for x in apoyos if x[0] <= (pa + pb) / 2 < x[1]), None)
+            if ap:
+                wa, wb, c, blur, off = ap
+                fil.append(f'[{idx[c]}:v]trim={off + pa - wa:.3f}:{off + pb - wa:.3f},setpts=PTS-STARTPTS,'
+                           f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,gblur=sigma={blur},fps={FPS},setsar=1,format=yuv420p[v{k}];')
+            else:
+                if enc == 'zoom': v = zoom_f(pb - pa, pa - z0, D)
+                else:
+                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; v = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
+                fil.append(f'[0:v]trim={pa}:{pb},setpts=PTS-STARTPTS,{v},fps={FPS},setsar=1,format=yuv420p[v{k}];')
+            vpz.append(f'[v{k}]'); k += 1
+    fil.append(''.join(vpz) + f'concat=n={len(vpz)}:v=1:a=0[vb];' + ''.join(apz) + f'concat=n={len(apz)}:v=0:a=1[ab];')
     # voz original: limpieza suave y algo más de volumen; música H muy baja
     fil.append('[ab]highpass=f=80,afftdn=nf=-30,acompressor=threshold=0.1:ratio=2.5:attack=10:release=200,'
                'aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voz][vsc];')
@@ -233,9 +246,9 @@ def base(bruto, trabajo, planos, total):
                '[m][vsc]sidechaincompress=threshold=0.03:ratio=5:attack=30:release=600[md];'
                '[voz][md]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=8,aresample=48000[a]')
     open(f'{trabajo}/filtro_base.txt', 'w').write(''.join(fil))
-    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', bruto, '-i', MUSICA, '-filter_complex_script', f'{trabajo}/filtro_base.txt',
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-filter_complex_script', f'{trabajo}/filtro_base.txt',
                     '-map', '[vb]', '-map', '[a]', '-c:v', 'libx264', '-crf', '18', '-preset', 'fast',
-                    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', f'{trabajo}/base_full.mp4'], check=True)
+                    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', f'{trabajo}/base_full.mp4'], check=True, stdin=subprocess.DEVNULL)
 
 def capas(trabajo, total, partes=3):
     n = int(round(FPS * total)); os.makedirs(f'{trabajo}/capasF', exist_ok=True)
@@ -252,21 +265,11 @@ def capas(trabajo, total, partes=3):
                            env=dict(os.environ, NODE_PATH=np)) for i in range(partes)]
     for p in ps: p.wait()
 
-def final(trabajo, apoyos, total):
-    ent, fil, ult = ['-i', f'{trabajo}/base_full.mp4'], [], '0:v'
-    for j, (a, b, c, blur, off) in enumerate(apoyos):
-        ent += ['-i', os.path.join(REC, c)]
-        # el plano arranca en 0 con relleno hasta su sitio: si empieza tarde, ffmpeg se queda esperando (se atascaba)
-        fil.append(f'[{j + 1}:v]trim={off}:{off + b - a:.2f},setpts=PTS-STARTPTS,scale=1920:1080:force_original_aspect_ratio=increase,'
-                   f'crop=1920:1080,gblur=sigma={blur},fps={FPS},format=yuv420p,tpad=start_duration={a:.3f}[b{j}];'
-                   f"[{ult}][b{j}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b})'[o{j}];")
-        ult = f'o{j}'
-    k = len(apoyos) + 1
-    ent += ['-framerate', str(FPS), '-i', f'{trabajo}/capasF/f%05d.png']
-    fil.append(f'[{ult}][{k}:v]overlay=0:0[v]')
-    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-filter_complex', ''.join(fil), '-map', '[v]', '-map', '0:a',
+def final(trabajo, total):
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', f'{trabajo}/base_full.mp4', '-framerate', str(FPS),
+                    '-i', f'{trabajo}/capasF/f%05d.png', '-filter_complex', '[0:v][1:v]overlay=0:0[v]', '-map', '[v]', '-map', '0:a',
                     '-c:v', 'libx264', '-crf', '19', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-t', str(total),
-                    f'{trabajo}/VSL_Qualivo_plantilla.mp4'], check=True)
+                    f'{trabajo}/VSL_Qualivo_plantilla.mp4'], check=True, stdin=subprocess.DEVNULL)
     print('ok', f'{trabajo}/VSL_Qualivo_plantilla.mp4')
 
 if __name__ == '__main__':
@@ -274,4 +277,5 @@ if __name__ == '__main__':
     planos, total, apoyos = construir(json.load(open(pal)), bruto, trabajo)
     print('planos', len(planos), 'duración', total)
     if len(sys.argv) > 4: sys.exit()
-    base(bruto, trabajo, planos, total); capas(trabajo, total); final(trabajo, apoyos, total)
+    if os.environ.get('SIN_CAPAS') != '1': capas(trabajo, total)
+    base(bruto, trabajo, planos, total, apoyos); final(trabajo, total)
