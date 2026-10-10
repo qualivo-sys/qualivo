@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- VSL Qualivo · plantilla completa · capa de gráficos (fondo transparente), 1920x1080.
+     Las escenas llegan en window.TL.esc (vsl_plantilla.py), cada una atada a una frase del guion.
+     Marca de la web: Montserrat, navy #0A0F1A, turquesa #27BDB1, coral #E8590C. Entradas de 0,3-0,6 s. -->
+<style>
+@font-face{font-family:M;src:url(../../../assets/fonts/montserrat-latin.woff2) format('woff2');font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font-family:M,sans-serif}
+.l{position:absolute;opacity:0}
+.full{position:absolute;inset:0;background:#0A0F1A;opacity:0}
+#sub{position:absolute;left:260px;right:260px;bottom:64px;text-align:center;font-size:40px;font-weight:600;line-height:1.3;color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.65),0 0 2px rgba(0,0,0,.9);z-index:90}
+#sub b{color:#27BDB1;font-weight:800}
+#e.lado #sub{left:40px;right:960px;font-size:36px}
+.clave{position:absolute;left:50%;top:110px;background:#0A0F1A;color:#fff;font-weight:800;font-size:58px;padding:22px 42px;border-radius:14px;white-space:nowrap;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);z-index:60;opacity:0}
+.clave i{font-style:normal;color:#27BDB1}.clave.coral i{color:#FF8A4C}
+.clave s{text-decoration-thickness:6px;text-decoration-color:#FF8A4C}
+/* tarjeta flotante a la derecha */
+.tarjeta{position:absolute;left:1040px;top:120px;width:800px;min-height:560px;background:#0A0F1A;border-radius:30px;padding:70px 64px;
+  box-shadow:0 30px 80px rgba(10,15,26,.35);opacity:0;z-index:40}
+.tarjeta .k,.full .k{font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:#27BDB1;font-weight:800;margin-bottom:28px}
+.tarjeta h3{font-size:48px;color:#fff;font-weight:800;line-height:1.1;margin-bottom:30px}
+.it{display:flex;align-items:center;gap:22px;background:#141B2B;border:2px solid #24304A;border-radius:16px;padding:20px 26px;margin-bottom:16px;opacity:0}
+.it i{font-style:normal;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;flex:none;background:#27BDB1;color:#0A0F1A}
+.it i.ko{background:#E8590C;color:#fff}.it i.q{background:#24304A;color:#FF8A4C}.it i.mas{background:#24304A;color:#27BDB1}
+.it span{font-size:32px;color:#fff;font-weight:700}
+.big{font-size:84px;font-weight:800;color:#fff;line-height:1}
+.big small{display:block;font-size:30px;color:#B9C2D3;font-weight:600;margin-top:14px}
+.ej{position:absolute;font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:#6B7690;font-weight:700}
+/* pantalla completa: lista */
+.lista{display:flex;flex-direction:column;align-items:center;padding-top:150px}
+.lista h2{font-size:64px;color:#fff;font-weight:800;margin-bottom:56px;text-align:center}
+.lista .it{width:1100px;padding:28px 36px}.lista .it span{font-size:42px}
+/* cadena */
+.cadena{display:flex;flex-direction:column;align-items:center;padding-top:200px}
+.cadena .tach{font-size:56px;font-weight:800;color:#8A94AA;margin-bottom:70px;opacity:0}
+.cadena .tach s{text-decoration-thickness:6px;text-decoration-color:#FF8A4C}
+.fila{display:flex;align-items:center;gap:18px}
+.paso{background:#141B2B;border:2px solid #24304A;border-radius:18px;padding:26px 26px;font-size:30px;font-weight:800;color:#8A94AA;opacity:0;white-space:nowrap}
+.paso.on{background:#27BDB1;border-color:#27BDB1;color:#0A0F1A}
+.fl{font-size:40px;color:#27BDB1;font-weight:800;opacity:0}
+/* pantalla real de Intelligence */
+.pantalla{overflow:hidden;background:#F4F6FA}
+.pantalla img{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.pantalla .caja{position:absolute;border:6px solid #27BDB1;border-radius:18px;box-shadow:0 0 0 4000px rgba(10,15,26,.28);opacity:0}
+.pantalla .demo{position:absolute;right:40px;top:30px;background:#0A0F1A;color:#fff;font-size:22px;font-weight:700;padding:10px 18px;border-radius:999px}
+/* barras */
+.barras{padding:220px 220px 0}
+.barras h2{font-size:56px;color:#fff;font-weight:800;margin-bottom:70px}
+.bar{margin-bottom:46px;opacity:0}.bar span{display:block;font-size:34px;color:#B9C2D3;font-weight:700;margin-bottom:14px}
+.bar div{height:84px;border-radius:14px;background:#27BDB1;display:flex;align-items:center;padding-left:28px;font-size:42px;font-weight:800;color:#0A0F1A;width:0}
+.bar.b div{background:#FF8A4C}
+/* cronología */
+.crono{display:flex;flex-direction:column;align-items:center;padding-top:160px}
+.crono h2{font-size:60px;color:#fff;font-weight:800;margin-bottom:12px}
+.crono .precio{font-size:40px;color:#27BDB1;font-weight:800;margin-bottom:70px}
+.semanas{display:flex;gap:26px}
+.sem{width:380px;background:#141B2B;border:2px solid #24304A;border-radius:20px;padding:30px;opacity:0}
+.sem small{display:block;font-size:22px;letter-spacing:.16em;color:#27BDB1;font-weight:800;margin-bottom:12px}
+.sem b{font-size:36px;color:#fff;font-weight:800;line-height:1.15}
+/* tres anuncios */
+.ads3{display:flex;justify-content:center;gap:60px;padding-top:120px}
+.ad{width:440px;opacity:0}
+.ad .tag{font-size:22px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;text-align:center;color:#8A94AA}
+.tel{background:#fff;border-radius:30px;border:9px solid #1E2638;overflow:hidden}
+.ad.on .tel{border-color:#27BDB1}.ad.on .tag{color:#27BDB1}
+.th{display:flex;align-items:center;gap:12px;padding:16px 20px}.th i{width:42px;height:42px;border-radius:50%;background:#C9CFDA;display:block}
+.th b{font-size:20px;color:#0A0F1A}
+.img{height:260px;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;background:#0A0F1A}
+.img p{font-size:32px;font-weight:800;line-height:1.15;color:#fff}
+.btn{margin:16px 20px 20px;border-radius:12px;padding:14px;text-align:center;font-size:20px;font-weight:800;background:#0A0F1A;color:#27BDB1}
+/* landing */
+.landing{display:flex;justify-content:center;padding-top:90px}
+.nav{width:1400px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4);opacity:0}
+.barra{height:56px;background:#E9ECF2;display:flex;align-items:center;gap:10px;padding:0 22px}.barra i{width:16px;height:16px;border-radius:50%;background:#C9CFDA;display:block}
+.web{display:flex;gap:60px;padding:60px 70px}
+.web .izq{flex:1}.web h4{font-size:52px;font-weight:800;color:#0A0F1A;line-height:1.08;margin-bottom:22px}
+.web p{font-size:26px;color:#4A5568;line-height:1.4;margin-bottom:12px}
+.form{width:460px;border:3px solid #E2E6EE;border-radius:20px;padding:30px}
+.form.on{border-color:#27BDB1;box-shadow:0 0 0 8px rgba(39,189,177,.18)}
+.campo{height:56px;border:2px solid #D5DAE3;border-radius:12px;margin-bottom:14px;padding:14px;font-size:20px;color:#8A94AA}
+.envia{height:60px;border-radius:12px;background:#0A0F1A;color:#27BDB1;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center}
+.dudas{position:absolute;right:300px;top:150px;display:flex;flex-direction:column;gap:16px}
+.duda{background:#E8590C;color:#fff;font-size:34px;font-weight:800;padding:16px 26px;border-radius:16px;opacity:0}
+/* CTA y final */
+.cta{position:absolute;left:1080px;top:140px;width:760px;background:#fff;border-radius:28px;padding:50px 54px;box-shadow:0 30px 80px rgba(10,15,26,.3);opacity:0;z-index:40}
+.cta h3{font-size:46px;font-weight:800;color:#0A0F1A;line-height:1.1;margin-bottom:24px}
+.cta .it{background:#F2F4F8;border-color:#E2E6EE}.cta .it span{color:#0A0F1A;font-size:28px}
+.cta .pie{margin-top:18px;font-size:26px;font-weight:800;color:#0E7C74}
+.fin{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;text-align:center}
+.fin img{width:420px}.fin h2{font-size:64px;color:#fff;font-weight:800;line-height:1.1}
+.fin .boton{background:#27BDB1;color:#0A0F1A;font-size:40px;font-weight:800;padding:26px 56px;border-radius:18px}
+/* primer minuto (heredado de la V2) */
+.dot{position:absolute;width:44px;height:44px;border-radius:50%;background:#55627E;margin:-22px 0 0 -22px}
+.puerta{position:absolute;left:930px;top:260px;width:60px;height:560px;border-radius:30px;border:3px dashed #27BDB1;opacity:.7}
+.rot{position:absolute;top:220px;font-size:26px;letter-spacing:.2em;font-weight:800;color:#B9C2D3}
+#nombre{position:absolute;left:110px;bottom:190px;background:#fff;border-left:10px solid #27BDB1;padding:18px 30px 18px 26px;border-radius:6px;opacity:0;z-index:50}
+#nombre b{display:block;font-size:40px;font-weight:800;color:#0A0F1A}#nombre span{font-size:26px;font-weight:600;color:#4A5568}
+.tel2{width:380px;height:740px;border-radius:52px;border:14px solid #1E2638;background:#F2F4F8;overflow:hidden;position:relative;margin-bottom:150px}
+.post{margin:18px;background:#fff;border-radius:18px;overflow:hidden}
+.post .h{display:flex;align-items:center;gap:12px;padding:14px}.post .h i{width:38px;height:38px;border-radius:50%;display:block}
+.post .h u{height:12px;width:140px;border-radius:6px;background:#D5DAE3;display:block}
+.post .im{height:230px}.post .ln{height:12px;margin:12px 14px;border-radius:6px;background:#E2E6EE}.post .bt{height:40px;margin:10px 14px 16px;border-radius:10px;background:#0A0F1A;opacity:.85}
+</style>
+<div id="e" style="position:absolute;inset:0"><div id="nombre"><b>Maikel Echevarría</b><span>Fundador de Qualivo</span></div><div id="sub"></div></div>
+<script src="tiempos-plantilla.js"></script>
+<script>
+const TL=window.TL, E=document.getElementById('e');
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1), out=x=>1-Math.pow(1-x,3), io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function win(t,a,b,fi=.4,fo=.35){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi),1-nm(t,b-fo,b)); }
+function show(el,op,dy=0,base='',s0=.96){ el.style.opacity=op; const e=out(op); el.style.transform=`${base} translateY(${(1-e)*dy}px) scale(${s0+(1-s0)*e})`; }
+const mk=(cls,html,padre=E)=>{const d=document.createElement('div'); d.className=cls; d.innerHTML=html; padre.insertBefore(d,document.getElementById('sub')); return d;};
+const ICO={ok:'✓',ko:'✕',q:'?',mas:'+'};
+const item=x=>`<div class="it">${x.ico?`<i class="${x.ico}">${ICO[x.ico]||""}</i>`:""}<span>${x.txt}</span></div>`;
+// construir cada escena
+TL.esc.forEach(s=>{
+  if(s.tipo==='clave') s.el=mk('clave'+(s.coral?' coral':''),s.html);
+  if(s.tipo==='tarjeta') s.el=mk('tarjeta',`${s.k?`<div class="k">${s.k}</div>`:''}${s.titulo?`<h3>${s.titulo}</h3>`:''}${s.grande?`<div class="big">${s.grande}</div>`:''}${(s.items||[]).map(item).join('')}${s.ej?`<div class="ej" style="left:64px;bottom:34px">${s.ej}</div>`:''}`);
+  if(s.tipo==='lista') s.el=mk('full lista',`<h2>${s.titulo}</h2>${s.items.map(item).join('')}${s.ej?`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">${s.ej}</div>`:''}`);
+  if(s.tipo==='cadena') s.el=mk('full cadena',`${s.tachado?`<div class="tach"><s>${s.tachado.txt}</s></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
+  if(s.tipo==='pantalla') s.el=mk('full pantalla',`<img src="${s.src}"><div class="caja"></div><div class="demo">Demo · datos simulados</div>`);
+  if(s.tipo==='barras') s.el=mk('full barras',`<h2>${s.titulo}</h2>${s.barras.map((b,i)=>`<div class="bar ${i?'b':''}"><span>${b.txt}</span><div>${b.val}</div></div>`).join('')}<div class="ej" style="left:220px;bottom:150px">${s.ej}</div>`);
+  if(s.tipo==='crono') s.el=mk('full crono',`<h2>${s.titulo}</h2><div class="precio">${s.precio}</div><div class="semanas">${s.pasos.map(p=>`<div class="sem"><small>${p.sem}</small><b>${p.txt}</b></div>`).join('')}</div>`);
+  if(s.tipo==='ads3') s.el=mk('full ads3',s.ads.map(a=>`<div class="ad"><div class="tag">${a.tag}</div><div class="tel"><div class="th"><i></i><b>Tu empresa</b></div><div class="img"><p>${a.txt}</p></div><div class="btn">Más información</div></div></div>`).join('')+`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">Anuncios ilustrativos</div>`);
+  if(s.tipo==='landing') s.el=mk('full landing',`<div class="nav"><div class="barra"><i></i><i></i><i></i></div><div class="web"><div class="izq"><h4>${s.h}</h4><p>${s.p}</p><p>✓ ${s.b1}</p><p>✓ ${s.b2}</p></div><div class="form"><div class="campo">Nombre</div><div class="campo">${s.c1}</div><div class="campo">${s.c2}</div><div class="envia">Enviar</div></div></div></div><div class="dudas">${s.dudas.map(d=>`<div class="duda">${d.txt}</div>`).join('')}</div>`);
+  if(s.tipo==='cta') s.el=mk('cta',`<h3>${s.titulo}</h3>${s.items.map(item).join('')}<div class="pie">${s.pie}</div>`);
+  if(s.tipo==='fin') s.el=mk('full fin',`<img src="../2026-09-17-sistema/rec/logo-blanco.png"><h2>${s.titulo}</h2><div class="boton">${s.boton}</div>`);
+  if(s.tipo==='flujo'){ s.el=mk('full',`<div class="rot" style="left:150px">CONTACTOS</div><div class="rot" style="left:1480px">OPORTUNIDADES</div><div class="puerta"></div>`); s.dots=[];
+    const PASA=new Set([3,11,18,27,35]); let np=0; for(let i=0;i<40;i++){const d=document.createElement('div'); d.className='dot'; s.el.appendChild(d); s.dots.push({d,pasa:PASA.has(i),ord:PASA.has(i)?np++:0});} }
+  if(s.tipo==='feed'){ const COL=['#E8590C','#27BDB1','#7C5CFF','#F2B705','#3B82F6','#EF4444','#10B981','#F97316','#8B5CF6','#06B6D4','#EAB308','#EC4899'];
+    s.el=mk('full',`<div style="position:absolute;left:110px;top:330px;font-size:54px;line-height:1.1;font-weight:800;color:#fff;width:560px">Un anuncio<br><i style="font-style:normal;color:#27BDB1">para todo el mundo</i></div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div class="tel2"><div class="lista2" style="position:absolute;left:0;right:0;top:0">${COL.map(c=>`<div class="post"><div class="h"><i style="background:${c}"></i><u></u></div><div class="im" style="background:${c};opacity:.85"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="bt"></div></div>`).join('')}</div></div></div>`); }
+  if(s.tipo==='ads2') s.el=mk('full ads3',[['Mensaje genérico','¿Quieres más clientes? Escríbenos.'],['Mensaje para tu cliente ideal','¿Tu clínica ya invierte en anuncios y solo llegan preguntas de precio?']].map(a=>`<div class="ad"><div class="tag">${a[0]}</div><div class="tel"><div class="th"><i></i><b>Tu empresa</b></div><div class="img"><p>${a[1]}</p></div><div class="btn">Siguiente paso</div></div></div>`).join('')+`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">Anuncios ilustrativos</div>`);
+});
+window.setT=function(t){
+  let lado=false;
+  TL.esc.forEach(s=>{
+    const w=win(t,s.t0,s.t1,.45,.35);
+    if(s.tipo==='clave'){ show(s.el,w,-24,'translateX(-50%)'); return; }
+    if(s.tipo==='tarjeta'||s.tipo==='cta'){ if(t>=s.t0&&t<s.t1) lado=true; show(s.el,w,30,'',.97);
+      s.el.querySelectorAll('.it').forEach((d,i)=>show(d,nm(t,s.items[i].t,s.items[i].t+.4),20)); return; }
+    show(s.el,w,0,'',1);
+    if(w<=0) return;
+    if(s.tipo==='lista') s.el.querySelectorAll('.it').forEach((d,i)=>show(d,nm(t,s.items[i].t,s.items[i].t+.45),30));
+    if(s.tipo==='cadena'){ const tc=s.el.querySelector('.tach'); if(tc) show(tc,nm(t,s.tachado.t,s.tachado.t+.4),20);
+      const ps=s.el.querySelectorAll('.paso'), fs=s.el.querySelectorAll('.fl');
+      s.pasos.forEach((p,i)=>{ show(ps[i],nm(t,p.t,p.t+.4),20); ps[i].classList.toggle('on',t>=p.t+.3&&(!s.unico||i===s.pasos.filter(q=>t>=q.t+.3).length-1)); if(i) fs[i-1].style.opacity=nm(t,p.t-.15,p.t+.2); }); }
+    if(s.tipo==='pantalla'){ const f=[...s.focos].reverse().find(x=>t>=x.t); const img=s.el.querySelector('img'), cj=s.el.querySelector('.caja');
+      if(f&&f.w){ const z=1+(f.z-1)*io(nm(t,f.t,f.t+.8)), cx=(f.x+f.w/2)/2, cy=(f.y+f.h/2)/2;
+        const tx=cl(960-cx*z,1920-1920*z,0), ty=cl(540-cy*z,1080-1080*z,0); img.style.transform=`translate(${tx}px,${ty}px) scale(${z})`;
+        cj.style.left=(f.x/2*z+tx)+'px'; cj.style.top=(f.y/2*z+ty)+'px'; cj.style.width=(f.w/2*z)+'px'; cj.style.height=(f.h/2*z)+'px'; cj.style.opacity=nm(t,f.t+.6,f.t+1); }
+      else { img.style.transform='none'; cj.style.opacity=0; } }
+    if(s.tipo==='barras') s.el.querySelectorAll('.bar').forEach((d,i)=>{ const u=nm(t,s.barras[i].t,s.barras[i].t+.8); d.style.opacity=nm(t,s.barras[i].t,s.barras[i].t+.3); d.querySelector('div').style.width=(io(u)*s.barras[i].pct)+'%'; });
+    if(s.tipo==='crono') s.el.querySelectorAll('.sem').forEach((d,i)=>show(d,nm(t,s.pasos[i].t,s.pasos[i].t+.45),30));
+    if(s.tipo==='ads3') s.el.querySelectorAll('.ad').forEach((d,i)=>{ show(d,nm(t,s.ads[i].t,s.ads[i].t+.45),40); d.classList.toggle('on',s.mejor!=null&&i===s.mejor&&t>=s.tm); d.style.opacity=nm(t,s.ads[i].t,s.ads[i].t+.45)*(s.mejor!=null&&t>=s.tm&&i!==s.mejor?.45:1); });
+    if(s.tipo==='ads2'){ const a=s.el.querySelectorAll('.ad'); const ua=nm(t,s.ta,s.ta+.5), ub=nm(t,s.tb,s.tb+.5);
+      a[0].style.opacity=out(ua)*(1-.55*out(ub)); a[0].style.transform=`translateY(${(1-out(ua))*40}px) scale(${1-.08*out(ub)})`;
+      a[1].style.opacity=out(ub); a[1].style.transform=`translateY(${(1-out(ub))*40}px) scale(${.96+.08*out(ub)})`; a[1].classList.toggle('on',t>=s.tb); }
+    if(s.tipo==='landing'){ show(s.el.querySelector('.nav'),nm(t,s.t0+.1,s.t0+.6),40); s.el.querySelector('.form').classList.toggle('on',t>=s.tf);
+      s.el.querySelectorAll('.duda').forEach((d,i)=>show(d,nm(t,s.dudas[i].t,s.dudas[i].t+.4),20)); }
+    if(s.tipo==='flujo') s.dots.forEach((o,i)=>{ const t0=s.t0+.4+i*.085, u=nm(t,t0,t0+1.1), lane=300+(i%8)*68; let x=150+u*810, y=lane, op=u>0?1:0, col='#55627E';
+      if(o.pasa){ const v=nm(t,t0+1.1,t0+1.9); x=960+io(v)*600; y=lane+(330+o.ord*90-lane)*io(v); col=u>=1?'#27BDB1':col; }
+      else { const v=nm(t,t0+1.1,t0+1.7); y=lane+io(v)*180; op=u>0?1-v*.9:0; }
+      o.d.style.left=x+'px'; o.d.style.top=y+'px'; o.d.style.opacity=op; o.d.style.background=col; });
+    if(s.tipo==='feed') s.el.querySelector('.lista2').style.transform=`translateY(${-io(nm(t,s.t0,s.t1))*2600}px)`;
+  });
+  E.className=lado?'lado':'';
+  show(document.getElementById('nombre'),win(t,TL.nombre[0],TL.nombre[1],.45,.4),20,'',1);
+  const su=TL.subs.find(x=>t>=x[0]&&t<x[1]), sb=document.getElementById('sub'); if(su){sb.innerHTML=su[2]; sb.style.opacity=1;} else sb.style.opacity=0;
+};
+window.setT(0);
+</script>
