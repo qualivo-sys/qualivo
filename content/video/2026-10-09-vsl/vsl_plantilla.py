@@ -233,7 +233,7 @@ def base(bruto, trabajo, planos, total):
                '[m][vsc]sidechaincompress=threshold=0.03:ratio=5:attack=30:release=600[md];'
                '[voz][md]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=8,aresample=48000[a]')
     open(f'{trabajo}/filtro_base.txt', 'w').write(''.join(fil))
-    subprocess.run([FF, '-y', '-loglevel', 'error', '-i', bruto, '-i', MUSICA, '-filter_complex_script', f'{trabajo}/filtro_base.txt',
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', bruto, '-i', MUSICA, '-filter_complex_script', f'{trabajo}/filtro_base.txt',
                     '-map', '[vb]', '-map', '[a]', '-c:v', 'libx264', '-crf', '18', '-preset', 'fast',
                     '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', f'{trabajo}/base_full.mp4'], check=True)
 
@@ -256,14 +256,15 @@ def final(trabajo, apoyos, total):
     ent, fil, ult = ['-i', f'{trabajo}/base_full.mp4'], [], '0:v'
     for j, (a, b, c, blur, off) in enumerate(apoyos):
         ent += ['-i', os.path.join(REC, c)]
-        fil.append(f'[{j + 1}:v]trim={off}:{off + b - a:.2f},setpts=PTS-STARTPTS+{a}/TB,scale=1920:1080:force_original_aspect_ratio=increase,'
-                   f'crop=1920:1080,gblur=sigma={blur},fps={FPS},format=yuv420p[b{j}];'
+        # el plano arranca en 0 con relleno hasta su sitio: si empieza tarde, ffmpeg se queda esperando (se atascaba)
+        fil.append(f'[{j + 1}:v]trim={off}:{off + b - a:.2f},setpts=PTS-STARTPTS,scale=1920:1080:force_original_aspect_ratio=increase,'
+                   f'crop=1920:1080,gblur=sigma={blur},fps={FPS},format=yuv420p,tpad=start_duration={a:.3f}[b{j}];'
                    f"[{ult}][b{j}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b})'[o{j}];")
         ult = f'o{j}'
     k = len(apoyos) + 1
     ent += ['-framerate', str(FPS), '-i', f'{trabajo}/capasF/f%05d.png']
     fil.append(f'[{ult}][{k}:v]overlay=0:0[v]')
-    subprocess.run([FF, '-y', '-loglevel', 'error', *ent, '-filter_complex', ''.join(fil), '-map', '[v]', '-map', '0:a',
+    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-filter_complex', ''.join(fil), '-map', '[v]', '-map', '0:a',
                     '-c:v', 'libx264', '-crf', '19', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-t', str(total),
                     f'{trabajo}/VSL_Qualivo_plantilla.mp4'], check=True)
     print('ok', f'{trabajo}/VSL_Qualivo_plantilla.mp4')
