@@ -10,6 +10,7 @@
 // Se protege con un token en la URL (?k=...), que es lo que Vapi puede mandar
 // sin configuración extra.
 
+const H = require('./_horario.js');
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const CALENDARIO = 'zBlsw8BEKA2zah81YlOl';
@@ -79,6 +80,8 @@ async function huecosLibres(limite) {
   // Uno por franja para no cantarle quince horas seguidas: primero de la mañana
   // y primero de la tarde de cada día.
   for (const dia of dias) {
+    // El calendario del CRM no sabe qué días son festivos (12-oct-2026: ofrecía el lunes).
+    if (H.FESTIVOS.has(dia)) continue;
     let manana = null, tarde = null;
     for (const s of d[dia].slots) {
       const h = parseInt(String(s).slice(11, 13), 10);
