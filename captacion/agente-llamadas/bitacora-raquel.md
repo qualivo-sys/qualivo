@@ -384,3 +384,32 @@ Una llamada, registrada en Notion (📞 Llamadas de Raquel).
   según el número de intentos previos.
 - En clínicas, si el primer buzón es por la tarde, probar el segundo intento a primera hora
   (9:00-9:30) antes de dar el lead por no contactable.
+
+## 9-oct-2026 · revisión diaria (llamadas del 8-oct 19:39 al 9-oct 19:39)
+
+Cinco llamadas, registradas en Notion (📞 Llamadas de Raquel): una real y cuatro pruebas de Maikel
+con la nueva llamada desde la demo de Intelligence (ficha del CRM → «Que me llame a mí»).
+
+- Darío (lead form Meta, funnel v2 formación, nivel B, «más adelante, solo mirando»), 10:30:
+  buzón. Como el 1 y el 2-oct, el saludo se oye antes del mensaje de buzón («Hola. Hola, Darío…»).
+- Pruebas de Maikel (11:47, 11:54, 12:36, 12:48), todas cortadas por él tras el arranque. Latencia
+  media por turno entre 1,0 y 2,5 s.
+
+**Observado.**
+- Demo sin ficha (recepcionista): Maikel dijo «me acabas de llamar» y Raquel lo negó («nosotros no
+  hemos llamado todavía»). El guion de la prueba estaba redactado como llamada entrante.
+- Demo con ficha: en la primera prueba volcó la ficha entera en una frase (programa, interés, cuotas)
+  antes de dejar hablar. Con el sector del sueño ya arranca bien («vi que asististe al webinar de
+  las tres claves… ¿es buen momento?»), aunque en una prueba encadenó dos preguntas.
+- Transcriptor: sigue escribiendo «Michael Echeverría» y «Cuálibo»; el texto configurado en el
+  asistente sigue siendo «Máikel Echevarría» / «Cuálivo».
+
+**Aplicado (solo en el guion de las demos, api/_demo.js; el asistente de Vapi no se ha tocado).**
+- Recepcionista de la prueba: la llamada la ha hecho Raquel; si la persona dice que la han llamado,
+  se confirma y nunca se niega.
+- Llamada con ficha: en la primera frase, como mucho un dato del CRM y la pregunta de si es buen
+  momento; el resto, solo si viene a cuento y de uno en uno, sin dos preguntas seguidas.
+
+**Propuesto, no aplicado (decide Maikel).**
+- Leads «solo mirando» (todavia-no-candidato): no lanzar la llamada de Raquel el mismo día; dejar
+  el WhatsApp y llamar solo si contesta. Hoy la única llamada real fue a uno de ellos y acabó en buzón.
