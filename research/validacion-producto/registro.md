@@ -61,6 +61,7 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 |---|---|---|---|
 | 2026-10-11 | Apify (plan Starter, límite 30 $/mes) | Solo consultas de lectura a la API (cuenta, límites, catálogo). Ninguna ejecución | 0 $ |
 | 2026-10-11 | Apify — estado del ciclo 17/9–16/10 | Gasto 29,98 $ de 30 $ (COMPROBADO); consumo previo por scrapers de Instagram ajenos a esta investigación | — |
+| 2026-10-11 | Apify `apify/facebook-ads-scraper` | Prueba 5 anuncios + extracción 12 búsquedas (203 anuncios cobrados) | 0,815 $ (límite subido por Maikel a 50 $) |
 
 ## Decisiones
 
@@ -96,3 +97,18 @@ Interés relativo, no volumen. 0 = por debajo del umbral de Google. Ancla "funda
 Lectura: los candidatos P04-P07 tienen búsqueda casi nula en España; si se prueban, dependen de compra por descubrimiento (Meta), no de búsqueda. Esto no es ausencia de demanda, pero sí ausencia de una señal independiente que la confirme.
 - 2026-10-11 · P25: medida del artículo gratuito de Ryanair 40×30×20 cm. Varias fuentes secundarias coinciden (travelextra.ie, theportugalnews.com, cabinzero.com) → DECLARADO. La ayuda oficial de Ryanair (help.ryanair.com) devuelve 403 → confirmación oficial PENDIENTE (revisar a mano en ryanair.com).
 - 2026-10-11 · Top 10 copiado a Notion (página privada "Validación de producto · e-commerce España (oct 2026)", base de datos "Top 10 candidatos"). Este registro sigue siendo la fuente con historial; Notion es la vista para analizar.
+
+## Biblioteca de Anuncios de Meta vía Apify (2026-10-11)
+
+Ejecución: `apify/facebook-ads-scraper`, run `lUDTRZGy1bpojKY8F`, dataset `RJMvwM7uvllX0jWBH`, estado SUCCEEDED, 203 eventos cobrados, **coste 0,815 $** (tope 4 $). Prueba previa de 5 anuncios (run `epL7cjmU9qp0MZgps`), revisada antes de ampliar. Parámetros: anuncios activos, ES (10 búsquedas) y DE (2), máx. 50 por búsqueda, búsqueda por palabras sin orden. Datos depurados en `datos/meta-ads-2026-10-11.csv` (221 filas, 108 marcadas relevantes; sin imágenes ni enlaces firmados).
+
+Limitaciones: la búsqueda por palabras trae mucho ruido (relatos, apps); solo anuncios activos que llegaron a ES/DE; máx. 50 por búsqueda; sin gasto ni alcance; **la antigüedad o el número de variantes no prueban ventas ni beneficio**.
+
+| Candidato | Lo observado (COMPROBADO en la Biblioteca vía Apify) | Lectura |
+|---|---|---|
+| P21 colchoneta de viaje perro | 0 anuncios activos en ES del producto exacto. En "cama perro impermeable": Holfur (camas ortopédicas, desde 08/10/2026) y Zarpal (cama ortopédica, activo desde 03/11/2025). En DE: Flyingdogoriginal, bolso 3 en 1 (transportín + asiento + cama) desde 03/08/2026 | Nadie lo anuncia en ES: hueco o falta de demanda; no se puede distinguir sin prueba. Las marcas que anuncian venden camas de casa con ángulo ortopédico (alegación de salud a evitar) |
+| P06 funda coche perro | Bonotienda_Es (tienda Shopify) con 15 anuncios desde 26/08/2026 y versiones nuevas el 10/10/2026; vigoshop.es con funda de fondo rígido desde 25/09/2026 | Hay vendedores de impulso probando exactamente este producto en ES: competencia directa en Meta. Llevar ~6 semanas activos no prueba rentabilidad |
+| P25 packing cubes / cabina | Ángulo "no pagar equipaje" ya en uso: Get2Pack (desde 19/09/2026, nuevo 04/10), Valenni (compresión, 06/10), viaoliva (mochila de compresión al vacío 46 €), Firmellex (AeroPack 40×20×25, medida antigua), Smartviaje. Marcas: SUITSUIT (desde 02/2026), ONYX, Airportag, Nordace | Ángulo saturado por tiendas de impulso; diferenciarse con "cabe en 40×30×20" es débil |
+| P14 ovilladora | Caydo (marca) con creadoras de ganchillo (Vitadolls, TAnana Yarns) como "publi"; promociona ya ovilladora eléctrica | Un competidor con marca e influencers domina el nicho en ES |
+| P02/P24 quitapelos | Locochollos (quitapelusas eléctrico), CurlZip (guante quitapelos), PurePath, bolas para lavadora | Muchos vendedores de impulso; refuerza el aplazamiento |
+| P11 tablero puzzle | Solo apps de juegos (ruido) | Sin anunciantes del producto |
