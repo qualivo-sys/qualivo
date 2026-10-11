@@ -135,7 +135,7 @@ Formato de los vídeos: MP4 H.264 de menos de 2 MB para V1, `autoplay muted loop
 
 **Página de gracias y emails**
 - Página de gracias con el plazo real, qué pasa ahora (pedimos al proveedor y te enviamos el seguimiento) y el email de contacto.
-- Emails 1–3 de `anuncios-y-emails.md`, cambiando "colchoneta" por "funda" en el carrito abandonado.
+- Emails 1–3 de `anuncios-y-emails.md` (ya hablan de la funda desde el 11/10). Antes de activar los de carrito abandonado, ver el punto de consentimiento en `revision-red-team.md`.
 
 ## 5. Eventos de medición
 

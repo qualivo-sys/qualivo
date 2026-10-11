@@ -5,6 +5,8 @@ Producto principal: **funda de coche tipo hamaca, 44,90 €** (margen antes de p
 
 Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-emails.md`. Los textos de anuncio de ese archivo se escribieron para la colchoneta, así que no se usan en esta ronda (ver nota de políticas en el punto 2.1).
 
+> **Aviso de coherencia (red team, 11/10):** la sección final "Revisión del Agente Paid" **sustituye** a lo anterior donde lo contradiga. En concreto, quedan superados: los 3 conjuntos × 10 €/día (ahora **2 conjuntos × 15 €/día, A1 y A2**; **A3 pasa a la ronda 2**), la regla automática de los 75 € de §1.1 y §4.3 (ahora exige 0 compras **y** 0 pagos iniciados), la decisión por CPA de §4.3 (ahora por embudo; el CPA solo cuenta con ≥5 compras), los umbrales de CPM de §4.2, el plan B por CPM de §1.2, el corte de anuncios a 6 € (ahora 1.000 impresiones) y la subida de anuncios en D-1 de §1.5 (ahora D-2). Ver `revision-red-team.md`.
+
 **Leyenda:** [PRUEBA] = afirmación que no se publica hasta que la muestra la supere. HIPÓTESIS / ESTIMADO = cifra de referencia que no viene de datos propios. Se explica cómo está calculada y se sustituye por el dato real en cuanto haya gasto.
 
 ---
@@ -19,7 +21,7 @@ Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-email
    - Nunca mencionamos salud ni edad de la persona o del perro: ni "alergia al pelo", ni "si tienes más de 50", ni "perro mayor con problemas de cadera", ni "perro ansioso o mareado".
    - Nada de situación económica ("si no puedes pagar una tapicería nueva").
    - Verificar la redacción vigente de la política en el Centro de ayuda para empresas de Meta antes de publicar (VERIFICAR: la lista anterior es la que conocemos, puede haber cambiado).
-5. **Pendiente en `anuncios-y-emails.md`** (este documento no lo modifica). Antes de reutilizar nada de ese archivo hay que corregir dos cosas:
+5. **Pendiente en `anuncios-y-emails.md`** (RESUELTO el 11/10: el archivo ya no contiene estos textos y está alineado con este plan). Lo que había que corregir:
    - El cierre del guion "Envío gratis · 14 días de devolución" presenta un derecho legal como ventaja.
    - El texto "¿Viajas estas fiestas con tu perro?" interpela directamente a la persona.
 6. **Seguridad vial.** En ningún vídeo aparece el perro suelto con el coche en marcha. Si se graba en marcha, el perro lleva arnés enganchado al cinturón. La funda **no** se presenta como sistema de retención, en línea con la FAQ de la landing.
@@ -57,7 +59,7 @@ Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-email
 | Parámetro | Valor |
 |---|---|
 | Público | **Público Advantage+ (amplio)** en los 3 conjuntos. Sin intereses. Sugerencia de edad: 25–65 años, como pista, no como límite. |
-| Ubicación | **España**, excluyendo **Islas Baleares, provincia de Las Palmas, provincia de Santa Cruz de Tenerife, Ceuta y Melilla**. Ojo: `anuncios-y-emails.md` no excluía Baleares, y Baleares no es Península. |
+| Ubicación | **España**, excluyendo **Islas Baleares, provincia de Las Palmas, provincia de Santa Cruz de Tenerife, Ceuta y Melilla**. Baleares no es Península (`anuncios-y-emails.md` ya la excluye). |
 | Límites fijos | Edad mínima 18 años. Idioma: no se limita, porque el texto ya está en español. |
 | Por qué es amplio | El producto ya filtra al público: un vídeo de un perro con barro subiendo al coche solo engancha a quien tiene ese problema. En España, los intereses ("perros", "mascotas") son públicos de millones de personas, poco precisos y que inflan el CPM. Mantener el mismo público en los 3 conjuntos deja **el ángulo como única variable**. Los intereses se prueban, si acaso, en la ronda 2. |
 | Exclusiones de público | Ninguna en la ronda 1, porque no hay compradores. Cuando los haya, se excluye a quien ha comprado en los últimos 30 días. |
@@ -143,7 +145,7 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
 
 ### 2.3 Ángulo 1 · Barro: campo, río y playa
 
-**Conjunto:** `RP_R1_A1-barro`. **Destino:** ficha de la funda. **Cuerpo:** V6 (y V9 en H3).
+**Conjunto:** `RP_R1_A1-barro`. **Destino:** ficha de la funda. **Cuerpo:** V6 (en H3, V3 + los últimos 8 s de V6).
 
 #### A1H1 · Gancho visual
 - **Gancho 0–3 s (H01):** primer plano a ras de suelo de las patas con barro que se acercan a la puerta abierta del coche. Texto en pantalla: **"Vuelve del campo así… y quiere subir."**
@@ -186,7 +188,7 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
 
 ### 2.4 Ángulo 2 · Pelo y tapicería: el coche que quieres mantener limpio
 
-**Conjunto:** `RP_R1_A2-pelo`. **Destino:** ficha de la funda. **Cuerpo:** V7 (y V9 en H3).
+**Conjunto:** `RP_R1_A2-pelo`. **Destino:** ficha de la funda. **Cuerpo:** V7 (en H3, V8).
 
 #### A2H1 · Gancho visual
 - **Gancho 0–3 s (H05):** macro de pelos clavados en la tapicería y cinta adhesiva que los arranca. Texto: **"Pelo clavado: el clásico del sábado."**
@@ -233,7 +235,7 @@ Nota: "compara con el ancho de tu asiento" se refiere al coche, no a un atributo
 
 ### 2.5 Ángulo 3 · Viaje de Navidad + kit
 
-**Conjunto:** `RP_R1_A3-navidad-kit`. **Destino:** ficha con el **kit preseleccionado**. **Cuerpo:** V8.
+**Conjunto:** `RP_R1_A3-navidad-kit` (**ronda 2**, ver revisión final). **Destino:** ficha con el **kit preseleccionado** (ver `revision-red-team.md` sobre la preselección). **Cuerpo:** V9 (en H3, V5).
 
 #### A3H1 · Gancho de viaje
 - **Gancho 0–3 s (H09):** maletero lleno de maletas y regalos envueltos, y la colchoneta enrollada que entra en el último hueco. Texto: **"Navidad en casa de la familia, con perro."** En el cuerpo, el perro aparece con arnés enganchado al cinturón y el coche parado.
@@ -307,7 +309,7 @@ Formato: `MARCA_RONDA_NIVEL…`, con guiones bajos entre campos y guiones dentro
 |---|---|---|
 | Campaña | `RP_{ronda}_{objetivo}_{evento}_{presupuesto}_{geo}_{AAMM}` | `RP_R1_VENTAS_PUR_ABO_ES-PEN_2610` |
 | Conjunto | `RP_{ronda}_{ángulo}_{público}_{geo}_{€día}` | `RP_R1_A1-barro_BROAD_PEN_10EUR` |
-| Anuncio | `RP_{ronda}_{IDanuncio}_{vídeo}_{formatos}_{versión}` | `RP_R1_A1H3_V9-V6_916-45_v1` |
+| Anuncio | `RP_{ronda}_{IDanuncio}_{vídeo}_{formatos}_{versión}` | `RP_R1_A1H3_V3-V6_916-45_v1` |
 
 - Si se aplica el plan B, el evento cambia: `PUR` → `IC` → `ATC`.
 - Si se corrige un anuncio, se sube la versión (`v1` → `v2`). Nunca se reutiliza un nombre.

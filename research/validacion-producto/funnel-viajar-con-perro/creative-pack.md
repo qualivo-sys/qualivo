@@ -3,7 +3,7 @@
 Fecha: 2026-10-11 · Estado: **guion previo, sin muestra**. La muestra llega en 4–10 días.
 Producto principal: funda de coche impermeable tipo hamaca, 133×140 cm según el proveedor, a 44,90 €. Kit funda + colchoneta enrollable a 79,90 €.
 Rodaje: Maikel, con su móvil y su coche y, si se puede, un perro mediano o grande (propio o de un amigo). Presupuesto de producción ≈ 0 €.
-Documentos relacionados: `plan-prueba.md`, `anuncios-y-emails.md` y `landing.html`. La landing ya promete tres pruebas: instalación cronometrada en 2 coches, 250 ml de agua durante 30 min (también en costuras) y deslizamiento en tela y piel.
+Documentos relacionados: `plan-prueba.md`, `paid-meta-plan.md` (con su revisión final), `anuncios-y-emails.md` y `landing-v2.html` (`landing.html` es la v1, obsoleta). La landing v2 ya promete tres pruebas: instalación cronometrada en 2 coches, 250 ml de agua durante 30 min (también en costuras) y deslizamiento en tela y piel.
 
 ---
 
@@ -249,7 +249,7 @@ Normas comunes:
 
 ### Textos de apoyo (copy de Meta) para V6–V9
 
-Se reutilizan los de `anuncios-y-emails.md`, ajustados a la funda como producto principal. Se sustituye cualquier mención a "lavable", "impermeable" o "antideslizante" por el resultado concreto de la prueba (por ejemplo: "250 ml de agua, 30 minutos, papel seco: lo grabamos sin cortes"). Titular sugerido para V8: "La intentamos romper antes de venderla".
+Los textos vigentes están en `paid-meta-plan.md` §2.3–2.5 (resumen en `anuncios-y-emails.md`), ya escritos para la funda como producto principal. En la ronda 1 solo se usan los de A1 y A2; V9 (kit y Navidad) pasa a la ronda 2. Se sustituye cualquier mención a "lavable", "impermeable" o "antideslizante" por el resultado concreto de la prueba (por ejemplo: "250 ml de agua, 30 minutos, papel seco: lo grabamos sin cortes"). Titular sugerido para V8: "La intentamos romper antes de venderla".
 
 ---
 

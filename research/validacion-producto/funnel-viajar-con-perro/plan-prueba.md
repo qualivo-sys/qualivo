@@ -3,6 +3,8 @@
 Fecha: 2026-10-11 · Estado: **preparado, sin publicar**
 Marca provisional: **Ruta Perruna**. Los dominios rutaperruna.es y rutaperruna.com no resuelven en DNS, lo que sugiere que están libres (COMPROBADO 11/10). Antes de usar la marca hay que confirmarlo en un registrador y buscarla en la OEPM y la EUIPO.
 
+> **Aviso de coherencia (red team, 11/10):** las secciones 1 a 5 y 7 se escribieron cuando el producto principal era la colchoneta. Lo vigente es: **§8** (funda a 44,90 € como producto principal, kit a 79,90 €, la colchoneta no se vende sola) y `paid-meta-plan.md` con su **revisión final** (estructura, reglas de parada y de decisión). La tabla de oferta de §2 y las reglas de §5 se dejan como histórico; donde contradigan a §8 o a la revisión final, no aplican. Ver `revision-red-team.md`.
+
 ## 1. Qué queremos aprender
 
 | Pregunta | Métrica | Por qué importa |
@@ -29,8 +31,8 @@ Marca provisional: **Ruta Perruna**. Los dominios rutaperruna.es y rutaperruna.c
 ## 3. Estructura del funnel
 
 ```
-Anuncio Meta (vídeo/carrusel, 3 ángulos)
-  → Landing de producto (colchoneta) con bloque del kit
+Anuncio Meta (vídeo, 2 ángulos en la ronda 1: barro y pelo)
+  → Landing de producto (funda, landing-v2.html) con bloque del kit
     → Checkout (Shopify) con oferta del kit en el carrito
       → Página de gracias + email de confirmación con plazo real
         → Email de carrito abandonado (1 h y 24 h)
@@ -45,7 +47,7 @@ Anuncio Meta (vídeo/carrusel, 3 ángulos)
 | Muestra de A (y de B si cabe) | 25–45 € | Se compra el día 1 y se envía a tu dirección |
 | Tienda | ~0–35 € | Prueba gratuita de Shopify o plan Basic (precio en EUR PENDIENTE) |
 | Dominio | ~8–10 € | .es en OVHcloud 7,25 € el primer año (COMPROBADO) |
-| Publicidad Meta | **150 € máx.** | 3 conjuntos de anuncios × ~10 €/día durante ~5 días |
+| Publicidad Meta | **150 € máx.** | 2 conjuntos de anuncios × 15 €/día durante ~5 días (revisión final de `paid-meta-plan.md`) |
 | **Total** | **~185–240 €** | Quedan ~260–315 € para una segunda ronda o para cambiar de producto |
 
 ## 5. Reglas de decisión, fijadas antes de empezar
@@ -83,7 +85,7 @@ Margen antes de publicidad por pedido (ESTIMADO, pendiente del proveedor real): 
 |---|---|
 | 0 | Decisiones de Maikel (empresa, tienda, cobros); muestra pedida |
 | 1–2 | Montar la tienda con estos textos, las páginas legales, el píxel y la compra de prueba |
-| 2–3 | Grabar 3 vídeos cortos (o UGC con la muestra cuando llegue) |
+| 2–3 | Grabar los vídeos con la muestra (lista en `creative-pack.md`; en la ronda 1, 6 anuncios de A1 y A2) |
 | 3–8 | Campaña con 150 € |
 | 9 | Análisis y decisión con las reglas del punto 5 |
 
