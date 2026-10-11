@@ -95,3 +95,4 @@ Interés relativo, no volumen. 0 = por debajo del umbral de Google. Ancla "funda
 
 Lectura: los candidatos P04-P07 tienen búsqueda casi nula en España; si se prueban, dependen de compra por descubrimiento (Meta), no de búsqueda. Esto no es ausencia de demanda, pero sí ausencia de una señal independiente que la confirme.
 - 2026-10-11 · P25: medida del artículo gratuito de Ryanair 40×30×20 cm. Varias fuentes secundarias coinciden (travelextra.ie, theportugalnews.com, cabinzero.com) → DECLARADO. La ayuda oficial de Ryanair (help.ryanair.com) devuelve 403 → confirmación oficial PENDIENTE (revisar a mano en ryanair.com).
+- 2026-10-11 · Top 10 copiado a Notion (página privada "Validación de producto · e-commerce España (oct 2026)", base de datos "Top 10 candidatos"). Este registro sigue siendo la fuente con historial; Notion es la vista para analizar.
