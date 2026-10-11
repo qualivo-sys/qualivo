@@ -48,6 +48,12 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | P18 | Bolso bandolera de paseo para perro | Descartado | Media | Anclaje ES 18-23 € | 2026-10-11 |
 | P19 | Comedero de pájaros de ventana | Descartado | Media | Precio ES 14-28 €; demanda dudosa | 2026-10-11 |
 | P20 | Barra de pilates portátil | Descartado | Media | Genérico 12-28 € en Amazon.es | 2026-10-11 |
+| P21 | Colchoneta/cama de perro de viaje enrollable, impermeable y lavable (~100×70 cm) | Finalista · pedir muestra (requiere autorización) | Baja | Única con margen est. ≥15 € (a 44,90 €, solo con lote de 10-20 uds); competencia ES 14-30 € (Kiwoko 13,99 € COMPROBADO); zooplus.es sin enrollables (COMPROBADO); proveedor China MOQ 10 a 8,33 $ (DECLARADO) | 2026-10-11 |
+| P22 | Manta/funda de sofá impermeable para perro | Descartado | Media | Comoditizado: 14-20 € en España | 2026-10-11 |
+| P23 | Rascador de gato de pared/esquina | Descartado | Media | IKEA 5,99 € y Action 2,99 € | 2026-10-11 |
+| P24 | Kit quitapelusas manual para jerséis (peines madera/latón) | Aplazado (posible prueba regalo dic-ene) | Baja | Margen est. ~13,5 € con lote; eléctricos a 3-6 € en Action | 2026-10-11 |
+| P25 | Kit packing cubes para mochila gratuita 40×30×20 | Finalista secundario · investigar | Baja | "packing cubes" en fuerte subida en Trends ES 2026 (COMPROBADO); Action set 5 piezas ~5 € (COMPROBADO-buscador, precio ES PENDIENTE); medida 40×30×20 DECLARADA, falta fuente oficial | 2026-10-11 |
+| P26 | Organizadores de armario | Descartado | Media | IKEA, Action, Shein a 2-10 € | 2026-10-11 |
 
 ## Consumo de herramientas
 
@@ -57,6 +63,8 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | 2026-10-11 | Apify — estado del ciclo 17/9–16/10 | Gasto 29,98 $ de 30 $ (COMPROBADO); consumo previo por scrapers de Instagram ajenos a esta investigación | — |
 
 ## Decisiones
+
+- 2026-10-11: Primera recomendación: **ningún producto listo para prueba**. Resultado inconcluso. Finalistas: P21, P25, P06 (condicionado). Ver `informe-2026-10-11.md`.
 
 - 2026-10-11: No lanzar Apify en este ciclo (límite agotado). Ampliar límite a 40 $ queda en manos de Maikel.
 - 2026-10-11: P01 y P03 descartados para esta prueba por margen y precio de referencia en España.
