@@ -54,6 +54,10 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | P24 | Kit quitapelusas manual para jerséis (peines madera/latón) | Aplazado (posible prueba regalo dic-ene) | Baja | Margen est. ~13,5 € con lote; eléctricos a 3-6 € en Action | 2026-10-11 |
 | P25 | Kit packing cubes para mochila gratuita 40×30×20 | Finalista secundario · investigar | Baja | "packing cubes" en fuerte subida en Trends ES 2026 (COMPROBADO); Action set 5 piezas ~5 € (COMPROBADO-buscador, precio ES PENDIENTE); medida 40×30×20 DECLARADA, falta fuente oficial | 2026-10-11 |
 | P26 | Organizadores de armario | Descartado | Media | IKEA, Action, Shein a 2-10 € | 2026-10-11 |
+| P27 | Estante de ducha sin taladrar, de diseño (aluminio/acero lacado, adhesivo) | Investigar | Baja | 3 tiendas DE independientes lo anuncian (Designfabrik desde 23/04/2026, Metallbude, Nordesign); sin anuncios encontrados en ES con 2 búsquedas; oferta local 17-23 € (ManoMano, Leroy) y tesa; coste de proveedor PENDIENTE | 2026-10-11 |
+| P28 | Cesto/cama rascador de cuerda tejida para gatos | Descartado (arbitraje) | Media | Stimulicat/Celery Pets en US/GB desde 05-06/2026; ya copiado en ES por Vittasa, Silenxio, Alynoa y Más que Mascotas desde 20/09/2026 | 2026-10-11 |
+| P29 | Reclinatorio/asiento de jardín 2 en 1 | Aplazado (primavera) | Baja | Una tienda US (Aimerla) desde 11/12/2024; "diseño patentado" en el anuncio → revisar PI; sin anuncios encontrados en ES | 2026-10-11 |
+| P30 | Organizador de fregadero inox de diseño | Investigar solo si avanza P27 | Baja | Una tienda DE (Nordesign); sin anuncios encontrados en ES | 2026-10-11 |
 
 ## Consumo de herramientas
 
@@ -61,6 +65,7 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 |---|---|---|---|
 | 2026-10-11 | Apify (plan Starter, límite 30 $/mes) | Solo consultas de lectura a la API (cuenta, límites, catálogo). Ninguna ejecución | 0 $ |
 | 2026-10-11 | Apify — estado del ciclo 17/9–16/10 | Gasto 29,98 $ de 30 $ (COMPROBADO); consumo previo por scrapers de Instagram ajenos a esta investigación | — |
+| 2026-10-11 | Apify `apify/facebook-ads-scraper` | Barrido internacional US/GB/DE (run `6wnjV4d0DZqMpWP5W`, 830 cobrados) + contraste ES (run `RqRBNJqz6uFO2Ehin`, 19 cobrados) | 4,245 $ (tope del barrido 5 $); ciclo pasó de 31,11 $ a 36,05 $ |
 | 2026-10-11 | Apify `apify/facebook-ads-scraper` | Prueba 5 anuncios + extracción 12 búsquedas (203 anuncios cobrados) | 0,815 $ (límite subido por Maikel a 50 $) |
 
 ## Decisiones
@@ -112,3 +117,5 @@ Limitaciones: la búsqueda por palabras trae mucho ruido (relatos, apps); solo a
 | P14 ovilladora | Caydo (marca) con creadoras de ganchillo (Vitadolls, TAnana Yarns) como "publi"; promociona ya ovilladora eléctrica | Un competidor con marca e influencers domina el nicho en ES |
 | P02/P24 quitapelos | Locochollos (quitapelusas eléctrico), CurlZip (guante quitapelos), PurePath, bolas para lavadora | Muchos vendedores de impulso; refuerza el aplazamiento |
 | P11 tablero puzzle | Solo apps de juegos (ruido) | Sin anunciantes del producto |
+
+- 2026-10-11 · Barrido internacional: informe en `barrido-internacional-2026-10-11.md`. Lección: el cesto rascador de cuerda pasó de anunciarse en US/GB (mayo-junio) a copiarse en ES (septiembre-octubre) en semanas.
