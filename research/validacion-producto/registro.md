@@ -29,7 +29,7 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | ID | Producto | Estado | Confianza | Motivo principal | Fecha |
 |---|---|---|---|---|---|
 | P01 | Bolsas/cubos de compresión para maleta (sin bomba) | Descartado (para esta prueba) | Media | Mercantilizado en España (Action 3 uds 4,95 €; Amazon Basics ~12-14 €); Trends ES ≈0; temporada baja; margen est. ~7,5 € a 24,90 € | 2026-10-11 |
-| P02 | Quitapelos textil/mascota sin batería | En investigación | — | — | 2026-10-11 |
+| P02 | Quitapelos textil/mascota sin batería (rodillo con depósito) | Aplazado (posible marzo-abril) | Media | Equivalente a 5,19 € en AliExpress y 6,99 € en Zooplus (COMPROBADO); búsqueda ES ≈0 para "quitapelos"; temporada baja de muda; marca ChomChom registrada y litigio por copia de vídeo en EE. UU.; margen est. ~13,5 € en pack de 2 a 29,95 € | 2026-10-11 |
 | P03 | Organizador de maletero plegable | Descartado (para esta prueba) | Media | Precio ES 10-30 € (Action 9,99 € con nevera, Fortem ~25-30 €); voluminoso (~3 kg volumétricos); margen est. ≤5 € o negativo | 2026-10-11 |
 | P04 | Funda magnética antiescarcha parabrisas | Descartado salvo pack | Baja | Amazon.es desde 8,99 € (COMPROBADO-buscador); temporada corta | 2026-10-11 |
 | P05 | Limpiacristales magnético ajustable | Investigar con cautela | Baja | Demostración excelente; riesgo de incompatibilidad con grosor de cristal y devoluciones | 2026-10-11 |
