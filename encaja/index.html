@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Landing de prueba «Ver si tu negocio encaja» (11-oct-2026). Propuesta de Growth en el bus
+     (formulario por pasos + calendario bloqueado + precio delante + Raquel en directo), prueba
+     aparte de /diagnostico/ y de los formularios nativos. noindex y fuera del sitemap.
+     · Raquel en directo: POST /api/prueba/ (la barra final es obligatoria), igual que /prueba/.
+     · Formulario: POST /api/encaja/ → contacto en GHL con las etiquetas del funnel v2
+       (api/_funnel-v2.js) + landing-encaja. La regla de enrutado está aquí y en api/encaja.js:
+       si se cambia una, se cambia la otra.
+     · Calendario: el mismo de /gracias/, con utm_content=encaja; no existe en la página hasta
+       terminar las siete preguntas por el camino que encaja.
+     · Precio: fijo y entero en la página (sin la prueba A/B de /gracias/). -->
+<meta name="robots" content="noindex,nofollow">
+<title>Qualivo · Ver si tu negocio encaja</title>
+<meta name="description" content="Miramos tu recorrido entero, del anuncio a la venta, encontramos la fuga que más dinero te cuesta y la arreglamos. Con datos, no con opiniones.">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--tinta:#101319;--negro:#08090C;--crema:#FAF7F0;--teal:#0E7C74;--teal-claro:#27BDB1;--amarillo:#F4CC38;--gris:#5A5E66;--lila:#EFECFB;--error:#B42318;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-wrap:break-word}
+[hidden]{display:none !important}
+a{color:var(--teal)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{background:var(--negro);padding:12px 0}.top img{height:22px;display:block}
+h1,h2,h3{font-weight:900;letter-spacing:-.03em}
+h2{font-size:clamp(26px,4.4vw,40px);line-height:1.08;margin-bottom:12px}
+h3{font-size:clamp(19px,2.6vw,22px);line-height:1.2;letter-spacing:-.02em}
+.sec{padding:clamp(44px,7vw,80px) 0}
+.sec .intro{font-size:clamp(16.5px,2.2vw,18px);color:var(--gris);max-width:58ch}
+.lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:10px}
+:focus-visible{outline:3px solid var(--teal-claro);outline-offset:2px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:0 28px;border-radius:14px;background:var(--amarillo);color:var(--tinta);
+  font-family:inherit;font-weight:900;font-size:17px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 12px 32px rgba(244,204,56,.26);text-align:center;line-height:1.2}
+.btn[disabled]{opacity:.7;cursor:wait}
+.btn.ancho{width:100%}
+.btn-sec{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;border-radius:12px;background:transparent;color:var(--tinta);
+  border:1.5px solid rgba(16,19,25,.22);font-family:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
+
+/* hero */
+.hero{background:var(--negro);color:#fff;padding:clamp(44px,8vw,96px) 0 clamp(48px,8vw,96px);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.28),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(31px,5.6vw,58px);line-height:1.05;letter-spacing:-.035em;max-width:20ch}
+.hero h1 span{display:block;color:#C6CBD3;font-weight:800;font-size:.62em;letter-spacing:-.02em;line-height:1.2;margin-top:16px;max-width:34ch}
+.hero .bajada{margin:22px 0 30px;font-size:clamp(17px,2.4vw,20px);color:#C6CBD3;max-width:52ch}
+
+/* Raquel en directo */
+.raquel{background:var(--tinta);color:#fff}
+.raquel h2{color:#fff}
+.raquel .intro{color:#C6CBD3}
+.rq-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;align-items:start}
+@media(min-width:900px){.rq-grid{grid-template-columns:minmax(0,1fr) 420px;gap:56px}}
+.rq-puntos{margin-top:20px;display:grid;gap:10px;list-style:none}
+.rq-puntos li{font-size:15.5px;color:#C6CBD3;padding-left:26px;position:relative}
+.rq-puntos li::before{content:'';position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--teal-claro)}
+.caja{background:#fff;color:var(--tinta);border-radius:20px;padding:22px 20px 20px;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.caja .t{font-weight:900;font-size:20px;letter-spacing:-.02em;margin-bottom:4px}
+.caja .s{font-size:14.5px;color:var(--gris);margin-bottom:16px;line-height:1.45}
+
+/* campos */
+.campo{display:block;margin-bottom:12px}
+.campo span{display:block;font-size:13.5px;font-weight:800;color:var(--tinta);margin-bottom:6px}
+.campo input{width:100%;font:inherit;font-size:16px;min-height:52px;padding:12px 14px;border:1.5px solid #D9D5CC;border-radius:12px;background:#fff;color:var(--tinta)}
+.campo input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,124,116,.18)}
+.rgpd{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--gris);line-height:1.45;margin:6px 0 14px}
+.rgpd input{width:19px;height:19px;margin-top:1px;accent-color:var(--teal);flex-shrink:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.err{color:var(--error);font-size:14.5px;font-weight:700;margin:0 0 12px}
+.limite{font-size:12.5px;color:var(--gris);margin-top:10px;text-align:center}
+
+.estado{text-align:center;padding:10px 4px 4px}
+.estado .ico{width:68px;height:68px;border-radius:50%;background:rgba(14,124,116,.12);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.estado .ico.suena{animation:suena 1.2s ease-in-out infinite}
+@keyframes suena{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.estado .ico.suena{animation:none}html{scroll-behavior:auto}}
+.estado h3{margin-bottom:8px}
+.estado p{font-size:15.5px;color:var(--gris);margin-bottom:10px}
+.estado ul{text-align:left;margin:14px 0 0;padding:0 0 0 18px;font-size:15px;line-height:1.5}
+.estado ul li{margin:5px 0}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 0;min-height:52px;padding:0 18px;border-radius:14px;background:#25D366;color:#fff;font-weight:800;font-size:15.5px;text-decoration:none}
+
+/* dónde se pierde */
+.par{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:30px}
+@media(min-width:760px){.par{grid-template-columns:1fr 1fr}}
+.col{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px 22px}
+.col .lbl{margin-bottom:6px}
+.col h3{margin-bottom:12px}
+.col ul{list-style:none}
+.col li{font-size:16.5px;line-height:1.45;padding:11px 0 11px 28px;position:relative;border-top:1px solid rgba(16,19,25,.08);color:var(--tinta)}
+.col li:first-child{border-top:none}
+.col li::before{content:'';position:absolute;left:2px;top:19px;width:12px;height:3px;border-radius:2px;background:var(--amarillo)}
+.col.abajo{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.col.abajo .lbl{color:var(--amarillo)}
+.col.abajo li{color:#E3E6EB;border-color:rgba(255,255,255,.14)}
+.col.abajo li::before{background:var(--teal-claro)}
+
+/* qué hacemos cada mes */
+.mes{background:#fff}
+.planes{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:30px}
+@media(min-width:900px){.planes{grid-template-columns:repeat(3,1fr)}}
+.plan{border:1px solid rgba(16,19,25,.12);border-radius:18px;padding:24px 22px;background:var(--crema);display:flex;flex-direction:column}
+.plan.primero{border:2px solid var(--tinta);background:#fff}
+.plan .cuando{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--gris)}
+.plan h3{margin:6px 0 4px}
+.plan .precio{font-size:clamp(24px,3.4vw,30px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin:6px 0 14px}
+.plan .precio small{font-size:15px;font-weight:800;color:var(--gris);letter-spacing:0;white-space:nowrap}
+.plan ol,.plan ul{list-style:none;display:grid;gap:9px}
+.plan li{font-size:15.5px;line-height:1.45;padding-left:24px;position:relative}
+.plan ul li::before{content:'✓';position:absolute;left:0;top:0;color:var(--teal);font-weight:900}
+.plan ol li b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:1px}
+.plan ol li{padding-left:0}
+.plan .aparte{margin-top:12px;font-size:14px;color:var(--gris)}
+.terceros{margin-top:18px;font-size:15.5px;color:var(--tinta);background:var(--crema);border-left:5px solid var(--amarillo);border-radius:12px;padding:14px 18px}
+
+/* prueba */
+.casos{background:var(--tinta);color:#fff}
+.casos h2{color:#fff}
+.caso{display:block;margin-top:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:24px 22px;color:#fff;text-decoration:none;max-width:720px}
+.caso:hover{border-color:rgba(244,204,56,.6)}
+.caso .ti{font-size:clamp(19px,2.8vw,24px);font-weight:900;letter-spacing:-.02em;line-height:1.25}
+.caso .le{display:inline-block;margin-top:12px;font-weight:800;color:var(--amarillo);font-size:15px}
+.demo{margin-top:16px;font-size:15px;color:#C6CBD3}
+.demo a{color:var(--teal-claro);font-weight:800}
+
+/* garantía */
+.garantia{background:var(--amarillo)}
+.garantia .caja-g{max-width:760px}
+.garantia p{font-size:clamp(17.5px,2.4vw,21px);line-height:1.5;margin-top:6px}
+.garantia p+p{font-weight:900;margin-top:16px}
+
+/* para quién */
+.quien .si{background:rgba(14,124,116,.08);border-color:rgba(14,124,116,.28)}
+.quien .si h3{color:var(--teal)}
+.quien .no h3{color:var(--gris)}
+.quien li::before{content:'✓';background:none;width:auto;height:auto;top:10px;left:0;color:var(--teal);font-weight:900}
+.quien .no li::before{content:'✕';color:var(--error)}
+
+/* formulario por pasos */
+.form{background:var(--negro);color:#fff}
+.form h2{color:#fff}
+.form .intro{color:#AEB5BF}
+.f-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:28px;align-items:start}
+@media(min-width:900px){.f-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+.caja.pasos{padding:24px 20px 22px}
+.progreso{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.progreso .n{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--teal);white-space:nowrap}
+.progreso .barra{flex:1;height:6px;border-radius:99px;background:#ECE8DF;overflow:hidden}
+.progreso .barra i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s ease}
+fieldset{border:none;min-width:0}
+legend{font-size:clamp(19px,2.6vw,22px);font-weight:900;letter-spacing:-.02em;line-height:1.25;margin-bottom:14px;padding:0}
+legend:focus{outline:none}
+.precio-d{display:block;font-size:.85em;margin-bottom:6px}
+.opciones{display:grid;gap:9px;margin-bottom:16px}
+.op{display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 14px;border:1.5px solid #D9D5CC;border-radius:12px;cursor:pointer;font-size:16px;font-weight:600;background:#fff}
+.op input{width:20px;height:20px;accent-color:var(--teal);flex-shrink:0;margin:0}
+.op:has(input:checked){border-color:var(--teal);background:rgba(14,124,116,.07)}
+.op:has(input:focus-visible){outline:3px solid var(--teal-claro);outline-offset:2px}
+.nav-pasos{display:flex;gap:10px;align-items:stretch}
+.nav-pasos .btn{flex:1;min-width:0}
+.lado{display:grid;gap:14px}
+.bloqueado{border:1.5px dashed rgba(255,255,255,.28);border-radius:16px;padding:22px 20px;color:#C6CBD3;display:flex;gap:14px;align-items:flex-start}
+.bloqueado .cand{flex-shrink:0;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.bloqueado b{display:block;color:#fff;font-size:16.5px;margin-bottom:2px}
+.bloqueado p{font-size:15px}
+.nota-precio{font-size:15px;color:#AEB5BF;border-left:4px solid var(--amarillo);padding:4px 0 4px 14px}
+.resultado h3{font-size:clamp(22px,3.2vw,28px);margin-bottom:10px}
+.resultado p{font-size:16px;color:var(--gris);margin-bottom:12px}
+.resultado ol{font-size:15px;padding-left:20px;margin:6px 0 14px;color:var(--tinta);display:grid;gap:4px}
+#cal{margin-top:14px;background:#fff;border:1px solid rgba(16,19,25,.12);border-radius:14px;overflow:visible}
+#cal iframe{width:100%;min-height:760px;border:0;display:block}
+.cal-pantalla{display:block;margin:10px 0 0;padding:14px 16px;border-radius:12px;background:var(--tinta);color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;text-align:center;line-height:1.35}
+.reservado{margin-top:14px;font-size:15px}
+.reservado a{font-weight:800}
+
+/* faq */
+.faq details{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;margin-bottom:10px;max-width:760px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;color:var(--teal);line-height:1;flex-shrink:0}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 20px 18px;font-size:15.5px;color:var(--gris)}
+
+.pie{background:var(--negro);color:#6C7480;padding:24px 0 32px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie .wrap{display:flex;justify-content:space-between;gap:12px 18px;flex-wrap:wrap}
+.pie a{color:#9AA2AE;text-decoration:none;margin-right:16px}
+
+/* banner de cookies (assets/consent.js); copiado de assets/styles.css, que esta página no carga */
+#qv-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:200;display:flex;justify-content:center}
+#qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:20px 22px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;justify-content:space-between}
+#qv-cookies p{margin:0;font-size:14px;line-height:1.55;color:#C7D3E0;max-width:46ch}
+#qv-cookies a{color:#B7F0EA;text-decoration:underline}
+#qv-cookies .qv-ck-botones{display:flex;gap:10px}
+#qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font-family:var(--display);font-weight:700;font-size:14px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
+#qv-cookies #qv-ck-si{background:var(--teal-claro);border-color:var(--teal-claro);color:#04231F}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" width="110" height="22" style="width:auto"></div></div>
+
+<main>
+<header class="hero">
+  <div class="wrap">
+    <h1>¿Te entran leads que no compran? <span>A veces el problema está en a quién atraes. A veces, en lo que pasa después.</span></h1>
+    <p class="bajada">Miramos tu recorrido entero, del anuncio a la venta, encontramos la fuga que más dinero te cuesta y la arreglamos. Con datos, no con opiniones.</p>
+    <a href="#encaja" class="btn">Ver si mi negocio encaja&nbsp;→</a>
+  </div>
+</header>
+
+<section class="sec raquel" id="raquel" aria-labelledby="rq-t">
+  <div class="wrap rq-grid">
+    <div>
+      <p class="lbl" style="color:var(--teal-claro)">En directo</p>
+      <h2 id="rq-t">¿Quieres oír cómo atenderíamos a tus clientes? Pon tu móvil y te llama Raquel ahora.</h2>
+      <p class="intro">Raquel lee tu web y te llama en menos de un minuto como si fueras un cliente tuyo. Pregúntale lo que te preguntan a ti: precios, horarios, una cita.</p>
+      <ul class="rq-puntos">
+        <li>Al colgar te llega el correo que recibirías tú como dueño, con el resumen de la llamada.</li>
+        <li>Llamadas de 9:00 a 21:00. Fuera de ese horario, te llama al abrir.</li>
+      </ul>
+    </div>
+    <div class="caja" id="rq-caja">
+      <form id="rq" novalidate>
+        <p class="t">Que me llame Raquel.</p>
+        <p class="s">Te llamamos a este número solo para la prueba.</p>
+        <label class="campo"><span>Tu nombre</span><input type="text" name="nombre" autocomplete="given-name" required></label>
+        <label class="campo"><span>Tu móvil</span><input type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX" required></label>
+        <label class="campo"><span>Tu email (para el correo del dueño)</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="campo"><span>La web de tu negocio</span><input type="text" name="web" placeholder="tunegocio.com" autocomplete="url" required></label>
+        <label class="rgpd"><input type="checkbox" name="rgpd" required><span>Acepto que me llaméis a este número para la prueba y me mandéis el correo de la demo. <a href="/privacidad/" target="_blank" rel="noopener">Política de privacidad</a>.</span></label>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="err" id="rq-err" role="alert" hidden></p>
+        <button type="submit" class="btn ancho" id="rq-b">📞 Que me llame ahora →</button>
+        <p class="limite">Gratis · hasta 5 pruebas por móvil y día</p>
+      </form>
+
+      <div class="estado" id="rq-ok" hidden tabindex="-1">
+        <div class="ico suena" aria-hidden="true">📞</div>
+        <h3>Te va a sonar el móvil.</h3>
+        <p id="rq-ok-txt">Estamos leyendo tu web. En menos de un minuto te llama Raquel.</p>
+        <ul>
+          <li><b>Cuando llame:</b> haz de cliente. Pregúntale por un servicio, el precio, el horario. Pide cita.</li>
+          <li><b>Al colgar:</b> mira el correo. Te llega lo que verías tú como dueño.</li>
+          <li><b>¿También por WhatsApp?</b> Escríbele tú, como haría un cliente, y te contesta al momento.</li>
+        </ul>
+        <a class="btn-wa" id="rq-wa" href="https://wa.me/34647118491" target="_blank" rel="noopener">💬 Escribirle por WhatsApp como cliente</a>
+      </div>
+
+      <div class="estado" id="rq-tarde" hidden tabindex="-1">
+        <div class="ico" aria-hidden="true">🌙</div>
+        <h3>Ahora es tarde para llamarte.</h3>
+        <p>Las llamadas de prueba salen de 9:00 a 21:00. Te llamamos <b id="rq-tarde-h">a partir de las 9:00</b>, así que ten el móvil a mano.</p>
+      </div>
+
+      <div class="estado" id="rq-ko" hidden tabindex="-1">
+        <div class="ico" aria-hidden="true">✋</div>
+        <h3 id="rq-ko-t">No hemos podido llamarte.</h3>
+        <p id="rq-ko-p">Escríbenos a <a href="mailto:hola@qualivo.io">hola@qualivo.io</a> y lo hacemos a mano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="fuga-t">
+  <div class="wrap">
+    <h2 id="fuga-t">Dónde se pierde el negocio.</h2>
+    <p class="intro">Casi nunca en un solo sitio. Por eso miramos las dos mitades del recorrido.</p>
+    <div class="par">
+      <div class="col">
+        <p class="lbl">Arriba · atracción</p>
+        <h3>Antes de que llegue el lead</h3>
+        <ul>
+          <li>Anuncios que atraen curiosos.</li>
+          <li>Mensajes que no dicen para quién es.</li>
+          <li>Meta optimizando hacia quien rellena formularios, no hacia quien compra.</li>
+        </ul>
+      </div>
+      <div class="col abajo">
+        <p class="lbl">Abajo · después del lead</p>
+        <h3>Cuando ya ha llegado</h3>
+        <ul>
+          <li>Contestar tarde.</li>
+          <li>Seguimiento que depende de acordarse.</li>
+          <li>Plantones.</li>
+          <li>Presupuestos sin siguiente paso.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec mes" aria-labelledby="mes-t">
+  <div class="wrap">
+    <h2 id="mes-t">Qué hacemos cada mes.</h2>
+    <p class="intro">Precios sin IVA.</p>
+    <div class="planes">
+      <div class="plan primero">
+        <p class="cuando">Primer mes</p>
+        <h3>Sprint</h3>
+        <p class="precio">1.200 € <small>+ IVA</small></p>
+        <ol>
+          <li><b>Semana 1</b>Mapa del recorrido y fuga principal.</li>
+          <li><b>Semana 2</b>Primera mejora funcionando.</li>
+          <li><b>Semana 3</b>Medición.</li>
+          <li><b>Semana 4</b>Decisión.</li>
+        </ol>
+      </div>
+      <div class="plan">
+        <p class="cuando">Después</p>
+        <h3>Continuidad</h3>
+        <p class="precio">desde 1.000 € <small>/mes + IVA</small></p>
+        <ul>
+          <li>WhatsApp en minutos y llamada de Raquel cuando no contestan.</li>
+          <li>Confirmación, preparación y recordatorios de cada reunión.</li>
+          <li>Seguimiento de presupuestos.</li>
+          <li>Intelligence, con lo que hay que hacer cada semana.</li>
+          <li>Una mejora probada cada mes.</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <p class="cuando">Después, con anuncios</p>
+        <h3>Continuidad con anuncios</h3>
+        <p class="precio">1.200 € <small>/mes + IVA</small></p>
+        <ul>
+          <li>Todo lo anterior.</li>
+          <li>Gestión de una plataforma de anuncios.</li>
+          <li>Hasta cuatro adaptaciones de piezas al mes, con tus materiales.</li>
+        </ul>
+        <p class="aparte">Grabación o producción nueva, aparte.</p>
+      </div>
+    </div>
+    <p class="terceros">La inversión en anuncios y los costes de terceros (WhatsApp, llamadas) van aparte y se dicen antes de empezar.</p>
+  </div>
+</section>
+
+<section class="sec casos" aria-labelledby="casos-t">
+  <div class="wrap">
+    <h2 id="casos-t">Un caso publicado.</h2>
+    <a class="caso" href="/casos/nuria-roure/">
+      <span class="ti">Caso Nuria Roure: 2.000 € de inversión → 12.900 € en ventas atribuibles al sistema</span><br>
+      <span class="le">Leer el caso →</span>
+    </a>
+    <p class="demo">Y así se ve Intelligence por dentro: <a href="/intelligence/?sector=clinica&amp;empresa=Cl%C3%ADnica%20Ejemplo&amp;objetivo=todo">demo con datos de ejemplo →</a></p>
+  </div>
+</section>
+
+<section class="sec garantia" aria-labelledby="gar-t">
+  <div class="wrap">
+    <div class="caja-g">
+      <h2 id="gar-t">La garantía.</h2>
+      <p>Si al acabar el Sprint no te hemos entregado el diagnóstico, la medición y la mejora funcionando por algo que dependa de nosotros, eliges: 15 días más sin coste o te devolvemos lo no entregado.</p>
+      <p>No prometemos ventas: nadie honesto puede.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec quien" aria-labelledby="quien-t">
+  <div class="wrap">
+    <h2 id="quien-t">Para quién es.</h2>
+    <div class="par">
+      <div class="col si">
+        <h3>Sí, si…</h3>
+        <ul>
+          <li>Ya vendes.</li>
+          <li>Te entran solicitudes cada mes.</li>
+          <li>Puedes atender más clientes.</li>
+          <li>El valor de un cliente lo permite.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>No, si…</h3>
+        <ul>
+          <li>Estás validando qué vender.</li>
+          <li>No puedes atender a quien llega.</li>
+          <li>Solo buscas el lead más barato.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec form" id="encaja" aria-labelledby="encaja-t">
+  <div class="wrap">
+    <h2 id="encaja-t">Ver si tu negocio encaja.</h2>
+    <p class="intro">Siete preguntas, menos de un minuto. Si encaja, eliges hora aquí mismo. Si no, te lo decimos sin rodeos.</p>
+    <div class="f-grid">
+      <div class="caja pasos" id="f-caja">
+        <form id="f" novalidate>
+          <div class="progreso" aria-hidden="true"><span class="n" id="f-n">Paso 1 de 7</span><span class="barra"><i id="f-barra"></i></span></div>
+          <p class="hp" id="f-vivo" aria-live="polite"></p>
+
+          <fieldset data-paso="1">
+            <legend tabindex="-1">¿Con quién hablamos?</legend>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Empresa</span><input type="text" name="empresa" autocomplete="organization" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Móvil</span><input type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="6XX XXX XXX" required></label>
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          </fieldset>
+
+          <fieldset data-paso="2" hidden>
+            <legend tabindex="-1">¿Cuántas solicitudes te entran al mes?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="volumen" value="<20">Menos de 20</label>
+              <label class="op"><input type="radio" name="volumen" value="20-49">De 20 a 49</label>
+              <label class="op"><input type="radio" name="volumen" value="50-99">De 50 a 99</label>
+              <label class="op"><input type="radio" name="volumen" value="100-250">De 100 a 250</label>
+              <label class="op"><input type="radio" name="volumen" value="250+">Más de 250</label>
+            </div>
+          </fieldset>
+
+          <fieldset data-paso="3" hidden>
+            <legend tabindex="-1">¿Cuánto vale un cliente para ti?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="ticket" value="<300">Menos de 300 €</label>
+              <label class="op"><input type="radio" name="ticket" value="300-1000">De 300 a 1.000 €</label>
+              <label class="op"><input type="radio" name="ticket" value="1000-3000">De 1.000 a 3.000 €</label>
+              <label class="op"><input type="radio" name="ticket" value="3000+">Más de 3.000 €</label>
+            </div>
+          </fieldset>
+
+          <fieldset data-paso="4" hidden>
+            <legend tabindex="-1">¿Quién decide?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="decisor" value="yo">Yo</label>
+              <label class="op"><input type="radio" name="decisor" value="socio">Yo, con un socio</label>
+              <label class="op"><input type="radio" name="decisor" value="otro">Otra persona</label>
+            </div>
+          </fieldset>
+
+          <fieldset data-paso="5" hidden>
+            <legend tabindex="-1">¿Cuándo quieres resolverlo?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="momento" value="mes">Este mes</label>
+              <label class="op"><input type="radio" name="momento" value="1-3">En 1-3 meses</label>
+              <label class="op"><input type="radio" name="momento" value="mirando">Solo estoy mirando</label>
+            </div>
+          </fieldset>
+
+          <fieldset data-paso="6" hidden>
+            <legend tabindex="-1">¿Dónde crees que se te escapa?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="dolor" value="captacion">No entran suficientes</label>
+              <label class="op"><input type="radio" name="dolor" value="seguimiento">Entran, pero no compran</label>
+              <label class="op"><input type="radio" name="dolor" value="nose">No lo sé</label>
+            </div>
+          </fieldset>
+
+          <fieldset data-paso="7" hidden>
+            <legend tabindex="-1"><span class="precio-d">Los proyectos empiezan en 1.200 € + IVA.</span>¿Encaja ahora?</legend>
+            <div class="opciones">
+              <label class="op"><input type="radio" name="precio" value="si">Sí</label>
+              <label class="op"><input type="radio" name="precio" value="depende">Necesito entenderlo mejor</label>
+              <label class="op"><input type="radio" name="precio" value="no">No</label>
+            </div>
+          </fieldset>
+
+          <p class="err" id="f-err" role="alert" hidden></p>
+          <div class="nav-pasos">
+            <button type="button" class="btn-sec" id="f-atras" hidden>← Atrás</button>
+            <button type="submit" class="btn" id="f-sig">Continuar →</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="lado" id="f-lado">
+        <div class="bloqueado" id="cal-bloqueado">
+          <span class="cand" aria-hidden="true">🔒</span>
+          <div><b>El calendario se abre al terminar.</b><p>Primero vemos si tiene sentido. Si encaja, eliges hora aquí mismo; si no, te lo decimos.</p></div>
+        </div>
+        <p class="nota-precio">Los proyectos empiezan en 1.200 € + IVA. Te lo decimos antes de que reserves, no en la llamada.</p>
+      </div>
+
+      <div class="caja resultado" id="res-si" hidden tabindex="-1">
+        <p class="lbl">Encaja</p>
+        <h3>Elige hora.</h3>
+        <p>Son 30 minutos por videollamada. Miramos tu recorrido con tus números delante y te llevas un plan escrito, lo hagas con nosotros o no.</p>
+        <ol>
+          <li>Reservas la hora que mejor te venga.</li>
+          <li>Te confirmamos por WhatsApp y por correo.</li>
+          <li>Si decide otra persona, que venga: así hay un plan y no dos.</li>
+        </ol>
+        <div id="cal"></div>
+        <p class="reservado"><a href="/confirmado/">¿Ya has reservado? Prepara la reunión en dos minutos →</a></p>
+      </div>
+
+      <div class="caja resultado" id="res-no" hidden tabindex="-1">
+        <p class="lbl" style="color:var(--gris)">Sinceramente</p>
+        <h3>Ahora mismo probablemente no te compensaría pagar por Qualivo.</h3>
+        <p id="res-no-motivo"></p>
+        <p>Tres cosas que sí puedes mirar hoy sin nosotros:</p>
+        <ol>
+          <li>Cuánto tardas en contestar a un contacto nuevo. Si pasa de una hora, ahí ya pierdes.</li>
+          <li>Cuántos presupuestos del mes pasado siguen sin respuesta.</li>
+          <li>De qué canal salió tu último cliente. El último cliente, no el último lead.</li>
+        </ol>
+        <p>No te vamos a escribir para insistir. Si cambia, escríbenos a <a href="mailto:hola@qualivo.io">hola@qualivo.io</a> y lo miramos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" aria-labelledby="faq-t">
+  <div class="wrap">
+    <h2 id="faq-t">Lo que suelen preguntar.</h2>
+    <div style="margin-top:24px">
+      <details><summary>Ya tengo agencia.</summary><p>Podemos trabajar con ella. Medimos el recorrido entero y os decimos dónde se pierde.</p></details>
+      <details><summary>Ya probé Meta y no funcionó.</summary><p>Casi siempre falla a quién se le habla o lo que pasa después. Por eso miramos las dos cosas.</p></details>
+      <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No necesariamente. Empezamos por lo que ya usas.</p></details>
+      <details><summary>¿La IA habla sola con mis clientes?</summary><p>Con límites, supervisión y paso a una persona cuando hace falta. Los mensajes y los límites se acuerdan contigo antes de empezar.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function track(n, d) { try { if (window.qvTrack) window.qvTrack(n, d || {}); } catch (e) {} }
+
+  /* ---------- Raquel en directo: igual que /prueba/ (POST /api/prueba/, con barra final) ---------- */
+  (function () {
+    var f = document.getElementById('rq'), err = document.getElementById('rq-err'), b = document.getElementById('rq-b');
+    var TXT = b.textContent;
+    function ver(id) {
+      ['rq', 'rq-ok', 'rq-tarde', 'rq-ko'].forEach(function (x) { document.getElementById(x).hidden = x !== id; });
+      if (id !== 'rq') document.getElementById(id).focus();
+    }
+    function fallo(t) { err.textContent = t; err.hidden = false; b.disabled = false; b.textContent = TXT; }
+    function aEncaja(d) {
+      // Lo que ya ha escrito aquí no tiene que volver a escribirlo en el formulario de abajo.
+      var g = document.getElementById('f').elements;
+      if (!g.nombre.value) g.nombre.value = d.nombre;
+      if (!g.email.value) g.email.value = d.email;
+      if (!g.telefono.value) g.telefono.value = d.telefono;
+    }
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault(); err.hidden = true;
+      if (f.elements.website.value) return;
+      var d = { nombre: f.elements.nombre.value.trim(), telefono: f.elements.telefono.value.trim(), email: f.elements.email.value.trim(), web: f.elements.web.value.trim(), utm: location.search || '' };
+      if (d.nombre.length < 2) return fallo('Dinos tu nombre.');
+      if (!/^(\+?34)?[\s-]*[67](\s*\d){8}$/.test(d.telefono.replace(/[().-]/g, ''))) return fallo('Necesitamos un móvil español para llamarte.');
+      if (!EMAIL_RE.test(d.email)) return fallo('Ese email no parece correcto.');
+      if (!d.web) return fallo('Sin tu web no podemos preparar la llamada.');
+      if (!f.elements.rgpd.checked) return fallo('Necesitamos tu permiso para llamarte.');
+      b.disabled = true; b.textContent = 'Preparando la llamada…';
+      track('encaja_prueba_enviar', {});
+      fetch('/api/prueba/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          if (r.ok && r.estado === 'llamando') {
+            if (r.agente && r.negocio) document.getElementById('rq-ok-txt').textContent = 'Te llama ' + r.agente + ', la agente de ' + r.negocio + '. Cógelo y haz de cliente.';
+            var saludo = 'Hola, quería información' + (r.negocio ? ' sobre ' + r.negocio : '') + '.';
+            document.getElementById('rq-wa').href = 'https://wa.me/34647118491?text=' + encodeURIComponent(saludo);
+            aEncaja(d); ver('rq-ok'); track('encaja_prueba_llamando', {});
+          } else if (r.ok && r.estado === 'fuera_horario') {
+            document.getElementById('rq-tarde-h').textContent = 'a partir de las ' + (r.desde || 9) + ':00';
+            aEncaja(d); ver('rq-tarde');
+          } else if (r.error === 'ya_hoy') {
+            document.getElementById('rq-ko-t').textContent = 'Hoy ya te hemos llamado.';
+            document.getElementById('rq-ko-p').innerHTML = 'Ya has hecho hoy todas las pruebas de este móvil (hasta 5 por día). Si quieres verlo con tu caso, <a href="#encaja">mira si tu negocio encaja</a> y elige hora.';
+            ver('rq-ko');
+          } else if (r.error === 'tope') {
+            document.getElementById('rq-ko-t').textContent = 'Hoy se han acabado las pruebas.';
+            document.getElementById('rq-ko-p').innerHTML = 'Vuelve mañana o <a href="#encaja">mira si tu negocio encaja</a> y lo vemos con tu caso.';
+            ver('rq-ko');
+          } else if (r.error === 'telefono') fallo('Necesitamos un móvil español para llamarte.');
+          else if (r.error === 'email') fallo('Ese email no parece correcto.');
+          else ver('rq-ko');
+        })
+        .catch(function () { ver('rq-ko'); });
+    });
+  })();
+
+  /* ---------- Formulario por pasos con el calendario bloqueado ---------- */
+  var CALENDARIO = 'https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl';
+  var f = document.getElementById('f');
+  var pasos = Array.prototype.slice.call(f.querySelectorAll('fieldset[data-paso]'));
+  var TOTAL = pasos.length;
+  var actual = 1, empezado = false, enviando = false;
+  var err = document.getElementById('f-err'), sig = document.getElementById('f-sig'), atras = document.getElementById('f-atras');
+  var RADIOS = { 2: 'volumen', 3: 'ticket', 4: 'decisor', 5: 'momento', 6: 'dolor', 7: 'precio' };
+
+  function elegido(n) { var r = f.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ''; }
+  function telefonoOk(t) {
+    t = String(t || '').replace(/[\s\-().]/g, '');
+    return /^(\+34|0034|34)?[6789]\d{8}$/.test(t) || /^(\+|00)[1-9]\d{7,14}$/.test(t);
+  }
+
+  function mostrar(n, foco) {
+    actual = n;
+    pasos.forEach(function (p) { p.hidden = +p.getAttribute('data-paso') !== n; });
+    document.getElementById('f-n').textContent = 'Paso ' + n + ' de ' + TOTAL;
+    document.getElementById('f-barra').style.width = Math.round((n - 1) / TOTAL * 100) + '%';
+    document.getElementById('f-vivo').textContent = 'Paso ' + n + ' de ' + TOTAL;
+    atras.hidden = n === 1;
+    sig.textContent = n === TOTAL ? 'Ver si encaja →' : 'Continuar →';
+    err.hidden = true;
+    if (foco) pasos[n - 1].querySelector('legend').focus();
+  }
+  function fallo(t) { err.textContent = t; err.hidden = false; }
+
+  function valida(n) {
+    var e = f.elements;
+    if (n === 1) {
+      if (e.nombre.value.trim().length < 2) return 'Dinos tu nombre.';
+      if (e.empresa.value.trim().length < 2) return 'Dinos el nombre de tu empresa.';
+      if (!EMAIL_RE.test(e.email.value.trim())) return 'Ese email no parece correcto.';
+      if (!telefonoOk(e.telefono.value)) return 'Ese móvil no parece correcto.';
+      if (!e.rgpd.checked) return 'Necesitamos que aceptes la política de privacidad.';
+      return '';
+    }
+    return elegido(RADIOS[n]) ? '' : 'Elige una opción.';
+  }
+
+  // La misma regla que api/encaja.js (enrutar).
+  function enrutar(r) {
+    if (r.precio === 'no' || r.momento === 'mirando' || (r.volumen === '<20' && r.ticket === '<300')) return 'no-encaja';
+    if (r.volumen !== '<20') return 'encaja';
+    return 'revisar'; // < 20 solicitudes con ticket ≥ 300 €: la regla no lo descarta, ve el calendario.
+  }
+
+  f.addEventListener('focusin', function () { if (!empezado) { empezado = true; track('encaja_form_start', {}); } });
+  atras.addEventListener('click', function () { if (actual > 1) mostrar(actual - 1, true); });
+
+  f.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (enviando) return;
+    var m = valida(actual);
+    if (m) return fallo(m);
+    track('encaja_paso_' + actual, {});
+    if (actual < TOTAL) return mostrar(actual + 1, true);
+    if (f.elements.website.value) return;
+    terminar();
+  });
+
+  function terminar() {
+    var e = f.elements;
+    var d = {
+      nombre: e.nombre.value.trim(), empresa: e.empresa.value.trim(), email: e.email.value.trim(), telefono: e.telefono.value.trim(),
+      volumen: elegido('volumen'), ticket: elegido('ticket'), decisor: elegido('decisor'), momento: elegido('momento'),
+      dolor: elegido('dolor'), precio: elegido('precio'), utm: location.search || '', website: e.website.value
+    };
+    var estado = enrutar(d);
+    enviando = true; sig.disabled = true; sig.textContent = 'Un segundo…';
+    // El resultado se enseña aunque el envío falle: el calendario guarda el contacto
+    // al reservar y el mensaje de «no encaja» no depende del CRM.
+    var listo = false;
+    function seguir() {
+      if (listo) return; listo = true;
+      if (estado === 'no-encaja') noEncaja(d); else encaja(d, estado);
+    }
+    var t = setTimeout(seguir, 8000);
+    fetch('/api/encaja/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+      .catch(function () {})
+      .then(function () { clearTimeout(t); seguir(); });
+  }
+
+  function cerrarFormulario() {
+    document.getElementById('f-caja').hidden = true;
+    document.getElementById('f-lado').hidden = true;
+  }
+
+  function encaja(d, estado) {
+    cerrarFormulario();
+    var r = document.getElementById('res-si');
+    r.hidden = false;
+    calendario(d);
+    r.focus();
+    track('encaja_resultado', { estado: estado });
+    // Píxel de Meta (assets/consent.js, solo con consentimiento). Mismo event_id que la Conversions API de api/encaja.js.
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: 'landing-encaja' }, { eventID: 'encaja-' + d.email.toLowerCase() }); } catch (x) {}
+  }
+
+  function noEncaja(d) {
+    cerrarFormulario();
+    var motivo = d.precio === 'no'
+      ? 'Nos has dicho que ahora el precio no encaja, y no tiene sentido forzarlo.'
+      : d.momento === 'mirando'
+        ? 'Nos has dicho que de momento solo estás mirando. Esto rinde cuando se puede poner en marcha pronto, y no queremos ocupar tu tiempo antes.'
+        : 'Con menos de 20 solicitudes al mes y clientes de menos de 300 €, lo que cuesta el sistema se comería casi todo lo que recuperaría.';
+    document.getElementById('res-no-motivo').textContent = motivo;
+    var r = document.getElementById('res-no');
+    r.hidden = false; r.focus();
+    track('encaja_resultado', { estado: 'no-encaja' });
+  }
+
+  function calendario(d) {
+    var cal = document.getElementById('cal');
+    if (cal.getAttribute('data-listo')) return;
+    var q = new URLSearchParams(location.search);
+    var params = [
+      'first_name=' + encodeURIComponent(d.nombre.split(' ')[0] || ''),
+      'email=' + encodeURIComponent(d.email || ''),
+      'phone=' + encodeURIComponent(d.telefono || ''),
+      'utm_source=' + encodeURIComponent(q.get('utm_source') || 'web'),
+      'utm_medium=' + encodeURIComponent(q.get('utm_medium') || 'landing'),
+      'utm_campaign=' + encodeURIComponent(q.get('utm_campaign') || 'encaja'),
+      'utm_content=encaja'
+    ];
+    var i = document.createElement('iframe');
+    i.src = CALENDARIO + '?' + params.join('&');
+    i.id = 'zBlsw8BEKA2zah81YlOl_' + Date.now(); // form_embed.js de GHL ajusta la altura por este id
+    i.setAttribute('scrolling', 'auto');
+    i.title = 'Calendario para reservar la llamada';
+    var estrecho = window.innerWidth < 640;
+    i.style.minHeight = estrecho ? '1500px' : '760px';
+    cal.appendChild(i);
+    if (estrecho) {
+      var a = document.createElement('a');
+      a.className = 'cal-pantalla';
+      a.href = i.src; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = '¿No puedes moverte por el calendario? Ábrelo a pantalla completa →';
+      cal.parentNode.insertBefore(a, cal);
+    }
+    var s = document.createElement('script');
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+    cal.setAttribute('data-listo', '1');
+  }
+
+  mostrar(1, false);
+})();
+</script>
+<script src="/assets/consent.js?v=1" defer></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
