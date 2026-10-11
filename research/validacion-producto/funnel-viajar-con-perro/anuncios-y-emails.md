@@ -16,7 +16,7 @@ Normas aplicadas:
 - **Objetivo:** Ventas (conversiones con el evento Purchase).
 - **Presupuesto:** 3 conjuntos de anuncios × 10 €/día.
 - **Segmentación:** España peninsular, 25–60 años, intereses amplios relacionados con perros (o Advantage+ sin intereses en un conjunto de control).
-- **Exclusiones:** Canarias, Ceuta y Melilla. El envío desde la Península tiene otras condiciones.
+- **Exclusiones:** Baleares, Canarias, Ceuta y Melilla. El envío desde la Península tiene otras condiciones.
 - **Un ángulo por conjunto**, con 2 variantes de gancho cada uno.
 
 ---
@@ -26,7 +26,7 @@ Normas aplicadas:
 **Gancho del vídeo (0–3 s):** perro mojado o con barro subiendo al coche y plano de la cara del dueño.
 
 **Texto principal:**
-> ¿Viajas estas fiestas con tu perro? 🐶🚗
+> Estas fiestas, el perro también viaja. 🐶🚗
 > Su sitio, a donde vayáis: en el coche, en casa de la familia o en el apartamento.
 > Se enrolla en segundos, se lleva con una mano y va a la lavadora cuando volváis. [PRUEBA: lavable]
 > Envío gratis a la Península.

@@ -19,7 +19,10 @@ Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-email
    - Nunca mencionamos salud ni edad de la persona o del perro: ni "alergia al pelo", ni "si tienes más de 50", ni "perro mayor con problemas de cadera", ni "perro ansioso o mareado".
    - Nada de situación económica ("si no puedes pagar una tapicería nueva").
    - Verificar la redacción vigente de la política en el Centro de ayuda para empresas de Meta antes de publicar (VERIFICAR: la lista anterior es la que conocemos, puede haber cambiado).
-5. **Seguridad vial.** En ningún vídeo aparece el perro suelto con el coche en marcha. Si se graba en marcha, el perro lleva arnés enganchado al cinturón. La funda **no** se presenta como sistema de retención, en línea con la FAQ de la landing.
+5. **Pendiente en `anuncios-y-emails.md`** (este documento no lo modifica). Antes de reutilizar nada de ese archivo hay que corregir dos cosas:
+   - El cierre del guion "Envío gratis · 14 días de devolución" presenta un derecho legal como ventaja.
+   - El texto "¿Viajas estas fiestas con tu perro?" interpela directamente a la persona.
+6. **Seguridad vial.** En ningún vídeo aparece el perro suelto con el coche en marcha. Si se graba en marcha, el perro lleva arnés enganchado al cinturón. La funda **no** se presenta como sistema de retención, en línea con la FAQ de la landing.
 
 ---
 
@@ -112,6 +115,7 @@ Las URL de destino son estas:
 - **Frente a vigoshop (fondo rígido):** no entramos en la comparación de fondo rígido. Nuestro argumento es que se pone y se quita en segundos y que se sacude o se lava [PRUEBA].
 - **Afirmaciones que dependen de la muestra:** impermeable o "no pasa al asiento", antideslizante, lavable, encaje en SUV, medidas (133 × 140 cm según la ficha del proveedor), malla de visión y aperturas para el cinturón. Todas van marcadas [PRUEBA]. **Si la muestra no supera una prueba, se quita la frase o se cambia de gancho.** No se publica "por si acaso".
 - **"Envío desde España"** es [CONFIRMAR] con el origen real del envío de la muestra.
+- **Derechos legales como ventaja: prohibido.** Ni "14 días de devolución" ni la garantía legal aparecen en los anuncios como argumento de venta. Presentar derechos que la ley ya reconoce a todos los consumidores como si fueran un rasgo distintivo de la oferta es una práctica comercial desleal (Directiva 2005/29/CE, anexo I, punto 10). Esos derechos van en la landing y en las páginas legales, como información, no como reclamo. Lo que sí diferencia la oferta: **envío gratis a la Península, plazo real desde España y pruebas grabadas**.
 - Sin emojis en esta ronda. Sin precio tachado, sin "últimas unidades", sin cuenta atrás, sin reseñas ni "+1.000 clientes".
 - **Comparaciones:** solo planos reales del mismo coche, sin trucar, con la misma luz y sin borrar nada en edición. Nunca un "antes/después" montado.
 - **Texto principal:** la versión corta tiene ≤125 caracteres visibles, contando espacios y sin contar las marcas [PRUEBA], que son internas. La versión larga se usa como texto completo del anuncio: Meta muestra unos 125 caracteres y el resto queda tras "Ver más". Si se prefiere un texto mínimo, se publica solo la versión corta.
@@ -133,7 +137,7 @@ Se usan los IDs que ya define el equipo creativo en `creative-pack.md`:
 | **V9** | Kit para el viaje de Navidad, ~20 s | Cuerpo de A3H1 y A3H2 |
 | H01–H15 | Planos de gancho de 0–3 s | Se montan delante del cuerpo |
 
-Cada anuncio = **gancho H (0–3 s) + cuerpo V + cierre de 2 s** con el texto "Envío gratis a la Península · 14 días para devolver". Se exporta en 9:16 y en 4:5 y lleva subtítulos quemados en todos los casos.
+Cada anuncio = **gancho H (0–3 s) + cuerpo V + cierre de 2 s** con el texto "Envío gratis a la Península · {X–Y} días" (plazo real confirmado con la muestra). **No se usa "14 días de devolución"** (ver 2.1). Se exporta en 9:16 y en 4:5 y lleva subtítulos quemados en todos los casos.
 
 El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se usan sus variantes con "tu" que interpelan a la persona (por ejemplo, la de H01 "Lo que viene directo a tu asiento"): se usa la variante descriptiva.
 
@@ -149,7 +153,7 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
   > Ruta, baño en el río y vuelta a casa. El barro y el agua se quedan en la funda, no en la tapicería. [PRUEBA]
   > Funda tipo hamaca para el asiento trasero: se engancha a los reposacabezas y tapa el hueco de los pies.
   > Al llegar, se quita y se sacude. Lavable [PRUEBA].
-  > Envío gratis a la Península y 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** Funda para el asiento trasero · 44,90 €
 - **Descripción:** Envío gratis a la Península
 - **CTA:** Comprar
@@ -162,7 +166,7 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
   > Arena, barro y patas mojadas: todo en la funda. Se saca, se sacude y el asiento sigue como estaba. [PRUEBA]
   > Cubre todo el asiento trasero y el hueco de los pies, para que el perro no acabe ahí abajo en cada curva.
   > Aperturas para el cinturón y el enganche del arnés [PRUEBA].
-  > Envío gratis a la Península · 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** El asiento, igual que antes de la playa
 - **Descripción:** Funda tipo hamaca · 44,90 €
 - **CTA:** Comprar
@@ -175,7 +179,7 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
   > Le echamos agua encima y miramos debajo. Patas mojadas o un accidente: que se quede en la funda. [PRUEBA]
   > Lo grabamos con nuestra propia muestra antes de venderla.
   > Se engancha a los reposacabezas, tapa el hueco de los pies y se lava en casa [PRUEBA].
-  > Envío gratis a la Península · 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** Probada con agua antes de venderla [PRUEBA]
 - **Descripción:** Funda de coche para perro · 44,90 €
 - **CTA:** Comprar
@@ -187,25 +191,25 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
 #### A2H1 · Gancho visual
 - **Gancho 0–3 s (H05):** macro de pelos clavados en la tapicería y cinta adhesiva que los arranca. Texto: **"Pelo clavado: el clásico del sábado."**
 - **Vídeo:** H05 + V7
-- **Texto corto:** `Pelo de perro en la tapicería: horas con el guante. En la funda: sacudir y listo. [PRUEBA: el pelo no se clava]`
+- **Texto corto:** `Pelo de perro en la tapicería: cinta y aspirador cada semana. En la funda: sacudir y listo. [PRUEBA: el pelo no se clava]`
 - **Texto largo:**
-  > Pelo de perro en la tapicería: horas con el guante. En la funda: sacudir y listo. [PRUEBA: el pelo no se clava]
+  > Pelo de perro en la tapicería: cinta y aspirador cada semana. En la funda: sacudir y listo. [PRUEBA: el pelo no se clava]
   > Funda tipo hamaca que cubre el asiento trasero entero, el respaldo y el hueco de los pies.
   > Se pone en un minuto con los enganches a los reposacabezas y se quita igual de rápido [PRUEBA: cronometrar].
-  > Envío gratis a la Península · 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** La tapicería, sin pelo de perro
 - **Descripción:** Funda tipo hamaca · 44,90 €
 - **CTA:** Comprar
 
 #### A2H2 · Gancho de coche cuidado
-- **Gancho 0–3 s:** coche recién lavado y brillante, puerta trasera abierta. El perro sube de un salto sobre la funda ya puesta y se tumba. Texto: **"Coche recién lavado. Perro a bordo. Sigue limpio."** Plano de gancho: V4 (o grabar).
-- **Vídeo:** V4 (gancho) + V7
-- **Texto corto:** `Coche recién lavado y perro a bordo. La funda se lleva el pelo y las uñas; la tapicería, nada. [PRUEBA]`
+- **Gancho 0–3 s (H06):** pantalla partida con el mismo coche, el mismo encuadre y el trípode fijo. A la izquierda, el asiento sin funda con pelo real. A la derecha, con la funda puesta. Texto: **"Mismo coche. Misma semana."** Son planos reales de la misma semana, sin retoques ni limpieza previa de un solo lado. No se usa el rótulo "Antes / ahora".
+- **Vídeo:** H06 + V7
+- **Texto corto:** `Mismo coche, misma semana: a un lado la tapicería con pelo, al otro la funda. Se quita, se sacude y listo. [PRUEBA]`
 - **Texto largo:**
-  > Coche recién lavado y perro a bordo. La funda se lleva el pelo y las uñas; la tapicería, nada. [PRUEBA]
+  > Mismo coche, misma semana: a un lado la tapicería con pelo, al otro la funda. Se quita, se sacude y listo. [PRUEBA]
   > Cubre el asiento trasero completo y tapa el hueco de los pies.
   > Malla en el centro para verle desde delante [PRUEBA: confirmar en la muestra].
-  > Envío gratis a la Península · 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** Que el coche siga pareciendo nuevo
 - **Descripción:** Funda de coche para perro · 44,90 €
 - **CTA:** Comprar
@@ -213,14 +217,14 @@ El texto en pantalla de los ganchos se toma de `creative-pack.md`, pero no se us
 Nota: "parecer nuevo" describe el coche, no a la persona, y no afirma su situación económica.
 
 #### A2H3 · Gancho de objeciones (lo que falla en otras fundas)
-- **Gancho 0–3 s:** a cámara, un plano UGC con las manos tirando de una correa de la funda. Texto: **"3 cosas que miramos antes de vender esta funda."** En pantalla, una lista: "No resbala · Tapa el hueco · Mide 133 × 140 cm" [PRUEBA las tres].
-- **Vídeo:** V9 (tirón de las correas, frenada en parado, cinta métrica) + V7 (instalación en un SUV)
+- **Gancho 0–3 s (H08, alternativa H15):** Maikel a cámara, con el coche detrás, levantando tres dedos. Texto: **"3 cosas que miraría antes de comprar una funda."** Con H15, en cambio, las quejas se tachan una a una sobre fondo neutro (solo categorías, sin capturas de reseñas).
+- **Vídeo:** H08 + V8 (agua, deslizamiento y correas). V8 solo se publica si pasan las tres pruebas. Si falla alguna, se quita su bloque, tal como indica `creative-pack.md`, y se cambia el texto.
 - **Texto corto:** `Que no resbale, que tape el hueco de los pies y que encaje en un SUV. Lo comprobamos antes de venderla. [PRUEBA]`
 - **Texto largo:**
   > Que no resbale, que tape el hueco de los pies y que encaje en un SUV. Lo comprobamos antes de venderla. [PRUEBA]
   > Mide 133 × 140 cm [PRUEBA: medir]. Antes de comprar, compara con el ancho de tu asiento trasero.
   > Correas a los reposacabezas y anclajes entre los asientos [PRUEBA: tirón con fuerza].
-  > Envío gratis a la Península · 14 días para devolver.
+  > Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** Mírale las medidas antes de comprar
 - **Descripción:** Funda tipo hamaca · 44,90 €
 - **CTA:** Comprar
@@ -232,8 +236,8 @@ Nota: "compara con el ancho de tu asiento" se refiere al coche, no a un atributo
 **Conjunto:** `RP_R1_A3-navidad-kit`. **Destino:** ficha con el **kit preseleccionado**. **Cuerpo:** V8.
 
 #### A3H1 · Gancho de viaje
-- **Gancho 0–3 s:** maletero lleno de bolsas y regalos que se cierra. Corte al asiento trasero: el perro tumbado en la funda, con arnés enganchado al cinturón. Texto: **"400 km a casa de la familia. El perro también viene."** Plano de gancho: V5 (o grabar).
-- **Vídeo:** V5 (gancho) + V8
+- **Gancho 0–3 s (H09):** maletero lleno de maletas y regalos envueltos, y la colchoneta enrollada que entra en el último hueco. Texto: **"Navidad en casa de la familia, con perro."** En el cuerpo, el perro aparece con arnés enganchado al cinturón y el coche parado.
+- **Vídeo:** H09 + V9
 - **Texto corto:** `Viaje en Navidad a casa de la familia: funda para el asiento trasero y colchoneta para dormir al llegar.`
 - **Texto largo:**
   > Viaje en Navidad a casa de la familia: funda para el asiento trasero y colchoneta para dormir al llegar.
@@ -245,8 +249,8 @@ Nota: "compara con el ancho de tu asiento" se refiere al coche, no a un atributo
 - **CTA:** Comprar
 
 #### A3H2 · Gancho de llegada
-- **Gancho 0–3 s:** se abre la puerta de una casa, alguien entra con la colchoneta enrollada bajo el brazo y la desenrolla junto al sofá. El perro se tumba encima. Texto: **"Llegar a casa ajena con su sitio debajo del brazo."** Plano de gancho: tomado de V8.
-- **Vídeo:** V8 (reordenado: la llegada primero, el coche después)
+- **Gancho 0–3 s (H10):** el perro tumbado en la colchoneta en un salón con algo de decoración navideña. Texto: **"Su sitio, también fuera de casa."**
+- **Vídeo:** H10 + V9 (reordenado: la llegada primero, el coche después)
 - **Texto corto:** `En el coche, su funda. En casa de la familia, su colchoneta. Un kit para el viaje de estas fiestas.`
 - **Texto largo:**
   > En el coche, su funda. En casa de la familia, su colchoneta. Un kit para el viaje de estas fiestas.
@@ -258,14 +262,14 @@ Nota: "compara con el ancho de tu asiento" se refiere al coche, no a un atributo
 - **CTA:** Comprar
 
 #### A3H3 · Gancho de "qué incluye"
-- **Gancho 0–3 s:** plano cenital sobre una mesa. Se abre la caja y se colocan la funda doblada, la colchoneta enrollada y los anclajes. Texto: **"Todo lo que va en el kit para viajar con perro."**
-- **Vídeo:** plano cenital (grabar o extraer de V8) + V8
+- **Gancho 0–3 s (H11):** manos que desenrollan la colchoneta en el salón y la enrollan en el maletero, en dos planos de 1,5 s. Texto: **"Todo lo del perro para el viaje: 2 piezas."**
+- **Vídeo:** H11 + V5 (kit en uso, 15 s). Como alternativa, H11 + V9.
 - **Texto corto:** `Funda tipo hamaca para el asiento trasero y colchoneta de viaje enrollable. Lo que lleva el kit, sin relleno.`
 - **Texto largo:**
   > Funda tipo hamaca para el asiento trasero y colchoneta de viaje enrollable. Lo que lleva el kit, sin relleno.
   > Medidas: funda 133 × 140 cm [PRUEBA], colchoneta 95 × 65 cm [PRUEBA].
   > Para las escapadas y para el viaje de Navidad.
-  > 79,90 € el kit, envío gratis a la Península y 14 días para devolver.
+  > 79,90 € el kit. Envío gratis a la Península. Sale desde España y llega en {X–Y} días laborables [CONFIRMAR plazo real].
 - **Titular:** Qué incluye el kit · 79,90 €
 - **Descripción:** Envío gratis a la Península
 - **CTA:** Comprar
@@ -276,15 +280,15 @@ Nota sobre plazos: si se menciona "llega antes de Navidad", tiene que ir con una
 
 | ID | Ángulo | Gancho | Vídeo | Formato | Destino | Afirmaciones [PRUEBA] que bloquean |
 |---|---|---|---|---|---|---|
-| A1H1 | Barro | Salto del río al coche | V1 + V6 | 9:16 y 4:5 | Funda | No pasa el agua, lavable |
-| A1H2 | Barro | Funda con arena que se sacude | V2 + V6 | 9:16 y 4:5 | Funda | Asiento intacto, aperturas para el cinturón |
-| A1H3 | Barro | Agua y pañuelo seco | V9 + V6 | 9:16 y 4:5 | Funda | **Prueba de agua (imprescindible)** |
-| A2H1 | Pelo | Guante frente a sacudir | V3 + V7 | 9:16 y 4:5 | Funda | El pelo no se clava, tiempo de instalación |
-| A2H2 | Pelo | Coche recién lavado | V4 + V7 | 9:16 y 4:5 | Funda | Malla, resiste uñas |
-| A2H3 | Pelo | 3 cosas que miramos | V9 + V7 | 9:16 y 4:5 | Funda | **Antideslizante, medidas, SUV, correas** |
-| A3H1 | Navidad | Maletero y 400 km | V5 + V8 | 9:16 y 4:5 | Kit | Se enrolla y se lleva con una mano |
-| A3H2 | Navidad | Llegada con la colchoneta | V8 | 9:16 y 4:5 | Kit | Superficie impermeable |
-| A3H3 | Navidad | Qué incluye el kit | V8 | 9:16 y 4:5 | Kit | Medidas de las dos piezas |
+| A1H1 | Barro | H01 · Patas con barro hacia la puerta | H01 + V6 | 9:16 y 4:5 | Funda | No pasa el agua, lavable |
+| A1H2 | Barro | H02 · Levantar la funda: asiento limpio | H02 + V6 | 9:16 y 4:5 | Funda | **PRUEBA-AGUA**, aperturas para el cinturón |
+| A1H3 | Barro | H12 · 250 ml y papel debajo | H12 + V3 + V6 | 9:16 y 4:5 | Funda | **PRUEBA-AGUA (imprescindible)** |
+| A2H1 | Pelo | H05 · Pelo clavado y cinta | H05 + V7 | 9:16 y 4:5 | Funda | PRUEBA-PELO, tiempo de instalación |
+| A2H2 | Pelo | H06 · Pantalla partida real | H06 + V7 | 9:16 y 4:5 | Funda | PRUEBA-PELO, malla |
+| A2H3 | Pelo | H08/H15 · 3 cosas que miraría | H08 + V8 | 9:16 y 4:5 | Funda | **PRUEBA-AGUA, DESLIZ y CORREAS**, medidas, SUV |
+| A3H1 | Navidad | H09 · Maletero de Navidad | H09 + V9 | 9:16 y 4:5 | Kit | Se enrolla y se lleva con una mano |
+| A3H2 | Navidad | H10 · Su sitio en casa de la familia | H10 + V9 | 9:16 y 4:5 | Kit | Superficie impermeable |
+| A3H3 | Navidad | H11 · Las 2 piezas del kit | H11 + V5 | 9:16 y 4:5 | Kit | Medidas de las dos piezas |
 
 Si una prueba falla, el plan es este:
 - **Agua:** se elimina A1H3, y en todos los anuncios se cambia "no pasa al asiento" por "protege del barro y el pelo".

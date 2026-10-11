@@ -9,7 +9,9 @@ Producto principal: funda de coche tipo hamaca a 44,90 €. Subida de ticket: ki
 2. **Las reseñas de la competencia son el guion.** Las quejas reales (resbala, el agua traspasa, se rompen las correas, no encaja en SUV, el pelo se clava) se convierten en las secciones de la página. Así contestamos las objeciones antes de que aparezcan.
 3. **La honestidad también vende.** La comparativa admite que a un perro pequeño que casi no viaja le basta con una toalla. Al visitante frío de Meta le suena creíble, y filtra a quien devolvería el producto.
 4. **Legal y conversión van juntos.** Hay tres puntos legales que condicionan el diseño:
-   - **Derechos legales como si fueran ventaja propia.** Presentar la garantía legal de 3 años o los 14 días de desistimiento como ventaja de la tienda es práctica desleal "en todo caso" (Directiva 2005/29/CE, anexo I, punto 10; en España, art. 20 y ss. de la Ley de Competencia Desleal). Por eso las 3 microgarantías del hero son el **plazo**, la **devolución explicada con su coste** y la **atención humana**. La garantía de 3 años aparece en letra informativa con la coletilla "como en cualquier compra en la UE".
+   - **Derechos legales como si fueran ventaja propia.** Presentar los 14 días de desistimiento o la garantía legal de 3 años como ventaja de la tienda es práctica desleal "en todo caso" (Directiva 2005/29/CE, anexo I, punto 10; en España, art. 20 y ss. de la Ley de Competencia Desleal). Por eso **no aparecen** en la barra superior, las microgarantías, los CTA ni la comparativa. Solo figuran como información neutra en la FAQ ("Como establece la ley…"), en las condiciones y en el footer legal.
+   - Las microgarantías son ventajas propias y reales: **envío gratis a la Península con su plazo**, **pruebas grabadas sin cortes** y **una persona que responde en menos de 24 h**.
+   - Si se decide asumir el coste de la devolución, eso sí es una ventaja propia (la ley permite cobrarlo si se informa) y se puede anunciar como "Devolución sin coste para ti", siempre sin presentar el plazo de 14 días como mérito nuestro.
    - **El kit nunca va preseleccionado.** Marcar por defecto la opción más cara se acerca a los pagos adicionales por defecto que prohíbe el art. 60 bis del TRLGDCU, así que el selector arranca en la funda.
    - **Sin "ahorro".** La colchoneta no se vende sola, así que mostrar un ahorro sería un precio de referencia inventado.
 
@@ -17,9 +19,9 @@ Producto principal: funda de coche tipo hamaca a 44,90 €. Subida de ticket: ki
 
 | # | Sección | Trabajo que hace | Decisiones |
 |---|---|---|---|
-| 0 | Barra superior | Responde a "¿cuánto me cuesta de verdad?" y "¿qué pasa si no me gusta?" antes del primer scroll | Envío gratis Península · 14 días · respuesta < 24 h. Sin contadores ni urgencia |
+| 0 | Barra superior | Responde a "¿cuánto me cuesta de verdad?", "¿cuándo llega?" y "¿hay alguien detrás?" antes del primer scroll | Envío gratis Península · 3–6 días laborables · respuesta de una persona en < 24 h. Sin derechos legales como reclamo, sin contadores ni urgencia |
 | 1 | Cabecera | Marca y vía de contacto | **Sin menú**, para que nadie se vaya. "¿Dudas? Escríbenos" abre un mailto como señal de que hay alguien detrás |
-| 2 | Hero | Que el visitante de un anuncio entienda en 3 s qué es, para quién, cuánto cuesta y que puede comprar ya | **V1 arriba en móvil** porque continúa el anuncio (mismo plano: barro → asiento limpio). Titular de resultado concreto ("Vuelve del monte…") en vez de una característica. Precio final con IVA y envío pegado al titular. Selector funda/kit como tarjetas grandes y táctiles. El CTA repite el precio de la opción elegida. Las 3 microgarantías van **debajo** del CTA, donde surge la duda. Debajo, en letra pequeña, métodos de pago y aviso de que no es un sistema de retención |
+| 2 | Hero | Que el visitante de un anuncio entienda en 3 s qué es, para quién, cuánto cuesta y que puede comprar ya | **V1 arriba en móvil** porque continúa el anuncio (mismo plano: barro → asiento limpio). Titular de resultado concreto ("Vuelve del monte…") en vez de una característica. Precio final con IVA y envío pegado al titular. Selector funda/kit como tarjetas grandes y táctiles. El CTA repite el precio de la opción elegida. Las 3 microgarantías (envío y plazo, probada en vídeo, atención humana) van **debajo** del CTA, donde surge la duda. Debajo, en letra pequeña, métodos de pago, "precio final" y aviso de que no es un sistema de retención |
 | 3 | El problema | Que el visitante se reconozca: es su coche | 3 escenas sacadas de las reseñas: barro y agua, pelo clavado, perro en el hueco de los pies. Sin dramatizar ni hablar de seguridad |
 | 4 | Demo en 3 pasos (V2) | Desmonta la objeción "instalarla es un rollo" (queja de las reseñas) | Un solo vídeo de 20 s partido en 3 tramos con `data-start`. El tiempo de montaje solo se publica cronometrado en 2 coches |
 | 5 | Quejas y cómo lo comprobamos (V3, V4, F4) | **Diferenciador principal** frente a fundas de 20 €: pruebas reproducibles | Cada tarjeta lleva la cita de la queja, el protocolo de la prueba y el resultado. El compromiso de publicar el resultado "salga como salga" refuerza la credibilidad y nos obliga a cumplirlo |
@@ -27,7 +29,7 @@ Producto principal: funda de coche tipo hamaca a 44,90 €. Subida de ticket: ki
 | 6 | Comparativa | Justificar 44,90 € frente a 0 € y 20 € | Categorías genéricas, sin nombrar marcas ni tiendas (para no caer en publicidad comparativa engañosa ni denigratoria). Reconoce que somos más caros. La columna propia remite a vídeos, no a adjetivos. En móvil, tabla con scroll horizontal **dentro** del contenedor y primera columna fija |
 | 7 | Kit (V5, F5) | Subir el ticket | Un caso de uso distinto (llegar a casa de la familia en Navidad o al apartamento), no "más producto". Botón secundario que selecciona el kit y vuelve al hero, para que el carrito sea siempre el mismo |
 | 8 | Medidas y "¿vale para mi coche?" (F1, F2, F3, F6) | Desmonta la objeción "no encaja en mi SUV", fuente probable de devoluciones | Guía de 4 pasos medible con una cinta, lista de coches probados y un mailto con asunto y cuerpo rellenos para preguntar por un modelo. Cada consulta es un lead y un dato de compatibilidad |
-| 9 | FAQ | Resolver objeciones de cierre | Orden por frecuencia esperada: plazo, devolución, lavado, SUV, perro grande, retención, pasajeros, pago, quién vende. `<details>` nativo, que no necesita JS. Cada apertura se mide con `faq_open` para reordenar |
+| 9 | FAQ | Resolver objeciones de cierre e informar de los derechos legales de forma neutra | Orden por frecuencia esperada: plazo, devolución (desistimiento "como establece la ley"), defectos (garantía legal), lavado, SUV, perro grande, retención, pasajeros, pago, quién vende. `<details>` nativo, que no necesita JS. Cada apertura se mide con `faq_open` para reordenar |
 | 10 | CTA final | Recoger a quien llega al final | Repite opción elegida y precio. Enlaza al hero, donde están el selector y la información precontractual |
 | 11 | Información del producto (GPSR) | Cumplir el art. 19 del GPSR | Fabricante, persona responsable en la UE, modelo y lote, y advertencias, también para la colchoneta. **Sin persona responsable en la UE no se vende** |
 | 12 | Footer | Información LSSI y enlaces legales | Razón social, NIF, dirección, email y formulario de desistimiento |
@@ -45,16 +47,17 @@ Producto principal: funda de coche tipo hamaca a 44,90 €. Subida de ticket: ki
 | V1 | Vídeo en bucle de 6 s, 4:5, sin sonido | Perro con barro sube → se tumba → funda fuera, asiento limpio | Hero |
 | V2 | Vídeo de 20 s | Instalación completa en tiempo real, en 3 tramos (0–7, 7–14 y 14–20 s) | Demo |
 | V3 | Vídeo de 10 s | 250 ml en el centro y en una costura, 30 min, levantar y ver el papel | Pruebas |
-| V4 | Vídeo de 10 s | Perro sobre la funda en curvas, plano fijo de la base, tela y piel | Pruebas |
+| V4 | Vídeo de 10 s | Cinta de carrocero alineada, garrafa de 5 L y 10 tirones, regla sobre el desfase (tela; V4b en piel si hay coche) | Pruebas |
 | V5 | Vídeo de 15 s | Funda en el coche → colchoneta desenrollada al llegar → enrollar y llevar del asa | Kit |
-| F1 | Foto | Funda instalada vista desde la puerta trasera | Medidas |
-| F2 | Foto | Ventana de malla desde el asiento del conductor | Medidas |
-| F3 | Foto | Correa al reposacabezas y hebilla por la ranura | Medidas |
-| F4 | Foto | Correas, hebillas y costuras tras la prueba de montajes | Pruebas |
-| F5 | Foto | Colchoneta enrollada y colgando del asa | Kit |
-| F6 | Foto | Funda extendida con cinta métrica | Medidas |
+| F1 | Foto | Funda en modo hamaca desde la puerta trasera abierta ("Probada en [modelo]") | Medidas (foto principal) |
+| F2 | Foto | Detalle de la ventana de malla con la cremallera medio abierta | Medidas |
+| F3 | Foto | Ranura del cinturón con el enganche saliendo | Medidas |
+| F4 | Foto | Hebilla cerrada alrededor del reposacabezas | Pruebas (correas) y medidas |
+| F5 | Foto | Bodegón del kit: funda doblada y colchoneta enrollada | Kit |
+| F6 | Foto | Colchoneta enrollada cogida del asa (y versión con cinta métrica) | Kit |
 
-> Si el equipo creativo usa otro significado para F1–F6, se cambia en el HTML. Los IDs de los vídeos V1–V5 coinciden con el encargo.
+> IDs y contenidos alineados con `creative-pack.md` (§2). Los protocolos de prueba de la landing son los del pack: [PRUEBA-AGUA], [PRUEBA-DESLIZ], [PRUEBA-CORREAS], [PRUEBA-INSTAL], [PRUEBA-MEDIDAS], [PRUEBA-SUV], [PRUEBA-PELO], [PRUEBA-LAVADO].
+> **Hueco sin foto:** el pack no incluye una foto de la funda extendida con cinta métrica. Si se quiere enseñar la medida real en la ficha, conviene añadirla al rodaje como F7.
 
 Formato de los vídeos: MP4 H.264 de menos de 2 MB para V1, `autoplay muted loop playsinline`, `poster` con el primer fotograma y `preload="metadata"` en V2–V5. Los vídeos de prueba (V3 y V4) **sin cortes**: si se acelera la espera, se indica en pantalla ("30 min acelerados").
 
@@ -70,7 +73,7 @@ Formato de los vídeos: MP4 H.264 de menos de 2 MB para V1, `autoplay muted loop
 | Prioridad | Hipótesis | Por qué | Métrica principal | Tamaño mínimo honesto |
 |---|---|---|---|---|
 | 1 | **V1 (vídeo de prueba real) frente a F1 (foto estática) en el hero** aumenta la tasa de añadir al carrito | Continúa el anuncio y enseña el resultado. Las fundas competidoras usan fotos de catálogo | Visitas → AddToCart | Del 6 % al 12 %: **~360 visitas por variante**. Del 6 % al 9 %: ~1.200. Solo cabe en la ronda 2 si se esperan efectos grandes |
-| 2 | **Devolución a nuestro cargo** ("devolución gratis" en la barra y en las microgarantías) frente a devolución a cargo del cliente sube la conversión lo bastante para pagar su coste | Somos más caros que Amazon, donde devolver es gratis. Es una decisión de negocio (~5–7 € por devolución), así que conviene medirla | Visitas → Purchase; también la tasa de devolución | Del 2 % al 4 %: **~1.150 visitas por variante**. Ronda 3 o posterior. Mientras tanto, decidirlo con criterio (recomendado: asumirla nosotros si el margen real lo permite) |
+| 2 | **Devolución sin coste para el cliente** ("Devolución sin coste para ti" en la barra; no se menciona el plazo de 14 días como ventaja) frente a devolución a cargo del cliente sube la conversión lo bastante para pagar su coste | Somos más caros que Amazon, donde devolver es gratis. Es una decisión de negocio (~5–7 € por devolución), así que conviene medirla | Visitas → Purchase; también la tasa de devolución | Del 2 % al 4 %: **~1.150 visitas por variante**. Ronda 3 o posterior. Mientras tanto, decidirlo con criterio (recomendado: asumirla nosotros si el margen real lo permite) |
 | 3 | **Oferta del kit en el carrito** ("Añade la colchoneta por 35 € más") frente a kit solo en la página sube el % de pedidos con kit sin bajar la conversión | En el carrito el comprador ya ha decidido. La subida se enmarca contra 44,90 € y no contra 0 € | % de pedidos con kit (o de carritos con kit) | Del 20 % al 35 %: **~140 carritos por variante**. Del 15 % al 30 %: ~120. Es el test más factible en las primeras rondas |
 | 4 | **Titular de prueba** ("Lo hemos mojado, montado y llevado en curvas: mira los vídeos") frente al titular de resultado ("Vuelve del monte con el perro lleno de barro…") | Saber si el tráfico frío compra más por el beneficio o por la credibilidad. La respuesta orienta las creatividades | Visitas → AddToCart y profundidad de scroll hasta las pruebas | Del 6 % al 9 %: ~1.200 por variante. **Hacerlo primero en Meta** como test de texto (CTR, del 1 % al 1,5 %: ~7.700 impresiones por variante, barato) y pasar a la landing el ganador |
 | 5 | **Bloque de pruebas justo después del hero** frente a después del problema y la demo | Si la duda principal es "¿traspasa o resbala?", adelantar la respuesta reduce el rebote | Visitas → AddToCart; % que ve el bloque de pruebas | Del 6 % al 9 %: ~1.200 por variante. Último en prioridad. Antes, mirar los mapas de calor (si se instalan) y `faq_open` |
@@ -161,12 +164,13 @@ Formato de los vídeos: MP4 H.264 de menos de 2 MB para V1, `autoplay muted loop
 - [ ] Montaje cronometrado en 2 coches (al menos uno SUV), primera vez y sin ayuda. Marca, modelo y año de cada coche.
 - [ ] Número de anclajes de asiento y de correas.
 - [ ] Prueba de agua: 250 ml en el centro y en una costura, 30 min, papel debajo (V3). Si pasa, **no** se usa "impermeable" ni "el agua no llega".
-- [ ] Prueba de deslizamiento en asiento de tela y de piel, con perro de {{peso}} kg (V4). Desplazamiento en cm. Hasta entonces, nada de "antideslizante" ni "no resbala".
-- [ ] {{N}} montajes y desmontajes y tirones a las correas: estado de costuras y hebillas (F4).
+- [ ] [PRUEBA-DESLIZ]: cinta, garrafa de 5 L y 10 tirones, en tela (y en piel si se puede) (V4). Desplazamiento en cm. "Antideslizante" solo si pasa en tela **y** en piel.
+- [ ] [PRUEBA-CORREAS]: 5 kg durante 60 s en cada correa y hebilla, y la cremallera 20 veces (F4).
 - [ ] Pelo: si sale con la mano o con un cepillo de goma.
 - [ ] Lavado según la etiqueta. "Lavadora" solo si la etiqueta lo permite y lo hemos probado.
 - [ ] Colchoneta: medidas (~95 × 65 cm), peso y si aísla de la humedad del suelo (o se borra esa línea).
-- [ ] Frase del hero "la hemos probado…" y compromiso "salga como salga": solo con V3 y V4 grabados.
+- [ ] Frase del hero "la hemos probado…", microgarantía "Probada antes de venderla" y compromiso "salga como salga": solo con V3, V4 y la prueba de correas grabados.
+- [ ] Peso del perro de las pruebas, para la FAQ "¿Sirve para un perro grande?".
 
 **{{…}} (datos)**
 - [ ] Plazo real de entrega (3–6 días laborables, por confirmar con el proveedor).
