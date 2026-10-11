@@ -56,3 +56,23 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 - Precios reales de Amazon.es (bloqueado para acceso automatizado) → Apify `junglee/Amazon-crawler`.
 - Anuncios activos en Meta (Ad Library requiere sesión) → Apify `apify/facebook-ads-scraper`.
 - Cotización con almacén UE (CJ, BigBuy, Syncee requieren registro → autorización).
+
+## Google Trends España, 5 años (COMPROBADO 2026-10-11; datos en `datos/trends-es-2026-10-11/`)
+
+Interés relativo, no volumen. 0 = por debajo del umbral de Google. Ancla "funda coche perro" casi siempre 0: la normalización entre grupos es solo orientativa.
+
+| Término | Media 5 a | Media 12 m | Pico típico | Tendencia 12 m |
+|---|---|---|---|---|
+| cama perro | 58,6 | 60,2 | dic (nov-ene) | +7 % |
+| burlete puerta | 33,9 | 38,4 | nov | +26 % |
+| quitapelusas | 27,6 | 23,8 | ene | −17 % |
+| organizador armario | 19,1 | 20,4 | sep | +3 % |
+| rascador gato | 16,9 | 15,2 | ago/dic | −1 % |
+| fuente gato | 4,3 | 6,1 | jul | +83 % |
+| packing cubes | 3,7 | 16,4 | irregular | fuerte subida en 2026 |
+| cepillo taladro | 2,8 | 2,7 | ene-feb | +28 % |
+| organizador maletero | 1,4 | 2,2 | oct/dic | base baja |
+| funda coche perro, alfombra olfativa, bolsas de compresión, banneton, limpiacristales magnético, quita pelos perro | <1 | <1 | — | ruido |
+| funda parabrisas, comedero lento perro | 0 | 0 | — | — |
+
+Lectura: los candidatos P04-P07 tienen búsqueda casi nula en España; si se prueban, dependen de compra por descubrimiento (Meta), no de búsqueda. Esto no es ausencia de demanda, pero sí ausencia de una señal independiente que la confirme.
