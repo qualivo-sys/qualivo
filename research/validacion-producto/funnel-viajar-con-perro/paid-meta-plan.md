@@ -501,3 +501,39 @@ Se diagnostica por tramos, con los datos de las 3 tablas:
 **Opcional**
 - [ ] **Catálogo** de Meta sincronizado desde la app de Shopify (funda y kit). No hace falta en la ronda 1. Sirve para etiquetar productos en Instagram y para anuncios de catálogo o remarketing dinámico en la ronda 2.
 - [ ] Microsoft Clarity o la grabación de sesiones de Shopify, para el diagnóstico del escenario A (también sujeto a consentimiento).
+
+---
+
+## Revisión del Agente Paid de Qualivo (11/10/2026) · cambios aplicados
+
+Fuente: sesión "Agente Paid". El texto completo está en la rama `claude/qualivo-paid`, `paid/revisiones/2026-10-11-revision-meta-ruta-perruna.md`. Veredicto: el plan es publicable con estos cambios, que **sustituyen** a los apartados anteriores donde contradigan.
+
+1. **Estructura:**
+   - **2 conjuntos ABO de 15 €/día, con 3 ganchos cada uno**: A1 (barro) y A2 (pelo).
+   - **A3 (Navidad + kit) pasa a la ronda 2**, a finales de noviembre y con el margen del kit recalculado.
+   - Motivo: con 9 anuncios salen ~17 € por anuncio, que solo da para medir el gancho y el CTR. Con 6 hay un 50 % más de datos por anuncio.
+2. **Regla de parada a los 75 €:** solo se pausa si hay 0 compras **y además** 0 pagos iniciados. Si hay pagos iniciados, se sigue hasta 150 €.
+   - Motivo: con un CPA esperado de 25–40 €, la probabilidad de llegar a 75 € sin ninguna compra con un embudo sano es del 15–30 % (ESTIMADO por el agente).
+3. **La ronda 1 se decide por embudo, no por CPA.** El CPA solo cuenta con 5 compras o más. Se **sigue** aunque haya 0–2 compras si se cumplen las tres condiciones:
+   - hook rate ≥ 20 %;
+   - CTR de enlace ≥ 1 %;
+   - coste por pago iniciado ≤ 7,5 €.
+4. **CPM para España en el cuarto trimestre:** bien ≤ 12 €, aceptable 12–20 €, mal > 25 €. El CPC queda como dato informativo, no decide nada. El plan B (optimizar a ATC o IC) solo se activa si se gasta menos del 50 % del presupuesto.
+5. **Apagar un anuncio** solo a partir de **1.000 impresiones**, no de 6 € gastados.
+6. **Antes del D1:**
+   - Comprobar que Purchase llega por la API de conversiones con calidad ≥ 6/10 y deduplicado.
+   - Subir los anuncios el **D-2**.
+   - Pedir ya la verificación del negocio.
+7. **Ubicaciones:** Advantage+ sin Audience Network. Si el D2 Facebook Stories se lleva más del 15 % del gasto con un CPM superior a 40 €, se excluye.
+8. **Medición:**
+   - Añadir `{{placement}}` a `utm_content`.
+   - Primera comprobación del D1: las visitas a la landing deben ser al menos el 70 % de los clics.
+9. **Políticas:** los 9 textos pasan.
+   - **A2H2 (pantalla partida):** poner en pantalla "mismo coche, misma semana".
+   - **V8:** si se muestra otra funda fallando, que sea una comprada por nosotros, sin marca visible.
+
+**Dato de referencia** (COMPROBADO por el agente en la cuenta de Qualivo, 17/09–11/10/2026; vídeo a formulario B2B, **no comparable** con e-commerce):
+- CPM 29,8 €, CTR de enlace 1,12 %, CPC 1,28 €.
+- Facebook Stories con CPM 86,8 €.
+
+Sirve como techo prudente de CPM en España ahora mismo. **No se han consultado cuentas de clientes:** el agente pide el permiso de Maikel para compartir datos agregados y anonimizados.
