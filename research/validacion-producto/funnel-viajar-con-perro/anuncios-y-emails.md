@@ -40,7 +40,7 @@ Normas aplicadas:
 2. Desenrollar la colchoneta en el maletero o en el asiento. Texto: "…sin manchar nada" (3–7 s)
 3. Agua sobre la colchoneta que resbala, en primer plano [PRUEBA] (7–10 s)
 4. Enrollarla, cerrar la hebilla y llevarla del asa (10–13 s)
-5. Logo y "Envío gratis · 14 días de devolución" (13–15 s)
+5. Logo y "Envío gratis a la Península" (13–15 s)
 
 ---
 
@@ -88,7 +88,7 @@ Normas aplicadas:
 **Asunto:** ¿Se te ha quedado algo en el carrito?
 
 > Hola {{nombre}}, te guardamos la colchoneta de viaje en el carrito.
-> Envío gratis a la Península y 14 días de devolución.
+> Envío gratis a la Península.
 > {{botón: Terminar mi pedido}}
 
 ## Email 3 · Carrito abandonado (24 h)
