@@ -119,3 +119,4 @@ Limitaciones: la búsqueda por palabras trae mucho ruido (relatos, apps); solo a
 | P11 tablero puzzle | Solo apps de juegos (ruido) | Sin anunciantes del producto |
 
 - 2026-10-11 · Barrido internacional: informe en `barrido-internacional-2026-10-11.md`. Lección: el cesto rascador de cuerda pasó de anunciarse en US/GB (mayo-junio) a copiarse en ES (septiembre-octubre) en semanas.
+- 2026-10-11 · P27 (Apify, ~0,39 $): Amazon.es búsqueda `junglee/Amazon-crawler` run `yxeRu5Hk5aEMdXRKp` (30 productos, 9,99-29,90 €, hasta 15.239 valoraciones); reseñas críticas `axesso_data/amazon-reviews-scraper` run `rXOf1FnjpTvx1aRD0` (72 reseñas 1-3★ de 4 ASIN; 30 mencionan fallo del adhesivo); Meta ES 4 sinónimos run `42LMfgPY4j8DAXq7I` (sin anuncios del producto exacto; versiones parecidas con ángulo "sin taladrar": Superzebra, Jupplies 29,95 €, vigoshop, Tienda Contrareembolso). Datos en `datos/amazon-es-*.csv`.
