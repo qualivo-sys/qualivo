@@ -88,3 +88,40 @@ Margen antes de publicidad por pedido (ESTIMADO, pendiente del proveedor real): 
 | 9 | Análisis y decisión con las reglas del punto 5 |
 
 Si se quiere empezar antes de que llegue la muestra, los anuncios solo pueden usar afirmaciones genéricas y vídeo con la muestra en cuanto llegue. Recomendación: **esperar a la muestra para grabar.** Grabar con el producto real es mejor creatividad y evita prometer lo que no hemos comprobado.
+
+---
+
+## 8. Actualización: proveedores con envío desde la UE (2026-10-11)
+
+Resultado de buscar en AliExpress con envío desde ES, PL, DE y FR (COMPROBADO-buscador). CJ, BigBuy, Syncee y Spocket quedan PENDIENTES porque exigen cuenta o tienen bloqueo. Precios sin oferta y con IVA incluido (supuesto). Las fichas no se pudieron abrir (captcha): **hay que confirmar a mano el precio de la talla elegida**.
+
+| Producto | Proveedor recomendado | Precio | Envío | Señales |
+|---|---|---|---|---|
+| A colchoneta | https://es.aliexpress.com/item/1005012975211088.html (90×60 cm) | 30,32 € | ES, 3–6 días, gastos PENDIENTES | 0 vendidos, sin reseñas |
+| A alternativa | https://es.aliexpress.com/item/1005012786425560.html (95×65 cm) | 27,37 € | DE, 5–10 días | 1 vendido |
+| B funda hamaca | https://es.aliexpress.com/item/1005010750821144.html (133×140 cm, malla) | 21,49 € | ES, envío gratis, ~4 días | 35 vendidos, 3 reseñas, 4,3★ |
+| B mejor respaldada | https://es.aliexpress.com/item/1005008512231045.html | 32,99 € | DE, 5–10 días | 370 vendidos, 58 reseñas, 4,9★ |
+
+**Margen antes de publicidad (ESTIMADO; incluye Stripe y un 10 % de incidencias):**
+
+| Escenario | Margen = CPA de equilibrio |
+|---|---|
+| A a 44,90 € (proveedor 30,32 €) | **2,15 €**, inviable |
+| A a 44,90 € (proveedor 27,37 €) | 5,10 € |
+| B a 39,90 € (proveedor 21,49 €) | 7,34 € |
+| **B a 44,90 € (proveedor 21,49 €)** | **~11,0 €** |
+| Kit a 69,90 € | −1,12 €, inviable |
+| **Kit a 79,90 € (A 27,37 € + B 21,49 €)** | **9,12 €** |
+
+**Conclusión:** con dropshipping desde la UE, **la colchoneta como producto principal no da margen**. Antes, en Made-in-China, salía a ~12 € puesta con un lote de 10 uds., pero eso exige comprar stock y hacer los envíos uno mismo.
+
+### Funnel revisado (recomendado)
+- **Producto principal: funda de coche tipo hamaca (B) a 44,90 €**, con proveedor en España, envío en ~4 días y unos 11 € de margen.
+- **Kit funda + colchoneta a 79,90 €** como subida de ticket, con unos 9 € de margen.
+- La colchoneta sola no se ofrece en esta ronda.
+- **Contra:** en Meta España ya anuncian fundas parecidas Bonotienda_Es y vigoshop (barrido del 11/10). Competimos en creatividad. La parte buena es que eso indica que hay anunciantes interesados, aunque no prueba que haya ventas.
+- **Reglas de decisión ajustadas:** con un margen de ~11 €, una venta con CPA ≤11 € cubre costes. Seguimos si el CPA es ≤15 € tras 150 €, y paramos si supera 25 €.
+- **Muestras:** B 1005010750821144 (21,49 €) + A 1005012786425560 (27,37 €) ≈ **49 €**.
+
+### Alternativa B (más trabajo, más margen)
+Comprar un lote de 10 colchonetas en Made-in-China (Anhui Keynovo, 8,33 $ FOB) y enviarlas tú desde casa. El margen sube a ~15 € con la colchoneta a 44,90 €, pero inmoviliza ~120 € y requiere preparar los envíos. Solo después de validar el CPA con la opción recomendada.
