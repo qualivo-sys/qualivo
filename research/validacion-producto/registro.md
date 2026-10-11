@@ -34,7 +34,7 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | P04 | Funda magnética antiescarcha parabrisas | Descartado salvo pack | Baja | Amazon.es desde 8,99 € (COMPROBADO-buscador); temporada corta | 2026-10-11 |
 | P05 | Limpiacristales magnético ajustable | Investigar con cautela | Baja | Demostración excelente; riesgo de incompatibilidad con grosor de cristal y devoluciones | 2026-10-11 |
 | P06 | Funda hamaca impermeable para perros (asiento trasero) | No recomendado como primera prueba (condicionado) | Media | Tiendanimal 17,50-31 € con envío gratis/recogida (COMPROBADO); Lidl lo ha vendido a 6-8 € (DECLARADO prensa); CPA de equilibrio est. 7-13 € a 34,90-39,90 € con almacén UE; ~108 reseñas: resbala, cremalleras y correas rotas. Reabrir solo con proveedor UE ≤12 € puesto y ticket ≥39,90 € | 2026-10-11 |
-| P07 | Alfombra olfativa para perros (pack) | En profundización | Baja | Buena demostración y logística; Amazon.es 11-29 € | 2026-10-11 |
+| P07 | Alfombra olfativa para perros (pack) | Descartado (para esta prueba) | Media | Amazon.es 13-18 € con >1.000 reseñas y Prime (COMPROBADO); zooplus 70×70 a 12,79 €; margen est. máx. ~8,6 € a 34,90 € desde China, negativo desde UE con Correos; queja principal: perros grandes la rompen | 2026-10-11 |
 | P08 | Kit banneton masa madre | Descartado (para esta prueba) | Baja | Contacto con alimentos (Reg. 1935/2004); nicho pequeño | 2026-10-11 |
 | P09 | Burlete doble bajo puerta | Descartado | Media | Valor percibido 10-16 € (Leroy Merlin) | 2026-10-11 |
 | P10 | Kit cepillos para taladro | Descartado | Media | Precio ES 9-14 €; requiere taladro | 2026-10-11 |
