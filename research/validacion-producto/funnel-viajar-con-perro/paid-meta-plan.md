@@ -24,7 +24,7 @@ Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-email
 5. **Pendiente en `anuncios-y-emails.md`** (RESUELTO el 11/10: el archivo ya no contiene estos textos y está alineado con este plan). Lo que había que corregir:
    - El cierre del guion "Envío gratis · 14 días de devolución" presenta un derecho legal como ventaja.
    - El texto "¿Viajas estas fiestas con tu perro?" interpela directamente a la persona.
-6. **Seguridad vial.** En ningún vídeo aparece el perro suelto con el coche en marcha. Si se graba en marcha, el perro lleva arnés enganchado al cinturón. La funda **no** se presenta como sistema de retención, en línea con la FAQ de la landing.
+6. **Seguridad vial.** En ningún vídeo aparece el perro suelto con el coche en marcha. No se graba nada con el coche en marcha (regla de `creative-pack.md`): un plano en marcha junto a la funda insinúa retención. La funda **no** se presenta como sistema de retención, en línea con la FAQ de la landing.
 
 ---
 
@@ -41,7 +41,7 @@ Este documento sustituye la sección "Campaña: estructura" de `anuncios-y-email
 | Tope de gasto | Límite de gasto de la **campaña: 150 €**. Límite de la **cuenta: 160 €** | Garantía dura de que no se pasa del presupuesto. |
 | Regla automática | "Si el gasto de la campaña es ≥ 75 € y las compras = 0, pausar la campaña", comprobada cada 30 min | Aplica la regla de parada sin depender de que alguien mire. |
 | Ubicaciones | **Advantage+ placements**, excluyendo **Audience Network** (y Messenger si aparece suelto) | Con poco presupuesto, Audience Network suele aportar clics de baja calidad (HIPÓTESIS habitual, no medida en esta cuenta). Reels, Stories y feed de Instagram y Facebook se quedan. |
-| Formatos | Un vídeo por anuncio con **personalización por ubicación**: **9:16** para Reels y Stories, **4:5** para feeds | Cada ubicación recibe el formato que le corresponde. Se deja una zona segura de ~14 % arriba y ~20 % abajo en el 9:16. |
+| Formatos | Un vídeo por anuncio con **personalización por ubicación**: **9:16** para Reels y Stories, **4:5** para feeds | Cada ubicación recibe el formato que le corresponde. Zona segura del 9:16 unificada con `creative-pack.md`: texto solo entre el 14 % y el 65 % del alto (px 270–1250 en 1080×1920). |
 | Mejoras Advantage+ de creatividades | **Desactivadas todas**: música, variaciones de texto, ampliación de imagen, retoques, superposiciones, "enlaces del sitio", anuncios de varios anunciantes y "creatividad dinámica" | Las mejoras automáticas pueden reescribir el texto, lo que podría añadir afirmaciones sin probar, y además contaminan la comparación entre ganchos. |
 | Atribución | **7 días tras clic y 1 día tras visualización** (la configuración por defecto) | Es la ventana con la que Meta optimiza. En el informe se añaden las columnas comparativas "1 día tras clic" y "7 días tras clic" para separar las ventas "tras ver" (menos fiables). **La verdad la tiene Shopify:** pedidos con `utm_source=facebook\|instagram` (ver punto 3). |
 
@@ -114,7 +114,7 @@ Las URL de destino son estas:
   - No repetimos la tríada genérica "pelos, suciedad y líquidos".
   - Cada anuncio cuenta **una escena concreta** (río, playa, monte, tapicería, viaje a casa de la familia).
   - Respondemos **a las quejas reales** de quien ya ha comprado fundas: que resbala, que se rompen las correas o cremalleras, que traspasa la orina, que no encaja en un SUV y que el pelo se clava. Lo hacemos enseñando la prueba, no prometiendo.
-- **Frente a vigoshop (fondo rígido):** no entramos en la comparación de fondo rígido. Nuestro argumento es que se pone y se quita en segundos y que se sacude o se lava [PRUEBA].
+- **Frente a vigoshop (fondo rígido):** no entramos en la comparación de fondo rígido. Nuestro argumento es el tiempo real cronometrado de instalación [PRUEBA-INSTAL: poner la cifra] y que se sacude o se lava [PRUEBA].
 - **Afirmaciones que dependen de la muestra:** impermeable o "no pasa al asiento", antideslizante, lavable, encaje en SUV, medidas (133 × 140 cm según la ficha del proveedor), malla de visión y aperturas para el cinturón. Todas van marcadas [PRUEBA]. **Si la muestra no supera una prueba, se quita la frase o se cambia de gancho.** No se publica "por si acaso".
 - **"Envío desde España"** es [CONFIRMAR] con el origen real del envío de la muestra.
 - **Derechos legales como ventaja: prohibido.** Ni "14 días de devolución" ni la garantía legal aparecen en los anuncios como argumento de venta. Presentar derechos que la ley ya reconoce a todos los consumidores como si fueran un rasgo distintivo de la oferta es una práctica comercial desleal (Directiva 2005/29/CE, anexo I, punto 10). Esos derechos van en la landing y en las páginas legales, como información, no como reclamo. Lo que sí diferencia la oferta: **envío gratis a la Península, plazo real desde España y pruebas grabadas**.

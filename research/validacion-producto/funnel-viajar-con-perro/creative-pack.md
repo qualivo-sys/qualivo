@@ -454,3 +454,60 @@ Prompts de ejemplo (en inglés, que suele funcionar mejor en estas herramientas;
 5. `Vertical 9:16, a generic medium-sized mixed-breed dog walking happily on a leash along a dirt path in a field, seen from behind, natural light, no car, no products, no text.` (Para usarlo solo como paisaje con perro, nunca junto a planos del producto y nunca haciéndolo pasar por el perro real del vídeo.)
 
 Prompts negativos que hay que añadir siempre: `car interior, seat cover, dog bed, product, brand logo, text, watermark`.
+
+---
+
+## Revisión del Agente Creative Performance de Qualivo (11/10/2026) · cambios aplicados
+
+Fuente: sesión "Agente Creative Performance · Qualivo". Estos cambios **mandan** sobre lo anterior.
+
+**Prioridad para la ronda 1**
+- **Ganchos principales:** H12 (agua y papel), H02 (levantar la funda y ver el asiento, con las patas ya sobre la funda en el fotograma 1) y H13 (5 kg colgando de la correa; no necesita perro).
+- H15 deja de ser gancho principal y pasa a apertura B de V8.
+- **Vídeos de anuncio:**
+  - **V8 "Probamos lo que suele fallar"** como pilar.
+  - **V6 UGC barro** como contrapeso emocional.
+  - V7 en reserva: solo se publica si [PRUEBA-PELO] queda clarísima.
+  - V9 pasa a la ronda 2.
+
+**Normas comunes de edición**
+- Movimiento en el fotograma 1.
+- Un rótulo, una idea, máximo 6 palabras.
+- La cifra de cada prueba siempre en la caja amarilla, en el mismo sitio.
+- Cierre de 2 s.
+- La voz no repite el rótulo.
+- **Zona segura:** texto solo entre el 14 % y el 65 % del alto. Revisar siempre en el móvil antes de exportar.
+
+**V6 (22 s):**
+- 0–2 s, H02: patas con barro ya sobre la funda. Rótulo: "Vuelta del campo".
+- 2–5 s: el perro baja y se levanta la funda en la misma toma. Rótulo: "Sin cortes".
+- 5–8 s: selfie. "Cada sábado igual con [nombre]. Así que probé esta."
+- 8–12 s: hueco de los pies [PRUEBA-HUECO], con el coche parado y la puerta abierta.
+- 12–16 s: paño húmedo [PRUEBA-LIMPIAR].
+- 16–20 s: cronómetro de instalación [PRUEBA-INSTAL].
+- 20–22 s: F1 y precio.
+- No decir la marca en la voz mientras sea provisional.
+
+**V7 (18 s):** se fusionan los planos 1 y 2. Rótulo único: "Pelo clavado. Cada sábado". Las características van una a una, 1,2 s cada una.
+
+**V8 (26 s):**
+- 0–2 s, H12: el vertido ya empezado. Voz: "Las quejas de estas fundas: traspasa, resbala, se rompen. Lo probamos."
+- Contador fijo 1·2·3 en una esquina.
+- Agua 2–9 s, deslizamiento 9–15 s, correas 15–22 s.
+- 22–26 s: F1 y "Vídeos completos, sin cortar, en la web".
+- La cifra real siempre se muestra, aunque sea poco favorable.
+
+**V9 (ronda 2):** el gesto del maletero ya en marcha en el fotograma 1. Se quita el plano del coche llegando. "En casa de mi madre" solo si es verdad.
+
+**Riesgos y reglas**
+- **Sin planos con el coche en marcha.** Se ha unificado en `paid-meta-plan.md`.
+- **"Tapa el hueco":** siempre con el coche parado y la puerta abierta, para que no se lea como "evita caídas".
+- **H04, H06, H10 y H15 son afirmaciones de hecho:** solo si son literales. "Cientos" solo con la cifra real.
+- La cita "repelente, no impermeable" va sin atribuir y sin capturas.
+- **Se elimina el b-roll generado con IA en la ronda 1.** Meta etiqueta "Información de IA" y eso resta credibilidad a una marca desconocida. Además, el vídeo IA genera letras falsas: en la VSL de Qualivo hubo que sustituir un plano.
+- **Voz:** grabada en el coche cerrado y sin procesar con aislador. En el selfie, sonido directo.
+- **Textos:** recortarlos tras verlos en el móvil (aprendizaje de los anuncios de Qualivo).
+
+**Aprendizaje de Qualivo** (cuenta B2B; vale como dirección, no como cifra para e-commerce): el anuncio que enseñaba el producto funcionando mantuvo un CTR del 3–4 %. El de dolor abstracto arrancó en un 5–7 % y cayó en 48 h. Por eso V8 es el pilar y un gancho no se juzga solo por el día 1.
+
+**Oferta:** Creative Performance puede montar V8 a partir del material bruto del rodaje, con el visto bueno de Maikel antes de publicar nada.
