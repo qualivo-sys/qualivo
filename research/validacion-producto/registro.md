@@ -38,6 +38,16 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | P08 | Kit banneton masa madre | Descartado (para esta prueba) | Baja | Contacto con alimentos (Reg. 1935/2004); nicho pequeño | 2026-10-11 |
 | P09 | Burlete doble bajo puerta | Descartado | Media | Valor percibido 10-16 € (Leroy Merlin) | 2026-10-11 |
 | P10 | Kit cepillos para taladro | Descartado | Media | Precio ES 9-14 €; requiere taladro | 2026-10-11 |
+| P11 | Tablero de puzzle de fieltro inclinable con bandejas y funda | Investigar (solo con pack ≥44,90 €) | Baja | Amazon.es 32-37 € (COMPROBADO-buscador); margen ≥15 € solo comprando en volumen (>1.000 €); Trends ES "tablero puzzle" ≈0 | 2026-10-11 |
+| P12 | Hamaca de ventana para gatos con ventosas | Descartado salvo diferencial | Baja | Precio creíble ES 24-28 €; quejas de ventosas; Trends ≈0 | 2026-10-11 |
+| P13 | Bandeja de bañera de bambú extensible | Descartado | Media | SKU de mayorista español muy repartido; caja larga | 2026-10-11 |
+| P14 | Kit devanadora + ovilladora para lana | Investigar | Baja | Único con margen est. ~15 € a 49,90 € en dropshipping; Trends ES "ovilladora"/"devanadora" ≈0; nicho pequeño | 2026-10-11 |
+| P15 | Paleta húmeda para miniaturas | Descartado | Media | Líder Army Painter 24,60 € con 9.018 valoraciones | 2026-10-11 |
+| P16 | Kit de ganchillo/amigurumi para principiantes | Descartado | Media | Action 1,59 € (COMPROBADO-buscador) | 2026-10-11 |
+| P17 | Bolsa de agua caliente larga con funda | Descartado | Media | Precio ES 14-25 €; riesgo de seguridad (caucho, quemaduras) | 2026-10-11 |
+| P18 | Bolso bandolera de paseo para perro | Descartado | Media | Anclaje ES 18-23 € | 2026-10-11 |
+| P19 | Comedero de pájaros de ventana | Descartado | Media | Precio ES 14-28 €; demanda dudosa | 2026-10-11 |
+| P20 | Barra de pilates portátil | Descartado | Media | Genérico 12-28 € en Amazon.es | 2026-10-11 |
 
 ## Consumo de herramientas
 
@@ -73,6 +83,6 @@ Interés relativo, no volumen. 0 = por debajo del umbral de Google. Ancla "funda
 | cepillo taladro | 2,8 | 2,7 | ene-feb | +28 % |
 | organizador maletero | 1,4 | 2,2 | oct/dic | base baja |
 | funda coche perro, alfombra olfativa, bolsas de compresión, banneton, limpiacristales magnético, quita pelos perro | <1 | <1 | — | ruido |
-| funda parabrisas, comedero lento perro | 0 | 0 | — | — |
+| funda parabrisas, comedero lento perro, ovilladora, devanadora, tablero puzzle, hamaca ventana gato | ≈0 | ≈0 | — | — |
 
 Lectura: los candidatos P04-P07 tienen búsqueda casi nula en España; si se prueban, dependen de compra por descubrimiento (Meta), no de búsqueda. Esto no es ausencia de demanda, pero sí ausencia de una señal independiente que la confirme.
