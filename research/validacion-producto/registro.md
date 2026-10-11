@@ -33,7 +33,7 @@ Etiquetas: COMPROBADO · COMPROBADO-buscador (solo fragmento del buscador) · DE
 | P03 | Organizador de maletero plegable | Descartado (para esta prueba) | Media | Precio ES 10-30 € (Action 9,99 € con nevera, Fortem ~25-30 €); voluminoso (~3 kg volumétricos); margen est. ≤5 € o negativo | 2026-10-11 |
 | P04 | Funda magnética antiescarcha parabrisas | Descartado salvo pack | Baja | Amazon.es desde 8,99 € (COMPROBADO-buscador); temporada corta | 2026-10-11 |
 | P05 | Limpiacristales magnético ajustable | Investigar con cautela | Baja | Demostración excelente; riesgo de incompatibilidad con grosor de cristal y devoluciones | 2026-10-11 |
-| P06 | Funda hamaca impermeable para perros (asiento trasero) | En profundización | Baja | Precio ES 26-39 € (COMPROBADO-buscador) | 2026-10-11 |
+| P06 | Funda hamaca impermeable para perros (asiento trasero) | No recomendado como primera prueba (condicionado) | Media | Tiendanimal 17,50-31 € con envío gratis/recogida (COMPROBADO); Lidl lo ha vendido a 6-8 € (DECLARADO prensa); CPA de equilibrio est. 7-13 € a 34,90-39,90 € con almacén UE; ~108 reseñas: resbala, cremalleras y correas rotas. Reabrir solo con proveedor UE ≤12 € puesto y ticket ≥39,90 € | 2026-10-11 |
 | P07 | Alfombra olfativa para perros (pack) | En profundización | Baja | Buena demostración y logística; Amazon.es 11-29 € | 2026-10-11 |
 | P08 | Kit banneton masa madre | Descartado (para esta prueba) | Baja | Contacto con alimentos (Reg. 1935/2004); nicho pequeño | 2026-10-11 |
 | P09 | Burlete doble bajo puerta | Descartado | Media | Valor percibido 10-16 € (Leroy Merlin) | 2026-10-11 |
