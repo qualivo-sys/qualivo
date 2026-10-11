@@ -7,6 +7,8 @@ Normas aplicadas:
 - Nada de precios tachados inventados.
 - Nada de urgencias falsas.
 
+> **Actualización 11/10:** tras buscar proveedores en la UE, la **funda de coche (44,90 €)** es el producto principal y la colchoneta solo va en el kit (79,90 €). El ángulo 1 se graba con la funda: perro con barro → asiento protegido. El ángulo 2 (terrazas) pasa a segunda ronda.
+
 ---
 
 ## Campaña: estructura
@@ -64,9 +66,9 @@ Normas aplicadas:
 **Texto principal:**
 > Kit para viajar con perro: funda para el asiento trasero + colchoneta enrollable.
 > Protege la tapicería del barro y el pelo, y le da su sitio al llegar.
-> 69,90 € el kit, envío gratis a la Península.
+> 79,90 € el kit, envío gratis a la Península.
 
-**Titular:** Kit para viajar con tu perro · 69,90 €
+**Titular:** Kit para viajar con tu perro · 79,90 €
 **CTA:** Comprar
 
 ---
