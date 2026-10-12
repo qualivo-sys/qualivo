@@ -1306,3 +1306,39 @@ Maikel compartió la revisión de ChatGPT de la web V2 y dijo «podemos ir hacie
 
 **Hipótesis para la semana que viene:** con la pregunta de quién decide en el formulario nuevo, los contactos con «otra persona» llegarán a la reunión más veces sin quien decide que los de «yo». Se puede contar con Growth el viernes 16 cruzando la etiqueta `decisor-*` con las reuniones, sin publicar tasas (R3) mientras dure la prueba.
 
+### Lunes 12-oct · trabajo del día (semana 42, cualificación)
+
+**Corrección primero (R2):** la prueba del funnel v2 de Growth está en marcha desde el 8-oct (primer lead v2 ese día, daily del 9-oct). El viernes escribí «prevista el lunes 12» con el bus del 8-oct. Corregido en:
+- `/blog/quien-decide-la-compra/` y `/blog/primera-reunion-con-un-cliente/`;
+- llms.txt y el borrador de la tesis;
+- dos artículos que decían que la pregunta del precio estaba «pendiente»: `/blog/cuanto-invertir-en-publicidad/` y `/blog/objecion-de-precio/`.
+
+**Publicado:**
+- **[/blog/cualificar-leads/](https://qualivo.io/blog/cualificar-leads/), actualización fuerte** (pieza 1 del brief de la semana 42):
+  - **sección nueva «Lo que el formulario no ve»:** el caso del 5-oct anonimizado y la pregunta de ticket en cuatro tramos del formulario v2. Por ahora solo deja una marca y el resultado se contará cuando acabe la prueba;
+  - **el paso 1** añade el precio de lo que vende el cliente;
+  - **FAQ nueva:** «¿cuántas preguntas debe tener un formulario?», sin cifra inventada.
+- **Re-apunte de [/blog/formulario-de-facebook-o-landing-page/](https://qualivo.io/blog/formulario-de-facebook-o-landing-page/)**, que es uno de los dos enlaces que pide el brief. Lleva los formularios v2 y enlaza a cualificar-leads y a quien-decide-la-compra.
+- **Registro de keywords al día.**
+
+**Hoy no he escrito un artículo nuevo.** El brief de la semana 42 pone el lunes la actualización de cualificar-leads, y escribir otro competiría con ella.
+
+**Piezas internas del brief** (`content/briefs/2026-10-12-semana-42-piezas-6-7.md`):
+- **Pieza 6:** fragmento para outbound, para Growth.
+- **Pieza 7:** argumento comercial «nos llegan muchos leads, pero malos», para el guion de venta.
+
+Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en el daily: el precio cambiaba la cuenta.
+
+**Borrador de redes:** el «Agentizando» del lunes es `content/borradores/2026-10-08-agentizando-se-corrige.md`, que estaba en el banco desde el jueves. No he escrito otro, para no acumular piezas sin publicar. Según el brief, mañana toca el LinkedIn A, «la A que no era».
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-12.md`): cualificar-leads 6, re-apunte 7, corrección 8 y piezas 6-7 5. Aplicados los críticos. Lo importante: la prueba sí cambia mensajes (el dolor entra en el primer WhatsApp), aunque la respuesta del precio solo deja marca, y el texto ya lo dice así.
+
+**Descartado:** la newsletter. Vuelve en la semana 45.
+
+**Decisiones para Maikel:**
+1. **La frase del brief (§3):** «Mi formulario sabía cuánto invertía en anuncios. No sabía cuánto cobraba a sus clientes.» ¿La suscribes? Recomendación: sí, para el LinkedIn A de mañana.
+2. **D1, LinkedIn:** ¿qué ha salido de la cobertura? Sin eso no puedo ordenar el banco: «Agentizando se corrige», la tesis «quién decide» y el LinkedIn A y B de esta semana.
+3. **`utm_campaign`:** el blog usa `articulo` y el Content OS pide el tema de la semana (`s42-cualificacion`). Recomendación: mantener `articulo` en el blog, porque cada artículo vive meses, y usar el tema solo en redes y outbound.
+
+**Hipótesis para mañana:** el post de «la A que no era» funcionará mejor con dueños de servicios que con perfiles de marketing, porque habla de lo que cobran, no de anuncios. Se mide el viernes 16 con los comentarios de perfiles de dirección.
+

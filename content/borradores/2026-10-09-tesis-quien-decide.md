@@ -15,7 +15,7 @@
   - **Funnel v2** (`bus/out/demand.jsonl`, 8-oct, `solicitud-montaje`): los formularios nuevos preguntan quién decide (yo / yo con un socio / otra persona). **Corrección 12-oct:** la prueba está en marcha desde el 8-oct (primer lead del funnel v2 ese día, daily del 9-oct). El 9-oct se escribió «prevista el lunes 12» con el bus del 8-oct; ya corregido en el texto.
   - **Caso del 5-oct**, ya publicado en `/blog/cuanto-invertir-en-publicidad/`: un contacto entró con la nota más alta por inversión y volumen, y en la reunión el precio de su servicio cambiaba toda la cuenta.
 - **Reglas:**
-  - **R3:** la prueba del lunes no ha empezado. No se da ningún resultado.
+  - **R3:** la prueba está en marcha desde el 8-oct y sigue abierta. No se da ningún resultado.
   - **R5:** sin nombres ni sectores.
   - **R10:** sin precio.
   - **R12:** primero lo que cambiamos (la pregunta nueva), después el fallo (la objeción).
