@@ -96,7 +96,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='tarjeta', t0=P('y llevo mas'), t1=P('y si algo'), k='Maikel Echevarría',
       items=[it('Más de 10 años en marketing y captación', P('y llevo mas')), it('Cientos de anuncios probados', P('probado cientos'))])
     E(tipo='clave', html='<s>Cuánto inviertes</s> <i>Cómo inviertes</i>', t0=P('y si algo'), t1=P('si tu anuncio'))
-    E(tipo='lista', t0=P('si tu anuncio'), t1=P('y ojo'), titulo='Dónde se va el dinero',
+    E(tipo='tarjeta', t0=P('si tu anuncio'), t1=P('y ojo'), k='Dónde se va el dinero',
       items=[it('Un anuncio que habla a todo el mundo', P('si tu anuncio'), 'ko'), it('Un mensaje que no conecta', P('si tu mensaje'), 'ko'),
              it('Una página que no convence', P('una pagina que'), 'ko')])
     E(tipo='cadena', unico=1, t0=P('y ojo'), t1=P('pero muchas empresas'),
@@ -147,22 +147,27 @@ def construir(palabras, bruto, trabajo):
     E(tipo='clave', html='¿Cómo empezamos <i>a trabajar juntos?</i>', t0=P('y como empezamos'), t1=P('primero analizamos'))
     E(tipo='tarjeta', t0=P('primero analizamos'), t1=P('a partir de ahi'), k='Primero, tu situación',
       items=[it('Cómo captas clientes', P('que estas haciendo')), it('Qué resultados consigues', P('que resultados')), it('Qué pasa después', P('y que ocurre'))])
-    E(tipo='lista', t0=P('a partir de ahi'), t1=P('cada negocio'), titulo='¿Dónde intervenir?',
+    E(tipo='tarjeta', t0=P('a partir de ahi'), t1=P('cada negocio'), k='¿Dónde intervenir?',
       items=[it('¿Los anuncios?', P('puede que necesites'), 'q'), it('¿La página?', P('puede que el problema'), 'q'), it('¿Lo que pasa después?', P('o puede que'), 'q')])
     E(tipo='clave', html='Cada negocio <i>es diferente</i>', t0=P('cada negocio'), t1=P('por eso no queremos'))
     E(tipo='clave', coral=1, html='<s>Un montón de herramientas</s>', t0=P('por eso no queremos'), t1=P('queremos disenar'))
-    E(tipo='cadena', unico=1, t0=P('queremos disenar'), t1=P('asi que si'),
-      pasos=[{'txt': 'Diseñar', 't': P('queremos disenar')}, {'txt': 'Poner a funcionar', 't': P('ponerla a')}, {'txt': 'Mejorar con datos', 't': P('y mejorarla')}])
+    E(tipo='tarjeta', t0=P('queremos disenar'), t1=P('asi que si'), k='Una estrategia para tu empresa',
+      items=[it('Diseñarla', P('queremos disenar')), it('Ponerla a funcionar', P('ponerla a')), it('Mejorarla con datos', P('y mejorarla'))])
     # B6 · cierre
     E(tipo='cta', t0=P('reserva una sesion'), t1=P('sin discursos'), titulo='Reserva una sesión con nosotros', pie='Analizamos tu captación contigo',
       items=[it('Cómo atraes clientes', P('como estas atrayendo')), it('Qué pasa después', P('que pasa despues')), it('Dónde puedes mejorar', P('y donde tienes'))])
-    E(tipo='lista', t0=P('sin discursos'), t1=P('que si fuera'), titulo='Sin…',
+    E(tipo='tarjeta', t0=P('sin discursos'), t1=P('que si fuera'), k='Sin…',
       items=[it('Discursos raros', P('sin discursos'), 'ko'), it('IA porque sí', P('sin venderte'), 'ko'), it('Prometer ×10 en una semana', P('y sin prometerte'), 'ko')])
     E(tipo='clave', html='Entender tu negocio <i>y ayudarte a crecer</i>', t0=P('lo que si vamos'), t1=P('asi que nada'))
-    t_fin = Pe('nos vemos adentro') + 0.5
+    t_fin = P('haz clic')   # la tarjeta final con el botón entra cuando lo dice
     E(tipo='fin', t0=t_fin, t1=1e9, titulo='Descubre dónde puedes mejorar tu captación', boton='Reserva una sesión de diagnóstico')
+    # Las pantallas completas tapan a Maikel: se quitan 2,5 s después de su último elemento.
+    for s in ests:
+        if s['tipo'] in ('lista', 'cadena', 'ads3', 'landing', 'pantalla'):
+            ts = [x['t'] for k in ('items', 'pasos', 'ads', 'dudas', 'focos') for x in s.get(k, [])] + [s.get(k, s['t0']) for k in ('t0', 'tm', 'tf', 'tb')]
+            s['t1'] = min(s['t1'], max(ts) + 2.5)
     nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
-    apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 1.2)]
+    apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 0)]
     # encuadres: «de lado» cuando hay tarjeta; zoom en el gancho; si no, abierto y cerrado alternos
     forz = [(s['t0'], s['t1']) for s in ests if s['tipo'] in ('tarjeta', 'cta')]
     gancho = (tr[0][0], P('empresas que estan'))
@@ -229,7 +234,7 @@ def base(bruto, trabajo, planos, total, apoyos=()):
             ap = next((x for x in apoyos if x[0] <= (pa + pb) / 2 < x[1]), None)
             if ap:
                 wa, wb, c, blur, off = ap
-                ent = ['-ss', f'{off + pa - wa:.3f}', '-i', os.path.join(REC, c)]
+                ent = ['-stream_loop', '-1', '-ss', f'{off + pa - wa:.3f}', '-i', os.path.join(REC, c)]  # en bucle: los clips de Kling duran 5 s
                 vf = f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,gblur=sigma={blur}'
             else:
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
@@ -239,6 +244,7 @@ def base(bruto, trabajo, planos, total, apoyos=()):
             trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
     def hacer(tj):
         i, ent, vf, n = tj
+        if os.environ.get('REUSAR') == '1' and os.path.getsize(f'{tz}/t{i:04d}.mp4') > 20000 if os.path.exists(f'{tz}/t{i:04d}.mp4') else False: return
         subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', *ent, '-vf', vf, '-frames:v', str(n), '-an', '-c:v', 'libx264',
                         '-crf', '18', '-preset', 'fast', '-r', str(FPS), f'{tz}/t{i:04d}.mp4'], check=True, stdin=subprocess.DEVNULL)
     with ThreadPoolExecutor(3) as ex: list(ex.map(hacer, trabajos))
