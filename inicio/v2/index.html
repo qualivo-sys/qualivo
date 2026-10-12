@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR · Home de Qualivo con el posicionamiento v2 (content/posicionamiento-v2-2026-10-12.md), 12-oct-2026.
+     noindex. No sustituye a / hasta el OK de Maikel. Formulario: el mismo de la home (assets/app.js → /api/lead),
+     con los mismos IDs. Sin precios, sin garantía, sin «agentes de IA» ni «agentizamos». -->
+<title>Qualivo · Conseguimos que más oportunidades se conviertan en clientes</title>
+<meta name="description" content="Sistemas de crecimiento que conectan la captación, la respuesta comercial y el seguimiento hasta la venta. Más oportunidades, menos negocio perdido y saber qué funciona. Diagnóstico sin coste de 30 minutos.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://qualivo.io/">
+<meta property="og:title" content="Qualivo · Conseguimos que más oportunidades se conviertan en clientes">
+<meta property="og:description" content="Captación, conversión, seguimiento y medición conectados en un sistema gestionado. Diagnóstico sin coste de 30 minutos.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --marfil:#FAF7F0; --marfil-2:#F2EDE2; --tinta:#101319; --negro:#08090C;
+  --verde:#0E7C74; --verde-claro:#27BDB1; --verde-suave:#E3F2EF; --amarillo:#F4CC38;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --linea:rgba(16,19,25,.1); --rojo:#C2410C; --naranja-suave:#FFF1EA;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--display);background:var(--marfil);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(64px,8vw,112px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(30px,4.2vw,48px);max-width:20ch}
+h3{font-size:clamp(18px,2vw,21px);letter-spacing:-.02em;line-height:1.22}
+p{font-size:clamp(16px,1.8vw,17.5px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:14px}
+.lead{color:var(--gris);margin-top:16px;max-width:56ch}
+.borrador{background:var(--amarillo);text-align:center;font-weight:800;font-size:13px;padding:7px 16px}
+.tag-demo{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--amarillo);color:var(--tinta);font:900 clamp(16px,1.9vw,18px)/1.15 var(--display);text-decoration:none;text-align:center;
+  box-shadow:0 12px 30px rgba(244,204,56,.32);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(244,204,56,.42)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-sm{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+.btn-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:800;font-size:16px;text-decoration:none;color:var(--gris)}
+.btn-link:hover{color:var(--tinta)}
+
+/* barra */
+.top{position:sticky;top:0;z-index:40;background:rgba(250,247,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.top img{height:22px;width:auto}
+.top nav{display:flex;align-items:center;gap:22px}
+.top nav a.l{font-size:14.5px;font-weight:700;text-decoration:none;color:#3E434B}
+.top nav a.l:hover{color:var(--verde)}
+
+/* 1 · HERO */
+.hero{padding:clamp(44px,6vw,84px) 0 clamp(56px,7vw,96px)}
+.grid-h{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(34px,4.7vw,58px);max-width:15ch}
+.hero h1 span{color:var(--verde);text-decoration:underline;text-decoration-color:rgba(244,204,56,.9);text-decoration-thickness:.16em;text-underline-offset:.08em;text-decoration-skip-ink:none}
+.hero .lead{font-size:clamp(17px,1.9vw,19px);color:#3E434B;margin-top:22px;max-width:46ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:30px}
+.hero .micro{margin-top:14px;font-size:14.5px;color:var(--gris);font-weight:700}
+.hero .micro span{color:var(--verde)}
+.sectores{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:26px;padding-top:20px;border-top:1px solid var(--linea)}
+.sectores small{font-size:13px;font-weight:700;color:var(--gris-claro);margin-right:4px}
+.sectores a{font-size:13.5px;font-weight:800;text-decoration:none;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:7px 13px}
+.sectores a:hover{border-color:var(--verde);color:var(--verde)}
+.dash{background:#fff;border:1px solid var(--linea);border-radius:22px;box-shadow:0 30px 80px rgba(16,19,25,.10);padding:22px 22px 18px}
+.dash-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.dash-h b{font-size:15.5px;display:block}
+.dash-h small{display:block;font-size:13px;color:var(--gris-claro);font-weight:600;margin-top:3px}
+.etapa{display:grid;grid-template-columns:118px 1fr 40px;gap:12px;align-items:center;padding:7px 0}
+.etapa .n{font-size:14px;font-weight:700;color:#2B2F36}
+.barra{height:26px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--verde),var(--verde-claro));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dash.on .barra i{width:var(--w)}
+.etapa .v{font-size:15px;font-weight:900;text-align:right}
+.etapa.fin .barra i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fuga-h{margin:6px 0 6px 130px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
+.dash-pie{border-top:1px solid var(--linea);margin-top:12px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
+
+/* 2 · RESULTADOS */
+.res{background:#fff}
+.casos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.caso{border-radius:22px;padding:clamp(26px,3.4vw,38px);display:flex;flex-direction:column}
+.caso.oscuro{background:var(--tinta);color:#fff}
+.caso.claro{background:var(--verde-suave)}
+.caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.caso .cab img{height:30px;width:auto}
+.caso.oscuro .cab img{filter:brightness(0) invert(1);opacity:.9;height:26px}
+.caso .quien{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.75}
+.caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:22px 0 16px}
+.caso .big{font-size:clamp(44px,5.6vw,68px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.caso.oscuro .big{color:var(--amarillo)}
+.caso.claro .big{color:var(--verde)}
+.caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:22ch;line-height:1.35}
+.caso.oscuro .lbl{color:#C6CBD3}
+.caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
+.caso.oscuro .ctx{color:#AEB5BF}
+.caso .ctx b{font-weight:800}
+.caso.oscuro .ctx b{color:#fff}
+.caso.claro .ctx{color:#3E434B}
+.caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none}
+.caso.oscuro .ver{color:var(--amarillo)}
+.caso.claro .ver{color:var(--verde)}
+.mas-casos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:16px;border:1px solid var(--linea);border-radius:18px;overflow:hidden}
+.mas-casos a{display:flex;gap:14px;align-items:baseline;padding:18px 20px;text-decoration:none;background:#fff}
+.mas-casos a + a{border-left:1px solid var(--linea)}
+.mas-casos a:hover{background:var(--marfil)}
+.mas-casos b{font-size:24px;font-weight:900;letter-spacing:-.04em;color:var(--verde);white-space:nowrap}
+.mas-casos span{font-size:14px;color:var(--gris);line-height:1.4}
+.mas-casos span strong{color:var(--tinta)}
+.logos{margin-top:clamp(36px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center}
+.logos p{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);max-width:14ch;line-height:1.4}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;opacity:.6}
+.logos img{width:auto}
+
+/* 3 · PROBLEMA + SOLUCIÓN */
+.fugas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
+.fg{padding:20px 24px 20px 0;border-bottom:1px solid var(--linea)}
+.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding-left:24px;border-left:1px solid var(--linea)}
+.fg .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--rojo)}
+.fg p{font-size:15.5px;color:#3E434B;line-height:1.45;margin-top:6px}
+.solucion{margin-top:clamp(40px,5vw,56px);background:var(--tinta);color:#fff;border-radius:24px;padding:clamp(24px,3.4vw,38px)}
+.solucion .t{margin-bottom:24px}
+.solucion .t h3{font-size:clamp(20px,2.4vw,26px);color:#fff;max-width:34ch}
+.solucion .t p{font-size:15px;color:#AEB5BF;margin-top:8px;max-width:70ch}
+.flujo{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;list-style:none;counter-reset:f}
+.flujo li{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 16px 16px}
+.flujo li::before{counter-increment:f;content:'0' counter(f);display:block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--verde-claro);margin-bottom:10px}
+.flujo li::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:1;color:var(--amarillo);font-weight:900;background:var(--tinta);width:12px;text-align:center}
+.flujo li:last-child::after{display:none}
+.flujo b{display:block;font-size:17px;letter-spacing:-.01em;margin-bottom:6px}
+.flujo span{display:block;font-size:13.5px;color:#AEB5BF;line-height:1.45}
+.flujo em{display:block;font-style:normal;font-size:12px;color:#7F8794;margin-top:10px;font-weight:600}
+
+/* 4 · DEMOSTRACIÓN */
+.demo{background:var(--negro);color:#fff}
+.demo h2{color:#fff;max-width:18ch}
+.demo .eyebrow{color:var(--verde-claro)}
+.demo .lead{color:#AEB5BF}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;margin-top:36px}
+.kpis div{background:#11151B;padding:16px 18px}
+.kpis small{display:block;font-size:12.5px;color:#8E96A2;font-weight:700}
+.kpis b{display:block;font-size:clamp(22px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;margin-top:4px}
+.kpis .alerta b{color:#FF9B7A}
+.kpis .ok b{color:var(--amarillo)}
+.escena{margin-top:16px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
+.escena > div,.lado > div{min-width:0}
+.marco{background:#F6F4EF;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.marco .bar{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 14px;background:#14181F}
+.marco .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.marco .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.marco .bar .tag-demo{margin-left:auto}
+.marco img{width:100%;height:auto}
+.nota-img{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:14.5px;color:#C6CBD3;line-height:1.45}
+.nota-img .n{flex:0 0 24px;height:24px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:grid;place-items:center;font-weight:900;font-size:12.5px}
+.nota-img b{color:#fff}
+.lado{display:grid;gap:16px}
+.raquel{background:linear-gradient(135deg,#14181F,#0F1F1D);border:1px solid rgba(39,189,177,.35);border-radius:18px;padding:20px}
+.raquel .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde-claro)}
+.raquel h3{color:#fff;margin:8px 0 6px;font-size:18px}
+.raquel p{font-size:14.5px;color:#AEB5BF;line-height:1.5}
+.raquel a{display:inline-flex;align-items:center;margin-top:14px;min-height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:800;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.35)}
+.raquel a:hover{border-color:var(--verde-claro)}
+
+/* 5 · SERVICIO */
+.serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);margin-top:40px;align-items:start}
+.fases{list-style:none;border-top:2px solid var(--tinta)}
+.fases li{display:grid;grid-template-columns:64px 1fr;gap:0 14px;padding:20px 0;border-bottom:1px solid var(--linea)}
+.fases .num{grid-row:1/3;font-size:34px;font-weight:900;letter-spacing:-.05em;color:var(--verde);line-height:1}
+.fases h3{margin-bottom:4px}
+.fases p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.incluye{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:clamp(22px,3vw,30px)}
+.incluye .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.incluye h3{font-size:clamp(20px,2.4vw,24px);margin:8px 0 16px}
+.incluye ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.incluye li{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:700;line-height:1.35;background:var(--marfil);border-radius:12px;padding:12px}
+.incluye li::before{content:'✓';color:var(--verde);font-weight:900}
+.incluye .pie-i{margin-top:14px;font-size:13.5px;color:var(--gris);line-height:1.5}
+.incluye .pie-i b{color:var(--tinta)}
+.fundador{margin-top:clamp(32px,4vw,44px);display:grid;grid-template-columns:auto 1fr auto;gap:18px 24px;align-items:center;background:var(--marfil-2);border-radius:20px;padding:20px 24px}
+.fundador img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.fundador p{font-size:15px;color:#3E434B;line-height:1.5;max-width:70ch}
+.fundador b{color:var(--tinta)}
+.fundador .btn{white-space:nowrap}
+
+/* 6 · CONVERSIÓN (formulario de la home: assets/app.js) */
+.final{background:var(--negro);color:#fff}
+.final h2{color:#fff}
+.final .eyebrow{color:var(--verde-claro)}
+.final .lead{color:#AEB5BF}
+.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
+.despues{margin-top:26px;list-style:none;display:grid;gap:12px;counter-reset:d}
+.despues li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:15.5px;color:#C6CBD3;line-height:1.45}
+.despues li::before{counter-increment:d;content:counter(d);width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font-weight:900;font-size:13px;color:var(--verde-claro)}
+.despues b{color:#fff}
+.caja-f{background:#fff;color:var(--tinta);border-radius:22px;padding:clamp(22px,3.2vw,34px)}
+#lead-form{display:flex;flex-direction:column;gap:14px}
+#lead-form h3{font-size:21px}
+.field{display:block}
+.field-label{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;min-height:50px;padding:12px 14px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--verde-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--gris);line-height:1.5;cursor:pointer}
+.rgpd input{width:18px;height:18px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#submit-btn{width:100%}
+.faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
+.faq h3{font-size:clamp(22px,2.8vw,30px);color:#fff}
+.faq details{border-top:1px solid rgba(255,255,255,.14)}
+.faq details:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:18px;align-items:center;color:#fff}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;font-weight:700;color:var(--verde-claro);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 0 18px;color:#AEB5BF;font-size:15.5px;line-height:1.6;max-width:58ch}
+
+.pie{background:var(--negro);color:#6C7480;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+.pie .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:34px;padding-bottom:96px}
+.pie img{height:22px;width:auto;margin-bottom:12px}
+.pie .cols{display:flex;gap:40px;flex-wrap:wrap}
+.pie .cols div{display:flex;flex-direction:column;gap:8px}
+.pie a{color:#9AA2AE;text-decoration:none}
+.pie a:hover{color:#fff}
+[hidden]{display:none !important}
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+
+@media(max-width:1000px){.flujo{grid-template-columns:1fr 1fr}.flujo li::after{display:none}.escena{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:960px){.grid-h,.casos,.grid-f,.faq,.serv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}.mas-casos{grid-template-columns:1fr}.mas-casos a + a{border-left:0;border-top:1px solid var(--linea)}.top nav a.l{display:none}}
+@media(max-width:760px){
+  .top .btn-sm{display:none}.fijo{display:block}
+  .fugas{grid-template-columns:1fr 1fr}
+  .fg,.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding:16px 12px 16px 0;border-left:0}
+  .fg:nth-child(2n){padding-left:14px;border-left:1px solid var(--linea)}
+  .flujo{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}.kpis div:last-child{grid-column:1/-1}
+  .etapa{grid-template-columns:104px 1fr 36px;gap:10px}.fuga-h{margin-left:0}
+  .logos{grid-template-columns:1fr}.logos p{max-width:none}
+  .incluye ul{grid-template-columns:1fr}
+  .hero .ctas .btn{width:100%}
+  .fundador{grid-template-columns:auto 1fr}.fundador .btn{grid-column:1/-1;width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR · home con el posicionamiento v2 · sin publicar · el formulario es real</div>
+
+<div class="top">
+  <div class="wrap">
+    <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
+    <nav aria-label="Principal">
+      <a class="l" href="#como">Cómo funciona</a>
+      <a class="l" href="#casos">Casos</a>
+      <a class="l" href="/blog/">Blog</a>
+      <a href="#contacto" class="btn btn-sm" data-cta="barra">Diagnóstico sin coste</a>
+    </nav>
+  </div>
+</div>
+
+<!-- 1 · HERO -->
+<header class="hero" id="hero">
+  <div class="wrap grid-h">
+    <div>
+      <p class="eyebrow">Sistemas de crecimiento comercial, gestionados</p>
+      <h1>Conseguimos que más oportunidades <span>se conviertan en clientes.</span></h1>
+      <p class="lead">Conectamos la captación, la respuesta comercial y el seguimiento hasta la venta, para que tu empresa consiga más oportunidades, pierda menos por el camino y sepa qué funciona.</p>
+      <div class="ctas">
+        <a href="#contacto" class="btn" data-cta="hero">Descubre dónde pierdes oportunidades&nbsp;→</a>
+        <a href="#como" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
+      </div>
+      <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
+      <div class="sectores"><small>Por sector:</small><a href="/formacion/">Academias y formación</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
+    </div>
+
+    <figure class="dash" id="dash" aria-label="Ejemplo de recorrido comercial de un mes: de 120 oportunidades a 7 clientes. Datos de ejemplo.">
+      <div class="dash-h">
+        <div><b>Recorrido comercial de un mes</b><small>De la oportunidad a la venta</small></div>
+        <span class="tag-demo">Datos de ejemplo</span>
+      </div>
+      <div class="etapa"><span class="n">Oportunidades</span><div class="barra"><i style="--w:100%"></i></div><span class="v" data-n="120">120</span></div>
+      <div class="etapa"><span class="n">Conversaciones</span><div class="barra"><i style="--w:65%"></i></div><span class="v" data-n="78">78</span></div>
+      <div class="fuga-h">42 oportunidades no llegaron a hablar con nadie. Aquí se pierde.</div>
+      <div class="etapa"><span class="n">Reuniones</span><div class="barra"><i style="--w:26%"></i></div><span class="v" data-n="31">31</span></div>
+      <div class="etapa"><span class="n">Propuestas</span><div class="barra"><i style="--w:15%"></i></div><span class="v" data-n="18">18</span></div>
+      <div class="etapa fin"><span class="n">Clientes</span><div class="barra"><i style="--w:7%"></i></div><span class="v" data-n="7">7</span></div>
+      <figcaption class="dash-pie">Ejemplo ilustrativo. No son datos de un cliente.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- 2 · RESULTADOS -->
+<section class="sec res" id="casos" aria-labelledby="t-res">
+  <div class="wrap">
+    <p class="eyebrow">Resultados</p>
+    <h2 id="t-res">Resultados reales, del anuncio a la venta.</h2>
+    <div class="casos">
+      <article class="caso oscuro">
+        <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya · Formación</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
+          <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">facturados y atribuidos en un mes</div></div>
+        </div>
+        <p class="ctx"><b>Captación conectada a la matrícula.</b> Campañas por curso en Meta, Google y TikTok, unidas al CRM, y cada solicitud seguida hasta la entrevista y la matrícula.</p>
+        <a class="ver" href="/casos/eac/">Ver el caso →</a>
+      </article>
+      <article class="caso claro">
+        <div class="cab"><span class="quien">Nuria Roure · Servicios y formación online</span><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" loading="lazy"></div>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="6.45" data-dec="2" data-suf="×">6,45×</div><div class="lbl">de retorno: 2.000 € invertidos, 12.900 € en ventas</div></div>
+        </div>
+        <p class="ctx"><b>Sin captar un lead más.</b> El problema no era conseguir más leads, sino saber cuáles merecían atención: cualificación, puntuación y seguimiento.</p>
+        <a class="ver" href="/casos/nuria-roure/">Ver el caso →</a>
+      </article>
+    </div>
+    <div class="mas-casos">
+      <a href="/casos/bellovinilo/"><b>8,3×</b><span><strong>BelloVinilo.</strong> Un sistema comercial construido desde cero.</span></a>
+      <a href="/formacion/"><b>21</b><span><strong>Nail Boss Academy.</strong> Matrículas en cuatro meses, partiendo de cero.</span></a>
+      <a href="/casos/focus-practical/"><b>−53&nbsp;%</b><span><strong>Focus Practical.</strong> Coste por contacto en formación de oficios.</span></a>
+    </div>
+    <div class="logos">
+      <p>Han trabajado con Qualivo</p>
+      <div class="fila">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:44px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:38px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:22px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:36px;filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:26px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:26px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:20px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:12px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:22px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:30px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:22px">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="como" aria-labelledby="t-prob">
+  <div class="wrap">
+    <p class="eyebrow">Dónde se pierde el negocio</p>
+    <h2 id="t-prob">No necesitas solo más leads. Necesitas convertir más en clientes.</h2>
+    <div class="fugas">
+      <div class="fg"><span class="k">Captación</span><p>No entran suficientes oportunidades, o entran contactos que no encajan.</p></div>
+      <div class="fg"><span class="k">Conversión</span><p>Anuncios, páginas o formularios que no convierten.</p></div>
+      <div class="fg"><span class="k">Respuesta</span><p>Se tarda demasiado en contactar con los interesados.</p></div>
+      <div class="fg"><span class="k">Seguimiento</span><p>Se envía un presupuesto, no hay respuesta y nadie vuelve a insistir.</p></div>
+      <div class="fg"><span class="k">Ventas</span><p>Hay reuniones, pero no se sabe por qué no cierran.</p></div>
+      <div class="fg"><span class="k">Visibilidad</span><p>No sabes dónde pierdes dinero ni qué mejorar primero.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t">
+        <h3>Qualivo conecta todo el recorrido en un solo sistema.</h3>
+        <p>Una agencia suele vender campañas y leads; una empresa de automatización, procesos sueltos. Nosotros nos responsabilizamos de detectar y mejorar las fugas de todo el recorrido.</p>
+      </div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Oportunidades que encajan con lo que vendes.</span><em>Anuncios · segmentación · creatividades</em></li>
+        <li><b>Convertir</b><span>Que quien llega pida información y se cualifique.</span><em>Landings · formularios · cualificación</em></li>
+        <li><b>Responder y seguir</b><span>Cada oportunidad, con respuesta y siguiente paso.</span><em>WhatsApp · email · voz IA · CRM</em></li>
+        <li><b>Vender</b><span>Reuniones preparadas y presupuestos con seguimiento.</span><em>Agenda · reuniones · presupuestos</em></li>
+        <li><b>Medir y mejorar</b><span>Saber qué funciona y corregir cada etapa.</span><em>Intelligence · métricas · optimización</em></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · DEMOSTRACIÓN -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
+  <div class="wrap">
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">Todo conectado. Cada oportunidad bajo control.</h2>
+    <p class="lead">Desde que alguien pide información hasta que firma, sabes qué ocurre en cada etapa, dónde se pierden oportunidades y qué necesita atención hoy.</p>
+    <div class="kpis" role="list" aria-label="Ejemplo de métricas de un mes en Qualivo Intelligence, datos simulados">
+      <div role="listitem"><small>Oportunidades nuevas</small><b>263</b></div>
+      <div role="listitem"><small>Reuniones celebradas</small><b>49</b></div>
+      <div role="listitem"><small>Propuestas enviadas</small><b>29</b></div>
+      <div role="listitem" class="alerta"><small>Requieren atención hoy</small><b>14</b></div>
+      <div role="listitem" class="ok"><small>Ganadas</small><b>11</b></div>
+    </div>
+    <div class="escena">
+      <div>
+        <div class="marco">
+          <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Servicios B2B</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+          <img src="/inicio/v2/img/intelligence-recorrido.jpg" alt="Qualivo Intelligence: recorrido de la oportunidad a la firma y fugas ordenadas de mayor a menor. Ejemplo con datos simulados." width="1700" height="1080" loading="lazy" decoding="async">
+        </div>
+        <p class="nota-img"><span class="n">1</span><span><b>Dónde se pierden.</b> Cada etapa comparada con lo que pasa cuando el seguimiento está bien hecho. La fuga mayor, arriba.</span></p>
+      </div>
+      <div class="lado">
+        <div>
+          <div class="marco">
+            <div class="bar"><i></i><i></i><i></i><span>Hoy</span><span class="tag-demo">Ejemplo</span></div>
+            <img src="/inicio/v2/img/intelligence-acciones.jpg" alt="Oportunidades que requieren atención hoy, con la acción recomendada para cada una. Ejemplo con datos simulados." width="922" height="840" loading="lazy" decoding="async">
+          </div>
+          <p class="nota-img"><span class="n">2</span><span><b>Qué hacer hoy.</b> Cada oportunidad con su siguiente acción y su prioridad.</span></p>
+        </div>
+        <div class="raquel">
+          <span class="k">Capacidad del sistema · voz</span>
+          <h3>Raquel, asistente de voz</h3>
+          <p>Descubre cómo un asistente de IA puede atender a quien pide información y facilitar el agendamiento. Te llama en menos de un minuto, de 9:00 a 21:00.</p>
+          <a href="/prueba/" data-cta="raquel">Probar una llamada →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · SERVICIO -->
+<section class="sec" aria-labelledby="t-serv">
+  <div class="wrap">
+    <p class="eyebrow">Qué recibe tu empresa</p>
+    <h2 id="t-serv">Nos ocupamos del sistema de crecimiento. Tú, de tus clientes.</h2>
+    <p class="lead">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo dedique su tiempo a las oportunidades que pueden comprar.</p>
+    <div class="serv-grid">
+      <ol class="fases">
+        <li><span class="num">01</span><h3>Diagnóstico</h3><p>Analizamos cómo captas clientes y dónde pierdes oportunidades.</p></li>
+        <li><span class="num">02</span><h3>Implantación</h3><p>Ponemos en marcha las campañas, páginas y procesos acordados.</p></li>
+        <li><span class="num">03</span><h3>Optimización</h3><p>Medimos resultados, revisamos el recorrido y mejoramos continuamente.</p></li>
+      </ol>
+      <div class="incluye">
+        <span class="k">Sistema de Crecimiento Qualivo · Gestionado</span>
+        <h3>Lo que podemos llevar por ti</h3>
+        <ul>
+          <li>Campañas de captación</li>
+          <li>Landing pages y formularios</li>
+          <li>CRM y seguimiento</li>
+          <li>Automatizaciones e IA, cuando aportan</li>
+          <li>Panel de métricas</li>
+          <li>Revisión y optimización</li>
+        </ul>
+        <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico.</b> Organizamos el proceso, preparamos las reuniones y seguimos los presupuestos; la venta la cierra tu equipo.</p>
+      </div>
+    </div>
+    <div class="fundador">
+      <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="64" height="64">
+      <p><b>Maikel Echevarría, fundador.</b> Años construyendo sistemas de captación y ventas para empresas de formación, servicios y B2B, con un equipo de medios pagados, creatividades, vídeo y CRM. ¿Ya tienes agencia? No hace falta sustituirla: trabajamos el recorrido completo, con ella.</p>
+      <a href="#contacto" class="btn" data-cta="servicio">Descubre dónde pierdes oportunidades&nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · CONVERSIÓN -->
+<section class="sec final" id="contacto" aria-labelledby="t-final">
+  <div class="wrap">
+    <div class="grid-f">
+      <div>
+        <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
+        <h2 id="t-final">Descubre dónde pierdes oportunidades.</h2>
+        <p class="lead">Miramos tu recorrido entero, de la captación a la venta, y te decimos dónde está la mayor fuga y qué haríamos primero. O que no tiene sentido.</p>
+        <ol class="despues" aria-label="Qué pasa después">
+          <li><span><b>Cuéntanos tu caso</b> en el formulario. Dos minutos.</span></li>
+          <li><span><b>Elige la hora</b> en el calendario que aparece al enviar.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tus números y te decimos dónde actuar primero.</span></li>
+        </ol>
+      </div>
+
+      <div class="caja-f">
+        <form id="lead-form" novalidate>
+          <h3>Cuéntanos dónde se te escapa</h3>
+          <label class="field"><span class="field-label">Nombre y cargo</span><input type="text" name="nombre" id="f-nombre" placeholder="Ana Ruiz · Directora general" autocomplete="name"></label>
+          <label class="field"><span class="field-label">Email de trabajo</span><input type="email" name="email" id="f-email" placeholder="ana@tuempresa.com" autocomplete="email"></label>
+          <label class="field"><span class="field-label">Empresa y web</span><input type="text" name="empresa" id="f-empresa" placeholder="Tu Empresa · tuempresa.com" autocomplete="organization"></label>
+          <label class="field"><span class="field-label">Facturación anual aproximada</span>
+            <select name="facturacion" id="f-fact">
+              <option value="">Elige un rango</option>
+              <option value="0">Menos de 500k €</option>
+              <option value="1">500k–1M €</option>
+              <option value="2">1M–3M €</option>
+              <option value="3">3M–10M €</option>
+              <option value="4">+10M €</option>
+            </select>
+          </label>
+          <label class="field"><span class="field-label">¿Quién lleva actualmente la captación?</span>
+            <select name="quien" id="f-quien">
+              <option value="">Elige una opción</option>
+              <option value="interno">Equipo interno</option>
+              <option value="agencia">Agencia</option>
+              <option value="freelance">Freelancers</option>
+              <option value="mixto">Agencia + equipo interno</option>
+              <option value="direccion">Fundador / equipo directivo</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+          <label class="field"><span class="field-label">¿Dónde crees que se pierden más oportunidades?</span><textarea name="hipotesis" id="f-hipotesis" rows="3" placeholder="Creo que el problema está en…"></textarea></label>
+          <label class="rgpd"><input type="checkbox" name="rgpd" id="f-rgpd"><span>He leído y acepto la <a href="/privacidad/" target="_blank">política de privacidad</a>. Usaremos estos datos solo para responder a tu solicitud.</span></label>
+          <div class="hp-field" aria-hidden="true"><label>No rellenes este campo si eres humano <input type="text" name="website" id="f-website" tabindex="-1" autocomplete="off"></label></div>
+          <p id="form-error" hidden style="font-size:14px;color:var(--rojo);font-weight:700;line-height:1.5"></p>
+          <button type="submit" id="submit-btn" class="btn">Solicitar diagnóstico →</button>
+          <p style="font-size:13px;color:var(--gris-claro);line-height:1.5">Al enviar, eliges hora. Respondemos en menos de 24 horas.</p>
+        </form>
+        <div id="panel-thanks" hidden>
+          <h3 style="font-size:22px;margin-bottom:10px">Recibido. Ahora elige hora.</h3>
+          <p style="font-size:15.5px;color:#3D4148;margin-bottom:18px">Revisamos tus respuestas y tu web antes de la llamada.</p>
+          <div id="calendar-slot" style="border:1px dashed rgba(16,19,25,.2);border-radius:12px;padding:24px;text-align:center"><p style="font-size:14px;color:var(--gris-claro)">Calendario</p></div>
+          <p style="font-size:13px;color:var(--gris-claro);margin-top:14px">Si no ves el email de confirmación en cinco minutos, mira en spam.</p>
+        </div>
+        <div id="panel-reject" hidden>
+          <h3 style="font-size:22px;margin-bottom:10px">Sinceramente: todavía no.</h3>
+          <p style="font-size:15.5px;color:#3D4148;margin-bottom:18px">Un diagnóstico tiene sentido cuando ya entran oportunidades y hay algo montado detrás. Escríbenos igualmente si crees que tu caso es una excepción.</p>
+          <button type="button" id="back-btn" class="btn btn-sm">Volver al formulario</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h3>Preguntas frecuentes</h3>
+      <div>
+        <details><summary>¿Sois una agencia de marketing?</summary><p>No solo. Llevamos campañas cuando hace falta, pero nos responsabilizamos del recorrido completo: captación, conversión, respuesta, seguimiento y medición, conectados en un sistema.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM o mi agencia?</summary><p>No. Trabajamos sobre las herramientas que ya usas y nos coordinamos con tu agencia si la tienes. Lo que funciona se queda.</p></details>
+        <details><summary>¿Qué incluye y cuánto cuesta?</summary><p>Depende de lo que necesite tu recorrido. Empezamos con un diagnóstico sin coste; después te proponemos un alcance cerrado y su precio, por escrito. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
+        <details><summary>¿Para qué empresas tiene sentido?</summary><p>Para empresas que ya venden y reciben oportunidades, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, clínicas, servicios y B2B.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap">
+    <div>
+      <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" loading="lazy">
+      <p style="max-width:34ch;color:#9AA2AE;font-size:14.5px">Conseguimos que más oportunidades se conviertan en clientes.</p>
+      <p style="margin-top:14px;font-size:13px">© 2026 Qualivo · España</p>
+    </div>
+    <div class="cols">
+      <div><a href="/formacion/">Formación</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
+      <div><a href="/casos/eac/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
+      <div><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="fijo" id="fijo"><a href="#contacto" class="btn" data-cta="fijo-movil">Descubre dónde pierdes oportunidades&nbsp;→</a></div>
+
+<script>
+(function(){
+  'use strict';
+  function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
+  function contar(el,fin,dec,suf,ms){
+    if(quieto) return; var t0=null; suf=suf||'';
+    function paso(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/ms), e=1-Math.pow(1-k,3); el.innerHTML=fmt(fin*e,dec)+suf; if(k<1) requestAnimationFrame(paso); }
+    el.innerHTML=fmt(0,dec)+suf; requestAnimationFrame(paso);
+  }
+  function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
+    new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
+  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track('home_cta',{ubicacion:a.getAttribute('data-cta'),version:'v2'}); }); });
+  var dash=document.getElementById('dash');
+  alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
+  document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
+  var fijo=document.getElementById('fijo'), hero=document.getElementById('hero'), fin=document.getElementById('contacto');
+  if('IntersectionObserver' in window){
+    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
+    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
+    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
+  }
+})();
+</script>
+<script>
+/* UTM de la visita para el CRM: assets/app.js las lee de sessionStorage («qv_utm»), pero nadie las guardaba
+   y la home mandaba utm: null. Se guarda el primer toque de la sesión. */
+(function(){ try{ if(sessionStorage.getItem('qv_utm')) return; var q=new URLSearchParams(location.search), u={};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(k){ if(q.get(k)) u[k]=q.get(k); });
+  if(document.referrer && document.referrer.indexOf(location.host)<0) u.referrer=document.referrer.slice(0,200);
+  if(Object.keys(u).length) sessionStorage.setItem('qv_utm',JSON.stringify(u)); }catch(e){} })();
+</script>
+<script src="/inicio/v2/form.js"></script>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
