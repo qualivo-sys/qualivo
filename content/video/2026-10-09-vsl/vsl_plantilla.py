@@ -21,9 +21,10 @@ RETOMAS = []
 # Grabación del 12-oct: 1080p, cámara frontal en espejo (los libros se leen al revés), así que se voltea.
 # Encuadres (w, h, x, y) sobre el bruto ya volteado; CARA = centro de la cara.
 VOLTEAR = True
-ABIERTO, CERRADO, LADO = (1920, 1080, 0, 0), (1440, 810, 170, 40), (1600, 900, 330, 20)
+# El abierto deja fuera el libro negro del borde izquierdo.
+ABIERTO, CERRADO, LADO = (1760, 990, 130, 0), (1440, 810, 170, 40), (1600, 900, 330, 20)
 CARA = (890, 380)
-ZOOM_REG, ZOOM_K = (1920, 1080, 0, 0), 1.18
+ZOOM_REG, ZOOM_K = (1760, 990, 130, 0), 1.15
 # Correcciones de la transcripción para los subtítulos
 ARREGLOS = {'Qualibo': 'Qualivo', 'Qualvo': 'Qualivo', 'Michael': 'Maikel', 'cuestan contacto': 'cuesta un contacto',
             'más lich': 'más leads', '1200 euros': '1.200 euros', 'trayendo las personas': 'atrayendo a las personas',
@@ -56,12 +57,14 @@ def silencios(bruto, trabajo):
     return [tuple(map(float, l.split())) for l in open(f) if l.strip()]
 
 def tramos(sil, total):
-    """Voz = lo que no es silencio, con un poco de aire; menos las retomas."""
+    """Voz = lo que no es silencio, menos las retomas. Solo se recortan las pausas largas (>= 0,6 s) y se dejan
+    en ~0,45 s: recortar cada respiración dejaba el vídeo entrecortado (Maikel, 12-oct)."""
+    sil = [(a, b) for a, b in sil if b - a >= 0.6]
     voz, prev = [], 0.0
     for a, b in sil:
-        if a > prev: voz.append((max(0, prev - 0.10), a + 0.14))
+        if a > prev: voz.append((max(0, prev - 0.20), a + 0.25))
         prev = b
-    voz.append((prev - 0.10, total))
+    voz.append((prev - 0.20, total))
     fus = []
     for a, b in voz:
         if fus and a <= fus[-1][1]: fus[-1] = (fus[-1][0], max(b, fus[-1][1]))
