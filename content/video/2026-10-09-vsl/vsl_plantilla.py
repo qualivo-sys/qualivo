@@ -288,6 +288,13 @@ def construir(palabras, bruto, trabajo):
         t0, t1 = T(c[0]['s']), T(c[-1]['e']) + 0.25
         if t0 < T(t_fin): SUBS.append([t0, min(t1, T(t_fin)), txt])
     for i in range(len(SUBS) - 1): SUBS[i][1] = min(SUBS[i][1], SUBS[i + 1][0])
+    # Saltos: corte de pausa sin cambio de encuadre y sin gráfico que lo tape. Se suavizan con un fundido corto en final().
+    tapan = [(x['t0'], x['t1']) for x in ests if x['tipo'] in TAPA + ('fin',)] + [(T(x[0]), T(x[1])) for x in apoyos]
+    saltos, o = [], 0.0
+    for (a, b, e), (a2, b2, e2) in zip(planos, planos[1:]):
+        o += b - a
+        if abs(a2 - b) > 1e-3 and e == e2 and not any(x - 0.05 <= o <= y + 0.05 for x, y in tapan): saltos.append(round(o * FPS))
+    json.dump(saltos, open(os.path.join(trabajo, 'saltos.json'), 'w'))
     TL = {'esc': ests, 'subs': SUBS, 'ocultos': [[T(x[0]), T(x[1])] for x in apoyos], 'nombre': [T(nombre[0]), T(nombre[1])]}
     open(os.path.join(AQUI, 'tiempos-plantilla.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     return planos, total, apoyos
@@ -388,14 +395,22 @@ def final(trabajo, total, hilos=4):
     def capa(i):
         p = f'{trabajo}/capasF/f{i:05d}.png'
         return np.asarray(Image.open(p).convert('RGBA')) if os.path.exists(p) else None
+    sp = os.path.join(trabajo, 'saltos.json'); saltos = set(json.load(open(sp))) if os.path.exists(sp) else set()
+    FUNDE = 6; congelado, quedan = None, 0
     with ThreadPoolExecutor(hilos) as ex:
         futuros = [ex.submit(capa, i) for i in range(min(n, hilos * 3))]
-        ult = None
+        ult = None; prev_ = None
         for i in range(n):
             raw = lee.stdout.read(tam)
             if len(raw) < tam: raw = ult if ult is not None else bytes(tam)   # por si la cámara acaba un fotograma antes
             ult = raw
             base_ = np.frombuffer(raw, np.uint8).reshape(H_, W_, 3)
+            # fundido corto en los saltos: del último fotograma antes del corte al plano nuevo
+            if i in saltos and prev_ is not None: congelado, quedan = prev_, FUNDE
+            prev_ = base_
+            if quedan:
+                al = 1 - quedan / (FUNDE + 1); al = al * al * (3 - 2 * al)
+                base_ = (congelado.astype(np.float32) * (1 - al) + base_.astype(np.float32) * al).astype(np.uint8); quedan -= 1
             c = futuros[i].result()
             if i + hilos * 3 < n: futuros.append(ex.submit(capa, i + hilos * 3))
             futuros[i] = None
