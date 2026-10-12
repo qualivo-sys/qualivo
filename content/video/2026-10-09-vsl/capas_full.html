@@ -162,7 +162,7 @@ TL.esc.forEach(s=>{ if(!FULL.has(s.tipo)&&s.tipo!=='tarjeta'&&s.tipo!=='cta') re
 window.setT=function(t){
   let lado=false, claro=false;
   TL.esc.forEach(s=>{
-    const w=win(t,s.t0,s.t1,s.pegadoIni?.01:.45,s.pegadoFin?.01:.25);
+    const w=win(t,s.t0-(s.pegadoIni?.07:0),s.t1+(s.pegadoFin?.07:0),s.pegadoIni?.01:.45,s.pegadoFin?.01:.25);   // al tocar otro gráfico o un Kling se solapan 2 fotogramas: sin destello de cámara
     if(s.tipo==='clave'||s.tipo==='grande'){
       const base=s.tipo==='clave'&&s.var!=='izq'?'translateX(-50%)':'';
       if(s.var==='barrido'){ const u=out(nm(t,s.t0,s.t0+.45)); s.el.style.opacity=w>0?Math.min(1,w*3):0; s.el.style.transform=base; s.el.style.clipPath=`inset(0 ${(1-u)*100}% 0 0 round 14px)`;
