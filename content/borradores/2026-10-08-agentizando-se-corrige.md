@@ -2,7 +2,7 @@
 
 > Pieza de jueves de la serie «Agentizando», para LinkedIn. **Sin publicar.** Las redes siguen en pausa: se publican piezas una a una con el ok de Maikel (R16).
 >
-> **Hoy LinkedIn ya tiene pieza:** el post 2 de la cobertura (`content/linkedin/2026-10-06-air-cover.md`), si el post 1 salió ayer. Esta queda en el banco para el lunes 12, el siguiente hueco de «Agentizando». Si la cobertura no ha empezado, esta puede ir hoy en su lugar.
+> **Pieza del lunes 12 (semana 42).** Era del jueves 8 y quedó en el banco para hoy. Si la cobertura de LinkedIn sigue saliendo esta semana, va el lunes 19.
 
 ## Ficha
 

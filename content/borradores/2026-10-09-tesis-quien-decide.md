@@ -12,7 +12,7 @@
 - **R4 · necesita el ok de Maikel a la tesis.** La base es su mensaje del 7-oct en la sesión de contenido, al revisar la landing: la inversión declarada es una señal bastante mala. Si no la suscribe tal cual, la pieza no sale.
 - **Datos reales:**
   - **Daily de Growth del 8-oct** (`bus/out/demand.jsonl`, `objecion_que_se_repite`): «lo veo con el equipo y te digo; a la reunión no llega quien decide».
-  - **Funnel v2** (`bus/out/demand.jsonl`, 8-oct, `solicitud-montaje`): los formularios nuevos preguntan quién decide (yo / yo con un socio / otra persona). Activación prevista el lunes 12.
+  - **Funnel v2** (`bus/out/demand.jsonl`, 8-oct, `solicitud-montaje`): los formularios nuevos preguntan quién decide (yo / yo con un socio / otra persona). **Corrección 12-oct:** la prueba está en marcha desde el 8-oct (primer lead del funnel v2 ese día, daily del 9-oct). El 9-oct se escribió «prevista el lunes 12» con el bus del 8-oct; ya corregido en el texto.
   - **Caso del 5-oct**, ya publicado en `/blog/cuanto-invertir-en-publicidad/`: un contacto entró con la nota más alta por inversión y volumen, y en la reunión el precio de su servicio cambiaba toda la cuenta.
 - **Reglas:**
   - **R3:** la prueba del lunes no ha empezado. No se da ningún resultado.
@@ -23,16 +23,16 @@
 - **CTA:** conversación.
 - **Qué se mide:** comentarios con cuántas reuniones tuvieron a quien decide.
 - **Enlaza con:** `/blog/quien-decide-la-compra/?utm_source=linkedin&utm_medium=organic&utm_campaign=articulo&utm_content=tesis-quien-decide`, en un comentario.
-- **Si pasa al viernes 16:** reescribir «una prueba que empezará el lunes». Para entonces estará en marcha y sigue sin poder darse ningún resultado (R3).
+- **Si pasa al viernes 16:** la prueba sigue abierta. No se da ningún resultado (R3).
 - **Master Reviewer (9-oct):** nota 5, publicar con cambios. Aplicados los 6 críticos. Queda el R4: el ok de Maikel a la tesis.
 
 ## Texto para LinkedIn
 
 > Antes de preguntar cuánto invierte un contacto, pregunta quién decide.
 >
-> En mi empresa hemos preparado formularios nuevos para una prueba que
-> empezará el lunes. Una de las preguntas es esa: quién decide. Yo, yo con un
-> socio u otra persona.
+> En mi empresa tenemos en marcha, desde el 8 de octubre, una prueba con
+> formularios nuevos. Una de las preguntas es esa: quién decide. Yo, yo con
+> un socio u otra persona.
 >
 > En nuestras reuniones se repite «lo veo con el equipo y te digo». Y a la
 > reunión no llega quien decide.

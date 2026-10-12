@@ -26,6 +26,8 @@
 
 | Fecha | Artículo | Qué cambió |
 |---|---|---|
+| 2026-10-12 | `/blog/cualificar-leads/` (actualización fuerte, pieza 1 del brief de la semana 42) | Nueva sección «Lo que el formulario no ve» con el caso del 5-oct anonimizado (sin sector, precio ni fecha) y la pregunta de ticket en cuatro tramos del formulario v2 desde el 8-oct (solo marca, resultado cuando acabe la prueba). El paso 1 añade el precio de lo que vende el cliente. FAQ nueva «¿Cuántas preguntas debe tener un formulario?» sin cifra. Un enlace más en «Sigue leyendo» |
+| 2026-10-12 | `/blog/formulario-de-facebook-o-landing-page/` | Primer párrafo de «Qué hacemos nosotros con esto» sustituido por la prueba del formulario v2 desde el 8-oct (solicitudes, ticket, quién decide, momento) con enlace a `/blog/cualificar-leads/`; sale «ponemos agentes de IA en el punto donde se pierden» (R2). Cierre con un solo botón, sin cambios |
 | 2026-10-09 | `/blog/primera-reunion-con-un-cliente/` | Primer párrafo de «Qué hacemos nosotros con esto» sustituido por el dato del 8-oct (quien decide no llega a la reunión) con enlace al artículo de hoy; sale la frase de la «herramienta propia para rellenar el diagnóstico en directo», sin verificar (R2). Cierre con un solo botón, sin cambios |
 | 2026-10-08 | `/blog/ahora-no-es-el-momento/` | Primer párrafo de «Qué hacemos nosotros con esto» sustituido por el dato del 6-oct (4 de 5 «no» por presupuesto o momento) con enlace al artículo de hoy. Cierre con un solo botón, sin cambios |
 | 2026-10-07 | `/blog/crm-gratis-para-pymes/` | Los dos últimos párrafos, sin «no es X, es Y» ni cifras de terceros sin fuente, con enlace a `/blog/pipeline-de-ventas/`. Cierre con un solo botón a `/diagnostico/` (fuera el de la calculadora). Registrado el 8-oct, faltaba |
