@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR · Landing Formación V2 (12-oct-2026). Instrucción maestra: content/formacion-v2-instruccion-maestra.md.
+     noindex: no sustituye a /formacion/ hasta el OK de Maikel. El formulario usa /diagnostico/landing.js sin cambios
+     (mapeo de campos más abajo, en el script de la página). Sin precios, sin FEMXA/XFP, sin «agentes de IA». -->
+<title>Más alumnos para tu centro · Qualivo para academias y centros de formación</title>
+<meta name="description" content="Captación y conversión para academias y centros de formación: campañas, páginas, respuesta, seguimiento y medición en un mismo sistema gestionado. Diagnóstico de captación de 30 minutos.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://qualivo.io/formacion/">
+<meta property="og:title" content="Más alumnos para tu centro. Del primer anuncio a la matrícula.">
+<meta property="og:description" content="Sistema de Crecimiento Qualivo para academias y centros de formación. Diagnóstico de captación de 30 minutos.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --marfil:#FAF7F0; --marfil-2:#F2EDE2; --tinta:#101319; --negro:#08090C; --blanco:#fff;
+  --verde:#0E7C74; --verde-claro:#27BDB1; --verde-suave:#E3F2EF; --amarillo:#F4CC38;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --linea:rgba(16,19,25,.1); --rojo:#C2410C;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--display);background:var(--marfil);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(64px,8vw,112px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(32px,4.6vw,52px);max-width:19ch}
+h3{font-size:clamp(19px,2.2vw,22px);letter-spacing:-.02em;line-height:1.2}
+p{font-size:clamp(16.5px,1.9vw,18px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:16px}
+.lead{color:var(--gris);margin-top:18px;max-width:58ch}
+.verde{color:var(--verde)}
+.borrador{background:var(--amarillo);text-align:center;font-weight:800;font-size:13px;padding:7px 16px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:0 30px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--amarillo);color:var(--tinta);font:900 clamp(16px,1.9vw,18px)/1 var(--display);text-decoration:none;
+  box-shadow:0 12px 30px rgba(244,204,56,.28);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(244,204,56,.38)}
+.btn-link{display:inline-flex;align-items:center;gap:8px;min-height:58px;padding:0 6px;font-weight:800;font-size:16.5px;text-decoration:none;color:var(--tinta)}
+.btn-link span{border-bottom:2px solid var(--verde-claro);padding-bottom:2px}
+.btn-sm{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:40;background:rgba(250,247,240,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.top img{height:22px;width:auto}
+
+/* 1 · hero */
+.hero{padding:clamp(48px,7vw,88px) 0 clamp(56px,7vw,96px);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-240px;top:-160px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.16),transparent 62%);pointer-events:none}
+.grid-h{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center;position:relative}
+.hero h1{font-size:clamp(36px,5vw,60px);max-width:15ch}
+.hero h1 span{display:block;color:var(--verde)}
+.hero .lead{font-size:clamp(17px,2vw,19.5px);color:#3E434B;margin-top:24px;max-width:46ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:32px}
+.micro{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:14.5px;color:var(--gris);font-weight:600}
+.micro span::before{content:'✓';color:var(--verde);font-weight:900;margin-right:6px}
+
+/* dashboard del hero */
+.dash{background:#fff;border:1px solid var(--linea);border-radius:22px;box-shadow:0 30px 80px rgba(16,19,25,.12),0 2px 0 rgba(16,19,25,.03);padding:22px 22px 18px}
+.dash-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.dash-h b{font-size:15px;letter-spacing:-.01em}
+.dash-h small{display:block;font-size:12.5px;color:var(--gris-claro);font-weight:600;margin-top:2px}
+.tag-demo{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:5px 9px;border-radius:999px;white-space:nowrap}
+.etapa{display:grid;grid-template-columns:112px 1fr 44px;gap:12px;align-items:center;padding:9px 0}
+.etapa .n{font-size:13.5px;font-weight:700;color:#2B2F36}
+.barra{height:30px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--verde),var(--verde-claro));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dash.on .barra i{width:var(--w)}
+.etapa .v{font-size:15px;font-weight:900;text-align:right}
+.etapa.fin .barra i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fuga-hero{display:flex;gap:10px;align-items:flex-start;margin:8px 0 0 124px;padding:10px 12px;border-radius:10px;background:#FFF1EA;color:#9A3412;font-size:13px;font-weight:700;line-height:1.35}
+.dash-pie{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--linea);margin-top:14px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
+
+/* 2 · resultados */
+.res{background:#fff}
+.casos{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:40px}
+.caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column;justify-content:space-between;min-height:320px;position:relative;overflow:hidden}
+.caso.eac{background:var(--tinta);color:#fff}
+.caso.eac::after{content:'';position:absolute;right:-120px;bottom:-140px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.35),transparent 65%)}
+.caso.nail{background:var(--verde-suave);color:var(--tinta)}
+.caso .quien{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.8}
+.caso .cifras{display:flex;flex-wrap:wrap;gap:12px 36px;margin:22px 0 10px;position:relative;z-index:1}
+.caso .big{font-size:clamp(46px,6.4vw,76px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.caso.eac .big{color:var(--amarillo)}
+.caso.nail .big{color:var(--verde)}
+.caso .lbl{font-size:14.5px;font-weight:700;margin-top:6px;max-width:22ch;line-height:1.35}
+.caso.eac .lbl{color:#C6CBD3}
+.caso p.ctx{font-size:15.5px;line-height:1.5;max-width:42ch;position:relative;z-index:1}
+.caso.eac p.ctx{color:#AEB5BF}
+.caso.nail p.ctx{color:#3E434B}
+.caso .pie-caso{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;position:relative;z-index:1}
+.caso .pie-caso img{height:40px;width:auto}
+.caso.eac .pie-caso img{filter:brightness(0) invert(1);opacity:.9;height:30px}
+.caso.nail .pie-caso img{filter:grayscale(1) brightness(.5) contrast(1.6);height:46px}
+.caso a{font-weight:800;font-size:15px;text-decoration:none;white-space:nowrap}
+.caso.eac a{color:var(--amarillo)}
+.otro{margin-top:16px;font-size:15px;color:var(--gris)}
+.otro a{font-weight:800;color:var(--verde);text-decoration:none}
+.logos{margin-top:clamp(40px,5vw,60px);padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--linea)}
+.logos p{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);text-align:center;margin-bottom:24px}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px clamp(24px,3.6vw,44px);opacity:.72}
+.logos img{width:auto}
+
+/* 3 · problema y solución */
+.prob .fugas{margin-top:44px;position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.prob .fugas::before{content:'';position:absolute;left:0;right:0;top:27px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--verde),var(--verde-claro) 60%,#E7A27E)}
+.fuga{padding-right:28px;position:relative}
+.fuga .pt{width:58px;height:58px;border-radius:50%;background:var(--marfil);border:4px solid var(--verde);display:grid;place-items:center;font-weight:900;font-size:19px;position:relative;z-index:1}
+.fuga:nth-child(3) .pt{border-color:#E7A27E}
+.fuga h3{margin:20px 0 8px}
+.fuga p{font-size:16px;color:var(--gris);line-height:1.5;max-width:30ch}
+.funciones{margin-top:clamp(52px,6vw,76px);background:#fff;border:1px solid var(--linea);border-radius:24px;padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(22px,3vw,40px);align-items:center}
+.funciones .tit{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.funciones .tit h3{font-size:clamp(22px,2.6vw,28px)}
+.funciones .tit span{font-size:14px;color:var(--gris-claro);font-weight:600}
+.tabs{display:flex;flex-direction:column;gap:6px;position:relative}
+.tab{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:14px;padding:13px 14px;cursor:pointer;font:800 17px/1.2 var(--display);color:#3E434B;transition:background .15s ease,border-color .15s ease}
+.tab .k{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--marfil-2);display:grid;place-items:center;font-size:13px;font-weight:900;color:var(--gris)}
+.tab:hover{background:var(--marfil)}
+.tab[aria-selected="true"]{background:var(--tinta);color:#fff}
+.tab[aria-selected="true"] .k{background:var(--amarillo);color:var(--tinta)}
+.panel{background:var(--marfil);border-radius:18px;padding:clamp(22px,3vw,34px);min-height:230px}
+.panel .k{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.panel h4{font-size:clamp(24px,2.8vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin:10px 0 12px}
+.panel p{color:#3E434B;max-width:44ch}
+.panel ul{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.panel li{list-style:none;font-size:13.5px;font-weight:700;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:6px 12px}
+.panel-m{display:none}
+
+/* 4 · todo conectado (oscura) */
+.con{background:var(--negro);color:#fff;position:relative;overflow:hidden}
+.con::before{content:'';position:absolute;left:-200px;top:-200px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.18),transparent 65%)}
+.con .wrap{position:relative}
+.con h2{color:#fff;max-width:17ch}
+.con .eyebrow{color:var(--verde-claro)}
+.con-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,64px);margin-top:48px;align-items:start}
+.viaje{position:relative;list-style:none;counter-reset:v}
+.viaje::before{content:'';position:absolute;left:19px;top:12px;bottom:12px;width:2px;background:linear-gradient(var(--verde-claro),rgba(39,189,177,.15))}
+.viaje li{position:relative;padding:0 0 22px 58px}
+.viaje li::before{counter-increment:v;content:counter(v);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:#14181F;border:2px solid var(--verde-claro);display:grid;place-items:center;font-weight:900;font-size:15px;color:#fff}
+.viaje li.tuyo::before{background:var(--amarillo);border-color:var(--amarillo);color:var(--tinta)}
+.viaje b{display:block;font-size:17.5px;letter-spacing:-.01em;padding-top:8px}
+.viaje span{display:block;font-size:15px;color:#9AA2AE;line-height:1.45;margin-top:4px}
+.marco{background:#14181F;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.marco .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.marco .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.marco .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.marco .bar em{margin-left:auto;font-style:normal;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;padding:4px 8px;border-radius:999px}
+.marco img{width:100%;height:auto;background:#F6F4EF}
+.intel-pie{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px}
+.intel-pie p{font-size:15.5px;color:#C6CBD3;max-width:46ch}
+.intel-pie p b{color:#fff}
+.intel-pie a{color:var(--verde-claro);font-weight:800;font-size:15px;text-decoration:none;white-space:nowrap}
+.raquel{margin-top:22px;background:linear-gradient(135deg,#14181F,#0F1F1D);border:1px solid rgba(39,189,177,.35);border-radius:18px;padding:20px 22px}
+.raquel .r1{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.raquel .who{display:flex;gap:14px;align-items:center}
+.onda{width:46px;height:46px;border-radius:50%;background:rgba(39,189,177,.16);display:flex;align-items:center;justify-content:center;gap:3px}
+.onda i{width:3px;border-radius:2px;background:var(--verde-claro);animation:onda 1.1s ease-in-out infinite}
+.onda i:nth-child(1){height:10px}.onda i:nth-child(2){height:20px;animation-delay:.15s}.onda i:nth-child(3){height:14px;animation-delay:.3s}.onda i:nth-child(4){height:22px;animation-delay:.45s}
+@keyframes onda{50%{transform:scaleY(.45)}}
+.raquel b{display:block;font-size:17px}
+.raquel .who span{display:block;font-size:14.5px;color:#AEB5BF;max-width:40ch;line-height:1.45}
+.raquel .abrir{min-height:46px;padding:0 18px;border-radius:12px;font-size:15px}
+.raquel form{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.raquel input{width:100%;min-height:48px;padding:12px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font:600 15.5px var(--display)}
+.raquel input::placeholder{color:#7F8794}
+.raquel input:focus{outline:none;border-color:var(--verde-claro)}
+.raquel .full{grid-column:1/-1}
+.raquel label.ok{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#AEB5BF;line-height:1.45}
+.raquel label.ok input{width:18px;min-height:18px;height:18px;margin-top:2px;accent-color:var(--verde-claro)}
+.raquel .nota{font-size:13px;color:#8E96A2}
+.raquel .estado{margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(39,189,177,.12);color:#DFF5F2;font-size:15px;font-weight:600}
+.raquel .estado.mal{background:rgba(194,65,12,.18);color:#FFD9C7}
+
+/* 5 · cómo trabajamos */
+.como .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:2px solid var(--tinta)}
+.como .paso{padding:26px 28px 6px 0}
+.como .paso + .paso{padding-left:28px;border-left:1px solid var(--linea)}
+.como .num{font-size:clamp(42px,5vw,60px);font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--verde)}
+.como .paso h3{margin:14px 0 8px}
+.como .paso p{font-size:16px;color:var(--gris);line-height:1.5}
+.oferta{margin-top:clamp(36px,4vw,52px);background:var(--tinta);color:#fff;border-radius:22px;padding:clamp(24px,3.4vw,38px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.oferta .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde-claro)}
+.oferta h3{font-size:clamp(22px,2.8vw,30px);margin:8px 0 10px;color:#fff}
+.oferta p{font-size:16px;color:#AEB5BF;max-width:56ch}
+
+/* 6 · cta final y formulario */
+.final{background:var(--marfil-2)}
+.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
+.final .lista{margin-top:26px;display:grid;gap:10px}
+.final .lista div{display:flex;gap:10px;font-size:16px;font-weight:700}
+.final .lista div::before{content:'✓';color:var(--verde);font-weight:900}
+.caja-f{background:#fff;border-radius:22px;padding:clamp(24px,3.4vw,36px);box-shadow:0 24px 60px rgba(16,19,25,.08);border:1px solid var(--linea)}
+.prog{height:6px;border-radius:6px;background:var(--marfil-2);overflow:hidden;margin-bottom:18px}
+.prog i{display:block;height:100%;width:50%;background:var(--verde);border-radius:6px;transition:width .3s ease}
+.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:6px}
+.caja-f h3{margin-bottom:16px}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.campo span em{font-style:normal;font-weight:600;color:var(--gris-claro)}
+.campo input,.campo select{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--verde-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.hp,.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera{background:var(--verde-suave);border-radius:14px;padding:24px}
+.faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
+.faq h3{font-size:clamp(24px,3vw,32px)}
+.faq details{border-top:1px solid var(--linea)}
+.faq details:last-child{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:800;font-size:17px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:26px;font-weight:700;color:var(--verde);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 0 20px;color:var(--gris);font-size:16px;line-height:1.6;max-width:60ch}
+
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+[hidden]{display:none !important}
+
+/* CTA fijo en móvil */
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+
+/* ===== efecto wow (todo se apaga con prefers-reduced-motion) ===== */
+.hero h1 span{position:relative;display:inline}
+.hero h1 .subr{background:linear-gradient(transparent 78%,rgba(244,204,56,.8) 78%) no-repeat 0 0/0% 100%;transition:background-size 1.1s .5s cubic-bezier(.2,.8,.2,1)}
+.hero.on h1 .subr{background-size:100% 100%}
+.escena{position:relative;perspective:1200px}
+.dash{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.dash .barra{position:relative}
+.dash .barra i{position:relative;overflow:hidden}
+.dash .barra i::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:brillo 3.2s ease-in-out infinite}
+.dash .etapa:nth-child(3) .barra i::after{animation-delay:.25s}.dash .etapa:nth-child(4) .barra i::after{animation-delay:.5s}
+.dash .etapa:nth-child(6) .barra i::after{animation-delay:.75s}.dash .etapa:nth-child(7) .barra i::after{animation-delay:1s}
+@keyframes brillo{0%,35%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
+.fuga-hero{animation:latido 2.4s ease-in-out infinite}
+@keyframes latido{50%{box-shadow:0 0 0 6px rgba(231,162,126,.18)}}
+.vivo{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--verde)}
+.vivo::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--verde-claro);box-shadow:0 0 0 0 rgba(39,189,177,.6);animation:pulso 1.8s infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 9px rgba(39,189,177,0)}100%{box-shadow:0 0 0 0 rgba(39,189,177,0)}}
+.toasts{position:absolute;left:-28px;bottom:calc(100% - 14px);z-index:3;display:flex;flex-direction:column-reverse;gap:8px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:10px;background:var(--tinta);color:#fff;border-radius:14px;padding:10px 14px 10px 10px;box-shadow:0 16px 40px rgba(16,19,25,.28);font-size:13.5px;font-weight:700;max-width:290px;
+  opacity:0;transform:translateY(10px) scale(.96);transition:opacity .4s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.toast.on{opacity:1;transform:none}
+.toast .ic{width:30px;height:30px;flex:0 0 30px;border-radius:9px;display:grid;place-items:center;font-size:15px;background:rgba(39,189,177,.2)}
+.toast.mat .ic{background:var(--amarillo);color:var(--tinta)}
+.toast small{display:block;font-size:11.5px;color:#8E96A2;font-weight:600;margin-top:1px}
+.logos .pista{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos .fila{flex-wrap:nowrap;justify-content:flex-start;width:max-content;gap:0 clamp(36px,4vw,56px);padding-right:clamp(36px,4vw,56px);animation:cinta 42s linear infinite}
+.logos .pista:hover .fila{animation-play-state:paused}
+@keyframes cinta{to{transform:translateX(-50%)}}
+.viaje::before{background:rgba(39,189,177,.15)}
+.viaje .prog-v{position:absolute;left:19px;top:12px;width:2px;height:0;background:linear-gradient(var(--verde-claro),var(--amarillo));box-shadow:0 0 14px rgba(39,189,177,.8);transition:height .15s linear}
+.viaje li::before{transition:background .35s ease,box-shadow .35s ease,border-color .35s ease}
+.viaje li{opacity:.45;transition:opacity .35s ease}
+.viaje li.lit{opacity:1}
+.viaje li.lit::before{background:var(--verde);box-shadow:0 0 0 6px rgba(39,189,177,.16),0 0 24px rgba(39,189,177,.55)}
+.viaje li.tuyo.lit::before{background:var(--amarillo);box-shadow:0 0 0 6px rgba(244,204,56,.18),0 0 24px rgba(244,204,56,.5)}
+.marco{transform:perspective(1400px) rotateX(8deg) translateY(24px);opacity:.6;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
+.marco.on{transform:none;opacity:1}
+.aparece{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.aparece.on{opacity:1;transform:none}
+@media(max-width:960px){.toasts{left:8px}}
+@media(max-width:960px){.escena{margin-top:70px}}
+@media(max-width:760px){.toast{font-size:12.5px;max-width:250px}.toasts .toast:nth-child(n+2){display:none}}
+
+/* huecos reales del calendario y quién hace la llamada */
+.hueco-hero{display:none;align-items:center;gap:10px;margin-top:16px;font-size:14.5px;font-weight:700;color:#2B2F36}
+.hueco-hero.on{display:inline-flex}
+.hueco-hero b{color:var(--verde)}
+.huecos{display:none;margin-top:26px;background:#fff;border:1px solid var(--linea);border-radius:16px;padding:16px 18px}
+.huecos.on{display:block}
+.huecos .t{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gris)}
+.huecos ul{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.huecos li{list-style:none}
+.huecos a{display:inline-block;background:var(--verde-suave);color:var(--verde);border-radius:10px;padding:9px 12px;font-size:14.5px;font-weight:800;text-decoration:none}
+.huecos a:hover{background:var(--verde);color:#fff}
+.maikel{display:flex;gap:14px;align-items:center;margin-top:22px}
+.maikel img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.maikel p{font-size:14.5px;color:var(--gris);line-height:1.45}
+.maikel b{color:var(--tinta)}
+.toast em{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;padding:2px 6px;border-radius:999px;margin-left:6px;vertical-align:1px}
+
+/* responsive */
+@media(max-width:960px){
+  .grid-h,.casos,.con-grid,.grid-f,.faq{grid-template-columns:1fr}
+  .funciones{grid-template-columns:1fr}
+  .tabs{display:none}.panel-d{display:none}.panel-m{display:block}
+}
+@media(max-width:760px){
+  .top .btn-sm{display:none}
+  .fijo{display:block}
+  .prob .fugas{grid-template-columns:1fr;gap:26px}
+  .prob .fugas::before{left:27px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(var(--verde),var(--verde-claro) 60%,#E7A27E)}
+  .fuga{display:grid;grid-template-columns:58px 1fr;gap:0 18px;padding:0}
+  .fuga h3{margin:6px 0 6px}
+  .fuga .tx{grid-column:2}
+  .fuga .pt{grid-row:1/3}
+  .como .pasos{grid-template-columns:1fr;border-top:0}
+  .como .paso,.como .paso + .paso{padding:22px 0;border-left:0;border-top:1px solid var(--linea);display:grid;grid-template-columns:72px 1fr;gap:0 16px}
+  .como .num{grid-row:1/3;font-size:44px}
+  .como .paso h3{margin:4px 0 6px}
+  .etapa{grid-template-columns:96px 1fr 40px;gap:10px}
+  .fuga-hero{margin-left:0}
+  .raquel form{grid-template-columns:1fr}
+  .caso{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.hero h1 .subr{background-size:100% 100%}.viaje li{opacity:1}.marco,.aparece{opacity:1;transform:none}.logos .fila{flex-wrap:wrap;justify-content:center;width:auto}.toasts{display:none}}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR · Formación V2 · sin publicar · el formulario envía de verdad si se usa en producción</div>
+
+<div class="top">
+  <div class="wrap">
+    <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
+    <a href="#diagnostico" class="btn btn-sm" data-cta="barra">Diagnóstico de captación</a>
+  </div>
+</div>
+
+<!-- 1 · HERO -->
+<header class="hero" id="hero">
+  <div class="wrap grid-h">
+    <div>
+      <p class="eyebrow">Crecimiento para academias y centros de formación</p>
+      <h1>Más alumnos para tu centro. <span class="subr">Del primer anuncio a la matrícula.</span></h1>
+      <p class="lead">Atraemos personas interesadas en tus cursos y gestionamos el recorrido para convertir más solicitudes en alumnos: campañas, páginas de captación, respuesta, seguimiento y optimización continua.</p>
+      <div class="ctas">
+        <a href="#diagnostico" class="btn" data-cta="hero">Descubre tu plan de captación&nbsp;→</a>
+        <a href="#sistema" class="btn-link" data-cta="hero-secundario"><span>Ver cómo funciona</span> ↓</a>
+      </div>
+      <div class="micro"><span>Diagnóstico de 30 minutos</span><span>Sin coste</span><span>Plan por escrito</span></div>
+      <div class="hueco-hero" id="hueco-hero"><span class="vivo">Agenda</span><span>Próximo hueco libre: <b id="hueco-1"></b></span></div>
+    </div>
+
+    <div class="escena">
+    <div class="toasts" id="toasts" aria-hidden="true"></div>
+    <div class="dash" id="dash" role="img" aria-label="Ejemplo de panel: de 180 solicitudes a 24 matrículas en un mes, con datos de demostración">
+      <div class="dash-h">
+        <div><b>Recorrido de captación</b><small><span class="vivo">En directo</span> · un centro de ejemplo</small></div>
+        <span class="tag-demo">Datos de ejemplo</span>
+      </div>
+      <div class="etapa"><span class="n">Anuncio</span><div class="barra"><i style="--w:100%"></i></div><span class="v">4</span></div>
+      <div class="etapa"><span class="n">Solicitud</span><div class="barra"><i style="--w:88%"></i></div><span class="v" data-n="180">180</span></div>
+      <div class="etapa"><span class="n">Conversación</span><div class="barra"><i style="--w:58%"></i></div><span class="v" data-n="118">118</span></div>
+      <div class="fuga-hero"><span aria-hidden="true">↘</span>62 solicitudes no llegaron a hablar con nadie. Aquí está la fuga.</div>
+      <div class="etapa"><span class="n">Reunión</span><div class="barra"><i style="--w:26%"></i></div><span class="v" data-n="46">46</span></div>
+      <div class="etapa fin"><span class="n">Matrícula</span><div class="barra"><i style="--w:14%"></i></div><span class="v" data-n="24">24</span></div>
+      <div class="dash-pie"><span>4 campañas activas</span><span>Cada solicitud, con su origen y su estado</span></div>
+    </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2 · RESULTADOS REALES -->
+<section class="sec res" aria-labelledby="t-res">
+  <div class="wrap">
+    <p class="eyebrow">Resultados</p>
+    <h2 id="t-res">Resultados reales en captación para formación.</h2>
+    <div class="casos aparece">
+      <article class="caso eac">
+        <span class="quien">Escola Aeronàutica de Catalunya</span>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
+          <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">atribuidos en un mes</div></div>
+        </div>
+        <p class="ctx">Campañas por curso y el recorrido medido del anuncio a la matrícula, con cada euro conectado a su resultado.</p>
+        <div class="pie-caso"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"><a href="/casos/eac/">Ver el caso →</a></div>
+      </article>
+      <article class="caso nail">
+        <span class="quien">Nail Boss Academy</span>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="1160">1.160</div><div class="lbl">solicitudes</div></div>
+          <div><div class="big" data-cuenta="21">21</div><div class="lbl">matrículas</div></div>
+        </div>
+        <p class="ctx">En cuatro meses, partiendo de cero.</p>
+        <div class="pie-caso"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" loading="lazy"></div>
+      </article>
+    </div>
+    <p class="otro">Y en formación de oficios, un 53&nbsp;% menos de coste por contacto. <a href="/casos/focus-practical/">Ver el caso de Focus Practical →</a></p>
+
+    <div class="logos">
+      <p>Hemos trabajado con</p>
+      <div class="pista"><div class="fila">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:52px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:44px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:42px;filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:30px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:30px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:38px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:26px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:22px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:14px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:26px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:36px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:24px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:38px">
+
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" style="height:52px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" style="height:44px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" style="height:32px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" style="height:42px;filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" style="height:32px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" style="height:30px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" style="height:32px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" style="height:30px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" style="height:38px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" style="height:26px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" style="height:22px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" style="height:14px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" style="height:26px;filter:brightness(0)">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" style="height:36px;filter:brightness(0)">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" style="height:24px">
+        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" style="height:38px">
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · PROBLEMA Y SOLUCIÓN -->
+<section class="sec prob" aria-labelledby="t-prob">
+  <div class="wrap">
+    <p class="eyebrow">El problema</p>
+    <h2 id="t-prob">No basta con conseguir solicitudes. Hay que convertirlas en alumnos.</h2>
+    <p class="lead">Muchos centros invierten en publicidad y reciben peticiones de información, pero pierden oportunidades durante el recorrido. A veces faltan solicitudes adecuadas. Otras veces la página no convierte, las respuestas llegan tarde o el seguimiento se interrumpe.</p>
+
+    <div class="fugas aparece">
+      <div class="fuga"><div class="pt">1</div><h3>Captación que no funciona</h3><p class="tx">Campañas poco enfocadas, mensajes genéricos y solicitudes que no encajan.</p></div>
+      <div class="fuga"><div class="pt">2</div><h3>Interesados que no avanzan</h3><p class="tx">Páginas que no convierten, respuestas que llegan tarde y alumnos difíciles de contactar.</p></div>
+      <div class="fuga"><div class="pt">3</div><h3>Oportunidades que se enfrían</h3><p class="tx">Seguimiento que se corta, presupuestos pendientes y contactos olvidados.</p></div>
+    </div>
+
+    <div class="funciones" id="sistema">
+      <div class="tit"><h3>Lo que hace Qualivo, en cinco funciones conectadas.</h3><span>Un mismo sistema, medible de punta a punta</span></div>
+      <div class="tabs" role="tablist" aria-label="Funciones del sistema">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="panel" data-i="0"><span class="k">01</span>Atraer</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel" data-i="1"><span class="k">02</span>Convertir</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel" data-i="2"><span class="k">03</span>Responder y seguir</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel" data-i="3"><span class="k">04</span>Facilitar la venta</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel" data-i="4"><span class="k">05</span>Medir y mejorar</button>
+      </div>
+      <div class="panel panel-d" id="panel" role="tabpanel" aria-live="polite"></div>
+      <div class="panel-m" id="panel-m"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · TODO CONECTADO -->
+<section class="sec con" id="como-funciona" aria-labelledby="t-con">
+  <div class="wrap">
+    <p class="eyebrow">Así funciona</p>
+    <h2 id="t-con">Todo conectado. Desde el primer clic hasta la matrícula.</h2>
+    <div class="con-grid">
+      <ol class="viaje" id="viaje" aria-label="El recorrido de un alumno">
+        <span class="prog-v" id="prog-v" aria-hidden="true"></span>
+        <li><b>Ve el anuncio de un curso</b><span>Una campaña con su curso, su fecha y su público.</span></li>
+        <li><b>Pide información</b><span>Una página o un formulario con las preguntas que tu equipo necesita.</span></li>
+        <li><b>Recibe respuesta</b><span>Por WhatsApp, correo o llamada, sobre el curso que pidió.</span></li>
+        <li><b>Resuelve sus dudas</b><span>Horarios, modalidad, plazas: lo que le frena para decidir.</span></li>
+        <li><b>Agenda una conversación</b><span>Con tu equipo, en tu calendario.</span></li>
+        <li class="tuyo"><b>Tu centro gestiona la matrícula</b><span>La decisión comercial y la matrícula siguen siendo tuyas.</span></li>
+      </ol>
+
+      <div>
+        <div class="marco" id="marco">
+          <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Formación</span><em>Demo con datos simulados</em></div>
+          <img src="/formacion/v2/img/intelligence-recorrido.jpg" alt="Panel de Qualivo Intelligence con el recorrido del anuncio a la matrícula y las fugas ordenadas. Demo con datos simulados." width="1275" height="810" loading="lazy" decoding="async">
+        </div>
+        <div class="intel-pie">
+          <p><b>Qualivo Intelligence</b> une cada anuncio con lo que pasa después: dónde se quedan los interesados, qué campaña trae matrículas y qué hay que atender hoy.</p>
+          <a href="/intelligence/?sector=formacion" target="_blank" rel="noopener" data-cta="intelligence-demo">Ver la demo →</a>
+        </div>
+
+        <div class="raquel">
+          <div class="r1">
+            <div class="who">
+              <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <div><b>Raquel, asistente de voz</b><span>Llama a quien pide información, resuelve las dudas básicas y propone una hora con tu equipo.</span></div>
+            </div>
+            <button type="button" class="btn abrir" id="r-abrir" aria-expanded="false" aria-controls="fr">Que me llame ahora</button>
+          </div>
+          <form id="fr" hidden novalidate>
+            <input name="nombre" placeholder="Tu nombre" autocomplete="name" aria-label="Tu nombre">
+            <input name="telefono" type="tel" placeholder="Tu móvil" autocomplete="tel" aria-label="Tu móvil">
+            <input name="email" type="email" placeholder="Tu email" autocomplete="email" aria-label="Tu email">
+            <input name="web" placeholder="Web de tu centro" aria-label="Web de tu centro">
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="ok full"><input type="checkbox" name="rgpd"><span>Acepto que me llamen para la prueba y la <a href="/privacidad/" target="_blank" style="color:var(--verde-claro)">política de privacidad</a>.</span></label>
+            <button type="submit" class="btn full" id="r-btn">Llamadme&nbsp;→</button>
+            <p class="nota full">Haz de alumno interesado. Te llama en menos de un minuto, de 9:00 a 21:00.</p>
+          </form>
+          <div class="estado" id="r-estado" hidden aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · CÓMO TRABAJAMOS -->
+<section class="sec como" aria-labelledby="t-como">
+  <div class="wrap">
+    <p class="eyebrow">Cómo trabajamos</p>
+    <h2 id="t-como">Nos ocupamos del sistema de crecimiento. Tú, de formar alumnos.</h2>
+    <p class="lead">Diseñamos, implementamos y optimizamos el recorrido de captación y seguimiento para que tu centro pueda concentrarse en atender y formar a sus alumnos.</p>
+    <div class="pasos aparece">
+      <div class="paso"><div class="num">01</div><h3>Diagnóstico</h3><p>Analizamos cómo captas alumnos y dónde se pierden oportunidades.</p></div>
+      <div class="paso"><div class="num">02</div><h3>Implantación</h3><p>Construimos y conectamos las campañas, las páginas y los procesos acordados.</p></div>
+      <div class="paso"><div class="num">03</div><h3>Optimización</h3><p>Medimos, detectamos problemas y mejoramos cada mes.</p></div>
+    </div>
+    <div class="oferta">
+      <div>
+        <span class="k">Una sola oferta</span>
+        <h3>Sistema de Crecimiento Qualivo · Gestionado</h3>
+        <p>Nosotros llevamos el sistema. Tu centro conserva las decisiones comerciales y la formalización de las matrículas.</p>
+      </div>
+      <a href="#diagnostico" class="btn" data-cta="oferta">Descubre tu plan de captación&nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · CTA FINAL, FORMULARIO Y FAQ -->
+<section class="sec final" id="diagnostico" aria-labelledby="t-final">
+  <div class="wrap">
+    <div class="grid-f">
+      <div>
+        <p class="eyebrow">Diagnóstico de captación</p>
+        <h2 id="t-final">Descubre dónde puedes conseguir más matrículas.</h2>
+        <p class="lead" id="form-bajada">Analizamos tu captación, la respuesta a tus solicitudes y el seguimiento comercial para identificar oportunidades de mejora.</p>
+        <div class="lista">
+          <div>30 minutos por videollamada</div>
+          <div>Sin coste y sin compromiso</div>
+          <div>Plan por escrito en 48 horas</div>
+        </div>
+        <div class="huecos" id="huecos">
+          <div class="t"><span class="vivo"></span>Próximos huecos libres</div>
+          <ul id="huecos-l"></ul>
+        </div>
+        <div class="maikel">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
+          <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
+        </div>
+      </div>
+
+      <div class="caja-f">
+        <form id="f" novalidate>
+          <div class="prog" aria-hidden="true"><i id="barra"></i></div>
+          <div id="p1">
+            <div class="paso-n">Paso 1 de 2 · tu centro</div>
+            <h3>Solicitar diagnóstico de captación</h3>
+            <label class="campo"><span>Nombre del centro</span><input type="text" name="centro" autocomplete="organization" required></label>
+            <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tucentro.com" required></label>
+            <label class="campo"><span>Principal objetivo</span>
+              <select name="objetivo" required>
+                <option value="">Elige una opción</option>
+                <option>Conseguir más solicitudes</option>
+                <option>Convertir más solicitudes en matrículas</option>
+                <option>Que ninguna solicitud se quede sin seguimiento</option>
+                <option>Saber qué campañas traen matrículas</option>
+                <option>Todavía no lo tengo claro</option>
+              </select>
+            </label>
+            <!-- Campos que exige /diagnostico/landing.js y api/diagnostico.js; esta página no los pregunta. -->
+            <div class="oculto" aria-hidden="true">
+              <select name="sector" tabindex="-1"><option selected>Formación o academia</option></select>
+              <select name="equipo" tabindex="-1"><option value="0" selected>No preguntado (formación v2)</option></select>
+              <select name="inversion" tabindex="-1"><option value="0" selected>No preguntado (formación v2)</option></select>
+            </div>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
+            <p class="seguro">Paso 2: tus datos de contacto y eliges hora.</p>
+          </div>
+
+          <div id="p2" hidden>
+            <div class="paso-n">Paso 2 de 2 · dónde te contactamos</div>
+            <h3>¿Con quién hablamos?</h3>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <input type="hidden" name="hipotesis">
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Solicitar diagnóstico de captación&nbsp;→</button>
+            <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
+          </div>
+
+          <div id="p3" hidden>
+            <div class="paso-n" id="p3-n">Último paso</div>
+            <h3 id="p3-t">Elige la hora que te venga bien.</h3>
+            <p style="font-size:15.5px;color:var(--gris);margin:-6px 0 16px">30 minutos. Antes de la llamada revisamos tu web y lo que nos has contado.</p>
+            <div id="cal"></div>
+          </div>
+
+          <div id="p4" hidden>
+            <div class="fuera"><h3>Gracias, lo hemos recibido.</h3><p style="font-size:16px;color:var(--gris)">Te escribimos en breve para ver si tiene sentido en tu caso.</p></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h3>Preguntas frecuentes</h3>
+      <div>
+        <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes. Si no, en el diagnóstico vemos si tiene sentido empezar y por dónde.</p></details>
+        <details><summary>¿Qué incluye el servicio?</summary><p>Campañas, páginas de captación, la respuesta y el seguimiento de cada solicitud, la conexión con tu CRM y la medición, con una revisión mensual de qué mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No. Trabajamos sobre el que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu centro.</p></details>
+        <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántos alumnos quieras captar y de lo que vale una matrícula para tu centro. En el diagnóstico hacemos esa cuenta con tus números y te damos una propuesta cerrada. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil">Descubre tu plan de captación&nbsp;→</a></div>
+
+<script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=formacion");}</script>
+<script>
+(function(){
+  'use strict';
+  function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
+
+  /* clics en CTA: no son leads, solo navegación */
+  document.querySelectorAll('[data-cta]').forEach(function(a){
+    a.addEventListener('click',function(){ track('formacion_cta',{ubicacion:a.getAttribute('data-cta')}); });
+  });
+
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
+  function contar(el,fin,dec,suf,ms){
+    if(quieto){ return; }
+    var t0=null; suf=suf||'';
+    function paso(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/ms), e=1-Math.pow(1-k,3); el.innerHTML=fmt(fin*e,dec)+suf; if(k<1) requestAnimationFrame(paso); }
+    el.innerHTML=fmt(0,dec)+suf; requestAnimationFrame(paso);
+  }
+  function alVer(el,fn,umbral){
+    if(!('IntersectionObserver' in window)){ fn(); return; }
+    new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:umbral||.3}).observe(el);
+  }
+
+  /* hero: subrayado, barras y cifras que suben */
+  var dash=document.getElementById('dash'), heroEl=document.getElementById('hero');
+  requestAnimationFrame(function(){ heroEl.classList.add('on'); });
+  alVer(dash,function(){
+    dash.classList.add('on');
+    dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1200); });
+  });
+
+  /* hero: avisos de ejemplo que van entrando (datos de demostración) */
+  var EV=[['✉','Nueva solicitud','Curso de enero · hace 2 s'],['💬','Conversación iniciada','WhatsApp · resuelve una duda de horario'],['📅','Reunión agendada','Jueves, 10:00 · con tu equipo'],['🎓','Matrícula confirmada','Grupo de enero','mat']];
+  var caja=document.getElementById('toasts'), k=0;
+  function toast(){
+    var e=EV[k++%EV.length], d=document.createElement('div');
+    d.className='toast'+(e[3]?' '+e[3]:''); d.innerHTML='<span class="ic">'+e[0]+'</span><span>'+e[1]+'<em>Ejemplo</em><small>'+e[2]+'</small></span>';
+    caja.appendChild(d); requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add('on'); }); });
+    var ts=caja.querySelectorAll('.toast'); if(ts.length>2){ var u=ts[0]; u.classList.remove('on'); setTimeout(function(){ u.remove(); },400); }
+  }
+  if(!quieto){ setTimeout(toast,1400); setInterval(function(){ if(!document.hidden) toast(); },3200); }
+
+  /* hero: el panel se inclina un poco con el ratón (solo escritorio) */
+  if(!quieto && matchMedia('(pointer:fine)').matches){
+    var esc=dash.parentNode;
+    esc.addEventListener('mousemove',function(ev){ var r=esc.getBoundingClientRect(), x=(ev.clientX-r.left)/r.width-.5, y=(ev.clientY-r.top)/r.height-.5; dash.style.transform='rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg)'; });
+    esc.addEventListener('mouseleave',function(){ dash.style.transform=''; });
+  }
+
+  /* resultados: las cifras cuentan al entrar */
+  document.querySelectorAll('[data-cuenta]').forEach(function(el){
+    alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1600); },.6);
+  });
+  document.querySelectorAll('.aparece').forEach(function(el){ alVer(el,function(){ el.classList.add('on'); },.15); });
+  var marco=document.getElementById('marco'); alVer(marco,function(){ marco.classList.add('on'); },.2);
+
+  /* sección oscura: la línea del recorrido se llena al bajar */
+  var viaje=document.getElementById('viaje'), prog=document.getElementById('prog-v'), pasosV=[].slice.call(viaje.querySelectorAll('li'));
+  function llenar(){
+    var r=viaje.getBoundingClientRect(), vh=innerHeight, total=r.height-24;
+    var hecho=Math.max(0,Math.min(total,(vh*.62)-r.top));
+    prog.style.height=hecho+'px';
+    pasosV.forEach(function(li){ li.classList.toggle('lit', li.offsetTop+10 <= hecho+12); });
+  }
+  if(quieto){ pasosV.forEach(function(li){ li.classList.add('lit'); }); prog.style.height='calc(100% - 24px)'; }
+  else { addEventListener('scroll',llenar,{passive:true}); addEventListener('resize',llenar); llenar(); }
+
+  /* cinco funciones: selector en escritorio, lista en móvil (mismo contenido) */
+  var F=[
+    ['Atraer','Campañas para el alumno que buscas.','Campañas y mensajes enfocados en el alumno que encaja con cada curso, para que las solicitudes que entran tengan sentido.',['Meta y Google','Mensaje por curso','Público por convocatoria']],
+    ['Convertir','Páginas que explican el curso.','Páginas y formularios que cuentan lo que el alumno quiere saber y recogen lo que tu equipo necesita de cada interesado.',['Páginas de captación','Formularios','Preguntas por curso']],
+    ['Responder y seguir','Ninguna solicitud se queda sin respuesta.','Cada solicitud recibe respuesta y un siguiente paso, por WhatsApp, correo o llamada, hasta que decide. Con los mensajes y los límites que acuerdas con nosotros.',['WhatsApp','Correo','Llamada de voz']],
+    ['Facilitar la venta','Tu equipo llega con el contexto.','Cada conversación con tu equipo llega con el curso que le interesa, sus dudas y en qué punto está. Y con fecha para el siguiente paso.',['Agenda','Ficha en tu CRM','Siguiente paso con fecha']],
+    ['Medir y mejorar','Qué campaña acaba en matrícula.','Medimos el recorrido entero, del anuncio a la matrícula, y cada mes decidimos qué mejorar con tus números delante.',['Qualivo Intelligence','Revisión mensual','Del anuncio a la matrícula']]
+  ];
+  function html(i){ var f=F[i]; return '<div class="k">'+String(i+1).padStart(2,'0')+' · '+f[0]+'</div><h4>'+f[1]+'</h4><p>'+f[2]+'</p><ul>'+f[3].map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>'; }
+  var panel=document.getElementById('panel'), tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function elegir(i){ tabs.forEach(function(t,j){ t.setAttribute('aria-selected', j===i?'true':'false'); t.tabIndex=j===i?0:-1; }); panel.innerHTML=html(i); }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ elegir(i); });
+    t.addEventListener('keydown',function(e){ var n=e.key==='ArrowDown'||e.key==='ArrowRight'?1:e.key==='ArrowUp'||e.key==='ArrowLeft'?-1:0; if(n){ e.preventDefault(); var k=(i+n+F.length)%F.length; elegir(k); tabs[k].focus(); } });
+  });
+  elegir(0);
+  document.getElementById('panel-m').innerHTML=F.map(function(_,i){ return '<div class="panel" style="margin-bottom:10px">'+html(i)+'</div>'; }).join('');
+
+  /* formulario: se adapta a /diagnostico/landing.js sin cambiarlo.
+     Centro y objetivo no existen en el backend: van en «hipotesis», que llega a la nota del CRM
+     y al primer WhatsApp. Este listener se registra antes que el de landing.js (defer). */
+  var f=document.getElementById('f'), barra=document.getElementById('barra');
+  f.addEventListener('submit',function(){
+    var c=f.elements.centro.value.trim(), o=f.elements.objetivo.value;
+    f.elements.hipotesis.value=('Centro: '+c+(o?' · Objetivo: '+o:'')).slice(0,1200);
+  });
+  document.getElementById('b1').addEventListener('click',function(ev){
+    var falta=!f.elements.centro.value.trim()||!f.elements.web.value.trim()||!f.elements.objetivo.value;
+    if(falta){ ev.stopImmediatePropagation(); var e1=document.getElementById('e1'); e1.textContent='Rellena el centro, la web y el objetivo.'; e1.hidden=false; return; }
+    barra.style.width='100%';
+  },true);
+
+  /* Raquel: la prueba real de llamada (/api/prueba/). */
+  var fr=document.getElementById('fr'), ab=document.getElementById('r-abrir'), est=document.getElementById('r-estado'), rb=document.getElementById('r-btn');
+  ab.addEventListener('click',function(){ fr.hidden=!fr.hidden; ab.setAttribute('aria-expanded',String(!fr.hidden)); if(!fr.hidden){ fr.elements.nombre.focus(); track('formacion_raquel_abrir',{}); } });
+  function aviso(t,mal){ est.textContent=t; est.className='estado'+(mal?' mal':''); est.hidden=false; }
+  fr.addEventListener('submit',function(ev){
+    ev.preventDefault(); est.hidden=true;
+    if(fr.elements.website.value) return;
+    var d={nombre:fr.elements.nombre.value.trim(),telefono:fr.elements.telefono.value.trim(),email:fr.elements.email.value.trim(),web:fr.elements.web.value.trim(),sector:'formacion',utm:location.search||''};
+    if(d.nombre.length<2) return aviso('Dinos tu nombre.',true);
+    if(!/^(\+?34)?[\s-]*[67](\s*\d){8}$/.test(d.telefono.replace(/[().-]/g,''))) return aviso('Necesitamos un móvil español para llamarte.',true);
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return aviso('Ese email no parece correcto.',true);
+    if(!d.web) return aviso('Pon la web de tu centro: con ella prepara la llamada.',true);
+    if(!fr.elements.rgpd.checked) return aviso('Necesitamos tu permiso para llamarte.',true);
+    rb.disabled=true; rb.textContent='Preparando la llamada…'; track('prueba_enviar',{sector:'formacion',origen:'formacion-v2'});
+    fetch('/api/prueba/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        rb.disabled=false; rb.textContent='Llamadme →';
+        if(r.ok&&r.estado==='llamando'){ fr.hidden=true; aviso('Te está llamando'+(r.agente?' '+r.agente:'')+'. Cógelo y haz de alumno interesado.'); track('prueba_llamando',{origen:'formacion-v2'}); }
+        else if(r.ok&&r.estado==='fuera_horario'){ fr.hidden=true; aviso('Ahora no podemos llamar: la prueba funciona de '+(r.desde||9)+':00 a 21:00. Te hemos apuntado.'); }
+        else if(r.error==='ya_hoy'||r.error==='tope') aviso('Hoy ya no quedan pruebas para este móvil. Si quieres verlo con tu caso, pide el diagnóstico.',true);
+        else if(r.error==='telefono') aviso('Necesitamos un móvil español para llamarte.',true);
+        else aviso('No ha salido. Vuelve a intentarlo en un momento.',true);
+      })
+      .catch(function(){ rb.disabled=false; rb.textContent='Llamadme →'; aviso('No ha salido. Vuelve a intentarlo en un momento.',true); });
+  });
+
+  /* huecos reales del calendario del diagnóstico (api/huecos.js). Si no hay, no se enseña nada. */
+  fetch('/api/huecos/').then(function(r){ return r.ok?r.json():{huecos:[]}; }).then(function(d){
+    var h=(d&&d.huecos)||[]; if(!h.length) return;
+    function txt(iso){ return new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',weekday:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(iso)).replace(',',' ·'); }
+    document.getElementById('hueco-1').textContent=txt(h[0]);
+    document.getElementById('hueco-hero').classList.add('on');
+    document.getElementById('huecos-l').innerHTML=h.map(function(x){ return '<li><a href="#diagnostico" data-cta="hueco">'+txt(x)+'</a></li>'; }).join('');
+    document.getElementById('huecos').classList.add('on');
+    document.querySelectorAll('#huecos a').forEach(function(a){ a.addEventListener('click',function(){ track('formacion_cta',{ubicacion:'hueco'}); var c=document.querySelector('#f [name=centro]'); if(c) setTimeout(function(){ c.focus(); },400); }); });
+  }).catch(function(){});
+
+  /* CTA fijo en móvil: aparece tras el hero y se esconde en el formulario */
+  var fijo=document.getElementById('fijo'), hero=document.querySelector('.hero'), fin=document.getElementById('diagnostico');
+  if('IntersectionObserver' in window){
+    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
+    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
+    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
+  }
+})();
+</script>
+<script src="/assets/consent.js" defer></script>
+<script src="/diagnostico/landing.js" defer></script>
+</body>
+</html>
