@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- BORRADOR · Landing Formación V2.1 (optimización de conversión sobre /formacion/v2/, 12-oct-2026).
+     noindex. No sustituye a /formacion/ hasta el OK de Maikel. Formulario: /diagnostico/landing.js sin cambios
+     (mapeo de campos en el script de la página). Sin precios, sin FEMXA/XFP, sin «agentes de IA». -->
+<title>Más alumnos para tu centro · Qualivo para academias y centros de formación</title>
+<meta name="description" content="Conseguimos solicitudes de personas interesadas en tus cursos y conectamos la captación con el seguimiento comercial para convertir más en matrículas. Diagnóstico sin coste de 30 minutos.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://qualivo.io/formacion/">
+<meta property="og:title" content="Más alumnos para tu centro. Del primer anuncio a la matrícula.">
+<meta property="og:description" content="Sistema de Crecimiento Qualivo para academias y centros de formación. Diagnóstico sin coste de 30 minutos.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+:root{
+  --marfil:#FAF7F0; --marfil-2:#F2EDE2; --tinta:#101319; --negro:#08090C;
+  --verde:#0E7C74; --verde-claro:#27BDB1; --verde-suave:#E3F2EF; --amarillo:#F4CC38;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --linea:rgba(16,19,25,.1); --rojo:#C2410C; --naranja-suave:#FFF1EA;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--display);background:var(--marfil);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(64px,8vw,112px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(30px,4.2vw,48px);max-width:20ch}
+h3{font-size:clamp(18px,2vw,21px);letter-spacing:-.02em;line-height:1.22}
+p{font-size:clamp(16px,1.8vw,17.5px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:14px}
+.lead{color:var(--gris);margin-top:16px;max-width:56ch}
+.borrador{background:var(--amarillo);text-align:center;font-weight:800;font-size:13px;padding:7px 16px}
+.tag-demo{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:4px 9px;border-radius:999px;white-space:nowrap}
+
+/* botones: uno solo en todo el sitio */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--amarillo);color:var(--tinta);font:900 clamp(16px,1.9vw,18px)/1.15 var(--display);text-decoration:none;text-align:center;
+  box-shadow:0 12px 30px rgba(244,204,56,.32);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(244,204,56,.42)}
+.btn-sm{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+.btn-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:800;font-size:16px;text-decoration:none;color:var(--gris)}
+.btn-link:hover{color:var(--tinta)}
+
+/* barra */
+.top{position:sticky;top:0;z-index:40;background:rgba(250,247,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.top img{height:22px;width:auto}
+
+/* 1 · HERO */
+.hero{padding:clamp(44px,6vw,84px) 0 clamp(56px,7vw,96px)}
+.grid-h{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(34px,4.7vw,58px);max-width:14ch}
+.hero h1 span{display:block;color:var(--verde);margin-top:.06em}
+.hero h1 .subr{text-decoration:underline;text-decoration-color:rgba(244,204,56,.9);text-decoration-thickness:.16em;text-underline-offset:.08em;text-decoration-skip-ink:none}
+.hero .lead{font-size:clamp(17px,1.9vw,19px);color:#3E434B;margin-top:22px;max-width:44ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:30px}
+.hero .micro{margin-top:14px;font-size:14.5px;color:var(--gris);font-weight:700}
+.hero .micro span{color:var(--verde)}
+
+.dash{background:#fff;border:1px solid var(--linea);border-radius:22px;box-shadow:0 30px 80px rgba(16,19,25,.10);padding:22px 22px 18px}
+.dash-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.dash-h b{font-size:15.5px;display:block}
+.dash-h small{display:block;font-size:13px;color:var(--gris-claro);font-weight:600;margin-top:3px}
+.etapa{display:grid;grid-template-columns:116px 1fr 44px;gap:12px;align-items:center;padding:8px 0}
+.etapa .n{font-size:14px;font-weight:700;color:#2B2F36}
+.barra{height:28px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--verde),var(--verde-claro));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dash.on .barra i{width:var(--w)}
+.etapa .v{font-size:15px;font-weight:900;text-align:right}
+.etapa.fin .barra i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fuga-h{margin:6px 0 6px 128px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
+.dash-pie{border-top:1px solid var(--linea);margin-top:12px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
+
+/* 2 · RESULTADOS */
+.res{background:#fff}
+.casos{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:36px}
+.caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column}
+.caso.eac{background:var(--tinta);color:#fff}
+.caso.nail{background:var(--verde-suave)}
+.caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.caso .cab img{height:34px;width:auto}
+.caso.eac .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
+.caso.nail .cab img{filter:grayscale(1) brightness(.5) contrast(1.6);height:44px}
+.caso .quien{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.75}
+.caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:24px 0 18px}
+.caso .big{font-size:clamp(44px,5.8vw,70px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.caso.eac .big{color:var(--amarillo)}
+.caso.nail .big{color:var(--verde)}
+.caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:20ch;line-height:1.35}
+.caso.eac .lbl{color:#C6CBD3}
+.caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
+.caso.eac .ctx{color:#AEB5BF}
+.caso.eac .ctx b{color:#fff}
+.caso.nail .ctx{color:#3E434B}
+.caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none;color:var(--amarillo)}
+.logos{margin-top:clamp(36px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center}
+.logos p{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);max-width:14ch;line-height:1.4}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;opacity:.6}
+.logos img{width:auto}
+
+/* 3 · PROBLEMA + SOLUCIÓN */
+.problemas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
+.pb{padding:24px 26px 6px 0}
+.pb + .pb{padding-left:26px;border-left:1px solid var(--linea)}
+.pb .x{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);font-weight:900;font-size:14px;margin-bottom:14px}
+.pb h3{margin-bottom:8px}
+.pb p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.solucion{margin-top:clamp(40px,5vw,60px);background:var(--tinta);color:#fff;border-radius:24px;padding:clamp(24px,3.4vw,38px)}
+.solucion .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.solucion .t h3{font-size:clamp(20px,2.4vw,26px);color:#fff}
+.solucion .t span{font-size:14px;color:#8E96A2;font-weight:600}
+.flujo{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;list-style:none;counter-reset:f}
+.flujo li{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 16px 16px}
+.flujo li::before{counter-increment:f;content:'0' counter(f);display:block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--verde-claro);margin-bottom:10px}
+.flujo li::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:1;color:var(--amarillo);font-weight:900;background:var(--tinta);width:12px;text-align:center}
+.flujo li:last-child::after{display:none}
+.flujo b{display:block;font-size:17px;letter-spacing:-.01em;margin-bottom:6px}
+.flujo span{display:block;font-size:14px;color:#AEB5BF;line-height:1.45}
+
+/* 4 · DEMOSTRACIÓN */
+.demo{background:var(--negro);color:#fff}
+.demo h2{color:#fff;max-width:18ch}
+.demo .eyebrow{color:var(--verde-claro)}
+.demo .lead{color:#AEB5BF}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;margin-top:36px}
+.kpis div{background:#11151B;padding:16px 18px}
+.kpis small{display:block;font-size:12.5px;color:#8E96A2;font-weight:700}
+.kpis b{display:block;font-size:clamp(22px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;margin-top:4px}
+.kpis .alerta b{color:#FF9B7A}
+.kpis .ok b{color:var(--amarillo)}
+.escena{position:relative;margin-top:16px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
+.marco{background:#F6F4EF;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.marco .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#14181F}
+.marco .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.marco .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.marco .bar .tag-demo{margin-left:auto}
+.marco img{width:100%;height:auto}
+.nota-img{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:14.5px;color:#C6CBD3;line-height:1.45}
+.nota-img .n{flex:0 0 24px;height:24px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:grid;place-items:center;font-weight:900;font-size:12.5px}
+.nota-img b{color:#fff}
+.lado{display:grid;gap:16px}
+.raquel{background:linear-gradient(135deg,#14181F,#0F1F1D);border:1px solid rgba(39,189,177,.35);border-radius:18px;padding:20px}
+.raquel .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde-claro)}
+.raquel h3{color:#fff;margin:8px 0 6px;font-size:18px}
+.raquel p{font-size:14.5px;color:#AEB5BF;line-height:1.5}
+.raquel .abrir{margin-top:14px;min-height:46px;padding:0 18px;border-radius:12px;font-size:15px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);box-shadow:none}
+.raquel .abrir:hover{border-color:var(--verde-claro);transform:none;box-shadow:none}
+.raquel form{margin-top:14px;display:grid;gap:8px}
+.raquel input{width:100%;min-height:46px;padding:11px 13px;border-radius:10px;border:1.5px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font:600 15px var(--display)}
+.raquel input::placeholder{color:#7F8794}
+.raquel input:focus{outline:none;border-color:var(--verde-claro)}
+.raquel label.ok{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#AEB5BF;line-height:1.45}
+.raquel label.ok input{width:18px;min-height:18px;height:18px;margin-top:2px;accent-color:var(--verde-claro)}
+.raquel .enviar{min-height:48px;font-size:15.5px;box-shadow:none}
+.raquel .nota{font-size:12.5px;color:#8E96A2}
+.raquel .estado{margin-top:12px;padding:12px 14px;border-radius:12px;background:rgba(39,189,177,.12);color:#DFF5F2;font-size:14.5px;font-weight:600}
+.raquel .estado.mal{background:rgba(194,65,12,.18);color:#FFD9C7}
+
+/* 5 · SERVICIO */
+.serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);margin-top:40px;align-items:start}
+.fases{list-style:none;border-top:2px solid var(--tinta)}
+.fases li{display:grid;grid-template-columns:64px 1fr;gap:0 14px;padding:20px 0;border-bottom:1px solid var(--linea)}
+.fases .num{grid-row:1/3;font-size:34px;font-weight:900;letter-spacing:-.05em;color:var(--verde);line-height:1}
+.fases h3{margin-bottom:4px}
+.fases p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.incluye{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:clamp(22px,3vw,30px)}
+.incluye .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.incluye h3{font-size:clamp(20px,2.4vw,24px);margin:8px 0 16px}
+.incluye ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.incluye li{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:700;line-height:1.35;background:var(--marfil);border-radius:12px;padding:12px}
+.incluye li::before{content:'✓';color:var(--verde);font-weight:900}
+.incluye .pie-i{margin-top:14px;font-size:13.5px;color:var(--gris);line-height:1.5}
+.incluye .pie-i b{color:var(--tinta)}
+.serv-cta{margin-top:clamp(28px,4vw,40px);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.serv-cta p{font-size:15px;color:var(--gris)}
+
+/* 6 · CONVERSIÓN */
+.final{background:var(--marfil-2)}
+.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
+.despues{margin-top:26px;list-style:none;display:grid;gap:12px;counter-reset:d}
+.despues li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:15.5px;color:#3E434B;line-height:1.45}
+.despues li::before{counter-increment:d;content:counter(d);width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;font-weight:900;font-size:13px;color:var(--verde)}
+.despues b{color:var(--tinta)}
+.huecos{display:none;margin-top:22px;font-size:14.5px;color:#3E434B}
+.huecos.on{display:block}
+.huecos b{color:var(--verde)}
+.maikel{display:flex;gap:14px;align-items:center;margin-top:22px}
+.maikel img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.maikel p{font-size:14.5px;color:var(--gris);line-height:1.45}
+.maikel b{color:var(--tinta)}
+.caja-f{background:#fff;border-radius:22px;padding:clamp(22px,3.2vw,34px);box-shadow:0 24px 60px rgba(16,19,25,.08);border:1px solid var(--linea)}
+.pasos-f{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;list-style:none;margin-bottom:20px}
+.pasos-f li{font-size:12.5px;font-weight:800;color:var(--gris-claro);padding-top:10px;border-top:4px solid var(--marfil-2);line-height:1.3}
+.pasos-f li.act{color:var(--tinta);border-color:var(--verde)}
+.pasos-f li.hecho{color:var(--verde);border-color:var(--verde)}
+.caja-f h3{margin-bottom:14px}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.campo input,.campo select{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--verde-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.hp,.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera,.reservado{background:var(--verde-suave);border-radius:14px;padding:22px}
+.faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
+.faq h3{font-size:clamp(22px,2.8vw,30px)}
+.faq details{border-top:1px solid var(--linea)}
+.faq details:last-child{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;font-weight:700;color:var(--verde);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 0 18px;color:var(--gris);font-size:15.5px;line-height:1.6;max-width:58ch}
+
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+[hidden]{display:none !important}
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+.aparece{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.aparece.on{opacity:1;transform:none}
+
+.escena > div,.lado > div{min-width:0}
+.marco .bar{flex-wrap:wrap}
+@media(max-width:1000px){.flujo{grid-template-columns:1fr 1fr}.flujo li::after{display:none}.escena{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:960px){.grid-h,.casos,.grid-f,.faq,.serv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){
+  .top .btn-sm{display:none}.fijo{display:block}
+  .problemas{grid-template-columns:1fr;border-top:0}
+  .pb,.pb + .pb{padding:20px 0;border-left:0;border-top:1px solid var(--linea);display:grid;grid-template-columns:42px 1fr;gap:0 10px}
+  .pb .x{grid-row:1/3;margin:0}.pb h3{margin-bottom:4px}
+  .flujo{grid-template-columns:1fr}
+  .flujo li{display:grid;grid-template-columns:34px 1fr;gap:2px 10px;padding:14px}
+  .flujo li::before{grid-row:1/3;margin:2px 0 0}
+  .kpis{grid-template-columns:1fr 1fr}.kpis div:last-child{grid-column:1/-1}
+  .etapa{grid-template-columns:104px 1fr 40px;gap:10px}.fuga-h{margin-left:0}
+  .logos{grid-template-columns:1fr}.logos p{max-width:none}
+  .incluye ul{grid-template-columns:1fr}
+  .hero .ctas .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.aparece{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="borrador">BORRADOR V2.1 · sin publicar · el formulario y la prueba de llamada son reales</div>
+
+<div class="top">
+  <div class="wrap">
+    <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
+    <a href="#diagnostico" class="btn btn-sm" data-cta="barra">Descubre cómo captar más alumnos</a>
+  </div>
+</div>
+
+<!-- 1 · HERO -->
+<header class="hero" id="hero">
+  <div class="wrap grid-h">
+    <div>
+      <p class="eyebrow">Para academias y centros de formación</p>
+      <h1>Más alumnos para tu centro. <span><span class="subr">Del primer anuncio a la matrícula.</span></span></h1>
+      <p class="lead">Conseguimos solicitudes de personas interesadas en tus cursos y conectamos la captación con el seguimiento comercial para ayudarte a convertir más en matrículas.</p>
+      <div class="ctas">
+        <a href="#diagnostico" class="btn" data-cta="hero">Descubre cómo captar más alumnos&nbsp;→</a>
+        <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
+      </div>
+      <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
+    </div>
+
+    <figure class="dash" id="dash" aria-label="Ejemplo de recorrido de un centro: de 180 solicitudes a 24 matrículas en un mes. Datos de ejemplo.">
+      <div class="dash-h">
+        <div><b>Recorrido de un mes</b><small>4 campañas activas</small></div>
+        <span class="tag-demo">Datos de ejemplo</span>
+      </div>
+      <div class="etapa"><span class="n">Solicitudes</span><div class="barra"><i style="--w:100%"></i></div><span class="v" data-n="180">180</span></div>
+      <div class="etapa"><span class="n">Conversaciones</span><div class="barra"><i style="--w:66%"></i></div><span class="v" data-n="118">118</span></div>
+      <div class="fuga-h">62 solicitudes no llegaron a hablar con nadie. Aquí se pierde.</div>
+      <div class="etapa"><span class="n">Reuniones</span><div class="barra"><i style="--w:26%"></i></div><span class="v" data-n="46">46</span></div>
+      <div class="etapa fin"><span class="n">Matrículas</span><div class="barra"><i style="--w:13%"></i></div><span class="v" data-n="24">24</span></div>
+      <figcaption class="dash-pie">Ejemplo ilustrativo. No son datos de un cliente.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- 2 · RESULTADOS -->
+<section class="sec res" aria-labelledby="t-res">
+  <div class="wrap">
+    <p class="eyebrow">Resultados</p>
+    <h2 id="t-res">Resultados reales en captación para formación.</h2>
+    <div class="casos">
+      <article class="caso eac">
+        <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
+          <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">facturados y atribuidos en un mes</div></div>
+        </div>
+        <p class="ctx"><b>Tres cursos, tres públicos distintos.</b> Montamos campañas por curso en Meta, Google y TikTok, conectadas al CRM, y seguimos cada solicitud hasta la entrevista y la matrícula. Ese mes: 10 matrículas, atribuidas por canal.</p>
+        <a class="ver" href="/casos/eac/">Ver el caso completo →</a>
+      </article>
+      <article class="caso nail">
+        <div class="cab"><span class="quien">Nail Boss Academy</span><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" loading="lazy"></div>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="1160">1.160</div><div class="lbl">solicitudes</div></div>
+          <div><div class="big" data-cuenta="21">21</div><div class="lbl">matrículas</div></div>
+        </div>
+        <p class="ctx">En cuatro meses, partiendo de cero.</p>
+      </article>
+    </div>
+    <div class="logos">
+      <p>Han trabajado con Qualivo</p>
+      <div class="fila">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:22px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:36px;filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:26px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:26px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:32px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:28px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:44px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:38px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:20px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:12px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:22px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:30px;filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:22px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:32px">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="sistema" aria-labelledby="t-prob">
+  <div class="wrap">
+    <p class="eyebrow">Dónde se pierden los alumnos</p>
+    <h2 id="t-prob">No basta con conseguir solicitudes. Hay que convertirlas en alumnos.</h2>
+    <div class="problemas">
+      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>No llegan suficientes interesados adecuados</h3><p>Campañas poco enfocadas y páginas que no convierten.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>Los interesados no avanzan</h3><p>Respuestas tardías, falta de cualificación y dificultades para contactar.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Las oportunidades se enfrían</h3><p>Seguimientos que no se hacen y contactos que se quedan olvidados.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Campañas para el alumno que encaja con cada curso.</span></li>
+        <li><b>Convertir</b><span>Páginas y formularios que explican y cualifican.</span></li>
+        <li><b>Responder</b><span>Cada solicitud, con respuesta y siguiente paso.</span></li>
+        <li><b>Facilitar la venta</b><span>Tu equipo, con el contexto de cada alumno.</span></li>
+        <li><b>Medir</b><span>Qué campaña acaba en matrícula, y qué mejorar.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · DEMOSTRACIÓN -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
+  <div class="wrap">
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">Todo conectado. Cada oportunidad bajo control.</h2>
+    <p class="lead">Desde que alguien solicita información hasta que decide matricularse, puedes conocer qué ocurre en cada etapa y dónde necesitas actuar.</p>
+
+    <div class="kpis" role="list" aria-label="Ejemplo de métricas de un mes en Qualivo Intelligence, datos simulados">
+      <div role="listitem"><small>Solicitudes recibidas</small><b>692</b></div>
+      <div role="listitem"><small>Conversaciones iniciadas</small><b>385</b></div>
+      <div role="listitem"><small>Reuniones agendadas</small><b>94</b></div>
+      <div role="listitem" class="alerta"><small>Requieren atención hoy</small><b>9</b></div>
+      <div role="listitem" class="ok"><small>Matrículas registradas</small><b>38</b></div>
+    </div>
+
+    <div class="escena">
+      <div>
+        <div class="marco">
+          <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Formación</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+          <img src="/formacion/v21/img/intelligence-recorrido.jpg" alt="Qualivo Intelligence: recorrido del anuncio a la matrícula y las fugas ordenadas de mayor a menor. Ejemplo con datos simulados." width="1275" height="810" loading="lazy" decoding="async">
+        </div>
+        <p class="nota-img"><span class="n">1</span><span><b>Dónde se pierden.</b> Cada etapa comparada con lo que pasa cuando el seguimiento está bien hecho. La fuga mayor, arriba.</span></p>
+      </div>
+      <div class="lado">
+        <div>
+          <div class="marco">
+            <div class="bar"><i></i><i></i><i></i><span>Hoy</span><span class="tag-demo">Ejemplo</span></div>
+            <img src="/formacion/v21/img/intelligence-acciones.jpg" alt="Lista de interesados que requieren atención hoy, con la acción recomendada para cada uno. Ejemplo con datos simulados." width="922" height="840" loading="lazy" decoding="async">
+          </div>
+          <p class="nota-img"><span class="n">2</span><span><b>Qué hacer hoy.</b> Cada interesado con la siguiente acción y su prioridad.</span></p>
+        </div>
+        <div class="raquel">
+          <span class="k">Capacidad del sistema · voz</span>
+          <h3>Raquel, asistente de voz</h3>
+          <p>Descubre cómo un asistente de IA puede atender solicitudes y facilitar el agendamiento.</p>
+          <button type="button" class="btn abrir" id="r-abrir" aria-expanded="false" aria-controls="fr">Probar una llamada</button>
+          <form id="fr" hidden novalidate>
+            <input name="nombre" placeholder="Tu nombre" autocomplete="name" aria-label="Tu nombre">
+            <input name="telefono" type="tel" placeholder="Tu móvil" autocomplete="tel" aria-label="Tu móvil">
+            <input name="email" type="email" placeholder="Tu email" autocomplete="email" aria-label="Tu email">
+            <input name="web" placeholder="Web de tu centro" aria-label="Web de tu centro">
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="ok"><input type="checkbox" name="rgpd"><span>Acepto que me llamen para la prueba y la <a href="/privacidad/" target="_blank" style="color:var(--verde-claro)">política de privacidad</a>.</span></label>
+            <button type="submit" class="btn enviar" id="r-btn">Llamadme&nbsp;→</button>
+            <p class="nota">Haz de alumno interesado. Llama en menos de un minuto, de 9:00 a 21:00.</p>
+          </form>
+          <div class="estado" id="r-estado" hidden aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · SERVICIO -->
+<section class="sec" aria-labelledby="t-serv">
+  <div class="wrap">
+    <p class="eyebrow">Qué recibe tu centro</p>
+    <h2 id="t-serv">Nos ocupamos del sistema de crecimiento. Tú, de formar alumnos.</h2>
+    <p class="lead">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que puedas concentrarte en atender a tus futuros alumnos.</p>
+    <div class="serv-grid">
+      <ol class="fases">
+        <li><span class="num">01</span><h3>Diagnóstico</h3><p>Analizamos cómo captas alumnos y dónde pierdes oportunidades.</p></li>
+        <li><span class="num">02</span><h3>Implantación</h3><p>Ponemos en marcha las campañas, páginas y procesos acordados.</p></li>
+        <li><span class="num">03</span><h3>Optimización</h3><p>Medimos resultados, revisamos el recorrido y mejoramos continuamente.</p></li>
+      </ol>
+      <div class="incluye">
+        <span class="k">Sistema de Crecimiento Qualivo · Gestionado</span>
+        <h3>Lo que podemos llevar por ti</h3>
+        <ul>
+          <li>Campañas de captación</li>
+          <li>Landing pages y formularios</li>
+          <li>CRM y seguimiento</li>
+          <li>Automatizaciones e IA, cuando aportan</li>
+          <li>Panel de métricas</li>
+          <li>Revisión y optimización</li>
+        </ul>
+        <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico</b>, según lo que necesite tu centro. Tú conservas las decisiones comerciales y la matrícula.</p>
+      </div>
+    </div>
+    <div class="serv-cta"><a href="#diagnostico" class="btn" data-cta="servicio">Descubre cómo captar más alumnos&nbsp;→</a><p>Empezamos por un diagnóstico sin coste de 30 minutos.</p></div>
+  </div>
+</section>
+
+<!-- 6 · CONVERSIÓN -->
+<section class="sec final" id="diagnostico" aria-labelledby="t-final">
+  <div class="wrap">
+    <div class="grid-f">
+      <div>
+        <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
+        <h2 id="t-final">Descubre dónde puedes conseguir más matrículas.</h2>
+        <p class="lead" id="form-bajada">Analizamos tu captación, la respuesta a tus solicitudes y el seguimiento comercial para identificar dónde actuar primero.</p>
+        <ol class="despues" aria-label="Qué pasa después">
+          <li><span><b>Cuéntanos tu centro</b> y deja tus datos. Un minuto.</span></li>
+          <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes y te decimos dónde está la mayor fuga.</span></li>
+        </ol>
+        <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
+        <div class="maikel">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
+          <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
+        </div>
+      </div>
+
+      <div class="caja-f">
+        <ol class="pasos-f" id="pasos-f" aria-label="Progreso">
+          <li class="act">1 · Tu centro</li><li>2 · Tus datos</li><li>3 · Reserva tu hora</li>
+        </ol>
+        <form id="f" novalidate>
+          <div id="p1">
+            <h3>Cuéntanos tu centro</h3>
+            <label class="campo"><span>Nombre del centro</span><input type="text" name="centro" autocomplete="organization" required></label>
+            <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tucentro.com" required></label>
+            <label class="campo"><span>Principal objetivo</span>
+              <select name="objetivo" required>
+                <option value="">Elige una opción</option>
+                <option>Conseguir más solicitudes</option>
+                <option>Convertir más solicitudes en matrículas</option>
+                <option>Que ninguna solicitud se quede sin seguimiento</option>
+                <option>Saber qué campañas traen matrículas</option>
+                <option>Todavía no lo tengo claro</option>
+              </select>
+            </label>
+            <div class="oculto" aria-hidden="true">
+              <select name="sector" tabindex="-1"><option selected>Formación o academia</option></select>
+              <select name="equipo" tabindex="-1"><option value="0" selected>No preguntado (formación v2.1)</option></select>
+              <select name="inversion" tabindex="-1"><option value="0" selected>No preguntado (formación v2.1)</option></select>
+            </div>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
+          </div>
+
+          <div id="p2" hidden>
+            <h3>¿Con quién hablamos?</h3>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <input type="hidden" name="hipotesis">
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Ir a elegir hora&nbsp;→</button>
+            <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
+          </div>
+
+          <div id="p3" hidden>
+            <p class="eyebrow" id="p3-n" style="margin-bottom:6px">Último paso</p>
+            <h3 id="p3-t">Elige la hora que te venga bien.</h3>
+            <p style="font-size:15px;color:var(--gris);margin:-6px 0 14px">30 minutos por videollamada. La reunión queda confirmada cuando eliges la hora.</p>
+            <div id="cal"></div>
+          </div>
+
+          <div id="p4" hidden>
+            <div class="fuera"><h3>Gracias, lo hemos recibido.</h3><p style="font-size:15.5px;color:var(--gris)">Te escribimos en breve para ver si tiene sentido en tu caso.</p></div>
+          </div>
+        </form>
+        <div class="reservado" id="reservado" hidden aria-live="polite">
+          <h3>Reunión reservada.</h3>
+          <p style="font-size:15.5px;color:var(--gris);margin-top:6px">Te llegará la confirmación con el enlace de la videollamada. Si tienes a mano cuántas solicitudes recibís al mes y cuántas acaban en matrícula, mejor.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h3>Preguntas frecuentes</h3>
+      <div>
+        <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes. Si no, el diagnóstico dice si tiene sentido empezar y por dónde.</p></details>
+        <details><summary>¿Qué incluye el servicio?</summary><p>Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No. Trabajamos sobre el que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu centro.</p></details>
+        <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántos alumnos quieras captar y de lo que vale una matrícula para tu centro. En el diagnóstico hacemos esa cuenta con tus números. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Qualivo · España</span>
+    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
+  </div>
+</footer>
+
+<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil">Descubre cómo captar más alumnos&nbsp;→</a></div>
+
+<script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=formacion");}</script>
+<script>
+(function(){
+  'use strict';
+  function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
+  function contar(el,fin,dec,suf,ms){
+    if(quieto) return; var t0=null; suf=suf||'';
+    function paso(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/ms), e=1-Math.pow(1-k,3); el.innerHTML=fmt(fin*e,dec)+suf; if(k<1) requestAnimationFrame(paso); }
+    el.innerHTML=fmt(0,dec)+suf; requestAnimationFrame(paso);
+  }
+  function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
+    new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
+
+  /* CTA: navegación, no lead */
+  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track('formacion_cta',{ubicacion:a.getAttribute('data-cta'),version:'v2.1'}); }); });
+
+  /* movimiento discreto: subrayado, barras, cifras que cuentan, entradas suaves */
+  var hero=document.getElementById('hero'), dash=document.getElementById('dash');
+  requestAnimationFrame(function(){ hero.classList.add('on'); });
+  alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
+  document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
+
+  /* formulario sobre /diagnostico/landing.js (sin cambios en ese archivo).
+     Centro y objetivo van en «hipotesis» (nota del CRM). Estos listeners se registran antes que los de landing.js. */
+  var f=document.getElementById('f'), pasos=document.querySelectorAll('#pasos-f li');
+  function pasoF(n){ pasos.forEach(function(li,i){ li.className=i<n?'hecho':(i===n?'act':''); }); }
+  f.addEventListener('submit',function(){
+    var c=f.elements.centro.value.trim(), o=f.elements.objetivo.value;
+    f.elements.hipotesis.value=('Centro: '+c+(o?' · Objetivo: '+o:'')+' · Landing formación v2.1').slice(0,1200);
+  });
+  document.getElementById('b1').addEventListener('click',function(ev){
+    if(!f.elements.centro.value.trim()||!f.elements.web.value.trim()||!f.elements.objetivo.value){
+      ev.stopImmediatePropagation(); var e1=document.getElementById('e1'); e1.textContent='Rellena el centro, la web y el objetivo.'; e1.hidden=false; return;
+    }
+    pasoF(1);
+  },true);
+  /* agenda abierta: cuando landing.js enseña el paso del calendario (una vez) */
+  var p3=document.getElementById('p3'), agenda=false;
+  new MutationObserver(function(){ if(!p3.hidden&&!agenda){ agenda=true; pasoF(2); track('formacion_agenda_abierta',{}); } }).observe(p3,{attributes:true,attributeFilter:['hidden']});
+  /* reunión reservada: solo si el calendario de GHL avisa de una reserva completada.
+     Si no llega ningún aviso, no se enseña confirmación (la reserva se mide en el CRM con el evento Schedule). */
+  var reservada=false;
+  addEventListener('message',function(e){
+    if(reservada||!/leadconnectorhq\.com|msgsndr\.com/.test(String(e.origin||''))) return;
+    var txt=''; try{ txt=typeof e.data==='string'?e.data:JSON.stringify(e.data); }catch(x){}
+    if(/booking|appointment/i.test(txt)&&/(complete|confirm|success|booked)/i.test(txt)){
+      reservada=true; pasos.forEach(function(li){ li.className='hecho'; });
+      document.getElementById('reservado').hidden=false; track('formacion_reserva',{});
+    }
+  });
+
+  /* Raquel: prueba real de llamada (/api/prueba/) */
+  var fr=document.getElementById('fr'), ab=document.getElementById('r-abrir'), est=document.getElementById('r-estado'), rb=document.getElementById('r-btn');
+  ab.addEventListener('click',function(){ fr.hidden=!fr.hidden; ab.setAttribute('aria-expanded',String(!fr.hidden)); if(!fr.hidden){ ab.hidden=true; fr.elements.nombre.focus(); track('formacion_raquel_abrir',{}); } });
+  function aviso(t,mal){ est.textContent=t; est.className='estado'+(mal?' mal':''); est.hidden=false; }
+  fr.addEventListener('submit',function(ev){
+    ev.preventDefault(); est.hidden=true;
+    if(fr.elements.website.value) return;
+    var d={nombre:fr.elements.nombre.value.trim(),telefono:fr.elements.telefono.value.trim(),email:fr.elements.email.value.trim(),web:fr.elements.web.value.trim(),sector:'formacion',utm:location.search||''};
+    if(d.nombre.length<2) return aviso('Dinos tu nombre.',true);
+    if(!/^(\+?34)?[\s-]*[67](\s*\d){8}$/.test(d.telefono.replace(/[().-]/g,''))) return aviso('Necesitamos un móvil español para llamarte.',true);
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return aviso('Ese email no parece correcto.',true);
+    if(!d.web) return aviso('Pon la web de tu centro: con ella prepara la llamada.',true);
+    if(!fr.elements.rgpd.checked) return aviso('Necesitamos tu permiso para llamarte.',true);
+    rb.disabled=true; rb.textContent='Preparando la llamada…'; track('prueba_enviar',{sector:'formacion',origen:'formacion-v2.1'});
+    fetch('/api/prueba/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        rb.disabled=false; rb.textContent='Llamadme →';
+        if(r.ok&&r.estado==='llamando'){ fr.hidden=true; aviso('Te está llamando'+(r.agente?' '+r.agente:'')+'. Cógelo y haz de alumno interesado.'); track('prueba_llamando',{origen:'formacion-v2.1'}); }
+        else if(r.ok&&r.estado==='fuera_horario'){ fr.hidden=true; aviso('La prueba funciona de '+(r.desde||9)+':00 a 21:00. Te hemos apuntado.'); }
+        else if(r.error==='ya_hoy'||r.error==='tope') aviso('Hoy ya no quedan pruebas para este móvil.',true);
+        else if(r.error==='telefono') aviso('Necesitamos un móvil español para llamarte.',true);
+        else aviso('No ha salido. Vuelve a intentarlo en un momento.',true);
+      })
+      .catch(function(){ rb.disabled=false; rb.textContent='Llamadme →'; aviso('No ha salido. Vuelve a intentarlo en un momento.',true); });
+  });
+
+  /* huecos reales del calendario (api/huecos.js). Sin huecos, no se enseña nada. */
+  fetch('/api/huecos/').then(function(r){ return r.ok?r.json():{huecos:[]}; }).then(function(d){
+    var h=((d&&d.huecos)||[]).slice(0,3); if(!h.length) return;
+    var fx=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',weekday:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    document.getElementById('huecos-t').textContent=h.map(function(x){ return fx.format(new Date(x)).replace(',',''); }).join(' · ');
+    document.getElementById('huecos').classList.add('on');
+  }).catch(function(){});
+
+  /* CTA fijo en móvil */
+  var fijo=document.getElementById('fijo'), fin=document.getElementById('diagnostico');
+  if('IntersectionObserver' in window){
+    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
+    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
+    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
+  }
+})();
+</script>
+<script src="/assets/consent.js" defer></script>
+<script src="/diagnostico/landing.js" defer></script>
+</body>
+</html>
