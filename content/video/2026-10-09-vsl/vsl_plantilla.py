@@ -93,7 +93,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='clave', html='100 contactos… <i>¿y clientes?</i>', t0=P('de que te sirve'), t1=P('porque eso pasa'))
     E(tipo='tarjeta', t0=P('empresas que estan'), t1=P('pero luego preguntas'), k='Lo que celebran', ej='Ejemplo',
       items=[it('Leads a 3 o 4 €', P('a 3 o 4'), ''), it('«¡Qué barato!»', P('ostras'), 'ok')])
-    E(tipo='lista', t0=P('pero luego preguntas'), t1=P('porque una cosa'), titulo='¿Cuántos se convierten <span style="color:#FF8A4C">en clientes?</span>', items=[])
+    E(tipo='lista', t0=P('pero luego preguntas'), t1=P('porque una cosa'), hasta=Pe('se convierten en clientes') + 0.2, titulo='¿Cuántos se convierten <span style="color:#FF8A4C">en clientes?</span>', items=[])
     E(tipo='clave', coral=1, html='Formularios <i>≠ clientes</i>', t0=P('porque una cosa'), t1=P('y esa diferencia'))
     E(tipo='clave', html='Ahí trabajamos <i>en Qualivo</i>', t0=P('y esa diferencia'), t1=P('por cierto'))
     # B2 · problema
@@ -182,7 +182,7 @@ def construir(palabras, bruto, trabajo):
     for s in ests:
         if s['tipo'] in ('lista', 'cadena', 'ads3', 'landing', 'pantalla'):
             ts = [x['t'] for k in ('items', 'pasos', 'ads', 'dudas', 'focos') for x in s.get(k, [])] + [s.get(k, s['t0']) for k in ('t0', 'tm', 'tf', 'tb')]
-            s['t1'] = min(s['t1'], max(ts) + 2.5)
+            s['t1'] = max(min(s['t1'], max(ts) + 2.5), s.pop('hasta', 0))
     nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
     # Planos de apoyo de Kling (12-oct), sin pantallas con texto: (desde, hasta, clip, desenfoque, segundo de inicio del clip)
     pc = P('cada negocio')
@@ -194,6 +194,32 @@ def construir(palabras, bruto, trabajo):
           [P('tu equipo'), P('nosotros ayudamos'), 'k-comercial-llamada.mp4', 0, 0],
           [pc, pc + 1.4, 'k-clinica.mp4', 0, 1.0], [pc + 1.4, pc + 2.8, 'k-taller.mp4', 0, 0.6],
           [P('estariamos todos'), P('lo que si vamos'), 'k-mojitos.mp4', 0, 0]]
+    # Los gráficos que tapan la cámara y las tarjetas se quedan hasta que acaba la frase; se vuelve a cámara cuando
+    # Maikel empieza la siguiente (Maikel, 12-oct: «deja el título y cuando acabe la frase pasa a mi cámara»).
+    fin_frase = sorted([w['e'] for w in g.W if w['w'].rstrip()[-1:] in '.?!,'] + [b for a, b in tr])
+    def hasta_frase(t):
+        c = [e for e in fin_frase if e >= t - 0.3]
+        return max(t, c[0] + 0.12) if c and c[0] - t < 5 else t
+    for x in ap: x[1] = hasta_frase(x[1])
+    for x in ests:
+        if x['tipo'] in ('lista', 'cadena', 'ads3', 'ads2', 'landing', 'pantalla', 'grande', 'tarjeta', 'cta') and x['t1'] < 1e8:
+            x['t1'] = hasta_frase(x['t1'])
+    # lo que venía detrás espera a que acabe: los rótulos y tarjetas entran después; un gráfico siguiente recorta al anterior
+    cubre = sorted([(x['t0'], x['t1'], x) for x in ests if x['tipo'] in ('lista', 'cadena', 'ads3', 'ads2', 'landing', 'pantalla', 'grande')]
+                   + [(x[0], x[1], x) for x in ap], key=lambda e: e[0])
+    for a0, a1, x in cubre:
+        for y in ests:
+            if y is x or y['tipo'] in ('fin', 'bloque'): continue
+            if a0 < y['t0'] < a1:
+                if y['tipo'] in ('clave', 'tarjeta', 'cta'): y['t0'] = a1
+                elif isinstance(x, dict): x['t1'] = y['t0']
+                else: x[1] = y['t0']
+        for z in ap:
+            if z is not x and a0 < z[0] < a1:
+                if isinstance(x, dict): x['t1'] = z[0]
+                else: x[1] = z[0]
+    for y in ests:   # un rótulo que ya no cabe se quita
+        if y['tipo'] in ('clave', 'tarjeta', 'cta') and y['t1'] - y['t0'] < 1.2: y['t1'] = y['t0']
     # Hilo de cámara (Maikel, 12-oct: «no vuelvas a la anterior de golpe ni te quedes en medio»):
     # - lo que tapa a Maikel (pantalla completa o plano de Kling) se junta si entre medias solo quedaría <2,5 s de cara;
     # - la cámara solo cambia en un corte de pausa o cuando entra o sale un gráfico, y al volver de un gráfico nunca
@@ -227,6 +253,9 @@ def construir(palabras, bruto, trabajo):
         return out
     OC = juntar([[e[0], e[1]] for e in ocultos])
     CA = juntar([[x['t0'], x['t1']] for x in ests if x['tipo'] in ('tarjeta', 'cta')])
+    for a_, b_ in CA:
+        dentro = sorted([x for x in ests if x['tipo'] in ('tarjeta', 'cta') and a_ <= x['t0'] < b_ and x['t1'] > x['t0']], key=lambda x: x['t0'])
+        if dentro: dentro[0]['t0'] = a_; dentro[-1]['t1'] = b_
     t_fin_raw = t_fin
     def estado(m):
         if m >= t_fin_raw: return 'H'
@@ -251,6 +280,9 @@ def construir(palabras, bruto, trabajo):
             if st == 'V': ult_vis = enc if enc != 'zoom' else 'cerrado'
             previo = st
             planos.append((pa, pb, enc))
+    # un rótulo que coincide con una tarjeta va arriba a la izquierda (centrado se pisaban)
+    for y in ests:
+        if y['tipo'] == 'clave' and any(c['tipo'] in ('tarjeta', 'cta') and c['t0'] < y['t1'] and y['t0'] < c['t1'] for c in ests): y['var'] = 'izq'
     # los gráficos que tapan o piden encuadre de lado entran y salen justo en un cambio de plano (si no, se ve el salto)
     lim = sorted({x for a, b, _ in planos for x in (a, b)})
     for x in ests:
