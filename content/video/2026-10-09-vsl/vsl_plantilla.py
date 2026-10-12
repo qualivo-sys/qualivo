@@ -23,6 +23,7 @@ RETOMAS = []
 VOLTEAR = True
 # El abierto deja fuera el libro negro del borde izquierdo.
 ABIERTO, CERRADO, LADO = (1760, 990, 130, 0), (1440, 810, 170, 40), (1600, 900, 330, 20)
+GOLPE = (1300, 731, 240, 30)   # golpe de zoom sobre la cara
 CARA = (890, 380)
 ZOOM_REG, ZOOM_K = (1760, 990, 130, 0), 1.15
 # Correcciones de la transcripción para los subtítulos
@@ -164,13 +165,35 @@ def construir(palabras, bruto, trabajo):
     E(tipo='clave', html='Entender tu negocio <i>y ayudarte a crecer</i>', t0=P('lo que si vamos'), t1=P('asi que nada'))
     t_fin = P('haz clic')   # la tarjeta final con el botón entra cuando lo dice
     E(tipo='fin', t0=t_fin, t1=1e9, titulo='Descubre dónde puedes mejorar tu captación', boton='Reserva una sesión de diagnóstico')
+    # Variedad (Maikel, 12-oct: «todo muy igual»): cada rótulo entra distinto; los más cortos van a pantalla grande 2 s.
+    ESTILO = {'Formularios': 'grande', 'Aquí entra': 'grande', 'Mal ': 'grande', 'Qualivo <i>Intelligence': 'grande', '¿Cómo empezamos': 'grande',
+              'Ahí trabajamos': 'barrido', '«¿Cuánto cuesta': 'barrido', 'Estrategia': 'barrido', 'Entender tu': 'barrido',
+              'Primero, entender': 'izq', 'Tu equipo': 'izq', 'Cada negocio': 'izq'}
+    for s in ests:
+        if s['tipo'] != 'clave': continue
+        est = next((v for k, v in ESTILO.items() if s['html'].startswith(k)), 'pop')
+        if est == 'grande': s['tipo'] = 'grande'; s['t1'] = min(s['t1'], s['t0'] + 2.2)
+        else: s['var'] = est
+    # Capítulos: cortina de color y rótulo arriba a la izquierda
+    for n, txt, f in [('02', 'El problema', 'por cierto'), ('03', 'Cómo trabajamos', 'y aqui es donde'), ('04', 'Seguimiento e Intelligence', 'y ahora viene'),
+                      ('05', 'Cómo empezamos', 'y como empezamos'), ('06', 'Tu siguiente paso', 'asi que si')]:
+        E(tipo='bloque', n=n, txt=txt, t0=P(f) - 0.25, t1=P(f) + 3.2)
     # Las pantallas completas tapan a Maikel: se quitan 2,5 s después de su último elemento.
     for s in ests:
         if s['tipo'] in ('lista', 'cadena', 'ads3', 'landing', 'pantalla'):
             ts = [x['t'] for k in ('items', 'pasos', 'ads', 'dudas', 'focos') for x in s.get(k, [])] + [s.get(k, s['t0']) for k in ('t0', 'tm', 'tf', 'tb')]
             s['t1'] = min(s['t1'], max(ts) + 2.5)
     nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
-    apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 0)]
+    # Planos de apoyo de Kling (12-oct), sin pantallas con texto: (desde, hasta, clip, desenfoque, segundo de inicio del clip)
+    pc = P('cada negocio')
+    apoyos = [(P('si luego no'), P('porque eso pasa'), 'k-embudo.mp4', 0, 0.3),
+              (P('pues acabas'), P('y ojo'), 'k-sofa.mp4', 0, 1.2),
+              (P('simplemente cruzar'), P('sino que'), 'k-dedos.mp4', 0, 0.8),
+              (P('despues viene'), P('probamos diferentes'), 'k-creativos.mp4', 0, 0),
+              (P('y nadie le'), P('hombre pues'), 'k-movil-noche.mp4', 0, 0),
+              (P('tu equipo'), P('nosotros ayudamos'), 'k-comercial-llamada.mp4', 0, 0),
+              (pc, pc + 1.4, 'k-clinica.mp4', 0, 1.0), (pc + 1.4, pc + 2.8, 'k-taller.mp4', 0, 0.6),
+              (P('estariamos todos'), P('lo que si vamos'), 'k-mojitos.mp4', 0, 0)]
     # encuadres: «de lado» cuando hay tarjeta; zoom en el gancho; si no, abierto y cerrado alternos
     forz = [(s['t0'], s['t1']) for s in ests if s['tipo'] in ('tarjeta', 'cta')]
     gancho = (tr[0][0], P('empresas que estan'))
@@ -183,6 +206,13 @@ def construir(palabras, bruto, trabajo):
             if acum > 3.5: sig ^= 1; acum = 0
             enc = ('abierto', 'cerrado')[sig]; acum += b - a
         planos.append((a, b, enc))
+    # Golpes de zoom: corte a un plano muy cerrado en las frases con gracia, 1,6 s
+    for tg in [P('y ahi ya'), P('ostras'), P('pues no'), P('hombre pues')]:
+        for i, (a, b, enc) in enumerate(planos):
+            if a <= tg < b and enc != 'zoom':
+                trozos = [(a, tg, enc), (tg, min(b, tg + 1.6), 'golpe'), (min(b, tg + 1.6), b, enc)]
+                planos[i:i + 1] = [x for x in trozos if x[1] - x[0] > 0.05]
+                break
     def T(x):
         o = 0
         for a, b, _ in planos:
@@ -238,12 +268,12 @@ def base(bruto, trabajo, planos, total, apoyos=()):
             if ap:
                 wa, wb, c, blur, off = ap
                 ent = ['-stream_loop', '-1', '-ss', f'{off + pa - wa:.3f}', '-i', os.path.join(REC, c)]  # en bucle: los clips de Kling duran 5 s
-                vf = f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,gblur=sigma={blur}'
+                vf = 'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080' + (f',gblur=sigma={blur}' if blur else '')
             else:
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
                 if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
                 else:
-                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
+                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO, 'golpe': GOLPE}[enc]; vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
             trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
     def hacer(tj):
         i, ent, vf, n = tj
@@ -255,9 +285,14 @@ def base(bruto, trabajo, planos, total, apoyos=()):
     subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', f'{tz}/lista.txt', '-c', 'copy',
                     f'{trabajo}/imagen.mp4'], check=True, stdin=subprocess.DEVNULL)
     # audio: voz original con limpieza suave y algo más de volumen; música H muy baja
+    # el audio va por tramos continuos (un cambio de encuadre sin corte no lleva fundido)
+    tramos_a = []
+    for a, b, _ in planos:
+        if tramos_a and abs(a - tramos_a[-1][1]) < 1e-6: tramos_a[-1][1] = b
+        else: tramos_a.append([a, b])
     fil = [f'[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={max(0, b - a - 0.03):.3f}:d=0.03[a{i}];'
-           for i, (a, b, _) in enumerate(planos)]
-    fil.append(''.join(f'[a{i}]' for i in range(len(planos))) + f'concat=n={len(planos)}:v=0:a=1[ab];')
+           for i, (a, b) in enumerate(tramos_a)]
+    fil.append(''.join(f'[a{i}]' for i in range(len(tramos_a))) + f'concat=n={len(tramos_a)}:v=0:a=1[ab];')
     fil.append('[ab]highpass=f=80,afftdn=nf=-30,acompressor=threshold=0.1:ratio=2.5:attack=10:release=200,'
                'aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voz][vsc];')
     fil.append(f'[1:a]aformat=sample_rates=48000:channel_layouts=stereo,aloop=loop=-1:size=2e9,atrim=0:{total},asetpts=PTS-STARTPTS,'

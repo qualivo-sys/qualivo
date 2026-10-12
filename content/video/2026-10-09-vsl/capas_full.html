@@ -102,6 +102,18 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
 .post .h{display:flex;align-items:center;gap:12px;padding:14px}.post .h i{width:38px;height:38px;border-radius:50%;display:block}
 .post .h u{height:12px;width:140px;border-radius:6px;background:#D5DAE3;display:block}
 .post .im{height:230px}.post .ln{height:12px;margin:12px 14px;border-radius:6px;background:#E2E6EE}.post .bt{height:40px;margin:10px 14px 16px;border-radius:10px;background:#0A0F1A;opacity:.85}
+/* variedad (12-oct): palabras que saltan, barridos, tachado que se dibuja, rótulo grande, capítulos */
+.clave.izq{left:110px}
+.w{display:inline-block;white-space:pre}
+.tch{position:relative;color:#8A94AA}.tch::after{content:'';position:absolute;left:-4px;top:54%;height:7px;border-radius:4px;background:#FF8A4C;width:calc(var(--p,0)*(100% + 8px))}
+.grande{display:flex;align-items:center;justify-content:center;background:rgba(10,15,26,.9)}
+.grande h1{font-size:132px;font-weight:900;color:#fff;text-align:center;line-height:1.02;max-width:1600px}
+.grande h1 i{font-style:normal;color:#27BDB1}.grande.coral h1 i{color:#FF8A4C}
+.cortina{position:absolute;top:-40px;bottom:-40px;width:2600px;left:0;background:#27BDB1;z-index:95;transform:translateX(-3200px) skewX(-12deg)}
+.cortina.c2{background:#0A0F1A}
+.cap{position:absolute;left:90px;top:80px;display:flex;align-items:center;gap:18px;background:#0A0F1A;border-radius:14px;padding:14px 28px 14px 18px;opacity:0;z-index:55}
+.cap b{background:#27BDB1;color:#0A0F1A;font-size:26px;font-weight:900;border-radius:10px;padding:6px 12px}
+.cap span{color:#fff;font-size:30px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 </style>
 <div id="e" style="position:absolute;inset:0"><div id="nombre"><b>Maikel Echevarría</b><span>Fundador de Qualivo</span></div><div id="sub"></div></div>
 <script src="tiempos-plantilla.js"></script>
@@ -112,13 +124,21 @@ function win(t,a,b,fi=.4,fo=.35){ if(t<a||t>b) return 0; return Math.min(nm(t,a,
 function show(el,op,dy=0,base='',s0=.96){ el.style.opacity=op; const e=out(op); el.style.transform=`${base} translateY(${(1-e)*dy}px) scale(${s0+(1-s0)*e})`; }
 const mk=(cls,html,padre=E)=>{const d=document.createElement('div'); d.className=cls; d.innerHTML=html; padre.insertBefore(d,document.getElementById('sub')); return d;};
 const ICO={ok:'✓',ko:'✕',q:'?',mas:'+'};
+const bo=x=>{const c=1.70158;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+// <s> pasa a un tachado que se dibuja; cada palabra en su span para que salte
+const tachar=h=>h.replace(/<s>/g,'<span class="tch">').replace(/<\/s>/g,'</span>');
+function palabras(el){ const ws=[]; (function rec(n){ [...n.childNodes].forEach(c=>{ if(c.nodeType===3){ const fr=document.createDocumentFragment();
+  c.textContent.split(/(\s+)/).forEach(p=>{ if(!p) return; if(/^\s+$/.test(p)) fr.appendChild(document.createTextNode(p)); else { const sp=document.createElement('span'); sp.className='w'; sp.textContent=p; ws.push(sp); fr.appendChild(sp);} });
+  n.replaceChild(fr,c);} else if(c.nodeType===1 && !c.classList.contains('tch')) rec(c); else if(c.nodeType===1){ c.classList.add('w'); ws.push(c);} }); })(el); return ws; }
 const item=x=>`<div class="it">${x.ico?`<i class="${x.ico}">${ICO[x.ico]||""}</i>`:""}<span>${x.txt}</span></div>`;
 // construir cada escena
-TL.esc.forEach(s=>{
-  if(s.tipo==='clave') s.el=mk('clave'+(s.coral?' coral':''),s.html);
+let nt=0; TL.esc.forEach(s=>{ if(s.tipo==='tarjeta'||s.tipo==='cta') s.n=nt++;
+  if(s.tipo==='clave'){ s.el=mk('clave'+(s.coral?' coral':'')+(s.var==='izq'?' izq':''),tachar(s.html)); s.ws=palabras(s.el); }
+  if(s.tipo==='grande'){ s.el=mk('full grande'+(s.coral?' coral':''),`<h1>${tachar(s.html)}</h1>`); s.ws=palabras(s.el.querySelector('h1')); }
+  if(s.tipo==='bloque'){ s.c1=mk('cortina',''); s.c2=mk('cortina c2',''); s.el=mk('cap',`<b>${s.n}</b><span>${s.txt}</span>`); }
   if(s.tipo==='tarjeta') s.el=mk('tarjeta',`${s.k?`<div class="k">${s.k}</div>`:''}${s.titulo?`<h3>${s.titulo}</h3>`:''}${s.grande?`<div class="big">${s.grande}</div>`:''}${(s.items||[]).map(item).join('')}${s.ej?`<div class="ej" style="left:64px;bottom:34px">${s.ej}</div>`:''}`);
   if(s.tipo==='lista') s.el=mk('full lista',`<h2>${s.titulo}</h2>${s.items.map(item).join('')}${s.ej?`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">${s.ej}</div>`:''}`);
-  if(s.tipo==='cadena') s.el=mk('full cadena',`${s.tachado?`<div class="tach"><s>${s.tachado.txt}</s></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
+  if(s.tipo==='cadena') s.el=mk('full cadena',`${s.tachado?`<div class="tach"><span class="tch">${s.tachado.txt}</span></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
   if(s.tipo==='pantalla') s.el=mk('full pantalla',`<img src="${s.src}"><div class="caja"></div><div class="demo">Demo · datos simulados</div>`);
   if(s.tipo==='barras') s.el=mk('full barras',`<h2>${s.titulo}</h2>${s.barras.map((b,i)=>`<div class="bar ${i?'b':''}"><span>${b.txt}</span><div>${b.val}</div></div>`).join('')}<div class="ej" style="left:220px;bottom:150px">${s.ej}</div>`);
   if(s.tipo==='crono') s.el=mk('full crono',`<h2>${s.titulo}</h2><div class="precio">${s.precio}</div><div class="semanas">${s.pasos.map(p=>`<div class="sem"><small>${p.sem}</small><b>${p.txt}</b></div>`).join('')}</div>`);
@@ -136,15 +156,28 @@ window.setT=function(t){
   let lado=false;
   TL.esc.forEach(s=>{
     const w=win(t,s.t0,s.t1,.45,.35);
-    if(s.tipo==='clave'){ show(s.el,w,-24,'translateX(-50%)'); return; }
-    if(s.tipo==='tarjeta'||s.tipo==='cta'){ if(t>=s.t0&&t<s.t1) lado=true; show(s.el,w,30,'',.97);
-      s.el.querySelectorAll('.it').forEach((d,i)=>show(d,nm(t,s.items[i].t,s.items[i].t+.4),20)); return; }
+    if(s.tipo==='clave'||s.tipo==='grande'){
+      const base=s.tipo==='clave'&&s.var!=='izq'?'translateX(-50%)':'';
+      if(s.var==='barrido'){ const u=out(nm(t,s.t0,s.t0+.45)); s.el.style.opacity=w>0?Math.min(1,w*3):0; s.el.style.transform=base; s.el.style.clipPath=`inset(0 ${(1-u)*100}% 0 0 round 14px)`;
+        s.ws.forEach(x=>{x.style.opacity=1;x.style.transform='none';}); }
+      else { s.el.style.opacity=w>0?Math.min(1,w*2.5):0; s.el.style.transform=`${base} scale(${.9+.1*out(nm(t,s.t0,s.t0+.3))})`;
+        s.ws.forEach((x,j)=>{ const u=nm(t,s.t0+.06+j*.09,s.t0+.06+j*.09+.38); x.style.opacity=u>0?1:0; x.style.transform=`translateY(${(1-out(u))*26}px) scale(${.6+.4*bo(u)})`; }); }
+      s.el.querySelectorAll('.tch').forEach(x=>x.style.setProperty('--p',out(nm(t,s.t0+.45,s.t0+.95))));
+      return; }
+    if(s.tipo==='bloque'){ const u=nm(t,s.t0,s.t0+.55), v=nm(t,s.t0+.12,s.t0+.7);
+      s.c1.style.transform=`translateX(${-3200+io(u)*6000}px) skewX(-12deg)`; s.c2.style.transform=`translateX(${-3200+io(v)*6000}px) skewX(-12deg)`;
+      show(s.el,win(t,s.t0+.35,s.t1,.4,.4),0,`translateX(${(1-out(nm(t,s.t0+.35,s.t0+.8)))*-60}px)`,1); return; }
+    if(s.tipo==='tarjeta'||s.tipo==='cta'){ if(t>=s.t0&&t<s.t1) lado=true;
+      if(s.n%2){ const u=out(nm(t,s.t0,s.t0+.5)); s.el.style.opacity=w>0?Math.min(1,w*3):0; s.el.style.transform='none'; s.el.style.clipPath=`inset(0 0 0 ${(1-u)*100}% round 30px)`;
+        s.el.querySelectorAll('.it').forEach((d,i)=>{ const v=nm(t,s.items[i].t,s.items[i].t+.4); d.style.opacity=v; d.style.transform=`translateX(${(1-out(v))*60}px)`; }); }
+      else { show(s.el,w,30,'',.97); s.el.querySelectorAll('.it').forEach((d,i)=>{ const v=nm(t,s.items[i].t,s.items[i].t+.4); d.style.opacity=v; d.style.transform=`scale(${.7+.3*bo(v)})`; }); }
+      return; }
     show(s.el,w,0,'',1);
     if(w<=0) return;
-    if(s.tipo==='lista') s.el.querySelectorAll('.it').forEach((d,i)=>show(d,nm(t,s.items[i].t,s.items[i].t+.45),30));
-    if(s.tipo==='cadena'){ const tc=s.el.querySelector('.tach'); if(tc) show(tc,nm(t,s.tachado.t,s.tachado.t+.4),20);
+    if(s.tipo==='lista') s.el.querySelectorAll('.it').forEach((d,i)=>{ const v=nm(t,s.items[i].t,s.items[i].t+.45); d.style.opacity=v; d.style.transform=`translateX(${(1-out(v))*(i%2?90:-90)}px)`; });
+    if(s.tipo==='cadena'){ const tc=s.el.querySelector('.tach'); if(tc){ show(tc,nm(t,s.tachado.t,s.tachado.t+.4),20); tc.querySelector('.tch').style.setProperty('--p',out(nm(t,s.tachado.t+.5,s.tachado.t+1.1))); }
       const ps=s.el.querySelectorAll('.paso'), fs=s.el.querySelectorAll('.fl');
-      s.pasos.forEach((p,i)=>{ show(ps[i],nm(t,p.t,p.t+.4),20); ps[i].classList.toggle('on',t>=p.t+.3&&(!s.unico||i===s.pasos.filter(q=>t>=q.t+.3).length-1)); if(i) fs[i-1].style.opacity=nm(t,p.t-.15,p.t+.2); }); }
+      s.pasos.forEach((p,i)=>{ const v=nm(t,p.t,p.t+.4); ps[i].style.opacity=v; ps[i].style.transform=`scale(${.5+.5*bo(v)})`; ps[i].classList.toggle('on',t>=p.t+.3&&(!s.unico||i===s.pasos.filter(q=>t>=q.t+.3).length-1)); if(i) fs[i-1].style.opacity=nm(t,p.t-.15,p.t+.2); }); }
     if(s.tipo==='pantalla'){ const f=[...s.focos].reverse().find(x=>t>=x.t); const img=s.el.querySelector('img'), cj=s.el.querySelector('.caja');
       if(f&&f.w){ const z=1+(f.z-1)*io(nm(t,f.t,f.t+.8)), cx=(f.x+f.w/2)/2, cy=(f.y+f.h/2)/2;
         const tx=cl(960-cx*z,1920-1920*z,0), ty=cl(540-cy*z,1080-1080*z,0); img.style.transform=`translate(${tx}px,${ty}px) scale(${z})`;
