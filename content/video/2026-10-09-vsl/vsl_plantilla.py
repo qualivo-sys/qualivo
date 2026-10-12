@@ -16,15 +16,18 @@ MUSICA = os.path.join(AQUI, '../../../produccion/video-anuncios/musica6/h-urbano
 REC = os.path.join(AQUI, 'recursos')
 FPS = 30
 
-# Tramos del bruto que se tiran: tomas repetidas (grabación del 9-oct). Revisar con cada grabación nueva.
-RETOMAS = [(12.90, 15.60), (161.50, 163.15)]
-# Encuadres sobre el 4K girado (3840x2160)
-ABIERTO, CERRADO, LADO = (3200, 1800, 640, 0), (2240, 1260, 1160, 90), (2400, 1350, 1440, 0)
-CARA = (2280, 570)
+# Tramos del bruto que se tiran: tomas repetidas. Revisar con cada grabación nueva.
+RETOMAS = []
+# Grabación del 12-oct: 1080p, cámara frontal en espejo (los libros se leen al revés), así que se voltea.
+# Encuadres (w, h, x, y) sobre el bruto ya volteado; CARA = centro de la cara.
+VOLTEAR = True
+ABIERTO, CERRADO, LADO = (1920, 1080, 0, 0), (1440, 810, 170, 40), (1600, 900, 330, 20)
+CARA = (890, 380)
+ZOOM_REG, ZOOM_K = (1920, 1080, 0, 0), 1.18
 # Correcciones de la transcripción para los subtítulos
 ARREGLOS = {'Qualibo': 'Qualivo', 'Qualvo': 'Qualivo', 'Michael': 'Maikel', 'cuestan contacto': 'cuesta un contacto',
             'más lich': 'más leads', '1200 euros': '1.200 euros', 'trayendo las personas': 'atrayendo a las personas',
-            'contratarle': 'contratarte'}
+            'contratarle': 'contratarte', 'lits': 'leads', 'lids': 'leads', 'Michel': 'Maikel'}
 
 def norm(w):
     w = unicodedata.normalize('NFD', w.lower())
@@ -81,89 +84,88 @@ def construir(palabras, bruto, trabajo):
     ests = []   # escenas (tiempos del bruto; se pasan al montaje al final)
     def E(**k): ests.append(k)
     it = lambda txt, t, ico='ok': {'txt': txt, 't': t, 'ico': ico}
+    # Guion del 12-oct (Drive, «BLOQUE 1 — GANCHO»). Sin precio del Sprint: el guion ya no lo dice.
     # B1 · gancho
-    E(tipo='clave', html='Miles de € <i>en publicidad</i>', t0=P('miles de euros'), t1=P('y siguen'))
-    E(tipo='tarjeta', t0=P('saben cuanto'), t1=P('pero no saben'), k='Lo que sí saben', ej='Datos de ejemplo',
-      items=[it('Coste por lead · 12 €', P('saben cuanto'), ''), it('Formularios · 340', P('cuantos formularios'), ''),
-             it('Inversión · 4.100 €', P('cuanto dinero'), '')])
-    E(tipo='lista', t0=P('pero no saben'), t1=P('y ahi esta'), titulo='¿Cuántos se convierten <span style="color:#FF8A4C">en clientes?</span>', items=[], ej='Datos de ejemplo')
-    E(tipo='feed', t0=P('un anuncio que habla'), t1=P('termina trayendo'))
-    E(tipo='flujo', t0=P('termina trayendo'), t1=P('soy maikel'))
-    E(tipo='clave', coral=1, html='Contactos <i>≠ oportunidades</i>', t0=P('y conseguir muchos'), t1=P('soy maikel'))
+    E(tipo='clave', html='100 contactos… <i>¿y clientes?</i>', t0=P('de que te sirve'), t1=P('porque eso pasa'))
+    E(tipo='tarjeta', t0=P('empresas que estan'), t1=P('pero luego preguntas'), k='Lo que celebran', ej='Ejemplo',
+      items=[it('Leads a 3 o 4 €', P('a 3 o 4'), ''), it('«¡Qué barato!»', P('ostras'), 'ok')])
+    E(tipo='lista', t0=P('pero luego preguntas'), t1=P('porque una cosa'), titulo='¿Cuántos se convierten <span style="color:#FF8A4C">en clientes?</span>', items=[])
+    E(tipo='clave', coral=1, html='Formularios <i>≠ clientes</i>', t0=P('porque una cosa'), t1=P('y esa diferencia'))
+    E(tipo='clave', html='Ahí trabajamos <i>en Qualivo</i>', t0=P('y esa diferencia'), t1=P('soy maikel'))
     # B2 · problema
-    E(tipo='ads2', t0=P('lanzar anuncios'), ta=P('lanzar anuncios'), tb=P('personas adecuadas', 42), t1=P('porque puedes'))
-    E(tipo='tarjeta', t0=P('porque puedes'), t1=P('y si solamente'), k='Ejemplo ilustrativo',
-      items=[it('Campaña A · 5 € / lead · ¿clientes?', P('cinco euros'), 'q'), it('Campaña B · 20 € / lead · ¿clientes?', P('veinte euros'), 'q')])
-    E(tipo='lista', t0=P('y si solamente'), t1=P('ademas muchas'), titulo='¿Cuál genera <span style="color:#27BDB1">mejores clientes?</span>', items=[], ej='Ejemplo ilustrativo')
-    E(tipo='lista', t0=P('crean anuncios'), t1=P('despues se preguntan'), titulo='El otro error',
-      items=[it('Anuncios genéricos', P('crean anuncios'), 'ko'), it('La misma página para todos', P('envian a todo'), 'ko'),
-             it('Formularios que no filtran', P('utilizan formularios'), 'ko')])
-    E(tipo='tarjeta', t0=P('y cuando las ventas'), t1=P('pero invertir'), k='La respuesta de siempre',
-      items=[it('Más presupuesto', P('mas presupuesto'), 'mas'), it('Más anuncios', P('mas anuncios'), 'mas'), it('Más contactos', P('mas contactos'), 'mas')])
-    E(tipo='clave', coral=1, html='Más dinero <i>no arregla el problema</i>', t0=P('pero invertir'), t1=P('por eso en'))
+    E(tipo='tarjeta', t0=P('y llevo mas'), t1=P('y si algo'), k='Maikel Echevarría',
+      items=[it('Más de 10 años en marketing y captación', P('y llevo mas')), it('Cientos de anuncios probados', P('probado cientos'))])
+    E(tipo='clave', html='<s>Cuánto inviertes</s> <i>Cómo inviertes</i>', t0=P('y si algo'), t1=P('si tu anuncio'))
+    E(tipo='lista', t0=P('si tu anuncio'), t1=P('y ojo'), titulo='Dónde se va el dinero',
+      items=[it('Un anuncio que habla a todo el mundo', P('si tu anuncio'), 'ko'), it('Un mensaje que no conecta', P('si tu mensaje'), 'ko'),
+             it('Una página que no convence', P('una pagina que'), 'ko')])
+    E(tipo='cadena', unico=1, t0=P('y ojo'), t1=P('pero muchas empresas'),
+      pasos=[{'txt': 'Datos', 't': P('que te dejen')}, {'txt': 'Responder', 't': P('hay que responder')}, {'txt': 'Cualificar', 't': P('cualificar')},
+             {'txt': 'Seguimiento', 't': P('hacer seguimiento')}, {'txt': 'Venta', 't': P('que esa oportunidad')}])
+    E(tipo='clave', html='«¿Cuánto cuesta <i>el lead?</i>»', t0=P('pero muchas empresas'), t1=P('y claro'))
+    E(tipo='tarjeta', t0=P('y claro'), t1=P('pues no'), k='La respuesta de siempre', items=[it('Más presupuesto', P('mas presupuesto'), 'mas')])
+    E(tipo='clave', coral=1, html='Primero, entender <i>qué está fallando</i>', t0=P('pues no'), t1=P('y aqui es donde'))
     # B3 · cómo trabajamos
-    E(tipo='clave', html='En Qualivo trabajamos <i>de otra manera</i>', t0=P('por eso en'), t1=P('no somos'))
-    td = P('disenamos y gestionamos')
-    E(tipo='cadena', t0=P('no somos'), t1=P('y todo empieza'), tachado={'txt': 'Una agencia que gestiona anuncios', 't': P('una agencia')},
-      pasos=[{'txt': x, 't': td + i * 0.55} for i, x in enumerate(['Estrategia', 'Anuncios', 'Landing', 'Cualificación', 'Seguimiento', 'Venta'])])
-    E(tipo='tarjeta', t0=P('y todo empieza'), t1=P('a partir de ahi'), k='Todo empieza entendiendo tu negocio',
-      items=[it('Quién es tu cliente ideal', P('quien es tu')), it('Qué problema necesita resolver', P('que problema')),
-             it('Qué le preocupa antes de contratarte', P('que le preocupa')), it('Qué mensaje hace que se interese', P('que mensaje'))])
-    E(tipo='clave', html='Estrategia <i>publicitaria</i>', t0=P('a partir de ahi'), t1=P('creamos anuncios'))
-    tc = P('creamos anuncios')
-    E(tipo='ads3', t0=tc, t1=P('pero no nos quedamos'), mejor=1, tm=P('y optimizamos'),
+    E(tipo='clave', html='Aquí entra <i>Qualivo</i>', t0=P('y aqui es donde'), t1=P('nosotros no'))
+    td = P('disenamos todo')
+    E(tipo='cadena', t0=P('nosotros no'), t1=P('y como lo hacemos'), tachado={'txt': 'Poner anuncios y cruzar los dedos', 't': P('nosotros no')},
+      pasos=[{'txt': x, 't': td + i * 0.5} for i, x in enumerate(['Negocio', 'Anuncios', 'Página', 'Seguimiento', 'Oportunidades'])])
+    E(tipo='tarjeta', t0=P('primero entendemos'), t1=P('porque antes de'), k='Primero, tu negocio',
+      items=[it('Quién es tu cliente ideal', P('quien es tu')), it('Qué necesita', P('que necesita')),
+             it('Qué le preocupa', P('que le preocupa')), it('Por qué debería elegirte', P('y por que'))])
+    E(tipo='clave', html='Estrategia <i>creativa</i>', t0=P('despues viene'), t1=P('probamos diferentes'))
+    tc = P('probamos diferentes')
+    E(tipo='ads3', t0=tc, t1=P('y aqui no vale'), mejor=1, tm=P('y que termina'),
       ads=[{'tag': 'Mensaje A', 'txt': '¿Pierdes pacientes después de darles precio?', 't': tc},
            {'tag': 'Mensaje B', 'txt': '¿Sabes qué anuncio te trae pacientes de verdad?', 't': tc + 0.7},
            {'tag': 'Mensaje C', 'txt': '¿Tu agenda tiene huecos que ya habías pagado?', 't': tc + 1.4}])
-    E(tipo='landing', t0=P('pero no nos quedamos'), t1=P('y despues conectamos'), h='Implantes en Sevilla', p='Valoración con el doctor en 30 minutos.',
+    E(tipo='clave', html='Probar · medir · <i>mejorar</i>', t0=P('hay que probar'), t1=P('despues trabajamos'))
+    E(tipo='landing', t0=P('despues trabajamos'), t1=P('por eso conectamos'), h='Implantes en Sevilla', p='Valoración con el doctor en 30 minutos.',
       b1='Te explicamos el tratamiento antes de empezar', b2='Si no es para ti, te lo decimos', c1='¿Qué tratamiento buscas?', c2='¿Cuándo quieres empezar?',
-      tf=P('y los formularios'), dudas=[{'txt': '¿Qué ofreces?', 't': P('no entiende')}, {'txt': '¿Por qué tú?', 't': P('que deberia elegirte')}])
-    E(tipo='cadena', unico=1, t0=P('y despues conectamos'), t1=P('podemos utilizar'),
-      pasos=[{'txt': 'Solicitud', 't': P('y despues conectamos') + 0.3}, {'txt': 'Atención', 't': P('reciban atencion')},
-             {'txt': 'Cualificación', 't': P('se cualifiquen')}, {'txt': 'Seguimiento', 't': P('seguimiento adecuado')}])
-    E(tipo='tarjeta', t0=P('podemos utilizar'), t1=P('pero la tecnologia'), k='Solo cuando aportan valor',
-      items=[it('WhatsApp', P('whatsapp')), it('Automatizaciones', P('automatizaciones')), it('Asistente de voz con IA', P('asistente de voz'))])
-    E(tipo='clave', html='La tecnología <i>no es el objetivo</i>', t0=P('pero la tecnologia'), t1=P('objetivo es conseguir'))
-    E(tipo='clave', html='Mejores oportunidades, <i>mejor aprovechadas</i>', t0=P('objetivo es conseguir'), t1=P('y para tener'))
-    # B4 · Intelligence (pantallas reales de la demo, datos simulados)
-    E(tipo='clave', html='Qualivo <i>Intelligence</i>', t0=P('utilizamos qualibo'), t1=P('aqui podemos'))
-    E(tipo='pantalla', src='recursos/intel-resumen.jpg', t0=P('aqui podemos'), t1=P('por ejemplo imagina'),
-      focos=[{'t': P('aqui podemos')}, {'t': P('cuales necesitan'), 'x': 460, 'y': 860, 'w': 1420, 'h': 840, 'z': 1.55},
-             {'t': P('en que parte'), 'x': 1960, 'y': 860, 'w': 1060, 'h': 240, 'z': 1.8}])
-    E(tipo='barras', t0=P('por ejemplo imagina'), t1=P('antes de aumentar'), titulo='Una campaña', ej='Ejemplo',
-      barras=[{'txt': 'Solicitudes', 'val': '100', 'pct': 100, 't': P('genera 100')}, {'txt': 'Conversaciones comerciales', 'val': '20', 'pct': 20, 't': P('solamente 20')}])
-    E(tipo='lista', t0=P('antes de aumentar'), t1=P('esta informacion'), titulo='Antes de subir el presupuesto',
-      items=[it('¿Público equivocado?', P('estamos atrayendo al'), 'q'), it('¿Curiosidad sin intención real?', P('el mensaje genera'), 'q'),
-             it('¿Se pierden después del formulario?', P('o estamos perdiendo'), 'q')])
-    E(tipo='pantalla', src='recursos/intel-oportunidades.jpg', t0=P('esta informacion'), t1=P('y cuando disponemos'),
-      focos=[{'t': P('esta informacion')}, {'t': P('esta informacion') + 0.8, 'x': 2100, 'y': 560, 'w': 940, 'h': 1040, 'z': 1.5}])
-    E(tipo='pantalla', src='recursos/intel-anuncios.jpg', t0=P('y cuando disponemos'), t1=P('y como empezamos'),
-      focos=[{'t': P('y cuando disponemos')}, {'t': P('y cuando disponemos') + 0.6, 'x': 460, 'y': 140, 'w': 2580, 'h': 420, 'z': 1.35},
-             {'t': P('queremos entender que'), 'x': 460, 'y': 620, 'w': 2580, 'h': 760, 'z': 1.4}])
-    # B5 · sprint
-    E(tipo='clave', html='¿Cómo empezamos <i>a trabajar juntos?</i>', t0=P('y como empezamos'), t1=P('con un sprint'))
-    E(tipo='tarjeta', t0=P('con un sprint'), t1=P('primero analizamos'), k='Para empezar', grande='Sprint de 30 días<small>Desde 1.200 € + IVA</small>')
-    E(tipo='crono', t0=P('primero analizamos'), t1=P('no te vamos'), titulo='Sprint de 30 días', precio='Desde 1.200 € + IVA',
-      pasos=[{'sem': 'SEMANA 1', 'txt': 'Diagnóstico de tu captación', 't': P('primero analizamos')},
-             {'sem': 'SEMANA 2', 'txt': 'Primera mejora en marcha', 't': P('despues identificamos')},
-             {'sem': 'SEMANA 3', 'txt': 'Medimos lo que ocurre', 't': P('medimos lo que')},
-             {'sem': 'SEMANA 4', 'txt': 'Decidimos los siguientes pasos', 't': P('y al finalizar')}])
-    E(tipo='clave', coral=1, html='<s>Duplicar tus ventas en 30 días</s>', t0=P('no te vamos'), t1=P('lo que si'))
-    E(tipo='tarjeta', t0=P('lo que si'), t1=P('y a partir de ahi podemos'), k='Lo que sí te llevas',
-      items=[it('Un diagnóstico', P('un diagnostico')), it('Una mejora implementada', P('una mejora implementada')), it('Datos para decidir mejor', P('y datos para'))])
+      tf=P('pero si la persona'), dudas=[{'txt': '¿Qué ofreces?', 't': P('que no explica')}])
+    E(tipo='cadena', unico=1, t0=P('por eso conectamos'), t1=P('y por supuesto'),
+      pasos=[{'txt': x, 't': P(f) } for x, f in [('Anuncio', 'el anuncio'), ('Mensaje', 'el mensaje'), ('Página', 'la pagina'), ('Formulario', 'y el formulario')]])
+    E(tipo='tarjeta', t0=P('y por supuesto'), t1=P('y ahora viene'), k='Lo que medimos',
+      items=[it('Cuáles son buenos', P('cuales son buenos')), it('Cuáles avanzan', P('cuales avanzan')), it('Qué campañas traen oportunidades', P('y que campanas'))])
+    # B4 · seguimiento e Intelligence (pantallas de la demo, datos simulados)
+    E(tipo='tarjeta', t0=P('imagina que'), t1=P('hombre pues'), k='Imagina',
+      items=[it('Llega alguien interesado', P('conseguimos atraer')), it('Deja sus datos', P('nos deja')), it('Respuesta: al día siguiente', P('y nadie'), 'ko')])
+    E(tipo='clave', coral=1, html='Mal <i>empezamos</i>', t0=P('hombre pues'), t1=P('por eso tambien'))
+    E(tipo='tarjeta', t0=P('podemos utilizar'), t1=P('pero tranquilo'), k='Para responder, cualificar y seguir',
+      items=[it('WhatsApp', P('whatsapp')), it('Automatizaciones', P('automatizaciones')), it('Asistentes de voz con IA', P('asistentes de voz'))])
+    E(tipo='clave', html='Tu equipo <i>sigue vendiendo</i>', t0=P('tu equipo'), t1=P('nosotros ayudamos'))
+    E(tipo='tarjeta', t0=P('nosotros ayudamos'), t1=P('y para tener'), k='Nosotros ayudamos a que llegue',
+      items=[it('A las conversaciones adecuadas', P('conversaciones adecuadas')), it('En el momento adecuado', P('en el momento')), it('Con más información', P('con mas informacion'))])
+    E(tipo='clave', html='Qualivo <i>Intelligence</i>', t0=P('y para tener'), t1=P('aqui podemos'))
+    E(tipo='pantalla', src='recursos/intel-resumen.jpg', t0=P('aqui podemos'), t1=P('y cuando tenemos'),
+      focos=[{'t': P('aqui podemos')}, {'t': P('que oportunidades'), 'x': 460, 'y': 860, 'w': 1420, 'h': 840, 'z': 1.55},
+             {'t': P('donde se estan'), 'x': 1960, 'y': 860, 'w': 1060, 'h': 240, 'z': 1.8}])
+    E(tipo='pantalla', src='recursos/intel-anuncios.jpg', t0=P('y cuando tenemos'), t1=P('asi dejamos'),
+      focos=[{'t': P('y cuando tenemos')}, {'t': P('podemos analizar'), 'x': 460, 'y': 140, 'w': 2580, 'h': 420, 'z': 1.35}])
+    E(tipo='clave', html='<s>Intuición</s> <i>Información</i>', t0=P('asi dejamos'), t1=P('y como empezamos'))
+    # B5 · cómo empezamos
+    E(tipo='clave', html='¿Cómo empezamos <i>a trabajar juntos?</i>', t0=P('y como empezamos'), t1=P('primero analizamos'))
+    E(tipo='tarjeta', t0=P('primero analizamos'), t1=P('a partir de ahi'), k='Primero, tu situación',
+      items=[it('Cómo captas clientes', P('que estas haciendo')), it('Qué resultados consigues', P('que resultados')), it('Qué pasa después', P('y que ocurre'))])
+    E(tipo='lista', t0=P('a partir de ahi'), t1=P('cada negocio'), titulo='¿Dónde intervenir?',
+      items=[it('¿Los anuncios?', P('puede que necesites'), 'q'), it('¿La página?', P('puede que el problema'), 'q'), it('¿Lo que pasa después?', P('o puede que'), 'q')])
+    E(tipo='clave', html='Cada negocio <i>es diferente</i>', t0=P('cada negocio'), t1=P('por eso no queremos'))
+    E(tipo='clave', coral=1, html='<s>Un montón de herramientas</s>', t0=P('por eso no queremos'), t1=P('queremos disenar'))
+    E(tipo='cadena', unico=1, t0=P('queremos disenar'), t1=P('asi que si'),
+      pasos=[{'txt': 'Diseñar', 't': P('queremos disenar')}, {'txt': 'Poner a funcionar', 't': P('ponerla a')}, {'txt': 'Mejorar con datos', 't': P('y mejorarla')}])
     # B6 · cierre
-    E(tipo='cta', t0=P('reserva una sesion'), t1=P('trabajemos juntos'), titulo='Reserva una sesión de 30 minutos', pie='Te llevas un plan escrito con los siguientes pasos',
-      items=[it('Cómo captas clientes', P('como estas captando')), it('Qué pasa después', P('que sucede despues')), it('Dónde puedes mejorar', P('donde tienes'))])
-    E(tipo='clave', html='No se trata de conseguir <i>más leads</i>', t0=P('porque no se trata'), t1=P('se trata de atraer'))
-    E(tipo='clave', html='Las personas adecuadas, <i>más clientes</i>', t0=P('se trata de atraer'), t1=P('nos vemos dentro'))
+    E(tipo='cta', t0=P('reserva una sesion'), t1=P('sin discursos'), titulo='Reserva una sesión con nosotros', pie='Analizamos tu captación contigo',
+      items=[it('Cómo atraes clientes', P('como estas atrayendo')), it('Qué pasa después', P('que pasa despues')), it('Dónde puedes mejorar', P('y donde tienes'))])
+    E(tipo='lista', t0=P('sin discursos'), t1=P('que si fuera'), titulo='Sin…',
+      items=[it('Discursos raros', P('sin discursos'), 'ko'), it('IA porque sí', P('sin venderte'), 'ko'), it('Prometer ×10 en una semana', P('y sin prometerte'), 'ko')])
+    E(tipo='clave', html='Entender tu negocio <i>y ayudarte a crecer</i>', t0=P('lo que si vamos'), t1=P('asi que nada'))
     t_fin = Pe('nos vemos dentro') + 0.5
     E(tipo='fin', t0=t_fin, t1=1e9, titulo='Descubre dónde puedes mejorar tu captación', boton='Reserva una sesión de diagnóstico')
     nombre = (P('soy maikel'), P('soy maikel') + 4.5)
-    apoyos = [(P('y siguen'), P('saben cuanto'), 'broll-panel.mp4', 7, 0), (P('despues se preguntan'), P('y cuando las ventas'), 'broll-comercial.mp4', 3, 0),
-              (P('a partir de ahi'), P('creamos anuncios'), 'broll-panel.mp4', 7, 1.2)]
+    apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 1.2)]
     # encuadres: «de lado» cuando hay tarjeta; zoom en el gancho; si no, abierto y cerrado alternos
     forz = [(s['t0'], s['t1']) for s in ests if s['tipo'] in ('tarjeta', 'cta')]
-    gancho = (tr[0][0], P('saben cuanto'))
+    gancho = (tr[0][0], P('empresas que estan'))
     planos, sig, acum = [], 0, 0
     for a, b in tr:
         m = (a + b) / 2
@@ -206,10 +208,10 @@ def construir(palabras, bruto, trabajo):
     open(os.path.join(AQUI, 'tiempos-plantilla.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     return planos, total, apoyos
 
-def zoom_f(d, off, D, k1=1.25):
+def zoom_f(d, off, D, k1=ZOOM_K):
     K = f"(1+({k1}-1)*min((t+{off:.3f})/{D:.3f},1))"
-    reg = (3300, 1856, 540, 0); fx, fy = (CARA[0] - reg[2]) / reg[0], CARA[1] / reg[1]
-    return (f"crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
+    reg = ZOOM_REG; fx, fy = (CARA[0] - reg[2]) / reg[0], CARA[1] / reg[1]
+    return (f"{'hflip,' if VOLTEAR else ''}crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
             f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
 
 def base(bruto, trabajo, planos, total, apoyos=()):
@@ -233,7 +235,7 @@ def base(bruto, trabajo, planos, total, apoyos=()):
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
                 if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
                 else:
-                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; vf = f'crop={w}:{h}:{x}:{y},scale=1920:1080'
+                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO}[enc]; vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
             trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
     def hacer(tj):
         i, ent, vf, n = tj
