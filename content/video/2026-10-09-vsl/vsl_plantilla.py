@@ -31,9 +31,11 @@ ARREGLOS = {'Qualibo': 'Qualivo', 'Qualvo': 'Qualivo', 'Michael': 'Maikel', 'cue
             'más lich': 'más leads', '1200 euros': '1.200 euros', 'trayendo las personas': 'atrayendo a las personas',
             'contratarle': 'contratarte', 'lits': 'leads', 'lids': 'leads', 'Michel': 'Maikel'}
 
+NUM = {'uno': '1', 'dos': '2', 'tres': '3', 'cuatro': '4', 'cinco': '5', 'seis': '6', 'diez': '10', 'veinte': '20', 'cien': '100'}
 def norm(w):
     w = unicodedata.normalize('NFD', w.lower())
-    return ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
+    w = ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
+    return NUM.get(w, w)   # la transcripción escribe a veces «tres» y a veces «3»
 
 class Guion:
     """Busca frases en la transcripción y devuelve su tiempo en el bruto."""
@@ -85,6 +87,20 @@ def construir(palabras, bruto, trabajo):
         + 60 * int(subprocess.run([FF, '-i', bruto], capture_output=True, text=True).stderr.split('Duration: ')[1].split(':')[1])
     fin_voz = g.W[-1]['e']
     tr = tramos(silencios(bruto, trabajo), min(dur_bruto, fin_voz + 3.2))
+    # Ningún corte dentro de una palabra: el detector de silencios se comía principios y finales flojos
+    # («¿cuántos», «invirtiendo»). Cada palabra entera se queda dentro del tramo, con 0,1 s de aire.
+    tr = [list(x) for x in tr]
+    for w in g.W:
+        for i in range(len(tr) - 1):
+            x, y = tr[i][1], tr[i + 1][0]
+            if w['e'] > x and w['s'] < y:
+                if w['s'] < x: tr[i][1] = max(x, min(w['e'] + 0.1, y))
+                else: tr[i + 1][0] = min(y, max(w['s'] - 0.1, x))
+    fus = []
+    for a, b in tr:
+        if fus and a <= fus[-1][1] + 0.05: fus[-1][1] = max(fus[-1][1], b)
+        else: fus.append([a, b])
+    tr = [(round(a, 2), round(b, 2)) for a, b in fus]
     ests = []   # escenas (tiempos del bruto; se pasan al montaje al final)
     def E(**k): ests.append(k)
     it = lambda txt, t, ico='ok': {'txt': txt, 't': t, 'ico': ico}
