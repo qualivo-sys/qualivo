@@ -331,9 +331,13 @@ def construir(palabras, bruto, trabajo):
     open(os.path.join(AQUI, 'tiempos-plantilla.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     return planos, total, apoyos
 
+# Los encuadres están medidos sobre 1920x1080; con un bruto 4K se escalan (recorte más nítido).
+ESCALA = 1.0
+def px(r): return tuple(int(round(v * ESCALA / 2)) * 2 for v in r)
+
 def zoom_f(d, off, D, k1=ZOOM_K):
     K = f"(1+({k1}-1)*min((t+{off:.3f})/{D:.3f},1))"
-    reg = ZOOM_REG; fx, fy = (CARA[0] - reg[2]) / reg[0], CARA[1] / reg[1]
+    reg = px(ZOOM_REG); fx, fy = (CARA[0] - ZOOM_REG[2]) / ZOOM_REG[0], CARA[1] / ZOOM_REG[1]
     return (f"{'hflip,' if VOLTEAR else ''}crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
             f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
 
@@ -342,6 +346,10 @@ def duracion(f):
     return int(d[0]) * 3600 + int(d[1]) * 60 + float(d[2])
 
 def base(bruto, trabajo, planos, total, apoyos=()):
+    global ESCALA
+    r = subprocess.run([FF, '-i', bruto], capture_output=True, text=True).stderr
+    import re as _re
+    m = _re.search(r'Video:.*?(\d{3,5})x(\d{3,5})', r); ESCALA = int(m.group(1)) / 1920 if m else 1.0
     """Imagen por trozos (un ffmpeg por plano, con número exacto de fotogramas) y audio aparte; luego se juntan.
     Hacerlo en un solo grafo con el 4K agotaba la memoria."""
     from concurrent.futures import ThreadPoolExecutor
@@ -364,7 +372,7 @@ def base(bruto, trabajo, planos, total, apoyos=()):
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
                 if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
                 else:
-                    w, h, x, y = {'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO, 'golpe': GOLPE}[enc]; vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
+                    w, h, x, y = px({'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO, 'golpe': GOLPE}[enc]); vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
             trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
     def hacer(tj):
         i, ent, vf, n = tj
