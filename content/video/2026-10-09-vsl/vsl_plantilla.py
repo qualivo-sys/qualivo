@@ -91,7 +91,7 @@ def construir(palabras, bruto, trabajo):
       items=[it('Leads a 3 o 4 €', P('a 3 o 4'), ''), it('«¡Qué barato!»', P('ostras'), 'ok')])
     E(tipo='lista', t0=P('pero luego preguntas'), t1=P('porque una cosa'), titulo='¿Cuántos se convierten <span style="color:#FF8A4C">en clientes?</span>', items=[])
     E(tipo='clave', coral=1, html='Formularios <i>≠ clientes</i>', t0=P('porque una cosa'), t1=P('y esa diferencia'))
-    E(tipo='clave', html='Ahí trabajamos <i>en Qualivo</i>', t0=P('y esa diferencia'), t1=P('soy maikel'))
+    E(tipo='clave', html='Ahí trabajamos <i>en Qualivo</i>', t0=P('y esa diferencia'), t1=P('por cierto'))
     # B2 · problema
     E(tipo='tarjeta', t0=P('y llevo mas'), t1=P('y si algo'), k='Maikel Echevarría',
       items=[it('Más de 10 años en marketing y captación', P('y llevo mas')), it('Cientos de anuncios probados', P('probado cientos'))])
@@ -103,7 +103,7 @@ def construir(palabras, bruto, trabajo):
       pasos=[{'txt': 'Datos', 't': P('que te dejen')}, {'txt': 'Responder', 't': P('hay que responder')}, {'txt': 'Cualificar', 't': P('cualificar')},
              {'txt': 'Seguimiento', 't': P('hacer seguimiento')}, {'txt': 'Venta', 't': P('que esa oportunidad')}])
     E(tipo='clave', html='«¿Cuánto cuesta <i>el lead?</i>»', t0=P('pero muchas empresas'), t1=P('y claro'))
-    E(tipo='tarjeta', t0=P('y claro'), t1=P('pues no'), k='La respuesta de siempre', items=[it('Más presupuesto', P('mas presupuesto'), 'mas')])
+    E(tipo='tarjeta', t0=P('y claro'), t1=P('pues no'), k='La respuesta de siempre', items=[it('¿Subimos el presupuesto?', P('el presupuesto'), 'mas')])
     E(tipo='clave', coral=1, html='Primero, entender <i>qué está fallando</i>', t0=P('pues no'), t1=P('y aqui es donde'))
     # B3 · cómo trabajamos
     E(tipo='clave', html='Aquí entra <i>Qualivo</i>', t0=P('y aqui es donde'), t1=P('nosotros no'))
@@ -124,7 +124,7 @@ def construir(palabras, bruto, trabajo):
       b1='Te explicamos el tratamiento antes de empezar', b2='Si no es para ti, te lo decimos', c1='¿Qué tratamiento buscas?', c2='¿Cuándo quieres empezar?',
       tf=P('pero si la persona'), dudas=[{'txt': '¿Qué ofreces?', 't': P('que no explica')}])
     E(tipo='cadena', unico=1, t0=P('por eso conectamos'), t1=P('y por supuesto'),
-      pasos=[{'txt': x, 't': P(f) } for x, f in [('Anuncio', 'el anuncio'), ('Mensaje', 'el mensaje'), ('Página', 'la pagina'), ('Formulario', 'y el formulario')]])
+      pasos=[{'txt': x, 't': P(f, P('por eso conectamos'))} for x, f in [('Anuncio', 'el anuncio'), ('Mensaje', 'el mensaje'), ('Página', 'la pagina'), ('Formulario', 'y el formulario')]])
     E(tipo='tarjeta', t0=P('y por supuesto'), t1=P('y ahora viene'), k='Lo que medimos',
       items=[it('Cuáles son buenos', P('cuales son buenos')), it('Cuáles avanzan', P('cuales avanzan')), it('Qué campañas traen oportunidades', P('y que campanas'))])
     # B4 · seguimiento e Intelligence (pantallas de la demo, datos simulados)
@@ -135,14 +135,14 @@ def construir(palabras, bruto, trabajo):
       items=[it('WhatsApp', P('whatsapp')), it('Automatizaciones', P('automatizaciones')), it('Asistentes de voz con IA', P('asistentes de voz'))])
     E(tipo='clave', html='Tu equipo <i>sigue vendiendo</i>', t0=P('tu equipo'), t1=P('nosotros ayudamos'))
     E(tipo='tarjeta', t0=P('nosotros ayudamos'), t1=P('y para tener'), k='Nosotros ayudamos a que llegue',
-      items=[it('A las conversaciones adecuadas', P('conversaciones adecuadas')), it('En el momento adecuado', P('en el momento')), it('Con más información', P('con mas informacion'))])
+      items=[it('A las conversaciones adecuadas', P('conversaciones adecuadas')), it('En el momento adecuado', P('en el momento')), it('Con más información', P('mucha mas informacion'))])
     E(tipo='clave', html='Qualivo <i>Intelligence</i>', t0=P('y para tener'), t1=P('aqui podemos'))
     E(tipo='pantalla', src='recursos/intel-resumen.jpg', t0=P('aqui podemos'), t1=P('y cuando tenemos'),
-      focos=[{'t': P('aqui podemos')}, {'t': P('que oportunidades'), 'x': 460, 'y': 860, 'w': 1420, 'h': 840, 'z': 1.55},
+      focos=[{'t': P('aqui podemos')}, {'t': P('que oportunidades', P('aqui podemos')), 'x': 460, 'y': 860, 'w': 1420, 'h': 840, 'z': 1.55},
              {'t': P('donde se estan'), 'x': 1960, 'y': 860, 'w': 1060, 'h': 240, 'z': 1.8}])
-    E(tipo='pantalla', src='recursos/intel-anuncios.jpg', t0=P('y cuando tenemos'), t1=P('asi dejamos'),
+    E(tipo='pantalla', src='recursos/intel-anuncios.jpg', t0=P('y cuando tenemos'), t1=P('de esta manera'),
       focos=[{'t': P('y cuando tenemos')}, {'t': P('podemos analizar'), 'x': 460, 'y': 140, 'w': 2580, 'h': 420, 'z': 1.35}])
-    E(tipo='clave', html='<s>Intuición</s> <i>Información</i>', t0=P('asi dejamos'), t1=P('y como empezamos'))
+    E(tipo='clave', html='<s>Intuición</s> <i>Información</i>', t0=P('de esta manera'), t1=P('y como empezamos'))
     # B5 · cómo empezamos
     E(tipo='clave', html='¿Cómo empezamos <i>a trabajar juntos?</i>', t0=P('y como empezamos'), t1=P('primero analizamos'))
     E(tipo='tarjeta', t0=P('primero analizamos'), t1=P('a partir de ahi'), k='Primero, tu situación',
@@ -161,7 +161,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='clave', html='Entender tu negocio <i>y ayudarte a crecer</i>', t0=P('lo que si vamos'), t1=P('asi que nada'))
     t_fin = Pe('nos vemos dentro') + 0.5
     E(tipo='fin', t0=t_fin, t1=1e9, titulo='Descubre dónde puedes mejorar tu captación', boton='Reserva una sesión de diagnóstico')
-    nombre = (P('soy maikel'), P('soy maikel') + 4.5)
+    nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
     apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 1.2)]
     # encuadres: «de lado» cuando hay tarjeta; zoom en el gancho; si no, abierto y cerrado alternos
     forz = [(s['t0'], s['t1']) for s in ests if s['tipo'] in ('tarjeta', 'cta')]
