@@ -103,7 +103,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='tarjeta', t0=P('si tu anuncio'), t1=P('y ojo'), k='Dónde se va el dinero',
       items=[it('Un anuncio que habla a todo el mundo', P('si tu anuncio'), 'ko'), it('Un mensaje que no conecta', P('si tu mensaje'), 'ko'),
              it('Una página que no convence', P('una pagina que'), 'ko')])
-    E(tipo='cadena', unico=1, t0=P('y ojo'), t1=P('pero muchas empresas'),
+    E(tipo='cadena', unico=1, t0=P('que te dejen') - 0.3, t1=P('pero muchas empresas'),
       pasos=[{'txt': 'Datos', 't': P('que te dejen')}, {'txt': 'Responder', 't': P('hay que responder')}, {'txt': 'Cualificar', 't': P('cualificar')},
              {'txt': 'Seguimiento', 't': P('hacer seguimiento')}, {'txt': 'Venta', 't': P('que esa oportunidad')}])
     E(tipo='clave', html='«¿Cuánto cuesta <i>el lead?</i>»', t0=P('pero muchas empresas'), t1=P('y claro'))
@@ -127,7 +127,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='landing', t0=P('despues trabajamos'), t1=P('por eso conectamos'), h='Implantes en Sevilla', p='Valoración con el doctor en 30 minutos.',
       b1='Te explicamos el tratamiento antes de empezar', b2='Si no es para ti, te lo decimos', c1='¿Qué tratamiento buscas?', c2='¿Cuándo quieres empezar?',
       tf=P('pero si la persona'), dudas=[{'txt': '¿Qué ofreces?', 't': P('que no explica')}])
-    E(tipo='cadena', unico=1, t0=P('por eso conectamos'), t1=P('y por supuesto'),
+    E(tipo='cadena', unico=1, t0=P('el anuncio', P('por eso conectamos')) - 0.3, t1=P('y por supuesto'),
       pasos=[{'txt': x, 't': P(f, P('por eso conectamos'))} for x, f in [('Anuncio', 'el anuncio'), ('Mensaje', 'el mensaje'), ('Página', 'la pagina'), ('Formulario', 'y el formulario')]])
     E(tipo='tarjeta', t0=P('y por supuesto'), t1=P('y ahora viene'), k='Lo que medimos',
       items=[it('Cuáles son buenos', P('cuales son buenos')), it('Cuáles avanzan', P('cuales avanzan')), it('Qué campañas traen oportunidades', P('y que campanas'))])
