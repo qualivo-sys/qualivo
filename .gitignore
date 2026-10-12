@@ -15,3 +15,4 @@ agenttome-site/.vercel
 maikelechevarria-site/.vercel
 .claude/settings.local.json
 herramientas/.estado/
+__pycache__/
