@@ -33,11 +33,12 @@ html,body{background:transparent;width:1920px;height:1080px;overflow:hidden;font
 .lista h2{font-size:64px;color:#fff;font-weight:800;margin-bottom:56px;text-align:center}
 .lista .it{width:1100px;padding:28px 36px}.lista .it span{font-size:42px}
 /* cadena */
-.cadena{display:flex;flex-direction:column;align-items:center;padding-top:200px}
+.cadena{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:80px}
 .cadena .tach{font-size:56px;font-weight:800;color:#8A94AA;margin-bottom:70px;opacity:0}
 .cadena .tach s{text-decoration-thickness:6px;text-decoration-color:#FF8A4C}
 .fila{display:flex;align-items:center;gap:18px}
-.paso{background:#141B2B;border:2px solid #24304A;border-radius:18px;padding:26px 26px;font-size:30px;font-weight:800;color:#8A94AA;opacity:0;white-space:nowrap}
+.cadena h2{font-size:72px;color:#fff;font-weight:900;margin-bottom:90px;text-align:center}.cadena h2 i{font-style:normal;color:#27BDB1}
+.paso{background:#141B2B;border:2px solid #24304A;border-radius:20px;padding:32px 34px;font-size:38px;font-weight:800;color:#8A94AA;opacity:0;white-space:nowrap}
 .paso.on{background:#27BDB1;border-color:#27BDB1;color:#0A0F1A}
 .fl{font-size:40px;color:#27BDB1;font-weight:800;opacity:0}
 /* pantalla real de Intelligence */
@@ -138,7 +139,7 @@ let nt=0; TL.esc.forEach(s=>{ if(s.tipo==='tarjeta'||s.tipo==='cta') s.n=nt++;
   if(s.tipo==='bloque'){ s.c1=mk('cortina',''); s.c2=mk('cortina c2',''); s.el=mk('cap',`<b>${s.n}</b><span>${s.txt}</span>`); }
   if(s.tipo==='tarjeta') s.el=mk('tarjeta',`${s.k?`<div class="k">${s.k}</div>`:''}${s.titulo?`<h3>${s.titulo}</h3>`:''}${s.grande?`<div class="big">${s.grande}</div>`:''}${(s.items||[]).map(item).join('')}${s.ej?`<div class="ej" style="left:64px;bottom:34px">${s.ej}</div>`:''}`);
   if(s.tipo==='lista') s.el=mk('full lista',`<h2>${s.titulo}</h2>${s.items.map(item).join('')}${s.ej?`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">${s.ej}</div>`:''}`);
-  if(s.tipo==='cadena') s.el=mk('full cadena',`${s.tachado?`<div class="tach"><span class="tch">${s.tachado.txt}</span></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
+  if(s.tipo==='cadena') s.el=mk('full cadena',`${s.titulo?`<h2>${s.titulo}</h2>`:''}${s.tachado?`<div class="tach"><span class="tch">${s.tachado.txt}</span></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
   if(s.tipo==='pantalla') s.el=mk('full pantalla',`<img src="${s.src}"><div class="caja"></div><div class="demo">Demo · datos simulados</div>`);
   if(s.tipo==='barras') s.el=mk('full barras',`<h2>${s.titulo}</h2>${s.barras.map((b,i)=>`<div class="bar ${i?'b':''}"><span>${b.txt}</span><div>${b.val}</div></div>`).join('')}<div class="ej" style="left:220px;bottom:150px">${s.ej}</div>`);
   if(s.tipo==='crono') s.el=mk('full crono',`<h2>${s.titulo}</h2><div class="precio">${s.precio}</div><div class="semanas">${s.pasos.map(p=>`<div class="sem"><small>${p.sem}</small><b>${p.txt}</b></div>`).join('')}</div>`);
@@ -177,7 +178,7 @@ window.setT=function(t){
     if(s.tipo==='lista') s.el.querySelectorAll('.it').forEach((d,i)=>{ const v=nm(t,s.items[i].t,s.items[i].t+.45); d.style.opacity=v; d.style.transform=`translateX(${(1-out(v))*(i%2?90:-90)}px)`; });
     if(s.tipo==='cadena'){ const tc=s.el.querySelector('.tach'); if(tc){ show(tc,nm(t,s.tachado.t,s.tachado.t+.4),20); tc.querySelector('.tch').style.setProperty('--p',out(nm(t,s.tachado.t+.5,s.tachado.t+1.1))); }
       const ps=s.el.querySelectorAll('.paso'), fs=s.el.querySelectorAll('.fl');
-      s.pasos.forEach((p,i)=>{ const v=nm(t,p.t,p.t+.4); ps[i].style.opacity=v; ps[i].style.transform=`scale(${.5+.5*bo(v)})`; ps[i].classList.toggle('on',t>=p.t+.3&&(!s.unico||i===s.pasos.filter(q=>t>=q.t+.3).length-1)); if(i) fs[i-1].style.opacity=nm(t,p.t-.15,p.t+.2); }); }
+      s.pasos.forEach((p,i)=>{ const v=nm(t,p.t,p.t+.4); ps[i].style.opacity=v; ps[i].style.transform=`scale(${.5+.5*bo(v)})`; if(s.unico){ ps[i].style.display=v>0?'':'none'; if(i) fs[i-1].style.display=v>0?'':'none'; } ps[i].classList.toggle('on',t>=p.t+.3&&(!s.unico||i===s.pasos.filter(q=>t>=q.t+.3).length-1)); if(i) fs[i-1].style.opacity=nm(t,p.t-.15,p.t+.2); }); }
     if(s.tipo==='pantalla'){ const f=[...s.focos].reverse().find(x=>t>=x.t); const img=s.el.querySelector('img'), cj=s.el.querySelector('.caja');
       if(f&&f.w){ const z=1+(f.z-1)*io(nm(t,f.t,f.t+.8)), cx=(f.x+f.w/2)/2, cy=(f.y+f.h/2)/2;
         const tx=cl(960-cx*z,1920-1920*z,0), ty=cl(540-cy*z,1080-1080*z,0); img.style.transform=`translate(${tx}px,${ty}px) scale(${z})`;
