@@ -93,12 +93,12 @@ def construir(palabras, bruto, trabajo):
     for w in g.W:
         for i in range(len(tr) - 1):
             x, y = tr[i][1], tr[i + 1][0]
-            if w['e'] > x and w['s'] < y:
-                if w['s'] < x: tr[i][1] = max(x, min(w['e'] + 0.1, y))
-                else: tr[i + 1][0] = min(y, max(w['s'] - 0.1, x))
+            if w['e'] > x - 0.12 and w['s'] < y + 0.12:
+                if w['s'] < x: tr[i][1] = max(x, min(w['e'] + 0.15, y))
+                else: tr[i + 1][0] = min(y, max(w['s'] - 0.12, x))
     fus = []
     for a, b in tr:
-        if fus and a <= fus[-1][1] + 0.05: fus[-1][1] = max(fus[-1][1], b)
+        if fus and a <= fus[-1][1] + 0.4: fus[-1][1] = max(fus[-1][1], b)   # quitar menos de 0,4 s solo da un salto
         else: fus.append([a, b])
     tr = [(round(a, 2), round(b, 2)) for a, b in fus]
     ests = []   # escenas (tiempos del bruto; se pasan al montaje al final)
