@@ -137,7 +137,7 @@ const item=x=>`<div class="it">${x.ico?`<i class="${x.ico}">${ICO[x.ico]||""}</i
 let nt=0; TL.esc.forEach(s=>{ if(s.tipo==='tarjeta'||s.tipo==='cta') s.n=nt++;
   if(s.tipo==='clave'){ s.el=mk('clave'+(s.coral?' coral':'')+(s.var==='izq'?' izq':''),tachar(s.html)); s.ws=palabras(s.el); }
   if(s.tipo==='grande'){ s.el=mk('full grande'+(s.coral?' coral':''),`<h1>${tachar(s.html)}</h1>`); s.ws=palabras(s.el.querySelector('h1')); }
-  if(s.tipo==='bloque'){ s.c1=mk('cortina',''); s.c2=mk('cortina c2',''); s.el=mk('cap',`<b>${s.n}</b><span>${s.txt}</span>`); }
+  if(s.tipo==='bloque'){ s.el=mk('cap',`<b>${s.n}</b><span>${s.txt}</span>`); }
   if(s.tipo==='tarjeta') s.el=mk('tarjeta',`${s.k?`<div class="k">${s.k}</div>`:''}${s.titulo?`<h3>${s.titulo}</h3>`:''}${s.grande?`<div class="big">${s.grande}</div>`:''}${(s.items||[]).map(item).join('')}${s.ej?`<div class="ej" style="left:64px;bottom:34px">${s.ej}</div>`:''}`);
   if(s.tipo==='lista') s.el=mk('full lista',`<h2>${s.titulo}</h2>${s.items.map(item).join('')}${s.ej?`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">${s.ej}</div>`:''}`);
   if(s.tipo==='cadena') s.el=mk('full cadena',`${s.titulo?`<h2>${s.titulo}</h2>`:''}${s.tachado?`<div class="tach"><span class="tch">${s.tachado.txt}</span></div>`:''}<div class="fila">${s.pasos.map((p,i)=>(i?'<div class="fl">→</div>':'')+`<div class="paso">${p.txt}</div>`).join('')}</div>`);
@@ -170,7 +170,6 @@ window.setT=function(t){
       s.el.querySelectorAll('.tch').forEach(x=>x.style.setProperty('--p',out(nm(t,s.t0+.45,s.t0+.95))));
       return; }
     if(s.tipo==='bloque'){ const u=nm(t,s.t0,s.t0+.55), v=nm(t,s.t0+.12,s.t0+.7);
-      s.c1.style.transform=`translateX(${-3200+io(u)*6000}px) skewX(-12deg)`; s.c2.style.transform=`translateX(${-3200+io(v)*6000}px) skewX(-12deg)`;
       show(s.el,win(t,s.t0+.35,s.t1,.4,.4),0,`translateX(${(1-out(nm(t,s.t0+.35,s.t0+.8)))*-60}px)`,1); return; }
     if(s.tipo==='tarjeta'||s.tipo==='cta'){ if(t>=s.t0&&t<s.t1) lado=true;
       if(s.n%2){ const u=out(nm(t,s.t0,s.t0+.5)); s.el.style.opacity=w>0?Math.min(1,w*3):0; s.el.style.transform='none'; s.el.style.clipPath=`inset(0 0 0 ${(1-u)*100}% round 30px)`;

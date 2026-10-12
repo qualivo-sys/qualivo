@@ -174,8 +174,8 @@ def construir(palabras, bruto, trabajo):
         est = next((v for k, v in ESTILO.items() if s['html'].startswith(k)), 'pop')
         if est == 'grande': s['tipo'] = 'grande'; s['t1'] = min(s['t1'], s['t0'] + 2.2)
         else: s['var'] = est
-    # Capítulos: cortina de color y rótulo arriba a la izquierda
-    for n, txt, f in [('02', 'El problema', 'por cierto'), ('03', 'Cómo trabajamos', 'y aqui es donde'), ('04', 'Seguimiento e Intelligence', 'y ahora viene'),
+    # Capítulos: rótulo arriba a la izquierda (sin cortina: cortaba y volvía al mismo plano). El 02 sobraba («soy Maikel»).
+    for n, txt, f in [('03', 'Cómo trabajamos', 'y aqui es donde'), ('04', 'Seguimiento e Intelligence', 'y ahora viene'),
                       ('05', 'Cómo empezamos', 'y como empezamos'), ('06', 'Tu siguiente paso', 'asi que si')]:
         E(tipo='bloque', n=n, txt=txt, t0=P(f) - 0.25, t1=P(f) + 3.2)
     # Las pantallas completas tapan a Maikel: se quitan 2,5 s después de su último elemento.
@@ -186,33 +186,76 @@ def construir(palabras, bruto, trabajo):
     nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
     # Planos de apoyo de Kling (12-oct), sin pantallas con texto: (desde, hasta, clip, desenfoque, segundo de inicio del clip)
     pc = P('cada negocio')
-    apoyos = [(P('si luego no'), P('porque eso pasa'), 'k-embudo.mp4', 0, 0.3),
-              (P('pues acabas'), P('y ojo'), 'k-sofa.mp4', 0, 1.2),
-              (P('simplemente cruzar'), P('sino que'), 'k-dedos.mp4', 0, 0.8),
-              (P('despues viene'), P('probamos diferentes'), 'k-creativos.mp4', 0, 0),
-              (P('y nadie le'), P('hombre pues'), 'k-movil-noche.mp4', 0, 0),
-              (P('tu equipo'), P('nosotros ayudamos'), 'k-comercial-llamada.mp4', 0, 0),
-              (pc, pc + 1.4, 'k-clinica.mp4', 0, 1.0), (pc + 1.4, pc + 2.8, 'k-taller.mp4', 0, 0.6),
-              (P('estariamos todos'), P('lo que si vamos'), 'k-mojitos.mp4', 0, 0)]
-    # encuadres: «de lado» cuando hay tarjeta; zoom en el gancho; si no, abierto y cerrado alternos
-    forz = [(s['t0'], s['t1']) for s in ests if s['tipo'] in ('tarjeta', 'cta')]
-    gancho = (tr[0][0], P('empresas que estan'))
-    planos, sig, acum = [], 0, 0
+    ap = [[P('si luego no'), P('porque eso pasa'), 'k-embudo.mp4', 0, 0.3],
+          [P('pues acabas'), P('y ojo'), 'k-sofa.mp4', 0, 1.2],
+          [P('simplemente cruzar'), P('sino que'), 'k-dedos.mp4', 0, 0.8],
+          [P('despues viene'), P('probamos diferentes'), 'k-creativos.mp4', 0, 0],
+          [P('y nadie le'), P('hombre pues'), 'k-movil-noche.mp4', 0, 0],
+          [P('tu equipo'), P('nosotros ayudamos'), 'k-comercial-llamada.mp4', 0, 0],
+          [pc, pc + 1.4, 'k-clinica.mp4', 0, 1.0], [pc + 1.4, pc + 2.8, 'k-taller.mp4', 0, 0.6],
+          [P('estariamos todos'), P('lo que si vamos'), 'k-mojitos.mp4', 0, 0]]
+    # Hilo de cámara (Maikel, 12-oct: «no vuelvas a la anterior de golpe ni te quedes en medio»):
+    # - lo que tapa a Maikel (pantalla completa o plano de Kling) se junta si entre medias solo quedaría <2,5 s de cara;
+    # - la cámara solo cambia en un corte de pausa o cuando entra o sale un gráfico, y al volver de un gráfico nunca
+    #   vuelve al mismo encuadre de antes; con tarjeta, encuadre de lado durante toda la tarjeta.
+    HUECO = 2.5
+    TAPA = ('lista', 'cadena', 'ads3', 'ads2', 'landing', 'pantalla', 'grande', 'barras', 'crono', 'feed', 'flujo')
+    ocultos = sorted([[x['t0'], x['t1'], x] for x in ests if x['tipo'] in TAPA] + [[x[0], x[1], x] for x in ap], key=lambda e: e[0])
+    for e1, e2 in zip(ocultos, ocultos[1:]):
+        if 0 < e2[0] - e1[1] < HUECO:
+            if isinstance(e1[2], dict): e1[2]['t1'] = e2[0]
+            else: e1[2][1] = e2[0]
+            e1[1] = e2[0]
+    apoyos = [tuple(x) for x in ap]
+    # tarjetas: si entre una tarjeta y un gráfico solo quedaría <2,5 s de cara, la tarjeta se estira hasta tocarlo
+    tarj = sorted([x for x in ests if x['tipo'] in ('tarjeta', 'cta')], key=lambda x: x['t0'])
+    for c in tarj:
+        antes = [e[1] for e in ocultos if c['t0'] - HUECO < e[1] <= c['t0']]
+        if antes: c['t0'] = max(antes)
+        despues = [e[0] for e in ocultos if c['t1'] <= e[0] < c['t1'] + HUECO]
+        if despues: c['t1'] = min(despues)
+    for c1, c2 in zip(tarj, tarj[1:]):
+        if 0 < c2['t0'] - c1['t1'] < HUECO: c1['t1'] = c2['t0']
+    def juntar(iv):
+        out = []
+        for a, b in sorted(iv):
+            if out and a - out[-1][1] < HUECO: out[-1][1] = max(out[-1][1], b)
+            else: out.append([a, b])
+        return out
+    OC = juntar([[e[0], e[1]] for e in ocultos])
+    CA = juntar([[x['t0'], x['t1']] for x in ests if x['tipo'] in ('tarjeta', 'cta')])
+    t_fin_raw = t_fin
+    def estado(m):
+        if m >= t_fin_raw: return 'H'
+        if any(a <= m < b for a, b in OC): return 'H'
+        if any(a <= m < b for a, b in CA): return 'C'
+        return 'V'
+    bordes = sorted({x for iv in OC + CA for x in iv})
+    gancho_fin = P('si luego no')   # el zoom del gancho acaba donde entra el primer plano de Kling
+    planos, ult_vis, previo, desde = [], 'cerrado', None, 0.0
     for a, b in tr:
-        m = (a + b) / 2
-        if gancho[0] <= m < gancho[1]: enc = 'zoom'
-        elif any(x <= m < y for x, y in forz): enc = 'lado'
-        else:
-            if acum > 3.5: sig ^= 1; acum = 0
-            enc = ('abierto', 'cerrado')[sig]; acum += b - a
-        planos.append((a, b, enc))
-    # Golpes de zoom: corte a un plano muy cerrado en las frases con gracia, 1,6 s
-    for tg in [P('y ahi ya'), P('ostras'), P('pues no'), P('hombre pues')]:
-        for i, (a, b, enc) in enumerate(planos):
-            if a <= tg < b and enc != 'zoom':
-                trozos = [(a, tg, enc), (tg, min(b, tg + 1.6), 'golpe'), (min(b, tg + 1.6), b, enc)]
-                planos[i:i + 1] = [x for x in trozos if x[1] - x[0] > 0.05]
-                break
+        cs = [a] + [x for x in bordes if a < x < b] + [b]
+        for pa, pb in zip(cs, cs[1:]):
+            if pb - pa < 0.02: continue
+            st = estado((pa + pb) / 2)
+            if st == 'C': enc = 'lado'
+            elif st == 'H': enc = planos[-1][2] if planos else 'abierto'
+            elif (pa + pb) / 2 < gancho_fin: enc = 'zoom'
+            elif previo != 'V' or (pa - desde > 6 and min([x for x in bordes if x > pa] + [1e9]) - pa > HUECO):
+                enc = 'abierto' if ult_vis != 'abierto' else 'cerrado'
+            else: enc = ult_vis
+            if st == 'V' and (previo != 'V' or enc != ult_vis): desde = pa
+            if st == 'V': ult_vis = enc if enc != 'zoom' else 'cerrado'
+            previo = st
+            planos.append((pa, pb, enc))
+    # los gráficos que tapan o piden encuadre de lado entran y salen justo en un cambio de plano (si no, se ve el salto)
+    lim = sorted({x for a, b, _ in planos for x in (a, b)})
+    for x in ests:
+        if x['tipo'] in TAPA + ('tarjeta', 'cta'):
+            for k in ('t0', 't1'):
+                if x[k] < 1e8:
+                    c = min(lim, key=lambda y: abs(y - x[k]))
+                    if abs(c - x[k]) < 0.35: x[k] = c
     def T(x):
         o = 0
         for a, b, _ in planos:
