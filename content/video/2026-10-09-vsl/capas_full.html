@@ -155,12 +155,14 @@ let nt=0; TL.esc.forEach(s=>{ if(s.tipo==='tarjeta'||s.tipo==='cta') s.n=nt++;
   if(s.tipo==='ads2') s.el=mk('full ads3',[['Mensaje genérico','¿Quieres más clientes? Escríbenos.'],['Mensaje para tu cliente ideal','¿Tu clínica ya invierte en anuncios y solo llegan preguntas de precio?']].map(a=>`<div class="ad"><div class="tag">${a[0]}</div><div class="tel"><div class="th"><i></i><b>Tu empresa</b></div><div class="img"><p>${a[1]}</p></div><div class="btn">Siguiente paso</div></div></div>`).join('')+`<div class="ej" style="left:50%;transform:translateX(-50%);bottom:150px">Anuncios ilustrativos</div>`);
 });
 const FULL=new Set(['lista','cadena','pantalla','barras','crono','ads3','ads2','landing','feed','flujo','grande','fin']);
-TL.esc.forEach(s=>{ if(!FULL.has(s.tipo)) return; TL.esc.forEach(o=>{ if(o===s||!FULL.has(o.tipo)) return;
-  if(Math.abs(o.t0-s.t1)<.15) s.pegadoFin=true; if(Math.abs(o.t1-s.t0)<.15) s.pegadoIni=true; }); });
+// lo que tapa la cámara: gráficos a pantalla completa y planos de Kling. Lo que se toca con ellos entra o sale en seco.
+const TAPAN=TL.esc.filter(o=>FULL.has(o.tipo)).map(o=>[o.t0,o.t1,o]).concat((TL.ocultos||[]).map(x=>[x[0],x[1],null]));
+TL.esc.forEach(s=>{ if(!FULL.has(s.tipo)&&s.tipo!=='tarjeta'&&s.tipo!=='cta') return; TAPAN.forEach(([a,b,o])=>{ if(o===s) return;
+  if(Math.abs(a-s.t1)<.15) s.pegadoFin=true; if(Math.abs(b-s.t0)<.15) s.pegadoIni=true; }); });
 window.setT=function(t){
   let lado=false, claro=false;
   TL.esc.forEach(s=>{
-    const w=win(t,s.t0,s.t1,s.pegadoIni?.01:.45,s.pegadoFin?.01:.35);
+    const w=win(t,s.t0,s.t1,s.pegadoIni?.01:.45,s.pegadoFin?.01:.25);
     if(s.tipo==='clave'||s.tipo==='grande'){
       const base=s.tipo==='clave'&&s.var!=='izq'?'translateX(-50%)':'';
       if(s.var==='barrido'){ const u=out(nm(t,s.t0,s.t0+.45)); s.el.style.opacity=w>0?Math.min(1,w*3):0; s.el.style.transform=base; s.el.style.clipPath=`inset(0 ${(1-u)*100}% 0 0 round 14px)`;

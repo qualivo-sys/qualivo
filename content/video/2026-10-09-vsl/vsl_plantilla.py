@@ -214,6 +214,9 @@ def construir(palabras, bruto, trabajo):
         if antes: c['t0'] = max(antes)
         despues = [e[0] for e in ocultos if c['t1'] <= e[0] < c['t1'] + HUECO]
         if despues: c['t1'] = min(despues)
+        for e in ocultos:   # un gráfico o plano de Kling que cae dentro de la tarjeta la corta: no se superponen
+            if c['t0'] < e[0] < c['t1']: c['t1'] = e[0]
+            if e[0] <= c['t0'] < e[1]: c['t0'] = e[1]
     for c1, c2 in zip(tarj, tarj[1:]):
         if 0 < c2['t0'] - c1['t1'] < HUECO: c1['t1'] = c2['t0']
     def juntar(iv):
@@ -285,7 +288,7 @@ def construir(palabras, bruto, trabajo):
         t0, t1 = T(c[0]['s']), T(c[-1]['e']) + 0.25
         if t0 < T(t_fin): SUBS.append([t0, min(t1, T(t_fin)), txt])
     for i in range(len(SUBS) - 1): SUBS[i][1] = min(SUBS[i][1], SUBS[i + 1][0])
-    TL = {'esc': ests, 'subs': SUBS, 'nombre': [T(nombre[0]), T(nombre[1])]}
+    TL = {'esc': ests, 'subs': SUBS, 'ocultos': [[T(x[0]), T(x[1])] for x in apoyos], 'nombre': [T(nombre[0]), T(nombre[1])]}
     open(os.path.join(AQUI, 'tiempos-plantilla.js'), 'w').write('window.TL=' + json.dumps(TL, ensure_ascii=False) + ';\n')
     return planos, total, apoyos
 
@@ -294,6 +297,10 @@ def zoom_f(d, off, D, k1=ZOOM_K):
     reg = ZOOM_REG; fx, fy = (CARA[0] - reg[2]) / reg[0], CARA[1] / reg[1]
     return (f"{'hflip,' if VOLTEAR else ''}crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
             f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
+
+def duracion(f):
+    d = subprocess.run([FF, '-i', f], capture_output=True, text=True).stderr.split('Duration: ')[1].split(',')[0].split(':')
+    return int(d[0]) * 3600 + int(d[1]) * 60 + float(d[2])
 
 def base(bruto, trabajo, planos, total, apoyos=()):
     """Imagen por trozos (un ffmpeg por plano, con número exacto de fotogramas) y audio aparte; luego se juntan.
@@ -310,8 +317,10 @@ def base(bruto, trabajo, planos, total, apoyos=()):
             ap = next((x for x in apoyos if x[0] <= (pa + pb) / 2 < x[1]), None)
             if ap:
                 wa, wb, c, blur, off = ap
-                ent = ['-stream_loop', '-1', '-ss', f'{off + pa - wa:.3f}', '-i', os.path.join(REC, c)]  # en bucle: los clips de Kling duran 5 s
-                vf = 'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080' + (f',gblur=sigma={blur}' if blur else '')
+                # sin bucle (al volver al principio se veía el salto): si el tramo dura más que el clip, se ralentiza
+                dc = duracion(os.path.join(REC, c)) - 0.1; off = max(0, min(off, dc - (wb - wa))); k = max(1.0, (wb - wa) / (dc - off))
+                ent = ['-ss', f'{off + (pa - wa) / k:.3f}', '-i', os.path.join(REC, c)]
+                vf = f'setpts={k:.4f}*PTS,scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080' + (f',gblur=sigma={blur}' if blur else '')
             else:
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
                 if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
