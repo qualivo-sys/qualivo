@@ -159,7 +159,7 @@ def construir(palabras, bruto, trabajo):
     E(tipo='lista', t0=P('sin discursos'), t1=P('que si fuera'), titulo='Sin…',
       items=[it('Discursos raros', P('sin discursos'), 'ko'), it('IA porque sí', P('sin venderte'), 'ko'), it('Prometer ×10 en una semana', P('y sin prometerte'), 'ko')])
     E(tipo='clave', html='Entender tu negocio <i>y ayudarte a crecer</i>', t0=P('lo que si vamos'), t1=P('asi que nada'))
-    t_fin = Pe('nos vemos dentro') + 0.5
+    t_fin = Pe('nos vemos adentro') + 0.5
     E(tipo='fin', t0=t_fin, t1=1e9, titulo='Descubre dónde puedes mejorar tu captación', boton='Reserva una sesión de diagnóstico')
     nombre = (P('por cierto') + 0.8, P('por cierto') + 5.3)
     apoyos = [(P('despues viene'), P('probamos diferentes'), 'broll-panel.mp4', 7, 1.2)]
