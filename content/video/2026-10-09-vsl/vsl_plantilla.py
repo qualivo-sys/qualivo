@@ -372,11 +372,38 @@ def capas(trabajo, total, partes=3):
                            env=dict(os.environ, NODE_PATH=np)) for i in range(partes)]
     for p in ps: p.wait()
 
-def final(trabajo, total):
-    subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', f'{trabajo}/base_full.mp4', '-framerate', str(FPS),
-                    '-i', f'{trabajo}/capasF/f%05d.png', '-filter_complex', '[0:v][1:v]overlay=0:0[v]', '-map', '[v]', '-map', '0:a',
-                    '-c:v', 'libx264', '-crf', '19', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-t', str(total),
-                    f'{trabajo}/VSL_Qualivo_plantilla.mp4'], check=True, stdin=subprocess.DEVNULL)
+def final(trabajo, total, hilos=4):
+    """Superpone la capa de gráficos fotograma a fotograma (fotograma n de la cámara + PNG n), sin dejar que ffmpeg
+    sincronice por tiempos: el overlay de ffmpeg perdía fotogramas sueltos y se veía la cámara en mitad de un gráfico."""
+    import numpy as np
+    from PIL import Image
+    from concurrent.futures import ThreadPoolExecutor
+    W_, H_ = 1920, 1080; n = int(round(FPS * total)); tam = W_ * H_ * 3
+    lee = subprocess.Popen([FF, '-nostdin', '-loglevel', 'error', '-i', f'{trabajo}/imagen.mp4', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
+                           stdout=subprocess.PIPE)
+    esc = subprocess.Popen([FF, '-nostdin', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W_}x{H_}', '-r', str(FPS),
+                            '-i', '-', '-i', f'{trabajo}/audio.m4a', '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-crf', '19', '-preset', 'fast',
+                            '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-shortest', '-movflags', '+faststart', f'{trabajo}/VSL_Qualivo_plantilla.mp4'],
+                           stdin=subprocess.PIPE)
+    def capa(i):
+        p = f'{trabajo}/capasF/f{i:05d}.png'
+        return np.asarray(Image.open(p).convert('RGBA')) if os.path.exists(p) else None
+    with ThreadPoolExecutor(hilos) as ex:
+        futuros = [ex.submit(capa, i) for i in range(min(n, hilos * 3))]
+        ult = None
+        for i in range(n):
+            raw = lee.stdout.read(tam)
+            if len(raw) < tam: raw = ult if ult is not None else bytes(tam)   # por si la cámara acaba un fotograma antes
+            ult = raw
+            base_ = np.frombuffer(raw, np.uint8).reshape(H_, W_, 3)
+            c = futuros[i].result()
+            if i + hilos * 3 < n: futuros.append(ex.submit(capa, i + hilos * 3))
+            futuros[i] = None
+            if c is not None and c[..., 3].any():
+                a_ = c[..., 3:4].astype(np.uint16)
+                base_ = ((c[..., :3].astype(np.uint16) * a_ + base_.astype(np.uint16) * (255 - a_) + 127) // 255).astype(np.uint8)
+            esc.stdin.write(base_.tobytes())
+    esc.stdin.close(); esc.wait(); lee.kill()
     print('ok', f'{trabajo}/VSL_Qualivo_plantilla.mp4')
 
 if __name__ == '__main__':
