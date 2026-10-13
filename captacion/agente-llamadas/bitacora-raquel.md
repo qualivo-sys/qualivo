@@ -413,3 +413,39 @@ con la nueva llamada desde la demo de Intelligence (ficha del CRM → «Que me l
 **Propuesto, no aplicado (decide Maikel).**
 - Leads «solo mirando» (todavia-no-candidato): no lanzar la llamada de Raquel el mismo día; dejar
   el WhatsApp y llamar solo si contesta. Hoy la única llamada real fue a uno de ellos y acabó en buzón.
+
+## 13-oct-2026 · revisión diaria (llamadas del 12-oct 19:39 al 13-oct 19:39)
+
+Cinco llamadas, registradas en Notion (📞 Llamadas de Raquel): tres reales y dos pruebas de Maikel.
+
+- Javier: única conversación real. Contestó, escuchó la presentación y colgó al poco de oír la
+  propuesta de videollamada. El audio está subido a su ficha de Notion.
+- Dra. Nataliia y Jeannine: buzón.
+- Pruebas de Maikel: la de las 17:16 a su móvil, que fue bien tras los cambios de abajo, y una por
+  SIP que no llegó a conectar.
+
+**Observado.**
+- A leads que pidieron el diagnóstico hace días, Raquel les decía «acabas de pedir». Suena a guion
+  y descoloca a quien ya ni se acuerda.
+- «Dra» se leía como si fuera parte del nombre («Hola, ¿Dra Nataliia?»).
+- El mensaje de buzón se repite (el texto sale dos veces). Es comportamiento del buzón de Vapi; no
+  está resuelto.
+- Javier colgó tras un pitch rápido: se pasó a ofrecer la videollamada sin haber sacado ningún dolor.
+- El transcriptor sigue escribiendo «Michael»; el texto configurado es «Máikel».
+
+**Aplicado.**
+- Nueva variable {{pedido}}, calculada en api/_activacion.js a partir de la fecha de alta del contacto:
+  «Acabas de pedir» (< 90 min), «Hace unas horas pediste» (< 20 h), «Ayer pediste» (< 48 h) o
+  «Hace unos días pediste». El primer mensaje del asistente y la apertura del prompt la usan
+  («{{pedido}} el diagnóstico de crecimiento en {{origen}}»). api/activacion.js y
+  api/intelligence-datos.js pasan ya la fecha de alta.
+- Tratamientos hablados: «Dra/Dr/Sra/Sr» se convierten en «doctora/doctor/señora/señor» antes de
+  pasar el nombre.
+- Copia del asistente antes del cambio guardada en el scratchpad (raquel-asistente-20261013.json).
+
+**Propuesto, no aplicado (decide Maikel).**
+- Antes de ofrecer la videollamada, una pregunta de dolor más («¿qué es lo que más te frena ahora
+  mismo para captar más?») y reflejar la respuesta en una frase. Con Javier se ofreció la llamada
+  sin haber sacado ningún dolor y colgó.
+- Buzón repetido: probar a acortar el texto o pasar el mensaje como variable para ver si deja de
+  duplicarse.
