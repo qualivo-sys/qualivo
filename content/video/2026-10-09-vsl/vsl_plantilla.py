@@ -348,14 +348,17 @@ def construir(palabras, bruto, trabajo):
     return planos, total, apoyos
 
 # Los encuadres están medidos sobre 1920x1080; con un bruto 4K se escalan (recorte más nítido).
+# Salida: 1080p por defecto; SALIDA=4k saca 3840x2160 (gráficos renderizados a doble densidad).
+OW, OH = (3840, 2160) if os.environ.get('SALIDA') == '4k' else (1920, 1080)
+VINETA = ',vignette=angle=0.38'   # viñeta suave sobre la cámara: la cara destaca sobre la pared
 ESCALA = 1.0
 def px(r): return tuple(int(round(v * ESCALA / 2)) * 2 for v in r)
 
 def zoom_f(d, off, D, k1=ZOOM_K):
     K = f"(1+({k1}-1)*min((t+{off:.3f})/{D:.3f},1))"
     reg = px(ZOOM_REG); fx, fy = (CARA[0] - ZOOM_REG[2]) / ZOOM_REG[0], CARA[1] / ZOOM_REG[1]
-    return (f"{'hflip,' if VOLTEAR else ''}crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc(1920*{K}/2)*2':h='trunc(1080*{K}/2)*2':eval=frame:flags=bicubic,"
-            f"crop=1920:1080:x='max(0,min(iw-1920,{fx:.4f}*iw-960))':y='max(0,min(ih-1080,{fy:.4f}*ih-432))'")
+    return (f"{'hflip,' if VOLTEAR else ''}crop={reg[0]}:{reg[1]}:{reg[2]}:{reg[3]},scale=w='trunc({OW}*{K}/2)*2':h='trunc({OH}*{K}/2)*2':eval=frame:flags=bicubic,"
+            f"crop={OW}:{OH}:x='max(0,min(iw-{OW},{fx:.4f}*iw-{OW // 2}))':y='max(0,min(ih-{OH},{fy:.4f}*ih-{int(OH * 0.4)}))'{VINETA}")
 
 def duracion(f):
     d = subprocess.run([FF, '-i', f], capture_output=True, text=True).stderr.split('Duration: ')[1].split(',')[0].split(':')
@@ -383,12 +386,12 @@ def base(bruto, trabajo, planos, total, apoyos=()):
                 # sin bucle (al volver al principio se veía el salto): si el tramo dura más que el clip, se ralentiza
                 dc = duracion(os.path.join(REC, c)) - 0.1; off = max(0, min(off, dc - (wb - wa))); k = max(1.0, (wb - wa) / (dc - off))
                 ent = ['-ss', f'{off + (pa - wa) / k:.3f}', '-i', os.path.join(REC, c)]
-                vf = f'setpts={k:.4f}*PTS,scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080' + (f',gblur=sigma={blur}' if blur else '')
+                vf = f'setpts={k:.4f}*PTS,scale={OW}:{OH}:force_original_aspect_ratio=increase:flags=lanczos,crop={OW}:{OH}' + (f',gblur=sigma={blur}' if blur else '')
             else:
                 ent = ['-ss', f'{pa:.3f}', '-i', bruto]
                 if enc == 'zoom': vf = zoom_f(pb - pa, pa - z0, D)
                 else:
-                    w, h, x, y = px({'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO, 'golpe': GOLPE}[enc]); vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale=1920:1080:flags=lanczos"
+                    w, h, x, y = px({'abierto': ABIERTO, 'cerrado': CERRADO, 'lado': LADO, 'golpe': GOLPE}[enc]); vf = f"{'hflip,' if VOLTEAR else ''}crop={w}:{h}:{x}:{y},scale={OW}:{OH}:flags=lanczos{VINETA}"
             trabajos.append((len(trabajos), ent, f'{vf},fps={FPS},setsar=1,format=yuv420p,tpad=stop_mode=clone:stop_duration=1', f1 - f0))
     def hacer(tj):
         i, ent, vf, n = tj
@@ -424,11 +427,11 @@ def capas(trabajo, total, partes=3):
     n = int(round(FPS * total)); os.makedirs(f'{trabajo}/capasF', exist_ok=True)
     js = """const { chromium } = require('playwright');
 (async () => { const [a, b, dir] = [+process.argv[2], +process.argv[3], process.argv[4]];
-  const br = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'}); const p = await br.newPage({viewport:{width:1920,height:1080}});
+  const br = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'}); const p = await br.newPage({viewport:{width:1920,height:1080}, deviceScaleFactor:%s});
   await p.goto('file://%s/capas_full.html',{waitUntil:'networkidle'}); await p.waitForTimeout(800);
   for (let i = a; i < b; i++) { await p.evaluate(t => window.setT(t), i / %d);
     await p.screenshot({path: dir + '/f' + String(i).padStart(5, '0') + '.png', omitBackground: true}); }
-  await br.close(); })();""" % (AQUI, FPS)
+  await br.close(); })();""" % (OW // 1920, AQUI, FPS)
     open(f'{trabajo}/grabaF.js', 'w').write(js)
     np = subprocess.run(['npm', 'root', '-g'], capture_output=True, text=True).stdout.strip()
     ps = [subprocess.Popen(['node', f'{trabajo}/grabaF.js', str(i * n // partes), str((i + 1) * n // partes), f'{trabajo}/capasF'],
@@ -441,7 +444,7 @@ def final(trabajo, total, hilos=4):
     import numpy as np
     from PIL import Image
     from concurrent.futures import ThreadPoolExecutor
-    W_, H_ = 1920, 1080; n = int(round(FPS * total)); tam = W_ * H_ * 3
+    W_, H_ = OW, OH; n = int(round(FPS * total)); tam = W_ * H_ * 3
     lee = subprocess.Popen([FF, '-nostdin', '-loglevel', 'error', '-i', f'{trabajo}/imagen.mp4', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
                            stdout=subprocess.PIPE)
     esc = subprocess.Popen([FF, '-nostdin', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W_}x{H_}', '-r', str(FPS),
