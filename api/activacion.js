@@ -500,6 +500,7 @@ async function handler(req, res) {
         const r = await A.lanzarLlamada({
           telefono: c.phone,
           nombre: datos.nombre,
+          entro: c.dateAdded,
           contexto: {
             nombre: datos.nombre,
             email: c.email || '',

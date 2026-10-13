@@ -740,6 +740,23 @@ function telefonoE164(valor) {
   return '';
 }
 
+// «Acabas de pedir» solo si entró hace menos de 90 minutos; si no, el tiempo real.
+function pedidoTexto(entro) {
+  const t = entro ? new Date(entro).getTime() : NaN;
+  if (!isFinite(t)) return 'Acabas de pedir';
+  const min = (Date.now() - t) / 60000;
+  if (min < 90) return 'Acabas de pedir';
+  if (min < 20 * 60) return 'Hace unas horas pediste';
+  if (min < 48 * 60) return 'Ayer pediste';
+  return 'Hace unos días pediste';
+}
+
+function nombreHablado(n) {
+  const s = String(n || '').trim();
+  const k = s.toLowerCase().replace(/\.$/, '');
+  return { dra: 'doctora', dr: 'doctor', sra: 'señora', sr: 'señor' }[k] || s;
+}
+
 // Saliente: el asistente va en cada llamada, así que el mismo número lo pueden
 // usar varias campañas sin pisarse. Los entrantes no se tocan.
 async function lanzarLlamada(datos) {
@@ -751,6 +768,14 @@ async function lanzarLlamada(datos) {
   const numero = telefonoE164(datos.telefono);
   if (!numero) return { ok: false, motivo: 'telefono_invalido' };
 
+  // 13-oct: Raquel decía «Acabas de pedir el diagnóstico» a quien lo pidió hace días (Javier,
+  // 13-oct: «¿Perdona? Es que no entiendo lo que me está diciendo»). El tiempo va en {{pedido}}
+  // según cuándo entró el contacto (datos.entro). Y un nombre que es un tratamiento («Dra»)
+  // se dice como tal: «¿doctora?», no «¿Dra?».
+  const contexto = Object.assign({}, datos.contexto || {});
+  contexto.pedido = contexto.pedido || pedidoTexto(datos.entro);
+  if (contexto.nombre) contexto.nombre = nombreHablado(contexto.nombre);
+
   const r = await fetch(VAPI_BASE + '/call', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + clave, 'Content-Type': 'application/json' },
@@ -758,7 +783,7 @@ async function lanzarLlamada(datos) {
       assistantId: asistente,
       phoneNumberId: process.env.VAPI_PHONE_NUMBER_ID || NUMERO_SALIENTE,
       customer: { number: numero, name: datos.nombre || undefined },
-      assistantOverrides: { variableValues: datos.contexto || {} }
+      assistantOverrides: { variableValues: contexto }
     })
   });
   if (!r.ok) return { ok: false, motivo: 'vapi_' + r.status, detalle: (await r.text()).slice(0, 200) };

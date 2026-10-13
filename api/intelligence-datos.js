@@ -556,7 +556,7 @@ async function llamar(b) {
   const c = await contactoGhl(id);
   if (!c.phone) throw new Error('No tiene teléfono en GHL.');
   const nombre = c.firstName || c.contactName || '';
-  const r = await A.lanzarLlamada({ telefono: c.phone, nombre: nombre, contexto: { nombre: nombre, email: c.email || '', email_dominio: String(c.email || '').split('@')[1] || '', empresa: c.companyName || '',
+  const r = await A.lanzarLlamada({ telefono: c.phone, nombre: nombre, entro: c.dateAdded, contexto: { nombre: nombre, email: c.email || '', email_dominio: String(c.email || '').split('@')[1] || '', empresa: c.companyName || '',
     // Raquel dice «Acabas de pedir el diagnóstico de crecimiento en {{origen}}»
     origen: (c.tags || []).some(function (t) { return t === 'paid' || t === 'leadform'; }) ? 'el anuncio' : 'la web', fuga: '' } });
   if (!r.ok) throw new Error('No se ha podido lanzar la llamada (' + (r.motivo || '') + ').');
