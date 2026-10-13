@@ -79,6 +79,17 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .fuga-h{margin:6px 0 6px 128px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
 .dash-pie{border-top:1px solid var(--linea);margin-top:12px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
 
+/* VSL */
+.vsl{margin:0}
+.vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
+.vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.vsl-play:hover img{transform:scale(1.02)}
+.vsl-btn{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:flex;align-items:center;justify-content:center;padding-left:4px;box-shadow:0 0 0 10px rgba(244,204,56,.28),0 14px 34px rgba(0,0,0,.35);transition:transform .16s ease}
+.vsl-play:hover .vsl-btn{transform:scale(1.07)}
+.vsl-dur{position:absolute;left:14px;bottom:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
+.vsl-marco iframe,.vsl-marco video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
+
 /* 2 · RESULTADOS */
 .res{background:#fff}
 .casos{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:36px}
@@ -279,17 +290,15 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
     </div>
 
-    <figure class="dash" id="dash" aria-label="Ejemplo de recorrido de un centro: de 180 solicitudes a 24 matrículas en un mes. Datos de ejemplo.">
-      <div class="dash-h">
-        <div><b>Recorrido de un mes</b><small>4 campañas activas</small></div>
-        <span class="tag-demo">Datos de ejemplo</span>
-      </div>
-      <div class="etapa"><span class="n">Solicitudes</span><div class="barra"><i style="--w:100%"></i></div><span class="v" data-n="180">180</span></div>
-      <div class="etapa"><span class="n">Conversaciones</span><div class="barra"><i style="--w:66%"></i></div><span class="v" data-n="118">118</span></div>
-      <div class="fuga-h">62 solicitudes no llegaron a hablar con nadie. Aquí se pierde.</div>
-      <div class="etapa"><span class="n">Reuniones</span><div class="barra"><i style="--w:26%"></i></div><span class="v" data-n="46">46</span></div>
-      <div class="etapa fin"><span class="n">Matrículas</span><div class="barra"><i style="--w:13%"></i></div><span class="v" data-n="24">24</span></div>
-      <figcaption class="dash-pie">Ejemplo ilustrativo. No son datos de un cliente.</figcaption>
+    <!-- VSL: portada y el reproductor se carga solo al pulsar (sin cookies ni peso antes del clic).
+         data-embed: URL de inserción de la plataforma (YouTube nocookie, Vimeo o Bunny), pendiente de Maikel. -->
+    <figure class="vsl" id="vsl" data-embed="">
+      <button type="button" class="vsl-play" aria-label="Ver el vídeo (5:38): cómo convertimos más contactos en clientes">
+        <img src="img/vsl-portada.jpg" alt="Maikel Echevarría, fundador de Qualivo, explicando cómo convertir más contactos en clientes" width="1280" height="720" fetchpriority="high">
+        <span class="vsl-btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+        <span class="vsl-dur" aria-hidden="true">▶ Ver vídeo · 5:38</span>
+      </button>
+      <figcaption>Maikel, fundador de Qualivo, te cuenta en 5 minutos cómo lo hacemos. Con subtítulos.</figcaption>
     </figure>
   </div>
 </header>
@@ -568,6 +577,18 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 
   /* movimiento discreto: subrayado, barras, cifras que cuentan, entradas suaves */
   var hero=document.getElementById('hero'), dash=document.getElementById('dash');
+
+  /* VSL: el reproductor se carga al pulsar. Sin autoplay con sonido antes del clic. */
+  var vsl=document.getElementById('vsl');
+  if(vsl){ vsl.querySelector('.vsl-play').addEventListener('click',function(){
+    var src=vsl.getAttribute('data-embed'), mp4=vsl.getAttribute('data-mp4'), marco=document.createElement('div'); marco.className='vsl-marco';
+    if(src){ var fr=document.createElement('iframe'); fr.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1';
+      fr.title='Vídeo: cómo convertimos más contactos en clientes'; fr.allow='autoplay; fullscreen; picture-in-picture; encrypted-media'; fr.allowFullscreen=true; marco.appendChild(fr); }
+    else if(mp4){ var v=document.createElement('video'); v.src=mp4; v.controls=true; v.autoplay=true; v.playsInline=true; v.poster='img/vsl-portada.jpg';
+      v.addEventListener('ended',function(){ track('formacion_vsl_fin',{}); }); marco.appendChild(v); }
+    else return;
+    this.replaceWith(marco); track('formacion_vsl_play',{});
+  }); }
   requestAnimationFrame(function(){ hero.classList.add('on'); });
   alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
   document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
