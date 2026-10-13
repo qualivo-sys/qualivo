@@ -66,7 +66,10 @@
     // estándar lo manda el servidor al entrar la cita (api/_cita.js) y con otro id contaría dos veces.
     formacion_vsl_play: ['trackCustom', 'VSLPlay'],
     formacion_agenda_abierta: ['trackCustom', 'FormacionAgenda'],
-    formacion_reserva: ['trackCustom', 'FormacionReserva']
+    formacion_reserva: ['trackCustom', 'FormacionReserva'],
+    home_vsl_play: ['trackCustom', 'VSLPlay'],
+    home_agenda_abierta: ['trackCustom', 'HomeAgenda'],
+    home_reserva: ['trackCustom', 'HomeReserva']
   };
 
   // Helper de eventos: siempre llamable; solo llega a GA y a Meta si hubo

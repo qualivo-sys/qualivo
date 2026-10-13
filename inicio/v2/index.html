@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- BORRADOR · Home de Qualivo con el posicionamiento v2 (content/posicionamiento-v2-2026-10-12.md), 12-oct-2026.
-     noindex. No sustituye a / hasta el OK de Maikel. Formulario: el mismo de la home (assets/app.js → /api/lead),
-     con los mismos IDs. Sin precios, sin garantía, sin «agentes de IA» ni «agentizamos». -->
+<!-- Home de Qualivo con el posicionamiento v2 (content/posicionamiento-v2-2026-10-12.md), en el mismo esquema que
+     /formacion/v21/ (13-oct-2026): portada con VSL, casos y formulario arriba; sistema, demo y alcance debajo.
+     Formulario: /diagnostico/landing.js → /api/diagnostico en tres pasos, con sector, solicitudes al mes y ticket
+     (etiquetas de encaje del funnel v2) y el precio «desde 1.200 € + IVA» al lado. ?paso=agenda: agenda directa.
+     noindex. No sustituye a la home (/) hasta el OK de Maikel. Sin «agentes de IA». -->
 <title>Qualivo · Conseguimos que más oportunidades se conviertan en clientes</title>
 <meta name="description" content="Sistemas de crecimiento que conectan la captación, la respuesta comercial y el seguimiento hasta la venta. Más oportunidades, menos negocio perdido y saber qué funciona. Diagnóstico sin coste de 30 minutos.">
 <meta name="robots" content="noindex,nofollow">
@@ -211,6 +213,44 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .rgpd input{width:18px;height:18px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
 .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 #submit-btn{width:100%}
+/* VSL */
+.vsl{margin:0}
+.vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
+.vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.vsl-play:hover img{transform:scale(1.02)}
+.vsl-play:hover{box-shadow:0 34px 90px rgba(16,19,25,.26)}
+.vsl-dur{position:absolute;right:14px;top:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
+.vsl-marco iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
+/* formulario en tres pasos (landing.js) */
+.precio{margin-top:22px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);font-size:15px;color:#C6CBD3;line-height:1.5}
+.precio b{color:#fff}
+.huecos{display:none;margin-top:18px;font-size:14.5px;color:#C6CBD3}
+.huecos.on{display:block}
+.huecos b{color:var(--verde-claro)}
+.maikel{display:flex;gap:14px;align-items:center;margin-top:22px}
+.maikel img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.maikel p{font-size:14.5px;color:#AEB5BF;line-height:1.45}
+.maikel b{color:#fff}
+.pasos-f{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;list-style:none;margin-bottom:20px}
+.pasos-f li{font-size:12.5px;font-weight:800;color:var(--gris-claro);padding-top:10px;border-top:4px solid var(--marfil-2);line-height:1.3}
+.pasos-f li.act{color:var(--tinta);border-color:var(--verde)}
+.pasos-f li.hecho{color:var(--verde);border-color:var(--verde)}
+.caja-f h3{font-size:21px;margin-bottom:14px}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.campo small{font-weight:600;color:var(--gris-claro)}
+.campo input,.campo select{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--verde-claro)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:end}
+@media(max-width:520px){.dos{grid-template-columns:1fr}}
+.caja-f .rgpd{margin:4px 0 16px}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.hp,.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera,.reservado{background:var(--verde-suave);border-radius:14px;padding:22px}
 .faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
 .faq h3{font-size:clamp(22px,2.8vw,30px);color:#fff}
 .faq details{border-top:1px solid rgba(255,255,255,.14)}
@@ -253,8 +293,6 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 </head>
 <body>
 
-<div class="borrador">BORRADOR · home con el posicionamiento v2 · sin publicar · el formulario es real</div>
-
 <div class="top">
   <div class="wrap">
     <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
@@ -282,18 +320,13 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <div class="sectores"><small>Por sector:</small><a href="/formacion/">Academias y formación</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
     </div>
 
-    <figure class="dash" id="dash" aria-label="Ejemplo de recorrido comercial de un mes: de 120 oportunidades a 7 clientes. Datos de ejemplo.">
-      <div class="dash-h">
-        <div><b>Recorrido comercial de un mes</b><small>De la oportunidad a la venta</small></div>
-        <span class="tag-demo">Datos de ejemplo</span>
-      </div>
-      <div class="etapa"><span class="n">Oportunidades</span><div class="barra"><i style="--w:100%"></i></div><span class="v" data-n="120">120</span></div>
-      <div class="etapa"><span class="n">Conversaciones</span><div class="barra"><i style="--w:65%"></i></div><span class="v" data-n="78">78</span></div>
-      <div class="fuga-h">42 oportunidades no llegaron a hablar con nadie. Aquí se pierde.</div>
-      <div class="etapa"><span class="n">Reuniones</span><div class="barra"><i style="--w:26%"></i></div><span class="v" data-n="31">31</span></div>
-      <div class="etapa"><span class="n">Propuestas</span><div class="barra"><i style="--w:15%"></i></div><span class="v" data-n="18">18</span></div>
-      <div class="etapa fin"><span class="n">Clientes</span><div class="barra"><i style="--w:7%"></i></div><span class="v" data-n="7">7</span></div>
-      <figcaption class="dash-pie">Ejemplo ilustrativo. No son datos de un cliente.</figcaption>
+    <!-- VSL: YouTube oculto en modo sin cookies; el reproductor solo se carga al pulsar. -->
+    <figure class="vsl" id="vsl" data-embed="https://www.youtube-nocookie.com/embed/WrWcO7SwYKY?rel=0&amp;playsinline=1">
+      <button type="button" class="vsl-play" aria-label="Ver el vídeo (5:38): cómo convertimos más contactos en clientes">
+        <img src="img/vsl-portada.jpg" alt="100 contactos… ¿y clientes? Vídeo de Qualivo de 5 minutos" width="1280" height="720" fetchpriority="high">
+        <span class="vsl-dur" aria-hidden="true">5:38</span>
+      </button>
+      <figcaption>Maikel, fundador de Qualivo, te cuenta en 5 minutos cómo lo hacemos. Con subtítulos.</figcaption>
     </figure>
   </div>
 </header>
@@ -351,7 +384,122 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- 3 · PROBLEMA + SOLUCIÓN -->
+
+
+
+<!-- 3 · CONVERSIÓN -->
+<section class="sec final" id="contacto" aria-labelledby="t-final">
+  <div class="wrap">
+    <div class="grid-f">
+      <div>
+        <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
+        <h2 id="t-final">Descubre dónde pierdes oportunidades.</h2>
+        <p class="lead" id="form-bajada">Miramos tu recorrido entero, de la captación a la venta, y te decimos dónde está la mayor fuga y qué haríamos primero. O que no tiene sentido.</p>
+        <ol class="despues" aria-label="Qué pasa después">
+          <li><span><b>Cuéntanos tu empresa</b> y deja tus datos. Un minuto.</span></li>
+          <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tus números y te decimos dónde actuar primero.</span></li>
+        </ol>
+        <p class="precio">Antes de reservar, que lo sepas: <b>trabajamos con proyectos que empiezan en 1.200&nbsp;€ + IVA.</b> El diagnóstico no tiene coste.</p>
+        <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
+        <div class="maikel">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
+          <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
+        </div>
+      </div>
+
+      <div class="caja-f">
+        <ol class="pasos-f" id="pasos-f" aria-label="Progreso">
+          <li class="act">1 · Tu empresa</li><li>2 · Tus datos</li><li>3 · Reserva tu hora</li>
+        </ol>
+        <form id="f" novalidate>
+          <div id="p1">
+            <h3>Cuéntanos tu empresa</h3>
+            <div class="dos">
+              <label class="campo"><span>Empresa</span><input type="text" name="empresa" autocomplete="organization" required></label>
+              <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tuempresa.com" required></label>
+            </div>
+            <label class="campo"><span>Sector</span>
+              <select name="sector" required>
+                <option value="">Elige una opción</option>
+                <option>Formación o academia</option>
+                <option>Salud, clínica o bienestar</option>
+                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
+                <option>Agencia o estudio</option>
+                <option>Reformas, construcción o instalaciones</option>
+                <option>Industria, taller o fabricación</option>
+                <option>Comercio o tienda</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <div class="dos">
+              <label class="campo"><span>Solicitudes al mes</span>
+                <select name="solicitudes" required>
+                  <option value="">Elige</option>
+                  <option>Menos de 20</option><option>20-49</option><option>50-99</option><option>100-250</option><option>Más de 250</option>
+                </select>
+              </label>
+              <label class="campo"><span>Ticket medio por cliente</span>
+                <select name="ticket" required>
+                  <option value="">Elige</option>
+                  <option>Menos de 300 €</option><option>300-1.000 €</option><option>1.000-3.000 €</option><option>Más de 3.000 €</option>
+                </select>
+              </label>
+            </div>
+            <div class="oculto" aria-hidden="true">
+              <select name="equipo" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
+              <select name="inversion" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
+            </div>
+            <p class="err" id="e1" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
+          </div>
+
+          <div id="p2" hidden>
+            <h3>¿Con quién hablamos?</h3>
+            <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
+            <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
+            <label class="campo"><span>¿Dónde crees que se te escapa más? <small>(opcional)</small></span>
+              <select name="donde">
+                <option value="">Elige una opción</option>
+                <option>En la captación: entran pocas oportunidades o no encajan</option>
+                <option>En la web o los formularios</option>
+                <option>En la respuesta: tardamos en contestar</option>
+                <option>En el seguimiento de presupuestos</option>
+                <option>No lo tengo claro</option>
+              </select>
+            </label>
+            <input type="hidden" name="hipotesis">
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="err" id="e2" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Ir a elegir hora&nbsp;→</button>
+            <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
+          </div>
+
+          <div id="p3" hidden>
+            <p class="eyebrow" id="p3-n" style="margin-bottom:6px">Último paso</p>
+            <h3 id="p3-t">Elige la hora que te venga bien.</h3>
+            <p style="font-size:15px;color:var(--gris);margin:-6px 0 14px">30 minutos por videollamada. La reunión queda confirmada cuando eliges la hora.</p>
+            <div id="cal"></div>
+          </div>
+
+          <div id="p4" hidden>
+            <div class="fuera"><h3>Gracias, lo hemos recibido.</h3><p style="font-size:15.5px;color:var(--gris)">Te escribimos en breve para ver si tiene sentido en tu caso.</p></div>
+          </div>
+        </form>
+        <div class="reservado" id="reservado" hidden aria-live="polite">
+          <h3>Reunión reservada.</h3>
+          <p style="font-size:15.5px;color:var(--gris);margin-top:6px">Te llegará la confirmación con el enlace de la videollamada. Si tienes a mano cuántas oportunidades os entran al mes y cuántas acaban en venta, mejor.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Portada, casos y formulario arriba; el detalle, debajo -->
+<!-- 4 · PROBLEMA + SOLUCIÓN -->
 <section class="sec" id="como" aria-labelledby="t-prob">
   <div class="wrap">
     <p class="eyebrow">Dónde se pierde el negocio</p>
@@ -380,7 +528,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- 4 · DEMOSTRACIÓN -->
+<!-- 5 · DEMOSTRACIÓN -->
 <section class="sec demo" id="demo" aria-labelledby="t-demo">
   <div class="wrap">
     <p class="eyebrow">Así se ve por dentro</p>
@@ -420,7 +568,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- 5 · SERVICIO -->
+<!-- 6 · SERVICIO -->
 <section class="sec" aria-labelledby="t-serv">
   <div class="wrap">
     <p class="eyebrow">Qué recibe tu empresa</p>
@@ -454,75 +602,15 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- 6 · CONVERSIÓN -->
-<section class="sec final" id="contacto" aria-labelledby="t-final">
+<!-- 7 · PREGUNTAS -->
+<section class="sec final" aria-label="Preguntas frecuentes">
   <div class="wrap">
-    <div class="grid-f">
-      <div>
-        <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
-        <h2 id="t-final">Descubre dónde pierdes oportunidades.</h2>
-        <p class="lead">Miramos tu recorrido entero, de la captación a la venta, y te decimos dónde está la mayor fuga y qué haríamos primero. O que no tiene sentido.</p>
-        <ol class="despues" aria-label="Qué pasa después">
-          <li><span><b>Cuéntanos tu caso</b> en el formulario. Dos minutos.</span></li>
-          <li><span><b>Elige la hora</b> en el calendario que aparece al enviar.</span></li>
-          <li><span><b>En la videollamada</b> repasamos tus números y te decimos dónde actuar primero.</span></li>
-        </ol>
-      </div>
-
-      <div class="caja-f">
-        <form id="lead-form" novalidate>
-          <h3>Cuéntanos dónde se te escapa</h3>
-          <label class="field"><span class="field-label">Nombre y cargo</span><input type="text" name="nombre" id="f-nombre" placeholder="Ana Ruiz · Directora general" autocomplete="name"></label>
-          <label class="field"><span class="field-label">Email de trabajo</span><input type="email" name="email" id="f-email" placeholder="ana@tuempresa.com" autocomplete="email"></label>
-          <label class="field"><span class="field-label">Empresa y web</span><input type="text" name="empresa" id="f-empresa" placeholder="Tu Empresa · tuempresa.com" autocomplete="organization"></label>
-          <label class="field"><span class="field-label">Facturación anual aproximada</span>
-            <select name="facturacion" id="f-fact">
-              <option value="">Elige un rango</option>
-              <option value="0">Menos de 500k €</option>
-              <option value="1">500k–1M €</option>
-              <option value="2">1M–3M €</option>
-              <option value="3">3M–10M €</option>
-              <option value="4">+10M €</option>
-            </select>
-          </label>
-          <label class="field"><span class="field-label">¿Quién lleva actualmente la captación?</span>
-            <select name="quien" id="f-quien">
-              <option value="">Elige una opción</option>
-              <option value="interno">Equipo interno</option>
-              <option value="agencia">Agencia</option>
-              <option value="freelance">Freelancers</option>
-              <option value="mixto">Agencia + equipo interno</option>
-              <option value="direccion">Fundador / equipo directivo</option>
-              <option value="otro">Otro</option>
-            </select>
-          </label>
-          <label class="field"><span class="field-label">¿Dónde crees que se pierden más oportunidades?</span><textarea name="hipotesis" id="f-hipotesis" rows="3" placeholder="Creo que el problema está en…"></textarea></label>
-          <label class="rgpd"><input type="checkbox" name="rgpd" id="f-rgpd"><span>He leído y acepto la <a href="/privacidad/" target="_blank">política de privacidad</a>. Usaremos estos datos solo para responder a tu solicitud.</span></label>
-          <div class="hp-field" aria-hidden="true"><label>No rellenes este campo si eres humano <input type="text" name="website" id="f-website" tabindex="-1" autocomplete="off"></label></div>
-          <p id="form-error" hidden style="font-size:14px;color:var(--rojo);font-weight:700;line-height:1.5"></p>
-          <button type="submit" id="submit-btn" class="btn">Solicitar diagnóstico →</button>
-          <p style="font-size:13px;color:var(--gris-claro);line-height:1.5">Al enviar, eliges hora. Respondemos en menos de 24 horas.</p>
-        </form>
-        <div id="panel-thanks" hidden>
-          <h3 style="font-size:22px;margin-bottom:10px">Recibido. Ahora elige hora.</h3>
-          <p style="font-size:15.5px;color:#3D4148;margin-bottom:18px">Revisamos tus respuestas y tu web antes de la llamada.</p>
-          <div id="calendar-slot" style="border:1px dashed rgba(16,19,25,.2);border-radius:12px;padding:24px;text-align:center"><p style="font-size:14px;color:var(--gris-claro)">Calendario</p></div>
-          <p style="font-size:13px;color:var(--gris-claro);margin-top:14px">Si no ves el email de confirmación en cinco minutos, mira en spam.</p>
-        </div>
-        <div id="panel-reject" hidden>
-          <h3 style="font-size:22px;margin-bottom:10px">Sinceramente: todavía no.</h3>
-          <p style="font-size:15.5px;color:#3D4148;margin-bottom:18px">Un diagnóstico tiene sentido cuando ya entran oportunidades y hay algo montado detrás. Escríbenos igualmente si crees que tu caso es una excepción.</p>
-          <button type="button" id="back-btn" class="btn btn-sm">Volver al formulario</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq">
+    <div class="faq" style="margin-top:0">
       <h3>Preguntas frecuentes</h3>
       <div>
         <details><summary>¿Sois una agencia de marketing?</summary><p>No solo. Llevamos campañas cuando hace falta, pero nos responsabilizamos del recorrido completo: captación, conversión, respuesta, seguimiento y medición, conectados en un sistema.</p></details>
         <details><summary>¿Tengo que cambiar mi CRM o mi agencia?</summary><p>No. Trabajamos sobre las herramientas que ya usas y nos coordinamos con tu agencia si la tienes. Lo que funciona se queda.</p></details>
-        <details><summary>¿Qué incluye y cuánto cuesta?</summary><p>Depende de lo que necesite tu recorrido. Empezamos con un diagnóstico sin coste; después te proponemos un alcance cerrado y su precio, por escrito. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
+        <details><summary>¿Qué incluye y cuánto cuesta?</summary><p>Los proyectos empiezan en 1.200&nbsp;€ + IVA. Empezamos con un diagnóstico sin coste y, después, te proponemos el alcance que necesita tu recorrido y su precio. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
         <details><summary>¿Para qué empresas tiene sentido?</summary><p>Para empresas que ya venden y reciben oportunidades, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, clínicas, servicios y B2B.</p></details>
       </div>
     </div>
@@ -560,8 +648,57 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
     new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
   document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track('home_cta',{ubicacion:a.getAttribute('data-cta'),version:'v2'}); }); });
-  var dash=document.getElementById('dash');
-  alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
+
+  /* VSL: el reproductor se carga al pulsar (sin cookies ni autoplay con sonido antes del clic). */
+  var vsl=document.getElementById('vsl');
+  if(vsl){ vsl.querySelector('.vsl-play').addEventListener('click',function(){
+    var src=vsl.getAttribute('data-embed'); if(!src) return;
+    var marco=document.createElement('div'), fr=document.createElement('iframe'); marco.className='vsl-marco';
+    fr.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1'; fr.title='Vídeo: cómo convertimos más contactos en clientes';
+    fr.allow='autoplay; fullscreen; picture-in-picture; encrypted-media'; fr.allowFullscreen=true; marco.appendChild(fr);
+    this.replaceWith(marco); track('home_vsl_play',{});
+  }); }
+
+  /* formulario sobre /diagnostico/landing.js (sin cambios en ese archivo para esta página).
+     Empresa y «dónde se escapa» van en «hipotesis» (nota del CRM y primer WhatsApp). Estos listeners
+     se registran antes que los de landing.js. */
+  var f=document.getElementById('f'), pasos=document.querySelectorAll('#pasos-f li');
+  function pasoF(n){ pasos.forEach(function(li,i){ li.className=i<n?'hecho':(i===n?'act':''); }); }
+  f.addEventListener('submit',function(){
+    var e=f.elements.empresa.value.trim(), d=f.elements.donde.value;
+    f.elements.hipotesis.value=('Empresa: '+e+(d?' · Dónde se le escapa: '+d:'')).slice(0,1200);
+  });
+  document.getElementById('b1').addEventListener('click',function(ev){
+    if(!f.elements.empresa.value.trim()||!f.elements.web.value.trim()||!f.elements.sector.value||!f.elements.solicitudes.value||!f.elements.ticket.value){
+      ev.stopImmediatePropagation(); var e1=document.getElementById('e1'); e1.textContent='Rellena los cinco campos, son diez segundos.'; e1.hidden=false; return;
+    }
+    pasoF(1);
+  },true);
+  /* ?paso=agenda: para quien ya ha dejado sus datos (WhatsApp de confirmación). landing.js enseña el calendario directo. */
+  if(new URLSearchParams(location.search).get('paso')==='agenda'){
+    pasoF(2);
+    document.getElementById('t-final').textContent='Elige la hora de tu diagnóstico.';
+    var d1=document.querySelector('.despues li'); if(d1) d1.hidden=true;
+  }
+  var p3=document.getElementById('p3'), agenda=false;
+  new MutationObserver(function(){ if(!p3.hidden&&!agenda){ agenda=true; pasoF(2); track('home_agenda_abierta',{}); } }).observe(p3,{attributes:true,attributeFilter:['hidden']});
+  /* reunión reservada: solo si el calendario de GHL avisa de una reserva completada (la reserva se mide en el CRM). */
+  var reservada=false;
+  addEventListener('message',function(e){
+    if(reservada||!/leadconnectorhq\.com|msgsndr\.com/.test(String(e.origin||''))) return;
+    var txt=''; try{ txt=typeof e.data==='string'?e.data:JSON.stringify(e.data); }catch(x){}
+    if(/booking|appointment/i.test(txt)&&/(complete|confirm|success|booked)/i.test(txt)){
+      reservada=true; pasos.forEach(function(li){ li.className='hecho'; });
+      document.getElementById('reservado').hidden=false; track('home_reserva',{});
+    }
+  });
+  /* huecos reales del calendario (api/huecos.js). Sin huecos, no se enseña nada. */
+  fetch('/api/huecos/').then(function(r){ return r.ok?r.json():{huecos:[]}; }).then(function(d){
+    var h=((d&&d.huecos)||[]).slice(0,3); if(!h.length) return;
+    var fx=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',weekday:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    document.getElementById('huecos-t').textContent=h.map(function(x){ return fx.format(new Date(x)).replace(',',''); }).join(' · ');
+    document.getElementById('huecos').classList.add('on');
+  }).catch(function(){});
   document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
   var fijo=document.getElementById('fijo'), hero=document.getElementById('hero'), fin=document.getElementById('contacto');
   if('IntersectionObserver' in window){
@@ -571,16 +708,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   }
 })();
 </script>
-<script>
-/* UTM de la visita para el CRM: assets/app.js las lee de sessionStorage («qv_utm»), pero nadie las guardaba
-   y la home mandaba utm: null. Se guarda el primer toque de la sesión. */
-(function(){ try{ if(sessionStorage.getItem('qv_utm')) return; var q=new URLSearchParams(location.search), u={};
-  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(k){ if(q.get(k)) u[k]=q.get(k); });
-  if(document.referrer && document.referrer.indexOf(location.host)<0) u.referrer=document.referrer.slice(0,200);
-  if(Object.keys(u).length) sessionStorage.setItem('qv_utm',JSON.stringify(u)); }catch(e){} })();
-</script>
-<script src="/inicio/v2/form.js"></script>
 <script src="/assets/consent.js?v=1"></script>
+<script src="/diagnostico/landing.js" defer></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

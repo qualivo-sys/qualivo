@@ -53,3 +53,26 @@
    - cargar `form.js` en lugar de `app.js`;
    - quitar el noindex y la barra «BORRADOR»;
    - rehacer el JSON-LD de la home con el posicionamiento nuevo.
+
+## 13-oct · mismo esquema que /formacion/v21/ (versión para tráfico de pago)
+
+- **Sin barra de borrador.** Sigue siendo noindex, en una ruta oculta.
+- **Portada:** el VSL de YouTube (oculto, sin cookies, carga al pulsar) sustituye al panel de ejemplo. El H1, el texto y los enlaces por sector no cambian.
+- **Orden:** portada, casos, formulario. Debajo van las fugas y el sistema, la demo, el alcance y las preguntas. En móvil el formulario empieza en la pantalla 4,3.
+- **Formulario: cambia de motor.**
+  - Antes: `assets/app.js` y `/api/lead`, con el corte por facturación de menos de 500k y la pantalla «todavía no».
+  - Ahora: el mismo de la landing de formación, `/diagnostico/landing.js` y `/api/diagnostico`, en tres pasos.
+    - **Paso 1:** empresa, web, sector, solicitudes al mes y ticket medio.
+    - **Paso 2:** contacto y «dónde se te escapa» (opcional).
+    - **Paso 3:** calendario.
+  - Con eso la home lleva las mismas etiquetas de encaje del funnel v2, el Lead del píxel y de la Conversions API, el primer WhatsApp y el correo de bienvenida que las landings de pago.
+  - Ya no se deja fuera a nadie por facturación.
+  - `form.js` ya no se usa.
+- **Precio junto al formulario:** «Trabajamos con proyectos que empiezan en 1.200 € + IVA». La pregunta del precio lo repite y ya no promete «por escrito», que no está confirmado.
+- **`?paso=agenda`:** agenda directa para quien ya ha dejado sus datos.
+- **Eventos:** `home_vsl_play` (VSLPlay), `home_agenda_abierta` (HomeAgenda) y `home_reserva` (HomeReserva), además de los `diagnostico_*` de `landing.js`.
+- **Probado** con API simuladas en escritorio y móvil:
+  - envío único y carga útil con las UTM completas;
+  - calendario, vídeo y agenda directa;
+  - sin errores.
+- **Decisión de Maikel:** el cambio de motor del formulario cuando esta versión pase a ser la home real (`/`).
