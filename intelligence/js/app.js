@@ -60,7 +60,7 @@
     return new Promise(function (ok, ko) {
       if (window.QV_SECTORES[id]) return ok(window.QV_SECTORES[id]);
       const s = document.createElement('script');
-      s.src = 'sectores/' + id + '.js?v=' + (window.QV_VERSION || '1');
+      s.src = 'sectores/' + id + '.js?v=' + (window.QV_VERSION || '20261013');
       s.onload = function () { window.QV_SECTORES[id] ? ok(window.QV_SECTORES[id]) : ko(new Error('sector vacío')); };
       s.onerror = function () { ko(new Error('no se pudo cargar el sector ' + id)); };
       document.head.appendChild(s);
