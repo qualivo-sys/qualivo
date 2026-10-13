@@ -84,9 +84,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
 .vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .vsl-play:hover img{transform:scale(1.02)}
-.vsl-btn{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:flex;align-items:center;justify-content:center;padding-left:4px;box-shadow:0 0 0 10px rgba(244,204,56,.28),0 14px 34px rgba(0,0,0,.35);transition:transform .16s ease}
-.vsl-play:hover .vsl-btn{transform:scale(1.07)}
-.vsl-dur{position:absolute;left:14px;bottom:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
+.vsl-play:hover{box-shadow:0 34px 90px rgba(16,19,25,.26)}
+.vsl-dur{position:absolute;right:14px;top:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
 .vsl-marco iframe,.vsl-marco video{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
 
@@ -291,12 +290,11 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     </div>
 
     <!-- VSL: portada y el reproductor se carga solo al pulsar (sin cookies ni peso antes del clic).
-         data-embed: URL de inserción de la plataforma (YouTube nocookie, Vimeo o Bunny), pendiente de Maikel. -->
-    <figure class="vsl" id="vsl" data-embed="">
+         data-embed: YouTube oculto en modo sin cookies (youtube-nocookie), solo se carga al pulsar. -->
+    <figure class="vsl" id="vsl" data-embed="https://www.youtube-nocookie.com/embed/WrWcO7SwYKY?rel=0&amp;playsinline=1">
       <button type="button" class="vsl-play" aria-label="Ver el vídeo (5:38): cómo convertimos más contactos en clientes">
-        <img src="img/vsl-portada.jpg" alt="Maikel Echevarría, fundador de Qualivo, explicando cómo convertir más contactos en clientes" width="1280" height="720" fetchpriority="high">
-        <span class="vsl-btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
-        <span class="vsl-dur" aria-hidden="true">▶ Ver vídeo · 5:38</span>
+        <img src="img/vsl-portada.jpg" alt="100 contactos… ¿y clientes? Vídeo de Qualivo de 5 minutos" width="1280" height="720" fetchpriority="high">
+        <span class="vsl-dur" aria-hidden="true">5:38</span>
       </button>
       <figcaption>Maikel, fundador de Qualivo, te cuenta en 5 minutos cómo lo hacemos. Con subtítulos.</figcaption>
     </figure>

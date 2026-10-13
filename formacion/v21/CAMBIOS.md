@@ -106,21 +106,21 @@
 5. **«Plan por escrito»** no aparece hasta que se confirme que se entrega.
 6. **El formulario y Raquel son reales** en la URL de vista previa. Si se usan, entra un lead o llama Raquel.
 
-## VSL en la portada (13-oct, sin publicar)
+## VSL en la portada (13-oct)
 
 - **Qué cambia:** el vídeo de Maikel (5:38, grabado en 4K el 12-oct) ocupa la columna derecha del hero. Sustituye al panel «Recorrido de un mes», cuyas cifras de ejemplo ya están en la franja de la demostración.
+- **Dónde se aloja:** en YouTube como oculto, «El sistema Qualivo». Se inserta con `youtube-nocookie.com/embed/WrWcO7SwYKY` (`data-embed` del `#vsl`).
 - **Cómo carga:**
-  - de entrada solo hay una portada de 95 KB (`img/vsl-portada.jpg`, sin el subtítulo quemado) y un botón de reproducir;
-  - el reproductor se carga al pulsar, así que antes del clic no hay cookies, ni peso, ni autoplay con sonido.
-- **Dónde se aloja:** en una plataforma de vídeo, con la URL de inserción en `data-embed` del `#vsl`. Para YouTube, usar `youtube-nocookie.com/embed/ID`.
+  - de entrada solo hay una portada de texto de 78 KB (`img/vsl-portada.jpg`, la misma miniatura que en YouTube) y la duración;
+  - el reproductor se carga al pulsar, así que antes del clic no hay ninguna petición a YouTube, ni cookies, ni autoplay con sonido.
+- **Probado** en escritorio y móvil, con YouTube simulado:
+  - ninguna petición a YouTube antes del clic;
+  - después del clic, iframe con autoplay y el evento `formacion_vsl_play`;
+  - sin errores y sin desbordamiento.
 - **Alternativa propia:** `data-mp4` sirve un MP4 propio. No se usa en Vercel por el tamaño.
-- **Eventos:**
-  - `formacion_vsl_play`;
-  - `formacion_vsl_fin`, que solo se mide con MP4 propio.
 - **Pendiente de Maikel:**
-  - la plataforma;
-  - el botón del final del vídeo;
-  - el ok para enseñar Intelligence con «Datos simulados».
+  - el destino del botón del final del vídeo. Propuesta: el formulario de esta página;
+  - el ok para enseñar Intelligence con «Datos simulados» (sale en el vídeo).
 
 ## Experimentos siguientes (uno cada vez, métrica principal: reunión cualificada celebrada)
 
