@@ -142,6 +142,33 @@
     },
 
     preguntas: [
+      // 13-oct-2026: prospección con señal para estudios de marca y agencias. Empresas reales con un
+      // motivo público en 2026 para revisar su marca, cada una con su noticia. Sin nombres de personas:
+      // el mensaje va al cargo y se localiza a la persona antes de escribir. Firma, caso y empresa
+      // salen del enlace de la demo (?firma=…&caso=…&empresa=…).
+      { q: '¿A qué cuentas nuevas deberíamos escribir esta semana?', h: 'prospeccion', obj: ['captacion', 'ventas', 'expansion', 'todo'], borradores: 4,
+        intro: 'Hay **7 empresas** que hoy no están en el CRM y han tenido este año un motivo real para revisar su marca: una fusión, un cambio de nombre, una salida a Bolsa o la entrada en un país nuevo. Cada señal lleva su noticia. **2 son prioridad alta.** No es mandar mil correos: es escribir a quien tiene el tema encima de la mesa.',
+        cuentas: [
+          { cuenta: 'Helios RE Socimi (antes Lar España)', tipo: 'socimi de centros comerciales', senal: 'Fusión con su matriz: pasa a operar con la nueva marca y tiene prevista una nueva identidad corporativa', canal: 'LinkedIn', prioridad: 'alta', a: 'Comunicación corporativa o Marketing',
+            fuente: 'https://www.alimarket.es/construccion/noticia/408705/lar-espana-aprueba-el-proyecto-de-fusion-con-su-matriz-y-pasara-a-llamarse-helios-re-socimi',
+            mensaje: 'Hola [Nombre], vi que tras la fusión Lar España pasa a operar como Helios RE Socimi y que tenéis prevista una nueva identidad corporativa. En un cambio así lo difícil no es el logo: es que inversores, operadores y los propios centros entiendan la marca nueva sin perder lo que valía la anterior. En {{empresa}} lo trabajamos en {{caso}}. ¿Tenéis ya definido quién lleva esa parte?\n\n{{firma}}' },
+          { cuenta: 'Moeve y Galp', tipo: 'energía y estaciones de servicio', senal: 'Exploran integrar su negocio de distribución en España y Portugal; mantendrán cada marca en sus estaciones', canal: 'Correo', prioridad: 'alta', a: 'Dirección de Marca',
+            fuente: 'https://www.vozpopuli.com/economia/energia/moeve-y-galp-mantendran-la-marca-en-sus-estaciones-de-servicio-para-separar-la-estrategia-comercial.html',
+            mensaje: 'Asunto: dos marcas, una plataforma\n\nHola [Nombre],\n\nleí que la integración con Galp mantendrá cada marca en sus estaciones. Cuando dos marcas conviven dentro de una misma plataforma, la arquitectura de marca decide qué se comparte y qué se separa, y conviene tenerla clara antes de que lo decidan los hechos.\n\n¿Es algo que estáis trabajando ya o llegará después del acuerdo?\n\n{{firma}}' },
+          { cuenta: 'Freixenet Iberia', tipo: 'vinos y cavas', senal: 'Su negocio en España pasa a llamarse Freixenet Iberia (ago. 2026); la marca de consumo se mantiene', canal: 'LinkedIn', prioridad: 'media', a: 'Comunicación corporativa',
+            fuente: 'https://www.vinetur.com/20260825106070/grupo-freixenet-pasa-a-llamarse-freixenet-iberia-en-espana.html',
+            mensaje: 'Hola [Nombre], vi el paso a Freixenet Iberia. Cuando cambia la marca corporativa y la de consumo se queda, suele hacer falta ordenar dónde aparece cada una: proveedores, canal, empleo, prensa. ¿Lo tenéis resuelto o es un tema abierto?\n\n{{firma}}' },
+          { cuenta: 'TSK', tipo: 'ingeniería e instalaciones', senal: 'Sale a Bolsa en 2026 con una oferta de unos 150 M€', canal: 'Correo', prioridad: 'media', a: 'Relación con inversores o Comunicación',
+            fuente: 'https://hlc.com/es/news/hogan-lovells-asesora-a-tsk-electronica-y-electricidad-en-su-salida-a-bolsa',
+            mensaje: 'Asunto: la marca después de salir a Bolsa\n\nHola [Nombre],\n\nenhorabuena por la salida a Bolsa. A partir de ahora la marca habla también con inversores y analistas, y no siempre la que funcionaba con clientes industriales sirve igual. ¿Os lo estáis planteando?\n\n{{firma}}' },
+          { cuenta: 'Digi Spain Telecom', tipo: 'telecomunicaciones', senal: 'Debuta en la Bolsa española a 5,60 € por acción, con una capitalización inicial de 1.662 M€ (jul. 2026)', canal: 'LinkedIn', prioridad: 'media', a: 'Marca o Comunicación corporativa',
+            fuente: 'https://www.bolsamania.com/noticias/empresas/economia-digi-debuta-este-jueves-en-la-bolsa-espanola-a-56-euros-por-accion-tras-registrar-una-fuerte-sobresuscripcion--23037396.html' },
+          { cuenta: 'Etidem', tipo: 'etiquetas textiles (Barcelona)', senal: 'Abre filial en Saarbrücken (Alemania) con apoyo de ACCIÓ', canal: 'Correo', prioridad: 'media', a: 'Gerencia',
+            fuente: 'https://capital-riesgo.es/es/articles/etidem-abre-una-nueva-filial-en-alemania-con-el-apoyo-de-acci-/' },
+          { cuenta: 'Concentrol', tipo: 'química (Girona)', senal: 'Inaugura filial en São Paulo; prevé que Sudamérica sea el 10–15 % de sus ventas internacionales en 2028', canal: 'Correo', prioridad: 'media', a: 'Dirección comercial o Gerencia',
+            fuente: 'https://capital-riesgo.es/es/articles/la-empresa-qu-mica-catalana-concentrol-con-el-apoyo-de-acci-inaugura-una-nueva-filial-en-brasil/' }
+        ],
+        cierre: 'Cada semana entran cuentas nuevas con señal. Intelligence prepara el primer mensaje y la persona decide si sale; nada se envía sin aprobación.' },
       { q: '¿Qué clientes están en riesgo de irse?', h: 'lista', obj: ['retencion', 'todo'],
         filtro: function (c) { return c.fin === 'ganado' && c.x.riesgo >= 40; }, orden: 'riesgo',
         intro: function (l, T, Mo) { return Mo.pl(l.length, 'cuenta está', 'cuentas están') + ' en riesgo. Suman ' + Mo.euros(l.reduce(function (a, c) { return a + c.valor; }, 0)) + ' de fee al año. Lo sabéis hoy, no el día que os mandan el correo de baja.'; },
