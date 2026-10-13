@@ -1,3 +1,5 @@
+> **Sustituido el 13-oct-2026 por el modelo medido (v3).** Esta propuesta puntuaba la inversión declarada al revés de los datos y sumaba el resultado (cita, entrevista). El modelo vigente y su falsificación están en `playbooks/cualificacion-leads/eleva-caso-practico.md`.
+
 # Lead scoring v2 · comportamiento + tipología (propuesta, datos reales 22-sep-2026)
 
 Muestra: 1.414 leads con trato · 23 matrículas. Tasas de matrícula por señal (dirección, no verdad absoluta: 23 ventas es poco).
