@@ -8,7 +8,7 @@
 
 - **Etapa del Revenue Journey:** cualificación.
 - **Datos reales:**
-  - **Daily de Growth del 5-oct** (`bus/out/demand.jsonl`): un contacto entró con la nota más alta, por inversión y volumen. En la reunión salió que lo que cobra por su servicio cambiaba toda la cuenta. Ya está publicado y anonimizado en `/blog/cuanto-invertir-en-publicidad/`.
+  - **Daily de Growth del 5-oct** (`bus/out/demand.jsonl`): un contacto tenía la nota más alta (A), por inversión y volumen. En la reunión salió lo que cobra por su servicio, y con ese dato la cuenta «le sale justa» (literal del daily). Ya está publicado y anonimizado en `/blog/cuanto-invertir-en-publicidad/`.
   - **Funnel v2** (bus del 8-oct, `api/_funnel-v2.js`): desde el 8-oct, los formularios de una prueba preguntan cuánto cobra la empresa por su servicio, en 4 tramos.
 - **Reglas:**
   - **R4:** la frase en primera persona es la que propone el brief (§3) y **necesita el ok de Maikel**. Sin ese ok, se usa la variante sin «mi».
@@ -16,6 +16,8 @@
   - **R3:** la prueba está en marcha. No se da ningún resultado.
   - **R10:** ni nuestro precio ni los tramos con cifras.
   - **R12:** primero lo que funcionó (la nota ordena), luego el fallo (le faltaba una pregunta).
+- **Cuándo:** el trato sigue abierto, con llamada el 15-oct. Recomendación: publicar después del 15-oct (R5).
+- **Master Reviewer (13-oct):** nota 7. Aplicados los 2 críticos («tuvimos», no «entró», y «había que rehacer la cuenta»).
 - **CTA:** conversación, con la pregunta del brief.
 - **Qué se mide:** comentarios de dueños o directores comerciales sobre qué le falta a su formulario.
 - **Enlaza con:** `/blog/cualificar-leads/?utm_source=linkedin&utm_medium=organic&utm_campaign=s42-cualificacion&utm_content=linkedin-a`, en un comentario y no en el post.
@@ -25,12 +27,12 @@
 > Mi formulario sabía cuánto invertía en anuncios. No sabía cuánto cobraba a
 > sus clientes.
 >
-> Hace poco entró un contacto con la nota más alta que da nuestro sistema.
+> Hace poco tuvimos un contacto con la nota más alta que da nuestro sistema.
 > Invertía en anuncios y le llegaban muchas peticiones. Todo cuadraba para
 > darle prioridad.
 >
 > En la reunión salió el dato que faltaba: lo que cobra por su servicio. Con
-> ese precio delante, la cuenta cambiaba entera.
+> ese dato delante, había que rehacer la cuenta.
 >
 > La nota acertó en lo que medía. Le faltaba una pregunta.
 >

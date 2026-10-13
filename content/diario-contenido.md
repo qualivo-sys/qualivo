@@ -1342,3 +1342,31 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 
 **Hipótesis para mañana:** el post de «la A que no era» funcionará mejor con dueños de servicios que con perfiles de marketing, porque habla de lo que cobran, no de anuncios. Se mide el viernes 16 con los comentarios de perfiles de dirección.
 
+
+### Martes 13-oct · trabajo del día (semana 42, cualificación)
+
+**Publicado:**
+- **[/blog/leads-que-solo-estan-mirando/](https://qualivo.io/blog/leads-que-solo-estan-mirando/), artículo nuevo.**
+  - **De qué va:** qué hacer con el contacto que dice «Más adelante, solo estoy mirando». Es una de las respuestas del formulario de la prueba del funnel v2.
+  - **Cómo cuenta el sistema:** la respuesta se apunta como una señal de poco encaje. Si se junta con otra, el primer mensaje no ofrece hora y cierra con una pregunta. Así lo hacen `api/_scoring.js` y `api/_agente.js`.
+  - **Pasos:** detectarlo, primero una pregunta y no una reunión, el contenido que sirve mientras tanto y una fecha para volver a escribirle.
+  - **Lo que no se da:** ningún resultado de la prueba (R3).
+- **Re-apunte de [/blog/que-es-un-lead/](https://qualivo.io/blog/que-es-un-lead/):** el último párrafo enlaza el artículo nuevo.
+- **Tarjeta del blog, sitemap, llms.txt y registro de keywords.**
+
+**Borrador de redes:** `content/borradores/2026-10-13-linkedin-a-la-a-que-no-era.md`. Es el LinkedIn A del brief de la semana 42 y ocupa el hueco «Sin humo» del martes. **No se publica** sin el OK de Maikel (R16).
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-13.md`): artículo 5, re-apunte 8 y LinkedIn 7. Aplicados todos los críticos. El importante: el artículo exageraba lo que hace el sistema. «Solo mirando» no basta por sí sola para que el primer mensaje deje de ofrecer hora, y `/gracias/` enseña el calendario a todos. Ahora el texto lo cuenta tal como funciona.
+
+**Descartado:** la newsletter. Vuelve en la semana 45.
+
+**Decisiones para Maikel:**
+1. **LinkedIn A.**
+   - ¿Suscribes la frase en primera persona del brief (R4)? Si no, hay una variante sin «mi».
+   - Recomendación: publicarlo después de la llamada del 15-oct, porque el trato sigue abierto (R5).
+2. **El funnel v2 y el modo sombra (para Growth).** El bus del 8-oct dice «no cambia ningún mensaje», pero el commit `df4f09d` hace que «solo mirando» entre en precualificar y el commit `c9de117` mete el dolor en el primer WhatsApp. Hay que alinear el bus con el código, o el código con el bus.
+3. **El texto del WA1 sigue diciendo «ponemos un agente de IA»,** contra el posicionamiento v2 (lo marcó Growth).
+4. **¿Pasan a producción `/formacion/v21/` e `/inicio/v2/`?** Las dos están subidas, ocultas y con noindex.
+5. **D4:** pasar la rutina diaria al modelo semanal del Content OS. Esta semana ya van dos piezas fuertes: cualificar-leads y la de hoy.
+
+**Hipótesis para mañana:** los contactos con «solo mirando» que reciben primero una pregunta contestarán más que si se les ofrece hora. Se mira con Growth el viernes 16 sin publicar tasas (R3). El miércoles toca bandera roja: la candidata es «un formulario que no pregunta para cuándo».
