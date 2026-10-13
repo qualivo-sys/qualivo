@@ -12,7 +12,12 @@
   var p1 = document.getElementById('p1'), p2 = document.getElementById('p2');
   var p3 = document.getElementById('p3'), p4 = document.getElementById('p4');
   var e1 = document.getElementById('e1'), e2 = document.getElementById('e2');
-  var datos = {};
+  // Id del evento Lead, el mismo en el píxel y en la Conversions API (el servidor lo recibe
+  // con el resto de datos). Aleatorio: antes era 'diag-' + email y el email llegaba a Meta en claro.
+  var datos = { evento_id: 'diag-' + (function () {
+    try { var a = new Uint8Array(10); crypto.getRandomValues(a); return Array.prototype.map.call(a, function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
+    catch (e) { return Date.now().toString(36) + Math.random().toString(36).slice(2, 10); }
+  })() };
 
   function ver(el) {
     [p1, p2, p3, p4].forEach(function (x) { x.hidden = x !== el; });
@@ -144,7 +149,7 @@
     enviar(false).then(function () {
       // El mismo identificador que usa el servidor en la Conversions API, para
       // que Meta deduplique en vez de contar el lead dos veces.
-      if (window.qvTrack) window.qvTrack('diagnostico_lead', { evento_id: 'diag-' + datos.email });
+      if (window.qvTrack) window.qvTrack('diagnostico_lead', { evento_id: datos.evento_id });
       f.dispatchEvent(new Event('qv:enviado'));
       calendario();
       ver(p3);
@@ -173,13 +178,29 @@
   }
 
   // Quien llega desde el lead form de Meta ya ha dejado sus datos: va directo
-  // al calendario (?paso=agenda). El nombre y el email se aceptan por URL si
-  // el formulario los pasa, pero no hacen falta.
+  // al calendario (?paso=agenda). 13-oct: los datos ya no viajan en la URL (acababan en
+  // registros, vistas previas de WhatsApp y referers). El enlace lleva un token corto
+  // (?c=…, api/_agenda-token.js) y la página pide los datos al servidor para rellenar el
+  // calendario. Sin token, la agenda sale vacía y la persona escribe sus datos.
   var q = new URLSearchParams(location.search);
   if (q.get('paso') === 'agenda') {
-    datos.nombre = q.get('nombre') || q.get('first_name') || '';
-    datos.email = q.get('email') || '';
-    datos.telefono = q.get('telefono') || q.get('phone') || '';
+    var token = q.get('c');
+    [p1, p2, p4].forEach(function (x) { x.hidden = true; });
+    p3.hidden = false;
+    if (token && /^[A-Za-z0-9]{10,40}\.[A-Za-z0-9_-]{8,40}$/.test(token)) {
+      fetch('/api/agenda-datos/?c=' + encodeURIComponent(token))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (r) { if (r && r.ok) agendaDirecta(r.nombre || '', r.email || '', r.telefono || ''); else agendaDirecta('', '', ''); })
+        .catch(function () { agendaDirecta('', '', ''); });
+    } else {
+      agendaDirecta('', '', '');
+    }
+  }
+
+  function agendaDirecta(nombre, email, telefono) {
+    datos.nombre = nombre;
+    datos.email = email;
+    datos.telefono = telefono;
     // Meta no sustituye variables en la URL del botón de su formulario: los
     // datos llegan vacíos salvo que el enlace venga de otro sitio (el WhatsApp
     // que sale al minuto, por ejemplo, que sí puede rellenarlos). Prometer

@@ -92,12 +92,19 @@ module.exports = async function handler(req, res) {
     // la misma que pone el formulario de Meta. La larga se queda por compatibilidad.
     const corto = require('./_tratos.js').sectorCorto(sector);
     if (corto && corto !== sector) etiquetas.push('sector-' + rotulo(corto));
-    if (inversion) etiquetas.push('inv-' + rotulo(inversion));
+    if (inversion && !/^no se pregunta/i.test(inversion)) etiquetas.push('inv-' + rotulo(inversion));
   }
   if (v2) v2.etiquetas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
   const utmSource = (utm.match(/utm_source=([^&]+)/) || [])[1];
-  const anuncioId = utmSource && /^meta|^facebook|^instagram|^ig$|^fb$/i.test(decodeURIComponent(utmSource)) && /^\d{8,}$/.test(String(utmContent || ''))
-    ? String(utmContent) : '';
+  // 13-oct: los anuncios nuevos de Paid llevan el id del anuncio en utm_id ({{ad.id}}) y la
+  // ubicación en utm_term ({{placement}}); utm_content se queda con el nombre del creativo.
+  const utmId = (utm.match(/utm_id=([^&]+)/) || [])[1];
+  const utmTerm = (utm.match(/utm_term=([^&]+)/) || [])[1];
+  if (utmTerm) etiquetas.push('ubicacion-' + rotulo(decodeURIComponent(utmTerm)));
+  const deMeta = utmSource && /^meta|^facebook|^instagram|^ig$|^fb$/i.test(decodeURIComponent(utmSource));
+  const anuncioId = deMeta && /^\d{8,}$/.test(String(utmId || '')) ? String(utmId)
+    : deMeta && /^\d{8,}$/.test(String(utmContent || '')) ? String(utmContent) : '';
+  if (anuncioId) etiquetas.push('anuncio-' + anuncioId);
 
   try {
     const upsertRes = await fetch(GHL_BASE + '/contacts/upsert', {
@@ -189,9 +196,13 @@ module.exports = async function handler(req, res) {
           nombre: nombre,
           contactId: contactId,
           // Mismo identificador que manda el navegador en landing.js, para que
-          // Meta deduplique el Lead en vez de contarlo dos veces.
-          eventoId: 'diag-' + email,
-          url: 'https://qualivo.io/diagnostico/',
+          // Meta deduplique el Lead en vez de contarlo dos veces. Desde el 13-oct es
+          // un id aleatorio que genera la página (antes era 'diag-' + email, y el email
+          // viajaba a Meta sin cifrar en un campo que no se cifra). Formularios viejos
+          // en caché: se cae a un resumen del email, nunca al email en claro.
+          eventoId: /^diag-[a-z0-9]{8,40}$/.test(String(b.evento_id || '')) ? String(b.evento_id)
+            : 'diag-' + require('crypto').createHash('sha256').update(email.toLowerCase()).digest('hex').slice(0, 24),
+          url: 'https://qualivo.io/' + (origen ? origen.replace(/^\/|\/$/g, '') + '/' : 'diagnostico/'),
           ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined,
           ua: req.headers['user-agent'],
           fbp: ck && ck.fbp,
