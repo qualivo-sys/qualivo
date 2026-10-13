@@ -198,7 +198,7 @@ window.setT=function(t){
     if(s.tipo==='ads2'){ const a=s.el.querySelectorAll('.ad'); const ua=nm(t,s.ta,s.ta+.5), ub=nm(t,s.tb,s.tb+.5);
       a[0].style.opacity=out(ua)*(1-.55*out(ub)); a[0].style.transform=`translateY(${(1-out(ua))*40}px) scale(${1-.08*out(ub)})`;
       a[1].style.opacity=out(ub); a[1].style.transform=`translateY(${(1-out(ub))*40}px) scale(${.96+.08*out(ub)})`; a[1].classList.toggle('on',t>=s.tb); }
-    if(s.tipo==='landing'){ show(s.el.querySelector('.nav'),nm(t,s.t0+.1,s.t0+.6),40); s.el.querySelector('.form').classList.toggle('on',t>=s.tf);
+    if(s.tipo==='landing'){ if(t>=s.t0&&t<s.t1) claro=true; show(s.el.querySelector('.nav'),nm(t,s.t0+.1,s.t0+.6),40); s.el.querySelector('.form').classList.toggle('on',t>=s.tf);
       s.el.querySelectorAll('.duda').forEach((d,i)=>show(d,nm(t,s.dudas[i].t,s.dudas[i].t+.4),20)); }
     if(s.tipo==='flujo') s.dots.forEach((o,i)=>{ const t0=s.t0+.4+i*.085, u=nm(t,t0,t0+1.1), lane=300+(i%8)*68; let x=150+u*810, y=lane, op=u>0?1:0, col='#55627E';
       if(o.pasa){ const v=nm(t,t0+1.1,t0+1.9); x=960+io(v)*600; y=lane+(330+o.ord*90-lane)*io(v); col=u>=1?'#27BDB1':col; }

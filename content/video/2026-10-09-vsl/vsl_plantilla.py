@@ -29,7 +29,9 @@ ZOOM_REG, ZOOM_K = (1760, 990, 130, 0), 1.15
 # Correcciones de la transcripción para los subtítulos
 ARREGLOS = {'Qualibo': 'Qualivo', 'Qualvo': 'Qualivo', 'Michael': 'Maikel', 'cuestan contacto': 'cuesta un contacto',
             'más lich': 'más leads', '1200 euros': '1.200 euros', 'trayendo las personas': 'atrayendo a las personas',
-            'contratarle': 'contratarte', 'lits': 'leads', 'lids': 'leads', 'Michel': 'Maikel'}
+            'contratarle': 'contratarte', 'lits': 'leads', 'lids': 'leads', 'Michel': 'Maikel',
+            'Y a ella cambia': 'Y ahí ya cambia', 'lo hemos leado': 'la hemos liado', 'atrae el perfil': 'atrae al perfil',
+            'entender que está fallando': 'entender qué está fallando'}
 
 NUM = {'uno': '1', 'dos': '2', 'tres': '3', 'cuatro': '4', 'cinco': '5', 'seis': '6', 'diez': '10', 'veinte': '20', 'cien': '100'}
 def norm(w):
