@@ -52,3 +52,5 @@ Requiere `GOOGLE_SA_B64` (la misma cuenta de servicio) añadida como **usuario**
 `netlify/functions/sync-stages.mjs` corre cada 10 min y recoloca los tratos cuya columna no coincide con sus etiquetas (8 reglas del proceso comercial, con salvaguardas: no toca *Alumna matriculada* ni *Baja*, no retrocede tratos avanzados). **Activo por defecto** (cada 5 min, 25 movimientos por pasada); `SYNC_APPLY=0` para dejarlo solo en simulación. Pasada manual completa: `/.netlify/functions/sync-stages-run?pw=<DASHBOARD_PASSWORD>&full=1&apply=1&max=40` (repetir hasta `remaining: 0`).
 
 `ILOCALIZABLE_DAYS` (por defecto 10): un lead en *Nuevo lead (IA)* con `calligence: llamar` y sin resultado tras esos días pasa a *Ilocalizable* (+ etiqueta). `0` lo desactiva.
+
+**Consumo de Netlify:** el motor corre cada 20 min con 60 s de presupuesto (`SYNC_WORKER_BUDGET_MS`, `SYNC_WORKER_MAX`). Cada 5 min con 4 min agotaba las 100 h/mes del plan gratuito y el sitio devolvía `usage_exceeded` (panel y motor caídos hasta el nuevo ciclo o hasta subir de plan).
