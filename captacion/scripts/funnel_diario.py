@@ -103,8 +103,26 @@ def email_frio():
             n.update(k)
         dep = ""
         if c["status"] == "ACTIVE":
-            a = req(f"https://server.smartlead.ai/api/v1/campaigns/{c['id']}/analytics?api_key={KEY}")
-            dep = int((a.get("campaign_lead_stats") or {}).get("notStarted") or 0)
+            # De donde sale el deposito.
+            #
+            # Hasta el 13-oct-2026 esto leia campaign_lead_stats.notStarted del
+            # endpoint /analytics, y SIEMPRE devolvia 0. Comprobado hoy en la
+            # campana 4042994: el endpoint dice notStarted 0 e inprogress 33,
+            # mientras que recorriendo /leads salen 27 INPROGRESS y 6 STARTED.
+            # Es decir, /analytics mete los STARTED dentro de inprogress y deja
+            # notStarted a cero para siempre. El informe del 12-oct dio "deposito
+            # a cero" como titular por culpa de esto: no era un hallazgo, era el
+            # campo equivocado.
+            #
+            # El deposito de verdad son los STARTED: cargados y todavia sin
+            # primer envio. Hay que contarlos lead a lead.
+            dep = 0; off2 = 0
+            while off2 <= 20000:
+                pl = req(f"https://server.smartlead.ai/api/v1/campaigns/{c['id']}/leads?api_key={KEY}&offset={off2}&limit=100")
+                filas = (pl or {}).get("data") or []
+                if not filas: break
+                dep += sum(1 for x in filas if (x.get("status") or "").upper() == "STARTED")
+                off2 += 100
             # El deposito que se vigila es el NUESTRO. El de un cliente no nos
             # da ni un dia mas de envio y falsea la alerta de los 40 leads.
             if not es_cliente(c.get("name")):
