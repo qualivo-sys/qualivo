@@ -121,8 +121,12 @@ function esV2(campos) {
 }
 
 // Devuelve { etiquetas, nota, volumenLegado } o null si no es un formulario nuevo.
-function desdeCampos(campos) {
-  if (!esV2(campos)) return null;
+// opciones.landing (13-oct): landings propias (/api/diagnostico) que hacen solo las dos
+// preguntas de tamaño (solicitudes y ticket). No traen «quién decide», así que no pasan
+// esV2; se marcan igual para poder compararlas con el formulario nativo por etiqueta.
+function desdeCampos(campos, opciones) {
+  const landing = !!(opciones && opciones.landing);
+  if (landing ? process.env.FUNNEL_V2 === '0' : !esV2(campos)) return null;
   const vol = tramoVolumen(campo(campos, CLAVES.volumen));
   const tic = tramoTicket(campo(campos, CLAVES.ticket));
   const dec = decisor(campo(campos, CLAVES.decisor));
@@ -157,7 +161,10 @@ function desdeCampos(campos) {
   if (dec === 'otro') etiquetas.push('pedir-decisor');
   if (abierta) etiquetas.push('cuentanos-si');
 
-  const nota = ['Formulario del funnel v2 (modo sombra: solo etiquetas, la cadencia no cambia)', '',
+  if (landing) etiquetas.push('funnel-v2-landing');
+
+  const nota = [landing ? 'Landing con las preguntas de tamaño del funnel v2 (solicitudes y ticket; solo etiquetas)'
+    : 'Formulario del funnel v2 (modo sombra: solo etiquetas, la cadencia no cambia)', '',
     vol ? 'Solicitudes al mes: tramo ' + vol + ' de 5' : '',
     tic ? 'Ticket medio: tramo ' + tic + ' de 4' : '',
     dec ? 'Quién decide: ' + dec : '',

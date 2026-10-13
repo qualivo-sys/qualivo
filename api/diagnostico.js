@@ -36,6 +36,14 @@ module.exports = async function handler(req, res) {
   const telefono = String(b.telefono || '').trim().slice(0, 40);
   const hipotesis = String(b.hipotesis || '').trim().slice(0, 1200);
   const utm = String(b.utm || '').trim().slice(0, 400);
+  // Preguntas de tamaño del funnel v2 (13-oct, /formacion/v21/): solo las mandan las
+  // landings que las hacen. Con ellas el contacto lleva las mismas etiquetas de encaje
+  // (vol-*, ticket-*, fit-*) que el formulario nativo y se puede comparar con él.
+  const solicitudes = String(b.solicitudes || '').trim().slice(0, 60);
+  const ticket = String(b.ticket || '').trim().slice(0, 60);
+  const v2 = (solicitudes || ticket) ? require('./_funnel-v2.js').desdeCampos([
+    { name: 'solicitudes', values: [solicitudes] }, { name: 'ticket', values: [ticket] }
+  ], { landing: true }) : null;
   // Que pagina lo ha traido. Sin esto, un lead de /reformas/ y uno del anuncio
   // de Meta entran en el CRM exactamente iguales y no se puede medir si una
   // landing de sector vale la pena. Se cae al Referer por si el navegador no
@@ -86,6 +94,7 @@ module.exports = async function handler(req, res) {
     if (corto && corto !== sector) etiquetas.push('sector-' + rotulo(corto));
     if (inversion) etiquetas.push('inv-' + rotulo(inversion));
   }
+  if (v2) v2.etiquetas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
   const utmSource = (utm.match(/utm_source=([^&]+)/) || [])[1];
   const anuncioId = utmSource && /^meta|^facebook|^instagram|^ig$|^fb$/i.test(decodeURIComponent(utmSource)) && /^\d{8,}$/.test(String(utmContent || ''))
     ? String(utmContent) : '';
@@ -136,10 +145,13 @@ module.exports = async function handler(req, res) {
         'Equipo: ' + equipo,
         'Inversión mensual en captación: ' + inversion,
         'Web: ' + web,
+        solicitudes ? 'Solicitudes al mes: ' + solicitudes : '',
+        ticket ? 'Lo que paga de media un alumno/cliente: ' + ticket : '',
         'Cualificado: ' + (cualificado ? 'sí' : 'no (por tamaño o inversión)'),
         utm ? 'Origen: ' + utm : '',
         '',
         hipotesis ? 'Dónde cree él que se está perdiendo:\n' + hipotesis : '',
+        v2 ? '\n' + v2.nota : '',
         '',
         new Date().toISOString()
       ].filter(Boolean).join('\n');
@@ -197,7 +209,7 @@ module.exports = async function handler(req, res) {
       try {
         const act = require('./_activacion.js');
         const msg = require('./_mensajes.js');
-        await act.primerWhatsAppCompleto(contactId, telefono, { nombre: nombre, hipotesis: hipotesis ? String(hipotesis).slice(0, 220) : '', sector: sector, inversion: inversion, origen: 'landing' });
+        await act.primerWhatsAppCompleto(contactId, telefono, { nombre: nombre, hipotesis: hipotesis ? String(hipotesis).slice(0, 220) : '', sector: sector, inversion: inversion, volumen: solicitudes || undefined, origen: 'landing' });
       } catch (err) {
         console.error('[diagnostico] primer WhatsApp no salió:', err && err.message);
       }

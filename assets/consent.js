@@ -61,7 +61,12 @@
     diagnostico_paso1: ['trackCustom', 'DiagnosticoPaso1'],
     diagnostico_lead: ['track', 'Lead'],
     diagnostico_leadform_agenda: ['trackCustom', 'DiagnosticoAgenda'],
-    diagnostico_whatsapp: ['trackCustom', 'DiagnosticoWhatsApp']
+    diagnostico_whatsapp: ['trackCustom', 'DiagnosticoWhatsApp'],
+    // Landing de formación (13-oct). La reserva va como evento propio, no como Schedule: el Schedule
+    // estándar lo manda el servidor al entrar la cita (api/_cita.js) y con otro id contaría dos veces.
+    formacion_vsl_play: ['trackCustom', 'VSLPlay'],
+    formacion_agenda_abierta: ['trackCustom', 'FormacionAgenda'],
+    formacion_reserva: ['trackCustom', 'FormacionReserva']
   };
 
   // Helper de eventos: siempre llamable; solo llega a GA y a Meta si hubo

@@ -122,6 +122,40 @@
   - el destino del botón del final del vídeo. Propuesta: el formulario de esta página;
   - el ok para enseñar Intelligence con «Datos simulados» (sale en el vídeo).
 
+## Versión para tráfico de pago (13-oct, revisión antes de invertir)
+
+1. **Fuera lo de borrador.**
+   - Sin la barra amarilla.
+   - Los dos campos ocultos ya no dicen «No preguntado (formación v2.1)» sino «No se pregunta en esta landing». Era lo que llegaba al CRM, al aviso y al primer WhatsApp.
+2. **Preguntas de tamaño del funnel v2 en el paso 1:** solicitudes al mes (5 tramos) y precio medio de un curso (4 tramos), con los mismos tramos que el formulario nativo.
+   - `landing.js` las manda si la página las tiene. Las demás landings no cambian.
+   - `api/diagnostico.js` pasa por `_funnel-v2.js` (`desdeCampos(..., { landing: true })`) y pone las mismas etiquetas que el nativo (`funnel-v2`, `vol-*`, `vol2-*`, `ticket-*`, `fit-paid-*` y `fit-dinero-*`), más `funnel-v2-landing`.
+   - La nota del CRM lleva los dos tramos y su clasificación. El primer WhatsApp recibe las solicitudes al mes.
+   - `FUNNEL_V2=0` también lo apaga aquí.
+3. **Más corta para tráfico frío.** Orden: portada con VSL, casos, formulario. Debajo van el sistema, la demo con el panel y Raquel, el alcance y las preguntas. En móvil el formulario empieza en la pantalla 3,8 (antes, unas 8).
+4. **Precio junto al formulario:** «Trabajamos con proyectos que empiezan en 1.200 € + IVA. El diagnóstico no tiene coste.» Es el mismo texto que la variante A de `/gracias/`. La pregunta frecuente del presupuesto lo repite.
+5. **Casos.** EAC lleva fuente: medido en el CRM del centro, del anuncio a la matrícula, en un mes de campaña. **Pendiente:**
+   - el mes exacto de EAC;
+   - el periodo y la fuente de Nail Boss, que no constan en el repo.
+   Los logos se quedan (decisión de Maikel).
+6. **Medición:**
+   - **Lead del píxel** al enviar el paso 2 (`diagnostico_lead`, con el mismo id que la Conversions API).
+   - **Reserva:** el `Schedule` estándar lo manda el servidor al entrar la cita (`api/_cita.js`). En el navegador van como eventos propios, para no contarla dos veces: `FormacionAgenda`, `FormacionReserva` y `VSLPlay`.
+   - **UTM completas:** en la nota del CRM («Origen: …»), con las etiquetas `pagina-formacion-v21` y `creativo-*`.
+7. **Velocidad:** Lighthouse en móvil, en local, da 94 (LCP 2,4 s, CLS 0, TBT 190 ms). Conviene repetirlo en PageSpeed con la URL pública.
+
+**Variante sin formulario** (`?paso=agenda`) para quien ya lo ha rellenado:
+- Muestra el VSL, los casos, Raquel y el calendario directo, con el progreso en el paso 3 y los botones en «Elige tu hora».
+- Acepta `nombre`, `email` y `telefono` por URL para rellenar el calendario.
+- No crea ningún lead.
+- Es para el WhatsApp de confirmación y para el segundo mensaje a quien no ha reservado. Ejemplo: `/formacion/v21/?paso=agenda&nombre=…&email=…&telefono=…&utm_source=whatsapp`.
+
+**Probado** con las API simuladas, sin CRM:
+- envío único y carga útil correcta;
+- etiquetas en el servidor con datos grandes y pequeños, y con el interruptor apagado;
+- `/diagnostico/` sin cambios;
+- sin errores en escritorio ni en móvil.
+
 ## Experimentos siguientes (uno cada vez, métrica principal: reunión cualificada celebrada)
 
 - **A. CTA del hero:** «Descubre cómo captar más alumnos» frente a «Descubre tu plan de captación» (la V2).

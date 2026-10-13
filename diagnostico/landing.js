@@ -102,6 +102,10 @@
     datos.equipo = f.elements.equipo.options[f.elements.equipo.selectedIndex].text;
     datos.inversion = f.elements.inversion.options[f.elements.inversion.selectedIndex].text;
     datos.web = f.elements.web.value.trim();
+    // Preguntas de tamaño del funnel v2: solo las tienen algunas páginas (/formacion/v21/).
+    ['solicitudes', 'ticket'].forEach(function (n) {
+      if (f.elements[n] && f.elements[n].value) datos[n] = f.elements[n].value;
+    });
     datos.cualificado = cualifica();
 
     if (window.qvTrack) window.qvTrack('diagnostico_paso1', { cualificado: datos.cualificado });
@@ -134,6 +138,7 @@
     datos.hipotesis = f.elements.hipotesis.value.trim();
 
     var b = document.getElementById('b2');
+    var textoB = b.innerHTML;
     b.disabled = true; b.textContent = 'Un segundo…';
 
     enviar(false).then(function () {
@@ -144,7 +149,7 @@
       calendario();
       ver(p3);
     }).catch(function () {
-      b.disabled = false; b.textContent = 'Quiero ver dónde está la fuga →';
+      b.disabled = false; b.innerHTML = textoB;
       error(e2, 'No ha salido. Escríbeme a hola@qualivo.io y lo vemos.');
     });
   });
