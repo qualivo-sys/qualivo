@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    { "source": "/api/data", "headers": [{ "key": "cache-control", "value": "no-store" }] }
+  ]
+}
