@@ -26,6 +26,32 @@ import json
 import subprocess
 import sys
 
+import html as _html
+import re as _re
+
+
+def texto_plano(cuerpo, tope=600):
+    """Deja el texto legible de un correo, no sus etiquetas.
+
+    Esto estaba mal hasta el 14-oct-2026. Se guardaba
+    " ".join(str(cuerpo).split())[:300], es decir se cortaba el HTML CRUDO a
+    300 caracteres. En los correos hechos con tablas (los avisos de entrega de
+    Gmail, por ejemplo) los primeros 300 caracteres son todos <html><head>
+    <style><table>, asi que el contenido de verdad no se veia NUNCA.
+
+    Lo descubri leyendo a mano el hilo de Service Design College: el servidor
+    habia rechazado el correo con "550 A URL in this email (goqualivo.com) is
+    listed on https://www.surbl.org/lists" y en el volcado solo se veia "<td".
+    Un rechazo por lista negra escondido detras de una etiqueta.
+    """
+    t = _re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", str(cuerpo or ""),
+                flags=_re.S | _re.I)
+    t = _re.sub(r"<br\s*/?>|</p>|</div>|</tr>|</td>", " ", t, flags=_re.I)
+    t = _re.sub(r"<[^>]+>", " ", t)
+    t = _html.unescape(t)
+    return " ".join(t.split())[:tope]
+
+
 API = "https://server.smartlead.ai/api/v1"
 UA = ["-H", "User-Agent: Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/120 Safari/537.36"]
 
@@ -174,7 +200,7 @@ def main():
                     "horas_esperando": round(esperando, 1),
                     "dias_esperando": round(esperando / 24.0, 1),
                     "ultimo_asunto": asunto[:120],
-                    "lo_que_dijo": " ".join(str(cuerpo).split())[:300],
+                    "lo_que_dijo": texto_plano(cuerpo, 600),
                 })
             off += 100
 
