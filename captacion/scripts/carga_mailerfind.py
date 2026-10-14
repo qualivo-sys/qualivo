@@ -42,10 +42,12 @@ CTA = "¿Te va bien esta semana?"
 FUGA = {
     "formacion": "quién persigue al que pide información y no se matricula",
     "servicios": "quién persigue al que pide presupuesto y no cierra",
+    "clinica": "quién persigue al que pide precio y no coge cita",
 }
 CIERRE = {
     "formacion": "cuántas solicitudes de información se quedan sin cerrar",
     "servicios": "cuántos presupuestos se quedan por el camino",
+    "clinica": "cuántas consultas de precio se quedan sin cita",
 }
 CASO = {
     "formacion": ("Nuria Roure ya tenía captación y ya tenía alumnos entrando. Su problema "
@@ -55,12 +57,17 @@ CASO = {
     "servicios": ("Un cliente nuestro tenía el CRM lleno y nadie lo miraba. Al ordenar el "
                   "seguimiento aparecieron 25 oportunidades paradas por 34.500 euros, sin "
                   "captar un contacto nuevo."),
+    "clinica": ("La Escola Aeronàutica de Catalunya invertía en Meta, Google y TikTok sin "
+                "saber qué acababa en matrícula. Conectamos cada euro con la matrícula "
+                "final: por cada euro invertido, unos diez de vuelta."),
 }
 
 # De la senal verificada a la frase que la afirma. El orden importa: se usa la
 # primera que aparezca, de mas fuerte a mas debil.
-ORDEN = ["hubspot", "zoho", "salesforce", "pipedrive", "meta", "ads", "ga4", "gtm"]
+ORDEN = ["multicentro", "hubspot", "zoho", "salesforce", "pipedrive", "meta", "ads",
+         "ga4", "gtm"]
 FRASE = {
+    "multicentro": "tenéis tres centros",
     "hubspot": "lleváis HubSpot",
     "zoho": "lleváis Zoho",
     "salesforce": "lleváis Salesforce",
@@ -71,6 +78,7 @@ FRASE = {
     "gtm": "tenéis Google Tag Manager instalado",
 }
 ASUNTO = {
+    "multicentro": "vuestros tres centros",
     "hubspot": "vuestro HubSpot", "zoho": "vuestro Zoho",
     "salesforce": "vuestro Salesforce", "pipedrive": "vuestro Pipedrive",
     "meta": "vuestros anuncios", "ads": "vuestros anuncios",
@@ -78,6 +86,7 @@ ASUNTO = {
 }
 # Por que esa senal me hace pensar que hay margen. Es el latido 2 de V3.
 DUDA = {
+    "multicentro": "Con tres sitios distintos,",
     "hubspot": "Con el CRM montado,", "zoho": "Con el CRM montado,",
     "salesforce": "Con el CRM montado,", "pipedrive": "Con el CRM montado,",
     "meta": "Si pagáis por cada contacto,", "ads": "Si pagáis por cada contacto,",
