@@ -1382,15 +1382,18 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 
 **Borrador de redes:** `content/borradores/2026-10-14-linkedin-b-dos-notas.md`, el LinkedIn B del brief («dos notas en vez de una»). Ocupa el hueco de la bandera roja del miércoles. **No se publica** sin el OK de Maikel (R16).
 
-**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-14.md`): en curso. Sus críticos van en un segundo commit.
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-14.md`): re-apunte 7 y LinkedIn B 5. Aplicados todos los críticos. Lo importante: el post contaba la B, la C y la D como no las trata el código. La B no tiene cadencia propia (el reenganche está apagado): si no contesta, le llama Raquel. La C se precualifica. La D no se guarda «para más adelante». Además, la caja del caso EAC del artículo iba con nombre y cifras sin fila en `content/casos-permisos.md`, y ahora va anonimizada.
 
 **Descartado:**
 - **Artículo nuevo (A).** El Content OS pone una pieza fuerte por semana, y la semana 42 ya lleva dos: la actualización de cualificar-leads y leads-que-solo-estan-mirando. Una tercera competiría con ellas.
 - **Newsletter (D).** El brief la deja fuera hasta la semana 45.
 
 **Decisiones para Maikel:**
-1. **Orden de los posts A y B.** Recomendación: publicar el B el jueves 15 y el A después de la llamada del 15. El B no depende de ningún trato abierto.
+1. **Orden de los posts A y B.** Recomendación: el B primero, en cuanto le des el ok; el A, después de la llamada del 15. El B no depende de ningún trato abierto.
+   - Para la A del post B, «Me llega un aviso y le llamo yo» es más exacto si confirmas que llamas tú (R4).
 2. **D4: pasar la rutina diaria al modelo semanal del Content OS.** Recomendación: sí. La rutina pide un artículo al día, y el Content OS y el brief dicen otra cosa. Dos días esta semana he tenido que descartar el artículo con la regla en la mano.
-3. **Guion del vídeo 5** (pieza 5 del brief, la ficha de un contacto con sus dos notas). Te lo paso mañana jueves, como dice el brief. Necesita 45 segundos de tu voz.
+3. **Permisos de casos.** `content/casos-permisos.md` no tiene la fila de EAC, pero sus cifras salen en las landings de formación y en el blog. Recomendación: apunta el permiso de EAC (o dime que no lo hay y las quito del blog).
+4. **«Plan por escrito en 24 horas».** Sigue en 13 artículos y en `/diagnostico/`. Recomendación: confírmalo o lo quito de todos de una vez.
+5. **Guion del vídeo 5** (pieza 5 del brief, la ficha de un contacto con sus dos notas). Te lo paso mañana jueves, como dice el brief. Necesita 45 segundos de tu voz.
 
 **Hipótesis para mañana:** el carrusel «Lo que tu formulario pregunta y lo que debería preguntar» funcionará mejor en LinkedIn como documento que en Instagram, porque lo comparte quien lleva el formulario y no quien lo rellena. Se mira el viernes 16 con los comentarios de perfiles de dirección.
