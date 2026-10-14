@@ -214,6 +214,14 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 #qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font:700 14px var(--display);cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
 #qv-cookies #qv-ck-si{background:var(--verde-claro);border-color:var(--verde-claro);color:#04231F}
 .corto{display:none}
+/* WhatsApp: botón flotante, como en el resto de landings. En móvil sube cuando aparece la barra fija. */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;background:#25D366;color:#fff;font:800 15px var(--display);text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.22);transition:transform .16s ease,bottom .25s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:26px;height:26px;flex-shrink:0}
+.wa-linea{margin-top:16px;font-size:14.5px;color:var(--gris)}
+.wa-linea a{color:var(--verde);font-weight:800}
+@media(max-width:760px){.wa{padding:0;width:56px;height:56px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}body.fijo-on .wa{bottom:84px}}
+
 
 @media(max-width:520px){.dos{grid-template-columns:1fr}}
 .fuente{margin-top:14px;font-size:13px;color:var(--gris-claro);font-weight:600;max-width:80ch}
@@ -393,6 +401,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
           <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
           <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
         </div>
+        <p class="wa-linea">¿Prefieres escribir? <a href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20formaci%C3%B3n%20y%20tengo%20una%20pregunta%20sobre%20mi%20centro." target="_blank" rel="noopener" data-wa="linea">Háblanos por WhatsApp</a>.</p>
       </div>
 
       <div class="caja-f">
@@ -600,6 +609,10 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </footer>
 
+<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20formaci%C3%B3n%20y%20tengo%20una%20pregunta%20sobre%20mi%20centro." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" data-wa="flotante">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 0 1 5.3 16C5.3 10.1 10.1 5.3 16 5.3S26.7 10.1 26.7 16 21.9 26.7 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  <span>WhatsApp</span>
+</a>
 <div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
 
 <script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=formacion");}</script>
@@ -616,6 +629,9 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   }
   function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
     new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
+
+  /* WhatsApp: mismo evento que el resto de landings (DiagnosticoWhatsApp en el píxel) */
+  document.querySelectorAll('[data-wa]').forEach(function(a){ a.addEventListener('click',function(){ track('diagnostico_whatsapp',{ubicacion:a.getAttribute('data-wa'),pagina:'formacion-v21'}); }); });
 
   /* CTA: navegación, no lead */
   document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track('formacion_cta',{ubicacion:a.getAttribute('data-cta'),version:'v2.1'}); }); });
@@ -714,7 +730,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   /* CTA fijo en móvil */
   var fijo=document.getElementById('fijo'), fin=document.getElementById('diagnostico');
   if('IntersectionObserver' in window){
-    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
+    var a=true,b=false; function pinta(){ var on=!a&&!b; fijo.classList.toggle('on',on); document.body.classList.toggle('fijo-on',on); }
     new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
     new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
   }
