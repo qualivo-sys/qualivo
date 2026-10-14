@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>HOCO · landings por tienda (maqueta)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
+<style>
+:root{--or:#fa720a;--or-dk:#d85f00;--ink:#1f2124;--muted:#5d636b;--line:#e6e4df;--soft:#f4f4f2}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:17px/1.55 "Nunito",system-ui,sans-serif}
+.wrap{width:min(1000px,100% - 32px);margin-inline:auto;padding:36px 0 60px}
+.maqueta{background:#111;color:#cfcfcf;font-size:12.5px;text-align:center;padding:6px 12px}
+img.logo{height:52px;width:auto}
+h1{font-size:clamp(28px,4vw,40px);font-weight:900;line-height:1.12;margin:22px 0 10px}
+h2{font-size:22px;font-weight:900;margin:40px 0 12px}
+p{margin:0}
+.lead{color:var(--muted);font-size:18.5px;max-width:64ch}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.card{display:flex;flex-direction:column;gap:6px;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--or);transform:translateY(-2px)}
+.card b{font-size:22px;font-weight:900}
+.card span{font-size:14.5px;color:var(--muted)}
+.card i{font-style:normal;margin-top:auto;padding-top:10px;font-weight:800;color:var(--or-dk)}
+ul{margin:0;padding-left:20px;display:grid;gap:8px}
+li b{color:var(--ink)}
+.pend{background:var(--soft);border-radius:16px;padding:18px 22px}
+@media (max-width:820px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="maqueta">Maqueta de Qualivo para HOCO · páginas de ejemplo, no indexadas · los formularios no envían datos</div>
+<div class="wrap">
+  <img class="logo" src="assets/logo.png" alt="HOCO · Son mis ventanas" width="260" height="100">
+  <h1>Una landing por tienda, pensada para convertir</h1>
+  <p class="lead">Misma base para las cuatro tiendas: el mensaje, el barrio y el teléfono cambian según la ciudad. Cada anuncio lleva a la landing de su tienda y cada contacto entra en Dynamics asignado a esa tienda.</p>
+
+  <div class="grid">
+    <a class="card" href="madrid/"><b>Madrid</b><span>Calle Cartagena, 6</span><span>Ángulo: ruido de la calle y frío en fincas antiguas</span><i>Ver landing →</i></a>
+    <a class="card" href="valencia/"><b>Valencia</b><span>C/ Valle de la Ballestera, 26</span><span>Ángulo: fabricadas en Bocairent, calor y humedad</span><i>Ver landing →</i></a>
+    <a class="card" href="murcia/"><b>Murcia</b><span>Av. Infante Juan Manuel, 7</span><span>Ángulo: calor y aire acondicionado</span><i>Ver landing →</i></a>
+    <a class="card" href="alicante/"><b>Alicante</b><span>C. Alfonso Guixot Guixot, 5</span><span>Ángulo: sol, calor y ruido (Alicante + Elche)</span><i>Ver landing →</i></a>
+  </div>
+
+  <h2>Qué hace que conviertan</h2>
+  <ul>
+    <li><b>La oferta está arriba del todo:</b> el Plan Renove de 150 € por ventana aparece en la barra superior, en el titular y en el formulario.</li>
+    <li><b>El formulario empieza con una pregunta fácil:</b> «¿Cuántas ventanas te gustaría cambiar?». Con cada ventana el descuento sube en directo, y solo después pide nombre, teléfono, población y email.</li>
+    <li><b>Mensaje de su ciudad:</b> el titular habla del problema que más se repite en cada zona y nombra los barrios cercanos a la tienda.</li>
+    <li><b>Se puede llamar desde cualquier punto:</b> el teléfono de la tienda está en la cabecera, en la sección de la promo, en la tienda, en el cierre y en la barra fija del móvil.</li>
+    <li><b>Confianza de fabricante:</b> fábrica propia, garantía de 10 años, instalación en un día y sin obras, sellos de calidad y la tienda física con su mapa.</li>
+    <li><b>Medible por tienda:</b> cada clic y cada contacto se registra con la tienda y el número de ventanas, para ver el coste por entrada de cada una.</li>
+  </ul>
+
+  <h2>Pendiente de HOCO antes de publicar</h2>
+  <div class="pend"><ul>
+    <li>Condiciones y fecha de fin del Plan Renove (las landings dicen «consulta condiciones»).</li>
+    <li>Tres reseñas reales de Google por tienda (ahora hay huecos marcados).</li>
+    <li>Fotos reales de cada tienda y de su equipo, y de instalaciones en la zona.</li>
+    <li>Validar los textos técnicos (control solar, acústica, rotura de puente térmico) y los barrios de cada tienda.</li>
+    <li>Conexión del formulario con Dynamics 365 y la política de privacidad.</li>
+  </ul></div>
+</div>
+</body>
+</html>
