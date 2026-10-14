@@ -27,6 +27,7 @@
 
 | Fecha | Artículo | Qué cambió |
 |---|---|---|
+| 2026-10-14 | `/blog/coste-por-lead/` | «Qué hacemos nosotros con esto»: añade los formularios de una prueba desde el 8-oct (solicitudes al mes y lo que paga de media un cliente, con marca de encaje) y el coste por contacto que encaja, con enlace a `/blog/cualificar-leads/`. Cierre: «y cuántos de tus contactos encajan». Caja final sin «Plan por escrito en 24 horas» (no confirmado). Un solo botón a `/diagnostico/`, sin cambios |
 | 2026-10-13 | `/blog/que-es-un-lead/` | Último párrafo («Antes de pedir más leads»): una frase con enlace al artículo de hoy (separar a quien tiene prisa de quien solo está mirando). Cierre con un solo botón, sin cambios |
 | 2026-10-12 | `/blog/cualificar-leads/` (actualización fuerte, pieza 1 del brief de la semana 42) | Nueva sección «Lo que el formulario no ve» con el caso del 5-oct anonimizado (sin sector, precio ni fecha) y la pregunta de ticket en cuatro tramos del formulario v2 desde el 8-oct (solo marca, resultado cuando acabe la prueba). El paso 1 añade el precio de lo que vende el cliente. FAQ nueva «¿Cuántas preguntas debe tener un formulario?» sin cifra. Un enlace más en «Sigue leyendo» |
 | 2026-10-12 | `/blog/formulario-de-facebook-o-landing-page/` | Primer párrafo de «Qué hacemos nosotros con esto» sustituido por la prueba del formulario v2 desde el 8-oct (solicitudes, ticket, quién decide, momento) con enlace a `/blog/cualificar-leads/`; sale «ponemos agentes de IA en el punto donde se pierden» (R2). Cierre con un solo botón, sin cambios |

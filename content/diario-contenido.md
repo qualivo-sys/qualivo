@@ -1370,3 +1370,27 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 5. **D4:** pasar la rutina diaria al modelo semanal del Content OS. Esta semana ya van dos piezas fuertes: cualificar-leads y la de hoy.
 
 **Hipótesis para mañana:** los contactos con «solo mirando» que reciben primero una pregunta contestarán más que si se les ofrece hora. Se mira con Growth el viernes 16 sin publicar tasas (R3). El miércoles toca bandera roja: la candidata es «un formulario que no pregunta para cuándo».
+
+### Miércoles 14-oct · trabajo del día (semana 42, cualificación)
+
+**Publicado:**
+- **Re-apunte de [/blog/coste-por-lead/](https://qualivo.io/blog/coste-por-lead/).**
+  - Los dos últimos párrafos cuentan que los formularios de una prueba preguntan, desde el 8-oct, las solicitudes al mes y lo que paga de media un cliente. Con eso se puede comparar el coste de un contacto que encaja, no solo el de un contacto.
+  - Enlaza a `/blog/cualificar-leads/`, que es la pieza 1 del brief.
+  - La caja final ya no promete «Plan por escrito en 24 horas», que no está confirmado.
+  - Actualizados el sitemap y el registro de keywords.
+
+**Borrador de redes:** `content/borradores/2026-10-14-linkedin-b-dos-notas.md`, el LinkedIn B del brief («dos notas en vez de una»). Ocupa el hueco de la bandera roja del miércoles. **No se publica** sin el OK de Maikel (R16).
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-14.md`): en curso. Sus críticos van en un segundo commit.
+
+**Descartado:**
+- **Artículo nuevo (A).** El Content OS pone una pieza fuerte por semana, y la semana 42 ya lleva dos: la actualización de cualificar-leads y leads-que-solo-estan-mirando. Una tercera competiría con ellas.
+- **Newsletter (D).** El brief la deja fuera hasta la semana 45.
+
+**Decisiones para Maikel:**
+1. **Orden de los posts A y B.** Recomendación: publicar el B el jueves 15 y el A después de la llamada del 15. El B no depende de ningún trato abierto.
+2. **D4: pasar la rutina diaria al modelo semanal del Content OS.** Recomendación: sí. La rutina pide un artículo al día, y el Content OS y el brief dicen otra cosa. Dos días esta semana he tenido que descartar el artículo con la regla en la mano.
+3. **Guion del vídeo 5** (pieza 5 del brief, la ficha de un contacto con sus dos notas). Te lo paso mañana jueves, como dice el brief. Necesita 45 segundos de tu voz.
+
+**Hipótesis para mañana:** el carrusel «Lo que tu formulario pregunta y lo que debería preguntar» funcionará mejor en LinkedIn como documento que en Instagram, porque lo comparte quien lleva el formulario y no quien lo rellena. Se mira el viernes 16 con los comentarios de perfiles de dirección.
