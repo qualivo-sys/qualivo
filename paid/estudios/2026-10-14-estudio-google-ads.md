@@ -1,5 +1,7 @@
 # Estudio · ¿Google Ads para Qualivo? (v0.9 · 14-oct-2026 · cierre 17-oct con Trends y revisión de Maikel)
 
+Notion: https://app.notion.com/p/3f956e1ad6ed81bb8758dc31c1264371
+
 Pedido de Maikel (14-oct): "¿crees que sería interesante hacer una campaña en Google Ads? ¿podríamos hacer un estudio?" → "haz eso porfa".
 Alcance: estudio de mesa, sin gasto. Decide si Google Ads arranca en noviembre, con qué estructura, presupuesto y fecha de muerte.
 Regla: cero cifras inventadas. Cada número lleva valor, fuente y fecha; lo que no tiene fuente va marcado como **estimación** o **pendiente**.
