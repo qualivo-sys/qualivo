@@ -205,6 +205,16 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .precio{margin-top:22px;padding:14px 16px;border-radius:12px;background:#fff;border:1px solid var(--linea);font-size:15px;color:#3E434B;line-height:1.5}
 .precio b{color:var(--tinta)}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:end}
+/* aviso de cookies (assets/consent.js): esta página no carga assets/styles.css */
+#qv-cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;display:flex;justify-content:center}
+#qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:16px 18px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+#qv-cookies p{margin:0;font-size:13.5px;line-height:1.5;color:#C7D3E0;max-width:46ch}
+#qv-cookies a{color:#B7F0EA;text-decoration:underline}
+#qv-cookies .qv-ck-botones{display:flex;gap:10px}
+#qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font:700 14px var(--display);cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
+#qv-cookies #qv-ck-si{background:var(--verde-claro);border-color:var(--verde-claro);color:#04231F}
+.corto{display:none}
+
 @media(max-width:520px){.dos{grid-template-columns:1fr}}
 .fuente{margin-top:14px;font-size:13px;color:var(--gris-claro);font-weight:600;max-width:80ch}
 .huecos{display:none;margin-top:22px;font-size:14.5px;color:#3E434B}
@@ -269,6 +279,11 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   .incluye ul{grid-template-columns:1fr}
   .hero .ctas .btn{width:100%}
 }
+/* móvil: botones de una línea y menos texto */
+@media(max-width:760px){
+  .btn{padding:0 18px;font-size:16px}
+  .largo{display:none}.corto{display:inline}
+}
 @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.aparece{opacity:1;transform:none}}
 </style>
 </head>
@@ -289,7 +304,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <h1>Más alumnos para tu centro. <span><span class="subr">Del primer anuncio a la matrícula.</span></span></h1>
       <p class="lead">Conseguimos solicitudes de personas interesadas en tus cursos y conectamos la captación con el seguimiento comercial para ayudarte a convertir más en matrículas.</p>
       <div class="ctas">
-        <a href="#diagnostico" class="btn" data-cta="hero">Descubre cómo captar más alumnos&nbsp;→</a>
+        <a href="#diagnostico" class="btn" data-cta="hero"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
         <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
@@ -559,7 +574,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico</b>, según lo que necesite tu centro. Tú conservas las decisiones comerciales y la matrícula.</p>
       </div>
     </div>
-    <div class="serv-cta"><a href="#diagnostico" class="btn" data-cta="servicio">Descubre cómo captar más alumnos&nbsp;→</a><p>Empezamos por un diagnóstico sin coste de 30 minutos.</p></div>
+    <div class="serv-cta"><a href="#diagnostico" class="btn" data-cta="servicio"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a><p>Empezamos por un diagnóstico sin coste de 30 minutos.</p></div>
   </div>
 </section>
 
@@ -585,7 +600,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </footer>
 
-<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil">Descubre cómo captar más alumnos&nbsp;→</a></div>
+<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
 
 <script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=formacion");}</script>
 <script>

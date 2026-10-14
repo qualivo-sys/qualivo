@@ -190,6 +190,16 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .fundador p{font-size:15px;color:#3E434B;line-height:1.5;max-width:70ch}
 .fundador b{color:var(--tinta)}
 .fundador .btn{white-space:nowrap}
+/* aviso de cookies (assets/consent.js): esta página no carga assets/styles.css */
+#qv-cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;display:flex;justify-content:center}
+#qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:16px 18px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+#qv-cookies p{margin:0;font-size:13.5px;line-height:1.5;color:#C7D3E0;max-width:46ch}
+#qv-cookies a{color:#B7F0EA;text-decoration:underline}
+#qv-cookies .qv-ck-botones{display:flex;gap:10px}
+#qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font:700 14px var(--display);cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
+#qv-cookies #qv-ck-si{background:var(--verde-claro);border-color:var(--verde-claro);color:#04231F}
+.corto{display:none}
+
 
 /* 6 · CONVERSIÓN (formulario de la home: assets/app.js) */
 .final{background:var(--negro);color:#fff}
@@ -286,7 +296,18 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   .logos{grid-template-columns:1fr}.logos p{max-width:none}
   .incluye ul{grid-template-columns:1fr}
   .hero .ctas .btn{width:100%}
-  .fundador{grid-template-columns:auto 1fr}.fundador .btn{grid-column:1/-1;width:100%}
+  .fundador{grid-template-columns:auto 1fr;padding:18px}.fundador .btn{grid-column:1/-1;width:100%;white-space:normal}
+  .fundador img{width:52px;height:52px}
+  .btn{padding:0 18px;font-size:16px}
+  .largo{display:none}.corto{display:inline}
+  .extra,.kpis,.solucion .t p,.flujo em,.dash-pie,.fases p{display:none}
+  .fases li{padding:14px 0}
+  .fugas{grid-template-columns:1fr;margin-top:26px}
+  .fg,.fg:nth-child(2n),.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding:12px 0;border-left:0;display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline}
+  .fg p{margin-top:0;font-size:15px}
+  .hero .lead{font-size:16.5px}
+  .caso .ctx{font-size:15px}
+  .mas-casos a{padding:14px 16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}}
 </style>
@@ -313,7 +334,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <h1>Conseguimos que más oportunidades <span>se conviertan en clientes.</span></h1>
       <p class="lead">Conectamos la captación, la respuesta comercial y el seguimiento hasta la venta, para que tu empresa consiga más oportunidades, pierda menos por el camino y sepa qué funciona.</p>
       <div class="ctas">
-        <a href="#contacto" class="btn" data-cta="hero">Descubre dónde pierdes oportunidades&nbsp;→</a>
+        <a href="#contacto" class="btn" data-cta="hero"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
         <a href="#como" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
@@ -533,7 +554,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   <div class="wrap">
     <p class="eyebrow">Así se ve por dentro</p>
     <h2 id="t-demo">Todo conectado. Cada oportunidad bajo control.</h2>
-    <p class="lead">Desde que alguien pide información hasta que firma, sabes qué ocurre en cada etapa, dónde se pierden oportunidades y qué necesita atención hoy.</p>
+    <p class="lead extra">Desde que alguien pide información hasta que firma, sabes qué ocurre en cada etapa, dónde se pierden oportunidades y qué necesita atención hoy.</p>
     <div class="kpis" role="list" aria-label="Ejemplo de métricas de un mes en Qualivo Intelligence, datos simulados">
       <div role="listitem"><small>Oportunidades nuevas</small><b>263</b></div>
       <div role="listitem"><small>Reuniones celebradas</small><b>49</b></div>
@@ -573,7 +594,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   <div class="wrap">
     <p class="eyebrow">Qué recibe tu empresa</p>
     <h2 id="t-serv">Nos ocupamos del sistema de crecimiento. Tú, de tus clientes.</h2>
-    <p class="lead">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo dedique su tiempo a las oportunidades que pueden comprar.</p>
+    <p class="lead extra">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo dedique su tiempo a las oportunidades que pueden comprar.</p>
     <div class="serv-grid">
       <ol class="fases">
         <li><span class="num">01</span><h3>Diagnóstico</h3><p>Analizamos cómo captas clientes y dónde pierdes oportunidades.</p></li>
@@ -596,8 +617,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     </div>
     <div class="fundador">
       <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="64" height="64">
-      <p><b>Maikel Echevarría, fundador.</b> Años construyendo sistemas de captación y ventas para empresas de formación, servicios y B2B, con un equipo de medios pagados, creatividades, vídeo y CRM. ¿Ya tienes agencia? No hace falta sustituirla: trabajamos el recorrido completo, con ella.</p>
-      <a href="#contacto" class="btn" data-cta="servicio">Descubre dónde pierdes oportunidades&nbsp;→</a>
+      <p><b>Maikel Echevarría, fundador.</b> Años construyendo sistemas de captación y ventas para empresas de formación, servicios y B2B<span class="extra">, con un equipo de medios pagados, creatividades, vídeo y CRM</span>. ¿Ya tienes agencia? No hace falta sustituirla: trabajamos el recorrido completo, con ella.</p>
+      <a href="#contacto" class="btn" data-cta="servicio"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
     </div>
   </div>
 </section>
@@ -632,7 +653,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </footer>
 
-<div class="fijo" id="fijo"><a href="#contacto" class="btn" data-cta="fijo-movil">Descubre dónde pierdes oportunidades&nbsp;→</a></div>
+<div class="fijo" id="fijo"><a href="#contacto" class="btn" data-cta="fijo-movil"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
 
 <script>
 (function(){
