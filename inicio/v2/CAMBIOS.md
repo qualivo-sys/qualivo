@@ -76,3 +76,16 @@
   - calendario, vídeo y agenda directa;
   - sin errores.
 - **Decisión de Maikel:** el cambio de motor del formulario cuando esta versión pase a ser la home real (`/`).
+
+## 14-oct · en producción
+
+- **OK de Maikel:** «acepta la home me gusta».
+- **`/index.html`** pasa a ser esta versión, sin `noindex`, con la cabecera SEO de producción.
+- **Datos estructurados nuevos:** organización, Maikel, servicio, web y FAQ, sacada de las preguntas visibles.
+- **Imágenes:** pasan a `/assets/img/home/`.
+- **Anclas antiguas que siguen funcionando:** `/#analiza`, `/#diagnostic`, `/#wall` y `/#quienes`, que enlazan otras páginas.
+- **`/inicio/v2/`** redirige a `/` (301, `vercel.json`).
+- **sitemap y llms.txt** al día. Fuera Femxa, Formación Ninja y el filtro de 500k.
+- **Lighthouse** en móvil, en local: rendimiento 97, SEO 92. El aviso que queda es por enlaces tipo «Ver el caso».
+- **Los contactos de la home** entran por `/api/diagnostico` con la etiqueta `pagina-inicio`.
+- **La home anterior** queda en el historial de git (commit anterior a este).

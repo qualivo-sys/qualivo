@@ -117,6 +117,16 @@
   ],
   "redirects": [
     {
+      "source": "/inicio/v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/inicio/v2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/agenda",
       "destination": "https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl",
       "permanent": false

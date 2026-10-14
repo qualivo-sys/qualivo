@@ -1397,3 +1397,9 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 5. **Guion del vídeo 5** (pieza 5 del brief, la ficha de un contacto con sus dos notas). Te lo paso mañana jueves, como dice el brief. Necesita 45 segundos de tu voz.
 
 **Hipótesis para mañana:** el carrusel «Lo que tu formulario pregunta y lo que debería preguntar» funcionará mejor en LinkedIn como documento que en Instagram, porque lo comparte quien lleva el formulario y no quien lo rellena. Se mira el viernes 16 con los comentarios de perfiles de dirección.
+
+**Home nueva en producción (14-oct, OK de Maikel).** `qualivo.io` pasa a la versión de `/inicio/v2/`.
+- **Qué lleva:** el VSL, los casos, el formulario de tres pasos con el precio al lado y, debajo, el resto.
+- **Contactos:** los de la home entran por `/api/diagnostico` (etiqueta `pagina-inicio`), con primer WhatsApp y correo, y sin el filtro de facturación de la home anterior.
+- **SEO:** sin `noindex`, datos estructurados nuevos, `/inicio/v2/` redirige a `/` y las anclas antiguas siguen funcionando.
+- **Detalle:** `inicio/v2/CAMBIOS.md`.
