@@ -246,6 +246,46 @@ Mismo molde que el de formación, con vocabulario de clínica y la música H (ur
 - **Hook:** «El que quiere un implante y el que pregunta cuánto cuesta una limpieza. En tu clínica reciben exactamente la misma llamada.»
 - **Mecanismo:** preguntas por WhatsApp, recepción llama primero a quien quiere tratarse ya, y decirle a Meta quién era un buen contacto.
 
+## Octubre 2026 · ICP «empresa con equipo comercial» (14-oct, propuesta pendiente del ok de Maikel)
+
+Brief completo en `content/video/2026-10-14-icp-equipos-comerciales/brief.md`.
+
+**ICP nuevo:**
+- empresas de 10-20+ personas;
+- más de 3-5 k€/mes en anuncios;
+- equipo comercial (setter y closer) y CRM;
+- sectores: reformas, clínicas, formación online, infoproductos y lanzamientos.
+
+**Ronda 1 (la variable es el dolor):** formato Maikel a cámara con interfaz, 9:16 de 33-37 s, gancho A en los tres.
+
+**CTA común:** «Si inviertes más de tres mil euros al mes en anuncios y tienes equipo comercial…» → REVISAR MI SISTEMA COMERCIAL.
+
+### 14 · ICP_PRI_v1 · «El closer haciendo de setter»
+- **Vertical:** formación más infoproducto, y clínicas.
+- **Etapa:** cualificación y prioridad.
+- **Dolor:** el comercial llama a todos por orden de llegada.
+- **Ángulo:** tiempo del equipo y oportunidad perdida.
+- **Formato:** fundador más interfaz de CRM.
+- **Gancho:** «Lunes, nueve de la mañana. Sesenta y tres leads del fin de semana. Tu comercial empieza por el primero de la lista.»
+- **Mecanismo:** WhatsApp en minutos, preguntas, llamada si no contesta, nivel A/B/C/D y ficha.
+- **Resultados:** pendientes.
+
+### 15 · ICP_ATR_v1 · «El anuncio que tu panel dice que gana»
+- **Etapa:** atribución y calidad.
+- **Dolor:** no saber qué anuncio trae ventas.
+- **Ángulo:** dinero.
+- **Gancho:** «Tu panel de Meta dice que el mejor anuncio es el de seis euros el lead. Tu comercial dice que de ahí no ha salido ni una venta.»
+- **Mecanismo:** cualificar, marcar la calidad y devolverla a Meta; análisis de qué anuncio trae oportunidades (con «DATOS DE EJEMPLO»).
+- **Resultados:** pendientes.
+
+### 16 · ICP_GEN_v1 · «Si vale para cualquiera, te escribe cualquiera»
+- **Etapa:** captación.
+- **Dolor:** creativo y landing genéricos.
+- **Ángulo:** competencia.
+- **Gancho:** «"Pide tu presupuesto sin compromiso." Lo pone tu anuncio. Y el de tus cinco competidores.»
+- **Mecanismo:** cliente ideal, anuncios por ángulo, landing y preguntas que filtran.
+- **Resultados:** pendientes.
+
 ## Resultados por creativo
 
 Una fila por anuncio y semana:
