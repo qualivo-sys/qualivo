@@ -27,9 +27,9 @@
 .paso-t{position:absolute;left:0;top:-4px;font-family:Anton;font-size:30px;letter-spacing:.04em;text-transform:uppercase;background:#0A0A0B;color:#F4CC38;padding:10px 20px;border-radius:12px;opacity:0;z-index:5}
 /* 1 · análisis */
 .rut{position:absolute;left:0;top:80px;width:880px;display:flex;justify-content:space-between;align-items:center}
-.rut span{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:16px;padding:14px 12px;font-family:Anton;font-size:28px;text-transform:uppercase;opacity:.25;width:150px;text-align:center}
+.rut span{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:16px;padding:16px 4px;font-family:Anton;font-size:24px;letter-spacing:.02em;text-transform:uppercase;opacity:.25;width:156px;text-align:center}
 .rut span.on{opacity:1;background:#F4CC38}
-.rut b{font-size:30px;opacity:.5}
+.rut b{font-size:24px;opacity:.5}
 .mejor{position:absolute;left:0;top:300px;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:40px 48px;opacity:0}
 .mejor .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:12px}
 .mejor h3{font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;margin-bottom:18px}
@@ -168,7 +168,7 @@
         <div class="tr" id="trm"><span>Anuncio 2 · resultado</span><b>31</b><b>3</b><b class="c">0</b></div>
         <div class="tr"><span>Anuncio 3 · objeción</span><b>12</b><b>6</b><b class="c">2</b></div>
         <div class="aviso" id="avs">← Muchos formularios. Ningún cliente.</div></div>
-      <div class="meta2" id="mt"><small>Señal de vuelta a Meta</small>Tráeme más como los del 1 y el 3.</div>
+      <div class="meta2" id="mt"><small>Señal de vuelta a Meta</small>Menos formularios.<br>Más como los del 1 y el 3.</div>
     </div>
   </div>
   <div id="wide" style="position:absolute;left:60px;right:60px;top:100px;bottom:200px"><div class="sc" id="s9">
@@ -230,7 +230,7 @@ window.setT=function(t){
   // 7 · medición
   const aM=S.sM[0]; show($('sM'),win(t,aM,S.sM[1]-.05,.3,.3),1); show($('tab'),nm(t,aM+.05,aM+.4),40);
   document.querySelectorAll('#sM .tr:not(.h)').forEach((d,i)=>show(d,nm(t,aM+.6+i*.4,aM+.9+i*.4),10));
-  $('trm').classList.toggle('mal',t>T.m2-.2); show($('avs'),nm(t,T.m2-.2,T.m2+.1),10); show($('mt'),nm(t,T.m2+1.1,T.m2+1.45),30);
+  $('trm').classList.toggle('mal',t>T.m2-.2); show($('avs'),nm(t,T.m2-.2,T.m2+.1),10); show($('mt'),nm(t,T.met-.1,T.met+.25),30);
   // cierre
   const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); show($('s9').querySelector('.t1'),nm(t,a9,a9+.3),16);
   $('s9').querySelectorAll('.sis div,.sis i').forEach((d,i)=>show(d,nm(t,a9+.5+i*.18,a9+.75+i*.18),12));

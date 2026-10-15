@@ -17,20 +17,22 @@ sys.path.insert(0, VA)
 # - las preguntas del formulario son las del cliente final (qué necesita, cuándo, presupuesto), no las de Qualivo.
 # v2 (feedback de Maikel 15-oct): fuera los cortes de sector; entra «diseñamos todo tu sistema de captación»;
 #   el gancho se queda como en la v1 (Maikel).
+# «Qualivo» se escribe «Cuálivo» en la locución para que David lo pronuncie bien (los subtítulos dicen Qualivo).
 # v3 (Maikel 15-oct): una sola historia contada como proceso: analizamos → anuncios (3 ángulos) → landings (una en vídeo)
 #   → formulario → encaja/seguimiento → agentes (voz) → medición en el CRM (no panel en vivo) → demo personalizada.
 GUION = [
  ('hook', 'Inviertes más de mil euros al mes en anuncios.'),
  ('h2', 'Tienes comerciales. Y los leads no cierran.'),
  ('giro', 'Tu equipo dice que los leads de Meta no valen. Pero, ¿el problema está en los anuncios o en lo que pasa después?'),
- ('ana', 'En Qualivo analizamos todo tu recorrido, del primer anuncio a la venta, y vemos qué clientes te dejan más negocio.'),
+ ('ana', 'En Cuálivo analizamos todo tu recorrido y vemos qué clientes te dejan más negocio.'),
  ('anu', 'Con eso diseñamos anuncios con ángulos distintos para atraer a más como ellos.'),
  ('lan', 'Landings que convierten, también en vídeo.'),
- ('frm', 'Y un formulario que pregunta lo que preguntaría tu comercial.'),
+ ('frm', 'Y un formulario que cualifica desde el primer clic.'),
  ('s3', 'Si encaja, avisamos a tu comercial con su ficha. Si todavía no, lo seguimos nosotros.'),
  ('voz', 'Nuestros agentes le responden en minutos, le llaman si no contesta y le recuerdan la cita.'),
- ('med', 'Y medimos en tu CRM qué campañas traen oportunidades y clientes, no solo formularios.'),
- ('s9', 'Te enseñamos cómo funcionaría todo este sistema en tu empresa, con una demo personalizada.'),
+ ('med', 'Y medimos en tu CRM qué campañas traen clientes, no solo formularios.'),
+ ('met', 'Luego le decimos a Meta quiénes eran buenos contactos, para que te busque más como ellos.'),
+ ('s9', 'Te enseñamos cómo funcionaría en tu empresa, con una demo personalizada.'),
 ]
 MARCAS = [('g1', 'giro', 'pero'), ('a1', 'ana', 'vemos'), ('n2', 'anu', 'angulos'), ('n3', 'anu', 'atraer'), ('l2', 'lan', 'tambien'),
           ('c2', 's3', 'todavia'), ('v2', 'voz', 'llaman'), ('v3', 'voz', 'recuerdan'), ('m2', 'med', 'no'), ('f2', 's9', 'demo')]
@@ -69,7 +71,7 @@ def tiempos():
         n = -(-len(tr) // 6); tam = -(-len(tr) // n)
         for k in range(0, len(tr), tam):
             c = tr[k:k + tam]
-            subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c).replace('cualivo', 'Qualivo')])
+            subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c).replace('Cuálivo', 'Qualivo').replace('cualivo', 'Qualivo')])
     for k in range(len(subs) - 1): subs[k][1] = min(subs[k][1], subs[k + 1][0])
     open(f'{AQUI}/tiempos.js', 'w').write(f'window.TIEMPOS={json.dumps(T)};window.DURACION={dur};window.SUBS={json.dumps(subs, ensure_ascii=False)};\n')
     print(T, dur)
