@@ -1,3 +1,5 @@
+> **SUSTITUIDO el 15-oct** por el Outbound Playbook V1 de Maikel (Notion: https://app.notion.com/p/3fa56e1ad6ed813b8b04d23d0c156877). Este borrador queda solo como referencia; no se usa para cargar. Copy en vigor: `captacion/scripts/ensayo_playbook_q4.py`.
+
 # Secuencias outbound · plan trimestral ICP (borrador para aprobar)
 
 15-oct-2026 · Base: «QUALIVO · Revisión estratégica del ICP y sistema de captación comercial» (Notion).
