@@ -16,11 +16,11 @@ sys.path.insert(0, VA)
 # - a Meta se le devuelve la calidad del contacto, no «cuáles acabaron en cliente»;
 # - las preguntas del formulario son las del cliente final (qué necesita, cuándo, presupuesto), no las de Qualivo.
 # v2 (feedback de Maikel 15-oct): fuera los cortes de sector; entra «diseñamos todo tu sistema de captación»;
-#   el cierre vende la demostración de la reunión (recorrido, fuga y sistema aplicado a su caso).
+#   el gancho se queda como en la v1 (Maikel); el cierre vende la demostración de la reunión (recorrido, fuga y sistema aplicado a su caso).
 GUION = [
  ('hook', 'Inviertes más de mil euros al mes en anuncios.'),
  ('h2', 'Tienes comerciales. Y los leads no cierran.'),
- ('giro', 'Cuando un contacto no avanza, ¿sabes si no encajaba, si todavía estaba valorando o si simplemente se perdió?'),
+ ('giro', 'Tu equipo dice que los leads de Meta no valen. Antes de darles la razón, mira lo que pasa después del clic.'),
  ('dis', 'Por eso diseñamos todo tu sistema de captación: anuncios que atraen a tus mejores clientes, no a gente que no te puede comprar, y landings que convierten mejor.'),
  ('s2', 'El formulario pregunta lo que tu comercial preguntaría en la primera llamada.'),
  ('s3', 'Si encaja, pasa a tu comercial. Si todavía no, lo seguimos nosotros.'),
@@ -28,8 +28,7 @@ GUION = [
  ('s5', 'Y le decimos a Meta quiénes eran buenos contactos, para que te traiga más como esos.'),
  ('s9', 'En treinta minutos analizamos tu recorrido y dónde está la fuga. Y te enseñamos el sistema que montaríamos para ti, con ejemplos de anuncios, landings y nuestros agentes respondiendo como tu equipo.'),
 ]
-MARCAS = [('g1', 'giro', 'encajaba'), ('g2', 'giro', 'valorando'), ('g3', 'giro', 'perdio'),
-          ('d1', 'dis', 'anuncios'), ('d2', 'dis', 'gente'), ('d3', 'dis', 'landings'),
+MARCAS = [('g1', 'giro', 'mira'), ('d1', 'dis', 'anuncios'), ('d2', 'dis', 'gente'), ('d3', 'dis', 'landings'),
           ('f1', 's9', 'fuga'), ('f2', 's9', 'sistema'), ('f3', 's9', 'anuncios'), ('f4', 's9', 'landings'), ('f5', 's9', 'agentes')]
 COLA = 2.4
 ADELANTO = 0.15
