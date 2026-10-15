@@ -16,26 +16,31 @@ sys.path.insert(0, VA)
 # - a Meta se le devuelve la calidad del contacto, no «cuáles acabaron en cliente»;
 # - las preguntas del formulario son las del cliente final (qué necesita, cuándo, presupuesto), no las de Qualivo.
 # v2 (feedback de Maikel 15-oct): fuera los cortes de sector; entra «diseñamos todo tu sistema de captación»;
-#   el gancho se queda como en la v1 (Maikel); el cierre vende la demostración de la reunión (recorrido, fuga y sistema aplicado a su caso).
+#   el gancho se queda como en la v1 (Maikel).
+# v3 (Maikel 15-oct): una sola historia contada como proceso: analizamos → anuncios (3 ángulos) → landings (una en vídeo)
+#   → formulario → encaja/seguimiento → agentes (voz) → medición en el CRM (no panel en vivo) → demo personalizada.
 GUION = [
  ('hook', 'Inviertes más de mil euros al mes en anuncios.'),
  ('h2', 'Tienes comerciales. Y los leads no cierran.'),
- ('giro', 'Tu equipo dice que los leads de Meta no valen. Antes de darles la razón, mira lo que pasa después del clic.'),
- ('dis', 'Por eso diseñamos todo tu sistema de captación: anuncios que atraen a tus mejores clientes, no a gente que no te puede comprar, y landings que convierten mejor.'),
- ('s2', 'El formulario pregunta lo que tu comercial preguntaría en la primera llamada.'),
- ('s3', 'Si encaja, pasa a tu comercial. Si todavía no, lo seguimos nosotros.'),
- ('s4', 'Le respondemos en minutos y lo seguimos hasta que tiene cita con tu comercial.'),
- ('s5', 'Y le decimos a Meta quiénes eran buenos contactos, para que te traiga más como esos.'),
- ('s9', 'En treinta minutos analizamos tu recorrido y dónde está la fuga. Y te enseñamos el sistema que montaríamos para ti, con ejemplos de anuncios, landings y nuestros agentes respondiendo como tu equipo.'),
+ ('giro', 'Tu equipo dice que los leads de Meta no valen. Pero, ¿el problema está en los anuncios o en lo que pasa después?'),
+ ('ana', 'En Qualivo analizamos todo tu recorrido, del primer anuncio a la venta, y vemos qué clientes te dejan más negocio.'),
+ ('anu', 'Con eso diseñamos anuncios con ángulos distintos para atraer a más como ellos.'),
+ ('lan', 'Landings que convierten, también en vídeo.'),
+ ('frm', 'Y un formulario que pregunta lo que preguntaría tu comercial.'),
+ ('s3', 'Si encaja, avisamos a tu comercial con su ficha. Si todavía no, lo seguimos nosotros.'),
+ ('voz', 'Nuestros agentes le responden en minutos, le llaman si no contesta y le recuerdan la cita.'),
+ ('med', 'Y medimos en tu CRM qué campañas traen oportunidades y clientes, no solo formularios.'),
+ ('s9', 'Te enseñamos cómo funcionaría todo este sistema en tu empresa, con una demo personalizada.'),
 ]
-MARCAS = [('g1', 'giro', 'mira'), ('d1', 'dis', 'anuncios'), ('d2', 'dis', 'gente'), ('d3', 'dis', 'landings'),
-          ('f1', 's9', 'fuga'), ('f2', 's9', 'sistema'), ('f3', 's9', 'anuncios'), ('f4', 's9', 'landings'), ('f5', 's9', 'agentes')]
+MARCAS = [('g1', 'giro', 'pero'), ('a1', 'ana', 'vemos'), ('n2', 'anu', 'angulos'), ('n3', 'anu', 'atraer'), ('l2', 'lan', 'tambien'),
+          ('c2', 's3', 'todavia'), ('v2', 'voz', 'llaman'), ('v3', 'voz', 'recuerdan'), ('m2', 'med', 'no'), ('f2', 's9', 'demo')]
 COLA = 2.4
 ADELANTO = 0.15
 
 def norm(w):
     w = unicodedata.normalize('NFD', w.lower())
-    return ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
+    w = ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
+    return 'cualivo' if w == 'qualivo' else w  # voz_elevenlabs lo escribe así para que lo pronuncie bien
 
 def tiempos():
     pal = json.load(open(f'{AQUI}/voz/horizontal.json'))
@@ -64,7 +69,7 @@ def tiempos():
         n = -(-len(tr) // 6); tam = -(-len(tr) // n)
         for k in range(0, len(tr), tam):
             c = tr[k:k + tam]
-            subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c)])
+            subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c).replace('cualivo', 'Qualivo')])
     for k in range(len(subs) - 1): subs[k][1] = min(subs[k][1], subs[k + 1][0])
     open(f'{AQUI}/tiempos.js', 'w').write(f'window.TIEMPOS={json.dumps(T)};window.DURACION={dur};window.SUBS={json.dumps(subs, ensure_ascii=False)};\n')
     print(T, dur)

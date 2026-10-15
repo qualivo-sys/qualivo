@@ -1,7 +1,10 @@
 <!DOCTYPE html><html lang="es"><meta charset="utf-8">
-<!-- Horizontal «Ya inviertes y no cierran» (encargo de Paid, 15-oct). Mismo lenguaje que QV_3V2:
-     verde Qualivo, Anton, pantallas simuladas, sin personas. Subtítulos quemados (SUBS de tiempos.js).
-     ?f=916 da 1080x1920; sin parámetro, 1080x1350 (4:5). Nombres ficticios, números marcados como ejemplo. -->
+<!-- Horizontal «Ya inviertes y no cierran» v3 (encargo de Paid 15-oct, guion de Maikel 15-oct).
+     Una sola historia contada como proceso: gancho de la v1 → analizamos → anuncios con 3 ángulos → landings (una en vídeo)
+     → formulario → encaja / seguimiento → agentes (WhatsApp, llamada, recordatorio) → medición en el CRM → demo personalizada.
+     Estilo 3V2: verde Qualivo, Anton, pantallas simuladas, sin personas. Subtítulos quemados (SUBS de tiempos.js).
+     ?f=916 da 1080x1920; sin parámetro, 1080x1350 (4:5). Nombres ficticios; números solo con «Datos de ejemplo».
+     Evitar la Ñ en títulos Anton pequeños: el tilde casi no se ve y «AÑO» se lee «ANO». -->
 <link rel="stylesheet" href="../2026-10-07-demo-caso-v2/base.css">
 <style>
 #e.v916{height:1920px}
@@ -9,97 +12,134 @@
 #e.v916 #stage{top:330px;left:214px;transform:scale(.74)}
 #e.v916 #hook h1,#e.v916 #hook .h2{font-size:118px}
 #e.v916 #reloj{top:250px}#e.v916 #ej{top:272px}
-#e.v916 #wide{top:300px!important;bottom:440px!important}
+#e.v916 #wide{top:330px!important;bottom:440px!important}
 #e.v916 #sub{bottom:330px}
 #e.v916 .pie{display:none}
 #hook h1{font-size:108px}
-#hook h1 small{display:block;font-family:SG;font-size:34px;font-weight:600;text-transform:none;color:rgba(244,241,235,.6);margin-top:18px;line-height:1.3}
 #hook .h2{font-family:Anton;font-size:108px;line-height:.95;text-transform:uppercase;color:#F4CC38;opacity:0}
 #hook .bloque{position:absolute;left:80px;right:80px;top:50%;transform:translateY(-50%)}
 #hook .giro .q{font-family:Anton;font-size:96px;line-height:.98;text-transform:uppercase;color:#F4F1EB}
 #hook .giro .q i{font-style:normal;color:#F4CC38}
 #hook .giro .quien{font-family:Anton;font-size:40px;letter-spacing:.06em;text-transform:uppercase;color:#F4CC38;margin-bottom:22px}
-#hook .giro .m{font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;color:#F4CC38;margin-top:44px;opacity:0}
+#hook .giro .m{font-family:Anton;font-size:64px;line-height:1.02;text-transform:uppercase;color:#F4CC38;margin-top:44px;opacity:0}
 #sub{position:absolute;left:50px;right:50px;bottom:96px;text-align:center;z-index:40;pointer-events:none}
 #sub span{display:inline-block;background:#0A0A0B;color:#F4F1EB;font-family:Anton;font-size:50px;line-height:1.12;text-transform:uppercase;letter-spacing:.01em;padding:12px 26px 14px;border-radius:16px;max-width:960px}
+.paso-t{position:absolute;left:0;top:-4px;font-family:Anton;font-size:30px;letter-spacing:.04em;text-transform:uppercase;background:#0A0A0B;color:#F4CC38;padding:10px 20px;border-radius:12px;opacity:0;z-index:5}
+/* 1 · análisis */
+.rut{position:absolute;left:0;top:80px;width:880px;display:flex;justify-content:space-between;align-items:center}
+.rut span{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:16px;padding:14px 12px;font-family:Anton;font-size:28px;text-transform:uppercase;opacity:.25;width:150px;text-align:center}
+.rut span.on{opacity:1;background:#F4CC38}
+.rut b{font-size:30px;opacity:.5}
+.mejor{position:absolute;left:0;top:300px;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:40px 48px;opacity:0}
+.mejor .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:12px}
+.mejor h3{font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;margin-bottom:18px}
+.chk2{display:grid;grid-template-columns:62px 1fr;gap:0 18px;align-items:center;padding:16px 0;border-top:2px solid rgba(10,10,11,.12);font-size:32px;font-weight:600;opacity:0}
+.chk2 i{font-style:normal;width:56px;height:56px;border-radius:50%;background:#0E7C74;color:#F4F1EB;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800}
+.mas{position:absolute;left:0;right:0;top:960px;text-align:center;font-family:Anton;font-size:58px;text-transform:uppercase;opacity:0}
+.mas i{font-style:normal;color:#F4F1EB}
+/* 2 · anuncios */
+.ad{position:absolute;width:600px;background:#fff;border:4px solid #0A0A0B;border-radius:28px;overflow:hidden;opacity:0;box-shadow:0 18px 0 rgba(10,10,11,.12)}
+.ad .igh{padding:20px 24px 14px}
+.ad .igi{height:260px;padding:30px 34px;gap:12px}
+.ad .igi h4{font-size:50px}
+.ad .ang{position:absolute;right:18px;top:18px;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:24px;text-transform:uppercase;padding:8px 14px;border-radius:10px;letter-spacing:.03em}
+.ad .igb{margin:14px 24px 20px;font-size:22px;padding:14px}
+/* 3 · landings */
+.lands{position:absolute;left:0;top:90px;width:880px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.lp{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:24px;overflow:hidden;opacity:0;height:820px;position:relative}
+.lp .bar{height:44px;background:#0A0A0B;margin:0;border-radius:0;display:flex;align-items:center;gap:8px;padding:0 14px}
+.lp .bar i{width:12px;height:12px;border-radius:50%;background:#5A5E66;display:block}
+.lp .in{padding:26px 22px}
+.lp .tt{font-family:Anton;font-size:42px;line-height:1;text-transform:uppercase;margin-bottom:16px}
+.lp .ln{height:16px;background:rgba(10,10,11,.15);border-radius:8px;margin-bottom:12px}
+.lp .img{height:220px;background:#1FA396;border-radius:16px;margin:18px 0;position:relative;opacity:.8}
+.lp .img.v{background:#0A0A0B;opacity:1}
+.lp .img.v::after{content:'';position:absolute;left:50%;top:50%;margin:-30px 0 0 -18px;border-left:52px solid #F4CC38;border-top:30px solid transparent;border-bottom:30px solid transparent}
+.lp .cta{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:26px;text-transform:uppercase;text-align:center;padding:16px;border-radius:12px;margin-top:20px}
+.lp .lab{position:absolute;left:0;right:0;bottom:0;background:#F4CC38;font-family:Anton;font-size:32px;text-transform:uppercase;text-align:center;padding:14px}
+/* 4 · formulario */
 .q2{border:3px solid #0A0A0B;border-radius:18px;padding:16px 22px;margin-bottom:18px;background:#fff;opacity:0}
 .q2 small{display:block;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:#7A7C82;font-weight:700;margin-bottom:10px}
 .q2 .txt{font-size:27px;font-weight:600;min-height:36px}
 .ops{display:flex;flex-wrap:wrap;gap:10px}
 .op{border:3px solid #0A0A0B;border-radius:999px;padding:8px 18px;font-size:24px;font-weight:700}
 .op.sel{background:#0A0A0B;color:#F4CC38}
+/* 5 · caminos */
 .camino{position:absolute;left:0;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:36px 44px;opacity:0}
 .camino .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
 .camino.ok .k{color:#0E7C74}.camino.nt .k{color:#7A7C82}
 .camino h3{font-family:Anton;font-size:56px;line-height:1.02;text-transform:uppercase}
 .camino p{font-size:28px;line-height:1.4;color:#3D4148;margin-top:12px}
-.camino .lead{position:relative;left:auto;width:auto;margin-top:18px;display:inline-block}
-.nadie{position:absolute;left:0;right:0;top:1000px;text-align:center;font-family:Anton;font-size:74px;text-transform:uppercase;color:#0A0A0B;opacity:0}
-.sect{display:grid;grid-template-rows:repeat(3,1fr);gap:26px;height:880px;margin-top:40px}
-.sect div{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:30px;display:flex;align-items:center;padding:0 48px;font-family:Anton;font-size:96px;text-transform:uppercase;opacity:0}
-.sect div small{font-family:SG;font-size:26px;font-weight:700;color:#0E7C74;letter-spacing:.14em;margin-right:30px}
-.patron{margin-top:40px;font-family:Anton;font-size:58px;line-height:1.05;text-transform:uppercase;text-align:center;opacity:0}
-.patron i{font-style:normal;color:#F4F1EB}
-.seg{position:absolute;left:34px;right:34px;bottom:40px;background:#F4F1EB;border:3px solid #0A0A0B;border-radius:22px;padding:20px 24px;opacity:0}
-.seg .k{font-size:17px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:12px}
-.dias{display:flex;gap:12px}
-.dias span{flex:1;text-align:center;border:3px solid #0A0A0B;border-radius:14px;padding:10px 0;font-weight:700;font-size:22px;opacity:.3}
+.ficha{margin-top:20px;border:3px solid #0A0A0B;border-radius:18px;background:#fff;padding:18px 22px;font-size:26px;line-height:1.45}
+.ficha b{font-family:Anton;font-weight:400;font-size:34px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.ficha b em{font-style:normal;background:#0E7C74;color:#F4F1EB;font-size:22px;padding:6px 14px;border-radius:999px;font-family:SG;font-weight:700}
+.ficha span{display:block;color:#3D4148}
+.dias{display:flex;gap:12px;margin-top:18px}
+.dias span{flex:1;text-align:center;border:3px solid #0A0A0B;border-radius:14px;padding:10px 0;font-weight:700;font-size:24px;opacity:.3}
 .dias span.on{opacity:1;background:#0A0A0B;color:#F4CC38}
-.cita{margin-top:14px;background:#0E7C74;color:#F4F1EB;border-radius:14px;padding:14px 18px;font-size:25px;font-weight:700;opacity:0}
+/* 6 · agentes */
 .mine{position:absolute;right:34px;width:560px;background:#D9FDD3;border-radius:26px;border-top-right-radius:8px;padding:22px 24px;font-size:27px;line-height:1.38;opacity:0}
 .mine .t{text-align:right;font-size:18px;color:#7A7C82;margin-top:8px}
-.meta{position:absolute;left:0;top:40px;width:880px;background:#0A0A0B;color:#F4F1EB;border-radius:36px;padding:44px 48px}
-.meta .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#F4CC38;margin-bottom:16px}
-.meta h2{font-family:Anton;font-size:62px;line-height:1;text-transform:uppercase;margin-bottom:22px}
-.meta .dato{border-top-color:rgba(244,241,235,.15)}.meta .dato b{color:rgba(244,241,235,.55)}
-.flecha{font-family:Anton;font-size:40px;color:#F4CC38;margin-top:24px;opacity:0;line-height:1.1;text-transform:uppercase}
-.crm{position:absolute;left:0;top:660px;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:34px 44px;opacity:0}
-.crm .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;display:flex;justify-content:space-between}
-.crm .k span:last-child{color:#7A7C82}
-.fila{display:grid;grid-template-columns:1fr 120px;padding:16px 0;border-top:2px solid rgba(10,10,11,.12);font-size:28px;opacity:0}
-.fila:first-of-type{margin-top:14px}
-.fila b{font-family:Anton;font-size:36px;text-align:right;color:#0E7C74;font-weight:400}
-.chips3{display:flex;flex-direction:column;gap:18px;margin-top:40px}
-.chips3 div{align-self:flex-start;border:4px solid #F4CC38;color:#F4CC38;border-radius:999px;padding:12px 30px;font-family:Anton;font-size:52px;text-transform:uppercase;opacity:0}
-.pieza{position:absolute;left:0;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;overflow:hidden;opacity:0}
-.pieza .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;padding:26px 40px 0}
-.pieza .igi{height:300px;margin:18px 0 0}
-.pieza .igi h4{font-size:58px}
-.tacha{position:absolute;left:40px;right:40px;top:470px;background:#C2410C;color:#F4F1EB;border-radius:18px;padding:18px 26px;font-family:Anton;font-size:40px;text-transform:uppercase;text-align:center;opacity:0;transform:rotate(-2deg)}
-.land{padding:30px 40px 40px}
-.land .url{font-size:20px;color:#7A7C82;border:2px solid rgba(10,10,11,.15);border-radius:999px;padding:8px 18px;display:inline-block;margin-bottom:24px}
-.land h4{font-family:Anton;font-size:60px;line-height:1;text-transform:uppercase;margin-bottom:14px}
-.land p{font-size:26px;color:#3D4148;line-height:1.4;margin-bottom:22px}
-.land .btn{margin-top:0}
-#s9{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;padding:0 20px}
-#s9{gap:26px}
-#s9 .t1{font-family:Anton;font-size:84px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
-#s9 .t2{font-family:Anton;font-size:66px;line-height:1;text-transform:uppercase;color:#F4F1EB}
-#s9 .btn2{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:26px 44px;border-radius:20px}
-#s9 img{width:320px}
-.rec{display:flex;gap:10px;align-items:center;justify-content:center}
-.rec span{border:3px solid #0A0A0B;border-radius:12px;padding:12px 16px;font-weight:700;font-size:30px;background:#F4F1EB}
-.rec span.fuga{background:#C2410C;color:#F4F1EB;border-color:#C2410C}
-.rec b{font-size:26px}
-.tres{display:flex;gap:14px;justify-content:center}
-.tres div{background:#0A0A0B;color:#F4F1EB;border-radius:18px;padding:22px 26px;font-family:Anton;font-size:50px;text-transform:uppercase;line-height:1;opacity:0}
-.tres div small{display:block;font-family:SG;font-size:22px;font-weight:600;text-transform:none;color:#F4CC38;margin-top:8px}
-#s9 .web{font-family:Anton;font-size:40px;letter-spacing:.06em;color:#F4CC38}
+#llam{opacity:0}
+#llam .tag2{margin-top:18px;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:28px;text-transform:uppercase;padding:8px 18px;border-radius:10px;letter-spacing:.04em}
+/* 7 · medición */
+.tab{position:absolute;left:0;top:60px;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:38px 40px;opacity:0}
+.tab .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;display:flex;justify-content:space-between;margin-bottom:12px}
+.tab .k span:last-child{color:#7A7C82}
+.tr{display:grid;grid-template-columns:1fr 110px 130px 120px;padding:18px 12px;border-top:2px solid rgba(10,10,11,.12);font-size:27px;align-items:center;border-radius:14px;opacity:0}
+.tr.h{font-size:18px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#7A7C82;opacity:1}
+.tr b{font-family:Anton;font-weight:400;font-size:38px;text-align:right}
+.tr b.c{color:#0E7C74}
+.tr.mal{background:rgba(194,65,12,.12)}
+.tr.mal b.c{color:#C2410C}
+.aviso{margin-top:18px;font-family:Anton;font-size:34px;text-transform:uppercase;color:#C2410C;opacity:0}
+.meta2{position:absolute;left:0;top:820px;width:880px;background:#0A0A0B;color:#F4F1EB;border-radius:30px;padding:30px 40px;font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.1;opacity:0}
+.meta2 small{display:block;font-family:SG;font-size:20px;letter-spacing:.18em;font-weight:700;color:#F4CC38;margin-bottom:8px}
+/* cierre */
+#s9{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px;padding:0 10px}
+#s9 .t1{font-family:Anton;font-size:68px;line-height:1;text-transform:uppercase;color:#0A0A0B}
+.sis{display:flex;align-items:center;gap:8px}
+.sis div{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:18px;padding:16px 12px;width:200px;opacity:0}
+.sis div b{display:block;font-family:Anton;font-weight:400;font-size:34px;text-transform:uppercase;line-height:1}
+.sis div small{display:block;font-size:20px;font-weight:700;color:#0E7C74;letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
+.sis i{font-style:normal;font-family:Anton;font-size:34px;opacity:0}
+#s9 .med{font-size:28px;font-weight:700;color:rgba(10,10,11,.75)}
+#s9 .t2{font-family:Anton;font-size:60px;line-height:1;text-transform:uppercase;color:#F4F1EB}
+#s9 .t3{font-size:28px;font-weight:700}
+#s9 .btn2{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:24px 40px;border-radius:20px}
+#s9 img{width:300px}
 </style>
 <div id="e">
   <div id="hook">
     <div class="bloque" id="b1"><h1 id="h1">Inviertes <i>+1.000 €</i> al mes en anuncios.</h1><div class="h2" id="h2">Tienes comerciales. Y los leads no cierran.</div></div>
-    <div class="bloque giro" id="b2"><div class="quien">Tu equipo:</div><div class="q">«Los leads de Meta <i>no valen.</i>»</div><div class="m" id="gm">Mira lo que pasa después del clic.</div></div></div>
+    <div class="bloque giro" id="b2"><div class="quien">Tu equipo:</div><div class="q">«Los leads de Meta <i>no valen.</i>»</div><div class="m" id="gm">¿Los anuncios? ¿O lo que pasa después?</div></div>
   </div>
   <div id="ej">Ejemplo</div>
-  <div id="reloj"><span>después del clic</span><b>00:00</b></div>
+  <div id="reloj"><span></span><b></b></div>
   <div id="stage">
-    <div class="sc" id="sd">
-      <div class="pieza" id="pa" style="top:0"><div class="k">Anuncio · para tu mejor cliente</div>
-        <div class="igi"><h4>¿Reformar la cocina entera este año?</h4><p>Cuéntanos qué buscas y te damos fecha para verla.</p></div></div>
-      <div class="tacha" id="tx">✕ Gente que no te puede comprar</div>
-      <div class="pieza" id="pl" style="top:640px"><div class="land"><div class="url">tuempresa.com/cocinas</div>
-        <h4>Tu cocina nueva, con fecha y presupuesto cerrado</h4><p>Tres preguntas y te llamamos para verla.</p><div class="btn">Quiero mi presupuesto</div></div></div>
+    <div class="sc" id="sA">
+      <div class="rut"><span>Anuncio</span><b>→</b><span>Landing</span><b>→</b><span>Formulario</span><b>→</b><span>Comercial</span><b>→</b><span>Venta</span></div>
+      <div class="mejor" id="mj"><div class="k">Analizamos tus ventas</div><h3>Tus clientes que más dejan</h3>
+        <div class="chk2"><i>✓</i><span>Saben lo que quieren</span></div>
+        <div class="chk2"><i>✓</i><span>Tienen presupuesto</span></div>
+        <div class="chk2"><i>✓</i><span>Quieren empezar pronto</span></div></div>
+    </div>
+    <div class="sc" id="sN">
+      <div class="paso-t" id="pN">01 · Anuncios</div>
+      <div class="ad" id="ad1" style="left:0;top:80px;transform-origin:50% 100%"><div class="ang">Ángulo · problema</div><div class="igh"><div class="av"></div><div><b>Tu empresa</b><span>Patrocinado</span></div></div>
+        <div class="igi"><h4>¿Tres presupuestos y ninguno claro?</h4></div><div class="igb">Más información</div></div>
+      <div class="ad" id="ad2" style="left:140px;top:340px"><div class="ang">Ángulo · resultado</div><div class="igh"><div class="av"></div><div><b>Tu empresa</b><span>Patrocinado</span></div></div>
+        <div class="igi"><h4>Tu proyecto, con fecha de entrega por escrito</h4></div><div class="igb">Más información</div></div>
+      <div class="ad" id="ad3" style="left:280px;top:600px"><div class="ang">Ángulo · objeción</div><div class="igh"><div class="av"></div><div><b>Tu empresa</b><span>Patrocinado</span></div></div>
+        <div class="igi"><h4>¿Y si sale más caro? Precio cerrado antes de empezar</h4></div><div class="igb">Más información</div></div>
+    </div>
+    <div class="sc" id="sL">
+      <div class="paso-t" id="pL">02 · Landings</div>
+      <div class="lands">
+        <div class="lp" id="lp0"><div class="bar"><i></i><i></i><i></i></div><div class="in"><div class="tt">Precio cerrado</div><div class="ln"></div><div class="ln" style="width:70%"></div><div class="img"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="cta">Quiero mi cita</div></div><div class="lab">Landing A</div></div>
+        <div class="lp" id="lp1"><div class="bar"><i></i><i></i><i></i></div><div class="in"><div class="tt">Fecha por escrito</div><div class="ln"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:55%"></div><div class="img"></div><div class="cta">Quiero mi cita</div></div><div class="lab">Landing B</div></div>
+        <div class="lp" id="lp2"><div class="bar"><i></i><i></i><i></i></div><div class="in"><div class="tt">Míralo en 2 minutos</div><div class="img v"></div><div class="ln"></div><div class="ln" style="width:65%"></div><div class="cta">Quiero mi cita</div></div><div class="lab">Landing C · vídeo</div></div>
+      </div>
     </div>
     <div class="sc" id="s2"><div class="phone"><div class="screen"><div class="form">
       <h3>Antes de llamarte</h3><p>Lo que tu comercial preguntaría en la primera llamada.</p>
@@ -109,34 +149,36 @@
       <div class="btn">Enviar</div>
     </div></div></div></div>
     <div class="sc" id="s3">
-      <div class="camino ok" id="c1" style="top:0"><div class="k">Encaja</div><h3>Pasa a tu comercial.</h3><div class="lead">Laura M.<small>Este mes · presupuesto claro</small></div></div>
-      <div class="camino nt" id="c2" style="top:420px"><div class="k">Todavía no</div><h3>Lo seguimos nosotros.</h3><p>Tu comercial no lo llama hoy. Y la puerta queda abierta.</p></div>
-      <div class="nadie" id="nadie">Nadie pierde una hora.</div>
+      <div class="camino ok" id="c1" style="top:0"><div class="k">Encaja</div><h3>Avisamos a tu comercial</h3>
+        <div class="ficha"><b>Laura M. <em>Ficha lista</em></b><span>Necesita: obra completa</span><span>Empieza: este mes · presupuesto claro</span></div></div>
+      <div class="camino nt" id="c2" style="top:620px"><div class="k">Todavía no</div><h3>Lo seguimos nosotros</h3>
+        <div class="dias"><span>Día 1</span><span>Día 3</span><span>Día 7</span></div></div>
     </div>
-    <div class="sc" id="s4"><div class="phone"><div class="screen"><div class="wa">
-      <div class="wah"><div class="av">T</div><div><b>Tu empresa</b><span>en línea</span></div></div>
-      <div class="mine" id="w1" style="top:170px">Hola Laura, gracias por escribirnos. ¿Te va bien que te llame nuestro comercial mañana a las 17:30?<div class="t">10:04</div></div>
-      <div class="bub" id="w2" style="top:430px">Mejor el jueves.<div class="t">12:51</div></div>
-      <div class="seg" id="seg"><div class="k">Seguimiento</div><div class="dias"><span>Día 1</span><span>Día 3</span><span>Día 7</span></div>
-        <div class="cita" id="cita">✓ Cita con tu comercial · jueves 17:30</div></div>
-    </div></div></div></div>
-    <div class="sc" id="s5"><div class="meta"><div class="k">Señal de vuelta a Meta</div><h2>Laura era un buen contacto.</h2>
-      <div class="dato"><b>Anuncio</b><span>El que la trajo</span></div>
-      <div class="dato"><b>Se avisa a</b><span>Meta</span></div>
-      <div class="flecha" id="fl5">→ Tráeme más como ella.</div></div>
-      <div class="crm" id="crm"><div class="k"><span>En tu CRM</span><span>Datos de ejemplo</span></div>
-        <div class="fila"><span>Contactos</span><b>40</b></div>
-        <div class="fila"><span>Encajan</span><b>16</b></div>
-        <div class="fila"><span>Citas con tu comercial</span><b>9</b></div></div>
+    <div class="sc" id="sV"><div class="phone"><div class="screen">
+      <div class="wa" id="wa"><div class="wah"><div class="av">T</div><div><b>Tu empresa</b><span>en línea</span></div></div>
+        <div class="mine" id="w1" style="top:170px">Hola Laura, gracias por escribirnos. ¿Te va bien una llamada mañana a las 17:30?<div class="t">10:04</div></div></div>
+      <div class="call" id="llam"><div class="av">L</div><h2>Agente de voz</h2><p>llamando a Laura…</p><div class="tag2">No contestó al WhatsApp</div>
+        <div class="wave" id="wave"></div>
+        <div class="cal" id="cal"><div class="chk">✓</div><div class="k">Recordatorio enviado</div><h3>Cita jueves 17:30</h3><p>Con tu comercial. La víspera le llega el aviso.</p></div></div>
+    </div></div></div>
+    <div class="sc" id="sM">
+      <div class="tab" id="tab"><div class="k"><span>En tu CRM · por campaña</span><span>Datos de ejemplo</span></div>
+        <div class="tr h"><span>Campaña</span><span style="text-align:right">Leads</span><span style="text-align:right">Oportun.</span><span style="text-align:right">Clientes</span></div>
+        <div class="tr"><span>Anuncio 1 · problema</span><b>18</b><b>7</b><b class="c">2</b></div>
+        <div class="tr" id="trm"><span>Anuncio 2 · resultado</span><b>31</b><b>3</b><b class="c">0</b></div>
+        <div class="tr"><span>Anuncio 3 · objeción</span><b>12</b><b>6</b><b class="c">2</b></div>
+        <div class="aviso" id="avs">← Muchos formularios. Ningún cliente.</div></div>
+      <div class="meta2" id="mt"><small>Señal de vuelta a Meta</small>Tráeme más como los del 1 y el 3.</div>
     </div>
   </div>
-  <div id="wide" style="position:absolute;left:80px;right:80px;top:100px;bottom:200px"><div class="sc" id="s9">
-    <div class="t1">30 minutos. Sin coste.</div>
-    <div class="rec" id="rec"><span>Anuncio</span><b>→</b><span>Formulario</span><b>→</b><span id="fg">Respuesta</span><b>→</b><span>Cita</span></div>
-    <div class="t2" id="t2">El sistema que montaríamos para ti</div>
-    <div class="tres"><div id="f3">Anuncios</div><div id="f4">Landings</div><div id="f5">Agentes<small>respondiendo como tu equipo</small></div></div>
-    <div class="btn2" id="bt">Quiero ver mi demo →</div>
-    <img src="rec/logo-blanco.png"></div></div></div>
+  <div id="wide" style="position:absolute;left:60px;right:60px;top:100px;bottom:200px"><div class="sc" id="s9">
+    <div class="t1">El sistema que montaríamos para tu negocio</div>
+    <div class="sis"><div><b>Anuncios</b><small>Captar</small></div><i>→</i><div><b>Landings</b><small>Convertir</small></div><i>→</i><div><b>Agentes + CRM</b><small>Cualificar</small></div><i>→</i><div><b>Ventas</b><small>Cerrar</small></div></div>
+    <div class="med" id="md">Todo medido en tu CRM</div>
+    <div class="t2" id="t2">Descubre cómo funcionaría en tu empresa</div>
+    <div class="t3" id="t3">Demo personalizada · Sin compromiso</div>
+    <div class="btn2" id="bt">Ver mi demo personalizada →</div>
+    <img src="rec/logo-blanco.png" id="lg"></div></div>
   <div id="sub"><span id="subt"></span></div>
   <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
   <div id="tex"></div>
@@ -147,34 +189,53 @@ const $=id=>document.getElementById(id);
 const V916=new URLSearchParams(location.search).get('f')==='916'; if(V916) $('e').classList.add('v916');
 const H=V916?1920:1350;
 $('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="'+H+'"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+for(let i=0;i<22;i++){const b=document.createElement('i'); $('wave').appendChild(b);}
 const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3);
 function win(t,a,b,fi=.35,fo=.3){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
 function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
-const S={hook:[0,T.dis+.3], sd:[T.dis,T.s2], s2:[T.s2,T.s3], s3:[T.s3,T.s4], s4:[T.s4,T.s5], s5:[T.s5,T.s9], s9:[T.s9,DUR+1]};
-const RELOJ=[[S.s2,'en el formulario','00:40'],[S.s3,'al enviarlo','00:01'],[[T.s4,T.s4+2.6],'respuesta','en minutos'],[[T.s4+2.6,T.s5],'seguimiento','día 1 · 3 · 7']];
-const TXT='Reformar la cocina entera';
+const S={hook:[0,T.ana+.3], sA:[T.ana,T.anu], sN:[T.anu,T.lan], sL:[T.lan,T.frm], s2:[T.frm,T.s3], s3:[T.s3,T.voz], sV:[T.voz,T.med], sM:[T.med,T.s9], s9:[T.s9,DUR+1]};
+const RELOJ=[[S.s2,'en el formulario','00:40'],[[T.s3,T.c2],'al enviarlo','00:01'],[[T.voz,T.v2],'respuesta','en minutos'],[[T.v2,T.v3],'si no contesta','llamada'],[[T.v3,T.med],'la víspera','recordatorio']];
+const TXT='Obra completa, este mes';
 window.setT=function(t){
   $('hook').style.opacity=win(t,0,S.hook[1],.01,.35);
-  const b1=$('b1'); b1.style.opacity=1-nm(t,T.giro-.1,T.giro+.15);
+  $('b1').style.opacity=1-nm(t,T.giro-.1,T.giro+.15);
   show($('h1'),nm(t,.02,.3),30); show($('h2'),nm(t,T.h2,T.h2+.3),24);
   $('b2').style.opacity=nm(t,T.giro,T.giro+.25); show($('gm'),nm(t,T.g1-.1,T.g1+.25),20);
   $('ej').style.opacity=(t>S.s2[0]+.2&&t<S.s9[0])?1:0;
   const r=RELOJ.find(x=>t>=x[0][0]&&t<x[0][1]); const rl=$('reloj'); if(r){rl.style.opacity=win(t,r[0][0],r[0][1],.3,.3); rl.innerHTML='<span>'+r[1]+'</span><b>'+r[2]+'</b>';} else rl.style.opacity=0;
-  // subtítulos: fuera mientras el gancho ya pone el texto en grande
-  const s=t>=T.dis?SUBS.find(x=>t>=x[0]&&t<x[1]):null; $('subt').parentNode.style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
-  const ad=S.sd[0]; show($('sd'),win(t,ad,S.sd[1]-.05,.3,.3),1); show($('pa'),nm(t,ad+.1,ad+.45),30); show($('tx'),win(t,T.d2-.1,T.d3,.2,.2),10); show($('pl'),nm(t,T.d3-.2,T.d3+.15),40);
+  const s=t>=T.ana?SUBS.find(x=>t>=x[0]&&t<x[1]):null; $('sub').style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
+  // 1 · análisis
+  const aA=S.sA[0]; show($('sA'),win(t,aA,S.sA[1]-.05,.3,.3),1);
+  document.querySelectorAll('#sA .rut span').forEach((d,i)=>d.classList.toggle('on',t>aA+.4+i*.55));
+  show($('mj'),nm(t,T.a1-.2,T.a1+.15),40); document.querySelectorAll('#sA .chk2').forEach((d,i)=>show(d,nm(t,T.a1+.4+i*.45,T.a1+.7+i*.45),14));
+  // 2 · anuncios
+  const aN=S.sN[0]; show($('sN'),win(t,aN,S.sN[1]-.05,.25,.3),1); show($('pN'),nm(t,aN,aN+.25),10);
+  [[ 'ad1',aN+.3],['ad2',T.n2],['ad3',T.n3]].forEach(([k,a])=>{const o=nm(t,a,a+.3); $(k).style.opacity=o; $(k).style.transform=`translateY(${(1-out(o))*60}px) rotate(${(1-out(o))*-4}deg)`;});
+  // 3 · landings
+  const aL=S.sL[0]; show($('sL'),win(t,aL,S.sL[1]-.05,.25,.3),1); show($('pL'),nm(t,aL,aL+.25),10);
+  [aL+.2,aL+.7,T.l2].forEach((a,i)=>show($('lp'+i),nm(t,a,a+.3),50));
+  // 4 · formulario
   const a2=S.s2[0]; show($('s2'),win(t,a2,S.s2[1]-.05,.3,.3),30);
-  document.querySelectorAll('#s2 .q2').forEach((q,i)=>{const ti=a2+[.9,1.9,2.9][i]; show(q,nm(t,ti-.6,ti-.3),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>ti+.3));});
-  $('txt').textContent=TXT.slice(0,Math.round(TXT.length*nm(t,a2+.9,a2+1.7)));
-  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),1); show($('c1'),nm(t,a3+.1,a3+.45),30); show($('c2'),nm(t,a3+2.3,a3+2.65),30); $('nadie').style.opacity=0;
-  const a4=S.s4[0]; show($('s4'),win(t,a4,S.s4[1]-.05,.3,.3),30); show($('w1'),nm(t,a4+.5,a4+.8),20); show($('w2'),nm(t,a4+2.2,a4+2.5),20); show($('seg'),nm(t,a4+2.8,a4+3.1),20);
-  document.querySelectorAll('#s4 .dias span').forEach((d,i)=>d.classList.toggle('on',t>a4+3.2+i*.45)); show($('cita'),nm(t,a4+4.3,a4+4.6),10);
-  const a5=S.s5[0]; show($('s5'),win(t,a5,S.s5[1]-.05,.3,.3),40); document.querySelectorAll('#s5 .dato').forEach((d,i)=>show(d,nm(t,a5+.5+i*.5,a5+.8+i*.5),14)); show($('fl5'),nm(t,a5+2.0,a5+2.35),14);
-  show($('crm'),nm(t,a5+2.8,a5+3.15),30); document.querySelectorAll('#s5 .fila').forEach((d,i)=>show(d,nm(t,a5+3.2+i*.35,a5+3.5+i*.35),10));
+  document.querySelectorAll('#s2 .q2').forEach((q,i)=>{const ti=a2+[.6,1.5,2.3][i]; show(q,nm(t,ti-.4,ti-.15),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>ti+.3));});
+  $('txt').textContent=TXT.slice(0,Math.round(TXT.length*nm(t,a2+.6,a2+1.3)));
+  // 5 · caminos
+  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),1); show($('c1'),nm(t,a3+.1,a3+.45),30); show($('c2'),nm(t,T.c2-.2,T.c2+.15),30);
+  document.querySelectorAll('#s3 .dias span').forEach((d,i)=>d.classList.toggle('on',t>T.c2+.8+i*.5));
+  // 6 · agentes
+  const aV=S.sV[0]; show($('sV'),win(t,aV,S.sV[1]-.05,.3,.3),30); show($('w1'),nm(t,aV+.4,aV+.7),20);
+  $('llam').style.opacity=nm(t,T.v2-.2,T.v2+.1); $('wa').style.opacity=1-nm(t,T.v2-.2,T.v2+.1);
+  document.querySelectorAll('#wave i').forEach((b,i)=>b.style.height=(20+Math.abs(Math.sin(t*7+i*.8))*80*(t>T.v2&&t<T.v3?1:.2))+'px');
+  show($('cal'),nm(t,T.v3,T.v3+.35),60);
+  // 7 · medición
+  const aM=S.sM[0]; show($('sM'),win(t,aM,S.sM[1]-.05,.3,.3),1); show($('tab'),nm(t,aM+.05,aM+.4),40);
+  document.querySelectorAll('#sM .tr:not(.h)').forEach((d,i)=>show(d,nm(t,aM+.6+i*.4,aM+.9+i*.4),10));
+  $('trm').classList.toggle('mal',t>T.m2-.2); show($('avs'),nm(t,T.m2-.2,T.m2+.1),10); show($('mt'),nm(t,T.m2+1.1,T.m2+1.45),30);
+  // cierre
   const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); show($('s9').querySelector('.t1'),nm(t,a9,a9+.3),16);
-  show($('rec'),nm(t,a9+.6,a9+.9),16); $('fg').classList.toggle('fuga',t>T.f1); $('fg').textContent=t>T.f1?'Aquí se pierde':'Respuesta';
-  show($('t2'),nm(t,T.f2-.1,T.f2+.2),16); ['f3','f4','f5'].forEach(k=>show($(k),nm(t,T[k]-.1,T[k]+.2),20)); show($('bt'),nm(t,T.f5+1.6,T.f5+1.9),16); show($('s9').querySelector('img'),nm(t,T.f5+1.9,T.f5+2.2),10);
+  $('s9').querySelectorAll('.sis div,.sis i').forEach((d,i)=>show(d,nm(t,a9+.5+i*.18,a9+.75+i*.18),12));
+  show($('md'),nm(t,a9+2.0,a9+2.3),10); show($('t2'),nm(t,a9+2.4,a9+2.7),16); show($('t3'),nm(t,T.f2-.3,T.f2),10);
+  show($('bt'),nm(t,T.f2,T.f2+.3),16); show($('lg'),nm(t,T.f2+.6,T.f2+.9),10);
 };
 window.setT(0);
 </script>
