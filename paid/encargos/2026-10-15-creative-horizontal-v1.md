@@ -1,6 +1,6 @@
 # Encargo a Creative · anuncio horizontal "ya inviertes y no cierran" (borrador Paid, 15-oct-2026)
 
-Estado: BORRADOR para el bloque de las 15:30 con Maikel. No es encargo firme hasta que Maikel lo apruebe.
+Estado: ENCARGO FIRME (Maikel, 15-oct 11:05 CEST: "pásale el brief para que lo pruebe, el precio no lo digas"). Sin precio en pantalla ni en textos.
 Estilo: el del 3V2 (demo del sistema sobre pantalla, tipografía, sin personas a cámara, sin stock). Dos cortes: 4:5 feed y 9:16 stories con texto dentro de la zona segura (filas 15-77 %). 50-60 s. Subtítulos siempre; voz en off opcional.
 Regla: ninguna cifra en pantalla que no sea real y verificable (caso con fuente y fecha, aprobado por Maikel). Donde pone [DATO] se pone el real o se quita la frase.
 
@@ -15,12 +15,12 @@ Regla: ninguna cifra en pantalla que no sea real y verificable (caso con fuente 
 | 24-36 | Tres cortes rápidos de 4 s: **academia** / **clínica** / **reformas**, cada uno con su pantalla de "encaja" | "Pasa en academias. Pasa en clínicas. Pasa en reformas. Sea tu sector el que sea, el patrón es el mismo." | Aquí está el horizontal: tres casos, mismo sistema. Tipografía distinta por sector, no fotos. |
 | 36-44 | **Respuesta en minutos. Seguimiento hasta la cita.** Pantalla de WhatsApp + llamada (Raquel) | "Al que encaja le respondemos en minutos, lo seguimos hasta que tiene cita con tu comercial, y nos quedamos con el que todavía no." | Sin nombres reales en las capturas. |
 | 44-52 | **Del anuncio al cliente. Medido en tu CRM.** Pantalla de informe: anuncio → lead → cita → cliente | "Y le decimos a Meta cuáles acabaron en cliente, para que te traiga más de esos. Todo medido en tu CRM, no en un panel nuestro." | Si hay [DATO] real aprobado (caso EAC: cifras medidas en su CRM en un mes de campaña), va aquí con fuente. Si no, sin cifra. |
-| 52-58 | **Diagnóstico sin coste · 30 min.** Línea pequeña: *proyectos desde 1.200 €* | "Treinta minutos, sin coste, para ver dónde se te escapan. Si no encajas, te lo decimos." | El precio en pequeño filtra antes del clic. CTA del anuncio: "Más información" o "Solicitar". |
+| 52-58 | **Diagnóstico sin coste · 30 min.** | "Treinta minutos, sin coste, para ver dónde se te escapan. Si no encajas, te lo decimos." | Sin precio (decisión de Maikel). CTA del anuncio: "Más información" o "Solicitar". |
 
 ## Textos del anuncio
 
 **Texto principal (feed):**
-"Inviertes más de 1.000 € al mes en anuncios, tienes comerciales, y los leads no cierran. El problema casi nunca es el anuncio: es lo que pasa después del clic. Cualificamos antes de que tu comercial descuelgue, respondemos en minutos, seguimos hasta la cita y medimos del anuncio al cliente en tu CRM. Pasa en academias, clínicas y reformas: el patrón es el mismo. Diagnóstico de 30 minutos sin coste. Trabajamos con proyectos desde 1.200 €."
+"Inviertes más de 1.000 € al mes en anuncios, tienes comerciales, y los leads no cierran. El problema casi nunca es el anuncio: es lo que pasa después del clic. Cualificamos antes de que tu comercial descuelgue, respondemos en minutos, seguimos hasta la cita y medimos del anuncio al cliente en tu CRM. Pasa en academias, clínicas y reformas: el patrón es el mismo. Diagnóstico de 30 minutos sin coste."
 
 **Titular:** "¿Tus comerciales dicen que los leads no valen?"
 **Descripción:** "Cualificación, respuesta y seguimiento hasta la cita. Medido en tu CRM."
