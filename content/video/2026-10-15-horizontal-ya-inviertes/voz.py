@@ -94,6 +94,7 @@ if __name__ == '__main__':
     orden, *resto = sys.argv[1:]
     if orden == 'voz':
         import voz_elevenlabs as v
-        v.tts(' '.join(f for _, f in GUION), 'david', f'{AQUI}/voz/horizontal')
+        # estabilidad 1.0 («robusta» en eleven_v3): sin ella el tono de David cambia de golpe entre frases (Maikel 15-oct)
+        v.tts(' '.join(f for _, f in GUION), 'david', f'{AQUI}/voz/horizontal', ajustes={'stability': 1.0})
     elif orden == 'tiempos': tiempos()
     elif orden == 'mezcla': mezcla(*resto)

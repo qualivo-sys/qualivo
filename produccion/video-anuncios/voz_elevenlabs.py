@@ -43,9 +43,12 @@ def palabras(al):
     for p in out: p['w'] = p['w'].replace('Qualivo', 'cualivo')
     return out
 
-def tts(texto, voz, destino):
+def tts(texto, voz, destino, modelo=MODELO, ajustes=None):
+    """ajustes: voice_settings de ElevenLabs (p. ej. {'stability': 1.0}); sin ellos, los de la voz."""
     clave = os.environ['ELEVENLABS_API_KEY']
-    cuerpo = json.dumps({'text': texto, 'model_id': MODELO, 'language_code': 'es'}).encode()
+    d = {'text': texto, 'model_id': modelo, 'language_code': 'es'}
+    if ajustes: d['voice_settings'] = ajustes
+    cuerpo = json.dumps(d).encode()
     req = urllib.request.Request(f'https://api.elevenlabs.io/v1/text-to-speech/{VOCES[voz]}/with-timestamps?output_format=mp3_44100_128',
                                  data=cuerpo, headers={'xi-api-key': clave, 'Content-Type': 'application/json'})
     r = json.load(urllib.request.urlopen(req, timeout=300))
