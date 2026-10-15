@@ -11,29 +11,30 @@
 ## Ficha
 
 - **Etapa del Revenue Journey:** cualificación.
-- **Dato real:** las preguntas de los formularios de una prueba que salen desde el 8-oct (`api/_funnel-v2.js`):
+- **Dato real:** las preguntas de los formularios de una prueba, desde el 8-oct (`api/_funnel-v2.js`):
   - solicitudes al mes;
-  - cuánto paga de media un cliente;
   - quién decide;
   - para cuándo;
-  - dónde se le escapa (opcional).
-- **El caso de la lámina 4:** la «A que no era», anonimizada, sin sector, fecha ni cifra (daily del 5-oct, R5).
+  - cuánto paga de media un cliente.
+
+  Van en «modo sombra»: hoy dejan marca. Lo de «solo mirando» cuenta como una señal de poco encaje, no como un bloqueo.
+- **Texto literal de las opciones:** «Yo con un socio» es como aparece en `api/encaja.js`. **Paid tiene que confirmar el texto del formulario nativo** (Notion §4.1) antes de publicar.
 - **Reglas:**
-  - **R1:** los formularios «de antes» son ejemplos genéricos y van marcados como «Ejemplo».
+  - **R1:** la columna tachada son ejemplos genéricos, marcados como «Ejemplo» en cada lámina.
   - **R3:** sin resultados de la prueba.
-  - **R10:** ni nuestro precio ni los tramos con cifras. Se dice «en tramos».
-  - **R12:** primero lo que funciona (cada pregunta cambia lo que haces después), y el fallo, corto (lámina 4).
+  - **R5:** no se usa el caso de la «A que no era». El trato sigue abierto, y el caso es del LinkedIn A.
+  - **R10:** ni nuestro precio ni tramos con cifras.
+  - **R12:** primero para qué sirve cada pregunta.
 - **Guía de carruseles:**
-  - 8 láminas de 1080 × 1350;
-  - 20-40 palabras por lámina;
-  - la idea en el tercio superior;
-  - barra de progreso;
-  - molde crema y tinta de Maikel;
-  - fuente escrita en la lámina 7.
-- **Formato visual:** «el formulario tachado». A la izquierda, la pregunta de siempre en gris y tachada. A la derecha, la que filtra, en verde.
-- **CTA (R15):** una sola acción, «Guárdalo». La pregunta va en el texto del post, no en la lámina.
-- **Qué se mide:** guardados, y comentarios de dueños o directores comerciales sobre qué le falta a su formulario.
-- **Enlace (en comentario, no en el post):** `/blog/cualificar-leads/?utm_source=linkedin&utm_medium=organic&utm_campaign=s42-cualificacion&utm_content=carrusel-formulario`
+  - 8 láminas de 1080 × 1350, 20-40 palabras por lámina, la idea en el tercio superior y barra de progreso;
+  - molde crema y tinta;
+  - fuente en la lámina 7;
+  - el último ítem es el que sorprende: el ticket.
+- **Formato visual:** «el formulario tachado». A la izquierda, la pregunta de siempre en gris, tachada y con la etiqueta «Ejemplo». A la derecha, la que filtra, en verde.
+- **CTA (brief): conversación.** Una sola acción: la pregunta de la lámina 8, que se repite en el texto.
+- **Enlace:** no va ni en el post ni en un comentario. Se guarda para contestar a quien pregunte: `/blog/cualificar-leads/?utm_source=linkedin&utm_medium=organic&utm_campaign=s42-cualificacion&utm_content=carrusel-formulario`.
+- **Qué se mide:** comentarios de dueños o directores comerciales sobre qué le falta a su formulario.
+- **Master Reviewer (15-oct):** nota 5, con los 9 críticos aplicados y varios opcionales.
 
 ## Láminas
 
@@ -44,66 +45,71 @@
 > *Visual: un formulario con las preguntas de siempre tachadas y cuatro nuevas al lado.* · 1/8
 
 **2 · Contexto**
-> Casi todos los formularios piden nombre, teléfono, email y «cuéntanos tu proyecto».
+> Casi todos los formularios piden nombre, teléfono, correo y «¿en qué podemos ayudarte?».
 > Sirve para llamar.
 > No sirve para saber **a quién llamar primero**.
 >
 > *Visual: una lista de 20 contactos idénticos, en gris.* · 2/8
 
 **3 · Pregunta 1**
-> ~~Cuéntanos tu proyecto~~
-> **¿Cuántas solicitudes os llegan al mes?**
+> ~~¿En qué podemos ayudarte?~~
+> **¿Cuántas solicitudes te llegan al mes?**
 > Dice si hay volumen que ordenar. Sin volumen, no hay nada que priorizar.
 >
-> *Visual: las dos columnas. A la izquierda, etiqueta «Ejemplo».* · 3/8
+> *Visual: las dos columnas. A la izquierda, «Ejemplo».* · 3/8
 
-**4 · Pregunta 2 (el fallo, corto)**
-> ~~¿A qué te dedicas?~~
-> **¿Cuánto te paga de media un cliente?**
-> A un contacto le dimos nuestra nota más alta. En la reunión salió lo que cobraba, y había que rehacer la cuenta.
->
-> *Visual: una ficha con «A», tachada y corregida.* · 4/8
-
-**5 · Pregunta 3**
+**4 · Pregunta 2**
 > ~~¿Eres el responsable?~~
 > **¿Quién decide la compra?**
-> Yo · Yo y un socio · Otra persona.
+> Yo · Yo con un socio · Otra persona.
 > Si decide otro, la reunión necesita a esa persona.
 >
-> *Visual: dos sillas en la reunión, una vacía.* · 5/8
+> *Visual: dos sillas en la reunión, una vacía. A la izquierda, «Ejemplo».* · 4/8
 
-**6 · Pregunta 4**
+**5 · Pregunta 3**
 > ~~¿Te interesa?~~
 > **¿Para cuándo quieres resolverlo?**
 > Este mes · En 1-3 meses · Más adelante, solo estoy mirando.
-> Cambia el primer mensaje: a quien solo mira no se le pide una reunión.
+> A quien solo mira, no le ofrezcas reunión en el primer mensaje. Primero, una pregunta.
 >
-> *Visual: tres caminos.* · 6/8
+> *Visual: tres caminos. A la izquierda, «Ejemplo».* · 5/8
+
+**6 · Pregunta 4 (la que nadie hace)**
+> ~~¿Tienes web?~~
+> **¿Cuánto te paga de media un cliente?**
+> Sin ella, un contacto con mucho volumen parece perfecto aunque lo que vende no le dé para pagarte.
+>
+> *Visual: una ficha con una nota alta y un interrogante. A la izquierda, «Ejemplo».* · 6/8
 
 **7 · Resumen**
-> **Cuatro preguntas. Diez segundos.**
-> Cada respuesta cambia lo que haces después: a quién llamas, a quién invitas y qué le dices primero.
+> **Cuatro preguntas de marcar.**
+> Cada respuesta te dice qué hacer después: a quién llamas, a quién invitas y qué le dices primero.
 >
 > *Fuente: formularios de una prueba de Qualivo, desde el 8-oct-2026. El resultado, cuando acabe.* · 7/8
 
 **8 · CTA**
-> **Guárdalo** para cuando rehagas tu formulario.
+> **¿Qué pregunta le falta a tu formulario?**
 >
 > *Visual: el formulario nuevo completo, limpio.* · 8/8
 
 ## Texto del post (LinkedIn)
 
 > Los formularios suelen preguntar lo fácil: a qué te dedicas, si eres el
-> responsable, «cuéntanos tu proyecto».
+> responsable, «¿en qué podemos ayudarte?».
 >
 > Lo que decide si alguien puede comprarte suele quedarse fuera.
 >
-> En el carrusel, las cuatro preguntas que hacemos desde el 8 de octubre en
-> los formularios de una prueba, y lo que cambia con cada respuesta.
+> En el carrusel, las cuatro preguntas que hemos añadido desde el 8 de
+> octubre a los formularios de una prueba, y para qué sirve cada respuesta.
+> El resultado, cuando acabe la prueba.
 >
 > ¿Qué pregunta le falta al tuyo?
 
 ## Texto del post (Instagram)
 
-> Tu formulario pregunta lo fácil. Estas son las cuatro preguntas que separan
-> al que compra del que curiosea. Guárdalo para cuando rehagas el tuyo.
+> Tu formulario pregunta lo fácil. Estas son las cuatro preguntas que hemos
+> añadido a los formularios de una prueba, y para qué sirve cada una.
+>
+> ¿Qué pregunta le falta al tuyo?
+>
+> #captaciondeclientes #leads #ventas #marketingdigital #pymes

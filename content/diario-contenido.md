@@ -1425,7 +1425,11 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 - **Carrusel** `content/borradores/2026-10-15-carrusel-lo-que-tu-formulario-pregunta.md`: la pieza 4 del brief y el adelanto del recurso B. Ocupa el hueco «Agentizando» del jueves.
 - **Guion del vídeo 5** `content/borradores/2026-10-15-video-5-ficha-dos-notas.md`: 45 segundos, voz el viernes.
 
-**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-15.md`): en curso. Sus críticos van en un segundo commit.
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-15.md`): re-apunte 7, carrusel 5 y vídeo 5 6. Aplicados todos los críticos. Lo importante:
+- El carrusel decía que a quien «solo mira» no se le pide reunión, pero `/gracias/` le enseña el calendario. Ahora es una recomendación.
+- El caso de la «A que no era» sale del carrusel, porque el trato sigue abierto.
+- La pregunta del precio solo deja marca y no entra en la nota. Ahora lo dicen el artículo y el vídeo.
+- Nuevo para la sesión del ICP: los formularios v2 no preguntan la inversión, así que ningún contacto v2 llega a A directa por encaje alto.
 
 **Descartado:**
 - **Artículo nuevo (A).** La semana 42 ya lleva dos piezas fuertes. El primero de la estrategia, «Lead scoring con dos notas», va el lunes 19 si Maikel aprueba la cadencia de dos por semana.
