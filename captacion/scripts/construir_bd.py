@@ -13,14 +13,15 @@ SECTOR_Q = {'formacion':'Formación','formación':'Formación','reformas':'Refor
             'inmobiliaria':'Inmobiliaria','asesoria':'Servicios profesionales','automocion':'Automoción',
             'software':'Software y tecnología B2B','gimnasio':'Fitness y bienestar','eventos':'Eventos, turismo y hostelería',
             'muebles':'Retail con tienda (hogar)','distribucion':'Industria y distribución','B2B':'Software y tecnología B2B',
-            'consulting':'Servicios profesionales','ingenieria':'Industria y distribución'}
+            'consulting':'Servicios profesionales','ingenieria':'Industria y distribución','energia solar':'Energía solar y servicios técnicos'}
 
 # tipologia por nombre/dominio (manda sobre la query)
 NAME_RULES = [
   ('Clínicas y salud', r'clinic|dental|denta|odonto|ortodon|estetic|aesthetic|fisio|psicolog|nutricion|oftalm|fertil|medic|capilar|skin|vascular|hospital|salud|veterin|vet\b'),
   ('Formación', r'formacion|academ|escuela|school|campus|oposicion|e-?learning|master|mba|training|fp\b|idiomas|english|educa'),
   ('Inmobiliaria', r'inmobil|real estate|realty|propert|immobil|promoci|inmo|realtor|brokers?\b.*(estate|marbella)'),
-  ('Reformas y hogar', r'reform|construc|cocina|kitchen|ventana|aluminio|alumin|carpinter|climatiz|solar|instalacion|fontaner|interiorismo|interiores|arquitect|rehabilit|piscina|bano'),
+  ('Energía solar y servicios técnicos', r'solar|fotovolt|renovable|aerotermia|energ[ií]a|energy|autoconsumo'),
+  ('Reformas y hogar', r'reform|construc|cocina|kitchen|ventana|aluminio|alumin|carpinter|climatiz|instalacion|fontaner|interiorismo|interiores|arquitect|rehabilit|piscina|bano|puerta|toldo|persiana|cerramiento|aislamiento'),
   ('Automoción', r'motor|auto|wagen|car\b|cars\b|concesionari|renting|motos?\b|seat|kia|hyundai|renault|volvo|toyota|bmw|audi|mercedes|peugeot|citro|ford|skoda|lexus|nissan|vehic'),
   ('Servicios profesionales', r'abogad|lawyer|legal|advocat|asesor|gestori|seguros|insurance|correduria|broker|economistas|consultor|consulting|auditor|fiscal|bufete|despacho'),
   ('Retail con tienda (hogar)', r'mueble|mobel|mobles|colchon|sofa|decora|furniture|home\b|optica|joyer|electrodom|descanso|dormi'),
@@ -90,14 +91,18 @@ for a in pordom.values():
     a['n_senales'] = nsen
     (out if motivo else keep).append(a)
 
-PESO = {'Formación':3,'Reformas y hogar':3,'Clínicas y salud':3,'Inmobiliaria':2,'Servicios profesionales':2,
-        'Automoción':2,'Retail con tienda (hogar)':2,'Fitness y bienestar':2,'Eventos, turismo y hostelería':1,
-        'Industria y distribución':1,'Software y tecnología B2B':1,'Otros B2B':1}
+LINEA = {'Formación':'1ª línea','Reformas y hogar':'1ª línea','Clínicas y salud':'1ª línea',
+         'Inmobiliaria':'2ª línea','Servicios profesionales':'2ª línea','Energía solar y servicios técnicos':'2ª línea'}
 for a in keep:
-    w = PESO.get(a['tipologia'],1); n = a['n_senales']
-    a['score'] = n*2 + w
-    a['prioridad'] = 'A' if (n >= 2 and w >= 2) or n >= 3 else 'B' if (w == 3 or n >= 2) else 'C'
-
+    lin = LINEA.get(a['tipologia'], 'Exploración')
+    sen = a['senales']; ads = 'anuncios' in sen or 'anuncios o CRM' in sen
+    a['linea'] = lin; n = a['n_senales']
+    if lin == '1ª línea' and ads and n >= 2: icp = 'A'
+    elif lin != 'Exploración' and n >= 1: icp = 'B'
+    else: icp = 'C'
+    a['prioridad'] = icp
+    a['score'] = {'A':3,'B':2,'C':1}[icp]*10 + n
+    a['economia'] = 'pendiente de validar'
 keep.sort(key=lambda a:(-a['score'], a['tipologia'], a['nombre'].lower()))
 json.dump([{k:(sorted(v) if isinstance(v,set) else dict(v) if isinstance(v,Counter) else v) for k,v in a.items()} for a in keep], open('bd_icp_keep.json','w'), ensure_ascii=False, indent=0)
 json.dump([{k:(sorted(v) if isinstance(v,set) else dict(v) if isinstance(v,Counter) else v) for k,v in a.items()} for a in out], open('bd_icp_out.json','w'), ensure_ascii=False, indent=0)
