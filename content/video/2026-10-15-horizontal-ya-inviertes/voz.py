@@ -15,19 +15,22 @@ sys.path.insert(0, VA)
 # - nunca «no encaja» a un lead (regla de Maikel): «si todavía no, lo seguimos nosotros»;
 # - a Meta se le devuelve la calidad del contacto, no «cuáles acabaron en cliente»;
 # - las preguntas del formulario son las del cliente final (qué necesita, cuándo, presupuesto), no las de Qualivo.
+# v2 (feedback de Maikel 15-oct): fuera los cortes de sector; entra «diseñamos todo tu sistema de captación»;
+#   el cierre vende la demostración de la reunión (recorrido, fuga y sistema aplicado a su caso).
 GUION = [
  ('hook', 'Inviertes más de mil euros al mes en anuncios.'),
  ('h2', 'Tienes comerciales. Y los leads no cierran.'),
- ('giro', 'Tu equipo dice que los leads de Meta no valen. Antes de darles la razón, mira lo que pasa después del clic.'),
- ('s2', 'Primero, el formulario pregunta lo que tu comercial preguntaría en la primera llamada: qué necesita, cuándo quiere empezar y con qué presupuesto.'),
- ('s3', 'Si encaja, pasa a tu comercial. Si todavía no, lo seguimos nosotros. Nadie pierde una hora.'),
- ('aca', 'Pasa en academias.'),
- ('cli', 'Pasa en clínicas.'),
- ('ref', 'Pasa en reformas. Sea cual sea tu sector, el patrón es el mismo.'),
- ('s4', 'Al que encaja le respondemos en minutos y lo seguimos hasta que tiene cita con tu comercial.'),
- ('s5', 'Y le decimos a Meta quiénes eran buenos contactos, para que te traiga más como esos. Todo medido en tu CRM.'),
- ('s9', 'Treinta minutos, sin coste, para ver dónde se te escapan.'),
+ ('giro', 'Cuando un contacto no avanza, ¿sabes si no encajaba, si todavía estaba valorando o si simplemente se perdió?'),
+ ('dis', 'Por eso diseñamos todo tu sistema de captación: anuncios que atraen a tus mejores clientes, no a gente que no te puede comprar, y landings que convierten mejor.'),
+ ('s2', 'El formulario pregunta lo que tu comercial preguntaría en la primera llamada.'),
+ ('s3', 'Si encaja, pasa a tu comercial. Si todavía no, lo seguimos nosotros.'),
+ ('s4', 'Le respondemos en minutos y lo seguimos hasta que tiene cita con tu comercial.'),
+ ('s5', 'Y le decimos a Meta quiénes eran buenos contactos, para que te traiga más como esos.'),
+ ('s9', 'En treinta minutos analizamos tu recorrido y dónde está la fuga. Y te enseñamos el sistema que montaríamos para ti, con ejemplos de anuncios, landings y nuestros agentes respondiendo como tu equipo.'),
 ]
+MARCAS = [('g1', 'giro', 'encajaba'), ('g2', 'giro', 'valorando'), ('g3', 'giro', 'perdio'),
+          ('d1', 'dis', 'anuncios'), ('d2', 'dis', 'gente'), ('d3', 'dis', 'landings'),
+          ('f1', 's9', 'fuga'), ('f2', 's9', 'sistema'), ('f3', 's9', 'anuncios'), ('f4', 's9', 'landings'), ('f5', 's9', 'agentes')]
 COLA = 2.4
 ADELANTO = 0.15
 
@@ -45,6 +48,10 @@ def tiempos():
         if ws[i:i + 2] != cab: sys.exit(f'no encuentro «{" ".join(cab)}» en la locución')
         T[bloque] = round(max(0, pal[i]['s'] - ADELANTO), 2) if bloque != 'hook' else 0
         i += 1
+    # marcas finas dentro de un bloque: (nombre, bloque, palabra) → inicio de la primera palabra que coincide tras el bloque
+    for nombre, bloque, pal_ in MARCAS:
+        j = next(k for k, p in enumerate(pal) if p['s'] >= T[bloque] and norm(p['w']).startswith(pal_))
+        T[nombre] = round(pal[j]['s'], 2)
     dur = round(pal[-1]['e'] + COLA, 2)
     # subtítulos: la voz en trozos de 3-6 palabras
     # cortes en la puntuación; los trozos largos se parten en mitades parecidas (máx. 6 palabras)

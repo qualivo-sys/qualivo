@@ -59,21 +59,50 @@
 .fila{display:grid;grid-template-columns:1fr 120px;padding:16px 0;border-top:2px solid rgba(10,10,11,.12);font-size:28px;opacity:0}
 .fila:first-of-type{margin-top:14px}
 .fila b{font-family:Anton;font-size:36px;text-align:right;color:#0E7C74;font-weight:400}
+#hook .giro .q{font-size:84px}
+.chips3{display:flex;flex-direction:column;gap:18px;margin-top:40px}
+.chips3 div{align-self:flex-start;border:4px solid #F4CC38;color:#F4CC38;border-radius:999px;padding:12px 30px;font-family:Anton;font-size:52px;text-transform:uppercase;opacity:0}
+.pieza{position:absolute;left:0;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;overflow:hidden;opacity:0}
+.pieza .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;padding:26px 40px 0}
+.pieza .igi{height:300px;margin:18px 0 0}
+.pieza .igi h4{font-size:58px}
+.tacha{position:absolute;left:40px;right:40px;top:470px;background:#C2410C;color:#F4F1EB;border-radius:18px;padding:18px 26px;font-family:Anton;font-size:40px;text-transform:uppercase;text-align:center;opacity:0;transform:rotate(-2deg)}
+.land{padding:30px 40px 40px}
+.land .url{font-size:20px;color:#7A7C82;border:2px solid rgba(10,10,11,.15);border-radius:999px;padding:8px 18px;display:inline-block;margin-bottom:24px}
+.land h4{font-family:Anton;font-size:60px;line-height:1;text-transform:uppercase;margin-bottom:14px}
+.land p{font-size:26px;color:#3D4148;line-height:1.4;margin-bottom:22px}
+.land .btn{margin-top:0}
 #s9{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;padding:0 20px}
-#s9 .t1{font-family:Anton;font-size:96px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
-#s9 .t2{font-family:Anton;font-size:56px;line-height:1;text-transform:uppercase;color:#F4F1EB}
+#s9{gap:26px}
+#s9 .t1{font-family:Anton;font-size:84px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
+#s9 .t2{font-family:Anton;font-size:66px;line-height:1;text-transform:uppercase;color:#F4F1EB}
 #s9 .btn2{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:26px 44px;border-radius:20px}
-#s9 img{width:400px}
+#s9 img{width:320px}
+.rec{display:flex;gap:10px;align-items:center;justify-content:center}
+.rec span{border:3px solid #0A0A0B;border-radius:12px;padding:12px 16px;font-weight:700;font-size:30px;background:#F4F1EB}
+.rec span.fuga{background:#C2410C;color:#F4F1EB;border-color:#C2410C}
+.rec b{font-size:26px}
+.tres{display:flex;gap:14px;justify-content:center}
+.tres div{background:#0A0A0B;color:#F4F1EB;border-radius:18px;padding:22px 26px;font-family:Anton;font-size:50px;text-transform:uppercase;line-height:1;opacity:0}
+.tres div small{display:block;font-family:SG;font-size:22px;font-weight:600;text-transform:none;color:#F4CC38;margin-top:8px}
 #s9 .web{font-family:Anton;font-size:40px;letter-spacing:.06em;color:#F4CC38}
 </style>
 <div id="e">
   <div id="hook">
     <div class="bloque" id="b1"><h1 id="h1">Inviertes <i>+1.000 €</i> al mes en anuncios.</h1><div class="h2" id="h2">Tienes comerciales. Y los leads no cierran.</div></div>
-    <div class="bloque giro" id="b2"><div class="quien">Tu equipo:</div><div class="q">«Los leads de Meta <i>no valen.</i>»</div><div class="m" id="gm">Mira lo que pasa después del clic.</div></div>
+    <div class="bloque giro" id="b2"><div class="quien">Un contacto no avanza.</div><div class="q">¿Sabes <i>por qué?</i></div>
+      <div class="chips3"><div id="g1">¿No encajaba?</div><div id="g2">¿Estaba valorando?</div><div id="g3">¿Se perdió?</div></div></div>
   </div>
   <div id="ej">Ejemplo</div>
   <div id="reloj"><span>después del clic</span><b>00:00</b></div>
   <div id="stage">
+    <div class="sc" id="sd">
+      <div class="pieza" id="pa" style="top:0"><div class="k">Anuncio · para tu mejor cliente</div>
+        <div class="igi"><h4>¿Reformar la cocina entera este año?</h4><p>Cuéntanos qué buscas y te damos fecha para verla.</p></div></div>
+      <div class="tacha" id="tx">✕ Gente que no te puede comprar</div>
+      <div class="pieza" id="pl" style="top:640px"><div class="land"><div class="url">tuempresa.com/cocinas</div>
+        <h4>Tu cocina nueva, con fecha y presupuesto cerrado</h4><p>Tres preguntas y te llamamos para verla.</p><div class="btn">Quiero mi presupuesto</div></div></div>
+    </div>
     <div class="sc" id="s2"><div class="phone"><div class="screen"><div class="form">
       <h3>Antes de llamarte</h3><p>Lo que tu comercial preguntaría en la primera llamada.</p>
       <div class="q2"><small>¿Qué necesitas?</small><div class="txt" id="txt"></div></div>
@@ -86,8 +115,6 @@
       <div class="camino nt" id="c2" style="top:420px"><div class="k">Todavía no</div><h3>Lo seguimos nosotros.</h3><p>Tu comercial no lo llama hoy. Y la puerta queda abierta.</p></div>
       <div class="nadie" id="nadie">Nadie pierde una hora.</div>
     </div>
-    <div class="sc" id="s6"><div class="sect"><div id="x0"><small>01</small>Academias</div><div id="x1"><small>02</small>Clínicas</div><div id="x2"><small>03</small>Reformas</div></div>
-      <div class="patron" id="pat">Mismo patrón: <i>el fallo está después del clic.</i></div></div>
     <div class="sc" id="s4"><div class="phone"><div class="screen"><div class="wa">
       <div class="wah"><div class="av">T</div><div><b>Tu empresa</b><span>en línea</span></div></div>
       <div class="mine" id="w1" style="top:170px">Hola Laura, gracias por escribirnos. ¿Te va bien que te llame nuestro comercial mañana a las 17:30?<div class="t">10:04</div></div>
@@ -106,9 +133,12 @@
     </div>
   </div>
   <div id="wide" style="position:absolute;left:80px;right:80px;top:100px;bottom:200px"><div class="sc" id="s9">
-    <div class="t1">30 minutos.<br>Sin coste.</div><div class="t2">Dónde se te escapan los leads</div>
-    <div class="btn2">Revisar mis fugas →</div>
-    <img src="rec/logo-blanco.png"><div class="web">QUALIVO.IO</div></div></div>
+    <div class="t1">30 minutos. Sin coste.</div>
+    <div class="rec" id="rec"><span>Anuncio</span><b>→</b><span>Formulario</span><b>→</b><span id="fg">Respuesta</span><b>→</b><span>Cita</span></div>
+    <div class="t2" id="t2">El sistema que montaríamos para ti</div>
+    <div class="tres"><div id="f3">Anuncios</div><div id="f4">Landings</div><div id="f5">Agentes<small>respondiendo como tu equipo</small></div></div>
+    <div class="btn2" id="bt">Quiero ver mi demo →</div>
+    <img src="rec/logo-blanco.png"></div></div></div>
   <div id="sub"><span id="subt"></span></div>
   <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
   <div id="tex"></div>
@@ -123,28 +153,30 @@ const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3);
 function win(t,a,b,fi=.35,fo=.3){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
 function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
-const S={hook:[0,T.s2], s2:[T.s2,T.s3], s3:[T.s3,T.aca], s6:[T.aca,T.s4], s4:[T.s4,T.s5], s5:[T.s5,T.s9], s9:[T.s9,DUR+1]};
+const S={hook:[0,T.dis+.3], sd:[T.dis,T.s2], s2:[T.s2,T.s3], s3:[T.s3,T.s4], s4:[T.s4,T.s5], s5:[T.s5,T.s9], s9:[T.s9,DUR+1]};
 const RELOJ=[[S.s2,'en el formulario','00:40'],[S.s3,'al enviarlo','00:01'],[[T.s4,T.s4+2.6],'respuesta','en minutos'],[[T.s4+2.6,T.s5],'seguimiento','día 1 · 3 · 7']];
 const TXT='Reformar la cocina entera';
 window.setT=function(t){
   $('hook').style.opacity=win(t,0,S.hook[1],.01,.35);
   const b1=$('b1'); b1.style.opacity=1-nm(t,T.giro-.1,T.giro+.15);
   show($('h1'),nm(t,.02,.3),30); show($('h2'),nm(t,T.h2,T.h2+.3),24);
-  $('b2').style.opacity=nm(t,T.giro,T.giro+.25); show($('gm'),nm(t,T.giro+5.0,T.giro+5.35),20);
+  $('b2').style.opacity=nm(t,T.giro,T.giro+.25); ['g1','g2','g3'].forEach(k=>show($(k),nm(t,T[k]-.1,T[k]+.2),20));
   $('ej').style.opacity=(t>S.s2[0]+.2&&t<S.s9[0])?1:0;
   const r=RELOJ.find(x=>t>=x[0][0]&&t<x[0][1]); const rl=$('reloj'); if(r){rl.style.opacity=win(t,r[0][0],r[0][1],.3,.3); rl.innerHTML='<span>'+r[1]+'</span><b>'+r[2]+'</b>';} else rl.style.opacity=0;
   // subtítulos: fuera mientras el gancho ya pone el texto en grande
-  const s=t>=T.giro+3.0?SUBS.find(x=>t>=x[0]&&t<x[1]):null; $('subt').parentNode.style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
+  const s=t>=T.dis?SUBS.find(x=>t>=x[0]&&t<x[1]):null; $('subt').parentNode.style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
+  const ad=S.sd[0]; show($('sd'),win(t,ad,S.sd[1]-.05,.3,.3),1); show($('pa'),nm(t,ad+.1,ad+.45),30); show($('tx'),win(t,T.d2-.1,T.d3,.2,.2),10); show($('pl'),nm(t,T.d3-.2,T.d3+.15),40);
   const a2=S.s2[0]; show($('s2'),win(t,a2,S.s2[1]-.05,.3,.3),30);
-  document.querySelectorAll('#s2 .q2').forEach((q,i)=>{const ti=a2+[5.3,6.6,7.9][i]; show(q,nm(t,ti-.6,ti-.3),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>ti+.3));});
-  $('txt').textContent=TXT.slice(0,Math.round(TXT.length*nm(t,a2+5.3,a2+6.3)));
-  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),1); show($('c1'),nm(t,a3+.1,a3+.45),30); show($('c2'),nm(t,a3+2.5,a3+2.85),30); show($('nadie'),nm(t,a3+5.0,a3+5.3),20);
-  const a6=S.s6[0]; show($('s6'),win(t,a6,S.s6[1]-.05,.25,.3),1); ['aca','cli','ref'].forEach((k,i)=>show($('x'+i),nm(t,T[k],T[k]+.25),40)); show($('pat'),nm(t,T.ref+1.5,T.ref+1.85),20);
+  document.querySelectorAll('#s2 .q2').forEach((q,i)=>{const ti=a2+[.9,1.9,2.9][i]; show(q,nm(t,ti-.6,ti-.3),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>ti+.3));});
+  $('txt').textContent=TXT.slice(0,Math.round(TXT.length*nm(t,a2+.9,a2+1.7)));
+  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),1); show($('c1'),nm(t,a3+.1,a3+.45),30); show($('c2'),nm(t,a3+2.3,a3+2.65),30); $('nadie').style.opacity=0;
   const a4=S.s4[0]; show($('s4'),win(t,a4,S.s4[1]-.05,.3,.3),30); show($('w1'),nm(t,a4+.5,a4+.8),20); show($('w2'),nm(t,a4+2.2,a4+2.5),20); show($('seg'),nm(t,a4+2.8,a4+3.1),20);
   document.querySelectorAll('#s4 .dias span').forEach((d,i)=>d.classList.toggle('on',t>a4+3.2+i*.45)); show($('cita'),nm(t,a4+4.3,a4+4.6),10);
   const a5=S.s5[0]; show($('s5'),win(t,a5,S.s5[1]-.05,.3,.3),40); document.querySelectorAll('#s5 .dato').forEach((d,i)=>show(d,nm(t,a5+.5+i*.5,a5+.8+i*.5),14)); show($('fl5'),nm(t,a5+2.0,a5+2.35),14);
-  show($('crm'),nm(t,a5+4.6,a5+4.95),30); document.querySelectorAll('#s5 .fila').forEach((d,i)=>show(d,nm(t,a5+5.0+i*.35,a5+5.3+i*.35),10));
-  const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); const k=$('s9').children; for(let i=0;i<k.length;i++) show(k[i],nm(t,a9+[0,2.2,3.6,0,0][i],a9+[0,2.2,3.6,0,0][i]+.3),16);
+  show($('crm'),nm(t,a5+2.8,a5+3.15),30); document.querySelectorAll('#s5 .fila').forEach((d,i)=>show(d,nm(t,a5+3.2+i*.35,a5+3.5+i*.35),10));
+  const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); show($('s9').querySelector('.t1'),nm(t,a9,a9+.3),16);
+  show($('rec'),nm(t,a9+.6,a9+.9),16); $('fg').classList.toggle('fuga',t>T.f1); $('fg').textContent=t>T.f1?'Aquí se pierde':'Respuesta';
+  show($('t2'),nm(t,T.f2-.1,T.f2+.2),16); ['f3','f4','f5'].forEach(k=>show($(k),nm(t,T[k]-.1,T[k]+.2),20)); show($('bt'),nm(t,T.f5+1.6,T.f5+1.9),16); show($('s9').querySelector('img'),nm(t,T.f5+1.9,T.f5+2.2),10);
 };
 window.setT(0);
 </script>
