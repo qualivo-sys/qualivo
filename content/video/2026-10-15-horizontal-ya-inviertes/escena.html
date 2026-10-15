@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Horizontal «Ya inviertes y no cierran» (encargo de Paid, 15-oct). Mismo lenguaje que QV_3V2:
+     verde Qualivo, Anton, pantallas simuladas, sin personas. Subtítulos quemados (SUBS de tiempos.js).
+     ?f=916 da 1080x1920; sin parámetro, 1080x1350 (4:5). Nombres ficticios, números marcados como ejemplo. -->
+<link rel="stylesheet" href="../2026-10-07-demo-caso-v2/base.css">
+<style>
+#e.v916{height:1920px}
+#stage{left:157px;top:120px;transform:scale(.78)}
+#e.v916 #stage{top:330px;left:214px;transform:scale(.74)}
+#e.v916 #hook h1,#e.v916 #hook .h2{font-size:118px}
+#e.v916 #reloj{top:250px}#e.v916 #ej{top:272px}
+#e.v916 #wide{top:300px!important;bottom:440px!important}
+#e.v916 #sub{bottom:330px}
+#e.v916 .pie{display:none}
+#hook h1{font-size:108px}
+#hook h1 small{display:block;font-family:SG;font-size:34px;font-weight:600;text-transform:none;color:rgba(244,241,235,.6);margin-top:18px;line-height:1.3}
+#hook .h2{font-family:Anton;font-size:108px;line-height:.95;text-transform:uppercase;color:#F4CC38;opacity:0}
+#hook .bloque{position:absolute;left:80px;right:80px;top:50%;transform:translateY(-50%)}
+#hook .giro .q{font-family:Anton;font-size:96px;line-height:.98;text-transform:uppercase;color:#F4F1EB}
+#hook .giro .q i{font-style:normal;color:#F4CC38}
+#hook .giro .quien{font-family:Anton;font-size:40px;letter-spacing:.06em;text-transform:uppercase;color:#F4CC38;margin-bottom:22px}
+#hook .giro .m{font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;color:#F4CC38;margin-top:44px;opacity:0}
+#sub{position:absolute;left:50px;right:50px;bottom:96px;text-align:center;z-index:40;pointer-events:none}
+#sub span{display:inline-block;background:#0A0A0B;color:#F4F1EB;font-family:Anton;font-size:50px;line-height:1.12;text-transform:uppercase;letter-spacing:.01em;padding:12px 26px 14px;border-radius:16px;max-width:960px}
+.q2{border:3px solid #0A0A0B;border-radius:18px;padding:16px 22px;margin-bottom:18px;background:#fff;opacity:0}
+.q2 small{display:block;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:#7A7C82;font-weight:700;margin-bottom:10px}
+.q2 .txt{font-size:27px;font-weight:600;min-height:36px}
+.ops{display:flex;flex-wrap:wrap;gap:10px}
+.op{border:3px solid #0A0A0B;border-radius:999px;padding:8px 18px;font-size:24px;font-weight:700}
+.op.sel{background:#0A0A0B;color:#F4CC38}
+.camino{position:absolute;left:0;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:36px 44px;opacity:0}
+.camino .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.camino.ok .k{color:#0E7C74}.camino.nt .k{color:#7A7C82}
+.camino h3{font-family:Anton;font-size:56px;line-height:1.02;text-transform:uppercase}
+.camino p{font-size:28px;line-height:1.4;color:#3D4148;margin-top:12px}
+.camino .lead{position:relative;left:auto;width:auto;margin-top:18px;display:inline-block}
+.nadie{position:absolute;left:0;right:0;top:1000px;text-align:center;font-family:Anton;font-size:74px;text-transform:uppercase;color:#0A0A0B;opacity:0}
+.sect{display:grid;grid-template-rows:repeat(3,1fr);gap:26px;height:880px;margin-top:40px}
+.sect div{background:#F4F1EB;border:4px solid #0A0A0B;border-radius:30px;display:flex;align-items:center;padding:0 48px;font-family:Anton;font-size:96px;text-transform:uppercase;opacity:0}
+.sect div small{font-family:SG;font-size:26px;font-weight:700;color:#0E7C74;letter-spacing:.14em;margin-right:30px}
+.patron{margin-top:40px;font-family:Anton;font-size:58px;line-height:1.05;text-transform:uppercase;text-align:center;opacity:0}
+.patron i{font-style:normal;color:#F4F1EB}
+.seg{position:absolute;left:34px;right:34px;bottom:40px;background:#F4F1EB;border:3px solid #0A0A0B;border-radius:22px;padding:20px 24px;opacity:0}
+.seg .k{font-size:17px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:12px}
+.dias{display:flex;gap:12px}
+.dias span{flex:1;text-align:center;border:3px solid #0A0A0B;border-radius:14px;padding:10px 0;font-weight:700;font-size:22px;opacity:.3}
+.dias span.on{opacity:1;background:#0A0A0B;color:#F4CC38}
+.cita{margin-top:14px;background:#0E7C74;color:#F4F1EB;border-radius:14px;padding:14px 18px;font-size:25px;font-weight:700;opacity:0}
+.mine{position:absolute;right:34px;width:560px;background:#D9FDD3;border-radius:26px;border-top-right-radius:8px;padding:22px 24px;font-size:27px;line-height:1.38;opacity:0}
+.mine .t{text-align:right;font-size:18px;color:#7A7C82;margin-top:8px}
+.meta{position:absolute;left:0;top:40px;width:880px;background:#0A0A0B;color:#F4F1EB;border-radius:36px;padding:44px 48px}
+.meta .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#F4CC38;margin-bottom:16px}
+.meta h2{font-family:Anton;font-size:62px;line-height:1;text-transform:uppercase;margin-bottom:22px}
+.meta .dato{border-top-color:rgba(244,241,235,.15)}.meta .dato b{color:rgba(244,241,235,.55)}
+.flecha{font-family:Anton;font-size:40px;color:#F4CC38;margin-top:24px;opacity:0;line-height:1.1;text-transform:uppercase}
+.crm{position:absolute;left:0;top:660px;width:880px;background:#F4F1EB;border:4px solid #0A0A0B;border-radius:36px;padding:34px 44px;opacity:0}
+.crm .k{font-size:20px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;display:flex;justify-content:space-between}
+.crm .k span:last-child{color:#7A7C82}
+.fila{display:grid;grid-template-columns:1fr 120px;padding:16px 0;border-top:2px solid rgba(10,10,11,.12);font-size:28px;opacity:0}
+.fila:first-of-type{margin-top:14px}
+.fila b{font-family:Anton;font-size:36px;text-align:right;color:#0E7C74;font-weight:400}
+#s9{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;padding:0 20px}
+#s9 .t1{font-family:Anton;font-size:96px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
+#s9 .t2{font-family:Anton;font-size:56px;line-height:1;text-transform:uppercase;color:#F4F1EB}
+#s9 .btn2{background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:26px 44px;border-radius:20px}
+#s9 img{width:400px}
+#s9 .web{font-family:Anton;font-size:40px;letter-spacing:.06em;color:#F4CC38}
+</style>
+<div id="e">
+  <div id="hook">
+    <div class="bloque" id="b1"><h1 id="h1">Inviertes <i>+1.000 €</i> al mes en anuncios.</h1><div class="h2" id="h2">Tienes comerciales. Y los leads no cierran.</div></div>
+    <div class="bloque giro" id="b2"><div class="quien">Tu equipo:</div><div class="q">«Los leads de Meta <i>no valen.</i>»</div><div class="m" id="gm">Mira lo que pasa después del clic.</div></div>
+  </div>
+  <div id="ej">Ejemplo</div>
+  <div id="reloj"><span>después del clic</span><b>00:00</b></div>
+  <div id="stage">
+    <div class="sc" id="s2"><div class="phone"><div class="screen"><div class="form">
+      <h3>Antes de llamarte</h3><p>Lo que tu comercial preguntaría en la primera llamada.</p>
+      <div class="q2"><small>¿Qué necesitas?</small><div class="txt" id="txt"></div></div>
+      <div class="q2"><small>¿Cuándo quieres empezar?</small><div class="ops"><span class="op" data-s="1">Este mes</span><span class="op">En unos meses</span><span class="op">Solo miro</span></div></div>
+      <div class="q2"><small>¿Con qué presupuesto?</small><div class="ops"><span class="op">Aún no lo sé</span><span class="op" data-s="1">Lo tengo claro</span></div></div>
+      <div class="btn">Enviar</div>
+    </div></div></div></div>
+    <div class="sc" id="s3">
+      <div class="camino ok" id="c1" style="top:0"><div class="k">Encaja</div><h3>Pasa a tu comercial.</h3><div class="lead">Laura M.<small>Este mes · presupuesto claro</small></div></div>
+      <div class="camino nt" id="c2" style="top:420px"><div class="k">Todavía no</div><h3>Lo seguimos nosotros.</h3><p>Tu comercial no lo llama hoy. Y la puerta queda abierta.</p></div>
+      <div class="nadie" id="nadie">Nadie pierde una hora.</div>
+    </div>
+    <div class="sc" id="s6"><div class="sect"><div id="x0"><small>01</small>Academias</div><div id="x1"><small>02</small>Clínicas</div><div id="x2"><small>03</small>Reformas</div></div>
+      <div class="patron" id="pat">Mismo patrón: <i>el fallo está después del clic.</i></div></div>
+    <div class="sc" id="s4"><div class="phone"><div class="screen"><div class="wa">
+      <div class="wah"><div class="av">T</div><div><b>Tu empresa</b><span>en línea</span></div></div>
+      <div class="mine" id="w1" style="top:170px">Hola Laura, gracias por escribirnos. ¿Te va bien que te llame nuestro comercial mañana a las 17:30?<div class="t">10:04</div></div>
+      <div class="bub" id="w2" style="top:430px">Mejor el jueves.<div class="t">12:51</div></div>
+      <div class="seg" id="seg"><div class="k">Seguimiento</div><div class="dias"><span>Día 1</span><span>Día 3</span><span>Día 7</span></div>
+        <div class="cita" id="cita">✓ Cita con tu comercial · jueves 17:30</div></div>
+    </div></div></div></div>
+    <div class="sc" id="s5"><div class="meta"><div class="k">Señal de vuelta a Meta</div><h2>Laura era un buen contacto.</h2>
+      <div class="dato"><b>Anuncio</b><span>El que la trajo</span></div>
+      <div class="dato"><b>Se avisa a</b><span>Meta</span></div>
+      <div class="flecha" id="fl5">→ Tráeme más como ella.</div></div>
+      <div class="crm" id="crm"><div class="k"><span>En tu CRM</span><span>Datos de ejemplo</span></div>
+        <div class="fila"><span>Contactos</span><b>40</b></div>
+        <div class="fila"><span>Encajan</span><b>16</b></div>
+        <div class="fila"><span>Citas con tu comercial</span><b>9</b></div></div>
+    </div>
+  </div>
+  <div id="wide" style="position:absolute;left:80px;right:80px;top:100px;bottom:200px"><div class="sc" id="s9">
+    <div class="t1">30 minutos.<br>Sin coste.</div><div class="t2">Dónde se te escapan los leads</div>
+    <div class="btn2">Revisar mis fugas →</div>
+    <img src="rec/logo-blanco.png"><div class="web">QUALIVO.IO</div></div></div>
+  <div id="sub"><span id="subt"></span></div>
+  <div class="pie pieL">@maikel.echevarria</div><div class="pie pieR">QUALIVO.IO</div>
+  <div id="tex"></div>
+</div>
+<script src="tiempos.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const V916=new URLSearchParams(location.search).get('f')==='916'; if(V916) $('e').classList.add('v916');
+const H=V916?1920:1350;
+$('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="'+H+'"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3);
+function win(t,a,b,fi=.35,fo=.3){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
+function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
+const S={hook:[0,T.s2], s2:[T.s2,T.s3], s3:[T.s3,T.aca], s6:[T.aca,T.s4], s4:[T.s4,T.s5], s5:[T.s5,T.s9], s9:[T.s9,DUR+1]};
+const RELOJ=[[S.s2,'en el formulario','00:40'],[S.s3,'al enviarlo','00:01'],[[T.s4,T.s4+2.6],'respuesta','en minutos'],[[T.s4+2.6,T.s5],'seguimiento','día 1 · 3 · 7']];
+const TXT='Reformar la cocina entera';
+window.setT=function(t){
+  $('hook').style.opacity=win(t,0,S.hook[1],.01,.35);
+  const b1=$('b1'); b1.style.opacity=1-nm(t,T.giro-.1,T.giro+.15);
+  show($('h1'),nm(t,.02,.3),30); show($('h2'),nm(t,T.h2,T.h2+.3),24);
+  $('b2').style.opacity=nm(t,T.giro,T.giro+.25); show($('gm'),nm(t,T.giro+5.0,T.giro+5.35),20);
+  $('ej').style.opacity=(t>S.s2[0]+.2&&t<S.s9[0])?1:0;
+  const r=RELOJ.find(x=>t>=x[0][0]&&t<x[0][1]); const rl=$('reloj'); if(r){rl.style.opacity=win(t,r[0][0],r[0][1],.3,.3); rl.innerHTML='<span>'+r[1]+'</span><b>'+r[2]+'</b>';} else rl.style.opacity=0;
+  // subtítulos: fuera mientras el gancho ya pone el texto en grande
+  const s=t>=T.giro+3.0?SUBS.find(x=>t>=x[0]&&t<x[1]):null; $('subt').parentNode.style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
+  const a2=S.s2[0]; show($('s2'),win(t,a2,S.s2[1]-.05,.3,.3),30);
+  document.querySelectorAll('#s2 .q2').forEach((q,i)=>{const ti=a2+[5.3,6.6,7.9][i]; show(q,nm(t,ti-.6,ti-.3),14); q.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',!!o.dataset.s&&t>ti+.3));});
+  $('txt').textContent=TXT.slice(0,Math.round(TXT.length*nm(t,a2+5.3,a2+6.3)));
+  const a3=S.s3[0]; show($('s3'),win(t,a3,S.s3[1]-.05,.3,.3),1); show($('c1'),nm(t,a3+.1,a3+.45),30); show($('c2'),nm(t,a3+2.5,a3+2.85),30); show($('nadie'),nm(t,a3+5.0,a3+5.3),20);
+  const a6=S.s6[0]; show($('s6'),win(t,a6,S.s6[1]-.05,.25,.3),1); ['aca','cli','ref'].forEach((k,i)=>show($('x'+i),nm(t,T[k],T[k]+.25),40)); show($('pat'),nm(t,T.ref+1.5,T.ref+1.85),20);
+  const a4=S.s4[0]; show($('s4'),win(t,a4,S.s4[1]-.05,.3,.3),30); show($('w1'),nm(t,a4+.5,a4+.8),20); show($('w2'),nm(t,a4+2.2,a4+2.5),20); show($('seg'),nm(t,a4+2.8,a4+3.1),20);
+  document.querySelectorAll('#s4 .dias span').forEach((d,i)=>d.classList.toggle('on',t>a4+3.2+i*.45)); show($('cita'),nm(t,a4+4.3,a4+4.6),10);
+  const a5=S.s5[0]; show($('s5'),win(t,a5,S.s5[1]-.05,.3,.3),40); document.querySelectorAll('#s5 .dato').forEach((d,i)=>show(d,nm(t,a5+.5+i*.5,a5+.8+i*.5),14)); show($('fl5'),nm(t,a5+2.0,a5+2.35),14);
+  show($('crm'),nm(t,a5+4.6,a5+4.95),30); document.querySelectorAll('#s5 .fila').forEach((d,i)=>show(d,nm(t,a5+5.0+i*.35,a5+5.3+i*.35),10));
+  const a9=S.s9[0]; show($('s9'),win(t,a9,DUR+1,.4,1),30); const k=$('s9').children; for(let i=0;i<k.length;i++) show(k[i],nm(t,a9+[0,2.2,3.6,0,0][i],a9+[0,2.2,3.6,0,0][i]+.3),16);
+};
+window.setT(0);
+</script>
