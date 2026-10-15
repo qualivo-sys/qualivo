@@ -1403,3 +1403,37 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 - **Contactos:** los de la home entran por `/api/diagnostico` (etiqueta `pagina-inicio`), con primer WhatsApp y correo, y sin el filtro de facturación de la home anterior.
 - **SEO:** sin `noindex`, datos estructurados nuevos, `/inicio/v2/` redirige a `/` y las anclas antiguas siguen funcionando.
 - **Detalle:** `inicio/v2/CAMBIOS.md`.
+
+### Jueves 15-oct · trabajo del día (semana 42, cualificación)
+
+**Estrategia del mes (encargo de Maikel del 14-oct):** «Ya invierten, no convierten», del 15-oct al 8-nov.
+- **Dónde está:** en el documento compartido «Estrategia «Ya invierten, no convierten» · oct-nov 2026» y en el repo, `content/estrategia/2026-10-estrategia-icp-inversores-que-no-convierten.md`.
+- **Qué incluye:**
+  - el ICP con criterios medibles y los cinco problemas, cada uno con su dato real;
+  - tres recursos gratuitos nuevos: la auditoría de leads, el formulario que filtra y la calculadora de coste por venta;
+  - la landing multisector L3, la secuencia ICP-14 y la newsletter;
+  - un banco de ideas por canal, la prospección con la Biblioteca de anuncios de Meta, el calendario y la medición.
+- **Pendiente:** ocho decisiones de Maikel.
+
+**Publicado:**
+- **Re-apunte de [/blog/marketing-que-no-convierte/](https://qualivo.io/blog/marketing-que-no-convierte/).**
+  - **Los dos últimos párrafos:** separar al curioso desde el formulario, con los formularios de una prueba desde el 8-oct y el enlace a cualificar-leads.
+  - **El cierre:** un solo botón; antes había dos al mismo sitio.
+  - Sitemap y registro de keywords al día.
+
+**Borradores:**
+- **Carrusel** `content/borradores/2026-10-15-carrusel-lo-que-tu-formulario-pregunta.md`: la pieza 4 del brief y el adelanto del recurso B. Ocupa el hueco «Agentizando» del jueves.
+- **Guion del vídeo 5** `content/borradores/2026-10-15-video-5-ficha-dos-notas.md`: 45 segundos, voz el viernes.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-15.md`): en curso. Sus críticos van en un segundo commit.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 42 ya lleva dos piezas fuertes. El primero de la estrategia, «Lead scoring con dos notas», va el lunes 19 si Maikel aprueba la cadencia de dos por semana.
+- **Newsletter.** Hoy es jueves, y el brief la deja para la semana 45. La estrategia propone adelantarla a la 44.
+
+**Decisiones para Maikel:**
+1. **Las ocho decisiones de la estrategia** (sección 10 del documento). La más urgente son los permisos de tres casos. Recomendación: pedirlos hoy.
+2. **La pantalla del vídeo 5.** Intelligence no enseña las dos notas. Recomendación: una ficha montada con «Ejemplo · datos simulados».
+3. **El carrusel**, hoy a las 13:30, si le das el ok antes.
+
+**Hipótesis para mañana:** el carrusel tendrá más guardados que comentarios, porque es una plantilla. Si es así, el recurso B («El formulario que filtra») tiene demanda y se adelanta a la semana 43.
