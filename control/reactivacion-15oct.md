@@ -18,3 +18,7 @@ Orden de Maikel, 15-oct por la tarde: «quiero volver a los 300 envíos diarios 
 ## Depósito después de la reactivación
 
 1.590 leads sin empezar, pero 1.296 están en Infoproducto, que tiene un tope de 15 al día. Sin Infoproducto quedan unos 300 leads nuevos, menos de 2 días. El volumen de los próximos días saldrá sobre todo de los seguimientos de los leads a medias que se han reanudado. Para mantener 300 envíos al día hay que cargar leads nuevos cada día.
+
+## 16-oct: corrección por respuestas malas
+
+Al reactivar, 229 de los 300 envíos del día fueron seguimientos («RE:», «no insisto más») a gente sin contacto desde hacía 15 a 60 días. Resultado: una baja («saturadores», GoalDental) y un rechazo sarcástico (17 WOODyART). Con el ok de Maikel («sí, para los seguimientos antiguos y autorizo los créditos») se pausaron todos los leads en curso cuyo envío anterior tenía más de 15 días: 287 en la segunda pasada, más los de la primera, que se cortó por un error de conexión antes de guardar el registro. Siguen enviando los primeros correos a leads sin empezar y los seguimientos recientes. Lección: reactivar campañas con secuencias a medias no reenvía el primer correo, pero sí manda seguimientos fuera de contexto. Eso se trata igual que un reenvío.
