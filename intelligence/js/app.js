@@ -31,6 +31,7 @@
     { id: 'maritima', txt: 'Formación marítima', desc: 'Formación homologada: certificados para embarcar y cursos para flotas, náuticas y puertos', ico: 'formacion' },
     { id: 'lanzamientos', txt: 'Lanzamientos', desc: 'Lanzamientos con audioclase, directo, carrito abierto y llamada de admisión para un programa de ticket alto', ico: 'formacion' },
     { id: 'sueno', txt: 'Formación del sueño', desc: 'Especialista en sueño que vende por lanzamientos: webinar en directo, carrito abierto y llamada de admisión', ico: 'formacion' },
+    { id: 'caza', txt: 'Marketplace de caza', desc: 'Jornadas de caza: monterías, recechos y esperas con comerciales y reservas con señal', ico: 'otro' },
     { id: 'retiros', txt: 'Marketplace de retiros', desc: 'Retiros de yoga, meditación y silencio: base de datos, plazas y reservas', ico: 'otro' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
