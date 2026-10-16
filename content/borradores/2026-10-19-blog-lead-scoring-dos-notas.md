@@ -12,6 +12,10 @@
 
 ## Ficha
 
+- **Master Reviewer (16-oct):** nota 5, con los 10 críticos aplicados. Las tablas ya coinciden con el código: volumen, sector, tres mensajes, recálculo cada 10 minutos, qué pasa con A y C, y entradilla, momento propio y destacado. **Antes de publicar el lunes:**
+  - enlazar desde `/diccionario/lead-scoring/` a este artículo;
+  - re-apuntar «Qué hacemos» de `/blog/cualificar-leads/` a «dos notas»;
+  - quitar «scoring de leads» de sus keywords secundarias.
 - **Dato real (R1/R2):** `api/_scoring.js`, puntos y umbrales tal como están en el código el 16-oct. En la puntuación de inversión manda lo mejor entre la inversión declarada y el encaje con el precio. El encaje con el precio no se cuenta en el artículo, porque es una pregunta de formularios antiguos y daría pie a hablar de precio (R10).
 - **Lo que pasa con cada letra:** `api/activacion.js` y `api/_aviso.js`, comprobado por el Master Reviewer el 14-oct.
 - **Sin resultados ni recuentos** de cuántos A/B/C/D hemos tenido (R1/R3).
@@ -23,12 +27,16 @@
 
 **Lead scoring: cómo puntuar tus leads con dos notas (y qué hacer con cada letra)**
 
-**Meta description:** Cómo montar un lead scoring que tu equipo use: una nota para quién es y otra para lo que hace. Los puntos exactos de nuestro sistema y qué hacer con cada letra.
+**Meta description:** Cómo montar un lead scoring que tu equipo use: una nota para quién es y otra para lo que hace. Los puntos de nuestro sistema y qué hacer con cada letra.
+
+## Entradilla (después del H1)
+
+Si tu equipo abre el CRM y no sabe a quién llamar primero, le falta un orden. El lead scoring es dar a cada contacto una puntuación para decidir a quién atender antes. Aquí va cómo lo hacemos nosotros: dos notas, los puntos de cada una y qué pasa con cada letra. Es parte de la guía de [captación de leads](/blog/captacion-de-leads/).
 
 ## Resumen (3 puntos)
 
 - Una sola nota mezcla dos cosas: si el contacto encaja y si se está moviendo. Separadas, cada combinación pide un trato distinto.
-- En nuestro sistema, cada contacto lleva dos notas de 0 a 10. Abajo están los puntos tal como están en el código.
+- En nuestro sistema, cada contacto que nos pide información lleva dos notas de 0 a 10. Abajo están los puntos de nuestro sistema.
 - De las dos notas sale una letra (A, B, C o D), y cada letra tiene su siguiente paso. Así el equipo sabe a quién llamar primero sin preguntar.
 
 ## Por qué una sola nota no basta
@@ -45,19 +53,19 @@ Mide si encaja con lo que vendes. Sale de lo que el contacto dice en el formular
 
 | Qué miramos | Respuesta | Puntos |
 |---|---|---|
-| Inversión en captación | Más de 2.000 € al mes | 5 |
+| Inversión en captación | Más de 2.000 € al mes (desde 1.000 € en el formulario del 15 de octubre) | 5 |
 | | Entre 500 y 2.000 € | 4 |
 | | Menos de 500 € | 2 |
 | | Nada | 0 |
 | | No lo dice | 2 |
 | Peticiones al mes | Más de 50 | 3 |
 | | Entre 20 y 50 | 2 |
-| | Entre 5 y 15 | 1 |
-| | Menos de 5 | 0 |
-| Sector | Uno de los que mejor conocemos | 2 |
-| | Otro | 1 |
+| | Menos de 20 | 1 |
+| | No lo dice | 1 |
+| Sector | Formación, clínicas, reformas o asesorías | 2 |
+| | Otro, o no lo dice | 1 |
 
-La nota no pasa de 10.
+La nota no pasa de 10. En el formulario que estrenamos el 15 de octubre los tramos de inversión cambian: desde 1.000 € al mes ya suma 5.
 
 ## Nota 2 · Qué hace (comportamiento, de 0 a 10)
 
@@ -67,32 +75,39 @@ Mide si se está moviendo. Sale de lo que hace después de dejar sus datos.
 |---|---|
 | Contesta a nuestro mensaje | +3 |
 | Contesta en menos de una hora | +1 |
-| Mantiene una conversación de tres mensajes o más | +1 |
+| Nos escribe tres mensajes o más | +1 |
 | Dice en el formulario que quiere empezar este mes | +3 |
 | Dice que quiere empezar en 1-3 meses | +1 |
 | Dice que solo está mirando | −1 |
-| Habla con nuestra asistente de voz | +2 |
+| Habla por teléfono con Raquel, nuestra asistente de voz con IA | +2 |
 | Coge cita | +4 |
 | Viene a la reunión | +1 |
 | No se presenta a la cita | −3 |
 | Pide la baja | La nota pasa a 0 |
+| No responde tras toda la secuencia | Se queda en 1 como mucho |
 
-La nota va de 0 a 10 y **se recalcula sola** cada vez que el contacto hace algo.
+La nota va de 0 a 10 y **se recalcula sola** en cada vuelta del sistema, cada diez minutos: contestar, coger cita o no presentarse la mueven.
+
+> **Destacado:** Una letra sin siguiente paso no sirve de nada.
 
 ## La letra, y qué hacer con cada una
 
 | Letra | Cuándo | Qué hacemos |
 |---|---|---|
-| **A** | Quién es 6 o más y qué hace 5 o más (o quién es 9 o más con algo de movimiento) | Aviso al momento. Si en 2 h 30 no ha contestado, le llama Maikel |
-| **B** | Quién es 6 o más, pero se mueve poco | Si en 2 h 30 no contesta, le llama nuestra asistente de voz |
-| **C** | Se mueve, pero encaja poco (quién es menos de 6) | Antes de darle una reunión, una o dos preguntas para ver si encaja |
-| **D** | El resto, quien pide la baja o quien no responde tras la secuencia | Sin llamada |
+| **A** | Quién es 6 o más y qué hace 5 o más (o quién es 9 o más con algo de movimiento) | Aviso a Maikel en cuanto llega a A. Si 2 h 30 después de nuestro primer WhatsApp no ha contestado, a Maikel le salta un aviso para llamarle |
+| **B** | Quién es 6 o más, pero se mueve poco | Si en 2 h 30 no contesta, le llama Raquel, una sola vez y en su horario |
+| **C** | Qué hace 5 o más, pero quién es menos de 6 | Si en 2 h 30 no contesta, también le llama Raquel. Y antes de ofrecerle una reunión, una o dos preguntas para ver si encaja |
+| **D** | El resto, quien pide la baja o quien no responde tras la secuencia | Sin llamada. Sigue con los WhatsApp de la secuencia, salvo quien pidió la baja, al que no se le escribe más |
 
-La B es la que más se pierde con una sola nota. Un buen contacto que todavía no ha contestado se queda al fondo de la lista, junto a los que nunca iban a comprar. Con dos notas se ve que vale la pena llamarle.
+La B es la que se pierde con una sola nota. Un buen contacto que todavía no ha contestado se queda al fondo de la lista, junto a los que nunca iban a comprar. Con dos notas se ve que vale la pena llamarle.
 
-## Cómo montarlo en tu CRM en una tarde
+## Lo que aprendimos al montarlo
 
-1. **Elige tres datos de «quién es»** que puedas preguntar en el formulario: inversión, volumen y lo que paga de media un cliente. Si no lo preguntas, no lo puedes puntuar.
+Al principio, para hacer preguntas antes de la reunión hacían falta dos señales flojas, y se nos colaban contactos que no encajaban. El 28 de septiembre cambiamos la regla: si la nota de quién es baja de 6, siempre se pregunta antes.
+
+## Cómo montarlo en tu CRM
+
+1. **Elige tres datos de «quién es»** que puedas preguntar en el formulario: inversión, volumen y sector, como nosotros. Si además preguntas lo que paga de media un cliente, apúntalo aparte hasta ver si predice algo. Lo que no preguntas, no lo puedes puntuar.
 2. **Elige cinco acciones de «qué hace»** que tu CRM ya registra: contesta, coge cita, viene, no viene, pide la baja.
 3. **Pon puntos.** Que lo que más se parece a comprar valga más: coger cita vale más que contestar.
 4. **Fija dos umbrales**, uno por nota, y saldrán las cuatro letras. Empieza con 6 y 5, como nosotros, y ajústalos.

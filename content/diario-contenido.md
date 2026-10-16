@@ -1455,14 +1455,17 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 - **Tesis contraria del viernes:** `content/borradores/2026-10-16-tesis-coste-por-lead-barato.md`, «Bajar el coste por lead es la forma más cara de captar». Dato: la campaña de septiembre ya publicada (mismo coste por contacto en reformas y en formación, el doble de citas en formación).
 - **Artículo del lunes (B1, el pilar de la semana 43):** `content/borradores/2026-10-19-blog-lead-scoring-dos-notas.md`, «Lead scoring con dos notas». Lleva los puntos exactos de `api/_scoring.js` y qué pasa con cada letra. Se publica el lunes.
 
-**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-16.md`): en curso. Sus críticos van en un segundo commit.
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-16.md`): re-apunte 7, tesis 7 y borrador de lead scoring 5. Aplicados todos los críticos. Lo importante:
+- Las tablas del artículo no coincidían del todo con el código (volumen, sector, qué pasa con la A y la C). Ya coinciden.
+- El titular de la tesis pasa a «El contacto más barato me salió el doble de caro», que sale del dato.
+- En `/blog/coste-por-lead/`, las filas suman 290,90 € y el total dice 291,90 €. Hay que comprobarlo en Meta.
 
 **Descartado:**
 - **Publicar hoy un artículo nuevo.** Sería la tercera pieza fuerte de la semana 42. El de lead scoring queda escrito y revisado para el lunes.
 - **Newsletter.** No toca hasta la semana 44 o 45.
 
 **Decisiones para Maikel:**
-1. **Titular de la tesis** (R4): «Bajar el coste por lead es la forma más cara de captar». Recomendación: sí, es tu dato y tu método. Hay una variante más suave en el borrador.
+1. **Titular de la tesis** (R4): «El contacto más barato me salió el doble de caro». Recomendación: sí, es tu dato. Hay una variante más suave en el borrador.
 2. **Publicar el lunes el artículo de lead scoring.** Recomendación: sí. Abre la semana 43 y es la base del recurso A (auditoría de leads).
 3. **Siguen pendientes** las ocho decisiones de la estrategia, con los permisos de casos en primer lugar.
 
