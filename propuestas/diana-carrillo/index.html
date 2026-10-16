@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Plan de captación · Diana Carrillo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap">
+<style>
+/* Plan para Diana Carrillo Advanced Esthetics (postoperatorio y estética corporal, Barcelona). Misma estructura que el plan de Natural Fit, con el dorado de su marca. */
+:root{--bg:#F7F4EE;--surface:#FFFFFF;--ink:#1F1A15;--muted:#5C5248;--line:#E3DACB;--accent:#7E6826;--accent-ink:#FFFFFF;--gold:#BDA55A;--tint:#F1E9D2;--warn:#9A5B00;--warn-bg:#FFF4E0;--good:#2E6B4A;--good-bg:#E6F2EA;--bad:#9B2C2C;--bad-bg:#FBEAEA;
+  --font:"Inter","Segoe UI",system-ui,sans-serif;--serif:"Cormorant Garamond",Georgia,serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15120F;--surface:#1E1A16;--ink:#F3EEE6;--muted:#BDB2A4;--line:#3A332B;--accent:#D9C27A;--accent-ink:#1A1610;--gold:#D9C27A;--tint:#2C261B;--warn:#F2C26B;--warn-bg:#2E2614;--good:#7CC3A0;--good-bg:#17291F;--bad:#F09A9A;--bad-bg:#2E1919;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15120F;--surface:#1E1A16;--ink:#F3EEE6;--muted:#BDB2A4;--line:#3A332B;--accent:#D9C27A;--accent-ink:#1A1610;--gold:#D9C27A;--tint:#2C261B;--warn:#F2C26B;--warn-bg:#2E2614;--good:#7CC3A0;--good-bg:#17291F;--bad:#F09A9A;--bad-bg:#2E1919;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);padding-inline:16px;padding-block:0 64px;overflow-x:hidden}
+.wrap{max-width:980px;margin-inline:auto;display:grid;gap:30px}
+.wrap > *{min-width:0}
+nav.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+nav.top div{max-width:980px;margin-inline:auto;display:flex;gap:8px;align-items:center;overflow-x:auto}
+nav.top b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:6px;white-space:nowrap}
+nav.top a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px}
+nav.top a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.hero{display:grid;gap:14px;padding-top:28px}
+.brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brandrow img{height:58px;width:auto;background:#FBF7EE;border-radius:8px;padding:6px 10px}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;line-height:1.08;margin:0;letter-spacing:-.015em;text-wrap:balance}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--accent);font-size:1.12em}
+h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0 0 4px;letter-spacing:-.005em}
+h3{font-size:17px;font-weight:700;margin:0 0 6px}
+p{margin:0}
+.sub{color:var(--muted);font-size:17.5px;max-width:68ch}
+section{display:grid;gap:14px}
+section > *{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.muted{color:var(--muted)}
+.small{font-size:14.5px}
+.flow{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:p}
+.flow li{counter-increment:p;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.flow li > div{min-width:0}
+.flow li::before{content:counter(p);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800}
+.flow li.focus{border:2px solid var(--gold)}
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:8px}
+.who div{font-size:14px;background:var(--bg);border-radius:8px;padding:8px 10px}
+.who b{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
+.tw table{min-width:520px}
+.warn{background:var(--warn-bg);color:var(--ink);border-left:4px solid var(--warn);border-radius:10px;padding:12px 14px;font-size:15px}
+.hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
+.cta{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border-radius:10px;padding:12px 16px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.cta.alt{background:var(--surface);color:var(--accent);border:1px solid var(--accent)}
+a{color:var(--accent)}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* Lo que hemos visto */
+.seen{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.seen > div{border-radius:14px;padding:16px 18px;border:1px solid var(--line);background:var(--surface)}
+.seen h3{display:flex;align-items:center;gap:8px}
+.seen h3 i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.06em;border-radius:6px;padding:2px 8px}
+.seen .ok i{background:var(--good-bg);color:var(--good)}
+.seen .ko i{background:var(--bad-bg);color:var(--bad)}
+.seen li{font-size:15px}
+.quote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.3;border-left:3px solid var(--gold);padding:4px 0 4px 14px}
+.quote small{display:block;font-family:var(--font);font-style:normal;font-size:13px;color:var(--muted);margin-top:6px}
+.shot{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.shot img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
+.shot figure{margin:0}
+.shot figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+.price{font-weight:800;font-size:22px;letter-spacing:-.01em}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
+@media (max-width:760px){.seen{grid-template-columns:1fr}.shot{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Presentación"><div><b>DIANA CARRILLO · QUALIVO</b><a href="./" aria-current="page">Plan</a><a href="demo/">Demo</a><a href="anuncios/">Anuncios</a><a href="landing/">Landing</a></div></nav>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brandrow"><img src="assets/logo.png" alt="Diana Carrillo · Soluciones estéticas" width="640" height="287"><span class="tag">QUALIVO · PLAN PARA DIANA CARRILLO ADVANCED ESTHETICS</span></div>
+    <h1>Que ninguna paciente que pidió precio <em>se quede sin respuesta</em></h1>
+    <p class="sub">Un plan para contestar cada consulta en el primer minuto, llevarla a una valoración contigo y acompañar cada presupuesto hasta que la paciente decide. Con anuncios que traen pacientes de postoperatorio y de estética corporal, y un panel para ver qué funciona. Lo afinamos con tus números en la reunión.</p>
+    <div class="ctas"><a class="cta" href="demo/">Ver la demo paso a paso</a><a class="cta alt" href="anuncios/">Ver los anuncios</a><a class="cta alt" href="landing/">Ver la landing</a></div>
+  </header>
+
+  <section>
+    <h2>Lo que me contaste</h2>
+    <div class="grid">
+      <div class="card"><p class="k">Inversión</p><p>Entre 500 y 2.000 € al mes en captación.</p></div>
+      <div class="card"><p class="k">Volumen</p><p>Entre 20 y 50 solicitudes al mes.</p></div>
+      <div class="card"><p class="k">Lo que se escapa</p><p>«El seguimiento y los presupuestos»: la paciente pide información, se lo piensa y nadie retoma la conversación.</p></div>
+    </div>
+    <p class="hyp"><b>Mi hipótesis, para confirmar contigo:</b> con 20-50 solicitudes al mes no te falta gente, te falta tiempo para volver a escribir a cada una. Mientras estás en cabina haciendo un drenaje, la paciente que preguntó ayer por un bono no recibe nada, y en postoperatorio eso pesa el doble: tiene una fecha de cirugía y acaba con quien le contesta antes. Lo primero es que cada consulta y cada presupuesto tengan dueño y fecha para el siguiente mensaje.</p>
+  </section>
+
+  <section>
+    <h2>Lo que hemos visto</h2>
+    <p class="muted small">Revisado el 16 de octubre de 2026 en dianacarrillo.es, en tu ficha de Treatwell y en búsquedas de Google. Lo que no he podido comprobar está marcado.</p>
+    <div class="seen">
+      <div class="ok"><h3><i>FUNCIONA</i> Lo que ya tienes a favor</h3>
+        <ul>
+          <li><b>Tu historia es tu mejor anuncio:</b> más de 20 años, técnicas colombianas y europeas, y trabajo junto a cirujanos. Pocas competidoras pueden decir lo mismo.</li>
+          <li><b>Una oferta completa para quien se opera:</b> asesoría, hospedaje, enfermeros, tratamiento postoperatorio y prendas (distribuidora de fajas M&amp;D). Para quien viene de fuera a operarse en Barcelona, eso vale mucho.</li>
+          <li><b>Buenas opiniones y públicas:</b> 5,0 sobre 5 con 30 opiniones en Treatwell, con una muy clara sobre el postoperatorio (abajo).</li>
+          <li><b>Fotos reales tuyas trabajando</b> en cabina y en consulta. Transmiten mucho más que una foto de banco de imágenes.</li>
+          <li><b>Bonos de 6, 8, 10, 12 y 15 sesiones</b> (drenaje postoperatorio, linfático, carboxiterapia, mesoterapia corporal, Scultor, lifting de glúteos, masaje moldeador): son tu «presupuesto» natural y el sitio donde el seguimiento tiene más retorno.</li>
+        </ul>
+      </div>
+      <div class="ko"><h3><i>FALLA</i> Dónde se pierden pacientes hoy</h3>
+        <ul>
+          <li><b>El botón «Agendar tratamiento» lleva a Treatwell</b>, donde tu ficha dice que hoy no acepta reservas (y el enlace del widget da error). La paciente que quiere reservar se queda sin camino.</li>
+          <li><b>«Contáctanos», «Ver catálogo» y «Artículos» dan error 404</b>, y las diez cirugías del menú no llevan a ninguna página.</li>
+          <li><b>Arriba pone «Estamos trabajando en nuestro sitio web»</b> y el único contacto es un WhatsApp con el texto «Hola deseo realizar un pedido», pensado para fajas, no para pedir una valoración.</li>
+          <li><b>Restos de la plantilla:</b> testimonios en inglés y en latín de relleno («Perfect Dress For Events», Emma, USA), avisos «Someone purchased… Minutes ago» y la pestaña del navegador se llama «Home-6». Restan confianza justo donde más importa.</li>
+          <li><b>No hay ningún formulario ni pregunta</b> que te diga si la paciente se opera la semana que viene o «algún día». Todas te llegan igual.</li>
+          <li><b>Treatwell te sitúa en Sarrià-Sant Gervasi</b> y tu dirección es Consell de Cent, 325, en L'Eixample. Conviene unificarlo (también en Google).</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote">«Me realice mi postoperatorio con Diana, ponerme en sus manos fue la mejor decisión. […] me sentí acompañada y en las mejores manos en todo momento.»<small>Opinión verificada y pública en tu ficha de Treatwell (tratamiento de drenaje linfático). La usamos tal cual, sin nombre, en anuncios y landing si te parece bien.</small></p>
+    <div class="grid">
+      <div class="card"><p class="k">Tus anuncios</p><p class="small">Desde aquí no he podido abrir la Biblioteca de anuncios de Meta (pide inicio de sesión), así que <b>no sé si tienes anuncios activos ahora</b>. Lo miramos juntos en la reunión: qué campañas tienes, a dónde llevan (¿al WhatsApp, a la web?) y qué se ha gastado este mes.</p></div>
+      <div class="card"><p class="k">Precios</p><p class="small">En la web no hay precios de tratamientos (bien, en salud es lo prudente). Sí los hay de fajas M&amp;D: de 22 € (almohadilla de espalda) a 149 € (faja con brasier). Para el agente necesitamos tus precios orientativos de bonos.</p></div>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Competencia en Barcelona</th><th>Qué hacen</th><th>Qué significa para ti</th></tr></thead>
+      <tbody>
+        <tr><td>Barcelona Plastic Surgery</td><td>Clínica de cirugía con equipo propio de drenaje linfático: la paciente sale de quirófano con el postoperatorio ya resuelto dentro.</td><td>Las clínicas grandes se quedan el postoperatorio. Tu ventaja es la relación con cirujanos que no lo tienen y el trato cercano: hay que decirlo.</td></tr>
+        <tr><td>FisioClinics Barcelona</td><td>Drenaje post-liposucción con fisioterapeutas, sesiones de 60 minutos, cita por teléfono o formulario. Sin precios.</td><td>Compiten por «drenaje post lipo Barcelona» en Google. Tu diferencia: técnica colombiana, fajas y acompañamiento antes de la cirugía.</td></tr>
+        <tr><td>Francia's Secret (Sant Martí) y centros en Booksy</td><td>Venden el drenaje post-lipo como un producto suelto (media hora). En Booksy hay drenajes postoperatorios a 29-40 € la sesión en el área metropolitana.</td><td>Quien compara por precio siempre encontrará algo más barato. Por eso el mensaje es confianza y plan completo, y el seguimiento resuelve dudas en vez de bajar precio.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>El recorrido que montamos</h2>
+    <ol class="flow">
+      <li><div><h3>Anuncios con tres mensajes</h3><p>«Prepara tu postoperatorio antes de operarte», «20 años y una opinión real» y «tu plan corporal sin cirugía». Cada uno con su público. <a href="anuncios/">Ver los 6 anuncios</a>.</p>
+        <div class="who"><div><b>Sistema</b>Mide qué anuncio trae valoraciones y bonos vendidos, no solo mensajes.</div><div><b>Tú</b>Validas textos e imágenes antes de publicar.</div></div></div></li>
+      <li><div><h3>Una landing que sí permite pedir cita</h3><p>Tu historia, cómo trabajas, tus opiniones reales y un test de tres preguntas: qué buscas, cuándo es tu cirugía y si vienes de fuera. <a href="landing/">Ver la maqueta</a>.</p>
+        <div class="who"><div><b>Sistema</b>Guarda de qué anuncio y con qué respuestas llega cada paciente.</div><div><b>Tú</b>Apruebas la página y las fotos.</div></div></div></li>
+      <li><div><h3>WhatsApp en el primer minuto</h3><p>Sofía, la asistente, escribe al momento, también por la noche y en fin de semana: pregunta la fecha de la cirugía o lo que busca, explica cómo trabajas y propone una valoración contigo.</p>
+        <div class="who"><div><b>Asistente</b>Nunca da consejo médico. Si hay algo clínico (dolor, fiebre, dudas del cirujano), deriva al cirujano o a ti.</div><div><b>Tú</b>Ves cada conversación y entras cuando quieras: en cuanto escribes, Sofía se calla.</div></div></div></li>
+      <li><div><h3>Llamada de Raquel si no contesta</h3><p>Si a los 10-20 minutos no ha respondido al WhatsApp, Raquel (asistente de voz) la llama. Solo a quien dejó sus datos y pidió información, y solo de 8:00 a 21:30.</p>
+        <div class="who"><div><b>Raquel</b>Se presenta como asistente, confirma qué busca y reserva la valoración en tu agenda.</div><div><b>Si no coge</b>Deja un mensaje corto en el buzón y sigue por WhatsApp.</div></div></div></li>
+      <li><div><h3>Valoración en agenda, con recordatorios</h3><p>Confirmación al reservar, recordatorio la víspera y 2 horas antes. Si no viene, se le propone otro hueco ese mismo día.</p>
+        <div class="who"><div><b>Asistente</b>Reserva, recuerda y recoloca.</div><div><b>Tú</b>Llegas a la valoración con su ficha: qué busca, fecha de cirugía, de dónde viene y qué anuncio la trajo.</div></div></div></li>
+      <li class="focus"><div><h3>Seguimiento de cada valoración y cada presupuesto</h3><p><b>El corazón del plan.</b> Quien pidió precio y no reservó, y quien vino a la valoración y se llevó un presupuesto, recibe mensajes con fecha (día 1, 3, 7, 14 y 30) con la duda típica de cada momento. Si es postoperatorio, el calendario se ajusta a su fecha de cirugía. Cuando responde, se para todo y te avisa.</p>
+        <div class="who"><div><b>Asistente</b>Resuelve dudas de horarios, bonos, fajas y forma de pago. Lo clínico, a ti o al cirujano.</div><div><b>Tú</b>Recibes un aviso con nombre, tratamiento y cuánto lleva esperando cuando conviene una llamada tuya.</div></div></div></li>
+      <li><div><h3>Durante el bono y después</h3><p>Recordatorio de cada sesión, aviso a mitad del bono, petición de reseña al terminar y un mensaje a los 60 días para quien quiera seguir con tratamiento corporal.</p>
+        <div class="who"><div><b>Asistente</b>Recuerda sesiones y pide la reseña en Google.</div><div><b>Tú</b>Decides qué pacientes reciben qué mensaje.</div></div></div></li>
+    </ol>
+    <p><a class="cta" href="demo/#seguimiento">Ver los textos de todos los seguimientos</a></p>
+  </section>
+
+  <section>
+    <h2>Anuncios</h2>
+    <div class="shot">
+      <figure><img src="anuncios/img/a-feed.jpg" alt="Anuncio A: organiza tu postoperatorio antes de entrar a quirófano" width="1080" height="1350" loading="lazy"><figcaption>A · Postoperatorio</figcaption></figure>
+      <figure><img src="anuncios/img/b-feed.jpg" alt="Anuncio B: opinión real, ponerme en sus manos fue la mejor decisión" width="1080" height="1350" loading="lazy"><figcaption>B · Confianza</figcaption></figure>
+      <figure><img src="anuncios/img/c-feed.jpg" alt="Anuncio C: un plan corporal pensado para ti" width="1080" height="1350" loading="lazy"><figcaption>C · Corporal sin cirugía</figcaption></figure>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Campaña</th><th>Dónde</th><th>Para qué</th></tr></thead>
+      <tbody>
+        <tr><td>A · Postoperatorio</td><td>Meta (feed, historias y reels)</td><td>Mujeres que se van a operar en Barcelona. Lleva al test de la landing: nos dice la fecha de la cirugía.</td></tr>
+        <tr><td>B · Confianza</td><td>Meta, directo a WhatsApp</td><td>Tu cara y una opinión real. Para quien ya te conoce o te ha visto en Instagram.</td></tr>
+        <tr><td>C · Corporal sin cirugía</td><td>Meta</td><td>Scultor, lifting de glúteos, masaje moldeador. Puerta de entrada que llena huecos de agenda.</td></tr>
+        <tr><td>Búsqueda (mes 2)</td><td>Google</td><td>«drenaje postoperatorio Barcelona», «drenaje post lipo»: gente que ya lo está buscando.</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="small">
+      <li><b>Partimos de lo que ya inviertes</b> (500-2.000 €/mes). Para la prueba bastan unos 30 € al día repartidos en los tres mensajes.</li>
+      <li><b>Las campañas aprenden de quien acaba comprando el bono</b>, no de quien deja el teléfono más barato: devolvemos a Meta las valoraciones y los bonos vendidos.</li>
+      <li><b>El reparto lo decidimos con datos</b> a las 3 semanas: lo que trae valoraciones sube; lo que solo trae curiosas baja.</li>
+    </ul>
+    <p class="warn"><b>Publicidad sanitaria.</b> Sin promesas de resultados, sin antes y después, sin fotos de cicatrices y sin ofertas agresivas. Carboxiterapia y mesoterapia corporal se consideran actos médicos: antes de anunciarlas hay que confirmar quién las realiza. Todo anuncio y toda página los validas tú antes de salir.</p>
+  </section>
+
+  <section>
+    <h2>Lo que verás cada mañana</h2>
+    <div class="grid">
+      <div class="card"><h3>A quién escribir hoy</h3><p class="small muted">Presupuestos abiertos, ordenados por probabilidad y por fecha de cirugía, con el siguiente paso de cada uno.</p></div>
+      <div class="card"><h3>Dinero en juego</h3><p class="small muted">Euros en presupuestos sin aceptar, y cuántos llevan más de dos días sin que nadie escriba.</p></div>
+      <div class="card"><h3>Por anuncio</h3><p class="small muted">Consultas, valoraciones, bonos vendidos y coste por valoración de cada campaña.</p></div>
+    </div>
+    <p class="small">Y una revisión de 30 minutos cada semana conmigo para decidir qué cambiar. Así se ve: <a href="https://qualivo.io/intelligence/?sector=clinica&amp;empresa=Diana%20Carrillo%20Advanced%20Esthetics&amp;objetivo=conversion" target="_blank" rel="noopener">panel de ejemplo con tu nombre</a> (datos de ejemplo de una clínica; con los tuyos aparecerían drenajes, bonos y fajas).</p>
+  </section>
+
+  <section>
+    <h2>Qué esperamos medir</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Qué</th><th>Hoy</th><th>Con el sistema</th></tr></thead>
+      <tbody>
+        <tr><td>Tiempo de respuesta</td><td>Cuando puedes, entre sesión y sesión</td><td>Menos de 1 minuto, de 8:00 a 21:30, todos los días</td></tr>
+        <tr><td>Presupuestos con siguiente mensaje fijado</td><td>No se sabe</td><td>Todos, con fecha</td></tr>
+        <tr><td>Consultas que llegan a valoración</td><td>No se sabe</td><td>Horquilla a confirmar en las 3 primeras semanas</td></tr>
+        <tr><td>Presupuestos que acaban en bono</td><td>No se sabe</td><td>Horquilla a confirmar en las 3 primeras semanas</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small muted">No prometo un número de pacientes. Lo primero es medir dónde se pierde cada una; con tres semanas de datos ponemos cifras con horquilla.</p>
+  </section>
+
+  <section>
+    <h2>Calendario</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Cuándo</th><th>Qué</th></tr></thead>
+      <tbody>
+        <tr><td>Semana 1</td><td>Accesos (Meta, WhatsApp, agenda), textos de Sofía y Raquel aprobados por ti, y lista de presupuestos abiertos que ya tienes.</td></tr>
+        <tr><td>Semana 2</td><td>Landing publicada, WhatsApp en el primer minuto, recordatorios de cita y seguimiento de presupuestos en marcha (también con los que ya tenías abiertos).</td></tr>
+        <tr><td>Semanas 3-4</td><td>Anuncios A, B y C en prueba, llamada de Raquel, panel y primeras decisiones de presupuesto con datos.</td></tr>
+        <tr><td>Mes 2</td><td>Google para «drenaje postoperatorio», mensajes durante el bono, reseñas y reactivación de quien preguntó y no vino.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Lo que necesito de ti</h2>
+    <ul>
+      <li>Acceso a tu cuenta de anuncios de Meta (y de Google si la tienes).</li>
+      <li>El número de WhatsApp que usáis para pacientes (¿es el mismo de las fajas?) y quién lo atiende hoy.</li>
+      <li>Tu agenda: dónde apuntas hoy las citas y los bonos, y cuánto dura una valoración.</li>
+      <li>Precios orientativos de cada bono y formas de pago, para que la asistente explique bien (el precio cerrado lo das tú).</li>
+      <li>Cómo funciona lo de cirugía: con qué cirujanos trabajas, cómo derivas, y qué incluyen el hospedaje y los enfermeros.</li>
+      <li>Permiso para usar tus fotos y las opiniones públicas de Treatwell y Google.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cómo podemos trabajar</h2>
+    <div class="grid">
+      <div class="card"><h3>Lo llevo yo</h3><p class="small muted">Implantación y gestión mensual: anuncios, landing, Sofía (WhatsApp), Raquel (voz), seguimientos, panel y revisión semanal.</p>
+        <p class="price">[____] € + IVA</p><p class="small muted">implantación</p><p class="price">[____] € + IVA / mes</p><p class="small muted">gestión mensual · la inversión en anuncios va aparte y la pagas tú directamente a Meta</p></div>
+      <div class="card"><h3>Lo monto y te lo dejo</h3><p class="small muted">Lo construyo, os formo y queda en casa. Tú o tu equipo lo lleváis desde el primer mes.</p>
+        <p class="price">[____] € + IVA</p><p class="small muted">pago único</p><p class="price">[____] € + IVA / mes</p><p class="small muted">herramientas (WhatsApp, voz y panel)</p></div>
+    </div>
+    <p class="small muted">Te recomiendo una de las dos cuando veamos tus números en la reunión.</p>
+  </section>
+
+  <footer class="foot">
+    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+    <p>Preparado el 16 de octubre de 2026 para Diana Carrillo Advanced Esthetics. Los datos del plan salen de lo que indicaste en el formulario y de tu web y ficha públicas; los de la demo son de ejemplo.</p>
+  </footer>
+</div>
+</body>
+</html>
