@@ -1441,3 +1441,29 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 3. **El carrusel**, hoy a las 13:30, si le das el ok antes.
 
 **Hipótesis para mañana:** el carrusel tendrá más guardados que comentarios, porque es una plantilla. Si es así, el recurso B («El formulario que filtra») tiene demanda y se adelanta a la semana 43.
+
+### Viernes 16-oct · trabajo del día (cierre de la semana 42)
+
+**Publicado:**
+- **Re-apunte de [/blog/equipo-comercial-no-usa-el-crm/](https://qualivo.io/blog/equipo-comercial-no-usa-el-crm/).**
+  - **Los dos últimos párrafos:** las dos notas de nuestro sistema para ver a quién llamar primero, con enlace a cualificar-leads, y un cierre concreto.
+  - **La caja final:** sin «plan por escrito en 24 horas».
+  - Sitemap y registro de keywords al día.
+  - **Por qué este artículo:** habla a empresas con equipo comercial, el ICP de la estrategia.
+
+**Borradores:**
+- **Tesis contraria del viernes:** `content/borradores/2026-10-16-tesis-coste-por-lead-barato.md`, «Bajar el coste por lead es la forma más cara de captar». Dato: la campaña de septiembre ya publicada (mismo coste por contacto en reformas y en formación, el doble de citas en formación).
+- **Artículo del lunes (B1, el pilar de la semana 43):** `content/borradores/2026-10-19-blog-lead-scoring-dos-notas.md`, «Lead scoring con dos notas». Lleva los puntos exactos de `api/_scoring.js` y qué pasa con cada letra. Se publica el lunes.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-16.md`): en curso. Sus críticos van en un segundo commit.
+
+**Descartado:**
+- **Publicar hoy un artículo nuevo.** Sería la tercera pieza fuerte de la semana 42. El de lead scoring queda escrito y revisado para el lunes.
+- **Newsletter.** No toca hasta la semana 44 o 45.
+
+**Decisiones para Maikel:**
+1. **Titular de la tesis** (R4): «Bajar el coste por lead es la forma más cara de captar». Recomendación: sí, es tu dato y tu método. Hay una variante más suave en el borrador.
+2. **Publicar el lunes el artículo de lead scoring.** Recomendación: sí. Abre la semana 43 y es la base del recurso A (auditoría de leads).
+3. **Siguen pendientes** las ocho decisiones de la estrategia, con los permisos de casos en primer lugar.
+
+**Hipótesis para el lunes:** con los puntos exactos a la vista, el artículo de lead scoring traerá más diagnósticos desde el blog que cualificar-leads. Se compara en dos semanas por `utm_content`.
