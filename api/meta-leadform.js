@@ -160,7 +160,10 @@ const FORMULARIOS_SECTOR = {
   // un punto de menos, el primer WhatsApp y el nurturing saldrían genéricos y no tendría etiqueta
   // sector-*. Los dos anteriores (V2_, con pregunta abierta obligatoria) están archivados.
   '1068055576128365': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'funnel-v2' },
-  '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' }
+  '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' },
+  // 15-oct-2026: horizontal «ya inviertes» (Qualivo_HZ_demo). Pregunta el sector, así que
+  // el sector sale de la respuesta (api/_funnel-hz.js), no de esta tabla.
+  '1593733452501786': { sector: '', angulo: 'hz-demo' }
 };
 
 async function nombreFormulario(formId) {
@@ -210,8 +213,11 @@ async function guardar(lead, opts) {
   const email = valor(campos, ['email', 'correo', 'correo_electronico']);
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
-  const sector = conocido ? conocido.sector : '';
-  const volumen = valor(campos, ['volumen']);
+  // Formulario horizontal (15-oct): inversión, quién atiende, sector, volumen y momento.
+  const hz = require('./_funnel-hz.js').desdeCampos(campos);
+  const sector = (hz && hz.sector) || (conocido ? conocido.sector : '');
+  // En el horizontal el tramo de volumen lo traduce _funnel-hz.js a las etiquetas vol-* de siempre.
+  const volumen = hz ? '' : valor(campos, ['volumen']);
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
@@ -226,14 +232,14 @@ async function guardar(lead, opts) {
   };
   const inversionCruda = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
   const fugaCruda = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios', 'web', 'respuesta', 'seguimiento', 'no lo s']);
-  const inversion = CLAVES_INV[inversionCruda] || inversionCruda;
+  const inversion = (hz && hz.inversionTexto) || CLAVES_INV[inversionCruda] || inversionCruda;
   let fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
   // Formulario del 28-sep-2026: «¿Cuándo te gustaría empezar?» y «Nuestros
   // proyectos empiezan desde 750 €/mes. ¿Encaja con lo que buscas?». Entran
   // como etiquetas cuando-* y precio-* y las lee la puntuación (api/_scoring.js).
   const cuandoCruda = respuesta(campos, ['cuando', 'empezar'], null).toLowerCase();
   const precioCruda = respuesta(campos, ['encaja', 'precio', '750'], null).toLowerCase();
-  const cuando = /este|mes$|^este_mes/.test(cuandoCruda) && !/1|3/.test(cuandoCruda) ? 'este-mes'
+  const cuando = hz ? hz.cuando : /este|mes$|^este_mes/.test(cuandoCruda) && !/1|3/.test(cuandoCruda) ? 'este-mes'
     : /1.?3|1_3|meses/.test(cuandoCruda) ? '1-3-meses'
     : /mirando|mirar/.test(cuandoCruda) ? 'mirando' : '';
   const precio = /depende/.test(precioCruda) ? 'depende'
@@ -294,6 +300,7 @@ async function guardar(lead, opts) {
   if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
   if (v2) v2.etiquetas.forEach(function (t) { etiquetas.push(t); });
+  if (hz) hz.etiquetas.forEach(function (t) { etiquetas.push(t); });
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook
   // no procesó el aviso de Meta): se añaden los datos del formulario, pero no
@@ -357,7 +364,13 @@ async function guardar(lead, opts) {
       body: JSON.stringify({ body: v2.nota + (lead.form_id ? '\nFormulario: ' + lead.form_id : '') + '\n\n' + new Date().toISOString() })
     }).catch(function () {});
   }
-  if (contactId && (inversion || fuga)) {
+  if (contactId && hz) {
+    await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+      method: 'POST', headers: headers,
+      body: JSON.stringify({ body: hz.nota + (lead.form_id ? '\nFormulario: ' + lead.form_id : '') + '\n\n' + new Date().toISOString() })
+    }).catch(function () {});
+  }
+  if (contactId && !hz && (inversion || fuga)) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
       method: 'POST', headers: headers,
       body: JSON.stringify({
