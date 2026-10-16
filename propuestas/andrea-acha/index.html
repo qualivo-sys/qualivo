@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Plan para tu próximo lanzamiento · Andrea Acha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Plan personalizado para Andrea Acha: asistencia al directo, grabación y llamadas. Mismo sistema que las propuestas de Qualivo, con sus colores (coral, arena y crema). */
+:root{--bg:#FBF6F1;--surface:#FFFFFF;--ink:#2A2421;--muted:#6B5E56;--line:#EADDD2;--accent:#B4554D;--accent-ink:#FFFFFF;--coral:#E98D87;--tan:#BB987A;--tint:#FBEAE6;--sand:#F4ECE3;--good:#2F7A55;--warn:#9A5B00;--warn-bg:#FFF4E0;
+  --display:"Hahmlet",Georgia,serif;--font:"Work Sans","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1C1715;--surface:#27201D;--ink:#F5EDE6;--muted:#C4B5AA;--line:#40352F;--accent:#F2A49D;--accent-ink:#2A1715;--tint:#3A2723;--sand:#2E2622;--good:#6CC79A;--warn:#F2C26B;--warn-bg:#2E2614;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1715;--surface:#27201D;--ink:#F5EDE6;--muted:#C4B5AA;--line:#40352F;--accent:#F2A49D;--accent-ink:#2A1715;--tint:#3A2723;--sand:#2E2622;--good:#6CC79A;--warn:#F2C26B;--warn-bg:#2E2614;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);padding-inline:16px;padding-block:0 64px}
+.top{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+.top .in{max-width:1000px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top b{font-family:var(--display);font-weight:600;font-size:15px}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top nav a{font-size:14px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px}
+.top nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wrap{max-width:1000px;margin-inline:auto;display:grid;gap:34px;padding-top:30px}
+.wrap > *{min-width:0}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+h1{font-size:clamp(30px,4.8vw,48px);font-weight:600;line-height:1.08;margin:12px 0 0;letter-spacing:-.015em}
+h2{font-size:clamp(22px,3vw,29px);font-weight:600;margin:0 0 4px;letter-spacing:-.005em;line-height:1.15}
+h3{font-size:17.5px;font-weight:600;margin:0 0 6px;line-height:1.25}
+p{margin:0}
+.sub{color:var(--muted);font-size:18px;max-width:68ch;margin-top:12px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:28px;align-items:end}
+.hero img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px}
+section{display:grid;gap:14px;scroll-margin-top:70px}
+section > header p{color:var(--muted);max-width:70ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.big{font-family:var(--display);font-size:34px;font-weight:600;line-height:1.05;margin-bottom:4px}
+q{font-style:italic}
+ul,ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.muted{color:var(--muted)}
+.small{font-size:14.5px}
+.ok li::marker{color:var(--good)}
+.ko li::marker{color:var(--accent)}
+.prio{list-style:none;padding:0;counter-reset:p;display:grid;gap:10px}
+.prio li{counter-increment:p;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.prio li::before{content:counter(p);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800}
+.prio li.opt::before{content:"+";background:var(--tan)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 12px}
+.tw table{min-width:640px}
+td.d{white-space:nowrap;font-weight:700}
+td.d small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+tr.t0 td{background:var(--tint)}
+.ch{display:inline-block;font-size:11.5px;font-weight:700;border-radius:5px;padding:1px 6px;margin:1px 2px 1px 0;white-space:nowrap}
+.ch.em{background:#E8EEF8;color:#2B4C7E}.ch.wa{background:#DCF5E3;color:#1D6B3A}.ch.gr{background:#F4ECE3;color:#7A5A3E}.ch.vz{background:#F3E3F1;color:#7A2E6E}.ch.ad{background:#FFF0D6;color:#8A5300}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ch{filter:brightness(.9)}}
+.warn{background:var(--warn-bg);border-left:4px solid var(--warn);border-radius:10px;padding:12px 14px;font-size:15px}
+.hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
+.cta{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border-radius:10px;padding:12px 16px}
+.cta.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.seg .card{border-top:4px solid var(--coral)}
+.seg .card.g{border-top-color:var(--good)}
+.seg .card.t{border-top-color:var(--tan)}
+.seg .card.m{border-top-color:var(--muted)}
+.flowz{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14.5px}
+.flowz span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.flowz i{font-style:normal;color:var(--muted)}
+.flowz span.hot{border-color:var(--accent);color:var(--accent);font-weight:700}
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.calc label{display:grid;gap:4px;font-size:14px;font-weight:600}
+.calc label span{display:flex;justify-content:space-between;gap:8px}
+.calc label output{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.calc input[type=range]{width:100%;accent-color:var(--accent)}
+.calc .fields{display:grid;gap:14px}
+.res{display:grid;gap:10px}
+.res div{background:var(--sand);border-radius:12px;padding:12px 14px}
+.res b{font-family:var(--display);font-size:26px;font-weight:600;display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.res span{font-size:13.5px;color:var(--muted)}
+.ej{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+.price{font-family:var(--display);font-size:22px;font-weight:600;margin-top:8px}
+.who{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.who .card h3{display:flex;align-items:center;gap:8px}
+.who .card h3 img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.who .card h3 i{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);font-style:normal;display:grid;place-items:center;font-size:13px;font-family:var(--font);font-weight:700}
+.next{background:var(--ink);color:var(--bg);border-radius:18px;padding:24px;display:grid;gap:12px}
+.next h2{color:var(--bg)}
+.next a.cta{background:var(--coral);color:#2A1715}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero img{max-width:220px;aspect-ratio:1;border-radius:50%}.grid2,.who,.calc{grid-template-columns:1fr}.big{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><b>Andrea Acha × Qualivo</b>
+  <nav aria-label="Presentación"><a href="./" aria-current="page">Plan</a><a href="demo/">Demo</a><a href="anuncios/">Anuncios</a><a href="landing/">Landing</a></nav></div></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <span class="tag">QUALIVO · PLAN PERSONALIZADO PARA ANDREA ACHA · 16 OCT 2026</span>
+      <h1>Más gente en tu directo, más gente que ve la grabación y más llamadas agendadas</h1>
+      <p class="sub">El plan que te prometí el 13 de octubre. Está hecho con lo que me contaste: tu recorrido de hoy, tus cifras y tus tres prioridades. Tu equipo sigue cerrando las llamadas como hasta ahora; lo que cambia es todo lo que pasa antes y después del directo.</p>
+    </div>
+    <img src="assets/andrea-retrato.jpg" alt="Andrea Acha" width="230" height="307">
+  </div>
+
+  <!-- 1 · LO QUE NOS CONTASTE -->
+  <section id="contaste">
+    <header><h2>Lo que me contaste el 13 de octubre</h2></header>
+    <div class="flowz" aria-label="Tu recorrido de hoy">
+      <span>Anuncios + orgánico</span><i>→</i><span>Página de registro al directo (gratis)</span><i>→</i><span>Email + grupo de WhatsApp</span><i>→</i><span class="hot">Directo en Zoom</span><i>→</i><span>2 emails + WhatsApps de venta</span><i>→</i><span>Agenda de llamada</span><i>→</i><span>Tu equipo cierra</span>
+    </div>
+    <div class="grid">
+      <div class="card"><p class="k">Asistencia al directo</p><p class="big">15-18 %</p><p class="small muted">de las registradas entra en directo. Es tu problema número uno.</p></div>
+      <div class="card"><p class="k">La grabación</p><p class="big">Más llamadas después</p><p class="small muted">Mucha gente ve la grabación más tarde, y tienes más agendas de llamada después del evento que durante.</p></div>
+      <div class="card"><p class="k">Cierre</p><p class="big">≈ 60 %</p><p class="small muted">de las llamadas que recibe tu equipo terminan en venta. El cierre humano funciona y se queda como está.</p></div>
+      <div class="card"><p class="k">Lo que no ves</p><p class="big"><q>Solo sé el volumen</q></p><p class="small muted">Con Zoom no sabes quién asistió y quién no, así que todas reciben el mismo mensaje.</p></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Cómo fue el último lanzamiento</h3><p class="small">«Bien»: el recorrido mantiene cifras correctas. No partimos de algo roto, sino de algo que funciona y que se puede apretar en los puntos donde se escapa gente.</p></div>
+      <div class="card"><h3>Lo que más crece</h3><p class="small">Las ventas de ticket alto, que no son la formación sino tu <b>servicio de agencia de prensa</b>: más facturación por cliente, menos escalable. El plan lo tiene en cuenta: quien no tiene tiempo para hacerlo ella misma es candidata a la agencia.</p></div>
+    </div>
+    <div class="card">
+      <h3>Lo que no quieres (y se respeta)</h3>
+      <ul class="small">
+        <li><b>Nada de setters ni de un proceso de ventas complicado.</b> La llamada la sigue haciendo tu equipo, y cierra tu equipo.</li>
+        <li><b>WhatsApp solo a quien ya está en el grupo o ha mostrado intención</b> (marcó la casilla, te escribió o pidió llamada). Nada de envíos masivos que pongan en riesgo tu número.</li>
+        <li>Decides <b>antes del 22 de octubre</b>: del 23 de octubre al 2 de noviembre estás en un evento y desapareces. El calendario está pensado para que no tengas que hacer nada esos días.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 · PRIORIDADES -->
+  <section id="prioridades">
+    <header><h2>Tus prioridades, en tu orden</h2></header>
+    <ol class="prio">
+      <li><div><h3>Precalentamiento para subir la asistencia en directo</h3><p class="small muted">Que quien se registra llegue al jueves con ganas, con el enlace a mano y con un motivo para venir en directo (y no esperar a la grabación).</p></div></li>
+      <li><div><h3>Empujar el visionado de la grabación</h3><p class="small muted">Grabación con fecha de caducidad, enlace personal y un aviso del minuto exacto por el que empezar. Y saber quién la ve y hasta dónde.</p></div></li>
+      <li><div><h3>Más paso de registro → asistencia → llamada agendada</h3><p class="small muted">Mensajes distintos para quien vino, quien se fue antes de la propuesta, quien no vino y quien vio la grabación. Cada una recibe lo que le toca.</p></div></li>
+      <li class="opt"><div><h3>Opcional: anuncios y su medición</h3><p class="small muted">Saber qué anuncio trae gente que asiste y agenda, no solo registros baratos.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- 3 · LO QUE HEMOS VISTO -->
+  <section id="visto">
+    <header><h2>Lo que he visto de tu web y de tus anuncios</h2><p>Revisado el 16 de octubre: andreaacha.com, la audioclase, la página del Pitch Noticiable™ en cursos.andreaacha.com y la Biblioteca de anuncios de Meta (España, anuncios activos).</p></header>
+    <div class="grid2">
+      <div class="card">
+        <p class="k">Lo que funciona</p>
+        <ul class="small ok">
+          <li><b>Tu historia «del otro lado»</b>: años decidiendo en revistas femeninas qué marcas salían. Es tu ángulo más fuerte y ya lo usas en anuncios («esos correos los cerraba a los tres segundos»).</li>
+          <li><b>Prueba social de medios</b>: Vogue, ELLE, Marie Claire, ABC, Harper's Bazaar, Vanity Fair, Telemadrid, Onda Cero… y ocho testimonios en vídeo en la web.</li>
+          <li><b>Oferta clara</b>: F.A.N. a 1.800 € + impuestos, pago fraccionado, 14 días de garantía y llamada previa para ver si encaja.</li>
+          <li><b>Una puerta de entrada de pago</b>: Pitch Noticiable™ a 47 € con AndreIA y sesión en directo (anunciada para el 21 de octubre).</li>
+          <li><b>Anuncios con textos largos y casos reales</b>, en tu voz. Se leen como contenido, no como publicidad.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="k">Lo que se escapa</p>
+        <ul class="small ko">
+          <li><b>La página de la audioclase solo pide nombre y email</b> (Kajabi). Sin teléfono opcional, sin casilla de WhatsApp y sin una sola pregunta: no sabes qué marca tiene ni si busca formación o que alguien lo haga por ella.</li>
+          <li><b>La web no menciona la agencia de prensa</b>, que es lo que más crece. Solo aparece en un anuncio («escribe AGENCIA»).</li>
+          <li><b>Formulario de contacto sin teléfono ni agenda</b> («¿No puedes esperar?»: nombre, email y mensaje).</li>
+          <li><b>Anuncios activos: unos 17, todos en Instagram</b>, casi todos con «comenta FAN / PITCH / AGENCIA». Funciona para conversar, pero no deja rastro de qué anuncio acaba en llamada o venta.</li>
+          <li><b>Un anuncio activo, lanzado el 14 de octubre, habla de «la edición de septiembre que empieza este 24»</b>; otro, de la última edición de 2026. Conviene revisarlo.</li>
+          <li><b>Detalle</b>: la web dice «más de 15 años» de experiencia; la página del Pitch y los anuncios, «20 años».</li>
+        </ul>
+      </div>
+    </div>
+    <p class="hyp"><b>Lo que saco de esto:</b> tu contenido y tu oferta convencen. Lo que falta es que el sistema <b>sepa quién es quién</b>: quién se registró desde qué anuncio, quién vino, cuánto se quedó, quién vio la grabación y quién no tiene tiempo para hacerlo ella. Con eso, cada persona recibe el mensaje que le toca y tu equipo sabe a quién llamar primero.</p>
+    <p class="small muted">Competencia: en una búsqueda rápida no he encontrado en España otro programa con tu mismo enfoque (prensa para marcas de bienestar, belleza y estilo de vida con una mentora que ha sido periodista). Lo más parecido son cursos sueltos de un día sobre relación con medios, de 50 a 300 €.</p>
+  </section>
+
+  <!-- 4 · QUIÉN ASISTIÓ -->
+  <section id="asistencia">
+    <header><h2>Cómo sabremos quién asistió (y quién vio la grabación)</h2><p>Hoy usas Zoom y solo ves el volumen. Hay tres formas de saberlo; la primera es la buena.</p></header>
+    <div class="grid">
+      <div class="card"><p class="k">Recomendada</p><h3>Zoom conectado, con enlace personal</h3><p class="small">Cada registrada recibe su propio enlace de Zoom (Zoom lo permite con el registro activado en tu cuenta). Al entrar, el sistema sabe que es ella, a qué hora entró y cuántos minutos se quedó. Así sabemos quién llegó a la propuesta y quién se fue antes.</p></div>
+      <div class="card"><p class="k">Si no se puede tocar Zoom</p><h3>Registro de asistencia después</h3><p class="small">Al terminar, se descarga el informe de participantes de Zoom y se cruza con las registradas por email y nombre. Funciona, pero llega una hora más tarde y falla con quien entra con otro correo.</p></div>
+      <div class="card"><p class="k">Grabación</p><h3>Página con enlace personal y fecha de caducidad</h3><p class="small">La grabación se ve en una página tuya con un enlace por persona. Sabemos quién le dio al play y si llegó al minuto de la propuesta. Caduca a las 72 horas.</p></div>
+    </div>
+    <p class="warn small">A comprobar con tu cuenta: el registro con enlace personal y el informe de participantes necesitan Zoom Pro o superior con la opción de registro activada. Si usas un enlace único compartido, solo se puede usar el informe de después.</p>
+  </section>
+
+  <!-- 5 · RECORRIDO -->
+  <section id="recorrido">
+    <header><h2>Tu próximo lanzamiento, día a día</h2><p>T0 es el día del directo. Las fechas son un <b>ejemplo</b> con un directo el jueves 3 de diciembre a las 19:00; se mueven todas con tu fecha real. Todos los textos completos están en la <a href="demo/#precalentamiento">demo</a>. Los mensajes automáticos salen solo de 8:00 a 21:30.</p></header>
+    <p class="small"><span class="ch em">Email</span> a todas las registradas · <span class="ch wa">WhatsApp</span> solo a quien marcó la casilla o escribió · <span class="ch gr">Grupo</span> mensaje que publica tu equipo en el grupo · <span class="ch vz">Voz</span> solo a quien pidió llamada · <span class="ch ad">Anuncio</span> recordatorio en Instagram a las registradas</p>
+    <div class="tw"><table>
+      <thead><tr><th>Cuándo</th><th>Qué pasa</th><th>Por dónde</th><th>Para qué</th></tr></thead>
+      <tbody>
+        <tr><td class="d">T-21 → T-1<small>12 nov → 2 dic</small></td><td><b>Registro abierto.</b> Anuncios y orgánico llevan a la nueva página de registro: nombre, email, dos preguntas de un toque, teléfono opcional y casilla de WhatsApp.</td><td><span class="ch ad">Anuncio</span></td><td>Saber de qué anuncio viene cada una y qué busca.</td></tr>
+        <tr><td class="d">Minuto 0<small>al registrarse</small></td><td><b>Bienvenida</b>: plaza confirmada, enlace personal de Zoom, «añadir a mi calendario» y enlace al grupo. Por WhatsApp, un mensaje que pide responder «SÍ».</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span></td><td>Que el directo esté en su calendario desde el primer minuto.</td></tr>
+        <tr><td class="d">+1 día<small>si faltan más de 8</small></td><td><b>Mientras llega el día</b>: tu audioclase de 10 minutos para quien se registró pronto.</td><td><span class="ch em">Email</span></td><td>Que no se enfríe en tres semanas.</td></tr>
+        <tr><td class="d">T-7<small>jue 26 nov</small></td><td><b>Deberes de 5 minutos</b>: «escribe en una frase qué hace tu marca y tráela; revisaré algunas en directo».</td><td><span class="ch em">Email</span><span class="ch gr">Grupo</span></td><td>Un motivo para venir en directo y no esperar a la grabación.</td></tr>
+        <tr><td class="d">T-5<small>sáb 28 nov</small></td><td><b>Historia</b>: el correo que tú borrabas a los tres segundos y por qué.</td><td><span class="ch em">Email</span></td><td>Que sienta que el directo va de ella.</td></tr>
+        <tr><td class="d">T-3<small>lun 30 nov</small></td><td><b>«¿Qué pregunta quieres que responda?»</b> Se contesta con un mensaje.</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span><span class="ch gr">Grupo</span></td><td>Compromiso: quien pregunta, viene.</td></tr>
+        <tr><td class="d">T-2<small>mar 1 dic</small></td><td><b>Lo que solo verá quien venga en directo</b> (revisión de frases en el momento y el regalo que tú decidas).</td><td><span class="ch em">Email</span><span class="ch ad">Anuncio</span></td><td>Diferencia clara entre venir y ver la grabación.</td></tr>
+        <tr><td class="d">T-1<small>mié 2 dic, 19:00</small></td><td><b>Víspera</b>: «mañana a las 19:00», con su enlace.</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span><span class="ch gr">Grupo</span></td><td>Recordar con 24 h de margen.</td></tr>
+        <tr class="t0"><td class="d">T0 · mañana<small>jue 3 dic, 10:00</small></td><td><b>«Hoy a las 19:00»</b> + recordatorio en Instagram a las registradas.</td><td><span class="ch em">Email</span><span class="ch ad">Anuncio</span></td><td>Llegar también a quien no abre el correo.</td></tr>
+        <tr class="t0"><td class="d">T0 · 2 h antes<small>17:00</small></td><td><b>«En dos horas empezamos»</b>: busca un rato tranquilo, ten tu frase a mano.</td><td><span class="ch wa">WhatsApp</span><span class="ch em">Email</span></td><td>Que organice la tarde.</td></tr>
+        <tr class="t0"><td class="d">T0 · 15 min antes<small>18:45</small></td><td><b>«Abrimos la sala en 15 minutos»</b>, con el botón de entrar.</td><td><span class="ch wa">WhatsApp</span><span class="ch em">Email</span><span class="ch gr">Grupo</span></td><td>Un toque, y está dentro.</td></tr>
+        <tr class="t0"><td class="d">T0 · en directo<small>19:03 y 19:15</small></td><td><b>«Estamos en directo, aún llegas»</b>. Solo a quien <b>no</b> ha entrado: Zoom ya nos dice quién está.</td><td><span class="ch wa">WhatsApp</span><span class="ch em">Email</span></td><td>Rescatar a quien se despistó, sin molestar a quien ya está.</td></tr>
+        <tr><td class="d">T0 · noche<small>21:00</small></td><td><b>Cuatro mensajes distintos</b>: se quedó hasta la propuesta · se fue antes · no vino · (y al día siguiente) vio la grabación. Ver abajo.</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span></td><td>Cada una recibe lo que le toca.</td></tr>
+        <tr><td class="d">T+1 → T+3<small>vie 4 → dom 6</small></td><td><b>Grabación con plazo</b> (hasta el domingo a las 23:59) y con el minuto por el que empezar. Último aviso el domingo a las 20:00.</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span><span class="ch ad">Anuncio</span></td><td>Que la vea esta semana, no «algún día».</td></tr>
+        <tr><td class="d">T0 → T+7<small>3 → 10 dic</small></td><td><b>Llamadas abiertas</b>. Agenda con confirmación, recordatorio la víspera y 2 h antes, y rescate si no se presenta. El agente de WhatsApp contesta dudas de precio y agenda. La voz llama solo a quien lo pidió.</td><td><span class="ch wa">WhatsApp</span><span class="ch em">Email</span><span class="ch vz">Voz</span></td><td>Que ninguna interesada se quede sin llamada.</td></tr>
+        <tr><td class="d">T+6 / T+7<small>9 y 10 dic</small></td><td><b>Cierre</b>: «cerramos mañana» y «últimas horas» (tus dos emails de venta, con el orden y el público correctos).</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span></td><td>Fecha límite clara.</td></tr>
+        <tr><td class="d">T+8 → T+14<small>11 → 17 dic</small></td><td><b>«Ahora no»</b>: una pregunta de un toque («¿qué te ha frenado?»). Momento → lista prioritaria de la próxima edición. Dinero → pago fraccionado o Pitch Noticiable™. <b>Tiempo → tu agencia de prensa.</b> Y el informe del lanzamiento.</td><td><span class="ch em">Email</span><span class="ch wa">WhatsApp</span></td><td>No perder a nadie y alimentar el ticket alto.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 6 · DESPUÉS DEL DIRECTO -->
+  <section id="despues">
+    <header><h2>Después del directo: cada una recibe lo suyo</h2><p>Hoy todas reciben los mismos dos emails y WhatsApps de venta. Con la asistencia conectada, se separan así:</p></header>
+    <div class="seg">
+      <div class="card g"><p class="k">Se quedó hasta la propuesta</p><p class="small">A las 21:00: gracias + enlace para elegir hora con tu equipo. Si en 48 h no agenda, las tres dudas más repetidas (precio, cuotas, garantía) y otra vez la agenda.</p></div>
+      <div class="card"><p class="k">Se fue antes de la propuesta</p><p class="small">A la mañana siguiente: «te fuiste justo antes de lo mejor», con la grabación desde el minuto exacto de la propuesta.</p></div>
+      <div class="card t"><p class="k">No vino</p><p class="small">Grabación hasta el domingo a las 23:59, con el minuto por el que empezar si solo tiene 15 minutos. Tres avisos como mucho.</p></div>
+      <div class="card g"><p class="k">Vio la grabación</p><p class="small">Si llegó a la propuesta: mensaje con la agenda en la misma hora. Es donde hoy tienes más agendas: ahora sabremos quién es.</p></div>
+      <div class="card m"><p class="k">Pidió llamada o dejó el teléfono y no agendó</p><p class="small">El agente de voz la llama a los 10-20 minutos (de 8:00 a 21:30) solo para buscar hora con tu equipo. Dos intentos como mucho.</p></div>
+    </div>
+    <p class="ctas"><a class="cta" href="demo/#despues">Ver todos los mensajes en la demo</a></p>
+  </section>
+
+  <!-- 7 · AGENTES -->
+  <section id="agentes">
+    <header><h2>Los dos agentes, y lo que no hacen</h2><p>Los dos se presentan como asistente de tu equipo (el nombre lo eliges tú; en la demo se llama Vera). Su trabajo es resolver dudas y llevar a la llamada. <b>No venden, no cierran y no negocian.</b></p></header>
+    <div class="grid2">
+      <div class="card">
+        <p class="k">Agente de WhatsApp</p>
+        <ul class="small">
+          <li>Contesta en minutos a quien te escribe o marcó la casilla: precio (1.800 € + impuestos), pago en cuotas, garantía de 14 días, duración, sesiones en directo y «¿es para mí?».</li>
+          <li>Ofrece dos horas de la agenda de tu equipo y la reserva.</li>
+          <li>Si dice «no tengo tiempo para hacerlo yo», le habla de la agencia y lo anota para tu equipo.</li>
+          <li><b>Pasa a tu equipo</b>: descuentos, condiciones especiales, quejas y todo lo que no sepa. En cuanto alguien de tu equipo escribe, se calla.</li>
+          <li><b>Nunca</b> escribe a quien no dio permiso, ni promete salir en prensa, ni manda mensajes fuera de 8:00 a 21:30.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="k">Agente de voz</p>
+        <ul class="small">
+          <li><b>Solo llama a quien lo pidió</b> («prefiero que me llaméis») o a quien empezó a agendar, dejó su teléfono y no terminó.</li>
+          <li>A los 10-20 minutos, de 8:00 a 21:30. Si es de noche, a partir de las 8:00.</li>
+          <li>Dos minutos: confirma qué marca tiene, si ha salido en prensa y le busca hora con tu equipo.</li>
+          <li>Si no contesta: mensaje corto en el buzón y un WhatsApp con dos horas. Dos intentos como mucho.</li>
+          <li><b>Nunca</b> llama a una lista, ni a quien solo se registró al directo, ni habla de precio más allá de lo que dice tu web.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small muted">Sobre el grupo de WhatsApp: los mensajes del grupo te los dejo escritos y con su hora; los publica tu equipo (o se programan si tu herramienta lo permite). Los mensajes uno a uno salen solo a quien dio su permiso, y el primero le pide responder: así es una conversación, no un envío masivo.</p>
+  </section>
+
+  <!-- 8 · MEDICIÓN -->
+  <section id="medicion">
+    <header><h2>Qué anuncio trae gente que viene y agenda</h2><p>Opcional, pero es lo que permite decidir dónde poner el dinero en el siguiente lanzamiento.</p></header>
+    <div class="grid">
+      <div class="card"><h3>Cada registrada lleva su anuncio</h3><p class="small muted">La página de registro guarda de qué anuncio, campaña o publicación orgánica viene. También para «comenta FAN»: el enlace que se manda por mensaje lleva su marca.</p></div>
+      <div class="card"><h3>Se sigue hasta el final</h3><p class="small muted">Registro → abrió la bienvenida → asistió (y cuánto) → vio la grabación → agendó → vino a la llamada → compró F.A.N. o la agencia.</p></div>
+      <div class="card"><h3>Meta aprende de quien asiste</h3><p class="small muted">Se le devuelve a Meta quién asistió, quién agendó y quién compró. Así optimiza hacia asistentes, no hacia registros baratos que no aparecen.</p></div>
+    </div>
+    <p class="small">Lo que se compara: <b>coste por asistente y coste por llamada agendada</b> de cada anuncio, no solo el coste por registro. Los anuncios de ejemplo están en <a href="anuncios/">Anuncios</a>.</p>
+  </section>
+
+  <!-- 9 · CIFRAS -->
+  <section id="cifras">
+    <header><h2>Qué significa subir unos puntos de asistencia <span class="ej">Ejemplo</span></h2><p>Con tus porcentajes (15-18 % de asistencia, cierre de ≈60 % de las llamadas, F.A.N. a 1.800 €) y dos datos que <b>no tenemos todavía</b>: cuántas se registran y cuántas asistentes agendan. Los he puesto de ejemplo; muévelos con tus números.</p></header>
+    <div class="card calc" id="calc">
+      <div class="fields">
+        <label>Registradas al directo <span><small class="muted">ejemplo</small><output id="o-reg">1.000</output></span><input type="range" id="reg" min="200" max="5000" step="50" value="1000"></label>
+        <label>Asistencia hoy <span><small class="muted">tu dato: 15-18 %</small><output id="o-hoy">16 %</output></span><input type="range" id="hoy" min="10" max="25" step="1" value="16"></label>
+        <label>Asistencia con el plan <span><small class="muted">ejemplo, no previsión</small><output id="o-plan">22 %</output></span><input type="range" id="plan" min="10" max="40" step="1" value="22"></label>
+        <label>Asistentes que agendan llamada <span><small class="muted">hipótesis: lo necesito de ti</small><output id="o-ag">10 %</output></span><input type="range" id="ag" min="2" max="30" step="1" value="10"></label>
+        <label>Llamadas que cierra tu equipo <span><small class="muted">tu dato</small><output id="o-ci">60 %</output></span><input type="range" id="ci" min="20" max="80" step="5" value="60"></label>
+      </div>
+      <div class="res" aria-live="polite">
+        <div><b id="r-asis">+60</b><span>personas más en directo (<span id="r-asis2">160 → 220</span>)</span></div>
+        <div><b id="r-llam">+6</b><span>llamadas más, solo de asistentes en directo</span></div>
+        <div><b id="r-ven">≈ 3-4</b><span>plazas de F.A.N. más, al ritmo de cierre de tu equipo</span></div>
+        <div><b id="r-eur">≈ 5.400-7.200 €</b><span>con F.A.N. a 1.800 € (sin impuestos). Sin contar la grabación ni la agencia.</span></div>
+      </div>
+    </div>
+    <p class="warn small"><b>Es un ejemplo, no una promesa.</b> No sé cuánto subirá tu asistencia: depende de tu lista, de tu fecha y de tu directo. Lo que sí puedo hacer es medirlo: con el primer lanzamiento sabremos tu punto de partida real (asistencia, grabación y agendas por cada grupo) y fijaremos las cifras a mejorar con datos. Cada punto de asistencia son 10 personas más por cada 1.000 registradas.</p>
+  </section>
+
+  <!-- 10 · QUIÉN HACE QUÉ -->
+  <section id="quien">
+    <header><h2>Qué haces tú y qué hago yo</h2></header>
+    <div class="who">
+      <div class="card"><h3><img src="assets/andrea-qa.jpg" alt="" width="30" height="30">Tú y tu equipo</h3>
+        <ul class="small">
+          <li>Fecha del directo y el contenido del directo (como ahora).</li>
+          <li>Decidir qué se lleva solo quien viene en directo.</li>
+          <li>Aprobar los textos antes de que salga nada: una sesión de 60 minutos.</li>
+          <li>Accesos: Zoom, Kajabi, tu herramienta de email, agenda de llamadas, WhatsApp Business y Meta.</li>
+          <li>Publicar en el grupo de WhatsApp (te lo dejo escrito y con hora).</li>
+          <li><b>Las llamadas y el cierre</b>, como hoy.</li>
+        </ul></div>
+      <div class="card"><h3><i>M</i>Qualivo (Maikel)</h3>
+        <ul class="small">
+          <li>Página de registro nueva, con tu marca y pensada para que vengan en directo.</li>
+          <li>Conexión con Zoom: quién asistió, cuánto y quién se fue antes.</li>
+          <li>Todos los mensajes de bienvenida, precalentamiento, recordatorios y después del directo, en tu voz.</li>
+          <li>Página de la grabación con enlace personal y caducidad.</li>
+          <li>Agente de WhatsApp y agente de voz, con sus límites.</li>
+          <li>Medición por anuncio y panel diario durante el lanzamiento.</li>
+          <li>Informe del lanzamiento y lista de «ahora no».</li>
+        </ul></div>
+    </div>
+    <p class="small muted">Qualivo soy yo, Maikel. No es una agencia ni un equipo de ventas: monto el sistema, lo pruebo y lo superviso durante el lanzamiento. No sustituyo Kajabi ni tu herramienta de email si te funcionan.</p>
+  </section>
+
+  <!-- 11 · ALCANCE -->
+  <section id="alcance">
+    <header><h2>Alcance por fases</h2><p>Puedes empezar solo por la asistencia, o montarlo completo para el próximo lanzamiento.</p></header>
+    <div class="grid">
+      <div class="card"><p class="k">Fase 1 · Asistencia</p><h3>Precalentamiento y directo</h3>
+        <ul class="small"><li>Página de registro nueva</li><li>Bienvenida, precalentamiento y recordatorios (víspera, 2 h, 15 min, «estamos en directo»)</li><li>Zoom conectado: quién asistió y cuánto</li><li>Grabación con plazo y mensajes por grupo</li><li>Panel del directo</li></ul>
+        <p class="price">[____] € + IVA</p></div>
+      <div class="card"><p class="k">Fase 2 · Completo</p><h3>Del registro a la llamada</h3>
+        <ul class="small"><li>Todo lo de la fase 1</li><li>Agente de WhatsApp (dudas y agenda)</li><li>Agente de voz (solo a quien lo pide)</li><li>Agenda con confirmación, recordatorios y rescate</li><li>«Ahora no» y paso a la agencia</li><li>Medición por anuncio y retorno a Meta</li><li>Informe del lanzamiento</li></ul>
+        <p class="price">[____] € + IVA</p></div>
+      <div class="card"><p class="k">Opcional</p><h3>Anuncios de captación al directo</h3>
+        <ul class="small"><li>Creativos con tu marca (3 ángulos, feed y story)</li><li>Recordatorio en Instagram a las registradas</li><li>Seguimiento diario durante el registro</li></ul>
+        <p class="price">[____] € + IVA</p><p class="small muted">La inversión en Meta la pagas tú directamente.</p></div>
+    </div>
+    <p class="small">Para los lanzamientos siguientes: <b>[____] € + IVA por lanzamiento</b>, o te lo dejo montado y documentado para tu equipo por <b>[____] € + IVA</b>. Lo que garantizo es el montaje en la fecha acordada y que no sale nada sin tu aprobación; no garantizo ventas.</p>
+  </section>
+
+  <!-- 12 · CALENDARIO -->
+  <section id="calendario">
+    <header><h2>Calendario, contando con tu evento</h2><p>Del 23 de octubre al 2 de noviembre no estás. Esos días son los míos: monto todo sin que tengas que contestar nada.</p></header>
+    <div class="tw"><table>
+      <thead><tr><th>Cuándo</th><th>Qué</th><th>Tú</th></tr></thead>
+      <tbody>
+        <tr><td class="d">Hasta el 22 oct</td><td>Decides la fase. Me dices la fecha del próximo directo.</td><td>15 minutos de tu equipo para darme los accesos.</td></tr>
+        <tr><td class="d">23 oct → 2 nov</td><td>Monto la página de registro, la conexión con Zoom (con una sala de prueba), todos los textos en borrador, la página de la grabación, los agentes y el panel. <b>No se publica nada.</b></td><td>Nada. Estás en tu evento.</td></tr>
+        <tr><td class="d">3 → 6 nov</td><td>Repasamos juntos los textos y lo que solo tendrán las que vengan en directo. Ajusto lo que digas.</td><td>Una sesión de 60 minutos.</td></tr>
+        <tr><td class="d">9 → 11 nov</td><td>Prueba completa con un registro de prueba: bienvenida, recordatorios, entrada en Zoom, grabación, agente y llamada.</td><td>Tu equipo prueba la agenda.</td></tr>
+        <tr><td class="d">Desde el 12 nov</td><td><b>Listo para abrir el registro.</b> Con 21 días de registro, el primer directo que puedo acompañar entero es a partir del <b>3 de diciembre</b>.</td><td>Tu directo.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hyp small">Si tu próximo directo es antes, montamos solo lo que llegue a tiempo (bienvenida, recordatorios y grabación con plazo). Si es en enero o febrero, mejor: hay margen para probarlo antes con un directo pequeño, por ejemplo el del Pitch Noticiable™.</p>
+  </section>
+
+  <!-- 13 · SIGUIENTE PASO -->
+  <section class="next" id="siguiente">
+    <h2>Siguiente paso</h2>
+    <p>Si te encaja, antes del <b>jueves 22 de octubre</b> me dices qué fase quieres y la fecha de tu próximo directo. El 23 empiezo a montarlo y el 3 de noviembre, a tu vuelta, lo tienes listo para revisar.</p>
+    <p class="ctas"><a class="cta" href="demo/">Ver la demo paso a paso</a><a class="cta alt" href="landing/">Ver la página de registro</a></p>
+  </section>
+
+  <div class="foot">
+    <p>Maikel Echevarría · Qualivo · <a href="mailto:maikel@qualivo.io">maikel@qualivo.io</a> · +34 647 11 84 91 · <a href="https://qualivo.io">qualivo.io</a></p>
+    <p>Preparado el 16 de octubre de 2026 para Andrea Acha. Las cifras del plan salen de lo que nos contaste el 13 de octubre; las fechas del directo, los nombres y las cifras de la demo son de ejemplo.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return Math.round(n).toLocaleString('es-ES'); };
+  function calc() {
+    var reg = +$('reg').value, hoy = +$('hoy').value / 100, plan = +$('plan').value / 100, ag = +$('ag').value / 100, ci = +$('ci').value / 100;
+    $('o-reg').textContent = fmt(reg); $('o-hoy').textContent = Math.round(hoy * 100) + ' %'; $('o-plan').textContent = Math.round(plan * 100) + ' %';
+    $('o-ag').textContent = Math.round(ag * 100) + ' %'; $('o-ci').textContent = Math.round(ci * 100) + ' %';
+    var a0 = reg * hoy, a1 = reg * plan, mas = a1 - a0, ll = mas * ag, v = ll * ci;
+    var sg = mas >= 0 ? '+' : '−';
+    $('r-asis').textContent = sg + fmt(Math.abs(mas));
+    $('r-asis2').textContent = fmt(a0) + ' → ' + fmt(a1);
+    $('r-llam').textContent = sg + fmt(Math.abs(ll));
+    var lo = Math.floor(Math.abs(v)), hi = Math.ceil(Math.abs(v));
+    $('r-ven').textContent = (lo === hi ? '≈ ' + lo : '≈ ' + lo + '-' + hi);
+    $('r-eur').textContent = lo === hi ? '≈ ' + fmt(lo * 1800) + ' €' : '≈ ' + fmt(lo * 1800) + '-' + fmt(hi * 1800) + ' €';
+  }
+  ['reg', 'hoy', 'plan', 'ag', 'ci'].forEach(function (id) { $(id).addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>

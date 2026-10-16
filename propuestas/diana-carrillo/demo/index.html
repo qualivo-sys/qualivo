@@ -175,6 +175,7 @@ td.num,th.num{font-variant-numeric:tabular-nums}
 .kpi span{font-size:13px;color:var(--muted)}
 .kpi.alert{border-color:var(--warn)}
 .kpi.alert b{color:var(--warn)}
+.small{font-size:13.5px}.muted{color:var(--muted)}
 footer{font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line);padding-top:16px}
 footer a{color:var(--accent)}
 .links{display:flex;flex-wrap:wrap;gap:8px}
@@ -182,6 +183,8 @@ footer a{color:var(--accent)}
 .navnext button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
 @media (max-width:900px){.cols,.seq,.star-cols{grid-template-columns:1fr}.two{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+@media (max-width:560px){nav.top div{flex-wrap:wrap;overflow:visible}nav.top b{width:100%;margin:0 0 2px}}
 </style>
 </head>
 <body>
@@ -282,7 +285,7 @@ footer a{color:var(--accent)}
   <header><h2>4 · Si no contesta, la llama Raquel <span class="ej">Ejemplo</span></h2><p>Raquel es la asistente de voz. Solo llama a quien ha dejado sus datos y ha pedido información (con la casilla marcada), de 8:00 a 21:30, y como mucho dos veces.</p></header>
   <div class="two">
     <div class="call">
-      <div class="top"><div><b>Raquel → Andrea</b><small>Lunes 13:12 · 15 minutos después del test, sin respuesta al WhatsApp</small></div><span>Ejemplo · 2 min 10 s</span></div>
+      <div class="top"><div><b>Raquel → Andrea</b><small>Domingo 19:56 · 15 minutos después del test, sin respuesta al WhatsApp</small></div><span>Ejemplo · 2 min 10 s</span></div>
       <div class="body">
         <p class="v s">Llamada saliente desde el número del centro</p>
         <p class="v r"><small>Raquel</small>Hola, ¿hablo con Andrea? Soy Raquel, la asistente virtual del centro de Diana Carrillo, en Barcelona. Te llamo porque hace un rato pediste información sobre tu postoperatorio. ¿Tienes un minuto?</p>
@@ -295,7 +298,7 @@ footer a{color:var(--accent)}
         <p class="v p"><small>Andrea</small>El martes me va bien.</p>
         <p class="v r"><small>Raquel</small>Hecho: martes a las seis de la tarde, en Consell de Cent, 325, principal primera. Ahora te llega la confirmación por WhatsApp con la dirección. ¿Necesitas algo más?</p>
         <p class="v p"><small>Andrea</small>No, gracias.</p>
-        <p class="v r"><small>Raquel</small>Gracias a ti, Andrea. Nos vemos el martes. ¡Que tengas buen día!</p>
+        <p class="v r"><small>Raquel</small>Gracias a ti, Andrea. Nos vemos el martes. ¡Buena tarde!</p>
         <p class="v s">Cita en tu agenda · ficha actualizada (liposucción, 12-nov) · resumen y grabación en la ficha · aviso a Diana</p>
       </div>
     </div>
@@ -385,11 +388,11 @@ Diana Carrillo</blockquote></li>
       <p>Para la valoración y para cada sesión. Y qué pasa si no viene.</p>
       <ol class="tl">
         <li><span class="w">Al reservar</span><span class="ch">WhatsApp</span><b>Confirmación</b><blockquote>Reservado, Andrea ✅
-Valoración con Diana: martes 21 de octubre, 18:00.
+Valoración con Diana: martes 20 de octubre, 18:00.
 Consell de Cent, 325, principal primera (L'Eixample).
 Si necesitas cambiarla, escríbeme por aquí.</blockquote></li>
-        <li class="mail"><span class="w">Al reservar</span><span class="ch">Email</span><b>Confirmación con mapa</b><blockquote><span class="subj">Asunto: Tu valoración con Diana Carrillo: martes 21 de octubre, 18:00</span>Hola, Andrea:
-Te esperamos el martes 21 de octubre a las 18:00 en Consell de Cent, 325, principal primera (L'Eixample, Barcelona). Aquí tienes el mapa: <span class="ph">[enlace de Google Maps]</span>.
+        <li class="mail"><span class="w">Al reservar</span><span class="ch">Email</span><b>Confirmación con mapa</b><blockquote><span class="subj">Asunto: Tu valoración con Diana Carrillo: martes 20 de octubre, 18:00</span>Hola, Andrea:
+Te esperamos el martes 20 de octubre a las 18:00 en Consell de Cent, 325, principal primera (L'Eixample, Barcelona). Aquí tienes el mapa: <span class="ph">[enlace de Google Maps]</span>.
 Si te surge algo, responde a este email y lo cambiamos.
 Diana Carrillo</blockquote></li>
         <li><span class="w">Víspera · 10:00</span><span class="ch">WhatsApp</span><b>¿Confirmas?</b><blockquote>Hola, Andrea. Te recuerdo tu valoración con Diana mañana martes a las 18:00. ¿Me confirmas que vienes? Responde SÍ o dime si prefieres otro día.</blockquote></li>

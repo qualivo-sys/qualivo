@@ -26,13 +26,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);pa
 .topnav nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .wrap{max-width:980px;margin-inline:auto;display:grid;gap:34px;padding-top:30px}
 .wrap > *{min-width:0}
-.tag{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+.tag{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;justify-self:start;max-width:100%}
 h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,7vw,68px);line-height:.98;margin:0;letter-spacing:.005em;text-wrap:balance}
 h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0 0 4px;letter-spacing:-.005em;line-height:1.2}
 h3{font-size:17px;font-weight:800;margin:0 0 6px;line-height:1.3}
 p{margin:0}
 .sub{color:var(--muted);font-size:18px;max-width:66ch}
 .hero{display:grid;gap:16px}
+.hero > *,.hero-grid > *{min-width:0}
 .hero-grid{display:grid;gap:20px;align-items:center}
 @media (min-width:860px){.hero-grid{grid-template-columns:1.25fr .75fr}}
 .hero img{width:100%;height:auto;border-radius:14px;display:block;aspect-ratio:4/3;object-fit:cover}
@@ -63,7 +64,8 @@ td.c{text-align:center}
 .tw table{min-width:640px}
 .yes{color:var(--good);font-weight:800}
 .no{color:var(--muted)}
-.price{font-weight:800;white-space:nowrap}
+.price{font-weight:800}
+.tw .price{white-space:nowrap}
 .warn{background:var(--warn-bg);color:var(--ink);border-left:4px solid var(--warn);border-radius:10px;padding:13px 15px;font-size:15.5px}
 .hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
 .pick{border:2px solid var(--accent)}
@@ -163,7 +165,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       <tbody>
         <tr><td><b>Consultoría Arrocero Pro</b></td><td>Bares, restaurantes, comida para llevar y caterings</td><td>Sin publicar · primera consulta gratis</td><td><b>Lo que más deja por cliente</b> (a confirmar contigo) y lo que puede repetirse con el seguimiento continuo. <b>Recorrido principal.</b></td></tr>
         <tr><td><b>Cursos Arrocero Pro HORECA y FULL</b></td><td>Cocineros, caterings y quien va a montar un negocio de arroces</td><td>160 € · 370 € + IVA</td><td>La puerta de entrada del profesional: quien no está para una consultoría empieza por aquí. Va en el mismo recorrido.</td></tr>
-        <tr><td>Curso de Iniciación</td><td>Particulares y turistas</td><td>87 €</td><td>Se vende bien, pero tiene techo: 2 días × 6 plazas = 12 plazas a la semana. Llenas del todo dan unos 4.000 € al mes. <b>Secundario:</b> llenar huecos, sobre todo con regalos de Navidad.</td></tr>
+        <tr><td>Curso de Iniciación</td><td>Particulares y turistas</td><td>87 €</td><td>Se vende bien, pero tiene techo: 2 días × 6 plazas = 12 plazas a la semana. Llenas del todo dan unos 4.000-4.500 € al mes. <b>Secundario:</b> llenar huecos, sobre todo con regalos de Navidad.</td></tr>
         <tr><td>Cursos en vídeo, caldos y sofritos</td><td>Quien no viene a Valencia</td><td>37 € · pack 207,20 €</td><td>Mejor como siguiente paso después de un curso o una consulta que como anuncio propio.</td></tr>
         <tr><td>Paellas a domicilio y eventos</td><td>Familias y empresas de Valencia</td><td>Sin precios en la web</td><td>Es donde están las reseñas. Fuera del plan, salvo <b>los presupuestos de eventos, que sí se siguen</b>, porque nos dijiste que se escapan.</td></tr>
         <tr><td>Franquicia Tu Paella en Casa</td><td>Emprendedores</td><td>17.700 € + IVA, según un directorio de franquicias</td><td>¿Sigue activa? Si lo está, el curso FULL («para montar tu propio negocio de arroces») es su antesala natural. Lo hablamos.</td></tr>
