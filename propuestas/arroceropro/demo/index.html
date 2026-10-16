@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Demo · Arrocero Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Demo guiada en pestañas (anuncios, test, WhatsApp, llamada, seguimientos, panel) para Arrocero Pro. Datos y nombres de ejemplo. */
+:root{
+  --bg:#F7F3EE; --surface:#FFFFFF; --ink:#16130F; --muted:#5C534A; --line:#E3D9CD;
+  --accent:#C2470A; --accent-ink:#FFFFFF; --good:#1F7A4D; --warn:#9A5B00; --tint:#FBE9DD;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --brand:#E8560A; --voz:#1E1A16; --voz-in:#2B2520;
+  --display:"Bebas Neue","Arial Narrow",Impact,sans-serif;
+  --body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F0D0B; --surface:#1A1714; --ink:#F5F0EB; --muted:#B9AEA2; --line:#342C25;
+  --accent:#FF8A3D; --accent-ink:#1A0E05; --good:#5FD39A; --warn:#F2C26B; --tint:#2B1B10;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F0D0B; --surface:#1A1714; --ink:#F5F0EB; --muted:#B9AEA2; --line:#342C25;
+  --accent:#FF8A3D; --accent-ink:#1A0E05; --good:#5FD39A; --warn:#F2C26B; --tint:#2B1B10;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:0 64px;overflow-x:hidden}
+.topnav{background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+.topnav .in{max-width:1080px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topnav .who{font-family:var(--display);font-size:22px;letter-spacing:.04em;line-height:1}
+.topnav .who span{color:var(--accent)}
+.topnav nav{display:flex;gap:6px;flex-wrap:wrap}
+.topnav nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14.5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px}
+.topnav nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px;padding-top:22px}
+.wrap > *{min-width:0}
+h1,h2,h3{line-height:1.15;text-wrap:balance;margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,60px);line-height:.98;letter-spacing:.005em}
+h2{font-size:clamp(22px,3vw,28px);font-weight:800}
+h3{font-size:17px;font-weight:800}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:68ch;margin-top:10px}
+.note{font-size:13.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+.only{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;background:var(--tint);color:var(--accent);border-radius:6px;padding:2px 7px;vertical-align:middle}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;position:sticky;top:0;background:var(--bg);z-index:3;padding-top:8px;scrollbar-width:thin}
+nav.tabs button{font:inherit;font-weight:700;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+nav.tabs button[aria-selected="true"] span{color:var(--accent-ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > *{min-width:0}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* Anuncios */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ig .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:700}
+.ig .h i{width:28px;height:28px;border-radius:50%;background:var(--brand);display:inline-block;flex:none}
+.ig .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ig img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700}
+.ig .cta b{color:var(--accent)}
+.ig .t{padding:10px 12px;font-size:14px}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* Test */
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-height:500px;align-content:start}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:var(--accent);transition:width .3s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:600;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer}
+.quiz .qopts button:hover{border-color:var(--accent)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-size:22px;font-weight:800}
+.quiz .done p{color:var(--muted);font-size:15px}
+.score{border-radius:12px;padding:12px 14px;background:var(--tint);font-size:14.5px}
+.score b{display:block;font-size:16px}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:var(--brand) url(../assets/logo-tpec-sm.png) center/90% no-repeat;display:inline-block;flex:none;border:2px solid #fff}
+.wa .top small{display:block;font-size:12px;opacity:.85}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);color:var(--ink)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:640px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* Llamada */
+.call{background:var(--voz);color:#F5F0EB;border-radius:18px;padding:16px;display:grid;gap:10px}
+.call .hd{display:flex;align-items:center;gap:12px;border-bottom:1px solid #3a322b;padding-bottom:12px}
+.call .hd i{width:44px;height:44px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-style:normal;font-weight:800;color:#fff;flex:none}
+.call .hd small{display:block;color:#B9AEA2;font-size:12.5px}
+.call .wave{font-family:var(--mono);font-size:12px;color:#FF8A3D;margin-left:auto}
+.vb{max-width:88%;padding:9px 12px;border-radius:14px;font-size:15px;line-height:1.45}
+.vb small{display:block;font-family:var(--mono);font-size:11px;color:#B9AEA2;margin-bottom:2px;text-transform:uppercase;letter-spacing:.05em}
+.vb.a{background:#3A2416;align-self:flex-start;border-top-left-radius:4px}
+.vb.c{background:var(--voz-in);align-self:flex-end;border-top-right-radius:4px}
+.call .stack{display:flex;flex-direction:column;gap:8px}
+.call .nt{font-size:12.5px;color:#B9AEA2;text-align:center;font-family:var(--mono)}
+/* Seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.seq .wide{grid-column:1 / -1}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 14px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--warn)}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl .ch{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--line);border-radius:5px;padding:0 5px;margin-left:6px;color:var(--muted)}
+.tl b{display:block;font-size:14.5px}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px;white-space:pre-line}
+.tl blockquote em{font-style:normal;font-weight:700;display:block;margin-bottom:4px}
+/* Panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+tfoot td{font-weight:800;border-bottom:0}
+td.num,th.num{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px}
+.kpi b{font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.alert{border-color:var(--warn)}
+.kpi.alert b{color:var(--warn)}
+.morning{white-space:pre-line;font-size:15px;background:var(--wa-out);color:var(--ink);border-radius:12px;padding:12px 14px;max-width:560px}
+footer{font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq{grid-template-columns:1fr}.two{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="in">
+    <div class="who">QUALIVO <span>×</span> ARROCERO PRO</div>
+    <nav aria-label="Presentación"><a href="../">Plan</a><a href="./" aria-current="page">Demo</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Demo para Arrocero Pro · Tu Paella en Casa · Chef Vicente</p>
+  <h1>Del anuncio a la consulta con Vicente, sin que se pierda ningún restaurante</h1>
+  <p class="lead">Así vería el recorrido el dueño de un bar que descubre Arrocero Pro en un anuncio, y así lo verías tú. Cocina en C. del Doctor Royo Vilanova (Valencia), 15 años de arroces, 4,6★ en Google.</p>
+</header>
+
+<p class="note"><span class="ej">Ejemplo</span> Todo lo que se ve es de ejemplo: anuncios, mensajes, nombres, fechas y cifras. Los textos finales los apruebas tú. La asistente se llama Amparo (el nombre lo eliges tú), dice que es una asistente virtual si se lo preguntan y nunca da precios cerrados de consultoría. Los mensajes automáticos salen solo de 8:00 a 21:30.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span>Preguntas</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span>Llamada</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>5</span>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>6</span>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIOS -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · Anuncios de ejemplo <span class="ej">Ejemplo</span></h2><p>Tres mensajes para el dueño de restaurante, con tus fotos. Cada uno prueba una idea distinta, y el que traiga consultas de verdad se queda. En la <a href="../anuncios/">galería completa</a> están las versiones para historias, las de particulares, los textos y el plan de prueba.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Meta · feed 4:5 · mensaje A</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Arrocero Pro · Chef Vicente<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/hosteleria-a-feed.jpg" alt="Anuncio: Que el arroz no dependa de quién esté en el fuego" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Pedir consulta gratis</span><b>›</b></div>
+        <p class="t"><b>¿Tu paella sale igual un martes que un sábado a tope?</b> Si depende de quién esté en el fuego, no es una receta: es una lotería. Vicente, chef arrocero valenciano, entra en tu cocina con fichas técnicas, tiempos y formación para tu equipo. Primera consulta gratis.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> habla del problema que vive cualquier cocina con rotación. Es la idea que más encaja con «formación».</div>
+    </div>
+    <div>
+      <p class="cap">Meta · feed 4:5 · mensaje B</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Arrocero Pro · Chef Vicente<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/hosteleria-b-feed.jpg" alt="Anuncio: ¿Sabes cuánto te deja cada ración de paella?" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Pedir consulta gratis</span><b>›</b></div>
+        <p class="t"><b>¿Sabes cuánto te deja cada ración de paella?</b> Muchos bares la ponen en carta a ojo. Vicente te ayuda con el escandallo al gramo, la carta de arroces y los precios. Primera consulta gratis.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> habla de dinero, que es lo que decide el dueño. El escandallo en blanco invita a pararse a rellenarlo.</div>
+    </div>
+    <div>
+      <p class="cap">Meta · feed 4:5 · mensaje C</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Arrocero Pro · Chef Vicente<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/hosteleria-c-feed.jpg" alt="Anuncio: 15 años de arroces. Ahora, en tu cocina." width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Pedir consulta gratis</span><b>›</b></div>
+        <p class="t"><b>15 años de arroces. Ahora, en tu cocina.</b> Formación, cartas, recetas, costes y arroces para llevar. Para bares, restaurantes y caterings. 4,6★ en Google con más de 200 reseñas. Primera consulta gratis.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> tu cara y tu oficio. Sirve para comprobar si el dueño compra a la persona antes que al problema.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="test">Siguiente: las preguntas ›</button></div>
+</section>
+
+<!-- 2 · TEST -->
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · Cuatro preguntas que separan al restaurante del curioso <span class="ej">Ejemplo</span></h2><p>Están en la página de Arrocero Pro, antes de pedir el nombre y el WhatsApp. Pruébalo respondiendo como si fueras el dueño de un bar.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div><h3>Lo que pregunta</h3><p>Qué tipo de negocio tiene, qué quiere mejorar, cuántos cocinan arroz y cuándo quiere empezar. Después pide el nombre, el del negocio, la población y el WhatsApp.</p></div>
+      <div><h3>La puntuación</h3><p><b>Prioridad alta:</b> restaurante, bar o catering que quiere empezar este mes. Amparo propone consulta enseguida y te avisa a ti.<br><b>Normal:</b> negocio que quiere empezar en 1-3 meses. Mismo recorrido, sin aviso urgente.<br><b>Particular:</b> le lleva a los cursos de iniciación y a la tienda de vídeos. No te ocupa la agenda de consultas.</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Ni facturación ni presupuesto. Eso lo hablas tú en la consulta.</p></div>
+      <div><h3>Lo que medimos</h3><p>Qué anuncio trajo a cada uno y en qué acabó: consulta, curso, consultoría o nada.</p></div>
+      <div><a class="btnl" href="../landing/#test">Verlo en la landing</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Un minuto después, le escribe Amparo <span class="ej">Ejemplo</span></h2><p>Eres Toni, dueño de un bar-restaurante en Paterna. Has rellenado el formulario a las 16:12, mientras Vicente estaba dando un curso. Elige un camino. A la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i></i><div><b>Amparo · Arrocero Pro</b><small>Asistente del equipo de Vicente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Amparo no da precios cerrados de consultoría ni promete resultados. Lo concreta Vicente en la consulta. Tú ves cada conversación y puedes entrar cuando quieras: en cuanto escribes, ella se calla. Si alguien escribe a las 23:00, le contesta a las 8:00.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: la llamada ›</button></div>
+</section>
+
+<!-- 4 · LLAMADA -->
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>4 · Si no contesta al WhatsApp, Amparo le llama <span class="ej">Ejemplo</span> <span class="only">Solo completa</span></h2><p>El agente de voz es para quien ha dejado sus datos y ha pedido información, y para nadie más. En la versión proporcionada, en lugar de esta llamada te llega un aviso y llamas tú.</p></header>
+  <div class="two">
+    <div class="call" aria-label="Transcripción de una llamada de ejemplo">
+      <div class="hd"><i>A</i><div><b>Amparo → Marta</b><small>Catering en Torrent · formulario a las 10:05 · sin respuesta al WhatsApp</small></div><span class="wave">10:20 · 2:14 min</span></div>
+      <div class="stack">
+        <div class="vb a"><small>Amparo</small>Hola, ¿Marta? Soy Amparo, la asistente de Arrocero Pro, del equipo de Vicente, el chef arrocero. Te llamo porque hace un rato has pedido la consulta gratis para tu catering. ¿Tienes dos minutos?</div>
+        <div class="vb c"><small>Marta</small>Sí, dime, que estoy preparando un evento.</div>
+        <div class="vb a"><small>Amparo</small>Gracias, seré rápida. Me has dicho que quieres mejorar los arroces para eventos. ¿Para cuántas personas soléis cocinar?</div>
+        <div class="vb c"><small>Marta</small>Depende, de 40 a 120. El problema es cuando hacemos varias paellas a la vez, que no salen iguales.</div>
+        <div class="vb a"><small>Amparo</small>Entendido: varias paellas a la vez y que salgan todas iguales. Eso es justo lo que trabaja Vicente en la producción para eventos. ¿Quién cocina los arroces, tú o alguien del equipo?</div>
+        <div class="vb c"><small>Marta</small>Mi socio y un ayudante.</div>
+        <div class="vb a"><small>Amparo</small>Vale. Lo mejor es una primera consulta con Vicente: 30 minutos, gratis, por videollamada o en vuestra cocina. ¿Te va mejor el miércoles a las 11:00 o el jueves a las 16:30?</div>
+        <div class="vb c"><small>Marta</small>El jueves, que el miércoles tenemos boda.</div>
+        <div class="vb a"><small>Amparo</small>Apuntado: jueves a las 16:30 con Vicente. ¿Lo hacéis por videollamada o preferís que vaya a vuestra cocina?</div>
+        <div class="vb c"><small>Marta</small>Mejor que venga, así ve los fuegos. ¿Eres una persona o un robot?</div>
+        <div class="vb a"><small>Amparo</small>Soy una asistente virtual del equipo de Vicente. Él ve todas las conversaciones y será él quien vaya el jueves. Te mando ahora por WhatsApp la confirmación con todo. ¿Quieres que le cuente algo más?</div>
+        <div class="vb c"><small>Marta</small>Que también estará mi socio.</div>
+        <div class="vb a"><small>Amparo</small>Se lo apunto. Gracias, Marta, y que vaya muy bien la boda del miércoles.</div>
+        <p class="nt">Fin de la llamada · resumen guardado en la ficha</p>
+      </div>
+    </div>
+    <div class="list">
+      <div><h3>Cuándo llama</h3><p>Entre 10 y 20 minutos después del formulario, si no ha contestado al WhatsApp. Solo de 8:00 a 21:30 y solo a quien ha dejado su teléfono pidiendo información. Hace dos intentos como máximo (el mismo día y el siguiente) y nunca más.</p></div>
+      <div><h3>Lo que te llega a ti</h3><p><b>Marta · catering en Torrent · eventos de 40 a 120 personas.</b><br>El problema: varias paellas a la vez que no salen iguales. Cocinan su socio y un ayudante. Consulta el jueves a las 16:30 en su cocina; estará el socio. Viene del anuncio A.</p></div>
+      <div><h3>Si no lo coge: mensaje en el buzón</h3><p>«Hola, Marta, soy Amparo, de Arrocero Pro, el equipo de Vicente. Te llamaba por la consulta gratis que has pedido para tu catering. Te escribo ahora por WhatsApp con dos huecos. Contesta cuando puedas. ¡Gracias!»</p></div>
+      <div><h3>…y un WhatsApp al momento</h3><p>«Hola, Marta. Te acabo de llamar por la consulta gratis con Vicente. No quería molestarte en pleno servicio 🙂 Tiene hueco el miércoles a las 11:00 o el jueves a las 16:30. ¿Te va alguno? Si prefieres otro día, dímelo y lo buscamos.»</p></div>
+      <div><h3>Lo que nunca hace</h3><p>Llamar a listas compradas o a quien no ha pedido nada, insistir después de un «no», dar precios de consultoría o fingir que es Vicente.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos ›</button></div>
+</section>
+
+<!-- 5 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>5 · Ningún presupuesto se queda olvidado <span class="ej">Ejemplo</span></h2><p>Mensajes que salen solos, de 8:00 a 21:30. En cuanto alguien responde, se para su secuencia y pasa a ti. Estos son los textos completos; los adaptas tú a tu forma de hablar.</p></header>
+  <div class="seq">
+
+    <div>
+      <h3>A · Restaurante que pidió la consulta y no ha reservado</h3>
+      <p>Toni, bar-restaurante en Paterna. Le preocupan los costes.</p>
+      <ol class="tl">
+        <li><span class="w">Minuto 1</span><span class="ch">WhatsApp</span><b>Bienvenida y dos preguntas</b><blockquote>Es la conversación del paso 3.</blockquote></li>
+        <li><span class="w">Minuto 10-20</span><span class="ch">Llamada</span><b>Amparo le llama si no ha contestado (solo en la completa)</b></li>
+        <li><span class="w">Día 0 · 1 h después</span><span class="ch">Email</span><b>Cómo es la consulta</b><blockquote><em>Asunto: Tu consulta gratis con Vicente: cómo funciona</em>Hola, Toni:
+Gracias por escribir a Arrocero Pro. Te cuento en tres líneas cómo es la primera consulta:
+1. Son 30 minutos con Vicente, por videollamada o en tu local.
+2. Te pregunta cuántas raciones sacáis, quién cocina y qué te preocupa: el sabor, los costes, los tiempos o la carta.
+3. Te dice qué haría él y, si tiene sentido, te manda una propuesta por escrito. Si no lo tiene, también te lo dice.
+Puedes reservar contestando a este correo o por WhatsApp.
+Un saludo,
+Amparo · Arrocero Pro, el equipo de Vicente</blockquote></li>
+        <li><span class="w">Día 1</span><span class="ch">WhatsApp</span><b>Dos huecos concretos</b><blockquote>Hola, Toni. ¿Te reservo la consulta con Vicente? Esta semana tiene el jueves a las 16:30 y el viernes a las 11:00. Si ahora no es buen momento, dímelo y lo dejamos para más adelante, sin problema.</blockquote></li>
+        <li><span class="w">Día 3</span><span class="ch">Email</span><b>Algo útil, aunque no reserve</b><blockquote><em>Asunto: Los 3 agujeros por los que se escapa el dinero de una paella</em>Hola, Toni:
+Después de 15 años entre paelleras, Vicente se encuentra casi siempre lo mismo:
+· El caldo, hecho «a ojo» cada día: cambian el sabor y el coste.
+· Las raciones sin pesar: dos cocineros, dos paellas distintas al mismo precio en carta.
+· El tiempo muerto entre pase y pase un sábado a tope.
+En la consulta gratis lo mira con tus números. ¿Te busco hueco?
+Amparo · Arrocero Pro</blockquote></li>
+        <li><span class="w">Día 5</span><span class="ch">WhatsApp</span><b>Una pregunta corta</b><blockquote>Toni, una pregunta rápida: ¿lo que más te preocupa ahora es el coste por ración o que el arroz salga siempre igual? Así le paso a Vicente lo que de verdad importa.</blockquote></li>
+        <li><span class="w">Día 8</span><span class="ch">Email</span><b>Despedida amable</b><blockquote><em>Asunto: ¿Lo dejamos para más adelante?</em>Hola, Toni:
+No quiero llenarte el correo. Si ahora no es el momento, perfecto: contéstame «más adelante» y te escribo en primavera, antes de la temporada de terrazas.
+Si quieres la consulta, contesta «sí» y te paso huecos.
+Amparo · Arrocero Pro</blockquote></li>
+        <li class="alert"><span class="w">Día 9</span><b>Aviso a Vicente</b><blockquote>Toni · bar-restaurante en Paterna · costes y escandallos · 30-80 raciones el fin de semana · 9 días sin respuesta. Si quieres, llámale tú.</blockquote></li>
+        <li class="stop"><span class="w">Si responde</span><b>Se para todo y sigues tú (o Amparo, si es para agendar)</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>B · Consulta reservada: recordatorios y quien no se presenta</h3>
+      <p>Toni ha reservado el miércoles 21 a las 11:00, por videollamada.</p>
+      <ol class="tl">
+        <li><span class="w">Al reservar</span><span class="ch">WhatsApp</span><b>Confirmación</b><blockquote>¡Reservado, Toni! Consulta gratis con Vicente el miércoles 21 a las 11:00, por videollamada. Te mando el enlace por email. Si te surge algo, contesta aquí y la cambiamos.</blockquote></li>
+        <li><span class="w">Al reservar</span><span class="ch">Email</span><b>Confirmación con el enlace</b><blockquote><em>Asunto: Confirmado: tu consulta con Vicente, miércoles 21 a las 11:00</em>Hola, Toni:
+Queda confirmada tu consulta gratis con Vicente: miércoles 21 de octubre, a las 11:00, por videollamada.
+Enlace: [enlace de la videollamada]
+Para aprovecharla, ten a mano tu carta de arroces con los precios y, si lo tienes, lo que te cuestan los ingredientes.
+Si necesitas cambiarla, contesta a este correo.
+Amparo · Arrocero Pro</blockquote></li>
+        <li><span class="w">Víspera · 18:00</span><span class="ch">WhatsApp</span><b>¿Sigue en pie?</b><blockquote>Hola, Toni. Te recuerdo que mañana a las 11:00 tienes la consulta con Vicente por videollamada. ¿Sigue en pie? Contesta «sí» o dime si la movemos.</blockquote></li>
+        <li class="alert"><span class="w">Si no confirma</span><b>Aviso a Vicente la misma tarde</b></li>
+        <li><span class="w">2 h antes</span><span class="ch">WhatsApp</span><b>Último recordatorio</b><blockquote>Toni, a las 11:00 te espera Vicente. Este es el enlace: [enlace]. ¡Hasta ahora!</blockquote></li>
+        <li><span class="w">No se presenta · 15 min</span><span class="ch">WhatsApp</span><b>Recuperar sin reproches</b><blockquote>Hola, Toni. Vicente te ha estado esperando a las 11:00. Imagino que se ha complicado el día. ¿La movemos? Tiene el jueves a las 16:30 o el viernes a las 11:00.</blockquote></li>
+        <li><span class="w">No se presenta · día 2</span><span class="ch">WhatsApp</span><b>Segundo intento</b><blockquote>Toni, ¿te busco otro hueco con Vicente o lo dejamos para más adelante? Las dos cosas están bien.</blockquote></li>
+        <li class="alert"><span class="w">No se presenta · día 3</span><b>Pasa a «más adelante» y aviso a Vicente</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>C · Propuesta de consultoría enviada</h3>
+      <p>Después de la consulta, Vicente manda la propuesta.</p>
+      <ol class="tl">
+        <li><span class="w">Día 0</span><b>Vicente envía la propuesta</b></li>
+        <li><span class="w">Día 2</span><span class="ch">WhatsApp</span><b>¿Alguna duda?</b><blockquote>Hola, Toni. ¿Has podido ver la propuesta de Vicente? Si te ha surgido alguna duda, dímela por aquí y te la resuelvo o se la paso a él.</blockquote></li>
+        <li><span class="w">Día 5</span><span class="ch">Email</span><b>Las dudas de siempre</b><blockquote><em>Asunto: Tu propuesta de Arrocero Pro: las dudas más habituales</em>Hola, Toni:
+Por si te ayuda, estas son las preguntas que más nos hacen al recibir la propuesta:
+· ¿Hay que cerrar la cocina? [Respuesta de Vicente]
+· ¿Cuánto se tarda en notarlo en la cocina? [Respuesta de Vicente]
+· ¿Qué pasa después? [Seguimiento que incluye]
+Si prefieres hablarlo, contesta a este correo y Vicente te llama.
+Amparo · Arrocero Pro</blockquote></li>
+        <li><span class="w">Día 10</span><span class="ch">WhatsApp</span><b>¿Seguimos o lo dejamos?</b><blockquote>Toni, ¿seguimos con la propuesta o prefieres dejarlo para más adelante? Cualquiera de las dos cosas está bien. Así lo apunto y no te molesto.</blockquote></li>
+        <li class="alert"><span class="w">Día 11</span><b>Aviso a Vicente</b><blockquote>Toni · propuesta enviada hace 11 días · sin respuesta. Mejor que le llames tú.</blockquote></li>
+        <li class="stop"><span class="w">Si responde</span><b>Se para todo y sigues tú</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>D · Presupuesto de paella para un evento</h3>
+      <p>Laura pide presupuesto en el formulario de eventos para una comida de empresa de 40 personas.</p>
+      <ol class="tl">
+        <li><span class="w">Minuto 1</span><span class="ch">WhatsApp</span><b>Lo que hace falta para el presupuesto</b><blockquote>Hola, Laura. Soy Amparo, de Tu Paella en Casa. Gracias por pedir presupuesto para tu evento 🥘 Para preparártelo bien: ¿qué día es, cuántos seréis, qué arroces os gustan y si necesitáis mesas y sillas?</blockquote></li>
+        <li><span class="w">Día 0</span><b>Vicente manda el precio</b><blockquote>Con la ficha completa (fecha, personas, arroces y mobiliario) solo tiene que ponerlo.</blockquote></li>
+        <li><span class="w">Día 1</span><span class="ch">WhatsApp</span><b>¿Te llegó bien?</b><blockquote>Hola, Laura. ¿Te llegó bien el presupuesto para el día 28? Si quieres cambiar algún arroz o el número de personas, lo ajustamos.</blockquote></li>
+        <li><span class="w">Día 3</span><span class="ch">Email</span><b>Qué incluye</b><blockquote><em>Asunto: Tu paella para el 28 de noviembre: lo que incluye</em>Hola, Laura:
+Te resumo lo que incluye tu presupuesto: paella recién hecha, entrega en el portal a la hora que nos digas y recogida de la paellera 90 minutos después. [Mobiliario: según lo que pediste.]
+Para guardarte la fecha, contesta a este correo o escríbenos por WhatsApp.
+Tu Paella en Casa</blockquote></li>
+        <li><span class="w">Día 7</span><span class="ch">WhatsApp</span><b>Cierre amable</b><blockquote>Laura, ¿te guardo la fecha del 28 o lo dejamos? Si ya lo tenéis resuelto, dímelo y no te molesto más.</blockquote></li>
+        <li class="alert"><span class="w">Día 8</span><b>Aviso a Vicente si no hay respuesta</b></li>
+        <li><span class="w">10 días antes del evento</span><span class="ch">WhatsApp</span><b>Si reservó: confirmar personas</b><blockquote>Hola, Laura. Quedan 10 días para la comida. ¿Seguís siendo 40? Si cambia algo, dímelo antes del día 25.</blockquote></li>
+        <li><span class="w">Víspera</span><span class="ch">WhatsApp</span><b>Hora de entrega</b><blockquote>Mañana a las 14:00 llega vuestra paella al portal. Pasaremos a por la paellera hacia las 15:30. ¡Que aproveche!</blockquote></li>
+        <li class="stop"><span class="w">Día siguiente</span><span class="ch">WhatsApp</span><b>Reseña</b><blockquote>Laura, ¿qué tal la paella? Si os gustó, nos ayuda mucho una reseña en Google: [enlace]. ¡Gracias!</blockquote></li>
+      </ol>
+    </div>
+
+    <div class="wide">
+      <h3>E · Curso de Iniciación (particulares): reserva, Bizum, recordatorios y después</h3>
+      <p>Sara reserva plaza en el curso del lunes 2 de noviembre. Todo automático: tú solo cocinas.</p>
+      <ol class="tl">
+        <li><span class="w">Al reservar</span><span class="ch">WhatsApp</span><b>Plaza guardada y Bizum</b><blockquote>¡Hola, Sara! Te guardamos plaza en el Curso de Iniciación del lunes 2 de noviembre. Para confirmarla, haz un Bizum de 27 € a [número de Bizum] con tu nombre. El resto (60 €) se paga el día del curso, antes de empezar.</blockquote></li>
+        <li class="alert"><span class="w">24 h sin Bizum</span><span class="ch">WhatsApp</span><b>Aviso antes de liberar la plaza</b><blockquote>Sara, aún no nos ha llegado el Bizum de 27 €. Te guardamos la plaza hasta mañana a las 12:00; después la liberamos para otra persona. ¿Te ayudo con algo?</blockquote></li>
+        <li><span class="w">Al pagar</span><span class="ch">Email</span><b>Plaza confirmada</b><blockquote><em>Asunto: Plaza confirmada: Curso de Iniciación, lunes 2 de noviembre</em>Hola, Sara:
+¡Plaza confirmada!
+· Cuándo: lunes 2 de noviembre, a las [hora]. Llega 20 minutos antes.
+· Dónde: C. del Doctor Royo Vilanova, 8, Bajo D, 46017 Valencia.
+· Pago: 60 € el día del curso, antes de empezar.
+· Cambios: si avisas con 7 días laborables, te devolvemos el dinero o te lo guardamos un año para otro curso.
+Cocinas tú y luego comemos todos juntos. ¡Nos vemos!
+Vicente y el equipo de Tu Paella en Casa</blockquote></li>
+        <li><span class="w">Víspera</span><span class="ch">WhatsApp</span><b>Mañana cocinamos</b><blockquote>Sara, ¡mañana cocinamos! Te esperamos en C. del Doctor Royo Vilanova, 8, Bajo D, 20 minutos antes de empezar, que empezamos puntuales. Si te surge algo, dímelo hoy.</blockquote></li>
+        <li><span class="w">2 h antes</span><span class="ch">WhatsApp</span><b>Ubicación</b><blockquote>¡Buenos días, Sara! En 2 horas empezamos. Aquí tienes cómo llegar: [enlace de Google Maps].</blockquote></li>
+        <li><span class="w">Día siguiente</span><span class="ch">WhatsApp</span><b>Reseña</b><blockquote>Sara, ¿ya has probado a hacerla en casa? 😄 Si te gustó el curso, una reseña en Google nos ayuda muchísimo: [enlace].</blockquote></li>
+        <li class="stop"><span class="w">Día 3</span><span class="ch">Email</span><b>Siguiente paso: las recetas en vídeo</b><blockquote><em>Asunto: Las 8 recetas de Vicente, en vídeo</em>Hola, Sara:
+Si quieres seguir practicando, tienes los 8 cursos de Vicente en vídeo, con su recetario en PDF: paella valenciana, paella de marisco, arroz del senyoret, arroz negro, arroz de secreto y ajitos, fideuà de marisco, fideuà de carne y paella vegana.
+Hasta el 31 de diciembre, el pack de los 8 está a 207,20 € (antes 296 €): [enlace a la tienda].
+Vicente</blockquote></li>
+      </ol>
+    </div>
+
+  </div>
+  <p class="note">Los textos entre corchetes los completa Vicente. Las fechas son de ejemplo. Las condiciones de pago y cancelación salen de arroceropro.com.</p>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel ›</button></div>
+</section>
+
+<!-- 6 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>6 · El panel <span class="ej">Datos de ejemplo</span></h2><p>Qué anuncio trae restaurantes y qué presupuestos están a punto de perderse. Son cifras redondas inventadas, no una previsión.</p></header>
+  <div class="kpis">
+    <div class="kpi"><b>38</b><span>solicitudes este mes · ejemplo</span></div>
+    <div class="kpi"><b>9</b><span>consultas gratis celebradas · ejemplo</span></div>
+    <div class="kpi alert"><b>2.300 €</b><span>en presupuestos de eventos sin respuesta desde hace más de 2 días · ejemplo</span></div>
+  </div>
+  <div class="two">
+    <div class="box">
+      <p class="cap">Lo que te llega cada mañana a las 8:30 · ejemplo</p>
+      <div class="morning">Buenos días, Vicente. Hoy:
+· 2 consultas nuevas de hostelería. Toni (Paterna) quiere empezar este mes: llámale antes de las 12.
+· Consulta con Marta (catering, Torrent) el jueves a las 16:30 en su cocina. Confirmada.
+· 2 presupuestos de eventos sin respuesta desde hace 3 días (1.150 € en total). Amparo les escribe hoy.
+· Lunes: 4 de 6 plazas ocupadas. Sara aún no ha hecho el Bizum.
+· Esta semana, el anuncio B (escandallo) es el que trae las consultas más baratas.</div>
+    </div>
+    <div class="box">
+      <p class="cap">El panel completo</p>
+      <p>Ficha de cada contacto, qué toca hacer hoy y con quién, y qué anuncio trae consultas que acaban en venta. En la demo salen datos de una escuela de formación de ejemplo; en el tuyo saldrían Iniciación, HORECA, FULL, consultoría y eventos.</p>
+      <p><a class="btnl" href="https://qualivo.io/intelligence/?sector=formacion&amp;empresa=Arrocero%20Pro&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel de ejemplo ›</a></p>
+      <p class="note">En la versión proporcionada, en lugar del panel diario te llega un resumen por email cada lunes con estas mismas cifras.</p>
+    </div>
+  </div>
+  <div class="box">
+    <p class="cap">Por origen · un mes · datos de ejemplo</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Origen</th><th class="num">Contactos</th><th class="num">Consulta o reserva</th><th class="num">Ventas</th><th class="num">Inversión</th><th class="num">Coste por venta</th></tr></thead>
+        <tbody>
+          <tr><td>Meta · hostelería A (el fuego)</td><td class="num">7</td><td class="num">3</td><td class="num">2</td><td class="num">75 €</td><td class="num">38 €</td></tr>
+          <tr><td>Meta · hostelería B (escandallo)</td><td class="num">9</td><td class="num">4</td><td class="num">2</td><td class="num">75 €</td><td class="num">38 €</td></tr>
+          <tr><td>Meta · hostelería C (15 años)</td><td class="num">4</td><td class="num">1</td><td class="num">0</td><td class="num">75 €</td><td class="num">—</td></tr>
+          <tr><td>Meta · particulares (regalo)</td><td class="num">8</td><td class="num">6</td><td class="num">5</td><td class="num">60 €</td><td class="num">12 €</td></tr>
+          <tr><td>Web · presupuestos de eventos</td><td class="num">6</td><td class="num">6</td><td class="num">3</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>Google y boca a boca</td><td class="num">4</td><td class="num">2</td><td class="num">2</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="num">38</td><td class="num">22</td><td class="num">14</td><td class="num">285 €</td><td class="num"></td></tr></tfoot>
+      </table>
+    </div>
+    <p class="note">Datos de ejemplo. En la versión real se rellena solo con cada conversación, consulta, reserva y presupuesto.</p>
+  </div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan ›</a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../">Plan</a><a class="btnl" href="../anuncios/">Anuncios</a><a class="btnl" href="../landing/">Landing</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Demo preparada el 16 de octubre de 2026 para Arrocero Pro y Tu Paella en Casa. No es una página de Vicente: los anuncios, mensajes, nombres y cifras son de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'test', 'whatsapp', 'voz', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    if (push) window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+
+  // Preguntas de ejemplo
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué tipo de negocio tienes?', ['Restaurante o bar', 'Comida para llevar o delivery', 'Catering o eventos', 'Voy a abrir un negocio de arroces', 'Soy particular']],
+    ['¿Qué te gustaría mejorar?', ['Que el arroz salga siempre igual', 'Costes y escandallos', 'Añadir arroces a la carta', 'Formar a mi equipo', 'Arroces para llevar o eventos']],
+    ['¿Cuántas personas cocinan arroz en tu cocina?', ['Solo yo', '2 o 3', '4 o más']],
+    ['¿Cuándo te gustaría empezar?', ['Este mes', 'En 1-3 meses', 'Solo me estoy informando']]
+  ];
+  var resp = [];
+  function paso(n) {
+    quiz.innerHTML = '';
+    var total = Q.length;
+    var cap = el('p', 'cap', 'Ejemplo · pregunta ' + Math.min(n + 1, total) + ' de ' + total);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / total * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (resp[0] === 'Soy particular' && n === 1) { n = total; }
+    if (n >= total) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var d = el('div', 'done');
+      var sc = el('div', 'score');
+      if (resp[0] === 'Soy particular') {
+        d.appendChild(el('b', 't', 'Lo tuyo son los cursos de iniciación'));
+        d.appendChild(el('p', null, 'Le llevamos a la página de cursos: Iniciación (87 €, 5 horas, máximo 6 personas) y los cursos en vídeo. No ocupa la agenda de consultas de Vicente.'));
+        sc.appendChild(el('b', null, 'Puntuación: particular'));
+        sc.appendChild(document.createTextNode('Va al recorrido de cursos, con reserva por Bizum.'));
+      } else {
+        var alta = resp[3] === 'Este mes';
+        var info = resp[3] === 'Solo me estoy informando';
+        d.appendChild(el('b', 't', 'Te escribimos por WhatsApp en un minuto'));
+        d.appendChild(el('p', null, 'Amparo, del equipo de Vicente, te propone la primera consulta gratis. Tus respuestas: ' + resp.join(' · ') + '.'));
+        sc.appendChild(el('b', null, alta ? 'Puntuación: prioridad alta' : (info ? 'Puntuación: se informa' : 'Puntuación: normal')));
+        sc.appendChild(document.createTextNode(alta ? 'Amparo propone consulta ya y Vicente recibe un aviso para llamar hoy.' : (info ? 'Recibe el email útil y los cursos HORECA y FULL. Sin aviso a Vicente.' : 'Mismo recorrido, sin aviso urgente.')));
+      }
+      d.appendChild(sc);
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      if (resp[0] !== 'Soy particular') { var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); }); row.appendChild(w); }
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)';
+      r.addEventListener('click', function () { resp = []; paso(0); });
+      row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 12;
+  function hora() { minuto++; return '16:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = el('div', 'b ' + cls, txt);
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.appendChild(el('b', null, txt)); li.appendChild(el('span', null, sub || ''));
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = el('div', 'typing', 'escribiendo…');
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = el('button', null, c[0]); b.type = 'button';
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 350); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = el('button', 'restart', '↺ Probar otro camino'); b.type = 'button';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var raciones = 'raciones por concretar', fuego = 'quién cocina por concretar';
+  var HUECOS = [['Miércoles 11:00', 'mie'], ['Jueves 16:30', 'jue'], ['Prefiero que me llame', 'llamar']];
+  var N = {
+    inicio: function () {
+      bot(['Hola, Toni. Soy Amparo, la asistente de Arrocero Pro, el equipo de Vicente. Gracias por pedir la consulta gratis 🙂',
+           'He visto que tienes un bar-restaurante en Paterna y que quieres afinar los costes de tus arroces. ¿Te hago dos preguntas rápidas para que Vicente llegue preparado?'],
+        function () { choices([['Sí, dime', 'p1'], ['¿Cuánto cuesta la consultoría?', 'precio'], ['¿Eres una persona?', 'humano']]); });
+    },
+    p1: function () {
+      bot(['¿Cuántas raciones de arroz sacáis un fin de semana normal?'],
+        function () { choices([['Menos de 30', 'r1'], ['Entre 30 y 80', 'r2'], ['Más de 80', 'r3']]); });
+    },
+    r1: function () { raciones = 'menos de 30 raciones'; N.p2(); },
+    r2: function () { raciones = '30-80 raciones'; N.p2(); },
+    r3: function () { raciones = 'más de 80 raciones'; N.p2(); },
+    p2: function () {
+      apunta('Volumen: ' + raciones + ' el fin de semana', 'se guarda en su ficha');
+      bot(['Anotado. ¿Y quién está en el fuego? ¿Siempre la misma persona o va rotando?'],
+        function () { choices([['Siempre yo', 'f1'], ['Va rotando según el turno', 'f2']]); });
+    },
+    f1: function () { fuego = 'cocina él'; N.p3(); },
+    f2: function () { fuego = 'cocineros que rotan'; N.p3(); },
+    p3: function () {
+      apunta('En el fuego: ' + fuego, fuego === 'cocineros que rotan' ? 'encaja con formación del equipo' : 'encaja con escandallo y carta', 'g');
+      bot(['Gracias, Toni. Eso es justo lo que Vicente mira en la primera consulta: 30 minutos, gratis y sin compromiso. Puede ser por videollamada o pasándose por tu local.',
+           'Tiene hueco el miércoles a las 11:00 o el jueves a las 16:30. ¿Cuál te va mejor?'],
+        function () { choices(HUECOS); });
+    },
+    mie: function () { cita('el miércoles a las 11:00'); },
+    jue: function () { cita('el jueves a las 16:30'); },
+    llamar: function () {
+      apunta('Prefiere hablar por teléfono', 'aviso a Vicente: llamar hoy de 17:00 a 19:00', 'h');
+      bot(['Perfecto. Se lo paso a Vicente ahora mismo: te llama hoy entre las 17:00 y las 19:00, cuando acabe el curso. ¿Te va bien?'],
+        function () { choices([['Sí, perfecto', 'okllamar'], ['Mejor mañana', 'manana']]); });
+    },
+    okllamar: function () {
+      apunta('Aviso a Vicente', 'Toni · bar-restaurante en Paterna · ' + raciones + ' · ' + fuego + '\nLlamar hoy de 17:00 a 19:00 · viene del anuncio B (escandallo)', 'g');
+      bot(['Hecho. Te llamará desde su número. ¡Que vaya bien el servicio!'], fin);
+    },
+    manana: function () {
+      apunta('Llamada aplazada', 'aviso a Vicente: llamar mañana por la mañana');
+      bot(['Sin problema. Mañana por la mañana te llama Vicente. Si te viene mal, contéstame aquí y lo movemos.'], fin);
+    },
+    precio: function () {
+      apunta('Pregunta el precio', 'Amparo no da cifras cerradas de consultoría', 'h');
+      bot(['Es normal preguntarlo. Depende de lo que necesite tu cocina: no es lo mismo formar a un cocinero que montar entera la carta de arroces. Por eso la primera consulta es gratis: Vicente lo ve contigo y te dice el precio por escrito.',
+           'Si prefieres empezar por algo cerrado, el curso Arrocero Pro HORECA (160 €, 5-6 horas, máximo 6 alumnos) trabaja escandallos y tiempos de servicio.',
+           '¿Te reservo la consulta gratis o te cuento lo del curso?'],
+        function () { choices([['Reservar la consulta', 'huecos'], ['Cuéntame el curso', 'curso']]); });
+    },
+    huecos: function () {
+      bot(['Genial. Vicente tiene hueco el miércoles a las 11:00 o el jueves a las 16:30. ¿Cuál te va mejor?'], function () { choices(HUECOS); });
+    },
+    curso: function () {
+      apunta('Interés: curso HORECA', 'se guarda en su ficha');
+      bot(['El próximo Arrocero Pro HORECA es el martes 27 de octubre en la escuela de Vicente (C. del Doctor Royo Vilanova, Valencia). Quedan 3 plazas.',
+           'La plaza se reserva con 27 € por Bizum y el resto se paga el día del curso. ¿Te la guardo?'],
+        function () { choices([['Sí, guárdamela', 'reserva'], ['Lo pienso', 'piensa']]); });
+    },
+    reserva: function () {
+      apunta('Plaza guardada · HORECA 27 oct', 'Bizum pendiente · aviso a las 24 h si no llega', 'g');
+      apunta('Recordatorios programados', 'la víspera y 2 h antes del curso');
+      bot(['¡Guardada, Toni! Te mando ahora por aquí los datos del Bizum. En cuanto llegue, te confirmo la plaza por email.',
+           'Y si después del curso quieres que Vicente vea tu cocina, la consulta sigue siendo gratis.'], fin);
+    },
+    piensa: function () {
+      apunta('No reserva por ahora', 'entra en el seguimiento: WhatsApp mañana y email en 3 días');
+      bot(['Sin problema, Toni. Te dejo aquí mi WhatsApp para cuando quieras. ¡Que vaya bien el servicio!'], fin);
+    },
+    humano: function () {
+      apunta('Pregunta si es una persona', 'se lo dice con naturalidad');
+      bot(['Soy una asistente virtual del equipo de Vicente. Contesto al momento para que nadie se quede esperando, y Vicente ve todas las conversaciones.',
+           'Si prefieres hablar con él directamente, se lo paso ahora. ¿Qué prefieres?'],
+        function () { choices([['Vale, sigue tú', 'p1'], ['Prefiero hablar con Vicente', 'llamar']]); });
+    }
+  };
+  function cita(cuando) {
+    apunta('Consulta reservada: ' + cuando, 'en la agenda de Vicente', 'g');
+    apunta('Aviso a Vicente', 'Toni · bar-restaurante en Paterna · ' + raciones + ' · ' + fuego + '\nConsulta ' + cuando + ' · viene del anuncio B (escandallo)', 'g');
+    apunta('Recordatorios programados', 'confirmación por email, la víspera y 2 h antes');
+    bot(['Hecho, Toni: ' + cuando + ' con Vicente, por videollamada. Te mando ahora el enlace por email y te lo recuerdo la víspera por aquí.',
+         'Si tienes a mano la carta y los precios de tus arroces, tenlos cerca: así Vicente puede hacer números contigo en la misma llamada.'], fin);
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 12; raciones = 'raciones por concretar'; fuego = 'quién cocina por concretar';
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Toni ha rellenado el formulario a las 16:12 desde el anuncio B');
+    apunta('Ficha creada', 'origen: Meta · hostelería B (escandallo)\nrestaurante o bar · costes y escandallos · 2-3 cocinan · este mes');
+    apunta('Puntuación: prioridad alta', 'quiere empezar este mes', 'g');
+    apunta('Respuesta en menos de un minuto', 'aunque Vicente esté dando un curso');
+    go('inicio');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>

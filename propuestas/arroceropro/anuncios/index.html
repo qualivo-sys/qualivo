@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Anuncios · Arrocero Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap">
+<style>
+/* Galería de anuncios de ejemplo para Arrocero Pro: 3 mensajes para hostelería (feed + historia) y 2 para particulares, con textos, público y plan de prueba. */
+:root{--bg:#F7F3EE;--surface:#FFFFFF;--ink:#16130F;--muted:#5C534A;--line:#E3D9CD;--accent:#C2470A;--accent-ink:#FFFFFF;--soft:#F1E8DD;--tint:#FBE9DD;
+  --font:"DM Sans","Segoe UI",system-ui,sans-serif;--display:"Bebas Neue","Arial Narrow",Impact,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F0D0B;--surface:#1A1714;--ink:#F5F0EB;--muted:#B9AEA2;--line:#342C25;--accent:#FF8A3D;--accent-ink:#1A0E05;--soft:#221D19;--tint:#2B1B10;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F0D0B;--surface:#1A1714;--ink:#F5F0EB;--muted:#B9AEA2;--line:#342C25;--accent:#FF8A3D;--accent-ink:#1A0E05;--soft:#221D19;--tint:#2B1B10;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.55 var(--font);overflow-x:hidden}
+.maqueta{background:#0A0A0A;color:#cfc6bc;font-size:12.5px;text-align:center;padding:6px 16px}
+.topnav{border-bottom:1px solid var(--line);padding:10px 16px}
+.topnav .in{max-width:1180px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topnav .who{font-family:var(--display);font-size:22px;letter-spacing:.04em;line-height:1}
+.topnav .who span{color:var(--accent)}
+.topnav nav{display:flex;gap:6px;flex-wrap:wrap}
+.topnav nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14.5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px}
+.topnav nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto;padding:30px 0 70px}
+.logo{display:inline-block;background:#fff;border-radius:12px;padding:6px 10px;border:1px solid var(--line)}
+.logo img{height:64px;width:auto;display:block}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,60px);line-height:1;margin:18px 0 10px;text-wrap:balance}
+h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;margin:0;line-height:1.15}
+h3{font-size:22px;font-weight:800;margin:0}
+p{margin:0}
+.lead{color:var(--muted);font-size:18.5px;max-width:72ch}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}
+.jump a{color:inherit;text-decoration:none;font-weight:700;border:1.5px solid var(--line);border-radius:99px;padding:7px 16px;background:var(--surface)}
+.jump a:hover{border-color:var(--accent);color:var(--accent)}
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.plan div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.plan b{display:block;font-size:18px;margin-bottom:4px}
+.plan p{color:var(--muted);font-size:15.5px}
+.group{border-top:1px solid var(--line);margin-top:46px;padding-top:30px;display:grid;gap:8px}
+.group > p{color:var(--muted);max-width:76ch}
+.angle{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.58fr) minmax(0,1.5fr);gap:18px;align-items:start;margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.angle.solo{grid-template-columns:minmax(0,1fr) minmax(0,2.08fr)}
+figure{margin:0;min-width:0}
+figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line);background:#0A0A0A}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.35}
+figcaption b{display:block;color:var(--ink);font-size:14px}
+.copy{display:grid;gap:10px;min-width:0}
+.copy .tit{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.copy .tit span{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--tint);color:var(--accent);border-radius:6px;padding:3px 8px}
+.k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:4px 0 2px}
+pre{white-space:pre-wrap;font:15px/1.5 var(--font);background:var(--soft);border-radius:10px;padding:11px 13px;margin:0;color:var(--ink)}
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.meta pre{font-weight:700}
+.aud{font-size:14.5px;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
+.aud b{color:var(--ink)}
+h4{font-size:24px;font-weight:800;margin:52px 0 12px}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 12px}
+.tw table{min-width:640px}
+.pend{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 22px}
+.pend ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.hyp{background:var(--tint);border-radius:12px;padding:13px 15px;margin-top:12px}
+a{color:var(--accent)}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:50px;padding-top:16px;display:grid;gap:4px}
+@media (max-width:980px){.angle{grid-template-columns:minmax(0,1fr) minmax(0,.58fr)}.angle .copy{grid-column:1 / -1}.angle.solo{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)}}
+@media (max-width:640px){.plan,.meta{grid-template-columns:1fr}.angle.solo{grid-template-columns:1fr}.angle.solo figure{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="maqueta">Maqueta de Qualivo para Arrocero Pro · anuncios de ejemplo con fotos de arroceropro.com · no publicados</div>
+<header class="topnav">
+  <div class="in">
+    <div class="who">QUALIVO <span>×</span> ARROCERO PRO</div>
+    <nav aria-label="Presentación"><a href="../">Plan</a><a href="../demo/">Demo</a><a href="./" aria-current="page">Anuncios</a><a href="../landing/">Landing</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <span class="logo"><img src="../assets/logo-crop.png" alt="Tu Paella en Casa · Formación hostelería · Especialistas en arroces y paellas" width="640" height="380"></span>
+  <h1>Anuncios: tres mensajes para restaurantes y dos para particulares</h1>
+  <p class="lead">El público principal es la hostelería (consultoría y cursos HORECA y FULL): tres ideas distintas, cada una con versión para el feed (4:5) y para historias y reels (9:16), para ver cuál trae dueños de restaurante de verdad. Para particulares hay dos piezas (curso de iniciación y regalo de Navidad) para llenar plazas libres. Las fotos son las de tu web.</p>
+  <nav class="jump" aria-label="Secciones"><a href="#hosteleria">Hostelería</a><a href="#particulares">Particulares</a><a href="#prueba">Plan de prueba</a><a href="#pendiente">Pendiente</a></nav>
+
+  <div class="plan">
+    <div><b>A · El fuego</b><p>«Que el arroz no dependa de quién esté en el fuego». La pregunta: ¿el problema de la regularidad (cocineros que rotan) hace que el dueño se pare a mirar?</p></div>
+    <div><b>B · Los números</b><p>«¿Sabes cuánto te deja cada ración de paella?», con un escandallo en blanco. La pregunta: ¿el dinero trae consultas más serias que la cocina?</p></div>
+    <div><b>C · Vicente</b><p>«15 años de arroces. Ahora, en tu cocina». La pregunta: ¿el dueño compra antes a la persona y su oficio que al problema?</p></div>
+  </div>
+
+  <section class="group" id="hosteleria">
+    <h2>Hostelería · recorrido principal</h2>
+    <p>Llevan a la página de Arrocero Pro para hostelería (<a href="../landing/">ver la maqueta</a>). El botón es «Más información» y el objetivo de la campaña es que se complete el formulario con las cuatro preguntas.</p>
+
+    <div class="angle">
+      <figure><img src="img/hosteleria-a-feed.jpg" alt="Anuncio A en formato feed: Que el arroz no dependa de quién esté en el fuego" width="1080" height="1350" loading="lazy"><figcaption><b>A · Feed 4:5</b>Vicente cocinando (foto de tu tienda online)</figcaption></figure>
+      <figure><img src="img/hosteleria-a-story.jpg" alt="Anuncio A en formato historia: ¿Tu paella sale igual un martes que un sábado a tope?" width="1080" height="1920" loading="lazy"><figcaption><b>A · Historia 9:16</b>Historias y reels</figcaption></figure>
+      <div class="copy">
+        <div class="tit"><h3>A · El fuego</h3><span>Hostelería</span></div>
+        <p class="k">Texto principal</p>
+        <pre>¿Tu paella sale igual un martes que un sábado a tope?
+Si depende de quién esté en el fuego, no es una receta: es una lotería.
+
+Vicente, chef arrocero valenciano con 15 años entre paelleras, entra en tu cocina:
+✓ Fichas técnicas y tiempos para cada arroz
+✓ Formación práctica para tu equipo
+✓ Carta de arroces y escandallos
+
+Para bares, restaurantes, comida para llevar y caterings. La primera consulta es gratis.</pre>
+        <div class="meta"><div><p class="k">Titular</p><pre>Que el arroz no dependa de quién cocine</pre></div><div><p class="k">Descripción</p><pre>Primera consulta gratis · Arrocero Pro</pre></div><div><p class="k">Botón</p><pre>Más información</pre></div></div>
+        <p class="aud"><b>A quién va:</b> dueños y jefes de cocina de bares, restaurantes, comida para llevar y caterings. Comunidad Valenciana (o el radio en el que trabajes, a confirmar), de 25 a 60 años, con intereses de hostelería y restauración o público abierto.</p>
+      </div>
+    </div>
+
+    <div class="angle">
+      <figure><img src="img/hosteleria-b-feed.jpg" alt="Anuncio B en formato feed: ¿Sabes cuánto te deja cada ración de paella?" width="1080" height="1350" loading="lazy"><figcaption><b>B · Feed 4:5</b>Paellas de tu web + escandallo en blanco</figcaption></figure>
+      <figure><img src="img/hosteleria-b-story.jpg" alt="Anuncio B en formato historia: Vendes paella. ¿Sabes lo que te cuesta cada ración?" width="1080" height="1920" loading="lazy"><figcaption><b>B · Historia 9:16</b>Historias y reels</figcaption></figure>
+      <div class="copy">
+        <div class="tit"><h3>B · Los números</h3><span>Hostelería</span></div>
+        <p class="k">Texto principal</p>
+        <pre>¿Sabes cuánto te deja cada ración de paella?
+Si el precio de carta sale de mirar a la competencia y el coste se calcula «a ojo», es difícil saberlo.
+
+Vicente te ayuda a hacer números:
+✓ Escandallo al gramo de cada arroz
+✓ Un precio de carta que cuadra con tu coste
+✓ Arroces para llevar y menús que suben el ticket
+
+Primera consulta gratis, por videollamada o en tu local.</pre>
+        <div class="meta"><div><p class="k">Titular</p><pre>El escandallo de tus arroces, al gramo</pre></div><div><p class="k">Descripción</p><pre>Primera consulta gratis · Arrocero Pro</pre></div><div><p class="k">Botón</p><pre>Más información</pre></div></div>
+        <p class="aud"><b>A quién va:</b> el mismo público que A. Es el que mejor encaja con el curso Arrocero Pro HORECA (escandallo, producción y ticket medio) si el dueño no está para una consultoría.</p>
+      </div>
+    </div>
+
+    <div class="angle">
+      <figure><img src="img/hosteleria-c-feed.jpg" alt="Anuncio C en formato feed: 15 años de arroces. Ahora, en tu cocina." width="1080" height="1350" loading="lazy"><figcaption><b>C · Feed 4:5</b>Vicente en el World Paella Day</figcaption></figure>
+      <figure><img src="img/hosteleria-c-story.jpg" alt="Anuncio C en formato historia: Chef Vicente. Valenciano. 15 años de arroces." width="1080" height="1920" loading="lazy"><figcaption><b>C · Historia 9:16</b>Historias y reels</figcaption></figure>
+      <div class="copy">
+        <div class="tit"><h3>C · Vicente</h3><span>Hostelería</span></div>
+        <p class="k">Texto principal</p>
+        <pre>15 años de arroces. Ahora, en tu cocina.
+
+Soy Vicente, chef arrocero valenciano. Después de cocinar para más de 2.000 clientes, ayudo a bares, restaurantes y caterings con sus arroces:
+· Formación para tu equipo
+· Cartas y recetas con ficha técnica
+· Escandallos y costes
+· Arroces para llevar, delivery y catering
+
+4,6★ en Google con más de 200 reseñas. La primera consulta es gratis.</pre>
+        <div class="meta"><div><p class="k">Titular</p><pre>Consultoría de arroces para hostelería</pre></div><div><p class="k">Descripción</p><pre>Chef Vicente · Valencia</pre></div><div><p class="k">Botón</p><pre>Más información</pre></div></div>
+        <p class="aud"><b>A quién va:</b> el mismo público que A y B. Si gana C, el siguiente paso es un vídeo de 15-20 s de Vicente en una cocina de cliente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="group" id="particulares">
+    <h2>Particulares · recorrido secundario</h2>
+    <p>Solo para llenar plazas libres de los lunes y martes, y con más peso en noviembre y diciembre (regalos). Llevan a la sección de cursos de arroceropro.com, con reserva de 27 € por Bizum.</p>
+
+    <div class="angle solo">
+      <figure><img src="img/particulares-regalo-feed.jpg" alt="Anuncio de regalo: Esta Navidad, regala su primera paella de verdad" width="1080" height="1350" loading="lazy"><figcaption><b>D · Feed 4:5</b>Alumna real con su paella (foto de tu web)</figcaption></figure>
+      <div class="copy">
+        <div class="tit"><h3>D · El regalo</h3><span>Particulares</span></div>
+        <p class="k">Texto principal</p>
+        <pre>¿Buscas un regalo que no acabe en un cajón?
+Un día cocinando paella valenciana con Vicente, chef arrocero, en Valencia:
+· 5 horas, 100 % práctico
+· Máximo 6 personas
+· Cocina su propia paella, con su socarrat, y luego coméis todos juntos
+
+Curso de Iniciación: 87 €. Lunes y martes.</pre>
+        <div class="meta"><div><p class="k">Titular</p><pre>Regala su primera paella de verdad</pre></div><div><p class="k">Descripción</p><pre>Curso de Iniciación · 87 €</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div></div>
+        <p class="aud"><b>A quién va:</b> Valencia y 40 km alrededor, de 25 a 60 años, abierto. Del 1 de noviembre al 20 de diciembre. <b>A confirmar:</b> si vendes tarjeta regalo o bono con fecha abierta. Sin eso, este anuncio no se publica.</p>
+      </div>
+    </div>
+
+    <div class="angle solo">
+      <figure style="max-width:260px"><img src="img/particulares-curso-story.jpg" alt="Historia: Tu primera paella. Hecha por ti." width="1080" height="1920" loading="lazy"><figcaption><b>E · Historia 9:16</b>Alumna real con su paella (foto de tu web)</figcaption></figure>
+      <div class="copy">
+        <div class="tit"><h3>E · Tu primera paella</h3><span>Particulares</span></div>
+        <p class="k">Texto principal</p>
+        <pre>Tu primera paella. Hecha por ti.
+Con Vicente, chef arrocero valenciano, en grupos de 6 como máximo. Fuego, caldo, el punto del arroz y el socarrat. Cocinas tú y luego comemos juntos.
+
+Iniciación: 87 €, 5 horas. Reserva tu plaza con 27 € por Bizum.</pre>
+        <div class="meta"><div><p class="k">Titular</p><pre>Curso de paella en Valencia · 87 €</pre></div><div><p class="k">Descripción</p><pre>Lunes y martes · máx. 6 personas</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div></div>
+        <p class="aud"><b>A quién va:</b> Valencia y 40 km alrededor, de 25 a 60 años, y quien ha visitado arroceropro.com en los últimos 30 días y no ha reservado. Solo cuando haya plazas libres en las dos semanas siguientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <h4 id="prueba">Plan de prueba</h4>
+  <div class="tw"><table>
+    <thead><tr><th>Qué</th><th>Versión proporcionada</th><th>Versión completa</th></tr></thead>
+    <tbody>
+      <tr><td>Presupuesto al día</td><td>Hostelería: 7 €/día (A, B y C dentro de la misma campaña). Particulares: 3 €/día, solo en noviembre y diciembre. Unos 210-300 € al mes.</td><td>Hostelería: 10-12 €/día. Particulares: 3-5 €/día. Recuerdo a quien visitó la web y no escribió: 2 €/día. Google para búsquedas profesionales («curso arrocero profesional», «formación paella hostelería», «asesor de arroces para restaurante»): 3-5 €/día. Unos 450-600 € al mes.</td></tr>
+      <tr><td>Cómo</td><td colspan="2">La misma página, el mismo público y las mismas preguntas para A, B y C. Solo cambia el mensaje, para que la comparación sea limpia.</td></tr>
+      <tr><td>Primeras 2 semanas</td><td colspan="2">Miramos qué mensaje hace que se paren (cuántos lo ven 3 segundos y cuántos hacen clic) y cuál lleva del clic al formulario. No se apaga nada antes de 1.500-2.000 impresiones por anuncio o 7 días.</td></tr>
+      <tr><td>Qué gana</td><td colspan="2">No el formulario más barato, sino el <b>coste por consulta gratis celebrada con un negocio de hostelería</b> (y después, por curso HORECA, FULL o consultoría vendida). En particulares, el coste por plaza pagada con Bizum. Un anuncio más caro por formulario puede ganar si trae más consultas reales.</td></tr>
+      <tr><td>Cuándo se corta</td><td colspan="2">A las 2 semanas, el anuncio que cueste el doble por consulta que el mejor se apaga. Si a las 3 semanas la campaña de hostelería no ha traído ninguna consulta celebrada, paramos y revisamos el mensaje y la página antes de gastar más. Particulares: si no hay plazas libres, se pausa.</td></tr>
+      <tr><td>Después</td><td colspan="2">El mensaje que gane se queda y se le hacen 3 ganchos nuevos sobre la misma idea. El que pierda se sustituye. Un vídeo de 15-20 s de Vicente en una cocina se prueba contra el mejor estático.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="hyp"><b>Horquilla orientativa, a confirmar en las 3 primeras semanas:</b> con 7 €/día en hostelería esperaríamos entre 4 y 12 contactos de negocios al mes, y una parte de ellos acabaría en consulta. Es un público pequeño y caro de alcanzar, y por eso lo que más pesa al principio es contestar al minuto y hacer seguimiento, no el presupuesto de anuncios.</p>
+
+  <h4 id="pendiente">Pendiente antes de publicar</h4>
+  <div class="pend"><ul>
+    <li>Fotos tuyas en cocinas de clientes (o en tu cocina con cocineros profesionales). La foto que hay ahora en la sección de consultoría parece de otro chef: confírmanoslo y no la usamos.</li>
+    <li>Píxel de Meta en arroceropro.com (hoy no lo tiene) para saber qué anuncio trae a quién.</li>
+    <li>Si vendes tarjeta regalo de los cursos (sin ella, el anuncio D no sale).</li>
+    <li>Hasta dónde te desplazas para una consultoría y si haces la primera consulta por videollamada, para ajustar el público.</li>
+    <li>Validar contigo los textos de oficio (escandallo, fichas técnicas, producción para eventos) y la cifra de «más de 2.000 clientes».</li>
+    <li>Ver juntos en la Biblioteca de anuncios de Meta si ya tienes algo activo, para no competir contigo mismo.</li>
+  </ul></div>
+
+  <footer class="foot">
+    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+    <p>Anuncios de ejemplo preparados el 16 de octubre de 2026 para Arrocero Pro y Tu Paella en Casa. Fotos de arroceropro.com, solo para enseñárselas a Vicente.</p>
+  </footer>
+</div>
+</body>
+</html>

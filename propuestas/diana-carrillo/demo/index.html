@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Demo del recorrido · Diana Carrillo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<style>
+/* Demo guiada en pestañas para Diana Carrillo: anuncios, test, WhatsApp, llamada de voz, seguimientos y panel. Misma base que la demo de Natural Fit, con el dorado de su marca. */
+:root{
+  --bg:#F7F4EE; --surface:#FFFFFF; --ink:#1F1A15; --muted:#5C5248; --line:#E3DACB;
+  --accent:#7E6826; --accent-ink:#FFFFFF; --good:#2E6B4A; --warn:#B4541A; --tint:#F4EEDD; --mail:#EEF2F8;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --brand:#BDA55A; --voice:#F1ECFA; --voice-ink:#4B3A7A;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15120F; --surface:#1E1A16; --ink:#F3EEE6; --muted:#BDB2A4; --line:#3A332B;
+  --accent:#D9C27A; --accent-ink:#1A1610; --good:#7CC3A0; --warn:#F09A63; --tint:#2C261B; --mail:#1C2330;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#D9C27A; --voice:#251F33; --voice-ink:#CDBBF5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15120F; --surface:#1E1A16; --ink:#F3EEE6; --muted:#BDB2A4; --line:#3A332B;
+  --accent:#D9C27A; --accent-ink:#1A1610; --good:#7CC3A0; --warn:#F09A63; --tint:#2C261B; --mail:#1C2330;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34;
+  --brand:#D9C27A; --voice:#251F33; --voice-ink:#CDBBF5; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:0 64px;overflow-x:hidden}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px}
+.wrap > *{min-width:0}
+nav.top{background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+nav.top div{max-width:1080px;margin-inline:auto;display:flex;gap:8px;align-items:center;overflow-x:auto}
+nav.top b{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-right:6px;white-space:nowrap}
+nav.top a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px}
+nav.top a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+header.intro{padding-top:22px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:68ch;margin-top:10px}
+.note{font-size:13.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;position:sticky;top:0;background:var(--bg);z-index:3;padding-top:8px}
+nav.tabs button{font:inherit;font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+nav.tabs button[aria-selected="true"] span{color:var(--accent-ink)}
+nav.tabs button.star{border-color:var(--brand)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > *{min-width:0}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.cols > *{min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* Anuncios */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ig .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:600}
+.ig .h i{width:28px;height:28px;border-radius:50%;background:#FBF7EE url(../assets/logo.png) center/80% auto no-repeat;border:1px solid var(--line);display:inline-block;flex:none}
+.ig .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ig img{width:100%;height:auto;display:block}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.ig .cta b{color:var(--accent)}
+.ig .t{padding:10px 12px;font-size:14px}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* Test */
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-height:480px;align-content:start}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:var(--accent);transition:width .3s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:600;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer}
+.quiz .qopts button:hover{border-color:var(--accent)}
+.quiz label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.quiz input[type=text],.quiz input[type=tel]{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.quiz .chk{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start;font-size:13px}
+.quiz .done{text-align:center;display:grid;gap:10px;padding-top:20px}
+.quiz .done b{font-family:var(--display);font-size:24px}
+.quiz .done p{color:var(--muted)}
+.score{display:inline-block;font-family:var(--mono);font-size:12px;border-radius:6px;padding:3px 8px;background:var(--tint);color:var(--accent)}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:#FBF7EE url(../assets/logo.png) center/80% auto no-repeat;display:inline-block;flex:none}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:640px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* Voz */
+.call{border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+.call .top{background:#1F1A15;color:#F3EEE6;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.call .top b{font-family:var(--display);font-size:17px}
+.call .top small{display:block;font-size:12px;opacity:.75}
+.call .top span{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px}
+.call .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+.v{max-width:86%;padding:9px 12px;border-radius:12px;font-size:15px;line-height:1.45}
+.v small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px;opacity:.75}
+.v.r{background:var(--voice);color:var(--ink);align-self:flex-start}
+.v.r small{color:var(--voice-ink)}
+.v.p{background:var(--tint);align-self:flex-end}
+.v.s{align-self:center;background:transparent;border:1px dashed var(--line);font-size:12.5px;color:var(--muted);text-align:center}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.rules p{color:var(--muted);font-size:14px;margin-top:4px}
+.rules blockquote{margin:8px 0 0;background:var(--voice);border-radius:8px;padding:8px 10px;font-size:14px}
+.rules blockquote.wq{background:var(--wa-out)}
+/* Seguimientos */
+.rulebar{display:flex;flex-wrap:wrap;gap:8px}
+.rulebar span{font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.seq{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq > div.star{border:2px solid var(--brand);grid-column:1 / -1}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 16px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--warn)}
+.tl li.mail::before{background:#4A6FA5}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl .ch{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;border-radius:5px;padding:1px 6px;margin-left:6px;background:var(--wa-out);color:var(--ink)}
+.tl li.mail .ch{background:var(--mail)}
+.tl li.alert .ch{background:var(--warn);color:#fff}
+.tl b{display:block;font-size:14.5px}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px;white-space:pre-line}
+.tl li.mail blockquote{background:var(--mail)}
+.tl blockquote .subj{display:block;font-weight:600;margin-bottom:4px;white-space:normal}
+.tl .ph{background:var(--warn);color:#fff;border-radius:4px;padding:0 4px;font-size:13px}
+.star-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.star-cols > *{min-width:0}
+/* Panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td.l,th.l{text-align:left;white-space:normal}
+th{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+tfoot td{font-weight:700;border-bottom:0}
+td.num,th.num{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px}
+.kpi b{font-family:var(--display);font-size:30px;line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.alert{border-color:var(--warn)}
+.kpi.alert b{color:var(--warn)}
+footer{font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq,.star-cols{grid-template-columns:1fr}.two{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Presentación"><div><b>DIANA CARRILLO · QUALIVO</b><a href="../">Plan</a><a href="./" aria-current="page">Demo</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a></div></nav>
+<div class="wrap">
+
+<header class="intro">
+  <p class="eyebrow">Demo para Diana Carrillo Advanced Esthetics · Consell de Cent, 325 · L'Eixample, Barcelona</p>
+  <h1>Del anuncio a la valoración con Diana, y del presupuesto al bono, sin que se pierda nadie</h1>
+  <p class="lead">Así vive el recorrido una paciente que se va a operar y busca quién le haga el postoperatorio, y así lo ves tú. La pestaña 5, seguimientos, es la que responde a lo que me contaste: que nadie retoma la conversación cuando la paciente «se lo piensa».</p>
+</header>
+
+<p class="note"><span class="ej">Ejemplo</span> Todo lo que se ve es de ejemplo: la paciente (Andrea), los mensajes, las horas y las cifras. Los textos finales los apruebas tú. Las asistentes (Sofía por WhatsApp y Raquel por teléfono) nunca dan consejo médico ni precios cerrados, y siempre dicen que son asistentes.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span>Test</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span>Llamada</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento" class="star"><span>5</span>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>6</span>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIOS -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · Anuncios de ejemplo <span class="ej">Ejemplo</span></h2><p>Tres mensajes, cada uno para un momento distinto. Con tus fotos reales, sin precios y sin promesas de resultado. La galería completa (feed y stories, con textos y públicos) está en <a href="../anuncios/">Anuncios</a>.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">A · Postoperatorio · Meta</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Diana Carrillo Advanced Esthetics<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/a-feed.jpg" alt="Anuncio: organiza tu postoperatorio antes de entrar a quirófano" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Más información</span><b>›</b></div>
+        <p class="t"><b>Tu postoperatorio, organizado antes de operarte.</b> Si ya tienes fecha para tu liposucción o abdominoplastia, el postoperatorio también se prepara: drenaje, faja y alguien a quien escribir cuando tengas dudas.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> habla a quien tiene fecha de cirugía, que es quien más prisa tiene. Lleva al test, que nos dice esa fecha.</div>
+    </div>
+    <div>
+      <p class="cap">B · Confianza · Meta → WhatsApp</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Diana Carrillo Advanced Esthetics<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/b-feed.jpg" alt="Anuncio: ponerme en sus manos fue la mejor decisión" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Enviar mensaje</span><b>›</b></div>
+        <p class="t"><b>20 años cuidando postoperatorios.</b> Una opinión real de Treatwell y tu cara. El botón abre WhatsApp y Sofía contesta al momento.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> en postoperatorio se elige a una persona, no un centro. Tu cara y una paciente real dan más confianza que cualquier eslogan.</div>
+    </div>
+    <div>
+      <p class="cap">C · Corporal sin cirugía · Meta</p>
+      <div class="ig">
+        <div class="h"><i></i><div>Diana Carrillo Advanced Esthetics<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/c-feed.jpg" alt="Anuncio: un plan corporal pensado para ti" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Más información</span><b>›</b></div>
+        <p class="t"><b>Valoración corporal con Diana.</b> Scultor, lifting de glúteos y masaje moldeador. Primero te escuchamos; luego, tu plan por escrito.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> llena agenda entre postoperatorios y es la puerta de entrada de quien aún no se opera.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="test">Siguiente: el test ›</button></div>
+</section>
+
+<!-- 2 · TEST -->
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · Un test de tres preguntas <span class="ej">Ejemplo</span></h2><p>Es lo que aparece en la landing al tocar el anuncio. Pruébalo: responde como si fueras una paciente.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div><h3>Lo que pregunta</h3><p>Qué busca (postoperatorio, drenaje ya operada, corporal sin cirugía o fajas), cuándo es su cirugía y si vive en Barcelona o viene de fuera.</p></div>
+      <div><h3>Para qué sirve</h3><p>Sofía ya escribe sabiendo la fecha. Quien se opera en menos de 4 semanas o ya está operada sale con prioridad alta y te llega aviso. Quien viene de fuera, con aviso de hospedaje.</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Nada de historial médico, fotos ni nombre del cirujano. Eso lo hablas tú en la valoración.</p></div>
+      <div><h3>Permiso claro</h3><p>Una casilla para aceptar que le escribamos por WhatsApp y la llamemos. Sin esa casilla, Raquel no llama.</p></div>
+      <div><a class="btnl" href="../landing/#test" target="_blank" rel="noopener">Ver el test en la landing</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Un minuto después, le escribe Sofía <span class="ej">Ejemplo</span></h2><p>Eres Andrea: te operas de una liposucción el 12 de noviembre y has hecho el test un domingo por la tarde. Elige un camino. A la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i></i><div><b>Diana Carrillo · Soluciones Estéticas</b><small>Sofía, asistente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Sofía no da consejo médico ni precios cerrados. Cuándo empezar los drenajes lo marca siempre el cirujano. Si la paciente cuenta algo clínico (dolor fuerte, fiebre, una herida), Sofía le dice que llame a su cirujano y te avisa. Tú ves cada conversación y puedes entrar cuando quieras: en cuanto escribes, Sofía se calla.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: la llamada ›</button></div>
+</section>
+
+<!-- 4 · VOZ -->
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>4 · Si no contesta, la llama Raquel <span class="ej">Ejemplo</span></h2><p>Raquel es la asistente de voz. Solo llama a quien ha dejado sus datos y ha pedido información (con la casilla marcada), de 8:00 a 21:30, y como mucho dos veces.</p></header>
+  <div class="two">
+    <div class="call">
+      <div class="top"><div><b>Raquel → Andrea</b><small>Lunes 13:12 · 15 minutos después del test, sin respuesta al WhatsApp</small></div><span>Ejemplo · 2 min 10 s</span></div>
+      <div class="body">
+        <p class="v s">Llamada saliente desde el número del centro</p>
+        <p class="v r"><small>Raquel</small>Hola, ¿hablo con Andrea? Soy Raquel, la asistente virtual del centro de Diana Carrillo, en Barcelona. Te llamo porque hace un rato pediste información sobre tu postoperatorio. ¿Tienes un minuto?</p>
+        <p class="v p"><small>Andrea</small>Sí, dime.</p>
+        <p class="v r"><small>Raquel</small>Genial. En el formulario pusiste que te operas en las próximas semanas. ¿Qué cirugía es y tienes ya la fecha?</p>
+        <p class="v p"><small>Andrea</small>Una liposucción, el 12 de noviembre.</p>
+        <p class="v r"><small>Raquel</small>Perfecto, lo apunto. Lo que solemos hacer es una valoración con Diana antes de la cirugía: te explica cómo serán las sesiones de drenaje, te asesora con la faja y te da el presupuesto por escrito. Cuándo empezar lo decide siempre tu cirujano.</p>
+        <p class="v p"><small>Andrea</small>¿Y más o menos cuánto cuesta?</p>
+        <p class="v r"><small>Raquel</small>Depende de las sesiones que necesites, por eso Diana te lo da cerrado en la valoración. Hay bonos de seis, diez y doce sesiones. ¿Te parece si la reservamos? Tengo el martes a las seis de la tarde o el jueves a las once y media.</p>
+        <p class="v p"><small>Andrea</small>El martes me va bien.</p>
+        <p class="v r"><small>Raquel</small>Hecho: martes a las seis de la tarde, en Consell de Cent, 325, principal primera. Ahora te llega la confirmación por WhatsApp con la dirección. ¿Necesitas algo más?</p>
+        <p class="v p"><small>Andrea</small>No, gracias.</p>
+        <p class="v r"><small>Raquel</small>Gracias a ti, Andrea. Nos vemos el martes. ¡Que tengas buen día!</p>
+        <p class="v s">Cita en tu agenda · ficha actualizada (liposucción, 12-nov) · resumen y grabación en la ficha · aviso a Diana</p>
+      </div>
+    </div>
+    <div class="rules">
+      <div><h3>Cuándo llama</h3><p>A los 10-20 minutos de dejar sus datos, si no ha contestado al WhatsApp. Solo de 8:00 a 21:30: si el test llega a las 23:00, llama a las 10:00 del día siguiente. Si la paciente ya ha reservado por WhatsApp, no llama.</p></div>
+      <div><h3>Si no contesta: buzón</h3><blockquote>«Hola, Andrea, soy Raquel, la asistente del centro de Diana Carrillo. Te llamaba por la información que pediste sobre tu postoperatorio. Te escribo por WhatsApp para buscarte un hueco. ¡Hasta luego!»</blockquote></div>
+      <div><h3>…y WhatsApp justo después</h3><blockquote class="wq">Hola, Andrea. Te acabo de llamar desde el centro de Diana Carrillo por tu postoperatorio. Cuando te venga bien, dime qué cirugía es y la fecha, y te busco hueco para la valoración con Diana. 😊</blockquote></div>
+      <div><h3>Segundo intento</h3><p>Al día siguiente, a otra hora (si la primera fue a mediodía, la segunda a las 18:30). Si tampoco contesta, no hay más llamadas: sigue el seguimiento por WhatsApp y email.</p></div>
+      <div><h3>Lo que Raquel no hace</h3><p>No da consejo médico ni precios cerrados, no llama a quien no dejó sus datos, no llama fuera de horario y no insiste si le dicen que no. Si la paciente pide hablar con Diana, te deja el aviso con su número y la hora que le va bien.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos ›</button></div>
+</section>
+
+<!-- 5 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>5 · Ninguna paciente que pidió precio se queda sin respuesta <span class="ej">Ejemplo</span></h2><p>Los mensajes salen solos, con fecha. En cuanto la paciente responde, se para la secuencia y la conversación pasa a ti (o a Sofía, si es una duda sencilla). Las partes en naranja las rellenas tú.</p></header>
+  <div class="rulebar">
+    <span>Solo de 8:00 a 21:30</span><span>Se para en cuanto responde</span><span>Máximo un mensaje al día</span><span>«No me escribáis más» = no se le escribe más</span><span>Si es postoperatorio, el calendario se ajusta a su fecha de cirugía</span>
+  </div>
+  <div class="seq">
+
+    <div class="star">
+      <h3>El que más importa: seguimiento de la valoración y del presupuesto</h3>
+      <p>Para quien vino a la valoración y se llevó un plan (por ejemplo, bono de 10 drenajes postoperatorios + faja). Es exactamente el hueco que me contaste: «se lo piensa y nadie retoma la conversación».</p>
+      <div class="star-cols">
+        <ol class="tl">
+          <li><span class="w">Día 0 · 2 h después de la valoración</span><span class="ch">WhatsApp</span><b>Su plan, por escrito</b><blockquote>Andrea, gracias por venir hoy. Te dejo por aquí lo que hablaste con Diana para que lo tengas a mano:
+• Bono de 10 sesiones de drenaje postoperatorio
+• Faja M&amp;D en tu talla
+• Total: <span class="ph">[____] €</span>
+Cuándo empezar lo marca tu cirujano; nosotras nos adaptamos. Cualquier duda, me escribes por aquí.</blockquote></li>
+          <li class="mail"><span class="w">Día 0</span><span class="ch">Email</span><b>El mismo plan, para guardarlo</b><blockquote><span class="subj">Asunto: Tu plan de postoperatorio con Diana Carrillo (por escrito)</span>Hola, Andrea:
+Gracias por venir hoy al centro. Aquí tienes el plan que hablaste con Diana: bono de 10 sesiones de drenaje postoperatorio y faja M&amp;D en tu talla, por <span class="ph">[____] €</span>.
+Formas de pago: <span class="ph">[a confirmar con Diana]</span>.
+Las sesiones se empiezan cuando te lo indique tu cirujano. Si quieres reservar o tienes cualquier duda, responde a este email o escríbenos por WhatsApp.
+Un abrazo,
+Diana Carrillo · Consell de Cent, 325, pral. 1.ª · L'Eixample, Barcelona</blockquote></li>
+          <li><span class="w">Día 1</span><span class="ch">WhatsApp</span><b>¿Alguna duda?</b><blockquote>Hola, Andrea. ¿Te quedó alguna duda después de la valoración? A veces surgen al llegar a casa. Te las resuelvo por aquí o se las paso a Diana.</blockquote></li>
+          <li><span class="w">Día 3</span><span class="ch">WhatsApp</span><b>Pago y faja</b><blockquote>Andrea, por si te ayuda a decidir: el bono se puede pagar <span class="ph">[forma de pago a confirmar]</span>. Y si lo reservas, te tenemos la faja preparada en tu talla antes del día de la cirugía.</blockquote></li>
+        </ol>
+        <ol class="tl">
+          <li class="mail"><span class="w">Día 5</span><span class="ch">Email</span><b>Qué esperar de la primera sesión</b><blockquote><span class="subj">Asunto: Andrea, así es tu primera sesión de drenaje con nosotras</span>Hola, Andrea:
+Te contamos cómo es la primera sesión para que vayas tranquila: dura unos 45 minutos, vienes con tu faja y ropa cómoda, y seguimos siempre las indicaciones de tu cirujano.
+Como nos escribió una paciente: «me sentí acompañada y en las mejores manos en todo momento».
+Si quieres dejar reservadas tus primeras sesiones, responde a este email.
+Diana Carrillo</blockquote></li>
+          <li><span class="w">Día 7 · ajustado a su cirugía</span><span class="ch">WhatsApp</span><b>Antes de que llegue la fecha</b><blockquote>Andrea, quedan dos semanas para tu cirugía del 12 de noviembre. Para guardarte las primeras sesiones los días que te toquen, ¿lo dejamos reservado? Si prefieres hablarlo con Diana, te llama ella.</blockquote></li>
+          <li class="alert"><span class="w">Día 8</span><span class="ch">Aviso a Diana</span><b>Mejor una llamada tuya</b><blockquote>Andrea · liposucción el 12-nov · plan de 10 drenajes + faja · <span class="ph">[____] €</span> · presupuesto de hace 8 días · abrió el email, no ha respondido. Mejor una llamada tuya hoy.</blockquote></li>
+          <li><span class="w">Día 14</span><span class="ch">WhatsApp</span><b>¿Más adelante o reservamos?</b><blockquote>Andrea, ¿lo dejamos para más adelante o prefieres que te reserve? Las dos opciones están bien. Dime y lo anoto.</blockquote></li>
+          <li class="mail"><span class="w">Día 30</span><span class="ch">Email</span><b>Última, sin presión</b><blockquote><span class="subj">Asunto: ¿Cómo vas, Andrea?</span>Hola, Andrea:
+No queremos llenarte el correo. Solo recordarte que, si aún no has empezado tus drenajes o más adelante quieres un tratamiento corporal, aquí seguimos. Escríbenos cuando quieras.
+Diana Carrillo</blockquote></li>
+          <li class="stop"><span class="w">Si responde</span><b>Se para todo y sigue Diana (o Sofía)</b><span class="muted small">Si dice que no, se apunta el motivo (precio, ya tiene centro, cirugía aplazada) y aparece en el panel.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div>
+      <h3>Pidió información y no reservó</h3>
+      <p>Para quien escribió o hizo el test, pero no reservó valoración (ni con Sofía ni con Raquel).</p>
+      <ol class="tl">
+        <li><span class="w">Día 0</span><span class="ch">WhatsApp</span><b>La conversación de la pestaña 3</b><span class="muted small">Y la llamada de Raquel si no contesta.</span></li>
+        <li class="mail"><span class="w">Día 0 · si dejó email</span><span class="ch">Email</span><b>Cómo trabajamos</b><blockquote><span class="subj">Asunto: Andrea, así trabajamos el postoperatorio en el centro de Diana Carrillo</span>Hola, Andrea:
+Gracias por escribirnos. Te resumo cómo trabajamos: primero, una valoración con Diana antes de tu cirugía; después, tus sesiones de drenaje cuando te lo indique tu cirujano, y tu faja en tu talla. Si vienes de fuera, también te ayudamos con el hospedaje.
+Más de 20 años de experiencia, técnicas colombianas y europeas.
+Para reservar tu valoración, responde a este email o escríbenos por WhatsApp.
+Diana Carrillo</blockquote></li>
+        <li><span class="w">Día 1</span><span class="ch">WhatsApp</span><b>Retomar</b><blockquote>Hola, Andrea. Soy Sofía, del centro de Diana Carrillo. Ayer me preguntaste por el postoperatorio de tu liposucción. ¿Te quedó alguna duda? Si quieres, te propongo dos huecos para la valoración con Diana esta semana.</blockquote></li>
+        <li class="mail"><span class="w">Día 3</span><span class="ch">Email</span><b>Las dudas de siempre</b><blockquote><span class="subj">Asunto: Las 4 preguntas que más nos hacen antes de una cirugía</span>Hola, Andrea:
+1. ¿Cuándo se empiezan los drenajes? Cuando lo indique tu cirujano.
+2. ¿Cuántas sesiones? Depende de cada caso; Diana te lo concreta en la valoración.
+3. ¿Qué faja? Te asesoramos en el centro; somos distribuidoras de fajas M&amp;D.
+4. ¿Y si vengo de fuera? Te ayudamos con el hospedaje y los enfermeros los primeros días.
+¿Reservamos tu valoración? Responde a este email.
+Diana Carrillo</blockquote></li>
+        <li><span class="w">Día 5</span><span class="ch">WhatsApp</span><b>Una opinión real</b><blockquote>Andrea, te comparto lo que escribió una paciente tras su postoperatorio con Diana: «ponerme en sus manos fue la mejor decisión». Si quieres, te busco hueco: ¿mañana por la tarde o el jueves por la mañana?</blockquote></li>
+        <li><span class="w">Día 7 · ajustado a su cirugía</span><span class="ch">WhatsApp</span><b>La fecha se acerca</b><blockquote>Andrea, tu cirugía es el 12 de noviembre. Para tenerlo todo listo (sesiones y faja), lo ideal es hacer la valoración antes. ¿Te la reservo?</blockquote></li>
+        <li class="alert"><span class="w">Día 8</span><span class="ch">Aviso a Diana</span><b>Antes de perderla</b><blockquote>Andrea · liposucción el 12-nov · pidió información hace 8 días · no ha reservado. Si la llamas tú, aún llega.</blockquote></li>
+        <li><span class="w">Día 14</span><span class="ch">WhatsApp</span><b>Cierre amable</b><blockquote>Andrea, no quiero llenarte el móvil de mensajes. ¿Lo dejamos para más adelante o prefieres que te reserve? Las dos están bien. Si más adelante lo necesitas, escríbeme aquí.</blockquote></li>
+        <li class="stop"><span class="w">Si no responde</span><b>Pasa a «más adelante»</b><span class="muted small">Solo se le vuelve a escribir si aceptó recibir novedades.</span></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>Recordatorios de la cita</h3>
+      <p>Para la valoración y para cada sesión. Y qué pasa si no viene.</p>
+      <ol class="tl">
+        <li><span class="w">Al reservar</span><span class="ch">WhatsApp</span><b>Confirmación</b><blockquote>Reservado, Andrea ✅
+Valoración con Diana: martes 21 de octubre, 18:00.
+Consell de Cent, 325, principal primera (L'Eixample).
+Si necesitas cambiarla, escríbeme por aquí.</blockquote></li>
+        <li class="mail"><span class="w">Al reservar</span><span class="ch">Email</span><b>Confirmación con mapa</b><blockquote><span class="subj">Asunto: Tu valoración con Diana Carrillo: martes 21 de octubre, 18:00</span>Hola, Andrea:
+Te esperamos el martes 21 de octubre a las 18:00 en Consell de Cent, 325, principal primera (L'Eixample, Barcelona). Aquí tienes el mapa: <span class="ph">[enlace de Google Maps]</span>.
+Si te surge algo, responde a este email y lo cambiamos.
+Diana Carrillo</blockquote></li>
+        <li><span class="w">Víspera · 10:00</span><span class="ch">WhatsApp</span><b>¿Confirmas?</b><blockquote>Hola, Andrea. Te recuerdo tu valoración con Diana mañana martes a las 18:00. ¿Me confirmas que vienes? Responde SÍ o dime si prefieres otro día.</blockquote></li>
+        <li class="alert"><span class="w">Víspera · 14:00 si no confirma</span><span class="ch">Aviso</span><b>Cita sin confirmar</b><blockquote>Andrea · valoración mañana 18:00 · sin confirmar. Raquel la llama a las 17:00 para confirmar.</blockquote></li>
+        <li><span class="w">2 h antes</span><span class="ch">WhatsApp</span><b>Hasta ahora</b><blockquote>Andrea, nos vemos a las 18:00 en Consell de Cent, 325, principal primera. Si te pilla tarde, avísame por aquí. ¡Hasta ahora!</blockquote></li>
+        <li><span class="w">No vino · 15 min después</span><span class="ch">WhatsApp</span><b>Sin reproches, otro hueco</b><blockquote>Andrea, te esperábamos a las 18:00. ¿Todo bien? Si te ha surgido algo, no pasa nada: ¿te va mejor el jueves a las 11:30 o el viernes a las 17:00?</blockquote></li>
+        <li><span class="w">No vino · día siguiente</span><span class="ch">WhatsApp</span><b>Ajustado a su cirugía</b><blockquote>Hola, Andrea. Ayer no pudimos vernos. Como tu cirugía es el 12 de noviembre, me gustaría dejarte la valoración cerrada esta semana. ¿Te propongo dos horas?</blockquote></li>
+        <li class="alert"><span class="w">No vino · día 3</span><span class="ch">Aviso a Diana</span><b>Recuperar a mano</b><blockquote>Andrea · no vino a la valoración del martes · no ha contestado. Mejor una llamada tuya.</blockquote></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>Durante el bono y después</h3>
+      <p>Para quien ya compró. El cuidado lo llevas tú; esto solo evita olvidos y pide la reseña en el momento bueno.</p>
+      <ol class="tl">
+        <li><span class="w">Víspera de cada sesión</span><span class="ch">WhatsApp</span><b>Recordatorio</b><blockquote>Hola, Andrea. Mañana a las 17:00 tienes tu sesión 3 de 10. Recuerda venir con tu faja. Si necesitas cambiarla, escríbeme.</blockquote></li>
+        <li><span class="w">Mitad del bono</span><span class="ch">WhatsApp</span><b>¿Cómo vas?</b><blockquote>Andrea, ya llevas 5 de 10 sesiones. ¿Cómo te encuentras con la faja y con los horarios? Si algo no te va bien, lo cambiamos.</blockquote></li>
+        <li><span class="w">Día después de la última sesión</span><span class="ch">WhatsApp</span><b>Reseña</b><blockquote>Andrea, gracias por confiar en nosotras estas semanas. Si te apetece, nos ayudaría mucho que contaras tu experiencia en Google. Aquí tienes el enlace: <span class="ph">[enlace de reseñas]</span></blockquote></li>
+        <li class="mail"><span class="w">A los 60 días · solo si aceptó novedades</span><span class="ch">Email</span><b>Siguiente paso</b><blockquote><span class="subj">Asunto: Andrea, ¿seguimos cuidándote?</span>Hola, Andrea:
+Si te apetece seguir cuidándote después del postoperatorio, en el centro hacemos tratamiento corporal sin cirugía: Scultor, lifting de glúteos y masaje moldeador. Empieza con una valoración con Diana.
+Responde a este email y te buscamos hueco.
+Diana Carrillo</blockquote></li>
+        <li class="stop"><span class="w">Después</span><b>Fin de la secuencia</b></li>
+      </ol>
+    </div>
+
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel ›</button></div>
+</section>
+
+<!-- 6 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>6 · Lo que verías cada mañana <span class="ej">Datos de ejemplo</span></h2><p>Qué anuncio trae valoraciones y bonos, y no solo mensajes. Y, sobre todo, a quién escribir hoy. Cifras redondas inventadas, no previsiones.</p></header>
+  <div class="kpis">
+    <div class="kpi"><b>38</b><span>consultas este mes · ejemplo</span></div>
+    <div class="kpi"><b>17</b><span>valoraciones hechas · ejemplo</span></div>
+    <div class="kpi"><b>9</b><span>bonos vendidos · ejemplo</span></div>
+    <div class="kpi alert"><b>4.200 €</b><span>en presupuestos abiertos · 1.600 € sin mensaje en más de 2 días · ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap">A quién escribir hoy · Datos de ejemplo</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Paciente</th><th class="l">Qué</th><th>Presupuesto</th><th>Esperando</th><th class="l">Siguiente paso</th></tr></thead>
+        <tbody>
+          <tr><td>Andrea M.</td><td class="l">Lipo · cirugía 12-nov</td><td class="num">[____] €</td><td class="num">8 días</td><td class="l">Llamada tuya hoy (abrió el email)</td></tr>
+          <tr><td>Paola R.</td><td class="l">Abdominoplastia · viene de fuera</td><td class="num">[____] €</td><td class="num">3 días</td><td class="l">Pregunta por hospedaje: llamada tuya</td></tr>
+          <tr><td>Laura G.</td><td class="l">Scultor · sin cirugía</td><td class="num">[____] €</td><td class="num">5 días</td><td class="l">Sofía le escribe hoy (día 5)</td></tr>
+          <tr><td>Marta S.</td><td class="l">Valoración mañana 18:00</td><td class="num">—</td><td class="num">—</td><td class="l">Sin confirmar: Raquel llama a las 17:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="box">
+    <p class="cap">Por anuncio · un mes · Datos de ejemplo</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Campaña</th><th class="num">Consultas</th><th class="num">Valoraciones</th><th class="num">Presupuestos</th><th class="num">Bonos</th><th class="num">Coste por valoración</th></tr></thead>
+        <tbody>
+          <tr><td>A · Postoperatorio</td><td class="num">14</td><td class="num">7</td><td class="num">6</td><td class="num">4</td><td class="num">45 €</td></tr>
+          <tr><td>B · Confianza (WhatsApp)</td><td class="num">10</td><td class="num">4</td><td class="num">3</td><td class="num">2</td><td class="num">55 €</td></tr>
+          <tr><td>C · Corporal sin cirugía</td><td class="num">8</td><td class="num">3</td><td class="num">3</td><td class="num">1</td><td class="num">60 €</td></tr>
+          <tr><td>Instagram y recomendación</td><td class="num">6</td><td class="num">3</td><td class="num">2</td><td class="num">2</td><td class="num">—</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="num">38</td><td class="num">17</td><td class="num">14</td><td class="num">9</td><td class="num"></td></tr></tfoot>
+      </table>
+    </div>
+    <p class="note">Datos de ejemplo. En la versión real se rellena solo con cada conversación, cita y bono. El panel de ejemplo que se abre abajo usa datos de una clínica genérica: con los tuyos verías drenajes, bonos y fajas.</p>
+  </div>
+  <div class="links"><a class="btnl" href="https://qualivo.io/intelligence/?sector=clinica&amp;empresa=Diana%20Carrillo%20Advanced%20Esthetics&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel de ejemplo ›</a><a class="btnl" style="background:var(--surface);color:var(--accent);border:1px solid var(--accent)" href="../">Volver al plan</a></div>
+</section>
+
+<footer>
+  <div class="links"><a href="../">Plan</a> · <a href="../anuncios/">Anuncios</a> · <a href="../landing/">Landing</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Ejemplo preparado el 16 de octubre de 2026 para Diana Carrillo Advanced Esthetics. No es una página del centro; anuncios, mensajes, nombres y cifras son de ejemplo. La opinión citada es pública (Treatwell).</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'test', 'whatsapp', 'voz', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    if (push) window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+
+  // Test de ejemplo
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué te gustaría?', ['Preparar mi postoperatorio (me voy a operar)', 'Ya me he operado y necesito drenajes', 'Tratamiento corporal sin cirugía', 'Fajas y prendas postoperatorias']],
+    ['¿Cuándo es tu cirugía o cuándo te gustaría empezar?', ['En menos de 4 semanas', 'En 1-3 meses', 'Ya me he operado', 'Aún no tengo fecha']],
+    ['¿Dónde vives?', ['En Barcelona o alrededores', 'Vengo de fuera a operarme', 'Fuera de España']]
+  ];
+  var resp = [];
+  function prioridad() {
+    var alta = resp[1] === 'En menos de 4 semanas' || resp[1] === 'Ya me he operado';
+    return alta ? 'Prioridad alta · aviso a Diana' : 'Prioridad normal';
+  }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var total = Q.length + 1;
+    var cap = el('p', 'cap', 'Ejemplo · paso ' + Math.min(n + 1, total) + ' de ' + total);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / total * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n === Q.length) {
+      quiz.appendChild(el('h3', null, 'Te escribimos por WhatsApp en un minuto'));
+      var l1 = el('label', null, 'Nombre'); var i1 = el('input'); i1.type = 'text'; i1.value = 'Andrea'; i1.autocomplete = 'off'; l1.appendChild(i1);
+      var l2 = el('label', null, 'Teléfono'); var i2 = el('input'); i2.type = 'tel'; i2.placeholder = '+34 600 000 000'; i2.autocomplete = 'off'; l2.appendChild(i2);
+      var c = el('label', 'chk'); var cb = el('input'); cb.type = 'checkbox'; cb.checked = true; c.appendChild(cb);
+      c.appendChild(el('span', null, 'Acepto que el centro de Diana Carrillo me escriba por WhatsApp y me llame para darme información, de 8:00 a 21:30.'));
+      var go = el('button', 'btnl', 'Enviar'); go.type = 'button'; go.addEventListener('click', function () { paso(n + 1); });
+      quiz.appendChild(l1); quiz.appendChild(l2); quiz.appendChild(c); quiz.appendChild(go);
+      quiz.appendChild(el('p', 'cap', 'Maqueta: no envía ni guarda nada'));
+      return;
+    }
+    if (n > Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var d = el('div', 'done');
+      d.appendChild(el('b', null, 'Listo. Sofía te escribe ahora'));
+      d.appendChild(el('p', null, 'Tus respuestas: ' + resp.join(' · ') + '.'));
+      d.appendChild(el('span', 'score', prioridad()));
+      if (resp[2] === 'Vengo de fuera a operarme' || resp[2] === 'Fuera de España') d.appendChild(el('span', 'score', 'Aviso: le interesa hospedaje'));
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)';
+      r.addEventListener('click', function () { resp = []; paso(0); });
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.justifyContent = 'center'; row.style.flexWrap = 'wrap';
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 40;
+  function hora() { minuto++; return '19:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = el('div', 'b ' + cls, txt);
+    if (cls !== 'sys') { d.appendChild(el('time', null, hora())); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = el('li', tipo || null); li.appendChild(el('b', null, txt)); li.appendChild(el('span', null, sub || ''));
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = el('div', 'typing', 'escribiendo…');
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = el('button', null, c[0]); b.type = 'button';
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 350); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = el('button', 'restart', '↺ Probar otro camino'); b.type = 'button';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var cirugia = 'cirugía por concretar';
+  var HUECOS = [['Martes 18:00', 'martes'], ['Jueves 11:30', 'jueves']];
+  var N = {
+    inicio: function () {
+      bot(['Hola, Andrea. Soy Sofía, la asistente del centro de Diana Carrillo, en L\'Eixample. Gracias por escribirnos 😊',
+           'He visto que te operas en menos de 4 semanas y quieres organizar tu postoperatorio. ¿Te ayudo con eso?'],
+        function () { choices([['Sí, quiero organizarlo', 'q1'], ['¿Cuánto cuesta?', 'precio'], ['Vengo de fuera', 'fuera'], ['Ya me operé y me duele mucho', 'clinico']]); });
+    },
+    q1: function () {
+      bot(['Genial. ¿Qué cirugía te vas a hacer?'],
+        function () { choices([['Liposucción', 'c1'], ['Abdominoplastia', 'c2'], ['Mommy makeover', 'c3'], ['Otra', 'c4']]); });
+    },
+    c1: function () { cirugia = 'liposucción'; N.fecha(); },
+    c2: function () { cirugia = 'abdominoplastia'; N.fecha(); },
+    c3: function () { cirugia = 'mommy makeover'; N.fecha(); },
+    c4: function () { cirugia = 'otra cirugía'; N.fecha(); },
+    fecha: function () {
+      apunta('Cirugía: ' + cirugia, 'se guarda en su ficha');
+      bot(['Anotado. ¿Tienes ya la fecha?'],
+        function () { choices([['Sí, el 12 de noviembre', 'f1'], ['Aún no', 'f2']]); });
+    },
+    f1: function () {
+      apunta('Fecha de cirugía: 12-nov', 'el seguimiento se ajusta a esta fecha · prioridad alta', 'g');
+      N.propone();
+    },
+    f2: function () {
+      apunta('Sin fecha todavía', 'prioridad normal · seguimiento estándar');
+      N.propone();
+    },
+    propone: function () {
+      bot(['Perfecto. Lo habitual es dejarlo organizado antes de operarte: Diana te ve en una valoración, te explica cómo serán las sesiones de drenaje y te asesora con la faja.',
+           'Cuándo empezar los drenajes lo marca siempre tu cirujano; nosotras nos adaptamos.',
+           'Tengo hueco el martes a las 18:00 o el jueves a las 11:30. ¿Cuál te va mejor?'],
+        function () { choices(HUECOS.concat([['¿Cuánto cuesta?', 'precio'], ['Lo pienso', 'pienso']])); });
+    },
+    martes: function () { cita('el martes a las 18:00'); },
+    jueves: function () { cita('el jueves a las 11:30'); },
+    precio: function () {
+      apunta('Pregunta el precio', 'Sofía no da cifras cerradas: explica y propone valoración', 'h');
+      bot(['Es normal preguntarlo. Depende de tu cirugía y de cuántas sesiones necesites, por eso Diana te da el presupuesto cerrado y por escrito en la valoración.',
+           'Hay bonos de 6, 10 y 12 sesiones de drenaje postoperatorio, y la faja te la asesoramos en el centro.',
+           '¿Te reservo la valoración? Tengo el martes a las 18:00 o el jueves a las 11:30.'],
+        function () { choices(HUECOS.concat([['Lo pienso', 'pienso']])); });
+    },
+    fuera: function () {
+      apunta('Viene de fuera a operarse', 'le interesa hospedaje · aviso a Diana', 'h');
+      bot(['¡Qué bien que nos hayas encontrado! Si vienes de fuera, Diana también te ayuda con el hospedaje y con enfermeros durante los primeros días.',
+           'Como cada caso es distinto, lo mejor es que te llame ella. ¿Cuándo te va bien?'],
+        function () { choices([['Hoy por la tarde', 'llama'], ['Mañana por la mañana', 'llama']]); });
+    },
+    llama: function () {
+      apunta('Aviso a Diana: llamada pedida', 'Andrea · viene de fuera · hospedaje · franja elegida', 'g');
+      bot(['Hecho. Le paso tu nombre y la franja a Diana y te llama ella. Si mientras tanto te surge cualquier duda, escríbeme por aquí.'], fin);
+    },
+    clinico: function () {
+      apunta('Mensaje clínico detectado', 'Sofía no valora síntomas · deriva al cirujano · aviso urgente a Diana', 'h');
+      bot(['Siento que estés así, Andrea. Eso tiene que verlo tu cirujano: llámale hoy, por favor. Si es muy fuerte o tienes fiebre, ve a urgencias.',
+           'Aviso ahora mismo a Diana para que esté al tanto. Cuando tu cirujano te dé el visto bueno para los drenajes, aquí estamos.'], fin);
+    },
+    pienso: function () {
+      apunta('No reserva por ahora', 'entra en «pidió información y no reservó»\nmañana: mensaje del día 1 · si no reserva, aviso a Diana el día 8');
+      bot(['Claro, Andrea, es normal pensarlo. Mañana te escribo por si te surge alguna duda.',
+           'Y como tu cirugía se acerca, mejor dejarlo cerrado con tiempo. ¡Buena tarde!'], fin);
+    }
+  };
+  function cita(cuando) {
+    apunta('Valoración reservada: ' + cuando, 'en tu agenda · Raquel ya no llama', 'g');
+    apunta('Ficha para Diana', 'Andrea · ' + cirugia + ' · Barcelona\nvaloración ' + cuando + ' · vino del anuncio A (postoperatorio)', 'g');
+    apunta('Recordatorios programados', 'confirmación ahora · víspera 10:00 · 2 h antes');
+    bot(['Reservado, Andrea ✅ Te esperamos ' + cuando + ' en Consell de Cent, 325, principal primera (L\'Eixample).',
+         'La víspera te lo recuerdo por aquí. Si te surge algo, escríbeme y lo cambiamos.'], fin);
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 40; cirugia = 'cirugía por concretar';
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · domingo · Andrea acaba de hacer el test desde el anuncio A');
+    apunta('Ficha creada', 'origen: anuncio A · postoperatorio · Meta\ntest: postoperatorio · menos de 4 semanas · Barcelona');
+    apunta('Respuesta en menos de un minuto', 'aunque sea domingo y el centro esté cerrado');
+    go('inicio');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>

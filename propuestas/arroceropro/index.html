@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Plan · Arrocero Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap">
+<style>
+/* Plan para Arrocero Pro / Tu Paella en Casa (Vicente). Mismo sistema que las propuestas de Qualivo, con los colores de su marca (negro, fuego y crudo). */
+:root{--bg:#F7F3EE;--surface:#FFFFFF;--ink:#16130F;--muted:#5C534A;--line:#E3D9CD;--accent:#C2470A;--accent-ink:#FFFFFF;--tint:#FBE9DD;--warn:#9A5B00;--warn-bg:#FFF4E0;--good:#1F7A4D;--good-bg:#E5F4EB;
+  --font:"DM Sans","Segoe UI",system-ui,sans-serif;--display:"Bebas Neue","Arial Narrow",Impact,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F0D0B;--surface:#1A1714;--ink:#F5F0EB;--muted:#B9AEA2;--line:#342C25;--accent:#FF8A3D;--accent-ink:#1A0E05;--tint:#2B1B10;--warn:#F2C26B;--warn-bg:#2E2614;--good:#5FD39A;--good-bg:#12291D;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F0D0B;--surface:#1A1714;--ink:#F5F0EB;--muted:#B9AEA2;--line:#342C25;--accent:#FF8A3D;--accent-ink:#1A0E05;--tint:#2B1B10;--warn:#F2C26B;--warn-bg:#2E2614;--good:#5FD39A;--good-bg:#12291D;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);padding-inline:16px;padding-block:0 64px;overflow-x:hidden}
+.topnav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+.topnav .in{max-width:980px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topnav .who{font-family:var(--display);font-size:22px;letter-spacing:.04em;line-height:1}
+.topnav .who span{color:var(--accent)}
+.topnav nav{display:flex;gap:6px;flex-wrap:wrap}
+.topnav nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14.5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px}
+.topnav nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wrap{max-width:980px;margin-inline:auto;display:grid;gap:34px;padding-top:30px}
+.wrap > *{min-width:0}
+.tag{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,7vw,68px);line-height:.98;margin:0;letter-spacing:.005em;text-wrap:balance}
+h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0 0 4px;letter-spacing:-.005em;line-height:1.2}
+h3{font-size:17px;font-weight:800;margin:0 0 6px;line-height:1.3}
+p{margin:0}
+.sub{color:var(--muted);font-size:18px;max-width:66ch}
+.hero{display:grid;gap:16px}
+.hero-grid{display:grid;gap:20px;align-items:center}
+@media (min-width:860px){.hero-grid{grid-template-columns:1.25fr .75fr}}
+.hero img{width:100%;height:auto;border-radius:14px;display:block;aspect-ratio:4/3;object-fit:cover}
+section{display:grid;gap:14px}
+section > *{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:14px;align-items:start}
+.k{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.muted{color:var(--muted)}
+.small{font-size:14.5px}
+.ok h3{color:var(--good)}
+.ko h3{color:var(--warn)}
+.flow{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:p}
+.flow li{counter-increment:p;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.flow li > div{min-width:0}
+.flow li::before{content:counter(p);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800}
+.flow .only{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:var(--tint);color:var(--accent);margin-left:6px;vertical-align:2px}
+.who2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;margin-top:8px}
+.who2 div{font-size:14px;background:var(--bg);border-radius:8px;padding:8px 10px}
+.who2 b{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+td.c{text-align:center}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
+.tw table{min-width:640px}
+.yes{color:var(--good);font-weight:800}
+.no{color:var(--muted)}
+.price{font-weight:800;white-space:nowrap}
+.warn{background:var(--warn-bg);color:var(--ink);border-left:4px solid var(--warn);border-radius:10px;padding:13px 15px;font-size:15.5px}
+.hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
+.pick{border:2px solid var(--accent)}
+.badge{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:3px 8px;background:var(--accent);color:var(--accent-ink);margin-bottom:6px}
+.cta{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;border-radius:10px;padding:12px 16px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.ctas a.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+a{color:var(--accent)}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="in">
+    <div class="who">QUALIVO <span>×</span> ARROCERO PRO</div>
+    <nav aria-label="Presentación"><a href="./" aria-current="page">Plan</a><a href="demo/">Demo</a><a href="anuncios/">Anuncios</a><a href="landing/">Landing</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="tag">QUALIVO · PLAN PARA ARROCERO PRO · TU PAELLA EN CASA</span>
+    <div class="hero-grid">
+      <div class="hero">
+        <h1>Que ningún restaurante se quede sin respuesta, y que cada presupuesto tenga su seguimiento</h1>
+        <p class="sub">Vicente: te enseñamos el sistema completo, como pediste, y al lado la versión que tiene sentido para tu tamaño hoy. Lo afinamos en la reunión con tus números.</p>
+        <div class="ctas"><a class="cta" href="demo/">Ver la demo paso a paso</a><a class="cta ghost" href="anuncios/">Ver los anuncios</a></div>
+      </div>
+      <img src="assets/chef-vicente.webp" alt="Vicente, con chaquetilla, enseña un plato de paella en el World Paella Day" width="1080" height="810">
+    </div>
+  </div>
+
+  <section>
+    <h2>Lo que nos contaste</h2>
+    <div class="grid">
+      <div class="card"><p class="k">Qué haces</p><p>«Formación en arroces y consultoría hostelería».</p></div>
+      <div class="card"><p class="k">Equipo</p><p>De 2 a 4 personas.</p></div>
+      <div class="card"><p class="k">Volumen</p><p>Entre 20 y 49 solicitudes al mes.</p></div>
+      <div class="card"><p class="k">Inversión en captación</p><p>Menos de 500 € al mes.</p></div>
+      <div class="card"><p class="k">Ticket medio</p><p>Menos de 300 €.</p></div>
+      <div class="card"><p class="k">Lo que se te escapa</p><p>El seguimiento y los presupuestos. Decides tú y quieres resolverlo este mes.</p></div>
+    </div>
+    <p class="hyp"><b>Nuestra hipótesis, para confirmar contigo:</b> con 20-49 solicitudes al mes y un equipo pequeño que además cocina, reparte y da clase, no te faltan contactos: se contestan tarde (tus formularios prometen respuesta «en menos de 24 horas») y los presupuestos de eventos y de consultoría se quedan sin un segundo mensaje. Antes de gastar un euro más en anuncios, hay que tapar eso.</p>
+  </section>
+
+  <section>
+    <h2>Lo que hemos visto en tus dos webs</h2>
+    <p class="muted small">Hemos mirado tupaellaencasa.com y arroceropro.com el 16 de octubre, además de tu ficha en Google y a quién tienes al lado.</p>
+    <div class="two">
+      <div class="card ok">
+        <h3>Lo que funciona</h3>
+        <ul class="small">
+          <li><b>Prueba social fuerte:</b> 4,6★ en Google con más de 200 reseñas. Las opiniones hablan de puntualidad, raciones generosas y eventos de 30 a 65 personas.</li>
+          <li><b>Cursos claros y con precio:</b> Iniciación 87 €, Arrocero Pro HORECA 160 € y Arrocero Pro FULL 370 € + IVA. Grupos de 6 como máximo y reserva de 27 € por Bizum, que ya filtra a los curiosos.</li>
+          <li><b>Das la cara tú:</b> «Chef Vicente, valenciano nativo, 15 años». La foto del World Paella Day transmite oficio.</li>
+          <li><b>Lo digital ya está montado:</b> 8 cursos en vídeo a 37 € y el pack de los 8 a 207,20 € (antes 296 €) hasta el 31 de diciembre, además de caldos y sofritos con envío a España y Europa.</li>
+          <li><b>Fotos reales de alumnos</b> con su paella y su delantal de Arrocero Pro. Es lo mejor que tienes para los anuncios.</li>
+        </ul>
+      </div>
+      <div class="card ko">
+        <h3>Lo que falla</h3>
+        <ul class="small">
+          <li><b>Dos webs que no se hablan.</b> tupaellaencasa.com, que es la que tiene las reseñas y el píxel de Meta, no enlaza ni a los cursos ni a la consultoría. Quien te compra una paella no se entera de que enseñas.</li>
+          <li><b>La consultoría queda escondida.</b> arroceropro.com se presenta como «Tu Paella en Casa · Cursos de paella» y la consultoría aparece a mitad de página. Un dueño de restaurante entra y ve un curso para particulares.</li>
+          <li><b>La consultoría no tiene precio orientativo, casos de restaurantes ni fotos tuyas en cocinas de clientes.</b> La foto de esa sección parece de otro chef con alumnos (confírmanoslo). Si vendes tu oficio, tiene que salir tu cara.</li>
+          <li><b>«Te contactaremos en menos de 24 horas».</b> Un restaurante que pide ayuda el martes por la noche puede haber hablado ya con otro el miércoles.</li>
+          <li><b>Detalles que restan confianza:</b> la portada dice «2 niveles de curso» y hay tres; pone «200 familias» y también «2.000 clientes»; el horario es «Lun-Dom 10-16», pero los cursos son solo lunes y martes. Además, las reseñas que se enseñan son de paellas a domicilio, no de alumnos ni de restaurantes.</li>
+          <li><b>arroceropro.com no tiene redes ni píxel de Meta</b>, solo el seguimiento de la agencia que la hizo. Si pones un anuncio mañana, no sabrás qué anuncio te trajo a quién.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Tus anuncios</h3>
+        <p class="small">La Biblioteca de anuncios de Meta no nos ha dejado entrar de forma automática, así que <b>no lo damos por hecho: lo miramos juntos en la reunión</b>. Lo que sí hemos visto es que tupaellaencasa.com tiene el píxel de Meta y Google Analytics, y que arroceropro.com no tiene ninguno de los dos. Tampoco hemos encontrado anuncios de los cursos ni de la consultoría en Google.</p>
+      </div>
+      <div class="card">
+        <h3>Quién tienes al lado</h3>
+        <ul class="small">
+          <li><b>Krono Consulting</b> (Boadilla del Monte, Madrid): consultoría para implantar arroces y paellas en restaurantes y hoteles, con formación del personal. Hace lo mismo que Arrocero Pro y tampoco enseña precios ni casos.</li>
+          <li><b>Arrózame</b> (Kike Martí, Mallorca): asesoría, formación y showcookings para la partida de arroces. Se apoya en su título de cocina de competición y en las ferias de hostelería.</li>
+          <li><b>Escola de l'Arròs</b> (D.O. Arroz de Valencia): formación para profesionales con el sello de la D.O.</li>
+          <li><b>Para particulares y turistas</b>, Viator vende clases de 65-75 € con sangría y mercado, y Le Cordon Bleu Madrid cobra 135-150 €. Tus 87 € por 5 horas, con 6 personas como máximo, están bien. Te falta el inglés.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="hyp"><b>Nadie en tu nicho enseña casos con números.</b> El primero que diga «este bar sacaba sus paellas así y con este coste, y ahora así» se queda con la confianza del dueño de restaurante. Con uno o dos casos tuyos con permiso, Arrocero Pro se distingue de los demás.</p>
+  </section>
+
+  <section>
+    <h2>Tus negocios, de un vistazo</h2>
+    <p class="muted small">Tienes varios públicos a la vez. No se puede empujar todo con menos de 500 € al mes, así que hay que elegir.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Negocio</th><th>Para quién</th><th>Precio que vemos</th><th>Lo que pensamos</th></tr></thead>
+      <tbody>
+        <tr><td><b>Consultoría Arrocero Pro</b></td><td>Bares, restaurantes, comida para llevar y caterings</td><td>Sin publicar · primera consulta gratis</td><td><b>Lo que más deja por cliente</b> (a confirmar contigo) y lo que puede repetirse con el seguimiento continuo. <b>Recorrido principal.</b></td></tr>
+        <tr><td><b>Cursos Arrocero Pro HORECA y FULL</b></td><td>Cocineros, caterings y quien va a montar un negocio de arroces</td><td>160 € · 370 € + IVA</td><td>La puerta de entrada del profesional: quien no está para una consultoría empieza por aquí. Va en el mismo recorrido.</td></tr>
+        <tr><td>Curso de Iniciación</td><td>Particulares y turistas</td><td>87 €</td><td>Se vende bien, pero tiene techo: 2 días × 6 plazas = 12 plazas a la semana. Llenas del todo dan unos 4.000 € al mes. <b>Secundario:</b> llenar huecos, sobre todo con regalos de Navidad.</td></tr>
+        <tr><td>Cursos en vídeo, caldos y sofritos</td><td>Quien no viene a Valencia</td><td>37 € · pack 207,20 €</td><td>Mejor como siguiente paso después de un curso o una consulta que como anuncio propio.</td></tr>
+        <tr><td>Paellas a domicilio y eventos</td><td>Familias y empresas de Valencia</td><td>Sin precios en la web</td><td>Es donde están las reseñas. Fuera del plan, salvo <b>los presupuestos de eventos, que sí se siguen</b>, porque nos dijiste que se escapan.</td></tr>
+        <tr><td>Franquicia Tu Paella en Casa</td><td>Emprendedores</td><td>17.700 € + IVA, según un directorio de franquicias</td><td>¿Sigue activa? Si lo está, el curso FULL («para montar tu propio negocio de arroces») es su antesala natural. Lo hablamos.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <p class="warn"><b>Te lo decimos con franqueza.</b> Con menos de 500 € al mes en captación y un ticket medio por debajo de 300 €, el sistema completo (anuncios gestionados cada semana, agente de voz y panel con reunión semanal) probablemente es más de lo que tu negocio necesita hoy. Te lo enseñamos entero porque lo pediste, y al lado te ponemos la versión que sí nos parece proporcionada. Si en la reunión vemos que los números no salen, te lo decimos y no hace falta seguir.</p>
+
+  <section>
+    <h2>El recorrido de un restaurante, de principio a fin</h2>
+    <p class="muted small">El recorrido principal. Lo que solo está en la versión completa va marcado.</p>
+    <ol class="flow">
+      <li><div><h3>Anuncio para hostelería</h3><p>Tres mensajes distintos (el arroz que depende de quién cocine, cuánto deja cada ración y tus 15 años de oficio) para ver cuál trae dueños de restaurante de verdad. <a href="anuncios/">Ver los anuncios</a>.</p>
+        <div class="who2"><div><b>Sistema</b>Mide qué anuncio trae consultas que acaban en curso o consultoría, no solo mensajes.</div><div><b>Tú</b>Apruebas textos y fotos antes de publicar.</div></div></div></li>
+      <li><div><h3>Página de Arrocero Pro solo para hostelería</h3><p>Tu oferta real, tus fotos y cuatro preguntas: tipo de negocio, qué quiere mejorar, cuántos cocinan arroz y cuándo quiere empezar. <a href="landing/">Ver la maqueta</a>.</p>
+        <div class="who2"><div><b>Sistema</b>Guarda de qué anuncio viene cada persona y qué ha contestado.</div><div><b>Particular</b>Si marca «soy particular», le lleva a los cursos de iniciación.</div></div></div></li>
+      <li><div><h3>WhatsApp al minuto</h3><p>Amparo, la asistente de Arrocero Pro, escribe al minuto (de 8:00 a 21:30): confirma qué necesita, pregunta cuántas raciones de arroz sacan y propone la primera consulta gratis contigo.</p>
+        <div class="who2"><div><b>Agente</b>Contesta, pregunta y agenda. No da precios cerrados de consultoría.</div><div><b>Tú</b>Ves cada conversación y entras cuando quieras. Si escribes tú, ella se calla.</div></div></div></li>
+      <li><div><h3>Llamada si no contesta <span class="only">Solo completa</span></h3><p>Si a los 10-20 minutos no ha contestado al WhatsApp, Amparo le llama. Solo a quien ha dejado sus datos y ha pedido información, y de 8:00 a 21:30.</p>
+        <div class="who2"><div><b>Agente de voz</b>Dos minutos: confirma, pregunta y agenda. Si no lo coge, deja un mensaje en el buzón y le escribe por WhatsApp.</div><div><b>En la versión proporcionada</b>Te llega un aviso y le llamas tú cuando salgas de cocina.</div></div></div></li>
+      <li><div><h3>Primera consulta gratis contigo</h3><p>30 minutos por videollamada o en su local. Le llega la confirmación, un recordatorio la víspera y otro 2 horas antes. Si no se presenta, se le recupera con dos huecos nuevos.</p>
+        <div class="who2"><div><b>Tú</b>Llegas con la ficha hecha: tipo de negocio, raciones, qué quiere mejorar y de qué anuncio viene.</div><div><b>Sistema</b>Recuerda, confirma y, si falla, vuelve a proponer.</div></div></div></li>
+      <li><div><h3>Propuesta con seguimiento</h3><p>Tras la consulta, la propuesta (consultoría o curso HORECA/FULL) tiene mensajes a los 2, 5 y 10 días. Al día 11 te avisa para que llames tú.</p>
+        <div class="who2"><div><b>Agente</b>Resuelve dudas de fechas, formato y pago. No negocia precios.</div><div><b>Tú</b>Cierras.</div></div></div></li>
+      <li><div><h3>Después</h3><p>Reseña en Google y, con su permiso, una foto o un caso. Al particular que hizo Iniciación se le ofrece el pack de vídeos; al cocinero que hizo HORECA, el FULL o la consultoría para su local.</p>
+        <div class="who2"><div><b>Agente</b>Pide la reseña en el momento adecuado.</div><div><b>Tú</b>Decides qué caso se enseña.</div></div></div></li>
+    </ol>
+    <div class="two">
+      <div class="card"><h3>Recorrido secundario: particulares</h3><p class="small muted">Anuncio de regalo (Navidad) o de «tu primera paella», reserva de plaza, mensaje con el Bizum de 27 € y aviso si no paga en 24 horas, recordatorio la víspera (llegar 20 minutos antes, dirección) y, al terminar, reseña y pack de vídeos. Es todo automático y no te quita tiempo.</p></div>
+      <div class="card"><h3>Presupuestos de eventos</h3><p class="small muted">Quien pide presupuesto de paella para un evento recibe un WhatsApp al minuto que le pide fecha, personas, arroces y si necesita mobiliario. Tú mandas el precio y el sistema hace el seguimiento el día 1, el 3 y el 7, y otra vez cuando se acerca la fecha. Es justo lo que nos dijiste que se escapa.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dos versiones: la proporcionada y la completa</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Qué incluye</th><th>Proporcionada<br><span class="muted small" style="text-transform:none;letter-spacing:0">lo mínimo que te daría resultado</span></th><th>Completa<br><span class="muted small" style="text-transform:none;letter-spacing:0">todo el sistema</span></th></tr></thead>
+      <tbody>
+        <tr><td>WhatsApp que contesta al minuto (consultas, cursos y eventos)</td><td class="c yes">Sí</td><td class="c yes">Sí</td></tr>
+        <tr><td>Ficha de cada contacto, con su origen y sus respuestas</td><td class="c yes">Sí</td><td class="c yes">Sí</td></tr>
+        <tr><td>Recordatorios de curso y de consulta (confirmación, víspera y 2 h antes) y aviso del Bizum pendiente</td><td class="c yes">Sí</td><td class="c yes">Sí</td></tr>
+        <tr><td>Seguimiento de presupuestos de eventos y de propuestas de consultoría</td><td class="c yes">Sí</td><td class="c yes">Sí</td></tr>
+        <tr><td>Emails de seguimiento</td><td class="c">3 por recorrido</td><td class="c">Secuencia entera</td></tr>
+        <tr><td>Página</td><td class="c">Arreglamos arroceropro.com: sección de hostelería arriba, formulario con preguntas y píxel</td><td class="c">Landing propia de hostelería y otra de particulares</td></tr>
+        <tr><td>Anuncios</td><td class="c">Una campaña de hostelería con 3 mensajes. La montamos y te dejamos una guía</td><td class="c">Hostelería, particulares y recuerdo. Gestión cada semana y Google para búsquedas profesionales</td></tr>
+        <tr><td>Agente de voz (Amparo llama a los 10-20 min)</td><td class="c no">No: te avisa y llamas tú</td><td class="c yes">Sí</td></tr>
+        <tr><td>Panel</td><td class="c">Resumen por email cada lunes</td><td class="c">Panel diario y reunión de 30 min cada semana</td></tr>
+        <tr><td>Inversión en anuncios (se paga aparte, directamente a Meta)</td><td class="c">7-10 €/día (210-300 €/mes)</td><td class="c">15-20 €/día (450-600 €/mes)</td></tr>
+        <tr><td><b>Precio de Qualivo</b></td><td class="c price">[____] € + IVA<br><span class="muted small">pago único</span></td><td class="c price">[____] € + IVA<br><span class="muted small">implantación</span><br>+ [____] € + IVA/mes</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hyp"><b>Nuestra recomendación:</b> empezar por la proporcionada. Si en 6-8 semanas la consultoría trae restaurantes de verdad y sabemos cuánto deja cada uno, entonces tiene sentido hablar de la completa. Antes, no.</p>
+  </section>
+
+  <section>
+    <h2>La cuenta que haremos contigo</h2>
+    <div class="grid">
+      <div class="card"><p class="k">Punto de partida</p><p>20-49 solicitudes al mes, hoy contestadas «en menos de 24 horas».</p></div>
+      <div class="card"><p class="k">Si contestar al minuto y seguir cada presupuesto recupera…</p><p>2-5 ventas más al mes (cursos, eventos o consultas)</p></div>
+      <div class="card"><p class="k">…con tu ticket de menos de 300 €</p><p>serían unos 300-1.500 € más al mes.</p></div>
+    </div>
+    <p class="small muted">Son horquillas orientativas, no una promesa: las confirmamos con tus datos reales en las 3 primeras semanas. Una sola consultoría de restaurante puede cambiar esta cuenta, y por eso necesitamos saber cuánto te deja una.</p>
+  </section>
+
+  <section>
+    <h2>Lo que verías cada mañana</h2>
+    <div class="grid">
+      <div class="card"><h3>Hoy</h3><p class="small muted">Quién ha escrito, quién tiene prisa («este mes») y a quién conviene que llames tú.</p></div>
+      <div class="card"><h3>Dinero en juego</h3><p class="small muted">Presupuestos de eventos y propuestas de consultoría abiertos, en euros, y cuántos llevan más de 2 días sin respuesta.</p></div>
+      <div class="card"><h3>Plazas</h3><p class="small muted">Plazas libres del próximo lunes y martes, y reservas con el Bizum pendiente.</p></div>
+      <div class="card"><h3>Por anuncio</h3><p class="small muted">Consultas, consultas gratis celebradas, cursos y consultorías por cada anuncio, y cuánto ha costado cada una.</p></div>
+    </div>
+    <p class="small">Así se ve con datos de ejemplo de una escuela de formación: <a href="https://qualivo.io/intelligence/?sector=formacion&amp;empresa=Arrocero%20Pro&amp;objetivo=conversion" target="_blank" rel="noopener">panel de ejemplo</a>. Los cursos y las campañas que salen ahí son de ejemplo. En el tuyo saldrían Iniciación, HORECA, FULL, consultoría y eventos.</p>
+  </section>
+
+  <section>
+    <h2>Calendario: resolverlo este mes</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Cuándo</th><th>Qué</th></tr></thead>
+      <tbody>
+        <tr><td>Semana 1</td><td>Accesos (WhatsApp, formularios de las dos webs, Meta), textos de Amparo aprobados por ti y conexión de los formularios.</td></tr>
+        <tr><td>Semana 2</td><td>WhatsApp al minuto en marcha, recordatorios de curso y de consulta, y seguimiento de presupuestos de eventos.</td></tr>
+        <tr><td>Semana 3</td><td>Sección de hostelería en arroceropro.com (o landing propia), píxel y campaña de hostelería con los 3 mensajes.</td></tr>
+        <tr><td>Semana 4</td><td>Primer resumen: qué mensaje trae restaurantes, cuántas consultas gratis se celebran y qué presupuestos se han recuperado. Decidimos el siguiente paso con datos.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Lo que necesitamos de ti</h2>
+    <ul>
+      <li>El número de WhatsApp que usáis (el de «WhatsApp 24 horas») y quién lo atiende hoy.</li>
+      <li>Acceso a los formularios de las dos webs. Si los lleva Osyris Marketing Digital, hablamos con ellos para no pisarnos.</li>
+      <li>Tu agenda para las consultas gratis: días y horas en que puedes atender fuera de los cursos.</li>
+      <li>Cuánto cuesta una consultoría tipo, aunque sea una horquilla, para que Amparo pueda orientar sin dar un precio cerrado.</li>
+      <li>Uno o dos restaurantes con los que hayas trabajado y que acepten salir como caso, y fotos tuyas en esas cocinas.</li>
+      <li>Acceso a Meta como anunciante (página de Facebook e Instagram).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Lo que queremos preguntarte hoy</h2>
+    <ul>
+      <li>De las 20-49 solicitudes al mes, ¿cuántas son de restaurantes, cuántas de cursos y cuántas de eventos o paellas a domicilio?</li>
+      <li>¿Cuánto factura una consultoría tipo y cuántas has cerrado este año?</li>
+      <li>¿Qué hace hoy Osyris por ti (web, anuncios, formularios) y qué quieres mantener?</li>
+      <li>¿Trabajas solo en la Comunidad Valenciana o te desplazas? ¿Haces consultas por videollamada?</li>
+      <li>¿La franquicia sigue activa? ¿Vendes tarjetas regalo de los cursos?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cómo podemos trabajar</h2>
+    <div class="two">
+      <div class="card pick"><span class="badge">La que te recomendamos</span><h3>Lo montamos y te lo dejamos</h3><p class="small muted">La versión proporcionada: WhatsApp al minuto, recordatorios, seguimiento de presupuestos, la sección de hostelería y una campaña. Te enseñamos a usarlo y queda en casa.</p><p class="price" style="margin-top:8px">[____] € + IVA</p></div>
+      <div class="card"><h3>Lo operamos nosotros</h3><p class="small muted">La versión completa: anuncios cada semana, agente de voz, panel diario y reunión semanal. Solo cuando los números de la consultoría lo justifiquen.</p><p class="price" style="margin-top:8px">[____] € + IVA de implantación + [____] € + IVA/mes</p></div>
+    </div>
+    <p class="small muted">La publicidad se paga aparte, directamente a Meta y Google.</p>
+  </section>
+
+  <footer class="foot">
+    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+    <p>Preparado el 16 de octubre de 2026 para Vicente (Tu Paella en Casa · Arrocero Pro). Los datos de la demo son de ejemplo. Los de este plan salen de lo que nos indicaste en el formulario y de tus webs públicas.</p>
+  </footer>
+</main>
+</body>
+</html>
