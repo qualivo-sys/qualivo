@@ -109,7 +109,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .b u{color:#53BDEB}}
 .typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
 .wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px}
-.wa .body{overflow-y:auto}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
 .wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
 .wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
 .wa .opts button.restart{border-color:var(--line);color:var(--muted)}
@@ -924,6 +924,7 @@ Andrea</div></div>
     chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
     bubble('sys', 'Ejemplo · jueves 3 de diciembre');
     bubble('in', 'Gracias por quedarte hasta el final, Lucía 💛 Si quieres ver si FAN encaja con tu marca, elige aquí la hora para hablar con mi equipo: andreaacha.com/llamada');
+    chat.lastChild.querySelector('time').textContent = '21:00';
     bubble('out', '¡Hola! Me ha encantado. Una pregunta antes de reservar…');
     apunta('Ficha de Lucía', 'anuncio A · belleza y cosmética · nunca ha salido en prensa\nAsistió 58 min · se quedó a la propuesta');
     apunta('Respuesta en menos de un minuto', 'son las 21:12: dentro del horario (8:00-21:30)');

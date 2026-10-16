@@ -25,7 +25,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);pa
 .top nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .wrap{max-width:1000px;margin-inline:auto;display:grid;gap:34px;padding-top:30px}
 .wrap > *{min-width:0}
-.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;max-width:100%}
 h1,h2,h3{font-family:var(--display);text-wrap:balance}
 h1{font-size:clamp(30px,4.8vw,48px);font-weight:600;line-height:1.08;margin:12px 0 0;letter-spacing:-.015em}
 h2{font-size:clamp(22px,3vw,29px);font-weight:600;margin:0 0 4px;letter-spacing:-.005em;line-height:1.15}
@@ -33,6 +33,7 @@ h3{font-size:17.5px;font-weight:600;margin:0 0 6px;line-height:1.25}
 p{margin:0}
 .sub{color:var(--muted);font-size:18px;max-width:68ch;margin-top:12px}
 .hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:28px;align-items:end}
+.hero > *{min-width:0}
 .hero img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px}
 section{display:grid;gap:14px;scroll-margin-top:70px}
 section > header p{color:var(--muted);max-width:70ch}
@@ -97,8 +98,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .next{background:var(--ink);color:var(--bg);border-radius:18px;padding:24px;display:grid;gap:12px}
 .next h2{color:var(--bg)}
 .next a.cta{background:var(--coral);color:#2A1715}
+.next a.cta.alt{background:transparent;color:var(--bg);border:1px solid var(--bg)}
 .foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
-@media (max-width:760px){.hero{grid-template-columns:1fr}.hero img{max-width:220px;aspect-ratio:1;border-radius:50%}.grid2,.who,.calc{grid-template-columns:1fr}.big{font-size:30px}}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero > *{min-width:0}
+.hero img{width:180px;height:180px;aspect-ratio:auto;border-radius:50%}.grid2,.who,.calc{grid-template-columns:1fr}.big{font-size:30px}}
 </style>
 </head>
 <body>
@@ -371,7 +374,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var fmt = function (n) { return Math.round(n).toLocaleString('es-ES'); };
+  var fmt = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
   function calc() {
     var reg = +$('reg').value, hoy = +$('hoy').value / 100, plan = +$('plan').value / 100, ag = +$('ag').value / 100, ci = +$('ci').value / 100;
     $('o-reg').textContent = fmt(reg); $('o-hoy').textContent = Math.round(hoy * 100) + ' %'; $('o-plan').textContent = Math.round(plan * 100) + ' %';

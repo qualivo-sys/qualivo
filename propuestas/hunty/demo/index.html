@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty · demo del recorrido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Demo guiada en pestañas para Hunty: anuncios, captura y test, WhatsApp, Raquel (voz), ficha del comercial, seguimientos y panel. */
+:root{
+  --bg:#F4F7F3; --surface:#FFFFFF; --ink:#13220F; --muted:#56654F; --line:#D7E3D3;
+  --accent:#2C7C24; --good:#1F6F1A; --warn:#A35A12; --tint:#E8F5E6; --dark:#1A4A15;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --body:"DM Sans","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E160C; --surface:#152113; --ink:#EEF4EC; --muted:#A9B8A5; --line:#2A3B27;
+  --accent:#6BBF62; --good:#7FD477; --warn:#F09A63; --tint:#1B2E18; --dark:#0B1A09;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E160C; --surface:#152113; --ink:#EEF4EC; --muted:#A9B8A5; --line:#2A3B27;
+  --accent:#6BBF62; --good:#7FD477; --warn:#F09A63; --tint:#1B2E18; --dark:#0B1A09;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);overflow-x:hidden}
+.topnav{background:var(--dark);color:#fff}
+.topnav .in{max-width:1100px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topnav img{height:20px;width:auto;display:block;filter:brightness(0) invert(1)}
+.topnav .by{font-size:12.5px;opacity:.8;margin-right:auto}
+.topnav a{color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.3)}
+.topnav a[aria-current="page"]{background:#fff;color:#1A4A15;border-color:#fff}
+.wrap{max-width:1100px;margin-inline:auto;display:grid;gap:22px;padding:20px 16px 64px}
+.wrap > *{min-width:0}
+h1,h2,h3{line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,42px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,3vw,29px);font-weight:800}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:70ch;margin-top:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 0 4px;position:sticky;top:0;background:var(--bg);z-index:3}
+nav.tabs button{font:inherit;font-weight:600;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.tabs button[aria-selected="true"] span{color:#fff}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > *{min-width:0}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.adimg{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* captura */
+.capt{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.capt .row{display:flex;gap:8px;flex-wrap:wrap}
+.capt .fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--bg)}
+.capt .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;border-radius:99px;padding:9px 16px;font-size:14.5px}
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-height:480px;align-content:start}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:var(--accent);transition:width .3s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:600;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:11px 14px;cursor:pointer}
+.quiz .qopts button:hover{border-color:var(--accent)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-size:22px}
+.quiz .done p{color:var(--muted);font-size:15px}
+.grp{display:inline-block;font-weight:800;border-radius:8px;padding:4px 10px;font-size:14px}
+.grp.a{background:var(--tint);color:var(--good)}
+.grp.b{background:#FFF1D6;color:#8A5A00}
+.grp.c{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit}
+/* WhatsApp */
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px}
+.wa .top{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/76% no-repeat;display:inline-block;flex:none}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:640px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--accent);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* voz */
+.call{border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+.call .top{background:#1d2b1a;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}
+.call .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+.v{max-width:86%;padding:8px 12px;border-radius:12px;font-size:15px;line-height:1.45}
+.v small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:2px}
+.v.r{background:var(--tint);align-self:flex-start}
+.v.c{background:var(--bg);border:1px solid var(--line);align-self:flex-end}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14.5px}
+.rules b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+/* ficha */
+.ficha{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .sc{font-size:30px;font-weight:800;color:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dt{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:2px 0 0}
+.ficha .why2{padding:14px 18px;font-size:14.5px;border-bottom:1px solid var(--line)}
+.ficha .next{padding:14px 18px;background:var(--tint);font-weight:600}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:6px 0;border-bottom:1px dashed var(--line)}
+.pts td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+/* seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.seq h3{margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 14px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--warn)}
+.tl li.mail::before{background:#5B7FB8}
+.tl .w{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tl b{display:block;font-size:14px}
+.tl blockquote{margin:6px 0 0;background:var(--tint);border-radius:8px;padding:8px 10px;font-size:14px;white-space:pre-line}
+.tl li.mail blockquote{background:var(--bg);border:1px solid var(--line)}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,td.l,th.l{text-align:left}
+td.w{white-space:normal;min-width:220px}
+th{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px}
+.kpi b{font-size:28px;line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.alert{border-color:var(--warn)}
+.kpi.alert b{color:var(--warn)}
+footer{font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+footer a{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.seq,.two{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line)}.ficha .grid > div:nth-child(2n){border-right:0}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <img src="../assets/logo-white.svg" alt="Hunty" width="84" height="20">
+    <span class="by">× Qualivo · 16-oct-2026</span>
+    <a href="../">Plan</a>
+    <a href="./" aria-current="page">Demo</a>
+    <a href="../anuncios/">Anuncios</a>
+    <a href="../landing/">Landing</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Demo · Hunty · paso a paso</p>
+  <h1>Del anuncio a la reserva, y a su próxima temporada</h1>
+  <p class="lead">Así lo vivirían Javier (cazador de Madrid, dos puestos, monterías en diciembre o enero) y vuestro comercial. Los anuncios siguen llevando a la web. La diferencia está en lo que pasa cuando Javier deja su WhatsApp o escribe al asesor.</p>
+</header>
+
+<p class="note"><span class="ej">Ejemplo</span> Demo preparada por Qualivo. Las cacerías que aparecen están publicadas hoy en hunty.es. Javier, el comercial «Pablo», los mensajes y las cifras del panel son inventados. Los textos finales los aprueba Hunty. El agente no confirma plazas ni cierra precios fuera de lo publicado.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span>Captura y test</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span>Raquel (voz)</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>5</span>Ficha del comercial</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>6</span>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIOS -->
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>1 · Anuncios que filtran, y siguen yendo a la web <span class="ej">Ejemplo</span></h2><p>Tres ideas, cada una para un tipo de cazador. Las tres llevan a hunty.es, como hoy. Galería completa, con textos, públicos y plan de prueba, en <a href="../anuncios/">Anuncios</a>.</p></header>
+  <div class="cols">
+    <div><p class="cap">A · Montería con fecha y precio · feed</p><img class="adimg" src="../anuncios/img/a-feed.jpg" alt="Anuncio de monterías de diciembre y enero" loading="lazy"><div class="why"><b>Filtra por:</b> fecha (diciembre y enero), zona y rango de precio. <b>Lleva a:</b> la página de monterías con filtro de provincia y precio y el «avísame si sale».</div></div>
+    <div><p class="cap">B · Rececho de trofeo con precio · feed</p><img class="adimg" src="../anuncios/img/b-feed.jpg" alt="Anuncio de rececho de macho montés con precios" loading="lazy"><div class="why"><b>Filtra por:</b> presupuesto (3.400-5.500 €) y «para cazadores que ya saben lo que buscan». <b>Es el experimento H1:</b> la mitad del presupuesto va a la web y la otra mitad al test con respuesta al minuto.</div></div>
+    <div><p class="cap">C · «Más adelante» · story</p><img class="adimg" src="../anuncios/img/c-story.jpg" alt="Anuncio de avisos por temporada" loading="lazy" style="max-height:520px;object-fit:cover"><div class="why"><b>Separa:</b> a quien caza la temporada que viene. Deja su temporada y su WhatsApp y nunca ocupa al comercial antes de tiempo.</div></div>
+  </div>
+  <div class="navnext"><button data-go="test">Siguiente: captura y test ›</button></div>
+</section>
+
+<!-- 2 · CAPTURA Y TEST -->
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · Captura con valor dentro de la web, y un test de siete toques <span class="ej">Ejemplo</span></h2><p>Nada tapa el catálogo ni la reserva. Quien no reserva tiene tres formas de quedarse, y todas le dan algo a cambio. El test es la más completa. Pruébalo como si fueras Javier.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div class="capt"><p class="cap" style="margin:0">En cada ficha de montería</p><div class="row"><span class="fake">🔔 Avísame si sale otra en <b>Cáceres</b> por menos de <b>400 €</b></span></div><span class="btn">Avisarme por WhatsApp</span></div>
+      <div class="capt"><p class="cap" style="margin:0">En el calendario de monterías</p><div class="row"><span class="fake">Provincia ▾</span><span class="fake">Precio ▾</span><span class="fake">Fechas ▾</span></div><p class="small muted" style="font-size:14px">Filtra gratis. «Recibir cada lunes las nuevas de mi zona» pide el WhatsApp.</p></div>
+      <div><h3>Lo que no pregunta</h3><p>Ni licencia, ni armas, ni DNI. Eso llega con la reserva.</p></div>
+      <div><h3>Qué pasa al terminar</h3><p>Se crea la ficha con su puntuación y su grupo (ahora, más adelante o mirando), y sale el WhatsApp al minuto. Si es «ahora», Raquel llama a los 10-20 minutos.</p></div>
+      <div><a class="btnl" href="../landing/" target="_blank" rel="noopener">Ver la página de monterías</a></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp ›</button></div>
+</section>
+
+<!-- 3 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Al minuto, por WhatsApp <span class="ej">Ejemplo</span></h2><p>Javier pulsó «Hablar con un asesor» en una montería a las 19:14. Hoy esa conversación espera a que un comercial esté libre. Aquí contesta Lucía, la asistente, que cualifica conversando y propone cacerías reales. Elige un camino; a la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i aria-hidden="true"></i><div><b>Hunty · asesor de caza</b><small>Lucía, asistente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Lucía no confirma plazas ni da precios fuera de lo publicado. Lo confirma el comercial o la ficha de hunty.es. El comercial ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Lucía se calla con ese contacto. Mensajes automáticos solo de 8:00 a 21:30.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: Raquel ›</button></div>
+</section>
+
+<!-- 4 · VOZ -->
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>4 · Raquel, la asistente de voz <span class="ej">Ejemplo</span></h2><p>Otro caso: Javier deja su WhatsApp en «avísame» y no contesta al mensaje. Raquel llama solo a quien ha dejado su teléfono y es «ahora». Su trabajo no es vender: confirma lo básico y deja agendada la llamada con el comercial a la hora que elige el cazador. Así se acaba el «no coge el teléfono».</p></header>
+  <div class="two">
+    <div class="call">
+      <div class="top"><span><b>Llamada saliente · Raquel (Hunty)</b> → Javier M.</span><span>Martes 19:31 · 2 min 40 s · Ejemplo</span></div>
+      <div class="body">
+        <div class="v r"><small>RAQUEL</small>Hola, ¿Javier? Soy Raquel, la asistente de Hunty. Te llamo porque hace un rato pediste aviso de monterías en Extremadura y Castilla-La Mancha. ¿Te pillo bien un par de minutos?</div>
+        <div class="v c"><small>JAVIER</small>Sí, dime.</div>
+        <div class="v r"><small>RAQUEL</small>Perfecto. Para confirmar: sois dos cazadores, buscáis montería en diciembre o enero y el presupuesto ronda los 250 a 400 euros por puesto. ¿Es así?</div>
+        <div class="v c"><small>JAVIER</small>Sí. Bueno, si es muy buena podemos subir un poco.</div>
+        <div class="v r"><small>RAQUEL</small>Anotado. Te he mandado por WhatsApp dos que encajan: Río Frío, en Toledo, el 26 de diciembre, y Valmorisco, en Cáceres, el 9 de enero. ¿Has cazado antes con algún organizador?</div>
+        <div class="v c"><small>JAVIER</small>Con una sociedad de mi pueblo, nunca con organizador.</div>
+        <div class="v r"><small>RAQUEL</small>Entonces lo mejor es que te llame Pablo, del equipo de Hunty. Conoce esas fincas y te cuenta cómo es el sorteo de puestos, qué incluye y cómo funciona la reserva. ¿Te viene mejor mañana a las 10:00 o a las 19:30?</div>
+        <div class="v c"><small>JAVIER</small>A las 19:30.</div>
+        <div class="v r"><small>RAQUEL</small>Hecho: mañana miércoles a las 19:30 te llama Pablo. Te lo dejo por escrito en WhatsApp y te aviso un rato antes. Si te surge algo, contesta a ese mensaje y lo movemos. ¡Gracias, Javier!</div>
+      </div>
+    </div>
+    <div class="rules">
+      <div><b>Cuándo llama</b>Entre 10 y 20 minutos después de la captura, solo si es «ahora» y no ha contestado al WhatsApp. Si la captura entra de noche, llama a partir de las 8:00.</div>
+      <div><b>A quién</b>Solo a quien dejó su teléfono y pidió información. Nunca a listas ni a bases compradas. Se presenta como asistente de Hunty.</div>
+      <div><b>Horario</b>De 8:00 a 21:30. Dos intentos como máximo en 24 h.</div>
+      <div><b>Qué deja hecho</b>Datos confirmados (modalidad, fechas, cazadores, presupuesto, experiencia), la llamada con el comercial en la agenda y el resumen y la grabación en la ficha.</div>
+      <div><b>Si no contesta · buzón</b>«Hola, Javier, soy Raquel, de Hunty. Te llamaba por las monterías de diciembre y enero que pediste. Te escribo por WhatsApp para que elijas cuándo te llama Pablo. ¡Un saludo!»</div>
+      <div><b>Si no contesta · WhatsApp a la vez</b>«Javier, te acabo de llamar por tus monterías. Te he dejado dos opciones arriba. ¿Cuándo te viene bien que te llame Pablo, del equipo? [Mañana 10:00] [Mañana 19:30] [Escríbeme mejor]»</div>
+      <div><b>Cuándo se calla</b>Si pide no recibir llamadas, si es «más adelante» o si un comercial ya ha hablado con él.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha del comercial ›</button></div>
+</section>
+
+<!-- 5 · FICHA -->
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header><h2>5 · Lo que ve Pablo antes de llamar <span class="ej">Ejemplo</span></h2><p>Una ficha, no un nombre y un teléfono. Pablo solo recibe aviso de los A. Los B y los C los mueve el sistema hasta que suben o se apartan.</p></header>
+  <div class="two">
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Javier M. · Madrid</b><p class="muted" style="font-size:14px">Entró por: anuncio «Monterías de diciembre y enero» (A-feed) → ficha de Valmorisco → «Hablar con un asesor»</p></div><div style="text-align:right"><span class="sc">78</span><br><span class="grp a">A · ahora</span></div></div>
+      <div class="grid">
+        <div><dl><dt>Modalidad</dt><dd>Montería</dd></dl></div>
+        <div><dl><dt>Cuándo</dt><dd>Diciembre o enero</dd></dl></div>
+        <div><dl><dt>Cazadores</dt><dd>2 puestos</dd></dl></div>
+        <div><dl><dt>Presupuesto</dt><dd>250-400 € por puesto («puede subir si es muy buena»)</dd></dl></div>
+        <div><dl><dt>Zona</dt><dd>Extremadura o Castilla-La Mancha</dd></dl></div>
+        <div><dl><dt>Experiencia</dt><dd>Sociedad local; nunca con organizador</dd></dl></div>
+        <div><dl><dt>Cacerías vistas</dt><dd>Valmorisco (3 veces), Río Frío</dd></dl></div>
+        <div><dl><dt>Objeciones</dt><dd>«¿Cómo es el sorteo de puestos?» · desayuno incluido</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd>Mié 19:30 · confirmada por WhatsApp</dd></dl></div>
+      </div>
+      <div class="why2"><b>Resumen:</b> Busca su primera montería con organizador para dos. Le encaja Valmorisco (9-ene, 300 €, 4,3/5 con 4 reseñas). Le preocupa el sorteo y qué incluye. Ha mirado Prime pero no ha preguntado.</div>
+      <div class="next">Siguiente paso: llamar mié 19:30 · explicar el sorteo y lo que incluye Valmorisco · si encaja, enviar el enlace de reserva (señal de 40 € por puesto) · mencionar Prime solo si pregunta por precio.</div>
+    </div>
+    <div class="box">
+      <h3>Por qué tiene 78</h3>
+      <table class="pts" style="min-width:0">
+        <tr><td>Momento: esta temporada, a menos de 90 días</td><td>18</td></tr>
+        <tr><td>Presupuesto dentro del rango de lo publicado</td><td>20</td></tr>
+        <tr><td>2 cazadores</td><td>7</td></tr>
+        <tr><td>Nunca con organizador</td><td>3</td></tr>
+        <tr><td>Contesta en menos de 1 h y habla con Raquel</td><td>20</td></tr>
+        <tr><td>Ha visto 3 fichas de montería</td><td>7</td></tr>
+        <tr><td>Reserva empezada sin pagar</td><td>0</td></tr>
+        <tr><td><b>Total</b></td><td>75 → 78*</td></tr>
+      </table>
+      <p class="note">* +3 por la regla «vuelve a la misma ficha 3 veces en 24 h», que añadiríais vosotros. Pesos de ejemplo: los aprueba Hunty y se recalibran cada mes con las reservas reales. Arrancamos con vuestra puntuación actual y medimos las dos.</p>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos ›</button></div>
+</section>
+
+<!-- 6 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>6 · Seguimientos: nadie se queda esperando <span class="ej">Ejemplo</span></h2><p>Todos salen solos, de 8:00 a 21:30. Cualquier respuesta los para y pasa el contacto a la persona que corresponda. Cada texto lo aprobáis antes.</p></header>
+  <div class="seq">
+    <div>
+      <h3>A · «Ahora» que no contesta</h3>
+      <p>Dejó sus datos y no responde al WhatsApp ni a Raquel.</p>
+      <ol class="tl">
+        <li><span class="w">Minuto 1 · WhatsApp</span><b>Las opciones</b><blockquote>Hola, Javier. Soy Lucía, asistente de Hunty. Para diciembre y enero, en Extremadura y Castilla-La Mancha, hoy hay estas dos que encajan con lo que buscas:
+• Río Frío (Robledo del Mazo, Toledo) · 26-dic · 350 € el puesto
+• Valmorisco (Jarandilla de la Vera, Cáceres) · 9-ene · 300 € el puesto
+¿Te cuento más de alguna?</blockquote></li>
+        <li><span class="w">Minuto 10-20 · voz</span><b>Llama Raquel</b> <span class="muted" style="font-size:13px">(si no contesta: buzón y WhatsApp con dos horas a elegir)</span></li>
+        <li class="mail"><span class="w">Día 0 · email</span><b>Las cacerías por escrito</b><blockquote><span class="subj">Asunto: Javier, tus monterías de diciembre y enero</span>Hola, Javier:
+Te dejamos aquí las monterías que encajan con lo que nos pediste (2 puestos, Extremadura o Castilla-La Mancha, 250-400 €), con su ficha, sus reseñas y el enlace para reservar.
+Si prefieres que te llame alguien del equipo, contesta a este correo con una hora.
+Hunty · mismo precio que el organizador</blockquote></li>
+        <li><span class="w">Día 1 · WhatsApp</span><b>Una duda concreta</b><blockquote>Javier, una cosa que nos preguntan mucho de Valmorisco: es finca abierta, 60 puestos y sin cupo a venados y jabalíes. Desayuno y comida incluidos. ¿Quieres que te llame Pablo y te lo cuenta en 5 minutos?</blockquote></li>
+        <li class="mail"><span class="w">Día 3 · email</span><b>Prueba social</b><blockquote><span class="subj">Asunto: Lo que cuentan los que ya fueron a Valmorisco</span>Cuatro reseñas de cazadores que reservaron por Hunty, con lo bueno y lo menos bueno. Y cómo es el sorteo de puestos el día de la montería.</blockquote></li>
+        <li><span class="w">Día 5 · WhatsApp</span><b>¿Ahora o más adelante?</b><blockquote>Javier, ¿sigues buscando para diciembre-enero o lo dejamos para más adelante? Cualquiera de las dos está bien.
+[Sigo buscando] [Más adelante] [Ya lo tengo]</blockquote></li>
+        <li class="alert"><span class="w">Día 6 · aviso a Pablo</span><b>Solo si abrió el email o volvió a la web</b><blockquote>Javier M. · montería dic-ene · 2 puestos · ha vuelto 2 veces a Valmorisco sin contestar. Mejor llamada.</blockquote></li>
+        <li class="stop"><span class="w">Día 10</span><b>Pasa a «más adelante», con su temporada guardada</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>B · La llamada con el comercial</h3>
+      <p>Para que la llamada agendada ocurra.</p>
+      <ol class="tl">
+        <li><span class="w">Al agendar · WhatsApp</span><b>Confirmación</b><blockquote>Listo, Javier: mañana miércoles a las 19:30 te llama Pablo, del equipo de Hunty, por las monterías de diciembre y enero. Si te viene mal, contesta aquí y lo movemos.</blockquote></li>
+        <li class="mail"><span class="w">Al agendar · email</span><b>Con invitación de calendario</b><blockquote><span class="subj">Asunto: Mañana 19:30 · te llama Pablo (Hunty)</span>Llamada de 10 minutos para hablar de Río Frío y Valmorisco. Añádela a tu calendario.</blockquote></li>
+        <li><span class="w">Víspera, 20:00 · WhatsApp</span><b>Recordatorio</b><blockquote>Javier, mañana a las 19:30 te llama Pablo. Si quieres, mira antes la ficha de Valmorisco: [enlace]</blockquote></li>
+        <li><span class="w">2 h antes · WhatsApp</span><b>Último aviso</b><blockquote>A las 19:30 te llama Pablo desde el +34 6XX XXX XXX. ¿Sigue bien la hora? [Sí] [Mejor otro día]</blockquote></li>
+        <li class="alert"><span class="w">Si no lo coge · 5 min después</span><b>Recuperación</b><blockquote>Javier, Pablo te ha llamado y no hemos dado contigo. Sin problema. ¿Te viene mejor mañana? [10:00] [14:00] [19:30]</blockquote></li>
+        <li class="alert"><span class="w">Si falla dos veces</span><b>Pasa a WhatsApp con el comercial</b><blockquote>Pablo le escribe directamente, con la ficha delante. Sin más llamadas automáticas.</blockquote></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>C · Cacería propuesta y reserva a medias</h3>
+      <p>Para que la propuesta no se quede en el aire.</p>
+      <ol class="tl">
+        <li><span class="w">Pablo envía Valmorisco</span><b>Se arranca el seguimiento de la propuesta</b></li>
+        <li><span class="w">24 h · WhatsApp</span><b>Dudas</b><blockquote>Javier, ¿te quedó alguna duda de Valmorisco después de hablar con Pablo? Si quieres, te la resolvemos por aquí.</blockquote></li>
+        <li class="mail"><span class="w">48 h · email</span><b>Qué incluye</b><blockquote><span class="subj">Asunto: Valmorisco, 9 de enero: lo que incluye tu puesto</span>Finca, número de puestos, cupo, desayuno y comida, último resultado publicado y cómo se paga: reserva de 40 € por puesto y el resto según las condiciones del organizador.</blockquote></li>
+        <li><span class="w">Reserva empezada sin pagar · 1 h</span><b>Carrito</b><blockquote>Javier, vimos que empezaste la reserva de Valmorisco y no se completó. ¿Hubo algún problema con el pago? Te ayudamos por aquí.</blockquote></li>
+        <li class="alert"><span class="w">Día 4 · aviso a Pablo</span><b>Propuesta sin respuesta</b><blockquote>Javier M. · Valmorisco · propuesta de hace 4 días sin respuesta · abrió el email 2 veces.</blockquote></li>
+        <li class="stop"><span class="w">Reserva pagada</span><b>Se para todo y empieza D</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>D · Antes y después de la jornada</h3>
+      <p>Para que llegue a la cacería y vuelva a reservar.</p>
+      <ol class="tl">
+        <li><span class="w">Al reservar · WhatsApp + email</span><b>Confirmación</b><blockquote>¡Reservado, Javier! Valmorisco, 9 de enero, 2 puestos. El organizador te enviará la ubicación la semana de la montería.</blockquote></li>
+        <li><span class="w">7 días antes · WhatsApp</span><b>Papeles</b><blockquote>Javier, el viernes es Valmorisco. ¿Tenéis la licencia de Extremadura o la interautonómica en vigor? Si no, en Hunty la tramitamos: [licencias]</blockquote></li>
+        <li><span class="w">Víspera · WhatsApp</span><b>Recordatorio</b><blockquote>Mañana, montería en Valmorisco. ¿Os ha llegado la ubicación del organizador? Si no, dínoslo y lo movemos ahora. ¡Buena caza!</blockquote></li>
+        <li><span class="w">Día +2 · WhatsApp</span><b>Reseña</b><blockquote>Javier, ¿qué tal en Valmorisco? Si te apetece, deja tu opinión: ayuda mucho a otros cazadores. [Valorar]</blockquote></li>
+        <li class="mail"><span class="w">Día +10 · email</span><b>Siguiente temporada</b><blockquote><span class="subj">Asunto: ¿Repetimos en febrero?</span>Las monterías de febrero en tu zona, y lo que te habrías ahorrado con Prime en esta reserva.</blockquote></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>E · «Más adelante», por temporada</h3>
+      <p>Ejemplo: Luis pidió rececho de corzo «en primavera». No pasa al comercial ahora.</p>
+      <ol class="tl">
+        <li><span class="w">Hoy · WhatsApp</span><b>Guardado</b><blockquote>Perfecto, Luis. Te apunto para corzo en primavera, en Burgos o Soria. Te escribo unas semanas antes de que abra, con lo que haya publicado. Si cambias de idea, escríbeme.</blockquote></li>
+        <li><span class="w">Cuando sale algo nuevo · WhatsApp (máx. 1 a la semana)</span><b>Alerta a su perfil</b><blockquote>Luis, acaba de publicarse un rececho de corzo bronce en Lerma (Burgos), de abril a septiembre. ¿Te lo guardo para cuando hablemos? [Ver ficha]</blockquote></li>
+        <li class="mail"><span class="w">6 semanas antes · email</span><b>Reactivación</b><blockquote><span class="subj">Asunto: Luis, los recechos de corzo de abril ya están aquí</span>Los recechos de corzo de tu zona y tu presupuesto, ordenados por fecha. Los primeros se llenan antes.</blockquote></li>
+        <li><span class="w">5 semanas antes · WhatsApp</span><b>¿Hablamos?</b><blockquote>Luis, como te dije, ya están los corzos de abril. ¿Te llama alguien del equipo 10 minutos para elegir? [Sí] [Mándamelos por aquí] [Este año no]</blockquote></li>
+        <li class="stop"><span class="w">Si dice sí</span><b>Vuelve a «ahora» con su ficha completa</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>F · «Solo mirando»</h3>
+      <p>Sin fecha ni presupuesto. Contenido y nada más.</p>
+      <ol class="tl">
+        <li class="mail"><span class="w">Semanal · email</span><b>Calendario de su zona</b><blockquote><span class="subj">Asunto: Las monterías de esta semana en Castilla-La Mancha</span>Fecha, finca, puestos y precio. Sin llamadas ni WhatsApp.</blockquote></li>
+        <li class="stop"><span class="w">Si abre 3 seguidos o empieza una reserva</span><b>Sube a «ahora» y le escribe Lucía</b></li>
+      </ol>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel ›</button></div>
+</section>
+
+<!-- 7 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>7 · Lo que veríais en el daily <span class="ej">Datos de ejemplo</span></h2><p>Por comercial y por anuncio, hasta la reserva y la comisión. Cifras redondas e inventadas, no son previsiones. Ejemplo interactivo completo en <a href="https://qualivo.io/intelligence/?sector=retiros&amp;empresa=Hunty&amp;objetivo=conversion" target="_blank" rel="noopener">el panel de ejemplo</a>: lo más parecido a Hunty es el sector «marketplace de experiencias».</p></header>
+  <div class="kpis">
+    <div class="kpi"><b>3 min</b><span>mediana hasta el primer contacto humano con los A · ejemplo</span></div>
+    <div class="kpi"><b>72 %</b><span>llamadas agendadas que se presentan · ejemplo</span></div>
+    <div class="kpi alert"><b>4</b><span>A sin tocar más de 2 h · ejemplo</span></div>
+    <div class="kpi"><b>214</b><span>«más adelante» con temporada en los próximos 60 días · ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap">A quién llamar hoy · Pablo · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Cazador</th><th>Nota</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Javier M.</td><td>78 A</td><td class="l w">Llamada agendada a las 19:30 · montería dic-ene, 2 puestos</td><td class="l w">Explicar el sorteo de Valmorisco y enviar la reserva</td></tr>
+        <tr><td>Ricardo P.</td><td>81 A</td><td class="l w">Reserva empezada sin pagar hace 3 h · rececho de macho montés plata</td><td class="l w">Llamar: duda de pago o de fechas</td></tr>
+        <tr><td>Ana G.</td><td>66 B</td><td class="l w">Propuesta enviada hace 4 días · abrió el email 2 veces</td><td class="l w">WhatsApp de Pablo, no llamada</td></tr>
+        <tr><td>Tomás R.</td><td>72 A</td><td class="l w">Grupo de 5 · monterías de enero · contestó a Lucía a las 8:05</td><td class="l w">Llamar antes de las 12:00</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap">Por anuncio · 30 días · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Visitas</th><th>Reservas directas</th><th>Capturas</th><th>A+B</th><th>Reservas asesoradas</th><th>Comisión</th><th>€ comisión / € invertido</th></tr></thead>
+      <tbody>
+        <tr><td>A · Monterías dic-ene</td><td>1.200 €</td><td>4.100</td><td>14</td><td>130</td><td>58</td><td>11</td><td>1.900 €</td><td>1,6</td></tr>
+        <tr><td>B · Macho montés (web)</td><td>600 €</td><td>1.300</td><td>1</td><td>22</td><td>9</td><td>1</td><td>880 €</td><td>1,5</td></tr>
+        <tr><td>B · Macho montés (test, H1)</td><td>600 €</td><td>900</td><td>0</td><td>41</td><td>17</td><td>2</td><td>1.300 €</td><td>2,2</td></tr>
+        <tr><td>C · Avisos por temporada</td><td>400 €</td><td>1.700</td><td>2</td><td>160</td><td>12</td><td>1</td><td>350 €</td><td>0,9*</td></tr>
+        <tr><td>Recuerdo (vio ficha y no reservó)</td><td>500 €</td><td>2.300</td><td>16</td><td>40</td><td>21</td><td>4</td><td>2.200 €</td><td>4,4</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">* El de avisos se juzga por su cohorte: cuántos de esos 160 reservan cuando llega su temporada. Todos los datos son de ejemplo. En la versión real se rellena solo con cada visita, captura, llamada y reserva.</p>
+  </div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan ›</a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../">Plan</a><a class="btnl" href="../anuncios/">Anuncios</a><a class="btnl" href="../landing/">Landing</a><a class="btnl" href="https://qualivo.io/intelligence/?sector=retiros&amp;empresa=Hunty&amp;objetivo=conversion" target="_blank" rel="noopener">Panel de ejemplo</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Demo preparada el 16 de octubre de 2026 para Hunty. No es una página de Hunty. Cacerías y precios tomados de hunty.es ese día; personas, mensajes y cifras de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncios', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncios';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Test de 7 toques
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué modalidad buscas?', ['Montería', 'Rececho', 'Espera', 'Caza menor', 'Internacional']],
+    ['¿Qué especie te interesa más?', ['Jabalí y ciervo', 'Macho montés o cabra', 'Corzo', 'Gamo o muflón', 'Me da igual']],
+    ['¿Cuándo quieres cazar?', ['En los próximos 30 días', 'Esta temporada', 'La próxima temporada', 'Solo estoy mirando']],
+    ['Presupuesto por cazador', ['Menos de 300 €', '300-800 €', '800-2.500 €', 'Más de 2.500 €']],
+    ['¿Cuántos vais?', ['Solo yo', '2', '3-5', 'Más de 5']],
+    ['¿Dónde?', ['Extremadura o Castilla-La Mancha', 'Andalucía', 'Castilla y León o norte', 'Fuera de España', 'Donde mejor esté']],
+    ['¿Has cazado antes con un organizador?', ['Sí, con Hunty', 'Sí, con otros', 'Nunca']]
+  ];
+  var resp = [];
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+  function grupo() {
+    var c = resp[2];
+    if (c === 'Solo estoy mirando') return ['c', 'Solo mirando', 'Recibe el calendario de su zona por email. Sin llamadas.'];
+    if (c === 'La próxima temporada') return ['b', 'Más adelante', 'Se guarda la temporada. Aviso unas 6 semanas antes y alertas de cacerías nuevas a su perfil. No pasa al comercial.'];
+    var pts = (c === 'En los próximos 30 días' ? 25 : 18) + ({ 'Solo yo': 4, '2': 7, '3-5': 10, 'Más de 5': 10 }[resp[4]] || 0) + ({ 'Sí, con Hunty': 10, 'Sí, con otros': 7, 'Nunca': 3 }[resp[6]] || 0) + (resp[3] === 'Menos de 300 €' && resp[0] === 'Rececho' ? 0 : 20);
+    return pts >= 45 ? ['a', 'Ahora · ' + pts + ' puntos antes de conversar', 'WhatsApp al minuto con 2-3 cacerías que encajan y llamada de Raquel a los 10-20 min para agendar con el comercial.'] : ['b', 'Ahora, con dudas · ' + pts + ' puntos', 'WhatsApp al minuto. El comercial entra si contesta o si vuelve a la web.'];
+  }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · ' + Math.min(n + 1, Q.length) + ' de ' + Q.length);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / Q.length * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n >= Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var g = grupo(), d = el('div', 'done');
+      d.appendChild(el('b', 't', 'Te escribimos por WhatsApp en un minuto'));
+      d.appendChild(el('p', null, 'En la versión real aquí se piden el nombre y el WhatsApp, con consentimiento. Tus respuestas: ' + resp.join(' · ') + '.'));
+      var gp = el('p'); var sp = el('span', 'grp ' + g[0], g[1]); gp.appendChild(sp); d.appendChild(gp);
+      d.appendChild(el('p', null, g[2]));
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)'; r.addEventListener('click', function () { resp = []; paso(0); });
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 14;
+  function hora() { minuto++; return '19:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls; d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { N[c[1]](); }, reduce ? 0 : 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var N = {
+    inicio: function () {
+      bot(['¡Hola, Javier! Soy Lucía, asistente de Hunty. Veo que estabas mirando la montería de Valmorisco.', '¿Qué buscas?'],
+        function () { choices([['Montería para diciembre o enero', 'm1'], ['Es para más adelante', 'luego'], ['¿Prime merece la pena?', 'prime']]); });
+    },
+    m1: function () {
+      apunta('Modalidad: montería · dic-ene', 'momento: esta temporada (+18)', 'g');
+      bot(['Buena época. Para afinar: ¿cuántos vais y por qué zona os movéis?'],
+        function () { choices([['2, Extremadura o Castilla-La Mancha', 'm2'], ['Grupo de 5, donde sea', 'm2g']]); });
+    },
+    m2g: function () { apunta('Grupo de 5 · cualquier zona', 'cazadores: +10 · prioridad alta', 'g'); N.m2(); },
+    m2: function () {
+      apunta('Cazadores y zona guardados', 'se escriben en la ficha');
+      bot(['¿Y qué presupuesto por puesto tenéis en la cabeza, más o menos?'],
+        function () { choices([['250-400 €', 'm3'], ['Hasta 600 €', 'm3'], ['Lo que cueste si merece la pena', 'm3']]); });
+    },
+    m3: function () {
+      apunta('Presupuesto dentro del rango publicado', '+20 · puntuación provisional 70 → A', 'g');
+      bot(['Con eso, hoy hay dos publicadas en esas fechas:',
+           '• Río Frío · Robledo del Mazo (Toledo) · sábado 26-dic · 350 € el puesto (reserva 35 €)\n• Valmorisco · Jarandilla de la Vera (Cáceres) · 9-ene · 300 € el puesto (reserva 40 €) · 4,3/5 en 4 reseñas',
+           'Si podéis en febrero, también está La Dehesa (Cuenca) el 19-feb por 200 €.',
+           '¿Quieres que te llame Pablo, del equipo, y te cuenta cómo son? Conoce las dos fincas.'],
+        function () { choices([['Sí, mañana a las 19:30', 'cita'], ['Mejor por aquí', 'aqui'], ['Me lo pienso', 'piensa']]); });
+    },
+    cita: function () {
+      apunta('Llamada agendada: mié 19:30 con Pablo', 'en su agenda · recordatorios: víspera y 2 h antes', 'g');
+      apunta('Aviso a Pablo', 'Javier M. · A 78 · montería dic-ene · 2 puestos · 250-400 €\nVio Valmorisco 3 veces · anuncio A-feed', 'g');
+      bot(['Hecho: mañana miércoles a las 19:30 te llama Pablo. Te aviso un rato antes por aquí.', 'Mientras, te dejo la ficha de Valmorisco por si quieres ver las reseñas: hunty.es/monterias/…'], fin);
+    },
+    aqui: function () {
+      apunta('Prefiere WhatsApp', 'Pablo entra en la conversación con la ficha delante', 'h');
+      bot(['Claro. Le paso tu conversación a Pablo y te escribe él por aquí en un rato, con lo que te he contado.'], fin);
+    },
+    piensa: function () {
+      apunta('«Me lo pienso»', 'sigue el recorrido A: email hoy, WhatsApp día 1, 3 y 5', 'h');
+      bot(['Sin problema, Javier. Te mando las dos por email para que las veas con calma. Si alguna se llena, te aviso.'], fin);
+    },
+    luego: function () {
+      apunta('Camino: más adelante', 'no pasa al comercial', 'h');
+      bot(['Perfecto. ¿Para qué temporada y qué te gustaría cazar?'],
+        function () { choices([['Corzo en primavera', 'l2'], ['Berrea del año que viene', 'l3']]); });
+    },
+    l2: function () { N.lfin('corzo · abril', 'febrero'); },
+    l3: function () { N.lfin('berrea · septiembre', 'julio'); },
+    lfin: function (t, m) {
+      apunta('Guardado: ' + t, 'aviso a principios de ' + m + ' · alertas de cacerías nuevas a su perfil (máx. 1/semana)', 'g');
+      bot(['Apuntado: ' + t + '. Te escribo a principios de ' + m + ' con lo que haya publicado, antes de que se llene.', 'Y si sale algo muy bueno antes, te aviso. Para dejar de recibirlo, basta con decírmelo.'], fin);
+    },
+    prime: function () {
+      apunta('Pregunta por Prime', 'interés en precio · se anota', 'h');
+      bot(['Prime cuesta 150 € al año. Tienes precio Prime en cada jornada (en Valmorisco, 280 € en vez de 300 €), sorteos exclusivos y descuentos en licencias y tienda.',
+           'Si vas a reservar dos o más jornadas al año, suele compensar. ¿Te ayudo a buscar la montería primero?'],
+        function () { choices([['Sí, para diciembre o enero', 'm1'], ['Ahora no', 'piensa']]); });
+    }
+  };
+  function start() {
+    started = true; minuto = 14; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Javier pulsa «Hablar con un asesor» en la ficha de Valmorisco');
+    apunta('Ficha creada', 'origen: anuncio A-feed → Valmorisco → WhatsApp del asesor');
+    apunta('Respuesta en menos de 1 minuto', 'de 8:00 a 21:30');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
