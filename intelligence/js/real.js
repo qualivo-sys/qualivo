@@ -123,7 +123,7 @@
 
   document.addEventListener('click', function (e) {
     const b = e.target.closest && e.target.closest('[data-real]');
-    if (!b || !(QV.estado.cfg && QV.estado.cfg.real)) return; // en la demo lo simula acciones-demo.js
+    if (!b || !(QV.estado.cfg && QV.estado.cfg.real) || QV.estado.cfg.cuenta) return; // en la demo lo simula acciones-demo.js; las cuentas de clientes son de solo lectura
     e.preventDefault(); e.stopPropagation();
     const accion = b.getAttribute('data-real'), id = b.getAttribute('data-id');
     const box = cajaDe(b);
@@ -214,7 +214,7 @@
     const est = QV.estado;
     const c = (est.contactos || []).filter(function (x) { return x.id === contactId; })[0];
     const etapa = (est.cfg.columnasCrm || []).filter(function (x) { return x.id === etapaId; })[0];
-    if (!c || !etapa || c.etapaId === etapaId) return;
+    if (est.cfg.cuenta || !c || !etapa || c.etapaId === etapaId) return;
     const antes = { etapaId: c.etapaId, etapaTxt: c.etapaTxt };
     c.etapaId = etapaId; c.etapaTxt = etapa.txt;
     QV.pintarTodo();

@@ -135,10 +135,16 @@
   }
 
   function recalcular() { M.evaluarTodos(estado); }
+  // Modo real: Qualivo (real.js) o la cuenta privada de un cliente (QV.cuentas, p. ej. real-nuria.js)
+  function realDe() {
+    const c = estado.cfg;
+    if (!c || !c.real) return null;
+    return c.cuenta ? (QV.cuentas || {})[c.cuenta] || null : QV.real || null;
+  }
   QV.guardarUrl = function () { guardarUrl(); };
 
   function guardarUrl() {
-    if (estado.cfg.real) { try { history.replaceState(null, '', '?sector=qualivo&modo=real'); } catch (e) { /* nada */ } return; }
+    if (estado.cfg.real) { try { history.replaceState(null, '', estado.cfg.cuenta ? '?cuenta=' + estado.cfg.cuenta : '?sector=qualivo&modo=real'); } catch (e) { /* nada */ } return; }
     const p = new URLSearchParams();
     p.set('sector', estado.sectorId);
     if (estado.empresa) p.set('empresa', estado.empresa);
@@ -320,7 +326,8 @@
   function pintarNav() {
     const nAt = atencion().length;
     const nSen = estado.contactos.reduce(function (a, c) { return a + c.x.senales.filter(function (s) { return s.humano; }).length; }, 0);
-    $('#nav').innerHTML = (estado.cfg.vistasExtra || []).concat(VISTAS).map(function (v) {
+    const ocultas = estado.cfg.vistasOcultas || [];
+    $('#nav').innerHTML = (estado.cfg.vistasExtra || []).concat(VISTAS.filter(function (v) { return ocultas.indexOf(v.id) < 0; })).map(function (v) {
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
@@ -336,7 +343,7 @@
     $('#reloj').innerHTML = '<i></i>' + M.hora(estado.ahora);
     $('#selSector').innerHTML = SECTORES.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
     if (QV.demo) QV.demo.pintarBotones();
-    if (estado.cfg.real && QV.real) QV.real.pintarBarra();
+    if (realDe()) realDe().pintarBarra();
   }
   function pintarTodo() {
     pintarNav();
@@ -392,6 +399,7 @@
   }
   // Modo real: generar mensaje, agente de WhatsApp y llamada de Raquel (real.js hace el resto)
   function accionesRealHtml(c) {
+    if (estado.cfg.cuenta) return ''; // cuentas de clientes: solo lectura
     return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
       '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
       '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div class="accion-real-caja"></div></div>';
@@ -405,10 +413,10 @@
       return '<div class="columna" data-etapa-crm="' + esc(id) + '"><h4><span>' + esc(txt) + '</span><span class="gris-2">' + cs.length + '</span></h4>' +
         (nota ? '<p class="gris" style="font-size:11px;margin:-4px 0 8px">' + esc(nota) + '</p>' : '') +
         cs.map(function (c) {
-          return '<div class="chipc" draggable="true" data-mover="' + c.id + '" data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
+          return '<div class="chipc"' + (estado.cfg.cuenta ? '' : ' draggable="true" data-mover="' + c.id + '"') + ' data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
         }).join('') + '</div>';
     };
-    return col('', 'Sin trato en el CRM', sin, 'Arrástralo a una etapa para crearle el trato') +
+    return (estado.cfg.cuenta ? '' : col('', 'Sin trato en el CRM', sin, 'Arrástralo a una etapa para crearle el trato')) +
       etapas.map(function (e) { return col(e.id, e.txt, estado.contactos.filter(function (c) { return c.etapaId === e.id; })); }).join('');
   }
 
@@ -597,7 +605,7 @@
       if (sel) {
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
-            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? 'Agente de WhatsApp' : m.de === 'v' ? 'Agente de voz' : 'Equipo';
+            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : 'Equipo';
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
@@ -637,7 +645,7 @@
         '<div class="rejilla r-2"><div class="tarjeta"><h3>Últimos 30 días <span class="sub">% que pasa de la etapa anterior</span></h3><div class="embudo" style="margin-top:12px">' + filas + '</div></div>' +
         '<div class="tarjeta"><h3>Fugas, de mayor a menor</h3><div class="tabla-caja" style="margin-top:10px;border:0"><table class="tabla"><thead><tr><th>Fuga</th><th class="num">Hoy</th><th class="num">Bien hecho</th><th class="num">Al mes</th></tr></thead><tbody>' + tablaFugas + '</tbody></table></div>' +
         (peor ? '<p class="gris" style="font-size:12.5px;margin-top:10px">La mayor: <b style="color:var(--tinta)">' + esc((nombres[peor.a.id] || {}).exp || '') + '</b>.</p>' : '') + '</div></div>' +
-        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">' + (cfg.columnasCrm && cfg.columnasCrm.length ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa en GHL</span>' : 'Hoy en el sistema, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa</span>') + '</p><div class="columnas columnas-crm">' + cols + '</div>');
+        (cfg.sinColumnas ? '' : '<p class="pregunta-guia" style="margin:20px 0 8px">' + (cfg.cuenta ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· las etapas se cambian en GHL</span>' : cfg.columnasCrm && cfg.columnasCrm.length ? 'Hoy en el CRM, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa en GHL</span>' : 'Hoy en el sistema, por etapa <span class="gris" style="text-transform:none;letter-spacing:0;font-weight:500">· arrastra una tarjeta para moverla de etapa</span>') + '</p><div class="columnas columnas-crm">' + cols + '</div>');
     },
 
     senales: function () {
@@ -753,7 +761,7 @@
       '<div class="ficha-cuerpo">' +
         '<div><p class="bloque-t">Inteligencia</p>' + scoresHtml(x) + '</div>' +
         '<div><p class="bloque-t">Por qué</p><div class="porque-caja">' + esc(x.porque) + '</div></div>' +
-        '<div><p class="bloque-t">Lo que respondió en el formulario</p>' + (estado.cfg.real ? '<div class="form-real tarjeta" data-form-real="' + c.id + '"><p class="gris" style="font-size:13px">Cargando…</p></div>' : formularioDemoHtml(c)) + '</div>' +
+        '<div><p class="bloque-t">Lo que respondió en el formulario</p>' + (estado.cfg.cuenta ? '<div class="form-real tarjeta"><p class="gris" style="font-size:13px">Se inscribió con nombre, correo y móvil. Origen: ' + esc(c.rol.split(' · ')[0]) + '.</p></div>' : estado.cfg.real ? '<div class="form-real tarjeta" data-form-real="' + c.id + '"><p class="gris" style="font-size:13px">Cargando…</p></div>' : formularioDemoHtml(c)) + '</div>' +
         '<div><p class="bloque-t">Siguiente mejor acción</p><div class="nba-caja' + (nba.tipo === 'humano' ? ' humano' : '') + '"><h3>' + ico(icoAccion(nba.tipo)) + esc(nba.accion) + '</h3><p>' + esc(nba.por) + '</p>' +
           '<div class="pie"><span class="estado-ag ' + (nba.estado === 'humano' || nba.estado === 'escalado' ? 'humano' : nba.estado) + '"><i></i>' + esc(nba.quien) + ' · ' + esc(M.ESTADOS[nba.estado]) + '</span><span style="flex:1"></span>' +
           '<button class="btn btn-mini" type="button" data-reunion="' + c.id + '">Preparar la reunión</button>' +
@@ -842,7 +850,7 @@
   });
   $('#btnReiniciar').innerHTML = ico('reinicio');
   $('#btnReiniciar').addEventListener('click', function () {
-    if (estado.cfg && estado.cfg.real && QV.real) { QV.real.recargar(); return; }
+    if (realDe()) { realDe().recargar(); return; }
     iniciar({ sector: estado.sectorId, objetivo: estado.objetivo, empresa: estado.empresa, historia: estado.historia }).then(function () { aviso('Demo reiniciada', 'reinicio'); });
   });
   $('#btnCopilotMovil').innerHTML = ico('chat');
@@ -858,6 +866,8 @@
     const p = new URLSearchParams(location.search);
     const sector = p.get('sector');
     if (sector === 'qualivo' && p.get('modo') === 'real' && QV.real) { QV.real.arrancar(); return; }
+    const cuenta = p.get('cuenta');
+    if (cuenta && QV.cuentas && QV.cuentas[cuenta]) { QV.cuentas[cuenta].arrancar(); return; }
     if (sector && SECTORES.some(function (s) { return s.id === sector; })) {
       iniciar({ sector: sector, empresa: p.get('empresa') || '', objetivo: p.get('objetivo') || 'todo', historia: p.get('historia') || '', vista: p.get('vista') || 'resumen' })
         .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar(); })
