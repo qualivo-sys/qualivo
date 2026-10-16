@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Mapa de Fugas Comerciales · Qualivo</title>
+<meta name="description" content="Sabes cuánto gastas en captar clientes. No sabes cuánto se te escapa después. Diagnóstico de 45 minutos: te enseñamos dónde se va el dinero entre el contacto y el contrato, y montamos el sistema que lo tapa.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --qv-navy-900: #0B1C33;
+  --qv-navy-800: #0F2540;
+  --qv-navy-700: #132B4C;
+  --qv-navy-600: #1B3A66;
+  --qv-teal-700: #1F9E94;
+  --qv-teal-600: #27BDB1;
+  --qv-teal-500: #3CCEC2;
+  --qv-teal-100: #E3F8F6;
+  --qv-yellow-700: #D9B420;
+  --qv-yellow-600: #F4CC38;
+  --qv-yellow-300: #FBE896;
+  --qv-ink-900: #111827;
+  --qv-ink-700: #374151;
+  --qv-ink-500: #6B7280;
+  --qv-ink-400: #9CA3AF;
+  --qv-line-200: #E5E7EB;
+  --qv-surface-50: #F7F8FA;
+  --qv-danger: #D94A3D;
+  --qv-font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --qv-font-body: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --qv-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --qv-ease: cubic-bezier(.2,.7,.2,1);
+  --qv-dur: 200ms;
+  --wrap: 1180px;
+  --gutter: 32px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+  margin: 0;
+  font-family: var(--qv-font-body);
+  color: var(--qv-ink-900);
+  background: #fff;
+  font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+a.cta-link { text-decoration: none; }
+img { max-width: 100%; }
+
+/* ---------- KICKER / LABELS ---------- */
+.kicker {
+  font-family: var(--qv-font-mono);
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--qv-teal-600); font-weight: 700;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.kicker::before { content: ""; width: 26px; height: 2px; background: var(--qv-teal-600); display: inline-block; }
+.dark .kicker { color: var(--qv-teal-500); }
+
+/* ---------- BTN ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--qv-yellow-600); color: var(--qv-navy-900);
+  padding: 20px 34px; border-radius: 999px;
+  font-family: var(--qv-font-display); font-weight: 800;
+  font-size: 17px; letter-spacing: -0.005em;
+  text-decoration: none;
+  transition: transform var(--qv-dur) var(--qv-ease), background var(--qv-dur), box-shadow var(--qv-dur);
+  box-shadow: 0 20px 50px rgba(244,204,56,0.3);
+  border: none; cursor: pointer;
+}
+.btn:hover { transform: translateY(-2px); background: #fff; }
+.btn .arr { transition: transform var(--qv-dur); font-weight: 900; }
+.btn:hover .arr { transform: translateX(4px); }
+.btn.sm { font-size: 14px; padding: 12px 22px; box-shadow: none; }
+.btn.ghost {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.25); box-shadow: none;
+}
+.btn.ghost:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.light .btn.ghost { color: var(--qv-navy-900); border-color: var(--qv-line-200); }
+
+/* ---------- NAV ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11,28,51,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav .brand { display: flex; align-items: center; gap: 14px; color: #fff; text-decoration: none; }
+.nav .brand .logo {
+  font-family: var(--qv-font-display); font-weight: 900; font-size: 19px; letter-spacing: -0.02em;
+}
+.nav .brand .logo em { color: var(--qv-teal-500); font-style: normal; }
+.nav .brand .pill {
+  font-family: var(--qv-font-mono); font-weight: 700;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--qv-teal-500); border: 1px solid rgba(60,206,194,0.4);
+  border-radius: 999px; padding: 4px 10px;
+}
+.nav-links { display: flex; gap: 26px; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 600;
+  transition: color var(--qv-dur);
+}
+.nav-links a:hover { color: #fff; }
+@media (max-width: 900px) { .nav-links a:not(.btn) { display: none; } }
+
+/* ---------- HERO ---------- */
+.hero {
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(39,189,177,0.18), transparent 60%),
+    radial-gradient(700px 400px at 0% 110%, rgba(244,204,56,0.10), transparent 60%),
+    var(--qv-navy-900);
+  color: #fff; padding: 110px 0 90px;
+}
+.hero h1 {
+  font-family: var(--qv-font-display); font-weight: 900;
+  font-size: clamp(38px, 5.6vw, 64px); line-height: 1.06; letter-spacing: -0.025em;
+  margin: 26px 0 24px; max-width: 900px;
+}
+.hero h1 .hl { color: var(--qv-yellow-600); }
+.hero p.lede {
+  font-size: 19px; line-height: 1.65; color: rgba(255,255,255,0.78);
+  max-width: 680px; margin: 0 0 38px;
+}
+.hero .ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.hero .micro {
+  margin-top: 22px; font-size: 14px; color: rgba(255,255,255,0.55);
+  display: flex; align-items: center; gap: 8px;
+}
+.hero .micro::before { content: "✓"; color: var(--qv-teal-500); font-weight: 900; }
+
+/* ---------- LOGOS ---------- */
+.logos { background: var(--qv-navy-800); color: #fff; padding: 34px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.logos .label {
+  text-align: center; font-family: var(--qv-font-mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 20px;
+}
+.marquee { overflow: hidden; position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.marquee-track { display: flex; gap: 56px; width: max-content; animation: scroll 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span {
+  font-family: var(--qv-font-display); font-weight: 700; font-size: 16px;
+  color: rgba(255,255,255,0.55); white-space: nowrap;
+}
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* ---------- SECTIONS ---------- */
+section { padding: 96px 0; }
+.sec-head { max-width: 780px; margin-bottom: 56px; }
+.sec-head h2 {
+  font-family: var(--qv-font-display); font-weight: 900;
+  font-size: clamp(28px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -0.02em;
+  margin: 18px 0 18px;
+}
+.sec-head p { font-size: 17px; color: var(--qv-ink-500); line-height: 1.7; margin: 0; }
+.dark { background: var(--qv-navy-900); color: #fff; }
+.dark .sec-head p { color: rgba(255,255,255,0.7); }
+.soft { background: var(--qv-surface-50); }
+
+/* ---------- MAPA: 7 TRAMOS ---------- */
+.tramos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.tramo {
+  background: #fff; border: 1px solid var(--qv-line-200); border-radius: 22px;
+  padding: 28px; position: relative;
+  transition: transform var(--qv-dur) var(--qv-ease), box-shadow var(--qv-dur);
+}
+.tramo:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(11,28,51,0.08); }
+.tramo .num {
+  font-family: var(--qv-font-mono); font-weight: 700; font-size: 13px;
+  letter-spacing: 0.16em; color: var(--qv-teal-700);
+  display: inline-block; background: var(--qv-teal-100);
+  border-radius: 999px; padding: 6px 14px; margin-bottom: 16px;
+}
+.tramo h3 { font-family: var(--qv-font-display); font-weight: 800; font-size: 19px; margin: 0 0 10px; letter-spacing: -0.01em; }
+.tramo p { margin: 0; font-size: 15px; color: var(--qv-ink-500); line-height: 1.65; }
+.tramo.leak { border-color: rgba(217,74,61,0.35); background: linear-gradient(160deg, rgba(217,74,61,0.05), #fff 55%); }
+.tramo.leak .num { background: rgba(217,74,61,0.1); color: var(--qv-danger); }
+.tramo .tag {
+  position: absolute; top: 24px; right: 24px;
+  font-family: var(--qv-font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--qv-danger); font-weight: 700;
+}
+
+/* ---------- CALCULADORA ---------- */
+.calc {
+  background: var(--qv-navy-800); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px; padding: 46px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 860px) { .calc { grid-template-columns: 1fr; padding: 30px; } }
+.calc .controls label {
+  display: block; font-weight: 700; font-size: 15px; margin: 26px 0 10px; color: rgba(255,255,255,0.85);
+}
+.calc .controls label:first-child { margin-top: 0; }
+.calc .val {
+  font-family: var(--qv-font-mono); font-weight: 700; font-size: 22px; color: var(--qv-teal-500);
+  margin-left: 10px;
+}
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+  background: rgba(255,255,255,0.15); outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--qv-yellow-600); cursor: pointer; border: 4px solid var(--qv-navy-800);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--qv-yellow-600); cursor: pointer; border: 4px solid var(--qv-navy-800);
+}
+.calc .result { text-align: center; }
+.calc .result .lead-line { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 10px; }
+.calc .result .big {
+  font-family: var(--qv-font-display); font-weight: 900; font-size: clamp(48px, 6vw, 72px);
+  letter-spacing: -0.03em; color: var(--qv-yellow-600); line-height: 1;
+}
+.calc .result .sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-top: 14px; line-height: 1.6; }
+.calc .result .sub strong { color: #fff; }
+.calc .chips { display: flex; gap: 12px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
+.calc .chip {
+  font-family: var(--qv-font-mono); font-size: 12.5px; font-weight: 700;
+  background: rgba(217,74,61,0.14); color: #ff9a90;
+  border: 1px solid rgba(217,74,61,0.35); border-radius: 999px; padding: 8px 16px;
+}
+.calc-note { max-width: 720px; margin: 26px auto 0; text-align: center; font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.calc-cta { text-align: center; margin-top: 36px; }
+
+/* ---------- CASO TONI ---------- */
+.caso { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 860px) { .caso { grid-template-columns: 1fr; } }
+.caso h2 {
+  font-family: var(--qv-font-display); font-weight: 900;
+  font-size: clamp(26px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 18px 0 20px;
+}
+.caso p { color: var(--qv-ink-700); font-size: 16.5px; line-height: 1.75; }
+.caso .punch { font-weight: 800; color: var(--qv-ink-900); }
+.diagnostico {
+  background: var(--qv-navy-900); color: #fff; border-radius: 24px; padding: 34px;
+  box-shadow: 0 30px 80px rgba(11,28,51,0.25);
+}
+.diagnostico .head {
+  font-family: var(--qv-font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 14px; margin-bottom: 20px; display: flex; justify-content: space-between;
+}
+.diagnostico .head .dot { color: var(--qv-danger); }
+.diagnostico .fuga {
+  display: inline-block; font-family: var(--qv-font-mono); font-weight: 700; font-size: 13px;
+  background: rgba(217,74,61,0.16); color: #ff9a90; border: 1px solid rgba(217,74,61,0.4);
+  border-radius: 999px; padding: 7px 16px; margin-bottom: 16px;
+}
+.diagnostico p { color: rgba(255,255,255,0.75); font-size: 15px; line-height: 1.7; margin: 0; }
+
+/* ---------- RESULTADOS ---------- */
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.res {
+  background: #fff; border: 1px solid var(--qv-line-200); border-radius: 22px; padding: 34px;
+  transition: transform var(--qv-dur) var(--qv-ease), box-shadow var(--qv-dur);
+}
+.res:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(11,28,51,0.08); }
+.res .metric {
+  font-family: var(--qv-font-display); font-weight: 900; font-size: 46px; letter-spacing: -0.03em;
+  color: var(--qv-teal-700); line-height: 1;
+}
+.res .metric-label { font-family: var(--qv-font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--qv-ink-400); margin: 10px 0 18px; }
+.res p { font-size: 15.5px; color: var(--qv-ink-700); line-height: 1.65; margin: 0 0 18px; }
+.res .who { font-weight: 800; font-size: 14.5px; }
+.res .who span { display: block; font-weight: 500; color: var(--qv-ink-500); font-size: 13px; margin-top: 2px; }
+.fine { font-size: 13px; color: var(--qv-ink-400); margin-top: 26px; }
+
+/* ---------- FASES ---------- */
+.fases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; counter-reset: fase; }
+.fase {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 22px; padding: 32px;
+}
+.fase .fnum {
+  font-family: var(--qv-font-mono); font-weight: 700; font-size: 12px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--qv-yellow-600); margin-bottom: 14px;
+}
+.fase h3 { font-family: var(--qv-font-display); font-weight: 800; font-size: 20px; margin: 0 0 12px; }
+.fase p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.7; margin: 0; }
+.fases-note { margin-top: 30px; font-size: 14.5px; color: rgba(255,255,255,0.55); text-align: center; }
+.fases-note strong { color: rgba(255,255,255,0.85); }
+
+/* ---------- GARANTÍAS ---------- */
+.garantias { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .garantias { grid-template-columns: 1fr; } }
+.gar {
+  border-radius: 22px; padding: 36px; background: #fff; border: 1px solid var(--qv-line-200);
+}
+.gar .icon { font-size: 28px; margin-bottom: 14px; }
+.gar h3 { font-family: var(--qv-font-display); font-weight: 800; font-size: 21px; margin: 0 0 12px; letter-spacing: -0.01em; }
+.gar p { color: var(--qv-ink-500); font-size: 15.5px; line-height: 1.7; margin: 0; }
+.gar strong { color: var(--qv-ink-900); }
+.gar-close { text-align: center; margin-top: 34px; font-size: 16.5px; color: var(--qv-ink-700); }
+.gar-close strong { color: var(--qv-ink-900); }
+
+/* ---------- ENCAJE ---------- */
+.fit { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .fit { grid-template-columns: 1fr; } }
+.fit-col { border-radius: 22px; padding: 34px; }
+.fit-col.yes { background: var(--qv-teal-100); border: 1px solid rgba(31,158,148,0.25); }
+.fit-col.no { background: #fff; border: 1px solid rgba(217,74,61,0.3); }
+.fit-col h3 { font-family: var(--qv-font-display); font-weight: 800; font-size: 19px; margin: 0 0 20px; }
+.fit-col ul { list-style: none; margin: 0; padding: 0; }
+.fit-col li { display: flex; gap: 12px; font-size: 15.5px; line-height: 1.6; color: var(--qv-ink-700); margin-bottom: 14px; }
+.fit-col li .m { font-weight: 900; flex-shrink: 0; }
+.fit-col.yes li .m { color: var(--qv-teal-700); }
+.fit-col.no li .m { color: var(--qv-danger); }
+.fit-note { margin-top: 28px; font-size: 14.5px; color: var(--qv-ink-500); text-align: center; }
+
+/* ---------- AUDITORÍA + BIO ---------- */
+.audit { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+@media (max-width: 900px) { .audit { grid-template-columns: 1fr; } }
+.audit .bullets { list-style: none; margin: 28px 0 0; padding: 0; }
+.audit .bullets li { display: flex; gap: 12px; margin-bottom: 14px; font-size: 16px; color: rgba(255,255,255,0.8); }
+.audit .bullets li::before { content: "→"; color: var(--qv-yellow-600); font-weight: 900; flex-shrink: 0; }
+.bio {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px; padding: 34px;
+}
+.bio .name { font-family: var(--qv-font-display); font-weight: 900; font-size: 21px; }
+.bio .role { font-family: var(--qv-font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--qv-teal-500); margin: 6px 0 18px; }
+.bio p { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.7; }
+.bio ul { list-style: none; margin: 18px 0 0; padding: 0; }
+.bio li { display: flex; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,0.72); margin-bottom: 10px; }
+.bio li::before { content: "✓"; color: var(--qv-teal-500); font-weight: 900; }
+
+/* ---------- FORM ---------- */
+.form-card {
+  background: #fff; border-radius: 24px; padding: 44px;
+  max-width: 660px; margin: 0 auto; color: var(--qv-ink-900);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+}
+@media (max-width: 640px) { .form-card { padding: 28px; } }
+.form-card h3 { font-family: var(--qv-font-display); font-weight: 900; font-size: 24px; margin: 0 0 8px; letter-spacing: -0.015em; }
+.form-card .sub { color: var(--qv-ink-500); font-size: 14.5px; margin: 0 0 28px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.field input, .field select {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--qv-line-200);
+  font-family: var(--qv-font-body); font-size: 15px; background: var(--qv-surface-50);
+  transition: border-color var(--qv-dur); color: var(--qv-ink-900);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--qv-teal-600); background: #fff; }
+.field textarea {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--qv-line-200);
+  font-family: var(--qv-font-body); font-size: 15px; background: var(--qv-surface-50);
+  transition: border-color var(--qv-dur); color: var(--qv-ink-900); resize: vertical;
+}
+.field textarea:focus { outline: none; border-color: var(--qv-teal-600); background: #fff; }
+.field .hint { font-size: 12.5px; color: var(--qv-ink-400); margin: -4px 0 8px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--qv-ink-500); margin: 6px 0 10px; cursor: pointer; }
+.check input { margin-top: 3px; accent-color: var(--qv-teal-600); flex-shrink: 0; }
+.check a { color: var(--qv-teal-700); }
+.form-card .btn { width: 100%; justify-content: center; margin-top: 10px; }
+.form-card .after { text-align: center; font-size: 13px; color: var(--qv-ink-400); margin-top: 16px; }
+
+/* ---------- FOOTER ---------- */
+footer { background: var(--qv-navy-900); color: rgba(255,255,255,0.6); padding: 64px 0 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+.foot-grid .logo { font-family: var(--qv-font-display); font-weight: 900; font-size: 20px; color: #fff; margin-bottom: 12px; }
+.foot-grid .logo em { color: var(--qv-teal-500); font-style: normal; }
+.foot-grid p { font-size: 14px; line-height: 1.7; max-width: 320px; }
+.foot-grid h4 { font-family: var(--qv-font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin: 0 0 16px; }
+.foot-grid a { display: block; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 14px; margin-bottom: 10px; }
+.foot-grid a:hover { color: #fff; }
+.foot-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 26px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 13px;
+}
+.foot-bottom .legal { display: flex; gap: 22px; }
+.foot-bottom .legal a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.foot-bottom .legal a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="logo">QUALI<em>VO</em></span>
+      <span class="pill">Sistemas comerciales</span>
+    </a>
+    <div class="nav-links">
+      <a href="#mapa">El Mapa</a>
+      <a href="#calculadora">La cuenta</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#encaje">¿Encajas?</a>
+      <a class="btn sm cta-link" href="#solicitar">Solicitar diagnóstico <span class="arr">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="kicker">Qualivo · Sistemas comerciales</span>
+    <h1>Sabes cuánto gastas en captar clientes.<br><span class="hl">No sabes cuánto se te escapa después.</span></h1>
+    <p class="lede">Cada mes te entran leads: de ads, de portales, de referencias. Y una parte se pierde por el camino. Nadie contesta a tiempo. Nadie hace seguimiento. Nadie lo mide. Te enseñamos exactamente dónde se te va el dinero. Y montamos el sistema que lo tapa.</p>
+    <div class="ctas">
+      <a class="btn" href="#solicitar">Solicitar diagnóstico comercial <span class="arr">→</span></a>
+      <a class="btn ghost" href="#mapa">Ver el Mapa de Fugas ↓</a>
+    </div>
+    <p class="micro">45 minutos sobre tus números. Sales con tu Mapa de Fugas, trabajes con nosotros o no.</p>
+  </div>
+</header>
+
+<!-- ============ LOGOS ============ -->
+<div class="logos">
+  <div class="wrap">
+    <div class="label">Sistemas montados para marcas que ya captan clientes</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>Femxa</span><span>Nuria Roure</span><span>Escuela de Nuevos Negocios</span><span>Emprende Aprendiendo</span><span>Formación Ninja</span><span>Ciencia Interior</span><span>Growth Hacking Course</span><span>Pro Trading Skills</span><span>The Hit</span><span>Miquel Baixas</span><span>Judit Català</span>
+        <span>Femxa</span><span>Nuria Roure</span><span>Escuela de Nuevos Negocios</span><span>Emprende Aprendiendo</span><span>Formación Ninja</span><span>Ciencia Interior</span><span>Growth Hacking Course</span><span>Pro Trading Skills</span><span>The Hit</span><span>Miquel Baixas</span><span>Judit Català</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 01 · EL MAPA ============ -->
+<section class="soft" id="mapa">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">01 · El Mapa de Fugas Comerciales</span>
+      <h2>Cuando bajan las ventas, todos miran al anuncio. Y el agujero casi nunca está ahí.</h2>
+      <p>Se cambia el creativo. Se despide a la agencia. Se sube el presupuesto. Mientras tanto, el dinero se sigue perdiendo en el tramo que nadie mira: desde que alguien levanta la mano hasta que firma. Son siete puntos. <strong>Nadie tiene los siete bien.</strong> Casi siempre hay dos o tres rotos, y uno que no te esperas.</p>
+    </div>
+    <div class="tramos">
+      <div class="tramo">
+        <span class="num">01 · CAPTACIÓN</span>
+        <h3>Pagas leads que nunca llegan a existir</h3>
+        <p>Formularios que fallan, integraciones caídas, canales sin vigilar. El clic lo pagaste. El lead no lo viste nunca.</p>
+      </div>
+      <div class="tramo">
+        <span class="num">02 · LATENCIA</span>
+        <h3>El lead entra caliente. Y se enfría esperándote.</h3>
+        <p>Cada hora sin respuesta es una reunión menos. El que contesta primero se lo lleva.</p>
+      </div>
+      <div class="tramo">
+        <span class="num">03 · CUALIFICACIÓN</span>
+        <h3>Tu comercial pierde sus mejores horas con curiosos</h3>
+        <p>El que puede comprar y el que solo mira reciben el mismo trato. Adivina quién paga esas horas.</p>
+      </div>
+      <div class="tramo">
+        <span class="num">04 · ENRUTAMIENTO</span>
+        <h3>Leads huérfanos que no llama nadie</h3>
+        <p>Si un lead no es de nadie, nadie lo persigue. Desaparece sin que nadie lo haya decidido.</p>
+      </div>
+      <div class="tramo leak">
+        <span class="num">05 · SEGUIMIENTO</span>
+        <span class="tag">● aquí está el dinero</span>
+        <h3>El "más adelante" muere archivado como un "no"</h3>
+        <p>Aquí está la mayor parte del dinero que ya pagaste y todavía no has cobrado.</p>
+      </div>
+      <div class="tramo">
+        <span class="num">06 · CONVERSIÓN</span>
+        <h3>Reuniones que se improvisan</h3>
+        <p>Cerrar diez puntos por debajo de tu sector cuesta más que cualquier campaña que puedas pausar.</p>
+      </div>
+      <div class="tramo">
+        <span class="num">07 · MEDICIÓN</span>
+        <h3>Sabes qué campaña gasta. No cuál vende.</h3>
+        <p>Sin ese dato, cada decisión de presupuesto es una apuesta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · CALCULADORA ============ -->
+<section class="dark" id="calculadora">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">02 · La cuenta que nadie hace</span>
+      <h2>¿Cuánto te cuesta contestar tarde?</h2>
+      <p>Mueve los dos controles. La cifra es tuya, no nuestra. Y ojo: esto es solo una fuga de las siete.</p>
+    </div>
+    <div class="calc">
+      <div class="controls">
+        <label>Leads que recibes al mes <span class="val" id="leadsVal">50</span></label>
+        <input type="range" id="leads" min="10" max="500" step="5" value="50">
+        <label>Lo que vale un cliente <span class="val" id="valueVal">400&nbsp;€</span></label>
+        <input type="range" id="value" min="100" max="5000" step="50" value="400">
+      </div>
+      <div class="result">
+        <div class="lead-line">Se te está yendo cada mes</div>
+        <div class="big" id="lost">1.600&nbsp;€</div>
+        <p class="sub">en ventas que <strong>ya habías pagado</strong> con tu captación</p>
+        <div class="chips">
+          <span class="chip" id="cooled">20 leads enfriados</span>
+          <span class="chip" id="sales">4 ventas perdidas</span>
+        </div>
+      </div>
+    </div>
+    <p class="calc-note">Estimación conservadora: en torno al 40&nbsp;% de los leads se enfrían cuando la respuesta tarda horas, y una de cada cinco de esas conversaciones habría acabado en venta. En el diagnóstico sustituimos esta estimación por tus datos reales.</p>
+    <div class="calc-cta"><a class="btn" href="#solicitar">Quiero el mapa de mi empresa <span class="arr">→</span></a></div>
+  </div>
+</section>
+
+<!-- ============ 03 · CASO TONI ============ -->
+<section>
+  <div class="wrap caso">
+    <div>
+      <span class="kicker">03 · Prueba · nosotros mismos</span>
+      <h2>Nos hicimos el diagnóstico a nosotros mismos. Y salió mal.</h2>
+      <p>Toni nos escribió un martes. Su mensaje se quedó en una bandeja que ese día no miraba nadie. Cuando le contestamos, ya había firmado con otro.</p>
+      <p><span class="punch">Nos dedicamos a esto. Y no lo vimos hasta que lo auditamos.</span></p>
+      <p class="punch">Si nos pasa a nosotros, te está pasando a ti. Solo que tú todavía no sabes por dónde.</p>
+    </div>
+    <div class="diagnostico">
+      <div class="head"><span>Diagnóstico del caso</span><span class="dot">● fuga detectada</span></div>
+      <span class="fuga">Fuga nº1 · Captación</span>
+      <p>Un lead pagado que nunca llegó a existir dentro del sistema. Sin registro no hay alerta, sin alerta no hay llamada, y sin llamada no hay nada que optimizar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · RESULTADOS ============ -->
+<section class="soft" id="resultados">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">04 · Resultados</span>
+      <h2>Esto no es teoría. Son números de clientes.</h2>
+      <p>Mismo método, sectores distintos: encontrar la fuga, cerrarla, medir.</p>
+    </div>
+    <div class="results">
+      <div class="res">
+        <div class="metric">8,3x</div>
+        <div class="metric-label">retorno sobre la inversión</div>
+        <p>30.000&nbsp;€ facturados en tres meses con 3.600&nbsp;€ de inversión publicitaria.</p>
+        <div class="who">BelloVinilo <span>Revestimientos acústicos</span></div>
+      </div>
+      <div class="res">
+        <div class="metric">8,6x</div>
+        <div class="metric-label">retorno sobre la inversión</div>
+        <p>12.900&nbsp;€ facturados con 1.500&nbsp;€ de inversión publicitaria.</p>
+        <div class="who">Nuria Roure <span>Formación contra el insomnio</span></div>
+      </div>
+      <div class="res">
+        <div class="metric">14 días</div>
+        <div class="metric-label">hasta las primeras ventas</div>
+        <p>1.690&nbsp;€ en ventas cerradas durante las dos primeras semanas del sistema.</p>
+        <div class="who">Eleva Academy <span>Escuela de formación de manicura</span></div>
+      </div>
+    </div>
+    <p class="fine">Cifras aportadas por cada cliente sobre el periodo indicado. El desglose lo enseño en la llamada.</p>
+  </div>
+</section>
+
+<!-- ============ 05 · CÓMO TRABAJAMOS ============ -->
+<section class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">05 · Cómo trabajamos</span>
+      <h2>Primero diagnóstico. Después sistema. Nunca al revés.</h2>
+    </div>
+    <div class="fases">
+      <div class="fase">
+        <div class="fnum">Fase 1</div>
+        <h3>Diagnóstico comercial</h3>
+        <p>Repasamos los siete tramos con tus datos: qué entra por cada canal, cuánto tardáis en contestar, qué pasa con los "más adelante". Sales con tu Mapa de Fugas priorizado por dinero perdido, no por facilidad de arreglo.</p>
+      </div>
+      <div class="fase">
+        <div class="fnum">Fase 2</div>
+        <h3>Implantación · HackTheLead</h3>
+        <p>Catorce días para construir el sistema sobre tu CRM y tus canales: captura unificada, primer contacto automático, cualificación previa a la llamada, seguimiento y agenda. Tú no instalas nada.</p>
+      </div>
+      <div class="fase">
+        <div class="fnum">Fase 3</div>
+        <h3>Optimización</h3>
+        <p>Informe semanal con tres números: leads entrados, tiempo hasta el primer contacto y reuniones agendadas. Cuando algo se rompe, lo vemos antes que tú.</p>
+      </div>
+    </div>
+    <p class="fases-note"><strong>No hacemos más marketing. Hacemos que tu marketing y tus ventas funcionen mejor.</strong> Tus campañas las sigue gestionando quien las gestiona hoy.</p>
+  </div>
+</section>
+
+<!-- ============ 06 · GARANTÍAS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">06 · Garantía</span>
+      <h2>El riesgo lo asumimos nosotros. Los dos.</h2>
+    </div>
+    <div class="garantias">
+      <div class="gar">
+        <div class="icon">⚡</div>
+        <h3>Sistema funcionando en 14 días</h3>
+        <p>Si el día 15 tu sistema no está captando y cualificando leads, <strong>te devolvemos el 100&nbsp;%</strong>. Sin letra pequeña.</p>
+      </div>
+      <div class="gar">
+        <div class="icon">📅</div>
+        <h3>Citas cualificadas en 30 días</h3>
+        <p>Si con leads entrando cada mes no agendas tus primeras citas cualificadas en 30 días, <strong>seguimos trabajando gratis</strong> hasta que las tengas.</p>
+      </div>
+    </div>
+    <p class="gar-close"><strong>Tú solo pierdes si nosotros no entregamos.</strong> Por eso solo trabajamos con negocios a los que ya les llegan oportunidades todos los meses.</p>
+  </div>
+</section>
+
+<!-- ============ 07 · ENCAJE ============ -->
+<section class="soft" id="encaje">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">07 · Encaje</span>
+      <h2>Trabajo con pocas empresas a la vez. Y no con cualquiera.</h2>
+      <p>Lee esto antes de pedir el diagnóstico. Te ahorro el tiempo a los dos.</p>
+    </div>
+    <div class="fit">
+      <div class="fit-col yes">
+        <h3>✅ Encaja si…</h3>
+        <ul>
+          <li><span class="m">✓</span>Te llegan oportunidades todos los meses: publicidad, portales, referencias o llamadas.</li>
+          <li><span class="m">✓</span>Vendes servicios o formación con una llamada de por medio.</li>
+          <li><span class="m">✓</span>Facturas medio millón o más: un negocio con recorrido, no una idea por validar.</li>
+          <li><span class="m">✓</span>Inviertes en marketing y ventas, pero has perdido visibilidad de qué funciona.</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <h3>❌ No encaja si…</h3>
+        <ul>
+          <li><span class="m">×</span>Todavía no te llega demanda de forma regular: primero necesitas demanda, no un sistema.</li>
+          <li><span class="m">×</span>Vendes ecommerce puro sin contacto comercial.</li>
+          <li><span class="m">×</span>Buscas que gestionemos tus campañas.</li>
+          <li><span class="m">×</span>Quieres resultados sin cambiar cómo trabaja tu equipo.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fit-note">Hoy trabajamos sobre todo con formación y servicios profesionales. Construcción y clínicas responden al mismo patrón: lead que entra, comercial que llama.</p>
+  </div>
+</section>
+
+<!-- ============ 08 · AUDITORÍA + FORM ============ -->
+<section class="dark" id="solicitar">
+  <div class="wrap">
+    <div class="audit">
+      <div>
+        <span class="kicker">08 · Diagnóstico comercial</span>
+        <h2 style="font-family:var(--qv-font-display);font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.12;letter-spacing:-0.02em;margin:18px 0;">45 minutos mirando dónde se te cae el dinero.</h2>
+        <p style="color:rgba(255,255,255,0.72);font-size:17px;line-height:1.7;">Repasamos tus siete tramos con tus datos delante. Sales con tu Mapa de Fugas y una cifra al lado de cada fuga: lo que te está costando cada mes.</p>
+        <ul class="bullets">
+          <li>Solo para negocios a los que ya les llegan oportunidades cada mes.</li>
+          <li>Sin presentación de agencia ni propuesta de 40 páginas.</li>
+          <li>Si no te puedo ayudar, te lo digo en el minuto 10.</li>
+        </ul>
+        <div class="bio" style="margin-top:36px;">
+          <div class="name">Maikel Echevarría</div>
+          <div class="role">Fundador de Qualivo</div>
+          <p>El diagnóstico lo hago yo, y la parte técnica del sistema (CRM, automatizaciones, agente de WhatsApp) la monto y la gestiono yo. No se subcontrata.</p>
+          <ul>
+            <li>+10 años en agencias y +40 proyectos de captación implementados</li>
+            <li>Especializado en funnels, CRM, automatización y Meta Ads</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+<!-- Mapeo GHL (location: campos ya creados por API):
+     nombre_cargo -> contact.name + "QV - Cargo" (Z3a1TzbBAmSJjZxC9jwd)
+     empresa_web  -> contact.companyName / website
+     facturacion  -> "QV - Facturación anual" (4xAHatu7HkiKNVHD14Jp)
+     captacion    -> "QV - Quién lleva la captación" (d6w0ucuobdTXfj7K9vdD)
+     hipotesis    -> "QV - Hipótesis del problema" (Mw37t6A0k0vJuu5CvPa0) -->
+        <form class="form-card" id="auditForm" method="post" action="#">
+          <h3>Solicitar diagnóstico</h3>
+          <div class="field">
+            <label for="f-nombre">Nombre y cargo</label>
+            <input id="f-nombre" name="nombre_cargo" type="text" placeholder="Ana Ruiz · Directora general" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email de trabajo</label>
+            <input id="f-email" name="email" type="email" placeholder="ana@tuempresa.com" required>
+          </div>
+          <div class="field">
+            <label for="f-empresa">Empresa y web</label>
+            <input id="f-empresa" name="empresa_web" type="text" placeholder="Tu Empresa · tuempresa.com" required>
+          </div>
+          <div class="field">
+            <label for="f-facturacion">Facturación anual aproximada</label>
+            <select id="f-facturacion" name="facturacion" required>
+              <option value="" disabled selected>Elige un rango</option>
+              <option>Menos de 500.000 €</option>
+              <option>500.000 € - 1 M€</option>
+              <option>1 - 3 M€</option>
+              <option>Más de 3 M€</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-captacion">¿Quién lleva actualmente la captación?</label>
+            <select id="f-captacion" name="captacion" required>
+              <option value="" disabled selected>Elige una opción</option>
+              <option>Yo mismo (fundador/dirección)</option>
+              <option>Equipo interno de marketing</option>
+              <option>Agencia externa</option>
+              <option>Freelancers</option>
+              <option>Una mezcla de varios</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-hipotesis">¿Dónde crees que está el principal problema?</label>
+            <p class="hint">Tu hipótesis en una frase. Es lo que más nos interesa leer.</p>
+            <textarea id="f-hipotesis" name="hipotesis" rows="3" placeholder="Creo que el problema está en…" required></textarea>
+          </div>
+          <label class="check">
+            <input type="checkbox" name="privacidad" required>
+            <span>He leído y acepto la <a href="#">política de privacidad</a>. Usaremos estos datos solo para responder a tu solicitud.</span>
+          </label>
+          <button class="btn" type="submit">Solicitar diagnóstico <span class="arr">→</span></button>
+          <p class="after">Después podrás elegir una hora. Respondemos en menos de 24&nbsp;horas.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  Hueco reservado · NO PUBLICAR TODAVÍA
+  Aquí irá la descarga del Mapa de Fugas en PDF. Va deliberadamente al final:
+  si sube en la página, le roba clics al diagnóstico.
+  Activar cuando arranque el re-enganche de septiembre (gancho para los contactos de vacaciones).
+-->
+<section id="pdf" style="display:none;">
+  <div class="wrap" style="text-align:center;max-width:560px;">
+    <span class="kicker">El Mapa de Fugas · PDF</span>
+    <h2 style="font-family:var(--qv-font-display);font-weight:900;font-size:30px;">Llévate el Mapa de Fugas en PDF</h2>
+    <form>
+      <input type="email" placeholder="tu@empresa.com" style="padding:14px 16px;border-radius:12px;border:1.5px solid var(--qv-line-200);width:60%;">
+      <button class="btn sm" type="submit">Descargar</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">QUALI<em>VO</em></div>
+        <p>Detectamos qué falla en tu sistema de captación y ventas, priorizamos qué arreglar primero, y lo implementamos.</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <a href="#mapa">El Mapa de Fugas</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#solicitar">Diagnóstico comercial</a>
+      </div>
+      <div>
+        <h4>Ecosistema</h4>
+        <a href="#">Maikel Echevarría</a>
+        <a href="#">HackTheLead</a>
+        <a href="#">Hack the Prompt</a>
+        <a href="#">Agentome</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Qualivo · España</span>
+      <span class="legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var leads = document.getElementById('leads');
+  var value = document.getElementById('value');
+  var fmt = function (n) { return n.toLocaleString('es-ES'); };
+  function update() {
+    var l = parseInt(leads.value, 10);
+    var v = parseInt(value.value, 10);
+    var cooled = Math.round(l * 0.4);
+    var sales = Math.round(cooled / 5);
+    var lost = sales * v;
+    document.getElementById('leadsVal').textContent = fmt(l);
+    document.getElementById('valueVal').textContent = fmt(v) + ' €';
+    document.getElementById('lost').textContent = fmt(lost) + ' €';
+    document.getElementById('cooled').textContent = fmt(cooled) + ' leads enfriados';
+    document.getElementById('sales').textContent = fmt(sales) + ' ventas perdidas';
+  }
+  leads.addEventListener('input', update);
+  value.addEventListener('input', update);
+  update();
+
+  // Placeholder hasta conectar con GHL: evita el envío en vacío.
+  document.getElementById('auditForm').addEventListener('submit', function (e) {
+    if (this.action.slice(-1) === '#' || this.action === window.location.href + '#') {
+      e.preventDefault();
+      alert('Formulario de demo: conectar con GoHighLevel antes de publicar.');
+    }
+  });
+})();
+</script>
+</body>
+</html>

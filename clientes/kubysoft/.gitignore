@@ -1,0 +1,6 @@
+datos/
+*.json
+*.csv
+*.xlsx
+.apify_key
+.smartlead_key

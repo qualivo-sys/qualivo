@@ -1,0 +1,92 @@
+[
+ {
+  "nombre": "David",
+  "apellidos": "Martinez Perez",
+  "email": "d.martinez@clinicasw.com",
+  "empresa": "Clínicas W",
+  "cargo": "Responsable de Growth Marketing y Automatización",
+  "ciudad": "Valencia",
+  "dominio": "clinicasw.com",
+  "linkedin": "http://www.linkedin.com/in/david-martinez"
+ },
+ {
+  "nombre": "Manuel",
+  "apellidos": "De Bethencourt Bohorquez",
+  "email": "mdb@grupo-ohi.com",
+  "empresa": "OHI - Odontología Hospitalaria Integral",
+  "cargo": "CEO",
+  "ciudad": "Madrid",
+  "dominio": "grupo-ohi.com",
+  "linkedin": "http://www.linkedin.com/in/manueldebethencourtbohorquez"
+ },
+ {
+  "nombre": "Elena",
+  "apellidos": "Criado Camara",
+  "email": "elena@wikendsmile.com",
+  "empresa": "Wikend Smile®",
+  "cargo": "Co Founder & Chief Medical Officer",
+  "ciudad": "Madrid",
+  "dominio": "wikendsmile.com",
+  "linkedin": "http://www.linkedin.com/in/elenacriadocamara"
+ },
+ {
+  "nombre": "Carlos",
+  "apellidos": "Dolz Peris",
+  "email": "carlos@talentclinics.com",
+  "empresa": "Talent Clinics",
+  "cargo": "Co-founder",
+  "ciudad": "Valencia",
+  "dominio": "talentclinics.com",
+  "linkedin": "http://www.linkedin.com/in/carlos-dolz-peris-5645a4170"
+ },
+ {
+  "nombre": "Carlos",
+  "apellidos": "Aparicio",
+  "email": "carlos.aparicio@zagacenters.com",
+  "empresa": "ZAGA Centers, Experts in Zygomatic Implants",
+  "cargo": "Co-Founder",
+  "ciudad": "Barcelona",
+  "dominio": "zagacenters.com",
+  "linkedin": "http://www.linkedin.com/in/draparicio"
+ },
+ {
+  "nombre": "Alejandra",
+  "apellidos": "Saavedra Herranz",
+  "email": "alejandra@zaldent.com",
+  "empresa": "Clínicas Zaldent - Dr. Fernández de Córdoba",
+  "cargo": "Director General",
+  "ciudad": "Madrid",
+  "dominio": "zaldent.com",
+  "linkedin": "http://www.linkedin.com/in/alejandrasaavedraherranz"
+ },
+ {
+  "nombre": "Rafael",
+  "apellidos": "Vicente Polo",
+  "email": "rafael.vicente@dentalios.es",
+  "empresa": "Dentalios",
+  "cargo": "Director de Clínica",
+  "ciudad": "Valladolid",
+  "dominio": "dentalios.es",
+  "linkedin": "http://www.linkedin.com/in/rafael-vicente-polo-aa6711131"
+ },
+ {
+  "nombre": "Tula",
+  "apellidos": "Crooke",
+  "email": "tula@crooke.net",
+  "empresa": "Crooke Dental Clinics",
+  "cargo": "International Business Director",
+  "ciudad": null,
+  "dominio": "crooke.net",
+  "linkedin": "http://www.linkedin.com/in/tula-crooke"
+ },
+ {
+  "nombre": "Alfonso",
+  "apellidos": "Moreno Sanchez",
+  "email": "alfonso@clinicadentalbocaboca.com",
+  "empresa": "Bocaboca Clínicas Dentales",
+  "cargo": "Director Área Médica",
+  "ciudad": "Mijas",
+  "dominio": "clinicadentalbocaboca.com",
+  "linkedin": "http://www.linkedin.com/in/alfonso-moreno-s%c3%a1nchez-221a355b"
+ }
+]
