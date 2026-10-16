@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/deck.css">
 <style>
-/* Demo guiada en pestañas para Hunty: anuncios, captura y test, WhatsApp, Raquel (voz), ficha del comercial, seguimientos y panel. */
+/* Demo guiada en pestañas para Hunty: anuncios, captura y test, WhatsApp, Álvaro (voz), ficha del comercial, seguimientos y panel. */
 :root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--body:var(--sans)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
 :root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
@@ -222,7 +222,7 @@ footer p b{color:var(--ink)}
   <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
   <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Captura y test</button>
   <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
-  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Raquel (voz)</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Álvaro (voz)</button>
   <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha del comercial</button>
   <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
   <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
@@ -248,7 +248,7 @@ footer p b{color:var(--ink)}
       <div class="capt"><p class="cap" style="margin:0">En cada ficha de montería</p><div class="row"><span class="fake">🔔 Avísame si sale otra en <b>Cáceres</b> por menos de <b>400 €</b></span></div><span class="btn">Avisarme por WhatsApp</span></div>
       <div class="capt"><p class="cap" style="margin:0">En el calendario de monterías</p><div class="row"><span class="fake">Provincia ▾</span><span class="fake">Precio ▾</span><span class="fake">Fechas ▾</span></div><p class="small muted" style="font-size:14px">Filtra gratis. «Recibir cada lunes las nuevas de mi zona» pide el WhatsApp.</p></div>
       <div><h3>Lo que no pregunta</h3><p>Ni licencia, ni armas, ni DNI. Eso llega con la reserva.</p></div>
-      <div><h3>Qué pasa al terminar</h3><p>Se crea la ficha con su puntuación y su grupo (ahora, más adelante o mirando), y sale el WhatsApp al minuto. Si es «ahora», Raquel llama a los 10-20 minutos.</p></div>
+      <div><h3>Qué pasa al terminar</h3><p>Se crea la ficha con su puntuación y su grupo (ahora, más adelante o mirando), y sale el WhatsApp al minuto. Si es «ahora», Álvaro llama a los 10-20 minutos.</p></div>
       <div><a class="btnl" href="../landing/" target="_blank" rel="noopener">Ver la página de monterías</a></div>
     </div>
   </div>
@@ -272,30 +272,30 @@ footer p b{color:var(--ink)}
     </div>
   </div>
   <p class="note">Lucía no confirma plazas ni da precios fuera de lo publicado. Lo confirma el comercial o la ficha de hunty.es. El comercial ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Lucía se calla con ese contacto. Mensajes automáticos solo de 8:00 a 21:30.</p>
-  <div class="navnext"><button data-go="voz">Siguiente: Raquel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+  <div class="navnext"><button data-go="voz">Siguiente: Álvaro <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
 <!-- 4 · VOZ -->
 <section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
-  <header><h2>4 · Raquel, la asistente de voz <span class="ej">Ejemplo</span></h2><p>Otro caso: Javier deja su WhatsApp en «avísame» y no contesta al mensaje. Raquel llama solo a quien ha dejado su teléfono y es «ahora». Su trabajo no es vender: confirma lo básico y deja agendada la llamada con el comercial a la hora que elige el cazador. Así se acaba el «no coge el teléfono».</p></header>
+  <header><h2>4 · Álvaro, el asistente de voz <span class="ej">Ejemplo</span></h2><p>Otro caso: Javier deja su WhatsApp en «avísame» y no contesta al mensaje. Álvaro llama solo a quien ha dejado su teléfono y es «ahora». Su trabajo no es vender: confirma lo básico y deja agendada la llamada con el comercial a la hora que elige el cazador. Así se acaba el «no coge el teléfono».</p></header>
   <div class="audio-demo" style="margin:14px 0 18px;padding:14px 16px;border-radius:14px;background:rgba(19,143,143,.08);border:1px solid rgba(19,143,143,.25)">
-    <p style="margin:0 0 8px;font-weight:700">&#9654; Escucha la llamada <span style="font-weight:400;opacity:.75">· Raquel llama a Javier · 1 min 22 s · voz generada con la misma tecnología que usa el agente</span></p>
-    <audio controls preload="none" src="../assets/llamada-raquel.mp3" style="width:100%"></audio>
+    <p style="margin:0 0 8px;font-weight:700">&#9654; Escucha la llamada <span style="font-weight:400;opacity:.75">· Álvaro llama a Javier · 1 min 5 s · voz generada con la misma tecnología que usa el agente</span></p>
+    <audio controls preload="none" src="../assets/llamada-agente.mp3" style="width:100%"></audio>
     <p style="margin:6px 0 0;font-size:12.5px;opacity:.7">Ejemplo con datos ficticios. La voz del cliente simula el sonido de teléfono.</p>
   </div>
   <div class="two">
     <div class="call">
-      <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · Raquel (Hunty)</b> → Javier M.</span><small>Martes 19:31 · 2 min 40 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · Álvaro (Hunty)</b> → Javier M.</span><small>Martes 19:31 · 2 min 40 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
       <div class="body">
-        <div class="v r"><small>RAQUEL</small>Hola, ¿Javier? Soy Raquel, la asistente de Hunty. Te llamo porque hace un rato pediste aviso de monterías en Extremadura y Castilla-La Mancha. ¿Te pillo bien un par de minutos?</div>
+        <div class="v r"><small>ÁLVARO</small>Hola, ¿Javier? Soy Álvaro, el asistente de Hunty. Te llamo porque hace un rato pediste aviso de monterías en Extremadura y Castilla-La Mancha. ¿Te pillo bien un par de minutos?</div>
         <div class="v c"><small>JAVIER</small>Sí, dime.</div>
-        <div class="v r"><small>RAQUEL</small>Perfecto. Para confirmar: sois dos cazadores, buscáis montería en diciembre o enero y el presupuesto ronda los 250 a 400 euros por puesto. ¿Es así?</div>
+        <div class="v r"><small>ÁLVARO</small>Perfecto. Para confirmar: sois dos cazadores, buscáis montería en diciembre o enero y el presupuesto ronda los 250 a 400 euros por puesto. ¿Es así?</div>
         <div class="v c"><small>JAVIER</small>Sí. Bueno, si es muy buena podemos subir un poco.</div>
-        <div class="v r"><small>RAQUEL</small>Anotado. Te he mandado por WhatsApp dos que encajan: Río Frío, en Toledo, el 26 de diciembre, y Valmorisco, en Cáceres, el 9 de enero. ¿Has cazado antes con algún organizador?</div>
+        <div class="v r"><small>ÁLVARO</small>Anotado. Te he mandado por WhatsApp dos que encajan: Río Frío, en Toledo, el 26 de diciembre, y Valmorisco, en Cáceres, el 9 de enero. ¿Has cazado antes con algún organizador?</div>
         <div class="v c"><small>JAVIER</small>Con una sociedad de mi pueblo, nunca con organizador.</div>
-        <div class="v r"><small>RAQUEL</small>Entonces lo mejor es que te llame Pablo, del equipo de Hunty. Conoce esas fincas y te cuenta cómo es el sorteo de puestos, qué incluye y cómo funciona la reserva. ¿Te viene mejor mañana a las 10:00 o a las 19:30?</div>
+        <div class="v r"><small>ÁLVARO</small>Entonces lo mejor es que te llame Pablo, del equipo de Hunty. Conoce esas fincas y te cuenta cómo es el sorteo de puestos, qué incluye y cómo funciona la reserva. ¿Te viene mejor mañana a las 10:00 o a las 19:30?</div>
         <div class="v c"><small>JAVIER</small>A las 19:30.</div>
-        <div class="v r"><small>RAQUEL</small>Hecho: mañana miércoles a las 19:30 te llama Pablo. Te lo dejo por escrito en WhatsApp y te aviso un rato antes. Si te surge algo, contesta a ese mensaje y lo movemos. ¡Gracias, Javier!</div>
+        <div class="v r"><small>ÁLVARO</small>Hecho: mañana miércoles a las 19:30 te llama Pablo. Te lo dejo por escrito en WhatsApp y te aviso un rato antes. Si te surge algo, contesta a ese mensaje y lo movemos. ¡Gracias, Javier!</div>
       </div>
     </div>
     <div class="rules">
@@ -303,7 +303,7 @@ footer p b{color:var(--ink)}
       <div><b>A quién</b>Solo a quien dejó su teléfono y pidió información. Nunca a listas ni a bases compradas. Se presenta como asistente de Hunty.</div>
       <div><b>Horario</b>De 8:00 a 21:30. Dos intentos como máximo en 24 h.</div>
       <div><b>Qué deja hecho</b>Datos confirmados (modalidad, fechas, cazadores, presupuesto, experiencia), la llamada con el comercial en la agenda y el resumen y la grabación en la ficha.</div>
-      <div><b>Si no contesta · buzón</b>«Hola, Javier, soy Raquel, de Hunty. Te llamaba por las monterías de diciembre y enero que pediste. Te escribo por WhatsApp para que elijas cuándo te llama Pablo. ¡Un saludo!»</div>
+      <div><b>Si no contesta · buzón</b>«Hola, Javier, soy Álvaro, de Hunty. Te llamaba por las monterías de diciembre y enero que pediste. Te escribo por WhatsApp para que elijas cuándo te llama Pablo. ¡Un saludo!»</div>
       <div><b>Si no contesta · WhatsApp a la vez</b>«Javier, te acabo de llamar por tus monterías. Te he dejado dos opciones arriba. ¿Cuándo te viene bien que te llame Pablo, del equipo? [Mañana 10:00] [Mañana 19:30] [Escríbeme mejor]»</div>
       <div><b>Cuándo se calla</b>Si pide no recibir llamadas, si es «más adelante» o si un comercial ya ha hablado con él.</div>
     </div>
@@ -339,7 +339,7 @@ footer p b{color:var(--ink)}
         <tr><td>Presupuesto dentro del rango de lo publicado</td><td>20</td></tr>
         <tr><td>2 cazadores</td><td>7</td></tr>
         <tr><td>Nunca con organizador</td><td>3</td></tr>
-        <tr><td>Contesta en menos de 1 h y habla con Raquel</td><td>20</td></tr>
+        <tr><td>Contesta en menos de 1 h y habla con Álvaro</td><td>20</td></tr>
         <tr><td>Ha visto 3 fichas de montería</td><td>7</td></tr>
         <tr><td>Reserva empezada sin pagar</td><td>0</td></tr>
         <tr><td><b>Total</b></td><td>75 → 78*</td></tr>
@@ -356,13 +356,13 @@ footer p b{color:var(--ink)}
   <div class="seq">
     <div>
       <h3>A · «Ahora» que no contesta</h3>
-      <p>Dejó sus datos y no responde al WhatsApp ni a Raquel.</p>
+      <p>Dejó sus datos y no responde al WhatsApp ni a Álvaro.</p>
       <ol class="tl">
         <li><span class="w">Minuto 1 · WhatsApp</span><b>Las opciones</b><blockquote>Hola, Javier. Soy Lucía, asistente de Hunty. Para diciembre y enero, en Extremadura y Castilla-La Mancha, hoy hay estas dos que encajan con lo que buscas:
 • Río Frío (Robledo del Mazo, Toledo) · 26-dic · 350 € el puesto
 • Valmorisco (Jarandilla de la Vera, Cáceres) · 9-ene · 300 € el puesto
 ¿Te cuento más de alguna?</blockquote></li>
-        <li><span class="w">Minuto 10-20 · voz</span><b>Llama Raquel</b> <span class="muted" style="font-size:13px">(si no contesta: buzón y WhatsApp con dos horas a elegir)</span></li>
+        <li><span class="w">Minuto 10-20 · voz</span><b>Llama Álvaro</b> <span class="muted" style="font-size:13px">(si no contesta: buzón y WhatsApp con dos horas a elegir)</span></li>
         <li class="mail"><span class="w">Día 0 · email</span><b>Las cacerías por escrito</b><blockquote><span class="subj">Asunto: Javier, tus monterías de diciembre y enero</span>Hola, Javier:
 Te dejamos aquí las monterías que encajan con lo que nos pediste (2 puestos, Extremadura o Castilla-La Mancha, 250-400 €), con su ficha, sus reseñas y el enlace para reservar.
 Si prefieres que te llame alguien del equipo, contesta a este correo con una hora.
@@ -532,7 +532,7 @@ Hunty · mismo precio que el organizador</blockquote></li>
     if (c === 'Solo estoy mirando') return ['c', 'Solo mirando', 'Recibe el calendario de su zona por email. Sin llamadas.'];
     if (c === 'La próxima temporada') return ['b', 'Más adelante', 'Se guarda la temporada. Aviso unas 6 semanas antes y alertas de cacerías nuevas a su perfil. No pasa al comercial.'];
     var pts = (c === 'En los próximos 30 días' ? 25 : 18) + ({ 'Solo yo': 4, '2': 7, '3-5': 10, 'Más de 5': 10 }[resp[4]] || 0) + ({ 'Sí, con Hunty': 10, 'Sí, con otros': 7, 'Nunca': 3 }[resp[6]] || 0) + (resp[3] === 'Menos de 300 €' && resp[0] === 'Rececho' ? 0 : 20);
-    return pts >= 45 ? ['a', 'Ahora · ' + pts + ' puntos antes de conversar', 'WhatsApp al minuto con 2-3 cacerías que encajan y llamada de Raquel a los 10-20 min para agendar con el comercial.'] : ['b', 'Ahora, con dudas · ' + pts + ' puntos', 'WhatsApp al minuto. El comercial entra si contesta o si vuelve a la web.'];
+    return pts >= 45 ? ['a', 'Ahora · ' + pts + ' puntos antes de conversar', 'WhatsApp al minuto con 2-3 cacerías que encajan y llamada de Álvaro a los 10-20 min para agendar con el comercial.'] : ['b', 'Ahora, con dudas · ' + pts + ' puntos', 'WhatsApp al minuto. El comercial entra si contesta o si vuelve a la web.'];
   }
   function paso(n) {
     quiz.innerHTML = '';
