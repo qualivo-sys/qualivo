@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty · plan de captación y seguimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap">
+<style>
+/* Plan para Hunty (marketplace de caza): anuncios que filtran → test → WhatsApp al minuto → Raquel (voz) → comercial informado → reserva → temporada siguiente. Estilo de las propuestas de Qualivo con la marca de Hunty. */
+:root{--bg:#F4F7F3;--surface:#FFFFFF;--ink:#13220F;--muted:#4E5D4A;--line:#D7E3D3;--accent:#2C7C24;--accent-ink:#FFFFFF;--dark:#1A4A15;--tint:#E8F5E6;--warn:#9A5B00;--warn-bg:#FFF4E0;--bad:#B3261E;--bad-bg:#FDECEA;--good:#1F6F1A;
+  --font:"DM Sans","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E160C;--surface:#152113;--ink:#EEF4EC;--muted:#A9B8A5;--line:#2A3B27;--accent:#6BBF62;--accent-ink:#0B1A09;--dark:#0B1A09;--tint:#1B2E18;--warn:#F2C26B;--warn-bg:#2E2614;--bad:#FF8A80;--bad-bg:#3A1A17;--good:#7FD477;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E160C;--surface:#152113;--ink:#EEF4EC;--muted:#A9B8A5;--line:#2A3B27;--accent:#6BBF62;--accent-ink:#0B1A09;--dark:#0B1A09;--tint:#1B2E18;--warn:#F2C26B;--warn-bg:#2E2614;--bad:#FF8A80;--bad-bg:#3A1A17;--good:#7FD477;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);overflow-x:hidden}
+.topnav{position:sticky;top:0;z-index:5;background:var(--dark);color:#fff}
+.topnav .in{max-width:1040px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topnav img{height:20px;width:auto;display:block}
+.topnav .by{font-size:12.5px;opacity:.8;margin-right:auto}
+.topnav a{color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.3)}
+.topnav a[aria-current="page"]{background:#fff;color:#1A4A15;border-color:#fff}
+.wrap{max-width:1040px;margin-inline:auto;display:grid;gap:34px;padding:28px 16px 64px}
+.wrap > *{min-width:0}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;line-height:1.08;margin:0;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0;letter-spacing:-.005em;text-wrap:balance}
+h2 .n{color:var(--accent);margin-right:8px}
+h3{font-size:17px;font-weight:700;margin:0 0 6px}
+p{margin:0}
+.sub{color:var(--muted);font-size:17.5px;max-width:70ch}
+section{display:grid;gap:14px;scroll-margin-top:60px}
+section > *{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+ul,ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.wide table{min-width:760px}
+.mid table{min-width:620px}
+.warn{background:var(--warn-bg);border-left:4px solid var(--warn);border-radius:10px;padding:12px 14px;font-size:15px}
+.hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
+.src{font-size:12.5px;color:var(--muted)}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;white-space:nowrap}
+.pill.ok{background:var(--tint);color:var(--good)}
+.pill.ko{background:var(--bad-bg);color:var(--bad)}
+.pill.hy{background:var(--warn-bg);color:var(--warn)}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tldr{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:16px 18px}
+.tldr ol{gap:8px}
+/* anuncios activos */
+.lines{display:grid;gap:16px}
+.line{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.thumbs figure{margin:0;flex:none;width:118px}
+.thumbs img{width:118px;height:210px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;background:#000}
+.thumbs figcaption{font-size:11px;color:var(--muted);line-height:1.3;margin-top:4px;word-break:break-all}
+.ok-ko{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ok-ko > div{border-radius:10px;padding:10px 12px;font-size:14.5px}
+.ok-ko .o{background:var(--tint)}
+.ok-ko .x{background:var(--bad-bg)}
+.ok-ko b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+/* recorrido */
+.flow{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:600}
+.flow li.arrow{background:none;border:0;padding:0 2px;color:var(--muted);font-weight:400}
+.split{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.split > div{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:14px 16px}
+.split > div.b2{border-top-color:#C79A2B}
+.split > div.b3{border-top-color:var(--muted)}
+/* calculadora */
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:16px}
+.calc .ins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.calc label{display:grid;gap:4px;font-size:13.5px;color:var(--muted)}
+.calc input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%}
+.calc .outs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.calc .outs div{background:var(--bg);border-radius:10px;padding:12px}
+.calc .outs b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.calc .outs span{font-size:13px;color:var(--muted)}
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.mod .mk{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--accent)}
+.mod dl{margin:0;display:grid;gap:6px;font-size:14.5px}
+.mod dt{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.mod dd{margin:0}
+.mod a.go{font-weight:700;font-size:14px}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.price{font-size:22px;font-weight:800;margin-top:6px}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
+@media (max-width:760px){.ok-ko,.split,.calc .outs{grid-template-columns:1fr}.calc .ins{grid-template-columns:1fr 1fr}}
+@media print{.topnav{position:static}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <img src="assets/logo-white.svg" alt="Hunty" width="84" height="20" style="filter:brightness(0) invert(1)">
+    <span class="by">× Qualivo · 16-oct-2026</span>
+    <a href="./" aria-current="page">Plan</a>
+    <a href="demo/">Demo</a>
+    <a href="anuncios/">Anuncios</a>
+    <a href="landing/">Landing</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header style="display:grid;gap:14px">
+    <span class="tag">QUALIVO · PLAN PARA HUNTY · REUNIÓN 16-OCT · 12:00</span>
+    <h1>Retomamos: contactos mejor filtrados, seguimiento que no se cae y un comercial que llama sabiendo a quién</h1>
+    <p class="sub">En 2022-2023 os llevé la captación en Meta: plan de medios, vídeos, informe semanal y las pruebas de montería y ronca del gamo con formulario. Entraba mucho contacto, pero no todo era para ahora y a muchos no se les localizaba. Este plan ataca esas tres fugas con piezas que entonces no existían. Cada dato lleva su fuente; lo que es hipótesis, lo pone.</p>
+  </header>
+
+  <div class="tldr">
+    <p class="k">En cinco líneas</p>
+    <ol>
+      <li><b>Hoy no captáis datos desde los anuncios.</b> Los 20 anuncios activos en Meta llevan al catálogo o a Prime. Quien no reserva en esa visita se va sin dejar nada. <span class="src">Fuente: Biblioteca de anuncios de Meta, 16-oct.</span></li>
+      <li><b>Hay errores en anuncios que siguen activos:</b> el de muflón lleva a la página de corzo, y los de Castilla-La Mancha y Andalucía llevan a monterías de Extremadura. Se arreglan hoy y no cuestan nada. <a href="#activo">Detalle</a>.</li>
+      <li><b>Propuesta:</b> anuncios que filtran (fecha, precio, «para quien ya…») y un test de 7 preguntas que reparte a cada contacto en <b>ahora</b>, <b>más adelante</b> o <b>mirando</b>.</li>
+      <li><b>Al minuto,</b> WhatsApp con 2-3 cacerías reales que encajan. A los 10-20 minutos llama Raquel, la asistente de voz, que deja <b>la llamada con el comercial agendada a la hora que elige el cazador</b>. El comercial llama con la ficha completa.</li>
+      <li><b>Todo se mide hasta la comisión:</b> qué anuncio trae reservas, no solo contactos. Partimos de vuestra puntuación, la medimos contra reservas reales y la recalibramos cada mes.</li>
+    </ol>
+  </div>
+
+  <!-- ANTES / AHORA -->
+  <section id="antes">
+    <h2><span class="n">1</span>Antes (2023) y ahora</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>Pieza</th><th>Cómo lo hicimos en 2023</th><th>Cómo lo haríamos ahora</th></tr></thead>
+      <tbody>
+        <tr><td><b>Anuncios</b></td><td>Campañas por modalidad (montería, ronca del gamo) con tráfico frío y públicos similares a clientes. Se medían por coste por contacto.</td><td>Mensajes que filtran: fecha, rango de precio y «para quien ya…». Se miden por coste por reserva y por euro de comisión, y Meta recibe qué contactos reservan.</td></tr>
+        <tr><td><b>Formulario</b></td><td>Typeform aparte. Luego había que pasar los datos a la ficha a mano o por integración.</td><td>Test de 7 preguntas en vuestra web y con vuestra marca. Crea la ficha con puntuación y reparte: ahora, más adelante o mirando.</td></tr>
+        <tr><td><b>Primera respuesta</b></td><td>El comercial, cuando podía.</td><td>WhatsApp al minuto (de 8:00 a 21:30) con 2-3 cacerías publicadas que encajan con lo que pidió.</td></tr>
+        <tr><td><b>«No coge el teléfono»</b></td><td>Volver a llamar.</td><td>Raquel llama a los 10-20 minutos. Si no contesta, buzón y WhatsApp. El cazador elige a qué hora le llama el comercial.</td></tr>
+        <tr><td><b>«Más adelante»</b></td><td>Se quedaba en una lista.</td><td>Se guarda la temporada y la fecha que dijo. Recibe un aviso antes de su temporada y alertas de cacerías nuevas que encajan con su perfil (una a la semana como máximo).</td></tr>
+        <tr><td><b>Comercial</b></td><td>Llamaba con nombre y teléfono.</td><td>Llama con la ficha: resumen, puntuación y por qué, momento, presupuesto, objeciones, cacerías vistas y siguiente paso. Solo recibe aviso de los contactos calientes.</td></tr>
+        <tr><td><b>Informe</b></td><td>Informe semanal de Meta.</td><td>Panel diario por comercial y por anuncio, hasta la reserva y la comisión. Preparado para vuestro daily y vuestra revisión semanal.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- LO QUE TENÉIS ACTIVO HOY -->
+  <section id="activo">
+    <h2><span class="n">2</span>Lo que tenéis activo hoy</h2>
+    <p class="muted">Biblioteca de anuncios de Meta, España, búsqueda «hunty», anuncios activos, consultada el 16-oct-2026 a primera hora. Aparecen unos 33 resultados y 20 anuncios distintos con sus creatividades. Los 20 son imágenes estáticas, casi todas verticales, con varias versiones cada uno. Salen en Facebook, Instagram, Messenger, Threads y Audience Network. Las capturas son las de la Biblioteca y el número es su identificador.</p>
+
+    <div class="lines">
+      <div class="line">
+        <h3>Línea 1 · «Recechos de [especie]» · página HUNTY · 8 anuncios · activos desde el 17 y el 22 de julio</h3>
+        <div class="thumbs">
+          <figure><img src="assets/activos/1350175807273158.jpg" alt="Anuncio Recechos de ciervo" loading="lazy"><figcaption>Ciervo · 1350175807273158 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/2043959529580115.jpg" alt="Anuncio Recechos de gamo" loading="lazy"><figcaption>Gamo · 2043959529580115 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/28117340151183768.jpg" alt="Anuncio Recechos de corzo" loading="lazy"><figcaption>Corzo · 28117340151183768 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/1371734191598607.jpg" alt="Anuncio Recechos de muflón" loading="lazy"><figcaption>Muflón · 1371734191598607 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/1008978358616113.jpg" alt="Anuncio Recechos de rebeco" loading="lazy"><figcaption>Rebeco · 1008978358616113 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/1783323322827532.jpg" alt="Anuncio Recechos de arruí" loading="lazy"><figcaption>Arruí · 1783323322827532 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/2153292858579633.jpg" alt="Anuncio Recechos de boc balear" loading="lazy"><figcaption>Boc balear · 2153292858579633 · 22-jul</figcaption></figure>
+        </div>
+        <p class="small"><b>Texto (ej. corzo):</b> «El duende del bosque. Esquivo, difícil y de los más deseados 🎯 Encuentra tu rececho de corzo en Hunty.» · <b>Titular:</b> «Recechos de Corzo» · <b>Descripción:</b> «Descubre tu próxima aventura» · <b>Botón:</b> Ver detalles · <b>Destino:</b> hunty.es/especies/&lt;especie&gt;?referred_by=…</p>
+        <div class="ok-ko">
+          <div class="o"><b>Funciona</b>Creatividad cuidada y coherente. La especie como gancho y un lenguaje de cazador que no suena a anuncio.</div>
+          <div class="x"><b>Falla</b>No filtran: sin precio, sin fecha y sin «para quién», atraen a todo el que disfruta de la foto. El destino es la página de la especie con todas las modalidades (ciervo: 417 cacerías, monterías incluidas), no los recechos. El de ciervo habla de berrea, que ya está terminando. Llevan tres meses con la misma pieza.</div>
+        </div>
+      </div>
+
+      <div class="line">
+        <h3>Línea 2 · Monterías por comunidad y calendario · página HUNTY · 5 anuncios · activos desde el 20 y el 21 de septiembre</h3>
+        <div class="thumbs">
+          <figure><img src="assets/activos/1790404692155428.jpg" alt="Anuncio Calendarios de monterías" loading="lazy"><figcaption>Calendario · 1790404692155428 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/1431619258818971.jpg" alt="Anuncio Calendarios de monterías" loading="lazy"><figcaption>Calendario · 1431619258818971 · 21-sep</figcaption></figure>
+          <figure><img src="assets/activos/1064600312834941.jpg" alt="Anuncio Monterías en Extremadura" loading="lazy"><figcaption>Extremadura · 1064600312834941 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/2368630826877479.jpg" alt="Anuncio Monterías en Castilla-La Mancha" loading="lazy" style="object-fit:contain"><figcaption>Castilla-La Mancha · 2368630826877479 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/3323657874480438.jpg" alt="Anuncio Monterías en Andalucía" loading="lazy"><figcaption>Andalucía · 3323657874480438 · 20-sep</figcaption></figure>
+        </div>
+        <p class="small"><b>Texto (ej. Extremadura):</b> «Extremadura, tierra de monterías únicas 🦌 Descubre las mejores fincas esta temporada con puestos desde 220€. 👉 Reserva tu puesto en Hunty» · <b>Titular:</b> «Puestos desde 220€» · <b>Botón:</b> Más información · <b>Destino:</b> buscador filtrado o hunty.es/calendario-de-monterias</p>
+        <div class="ok-ko">
+          <div class="o"><b>Funciona</b>Llegan en temporada. El precio «desde» ya filtra algo y el calendario es contenido útil que el cazador guarda.</div>
+          <div class="x"><b>Falla</b>Los de Castilla-La Mancha y Andalucía llevan al buscador filtrado por <b>Extremadura</b> (95 cacerías de Extremadura). El texto dice «desde 170 €» y «desde 180 €», pero el titular dice «Puestos desde 220€». El código de seguimiento va pegado dentro de otro parámetro del enlace (<code>commit=Buscar%3Freferred_by%3D…</code>), así que probablemente no se registra. El calendario (631 monterías de octubre a febrero) abre con monterías que ya se celebraron (3-oct), no se puede filtrar por provincia ni por precio y no pide ningún dato.</div>
+        </div>
+      </div>
+
+      <div class="line">
+        <h3>Línea 3 · Club Hunty Prime · página «Hunting Land - Club Tierra de Caza» · 8 anuncios · activos desde el 20 de septiembre</h3>
+        <div class="thumbs">
+          <figure><img src="assets/activos/986838803963905.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>986838803963905</figcaption></figure>
+          <figure><img src="assets/activos/1958355501523595.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1958355501523595</figcaption></figure>
+          <figure><img src="assets/activos/2158518878388105.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>2158518878388105</figcaption></figure>
+          <figure><img src="assets/activos/1393695662334439.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1393695662334439</figcaption></figure>
+          <figure><img src="assets/activos/2206671423537475.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>2206671423537475</figcaption></figure>
+          <figure><img src="assets/activos/1600879178350783.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1600879178350783</figcaption></figure>
+        </div>
+        <p class="small"><b>Texto (ej.):</b> «Si vas a cazar, ¿por qué pagar de más? Con Club Hunty Prime puedes ahorrar hasta 500€ en tu próxima jornada. 🦌 Recechos → hasta 300€ 🐗 Monterías → hasta 175€ 🌙 Esperas → hasta 140€ 🌲 Cotos → hasta 500€» · <b>Titular:</b> «No pagues de más al cazar» / «Mejor precio garantizado» · <b>Botón:</b> Más información · <b>Destino:</b> hunty.es/club/prime?referred_by=…</p>
+        <div class="ok-ko">
+          <div class="o"><b>Funciona</b>La oferta es concreta, con cifras por modalidad, y hay seis variantes de mensaje sobre la misma idea: es un test bien planteado.</div>
+          <div class="x"><b>Falla</b>Lo firma «Hunting Land - Club Tierra de Caza», no HUNTY, y el que lo ve no reconoce la marca. «Mejor precio garantizado» convive con el «Mismo precio que el organizador» de la web. La landing tampoco recoge a quien no paga en ese momento: su única salida es «Habla con un asesor», un WhatsApp con mensaje genérico.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tw mid"><table>
+      <thead><tr><th>Otros canales</th><th>Resultado</th><th>Fuente</th></tr></thead>
+      <tbody>
+        <tr><td>Google Ads</td><td>0 anuncios para hunty.es en España.</td><td class="src">Centro de Transparencia Publicitaria de Google, 16-oct</td></tr>
+        <tr><td>LinkedIn</td><td>No verificado: LinkedIn bloqueó la consulta automática. Lo miro en directo si os interesa la parte de organizadores.</td><td class="src">—</td></tr>
+      </tbody>
+    </table></div>
+
+    <p class="hyp"><b>Lectura.</b> Todo es tráfico al catálogo: inspiración por especie y ahorro con Prime. Funciona para quien ya sabe lo que quiere y reserva en la misma visita. Quien duda o caza «más adelante» no deja ni el teléfono ni el momento. En 2023 hicimos lo contrario: formulario, mucho contacto, poco filtro. La propuesta es el punto medio: <b>anuncios que filtran + test que reparte</b>, de modo que al comercial solo le llegue quien está para ahora.</p>
+    <p class="warn"><b>Tres arreglos para hoy mismo, gratis:</b> (1) cambiar el enlace del anuncio de muflón (1371734191598607), que lleva a /especies/corzo; (2) cambiar el filtro de los de Castilla-La Mancha (2368630826877479) y Andalucía (3323657874480438), que llevan a Extremadura, y cuadrar «desde 170/180 €» con «desde 220 €»; (3) poner el <code>referred_by</code> como parámetro propio (<code>&amp;referred_by=</code>) en los enlaces del buscador. <span class="src">Comprobado en la versión del anuncio que muestra la Biblioteca. Puede haber otras versiones con otros enlaces.</span></p>
+  </section>
+
+  <!-- WEB -->
+  <section id="web">
+    <h2><span class="n">3</span>Lo que hemos visto en la web</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>Hallazgo</th><th>Implicación</th><th>Fuente</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill ok">Bien</span> Buscador por modalidad, especie y provincia, precio Prime visible y reserva online con señal (p. ej. montería en Valmorisco: 300 €, reserva de 40 €). Reseñas por cacería y por organizador.</td><td>El producto ya convierte a quien llega decidido. No hace falta tocar la reserva.</td><td class="src">hunty.es y ficha /monterias/…-1790</td></tr>
+        <tr><td><span class="pill ko">Falla</span> El único formulario es «Crear cuenta gratis»: email y contraseña, o Google/Facebook. Salta en una ventana a los 10 segundos en cualquier página.</td><td>La cuenta no dice qué caza, cuándo ni con qué presupuesto. El comercial no tiene con qué priorizar.</td><td class="src">/users/sign_up · ventana «Únete a Hunty»</td></tr>
+        <tr><td><span class="pill ko">Falla</span> «¿No encuentras lo que buscas? Hablar con un asesor» abre WhatsApp con un texto fijo: «Me gustaría recibir información y asesoramiento…».</td><td>Cada conversación empieza de cero: modalidad, fechas, zona y presupuesto se preguntan a mano.</td><td class="src">Pie de la home y de /licencias</td></tr>
+        <tr><td><span class="pill hy">Ojo</span> Cifras que no coinciden: 4,7/5 con 644 opiniones arriba y 4,6/5 con 764 abajo, en la misma home. «+30.000 cazadores» en /pro.</td><td>Para un público exigente, conviene unificar las cifras antes de usarlas en anuncios.</td><td class="src">Home y /pro</td></tr>
+        <tr><td><span class="pill ko">Falla</span> «Anuncia una cacería» lleva a /pro: planes Free (14 %), Mensual 60 €/mes (12 %) y Anual 600 €/año (10 %). Solo hay botones de «Registrarme»; no hay forma de hablar con alguien.</td><td>El organizador que duda no tiene con quién hablar. Es un módulo opcional (M9).</td><td class="src">/pro</td></tr>
+        <tr><td><span class="pill ok">Bien</span> Medición instalada: píxel de Meta, Google Tag Manager, GA4, Mixpanel y Clarity.</td><td>Hay base para devolver a Meta las reservas y para unir anuncio, ficha y reserva.</td><td class="src">Código de la home</td></tr>
+        <tr><td><span class="pill hy">Ojo</span> Club Prime: 150 €/año, «+560 miembros», sorteos por WhatsApp e inscripción en las ofertas públicas. Salida: «Hazte Prime» o «Habla con un asesor».</td><td>Prime puede ser el siguiente paso natural del contacto «más adelante»: le da un motivo para quedarse.</td><td class="src">/club/prime</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- RECORRIDO HOY -->
+  <section id="hoy">
+    <h2><span class="n">3b</span>Cómo funciona hoy vuestro recorrido</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>Punto donde se captan datos</th><th>Quién lo inicia</th><th>Qué sabe el comercial</th><th>Si no compra</th></tr></thead>
+      <tbody>
+        <tr><td>Reserva con señal</td><td>El cazador, decidido</td><td>Todo: cacería, fecha y puestos</td><td>—</td></tr>
+        <tr><td>«Crear cuenta gratis»</td><td>El cazador (ventana a los 10 s)</td><td>Solo el email</td><td>Sin teléfono ni momento</td></tr>
+        <tr><td>WhatsApp «Hablar con un asesor»</td><td>El cazador, con texto fijo</td><td>Lo que escriba</td><td>Depende de que el comercial vuelva a escribir</td></tr>
+        <tr><td>Prime de pago</td><td>El cazador</td><td>Que es socio</td><td>—</td></tr>
+        <tr><td>Ficha, especie o calendario (631 monterías, sin filtro de provincia ni de precio)</td><td>—</td><td>Nada</td><td><b>No deja rastro</b>: no hay forma de seguir a quien vio una montería y no reservó</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid">
+      <div class="card"><p class="k">a · Captura con valor en el destino</p><p class="small">En la ficha, la especie y el calendario: «Avísame cuando salga una montería en mi provincia y con mi presupuesto», un calendario filtrable a cambio de WhatsApp con consentimiento, o un test de «qué rececho te encaja». Así quien mira y se va deja algo.</p></div>
+      <div class="card"><p class="k">b · Formulario que cualifica para la venta asesorada</p><p class="small">Para el ticket alto (recechos de trofeo e internacional): anuncio con test o formulario instantáneo y paso al comercial con la ficha completa.</p></div>
+      <div class="card"><p class="k">c · El WhatsApp del asesor, atendido al minuto</p><p class="small">El agente contesta a quien escribe, hace las preguntas de cualificación y pasa el contacto al comercial con la ficha. Nadie empieza de cero.</p></div>
+    </div>
+    <p class="hyp"><b>Dos caminos medidos por separado.</b> El tráfico al catálogo se mantiene para la reserva directa de ticket bajo (esperas y monterías económicas): ahí el mejor comercial es una ficha clara. La venta asesorada pasa por el test. Cada camino con su coste por reserva y su comisión, para mover presupuesto con datos.</p>
+  </section>
+
+  <!-- PREGUNTAS -->
+  <section id="preguntas">
+    <h2><span class="n">4</span>Lo que queremos entender hoy</h2>
+    <p class="muted">Con las respuestas decidimos qué módulos enseñar y con qué cifras arrancar. Lo que no sepáis hoy, lo medimos en la semana 1.</p>
+    <div class="tw mid"><table>
+      <thead><tr><th>#</th><th>Pregunta</th><th>Para qué la necesito</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>¿Cuántos contactos y reservas al mes, y por dónde entran (reserva directa, WhatsApp del asesor, cuenta creada, teléfono)? ¿Qué parte cierra un comercial?</td><td>Fijar el punto de partida del árbol de métricas.</td></tr>
+        <tr><td>2</td><td>¿Cuántos comerciales hay, cómo se reparten los contactos y en qué herramienta trabajan?</td><td>Saber dónde vive la ficha y a qué se conecta el sistema.</td></tr>
+        <tr><td>3</td><td>Vuestra puntuación actual: ¿qué datos usa, qué pesos tiene y se la creen los comerciales?</td><td>Partir de ella y medirla contra las reservas reales.</td></tr>
+        <tr><td>4</td><td>De los que no compran, ¿qué pesa más: «no es ahora», «no coge el teléfono» o «no era buen contacto»? ¿Hay motivo de pérdida registrado?</td><td>Decidir el orden: módulos 2, 4 o 6.</td></tr>
+        <tr><td>5</td><td>¿Qué se hace hoy con los «más adelante»? ¿Se guarda la temporada o la fecha?</td><td>Calcular cuántos podemos reactivar antes de cada temporada.</td></tr>
+        <tr><td>6</td><td>¿Qué traen las tres líneas activas (recechos, monterías, Prime)? ¿Medís reservas por anuncio o solo visitas?</td><td>Saber si el <code>referred_by</code> llega y qué anuncio paga la inversión.</td></tr>
+        <tr><td>7</td><td>Prioridad de este año: ¿reservas de cazador, socios Prime u organizadores Hunty Pro?</td><td>Elegir la primera prueba.</td></tr>
+        <tr><td>8</td><td>De cómo trabajamos en 2023, ¿qué os sirvió y qué no?</td><td>No repetir lo que no funcionó.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- RECORRIDO -->
+  <section id="recorrido">
+    <h2><span class="n">5</span>El recorrido</h2>
+    <ol class="flow" aria-label="Recorrido del cazador">
+      <li>Anuncio que filtra</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Test de 7 preguntas</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Puntuación y reparto</li><li class="arrow" aria-hidden="true">→</li>
+      <li>WhatsApp al minuto con 2-3 cacerías</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Raquel llama (10-20 min)</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Llamada con el comercial a la hora elegida</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Cacería propuesta</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Reserva con señal</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Jornada y reseña</li><li class="arrow" aria-hidden="true">→</li>
+      <li>Su próxima temporada</li>
+    </ol>
+    <div class="split">
+      <div><h3>Ahora · esta temporada</h3><p class="small">Caza en menos de 90 días o en la temporada en curso, con presupuesto acorde. → WhatsApp al minuto, Raquel y <b>comercial</b>. Aviso al comercial solo si la puntuación es A.</p></div>
+      <div class="b2"><h3>Más adelante</h3><p class="small">Próxima temporada o fecha concreta lejana. → <b>No pasa al comercial.</b> Se guarda la temporada, recibe un aviso unas 6 semanas antes y alertas de cacerías nuevas (una a la semana como máximo).</p></div>
+      <div class="b3"><h3>Solo mirando</h3><p class="small">Sin fecha ni presupuesto. → Contenido: calendario, guías por especie y Prime. Si cambia de respuesta o empieza una reserva, sube de grupo.</p></div>
+    </div>
+  </section>
+
+  <!-- MÓDULOS -->
+  <section id="modulos">
+    <h2><span class="n">6</span>El sistema, por módulos</h2>
+    <p class="muted">Cada módulo funciona por separado. Enseño solo los que os duelan y empezamos por uno.</p>
+    <div class="mods">
+      <div class="mod"><span class="mk">M1 · ANUNCIOS QUE FILTRAN</span><dl><dt>Problema</dt><dd>Contactos que no son para ahora o no tienen presupuesto.</dd><dt>Qué hace</dt><dd>Mensajes por modalidad y temporada con fecha, rango de precio y «para quien ya…». Una línea aparte para «más adelante», que nunca llega al comercial.</dd><dt>Métrica</dt><dd>Coste por contacto A+B y coste por reserva, por anuncio.</dd></dl><a class="go" href="anuncios/">Ver los anuncios →</a></div>
+      <div class="mod"><span class="mk">M2 · TEST QUE CUALIFICA Y REPARTE</span><dl><dt>Problema</dt><dd>El comercial llama para preguntar lo básico.</dd><dt>Qué hace</dt><dd>Siete preguntas con un toque cada una (modalidad, especie, cuándo, presupuesto, cazadores, zona, experiencia) y después el teléfono. Crea la ficha y la reparte.</dd><dt>Métrica</dt><dd>% de formularios completados y % de contactos A, B y C.</dd></dl><a class="go" href="demo/#test">Probar el test →</a></div>
+      <div class="mod"><span class="mk">M3 · WHATSAPP AL MINUTO</span><dl><dt>Problema</dt><dd>El contacto se enfría o reserva en otro sitio.</dd><dt>Qué hace</dt><dd>Escribe en menos de un minuto (de 8:00 a 21:30) con 2-3 cacerías publicadas que encajan, resuelve dudas generales y retoma si el cazador no contesta al comercial.</dd><dt>Métrica</dt><dd>% contactado en menos de 5 minutos y % con conversación.</dd></dl><a class="go" href="demo/#whatsapp">Ver la conversación →</a></div>
+      <div class="mod"><span class="mk">M4 · RAQUEL, ASISTENTE DE VOZ</span><dl><dt>Problema</dt><dd>«No coge el teléfono».</dd><dt>Qué hace</dt><dd>Llama a los 10-20 minutos, solo a quien dejó su teléfono y pidió información. Confirma lo básico y deja agendada la llamada con el comercial. Si no contesta, deja un mensaje en el buzón y escribe por WhatsApp con dos horas a elegir.</dd><dt>Métrica</dt><dd>% de llamadas con comercial agendadas y % presentadas.</dd></dl><a class="go" href="demo/#voz">Ver el guion →</a></div>
+      <div class="mod"><span class="mk">M5 · FICHA PARA EL COMERCIAL</span><dl><dt>Problema</dt><dd>El comercial llama a ciegas.</dd><dt>Qué hace</dt><dd>Resumen de la conversación, puntuación y por qué, momento, presupuesto, objeciones, cacerías que ha visto y siguiente paso. Aviso solo de los calientes.</dd><dt>Métrica</dt><dd>Tiempo hasta el primer contacto humano y A sin tocar más de 2 horas.</dd></dl><a class="go" href="demo/#ficha">Ver la ficha →</a></div>
+      <div class="mod"><span class="mk">M6 · «MÁS ADELANTE» POR TEMPORADA</span><dl><dt>Problema</dt><dd>Contactos buenos que no eran para ahora y se pierden.</dd><dt>Qué hace</dt><dd>Guarda la temporada que dijo (berrea, montería, corzo…). Aviso unas 6 semanas antes y alertas de cacerías nuevas a su perfil.</dd><dt>Métrica</dt><dd>Cohortes: guardados, reactivados y reservas por mes de alta.</dd></dl><a class="go" href="demo/#seguimiento">Ver los mensajes →</a></div>
+      <div class="mod"><span class="mk">M7 · SEGUIMIENTO HASTA LA RESERVA</span><dl><dt>Problema</dt><dd>Propuestas sin respuesta y reservas a medias.</dd><dt>Qué hace</dt><dd>Recordatorios de la llamada (confirmación, víspera, 2 h antes), recuperación de quien no estuvo, seguimiento de la cacería propuesta, reservas sin terminar, víspera de la jornada y reseña.</dd><dt>Métrica</dt><dd>% de propuestas que acaban en reserva con señal, y en cuántos días.</dd></dl><a class="go" href="demo/#seguimiento">Ver la secuencia →</a></div>
+      <div class="mod"><span class="mk">M8 · MEDICIÓN Y PANEL</span><dl><dt>Problema</dt><dd>No se sabe qué anuncio paga la inversión.</dd><dt>Qué hace</dt><dd>Une anuncio, ficha, reserva y comisión. Devuelve a Meta qué contactos reservan. Panel para el daily (por comercial) y para la revisión semanal y el comité.</dd><dt>Métrica</dt><dd>€ de comisión por € invertido, por anuncio y modalidad.</dd></dl><a class="go" href="demo/#panel">Ver el panel →</a></div>
+      <div class="mod"><span class="mk">M9 · ORGANIZADORES (HUNTY PRO) · OPCIONAL</span><dl><dt>Problema</dt><dd>«Anuncia una cacería» solo deja registrarse.</dd><dt>Qué hace</dt><dd>Un formulario corto (jornadas por temporada, modalidades, provincia, si ya vende online), WhatsApp al minuto y llamada de 15 minutos con vuestro equipo.</dd><dt>Métrica</dt><dd>Altas de Hunty Pro (Mensual o Anual) por anuncio.</dd></dl><a class="go" href="anuncios/#pro">Ver el anuncio →</a></div>
+    </div>
+  </section>
+
+  <!-- PUNTUACIÓN -->
+  <section id="puntuacion">
+    <h2><span class="n">7</span>Puntuación transparente</h2>
+    <p class="muted">Ya tenéis una puntuación. Propuesta: arrancamos con la vuestra, la medimos un mes contra las reservas reales y la comparamos con esta. Os quedáis con la que mejor separe. Los pesos se ven y se ajustan, y cada contacto lleva escrito el porqué de su nota.</p>
+    <div class="tw wide"><table>
+      <thead><tr><th>Criterio</th><th>Dato</th><th>Puntos (propuesta)</th><th class="num">Máx.</th></tr></thead>
+      <tbody>
+        <tr><td>Momento</td><td>Test: «¿Cuándo quieres cazar?»</td><td>Menos de 30 días: 25 · esta temporada: 18 · próxima temporada: 8 · solo mirando: 0</td><td class="num">25</td></tr>
+        <tr><td>Encaje de presupuesto</td><td>Test (presupuesto por cazador) frente al precio de las cacerías publicadas de esa modalidad y zona</td><td>Dentro del rango: 20 · algo por debajo: 10 · muy por debajo: 0</td><td class="num">20</td></tr>
+        <tr><td>Cazadores (puestos)</td><td>Test: «¿Cuántos vais?»</td><td>3 o más: 10 · 2: 7 · 1: 4</td><td class="num">10</td></tr>
+        <tr><td>Experiencia</td><td>Test e historial en Hunty</td><td>Ya reservó en Hunty: 10 · ha cazado con organizador: 7 · nunca: 3</td><td class="num">10</td></tr>
+        <tr><td>Respuesta</td><td>WhatsApp y llamada de Raquel</td><td>Contesta en menos de 1 h: 10 · habla con Raquel: 10</td><td class="num">20</td></tr>
+        <tr><td>Comportamiento</td><td>Web (Mixpanel o píxel): fichas vistas, reserva empezada</td><td>3 o más fichas de su modalidad: 7 · reserva empezada sin pagar: 8</td><td class="num">15</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid">
+      <div class="card"><p class="k">Niveles</p><p class="small"><b>A (70-100):</b> aviso al comercial y llamada el mismo día. <b>B (45-69):</b> WhatsApp y Raquel, comercial en 48 h. <b>C (&lt;45):</b> recorrido automático. «Más adelante» manda sobre la nota: nunca pasa al comercial antes de su fecha.</p></div>
+      <div class="card"><p class="k">Calibración mensual</p><p class="small">Cada mes: reservas por nivel (A, B y C) y por criterio. Si un criterio no separa a quien reserva de quien no, baja su peso. Los cambios los aprobáis vosotros y quedan con fecha.</p></div>
+    </div>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section id="metricas">
+    <h2><span class="n">8</span>Árbol de métricas, de la impresión a la comisión</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>#</th><th>Métrica</th><th>Definición exacta</th><th>De dónde sale</th><th>Se ve</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Impresiones</td><td>Veces que se mostró el anuncio</td><td>Meta</td><td>Diario</td></tr>
+        <tr><td>2</td><td>Clic al enlace</td><td>Clics que salen a la landing (no reacciones)</td><td>Meta</td><td>Diario</td></tr>
+        <tr><td>3</td><td>Test empezado</td><td>Responde la primera pregunta</td><td>Evento web</td><td>Diario</td></tr>
+        <tr><td>4</td><td>Test completo</td><td>Deja teléfono válido y acepta la privacidad</td><td>Evento web y ficha</td><td>Diario</td></tr>
+        <tr><td>5</td><td>Contacto cualificado</td><td>Ficha con nivel A, B o C y grupo (ahora / más adelante / mirando)</td><td>Puntuación</td><td>Diario</td></tr>
+        <tr><td>6</td><td>Contactado en menos de 5 min</td><td>Primer mensaje enviado en menos de 5 min desde el test (si entra de 21:30 a 8:00, cuenta desde las 8:00)</td><td>Registro de WhatsApp</td><td>Diario</td></tr>
+        <tr><td>7</td><td>Conversación</td><td>El cazador contesta al menos una vez (WhatsApp o voz)</td><td>WhatsApp y llamadas</td><td>Diario</td></tr>
+        <tr><td>8</td><td>Llamada agendada</td><td>Hora cerrada con un comercial concreto</td><td>Agenda</td><td>Diario</td></tr>
+        <tr><td>9</td><td>Llamada presentada</td><td>El comercial habla 3 minutos o más con el cazador en la franja agendada</td><td>Registro de llamadas</td><td>Diario</td></tr>
+        <tr><td>10</td><td>Cacería propuesta</td><td>El comercial envía una o más cacerías concretas (enlace a la ficha)</td><td>Ficha</td><td>Semanal</td></tr>
+        <tr><td>11</td><td>Reserva con señal</td><td>Pago de la reserva en hunty.es</td><td>Sistema de reservas de Hunty</td><td>Semanal</td></tr>
+        <tr><td>12</td><td>Jornada realizada</td><td>Pasa la fecha de la cacería sin cancelación</td><td>Sistema de reservas de Hunty</td><td>Semanal / comité</td></tr>
+        <tr><td>13</td><td>Comisión</td><td>Euros de comisión de esa reserva según el plan del organizador (14 %, 12 % o 10 %)</td><td>Sistema de Hunty</td><td>Comité</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- DAILY / SEMANAL -->
+  <section id="daily">
+    <h2><span class="n">9</span>Qué veríais en el daily y en la revisión semanal</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>En el daily (por comercial)</th><th>Definición</th></tr></thead>
+      <tbody>
+        <tr><td>Contactos nuevos asignados</td><td>Ayer y hoy, por nivel A, B y C</td></tr>
+        <tr><td>Tiempo hasta el primer contacto humano</td><td>Mediana desde el test hasta la primera llamada o mensaje del comercial</td></tr>
+        <tr><td>A sin tocar más de 2 horas</td><td>Lista con nombre y motivo de la nota</td></tr>
+        <tr><td>Sin tocar más de 24 horas</td><td>Cualquier nivel, ahora</td></tr>
+        <tr><td>A quién llamar hoy y por qué</td><td>Lista ordenada: llamadas agendadas con hora, reservas empezadas sin pagar y propuestas sin respuesta</td></tr>
+        <tr><td>Propuestas sin respuesta en 48 h</td><td>Con la cacería propuesta y su fecha</td></tr>
+        <tr><td>Reservas de ayer</td><td>Con anuncio de origen</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tw wide"><table>
+      <thead><tr><th>En la revisión semanal / comité</th><th>Corte</th></tr></thead>
+      <tbody>
+        <tr><td>Coste por contacto cualificado (A+B), por llamada presentada y por reserva</td><td>Por anuncio y por modalidad</td></tr>
+        <tr><td>€ de comisión por € invertido</td><td>Por anuncio, modalidad y mes</td></tr>
+        <tr><td>% de «no contesta» antes y después de Raquel</td><td>Semanal, con grupo de control al principio</td></tr>
+        <tr><td>Cohortes de «más adelante»</td><td>Guardados por mes de alta → reactivados → conversación → reserva</td></tr>
+        <tr><td>Motivos de pérdida</td><td>Precio, fechas, sin plazas, se fue a otro sitio, no contesta, no era para ahora</td></tr>
+        <tr><td>Calibración de la puntuación</td><td>Reservas por nivel y por criterio (mensual)</td></tr>
+        <tr><td>Por comercial</td><td>Llamadas presentadas, propuestas y reservas, con el mismo reparto de contactos</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Ejemplo de cómo se ve, con datos inventados: <a href="https://qualivo.io/intelligence/?sector=retiros&amp;empresa=Hunty&amp;objetivo=conversion" target="_blank" rel="noopener">panel de un marketplace de experiencias</a>. Es la versión de ejemplo más parecida a Hunty: reservas, plazas y una base de datos que vuelve.</p>
+  </section>
+
+  <!-- PRUEBAS -->
+  <section id="pruebas">
+    <h2><span class="n">10</span>Plan de pruebas</h2>
+    <p class="muted">Formato experimento. Los umbrales son una propuesta que se valida con vuestros datos de partida en la semana 1. Las fechas suponen el arranque el lunes 2-nov.</p>
+    <div class="tw wide"><table>
+      <thead><tr><th>#</th><th>Hipótesis</th><th>Métrica de éxito</th><th>Umbral de corte (propuesta)</th><th>Decisión</th></tr></thead>
+      <tbody>
+        <tr><td>H1</td><td>Un test con «cuándo» y presupuesto sube el % de contactos A+B sin encarecer demasiado el contacto.</td><td>% A+B y coste por contacto A+B</td><td>Se queda si el coste por A+B baja, aunque el coste por contacto suba hasta un 30 %. Mínimo de 150 tests completos por variante.</td><td>23-nov</td></tr>
+        <tr><td>H2</td><td>Raquel y la agenda por WhatsApp reducen «no contesta».</td><td>% con conversación en 48 h y % de llamadas presentadas</td><td>Una mitad de los contactos con Raquel y otra sin ella. Se queda si mejora en 25 % o más (relativo) con 200 contactos por grupo.</td><td>30-nov</td></tr>
+        <tr><td>H3</td><td>El aviso por temporada recupera a los «más adelante».</td><td>% de reactivados con conversación y reservas</td><td>Primera ventana: monterías de enero y febrero sobre la base de cuentas sin reserva. Referencia a validar: 8-15 % con conversación.</td><td>15-ene</td></tr>
+        <tr><td>H4</td><td>Un anuncio que filtra (fecha y precio) trae reservas más baratas que uno de inspiración.</td><td>Coste por reserva y € de comisión por € invertido</td><td>Mismo presupuesto y público. Decide la comisión, no el coste por clic. Mínimo de 3 semanas.</td><td>30-nov</td></tr>
+        <tr><td>H5</td><td>Proponer 2-3 cacerías concretas al minuto convierte mejor que un «¿en qué te ayudo?».</td><td>% que abre una ficha o pide llamada en 24 h</td><td>Reparto al 50 %. Se queda si sube 20 % o más (relativo).</td><td>23-nov</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- PREVISIÓN -->
+  <section id="prevision">
+    <h2><span class="n">11</span>Previsión ilustrativa</h2>
+    <p class="warn"><b>No es una promesa.</b> Los valores de partida son de ejemplo, no son vuestros. Poned los vuestros y la tabla calcula una horquilla con tres escenarios de mejora relativa. Las cifras reales se confirman en las 3 primeras semanas con el grupo de control.</p>
+    <div class="calc" id="calc">
+      <div class="ins">
+        <label>Contactos al mes<input type="number" id="c-n" value="600" min="0" step="10" inputmode="numeric"></label>
+        <label>% que llega a hablar con un comercial<input type="number" id="c-h" value="40" min="0" max="100" step="1" inputmode="numeric"></label>
+        <label>% de esos que reserva<input type="number" id="c-r" value="10" min="0" max="100" step="1" inputmode="numeric"></label>
+        <label>Comisión media por reserva (€)<input type="number" id="c-e" value="150" min="0" step="10" inputmode="numeric"></label>
+      </div>
+      <div class="tw" style="border:0;padding:0"><table>
+        <thead><tr><th>Escenario</th><th>Supuesto</th><th class="num">Reservas/mes</th><th class="num">Comisión/mes</th></tr></thead>
+        <tbody id="c-t"></tbody>
+      </table></div>
+      <p class="src">Supuestos: prudente = +10 % de contactos que hablan con un comercial y un 1 % de la base «más adelante» reactivada al mes; medio = +20 % y 2 %; alto = +30 % y 3 %. La base «más adelante» se estima como el 40 % de los contactos del mes. Todo son supuestos de ejemplo que se sustituyen por vuestros datos.</p>
+    </div>
+  </section>
+
+  <!-- GOBIERNO -->
+  <section id="gobierno">
+    <h2><span class="n">12</span>Gobierno y límites</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>Tema</th><th>Regla</th></tr></thead>
+      <tbody>
+        <tr><td>Textos</td><td>Hunty aprueba cada mensaje de WhatsApp, cada email y el guion de Raquel antes de que salga. Cada cambio queda con versión y fecha.</td></tr>
+        <tr><td>Puntuación</td><td>Pesos visibles. Los cambios los aprueba Hunty y se recalibran cada mes contra las reservas.</td></tr>
+        <tr><td>Acceso</td><td>Todo queda en la ficha: cada mensaje, la grabación de cada llamada y su transcripción. Acceso completo para quien decidáis.</td></tr>
+        <tr><td>Datos</td><td>Son vuestros. Se exportan en cualquier momento (CSV) y se borran al terminar si así lo pedís.</td></tr>
+        <tr><td>Traspaso</td><td>En cuanto un comercial escribe o llama, el agente se calla con ese contacto. El contacto pasa al comercial si es A, si pide hablar con una persona, si pregunta por disponibilidad o condiciones que no están en la ficha, o si hay una queja.</td></tr>
+        <tr><td>Lo que el agente no hace</td><td>No confirma plazas ni cierra precios fuera de lo publicado. No promete resultados de caza. No habla de armas ni de normativa más allá de remitir a licencias.</td></tr>
+        <tr><td>Horario</td><td>Mensajes automáticos solo de 8:00 a 21:30.</td></tr>
+        <tr><td>A quién</td><td>Raquel solo llama a quien dejó su teléfono y pidió información, y se presenta como asistente de Hunty. Sin envíos masivos: las alertas van por perfil, una a la semana como máximo, y la baja se pide con un mensaje.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section id="calendario">
+    <h2><span class="n">13</span>Calendario</h2>
+    <div class="tw wide"><table>
+      <thead><tr><th>Cuándo</th><th>Qué</th><th>Temporada</th></tr></thead>
+      <tbody>
+        <tr><td>Hoy</td><td>Los tres arreglos de los anuncios activos.</td><td>Monterías en marcha</td></tr>
+        <tr><td>Semana 1</td><td>Accesos, punto de partida de cada métrica, vuestra puntuación, medición de reserva por anuncio y textos aprobados.</td><td>Monterías de noviembre</td></tr>
+        <tr><td>Semana 2</td><td>Test y landing de monterías, WhatsApp al minuto con cacerías del catálogo y ficha del comercial.</td><td>Monterías de diciembre y enero</td></tr>
+        <tr><td>Semana 3</td><td>Raquel (con grupo de control), recordatorios y seguimiento de reservas. Anuncios que filtran frente a los actuales (H4).</td><td>Celo del macho montés</td></tr>
+        <tr><td>Semana 4</td><td>«Más adelante» con temporadas y reactivación de la base de cuentas sin reserva para monterías de enero y febrero. Panel del daily.</td><td>—</td></tr>
+        <tr><td>Mes 2-3</td><td>Recechos de primavera: avisos de corzo en febrero y marzo para abril. Prime como siguiente paso del «más adelante». Hunty Pro (opcional).</td><td>Corzo desde abril</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- NECESITAMOS -->
+  <section id="necesitamos">
+    <h2><span class="n">14</span>Lo que necesito de vosotros</h2>
+    <ul>
+      <li>Acceso a Meta Business (anuncios y píxel) y lectura de GA4 y Mixpanel.</li>
+      <li>La herramienta donde viven hoy los contactos, con vuestra puntuación actual y sus reglas.</li>
+      <li>El número de WhatsApp del asesor y cómo se reparten hoy las conversaciones entre comerciales.</li>
+      <li>La agenda de los comerciales: franjas y quién lleva qué modalidad o zona.</li>
+      <li>Acceso al catálogo de cacerías (exportación o API), para que el agente proponga cacerías reales y con plazas.</li>
+      <li>Qué no se puede decir: precios cerrados, plazas, condiciones de Prime y de reserva.</li>
+      <li>La base de cuentas sin reserva y cualquier lista de «más adelante», con la fecha de alta.</li>
+    </ul>
+  </section>
+
+  <!-- CÓMO -->
+  <section id="como">
+    <h2><span class="n">15</span>Cómo podemos trabajar</h2>
+    <div class="prices">
+      <div class="card"><h3>Piloto de monterías · 6 semanas</h3><p class="small muted">M2, M3, M4 y M5 sobre la campaña de monterías, con grupo de control y panel. Al final se decide con datos.</p><p class="price">[____] € + IVA</p></div>
+      <div class="card"><h3>Lo opero yo</h3><p class="small muted">Implantación de los módulos elegidos y gestión mensual: anuncios, test, agentes, seguimiento, panel y revisión semanal con vosotros.</p><p class="price">[____] € + IVA <span class="small muted">implantación</span></p><p class="price">[____] € + IVA <span class="small muted">al mes</span></p></div>
+      <div class="card"><h3>Lo monto y os lo dejo</h3><p class="small muted">Lo construyo, formo a vuestro equipo y queda en casa, con un mes de acompañamiento.</p><p class="price">[____] € + IVA</p></div>
+    </div>
+    <p class="small muted">Sin permanencia. La inversión en anuncios la pagáis directamente a Meta.</p>
+  </section>
+
+  <div class="foot">
+    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+    <p>Preparado el 16 de octubre de 2026 para Hunty Ibérica. Fuentes: hunty.es (home, /pro, /club/prime, /licencias, /calendario-de-monterias, fichas de cacería), Biblioteca de anuncios de Meta y Centro de Transparencia de Google, consultados el 16-oct. Los datos de la demo, del panel y de la previsión son de ejemplo.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var f = function (v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+  var S = [['Hoy (vuestros datos)', 'sin cambios', 0, 0], ['Prudente', '+10 % hablan · 1 % reactivados', .10, .01], ['Medio', '+20 % hablan · 2 % reactivados', .20, .02], ['Alto', '+30 % hablan · 3 % reactivados', .30, .03]];
+  function calc() {
+    var n = +document.getElementById('c-n').value || 0, h = (+document.getElementById('c-h').value || 0) / 100,
+        r = (+document.getElementById('c-r').value || 0) / 100, e = +document.getElementById('c-e').value || 0;
+    var base = n * h * r, t = document.getElementById('c-t'); t.innerHTML = '';
+    S.forEach(function (s, i) {
+      var res = n * Math.min(h * (1 + s[2]), 1) * r + (n * 0.4) * s[3] * r;
+      var tr = document.createElement('tr');
+      var extra = i ? ' <span class="muted">(+' + f(res - base) + ')</span>' : '';
+      tr.innerHTML = '<td><b></b></td><td class="small"></td><td class="num">' + f(res) + extra + '</td><td class="num">' + f(res * e) + ' €</td>';
+      tr.cells[0].firstChild.textContent = s[0]; tr.cells[1].textContent = s[1];
+      t.appendChild(tr);
+    });
+  }
+  ['c-n', 'c-h', 'c-r', 'c-e'].forEach(function (id) { document.getElementById(id).addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
