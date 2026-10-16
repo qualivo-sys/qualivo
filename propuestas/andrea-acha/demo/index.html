@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Demo del lanzamiento · Andrea Acha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Demo guiada en pestañas: del anuncio de registro al panel, pasando por bienvenida, precalentamiento, recordatorios, después del directo, agente de WhatsApp y agente de voz. */
+:root{
+  --bg:#FBF6F1; --surface:#FFFFFF; --ink:#2A2421; --muted:#6B5E56; --line:#EADDD2;
+  --accent:#B4554D; --accent-ink:#FFFFFF; --coral:#E98D87; --tan:#BB987A; --good:#2F7A55; --warn:#A8561C; --tint:#FBEAE6; --sand:#F4ECE3;
+  --wa-bg:#EFE7DD; --wa-in:#FFFFFF; --wa-out:#D9FDD3; --wa-head:#075E54;
+  --vz-bg:#F3EEF7; --vz-a:#FFFFFF; --vz-b:#E8DDF2;
+  --display:"Hahmlet",Georgia,serif; --body:"Work Sans","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1C1715; --surface:#27201D; --ink:#F5EDE6; --muted:#C4B5AA; --line:#40352F;
+  --accent:#F2A49D; --accent-ink:#2A1715; --good:#6CC79A; --warn:#F09A63; --tint:#3A2723; --sand:#2E2622;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; --vz-bg:#231C29; --vz-a:#2E2535; --vz-b:#3D2F4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1C1715; --surface:#27201D; --ink:#F5EDE6; --muted:#C4B5AA; --line:#40352F;
+  --accent:#F2A49D; --accent-ink:#2A1715; --good:#6CC79A; --warn:#F09A63; --tint:#3A2723; --sand:#2E2622;
+  --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --wa-head:#1F2C34; --vz-bg:#231C29; --vz-a:#2E2535; --vz-b:#3D2F4A; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:0 64px}
+.top{background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:10px 16px}
+.top .in{max-width:1080px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top b{font-family:var(--display);font-weight:600;font-size:15px}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top nav a{font-size:14px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px}
+.top nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;gap:22px;padding-top:22px}
+.wrap > *{min-width:0}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0;font-weight:600}
+h1{font-size:clamp(28px,4.6vw,44px);letter-spacing:-.015em}
+h2{font-size:clamp(22px,3vw,30px)}
+h3{font-size:17.5px}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:68ch;margin-top:10px}
+.note{font-size:13.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;background:var(--warn);color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle}
+nav.tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 0 6px;position:sticky;top:0;background:var(--bg);z-index:3}
+nav.tabs button{font:inherit;font-weight:600;font-size:14.5px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 13px;cursor:pointer}
+nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+nav.tabs button[aria-selected="true"] span{color:var(--accent-ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pane{display:none;gap:18px}
+.pane.on{display:grid}
+.pane > *{min-width:0}
+.pane > header p{color:var(--muted);margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.half{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.cap{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+/* anuncios */
+.ad{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ad .h{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:14px;font-weight:600}
+.ad .h img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.ad .h small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.ad > img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+.ad .t{padding:10px 12px;font-size:14px;white-space:pre-line}
+.ad .cta{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--line);font-size:14px}
+.ad .cta b{background:var(--sand);border-radius:6px;padding:5px 10px;font-size:13px;white-space:nowrap}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:var(--muted);margin-top:10px}
+.why b{color:var(--ink)}
+/* test */
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-height:470px;align-content:start}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:var(--coral);transition:width .3s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:600;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer}
+.quiz .qopts button:hover{border-color:var(--accent)}
+.quiz .done{display:grid;gap:10px;padding-top:6px}
+.quiz .done b{font-family:var(--display);font-size:23px;font-weight:600}
+.quiz .done p{color:var(--muted);font-size:14.5px}
+.quiz .tagq{display:inline-block;font-size:12.5px;font-weight:700;border-radius:6px;padding:3px 8px;background:var(--tint);color:var(--accent);margin:2px 4px 2px 0}
+.list{display:grid;gap:10px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.list p{color:var(--muted);font-size:14px;margin-top:4px}
+.btnl{display:inline-block;font-weight:700;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:10px;padding:10px 14px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit}
+.btnl.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+/* email */
+.mail{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14.5px}
+.mail .mh{padding:10px 14px;border-bottom:1px solid var(--line);display:grid;gap:2px;background:var(--sand)}
+.mail .mh small{color:var(--muted);font-size:12.5px}
+.mail .mh b{font-size:15px}
+.mail .mb{padding:14px;white-space:pre-line}
+.mail .mb .bt{display:inline-block;background:var(--coral);color:#2A1715;font-weight:700;border-radius:8px;padding:6px 12px;margin:2px 0;white-space:normal}
+.mail .mb .bt.s{background:var(--sand);color:var(--ink)}
+/* whatsapp */
+.phone{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg)}
+.top2{background:var(--wa-head);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.top2 img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.top2 small{display:block;font-size:12px;opacity:.85}
+.phone .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:86%;padding:8px 10px 6px;border-radius:10px;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);overflow-wrap:anywhere}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:var(--surface);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center}
+.b u{color:#1F6FB2;text-decoration:none;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .b u{color:#53BDEB}}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.wa{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px}
+.wa .body{overflow-y:auto}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:58px}
+.wa .opts button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;max-height:640px;overflow-y:auto}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border-left:3px solid var(--coral);padding:4px 0 4px 10px;font-size:14px}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-color:var(--warn)}
+.log li.g{border-color:var(--good)}
+/* secuencias */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl > li{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--line);margin-left:7px}
+.tl > li:last-child{border-left-color:transparent}
+.tl > li::before{content:"";position:absolute;left:-8px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--coral);border:2px solid var(--bg)}
+.tl > li.t0::before{background:var(--accent)}
+.tl > li.stop::before{background:var(--good)}
+.tl > li.alert::before{background:var(--warn)}
+.tl .w{font-family:var(--mono);font-size:12.5px;color:var(--accent);display:block}
+.tl .ti{display:block;font-weight:700;font-size:15.5px;margin:2px 0 8px}
+.msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start}
+.ch{display:inline-block;font-size:11.5px;font-weight:700;border-radius:5px;padding:1px 6px;margin-right:4px;white-space:nowrap}
+.ch.em{background:#E8EEF8;color:#2B4C7E}.ch.wa{background:#DCF5E3;color:#1D6B3A}.ch.gr{background:#F4ECE3;color:#7A5A3E}.ch.vz{background:#F3E3F1;color:#7A2E6E}.ch.ad{background:#FFF0D6;color:#8A5300}
+.mini{background:var(--wa-bg);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:6px}
+.mini .lbl{font-size:12px;color:var(--muted);font-weight:600}
+.mini.gr .lbl::before{content:"👥 "}
+.seg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.seg > p{color:var(--muted);font-size:14.5px}
+.seg h3{display:flex;align-items:center;gap:10px}
+.seg h3 i{width:12px;height:12px;border-radius:50%;background:var(--coral);flex:none}
+.seg.g h3 i{background:var(--good)}.seg.t h3 i{background:var(--tan)}.seg.m h3 i{background:var(--muted)}
+details.more{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 16px}
+details.more summary{cursor:pointer;font-weight:700;padding:12px 0}
+details.more[open]{padding-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chips span{border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600}
+/* voz */
+.call{background:var(--vz-bg);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.call .hdr{display:flex;align-items:center;gap:10px;padding:4px 4px 10px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.call .hdr i{width:38px;height:38px;border-radius:50%;background:#7A2E6E;color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.call .hdr small{display:block;color:var(--muted);font-size:12.5px}
+.v{max-width:86%;padding:8px 12px;border-radius:14px;font-size:15px;line-height:1.45}
+.v.a{background:var(--vz-a);align-self:flex-start;border:1px solid var(--line)}
+.v.b2{background:var(--vz-b);align-self:flex-end}
+.v small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:2px}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.rules ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px;font-size:14.5px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+tfoot td{font-weight:700;border-bottom:0}
+td{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px}
+.kpi b{font-family:var(--display);font-size:30px;line-height:1.1;font-weight:600}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi.alert{border-color:var(--warn)}
+.kpi.alert b{color:var(--warn)}
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.todo li{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.todo li b{display:block}
+.todo li span{color:var(--muted);font-size:13.5px}
+.todo li em{font-style:normal;font-family:var(--mono);font-size:11.5px;border-radius:6px;padding:2px 7px;background:var(--tint);color:var(--accent);white-space:nowrap;margin-top:2px}
+footer{font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media (max-width:900px){.cols,.two,.half{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><b>Andrea Acha × Qualivo</b>
+  <nav aria-label="Presentación"><a href="../">Plan</a><a href="./" aria-current="page">Demo</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a></nav></div></div>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Ejemplo · Demo para Andrea Acha · Marca Mediática Sessions</p>
+  <h1>Del anuncio a la llamada con tu equipo, paso a paso</h1>
+  <p class="lead">Así lo viviría Lucía, que tiene una marca de cosmética natural y se registra a tu directo desde un anuncio. Y así lo verías tú. Directo de ejemplo: jueves 3 de diciembre a las 19:00.</p>
+</header>
+
+<p class="note"><span class="ej">Ejemplo</span> Todo lo que se ve es de ejemplo: fechas, nombres, mensajes y cifras. Los textos están escritos en tu voz para que los corrijas; no sale nada sin tu aprobación. Los mensajes automáticos solo salen de 8:00 a 21:30, y el WhatsApp uno a uno solo a quien dio su permiso o te escribió.</p>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span>Anuncio</button>
+  <button role="tab" id="t-registro" aria-controls="p-registro" data-p="registro"><span>2</span>Registro</button>
+  <button role="tab" id="t-bienvenida" aria-controls="p-bienvenida" data-p="bienvenida"><span>3</span>Bienvenida</button>
+  <button role="tab" id="t-precalentamiento" aria-controls="p-precalentamiento" data-p="precalentamiento"><span>4</span>Precalentamiento</button>
+  <button role="tab" id="t-recordatorios" aria-controls="p-recordatorios" data-p="recordatorios"><span>5</span>Recordatorios</button>
+  <button role="tab" id="t-despues" aria-controls="p-despues" data-p="despues"><span>6</span>Después del directo</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>7</span>Agente WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>8</span>Agente de voz</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>9</span>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIO -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header><h2>1 · El anuncio de registro <span class="ej">Ejemplo</span></h2><p>Tres ángulos sacados de tus propios textos, todos llevando a la página de registro del directo. Lucía llega desde el primero. La galería completa, con stories y textos, está en <a href="../anuncios/">Anuncios</a>.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">A · Al otro lado · feed 4:5</p>
+      <div class="ad">
+        <div class="h"><img src="../assets/andrea-qa.jpg" alt="" width="30" height="30"><div>andreaachasusaeta<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/a-feed.jpg" alt="Anuncio A: Durante años decidí qué marcas salían en la revista" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Lo que una periodista lee en 3 segundos</span><b>Registrarte</b></div>
+        <p class="t">Durante años estuve al otro lado: escribiendo en revistas femeninas y decidiendo qué marcas salían. Los correos que empezaban igual, los cerraba a los tres segundos…</p>
+      </div>
+      <div class="why"><b>Por qué:</b> es tu historia más fuerte y ya la usas. Aquí lleva a una fecha y una plaza, no a «comenta FAN».</div>
+    </div>
+    <div>
+      <p class="cap">B · El secreto mejor guardado · feed 4:5</p>
+      <div class="ad">
+        <div class="h"><img src="../assets/andrea-qa.jpg" alt="" width="30" height="30"><div>andreaachasusaeta<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/b-feed.jpg" alt="Anuncio B: Tu marca funciona. Fuera de tu comunidad, nadie lo sabe" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Deja de ser el secreto mejor guardado</span><b>Registrarte</b></div>
+        <p class="t">Tu marca funciona. Tienes clientas, te recomiendan… y fuera de tu comunidad casi nadie sabe quién eres.</p>
+      </div>
+      <div class="why"><b>Por qué:</b> habla del dolor de quien ya vende. Los logos de medios hacen de prueba sin prometer nada.</div>
+    </div>
+    <div>
+      <p class="cap">C · Sin vivir en Instagram · feed 4:5</p>
+      <div class="ad">
+        <div class="h"><img src="../assets/andrea-qa.jpg" alt="" width="30" height="30"><div>andreaachasusaeta<small>Publicidad · Ejemplo</small></div></div>
+        <img src="../anuncios/img/c-feed.jpg" alt="Anuncio C: La prensa no te pide estar todos los días en Instagram" width="1080" height="1350" loading="lazy">
+        <div class="cta"><span>Un artículo no caduca en 48 horas</span><b>Registrarte</b></div>
+        <p class="t">Me lo decís mucho: «estoy saturada, no tengo tiempo para sumar otra cosa más». La prensa funciona al revés…</p>
+      </div>
+      <div class="why"><b>Por qué:</b> responde a la objeción que te dieron tus registradas. Y quien no tiene tiempo es candidata a tu agencia.</div>
+    </div>
+  </div>
+  <p class="note">Cada anuncio lleva su marca en el enlace. Así, cuando Lucía se registra, su ficha ya dice «anuncio A». Lo veremos al final, en el panel.</p>
+  <div class="navnext"><button data-go="registro">Siguiente: el registro ›</button></div>
+</section>
+
+<!-- 2 · REGISTRO -->
+<section class="pane" id="p-registro" role="tabpanel" aria-labelledby="t-registro">
+  <header><h2>2 · Un registro que ya te dice quién es <span class="ej">Ejemplo</span></h2><p>Nombre y email, como ahora, y después tres toques. Pruébalo como si fueras Lucía. La página entera, con tu marca, está en <a href="../landing/">Landing</a>.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div><h3>Lo que pregunta</h3><p>Qué tipo de marca tiene, si ha salido ya en prensa y si quiere aprender a hacerlo ella o que alguien lo haga por ella. Y si quiere el recordatorio por WhatsApp.</p></div>
+      <div><h3>Para qué sirve</h3><p>Los mensajes hablan de su marca. Tu equipo sabe antes de la llamada si es una candidata a F.A.N. o a la agencia.</p></div>
+      <div><h3>El permiso de WhatsApp</h3><p>Casilla sin marcar por defecto: «solo recordatorios del directo, puedes salir cuando quieras». Sin casilla, solo email.</p></div>
+      <div><h3>Lo que pasa al pulsar</h3><p>Se crea su plaza en Zoom con enlace personal, se guarda de qué anuncio viene y sale la bienvenida.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="bienvenida">Siguiente: la bienvenida ›</button></div>
+</section>
+
+<!-- 3 · BIENVENIDA -->
+<section class="pane" id="p-bienvenida" role="tabpanel" aria-labelledby="t-bienvenida">
+  <header><h2>3 · En el minuto 0: la bienvenida <span class="ej">Ejemplo</span></h2><p>Lucía se registra un jueves a las 13:40. En menos de un minuto le llegan el correo y, como marcó la casilla, el WhatsApp. Las dos cosas buscan lo mismo: que el directo quede en su calendario.</p></header>
+  <div class="half">
+    <div>
+      <p class="cap"><span class="ch em">Email</span> al registrarse</p>
+      <div class="mail">
+        <div class="mh"><small>De: Andrea Acha · Para: Lucía</small><b>Lucía, tienes plaza para el jueves 3 a las 19:00</b></div>
+        <div class="mb">Hola, Lucía:
+
+Ya tienes tu plaza en <b>Marca Mediática Sessions</b>. Apunta:
+
+📅 Jueves 3 de diciembre, 19:00 h (hora de Madrid)
+💻 Por Zoom. Este es tu enlace personal, solo tuyo:
+<span class="bt">Entrar al directo</span>
+
+Dos cosas para que no se te pase:
+1. Guárdalo ya en tu calendario:
+<span class="bt s">Google Calendar</span> <span class="bt s">Apple / Outlook</span>
+2. Únete al grupo de WhatsApp del directo, donde comparto el material previo:
+<span class="bt s">Unirme al grupo</span>
+
+Durante años fui yo la que decidía en una revista qué marcas salían y cuáles no. El jueves 3 te enseño, con ejemplos reales, qué leía y qué borraba a los tres segundos.
+
+Nos vemos en directo,
+Andrea
+
+PD: si este correo te ha llegado a Promociones, muévelo a Principal y así no te pierdes el enlace.</div>
+      </div>
+    </div>
+    <div>
+      <p class="cap"><span class="ch wa">WhatsApp</span> al registrarse · solo si marcó la casilla</p>
+      <div class="phone">
+        <div class="top2"><img src="../assets/andrea-qa.jpg" alt="" width="34" height="34"><div><b>Andrea Acha</b><small>Cuenta de empresa</small></div></div>
+        <div class="body">
+          <div class="b sys">Hoy</div>
+          <div class="b in">Hola, Lucía 👋 Soy Andrea. Ya tienes tu plaza para <b>Marca Mediática Sessions</b>: jueves 3 de diciembre a las 19:00 (hora de Madrid).
+
+Por aquí solo te escribiré para recordártelo. Si en algún momento no quieres más mensajes, responde BAJA.
+
+¿Me confirmas que te llega bien? Responde SÍ 🙌<time>13:41</time></div>
+          <div class="b out">Sí!! 😊<time>13:44</time></div>
+          <div class="b in">¡Genial! Te dejo el grupo del directo, donde iré compartiendo el material previo: <u>chat.whatsapp.com/…</u>
+Nos vemos el jueves 3 💛<time>13:44</time></div>
+        </div>
+      </div>
+      <div class="why"><b>Por qué pedir que responda «SÍ»:</b> así es una conversación y no un envío masivo, que es lo que protege tu número. Y quien responde ya ha dado un paso: suele venir más.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="precalentamiento">Siguiente: el precalentamiento ›</button></div>
+</section>
+
+<!-- 4 · PRECALENTAMIENTO -->
+<section class="pane" id="p-precalentamiento" role="tabpanel" aria-labelledby="t-precalentamiento">
+  <header><h2>4 · Precalentamiento: que llegue con ganas y con un motivo para venir en directo <span class="ej">Ejemplo</span></h2><p>Todos los textos, con su asunto y su día. Quien se registra tarde recibe solo lo que queda. Cualquier respuesta la ve tu equipo.</p></header>
+  <ol class="tl">
+    <li><span class="w">+1 día después de registrarse · solo si faltan más de 8 días</span><span class="ti">Mientras llega el día: tu audioclase</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 10:00</small><b>Mientras llega el 3 de diciembre: 10 minutos para ti</b></div>
+          <div class="mb">Hola, Lucía:
+
+Quedan unos días para Marca Mediática Sessions y no quiero que llegues en frío.
+
+Te dejo mi audioclase: en 10 minutos sabrás si tu marca está preparada para salir en prensa y cuáles son las 3 únicas cosas que necesita.
+<span class="bt">Escuchar la audioclase</span>
+
+Escúchala en un paseo o mientras recoges la cocina. El jueves 3 iremos un paso más allá.
+
+Un abrazo,
+Andrea</div></div>
+      </div></li>
+    <li><span class="w">T-7 · jueves 26 de noviembre</span><span class="ti">Deberes de 5 minutos (el motivo para venir en directo)</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 9:30</small><b>Tus deberes para el jueves 3 (5 minutos)</b></div>
+          <div class="mb">Hola, Lucía:
+
+Antes del directo quiero pedirte una cosa pequeña.
+
+Escribe en una sola frase qué hace tu marca. Como si se lo contaras a una periodista que tiene tres segundos.
+
+No tiene que estar bonita. Tiene que estar escrita.
+
+El jueves 3, en directo, elegiré varias frases de las que estéis conectadas y las revisaremos en el momento: qué sobra, qué falta y cómo la leería yo si estuviera otra vez en la redacción.
+
+La revisión es para quien está: en la grabación no podrás participar.
+
+Nos vemos el jueves 3 a las 19:00.
+Andrea
+
+PD: tu enlace personal sigue aquí: <span class="bt s">Entrar al directo</span></div></div>
+        <div class="mini gr"><p class="lbl">Grupo · lo publica tu equipo a las 10:00</p><div class="b in">¡Hola a todas! 👋 Deberes para el jueves: escribid en una frase qué hace vuestra marca, como si se la contarais a una periodista con tres segundos.
+
+En el directo revisaré algunas en el momento ✍️ Si queréis, compartidla por aquí.</div></div>
+      </div></li>
+    <li><span class="w">T-5 · sábado 28 de noviembre</span><span class="ti">Una historia: el correo que yo borraba</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 10:00</small><b>El correo que yo borraba en tres segundos</b></div>
+          <div class="mb">Hola, Lucía:
+
+Durante años estuve al otro lado, escribiendo en una revista femenina. Me llegaban decenas de correos al día y la mayoría empezaban igual:
+
+«Hola, soy Marta, tengo una marca de cosmética y me encantaría salir en vuestra revista».
+
+Los cerraba a los tres segundos. No porque la marca fuera mala: porque no me daba ningún motivo para seguir leyendo.
+
+Lo interesante de tu marca existe. Lo que pasa es que estás tan dentro que te cuesta verlo.
+
+El jueves 3 te enseño qué hacía que siguiera leyendo, con ejemplos reales.
+
+Andrea</div></div>
+      </div></li>
+    <li><span class="w">T-3 · lunes 30 de noviembre</span><span class="ti">«¿Qué pregunta quieres que responda?»</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 9:30</small><b>¿Qué quieres que te responda el jueves?</b></div>
+          <div class="mb">Hola, Lucía:
+
+Estoy preparando el directo y quiero responder a lo que de verdad os preocupa.
+
+Contéstame a este correo con tu pregunta sobre salir en prensa. La que sea: a quién escribir, qué mandar, si tu marca es «demasiado pequeña»…
+
+Las más repetidas las respondo en directo, el jueves 3 a las 19:00.
+
+Andrea</div></div>
+        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 12:00 · solo con permiso</p><div class="b in">Hola, Lucía 🙂 Soy Andrea. El jueves respondo en directo las preguntas que más se repitan.
+
+¿Cuál es la tuya sobre salir en prensa? Contéstame por aquí con una frase.</div><div class="b out">Si una marca pequeña como la mía tiene sentido en revistas grandes o mejor empezar por medios locales</div><div class="b in">¡Apuntada! Es de las que más me llegan, así que la respondo el jueves 💛</div></div>
+        <div class="mini gr"><p class="lbl">Grupo · 12:30</p><div class="b in">¿Qué pregunta queréis que responda el jueves? Dejadla por aquí 👇 Las más repetidas van al directo.</div></div>
+      </div></li>
+    <li><span class="w">T-2 · martes 1 de diciembre</span><span class="ti">Lo que solo verá quien venga en directo</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 19:00</small><b>Lo que solo verá quien venga en directo</b></div>
+          <div class="mb">Hola, Lucía:
+
+Habrá grabación, no te voy a engañar. Pero hay cosas que solo pasan en directo:
+
+· Revisaré en el momento algunas de vuestras frases (trae la tuya).
+· Responderé vuestras preguntas, también las del chat.
+· [El regalo para quien se quede hasta el final: lo decides tú. Por ejemplo, la plantilla del primer correo a una periodista.]
+
+Jueves 3 de diciembre · 19:00 (hora de Madrid) · 60 minutos + preguntas.
+<span class="bt s">Añadir a mi calendario</span> <span class="bt">Mi enlace al directo</span>
+
+Andrea</div></div>
+        <div class="mini"><p class="lbl"><span class="ch ad">Anuncio</span> recordatorio en Instagram a las registradas</p><p class="small" style="font-size:14px">Story «¿Te guardo sitio para el jueves?» solo para la lista de registradas. Llega también a quien no abre el correo ni está en WhatsApp. Ver <a href="../anuncios/#recuerdo">anuncios de recuerdo</a>.</p></div>
+      </div></li>
+  </ol>
+  <div class="navnext"><button data-go="recordatorios">Siguiente: los recordatorios ›</button></div>
+</section>
+
+<!-- 5 · RECORDATORIOS -->
+<section class="pane" id="p-recordatorios" role="tabpanel" aria-labelledby="t-recordatorios">
+  <header><h2>5 · Recordatorios del directo <span class="ej">Ejemplo</span></h2><p>Víspera, mañana, 2 horas, 15 minutos y «estamos en directo». Este último solo a quien no ha entrado: con Zoom conectado sabemos quién está dentro y a quién no hay que molestar.</p></header>
+  <ol class="tl">
+    <li><span class="w">T-1 · miércoles 2 de diciembre · 19:00</span><span class="ti">Víspera</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 19:00</small><b>Mañana a las 19:00 (tu enlace dentro)</b></div>
+          <div class="mb">Hola, Lucía:
+
+Mañana, jueves 3 de diciembre, a las 19:00 (hora de Madrid) nos vemos en Marca Mediática Sessions.
+
+Tu enlace personal: <span class="bt">Entrar al directo</span>
+
+Tres cosas para aprovecharlo:
+1. Busca 75 minutos sin interrupciones.
+2. Ten tu frase escrita a mano.
+3. Entra 5 minutos antes para probar el audio.
+
+Hasta mañana,
+Andrea</div></div>
+        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 19:05</p><div class="b in">Lucía, mañana a las 19:00 nos vemos en Marca Mediática Sessions 🎙️
+
+Tu enlace personal: <u>zoom.us/w/…</u>
+Trae tu frase escrita: revisaré algunas en directo ✍️</div></div>
+        <div class="mini gr"><p class="lbl">Grupo · 19:10</p><div class="b in">¡Mañana a las 19:00! 💛 El enlace os ha llegado a cada una por correo. Si no lo encontráis, mirad en Promociones o escribidnos por privado.</div></div>
+      </div></li>
+    <li class="t0"><span class="w">T0 · jueves 3 de diciembre · 10:00</span><span class="ti">«Hoy es el día»</span>
+      <div class="msgs">
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 10:00</small><b>Hoy a las 19:00</b></div>
+          <div class="mb">Hoy es el día, Lucía. A las 19:00 (hora de Madrid) empezamos.
+
+<span class="bt">Entrar al directo</span> <span class="bt s">Añadir a mi calendario</span>
+
+Andrea</div></div>
+        <div class="mini"><p class="lbl"><span class="ch ad">Anuncio</span> todo el día, solo a registradas</p><p style="font-size:14px">Story «Hoy a las 19:00 te espero en directo».</p></div>
+      </div></li>
+    <li class="t0"><span class="w">T0 · 17:00 · 2 horas antes</span><span class="ti">«En dos horas empezamos»</span>
+      <div class="msgs">
+        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 17:00</p><div class="b in">En dos horas empezamos, Lucía. Busca un rato tranquilo y ten a mano tu frase 🙂
+Tu enlace: <u>zoom.us/w/…</u></div></div>
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 17:00 · a quien no tiene WhatsApp</small><b>En 2 horas empezamos</b></div><div class="mb">A las 19:00 nos vemos, Lucía. <span class="bt">Entrar al directo</span></div></div>
+      </div></li>
+    <li class="t0"><span class="w">T0 · 18:45 · 15 minutos antes</span><span class="ti">«Abrimos la sala»</span>
+      <div class="msgs">
+        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 18:45</p><div class="b in">Abrimos la sala en 15 minutos 👉 <u>zoom.us/w/…</u></div></div>
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 18:45</small><b>Abrimos la sala en 15 minutos</b></div><div class="mb"><span class="bt">Entrar ahora</span></div></div>
+        <div class="mini gr"><p class="lbl">Grupo · 18:50</p><div class="b in">¡Abrimos en 10 minutos! Entrad con vuestro enlace personal 💛</div></div>
+      </div></li>
+    <li class="t0"><span class="w">T0 · 19:03 y 19:15 · solo a quien no ha entrado</span><span class="ti">«Estamos en directo, aún llegas»</span>
+      <div class="msgs">
+        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 19:03</p><div class="b in">Ya hemos empezado, Lucía, y estoy contando lo de los tres segundos. Aún llegas 👉 <u>zoom.us/w/…</u></div></div>
+        <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 19:15</small><b>Ahora viene la revisión de frases</b></div><div class="mb">Si puedes, entra ahora: <span class="bt">Entrar al directo</span>
+Si hoy no llegas, mañana te mando la grabación.</div></div>
+      </div></li>
+    <li class="stop"><span class="w">19:00 → 20:15 · por detrás</span><span class="ti">Zoom apunta quién entra, a qué hora y cuántos minutos se queda</span>
+      <p class="note">Lucía entra a las 19:04 y se queda 58 minutos, hasta después de la propuesta. Su ficha pasa a «Asistió · se quedó a la propuesta». Otra registrada entra a las 19:20 y se va a las 19:40: «Asistió · se fue antes de la propuesta».</p></li>
+  </ol>
+  <div class="navnext"><button data-go="despues">Siguiente: después del directo ›</button></div>
+</section>
+
+<!-- 6 · DESPUÉS -->
+<section class="pane" id="p-despues" role="tabpanel" aria-labelledby="t-despues">
+  <header><h2>6 · Después del directo: un mensaje para cada una <span class="ej">Ejemplo</span></h2><p>Hoy todas reciben los mismos dos emails y WhatsApps de venta. Aquí cada grupo recibe lo suyo. Pongamos que la propuesta empieza en el minuto 42 del directo.</p></header>
+
+  <div class="seg g">
+    <h3><i></i>Se quedó hasta la propuesta (Lucía)</h3>
+    <div class="msgs">
+      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T0 · 21:00</p><div class="b in">Gracias por quedarte hasta el final, Lucía 💛
+
+Si quieres ver si FAN encaja con tu marca, elige aquí la hora para hablar con mi equipo: <u>andreaacha.com/llamada</u>
+Son 30 minutos y sin compromiso.</div></div>
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T0 · 21:00</small><b>Tu llamada para ver si FAN encaja (eliges tú la hora)</b></div>
+        <div class="mb">Hola, Lucía:
+
+Gracias por venir esta tarde. Si al escucharme pensaste «esto es lo que me falta», el siguiente paso es una llamada con mi equipo: vemos tu marca, tu momento y si FAN es para ti. Si no lo es, te lo diremos.
+<span class="bt">Elegir hora</span>
+
+FAN son 3 meses: 7 semanas de contenido y 5 de soporte, ejercicios corregidos uno a uno y sesiones en directo. 1.800 € + impuestos, se puede pagar en cuotas y tienes 14 días de garantía.
+
+Las llamadas están abiertas hasta el jueves 10 de diciembre.
+
+Andrea</div></div>
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+2 · solo si no ha agendado</small><b>Las 3 preguntas que más me hicisteis</b></div>
+        <div class="mb">Hola, Lucía:
+
+Después del jueves me llegaron muchas preguntas. Te dejo las tres que más se repiten:
+
+<b>¿Se puede pagar en cuotas?</b> Sí. Lo vemos en la llamada según te venga mejor.
+<b>¿Mi marca es demasiado pequeña?</b> No depende de tus seguidores. Lo importante es que tengas web, tengas clara tu solución y tu negocio esté en marcha.
+<b>¿Y si no tengo tiempo para hacerlo yo?</b> Para eso tenemos también un servicio de agencia: mi equipo lleva la prensa de tu marca por ti. Cuéntalo en la llamada y lo vemos.
+
+<span class="bt">Elegir hora</span>
+
+Andrea</div></div>
+    </div>
+  </div>
+
+  <div class="seg">
+    <h3><i></i>Se fue antes de la propuesta</h3>
+    <div class="msgs">
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+1 · 10:00</small><b>Te fuiste justo antes de lo mejor</b></div>
+        <div class="mb">Hola, Lucía:
+
+Ayer estuviste conmigo un buen rato (¡gracias!) y te fuiste justo antes de la parte en la que conté cómo trabajamos en FAN.
+
+Te la dejo aquí, empezando en el minuto 42:
+<span class="bt">Ver desde el minuto 42</span>
+
+La grabación está disponible hasta el domingo a las 23:59.
+
+Andrea</div></div>
+      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T+1 · 10:05 · con permiso</p><div class="b in">Lucía, te dejo la grabación justo desde donde te fuiste (minuto 42): <u>andreaacha.com/sesion/…</u>
+Está hasta el domingo 🙂</div></div>
+    </div>
+  </div>
+
+  <div class="seg t">
+    <h3><i></i>No vino: grabación con plazo</h3>
+    <div class="msgs">
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+1 · 9:30</small><b>No pudiste venir: aquí tienes la grabación (hasta el domingo)</b></div>
+        <div class="mb">Hola, Lucía:
+
+Sé que no siempre se llega. Aquí tienes la grabación de Marca Mediática Sessions:
+<span class="bt">Ver la grabación</span>
+
+Si solo tienes 15 minutos, empieza en el minuto 18: lo que hace una periodista en los tres primeros segundos.
+
+Estará disponible hasta el domingo 6 a las 23:59.
+
+Andrea</div></div>
+      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T+1 · 9:35 · con permiso</p><div class="b in">Hola, Lucía. Ayer no pudiste venir, lo sé 🙂 Aquí tienes la grabación hasta el domingo: <u>andreaacha.com/sesion/…</u>
+Si vas con prisa, empieza en el minuto 18.</div></div>
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+2 · solo si no la ha abierto</small><b>Lo que más se comentó en el chat</b></div>
+        <div class="mb">Hola, Lucía:
+
+En el chat del jueves salió una y otra vez la misma idea: «yo pensaba que había que tener muchos seguidores para salir en prensa».
+
+No. En la grabación explico por qué, a partir del minuto 18.
+<span class="bt">Ver la grabación</span>
+
+Andrea</div></div>
+      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> + <span class="ch em">Email</span> T+3 · domingo 20:00</p><div class="b in">Lucía, la grabación se va esta noche a las 23:59. Si querías verla, este es el momento 👉 <u>andreaacha.com/sesion/…</u></div></div>
+    </div>
+  </div>
+
+  <div class="seg g">
+    <h3><i></i>Vio la grabación hasta la propuesta</h3>
+    <p>La página de la grabación avisa cuando pasa del minuto 42. El mensaje sale en la hora siguiente (de 8:00 a 21:30). Es donde hoy tienes más agendas: ahora sabremos quién es.</p>
+    <div class="msgs">
+      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> o <span class="ch em">Email</span> si no hay permiso</p><div class="b in">Gracias por ver la sesión, Lucía 🙌 Si te quedaste con ganas de saber si FAN encaja con tu marca, elige hora con mi equipo aquí: <u>andreaacha.com/llamada</u>
+Y si tienes alguna duda antes, escríbeme por aquí.</div></div>
+    </div>
+  </div>
+
+  <div class="seg m">
+    <h3><i></i>Agendó la llamada: confirmación, recordatorios y rescate</h3>
+    <ol class="tl">
+      <li><span class="w">Al reservar</span><span class="ti">Confirmación + preparación</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> + <span class="ch em">Email</span></p><div class="b in">Hecho, Lucía: hablas con el equipo de Andrea el martes 8 a las 12:00.
+
+Antes, cuéntanos en 2 minutos tu web, qué vendes y qué te gustaría conseguir con la prensa: <u>andreaacha.com/antes-de-la-llamada</u>
+Así llegamos preparadas.</div></div></div></li>
+      <li><span class="w">Víspera · 19:00</span><span class="ti">Recordatorio</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">Mañana a las 12:00 hablamos de tu marca, Lucía. Si te surge algo, responde a este mensaje y lo movemos.</div></div></div></li>
+      <li><span class="w">2 horas antes</span><span class="ti">Último aviso</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">En 2 horas hablamos 🙂 Aquí tienes el enlace de la llamada: <u>meet.google.com/…</u></div></div></div></li>
+      <li class="alert"><span class="w">+10 minutos si no se conecta</span><span class="ti">Rescate del plantón (y aviso a tu equipo)</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">Lucía, te esperábamos a las 12:00. ¿Te ha surgido algo? Te dejo dos huecos: mañana a las 11:00 o el jueves a las 17:30. Responde 1 o 2.</div></div></div></li>
+      <li class="stop"><span class="w">En la llamada</span><span class="ti">Cierra tu equipo, como hasta ahora</span></li>
+    </ol>
+  </div>
+
+  <div class="seg">
+    <h3><i></i>Cierre de las llamadas · T+6 y T+7</h3>
+    <p>Tus dos emails de venta, solo a quien asistió o vio la grabación y no ha agendado ni comprado.</p>
+    <div class="msgs">
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+6 · miércoles 9 · 10:00</small><b>Cerramos las llamadas mañana</b></div><div class="mb">Hola, Lucía:
+
+Mañana jueves a las 23:59 cierro las llamadas de esta edición de FAN. Si te lo estás pensando, la llamada es el sitio para resolverlo: si no es para ti, te lo diremos.
+<span class="bt">Elegir hora</span>
+
+Andrea</div></div>
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wa">WhatsApp</span> T+7 · jueves 10 · 18:00</small><b>Últimas horas para hablar con mi equipo</b></div><div class="mb">Lucía, hoy a las 23:59 cerramos. Quedan huecos esta tarde y mañana por la mañana para quien reserve antes del cierre.
+<span class="bt">Elegir hora</span></div></div>
+    </div>
+  </div>
+
+  <div class="seg t">
+    <h3><i></i>«Ahora no» · T+8</h3>
+    <p>Una pregunta de un toque. Cada respuesta tiene su camino; la de «tiempo» alimenta tu agencia.</p>
+    <div class="msgs">
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wa">WhatsApp</span> con permiso · T+8 · 10:00</small><b>¿Qué te ha frenado? (un toque)</b></div><div class="mb">Hola, Lucía:
+
+Cerramos esta edición de FAN. Si no ha sido tu momento, me ayuda mucho saber por qué. Un toque:
+
+<span class="bt s">No es mi momento</span> <span class="bt s">Por el dinero</span> <span class="bt s">No tengo tiempo para hacerlo yo</span> <span class="bt s">Otra cosa</span>
+
+Gracias,
+Andrea</div></div>
+      <div class="list">
+        <div><h3>No es mi momento</h3><p>«Te apunto a la lista prioritaria: te aviso antes que a nadie de la próxima edición.»</p></div>
+        <div><h3>Por el dinero</h3><p>«FAN se puede pagar en cuotas. Y si prefieres empezar por algo pequeño, el Pitch Noticiable™ (47 €) te deja tu frase lista en una mañana.»</p></div>
+        <div><h3>No tengo tiempo para hacerlo yo</h3><p>«Te entiendo. Por eso mi equipo también lleva la prensa de marcas como la tuya. ¿Quieres que te llamemos para contártelo?» → aviso a tu equipo: <b>candidata a agencia</b>.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el agente de WhatsApp ›</button></div>
+</section>
+
+<!-- 7 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>7 · Lucía contesta con una duda: el agente de WhatsApp <span class="ej">Ejemplo</span></h2><p>Son las 21:12 del día del directo. Lucía responde al mensaje de las 21:00. Elige un camino. A la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top2"><img src="../assets/andrea-qa.jpg" alt="" width="34" height="34"><div><b>Andrea Acha</b><small>Vera, asistente del equipo · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="log">
+      <h3>Por detrás</h3>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Vera se presenta como asistente del equipo. Contesta con lo que dice tu web (precio, cuotas, garantía, duración) y lleva a la llamada. No negocia, no promete apariciones y no cierra ventas. Tu equipo ve cada conversación y puede entrar cuando quiera: en cuanto escribe alguien de tu equipo, Vera se calla.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: el agente de voz ›</button></div>
+</section>
+
+<!-- 8 · VOZ -->
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>8 · El agente de voz: solo a quien lo pidió <span class="ej">Ejemplo</span></h2><p>Lucía, en el WhatsApp, pulsa «Prefiero que me llaméis». A los 12 minutos suena su teléfono. La llamada dura dos minutos y su único objetivo es buscarle hora con tu equipo.</p></header>
+  <div class="two">
+    <div class="call" aria-label="Guion de la llamada">
+      <div class="hdr"><i>V</i><div><b>Llamada saliente · Vera, asistente de voz</b><small>Jueves 3 · 21:24 · 2 min 05 s · Ejemplo</small></div></div>
+      <div class="v a"><small>Vera</small>Hola, ¿hablo con Lucía?</div>
+      <div class="v b2"><small>Lucía</small>Sí, soy yo.</div>
+      <div class="v a"><small>Vera</small>Hola, Lucía, soy Vera, la asistente virtual del equipo de Andrea Acha. Te llamo porque hace un rato nos pediste que te llamáramos después de la sesión. ¿Te pillo bien un par de minutos?</div>
+      <div class="v b2"><small>Lucía</small>Sí, sí, dime.</div>
+      <div class="v a"><small>Vera</small>Genial. Solo quiero buscarte un hueco para la llamada con el equipo, donde veis si FAN encaja con tu marca. Antes, ¿me cuentas en una frase qué marca tienes?</div>
+      <div class="v b2"><small>Lucía</small>Una marca de cosmética natural. Llevo dos años.</div>
+      <div class="v a"><small>Vera</small>Qué bien. ¿Has salido ya alguna vez en prensa?</div>
+      <div class="v b2"><small>Lucía</small>Una vez, en un periódico local.</div>
+      <div class="v a"><small>Vera</small>Perfecto, se lo apunto al equipo. Tengo mañana viernes a las 11:00 o el lunes a las 17:30. ¿Cuál te viene mejor?</div>
+      <div class="v b2"><small>Lucía</small>El lunes a las 17:30.</div>
+      <div class="v a"><small>Vera</small>Hecho: lunes a las 17:30. Ahora te llega la confirmación por WhatsApp y por correo, con un formulario de dos minutos para que el equipo llegue preparado. ¿Hay alguna duda que quieras que les pase?</div>
+      <div class="v b2"><small>Lucía</small>Sí, cuántas cuotas hay.</div>
+      <div class="v a"><small>Vera</small>Se lo dejo anotado y te lo concretan en la llamada. Gracias, Lucía, ¡hasta el lunes!</div>
+    </div>
+    <div class="rules">
+      <div><h3>Cuándo llama</h3><ul>
+        <li>Solo a quien pulsó «Prefiero que me llaméis» o lo pidió por escrito.</li>
+        <li>O a quien empezó a agendar, dejó su teléfono y no terminó.</li>
+        <li>A los 10-20 minutos, de 8:00 a 21:30. Si es más tarde, a partir de las 8:00 del día siguiente.</li>
+        <li>Dos intentos como mucho. Nunca a quien solo se registró al directo.</li></ul></div>
+      <div><h3>Si no contesta</h3><p class="small" style="font-size:14.5px">Deja un mensaje corto en el buzón:</p>
+        <div class="v a" style="max-width:100%;margin-top:6px"><small>Buzón</small>Hola, Lucía, soy Vera, la asistente virtual del equipo de Andrea Acha. Te llamaba por la llamada que pediste después de la sesión. Te escribo ahora por WhatsApp con dos horarios. ¡Hasta luego!</div>
+        <div class="mini" style="margin-top:8px"><p class="lbl"><span class="ch wa">WhatsApp</span> justo después</p><div class="b in">Hola, Lucía, te acabamos de llamar del equipo de Andrea 🙂 Para tu llamada tengo mañana a las 11:00 o el lunes a las 17:30. Responde 1 o 2 y te la reservo.</div></div></div>
+      <div><h3>Lo que no hace</h3><ul>
+        <li>No vende ni cierra: eso es de tu equipo.</li>
+        <li>No da detalles de precio más allá de tu web (1.800 € + impuestos, cuotas, 14 días de garantía).</li>
+        <li>No promete apariciones en prensa.</li>
+        <li>Si la persona pide hablar con alguien, pasa el aviso a tu equipo y lo dice.</li></ul></div>
+      <div><h3>Lo que queda apuntado</h3><p class="small" style="font-size:14.5px">Resumen en su ficha: «Cosmética natural · 2 años · salió una vez en prensa local · llamada lunes 17:30 · pregunta: cuotas». Con la grabación de la llamada, para que tu equipo la escuche si quiere.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel ›</button></div>
+</section>
+
+<!-- 9 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>9 · Lo que verías cada mañana durante el lanzamiento <span class="ej">Datos de ejemplo</span></h2><p>Cifras redondas inventadas para enseñar el formato, no previsiones. En la versión real se rellena solo con cada registro, cada entrada en Zoom, cada visionado de la grabación y cada llamada.</p></header>
+  <div class="kpis">
+    <div class="kpi"><b>1.200</b><span>registradas · ejemplo</span></div>
+    <div class="kpi"><b>21 %</b><span>en directo (252) · ejemplo</span></div>
+    <div class="kpi"><b>310</b><span>vieron la grabación · ejemplo</span></div>
+    <div class="kpi alert"><b>14</b><span>pidieron llamada y aún no tienen hora · ejemplo</span></div>
+  </div>
+  <div class="half">
+    <div class="box">
+      <p class="cap">Hoy necesitan a una persona · Ejemplo</p>
+      <ul class="todo">
+        <li><em>Llamada</em><div><b>Lucía M. · cosmética natural</b><span>Asistió 58 min · llamada lunes 17:30 · pregunta por las cuotas · vino del anuncio A</span></div></li>
+        <li><em>Agencia</em><div><b>3 personas dicen «no tengo tiempo para hacerlo yo»</b><span>Candidatas a la agencia de prensa: mejor que las llame alguien de tu equipo</span></div></li>
+        <li><em>Plantón</em><div><b>2 llamadas de ayer sin presentarse</b><span>Ya tienen el WhatsApp de rescate; una ha contestado «mañana a las 11:00»</span></div></li>
+        <li><em>Descuento</em><div><b>1 pregunta por condiciones especiales</b><span>Vera lo ha pasado al equipo y no ha contestado</span></div></li>
+      </ul>
+    </div>
+    <div class="box">
+      <p class="cap">El recorrido de este lanzamiento · Ejemplo</p>
+      <ul class="todo">
+        <li><em>1.200</em><div><b>Registradas</b><span>740 con WhatsApp autorizado · 610 en el grupo</span></div></li>
+        <li><em>252</em><div><b>En directo</b><span>176 se quedaron hasta la propuesta (minuto 42)</span></div></li>
+        <li><em>310</em><div><b>Vieron la grabación</b><span>118 llegaron a la propuesta</span></div></li>
+        <li><em>64</em><div><b>Llamadas agendadas</b><span>29 de asistentes en directo · 31 de la grabación · 4 por la voz</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="box">
+    <p class="cap">Por origen · un lanzamiento · Datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Origen</th><th>Registradas</th><th>% en directo</th><th>Grabación</th><th>Llamadas</th><th>Plazas</th><th>Coste por asistente</th></tr></thead>
+      <tbody>
+        <tr><td>Anuncio A · Al otro lado</td><td>320</td><td>24 %</td><td>80</td><td>18</td><td>10</td><td>9 €</td></tr>
+        <tr><td>Anuncio B · Secreto mejor guardado</td><td>280</td><td>17 %</td><td>70</td><td>11</td><td>6</td><td>14 €</td></tr>
+        <tr><td>Anuncio C · Sin vivir en Instagram</td><td>200</td><td>19 %</td><td>55</td><td>13</td><td>6 (2 agencia)</td><td>12 €</td></tr>
+        <tr><td>«Comenta FAN» en Instagram</td><td>150</td><td>25 %</td><td>40</td><td>10</td><td>7</td><td>—</td></tr>
+        <tr><td>Orgánico y grupo</td><td>250</td><td>22 %</td><td>65</td><td>12</td><td>8</td><td>—</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>1.200</td><td>21 %</td><td>310</td><td>64</td><td>37</td><td></td></tr></tfoot>
+    </table></div>
+    <p class="note">Datos de ejemplo. Lo que se mira para decidir el siguiente lanzamiento: coste por asistente y por llamada de cada anuncio, no el coste por registro.</p>
+  </div>
+  <div class="box">
+    <h3>El panel, en vivo</h3>
+    <p class="small" style="color:var(--muted)">Panel de ejemplo con tu nombre y datos ficticios. Pulsa «Iniciar demo» dentro para ver una historia de principio a fin.</p>
+    <div class="links">
+      <a class="btnl" href="https://qualivo.io/intelligence/?sector=lanzamientos&amp;empresa=Andrea%20Acha&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel</a>
+      <a class="btnl alt" href="https://qualivo.io/intelligence/?sector=lanzamientos&amp;empresa=Andrea%20Acha&amp;objetivo=conversion&amp;historia=pitch" target="_blank" rel="noopener">Historia «del Pitch al programa»</a>
+    </div>
+  </div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan ›</a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl alt" href="../">Plan</a><a class="btnl alt" href="../anuncios/">Anuncios</a><a class="btnl alt" href="../landing/">Landing</a></div>
+  <p>Maikel Echevarría · Qualivo · <a href="mailto:maikel@qualivo.io">maikel@qualivo.io</a> · +34 647 11 84 91 · <a href="https://qualivo.io">qualivo.io</a></p>
+  <p>Demo preparada el 16 de octubre de 2026 para Andrea Acha. No es una página de Andrea Acha; fechas, mensajes, nombres y cifras son de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'registro', 'bienvenida', 'precalentamiento', 'recordatorios', 'despues', 'whatsapp', 'voz', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    var t = document.getElementById('t-' + id); if (t && t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'center' });
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+
+  // Registro de ejemplo
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué tipo de marca tienes?', ['Belleza y cosmética', 'Bienestar y salud', 'Moda, hogar y estilo de vida', 'Marca personal (soy la experta)']],
+    ['¿Has salido ya en prensa?', ['Nunca', 'Alguna vez', 'Sí, y quiero más']],
+    ['¿Qué te interesa más ahora?', ['Aprender a hacerlo yo', 'Que un equipo lo haga por mí', 'Aún no lo sé']],
+    ['¿Te recordamos el directo por WhatsApp?', ['Sí, solo recordatorios del directo', 'No, mejor solo por email']]
+  ];
+  var resp = [];
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · ' + (n < Q.length ? 'pregunta ' + (n + 1) + ' de ' + Q.length : 'listo'));
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / Q.length * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n === 0) quiz.appendChild(el('p', 'note', 'Lucía ya ha escrito su nombre y su email. Ahora, cuatro toques.'));
+    if (n >= Q.length) {
+      var d = el('div', 'done');
+      d.appendChild(el('b', null, '¡Plaza reservada, Lucía!'));
+      d.appendChild(el('p', null, 'Jueves 3 de diciembre · 19:00 · su enlace personal de Zoom ya está creado.'));
+      var tags = el('div');
+      resp.forEach(function (r) { tags.appendChild(el('span', 'tagq', r)); });
+      d.appendChild(tags);
+      var nota = resp[2] === 'Que un equipo lo haga por mí' ? 'Señal para tu equipo: interesa la agencia de prensa (ticket alto).' : (resp[2] === 'Aprender a hacerlo yo' ? 'Señal para tu equipo: candidata a F.A.N.' : 'Señal para tu equipo: aún no sabe; lo aclarará la llamada.');
+      d.appendChild(el('p', null, nota));
+      d.appendChild(el('p', null, resp[3] && resp[3].indexOf('Sí') === 0 ? 'Recibe la bienvenida por email y por WhatsApp.' : 'Recibe la bienvenida solo por email. Nada de WhatsApp.'));
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      var w = el('button', 'btnl', 'Ver la bienvenida ›'); w.type = 'button'; w.addEventListener('click', function () { show('bienvenida', true); });
+      var r = el('button', 'btnl alt', '↺ Repetir'); r.type = 'button'; r.addEventListener('click', function () { resp = []; paso(0); });
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); s.style.width = '100%'; return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // Simulador de WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 11;
+  function hora() { minuto++; return '21:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = el('div', 'b ' + cls, txt);
+    if (cls !== 'sys') { var t = el('time', null, hora()); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = el('li', tipo || null); li.appendChild(el('b', null, txt)); li.appendChild(el('span', null, sub || ''));
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = el('div', 'typing', 'escribiendo…');
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = el('button', null, c[0]); b.type = 'button';
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { go(c[1]); }, reduce ? 0 : 350); });
+      opts.appendChild(b);
+    });
+  }
+  function fin(extra) {
+    opts.innerHTML = '';
+    if (extra) { var v = el('button', null, extra[0]); v.type = 'button'; v.addEventListener('click', function () { show(extra[1], true); }); opts.appendChild(v); }
+    var b = el('button', 'restart', '↺ Probar otro camino'); b.type = 'button';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var interes = 'F.A.N.';
+  var HUECOS = [['Viernes 11:00', 'viernes'], ['Lunes 17:30', 'lunes'], ['Prefiero que me llaméis', 'llamadme']];
+  var N = {
+    inicio: function () {
+      bot(['¡Hola, Lucía! Soy Vera, la asistente del equipo de Andrea 🙂 ¡Qué bien que te haya gustado!', '¿Qué te gustaría saber?'],
+        function () { choices([['¿Cuánto cuesta FAN?', 'precio'], ['¿Es para mí? Mi marca es pequeña', 'pequena'], ['No tengo tiempo para hacerlo yo', 'tiempo'], ['¿Me garantizáis salir en prensa?', 'garantia'], ['¿Me hacéis descuento?', 'descuento']]); });
+    },
+    precio: function () {
+      apunta('Pregunta el precio', 'Vera contesta con lo que dice la web');
+      bot(['FAN cuesta 1.800 € + impuestos y se puede pagar en cuotas.',
+           'Son 3 meses: 7 semanas de contenido y 5 de soporte mientras aplicas tu plan, ejercicios corregidos uno a uno, Slack y sesiones en directo. Y tienes 14 días de garantía.',
+           'Antes de entrar hay una llamada con el equipo para ver si encaja con tu marca. ¿Te busco hora?'],
+        function () { choices([['¿En cuántas cuotas?', 'cuotas'], ['Sí, búscame hora', 'horas'], ['Me lo pienso', 'pienso']]); });
+    },
+    cuotas: function () {
+      apunta('Pregunta por las cuotas', 'Vera no inventa datos: lo concreta el equipo', 'h');
+      bot(['Las cuotas te las concreta el equipo en la llamada, según lo que te venga mejor. Prefiero no darte un dato que no sea exacto.'], N.horas);
+    },
+    horas: function () {
+      bot(['Tengo mañana viernes a las 11:00 o el lunes a las 17:30. ¿Cuál te va mejor?'], function () { choices(HUECOS); });
+    },
+    pequena: function () {
+      apunta('Duda: «¿es para mí?»', 'respuesta de las preguntas frecuentes de la web');
+      bot(['Es una duda muy habitual.', 'No depende del tamaño ni de los seguidores: lo importante es que tu negocio tenga web, tengas clara la solución que ofreces y ya esté en marcha.', '¿Cuánto llevas con tu marca?'],
+        function () { choices([['Menos de 1 año', 'anos'], ['Entre 1 y 3 años', 'anos'], ['Más de 3 años', 'anos']]); });
+    },
+    anos: function () {
+      apunta('Antigüedad de la marca', 'se guarda en su ficha para la llamada');
+      bot(['Perfecto, se lo apunto al equipo.'], N.horas);
+    },
+    tiempo: function () {
+      interes = 'agencia de prensa';
+      apunta('Señal: no tiene tiempo', 'candidata a la agencia de prensa (ticket alto)', 'g');
+      bot(['Te entiendo, es lo que más nos decís.', 'Además de FAN, Andrea tiene un servicio de agencia: su equipo lleva la prensa de tu marca por ti.', '¿Quieres que en la llamada te cuenten las dos opciones?'],
+        function () { choices([['Sí, las dos', 'horas'], ['Solo la agencia', 'horas'], ['Prefiero que me llaméis', 'llamadme']]); });
+    },
+    garantia: function () {
+      apunta('Pregunta por garantías', 'Vera nunca promete apariciones', 'h');
+      bot(['Te soy sincera: nadie honesto puede garantizarte que una periodista te publique. Esa decisión es suya.',
+           'Lo que sí tienes: el método, tus ejercicios corregidos uno a uno, las sesiones en directo con Andrea y 14 días de garantía de devolución.',
+           '¿Te busco hora con el equipo para que lo veáis con tu marca delante?'],
+        function () { choices([['Sí, búscame hora', 'horas'], ['Me lo pienso', 'pienso']]); });
+    },
+    descuento: function () {
+      apunta('Pide condiciones especiales', 'pasa a tu equipo · Vera deja de contestar', 'h');
+      bot(['Eso lo ve directamente el equipo, no te quiero decir algo que no me toca.', 'Les paso tu mensaje ahora y te escriben mañana por la mañana 🙂'],
+        function () { apunta('Aviso al equipo', 'Lucía M. · asistió 58 min · pregunta por condiciones especiales'); fin(); });
+    },
+    pienso: function () {
+      apunta('No agenda por ahora', 'recibirá el aviso de cierre (T+6) si no agenda');
+      bot(['Claro, sin prisa. Las llamadas están abiertas hasta el jueves 10.', 'Si te surge cualquier duda, escríbeme por aquí.'], function () { fin(); });
+    },
+    llamadme: function () {
+      apunta('Pide que la llamen', 'el agente de voz llama en 10-20 minutos (8:00-21:30)', 'g');
+      bot(['¡Claro! En unos minutos te llama Vera, la asistente de voz del equipo, solo para buscarte hora. Son dos minutos.'],
+        function () { fin(['Ver la llamada ›', 'voz']); });
+    },
+    viernes: function () { cita('mañana viernes a las 11:00'); },
+    lunes: function () { cita('el lunes a las 17:30'); }
+  };
+  function cita(cuando) {
+    apunta('Llamada agendada: ' + cuando, 'en la agenda de tu equipo', 'g');
+    apunta('Aviso al equipo', 'Lucía M. · cosmética natural · asistió 58 min y se quedó a la propuesta\nInterés: ' + interes + ' · vino del anuncio A', 'g');
+    apunta('Recordatorios programados', 'la víspera a las 19:00 y 2 horas antes');
+    bot(['Reservado, Lucía: ' + cuando + ' con el equipo de Andrea.', 'Te llega ahora la confirmación con un formulario de 2 minutos (tu web, qué vendes y qué quieres conseguir). La víspera y 2 horas antes te lo recuerdo por aquí.'], function () { fin(); });
+  }
+  function go(k) { N[k](); }
+  function start() {
+    started = true; minuto = 11; interes = 'F.A.N.';
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · jueves 3 de diciembre');
+    bubble('in', 'Gracias por quedarte hasta el final, Lucía 💛 Si quieres ver si FAN encaja con tu marca, elige aquí la hora para hablar con mi equipo: andreaacha.com/llamada');
+    bubble('out', '¡Hola! Me ha encantado. Una pregunta antes de reservar…');
+    apunta('Ficha de Lucía', 'anuncio A · belleza y cosmética · nunca ha salido en prensa\nAsistió 58 min · se quedó a la propuesta');
+    apunta('Respuesta en menos de un minuto', 'son las 21:12: dentro del horario (8:00-21:30)');
+    go('inicio');
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
