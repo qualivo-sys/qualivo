@@ -50,6 +50,7 @@ nav.tabs button{font:inherit;font-weight:600;font-size:14.5px;white-space:nowrap
 nav.tabs button span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
 nav.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 nav.tabs button[aria-selected="true"] span{color:var(--accent-ink)}
+a{color:var(--accent)}
 button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .pane{display:none;gap:18px}
 .pane.on{display:grid}
@@ -132,7 +133,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 .tl .ti{display:block;font-weight:700;font-size:15.5px;margin:2px 0 8px}
 .msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start}
 .ch{display:inline-block;font-size:11.5px;font-weight:700;border-radius:5px;padding:1px 6px;margin-right:4px;white-space:nowrap}
-.ch.em{background:#E8EEF8;color:#2B4C7E}.ch.wa{background:#DCF5E3;color:#1D6B3A}.ch.gr{background:#F4ECE3;color:#7A5A3E}.ch.vz{background:#F3E3F1;color:#7A2E6E}.ch.ad{background:#FFF0D6;color:#8A5300}
+.ch.em{background:#E8EEF8;color:#2B4C7E}.ch.wap{background:#DCF5E3;color:#1D6B3A}.ch.gr{background:#F4ECE3;color:#7A5A3E}.ch.vz{background:#F3E3F1;color:#7A2E6E}.ch.ad{background:#FFF0D6;color:#8A5300}
 .mini{background:var(--wa-bg);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:6px}
 .mini .lbl{font-size:12px;color:var(--muted);font-weight:600}
 .mini.gr .lbl::before{content:"👥 "}
@@ -183,7 +184,7 @@ footer a{color:var(--accent)}
 .links{display:flex;flex-wrap:wrap;gap:8px}
 .navnext{display:flex;justify-content:flex-end}
 .navnext button{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
-@media (max-width:900px){.cols,.two,.half{grid-template-columns:1fr}.wa{height:580px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.cols,.two,.half{grid-template-columns:1fr}.wa{height:auto;grid-template-rows:auto auto auto}.wa .body{min-height:320px;overflow:visible}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -254,7 +255,7 @@ footer a{color:var(--accent)}
 
 <!-- 2 · REGISTRO -->
 <section class="pane" id="p-registro" role="tabpanel" aria-labelledby="t-registro">
-  <header><h2>2 · Un registro que ya te dice quién es <span class="ej">Ejemplo</span></h2><p>Nombre y email, como ahora, y después tres toques. Pruébalo como si fueras Lucía. La página entera, con tu marca, está en <a href="../landing/">Landing</a>.</p></header>
+  <header><h2>2 · Un registro que ya te dice quién es <span class="ej">Ejemplo</span></h2><p>Nombre y email, como ahora, y después cuatro toques. Pruébalo como si fueras Lucía. La página entera, con tu marca, está en <a href="../landing/">Landing</a>.</p></header>
   <div class="two">
     <div class="quiz" id="quiz" aria-live="polite"></div>
     <div class="list">
@@ -298,7 +299,7 @@ PD: si este correo te ha llegado a Promociones, muévelo a Principal y así no t
       </div>
     </div>
     <div>
-      <p class="cap"><span class="ch wa">WhatsApp</span> al registrarse · solo si marcó la casilla</p>
+      <p class="cap"><span class="ch wap">WhatsApp</span> al registrarse · solo si marcó la casilla</p>
       <div class="phone">
         <div class="top2"><img src="../assets/andrea-qa.jpg" alt="" width="34" height="34"><div><b>Andrea Acha</b><small>Cuenta de empresa</small></div></div>
         <div class="body">
@@ -390,7 +391,7 @@ Contéstame a este correo con tu pregunta sobre salir en prensa. La que sea: a q
 Las más repetidas las respondo en directo, el jueves 3 a las 19:00.
 
 Andrea</div></div>
-        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 12:00 · solo con permiso</p><div class="b in">Hola, Lucía 🙂 Soy Andrea. El jueves respondo en directo las preguntas que más se repitan.
+        <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> 12:00 · solo con permiso</p><div class="b in">Hola, Lucía 🙂 Soy Andrea. El jueves respondo en directo las preguntas que más se repitan.
 
 ¿Cuál es la tuya sobre salir en prensa? Contéstame por aquí con una frase.</div><div class="b out">Si una marca pequeña como la mía tiene sentido en revistas grandes o mejor empezar por medios locales</div><div class="b in">¡Apuntada! Es de las que más me llegan, así que la respondo el jueves 💛</div></div>
         <div class="mini gr"><p class="lbl">Grupo · 12:30</p><div class="b in">¿Qué pregunta queréis que responda el jueves? Dejadla por aquí 👇 Las más repetidas van al directo.</div></div>
@@ -436,7 +437,7 @@ Tres cosas para aprovecharlo:
 
 Hasta mañana,
 Andrea</div></div>
-        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 19:05</p><div class="b in">Lucía, mañana a las 19:00 nos vemos en Marca Mediática Sessions 🎙️
+        <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> 19:05</p><div class="b in">Lucía, mañana a las 19:00 nos vemos en Marca Mediática Sessions 🎙️
 
 Tu enlace personal: <u>zoom.us/w/…</u>
 Trae tu frase escrita: revisaré algunas en directo ✍️</div></div>
@@ -454,19 +455,19 @@ Andrea</div></div>
       </div></li>
     <li class="t0"><span class="w">T0 · 17:00 · 2 horas antes</span><span class="ti">«En dos horas empezamos»</span>
       <div class="msgs">
-        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 17:00</p><div class="b in">En dos horas empezamos, Lucía. Busca un rato tranquilo y ten a mano tu frase 🙂
+        <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> 17:00</p><div class="b in">En dos horas empezamos, Lucía. Busca un rato tranquilo y ten a mano tu frase 🙂
 Tu enlace: <u>zoom.us/w/…</u></div></div>
         <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 17:00 · a quien no tiene WhatsApp</small><b>En 2 horas empezamos</b></div><div class="mb">A las 19:00 nos vemos, Lucía. <span class="bt">Entrar al directo</span></div></div>
       </div></li>
     <li class="t0"><span class="w">T0 · 18:45 · 15 minutos antes</span><span class="ti">«Abrimos la sala»</span>
       <div class="msgs">
-        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 18:45</p><div class="b in">Abrimos la sala en 15 minutos 👉 <u>zoom.us/w/…</u></div></div>
+        <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> 18:45</p><div class="b in">Abrimos la sala en 15 minutos 👉 <u>zoom.us/w/…</u></div></div>
         <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 18:45</small><b>Abrimos la sala en 15 minutos</b></div><div class="mb"><span class="bt">Entrar ahora</span></div></div>
         <div class="mini gr"><p class="lbl">Grupo · 18:50</p><div class="b in">¡Abrimos en 10 minutos! Entrad con vuestro enlace personal 💛</div></div>
       </div></li>
     <li class="t0"><span class="w">T0 · 19:03 y 19:15 · solo a quien no ha entrado</span><span class="ti">«Estamos en directo, aún llegas»</span>
       <div class="msgs">
-        <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> 19:03</p><div class="b in">Ya hemos empezado, Lucía, y estoy contando lo de los tres segundos. Aún llegas 👉 <u>zoom.us/w/…</u></div></div>
+        <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> 19:03</p><div class="b in">Ya hemos empezado, Lucía, y estoy contando lo de los tres segundos. Aún llegas 👉 <u>zoom.us/w/…</u></div></div>
         <div class="mail"><div class="mh"><small><span class="ch em">Email</span> 19:15</small><b>Ahora viene la revisión de frases</b></div><div class="mb">Si puedes, entra ahora: <span class="bt">Entrar al directo</span>
 Si hoy no llegas, mañana te mando la grabación.</div></div>
       </div></li>
@@ -483,7 +484,7 @@ Si hoy no llegas, mañana te mando la grabación.</div></div>
   <div class="seg g">
     <h3><i></i>Se quedó hasta la propuesta (Lucía)</h3>
     <div class="msgs">
-      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T0 · 21:00</p><div class="b in">Gracias por quedarte hasta el final, Lucía 💛
+      <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> T0 · 21:00</p><div class="b in">Gracias por quedarte hasta el final, Lucía 💛
 
 Si quieres ver si FAN encaja con tu marca, elige aquí la hora para hablar con mi equipo: <u>andreaacha.com/llamada</u>
 Son 30 minutos y sin compromiso.</div></div>
@@ -527,7 +528,7 @@ Te la dejo aquí, empezando en el minuto 42:
 La grabación está disponible hasta el domingo a las 23:59.
 
 Andrea</div></div>
-      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T+1 · 10:05 · con permiso</p><div class="b in">Lucía, te dejo la grabación justo desde donde te fuiste (minuto 42): <u>andreaacha.com/sesion/…</u>
+      <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> T+1 · 10:05 · con permiso</p><div class="b in">Lucía, te dejo la grabación justo desde donde te fuiste (minuto 42): <u>andreaacha.com/sesion/…</u>
 Está hasta el domingo 🙂</div></div>
     </div>
   </div>
@@ -546,7 +547,7 @@ Si solo tienes 15 minutos, empieza en el minuto 18: lo que hace una periodista e
 Estará disponible hasta el domingo 6 a las 23:59.
 
 Andrea</div></div>
-      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> T+1 · 9:35 · con permiso</p><div class="b in">Hola, Lucía. Ayer no pudiste venir, lo sé 🙂 Aquí tienes la grabación hasta el domingo: <u>andreaacha.com/sesion/…</u>
+      <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> T+1 · 9:35 · con permiso</p><div class="b in">Hola, Lucía. Ayer no pudiste venir, lo sé 🙂 Aquí tienes la grabación hasta el domingo: <u>andreaacha.com/sesion/…</u>
 Si vas con prisa, empieza en el minuto 18.</div></div>
       <div class="mail"><div class="mh"><small><span class="ch em">Email</span> T+2 · solo si no la ha abierto</small><b>Lo que más se comentó en el chat</b></div>
         <div class="mb">Hola, Lucía:
@@ -557,7 +558,7 @@ No. En la grabación explico por qué, a partir del minuto 18.
 <span class="bt">Ver la grabación</span>
 
 Andrea</div></div>
-      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> + <span class="ch em">Email</span> T+3 · domingo 20:00</p><div class="b in">Lucía, la grabación se va esta noche a las 23:59. Si querías verla, este es el momento 👉 <u>andreaacha.com/sesion/…</u></div></div>
+      <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> + <span class="ch em">Email</span> T+3 · domingo 20:00</p><div class="b in">Lucía, la grabación se va esta noche a las 23:59. Si querías verla, este es el momento 👉 <u>andreaacha.com/sesion/…</u></div></div>
     </div>
   </div>
 
@@ -565,7 +566,7 @@ Andrea</div></div>
     <h3><i></i>Vio la grabación hasta la propuesta</h3>
     <p>La página de la grabación avisa cuando pasa del minuto 42. El mensaje sale en la hora siguiente (de 8:00 a 21:30). Es donde hoy tienes más agendas: ahora sabremos quién es.</p>
     <div class="msgs">
-      <div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> o <span class="ch em">Email</span> si no hay permiso</p><div class="b in">Gracias por ver la sesión, Lucía 🙌 Si te quedaste con ganas de saber si FAN encaja con tu marca, elige hora con mi equipo aquí: <u>andreaacha.com/llamada</u>
+      <div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> o <span class="ch em">Email</span> si no hay permiso</p><div class="b in">Gracias por ver la sesión, Lucía 🙌 Si te quedaste con ganas de saber si FAN encaja con tu marca, elige hora con mi equipo aquí: <u>andreaacha.com/llamada</u>
 Y si tienes alguna duda antes, escríbeme por aquí.</div></div>
     </div>
   </div>
@@ -573,13 +574,13 @@ Y si tienes alguna duda antes, escríbeme por aquí.</div></div>
   <div class="seg m">
     <h3><i></i>Agendó la llamada: confirmación, recordatorios y rescate</h3>
     <ol class="tl">
-      <li><span class="w">Al reservar</span><span class="ti">Confirmación + preparación</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span> + <span class="ch em">Email</span></p><div class="b in">Hecho, Lucía: hablas con el equipo de Andrea el martes 8 a las 12:00.
+      <li><span class="w">Al reservar</span><span class="ti">Confirmación + preparación</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span> + <span class="ch em">Email</span></p><div class="b in">Hecho, Lucía: hablas con el equipo de Andrea el martes 8 a las 12:00.
 
 Antes, cuéntanos en 2 minutos tu web, qué vendes y qué te gustaría conseguir con la prensa: <u>andreaacha.com/antes-de-la-llamada</u>
 Así llegamos preparadas.</div></div></div></li>
-      <li><span class="w">Víspera · 19:00</span><span class="ti">Recordatorio</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">Mañana a las 12:00 hablamos de tu marca, Lucía. Si te surge algo, responde a este mensaje y lo movemos.</div></div></div></li>
-      <li><span class="w">2 horas antes</span><span class="ti">Último aviso</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">En 2 horas hablamos 🙂 Aquí tienes el enlace de la llamada: <u>meet.google.com/…</u></div></div></div></li>
-      <li class="alert"><span class="w">+10 minutos si no se conecta</span><span class="ti">Rescate del plantón (y aviso a tu equipo)</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wa">WhatsApp</span></p><div class="b in">Lucía, te esperábamos a las 12:00. ¿Te ha surgido algo? Te dejo dos huecos: mañana a las 11:00 o el jueves a las 17:30. Responde 1 o 2.</div></div></div></li>
+      <li><span class="w">Víspera · 19:00</span><span class="ti">Recordatorio</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span></p><div class="b in">Mañana a las 12:00 hablamos de tu marca, Lucía. Si te surge algo, responde a este mensaje y lo movemos.</div></div></div></li>
+      <li><span class="w">2 horas antes</span><span class="ti">Último aviso</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span></p><div class="b in">En 2 horas hablamos 🙂 Aquí tienes el enlace de la llamada: <u>meet.google.com/…</u></div></div></div></li>
+      <li class="alert"><span class="w">+10 minutos si no se conecta</span><span class="ti">Rescate del plantón (y aviso a tu equipo)</span><div class="msgs"><div class="mini"><p class="lbl"><span class="ch wap">WhatsApp</span></p><div class="b in">Lucía, te esperábamos a las 12:00. ¿Te ha surgido algo? Te dejo dos huecos: mañana a las 11:00 o el jueves a las 17:30. Responde 1 o 2.</div></div></div></li>
       <li class="stop"><span class="w">En la llamada</span><span class="ti">Cierra tu equipo, como hasta ahora</span></li>
     </ol>
   </div>
@@ -594,7 +595,7 @@ Mañana jueves a las 23:59 cierro las llamadas de esta edición de FAN. Si te lo
 <span class="bt">Elegir hora</span>
 
 Andrea</div></div>
-      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wa">WhatsApp</span> T+7 · jueves 10 · 18:00</small><b>Últimas horas para hablar con mi equipo</b></div><div class="mb">Lucía, hoy a las 23:59 cerramos. Quedan huecos esta tarde y mañana por la mañana para quien reserve antes del cierre.
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wap">WhatsApp</span> T+7 · jueves 10 · 18:00</small><b>Últimas horas para hablar con mi equipo</b></div><div class="mb">Lucía, hoy a las 23:59 cerramos. Quedan huecos esta tarde y mañana por la mañana para quien reserve antes del cierre.
 <span class="bt">Elegir hora</span></div></div>
     </div>
   </div>
@@ -603,7 +604,7 @@ Andrea</div></div>
     <h3><i></i>«Ahora no» · T+8</h3>
     <p>Una pregunta de un toque. Cada respuesta tiene su camino; la de «tiempo» alimenta tu agencia.</p>
     <div class="msgs">
-      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wa">WhatsApp</span> con permiso · T+8 · 10:00</small><b>¿Qué te ha frenado? (un toque)</b></div><div class="mb">Hola, Lucía:
+      <div class="mail"><div class="mh"><small><span class="ch em">Email</span> + <span class="ch wap">WhatsApp</span> con permiso · T+8 · 10:00</small><b>¿Qué te ha frenado? (un toque)</b></div><div class="mb">Hola, Lucía:
 
 Cerramos esta edición de FAN. Si no ha sido tu momento, me ayuda mucho saber por qué. Un toque:
 
@@ -623,7 +624,7 @@ Andrea</div></div>
 
 <!-- 7 · WHATSAPP -->
 <section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
-  <header><h2>7 · Lucía contesta con una duda: el agente de WhatsApp <span class="ej">Ejemplo</span></h2><p>Son las 21:12 del día del directo. Lucía responde al mensaje de las 21:00. Elige un camino. A la derecha, lo que pasa por detrás.</p></header>
+  <header><h2>7 · Lucía contesta con una duda: el agente de WhatsApp <span class="ej">Ejemplo</span></h2><p>Son las 21:12 del día del directo. Lucía responde al mensaje de las 21:00. Elige un camino. En «Por detrás», lo que apunta el sistema.</p></header>
   <div class="two">
     <div class="wa" aria-label="Simulación de WhatsApp">
       <div class="top2"><img src="../assets/andrea-qa.jpg" alt="" width="34" height="34"><div><b>Andrea Acha</b><small>Vera, asistente del equipo · Ejemplo</small></div></div>
@@ -667,7 +668,7 @@ Andrea</div></div>
         <li>Dos intentos como mucho. Nunca a quien solo se registró al directo.</li></ul></div>
       <div><h3>Si no contesta</h3><p class="small" style="font-size:14.5px">Deja un mensaje corto en el buzón:</p>
         <div class="v a" style="max-width:100%;margin-top:6px"><small>Buzón</small>Hola, Lucía, soy Vera, la asistente virtual del equipo de Andrea Acha. Te llamaba por la llamada que pediste después de la sesión. Te escribo ahora por WhatsApp con dos horarios. ¡Hasta luego!</div>
-        <div class="mini" style="margin-top:8px"><p class="lbl"><span class="ch wa">WhatsApp</span> justo después</p><div class="b in">Hola, Lucía, te acabamos de llamar del equipo de Andrea 🙂 Para tu llamada tengo mañana a las 11:00 o el lunes a las 17:30. Responde 1 o 2 y te la reservo.</div></div></div>
+        <div class="mini" style="margin-top:8px"><p class="lbl"><span class="ch wap">WhatsApp</span> justo después</p><div class="b in">Hola, Lucía, te acabamos de llamar del equipo de Andrea 🙂 Para tu llamada tengo mañana a las 11:00 o el lunes a las 17:30. Responde 1 o 2 y te la reservo.</div></div></div>
       <div><h3>Lo que no hace</h3><ul>
         <li>No vende ni cierra: eso es de tu equipo.</li>
         <li>No da detalles de precio más allá de tu web (1.800 € + impuestos, cuotas, 14 días de garantía).</li>

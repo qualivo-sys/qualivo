@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Monterías 2026-2027 · Hunty (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap">
+<style>
+/* Maqueta de página de monterías de Hunty con captura con valor («avísame») y WhatsApp del asesor. Marca: verde #2C7C24 / #1A4A15, DM Sans. */
+:root{--p100:#f3fbf2;--p200:#bbe3b7;--p300:#87c681;--p400:#57a450;--p500:#2c7c24;--p800:#1a4a15;--ink:#111827;--muted:#4b5563;--line:#e5e7eb;--soft:#f9fafb;--wa:#1f8f4e;--star:#f5b301}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 "DM Sans",system-ui,sans-serif;overflow-x:hidden;padding-bottom:80px}
+@media (min-width:800px){body{padding-bottom:0}}
+.maq{background:#111;color:#cfcfcf;font-size:12px;text-align:center;padding:6px 12px}
+.maq a{color:#fff}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:16px}
+@media (min-width:800px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+a{color:var(--p500)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--p400);outline-offset:2px}
+.btn{font:inherit;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;min-height:48px;text-align:center}
+.btn.pri{background:var(--p500);color:#fff}
+.btn.pri:hover{background:var(--p800)}
+.btn.lin{background:#fff;color:var(--p800);border-color:var(--p500)}
+.btn.wa{background:var(--wa);color:#fff}
+/* cabecera */
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:18px;height:64px}
+header.site img{height:22px;width:auto}
+header.site nav{display:none;gap:22px;font-weight:500;font-size:15px;margin-left:12px}
+header.site nav a{color:var(--ink);text-decoration:none}
+@media (min-width:900px){header.site nav{display:flex}}
+header.site .r{margin-left:auto;display:flex;gap:10px;align-items:center}
+header.site .prime{font-size:13px;font-weight:700;color:var(--p800);background:var(--p100);border-radius:99px;padding:6px 12px;text-decoration:none;display:none}
+@media (min-width:640px){header.site .prime{display:inline-block}}
+/* hero */
+.hero{position:relative;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:url(../assets/monteria.jpg) center 30%/cover}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(26,74,21,.92) 0%,rgba(26,74,21,.75) 50%,rgba(26,74,21,.35) 100%)}
+.hero .wrap{position:relative;padding-block:48px 56px;display:grid;gap:20px}
+@media (min-width:800px){.hero .wrap{padding-block:80px 88px}}
+.hero .ey{font-weight:700;color:var(--p200);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,6vw,54px);font-weight:800;letter-spacing:-.02em;max-width:16ch}
+.hero .lead{font-size:18px;max-width:46ch;color:#e8f3e6}
+.search{background:#fff;color:var(--ink);border-radius:18px;padding:14px;display:grid;gap:10px;max-width:880px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+@media (min-width:760px){.search{grid-template-columns:repeat(3,1fr) auto;align-items:end}}
+.search label{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)}
+.search select{font:inherit;font-size:15px;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;width:100%}
+.trust{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14.5px;color:#e8f3e6}
+.trust b{color:#fff}
+.trust .st{color:var(--star);letter-spacing:1px}
+/* franja */
+.band{background:var(--p100);border-bottom:1px solid var(--line)}
+.band .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding-block:18px;font-size:14.5px}
+@media (min-width:800px){.band .wrap{grid-template-columns:repeat(4,1fr)}}
+.band b{display:block;font-size:20px;color:var(--p800)}
+section{padding-block:56px;scroll-margin-top:70px}
+@media (min-width:800px){section{padding-block:76px}}
+.head{display:grid;gap:8px;margin-bottom:26px;max-width:720px}
+.head h2{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.01em}
+.head p{color:var(--muted);font-size:17px}
+/* tarjetas */
+.cards{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
+.c{border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;background:#fff}
+.c .im{aspect-ratio:16/10;background-size:cover;background-position:center;position:relative}
+.c .im span{position:absolute;left:10px;top:10px;font-size:12px;font-weight:700;background:#fff;color:var(--p800);border-radius:99px;padding:3px 10px}
+.c .bd{padding:14px 16px;display:grid;gap:6px}
+.c h3{font-size:17px;font-weight:700}
+.c .loc{font-size:14px;color:var(--muted)}
+.c .row{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-top:6px;flex-wrap:wrap}
+.c .pr b{font-size:20px}
+.c .pr small{display:block;font-size:12.5px;color:var(--muted)}
+.c .pp{font-size:13px;color:var(--p500);font-weight:700}
+.c .ac{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
+.c .ac .btn{min-height:40px;padding:8px 14px;font-size:14px}
+.c .ac .al{background:none;border:1.5px solid var(--line);color:var(--ink)}
+.tiny{font-size:12.5px;color:var(--muted)}
+/* avísame */
+.avi{background:var(--p800);color:#fff}
+.avi .wrap{display:grid;gap:30px}
+@media (min-width:900px){.avi .wrap{grid-template-columns:1fr 1fr;align-items:center;gap:56px}}
+.avi .head p{color:#d6ead3}
+.avi ul{margin:0;padding-left:20px;display:grid;gap:6px;color:#e8f3e6}
+.box{background:#fff;color:var(--ink);border-radius:18px;padding:22px;display:grid;gap:14px}
+.box .bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+.box .bar i{display:block;height:100%;background:var(--p500);transition:width .25s}
+.step{display:none;gap:8px}
+.step.on{display:grid}
+.step h3{font-size:19px;margin-bottom:4px}
+.opt{font:inherit;text-align:left;background:var(--soft);color:var(--ink);border:1.5px solid var(--line);padding:12px 14px;cursor:pointer;min-height:48px;border-radius:12px;font-weight:500}
+.opt:hover{border-color:var(--p400)}
+.back{font:inherit;font-size:14px;background:none;border:0;color:var(--muted);cursor:pointer;justify-self:start;padding:6px 0;text-decoration:underline}
+.step label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.step input{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--line);padding:12px 14px;border-radius:10px;width:100%}
+.chk{display:flex!important;gap:8px;align-items:flex-start;font-size:13px!important}
+.chk input{width:auto;margin-top:4px}
+.ok{display:none;background:var(--p100);border-radius:10px;padding:12px 14px;font-size:15px}
+.ok.on{display:block}
+.note{font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:8px 10px}
+/* cómo */
+.how{display:grid;gap:16px}
+@media (min-width:800px){.how{grid-template-columns:repeat(3,1fr)}}
+.how div{border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:6px}
+.how b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--p100);color:var(--p800);font-size:16px}
+.how h3{font-size:18px}
+.how p{color:var(--muted);font-size:15px}
+/* opiniones */
+.ops{display:grid;gap:14px}
+@media (min-width:800px){.ops{grid-template-columns:repeat(3,1fr)}}
+.ops blockquote{margin:0;border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:8px;background:#fff}
+.ops .st{color:var(--star)}
+.ops cite{font-style:normal;font-size:14px;color:var(--muted)}
+.soft{background:var(--soft)}
+/* asesor */
+.ases{display:grid;gap:20px;border-radius:20px;overflow:hidden;background:url(../assets/prefooter.jpg) center/cover;position:relative;color:#fff;padding:40px 24px;text-align:center;justify-items:center}
+.ases::before{content:"";position:absolute;inset:0;background:rgba(26,74,21,.72)}
+.ases > *{position:relative}
+.ases h2{font-size:clamp(24px,4vw,34px)}
+/* faq */
+.faq{display:grid;max-width:820px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;font-weight:700;font-size:17px;padding-block:16px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--p500);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);padding-bottom:16px}
+footer{background:var(--p800);color:#d6ead3;font-size:13.5px}
+footer .wrap{padding-block:32px;display:grid;gap:6px}
+footer img{height:22px;width:auto;margin-bottom:8px;filter:brightness(0) invert(1)}
+footer a{color:#fff}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sticky .btn{min-height:46px;padding:10px;font-size:15px}
+@media (min-width:800px){.sticky{display:none}}
+</style>
+</head>
+<body>
+
+<div class="maq">Maqueta de Qualivo para Hunty · no indexada · los formularios no envían datos · <a href="../">volver al plan</a></div>
+
+<header class="site">
+  <div class="wrap">
+    <img src="../assets/logo-green.svg" alt="Hunty" width="92" height="22">
+    <nav aria-label="Principal"><a href="#monterias">Monterías</a><a href="#avisame">Avísame</a><a href="#como">Cómo funciona</a><a href="#faq">Preguntas</a></nav>
+    <div class="r"><a class="prime" href="#faq">¿Quieres gastar menos al cazar? Hazte Prime</a><a class="btn pri" href="#monterias" style="min-height:40px;padding:8px 16px;font-size:14px">Ver monterías</a></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1" style="padding:0">
+    <div class="bg" role="img" aria-label="Montero en el puesto"></div>
+    <div class="wrap">
+      <p class="ey">Temporada 2026-2027</p>
+      <h1 id="h1">Monterías de diciembre y enero, con fecha y precio a la vista</h1>
+      <p class="lead">Extremadura, Castilla-La Mancha y Andalucía. Filtra por provincia y precio y reserva tu puesto con una señal. Si aún no hay la tuya, te avisamos cuando salga.</p>
+      <form class="search" onsubmit="location.hash='monterias';return false" aria-label="Buscar monterías">
+        <label>Provincia<select><option>Todas</option><option>Cáceres</option><option>Badajoz</option><option>Toledo</option><option>Ciudad Real</option><option>Cuenca</option><option>Cádiz</option></select></label>
+        <label>Fechas<select><option>Diciembre y enero</option><option>Noviembre</option><option>Febrero</option></select></label>
+        <label>Precio por puesto<select><option>Hasta 450 €</option><option>Hasta 300 €</option><option>Más de 450 €</option></select></label>
+        <button class="btn pri" type="submit">Buscar</button>
+      </form>
+      <div class="trust"><span><span class="st" aria-hidden="true">★★★★★</span> <b>4,6/5</b> con 764 opiniones de cazadores</span><span><b>+9.400</b> reservas gestionadas</span><span><b>+400</b> organizadores</span></div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <div><b>Mismo precio</b>que el organizador, garantizado</div>
+      <div><b>Reserva con señal</b>y el resto, según el organizador</div>
+      <div><b>Reseñas reales</b>de cada cacería y organizador</div>
+      <div><b>Un asesor</b>antes y después de la jornada</div>
+    </div>
+  </div>
+
+  <section id="monterias" aria-labelledby="h-mont">
+    <div class="wrap">
+      <div class="head"><h2 id="h-mont">Monterías publicadas para esta temporada</h2><p>Precio total por puesto, señal para reservar y precio para socios Prime.</p></div>
+      <div class="cards">
+        <article class="c"><div class="im" style="background-image:url(../assets/monteria.jpg)"><span>28 nov 2026</span></div><div class="bd"><h3>Montería Estenilla · Cerro Quintín</h3><p class="loc">Anchuras (Ciudad Real)</p><div class="row"><div class="pr"><b>340 €</b><small>Reserva: 40 €</small></div><span class="pp">Prime: 320 €</span></div></div><div class="ac"><a class="btn pri" href="#avisame">Reservar</a><a class="btn al" href="#avisame">🔔 Avísame de otras así</a></div></article>
+        <article class="c"><div class="im" style="background-image:url(../assets/espera.jpg)"><span>26 dic 2026</span></div><div class="bd"><h3>Montería en Río Frío</h3><p class="loc">Robledo del Mazo (Toledo)</p><div class="row"><div class="pr"><b>350 €</b><small>Reserva: 35 €</small></div><span class="pp">Prime: 332,5 €</span></div></div><div class="ac"><a class="btn pri" href="#avisame">Reservar</a><a class="btn al" href="#avisame">🔔 Avísame de otras así</a></div></article>
+        <article class="c"><div class="im" style="background-image:url(../assets/ciervo.jpg)"><span>9 ene 2027 · 4,3/5</span></div><div class="bd"><h3>Montería en Valmorisco</h3><p class="loc">Jarandilla de la Vera (Cáceres) · 60 puestos · sin cupo a venados y jabalíes</p><div class="row"><div class="pr"><b>300 €</b><small>Reserva: 40 €</small></div><span class="pp">Prime: 280 €</span></div></div><div class="ac"><a class="btn pri" href="#avisame">Reservar</a><a class="btn al" href="#avisame">🔔 Avísame de otras así</a></div></article>
+        <article class="c"><div class="im" style="background-image:url(../assets/coto.jpg)"><span>17 ene 2027</span></div><div class="bd"><h3>Montería en La Alcaidesa</h3><p class="loc">San Roque (Cádiz)</p><div class="row"><div class="pr"><b>450 €</b><small>Reserva: 60 €</small></div><span class="pp">Prime: 420 €</span></div></div><div class="ac"><a class="btn pri" href="#avisame">Reservar</a><a class="btn al" href="#avisame">🔔 Avísame de otras así</a></div></article>
+        <article class="c"><div class="im" style="background-image:url(../assets/rececho.jpg)"><span>19 feb 2027 · 4,1/5</span></div><div class="bd"><h3>Montería en La Dehesa</h3><p class="loc">Cuenca</p><div class="row"><div class="pr"><b>200 €</b><small>Reserva: 150 €</small></div><span class="pp">Prime: 190 €</span></div></div><div class="ac"><a class="btn pri" href="#avisame">Reservar</a><a class="btn al" href="#avisame">🔔 Avísame de otras así</a></div></article>
+        <article class="c" style="background:var(--p100);align-content:center"><div class="bd" style="padding:24px;gap:10px"><h3>¿No ves la tuya?</h3><p class="loc">Dinos fechas, zona, cuántos sois y presupuesto. Te escribimos por WhatsApp en un minuto con las que encajan, y te avisamos cuando salgan nuevas.</p><a class="btn pri" href="#avisame">Avisarme por WhatsApp</a><a class="btn wa" href="#" onclick="return false">Hablar con un asesor</a></div></article>
+      </div>
+      <p class="tiny" style="margin-top:12px">Cacerías y precios publicados en hunty.es el 16-oct-2026. Las fotos son de ejemplo y no de cada finca.</p>
+    </div>
+  </section>
+
+  <section class="avi" id="avisame" aria-labelledby="h-avi">
+    <div class="wrap">
+      <div>
+        <div class="head"><h2 id="h-avi">Avísame cuando salga la mía</h2><p>Cuatro toques y tu WhatsApp. Te mandamos al minuto las que ya encajan y te avisamos de las nuevas. Solo lo que encaja con lo que nos digas, una vez por semana como mucho.</p></div>
+        <ul>
+          <li>Si es para esta temporada, te escribe un asesor de caza de Hunty.</li>
+          <li>Si es para más adelante, te avisamos unas semanas antes de que abra.</li>
+          <li>Te das de baja con un mensaje.</li>
+        </ul>
+      </div>
+      <div class="box" id="form">
+        <div class="bar"><i id="bar" style="width:20%"></i></div>
+        <div class="step on" data-s="1"><h3>¿Cuándo quieres cazar?</h3>
+          <button type="button" class="opt" data-k="cuando" data-v="ahora">En los próximos 30 días</button>
+          <button type="button" class="opt" data-k="cuando" data-v="temporada">Esta temporada (hasta febrero)</button>
+          <button type="button" class="opt" data-k="cuando" data-v="proxima">La próxima temporada</button>
+          <button type="button" class="opt" data-k="cuando" data-v="mirando">Solo estoy mirando</button>
+        </div>
+        <div class="step" data-s="2"><h3>¿Por dónde?</h3>
+          <button type="button" class="opt" data-k="zona" data-v="ext-clm">Extremadura o Castilla-La Mancha</button>
+          <button type="button" class="opt" data-k="zona" data-v="and">Andalucía</button>
+          <button type="button" class="opt" data-k="zona" data-v="norte">Castilla y León o el norte</button>
+          <button type="button" class="opt" data-k="zona" data-v="igual">Donde mejor esté</button>
+          <button type="button" class="back" data-back="1">‹ Atrás</button>
+        </div>
+        <div class="step" data-s="3"><h3>¿Cuántos vais?</h3>
+          <button type="button" class="opt" data-k="n" data-v="1">Solo yo</button>
+          <button type="button" class="opt" data-k="n" data-v="2">2</button>
+          <button type="button" class="opt" data-k="n" data-v="3-5">3 a 5</button>
+          <button type="button" class="opt" data-k="n" data-v="6+">Más de 5</button>
+          <button type="button" class="back" data-back="2">‹ Atrás</button>
+        </div>
+        <div class="step" data-s="4"><h3>Presupuesto por puesto</h3>
+          <button type="button" class="opt" data-k="ppto" data-v="-250">Hasta 250 €</button>
+          <button type="button" class="opt" data-k="ppto" data-v="250-400">De 250 a 400 €</button>
+          <button type="button" class="opt" data-k="ppto" data-v="400-800">De 400 a 800 €</button>
+          <button type="button" class="opt" data-k="ppto" data-v="800+">Más de 800 €</button>
+          <button type="button" class="back" data-back="3">‹ Atrás</button>
+        </div>
+        <div class="step" data-s="5"><h3 id="fin-t">Te escribimos por WhatsApp en un minuto</h3>
+          <p class="tiny" id="fin-p">Con las monterías que ya encajan.</p>
+          <label>Nombre<input autocomplete="given-name" placeholder="Tu nombre"></label>
+          <label>WhatsApp<input type="tel" inputmode="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
+          <label class="chk"><input type="checkbox"> Acepto que Hunty me escriba por WhatsApp y me llame sobre estas cacerías. Puedo darme de baja cuando quiera.</label>
+          <button class="btn pri" type="button" id="send">Avisarme por WhatsApp</button>
+          <p class="ok" id="ok" role="status">Listo. En la versión real te llegaría ahora el WhatsApp con las monterías que encajan.</p>
+          <button type="button" class="back" data-back="1" data-reset="1">‹ Volver a empezar</button>
+          <p class="note">Maqueta: no envía ni guarda ningún dato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como" aria-labelledby="h-como">
+    <div class="wrap">
+      <div class="head"><h2 id="h-como">¿Cómo funciona Hunty?</h2></div>
+      <div class="how">
+        <div><b>1</b><h3>Busca tu jornada</h3><p>Monterías, recechos, esperas, caza menor e internacional, con fecha, puestos, cupo y precio.</p></div>
+        <div><b>2</b><h3>Reserva en pocos clics</h3><p>Pagas una señal para asegurar tu puesto. Con Hunty no pagas más: la comisión la paga el organizador.</p></div>
+        <div><b>3</b><h3>Disfruta de la jornada</h3><p>Te informamos antes y después. La ubicación te llega la semana de la montería.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" aria-labelledby="h-op">
+    <div class="wrap">
+      <div class="head"><h2 id="h-op">Lo que dicen los cazadores</h2><p>Opiniones publicadas en hunty.es.</p></div>
+      <div class="ops">
+        <blockquote><span class="st" aria-label="5 de 5">★★★★★</span><p>«Me pareció perfecto el trato y el resultado.»</p><cite>Luis Miguel · 2 reservas en Hunty</cite></blockquote>
+        <blockquote><span class="st" aria-label="5 de 5">★★★★★</span><p>«Sólo he utilizado esta vez vuestros servicios, pero no dudaré en volveros a visitar y a recomendar.»</p><cite>Santiago · 1 reserva en Hunty</cite></blockquote>
+        <blockquote><span class="st" aria-label="5 de 5">★★★★★</span><p>«Buena atención al cliente.»</p><cite>Elias · 2 reservas en Hunty</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-as">
+    <div class="wrap">
+      <div class="ases"><h2 id="h-as">¿No encuentras lo que buscas? ¡Te ayudamos!</h2><p>Escríbenos por WhatsApp. Te contesta un asesor al momento, de 8:00 a 21:30.</p><a class="btn wa" href="#" onclick="return false">Hablar con un asesor</a></div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="h-faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><h2 id="h-faq">Preguntas frecuentes</h2></div>
+      <div class="faq">
+        <details><summary>¿Pago más por reservar en Hunty?</summary><p>No. Mismo precio que el organizador, garantizado. Hunty cobra una comisión al organizador, no a ti.</p></details>
+        <details><summary>¿Cuánto pago al reservar?</summary><p>Una señal para asegurar tu puesto (por ejemplo, 40 € en Valmorisco). El resto, según las condiciones de cada organizador, que aparecen en la ficha.</p></details>
+        <details><summary>¿Cuándo me dan la ubicación?</summary><p>El organizador se pone en contacto contigo para enviarte la ubicación la semana de la montería.</p></details>
+        <details><summary>¿Necesito licencia?</summary><p>Sí, la de la comunidad donde cazas o la interautonómica. Si no la tienes, en Hunty la tramitamos.</p></details>
+        <details><summary>¿Qué es Hunty Prime?</summary><p>El club de Hunty: 150 € al año con precio Prime en cada jornada, sorteos exclusivos, inscripción en las ofertas públicas y descuentos en licencias y tienda.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/logo-white.svg" alt="Hunty" width="92" height="22">
+    <p>Plataforma líder en contratación de jornadas de caza en España.</p>
+    <p>Maqueta preparada por Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io · 16-oct-2026. No es la web de Hunty. Datos, cacerías y opiniones tomados de hunty.es; en la web conviven «4,7/5 con 644 opiniones» y «4,6/5 con 764»: aquí se usa la segunda.</p>
+  </div>
+</footer>
+
+<div class="sticky">
+  <a class="btn wa" href="#" onclick="return false">Asesor</a>
+  <a class="btn pri" href="#avisame">Avísame</a>
+</div>
+
+<script>
+(function () {
+  var r = {}, total = 5;
+  var steps = document.querySelectorAll('#form .step');
+  function go(n) {
+    steps.forEach(function (s) { s.classList.toggle('on', s.dataset.s === String(n)); });
+    document.getElementById('bar').style.width = Math.round(n / total * 100) + '%';
+    if (n === 5) {
+      var t = document.getElementById('fin-t'), p = document.getElementById('fin-p');
+      if (r.cuando === 'proxima') { t.textContent = 'Te avisamos antes de que abra'; p.textContent = 'Guardamos tu temporada y te escribimos unas semanas antes, con lo que haya publicado.'; }
+      else if (r.cuando === 'mirando') { t.textContent = 'Te mandamos el calendario de tu zona'; p.textContent = 'Cada semana, las monterías nuevas de tu zona. Sin llamadas.'; }
+      else { t.textContent = 'Te escribimos por WhatsApp en un minuto'; p.textContent = 'Con las monterías que ya encajan con tus fechas, tu zona y tu presupuesto.'; }
+    }
+    var box = document.getElementById('form');
+    if (box.getBoundingClientRect().top < 60) box.scrollIntoView({ block: 'start' });
+  }
+  document.querySelectorAll('#form .opt').forEach(function (b) {
+    b.addEventListener('click', function () { r[b.dataset.k] = b.dataset.v; go(+b.closest('.step').dataset.s + 1); });
+  });
+  document.querySelectorAll('#form .back').forEach(function (b) {
+    b.addEventListener('click', function () { if (b.dataset.reset) { r = {}; document.getElementById('ok').classList.remove('on'); } go(+b.dataset.back); });
+  });
+  document.getElementById('send').addEventListener('click', function () { document.getElementById('ok').classList.add('on'); });
+})();
+</script>
+</body>
+</html>

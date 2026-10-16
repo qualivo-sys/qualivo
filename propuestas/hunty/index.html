@@ -25,7 +25,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);ov
 .topnav a[aria-current="page"]{background:#fff;color:#1A4A15;border-color:#fff}
 .wrap{max-width:1040px;margin-inline:auto;display:grid;gap:34px;padding:28px 16px 64px}
 .wrap > *{min-width:0}
-.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:max-content;max-width:100%}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:fit-content;max-width:100%}
 h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;line-height:1.08;margin:0;letter-spacing:-.015em;text-wrap:balance}
 h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0;letter-spacing:-.005em;text-wrap:balance}
 h2 .n{color:var(--accent);margin-right:8px}
@@ -70,7 +70,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .ok-ko > div{border-radius:10px;padding:10px 12px;font-size:14.5px}
 .ok-ko .o{background:var(--tint)}
 .ok-ko .x{background:var(--bad-bg)}
-.ok-ko b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.ok-ko > div > b:first-child{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
 /* recorrido */
 .flow{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .flow li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:600}
@@ -161,13 +161,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
       <div class="line">
         <h3>Línea 1 · «Recechos de [especie]» · página HUNTY · 8 anuncios · activos desde el 17 y el 22 de julio</h3>
         <div class="thumbs">
-          <figure><img src="assets/activos/1350175807273158.jpg" alt="Anuncio Recechos de ciervo" loading="lazy"><figcaption>Ciervo · 1350175807273158 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/2043959529580115.jpg" alt="Anuncio Recechos de gamo" loading="lazy"><figcaption>Gamo · 2043959529580115 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/28117340151183768.jpg" alt="Anuncio Recechos de corzo" loading="lazy"><figcaption>Corzo · 28117340151183768 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/1371734191598607.jpg" alt="Anuncio Recechos de muflón" loading="lazy"><figcaption>Muflón · 1371734191598607 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/1008978358616113.jpg" alt="Anuncio Recechos de rebeco" loading="lazy"><figcaption>Rebeco · 1008978358616113 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/1783323322827532.jpg" alt="Anuncio Recechos de arruí" loading="lazy"><figcaption>Arruí · 1783323322827532 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/2153292858579633.jpg" alt="Anuncio Recechos de boc balear" loading="lazy"><figcaption>Boc balear · 2153292858579633 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/1350175807273158.jpg" alt="Anuncio Recechos de ciervo"><figcaption>Ciervo · 1350175807273158 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/2043959529580115.jpg" alt="Anuncio Recechos de gamo"><figcaption>Gamo · 2043959529580115 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/28117340151183768.jpg" alt="Anuncio Recechos de corzo"><figcaption>Corzo · 28117340151183768 · 17-jul</figcaption></figure>
+          <figure><img src="assets/activos/1371734191598607.jpg" alt="Anuncio Recechos de muflón"><figcaption>Muflón · 1371734191598607 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/1008978358616113.jpg" alt="Anuncio Recechos de rebeco"><figcaption>Rebeco · 1008978358616113 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/1783323322827532.jpg" alt="Anuncio Recechos de arruí"><figcaption>Arruí · 1783323322827532 · 22-jul</figcaption></figure>
+          <figure><img src="assets/activos/2153292858579633.jpg" alt="Anuncio Recechos de boc balear"><figcaption>Boc balear · 2153292858579633 · 22-jul</figcaption></figure>
         </div>
         <p class="small"><b>Texto (ej. corzo):</b> «El duende del bosque. Esquivo, difícil y de los más deseados 🎯 Encuentra tu rececho de corzo en Hunty.» · <b>Titular:</b> «Recechos de Corzo» · <b>Descripción:</b> «Descubre tu próxima aventura» · <b>Botón:</b> Ver detalles · <b>Destino:</b> hunty.es/especies/&lt;especie&gt;?referred_by=…</p>
         <div class="ok-ko">
@@ -179,11 +179,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
       <div class="line">
         <h3>Línea 2 · Monterías por comunidad y calendario · página HUNTY · 5 anuncios · activos desde el 20 y el 21 de septiembre</h3>
         <div class="thumbs">
-          <figure><img src="assets/activos/1790404692155428.jpg" alt="Anuncio Calendarios de monterías" loading="lazy"><figcaption>Calendario · 1790404692155428 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/1431619258818971.jpg" alt="Anuncio Calendarios de monterías" loading="lazy"><figcaption>Calendario · 1431619258818971 · 21-sep</figcaption></figure>
-          <figure><img src="assets/activos/1064600312834941.jpg" alt="Anuncio Monterías en Extremadura" loading="lazy"><figcaption>Extremadura · 1064600312834941 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/2368630826877479.jpg" alt="Anuncio Monterías en Castilla-La Mancha" loading="lazy" style="object-fit:contain"><figcaption>Castilla-La Mancha · 2368630826877479 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/3323657874480438.jpg" alt="Anuncio Monterías en Andalucía" loading="lazy"><figcaption>Andalucía · 3323657874480438 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/1790404692155428.jpg" alt="Anuncio Calendarios de monterías"><figcaption>Calendario · 1790404692155428 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/1431619258818971.jpg" alt="Anuncio Calendarios de monterías"><figcaption>Calendario · 1431619258818971 · 21-sep</figcaption></figure>
+          <figure><img src="assets/activos/1064600312834941.jpg" alt="Anuncio Monterías en Extremadura"><figcaption>Extremadura · 1064600312834941 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/2368630826877479.jpg" alt="Anuncio Monterías en Castilla-La Mancha" style="object-fit:contain"><figcaption>Castilla-La Mancha · 2368630826877479 · 20-sep</figcaption></figure>
+          <figure><img src="assets/activos/3323657874480438.jpg" alt="Anuncio Monterías en Andalucía"><figcaption>Andalucía · 3323657874480438 · 20-sep</figcaption></figure>
         </div>
         <p class="small"><b>Texto (ej. Extremadura):</b> «Extremadura, tierra de monterías únicas 🦌 Descubre las mejores fincas esta temporada con puestos desde 220€. 👉 Reserva tu puesto en Hunty» · <b>Titular:</b> «Puestos desde 220€» · <b>Botón:</b> Más información · <b>Destino:</b> buscador filtrado o hunty.es/calendario-de-monterias</p>
         <div class="ok-ko">
@@ -195,12 +195,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
       <div class="line">
         <h3>Línea 3 · Club Hunty Prime · página «Hunting Land - Club Tierra de Caza» · 8 anuncios · activos desde el 20 de septiembre</h3>
         <div class="thumbs">
-          <figure><img src="assets/activos/986838803963905.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>986838803963905</figcaption></figure>
-          <figure><img src="assets/activos/1958355501523595.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1958355501523595</figcaption></figure>
-          <figure><img src="assets/activos/2158518878388105.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>2158518878388105</figcaption></figure>
-          <figure><img src="assets/activos/1393695662334439.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1393695662334439</figcaption></figure>
-          <figure><img src="assets/activos/2206671423537475.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>2206671423537475</figcaption></figure>
-          <figure><img src="assets/activos/1600879178350783.jpg" alt="Anuncio Prime" loading="lazy"><figcaption>1600879178350783</figcaption></figure>
+          <figure><img src="assets/activos/986838803963905.jpg" alt="Anuncio Prime"><figcaption>986838803963905</figcaption></figure>
+          <figure><img src="assets/activos/1958355501523595.jpg" alt="Anuncio Prime"><figcaption>1958355501523595</figcaption></figure>
+          <figure><img src="assets/activos/2158518878388105.jpg" alt="Anuncio Prime"><figcaption>2158518878388105</figcaption></figure>
+          <figure><img src="assets/activos/1393695662334439.jpg" alt="Anuncio Prime"><figcaption>1393695662334439</figcaption></figure>
+          <figure><img src="assets/activos/2206671423537475.jpg" alt="Anuncio Prime"><figcaption>2206671423537475</figcaption></figure>
+          <figure><img src="assets/activos/1600879178350783.jpg" alt="Anuncio Prime"><figcaption>1600879178350783</figcaption></figure>
         </div>
         <p class="small"><b>Texto (ej.):</b> «Si vas a cazar, ¿por qué pagar de más? Con Club Hunty Prime puedes ahorrar hasta 500€ en tu próxima jornada. 🦌 Recechos → hasta 300€ 🐗 Monterías → hasta 175€ 🌙 Esperas → hasta 140€ 🌲 Cotos → hasta 500€» · <b>Titular:</b> «No pagues de más al cazar» / «Mejor precio garantizado» · <b>Botón:</b> Más información · <b>Destino:</b> hunty.es/club/prime?referred_by=…</p>
         <div class="ok-ko">
