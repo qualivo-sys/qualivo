@@ -83,7 +83,9 @@
       '<div><p class="bloque-t">Cómo abrir</p><div class="nba-caja"><p><b>Romper el hielo:</b> ' + esc(apertura) + '</p><p style="margin-top:8px"><b>Presentación:</b> ' + esc(presentacion) + '</p><p style="margin-top:8px"><b>Después, calla y escucha.</b> Lo que conteste es lo que le vas a ofrecer.</p></div></div>' +
       '<div><p class="bloque-t">Qué preguntar</p>' + lista(preguntas.slice(0, 4)) + '</div>' +
       '<div><p class="bloque-t">Objeciones probables</p>' + objeciones.slice(0, 3).map(function (o) { return '<div class="rd-obj"><b>' + esc(o[0]) + '</b><p>' + esc(o[1]) + '</p></div>'; }).join('') + '</div>' +
-      '<div><p class="bloque-t">Qué ofrecer</p><div class="porque-caja">' + (cfg.real
+      '<div><p class="bloque-t">Qué ofrecer</p><div class="porque-caja">' + (cfg.cuenta === 'nuria'
+        ? 'Programa Por Fin Duermo: método online de la Dra. Nuria Roure, 1.795 € con pago fraccionado. Se habla del método y de cómo se trabaja, nunca de resultados médicos ni de curas.'
+        : cfg.real
         ? 'Diagnóstico en vivo con sus números, demo de su sector y, si encaja, arranque con fecha: implantación y primer mes, y después desde 750 €/mes, sin permanencia. Caso para citar: EAC (10,2×, 44.000 € en un mes) o Nuria Roure (6,45×).'
         : esc(cap(c.prod || T.producto)) + (c.valor ? ' · ' + M.euros(c.valor) : '') + '. Si pregunta por resultados, ' + esc(T.casoExito || 'un caso parecido') + '.') + '</div></div>' +
       '<div><p class="bloque-t">Qué tienes que conseguir</p><div class="nba-caja humano rd-meta">' + QV.ico('diana') + '<p>' + md(objetivo) + '</p></div></div>' +

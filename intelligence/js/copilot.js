@@ -518,6 +518,8 @@
       hecho = true;
       rellenar(el, responderDet(plan));
     };
+    // Cuentas de clientes (datos de salud en el caso de Nuria): nada sale hacia la IA, responde el motor
+    if (E().cfg.cuenta) { respaldo(); return; }
     const reloj = setTimeout(respaldo, TIEMPO_MAX);
     const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     fetch('/api/intelligence-copilot/', {

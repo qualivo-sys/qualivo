@@ -3,18 +3,23 @@
 //
 //   POST /api/intelligence-nuria/?accion=entrar   { clave }  → cookie de sesión
 //   POST /api/intelligence-nuria/?accion=salir               → borra la cookie
-//   GET  /api/intelligence-nuria/                            → datos (401 sin sesión)
+//   GET  /api/intelligence-nuria/                            → resumen (401 sin sesión)
+//   GET  /api/intelligence-nuria/?accion=tablero             → fichas y conversaciones
+//                                                              (pantallas de Intelligence, ?cuenta=nuria)
 //
 // Variables en Vercel (las pone Maikel):
 //   INTELLIGENCE_CLAVE_NURIA  contraseña de la página
-//   NURIA_GHL_API_KEY         token privado de la cuenta de GHL de Nuria
+//   NURIA_GHL_API_KEY         token privado de la cuenta de GHL de Nuria (solo lectura)
 //   NURIA_GHL_LOCATION_ID     id de la cuenta
+//   NURIA_GHL_APP_URL         (opcional) dominio del CRM para «Abrir en GHL»
 //
 // Reglas:
 //   - SOLO LECTURA: todo sale por leer(), que solo hace GET.
-//   - Son datos de salud (insomnio): aquí no se leen conversaciones, notas ni
-//     formularios. Del contacto solo se usan sus etiquetas y el nombre, que se
-//     manda al navegador como «Nombre I.». Ni correos ni teléfonos.
+//   - Son datos de salud (insomnio). El resumen no lee conversaciones. El tablero
+//     sí (Nuria lo autorizó el 16-oct, vía Maikel), solo de las inscritas al
+//     directo, y solo los mensajes desde el 14 de octubre. Nunca correos ni
+//     teléfonos al navegador; el nombre, como «Nombre I.». No se leen notas
+//     ni formularios.
 //   - Nada de datos en el código. Cache de 3 minutos en memoria. Sin sesión, 401.
 
 const S = require('./_intel-sesion.js').crear({ cookie: 'qi_nuria', env: 'INTELLIGENCE_CLAVE_NURIA', sal: 'nuria-intelligence|' });
@@ -47,13 +52,17 @@ function cab(version) {
   };
 }
 async function leer(ruta, version) {
-  const ctl = new AbortController();
-  const t = setTimeout(function () { ctl.abort(); }, 12000);
-  try {
-    const r = await fetch(GHL + ruta, { method: 'GET', headers: cab(version), signal: ctl.signal });
-    if (!r.ok) throw new Error('GHL ' + r.status);
-    return await r.json();
-  } finally { clearTimeout(t); }
+  for (let intento = 0; ; intento++) {
+    const ctl = new AbortController();
+    const t = setTimeout(function () { ctl.abort(); }, 12000);
+    try {
+      const r = await fetch(GHL + ruta, { method: 'GET', headers: cab(version), signal: ctl.signal });
+      // GHL deja 100 llamadas cada 10 segundos: si nos pasamos, esperar y repetir
+      if (r.status === 429 && intento < 4) { await new Promise(function (ok) { setTimeout(ok, 1500 * (intento + 1)); }); continue; }
+      if (!r.ok) throw new Error('GHL ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
 }
 
 function diaMadrid(iso) {
@@ -184,6 +193,162 @@ async function recoger() {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Tablero: una ficha por inscrita, con su trato, sus citas y sus mensajes
+// ---------------------------------------------------------------------------
+const DESDE_MENSAJES = Date.parse('2026-10-14T00:00:00Z'); // desde la semana del directo
+let cacheTab = null, tabEnCurso = null;
+const memMensajes = {}; // contacto → { huella, msgs }
+
+async function enParalelo(items, n, fn, hasta) {
+  const out = new Array(items.length);
+  let i = 0;
+  async function obrero() {
+    while (i < items.length) {
+      const k = i++;
+      if (Date.now() > hasta) { out[k] = undefined; continue; }
+      try { out[k] = await fn(items[k]); } catch (e) { out[k] = null; }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(n, items.length) }, obrero));
+  return out;
+}
+
+// Quién escribió: c = la persona, h = alguien del equipo, a = automático (flujos, n8n, campañas, bot)
+function autor(m) {
+  if (m.direction === 'inbound') return 'c';
+  return m.source === 'app' && m.userId ? 'h' : 'a';
+}
+function canalDe(t) {
+  t = String(t || '');
+  if (/WHATSAPP/.test(t)) return 'wa';
+  if (/EMAIL/.test(t)) return 'email';
+  if (/CALL|VOICE/.test(t)) return 'voz';
+  return 'wa';
+}
+function textoDe(m) {
+  const canal = canalDe(m.messageType);
+  let t = String(m.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (canal === 'email' && m.direction !== 'inbound') {
+    const asunto = m.meta && m.meta.email && m.meta.email.subject;
+    t = 'Correo: ' + (asunto || t.slice(0, 80));
+  }
+  if (canal === 'voz') t = 'Llamada';
+  return t.slice(0, 600) || (canal === 'email' ? 'Correo' : 'Mensaje sin texto');
+}
+
+async function tablero() {
+  const base = cache && Date.now() - cache.t < CACHE_MS ? cache.datos : await recoger();
+  const loc = encodeURIComponent(process.env.NURIA_GHL_LOCATION_ID);
+  const hasta = Date.now() + 48000;
+
+  const embudos = await leer('/opportunities/pipelines?locationId=' + loc);
+  const emb = (embudos.pipelines || []).filter(function (p) { return p.id === EMBUDO; })[0];
+  const etapas = (emb.stages || []).map(function (s) { return { id: s.id, txt: s.name }; });
+
+  let ops = [];
+  for (let pag = 1; pag <= 60; pag++) {
+    const d = await leer('/opportunities/search?location_id=' + loc + '&pipeline_id=' + EMBUDO + '&limit=100&page=' + pag);
+    const o = d.opportunities || [];
+    ops = ops.concat(o);
+    if (o.length < 100) break;
+  }
+  const vistos = {};
+  const gente = ops.filter(function (o) {
+    const c = o.contact || {}, id = o.contactId || c.id;
+    if (!id || vistos[id]) return false;
+    vistos[id] = true;
+    const tags = (c.tags || []).map(String);
+    return tags.indexOf('no enviar · webinar 22-oct') < 0 && tags.indexOf('prueba') < 0;
+  });
+
+  // Mensajes: una conversación por persona, solo desde el 14 de octubre
+  const huellas = [];
+  const convs = await enParalelo(gente, 4, async function (o) {
+    const s = await leer('/conversations/search?locationId=' + loc + '&contactId=' + encodeURIComponent(o.contactId), '2021-04-15');
+    const lista = s.conversations || [];
+    // Si nada ha cambiado desde la última lectura, se reutilizan los mensajes (memoria de la instancia)
+    const huella = lista.map(function (c) { return c.id + ':' + c.lastMessageDate; }).join('|');
+    const previo = memMensajes[o.contactId];
+    if (previo && previo.huella === huella) return previo.msgs;
+    huellas[gente.indexOf(o)] = huella;
+    let msgs = [];
+    for (let i = 0; i < lista.length && i < 2; i++) {
+      const m = await leer('/conversations/' + encodeURIComponent(lista[i].id) + '/messages?limit=40', '2021-04-15');
+      msgs = msgs.concat((m.messages && m.messages.messages) || []);
+    }
+    return msgs
+      .filter(function (m) { return Date.parse(m.dateAdded) >= DESDE_MENSAJES && !/ACTIVITY/.test(m.messageType || ''); })
+      .map(function (m) { return { t: Date.parse(m.dateAdded), de: autor(m), canal: canalDe(m.messageType), texto: textoDe(m), estado: m.status || '' }; })
+      .sort(function (a, b) { return a.t - b.t; });
+  }, hasta);
+  gente.forEach(function (o, k) { if (convs[k] && huellas[k]) memMensajes[o.contactId] = { huella: huellas[k], msgs: convs[k] }; });
+  const parcial = convs.some(function (x) { return x == null; });
+
+  // Citas por contacto
+  const citasDe = {};
+  try {
+    const ev = await leer('/calendars/events?locationId=' + loc + '&calendarId=' + CALENDARIO + '&startTime=' + Date.parse('2026-10-15T00:00:00Z') + '&endTime=' + (Date.now() + 21 * 864e5), '2021-04-15');
+    (ev.events || []).forEach(function (e) {
+      if (e.deleted) return;
+      (citasDe[e.contactId] = citasDe[e.contactId] || []).push({ t: Date.parse(e.startTime), estado: e.appointmentStatus || '', closer: e.assignedUserId || '' });
+    });
+  } catch (e) { /* sin calendario */ }
+  let usuarios = {};
+  try {
+    const u = await leer('/users/?locationId=' + loc);
+    (u.users || []).forEach(function (x) { usuarios[x.id] = (x.firstName || x.name || '').trim(); });
+  } catch (e) { usuarios = {}; }
+
+  const app = (process.env.NURIA_GHL_APP_URL || 'https://app.gohighlevel.com').replace(/\/+$/, '');
+  const ordenEtapa = {};
+  PASOS.forEach(function (p, i) { p.etapas.forEach(function (e) { ordenEtapa[e] = i; }); });
+  const nombreEtapa = {};
+  etapas.forEach(function (e) { nombreEtapa[e.id] = e.txt; });
+
+  const contactos = gente.map(function (o, k) {
+    const c = o.contact || {};
+    const tags = (c.tags || []).map(String);
+    const conv = convs[k] || [];
+    const citas = (citasDe[o.contactId] || []).sort(function (a, b) { return a.t - b.t; });
+    const prox = citas.filter(function (x) { return x.estado !== 'cancelled' && x.estado !== 'invalid'; }).slice(-1)[0];
+    const ultimo = conv[conv.length - 1];
+    const suyos = conv.filter(function (m) { return m.de === 'c'; });
+    const etapaNom = nombreEtapa[o.pipelineStageId] || '';
+    const a = (o.attributions || []).filter(function (x) { return x.isFirst; })[0] || (o.attributions || [])[0] || {};
+    return {
+      id: o.contactId,
+      n: corto(c.name),
+      tratoId: o.id,
+      etapaId: o.pipelineStageId,
+      etapaNombre: etapaNom,
+      paso: o.status === 'won' ? 4 : (ordenEtapa[etapaNom] != null ? ordenEtapa[etapaNom] : 0),
+      fin: o.status === 'won' ? 'ganado' : (o.status === 'lost' || etapaNom === 'Perdido') ? 'perdido' : '',
+      valor: Number(o.monetaryValue) || 0,
+      creado: Date.parse(o.createdAt),
+      cambioEtapa: Date.parse(o.lastStageChangeAt || o.createdAt),
+      origen: a.utmSource || (a.utmSessionSource === 'Direct traffic' ? 'Email o directo' : a.utmSessionSource) || 'Sin origen',
+      ghl: app + '/v2/location/' + encodeURIComponent(process.env.NURIA_GHL_LOCATION_ID) + '/contacts/detail/' + encodeURIComponent(o.contactId),
+      s: {
+        e1: tags.indexOf('n8n · e1 enviado') >= 0,
+        w1: tags.indexOf('wa · w1 bienvenida') >= 0,
+        movil: !!c.phone,
+        atender: tags.indexOf('atender · persona') >= 0,
+        baja: tags.indexOf('baja whatsapp') >= 0,
+        cita: prox ? prox.t : null,
+        citaEstado: prox ? prox.estado : '',
+        closer: prox ? (usuarios[prox.closer] || '') : '',
+        citas: citas.map(function (x) { return { t: x.t, estado: x.estado }; }),
+        esperaDesde: ultimo && ultimo.de === 'c' ? ultimo.t : null,
+        primeraRespuesta: suyos.length ? suyos[0].t : null
+      },
+      conv: conv
+    };
+  });
+
+  return Object.assign({}, base, { etapasCrm: etapas, contactos: contactos, parcial: parcial, generado: Date.now() });
+}
+
 function cuerpo(req) {
   let b = req.body;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }
@@ -214,6 +379,20 @@ module.exports = async function (req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
   if (!process.env.NURIA_GHL_API_KEY || !process.env.NURIA_GHL_LOCATION_ID) return res.status(503).json({ error: 'Faltan las claves de GHL de Nuria en Vercel.' });
+
+  if (accion === 'tablero') {
+    try {
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      const edad = cacheTab ? Date.now() - cacheTab.t : Infinity;
+      if (!cacheTab || edad > CACHE_MS || (fresco && edad > 30000)) {
+        if (!tabEnCurso) tabEnCurso = tablero().then(function (d) { cacheTab = { t: Date.now(), datos: d }; return d; }).finally(function () { tabEnCurso = null; });
+        await tabEnCurso;
+      }
+      return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheTab.t) / 1000) }, cacheTab.datos));
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
 
   try {
     const fresco = String((req.query && req.query.fresco) || '') === '1';
