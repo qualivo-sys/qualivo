@@ -5,139 +5,383 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Hunty · plan de captación y seguimiento</title>
+<meta name="description" content="Plan de Qualivo para Hunty: captura con valor dentro de la web, WhatsApp al minuto, asistente de voz y medición hasta la comisión.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/deck.css">
 <style>
-/* Plan para Hunty (marketplace de caza): anuncios que filtran → test → WhatsApp al minuto → Raquel (voz) → comercial informado → reserva → temporada siguiente. Estilo de las propuestas de Qualivo con la marca de Hunty. */
-:root{--bg:#F4F7F3;--surface:#FFFFFF;--ink:#13220F;--muted:#4E5D4A;--line:#D7E3D3;--accent:#2C7C24;--accent-ink:#FFFFFF;--dark:#1A4A15;--tint:#E8F5E6;--warn:#9A5B00;--warn-bg:#FFF4E0;--bad:#B3261E;--bad-bg:#FDECEA;--good:#1F6F1A;
-  --font:"DM Sans","Segoe UI",system-ui,sans-serif}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E160C;--surface:#152113;--ink:#EEF4EC;--muted:#A9B8A5;--line:#2A3B27;--accent:#6BBF62;--accent-ink:#0B1A09;--dark:#0B1A09;--tint:#1B2E18;--warn:#F2C26B;--warn-bg:#2E2614;--bad:#FF8A80;--bad-bg:#3A1A17;--good:#7FD477;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0E160C;--surface:#152113;--ink:#EEF4EC;--muted:#A9B8A5;--line:#2A3B27;--accent:#6BBF62;--accent-ink:#0B1A09;--dark:#0B1A09;--tint:#1B2E18;--warn:#F2C26B;--warn-bg:#2E2614;--bad:#FF8A80;--bad-bg:#3A1A17;--good:#7FD477;color-scheme:dark}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);overflow-x:hidden}
-.topnav{position:sticky;top:0;z-index:5;background:var(--dark);color:#fff}
-.topnav .in{max-width:1040px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.topnav img{height:20px;width:auto;display:block}
-.topnav .by{font-size:12.5px;opacity:.8;margin-right:auto}
-.topnav a{color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.3)}
-.topnav a[aria-current="page"]{background:#fff;color:#1A4A15;border-color:#fff}
-.wrap{max-width:1040px;margin-inline:auto;display:grid;gap:34px;padding:28px 16px 64px}
-.wrap > *{min-width:0}
-.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:var(--tint);color:var(--accent);border-radius:6px;padding:4px 10px;width:fit-content;max-width:100%}
-h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;line-height:1.08;margin:0;letter-spacing:-.015em;text-wrap:balance}
-h2{font-size:clamp(21px,3vw,27px);font-weight:800;margin:0;letter-spacing:-.005em;text-wrap:balance}
-h2 .n{color:var(--accent);margin-right:8px}
-h3{font-size:17px;font-weight:700;margin:0 0 6px}
-p{margin:0}
-.sub{color:var(--muted);font-size:17.5px;max-width:70ch}
-section{display:grid;gap:14px;scroll-margin-top:60px}
-section > *{min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
-ul,ol{margin:0;padding-left:20px;display:grid;gap:6px}
-.muted{color:var(--muted)}
-.small{font-size:14px}
-.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
-table{width:100%;border-collapse:collapse;font-size:14.5px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:0}
-th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
-.wide table{min-width:760px}
-.mid table{min-width:620px}
-.warn{background:var(--warn-bg);border-left:4px solid var(--warn);border-radius:10px;padding:12px 14px;font-size:15px}
-.hyp{background:var(--tint);border-radius:12px;padding:14px 16px}
-.src{font-size:12.5px;color:var(--muted)}
-.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;white-space:nowrap}
-.pill.ok{background:var(--tint);color:var(--good)}
-.pill.ko{background:var(--bad-bg);color:var(--bad)}
-.pill.hy{background:var(--warn-bg);color:var(--warn)}
-a{color:var(--accent)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.tldr{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:16px 18px}
-.tldr ol{gap:8px}
+/* Plan para Hunty: anuncios que filtran → captura con valor → WhatsApp al minuto → Raquel (voz) → comercial informado → reserva → temporada siguiente. */
+/* portada */
+.hero{position:relative;color:#fff;background:var(--f900);overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;background:url(assets/ciervo.jpg) center 45%/cover;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(12,33,9,.45) 0%,rgba(12,33,9,.62) 40%,rgba(12,33,9,.97) 100%),linear-gradient(90deg,rgba(12,33,9,.88) 0%,rgba(12,33,9,.35) 75%)}
+.hero .wrap{padding-block:104px 44px;display:grid;gap:24px}
+.hero .eyebrow{color:#BFE3B6}
+.hero h1{font-size:clamp(36px,5.6vw,68px);max-width:19ch;color:#fff}
+.hero .sub{color:rgba(255,255,255,.84);font-size:clamp(16.5px,1.6vw,19px);line-height:1.6;max-width:66ch}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.hero .meta span{display:inline-flex;gap:8px;align-items:center}
+.hero .meta span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--moss)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.kpi{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:18px 18px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.kpi b{display:block;font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(34px,4vw,48px);line-height:1;letter-spacing:-.02em;color:#fff}
+.kpi span{display:block;margin-top:8px;font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.4}
+.hero .ksrc{font-size:12px;color:rgba(255,255,255,.55)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.hero .wrap{padding-block:64px 36px}}
+/* franja regalo */
+.giftbar{background:linear-gradient(90deg,#E9DFC9,#F3ECDD);color:#3B2F1C;border-bottom:1px solid var(--line)}
+.giftbar .wrap{display:flex;gap:10px 16px;align-items:center;flex-wrap:wrap;padding-block:14px;font-size:15px}
+.giftbar .i{color:#8A5A06;width:22px;height:22px}
+.giftbar a{color:#3B2F1C;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .giftbar{background:#2A2216;color:#EAD9B8}:root:not([data-theme="light"]) .giftbar a{color:#F2C26B}}
+:root[data-theme="dark"] .giftbar{background:#2A2216;color:#EAD9B8}:root[data-theme="dark"] .giftbar a{color:#F2C26B}
+/* resumen */
+.tldr{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:32px;align-items:start}
+.tldr h2{position:sticky;top:90px}
+.tldr ol{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:t}
+.tldr li{counter-increment:t;display:grid;grid-template-columns:52px 1fr;gap:6px;padding:18px 0;border-top:1px solid var(--line);font-size:16.5px;line-height:1.6}
+.tldr li:last-child{border-bottom:1px solid var(--line)}
+.tldr li::before{content:"0" counter(t);font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.1;color:var(--accent)}
+@media (max-width:860px){.tldr{grid-template-columns:1fr;gap:12px}.tldr h2{position:static}}
+/* índice */
+.toc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.toc a{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-weight:600;font-size:14.5px;line-height:1.35;transition:border-color .2s,transform .2s}
+.toc a:hover{border-color:var(--accent);transform:translateY(-1px)}
+.toc a b{font-family:var(--mono);font-weight:500;font-size:11.5px;color:var(--accent)}
+.toc a.gift{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+.toc a.gift b{color:var(--warn)}
+@media (max-width:900px){.toc{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.toc a{font-size:13.5px;padding:10px 12px}}
+.sec.alt{background:var(--surface-2)}
+/* antes / ahora */
+.cmp td:nth-child(3){background:color-mix(in srgb,var(--accent-soft) 55%,transparent)}
+.cmp th:nth-child(3){color:var(--accent)}
+.cmp td:first-child{width:18%}
+@media screen and (max-width:720px){.cmp td:nth-child(3){background:var(--accent-soft);border-radius:10px;margin:4px 0 8px;width:calc(100% - 24px);margin-inline:12px}}
 /* anuncios activos */
-.lines{display:grid;gap:16px}
-.line{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}
-.thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
-.thumbs figure{margin:0;flex:none;width:118px}
-.thumbs img{width:118px;height:210px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;background:#000}
-.thumbs figcaption{font-size:11px;color:var(--muted);line-height:1.3;margin-top:4px;word-break:break-all}
-.ok-ko{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ok-ko > div{border-radius:10px;padding:10px 12px;font-size:14.5px}
-.ok-ko .o{background:var(--tint)}
-.ok-ko .x{background:var(--bad-bg)}
-.ok-ko > div > b:first-child{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
-/* recorrido */
-.flow{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.flow li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:600}
-.flow li.arrow{background:none;border:0;padding:0 2px;color:var(--muted);font-weight:400}
-.split{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.split > div{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:14px 16px}
-.split > div.b2{border-top-color:#C79A2B}
-.split > div.b3{border-top-color:var(--muted)}
+.lines{display:grid;gap:20px}
+.line{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:18px;min-width:0;box-shadow:var(--shadow)}
+.line > *{min-width:0}
+.lh{display:grid;gap:10px}
+.lh .ln{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lh h3{font-family:var(--serif);font-weight:600;font-size:clamp(21px,2.4vw,26px);letter-spacing:-.01em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.adg{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:14px}
+.ad{margin:0;min-width:0}
+.ad .ph{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#0b0f0a;box-shadow:var(--shadow);border:1px solid var(--line)}
+.ad .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ad.err .ph{border-color:var(--bad);box-shadow:0 0 0 2px var(--bad)}
+.ad.wrn .ph{border-color:#C9860A;box-shadow:0 0 0 2px #C9860A}
+.ad .st{position:absolute;left:6px;top:6px;right:6px;display:flex}
+.ad .st span{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:99px;padding:4px 8px;line-height:1.15;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.ad .st .ok{background:rgba(255,255,255,.94);color:#1F6F1A}
+.ad .st .ko{background:#B3261E;color:#fff}
+.ad .st .hy{background:#C9860A;color:#fff}
+.ad figcaption{margin-top:8px;display:grid;gap:1px;font-size:13.5px;line-height:1.35}
+.ad figcaption b{font-weight:650}
+.ad figcaption code{background:none;padding:0;font-size:10.5px;color:var(--muted);word-break:break-all}
+.ad figcaption small{font-size:12px;color:var(--muted)}
+@media (max-width:640px){.adg{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:44%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-inline:-4px;padding-inline:4px}.ad{scroll-snap-align:start}.line{padding:18px}}
+.adcopy{background:var(--surface-2);border:1px solid var(--line-2);border-left:3px solid var(--earth);border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.6}
+.okko{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
+.okko > div{border-radius:12px;padding:14px 16px;font-size:14.5px;line-height:1.6}
+.okko .o{background:var(--good-soft)}
+.okko .x{background:var(--bad-soft)}
+.okko > div > b:first-child{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.okko .o > b:first-child{color:var(--good)}
+.okko .x > b:first-child{color:var(--bad)}
+.okko .i{width:16px;height:16px}
+@media (max-width:760px){.okko{grid-template-columns:1fr}}
+/* regalo */
+.gift{position:relative;border-radius:24px;background:radial-gradient(120% 140% at 100% 0%,#2C5A22 0%,#163F12 45%,#0C2109 100%);color:#fff;padding:clamp(22px,4vw,40px);display:grid;gap:22px;overflow:hidden;box-shadow:var(--shadow-lg);scroll-margin-top:80px}
+.gift::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,.08);box-shadow:0 0 0 40px rgba(255,255,255,.03),0 0 0 80px rgba(255,255,255,.02);pointer-events:none}
+.gift .rib{display:inline-flex;align-items:center;gap:8px;background:#E9C46A;color:#2B2008;font-weight:700;font-size:13px;border-radius:99px;padding:6px 14px 6px 10px;width:fit-content}
+.gift .rib .i{width:18px;height:18px}
+.gift h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;line-height:1.05}
+.gift .gl{color:rgba(255,255,255,.78);max-width:62ch}
+.fixes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fix{background:#fff;color:#17200F;border-radius:16px;padding:18px;display:grid;gap:12px;align-content:start;position:relative}
+.fix .n{position:absolute;right:16px;top:10px;font-family:var(--serif);font-weight:600;font-size:46px;line-height:1;color:#E3EEDD}
+.fix h3{font-size:17px;padding-right:40px}
+.fix p{font-size:14.5px;color:#3B4535;line-height:1.55}
+.fix .th{display:flex;gap:8px}
+.fix .th img{width:68px;height:121px;object-fit:cover;border-radius:7px;border:2px solid #B3261E;display:block;background:#000}
+.fix .diff{display:grid;gap:6px;font-size:12.5px}
+.fix .diff div{display:grid;grid-template-columns:62px 1fr;gap:8px;align-items:baseline;border-radius:8px;padding:7px 10px}
+.fix .diff .a{background:#FBE7E4}
+.fix .diff .b{background:#E3F1DE}
+.fix .diff span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5D6655}
+.fix .diff code{background:none;padding:0;color:#17200F;font-size:12px}
+.gift .src{color:rgba(255,255,255,.6)}
+@media (max-width:900px){.fixes{grid-template-columns:1fr}}
+/* capa */
+.layer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.layer .card{display:grid;gap:10px;align-content:start}
+.layer .card p.small{color:var(--ink-2)}
+@media (max-width:980px){.layer{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.layer{grid-template-columns:1fr}}
+/* preguntas */
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:12px;counter-reset:q}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 62px;position:relative;display:grid;gap:6px;box-shadow:var(--shadow)}
+.q .qn{position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:13px;background:var(--line-2);color:var(--ink-2)}
+.q p:first-of-type{font-weight:550;line-height:1.5}
+.q .for{font-size:14px;color:var(--muted)}
+.q.top{border-color:var(--accent);background:linear-gradient(0deg,var(--surface),var(--surface)) padding-box}
+.q.top .qn{background:var(--accent);color:var(--accent-ink)}
+.q .tp{position:absolute;right:14px;top:-10px;font-size:11px;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:99px;padding:2px 9px}
+@media (max-width:760px){.qs{grid-template-columns:1fr}}
+/* diagramas */
+.dg{display:block;width:100%;height:auto;overflow:visible}
+.dg text{font-family:var(--sans)}
+.dg .n{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .ng{fill:var(--good-soft);stroke:var(--good);stroke-width:1.4}
+.dg .t1{font-size:14px;font-weight:650;fill:var(--ink)}
+.dg .t2{font-size:11.5px;fill:var(--muted)}
+.dg .tn{font-family:var(--mono);font-size:10.5px;fill:var(--accent);letter-spacing:.06em}
+.dg .ar{stroke:var(--muted);stroke-width:1.5;fill:none}
+.dg .mk{fill:var(--muted)}
+.dg .mkg{fill:var(--good)}
+.dg .mkb{fill:var(--bad)}
+.dg .lk{stroke:var(--bad);stroke-width:1.4;stroke-dasharray:4 4;fill:none}
+.dg .lp{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1}
+.dg .lt{fill:var(--bad);font-size:11.5px;font-weight:600}
+.dg .ld{fill:var(--bad)}
+.dg .hd{font-family:var(--mono);font-size:11px;letter-spacing:.14em;fill:var(--muted)}
+.dg .hd2{font-family:var(--mono);font-size:11px;letter-spacing:.14em;fill:var(--accent)}
+.dg .dv{stroke:var(--line);stroke-dasharray:3 5}
+.dg .chip{fill:var(--good)}
+.dg .ct{fill:#fff;font-size:10.5px;font-weight:700;letter-spacing:.04em}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dg .ct{fill:#0B1A09}}
+:root[data-theme="dark"] .dg .ct{fill:#0B1A09}
+.dg .loop{stroke:var(--good);stroke-width:1.5;stroke-dasharray:5 4;fill:none}
+.dgbox{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(16px,3vw,32px);box-shadow:var(--shadow)}
+.dg-m{display:none}
+@media (max-width:760px){.dg-d{display:none}.dg-m{display:block}}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:14px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+/* reparto */
+.rep{display:grid;gap:0}
+.rep .root{justify-self:center;display:inline-flex;align-items:center;gap:8px;background:var(--f700);color:#fff;font-weight:650;border-radius:99px;padding:10px 18px;font-size:15px;box-shadow:var(--shadow)}
+.rep > svg{display:block;width:100%;height:70px}
+.rep .c3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grp{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start;box-shadow:var(--shadow)}
+.grp.b2{border-top-color:var(--ochre)}
+.grp.b3{border-top-color:var(--muted)}
+.grp .gh{display:flex;align-items:center;gap:10px}
+.grp.b2 .ic{background:var(--warn-soft);color:var(--warn)}
+.grp.b3 .ic{background:var(--line-2);color:var(--muted)}
+.grp p{font-size:14.5px;color:var(--ink-2)}
+@media (max-width:760px){.rep > svg{display:none}.rep .root{justify-self:start;margin-bottom:14px}.rep .c3{grid-template-columns:1fr;border-left:2px solid var(--line);padding-left:14px;margin-left:20px}}
+/* módulos */
+.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.mod:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.mod .mh{display:flex;align-items:center;gap:12px}
+.mod .mk{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--accent);line-height:1.4}
+.mod dl{margin:0;display:grid;gap:8px;font-size:14.5px}
+.mod dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mod dd{margin:0;line-height:1.55}
+.mod dd.met{background:var(--accent-soft);border-radius:8px;padding:8px 10px;font-weight:550}
+.mod a.go{display:inline-flex;align-items:center;gap:6px;font-weight:650;font-size:14px;text-decoration:none;margin-top:2px}
+.mod a.go .i{width:16px;height:16px;transition:transform .2s}
+.mod a.go:hover .i{transform:translateX(3px)}
+@media (max-width:980px){.mods{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.mods{grid-template-columns:1fr}}
+/* puntuación */
+.pbar{display:flex;height:46px;border-radius:12px;overflow:hidden;font-size:12px;font-weight:650;color:#fff}
+.pbar div{display:grid;place-items:center;text-align:center;line-height:1.15;padding:2px;border-right:2px solid var(--surface)}
+.pbar div:last-child{border-right:0}
+.pbar small{display:block;font-weight:500;opacity:.85;font-size:10.5px}
+.lvl{display:grid;grid-template-columns:45fr 25fr 30fr;border-radius:12px;overflow:hidden;font-size:13px;font-weight:650;text-align:center}
+.lvl div{padding:10px 6px}
+.lvl .c{background:var(--line-2);color:var(--muted)}
+.lvl .b{background:var(--warn-soft);color:var(--warn)}
+.lvl .a{background:var(--good-soft);color:var(--good)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px}
+@media (max-width:640px){.pbar{height:58px;font-size:10.5px}.pbar small{font-size:9.5px}}
+/* métricas */
+.mt{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start}
+.mt .side{display:grid;gap:14px}
+@media (max-width:900px){.mt{grid-template-columns:1fr}}
+.dg .fb{font-size:12.5px;font-weight:650;fill:#fff}
+.dg .bt{font-size:11.5px;font-weight:650;fill:var(--ink)}
+.dg .bt2{font-size:11px;fill:var(--muted)}
+.dg .br{fill:var(--surface);stroke:var(--accent);stroke-width:1.4;stroke-dasharray:5 4}
+.dg .brl{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4;fill:none}
+.dg .mka{fill:var(--accent)}
+/* cuadro de mando */
+.dash{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.panel .ph{display:flex;align-items:center;gap:10px;background:var(--f800);color:#fff;padding:14px 18px}
+.panel .ph h3{font-size:15.5px;color:#fff}
+.panel .ph small{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.panel .ph .dot{width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px rgba(124,200,115,.25)}
+.panel ul{list-style:none;margin:0;padding:6px 0}
+.panel li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:4px 16px;padding:12px 18px;border-bottom:1px solid var(--line-2);font-size:14.5px;line-height:1.5}
+.panel li:last-child{border-bottom:0}
+.panel li b{font-weight:600}
+.panel li span{color:var(--muted)}
+.panel li span.cut{display:inline;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:var(--line-2);border-radius:6px;padding:3px 8px;justify-self:start;align-self:start}
+@media (max-width:900px){.dash{grid-template-columns:1fr}}
+@media (max-width:480px){.panel li{grid-template-columns:1fr}}
+/* pruebas */
+.dec{display:flex;align-items:center;gap:0;margin:4px 0 6px;overflow-x:auto;padding-bottom:4px}
+.dec div{flex:1;min-width:150px;position:relative;padding-top:22px;font-size:13.5px}
+.dec div::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:var(--line)}
+.dec div::after{content:"";position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.dec b{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--accent);display:block}
+.hs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.h{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
+.h .hh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.h .id{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--accent);letter-spacing:-.02em}
+.h .dt{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;background:var(--f800);color:#fff;border-radius:99px;padding:4px 10px}
+.h .dt .i{width:13px;height:13px}
+.h .hy{font-size:15.5px;font-weight:550;line-height:1.5}
+.h dl{margin:0;display:grid;gap:10px;font-size:14px}
+.h dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.h dd{margin:0;line-height:1.5}
+.h dd.cut{background:var(--warn-soft);border-radius:8px;padding:8px 10px}
+@media (max-width:1000px){.hs{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.hs{grid-template-columns:1fr}}
 /* calculadora */
-.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:16px}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:18px;box-shadow:var(--shadow)}
 .calc .ins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.calc label{display:grid;gap:4px;font-size:13.5px;color:var(--muted)}
-.calc input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%}
-.calc .outs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.calc .outs div{background:var(--bg);border-radius:10px;padding:12px}
-.calc .outs b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
-.calc .outs span{font-size:13px;color:var(--muted)}
-.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.mod{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:8px;align-content:start}
-.mod .mk{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--accent)}
-.mod dl{margin:0;display:grid;gap:6px;font-size:14.5px}
-.mod dt{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.mod dd{margin:0}
-.mod a.go{font-weight:700;font-size:14px}
-.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.price{font-size:22px;font-weight:800;margin-top:6px}
-.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:4px}
-@media (max-width:760px){.ok-ko,.split,.calc .outs{grid-template-columns:1fr}.calc .ins{grid-template-columns:1fr 1fr}}
-@media print{.topnav{position:static}}
+.calc label{display:grid;gap:6px;font-size:13.5px;color:var(--muted);align-content:end;line-height:1.35}
+.calc input{font:inherit;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.calc input:focus{border-color:var(--accent)}
+.calc table{font-size:15px}
+.calc tbody tr:first-child td{color:var(--muted)}
+.calc tbody td.num{font-size:18px;font-weight:650}
+.calc tbody tr:last-child td.num{color:var(--accent)}
+@media (max-width:760px){.calc .ins{grid-template-columns:1fr 1fr}.calc tbody td.num{font-size:16px}}
+/* gobierno, necesitamos */
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rule{display:grid;grid-template-columns:auto 1fr;align-content:start;gap:4px 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+.rule .ic{grid-row:span 2}
+.rule h3{font-size:15.5px}
+.rule p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+@media (max-width:760px){.rules{grid-template-columns:1fr}}
+.cal td:first-child{white-space:nowrap}
+.need{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.need li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px}
+.need li .i{color:var(--accent);margin-top:2px}
+@media (max-width:760px){.need{grid-template-columns:1fr}}
+/* calendario */
+.gantt{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gantt svg{min-width:860px}
+.swipe{display:none;font-size:12.5px;color:var(--muted);align-items:center;gap:6px}
+@media (max-width:900px){.swipe{display:flex}}
+.dg .gl{stroke:var(--line-2)}
+.dg .gh1{font-size:13px;font-weight:650;fill:var(--ink)}
+.dg .gh2{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+.dg .rl{font-size:12.5px;fill:var(--ink-2)}
+.dg .rt{font-family:var(--mono);font-size:10.5px;fill:var(--accent)}
+.dg .bs{fill:var(--accent)}
+.dg .bc{fill:var(--accent);opacity:.22}
+.dg .bgf{fill:#C9860A}
+.dg .bo{fill:none;stroke:var(--accent);stroke-dasharray:4 3}
+.dg .sea{fill:var(--earth-soft)}
+.dg .seat{font-size:11px;fill:var(--earth)}
+.dg .ms{fill:var(--f700)}
+.dg .mst{font-family:var(--mono);font-size:10.5px;fill:var(--ink)}
+.dg .mst2{font-size:11px;font-weight:650;fill:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dg .ms{fill:var(--moss)}}
+:root[data-theme="dark"] .dg .ms{fill:var(--moss)}
+/* precios */
+.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.price-c{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
+.price-c h3{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.price{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em;line-height:1.2}
+.price span{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--muted)}
+@media (max-width:900px){.prices{grid-template-columns:1fr}}
+@media print{
+  .hero{min-height:330mm;display:flex;align-items:flex-end}.hero .wrap{padding-block:40px 40px;width:100%}
+  .giftbar,.toc-sec{display:none}
+  .dg-m{display:none!important}.dg-d{display:block!important}
+  .gantt svg{min-width:0}
+  .adg{grid-auto-flow:row;grid-template-columns:repeat(7,1fr);overflow:visible}
+  .mod:hover{transform:none}
+  .tldr h2{position:static}
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10.5 3 12 8 12 8s1.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M7 2v4a5 5 0 0 0 10 0V2M7 22v-4a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol></svg>
 
 <nav class="topnav" aria-label="Presentación">
   <div class="in">
-    <img src="assets/logo-white.svg" alt="Hunty" width="84" height="20" style="filter:brightness(0) invert(1)">
-    <span class="by">× Qualivo · 16-oct-2026</span>
-    <a href="./" aria-current="page">Plan</a>
-    <a href="demo/">Demo</a>
-    <a href="anuncios/">Anuncios</a>
-    <a href="landing/">Landing</a>
+    <div class="brand"><img src="assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span><span class="by">16-oct-2026</span></div>
+    <div class="links"><a href="./" aria-current="page">Plan</a><a href="demo/">Demo</a><a href="anuncios/">Anuncios</a><a href="landing/">Landing</a></div>
   </div>
 </nav>
 
-<div class="wrap">
-
-  <header style="display:grid;gap:14px">
-    <span class="tag">QUALIVO · PLAN PARA HUNTY · REUNIÓN 16-OCT · 12:00</span>
-    <h1>Retomamos: contactos mejor filtrados, seguimiento que no se cae y un comercial que llama sabiendo a quién</h1>
+<header class="hero">
+  <div class="bg" role="img" aria-label="Ciervos en una dehesa"></div>
+  <div class="wrap">
+    <span class="eyebrow">Qualivo · Plan para Hunty · Reunión 16-oct · 12:00</span>
+    <h1 class="display">Retomamos: contactos mejor filtrados, seguimiento que no se cae y un comercial que llama sabiendo a quién</h1>
     <p class="sub">En 2022-2023 os llevé la captación en Meta: plan de medios, vídeos, informe semanal y las pruebas de montería y ronca del gamo con formulario. Los formularios traían volumen, pero no convertían lo suficiente, y por eso hoy mandáis los anuncios a la web. Esa decisión se mantiene. Lo que propongo es una capa encima de la web para tres fugas: quien mira y se va sin dejar nada, el «más adelante» y el «no coge el teléfono». Cada dato lleva su fuente; lo que es hipótesis, lo pone.</p>
-  </header>
-
-  <div class="tldr">
-    <p class="k">En cinco líneas</p>
-    <ol>
-      <li><b>Hoy no captáis datos desde los anuncios.</b> Los 20 anuncios activos en Meta llevan al catálogo o a Prime. Quien no reserva en esa visita se va sin dejar nada. <span class="src">Fuente: Biblioteca de anuncios de Meta, 16-oct.</span></li>
-      <li><b>Hay errores en anuncios que siguen activos:</b> el de muflón lleva a la página de corzo, y los de Castilla-La Mancha y Andalucía llevan a monterías de Extremadura. Se arreglan hoy y no cuestan nada. <a href="#activo">Detalle</a>.</li>
-      <li><b>El tráfico a la web se queda.</b> No propongo volver a los formularios. Propongo una capa encima: captura con valor dentro de la web (alertas de cacerías por especie, zona y presupuesto; «avísame cuando salga»; calendario filtrable), el WhatsApp del asesor atendido al minuto por un agente que cualifica conversando, y anuncios de recuerdo para quien vio una ficha y no reservó. El formulario, solo como experimento acotado para ticket alto, medido contra la web. Si no gana, se apaga.</li>
-      <li><b>Cuando alguien deja su teléfono,</b> recibe al minuto un WhatsApp con 2-3 cacerías reales que encajan. Si es para ahora, Raquel, la asistente de voz, llama a los 10-20 minutos y deja <b>la llamada con el comercial agendada a la hora que elige el cazador</b>. El comercial llama con la ficha completa. Si es para más adelante, se guarda con su temporada.</li>
-      <li><b>Todo se mide hasta la comisión:</b> qué anuncio trae reservas, no solo contactos. Partimos de vuestra puntuación, la medimos contra reservas reales y la recalibramos cada mes.</li>
-    </ol>
+    <div class="kpis" role="list" aria-label="Hunty en cifras">
+      <div class="kpi" role="listitem"><b>+9.400</b><span>reservas gestionadas</span></div>
+      <div class="kpi" role="listitem"><b>+400</b><span>organizadores publicando jornadas</span></div>
+      <div class="kpi" role="listitem"><b>4,6/5</b><span>con 764 opiniones de cazadores</span></div>
+      <div class="kpi" role="listitem"><b>631</b><span>monterías en el calendario, de octubre a febrero</span></div>
+    </div>
+    <p class="ksrc">Cifras publicadas en hunty.es, consultadas el 16-oct-2026.</p>
   </div>
+</header>
 
-  <!-- ANTES / AHORA -->
-  <section id="antes">
-    <h2><span class="n">1</span>Antes (2023) y ahora</h2>
-    <div class="tw wide"><table>
+<div class="giftbar noprint">
+  <div class="wrap"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg><span><b>Regalo para hoy:</b> hay errores en anuncios que siguen activos. Se arreglan hoy y no cuestan nada.</span><a href="#arreglos">Ver los 3 arreglos →</a></div>
+</div>
+
+<section class="sec" id="resumen" style="border-top:0">
+  <div class="wrap">
+    <div class="tldr">
+      <div class="sh"><span class="eyebrow">Resumen</span><h2 class="t">En cinco líneas</h2></div>
+      <ol>
+        <li><span><b>Hoy no captáis datos desde los anuncios.</b> Los 20 anuncios activos en Meta llevan al catálogo o a Prime. Quien no reserva en esa visita se va sin dejar nada. <span class="src">Fuente: Biblioteca de anuncios de Meta, 16-oct.</span></span></li>
+        <li><span><b>Hay errores en anuncios que siguen activos:</b> el de muflón lleva a la página de corzo, y los de Castilla-La Mancha y Andalucía llevan a monterías de Extremadura. Se arreglan hoy y no cuestan nada. <a href="#arreglos">Detalle</a>.</span></li>
+        <li><span><b>El tráfico a la web se queda.</b> No propongo volver a los formularios. Propongo una capa encima: captura con valor dentro de la web (alertas de cacerías por especie, zona y presupuesto; «avísame cuando salga»; calendario filtrable), el WhatsApp del asesor atendido al minuto por un agente que cualifica conversando, y anuncios de recuerdo para quien vio una ficha y no reservó. El formulario, solo como experimento acotado para ticket alto, medido contra la web. Si no gana, se apaga.</span></li>
+        <li><span><b>Cuando alguien deja su teléfono,</b> recibe al minuto un WhatsApp con 2-3 cacerías reales que encajan. Si es para ahora, Raquel, la asistente de voz, llama a los 10-20 minutos y deja <b>la llamada con el comercial agendada a la hora que elige el cazador</b>. El comercial llama con la ficha completa. Si es para más adelante, se guarda con su temporada.</span></li>
+        <li><span><b>Todo se mide hasta la comisión:</b> qué anuncio trae reservas, no solo contactos. Partimos de vuestra puntuación, la medimos contra reservas reales y la recalibramos cada mes.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt toc-sec" id="indice">
+  <div class="wrap">
+    <div class="sh"><span class="eyebrow">Índice</span></div>
+    <nav class="toc" aria-label="Índice del plan">
+      <a href="#antes"><b>01</b>Antes (2023) y ahora</a>
+      <a href="#activo"><b>02</b>Lo que tenéis activo hoy</a>
+      <a href="#arreglos" class="gift"><b>★</b>3 arreglos para hoy</a>
+      <a href="#web"><b>03</b>Lo que hemos visto en la web</a>
+      <a href="#hoy"><b>3b</b>Cómo funciona hoy el recorrido</a>
+      <a href="#preguntas"><b>04</b>Lo que queremos entender hoy</a>
+      <a href="#recorrido"><b>05</b>El recorrido</a>
+      <a href="#modulos"><b>06</b>El sistema, por módulos</a>
+      <a href="#puntuacion"><b>07</b>Puntuación transparente</a>
+      <a href="#metricas"><b>08</b>Árbol de métricas</a>
+      <a href="#daily"><b>09</b>Daily y revisión semanal</a>
+      <a href="#pruebas"><b>10</b>Plan de pruebas</a>
+      <a href="#prevision"><b>11</b>Previsión ilustrativa</a>
+      <a href="#gobierno"><b>12</b>Gobierno y límites</a>
+      <a href="#calendario"><b>13</b>Calendario</a>
+      <a href="#necesitamos"><b>14</b>Lo que necesito</a>
+      <a href="#como"><b>15</b>Cómo podemos trabajar</a>
+    </nav>
+  </div>
+</section>
+
+<!-- 1 · ANTES / AHORA -->
+<section class="sec" id="antes">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>01</b><span></span></div><h2 class="t">Antes (2023) y ahora</h2></div>
+    <div class="tw stack cmp"><table>
       <thead><tr><th>Pieza</th><th>Cómo lo hicimos en 2023</th><th>Cómo lo haríamos ahora</th></tr></thead>
       <tbody>
         <tr><td><b>Anuncios</b></td><td>Campañas por modalidad (montería, ronca del gamo) con tráfico frío y públicos similares a clientes. Se medían por coste por contacto.</td><td>Siguen yendo a la web, como hoy, con mensajes que filtran: fecha, rango de precio y «para quien ya…». Anuncios de recuerdo para quien vio una ficha y no reservó. Se miden por coste por reserva y por euro de comisión, y Meta recibe qué visitas acaban en reserva.</td></tr>
@@ -150,357 +394,446 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
         <tr><td><b>Informe</b></td><td>Informe semanal de Meta.</td><td>Panel diario por comercial y por anuncio, hasta la reserva y la comisión. Preparado para vuestro daily y vuestra revisión semanal.</td></tr>
       </tbody>
     </table></div>
-  </section>
+  </div>
+</section>
 
-  <!-- LO QUE TENÉIS ACTIVO HOY -->
-  <section id="activo">
-    <h2><span class="n">2</span>Lo que tenéis activo hoy</h2>
-    <p class="muted">Biblioteca de anuncios de Meta, España, búsqueda «hunty», anuncios activos, consultada el 16-oct-2026 a primera hora. Aparecen unos 33 resultados y 20 anuncios distintos con sus creatividades. Los 20 son imágenes estáticas, casi todas verticales, con varias versiones cada uno. Salen en Facebook, Instagram, Messenger, Threads y Audience Network. Las capturas son las de la Biblioteca y el número es su identificador.</p>
+<!-- 2 · LO QUE TENÉIS ACTIVO HOY -->
+<section class="sec alt" id="activo">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>02</b><span></span></div><h2 class="t">Lo que tenéis activo hoy</h2>
+      <p class="lede">Biblioteca de anuncios de Meta, España, búsqueda «hunty», anuncios activos, consultada el 16-oct-2026 a primera hora. Aparecen unos 33 resultados y 20 anuncios distintos con sus creatividades. Los 20 son imágenes estáticas, casi todas verticales, con varias versiones cada uno. Salen en Facebook, Instagram, Messenger, Threads y Audience Network. Las capturas son las de la Biblioteca y el número es su identificador.</p>
+      <div class="legend"><span><span class="pill ok"><svg class="i" style="width:14px;height:14px" aria-hidden="true"><use href="#i-check"/></svg>Funciona</span> sin error detectado</span><span><span class="pill ko"><svg class="i" style="width:14px;height:14px" aria-hidden="true"><use href="#i-alert"/></svg>Error</span> enlace o filtro equivocado</span><span><span class="pill hy"><svg class="i" style="width:14px;height:14px" aria-hidden="true"><use href="#i-alert"/></svg>Revisar</span> texto o código de seguimiento</span></div>
+    </div>
 
     <div class="lines">
-      <div class="line">
-        <h3>Línea 1 · «Recechos de [especie]» · página HUNTY · 7 anuncios · activos desde el 17 y el 22 de julio</h3>
-        <div class="thumbs">
-          <figure><img src="assets/activos/1350175807273158.jpg" alt="Anuncio Recechos de ciervo"><figcaption>Ciervo · 1350175807273158 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/2043959529580115.jpg" alt="Anuncio Recechos de gamo"><figcaption>Gamo · 2043959529580115 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/28117340151183768.jpg" alt="Anuncio Recechos de corzo"><figcaption>Corzo · 28117340151183768 · 17-jul</figcaption></figure>
-          <figure><img src="assets/activos/1371734191598607.jpg" alt="Anuncio Recechos de muflón"><figcaption>Muflón · 1371734191598607 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/1008978358616113.jpg" alt="Anuncio Recechos de rebeco"><figcaption>Rebeco · 1008978358616113 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/1783323322827532.jpg" alt="Anuncio Recechos de arruí"><figcaption>Arruí · 1783323322827532 · 22-jul</figcaption></figure>
-          <figure><img src="assets/activos/2153292858579633.jpg" alt="Anuncio Recechos de boc balear"><figcaption>Boc balear · 2153292858579633 · 22-jul</figcaption></figure>
+      <article class="line">
+        <div class="lh"><span class="ln">Línea 1</span><h3>«Recechos de [especie]»</h3><div class="chips"><span class="pill nt">página HUNTY</span><span class="pill nt">7 anuncios</span><span class="pill nt">activos desde el 17 y el 22 de julio</span></div></div>
+        <div class="adg">
+          <figure class="ad wrn"><div class="ph"><img src="assets/activos/1350175807273158.jpg" alt="Anuncio Recechos de ciervo"><div class="st"><span class="hy">⚠ Habla de berrea</span></div></div><figcaption><b>Ciervo</b><code>1350175807273158</code><small>17-jul</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/2043959529580115.jpg" alt="Anuncio Recechos de gamo"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Gamo</b><code>2043959529580115</code><small>17-jul</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/28117340151183768.jpg" alt="Anuncio Recechos de corzo"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Corzo</b><code>28117340151183768</code><small>17-jul</small></figcaption></figure>
+          <figure class="ad err"><div class="ph"><img src="assets/activos/1371734191598607.jpg" alt="Anuncio Recechos de muflón"><div class="st"><span class="ko">⚠ Lleva a corzo</span></div></div><figcaption><b>Muflón</b><code>1371734191598607</code><small>22-jul</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1008978358616113.jpg" alt="Anuncio Recechos de rebeco"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Rebeco</b><code>1008978358616113</code><small>22-jul</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1783323322827532.jpg" alt="Anuncio Recechos de arruí"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Arruí</b><code>1783323322827532</code><small>22-jul</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/2153292858579633.jpg" alt="Anuncio Recechos de boc balear"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Boc balear</b><code>2153292858579633</code><small>22-jul</small></figcaption></figure>
         </div>
-        <p class="small"><b>Texto (ej. corzo):</b> «El duende del bosque. Esquivo, difícil y de los más deseados 🎯 Encuentra tu rececho de corzo en Hunty.» · <b>Titular:</b> «Recechos de Corzo» · <b>Descripción:</b> «Descubre tu próxima aventura» · <b>Botón:</b> Ver detalles · <b>Destino:</b> hunty.es/especies/&lt;especie&gt;?referred_by=…</p>
-        <div class="ok-ko">
-          <div class="o"><b>Funciona</b>Creatividad cuidada y coherente. La especie como gancho y un lenguaje de cazador que no suena a anuncio.</div>
-          <div class="x"><b>Falla</b>No filtran: sin precio, sin fecha y sin «para quién», atraen a todo el que disfruta de la foto. El destino es la página de la especie con todas las modalidades (ciervo: 417 cacerías, monterías incluidas), no los recechos. El de ciervo habla de berrea, que ya está terminando. Llevan tres meses con la misma pieza.</div>
+        <p class="adcopy"><b>Texto (ej. corzo):</b> «El duende del bosque. Esquivo, difícil y de los más deseados 🎯 Encuentra tu rececho de corzo en Hunty.» · <b>Titular:</b> «Recechos de Corzo» · <b>Descripción:</b> «Descubre tu próxima aventura» · <b>Botón:</b> Ver detalles · <b>Destino:</b> hunty.es/especies/&lt;especie&gt;?referred_by=…</p>
+        <div class="okko">
+          <div class="o"><b><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Funciona</b>Creatividad cuidada y coherente. La especie como gancho y un lenguaje de cazador que no suena a anuncio.</div>
+          <div class="x"><b><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>Falla</b>No filtran: sin precio, sin fecha y sin «para quién», atraen a todo el que disfruta de la foto. El destino es la página de la especie con todas las modalidades (ciervo: 417 cacerías, monterías incluidas), no los recechos. El de ciervo habla de berrea, que ya está terminando. Llevan tres meses con la misma pieza.</div>
         </div>
-      </div>
+      </article>
 
-      <div class="line">
-        <h3>Línea 2 · Monterías por comunidad y calendario · página HUNTY · 5 anuncios · activos desde el 20 y el 21 de septiembre</h3>
-        <div class="thumbs">
-          <figure><img src="assets/activos/1790404692155428.jpg" alt="Anuncio Calendarios de monterías"><figcaption>Calendario · 1790404692155428 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/1431619258818971.jpg" alt="Anuncio Calendarios de monterías"><figcaption>Calendario · 1431619258818971 · 21-sep</figcaption></figure>
-          <figure><img src="assets/activos/1064600312834941.jpg" alt="Anuncio Monterías en Extremadura"><figcaption>Extremadura · 1064600312834941 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/2368630826877479.jpg" alt="Anuncio Monterías en Castilla-La Mancha" style="object-fit:contain"><figcaption>Castilla-La Mancha · 2368630826877479 · 20-sep</figcaption></figure>
-          <figure><img src="assets/activos/3323657874480438.jpg" alt="Anuncio Monterías en Andalucía"><figcaption>Andalucía · 3323657874480438 · 20-sep</figcaption></figure>
+      <article class="line">
+        <div class="lh"><span class="ln">Línea 2</span><h3>Monterías por comunidad y calendario</h3><div class="chips"><span class="pill nt">página HUNTY</span><span class="pill nt">5 anuncios</span><span class="pill nt">activos desde el 20 y el 21 de septiembre</span></div></div>
+        <div class="adg">
+          <figure class="ad"><div class="ph"><img src="assets/activos/1790404692155428.jpg" alt="Anuncio Calendarios de monterías"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Calendario</b><code>1790404692155428</code><small>20-sep</small></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1431619258818971.jpg" alt="Anuncio Calendarios de monterías"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Calendario</b><code>1431619258818971</code><small>21-sep</small></figcaption></figure>
+          <figure class="ad wrn"><div class="ph"><img src="assets/activos/1064600312834941.jpg" alt="Anuncio Monterías en Extremadura"><div class="st"><span class="hy">⚠ Código de seguimiento</span></div></div><figcaption><b>Extremadura</b><code>1064600312834941</code><small>20-sep</small></figcaption></figure>
+          <figure class="ad err"><div class="ph"><img src="assets/activos/2368630826877479.jpg" alt="Anuncio Monterías en Castilla-La Mancha" style="object-fit:contain"><div class="st"><span class="ko">⚠ Lleva a Extremadura</span></div></div><figcaption><b>Castilla-La Mancha</b><code>2368630826877479</code><small>20-sep</small></figcaption></figure>
+          <figure class="ad err"><div class="ph"><img src="assets/activos/3323657874480438.jpg" alt="Anuncio Monterías en Andalucía"><div class="st"><span class="ko">⚠ Lleva a Extremadura</span></div></div><figcaption><b>Andalucía</b><code>3323657874480438</code><small>20-sep</small></figcaption></figure>
         </div>
-        <p class="small"><b>Texto (ej. Extremadura):</b> «Extremadura, tierra de monterías únicas 🦌 Descubre las mejores fincas esta temporada con puestos desde 220€. 👉 Reserva tu puesto en Hunty» · <b>Titular:</b> «Puestos desde 220€» · <b>Botón:</b> Más información · <b>Destino:</b> buscador filtrado o hunty.es/calendario-de-monterias</p>
-        <div class="ok-ko">
-          <div class="o"><b>Funciona</b>Llegan en temporada. El precio «desde» ya filtra algo y el calendario es contenido útil que el cazador guarda.</div>
-          <div class="x"><b>Falla</b>Los de Castilla-La Mancha y Andalucía llevan al buscador filtrado por <b>Extremadura</b> (95 cacerías de Extremadura). El texto dice «desde 170 €» y «desde 180 €», pero el titular dice «Puestos desde 220€». El código de seguimiento va pegado dentro de otro parámetro del enlace (<code>commit=Buscar%3Freferred_by%3D…</code>), así que probablemente no se registra. El calendario (631 monterías de octubre a febrero) abre con monterías que ya se celebraron (3-oct), no se puede filtrar por provincia ni por precio y no pide ningún dato.</div>
+        <p class="adcopy"><b>Texto (ej. Extremadura):</b> «Extremadura, tierra de monterías únicas 🦌 Descubre las mejores fincas esta temporada con puestos desde 220€. 👉 Reserva tu puesto en Hunty» · <b>Titular:</b> «Puestos desde 220€» · <b>Botón:</b> Más información · <b>Destino:</b> buscador filtrado o hunty.es/calendario-de-monterias</p>
+        <div class="okko">
+          <div class="o"><b><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Funciona</b>Llegan en temporada. El precio «desde» ya filtra algo y el calendario es contenido útil que el cazador guarda.</div>
+          <div class="x"><b><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>Falla</b>Los de Castilla-La Mancha y Andalucía llevan al buscador filtrado por <b>Extremadura</b> (95 cacerías de Extremadura). El texto dice «desde 170 €» y «desde 180 €», pero el titular dice «Puestos desde 220€». El código de seguimiento va pegado dentro de otro parámetro del enlace (<code>commit=Buscar%3Freferred_by%3D…</code>), así que probablemente no se registra. El calendario (631 monterías de octubre a febrero) abre con monterías que ya se celebraron (3-oct), no se puede filtrar por provincia ni por precio y no pide ningún dato.</div>
         </div>
-      </div>
+      </article>
 
-      <div class="line">
-        <h3>Línea 3 · Club Hunty Prime · página «Hunting Land - Club Tierra de Caza» · 8 anuncios (6 en las capturas) · activos desde el 20 de septiembre</h3>
-        <div class="thumbs">
-          <figure><img src="assets/activos/986838803963905.jpg" alt="Anuncio Prime"><figcaption>986838803963905</figcaption></figure>
-          <figure><img src="assets/activos/1958355501523595.jpg" alt="Anuncio Prime"><figcaption>1958355501523595</figcaption></figure>
-          <figure><img src="assets/activos/2158518878388105.jpg" alt="Anuncio Prime"><figcaption>2158518878388105</figcaption></figure>
-          <figure><img src="assets/activos/1393695662334439.jpg" alt="Anuncio Prime"><figcaption>1393695662334439</figcaption></figure>
-          <figure><img src="assets/activos/2206671423537475.jpg" alt="Anuncio Prime"><figcaption>2206671423537475</figcaption></figure>
-          <figure><img src="assets/activos/1600879178350783.jpg" alt="Anuncio Prime"><figcaption>1600879178350783</figcaption></figure>
+      <article class="line">
+        <div class="lh"><span class="ln">Línea 3</span><h3>Club Hunty Prime</h3><div class="chips"><span class="pill hy">página «Hunting Land - Club Tierra de Caza»</span><span class="pill nt">8 anuncios (6 en las capturas)</span><span class="pill nt">activos desde el 20 de septiembre</span></div></div>
+        <div class="adg">
+          <figure class="ad"><div class="ph"><img src="assets/activos/986838803963905.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>986838803963905</code></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1958355501523595.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>1958355501523595</code></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/2158518878388105.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>2158518878388105</code></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1393695662334439.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>1393695662334439</code></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/2206671423537475.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>2206671423537475</code></figcaption></figure>
+          <figure class="ad"><div class="ph"><img src="assets/activos/1600879178350783.jpg" alt="Anuncio Prime"><div class="st"><span class="ok">✓ Funciona</span></div></div><figcaption><b>Prime</b><code>1600879178350783</code></figcaption></figure>
         </div>
-        <p class="small"><b>Texto (ej.):</b> «Si vas a cazar, ¿por qué pagar de más? Con Club Hunty Prime puedes ahorrar hasta 500€ en tu próxima jornada. 🦌 Recechos → hasta 300€ 🐗 Monterías → hasta 175€ 🌙 Esperas → hasta 140€ 🌲 Cotos → hasta 500€» · <b>Titular:</b> «No pagues de más al cazar» / «Mejor precio garantizado» · <b>Botón:</b> Más información · <b>Destino:</b> hunty.es/club/prime?referred_by=…</p>
-        <div class="ok-ko">
-          <div class="o"><b>Funciona</b>La oferta es concreta, con cifras por modalidad, y hay seis variantes de mensaje sobre la misma idea: es un test bien planteado.</div>
-          <div class="x"><b>Falla</b>Lo firma «Hunting Land - Club Tierra de Caza», no HUNTY, y el que lo ve no reconoce la marca. «Mejor precio garantizado» convive con el «Mismo precio que el organizador» de la web. La landing tampoco recoge a quien no paga en ese momento: su única salida es «Habla con un asesor», un WhatsApp con mensaje genérico.</div>
+        <p class="adcopy"><b>Texto (ej.):</b> «Si vas a cazar, ¿por qué pagar de más? Con Club Hunty Prime puedes ahorrar hasta 500€ en tu próxima jornada. 🦌 Recechos → hasta 300€ 🐗 Monterías → hasta 175€ 🌙 Esperas → hasta 140€ 🌲 Cotos → hasta 500€» · <b>Titular:</b> «No pagues de más al cazar» / «Mejor precio garantizado» · <b>Botón:</b> Más información · <b>Destino:</b> hunty.es/club/prime?referred_by=…</p>
+        <div class="okko">
+          <div class="o"><b><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Funciona</b>La oferta es concreta, con cifras por modalidad, y hay seis variantes de mensaje sobre la misma idea: es un test bien planteado.</div>
+          <div class="x"><b><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>Falla</b>Lo firma «Hunting Land - Club Tierra de Caza», no HUNTY, y el que lo ve no reconoce la marca. «Mejor precio garantizado» convive con el «Mismo precio que el organizador» de la web. La landing tampoco recoge a quien no paga en ese momento: su única salida es «Habla con un asesor», un WhatsApp con mensaje genérico.</div>
         </div>
-      </div>
+      </article>
     </div>
 
-    <div class="tw mid"><table>
+    <div class="tw stack"><table>
       <thead><tr><th>Otros canales</th><th>Resultado</th><th>Fuente</th></tr></thead>
       <tbody>
-        <tr><td>Google Ads</td><td>0 anuncios para hunty.es en España.</td><td class="src">Centro de Transparencia Publicitaria de Google, 16-oct</td></tr>
-        <tr><td>LinkedIn</td><td>No verificado: LinkedIn bloqueó la consulta automática. Lo miro en directo si os interesa la parte de organizadores.</td><td class="src">—</td></tr>
+        <tr><td><b>Google Ads</b></td><td>0 anuncios para hunty.es en España.</td><td class="src">Centro de Transparencia Publicitaria de Google, 16-oct</td></tr>
+        <tr><td><b>LinkedIn</b></td><td>No verificado: LinkedIn bloqueó la consulta automática. Lo miro en directo si os interesa la parte de organizadores.</td><td class="src">—</td></tr>
       </tbody>
     </table></div>
 
-    <p class="hyp"><b>Lectura.</b> Todo es tráfico al catálogo: inspiración por especie y ahorro con Prime. Tiene sentido, porque la reserva con señal funciona en la propia web y los formularios de antes no convertían lo suficiente. El hueco está en quien duda o caza «más adelante»: no deja ni el teléfono ni el momento, y no hay forma de volver a él salvo con anuncios de recuerdo genéricos. La propuesta no cambia el destino de los anuncios: <b>añade dentro de la web una forma de quedarse</b> que le dé algo al cazador, y una respuesta al minuto cuando lo hace.</p>
-    <p class="warn"><b>Tres arreglos para hoy mismo, gratis:</b> (1) cambiar el enlace del anuncio de muflón (1371734191598607), que lleva a /especies/corzo; (2) cambiar el filtro de los de Castilla-La Mancha (2368630826877479) y Andalucía (3323657874480438), que llevan a Extremadura, y cuadrar «desde 170/180 €» con «desde 220 €»; (3) poner el <code>referred_by</code> como parámetro propio (<code>&amp;referred_by=</code>) en los enlaces del buscador. <span class="src">Comprobado en la versión del anuncio que muestra la Biblioteca. Puede haber otras versiones con otros enlaces.</span></p>
-  </section>
+    <div class="callout hyp"><svg class="i" aria-hidden="true"><use href="#i-bulb"/></svg><p><b>Lectura.</b> Todo es tráfico al catálogo: inspiración por especie y ahorro con Prime. Tiene sentido, porque la reserva con señal funciona en la propia web y los formularios de antes no convertían lo suficiente. El hueco está en quien duda o caza «más adelante»: no deja ni el teléfono ni el momento, y no hay forma de volver a él salvo con anuncios de recuerdo genéricos. La propuesta no cambia el destino de los anuncios: <b>añade dentro de la web una forma de quedarse</b> que le dé algo al cazador, y una respuesta al minuto cuando lo hace.</p></div>
 
-  <!-- WEB -->
-  <section id="web">
-    <h2><span class="n">3</span>Lo que hemos visto en la web</h2>
-    <div class="tw wide"><table>
+    <div class="gift" id="arreglos">
+      <span class="rib"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg>Regalo</span>
+      <h2>3 arreglos que podéis hacer hoy</h2>
+      <p class="gl">Tres arreglos para hoy mismo, gratis, en anuncios que siguen activos.</p>
+      <div class="fixes">
+        <div class="fix"><span class="n" aria-hidden="true">1</span><h3>El de muflón lleva a corzo</h3>
+          <div class="th"><img src="assets/activos/1371734191598607.jpg" alt="Anuncio de muflón"></div>
+          <p>Cambiar el enlace del anuncio de muflón (1371734191598607), que lleva a /especies/corzo.</p>
+          <div class="diff"><div class="a"><span>Ahora</span><code>/especies/corzo</code></div><div class="b"><span>Arreglo</span><code>/especies/muflon</code></div></div>
+        </div>
+        <div class="fix"><span class="n" aria-hidden="true">2</span><h3>Castilla-La Mancha y Andalucía llevan a Extremadura</h3>
+          <div class="th"><img src="assets/activos/2368630826877479.jpg" alt="Anuncio de Castilla-La Mancha" style="object-fit:contain"><img src="assets/activos/3323657874480438.jpg" alt="Anuncio de Andalucía"></div>
+          <p>Cambiar el filtro de los de Castilla-La Mancha (2368630826877479) y Andalucía (3323657874480438), que llevan a Extremadura, y cuadrar «desde 170/180 €» con «desde 220 €».</p>
+        </div>
+        <div class="fix"><span class="n" aria-hidden="true">3</span><h3>El código de seguimiento no se registra</h3>
+          <p>Poner el <code>referred_by</code> como parámetro propio (<code>&amp;referred_by=</code>) en los enlaces del buscador.</p>
+          <div class="diff"><div class="a"><span>Ahora</span><code>commit=Buscar%3Freferred_by%3D…</code></div><div class="b"><span>Arreglo</span><code>&amp;referred_by=…</code></div></div>
+        </div>
+      </div>
+      <p class="src">Comprobado en la versión del anuncio que muestra la Biblioteca. Puede haber otras versiones con otros enlaces.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · WEB -->
+<section class="sec" id="web">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>03</b><span></span></div><h2 class="t">Lo que hemos visto en la web</h2></div>
+    <div class="tw stack"><table>
       <thead><tr><th>Hallazgo</th><th>Implicación</th><th>Fuente</th></tr></thead>
       <tbody>
-        <tr><td><span class="pill ok">Bien</span> Buscador por modalidad, especie y provincia, precio Prime visible y reserva online con señal (p. ej. montería en Valmorisco: 300 €, reserva de 40 €). Reseñas por cacería y por organizador.</td><td>El producto ya convierte a quien llega decidido. No hace falta tocar la reserva.</td><td class="src">hunty.es y ficha /monterias/…-1790</td></tr>
-        <tr><td><span class="pill ko">Falla</span> El único formulario es «Crear cuenta gratis»: email y contraseña, o Google/Facebook. Salta en una ventana a los 10 segundos en cualquier página.</td><td>La cuenta no dice qué caza, cuándo ni con qué presupuesto. El comercial no tiene con qué priorizar.</td><td class="src">/users/sign_up · ventana «Únete a Hunty»</td></tr>
-        <tr><td><span class="pill ko">Falla</span> «¿No encuentras lo que buscas? Hablar con un asesor» abre WhatsApp con un texto fijo: «Me gustaría recibir información y asesoramiento…».</td><td>Cada conversación empieza de cero: modalidad, fechas, zona y presupuesto se preguntan a mano.</td><td class="src">Pie de la home y de /licencias</td></tr>
-        <tr><td><span class="pill hy">Ojo</span> Cifras que no coinciden: 4,7/5 con 644 opiniones arriba y 4,6/5 con 764 abajo, en la misma home. «+30.000 cazadores» en /pro.</td><td>Para un público exigente, conviene unificar las cifras antes de usarlas en anuncios.</td><td class="src">Home y /pro</td></tr>
-        <tr><td><span class="pill ko">Falla</span> «Anuncia una cacería» lleva a /pro: planes Free (14 %), Mensual 60 €/mes (12 %) y Anual 600 €/año (10 %). Solo hay botones de «Registrarme»; no hay forma de hablar con alguien.</td><td>El organizador que duda no tiene con quién hablar. Es un módulo opcional (M9).</td><td class="src">/pro</td></tr>
-        <tr><td><span class="pill ok">Bien</span> Medición instalada: píxel de Meta, Google Tag Manager, GA4, Mixpanel y Clarity.</td><td>Hay base para devolver a Meta las reservas y para unir anuncio, ficha y reserva.</td><td class="src">Código de la home</td></tr>
-        <tr><td><span class="pill hy">Ojo</span> Club Prime: 150 €/año, «+560 miembros», sorteos por WhatsApp e inscripción en las ofertas públicas. Salida: «Hazte Prime» o «Habla con un asesor».</td><td>Prime puede ser el siguiente paso natural del contacto «más adelante»: le da un motivo para quedarse.</td><td class="src">/club/prime</td></tr>
+        <tr><td><span class="pill ok">✓ Bien</span> Buscador por modalidad, especie y provincia, precio Prime visible y reserva online con señal (p. ej. montería en Valmorisco: 300 €, reserva de 40 €). Reseñas por cacería y por organizador.</td><td>El producto ya convierte a quien llega decidido. No hace falta tocar la reserva.</td><td class="src">hunty.es y ficha /monterias/…-1790</td></tr>
+        <tr><td><span class="pill ko">✕ Falla</span> El único formulario es «Crear cuenta gratis»: email y contraseña, o Google/Facebook. Salta en una ventana a los 10 segundos en cualquier página.</td><td>La cuenta no dice qué caza, cuándo ni con qué presupuesto. El comercial no tiene con qué priorizar.</td><td class="src">/users/sign_up · ventana «Únete a Hunty»</td></tr>
+        <tr><td><span class="pill ko">✕ Falla</span> «¿No encuentras lo que buscas? Hablar con un asesor» abre WhatsApp con un texto fijo: «Me gustaría recibir información y asesoramiento…».</td><td>Cada conversación empieza de cero: modalidad, fechas, zona y presupuesto se preguntan a mano.</td><td class="src">Pie de la home y de /licencias</td></tr>
+        <tr><td><span class="pill hy">⚠ Ojo</span> Cifras que no coinciden: 4,7/5 con 644 opiniones arriba y 4,6/5 con 764 abajo, en la misma home. «+30.000 cazadores» en /pro.</td><td>Para un público exigente, conviene unificar las cifras antes de usarlas en anuncios.</td><td class="src">Home y /pro</td></tr>
+        <tr><td><span class="pill ko">✕ Falla</span> «Anuncia una cacería» lleva a /pro: planes Free (14 %), Mensual 60 €/mes (12 %) y Anual 600 €/año (10 %). Solo hay botones de «Registrarme»; no hay forma de hablar con alguien.</td><td>El organizador que duda no tiene con quién hablar. Es un módulo opcional (M9).</td><td class="src">/pro</td></tr>
+        <tr><td><span class="pill ok">✓ Bien</span> Medición instalada: píxel de Meta, Google Tag Manager, GA4, Mixpanel y Clarity.</td><td>Hay base para devolver a Meta las reservas y para unir anuncio, ficha y reserva.</td><td class="src">Código de la home</td></tr>
+        <tr><td><span class="pill hy">⚠ Ojo</span> Club Prime: 150 €/año, «+560 miembros», sorteos por WhatsApp e inscripción en las ofertas públicas. Salida: «Hazte Prime» o «Habla con un asesor».</td><td>Prime puede ser el siguiente paso natural del contacto «más adelante»: le da un motivo para quedarse.</td><td class="src">/club/prime</td></tr>
       </tbody>
     </table></div>
-  </section>
+  </div>
+</section>
 
-  <!-- RECORRIDO HOY -->
-  <section id="hoy">
-    <h2><span class="n">3b</span>Cómo funciona hoy vuestro recorrido</h2>
-    <div class="tw wide"><table>
+<!-- 3b · RECORRIDO HOY -->
+<section class="sec alt" id="hoy">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>3b</b><span></span></div><h2 class="t">Cómo funciona hoy vuestro recorrido</h2></div>
+    <div class="tw stack"><table>
       <thead><tr><th>Punto donde se captan datos</th><th>Quién lo inicia</th><th>Qué sabe el comercial</th><th>Si no compra</th></tr></thead>
       <tbody>
-        <tr><td>Reserva con señal</td><td>El cazador, decidido</td><td>Todo: cacería, fecha y puestos</td><td>—</td></tr>
-        <tr><td>«Crear cuenta gratis»</td><td>El cazador (ventana a los 10 s)</td><td>Solo el email</td><td>Sin teléfono ni momento</td></tr>
-        <tr><td>WhatsApp «Hablar con un asesor»</td><td>El cazador, con texto fijo</td><td>Lo que escriba</td><td>Depende de que el comercial vuelva a escribir</td></tr>
-        <tr><td>Prime de pago</td><td>El cazador</td><td>Que es socio</td><td>—</td></tr>
-        <tr><td>Ficha, especie o calendario (631 monterías, sin filtro de provincia ni de precio)</td><td>—</td><td>Nada</td><td><b>No deja rastro</b>: no hay forma de seguir a quien vio una montería y no reservó</td></tr>
+        <tr><td><b>Reserva con señal</b></td><td>El cazador, decidido</td><td>Todo: cacería, fecha y puestos</td><td>—</td></tr>
+        <tr><td><b>«Crear cuenta gratis»</b></td><td>El cazador (ventana a los 10 s)</td><td>Solo el email</td><td>Sin teléfono ni momento</td></tr>
+        <tr><td><b>WhatsApp «Hablar con un asesor»</b></td><td>El cazador, con texto fijo</td><td>Lo que escriba</td><td>Depende de que el comercial vuelva a escribir</td></tr>
+        <tr><td><b>Prime de pago</b></td><td>El cazador</td><td>Que es socio</td><td>—</td></tr>
+        <tr><td><b>Ficha, especie o calendario</b> (631 monterías, sin filtro de provincia ni de precio)</td><td>—</td><td>Nada</td><td><span class="pill ko">No deja rastro</span> no hay forma de seguir a quien vio una montería y no reservó</td></tr>
       </tbody>
     </table></div>
-    <p class="k" style="margin-top:4px">La capa que propongo encima de la web (no sustituye nada)</p>
-    <div class="grid">
-      <div class="card"><p class="k">1 · Captura con valor dentro de la web</p><p class="small">En la ficha, en la página de especie y en el calendario: «Avísame cuando salga una montería en mi provincia y con mi presupuesto», alertas por especie, calendario filtrable, comparar cacerías o «te guardo la plaza 24 h». Quien mira y se va deja algo, y recibe algo a cambio.</p></div>
-      <div class="card"><p class="k">2 · El WhatsApp del asesor, atendido al minuto</p><p class="small">El agente contesta a quien escribe y cualifica conversando, sin formulario: modalidad, fechas, zona, cazadores y presupuesto. Pasa el contacto al comercial con la ficha hecha. Nadie empieza de cero.</p></div>
-      <div class="card"><p class="k">3 · Anuncios de recuerdo con lo que vio</p><p class="small">Quien vio una ficha o empezó una reserva y no pagó vuelve a ver esa cacería, o las de su especie y zona, durante 7-14 días.</p></div>
-      <div class="card"><p class="k">4 · Formulario, solo como experimento</p><p class="small">Acotado al ticket alto (recechos de trofeo e internacional) y medido contra el tráfico a la web en las mismas métricas: coste por reserva y por euro de comisión. Si no gana, se apaga (H1).</p></div>
+    <p class="k" style="margin-top:10px">La capa que propongo encima de la web (no sustituye nada)</p>
+    <div class="layer">
+      <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg></span><h3>1 · Captura con valor dentro de la web</h3><p class="small">En la ficha, en la página de especie y en el calendario: «Avísame cuando salga una montería en mi provincia y con mi presupuesto», alertas por especie, calendario filtrable, comparar cacerías o «te guardo la plaza 24 h». Quien mira y se va deja algo, y recibe algo a cambio.</p></div>
+      <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span><h3>2 · El WhatsApp del asesor, atendido al minuto</h3><p class="small">El agente contesta a quien escribe y cualifica conversando, sin formulario: modalidad, fechas, zona, cazadores y presupuesto. Pasa el contacto al comercial con la ficha hecha. Nadie empieza de cero.</p></div>
+      <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span><h3>3 · Anuncios de recuerdo con lo que vio</h3><p class="small">Quien vio una ficha o empezó una reserva y no pagó vuelve a ver esa cacería, o las de su especie y zona, durante 7-14 días.</p></div>
+      <div class="card"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span><h3>4 · Formulario, solo como experimento</h3><p class="small">Acotado al ticket alto (recechos de trofeo e internacional) y medido contra el tráfico a la web en las mismas métricas: coste por reserva y por euro de comisión. Si no gana, se apaga (H1).</p></div>
     </div>
-    <p class="hyp"><b>Dos caminos medidos por separado.</b> El tráfico al catálogo sigue siendo la vía de la reserva directa, sobre todo en ticket bajo (esperas y monterías económicas): ahí el mejor comercial es una ficha clara. La capa recoge lo que hoy se pierde y alimenta la venta asesorada. Cada camino tiene su coste por reserva y su comisión, para mover presupuesto con datos.</p>
-  </section>
+    <div class="callout hyp"><svg class="i" aria-hidden="true"><use href="#i-route"/></svg><p><b>Dos caminos medidos por separado.</b> El tráfico al catálogo sigue siendo la vía de la reserva directa, sobre todo en ticket bajo (esperas y monterías económicas): ahí el mejor comercial es una ficha clara. La capa recoge lo que hoy se pierde y alimenta la venta asesorada. Cada camino tiene su coste por reserva y su comisión, para mover presupuesto con datos.</p></div>
+  </div>
+</section>
 
-  <!-- PREGUNTAS -->
-  <section id="preguntas">
-    <h2><span class="n">4</span>Lo que queremos entender hoy</h2>
-    <p class="muted">Con las respuestas decidimos qué módulos enseñar y con qué cifras arrancar. Lo que no sepáis hoy, lo medimos en la semana 1. Si solo hay tiempo para tres: la 1, la 4 y la 7.</p>
-    <div class="tw mid"><table>
-      <thead><tr><th>#</th><th>Pregunta</th><th>Para qué la necesito</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>¿Cuántos contactos y reservas al mes, y por dónde entran (reserva directa, WhatsApp del asesor, cuenta creada, teléfono)? ¿Qué parte cierra un comercial?</td><td>Fijar el punto de partida del árbol de métricas.</td></tr>
-        <tr><td>2</td><td>¿Cuántos comerciales hay, cómo se reparten los contactos y en qué herramienta trabajan?</td><td>Saber dónde vive la ficha y a qué se conecta el sistema.</td></tr>
-        <tr><td>3</td><td>Vuestra puntuación actual: ¿qué datos usa, qué pesos tiene y se la creen los comerciales?</td><td>Partir de ella y medirla contra las reservas reales.</td></tr>
-        <tr><td>4</td><td>De los que no compran, ¿qué pesa más: «no es ahora», «no coge el teléfono» o «no era buen contacto»? ¿Hay motivo de pérdida registrado?</td><td>Decidir el orden: módulos 2, 4 o 6.</td></tr>
-        <tr><td>5</td><td>¿Qué se hace hoy con los «más adelante»? ¿Se guarda la temporada o la fecha?</td><td>Calcular cuántos podemos reactivar antes de cada temporada.</td></tr>
-        <tr><td>6</td><td>¿Qué traen las tres líneas activas (recechos, monterías, Prime)? ¿Qué medís del <code>referred_by</code>: visitas, cuentas o reservas?</td><td>Saber qué anuncio paga la inversión y si el código llega.</td></tr>
-        <tr><td>7</td><td>¿Por qué pasasteis de formularios a la web y qué métrica lo decidió?</td><td>Medir la capa nueva con esa misma métrica.</td></tr>
-        <tr><td>8</td><td>¿Qué % de las reservas son autoservicio y qué % pasan por un comercial?</td><td>Saber cuánto pesa la venta asesorada.</td></tr>
-        <tr><td>9</td><td>¿Qué hacen hoy los comerciales con los WhatsApp del asesor? ¿Cuánto tardan en contestar?</td><td>Punto de partida del módulo 3.</td></tr>
-        <tr><td>10</td><td>Prioridad de este año: ¿reservas de cazador, socios Prime u organizadores Hunty Pro?</td><td>Elegir la primera prueba.</td></tr>
-        <tr><td>11</td><td>De cómo trabajamos en 2023, ¿qué os sirvió y qué no?</td><td>No repetir lo que no funcionó.</td></tr>
-      </tbody>
-    </table></div>
-  </section>
-
-  <!-- RECORRIDO -->
-  <section id="recorrido">
-    <h2><span class="n">5</span>El recorrido</h2>
-    <ol class="flow" aria-label="Recorrido del cazador">
-      <li>Anuncio a la web</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Reserva directa, o se queda con «avísame», alerta, WhatsApp del asesor o test</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Puntuación y reparto</li><li class="arrow" aria-hidden="true">→</li>
-      <li>WhatsApp al minuto con 2-3 cacerías</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Raquel llama (10-20 min)</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Llamada con el comercial a la hora elegida</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Cacería propuesta</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Reserva con señal</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Jornada y reseña</li><li class="arrow" aria-hidden="true">→</li>
-      <li>Su próxima temporada</li>
-    </ol>
-    <div class="split">
-      <div><h3>Ahora · esta temporada</h3><p class="small">Caza en menos de 90 días o en la temporada en curso, con presupuesto acorde. → WhatsApp al minuto, Raquel y <b>comercial</b>. Aviso al comercial solo si la puntuación es A.</p></div>
-      <div class="b2"><h3>Más adelante</h3><p class="small">Próxima temporada o fecha concreta lejana. → <b>No pasa al comercial.</b> Se guarda la temporada, recibe un aviso unas 6 semanas antes y alertas de cacerías nuevas (una a la semana como máximo).</p></div>
-      <div class="b3"><h3>Solo mirando</h3><p class="small">Sin fecha ni presupuesto. → Contenido: calendario, guías por especie y Prime. Si cambia de respuesta o empieza una reserva, sube de grupo.</p></div>
+<!-- 4 · PREGUNTAS -->
+<section class="sec" id="preguntas">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>04</b><span></span></div><h2 class="t">Lo que queremos entender hoy</h2>
+      <p class="lede">Con las respuestas decidimos qué módulos enseñar y con qué cifras arrancar. Lo que no sepáis hoy, lo medimos en la semana 1. Si solo hay tiempo para tres: la 1, la 4 y la 7.</p></div>
+    <div class="qs">
+      <div class="q top"><span class="qn">1</span><span class="tp">Prioridad</span><p>¿Cuántos contactos y reservas al mes, y por dónde entran (reserva directa, WhatsApp del asesor, cuenta creada, teléfono)? ¿Qué parte cierra un comercial?</p><p class="for">Para: fijar el punto de partida del árbol de métricas.</p></div>
+      <div class="q"><span class="qn">2</span><p>¿Cuántos comerciales hay, cómo se reparten los contactos y en qué herramienta trabajan?</p><p class="for">Para: saber dónde vive la ficha y a qué se conecta el sistema.</p></div>
+      <div class="q"><span class="qn">3</span><p>Vuestra puntuación actual: ¿qué datos usa, qué pesos tiene y se la creen los comerciales?</p><p class="for">Para: partir de ella y medirla contra las reservas reales.</p></div>
+      <div class="q top"><span class="qn">4</span><span class="tp">Prioridad</span><p>De los que no compran, ¿qué pesa más: «no es ahora», «no coge el teléfono» o «no era buen contacto»? ¿Hay motivo de pérdida registrado?</p><p class="for">Para: decidir el orden: módulos 2, 4 o 6.</p></div>
+      <div class="q"><span class="qn">5</span><p>¿Qué se hace hoy con los «más adelante»? ¿Se guarda la temporada o la fecha?</p><p class="for">Para: calcular cuántos podemos reactivar antes de cada temporada.</p></div>
+      <div class="q"><span class="qn">6</span><p>¿Qué traen las tres líneas activas (recechos, monterías, Prime)? ¿Qué medís del <code>referred_by</code>: visitas, cuentas o reservas?</p><p class="for">Para: saber qué anuncio paga la inversión y si el código llega.</p></div>
+      <div class="q top"><span class="qn">7</span><span class="tp">Prioridad</span><p>¿Por qué pasasteis de formularios a la web y qué métrica lo decidió?</p><p class="for">Para: medir la capa nueva con esa misma métrica.</p></div>
+      <div class="q"><span class="qn">8</span><p>¿Qué % de las reservas son autoservicio y qué % pasan por un comercial?</p><p class="for">Para: saber cuánto pesa la venta asesorada.</p></div>
+      <div class="q"><span class="qn">9</span><p>¿Qué hacen hoy los comerciales con los WhatsApp del asesor? ¿Cuánto tardan en contestar?</p><p class="for">Para: punto de partida del módulo 3.</p></div>
+      <div class="q"><span class="qn">10</span><p>Prioridad de este año: ¿reservas de cazador, socios Prime u organizadores Hunty Pro?</p><p class="for">Para: elegir la primera prueba.</p></div>
+      <div class="q"><span class="qn">11</span><p>De cómo trabajamos en 2023, ¿qué os sirvió y qué no?</p><p class="for">Para: no repetir lo que no funcionó.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- MÓDULOS -->
-  <section id="modulos">
-    <h2><span class="n">6</span>El sistema, por módulos</h2>
-    <p class="muted">Cada módulo funciona por separado. Enseño solo los que os duelan y empezamos por uno.</p>
+<!-- 5 · RECORRIDO -->
+<section class="sec alt" id="recorrido">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>05</b><span></span></div><h2 class="t">El recorrido</h2>
+      <p class="lede">Arriba, lo que pasa hoy y dónde se pierde la gente. Abajo, el recorrido propuesto: los anuncios siguen yendo a la web y cada fuga tiene su respuesta.</p></div>
+    <div class="dgbox keep">
+      <svg class="dg dg-d" viewBox="0 0 1160 600" role="img" aria-labelledby="dga-t"><title id="dga-t">Recorrido de hoy, con sus fugas, y recorrido propuesto en diez pasos</title><defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mk"/></marker><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mkg"/></marker></defs><text x="0" y="14" class="hd" text-anchor="start">HOY · LO QUE PASA AHORA</text><rect x="0" y="30" width="188" height="70" rx="12" class="n"/><text x="16" y="61" class="t1" text-anchor="start">Anuncio en Meta</text><text x="16" y="81" class="t2" text-anchor="start">20 activos, a la web</text><path d="M194 65H235" class="ar" marker-end="url(#a1)"/><rect x="243" y="30" width="188" height="70" rx="12" class="n"/><text x="259" y="61" class="t1" text-anchor="start">Web</text><text x="259" y="81" class="t2" text-anchor="start">ficha, especie, calendario</text><path d="M437 65H478" class="ar" marker-end="url(#a1)"/><rect x="486" y="30" width="188" height="70" rx="12" class="n"/><text x="502" y="61" class="t1" text-anchor="start">Cuenta o WhatsApp</text><text x="502" y="81" class="t2" text-anchor="start">solo email · texto fijo</text><path d="M680 65H721" class="ar" marker-end="url(#a1)"/><rect x="729" y="30" width="188" height="70" rx="12" class="n"/><text x="745" y="61" class="t1" text-anchor="start">Comercial</text><text x="745" y="81" class="t2" text-anchor="start">llama cuando puede</text><path d="M923 65H964" class="ar" marker-end="url(#a1)"/><rect x="972" y="30" width="188" height="70" rx="12" class="ng"/><text x="988" y="61" class="t1" text-anchor="start">Reserva con señal</text><text x="988" y="81" class="t2" text-anchor="start">solo el decidido</text><path d="M347 100V140" class="lk"/><circle cx="347" cy="100" r="4" class="ld"/><rect x="263" y="140" width="168" height="44" rx="10" class="lp"/><text x="347" y="158" class="lt" text-anchor="middle">Fuga 1 · mira y se va</text><text x="347" y="174" class="lt" text-anchor="middle" style="font-weight:500">sin dejar nada</text><path d="M590 100V140" class="lk"/><circle cx="590" cy="100" r="4" class="ld"/><rect x="506" y="140" width="168" height="44" rx="10" class="lp"/><text x="590" y="158" class="lt" text-anchor="middle">Sin teléfono</text><text x="590" y="174" class="lt" text-anchor="middle" style="font-weight:500">ni momento</text><path d="M833 100V140" class="lk"/><circle cx="833" cy="100" r="4" class="ld"/><rect x="749" y="140" width="168" height="44" rx="10" class="lp"/><text x="833" y="158" class="lt" text-anchor="middle">Fuga 3 · «no coge</text><text x="833" y="174" class="lt" text-anchor="middle" style="font-weight:500">el teléfono»</text><path d="M737 100V216H749" class="lk"/><circle cx="737" cy="100" r="4" class="ld"/><rect x="749" y="194" width="168" height="44" rx="10" class="lp"/><text x="833" y="212" class="lt" text-anchor="middle">Fuga 2 · «más adelante»</text><text x="833" y="228" class="lt" text-anchor="middle" style="font-weight:500">se queda en una lista</text><path d="M0 266H1160" class="dv"/><text x="0" y="300" class="hd2" text-anchor="start">PROPUESTO · UNA CAPA ENCIMA DE LA WEB</text><rect x="0" y="320" width="188" height="104" rx="12" class="n"/><text x="16" y="342" class="tn" text-anchor="start">01</text><text x="16" y="363" class="t1" text-anchor="start">Anuncio a la web</text><text x="16" y="382" class="t2" text-anchor="start">mensajes que filtran</text><path d="M194 372H235" class="ar" marker-end="url(#a1)"/><rect x="243" y="320" width="188" height="104" rx="12" class="n"/><text x="259" y="342" class="tn" text-anchor="start">02</text><text x="259" y="363" class="t1" text-anchor="start">Reserva directa</text><text x="259" y="382" class="t2" text-anchor="start">o se queda con «avísame»,</text><text x="259" y="397" class="t2" text-anchor="start">alerta, WhatsApp del</text><text x="259" y="412" class="t2" text-anchor="start">asesor o test</text><rect x="347" y="309" width="76" height="22" rx="11" class="chip"/><text x="385" y="324" class="ct" text-anchor="middle">✓ FUGA 1</text><path d="M437 372H478" class="ar" marker-end="url(#a1)"/><rect x="486" y="320" width="188" height="104" rx="12" class="n"/><text x="502" y="342" class="tn" text-anchor="start">03</text><text x="502" y="363" class="t1" text-anchor="start">Puntuación y reparto</text><text x="502" y="382" class="t2" text-anchor="start">ahora, más adelante</text><text x="502" y="397" class="t2" text-anchor="start">o mirando</text><path d="M680 372H721" class="ar" marker-end="url(#a1)"/><rect x="729" y="320" width="188" height="104" rx="12" class="n"/><text x="745" y="342" class="tn" text-anchor="start">04</text><text x="745" y="363" class="t1" text-anchor="start">WhatsApp al minuto</text><text x="745" y="382" class="t2" text-anchor="start">con 2-3 cacerías</text><text x="745" y="397" class="t2" text-anchor="start">que encajan</text><path d="M923 372H964" class="ar" marker-end="url(#a1)"/><rect x="972" y="320" width="188" height="104" rx="12" class="n"/><text x="988" y="342" class="tn" text-anchor="start">05</text><text x="988" y="363" class="t1" text-anchor="start">Raquel llama</text><text x="988" y="382" class="t2" text-anchor="start">a los 10-20 min y deja</text><text x="988" y="397" class="t2" text-anchor="start">la llamada agendada</text><rect x="1076" y="309" width="76" height="22" rx="11" class="chip"/><text x="1114" y="324" class="ct" text-anchor="middle">✓ FUGA 3</text><path d="M1066 428V472" class="ar" marker-end="url(#a1)"/><rect x="972" y="480" width="188" height="104" rx="12" class="n"/><text x="988" y="502" class="tn" text-anchor="start">06</text><text x="988" y="523" class="t1" text-anchor="start">Comercial</text><text x="988" y="542" class="t2" text-anchor="start">llama a la hora que</text><text x="988" y="557" class="t2" text-anchor="start">elige el cazador, con</text><text x="988" y="572" class="t2" text-anchor="start">la ficha completa</text><path d="M966 532H925" class="ar" marker-end="url(#a1)"/><rect x="729" y="480" width="188" height="104" rx="12" class="n"/><text x="745" y="502" class="tn" text-anchor="start">07</text><text x="745" y="523" class="t1" text-anchor="start">Cacería propuesta</text><text x="745" y="542" class="t2" text-anchor="start">una o más cacerías</text><text x="745" y="557" class="t2" text-anchor="start">concretas</text><path d="M723 532H682" class="ar" marker-end="url(#a1)"/><rect x="486" y="480" width="188" height="104" rx="12" class="ng"/><text x="502" y="502" class="tn" text-anchor="start">08</text><text x="502" y="523" class="t1" text-anchor="start">Reserva con señal</text><text x="502" y="542" class="t2" text-anchor="start">en hunty.es</text><path d="M480 532H439" class="ar" marker-end="url(#a1)"/><rect x="243" y="480" width="188" height="104" rx="12" class="n"/><text x="259" y="502" class="tn" text-anchor="start">09</text><text x="259" y="523" class="t1" text-anchor="start">Jornada y reseña</text><path d="M237 532H196" class="ar" marker-end="url(#a1)"/><rect x="0" y="480" width="188" height="104" rx="12" class="n"/><text x="16" y="502" class="tn" text-anchor="start">10</text><text x="16" y="523" class="t1" text-anchor="start">Su próxima temporada</text><text x="16" y="542" class="t2" text-anchor="start">aviso antes de</text><text x="16" y="557" class="t2" text-anchor="start">su temporada</text><rect x="104" y="469" width="76" height="22" rx="11" class="chip"/><text x="142" y="484" class="ct" text-anchor="middle">✓ FUGA 2</text><path d="M94 476V432" class="loop" marker-end="url(#a2)"/><text x="104" y="456" class="t2" text-anchor="start" style="fill:var(--good);font-weight:600">vuelve a reservar</text></svg>
+      <svg class="dg dg-m" viewBox="0 0 360 1332" role="img" aria-labelledby="dgam-t"><title id="dgam-t">Recorrido de hoy, con sus fugas, y recorrido propuesto en diez pasos</title><defs><marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mk"/></marker><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mkg"/></marker></defs><text x="0" y="14" class="hd" text-anchor="start">HOY · LO QUE PASA AHORA</text><rect x="0" y="34" width="196" height="56" rx="11" class="n"/><text x="14" y="58" class="t1" text-anchor="start">Anuncio en Meta</text><text x="14" y="76" class="t2" text-anchor="start">20 activos, a la web</text><path d="M98 93V112" class="ar" marker-end="url(#m1)"/><rect x="0" y="118" width="196" height="56" rx="11" class="n"/><text x="14" y="142" class="t1" text-anchor="start">Web</text><text x="14" y="160" class="t2" text-anchor="start">ficha, especie, calendario</text><path d="M98 177V196" class="ar" marker-end="url(#m1)"/><rect x="0" y="202" width="196" height="56" rx="11" class="n"/><text x="14" y="226" class="t1" text-anchor="start">Cuenta o WhatsApp</text><text x="14" y="244" class="t2" text-anchor="start">solo email · texto fijo</text><path d="M98 261V280" class="ar" marker-end="url(#m1)"/><rect x="0" y="286" width="196" height="56" rx="11" class="n"/><text x="14" y="310" class="t1" text-anchor="start">Comercial</text><text x="14" y="328" class="t2" text-anchor="start">llama cuando puede</text><path d="M98 345V364" class="ar" marker-end="url(#m1)"/><rect x="0" y="370" width="196" height="56" rx="11" class="ng"/><text x="14" y="394" class="t1" text-anchor="start">Reserva con señal</text><text x="14" y="412" class="t2" text-anchor="start">solo el decidido</text><path d="M196 146C206 146 204 146 214 146" class="lk"/><circle cx="196" cy="146" r="3.5" class="ld"/><rect x="214" y="127" width="146" height="38" rx="9" class="lp"/><text x="287" y="143" class="lt" text-anchor="middle" style="font-size:10.5px">Fuga 1 · mira y se va</text><text x="287" y="157" class="lt" text-anchor="middle" style="font-size:10.5px;font-weight:500">sin dejar nada</text><path d="M196 230C206 230 204 230 214 230" class="lk"/><circle cx="196" cy="230" r="3.5" class="ld"/><rect x="214" y="211" width="146" height="38" rx="9" class="lp"/><text x="287" y="227" class="lt" text-anchor="middle" style="font-size:10.5px">Sin teléfono</text><text x="287" y="241" class="lt" text-anchor="middle" style="font-size:10.5px;font-weight:500">ni momento</text><path d="M196 314C206 314 204 291 214 291" class="lk"/><circle cx="196" cy="314" r="3.5" class="ld"/><rect x="214" y="272" width="146" height="38" rx="9" class="lp"/><text x="287" y="288" class="lt" text-anchor="middle" style="font-size:10.5px">Fuga 3 · «no coge</text><text x="287" y="302" class="lt" text-anchor="middle" style="font-size:10.5px;font-weight:500">el teléfono»</text><path d="M196 314C206 314 204 335 214 335" class="lk"/><circle cx="196" cy="314" r="3.5" class="ld"/><rect x="214" y="316" width="146" height="38" rx="9" class="lp"/><text x="287" y="332" class="lt" text-anchor="middle" style="font-size:10.5px">Fuga 2 · «más adelante»</text><text x="287" y="346" class="lt" text-anchor="middle" style="font-size:10.5px;font-weight:500">se queda en una lista</text><path d="M0 456H360" class="dv"/><text x="0" y="488" class="hd2" text-anchor="start">PROPUESTO · CAPA ENCIMA DE LA WEB</text><rect x="0" y="506" width="246" height="55" rx="11" class="n"/><text x="14" y="530" class="tn" text-anchor="start">01</text><text x="38" y="530" class="t1" text-anchor="start">Anuncio a la web</text><text x="38" y="548" class="t2" text-anchor="start">mensajes que filtran</text><path d="M123 564V579" class="ar" marker-end="url(#m1)"/><rect x="0" y="585" width="246" height="70" rx="11" class="n"/><text x="14" y="609" class="tn" text-anchor="start">02</text><text x="38" y="609" class="t1" text-anchor="start">Reserva directa</text><text x="38" y="627" class="t2" text-anchor="start">o se queda con «avísame», alerta,</text><text x="38" y="642" class="t2" text-anchor="start">WhatsApp del asesor o test</text><path d="M246 620H266" class="ar" style="stroke:var(--good)"/><rect x="266" y="608" width="90" height="24" rx="12" class="chip"/><text x="311" y="624" class="ct" text-anchor="middle">✓ FUGA 1</text><path d="M123 658V673" class="ar" marker-end="url(#m1)"/><rect x="0" y="679" width="246" height="55" rx="11" class="n"/><text x="14" y="703" class="tn" text-anchor="start">03</text><text x="38" y="703" class="t1" text-anchor="start">Puntuación y reparto</text><text x="38" y="721" class="t2" text-anchor="start">ahora, más adelante o mirando</text><path d="M123 737V752" class="ar" marker-end="url(#m1)"/><rect x="0" y="758" width="246" height="55" rx="11" class="n"/><text x="14" y="782" class="tn" text-anchor="start">04</text><text x="38" y="782" class="t1" text-anchor="start">WhatsApp al minuto</text><text x="38" y="800" class="t2" text-anchor="start">con 2-3 cacerías que encajan</text><path d="M123 816V831" class="ar" marker-end="url(#m1)"/><rect x="0" y="837" width="246" height="70" rx="11" class="n"/><text x="14" y="861" class="tn" text-anchor="start">05</text><text x="38" y="861" class="t1" text-anchor="start">Raquel llama</text><text x="38" y="879" class="t2" text-anchor="start">a los 10-20 min y deja</text><text x="38" y="894" class="t2" text-anchor="start">la llamada agendada</text><path d="M246 872H266" class="ar" style="stroke:var(--good)"/><rect x="266" y="860" width="90" height="24" rx="12" class="chip"/><text x="311" y="876" class="ct" text-anchor="middle">✓ FUGA 3</text><path d="M123 910V925" class="ar" marker-end="url(#m1)"/><rect x="0" y="931" width="246" height="70" rx="11" class="n"/><text x="14" y="955" class="tn" text-anchor="start">06</text><text x="38" y="955" class="t1" text-anchor="start">Comercial</text><text x="38" y="973" class="t2" text-anchor="start">a la hora que elige el cazador,</text><text x="38" y="988" class="t2" text-anchor="start">con la ficha completa</text><path d="M123 1004V1019" class="ar" marker-end="url(#m1)"/><rect x="0" y="1025" width="246" height="55" rx="11" class="n"/><text x="14" y="1049" class="tn" text-anchor="start">07</text><text x="38" y="1049" class="t1" text-anchor="start">Cacería propuesta</text><text x="38" y="1067" class="t2" text-anchor="start">una o más cacerías concretas</text><path d="M123 1083V1098" class="ar" marker-end="url(#m1)"/><rect x="0" y="1104" width="246" height="55" rx="11" class="ng"/><text x="14" y="1128" class="tn" text-anchor="start">08</text><text x="38" y="1128" class="t1" text-anchor="start">Reserva con señal</text><text x="38" y="1146" class="t2" text-anchor="start">en hunty.es</text><path d="M123 1162V1177" class="ar" marker-end="url(#m1)"/><rect x="0" y="1183" width="246" height="36" rx="11" class="n"/><text x="14" y="1207" class="tn" text-anchor="start">09</text><text x="38" y="1207" class="t1" text-anchor="start">Jornada y reseña</text><path d="M123 1222V1237" class="ar" marker-end="url(#m1)"/><rect x="0" y="1243" width="246" height="55" rx="11" class="n"/><text x="14" y="1267" class="tn" text-anchor="start">10</text><text x="38" y="1267" class="t1" text-anchor="start">Su próxima temporada</text><text x="38" y="1285" class="t2" text-anchor="start">aviso antes de su temporada</text><path d="M246 1270.5H266" class="ar" style="stroke:var(--good)"/><rect x="266" y="1258.5" width="90" height="24" rx="12" class="chip"/><text x="311" y="1274.5" class="ct" text-anchor="middle">✓ FUGA 2</text><text x="0" y="1322" class="t2" text-anchor="start" style="fill:var(--good);font-weight:600">↺ y vuelve a reservar en su próxima temporada</text></svg>
+      <div class="legend"><span><i style="background:var(--bad)"></i>Dónde se pierde la gente hoy</span><span><i style="background:var(--good)"></i>Fuga cubierta en el recorrido propuesto</span><span><i style="border:1.5px dashed var(--good)"></i>Vuelve en su próxima temporada</span></div>
+    </div>
+    <p class="k" style="margin-top:16px">El reparto, después de la puntuación</p>
+    <div class="rep keep">
+      <span class="root"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg>Puntuación y reparto</span>
+      <svg viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="r1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mk"/></marker></defs><path d="M500 0C500 40 166 30 166 66" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke"/><path d="M500 0C500 40 500 30 500 66" fill="none" stroke="var(--ochre)" stroke-width="2" vector-effect="non-scaling-stroke"/><path d="M500 0C500 40 834 30 834 66" fill="none" stroke="var(--muted)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+      <div class="c3">
+        <div class="grp"><div class="gh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span><h3>Ahora · esta temporada</h3></div><p>Caza en menos de 90 días o en la temporada en curso, con presupuesto acorde. → WhatsApp al minuto, Raquel y <b>comercial</b>. Aviso al comercial solo si la puntuación es A.</p></div>
+        <div class="grp b2"><div class="gh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-hourglass"/></svg></span><h3>Más adelante</h3></div><p>Próxima temporada o fecha concreta lejana. → <b>No pasa al comercial.</b> Se guarda la temporada, recibe un aviso unas 6 semanas antes y alertas de cacerías nuevas (una a la semana como máximo).</p></div>
+        <div class="grp b3"><div class="gh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span><h3>Solo mirando</h3></div><p>Sin fecha ni presupuesto. → Contenido: calendario, guías por especie y Prime. Si cambia de respuesta o empieza una reserva, sube de grupo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · MÓDULOS -->
+<section class="sec" id="modulos">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>06</b><span></span></div><h2 class="t">El sistema, por módulos</h2>
+      <p class="lede">Cada módulo funciona por separado. Enseño solo los que os duelan y empezamos por uno.</p></div>
     <div class="mods">
-      <div class="mod"><span class="mk">M1 · ANUNCIOS A LA WEB QUE FILTRAN, Y RECUERDO</span><dl><dt>Problema</dt><dd>Visitas que no son para ahora o no tienen presupuesto, y visitas que se van sin volver.</dd><dt>Qué hace</dt><dd>Mantiene el destino web. Mensajes por modalidad y temporada con fecha, rango de precio y «para quien ya…». Anuncios de recuerdo con la cacería que vio. Una línea aparte para «más adelante».</dd><dt>Métrica</dt><dd>Coste por reserva y € de comisión por € invertido, por anuncio.</dd></dl><a class="go" href="anuncios/">Ver los anuncios →</a></div>
-      <div class="mod"><span class="mk">M2 · CAPTURA CON VALOR DENTRO DE LA WEB</span><dl><dt>Problema</dt><dd>Quien mira y se va no deja rastro.</dd><dt>Qué hace</dt><dd>«Avísame cuando salga», alertas por especie, zona y presupuesto, calendario filtrable, «te guardo la plaza» y un test opcional de «qué cacería te encaja» (7 toques). Cada uno crea la ficha y la reparte.</dd><dt>Métrica</dt><dd>% de visitas que dejan WhatsApp y % de contactos A, B y C.</dd></dl><a class="go" href="landing/">Ver la página →</a></div>
-      <div class="mod"><span class="mk">M3 · WHATSAPP AL MINUTO</span><dl><dt>Problema</dt><dd>El contacto se enfría o reserva en otro sitio. El WhatsApp del asesor depende de que haya alguien libre.</dd><dt>Qué hace</dt><dd>Atiende el WhatsApp del asesor y cualquier captura en menos de un minuto (de 8:00 a 21:30). Cualifica conversando, sin formulario, y propone 2-3 cacerías publicadas que encajan. Retoma si el cazador no contesta al comercial.</dd><dt>Métrica</dt><dd>% contactado en menos de 5 minutos y % con conversación.</dd></dl><a class="go" href="demo/#whatsapp">Ver la conversación →</a></div>
-      <div class="mod"><span class="mk">M4 · RAQUEL, ASISTENTE DE VOZ</span><dl><dt>Problema</dt><dd>«No coge el teléfono».</dd><dt>Qué hace</dt><dd>Llama a los 10-20 minutos, solo a quien dejó su teléfono y pidió información. Confirma lo básico y deja agendada la llamada con el comercial. Si no contesta, deja un mensaje en el buzón y escribe por WhatsApp con dos horas a elegir.</dd><dt>Métrica</dt><dd>% de llamadas con comercial agendadas y % presentadas.</dd></dl><a class="go" href="demo/#voz">Ver el guion →</a></div>
-      <div class="mod"><span class="mk">M5 · FICHA PARA EL COMERCIAL</span><dl><dt>Problema</dt><dd>El comercial llama a ciegas.</dd><dt>Qué hace</dt><dd>Resumen de la conversación, puntuación y por qué, momento, presupuesto, objeciones, cacerías que ha visto y siguiente paso. Aviso solo de los calientes.</dd><dt>Métrica</dt><dd>Tiempo hasta el primer contacto humano y A sin tocar más de 2 horas.</dd></dl><a class="go" href="demo/#ficha">Ver la ficha →</a></div>
-      <div class="mod"><span class="mk">M6 · «MÁS ADELANTE» POR TEMPORADA</span><dl><dt>Problema</dt><dd>Contactos buenos que no eran para ahora y se pierden.</dd><dt>Qué hace</dt><dd>Guarda la temporada que dijo (berrea, montería, corzo…). Aviso unas 6 semanas antes y alertas de cacerías nuevas a su perfil.</dd><dt>Métrica</dt><dd>Cohortes: guardados, reactivados y reservas por mes de alta.</dd></dl><a class="go" href="demo/#seguimiento">Ver los mensajes →</a></div>
-      <div class="mod"><span class="mk">M7 · SEGUIMIENTO HASTA LA RESERVA</span><dl><dt>Problema</dt><dd>Propuestas sin respuesta y reservas a medias.</dd><dt>Qué hace</dt><dd>Recordatorios de la llamada (confirmación, víspera, 2 h antes), recuperación de quien no estuvo, seguimiento de la cacería propuesta, reservas sin terminar, víspera de la jornada y reseña.</dd><dt>Métrica</dt><dd>% de propuestas que acaban en reserva con señal, y en cuántos días.</dd></dl><a class="go" href="demo/#seguimiento">Ver la secuencia →</a></div>
-      <div class="mod"><span class="mk">M8 · MEDICIÓN Y PANEL</span><dl><dt>Problema</dt><dd>No se sabe qué anuncio paga la inversión.</dd><dt>Qué hace</dt><dd>Une anuncio, ficha, reserva y comisión. Devuelve a Meta qué contactos reservan. Panel para el daily (por comercial) y para la revisión semanal y el comité.</dd><dt>Métrica</dt><dd>€ de comisión por € invertido, por anuncio y modalidad.</dd></dl><a class="go" href="demo/#panel">Ver el panel →</a></div>
-      <div class="mod"><span class="mk">M9 · ORGANIZADORES (HUNTY PRO) · OPCIONAL</span><dl><dt>Problema</dt><dd>«Anuncia una cacería» solo deja registrarse.</dd><dt>Qué hace</dt><dd>Un formulario corto (jornadas por temporada, modalidades, provincia, si ya vende online), WhatsApp al minuto y llamada de 15 minutos con vuestro equipo.</dd><dt>Métrica</dt><dd>Altas de Hunty Pro (Mensual o Anual) por anuncio.</dd></dl><a class="go" href="anuncios/#pro">Ver el anuncio →</a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-mega"/></svg></span><span class="mk">M1 · ANUNCIOS A LA WEB QUE FILTRAN, Y RECUERDO</span></div><dl><dt>Problema</dt><dd>Visitas que no son para ahora o no tienen presupuesto, y visitas que se van sin volver.</dd><dt>Qué hace</dt><dd>Mantiene el destino web. Mensajes por modalidad y temporada con fecha, rango de precio y «para quien ya…». Anuncios de recuerdo con la cacería que vio. Una línea aparte para «más adelante».</dd><dt>Métrica</dt><dd class="met">Coste por reserva y € de comisión por € invertido, por anuncio.</dd></dl><a class="go" href="anuncios/">Ver los anuncios <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg></span><span class="mk">M2 · CAPTURA CON VALOR DENTRO DE LA WEB</span></div><dl><dt>Problema</dt><dd>Quien mira y se va no deja rastro.</dd><dt>Qué hace</dt><dd>«Avísame cuando salga», alertas por especie, zona y presupuesto, calendario filtrable, «te guardo la plaza» y un test opcional de «qué cacería te encaja» (7 toques). Cada uno crea la ficha y la reparte.</dd><dt>Métrica</dt><dd class="met">% de visitas que dejan WhatsApp y % de contactos A, B y C.</dd></dl><a class="go" href="landing/">Ver la página <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span><span class="mk">M3 · WHATSAPP AL MINUTO</span></div><dl><dt>Problema</dt><dd>El contacto se enfría o reserva en otro sitio. El WhatsApp del asesor depende de que haya alguien libre.</dd><dt>Qué hace</dt><dd>Atiende el WhatsApp del asesor y cualquier captura en menos de un minuto (de 8:00 a 21:30). Cualifica conversando, sin formulario, y propone 2-3 cacerías publicadas que encajan. Retoma si el cazador no contesta al comercial.</dd><dt>Métrica</dt><dd class="met">% contactado en menos de 5 minutos y % con conversación.</dd></dl><a class="go" href="demo/#whatsapp">Ver la conversación <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-mic"/></svg></span><span class="mk">M4 · RAQUEL, ASISTENTE DE VOZ</span></div><dl><dt>Problema</dt><dd>«No coge el teléfono».</dd><dt>Qué hace</dt><dd>Llama a los 10-20 minutos, solo a quien dejó su teléfono y pidió información. Confirma lo básico y deja agendada la llamada con el comercial. Si no contesta, deja un mensaje en el buzón y escribe por WhatsApp con dos horas a elegir.</dd><dt>Métrica</dt><dd class="met">% de llamadas con comercial agendadas y % presentadas.</dd></dl><a class="go" href="demo/#voz">Ver el guion <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><span class="mk">M5 · FICHA PARA EL COMERCIAL</span></div><dl><dt>Problema</dt><dd>El comercial llama a ciegas.</dd><dt>Qué hace</dt><dd>Resumen de la conversación, puntuación y por qué, momento, presupuesto, objeciones, cacerías que ha visto y siguiente paso. Aviso solo de los calientes.</dd><dt>Métrica</dt><dd class="met">Tiempo hasta el primer contacto humano y A sin tocar más de 2 horas.</dd></dl><a class="go" href="demo/#ficha">Ver la ficha <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-hourglass"/></svg></span><span class="mk">M6 · «MÁS ADELANTE» POR TEMPORADA</span></div><dl><dt>Problema</dt><dd>Contactos buenos que no eran para ahora y se pierden.</dd><dt>Qué hace</dt><dd>Guarda la temporada que dijo (berrea, montería, corzo…). Aviso unas 6 semanas antes y alertas de cacerías nuevas a su perfil.</dd><dt>Métrica</dt><dd class="met">Cohortes: guardados, reactivados y reservas por mes de alta.</dd></dl><a class="go" href="demo/#seguimiento">Ver los mensajes <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-route"/></svg></span><span class="mk">M7 · SEGUIMIENTO HASTA LA RESERVA</span></div><dl><dt>Problema</dt><dd>Propuestas sin respuesta y reservas a medias.</dd><dt>Qué hace</dt><dd>Recordatorios de la llamada (confirmación, víspera, 2 h antes), recuperación de quien no estuvo, seguimiento de la cacería propuesta, reservas sin terminar, víspera de la jornada y reseña.</dd><dt>Métrica</dt><dd class="met">% de propuestas que acaban en reserva con señal, y en cuántos días.</dd></dl><a class="go" href="demo/#seguimiento">Ver la secuencia <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg></span><span class="mk">M8 · MEDICIÓN Y PANEL</span></div><dl><dt>Problema</dt><dd>No se sabe qué anuncio paga la inversión.</dd><dt>Qué hace</dt><dd>Une anuncio, ficha, reserva y comisión. Devuelve a Meta qué contactos reservan. Panel para el daily (por comercial) y para la revisión semanal y el comité.</dd><dt>Métrica</dt><dd class="met">€ de comisión por € invertido, por anuncio y modalidad.</dd></dl><a class="go" href="demo/#panel">Ver el panel <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="mod"><div class="mh"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><span class="mk">M9 · ORGANIZADORES (HUNTY PRO) · OPCIONAL</span></div><dl><dt>Problema</dt><dd>«Anuncia una cacería» solo deja registrarse.</dd><dt>Qué hace</dt><dd>Un formulario corto (jornadas por temporada, modalidades, provincia, si ya vende online), WhatsApp al minuto y llamada de 15 minutos con vuestro equipo.</dd><dt>Métrica</dt><dd class="met">Altas de Hunty Pro (Mensual o Anual) por anuncio.</dd></dl><a class="go" href="anuncios/#pro">Ver el anuncio <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PUNTUACIÓN -->
-  <section id="puntuacion">
-    <h2><span class="n">7</span>Puntuación transparente</h2>
-    <p class="muted">Ya tenéis una puntuación. Propuesta: arrancamos con la vuestra, la medimos un mes contra las reservas reales y la comparamos con esta. Os quedáis con la que mejor separe. Los pesos se ven y se ajustan, y cada contacto lleva escrito el porqué de su nota.</p>
-    <div class="tw wide"><table>
+<!-- 7 · PUNTUACIÓN -->
+<section class="sec alt" id="puntuacion">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>07</b><span></span></div><h2 class="t">Puntuación transparente</h2>
+      <p class="lede">Ya tenéis una puntuación. Propuesta: arrancamos con la vuestra, la medimos un mes contra las reservas reales y la comparamos con esta. Os quedáis con la que mejor separe. Los pesos se ven y se ajustan, y cada contacto lleva escrito el porqué de su nota.</p></div>
+    <div class="card keep" style="display:grid;gap:16px">
+      <p class="k" style="margin:0">Reparto de los 100 puntos (máximo por criterio)</p>
+      <div class="pbar" role="img" aria-label="Momento 25, presupuesto 20, cazadores 10, experiencia 10, respuesta 20, comportamiento 15">
+        <div style="flex:25;background:#163F12">Momento<small>25</small></div>
+        <div style="flex:20;background:#2C7C24">Presupuesto<small>20</small></div>
+        <div style="flex:10;background:#5E8F35">Cazadores<small>10</small></div>
+        <div style="flex:10;background:#8E7A3A">Experiencia<small>10</small></div>
+        <div style="flex:20;background:#8A6A3F">Respuesta<small>20</small></div>
+        <div style="flex:15;background:#6B5230">Comportamiento<small>15</small></div>
+      </div>
+      <div>
+        <div class="lvl" role="img" aria-label="C menos de 45, B de 45 a 69, A de 70 a 100"><div class="c">C · recorrido automático</div><div class="b">B · 45-69</div><div class="a">A · 70-100</div></div>
+        <div class="scale"><span>0</span><span>45</span><span>70</span><span>100</span></div>
+      </div>
+    </div>
+    <div class="tw stack"><table>
       <thead><tr><th>Criterio</th><th>Dato</th><th>Puntos (propuesta)</th><th class="num">Máx.</th></tr></thead>
       <tbody>
-        <tr><td>Momento</td><td>Conversación, «avísame» o test: «¿Cuándo quieres cazar?»</td><td>Menos de 30 días: 25 · esta temporada: 18 · próxima temporada: 8 · solo mirando: 0</td><td class="num">25</td></tr>
-        <tr><td>Encaje de presupuesto</td><td>Conversación o test (presupuesto por cazador) frente al precio de las cacerías publicadas de esa modalidad y zona</td><td>Dentro del rango: 20 · algo por debajo: 10 · muy por debajo: 0</td><td class="num">20</td></tr>
-        <tr><td>Cazadores (puestos)</td><td>Conversación o test: «¿Cuántos vais?»</td><td>3 o más: 10 · 2: 7 · 1: 4</td><td class="num">10</td></tr>
-        <tr><td>Experiencia</td><td>Conversación, test e historial en Hunty</td><td>Ya reservó en Hunty: 10 · ha cazado con organizador: 7 · nunca: 3</td><td class="num">10</td></tr>
-        <tr><td>Respuesta</td><td>WhatsApp y llamada de Raquel</td><td>Contesta en menos de 1 h: 10 · habla con Raquel: 10</td><td class="num">20</td></tr>
-        <tr><td>Comportamiento</td><td>Web (Mixpanel o píxel): fichas vistas, reserva empezada</td><td>3 o más fichas de su modalidad: 7 · reserva empezada sin pagar: 8</td><td class="num">15</td></tr>
+        <tr><td><b>Momento</b></td><td>Conversación, «avísame» o test: «¿Cuándo quieres cazar?»</td><td>Menos de 30 días: 25 · esta temporada: 18 · próxima temporada: 8 · solo mirando: 0</td><td class="num"><b>25</b></td></tr>
+        <tr><td><b>Encaje de presupuesto</b></td><td>Conversación o test (presupuesto por cazador) frente al precio de las cacerías publicadas de esa modalidad y zona</td><td>Dentro del rango: 20 · algo por debajo: 10 · muy por debajo: 0</td><td class="num"><b>20</b></td></tr>
+        <tr><td><b>Cazadores (puestos)</b></td><td>Conversación o test: «¿Cuántos vais?»</td><td>3 o más: 10 · 2: 7 · 1: 4</td><td class="num"><b>10</b></td></tr>
+        <tr><td><b>Experiencia</b></td><td>Conversación, test e historial en Hunty</td><td>Ya reservó en Hunty: 10 · ha cazado con organizador: 7 · nunca: 3</td><td class="num"><b>10</b></td></tr>
+        <tr><td><b>Respuesta</b></td><td>WhatsApp y llamada de Raquel</td><td>Contesta en menos de 1 h: 10 · habla con Raquel: 10</td><td class="num"><b>20</b></td></tr>
+        <tr><td><b>Comportamiento</b></td><td>Web (Mixpanel o píxel): fichas vistas, reserva empezada</td><td>3 o más fichas de su modalidad: 7 · reserva empezada sin pagar: 8</td><td class="num"><b>15</b></td></tr>
       </tbody>
     </table></div>
     <div class="grid">
       <div class="card"><p class="k">Niveles</p><p class="small"><b>A (70-100):</b> aviso al comercial y llamada el mismo día. <b>B (45-69):</b> WhatsApp y Raquel, comercial en 48 h. <b>C (&lt;45):</b> recorrido automático. «Más adelante» manda sobre la nota: nunca pasa al comercial antes de su fecha.</p></div>
       <div class="card"><p class="k">Calibración mensual</p><p class="small">Cada mes: reservas por nivel (A, B y C) y por criterio. Si un criterio no separa a quien reserva de quien no, baja su peso. Los cambios los aprobáis vosotros y quedan con fecha.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- MÉTRICAS -->
-  <section id="metricas">
-    <h2><span class="n">8</span>Árbol de métricas, de la impresión a la comisión</h2>
-    <div class="tw wide"><table>
+<!-- 8 · MÉTRICAS -->
+<section class="sec" id="metricas">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>08</b><span></span></div><h2 class="t">Árbol de métricas, de la impresión a la comisión</h2></div>
+    <div class="mt">
+      <div class="dgbox keep"><svg class="dg" viewBox="0 0 440 540" role="img" aria-labelledby="dgf-t"><title id="dgf-t">Árbol de métricas: de impresiones a comisión, con la reserva directa como rama aparte</title><defs><marker id="f1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="mka"/></marker></defs><text x="168" y="14" class="hd" text-anchor="middle">DE LA IMPRESIÓN…</text><rect x="5" y="30" width="326" height="30" rx="8" fill="#7A5C34"/><text x="168" y="49.5" class="fb" text-anchor="middle">1 · Impresiones</text><rect x="12.333333333333343" y="68" width="311.3333333333333" height="30" rx="8" fill="#7A5C34"/><text x="168" y="87.5" class="fb" text-anchor="middle">2 · Clic al enlace</text><rect x="19.666666666666657" y="106" width="296.6666666666667" height="30" rx="8" fill="#8E7A3A"/><text x="168" y="125.5" class="fb" text-anchor="middle">3 · Visita con intención</text><rect x="27" y="144" width="282" height="30" rx="8" fill="#8E7A3A"/><text x="168" y="163.5" class="fb" text-anchor="middle">4 · Captura</text><rect x="34.33333333333334" y="182" width="267.3333333333333" height="30" rx="8" fill="#5E7F2E"/><text x="168" y="201.5" class="fb" text-anchor="middle">5 · Contacto cualificado</text><rect x="41.66666666666666" y="220" width="252.66666666666669" height="30" rx="8" fill="#5E7F2E"/><text x="168" y="239.5" class="fb" text-anchor="middle">6 · Contactado en menos de 5 min</text><rect x="49" y="258" width="238" height="30" rx="8" fill="#5E7F2E"/><text x="168" y="277.5" class="fb" text-anchor="middle">7 · Conversación</text><rect x="56.33333333333334" y="296" width="223.33333333333331" height="30" rx="8" fill="#3F7A28"/><text x="168" y="315.5" class="fb" text-anchor="middle">8 · Llamada agendada</text><rect x="63.66666666666666" y="334" width="208.66666666666669" height="30" rx="8" fill="#3F7A28"/><text x="168" y="353.5" class="fb" text-anchor="middle">9 · Llamada presentada</text><rect x="71" y="372" width="194" height="30" rx="8" fill="#3F7A28"/><text x="168" y="391.5" class="fb" text-anchor="middle">10 · Cacería propuesta</text><rect x="78.33333333333333" y="410" width="179.33333333333334" height="30" rx="8" fill="#2C7C24"/><text x="168" y="429.5" class="fb" text-anchor="middle">11 · Reserva con señal</text><rect x="85.66666666666667" y="448" width="164.66666666666666" height="30" rx="8" fill="#2C7C24"/><text x="168" y="467.5" class="fb" text-anchor="middle">12 · Jornada realizada</text><rect x="93" y="486" width="150" height="30" rx="8" fill="#163F12"/><text x="168" y="505.5" class="fb" text-anchor="middle">13 · Comisión</text><path d="M318.33333333333337 121C334 121 392 112 392 134" class="brl" marker-end="url(#f1)"/><rect x="344" y="140" width="96" height="66" rx="10" class="br"/><text x="392" y="160" class="bt" text-anchor="middle">4b · Reserva</text><text x="392" y="175" class="bt" text-anchor="middle">directa</text><text x="392" y="193" class="bt2" text-anchor="middle">autoservicio</text><path d="M392 210V425H265.6666666666667" class="brl" marker-end="url(#f1)"/><text x="400" y="315.5" class="bt2" text-anchor="start" transform="rotate(90 400 315.5)" style="font-size:10.5px">sin hablar</text><text x="168" y="534" class="hd" text-anchor="middle">…A LA COMISIÓN</text></svg></div>
+      <div class="side">
+        <div class="card"><p class="k">Cómo se lee</p><p class="small">Cada escalón es una métrica con definición exacta. El tronco es la venta asesorada (captura → conversación → comercial). La rama de la derecha es la reserva directa (4b): se mide aparte y se une en la reserva con señal.</p></div>
+        <div class="legend" style="margin:0">
+          <span><i style="background:#7A5C34"></i>Meta</span><span><i style="background:#8E7A3A"></i>Web</span><span><i style="background:#5E7F2E"></i>Contacto</span><span><i style="background:#3F7A28"></i>Comercial</span><span><i style="background:#2C7C24"></i>Reserva</span><span><i style="background:#163F12"></i>Comisión</span>
+        </div>
+        <div class="card"><p class="k">Cuándo se ve</p><p class="small"><b>Diario:</b> de la 1 a la 9. <b>Semanal:</b> cacería propuesta y reserva con señal. <b>Semanal / comité:</b> jornada realizada. <b>Comité:</b> comisión.</p></div>
+      </div>
+    </div>
+    <div class="tw stack"><table>
       <thead><tr><th>#</th><th>Métrica</th><th>Definición exacta</th><th>De dónde sale</th><th>Se ve</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Impresiones</td><td>Veces que se mostró el anuncio</td><td>Meta</td><td>Diario</td></tr>
-        <tr><td>2</td><td>Clic al enlace</td><td>Clics que salen a la landing (no reacciones)</td><td>Meta</td><td>Diario</td></tr>
-        <tr><td>3</td><td>Visita con intención</td><td>Ve 2 o más fichas de la misma modalidad, o empieza una reserva</td><td>Mixpanel o píxel</td><td>Diario</td></tr>
-        <tr><td>4</td><td>Captura</td><td>Deja un WhatsApp válido con consentimiento: «avísame», alerta, calendario, WhatsApp del asesor o test. Se cuenta por tipo de captura</td><td>Evento web y ficha</td><td>Diario</td></tr>
-        <tr><td>4b</td><td>Reserva directa</td><td>Reserva con señal sin haber hablado con nadie (autoservicio)</td><td>Sistema de reservas de Hunty</td><td>Diario</td></tr>
-        <tr><td>5</td><td>Contacto cualificado</td><td>Ficha con nivel A, B o C y grupo (ahora / más adelante / mirando)</td><td>Puntuación</td><td>Diario</td></tr>
-        <tr><td>6</td><td>Contactado en menos de 5 min</td><td>Primer mensaje enviado en menos de 5 min desde la captura (si entra de 21:30 a 8:00, cuenta desde las 8:00)</td><td>Registro de WhatsApp</td><td>Diario</td></tr>
-        <tr><td>7</td><td>Conversación</td><td>El cazador contesta al menos una vez (WhatsApp o voz)</td><td>WhatsApp y llamadas</td><td>Diario</td></tr>
-        <tr><td>8</td><td>Llamada agendada</td><td>Hora cerrada con un comercial concreto</td><td>Agenda</td><td>Diario</td></tr>
-        <tr><td>9</td><td>Llamada presentada</td><td>El comercial habla 3 minutos o más con el cazador en la franja agendada</td><td>Registro de llamadas</td><td>Diario</td></tr>
-        <tr><td>10</td><td>Cacería propuesta</td><td>El comercial envía una o más cacerías concretas (enlace a la ficha)</td><td>Ficha</td><td>Semanal</td></tr>
-        <tr><td>11</td><td>Reserva con señal</td><td>Pago de la reserva en hunty.es</td><td>Sistema de reservas de Hunty</td><td>Semanal</td></tr>
-        <tr><td>12</td><td>Jornada realizada</td><td>Pasa la fecha de la cacería sin cancelación</td><td>Sistema de reservas de Hunty</td><td>Semanal / comité</td></tr>
-        <tr><td>13</td><td>Comisión</td><td>Euros de comisión de esa reserva según el plan del organizador (14 %, 12 % o 10 %)</td><td>Sistema de Hunty</td><td>Comité</td></tr>
+        <tr><td class="num">1</td><td><b>Impresiones</b></td><td>Veces que se mostró el anuncio</td><td>Meta</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">2</td><td><b>Clic al enlace</b></td><td>Clics que salen a la landing (no reacciones)</td><td>Meta</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">3</td><td><b>Visita con intención</b></td><td>Ve 2 o más fichas de la misma modalidad, o empieza una reserva</td><td>Mixpanel o píxel</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">4</td><td><b>Captura</b></td><td>Deja un WhatsApp válido con consentimiento: «avísame», alerta, calendario, WhatsApp del asesor o test. Se cuenta por tipo de captura</td><td>Evento web y ficha</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">4b</td><td><b>Reserva directa</b></td><td>Reserva con señal sin haber hablado con nadie (autoservicio)</td><td>Sistema de reservas de Hunty</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">5</td><td><b>Contacto cualificado</b></td><td>Ficha con nivel A, B o C y grupo (ahora / más adelante / mirando)</td><td>Puntuación</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">6</td><td><b>Contactado en menos de 5 min</b></td><td>Primer mensaje enviado en menos de 5 min desde la captura (si entra de 21:30 a 8:00, cuenta desde las 8:00)</td><td>Registro de WhatsApp</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">7</td><td><b>Conversación</b></td><td>El cazador contesta al menos una vez (WhatsApp o voz)</td><td>WhatsApp y llamadas</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">8</td><td><b>Llamada agendada</b></td><td>Hora cerrada con un comercial concreto</td><td>Agenda</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">9</td><td><b>Llamada presentada</b></td><td>El comercial habla 3 minutos o más con el cazador en la franja agendada</td><td>Registro de llamadas</td><td><span class="pill nt">Diario</span></td></tr>
+        <tr><td class="num">10</td><td><b>Cacería propuesta</b></td><td>El comercial envía una o más cacerías concretas (enlace a la ficha)</td><td>Ficha</td><td><span class="pill hy">Semanal</span></td></tr>
+        <tr><td class="num">11</td><td><b>Reserva con señal</b></td><td>Pago de la reserva en hunty.es</td><td>Sistema de reservas de Hunty</td><td><span class="pill hy">Semanal</span></td></tr>
+        <tr><td class="num">12</td><td><b>Jornada realizada</b></td><td>Pasa la fecha de la cacería sin cancelación</td><td>Sistema de reservas de Hunty</td><td><span class="pill hy">Semanal / comité</span></td></tr>
+        <tr><td class="num">13</td><td><b>Comisión</b></td><td>Euros de comisión de esa reserva según el plan del organizador (14 %, 12 % o 10 %)</td><td>Sistema de Hunty</td><td><span class="pill ok">Comité</span></td></tr>
       </tbody>
     </table></div>
-  </section>
+  </div>
+</section>
 
-  <!-- DAILY / SEMANAL -->
-  <section id="daily">
-    <h2><span class="n">9</span>Qué veríais en el daily y en la revisión semanal</h2>
-    <div class="tw wide"><table>
-      <thead><tr><th>En el daily (por comercial)</th><th>Definición</th></tr></thead>
-      <tbody>
-        <tr><td>Contactos nuevos asignados</td><td>Ayer y hoy, por nivel A, B y C</td></tr>
-        <tr><td>Tiempo hasta el primer contacto humano</td><td>Mediana desde el test hasta la primera llamada o mensaje del comercial</td></tr>
-        <tr><td>A sin tocar más de 2 horas</td><td>Lista con nombre y motivo de la nota</td></tr>
-        <tr><td>Sin tocar más de 24 horas</td><td>Cualquier nivel, ahora</td></tr>
-        <tr><td>A quién llamar hoy y por qué</td><td>Lista ordenada: llamadas agendadas con hora, reservas empezadas sin pagar y propuestas sin respuesta</td></tr>
-        <tr><td>Propuestas sin respuesta en 48 h</td><td>Con la cacería propuesta y su fecha</td></tr>
-        <tr><td>Reservas de ayer</td><td>Con anuncio de origen</td></tr>
-      </tbody>
-    </table></div>
-    <div class="tw wide"><table>
-      <thead><tr><th>En la revisión semanal / comité</th><th>Corte</th></tr></thead>
-      <tbody>
-        <tr><td>Coste por contacto cualificado (A+B), por llamada presentada y por reserva</td><td>Por anuncio y por modalidad</td></tr>
-        <tr><td>€ de comisión por € invertido</td><td>Por anuncio, modalidad y mes</td></tr>
-        <tr><td>% de «no contesta» antes y después de Raquel</td><td>Semanal, con grupo de control al principio</td></tr>
-        <tr><td>Cohortes de «más adelante»</td><td>Guardados por mes de alta → reactivados → conversación → reserva</td></tr>
-        <tr><td>Motivos de pérdida</td><td>Precio, fechas, sin plazas, se fue a otro sitio, no contesta, no era para ahora</td></tr>
-        <tr><td>Calibración de la puntuación</td><td>Reservas por nivel y por criterio (mensual)</td></tr>
-        <tr><td>Por comercial</td><td>Llamadas presentadas, propuestas y reservas, con el mismo reparto de contactos</td></tr>
-      </tbody>
-    </table></div>
-    <p class="small">Ejemplo de cómo se ve, con datos inventados: <a href="https://qualivo.io/intelligence/?sector=retiros&amp;empresa=Hunty&amp;objetivo=conversion" target="_blank" rel="noopener">panel de un marketplace de experiencias</a>. Es la versión de ejemplo más parecida a Hunty: reservas, plazas y una base de datos que vuelve.</p>
-  </section>
+<!-- 9 · DAILY / SEMANAL -->
+<section class="sec alt" id="daily">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>09</b><span></span></div><h2 class="t">Qué veríais en el daily y en la revisión semanal</h2></div>
+    <div class="dash">
+      <div class="panel keep">
+        <div class="ph"><span class="dot" aria-hidden="true"></span><h3>En el daily (por comercial)</h3><small>Definición</small></div>
+        <ul>
+          <li><b>Contactos nuevos asignados</b><span>Ayer y hoy, por nivel A, B y C</span></li>
+          <li><b>Tiempo hasta el primer contacto humano</b><span>Mediana desde el test hasta la primera llamada o mensaje del comercial</span></li>
+          <li><b>A sin tocar más de 2 horas</b><span>Lista con nombre y motivo de la nota</span></li>
+          <li><b>Sin tocar más de 24 horas</b><span>Cualquier nivel, ahora</span></li>
+          <li><b>A quién llamar hoy y por qué</b><span>Lista ordenada: llamadas agendadas con hora, reservas empezadas sin pagar y propuestas sin respuesta</span></li>
+          <li><b>Propuestas sin respuesta en 48 h</b><span>Con la cacería propuesta y su fecha</span></li>
+          <li><b>Reservas de ayer</b><span>Con anuncio de origen</span></li>
+        </ul>
+      </div>
+      <div class="panel keep">
+        <div class="ph"><span class="dot" aria-hidden="true" style="background:#E9C46A;box-shadow:0 0 0 4px rgba(233,196,106,.25)"></span><h3>En la revisión semanal / comité</h3><small>Corte</small></div>
+        <ul>
+          <li><b>Coste por contacto cualificado (A+B), por llamada presentada y por reserva</b><span class="cut">Por anuncio y por modalidad</span></li>
+          <li><b>€ de comisión por € invertido</b><span class="cut">Por anuncio, modalidad y mes</span></li>
+          <li><b>% de «no contesta» antes y después de Raquel</b><span class="cut">Semanal, con grupo de control al principio</span></li>
+          <li><b>Cohortes de «más adelante»</b><span class="cut">Guardados por mes de alta → reactivados → conversación → reserva</span></li>
+          <li><b>Motivos de pérdida</b><span class="cut">Precio, fechas, sin plazas, se fue a otro sitio, no contesta, no era para ahora</span></li>
+          <li><b>Calibración de la puntuación</b><span class="cut">Reservas por nivel y por criterio (mensual)</span></li>
+          <li><b>Por comercial</b><span class="cut">Llamadas presentadas, propuestas y reservas, con el mismo reparto de contactos</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="small muted">Ejemplo de cómo se ve, con datos inventados: <a href="https://qualivo.io/intelligence/?sector=retiros&amp;empresa=Hunty&amp;objetivo=conversion" target="_blank" rel="noopener">panel de un marketplace de experiencias</a>. Es la versión de ejemplo más parecida a Hunty: reservas, plazas y una base de datos que vuelve.</p>
+  </div>
+</section>
 
-  <!-- PRUEBAS -->
-  <section id="pruebas">
-    <h2><span class="n">10</span>Plan de pruebas</h2>
-    <p class="muted">Formato experimento. Los umbrales son una propuesta que se valida con vuestros datos de partida en la semana 1. Las fechas suponen el arranque el lunes 2-nov.</p>
-    <div class="tw wide"><table>
-      <thead><tr><th>#</th><th>Hipótesis</th><th>Métrica de éxito</th><th>Umbral de corte (propuesta)</th><th>Decisión</th></tr></thead>
-      <tbody>
-        <tr><td>H0</td><td>La captura con valor en la web («avísame», alertas, calendario filtrable) recoge a una parte de quien hoy se va, sin quitar reservas directas.</td><td>% de visitas que dejan WhatsApp y reservas directas por visita</td><td>Se queda si captura el 2 % o más de las visitas con intención y la tasa de reserva directa no baja más de un 5 % (relativo).</td><td>23-nov</td></tr>
-        <tr><td>H1</td><td>Para ticket alto (recechos de trofeo e internacional), un formulario que cualifica con «cuándo» y presupuesto, con respuesta al minuto, trae reservas más baratas que el tráfico a la web.</td><td>Coste por reserva y € de comisión por € invertido, frente a la web con el mismo presupuesto y público</td><td>Se apaga si no mejora en al menos un 15 % el coste por reserva en 4 semanas, o si la comisión por euro invertido queda por debajo de la web.</td><td>30-nov</td></tr>
-        <tr><td>H2</td><td>Raquel y la agenda por WhatsApp reducen «no contesta».</td><td>% con conversación en 48 h y % de llamadas presentadas</td><td>Una mitad de los contactos con Raquel y otra sin ella. Se queda si mejora en 25 % o más (relativo) con 200 contactos por grupo.</td><td>30-nov</td></tr>
-        <tr><td>H3</td><td>El aviso por temporada recupera a los «más adelante».</td><td>% de reactivados con conversación y reservas</td><td>Primera ventana: monterías de enero y febrero sobre la base de cuentas sin reserva. Referencia a validar: 8-15 % con conversación.</td><td>15-ene</td></tr>
-        <tr><td>H4</td><td>Un anuncio que filtra (fecha y precio) trae reservas más baratas que uno de inspiración.</td><td>Coste por reserva y € de comisión por € invertido</td><td>Mismo presupuesto y público. Decide la comisión, no el coste por clic. Mínimo de 3 semanas.</td><td>30-nov</td></tr>
-        <tr><td>H5</td><td>Proponer 2-3 cacerías concretas al minuto convierte mejor que un «¿en qué te ayudo?».</td><td>% que abre una ficha o pide llamada en 24 h</td><td>Reparto al 50 %. Se queda si sube 20 % o más (relativo).</td><td>23-nov</td></tr>
-      </tbody>
-    </table></div>
-  </section>
+<!-- 10 · PRUEBAS -->
+<section class="sec" id="pruebas">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>10</b><span></span></div><h2 class="t">Plan de pruebas</h2>
+      <p class="lede">Formato experimento. Los umbrales son una propuesta que se valida con vuestros datos de partida en la semana 1. Las fechas suponen el arranque el lunes 2-nov.</p></div>
+    <div class="dec" aria-label="Fechas de decisión">
+      <div><b>2-nov</b>Arranque</div>
+      <div><b>23-nov</b>Deciden H0 y H5</div>
+      <div><b>30-nov</b>Deciden H1, H2 y H4</div>
+      <div><b>15-ene</b>Decide H3</div>
+    </div>
+    <div class="hs">
+      <article class="h"><div class="hh"><span class="id">H0</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 23-nov</span></div><p class="hy">La captura con valor en la web («avísame», alertas, calendario filtrable) recoge a una parte de quien hoy se va, sin quitar reservas directas.</p><dl><div><dt>Métrica de éxito</dt><dd>% de visitas que dejan WhatsApp y reservas directas por visita</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Se queda si captura el 2 % o más de las visitas con intención y la tasa de reserva directa no baja más de un 5 % (relativo).</dd></div></dl></article>
+      <article class="h"><div class="hh"><span class="id">H1</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 30-nov</span></div><p class="hy">Para ticket alto (recechos de trofeo e internacional), un formulario que cualifica con «cuándo» y presupuesto, con respuesta al minuto, trae reservas más baratas que el tráfico a la web.</p><dl><div><dt>Métrica de éxito</dt><dd>Coste por reserva y € de comisión por € invertido, frente a la web con el mismo presupuesto y público</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Se apaga si no mejora en al menos un 15 % el coste por reserva en 4 semanas, o si la comisión por euro invertido queda por debajo de la web.</dd></div></dl></article>
+      <article class="h"><div class="hh"><span class="id">H2</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 30-nov</span></div><p class="hy">Raquel y la agenda por WhatsApp reducen «no contesta».</p><dl><div><dt>Métrica de éxito</dt><dd>% con conversación en 48 h y % de llamadas presentadas</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Una mitad de los contactos con Raquel y otra sin ella. Se queda si mejora en 25 % o más (relativo) con 200 contactos por grupo.</dd></div></dl></article>
+      <article class="h"><div class="hh"><span class="id">H3</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 15-ene</span></div><p class="hy">El aviso por temporada recupera a los «más adelante».</p><dl><div><dt>Métrica de éxito</dt><dd>% de reactivados con conversación y reservas</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Primera ventana: monterías de enero y febrero sobre la base de cuentas sin reserva. Referencia a validar: 8-15 % con conversación.</dd></div></dl></article>
+      <article class="h"><div class="hh"><span class="id">H4</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 30-nov</span></div><p class="hy">Un anuncio que filtra (fecha y precio) trae reservas más baratas que uno de inspiración.</p><dl><div><dt>Métrica de éxito</dt><dd>Coste por reserva y € de comisión por € invertido</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Mismo presupuesto y público. Decide la comisión, no el coste por clic. Mínimo de 3 semanas.</dd></div></dl></article>
+      <article class="h"><div class="hh"><span class="id">H5</span><span class="dt"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg>Decisión 23-nov</span></div><p class="hy">Proponer 2-3 cacerías concretas al minuto convierte mejor que un «¿en qué te ayudo?».</p><dl><div><dt>Métrica de éxito</dt><dd>% que abre una ficha o pide llamada en 24 h</dd></div><div><dt>Umbral de corte (propuesta)</dt><dd class="cut">Reparto al 50 %. Se queda si sube 20 % o más (relativo).</dd></div></dl></article>
+    </div>
+  </div>
+</section>
 
-  <!-- PREVISIÓN -->
-  <section id="prevision">
-    <h2><span class="n">11</span>Previsión ilustrativa</h2>
-    <p class="warn"><b>No es una promesa.</b> Los valores de partida son de ejemplo, no son vuestros. Poned los vuestros y la tabla calcula una horquilla con tres escenarios de mejora relativa. Las cifras reales se confirman en las 3 primeras semanas con el grupo de control.</p>
-    <div class="calc" id="calc">
+<!-- 11 · PREVISIÓN -->
+<section class="sec alt" id="prevision">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>11</b><span></span></div><h2 class="t">Previsión ilustrativa</h2></div>
+    <div class="callout warn"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><p><b>No es una promesa.</b> Los valores de partida son de ejemplo, no son vuestros. Poned los vuestros y la tabla calcula una horquilla con tres escenarios de mejora relativa. Las cifras reales se confirman en las 3 primeras semanas con el grupo de control.</p></div>
+    <div class="calc keep" id="calc">
       <div class="ins">
         <label>Contactos al mes<input type="number" id="c-n" value="600" min="0" step="10" inputmode="numeric"></label>
         <label>% que llega a hablar con un comercial<input type="number" id="c-h" value="40" min="0" max="100" step="1" inputmode="numeric"></label>
         <label>% de esos que reserva<input type="number" id="c-r" value="10" min="0" max="100" step="1" inputmode="numeric"></label>
         <label>Comisión media por reserva (€)<input type="number" id="c-e" value="150" min="0" step="10" inputmode="numeric"></label>
       </div>
-      <div class="tw" style="border:0;padding:0"><table>
+      <div class="tw" style="box-shadow:none"><table>
         <thead><tr><th>Escenario</th><th>Supuesto</th><th class="num">Reservas/mes</th><th class="num">Comisión/mes</th></tr></thead>
         <tbody id="c-t"></tbody>
       </table></div>
       <p class="src">Supuestos: prudente = +10 % de contactos que hablan con un comercial y un 1 % de la base «más adelante» reactivada al mes; medio = +20 % y 2 %; alto = +30 % y 3 %. La base «más adelante» se estima como el 40 % de los contactos del mes. Todo son supuestos de ejemplo que se sustituyen por vuestros datos.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GOBIERNO -->
-  <section id="gobierno">
-    <h2><span class="n">12</span>Gobierno y límites</h2>
-    <div class="tw wide"><table>
-      <thead><tr><th>Tema</th><th>Regla</th></tr></thead>
-      <tbody>
-        <tr><td>Textos</td><td>Hunty aprueba cada mensaje de WhatsApp, cada email y el guion de Raquel antes de que salga. Cada cambio queda con versión y fecha.</td></tr>
-        <tr><td>Puntuación</td><td>Pesos visibles. Los cambios los aprueba Hunty y se recalibran cada mes contra las reservas.</td></tr>
-        <tr><td>Acceso</td><td>Todo queda en la ficha: cada mensaje, la grabación de cada llamada y su transcripción. Acceso completo para quien decidáis.</td></tr>
-        <tr><td>Datos</td><td>Son vuestros. Se exportan en cualquier momento (CSV) y se borran al terminar si así lo pedís.</td></tr>
-        <tr><td>Traspaso</td><td>En cuanto un comercial escribe o llama, el agente se calla con ese contacto. El contacto pasa al comercial si es A, si pide hablar con una persona, si pregunta por disponibilidad o condiciones que no están en la ficha, o si hay una queja.</td></tr>
-        <tr><td>Lo que el agente no hace</td><td>No confirma plazas ni cierra precios fuera de lo publicado. No promete resultados de caza. No habla de armas ni de normativa más allá de remitir a licencias.</td></tr>
-        <tr><td>Horario</td><td>Mensajes automáticos solo de 8:00 a 21:30.</td></tr>
-        <tr><td>A quién</td><td>Raquel solo llama a quien dejó su teléfono y pidió información, y se presenta como asistente de Hunty. Sin envíos masivos: las alertas van por perfil, una a la semana como máximo, y la baja se pide con un mensaje.</td></tr>
-      </tbody>
-    </table></div>
-  </section>
+<!-- 12 · GOBIERNO -->
+<section class="sec" id="gobierno">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>12</b><span></span></div><h2 class="t">Gobierno y límites</h2></div>
+    <div class="rules">
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><h3>Textos</h3><p>Hunty aprueba cada mensaje de WhatsApp, cada email y el guion de Raquel antes de que salga. Cada cambio queda con versión y fecha.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg></span><h3>Puntuación</h3><p>Pesos visibles. Los cambios los aprueba Hunty y se recalibran cada mes contra las reservas.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span><h3>Acceso</h3><p>Todo queda en la ficha: cada mensaje, la grabación de cada llamada y su transcripción. Acceso completo para quien decidáis.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Datos</h3><p>Son vuestros. Se exportan en cualquier momento (CSV) y se borran al terminar si así lo pedís.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><h3>Traspaso</h3><p>En cuanto un comercial escribe o llama, el agente se calla con ese contacto. El contacto pasa al comercial si es A, si pide hablar con una persona, si pregunta por disponibilidad o condiciones que no están en la ficha, o si hay una queja.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></span><h3>Lo que el agente no hace</h3><p>No confirma plazas ni cierra precios fuera de lo publicado. No promete resultados de caza. No habla de armas ni de normativa más allá de remitir a licencias.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>Horario</h3><p>Mensajes automáticos solo de 8:00 a 21:30.</p></div>
+      <div class="rule"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><h3>A quién</h3><p>Raquel solo llama a quien dejó su teléfono y pidió información, y se presenta como asistente de Hunty. Sin envíos masivos: las alertas van por perfil, una a la semana como máximo, y la baja se pide con un mensaje.</p></div>
+    </div>
+  </div>
+</section>
 
-  <!-- CALENDARIO -->
-  <section id="calendario">
-    <h2><span class="n">13</span>Calendario</h2>
-    <div class="tw wide"><table>
+<!-- 13 · CALENDARIO -->
+<section class="sec alt" id="calendario">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>13</b><span></span></div><h2 class="t">Calendario</h2>
+      <p class="lede">Implantación por semanas, con arranque el lunes 2-nov, y la temporada de caza que coincide con cada paso.</p></div>
+    <div class="dgbox keep">
+      <p class="swipe noprint"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Desliza para ver todas las semanas</p>
+      <div class="gantt"><svg class="dg" viewBox="0 0 1000 594" role="img" aria-labelledby="dgg-t"><title id="dgg-t">Calendario de implantación por semanas, con decisiones de las pruebas y temporada de caza</title><path d="M250 0V586" class="gl"/><text x="262" y="20" class="gh1" text-anchor="start">Hoy</text><text x="262" y="38" class="gh2" text-anchor="start">16-oct</text><path d="M375 0V586" class="gl"/><text x="387" y="20" class="gh1" text-anchor="start">Semana 1</text><text x="387" y="38" class="gh2" text-anchor="start">2-nov</text><path d="M500 0V586" class="gl"/><text x="512" y="20" class="gh1" text-anchor="start">Semana 2</text><text x="512" y="38" class="gh2" text-anchor="start">9-nov</text><path d="M625 0V586" class="gl"/><text x="637" y="20" class="gh1" text-anchor="start">Semana 3</text><text x="637" y="38" class="gh2" text-anchor="start">16-nov</text><path d="M750 0V586" class="gl"/><text x="762" y="20" class="gh1" text-anchor="start">Semana 4</text><text x="762" y="38" class="gh2" text-anchor="start">23-nov</text><path d="M875 0V586" class="gl"/><text x="887" y="20" class="gh1" text-anchor="start">Mes 2-3</text><path d="M0 46H1000" class="gl"/><text x="0" y="72" class="rl" text-anchor="start">Los tres arreglos de anuncios</text><rect x="256" y="59" width="113" height="16" rx="5" class="bgf"/><text x="0" y="102" class="rl" text-anchor="start">Accesos y punto de partida</text><rect x="381" y="89" width="113" height="16" rx="5" class="bs"/><text x="0" y="132" class="rl" text-anchor="start">Vuestra puntuación y textos</text><rect x="381" y="119" width="113" height="16" rx="5" class="bs"/><text x="0" y="162" class="rt" text-anchor="start">M8</text><text x="34" y="162" class="rl" text-anchor="start">Medición de reserva por anuncio</text><rect x="381" y="149" width="113" height="16" rx="5" class="bs"/><rect x="498" y="149" width="496" height="16" rx="5" class="bc"/><text x="0" y="192" class="rt" text-anchor="start">M2</text><text x="34" y="192" class="rl" text-anchor="start">Captura con valor (monterías)</text><rect x="506" y="179" width="113" height="16" rx="5" class="bs"/><rect x="623" y="179" width="371" height="16" rx="5" class="bc"/><text x="0" y="222" class="rt" text-anchor="start">M3</text><text x="34" y="222" class="rl" text-anchor="start">WhatsApp del asesor al minuto</text><rect x="506" y="209" width="113" height="16" rx="5" class="bs"/><rect x="623" y="209" width="371" height="16" rx="5" class="bc"/><text x="0" y="252" class="rt" text-anchor="start">M5</text><text x="34" y="252" class="rl" text-anchor="start">Ficha del comercial</text><rect x="506" y="239" width="113" height="16" rx="5" class="bs"/><rect x="623" y="239" width="371" height="16" rx="5" class="bc"/><text x="0" y="282" class="rt" text-anchor="start">M4</text><text x="34" y="282" class="rl" text-anchor="start">Raquel, con grupo de control</text><rect x="631" y="269" width="113" height="16" rx="5" class="bs"/><rect x="748" y="269" width="246" height="16" rx="5" class="bc"/><text x="0" y="312" class="rt" text-anchor="start">M7</text><text x="34" y="312" class="rl" text-anchor="start">Recordatorios y seguimiento</text><rect x="631" y="299" width="113" height="16" rx="5" class="bs"/><rect x="748" y="299" width="246" height="16" rx="5" class="bc"/><text x="0" y="342" class="rt" text-anchor="start">H4</text><text x="34" y="342" class="rl" text-anchor="start">Anuncios que filtran vs. actuales</text><rect x="631" y="329" width="113" height="16" rx="5" class="bs"/><rect x="748" y="329" width="121" height="16" rx="5" class="bc"/><text x="0" y="372" class="rt" text-anchor="start">M6</text><text x="34" y="372" class="rl" text-anchor="start">«Más adelante» y reactivación</text><rect x="756" y="359" width="113" height="16" rx="5" class="bs"/><rect x="873" y="359" width="121" height="16" rx="5" class="bc"/><text x="0" y="402" class="rt" text-anchor="start">M8</text><text x="34" y="402" class="rl" text-anchor="start">Panel del daily</text><rect x="756" y="389" width="113" height="16" rx="5" class="bs"/><rect x="873" y="389" width="121" height="16" rx="5" class="bc"/><text x="0" y="432" class="rl" text-anchor="start">Recechos de primavera · Prime</text><rect x="881" y="419" width="113" height="16" rx="5" class="bs"/><text x="0" y="462" class="rt" text-anchor="start">M9</text><text x="34" y="462" class="rl" text-anchor="start">Hunty Pro (opcional)</text><rect x="881" y="449" width="113" height="16" rx="5" class="bo"/><text x="0" y="506" class="rl" text-anchor="start" style="font-weight:650">Decisiones de las pruebas</text><rect x="757" y="486" width="14" height="14" transform="rotate(45 764 493)" class="ms"/><text x="764" y="518" class="mst" text-anchor="middle">23-nov</text><text x="764" y="532" class="mst2" text-anchor="middle">H0 · H5</text><rect x="868" y="486" width="14" height="14" transform="rotate(45 875 493)" class="ms"/><text x="875" y="518" class="mst" text-anchor="middle">30-nov</text><text x="875" y="532" class="mst2" text-anchor="middle">H1 · H2 · H4</text><rect x="960" y="486" width="14" height="14" transform="rotate(45 967 493)" class="ms"/><text x="967" y="518" class="mst" text-anchor="middle">15-ene</text><text x="967" y="532" class="mst2" text-anchor="middle">H3</text><text x="0" y="568" class="rl" text-anchor="start" style="font-weight:650">Temporada</text><rect x="254" y="542" width="117" height="40" rx="8" class="sea"/><text x="262" y="559" class="seat" text-anchor="start" style="font-weight:600">Monterías</text><text x="262" y="574" class="seat" text-anchor="start">en marcha</text><rect x="379" y="542" width="117" height="40" rx="8" class="sea"/><text x="387" y="559" class="seat" text-anchor="start" style="font-weight:600">Monterías de</text><text x="387" y="574" class="seat" text-anchor="start">noviembre</text><rect x="504" y="542" width="117" height="40" rx="8" class="sea"/><text x="512" y="559" class="seat" text-anchor="start" style="font-weight:600">Monterías de</text><text x="512" y="574" class="seat" text-anchor="start">diciembre y enero</text><rect x="629" y="542" width="117" height="40" rx="8" class="sea"/><text x="637" y="559" class="seat" text-anchor="start" style="font-weight:600">Celo del</text><text x="637" y="574" class="seat" text-anchor="start">macho montés</text><rect x="754" y="542" width="117" height="40" rx="8" class="sea"/><text x="762" y="559" class="seat" text-anchor="start" style="font-weight:600">—</text><rect x="879" y="542" width="117" height="40" rx="8" class="sea"/><text x="887" y="559" class="seat" text-anchor="start" style="font-weight:600">Corzo</text><text x="887" y="574" class="seat" text-anchor="start">desde abril</text></svg></div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Arranque</span><span><i style="background:var(--accent);opacity:.25"></i>En marcha</span><span><i style="background:#C9860A"></i>Arreglos de hoy</span><span><i style="background:var(--earth-soft);border:1px solid var(--earth)"></i>Temporada</span><span><i style="background:var(--f700);transform:rotate(45deg) scale(.75)"></i>Decisión de una prueba</span></div>
+    </div>
+    <div class="tw stack cal"><table>
       <thead><tr><th>Cuándo</th><th>Qué</th><th>Temporada</th></tr></thead>
       <tbody>
-        <tr><td>Hoy</td><td>Los tres arreglos de los anuncios activos.</td><td>Monterías en marcha</td></tr>
-        <tr><td>Semana 1</td><td>Accesos, punto de partida de cada métrica, vuestra puntuación, medición de reserva por anuncio y textos aprobados.</td><td>Monterías de noviembre</td></tr>
-        <tr><td>Semana 2</td><td>Captura con valor en la página de monterías («avísame» y calendario filtrable), WhatsApp del asesor atendido al minuto con cacerías del catálogo y ficha del comercial.</td><td>Monterías de diciembre y enero</td></tr>
-        <tr><td>Semana 3</td><td>Raquel (con grupo de control), recordatorios y seguimiento de reservas. Anuncios que filtran frente a los actuales (H4).</td><td>Celo del macho montés</td></tr>
-        <tr><td>Semana 4</td><td>«Más adelante» con temporadas y reactivación de la base de cuentas sin reserva para monterías de enero y febrero. Panel del daily.</td><td>—</td></tr>
-        <tr><td>Mes 2-3</td><td>Recechos de primavera: avisos de corzo en febrero y marzo para abril. Prime como siguiente paso del «más adelante». Hunty Pro (opcional).</td><td>Corzo desde abril</td></tr>
+        <tr><td><b>Hoy</b></td><td>Los tres arreglos de los anuncios activos.</td><td>Monterías en marcha</td></tr>
+        <tr><td><b>Semana 1</b></td><td>Accesos, punto de partida de cada métrica, vuestra puntuación, medición de reserva por anuncio y textos aprobados.</td><td>Monterías de noviembre</td></tr>
+        <tr><td><b>Semana 2</b></td><td>Captura con valor en la página de monterías («avísame» y calendario filtrable), WhatsApp del asesor atendido al minuto con cacerías del catálogo y ficha del comercial.</td><td>Monterías de diciembre y enero</td></tr>
+        <tr><td><b>Semana 3</b></td><td>Raquel (con grupo de control), recordatorios y seguimiento de reservas. Anuncios que filtran frente a los actuales (H4).</td><td>Celo del macho montés</td></tr>
+        <tr><td><b>Semana 4</b></td><td>«Más adelante» con temporadas y reactivación de la base de cuentas sin reserva para monterías de enero y febrero. Panel del daily.</td><td>—</td></tr>
+        <tr><td><b>Mes 2-3</b></td><td>Recechos de primavera: avisos de corzo en febrero y marzo para abril. Prime como siguiente paso del «más adelante». Hunty Pro (opcional).</td><td>Corzo desde abril</td></tr>
       </tbody>
     </table></div>
-  </section>
+  </div>
+</section>
 
-  <!-- NECESITAMOS -->
-  <section id="necesitamos">
-    <h2><span class="n">14</span>Lo que necesito de vosotros</h2>
-    <ul>
-      <li>Acceso a Meta Business (anuncios y píxel) y lectura de GA4 y Mixpanel.</li>
-      <li>La herramienta donde viven hoy los contactos, con vuestra puntuación actual y sus reglas.</li>
-      <li>El número de WhatsApp del asesor y cómo se reparten hoy las conversaciones entre comerciales.</li>
-      <li>La agenda de los comerciales: franjas y quién lleva qué modalidad o zona.</li>
-      <li>Acceso al catálogo de cacerías (exportación o API), para que el agente proponga cacerías reales y con plazas.</li>
-      <li>Qué no se puede decir: precios cerrados, plazas, condiciones de Prime y de reserva.</li>
-      <li>La base de cuentas sin reserva y cualquier lista de «más adelante», con la fecha de alta.</li>
+<!-- 14 · NECESITAMOS -->
+<section class="sec" id="necesitamos">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>14</b><span></span></div><h2 class="t">Lo que necesito de vosotros</h2></div>
+    <ul class="need">
+      <li><svg class="i" aria-hidden="true"><use href="#i-key"/></svg><span>Acceso a Meta Business (anuncios y píxel) y lectura de GA4 y Mixpanel.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg><span>La herramienta donde viven hoy los contactos, con vuestra puntuación actual y sus reglas.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg><span>El número de WhatsApp del asesor y cómo se reparten hoy las conversaciones entre comerciales.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg><span>La agenda de los comerciales: franjas y quién lleva qué modalidad o zona.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-layers"/></svg><span>Acceso al catálogo de cacerías (exportación o API), para que el agente proponga cacerías reales y con plazas.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><span>Qué no se puede decir: precios cerrados, plazas, condiciones de Prime y de reserva.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-hourglass"/></svg><span>La base de cuentas sin reserva y cualquier lista de «más adelante», con la fecha de alta.</span></li>
     </ul>
-  </section>
+  </div>
+</section>
 
-  <!-- CÓMO -->
-  <section id="como">
-    <h2><span class="n">15</span>Cómo podemos trabajar</h2>
+<!-- 15 · CÓMO -->
+<section class="sec alt" id="como">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>15</b><span></span></div><h2 class="t">Cómo podemos trabajar</h2></div>
     <div class="prices">
-      <div class="card"><h3>Piloto de monterías · 6 semanas</h3><p class="small muted">M2, M3, M4 y M5 sobre la campaña de monterías, con grupo de control y panel. Al final se decide con datos.</p><p class="price">[____] € + IVA</p></div>
-      <div class="card"><h3>Lo opero yo</h3><p class="small muted">Implantación de los módulos elegidos y gestión mensual: anuncios, test, agentes, seguimiento, panel y revisión semanal con vosotros.</p><p class="price">[____] € + IVA <span class="small muted">implantación</span></p><p class="price">[____] € + IVA <span class="small muted">al mes</span></p></div>
-      <div class="card"><h3>Lo monto y os lo dejo</h3><p class="small muted">Lo construyo, formo a vuestro equipo y queda en casa, con un mes de acompañamiento.</p><p class="price">[____] € + IVA</p></div>
+      <div class="price-c"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span><h3>Piloto de monterías · 6 semanas</h3><p class="small muted">M2, M3, M4 y M5 sobre la campaña de monterías, con grupo de control y panel. Al final se decide con datos.</p><p class="price">[____] € <span>+ IVA</span></p></div>
+      <div class="price-c"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-route"/></svg></span><h3>Lo opero yo</h3><p class="small muted">Implantación de los módulos elegidos y gestión mensual: anuncios, test, agentes, seguimiento, panel y revisión semanal con vosotros.</p><p class="price">[____] € <span>+ IVA implantación</span></p><p class="price">[____] € <span>+ IVA al mes</span></p></div>
+      <div class="price-c"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-key"/></svg></span><h3>Lo monto y os lo dejo</h3><p class="small muted">Lo construyo, formo a vuestro equipo y queda en casa, con un mes de acompañamiento.</p><p class="price">[____] € <span>+ IVA</span></p></div>
     </div>
     <p class="small muted">Sin permanencia. La inversión en anuncios la pagáis directamente a Meta.</p>
-  </section>
+  </div>
+</section>
 
-  <div class="foot">
-    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Maikel Echevarría · Qualivo</b><span>maikel@qualivo.io · +34 647 11 84 91 · <a href="https://qualivo.io">qualivo.io</a></span></div>
     <p>Preparado el 16 de octubre de 2026 para Hunty Ibérica. Fuentes: hunty.es (home, /pro, /club/prime, /licencias, /calendario-de-monterias, fichas de cacería), Biblioteca de anuncios de Meta y Centro de Transparencia de Google, consultados el 16-oct. Los datos de la demo, del panel y de la previsión son de ejemplo.</p>
   </div>
-</div>
+</footer>
 
 <script>
 (function () {
+  // etiquetas para las tablas apiladas en móvil
+  document.querySelectorAll('.stack').forEach(function (w) {
+    var h = [].map.call(w.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+    w.querySelectorAll('tbody tr').forEach(function (tr) { [].forEach.call(tr.children, function (td, i) { if (h[i] && i > 0) td.setAttribute('data-label', h[i]); }); });
+  });
   var f = function (v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
   var S = [['Hoy (vuestros datos)', 'sin cambios', 0, 0], ['Prudente', '+10 % hablan · 1 % reactivados', .10, .01], ['Medio', '+20 % hablan · 2 % reactivados', .20, .02], ['Alto', '+30 % hablan · 3 % reactivados', .30, .03]];
   function calc() {
@@ -510,7 +843,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
     S.forEach(function (s, i) {
       var res = n * Math.min(h * (1 + s[2]), 1) * r + (n * 0.4) * s[3] * r;
       var tr = document.createElement('tr');
-      var extra = i ? ' <span class="muted">(+' + f(res - base) + ')</span>' : '';
+      var extra = i ? ' <span class="muted" style="font-size:13px;font-weight:500">(+' + f(res - base) + ')</span>' : '';
       tr.innerHTML = '<td><b></b></td><td class="small"></td><td class="num">' + f(res) + extra + '</td><td class="num">' + f(res * e) + ' €</td>';
       tr.cells[0].firstChild.textContent = s[0]; tr.cells[1].textContent = s[1];
       t.appendChild(tr);

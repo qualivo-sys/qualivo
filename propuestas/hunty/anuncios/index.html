@@ -7,192 +7,266 @@
 <title>Hunty · anuncios de ejemplo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
 <style>
-:root{--g:#2c7c24;--g-dk:#1a4a15;--g-soft:#f3fbf2;--ink:#14210f;--muted:#56654f;--line:#dfe8dc;--soft:#f4f7f3}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#fff;color:var(--ink);font:16.5px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:hidden}
-.topnav{background:var(--g-dk);color:#fff}
-.topnav .in{max-width:1240px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.topnav img{height:20px;width:auto;display:block;filter:brightness(0) invert(1)}
-.topnav .by{font-size:12.5px;opacity:.8;margin-right:auto}
-.topnav a{color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.3)}
-.topnav a[aria-current="page"]{background:#fff;color:var(--g-dk);border-color:#fff}
-.maqueta{background:#111;color:#cfcfcf;font-size:12.5px;text-align:center;padding:6px 12px}
-.wrap{width:min(1240px,100% - 32px);margin-inline:auto;padding:30px 0 70px}
-img.logo{height:40px;width:auto}
-h1{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.1;margin:18px 0 10px;letter-spacing:-.015em}
-.lead{color:var(--muted);font-size:18px;max-width:74ch;margin:0}
-nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 0}
-nav.jump a{color:inherit;text-decoration:none;font-weight:700;border:1.5px solid var(--line);border-radius:99px;padding:7px 16px;font-size:15px}
-nav.jump a:hover{border-color:var(--g);color:var(--g)}
-.plan{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
-.plan div{background:var(--soft);border-radius:16px;padding:16px 18px}
-.plan b{display:block;font-size:17px;margin-bottom:4px}
-.plan p{margin:0;color:var(--muted);font-size:15px}
-.angle{border-top:1px solid var(--line);margin-top:44px;padding-top:28px;scroll-margin-top:10px}
-.sh h2{font-size:30px;font-weight:800;margin:0;letter-spacing:-.01em}
-.sh p{margin:4px 0 0;color:var(--muted)}
-.ads{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr) minmax(0,1.6fr);gap:18px;margin-top:18px;align-items:start}
-figure{margin:0}
-figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);background:#000}
-figcaption{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.35}
-figcaption b{display:block;color:var(--ink);font-size:15px}
-.copy{display:grid;gap:4px;align-content:start}
-.k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--g);margin:8px 0 2px}
-pre{white-space:pre-wrap;font:15px/1.5 "DM Sans",sans-serif;background:var(--soft);border-radius:10px;padding:10px 12px;margin:0}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-h3{font-size:24px;font-weight:800;margin:50px 0 10px}
-table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.tw{overflow-x:auto}
-.pend{background:var(--soft);border-radius:16px;padding:16px 22px}
-.pend ul{margin:0;padding-left:20px;display:grid;gap:6px}
-.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:40px;padding-top:16px;display:grid;gap:4px}
-a{color:var(--g)}
-a:focus-visible{outline:3px solid var(--g);outline-offset:2px}
-@media (max-width:1000px){.ads{grid-template-columns:1fr 1fr}.ads .copy{grid-column:1/-1}.plan{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.plan,.meta{grid-template-columns:1fr}.ads{grid-template-columns:1fr 1fr;gap:10px}}
+/* Galería de anuncios de ejemplo para Hunty, simulando el feed y las stories de Instagram a tamaño real. */
+.ahero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.ahero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,33,9,.97) 0%,rgba(12,33,9,.85) 55%,rgba(12,33,9,.5) 100%),url(../assets/rececho.jpg) center 40%/cover}
+.ahero .wrap{padding-block:60px 48px;display:grid;gap:14px}
+.ahero .eyebrow{color:#BFE3B6}
+.ahero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(32px,4.8vw,58px);line-height:1.05;letter-spacing:-.02em;max-width:18ch}
+.ahero .lead{color:rgba(255,255,255,.84);font-size:18px;max-width:72ch}
+.ahero .maq{font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,.6);letter-spacing:.03em}
+nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+nav.jump a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);border-radius:99px;padding:7px 14px;transition:background .2s}
+nav.jump a:hover{background:rgba(255,255,255,.16)}
+.plan4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.plan4 a{display:grid;gap:8px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.plan4 a:hover{transform:translateY(-2px);border-color:var(--accent)}
+.plan4 .lt{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--f700);color:#fff;font-family:var(--serif);font-weight:600;font-size:18px}
+.plan4 b{font-size:16px}
+.plan4 p{color:var(--muted);font-size:14.5px;line-height:1.55}
+@media (max-width:980px){.plan4{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plan4{grid-template-columns:1fr}}
+/* ángulo */
+.angle{scroll-margin-top:70px}
+.ah{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start}
+.ah .lt{grid-row:span 2;display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--f700);color:#fff;font-family:var(--serif);font-weight:600;font-size:30px}
+.ah .meta{display:grid;gap:6px;font-size:14.5px;color:var(--muted);max-width:90ch}
+.ah .meta b{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-right:6px}
+@media (max-width:560px){.ah{grid-template-columns:1fr}.ah .lt{grid-row:auto;width:44px;height:44px;font-size:24px}}
+.ads{display:grid;grid-template-columns:380px 320px minmax(0,1fr);gap:28px;align-items:start;margin-top:8px}
+@media (max-width:1180px){.ads{grid-template-columns:380px 320px}.ads .copy{grid-column:1/-1}}
+@media (max-width:760px){.ads{grid-template-columns:minmax(0,1fr);justify-items:center}.ads .copy{justify-self:stretch}}
+figure{margin:0;min-width:0}
+.ads > figure{width:100%;display:grid;justify-items:center}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px;text-align:center;line-height:1.4}
+figcaption b{color:var(--ink);font-weight:650}
+/* post de feed */
+.ig{width:min(380px,100%);background:#fff;color:#111;border-radius:14px;overflow:hidden;border:1px solid #DBDBDB;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/74% no-repeat;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #2C7C24}
+.ig .h b{font-size:13.5px;display:block;line-height:1.2}
+.ig .h small{font-size:11.5px;color:#737373}
+.ig .h .dots{margin-left:auto;font-weight:700;color:#262626;letter-spacing:1px}
+.ig img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#111}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-bottom:1px solid #EFEFEF;font-size:13.5px;font-weight:600;color:#0095F6}
+.ig .cta svg{width:16px;height:16px}
+.ig .acts{display:flex;gap:14px;padding:10px 12px 4px;color:#262626}
+.ig .acts svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.ig .acts .sv{margin-left:auto}
+.ig .cap{padding:4px 12px 14px;font-size:13.5px;line-height:1.45}
+.ig .cap b{margin-right:5px}
+.ig .cap span{color:#737373}
+/* story */
+.story{position:relative;width:min(320px,100%);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.story img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story::before{content:"";position:absolute;inset:0 0 auto;height:90px;background:linear-gradient(rgba(0,0,0,.45),transparent);z-index:1}
+.story .pb{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:3px;z-index:2}
+.story .pb i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.4);overflow:hidden}
+.story .pb i:first-child::after{content:"";display:block;height:100%;width:60%;background:#fff}
+.story .sh2{position:absolute;top:18px;left:10px;right:10px;display:flex;align-items:center;gap:8px;color:#fff;z-index:2;font-size:12.5px}
+.story .sh2 .av{width:26px;height:26px;box-shadow:none}
+.story .sh2 small{opacity:.8;font-size:11px}
+.story .up{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;display:grid;justify-items:center;gap:2px;color:#fff;font-size:12.5px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.story .up span{background:#fff;color:#111;border-radius:99px;padding:6px 14px;text-shadow:none;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.story .up svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
+/* textos */
+.copy{display:grid;gap:12px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.copy .k{margin:0 0 4px}
+pre{white-space:pre-wrap;font:14.5px/1.55 var(--sans);background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:11px 13px;margin:0;color:var(--ink)}
+.meta2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.meta2 > div{min-width:0}
+.filt pre{background:var(--warn-soft);border-color:transparent}
+@media (max-width:560px){.meta2{grid-template-columns:1fr}}
+/* experimento */
+.exp td:first-child{white-space:nowrap}
+.exp .lt{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--f700);color:#fff;font-family:var(--serif);font-weight:600;margin-right:8px}
+.exp td.dec{font-weight:600}
+.proto td:first-child{width:22%}
+.pend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pend li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px}
+.pend li .i{color:#C9860A;margin-top:2px}
+@media (max-width:760px){.pend{grid-template-columns:1fr}}
+@media print{.ahero::before{background:var(--f900)}.ig,.story{box-shadow:none}.angle{break-before:page}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10.5 3 12 8 12 8s1.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M7 2v4a5 5 0 0 0 10 0V2M7 22v-4a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol></svg>
 <nav class="topnav" aria-label="Presentación">
   <div class="in">
-    <img src="../assets/logo-white.svg" alt="Hunty" width="84" height="20">
-    <span class="by">× Qualivo · 16-oct-2026</span>
-    <a href="../">Plan</a>
-    <a href="../demo/">Demo</a>
-    <a href="./" aria-current="page">Anuncios</a>
-    <a href="../landing/">Landing</a>
+    <div class="brand"><img src="../assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span><span class="by">16-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../demo/">Demo</a><a href="./" aria-current="page">Anuncios</a><a href="../landing/">Landing</a></div>
   </div>
 </nav>
-<div class="maqueta">Maqueta de Qualivo para Hunty · anuncios de ejemplo · fotos de hunty.es · precios publicados en hunty.es el 16-oct-2026</div>
-<div class="wrap">
-  <img class="logo" src="../assets/logo-green.svg" alt="Hunty" width="167" height="40">
-  <h1>Anuncios que siguen yendo a la web, pero filtran</h1>
-  <p class="lead">Ocho piezas: tres ángulos para cazadores y uno para organizadores, cada uno en feed (4:5) y story (9:16). Mismo estilo que vuestros anuncios actuales, con un cambio: cada mensaje dice para quién es (fecha, precio o momento), para que llegue menos curioso y más gente con intención.</p>
-  <nav class="jump"><a href="#a">A · Montería con fecha</a><a href="#b">B · Rececho con precio</a><a href="#c">C · Más adelante</a><a href="#pro">D · Hunty Pro</a><a href="#test">Plan de prueba</a><a href="#arreglos">Arreglos de lo activo</a></nav>
 
-  <div class="plan">
-    <div><b>A · Montería con fecha</b><p>Diciembre y enero, zona y rango de precio. Pregunta: ¿un mensaje con fecha y precio trae reservas más baratas que «la cuna de la montería»?</p></div>
-    <div><b>B · Rececho con precio</b><p>Macho montés de 3.400 a 5.500 €. Pregunta: ¿enseñar el precio aparta al soñador y deja al que compra? Es el experimento H1 (web frente a test).</p></div>
-    <div><b>C · Más adelante</b><p>«Dinos cuándo y te avisamos». Pregunta: ¿cuánto cuesta una ficha con temporada y cuántas acaban en reserva cuando llega su momento?</p></div>
-    <div><b>D · Hunty Pro</b><p>Para organizadores. Pregunta: ¿una llamada de 15 minutos convierte más que el «Registrarme» de /pro?</p></div>
+<header class="ahero">
+  <div class="wrap">
+    <span class="eyebrow">Anuncios de ejemplo · Meta · feed y stories</span>
+    <h1>Anuncios que siguen yendo a la web, pero filtran</h1>
+    <p class="lead">Ocho piezas: tres ángulos para cazadores y uno para organizadores, cada uno en feed (4:5) y story (9:16). Mismo estilo que vuestros anuncios actuales, con un cambio: cada mensaje dice para quién es (fecha, precio o momento), para que llegue menos curioso y más gente con intención.</p>
+    <nav class="jump" aria-label="Ir a"><a href="#a">A · Montería con fecha</a><a href="#b">B · Rececho con precio</a><a href="#c">C · Más adelante</a><a href="#pro">D · Hunty Pro</a><a href="#test">Plan de prueba</a><a href="#arreglos">Arreglos de lo activo</a></nav>
+    <p class="maq">Maqueta de Qualivo para Hunty · anuncios de ejemplo · fotos de hunty.es · precios publicados en hunty.es el 16-oct-2026</p>
   </div>
+</header>
 
-  <section class="angle" id="a">
-    <div class="sh"><h2>A · Montería con fecha y precio</h2><p>Destino: <a href="../landing/">página de monterías</a> con filtro de provincia y precio y «avísame si sale» · Público: hombres de 30 a 65 años en España, intereses de caza mayor, y públicos similares a quien ya reservó montería</p></div>
+<section class="sec" style="border-top:0;padding-bottom:24px">
+  <div class="wrap">
+    <div class="plan4">
+      <a href="#a"><span class="lt">A</span><b>Montería con fecha</b><p>Diciembre y enero, zona y rango de precio. Pregunta: ¿un mensaje con fecha y precio trae reservas más baratas que «la cuna de la montería»?</p></a>
+      <a href="#b"><span class="lt">B</span><b>Rececho con precio</b><p>Macho montés de 3.400 a 5.500 €. Pregunta: ¿enseñar el precio aparta al soñador y deja al que compra? Es el experimento H1 (web frente a test).</p></a>
+      <a href="#c"><span class="lt">C</span><b>Más adelante</b><p>«Dinos cuándo y te avisamos». Pregunta: ¿cuánto cuesta una ficha con temporada y cuántas acaban en reserva cuando llega su momento?</p></a>
+      <a href="#pro"><span class="lt">D</span><b>Hunty Pro</b><p>Para organizadores. Pregunta: ¿una llamada de 15 minutos convierte más que el «Registrarme» de /pro?</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle alt" id="a">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">A</span><h2 class="t">A · Montería con fecha y precio</h2><div class="meta"><span><b>Destino</b><a href="../landing/">página de monterías</a> con filtro de provincia y precio y «avísame si sale»</span><span><b>Público</b>hombres de 30 a 65 años en España, intereses de caza mayor, y públicos similares a quien ya reservó montería</span></div></div>
     <div class="ads">
-      <figure><img src="img/a-feed.jpg" alt="Anuncio A feed: Monterías de diciembre y enero" width="1080" height="1350"><figcaption><b>Feed 4:5</b>Facebook e Instagram</figcaption></figure>
-      <figure><img src="img/a-story.jpg" alt="Anuncio A story: Monterías de diciembre y enero" width="1080" height="1920"><figcaption><b>Story / Reels 9:16</b>Historias y reels</figcaption></figure>
+      <figure><div class="ig"><div class="h"><span class="av" aria-hidden="true"></span><div><b>hunty</b><small>Publicidad</small></div><span class="dots" aria-hidden="true">···</span></div><img src="img/a-feed.jpg" alt="Anuncio A feed: Monterías de diciembre y enero" width="1080" height="1350"><div class="cta"><span>Ver más</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>hunty</b>¿Montería en diciembre o enero? Estas fechas se llenan antes que las de febrero. <span>… más</span></p></div><figcaption><b>Feed 4:5</b> · Facebook e Instagram</figcaption></figure>
+      <figure><div class="story"><img src="img/a-story.jpg" alt="Anuncio A story: Monterías de diciembre y enero" width="1080" height="1920"><div class="pb" aria-hidden="true"><i></i><i></i><i></i></div><div class="up" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg><span>Ver más</span></div></div><figcaption><b>Story / Reels 9:16</b> · Historias y reels</figcaption></figure>
       <div class="copy">
-        <p class="k">Texto principal</p>
-        <pre>¿Montería en diciembre o enero? Estas fechas se llenan antes que las de febrero.
+        <div><p class="k">Texto principal</p><pre>¿Montería en diciembre o enero? Estas fechas se llenan antes que las de febrero.
 
 En Hunty tienes las monterías de Extremadura y Castilla-La Mancha con fecha, puestos y precio a la vista: hoy, de 200 a 450 € el puesto.
 
 ✓ Mismo precio que el organizador
 ✓ Reserva tu puesto con una señal
-✓ Filtra por provincia y precio, o pide que te avisemos</pre>
-        <div class="meta"><div><p class="k">Titular</p><pre>Monterías de diciembre y enero</pre></div><div><p class="k">Descripción</p><pre>Puestos de 200 a 450 €</pre></div></div>
-        <div class="meta"><div><p class="k">Botón</p><pre>Ver más</pre></div><div><p class="k">Filtra a</p><pre>Quien no puede en esas fechas o busca menos de 200 €</pre></div></div>
+✓ Filtra por provincia y precio, o pide que te avisemos</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Monterías de diciembre y enero</pre></div><div><p class="k">Descripción</p><pre>Puestos de 200 a 450 €</pre></div></div>
+        <div class="meta2"><div><p class="k">Botón</p><pre>Ver más</pre></div><div class="filt"><p class="k">Filtra a</p><pre>Quien no puede en esas fechas o busca menos de 200 €</pre></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="angle" id="b">
-    <div class="sh"><h2>B · Rececho de trofeo con el precio a la vista</h2><p>Destino (experimento H1): mitad a la página de recechos de macho montés y mitad a un test de 7 toques con respuesta al minuto · Público: cazadores de caza mayor de 35 a 70 años, públicos similares a quien reservó recechos de más de 1.500 €</p></div>
+<section class="sec angle" id="b">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">B</span><h2 class="t">B · Rececho de trofeo con el precio a la vista</h2><div class="meta"><span><b>Destino</b>(experimento H1): mitad a la página de recechos de macho montés y mitad a un test de 7 toques con respuesta al minuto</span><span><b>Público</b>cazadores de caza mayor de 35 a 70 años, públicos similares a quien reservó recechos de más de 1.500 €</span></div></div>
     <div class="ads">
-      <figure><img src="img/b-feed.jpg" alt="Anuncio B feed: rececho de macho montés de 3.400 a 5.500 €" width="1080" height="1350"><figcaption><b>Feed 4:5</b>Facebook e Instagram</figcaption></figure>
-      <figure><img src="img/b-story.jpg" alt="Anuncio B story: rececho de macho montés" width="1080" height="1920"><figcaption><b>Story / Reels 9:16</b>Historias y reels</figcaption></figure>
+      <figure><div class="ig"><div class="h"><span class="av" aria-hidden="true"></span><div><b>hunty</b><small>Publicidad</small></div><span class="dots" aria-hidden="true">···</span></div><img src="img/b-feed.jpg" alt="Anuncio B feed: rececho de macho montés de 3.400 a 5.500 €" width="1080" height="1350"><div class="cta"><span>Más información</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>hunty</b>Rececho de macho montés en Granada y Almería, hasta abril de 2027. <span>… más</span></p></div><figcaption><b>Feed 4:5</b> · Facebook e Instagram</figcaption></figure>
+      <figure><div class="story"><img src="img/b-story.jpg" alt="Anuncio B story: rececho de macho montés de 3.400 a 5.500 €" width="1080" height="1920"><div class="pb" aria-hidden="true"><i></i><i></i><i></i></div><div class="up" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg><span>Más información</span></div></div><figcaption><b>Story / Reels 9:16</b> · Historias y reels</figcaption></figure>
       <div class="copy">
-        <p class="k">Texto principal</p>
-        <pre>Rececho de macho montés en Granada y Almería, hasta abril de 2027.
+        <div><p class="k">Texto principal</p><pre>Rececho de macho montés en Granada y Almería, hasta abril de 2027.
 
 Precios publicados hoy en Hunty:
 Bronce · 3.400 €
 Plata · 4.200 €
 Oro · 5.500 €
 
-Si estás en ese rango, dinos fechas y nivel de trofeo y en un minuto te escribimos con las opciones que encajan. Si no, mejor no pierdas el tiempo: este no es para ti.</pre>
-        <div class="meta"><div><p class="k">Titular</p><pre>Macho montés: de 3.400 a 5.500 €</pre></div><div><p class="k">Descripción</p><pre>Bronce, plata u oro</pre></div></div>
-        <div class="meta"><div><p class="k">Botón</p><pre>Más información</pre></div><div><p class="k">Filtra a</p><pre>Quien sueña con el trofeo pero no tiene ese presupuesto</pre></div></div>
+Si estás en ese rango, dinos fechas y nivel de trofeo y en un minuto te escribimos con las opciones que encajan. Si no, mejor no pierdas el tiempo: este no es para ti.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Macho montés: de 3.400 a 5.500 €</pre></div><div><p class="k">Descripción</p><pre>Bronce, plata u oro</pre></div></div>
+        <div class="meta2"><div><p class="k">Botón</p><pre>Más información</pre></div><div class="filt"><p class="k">Filtra a</p><pre>Quien sueña con el trofeo pero no tiene ese presupuesto</pre></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="angle" id="c">
-    <div class="sh"><h2>C · «Más adelante»: dinos cuándo y te avisamos</h2><p>Destino: <a href="../landing/#avisame">«avísame» de la página de monterías</a> (temporada, especie, zona y WhatsApp) · Público: visitas de los últimos 90 días sin reserva y seguidores de Hunty</p></div>
+<section class="sec angle alt" id="c">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">C</span><h2 class="t">C · «Más adelante»: dinos cuándo y te avisamos</h2><div class="meta"><span><b>Destino</b><a href="../landing/#avisame">«avísame» de la página de monterías</a> (temporada, especie, zona y WhatsApp)</span><span><b>Público</b>visitas de los últimos 90 días sin reserva y seguidores de Hunty</span></div></div>
     <div class="ads">
-      <figure><img src="img/c-feed.jpg" alt="Anuncio C feed: dinos cuándo quieres cazar" width="1080" height="1350"><figcaption><b>Feed 4:5</b>Facebook e Instagram</figcaption></figure>
-      <figure><img src="img/c-story.jpg" alt="Anuncio C story: dinos cuándo quieres cazar" width="1080" height="1920"><figcaption><b>Story / Reels 9:16</b>Historias y reels</figcaption></figure>
+      <figure><div class="ig"><div class="h"><span class="av" aria-hidden="true"></span><div><b>hunty</b><small>Publicidad</small></div><span class="dots" aria-hidden="true">···</span></div><img src="img/c-feed.jpg" alt="Anuncio C feed: dinos cuándo quieres cazar" width="1080" height="1350"><div class="cta"><span>Suscribirse</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>hunty</b>¿Tu próxima cacería no es esta semana? Mejor. <span>… más</span></p></div><figcaption><b>Feed 4:5</b> · Facebook e Instagram</figcaption></figure>
+      <figure><div class="story"><img src="img/c-story.jpg" alt="Anuncio C story: dinos cuándo quieres cazar" width="1080" height="1920"><div class="pb" aria-hidden="true"><i></i><i></i><i></i></div><div class="up" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg><span>Suscribirse</span></div></div><figcaption><b>Story / Reels 9:16</b> · Historias y reels</figcaption></figure>
       <div class="copy">
-        <p class="k">Texto principal</p>
-        <pre>¿Tu próxima cacería no es esta semana? Mejor.
+        <div><p class="k">Texto principal</p><pre>¿Tu próxima cacería no es esta semana? Mejor.
 
 Dinos qué quieres cazar y cuándo (corzo en abril, berrea en septiembre o la montería del año que viene) y te escribimos por WhatsApp unas semanas antes, con lo que haya publicado y antes de que se llene.
 
-Un aviso solo cuando toca. Te das de baja con un mensaje.</pre>
-        <div class="meta"><div><p class="k">Titular</p><pre>Te avisamos antes de que se llene</pre></div><div><p class="k">Descripción</p><pre>Corzo, berrea, montería</pre></div></div>
-        <div class="meta"><div><p class="k">Botón</p><pre>Suscribirse</pre></div><div><p class="k">Separa</p><pre>A quien es «más adelante»: nunca ocupa al comercial antes de su temporada</pre></div></div>
+Un aviso solo cuando toca. Te das de baja con un mensaje.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Te avisamos antes de que se llene</pre></div><div><p class="k">Descripción</p><pre>Corzo, berrea, montería</pre></div></div>
+        <div class="meta2"><div><p class="k">Botón</p><pre>Suscribirse</pre></div><div class="filt"><p class="k">Separa</p><pre>A quien es «más adelante»: nunca ocupa al comercial antes de su temporada</pre></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="angle" id="pro">
-    <div class="sh"><h2>D · Hunty Pro · para organizadores (opcional)</h2><p>Destino: formulario corto (jornadas por temporada, modalidades, provincia, si ya vende online) → WhatsApp al minuto → llamada de 15 minutos · Público: administradores de fincas y organizaciones cinegéticas, intereses de gestión de cotos, y LinkedIn por cargo</p></div>
+<section class="sec angle" id="pro">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">D</span><h2 class="t">D · Hunty Pro · para organizadores (opcional)</h2><div class="meta"><span><b>Destino</b>formulario corto (jornadas por temporada, modalidades, provincia, si ya vende online) → WhatsApp al minuto → llamada de 15 minutos</span><span><b>Público</b>administradores de fincas y organizaciones cinegéticas, intereses de gestión de cotos, y LinkedIn por cargo</span></div></div>
     <div class="ads">
-      <figure><img src="img/d-feed.jpg" alt="Anuncio D feed: organizadores" width="1080" height="1350"><figcaption><b>Feed 4:5</b>Facebook, Instagram y LinkedIn</figcaption></figure>
-      <figure><img src="img/d-story.jpg" alt="Anuncio D story: organizadores" width="1080" height="1920"><figcaption><b>Story 9:16</b>Historias</figcaption></figure>
+      <figure><div class="ig"><div class="h"><span class="av" aria-hidden="true"></span><div><b>hunty</b><small>Publicidad</small></div><span class="dots" aria-hidden="true">···</span></div><img src="img/d-feed.jpg" alt="Anuncio D feed: organizadores" width="1080" height="1350"><div class="cta"><span>Solicitar información</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>hunty</b>¿Te quedan puestos libres en tus monterías o recechos sin vender? <span>… más</span></p></div><figcaption><b>Feed 4:5</b> · Facebook, Instagram y LinkedIn</figcaption></figure>
+      <figure><div class="story"><img src="img/d-story.jpg" alt="Anuncio D story: organizadores" width="1080" height="1920"><div class="pb" aria-hidden="true"><i></i><i></i><i></i></div><div class="up" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg><span>Solicitar información</span></div></div><figcaption><b>Story 9:16</b> · Historias</figcaption></figure>
       <div class="copy">
-        <p class="k">Texto principal</p>
-        <pre>¿Te quedan puestos libres en tus monterías o recechos sin vender?
+        <div><p class="k">Texto principal</p><pre>¿Te quedan puestos libres en tus monterías o recechos sin vender?
 
 Más de 400 organizadores ya publican sus jornadas en Hunty. Publicar es gratis. Con Hunty Pro, tus jornadas salen en portada y en el correo a nuestra base de cazadores, y la comisión baja del 14 % al 12 % o al 10 %.
 
-Cuéntanos qué organizas y te decimos en 15 minutos si te encaja.</pre>
-        <div class="meta"><div><p class="k">Titular</p><pre>Llena los puestos que te quedan</pre></div><div><p class="k">Descripción</p><pre>Free, Mensual o Anual · sin permanencia</pre></div></div>
-        <div class="meta"><div><p class="k">Botón</p><pre>Solicitar información</pre></div><div><p class="k">Filtra a</p><pre>Quien organiza menos de 3 jornadas por temporada (va al alta autoservicio)</pre></div></div>
+Cuéntanos qué organizas y te decimos en 15 minutos si te encaja.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Llena los puestos que te quedan</pre></div><div><p class="k">Descripción</p><pre>Free, Mensual o Anual · sin permanencia</pre></div></div>
+        <div class="meta2"><div><p class="k">Botón</p><pre>Solicitar información</pre></div><div class="filt"><p class="k">Filtra a</p><pre>Quien organiza menos de 3 jornadas por temporada (va al alta autoservicio)</pre></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <h3 id="test">Plan de prueba</h3>
-  <div class="tw"><table>
-    <tr><th>Qué</th><th>Cómo</th></tr>
-    <tr><td>Estructura</td><td>Una campaña por ángulo y un conjunto de anuncios por formato. A se compara con vuestros anuncios actuales de monterías (mismo público y presupuesto). B se reparte al 50 % entre la web y el test (H1).</td></tr>
-    <tr><td>Presupuesto de prueba</td><td>A: 40-60 €/día · B: 30-40 €/día (repartido 50/50) · C: 15-20 €/día · D: 15-20 €/día. Durante 3-4 semanas. Propuesta que se ajusta a lo que invertís hoy: no hace falta gastar más para empezar.</td></tr>
-    <tr><td>Primeros 7 días</td><td>Ver qué mensaje para el scroll (retención a 3 s en story y CTR) y cuál pasa del clic a visita con intención. No se apaga nada antes de 2.000-3.000 impresiones por anuncio.</td></tr>
-    <tr><td>Qué decide</td><td>No el coste por clic ni por contacto, sino el <b>coste por reserva y los € de comisión por € invertido</b>. C se juzga por su cohorte (reservas cuando llega su temporada) y D por las altas de Hunty Pro.</td></tr>
-    <tr><td>Cuándo se corta</td><td>Si un anuncio gasta 2 veces el coste por reserva objetivo sin reserva ni contacto A, se apaga. B-test se apaga si a las 4 semanas no mejora en al menos un 15 % el coste por reserva frente a B-web.</td></tr>
-    <tr><td>Después</td><td>El mensaje que gane se queda y se le hacen 3 ganchos nuevos sobre la misma idea. Se cambia la pieza cada 3-4 semanas: las actuales llevan desde julio.</td></tr>
-  </table></div>
+<section class="sec alt" id="test">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>PRUEBA</b><span></span></div><h2 class="t">Plan de prueba</h2>
+      <p class="lede">Un experimento por ángulo, con su pregunta, su comparación y la métrica que decide.</p></div>
+    <div class="tw stack exp"><table>
+      <thead><tr><th>Ángulo</th><th>Pregunta</th><th>Se compara con</th><th>Presupuesto de prueba</th><th>Qué decide</th></tr></thead>
+      <tbody>
+        <tr><td><span class="lt">A</span><b>Montería con fecha</b></td><td>¿Un mensaje con fecha y precio trae reservas más baratas que «la cuna de la montería»?</td><td>Vuestros anuncios actuales de monterías (mismo público y presupuesto)</td><td class="num">40-60 €/día</td><td class="dec">Coste por reserva y € de comisión por € invertido</td></tr>
+        <tr><td><span class="lt">B</span><b>Rececho con precio</b></td><td>¿Enseñar el precio aparta al soñador y deja al que compra? Experimento H1 (web frente a test)</td><td>B-web frente a B-test, repartido al 50 %</td><td class="num">30-40 €/día</td><td class="dec">Coste por reserva. B-test se apaga si a las 4 semanas no mejora en al menos un 15 %</td></tr>
+        <tr><td><span class="lt">C</span><b>Más adelante</b></td><td>¿Cuánto cuesta una ficha con temporada y cuántas acaban en reserva cuando llega su momento?</td><td>—</td><td class="num">15-20 €/día</td><td class="dec">Su cohorte: reservas cuando llega su temporada</td></tr>
+        <tr><td><span class="lt">D</span><b>Hunty Pro</b></td><td>¿Una llamada de 15 minutos convierte más que el «Registrarme» de /pro?</td><td>El «Registrarme» de /pro</td><td class="num">15-20 €/día</td><td class="dec">Altas de Hunty Pro</td></tr>
+      </tbody>
+    </table></div>
+    <p class="k" style="margin-top:8px">Protocolo común</p>
+    <div class="tw stack proto"><table>
+      <thead><tr><th>Qué</th><th>Cómo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Estructura</b></td><td>Una campaña por ángulo y un conjunto de anuncios por formato. A se compara con vuestros anuncios actuales de monterías (mismo público y presupuesto). B se reparte al 50 % entre la web y el test (H1).</td></tr>
+        <tr><td><b>Presupuesto de prueba</b></td><td>A: 40-60 €/día · B: 30-40 €/día (repartido 50/50) · C: 15-20 €/día · D: 15-20 €/día. Durante 3-4 semanas. Propuesta que se ajusta a lo que invertís hoy: no hace falta gastar más para empezar.</td></tr>
+        <tr><td><b>Primeros 7 días</b></td><td>Ver qué mensaje para el scroll (retención a 3 s en story y CTR) y cuál pasa del clic a visita con intención. No se apaga nada antes de 2.000-3.000 impresiones por anuncio.</td></tr>
+        <tr><td><b>Qué decide</b></td><td>No el coste por clic ni por contacto, sino el <b>coste por reserva y los € de comisión por € invertido</b>. C se juzga por su cohorte (reservas cuando llega su temporada) y D por las altas de Hunty Pro.</td></tr>
+        <tr><td><b>Cuándo se corta</b></td><td>Si un anuncio gasta 2 veces el coste por reserva objetivo sin reserva ni contacto A, se apaga. B-test se apaga si a las 4 semanas no mejora en al menos un 15 % el coste por reserva frente a B-web.</td></tr>
+        <tr><td><b>Después</b></td><td>El mensaje que gane se queda y se le hacen 3 ganchos nuevos sobre la misma idea. Se cambia la pieza cada 3-4 semanas: las actuales llevan desde julio.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
 
-  <h3 id="arreglos">Arreglos de lo que tenéis activo (gratis, hoy)</h3>
-  <div class="tw"><table>
-    <tr><th>Anuncio (ID de la Biblioteca)</th><th>Qué pasa</th><th>Arreglo</th></tr>
-    <tr><td>Recechos de muflón · 1371734191598607</td><td>Lleva a hunty.es/especies/corzo</td><td>Enlace a /especies/muflon (mejor aún, a los recechos de muflón)</td></tr>
-    <tr><td>Monterías Castilla-La Mancha · 2368630826877479</td><td>Lleva al buscador filtrado por Extremadura</td><td>Cambiar el filtro de comunidad</td></tr>
-    <tr><td>Monterías Andalucía · 3323657874480438</td><td>Lleva al buscador filtrado por Extremadura. El texto dice «desde 180€» y el titular «desde 220€»</td><td>Cambiar el filtro y cuadrar los precios</td></tr>
-    <tr><td>Monterías (los 3 de comunidad)</td><td>El <code>referred_by</code> va dentro de <code>commit=Buscar%3F…</code></td><td>Añadirlo como <code>&amp;referred_by=…</code> para que se registre</td></tr>
-    <tr><td>Recechos de ciervo · 1350175807273158</td><td>Habla de berrea a mediados de octubre</td><td>Cambiar a ronca del gamo o a montería</td></tr>
-  </table></div>
-  <p style="font-size:13px;color:var(--muted);margin-top:8px">Comprobado el 16-oct en la versión que muestra la Biblioteca de anuncios de Meta (España). Puede haber otras versiones con otros enlaces.</p>
+<section class="sec" id="arreglos">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>REGALO</b><span></span></div><h2 class="t">Arreglos de lo que tenéis activo (gratis, hoy)</h2></div>
+    <div class="tw stack"><table>
+      <thead><tr><th>Anuncio (ID de la Biblioteca)</th><th>Qué pasa</th><th>Arreglo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Recechos de muflón</b> · <code>1371734191598607</code></td><td><span class="pill ko">⚠ Error</span> Lleva a hunty.es/especies/corzo</td><td>Enlace a /especies/muflon (mejor aún, a los recechos de muflón)</td></tr>
+        <tr><td><b>Monterías Castilla-La Mancha</b> · <code>2368630826877479</code></td><td><span class="pill ko">⚠ Error</span> Lleva al buscador filtrado por Extremadura</td><td>Cambiar el filtro de comunidad</td></tr>
+        <tr><td><b>Monterías Andalucía</b> · <code>3323657874480438</code></td><td><span class="pill ko">⚠ Error</span> Lleva al buscador filtrado por Extremadura. El texto dice «desde 180€» y el titular «desde 220€»</td><td>Cambiar el filtro y cuadrar los precios</td></tr>
+        <tr><td><b>Monterías (los 3 de comunidad)</b></td><td><span class="pill hy">⚠ Revisar</span> El <code>referred_by</code> va dentro de <code>commit=Buscar%3F…</code></td><td>Añadirlo como <code>&amp;referred_by=…</code> para que se registre</td></tr>
+        <tr><td><b>Recechos de ciervo</b> · <code>1350175807273158</code></td><td><span class="pill hy">⚠ Revisar</span> Habla de berrea a mediados de octubre</td><td>Cambiar a ronca del gamo o a montería</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Comprobado el 16-oct en la versión que muestra la Biblioteca de anuncios de Meta (España). Puede haber otras versiones con otros enlaces.</p>
 
-  <h3>Pendiente antes de publicar</h3>
-  <div class="pend"><ul>
-    <li>Las fotos son de hunty.es. Para producción, mejor fotos propias de cacerías reales con permiso del organizador, o las que uséis hoy en los anuncios.</li>
-    <li>Confirmar los precios y las fechas del día de publicación (los de esta maqueta son de hunty.es a 16-oct).</li>
-    <li>Las reglas de «Mismo precio que el organizador» frente a «Mejor precio garantizado»: usar una sola.</li>
-    <li>Firmar todo desde la página HUNTY, también Prime.</li>
-  </ul></div>
+    <p class="k" style="margin-top:18px">Pendiente antes de publicar</p>
+    <ul class="pend">
+      <li><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>Las fotos son de hunty.es. Para producción, mejor fotos propias de cacerías reales con permiso del organizador, o las que uséis hoy en los anuncios.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>Confirmar los precios y las fechas del día de publicación (los de esta maqueta son de hunty.es a 16-oct).</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>Las reglas de «Mismo precio que el organizador» frente a «Mejor precio garantizado»: usar una sola.</span></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>Firmar todo desde la página HUNTY, también Prime.</span></li>
+    </ul>
+  </div>
+</section>
 
-  <div class="foot">
-    <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Maikel Echevarría · Qualivo</b><span>maikel@qualivo.io · +34 647 11 84 91 · <a href="https://qualivo.io">qualivo.io</a></span></div>
     <p>Maqueta preparada el 16 de octubre de 2026 para Hunty. No son anuncios publicados.</p>
   </div>
-</div>
+</footer>
+<script>
+document.querySelectorAll('.stack').forEach(function (w) {
+  var h = [].map.call(w.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+  w.querySelectorAll('tbody tr').forEach(function (tr) { [].forEach.call(tr.children, function (td, i) { if (h[i] && i > 0) td.setAttribute('data-label', h[i]); }); });
+});
+</script>
 </body>
 </html>
