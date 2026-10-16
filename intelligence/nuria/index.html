@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Intelligence · Nuria Roure</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../app.css">
+<style>
+  body { overflow-y: auto; }
+  .nr { max-width: 1080px; margin: 0 auto; padding: 24px 16px 48px; }
+  .nr-cab { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .nr-cab img { height: 24px; width: auto; }
+  .nr-cab h1 { font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+  .nr-cab p { color: var(--gris); font-size: 13px; margin-top: 2px; }
+  .nr-cab .der { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .nr-cuenta { background: var(--tinta); color: #fff; border-radius: var(--radio); padding: 16px 18px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+  .nr-cuenta strong { font-size: 22px; font-weight: 800; }
+  .nr-cuenta span { color: #C9CCD2; font-size: 13px; }
+  .nr .kpis { margin-bottom: 14px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .nr-rejilla { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 14px; margin-bottom: 14px; }
+  .nr .tarjeta h3 { margin-bottom: 12px; }
+  .paso { display: grid; grid-template-columns: 150px minmax(0, 1fr) 44px; gap: 10px; align-items: center; margin: 8px 0; font-size: 13px; }
+  .paso .pista { height: 22px; background: var(--borde-2); border-radius: 6px; overflow: hidden; }
+  .paso .lleno { height: 100%; background: var(--verde-2); border-radius: 6px; min-width: 2px; }
+  .paso b { text-align: right; }
+  .paso small { display: block; color: var(--gris-2); font-size: 11px; }
+  .dias { display: flex; align-items: flex-end; gap: 6px; height: 150px; padding-top: 10px; }
+  .dia { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+  .dia .col { width: 100%; max-width: 38px; background: var(--verde); border-radius: 5px 5px 0 0; min-height: 2px; }
+  .dia b { font-size: 12px; }
+  .dia span { font-size: 11px; color: var(--gris-2); white-space: nowrap; }
+  table.nr-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .nr-tabla th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--gris-2); font-weight: 700; padding: 6px 8px; border-bottom: 1px solid var(--borde); }
+  .nr-tabla td { padding: 8px; border-bottom: 1px solid var(--borde-2); }
+  .nr-tabla td.num { text-align: right; font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11.5px; font-weight: 600; background: var(--hover); color: var(--gris); }
+  .pill.ok { background: var(--verde-bg); color: var(--verde-txt); }
+  .pill.mal { background: var(--coral-bg); color: var(--coral); }
+  .vacio { color: var(--gris-2); font-size: 13px; padding: 10px 0; }
+  .aviso { background: var(--ambar-bg); color: #7a5214; border-radius: var(--radio-s); padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+  .pie { color: var(--gris-2); font-size: 12px; margin-top: 18px; }
+  .acceso { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+  .acceso form { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 28px 24px; width: 100%; max-width: 380px; box-shadow: var(--sombra); }
+  .acceso h1 { font-size: 19px; margin: 14px 0 4px; }
+  .acceso p { color: var(--gris); font-size: 13px; margin-bottom: 18px; }
+  .acceso label { font-weight: 600; font-size: 13px; display: block; margin-bottom: 6px; }
+  .acceso input { width: 100%; height: 40px; border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 0 12px; margin-bottom: 6px; }
+  .acceso .error { color: var(--coral); font-size: 13px; min-height: 20px; margin-bottom: 8px; }
+  @media (max-width: 820px) {
+    .nr-rejilla { grid-template-columns: minmax(0, 1fr); }
+    .paso { grid-template-columns: 110px minmax(0, 1fr) 40px; }
+    .nr-cab .der { margin-left: 0; }
+    .nr .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nr .kpis .kpi:last-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<noscript>Esta página necesita JavaScript.</noscript>
+
+<section id="acceso" class="acceso" hidden>
+  <form id="formAcceso">
+    <img src="/assets/img/qualivo-logo.png" alt="Qualivo" width="110" height="27">
+    <h1>Intelligence · Nuria Roure</h1>
+    <p>Clase en directo del jueves 22 de octubre.</p>
+    <label for="clave">Contraseña</label>
+    <input id="clave" name="password" type="password" autocomplete="current-password" required>
+    <div class="error" id="claveError"></div>
+    <button class="btn btn-primario btn-bloque" id="entrar" type="submit">Entrar</button>
+  </form>
+</section>
+
+<main id="panel" class="nr" hidden>
+  <header class="nr-cab">
+    <img src="/assets/img/qualivo-logo.png" alt="Qualivo" width="99" height="24">
+    <div>
+      <h1>Directo «Las 3 trampas»</h1>
+      <p>Jueves 22 de octubre, 18:00 h · Dra. Nuria Roure</p>
+    </div>
+    <div class="der">
+      <button class="btn" id="actualizar" type="button">Actualizar</button>
+      <button class="btn btn-fantasma" id="salir" type="button">Salir</button>
+    </div>
+  </header>
+  <div id="contenido"><p class="vacio">Cargando datos…</p></div>
+</main>
+
+<script src="nuria.js"></script>
+</body>
+</html>
