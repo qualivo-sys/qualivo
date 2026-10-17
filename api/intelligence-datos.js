@@ -715,8 +715,23 @@ module.exports = async function (req, res) {
       return res.status(200).json(await fn(body || {}));
     } catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 160) }); }
   }
+  if (req.method === 'POST' && (accion === 'prospeccion-marcar' || accion === 'prospeccion-campana')) {
+    // 8-oct: Prospección. Cambiar el estado de una cuenta en la pestaña o crear una campaña
+    // de Smartlead en borrador. Solo con sesión y por un clic de Maikel.
+    if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+    let body = req.body;
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
+    try {
+      const P = require('./_intel-prospeccion.js');
+      return res.status(200).json(await (accion === 'prospeccion-marcar' ? P.marcar(body || {}) : P.crearCampana(body || {})));
+    } catch (e) { return res.status(400).json({ error: String(e.message || e).slice(0, 200) }); }
+  }
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+  if (accion === 'prospeccion') {
+    try { return res.status(200).json(await require('./_intel-prospeccion.js').datos()); }
+    catch (e) { return res.status(502).json({ error: 'No se ha podido leer la prospección: ' + String(e.message || e).slice(0, 120) }); }
+  }
   if (accion === 'finanzas') {
     try { return res.status(200).json(await finanzas(String((req.query && req.query.fresco) || '') === '1')); }
     catch (e) { return res.status(502).json({ error: 'No se ha podido leer la hoja de finanzas: ' + String(e.message || e).slice(0, 120) }); }
