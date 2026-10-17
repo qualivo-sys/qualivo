@@ -17,6 +17,10 @@ function onOpen() {
     .addItem('Configurar credenciales (hoja _Config)', 'openConfigSheet')
     .addItem('Guardar credenciales de _Config', 'saveConfigFromSheet')
     .addItem('Programar refresco diario', 'installDailyTrigger')
+    .addSeparator()
+    .addSubMenu(SpreadsheetApp.getUi().createMenu('Qualivo · Lead Form')
+      .addItem('Ver URL del webhook', 'showWebhookUrl')
+      .addItem('Probar lead (QA CAPI)', 'qaSendTestLead'))
     .addToUi();
 }
 
