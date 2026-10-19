@@ -95,10 +95,13 @@ ul.points{padding-left:18px;display:grid;gap:6px;margin-top:10px}
 .ph{background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:0 3px;font-weight:600;white-space:nowrap}
 
 /* Fondos de cada ángulo */
-.g-a{background:radial-gradient(circle at 85% 12%,rgba(255,196,102,.35),transparent 40%),linear-gradient(160deg,#0E2A1E,#1F6F4A 62%,#3FA36E)}
-.g-b{background:radial-gradient(circle at 15% 90%,rgba(230,190,110,.25),transparent 45%),linear-gradient(155deg,#16223D,#2B4677)}
-.g-c{background:linear-gradient(175deg,#F4B266,#E0694A 52%,#6E2747)}
-.g-d{background:linear-gradient(165deg,#FFF1D6,#F8D9A2);color:#16211C}
+.g-a{background:linear-gradient(180deg,rgba(8,24,17,.78) 0%,rgba(8,24,17,.35) 45%,rgba(8,24,17,.85) 100%),url(img/a.jpg) center/cover}
+.g-b{background:linear-gradient(180deg,rgba(14,22,45,.82) 0%,rgba(14,22,45,.3) 50%,rgba(14,22,45,.88) 100%),url(img/b.jpg) center 30%/cover}
+.g-c{background:linear-gradient(180deg,rgba(60,20,30,.78) 0%,rgba(60,20,30,.25) 50%,rgba(40,14,22,.9) 100%),url(img/c.jpg) center/cover}
+.g-d{background:linear-gradient(180deg,rgba(255,246,230,.92) 0%,rgba(255,246,230,.55) 45%,rgba(255,246,230,.2) 100%),url(img/d.jpg) center/cover;color:#16211C}
+.cr,.st{text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.g-d.cr,.g-d.st{text-shadow:none}
+.cr .cert,.cr .day,.cr .book,.cr .free,.st .cert,.st .day,.st .book{display:none}
 .cert{background:#FBF6EA;color:#1B2A4A;border-radius:2.5cqw;padding:5cqw;margin-top:6cqw;transform:rotate(-3deg);box-shadow:0 3cqw 6cqw rgba(0,0,0,.3);position:relative;border:1.2cqw solid #E8D9B5}
 .cert .t{font-size:3cqw;letter-spacing:.2em;font-weight:700;color:#9B7A2E}
 .cert .n{font-family:var(--serif);font-size:6cqw;line-height:1.1;margin-top:2cqw}
@@ -120,6 +123,18 @@ ul.points{padding-left:18px;display:grid;gap:6px;margin-top:10px}
 .steps li::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:13px}
 footer{color:var(--muted);font-size:14px;padding:0 0 40px}
 footer a{color:var(--accent);font-weight:600;text-decoration:none}
+
+/* Tamaños fijos (las unidades cqw no se resolvían bien en las historias) */
+.cr{padding:26px 24px}
+.cr .k{font-size:12px}.cr .big{font-size:40px;margin-top:12px}.cr .mid{font-size:17px;margin-top:12px}
+.cr .chips{gap:7px;margin-top:16px}.cr .chips span{font-size:12.5px;padding:5px 11px}
+.cr .foot{font-size:12.5px;gap:8px}.cr .logo{font-size:11px;padding:4px 8px;border-radius:5px}
+.st{padding:62px 16px 18px}
+.st .bar{top:9px;left:10px;right:10px;height:3px}
+.st .who{top:20px;left:10px;font-size:11.5px;gap:6px}.st .who i{width:22px;height:22px;border-width:2px}
+.st .k{font-size:10.5px;margin-top:18px}.st .big{font-size:28px;margin-top:8px}.st .mid{font-size:13.5px;margin-top:10px}
+.st .up{font-size:12px}.st .up span{padding:7px 14px;margin-top:4px}.st .up svg{width:16px;height:16px}
+@media (max-width:420px){.cr{padding:20px 18px}.cr .big{font-size:32px}.cr .mid{font-size:15px}}
 </style>
 </head>
 <body>
@@ -197,7 +212,7 @@ footer a{color:var(--accent);font-weight:600;text-decoration:none}
           <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
           <div class="cr g-b">
             <div class="k" style="color:#E6C27A">Crece como docente</div>
-            <div class="big" style="font-size:10.5cqw">Suma Educación Inclusiva a tu CV.</div>
+            <div class="big" >Suma Educación Inclusiva a tu CV.</div>
             <div class="cert">
               <div class="t">CERTIFICADO DE INSPEU</div>
               <div class="n">Educación Inclusiva y Atención a la Diversidad</div>
@@ -249,7 +264,7 @@ footer a{color:var(--accent);font-weight:600;text-decoration:none}
           <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
           <div class="cr g-c">
             <div class="k">100 % online</div>
-            <div class="big" style="font-size:10.5cqw">Estudia cuando terminas de dar clase.</div>
+            <div class="big" >Estudia cuando terminas de dar clase.</div>
             <div class="day">
               <div><b>07:30</b>🏫 Clases</div>
               <div><b>15:00</b>📝 Corregir tareas</div>
@@ -275,7 +290,7 @@ footer a{color:var(--accent);font-weight:600;text-decoration:none}
           <div class="bar"><i></i></div>
           <div class="who"><i></i>inspeu <small>Publicidad</small></div>
           <div class="k">🌙 Son las</div>
-          <div class="big" style="font-size:22cqw">21:00</div>
+          <div class="big" >21:00</div>
           <div class="mid">Tus alumnos ya están en casa. Tú avanzas tu curso, desde el celular.</div>
           <div class="up"><svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg><span>Pregúntanos cómo</span></div>
         </div>
@@ -301,7 +316,7 @@ footer a{color:var(--accent);font-weight:600;text-decoration:none}
           <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
           <div class="cr g-d">
             <div class="k" style="color:#1F6F4A">Para docentes · gratis</div>
-            <div class="big" style="font-size:10cqw;color:#0E2A1E">10 estrategias para tu aula inclusiva</div>
+            <div class="big" style="color:#0E2A1E">10 estrategias para tu aula inclusiva</div>
             <div style="margin-top:6cqw"><div class="book"><div class="t">GUÍA PRÁCTICA</div><div class="n">10</div><div class="s">estrategias para atender a cada alumno</div></div></div>
             <div class="free">GRATIS</div>
             <div class="foot" style="color:#0E2A1E"><span class="logo" style="background:#0E2A1E;color:#fff">INSPEU</span>Inicial · Primaria · Secundaria</div>
