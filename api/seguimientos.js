@@ -112,6 +112,32 @@ module.exports = async function handler(req, res) {
     }
     resumen.revisadas = abiertas.length;
 
+    // Calidad a Meta (19-oct, V3 con Paid): «Qualified» solo con la reunión celebrada y con encaje.
+    // Los movimientos hechos a mano en GHL no avisan a nadie, así que se barre aquí cada mañana.
+    // calidadAMeta solo actúa con leads del formulario de Meta y una vez por evento (etiqueta meta-<evento>).
+    resumen.meta = [];
+    const T = require('./_tratos.js');
+    for (const op of abiertas) {
+      const n = (etapa[op.pipelineStageId] || '').toLowerCase();
+      const clave = /segunda/.test(n) ? 'celebrada' : /oferta|propuesta/.test(n) ? 'oferta' : /negociaci/.test(n) ? 'seguimiento'
+        : /piloto/.test(n) ? 'piloto' : /^cliente/.test(n) ? 'cliente' : /reuni|confirmad|call agendada/.test(n) ? 'encaja?' : '';
+      if (!clave) continue;
+      const contactId = op.contact && op.contact.id ? op.contact.id : op.contactId;
+      if (!contactId) continue;
+      let ct;
+      try { ct = (await ghlJson(GHL_BASE + '/contacts/' + contactId, ghl)).contact || {}; } catch (e) { continue; }
+      const tags = (ct.tags || []).map(String);
+      if (!tags.some(function (t) { return t.indexOf('meta-lead-') === 0; })) continue;
+      // En «Reunión agendada» o «Confirmado» solo cuenta si Maikel marcó reunion-encaja tras la reunión.
+      const final = clave === 'encaja?' ? (tags.includes('reunion-encaja') ? 'celebrada' : '') : clave;
+      if (!final) continue;
+      const evento = (final === 'piloto' || final === 'cliente') ? 'converted' : 'qualified';
+      if (tags.includes('meta-' + evento)) continue;
+      if (seco) { resumen.meta.push({ oportunidad: op.name, etapa: etapa[op.pipelineStageId], evento: evento }); continue; }
+      const r = await T.calidadAMeta(ct, final, 'reunión celebrada con encaje');
+      resumen.meta.push({ oportunidad: op.name, etapa: etapa[op.pipelineStageId], evento: evento, resultado: r || 'error' });
+    }
+
     for (const op of abiertas) {
       if (resumen.tareas >= MAX_TAREAS) break;
       const nombreEtapa = (etapa[op.pipelineStageId] || '').toLowerCase();

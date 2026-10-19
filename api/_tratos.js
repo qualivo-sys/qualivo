@@ -78,16 +78,29 @@ async function pipelineDe(contactId) {
 // 28-sep: con await (en Vercel una promesa sin esperar muere al responder: en diez días a Meta le
 // llegaron 2 «Contacted» y ningún «Qualified»). Oferta y Negociación también son «Qualified»: el
 // event_id es el mismo por etapa, así que Meta no lo cuenta dos veces.
-const META_POR_ETAPA = { conversacion: 'Contacted', reunion: 'Qualified', oferta: 'Qualified', seguimiento: 'Qualified', piloto: 'Converted', cliente: 'Converted', noEncaja: 'Disqualified' };
+// 19-oct (Revenue Journey V3, con Paid): «Qualified» = reunión CELEBRADA con encaje, no reserva.
+// Antes salía al agendar y el píxel contaba 28 «Qualified» que eran reservas (8 no se presentaron).
+// La reserva ya llega a Meta como «Schedule» desde _cita.js. Celebrada con encaje = el trato pasa
+// a Segunda reunión, Oferta o Negociación (a mano o desde el panel), o el contacto lleva la
+// etiqueta reunion-encaja; api/seguimientos.js lo barre cada mañana.
+const META_POR_ETAPA = { conversacion: 'Contacted', celebrada: 'Qualified', oferta: 'Qualified', seguimiento: 'Qualified', piloto: 'Converted', cliente: 'Converted', noEncaja: 'Disqualified' };
 async function calidadAMeta(contacto, etapa, motivo) {
   try {
     const evento = META_POR_ETAPA[etapa];
     if (!evento || !contacto) return;
-    const idMeta = (contacto.tags || []).map(String).filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0];
+    const tags = (contacto.tags || []).map(String);
+    const idMeta = tags.filter(function (t) { return t.indexOf('meta-lead-') === 0; })[0];
     if (!idMeta) return;
-    await require('./_meta.js').calidadLead(evento, {
+    // Una sola vez por evento: Meta solo deduplica por event_id durante 48 h.
+    const marca = 'meta-' + evento.toLowerCase();
+    if (tags.indexOf(marca) !== -1) return 'ya_enviado';
+    const r = await require('./_meta.js').calidadLead(evento, {
       leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id, motivo: motivo
     });
+    if (r === 'enviado' && contacto.id) {
+      await fetch(GHL_BASE + '/contacts/' + contacto.id + '/tags', { method: 'POST', headers: cabeceras(), body: JSON.stringify({ tags: [marca] }) });
+    }
+    return r;
   } catch (e) { console.error('[tratos] calidad a Meta no salió', contacto && contacto.id, etapa, e && e.message); }
 }
 

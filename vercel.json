@@ -278,6 +278,9 @@
     "api/encaja.js": {
       "maxDuration": 60
     },
+    "api/seguimientos.js": {
+      "maxDuration": 60
+    },
     "api/vapi-fin.js": {
       "maxDuration": 60
     },
