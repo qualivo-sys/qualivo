@@ -113,19 +113,18 @@ async function preguntarModelo(conversacion) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: Object.assign(
-      { 'Content-Type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-beta': 'server-side-fallback-2026-07-01' },
+      { 'Content-Type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
       process.env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID } : {}
     ),
     body: JSON.stringify({
       model: MODELO,
       max_tokens: 4000,
-      fallbacks: 'default',
       output_config: { effort: 'low', format: FORMATO },
       system: SISTEMA,
       messages: [{ role: 'user', content: conversacion }]
     })
   });
-  if (!r.ok) throw new Error('anthropic ' + r.status);
+  if (!r.ok) throw new Error('anthropic ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const d = await r.json();
   if (d.stop_reason === 'refusal') return { accion: 'pasar', texto: 'Se lo paso al equipo de Nuria y te escriben en cuanto puedan. Gracias por tu paciencia.', baja: false };
   const bloque = (d.content || []).filter(function (b) { return b.type === 'text'; }).pop();
@@ -168,13 +167,24 @@ async function atender(conv, ahora, prueba) {
   return res.accion + (res.baja ? ' (baja)' : '');
 }
 
+// Última vuelta (memoria de la instancia), para comprobar desde fuera con ?estado=1.
+// Solo recuentos y el último error técnico: nada de nombres ni mensajes.
+let ultima = null;
+
 module.exports = async function handler(req, res) {
+  if (String((req.query && req.query.estado) || '') === '1') {
+    return res.status(200).json({
+      encendido: process.env.NURIA_WA_BOT === 'on',
+      variables: { escritura: !!process.env.NURIA_GHL_API_KEY_ESCRITURA, cuenta: !!process.env.NURIA_GHL_LOCATION_ID, ia: !!process.env.ANTHROPIC_API_KEY, cron: !!process.env.CRON_SECRET },
+      ultimaVuelta: ultima
+    });
+  }
   const secreto = process.env.CRON_SECRET;
   if (!secreto || String(req.headers.authorization || '') !== 'Bearer ' + secreto) return res.status(401).json({ ok: false, error: 'unauthorized' });
   if (process.env.NURIA_WA_BOT !== 'on') return res.status(200).json({ ok: true, apagado: true });
   if (!process.env.ANTHROPIC_API_KEY || !process.env.NURIA_GHL_API_KEY_ESCRITURA || !process.env.NURIA_GHL_LOCATION_ID) return res.status(200).json({ ok: false, error: 'faltan variables' });
   const min = horaMadrid();
-  if (min < 8 * 60 || min >= 22 * 60) return res.status(200).json({ ok: true, esperando: 'fuera de horario' });
+  if (min < 8 * 60 || min >= 22 * 60) { ultima = { hora: new Date().toISOString(), esperando: 'fuera de horario' }; return res.status(200).json({ ok: true, esperando: 'fuera de horario' }); }
   const prueba = String((req.query && req.query.prueba) || '') === '1';
 
   const ahora = Date.now();
@@ -208,14 +218,16 @@ module.exports = async function handler(req, res) {
       if (Date.now() - ahora > 45000 || hechas >= MAX_POR_VUELTA) break;
       resumen.miradas++;
       let r;
-      try { r = await atender(conv, ahora, prueba); } catch (e) { r = 'error'; console.error('[wa-nuria]', e && e.message); }
+      try { r = await atender(conv, ahora, prueba); } catch (e) { r = 'error'; resumen.ultimoError = String(e && e.message || e).slice(0, 240); console.error('[wa-nuria]', e && e.message); }
       if (/^(responder|pasar|prueba)/.test(r)) hechas++;
       resumen.resultado[r] = (resumen.resultado[r] || 0) + 1;
     }
   } catch (e) {
     console.error('[wa-nuria]', e && e.message);
+    ultima = { hora: new Date().toISOString(), ok: false, error: String(e && e.message).slice(0, 240), resumen: resumen };
     return res.status(200).json({ ok: false, error: e && e.message, resumen: resumen });
   }
+  ultima = { hora: new Date().toISOString(), ok: true, resumen: resumen };
   return res.status(200).json({ ok: true, resumen: resumen });
 };
 module.exports._atender = atender; // para las pruebas
