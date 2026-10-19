@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>INSPEU · landing de ejemplo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Landing de ejemplo preparada por Qualivo para INSPEU. No es una página real: el formulario no envía nada. Los datos entre corchetes los completa INSPEU. */
+:root{--bg:#F7F5F0;--card:#FFFFFF;--ink:#16211C;--muted:#5D6B64;--line:#E2DED5;--accent:#1F6F4A;--accent-soft:#E3F1E9;--warn:#A4471F;--warn-soft:#FBEDE6;--wa:#1FA855;--wa-ink:#FFFFFF;--hero:#0E2A1E;--ph:#8A5A00;--ph-soft:#FFF4DC;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa:#25D366;--wa-ink:#0B1A12;--hero:#0A1F16;--ph:#F2C467;--ph-soft:#33280F}}
+:root[data-theme="dark"]{--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa:#25D366;--wa-ink:#0B1A12;--hero:#0A1F16;--ph:#F2C467;--ph-soft:#33280F}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;overflow-x:hidden}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+a{color:var(--accent)}
+.ph{background:var(--ph-soft);color:var(--ph);border-radius:5px;padding:0 4px;font-weight:600;-webkit-box-decoration-break:clone;box-decoration-break:clone;overflow-wrap:anywhere}
+
+/* Aviso */
+.notice{background:var(--ph-soft);color:var(--ph);font-size:13px;border-bottom:1px solid var(--line)}
+.notice .wrap{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;align-items:center;padding-top:7px;padding-bottom:7px}
+.notice a{color:var(--ph);font-weight:600;text-decoration:none;white-space:nowrap}
+.notice a:hover{text-decoration:underline}
+
+/* Hero */
+header.hero{background:radial-gradient(120% 90% at 100% 0%,#1F6F4A 0%,transparent 60%),var(--hero);color:#fff;padding:22px 0 48px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+.brand .logo{width:34px;height:34px;border-radius:9px;background:#fff;display:grid;place-items:center;flex:none}
+.brand small{display:block;font-weight:500;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:0}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start;margin-top:36px}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9FD8B8;font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(30px,5vw,50px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 14px;max-width:20ch}
+.hero p.lead{color:rgba(255,255,255,.85);font-size:18px;max-width:56ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.facts li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px;font-size:14px}
+.facts .ph{background:rgba(255,220,140,.18);color:#FFE2A3}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:16px;padding:12px 18px;border-radius:11px;text-decoration:none;cursor:pointer;border:0;line-height:1.2}
+.btn-primary{background:var(--accent);color:#fff}
+.hero .btn-primary{background:#fff;color:#0E2A1E}
+.btn-wa{background:var(--wa);color:var(--wa-ink)}
+.btn-ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn svg{flex:none}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9FD8B8;outline-offset:2px}
+
+/* Formulario */
+.form-card{background:var(--card);color:var(--ink);border-radius:18px;padding:22px;box-shadow:0 18px 40px rgba(0,0,0,.25);scroll-margin-top:16px}
+.form-card h2{font-size:24px;margin-bottom:4px}
+.form-card .promise{display:flex;gap:8px;align-items:flex-start;background:var(--accent-soft);color:var(--ink);border-radius:10px;padding:9px 11px;font-size:14.5px;margin:10px 0 16px}
+form{display:grid;gap:13px}
+label{display:grid;gap:5px;font-size:14px;font-weight:600;color:var(--ink)}
+label .hint{font-weight:400;color:var(--muted);font-size:13px}
+input,select{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+.phone-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px}
+.form-card .btn{width:100%;margin-top:4px}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:2px 0}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.legal{font-size:12.5px;color:var(--muted)}
+.ok{display:none;text-align:left}
+.ok .tick{width:46px;height:46px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;margin-bottom:10px}
+.ok h3{font-family:var(--serif);font-size:22px;line-height:1.2;margin-bottom:6px}
+.ok p{color:var(--muted);font-size:15px}
+.wa-preview{background:#EFE7DD;border-radius:12px;padding:12px;margin:14px 0 10px}
+:root[data-theme="dark"] .wa-preview{background:#0B141A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wa-preview{background:#0B141A}}
+.wa-bubble{background:#fff;color:#16211C;border-radius:10px;padding:9px 11px;font-size:14px;line-height:1.45;max-width:94%}
+:root[data-theme="dark"] .wa-bubble{background:#202C33;color:#E9EFEB}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wa-bubble{background:#202C33;color:#E9EFEB}}
+.wa-bubble small{display:block;text-align:right;opacity:.6;font-size:11px;margin-top:3px}
+.demo-tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--ph-soft);color:var(--ph)}
+
+/* Secciones */
+main{display:grid;gap:22px;padding:28px 0 56px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+@media (max-width:480px){section.card{padding:20px 16px}.form-card{padding:18px 16px}}
+h2{font-family:var(--serif);font-size:clamp(23px,3vw,31px);line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:70ch}
+
+/* Franja: qué pasa después */
+.after{background:var(--accent-soft);border:1px solid var(--line);border-radius:16px;padding:24px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;padding:0;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.steps li{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--line);position:relative}
+.steps li::before{counter-increment:s;content:counter(s);display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;margin-bottom:8px}
+:root[data-theme="dark"] .steps li::before{color:#0F1512}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .steps li::before{color:#0F1512}}
+.steps strong{display:block;font-size:16.5px;margin-bottom:3px}
+.steps span{color:var(--muted);font-size:14.5px}
+
+/* Para quién */
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:760px){.who{grid-template-columns:1fr}}
+.who div{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg)}
+.who .ico{font-size:24px;line-height:1;margin-bottom:8px}
+.who strong{display:block;margin-bottom:3px}
+.who p{color:var(--muted);font-size:14.5px}
+.gain{margin-top:16px;padding-left:20px;display:grid;gap:6px}
+
+/* Temario */
+.mods{list-style:none;padding:0;display:grid;gap:10px}
+.mods li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border-top:1px solid var(--line);padding-top:12px}
+.mods li:first-child{border-top:0;padding-top:0}
+.mods .m{font-family:var(--serif);font-weight:600;color:var(--accent);font-size:15px;background:var(--accent-soft);border-radius:8px;padding:3px 9px;white-space:nowrap}
+.mods strong{display:block}
+.mods p{color:var(--muted);font-size:14.5px}
+
+/* Cómo funciona */
+.how{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:640px){.how{grid-template-columns:1fr}}
+.how div{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:12px}
+.how .ico{font-size:22px;line-height:1.2;flex:none}
+.how p{color:var(--muted);font-size:14.5px}
+
+/* Testimonio */
+blockquote{border-left:4px solid var(--accent);padding:6px 0 6px 16px;font-family:var(--serif);font-size:20px;line-height:1.35}
+blockquote cite{display:block;font-family:var(--sans);font-style:normal;font-size:14px;color:var(--muted);margin-top:8px}
+
+/* FAQ */
+details{border-top:1px solid var(--line);padding:12px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:20px;line-height:1;flex:none}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-top:8px;font-size:15px;max-width:70ch}
+
+/* CTA final */
+.final{background:var(--hero);color:#fff;border-radius:16px;padding:28px 24px;text-align:center}
+.final h2{color:#fff}
+.final p{color:rgba(255,255,255,.82);max-width:52ch;margin:0 auto 18px}
+.final .btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.final .btn-primary{background:#fff;color:#0E2A1E}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;margin-top:14px}
+footer{color:var(--muted);font-size:13px;padding:0 0 40px}
+footer .wrap{display:grid;gap:4px}
+</style>
+</head>
+<body>
+
+<div class="notice" role="note">
+  <div class="wrap">
+    <span>Ejemplo de landing preparado por Qualivo para INSPEU · no es una página real</span>
+    <a href="../">← Volver a la demo</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 8l10 5 10-5-10-5Z" fill="#1F6F4A"/><path d="M6 10.5V15c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5" stroke="#1F6F4A" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <span>INSPEU<small>Instituto Peruano Europeo</small></span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Curso online para docentes</div>
+        <h1>Educación Inclusiva y Atención a la Diversidad</h1>
+        <p class="lead">Herramientas prácticas para que cada estudiante de tu aula aprenda, también quienes tienen necesidades educativas especiales. Online y pensado para docentes de Perú y Latinoamérica.</p>
+        <ul class="facts">
+          <li>💻 100&nbsp;% online</li>
+          <li>🗓️ Inicio: <span class="ph">[fecha de inicio]</span></li>
+          <li>⏱️ <span class="ph">[horas]</span></li>
+          <li>📜 <span class="ph">[tipo de certificado]</span></li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#formulario">Quiero el temario</a>
+          <a class="btn btn-ghost js-wa" href="#" style="color:#fff">Escríbenos por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="form-card" id="formulario">
+        <div id="formBox">
+          <h2>Recibe el temario y las fechas</h2>
+          <p class="promise"><span aria-hidden="true">⚡</span><span>Te escribimos por WhatsApp en menos de 1 minuto con el temario y las fechas.</span></p>
+          <form id="leadForm" novalidate>
+            <label>Nombre
+              <input name="nombre" autocomplete="given-name" placeholder="Ej.: María" required>
+            </label>
+            <label>WhatsApp
+              <span class="phone-row">
+                <select name="prefijo" aria-label="Prefijo de país">
+                  <option value="+51" selected>🇵🇪 +51</option>
+                  <option value="+591">🇧🇴 +591</option>
+                  <option value="+56">🇨🇱 +56</option>
+                  <option value="+57">🇨🇴 +57</option>
+                  <option value="+593">🇪🇨 +593</option>
+                  <option value="+52">🇲🇽 +52</option>
+                  <option value="+54">🇦🇷 +54</option>
+                  <option value="+595">🇵🇾 +595</option>
+                  <option value="+598">🇺🇾 +598</option>
+                  <option value="+58">🇻🇪 +58</option>
+                  <option value="+506">🇨🇷 +506</option>
+                  <option value="+507">🇵🇦 +507</option>
+                  <option value="+502">🇬🇹 +502</option>
+                  <option value="+504">🇭🇳 +504</option>
+                  <option value="+503">🇸🇻 +503</option>
+                  <option value="+505">🇳🇮 +505</option>
+                  <option value="+1">🇩🇴 +1</option>
+                  <option value="+34">🇪🇸 +34</option>
+                </select>
+                <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="987 654 321" required>
+              </span>
+            </label>
+            <label>¿Eres docente en activo?
+              <select name="nivel" required>
+                <option value="" selected disabled>Elige una opción</option>
+                <option>Sí, en inicial</option>
+                <option>Sí, en primaria</option>
+                <option>Sí, en secundaria</option>
+                <option>Sí, en otro nivel</option>
+                <option>No ahora mismo</option>
+              </select>
+            </label>
+            <label>País
+              <select name="pais" required>
+                <option value="Perú" selected>Perú</option>
+                <option>Bolivia</option><option>Chile</option><option>Colombia</option><option>Ecuador</option><option>México</option><option>Argentina</option><option>Paraguay</option><option>Uruguay</option><option>Venezuela</option><option>Centroamérica</option><option>República Dominicana</option><option>España</option><option>Otro</option>
+              </select>
+            </label>
+            <button class="btn btn-primary" type="submit">Enviarme el temario por WhatsApp</button>
+            <div class="or">o si prefieres</div>
+            <a class="btn btn-wa js-wa" href="#">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+              Escríbenos por WhatsApp
+            </a>
+            <p class="legal">Usamos tu número solo para enviarte la información del curso. Puedes pedir que dejemos de escribirte cuando quieras. <span class="ph">[enlace a política de privacidad]</span></p>
+          </form>
+        </div>
+
+        <div class="ok" id="okBox" role="status" aria-live="polite" tabindex="-1">
+          <span class="demo-tag">Así respondería la página real</span>
+          <div class="tick" aria-hidden="true" style="margin-top:12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 id="okTitle">¡Listo! Revisa tu WhatsApp</h3>
+          <p id="okText">En menos de 1 minuto te llega un mensaje de INSPEU con el temario y las fechas.</p>
+          <div class="wa-preview" aria-label="Vista previa del mensaje">
+            <div class="wa-bubble" id="okBubble">¡Hola! Soy del equipo de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva 👉 [enlace al temario]. Próximo inicio: [fecha de inicio]. ¿Te viene bien que resolvamos tus dudas mañana a las 10:00 o a las 18:00?<small>ahora</small></div>
+          </div>
+          <p class="note" style="margin-top:6px">Ejemplo: este formulario no envía ningún dato.</p>
+          <button class="btn btn-ghost" type="button" id="resetBtn" style="width:100%;margin-top:12px">Volver al formulario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="after" aria-labelledby="after-h">
+    <h2 id="after-h">Qué pasa después de enviar</h2>
+    <p class="sub">Sin esperas y sin tener que proponer tú una hora para una llamada.</p>
+    <ol class="steps">
+      <li><strong>Recibes el temario al momento por WhatsApp</strong><span>Con las fechas del próximo grupo y lo esencial del curso, en menos de 1 minuto.</span></li>
+      <li><strong>Eliges horario para resolver dudas</strong><span>Te proponemos dos horarios concretos (hora de tu país). Solo respondes con el que te venga mejor.</span></li>
+      <li><strong>Te matriculas</strong><span>Cuando lo tengas claro, te enviamos el enlace de matrícula y los pasos para empezar.</span></li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="who-h">
+    <h2 id="who-h">Para quién es</h2>
+    <p class="sub">Para docentes que tienen en su aula estudiantes con ritmos, capacidades y necesidades distintas, y quieren saber qué hacer el lunes por la mañana.</p>
+    <div class="who">
+      <div><div class="ico" aria-hidden="true">🧸</div><strong>Docentes de inicial</strong><p>Detectar a tiempo señales de alerta y adaptar el juego y las rutinas.</p></div>
+      <div><div class="ico" aria-hidden="true">✏️</div><strong>Docentes de primaria</strong><p>Planificar una misma clase que funcione para todo el grupo.</p></div>
+      <div><div class="ico" aria-hidden="true">📚</div><strong>Docentes de secundaria</strong><p>Adaptar contenidos y evaluaciones sin rebajar el nivel de exigencia.</p></div>
+    </div>
+    <h3 style="font-size:17px;margin-top:20px">Al terminar podrás</h3>
+    <ul class="gain">
+      <li>Identificar las necesidades educativas más frecuentes en tu aula.</li>
+      <li>Diseñar adaptaciones curriculares sencillas y aplicables.</li>
+      <li>Evaluar de forma justa a estudiantes con distintos puntos de partida.</li>
+      <li>Trabajar mejor con las familias y con el resto del equipo docente.</li>
+    </ul>
+  </section>
+
+  <section class="card" aria-labelledby="tem-h">
+    <h2 id="tem-h">Temario</h2>
+    <p class="sub"><span class="demo-tag">Temario orientativo</span> &nbsp;Propuesta genérica de ejemplo; INSPEU la sustituye por su temario real.</p>
+    <ol class="mods">
+      <li><span class="m">Módulo 1</span><div><strong>Fundamentos de la educación inclusiva</strong><p>Qué es la inclusión, de la integración a la inclusión y marco normativo de referencia en la región.</p></div></li>
+      <li><span class="m">Módulo 2</span><div><strong>Diversidad en el aula y necesidades educativas especiales</strong><p>Discapacidad, dificultades de aprendizaje, TDAH, TEA, altas capacidades y diversidad cultural y lingüística.</p></div></li>
+      <li><span class="m">Módulo 3</span><div><strong>Diseño Universal para el Aprendizaje (DUA)</strong><p>Planificar desde el inicio para que la clase sea accesible a todo el grupo.</p></div></li>
+      <li><span class="m">Módulo 4</span><div><strong>Adaptaciones curriculares y estrategias didácticas</strong><p>Ajustes de acceso y de contenido, aprendizaje cooperativo y apoyos dentro del aula.</p></div></li>
+      <li><span class="m">Módulo 5</span><div><strong>Evaluación inclusiva</strong><p>Instrumentos variados y criterios para valorar el progreso de cada estudiante.</p></div></li>
+      <li><span class="m">Módulo 6</span><div><strong>Familia, escuela y comunidad</strong><p>Comunicación con las familias, trabajo en equipo y convivencia en el aula.</p></div></li>
+      <li><span class="m">Trabajo final</span><div><strong>Tu propuesta de aula</strong><p>Aplicas lo aprendido a un caso real de tu grupo.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="how-h">
+    <h2 id="how-h">Cómo funciona</h2>
+    <p class="sub">Pensado para compaginarlo con tu trabajo en el colegio.</p>
+    <div class="how">
+      <div><span class="ico" aria-hidden="true">💻</span><div><strong>Plataforma online</strong><p>Accedes desde el celular o la computadora. Duración: <span class="ph">[horas]</span>.</p></div></div>
+      <div><span class="ico" aria-hidden="true">🗓️</span><div><strong>Fechas</strong><p>Próximo inicio: <span class="ph">[fecha de inicio]</span>. Modalidad: <span class="ph">[a tu ritmo / sesiones en vivo]</span>.</p></div></div>
+      <div><span class="ico" aria-hidden="true">🙋</span><div><strong>Acompañamiento</strong><p>Resuelves dudas con <span class="ph">[tutor o equipo docente]</span> por <span class="ph">[canal]</span>.</p></div></div>
+      <div><span class="ico" aria-hidden="true">📜</span><div><strong>Certificado</strong><p><span class="ph">[tipo de certificado y quién lo emite]</span>.</p></div></div>
+      <div><span class="ico" aria-hidden="true">💳</span><div><strong>Inversión</strong><p><span class="ph">[precio]</span> · <span class="ph">[formas de pago]</span>.</p></div></div>
+      <div><span class="ico" aria-hidden="true">🌎</span><div><strong>Desde cualquier país</strong><p>Docentes de Perú y de toda Latinoamérica.</p></div></div>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Testimonio">
+    <blockquote>«<span class="ph">[testimonio de una alumna]</span>»
+      <cite><span class="ph">[nombre, nivel y ciudad]</span></cite>
+    </blockquote>
+    <p class="note">Un testimonio real de una docente que ya hizo el curso convence más que cualquier texto. Aquí va uno de verdad, con su permiso.</p>
+  </section>
+
+  <section class="card" aria-labelledby="faq-h">
+    <h2 id="faq-h">Preguntas frecuentes</h2>
+    <p class="sub" style="margin-bottom:8px">Si tu duda no está aquí, escríbenos por WhatsApp y te respondemos al momento.</p>
+    <details><summary>¿Necesito experiencia previa en educación inclusiva?</summary><p>No. El curso parte desde lo básico y va hacia lo práctico. Está pensado para docentes de aula, tengan o no formación previa en el tema.</p></details>
+    <details><summary>¿Puedo hacerlo si trabajo a tiempo completo?</summary><p>Sí, es online. Modalidad: <span class="ph">[a tu ritmo / sesiones en vivo]</span>. Dedicación estimada: <span class="ph">[horas por semana]</span>.</p></details>
+    <details><summary>¿Cuándo empieza y cuánto dura?</summary><p>Próximo inicio: <span class="ph">[fecha de inicio]</span>. Duración: <span class="ph">[horas]</span>. Te enviamos el calendario completo por WhatsApp.</p></details>
+    <details><summary>¿Cuánto cuesta y cómo se paga?</summary><p><span class="ph">[precio]</span>. Formas de pago: <span class="ph">[formas de pago]</span>.</p></details>
+    <details><summary>¿Qué certificado recibo?</summary><p><span class="ph">[tipo de certificado y quién lo emite]</span>.</p></details>
+    <details><summary>¿Puedo hacerlo desde fuera del Perú?</summary><p>Sí. Al ser online, puedes seguirlo desde cualquier país. Los horarios de atención se te proponen en tu hora local.</p></details>
+    <details><summary>¿Qué pasa cuando envío el formulario?</summary><p>Te llega al momento un WhatsApp con el temario y las fechas. Después te proponemos dos horarios para resolver dudas y, si te convence, te enviamos el enlace de matrícula.</p></details>
+  </section>
+
+  <section class="final">
+    <h2>Recibe el temario ahora</h2>
+    <p>Déjanos tu WhatsApp y en menos de 1 minuto tienes el temario y las fechas del próximo grupo.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="#formulario">Quiero el temario</a>
+      <a class="btn btn-wa js-wa" href="#">Escríbenos por WhatsApp</a>
+    </div>
+  </section>
+
+  <p class="note" id="waNote" hidden>En la página real, este botón abriría WhatsApp con un mensaje ya escrito para <span class="ph">[número de WhatsApp de INSPEU]</span>.</p>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>INSPEU · Instituto Peruano Europeo · <span class="ph">[datos de contacto y aviso legal]</span></span>
+    <span>Ejemplo de landing preparado por Qualivo. No es una página real y no recoge datos. <a href="../">← Volver a la demo</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form=document.getElementById('leadForm'),formBox=document.getElementById('formBox'),okBox=document.getElementById('okBox');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=null;
+    ['nombre','whatsapp','nivel'].forEach(function(n){var el=form.elements[n];if(!bad&&!String(el.value).trim())bad=el;});
+    if(bad){bad.focus();bad.style.borderColor='var(--warn)';return;}
+    var nombre=form.elements.nombre.value.trim().split(/\s+/)[0];
+    var tel=form.elements.prefijo.value+' '+form.elements.whatsapp.value.trim();
+    var hora=form.elements.pais.value==='Perú'?' (hora de Perú)':' (en tu hora local)';
+    document.getElementById('okTitle').textContent='¡Listo, '+nombre+'! Revisa tu WhatsApp';
+    document.getElementById('okText').textContent='En menos de 1 minuto te llega un mensaje de INSPEU al '+tel+' con el temario y las fechas.';
+    document.getElementById('okBubble').innerHTML='¡Hola, '+esc(nombre)+'! Soy del equipo de INSPEU 👋 Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad 👉 [enlace al temario]. Próximo inicio: [fecha de inicio]. Para resolver tus dudas, ¿te viene mejor mañana a las 10:00 o a las 18:00'+hora+'?<small>ahora</small>';
+    formBox.style.display='none';okBox.style.display='block';okBox.focus();
+    document.getElementById('formulario').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  form.addEventListener('input',function(e){e.target.style.borderColor='';});
+  document.getElementById('resetBtn').addEventListener('click',function(){okBox.style.display='none';formBox.style.display='block';form.reset();});
+  var note=document.getElementById('waNote');
+  Array.prototype.forEach.call(document.querySelectorAll('.js-wa'),function(a){
+    a.addEventListener('click',function(e){e.preventDefault();note.hidden=false;note.scrollIntoView({behavior:'smooth',block:'center'});});
+  });
+})();
+</script>
+</body>
+</html>
