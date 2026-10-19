@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>INSPEU · demo del seguimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Demo para el diagnóstico de INSPEU (19-oct): su primer mensaje de hoy, cómo sería con un agente, el seguimiento a quien no contesta y la cuenta de lo que se escapa. */
+:root{--bg:#F7F5F0;--card:#FFFFFF;--ink:#16211C;--muted:#5D6B64;--line:#E2DED5;--accent:#1F6F4A;--accent-soft:#E3F1E9;--warn:#A4471F;--warn-soft:#FBEDE6;--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.hero{background:#0E2A1E;color:#fff;padding:56px 0 40px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9FD8B8;font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(30px,4.6vw,50px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 12px;max-width:22ch}
+.hero p{color:rgba(255,255,255,.82);max-width:66ch;font-size:18px}
+main{display:grid;gap:28px;padding:32px 0 72px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+h2{font-family:var(--serif);font-size:clamp(23px,3vw,31px);line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:72ch}
+.num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;margin-right:8px;vertical-align:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.phone{background:var(--wa-bg);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.phone .top{background:var(--wa-head);color:#fff;padding:10px 14px;font-weight:600;font-size:14px}
+.phone .chat{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:220px}
+.b{max-width:86%;padding:8px 11px;border-radius:10px;font-size:14.5px;line-height:1.45;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b small{display:block;text-align:right;color:var(--muted);font-size:11px;margin-top:3px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
+.tag.bad{background:var(--warn-soft);color:var(--warn)}
+.tag.good{background:var(--accent-soft);color:var(--accent)}
+ul.points{padding-left:18px;display:grid;gap:6px;margin-top:12px}
+.timeline{display:grid;gap:12px}
+.step{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start;border-top:1px solid var(--line);padding-top:12px}
+.step:first-child{border-top:0;padding-top:0}
+.when{font-weight:700;color:var(--accent);font-size:14px}
+.step .msg{background:var(--wa-out);border-radius:10px;padding:9px 12px;font-size:14.5px}
+@media (max-width:560px){.step{grid-template-columns:1fr;gap:6px}}
+.calc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:700px){.calc{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:14px;color:var(--muted);font-weight:500}
+input{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.result{margin-top:18px;padding:18px;border-radius:12px;background:var(--accent-soft);display:grid;gap:4px}
+.result .big{font-family:var(--serif);font-size:clamp(28px,4vw,40px);color:var(--accent);line-height:1.1}
+.result p{color:var(--ink);font-size:15px}
+a.btn{display:inline-block;margin-top:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:11px 16px;border-radius:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;margin-top:14px}
+footer{color:var(--muted);font-size:13px;padding:0 0 40px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Qualivo · diagnóstico para INSPEU</div>
+    <h1>Del primer mensaje a la matrícula, sin que nadie se quede esperando</h1>
+    <p>Qué recibe hoy quien os escribe, cómo sería con un agente que responde al momento y hace el seguimiento, y cuánto se os puede estar escapando cada mes.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2><span class="num">1</span>Lo que recibe hoy quien os escribe</h2>
+    <p class="sub">Este es el mensaje que nos llegó a nosotros al escribiros. Es el mismo para cualquier persona, sea alumna o no.</p>
+    <div class="grid2">
+      <div class="phone">
+        <div class="top">INSPEU</div>
+        <div class="chat">
+          <div class="b out">Hola, me interesa el curso. ¿Me dais información?<small>12:06</small></div>
+          <div class="b in">Buen día, mi nombre es Alejandro y me comunico desde INSPEU - Instituto Peruano Europeo. Gracias por su interés en capacitarse en Educación Inclusiva y Atención a la Diversidad. ¿Me puede decir por esta misma vía en qué momento podemos agendar una llamada telefónica? Quedo atento.<small>12:06</small></div>
+        </div>
+      </div>
+      <div>
+        <span class="tag bad">Dónde se pierde la gente</span>
+        <ul class="points">
+          <li><strong>Le pasa el trabajo a la alumna:</strong> tiene que pensar ella a qué hora le viene bien. Muchas lo dejan para luego y no vuelven.</li>
+          <li><strong>No le da nada a cambio:</strong> ni temario, ni fechas, ni precio. Pide una llamada antes de aportar nada.</li>
+          <li><strong>No distingue a nadie:</strong> el mismo texto para una docente con prisa por matricularse que para quien solo curiosea.</li>
+          <li><strong>Si no contesta, se acaba ahí:</strong> no hay un segundo mensaje. Es justo la fuga que marcasteis: el seguimiento.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span>El mismo momento, con un agente</h2>
+    <p class="sub">Responde en menos de un minuto, a cualquier hora y en el horario de cada país. Da la información útil, hace una o dos preguntas para saber a quién tiene delante y ofrece dos horarios concretos para la llamada.</p>
+    <div class="grid2">
+      <div class="phone">
+        <div class="top">INSPEU · asistente</div>
+        <div class="chat">
+          <div class="b in" style="align-self:flex-end;background:var(--wa-out)">Hola, me interesa el curso de Educación Inclusiva.<small>21:14</small></div>
+          <div class="b in">¡Hola! Gracias por escribir. Te cuento lo principal: el curso es online, a tu ritmo, con certificado al terminar. Te dejo el temario aquí 👉 [enlace]. Para orientarte bien: ¿eres docente en activo y en qué país trabajas?<small>21:14</small></div>
+          <div class="b in" style="align-self:flex-end;background:var(--wa-out)">Sí, soy profesora de primaria en Arequipa.<small>21:16</small></div>
+          <div class="b in">Perfecto, está pensado justo para docentes de aula. Si quieres resolver dudas de fechas y pago con el equipo, ¿te viene mejor mañana a las 10:00 o a las 18:00 (hora de Perú)? Solo dime cuál.<small>21:16</small></div>
+          <div class="b in" style="align-self:flex-end;background:var(--wa-out)">A las 18:00.<small>21:17</small></div>
+          <div class="b in">Hecho: mañana a las 18:00 te llama el equipo. Te mando un recordatorio una hora antes. ¡Hasta mañana!<small>21:17</small></div>
+        </div>
+      </div>
+      <div>
+        <span class="tag good">Qué cambia</span>
+        <ul class="points">
+          <li><strong>Responde al momento,</strong> también de noche y en fin de semana, cuando más escriben las docentes.</li>
+          <li><strong>Da valor antes de pedir:</strong> temario, modalidad y certificado en el primer mensaje.</li>
+          <li><strong>Cualifica en dos preguntas</strong> y le pasa al equipo la ficha: quién es, qué curso, país y lo que ha preguntado.</li>
+          <li><strong>Ofrece dos horarios en su zona horaria</strong> en vez de pedir que la alumna proponga uno.</li>
+          <li><strong>El equipo solo habla con quien ya quiere hablar.</strong></li>
+        </ul>
+        <p class="note">Ejemplo ilustrativo. Los datos del curso (temario, fechas, precio) se cargan con vuestra información real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">3</span>Seguimiento a quien no contesta</h2>
+    <p class="sub">Hoy, si la alumna no responde al primer mensaje, se pierde. Con el agente, cada persona recibe un seguimiento corto y útil hasta que decide. Si contesta en cualquier punto, la conversación sigue con ella y se para la secuencia.</p>
+    <div class="timeline">
+      <div class="step"><div class="when">+2 horas</div><div class="msg">Te dejo por aquí el temario por si quieres echarle un vistazo con calma. ¿Te reservo plaza para la próxima convocatoria o prefieres que te cuente antes las fechas?</div></div>
+      <div class="step"><div class="when">+1 día</div><div class="msg">Una pregunta rápida: ¿lo que más te interesa es el certificado o aplicar lo que aprendas en tu aula? Así te cuento lo que más te sirve.</div></div>
+      <div class="step"><div class="when">+3 días</div><div class="msg">Esta es la experiencia de una docente que hizo el curso el año pasado: [testimonio]. Si te encaja, te guardo plaza.</div></div>
+      <div class="step"><div class="when">+7 días</div><div class="msg">No quiero insistirte. ¿Lo dejamos para la siguiente convocatoria o lo ves para ahora? Con un «ahora» o un «más adelante» me vale.</div></div>
+      <div class="step"><div class="when">+30 días</div><div class="msg">Abrimos nueva convocatoria el [fecha]. Si sigues interesada, te reservo plaza antes de que se llene.</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">4</span>La cuenta: cuánto se escapa cada mes</h2>
+    <p class="sub">Con vuestros números. Cambia las cifras y se recalcula al momento.</p>
+    <div class="calc">
+      <label>Solicitudes al mes<input id="sol" type="number" min="0" value="75" inputmode="numeric"></label>
+      <label>% que hoy no contesta y se pierde<input id="per" type="number" min="0" max="100" value="40" inputmode="numeric"></label>
+      <label>Precio medio de un curso (€)<input id="pre" type="number" min="0" value="150" inputmode="numeric"></label>
+    </div>
+    <div class="calc" style="margin-top:14px">
+      <label>% que se recupera con seguimiento<input id="rec" type="number" min="0" max="100" value="20" inputmode="numeric"></label>
+    </div>
+    <div class="result">
+      <div class="big" id="out-perdidas">—</div>
+      <p id="out-txt">—</p>
+    </div>
+    <p class="note">Las cifras de partida son un ejemplo para rellenar en la llamada con vuestros datos reales.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">5</span>El panel: todo el recorrido a la vista</h2>
+    <p class="sub">Cada solicitud, en qué punto está, quién la atiende y dónde se para. Así se ve el sistema completo para una escuela online con alumnos de varios países.</p>
+    <a class="btn" href="/intelligence/?sector=masters&amp;empresa=INSPEU&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel de ejemplo</a>
+  </section>
+
+</main>
+<footer class="wrap">Qualivo · documento de trabajo para INSPEU. No indexado.</footer>
+
+<script>
+(function(){
+  var ids=['sol','per','pre','rec'];
+  var f=new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
+  function v(id){var n=parseFloat(document.getElementById(id).value);return isFinite(n)&&n>0?n:0}
+  function calc(){
+    var sol=v('sol'),per=Math.min(v('per'),100)/100,pre=v('pre'),rec=Math.min(v('rec'),100)/100;
+    var perdidas=sol*per, euros=perdidas*pre, recuperadas=perdidas*rec, eurosRec=recuperadas*pre;
+    document.getElementById('out-perdidas').textContent=f.format(euros)+' € al mes';
+    document.getElementById('out-txt').textContent='Son unas '+f.format(perdidas)+' personas al mes que preguntan y no reciben seguimiento. Recuperando el '+f.format(rec*100)+' % de ellas, entrarían unas '+f.format(recuperadas)+' matrículas más al mes, unos '+f.format(eurosRec)+' € al mes ('+f.format(eurosRec*12)+' € al año).';
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
