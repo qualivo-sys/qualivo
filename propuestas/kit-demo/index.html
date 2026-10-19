@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Kit de demo · Qualivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Kit de demo por sector para primeras reuniones de venta. Se adapta con ?sector= y, opcionalmente, ?empresa=. Todo con datos simulados. */
+:root{--bg:#F7F5F0;--card:#FFFFFF;--ink:#16211C;--muted:#5D6B64;--line:#E2DED5;--accent:#1F6F4A;--accent-soft:#E3F1E9;--warn:#A4471F;--warn-soft:#FBEDE6;--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.hero{background:#0E2A1E;color:#fff;padding:40px 0 40px}
+.sectores{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.sectores a{color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 13px;text-decoration:none;font-weight:600;font-size:14px}
+.sectores a:hover{border-color:#fff}
+.sectores a[aria-current="page"]{background:#fff;color:#0E2A1E;border-color:#fff}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9FD8B8;font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(30px,4.6vw,50px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 12px;max-width:22ch;overflow-wrap:anywhere}
+.hero p{color:rgba(255,255,255,.82);max-width:66ch;font-size:18px}
+main{display:grid;gap:28px;padding:32px 0 72px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;min-width:0}
+@media (max-width:560px){section.card{padding:18px}}
+h2{font-family:var(--serif);font-size:clamp(23px,3vw,31px);line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:72ch}
+.num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;margin-right:8px;vertical-align:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid2>*{min-width:0}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.phone{background:var(--wa-bg);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.phone .top{background:var(--wa-head);color:#fff;padding:10px 14px;font-weight:600;font-size:14px;overflow-wrap:anywhere}
+.phone .chat{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:220px}
+.b{max-width:86%;padding:8px 11px;border-radius:10px;font-size:14.5px;line-height:1.45;box-shadow:0 1px 0 rgba(0,0,0,.06);overflow-wrap:anywhere}
+.b.in{background:var(--wa-in);align-self:flex-start}
+.b.out{background:var(--wa-out);align-self:flex-end}
+.b small{display:block;text-align:right;color:var(--muted);font-size:11px;margin-top:3px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
+.tag.bad{background:var(--warn-soft);color:var(--warn)}
+.tag.good{background:var(--accent-soft);color:var(--accent)}
+ul.points{padding-left:18px;display:grid;gap:6px;margin-top:12px}
+.timeline{display:grid;gap:12px}
+.step{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start;border-top:1px solid var(--line);padding-top:12px}
+.step:first-child{border-top:0;padding-top:0}
+.step>*{min-width:0}
+.when{font-weight:700;color:var(--accent);font-size:14px}
+.when span{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.step .msg{background:var(--wa-out);border-radius:10px;padding:9px 12px;font-size:14.5px;overflow-wrap:anywhere}
+.step .msg.mail{background:var(--bg);border:1px solid var(--line)}
+.step .aviso{margin-top:6px;font-size:13.5px;color:var(--muted);padding-left:10px;border-left:3px solid var(--accent)}
+.step .aviso strong{color:var(--ink)}
+@media (max-width:560px){.step{grid-template-columns:1fr;gap:6px}.when span{display:inline;margin-left:6px}}
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:end}
+@media (max-width:900px){.calc{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.calc{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:14px;color:var(--muted);font-weight:500}
+input{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+.result{margin-top:18px;padding:18px;border-radius:12px;background:var(--accent-soft);display:grid;gap:4px}
+.result .big{font-family:var(--serif);font-size:clamp(28px,4vw,40px);color:var(--accent);line-height:1.1}
+.result .year{font-weight:600;color:var(--accent);font-size:17px}
+.result p{color:var(--ink);font-size:15px}
+.h2row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:6px}
+.h2row h2{margin-bottom:0}
+a.btn{display:inline-block;margin-top:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:11px 16px;border-radius:10px}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;margin-top:14px}
+footer{color:var(--muted);font-size:13px;padding:0 0 40px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <nav class="sectores" id="sectores" aria-label="Sector de la demo"></nav>
+    <div class="eyebrow" id="eyebrow">Qualivo · demo de ejemplo</div>
+    <h1 id="titular">Del primer mensaje al cliente, sin que nadie se quede esperando</h1>
+    <p id="intro"></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2><span class="num">1</span>Así responde hoy un negocio típico</h2>
+    <p class="sub" id="hoy-sub"></p>
+    <div class="grid2">
+      <div class="phone">
+        <div class="top" id="hoy-top"></div>
+        <div class="chat" id="hoy-chat"></div>
+      </div>
+      <div>
+        <span class="tag bad">Dónde se pierde la gente</span>
+        <ul class="points" id="hoy-problemas"></ul>
+      </div>
+    </div>
+    <p class="note">Mensaje inventado, del tipo que se recibe a menudo en el sector. No es de ningún negocio concreto.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span>El mismo momento, con un agente</h2>
+    <p class="sub">Responde en minutos, a cualquier hora. Da la información útil, hace dos o tres preguntas para saber a quién tiene delante y propone dos huecos concretos para la cita.</p>
+    <div class="grid2">
+      <div class="phone">
+        <div class="top" id="agente-top"></div>
+        <div class="chat" id="agente-chat"></div>
+      </div>
+      <div>
+        <span class="tag good">Qué cambia</span>
+        <ul class="points" id="agente-cambia"></ul>
+        <p class="note">Ejemplo ilustrativo con datos inventados. La información real de cada negocio (servicios, fechas, horarios, condiciones) se carga al configurar el agente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">3</span>Seguimiento a quien no contesta</h2>
+    <p class="sub" id="seg-sub"></p>
+    <div class="timeline" id="seg-linea"></div>
+    <p class="note">Solo WhatsApp y correo: no hay llamadas automáticas. Cuando hace falta llamar, el sistema avisa al comercial y llama una persona del equipo.</p>
+  </section>
+
+  <section class="card">
+    <div class="h2row">
+      <h2><span class="num">4</span>La cuenta: cuánto se puede estar escapando</h2>
+      <span class="tag good">Estimación con tus números</span>
+    </div>
+    <p class="sub">Cambia las cifras y se recalcula al momento. Las de partida son solo un ejemplo para rellenar en la llamada.</p>
+    <div class="calc">
+      <label>Solicitudes al mes<input id="sol" type="number" min="0" inputmode="numeric"></label>
+      <label>% que hoy se queda sin seguimiento<input id="per" type="number" min="0" max="100" inputmode="numeric"></label>
+      <label><span id="pre-label">Ticket medio (€)</span><input id="pre" type="number" min="0" inputmode="numeric"></label>
+      <label>% que se podría recuperar<input id="rec" type="number" min="0" max="100" inputmode="numeric"></label>
+    </div>
+    <div class="result" aria-live="polite">
+      <div class="big" id="out-mes">—</div>
+      <div class="year" id="out-anio">—</div>
+      <p id="out-txt">—</p>
+    </div>
+    <p class="note">Estimación con tus números, no una previsión: el resultado depende de cada negocio, de su oferta y de su equipo.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">5</span>El panel: todo el recorrido a la vista</h2>
+    <p class="sub" id="panel-sub"></p>
+    <a class="btn" id="panel-btn" href="/intelligence/?sector=otro&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel de ejemplo</a>
+  </section>
+
+</main>
+<footer class="wrap">Qualivo · demo de ejemplo con datos simulados. No indexado.</footer>
+
+<noscript><p class="wrap" style="padding-bottom:24px">Esta demo necesita JavaScript.</p></noscript>
+
+<script>
+(function(){
+  'use strict';
+
+  // Textos por sector. Todo inventado: sin nombres, clientes ni cifras reales.
+  // Conversaciones vistas desde el móvil de quien escribe: 'out' = la persona, 'in' = el negocio.
+  var SECTORES = {
+    formacion: {
+      nombre: 'Formación',
+      panel: 'formacion',
+      panelTxt: 'una escuela con varios programas',
+      titular: 'Del primer mensaje a la matrícula, sin que nadie se quede esperando',
+      intro: 'Qué recibe hoy quien pregunta por un curso o un máster, cómo sería con un agente que responde en minutos y hace el seguimiento, y cuánto puede estar escapándose cada mes.',
+      negocio: 'Escuela de ejemplo',
+      hoySub: 'Alguien pregunta por un programa a las nueve de la noche, desde un anuncio. Esto es lo que suele recibir.',
+      hoy: [
+        ['out', 'Hola, quería información del máster. ¿Cuándo empieza la próxima edición?', '21:12'],
+        ['in', 'Gracias por contactar con nosotros. Hemos recibido su solicitud correctamente. Un asesor académico se pondrá en contacto con usted en un plazo de 24 a 48 horas laborables. Atentamente, el equipo de admisiones.', '21:12']
+      ],
+      problemas: [
+        ['Llega tarde:', 'en 48 horas esa persona ya ha pedido información a otras escuelas y suele quedarse con la primera que le contestó de verdad.'],
+        ['No responde a lo que pregunta:', 'ni fechas, ni modalidad, ni cuál es el siguiente paso. Solo «ya le llamaremos».'],
+        ['Si no coge el teléfono, se acaba ahí:', 'no hay segundo mensaje ni nadie que retome la conversación.']
+      ],
+      chat: [
+        ['out', 'Hola, quería información del máster. ¿Cuándo empieza la próxima edición?', '21:12'],
+        ['in', '¡Hola! Gracias por escribir. La próxima edición empieza el [fecha], online y con clases en directo una tarde a la semana. Te dejo el programa aquí: [enlace]. Para orientarte bien: ¿a qué te dedicas ahora?', '21:13'],
+        ['out', 'Trabajo en recursos humanos, unos cuatro años.', '21:15'],
+        ['in', 'Encaja con el perfil del máster. ¿Lo harías por tu cuenta o te gustaría que lo financiara tu empresa? Lo pregunto porque cambian las opciones de pago.', '21:15'],
+        ['out', 'Si se puede, que lo pague la empresa.', '21:16'],
+        ['in', 'Perfecto. Lo mejor es que lo veas con una asesora de admisiones, que te explica condiciones y cómo plantearlo en tu empresa. ¿Te viene mejor mañana a las 10:30 o a las 17:00?', '21:16'],
+        ['out', 'A las 17:00.', '21:17'],
+        ['in', 'Hecho: mañana a las 17:00 te llama una asesora. Te mando un recordatorio una hora antes.', '21:17']
+      ],
+      ficha: 'quién es, qué programa le interesa, cómo lo pagaría y qué ha preguntado',
+      seguimiento: {
+        h4: 'Te dejo por aquí el programa completo por si quieres verlo con calma: [enlace]. ¿Te cuento fechas y plazas de la próxima edición?',
+        d1: 'Asunto: El programa y las fechas de la próxima edición. Te resumo lo que suele preguntar quien está en tu situación: horarios, titulación y formas de pago. Si respondes a este correo, te propongo dos horarios para hablarlo con una asesora.',
+        d3: '¿Qué te frena más ahora mismo: el horario, el precio o el momento? Con una palabra me vale y te digo si tiene solución.',
+        d7: 'No quiero insistirte. ¿Lo dejamos para la siguiente edición o lo ves para esta? Con un «ahora» o un «más adelante» me vale.'
+      },
+      calc: { sol: 80, per: 40, pre: 1500, rec: 15, preLabel: 'Precio medio de la matrícula (€)', unidad: 'matrículas', personas: 'personas' }
+    },
+
+    clinicas: {
+      nombre: 'Clínicas',
+      panel: 'clinica',
+      panelTxt: 'una clínica de estética o dental',
+      titular: 'De la primera consulta a la primera cita, sin que nadie se quede esperando',
+      intro: 'Qué recibe hoy quien pregunta por un tratamiento, cómo sería con un agente que responde en minutos y reserva la primera cita, y cuánto puede estar escapándose cada mes.',
+      negocio: 'Clínica de ejemplo',
+      hoySub: 'Alguien pregunta por un tratamiento al salir del trabajo. Esto es lo que suele recibir.',
+      hoy: [
+        ['out', 'Hola, ¿hacéis blanqueamiento dental? ¿Tendríais cita esta semana?', '20:41'],
+        ['in', 'Gracias por su mensaje. Nuestro horario de atención es de lunes a viernes de 9:00 a 14:00 y de 16:00 a 20:00. Para solicitar cita, llame al teléfono de la clínica en horario de atención. Un saludo.', '20:41']
+      ],
+      problemas: [
+        ['Le manda al teléfono:', 'le pide que llame en horario de oficina, justo cuando está trabajando. Mucha gente no llama nunca.'],
+        ['No contesta a nada:', 'ni disponibilidad, ni qué incluye la primera visita, ni cuánto dura.'],
+        ['Nadie vuelve a escribir:', 'si no llama, la clínica ni se entera de que había alguien interesado.']
+      ],
+      chat: [
+        ['out', 'Hola, ¿hacéis blanqueamiento dental? ¿Tendríais cita esta semana?', '20:41'],
+        ['in', '¡Hola! Gracias por escribir. Sí: empieza con una primera visita de valoración para ver si es el tratamiento adecuado y darte el presupuesto por escrito. ¿Es la primera vez que vienes a la clínica?', '20:42'],
+        ['out', 'Sí, primera vez.', '20:43'],
+        ['in', '¿Tienes sensibilidad dental o algún tratamiento reciente que debamos saber antes de la visita?', '20:43'],
+        ['out', 'No, nada.', '20:44'],
+        ['in', 'Perfecto. Para la primera visita tengo hueco el jueves a las 10:00 o el viernes a las 18:30. ¿Cuál te viene mejor?', '20:44'],
+        ['out', 'El viernes.', '20:45'],
+        ['in', 'Reservado: viernes a las 18:30. Te mando la ubicación y un recordatorio el día antes y otro una hora antes.', '20:45']
+      ],
+      ficha: 'qué tratamiento le interesa, si es paciente nueva y lo que ha contado',
+      seguimiento: {
+        h4: 'Te dejo por aquí qué incluye la primera visita y cuánto dura: [enlace]. ¿Te busco un hueco esta semana?',
+        d1: 'Asunto: Tu primera visita de valoración. Te resumo cómo es, cuánto dura y las dudas más habituales sobre el tratamiento. Si respondes a este correo, te propongo dos horarios.',
+        d3: '¿Qué te frena más: el horario, el presupuesto o tener dudas sobre el tratamiento? Con una palabra me vale.',
+        d7: 'No quiero insistirte. ¿Te escribo más adelante o lo dejamos aquí? Con un «más adelante» me vale.'
+      },
+      calc: { sol: 120, per: 35, pre: 600, rec: 15, preLabel: 'Ticket medio de un tratamiento (€)', unidad: 'tratamientos', personas: 'personas' }
+    },
+
+    reformas: {
+      nombre: 'Reformas',
+      panel: 'reformas',
+      panelTxt: 'una empresa de reformas',
+      titular: 'De la primera consulta al presupuesto, sin que nadie se quede esperando',
+      intro: 'Qué recibe hoy quien pide presupuesto para una obra, cómo sería con un agente que responde en minutos y deja la visita cerrada, y cuánto puede estar escapándose cada mes.',
+      negocio: 'Reformas de ejemplo',
+      hoySub: 'Alguien pide presupuesto un domingo por la tarde, después de ver un anuncio. Esto es lo que suele recibir.',
+      hoy: [
+        ['out', 'Buenas, quiero reformar el baño entero. ¿Me podéis dar presupuesto?', '19:58'],
+        ['in', 'Gracias por contactar. Debido al alto volumen de solicitudes, los presupuestos se atienden por orden de llegada. Nos pondremos en contacto con usted lo antes posible.', '19:58']
+      ],
+      problemas: [
+        ['No da fecha:', '«lo antes posible» puede ser una semana. Mientras, esa persona ya ha pedido presupuesto a otras empresas.'],
+        ['No pregunta nada:', 'el técnico irá a la visita sin saber metros, plazos ni qué quiere cambiar exactamente.'],
+        ['Si no contesta al teléfono, se pierde:', 'nadie vuelve a escribir y el presupuesto no llega a hacerse.']
+      ],
+      chat: [
+        ['out', 'Buenas, quiero reformar el baño entero. ¿Me podéis dar presupuesto?', '19:58'],
+        ['in', '¡Hola! Gracias por escribir. Para darte un presupuesto ajustado hacemos una visita corta. Antes, unas preguntas rápidas: ¿cuántos metros tiene el baño, más o menos?', '19:59'],
+        ['out', 'Unos 5 m², con bañera.', '20:01'],
+        ['in', '¿Quieres cambiar la bañera por plato de ducha? ¿Y para cuándo te gustaría tener la obra terminada?', '20:01'],
+        ['out', 'Sí, plato de ducha. En un par de meses, si puede ser.', '20:03'],
+        ['in', 'Perfecto. Para la visita tengo el martes a las 9:00 o el miércoles a las 16:00. ¿Cuál te viene mejor?', '20:03'],
+        ['out', 'El miércoles.', '20:04'],
+        ['in', 'Apuntado: miércoles a las 16:00. El técnico irá con tus respuestas ya leídas. Te aviso el día antes y una hora antes.', '20:04']
+      ],
+      ficha: 'tipo de obra, metros, plazos y lo que quiere cambiar',
+      seguimiento: {
+        h4: 'Te dejo fotos de baños parecidos al tuyo, por si te ayudan a pensar en acabados: [fotos]. ¿Te reservo la visita?',
+        d1: 'Asunto: Tu reforma de baño, paso a paso. Cómo es la visita, cómo se entrega el presupuesto por escrito y cómo se organizan los plazos de obra. Si respondes con dos días que te vengan bien, te confirmamos la visita.',
+        d3: '¿Qué te frena más ahora: el presupuesto, los plazos o elegir materiales? Con una palabra me vale.',
+        d7: 'No quiero insistirte. ¿Lo dejamos para más adelante o quieres que vayamos a verlo este mes?'
+      },
+      calc: { sol: 40, per: 45, pre: 8000, rec: 10, preLabel: 'Importe medio de una obra (€)', unidad: 'obras', personas: 'personas' }
+    },
+
+    asesorias: {
+      nombre: 'Asesorías',
+      panel: 'b2b',
+      panelTxt: 'una asesoría o despacho profesional',
+      titular: 'De la primera consulta al cliente con iguala, sin que nadie se quede esperando',
+      intro: 'Qué recibe hoy quien busca asesoría o gestoría, cómo sería con un agente que responde en minutos y entiende su caso, y cuánto puede estar escapándose cada mes.',
+      negocio: 'Asesoría de ejemplo',
+      hoySub: 'Un autónomo decide cambiar de gestoría una noche, después de un trimestre complicado. Esto es lo que suele recibir.',
+      hoy: [
+        ['out', 'Hola, soy autónomo y estoy pensando en cambiar de gestoría. ¿Cómo funcionáis?', '22:05'],
+        ['in', 'Gracias por su consulta. En estos momentos no podemos atenderle. Le responderemos a la mayor brevedad posible. Para consultas urgentes, puede escribir a nuestro correo de contacto.', '22:05']
+      ],
+      problemas: [
+        ['Respuesta de contestador:', 'no dice cuándo ni quién va a responder, y le manda a otro canal.'],
+        ['No sabe a quién tiene delante:', 'no es lo mismo un autónomo que una sociedad con empleados; la iguala y la conversación cambian por completo.'],
+        ['Sin segundo mensaje, se queda donde estaba:', 'el cambio de asesoría se decide en caliente. Si nadie vuelve a escribir, el interés se enfría.']
+      ],
+      chat: [
+        ['out', 'Hola, soy autónomo y estoy pensando en cambiar de gestoría. ¿Cómo funcionáis?', '22:05'],
+        ['in', '¡Hola! Gracias por escribir. Trabajamos con una iguala mensual según lo que necesites. Para decirte qué encaja, unas preguntas rápidas: ¿a qué te dedicas y facturas como autónomo o con sociedad?', '22:06'],
+        ['out', 'Diseño gráfico, como autónomo.', '22:08'],
+        ['in', '¿Tienes trabajadores a tu cargo? ¿Y la facturación la llevas tú o alguien te la lleva?', '22:08'],
+        ['out', 'Sin trabajadores. Facturo yo con un programa.', '22:09'],
+        ['in', 'Perfecto. Para explicarte la iguala y cómo se hace el cambio de gestoría, ¿te viene mejor una llamada de 15 minutos mañana a las 9:30 o a las 13:00?', '22:09'],
+        ['out', 'A las 13:00.', '22:10'],
+        ['in', 'Hecho: mañana a las 13:00 te llama una asesora. Te mando un recordatorio una hora antes.', '22:10']
+      ],
+      ficha: 'actividad, forma jurídica, trabajadores y lo que necesita',
+      seguimiento: {
+        h4: 'Te dejo por aquí qué incluye la iguala para autónomos y qué documentación hace falta para el cambio: [enlace]. ¿Te reservo la llamada?',
+        d1: 'Asunto: Cambiar de gestoría, paso a paso. Qué incluye la iguala, qué papeles se necesitan y cuándo conviene hacer el cambio. Si respondes a este correo, te propongo dos horarios para hablarlo.',
+        d3: '¿Qué te frena más ahora: la cuota, el momento del año o el trámite del cambio? Con una palabra me vale.',
+        d7: 'No quiero insistirte. ¿Lo vemos al cierre del trimestre o lo dejamos aquí? Con un «más adelante» me vale.'
+      },
+      calc: { sol: 30, per: 35, pre: 1200, rec: 15, preLabel: 'Iguala media de un cliente el primer año (€)', unidad: 'clientes con iguala', personas: 'personas' }
+    },
+
+    servicios: {
+      nombre: 'Servicios',
+      panel: 'otro',
+      panelTxt: 'un negocio de servicios',
+      titular: 'Del primer mensaje al cliente, sin que nadie se quede esperando',
+      intro: 'Qué recibe hoy quien pregunta por un servicio, cómo sería con un agente que responde en minutos y hace el seguimiento, y cuánto puede estar escapándose cada mes.',
+      negocio: 'Negocio de ejemplo',
+      hoySub: 'Alguien escribe por la noche después de ver un anuncio. Esto es lo que suele recibir.',
+      hoy: [
+        ['out', 'Hola, he visto vuestro anuncio. ¿Me podéis dar más información?', '21:30'],
+        ['in', '¡Hola! Gracias por escribirnos. Hemos recibido tu mensaje y te responderemos lo antes posible. Mientras tanto, puedes visitar nuestra web.', '21:30']
+      ],
+      problemas: [
+        ['Vale para cualquiera:', 'la persona preguntó por algo concreto y recibe un texto que no responde a nada.'],
+        ['Lo deja todo en el aire:', 'ni cuándo, ni quién, ni cuál es el siguiente paso.'],
+        ['Si nadie vuelve a escribir, se olvida:', 'no hay segundo mensaje y el interés de esa noche se pierde.']
+      ],
+      chat: [
+        ['out', 'Hola, he visto vuestro anuncio. ¿Me podéis dar más información?', '21:30'],
+        ['in', '¡Hola! Gracias por escribir. Te cuento lo principal: [qué hacemos, para quién y cómo funciona]. Para orientarte bien: ¿es para ti o para tu empresa?', '21:31'],
+        ['out', 'Para mi empresa, somos ocho personas.', '21:33'],
+        ['in', '¿Y para cuándo lo necesitaríais?', '21:33'],
+        ['out', 'Este mes, si puede ser.', '21:34'],
+        ['in', 'Perfecto. Lo mejor es una llamada de 15 minutos con el equipo para verlo con vuestro caso. ¿Te viene mejor mañana a las 11:00 o a las 16:30?', '21:34'],
+        ['out', 'A las 11:00.', '21:35'],
+        ['in', 'Hecho: mañana a las 11:00 te llama el equipo. Te mando un recordatorio una hora antes.', '21:35']
+      ],
+      ficha: 'quién es, qué necesita, para cuándo y qué ha preguntado',
+      seguimiento: {
+        h4: 'Te dejo por aquí un resumen de cómo trabajamos y casos parecidos al tuyo: [enlace]. ¿Te reservo la llamada?',
+        d1: 'Asunto: Lo que nos preguntaste. Te resumo cómo trabajamos, qué incluye el servicio y cuál sería el siguiente paso. Si respondes a este correo, te propongo dos horarios.',
+        d3: '¿Qué te frena más ahora: el precio, el momento o no tener claro si encaja? Con una palabra me vale.',
+        d7: 'No quiero insistirte. ¿Lo dejamos para más adelante o lo ves para ahora? Con un «ahora» o un «más adelante» me vale.'
+      },
+      calc: { sol: 50, per: 40, pre: 900, rec: 15, preLabel: 'Ticket medio (€)', unidad: 'clientes', personas: 'personas' }
+    }
+  };
+  var ORDEN = ['formacion', 'clinicas', 'reformas', 'asesorias', 'servicios'];
+  var POR_DEFECTO = 'servicios';
+
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (txt != null) n.textContent = txt;
+    return n;
+  }
+  function vaciar(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+
+  // Parámetros de URL: solo se usan como texto (textContent) o dentro de URLSearchParams.
+  function leerParams() {
+    var p = new URLSearchParams(location.search);
+    var s = p.get('sector');
+    var empresa = (p.get('empresa') || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    return { sector: SECTORES.hasOwnProperty(s) ? s : POR_DEFECTO, empresa: empresa };
+  }
+  function urlKit(sector, empresa) {
+    var p = new URLSearchParams();
+    p.set('sector', sector);
+    if (empresa) p.set('empresa', empresa);
+    return '?' + p.toString();
+  }
+
+  function pintarChat(cont, mensajes) {
+    vaciar(cont);
+    mensajes.forEach(function (m) {
+      var b = el('div', 'b ' + m[0], m[1]);
+      b.appendChild(el('small', null, m[2]));
+      cont.appendChild(b);
+    });
+  }
+  function pintarPuntos(cont, puntos) {
+    vaciar(cont);
+    puntos.forEach(function (pt) {
+      var li = el('li');
+      li.appendChild(el('strong', null, pt[0]));
+      li.appendChild(document.createTextNode(' ' + pt[1]));
+      cont.appendChild(li);
+    });
+  }
+
+  var estado = { sector: POR_DEFECTO, empresa: '', calc: null };
+
+  function pintar() {
+    var S = SECTORES[estado.sector];
+    var empresa = estado.empresa;
+
+    // Selector de sector
+    var nav = $('sectores');
+    vaciar(nav);
+    ORDEN.forEach(function (id) {
+      var a = el('a', null, SECTORES[id].nombre);
+      a.href = urlKit(id, empresa);
+      a.setAttribute('data-sector', id);
+      if (id === estado.sector) a.setAttribute('aria-current', 'page');
+      nav.appendChild(a);
+    });
+
+    // Cabecera
+    $('eyebrow').textContent = empresa ? 'Qualivo · demo para ' + empresa : 'Qualivo · demo de ejemplo · ' + S.nombre.toLowerCase();
+    $('titular').textContent = empresa ? empresa + ': ' + S.titular.charAt(0).toLowerCase() + S.titular.slice(1) : S.titular;
+    $('intro').textContent = S.intro;
+    document.title = (empresa ? empresa + ' · ' : '') + 'Demo ' + S.nombre.toLowerCase() + ' · Qualivo';
+
+    // 1) Hoy
+    $('hoy-sub').textContent = S.hoySub;
+    $('hoy-top').textContent = S.negocio;
+    pintarChat($('hoy-chat'), S.hoy);
+    pintarPuntos($('hoy-problemas'), S.problemas);
+
+    // 2) Agente
+    $('agente-top').textContent = (empresa || S.negocio) + ' · asistente';
+    pintarChat($('agente-chat'), S.chat);
+    pintarPuntos($('agente-cambia'), [
+      ['Responde en minutos,', 'también de noche y en fin de semana, que es cuando más gente escribe.'],
+      ['Da información útil antes de pedir nada,', 'en vez de un «ya te llamaremos».'],
+      ['Cualifica con dos o tres preguntas', 'y pasa al equipo la ficha: ' + S.ficha + '.'],
+      ['Propone dos huecos concretos', 'en vez de pedir a la persona que proponga uno.'],
+      ['El equipo solo habla con quien ya quiere hablar.', '']
+    ]);
+
+    // 3) Seguimiento
+    $('seg-sub').textContent = 'Si la persona no contesta, recibe mensajes cortos y útiles hasta que decide. En cuanto responde en cualquier punto, la secuencia se para y la conversación sigue con ella.';
+    var linea = $('seg-linea');
+    vaciar(linea);
+    var pasos = [
+      { cuando: 'Minuto 1', canal: 'WhatsApp', msg: 'Primera respuesta con la información útil y las primeras preguntas: la conversación del punto 2.' },
+      { cuando: 'Hora 4', canal: 'WhatsApp', msg: S.seguimiento.h4 },
+      { cuando: 'Día 1', canal: 'Correo', msg: S.seguimiento.d1, mail: true },
+      { cuando: 'Día 3', canal: 'WhatsApp', msg: S.seguimiento.d3, aviso: ['Aviso al comercial:', 'le llega la ficha (' + S.ficha + ') por si prefiere escribirle o llamarle él.'] },
+      { cuando: 'Día 7', canal: 'WhatsApp', msg: S.seguimiento.d7, aviso: ['Cierre de la secuencia:', 'si sigue sin contestar, queda en la lista para retomarla más adelante y el comercial recibe el resumen.'] }
+    ];
+    pasos.forEach(function (p) {
+      var step = el('div', 'step');
+      var w = el('div', 'when', p.cuando);
+      w.appendChild(el('span', null, p.canal));
+      step.appendChild(w);
+      var cuerpo = el('div');
+      cuerpo.appendChild(el('div', 'msg' + (p.mail ? ' mail' : ''), p.msg));
+      if (p.aviso) {
+        var av = el('div', 'aviso');
+        av.appendChild(el('strong', null, p.aviso[0]));
+        av.appendChild(document.createTextNode(' ' + p.aviso[1]));
+        cuerpo.appendChild(av);
+      }
+      step.appendChild(cuerpo);
+      linea.appendChild(step);
+    });
+
+    // 4) Calculadora: valores por defecto del sector
+    estado.calc = S.calc;
+    $('pre-label').textContent = S.calc.preLabel;
+    $('sol').value = S.calc.sol;
+    $('per').value = S.calc.per;
+    $('pre').value = S.calc.pre;
+    $('rec').value = S.calc.rec;
+    calcular();
+
+    // 5) Panel
+    $('panel-sub').textContent = 'Cada solicitud, en qué punto está, quién la atiende y dónde se para. Así se ve el sistema completo para ' + S.panelTxt + ', con datos simulados.';
+    var pp = new URLSearchParams();
+    pp.set('sector', S.panel);
+    pp.set('objetivo', 'conversion');
+    if (empresa) pp.set('empresa', empresa);
+    $('panel-btn').href = '/intelligence/?' + pp.toString();
+  }
+
+  // Separador de miles también en números de 4 cifras (Intl es-ES no lo pone: «7200»).
+  var fmt = { format: function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); } };
+  function num(id) { var n = parseFloat($(id).value); return isFinite(n) && n > 0 ? n : 0; }
+  function calcular() {
+    var c = estado.calc;
+    var sol = num('sol'), per = Math.min(num('per'), 100) / 100, pre = num('pre'), rec = Math.min(num('rec'), 100) / 100;
+    var sinSeg = sol * per, recuperadas = sinSeg * rec, mes = recuperadas * pre;
+    $('out-mes').textContent = '≈ ' + fmt.format(mes) + ' € al mes';
+    $('out-anio').textContent = '≈ ' + fmt.format(mes * 12) + ' € al año';
+    $('out-txt').textContent = 'Son unas ' + fmt.format(sinSeg) + ' ' + c.personas + ' al mes que preguntan y se quedan sin seguimiento. Si se recuperase el ' + fmt.format(rec * 100) + ' % de ellas, serían unas ' + fmt.format(recuperadas) + ' ' + c.unidad + ' más al mes.';
+  }
+  ['sol', 'per', 'pre', 'rec'].forEach(function (id) { $(id).addEventListener('input', calcular); });
+
+  // Cambio de sector en directo, sin recargar
+  $('sectores').addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-sector]') : null;
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    estado.sector = a.getAttribute('data-sector');
+    try { history.pushState(null, '', urlKit(estado.sector, estado.empresa)); } catch (err) {}
+    pintar();
+  });
+  window.addEventListener('popstate', function () {
+    var p = leerParams();
+    estado.sector = p.sector; estado.empresa = p.empresa;
+    pintar();
+  });
+
+  var ini = leerParams();
+  estado.sector = ini.sector; estado.empresa = ini.empresa;
+  pintar();
+})();
+</script>
+</body>
+</html>
