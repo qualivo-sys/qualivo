@@ -228,7 +228,8 @@
     {
       "path": "/api/recordatorios-vispera/",
       "schedule": "30 16,17 * * *"
-    }
+    },
+    { "path": "/api/wa-nuria/", "schedule": "*/2 * * * *" }
   ],
   "functions": {
     "api/intelligence-datos.js": {
@@ -274,6 +275,7 @@
       "maxDuration": 60
     },
     "api/intelligence-nuria.js": { "maxDuration": 60 },
+    "api/wa-nuria.js": { "maxDuration": 60 },
     "api/intelligence-copilot.js": {
       "maxDuration": 30
     }
