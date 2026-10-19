@@ -1,0 +1,202 @@
+{
+ "capturado": "2026-10-19T13:30Z",
+ "fuente": "Meta Marketing API v21.0",
+ "anuncio": {
+  "id": "120245699600960358",
+  "nombre": "AD · VERT · formacion",
+  "estado": "ACTIVE",
+  "creative_id": "3193765407499417"
+ },
+ "conjunto": {
+  "id": "120245699224780358",
+  "nombre": "formacion · VIEJO · ES 25-65 ABIERTO · 20 €/día",
+  "daily_budget_cent": "2000",
+  "optimization_goal": "LEAD_GENERATION",
+  "targeting": {
+   "age_max": 65,
+   "age_min": 25,
+   "excluded_custom_audiences": [
+    {
+     "id": "120236339793530358",
+     "name": "Forms_abiertos"
+    },
+    {
+     "id": "120236339828020358",
+     "name": "Vídeos"
+    },
+    {
+     "id": "120244236946000358",
+     "name": "HTL_LAL_FormsAbiertos_1pct_ES"
+    }
+   ],
+   "geo_locations": {
+    "countries": [
+     "ES"
+    ],
+    "location_types": [
+     "home",
+     "recent"
+    ]
+   },
+   "targeting_automation": {
+    "advantage_audience": 1
+   },
+   "publisher_platforms": [
+    "facebook",
+    "instagram"
+   ],
+   "facebook_positions": [
+    "feed",
+    "story"
+   ],
+   "instagram_positions": [
+    "stream",
+    "story"
+   ]
+  }
+ },
+ "formulario": {
+  "name": "Qualivo_FORMACION_sep2026",
+  "status": "ACTIVE",
+  "locale": "es_ES",
+  "questions": [
+   {
+    "key": "inversion",
+    "label": "¿Cuánto invertís al mes en conseguir clientes?",
+    "options": [
+     {
+      "key": "mas5000",
+      "value": "Más de 5.000 €"
+     },
+     {
+      "key": "2000_5000",
+      "value": "Entre 2.000 y 5.000 €"
+     },
+     {
+      "key": "500_2000",
+      "value": "Entre 500 y 2.000 €"
+     },
+     {
+      "key": "menos500",
+      "value": "Menos de 500 €"
+     },
+     {
+      "key": "nada",
+      "value": "Todavía no invierto nada"
+     }
+    ],
+    "type": "CUSTOM",
+    "id": "1052202490774252"
+   },
+   {
+    "key": "volumen",
+    "label": "¿Cuántas solicitudes de información recibes al mes?",
+    "options": [
+     {
+      "key": "mas100",
+      "value": "Más de 100"
+     },
+     {
+      "key": "50_100",
+      "value": "Entre 50 y 100"
+     },
+     {
+      "key": "20_50",
+      "value": "Entre 20 y 50"
+     },
+     {
+      "key": "menos20",
+      "value": "Menos de 20"
+     }
+    ],
+    "type": "CUSTOM",
+    "id": "2136260367240808"
+   },
+   {
+    "key": "fuga",
+    "label": "¿Dónde crees que se te está escapando el negocio?",
+    "options": [
+     {
+      "key": "respuesta",
+      "value": "En el tiempo de respuesta"
+     },
+     {
+      "key": "seguimiento",
+      "value": "En el seguimiento de los presupuestos"
+     },
+     {
+      "key": "anuncios",
+      "value": "En los anuncios y la captación"
+     },
+     {
+      "key": "web",
+      "value": "En la web y los formularios"
+     },
+     {
+      "key": "nose",
+      "value": "No lo sé, eso es lo que quiero averiguar"
+     }
+    ],
+    "type": "CUSTOM",
+    "id": "38281996661448192"
+   },
+   {
+    "key": "full_name",
+    "label": "Full name",
+    "type": "FULL_NAME",
+    "id": "2186156632243407"
+   },
+   {
+    "key": "company_name",
+    "label": "Company name",
+    "type": "COMPANY_NAME",
+    "id": "1440542004632872"
+   },
+   {
+    "key": "email",
+    "label": "Email",
+    "type": "EMAIL",
+    "id": "2009055696477885"
+   },
+   {
+    "key": "phone_number",
+    "label": "Phone number",
+    "type": "PHONE",
+    "id": "1057994490342489"
+   }
+  ],
+  "thank_you_page": {
+   "title": "Hecho. Te escribo en unos minutos.",
+   "body": "Te mando un WhatsApp con una pregunta para preparar la llamada. Si prefieres coger hueco tú directamente, pulsa abajo.",
+   "button_text": "Elegir hora ahora",
+   "enable_messenger": false,
+   "button_type": "VIEW_WEBSITE",
+   "website_url": "https://qualivo.io/diagnostico/?paso=agenda&utm_source=meta&utm_medium=leadform",
+   "id": "1760446888569962"
+  },
+  "is_optimized_for_quality": true,
+  "block_display_for_non_targeted_viewer": true,
+  "created_time": "2026-09-17T12:59:29+0000",
+  "leads_count": 23,
+  "context_card": {
+   "title": "Formación: te piden información, ¿y después qué?",
+   "content": [
+    "Para academias y centros de formación que YA invierten en captación.",
+    "Quince minutos revisando los ocho puntos entre el anuncio y el cierre.",
+    "Sales con un plan por escrito, lo hagas con nosotros o no."
+   ],
+   "style": "LIST_STYLE",
+   "button_text": "Ver si encajo",
+   "id": "29293633183563140"
+  },
+  "id": "1786744439184083"
+ },
+ "resultados_control_30d": {
+  "periodo": "2026-09-19..2026-10-19",
+  "gasto_conjunto": 427.64,
+  "leads_formulario_api": 20,
+  "cpl": 21.38,
+  "clics": 193,
+  "cpm": 23.7
+ }
+}
