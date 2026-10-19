@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>INSPEU · anuncios de ejemplo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Anuncios de ejemplo para INSPEU: 4 ángulos para probar en Meta, cada uno en feed 4:5 y story 9:16, con su destino y qué se mide. Maquetas en HTML/CSS, sin imágenes. */
+:root{--bg:#F7F5F0;--card:#FFFFFF;--ink:#16211C;--muted:#5D6B64;--line:#E2DED5;--accent:#1F6F4A;--accent-soft:#E3F1E9;--warn:#A4471F;--warn-soft:#FBEDE6;--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ig-bg:#FFFFFF;--ig-ink:#111111;--ig-muted:#737373;--ig-cta:#EFEFEF;--ig-link:#0095F6;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ig-bg:#000000;--ig-ink:#F5F5F5;--ig-muted:#A8A8A8;--ig-cta:#262626;--ig-link:#4CB5F9}}
+:root[data-theme="dark"]{--bg:#0F1512;--card:#17201B;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--accent:#5BC48D;--accent-soft:#183326;--warn:#F08A5D;--warn-soft:#3A2116;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ig-bg:#000000;--ig-ink:#F5F5F5;--ig-muted:#A8A8A8;--ig-cta:#262626;--ig-link:#4CB5F9}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.hero{background:#0E2A1E;color:#fff;padding:56px 0 40px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9FD8B8;font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(30px,4.6vw,50px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 12px;max-width:22ch}
+.hero p{color:rgba(255,255,255,.82);max-width:66ch;font-size:18px}
+.legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:22px}
+.legend div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 12px;font-size:14px;color:rgba(255,255,255,.9)}
+.legend b{display:block;font-family:var(--serif);font-size:18px;color:#fff;font-weight:600}
+@media (max-width:760px){.legend{grid-template-columns:1fr 1fr}}
+main{display:grid;gap:28px;padding:32px 0 56px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;min-width:0}
+@media (max-width:560px){section.card{padding:18px 14px}}
+h2{font-family:var(--serif);font-size:clamp(23px,3vw,31px);line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:72ch}
+.num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;margin-right:8px;vertical-align:3px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;margin-top:14px}
+ul.points{padding-left:18px;display:grid;gap:6px;margin-top:10px}
+
+/* Disposición anuncio: post + story */
+.ad{display:grid;grid-template-columns:minmax(0,380px) 200px;gap:28px;align-items:start;justify-content:start;margin:6px 0 22px}
+.ad .lbl{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+@media (max-width:700px){.ad{grid-template-columns:minmax(0,1fr)}.ad>div:last-child{justify-self:center;width:210px}}
+
+/* Post de Instagram */
+.ig{background:var(--ig-bg);color:var(--ig-ink);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;line-height:1.4}
+.ig-head{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#F9CE34,#EE2A7B,#6228D7);flex:none}
+.av span{display:flex;width:100%;height:100%;border-radius:50%;background:#0E2A1E;color:#fff;align-items:center;justify-content:center;font-size:9px;font-weight:700;border:2px solid var(--ig-bg);letter-spacing:.02em}
+.ig-head .who{flex:1;min-width:0}
+.ig-head .who b{display:block;font-size:13.5px}
+.ig-head .who small{color:var(--ig-muted);font-size:12px}
+.dots{color:var(--ig-muted);font-weight:700;letter-spacing:1px}
+.ig-cta{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--ig-cta);padding:10px 12px}
+.ig-cta .hl{font-weight:600;font-size:13.5px;min-width:0}
+.ig-cta .hl small{display:block;font-weight:400;color:var(--ig-muted);font-size:11.5px}
+.ig-cta .btn{flex:none;background:var(--ig-link);color:#fff;font-weight:600;font-size:13px;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.ig-act{display:flex;gap:14px;padding:10px 12px 4px}
+.ig-act svg{width:22px;height:22px;stroke:var(--ig-ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ig-act .sp{flex:1}
+.ig-txt{padding:4px 12px 14px}
+.ig-txt b{margin-right:4px}
+
+/* Creatividad 4:5 */
+.cr{aspect-ratio:4/5;container-type:inline-size;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:7cqw;color:#fff}
+.cr .k{font-size:3.4cqw;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.cr .big{font-family:var(--serif);font-weight:600;font-size:12cqw;line-height:1.02;letter-spacing:-.02em;margin-top:4cqw}
+.cr .mid{font-size:5.2cqw;font-weight:600;line-height:1.25;margin-top:4cqw}
+.cr .foot{margin-top:auto;font-size:3.6cqw;font-weight:600;display:flex;align-items:center;gap:2.5cqw;opacity:.95}
+.cr .logo{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#0E2A1E;font-weight:800;font-size:3.2cqw;padding:1.4cqw 2.4cqw;border-radius:1.6cqw;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:2cqw;margin-top:5cqw}
+.chips span{font-size:3.8cqw;font-weight:600;padding:1.6cqw 3.2cqw;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3)}
+
+/* Story 9:16 */
+.st{aspect-ratio:9/16;container-type:inline-size;position:relative;overflow:hidden;border-radius:18px;display:flex;flex-direction:column;padding:16cqw 8cqw 8cqw;color:#fff;border:1px solid var(--line)}
+.st .bar{position:absolute;top:4cqw;left:5cqw;right:5cqw;height:1.4cqw;border-radius:2cqw;background:rgba(255,255,255,.35)}
+.st .bar i{display:block;width:40%;height:100%;border-radius:2cqw;background:#fff}
+.st .who{position:absolute;top:8cqw;left:5cqw;display:flex;align-items:center;gap:3cqw;font-size:5.2cqw;font-weight:600}
+.st .who i{width:10cqw;height:10cqw;border-radius:50%;background:#0E2A1E;border:1.2cqw solid #fff;display:inline-block}
+.st .who small{font-weight:400;opacity:.8}
+.st .k{font-size:5.4cqw;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.85;margin-top:10cqw}
+.st .big{font-family:var(--serif);font-weight:600;font-size:15cqw;line-height:1.02;letter-spacing:-.02em;margin-top:4cqw}
+.st .mid{font-size:7cqw;font-weight:600;line-height:1.3;margin-top:6cqw}
+.st .up{margin-top:auto;text-align:center;font-size:6cqw;font-weight:700}
+.st .up span{display:inline-block;background:#fff;color:#111;padding:3.5cqw 7cqw;border-radius:99px;margin-top:2cqw}
+.st .up svg{display:block;margin:0 auto;width:8cqw;height:8cqw;stroke:#fff;fill:none;stroke-width:2.5}
+
+/* Fichas bajo cada anuncio */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:900px){.facts{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.facts{grid-template-columns:1fr}}
+.facts div{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:14.5px;min-width:0}
+.facts h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.facts ul{padding-left:16px;display:grid;gap:3px}
+.wa{display:block;background:var(--wa-out);border-radius:10px;padding:7px 10px;margin-top:8px;font-size:13.5px}
+.wa small{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}
+.ph{background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:0 3px;font-weight:600;white-space:nowrap}
+
+/* Fondos de cada ángulo */
+.g-a{background:radial-gradient(circle at 85% 12%,rgba(255,196,102,.35),transparent 40%),linear-gradient(160deg,#0E2A1E,#1F6F4A 62%,#3FA36E)}
+.g-b{background:radial-gradient(circle at 15% 90%,rgba(230,190,110,.25),transparent 45%),linear-gradient(155deg,#16223D,#2B4677)}
+.g-c{background:linear-gradient(175deg,#F4B266,#E0694A 52%,#6E2747)}
+.g-d{background:linear-gradient(165deg,#FFF1D6,#F8D9A2);color:#16211C}
+.cert{background:#FBF6EA;color:#1B2A4A;border-radius:2.5cqw;padding:5cqw;margin-top:6cqw;transform:rotate(-3deg);box-shadow:0 3cqw 6cqw rgba(0,0,0,.3);position:relative;border:1.2cqw solid #E8D9B5}
+.cert .t{font-size:3cqw;letter-spacing:.2em;font-weight:700;color:#9B7A2E}
+.cert .n{font-family:var(--serif);font-size:6cqw;line-height:1.1;margin-top:2cqw}
+.cert .l{border-top:1px solid #C9B88F;margin-top:5cqw;padding-top:1.5cqw;font-size:3cqw;color:#6B7280;width:55%}
+.cert svg{position:absolute;right:4cqw;bottom:3cqw;width:16cqw;height:16cqw}
+.day{display:grid;gap:2cqw;margin-top:5cqw}
+.day div{display:flex;gap:3cqw;align-items:center;font-size:4.2cqw;font-weight:600;background:rgba(255,255,255,.14);border-radius:2.4cqw;padding:2.2cqw 3cqw}
+.day div b{font-variant-numeric:tabular-nums;opacity:.8;font-weight:700;width:12cqw}
+.day div.on{background:#fff;color:#6E2747}
+.day div.on b{opacity:1}
+.book{background:#1F6F4A;color:#fff;border-radius:2cqw 3cqw 3cqw 2cqw;padding:6cqw 5cqw;width:56%;box-shadow:-2cqw 0 0 #155537 inset,0 3cqw 6cqw rgba(0,0,0,.2);transform:rotate(-4deg)}
+.book .t{font-size:3cqw;letter-spacing:.18em;font-weight:700;opacity:.8}
+.book .n{font-family:var(--serif);font-size:9cqw;line-height:1;margin-top:2cqw}
+.book .s{font-size:3.6cqw;margin-top:2cqw;line-height:1.25}
+.free{position:absolute;right:7cqw;top:30cqw;width:24cqw;height:24cqw;border-radius:50%;background:#A4471F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:4.6cqw;transform:rotate(12deg);letter-spacing:.04em}
+
+.steps{display:grid;gap:10px;counter-reset:s;padding:0;list-style:none}
+.steps li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:13px}
+footer{color:var(--muted);font-size:14px;padding:0 0 40px}
+footer a{color:var(--accent);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Qualivo · anuncios de ejemplo para INSPEU</div>
+    <h1>Cuatro formas de anunciar el curso, listas para probar</h1>
+    <p>Son 4 ángulos de anuncio para Instagram y Facebook. Cada uno va en formato publicación (4:5) y en formato historia (9:16). Se lanzan a la vez con el mismo presupuesto y, a las dos semanas, nos quedamos con el que trae más llamadas agendadas, no con el que trae más clics.</p>
+    <div class="legend">
+      <div><b>A · El aula diversa</b>Lleva a WhatsApp</div>
+      <div><b>B · El certificado</b>Lleva a una landing</div>
+      <div><b>C · A tu ritmo</b>Lleva a WhatsApp</div>
+      <div><b>D · Guía gratuita</b>Lleva a un formulario</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ÁNGULO A -->
+  <section class="card">
+    <h2><span class="num">A</span>Tu aula ya es diversa</h2>
+    <p class="sub">Parte del problema que la docente vive cada día en su salón: alumnos con ritmos y necesidades muy distintos y poco tiempo para atender a todos.</p>
+    <div class="ad">
+      <div>
+        <div class="lbl">Publicación · 4:5</div>
+        <div class="ig">
+          <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="cr g-a">
+            <div class="k">Curso online para docentes</div>
+            <div class="big">Tu aula ya es diversa.</div>
+            <div class="mid">Aprende a atender a cada alumno, no solo al promedio.</div>
+            <div class="chips"><span>🧩 Ritmos distintos</span><span>💬 Necesidades educativas</span><span>✏️ Adaptar tu clase</span></div>
+            <div class="foot"><span class="logo">INSPEU</span>Educación Inclusiva y Atención a la Diversidad</div>
+          </div>
+          <div class="ig-cta"><div class="hl">Estrategias para atender a cada alumno<small>WhatsApp</small></div><span class="btn">Enviar mensaje</span></div>
+          <div class="ig-act">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.4 5 7 5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.8 3.6 4.5 6.8C19.5 16.4 12 21 12 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 3 9.5 13.5M22 3l-7 18-5.5-7.5L2 10z"/></svg>
+            <span class="sp"></span>
+            <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+          </div>
+          <div class="ig-txt"><b>inspeu</b>¿Tienes en tu salón alumnos que aprenden a ritmos muy distintos y no sabes cómo llegar a todos? En el curso de Educación Inclusiva y Atención a la Diversidad aprendes estrategias concretas para adaptar tus clases. 100 % online. Escríbenos por WhatsApp y te enviamos el temario al momento.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lbl">Historia · 9:16</div>
+        <div class="st g-a">
+          <div class="bar"><i></i></div>
+          <div class="who"><i></i>inspeu <small>Publicidad</small></div>
+          <div class="k">Docente:</div>
+          <div class="big">¿30 alumnos, 30 ritmos?</div>
+          <div class="mid">Aprende a llegar a cada uno con estrategias que usas mañana en clase.</div>
+          <div class="up"><svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg><span>Escríbenos</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div><h3>A quién va</h3>Docentes de inicial, primaria y secundaria en Perú y Latinoamérica que ya tienen en el aula alumnos con necesidades distintas.</div>
+      <div><h3>Qué promete</h3>Herramientas prácticas para atender la diversidad del aula sin dejar a nadie atrás. Nada de precio ni fechas en el anuncio: eso lo da el agente.</div>
+      <div><h3>A dónde lleva</h3>WhatsApp, con el mensaje ya escrito. Responde el agente al momento, envía el temario y hace dos preguntas.<span class="wa"><small>Mensaje prellenado</small>Hola, quiero el temario del curso de Educación Inclusiva.</span></div>
+      <div><h3>Qué medimos</h3><ul><li>Costo por conversación iniciada</li><li>% que responde a la pregunta del agente</li><li>Llamadas agendadas y matrículas</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ÁNGULO B -->
+  <section class="card">
+    <h2><span class="num">B</span>Suma un certificado a tu CV docente</h2>
+    <p class="sub">Habla a quien piensa en su carrera: crecer profesionalmente y tener algo que mostrar al terminar. El certificado es el de INSPEU; no se menciona ninguna acreditación oficial.</p>
+    <div class="ad">
+      <div>
+        <div class="lbl">Publicación · 4:5</div>
+        <div class="ig">
+          <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="cr g-b">
+            <div class="k" style="color:#E6C27A">Crece como docente</div>
+            <div class="big" style="font-size:10.5cqw">Suma Educación Inclusiva a tu CV.</div>
+            <div class="cert">
+              <div class="t">CERTIFICADO DE INSPEU</div>
+              <div class="n">Educación Inclusiva y Atención a la Diversidad</div>
+              <div class="l">[Nombre del docente]</div>
+              <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#D9B45A"/><circle cx="20" cy="20" r="12.5" fill="none" stroke="#FBF6EA" stroke-width="1.4"/><path d="M14 20.5l4 4 8-8.5" fill="none" stroke="#FBF6EA" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="foot"><span class="logo">INSPEU</span>Inicio: [fecha de inicio] · [horas] horas</div>
+          </div>
+          <div class="ig-cta"><div class="hl">Certificado de INSPEU en Educación Inclusiva<small>inspeu.com</small></div><span class="btn">Más información</span></div>
+          <div class="ig-act">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.4 5 7 5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.8 3.6 4.5 6.8C19.5 16.4 12 21 12 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 3 9.5 13.5M22 3l-7 18-5.5-7.5L2 10z"/></svg>
+            <span class="sp"></span>
+            <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+          </div>
+          <div class="ig-txt"><b>inspeu</b>La inclusión ya es parte del día a día en la escuela. Fórmate en Educación Inclusiva y Atención a la Diversidad y recibe el certificado de INSPEU al terminar. Próximo inicio: [fecha de inicio]. Mira el temario y las condiciones en la web.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lbl">Historia · 9:16</div>
+        <div class="st g-b">
+          <div class="bar"><i></i></div>
+          <div class="who"><i></i>inspeu <small>Publicidad</small></div>
+          <div class="k" style="color:#E6C27A">Tu CV docente</div>
+          <div class="big">+ Educación Inclusiva</div>
+          <div class="mid">Curso online con certificado de INSPEU al terminar.</div>
+          <div class="mid" style="font-size:6cqw;opacity:.85">Inicio: [fecha de inicio]</div>
+          <div class="up"><svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg><span>Ver temario</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div><h3>A quién va</h3>Docentes que quieren crecer: concursos, cambio de colegio, ascensos o simplemente reforzar su perfil profesional.</div>
+      <div><h3>Qué promete</h3>Una formación con certificado de INSPEU que puede añadir a su CV. Fecha de inicio y horas, con datos reales: <span class="ph">[fecha de inicio]</span> <span class="ph">[horas]</span>.</div>
+      <div><h3>A dónde lleva</h3>Una landing con temario, modalidad, <span class="ph">[precio]</span> y <span class="ph">[fecha de inicio]</span>, un formulario corto (nombre, WhatsApp, país, nivel) y un botón de WhatsApp. Quien deja sus datos recibe un mensaje del agente en menos de un minuto.</div>
+      <div><h3>Qué medimos</h3><ul><li>% de clics y costo por visita</li><li>% de visitas que dejan sus datos</li><li>Costo por solicitud y por llamada agendada</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ÁNGULO C -->
+  <section class="card">
+    <h2><span class="num">C</span>A tu ritmo, compatible con dar clase</h2>
+    <p class="sub">Responde a la objeción más común antes de que aparezca: «no tengo tiempo». El curso se adapta al horario de la docente, no al revés.</p>
+    <div class="ad">
+      <div>
+        <div class="lbl">Publicación · 4:5</div>
+        <div class="ig">
+          <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="cr g-c">
+            <div class="k">100 % online</div>
+            <div class="big" style="font-size:10.5cqw">Estudia cuando terminas de dar clase.</div>
+            <div class="day">
+              <div><b>07:30</b>🏫 Clases</div>
+              <div><b>15:00</b>📝 Corregir tareas</div>
+              <div><b>19:00</b>🍲 Familia</div>
+              <div class="on"><b>21:00</b>📱 Tu curso, a tu ritmo</div>
+            </div>
+            <div class="foot"><span class="logo">INSPEU</span>Educación Inclusiva y Atención a la Diversidad</div>
+          </div>
+          <div class="ig-cta"><div class="hl">100 % online, compatible con dar clase<small>WhatsApp</small></div><span class="btn">Enviar mensaje</span></div>
+          <div class="ig-act">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.4 5 7 5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.8 3.6 4.5 6.8C19.5 16.4 12 21 12 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 3 9.5 13.5M22 3l-7 18-5.5-7.5L2 10z"/></svg>
+            <span class="sp"></span>
+            <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+          </div>
+          <div class="ig-txt"><b>inspeu</b>Sabemos que tu horario ya está lleno. Por eso el curso de Educación Inclusiva es 100 % online y lo avanzas cuando puedes: en la noche, el fin de semana o en tu hora libre. Escríbenos y te contamos cómo se organiza.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lbl">Historia · 9:16</div>
+        <div class="st g-c">
+          <div class="bar"><i></i></div>
+          <div class="who"><i></i>inspeu <small>Publicidad</small></div>
+          <div class="k">🌙 Son las</div>
+          <div class="big" style="font-size:22cqw">21:00</div>
+          <div class="mid">Tus alumnos ya están en casa. Tú avanzas tu curso, desde el celular.</div>
+          <div class="up"><svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg><span>Pregúntanos cómo</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div><h3>A quién va</h3>Docentes en actividad, con jornada completa, que quieren formarse pero creen que no les da el tiempo.</div>
+      <div><h3>Qué promete</h3>Que puede estudiar sin dejar de dar clase, en sus horarios. Duración y carga: <span class="ph">[horas]</span>, solo si INSPEU las confirma.</div>
+      <div><h3>A dónde lleva</h3>WhatsApp, con el mensaje ya escrito. El agente explica cómo se organiza el curso y ofrece dos horarios para una llamada.<span class="wa"><small>Mensaje prellenado</small>Hola, ¿cómo se organiza el curso si trabajo a tiempo completo?</span></div>
+      <div><h3>Qué medimos</h3><ul><li>Costo por conversación iniciada</li><li>% que acepta uno de los dos horarios</li><li>Llamadas celebradas y matrículas</li></ul></div>
+    </div>
+    <p class="note">Antes de lanzarlo, hay que confirmar con INSPEU que el curso se puede seguir a su ritmo (clases grabadas o en diferido). Si tiene sesiones en vivo, el mensaje cambia a «horarios pensados para docentes».</p>
+  </section>
+
+  <!-- ÁNGULO D -->
+  <section class="card">
+    <h2><span class="num">D</span>Guía gratuita: 10 estrategias para tu aula inclusiva</h2>
+    <p class="sub">No pide nada a cambio más que el contacto: da algo útil primero. Atrae a más gente que los otros tres, y el seguimiento automático se encarga de convertir la descarga en interés por el curso.</p>
+    <div class="ad">
+      <div>
+        <div class="lbl">Publicación · 4:5</div>
+        <div class="ig">
+          <div class="ig-head"><div class="av"><span>INSPEU</span></div><div class="who"><b>inspeu</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="cr g-d">
+            <div class="k" style="color:#1F6F4A">Para docentes · gratis</div>
+            <div class="big" style="font-size:10cqw;color:#0E2A1E">10 estrategias para tu aula inclusiva</div>
+            <div style="margin-top:6cqw"><div class="book"><div class="t">GUÍA PRÁCTICA</div><div class="n">10</div><div class="s">estrategias para atender a cada alumno</div></div></div>
+            <div class="free">GRATIS</div>
+            <div class="foot" style="color:#0E2A1E"><span class="logo" style="background:#0E2A1E;color:#fff">INSPEU</span>Inicial · Primaria · Secundaria</div>
+          </div>
+          <div class="ig-cta"><div class="hl">Descarga gratis la guía<small>Formulario</small></div><span class="btn">Descargar</span></div>
+          <div class="ig-act">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.4 5 7 5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.8 3.6 4.5 6.8C19.5 16.4 12 21 12 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 3 9.5 13.5M22 3l-7 18-5.5-7.5L2 10z"/></svg>
+            <span class="sp"></span>
+            <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+          </div>
+          <div class="ig-txt"><b>inspeu</b>Te regalamos una guía con 10 estrategias que puedes aplicar en tu salón desde mañana, para inicial, primaria o secundaria. Déjanos tu nombre y tu WhatsApp y te la enviamos al momento.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lbl">Historia · 9:16</div>
+        <div class="st g-d" style="color:#0E2A1E">
+          <div class="bar" style="background:rgba(14,42,30,.2)"><i style="background:#0E2A1E"></i></div>
+          <div class="who"><i></i>inspeu <small>Publicidad</small></div>
+          <div class="k" style="color:#A4471F">🎁 Gratis</div>
+          <div class="big">10 estrategias para tu aula inclusiva</div>
+          <div class="mid">Te la enviamos por WhatsApp en un minuto.</div>
+          <div class="up"><svg viewBox="0 0 24 24" style="stroke:#0E2A1E"><path d="M6 14l6-6 6 6"/></svg><span style="background:#0E2A1E;color:#fff">Quiero la guía</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div><h3>A quién va</h3>Docentes que todavía no buscan un curso pero sí tienen el problema en su aula. Público más amplio y más frío que en A, B y C.</div>
+      <div><h3>Qué promete</h3>Una guía práctica y gratuita. Alternativa: una clase gratuita grabada. Cualquiera de las dos hay que prepararla con INSPEU antes de lanzar.</div>
+      <div><h3>A dónde lleva</h3>Un formulario de Meta, sin salir de Instagram: nombre, WhatsApp, país y nivel en el que enseña. Al enviarlo, el agente le escribe por WhatsApp con la guía y una pregunta. A partir de ahí, seguimiento automático hacia el curso.</div>
+      <div><h3>Qué medimos</h3><ul><li>Costo por contacto</li><li>% que responde al mensaje con la guía</li><li>% que pasa a pedir información del curso</li><li>Costo por llamada agendada</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Cómo se prueban</h2>
+    <p class="sub">La idea no es elegir hoy el mejor anuncio, sino que lo elijan los números.</p>
+    <ol class="steps">
+      <li><div><strong>Los cuatro a la vez,</strong> al mismo público y con el mismo presupuesto diario: <span class="ph">[presupuesto]</span> por ángulo.</div></li>
+      <li><div><strong>Cada contacto entra en el mismo sistema:</strong> el agente responde al momento, cualifica con dos preguntas, ofrece dos horarios y hace el seguimiento a quien no contesta.</div></li>
+      <li><div><strong>A los 10-14 días se compara el costo por llamada agendada</strong> (y después por matrícula), no el costo por clic. Un anuncio barato que trae curiosos sale caro.</div></li>
+      <li><div><strong>Se queda el ganador y se prueban variantes</strong> de su frase de arranque y su imagen. El resto se apaga.</div></li>
+    </ol>
+    <p class="note">Maquetas ilustrativas. Todo lo que va entre corchetes (<span class="ph">[precio]</span>, <span class="ph">[fecha de inicio]</span>, <span class="ph">[horas]</span>) se completa con datos reales de INSPEU. No se usan testimonios ni acreditaciones que INSPEU no pueda respaldar.</p>
+  </section>
+
+</main>
+
+<footer class="wrap"><a href="../">← Volver a la demo</a></footer>
+</body>
+</html>
