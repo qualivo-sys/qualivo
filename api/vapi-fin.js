@@ -34,6 +34,10 @@ const ROTOS = [
 // Quince segundos dan para el saludo y poco más.
 const CORTA_SEG = 15;
 
+// 19-oct-2026 (Revenue Journey V3): sin mensaje automático de «se nos ha
+// cortado la llamada». Volver a true solo con la voz reparada y probada.
+const RESCATE_AUTOMATICO = false;
+
 // Fallos de la telefonía: la llamada NUNCA llegó a sonar. Es distinto de que se
 // rompa a mitad, y confundir las dos cosas sale caro. El 15-sep le escribimos
 // «perdona, se nos ha cortado la llamada» a un lead cuyo teléfono no sonó
@@ -307,7 +311,12 @@ module.exports = async function handler(req, res) {
     // Rescate: la llamada se ha caído y del otro lado hay alguien que acaba de
     // hablar con un robot que se ha colgado. Se pide perdón y se le devuelve el
     // control, sin volver a llamar automáticamente.
-    if (A.enVentana('whatsapp')) {
+    // 19-oct-2026 (V3): apagado. El 19-oct salió a un lead cuya llamada nunca
+    // conectó (Twilio caído; el motivo no casó con NO_CONECTO). Mientras la voz
+    // esté pausada, solo se avisa a Maikel y decide él.
+    if (!RESCATE_AUTOMATICO) {
+      acciones.push('rescate_pausado');
+    } else if (A.enVentana('whatsapp')) {
       const texto = (nombre ? nombre + ', ' : '') +
         'perdona, se nos ha cortado la llamada. Soy Maikel, de Qualivo. ' +
         'Si te viene bien te escribo por aquí y lo vemos sin llamadas: ' +

@@ -54,6 +54,13 @@ const CADENCIA_DESDE = Date.parse('2026-09-27T17:16:00Z');
 // apagados. Primero medimos WhatsApp + Raquel solos, y las respuestas van en
 // modo copiloto.
 const SECUENCIAS_PAUSADAS = true;
+
+// 19-oct-2026 (Revenue Journey V3, aprobado por Maikel): Raquel no llama.
+// Twilio está caído desde el 15-oct y la voz automatizada necesita
+// consentimiento específico antes de volver. B/C siguen solo por WhatsApp y
+// las llamadas programadas se descartan sin llamar. Quitar cuando Maikel
+// apruebe la vuelta de la voz tras reparación y pruebas.
+const VOZ_PAUSADA = true;
 const REENGANCHE_PAUSADO = true;
 const ESPERA_PASO2_MIN = 150;
 
@@ -455,7 +462,7 @@ async function handler(req, res) {
           resumen.aviso_a = (resumen.aviso_a || 0) + 1; hechos++;
           continue;
         }
-        if (nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal')) {
+        if (VOZ_PAUSADA || nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal')) {
           await A.etiquetar(c.id, ['act-paso2', 'ruta-solo-wa']);
           continue;
         }
@@ -473,6 +480,12 @@ async function handler(req, res) {
         paso.ruta = 'ruta-raquel';
       }
       if (paso.tipo === 'voz1' || paso.tipo === 'voz2') {
+        if (VOZ_PAUSADA) {
+          // Llamada programada antes del 19-oct: se descarta y sigue solo WhatsApp.
+          await A.etiquetar(c.id, ['act-' + paso.tipo, 'voz-pausada'].concat(paso.ruta ? ['act-paso2', 'ruta-solo-wa'] : []));
+          await A.nota(c.id, 'Llamada ' + paso.tipo + ' descartada: la voz está pausada (Twilio caído; Revenue Journey V3). Sigue solo WhatsApp.');
+          resumen.esperando++; continue;
+        }
         if (!A.enVentana('voz')) { resumen.esperando++; continue; }
         // Regla «sin canal» (19-sep-2026, tras Francisco y Carmen): si la
         // llamada anterior no llegó a sonar y el WhatsApp tampoco entró, el

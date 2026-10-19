@@ -61,9 +61,20 @@ function textoDia(nombre, hora, enlace, extra) {
     'Si te surge algo, dímelo por aquí y lo movemos.';
 }
 
-function textoVispera(nombre, hora) {
-  return 'Hola ' + (nombre || '') + ', soy Maikel. Mañana a las ' + hora + ' tenemos la videollamada (unos 30 minutos): ' +
-    QUE_VEREMOS.charAt(0).toLowerCase() + QUE_VEREMOS.slice(1) + '\n¿Sigue en pie?';
+// Víspera (19-oct-2026, Revenue Journey V3, WA-07): pide un «sí» y deja el
+// enlace y la salida para cambiarla. El enlace no se retiene hasta el «sí».
+function textoVispera(nombre, hora, enlace) {
+  return 'Hola ' + (nombre || '') + ', soy Maikel. Mañana a las ' + hora + ' (hora de Madrid) tenemos la videollamada de 30 minutos: ' +
+    'revisamos cómo os llegan y se pierden las solicitudes y te enseño una demo de vuestro sector.\n' +
+    '¿Sigue en pie? Respóndeme con un «sí» o, si necesitas cambiarla, dímelo por aquí y buscamos otra hora.' +
+    (/^https?:/.test(String(enlace || '')) ? '\nEl enlace es este: ' + enlace : '');
+}
+
+// Una hora antes (19-oct-2026, V3): solo el enlace y la salida para cambiarla.
+function textoHora(nombre, hora, enlace) {
+  return 'Nos vemos a las ' + hora + ', ' + (nombre || '') + '. ' +
+    (/^https?:/.test(String(enlace || '')) ? 'Este es el enlace: ' + enlace : 'El enlace está ' + enlace + '.') +
+    '\nSi te surge algo, dímelo por aquí y lo movemos.';
 }
 
 function htmlDe(texto) {
@@ -171,10 +182,15 @@ async function vuelta(modo, opciones) {
   const resumen = { modo: modo, citas: 0, enviados: 0, saltados: 0, detalle: [], errores: [] };
   try {
     // Ventana de citas: hoy (desde ahora) o mañana entero, en hora de Madrid.
+    // Modo 'hora': las que empiezan dentro de 45-75 minutos (cron cada 10 min).
     const objetivo = modo === 'vispera' ? claveDia(new Date(Date.now() + 24 * 3600 * 1000)) : hoy;
-    const ini = modo === 'vispera' ? Date.now() + 2 * 3600 * 1000 : Date.now() - 15 * 60000;
-    const fin = Date.now() + 48 * 3600 * 1000;
-    const citas = (await citasEntre(ini, fin)).filter(function (e) { return claveDia(CITA.fechaGHL(e.startTime) || new Date(0)) === objetivo; });
+    const ini = modo === 'vispera' ? Date.now() + 2 * 3600 * 1000 : modo === 'hora' ? Date.now() + 45 * 60000 : Date.now() - 15 * 60000;
+    const fin = modo === 'hora' ? Date.now() + 75 * 60000 : Date.now() + 48 * 3600 * 1000;
+    const citas = (await citasEntre(ini, fin)).filter(function (e) {
+      const t = CITA.fechaGHL(e.startTime) || new Date(0);
+      if (modo === 'hora') return t.getTime() >= ini && t.getTime() <= fin;
+      return claveDia(t) === objetivo;
+    });
     resumen.citas = citas.length;
 
     const porContacto = {};
@@ -183,15 +199,21 @@ async function vuelta(modo, opciones) {
       porContacto[ev.contactId] = true;
       if (resumen.enviados >= MAX_ENVIOS) break;
       const inicio = CITA.fechaGHL(ev.startTime) || new Date(NaN);
-      const etiqueta = (modo === 'vispera' ? 'rec-visp-' : 'rec-dia-') + objetivo;
-      const cual = modo === 'vispera' ? 'vispera' : 'dia';
+      const etiqueta = (modo === 'vispera' ? 'rec-visp-' : modo === 'hora' ? 'rec-h1-' : 'rec-dia-') + objetivo;
+      const cual = modo === 'vispera' ? 'vispera' : modo === 'hora' ? 'h1' : 'dia';
       const fila = { contacto: ev.contactId, cita: ev.id, hora: horaDe(inicio), titulo: ev.title || '' };
       try {
-        // Víspera solo si se reservó con dos o más días de antelación. Si no
-        // sabemos cuándo se reservó, se manda (mejor un «¿sigue en pie?» de más).
+        // Víspera solo si se reservó con al menos 20 h de antelación (19-oct, V3:
+        // antes eran dos días y la mayoría de citas se quedaban sin confirmar).
+        // Si no sabemos cuándo se reservó, se manda (mejor un «¿sigue en pie?» de más).
         if (modo === 'vispera') {
           const creada = Date.parse(ev.dateAdded || ev.createdAt || 0);
-          if (creada && inicio.getTime() - creada < 2 * 24 * 3600 * 1000) { fila.motivo = 'reservada hace menos de dos días'; resumen.saltados++; resumen.detalle.push(fila); continue; }
+          if (creada && inicio.getTime() - creada < 20 * 3600 * 1000) { fila.motivo = 'reservada hace menos de 20 h'; resumen.saltados++; resumen.detalle.push(fila); continue; }
+        }
+        // Una hora antes: no si se reservó hace menos de 2 h (acaba de recibir la confirmación).
+        if (modo === 'hora') {
+          const creada = Date.parse(ev.dateAdded || ev.createdAt || 0);
+          if (creada && Date.now() - creada < 2 * 3600 * 1000) { fila.motivo = 'reservada hace menos de 2 h'; resumen.saltados++; resumen.detalle.push(fila); continue; }
         }
         const c = await contactoPorId(ev.contactId);
         if (!c) { fila.motivo = 'sin contacto'; resumen.saltados++; resumen.detalle.push(fila); continue; }
@@ -212,7 +234,8 @@ async function vuelta(modo, opciones) {
         const mensajes = await A.mensajesDe(c.id);
         const hilo = leerHilo(mensajes, hoy);
         fila.canal = hilo.canal || 'sin hilo';
-        if (hilo.yaHoy) {
+        // El de una hora antes sale aunque hoy ya haya salido otro mensaje: es el que lleva el enlace a mano.
+        if (hilo.yaHoy && modo !== 'hora') {
           fila.motivo = 'hoy ya salió el enlace o un recordatorio';
           resumen.saltados++; resumen.detalle.push(fila);
           if (!seco && reg) await CI.marcarRecordatorio(c.id, ev.id, cual);
@@ -223,13 +246,13 @@ async function vuelta(modo, opciones) {
         const enlace = CITA.enlaceDe(ev) || CITA.SIN_ENLACE;
         // Si Raquel la cerró como llamada, el lead puede esperar el teléfono.
         const extra = A.tiene(c, 'voz-completada') ? 'Si prefieres por teléfono, te llamo yo al móvil a esa hora.' : '';
-        const texto = modo === 'vispera' ? textoVispera(nombre, horaDe(inicio)) : textoDia(nombre, horaDe(inicio), enlace, extra);
+        const texto = modo === 'vispera' ? textoVispera(nombre, horaDe(inicio), enlace) : modo === 'hora' ? textoHora(nombre, horaDe(inicio), enlace) : textoDia(nombre, horaDe(inicio), enlace, extra);
         fila.texto = texto;
         if (seco) { resumen.enviados++; resumen.detalle.push(fila); continue; }
 
         const asunto = modo === 'vispera' ? 'Mañana a las ' + horaDe(inicio) + ' · videollamada con Qualivo' : 'Hoy a las ' + horaDe(inicio) + ' · enlace de la videollamada';
         let correoV2 = null;
-        if (CORREO_CITA_V2) {
+        if (CORREO_CITA_V2 && modo !== 'hora') {
           try {
             const CC = require('./_correo-cita.js');
             const datosCita = { hora: horaDe(inicio), enlace: CITA.enlaceDe(ev), porTelefono: !!extra };
@@ -240,7 +263,7 @@ async function vuelta(modo, opciones) {
         fila.enviado = hecho.join(', ');
         // Sin registro de la cita (aún no la ha visto el rastreo) queda la etiqueta antigua.
         if (reg) await CI.marcarRecordatorio(c.id, ev.id, cual); else await A.etiquetar(c.id, [etiqueta]);
-        await A.nota(c.id, 'RECORDATORIO DE CITA (' + (modo === 'vispera' ? 'víspera' : 'mismo día') + ') · ' + ahora.toLocaleString('es-ES', { timeZone: ZONA }) +
+        await A.nota(c.id, 'RECORDATORIO DE CITA (' + (modo === 'vispera' ? 'víspera' : modo === 'hora' ? 'una hora antes' : 'mismo día') + ') · ' + ahora.toLocaleString('es-ES', { timeZone: ZONA }) +
           '\nCita: ' + inicio.toLocaleString('es-ES', { timeZone: ZONA }) + ' · por ' + fila.enviado + '\n«' + texto + '»').catch(function () {});
         resumen.enviados++;
         resumen.detalle.push(fila);
@@ -257,4 +280,4 @@ async function vuelta(modo, opciones) {
   return resumen;
 }
 
-module.exports = { CORREO_CITA_V2: CORREO_CITA_V2, vuelta: vuelta, textoDia: textoDia, textoVispera: textoVispera, citasEntre: citasEntre, claveDia: claveDia };
+module.exports = { CORREO_CITA_V2: CORREO_CITA_V2, vuelta: vuelta, textoDia: textoDia, textoVispera: textoVispera, textoHora: textoHora, citasEntre: citasEntre, claveDia: claveDia };
