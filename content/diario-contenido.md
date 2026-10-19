@@ -1470,3 +1470,40 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 3. **Siguen pendientes** las ocho decisiones de la estrategia, con los permisos de casos en primer lugar.
 
 **Hipótesis para el lunes:** con los puntos exactos a la vista, el artículo de lead scoring traerá más diagnósticos desde el blog que cualificar-leads. Se compara en dos semanas por `utm_content`.
+
+### Lunes 19-oct · trabajo del día (abre la semana 43)
+
+**Publicado:**
+- **Artículo nuevo: [/blog/lead-scoring/](https://qualivo.io/blog/lead-scoring/)**, «Lead scoring: cómo puntuar tus leads con dos notas (y qué hacer con cada letra)». Es el B1 de la estrategia del mes.
+  - Las tablas se han vuelto a comprobar hoy contra `api/_scoring.js`; no ha cambiado desde la revisión del 16-oct.
+  - Tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+  - Comprobado en móvil (390 px): sin desbordes.
+- **Re-apunte de [/blog/cualificar-leads/](https://qualivo.io/blog/cualificar-leads/):**
+  - «Qué hacemos nosotros con esto» pasa a «dos notas» y enlaza al artículo nuevo;
+  - la caja final va sin «plan por escrito en 24 horas»;
+  - «scoring de leads» sale de sus keywords secundarias y pasa a `/blog/lead-scoring/`.
+- **Enlaces al artículo nuevo** desde `/diccionario/lead-scoring/` y `/blog/equipo-comercial-no-usa-el-crm/`.
+
+**Borradores:**
+- **Agentizando del lunes:** `content/borradores/2026-10-19-agentizando-la-linea-se-cae.md`, «Mi agente de voz lleva cuatro días sin llamar a nadie».
+  - **Dato:** cierres de Growth del 15 al 18-oct. La línea de Twilio está caída, Raquel ha hecho 0 llamadas y el registro apuntó «no conectó», no «no contestó».
+  - Tiene dos variantes: con la línea caída o cuando vuelva.
+- **Sigue en el banco:** `2026-10-08-agentizando-se-corrige.md`, como alternativa si no se quiere contar el fallo.
+
+**Aviso:** el artículo de hoy describe las reglas del sistema («si en 2 h 30 no contesta, le llama Raquel»). Las reglas son esas. Pero desde el 15-oct esas llamadas no salen, porque Twilio está caído. No se cambia el artículo: se arregla la línea.
+
+**Descartado:**
+- **Segundo artículo.** El de hoy es largo y es la pieza fuerte de la semana.
+- **Newsletter.** Hoy es lunes.
+
+**Decisiones para Maikel:**
+1. **Twilio.** Revisar el saldo o la cuenta hoy. Sin eso, la B y la C no reciben su llamada y el artículo de hoy describe algo que no está pasando. Recomendación: es lo primero del día.
+2. **Agentizando:** ¿se cuenta el fallo de la línea? Recomendación: sí, cuando vuelva (variante B), con la causa y el día.
+3. **Siguen pendientes:**
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis del viernes;
+   - el carrusel;
+   - el vídeo 5;
+   - el 290,90 € frente a 291,90 € en Meta.
+
+**Hipótesis para mañana:** las búsquedas de «lead scoring» van a llegar más por el diccionario que por el blog, porque el diccionario ya posiciona. Si es así, el enlace de hoy desde el diccionario será la primera fuente de visitas del artículo. Se mira en dos semanas.
