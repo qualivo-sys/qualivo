@@ -10,3 +10,7 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Exportaciones con datos personales de leads (nombre, teléfono, email).
+# Nunca van al repo: se entregan por el canal que use el cliente.
+*.csv
