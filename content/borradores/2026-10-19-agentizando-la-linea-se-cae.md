@@ -6,6 +6,8 @@
 >
 > **Alternativa en el banco:** `content/borradores/2026-10-08-agentizando-se-corrige.md` («Un agente que se corrige por escrito») sigue sin publicar y vale para hoy si Maikel prefiere no contar este fallo.
 
+> **Actualización del 20-oct:** desde la tarde del 19-oct la voz está **pausada a propósito** en el código (`VOZ_PAUSADA` en `api/activacion.js`, Revenue Journey V3 aprobado por Maikel). La B y la C van solo por WhatsApp, y la voz automática no vuelve sin reparación, pruebas y consentimiento específico del contacto. La variante B ya no puede decir «volvió» hasta que Maikel la reactive. Si se publica antes, el cierre honesto es: «Mientras tanto, la he parado. No vuelve hasta que esté arreglada, probada y con permiso de quien recibe la llamada.»
+
 ## Ficha
 
 - **Serie:** Agentizando mi propia empresa.

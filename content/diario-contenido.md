@@ -1507,3 +1507,40 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - el 290,90 € frente a 291,90 € en Meta.
 
 **Hipótesis para mañana:** las búsquedas de «lead scoring» van a llegar más por el diccionario que por el blog, porque el diccionario ya posiciona. Si es así, el enlace de hoy desde el diccionario será la primera fuente de visitas del artículo. Se mira en dos semanas.
+
+### Martes 20-oct · trabajo del día
+
+**Publicado:**
+- **Artículo nuevo: [/blog/conversiones-offline-meta/](https://qualivo.io/blog/conversiones-offline-meta/)**, «Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando».
+  - Es el B4 de la estrategia, adelantado de la semana 44 porque el dato es de ayer.
+  - **Dato:** el cambio del 19-oct en `api/_tratos.js` (commit 75b4349). «Qualified» pasa a ser reunión celebrada con encaje, no reserva. Había 28 «Qualified» en el píxel que eran reservas.
+  - **Segundo dato:** el fallo del 28-sep, cuando a Meta le llegaron dos «Contacted» y ningún «Qualified» en diez días.
+  - **No se publica** la cifra de no presentados que está en el mismo comentario (R7).
+  - Tarjeta, sitemap, llms.txt y registro de keywords al día.
+- **Re-apunte de [/blog/meta-ads/](https://qualivo.io/blog/meta-ads/):**
+  - un sexto error en la lista final («no contarle a Meta qué contactos compraron»), con enlace al artículo nuevo;
+  - la caja final va sin la promesa «coste real por cliente de cada canal» y con un solo botón al diagnóstico.
+- **Corrección en [/blog/lead-scoring/](https://qualivo.io/blog/lead-scoring/):**
+  - **Por qué:** desde la tarde del 19-oct la voz está pausada en el código (`VOZ_PAUSADA`, Revenue Journey V3), así que la llamada de Raquel a la B y la C no sale.
+  - **Qué cambia:** el artículo lo dice en una nota bajo la tabla de letras. Sin esa nota incumplía R2.
+
+**Borradores:**
+- **Sin humo del martes:** `content/borradores/2026-10-20-sin-humo-28-cualificados.md`, «28 cualificados que no lo eran». Va con el artículo de hoy.
+- **Agentizando de ayer** (`2026-10-19-agentizando-la-linea-se-cae.md`): actualizado con la pausa de la voz. La variante «volvió» no vale hasta que Maikel reactive la voz.
+
+**Descartado:**
+- **Pieza sobre el no presentado de ayer** (escuela de formación). Rozaría la tasa de plantones (R7) y es un trato abierto (R5).
+- **Newsletter.** Hoy es martes.
+
+**Decisiones para Maikel:**
+1. **Cadencia.** Esta semana van dos piezas fuertes (lead scoring y conversiones offline), tirando de tu «caña máxima». Recomendación: dejarlo en dos por semana, que es la decisión 2 de la estrategia.
+2. **Sin humo «28 cualificados».** Recomendación: sí, hoy o mañana, con el enlace en el primer comentario.
+3. **La voz de Raquel.** Cuando vuelva, avísame para quitar la nota de lead scoring y cerrar el Agentizando.
+4. **Siguen pendientes:**
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis del viernes;
+   - el carrusel;
+   - el vídeo 5;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** el artículo de conversiones offline traerá menos visitas que lead scoring, pero más diagnósticos de empresas que ya invierten, porque solo lo busca quien ya tiene campañas. Se compara por `utm_content` en dos semanas.
