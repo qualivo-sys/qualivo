@@ -1,0 +1,409 @@
+[
+ {
+  "email": "marc@connect-ett.com",
+  "first_name": "Marc",
+  "last_name": "Torres Vicente",
+  "company_name": "Connect Ett",
+  "dom": "connect-ett.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "direccion@empleabilidadett.es",
+  "first_name": "Miguel",
+  "last_name": "Marquez Gamez",
+  "company_name": "Empleabilidad ETT",
+  "dom": "empleabilidadett.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "ibonolazabal@jobbe.es",
+  "first_name": "Ibon",
+  "last_name": "Olazabal Lizaso",
+  "company_name": "JOBBE ETT",
+  "dom": "jobbe.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "ivazquez@isprox.com",
+  "first_name": "Ivan",
+  "last_name": "Vazquez Carulla",
+  "company_name": "ISPROX",
+  "dom": "isprox.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "joaquin@enovalevante.es",
+  "first_name": "Joaquin",
+  "last_name": "Vinals",
+  "company_name": "Enova Levante",
+  "dom": "enovalevante.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jcmiguel@grupocfi.es",
+  "first_name": "Julio",
+  "last_name": "Cesar Miguel",
+  "company_name": "Grupo CFI",
+  "dom": "grupocfi.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "pablo@todocristal.eu",
+  "first_name": "Pablo",
+  "last_name": "Rodriguez",
+  "company_name": "Todocristal",
+  "dom": "todocristal.eu",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "rsosuna@idf-af.com",
+  "first_name": "Roberto",
+  "last_name": "Osuna Marcos",
+  "company_name": "IDF ALL FINANCING",
+  "dom": "idf-af.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jjavier@froxa.com",
+  "first_name": "Jose",
+  "last_name": "Javier Fernandez",
+  "company_name": "Froxá S.A.",
+  "dom": "froxa.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "gerencia@urbanclean.es",
+  "first_name": "Julio",
+  "last_name": "Alonso",
+  "company_name": "UrbanClean",
+  "dom": "urbanclean.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "daniel@nursecare.es",
+  "first_name": "Daniel",
+  "last_name": "Gonzalez",
+  "company_name": "NURSECARE | Salud y Prevención",
+  "dom": "nursecare.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "lcalduch@otp.es",
+  "first_name": "Liming",
+  "last_name": "Calduch",
+  "company_name": "OTP Oficina Técnica de Prevención",
+  "dom": "otp.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "rafael.ruiz@adymus.com",
+  "first_name": "Rafael",
+  "last_name": "Ruiz-Cabrero",
+  "company_name": "Adymus",
+  "dom": "adymus.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "marcos.vargas@fractalup.com",
+  "first_name": "Marcos",
+  "last_name": "Vargas",
+  "company_name": "FractalUp",
+  "dom": "fractalup.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "llvera@ackcent.com",
+  "first_name": "Lluis",
+  "last_name": "Vera",
+  "company_name": "Ackcent Cybersecurity",
+  "dom": "ackcent.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "pau@founderz.com",
+  "first_name": "Pau",
+  "last_name": "Garcia-Mila",
+  "company_name": "Founderz",
+  "dom": "founderz.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "javi.font@alusinsolar.com",
+  "first_name": "Javier",
+  "last_name": "Fernandez-Font Perez",
+  "company_name": "Alusin Solar | Solar Structures",
+  "dom": "alusinsolar.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jordi@upbizor.com",
+  "first_name": "Jordi",
+  "last_name": "Altimira",
+  "company_name": "UpBizor",
+  "dom": "upbizor.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "xavi@growitschool.com",
+  "first_name": "Xavi",
+  "last_name": "Laballos",
+  "company_name": "Growit School",
+  "dom": "growitschool.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "raul@esmartia.com",
+  "first_name": "Raul",
+  "last_name": "Montalvo",
+  "company_name": "Esmartia",
+  "dom": "esmartia.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "rafael@editeca.com",
+  "first_name": "Rafael",
+  "last_name": "Castillo Sancho",
+  "company_name": "Editeca",
+  "dom": "editeca.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "guillermo@brickbro.com",
+  "first_name": "Guillermo",
+  "last_name": "Preckler",
+  "company_name": "BRICKBRO",
+  "dom": "brickbro.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "jpuebla@talentoo.net",
+  "first_name": "Javier",
+  "last_name": "Puebla",
+  "company_name": "Talentoo",
+  "dom": "talentoo.net",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "ignaciomartinez@lawyoulegal.com",
+  "first_name": "Ignacio",
+  "last_name": "Martinez Fonseca",
+  "company_name": "LAWYOU",
+  "dom": "lawyoulegal.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "andoni.miranda@energyear.com",
+  "first_name": "Andoni",
+  "last_name": "Miranda",
+  "company_name": "Energyear",
+  "dom": "energyear.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "lola.chicon@smartmeanalytics.com",
+  "first_name": "Lola",
+  "last_name": "Chicon",
+  "company_name": "Smartme Analytics",
+  "dom": "smartmeanalytics.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "asier.deartaza@evolk.es",
+  "first_name": "Asier",
+  "last_name": "De Artaza",
+  "company_name": "Evolk",
+  "dom": "evolk.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "dominic@trustworks.io",
+  "first_name": "Dominic",
+  "last_name": "Yates",
+  "company_name": "TrustWorks",
+  "dom": "trustworks.io",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "reynaldo@below.es",
+  "first_name": "Reynaldo",
+  "last_name": "Gonzalez",
+  "company_name": "Below",
+  "dom": "below.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "g.espin@aticco.com",
+  "first_name": "Gabriel",
+  "last_name": "Espin Ordas",
+  "company_name": "Aticco",
+  "dom": "aticco.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "david.conde@coinscrapfinance.com",
+  "first_name": "David",
+  "last_name": "Conde Sayans",
+  "company_name": "Coinscrap Finance",
+  "dom": "coinscrapfinance.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "javier@getpulpo.com",
+  "first_name": "Javier",
+  "last_name": "Arambarri",
+  "company_name": "Pulpo",
+  "dom": "getpulpo.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "kai.brandt@enginy.ai",
+  "first_name": "Kai",
+  "last_name": "Brandt",
+  "company_name": "Enginy",
+  "dom": "enginy.ai",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "juan@dataslayer.ai",
+  "first_name": "Juan",
+  "last_name": "De Portugal",
+  "company_name": "Dataslayer.ai",
+  "dom": "dataslayer.ai",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "o.molina@augustaabogados.com",
+  "first_name": "Omar",
+  "last_name": "Molina Garcia",
+  "company_name": "Augusta Abogados",
+  "dom": "augustaabogados.com",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "fermin.carmona@hotelverse.tech",
+  "first_name": "Fermin",
+  "last_name": "Carmona Fernandez",
+  "company_name": "Hotelverse",
+  "dom": "hotelverse.tech",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ },
+ {
+  "email": "f.sanchez@netcheck.es",
+  "first_name": "Fermin",
+  "last_name": "Sanchez Martinez",
+  "company_name": "NETCheck",
+  "dom": "netcheck.es",
+  "puerta": "crm",
+  "v": {
+   "crm": "HubSpot"
+  }
+ }
+]

@@ -1,0 +1,13 @@
+[
+ {"nombre":"Raul","apellido":"Cortijo Marcos","email":"raul.cortijo@umilesgroup.com","empresa":"UMILES University","dominio":"umilesgroup.com","cargo":"Director General","empleados":42,"vertical":"formacion","cid":4042994},
+ {"nombre":"Olga","apellido":"Morcillo Lopez","email":"olga@aulainmobiliaria.com","empresa":"Aula Inmobiliaria","dominio":"aulainmobiliaria.com","cargo":"CEO - Directora Academica","empleados":4,"vertical":"formacion","cid":4042994},
+ {"nombre":"Esteve","apellido":"Niell Rovirosa","email":"esteve@cipsa.net","empresa":"CIPSA","dominio":"cipsa.net","cargo":"Commercial Director","empleados":42,"vertical":"formacion","cid":4042994},
+ {"nombre":"Neus","apellido":"Larregola Almirall","email":"nlarregola@zonarisk.es","empresa":"ZONA RISK","dominio":"zonarisk.es","cargo":"Manager","empleados":7,"vertical":"formacion","cid":4042994},
+ {"nombre":"Pedro","apellido":"Pavon Merayo","email":"ppavon@formacional.es","empresa":"FORMACIONAL","dominio":"formacional.es","cargo":"Director de Formacion","empleados":14,"vertical":"formacion","cid":4042994},
+ {"nombre":"Eduardo","apellido":"Navarro Navarro","email":"eduardo.navarro@fimed.es","empresa":"FIMED","dominio":"fimed.es","cargo":"General Manager","empleados":14,"vertical":"formacion","cid":4042994},
+ {"nombre":"Hassan","apellido":"Kalantari Bornak","email":"h.kalantari@uniway.es","empresa":"Uniway","dominio":"uniway.es","cargo":"Director","empleados":55,"vertical":"servicios","cid":4042995},
+ {"nombre":"Javier","apellido":"Rueda Encinas","email":"jrueda@asimetricconsultores.com","empresa":"Asimetric","dominio":"asimetricconsultores.com","cargo":"Commercial Manager","empleados":21,"vertical":"servicios","cid":4042995},
+ {"nombre":"Fernando","apellido":"Fuente Perez-Villamil","email":"fernando-delafuente@fbceuroconsulting.com","empresa":"FBC Euroconsulting","dominio":"fbceuroconsulting.com","cargo":"Director","empleados":10,"vertical":"servicios","cid":4042995},
+ {"nombre":"Carlos","apellido":"Garcia Garcia","email":"carlos@mzgasesores.es","empresa":"MZG Asesores","dominio":"mzgasesores.es","cargo":"Director","empleados":19,"vertical":"servicios","cid":4042995},
+ {"nombre":"Armando","apellido":"Pastor","email":"armando@futurvia.es","empresa":"FuturVia","dominio":"futurvia.es","cargo":"Sales Director","empleados":2,"vertical":"servicios","cid":4042995}
+]

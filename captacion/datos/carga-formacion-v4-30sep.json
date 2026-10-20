@@ -1,0 +1,626 @@
+[
+ {
+  "email": "shuber@boolino.com",
+  "first_name": "Sven",
+  "last_name": "Huber",
+  "company_name": "Fiction Express Education",
+  "website": "http://www.fictionexpress.com",
+  "phone_number": "+34 669 00 47 90",
+  "linkedin_profile": "http://www.linkedin.com/in/svenhuber",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Sven,\n\nHe estado mirando escuelas como Fiction Express Education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "mzapater@grupoesneca.com",
+  "first_name": "Maria",
+  "last_name": "Zapater",
+  "company_name": "ESNECA Business School",
+  "website": "http://www.esneca.com",
+  "phone_number": "+34 910 05 91 27",
+  "linkedin_profile": "http://www.linkedin.com/in/mar%c3%ada-zapater-891527233",
+  "location": "Reus",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Maria,\n\nHe estado mirando escuelas como ESNECA Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "fernando.villa@hazerta.es",
+  "first_name": "Fernando",
+  "last_name": "Villa Groizard",
+  "company_name": "Hazerta Formación",
+  "website": "http://www.cursoshazerta.es",
+  "phone_number": "+34 918 38 85 28",
+  "linkedin_profile": "http://www.linkedin.com/in/fernando-villa-groizard-789908b3",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Fernando,\n\nHe estado mirando escuelas como Hazerta Formación. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "eduardo@galiciabusinessschool.es",
+  "first_name": "Eduardo",
+  "last_name": "Garcia Erquiaga",
+  "company_name": "Galicia Business School",
+  "website": "http://www.galiciabusinessschool.es",
+  "phone_number": "+34 886 31 71 46",
+  "linkedin_profile": "http://www.linkedin.com/in/erquiaga",
+  "location": "Vigo",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Eduardo,\n\nHe estado mirando escuelas como Galicia Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jescudero@itaerea.es",
+  "first_name": "Jose",
+  "last_name": "Ignacio Escudero",
+  "company_name": "ITAérea Aeronautical Business School",
+  "website": "http://www.itaerea.es",
+  "phone_number": "+34 968 96 68 85",
+  "linkedin_profile": "http://www.linkedin.com/in/jos%c3%a9-ignacio-escudero-6b899a31",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jose,\n\nHe estado mirando escuelas como ITAérea Aeronautical Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "carlos@esgerencia.com",
+  "first_name": "Carlos",
+  "last_name": "Castilla",
+  "company_name": "EIG Education",
+  "website": "http://www.esgerencia.com",
+  "phone_number": "+34 678 00 50 05",
+  "linkedin_profile": "http://www.linkedin.com/in/carlos-castilla-",
+  "location": "Granada",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Carlos,\n\nHe estado mirando escuelas como EIG Education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "mvaliente@cesma.es",
+  "first_name": "Miguel",
+  "last_name": "Valiente Blanco",
+  "company_name": "CESMA Business School",
+  "website": "",
+  "phone_number": "+34 914 58 33 33",
+  "linkedin_profile": "http://www.linkedin.com/in/miguel-valiente-blanco-82660141",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Miguel,\n\nHe estado mirando escuelas como CESMA Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jose.lozano@liceodefarmacia.com",
+  "first_name": "Jose",
+  "last_name": "Lozano",
+  "company_name": "Liceo de Farmacia",
+  "website": "http://www.liceodefarmacia.com",
+  "phone_number": "+34 664 58 82 24",
+  "linkedin_profile": "http://www.linkedin.com/in/joseantoniolozano",
+  "location": "Seville",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jose,\n\nHe estado mirando escuelas como Liceo de Farmacia. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "adrian.aira@elev8.school",
+  "first_name": "Adrian",
+  "last_name": "Aira",
+  "company_name": "Elev8 School",
+  "website": "http://www.elev8.school",
+  "phone_number": "+34 910 78 30 37",
+  "linkedin_profile": "http://www.linkedin.com/in/adrianaira",
+  "location": "Vigo",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Adrian,\n\nHe estado mirando escuelas como Elev8 School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "noviedo@tutellus.com",
+  "first_name": "Nicolas",
+  "last_name": "Oviedo",
+  "company_name": "Tutellus",
+  "website": "http://www.tutellus.com",
+  "phone_number": "+34 911 73 02 53",
+  "linkedin_profile": "http://www.linkedin.com/in/ingnicol%c3%a1soviedo",
+  "location": "Malaga",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Nicolas,\n\nHe estado mirando escuelas como Tutellus. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "davidds@docencia-online.com",
+  "first_name": "David",
+  "last_name": "Delgado",
+  "company_name": "Docencia Online",
+  "website": "http://www.docencia-online.com",
+  "phone_number": "+34 649 08 36 93",
+  "linkedin_profile": "http://www.linkedin.com/in/davidds",
+  "location": "Las Palmas de Gran Canaria",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola David,\n\nHe estado mirando escuelas como Docencia Online. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jadominguez.omma@hesperides.edu.es",
+  "first_name": "Jose",
+  "last_name": "Dominguez Torre",
+  "company_name": "Universidad de las Hespérides",
+  "website": "http://www.hesperides.edu.es",
+  "phone_number": "",
+  "linkedin_profile": "http://www.linkedin.com/in/jos%c3%a9-augusto-dom%c3%adnguez-torre-492b11b6",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jose,\n\nHe estado mirando escuelas como Universidad de las Hespérides. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "s.navarrorubio@namenciscapital.com",
+  "first_name": "Santiago",
+  "last_name": "Navarro-Rubio",
+  "company_name": "Namencis Education",
+  "website": "http://www.namenciseducation.com",
+  "phone_number": "+34 917 93 18 20",
+  "linkedin_profile": "http://www.linkedin.com/in/santiagonavarrorubio",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Santiago,\n\nHe estado mirando escuelas como Namencis Education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "festrada@tbsweb.es",
+  "first_name": "Paco",
+  "last_name": "Estrada",
+  "company_name": "Traders Business School",
+  "website": "http://www.tradersbusinessschool.com",
+  "phone_number": "+34 678 82 84 10",
+  "linkedin_profile": "http://www.linkedin.com/in/paco-estrada-a48505124",
+  "location": "Seville",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Paco,\n\nHe estado mirando escuelas como Traders Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "angel@target.edu.es",
+  "first_name": "Angel",
+  "last_name": "Lopez Naranjo",
+  "company_name": "target business school",
+  "website": "http://www.target.edu.es",
+  "phone_number": "+34 968 21 60 67",
+  "linkedin_profile": "http://www.linkedin.com/in/angellopeznaranjo-motivacion-trabajoenequipo",
+  "location": "Murcia",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Angel,\n\nHe estado mirando escuelas como target business school. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "pmascort@idep.es",
+  "first_name": "Pau",
+  "last_name": "Mascort",
+  "company_name": "IDEP BARCELONA Escuela Superior de Imagen y Diseño",
+  "website": "http://www.idep.es",
+  "phone_number": "+34 934 16 10 12",
+  "linkedin_profile": "http://www.linkedin.com/in/pau-mascort-admisionesidep-recursoshumanos",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Pau,\n\nHe estado mirando escuelas como IDEP BARCELONA Escuela Superior de Imagen y Diseño. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jaime@protocolo.com",
+  "first_name": "Jaime",
+  "last_name": "Otegui Carles",
+  "company_name": "Escuela Internacional de Protocolo y Eventos",
+  "website": "http://www.protocolo.com",
+  "phone_number": "+34 913 10 18 03",
+  "linkedin_profile": "http://www.linkedin.com/in/jaime-otegui-carles-40ba42b4",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jaime,\n\nHe estado mirando escuelas como Escuela Internacional de Protocolo y Eventos. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "marcos@hispania-valencia.com",
+  "first_name": "Marcos",
+  "last_name": "Duran",
+  "company_name": "Hispania Education",
+  "website": "http://www.hispania-valencia.com",
+  "phone_number": "+34 963 51 05 05",
+  "linkedin_profile": "http://www.linkedin.com/in/mduranfoix",
+  "location": "Valencia",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Marcos,\n\nHe estado mirando escuelas como Hispania Education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jesus.dominguez@didascalia.es",
+  "first_name": "Jesus",
+  "last_name": "Dominguez",
+  "company_name": "Didascalia Educational Group",
+  "website": "http://www.didascalia.es",
+  "phone_number": "+34 955 02 77 17",
+  "linkedin_profile": "http://www.linkedin.com/in/jes%c3%bas-dom%c3%adnguez-35101b25",
+  "location": "Gelves",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jesus,\n\nHe estado mirando escuelas como Didascalia Educational Group. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jesus@orbelgrupo.com",
+  "first_name": "Jesus",
+  "last_name": "Ortiz",
+  "company_name": "Academia Industrial by Orbelgrupo",
+  "website": "http://www.academiaindustrial.com",
+  "phone_number": "+34 604 85 20 31",
+  "linkedin_profile": "http://www.linkedin.com/in/jesusortiz",
+  "location": "Benicassim",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jesus,\n\nHe estado mirando escuelas como Academia Industrial by Orbelgrupo. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "javier@forst.es",
+  "first_name": "Javier",
+  "last_name": "Jimenez Pastor",
+  "company_name": "FORST Tourism Business School",
+  "website": "http://www.forst.es",
+  "phone_number": "+34 661 84 98 60",
+  "linkedin_profile": "http://www.linkedin.com/in/javierjimenezpastor",
+  "location": "Alicante",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Javier,\n\nHe estado mirando escuelas como FORST Tourism Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jetina.sambo@summitbschool.com",
+  "first_name": "Jetina",
+  "last_name": "De Sousa Sambo",
+  "company_name": "Summit Business School",
+  "website": "http://www.summitbusinessschool.com",
+  "phone_number": "+34 936 55 55 11",
+  "linkedin_profile": "http://www.linkedin.com/in/jetina-o-de-sousa-sambo",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jetina,\n\nHe estado mirando escuelas como Summit Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "sdesco@cumbresschool.es",
+  "first_name": "Sergio",
+  "last_name": "Desco Bano",
+  "company_name": "Cumbres School Valencia",
+  "website": "http://www.cumbresschool.es",
+  "phone_number": "+34 961 39 39 59",
+  "linkedin_profile": "http://www.linkedin.com/in/sergio-desco-ba%c3%b1%c3%b3-",
+  "location": "Valencia",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Sergio,\n\nHe estado mirando escuelas como Cumbres School Valencia. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "legil@cedeu.es",
+  "first_name": "Luis",
+  "last_name": "Gil Navas",
+  "company_name": "CEDEU Centro de Estudios Universitarios",
+  "website": "http://www.cedeu.es",
+  "phone_number": "+34 917 25 44 39",
+  "linkedin_profile": "http://www.linkedin.com/in/luisenriquegilnavas",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Luis,\n\nHe estado mirando escuelas como CEDEU Centro de Estudios Universitarios. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "ijavier@ealde.es",
+  "first_name": "Ignacio",
+  "last_name": "Barriga Alibrandi",
+  "company_name": "EALDE Business School",
+  "website": "http://www.ealde.es",
+  "phone_number": "+34 917 71 02 59",
+  "linkedin_profile": "http://www.linkedin.com/in/ibarriga",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Ignacio,\n\nHe estado mirando escuelas como EALDE Business School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "enric.delpozo@tekmaneducation.com",
+  "first_name": "Enric",
+  "last_name": "Pozo Roses",
+  "company_name": "tekman education",
+  "website": "http://www.tekmaneducation.com",
+  "phone_number": "+34 900 833 805",
+  "linkedin_profile": "http://www.linkedin.com/in/enric-del-pozo-ros%c3%a9s-22a44a19",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Enric,\n\nHe estado mirando escuelas como tekman education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "jorge.mejia@pentalearning.com",
+  "first_name": "Jorge",
+  "last_name": "Mejia",
+  "company_name": "Penta Learning",
+  "website": "http://www.pentalearning.com",
+  "phone_number": "",
+  "linkedin_profile": "http://www.linkedin.com/in/jorge-mejia-pentalearning",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Jorge,\n\nHe estado mirando escuelas como Penta Learning. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "edgardo@tlteducation.com",
+  "first_name": "Edgardo",
+  "last_name": "Javier",
+  "company_name": "The Lemon Tree Education",
+  "website": "http://www.tlteducation.com",
+  "phone_number": "",
+  "linkedin_profile": "http://www.linkedin.com/in/edgardospivak",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Edgardo,\n\nHe estado mirando escuelas como The Lemon Tree Education. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "mvelarde@inorbis.net",
+  "first_name": "Misky",
+  "last_name": "Velarde",
+  "company_name": "InOrbis School",
+  "website": "http://www.inorbis.school",
+  "phone_number": "+34 931 61 80 04",
+  "linkedin_profile": "http://www.linkedin.com/in/misky-velarde-4a753a22",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Misky,\n\nHe estado mirando escuelas como InOrbis School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "miguel.tienda@grupoineprodes.com",
+  "first_name": "Miguel",
+  "last_name": "Tienda Ruiz",
+  "company_name": "IMEFOR",
+  "website": "http://www.institutoimefor.com",
+  "phone_number": "+61 3 8376 6284",
+  "linkedin_profile": "http://www.linkedin.com/in/miguel-tienda-ruiz-90577030",
+  "location": "Cabra",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Miguel,\n\nHe estado mirando escuelas como IMEFOR. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "julie.bruneau@bse.eu",
+  "first_name": "Julie",
+  "last_name": "Bruneau",
+  "company_name": "Barcelona School of Economics",
+  "website": "http://www.bse.eu",
+  "phone_number": "+34 935 42 12 24",
+  "linkedin_profile": "http://www.linkedin.com/in/julie-bruneau-marketing",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Julie,\n\nHe estado mirando escuelas como Barcelona School of Economics. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "sandra.gonzalez@mbitschool.com",
+  "first_name": "Sandra",
+  "last_name": "Gonzalez",
+  "company_name": "MBIT School",
+  "website": "http://www.mbitschool.com",
+  "phone_number": "+34 910 63 02 16",
+  "linkedin_profile": "http://www.linkedin.com/in/sgg80",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Sandra,\n\nHe estado mirando escuelas como MBIT School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "alberto@ie.edu",
+  "first_name": "Alberto",
+  "last_name": "Jimenez Baez",
+  "company_name": "IE School of Politics, Economics & Global Affairs",
+  "website": "http://www.ie.edu/school-politics-economics-global-affairs",
+  "phone_number": "+34 915 68 96 00",
+  "linkedin_profile": "http://www.linkedin.com/in/albertojimenezbaez",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Alberto,\n\nHe estado mirando escuelas como IE School of Politics, Economics & Global Affairs. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "carlos.garcia@neoland.es",
+  "first_name": "Carlos",
+  "last_name": "Garcia Trujillo",
+  "company_name": "NEOLAND",
+  "website": "http://www.neoland.es",
+  "phone_number": "+34 917 15 53 99",
+  "linkedin_profile": "http://www.linkedin.com/in/carlosgtrujillo",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Carlos,\n\nHe estado mirando escuelas como NEOLAND. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "mdelcastillo@faroedtech.com",
+  "first_name": "Maria",
+  "last_name": "Del Castillo",
+  "company_name": "FARO Educación",
+  "website": "http://www.faroeducacion.com",
+  "phone_number": "+34 953 80 00 95",
+  "linkedin_profile": "http://www.linkedin.com/in/mariadelcastillophd",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Maria,\n\nHe estado mirando escuelas como FARO Educación. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "anna.nissley@expanish.com",
+  "first_name": "Anna",
+  "last_name": "Nissley",
+  "company_name": "Expanish",
+  "website": "http://www.expanish.com",
+  "phone_number": "+1 628-239-3044",
+  "linkedin_profile": "http://www.linkedin.com/in/anna-nissley-54116a1b9",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Anna,\n\nHe estado mirando escuelas como Expanish. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "r.pozuelo@mrctraining.com",
+  "first_name": "Rufino",
+  "last_name": "Pozuelo",
+  "company_name": "MRC International People Training",
+  "website": "http://www.mrctraining.com",
+  "phone_number": "+34 913 07 96 29",
+  "linkedin_profile": "http://www.linkedin.com/in/rufinopozuelo",
+  "location": "Barcelona",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Rufino,\n\nHe estado mirando escuelas como MRC International People Training. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "mercedespardo@ime.es",
+  "first_name": "Mercedes",
+  "last_name": "Pardo",
+  "company_name": "Instituto Marítimo Español, IME",
+  "website": "http://www.ime.es",
+  "phone_number": "+34 915 77 40 25",
+  "linkedin_profile": "http://www.linkedin.com/in/mercedes-pardo-76347717",
+  "location": "Madrid",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Mercedes,\n\nHe estado mirando escuelas como Instituto Marítimo Español, IME. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ },
+ {
+  "email": "hernan.trabatto@imaginemontessori.es",
+  "first_name": "Hernan",
+  "last_name": "Trabatto",
+  "company_name": "Imagine Montessori School",
+  "website": "http://www.imaginemontessori.es",
+  "phone_number": "+34 961 07 19 25",
+  "linkedin_profile": "http://www.linkedin.com/in/hernan-trabatto",
+  "location": "Valencia",
+  "custom_fields": {
+   "subject1": "entre la solicitud y la matrícula",
+   "body1": "Hola Hernan,\n\nHe estado mirando escuelas como Imagine Montessori School. Con solicitudes por anuncios, el agujero no está en el anuncio sino entre solicitud y matrícula.\n\nNosotros detectamos dónde se pierden clientes en el proceso de captación y ventas, y lo arreglamos metiendo IA dentro del sistema que ya tenéis.\n\nEl primer paso es una llamada corta: me cuentas cómo lo tenéis montado y te digo qué veo. Si sale algo claro, lo probamos un mes sin coste y luego decidís si tiene sentido seguir.\n\n¿Te va bien esta semana?\n\nMaikel",
+   "vertical": "formacion_premium",
+   "capa": "capa-b"
+  }
+ }
+]
