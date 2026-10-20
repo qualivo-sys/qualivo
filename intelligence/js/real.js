@@ -342,7 +342,7 @@
       campanas: campanas,
       mesDatos: { respuestaAntes: resp || 0, respuestaAhora: resp || 0, agendadas: embudoDe(leads).diagnostico },
       contactos: leads.map(function (r) { return aContacto(r, ahora); }),
-      vistasExtra: [{ id: 'hoy', txt: 'Hoy', ico: 'calendario' }, { id: 'finanzas', txt: 'Finanzas', ico: 'euro' }],
+      vistasExtra: [{ id: 'hoy', txt: 'Hoy', ico: 'calendario' }, { id: 'prospeccion', txt: 'Prospección', ico: 'diana' }, { id: 'finanzas', txt: 'Finanzas', ico: 'euro' }],
       timelineSinOrigen: true,
       textoAlta: function (c) { return 'Entra · ' + c.prod; },
       kpiCustom: function (m, c2, Mo, est) {
