@@ -77,6 +77,21 @@ Se revisa el viernes en verde, ámbar o rojo. Así cada área sabe qué tiene qu
 | Clientes · piloto | EAC y Eleva con reunión preparada y acuerdos registrados; tus horas dentro de la referencia | Cumplido el 20-oct [C] | Agentes EAC y Eleva |
 | Coordinación | Un resumen diario; ≤ 10 decisiones abiertas | 16 [C] | Chief of Staff |
 
+### Agentes de cliente
+
+Incorporados a petición de Maikel el 20-oct, incluido Alpha. Su objetivo común es O3: que cada cliente reciba lo comprometido, pague a tiempo y tenga un siguiente hito.
+
+| Cliente | Objetivo de la semana | Situación a 20-oct | Dueño |
+|---|---|---|---|
+| **Alpha Media Group** | Factura y contrato enviados. Correo de dependencias enviado (Meta Business Manager, número de Aircall, exportación de Zoho, OK al repositorio). Demo del lunes 26 con los límites explícitos | Correo listo sin enviar. Factura en borrador desde el 7-oct [C] | Agente Alpha; CFO para la factura |
+| **Nuria Roure** | Directo del jueves 22 sin incidencias. Test nuevo publicado en GHL. El 23, decidido el envío posterior con asistencia y replay. Precio y acuerdo de tratamiento de datos cerrados | Emails programados (Maikel). Test listo para pegar. Su número de voz sale por la línea de Twilio caída [C] | Agente Nuria |
+| **Kill & Ramble · Scubalight** | Saldo de la bolsa de 30 h claro (21-oct). Prensa ES/BR revisada (22-oct). Envíos del 27 y del 29 preparados sin activar. Claves en la configuración del entorno, no en archivos temporales | 6 creadores cargados y 35 mensajes preparados. Claves en archivo temporal [C] | Agente Kill & Ramble |
+| **Equipzilla** | Decisiones de las reuniones de mañana registradas. Contrato de colaboración revisado | Agente sin actividad desde el 6-oct; avanzas tú. Es el 74 % de lo que entra [C, CFO] | Maikel; agente si se reactiva |
+| **Kubysoft** | Decidir si el piloto sigue, con precio y fecha de fin, o se cierra | Piloto sin facturar. Clave de Smartlead perdida [C] | Maikel decide; agente ejecuta |
+| **Adigital y Antic** | Cobro de Adigital conciliado (1.028,50 € pendiente en Quipu) | Baja actividad [C] | CFO |
+
+**Hipótesis de retención (H6), sin ocupar hueco de experimento:** los clientes se van o no amplían porque no ven un resultado medido ni un siguiente hito. Evidencia: 14 bajas sin motivo registrado; Alpha 17 días sin facturar; Kubysoft sin precio [C]. Se trata como estándar de entrega, medido cada viernes: cada cliente con plan, siguiente hito, factura al día y reunión preparada.
+
 **Autonomía:** dentro de un experimento aprobado, el agente ejecuta, mide y para solo. Tú recibes una línea por experimento en el resumen diario y la lectura completa el viernes.
 
 ---
