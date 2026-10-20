@@ -89,6 +89,14 @@ main { max-width: 1240px; margin: 0 auto; padding: 20px; }
 .paso-s .dia small { display: block; color: var(--gris); font-weight: 600; }
 .paso-s b { display: block; }
 .paso-s p { color: var(--tinta-2); margin-top: 3px; white-space: pre-line; }
+.paso-s { position: relative; }
+[contenteditable] { outline: none; border-radius: 4px; }
+[contenteditable]:hover { background: var(--hover); }
+[contenteditable]:focus { background: var(--verde-bg); box-shadow: 0 0 0 2px #CBE8E4; }
+.quitar { position: absolute; top: 6px; right: 6px; border: 0; background: none; color: var(--gris-2); font-size: 16px; width: 24px; height: 24px; border-radius: 6px; }
+.quitar:hover { background: var(--hover); color: var(--tinta); }
+.seq-bar { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.btn.mini { height: 30px; font-size: 12.5px; }
 .nota-s { color: var(--gris); font-size: 12px; margin-top: 8px; }
 .secs { margin-top: 20px; background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 16px; box-shadow: var(--sombra); }
 .secs h2 { font-size: 16px; }
@@ -256,6 +264,18 @@ var SEQ = {
     ['Día 5', 'LinkedIn', 'Conexión con nota', 'Recordatorio breve del correo.'],
     ['Día 12', 'Correo', 'Material para vuestros clientes', 'Ficha del fondo revisada por cumplimiento normativo, y propuesta de 15 minutos.']] }
 };
+var SEQ_ORIG = JSON.parse(JSON.stringify(SEQ));
+try { var guard = JSON.parse(localStorage.getItem('qv-faraday-seq') || 'null'); if (guard) Object.keys(guard).forEach(function (k) { SEQ[k] = guard[k]; }); } catch (e) { /* sin almacenamiento */ }
+function guardarSeq() { try { localStorage.setItem('qv-faraday-seq', JSON.stringify(SEQ)); } catch (e) { /* nada */ } }
+var actual = -1;
+function pintarSeq(seg) {
+  var q = SEQ[seg]; if (!q) return '';
+  return '<div class="bloque" id="bloque-seq"><h3>Secuencia: <span contenteditable="true" data-seg="' + txt(seg) + '" data-f="t">' + txt(q.t) + '</span></h3><div class="seq">' +
+    q.p.map(function (x, j) {
+      return '<div class="paso-s"><button class="quitar" data-quitar="' + j + '" aria-label="Quitar paso">×</button><div class="dia"><span contenteditable="true" data-seg="' + txt(seg) + '" data-j="' + j + '" data-k="0">' + txt(x[0]) + '</span><small contenteditable="true" data-seg="' + txt(seg) + '" data-j="' + j + '" data-k="1">' + txt(x[1]) + '</small></div><div><b contenteditable="true" data-seg="' + txt(seg) + '" data-j="' + j + '" data-k="2">' + txt(x[2]) + '</b><p contenteditable="true" data-seg="' + txt(seg) + '" data-j="' + j + '" data-k="3">' + txt(x[3]) + '</p></div></div>';
+    }).join('') + '</div><div class="seq-bar"><button class="btn mini" data-anadir="1">+ Añadir paso</button><button class="btn mini" data-restaurar="1">Restaurar original</button></div>' +
+    '<p class="nota-s">Pincha en cualquier texto para editarlo: día, canal, asunto o mensaje. Se para en cuanto responde y cada mensaje lo revisa vuestro equipo antes de salir.</p></div>';
+}
 var filtro = { seg: 'Todos', sen: 'Todas', est: 'Todos' };
 var EST_TXT = { nuevo: 'Nuevo', crm: 'En CRM, sin seguimiento', conv: 'En conversación' };
 function txt(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
@@ -288,6 +308,7 @@ function pintar() {
   }).join('') : '<div class="vacio">Ninguna cuenta con estos filtros.</div>';
 }
 function abrir(i) {
+  actual = i;
   var c = CUENTAS[i];
   document.querySelectorAll('.fila').forEach(function (f) { f.classList.toggle('sel', f.getAttribute('data-i') === String(i)); });
   document.getElementById('ficha-c').innerHTML =
@@ -297,9 +318,7 @@ function abrir(i) {
     '<div class="bloque"><h3>A quién tocar</h3><p>' + txt(c.quien) + ' · canal: ' + txt(c.canal) + '</p></div>' +
     '<div class="bloque"><h3>Siguiente paso</h3><p>' + txt(c.paso) + '</p></div>' +
     '<div class="bloque"><h3>Primer mensaje sugerido</h3><div class="msg">' + txt(c.msg) + '</div></div>' +
-    (SEQ[c.seg] ? '<div class="bloque"><h3>Secuencia: ' + txt(SEQ[c.seg].t) + '</h3><div class="seq">' + SEQ[c.seg].p.map(function (x) {
-      return '<div class="paso-s"><div class="dia">' + txt(x[0]) + '<small>' + txt(x[1]) + '</small></div><div><b>' + txt(x[2]) + '</b><p>' + txt(x[3]) + '</p></div></div>';
-    }).join('') + '</div><p class="nota-s">Se para en cuanto responde. Cada mensaje lo revisa vuestro equipo antes de salir.</p></div>' : '') +
+    pintarSeq(c.seg) +
     '<div class="acciones"><button class="btn pri" data-t="Entraría en la secuencia y la primera pieza quedaría pendiente de vuestra revisión">Activar secuencia</button><button class="btn" data-t="Se crearía la tarea en vuestro CRM, con la ficha adjunta">Crear tarea en el CRM</button><button class="btn" data-t="Se añadiría a la audiencia de vuestra campaña de LinkedIn">Añadir a audiencia de LinkedIn</button></div>';
   document.getElementById('ficha').classList.add('abierta');
   document.getElementById('velo').classList.add('on');
@@ -312,6 +331,19 @@ document.addEventListener('click', function (e) {
   var r = e.target.closest('.fila'); if (r) { abrir(+r.getAttribute('data-i')); return; }
   var b = e.target.closest('[data-t]'); if (b) { toast(b.getAttribute('data-t')); return; }
   if (e.target.id === 'cerrar' || e.target.id === 'velo') cerrar();
+});
+document.addEventListener('input', function (e) {
+  var el = e.target, seg = el.getAttribute && el.getAttribute('data-seg'); if (!seg || !SEQ[seg]) return;
+  if (el.getAttribute('data-f') === 't') SEQ[seg].t = el.textContent;
+  else SEQ[seg].p[+el.getAttribute('data-j')][+el.getAttribute('data-k')] = el.textContent;
+  guardarSeq();
+});
+function repintarSeq() { var c = CUENTAS[actual]; var b = document.getElementById('bloque-seq'); if (c && b) b.outerHTML = pintarSeq(c.seg); }
+document.addEventListener('click', function (e) {
+  var c = CUENTAS[actual]; if (!c || !SEQ[c.seg]) return;
+  var q = e.target.closest('[data-quitar]'); if (q) { SEQ[c.seg].p.splice(+q.getAttribute('data-quitar'), 1); guardarSeq(); repintarSeq(); return; }
+  if (e.target.closest('[data-anadir]')) { SEQ[c.seg].p.push(['Día ?', 'Correo', 'Asunto nuevo', 'Escribe aquí el mensaje.']); guardarSeq(); repintarSeq(); return; }
+  if (e.target.closest('[data-restaurar]')) { SEQ[c.seg] = JSON.parse(JSON.stringify(SEQ_ORIG[c.seg])); guardarSeq(); repintarSeq(); toast('secuencia restaurada'); }
 });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
 document.getElementById('k-total').textContent = '148';
