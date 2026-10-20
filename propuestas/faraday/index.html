@@ -83,6 +83,18 @@ main { max-width: 1240px; margin: 0 auto; padding: 20px; }
 .camp { margin-top: 14px; display: grid; gap: 6px; }
 .camp div { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; padding: 8px 10px; border-radius: 8px; background: var(--fondo); font-size: 12.5px; }
 .camp div.h { background: none; color: var(--gris-2); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; }
+.seq { display: grid; gap: 8px; }
+.paso-s { display: grid; grid-template-columns: 54px 1fr; gap: 10px; border: 1px solid var(--borde); border-radius: 10px; padding: 10px; }
+.paso-s .dia { font-weight: 800; color: var(--verde-txt); font-size: 12px; }
+.paso-s .dia small { display: block; color: var(--gris); font-weight: 600; }
+.paso-s b { display: block; }
+.paso-s p { color: var(--tinta-2); margin-top: 3px; white-space: pre-line; }
+.nota-s { color: var(--gris); font-size: 12px; margin-top: 8px; }
+.secs { margin-top: 20px; background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 16px; box-shadow: var(--sombra); }
+.secs h2 { font-size: 16px; }
+.secs > p { color: var(--gris); margin-top: 2px; }
+.secs .camp div { grid-template-columns: 2.2fr .9fr .9fr .9fr .9fr; }
+.ir { margin-left: 12px; font-weight: 700; font-size: 12.5px; color: var(--verde); text-decoration: none; }
 .pie { color: var(--gris); font-size: 12px; margin: 18px 0 30px; max-width: 900px; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--tinta); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 600; transition: transform .25s; z-index: 20; max-width: calc(100% - 32px); }
 .toast.on { transform: translateX(-50%) translateY(0); }
@@ -104,6 +116,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 20px; }
 <header class="top">
   <div class="logo">Qualivo <span>Intelligence</span></div>
   <div class="miga">· Prospección de inversores</div>
+  <a class="ir" href="/intelligence/?sector=b2b&amp;empresa=Faraday&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir panel completo →</a>
   <div class="chip-sim">Datos simulados</div>
 </header>
 <main>
@@ -130,6 +143,18 @@ main { max-width: 1240px; margin: 0 auto; padding: 20px; }
       <div id="filas"></div>
     </section>
   </div>
+
+  <section class="secs" aria-label="Secuencias en marcha">
+    <h2>Secuencias en marcha</h2>
+    <p>Cada cuenta entra en la secuencia de su perfil. Se para sola en cuanto alguien responde, y vuestro equipo revisa cada mensaje antes de que salga.</p>
+    <div class="camp">
+      <div class="h"><span>Secuencia</span><span>En curso</span><span>Abren</span><span>Responden</span><span>Reuniones</span></div>
+      <div><span>Fundadores con salida · invitación al Club</span><span>38</span><span>61 %</span><span>13 %</span><span>4</span></div>
+      <div><span>Family offices · coinversión operación a operación</span><span>22</span><span>55 %</span><span>9 %</span><span>2</span></div>
+      <div><span>Registrados que no asistieron al evento</span><span>47</span><span>72 %</span><span>19 %</span><span>6</span></div>
+      <div><span>Asesores patrimoniales · fondos para clientes profesionales</span><span>15</span><span>48 %</span><span>7 %</span><span>1</span></div>
+    </div>
+  </section>
 
   <section class="embudo" aria-label="Del anuncio a la inversión">
     <h2>Del anuncio a la inversión, por campaña</h2>
@@ -202,6 +227,35 @@ var CUENTAS = [
     quien: 'Ella misma', paso: 'Audiencia de la campaña de directivos y seguimiento si se registra',
     msg: '(Sin mensaje directo: entra en la audiencia de la campaña.)' }
 ];
+var SEQ = {
+  'Family office': { t: 'Coinversión operación a operación', p: [
+    ['Día 0', 'Correo', 'Coinversión en [startup del sector]', 'Hola, [nombre]. Vi vuestra entrada en [ronda]. Coinvertimos en fase temprana con inversores privados; te cuento en 15 minutos cómo funciona operación a operación.'],
+    ['Día 3', 'LinkedIn', 'Conexión con nota', 'Nota corta al director de inversiones, sin enlace, citando la misma operación.'],
+    ['Día 7', 'Correo', 'Una operación como ejemplo', 'Resumen de una operación ya cerrada de la cartera (fase, ticket y qué buscábamos), sin rentabilidades.'],
+    ['Día 14', 'Correo', '¿Lo dejamos para más adelante?', 'Pregunta cerrada: ¿te encaja el próximo encuentro del Club o lo retomamos en enero?']] },
+  'Fundador con salida': { t: 'Invitación al Club', p: [
+    ['Día 0', 'LinkedIn', 'Mensaje personal', 'Enhorabuena por la operación, y una invitación al próximo encuentro del Club: pequeño y sin compromiso.'],
+    ['Día 2', 'Correo', 'Lo que hacen otros fundadores tras vender', 'Cómo varios socios del Club empezaron a invertir en fase temprana después de su salida.'],
+    ['Día 6', 'Correo', 'Plazas del próximo encuentro', 'Fecha, lugar y quién presenta. Una sola pregunta: ¿te guardo sitio?'],
+    ['Día 12', 'Correo', 'Último aviso', 'Cierre amable: le dejamos la puerta abierta al siguiente.']] },
+  'Directivo tech': { t: 'De la campaña al encuentro', p: [
+    ['Día 0', 'LinkedIn Ads', 'Entra en la audiencia', 'Sin mensaje directo: ve la campaña del Club en LinkedIn.'],
+    ['Si se registra', 'Correo', 'Gracias por apuntarte', 'Respuesta en minutos con la fecha, el enlace y una pregunta: ¿operación a operación o primero entender el Club?'],
+    ['Día 1 tras el evento', 'Correo', 'La grabación y un siguiente paso', 'Si no asistió: grabación y pregunta concreta. Si asistió: propuesta de llamada con el equipo.'],
+    ['Día 5', 'Correo', '¿Hablamos 15 minutos?', 'Dos huecos concretos con el equipo de inversión.']] },
+  'Business angel': { t: 'Acuerdo con la red', p: [
+    ['Día 0', 'Correo', 'Sesión conjunta en vuestro foro', 'Propuesta de una sesión con una startup de la cartera.'],
+    ['Día 4', 'Llamada', 'Llamada a la coordinadora', 'La hace vuestro equipo, con la ficha delante.'],
+    ['Día 10', 'Correo', 'Propuesta por escrito', 'Formato, fecha y qué aporta cada parte.']] },
+  'Corporate / CVC': { t: 'Contenido primero', p: [
+    ['Día 0', 'Correo', 'Informe anual de la cartera', 'Ofrecer el informe; sin pedir reunión.'],
+    ['Día 10', 'Correo', 'Tres aprendizajes del informe', 'Lo más útil para un área de innovación abierta.'],
+    ['Día 21', 'Correo', '¿Lo vemos juntos?', 'Propuesta de 20 minutos para comentarlo.']] },
+  'Asesor patrimonial': { t: 'Fondos para clientes profesionales', p: [
+    ['Día 0', 'Correo', 'Capital riesgo para vuestros clientes profesionales', 'Cómo lo presentan otros asesores, sin cifras de rentabilidad.'],
+    ['Día 5', 'LinkedIn', 'Conexión con nota', 'Recordatorio breve del correo.'],
+    ['Día 12', 'Correo', 'Material para vuestros clientes', 'Ficha del fondo revisada por cumplimiento normativo, y propuesta de 15 minutos.']] }
+};
 var filtro = { seg: 'Todos', sen: 'Todas', est: 'Todos' };
 var EST_TXT = { nuevo: 'Nuevo', crm: 'En CRM, sin seguimiento', conv: 'En conversación' };
 function txt(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
@@ -243,7 +297,10 @@ function abrir(i) {
     '<div class="bloque"><h3>A quién tocar</h3><p>' + txt(c.quien) + ' · canal: ' + txt(c.canal) + '</p></div>' +
     '<div class="bloque"><h3>Siguiente paso</h3><p>' + txt(c.paso) + '</p></div>' +
     '<div class="bloque"><h3>Primer mensaje sugerido</h3><div class="msg">' + txt(c.msg) + '</div></div>' +
-    '<div class="acciones"><button class="btn pri" data-t="Se crearía la tarea en vuestro CRM, con la ficha adjunta">Crear tarea en el CRM</button><button class="btn" data-t="Se añadiría a la audiencia de vuestra campaña de LinkedIn">Añadir a audiencia de LinkedIn</button></div>';
+    (SEQ[c.seg] ? '<div class="bloque"><h3>Secuencia: ' + txt(SEQ[c.seg].t) + '</h3><div class="seq">' + SEQ[c.seg].p.map(function (x) {
+      return '<div class="paso-s"><div class="dia">' + txt(x[0]) + '<small>' + txt(x[1]) + '</small></div><div><b>' + txt(x[2]) + '</b><p>' + txt(x[3]) + '</p></div></div>';
+    }).join('') + '</div><p class="nota-s">Se para en cuanto responde. Cada mensaje lo revisa vuestro equipo antes de salir.</p></div>' : '') +
+    '<div class="acciones"><button class="btn pri" data-t="Entraría en la secuencia y la primera pieza quedaría pendiente de vuestra revisión">Activar secuencia</button><button class="btn" data-t="Se crearía la tarea en vuestro CRM, con la ficha adjunta">Crear tarea en el CRM</button><button class="btn" data-t="Se añadiría a la audiencia de vuestra campaña de LinkedIn">Añadir a audiencia de LinkedIn</button></div>';
   document.getElementById('ficha').classList.add('abierta');
   document.getElementById('velo').classList.add('on');
 }
