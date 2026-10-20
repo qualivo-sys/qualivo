@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Intelligence · Prospección de inversores</title>
+<style>
+/* Demo para la primera llamada con Faraday VP (20-oct). Prospección de cuentas de inversores con datos simulados, con el estilo de Qualivo Intelligence. */
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/assets/fonts/montserrat-latin.woff2") format('woff2'); }
+:root {
+  --tinta: #101319; --tinta-2: #3D4148; --gris: #5A5E66; --gris-2: #8A8D93;
+  --fondo: #F6F6F3; --superficie: #FFFFFF; --borde: #E6E5E0; --hover: #F2F1ED;
+  --verde: #0E7C74; --verde-2: #27BDB1; --verde-bg: #E6F4F2; --verde-txt: #0B635C;
+  --lila: #EFECFB; --lila-txt: #5B4DB8; --ambar: #B7791F; --ambar-bg: #FDF4E0;
+  --azul: #2F6FD6; --azul-bg: #E9F0FC; --coral: #D9480F; --coral-bg: #FDEEE6;
+  --sombra: 0 1px 2px rgba(16,19,25,.05), 0 4px 16px rgba(16,19,25,.05);
+  --f: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--f); font-size: 13.5px; line-height: 1.45; color: var(--tinta); background: var(--fondo); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3, p { margin: 0; }
+button { font-family: inherit; font-size: inherit; color: inherit; cursor: pointer; }
+.top { display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: var(--superficie); border-bottom: 1px solid var(--borde); flex-wrap: wrap; }
+.logo { font-weight: 800; letter-spacing: -.01em; }
+.logo span { color: var(--verde); }
+.miga { color: var(--gris); font-weight: 600; }
+.chip-sim { margin-left: auto; background: var(--ambar-bg); color: var(--ambar); font-weight: 700; font-size: 11.5px; padding: 4px 10px; border-radius: 99px; }
+main { max-width: 1240px; margin: 0 auto; padding: 20px; }
+.cab h1 { font-size: 22px; letter-spacing: -.02em; }
+.cab p { color: var(--gris); margin-top: 4px; max-width: 760px; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0; }
+.kpi { background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 14px 16px; box-shadow: var(--sombra); }
+.kpi b { display: block; font-size: 24px; letter-spacing: -.02em; }
+.kpi span { color: var(--gris); font-size: 12.5px; }
+.panel { display: grid; grid-template-columns: 230px 1fr; gap: 16px; align-items: start; }
+.filtros { background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 14px; box-shadow: var(--sombra); }
+.filtros h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--gris-2); margin: 10px 0 8px; }
+.filtros h3:first-child { margin-top: 0; }
+.fbtn { display: flex; justify-content: space-between; width: 100%; text-align: left; background: none; border: 1px solid transparent; border-radius: 8px; padding: 6px 8px; font-weight: 600; color: var(--tinta-2); }
+.fbtn:hover { background: var(--hover); }
+.fbtn.on { background: var(--verde-bg); color: var(--verde-txt); border-color: #CBE8E4; }
+.fbtn em { font-style: normal; color: var(--gris-2); font-weight: 600; }
+.tabla { background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; box-shadow: var(--sombra); overflow: hidden; }
+.thead, .fila { display: grid; grid-template-columns: 2.1fr 1.2fr 2fr 1fr 1.1fr 1fr; gap: 12px; align-items: center; padding: 11px 16px; }
+.thead { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--gris-2); border-bottom: 1px solid var(--borde); font-weight: 700; }
+.fila { border-bottom: 1px solid #EFEEEA; background: none; border-left: 0; border-right: 0; border-top: 0; width: 100%; text-align: left; }
+.fila:hover { background: var(--hover); }
+.fila.sel { background: var(--verde-bg); }
+.nom b { display: block; }
+.nom small, .sen small { color: var(--gris); }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 99px; background: var(--lila); color: var(--lila-txt); white-space: nowrap; }
+.barra { height: 6px; background: #ECEBE6; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.barra i { display: block; height: 100%; background: var(--verde-2); border-radius: 99px; }
+.est { font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 99px; white-space: nowrap; }
+.est.nuevo { background: var(--azul-bg); color: var(--azul); }
+.est.crm { background: var(--ambar-bg); color: var(--ambar); }
+.est.conv { background: var(--verde-bg); color: var(--verde-txt); }
+.vacio { padding: 30px; text-align: center; color: var(--gris); }
+.ficha { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--superficie); box-shadow: 0 12px 40px rgba(16,19,25,.18); padding: 22px; overflow-y: auto; transform: translateX(105%); transition: transform .25s ease; z-index: 10; }
+.ficha.abierta { transform: none; }
+.ficha .cerrar { position: absolute; top: 14px; right: 14px; border: 1px solid var(--borde); background: var(--superficie); border-radius: 8px; width: 32px; height: 32px; font-size: 18px; }
+.ficha h2 { font-size: 18px; letter-spacing: -.01em; padding-right: 40px; }
+.ficha .sub { color: var(--gris); margin-top: 2px; }
+.bloque { margin-top: 16px; }
+.bloque h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--gris-2); margin-bottom: 6px; }
+.bloque ul { margin: 0; padding-left: 18px; }
+.bloque li { margin: 3px 0; }
+.msg { background: var(--fondo); border: 1px solid var(--borde); border-radius: 10px; padding: 12px; white-space: pre-line; }
+.acciones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; height: 34px; padding: 0 13px; border-radius: 8px; border: 1px solid var(--borde); background: var(--superficie); font-weight: 600; font-size: 13px; }
+.btn.pri { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+.velo { position: fixed; inset: 0; background: rgba(16,19,25,.25); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 9; }
+.velo.on { opacity: 1; pointer-events: auto; }
+.embudo { margin-top: 20px; background: var(--superficie); border: 1px solid var(--borde); border-radius: 12px; padding: 16px; box-shadow: var(--sombra); }
+.embudo h2 { font-size: 16px; }
+.embudo > p { color: var(--gris); margin-top: 2px; }
+.pasos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 14px; }
+.paso { border: 1px solid var(--borde); border-radius: 10px; padding: 12px; }
+.paso b { display: block; font-size: 20px; }
+.paso span { color: var(--gris); font-size: 12.5px; }
+.paso.fin { background: var(--verde-bg); border-color: #CBE8E4; }
+.camp { margin-top: 14px; display: grid; gap: 6px; }
+.camp div { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; padding: 8px 10px; border-radius: 8px; background: var(--fondo); font-size: 12.5px; }
+.camp div.h { background: none; color: var(--gris-2); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; }
+.pie { color: var(--gris); font-size: 12px; margin: 18px 0 30px; max-width: 900px; }
+.toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--tinta); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 600; transition: transform .25s; z-index: 20; max-width: calc(100% - 32px); }
+.toast.on { transform: translateX(-50%) translateY(0); }
+@media (max-width: 900px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .panel { grid-template-columns: 1fr; }
+  .pasos { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  main { padding: 16px; }
+  .thead { display: none; }
+  .fila { grid-template-columns: 1fr 1fr; }
+  .fila .nom, .fila .sen { grid-column: 1 / -1; }
+  .camp div { grid-template-columns: 1.6fr 1fr 1fr 1fr; font-size: 11.5px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">Qualivo <span>Intelligence</span></div>
+  <div class="miga">· Prospección de inversores</div>
+  <div class="chip-sim">Datos simulados</div>
+</header>
+<main>
+  <div class="cab">
+    <h1>¿A quién deberíais estar hablando esta semana?</h1>
+    <p>Cuentas que encajan con el perfil de vuestros inversores, cada una con la señal que la hace interesante ahora y el siguiente paso. Pinchad en cualquier fila para ver la ficha.</p>
+  </div>
+
+  <section class="kpis" aria-label="Resumen">
+    <div class="kpi"><b id="k-total">0</b><span>cuentas detectadas</span></div>
+    <div class="kpi"><b id="k-alto">0</b><span>encaje alto (80 o más)</span></div>
+    <div class="kpi"><b id="k-senal">0</b><span>con señal en los últimos 30 días</span></div>
+    <div class="kpi"><b id="k-nuevas">0</b><span>no están todavía en vuestro CRM</span></div>
+  </section>
+
+  <div class="panel">
+    <aside class="filtros" aria-label="Filtros">
+      <h3>Perfil</h3><div id="f-seg"></div>
+      <h3>Señal</h3><div id="f-sen"></div>
+      <h3>Estado</h3><div id="f-est"></div>
+    </aside>
+    <section class="tabla" aria-label="Cuentas">
+      <div class="thead"><div>Cuenta</div><div>Perfil</div><div>Señal</div><div>Encaje</div><div>Canal</div><div>Estado</div></div>
+      <div id="filas"></div>
+    </section>
+  </div>
+
+  <section class="embudo" aria-label="Del anuncio a la inversión">
+    <h2>Del anuncio a la inversión, por campaña</h2>
+    <p>Lo que hoy suele cortarse en el formulario: qué campaña de LinkedIn trajo a quien acabó invirtiendo.</p>
+    <div class="pasos">
+      <div class="paso"><b>412</b><span>registros desde LinkedIn</span></div>
+      <div class="paso"><b>131</b><span>contactados en 24 h</span></div>
+      <div class="paso"><b>58</b><span>asisten a un evento del Club</span></div>
+      <div class="paso"><b>21</b><span>reunión con el equipo</span></div>
+      <div class="paso fin"><b>6</b><span>invierten</span></div>
+    </div>
+    <div class="camp">
+      <div class="h"><span>Campaña</span><span>Registros</span><span>Reuniones</span><span>Invierten</span></div>
+      <div><span>Operación a operación · directivos tech</span><span>164</span><span>11</span><span>4</span></div>
+      <div><span>Club · evento de networking</span><span>189</span><span>8</span><span>2</span></div>
+      <div><span>Fondo · inversor profesional</span><span>59</span><span>2</span><span>0</span></div>
+    </div>
+  </section>
+
+  <p class="pie">Demo con datos inventados: ni las cuentas ni las cifras son reales. En una implantación real, las cuentas salen de fuentes públicas (registros mercantiles, prensa económica, cambios de cargo, asistentes a eventos) cruzadas con vuestro CRM y con quién ha interactuado con vuestras campañas. Los mensajes los revisa vuestro equipo antes de salir y respetan las normas de comunicación con inversores.</p>
+</main>
+
+<div class="velo" id="velo"></div>
+<aside class="ficha" id="ficha" aria-live="polite">
+  <button class="cerrar" id="cerrar" aria-label="Cerrar">×</button>
+  <div id="ficha-c"></div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+var CUENTAS = [
+  { n: 'Grupo Ladera Inversiones', d: 'Family office · Madrid', seg: 'Family office', sen: 'Ronda cerrada', sd: 'Coinvirtió en una seed de logística hace 3 semanas', dias: 21, e: 92, canal: 'Introducción', est: 'nuevo',
+    por: ['Ya invierte en fase temprana y busca coinversores', 'Ticket habitual compatible con operación a operación', 'Sin relación previa con vosotros'],
+    quien: 'Director de inversiones', paso: 'Pedir introducción a un socio del Club que coinvirtió con ellos',
+    msg: 'Hola, [nombre]. Vi que habéis entrado en la ronda de [startup]. En Faraday coinvertimos en fase temprana con un grupo de inversores privados y organizamos encuentros pequeños del Club. ¿Te encajaría venir al próximo y conocernos?' },
+  { n: 'Marta R. · ex-CEO de Nórdica Software', d: 'Fundadora con salida · Barcelona', seg: 'Fundador con salida', sen: 'Venta de empresa', sd: 'Vendió su compañía hace 2 meses', dias: 58, e: 88, canal: 'LinkedIn', est: 'nuevo',
+    por: ['Liquidez reciente tras la venta', 'Conoce el ciclo de una startup desde dentro', 'Perfil típico de socio del Club'],
+    quien: 'Ella misma', paso: 'Mensaje personal en LinkedIn con invitación al próximo encuentro',
+    msg: 'Hola, Marta. Enhorabuena por la operación de Nórdica. En el Club de Faraday hay varios fundadores que, tras vender, han empezado a invertir en fase temprana. Si te apetece, te invito al próximo encuentro: es pequeño y sin compromiso.' },
+  { n: 'Javier T. · nuevo CFO en Alcora Energía', d: 'Directivo · Madrid', seg: 'Directivo tech', sen: 'Cambio de cargo', sd: 'Nuevo cargo hace 12 días', dias: 12, e: 74, canal: 'LinkedIn Ads', est: 'nuevo',
+    por: ['Perfil de inversor profesional por patrimonio y experiencia', 'Momento de cambio: suele revisar su cartera', 'Encaje medio: sin historial de inversión en startups'],
+    quien: 'Él mismo', paso: 'Incluirlo en la audiencia de LinkedIn del Club y esperar su registro',
+    msg: '(Sin mensaje directo todavía: entra en la audiencia de la campaña del Club y se le escribe si se registra.)' },
+  { n: 'Red de Business Angels del Norte', d: 'Red de inversores · Bilbao', seg: 'Business angel', sen: 'Evento', sd: 'Organizan un foro de inversión el 12-nov', dias: 6, e: 81, canal: 'Evento', est: 'crm',
+    por: ['Más de 60 inversores activos en una sola relación', 'Comparten operaciones con otras redes', 'Ya está en vuestro CRM desde 2025, sin seguimiento'],
+    quien: 'Coordinadora de la red', paso: 'Proponer coorganizar una sesión del foro con una startup de la cartera',
+    msg: 'Hola, [nombre]. Vimos que preparáis el foro del 12 de noviembre. ¿Os encajaría una sesión con una de las startups de nuestra cartera y la experiencia de coinvertir operación a operación? Lo vemos en 15 minutos cuando os venga bien.' },
+  { n: 'Arrabal Capital Corporativo', d: 'Corporate · Valencia', seg: 'Corporate / CVC', sen: 'Interacción LinkedIn', sd: 'Tres personas comentaron vuestras publicaciones este mes', dias: 9, e: 69, canal: 'LinkedIn', est: 'nuevo',
+    por: ['Está creando un área de innovación abierta', 'Interés demostrado: interacciones repetidas', 'Ciclo de decisión largo'],
+    quien: 'Responsable de innovación', paso: 'Contenido útil primero: invitación al informe anual de la cartera',
+    msg: 'Hola, [nombre]. Gracias por seguir lo que publicamos. Estamos preparando el informe anual de la cartera con lo aprendido en 64 startups; si te interesa, te lo mando cuando salga.' },
+  { n: 'Lucía M. · socia de Bracamonte Abogados', d: 'Profesional liberal · Madrid', seg: 'Directivo tech', sen: 'Interacción LinkedIn', sd: 'Se registró en vuestro webinar y no asistió', dias: 15, e: 77, canal: 'Correo', est: 'crm',
+    por: ['Registro previo: ya levantó la mano', 'Perfil de patrimonio compatible', 'Nadie la contactó tras faltar al webinar'],
+    quien: 'Ella misma', paso: 'Correo con la grabación y una pregunta concreta',
+    msg: 'Hola, Lucía. Te dejo la grabación del webinar por si no pudiste conectarte. Una pregunta: ¿lo que te interesa es invertir operación a operación o entender primero cómo funciona el Club?' },
+  { n: 'Familia Ortúzar · holding patrimonial', d: 'Family office · San Sebastián', seg: 'Family office', sen: 'Venta de empresa', sd: 'Vendieron la empresa familiar en septiembre', dias: 34, e: 90, canal: 'Introducción', est: 'nuevo',
+    por: ['Liquidez reciente y voluntad de diversificar', 'Segunda generación interesada en tecnología', 'Sin relación previa'],
+    quien: 'Responsable del holding', paso: 'Introducción a través de un asesor patrimonial de confianza',
+    msg: '(Primer contacto por introducción: el mensaje lo envía quien os presenta.)' },
+  { n: 'Pablo G. · ex-director de Ventas en Telnova Iberia', d: 'Fundador con salida · Madrid', seg: 'Fundador con salida', sen: 'Ronda cerrada', sd: 'Entró como business angel en dos rondas este año', dias: 40, e: 84, canal: 'LinkedIn', est: 'conv',
+    por: ['Ya invierte como business angel', 'Busca acceso a mejores operaciones', 'Conversación abierta con vuestro equipo'],
+    quien: 'Él mismo', paso: 'Llamada con el equipo de inversión esta semana',
+    msg: '(En conversación: el siguiente paso es la llamada con el equipo.)' },
+  { n: 'Asesoría Patrimonial Duero', d: 'Asesor patrimonial · Valladolid', seg: 'Asesor patrimonial', sen: 'Evento', sd: 'Asistió a South Summit 2026', dias: 120, e: 63, canal: 'Correo', est: 'nuevo',
+    por: ['Puede presentar varios clientes a la vez', 'Interés en capital riesgo para sus carteras', 'Señal antigua: hace 4 meses'],
+    quien: 'Socio director', paso: 'Correo breve con el formato para clientes profesionales',
+    msg: 'Hola, [nombre]. Coincidimos en South Summit. Algunos asesores patrimoniales presentan el capital riesgo a sus clientes profesionales a través de nuestros fondos. ¿Te cuento en 15 minutos cómo lo hacen?' },
+  { n: 'Nerea V. · directora general en Ébano Retail', d: 'Directiva · Bilbao', seg: 'Directivo tech', sen: 'Cambio de cargo', sd: 'Nombrada directora general hace 25 días', dias: 25, e: 71, canal: 'LinkedIn Ads', est: 'nuevo',
+    por: ['Perfil directivo con patrimonio', 'Sector cercano a varias startups de la cartera', 'Sin historial inversor visible'],
+    quien: 'Ella misma', paso: 'Audiencia de la campaña de directivos y seguimiento si se registra',
+    msg: '(Sin mensaje directo: entra en la audiencia de la campaña.)' }
+];
+var filtro = { seg: 'Todos', sen: 'Todas', est: 'Todos' };
+var EST_TXT = { nuevo: 'Nuevo', crm: 'En CRM, sin seguimiento', conv: 'En conversación' };
+function txt(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function contar(campo, valor) { return CUENTAS.filter(function (c) { return c[campo] === valor; }).length; }
+function botones(id, campo, todos, valores, etiquetas) {
+  var el = document.getElementById(id), html = '';
+  [todos].concat(valores).forEach(function (v) {
+    var n = v === todos ? CUENTAS.length : contar(campo, v);
+    html += '<button class="fbtn' + (filtro[campo] === v ? ' on' : '') + '" data-c="' + campo + '" data-v="' + txt(v) + '">' + txt(etiquetas ? (etiquetas[v] || v) : v) + '<em>' + n + '</em></button>';
+  });
+  el.innerHTML = html;
+}
+function unicos(campo) { return CUENTAS.map(function (c) { return c[campo]; }).filter(function (v, i, a) { return a.indexOf(v) === i; }); }
+function pintar() {
+  botones('f-seg', 'seg', 'Todos', unicos('seg'));
+  botones('f-sen', 'sen', 'Todas', unicos('sen'));
+  botones('f-est', 'est', 'Todos', ['nuevo', 'crm', 'conv'], { Todos: 'Todos', nuevo: 'Nuevas', crm: 'En CRM, sin seguimiento', conv: 'En conversación' });
+  var lista = CUENTAS.filter(function (c) {
+    return (filtro.seg === 'Todos' || c.seg === filtro.seg) && (filtro.sen === 'Todas' || c.sen === filtro.sen) && (filtro.est === 'Todos' || c.est === filtro.est);
+  }).sort(function (a, b) { return b.e - a.e; });
+  document.getElementById('filas').innerHTML = lista.length ? lista.map(function (c) {
+    var i = CUENTAS.indexOf(c);
+    return '<button class="fila" data-i="' + i + '">' +
+      '<div class="nom"><b>' + txt(c.n) + '</b><small>' + txt(c.d) + '</small></div>' +
+      '<div><span class="tag">' + txt(c.seg) + '</span></div>' +
+      '<div class="sen">' + txt(c.sen) + '<br><small>' + txt(c.sd) + '</small></div>' +
+      '<div><b>' + c.e + '</b><div class="barra"><i style="width:' + c.e + '%"></i></div></div>' +
+      '<div>' + txt(c.canal) + '</div>' +
+      '<div><span class="est ' + c.est + '">' + EST_TXT[c.est] + '</span></div></button>';
+  }).join('') : '<div class="vacio">Ninguna cuenta con estos filtros.</div>';
+}
+function abrir(i) {
+  var c = CUENTAS[i];
+  document.querySelectorAll('.fila').forEach(function (f) { f.classList.toggle('sel', f.getAttribute('data-i') === String(i)); });
+  document.getElementById('ficha-c').innerHTML =
+    '<h2>' + txt(c.n) + '</h2><p class="sub">' + txt(c.d) + ' · encaje ' + c.e + '/100</p>' +
+    '<div class="bloque"><h3>Por qué ahora</h3><p>' + txt(c.sd) + '</p></div>' +
+    '<div class="bloque"><h3>Por qué encaja</h3><ul>' + c.por.map(function (p) { return '<li>' + txt(p) + '</li>'; }).join('') + '</ul></div>' +
+    '<div class="bloque"><h3>A quién tocar</h3><p>' + txt(c.quien) + ' · canal: ' + txt(c.canal) + '</p></div>' +
+    '<div class="bloque"><h3>Siguiente paso</h3><p>' + txt(c.paso) + '</p></div>' +
+    '<div class="bloque"><h3>Primer mensaje sugerido</h3><div class="msg">' + txt(c.msg) + '</div></div>' +
+    '<div class="acciones"><button class="btn pri" data-t="Se crearía la tarea en vuestro CRM, con la ficha adjunta">Crear tarea en el CRM</button><button class="btn" data-t="Se añadiría a la audiencia de vuestra campaña de LinkedIn">Añadir a audiencia de LinkedIn</button></div>';
+  document.getElementById('ficha').classList.add('abierta');
+  document.getElementById('velo').classList.add('on');
+}
+function cerrar() { document.getElementById('ficha').classList.remove('abierta'); document.getElementById('velo').classList.remove('on'); }
+var tt;
+function toast(t) { var el = document.getElementById('toast'); el.textContent = 'Demo: ' + t + '.'; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { el.classList.remove('on'); }, 2600); }
+document.addEventListener('click', function (e) {
+  var f = e.target.closest('.fbtn'); if (f) { filtro[f.getAttribute('data-c')] = f.getAttribute('data-v'); pintar(); return; }
+  var r = e.target.closest('.fila'); if (r) { abrir(+r.getAttribute('data-i')); return; }
+  var b = e.target.closest('[data-t]'); if (b) { toast(b.getAttribute('data-t')); return; }
+  if (e.target.id === 'cerrar' || e.target.id === 'velo') cerrar();
+});
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+document.getElementById('k-total').textContent = '148';
+document.getElementById('k-alto').textContent = '23';
+document.getElementById('k-senal').textContent = '41';
+document.getElementById('k-nuevas').textContent = '112';
+pintar();
+</script>
+</body>
+</html>
