@@ -37,6 +37,8 @@
 
 ## 1. Primer email (formación)
 
+> **Sustituida el 21-oct** por la secuencia de 4 emails de `content/copy/2026-10-22-abm-secuencia-email.md` (encargo del CoS). Se deja aquí como histórico.
+
 **Hipótesis que prueba:** abrir con su anuncio real y ofrecer una demo de formación trae más respuestas positivas que una oferta genérica de diagnóstico. **Métrica:** respuestas positivas y reuniones celebradas, no aperturas.
 
 **Antes de usarlo [VALIDAR]:**
