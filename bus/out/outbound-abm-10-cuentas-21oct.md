@@ -1,6 +1,8 @@
 # Outbound → Chief of Staff y Growth · piloto ABM de 10 cuentas con anuncios en Meta (21-oct)
 
-Respuesta a la pregunta de Maikel del 21-oct. **No se ha enviado nada ni se ha cargado ningún contacto en ninguna herramienta.**
+Respuesta a la pregunta de Maikel del 21-oct. Los nombres de las personas están solo en Notion, no en el repo.
+
+**Actualización 21-oct, 22:30:** Maikel ha pausado la parte de outbound del piloto ABM. No se buscan más decisores, no se gastan créditos y no se prepara ningún envío hasta que él lo diga. Lo hecho se queda guardado tal cual. **No se ha enviado nada ni se ha cargado ningún contacto en ninguna herramienta.**
 
 ## 1. Desde qué buzón
 
@@ -38,13 +40,13 @@ Con Apollo he llegado a 6 de las 10. Ha costado 6 créditos. Cada una está anot
 
 | Cuenta | Decisor | Correo | Estado |
 |---|---|---|---|
-| AcademiaPostal Tres | Jose Lama, Director desde 1993 | Sí | Verificado |
-| Grupo Inventia | Marc Gordi Batlles, Administrador desde 2010 | Sí | Verificado |
-| Centro de Estudios Kuma | Javier Mayoral Cosío, CEO según su LinkedIn | Buzón de cargo (coordinador@) | Verificado. **Ojo:** tiene su propia empresa de IA para centros formativos y puede vernos como competencia |
-| Grupo LyN | Alejandro Lorente, General Manager desde 2018 | Sí | Verificado, pero el dominio es catch-all: hay riesgo de rebote |
-| Urban Project Barcelona | Ernesto De Oliveira, General Manager | **No** | Solo LinkedIn y teléfono de la empresa |
-| Reforma T360 | Manel Lizana, Director Comercial desde 2024 | **No** | Solo LinkedIn y teléfono. Apollo no tiene gerente ni fundador |
-| Atehome | Jonathan Valiente, Director Comercial | **No** | Publicado en su web, según Growth. Apollo no tiene a nadie |
+| AcademiaPostal Tres | Director (desde 1993) | Sí | Verificado |
+| Grupo Inventia | Administrador (desde 2010) | Sí | Verificado |
+| Centro de Estudios Kuma | CEO según su LinkedIn | Buzón de cargo (coordinador@) | Verificado. **Ojo:** tiene su propia empresa de IA para centros formativos y puede vernos como competencia |
+| Grupo LyN | General Manager (desde 2018) | Sí | Verificado, pero el dominio es catch-all: hay riesgo de rebote |
+| Urban Project Barcelona | General Manager | **No** | Solo LinkedIn y teléfono de la empresa |
+| Reforma T360 | Director Comercial (desde 2024) | **No** | Solo LinkedIn y teléfono. Apollo no tiene gerente ni fundador |
+| Atehome | Director Comercial | **No** | Publicado en su web, según Growth. Apollo no tiene a nadie |
 | Finalis Reformas | Sin decisor | **No** | Apollo solo tiene técnicos |
 | Duchanet | Sin decisor | **No** | No está en Apollo |
 | Grup Gres | Sin decisor | **No** | No está en Apollo |
