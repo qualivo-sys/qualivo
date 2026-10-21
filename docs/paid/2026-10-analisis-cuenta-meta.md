@@ -16,12 +16,12 @@ Autor: agente Paid. Fecha: 21-oct-2026. Encargo de Maikel a través del Chief of
 ## Resumen para Maikel (10 líneas)
 
 1. En 3 meses, Meta ha costado **1.580,75 €** y ha traído **58 leads reales**, a **27,25 € por lead**. [C]
-2. De esos leads salieron 31 reservas, **10 reuniones celebradas**, **8 propuestas**, **1 piloto** y **0 clientes cobrados registrados**. [C]
+2. De esos leads salieron 31 reservas, **10 reuniones celebradas**, **7 propuestas**, **1 piloto** y **0 clientes cobrados registrados**. [C]
 3. **Cada reunión celebrada costó 158 €**, por encima de la referencia de 137 €. [C]
 4. **El anuncio no es el problema principal.** Uno de cada 10 que abren el formulario lo envía, y el 64 % de los leads contesta. [C]
 5. **Se rompe después de la reserva.** El 29 % de las reservas no se presenta, y ninguna propuesta se ha convertido en cliente cobrado. [C]
 6. **Lo que funciona es nombrar el sector:** formación viejo y reformas 3V. Formación viejo hace la reunión a 96 € y reformas a 95 €; reformas trajo el único piloto. [C]
-7. **Las 9 piezas nuevas de octubre gastaron 365 €** y dejaron 4 leads y 1 propuesta. [C]
+7. **Las 9 piezas nuevas de octubre gastaron 365 €** y dejaron 4 leads y ninguna propuesta. CRM v9 se descarta: su único lead era de nivel D. [C]
 8. **En octubre la cuenta se encareció.** El coste por clic pasó de 1,94 € a 3,61 € y los leads semanales bajaron de 20 a 6. Coincidió con trocear la cuenta en hasta 8 conjuntos, tres periodos de gracia y varios reinicios del aprendizaje. [C] dato, [H] causa
 9. **Hay cosas que no se pueden medir:** la landing por el banner de cookies, los cobros, y la mitad de los resultados de reunión porque el CRM no está al día. [C]
 10. **Para noviembre:**
@@ -51,7 +51,7 @@ Autor: agente Paid. Fecha: 21-oct-2026. Encargo de Maikel a través del Chief of
 | Reservan reunión | 31, el 53 % | [C] |
 | No se presentan | 9, el 29 % de las reservas | [C] |
 | Reuniones celebradas registradas | 10, el 17 % de los leads | [C] |
-| Propuestas | 8 | [C] |
+| Propuestas | 7 | [C]. Corregido el 21-oct: el lead de CRM v9 tenía la oportunidad perdida, sin reunión ni propuesta |
 | Pilotos | 1, de reformas | [C]. Sin dato de si está cobrado |
 | Clientes cobrados atribuibles a Meta | 0 registrados | [C] en el CRM |
 
@@ -63,11 +63,11 @@ Autor: agente Paid. Fecha: 21-oct-2026. Encargo de Maikel a través del Chief of
 | Lead A o B | 56,46 € |
 | Reserva | 50,99 € |
 | Reunión celebrada | 158,08 € |
-| Propuesta | 197,59 € |
+| Propuesta | 225,82 € |
 
 **CAC publicitario:** no se puede calcular, porque no hay ningún cobro atribuible. [C]
 
-**Fuera del CRM, declarado por Maikel o por Growth:** reunión y propuesta de 2.000 € de HOCO, y una segunda reunión con CANCOMAR el 10-nov. Si se registran, quedan 11 reuniones a 143,70 € y 9 propuestas. [H] hasta que estén en el CRM
+**Fuera del CRM, declarado por Maikel o por Growth:** reunión y propuesta de 2.000 € de HOCO, y una segunda reunión con CANCOMAR el 10-nov. Si se registran, quedan 11 reuniones a 143,70 € y 8 propuestas. [H] hasta que estén en el CRM
 
 ## 2 · Desglose por sector o ángulo, formato y conjunto
 
@@ -79,7 +79,7 @@ Todos los anuncios del periodo son vídeo, en 4:5 para feed y 9:16 para stories.
 | Clínicas viejo (nombra el sector) | 413,06 € | 38,1 € | 96 | 11 | 8 | 5 | 1 | 3 | 3 | 37,55 € | 137,69 € |
 | Reformas 3V (nombra el sector) | 189,79 € | 24,3 € | 107 | 15 | 5 | 7 | 3 | 2 | 0, más 1 piloto | **12,65 €** | **94,90 €** |
 | 3V2 formación (demo del sistema) | 134,28 € | 43,6 € | 35 | 5 | 3 | 2 | 0 | 0 en el CRM (HOCO, declarado) | 0 en el CRM | 26,86 € | — |
-| Resto: genérico «Ya inviertes», S1, clínicas nuevos, 3V2 clínicas, landing v21, asesorías, HERO, DIAG, CRM vídeo | 365,49 € | 31-60 € | 200 | 4 | 1 | 1 | 0 | 0 | 1 | 91,37 € | — |
+| Resto: genérico «Ya inviertes», S1, clínicas nuevos, 3V2 clínicas, landing v21, asesorías, HERO, DIAG, CRM vídeo | 365,49 € | 31-60 € | 200 | 4 | 1 | 1 | 0 | 0 | 0 | 91,37 € | — |
 
 Lectura [C]:
 - Los tres anuncios que nombran el sector se llevan el 68 % del gasto y traen el 84 % de los leads y todas las reuniones registradas.
@@ -160,7 +160,7 @@ Lectura [C]:
 
 ## 4 · Conclusiones
 
-1. **[C] Meta trae leads y reuniones, pero en 3 meses no ha traído ningún cobro registrado.** 1.580,75 €, 10 reuniones celebradas a 158 € cada una, 8 propuestas y 1 piloto.
+1. **[C] Meta trae leads y reuniones, pero en 3 meses no ha traído ningún cobro registrado.** 1.580,75 €, 10 reuniones celebradas a 158 € cada una, 7 propuestas y 1 piloto.
 2. **[C] Lo que funciona es el anuncio que nombra el sector, con formulario nativo.** Formación viejo hace la reunión a 96 € y reformas 3V a 95 €. Están por debajo de la referencia de 137 €. Las 9 piezas nuevas de octubre gastaron 365 € sin traer ninguna reunión.
 3. **[C] La pérdida está después de la reserva, no en el anuncio.** El 29 % de las reservas no se presentó. Ninguna de las 10 reuniones ha acabado en cobro.
 4. **[C] dato, [H] causa. Octubre se encareció por cómo gestionamos la cuenta.** El coste por clic subió de 1,94 € a 3,61 € en tres semanas. A la vez: hasta 8 conjuntos a 10-20 €/día, tres periodos de gracia y reinicios del aprendizaje casi semanales.
