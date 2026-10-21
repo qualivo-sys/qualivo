@@ -449,3 +449,27 @@ Cinco llamadas, registradas en Notion (📞 Llamadas de Raquel): tres reales y d
   sin haber sacado ningún dolor y colgó.
 - Buzón repetido: probar a acortar el texto o pasar el mensaje como variable para ver si deja de
   duplicarse.
+
+## 21-oct-2026 · Raquel pasa a ser Rodrigo, con el superprompt de Notion
+
+**Por qué.** Máikel cambia la voz a «Rodrigo - Spanish Commercial» (ElevenLabs
+HfvB83WfJmz9muzlBPPN, velocidad 1,1) y aprueba en Notion el «Superprompt de voz para
+leads del diagnóstico», alineado con la propuesta «Ya inviertes en captar clientes».
+
+**Cambios aplicados al asistente (mismo id, ahora `Rodrigo · Landing Diagnóstico`):**
+- Prompt nuevo: `prompt-rodrigo-landing-v1.md`. Se identifica como asistente de IA en el
+  primer mensaje, avisa de la grabación y de que puede pedir no ser llamado, hace tres
+  preguntas opcionales (solicitudes al mes, quién las atiende, dónde llevan el seguimiento),
+  resume solo lo confirmado y agenda. Fuera «lo agentizamos» y el piloto de 30 días; precio
+  «desde setecientos cincuenta euros al mes» solo si lo preguntan.
+- Se conservan las lecciones de esta bitácora: números con letras, «Máikel» con tilde,
+  huecos solo desde la herramienta, correo por dominio, colgar tras la despedida, centralitas.
+- Sin mensaje de buzón (el superprompt pide no dejarlo por defecto).
+- Analista de Vapi: extrae `volumen`, `quien_atiende`, `donde_seguimiento`, `pide_baja` y
+  `pide_persona`, con más resultados posibles.
+- api/vapi-fin.js: las tres respuestas van a la nota del contacto y `pide_baja` pone la
+  etiqueta `act-baja`, que ya respetan todas las cadencias.
+- Las herramientas del superprompt que no existen (elegibilidad, supresión independiente,
+  tareas humanas, reenvío de invitación) no se han simulado: el prompt solo usa
+  `huecos_disponibles`, `agendar_diagnostico` y endCall.
+- Copia previa: scratchpad, `raquel-backup-2026-10-21.json`.
