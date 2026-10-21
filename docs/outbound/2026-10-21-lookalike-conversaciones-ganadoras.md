@@ -75,11 +75,14 @@ Las cinco recibieron la misma familia de copy: la V3 «al grano», con la primer
 | Criterio | Cómo se comprueba | Fuente |
 |---|---|---|
 | Inversión visible: **LinkedIn Ads**, Google Ads o HubSpot | Tecnología en Apollo más sonda de la web con curl | Gratis |
+| **Anuncio activo de captación** (ICP-5 de Growth): un anuncio de Meta o Google que pide datos o una llamada, en una empresa sin ecommerce | Biblioteca de anuncios de Meta y Centro de transparencia de Google. Es la señal más fuerte de la tabla, porque es dinero que se gasta esta semana | Gratis, a mano o con un script |
 | 11 a 200 empleados (hoy cargamos de 1 a 50) | Apollo | Gratis |
 | Fundada hace 5 años o más | Apollo, `founded_year` | Gratis |
 | B2B o B2B2C con equipo que atiende: ventas, cuentas o customer success | Apollo, recuento de personas por departamento | Gratis |
 | Destinatario: CEO, socio o fundador; si no hay correo verificado, Head of Marketing o de ventas | Apollo | 1 crédito por persona |
 | Fuera: competidores directos (agencias de performance y consultoras de CRM), autónomos, ticket bajo | Lista de exclusión y lectura de la web | Gratis |
+
+**Una sola lista con ICP-5 (aviso del CoS, 21-oct).** El anuncio activo de captación es una señal más dentro de estos criterios. Las 10 empresas de reformas y formación que pase Growth entran en esta misma lista, con una marca de origen («ICP-5»). Si alguna ya estaba en la de lookalike, se marca y no se duplica. Ninguna se contacta hasta que lo apruebe Maikel. En ellas, el email solo se usa donde la asesoría confirme que la LSSI lo permite.
 
 **Lo que cambia respecto a la carga de hoy:** el tope de tamaño (de 50 a 200), la prioridad de la puerta LinkedIn Ads y la entrada de agencias que no compiten con nosotros, como branding, publicidad exterior o comunicación.
 
