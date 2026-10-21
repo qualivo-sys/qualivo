@@ -77,7 +77,64 @@ Sin añadir huecos: cada uno se coloca en el plan del Daily (máximo dos activos
 
 ---
 
-## 6. Qué decidir mañana (10 minutos)
+## 6. Clientes reales frente a prospectos · tabla v0 (ICP-0 arrancado)
+
+Hecha con datos ya verificados: Quipu vía CFO, CRM vía Growth, Tactiq y repo. **Lo que pone «sin dato» lo completan Growth, el CFO o Maikel.** La edad no consta en ninguna fuente.
+
+### 6.1 Clientes que han pagado en 2026
+
+| Cliente | Sector | Facturado en 2026 | ¿Sigue? | Equipo que atiende | CRM | Origen | Resultado entregado |
+|---|---|---|---|---|---|---|---|
+| **Adigital** | Servicios B2B (Google Ads) | 10.000 € en el 1.er semestre; 850 € en el 2.º [C] | Casi no | sin dato | sin dato | sin dato | sin dato |
+| **FEMXA** (dos sociedades) | Formación | 8.500 €; última factura 8-may [C] | No | sin dato | sin dato | sin dato | sin dato |
+| **Bellovinilo** | Reformas, B2B | 3.400 €; última 29-may [C] | No | sin dato | sin dato | sin dato | 8,3× · de 3.600 a 30.000 [C, caso] |
+| **EAC** | Formación (aeronáutica) | 447 €/mes [C] | **Sí** | Gerencia + admisiones + Calligence | GHL | sin dato | 10,2× del anuncio a la matrícula [C, caso] |
+| **Eleva Academy** | Formación (uñas) | 500 €/mes [C] | **Sí** | 3 comerciales + Calligence | GHL | sin dato | CPL −61 %, entrevistas +102 % [C, caso] |
+| **Focus Practical** | Formación | 1.000 €; última 22-jul [C] | No | sin dato | sin dato | sin dato | −53 % coste por contacto [C, caso] |
+| **Nuria Roure** | Salud / infoproducto | 600 € puntual en agosto; 500 € en noviembre [C] | Por proyecto | Closers | GHL | Excliente | 6,45× cualificando la base [C, caso] |
+| **Alpha Media Group** | Publicidad exterior | Cerrado el 2-oct, **sin facturar** [C] | Sí | 15 comerciales, 40 empleados [C] | Zoho, usado a medias [C] | Correo frío [C] | En construcción |
+| Greencar, Fruites Calanda, Gambooza, SalesPro, Belfort Activa, EIF Interiorismo, Global Cozmeti, Playfilm, Sollworld | Varios, por confirmar | 669-2.500 € cada uno; ninguno factura desde julio [C] | No | sin dato | sin dato | sin dato | sin dato |
+
+**Lectura [E]:** los **dos únicos clientes que siguen pagando**, EAC y Eleva, son formación con equipo de admisión o comerciales, CRM y volumen de solicitudes. Encaja con H-ICP. Los 14 que se fueron no tienen motivo registrado: es el hueco más importante para validarla.
+
+### 6.2 Prospectos recientes, que no son clientes
+
+| Prospecto | Sector | Tamaño y equipo | CRM | Problema, en sus palabras | Objeción | Ticket hablado | Encaje |
+|---|---|---|---|---|---|---|---|
+| **HOCO** | Reformas o cocinas, 4 tiendas | Equipo de tienda; agencia propia de campañas | Microsoft, recién personalizado | Captación por zonas; «estoy obsesionado con aumentar la captación» | No cambiar el CRM ni la agencia | Piloto de 2.000 € | Alto. Sabe medir |
+| **Natural Fit** | Cirugía estética | Equipo de captación | HubSpot + Zapier + agente de llamadas | «Meta es tirar la pasta… el paciente no tiene para pagar» | Calidad de Meta frente a Google | — | Perdido contra un competidor |
+| **Hunty** | Excliente; venta por web | Equipo técnico que ya construye agentes | Activo (ActiveCampaign o similar) | Conversión de la web a ventas | Quieren centralizarlo en sistemas propios | 900 €/mes × 3 | Medio-alto; decide el 23-oct |
+| **Andrea Acha** | Infoproducto, lanzamientos | Lo hace ella con closers | — | Optimizar el registro del lanzamiento | «Me da miedo delegar porque me funciona» | 1.200 €/mes × 3 | Medio. No es el perfil «no entiende» |
+| **CANCOMAR** | Formación náutica | Equipo administrativo saturado | Ágora (lo están valorando) | «El teléfono nos tiene enganchadas» | Que lo abarque todo, también la matrícula | — | Alto |
+| **Clínica Ana Claros** | Clínica dental | 1 persona en atención; lista de espera | Integración con su software | «No recaptamos al paciente que ya se valoró» | — | 1.500 € + IVA | Alto |
+| **Vicente** | Cursos de 160 € | Dueño solo | — | «Busco un sistema que me ayude a vender» | Precio total | 1.200 € + 800 €/mes | **Anti-ICP** |
+
+**Dos hallazgos que cambian mensajes [C]:**
+1. **Los que mejor encajan ya tienen agencia o CRM y no quieren cambiarlos** (HOCO, Hunty). La oferta tiene que sumarse a lo que ya tienen, no sustituirlo. Coincide con la frase validada de septiembre: «No sustituimos tu sistema comercial».
+2. **Hay un perfil sofisticado que no encaja con «no entiende»** (Natural Fit, Hunty, Andrea). Ese perfil compra optimización medible, no educación.
+
+---
+
+## 7. Propuesta de valor y mensajes · borradores para probar, no para publicar
+
+**Posicionamiento que propone Maikel:** «Ya inviertes en captar clientes. Te ayudamos a descubrir dónde se pierden las oportunidades y a convertir más en ventas.» La IA, los agentes, las landings y el CRM son medios, no el argumento.
+
+**Encaja con lo ya decidido:** el Maestro 1.1 dice que «seguimiento e IA son medios dentro del sistema», y la propuesta V2 de septiembre prohíbe usar «IA» como argumento en frío [C]. Lo que falta es aplicarlo en anuncios, demos y landing.
+
+**Aviso honesto:** un anuncio con ese mismo ángulo, «Ya inviertes», se probó en octubre (HZ): 49 €, 16 aperturas del formulario y ningún envío [C, Paid]. **No refuta el mensaje**, porque cambió tres cosas a la vez: creatividad sin sector, formulario de 5 preguntas y conjunto nuevo [C, Creative]. Hay que probarlo bien, en ICP-1, cambiando una sola cosa.
+
+| Canal | Mensaje propuesto [P] | Apoyo en datos |
+|---|---|---|
+| **Anuncio** | «Tu equipo atiende muchas solicitudes. ¿Sabes cuántas se quedan sin seguimiento?» con el sector nombrado | El formato con el sector nombrado es el único que trae reuniones [C, Creative] |
+| **Landing** | Titular: «Ya inviertes en captar. Te enseñamos dónde se pierden las ventas, con tus datos.» Arriba: 3 preguntas de encaje (solicitudes al mes, quién las atiende, qué CRM). Debajo: un caso con cifra | Casos EAC y Eleva [C] |
+| **WhatsApp** (primer toque) | «Hola X, soy Maikel. Antes de vernos, ¿cuántas solicitudes os entran al mes y quién las atiende? Así llevo vuestros números a la llamada.» | Cualificar antes de agendar reduce plantones [H, E-02] |
+| **Email frío** | «No vengo a cambiaros el CRM ni la agencia. Miro qué pasa con cada oportunidad después de que entra.» | Objeción de HOCO y Hunty [C] |
+| **Contenido** (LinkedIn de Maikel) | «Por qué tu equipo no usa el CRM» · «El presupuesto que nadie volvió a llamar» · «Estancados dos años en Google Ads» | Frases literales de Alpha y Ana Claros [C] |
+| **Objeción principal** | «Ya me vendieron una implantación que no se usó» → piloto de 3 meses con hito de uso medido: si el equipo no lo usa, no se sigue | Alpha: «es la tercera vez» [C] |
+
+---
+
+## 8. Qué decidir mañana (10 minutos)
 
 1. **¿Aceptas H-ICP con los dos ajustes?** Es decir, el dolor es el proceso después del lead y la edad queda pendiente de validar.
 2. **¿Lanzamos ICP-0 esta semana?** Encargo a Growth y al CFO, y 15 minutos tuyos el viernes.
