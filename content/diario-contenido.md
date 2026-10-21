@@ -1544,3 +1544,35 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - el 290,90 € frente a 291,90 €.
 
 **Hipótesis para mañana:** el artículo de conversiones offline traerá menos visitas que lead scoring, pero más diagnósticos de empresas que ya invierten, porque solo lo busca quien ya tiene campañas. Se compara por `utm_content` en dos semanas.
+
+### Miércoles 21-oct · trabajo del día
+
+**Publicado:**
+- **Re-apunte de [/blog/agencia-meta-ads/](https://qualivo.io/blog/agencia-meta-ads/):**
+  - «Las preguntas antes de firmar» pasa de cinco a seis. La sexta: «¿Qué le devolvéis a Meta de mis contactos, y qué cuenta como cualificado?». Lleva el dato del 19-oct y enlaza a `/blog/conversiones-offline-meta/`.
+  - La caja final va sin «coste real por cliente de cada canal», una promesa sin comprobar, y con un solo botón al diagnóstico.
+  - Meta description, entradilla, llms.txt, sitemap y registro de keywords al día.
+  - **Por qué este:** habla a quien ya paga una agencia, el ICP del mes.
+
+**Borradores:**
+- **Bandera roja:** `content/borradores/2026-10-21-bandera-roja-trato-sin-importe.md`, «Un trato en negociación sin importe».
+  - **Dato:** el cierre de Growth del 20-oct (un trato pasa a Negociación sin importe) y los dos tratos de 0 € del 1-oct, ya publicados.
+  - **Corregido antes de guardarlo:** había escrito que el trato tenía tareas a los 2, 5 y 10 días. En `api/seguimientos.js` esas tareas son solo para propuestas enviadas; Negociación tiene una a los 30 días. Sale del texto.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya lleva dos piezas fuertes (lead scoring y conversiones offline), y mi recomendación es dos por semana hasta que Maikel decida.
+- **Newsletter (D).** Sigue en la semana 44 o 45, pendiente del ok de Maikel, y sin envío masivo sin su autorización (R17).
+- **Pieza sobre los dos plantones de Meta de esta semana** (cierre del 20-oct). Rozaría la tasa de plantones (R7).
+
+**Decisiones para Maikel:**
+1. **La bandera roja.** Recomendación: sí, después de poner un rango de importe al trato del 20-oct.
+2. **Twilio.** Growth ha encontrado que el trunk de Qualivo da 404 desde el 15-oct y que el de Equipzilla sí conecta. Falta que revises la consola. Recomendación: hoy; sin eso no vuelve la voz.
+3. **Siguen pendientes:**
+   - la cadencia de dos piezas por semana;
+   - el Sin humo «28 cualificados»;
+   - el Agentizando de la línea;
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis, el carrusel y el vídeo 5;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** la pregunta nueva de agencia-meta-ads hará que ese artículo mande visitas a conversiones-offline-meta. Si en dos semanas el enlace no tiene clics, la pregunta va más arriba en el artículo.
