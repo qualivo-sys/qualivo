@@ -148,3 +148,56 @@
    - **Quién:** el responsable técnico o Growth. Yo no toco la demo.
 2. **Canal y pie legal del email** (Growth y la asesoría).
 3. **Destino comprobado de cada anuncio** (Outbound), para la variable de la apertura.
+
+---
+
+## 5. Actualización del 21-oct con el brief de Growth
+
+Se aplica la base de mensajes de Qualivo (Notion, bajo el piloto ABM). Los ejemplos con nombre de cuenta (Cuentas A y B) están en Notion, no aquí.
+
+### 5.1 Primer email de formación, plantilla de unas 100 palabras
+
+> **Asunto:** Vuestro anuncio de «[anuncio]»
+>
+> Hola, [nombre]:
+>
+> He visto que [academia] tiene activo en Meta «[anuncio]» desde [desde], y que lleva a [destino]. [Dato de consolidación]: enhorabuena por sostenerlo.
+>
+> Trabajamos con academias en todo el recorrido: qué solicitud de información merece una llamada, qué anuncios y formularios atraen a ese alumno, quién responde y cuándo, y de qué anuncio sale cada matrícula. Lo que se aprende al final decide qué anuncio sigue.
+>
+> Una pregunta fácil: cuando entra una solicitud de ese anuncio, ¿la atiende alguien en concreto o se reparte en admisiones?
+>
+> Maikel Echevarría · Qualivo · [VALIDAR: teléfono, web e identidad legal]
+> Si no te interesa, contéstame «no» y no te escribo más.
+
+**CTA:** una sola pregunta, porque la base fija un CTA por mensaje.
+- **Los 30 minutos** van en la respuesta a «cuéntame más» y en el toque del día 7.
+- **El alumno de prueba**, con permiso, va en el toque del día 3.
+
+**Pendiente con Growth:** la redacción de «con tus datos… y te llevas un plan por escrito». No tenemos sus datos antes de la reunión, y el plan por escrito no está confirmado.
+
+### 5.2 Cabecera de landing, con las tres viñetas que pide el brief
+
+Base: `/diagnostico/v2/` (borrador sin indexar).
+
+> **Antetítulo:** Para academias que ya captan alumnos con anuncios
+>
+> **Titular:** Ya inviertes en captar alumnos. Te ayudamos a atraer a los que se matriculan y a no perder a los que ya te piden información.
+>
+> **Subtítulo:** Del anuncio a la matrícula, con lo que ya tienes: tu equipo de admisiones, tu CRM y tus campañas.
+>
+> - **Qué solicitud encaja.** La definimos con admisiones y probamos anuncios y formularios para atraer a ese alumno.
+> - **Cada solicitud, con respuesta y siguiente paso.** Se puntúa con lo que dice y con lo que hace, y admisiones llama primero a quien está listo.
+> - **De qué anuncio sale cada matrícula.** Lo ves en un panel, y lo que se aprende decide qué anuncio sigue. [VALIDAR: según los datos y las integraciones de cada academia]
+>
+> **Botón:** Ver qué pasa con mis solicitudes
+> **Bajo el botón:** 30 minutos. Miramos juntos cómo trabajáis, del anuncio a la matrícula.
+
+**Del borrador de `/diagnostico/v2/` no puede ir a producción:**
+- **«Con tus datos»:** no los tenemos antes de la reunión.
+- **«Te mandamos el plan por escrito en 24 horas»:** no está confirmado.
+- **Los resultados de clientes (6,45×, 10,2×, «de 83 a 168»…):** `content/casos-permisos.md` no tiene ningún permiso por escrito, y la regla R6 lo impide.
+
+### 5.3 Apertura de la demo
+
+Sigue la de la sección 3, sin cambios. **Corrección al brief:** sí existe una versión de formación del kit, `qualivo.io/propuestas/kit-demo/?sector=formacion`, que abre, con datos ficticios. Pero su titular presenta Qualivo como lo que pasa después del formulario, y no tiene pantallas de anuncio ni de formulario (sección 0).
