@@ -41,3 +41,32 @@ El motor V3, Zoho y Pipedrive estaban en estado COMPLETED. Se arrancaron despué
 | Empresa ya contactada | 11 |
 
 **La base española de Apollo para este perfil está muy trabajada.** Para sostener 100 leads nuevos al día hacen falta unos 300 créditos diarios, o bien abrir nuevas fuentes (Maps → dominio → Apollo) y nuevos sectores.
+
+## 21-oct · segunda carga: 160 leads nuevos
+
+Mismo filtro y mismo copy por lead. Tres agentes revelaron 120 personas cada uno en Apollo (360 créditos).
+
+| Puerta | Campaña | Leads nuevos |
+|---|---|---:|
+| Google Ads | 3963336 | 67 |
+| Meta | 3964316 | 53 |
+| HubSpot | 3940264 (motor V3) | 18 |
+| Odoo | 3963237 | 8 |
+| Salesforce | 3963217 | 6 |
+| Pipedrive | 3964076 | 5 |
+| Zoho | 3964313 | 3 |
+
+De 314 revelados con correo, se quedaron fuera:
+
+| Motivo | Personas |
+|---|---:|
+| Catch-all | 77 |
+| Empresa ya contactada (detectada después de pagar el crédito) | 62 |
+| Dominio cruzado | 36 |
+| Sector fuera | 16 |
+| Duplicado entre puertas | 6 |
+| Buzón de rol | 3 |
+
+Unos 2,2 créditos por lead cargado. La pérdida de 62 créditos en empresas ya contactadas se evita filtrando por dominio antes de revelar (H-10 en `docs/outbound/2026-10-21-hipotesis-outbound-noviembre.md`).
+
+El script acepta ahora los ficheros como argumentos: `python3 captacion/scripts/carga_senal.py <clave> <fichero.json>... [--dry]`.

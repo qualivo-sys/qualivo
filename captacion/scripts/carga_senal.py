@@ -4,7 +4,7 @@
 # Filtro minimo que se mantiene (entregabilidad y RGPD): verificado, no catch-all,
 # mismo dominio, no buzon de rol, no contactado antes, no bloqueado, Espana.
 # El copy va por lead con carga_v3.construir(); la secuencia de la campana no se toca.
-# Uso: python3 carga_senal_20oct.py <clave> [--dry]
+# Uso: python3 carga_senal.py <clave> <fichero.json> [<fichero.json> ...] [--dry]
 import json, re, sys, time, urllib.request, urllib.error, os
 sys.path.insert(0, "/home/user/qualivo/captacion/scripts")
 import carga_v3
@@ -35,7 +35,7 @@ env = json.load(open(f"{S}/enviados_reales.json"))
 env = set(e.lower() for e in (env["correos"] if isinstance(env, dict) else env))
 envd = {e.split("@")[-1] for e in env}
 ya = set(); por = {}; fuera = {}
-for f in ("apollo_google_ads_20oct.json", "apollo_meta_ads_20oct.json", "apollo_crm_20oct.json"):
+for f in [a for a in sys.argv[2:] if a.endswith(".json")]:
     p = f"{S}/{f}"
     if not os.path.exists(p): print("falta", f); continue
     for l in json.load(open(p)):
@@ -62,7 +62,7 @@ for clave, ls in por.items():
         filas.append({"email": l["email"], "first_name": l.get("first_name") or "", "last_name": l.get("last_name") or "",
                       "company_name": carga_v3.limpia_empresa(l.get("company_name") or ""), "website": l["dom"],
                       "custom_fields": {"subject1": s, "body1": b1, "body2": b2, "body3": b3,
-                                        "puerta": l["puerta"], "origen": "senal-20oct"}})
+                                        "puerta": l["puerta"], "origen": "senal-" + time.strftime("%d%b").lower()}})
     cid = CAMP[clave]; total += len(filas)
     if dry: print(clave, cid, len(filas)); continue
     st, b = pide("POST", f"/campaigns/{cid}/leads", {"lead_list": filas, "settings": {
