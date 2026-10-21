@@ -157,3 +157,40 @@ Sin aceptación explícita no se programa ningún seguimiento.
 >
 > Maikel Echevarría · Qualivo
 > Si no te interesa, contéstame «no» y no te escribo más.
+
+## 8. Ampliación del 22-oct: agente de voz y panel navegable (petición de Maikel)
+
+**La demo pasa a siete etapas.** Entra «3 · Agente de voz», entre WhatsApp y admisiones.
+
+**Agente de voz**
+
+- **El caso:** otra situación del mismo ejemplo. Laura no ha contestado al WhatsApp, y como marcó en el formulario la casilla aparte «Acepto que un asistente de voz automatizado me llame sobre esta solicitud», la llama a media tarde.
+- **La llamada es interactiva:**
+  - **«Sí, dime»:** confirma el horario, recoge la duda (metodología y precio) y ofrece la llamada con admisiones, por teléfono o por WhatsApp.
+  - **«Ahora no puedo»:** puede pasarse a WhatsApp o retirar el permiso de llamada.
+- **«Por detrás»:** permiso de llamada, resultado, horario, duda y próximo paso.
+- **Las reglas que se ven en la página:**
+  - solo llama con permiso;
+  - se presenta como IA;
+  - hace una sola llamada y, si no contesta, manda un WhatsApp;
+  - no da precios, no confirma requisitos ni titulación y no matricula.
+- **Etiquetas:** «Simulación» y **«En pausa hoy»**. La voz de Qualivo está pausada desde el 19-oct (`VOZ_PAUSADA`), y la llamada automatizada comercial necesita un consentimiento previo específico (AEPD).
+- **Antes de activarla en una academia:** reparar la línea, probar la voz y que la asesoría valide el texto de la casilla.
+- **Sin audio:** a diferencia de Hunty, no hay grabación. Si se quiere, se genera con la voz aprobada.
+
+**Panel Intelligence navegable**
+
+- **Tres vistas:**
+  - **Hoy:** a quién atender, con su motivo y su responsable.
+  - **Por anuncio:** barras de la solicitud a la matrícula por anuncio, más la tabla.
+  - **Ficha de Laura:** su línea de tiempo según el camino elegido.
+- **Indicadores de 30 días que cuadran con la tabla:**
+
+  | Solicitudes | Conversaciones con encaje | Citas celebradas | Matrículas registradas | Citas sin resultado registrado |
+  |---|---|---|---|---|
+  | 135 | 37 | 17 | 6 | 3 |
+
+- **Enlace** a la demo completa de Intelligence (`qualivo.io/intelligence/?sector=formacion&objetivo=conversion`). Lleva una nota: usa otra escuela de ejemplo, también con datos ficticios.
+- **Qué existe hoy:**
+  - **en la demo de Intelligence:** la lista de prioridades, la pantalla de anuncios y la línea de tiempo por contacto;
+  - **propuesta:** la vista de barras por anuncio con estos cinco indicadores.
