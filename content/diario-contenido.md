@@ -1582,3 +1582,11 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 - **Cinco hipótesis nuevas**, de C-1 a C-5. La de mayor ICE es C-2, la página para reenviar al que decide, con 7,0.
 - **Dato nuevo, de una lectura de solo lectura del CRM:** ninguno de los 1.159 contactos lleva la etiqueta de un artículo del blog, aunque los botones llevan `utm_content` al menos desde el 6-oct.
 - **Aviso:** el documento del ICP del CoS está en una rama del repositorio público, con nombres de prospectos e importes.
+
+**Copy y Conversión (21-oct, mensaje del CoS): primer encargo entregado antes de plazo.**
+- **Entrega para Growth:** `content/copy/2026-10-22-abm-formacion.md`.
+  - **Qué lleva:** el primer email ABM, la cabecera de landing y la apertura de la demo, todo para formación.
+  - **Estado:** borrador. No se envía ni se activa nada.
+- **Referencia de marca:** `content/copy/referencia-marca.md`.
+- **Bloqueo:** el kit de demo de formación no tiene pantallas de anuncio ni de formulario, y su titular («Del primer mensaje al cliente») reduce Qualivo a lo que pasa después del formulario. El email lleva dos versiones de la línea de la demo según si se arregla.
+- **Pendiente de Maikel:** confirmar que asumo la función. El mensaje del CoS lo da por decidido, pero en este chat aún no lo ha dicho él.
