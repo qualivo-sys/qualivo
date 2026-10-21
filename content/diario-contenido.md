@@ -1576,3 +1576,9 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - el 290,90 € frente a 291,90 €.
 
 **Hipótesis para mañana:** la pregunta nueva de agencia-meta-ads hará que ese artículo mande visitas a conversiones-offline-meta. Si en dos semanas el enlace no tiene clics, la pregunta va más arriba en el artículo.
+
+**Entrega a Growth (21-oct, encargo «hipótesis para noviembre»):** `content/estrategia/2026-10-21-hipotesis-contenido-noviembre.md`.
+- **H-12** se descarta tal como estaba.
+- **Cinco hipótesis nuevas**, de C-1 a C-5. La de mayor ICE es C-2, la página para reenviar al que decide, con 7,0.
+- **Dato nuevo, de una lectura de solo lectura del CRM:** ninguno de los 1.159 contactos lleva la etiqueta de un artículo del blog, aunque los botones llevan `utm_content` al menos desde el 6-oct.
+- **Aviso:** el documento del ICP del CoS está en una rama del repositorio público, con nombres de prospectos e importes.
