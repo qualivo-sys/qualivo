@@ -56,7 +56,7 @@ Mismo filtro y mismo copy por lead. Tres agentes revelaron 120 personas cada uno
 | Pipedrive | 3964076 | 5 |
 | Zoho | 3964313 | 3 |
 
-De 314 revelados con correo, se quedaron fuera:
+De 360 revelados, se quedaron fuera 200:
 
 | Motivo | Personas |
 |---|---:|
