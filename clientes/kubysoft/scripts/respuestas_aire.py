@@ -23,7 +23,7 @@
 #
 # Uso: python3 respuestas_aire.py [--ejecutar-bajas]
 #      Sin el flag no bloquea nada, solo dice que bloquearia.
-import csv, json, os, sys, time, urllib.error, urllib.request
+import csv, json, os, re, sys, time, urllib.error, urllib.request
 
 S = os.path.dirname(os.path.abspath(__file__))
 KUBY = os.path.dirname(S)
@@ -103,6 +103,43 @@ def leads(k, cid):
         off += 100
 
 
+def rebotados(k, cid):
+    """Correos que rebotaron, segun /statistics.
+
+    AQUI ESTABA EL FALLO, y lo escribo entero porque casi le mete basura al CRM
+    de Marc: antes esto se sacaba del campo `status` de /leads, creyendo que
+    valdria BOUNCED. No vale nunca. Ese campo lleva el progreso de la secuencia
+    (NOTSTARTED, INPROGRESS, COMPLETED), asi que la comprobacion no se cumplia
+    jamas y los tres avisos de "Your email could not be delivered" entraban por
+    message-history como REPLY, se clasificaban con 60 y salian en el CSV que va
+    a Marc. El 21-oct los tres unicos "respuestas" del piloto eran los tres
+    rebotes.
+    """
+    fuera, off = set(), 0
+    while True:
+        d = get(f"{B}/campaigns/{cid}/statistics?api_key={k}&offset={off}&limit=100")
+        lote = (d or {}).get("data") or []
+        for r in lote:
+            if r.get("is_bounced"):
+                e = (r.get("lead_email") or "").lower()
+                if e:
+                    fuera.add(e)
+        if len(lote) < 100:
+            return fuera
+        off += 100
+
+
+# Segunda capa, por si /statistics tarda en marcar un rebote recien llegado: el
+# propio aviso se delata en el texto. Es red de seguridad, no el criterio
+# principal, porque un prospecto podria citar estas palabras en una respuesta
+# de verdad.
+ES_REBOTE = re.compile(
+    r"could not be delivered|could not be reached|mail delivery (failed|subsystem)"
+    r"|delivery status notification|undelivered mail|returned to sender"
+    r"|no se pudo entregar|no ha podido ser entregado|mailer-daemon"
+    r"|recipient address rejected|user unknown|does not exist", re.I)
+
+
 def respuestas(k, cid, lead_id):
     """Los mensajes de un hilo. Devuelve solo lo que escribio la persona."""
     d = get(f"{B}/campaigns/{cid}/leads/{lead_id}/message-history?api_key={k}")
@@ -127,17 +164,20 @@ if __name__ == "__main__":
     for c in camp:
         cid = c["id"]
         idx = leads(k, cid)
-        print(f"  {c.get('name')}: {len(idx)} leads")
+        reb = rebotados(k, cid)
+        print(f"  {c.get('name')}: {len(idx)} leads, {len(reb)} rebotados")
         for email, l in idx.items():
-            # Los rebotes no son respuestas: los marca Smartlead y no llevan
-            # texto que clasificar. Se apartan por bandera, no por regex.
-            if (l.get("estado") or "").upper() in ("BOUNCED", "BLOCKED"):
+            # Los rebotes no son respuestas y no llevan texto que clasificar.
+            if email in reb or (l.get("estado") or "").upper() in ("BOUNCED", "BLOCKED"):
                 rebotes.append({**l, "campana": c.get("name")})
                 continue
             if not l.get("id"):
                 continue
             for m in respuestas(k, cid, l["id"]):
                 t = texto(m)
+                if ES_REBOTE.search(t):
+                    rebotes.append({**l, "campana": c.get("name")})
+                    continue
                 score, accion = puntuar(t, "")
                 fila = {**l, "campana": c.get("name"), "score": score,
                         "accion": accion, "texto": t.replace("\n", " ")[:300]}
