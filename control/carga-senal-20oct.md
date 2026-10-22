@@ -70,3 +70,17 @@ De 360 revelados, se quedaron fuera 200:
 Unos 2,2 créditos por lead cargado. La pérdida de 62 créditos en empresas ya contactadas se evita filtrando por dominio antes de revelar (H-10 en `docs/outbound/2026-10-21-hipotesis-outbound-noviembre.md`).
 
 El script acepta ahora los ficheros como argumentos: `python3 captacion/scripts/carga_senal.py <clave> <fichero.json>... [--dry]`.
+
+## 22-oct · tercera carga: 172 leads nuevos
+
+| Puerta | Campaña | Leads nuevos |
+|---|---|---:|
+| LinkedIn Ads | 3964077 | 64 |
+| Google Ads | 3963336 | 54 |
+| Salesforce | 3963217 | 14 |
+| Odoo | 3963237 | 14 |
+| Zoho | 3964313 | 12 |
+| Pipedrive | 3964076 | 10 |
+| HubSpot | 3940264 (motor V3) | 4 |
+
+De los 298 revelados con correo se quedaron fuera, sobre todo, 166 catch-all (contando los del 21-oct que se volvieron a pasar por el filtro) y 69 correos de otro dominio. LinkedIn Ads vuelve a tener leads: es la puerta con más respuestas (7 de 109 leads).
