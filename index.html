@@ -329,6 +329,21 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .cita{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px 14px;font-size:14px}
 .cita time{font-weight:800;font-variant-numeric:tabular-nums}
 .cita small{display:block;color:#8A8F97;font-size:12.5px;font-weight:600}
+.ficha-h{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start;background:#fff;border-radius:14px 14px 0 0;padding:16px 18px;border-bottom:1px solid rgba(16,19,25,.08)}
+.ficha-h b{font-size:18px;font-weight:900;letter-spacing:-.01em}
+.ficha-h small{display:block;color:#8A8F97;font-size:13px;font-weight:600;margin-top:3px}
+.notas{display:flex;gap:8px;align-items:stretch}
+.nota{background:#FAF8F3;border:1px solid rgba(16,19,25,.08);border-radius:12px;padding:8px 12px;text-align:center;min-width:86px}
+.nota small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800}
+.nota b{font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}
+.nota.letra{background:#0E7C74;border-color:#0E7C74;color:#fff}.nota.letra small{color:rgba(255,255,255,.8)}
+.ficha-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#fff}
+.ficha-g div{padding:12px 18px;border-bottom:1px solid rgba(16,19,25,.06);font-size:14px}
+.ficha-g div:nth-child(odd){border-right:1px solid rgba(16,19,25,.06)}
+.ficha-g span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800;margin-bottom:3px}
+.ficha-res{background:#fff;padding:14px 18px;font-size:14px;line-height:1.55;border-bottom:1px solid rgba(16,19,25,.06)}
+.ficha-sig{background:#E3F2EF;padding:14px 18px;font-size:14px;font-weight:700;border-left:4px solid #0E7C74;border-radius:0 0 14px 0}
+@media(max-width:760px){.ficha-g{grid-template-columns:1fr}.ficha-g div:nth-child(odd){border-right:0}}
 .vnota{margin-top:12px;font-size:13.5px;color:#5A5E66;line-height:1.5}
 .vista .nota-img{margin-top:12px}
 @media(max-width:760px){.wa-esc{grid-template-columns:1fr}.cita{grid-template-columns:1fr}.detras div{grid-template-columns:1fr;gap:2px}}
@@ -730,9 +745,10 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     <div class="vistas" role="tablist" aria-label="Partes del recorrido">
       <button type="button" role="tab" id="v-anuncios" aria-controls="vp-anuncios" aria-selected="true"><span>1</span>Anuncios</button>
       <button type="button" role="tab" id="v-whatsapp" aria-controls="vp-whatsapp" aria-selected="false" tabindex="-1"><span>2</span>Asistente de WhatsApp</button>
-      <button type="button" role="tab" id="v-citas" aria-controls="vp-citas" aria-selected="false" tabindex="-1"><span>3</span>Citas</button>
-      <button type="button" role="tab" id="v-recorrido" aria-controls="vp-recorrido" aria-selected="false" tabindex="-1"><span>4</span>Dónde se pierden</button>
-      <button type="button" role="tab" id="v-hoy" aria-controls="vp-hoy" aria-selected="false" tabindex="-1"><span>5</span>Qué hacer hoy</button>
+      <button type="button" role="tab" id="v-ficha" aria-controls="vp-ficha" aria-selected="false" tabindex="-1"><span>3</span>Ficha del cliente</button>
+      <button type="button" role="tab" id="v-citas" aria-controls="vp-citas" aria-selected="false" tabindex="-1"><span>4</span>Citas</button>
+      <button type="button" role="tab" id="v-recorrido" aria-controls="vp-recorrido" aria-selected="false" tabindex="-1"><span>5</span>Dónde se pierden</button>
+      <button type="button" role="tab" id="v-hoy" aria-controls="vp-hoy" aria-selected="false" tabindex="-1"><span>6</span>Qué hacer hoy</button>
     </div>
 
     <div class="vista" role="tabpanel" id="vp-anuncios" aria-labelledby="v-anuncios">
@@ -776,6 +792,33 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <p class="nota-img"><span class="n">2</span><span><b>Responde en minutos y prepara la llamada.</b> Se presenta como IA, pregunta solo lo que falta y pasa a una persona lo que es suyo: precio, condiciones y decisión.</span></p>
     </div>
 
+    <div class="vista" role="tabpanel" id="vp-ficha" aria-labelledby="v-ficha" hidden>
+      <div class="marco">
+        <div class="bar"><i></i><i></i><i></i><span>Contactos › Laura M. · ficha</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody">
+          <div class="ficha-h">
+            <div><b>Laura M. · Directora de operaciones</b><small>Empresa con 3 sedes en Madrid · llegó por el anuncio «Demo del sistema con el sector»</small></div>
+            <div class="notas" aria-label="Puntuación">
+              <div class="nota"><small>Quién es</small><b>8</b><small>de 10</small></div>
+              <div class="nota"><small>Qué hace</small><b>9</b><small>de 10</small></div>
+              <div class="nota letra"><small>Nivel</small><b>A</b><small>prioridad</small></div>
+            </div>
+          </div>
+          <div class="ficha-g">
+            <div><span>Necesidad</span>Mantenimiento para 3 sedes</div>
+            <div><span>Momento</span>Este trimestre</div>
+            <div><span>Por qué «quién es» 8</span>Volumen de 3 sedes · servicio que encaja · empresa con equipo</div>
+            <div><span>Por qué «qué hace» 9</span>Contestó en minutos · quiere empezar este trimestre · eligió cita</div>
+            <div><span>Canal</span>WhatsApp, con el asistente de IA</div>
+            <div><span>Cita</span>Martes 10:00 con Carlos · confirmada</div>
+          </div>
+          <p class="ficha-res"><b>Resumen para el equipo:</b> busca mantenimiento para sus tres sedes este trimestre y ha confirmado la cita. No ha preguntado por precio todavía.</p>
+          <p class="ficha-sig">Siguiente paso: llamada del martes a las 10:00. Llevar una propuesta para tres sedes y preguntar quién más decide.</p>
+        </div>
+      </div>
+      <p class="nota-img"><span class="n">3</span><span><b>Cada cliente, con su ficha y su puntuación.</b> Dos notas: si encaja y si se está moviendo. Con ellas sale la prioridad, y quien llama lo hace con el contexto delante.</span></p>
+    </div>
+
     <div class="vista" role="tabpanel" id="vp-citas" aria-labelledby="v-citas" hidden>
       <div class="marco">
         <div class="bar"><i></i><i></i><i></i><span>Citas de esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
@@ -789,7 +832,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
           <p class="vnota">Cada cita recibe un recordatorio la víspera que pide un «sí» y lleva el enlace, y otro una hora antes. Si la persona responde o pide otra hora, el seguimiento cambia con ella.</p>
         </div>
       </div>
-      <p class="nota-img"><span class="n">3</span><span><b>Citas que llegan.</b> Se ve quién ha confirmado, quién no y qué reunión celebrada aún no tiene resultado registrado.</span></p>
+      <p class="nota-img"><span class="n">4</span><span><b>Citas que llegan.</b> Se ve quién ha confirmado, quién no y qué reunión celebrada aún no tiene resultado registrado.</span></p>
     </div>
 
     <div class="vista" role="tabpanel" id="vp-recorrido" aria-labelledby="v-recorrido" hidden>
@@ -797,7 +840,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Servicios B2B</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
         <img src="/assets/img/home/intelligence-recorrido.jpg" alt="Qualivo Intelligence: recorrido de la oportunidad a la firma y fugas ordenadas de mayor a menor. Ejemplo con datos simulados." width="1700" height="1080" loading="lazy" decoding="async">
       </div>
-      <p class="nota-img"><span class="n">4</span><span><b>Dónde se pierden.</b> Cada etapa comparada con lo que pasa cuando el seguimiento está bien hecho. La fuga mayor, arriba.</span></p>
+      <p class="nota-img"><span class="n">5</span><span><b>Dónde se pierden.</b> Cada etapa comparada con lo que pasa cuando el seguimiento está bien hecho. La fuga mayor, arriba.</span></p>
     </div>
 
     <div class="vista" role="tabpanel" id="vp-hoy" aria-labelledby="v-hoy" hidden>
@@ -806,7 +849,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
           <div class="bar"><i></i><i></i><i></i><span>Hoy</span><span class="tag-demo">Ejemplo</span></div>
           <img src="/assets/img/home/intelligence-acciones.jpg" alt="Oportunidades que requieren atención hoy, con la acción recomendada para cada una. Ejemplo con datos simulados." width="922" height="840" loading="lazy" decoding="async">
         </div>
-        <p class="nota-img"><span class="n">5</span><span><b>Qué hacer hoy.</b> Cada oportunidad con su siguiente acción y su prioridad.</span></p>
+        <p class="nota-img"><span class="n">6</span><span><b>Qué hacer hoy.</b> Cada oportunidad con su siguiente acción y su prioridad.</span></p>
       </div>
     </div>
 
