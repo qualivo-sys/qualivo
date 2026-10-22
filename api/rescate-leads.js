@@ -85,6 +85,33 @@ async function avisar(asunto, html) {
   }).catch(function () {});
 }
 
+// Formularios activos de la página que ya tienen algún lead. Pasó el 22-oct:
+// Paid creó un formulario nuevo, no estaba en ninguna lista y su primer lead
+// apto se quedó tres horas sin mensaje. Con
+// esto un formulario nuevo entra solo, sin tocar código ni variables.
+// leadgen_forms exige token de página; si el de la variable es de usuario, se
+// pide el de la página con él.
+const PAGINA = process.env.META_PAGE_ID || '359073050620335';
+async function formulariosDeLaPagina(token) {
+  const pedir = function (tk) {
+    return fetch(GRAPH + '/' + PAGINA + '/leadgen_forms?fields=id,name,status,leads_count&limit=100&access_token=' + encodeURIComponent(tk));
+  };
+  let r = await pedir(token);
+  if (!r.ok) {
+    const p = await fetch(GRAPH + '/' + PAGINA + '?fields=access_token&access_token=' + encodeURIComponent(token));
+    const tp = p.ok ? ((await p.json().catch(function () { return {}; })).access_token || '') : '';
+    if (!tp) throw new Error('leadgen_forms ' + r.status + ' ' + (await r.text()).slice(0, 160));
+    r = await pedir(tp);
+    if (!r.ok) throw new Error('leadgen_forms ' + r.status + ' ' + (await r.text()).slice(0, 160));
+  }
+  const d = await r.json();
+  return (d.data || []).filter(function (f) {
+    // Todos los activos con leads, no solo los Qualivo_: uno con otro nombre se guarda
+    // sin activar (lo decide guardar) pero entra en el CRM y salta el aviso de rescate.
+    return f.status === 'ACTIVE' && Number(f.leads_count || 0) > 0;
+  }).map(function (f) { return String(f.id); });
+}
+
 module.exports = async function handler(req, res) {
   const secreto = process.env.CRON_SECRET;
   if (!secreto || String(req.headers.authorization || '') !== 'Bearer ' + secreto) {
@@ -100,7 +127,14 @@ module.exports = async function handler(req, res) {
   }
 
   const desde = Math.floor(Date.now() / 1000) - HORAS * 3600;
-  const parte = { revisados: 0, ya_estaban: 0, rescatados: 0, completados: 0, errores: [] };
+  const parte = { revisados: 0, ya_estaban: 0, rescatados: 0, completados: 0, descubiertos: [], errores: [] };
+  try {
+    (await formulariosDeLaPagina(token)).forEach(function (id) {
+      if (formularios.indexOf(id) === -1) { formularios.push(id); parte.descubiertos.push(id); }
+    });
+  } catch (e) {
+    parte.errores.push('descubrir formularios: ' + String(e && e.message).slice(0, 160));
+  }
   const nuevos = [];
   const completados = [];
 
@@ -214,6 +248,8 @@ module.exports = async function handler(req, res) {
       (filasCompletados ? '<p style="font:14px/1.5 system-ui">Ya estaban en el CRM por otra vía (la landing), pero el webhook de Meta no los procesó. ' +
         'Se les han añadido las etiquetas y la nota del formulario. Conviene mirar el registro de /api/meta-leadform/ en Vercel de esa hora:</p>' +
         '<table style="font:14px/1.6 system-ui">' + filasCompletados + '</table>' : '') +
+      (parte.descubiertos.length ? '<p style="font:14px/1.5 system-ui">Formularios encontrados en la página que no estaban en la lista: ' +
+        parte.descubiertos.join(', ') + '. Ya se revisan solos; conviene añadirlos a FORMULARIOS_SECTOR para que entren con su sector.</p>' : '') +
       (parte.errores.length ? '<p style="font:13px/1.5 system-ui;color:#C2410C"><b>Errores:</b><br>' +
         parte.errores.map(function (e) { return String(e).replace(/[<>]/g, ''); }).join('<br>') + '</p>' : '') +
       '<p style="font:13px/1.5 system-ui;color:#666">Si esto rescata leads a menudo, el webhook no está haciendo su trabajo ' +
@@ -223,3 +259,5 @@ module.exports = async function handler(req, res) {
 
   return res.status(200).json({ ok: true, parte: parte });
 };
+
+module.exports.formulariosDeLaPagina = formulariosDeLaPagina;
