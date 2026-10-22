@@ -162,12 +162,53 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .lado{display:grid;gap:16px}
 
 /* 5 · DEMO por pestañas (22-oct): anuncio, formulario, WhatsApp, llamada, ficha, seguimientos y panel */
-.vistas{display:flex;gap:6px;margin-top:34px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.vistas{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:30px;padding:5px;background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:14px;-webkit-overflow-scrolling:touch}
 .vistas::-webkit-scrollbar{display:none}
-.vistas button{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#C6CBD3;font:800 14.5px var(--display);cursor:pointer;white-space:nowrap}
-.vistas button i{font-style:normal;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);font-size:12px}
-.vistas button[aria-selected="true"]{background:var(--amarillo);color:var(--tinta);border-color:var(--amarillo)}
-.vistas button[aria-selected="true"] i{background:rgba(16,19,25,.12)}
+.vistas button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:transparent;color:#8E96A2;font:800 13px var(--display);border-radius:10px;padding:10px 7px;cursor:pointer;white-space:nowrap}
+.vistas button i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);font-size:11.5px}
+.vistas button:hover{color:#fff}
+.vistas button[aria-selected="true"]{background:#fff;color:var(--tinta)}
+.vistas button[aria-selected="true"] i{background:var(--amarillo);color:var(--tinta)}
+/* anuncios, citas, recorrido y hoy: como en la home, con ejemplos del sector */
+.vbody{padding:18px;color:var(--tinta)}
+.cap{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#8A8F97;margin-bottom:10px}
+.vtabla{overflow-x:auto}
+.vtabla table{width:100%;border-collapse:collapse;font-size:14px;min-width:680px;background:#fff;border-radius:12px;overflow:hidden}
+.vtabla th,.vtabla td{padding:11px 12px;border-bottom:1px solid rgba(16,19,25,.07);text-align:right;white-space:nowrap}
+.vtabla th:first-child,.vtabla td:first-child{text-align:left}
+.vtabla th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800;background:#FAF8F3}
+.vtabla td{font-variant-numeric:tabular-nums}
+.vtabla td b{font-weight:800}
+.vtabla td small{display:block;color:#8A8F97;font-size:12px;font-weight:600}
+.vd{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.vd.si{background:#E3F2EF;color:#0E7C74}.vd.mm{background:#FDF1C7;color:#8A5A00}.vd.no{background:#FFE9E0;color:#B2410C}
+.citas{display:grid;gap:8px}
+.cita{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px 14px;font-size:14px}
+.cita time{font-weight:800;font-variant-numeric:tabular-nums}
+.cita small{display:block;color:#8A8F97;font-size:12.5px;font-weight:600}
+.emb-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.emb{display:grid;gap:7px}
+.et{display:grid;grid-template-columns:150px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.et b{text-align:right;font-weight:900;font-variant-numeric:tabular-nums}
+.br{height:22px;border-radius:7px;background:#ECE8DE;overflow:hidden}
+.br i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--verde),var(--verde-claro))}
+.et:last-child .br i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fugas{display:grid;gap:8px}
+.fu{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:11px 12px;font-size:14px;line-height:1.4}
+.fu:first-child{border-color:#F3B79E;background:#FFF6F1}
+.fu .nf{width:28px;height:28px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);display:grid;place-items:center;font-weight:900;font-size:13px}
+.fu small{display:block;color:var(--verde);font-weight:800;font-size:13px;margin-top:4px}
+.hy-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;margin-bottom:10px}
+.hy-h b{font-size:16px}.hy-h span{font-size:13.5px;color:#8A8F97}
+.hys{background:#fff;border-radius:14px;overflow:hidden}
+.hy{display:grid;grid-template-columns:40px minmax(0,1.2fr) minmax(0,1fr) 96px;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(16,19,25,.07)}
+.hy:last-child{border-bottom:0}
+.av2{width:40px;height:40px;border-radius:50%;background:#EAF0FA;display:grid;place-items:center;font-weight:800;font-size:13px;color:#3E434B}
+.hy:nth-child(2n) .av2{background:#FBEBE3}.hy:nth-child(3n) .av2{background:#E3F2EF}
+.qn b{display:block;font-size:15px}.qn small{display:block;font-size:12.5px;color:#8A8F97;font-weight:600;line-height:1.35}
+.ac{font-size:13.5px;font-weight:700;color:#2B2F36}
+.pr{justify-self:end;font-size:12.5px;font-weight:800;border-radius:999px;padding:4px 10px;background:#FDF1C7;color:#8A5A00}
+.pr.urgente{background:#FFE9E0;color:#C2410C}.pr.media{background:#EEF0F3;color:#5A5E66}
 .vista{margin-top:18px}
 .vista-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
 .vista-g > div{min-width:0}
@@ -304,8 +345,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .tabla-w{overflow-x:auto}
 .panel .pie-p{font-size:12.5px;color:var(--gris);margin-top:10px}
 .abre-panel{display:inline-flex;margin-top:14px;font-weight:800;color:var(--amarillo);text-decoration:none;font-size:15px}
-@media(max-width:960px){.vista-g{grid-template-columns:minmax(0,1fr)}.ads{grid-template-columns:minmax(0,1fr)}.pk{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.notas,.campos{grid-template-columns:1fr}.pk{grid-template-columns:1fr 1fr}.linea{grid-template-columns:1fr;gap:2px}.chat{height:420px}}
+@media(max-width:960px){.emb-g{grid-template-columns:minmax(0,1fr)}.vista-g{grid-template-columns:minmax(0,1fr)}.ads{grid-template-columns:minmax(0,1fr)}.pk{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.hy{grid-template-columns:36px minmax(0,1fr) auto}.hy .ac{grid-column:2/-1;grid-row:2}.av2{width:36px;height:36px}.cita{grid-template-columns:minmax(0,1fr) auto}.cita time{grid-column:1/-1}.et{grid-template-columns:110px minmax(0,1fr) 34px}.notas,.campos{grid-template-columns:1fr}.pk{grid-template-columns:1fr 1fr}.linea{grid-template-columns:1fr;gap:2px}.chat{height:420px}}
 @media(prefers-reduced-motion:reduce){.onda i{animation:none;height:60%}}
 
 /* 6 · SERVICIO */
@@ -647,30 +688,16 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
       <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
       <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
-      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>6</i>Seguimientos</button>
-      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="panel"><i>7</i>Panel</button>
+      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
     </div>
     <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
-      <div class="ads"><article class="ad">
-          <div class="ad-h"><span class="av">A</span><span><b>Academia de ejemplo</b><small>Publicidad · Feed</small></span></div>
-          <p class="ad-c">¿Quieres formarte en gestión administrativa mientras trabajas? Conoce el programa y comprueba si los horarios encajan contigo.</p>
-          <div class="ad-img"><span class="kk">Curso de gestión administrativa</span><span class="tt">Online, con clases en directo</span><span class="ll"><span>Martes y jueves · 18:30 a 20:00</span><span>Próxima convocatoria</span></span></div>
-          <div class="ad-f"><span>Más información</span><small>Formulario</small></div>
-          <p class="ad-n"><b>Filtra por:</b> horario y modalidad, dichos en la primera línea. <b>Lleva a:</b> un formulario con objetivo, situación, duda principal y canal.</p>
-        </article><article class="ad">
-          <div class="ad-h"><span class="av">A</span><span><b>Academia de ejemplo</b><small>Publicidad · Feed</small></span></div>
-          <p class="ad-c">Si estás pensando en cambiar de puesto, mira qué te exigiría el curso y cuánto tiempo a la semana. Resolvemos tus dudas antes de que decidas.</p>
-          <div class="ad-img"><span class="kk">Cambia de puesto</span><span class="tt">Una formación que encaja con tu trabajo</span><span class="ll"><span>Programa de 6 meses</span><span>Con asesoría de admisiones</span></span></div>
-          <div class="ad-f"><span>Más información</span><small>Formulario</small></div>
-          <p class="ad-n"><b>Filtra por:</b> objetivo profesional. <b>Prueba:</b> si el ángulo del cambio de puesto trae solicitudes con más encaje que el del horario.</p>
-        </article><article class="ad story">
-          <div class="ad-h"><span class="av">A</span><span><b>Academia de ejemplo</b><small>Publicidad · Historia</small></span></div>
-          <p class="ad-c">Si este año no puedes, dinos cuándo y te escribimos con las fechas.</p>
-          <div class="ad-img"><span class="kk">¿Más adelante?</span><span class="tt">Te avisamos de la próxima convocatoria</span><span class="ll"><span>Deja la fecha que te venga bien</span></span></div>
-          <div class="ad-f"><span>Más información</span><small>Formulario</small></div>
-          <p class="ad-n"><b>Separa:</b> a quien piensa en otra convocatoria. Deja su fecha y no ocupa a admisiones antes de tiempo.</p>
-        </article></div>
-      <p class="pista">Tres anuncios de ejemplo, cada uno con una hipótesis. El panel dice después cuál acaba en matrícula, no cuál trae más clics.</p>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><p class="cap">Qué anuncio trae alumnos, no solo solicitudes</p>
+          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Llamadas celebradas</th><th>Matrículas</th><th>Qué hacemos</th></tr></thead><tbody><tr><td><b>«Horarios compatibles con trabajo»</b><small>Meta · vídeo</small></td><td>42</td><td>17</td><td>8</td><td>3</td><td><span class="vd si">Escalar</span></td></tr><tr><td><b>«Cambia de puesto con una formación»</b><small>Meta · carrusel</small></td><td>35</td><td>9</td><td>4</td><td>1</td><td><span class="vd mm">Mantener</span></td></tr><tr><td><b>«Próxima convocatoria»</b><small>Meta · formulario</small></td><td>58</td><td>11</td><td>5</td><td>2</td><td><span class="vd no">Revisar público</span></td></tr></tbody></table></div></div></div>
+      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por matrículas.</b> Cada anuncio con las solicitudes que trajo, cuántas encajaban con el curso y cuántas acabaron matriculadas. El de la próxima convocatoria trae más solicitudes, pero menos alumnos: se revisa a quién se enseña.</span></p>
     </div>
     <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
       <div class="vista-g">
@@ -734,6 +761,11 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       </div>
     </div>
     <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamadas con admisiones · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><div class="citas"><div class="cita"><time>Mié 16:00</time><span><b>Laura</b><small>Gestión administrativa · respondió «sí» al recordatorio de la víspera</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Jue 12:00</time><span><b>Sergio</b><small>Gestión administrativa · recordatorio enviado, sin respuesta todavía</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Jue 18:30</time><span><b>Javier</b><small>Pidió cambiar la hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Mar 17:00</time><span><b>Carmen</b><small>Celebrada. Falta registrar el resultado y el siguiente paso</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
+      <p class="nota-img"><span class="n">6</span><span><b>Llamadas que se celebran.</b> Cada una con un recordatorio la víspera que pide un «sí» y otro una hora antes. Se ve quién ha confirmado, quién no y qué llamada no tiene resultado registrado.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
       <div class="vista-g">
         <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió información y no contesta</button>
 <button type="button" aria-pressed="false" data-seg="1">B · La llamada con admisiones</button>
@@ -752,15 +784,21 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         </ul></div>
       </div>
     </div>
-    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
+    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
       <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Academia de ejemplo</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
         <div class="panel">
-          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>135</b></div><div class=""><small>Conversaciones con encaje</small><b>37</b></div><div class=""><small>Citas celebradas</small><b>17</b></div><div class="alerta"><small>Requieren atención hoy</small><b>4</b></div><div class="ok"><small>Matrículas registradas</small><b>6</b></div></div>
-          <h4>Qué hacer hoy</h4><div class="hoy"><div><span class="nv">A</span><b>Laura <span>· Llamada con admisiones el miércoles a las 16:00</span></b><small>→ Preparar condiciones de pago antes de la llamada</small></div><div><span class="nv b">B</span><b>Nerea <span>· Preguntó por requisitos hace 26 h y nadie ha respondido</span></b><small>→ Responder hoy</small></div><div><span class="nv">A</span><b>Sergio <span>· Cita mañana a las 12:00 sin confirmar el recordatorio</span></b><small>→ Confirmar o mover la cita</small></div><div><span class="nv b">B</span><b>Carmen <span>· Cita celebrada ayer sin resultado registrado</span></b><small>→ Registrar resultado y siguiente paso</small></div></div>
-          <h4>Por anuncio · últimos 30 días</h4><div class="tabla-w"><table class="tabla"><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Citas celebradas</th><th>Matrículas registradas</th></tr></thead><tbody><tr><td>Curso de gestión administrativa (horario)</td><td>42</td><td>17</td><td>8</td><td>3</td></tr><tr><td>Cambia de puesto</td><td>35</td><td>9</td><td>4</td><td>1</td></tr><tr><td>Próxima convocatoria</td><td>58</td><td>11</td><td>5</td><td>2</td></tr></tbody></table></div>
+          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>135</b></div><div class=""><small>Con encaje</small><b>37</b></div><div class=""><small>Llamadas con admisiones</small><b>17</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Matrículas registradas</small><b>6</b></div></div>
+          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>135</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:73%"></i></span><b>98</b></div><div class="et"><span>Con encaje</span><span class="br"><i style="width:27%"></i></span><b>37</b></div><div class="et"><span>Llamada reservada</span><span class="br"><i style="width:16%"></i></span><b>22</b></div><div class="et"><span>Llamada celebrada</span><span class="br"><i style="width:13%"></i></span><b>17</b></div><div class="et"><span>Matrícula</span><span class="br"><i style="width:4%"></i></span><b>6</b></div></div></div>
+          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>De la llamada celebrada a la matrícula</b> · 11 de 17 siguen sin decidir<small>→ Condiciones con tareas a los 2, 5 y 10 días, con borrador para admisiones</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes que no contestan</b> · 37 de 135 no responden al primer mensaje<small>→ Llamada solo si la aceptaron y un WhatsApp con una duda concreta al día siguiente</small></span></div><div class="fu"><span class="nf">3</span><span><b>Llamadas reservadas que no se celebran</b> · 5 de 22<small>→ Recordatorio que pide un «sí» y recuperación a los 5 minutos si no lo coge</small></span></div></div></div></div>
           <p class="pie-p">Cifras de ejemplo para una academia. Las matrículas son las que registra admisiones; no son cobros.</p>
         </div></div>
+      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden los alumnos.</b> Cada etapa con cuántos pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
       <a class="abre-panel" href="/intelligence/?sector=formacion" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
+      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Academia de ejemplo</span><span class="tag-demo">Ejemplo</span></div>
+        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">N</span><span class="qn"><b>Nerea</b><small>Curso de gestión administrativa · Preguntó por requisitos hace 26 h y nadie ha respondido</small></span><span class="ac">💬 Responder hoy</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">S</span><span class="qn"><b>Sergio</b><small>Llamada mañana a las 12:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la llamada</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">C</span><span class="qn"><b>Carmen</b><small>Llamada celebrada ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y siguiente paso</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">P</span><span class="qn"><b>Pablo</b><small>Condiciones enviadas hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Marta con la duda más habitual</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">L</span><span class="qn"><b>Laura</b><small>Llamada el miércoles a las 16:00 · Quiere metodología y pago</small></span><span class="ac">👤 Preparar la llamada</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">I</span><span class="qn"><b>Irene</b><small>Pidió que le escribiéramos en la próxima convocatoria · Hoy toca</small></span><span class="ac">💬 Mensaje con las fechas</span><span class="pr media">● Media</span></div></div></div></div>
+      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> Admisiones abre el día con esta lista: cada interesado con su siguiente acción y su prioridad. No hay que buscar en el CRM.</span></p>
     </div>
   </div>
 </section>
