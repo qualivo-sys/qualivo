@@ -170,11 +170,11 @@ html,body{background:#000}
   <div id="sector"><span>SI VENDES FORMACIÓN</span><p id="filtro">y ya inviertes en publicidad</p></div>
 
   <!-- S0 · móvil con notificaciones -->
-  <div class="sc" id="s0"><div class="ava" id="ava"></div><div class="notis" id="notis" style="display:none"></div></div>
+  <div class="sc" id="s0"><div class="full"><img id="c-h1"></div><div class="ava" id="ava" style="display:none"></div><div class="notis" id="notis" style="display:none"></div></div>
 
   <!-- S1/S2 · bandeja de solicitudes -->
-  <div class="sc" id="s1"><div class="rot" id="r1">El reto no es tener <i>más solicitudes</i></div>
-    <div class="ven"><div class="bar"><i></i><i></i><i></i><span>Solicitudes · esta semana</span><span class="td">Ejemplo</span></div><div class="lista" id="lista"></div></div></div>
+  <div class="sc" id="s1"><div class="full"><img id="c-h2"></div><div class="rot" id="r1">El reto no es tener <i>más solicitudes</i></div>
+    <div class="ven" style="display:none"><div class="bar"><i></i><i></i><i></i><span>Solicitudes · esta semana</span><span class="td">Ejemplo</span></div><div class="lista" id="lista"></div></div></div>
 
   <!-- S3 · no contesta -->
   <div class="sc" id="s3"><div class="clip"><img id="c-dedos"></div>
@@ -252,7 +252,7 @@ html,body{background:#000}
       <div class="real" id="real"><small>Caso real · un mes de campaña</small><b>10 matrículas en un mes · <i>10,2 veces lo invertido</i></b><span>Escuela de aviación · medido en el CRM del centro</span></div></div></div>
 
   <!-- S12 · CTA -->
-  <div class="sc" id="s12"><div id="g6w" style="position:absolute;inset:0"><div class="ava" id="ava2"></div></div><div id="preg">¿Cuántas se te están <i>congelando?</i></div><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
+  <div class="sc" id="s12"><div id="g6w" class="full"><img id="c-h3"></div><div class="ava" id="ava2" style="display:none"></div><div id="preg">Encuentra a quien <i>sí va a comprar</i></div><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
     <div class="ad" id="ad2"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
       <div class="im"><h4>Curso online de gestión administrativa. <i>En directo y grabado.</i></h4><p>Para quien trabaja y quiere cambiar de puesto, a su ritmo.</p></div>
       <div class="bt" id="bt2">Más información</div></div>
@@ -291,7 +291,7 @@ const CLIP={movil:'k-movil-noche',dedos:'k-dedos',sofa:'k-sofa',com:'broll-panel
 const espera=[];
 function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25*vel))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
   if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
-const S={s0:[0,2.6], s1:[2.6,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.voz], s9b:[T.voz,T.p4], s10:[T.p4,T.f2-.2], s11:[T.f2-.2,T.cta], s12:[T.cta,DUR+1]};
+const S={s0:[0,4.0], s1:[4.0,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.voz], s9b:[T.voz,T.p4], s10:[T.p4,T.f2-.2], s11:[T.f2-.2,T.cta], s12:[T.cta,DUR+1]};
 // avalancha de notificaciones (arranque) y la misma pila ordenándose (remate)
 const YF=V45?1350/1920:1; let rs=7; const rnd=()=>{ rs=(rs*16807)%2147483647; return rs/2147483647; };
 const CURS=['Curso online de gestión administrativa','Inglés B2 online','Contabilidad online','Marketing digital','Auxiliar de enfermería','Excel avanzado online'];
@@ -320,6 +320,9 @@ window.setT=function(t){
   const nop=t>S.s4[0]+1.0; $('cest').textContent=nop?'No se presentó':'Confirmada'; $('cest').className='est '+(nop?'no':'pe'); $('cmal').style.background=nop?'#FFF1EA':'transparent';
   // S5
   if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-g4','G4_congela',S.s5[0],t,5/(S.s5[1]-S.s5[0]));
+  if(t<4.2) clip('c-h1','H1_arena',0,t,5/4.2);
+  if(t>=3.9&&t<T.dolor+.1) clip('c-h2','H2_arena_dorado',4.0,t,5/(T.dolor-4.0));
+  if(t>=S.s12[0]-.1&&t<T.c1+.2) clip('c-h3','H3_mano_dorada',S.s12[0],t,5/(T.c1-S.s12[0]));
   // S6: la bandeja se escanea, cada solicitud recibe su nivel y se ordena
   const a6=S.s6[0], sc=nm(t,a6+.2,a6+1.4), ord6=io(nm(t,a6+1.6,a6+2.3)); $('scan').style.opacity=sc>0&&sc<1?1:0; $('scan').style.top=(80+sc*640)+'px';
   [...$('cls').children].forEach((e,i)=>{ const x=CL[i]; const tb=a6+.2+1.2*(x[3]*108+50)/640; const nv=e.querySelector('.nv'); nv.style.opacity=nm(t,tb,tb+.12); nv.style.transform=`scale(${1.5-.5*out(nm(t,tb,tb+.2))})`;
