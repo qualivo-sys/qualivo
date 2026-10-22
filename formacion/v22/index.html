@@ -471,6 +471,111 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   .largo{display:none}.corto{display:inline}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.aparece{opacity:1;transform:none}}
+
+/* ===== Retoque de UX (22-oct, handoff de Claude Design) ===== */
+/* C1 · portada: jerarquía del H1 y prueba social en móvil */
+.hero h1 span{display:inline;color:inherit;margin:0}
+.hero h1 .h1-b{font-weight:700;color:var(--gris)}
+.hero-prueba{display:flex;flex-direction:column;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--marfil-2)}
+.hero-prueba > span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.hero-prueba .fila{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:center}
+.hero-prueba img{height:30px;width:100%;object-fit:contain}
+.hero-prueba img:nth-child(n+5){display:none}
+.hero-prueba .fila.pocos{grid-template-columns:repeat(2,minmax(0,150px));gap:24px}.hero-prueba .fila.pocos img{height:40px}
+@media (min-width:761px){.hero-prueba{display:none}}
+@media (max-width:760px){
+  .hero h1{font-size:clamp(28px,7.8vw,34px);line-height:1.1}
+  .hero .lead{font-size:16px;line-height:1.5}
+  .hero .ctas{flex-direction:column;align-items:stretch;gap:4px}
+  .hero .ctas .btn{min-height:52px}
+  .hero .btn-link{min-height:44px}
+  .hero .vsl{margin-top:8px}
+}
+/* C2 · demo: etapas, pestañas en rejilla (escritorio) o tira con scroll (<1100 px) */
+#demo .etapas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin:30px 0 8px}
+#demo .etapas span{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--verde-claro);border-top:2px solid var(--verde-claro);padding-top:8px}
+#demo .etapas span:nth-child(1){grid-column:span 2}#demo .etapas span:nth-child(2){grid-column:span 3}#demo .etapas span:nth-child(3){grid-column:span 4}
+#demo .vistas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-top:0;padding:0;background:none;border:0;border-radius:0;overflow:visible}
+#demo .vistas button{min-height:56px;justify-content:flex-start;text-align:left;white-space:normal;line-height:1.25;font-size:12.5px;padding:8px 8px;gap:6px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.03)}
+#demo .vistas button[aria-selected="true"]{background:#fff;color:var(--tinta);border-color:#fff}
+#demo .vistas button i{width:18px;height:18px;flex:none}
+#demo .vistas [role=tab]:focus-visible,#demo .vista-nav :focus-visible{outline:3px solid var(--verde-claro);outline-offset:2px}
+#demo .progreso{display:none}
+@media (max-width:1099px){
+  #demo .etapas{display:none}
+  #demo .progreso{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:8px;margin:28px 0 10px;font-size:13px;font-weight:800}
+  #demo .progreso b{color:var(--verde-claro)}#demo .progreso span{color:#C9CCD2}
+  #demo .progreso .seg{grid-column:1/-1;display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+  #demo .progreso .seg i{height:4px;border-radius:2px;background:rgba(255,255,255,.14)}
+  #demo .progreso .seg i.on{background:var(--verde-claro)}
+  #demo .vistas{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -24px;padding:4px 24px 12px;
+    -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  #demo .vistas::-webkit-scrollbar{display:none}
+  #demo .vistas button{flex:none;min-height:44px;white-space:nowrap;scroll-snap-align:center;border-radius:999px;padding:0 14px}
+}
+/* C3 · demo: anterior / siguiente y CTA en la última pestaña */
+#demo .vista-nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;margin-top:24px}
+#demo .vista-nav [data-prev]{justify-self:start;color:#C9CCD2;min-height:44px;background:none;border:0;font:800 15px var(--display);cursor:pointer;padding:0}
+#demo .vista-nav [data-prev]:hover{color:#fff}
+#demo .vista-pos{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#C9CCD2}
+#demo .vista-pos .seg{display:flex;gap:4px}#demo .vista-pos .seg i{width:14px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}#demo .vista-pos .seg i.on{background:var(--verde-claro)}
+#demo .vista-sig,#demo .vista-fin{justify-self:end}
+#demo .vista-sig{min-height:48px;padding:0 20px;border:1px solid var(--verde-claro);border-radius:12px;background:transparent;color:#fff;font:800 15px var(--display);cursor:pointer}
+#demo .vista-sig:hover{background:rgba(39,189,177,.12)}
+#demo .vista-fin{grid-column:3;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:10px;margin:0;color:#C9CCD2;font-size:14px}
+#demo .vista-fin .btn{min-height:52px;font-size:16px;white-space:nowrap;flex:none}
+@media (min-width:761px){#demo .vista-nav.ultimo .vista-pos{display:none}#demo .vista-nav.ultimo .vista-fin{grid-column:2/-1;flex-direction:row;align-items:center;justify-content:flex-end;gap:16px}}
+@media (max-width:760px){
+  #demo .vista-nav{grid-template-columns:minmax(0,1fr);gap:4px}
+  #demo .vista-pos{display:none}
+  #demo .vista-sig{justify-self:stretch;width:100%}
+  #demo .vista-fin{grid-column:1/-1;flex-direction:column;align-items:stretch;text-align:center}
+}
+/* C4 · formulario: en móvil, encabezado → Maikel → formulario → pasos; errores accesibles */
+@media (min-width:961px){#diagnostico .f-izq{position:sticky;top:96px;align-self:start}}
+@media (max-width:760px){
+  #diagnostico .grid-f{display:flex;flex-direction:column;gap:16px}
+  #diagnostico .f-izq{display:contents}
+  #diagnostico .f-izq > *{order:4;margin-top:0}
+  #diagnostico .f-izq > :is(.eyebrow,h2,.lead){order:1}
+  #diagnostico .maikel{order:2;font-size:14px}
+  #diagnostico .maikel img{width:48px;height:48px}
+  #diagnostico .caja-f{order:3}
+}
+#diagnostico .campo :is(input,select)[aria-invalid="true"]{border-color:#D94A3D;box-shadow:0 0 0 1px #D94A3D}
+#e1,#e2{font-weight:600;color:var(--tinta);border:1px solid #D94A3D;border-radius:10px;padding:12px;background:#FFF6F4}
+/* C5 · CTA fijo y WhatsApp en móvil */
+@media (max-width:760px){
+  body{padding-bottom:84px}
+  .top .btn-sm{display:inline-flex}
+  .wa{transition:bottom .25s ease}
+}
+@media (prefers-reduced-motion:reduce){.fijo,.wa{transition:none}}
+/* C6 · logos en rejilla de altura uniforme y ritmo en móvil */
+.res .logos{display:block;margin-top:56px;padding:40px 0 8px;border-top:1px solid var(--linea)}
+.res .logos p{max-width:none;margin-bottom:22px}
+.res .logos .fila{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 48px;align-items:center;opacity:1}
+.res .logos .fila img{height:48px;width:100%;object-fit:contain}
+@media (max-width:760px){
+  .res .logos .fila{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 24px}
+  .res .logos .fila img{height:36px}
+  #sistema .problemas .pb{padding:16px 0}
+  #sistema .solucion .flujo li{padding:12px 14px}
+}
+
+/* Paleta del logo (propuesta de Claude Design, 22-oct): blanco y azul marino. Para volver a la de siempre: PALETA='marfil' en el generador. */
+:root{--marfil:#FFFFFF;--marfil-2:#F1F3F5;--negro:#0F2540;--tinta:#0B1C33;--linea:rgba(11,28,51,.1)}
+.top{background:rgba(255,255,255,.94)}
+#sistema{background:#F1F3F5}
+.final{background:#E3F8F6}
+.claro{background:#F7F8FA}
+.claro .bar,.marco .bar{background:#0B1C33}
+.kpis div,.caja-d{background:#0B1D36}
+.caja-d{border-color:rgba(255,255,255,.14)}
+.fijo{background:rgba(15,37,64,.96)}
+.campo input,.campo select{border-color:#CBD1D9}
+.tl li::before{box-shadow:0 0 0 4px var(--negro)}
+.flujo li::after{background:var(--tinta)}
 </style>
 </head>
 <body>
@@ -478,7 +583,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 <div class="top">
   <div class="wrap">
     <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
-    <a href="#diagnostico" class="btn btn-sm" data-cta="barra">Descubre cómo captar más alumnos</a>
+    <a href="#diagnostico" class="btn btn-sm" data-cta="barra"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span></a>
   </div>
 </div>
 
@@ -487,13 +592,14 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   <div class="wrap grid-h">
     <div>
       <p class="eyebrow">Para academias y centros de formación</p>
-      <h1>Más alumnos para tu centro. <span><span class="subr">Del primer anuncio a la matrícula.</span></span></h1>
+      <h1><span class="subr">Más alumnos para tu centro.</span> <span class="h1-b">Del primer anuncio a la matrícula.</span></h1>
       <p class="lead">Conseguimos solicitudes de personas interesadas en tus cursos y conectamos la captación con el seguimiento comercial para ayudarte a convertir más en matrículas.</p>
       <div class="ctas">
         <a href="#diagnostico" class="btn" data-cta="hero"><span class="largo">Descubre cómo captar más alumnos</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
         <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
+      <div class="hero-prueba"><span>Han trabajado con Qualivo</span><div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="eager" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" height="30" loading="eager" decoding="async"></div></div>
     </div>
 
     <!-- Vídeo del sistema en una academia (1:10). Se servirá el nuevo vídeo del sistema completo cuando esté. -->
@@ -536,22 +642,22 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     <div class="logos">
       <p>Han trabajado con Qualivo</p>
       <div class="fila">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:34px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:54px;filter:grayscale(1) brightness(.5) contrast(1.6)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:42px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:39px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:39px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:48px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:42px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:42px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:64px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:56px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:30px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:18px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:33px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:44px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:33px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:48px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" >
       </div>
     </div>
   </div>
@@ -590,16 +696,18 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     <p class="eyebrow">Así se ve por dentro</p>
     <h2 id="t-demo">Del anuncio a la matrícula, paso a paso.</h2>
     <p class="lead">Así lo viviría Laura, que trabaja por las mañanas y quiere formarse para cambiar de puesto, y así lo vería tu equipo de admisiones. Academia, personas, mensajes y cifras de ejemplo.</p>
+    <div class="etapas" aria-hidden="true"><span>Captar</span><span>Atender</span><span>Seguir y medir</span></div>
+    <div class="progreso" aria-hidden="true"></div>
     <div class="vistas" role="tablist" aria-label="Partes del sistema">
-      <button type="button" role="tab" id="tab-0" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
-      <button type="button" role="tab" id="tab-1" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
-      <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
-      <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
-      <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
-      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
-      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
-      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
-      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
+      <button type="button" role="tab" id="tab-0" data-etapa="Captar" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
+      <button type="button" role="tab" id="tab-1" data-etapa="Captar" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
+      <button type="button" role="tab" id="tab-2" data-etapa="Atender" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
+      <button type="button" role="tab" id="tab-3" data-etapa="Atender" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
+      <button type="button" role="tab" id="tab-4" data-etapa="Atender" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
+      <button type="button" role="tab" id="tab-5" data-etapa="Seguir y medir" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" data-etapa="Seguir y medir" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" data-etapa="Seguir y medir" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" data-etapa="Seguir y medir" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
     </div>
     <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
       <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
@@ -712,6 +820,12 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">N</span><span class="qn"><b>Nerea</b><small>Curso de gestión administrativa · Preguntó por requisitos hace 26 h y nadie ha respondido</small></span><span class="ac">💬 Responder hoy</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">S</span><span class="qn"><b>Sergio</b><small>Llamada mañana a las 12:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la llamada</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">C</span><span class="qn"><b>Carmen</b><small>Llamada celebrada ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y siguiente paso</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">P</span><span class="qn"><b>Pablo</b><small>Condiciones enviadas hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Marta con la duda más habitual</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">L</span><span class="qn"><b>Laura</b><small>Llamada el miércoles a las 16:00 · Quiere metodología y pago</small></span><span class="ac">👤 Preparar la llamada</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">I</span><span class="qn"><b>Irene</b><small>Pidió que le escribiéramos en la próxima convocatoria · Hoy toca</small></span><span class="ac">💬 Mensaje con las fechas</span><span class="pr media">● Media</span></div></div></div></div>
       <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> Admisiones abre el día con esta lista: cada interesado con su siguiente acción y su prioridad. No hay que buscar en el CRM.</span></p>
     </div>
+    <nav class="vista-nav" aria-label="Recorrido de la demo">
+      <button type="button" data-prev hidden></button>
+      <span class="vista-pos"></span>
+      <button type="button" class="vista-sig" data-next></button>
+      <p class="vista-fin" hidden>Lo vemos con tu captación y tus solicitudes en el diagnóstico. <a class="btn" href="#diagnostico" data-cta="demo-fin">Pide tu diagnóstico&nbsp;→</a></p>
+    </nav>
   </div>
 </section>
 
@@ -719,7 +833,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 <section class="sec final" id="diagnostico" aria-labelledby="t-final">
   <div class="wrap">
     <div class="grid-f">
-      <div>
+      <div class="f-izq">
         <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
         <h2 id="t-final">Descubre dónde puedes conseguir más matrículas.</h2>
         <p class="lead" id="form-bajada">Analizamos tu captación, la respuesta a tus solicitudes y el seguimiento comercial para identificar dónde actuar primero.</p>
@@ -774,7 +888,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
               <select name="equipo" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
               <select name="inversion" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
             </div>
-            <p class="err" id="e1" hidden></p>
+            <p class="err" id="e1" role="alert" hidden></p>
             <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
           </div>
 
@@ -786,7 +900,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
             <input type="hidden" name="hipotesis">
             <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="err" id="e2" hidden></p>
+            <p class="err" id="e2" role="alert" hidden></p>
             <button type="submit" class="btn" style="width:100%" id="b2">Ir a elegir hora&nbsp;→</button>
             <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
           </div>
@@ -912,11 +1026,22 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     f.elements.hipotesis.value=('Centro: '+c+(o?' · Objetivo: '+o:'')).slice(0,1200);
   });
   document.getElementById('b1').addEventListener('click',function(ev){
-    if(!f.elements.centro.value.trim()||!f.elements.web.value.trim()||!f.elements.objetivo.value||!f.elements.solicitudes.value||!f.elements.ticket.value){
-      ev.stopImmediatePropagation(); var e1=document.getElementById('e1'); e1.textContent='Rellena los cinco campos, son diez segundos.'; e1.hidden=false; return;
+    var req=['centro','web','objetivo','solicitudes','ticket'], mal=req.filter(function(n){ return !String(f.elements[n].value||'').trim(); });
+    req.forEach(function(n){ var el=f.elements[n]; if(mal.indexOf(n)>=0) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid'); });
+    if(mal.length){
+      ev.stopImmediatePropagation(); var e1=document.getElementById('e1');
+      e1.textContent=mal.length===1?'Revisa 1 campo para continuar.':'Revisa '+mal.length+' campos para continuar.'; e1.hidden=false;
+      f.elements[mal[0]].focus(); return;
     }
     pasoF(1);
   },true);
+  /* paso 2: marca los campos vacíos o mal escritos (el aviso lo da landing.js) */
+  f.addEventListener('submit',function(){
+    ['nombre','email','telefono'].forEach(function(n){ var el=f.elements[n], v=String(el.value||'').trim(), ok=v&&(n!=='email'||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+      if(ok) el.removeAttribute('aria-invalid'); else el.setAttribute('aria-invalid','true'); });
+  },true);
+  f.addEventListener('input',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
+  f.addEventListener('change',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
   /* ?paso=agenda: para quien ya ha dejado el formulario (enlace del WhatsApp de confirmación y del
      segundo mensaje). landing.js enseña el calendario directo; aquí se ajusta el resto de la página. */
   if(new URLSearchParams(location.search).get('paso')==='agenda'){
@@ -944,7 +1069,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   /* DEMO por pestañas: teclado con flechas, evento por vista */
   var tabs=[].slice.call(document.querySelectorAll('.vistas [role=tab]')), vistos={};
   function abre(i,foco){ tabs.forEach(function(t,j){ var on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; document.getElementById('vista-'+j).hidden=!on; });
-    if(foco) tabs[i].focus(); tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
+    if(foco) tabs[i].focus({preventScroll:true});
     var v=tabs[i].getAttribute('data-vista'); if(!vistos[v]){ vistos[v]=1; track(EV+'_demo_vista',{vista:v,pagina:PAG}); }
     if(v==='whatsapp'&&!waIni) waReset(); }
   var au=document.getElementById('voz-audio'); if(au) au.addEventListener('play',function una(){ track(EV+'_demo_audio',{pagina:PAG}); au.removeEventListener('play',una); });
@@ -952,6 +1077,26 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     t.addEventListener('keydown',function(e){ var k=e.key, n=tabs.length;
       if(k==='ArrowRight'){ e.preventDefault(); abre((i+1)%n,true); } else if(k==='ArrowLeft'){ e.preventDefault(); abre((i-1+n)%n,true); }
       else if(k==='Home'){ e.preventDefault(); abre(0,true); } else if(k==='End'){ e.preventDefault(); abre(n-1,true); } }); });
+
+  /* Retoque de UX (Claude Design): «Anterior / Siguiente», posición, CTA final y pestaña activa centrada */
+  (function(){
+    var lista=document.querySelector('#demo .vistas'), nav=document.querySelector('#demo .vista-nav'); if(!lista||!nav) return;
+    var prev=nav.querySelector('[data-prev]'), next=nav.querySelector('[data-next]'), pos=nav.querySelector('.vista-pos'), fin=nav.querySelector('.vista-fin'), prog=document.querySelector('#demo .progreso');
+    function nombre(t){ return t.textContent.replace(/^\s*\d+\s*/,'').trim(); }
+    function actual(){ for(var i=0;i<tabs.length;i++) if(tabs[i].getAttribute('aria-selected')==='true') return i; return 0; }
+    function segs(i){ var h=''; for(var j=0;j<tabs.length;j++) h+='<i'+(j<=i?' class="on"':'')+'></i>'; return h; }
+    function pintar(){ var i=actual(), ultimo=i===tabs.length-1, et=tabs[i].getAttribute('data-etapa')||'';
+      prev.hidden=i===0; if(i>0) prev.textContent='← '+nombre(tabs[i-1]);
+      next.hidden=ultimo; fin.hidden=!ultimo; nav.classList.toggle('ultimo',ultimo); if(!ultimo) next.textContent='Siguiente: '+nombre(tabs[i+1])+' →';
+      pos.innerHTML='<span>'+(i+1)+' de '+tabs.length+' · '+et+'</span><span class="seg" aria-hidden="true">'+segs(i)+'</span>';
+      if(prog) prog.innerHTML='<b>'+et+'</b><span>'+(i+1)+' de '+tabs.length+'</span><span class="seg">'+segs(i)+'</span>';
+      var t=tabs[i]; if(lista.scrollWidth>lista.clientWidth) lista.scrollTo({left:t.offsetLeft-(lista.clientWidth-t.offsetWidth)/2,behavior:quieto?'auto':'smooth'}); }
+    function ir(d){ var i=actual()+d; if(i<0||i>=tabs.length) return; tabs[i].click(); tabs[i].focus({preventScroll:true});
+      var top=lista.getBoundingClientRect().top; if(top<0) window.scrollBy({top:top-90,behavior:quieto?'auto':'smooth'}); }
+    prev.addEventListener('click',function(){ ir(-1); }); next.addEventListener('click',function(){ ir(1); });
+    new MutationObserver(pintar).observe(lista,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+    pintar();
+  })();
 
   /* WhatsApp de ejemplo: ramas con botones; «Por detrás» va apuntando lo que queda en el CRM */
   var chat=document.getElementById('chat'), wlog=document.getElementById('wa-log'), waIni=false, waT=[];
@@ -992,12 +1137,15 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     document.getElementById('huecos').classList.add('on');
   }).catch(function(){});
 
-  /* CTA fijo en móvil */
-  var fijo=document.getElementById('fijo'), fin=document.getElementById('diagnostico');
+  /* CTA fijo en móvil: se oculta mientras se ven los botones de la portada, la demo (tiene su CTA), el diagnóstico o el pie */
+  var fijo=document.getElementById('fijo');
   if('IntersectionObserver' in window){
-    var a=true,b=false; function pinta(){ var on=!a&&!b; fijo.classList.toggle('on',on); document.body.classList.toggle('fijo-on',on); }
-    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
-    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
+    var vistos=[];
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ var k=vistos.indexOf(e.target); if(e.isIntersecting&&k<0) vistos.push(e.target); else if(!e.isIntersecting&&k>=0) vistos.splice(k,1); });
+      var on=vistos.length===0; fijo.classList.toggle('on',on); fijo.inert=!on; document.body.classList.toggle('fijo-on',on);
+    });
+    [document.querySelector('.hero .ctas'),document.getElementById('demo'),document.getElementById('diagnostico'),document.querySelector('footer.pie')].forEach(function(el){ if(el) io.observe(el); });
   }
 })();
 </script>
