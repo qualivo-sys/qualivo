@@ -15,10 +15,10 @@ GUION = [
  ('d3', 'Y quien sí encajaba con el curso… se enfría esperando su turno.'),
  ('cambia', 'La calidad se trabaja en todo el recorrido.'),
  ('p1', 'Un anuncio que habla a quien encaja con cada curso.'),
- ('p2', 'Un formulario con cuatro preguntas que separa a quien está listo.'),
+ ('p2', 'Un formulario con cuatro preguntas que detecta quién tiene intención de compra.'),
  ('p3', 'Una respuesta por WhatsApp en minutos, que resuelve lo básico y recoge lo que falta.'),
- ('p4', 'Y admisiones llama con la ficha delante: qué quiere, qué le preocupa y por dónde empezar.'),
- ('prueba', 'Y cada solicitud tiene su siguiente paso. Nadie se queda esperando a que alguien se acuerde.'),
+ ('voz', 'Y si no contesta, un asistente de voz le llama y le propone hora.'),
+ ('p4', 'Admisiones recibe la ficha con su nivel: sabe a quién llamar primero y qué decirle.'),
  ('cta', 'Si ya inviertes en anuncios para vender formación, toca en Más información y responde cuatro preguntas. Lo vemos en treinta minutos, con tus números.'),
 ]
 EXTRA = {
@@ -26,8 +26,9 @@ EXTRA = {
  'prueba_a': 'En una escuela de aviación, en un mes: diez matrículas y diez veces lo invertido en publicidad.',
  'cta_landing': 'Si tu centro ya invierte en anuncios, pide tu diagnóstico: treinta minutos, con tus números, y vemos dónde se te están quedando las matrículas.',
 }
+# v5 (Maikel 22-oct): más peso a la cualificación, vuelve el asistente de voz, sin la frase de «siguiente paso».
 # marcas finas: (nombre, bloque, palabra)
-MARCAS = [('g2', 'gancho', 'calidad'), ('g1', 'gancho', 'reto'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'lo')]
+MARCAS = [('g2', 'gancho', 'calidad'), ('g1', 'gancho', 'reto'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'lo'), ('v2', 'voz', 'propone'), ('f2', 'p4', 'sabe')]
 COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
