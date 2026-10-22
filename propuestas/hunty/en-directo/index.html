@@ -147,6 +147,8 @@
 .book b{font-size:15px}
 .book .btn{background:#2C7C24;color:#fff;font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 14px;white-space:nowrap}
 .book .btn.grey{background:#ddd;color:#666}
+.book .qty{display:inline-block;border:1px solid #ccc;border-radius:8px;padding:2px 8px;font-size:13.5px;transition:background .3s}
+.book .qty.hl{background:#FFF4D6;border-color:#E2B14A}
 /* pago */
 .pay{padding:14px;display:grid;gap:10px;font-size:13px;color:#222}
 .pay h3{font-size:18px;color:#111}
@@ -462,7 +464,7 @@
   <div class="capb"><span class="n" id="capN">0 / 0</span><p id="cap">Pulsa «Empezar».</p><div class="pg"><i id="capPg"></i></div></div>
 
   <div class="sfoot">
-    <p><b>Qué es real y qué no.</b> Real: las fichas de Río Frío (Robledo del Mazo, Toledo · 26-dic · 350 € · 332,50 € con Prime · señal 35 €) y Valmorisco (Jarandilla de la Vera, Cáceres · 9-ene · 300 € · 280 € con Prime · señal 40 € · 4,3/5 con 4 reseñas · «solo 1 puesto disponible»), comprobadas en hunty.es el 22-oct-2026, y el anuncio A de nuestra propuesta. Inventado: las personas, los mensajes, las horas y todas las cifras de contactos, segmentos y panel. Los textos finales los aprueba Hunty.</p>
+    <p><b>Qué es real y qué no.</b> Real: las fichas de Río Frío (Robledo del Mazo, Toledo · 26-dic · 350 € · 332,50 € con Prime · señal 35 €) y Valmorisco (Jarandilla de la Vera, Cáceres · 9-ene · 300 € · 280 € con Prime · reserva por 40 € · 4,3/5 con 4 reseñas · «¡Solo 1 puesto disponible!»), comprobadas en hunty.es el 22-oct-2026, y el anuncio A de nuestra propuesta. Javier y Pablo son los mismos de la demo del 16-oct: Javier busca 2 puestos. Inventado: las personas, los mensajes, las horas y todas las cifras de contactos, segmentos y panel. Los textos finales los aprueba Hunty.</p>
     <div class="lk"><a href="../recorrido/">Recorrido paso a paso</a><a href="../">Plan del 16-oct</a><a href="../demo/">Demo de WhatsApp y voz</a></div>
     <p>Maikel Echevarría · Qualivo · maikel@qualivo.io · No es una página de Hunty.</p>
   </div>
@@ -567,19 +569,32 @@ function fichaRF(){
   <div class="book"><div><small>Reserva hoy</small><b>35 €</b></div><span class="btn">Reservar</span></div>`;
   $('#web').scrollTop=0;
 }
+function fichaVM(){
+  $('#url').textContent='hunty.es/monterias/monteria-en-valmorisco-1790';
+  $('#web').innerHTML=`<div class="wh"><img src="../assets/logo-white.svg" alt="Hunty"><span>Asesor · WhatsApp</span></div>
+  <div class="fimg" style="background-image:url(${IMG.coto})"><span>La Vera, Cáceres</span></div>
+  <div class="fb"><h3>Montería en Valmorisco</h3><span class="loc">Jarandilla de la Vera, Cáceres · 9 de enero de 2027</span>
+  <div class="pr"><b>300 €</b><span>Precio Prime: 280 €</span></div>
+  <span class="rv">★ 4,3/5 · 4 reseñas de cazadores</span>
+  <dl><dt>Finca</dt><dd>Abierta</dd><dt>Puestos</dt><dd>60</dd><dt>Cupo</dt><dd>Sin cupo</dd><dt>Especies</dt><dd>Jabalí y ciervo</dd><dt>Desayuno y comida</dt><dd>Sí</dd><dt>Último resultado</dt><dd>33 jabalíes, 1 venado y 14 ciervas</dd></dl>
+  <div class="obs" id="vmLeft"><b>¡Solo 1 puesto disponible!</b>Nos pondremos en contacto contigo para enviarte la ubicación la semana de la montería.</div>
+  <p class="rv">Mismo precio que el organizador garantizado.</p></div>
+  <div class="book"><div><small>Puestos</small><b id="vmQty" class="qty">1 puesto</b></div><span class="btn" id="vmBtn">Reservar por 40 €</span></div>`;
+  $('#web').scrollTop=0;
+}
 function checkout(){
-  $('#url').textContent='hunty.es/monterias/monteria-en-valmorisco-1790/reservar';
+  $('#url').textContent='hunty.es/monterias/NWR24E/reservar';
   $('#web').innerHTML=`<div class="wh"><img src="../assets/logo-white.svg" alt="Hunty"><span>Pago seguro</span></div>
-  <div class="pay"><h3>Montería en Valmorisco</h3>
-  <div class="row"><span>Lugar</span><b>Jarandilla de la Vera, Cáceres</b></div>
-  <div class="row"><span>Fecha</span><b>9 de enero de 2027</b></div>
-  <div class="row"><span>Puestos</span><b>1</b></div>
-  <div class="row"><span>Precio del puesto</span><b>300 €</b></div>
-  <div class="row tot"><span>Señal hoy</span><b>40 €</b></div>
+  <div class="pay"><h3>Montería en Río Frío</h3>
+  <div class="row"><span>Lugar</span><b>Robledo del Mazo, Toledo</b></div>
+  <div class="row"><span>Fecha</span><b>26 de diciembre</b></div>
+  <div class="row"><span>Puestos</span><b>2</b></div>
+  <div class="row"><span>Precio del puesto</span><b>350 €</b></div>
+  <div class="row tot"><span>Señal hoy (35 € × 2)</span><b>70 €</b></div>
   <div class="card"><span>Tarjeta •••• 4417</span><span>Cambiar</span></div>
-  <div class="btn" id="payBtn">Pagar 40 €</div>
-  <p style="font-size:11.5px;color:#777">El resto del precio se paga como indica la ficha. Mismo precio que el organizador.</p></div>
-  <div class="ok" id="payOk"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Reserva confirmada</h3><p>Valmorisco · 9 de enero · 1 puesto<br>Te hemos enviado la confirmación por email.</p></div>`;
+  <div class="btn" id="payBtn">Pagar 70 €</div>
+  <p style="font-size:11.5px;color:#777">Después, reserva de 100 € a la organización para confirmar el puesto, como indica la ficha. Mismo precio que el organizador.</p></div>
+  <div class="ok" id="payOk"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Reserva confirmada</h3><p>Río Frío · 26 de diciembre · 2 puestos<br>Te hemos enviado la confirmación por email.</p></div>`;
   $('#web').scrollTop=0;
 }
 function waReset(){$('#waB').innerHTML='';$('#waIn').textContent=''}
@@ -723,83 +738,82 @@ const STEPS=[
   await ev('web','usar_filtro',{provincias:['Toledo','Cáceres'],fechas:'dic-ene',precio_max:400});
   setF('busca','Montería');setF('zona','Toledo, Cáceres');setF('presu','Hasta 400 € el puesto');score(14);
 }},
-/* 4 */ {ch:1,clock:'Día 1 · 19:07',cap:'Abre Río Frío: Montes de Toledo, 26 de diciembre, 350 € el puesto.',run:async()=>{
-  const h=$('#hcRF');h.classList.add('hl');await tap(h);
-  fichaRF();await sleep(400);
-  await ev('web','ver_ficha',{ficha:'NWR24E · Río Frío',precio:350,fecha:'26-dic',visita:1});
-  setF('fichas','Río Frío (1)');score(24);hist('Ve la ficha de Río Frío');
+/* 4 */ {ch:1,clock:'Día 1 · 19:07',cap:'Abre Valmorisco, la que ya miró otras veces: Jarandilla de la Vera, 9 de enero, 300 € el puesto y 4,3 sobre 5.',run:async()=>{
+  const h=$('#hcVM');await scrollTo($('#web'),h.offsetTop-260,800);h.classList.add('hl');await tap(h);
+  fichaVM();await sleep(400);
+  await ev('web','ver_ficha',{ficha:'1790 · Valmorisco',precio:300,fecha:'9-ene',visita:1});
+  setF('fichas','Valmorisco (1)');score(24);hist('Ve la ficha de Valmorisco');
   await scrollTo($('#web'),230,1000);
 }},
-/* 5 */ {ch:1,clock:'Día 1 · 19:09',cap:'Se para en dos cosas: la finca no tiene reseñas y hay que hacer una reserva de 100 € a la organización. Se va sin reservar.',run:async()=>{
-  const w=$('#web');await scrollTo(w,$('#rfObs').offsetTop-160,900);$('#rfObs').classList.add('hl');await sleep(1300);
-  $('#rfRv').classList.add('hl');await sleep(1200);
-  await ev('web','lectura de la ficha',{sección:['observaciones','reseñas'],tiempo:'52 s',clarity:'vuelve 2 veces a «Observaciones»'});
+/* 5 */ {ch:1,clock:'Día 1 · 19:09',cap:'Pero van dos, y la ficha dice que solo queda 1 puesto. Elige 2 puestos, no puede seguir y se va. Hoy, esa visita se pierde.',run:async()=>{
+  const w=$('#web');await scrollTo(w,$('#vmLeft').offsetTop-260,900);$('#vmLeft').classList.add('hl');await sleep(1200);
+  const q=$('#vmQty');q.textContent='2 puestos';q.classList.add('hl');await tap(q);$('#vmBtn').classList.add('grey');$('#vmBtn').textContent='No disponible';await sleep(900);
+  await ev('web','empezar_reserva',{ficha:'1790',puestos:2,resultado:'solo queda 1 puesto'});
   view('home',true);
-  await ev('web','sale sin reservar',{reserva:'no empezada',última_ficha:'NWR24E'});
-  setF('estado','Duda: reseñas y reserva al organizador');next('Ver si vuelve a la ficha');
+  await ev('web','sale sin reservar',{reserva:'no completada',motivo:'busca 2 puestos',última_ficha:'1790'});
+  setF('estado','Busca 2 puestos · Valmorisco solo tiene 1');setF('presu','Hasta 400 € · 2 puestos');next('Ofrecerle lo más parecido con sitio para dos');
 }},
-/* 6 */ {ch:2,clock:'Día 1 · 22:40',cap:'Por la noche vuelve a la misma ficha. Es su tercera visita y sigue sin reservar. Entra en el público de retargeting de «vio una ficha 2 o más veces».',run:async()=>{
-  phoneTime('22:40');fichaRF();view('web');await sleep(400);await scrollTo($('#web'),$('#rfObs').offsetTop-160,900);
-  await ev('web','ver_ficha',{ficha:'NWR24E · Río Frío',visita:3});
-  setF('fichas','Río Frío (3)');score(41);hist('3.ª visita a Río Frío');
+/* 6 */ {ch:2,clock:'Día 1 · 22:40',cap:'Por la noche vuelve a Valmorisco. Es su tercera visita y sigue con 1 puesto. Entra en el público de recuerdo de «empezó la reserva y no pagó».',run:async()=>{
+  phoneTime('22:40');fichaVM();view('web');await sleep(400);await scrollTo($('#web'),$('#vmLeft').offsetTop-260,900);
+  await ev('web','ver_ficha',{ficha:'1790 · Valmorisco',visita:3});
+  setF('fichas','Valmorisco (3)');score(41);hist('3.ª visita a Valmorisco');
   view('home',true);
-  await ev('meta','Entra en un público de recuerdo',{público:'vio una ficha 2+ veces · días 1-7',anuncio:'dinámico de catálogo, desde la ficha',límite:'2-3 impactos por semana'});
-  next('Anuncio de Río Frío que responda a su duda');
+  await ev('meta','Entra en un público de recuerdo',{público:'empezó la reserva y no pagó · 72 h',anuncio:'catálogo: lo más parecido a lo que miró',límite:'2-3 impactos por semana'});
+  next('Anuncio de una montería parecida, con la puerta al asesor');
 }},
-/* 7 */ {ch:2,clock:'Día 2 · 13:40',cap:'Al día siguiente le sale Río Frío, montado solo desde la ficha del catálogo, con la puerta abierta a su duda: «¿Dudas? Te contestamos por WhatsApp».',run:async()=>{
+/* 7 */ {ch:2,clock:'Día 2 · 13:40',cap:'Al día siguiente le sale la más parecida a Valmorisco: Río Frío, también de diciembre-enero y por debajo de 400 €. El anuncio se monta solo desde la ficha.',run:async()=>{
   phoneTime('13:40');igRT();view('ig');await sleep(500);
   await scrollTo($('#igFeed'),$('#adR').offsetTop-50,1200);
-  await ev('meta','Anuncio dinámico de catálogo',{catálogo:'fichas de hunty.es',producto:'NWR24E',texto:'Río Frío · 26 dic · 350 € el puesto',se_retira:'cuando pasa la fecha o se llena'});
+  await ev('meta','Anuncio dinámico de catálogo',{catálogo:'fichas de hunty.es',criterio:'parecidas a 1790: montería · dic-ene · ≤ 400 €',producto:'NWR24E · Río Frío',se_retira:'cuando pasa la fecha o se llena'});
 }},
-/* 8 */ {ch:3,clock:'Día 2 · 13:41',cap:'Toca «Enviar mensaje» y escribe. El mensaje lleva la cacería que estaba mirando, así que nadie empieza de cero.',run:async()=>{
+/* 8 */ {ch:3,clock:'Día 2 · 13:41',cap:'Toca «Enviar mensaje» y escribe. El mensaje lleva la cacería del anuncio, y Clara recibe todo lo que hizo ayer.',run:async()=>{
   const c=$('#rtCta');c.classList.add('hl');await tap(c);
   phoneTime('13:41');waReset();view('wa',true);await sleep(400);
-  await waType('Hola, tengo una duda sobre Río Frío (26-dic)');
-  await waMsg('out','Hola, tengo una duda sobre Río Frío (26-dic)','13:41');
+  await waType('Hola, somos dos. ¿Río Frío (26-dic) tiene sitio?');
+  await waMsg('out','Hola, somos dos. ¿Río Frío (26-dic) tiene sitio?','13:41');
   await ev('web','abrir_whatsapp_asesor',{origen:'anuncio dinámico NWR24E',ficha:'NWR24E'});
-  await ev('ac','Contacto creado y unido a su historial',{whatsapp:'+34 6•• ••• •12',historial:'3 visitas a Río Frío, filtros Toledo/Cáceres ≤ 400 €',etiquetas:['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres']});
+  await ev('ac','Contacto creado y unido a su historial',{whatsapp:'+34 6•• ••• •12',historial:'3 visitas a Valmorisco, reserva de 2 puestos sin completar',etiquetas:['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres','grupo-2-puestos']});
   identify('Javier','WhatsApp +34 6•• ••• •12 · inventado');setF('canal','WhatsApp');score(58);
-  ['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres'].forEach(t=>tag(t));hist('Escribe por WhatsApp');
-  await ev('orq','Conversación nueva → Clara',{contexto:'ficha NWR24E, 3 visitas, dudas en observaciones y reseñas',reglas:'cualificación y textos aprobados por Hunty'});
+  ['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres','grupo-2-puestos'].forEach(t=>tag(t));hist('Escribe por WhatsApp');
+  await ev('orq','Conversación nueva → Clara',{contexto:'2 puestos · Valmorisco sin sitio para dos · llega por Río Frío',reglas:'cualificación y textos aprobados por Hunty'});
 }},
-/* 9 */ {ch:3,clock:'Día 2 · 13:41',cap:'Clara contesta en menos de un minuto, solo con datos de la ficha. Javier pregunta lo que le frenó ayer.',run:async()=>{
-  await waMsg('in','¡Hola, Javier! Soy Clara, de Hunty. Río Frío es en Robledo del Mazo (Toledo), el 26 de diciembre, a 350 € el puesto (332,50 € con Prime). Para reservar se paga una señal de 35 €.','13:41','Clara · Hunty');
-  await ev('clara','Responde con datos de la ficha',{fuente:'ficha NWR24E',tiempo_de_respuesta:'38 s'});
+/* 9 */ {ch:3,clock:'Día 2 · 13:42',cap:'Clara contesta en menos de un minuto y solo con datos de la ficha. No promete plazas: dice lo que dice la ficha.',run:async()=>{
+  await waMsg('in','¡Hola, Javier! Soy Clara, de Hunty. Río Frío es en Robledo del Mazo (Toledo), el 26 de diciembre, a 350 € el puesto (332,50 € con Prime). La ficha no marca límite de puestos, así que puedes elegir 2 al reservar. La señal es de 35 € por puesto.','13:42','Clara · Hunty');
+  await ev('clara','Responde con datos de la ficha',{fuente:'ficha NWR24E',tiempo_de_respuesta:'38 s',no_hace:'confirmar plazas que la ficha no indica'});
   await waType('No veo reseñas. ¿Y qué es lo de los 100 € a la organización?');
   await waMsg('out','No veo reseñas. ¿Y qué es lo de los 100 € a la organización?','13:42');
 }},
-/* 10 */ {ch:3,clock:'Día 2 · 13:43',cap:'Clara resuelve las dos dudas y, como no tiene reseñas, le ofrece una finca con historial que encaja con lo que busca: Valmorisco.',run:async()=>{
-  await ev('orq','Clara busca alternativas en el catálogo',{criterio:'montería · Toledo o Cáceres · dic-ene · ≤ 400 € · con reseñas',resultado:'Valmorisco (1790) · 4,3/5 · queda 1 puesto'});
-  await waMsg('in','Es la primera temporada que esta organización caza Río Frío, por eso aún no tiene reseñas. Y sí: una vez reservada, hay que hacer una reserva de 100 € a la organización para confirmar el puesto.<br><br>Si prefieres una finca con historial: <b>Valmorisco</b> (Jarandilla de la Vera, Cáceres), el 9 de enero a 300 € el puesto, con 4,3/5 en 4 reseñas. La ficha dice que queda 1 puesto.','13:43','Clara · Hunty');
-  setF('fichas','Río Frío (3) · Valmorisco');score(74);
-  await waType('Voy solo. Me quedo con Valmorisco');
-  await waMsg('out','Voy solo. Me quedo con Valmorisco','13:44');
-  setF('estado','Quiere reservar Valmorisco');tag('interes-valmorisco-1790');next('Enviar enlace de reserva');
+/* 10 */ {ch:3,clock:'Día 2 · 13:43',cap:'Resuelve las dos dudas que frenan a cualquiera con esta ficha: por qué no tiene reseñas y qué son los 100 € a la organización.',run:async()=>{
+  await waMsg('in','Es la primera temporada que esta organización caza Río Frío, por eso aún no tiene reseñas. Y sí: una vez reservada, hay que hacer una reserva de 100 € a la organización para confirmar el puesto. Es finca abierta, 50 puestos y sin cupo, con desayuno y comida.<br><br>¿Quieres que Pablo, del equipo, te llame antes, o prefieres el enlace para reservar?','13:43','Clara · Hunty');
+  setF('fichas','Valmorisco (3) · Río Frío');score(74);
+  await waType('El enlace, reservamos los dos');
+  await waMsg('out','El enlace, reservamos los dos','13:44');
+  setF('estado','Quiere reservar Río Frío para 2');tag('interes-riofrio-NWR24E');next('Enviar enlace de reserva');
 }},
-/* 11 */ {ch:4,clock:'Día 2 · 13:44',cap:'Clara le manda el enlace directo a la reserva. Paga la señal de 40 € desde el móvil.',run:async()=>{
-  await waMsg('in','Perfecto. Aquí puedes reservar tu puesto con la señal de 40 €:<span class="lk">hunty.es/monterias/monteria-en-valmorisco-1790</span>','13:44','Clara · Hunty');
+/* 11 */ {ch:4,clock:'Día 2 · 13:44',cap:'Clara le manda el enlace directo a la reserva. Elige 2 puestos y paga la señal desde el móvil.',run:async()=>{
+  await waMsg('in','Aquí lo tienes. Elige 2 puestos y paga la señal:<span class="lk">hunty.es/monterias/NWR24E</span>','13:44','Clara · Hunty');
   const lk=[...document.querySelectorAll('#waB .lk')].pop();await tap(lk);phoneTime('13:44');
   checkout();view('web');await sleep(500);
-  await ev('web','empezar_reserva',{ficha:'1790 · Valmorisco',puestos:1});
+  await ev('web','empezar_reserva',{ficha:'NWR24E · Río Frío',puestos:2});
   await scrollTo($('#web'),120,700);await tap($('#payBtn'));
   $('#payOk').classList.add('on');await sleep(600);
-  await ev('web','reserva_pagada',{ficha:'1790',señal:40,precio:300,camino:'anuncio A1 → landing → retargeting → WhatsApp con Clara'});
+  await ev('web','reserva_pagada',{ficha:'NWR24E',puestos:2,señal:70,precio:700,camino:'anuncio A1 → landing → Valmorisco sin sitio → retargeting → WhatsApp con Clara'});
 }},
 /* 12 */ {ch:4,clock:'Día 2 · 13:45',cap:'La reserva pagada vuelve a Meta y a ActiveCampaign. Meta aprende de quien reserva, no de quien hace clic. Y Javier deja de ver anuncios de recuerdo.',run:async()=>{
-  await ev('meta','API de conversiones · Purchase',{evento:'Purchase',valor:'300 EUR',id_evento:'el mismo que el píxel (sin duplicar)',origen:'a1 + retargeting'});
+  await ev('meta','API de conversiones · Purchase',{evento:'Purchase',valor:'700 EUR',id_evento:'el mismo que el píxel (sin duplicar)',origen:'a1 + retargeting'});
   await ev('meta','Sale de los públicos de recuerdo',{motivo:'ha reservado'});
-  await ev('ac','Etiquetas actualizadas',{añade:['cliente-monteria','reserva-2026-27','valmorisco-1790'],quita:['retargeting-ficha']});
-  ['cliente-monteria','reserva-2026-27','valmorisco-1790'].forEach(t=>tag(t));untag('interes-valmorisco-1790');
-  setF('estado','Cliente · Valmorisco, 9 de enero');score(100);hist('Reserva pagada · 40 €');
-  await ev('bruno','¿Candidato a Prime?',{jornadas_este_año:1,ahorro_en_esta:'20 €',decisión:'todavía no: se ofrece a partir de la 2.ª jornada'});
+  await ev('ac','Etiquetas actualizadas',{añade:['cliente-monteria','reserva-2026-27','riofrio-NWR24E'],quita:['retargeting-reserva-empezada']});
+  ['cliente-monteria','reserva-2026-27','riofrio-NWR24E'].forEach(t=>tag(t));untag('interes-riofrio-NWR24E');
+  setF('estado','Cliente · Río Frío, 26 de diciembre, 2 puestos');score(100);hist('Reserva pagada · 70 €');
+  await ev('bruno','¿Candidato a Prime?',{jornadas_este_año:1,ahorro_en_esta:'35 € (2 puestos)',decisión:'todavía no: se ofrece a partir de la 2.ª jornada'});
   next('Acompañarle antes de la jornada y ofrecerle un aviso');
 }},
 /* 13 */ {ch:5,clock:'Día 2 · 13:46',cap:'Antes de despedirse, Clara le ofrece un aviso. Javier se queda en la base con lo que busca, para la próxima.',run:async()=>{
   phoneTime('13:46');view('wa',true);await sleep(300);
-  await waMsg('in','Hecho, Javier. Te llega la confirmación por email. ¿Quieres que te avise cuando salgan más monterías en Toledo o Cáceres hasta 400 €? Como mucho, un aviso por semana.','13:46','Clara · Hunty');
+  await waMsg('in','Hecho, Javier. Te llega la confirmación por email. ¿Quieres que te avise cuando salgan monterías en Toledo o Cáceres con sitio para dos y hasta 400 €? Como mucho, un aviso por semana.','13:46','Clara · Hunty');
   await waType('Sí, avísame');
   await waMsg('out','Sí, avísame','13:46');
-  await ev('ac','Aviso creado',{modalidad:'montería',provincias:['Toledo','Cáceres'],fechas:'dic-feb',presupuesto:'≤ 400 €',canal:'WhatsApp',consentimiento:'sí · 13:46'});
+  await ev('ac','Aviso creado',{modalidad:'montería',provincias:['Toledo','Cáceres'],puestos:2,presupuesto:'≤ 400 €',canal:'WhatsApp',consentimiento:'sí · 13:46'});
   tag('aviso-monteria-to-cc');hist('Crea un aviso de montería');next('Avisarle cuando salga una ficha que encaje');
 }},
 /* 14 */ {ch:6,clock:'Día 9 · 10:00',cap:'Ahora, la base de clientes. Cuando se publica una ficha, la web avisa y el agente de emails la lee. Lo hacemos con Río Frío, que es real.',run:async()=>{
