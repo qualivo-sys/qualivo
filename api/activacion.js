@@ -632,6 +632,17 @@ async function handler(req, res) {
     console.error('[activacion] reenganche falló:', err && err.message);
   }
 
+  // Vigía del primer mensaje (22-oct): lead en activación con el horario abierto
+  // y más de 15 min sin WhatsApp → aviso a Maikel. Con la lista recién leída,
+  // para no avisar de uno al que esta misma vuelta acaba de escribir.
+  try {
+    const frescos = await A.buscarPorEtiqueta('activacion', 400);
+    const vg = await require('./_vigia-primer-mensaje.js').vuelta(frescos);
+    if (vg.pendientes) resumen.vigia = vg;
+  } catch (err) {
+    console.error('[activacion] vigía:', err && err.message);
+  }
+
   console.log('[activacion]', JSON.stringify(resumen));
   return res.status(200).json({ ok: true, resumen: resumen });
 };
