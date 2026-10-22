@@ -730,6 +730,10 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .sp-c i{font-style:normal;font-weight:900;color:var(--verde);font-size:20px}
 .sp-l{font-size:14.5px;color:var(--gris);margin-top:8px}
 .sp-l a{color:var(--verde);font-weight:800}
+.hero .sectores{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;margin-top:14px;font-size:14.5px}
+.hero .sectores small{font-size:13px;font-weight:700;color:var(--gris)}
+.hero .sectores a{color:var(--verde);font-weight:800;text-decoration:none}
+.hero .sectores a:hover{text-decoration:underline}
 .demo-sector{margin-top:12px;font-size:15px;color:#C9CCD2}
 .demo-sector a{color:var(--amarillo);font-weight:800}
 @media(max-width:560px){.sp-c{grid-template-columns:84px minmax(0,1fr) auto;gap:10px}.sp-c img{width:84px;height:48px}.sp-c b{font-size:15px}}
@@ -763,15 +767,17 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
       <div class="hero-prueba"><span>Han trabajado con Qualivo</span><div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="eager" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/selectra.webp" alt="Selectra" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" height="30" loading="eager" decoding="async"></div></div>
+      <p class="sectores"><small>Por sector:</small><a href="/formacion/" data-cta="sector-formacion">Formación</a><a href="/reformas/" data-cta="sector-reformas">Reformas</a><a href="/clinicas/" data-cta="sector-clinicas">Clínicas</a><a href="/growth-b2b/" data-cta="sector-b2b">Servicios B2B</a></p>
     </div>
 
-    <!-- Portada genérica: lleva a cada sector (vídeo y demo propios). El vídeo del sistema completo irá aquí cuando esté. -->
-    <div class="sector-pick" id="sectores">
-      <p class="sp-t">Mira cómo funciona en tu sector</p>
-      <a class="sp-c" href="/formacion/" data-cta="sector-formacion"><img src="/assets/video/qualivo-sistema-formacion-h-poster.jpg" alt="" width="160" height="90" loading="eager" decoding="async"><span><b>Academias y centros de formación</b><small>Del primer anuncio a la matrícula · vídeo de 70 s y demo</small></span><i aria-hidden="true">→</i></a>
-      <a class="sp-c" href="/reformas/" data-cta="sector-reformas"><img src="/assets/video/qualivo-sistema-reformas-h-poster.jpg" alt="" width="160" height="90" loading="eager" decoding="async"><span><b>Reformas, construcción e instalaciones</b><small>Del anuncio al presupuesto aceptado · vídeo de 67 s y demo</small></span><i aria-hidden="true">→</i></a>
-      <p class="sp-l">También trabajamos con <a href="/clinicas/" data-cta="sector-clinicas">clínicas</a> y <a href="/growth-b2b/" data-cta="sector-b2b">servicios B2B</a>.</p>
-    </div>
+    <!-- VSL: YouTube oculto en modo sin cookies; el reproductor solo se carga al pulsar. -->
+    <figure class="vsl" id="vsl" data-embed="https://www.youtube-nocookie.com/embed/WrWcO7SwYKY?rel=0&amp;playsinline=1">
+      <button type="button" class="vsl-play" aria-label="Ver el vídeo (5:38): cómo convertimos más contactos en clientes">
+        <img src="/assets/img/home/vsl-portada.jpg" alt="100 contactos… ¿y clientes? Vídeo de Qualivo de 5 minutos" width="1280" height="720" fetchpriority="high">
+        <span class="vsl-dur" aria-hidden="true">5:38</span>
+      </button>
+      <figcaption>Maikel, fundador de Qualivo, te cuenta en 5 minutos cómo lo hacemos. Con subtítulos.</figcaption>
+    </figure>
   </div>
 </header>
 
@@ -1187,9 +1193,15 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   /* movimiento discreto: subrayado, barras, cifras que cuentan, entradas suaves */
   var hero=document.getElementById('hero'), dash=document.getElementById('dash');
 
-  /* vídeo del sistema: inicio y final */
-  var vid=document.getElementById('vid');
-  if(vid){ vid.addEventListener('play',function una(){ track(EV+'_video_play',{video:'None',pagina:PAG}); vid.removeEventListener('play',una); }); vid.addEventListener('ended',function(){ track(EV+'_video_fin',{video:'None',pagina:PAG}); }); }
+  /* VSL: el reproductor de YouTube (sin cookies) se carga al pulsar; sin autoplay con sonido antes del clic. */
+  var vsl=document.getElementById('vsl');
+  if(vsl){ vsl.querySelector('.vsl-play').addEventListener('click',function(){
+    var src=vsl.getAttribute('data-embed'); if(!src) return;
+    var marco=document.createElement('div'), fr=document.createElement('iframe'); marco.className='vsl-marco';
+    fr.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1'; fr.title='Vídeo: cómo convertimos más contactos en clientes';
+    fr.allow='autoplay; fullscreen; picture-in-picture; encrypted-media'; fr.allowFullscreen=true; marco.appendChild(fr);
+    this.replaceWith(marco); track(EV+'_vsl_play',{pagina:PAG});
+  }); }
   requestAnimationFrame(function(){ hero.classList.add('on'); });
   alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
   document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
