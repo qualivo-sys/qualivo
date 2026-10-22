@@ -16,6 +16,7 @@ html,body{background:#000}
 .rot i{font-style:normal;color:#F4CC38}
 .rot small{display:block;font-family:Mont;font-weight:800;font-size:30px;letter-spacing:.16em;color:#27BDB1;margin-bottom:14px}
 #sector{position:absolute;left:0;right:0;top:290px;text-align:center;z-index:30;opacity:0}
+#sector p{font-family:Anton;font-size:62px;line-height:1.05;color:#FAF7F0;margin-top:22px;text-shadow:0 4px 18px rgba(0,0,0,.6)}
 #sector span{display:inline-block;background:#F4CC38;color:#08090C;font-family:Anton;font-size:54px;letter-spacing:.06em;padding:10px 30px 12px;border-radius:14px}
 /* ventana de pantalla (tarjeta) */
 .ven{position:absolute;left:90px;width:900px;top:500px;height:880px;border-radius:30px;overflow:hidden;background:#FAF7F0;box-shadow:0 30px 80px rgba(0,0,0,.5)}
@@ -95,16 +96,16 @@ html,body{background:#000}
 .escribe{align-self:flex-start;background:#1F2C33;border-radius:20px;padding:20px 24px;display:flex;gap:9px;opacity:0;position:absolute;left:24px}
 .escribe i{width:13px;height:13px;border-radius:50%;background:#8696A0;display:block}
 /* ficha en vivo */
-.fi{padding:28px 32px;color:#101319}
-.fi-h{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px}
+.fi{padding:22px 30px;color:#101319}
+.fi-h{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:14px}
 .fi-h h3{font-size:35px;font-weight:900;line-height:1.15}.fi-h p{font-size:20px;color:#7A7C82;font-weight:600;margin-top:6px}
 .nivel{width:86px;height:86px;border-radius:18px;background:#0E7C74;color:#fff;font-weight:900;font-size:52px;display:flex;align-items:center;justify-content:center;flex:none;opacity:0}
 .notas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
 .nota{background:#fff;border:2px solid #ECE6DA;border-radius:16px;padding:16px 18px}
 .nota small{font-size:18px;font-weight:800;color:#5A5E66;text-transform:uppercase;letter-spacing:.06em}
-.nota b{display:block;font-size:46px;font-weight:900;margin:4px 0 8px}.nota b em{font-style:normal;font-size:22px;color:#7A7C82}
+.nota b{display:block;font-size:38px;font-weight:900;margin:2px 0 6px}.nota b em{font-style:normal;font-size:22px;color:#7A7C82}
 .br{height:12px;background:#ECE6DA;border-radius:999px;overflow:hidden}.br i{display:block;height:100%;background:#0E7C74;width:0}
-.campo{background:#fff;border:2px solid #ECE6DA;border-radius:14px;padding:12px 18px;margin-bottom:12px;opacity:0}
+.campo{background:#fff;border:2px solid #ECE6DA;border-radius:14px;padding:9px 18px;margin-bottom:10px;opacity:0}
 .campo dt{font-size:18px;font-weight:800;color:#7A7C82;letter-spacing:.1em;text-transform:uppercase}
 .campo dd{font-size:28px;font-weight:700;margin-top:2px}
 .campo.sig{background:#FDF1C7;border-color:#F0D98A}
@@ -118,9 +119,15 @@ html,body{background:#000}
 .hy .ac{font-size:19px;color:#0E7C74;font-weight:800}
 .pr{font-size:19px;font-weight:800;padding:7px 14px;border-radius:999px;white-space:nowrap}
 .pr.u{background:#C2410C;color:#fff}.pr.al{background:#FDF1C7;color:#8A5A00}.pr.me{background:#ECE6DA;color:#5A5E66}
+.real{position:absolute;left:0;right:0;bottom:0;background:#08090C;color:#FAF7F0;padding:16px 28px 18px;border-top:6px solid #F4CC38;opacity:0}
+.real small{display:block;font-weight:800;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#F4CC38;margin-bottom:8px}
+.real b{display:block;font-family:Anton;font-weight:400;font-size:44px;line-height:1.05;text-transform:uppercase}
+.real b i{font-style:normal;color:#F4CC38}
+.real span{display:block;font-size:20px;font-weight:600;color:#AEB5BF;margin-top:8px}
+#s0 .clip{top:530px}#s0 .notis{top:600px}
 /* 4:5 (?f=45): mismo montaje en 1080x1350 */
 #e.v45{height:1350px}
-.v45 #sector{top:60px}.v45 .rot{top:60px}
+.v45 #sector{top:60px}.v45 #s0 .clip{top:270px!important;height:840px!important}.v45 #s0 .notis{top:330px}.v45 #sector p{font-size:56px;margin-top:16px}.v45 .rot{top:60px}
 .v45 .ven{top:230px}
 .v45 .clip{top:220px!important;height:880px!important}.v45 .clip img{height:1125px;margin-top:-120px}
 .v45 #sub{top:1150px}
@@ -133,7 +140,7 @@ html,body{background:#000}
 #logo p{font-family:Anton;font-size:48px;color:#F4CC38;letter-spacing:.06em;margin-top:30px}
 </style>
 <div id="e">
-  <div id="sector"><span>CENTROS DE FORMACIÓN</span></div>
+  <div id="sector"><span>CENTROS DE FORMACIÓN</span><p id="filtro">¿Ya invertís en publicidad?</p></div>
 
   <!-- S0 · móvil con notificaciones -->
   <div class="sc" id="s0"><div class="clip"><img id="c-movil"></div>
@@ -203,9 +210,9 @@ html,body{background:#000}
           <div class="nota"><small>Qué hace · interés</small><b id="n-h">0<em>/10</em></b><div class="br"><i id="b-h"></i></div></div></div>
         <div class="campo"><dt>Objetivo</dt><dd>Formarse para cambiar de puesto</dd></div>
         <div class="campo"><dt>Disponibilidad</dt><dd>Martes y jueves de 18:30 a 20:00</dd></div>
-        <div class="campo"><dt>Pendiente</dt><dd>Metodología y opciones de pago</dd></div>
         <div class="campo sig"><dt>Siguiente paso</dt><dd>Llamada del miércoles a las 16:00: explicar metodología y pago</dd></div>
-      </div></div></div>
+      </div>
+      <div class="real" id="real"><small>Caso real · un mes de campaña</small><b>10 matrículas en un mes · <i>10,2 veces lo invertido</i></b><span>Escuela de aviación · medido en el CRM del centro</span></div></div></div>
 
   <!-- S11 · Qué hacer hoy en vivo -->
   <div class="sc" id="s11"><div class="rot">Cada solicitud, <i>con su siguiente paso</i></div>
@@ -277,7 +284,7 @@ window.setT=function(t){
   const fr=nm(t,S.s5[0]+.5,S.s5[1]-.5); $('c-sofa').style.filter=`saturate(${1-.55*fr}) hue-rotate(${18*fr}deg) brightness(${1-.25*fr})`;
   show($('frio'),nm(t,S.s5[0]+.8,S.s5[0]+1.1),20); $('r5b').style.opacity=nm(t,S.s5[0]+2.6,S.s5[0]+2.9);
   // S6
-  document.querySelectorAll('.paso').forEach((p,i)=>show(p,nm(t,S.s6[0]+.6+i*.45,S.s6[0]+.85+i*.45),20));
+  document.querySelectorAll('.paso').forEach((p,i)=>show(p,nm(t,S.s6[0]+i*.5,S.s6[0]+.2+i*.5),20));
   // S7
   $('ad').style.transform=`translateY(${(1-out(nm(t,S.s7[0],S.s7[0]+.4)))*200}px)`;
   // S8: el formulario se rellena tocando cada opción
@@ -296,6 +303,7 @@ window.setT=function(t){
   $('n-q').innerHTML=Math.round(7*nq)+'<em>/10</em>'; $('b-q').style.width=(70*nq)+'%'; $('n-h').innerHTML=Math.round(9*nh)+'<em>/10</em>'; $('b-h').style.width=(90*nh)+'%';
   const nv=nm(t,a10+1.7,a10+1.95); $('nivel').style.opacity=nv; $('nivel').style.transform=`scale(${1.6-.6*out(nv)})`;
   document.querySelectorAll('.campo').forEach((c,i)=>show(c,nm(t,a10+2.1+i*.75,a10+2.35+i*.75),14));
+  show($('real'),nm(t,a10+3.8,a10+4.1),60);
   // S11: la lista se ordena por prioridad y salta el «Urgente»
   const a11=S.s11[0], ord=nm(t,a11+1.6,a11+2.4), hy=[...document.querySelectorAll('#hys .hy')];
   hy.forEach((e,i)=>{ const y0=+e.dataset.y0*124, y1=+e.dataset.y1*124; show(e,nm(t,a11+.2+i*.18,a11+.4+i*.18),0); e.style.top=(y0+(y1-y0)*io(ord))+'px';
