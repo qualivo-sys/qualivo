@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty en directo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Simulación en directo para la reunión con Hunty del 23-oct: el móvil del cazador, lo que pasa por detrás y la ficha del contacto, sincronizados paso a paso. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--con:#0F170D;--con-ink:#D7E3D0;--con-mute:#7F8F78}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--con:#080D07}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--con:#080D07}
+.instant *,.instant *::before,.instant *::after{transition:none!important;animation-duration:0s!important;animation-delay:0s!important}
+
+/* barra de control */
+.live{max-width:1560px;margin-inline:auto;padding:14px 16px 24px;display:grid;gap:12px}
+.live > *{min-width:0}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 12px;box-shadow:var(--shadow)}
+.ctl h1{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;line-height:1.1;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.sim{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:#C9860A;color:#fff;border-radius:6px;padding:3px 7px}
+.rec{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--bad);letter-spacing:.08em}
+.rec i{width:8px;height:8px;border-radius:50%;background:var(--bad);animation:blink 1.4s infinite}
+.paused .rec i{animation:none;opacity:.35}
+@keyframes blink{50%{opacity:.25}}
+.chaps{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1 1 420px;min-width:0}
+.chaps::-webkit-scrollbar{display:none}
+.chaps button{font:inherit;font-size:12.5px;font-weight:600;white-space:nowrap;border:1px solid var(--line);background:var(--surface-2);color:var(--muted);border-radius:99px;padding:6px 11px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.chaps button.done{color:var(--ink-2)}
+.chaps button.on{background:var(--f700);border-color:var(--f700);color:#fff}
+.clock{font-family:var(--mono);font-size:13px;font-weight:500;background:var(--f900);color:#BFE3B6;border-radius:10px;padding:7px 11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:6px;align-items:center}
+.btns button{font:inherit;font-weight:650;font-size:13px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:10px;height:36px;min-width:36px;padding:0 10px;cursor:pointer;display:inline-grid;place-items:center}
+.btns button:hover{border-color:var(--accent)}
+.btns #bPlay{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);min-width:96px}
+.btns .i{width:16px;height:16px;vertical-align:-3px}
+
+/* escenario */
+.stage{display:grid;grid-template-columns:minmax(300px,360px) minmax(0,1fr) minmax(0,1.05fr);gap:14px;align-items:stretch;position:relative}
+.stage > *{min-width:0}
+.stage{z-index:0}
+.colh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;min-height:20px}
+.colh b{color:var(--ink);font-weight:500}
+.colh .tagr{font-size:10px;letter-spacing:.06em;text-transform:none;border:1px solid var(--line);border-radius:6px;padding:1px 6px;white-space:nowrap}
+
+/* móvil */
+.phone{width:100%;max-width:360px;margin-inline:auto;background:#0E120D;border-radius:46px;padding:11px;box-shadow:0 0 0 1px #2b3328,0 30px 60px -20px rgba(12,33,9,.55),inset 0 0 0 2px #262c24;position:relative}
+.scr{position:relative;height:min(660px,calc(100vh - 292px));min-height:500px;border-radius:35px;overflow:hidden;background:#fff;color:#111;isolation:isolate}
+.sbar{position:absolute;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:12px 26px 0;font-size:13px;font-weight:650;height:44px;color:#111;pointer-events:none;transition:color .3s}
+.sbar.light{color:#fff}
+.sbar .isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:100px;height:28px;border-radius:20px;background:#000}
+.sbar .sic{display:flex;gap:5px;align-items:center}
+.sbar .sic i{display:inline-block;width:17px;height:10px;border:1.5px solid currentColor;border-radius:3px;position:relative}
+.sbar .sic i::after{content:"";position:absolute;inset:1.5px 4px 1.5px 1.5px;background:currentColor;border-radius:1px}
+.v{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateX(18px);transition:opacity .4s,transform .45s cubic-bezier(.2,.7,.2,1);pointer-events:none;background:#fff}
+.v.on{opacity:1;transform:none;pointer-events:auto}
+.vs{position:relative;flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.vs::-webkit-scrollbar{display:none}
+.tap{position:absolute;z-index:50;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(124,200,115,.45);border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 6px rgba(124,200,115,.25);pointer-events:none;opacity:0;transform:scale(.4)}
+.tap.go{animation:tapA .65s ease-out}
+@keyframes tapA{0%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.5)}}
+.notif{position:absolute;left:8px;right:8px;top:8px;z-index:40;background:rgba(245,245,245,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px;padding:11px 13px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);transform:translateY(-130%);transition:transform .5s cubic-bezier(.2,.8,.2,1);color:#111}
+.notif.on{transform:none}
+.notif .ap{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
+.notif .ap.wa{background:#25D366}.notif .ap.ml{background:#1A73E8}.notif .ap.ph{background:#34C759}
+.notif b{display:block;font-size:13px}.notif small{float:right;color:#777;font-size:11px;font-weight:500}
+.notif p{font-size:12.5px;line-height:1.35;color:#333;margin-top:1px}
+
+/* vista: Instagram */
+.ig-top{padding:50px 14px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;background:#fff}
+.ig-top b{font-family:"Fraunces",Georgia,serif;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.ig-top span{display:flex;gap:14px}
+.ig-top svg{width:22px;height:22px;fill:none;stroke:#111;stroke-width:1.8}
+.post{border-bottom:1px solid #eee;background:#fff}
+.post .h{display:flex;align-items:center;gap:9px;padding:9px 12px}
+.post .h .av{width:32px;height:32px;border-radius:50%;flex:none;background:#2C7C24 url(../assets/logo-white.svg) center/74% no-repeat;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #d62976}
+.post .h .av.g{background:#8A6A3F;box-shadow:none}
+.post .h b{font-size:13px;display:block;line-height:1.2}
+.post .h small{font-size:11.5px;color:#666}
+.post .img{position:relative;aspect-ratio:4/5;background:#1a2a16 center/cover no-repeat}
+.post .img.sq{aspect-ratio:1/1}
+.post .cta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:13.5px;font-weight:650;color:#0a58ca;border-bottom:1px solid #f0f0f0}
+.post .cta.hl{background:#EAF2FF}
+.post .acts{display:flex;gap:14px;padding:9px 12px 4px}
+.post .acts svg{width:22px;height:22px;fill:none;stroke:#111;stroke-width:1.8}
+.post .cap{font-size:12.5px;padding:2px 12px 12px;line-height:1.45;color:#222}
+.post .cap b{margin-right:5px}
+.dyn{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(10,30,8,.92) 100%)}
+.dyn .lg{position:absolute;top:14px;left:14px;height:16px}
+.dyn .pill{position:absolute;top:12px;right:12px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,.5);border-radius:99px;padding:3px 9px}
+.dyn small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#BFE3B6;font-weight:600}
+.dyn h4{font-size:24px;font-weight:700;line-height:1.1;margin:4px 0 6px;letter-spacing:-.01em}
+.dyn p{font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.4}
+.dyn .pr{display:flex;gap:8px;align-items:baseline;margin-top:8px}
+.dyn .pr b{font-size:22px}
+.dyn .pr span{font-size:12px;color:#BFE3B6}
+.dyn .q{margin-top:10px;background:#25D366;color:#073B12;font-weight:700;font-size:13px;border-radius:99px;padding:8px 12px;width:fit-content}
+
+/* vista: navegador */
+.web .ub{padding:48px 10px 8px;background:#F2F2F4;border-bottom:1px solid #e3e3e6}
+.web .url{background:#E3E3E8;border-radius:10px;padding:7px 10px;font-size:12px;color:#333;display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.web .url svg{width:12px;height:12px;flex:none;fill:none;stroke:#666;stroke-width:2.2}
+.web .url span{overflow:hidden;text-overflow:ellipsis}
+.wh{background:#1A4A15;color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.wh img{height:15px;display:block}
+.wh span{font-size:11.5px;opacity:.8}
+.lhero{padding:16px 14px 12px;background:linear-gradient(180deg,#0C2109,#1A4A15);color:#fff}
+.lhero small{font-size:11px;color:#BFE3B6;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.lhero h3{font-size:21px;line-height:1.15;margin:4px 0 8px;font-weight:700;letter-spacing:-.01em}
+.lhero p{font-size:12px;color:rgba(255,255,255,.8)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:#F6F4EE;border-bottom:1px solid #e9e4d8}
+.chips span{font-size:12px;font-weight:600;border:1px solid #cfc8b6;border-radius:99px;padding:4px 10px;background:#fff;color:#333}
+.chips span.on{background:#2C7C24;border-color:#2C7C24;color:#fff}
+.hc{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:10px 14px;border-bottom:1px solid #eee;align-items:center;transition:background .3s}
+.hc.hl{background:#EEF6EA}
+.hc .ph{width:96px;height:74px;border-radius:10px;background:#333 center/cover}
+.hc b{font-size:13.5px;display:block;line-height:1.25}
+.hc small{font-size:11.5px;color:#666;display:block}
+.hc .p{font-size:13px;font-weight:700;color:#1A4A15;margin-top:3px}
+.hc .p span{font-weight:500;color:#8A6A3F;font-size:11.5px;margin-left:4px}
+.hc .tg{display:inline-block;font-size:10.5px;font-weight:650;border-radius:5px;padding:1px 6px;margin-top:3px;background:#FBEFD6;color:#8F5A06}
+.bell{margin:12px 14px 16px;border:1.5px dashed #2C7C24;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#1A4A15;background:#F3F9F0}
+.bell b{display:block;font-size:13px}
+.trust{font-size:11.5px;color:#555;padding:10px 14px;background:#fff;border-bottom:1px solid #eee}
+/* ficha */
+.fimg{height:170px;background:#333 center/cover;position:relative}
+.fimg span{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;border-radius:6px;padding:2px 7px}
+.fb{padding:12px 14px;display:grid;gap:8px;font-size:12.5px;color:#333}
+.fb h3{font-size:19px;line-height:1.2;color:#111;font-weight:700}
+.fb .loc{color:#666;font-size:12px}
+.fb .pr{display:flex;align-items:baseline;gap:10px}
+.fb .pr b{font-size:22px;color:#111}
+.fb .pr span{color:#8A6A3F;font-weight:600;font-size:12.5px}
+.fb .rv{font-size:12px;color:#666}
+.fb dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0;font-size:12px;border-top:1px solid #eee;padding-top:8px}
+.fb dt{color:#777}.fb dd{margin:0;font-weight:600;color:#222}
+.fb .obs{border-radius:10px;padding:9px 10px;background:#F7F5EF;border:1px solid #e9e4d8;transition:background .3s,box-shadow .3s}
+.fb .obs.hl{background:#FFF4D6;box-shadow:0 0 0 2px #E2B14A}
+.fb .obs b{display:block;font-size:12px;color:#111}
+.fb .rvbox{border-radius:10px;padding:9px 10px;border:1px solid #eee;transition:background .3s,box-shadow .3s}
+.fb .rvbox.hl{background:#FFF4D6;box-shadow:0 0 0 2px #E2B14A}
+.book{position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.book small{font-size:11.5px;color:#666;display:block}
+.book b{font-size:15px}
+.book .btn{background:#2C7C24;color:#fff;font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 14px;white-space:nowrap}
+.book .btn.grey{background:#ddd;color:#666}
+/* pago */
+.pay{padding:14px;display:grid;gap:10px;font-size:13px;color:#222}
+.pay h3{font-size:18px;color:#111}
+.pay .row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding-bottom:7px}
+.pay .row span{color:#666}
+.pay .tot{font-size:15px;font-weight:700}
+.pay .card{border:1px solid #ddd;border-radius:10px;padding:10px;display:flex;justify-content:space-between;font-size:12.5px;box-shadow:none;background:#fafafa}
+.pay .btn{background:#2C7C24;color:#fff;text-align:center;font-weight:700;border-radius:12px;padding:12px;font-size:14.5px}
+.ok{position:absolute;inset:0;background:#fff;display:grid;place-items:center;align-content:center;gap:10px;text-align:center;padding:24px;opacity:0;transition:opacity .4s;pointer-events:none}
+.ok.on{opacity:1}
+.ok .ck{width:64px;height:64px;border-radius:50%;background:#2C7C24;display:grid;place-items:center;margin-inline:auto;transform:scale(.6);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.ok.on .ck{transform:none}
+.ok .ck svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:3}
+.ok h3{font-size:19px;color:#111}
+.ok p{font-size:13px;color:#555}
+
+/* vista: WhatsApp */
+.wa{background:var(--wa-bg);background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:48px 12px 10px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:34px;height:34px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/76% no-repeat;flex:none}
+.wa .top b{font-size:14.5px;display:block;line-height:1.2}
+.wa .top small{font-size:11.5px;opacity:.8}
+.wa .vs{padding:12px 10px;display:flex;flex-direction:column;gap:7px}
+.m{max-width:84%;padding:7px 10px 6px;border-radius:12px;font-size:13px;line-height:1.42;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08);animation:min .3s ease-out}
+.m.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.m.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.m small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.m .who{display:block;font-size:11px;font-weight:700;color:#1F8A3A;margin-bottom:1px}
+.m .lk{display:block;margin-top:6px;border-radius:8px;background:rgba(0,0,0,.05);padding:6px 8px;font-size:12px;color:#0a58ca;overflow-wrap:anywhere}
+.m.typing{display:flex;gap:4px;padding:11px 12px}
+.m.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:dot 1s infinite}
+.m.typing i:nth-child(2){animation-delay:.15s}.m.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@keyframes min{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wa .inp{display:flex;gap:8px;align-items:center;padding:8px 10px 14px;background:var(--wa-bg)}
+.wa .inp span{flex:1;background:var(--wa-in);border-radius:99px;padding:9px 14px;font-size:13px;color:var(--ink);min-height:38px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa .inp span:empty::before{content:"Mensaje";color:var(--muted)}
+.wa .inp i{width:38px;height:38px;border-radius:50%;background:#00A884;flex:none}
+
+/* vista: correo */
+.mail .mh{padding:50px 14px 10px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}
+.mail .mh b{font-size:16px}
+.mail .it{display:grid;grid-template-columns:36px 1fr;gap:10px;padding:11px 14px;border-bottom:1px solid #f0f0f0;font-size:12.5px;color:#444}
+.mail .it .av{width:36px;height:36px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/72% no-repeat}
+.mail .it .av.o{background:#c7c2b5}
+.mail .it b{color:#111;display:block;font-size:13px}
+.mail .it.new b::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#1A73E8;margin-left:6px;vertical-align:1px}
+.mail .it.hl{background:#EAF2FF}
+.em{padding:12px 14px 18px;font-size:13px;line-height:1.55;color:#222;display:grid;gap:9px}
+.em .sj{font-size:17px;font-weight:700;line-height:1.3;color:#111}
+.em .fr{display:flex;align-items:center;gap:8px;font-size:12px;color:#666}
+.em .fr i{width:28px;height:28px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/72% no-repeat;flex:none}
+.em .hero{height:130px;border-radius:10px;background:#333 center/cover}
+.em ul{margin:0;padding-left:18px}
+.em .bt{display:block;text-align:center;background:#2C7C24;color:#fff;font-weight:700;border-radius:10px;padding:10px}
+.em .bt2{display:block;text-align:center;border:1.5px solid #2C7C24;color:#2C7C24;font-weight:700;border-radius:10px;padding:9px;transition:background .3s}
+.em .bt2.hl{background:#E5F1E0}
+.em .ft{font-size:11px;color:#888}
+/* vista: llamada */
+.call{background:linear-gradient(180deg,#203a1b,#0b160a);color:#fff;align-items:center;justify-content:space-between;padding:110px 20px 60px;text-align:center}
+.call .av{width:84px;height:84px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/74% no-repeat;margin:0 auto 14px}
+.call h3{font-size:24px;font-weight:600}
+.call p{opacity:.75;font-size:14px}
+.call .bts{display:flex;gap:60px;justify-content:center}
+.call .bts i{width:64px;height:64px;border-radius:50%;display:block;background:#E5484D}
+.call .bts i.g{background:#30C85E;animation:ring 1.2s infinite}
+@keyframes ring{0%,100%{transform:rotate(0)}10%,30%{transform:rotate(-10deg)}20%,40%{transform:rotate(10deg)}50%{transform:rotate(0)}}
+/* vista: inicio */
+.home{background:linear-gradient(160deg,#20381c,#0b170a 70%);color:#fff;align-items:center;justify-content:center;text-align:center;gap:4px}
+.home b{font-size:56px;font-weight:300;letter-spacing:-.02em}
+.home span{opacity:.75;font-size:14px}
+
+/* consola */
+.con{background:var(--con);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,calc(100vh - 292px)) + 22px);min-height:522px;box-shadow:var(--shadow-lg);border:1px solid #1d2a19}
+.con .colh{flex-wrap:wrap;color:var(--con-mute);padding:2px 4px 8px;border-bottom:1px solid #1f2c1b;margin-bottom:8px}
+.con .colh b{color:var(--con-ink)}
+.con .colh .tagr{border-color:#2a3a25;color:var(--con-mute)}
+.log{list-style:none;margin:0;padding:0 2px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:7px;scrollbar-width:thin;scrollbar-color:#2a3a25 transparent;scroll-behavior:smooth}
+.ev{border:1px solid #1f2c1b;background:#121c10;border-radius:11px;padding:8px 10px;animation:evIn .45s cubic-bezier(.2,.7,.2,1);color:var(--con-ink)}
+.ev.new{border-color:#3b6b30;box-shadow:0 0 0 1px #3b6b30,0 0 22px -6px rgba(124,200,115,.45)}
+@keyframes evIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.ev .eh{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;line-height:1.3}
+.ev .eh time{font-family:var(--mono);font-size:10.5px;color:var(--con-mute);font-weight:500;flex:none}
+.ev .eh span.t{min-width:0}
+.src{flex:none;font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.08em;border-radius:5px;padding:2px 6px;color:#0b1408;text-transform:uppercase}
+.s-web{background:#9CC9F5}.s-meta{background:#B9B4FF}.s-ac{background:#F5B36A}.s-orq{background:#E8E8E8}.s-clara{background:#7CC873}.s-bruno{background:#F2D46B}.s-qv{background:#F59BB8}.s-com{background:#8FE3D5}
+.ev pre{margin:6px 0 0;font-family:var(--mono);font-size:11px;line-height:1.55;color:#AFC3A6;white-space:pre-wrap;overflow-wrap:anywhere}
+.ev pre .ky{color:#7F8F78}.ev pre .s{color:#E8D49A}.ev pre .n{color:#9CC9F5}
+.legend{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;padding-top:8px;border-top:1px solid #1f2c1b}
+.legend .src{opacity:.85}
+
+/* lateral */
+.side{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,calc(100vh - 292px)) + 22px);min-height:522px;box-shadow:var(--shadow-lg);min-width:0}
+.stabs{display:flex;gap:4px;background:var(--line-2);border-radius:11px;padding:3px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stabs button{flex:1 0 auto;font:inherit;font-size:12.5px;font-weight:600;border:0;background:transparent;color:var(--muted);border-radius:8px;padding:7px 9px;cursor:pointer;white-space:nowrap}
+.stabs button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.sp{position:relative;display:none;flex:1;overflow-y:auto;min-height:0;scrollbar-width:thin}
+.sp.on{display:block;animation:paneIn .4s ease-out}
+@keyframes paneIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.flash{animation:flash 1.2s ease-out}
+@keyframes flash{0%{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent)}100%{background:transparent;box-shadow:0 0 0 0 transparent}}
+/* contacto */
+.cc-h{display:flex;align-items:center;gap:11px;padding:4px 2px 10px}
+.cc-h .av{width:44px;height:44px;border-radius:50%;background:var(--line-2);display:grid;place-items:center;font-weight:700;color:var(--muted);flex:none;font-size:17px;transition:background .4s,color .4s}
+.cc-h .av.id{background:var(--f700);color:#fff}
+.cc-h b{display:block;font-size:16px;line-height:1.2}
+.cc-h small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cc-h .sc{margin-left:auto;text-align:right}
+.cc-h .sc b{font-family:var(--mono);font-size:24px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.cc-h .sc small{display:block}
+.meter{height:7px;border-radius:99px;background:var(--line-2);overflow:hidden;margin:0 2px 12px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#C99A3B,#2C7C24);border-radius:99px;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.fl{display:grid;grid-template-columns:118px minmax(0,1fr);margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+.fl dt,.fl dd{margin:0;padding:7px 10px;border-bottom:1px solid var(--line-2)}
+.fl dt{color:var(--muted);background:var(--surface-2);font-size:12px}
+.fl dd{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.fl dd.empty{color:var(--muted);font-weight:400}
+.fl > :nth-last-child(-n+2){border-bottom:0}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:10px 2px}
+.tags span{font-family:var(--mono);font-size:10.5px;border-radius:6px;padding:3px 7px;background:var(--accent-soft);color:var(--good);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);animation:min .35s ease-out}
+.tags span.x{text-decoration:line-through;opacity:.5;background:var(--line-2);color:var(--muted);border-color:var(--line)}
+.nx{border-radius:12px;background:var(--f900);color:#fff;padding:10px 12px;font-size:13px;margin-top:4px}
+.nx span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#BFE3B6;margin-bottom:2px}
+.hist{list-style:none;margin:12px 2px 0;padding:0;display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.hist li{display:flex;gap:8px}
+.hist time{font-family:var(--mono);font-size:10.5px;flex:none;padding-top:2px}
+/* agente de emails */
+.ag{display:grid;gap:10px}
+.ag h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0}
+.fx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.fx span{font-size:12px;border:1px solid var(--line);border-radius:8px;padding:5px 8px;color:var(--muted);transition:all .35s}
+.fx span b{display:block;color:var(--ink-2);font-size:12.5px}
+.fx span.on{border-color:var(--accent);background:var(--accent-soft);color:var(--good)}
+.seg{border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:12.5px}
+.seg div{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-bottom:1px solid var(--line-2);opacity:.35;transition:opacity .4s}
+.seg div.on{opacity:1}
+.seg div:last-child{border-bottom:0;font-weight:700;background:var(--surface-2)}
+.seg b{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.draft{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.55;background:var(--surface-2);min-height:120px;white-space:pre-wrap}
+.draft .sj{font-weight:700;display:block;margin-bottom:4px}
+.draft .cur{display:inline-block;width:7px;height:14px;background:var(--accent);vertical-align:-2px;animation:blink 1s infinite}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:12.5px}
+.chk li{display:flex;gap:7px;align-items:flex-start;opacity:0;transform:translateX(-4px);transition:all .35s}
+.chk li.on{opacity:1;transform:none}
+.chk li i{flex:none;width:17px;height:17px;border-radius:50%;background:var(--good);color:#fff;font-style:normal;font-size:11px;display:grid;place-items:center;margin-top:1px}
+.appr{display:flex;gap:8px;align-items:center}
+.appr span{font:inherit;font-weight:700;font-size:13px;border-radius:10px;padding:9px 14px;background:var(--accent);color:var(--accent-ink);transition:transform .2s,background .3s}
+.appr span.pressed{transform:scale(.95)}
+.appr span.done{background:var(--good-soft);color:var(--good)}
+.appr small{color:var(--muted);font-size:12px}
+/* comercial */
+.lead{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.lead .lh{background:var(--f900);color:#fff;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lead .lh b{font-size:15px;display:block}
+.lead .lh small{color:#BFE3B6;font-size:11.5px}
+.lead .lh .hot{font-family:var(--mono);font-size:11px;background:#E5484D;color:#fff;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.lead .lb{padding:10px 13px;display:grid;gap:9px;font-size:13px}
+.lead .lb h5{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.lead .lb ul{margin:2px 0 0;padding-left:17px;display:grid;gap:2px}
+.lead .say{background:var(--accent-soft);border-radius:10px;padding:9px 11px;font-style:italic;color:var(--ink-2)}
+.lead .acts{display:flex;gap:8px}
+.lead .acts span{font-weight:700;font-size:13px;border-radius:10px;padding:8px 13px;background:var(--accent);color:var(--accent-ink)}
+.lead .acts span.o{background:transparent;border:1px solid var(--line);color:var(--ink-2)}
+/* panel */
+.kp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.kp div{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kp small{font-size:11.5px;color:var(--muted);display:block}
+.kp b{font-family:var(--mono);font-size:24px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.kp div.big{grid-column:1/-1;background:var(--f900);border-color:var(--f900)}
+.kp div.big small{color:#BFE3B6}.kp div.big b{color:#fff;font-size:30px}
+.fn{display:grid;gap:5px;margin-top:10px}
+.fn div{display:grid;grid-template-columns:120px 1fr 54px;gap:8px;align-items:center;font-size:12px}
+.fn div span{color:var(--muted)}
+.fn div i{height:12px;border-radius:4px;background:var(--accent);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.fn div b{font-family:var(--mono);font-size:11.5px;text-align:right;font-variant-numeric:tabular-nums}
+.pnote{font-size:12px;color:var(--muted);margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+
+/* subtítulo */
+.capb{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center;background:var(--f900);color:#fff;border-radius:16px;padding:12px 18px;box-shadow:var(--shadow-lg)}
+.capb .n{font-family:var(--mono);font-size:12px;color:#BFE3B6;white-space:nowrap}
+.capb p{font-size:clamp(15px,1.45vw,19px);line-height:1.4;font-weight:500;min-height:1.4em}
+.capb .pg{grid-column:1/-1;height:3px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden;margin-top:6px}
+.capb .pg i{display:block;height:100%;width:0;background:var(--moss);transition:width .5s}
+
+/* portada */
+.cover{position:absolute;inset:0;z-index:60;display:grid;place-items:center;background:color-mix(in srgb,var(--paper) 72%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:18px;transition:opacity .4s}
+.cover.off{opacity:0;pointer-events:none}
+.cover .in{max-width:560px;text-align:center;display:grid;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);margin:16px}
+.cover h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3vw,32px);line-height:1.12;letter-spacing:-.015em}
+.cover p{color:var(--muted);font-size:15px}
+.cover button{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:99px;background:var(--accent);color:var(--accent-ink);padding:13px 26px;cursor:pointer;justify-self:center;display:inline-flex;gap:8px;align-items:center}
+.cover .note{font-size:12.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 10px;text-align:left}
+.cover kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--surface-2)}
+
+.sfoot{display:grid;gap:8px;font-size:13px;color:var(--muted);padding:6px 4px}
+.sfoot b{color:var(--ink-2)}
+.sfoot .lk{display:flex;flex-wrap:wrap;gap:8px}
+.sfoot .lk a{font-weight:600;border:1px solid var(--line);border-radius:99px;padding:5px 12px;text-decoration:none;background:var(--surface)}
+
+@media (max-width:1180px){
+  .stage{grid-template-columns:minmax(300px,360px) minmax(0,1fr)}
+  .side{grid-column:1/-1;height:auto;min-height:0}
+  .sp{overflow:visible}
+}
+@media (max-width:760px){
+  .cover{place-items:start center}.cover .in{position:sticky;top:70px}
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .con{height:440px;min-height:0}
+  .scr{height:600px;min-height:0}
+  .ctl h1{font-size:18px}
+  .chaps{order:5;flex-basis:100%}
+  .btns{margin-left:auto}
+  .capb{position:sticky;bottom:8px;z-index:30;padding:10px 14px}
+  .fl{grid-template-columns:100px minmax(0,1fr)}
+  .fn div{grid-template-columns:96px 1fr 48px}
+}
+@media (max-width:400px){.phone{border-radius:40px;padding:8px}.scr{border-radius:32px;height:560px}.clock{font-size:12px;padding:6px 8px}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><img src="../assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">En directo</a><a href="../demo/">Demo</a><a href="../anuncios/">Anuncios</a></div>
+  </div>
+</nav>
+
+<main class="live" id="live">
+  <div class="ctl">
+    <h1>Hunty en directo <span class="sim">Simulación</span></h1>
+    <span class="rec" aria-hidden="true"><i></i>EN DIRECTO</span>
+    <div class="chaps" id="chaps" role="tablist" aria-label="Capítulos"></div>
+    <span class="clock" id="clock" aria-live="off">Día 1 · 19:05</span>
+    <div class="btns">
+      <button id="bPrev" title="Paso anterior (←)" aria-label="Paso anterior"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button id="bPlay" title="Reproducir o pausar (espacio)"><span id="bPlayT">▶ Empezar</span></button>
+      <button id="bNext" title="Paso siguiente (→)" aria-label="Paso siguiente"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button id="bMode" title="Avance automático o paso a paso">Auto</button>
+      <button id="bSpeed" title="Velocidad">1×</button>
+      <button id="bFull" title="Pantalla completa" aria-label="Pantalla completa"><svg class="i" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <section aria-label="Móvil del cazador">
+      <div class="colh"><b id="whoT">Móvil de Javier</b><span class="tagr" id="whoS">cazador inventado · Madrid</span></div>
+      <div class="phone"><div class="scr" id="scr">
+        <div class="sbar" id="sbar"><span id="sbT">19:05</span><span class="isl"></span><span class="sic">5G <i></i></span></div>
+        <div class="notif" id="notif"><span class="ap wa" id="nAp">W</span><div style="min-width:0;flex:1"><b><span id="nT">WhatsApp</span><small id="nW">ahora</small></b><p id="nB"></p></div></div>
+        <div class="tap" id="tap"></div>
+
+        <div class="v home on" id="v-home"><b id="homeT">19:05</b><span>Martes</span></div>
+
+        <div class="v" id="v-ig">
+          <div class="ig-top"><b>Instagram</b><span><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg></span></div>
+          <div class="vs" id="igFeed"></div>
+        </div>
+
+        <div class="v web" id="v-web">
+          <div class="ub"><div class="url"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span id="url">hunty.es</span></div></div>
+          <div class="vs" id="web"></div>
+        </div>
+
+        <div class="v wa" id="v-wa">
+          <div class="top"><i></i><div><b>Hunty · Asesor</b><small id="waSt">en línea</small></div></div>
+          <div class="vs" id="waB"></div>
+          <div class="inp"><span id="waIn"></span><i></i></div>
+        </div>
+
+        <div class="v mail" id="v-mail">
+          <div class="mh"><b>Recibidos</b></div>
+          <div class="vs" id="mailB"></div>
+        </div>
+
+        <div class="v call" id="v-call">
+          <div><div class="av"></div><h3>Hunty</h3><p>Llamada entrante · móvil</p></div>
+          <div class="bts"><i></i><i class="g"></i></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="con" aria-label="Lo que pasa por detrás">
+      <div class="colh"><b>Por detrás · en tiempo real</b><span class="tagr">web → Meta → ActiveCampaign → orquestador → agentes</span></div>
+      <ol class="log" id="log" aria-live="polite"></ol>
+      <div class="legend" aria-label="Leyenda"><span class="src s-web">web</span><span class="src s-meta">meta</span><span class="src s-ac">activecampaign</span><span class="src s-orq">orquestador</span><span class="src s-clara">clara</span><span class="src s-bruno">bruno</span><span class="src s-qv">agente emails</span><span class="src s-com">comercial</span></div>
+    </section>
+
+    <section class="side" aria-label="Lo que ve vuestro equipo">
+      <div class="stabs" id="stabs" role="tablist">
+        <button data-p="cc" class="on">Ficha del contacto</button>
+        <button data-p="ag">Agente de emails</button>
+        <button data-p="cm">Comercial</button>
+        <button data-p="pn">Panel</button>
+      </div>
+      <div class="sp on" id="p-cc"></div>
+      <div class="sp" id="p-ag"></div>
+      <div class="sp" id="p-cm"></div>
+      <div class="sp" id="p-pn"></div>
+    </section>
+
+    <div class="cover" id="cover">
+      <div class="in">
+        <p class="eyebrow">Qualivo × Hunty · simulación</p>
+        <h2>Un cazador del anuncio a la reserva, y un cliente de la base a la llamada</h2>
+        <p>A la izquierda, su móvil. En el centro, lo que pasa por detrás (web, Meta, ActiveCampaign, vuestro orquestador y los agentes). A la derecha, lo que ve vuestro equipo.</p>
+        <button id="bStart">▶ Empezar</button>
+        <p class="note"><span class="sim">Simulación</span> Las cacerías, precios, fechas y observaciones son los de hunty.es comprobados el 22-oct-2026. Javier, Carlos, el comercial «Pablo», los mensajes, la hora y todas las cifras de contactos y del panel son inventados, y ninguna es una previsión. Teclas: <kbd>espacio</kbd> pausa, <kbd>←</kbd> <kbd>→</kbd> pasos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="capb"><span class="n" id="capN">0 / 0</span><p id="cap">Pulsa «Empezar».</p><div class="pg"><i id="capPg"></i></div></div>
+
+  <div class="sfoot">
+    <p><b>Qué es real y qué no.</b> Real: las fichas de Río Frío (Robledo del Mazo, Toledo · 26-dic · 350 € · 332,50 € con Prime · señal 35 €) y Valmorisco (Jarandilla de la Vera, Cáceres · 9-ene · 300 € · 280 € con Prime · señal 40 € · 4,3/5 con 4 reseñas · «solo 1 puesto disponible»), comprobadas en hunty.es el 22-oct-2026, y el anuncio A de nuestra propuesta. Inventado: las personas, los mensajes, las horas y todas las cifras de contactos, segmentos y panel. Los textos finales los aprueba Hunty.</p>
+    <div class="lk"><a href="../recorrido/">Recorrido paso a paso</a><a href="../">Plan del 16-oct</a><a href="../demo/">Demo de WhatsApp y voz</a></div>
+    <p>Maikel Echevarría · Qualivo · maikel@qualivo.io · No es una página de Hunty.</p>
+  </div>
+</main>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const IMG={mont:'../assets/monteria.jpg',ciervo:'../assets/ciervo.jpg',coto:'../assets/coto.jpg',espera:'../assets/espera.jpg',adA:'../anuncios/img/a-feed.jpg'};
+const STOP={};
+const S={i:-1,tok:0,paused:true,fast:false,speed:1,auto:true,started:false,running:false};
+const live=$('#live');
+
+/* ---------- tiempo ---------- */
+function sleep(ms){
+  const t=S.tok;
+  return new Promise((res,rej)=>{
+    if(S.fast){res();return}
+    let left=ms,last=performance.now();
+    (function tick(now){
+      if(t!==S.tok){rej(STOP);return}
+      if(!S.paused)left-=(now-last)*S.speed;
+      last=now;
+      if(left<=0)res();else requestAnimationFrame(tick);
+    })(last);
+  });
+}
+async function type(el,text,cps=38){
+  if(S.fast){el.textContent=text;return}
+  el.textContent='';
+  for(const ch of text){el.textContent+=ch;await sleep(1000/cps)}
+}
+async function scrollTo(el,y,ms=900){
+  if(S.fast){el.scrollTop=y;return}
+  const y0=el.scrollTop,d=y-y0,steps=Math.max(1,Math.round(ms/16));
+  for(let k=1;k<=steps;k++){const p=k/steps;el.scrollTop=y0+d*(p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2);await sleep(16)}
+}
+async function tap(el){
+  if(S.fast||!el)return;
+  const scr=$('#scr').getBoundingClientRect(),r=el.getBoundingClientRect(),t=$('#tap');
+  t.style.left=(r.left-scr.left+r.width/2)+'px';t.style.top=(r.top-scr.top+r.height/2)+'px';
+  t.classList.remove('go');void t.offsetWidth;t.classList.add('go');
+  await sleep(550);
+}
+async function press(el){
+  if(!el)return;
+  if(S.fast){el.classList.add('done');return}
+  el.classList.add('pressed');await sleep(220);el.classList.remove('pressed');el.classList.add('done');
+}
+
+/* ---------- móvil ---------- */
+function view(id,light){
+  document.querySelectorAll('.v').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));
+  $('#sbar').classList.toggle('light',!!light);
+}
+function phoneTime(t){$('#sbT').textContent=t;$('#homeT').textContent=t}
+async function notify(kind,title,body,hold=2200){
+  const ap=$('#nAp');ap.className='ap '+kind;ap.textContent={wa:'W',ml:'M',ph:'☎'}[kind]||'•';
+  $('#nT').textContent=title;$('#nB').textContent=body;
+  const n=$('#notif');
+  if(S.fast){n.classList.remove('on');return}
+  n.classList.add('on');await sleep(hold);n.classList.remove('on');await sleep(350);
+}
+function who(name,sub){$('#whoT').textContent=name;$('#whoS').textContent=sub}
+
+const ICO_ACTS='<div class="acts"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg></div>';
+function filler(user,img,txt){return `<article class="post"><div class="h"><span class="av g"></span><div><b>${user}</b><small>Hace 2 h</small></div></div><div class="img sq" style="background-image:url(${img})"></div>${ICO_ACTS}<p class="cap"><b>${user}</b>${txt}</p></article>`}
+function igA(){
+  $('#igFeed').innerHTML=filler('amigos_del_puesto',IMG.coto,'Último fin de semana de la media veda.')+
+  `<article class="post" id="adA"><div class="h"><span class="av"></span><div><b>hunty</b><small>Publicidad</small></div></div><div class="img" style="background-image:url(${IMG.adA})"></div><div class="cta" id="adCta"><span>Ver las monterías de mi zona</span><span>›</span></div>${ICO_ACTS}<p class="cap"><b>hunty</b>¿Montería en diciembre o enero? Estas fechas se llenan antes que las de febrero.</p></article>`+
+  filler('rehalas_del_sur',IMG.espera,'Preparando la temporada.');
+  $('#igFeed').scrollTop=0;
+}
+function igRT(){
+  $('#igFeed').innerHTML=filler('caza_mayor_es',IMG.ciervo,'Berrea en los Montes de Toledo.')+
+  `<article class="post" id="adR"><div class="h"><span class="av"></span><div><b>hunty</b><small>Publicidad</small></div></div><div class="img" style="background-image:url(${IMG.mont})"><div class="dyn"><img class="lg" src="../assets/logo-white.svg" alt=""><span class="pill">hunty.es</span><small>Montería · Montes de Toledo</small><h4>Río Frío · 26 de diciembre</h4><p>Robledo del Mazo · finca abierta · 50 puestos · sin cupo · desayuno y comida</p><div class="pr"><b>350 €</b><span>el puesto · 332,50 € con Prime</span></div><div class="q">¿Dudas? Te contestamos por WhatsApp</div></div></div><div class="cta" id="rtCta"><span>Enviar mensaje</span><span>›</span></div>${ICO_ACTS}<p class="cap"><b>hunty</b>La viste ayer. Si tienes alguna duda sobre la finca o la reserva, pregúntanos.</p></article>`;
+  $('#igFeed').scrollTop=0;
+}
+function landing(){
+  $('#url').textContent='hunty.es/monterias-diciembre-enero?utm_campaign=a_dic_ene&utm_content=a1';
+  $('#web').innerHTML=`<div class="wh"><img src="../assets/logo-white.svg" alt="Hunty"><span>Asesor · WhatsApp</span></div>
+  <div class="lhero"><small>Temporada 2026-2027</small><h3>Monterías de diciembre y enero</h3><p>Extremadura y Castilla-La Mancha · mismo precio que el organizador · reserva con señal</p></div>
+  <div class="chips"><span class="on">Toledo</span><span class="on">Cáceres</span><span>Ciudad Real</span><span class="on">Dic-Ene</span><span class="on">Hasta 400 €</span></div>
+  <div class="trust">+9.400 reservas gestionadas · +400 organizadores</div>
+  <div class="hc" id="hcRF"><div class="ph" style="background-image:url(${IMG.mont})"></div><div><b>Río Frío</b><small>Robledo del Mazo, Toledo · 26 dic</small><div class="p">350 € <span>332,50 € Prime</span></div><span class="tg">Finca nueva para esta organización</span></div></div>
+  <div class="hc"><div class="ph" style="background-image:url(${IMG.ciervo})"></div><div><b>Los Jaronales</b><small>Robledo del Buey, Toledo · 26 dic</small><div class="p">350 €</div></div></div>
+  <div class="hc"><div class="ph" style="background-image:url(${IMG.espera})"></div><div><b>La Loba</b><small>Mora, Toledo · 20 dic</small><div class="p">350 €</div></div></div>
+  <div class="hc" id="hcVM"><div class="ph" style="background-image:url(${IMG.coto})"></div><div><b>Valmorisco</b><small>Jarandilla de la Vera, Cáceres · 9 ene</small><div class="p">300 € <span>280 € Prime</span></div><span class="tg">4,3/5 · queda 1 puesto</span></div></div>
+  <div class="bell"><b>🔔 ¿No es la tuya? Te avisamos</b>Cuando salga una montería en tu provincia y tu presupuesto. Sin crear cuenta.</div>`;
+  $('#web').scrollTop=0;
+}
+function fichaRF(){
+  $('#url').textContent='hunty.es/monterias/NWR24E';
+  $('#web').innerHTML=`<div class="wh"><img src="../assets/logo-white.svg" alt="Hunty"><span>Asesor · WhatsApp</span></div>
+  <div class="fimg" style="background-image:url(${IMG.mont})"><span>Montes de Toledo</span></div>
+  <div class="fb"><h3>Montería en Río Frío</h3><span class="loc">Robledo del Mazo, Toledo · 26 de diciembre</span>
+  <div class="pr"><b>350 €</b><span>Precio Prime: 332,50 €</span></div>
+  <dl><dt>Finca</dt><dd>Abierta</dd><dt>Puestos</dt><dd>50</dd><dt>Cupo</dt><dd>Sin cupo</dd><dt>Especies</dt><dd>Jabalí, ciervo y cierva</dd><dt>Desayuno y comida</dt><dd>Sí</dd><dt>Último resultado</dt><dd>Nueva para esta organización</dd></dl>
+  <div class="obs" id="rfObs"><b>Observaciones</b>Una vez reservada la montería habrá que hacer una reserva de 100 € a la organización para confirmar el puesto.</div>
+  <div class="rvbox" id="rfRv"><b>0 reseñas de cazadores</b><br>No hay reseñas sobre esta cacería.</div>
+  <p class="rv">Mismo precio que el organizador garantizado.</p></div>
+  <div class="book"><div><small>Reserva hoy</small><b>35 €</b></div><span class="btn">Reservar</span></div>`;
+  $('#web').scrollTop=0;
+}
+function checkout(){
+  $('#url').textContent='hunty.es/monterias/monteria-en-valmorisco-1790/reservar';
+  $('#web').innerHTML=`<div class="wh"><img src="../assets/logo-white.svg" alt="Hunty"><span>Pago seguro</span></div>
+  <div class="pay"><h3>Montería en Valmorisco</h3>
+  <div class="row"><span>Lugar</span><b>Jarandilla de la Vera, Cáceres</b></div>
+  <div class="row"><span>Fecha</span><b>9 de enero de 2027</b></div>
+  <div class="row"><span>Puestos</span><b>1</b></div>
+  <div class="row"><span>Precio del puesto</span><b>300 €</b></div>
+  <div class="row tot"><span>Señal hoy</span><b>40 €</b></div>
+  <div class="card"><span>Tarjeta •••• 4417</span><span>Cambiar</span></div>
+  <div class="btn" id="payBtn">Pagar 40 €</div>
+  <p style="font-size:11.5px;color:#777">El resto del precio se paga como indica la ficha. Mismo precio que el organizador.</p></div>
+  <div class="ok" id="payOk"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Reserva confirmada</h3><p>Valmorisco · 9 de enero · 1 puesto<br>Te hemos enviado la confirmación por email.</p></div>`;
+  $('#web').scrollTop=0;
+}
+function waReset(){$('#waB').innerHTML='';$('#waIn').textContent=''}
+async function waMsg(dir,html,time,whoTag){
+  const b=$('#waB');
+  if(dir==='in'&&!S.fast){
+    const ty=document.createElement('div');ty.className='m in typing';ty.innerHTML='<i></i><i></i><i></i>';b.appendChild(ty);b.scrollTop=b.scrollHeight;
+    $('#waSt').textContent='escribiendo…';await sleep(1100);ty.remove();$('#waSt').textContent='en línea';
+  }
+  const m=document.createElement('div');m.className='m '+dir;
+  m.innerHTML=(whoTag?`<span class="who">${whoTag}</span>`:'')+html+`<small>${time}${dir==='out'?' ✓✓':''}</small>`;
+  b.appendChild(m);b.scrollTop=b.scrollHeight;
+  await sleep(dir==='in'?900:500);
+}
+async function waType(text){const inp=$('#waIn');await type(inp,text,26);await sleep(250);inp.textContent=''}
+function inbox(list){
+  $('#mailB').innerHTML=list.map((x,k)=>`<div class="it${x.n?' new':''}" id="mi${k}"><span class="av${x.o?' o':''}"></span><div><b>${x.f}</b>${x.s}<br><span style="color:#888">${x.p}</span></div></div>`).join('');
+}
+function emailCarlos(){
+  $('#mailB').innerHTML=`<div class="em"><div class="sj">Carlos, Río Frío: montería en los Montes de Toledo el 26 de diciembre</div>
+  <div class="fr"><i></i><span><b style="color:#111">Hunty</b> · para mí · 10:30</span></div>
+  <div class="hero" style="background-image:url(${IMG.mont})"></div>
+  <p>Hola, Carlos:</p>
+  <p>El año pasado por estas fechas reservasteis 3 puestos para una montería en Toledo en diciembre. Ya está publicada <b>Río Frío</b>, en Robledo del Mazo, el <b>26 de diciembre</b>.</p>
+  <ul><li>Finca abierta, 50 puestos y sin cupo.</li><li>Jabalí, ciervo y cierva. Desayuno y comida incluidos.</li><li>Es la primera temporada de esta organización en la finca, así que aún no tiene reseñas.</li></ul>
+  <p><b>350 € el puesto</b> (332,50 € con Prime). Para 3 puestos, 1.050 €. Se reserva con una señal de 35 € por puesto y, después, una reserva de 100 € a la organización para confirmar el puesto.</p>
+  <span class="bt">Ver la ficha y reservar</span>
+  <span class="bt2" id="callMe">Prefiero que me llame el asesor</span>
+  <p class="ft">Te escribimos porque reservaste con Hunty y aceptaste recibir novedades. Darte de baja.</p></div>`;
+  $('#mailB').scrollTop=0;
+}
+
+/* ---------- consola ---------- */
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function fmt(o){
+  return Object.entries(o).map(([k,v])=>{
+    let val=Array.isArray(v)?'['+v.map(x=>`<span class="s">"${esc(x)}"</span>`).join(', ')+']':typeof v==='number'?`<span class="n">${v}</span>`:`<span class="s">"${esc(v)}"</span>`;
+    return `<span class="ky">${esc(k)}:</span> ${val}`;
+  }).join('\n');
+}
+const SRC={web:'web',meta:'meta',ac:'activecampaign',orq:'orquestador',clara:'clara',bruno:'bruno',qv:'agente emails',com:'comercial'};
+async function ev(src,title,data,time){
+  const log=$('#log');
+  log.querySelectorAll('.ev.new').forEach(e=>e.classList.remove('new'));
+  const li=document.createElement('li');li.className='ev new';
+  li.innerHTML=`<div class="eh"><time>${time||S.clock}</time><span class="src s-${src}">${SRC[src]}</span><span class="t">${esc(title)}</span></div>`+(data?`<pre>${fmt(data)}</pre>`:'');
+  log.appendChild(li);log.scrollTop=log.scrollHeight;
+  await sleep(700);
+}
+
+/* ---------- lateral ---------- */
+function stab(p){
+  document.querySelectorAll('#stabs button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  document.querySelectorAll('.sp').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));
+}
+const FIELDS=[['origen','Origen'],['busca','Busca'],['zona','Zona'],['presu','Presupuesto'],['fichas','Fichas vistas'],['canal','Canal'],['estado','Estado']];
+function ccReset(name='Visitante anónimo',id='GA4 · usuario 7f3a…',av='?'){
+  $('#p-cc').innerHTML=`<div class="cc-h"><div class="av" id="cAv">${av}</div><div style="min-width:0"><b id="cName">${name}</b><small id="cId">${id}</small></div><div class="sc"><b id="cScore">0</b><small>puntuación</small></div></div>
+  <div class="meter"><i id="cMeter"></i></div>
+  <dl class="fl">${FIELDS.map(([k,l])=>`<dt>${l}</dt><dd class="empty" id="f-${k}">—</dd>`).join('')}</dl>
+  <div class="tags" id="cTags"></div>
+  <div class="nx"><span>Siguiente paso</span><b id="cNext">Esperar a que haga algo</b></div>
+  <ul class="hist" id="cHist"></ul>`;
+}
+function fl(el){if(!S.fast&&el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}}
+function setF(k,v){const d=$('#f-'+k);d.textContent=v;d.classList.remove('empty');fl(d)}
+function score(n){$('#cScore').textContent=n;$('#cMeter').style.width=n+'%';fl($('#cScore'))}
+function tag(t,x){const s=document.createElement('span');s.textContent=t;if(x)s.className='x';$('#cTags').appendChild(s)}
+function untag(t){[...$('#cTags').children].forEach(s=>{if(s.textContent===t)s.classList.add('x')})}
+function next(t){const n=$('#cNext');n.textContent=t;fl(n.parentElement)}
+function hist(t){const li=document.createElement('li');li.innerHTML=`<time>${S.clock.split('· ')[1]||''}</time><span>${t}</span>`;$('#cHist').prepend(li)}
+function identify(name,id){const a=$('#cAv');a.textContent=name[0];a.classList.add('id');$('#cName').textContent=name;$('#cId').textContent=id;fl($('#cName').parentElement)}
+
+function agReset(){
+  $('#p-ag').innerHTML=`<div class="ag">
+  <h4>1 · Lee la ficha publicada</h4>
+  <div class="fx" id="fx">${[['Cacería','Río Frío'],['Lugar','Robledo del Mazo, Toledo'],['Fecha','26 de diciembre'],['Precio','350 € · Prime 332,50 €'],['Señal','35 € por puesto'],['Finca','Abierta · 50 puestos · sin cupo'],['Incluye','Desayuno y comida'],['Reseñas','0'],['Observación','Reserva de 100 € a la organización'],['Último resultado','Nueva para esta organización']].map(([a,b])=>`<span><b>${b}</b>${a}</span>`).join('')}</div>
+  <h4>2 · Elige a quién le encaja <span class="sim" style="font-size:9px;padding:1px 5px">cifras simuladas</span></h4>
+  <div class="seg" id="seg"><div><span>Clientes con montería en Toledo en otras temporadas</span><b data-n="1240">0</b></div><div><span>+ avisos de montería en Toledo, dic-ene, ≤ 400 €</span><b data-n="186">0</b></div><div><span>− ya han reservado Río Frío</span><b data-n="-14">0</b></div><div><span>− sin consentimiento comercial</span><b data-n="-212">0</b></div><div><span>− recibieron un email de cacería esta semana</span><b data-n="-97">0</b></div><div><span>Reciben el email (10 % queda como grupo de control)</span><b data-n="1103">0</b></div></div>
+  <h4>3 · Redacta con la plantilla de Hunty, solo con datos de la ficha</h4>
+  <div class="draft" id="draft"><span class="sj" id="dSj"></span><span id="dBd"></span><span class="cur"></span></div>
+  <h4>4 · Comprueba antes de enviarlo</h4>
+  <ul class="chk" id="chk">${['Precio, Prime y señal coinciden con la ficha','Fecha y lugar coinciden con la ficha','0 reseñas: no se menciona ninguna valoración','Se incluye la reserva de 100 € a la organización','No dice «últimas plazas»: la ficha no lo dice','Personaliza con su historial: puestos y zona de su última reserva'].map(t=>`<li><i>✓</i><span>${t}</span></li>`).join('')}</ul>
+  <div class="appr"><span id="apBtn">Aprobar y programar · 10:30</span><small>Lo aprueba vuestro equipo, o sale solo si así lo decidís.</small></div></div>`;
+}
+async function countSeg(){
+  const rows=[...$('#seg').children];
+  for(const r of rows){
+    r.classList.add('on');const b=r.querySelector('b'),n=+b.dataset.n;
+    if(S.fast){b.textContent=(n>0&&r!==rows[0]&&r!==rows[rows.length-1]?'+':'')+n.toLocaleString('es-ES');continue}
+    const steps=18;for(let k=1;k<=steps;k++){const v=Math.round(n*k/steps);b.textContent=(n>0&&r!==rows[0]&&r!==rows[rows.length-1]?'+':'')+v.toLocaleString('es-ES');await sleep(28)}
+    await sleep(250);
+  }
+}
+const DSJ='{{nombre}}, Río Frío: montería en los Montes de Toledo el 26 de diciembre';
+const DBD='Hola, {{nombre}}:\nEl año pasado reservasteis {{puestos}} puestos para una montería en {{provincia}} en diciembre. Ya está publicada Río Frío, en Robledo del Mazo, el 26 de diciembre.\n· Finca abierta, 50 puestos y sin cupo.\n· Es la primera temporada de esta organización en la finca, así que aún no tiene reseñas.\n350 € el puesto (332,50 € con Prime). Para {{puestos}} puestos, {{puestos×350}} €. Señal de 35 € por puesto y, después, reserva de 100 € a la organización.\n[Ver la ficha y reservar]  [Que me llame el asesor]';
+
+function cmReset(){
+  $('#p-cm').innerHTML=`<p class="muted small" style="padding:8px 4px">Aquí le llega al comercial cada contacto caliente, con la ficha hecha. Aún no hay ninguno.</p>`;
+}
+function cmLead(){
+  $('#p-cm').innerHTML=`<div class="lead"><div class="lh"><div><b>Carlos · llamar ahora</b><small>Pide llamada desde el email de Río Frío · 10:42</small></div><span class="hot">CALIENTE · 88</span></div>
+  <div class="lb">
+  <div><h5>Quién es</h5><ul><li>Cliente de 2 temporadas. Última: montería en Toledo, diciembre, 3 puestos.</li><li>Suele reservar en la segunda quincena de octubre.</li><li>No es socio Prime.</li></ul></div>
+  <div><h5>Qué ha hecho hoy</h5><ul><li>10:41 abre el email de Río Frío.</li><li>10:42 pulsa «Prefiero que me llame el asesor».</li></ul></div>
+  <div><h5>Lo que ya sabe</h5><ul><li>350 € el puesto, 1.050 € para 3. Señal de 35 € por puesto.</li><li>Reserva de 100 € a la organización. Finca sin reseñas aún.</li></ul></div>
+  <div><h5>Cómo abrir la llamada</h5><p class="say">«Carlos, soy Pablo, de Hunty. Te llamo por Río Frío, el 26 de diciembre. ¿Seguís siendo tres?»</p></div>
+  <div><h5>Si pregunta por Prime</h5><p>Con 3 puestos ahorraría 52,50 € en esta montería. Prime cuesta 150 € al año: le compensa si hace más jornadas. Lo decide Bruno con su historial.</p></div>
+  <div class="acts"><span id="callBtn">Llamar</span><span class="o">Enviar WhatsApp</span></div></div></div>`;
+}
+function pnReset(){
+  $('#p-pn').innerHTML=`<div class="kp"><div class="big"><small>De cada 100 usuarios únicos, reservan</small><b id="k0">0,0</b></div>
+  <div><small>Usuarios únicos · semana</small><b id="k1">0</b></div><div><small>Reservas web</small><b id="k2">0</b></div>
+  <div><small>Avisos creados</small><b id="k3">0</b></div><div><small>Comisión por € en anuncios</small><b id="k4">0,0</b></div></div>
+  <div class="fn" id="fn">${[['Usuarios únicos',100],['Ven una ficha',46],['Dejan algo',9],['Hablan',4.1],['Reservan',1.8]].map(([a,b])=>`<div><span>${a}</span><i data-w="${b}"></i><b>${String(b).replace('.',',')} %</b></div>`).join('')}</div>
+  <p class="pnote"><span class="sim" style="font-size:9px;padding:1px 5px">Cifras inventadas</span> Así se vería el panel. Los números reales salen de medir la semana 0 con vuestros datos. Lo que gana cada pieza lo dice el grupo de control, no una previsión.</p>`;
+}
+async function count(el,to,dec=0,ms=1200){
+  const f=v=>v.toLocaleString('es-ES',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+  if(S.fast){el.textContent=f(to);return}
+  const st=30;for(let k=1;k<=st;k++){el.textContent=f(to*k/st);await sleep(ms/st)}
+}
+
+/* ---------- guion ---------- */
+const CH=['Anuncio','Landing','Retargeting','WhatsApp','Reserva','Aviso','Ficha → email','Cliente','Comercial','Panel'];
+const STEPS=[
+/* 1 */ {ch:0,clock:'Día 1 · 19:05',cap:'Javier, de Madrid, mira Instagram por la tarde. Le sale el anuncio de monterías de diciembre y enero.',run:async()=>{
+  who('Móvil de Javier','cazador inventado · Madrid');phoneTime('19:05');igA();view('ig');await sleep(600);
+  await scrollTo($('#igFeed'),$('#adA').offsetTop-50,1300);
+  await ev('meta','Impresión del anuncio',{campaña:'A · Monterías de temporada',pieza:'A1 · feed 4:5',público:'parecidos a quienes ya reservaron montería',excluye:'quien ha reservado en los últimos 30 días'});
+}},
+/* 2 */ {ch:0,clock:'Día 1 · 19:05',cap:'Toca el anuncio. El enlace lleva su código de seguimiento como parámetro propio, para saber qué anuncio trae cada reserva.',run:async()=>{
+  const c=$('#adCta');c.classList.add('hl');await tap(c);
+  await ev('meta','Clic en el enlace',{utm_source:'meta',utm_campaign:'a_dic_ene',utm_content:'a1',destino:'/monterias-diciembre-enero'});
+}},
+/* 3 */ {ch:1,clock:'Día 1 · 19:05',cap:'Llega a una página hecha para ese anuncio: mismas fechas, misma zona y mismo precio. Sin la ventana de «crear cuenta».',run:async()=>{
+  landing();view('web');await sleep(500);
+  await ev('web','ver_landing',{landing:'/monterias-diciembre-enero',campaña:'a_dic_ene',usuario:'anónimo 7f3a…'});
+  setF('origen','Meta · anuncio A1');score(8);
+  await scrollTo($('#web'),150,900);
+  await ev('web','usar_filtro',{provincias:['Toledo','Cáceres'],fechas:'dic-ene',precio_max:400});
+  setF('busca','Montería');setF('zona','Toledo, Cáceres');setF('presu','Hasta 400 € el puesto');score(14);
+}},
+/* 4 */ {ch:1,clock:'Día 1 · 19:07',cap:'Abre Río Frío: Montes de Toledo, 26 de diciembre, 350 € el puesto.',run:async()=>{
+  const h=$('#hcRF');h.classList.add('hl');await tap(h);
+  fichaRF();await sleep(400);
+  await ev('web','ver_ficha',{ficha:'NWR24E · Río Frío',precio:350,fecha:'26-dic',visita:1});
+  setF('fichas','Río Frío (1)');score(24);hist('Ve la ficha de Río Frío');
+  await scrollTo($('#web'),230,1000);
+}},
+/* 5 */ {ch:1,clock:'Día 1 · 19:09',cap:'Se para en dos cosas: la finca no tiene reseñas y hay que hacer una reserva de 100 € a la organización. Se va sin reservar.',run:async()=>{
+  const w=$('#web');await scrollTo(w,$('#rfObs').offsetTop-160,900);$('#rfObs').classList.add('hl');await sleep(1300);
+  $('#rfRv').classList.add('hl');await sleep(1200);
+  await ev('web','lectura de la ficha',{sección:['observaciones','reseñas'],tiempo:'52 s',clarity:'vuelve 2 veces a «Observaciones»'});
+  view('home',true);
+  await ev('web','sale sin reservar',{reserva:'no empezada',última_ficha:'NWR24E'});
+  setF('estado','Duda: reseñas y reserva al organizador');next('Ver si vuelve a la ficha');
+}},
+/* 6 */ {ch:2,clock:'Día 1 · 22:40',cap:'Por la noche vuelve a la misma ficha. Es su tercera visita y sigue sin reservar. Entra en el público de retargeting de «vio una ficha 2 o más veces».',run:async()=>{
+  phoneTime('22:40');fichaRF();view('web');await sleep(400);await scrollTo($('#web'),$('#rfObs').offsetTop-160,900);
+  await ev('web','ver_ficha',{ficha:'NWR24E · Río Frío',visita:3});
+  setF('fichas','Río Frío (3)');score(41);hist('3.ª visita a Río Frío');
+  view('home',true);
+  await ev('meta','Entra en un público de recuerdo',{público:'vio una ficha 2+ veces · días 1-7',anuncio:'dinámico de catálogo, desde la ficha',límite:'2-3 impactos por semana'});
+  next('Anuncio de Río Frío que responda a su duda');
+}},
+/* 7 */ {ch:2,clock:'Día 2 · 13:40',cap:'Al día siguiente le sale Río Frío, montado solo desde la ficha del catálogo, con la puerta abierta a su duda: «¿Dudas? Te contestamos por WhatsApp».',run:async()=>{
+  phoneTime('13:40');igRT();view('ig');await sleep(500);
+  await scrollTo($('#igFeed'),$('#adR').offsetTop-50,1200);
+  await ev('meta','Anuncio dinámico de catálogo',{catálogo:'fichas de hunty.es',producto:'NWR24E',texto:'Río Frío · 26 dic · 350 € el puesto',se_retira:'cuando pasa la fecha o se llena'});
+}},
+/* 8 */ {ch:3,clock:'Día 2 · 13:41',cap:'Toca «Enviar mensaje» y escribe. El mensaje lleva la cacería que estaba mirando, así que nadie empieza de cero.',run:async()=>{
+  const c=$('#rtCta');c.classList.add('hl');await tap(c);
+  phoneTime('13:41');waReset();view('wa',true);await sleep(400);
+  await waType('Hola, tengo una duda sobre Río Frío (26-dic)');
+  await waMsg('out','Hola, tengo una duda sobre Río Frío (26-dic)','13:41');
+  await ev('web','abrir_whatsapp_asesor',{origen:'anuncio dinámico NWR24E',ficha:'NWR24E'});
+  await ev('ac','Contacto creado y unido a su historial',{whatsapp:'+34 6•• ••• •12',historial:'3 visitas a Río Frío, filtros Toledo/Cáceres ≤ 400 €',etiquetas:['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres']});
+  identify('Javier','WhatsApp +34 6•• ••• •12 · inventado');setF('canal','WhatsApp');score(58);
+  ['origen-meta-a1','interes-monteria','zona-toledo','zona-caceres'].forEach(t=>tag(t));hist('Escribe por WhatsApp');
+  await ev('orq','Conversación nueva → Clara',{contexto:'ficha NWR24E, 3 visitas, dudas en observaciones y reseñas',reglas:'cualificación y textos aprobados por Hunty'});
+}},
+/* 9 */ {ch:3,clock:'Día 2 · 13:41',cap:'Clara contesta en menos de un minuto, solo con datos de la ficha. Javier pregunta lo que le frenó ayer.',run:async()=>{
+  await waMsg('in','¡Hola, Javier! Soy Clara, de Hunty. Río Frío es en Robledo del Mazo (Toledo), el 26 de diciembre, a 350 € el puesto (332,50 € con Prime). Para reservar se paga una señal de 35 €.','13:41','Clara · Hunty');
+  await ev('clara','Responde con datos de la ficha',{fuente:'ficha NWR24E',tiempo_de_respuesta:'38 s'});
+  await waType('No veo reseñas. ¿Y qué es lo de los 100 € a la organización?');
+  await waMsg('out','No veo reseñas. ¿Y qué es lo de los 100 € a la organización?','13:42');
+}},
+/* 10 */ {ch:3,clock:'Día 2 · 13:43',cap:'Clara resuelve las dos dudas y, como no tiene reseñas, le ofrece una finca con historial que encaja con lo que busca: Valmorisco.',run:async()=>{
+  await ev('orq','Clara busca alternativas en el catálogo',{criterio:'montería · Toledo o Cáceres · dic-ene · ≤ 400 € · con reseñas',resultado:'Valmorisco (1790) · 4,3/5 · queda 1 puesto'});
+  await waMsg('in','Es la primera temporada que esta organización caza Río Frío, por eso aún no tiene reseñas. Y sí: una vez reservada, hay que hacer una reserva de 100 € a la organización para confirmar el puesto.<br><br>Si prefieres una finca con historial: <b>Valmorisco</b> (Jarandilla de la Vera, Cáceres), el 9 de enero a 300 € el puesto, con 4,3/5 en 4 reseñas. La ficha dice que queda 1 puesto.','13:43','Clara · Hunty');
+  setF('fichas','Río Frío (3) · Valmorisco');score(74);
+  await waType('Voy solo. Me quedo con Valmorisco');
+  await waMsg('out','Voy solo. Me quedo con Valmorisco','13:44');
+  setF('estado','Quiere reservar Valmorisco');tag('interes-valmorisco-1790');next('Enviar enlace de reserva');
+}},
+/* 11 */ {ch:4,clock:'Día 2 · 13:44',cap:'Clara le manda el enlace directo a la reserva. Paga la señal de 40 € desde el móvil.',run:async()=>{
+  await waMsg('in','Perfecto. Aquí puedes reservar tu puesto con la señal de 40 €:<span class="lk">hunty.es/monterias/monteria-en-valmorisco-1790</span>','13:44','Clara · Hunty');
+  const lk=[...document.querySelectorAll('#waB .lk')].pop();await tap(lk);phoneTime('13:44');
+  checkout();view('web');await sleep(500);
+  await ev('web','empezar_reserva',{ficha:'1790 · Valmorisco',puestos:1});
+  await scrollTo($('#web'),120,700);await tap($('#payBtn'));
+  $('#payOk').classList.add('on');await sleep(600);
+  await ev('web','reserva_pagada',{ficha:'1790',señal:40,precio:300,camino:'anuncio A1 → landing → retargeting → WhatsApp con Clara'});
+}},
+/* 12 */ {ch:4,clock:'Día 2 · 13:45',cap:'La reserva pagada vuelve a Meta y a ActiveCampaign. Meta aprende de quien reserva, no de quien hace clic. Y Javier deja de ver anuncios de recuerdo.',run:async()=>{
+  await ev('meta','API de conversiones · Purchase',{evento:'Purchase',valor:'300 EUR',id_evento:'el mismo que el píxel (sin duplicar)',origen:'a1 + retargeting'});
+  await ev('meta','Sale de los públicos de recuerdo',{motivo:'ha reservado'});
+  await ev('ac','Etiquetas actualizadas',{añade:['cliente-monteria','reserva-2026-27','valmorisco-1790'],quita:['retargeting-ficha']});
+  ['cliente-monteria','reserva-2026-27','valmorisco-1790'].forEach(t=>tag(t));untag('interes-valmorisco-1790');
+  setF('estado','Cliente · Valmorisco, 9 de enero');score(100);hist('Reserva pagada · 40 €');
+  await ev('bruno','¿Candidato a Prime?',{jornadas_este_año:1,ahorro_en_esta:'20 €',decisión:'todavía no: se ofrece a partir de la 2.ª jornada'});
+  next('Acompañarle antes de la jornada y ofrecerle un aviso');
+}},
+/* 13 */ {ch:5,clock:'Día 2 · 13:46',cap:'Antes de despedirse, Clara le ofrece un aviso. Javier se queda en la base con lo que busca, para la próxima.',run:async()=>{
+  phoneTime('13:46');view('wa',true);await sleep(300);
+  await waMsg('in','Hecho, Javier. Te llega la confirmación por email. ¿Quieres que te avise cuando salgan más monterías en Toledo o Cáceres hasta 400 €? Como mucho, un aviso por semana.','13:46','Clara · Hunty');
+  await waType('Sí, avísame');
+  await waMsg('out','Sí, avísame','13:46');
+  await ev('ac','Aviso creado',{modalidad:'montería',provincias:['Toledo','Cáceres'],fechas:'dic-feb',presupuesto:'≤ 400 €',canal:'WhatsApp',consentimiento:'sí · 13:46'});
+  tag('aviso-monteria-to-cc');hist('Crea un aviso de montería');next('Avisarle cuando salga una ficha que encaje');
+}},
+/* 14 */ {ch:6,clock:'Día 9 · 10:00',cap:'Ahora, la base de clientes. Cuando se publica una ficha, la web avisa y el agente de emails la lee. Lo hacemos con Río Frío, que es real.',run:async()=>{
+  who('Vuestro equipo','lo que pasa en Hunty');phoneTime('10:00');view('home',true);
+  stab('ag');
+  await ev('web','ficha_publicada',{referencia:'NWR24E',modalidad:'montería',provincia:'Toledo',fecha:'26-dic'});
+  await ev('qv','El agente de emails lee la ficha',{campos:'precio, Prime, señal, fecha, finca, reseñas, observaciones'});
+  for(const s of document.querySelectorAll('#fx span')){s.classList.add('on');await sleep(180)}
+}},
+/* 15 */ {ch:6,clock:'Día 9 · 10:01',cap:'Elige solo a quién le encaja: clientes de montería en Toledo y avisos compatibles. Quita a quien ya reservó, a quien no dio su consentimiento y a quien ya recibió un email esta semana.',run:async()=>{
+  await countSeg();
+  await ev('ac','Segmento calculado',{incluye:'clientes de montería en Toledo + avisos compatibles',excluye:['ya reservaron NWR24E','sin consentimiento','email de cacería esta semana'],grupo_de_control:'10 %',cifras:'simuladas'});
+}},
+/* 16 */ {ch:6,clock:'Día 9 · 10:02',cap:'Redacta el email con la plantilla de Hunty y solo con datos de la ficha. Después lo comprueba: si un dato no está en la ficha, no sale en el email.',run:async()=>{
+  const sc=$('#p-ag');await scrollTo(sc,$('#draft').offsetTop-60,700);
+  await type($('#dSj'),DSJ,60);await type($('#dBd'),'\n'+DBD,90);
+  document.querySelector('#draft .cur').remove();
+  await scrollTo(sc,sc.scrollHeight,700);
+  for(const li of document.querySelectorAll('#chk li')){li.classList.add('on');await sleep(380)}
+  await ev('qv','Borrador comprobado contra la ficha',{precio:'ok',fecha:'ok',reseñas:'0 → no se mencionan',observación:'incluida',urgencia:'no: la ficha no la indica'});
+}},
+/* 17 */ {ch:6,clock:'Día 9 · 10:05',cap:'Vuestro equipo lo aprueba con un clic. ActiveCampaign lo envía a las 10:30 con su etiqueta, para medir cuántas reservas trae.',run:async()=>{
+  await press($('#apBtn'));$('#apBtn').textContent='Aprobado · sale a las 10:30';
+  await ev('ac','Envío programado',{hora:'10:30',etiqueta:'email-ficha-NWR24E',personaliza:['nombre','puestos','provincia'],grupo_de_control:'no lo recibe y se compara'});
+}},
+/* 18 */ {ch:7,clock:'Día 9 · 10:41',cap:'Carlos, cliente de otras temporadas, lo recibe. No es un email genérico: le habla de su montería del año pasado y le calcula el precio para sus 3 puestos.',run:async()=>{
+  who('Móvil de Carlos','cliente inventado · Toledo');phoneTime('10:41');
+  ccReset('Carlos','Cliente desde 2024 · inventado','C');$('#cAv').classList.add('id');
+  setF('origen','Base de clientes');setF('busca','Montería');setF('zona','Toledo');setF('presu','350 € el puesto · 3 puestos');setF('fichas','—');setF('canal','Email');setF('estado','Cliente de 2 temporadas');
+  ['cliente-monteria','zona-toledo','grupo-3-puestos'].forEach(t=>tag(t));score(52);
+  inbox([{f:'Hunty',s:'Carlos, Río Frío: montería en los Montes de Toledo el 26 de diciembre',p:'El año pasado por estas fechas reservasteis 3 puestos…',n:1},{f:'Federación de Caza',s:'Renovación de la licencia',p:'Recuerda que…',o:1},{f:'Banco',s:'Tu extracto de octubre',p:'Ya puedes consultar…',o:1}]);
+  view('mail');stab('cc');
+  await notify('ml','Hunty','Carlos, Río Frío: montería en los Montes de Toledo el 26 de diciembre',1800);
+  $('#mi0').classList.add('hl');await tap($('#mi0'));
+  emailCarlos();await sleep(300);
+  await ev('ac','Email abierto',{contacto:'Carlos',email:'email-ficha-NWR24E'});
+  hist('Abre el email de Río Frío');score(64);
+  await scrollTo($('#mailB'),330,1600);
+}},
+/* 19 */ {ch:7,clock:'Día 9 · 10:42',cap:'Pulsa «Prefiero que me llame el asesor». El orquestador lo marca como contacto caliente y lo pasa al comercial.',run:async()=>{
+  const b=$('#callMe');await scrollTo($('#mailB'),b.offsetTop-300,600);b.classList.add('hl');await tap(b);
+  await ev('ac','Clic: que me llamen',{enlace:'llamada_asesor',email:'email-ficha-NWR24E'});
+  setF('estado','Pide llamada · Río Frío para 3');score(88);tag('pide-llamada');hist('Pide que le llame el asesor');
+  await ev('orq','Contacto caliente → comercial',{motivo:'cliente de 2 temporadas · grupo de 3 · pide llamada',prioridad:'alta',plazo:'llamar en menos de 30 min'});
+  next('Llamada del comercial antes de las 11:12');
+}},
+/* 20 */ {ch:8,clock:'Día 9 · 10:44',cap:'El comercial recibe la ficha completa: quién es, qué ha hecho hoy, qué sabe ya y cómo abrir la llamada. Llama en dos minutos.',run:async()=>{
+  cmLead();stab('cm');
+  await ev('com','Pablo recibe la ficha de Carlos',{vista:'ActiveCampaign o vuestra plataforma',incluye:'historial, actividad de hoy, guion de apertura'});
+  await sleep(1400);await press($('#callBtn'));
+  view('call',true);phoneTime('10:44');
+  await ev('com','Llamada saliente',{a:'Carlos',motivo:'Río Frío · 3 puestos'});
+}},
+/* 21 */ {ch:9,clock:'Semana 4',cap:'Todo acaba en un panel: de cada 100 usuarios únicos, cuántos reservan, por canal y por campaña. Estas cifras son inventadas.',run:async()=>{
+  who('Panel del piloto','dirección y equipo comercial');view('home',true);phoneTime('09:00');
+  pnReset();stab('pn');
+  for(const i of document.querySelectorAll('#fn i')){i.style.width=i.dataset.w+'%'}
+  await Promise.all([count($('#k0'),1.8,1),count($('#k1'),12480),count($('#k2'),224),count($('#k3'),610),count($('#k4'),3.1,1)]);
+  await ev('qv','Resumen semanal',{gana:'landing A frente al buscador (grupo de control)',se_apaga:'pieza A3, la que peor convierte',siguiente_prueba:'email desde fichas a monteros de Cáceres',cifras:'inventadas'});
+}},
+/* 22 */ {ch:9,clock:'Semana 4',cap:'Lo que habéis visto usa vuestras fichas, vuestra web, ActiveCampaign y vuestros agentes. Lo que ponemos nosotros son las reglas, los textos, los segmentos y la medición.',run:async()=>{
+  await ev('orq','Fin de la simulación',{piezas_de_hunty:['web','fichas','ActiveCampaign','Clara','Bruno','orquestador','comerciales'],aporta_qualivo:['anuncios y landings','retargeting','avisos','emails desde fichas','segmentos','medición']});
+}}
+];
+
+/* ---------- reproductor ---------- */
+function resetAll(){
+  view('home',true);phoneTime('19:05');who('Móvil de Javier','cazador inventado · Madrid');
+  $('#log').innerHTML='';waReset();$('#web').innerHTML='';$('#igFeed').innerHTML='';$('#mailB').innerHTML='';$('#notif').classList.remove('on');
+  ccReset();agReset();cmReset();pnReset();stab('cc');
+}
+function ui(n){
+  const st=STEPS[n];S.clock=st.clock;
+  $('#clock').textContent=st.clock;$('#cap').textContent=st.cap;
+  $('#capN').textContent=(n+1)+' / '+STEPS.length;$('#capPg').style.width=((n+1)/STEPS.length*100)+'%';
+  document.querySelectorAll('#chaps button').forEach((b,k)=>{b.classList.toggle('on',k===st.ch);b.classList.toggle('done',k<st.ch)});
+  const on=document.querySelector('#chaps button.on');if(on&&!S.fast)on.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+}
+async function go(n,play=true){
+  n=Math.max(0,Math.min(STEPS.length-1,n));
+  const tok=++S.tok;
+  live.classList.add('instant');resetAll();S.fast=true;
+  try{for(let k=0;k<n;k++){S.i=k;ui(k);await STEPS[k].run()}}catch(e){if(e!==STOP)console.error(e)}
+  S.fast=false;
+  if(tok!==S.tok)return;
+  requestAnimationFrame(()=>live.classList.remove('instant'));
+  S.i=n;ui(n);
+  const lg=$('#log');lg.scrollTop=lg.scrollHeight;
+  if(play)run(n,tok);
+}
+async function run(n,tok){
+  S.running=true;
+  try{
+    for(let k=n;k<STEPS.length;k++){
+      if(tok!==S.tok)return;
+      S.i=k;ui(k);await STEPS[k].run();
+      if(k===STEPS.length-1){setPaused(true);return}
+      if(!S.auto){return}
+      await sleep(2200);
+    }
+  }catch(e){if(e!==STOP)console.error(e)}
+  finally{if(tok===S.tok)S.running=false}
+}
+function setPaused(p){S.paused=p;live.classList.toggle('paused',p);$('#bPlayT').textContent=p?'▶ Seguir':'❚❚ Pausa'}
+function start(){
+  if(S.started)return;S.started=true;$('#cover').classList.add('off');setPaused(false);go(0);
+}
+$('#bStart').onclick=start;
+$('#bPlay').onclick=()=>{
+  if(!S.started)return start();
+  if(S.i>=STEPS.length-1&&S.paused){setPaused(false);go(0);return}
+  if(!S.auto&&!S.running){setPaused(false);go(S.i+1);return}
+  setPaused(!S.paused);
+};
+$('#bNext').onclick=()=>{if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);go(S.i+1)};
+$('#bPrev').onclick=()=>{if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);go(S.i-1)};
+$('#bSpeed').onclick=()=>{S.speed=S.speed===1?1.6:S.speed===1.6?0.7:1;$('#bSpeed').textContent=String(S.speed).replace('.',',')+'×'};
+$('#bFull').onclick=()=>{const d=document;if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen()};
+$('#bMode').onclick=()=>{S.auto=!S.auto;$('#bMode').textContent=S.auto?'Auto':'Paso a paso'};
+$('#chaps').innerHTML=CH.map((c,k)=>`<button role="tab" data-c="${k}">${k+1} · ${c}</button>`).join('');
+$('#chaps').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);go(STEPS.findIndex(s=>s.ch===+b.dataset.c))};
+$('#stabs').onclick=e=>{const b=e.target.closest('button');if(b)stab(b.dataset.p)};
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea'))return;
+  if(e.key===' '){e.preventDefault();$('#bPlay').click()}
+  else if(e.key==='ArrowRight'){e.preventDefault();$('#bNext').click()}
+  else if(e.key==='ArrowLeft'){e.preventDefault();$('#bPrev').click()}
+});
+resetAll();S.clock=STEPS[0].clock;$('#capN').textContent='0 / '+STEPS.length;
+window.__hunty={go:n=>{S.started=true;$('#cover').classList.add('off');setPaused(false);go(n-1)},S};
+const mh=location.hash.match(/^#paso-(\d+)$/);if(mh){S.started=true;$('#cover').classList.add('off');setPaused(false);go(+mh[1]-1)}
+})();
+</script>
+</body>
+</html>
