@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """Anuncio 09 «Solicitudes de calidad» (formación): locución de Javier · Qualivo (ElevenLabs), tiempos y mezcla.
-   ELEVENLABS_API_KEY=... python3 voz.py voz      # voz/principal.* y pistas aparte (gancho B, prueba A, CTA landing)
-   python3 voz.py tiempos                         # tiempos.js
+   ELEVENLABS_API_KEY=... python3 voz.py voz [extra]   # voz/principal.* (y con «extra», las pistas aparte)
+   python3 voz.py tiempos                               # tiempos.js
    python3 voz.py mezcla out/muda.mp4 out/final.mp4
-La clave nunca se escribe en el repo. Guion: content/copy/2026-11-guion-anuncio-formacion-calidad.md (rama de la landing), v2.
-«Qualivo» no se dice. Gancho A + prueba B + CTA de Meta = pista principal (decisiones pendientes de Maikel)."""
+La clave nunca se escribe en el repo. Guion v2: content/copy/2026-11-guion-anuncio-formacion-calidad.md (rama de la landing).
+Pista principal = gancho A + prueba B + CTA de Meta (decisiones pendientes de Maikel)."""
 import json, os, subprocess, sys, unicodedata
 AQUI = os.path.dirname(os.path.abspath(__file__))
 VA = os.path.join(AQUI, '../../../produccion/video-anuncios'); sys.path.insert(0, VA)
 GUION = [
  ('gancho', 'Si tienes un centro de formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.'),
- ('dolor', 'Porque admisiones acaba llamando a quien no contesta. Reserva gente que luego no aparece. Y quien sí encajaba con el curso… se enfría esperando su turno.'),
+ ('dolor', 'Porque admisiones acaba llamando a quien no contesta.'),
+ ('d2', 'Reserva gente que luego no aparece.'),
+ ('d3', 'Y quien sí encajaba con el curso… se enfría esperando su turno.'),
  ('cambia', 'La calidad se trabaja en todo el recorrido.'),
  ('p1', 'Un anuncio que habla a quien encaja con cada curso.'),
  ('p2', 'Un formulario con cuatro preguntas que separa a quien está listo.'),
@@ -24,9 +26,9 @@ EXTRA = {
  'prueba_a': 'En una escuela de aviación, en un mes: diez matrículas y diez veces lo invertido en publicidad.',
  'cta_landing': 'Si tu centro ya invierte en anuncios, pide tu diagnóstico: treinta minutos, con tus números, y vemos dónde se te están quedando las matrículas.',
 }
-MARCAS = [('d1', 'dolor', 'reserva'), ('d2', 'dolor', 'y'), ('d3', 'dolor', 'se')]
-COLA, ADELANTO = 1.6, 0.15
-AJUSTES = {'stability': 1.0}
+# marcas finas: (nombre, bloque, palabra)
+MARCAS = [('g2', 'gancho', 'calidad'), ('g1', 'gancho', 'reto'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'lo')]
+COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
     w = unicodedata.normalize('NFD', w.lower())
@@ -40,7 +42,7 @@ def tiempos():
         if ws[i:i + 2] != cab: sys.exit(f'no encuentro «{" ".join(cab)}»')
         T[bloque] = round(max(0, pal[i]['s'] - ADELANTO), 2) if bloque != 'gancho' else 0; i += 1
     for nombre, bloque, w in MARCAS:
-        T[nombre] = round(next(p['s'] for p in pal if p['s'] > T[bloque] + .3 and norm(p['w']) == w), 2)
+        T[nombre] = round(next(p['s'] for p in pal if p['s'] >= T[bloque] and norm(p['w']) == w), 2)
     dur = round(pal[-1]['e'] + COLA, 2)
     trozos, cur = [], []
     for p in pal:
@@ -49,7 +51,7 @@ def tiempos():
     if cur: trozos.append(cur)
     subs = []
     for tr in trozos:
-        n = -(-len(tr) // 6); tam = -(-len(tr) // n)
+        n = -(-len(tr) // 5); tam = -(-len(tr) // n)
         for k in range(0, len(tr), tam):
             c = tr[k:k + tam]; subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c)])
     for k in range(len(subs) - 1): subs[k][1] = min(subs[k][1], subs[k + 1][0])
@@ -73,6 +75,7 @@ if __name__ == '__main__':
     if orden == 'voz':
         import voz_elevenlabs as v
         v.tts(' '.join(f for _, f in GUION), 'javier', f'{AQUI}/voz/principal', ajustes=AJUSTES)
-        for k, t in EXTRA.items(): v.tts(t, 'javier', f'{AQUI}/voz/{k}', ajustes=AJUSTES)
+        if resto[:1] == ['extra']:
+            for k, t in EXTRA.items(): v.tts(t, 'javier', f'{AQUI}/voz/{k}', ajustes=AJUSTES)
     elif orden == 'tiempos': tiempos()
     elif orden == 'mezcla': mezcla(*resto)

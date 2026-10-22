@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Anuncio 09 «Solicitudes de calidad» (formación), guion v2 de Contenido (22-oct). Prueba en 9:16 (1080x1920).
+     Sin cara: pantallas de la demo v22 (capturas/), clips de Kling de la VSL (out/clips/, recorte 4:5) y voz de Javier · Qualivo.
+     Fondo negro y tarjetas marfil como la sección de demo de la v22. Textos entre el 14 % y el 78 % del alto.
+     Pantallas con «Ejemplo · datos simulados». Sin voz de agente ni llamada del asistente. -->
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:Mont;src:url(fuentes/montserrat-latin.woff2) format('woff2');font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#08090C;font-family:Mont;color:#FAF7F0}
+#tex{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;pointer-events:none;z-index:60}
+.sc{position:absolute;inset:0;opacity:0}
+/* rótulo superior (zona 290-470) */
+.rot{position:absolute;left:70px;right:70px;top:300px;font-family:Anton;font-size:76px;line-height:1.02;text-transform:uppercase;color:#FAF7F0;z-index:20}
+.rot i{font-style:normal;color:#F4CC38}
+.rot small{display:block;font-family:Mont;font-weight:800;font-size:30px;letter-spacing:.16em;color:#27BDB1;margin-bottom:14px}
+#sector{position:absolute;left:0;right:0;top:290px;text-align:center;z-index:30;opacity:0}
+#sector span{display:inline-block;background:#F4CC38;color:#08090C;font-family:Anton;font-size:54px;letter-spacing:.06em;padding:10px 30px 12px;border-radius:14px}
+/* ventana de pantalla (tarjeta) */
+.ven{position:absolute;left:90px;width:900px;top:500px;height:880px;border-radius:30px;overflow:hidden;background:#FAF7F0;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.ven img.cap{position:absolute;left:0;top:0;width:900px;display:block}
+.clip{position:absolute;left:90px;top:470px;width:900px;height:1125px;border-radius:30px;overflow:hidden;background:#111}
+.clip img{width:900px;height:1125px;display:block}
+.tag{position:absolute;z-index:25;left:110px;top:1322px;font-family:Mont;font-weight:800;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:2px solid #F0D98A;border-radius:999px;padding:6px 16px;opacity:0}
+/* subtítulos (una línea, encima del 78 %) */
+#sub{position:absolute;left:40px;right:40px;top:1418px;text-align:center;z-index:40}
+#sub span{display:inline-block;background:rgba(8,9,12,.92);color:#FAF7F0;font-family:Anton;font-size:46px;line-height:1.12;text-transform:uppercase;padding:10px 24px 12px;border-radius:14px;max-width:1000px}
+/* bandeja de solicitudes (pantalla nueva con el estilo de la demo) */
+.bar{height:64px;background:#101319;display:flex;align-items:center;gap:10px;padding:0 24px;color:#AEB5BF;font-weight:700;font-size:22px}
+.bar i{width:14px;height:14px;border-radius:50%;background:#3A3F48;display:block}
+.bar .td{margin-left:auto;font-size:17px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:5px 12px;border-radius:999px}
+.lista{position:absolute;left:0;right:0;top:64px}
+.sol{display:grid;grid-template-columns:58px 1fr auto;gap:0 18px;align-items:center;padding:20px 26px;border-bottom:2px solid #ECE6DA;color:#101319;background:#FAF7F0}
+.sol .av{width:58px;height:58px;border-radius:50%;background:#E3F2EF;color:#0E7C74;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center}
+.sol b{font-size:27px;font-weight:800;display:block}
+.sol small{font-size:21px;color:#5A5E66;font-weight:600}
+.sol em{font-style:normal;font-size:19px;font-weight:800;color:#7A7C82}
+.sol.luz{background:#E3F2EF;outline:5px solid #0E7C74;outline-offset:-5px}
+.sol.luz em{color:#0E7C74}
+.sol .nv{display:none;width:52px;height:52px;border-radius:12px;background:#0E7C74;color:#fff;font-weight:900;font-size:30px;align-items:center;justify-content:center}
+.sol.luz .nv{display:flex}.sol.luz em.h{display:none}
+/* notificaciones sobre el clip del móvil */
+.notis{position:absolute;left:130px;right:130px;top:560px;z-index:5}
+.noti{background:rgba(250,247,240,.96);color:#101319;border-radius:22px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:52px 1fr;gap:0 16px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0}
+.noti .ic{width:52px;height:52px;border-radius:12px;background:#0E7C74;color:#fff;font-weight:900;font-size:26px;display:flex;align-items:center;justify-content:center}
+.noti b{display:block;font-size:22px;font-weight:800}.noti small{font-size:20px;color:#5A5E66;font-weight:600}
+/* sellos */
+.sello{position:absolute;left:50%;font-family:Anton;font-size:84px;color:#C2410C;border:8px solid #C2410C;border-radius:16px;padding:4px 26px 8px;background:rgba(250,247,240,.92);text-transform:uppercase;white-space:nowrap;opacity:0;z-index:6}
+/* citas */
+.cita{display:grid;grid-template-columns:140px 1fr auto;gap:0 18px;align-items:center;padding:28px 28px;border-bottom:2px solid #ECE6DA;color:#101319}
+.cita time{font-weight:800;font-size:28px}
+.cita b{display:block;font-size:30px;font-weight:800}.cita small{font-size:21px;color:#5A5E66;font-weight:600}
+.est{font-size:21px;font-weight:800;padding:8px 16px;border-radius:999px;white-space:nowrap}
+.est.ok{background:#E3F2EF;color:#0E7C74}.est.pe{background:#FDF1C7;color:#8A5A00}.est.no{background:#C2410C;color:#fff}
+.cita.mal{background:#FFF1EA}
+/* chip de la solicitud enfriándose */
+.frio{position:absolute;left:150px;right:150px;top:1180px;background:rgba(250,247,240,.95);color:#101319;border-radius:22px;padding:20px 24px;font-size:24px;font-weight:700;opacity:0;z-index:5}
+.frio small{display:block;color:#C2410C;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+/* recorrido */
+.pasos{position:absolute;left:90px;right:90px;top:760px}
+.paso{display:grid;grid-template-columns:96px 1fr;gap:0 26px;align-items:center;padding:22px 0;border-top:2px solid rgba(250,247,240,.15);opacity:0}
+.paso i{font-style:normal;width:96px;height:96px;border-radius:50%;background:#F4CC38;color:#08090C;font-family:Anton;font-size:52px;display:flex;align-items:center;justify-content:center}
+.paso span{font-family:Anton;font-size:56px;text-transform:uppercase}
+/* anuncio de Laura */
+.ad{position:absolute;left:150px;width:780px;top:560px;background:#fff;border-radius:30px;overflow:hidden;color:#101319}
+.ad .h{display:flex;align-items:center;gap:16px;padding:24px 26px}
+.ad .h .av{width:62px;height:62px;border-radius:50%;background:#0E7C74;color:#fff;font-weight:900;font-size:28px;display:flex;align-items:center;justify-content:center}
+.ad .h b{display:block;font-size:26px;font-weight:800}.ad .h small{font-size:20px;color:#7A7C82;font-weight:600}
+.ad .im{height:520px;background:#101319;color:#FAF7F0;display:flex;flex-direction:column;justify-content:center;padding:44px;gap:20px}
+.ad .im h4{font-family:Anton;font-size:74px;line-height:.98;text-transform:uppercase}
+.ad .im h4 i{font-style:normal;color:#F4CC38}
+.ad .im p{font-size:28px;color:#AEB5BF;font-weight:600;line-height:1.35}
+.ad .bt{margin:22px 26px 26px;border:3px solid #101319;border-radius:16px;text-align:center;font-weight:800;font-size:26px;padding:18px}
+/* cierre */
+#dedo{position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(244,204,56,.55);border:6px solid #F4CC38;opacity:0;z-index:8}
+#logo{position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0}
+#logo img{width:560px}
+#logo p{font-family:Anton;font-size:48px;color:#F4CC38;letter-spacing:.06em;margin-top:30px}
+</style>
+<div id="e">
+  <div id="sector"><span>CENTROS DE FORMACIÓN</span></div>
+
+  <!-- S0 · móvil con notificaciones -->
+  <div class="sc" id="s0"><div class="clip"><img id="c-movil"></div>
+    <div class="notis" id="notis"></div></div>
+
+  <!-- S1/S2 · bandeja de solicitudes -->
+  <div class="sc" id="s1"><div class="rot" id="r1">El reto no es tener <i>más solicitudes</i></div>
+    <div class="ven"><div class="bar"><i></i><i></i><i></i><span>Solicitudes · esta semana</span><span class="td">Ejemplo</span></div><div class="lista" id="lista"></div></div></div>
+
+  <!-- S3 · no contesta -->
+  <div class="sc" id="s3"><div class="clip"><img id="c-dedos"></div>
+    <div class="sello" id="n1" style="top:640px">No contesta</div><div class="sello" id="n2" style="top:840px">No contesta</div><div class="sello" id="n3" style="top:1040px">No contesta</div></div>
+
+  <!-- S4 · citas -->
+  <div class="sc" id="s4"><div class="rot">Reservó · <i>no apareció</i></div>
+    <div class="ven"><div class="bar"><i></i><i></i><i></i><span>Llamadas con admisiones</span><span class="td">Ejemplo · datos simulados</span></div>
+      <div class="lista">
+        <div class="cita"><time>Lun 10:00</time><span><b>Andrés</b><small>Gestión administrativa</small></span><span class="est ok">Celebrada</span></div>
+        <div class="cita mal" id="cmal"><time>Mar 17:30</time><span><b>Paula</b><small>Gestión administrativa · reservó el viernes</small></span><span class="est pe" id="cest">Confirmada</span></div>
+        <div class="cita"><time>Mié 12:00</time><span><b>Óscar</b><small>Auxiliar de enfermería</small></span><span class="est pe">Pendiente</span></div>
+        <div class="cita"><time>Jue 18:00</time><span><b>Irene</b><small>Gestión administrativa</small></span><span class="est ok">Confirmada</span></div>
+      </div></div></div>
+
+  <!-- S5 · se enfría -->
+  <div class="sc" id="s5"><div class="rot" id="r5">La que sí encajaba <i id="r5b">se enfría</i></div>
+    <div class="clip" style="top:500px"><img id="c-sofa"></div>
+    <div class="frio" id="frio"><small>Sin respuesta · 2 días</small>Laura · Curso de gestión administrativa</div></div>
+
+  <!-- S6 · recorrido -->
+  <div class="sc" id="s6"><div class="rot"><small>La calidad se trabaja</small>en todo <i>el recorrido</i></div>
+    <div class="pasos"><div class="paso"><i>1</i><span>Anuncio</span></div><div class="paso"><i>2</i><span>Formulario</span></div><div class="paso"><i>3</i><span>WhatsApp</span></div><div class="paso"><i>4</i><span>Admisiones</span></div></div></div>
+
+  <!-- S7 · anuncio -->
+  <div class="sc" id="s7"><div class="rot"><small>1 · Anuncio</small>Para quien <i>encaja</i></div>
+    <div class="ad" id="ad"><div class="h"><div class="av">H</div><div><b>Centro de Formación Horizonte</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Curso de gestión administrativa. <i>Martes y jueves, 18:30.</i></h4><p>Pensado para quien trabaja por las mañanas y quiere cambiar de puesto.</p></div>
+      <div class="bt">Más información</div></div></div>
+
+  <!-- S8 · formulario -->
+  <div class="sc" id="s8"><div class="rot"><small>2 · Formulario</small><i>4 preguntas</i></div>
+    <div class="ven"><img class="cap" id="i-form" src="capturas/formulario.png"></div></div>
+
+  <!-- S9 · WhatsApp -->
+  <div class="sc" id="s9"><div class="rot"><small>3 · WhatsApp</small>Respuesta <i>en minutos</i></div>
+    <div class="ven" style="background:#0B141A"><img class="cap" id="i-wa" src="capturas/whatsapp.png"><div id="wa-tapa" style="position:absolute;left:0;right:0;bottom:0;background:#0B141A"></div></div></div>
+
+  <!-- S10 · ficha -->
+  <div class="sc" id="s10"><div class="rot"><small>4 · Admisiones</small>Con la <i>ficha delante</i></div>
+    <div class="clip" id="b-com" style="top:500px;height:880px"><img id="c-com" style="margin-top:-120px"></div>
+    <div class="ven" id="v-ficha"><img class="cap" id="i-ficha" src="capturas/ficha.png"></div></div>
+
+  <!-- S11 · siguiente paso -->
+  <div class="sc" id="s11"><div class="rot">Cada solicitud, <i>con su siguiente paso</i></div>
+    <div class="ven"><img class="cap" id="i-hoy" src="capturas/hoy.png"></div></div>
+
+  <!-- S12 · CTA -->
+  <div class="sc" id="s12"><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
+    <div class="ad" id="ad2"><div class="h"><div class="av">H</div><div><b>Centro de Formación Horizonte</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Curso de gestión administrativa. <i>Martes y jueves, 18:30.</i></h4><p>Pensado para quien trabaja por las mañanas y quiere cambiar de puesto.</p></div>
+      <div class="bt" id="bt2">Más información</div></div>
+    <div id="dedo"></div>
+    <div id="logo"><img src="../2026-10-07-demo-caso-v2/rec/logo-blanco.png"><p>Diagnóstico sin coste · 30 min</p></div></div>
+
+  <div class="tag" id="tag">Ejemplo · datos simulados</div>
+  <div id="sub"><span id="subt"></span></div>
+  <div id="tex"></div>
+</div>
+<script src="tiempos.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+$('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3); const io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function win(t,a,b,fi=.15,fo=.04){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
+function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
+// datos de ejemplo de la bandeja
+const NOM=['Lucía','Marcos','Sara','Iván','Nerea','Pablo','Elena','Hugo','Carmen','Diego','Alba','Raúl','Marta','Jorge','Irene','Óscar','Paula','Álvaro','Noelia','Adrián','Rocío','Sergio','Laura','Víctor','Ainhoa','Rubén','Celia','Mario','Andrea','Javier'];
+const CUR=['Gestión administrativa','Auxiliar de enfermería','Inglés B2','Contabilidad','Gestión administrativa','Marketing digital'];
+let h=''; NOM.forEach((n,i)=>{ h+=`<div class="sol${n==='Laura'?'" id="laura':''}"><span class="av">${n[0]}</span><span><b>Nueva solicitud · ${n}</b><small>${CUR[i%6]}</small></span><em class="h">hace ${i+2} min</em><span class="nv">A</span></div>`; }); $('lista').innerHTML=h;
+const NO=[['Nueva solicitud','Curso de gestión administrativa'],['Nueva solicitud','Auxiliar de enfermería'],['Nueva solicitud','Inglés B2'],['Nueva solicitud','Contabilidad']];
+$('notis').innerHTML=NO.map(x=>`<div class="noti"><span class="ic">H</span><span><b>${x[0]}</b><small>${x[1]}</small></span></div>`).join('');
+// clips de Kling (126 fotogramas a 25 fps)
+const CLIP={movil:'k-movil-noche',dedos:'k-dedos',sofa:'k-sofa',com:'broll-panel'};
+const espera=[];
+function clip(id,nombre,t0,t){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
+  if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
+const S={s0:[0,1.7], s1:[1.7,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.p4], s10:[T.p4,T.prueba], s11:[T.prueba,T.cta], s12:[T.cta,DUR+1]};
+window.setT=function(t){
+  espera.length=0;
+  for(const k in S){ const [a,b]=S[k]; const o=k==='s0'?win(t,a,b,.01,.04):win(t,a,b); $(k).style.opacity=o; $(k).style.transform=`translateY(${(1-out(nm(t,a,a+.25)))*40}px)`; }
+  // rótulo del sector, del fotograma 0 al segundo 4
+  $('sector').style.opacity=t<T.g1-.2?1:1-nm(t,T.g1-.2,T.g1);
+  // S0
+  if(t<S.s0[1]+.1) clip('c-movil',CLIP.movil,0,t+1.2);
+  document.querySelectorAll('.noti').forEach((n,i)=>show(n,nm(t,.15+i*.32,.3+i*.32),-30));
+  // S1-S2: bandeja que se desplaza y frena en «calidad»
+  const a1=S.s1[0]; show($('r1'),nm(t,T.g1-.1,T.g1+.2),20);
+  const lauraY=22*102; const fin=lauraY-380; const v=nm(t,a1,T.g2); const y=fin*(v<1?(1-Math.pow(1-v,2.2)):1);
+  $('lista').style.transform=`translateY(${-y}px)`; $('laura').classList.toggle('luz',t>T.g2-.05);
+  if(t>T.g2-.05){ $('r1').innerHTML='Es que sean <i>de calidad</i>'; } else { $('r1').innerHTML='El reto no es tener <i>más solicitudes</i>'; }
+  // S3
+  if(t>=S.s3[0]-.1&&t<S.s3[1]+.1) clip('c-dedos',CLIP.dedos,S.s3[0],t);
+  ['n1','n2','n3'].forEach((k,i)=>{ const o=nm(t,S.s3[0]+.25+i*.75,S.s3[0]+.4+i*.75); const el=$(k); el.style.opacity=o; el.style.transform=`translateX(-50%) rotate(${[-6,4,-3][i]}deg) scale(${1.4-.4*out(o)})`; });
+  // S4
+  const nop=t>S.s4[0]+1.0; $('cest').textContent=nop?'No se presentó':'Confirmada'; $('cest').className='est '+(nop?'no':'pe'); $('cmal').style.background=nop?'#FFF1EA':'transparent';
+  // S5
+  if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-sofa',CLIP.sofa,S.s5[0],t);
+  const fr=nm(t,S.s5[0]+.5,S.s5[1]-.5); $('c-sofa').style.filter=`saturate(${1-.55*fr}) hue-rotate(${18*fr}deg) brightness(${1-.25*fr})`;
+  show($('frio'),nm(t,S.s5[0]+.8,S.s5[0]+1.1),20); $('r5b').style.opacity=nm(t,S.s5[0]+2.6,S.s5[0]+2.9);
+  // S6
+  document.querySelectorAll('.paso').forEach((p,i)=>show(p,nm(t,S.s6[0]+.6+i*.45,S.s6[0]+.85+i*.45),20));
+  // S7
+  $('ad').style.transform=`translateY(${(1-out(nm(t,S.s7[0],S.s7[0]+.4)))*200}px)`;
+  // S8: el formulario baja hasta la cuarta pregunta
+  $('i-form').style.transform=`translateY(${-640*io(nm(t,S.s8[0]+.8,S.s8[1]-.4))}px)`;
+  // S9: el chat se va descubriendo
+  const wv=nm(t,S.s9[0]+.2,S.s9[1]-1); $('wa-tapa').style.top=(80+wv*1240)+'px'; $('i-wa').style.transform=`translateY(${-Math.max(0,wv*1240+80-860)*.6}px)`;
+  // S10: plano de admisiones y luego la ficha
+  if(t>=S.s10[0]-.1&&t<S.s10[0]+2) clip('c-com',CLIP.com,S.s10[0],t);
+  const fo=nm(t,S.s10[0]+1.5,S.s10[0]+1.8); $('b-com').style.opacity=1-fo; $('v-ficha').style.opacity=fo;
+  $('i-ficha').style.transform=`translateY(${-2700*io(nm(t,S.s10[0]+3.2,S.s10[1]-.5))}px)`;
+  // S11
+  $('i-hoy').style.transform=`translateY(${-1800*io(nm(t,S.s11[0]+1,S.s11[1]-.3))}px)`;
+  // S12: portada, dedo en el botón y logo
+  $('bt2').style.background=t>T.c1+.1&&t<T.c1+.6?'#F4CC38':'transparent';
+  const dd=$('dedo'); dd.style.left='485px'; dd.style.top='1192px'; dd.style.opacity=win(t,T.c1-.2,T.c1+.9,.15,.2); dd.style.transform=`scale(${1-.25*Math.sin(Math.PI*nm(t,T.c1,T.c1+.4))})`;
+  const lg=nm(t,T.c2,T.c2+.4); $('logo').style.opacity=lg; $('ad2').style.opacity=1-lg; $('r12a').style.opacity=1-lg;
+  // etiqueta de ejemplo en las pantallas de la demo
+  $('tag').style.opacity=(t>S.s4[0]&&t<S.s4[1])||(t>S.s8[0]&&t<S.s11[1])?1:0;
+  // subtítulos
+  const s=SUBS.find(x=>t>=x[0]&&t<x[1]); $('sub').style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
+  return Promise.all(espera);
+};
+window.setT(0);
+</script>
