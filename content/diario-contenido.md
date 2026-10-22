@@ -1590,3 +1590,43 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 - **Referencia de marca:** `content/copy/referencia-marca.md`.
 - **Bloqueo:** el kit de demo de formación no tiene pantallas de anuncio ni de formulario, y su titular («Del primer mensaje al cliente») reduce Qualivo a lo que pasa después del formulario. El email lleva dos versiones de la línea de la demo según si se arregla.
 - **Pendiente de Maikel:** confirmar que asumo la función. El mensaje del CoS lo da por decidido, pero en este chat aún no lo ha dicho él.
+
+### Jueves 22-oct · trabajo del día
+
+**Incidencia al arrancar:** el entorno se reinició con la rama `claude/pensive-cray-u3k7kx` activa, que tiene 37 commits de otro trabajo. El `pull --rebase` empezó a ponerlos sobre la rama de contenido y se paró en un conflicto de `.gitignore`. Lo aborté (`git rebase --abort`): esa rama queda como estaba (0212f20), sin ningún push. La rutina sigue en `claude/qualivo-landing-vercel-nubk1i`.
+
+**Publicado:**
+- **Re-apunte de [/blog/presupuestos-sin-respuesta/](https://qualivo.io/blog/presupuestos-sin-respuesta/):**
+  - **El último bloque:** las tareas de seguimiento de propuestas a los 2, 5 y 10 días, con borrador, que envía una persona (desde el 19-oct). Y la lección de esta semana: un contacto se quejó de recibir demasiados toques, así que un presupuesto lo sigue una sola persona con nombre.
+  - **Lo que sale:**
+    - la caja del caso Nuria Roure, porque no hay permiso por escrito (R6);
+    - «no cambiamos tu sistema», porque no está comprobado;
+    - «plan por escrito en 24 horas», porque no está confirmado.
+  - Sitemap, llms.txt y registro de keywords al día.
+  - **Por qué este artículo:** es el de reformas, que es el primer sector del piloto ABM.
+
+**Borradores:**
+- **Agentizando del jueves:** `content/borradores/2026-10-22-agentizando-demasiados-toques.md`, «Me escribía demasiada gente».
+  - **Dato:** el daily de Growth del 21-oct (la queja por exceso de toques y 4 respuestas en unas horas a seguimientos manuales).
+  - **Dos variantes:** A, si Maikel aprueba el cambio de un solo remitente humano; B, si aún no.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya lleva dos piezas fuertes, y mi recomendación sigue siendo dos por semana.
+- **Newsletter.** Hoy es jueves.
+
+**Decisiones para Maikel:**
+1. **Un solo remitente humano desde el segundo toque** (propuesta de Growth). Recomendación: sí. Desbloquea el Agentizando de hoy.
+2. **La landing interactiva de la demo de formación** (preguntado ayer). Recomendación:
+   - publicarla en `/formacion/demo/` sin indexar;
+   - con el formulario de formación como único botón;
+   - con la voz marcada «en pausa hoy»;
+   - después de que la revise Growth.
+3. **Siguen pendientes:**
+   - la cadencia;
+   - el Sin humo «28 cualificados»;
+   - la bandera roja del trato sin importe;
+   - los permisos de casos;
+   - la LSSI de la secuencia ABM;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** si se aprueba el remitente único, los seguimientos de la semana que viene tendrán más respuestas por toque que los de la semana 42. Se compara con el registro de Growth, sin publicar tasas.
