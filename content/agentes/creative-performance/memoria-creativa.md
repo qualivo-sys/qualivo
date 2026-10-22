@@ -140,6 +140,18 @@ Plantilla:
 - **Pendiente:** el formulario aún dice «desde 750 €/mes»; decidir antes de subir. Medir con UTM y anuncio identificado.
 - **Resultados:** falta dato (no lanzado).
 
+## Noviembre 2026
+
+### 09 · «Solicitudes de calidad» · formación (guion del 22-oct)
+- **Estado:** borrador de guion, pendiente del ok de Maikel. Después, montaje de Creative.
+- **Vertical · Etapa · Dolor · Ángulo · Formato:** formación · captación, cualificación y seguimiento · calidad (admisiones gasta el tiempo con quien no iba a matricularse) · contrarian + pérdida · Maikel a cámara + pantallas de la demo v22 (Laura), 9:16 y 4:5, unos 55 s.
+- **Hooks:** A «Si tienes un centro de formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.» · B «Lunes, nueve de la mañana. Admisiones abre el CRM: treinta solicitudes nuevas. ¿A quién llama primero?» · C «En tu centro pagas por cada solicitud. También por las que nunca iban a matricularse.»
+- **Mecanismo que enseña:** anuncio para quien encaja → formulario de 4 preguntas → respuesta por WhatsApp en minutos → ficha para admisiones. Sin voz (en pausa) ni atribución por anuncio.
+- **CTA:** Meta «Toca en Más información y responde cuatro preguntas» · landing «Pide tu diagnóstico: treinta minutos conmigo…».
+- **Fuente:** `content/copy/2026-11-guion-anuncio-formacion-calidad.md`. Brief de Paid en la rama `claude/qualivo-paid`.
+- **Hipótesis de test:** P-03 de Paid. Cambia solo el vídeo; se mantienen el formulario de E-01, el público y el presupuesto. Decide el % de aptos y el coste por reunión con encaje.
+- **Resultados:** falta dato (no lanzado).
+
 ## Pendiente de la semana 1 (5-9 oct)
 - Decidir qué borradores entran al test, corrigiendo antes las promesas marcadas con ⚠️.
 - Mismo conjunto, mismo formulario y mismo presupuesto. Se decide por coste por lead A/B y reuniones celebradas, no por CPL.
