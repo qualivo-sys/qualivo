@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty · recorrido completo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Recorrido completo para Hunty (reunión 23-oct): mapa, anuncios, landing, retargeting, avisos, emails desde fichas, base de datos, agentes y medición. Reutiliza los estilos de la demo. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--body:var(--sans)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+/* cabecera */
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,33,9,.97) 0%,rgba(12,33,9,.86) 55%,rgba(12,33,9,.55) 100%),url(../assets/monteria.jpg) center 35%/cover}
+.dhero .wrap{padding-block:56px 40px;display:grid;gap:12px}
+.dhero .eyebrow{color:#BFE3B6}
+.dhero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.82);max-width:68ch;margin-top:6px}
+.dhero .note{color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.2);margin-top:10px;max-width:90ch}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:clamp(25px,3vw,34px);line-height:1.12;letter-spacing:-.015em}
+.eyebrow{font-family:var(--mono)}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#C9860A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
+h2 .ej{vertical-align:6px;margin-left:6px}
+/* pestañas tipo producto */
+nav.tabs{position:sticky;top:57px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-28px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 9px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(12,33,9,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px;font-size:13.5px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px}
+.pane > header p{color:var(--muted);margin-top:8px;max-width:76ch;font-size:16.5px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.adimg{width:100%;border-radius:14px;display:block;box-shadow:var(--shadow-lg)}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:12px;line-height:1.55}
+.why b{color:var(--ink)}
+/* captura y test */
+.capt{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;box-shadow:var(--shadow)}
+.capt .row{display:flex;gap:8px;flex-wrap:wrap}
+.capt .fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper)}
+.capt .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:650;border-radius:99px;padding:9px 16px;font-size:14.5px;width:fit-content}
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:24px;display:grid;gap:14px;min-height:500px;align-content:start;box-shadow:var(--shadow-lg)}
+.quiz h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;line-height:1.2}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--moss));transition:width .35s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:550;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+.quiz .qopts button:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateX(2px)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2}
+.quiz .done p{color:var(--muted);font-size:15px}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* móvil: WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0E120D;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #2b3328,0 30px 60px -20px rgba(12,33,9,.55),inset 0 0 0 2px #262c24;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:36px;height:36px;border-radius:50%;background:#2C7C24 url(../assets/logo-white.svg) center/76% no-repeat;display:inline-block;flex:none}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;max-height:690px;overflow-y:auto;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:#C9860A}
+.log li.g{border-left-color:var(--good)}
+/* voz */
+.call{border-radius:28px;background:var(--surface);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.call .top{background:linear-gradient(160deg,#1A4A15,#0C2109);color:#fff;padding:22px 20px 18px;display:grid;justify-items:center;gap:6px;text-align:center;font-size:14px}
+.call .av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+.call .av svg{width:28px;height:28px}
+.call .top small{opacity:.75;font-family:var(--mono);font-size:11.5px}
+.wave{display:flex;gap:3px;align-items:center;height:26px;margin-top:4px}
+.wave i{width:3px;border-radius:2px;background:var(--moss);animation:wv 1.2s ease-in-out infinite}
+.wave i:nth-child(odd){animation-delay:-.4s}.wave i:nth-child(3n){animation-delay:-.8s}
+@keyframes wv{0%,100%{height:5px}50%{height:24px}}
+.call .body{padding:16px;display:flex;flex-direction:column;gap:9px}
+.v{max-width:86%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.5}
+.v small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:2px;letter-spacing:.06em}
+.v.r{background:var(--accent-soft);align-self:flex-start;border-top-left-radius:4px}
+.v.c{background:var(--paper);border:1px solid var(--line);align-self:flex-end;border-top-right-radius:4px}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.55}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+/* ventanas de aplicación (ficha y panel) */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#E5DFD2}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:#C9860A;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd b{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.ficha .sc{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+/* seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:#C9860A}
+.tl li.mail::before{background:#5B7FB8}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.tbl{overflow-x:auto}
+.tbl table,.box > table{width:100%;border-collapse:collapse;font-size:14px}
+.tbl table{min-width:640px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl td.w{white-space:normal;min-width:220px}
+.tbl th{white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl td:nth-child(9){font-weight:700;color:var(--accent)}
+.ficha .hd > div:first-child{flex:1 1 300px}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tbl tbody tr:last-child td{border-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:#C9860A;background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.links .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.cols,.seq,.two{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.cols > div{max-width:440px}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:560px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:32px}.dhero .wrap{padding-block:40px 44px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.dhero::before{background:var(--f900)}.wave i{animation:none;height:10px}}
+/* recorrido */
+.bl{margin:0;padding-left:18px;display:grid;gap:7px;font-size:14.5px;line-height:1.5}
+.bl li::marker{color:var(--accent)}
+ol.bl{padding-left:20px}
+.box > p{font-size:15px;line-height:1.55}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;counter-reset:f}
+.flow li{position:relative;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--f700);border-radius:14px;padding:14px 12px;display:grid;gap:6px;align-content:start;box-shadow:var(--shadow)}
+.flow li b{font-size:14.5px;line-height:1.3}
+.flow li span{font-size:13px;color:var(--muted);line-height:1.45}
+.flow li.alt{border-top-color:#C9860A}
+.flow li.ok{border-top-color:var(--good)}
+.flow li.db{border-top-color:#5B7FB8}
+.flow.funnel{grid-template-columns:repeat(6,minmax(0,1fr))}
+.steps{margin:0;padding-left:20px;display:grid;gap:10px;font-size:14.5px;line-height:1.5}
+.steps li::marker{font-family:var(--mono);color:var(--accent)}
+table.kv,table.seg{width:100%;border-collapse:collapse;font-size:14px}
+table.kv th,table.kv td,table.seg th,table.seg td{padding:8px 8px;border-bottom:1px solid var(--line-2);text-align:left;vertical-align:top;line-height:1.45}
+table.kv th{width:32%;font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+table.seg th{font-family:var(--mono);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--surface-2)}
+table.seg td:first-child{font-weight:600;width:42%}
+table.kv tr:last-child th,table.kv tr:last-child td,table.seg tr:last-child td{border-bottom:0}
+.mailbox .subj{font-weight:700;font-size:15px}
+.mailbody{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;font-size:14.5px;line-height:1.55}
+.mailbody ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.mailbody .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:650;border-radius:99px;padding:9px 16px;font-size:14.5px}
+code{font-family:var(--mono);font-size:12px;background:var(--line-2);border-radius:5px;padding:1px 5px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow.funnel{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.flow,.flow.funnel{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10.5 3 12 8 12 8s1.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M7 2v4a5 5 0 0 0 10 0V2M7 22v-4a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol></svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><img src="../assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Recorrido</a><a href="../demo/">Demo</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">Recorrido completo · Hunty · ventas web</p>
+  <h1>Del anuncio a la reserva, y de la reserva a la siguiente</h1>
+  <p class="lead">Objetivo: más reservas web con el tráfico y la base que ya tenéis. Aquí está paso a paso todo lo que pasaría: el anuncio, la landing, el retargeting si no reserva, los avisos, los emails que salen de cada ficha, el trabajo con vuestra base de datos y cómo encaja con vuestros agentes.</p>
+  <p class="note"><span class="ej">Ejemplo</span> Las cacerías, los precios y las cifras de Hunty son los publicados en hunty.es el 16-oct-2026. Hay que confirmarlos antes de usarlos. Javier, Carlos, Marta, los mensajes y cualquier número de resultados son inventados, y ningún número de esta página es una previsión. Los textos finales los aprueba Hunty.</p>
+</div>
+</header>
+
+<div class="wrap main">
+
+<nav class="tabs" role="tablist" aria-label="Pasos del recorrido">
+  <button role="tab" id="t-mapa" aria-controls="p-mapa" data-p="mapa"><span>0</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Mapa</button>
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-layers"/></svg>Landing</button>
+  <button role="tab" id="t-retargeting" aria-controls="p-retargeting" data-p="retargeting"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-eye"/></svg>Retargeting</button>
+  <button role="tab" id="t-avisos" aria-controls="p-avisos" data-p="avisos"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Avisos</button>
+  <button role="tab" id="t-fichas" aria-controls="p-fichas" data-p="fichas"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mail"/></svg>Emails desde fichas</button>
+  <button role="tab" id="t-base" aria-controls="p-base" data-p="base"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-search"/></svg>Base de datos</button>
+  <button role="tab" id="t-agentes" aria-controls="p-agentes" data-p="agentes"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-key"/></svg>Vuestros agentes</button>
+  <button role="tab" id="t-medir" aria-controls="p-medir" data-p="medir"><span>8</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Medición y 90 días</button>
+</nav>
+
+<!-- 0 · MAPA -->
+<section class="pane" id="p-mapa" role="tabpanel" aria-labelledby="t-mapa">
+  <header><h2>El recorrido entero, en una pantalla</h2><p>Hoy hay un camino: el anuncio lleva a la web y el que no reserva en esa visita se pierde. Proponemos que cada visita tenga un siguiente paso, y que la base de clientes que ya tenéis vuelva a reservar.</p></header>
+  <ol class="flow">
+    <li><b>1 · Anuncio</b><span>Mensaje que filtra: modalidad, fecha, zona y precio. Va a una landing que dice lo mismo que el anuncio.</span></li>
+    <li><b>2 · Landing</b><span>Las cacerías que encajan, con su precio, sus reseñas y la reserva con señal. Quien no reserva puede dejar un aviso.</span></li>
+    <li class="alt"><b>3 · No reserva → retargeting</b><span>Según lo que hizo: vio la landing, vio una ficha tres veces o empezó la reserva. Cada caso ve un anuncio distinto.</span></li>
+    <li class="alt"><b>4 · Deja un aviso</b><span>«Avísame si sale una montería en Toledo por menos de 400 €». Cuando se publica una, le llega el aviso.</span></li>
+    <li><b>5 · Conversación</b><span>El WhatsApp del asesor se contesta al minuto. Lo hace Clara o nuestro agente, según decidáis. El comercial solo recibe los contactos calientes, con la ficha hecha.</span></li>
+    <li class="ok"><b>6 · Reserva</b><span>Señal pagada. Se avisa a Meta para que busque más cazadores como ese, y se le acompaña antes y después de la jornada.</span></li>
+    <li class="db"><b>7 · Base de datos</b><span>Cada ficha que publicáis genera su email para el segmento que encaja, y los clientes de otras temporadas reciben su siguiente cacería.</span></li>
+  </ol>
+  <div class="cols">
+    <div class="box"><p class="cap">Lo que no cambia</p><p>La web y la reserva con señal: ya convierten a quien llega decidido. El tráfico sigue yendo a hunty.es. Clara, Bruno y vuestro orquestador siguen siendo vuestros.</p></div>
+    <div class="box"><p class="cap">Lo que añadimos</p><p>Landings por campaña, retargeting por comportamiento, avisos, emails que salen de cada ficha, segmentos de la base y la medición desde el anuncio hasta la comisión.</p></div>
+    <div class="box"><p class="cap">El número que manda</p><p><b>De cada 100 usuarios únicos, cuántos reservan</b>, por canal y por campaña. Lo medimos en la semana 0 y todos los meses. Además: el euro de comisión por euro invertido en anuncios.</p></div>
+  </div>
+  <div class="navnext"><button class="btnl" data-go="anuncios">Siguiente: los anuncios <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 1 · ANUNCIOS -->
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>1 · Anuncios: atraer al cazador que va a reservar <span class="ej">Ejemplo</span></h2><p>Hoy hay 20 anuncios activos que llevan al catálogo o a Prime, sin precio ni fecha (Biblioteca de anuncios de Meta, 16-oct). Proponemos menos piezas y más claras, cada una con su landing, y medidas por reserva y no por clic.</p></header>
+  <div class="tbl"><table>
+    <thead><tr><th class="l">Campaña</th><th class="l">A quién</th><th class="l">Mensaje del anuncio</th><th class="l">Dónde lleva</th><th class="l">Se mide por</th></tr></thead>
+    <tbody>
+      <tr><td>A · Monterías de temporada</td><td class="w">Monteros de España. Públicos parecidos a quienes han reservado una montería (a partir de vuestras reservas).</td><td class="w">«Monterías de diciembre y enero en Toledo y Cáceres, desde 300 € el puesto. Mismo precio que el organizador.»</td><td class="w">Landing «Monterías de diciembre y enero», con filtro de provincia.</td><td class="w">Coste por reserva y comisión</td></tr>
+      <tr><td>B · Rececho de trofeo</td><td class="w">Cazadores con experiencia y presupuesto alto. Intereses en caza mayor y en viajes de caza.</td><td class="w">«Rececho de [especie] con precio cerrado. Para quien ya sabe lo que busca.» La especie y la temporada, correctas en cada pieza.</td><td class="w">Landing de la especie solo con recechos, no con todas las modalidades.</td><td class="w">Reservas y conversaciones con el asesor</td></tr>
+      <tr><td>C · Prime</td><td class="w">Quien ya ha reservado una vez y quien ha visitado 3 o más fichas.</td><td class="w">«En una montería te ahorras hasta 175 € con Prime. Prime cuesta 150 € al año.» Firmado por HUNTY, no por otra página.</td><td class="w">/club/prime, con el ahorro calculado para la cacería que estaba mirando.</td><td class="w">Altas de Prime y reservas de socios</td></tr>
+      <tr><td>D · «Más adelante»</td><td class="w">Público amplio de cazadores, fuera de su temporada.</td><td class="w">«¿Corzo en primavera? Te avisamos cuando salga en tu zona y en tu presupuesto.»</td><td class="w">Página de avisos (paso 4).</td><td class="w">Avisos creados y reservas a 90 días</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div class="box"><p class="cap">Reglas para todas las campañas</p>
+      <ul class="bl">
+        <li>Lo que dice el anuncio, la landing lo dice arriba del todo: misma cacería, misma zona y mismo precio.</li>
+        <li>3 o 4 piezas por campaña. Cada 2 semanas se cambia la que peor funciona.</li>
+        <li>Meta recibe las reservas pagadas por la API de conversiones, no solo las visitas, para que optimice por quien reserva.</li>
+        <li>El código de seguimiento como parámetro propio en cada enlace, para saber qué anuncio trae cada reserva.</li>
+        <li>Se excluye a quien ha reservado en los últimos 30 días.</li>
+      </ul>
+    </div>
+    <div class="box"><p class="cap">Antes de empezar (no cuesta nada)</p>
+      <ul class="bl">
+        <li>El anuncio de muflón lleva a la página de corzo.</li>
+        <li>Los de Castilla-La Mancha y Andalucía llevan a monterías de Extremadura.</li>
+        <li>El código de seguimiento va metido dentro de otro parámetro del enlace y probablemente no se registra.</li>
+        <li>«Desde 170 €» en el texto y «desde 220 €» en el titular del mismo anuncio.</li>
+      </ul>
+      <p class="small muted">Lo vimos el 16-oct en la Biblioteca de anuncios de Meta. Hay que comprobar si sigue así.</p>
+    </div>
+  </div>
+  <div class="box"><p class="cap">Google: hoy no tenéis ningún anuncio</p><p>Cero anuncios de hunty.es en el Centro de Transparencia de Google (16-oct). Proponemos una prueba pequeña en búsquedas con intención clara, como «montería Toledo diciembre», «rececho corzo Burgos» o «puesto montería precio». Cada búsqueda lleva a su landing filtrada, y se mide igual que Meta: por reserva.</p></div>
+  <div class="navnext"><button class="btnl" data-go="landing">Siguiente: la landing <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · LANDING -->
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>2 · La primera landing: que el que llega del anuncio encuentre su cacería <span class="ej">Ejemplo</span></h2><p>No es una página nueva fuera de la web. Es una página de hunty.es hecha para cada campaña. Javier, de Madrid, ve el anuncio A el martes a las 19:05 y entra.</p></header>
+  <div class="two">
+    <div class="box lp">
+      <p class="cap">Lo que ve Javier, de arriba abajo</p>
+      <ol class="steps">
+        <li><b>Arriba:</b> «Monterías de diciembre y enero en Castilla-La Mancha y Extremadura», con filtro de provincia, precio y fechas ya puesto según el anuncio.</li>
+        <li><b>Las cacerías, por fecha:</b> por ejemplo Río Frío (Robledo del Mazo, Toledo) el 26-dic a 350 € el puesto y Valmorisco (Jarandilla de la Vera, Cáceres) el 9-ene a 300 €. Cada una con precio, precio Prime, reseñas y el botón de reservar.</li>
+        <li><b>Confianza:</b> +9.400 reservas gestionadas, 4,6/5 con 764 opiniones y «mismo precio que el organizador». Hay que unificar antes las cifras de la web: en la misma home pone 4,7/5 con 644 opiniones.</li>
+        <li><b>Cómo se reserva:</b> la señal (en Valmorisco, 40 € por puesto), qué se paga al organizador y cómo es el sorteo de puestos. Son las dudas que más llegan.</li>
+        <li><b>Si no es la suya:</b> «🔔 Avísame si sale otra en mi provincia y mi presupuesto». Pide WhatsApp o email, sin crear cuenta.</li>
+        <li><b>Asesor:</b> «¿Dudas? Te contestamos en un minuto por WhatsApp». El mensaje lleva la cacería que estaba mirando, para no empezar de cero.</li>
+      </ol>
+    </div>
+    <div class="box">
+      <p class="cap">Qué quitamos de esta página</p>
+      <ul class="bl">
+        <li>La ventana de «Crear cuenta gratis» a los 10 segundos: aquí no aparece. La cuenta se crea al reservar.</li>
+        <li>El calendario que empieza por monterías que ya se han celebrado.</li>
+        <li>Los enlaces a todas las modalidades: esta página es solo de monterías.</li>
+      </ul>
+      <p class="cap" style="margin-top:8px">Qué se mide (ya tenéis GA4, GTM, Mixpanel, Clarity y el píxel)</p>
+      <ul class="bl">
+        <li><code>ver_landing</code> → <code>usar_filtro</code> → <code>ver_ficha</code> → <code>empezar_reserva</code> → <code>reserva_pagada</code></li>
+        <li><code>crear_aviso</code> y <code>abrir_whatsapp_asesor</code>, con la cacería vista.</li>
+        <li>Clarity: dónde se paran y dónde abandonan en la reserva.</li>
+      </ul>
+      <p class="cap" style="margin-top:8px">Primera prueba A/B</p>
+      <p>La mitad del tráfico del anuncio A va a la landing y la otra mitad al buscador actual. Gana la que más reservas consigue por cada 100 usuarios únicos. Si la landing no gana, se apaga.</p>
+    </div>
+  </div>
+  <p class="note">Hay una maqueta de esta landing (sus formularios no envían nada) en <a href="../landing/">Landing</a>.</p>
+  <div class="navnext"><button class="btnl" data-go="retargeting">Siguiente: si no reserva <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · RETARGETING -->
+<section class="pane" id="p-retargeting" role="tabpanel" aria-labelledby="t-retargeting">
+  <header><h2>3 · Si en la primera visita no reserva: retargeting según lo que hizo <span class="ej">Ejemplo</span></h2><p>Javier miró Valmorisco tres veces y se fue sin reservar. Hoy le saldría un anuncio genérico, o nada. Aquí cada comportamiento tiene su anuncio y su plazo, y en cuanto reserva deja de verlos.</p></header>
+  <div class="tbl"><table>
+    <thead><tr><th class="l">Qué hizo</th><th class="l">Cuándo</th><th class="l">Qué ve</th><th class="l">Formato</th><th class="l">Para cuando</th></tr></thead>
+    <tbody>
+      <tr><td>Vio la landing y no abrió ninguna ficha</td><td class="w">Días 1-3</td><td class="w">«Las monterías de diciembre en tu zona, por fecha». Un carrusel con 5 cacerías y su precio.</td><td class="w">Carrusel generado desde el catálogo</td><td class="w">Abre una ficha o pasan 3 días</td></tr>
+      <tr><td>Vio una ficha 2 o más veces</td><td class="w">Días 1-7</td><td class="w">La misma cacería: «Valmorisco · 9 de enero · 300 € el puesto · 4,3/5». Luego las 3 más parecidas.</td><td class="w">Anuncio dinámico de catálogo, que sale de la ficha</td><td class="w">Reserva o pasan 7 días</td></tr>
+      <tr><td>Empezó la reserva y no pagó</td><td class="w">Horas 1-72</td><td class="w">«Tu puesto en Valmorisco sigue disponible. ¿Te ayudamos con la reserva?», con un botón al WhatsApp del asesor.</td><td class="w">Imagen y mensaje directo. Si dejó datos, también WhatsApp y email.</td><td class="w">Paga o pasan 3 días</td></tr>
+      <tr><td>Visitó la web hace 8-30 días</td><td class="w">Días 8-30</td><td class="w">Opiniones de cazadores que fueron, y el ahorro con Prime en la modalidad que miró.</td><td class="w">Vídeo corto o imagen de reseñas</td><td class="w">Día 30</td></tr>
+      <tr><td>Pasa de 30 días</td><td class="w">—</td><td class="w">Deja de ver anuncios de recuerdo. Si dejó un aviso, se le avisa (paso 4).</td><td class="w">—</td><td class="w">—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols">
+    <div class="box"><p class="cap">El catálogo de cacerías</p><p>Las fichas de hunty.es se conectan a Meta como catálogo: nombre, fecha, provincia, precio, foto y enlace. Así los anuncios de recuerdo se hacen solos con cada cacería y se quitan cuando pasa la fecha o se llena. Hace falta que vuestro desarrollador lo exporte una vez.</p></div>
+    <div class="box"><p class="cap">Límites</p><p>Como máximo 2 o 3 impactos por persona a la semana. Fuera quien ya ha reservado, quien es Prime en los anuncios de Prime y el tráfico de organizadores (/pro). Nunca se dice «últimas plazas» si la ficha no lo dice.</p></div>
+    <div class="box"><p class="cap">Cómo se sabe si funciona</p><p>Una parte del público de recuerdo no ve los anuncios (grupo de control). Comparamos las reservas de quien los ve con las de quien no los ve. Así se mide la reserva que se ha ganado de verdad, no la que habría llegado igual.</p></div>
+  </div>
+  <div class="navnext"><button class="btnl" data-go="avisos">Siguiente: los avisos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · AVISOS -->
+<section class="pane" id="p-avisos" role="tabpanel" aria-labelledby="t-avisos">
+  <header><h2>4 · Avisos: que el cazador os pida que le escribáis <span class="ej">Ejemplo</span></h2><p>Es la forma de quedarse para quien no reserva hoy. A cambio de su WhatsApp o su email recibe algo útil: le avisáis cuando sale lo que busca. Cada aviso dice qué caza, dónde, cuándo y por cuánto, que es justo lo que el comercial necesita saber.</p></header>
+  <div class="two">
+    <div class="capt">
+      <p class="cap">En cada ficha, en la landing y en la página de cada especie</p>
+      <b>🔔 Avísame cuando salga</b>
+      <div class="row"><span class="fake">Montería ▾</span><span class="fake">Toledo, Cáceres ▾</span><span class="fake">Dic-Ene ▾</span><span class="fake">Hasta 400 € ▾</span></div>
+      <div class="row"><span class="fake">WhatsApp · 6XX XXX XXX</span><span class="btn">Avisarme</span></div>
+      <p class="small muted">Se guarda: modalidad, especie, provincias, fechas, presupuesto, canal y su consentimiento. No hace falta cuenta.</p>
+    </div>
+    <div class="box"><p class="cap">Qué hace saltar un aviso</p>
+      <ul class="bl">
+        <li><b>Cacería nueva que encaja:</b> se publica una ficha que coincide en modalidad, zona, fechas y precio.</li>
+        <li><b>Baja de precio</b> en una cacería que miró o que encaja.</li>
+        <li><b>Quedan pocos puestos,</b> solo si la ficha lo dice.</li>
+        <li><b>Antes de su temporada:</b> 6 semanas antes, para quien dejó «corzo en primavera».</li>
+        <li><b>Sorteo Prime</b> de su modalidad, si es socio.</li>
+      </ul>
+      <p class="small muted">Como máximo un aviso por semana y persona. Si hay varios, van juntos.</p>
+    </div>
+  </div>
+  <div class="seq">
+    <div><h3>WhatsApp · cacería nueva</h3><p>Sale solo cuando se publica la ficha. De 8:00 a 21:30.</p>
+      <ol class="tl"><li><span class="w">Martes 10:12 · aviso</span><b>Encaja con su aviso</b><blockquote>Javier, acaba de salir una montería que encaja con tu aviso: Río Frío (Robledo del Mazo, Toledo), 26 de diciembre, 350 € el puesto. ¿Te paso la ficha o prefieres que te llame alguien del equipo?
+[Ver ficha] [Que me llamen] [Ya no busco]</blockquote></li>
+      <li class="stop"><span class="w">Si contesta</span><b>Pasa a la conversación</b><blockquote>Contesta Clara o el agente. Si dice «que me llamen», el comercial recibe la ficha.</blockquote></li></ol></div>
+    <div><h3>Email · resumen semanal</h3><p>Para quien eligió email o para quien tiene varios avisos.</p>
+      <ol class="tl"><li class="mail"><span class="w">Lunes 8:00 · email</span><b>Lo nuevo de tu aviso</b><blockquote><span class="subj">Asunto: 3 monterías nuevas en Toledo y Cáceres, de 300 a 380 €</span>Hola, Javier. Esta semana se han publicado 3 monterías que encajan con lo que buscas: dos puestos, diciembre o enero, hasta 400 €. Están ordenadas por fecha, con su precio, sus reseñas y el enlace para reservar. Para cambiar el aviso o darte de baja, un clic abajo.</blockquote></li></ol></div>
+  </div>
+  <p class="note">Esto aprovecha lo que ya publicáis: hay +400 organizadores y 631 monterías en el calendario de octubre a febrero (hunty.es, 16-oct). Cada ficha nueva es un motivo para escribir a quien la estaba esperando.</p>
+  <div class="navnext"><button class="btnl" data-go="fichas">Siguiente: emails desde las fichas <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · EMAILS DESDE FICHAS -->
+<section class="pane" id="p-fichas" role="tabpanel" aria-labelledby="t-fichas">
+  <header><h2>5 · De cada ficha de cacería sale su email <span class="ej">Ejemplo</span></h2><p>Cada ficha que publica un organizador ya tiene todo lo que necesita un buen email: finca, fecha, precio, qué incluye y reseñas. Un agente lo convierte en un email listo para el segmento que encaja. Vuestro equipo lo revisa y ActiveCampaign lo envía.</p></header>
+  <div class="two">
+    <div class="box"><p class="cap">Entrada: la ficha (datos de hunty.es a 16-oct, hay que confirmarlos)</p>
+      <table class="kv">
+        <tr><th>Cacería</th><td>Montería en Valmorisco</td></tr>
+        <tr><th>Dónde</th><td>Jarandilla de la Vera, Cáceres</td></tr>
+        <tr><th>Fecha</th><td>9 de enero</td></tr>
+        <tr><th>Precio</th><td>300 € el puesto · 280 € con Prime</td></tr>
+        <tr><th>Reserva</th><td>Señal de 40 € por puesto</td></tr>
+        <tr><th>Finca</th><td>Abierta, 60 puestos, sin cupo de venados ni jabalíes</td></tr>
+        <tr><th>Incluye</th><td>Desayuno y comida</td></tr>
+        <tr><th>Reseñas</th><td>4,3/5 · 4 opiniones</td></tr>
+      </table>
+      <p class="cap" style="margin-top:6px">Segmento que se elige solo</p>
+      <p>Avisos de montería en Cáceres o en Extremadura, de 400 € o menos y para diciembre o enero. Más los clientes que reservaron montería en Extremadura en temporadas anteriores. Fuera quien ya ha reservado esta cacería.</p>
+    </div>
+    <div class="box mailbox"><p class="cap">Salida: el email, en borrador para que lo aprobéis</p>
+      <p class="subj">Asunto: Valmorisco, 9 de enero: montería en la Vera desde 300 €</p>
+      <p class="small muted">Previsualización: 60 puestos, sin cupo, desayuno y comida incluidos.</p>
+      <div class="mailbody">
+        <p>Hola, {{nombre}}:</p>
+        <p>Se ha publicado una montería que encaja con lo que nos pediste: <b>Valmorisco</b>, en Jarandilla de la Vera (Cáceres), el <b>sábado 9 de enero</b>.</p>
+        <ul><li>Finca abierta, 60 puestos y sin cupo de venados ni jabalíes.</li><li>Desayuno y comida incluidos.</li><li>300 € el puesto (280 € con Prime). Reservas con una señal de 40 € por puesto.</li><li>4,3 sobre 5 en las opiniones de cazadores que ya fueron.</li></ul>
+        <p>Si vais {{puestos}}, son {{puestos_x_precio}} €. Al mismo precio que el organizador.</p>
+        <p><span class="btn">Ver la ficha y reservar</span></p>
+        <p class="small muted">¿Dudas sobre el sorteo de puestos o qué incluye? Contesta a este email o escríbenos por WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="box"><p class="cap">Los 4 emails que pueden salir de una ficha</p><ul class="bl"><li><b>Al publicarse:</b> a su segmento.</li><li><b>Quedan pocos puestos:</b> solo si la ficha lo dice, a quien la miró.</li><li><b>Una semana antes:</b> «aún estás a tiempo», a quien la miró y no reservó.</li><li><b>Después de la jornada:</b> el resultado y las reseñas, para promocionar la próxima edición.</li></ul></div>
+    <div class="box"><p class="cap">Cómo se hace</p><ol class="bl"><li>Vuestra web avisa cuando se publica o cambia una ficha.</li><li>El agente redacta con la plantilla de Hunty y solo con datos de la ficha.</li><li>Comprueba precio, fecha y puestos contra la ficha.</li><li>Vuestro equipo lo aprueba con un clic, o sale solo si así lo decidís.</li><li>Lo envía ActiveCampaign, con su etiqueta para medir reservas.</li></ol></div>
+    <div class="box"><p class="cap">Lo que nunca hace</p><p>No inventa disponibilidad, resultados ni descuentos. No escribe a quien no tiene consentimiento comercial. No manda más de un email de cacería por semana a la misma persona. Si un dato no está en la ficha, no aparece en el email.</p></div>
+  </div>
+  <div class="navnext"><button class="btnl" data-go="base">Siguiente: la base de datos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · BASE DE DATOS -->
+<section class="pane" id="p-base" role="tabpanel" aria-labelledby="t-base">
+  <header><h2>6 · Conocer bien la base, y escribir a cada uno lo suyo <span class="ej">Ejemplo</span></h2><p>Con más de 9.400 reservas gestionadas, la base sabe qué caza cada cliente, dónde, cuándo, con cuántos y por cuánto. Primero lo ordenamos y después escribimos a cada grupo lo que le toca, en el momento en que suele reservar.</p></header>
+  <div class="two">
+    <div class="box"><p class="cap">Paso 1 · Lo que se junta en cada contacto</p>
+      <ul class="bl">
+        <li><b>Reservas:</b> modalidad, especie, provincia, fecha, puestos, importe y organizador.</li>
+        <li><b>Cuándo reserva:</b> el mes en que suele reservar y cuánto antes de la jornada.</li>
+        <li><b>Prime:</b> si es socio, desde cuándo y si usa el descuento.</li>
+        <li><b>Web:</b> fichas vistas, avisos y reservas a medias (GA4 y Mixpanel).</li>
+        <li><b>Conversaciones:</b> lo que habló con Clara o con el comercial, resumido.</li>
+        <li><b>Email:</b> si abre y hace clic en ActiveCampaign, y su consentimiento.</li>
+        <li><b>Reseñas</b> que ha dejado, y su país e idioma.</li>
+      </ul>
+      <p class="small muted">Todo vuelve a ActiveCampaign como campos y etiquetas, para que vuestro equipo y vuestros agentes lo vean.</p>
+    </div>
+    <div class="box"><p class="cap">Paso 2 · Segmentos de partida (se ajustan con vuestros datos)</p>
+      <table class="seg">
+        <tr><th>Segmento</th><th>Qué le escribimos</th></tr>
+        <tr><td>Monteros fieles: 2 o más temporadas</td><td>Las cacerías de su zona antes que a nadie, en el mes en que suele reservar.</td></tr>
+        <tr><td>Reservaron una vez y no han vuelto</td><td>La cacería más parecida a la que hizo, con las opiniones de quien fue.</td></tr>
+        <tr><td>Recechos de trofeo, ticket alto</td><td>Atención personal del asesor, sin descuentos. Especies y fechas de su nivel.</td></tr>
+        <tr><td>Cuenta creada sin ninguna reserva</td><td>Guía de la primera montería con organizador: el sorteo, qué incluye y cómo se reserva.</td></tr>
+        <tr><td>Socios Prime que no usan el descuento</td><td>Lo que se habrían ahorrado y las cacerías con precio Prime en su zona.</td></tr>
+        <tr><td>Clientes de fuera de España</td><td>En su idioma, con las especies de trofeo y el viaje resuelto.</td></tr>
+        <tr><td>Sin actividad en más de 18 meses</td><td>Un último email para confirmar si quiere seguir recibiendo. Si no contesta, se limpia de la lista.</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="seq">
+    <div><h3>Email personalizado · cliente que repite</h3><p>Carlos (inventado) reservó una montería en Toledo en diciembre del año pasado para 3 puestos. Es la segunda quincena de octubre, cuando suele reservar.</p>
+      <ol class="tl"><li class="mail"><span class="w">Día 0 · email</span><b>Su siguiente cacería</b><blockquote><span class="subj">Asunto: Carlos, las monterías de diciembre en Toledo ya están</span>Hola, Carlos. El año pasado por estas fechas reservasteis 3 puestos para una montería en Toledo. Este año ya están publicadas las de diciembre en tu zona. La más parecida es Río Frío (Robledo del Mazo), el 26 de diciembre a 350 € el puesto. Para 3 puestos, 1.050 €, y con Prime tendríais precio de socio en cada puesto. Abajo tienes las otras dos que encajan. Si lo prefieres, te llama el asesor y lo veis en 10 minutos.</blockquote></li>
+      <li><span class="w">Día 3 · WhatsApp, si abrió y no reservó</span><b>Una duda concreta</b><blockquote>Carlos, ¿te cuadra Río Frío para los tres o buscáis otra fecha? Te mando las de enero si queréis. [Río Frío] [Las de enero] [Este año no]</blockquote></li>
+      <li class="stop"><span class="w">Si reserva o dice «este año no»</span><b>Se para</b><blockquote>Se guarda la respuesta y no se le vuelve a escribir esta temporada.</blockquote></li></ol></div>
+    <div><h3>Email personalizado · cuenta sin reserva</h3><p>Marta (inventada) creó la cuenta en septiembre y miró recechos de corzo en Burgos. Nunca ha reservado.</p>
+      <ol class="tl"><li class="mail"><span class="w">Día 0 · email</span><b>Lo que buscaba</b><blockquote><span class="subj">Asunto: Recechos de corzo en Burgos: lo que hay para la primavera</span>Hola, Marta. Hace unas semanas miraste recechos de corzo en Burgos. Te dejamos lo que hay publicado para la primavera, como el corzo de Lerma, de abril a septiembre, con su precio y lo que incluye. ¿Quieres que te avisemos cuando salgan más en tu zona? Un clic y queda guardado.</blockquote></li>
+      <li><span class="w">Si crea el aviso</span><b>Pasa al paso 4</b><blockquote>Recibe las fichas nuevas que encajan y un aviso 6 semanas antes de que empiece la temporada.</blockquote></li></ol></div>
+  </div>
+  <div class="box"><p class="cap">Por qué esto es lo primero que haríamos</p><p>Es el canal que menos cuesta: no hay que pagar anuncios para llegar a quien ya os conoce. Antes de enviar a toda la base, se prueba cada segmento con una parte, comparada con un grupo que no recibe nada. Así se sabe cuántas reservas trae de verdad y no se gasta la base.</p></div>
+  <div class="navnext"><button class="btnl" data-go="agentes">Siguiente: cómo encaja con vuestros agentes <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 7 · AGENTES -->
+<section class="pane" id="p-agentes" role="tabpanel" aria-labelledby="t-agentes">
+  <header><h2>7 · Cómo encaja con Clara, Bruno y vuestro orquestador</h2><p>Queréis tenerlo todo en vuestra plataforma, y eso se respeta. Lo que aportamos son las reglas, los segmentos, los textos y la medición. Vuestros agentes los usan, y lo que no tengáis todavía lo cubrimos mientras lo construís.</p></header>
+  <div class="tbl"><table>
+    <thead><tr><th class="l">Pieza</th><th class="l">Quién lo hace</th><th class="l">Qué aportamos</th><th class="l">Cómo se conecta</th></tr></thead>
+    <tbody>
+      <tr><td>Contestar el WhatsApp del asesor</td><td class="w">Clara</td><td class="w">Las preguntas para cualificar, la puntuación de cada contacto, cuándo pasar al comercial y los textos de seguimiento.</td><td class="w">Reglas y textos que vuestro orquestador puede leer. Si Clara aún no puede con todo, nuestro agente cubre la prueba de tráfico de pago.</td></tr>
+      <tr><td>Prime y suscripciones</td><td class="w">Bruno</td><td class="w">Cuándo ofrecer Prime: a quien reserva 2 o más jornadas al año o a quien mira el precio. El ahorro calculado en cada caso.</td><td class="w">Una señal de «candidato a Prime» en ActiveCampaign.</td></tr>
+      <tr><td>Anuncios, landings y retargeting</td><td class="w">Qualivo</td><td class="w">Campañas, piezas, landings, catálogo y pruebas semanales.</td><td class="w">Píxel y API de conversiones con las reservas, desde GTM.</td></tr>
+      <tr><td>Avisos y emails desde fichas</td><td class="w">Qualivo monta, ActiveCampaign envía</td><td class="w">Formulario de avisos, plantillas y el agente que redacta desde la ficha.</td><td class="w">Aviso de la web al publicar una ficha, y la API de ActiveCampaign.</td></tr>
+      <tr><td>Segmentos de la base</td><td class="w">Qualivo, con vuestro equipo</td><td class="w">Unir reservas, web y email por contacto, los segmentos y los emails personalizados.</td><td class="w">Exportación de reservas y API de ActiveCampaign.</td></tr>
+      <tr><td>Llamar y cerrar</td><td class="w">Vuestros comerciales</td><td class="w">La ficha completa de cada contacto caliente: qué busca, por qué tiene esa puntuación y el siguiente paso.</td><td class="w">Vista en ActiveCampaign o en vuestra plataforma.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div class="box"><p class="cap">Lo que necesitaríamos de vuestro desarrollador (unas horas en total)</p><ol class="bl"><li>Acceso a la API de ActiveCampaign, con permisos de campos, etiquetas y automatizaciones.</li><li>Que la web avise cuando se publica o cambia una ficha, o un listado de cacerías que se actualice solo.</li><li>Que la reserva pagada envíe su evento con el importe, para Meta y GA4.</li><li>Una exportación de las reservas históricas, sin datos de pago.</li><li>Un interlocutor para la integración con el orquestador.</li></ol></div>
+    <div class="box"><p class="cap">Decisiones para mañana</p><ul class="bl"><li>¿Quién contesta el WhatsApp durante el piloto: Clara o nuestro agente con las reglas de Clara?</li><li>¿Los emails desde fichas salen solos o se aprueban uno a uno?</li><li>¿Qué segmento de la base probamos primero?</li><li>¿Quién es el responsable del piloto de vuestro lado?</li></ul></div>
+  </div>
+  <div class="navnext"><button class="btnl" data-go="medir">Siguiente: medición y 90 días <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 8 · MEDIR -->
+<section class="pane" id="p-medir" role="tabpanel" aria-labelledby="t-medir">
+  <header><h2>8 · Cómo se mide y qué pasa en 90 días</h2><p>Un solo embudo, del usuario único a la comisión. Cada pieza de esta página tiene su línea en el panel, y cada semana se decide qué sigue y qué se apaga.</p></header>
+  <ol class="flow funnel">
+    <li><b>Usuarios únicos</b><span>Por canal y campaña</span></li>
+    <li><b>Ven una ficha</b><span>% de los usuarios únicos</span></li>
+    <li><b>Dejan algo</b><span>Aviso, WhatsApp o reserva empezada</span></li>
+    <li><b>Hablan</b><span>Con Clara, el agente o el comercial</span></li>
+    <li class="ok"><b>Reservan</b><span>Señal pagada</span></li>
+    <li class="ok"><b>Comisión</b><span>€ por € invertido</span></li>
+  </ol>
+  <div class="tbl"><table>
+    <thead><tr><th class="l">Semanas</th><th class="l">Qué hacemos</th><th class="l">Qué se ve al final</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td class="w">Diagnóstico: medición de la web, embudo actual, revisión de los anuncios y primera lectura de la base. Arreglo de los enlaces de los anuncios.</td><td class="w">La conversión de partida, por canal. Es la referencia con la que se compara todo lo demás.</td></tr>
+      <tr><td>1-4</td><td class="w">Campañas A y B con sus landings, la prueba A/B contra el buscador, el retargeting por comportamiento y el catálogo en Meta.</td><td class="w">Qué anuncio y qué landing traen reservas, no solo clics.</td></tr>
+      <tr><td>5-8</td><td class="w">Avisos en la web, emails desde fichas y los dos primeros segmentos de la base, con grupo de control.</td><td class="w">Reservas que salen de la base y de los avisos, frente al grupo que no recibe nada.</td></tr>
+      <tr><td>9-12</td><td class="w">Integración con Clara y el orquestador. Seguir con lo que gana y apagar lo que no.</td><td class="w">Revisión el día 90: resultados con vuestros datos y la decisión de seguir o no.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols">
+    <div class="box"><p class="cap">Condiciones del piloto</p><p><b>900 € + IVA al mes durante 3 meses.</b> Incluye el diagnóstico y no tiene coste de implantación. La inversión en anuncios va aparte y la paga Hunty directamente.</p></div>
+    <div class="box"><p class="cap">Ritmo</p><p>Una prueba nueva cada semana, un resumen de lo que ha pasado y una revisión mensual con dirección. El panel está abierto para vuestro daily.</p></div>
+    <div class="box"><p class="cap">Lo que no prometemos</p><p>Ninguna cifra de resultados antes de medir la semana 0. Lo que se gana o se pierde lo dice el grupo de control, no una previsión.</p></div>
+  </div>
+  <div class="navnext"><a class="btnl" href="../demo/">Ver la demo del WhatsApp, la voz y el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../">Plan</a><a class="btnl" href="../demo/">Demo</a><a class="btnl" href="../anuncios/">Anuncios</a><a class="btnl" href="../landing/">Landing</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Recorrido preparado el 22 de octubre de 2026 para la reunión con Hunty del día 23. No es una página de Hunty. Cacerías, precios y cifras de Hunty tomados de hunty.es el 16-oct; personas, mensajes y ejemplos inventados.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['mapa', 'anuncios', 'landing', 'retargeting', 'avisos', 'fichas', 'base', 'agentes', 'medir'];
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'mapa';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
