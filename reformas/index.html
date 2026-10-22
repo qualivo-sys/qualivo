@@ -3,356 +3,687 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reformas: te piden presupuesto, ¿y después qué? · Diagnóstico gratuito · Qualivo</title>
-<meta name="description" content="Para empresas de obras y reformas. Miramos qué pasa desde que un cliente pide presupuesto hasta que firma, y ponemos agentes de IA donde hoy depende de que alguien se acuerde. Diagnóstico gratuito de 30 minutos, plan por escrito en 48 horas.">
-<link rel="canonical" href="https://qualivo.io/reformas/">
+<!-- Landing Reformas v22 (22-oct-2026). Generada con content/… gen (scratchpad) desde el diseño de /formacion/v21/.
+     Portada con el vídeo del sistema del sector, casos, sistema y demo por pestañas (anuncios, formulario, WhatsApp,
+     llamada simulada con audio, ficha, citas, seguimientos, recorrido y qué hacer hoy) con datos de ejemplo; después,
+     el formulario (el botón de arriba lleva a él). Sin precio (22-oct). Audio: /assets/audio/llamada-<sector>.mp3.
+     Formulario: /diagnostico/landing.js → /api/diagnostico, con las preguntas de tamaño del funnel v2.
+     En producción desde el 22-oct (ok de Maikel). La versión anterior está en /reformas/anterior/ (noindex). -->
+<title>Más obras de las solicitudes que ya recibes · Qualivo para reformas y construcción</title>
+<meta name="description" content="Conseguimos solicitudes de personas que de verdad quieren reformar y conectamos la captación con las visitas y el seguimiento de presupuestos. Diagnóstico sin coste de 30 minutos.">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Reformas: te piden presupuesto. ¿Y después qué?">
-<meta property="og:description" content="Desde que el cliente pide presupuesto hasta que firma: siete agentes de IA dentro del CRM que ya tienes. Diagnóstico gratuito de 30 minutos para empresas de obras y reformas.">
+<link rel="canonical" href="https://qualivo.io/reformas/">
+<meta property="og:title" content="Más obras de las solicitudes que ya recibes. Del anuncio al presupuesto aceptado.">
+<meta property="og:description" content="Conseguimos solicitudes de personas que de verdad quieren reformar y conectamos la captación con las visitas y el seguimiento de presupuestos. Diagnóstico sin coste de 30 minutos.">
 <meta property="og:image" content="https://qualivo.io/assets/video/qualivo-sistema-reformas-h-poster.jpg">
-<link rel="icon" href="/assets/img/favicon.png">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
 <style>
 :root{
-  --tinta:#101319; --negro:#08090C; --crema:#FAF7F0; --blanco:#FFFFFF;
-  --naranja:#0E7C74; --naranja-claro:#27BDB1; --amarillo:#F4CC38; /* el acento pasa del naranja al verde de marca (16-sep) */
-  --teal:#0E7C74; --teal-claro:#27BDB1; --lila:#EFECFB;
-  --gris:#5A5E66; --gris-claro:#7A7C82;
+  --marfil:#FAF7F0; --marfil-2:#F2EDE2; --tinta:#101319; --negro:#08090C;
+  --verde:#0E7C74; --verde-claro:#27BDB1; --verde-suave:#E3F2EF; --amarillo:#F4CC38;
+  --gris:#5A5E66; --gris-claro:#7A7C82; --linea:rgba(16,19,25,.1); --rojo:#C2410C; --naranja-suave:#FFF1EA;
   --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--display);background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
-img{max-width:100%}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-.sec{padding:clamp(56px,8vw,104px) 0}
-h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1}
-h1{font-size:clamp(38px,7.2vw,80px)}
-h2{font-size:clamp(30px,5.4vw,56px);letter-spacing:-.032em;line-height:1.02}
-h3{font-size:clamp(20px,3vw,26px);letter-spacing:-.02em;line-height:1.15}
-p{font-size:clamp(16.5px,2.2vw,19px)}
-.na{color:var(--naranja)} .am{color:var(--amarillo)} .te{color:var(--teal-claro)}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--display);background:var(--marfil);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-claro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.sec{padding:clamp(64px,8vw,112px) 0}
+h1,h2,h3{font-weight:900;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(30px,4.2vw,48px);max-width:20ch}
+h3{font-size:clamp(18px,2vw,21px);letter-spacing:-.02em;line-height:1.22}
+p{font-size:clamp(16px,1.8vw,17.5px)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:14px}
+.lead{color:var(--gris);margin-top:16px;max-width:56ch}
+.borrador{background:var(--amarillo);text-align:center;font-weight:800;font-size:13px;padding:7px 16px}
+.tag-demo{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:4px 9px;border-radius:999px;white-space:nowrap}
 
-/* barra fina superior, sin menú: una sola cosa que hacer */
-.top{background:var(--negro);color:#fff;padding:14px 0;font-size:14px}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* botones: uno solo en todo el sitio */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--amarillo);color:var(--tinta);font:900 clamp(16px,1.9vw,18px)/1.15 var(--display);text-decoration:none;text-align:center;
+  box-shadow:0 12px 30px rgba(244,204,56,.32);transition:transform .16s ease,box-shadow .16s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(244,204,56,.42)}
+.btn-sm{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
+.btn-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:800;font-size:16px;text-decoration:none;color:var(--gris)}
+.btn-link:hover{color:var(--tinta)}
+
+/* barra */
+.top{position:sticky;top:0;z-index:40;background:rgba(250,247,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .top img{height:22px;width:auto}
-.top span{color:#9AA2AE}
-.top b{color:var(--amarillo);font-weight:700}
 
-/* hero */
-.hero{background:var(--negro);color:#fff;padding:clamp(52px,8vw,92px) 0 clamp(60px,9vw,110px);position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.32),transparent 65%)}
-.hero .wrap{position:relative;z-index:1}
-.chip{display:inline-flex;align-items:center;gap:9px;background:rgba(39,189,177,.14);border:1px solid rgba(39,189,177,.45);color:var(--teal-claro);
-  font-size:13.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;border-radius:999px;margin-bottom:26px}
-.chip i{width:8px;height:8px;border-radius:50%;background:var(--teal-claro);display:block}
-.hero h1{max-width:15ch}
-.hero .bajada{font-size:clamp(17.5px,2.6vw,22px);color:#C6CBD3;margin:26px 0 0;max-width:50ch;line-height:1.5}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;
-  background:var(--amarillo);color:var(--tinta);font-weight:900;font-size:clamp(16px,2.2vw,19px);text-decoration:none;border:none;cursor:pointer;
-  box-shadow:0 12px 32px rgba(244,204,56,.26);transition:transform .16s ease,box-shadow .16s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(244,204,56,.34)}
-.btn.grande{min-height:68px;padding:0 38px}
-.hero .cta{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.hero .cta small{color:#8E96A2;font-size:14.5px;line-height:1.5}
-.tres{display:flex;gap:10px 30px;flex-wrap:wrap;margin-top:42px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14)}
-.tres div{font-size:15px;color:#C6CBD3;display:flex;align-items:center;gap:9px;font-weight:600}
-.tres b{color:#fff;font-weight:800}
+/* 1 · HERO */
+.hero{padding:clamp(44px,6vw,84px) 0 clamp(56px,7vw,96px)}
+.grid-h{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(34px,4.7vw,58px);max-width:14ch}
+.hero h1 span{display:block;color:var(--verde);margin-top:.06em}
+.hero h1 .subr{text-decoration:underline;text-decoration-color:rgba(244,204,56,.9);text-decoration-thickness:.16em;text-underline-offset:.08em;text-decoration-skip-ink:none}
+.hero .lead{font-size:clamp(17px,1.9vw,19px);color:#3E434B;margin-top:22px;max-width:44ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:30px}
+.hero .micro{margin-top:14px;font-size:14.5px;color:var(--gris);font-weight:700}
+.hero .micro span{color:var(--verde)}
 
-/* problema */
-.dicho{background:var(--lila)}
-.dicho .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
-.dicho .caja{background:#fff;border-radius:16px;padding:26px 28px}
-.dicho .caja.mal{border:1px solid rgba(16,19,25,.1)}
-.dicho .caja.bien{background:var(--tinta);color:#fff}
-.dicho .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:14px}
-.dicho .mal .lbl{color:var(--gris-claro)} .dicho .bien .lbl{color:var(--amarillo)}
-.dicho li{list-style:none;font-size:17px;line-height:1.5;padding:10px 0;border-top:1px solid rgba(16,19,25,.08)}
-.dicho .bien li{border-color:rgba(255,255,255,.14)}
-.dicho li:first-child{border-top:none}
-@media(max-width:700px){.dicho .par{grid-template-columns:1fr}}
+.dash{background:#fff;border:1px solid var(--linea);border-radius:22px;box-shadow:0 30px 80px rgba(16,19,25,.10);padding:22px 22px 18px}
+.dash-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.dash-h b{font-size:15.5px;display:block}
+.dash-h small{display:block;font-size:13px;color:var(--gris-claro);font-weight:600;margin-top:3px}
+.etapa{display:grid;grid-template-columns:116px 1fr 44px;gap:12px;align-items:center;padding:8px 0}
+.etapa .n{font-size:14px;font-weight:700;color:#2B2F36}
+.barra{height:28px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--verde),var(--verde-claro));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dash.on .barra i{width:var(--w)}
+.etapa .v{font-size:15px;font-weight:900;text-align:right}
+.etapa.fin .barra i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fuga-h{margin:6px 0 6px 128px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
+.dash-pie{border-top:1px solid var(--linea);margin-top:12px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
 
-/* qué analizamos */
-.mapa{background:var(--crema)}
-.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:44px}
-.card{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:16px;padding:24px 24px 22px;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--naranja)}
-.card:nth-child(3n+2)::before{background:var(--teal)}
-.card:nth-child(3n+3)::before{background:var(--amarillo)}
-.card .n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:10px}
-.card h3{margin-bottom:8px}
-.card p{font-size:16px;color:var(--gris);line-height:1.45}
+/* VSL */
+.vsl{margin:0}
+.vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
+.vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.vsl-play:hover img{transform:scale(1.02)}
+.vsl-play:hover{box-shadow:0 34px 90px rgba(16,19,25,.26)}
+.vsl-dur{position:absolute;right:14px;top:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
+.vsl-marco iframe,.vsl-marco video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl-marco{cursor:auto}
+.vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
 
-/* pasos */
-.pasos{background:var(--tinta);color:#fff}
-.pasos h2{color:#fff}
-.escalera{margin-top:46px;display:grid;gap:12px}
-.paso{display:grid;grid-template-columns:92px 1fr;gap:22px;align-items:start;background:rgba(255,255,255,.05);border-radius:16px;padding:26px 28px;border:1px solid rgba(255,255,255,.1)}
-.paso .num{font-size:clamp(38px,6vw,54px);font-weight:900;line-height:.9;letter-spacing:-.04em;color:rgba(255,255,255,.22)}
-.paso h3{color:#fff;margin-bottom:8px}
-.paso p{color:#AEB5BF;font-size:17px;line-height:1.5}
-.paso.destacado{background:var(--amarillo);border-color:var(--amarillo)}
-.paso.destacado .num{color:rgba(16,19,25,.3)}
-.paso.destacado h3,.paso.destacado p{color:var(--tinta)}
-.paso.destacado p{opacity:.82}
-@media(max-width:600px){.paso{grid-template-columns:1fr;gap:8px}}
+/* 2 · RESULTADOS */
+.res{background:#fff}
+.casos{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:36px}
+.caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column}
+.caso.eac{background:var(--tinta);color:#fff}
+.caso.nail{background:var(--verde-suave)}
+.caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.caso .cab img{height:34px;width:auto}
+.caso.eac .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
+.caso.nail .cab img{filter:grayscale(1) brightness(.5) contrast(1.6);height:44px}
+.caso .quien{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.75}
+.caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:24px 0 18px}
+.caso .big{font-size:clamp(44px,5.8vw,70px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.caso.eac .big{color:var(--amarillo)}
+.caso.nail .big{color:var(--verde)}
+.caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:20ch;line-height:1.35}
+.caso.eac .lbl{color:#C6CBD3}
+.caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
+.caso.eac .ctx{color:#AEB5BF}
+.caso.eac .ctx b{color:#fff}
+.caso.nail .ctx{color:#3E434B}
+.caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none;color:var(--amarillo)}
+.logos{margin-top:clamp(36px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center}
+.logos p{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);max-width:14ch;line-height:1.4}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;gap:22px 40px;opacity:.8}
+.logos img{width:auto}
 
-/* garantía */
-.garantia{background:var(--amarillo);color:var(--tinta)}
-.garantia .caja{text-align:center;max-width:760px;margin:0 auto}
-.garantia h2{font-size:clamp(32px,6vw,62px)}
-.garantia p{max-width:52ch;margin:26px auto 0;font-size:clamp(17px,2.4vw,20px);color:rgba(16,19,25,.78)}
+/* 3 · PROBLEMA + SOLUCIÓN */
+.problemas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
+.pb{padding:24px 26px 6px 0}
+.pb + .pb{padding-left:26px;border-left:1px solid var(--linea)}
+.pb .x{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);font-weight:900;font-size:14px;margin-bottom:14px}
+.pb h3{margin-bottom:8px}
+.pb p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.solucion{margin-top:clamp(40px,5vw,60px);background:var(--tinta);color:#fff;border-radius:24px;padding:clamp(24px,3.4vw,38px)}
+.solucion .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.solucion .t h3{font-size:clamp(20px,2.4vw,26px);color:#fff}
+.solucion .t span{font-size:14px;color:#8E96A2;font-weight:600}
+.flujo{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;list-style:none;counter-reset:f}
+.flujo li{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 16px 16px}
+.flujo li::before{counter-increment:f;content:'0' counter(f);display:block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--verde-claro);margin-bottom:10px}
+.flujo li::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:1;color:var(--amarillo);font-weight:900;background:var(--tinta);width:12px;text-align:center}
+.flujo li:last-child::after{display:none}
+.flujo b{display:block;font-size:17px;letter-spacing:-.01em;margin-bottom:6px}
+.flujo span{display:block;font-size:14px;color:#AEB5BF;line-height:1.45}
 
-/* para quién */
-.quien .par{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
-.quien .caja{border-radius:16px;padding:28px 30px}
-.quien .si{background:rgba(14,124,116,.08);border:1px solid rgba(14,124,116,.28)}
-.quien .no{background:#fff;border:1px solid rgba(16,19,25,.1)}
-.quien h3{margin-bottom:16px}
-.quien .si h3{color:var(--teal)} .quien .no h3{color:var(--gris)}
-.quien li{list-style:none;font-size:16.5px;line-height:1.45;padding:11px 0 11px 30px;position:relative;color:var(--gris)}
-.quien .si li::before{content:'✓';position:absolute;left:0;top:10px;color:var(--teal);font-weight:900}
-.quien .no li::before{content:'✕';position:absolute;left:0;top:10px;color:var(--naranja);font-weight:900}
-@media(max-width:700px){.quien .par{grid-template-columns:1fr}}
+/* 4 · DEMOSTRACIÓN */
+.demo{background:var(--negro);color:#fff}
+.demo h2{color:#fff;max-width:18ch}
+.demo .eyebrow{color:var(--verde-claro)}
+.demo .lead{color:#AEB5BF}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;margin-top:36px}
+.kpis div{background:#11151B;padding:16px 18px}
+.kpis small{display:block;font-size:12.5px;color:#8E96A2;font-weight:700}
+.kpis b{display:block;font-size:clamp(22px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;margin-top:4px}
+.kpis .alerta b{color:#FF9B7A}
+.kpis .ok b{color:var(--amarillo)}
+.escena{position:relative;margin-top:16px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
+.marco{background:#F6F4EF;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.marco .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#14181F}
+.marco .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.marco .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.marco .bar .tag-demo{margin-left:auto}
+.marco img{width:100%;height:auto}
+.nota-img{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:14.5px;color:#C6CBD3;line-height:1.45}
+.nota-img .n{flex:0 0 24px;height:24px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:grid;place-items:center;font-weight:900;font-size:12.5px}
+.nota-img b{color:#fff}
+.lado{display:grid;gap:16px}
 
-/* faq */
-.faq details{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;margin-bottom:10px;overflow:hidden}
-.faq summary{cursor:pointer;list-style:none;padding:22px 26px;font-weight:800;font-size:17.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';font-size:26px;font-weight:700;color:var(--naranja);line-height:1}
-.faq details[open] summary::after{content:'–'}
-.faq details p{padding:0 26px 24px;color:var(--gris);font-size:16.5px;line-height:1.6}
-
+/* 5 · DEMO por pestañas (22-oct): anuncio, formulario, WhatsApp, llamada, ficha, seguimientos y panel */
+.vistas{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:30px;padding:5px;background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:14px;-webkit-overflow-scrolling:touch}
+.vistas::-webkit-scrollbar{display:none}
+.vistas button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:transparent;color:#8E96A2;font:800 13px var(--display);border-radius:10px;padding:10px 7px;cursor:pointer;white-space:nowrap}
+.vistas button i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);font-size:11.5px}
+.vistas button:hover{color:#fff}
+.vistas button[aria-selected="true"]{background:#fff;color:var(--tinta)}
+.vistas button[aria-selected="true"] i{background:var(--amarillo);color:var(--tinta)}
+/* anuncios, citas, recorrido y hoy: como en la home, con ejemplos del sector */
+.vbody{padding:18px;color:var(--tinta)}
+.cap{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#8A8F97;margin-bottom:10px}
+.vtabla{overflow-x:auto}
+.vtabla table{width:100%;border-collapse:collapse;font-size:14px;min-width:680px;background:#fff;border-radius:12px;overflow:hidden}
+.vtabla th,.vtabla td{padding:11px 12px;border-bottom:1px solid rgba(16,19,25,.07);text-align:right;white-space:nowrap}
+.vtabla th:first-child,.vtabla td:first-child{text-align:left}
+.vtabla th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800;background:#FAF8F3}
+.vtabla td{font-variant-numeric:tabular-nums}
+.vtabla td b{font-weight:800}
+.vtabla td small{display:block;color:#8A8F97;font-size:12px;font-weight:600}
+.vd{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.vd.si{background:#E3F2EF;color:#0E7C74}.vd.mm{background:#FDF1C7;color:#8A5A00}.vd.no{background:#FFE9E0;color:#B2410C}
+.citas{display:grid;gap:8px}
+.cita{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px 14px;font-size:14px}
+.cita time{font-weight:800;font-variant-numeric:tabular-nums}
+.cita small{display:block;color:#8A8F97;font-size:12.5px;font-weight:600}
+.emb-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.emb{display:grid;gap:7px}
+.et{display:grid;grid-template-columns:150px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.et b{text-align:right;font-weight:900;font-variant-numeric:tabular-nums}
+.br{height:22px;border-radius:7px;background:#ECE8DE;overflow:hidden}
+.br i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--verde),var(--verde-claro))}
+.et:last-child .br i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fugas{display:grid;gap:8px}
+.fu{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:11px 12px;font-size:14px;line-height:1.4}
+.fu:first-child{border-color:#F3B79E;background:#FFF6F1}
+.fu .nf{width:28px;height:28px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);display:grid;place-items:center;font-weight:900;font-size:13px}
+.fu small{display:block;color:var(--verde);font-weight:800;font-size:13px;margin-top:4px}
+.hy-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;margin-bottom:10px}
+.hy-h b{font-size:16px}.hy-h span{font-size:13.5px;color:#8A8F97}
+.hys{background:#fff;border-radius:14px;overflow:hidden}
+.hy{display:grid;grid-template-columns:40px minmax(0,1.2fr) minmax(0,1fr) 96px;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(16,19,25,.07)}
+.hy:last-child{border-bottom:0}
+.av2{width:40px;height:40px;border-radius:50%;background:#EAF0FA;display:grid;place-items:center;font-weight:800;font-size:13px;color:#3E434B}
+.hy:nth-child(2n) .av2{background:#FBEBE3}.hy:nth-child(3n) .av2{background:#E3F2EF}
+.qn b{display:block;font-size:15px}.qn small{display:block;font-size:12.5px;color:#8A8F97;font-weight:600;line-height:1.35}
+.ac{font-size:13.5px;font-weight:700;color:#2B2F36}
+.pr{justify-self:end;font-size:12.5px;font-weight:800;border-radius:999px;padding:4px 10px;background:#FDF1C7;color:#8A5A00}
+.pr.urgente{background:#FFE9E0;color:#C2410C}.pr.media{background:#EEF0F3;color:#5A5E66}
+.vista{margin-top:18px}
+.vista-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+.vista-g > div{min-width:0}
+.caja-d{background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px}
+.caja-d .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde-claro);display:block;margin-bottom:10px}
+.caja-d h3{color:#fff;font-size:18px;margin-bottom:8px}
+.caja-d p,.caja-d li{font-size:14.5px;color:#AEB5BF;line-height:1.5}
+.caja-d ul{list-style:none;display:grid;gap:9px}
+.caja-d li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.caja-d li::before{content:'✓';color:var(--verde-claro);font-weight:900}
+.caja-d li b,.caja-d p b{color:#fff}
+.claro{background:#F6F4EF;color:var(--tinta);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.claro .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#14181F;flex-wrap:wrap}
+.claro .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.claro .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.claro .bar .tag-demo{margin-left:auto}
+.pista{font-size:13px;color:#8E96A2;margin-top:12px}
+/* anuncios */
+.ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ad{background:#fff;color:var(--tinta);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.ad-h{display:flex;gap:9px;align-items:center;padding:12px 12px 8px}
+.ad-h .av{width:30px;height:30px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px}
+.ad-h b{font-size:13.5px;display:block;line-height:1.2}.ad-h small{font-size:11.5px;color:var(--gris-claro);font-weight:600}
+.ad-c{padding:0 12px 10px;font-size:13.5px;line-height:1.45;color:#2B2F36}
+.ad-img{background:linear-gradient(150deg,#0F1F1D,#0E7C74);color:#fff;padding:20px 16px;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end}
+.ad.story .ad-img{background:linear-gradient(150deg,#2B2F36,#5A4A12);min-height:200px}
+.ad-img .kk{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--amarillo)}
+.ad-img .tt{font-size:20px;font-weight:900;letter-spacing:-.02em;line-height:1.12;margin:6px 0 10px}
+.ad-img .ll{display:flex;flex-wrap:wrap;gap:6px}
+.ad-img .ll span{font-size:11.5px;font-weight:800;background:rgba(255,255,255,.14);padding:4px 8px;border-radius:999px}
+.ad-f{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#F2F3F5;font-size:12.5px;font-weight:800}
+.ad-f span{background:#E4E6EB;padding:7px 10px;border-radius:7px}
+.ad-n{padding:12px;font-size:13px;line-height:1.45;color:#3E434B;border-top:1px solid var(--linea);margin-top:auto}
+.ad-n b{color:var(--tinta)}
 /* formulario */
-.form{background:var(--negro);color:#fff}
-.form h2{color:#fff;max-width:16ch}
-.form .bajada{color:#AEB5BF;margin:20px 0 0;max-width:44ch}
-.form .caja{background:#fff;color:var(--tinta);border-radius:20px;padding:clamp(26px,4vw,38px);margin-top:0}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,56px);align-items:start}
-@media(max-width:860px){.grid2{grid-template-columns:1fr}}
-.paso-n{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--naranja);margin-bottom:8px}
-.campo{display:block;margin-bottom:18px}
-.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:8px}
-.campo input,.campo select,.campo textarea{width:100%;min-height:54px;padding:14px 16px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;
-  font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)}
-.campo textarea{min-height:96px;resize:vertical}
-.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--teal-claro)}
-.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:6px 0 18px}
-.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
-.err{color:#C2410C;font-weight:700;font-size:14.5px;margin:0 0 14px}
-.hp{position:absolute;left:-9999px}
-#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
-#cal iframe{width:100%;min-height:520px;border:0;display:block}
-.fuera{background:var(--lila);border-radius:14px;padding:26px 28px}
-.fuera h3{margin-bottom:12px}
-.fuera p{font-size:16.5px;color:var(--gris);margin-bottom:18px}
-.btn-sec{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:12px;background:var(--tinta);color:#fff;
-  font-weight:800;font-size:16px;text-decoration:none}
-.pie{background:var(--negro);color:#6C7480;padding:28px 0 40px;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
-.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
-[hidden]{display:none !important}
+.fm{padding:18px;display:grid;gap:14px}
+.fm .q{font-size:14.5px;font-weight:800;margin-bottom:8px}
+.fm .ops{display:flex;flex-wrap:wrap;gap:6px}
+.fm .ops span{font-size:13.5px;font-weight:700;padding:8px 11px;border-radius:10px;border:1.5px solid rgba(16,19,25,.14);background:#fff;color:#3E434B}
+.fm .ops span.si{border-color:var(--verde);background:var(--verde-suave);color:var(--verde)}
+.fm .perm{font-size:12.5px;color:var(--gris);display:flex;gap:8px;align-items:flex-start}
+.fm .perm b{color:var(--verde)}
+.log{list-style:none;display:grid;gap:8px}
+.log li{display:block;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;font-size:13.5px;color:#C6CBD3;line-height:1.4}
+.log li::before{display:none}
+.log li b{display:block;color:#fff;font-size:13.5px}
+.log li.g{border-color:rgba(39,189,177,.45);background:rgba(39,189,177,.08)}
+.log li.h{border-color:rgba(244,204,56,.35);background:rgba(244,204,56,.06)}
+.log li.nuevo{animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* WhatsApp */
+.tel{max-width:400px;margin:0 auto;background:#0B141A;border-radius:28px;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.tel-h{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#1F2C34;border-radius:20px 20px 0 0;color:#E9EDEF}
+.tel-h .av{width:34px;height:34px;border-radius:50%;background:var(--verde);display:grid;place-items:center;font-weight:900;font-size:13px}
+.tel-h b{font-size:14.5px;display:block;line-height:1.2}.tel-h small{font-size:11.5px;color:#8696A0}
+.chat{background:#0B141A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23ffffff' fill-opacity='.04'/%3E%3C/svg%3E");height:440px;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:6px;border-radius:0 0 20px 20px;scroll-behavior:smooth}
+.msg{max-width:84%;padding:7px 10px 6px;border-radius:10px;font-size:14px;line-height:1.42;color:#E9EDEF;animation:entra .3s ease;white-space:pre-line}
+.msg.bot{background:#202C33;align-self:flex-start;border-top-left-radius:2px}
+.msg.yo{background:#005C4B;align-self:flex-end;border-top-right-radius:2px}
+.msg.sis{align-self:center;background:#182229;color:#FFD279;font-size:12px;font-weight:700;border-radius:8px;text-align:center}
+.msg small{display:block;text-align:right;font-size:10.5px;color:#8696A0;margin-top:2px}
+.escribe{align-self:flex-start;background:#202C33;border-radius:10px;padding:10px 12px;display:flex;gap:4px}
+.escribe i{width:6px;height:6px;border-radius:50%;background:#8696A0;animation:pt 1s infinite}
+.escribe i:nth-child(2){animation-delay:.15s}.escribe i:nth-child(3){animation-delay:.3s}
+@keyframes pt{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.opciones{display:flex;flex-direction:column;gap:6px;align-self:stretch;margin-top:4px}
+.opciones button{min-height:42px;border-radius:10px;border:1px solid #2A3942;background:#111B21;color:#53BDEB;font:700 14px var(--display);cursor:pointer;padding:8px 12px;text-align:center}
+.opciones button:hover{background:#17252D}
+.reini{margin-top:12px;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font:800 13.5px var(--display);cursor:pointer}
+/* llamada */
+.voz{padding:18px}
+.voz-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.voz-h b{display:block;font-size:15px}.voz-h small{display:block;font-size:12.5px;color:var(--gris);font-weight:700;margin-top:2px}
+.onda{display:flex;align-items:center;gap:3px;height:26px}
+.onda i{width:3px;border-radius:2px;background:var(--verde);height:30%;animation:onda 1.1s ease-in-out infinite}
+.onda i:nth-child(2n){animation-delay:.2s}.onda i:nth-child(3n){animation-delay:.4s}
+@keyframes onda{0%,100%{height:25%}50%{height:100%}}
+.linea{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--linea);font-size:14.5px;line-height:1.5;color:#2B2F36}
+.linea b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde);padding-top:2px}
+.linea.cl b{color:#8A5A00}
+.linea.oculta{display:none}
+.audio-d{padding:16px 18px 0}
+.audio-d .ad-t{font-weight:800;font-size:15px;margin-bottom:8px}.audio-d .ad-t span{font-weight:600;color:var(--gris)}
+.audio-d audio{width:100%}
+.audio-d .ad-m{font-size:12.5px;color:var(--gris);margin-top:6px}
+.estado-v{border-color:rgba(244,204,56,.45)}.estado-v .k{color:var(--amarillo)}
+/* ficha */
+.ficha{padding:20px}
+.ficha-h{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.ficha-h h3{font-size:19px}.ficha-h p{font-size:13.5px;color:var(--gris);margin-top:4px}
+.nivel{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:var(--verde);color:#fff;font-size:28px;font-weight:900}
+.notas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.nota-f{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px 14px}
+.nota-f small{font-size:12.5px;font-weight:800;color:var(--gris)}
+.nota-f b{display:block;font-size:26px;font-weight:900;letter-spacing:-.03em}
+.nota-f .barra{height:8px;margin-top:6px}.nota-f .barra i{width:var(--w)}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.campos div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.campos dt{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--gris-claro)}
+.campos dd{font-size:14px;font-weight:700;margin-top:3px;line-height:1.35}
+.resumen{margin-top:12px;background:var(--verde-suave);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5}
+.resumen b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde);margin-bottom:3px}
+.resumen + .resumen{background:#FDF1C7}.resumen + .resumen b{color:#8A5A00}
+/* seguimientos */
+.segs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.segs button{min-height:40px;padding:0 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#C6CBD3;font:800 13.5px var(--display);cursor:pointer;text-align:left}
+.segs button[aria-pressed="true"]{background:#fff;color:var(--tinta)}
+.tl{list-style:none;position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:rgba(255,255,255,.14)}
+.tl li{position:relative;padding:0 0 16px}
+.tl li::before{content:'';position:absolute;left:-23px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--verde-claro);box-shadow:0 0 0 4px var(--negro)}
+.tl li.alert::before{background:#FF9B7A}.tl li.mail::before{background:#8EA8FF}.tl li.stop::before{background:var(--amarillo)}
+.tl .cu{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#8E96A2}
+.tl .ti{font-size:15px;font-weight:800;color:#fff;margin:2px 0 6px}
+.tl .bu{background:#202C33;color:#E9EDEF;border-radius:4px 12px 12px 12px;padding:9px 12px;font-size:14px;line-height:1.45;max-width:52ch;white-space:pre-line}
+.tl li.mail .bu{background:#fff;color:var(--tinta);border-radius:10px}
+.tl li.alert .bu{background:rgba(255,155,122,.12);color:#FFD9C7;border-radius:10px}
+.tl .bu .chip{display:inline-block;margin:6px 6px 0 0;padding:4px 10px;border-radius:999px;border:1px solid #53BDEB;color:#53BDEB;font-size:12.5px;font-weight:800}
+.seg-p{font-size:14.5px;color:#AEB5BF;margin-bottom:14px}
+/* panel */
+.panel{padding:18px}
+.panel h4{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--gris);margin:18px 0 8px}
+.pk{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.pk div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.pk small{display:block;font-size:11.5px;color:var(--gris);font-weight:700;line-height:1.25}
+.pk b{display:block;font-size:24px;font-weight:900;letter-spacing:-.03em;margin-top:4px}
+.pk .alerta b{color:var(--rojo)}.pk .ok b{color:var(--verde)}
+.hoy{display:grid;gap:8px}
+.hoy div{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px;align-items:center}
+.hoy .nv{grid-row:1/3;width:30px;height:30px;border-radius:9px;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:900;font-size:14px}
+.hoy .nv.b{background:#5A8F8A}
+.hoy b{font-size:14.5px}.hoy b span{font-weight:600;color:var(--gris)}
+.hoy small{font-size:13px;color:var(--verde);font-weight:800}
+.tabla{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:12px;overflow:hidden}
+.tabla th,.tabla td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--linea)}
+.tabla th:first-child,.tabla td:first-child{text-align:left}
+.tabla th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--gris);font-weight:800;background:#FBFAF6}
+.tabla td:last-child{font-weight:900;color:var(--verde)}
+.tabla-w{overflow-x:auto}
+.panel .pie-p{font-size:12.5px;color:var(--gris);margin-top:10px}
+.abre-panel{display:inline-flex;margin-top:14px;font-weight:800;color:var(--amarillo);text-decoration:none;font-size:15px}
+@media(max-width:960px){.emb-g{grid-template-columns:minmax(0,1fr)}.vista-g{grid-template-columns:minmax(0,1fr)}.ads{grid-template-columns:minmax(0,1fr)}.pk{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.hy{grid-template-columns:36px minmax(0,1fr) auto}.hy .ac{grid-column:2/-1;grid-row:2}.av2{width:36px;height:36px}.cita{grid-template-columns:minmax(0,1fr) auto}.cita time{grid-column:1/-1}.et{grid-template-columns:110px minmax(0,1fr) 34px}.notas,.campos{grid-template-columns:1fr}.pk{grid-template-columns:1fr 1fr}.linea{grid-template-columns:1fr;gap:2px}.chat{height:420px}}
+@media(prefers-reduced-motion:reduce){.onda i{animation:none;height:60%}}
 
-/* logos y casos */
-.logos{background:#fff;padding:clamp(36px,5vw,56px) 0}
-.logos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);text-align:center;margin-bottom:26px}
-.logos .fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px clamp(26px,4vw,48px);opacity:.75}
-.casos{background:var(--tinta);color:#fff;padding:clamp(40px,6vw,64px) 0}
-.casos .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--amarillo);text-align:center;margin-bottom:26px}
-.casos .rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px 18px;text-align:center;align-items:center}
-.casos .n{white-space:nowrap;font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo)}
-.casos p{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:#AEB5BF}
-.casos p b{color:#fff;font-weight:700}
-.casos .lg{display:block;height:34px;width:auto;margin:14px auto 0;filter:brightness(0) invert(1);opacity:.85}
-.casos .destacado .lg{filter:grayscale(1) brightness(.45) contrast(1.6);opacity:1;height:60px}
-.casos .destacado{background:var(--amarillo);border-radius:16px;padding:18px 14px 16px;color:var(--tinta)}
-.casos .destacado .n{color:var(--tinta)}
-.casos .destacado p{color:rgba(16,19,25,.8)}
-.casos .destacado p b{color:var(--tinta)}
+/* 6 · SERVICIO */
+.serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);margin-top:40px;align-items:start}
+.fases{list-style:none;border-top:2px solid var(--tinta)}
+.fases li{display:grid;grid-template-columns:64px 1fr;gap:0 14px;padding:20px 0;border-bottom:1px solid var(--linea)}
+.fases .num{grid-row:1/3;font-size:34px;font-weight:900;letter-spacing:-.05em;color:var(--verde);line-height:1}
+.fases h3{margin-bottom:4px}
+.fases p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.incluye{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:clamp(22px,3vw,30px)}
+.incluye .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.incluye h3{font-size:clamp(20px,2.4vw,24px);margin:8px 0 16px}
+.incluye ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.incluye li{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:700;line-height:1.35;background:var(--marfil);border-radius:12px;padding:12px}
+.incluye li::before{content:'✓';color:var(--verde);font-weight:900}
+.incluye .pie-i{margin-top:14px;font-size:13.5px;color:var(--gris);line-height:1.5}
+.incluye .pie-i b{color:var(--tinta)}
+.serv-cta{margin-top:clamp(28px,4vw,40px);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.serv-cta p{font-size:15px;color:var(--gris)}
 
-/* los ocho */
-.ocho{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px}
-.ocho div{background:#fff;border:1px solid rgba(16,19,25,.1);border-radius:14px;padding:18px 18px 16px}
-.ocho b{display:block;font-size:12px;letter-spacing:.16em;color:var(--naranja);font-weight:800;margin-bottom:6px}
-.ocho h3{font-size:18px;margin-bottom:4px}
-.ocho p{font-size:14.5px;color:var(--gris);line-height:1.4}
-@media(max-width:860px){.ocho{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:420px){.ocho{grid-template-columns:1fr}}
-
-/* fuga → agente */
-.agente{background:var(--negro);color:#fff}
-.agente h2{color:#fff}
-.filas{margin-top:40px;border-top:1px solid rgba(255,255,255,.14)}
-.fila-a{display:grid;grid-template-columns:200px 40px 1fr;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14)}
-.fila-a .f{font-weight:900;font-size:19px;color:var(--naranja);letter-spacing:-.01em}
-.fila-a .fl{color:var(--amarillo);font-weight:900;font-size:22px;text-align:center}
-.fila-a .a{font-size:16.5px;color:#D5D9E0;line-height:1.45}
-.fila-a .a b{color:var(--amarillo)}
-@media(max-width:600px){.fila-a{grid-template-columns:1fr;gap:4px}.fila-a .fl{display:none}}
-.sines{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
-.sines div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px 22px}
-.sines h3{color:#fff;font-size:19px;margin-bottom:6px}
-.sines p{font-size:15.5px;color:#AEB5BF;line-height:1.45}
-@media(max-width:700px){.sines{grid-template-columns:1fr}}
-.remate{margin-top:36px;font-size:clamp(22px,3.4vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1.1}
-
-/* botón de WhatsApp, fijo abajo a la derecha */
-.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;
-  background:#25D366;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.28);transition:transform .16s ease}
+/* 6 · CONVERSIÓN */
+.final{background:var(--marfil-2)}
+.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
+.despues{margin-top:26px;list-style:none;display:grid;gap:12px;counter-reset:d}
+.despues li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:15.5px;color:#3E434B;line-height:1.45}
+.despues li::before{counter-increment:d;content:counter(d);width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;font-weight:900;font-size:13px;color:var(--verde)}
+.despues b{color:var(--tinta)}
+.precio{margin-top:22px;padding:14px 16px;border-radius:12px;background:#fff;border:1px solid var(--linea);font-size:15px;color:#3E434B;line-height:1.5}
+.precio b{color:var(--tinta)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:end}
+/* aviso de cookies (assets/consent.js): esta página no carga assets/styles.css */
+#qv-cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;display:flex;justify-content:center}
+#qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:16px 18px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+#qv-cookies p{margin:0;font-size:13.5px;line-height:1.5;color:#C7D3E0;max-width:46ch}
+#qv-cookies a{color:#B7F0EA;text-decoration:underline}
+#qv-cookies .qv-ck-botones{display:flex;gap:10px}
+#qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font:700 14px var(--display);cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
+#qv-cookies #qv-ck-si{background:var(--verde-claro);border-color:var(--verde-claro);color:#04231F}
+.corto{display:none}
+/* WhatsApp: botón flotante, como en el resto de landings. En móvil sube cuando aparece la barra fija. */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;background:#25D366;color:#fff;font:800 15px var(--display);text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.22);transition:transform .16s ease,bottom .25s ease}
 .wa:hover{transform:translateY(-2px)}
 .wa svg{width:26px;height:26px;flex-shrink:0}
-@media(max-width:600px){.wa{padding:0;width:58px;height:58px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}}
+.wa-linea{margin-top:16px;font-size:14.5px;color:var(--gris)}
+.wa-linea a{color:var(--verde);font-weight:800}
+@media(max-width:760px){.wa{padding:0;width:56px;height:56px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}body.fijo-on .wa{bottom:84px}}
 
-/* casos publicados */
-.pub{background:var(--tinta);color:#fff;padding:clamp(56px,7vw,84px) 0}
-.pub h2{color:#fff;margin-bottom:34px;max-width:22ch}
-.pub .rej2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.pub a{display:block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:26px 26px 24px;text-decoration:none;transition:border-color .16s ease,transform .16s ease}
-.pub a:hover{border-color:rgba(244,204,56,.55);transform:translateY(-2px)}
-.pub .m{font-family:var(--display);font-size:clamp(32px,4.4vw,44px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--amarillo);margin-bottom:6px}
-.pub .ms{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#8E96A2;margin-bottom:14px}
-.pub .ti{font-size:17px;line-height:1.35;font-weight:800;color:#fff;margin-bottom:10px}
-.pub .su{font-size:14px;line-height:1.45;color:#8E96A2;margin-bottom:14px}
-.pub .le{font-size:14.5px;font-weight:800;color:var(--amarillo)}
 
-/* vídeo de 48 s justo debajo del hero: misma paleta, continúa el fondo oscuro */
-.video{background:var(--negro);padding:0 0 clamp(40px,6vw,64px)}
-.video .caja{max-width:920px;margin:0 auto;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.45);aspect-ratio:16/9}
-.video video{width:100%;height:100%;display:block;object-fit:cover}
-.video .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--teal-claro);text-align:center;margin:0 0 16px}
+@media(max-width:520px){.dos{grid-template-columns:1fr}}
+.fuente{margin-top:14px;font-size:13px;color:var(--gris-claro);font-weight:600;max-width:80ch}
+.huecos{display:none;margin-top:22px;font-size:14.5px;color:#3E434B}
+.huecos.on{display:block}
+.huecos b{color:var(--verde)}
+.maikel{display:flex;gap:14px;align-items:center;margin-top:22px}
+.maikel img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.maikel p{font-size:14.5px;color:var(--gris);line-height:1.45}
+.maikel b{color:var(--tinta)}
+.caja-f{background:#fff;border-radius:22px;padding:clamp(22px,3.2vw,34px);box-shadow:0 24px 60px rgba(16,19,25,.08);border:1px solid var(--linea)}
+.pasos-f{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;list-style:none;margin-bottom:20px}
+.pasos-f li{font-size:12.5px;font-weight:800;color:var(--gris-claro);padding-top:10px;border-top:4px solid var(--marfil-2);line-height:1.3}
+.pasos-f li.act{color:var(--tinta);border-color:var(--verde)}
+.pasos-f li.hecho{color:var(--verde);border-color:var(--verde)}
+.caja-f h3{margin-bottom:14px}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.campo input,.campo select{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--verde-claro)}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
+.err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
+.seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
+.hp,.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#cal{border:1px dashed rgba(16,19,25,.2);border-radius:14px;min-height:520px;overflow:hidden}
+#cal iframe{width:100%;min-height:520px;border:0;display:block}
+.fuera,.reservado{background:var(--verde-suave);border-radius:14px;padding:22px}
+.faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
+.faq h3{font-size:clamp(22px,2.8vw,30px)}
+.faq details{border-top:1px solid var(--linea)}
+.faq details:last-child{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;font-weight:700;color:var(--verde);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 0 18px;color:var(--gris);font-size:15.5px;line-height:1.6;max-width:58ch}
+
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
+[hidden]{display:none !important}
+.fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .25s ease}
+.fijo .btn{width:100%;min-height:52px}
+.fijo.on{transform:none}
+.aparece{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.aparece.on{opacity:1;transform:none}
+
+.escena > div,.lado > div{min-width:0}
+.marco .bar{flex-wrap:wrap}
+@media(max-width:1000px){.flujo{grid-template-columns:1fr 1fr}.flujo li::after{display:none}.escena{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:960px){.grid-h,.casos,.grid-f,.faq,.serv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){
+  .top .btn-sm{display:none}.fijo{display:block}
+  .problemas{grid-template-columns:1fr;border-top:0}
+  .pb,.pb + .pb{padding:20px 0;border-left:0;border-top:1px solid var(--linea);display:grid;grid-template-columns:42px 1fr;gap:0 10px}
+  .pb .x{grid-row:1/3;margin:0}.pb h3{margin-bottom:4px}
+  .flujo{grid-template-columns:1fr}
+  .flujo li{display:grid;grid-template-columns:34px 1fr;gap:2px 10px;padding:14px}
+  .flujo li::before{grid-row:1/3;margin:2px 0 0}
+  .kpis{grid-template-columns:1fr 1fr}.kpis div:last-child{grid-column:1/-1}
+  .etapa{grid-template-columns:104px 1fr 40px;gap:10px}.fuga-h{margin-left:0}
+  .logos{grid-template-columns:1fr}.logos p{max-width:none}
+  .incluye ul{grid-template-columns:1fr}
+  .hero .ctas .btn{width:100%}
+}
+/* móvil: botones de una línea y menos texto */
+@media(max-width:760px){
+  .btn{padding:0 18px;font-size:16px}
+  .largo{display:none}.corto{display:inline}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.aparece{opacity:1;transform:none}}
+
+/* ===== Retoque de UX (22-oct, handoff de Claude Design) ===== */
+/* C1 · portada: jerarquía del H1 y prueba social en móvil */
+.hero h1 span{display:inline;color:inherit;margin:0}
+.hero h1 .h1-b{font-weight:700;color:var(--gris)}
+.hero-prueba{display:flex;flex-direction:column;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--marfil-2)}
+.hero-prueba > span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.hero-prueba .fila{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:center}
+.hero-prueba img{height:30px;width:100%;object-fit:contain}
+.hero-prueba img:nth-child(n+5){display:none}
+.hero-prueba .fila.pocos{grid-template-columns:repeat(2,minmax(0,150px));gap:24px}.hero-prueba .fila.pocos img{height:40px}
+@media (min-width:761px){.hero-prueba{display:none}}
+@media (max-width:760px){
+  .hero h1{font-size:clamp(28px,7.8vw,34px);line-height:1.1}
+  .hero .lead{font-size:16px;line-height:1.5}
+  .hero .ctas{flex-direction:column;align-items:stretch;gap:4px}
+  .hero .ctas .btn{min-height:52px}
+  .hero .btn-link{min-height:44px}
+  .hero .vsl{margin-top:8px}
+}
+/* C2 · demo: etapas, pestañas en rejilla (escritorio) o tira con scroll (<1100 px) */
+#demo .etapas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin:30px 0 8px}
+#demo .etapas span{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--verde-claro);border-top:2px solid var(--verde-claro);padding-top:8px}
+#demo .etapas span:nth-child(1){grid-column:span 2}#demo .etapas span:nth-child(2){grid-column:span 3}#demo .etapas span:nth-child(3){grid-column:span 4}
+#demo .vistas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-top:0;padding:0;background:none;border:0;border-radius:0;overflow:visible}
+#demo .vistas button{min-height:56px;justify-content:flex-start;text-align:left;white-space:normal;line-height:1.25;font-size:12.5px;padding:8px 8px;gap:6px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.03)}
+#demo .vistas button[aria-selected="true"]{background:#fff;color:var(--tinta);border-color:#fff}
+#demo .vistas button i{width:18px;height:18px;flex:none}
+#demo .vistas [role=tab]:focus-visible,#demo .vista-nav :focus-visible{outline:3px solid var(--verde-claro);outline-offset:2px}
+#demo .progreso{display:none}
+@media (max-width:1099px){
+  #demo .etapas{display:none}
+  #demo .progreso{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:8px;margin:28px 0 10px;font-size:13px;font-weight:800}
+  #demo .progreso b{color:var(--verde-claro)}#demo .progreso span{color:#C9CCD2}
+  #demo .progreso .seg{grid-column:1/-1;display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+  #demo .progreso .seg i{height:4px;border-radius:2px;background:rgba(255,255,255,.14)}
+  #demo .progreso .seg i.on{background:var(--verde-claro)}
+  #demo .vistas{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -24px;padding:4px 24px 12px;
+    -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  #demo .vistas::-webkit-scrollbar{display:none}
+  #demo .vistas button{flex:none;min-height:44px;white-space:nowrap;scroll-snap-align:center;border-radius:999px;padding:0 14px}
+}
+/* C3 · demo: anterior / siguiente y CTA en la última pestaña */
+#demo .vista-nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;margin-top:24px}
+#demo .vista-nav [data-prev]{justify-self:start;color:#C9CCD2;min-height:44px;background:none;border:0;font:800 15px var(--display);cursor:pointer;padding:0}
+#demo .vista-nav [data-prev]:hover{color:#fff}
+#demo .vista-pos{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#C9CCD2}
+#demo .vista-pos .seg{display:flex;gap:4px}#demo .vista-pos .seg i{width:14px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}#demo .vista-pos .seg i.on{background:var(--verde-claro)}
+#demo .vista-sig,#demo .vista-fin{justify-self:end}
+#demo .vista-sig{min-height:48px;padding:0 20px;border:1px solid var(--verde-claro);border-radius:12px;background:transparent;color:#fff;font:800 15px var(--display);cursor:pointer}
+#demo .vista-sig:hover{background:rgba(39,189,177,.12)}
+#demo .vista-fin{grid-column:3;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:10px;margin:0;color:#C9CCD2;font-size:14px}
+#demo .vista-fin .btn{min-height:52px;font-size:16px;white-space:nowrap;flex:none}
+@media (min-width:761px){#demo .vista-nav.ultimo .vista-pos{display:none}#demo .vista-nav.ultimo .vista-fin{grid-column:2/-1;flex-direction:row;align-items:center;justify-content:flex-end;gap:16px}}
+@media (max-width:760px){
+  #demo .vista-nav{grid-template-columns:minmax(0,1fr);gap:4px}
+  #demo .vista-pos{display:none}
+  #demo .vista-sig{justify-self:stretch;width:100%}
+  #demo .vista-fin{grid-column:1/-1;flex-direction:column;align-items:stretch;text-align:center}
+}
+/* C4 · formulario: en móvil, encabezado → Maikel → formulario → pasos; errores accesibles */
+@media (min-width:961px){#diagnostico .f-izq{position:sticky;top:96px;align-self:start}}
+@media (max-width:760px){
+  #diagnostico .grid-f{display:flex;flex-direction:column;gap:16px}
+  #diagnostico .f-izq{display:contents}
+  #diagnostico .f-izq > *{order:4;margin-top:0}
+  #diagnostico .f-izq > :is(.eyebrow,h2,.lead){order:1}
+  #diagnostico .maikel{order:2;font-size:14px}
+  #diagnostico .maikel img{width:48px;height:48px}
+  #diagnostico .caja-f{order:3}
+}
+#diagnostico .campo :is(input,select)[aria-invalid="true"]{border-color:#D94A3D;box-shadow:0 0 0 1px #D94A3D}
+#e1,#e2{font-weight:600;color:var(--tinta);border:1px solid #D94A3D;border-radius:10px;padding:12px;background:#FFF6F4}
+/* C5 · CTA fijo y WhatsApp en móvil */
+@media (max-width:760px){
+  body{padding-bottom:84px}
+  .top .btn-sm{display:inline-flex}
+  .wa{transition:bottom .25s ease}
+}
+@media (prefers-reduced-motion:reduce){.fijo,.wa{transition:none}}
+/* C6 · logos en rejilla de altura uniforme y ritmo en móvil */
+.res .logos{display:block;margin-top:56px;padding:40px 0 8px;border-top:1px solid var(--linea)}
+.res .logos p{max-width:none;margin-bottom:22px}
+.res .logos .fila{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 48px;align-items:center;opacity:1}
+.res .logos .fila img{height:48px;width:100%;object-fit:contain}
+@media (max-width:760px){
+  .res .logos .fila{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 24px}
+  .res .logos .fila img{height:36px}
+  #sistema .problemas .pb{padding:16px 0}
+  #sistema .solucion .flujo li{padding:12px 14px}
+}
+
+/* Paleta del logo (propuesta de Claude Design, 22-oct): blanco y azul marino. Para volver a la de siempre: PALETA='marfil' en el generador. */
+:root{--marfil:#FFFFFF;--marfil-2:#F1F3F5;--negro:#0F2540;--tinta:#0B1C33;--linea:rgba(11,28,51,.1)}
+.top{background:rgba(255,255,255,.94)}
+#sistema{background:#F1F3F5}
+.final{background:#E3F8F6}
+.claro{background:#F7F8FA}
+.claro .bar,.marco .bar{background:#0B1C33}
+.kpis div,.caja-d{background:#0B1D36}
+.caja-d{border-color:rgba(255,255,255,.14)}
+.fijo{background:rgba(15,37,64,.96)}
+.campo input,.campo select{border-color:#CBD1D9}
+.tl li::before{box-shadow:0 0 0 4px var(--negro)}
+.flujo li::after{background:var(--tinta)}
+
+/* producción (22-oct): navegación, portada genérica con sectores y pie con enlaces */
+.top nav{display:flex;align-items:center;gap:22px}
+.top nav a.l{font-weight:700;font-size:14.5px;text-decoration:none;color:var(--gris)}
+.top nav a.l:hover{color:var(--tinta)}
+@media(max-width:900px){.top nav a.l{display:none}}
+.sector-pick{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(16,19,25,.08)}
+.sp-t{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:12px}
+.sp-c{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--linea);border-radius:16px;text-decoration:none;margin-bottom:10px;transition:transform .16s ease,border-color .16s ease}
+.sp-c:hover{border-color:var(--verde-claro);transform:translateY(-2px)}
+.sp-c img{width:120px;height:68px;object-fit:cover;border-radius:10px}
+.sp-c b{display:block;font-size:16px;line-height:1.25}
+.sp-c small{display:block;font-size:13.5px;color:var(--gris);margin-top:4px;line-height:1.35}
+.sp-c i{font-style:normal;font-weight:900;color:var(--verde);font-size:20px}
+.sp-l{font-size:14.5px;color:var(--gris);margin-top:8px}
+.sp-l a{color:var(--verde);font-weight:800}
+.demo-sector{margin-top:12px;font-size:15px;color:#C9CCD2}
+.demo-sector a{color:var(--amarillo);font-weight:800}
+@media(max-width:560px){.sp-c{grid-template-columns:84px minmax(0,1fr) auto;gap:10px}.sp-c img{width:84px;height:48px}.sp-c b{font-size:15px}}
+.pie .cols{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px;margin-bottom:22px}
+.pie .cols b{display:block;color:#fff;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.pie .cols a{display:block;margin:0 0 8px;color:#C9CCD2}
+.pie .cols p{color:#9AA2AE;font-size:14.5px;max-width:34ch}
+@media(max-width:760px){.pie .cols{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
 <div class="top">
   <div class="wrap">
-    <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" onerror="this.outerHTML='<strong style=&quot;font-weight:900;letter-spacing:-.02em&quot;>Qualivo</strong>'">
-    <span>Obras y reformas · diagnóstico gratuito · <b>30 minutos</b></span>
+    <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
+    <nav aria-label="Principal"><a class="l" href="/formacion/">Formación</a><a class="l" href="/reformas/">Reformas</a><a class="l" href="/blog/">Blog</a>
+    <a href="#diagnostico" class="btn btn-sm" data-cta="barra"><span class="largo">Descubre cómo conseguir más obras</span><span class="corto">Pide tu diagnóstico</span></a></nav>
   </div>
 </div>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="chip"><i></i>Obras y reformas · diagnóstico gratuito</div>
-    <h1>Te piden presupuesto. <span class="te">¿Y después qué?</span></h1>
-    <p class="bajada">En una empresa de reformas el cliente escribe, espera, compara y se enfría. Miramos qué pasa desde que pide presupuesto hasta que firma, y ponemos agentes de IA donde hoy depende de que alguien se acuerde. Sin cambiar tu CRM ni contratar a nadie.</p>
-    <div class="cta">
-      <a href="#reservar" class="btn grande">Pedir el diagnóstico · 30 minutos&nbsp;→</a>
-      <small>30 minutos con tus números delante. Plan por escrito en 48 horas, lo hagas con nosotros o no.</small>
+<!-- 1 · HERO -->
+<header class="hero" id="hero">
+  <div class="wrap grid-h">
+    <div>
+      <p class="eyebrow">Para empresas de reformas, construcción e instalaciones</p>
+      <h1><span class="subr">Más obras de las solicitudes que ya recibes.</span> <span class="h1-b">Del anuncio al presupuesto aceptado.</span></h1>
+      <p class="lead">Conseguimos solicitudes de personas que de verdad quieren reformar y conectamos la captación con las visitas y el seguimiento de presupuestos, para que más acaben en obra.</p>
+      <div class="ctas">
+        <a href="#diagnostico" class="btn" data-cta="hero"><span class="largo">Descubre cómo conseguir más obras</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
+        <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
+      </div>
+      <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
+      <div class="hero-prueba"><span>Han trabajado con Qualivo</span><div class="fila pocos"><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" height="30" loading="eager" decoding="async" style="filter:brightness(0)"></div></div>
     </div>
-    <div class="tres">
-      <div><b>1 · Diagnóstico</b> 30 min. Dónde se pierde la reforma.</div>
-      <div><b>2 · Plan</b> Por escrito en 48 h.</div>
-      <div><b>3 · Primer agente</b> Funcionando en dos semanas.</div>
-    </div>
+
+    <!-- Vídeo del sistema en una empresa de reformas (1:07). Se servirá el nuevo vídeo del sistema completo cuando esté. -->
+    <figure class="vsl" id="vsl">
+      <div class="vsl-marco">
+        <video id="vid" controls playsinline preload="metadata" poster="/assets/video/qualivo-sistema-reformas-h-poster.jpg" aria-label="Vídeo de 1:07: cómo funciona el sistema">
+          <source src="/assets/video/qualivo-sistema-reformas-h.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption>Así funciona en una empresa de reformas, en 67 segundos. Caso de ejemplo; las cifras de las pantallas son ilustrativas.</figcaption>
+    </figure>
   </div>
 </header>
 
-
-<section class="video" aria-label="Vídeo: así funciona en una empresa de reformas">
+<!-- 2 · RESULTADOS -->
+<section class="sec res" aria-labelledby="t-res">
   <div class="wrap">
-    <p class="lbl">Así funciona en una empresa de reformas · 67 segundos</p>
-    <div class="caja">
-      <video controls playsinline preload="metadata" poster="/assets/video/qualivo-sistema-reformas-h-poster.jpg">
-        <source src="/assets/video/qualivo-sistema-reformas-h.mp4" type="video/mp4">
-      </video>
+    <p class="eyebrow">Resultados</p>
+    <h2 id="t-res">Resultados reales en captación para reformas.</h2>
+    <div class="casos">
+      <article class="caso eac">
+        <div class="cab"><span class="quien">Bellovinilo · revestimientos y reformas sin obras</span><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" loading="lazy" style="filter:brightness(0) invert(1)"></div>
+        <div class="cifras">
+          <div><div class="big" data-cuenta="8.3" data-dec="1" data-suf="×">8,3×</div><div class="lbl">retorno sobre la inversión</div></div>
+          <div><div class="big" data-cuenta="30000" data-suf="&nbsp;€">30.000&nbsp;€</div><div class="lbl">en ventas con 3.600&nbsp;€ de inversión</div></div>
+        </div>
+        <p class="ctx"><b>No había un sistema que optimizar. Tuvimos que construirlo.</b> Captación, páginas, publicidad, CRM, seguimiento y medición conectados de punta a punta.</p>
+        <a class="ver" href="/casos/bellovinilo/">Ver el caso completo →</a>
+      </article>
+      <article class="caso nail">
+        <div class="cab"><span class="quien">Antic Barcelona 113 · carpintería a medida</span><img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" loading="lazy" style="filter:brightness(0);height:52px"></div>
+        <div class="cifras">
+          <div><div class="big">&lt;&nbsp;24&nbsp;h</div><div class="lbl">de la solicitud de presupuesto a la visita agendada</div></div>
+        </div>
+        <p class="ctx">Cada solicitud recibe respuesta y una visita propuesta, sin esperar a que alguien se acuerde entre obra y obra.</p>
+      </article>
     </div>
-    <p style="text-align:center;font-size:13.5px;color:#8E96A2;margin:14px 0 0">Caso de ejemplo. Los siete agentes son los que montamos; las cifras de las pantallas son ilustrativas.</p>
-  </div>
-</section>
-
-<section class="logos">
-  <div class="wrap">
-    <p class="lbl">Proyectos con los que hemos trabajado</p>
-    <div class="fila">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:56px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:48px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:34px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:44px;width:auto;filter:grayscale(1) brightness(.5) contrast(1.6)">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:34px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:32px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:34px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:32px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:40px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:28px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:24px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:14px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:28px;width:auto;filter:brightness(0)">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:38px;width:auto;filter:brightness(0)">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:26px;width:auto">
-      <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:40px;width:auto">
-    </div>
-  </div>
-</section>
-
-<section class="casos">
-  <div class="wrap">
-    <p class="lbl">Dos empresas de reformas. Dos formas de perder clientes que ya no pierden.</p>
-    <div class="rej" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
-      <div class="destacado" style="padding:28px 24px 26px">
-        <img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" loading="lazy" style="height:74px;width:auto;margin:0 auto 14px;display:block;filter:brightness(0)">
-        <div class="n">&lt; 24 h</div>
-        <p><b>Visitas agendadas en menos de 24 horas</b> desde que el cliente pide presupuesto.</p>
-        <p style="margin-top:12px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:800">Antic Barcelona 113 · Carpintería de madera a medida · Barcelona y Terrassa</p>
-      </div>
-      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:28px 24px 26px">
-        <img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" loading="lazy" style="height:34px;width:auto;margin:20px auto 34px;display:block">
-        <div class="n">8,3×</div>
-        <p><b>3.600 € de inversión, 30.000 € en ventas.</b> No había sistema: se construyó desde cero, de la captación al seguimiento.</p>
-        <p style="margin-top:12px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#fff">Bellovinilo · Revestimientos vinílicos y decoración · <a href="/casos/bellovinilo/" style="color:var(--amarillo)">Leer el caso →</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec mapa">
-  <div class="wrap">
-    <h2>Dónde se pierde una reforma. Miramos los ocho puntos; en reformas la fuga casi siempre está en tres.</h2>
-    <p style="margin-top:20px;max-width:54ch;color:var(--gris)">Todo lo que pasa desde que alguien ve tu anuncio hasta que firma el presupuesto. El recorrido entero, con tus números delante.</p>
-    <div class="ocho">
-      <div><b>01</b><h3>Anuncios</h3><p>Traen curiosos que «quieren saber precios», no proyectos con fecha.</p></div>
-      <div><b>02</b><h3>La web</h3><p>Enseña fotos bonitas. No dice qué hacéis, dónde ni para quién.</p></div>
-      <div><b>03</b><h3>El formulario</h3><p>Pide el email y nada más. Sin ubicación, sin fecha, sin qué reforma.</p></div>
-      <div><b>04</b><h3>La respuesta</h3><p>El que escribe el martes recibe respuesta el jueves. Ya ha llamado a otros dos.</p></div>
-      <div><b>05</b><h3>La visita</h3><p>Se propone «cuando os venga bien» y nadie la cierra.</p></div>
-      <div><b>06</b><h3>El presupuesto</h3><p>Se envía y se espera. La mitad no contesta nunca.</p></div>
-      <div><b>07</b><h3>El seguimiento</h3><p>Depende de que el jefe se acuerde entre obra y obra.</p></div>
-      <div><b>08</b><h3>El «ahora no»</h3><p>El que iba a empezar en marzo y nadie retoma en febrero.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec agente">
-  <div class="wrap">
-    <h2>Qué montamos.<br>Siete agentes dentro del CRM que ya tienes.</h2>
-    <div class="filas">
-      <div class="fila-a"><span class="f">Entrada</span><span class="fl">→</span><span class="a"><b>Un agente</b> mete cada petición en tu CRM con origen, qué reforma, dónde, cuándo y una prioridad de 0 a 100. Nadie copia nada.</span></div>
-      <div class="fila-a"><span class="f">Primer contacto</span><span class="fl">→</span><span class="a"><b>Un agente</b> escribe por WhatsApp en dos minutos, con lo que el cliente ha contado, no con una plantilla.</span></div>
-      <div class="fila-a"><span class="f">Voz</span><span class="fl">→</span><span class="a"><b>Una voz</b> llama si no contesta, resuelve dudas y cierra la visita en tu calendario.</span></div>
-      <div class="fila-a"><span class="f">Presupuesto</span><span class="fl">→</span><span class="a"><b>Un agente</b> le pone fecha y siguiente paso a cada presupuesto enviado, y lo persigue hasta que hay respuesta.</span></div>
-      <div class="fila-a"><span class="f">Reactivación</span><span class="fl">→</span><span class="a"><b>Un agente</b> vuelve a los «ahora no» y a los presupuestos parados cuando toca, con un motivo.</span></div>
-      <div class="fila-a"><span class="f">Informe</span><span class="fl">→</span><span class="a"><b>Un agente</b> te dice cada mañana qué atender hoy y qué anuncio trae obras, no formularios.</span></div>
-    </div>
-    <div class="sines" style="grid-template-columns:1fr"><div><h3>Tu equipo hace las visitas y las obras.</h3><p>El sistema hace que ninguna petición se quede por el camino. Tu web, tus campañas, tu CRM y tu gente siguen como hoy: entramos en el punto exacto donde se pierde la reforma.</p></div></div>
-    <p class="remate">No sustituimos tu sistema. <span class="am">Lo agentizamos.</span></p>
-  </div>
-</section>
-
-<section class="sec pasos">
-  <div class="wrap">
-    <h2>Cómo va.</h2>
-    <div class="escalera">
-      <div class="paso">
-        <div class="num">01</div>
-        <div><h3>Diagnóstico. 30 minutos.</h3><p>Repasamos los ocho puntos con tus números delante: cuántas peticiones entran, cuánto tardáis en contestar, cuántos presupuestos siguen sin respuesta. Sin presentación comercial.</p></div>
-      </div>
-      <div class="paso">
-        <div class="num">02</div>
-        <div><h3>Plan. Por escrito en 48 horas.</h3><p>Las tres fugas por impacto, qué agente va en cada una y qué número tiene que moverse. Lo hagas con nosotros o no.</p></div>
-      </div>
-      <div class="paso destacado">
-        <div class="num">03</div>
-        <div><h3>Primer agente en dos semanas. Primer número en cuatro.</h3><p>Montamos el primer agente sobre lo que ya tienes, medimos el número el día uno y lo volvemos a medir a las cuatro semanas. <strong>Antes y después, con tus datos.</strong></p></div>
+    <p class="fuente">Bellovinilo: cifras del caso publicado, medidas del anuncio a la venta.</p>
+    <div class="logos">
+      <p>Han trabajado con Qualivo</p>
+      <div class="fila">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" >
       </div>
     </div>
   </div>
@@ -360,183 +691,498 @@ p{font-size:clamp(16.5px,2.2vw,19px)}
 
 
 
-<section class="pub">
+
+
+<!-- 4 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="sistema" aria-labelledby="t-prob">
   <div class="wrap">
-    <h2>Casos publicados, con números reales.</h2>
-    <div class="rej2">
-      <a href="/casos/bellovinilo/">
-        <div class="m">8,3×</div><div class="ms">Retorno sobre la inversión</div>
-        <div class="ti">No había un sistema que optimizar. Tuvimos que construirlo.</div>
-        <div class="su">BelloVinilo · B2B · Reformas y revestimientos</div>
-        <div class="le">Leer el caso →</div>
-      </a>
-      <a href="/casos/eac/">
-        <div class="m">10,2×</div><div class="ms">Del anuncio a la matrícula</div>
-        <div class="ti">De la inversión publicitaria a la matrícula, con todo medido.</div>
-        <div class="su">Escola Aeronàutica de Catalunya · Formación</div>
-        <div class="le">Leer el caso →</div>
-      </a>
-      <a href="/casos/focus-practical/">
-        <div class="m">−53 %</div><div class="ms">Coste por contacto</div>
-        <div class="ti">Contactos interesados en el curso de electricista a 3 €, con todo automatizado.</div>
-        <div class="su">Focus Practical · Formación de oficios</div>
-        <div class="le">Leer el caso →</div>
-      </a>
-      <a href="/casos/nuria-roure/">
-        <div class="m">6,45×</div><div class="ms">Retorno · mismos contactos</div>
-        <div class="ti">Más negocio sin comprar más demanda: 6,45 veces lo invertido sin captar un lead más.</div>
-        <div class="su">Nuria Roure · Formación y servicios online</div>
-        <div class="le">Leer el caso →</div>
-      </a>
+    <p class="eyebrow">Dónde se pierden las obras</p>
+    <h2 id="t-prob">No basta con que te pidan presupuesto. Hay que convertirlo en obra.</h2>
+    <div class="problemas">
+      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>Piden presupuesto quienes no van a reformar</h3><p>Curiosos, zonas que no cubres y obras que no haces.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>La visita se retrasa o no se confirma</h3><p>Respuestas tardías, llamadas que no se cogen y visitas que se caen.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Los presupuestos se quedan sin respuesta</h3><p>Nadie vuelve a llamar a quien se lo está pensando.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Campañas por tipo de obra y por zona.</span></li>
+        <li><b>Convertir</b><span>Páginas y formularios que piden lo necesario para valorar la obra.</span></li>
+        <li><b>Responder</b><span>Cada solicitud, con respuesta y visita propuesta.</span></li>
+        <li><b>Facilitar la venta</b><span>Tu técnico, con el contexto de cada obra.</span></li>
+        <li><b>Medir</b><span>Qué campaña acaba en obra, y qué mejorar.</span></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<section class="sec quien">
+<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
   <div class="wrap">
-    <h2>Esto no es para todo el mundo.</h2>
-    <div class="par">
-      <div class="caja si">
-        <h3>Tiene sentido si…</h3>
-        <ul>
-          <li>Ya te entran peticiones de presupuesto, aunque sean pocas.</li>
-          <li>Sois entre 5 y 50 personas y alguien atiende lo que entra.</li>
-          <li>Podéis hacer más obras de las que hacéis hoy.</li>
-          <li>El presupuesto medio aguanta una visita y un seguimiento.</li>
-        </ul>
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">De la solicitud de presupuesto a la obra, paso a paso.</h2>
+    <p class="lead">Así lo viviría Marta, que quiere reformar la cocina, y así lo vería tu técnico comercial. Empresa, personas, mensajes y cifras de ejemplo.</p>
+    <div class="etapas" aria-hidden="true"><span>Captar</span><span>Atender</span><span>Seguir y medir</span></div>
+    <div class="progreso" aria-hidden="true"></div>
+    <div class="vistas" role="tablist" aria-label="Partes del sistema">
+      <button type="button" role="tab" id="tab-0" data-etapa="Captar" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
+      <button type="button" role="tab" id="tab-1" data-etapa="Captar" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
+      <button type="button" role="tab" id="tab-2" data-etapa="Atender" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
+      <button type="button" role="tab" id="tab-3" data-etapa="Atender" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
+      <button type="button" role="tab" id="tab-4" data-etapa="Atender" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
+      <button type="button" role="tab" id="tab-5" data-etapa="Seguir y medir" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" data-etapa="Seguir y medir" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" data-etapa="Seguir y medir" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" data-etapa="Seguir y medir" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><p class="cap">Qué anuncio trae obras, no solo solicitudes</p>
+          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Visitas</th><th>Presupuestos</th><th>Aceptadas</th><th>Qué revisamos</th></tr></thead><tbody><tr><td><b>«Reforma de cocina · visita técnica en casa»</b><small>Meta · vídeo</small></td><td>96</td><td>41</td><td>25</td><td>20</td><td>7</td><td><span class="vd si">Comparar coste por obra</span></td></tr><tr><td><b>«Baño: mira antes obras terminadas»</b><small>Meta · carrusel</small></td><td>52</td><td>21</td><td>14</td><td>12</td><td>4</td><td><span class="vd mm">Seguir midiendo</span></td></tr><tr><td><b>«Presupuesto de reforma en 24 h»</b><small>Meta · formulario</small></td><td>36</td><td>9</td><td>7</td><td>6</td><td>1</td><td><span class="vd no">Analizar falta de encaje</span></td></tr></tbody></table></div></div></div>
+      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por obras, no por clics.</b> Cada anuncio con las solicitudes que trajo, cuántas eran de vuestra zona y de obras que hacéis, y cuántas acabaron en presupuesto aceptado. Antes de mover presupuesto se cruza con la inversión de cada anuncio para comparar el coste por obra. El de «presupuesto en 24 h» trae poco encaje: primero se miran los motivos.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="fm"><div><p class="q">¿Qué quieres reformar?</p><div class="ops"><span class="si">Cocina completa</span><span class="">Baño</span><span class="">Reforma integral</span><span class="">Otra obra</span></div></div><div><p class="q">¿Cuántos metros, más o menos?</p><div class="ops"><span class="">Menos de 10 m²</span><span class="si">Unos 12 m²</span><span class="">Más de 20 m²</span></div></div><div><p class="q">¿Para cuándo?</p><div class="ops"><span class="si">En los próximos 3 meses</span><span class="">Después del verano</span><span class="">Todavía no lo sé</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
+        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Reforma de cocina» · formulario</li><li><b>Obra</b>Cocina completa, unos 12 m²</li><li><b>Plazo</b>En los próximos 3 meses</li><li><b>Zona</b>Badalona</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
+          <p style="margin-top:12px">Cuatro preguntas que separan a quien va a reformar de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
       </div>
-      <div class="caja no">
-        <h3>No lo tiene si…</h3>
-        <ul>
-          <li>Todavía no te entra demanda: ahí lo primero es otra cosa, y te lo diremos.</li>
-          <li>Buscas quien te lleve las redes.</li>
-          <li>Quieres más leads sin tocar nada de lo que pasa después.</li>
-          <li>Trabajas solo y quieres seguir así.</li>
-        </ul>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
+      <div class="vista-g">
+        <div>
+          <div class="tel"><div class="tel-h"><span class="av">R</span><span><b>Reformas Horizonte</b><small>Asistente con IA · en línea</small></span></div>
+            <div class="chat" id="chat" aria-live="polite"></div></div>
+          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
+        </div>
+        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
+          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.</p></div>
       </div>
+      <p class="pista">Elige las respuestas de Marta en el móvil. Cada camino deja algo distinto en la ficha.</p>
     </div>
-  </div>
-</section>
-
-<section class="sec faq">
-  <div class="wrap">
-    <h2>Lo que suelen preguntar.</h2>
-    <div style="margin-top:36px;max-width:760px">
-      <details><summary>¿Tengo que cambiar de CRM?</summary><p>No. Entramos en el que ya usas. Si no tienes ninguno, te decimos cuál poner, gratis, y no es el más caro.</p></details>
-      <details><summary>¿Quién habla con mis clientes?</summary><p>Los agentes hacen el primer contacto y el seguimiento con tu nombre y tus reglas: qué se dice, cuándo y qué no se promete. La visita, el presupuesto y la obra son tuyos.</p></details>
-      <details><summary>¿Cuánto tarda?</summary><p>Diagnóstico de 30 minutos. Plan por escrito en 48 horas. Primer agente funcionando en dos semanas. Primer número, antes y después, en cuatro.</p></details>
-      <details><summary>¿Cuánto cuesta el diagnóstico?</summary><p>Nada. 30 minutos y el plan por escrito, lo hagas con nosotros o no. Si vemos que no podemos ayudarte, te lo decimos en la misma llamada.</p></details>
-      <details><summary>¿Y si ya trabajo con una agencia?</summary><p>No hace falta sustituirla. Nosotros entramos donde se pierde la reforma, que casi nunca es en el anuncio: es en lo que pasa después.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="sec form" id="reservar">
-  <div class="wrap">
-    <div class="grid2">
-      <div>
-        <h2>Reserva tu diagnóstico.</h2>
-        <p class="bajada" id="form-bajada">Cuatro preguntas para saber si tiene sentido en tu empresa de reformas, y eliges hora. Si no lo tiene, te lo decimos aquí mismo.</p>
-        <div class="tres" style="border-top-color:rgba(255,255,255,.14)">
-          <div><b>Sin compromiso</b></div><div><b>Sin presentación comercial</b></div><div><b>Plan por escrito</b></div>
+    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Simulación · opcional</span></div>
+          <div class="audio-d"><p class="ad-t">▶ Escucha la llamada <span>· el asistente llama a Marta · 42 s</span></p>
+            <audio id="voz-audio" controls preload="none" src="/assets/audio/llamada-reformas.mp3"></audio>
+            <p class="ad-m">Llamada simulada, con datos ficticios y voces generadas con la misma tecnología que usa el asistente. La voz de Marta simula el sonido de teléfono.</p></div>
+          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Marta</b><small>Jueves 18:20 · 42 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, Marta. Soy el asistente de voz con inteligencia artificial de Reformas Horizonte. Solicitaste presupuesto para reformar la cocina y autorizaste que te llamáramos. ¿Te viene bien hablar un momento?</span></div><div class="linea cl"><b>Marta</b><span>Sí. Es una cocina de unos doce metros, en Badalona.</span></div><div class="linea"><b>Asistente</b><span>Perfecto. ¿La reforma sería para los próximos tres meses?</span></div><div class="linea cl"><b>Marta</b><span>Sí. ¿Y más o menos cuánto costaría?</span></div><div class="linea"><b>Asistente</b><span>El precio te lo da el técnico después de ver la cocina, porque depende de la instalación y de los materiales. La visita no tiene coste. ¿Te viene mejor el jueves a las seis de la tarde o el sábado a las diez?</span></div><div class="linea cl"><b>Marta</b><span>El sábado a las diez.</span></div><div class="linea"><b>Asistente</b><span>Hecho. Te lo confirmo por WhatsApp y te lo recuerdo el viernes. Gracias, Marta.</span></div></div></div></div>
+        <div class="lado">
+          <div class="caja-d estado-v"><span class="k">Estado</span><p><b>Opcional, no incluido por defecto.</b> El asistente de voz se activa en cada proyecto solo después de configurarlo y probarlo con tu equipo. Mientras no está activo, todo sigue por WhatsApp.</p></div>
+          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
+            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
+            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
+            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
+            <li><span>No da precios ni promete nada: los da el técnico tras la visita.</span></li>
+          </ul></div>
+          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Marta, soy el asistente de Reformas Horizonte. Te llamaba por el presupuesto de la cocina. Te escribo por WhatsApp para que elijas día de visita.»</p></div>
+          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Obra, metros, zona y plazo confirmados, la visita técnica en la agenda y el resumen de la llamada en la ficha.</p></div>
         </div>
       </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="ficha">
+            <div class="ficha-h"><div><h3>Marta R. · Badalona</h3><p>Anuncio «Reforma de cocina» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
+            <div class="notas">
+              <div class="nota-f"><small>Quién es · encaje</small><b>8<small>/10</small></b><div class="barra"><i style="--w:80%"></i></div></div>
+              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
+            </div>
+            <dl class="campos"><div><dt>Obra</dt><dd>Cocina completa, unos 12 m²</dd></div><div><dt>Cambios</dt><dd>Quitar un tabique</dd></div><div><dt>Plazo</dt><dd>En los próximos 3 meses</dd></div><div><dt>Duda</dt><dd>El precio: se da tras la visita</dd></div><div><dt>Por qué «quién es» 8</dt><dd>Obra que hacéis · zona que cubrís · plazo cercano</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió visita</dd></div><div><dt>Visita</dt><dd>Sábado 10:00 con Carlos · confirmada</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
+            <p class="resumen"><b>Resumen para Carlos</b>Marta quiere reformar la cocina en los próximos tres meses y quitar un tabique. Ha confirmado la visita técnica. Todavía no ha hablado de presupuesto.</p>
+            <p class="resumen"><b>Siguiente paso</b>Visita del sábado a las 10:00: medir, ver el tabique y preguntar si decide sola o con alguien. Presupuesto en el plazo que acordéis.</p>
+          </div></div>
+        <div class="caja-d"><span class="k">Cómo se ordena</span>
+          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
+          <ul>
+            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
+            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
+            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
+            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
+          </ul>
+          <p style="margin-top:12px">Carlos no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Visitas técnicas · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><div class="citas"><div class="cita"><time>Jue 17:00</time><span><b>Ana G.</b><small>Baño en Sabadell · recordatorio de la víspera enviado, sin respuesta</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Vie 18:00</time><span><b>Luis F.</b><small>Reforma integral en Badalona · pidió otra hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Sáb 10:00</time><span><b>Marta R.</b><small>Cocina de 12 m² en Badalona · respondió «sí» al recordatorio</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Mié 12:00</time><span><b>Pere M.</b><small>Visitada. Falta registrar el resultado y la fecha del presupuesto</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
+      <p class="nota-img"><span class="n">6</span><span><b>Visitas que se hacen.</b> Cada una con un recordatorio la víspera que pide un «sí» y un aviso cuando el técnico sale. Se ve quién ha confirmado, quién no y qué visita no tiene resultado registrado.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
+      <div class="vista-g">
+        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió presupuesto y no contesta</button>
+<button type="button" aria-pressed="false" data-seg="1">B · La visita técnica</button>
+<button type="button" aria-pressed="false" data-seg="2">C · Presupuesto enviado</button>
+<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Marta. Soy el asistente de Reformas Horizonte. Has pedido presupuesto para la cocina, unos 12 m² en Badalona. ¿Quieres que vaya un técnico a verla?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Marta, una cosa que cambia mucho el presupuesto: ¿la cocina mantiene la distribución o cambia algo?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">Cómo es la visita</div><div class="bu">Asunto: Qué miramos en la visita técnica de tu cocina. Medidas, instalaciones y lo que conviene decidir antes del presupuesto.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿La reforma sigue siendo para estos meses o lo dejamos para más adelante? Cualquiera de las dos está bien.
+<span class="chip">Estos meses</span><span class="chip">Más adelante</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la visita ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Marta: el sábado a las 10:00 va Carlos a ver la cocina. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Marta, mañana a las 10:00 va Carlos a ver la cocina. ¿Te sigue viniendo bien?
+<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">Carlos sale hacia tu casa. Llega sobre las 10:00.</div></li><li class="alert"><div class="cu">Si no está · 15 min después</div><div class="ti">Recuperación</div><div class="bu">Marta, Carlos ha pasado y no hemos dado contigo. ¿Te viene mejor otro día?
+<span class="chip">Jueves 18:00</span><span class="chip">Sábado 12:00</span></div></li><li class="stop"><div class="cu">Después de la visita</div><div class="ti">El técnico registra el resultado</div><div class="bu">Encaja, presupuesto pendiente, más adelante o no sigue.</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Para que no se quede en el aire. Tareas con borrador que envía el técnico.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para Carlos</div><div class="ti">Una duda</div><div class="bu">Marta, ¿pudiste ver el presupuesto? Con esta obra la duda que más sale es el plazo; te lo aclaro antes de que lo preguntes.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Un ejemplo</div><div class="bu">Te paso cómo quedó una cocina parecida a la tuya, por si ayuda a decidir.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">Lo cierro por mi lado. El presupuesto sigue valiendo hasta el día X; si cambia algo, me escribes.</div></li><li class="stop"><div class="cu">Presupuesto aceptado</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">La reforma es para después del verano y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Marta. Te escribimos unas semanas antes de septiembre con huecos de visita, solo una vez.</div></li><li class=""><div class="cu">Unas semanas antes · WhatsApp</div><div class="ti">Huecos de visita</div><div class="bu">Marta, como quedamos: ¿te va bien que Carlos vaya a ver la cocina estas semanas?
+<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
+        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
+          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
+          <li><span>Los mensajes de presupuesto son <b>tareas con borrador</b>: los revisa y los envía Carlos, no un robot.</span></li>
+          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
+          <li><span>Quien dice «no» no recibe nada más.</span></li>
+          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Reformas Horizonte</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="panel">
+          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>184</b></div><div class=""><small>Visitas realizadas</small><b>46</b></div><div class=""><small>Presupuestos enviados</small><b>38</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Obras aceptadas</small><b>12</b></div></div>
+          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>184</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:72%"></i></span><b>132</b></div><div class="et"><span>Zona y obra que hacéis</span><span class="br"><i style="width:39%"></i></span><b>71</b></div><div class="et"><span>Visita reservada</span><span class="br"><i style="width:30%"></i></span><b>55</b></div><div class="et"><span>Visita realizada</span><span class="br"><i style="width:25%"></i></span><b>46</b></div><div class="et"><span>Presupuesto enviado</span><span class="br"><i style="width:21%"></i></span><b>38</b></div><div class="et"><span>Presupuesto aceptado</span><span class="br"><i style="width:7%"></i></span><b>12</b></div></div></div>
+          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>Presupuestos sin respuesta</b> · 26 de 38 siguen sin decisión<small>→ Tareas a los 2, 5 y 10 días, con borrador para el técnico</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes de fuera de zona o de obras que no hacéis</b> · 61 de 132<small>→ Zona y tipo de obra en el anuncio y en el formulario</small></span></div><div class="fu"><span class="nf">3</span><span><b>Visitas reservadas que se caen</b> · 9 de 55<small>→ Recordatorio que pide un «sí» la víspera y aviso una hora antes</small></span></div></div></div></div>
+          <p class="pie-p">Cifras de ejemplo para una empresa de reformas. «Obras aceptadas» son presupuestos aceptados que registra el equipo; no son cobros.</p>
+        </div></div>
+      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden las obras.</b> Cada etapa con cuántas pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
+      <a class="abre-panel" href="/intelligence/?sector=reformas" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
+      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Reformas Horizonte</span><span class="tag-demo">Ejemplo</span></div>
+        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">JP</span><span class="qn"><b>Jordi P.</b><small>Presupuesto de baño enviado hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Carlos con una obra parecida</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">RT</span><span class="qn"><b>Rosa T.</b><small>Pidió presupuesto de cocina hace 3 h · No contesta al WhatsApp; aceptó llamadas</small></span><span class="ac">📞 Llamarla hoy</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">AG</span><span class="qn"><b>Ana G.</b><small>Visita mañana a las 17:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la visita</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">PM</span><span class="qn"><b>Pere M.</b><small>Visita hecha ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y fecha del presupuesto</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">MR</span><span class="qn"><b>Marta R.</b><small>Visita el sábado a las 10:00 · Cocina de 12 m² y un tabique</small></span><span class="ac">👤 Preparar la visita</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">TB</span><span class="qn"><b>Toni B.</b><small>Dijo «después del verano» y aceptó que le escribiéramos · Hoy toca</small></span><span class="ac">💬 Mensaje con huecos de visita</span><span class="pr media">● Media</span></div></div></div></div>
+      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> El técnico abre el día con esta lista: cada solicitud con su siguiente acción y su prioridad. No hay que acordarse entre obra y obra.</span></p>
+    </div>
+    <nav class="vista-nav" aria-label="Recorrido de la demo">
+      <button type="button" data-prev hidden></button>
+      <span class="vista-pos"></span>
+      <button type="button" class="vista-sig" data-next></button>
+      <p class="vista-fin" hidden>Lo vemos con tu captación y tus solicitudes en el diagnóstico. <a class="btn" href="#diagnostico" data-cta="demo-fin">Pide tu diagnóstico&nbsp;→</a></p>
+    </nav>
+  </div>
+</section>
 
-      <div class="caja">
+<!-- CONVERSIÓN: después del recorrido y la demo -->
+<section class="sec final" id="diagnostico" aria-labelledby="t-final">
+  <span id="reservar"></span>
+  <div class="wrap">
+    <div class="grid-f">
+      <div class="f-izq">
+        <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
+        <h2 id="t-final">Descubre dónde puedes conseguir más obras.</h2>
+        <p class="lead" id="form-bajada">Analizamos tu captación, la respuesta a cada solicitud de presupuesto, las visitas y el seguimiento de presupuestos para identificar dónde actuar primero.</p>
+        <ol class="despues" aria-label="Qué pasa después">
+          <li><span><b>Cuéntanos tu empresa</b> y deja tus datos. Un minuto.</span></li>
+          <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes e identificamos qué conviene revisar primero con la información disponible.</span></li>
+        </ol>
+        <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
+        <div class="maikel">
+          <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
+          <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
+        </div>
+        <p class="wa-linea">¿Prefieres escribir? <a href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20reformas%20y%20tengo%20una%20pregunta%20sobre%20mi%20empresa." target="_blank" rel="noopener" data-wa="linea">Háblanos por WhatsApp</a>.</p>
+      </div>
+
+      <div class="caja-f">
+        <ol class="pasos-f" id="pasos-f" aria-label="Progreso">
+          <li class="act">1 · Tu empresa</li><li>2 · Tus datos</li><li>3 · Reserva tu hora</li>
+        </ol>
         <form id="f" novalidate>
           <div id="p1">
-            <div class="paso-n">Paso 1 de 2</div>
-            <h3 style="margin-bottom:20px">¿Tiene sentido para tu caso?</h3>
-            <label class="campo"><span>¿A qué se dedica tu empresa?</span>
-              <select name="sector" required>
+            <h3>Cuéntanos tu empresa</h3>
+            <label class="campo"><span>Nombre de la empresa</span><input type="text" name="centro" autocomplete="organization" required></label>
+            <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tuempresa.com" required></label>
+            <label class="campo"><span>Principal objetivo</span>
+              <select name="objetivo" required>
                 <option value="">Elige una opción</option>
-                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
-                <option selected>Reformas, construcción o instalaciones</option>
-                <option>Salud, clínica o bienestar</option>
-                <option>Formación o academia</option>
-                <option>Industria, taller o fabricación</option>
-                <option>Agencia o estudio</option>
-                <option>Comercio o tienda</option>
-                <option>Otro</option>
+                <option>Conseguir más solicitudes de presupuesto</option>
+                <option>Que más solicitudes acaben en visita</option>
+                <option>Que más presupuestos se acepten</option>
+                <option>Saber qué campañas traen obras</option>
+                <option>Todavía no lo tengo claro</option>
               </select>
             </label>
-            <label class="campo"><span>¿Cuántas personas sois?</span>
-              <select name="equipo" data-valor required>
-                <option value="">Elige una opción</option>
-                <option value="0">Solo yo</option>
-                <option value="1">De 2 a 4</option>
-                <option value="2">De 5 a 15</option>
-                <option value="2">De 16 a 50</option>
-                <option value="2">Más de 50</option>
-              </select>
-            </label>
-            <label class="campo"><span>¿Cuánto invertís al mes en conseguir clientes?</span>
-              <select name="inversion" data-valor required>
-                <option value="">Elige una opción</option>
-                <option value="0">Nada todavía</option>
-                <option value="1">Menos de 500 €</option>
-                <option value="2">Entre 500 y 2.000 €</option>
-                <option value="2">Entre 2.000 y 5.000 €</option>
-                <option value="2">Más de 5.000 €</option>
-              </select>
-            </label>
-            <label class="campo"><span>¿Cuál es tu web?</span>
-              <input type="text" name="web" placeholder="tuempresa.com" required>
-            </label>
-            <p class="err" id="e1" hidden></p>
-            <button type="button" class="btn" style="width:100%" id="b1">Continuar →</button>
+            <div class="dos">
+              <label class="campo"><span>Solicitudes de presupuesto al mes</span>
+                <select name="solicitudes" required>
+                  <option value="">Elige</option>
+                  <option>Menos de 20</option><option>20-49</option><option>50-99</option><option>100-250</option><option>Más de 250</option>
+                </select>
+              </label>
+              <label class="campo"><span>Importe medio de una obra</span>
+                <select name="ticket" required>
+                  <option value="">Elige</option>
+                  <option value="300-1.000 €">Menos de 1.000 €</option><option>1.000-3.000 €</option><option value="Más de 3.000 €">3.000-10.000 €</option><option value="Más de 3.000 €">Más de 10.000 €</option>
+                </select>
+              </label>
+            </div>
+            <div class="oculto" aria-hidden="true">
+              <select name="sector" tabindex="-1"><option selected>Reformas, construcción o instalaciones</option></select>
+              <select name="equipo" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
+              <select name="inversion" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
+            </div>
+            <p class="err" id="e1" role="alert" hidden></p>
+            <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
           </div>
 
           <div id="p2" hidden>
-            <div class="paso-n">Paso 2 de 2</div>
-            <h3 style="margin-bottom:8px">Perfecto. Vamos a verlo.</h3>
-            <p style="font-size:16px;color:var(--gris);margin-bottom:22px">Con esto preparo la llamada antes de que entres, para no perder tiempo en preguntas obvias.</p>
+            <h3>¿Con quién hablamos?</h3>
             <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
             <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
             <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
-            <label class="campo"><span>¿Qué tipo de reformas hacéis y dónde crees que se pierde?</span>
-              <textarea name="hipotesis" placeholder="Por ejemplo: cocinas y baños en Madrid. Se pierde en los presupuestos, que no contestan."></textarea>
-            </label>
-            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--teal)">política de privacidad</a>.</span></label>
-            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
-            <p class="err" id="e2" hidden></p>
-            <button type="submit" class="btn" style="width:100%" id="b2">Pedir el diagnóstico&nbsp;→</button>
+            <input type="hidden" name="hipotesis">
+            <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="err" id="e2" role="alert" hidden></p>
+            <button type="submit" class="btn" style="width:100%" id="b2">Ir a elegir hora&nbsp;→</button>
+            <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
           </div>
 
           <div id="p3" hidden>
-            <div class="paso-n" id="p3-n">Último paso</div>
-            <h3 style="margin-bottom:8px" id="p3-t">Coge el hueco que te venga bien.</h3>
-            <p style="font-size:16px;color:var(--gris);margin-bottom:20px">30 minutos. Reviso tu web y lo que me has contado antes de la llamada.</p>
+            <p class="eyebrow" id="p3-n" style="margin-bottom:6px">Último paso</p>
+            <h3 id="p3-t">Elige la hora que te venga bien.</h3>
+            <p style="font-size:15px;color:var(--gris);margin:-6px 0 14px">30 minutos por videollamada. La reunión queda confirmada cuando eliges la hora.</p>
             <div id="cal"></div>
           </div>
 
           <div id="p4" hidden>
-            <div class="fuera">
-              <h3>Sinceramente: todavía no.</h3>
-              <p>Un diagnóstico completo tiene sentido cuando ya entran oportunidades y hay algo montado detrás. En tu caso te costaría más tiempo del que te devolvería, y prefiero decírtelo ahora.</p>
-              <p>Cuando eso cambie, escríbenos a <a href="mailto:hola@qualivo.io" style="color:var(--teal);font-weight:700">hola@qualivo.io</a> y lo miramos.</p>
-            </div>
+            <div class="fuera"><h3>Gracias, lo hemos recibido.</h3><p style="font-size:15.5px;color:var(--gris)">Te escribimos en breve para ver si tiene sentido en tu caso.</p></div>
           </div>
         </form>
+        <div class="reservado" id="reservado" hidden aria-live="polite">
+          <h3>Reunión reservada.</h3>
+          <p style="font-size:15.5px;color:var(--gris);margin-top:6px">Te llegará la confirmación con el enlace de la videollamada. Si tienes a mano cuántas solicitudes de presupuesto recibís al mes y cuántas acaban en obra, mejor.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6 · SERVICIO -->
+<section class="sec" aria-labelledby="t-serv">
+  <div class="wrap">
+    <p class="eyebrow">Qué recibe tu empresa</p>
+    <h2 id="t-serv">Nos ocupamos del sistema de captación. Tú, de las obras.</h2>
+    <p class="lead">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo se concentre en visitar, presupuestar y ejecutar.</p>
+    <div class="serv-grid">
+      <ol class="fases">
+        <li><span class="num">01</span><h3>Diagnóstico</h3><p>Analizamos cómo te llegan las solicitudes y dónde se pierden las obras.</p></li>
+        <li><span class="num">02</span><h3>Implantación</h3><p>Ponemos en marcha las campañas, páginas y procesos acordados.</p></li>
+        <li><span class="num">03</span><h3>Optimización</h3><p>Medimos resultados, revisamos el recorrido y mejoramos continuamente.</p></li>
+      </ol>
+      <div class="incluye">
+        <span class="k">Sistema de Crecimiento Qualivo · Gestionado</span>
+        <h3>Lo que podemos llevar por ti</h3>
+        <ul>
+          <li>Campañas de captación</li>
+          <li>Landing pages y formularios</li>
+          <li>CRM y seguimiento</li>
+          <li>Automatizaciones e IA, cuando aportan</li>
+          <li>Panel de métricas</li>
+          <li>Revisión y optimización</li>
+        </ul>
+        <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico</b>, según lo que necesite tu empresa. Tú conservas el presupuesto, el precio y la decisión de cada obra.</p>
+      </div>
+    </div>
+    <div class="serv-cta"><a href="#diagnostico" class="btn" data-cta="servicio"><span class="largo">Descubre cómo conseguir más obras</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a><p>Empezamos por un diagnóstico sin coste de 30 minutos.</p></div>
+  </div>
+</section>
+
+<!-- 7 · PREGUNTAS -->
+<section class="sec" aria-label="Preguntas frecuentes">
+  <div class="wrap">
+    <div class="faq" style="margin-top:0">
+      <h3>Preguntas frecuentes</h3>
+      <div>
+        <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes de presupuesto. Si no, el diagnóstico dice si tiene sentido empezar y por dónde.</p></details>
+        <details><summary>¿Qué incluye el servicio?</summary><p>Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No necesariamente. Primero revisamos tu CRM y qué podemos conectar: antes de proponer cambios, comprobamos qué permite el sistema que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu empresa.</p></details>
+        <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántas obras quieras captar y de lo que deja una obra a tu empresa; en el diagnóstico hacemos esa cuenta con tus números y te decimos el alcance antes de empezar. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="pie">
-  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+  <div class="wrap">
+    <div class="cols">
+      <div><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" loading="lazy" style="height:24px;width:auto;margin-bottom:12px"><p>Conseguimos que más oportunidades se conviertan en clientes.</p></div>
+      <div><b>Sectores</b><a href="/formacion/">Formación</a><a href="/reformas/">Reformas</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
+      <div><b>Qualivo</b><a href="/casos/eac/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
+      <div><b>Legal</b><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
+    </div>
     <span>© 2026 Qualivo · España</span>
-    <span><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></span>
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20reformas%20y%20quiero%20ver%20d%C3%B3nde%20est%C3%A1%20la%20fuga." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" onclick="window.qvTrack&&qvTrack('diagnostico_whatsapp',{})">
+<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20reformas%20y%20tengo%20una%20pregunta%20sobre%20mi%20empresa." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" data-wa="flotante">
   <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 0 1 5.3 16C5.3 10.1 10.1 5.3 16 5.3S26.7 10.1 26.7 16 21.9 26.7 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
   <span>WhatsApp</span>
 </a>
+<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil"><span class="largo">Descubre cómo conseguir más obras</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
 
+<script>
+(function(){
+  'use strict';
+  function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
+  var EV='reformas', PAG='reformas';
+  var WA={"inicio": ["Hola, Marta. Soy el asistente de IA de Reformas Horizonte. Has pedido presupuesto para reformar la cocina, unos 12 m² en Badalona, para los próximos tres meses.", "¿Qué te gustaría resolver primero?"], "ops": [["Que vengan a verla", "a1"], ["Un precio orientativo", "b1"], ["Es para más adelante", "c1"]], "nodos": {"a1": {"log": [["Quiere visita", "obra en los próximos 3 meses", "g"]], "bot": ["Perfecto. Para preparar la visita: ¿la cocina mantiene la distribución o cambia algo?"], "ops": [["Se mantiene", "a2"], ["Quiero quitar un tabique", "a2"]]}, "a2": {"log": [["Distribución anotada", "lo revisa el técnico en la visita", ""]], "bot": ["Anotado. La visita la hace Carlos, el técnico, y no tiene coste. El presupuesto te lo da él después. ¿Te viene mejor el jueves a las 18:00 o el sábado a las 10:00?"], "ops": [["Jueves a las 18:00", "a3"], ["Sábado a las 10:00", "a3"]]}, "a3": {"log": [["Visita técnica reservada", "confirmación simulada · recordatorio la víspera", "g"], ["Aviso a Carlos", "Marta R. · A · cocina 12 m² · Badalona · 3 meses", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna visita real", "bot": ["Hecho: Carlos irá a esa hora. La víspera te lo recuerdo por aquí, y si te surge algo, me lo dices y lo cambiamos."], "fin": true}, "b1": {"log": [["Pide precio", "no se da sin visita", "h"]], "bot": ["Lo entiendo. Sin ver la obra no puedo darte un precio que valga: depende de la instalación, los materiales y si cambia la distribución.", "Lo da Carlos después de la visita, que no tiene coste. ¿Quieres que te llame y te lo explique?"], "ops": [["Sí, que me llame", "b2"], ["Prefiero pensármelo", "b3"]]}, "b2": {"log": [["Llamada propuesta con Carlos", "prefiere teléfono", "g"]], "bot": ["Hecho. Carlos te llama mañana por la tarde y te explica cómo calcula el presupuesto. Si prefieres otra hora, dímelo aquí."], "fin": true}, "b3": {"log": [["Lo está pensando", "seguimiento con una duda útil, sin presión", "h"]], "bot": ["Claro. Te dejo por aquí qué miramos en la visita, por si te ayuda a decidir. Cuando quieras, me escribes."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa al técnico ahora", "h"]], "bot": ["Sin prisa. ¿Para cuándo lo estás pensando?"], "ops": [["Después del verano", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos unas semanas antes con huecos de visita?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos unas semanas antes, solo una vez y con huecos de visita."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.", "hora": "20:47", "log0": [["Origen", "Anuncio «Reforma de cocina» · formulario", ""], ["Obra", "Cocina completa, unos 12 m²", ""], ["Plazo", "En los próximos 3 meses", ""], ["Zona", "Badalona", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
+  function contar(el,fin,dec,suf,ms){
+    if(quieto) return; var t0=null; suf=suf||'';
+    function paso(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/ms), e=1-Math.pow(1-k,3); el.innerHTML=fmt(fin*e,dec)+suf; if(k<1) requestAnimationFrame(paso); }
+    el.innerHTML=fmt(0,dec)+suf; requestAnimationFrame(paso);
+  }
+  function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
+    new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
+
+  /* WhatsApp: mismo evento que el resto de landings (DiagnosticoWhatsApp en el píxel) */
+  document.querySelectorAll('[data-wa]').forEach(function(a){ a.addEventListener('click',function(){ track('diagnostico_whatsapp',{ubicacion:a.getAttribute('data-wa'),pagina:'reformas'}); }); });
+
+  /* CTA: navegación, no lead */
+  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track(EV+'_cta',{ubicacion:a.getAttribute('data-cta'),pagina:PAG}); }); });
+
+  /* movimiento discreto: subrayado, barras, cifras que cuentan, entradas suaves */
+  var hero=document.getElementById('hero'), dash=document.getElementById('dash');
+
+  /* vídeo del sistema: inicio y final */
+  var vid=document.getElementById('vid');
+  if(vid){ vid.addEventListener('play',function una(){ track(EV+'_video_play',{video:'qualivo-sistema-reformas-h',pagina:PAG}); vid.removeEventListener('play',una); }); vid.addEventListener('ended',function(){ track(EV+'_video_fin',{video:'qualivo-sistema-reformas-h',pagina:PAG}); }); }
+  requestAnimationFrame(function(){ hero.classList.add('on'); });
+  alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
+  document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
+
+  /* formulario sobre /diagnostico/landing.js (sin cambios en ese archivo).
+     Centro y objetivo van en «hipotesis» (nota del CRM). Estos listeners se registran antes que los de landing.js. */
+  var f=document.getElementById('f'), pasos=document.querySelectorAll('#pasos-f li');
+  function pasoF(n){ pasos.forEach(function(li,i){ li.className=i<n?'hecho':(i===n?'act':''); }); }
+  f.addEventListener('submit',function(){
+    var c=f.elements.centro.value.trim(), o=f.elements.objetivo.value;
+    f.elements.hipotesis.value=('Empresa: '+c+(o?' · Objetivo: '+o:'')).slice(0,1200);
+  });
+  document.getElementById('b1').addEventListener('click',function(ev){
+    var req=['centro','web','objetivo','solicitudes','ticket'].concat(f.elements.sector&&f.elements.sector.required?['sector']:[]), mal=req.filter(function(n){ return !String(f.elements[n].value||'').trim(); });
+    req.forEach(function(n){ var el=f.elements[n]; if(mal.indexOf(n)>=0) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid'); });
+    if(mal.length){
+      ev.stopImmediatePropagation(); var e1=document.getElementById('e1');
+      e1.textContent=mal.length===1?'Revisa 1 campo para continuar.':'Revisa '+mal.length+' campos para continuar.'; e1.hidden=false;
+      f.elements[mal[0]].focus(); return;
+    }
+    pasoF(1);
+  },true);
+  /* paso 2: marca los campos vacíos o mal escritos (el aviso lo da landing.js) */
+  f.addEventListener('submit',function(){
+    ['nombre','email','telefono'].forEach(function(n){ var el=f.elements[n], v=String(el.value||'').trim(), ok=v&&(n!=='email'||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+      if(ok) el.removeAttribute('aria-invalid'); else el.setAttribute('aria-invalid','true'); });
+  },true);
+  f.addEventListener('input',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
+  f.addEventListener('change',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
+  /* ?paso=agenda: para quien ya ha dejado el formulario (enlace del WhatsApp de confirmación y del
+     segundo mensaje). landing.js enseña el calendario directo; aquí se ajusta el resto de la página. */
+  if(new URLSearchParams(location.search).get('paso')==='agenda'){
+    pasoF(2);
+    document.getElementById('t-final').textContent='Elige la hora de tu diagnóstico.';
+    document.querySelectorAll('[data-cta]').forEach(function(a){ if(a.classList.contains('btn')) a.innerHTML='Elige tu hora&nbsp;→'; });
+    var d1=document.querySelector('.despues li'); if(d1) d1.hidden=true;
+  }
+
+  /* agenda abierta: cuando landing.js enseña el paso del calendario (una vez) */
+  var p3=document.getElementById('p3'), agenda=false;
+  new MutationObserver(function(){ if(!p3.hidden&&!agenda){ agenda=true; pasoF(2); track(EV+'_agenda_abierta',{pagina:PAG}); } }).observe(p3,{attributes:true,attributeFilter:['hidden']});
+  /* reunión reservada: solo si el calendario de GHL avisa de una reserva completada.
+     Si no llega ningún aviso, no se enseña confirmación (la reserva se mide en el CRM con el evento Schedule). */
+  var reservada=false;
+  addEventListener('message',function(e){
+    if(reservada||!/leadconnectorhq\.com|msgsndr\.com/.test(String(e.origin||''))) return;
+    var txt=''; try{ txt=typeof e.data==='string'?e.data:JSON.stringify(e.data); }catch(x){}
+    if(/booking|appointment/i.test(txt)&&/(complete|confirm|success|booked)/i.test(txt)){
+      reservada=true; pasos.forEach(function(li){ li.className='hecho'; });
+      document.getElementById('reservado').hidden=false; track(EV+'_reserva',{pagina:PAG});
+    }
+  });
+
+  /* DEMO por pestañas: teclado con flechas, evento por vista */
+  var tabs=[].slice.call(document.querySelectorAll('.vistas [role=tab]')), vistos={};
+  function abre(i,foco){ tabs.forEach(function(t,j){ var on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; document.getElementById('vista-'+j).hidden=!on; });
+    if(foco) tabs[i].focus({preventScroll:true});
+    var v=tabs[i].getAttribute('data-vista'); if(!vistos[v]){ vistos[v]=1; track(EV+'_demo_vista',{vista:v,pagina:PAG}); }
+    if(v==='whatsapp'&&!waIni) waReset(); }
+  var au=document.getElementById('voz-audio'); if(au) au.addEventListener('play',function una(){ track(EV+'_demo_audio',{pagina:PAG}); au.removeEventListener('play',una); });
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ abre(i); });
+    t.addEventListener('keydown',function(e){ var k=e.key, n=tabs.length;
+      if(k==='ArrowRight'){ e.preventDefault(); abre((i+1)%n,true); } else if(k==='ArrowLeft'){ e.preventDefault(); abre((i-1+n)%n,true); }
+      else if(k==='Home'){ e.preventDefault(); abre(0,true); } else if(k==='End'){ e.preventDefault(); abre(n-1,true); } }); });
+
+  /* Retoque de UX (Claude Design): «Anterior / Siguiente», posición, CTA final y pestaña activa centrada */
+  (function(){
+    var lista=document.querySelector('#demo .vistas'), nav=document.querySelector('#demo .vista-nav'); if(!lista||!nav) return;
+    var prev=nav.querySelector('[data-prev]'), next=nav.querySelector('[data-next]'), pos=nav.querySelector('.vista-pos'), fin=nav.querySelector('.vista-fin'), prog=document.querySelector('#demo .progreso');
+    function nombre(t){ return t.textContent.replace(/^\s*\d+\s*/,'').trim(); }
+    function actual(){ for(var i=0;i<tabs.length;i++) if(tabs[i].getAttribute('aria-selected')==='true') return i; return 0; }
+    function segs(i){ var h=''; for(var j=0;j<tabs.length;j++) h+='<i'+(j<=i?' class="on"':'')+'></i>'; return h; }
+    function pintar(){ var i=actual(), ultimo=i===tabs.length-1, et=tabs[i].getAttribute('data-etapa')||'';
+      prev.hidden=i===0; if(i>0) prev.textContent='← '+nombre(tabs[i-1]);
+      next.hidden=ultimo; fin.hidden=!ultimo; nav.classList.toggle('ultimo',ultimo); if(!ultimo) next.textContent='Siguiente: '+nombre(tabs[i+1])+' →';
+      pos.innerHTML='<span>'+(i+1)+' de '+tabs.length+' · '+et+'</span><span class="seg" aria-hidden="true">'+segs(i)+'</span>';
+      if(prog) prog.innerHTML='<b>'+et+'</b><span>'+(i+1)+' de '+tabs.length+'</span><span class="seg">'+segs(i)+'</span>';
+      var t=tabs[i]; if(lista.scrollWidth>lista.clientWidth) lista.scrollTo({left:t.offsetLeft-(lista.clientWidth-t.offsetWidth)/2,behavior:quieto?'auto':'smooth'}); }
+    function ir(d){ var i=actual()+d; if(i<0||i>=tabs.length) return; tabs[i].click(); tabs[i].focus({preventScroll:true});
+      var top=lista.getBoundingClientRect().top; if(top<0) window.scrollBy({top:top-90,behavior:quieto?'auto':'smooth'}); }
+    prev.addEventListener('click',function(){ ir(-1); }); next.addEventListener('click',function(){ ir(1); });
+    new MutationObserver(pintar).observe(lista,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+    pintar();
+  })();
+
+  /* WhatsApp de ejemplo: ramas con botones; «Por detrás» va apuntando lo que queda en el CRM */
+  var chat=document.getElementById('chat'), wlog=document.getElementById('wa-log'), waIni=false, waT=[];
+  function esp(ms){ return quieto?0:ms; }
+  function burbuja(t,c){ var d=document.createElement('div'); d.className='msg '+c; d.textContent=t;
+    if(c!=='sis'){ var s=document.createElement('small'); s.textContent=WA.hora; d.appendChild(s); } chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+  function apunta(l){ (l||[]).forEach(function(x){ var li=document.createElement('li'); li.className='nuevo '+(x[2]||''); var b=document.createElement('b'); b.textContent=x[0]; li.appendChild(b); li.appendChild(document.createTextNode(x[1])); wlog.appendChild(li); }); }
+  function bot(lista,fin){ var i=0; (function sig(){ if(i>=lista.length){ fin&&fin(); return; }
+      var e=document.createElement('div'); e.className='escribe'; e.innerHTML='<i></i><i></i><i></i>'; chat.appendChild(e); chat.scrollTop=chat.scrollHeight;
+      waT.push(setTimeout(function(){ e.remove(); burbuja(lista[i++],'bot'); waT.push(setTimeout(sig,esp(350))); },esp(700))); })(); }
+  function ops(lista){ if(!lista) return; var c=document.createElement('div'); c.className='opciones';
+    lista.forEach(function(o){ var b=document.createElement('button'); b.type='button'; b.textContent=o[0];
+      b.addEventListener('click',function(){ c.remove(); burbuja(o[0],'yo'); track(EV+'_demo_whatsapp',{rama:o[1],pagina:PAG}); nodo(o[1]); }); c.appendChild(b); });
+    chat.appendChild(c); chat.scrollTop=chat.scrollHeight; }
+  function nodo(k){ var n=WA.nodos[k]; apunta(n.log); if(n.sys) burbuja(n.sys,'sis');
+    bot(n.bot,function(){ if(n.fin){ burbuja('Fin de este camino. Prueba otro con «Empezar de nuevo».','sis'); } else ops(n.ops); }); }
+  function waReset(){ waT.forEach(clearTimeout); waT=[]; waIni=true; chat.innerHTML=''; wlog.innerHTML='';
+    apunta(WA.log0); bot(WA.inicio,function(){ ops(WA.ops); }); }
+  document.getElementById('wa-reini').addEventListener('click',waReset);
+
+  /* llamada: la transcripción aparece línea a línea la primera vez */
+  var vozHecha=false;
+  function vozPlay(){ if(vozHecha||quieto) return; vozHecha=true; var ls=[].slice.call(document.querySelectorAll('#voz-t .linea'));
+    ls.forEach(function(l,i){ if(i>0){ l.classList.add('oculta'); setTimeout(function(){ l.classList.remove('oculta'); l.style.animation='entra .35s ease'; },i*900); } }); }
+
+  /* seguimientos: cuatro situaciones */
+  var sbs=[].slice.call(document.querySelectorAll('[data-seg]'));
+  sbs.forEach(function(b){ b.addEventListener('click',function(){ var k=b.getAttribute('data-seg');
+    sbs.forEach(function(x){ x.setAttribute('aria-pressed',x===b); });
+    document.querySelectorAll('[data-seg-p]').forEach(function(p){ p.hidden=p.getAttribute('data-seg-p')!==k; });
+    track(EV+'_demo_seguimiento',{caso:k,pagina:PAG}); }); });
+
+  /* huecos reales del calendario (api/huecos.js). Sin huecos, no se enseña nada. */
+  fetch('/api/huecos/').then(function(r){ return r.ok?r.json():{huecos:[]}; }).then(function(d){
+    var h=((d&&d.huecos)||[]).slice(0,3); if(!h.length) return;
+    var fx=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',weekday:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    document.getElementById('huecos-t').textContent=h.map(function(x){ return fx.format(new Date(x)).replace(',',''); }).join(' · ');
+    document.getElementById('huecos').classList.add('on');
+  }).catch(function(){});
+
+  /* CTA fijo en móvil: se oculta mientras se ven los botones de la portada, la demo (tiene su CTA), el diagnóstico o el pie */
+  var fijo=document.getElementById('fijo');
+  if('IntersectionObserver' in window){
+    var vistos=[];
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ var k=vistos.indexOf(e.target); if(e.isIntersecting&&k<0) vistos.push(e.target); else if(!e.isIntersecting&&k>=0) vistos.splice(k,1); });
+      var on=vistos.length===0; fijo.classList.toggle('on',on); fijo.inert=!on; document.body.classList.toggle('fijo-on',on);
+    });
+    [document.querySelector('.hero .ctas'),document.getElementById('demo'),document.getElementById('diagnostico'),document.querySelector('footer.pie')].forEach(function(el){ if(el) io.observe(el); });
+  }
+})();
+</script>
 <script src="/assets/consent.js" defer></script>
-<script>if(!location.search){history.replaceState(null,"",location.pathname+"?utm_content=reformas");}</script>
 <script src="/diagnostico/landing.js" defer></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

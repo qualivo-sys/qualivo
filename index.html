@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Home de Qualivo (en producción desde el 14-oct-2026, OK de Maikel). Posicionamiento v2
-     (content/posicionamiento-v2-2026-10-12.md), en el esquema de /formacion/v21/: portada con VSL, casos y formulario
-     arriba; sistema, demo y alcance debajo. Formulario: /diagnostico/landing.js → /api/diagnostico en tres pasos, con
-     sector, solicitudes al mes y ticket (etiquetas de encaje del funnel v2) y el precio «desde 1.200 € + IVA» al lado.
-     ?paso=agenda: agenda directa. Historial del borrador en inicio/v2/CAMBIOS.md. La home anterior está en el historial de git. -->
+<!-- Home v22 (22-oct-2026). Generada con content/… gen (scratchpad) desde el diseño de /formacion/v21/.
+     Portada con el vídeo del sistema del sector, casos, sistema y demo por pestañas (anuncios, formulario, WhatsApp,
+     llamada simulada con audio, ficha, citas, seguimientos, recorrido y qué hacer hoy) con datos de ejemplo; después,
+     el formulario (el botón de arriba lleva a él). Sin precio (22-oct). Audio: /assets/audio/llamada-<sector>.mp3.
+     Formulario: /diagnostico/landing.js → /api/diagnostico, con las preguntas de tamaño del funnel v2.
+     En producción desde el 22-oct (ok de Maikel). La versión anterior está en /anterior/ (noindex). -->
 <title>Qualivo · Conseguimos que más oportunidades se conviertan en clientes</title>
 <meta name="description" content="Sistemas de crecimiento que conectan la captación, la respuesta comercial y el seguimiento hasta la venta. Más oportunidades, menos negocio perdido y saber qué funciona. Diagnóstico sin coste de 30 minutos.">
 <link rel="canonical" href="https://qualivo.io/">
@@ -85,7 +86,7 @@
    "provider": {
     "@id": "https://qualivo.io/#organizacion"
    },
-   "description": "Diagnóstico sin coste de 30 minutos, implantación de campañas, páginas, CRM y seguimiento, y optimización continua. Los proyectos empiezan en 1.200 € + IVA.",
+   "description": "Diagnóstico sin coste de 30 minutos, implantación de campañas, páginas, CRM y seguimiento, y optimización continua.",
    "areaServed": "ES"
   },
   {
@@ -110,26 +111,42 @@
     },
     {
      "@type": "Question",
-     "name": "¿Tengo que cambiar mi CRM o mi agencia?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "No. Trabajamos sobre las herramientas que ya usas y nos coordinamos con tu agencia si la tienes. Lo que funciona se queda."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "¿Qué incluye y cuánto cuesta?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Los proyectos empiezan en 1.200 € + IVA. Empezamos con un diagnóstico sin coste y, después, te proponemos el alcance que necesita tu recorrido y su precio. La publicidad se paga aparte, directamente a cada plataforma."
-     }
-    },
-    {
-     "@type": "Question",
      "name": "¿Para qué empresas tiene sentido?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Para empresas que ya venden y reciben oportunidades, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, clínicas, servicios y B2B."
+      "text": "Para empresas que ya venden y reciben solicitudes, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, reformas, clínicas, servicios y B2B."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Necesito estar invirtiendo en publicidad?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes. Si no, el diagnóstico dice si tiene sentido empezar y por dónde."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Qué incluye el servicio?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Tengo que cambiar mi CRM?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No necesariamente. Primero revisamos tu CRM y qué podemos conectar: antes de proponer cambios, comprobamos qué permite el sistema que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu empresa."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Qué presupuesto necesito?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Depende de cuántos clientes quieras captar y de lo que vale una venta para tu empresa; en el diagnóstico hacemos esa cuenta con tus números y te decimos el alcance antes de empezar. La publicidad se paga aparte, directamente a cada plataforma."
      }
     }
    ]
@@ -163,11 +180,12 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .lead{color:var(--gris);margin-top:16px;max-width:56ch}
 .borrador{background:var(--amarillo);text-align:center;font-weight:800;font-size:13px;padding:7px 16px}
 .tag-demo{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00;background:#FDF1C7;border:1px solid #F0D98A;padding:4px 9px;border-radius:999px;white-space:nowrap}
+
+/* botones: uno solo en todo el sitio */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:0 32px;border-radius:14px;border:0;cursor:pointer;
   background:var(--amarillo);color:var(--tinta);font:900 clamp(16px,1.9vw,18px)/1.15 var(--display);text-decoration:none;text-align:center;
   box-shadow:0 12px 30px rgba(244,204,56,.32);transition:transform .16s ease,box-shadow .16s ease}
 .btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(244,204,56,.42)}
-.btn:disabled{opacity:.6;cursor:wait;transform:none}
 .btn-sm{min-height:42px;padding:0 18px;border-radius:10px;font-size:14.5px;box-shadow:none}
 .btn-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:800;font-size:16px;text-decoration:none;color:var(--gris)}
 .btn-link:hover{color:var(--tinta)}
@@ -176,91 +194,88 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .top{position:sticky;top:0;z-index:40;background:rgba(250,247,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .top img{height:22px;width:auto}
-.top nav{display:flex;align-items:center;gap:22px}
-.top nav a.l{font-size:14.5px;font-weight:700;text-decoration:none;color:#3E434B}
-.top nav a.l:hover{color:var(--verde)}
 
 /* 1 · HERO */
 .hero{padding:clamp(44px,6vw,84px) 0 clamp(56px,7vw,96px)}
 .grid-h{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,64px);align-items:center}
-.hero h1{font-size:clamp(34px,4.7vw,58px);max-width:15ch}
-.hero h1 span{color:var(--verde);text-decoration:underline;text-decoration-color:rgba(244,204,56,.9);text-decoration-thickness:.16em;text-underline-offset:.08em;text-decoration-skip-ink:none}
-.hero .lead{font-size:clamp(17px,1.9vw,19px);color:#3E434B;margin-top:22px;max-width:46ch}
+.hero h1{font-size:clamp(34px,4.7vw,58px);max-width:14ch}
+.hero h1 span{display:block;color:var(--verde);margin-top:.06em}
+.hero h1 .subr{text-decoration:underline;text-decoration-color:rgba(244,204,56,.9);text-decoration-thickness:.16em;text-underline-offset:.08em;text-decoration-skip-ink:none}
+.hero .lead{font-size:clamp(17px,1.9vw,19px);color:#3E434B;margin-top:22px;max-width:44ch}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:30px}
 .hero .micro{margin-top:14px;font-size:14.5px;color:var(--gris);font-weight:700}
 .hero .micro span{color:var(--verde)}
-.sectores{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:26px;padding-top:20px;border-top:1px solid var(--linea)}
-.sectores small{font-size:13px;font-weight:700;color:var(--gris-claro);margin-right:4px}
-.sectores a{font-size:13.5px;font-weight:800;text-decoration:none;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:7px 13px}
-.sectores a:hover{border-color:var(--verde);color:var(--verde)}
+
 .dash{background:#fff;border:1px solid var(--linea);border-radius:22px;box-shadow:0 30px 80px rgba(16,19,25,.10);padding:22px 22px 18px}
 .dash-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
 .dash-h b{font-size:15.5px;display:block}
 .dash-h small{display:block;font-size:13px;color:var(--gris-claro);font-weight:600;margin-top:3px}
-.etapa{display:grid;grid-template-columns:118px 1fr 40px;gap:12px;align-items:center;padding:7px 0}
+.etapa{display:grid;grid-template-columns:116px 1fr 44px;gap:12px;align-items:center;padding:8px 0}
 .etapa .n{font-size:14px;font-weight:700;color:#2B2F36}
-.barra{height:26px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
+.barra{height:28px;border-radius:9px;background:var(--marfil-2);overflow:hidden}
 .barra i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--verde),var(--verde-claro));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
 .dash.on .barra i{width:var(--w)}
 .etapa .v{font-size:15px;font-weight:900;text-align:right}
 .etapa.fin .barra i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
-.fuga-h{margin:6px 0 6px 130px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
+.fuga-h{margin:6px 0 6px 128px;padding:9px 12px;border-radius:10px;background:var(--naranja-suave);color:#9A3412;font-size:13.5px;font-weight:700;line-height:1.35}
 .dash-pie{border-top:1px solid var(--linea);margin-top:12px;padding-top:12px;font-size:12.5px;color:var(--gris-claro);font-weight:600}
+
+/* VSL */
+.vsl{margin:0}
+.vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
+.vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.vsl-play:hover img{transform:scale(1.02)}
+.vsl-play:hover{box-shadow:0 34px 90px rgba(16,19,25,.26)}
+.vsl-dur{position:absolute;right:14px;top:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
+.vsl-marco iframe,.vsl-marco video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl-marco{cursor:auto}
+.vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
 
 /* 2 · RESULTADOS */
 .res{background:#fff}
-.casos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
-.caso{border-radius:22px;padding:clamp(26px,3.4vw,38px);display:flex;flex-direction:column}
-.caso.oscuro{background:var(--tinta);color:#fff}
-.caso.claro{background:var(--verde-suave)}
+.casos{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:36px}
+.caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column}
+.caso.eac{background:var(--tinta);color:#fff}
+.caso.nail{background:var(--verde-suave)}
 .caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
-.caso .cab img{height:30px;width:auto}
-.caso.oscuro .cab img{filter:brightness(0) invert(1);opacity:.9;height:26px}
+.caso .cab img{height:34px;width:auto}
+.caso.eac .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
+.caso.nail .cab img{filter:grayscale(1) brightness(.5) contrast(1.6);height:44px}
 .caso .quien{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.75}
-.caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:22px 0 16px}
-.caso .big{font-size:clamp(44px,5.6vw,68px);font-weight:900;letter-spacing:-.05em;line-height:.95}
-.caso.oscuro .big{color:var(--amarillo)}
-.caso.claro .big{color:var(--verde)}
-.caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:22ch;line-height:1.35}
-.caso.oscuro .lbl{color:#C6CBD3}
+.caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:24px 0 18px}
+.caso .big{font-size:clamp(44px,5.8vw,70px);font-weight:900;letter-spacing:-.05em;line-height:.95}
+.caso.eac .big{color:var(--amarillo)}
+.caso.nail .big{color:var(--verde)}
+.caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:20ch;line-height:1.35}
+.caso.eac .lbl{color:#C6CBD3}
 .caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
-.caso.oscuro .ctx{color:#AEB5BF}
-.caso .ctx b{font-weight:800}
-.caso.oscuro .ctx b{color:#fff}
-.caso.claro .ctx{color:#3E434B}
-.caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none}
-.caso.oscuro .ver{color:var(--amarillo)}
-.caso.claro .ver{color:var(--verde)}
-.mas-casos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:16px;border:1px solid var(--linea);border-radius:18px;overflow:hidden}
-.mas-casos a{display:flex;gap:14px;align-items:baseline;padding:18px 20px;text-decoration:none;background:#fff}
-.mas-casos a + a{border-left:1px solid var(--linea)}
-.mas-casos a:hover{background:var(--marfil)}
-.mas-casos b{font-size:24px;font-weight:900;letter-spacing:-.04em;color:var(--verde);white-space:nowrap}
-.mas-casos span{font-size:14px;color:var(--gris);line-height:1.4}
-.mas-casos span strong{color:var(--tinta)}
+.caso.eac .ctx{color:#AEB5BF}
+.caso.eac .ctx b{color:#fff}
+.caso.nail .ctx{color:#3E434B}
+.caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none;color:var(--amarillo)}
 .logos{margin-top:clamp(36px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center}
-.logos p{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);max-width:14ch;line-height:1.4}
-.logos .fila{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;opacity:.6}
+.logos p{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);max-width:14ch;line-height:1.4}
+.logos .fila{display:flex;flex-wrap:wrap;align-items:center;gap:22px 40px;opacity:.8}
 .logos img{width:auto}
 
 /* 3 · PROBLEMA + SOLUCIÓN */
-.fugas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
-.fg{padding:20px 24px 20px 0;border-bottom:1px solid var(--linea)}
-.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding-left:24px;border-left:1px solid var(--linea)}
-.fg .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--rojo)}
-.fg p{font-size:15.5px;color:#3E434B;line-height:1.45;margin-top:6px}
-.solucion{margin-top:clamp(40px,5vw,56px);background:var(--tinta);color:#fff;border-radius:24px;padding:clamp(24px,3.4vw,38px)}
-.solucion .t{margin-bottom:24px}
-.solucion .t h3{font-size:clamp(20px,2.4vw,26px);color:#fff;max-width:34ch}
-.solucion .t p{font-size:15px;color:#AEB5BF;margin-top:8px;max-width:70ch}
+.problemas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
+.pb{padding:24px 26px 6px 0}
+.pb + .pb{padding-left:26px;border-left:1px solid var(--linea)}
+.pb .x{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);font-weight:900;font-size:14px;margin-bottom:14px}
+.pb h3{margin-bottom:8px}
+.pb p{font-size:15.5px;color:var(--gris);line-height:1.5}
+.solucion{margin-top:clamp(40px,5vw,60px);background:var(--tinta);color:#fff;border-radius:24px;padding:clamp(24px,3.4vw,38px)}
+.solucion .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.solucion .t h3{font-size:clamp(20px,2.4vw,26px);color:#fff}
+.solucion .t span{font-size:14px;color:#8E96A2;font-weight:600}
 .flujo{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;list-style:none;counter-reset:f}
 .flujo li{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 16px 16px}
 .flujo li::before{counter-increment:f;content:'0' counter(f);display:block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--verde-claro);margin-bottom:10px}
 .flujo li::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:1;color:var(--amarillo);font-weight:900;background:var(--tinta);width:12px;text-align:center}
 .flujo li:last-child::after{display:none}
 .flujo b{display:block;font-size:17px;letter-spacing:-.01em;margin-bottom:6px}
-.flujo span{display:block;font-size:13.5px;color:#AEB5BF;line-height:1.45}
-.flujo em{display:block;font-style:normal;font-size:12px;color:#7F8794;margin-top:10px;font-weight:600}
+.flujo span{display:block;font-size:14px;color:#AEB5BF;line-height:1.45}
 
 /* 4 · DEMOSTRACIÓN */
 .demo{background:var(--negro);color:#fff}
@@ -273,10 +288,9 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .kpis b{display:block;font-size:clamp(22px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;margin-top:4px}
 .kpis .alerta b{color:#FF9B7A}
 .kpis .ok b{color:var(--amarillo)}
-.escena{margin-top:16px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
-.escena > div,.lado > div{min-width:0}
+.escena{position:relative;margin-top:16px;display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
 .marco{background:#F6F4EF;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.marco .bar{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 14px;background:#14181F}
+.marco .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#14181F}
 .marco .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
 .marco .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
 .marco .bar .tag-demo{margin-left:auto}
@@ -285,70 +299,201 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .nota-img .n{flex:0 0 24px;height:24px;border-radius:50%;background:var(--amarillo);color:var(--tinta);display:grid;place-items:center;font-weight:900;font-size:12.5px}
 .nota-img b{color:#fff}
 .lado{display:grid;gap:16px}
-.raquel{background:linear-gradient(135deg,#14181F,#0F1F1D);border:1px solid rgba(39,189,177,.35);border-radius:18px;padding:20px}
-.raquel .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde-claro)}
-.raquel h3{color:#fff;margin:8px 0 6px;font-size:18px}
-.raquel p{font-size:14.5px;color:#AEB5BF;line-height:1.5}
-.raquel a{display:inline-flex;align-items:center;margin-top:14px;min-height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:800;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.35)}
-.raquel a:hover{border-color:var(--verde-claro)}
-/* pestañas de la demo (22-oct): anuncios, WhatsApp y citas antes del panel */
-.vistas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:28px;padding:5px;background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:14px}
+
+/* 5 · DEMO por pestañas (22-oct): anuncio, formulario, WhatsApp, llamada, ficha, seguimientos y panel */
+.vistas{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:30px;padding:5px;background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:14px;-webkit-overflow-scrolling:touch}
 .vistas::-webkit-scrollbar{display:none}
-.vistas button{flex:1 0 auto;display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;color:#8E96A2;font:800 14px var(--display);border-radius:10px;padding:10px 14px;cursor:pointer;white-space:nowrap}
-.vistas button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);font-size:11.5px}
+.vistas button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;background:transparent;color:#8E96A2;font:800 13px var(--display);border-radius:10px;padding:10px 7px;cursor:pointer;white-space:nowrap}
+.vistas button i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);font-size:11.5px}
 .vistas button:hover{color:#fff}
 .vistas button[aria-selected="true"]{background:#fff;color:var(--tinta)}
-.vistas button[aria-selected="true"] span{background:var(--amarillo);color:var(--tinta)}
-.vista{margin-top:18px}
-.vista[hidden]{display:none}
-.vista .marco{background:#F6F4EF}
+.vistas button[aria-selected="true"] i{background:var(--amarillo);color:var(--tinta)}
+/* anuncios, citas, recorrido y hoy: como en la home, con ejemplos del sector */
 .vbody{padding:18px;color:var(--tinta)}
-.vbody .cap{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#8A8F97;margin-bottom:10px}
+.cap{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#8A8F97;margin-bottom:10px}
 .vtabla{overflow-x:auto}
-.vtabla table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;background:#fff;border-radius:12px;overflow:hidden}
+.vtabla table{width:100%;border-collapse:collapse;font-size:14px;min-width:680px;background:#fff;border-radius:12px;overflow:hidden}
 .vtabla th,.vtabla td{padding:11px 12px;border-bottom:1px solid rgba(16,19,25,.07);text-align:right;white-space:nowrap}
 .vtabla th:first-child,.vtabla td:first-child{text-align:left}
 .vtabla th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800;background:#FAF8F3}
 .vtabla td{font-variant-numeric:tabular-nums}
 .vtabla td b{font-weight:800}
 .vtabla td small{display:block;color:#8A8F97;font-size:12px;font-weight:600}
-.ver{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px}
-.ver.si{background:#E3F2EF;color:#0E7C74}.ver.mm{background:#FDF1C7;color:#8A5A00}.ver.no{background:#FFE9E0;color:#B2410C}
-.wa-esc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
-.chat{background:#EFE7DD;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
-.chat .m{max-width:86%;padding:8px 11px;border-radius:12px;font-size:14px;line-height:1.45;box-shadow:0 1px 0 rgba(0,0,0,.07)}
-.chat .in{background:#fff;align-self:flex-start;border-top-left-radius:4px}
-.chat .out{background:#D9FDD3;align-self:flex-end;border-top-right-radius:4px}
-.chat .m small{display:block;font-size:11px;color:#8A8F97;font-weight:700;margin-bottom:2px}
-.detras{background:#fff;border-radius:14px;padding:16px;display:grid;gap:8px}
-.detras div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed rgba(16,19,25,.1)}
-.detras div:last-child{border-bottom:0}
-.detras span{color:#8A8F97;font-size:13px}
-.detras b{font-weight:700}
+.vd{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.vd.si{background:#E3F2EF;color:#0E7C74}.vd.mm{background:#FDF1C7;color:#8A5A00}.vd.no{background:#FFE9E0;color:#B2410C}
 .citas{display:grid;gap:8px}
-.cita{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px 14px;font-size:14px}
+.cita{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px 14px;font-size:14px}
 .cita time{font-weight:800;font-variant-numeric:tabular-nums}
 .cita small{display:block;color:#8A8F97;font-size:12.5px;font-weight:600}
-.ficha-h{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start;background:#fff;border-radius:14px 14px 0 0;padding:16px 18px;border-bottom:1px solid rgba(16,19,25,.08)}
-.ficha-h b{font-size:18px;font-weight:900;letter-spacing:-.01em}
-.ficha-h small{display:block;color:#8A8F97;font-size:13px;font-weight:600;margin-top:3px}
-.notas{display:flex;gap:8px;align-items:stretch}
-.nota{background:#FAF8F3;border:1px solid rgba(16,19,25,.08);border-radius:12px;padding:8px 12px;text-align:center;min-width:86px}
-.nota small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800}
-.nota b{font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}
-.nota.letra{background:#0E7C74;border-color:#0E7C74;color:#fff}.nota.letra small{color:rgba(255,255,255,.8)}
-.ficha-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#fff}
-.ficha-g div{padding:12px 18px;border-bottom:1px solid rgba(16,19,25,.06);font-size:14px}
-.ficha-g div:nth-child(odd){border-right:1px solid rgba(16,19,25,.06)}
-.ficha-g span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A8F97;font-weight:800;margin-bottom:3px}
-.ficha-res{background:#fff;padding:14px 18px;font-size:14px;line-height:1.55;border-bottom:1px solid rgba(16,19,25,.06)}
-.ficha-sig{background:#E3F2EF;padding:14px 18px;font-size:14px;font-weight:700;border-left:4px solid #0E7C74;border-radius:0 0 14px 0}
-@media(max-width:760px){.ficha-g{grid-template-columns:1fr}.ficha-g div:nth-child(odd){border-right:0}}
-.vnota{margin-top:12px;font-size:13.5px;color:#5A5E66;line-height:1.5}
-.vista .nota-img{margin-top:12px}
-@media(max-width:760px){.wa-esc{grid-template-columns:1fr}.cita{grid-template-columns:1fr}.detras div{grid-template-columns:1fr;gap:2px}}
+.emb-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.emb{display:grid;gap:7px}
+.et{display:grid;grid-template-columns:150px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;font-weight:700}
+.et b{text-align:right;font-weight:900;font-variant-numeric:tabular-nums}
+.br{height:22px;border-radius:7px;background:#ECE8DE;overflow:hidden}
+.br i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--verde),var(--verde-claro))}
+.et:last-child .br i{background:linear-gradient(90deg,#E9B80F,var(--amarillo))}
+.fugas{display:grid;gap:8px}
+.fu{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:11px 12px;font-size:14px;line-height:1.4}
+.fu:first-child{border-color:#F3B79E;background:#FFF6F1}
+.fu .nf{width:28px;height:28px;border-radius:50%;background:var(--naranja-suave);color:var(--rojo);display:grid;place-items:center;font-weight:900;font-size:13px}
+.fu small{display:block;color:var(--verde);font-weight:800;font-size:13px;margin-top:4px}
+.hy-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;margin-bottom:10px}
+.hy-h b{font-size:16px}.hy-h span{font-size:13.5px;color:#8A8F97}
+.hys{background:#fff;border-radius:14px;overflow:hidden}
+.hy{display:grid;grid-template-columns:40px minmax(0,1.2fr) minmax(0,1fr) 96px;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(16,19,25,.07)}
+.hy:last-child{border-bottom:0}
+.av2{width:40px;height:40px;border-radius:50%;background:#EAF0FA;display:grid;place-items:center;font-weight:800;font-size:13px;color:#3E434B}
+.hy:nth-child(2n) .av2{background:#FBEBE3}.hy:nth-child(3n) .av2{background:#E3F2EF}
+.qn b{display:block;font-size:15px}.qn small{display:block;font-size:12.5px;color:#8A8F97;font-weight:600;line-height:1.35}
+.ac{font-size:13.5px;font-weight:700;color:#2B2F36}
+.pr{justify-self:end;font-size:12.5px;font-weight:800;border-radius:999px;padding:4px 10px;background:#FDF1C7;color:#8A5A00}
+.pr.urgente{background:#FFE9E0;color:#C2410C}.pr.media{background:#EEF0F3;color:#5A5E66}
+.vista{margin-top:18px}
+.vista-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+.vista-g > div{min-width:0}
+.caja-d{background:#11151B;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px}
+.caja-d .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde-claro);display:block;margin-bottom:10px}
+.caja-d h3{color:#fff;font-size:18px;margin-bottom:8px}
+.caja-d p,.caja-d li{font-size:14.5px;color:#AEB5BF;line-height:1.5}
+.caja-d ul{list-style:none;display:grid;gap:9px}
+.caja-d li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.caja-d li::before{content:'✓';color:var(--verde-claro);font-weight:900}
+.caja-d li b,.caja-d p b{color:#fff}
+.claro{background:#F6F4EF;color:var(--tinta);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.claro .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#14181F;flex-wrap:wrap}
+.claro .bar i{width:10px;height:10px;border-radius:50%;background:#3A3F48}
+.claro .bar span{margin-left:8px;font-size:12.5px;color:#8E96A2;font-weight:700}
+.claro .bar .tag-demo{margin-left:auto}
+.pista{font-size:13px;color:#8E96A2;margin-top:12px}
+/* anuncios */
+.ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ad{background:#fff;color:var(--tinta);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.ad-h{display:flex;gap:9px;align-items:center;padding:12px 12px 8px}
+.ad-h .av{width:30px;height:30px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px}
+.ad-h b{font-size:13.5px;display:block;line-height:1.2}.ad-h small{font-size:11.5px;color:var(--gris-claro);font-weight:600}
+.ad-c{padding:0 12px 10px;font-size:13.5px;line-height:1.45;color:#2B2F36}
+.ad-img{background:linear-gradient(150deg,#0F1F1D,#0E7C74);color:#fff;padding:20px 16px;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end}
+.ad.story .ad-img{background:linear-gradient(150deg,#2B2F36,#5A4A12);min-height:200px}
+.ad-img .kk{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--amarillo)}
+.ad-img .tt{font-size:20px;font-weight:900;letter-spacing:-.02em;line-height:1.12;margin:6px 0 10px}
+.ad-img .ll{display:flex;flex-wrap:wrap;gap:6px}
+.ad-img .ll span{font-size:11.5px;font-weight:800;background:rgba(255,255,255,.14);padding:4px 8px;border-radius:999px}
+.ad-f{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#F2F3F5;font-size:12.5px;font-weight:800}
+.ad-f span{background:#E4E6EB;padding:7px 10px;border-radius:7px}
+.ad-n{padding:12px;font-size:13px;line-height:1.45;color:#3E434B;border-top:1px solid var(--linea);margin-top:auto}
+.ad-n b{color:var(--tinta)}
+/* formulario */
+.fm{padding:18px;display:grid;gap:14px}
+.fm .q{font-size:14.5px;font-weight:800;margin-bottom:8px}
+.fm .ops{display:flex;flex-wrap:wrap;gap:6px}
+.fm .ops span{font-size:13.5px;font-weight:700;padding:8px 11px;border-radius:10px;border:1.5px solid rgba(16,19,25,.14);background:#fff;color:#3E434B}
+.fm .ops span.si{border-color:var(--verde);background:var(--verde-suave);color:var(--verde)}
+.fm .perm{font-size:12.5px;color:var(--gris);display:flex;gap:8px;align-items:flex-start}
+.fm .perm b{color:var(--verde)}
+.log{list-style:none;display:grid;gap:8px}
+.log li{display:block;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;font-size:13.5px;color:#C6CBD3;line-height:1.4}
+.log li::before{display:none}
+.log li b{display:block;color:#fff;font-size:13.5px}
+.log li.g{border-color:rgba(39,189,177,.45);background:rgba(39,189,177,.08)}
+.log li.h{border-color:rgba(244,204,56,.35);background:rgba(244,204,56,.06)}
+.log li.nuevo{animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* WhatsApp */
+.tel{max-width:400px;margin:0 auto;background:#0B141A;border-radius:28px;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.tel-h{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#1F2C34;border-radius:20px 20px 0 0;color:#E9EDEF}
+.tel-h .av{width:34px;height:34px;border-radius:50%;background:var(--verde);display:grid;place-items:center;font-weight:900;font-size:13px}
+.tel-h b{font-size:14.5px;display:block;line-height:1.2}.tel-h small{font-size:11.5px;color:#8696A0}
+.chat{background:#0B141A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23ffffff' fill-opacity='.04'/%3E%3C/svg%3E");height:440px;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:6px;border-radius:0 0 20px 20px;scroll-behavior:smooth}
+.msg{max-width:84%;padding:7px 10px 6px;border-radius:10px;font-size:14px;line-height:1.42;color:#E9EDEF;animation:entra .3s ease;white-space:pre-line}
+.msg.bot{background:#202C33;align-self:flex-start;border-top-left-radius:2px}
+.msg.yo{background:#005C4B;align-self:flex-end;border-top-right-radius:2px}
+.msg.sis{align-self:center;background:#182229;color:#FFD279;font-size:12px;font-weight:700;border-radius:8px;text-align:center}
+.msg small{display:block;text-align:right;font-size:10.5px;color:#8696A0;margin-top:2px}
+.escribe{align-self:flex-start;background:#202C33;border-radius:10px;padding:10px 12px;display:flex;gap:4px}
+.escribe i{width:6px;height:6px;border-radius:50%;background:#8696A0;animation:pt 1s infinite}
+.escribe i:nth-child(2){animation-delay:.15s}.escribe i:nth-child(3){animation-delay:.3s}
+@keyframes pt{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.opciones{display:flex;flex-direction:column;gap:6px;align-self:stretch;margin-top:4px}
+.opciones button{min-height:42px;border-radius:10px;border:1px solid #2A3942;background:#111B21;color:#53BDEB;font:700 14px var(--display);cursor:pointer;padding:8px 12px;text-align:center}
+.opciones button:hover{background:#17252D}
+.reini{margin-top:12px;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font:800 13.5px var(--display);cursor:pointer}
+/* llamada */
+.voz{padding:18px}
+.voz-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.voz-h b{display:block;font-size:15px}.voz-h small{display:block;font-size:12.5px;color:var(--gris);font-weight:700;margin-top:2px}
+.onda{display:flex;align-items:center;gap:3px;height:26px}
+.onda i{width:3px;border-radius:2px;background:var(--verde);height:30%;animation:onda 1.1s ease-in-out infinite}
+.onda i:nth-child(2n){animation-delay:.2s}.onda i:nth-child(3n){animation-delay:.4s}
+@keyframes onda{0%,100%{height:25%}50%{height:100%}}
+.linea{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--linea);font-size:14.5px;line-height:1.5;color:#2B2F36}
+.linea b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde);padding-top:2px}
+.linea.cl b{color:#8A5A00}
+.linea.oculta{display:none}
+.audio-d{padding:16px 18px 0}
+.audio-d .ad-t{font-weight:800;font-size:15px;margin-bottom:8px}.audio-d .ad-t span{font-weight:600;color:var(--gris)}
+.audio-d audio{width:100%}
+.audio-d .ad-m{font-size:12.5px;color:var(--gris);margin-top:6px}
+.estado-v{border-color:rgba(244,204,56,.45)}.estado-v .k{color:var(--amarillo)}
+/* ficha */
+.ficha{padding:20px}
+.ficha-h{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.ficha-h h3{font-size:19px}.ficha-h p{font-size:13.5px;color:var(--gris);margin-top:4px}
+.nivel{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:var(--verde);color:#fff;font-size:28px;font-weight:900}
+.notas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.nota-f{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px 14px}
+.nota-f small{font-size:12.5px;font-weight:800;color:var(--gris)}
+.nota-f b{display:block;font-size:26px;font-weight:900;letter-spacing:-.03em}
+.nota-f .barra{height:8px;margin-top:6px}.nota-f .barra i{width:var(--w)}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.campos div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.campos dt{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--gris-claro)}
+.campos dd{font-size:14px;font-weight:700;margin-top:3px;line-height:1.35}
+.resumen{margin-top:12px;background:var(--verde-suave);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5}
+.resumen b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde);margin-bottom:3px}
+.resumen + .resumen{background:#FDF1C7}.resumen + .resumen b{color:#8A5A00}
+/* seguimientos */
+.segs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.segs button{min-height:40px;padding:0 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#C6CBD3;font:800 13.5px var(--display);cursor:pointer;text-align:left}
+.segs button[aria-pressed="true"]{background:#fff;color:var(--tinta)}
+.tl{list-style:none;position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:rgba(255,255,255,.14)}
+.tl li{position:relative;padding:0 0 16px}
+.tl li::before{content:'';position:absolute;left:-23px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--verde-claro);box-shadow:0 0 0 4px var(--negro)}
+.tl li.alert::before{background:#FF9B7A}.tl li.mail::before{background:#8EA8FF}.tl li.stop::before{background:var(--amarillo)}
+.tl .cu{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#8E96A2}
+.tl .ti{font-size:15px;font-weight:800;color:#fff;margin:2px 0 6px}
+.tl .bu{background:#202C33;color:#E9EDEF;border-radius:4px 12px 12px 12px;padding:9px 12px;font-size:14px;line-height:1.45;max-width:52ch;white-space:pre-line}
+.tl li.mail .bu{background:#fff;color:var(--tinta);border-radius:10px}
+.tl li.alert .bu{background:rgba(255,155,122,.12);color:#FFD9C7;border-radius:10px}
+.tl .bu .chip{display:inline-block;margin:6px 6px 0 0;padding:4px 10px;border-radius:999px;border:1px solid #53BDEB;color:#53BDEB;font-size:12.5px;font-weight:800}
+.seg-p{font-size:14.5px;color:#AEB5BF;margin-bottom:14px}
+/* panel */
+.panel{padding:18px}
+.panel h4{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--gris);margin:18px 0 8px}
+.pk{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.pk div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.pk small{display:block;font-size:11.5px;color:var(--gris);font-weight:700;line-height:1.25}
+.pk b{display:block;font-size:24px;font-weight:900;letter-spacing:-.03em;margin-top:4px}
+.pk .alerta b{color:var(--rojo)}.pk .ok b{color:var(--verde)}
+.hoy{display:grid;gap:8px}
+.hoy div{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 12px;align-items:center}
+.hoy .nv{grid-row:1/3;width:30px;height:30px;border-radius:9px;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:900;font-size:14px}
+.hoy .nv.b{background:#5A8F8A}
+.hoy b{font-size:14.5px}.hoy b span{font-weight:600;color:var(--gris)}
+.hoy small{font-size:13px;color:var(--verde);font-weight:800}
+.tabla{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:12px;overflow:hidden}
+.tabla th,.tabla td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--linea)}
+.tabla th:first-child,.tabla td:first-child{text-align:left}
+.tabla th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--gris);font-weight:800;background:#FBFAF6}
+.tabla td:last-child{font-weight:900;color:var(--verde)}
+.tabla-w{overflow-x:auto}
+.panel .pie-p{font-size:12.5px;color:var(--gris);margin-top:10px}
+.abre-panel{display:inline-flex;margin-top:14px;font-weight:800;color:var(--amarillo);text-decoration:none;font-size:15px}
+@media(max-width:960px){.emb-g{grid-template-columns:minmax(0,1fr)}.vista-g{grid-template-columns:minmax(0,1fr)}.ads{grid-template-columns:minmax(0,1fr)}.pk{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.hy{grid-template-columns:36px minmax(0,1fr) auto}.hy .ac{grid-column:2/-1;grid-row:2}.av2{width:36px;height:36px}.cita{grid-template-columns:minmax(0,1fr) auto}.cita time{grid-column:1/-1}.et{grid-template-columns:110px minmax(0,1fr) 34px}.notas,.campos{grid-template-columns:1fr}.pk{grid-template-columns:1fr 1fr}.linea{grid-template-columns:1fr;gap:2px}.chat{height:420px}}
+@media(prefers-reduced-motion:reduce){.onda i{animation:none;height:60%}}
 
-/* 5 · SERVICIO */
+/* 6 · SERVICIO */
 .serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);margin-top:40px;align-items:start}
 .fases{list-style:none;border-top:2px solid var(--tinta)}
 .fases li{display:grid;grid-template-columns:64px 1fr;gap:0 14px;padding:20px 0;border-bottom:1px solid var(--linea)}
@@ -363,11 +508,19 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .incluye li::before{content:'✓';color:var(--verde);font-weight:900}
 .incluye .pie-i{margin-top:14px;font-size:13.5px;color:var(--gris);line-height:1.5}
 .incluye .pie-i b{color:var(--tinta)}
-.fundador{margin-top:clamp(32px,4vw,44px);display:grid;grid-template-columns:auto 1fr auto;gap:18px 24px;align-items:center;background:var(--marfil-2);border-radius:20px;padding:20px 24px}
-.fundador img{width:64px;height:64px;border-radius:50%;object-fit:cover}
-.fundador p{font-size:15px;color:#3E434B;line-height:1.5;max-width:70ch}
-.fundador b{color:var(--tinta)}
-.fundador .btn{white-space:nowrap}
+.serv-cta{margin-top:clamp(28px,4vw,40px);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.serv-cta p{font-size:15px;color:var(--gris)}
+
+/* 6 · CONVERSIÓN */
+.final{background:var(--marfil-2)}
+.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
+.despues{margin-top:26px;list-style:none;display:grid;gap:12px;counter-reset:d}
+.despues li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:15.5px;color:#3E434B;line-height:1.45}
+.despues li::before{counter-increment:d;content:counter(d);width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;font-weight:900;font-size:13px;color:var(--verde)}
+.despues b{color:var(--tinta)}
+.precio{margin-top:22px;padding:14px 16px;border-radius:12px;background:#fff;border:1px solid var(--linea);font-size:15px;color:#3E434B;line-height:1.5}
+.precio b{color:var(--tinta)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:end}
 /* aviso de cookies (assets/consent.js): esta página no carga assets/styles.css */
 #qv-cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;display:flex;justify-content:center}
 #qv-cookies .qv-ck-inner{max-width:720px;width:100%;background:#101319;color:#F3F7FB;border-radius:16px;padding:16px 18px;box-shadow:0 24px 60px rgba(16,19,25,.35);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
@@ -377,63 +530,36 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 #qv-cookies button{min-height:42px;padding:0 18px;border-radius:10px;font:700 14px var(--display);cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff}
 #qv-cookies #qv-ck-si{background:var(--verde-claro);border-color:var(--verde-claro);color:#04231F}
 .corto{display:none}
-.ancla{display:block;position:relative;top:-80px;visibility:hidden}
+/* WhatsApp: botón flotante, como en el resto de landings. En móvil sube cuando aparece la barra fija. */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;background:#25D366;color:#fff;font:800 15px var(--display);text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.22);transition:transform .16s ease,bottom .25s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa svg{width:26px;height:26px;flex-shrink:0}
+.wa-linea{margin-top:16px;font-size:14.5px;color:var(--gris)}
+.wa-linea a{color:var(--verde);font-weight:800}
+@media(max-width:760px){.wa{padding:0;width:56px;height:56px;justify-content:center;right:14px;bottom:14px}.wa span{display:none}body.fijo-on .wa{bottom:84px}}
 
 
-/* 6 · CONVERSIÓN (formulario de la home: assets/app.js) */
-.final{background:var(--negro);color:#fff}
-.final h2{color:#fff}
-.final .eyebrow{color:var(--verde-claro)}
-.final .lead{color:#AEB5BF}
-.grid-f{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px);align-items:start}
-.despues{margin-top:26px;list-style:none;display:grid;gap:12px;counter-reset:d}
-.despues li{display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:15.5px;color:#C6CBD3;line-height:1.45}
-.despues li::before{counter-increment:d;content:counter(d);width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font-weight:900;font-size:13px;color:var(--verde-claro)}
-.despues b{color:#fff}
-.caja-f{background:#fff;color:var(--tinta);border-radius:22px;padding:clamp(22px,3.2vw,34px)}
-#lead-form{display:flex;flex-direction:column;gap:14px}
-#lead-form h3{font-size:21px}
-.field{display:block}
-.field-label{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;min-height:50px;padding:12px 14px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
-.field textarea{min-height:88px;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--verde-claro)}
-.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--gris);line-height:1.5;cursor:pointer}
-.rgpd input{width:18px;height:18px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
-.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-#submit-btn{width:100%}
-/* VSL */
-.vsl{margin:0}
-.vsl-play,.vsl-marco{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:20px;overflow:hidden;background:var(--negro);cursor:pointer;box-shadow:0 30px 80px rgba(16,19,25,.18)}
-.vsl-play img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-.vsl-play:hover img{transform:scale(1.02)}
-.vsl-play:hover{box-shadow:0 34px 90px rgba(16,19,25,.26)}
-.vsl-dur{position:absolute;right:14px;top:14px;background:rgba(8,9,12,.78);color:#fff;font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px}
-.vsl-marco iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vsl figcaption{margin-top:12px;font-size:14px;color:var(--gris);font-weight:600}
-/* formulario en tres pasos (landing.js) */
-.precio{margin-top:22px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);font-size:15px;color:#C6CBD3;line-height:1.5}
-.precio b{color:#fff}
-.huecos{display:none;margin-top:18px;font-size:14.5px;color:#C6CBD3}
+@media(max-width:520px){.dos{grid-template-columns:1fr}}
+.fuente{margin-top:14px;font-size:13px;color:var(--gris-claro);font-weight:600;max-width:80ch}
+.huecos{display:none;margin-top:22px;font-size:14.5px;color:#3E434B}
 .huecos.on{display:block}
-.huecos b{color:var(--verde-claro)}
+.huecos b{color:var(--verde)}
 .maikel{display:flex;gap:14px;align-items:center;margin-top:22px}
 .maikel img{width:52px;height:52px;border-radius:50%;object-fit:cover}
-.maikel p{font-size:14.5px;color:#AEB5BF;line-height:1.45}
-.maikel b{color:#fff}
+.maikel p{font-size:14.5px;color:var(--gris);line-height:1.45}
+.maikel b{color:var(--tinta)}
+.caja-f{background:#fff;border-radius:22px;padding:clamp(22px,3.2vw,34px);box-shadow:0 24px 60px rgba(16,19,25,.08);border:1px solid var(--linea)}
 .pasos-f{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;list-style:none;margin-bottom:20px}
 .pasos-f li{font-size:12.5px;font-weight:800;color:var(--gris-claro);padding-top:10px;border-top:4px solid var(--marfil-2);line-height:1.3}
 .pasos-f li.act{color:var(--tinta);border-color:var(--verde)}
 .pasos-f li.hecho{color:var(--verde);border-color:var(--verde)}
-.caja-f h3{font-size:21px;margin-bottom:14px}
+.caja-f h3{margin-bottom:14px}
 .campo{display:block;margin-bottom:14px}
 .campo span{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
-.campo small{font-weight:600;color:var(--gris-claro)}
 .campo input,.campo select{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid rgba(16,19,25,.18);border-radius:11px;font:500 16px var(--display);background:#fff;color:var(--tinta)}
 .campo input:focus,.campo select:focus{outline:none;border-color:var(--verde-claro)}
-.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:end}
-@media(max-width:520px){.dos{grid-template-columns:1fr}}
-.caja-f .rgpd{margin:4px 0 16px}
+.rgpd{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--gris);line-height:1.5;margin:4px 0 16px}
+.rgpd input{width:19px;height:19px;margin-top:2px;accent-color:var(--verde);flex-shrink:0}
 .err{color:var(--rojo);font-weight:700;font-size:14.5px;margin:0 0 12px}
 .seguro{margin-top:12px;font-size:13px;color:var(--gris-claro);text-align:center}
 .hp,.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -441,54 +567,177 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 #cal iframe{width:100%;min-height:520px;border:0;display:block}
 .fuera,.reservado{background:var(--verde-suave);border-radius:14px;padding:22px}
 .faq{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,64px)}
-.faq h3{font-size:clamp(22px,2.8vw,30px);color:#fff}
-.faq details{border-top:1px solid rgba(255,255,255,.14)}
-.faq details:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
-.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:18px;align-items:center;color:#fff}
+.faq h3{font-size:clamp(22px,2.8vw,30px)}
+.faq details{border-top:1px solid var(--linea)}
+.faq details:last-child{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:16.5px;display:flex;justify-content:space-between;gap:18px;align-items:center}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';font-size:24px;font-weight:700;color:var(--verde-claro);line-height:1}
+.faq summary::after{content:'+';font-size:24px;font-weight:700;color:var(--verde);line-height:1}
 .faq details[open] summary::after{content:'–'}
-.faq details p{padding:0 0 18px;color:#AEB5BF;font-size:15.5px;line-height:1.6;max-width:58ch}
+.faq details p{padding:0 0 18px;color:var(--gris);font-size:15.5px;line-height:1.6;max-width:58ch}
 
-.pie{background:var(--negro);color:#6C7480;font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
-.pie .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:34px;padding-bottom:96px}
-.pie img{height:22px;width:auto;margin-bottom:12px}
-.pie .cols{display:flex;gap:40px;flex-wrap:wrap}
-.pie .cols div{display:flex;flex-direction:column;gap:8px}
-.pie a{color:#9AA2AE;text-decoration:none}
-.pie a:hover{color:#fff}
+.pie{background:var(--negro);color:#6C7480;padding:26px 0 96px;font-size:14px}
+.pie a{color:#9AA2AE;text-decoration:none;margin-left:18px}
 [hidden]{display:none !important}
 .fijo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .25s ease}
 .fijo .btn{width:100%;min-height:52px}
 .fijo.on{transform:none}
+.aparece{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.aparece.on{opacity:1;transform:none}
 
+.escena > div,.lado > div{min-width:0}
+.marco .bar{flex-wrap:wrap}
 @media(max-width:1000px){.flujo{grid-template-columns:1fr 1fr}.flujo li::after{display:none}.escena{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:960px){.grid-h,.casos,.grid-f,.faq,.serv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}.mas-casos{grid-template-columns:1fr}.mas-casos a + a{border-left:0;border-top:1px solid var(--linea)}.top nav a.l{display:none}}
+@media(max-width:960px){.grid-h,.casos,.grid-f,.faq,.serv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){
   .top .btn-sm{display:none}.fijo{display:block}
-  .fugas{grid-template-columns:1fr 1fr}
-  .fg,.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding:16px 12px 16px 0;border-left:0}
-  .fg:nth-child(2n){padding-left:14px;border-left:1px solid var(--linea)}
+  .problemas{grid-template-columns:1fr;border-top:0}
+  .pb,.pb + .pb{padding:20px 0;border-left:0;border-top:1px solid var(--linea);display:grid;grid-template-columns:42px 1fr;gap:0 10px}
+  .pb .x{grid-row:1/3;margin:0}.pb h3{margin-bottom:4px}
   .flujo{grid-template-columns:1fr}
+  .flujo li{display:grid;grid-template-columns:34px 1fr;gap:2px 10px;padding:14px}
+  .flujo li::before{grid-row:1/3;margin:2px 0 0}
   .kpis{grid-template-columns:1fr 1fr}.kpis div:last-child{grid-column:1/-1}
-  .etapa{grid-template-columns:104px 1fr 36px;gap:10px}.fuga-h{margin-left:0}
+  .etapa{grid-template-columns:104px 1fr 40px;gap:10px}.fuga-h{margin-left:0}
   .logos{grid-template-columns:1fr}.logos p{max-width:none}
   .incluye ul{grid-template-columns:1fr}
   .hero .ctas .btn{width:100%}
-  .fundador{grid-template-columns:auto 1fr;padding:18px}.fundador .btn{grid-column:1/-1;width:100%;white-space:normal}
-  .fundador img{width:52px;height:52px}
+}
+/* móvil: botones de una línea y menos texto */
+@media(max-width:760px){
   .btn{padding:0 18px;font-size:16px}
   .largo{display:none}.corto{display:inline}
-  .extra,.kpis,.solucion .t p,.flujo em,.dash-pie,.fases p{display:none}
-  .fases li{padding:14px 0}
-  .fugas{grid-template-columns:1fr;margin-top:26px}
-  .fg,.fg:nth-child(2n),.fg:nth-child(3n+2),.fg:nth-child(3n+3){padding:12px 0;border-left:0;display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline}
-  .fg p{margin-top:0;font-size:15px}
-  .hero .lead{font-size:16.5px}
-  .caso .ctx{font-size:15px}
-  .mas-casos a{padding:14px 16px}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.dash .barra i{width:var(--w)}.aparece{opacity:1;transform:none}}
+
+/* ===== Retoque de UX (22-oct, handoff de Claude Design) ===== */
+/* C1 · portada: jerarquía del H1 y prueba social en móvil */
+.hero h1 span{display:inline;color:inherit;margin:0}
+.hero h1 .h1-b{font-weight:700;color:var(--gris)}
+.hero-prueba{display:flex;flex-direction:column;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--marfil-2)}
+.hero-prueba > span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.hero-prueba .fila{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:center}
+.hero-prueba img{height:30px;width:100%;object-fit:contain}
+.hero-prueba img:nth-child(n+5){display:none}
+.hero-prueba .fila.pocos{grid-template-columns:repeat(2,minmax(0,150px));gap:24px}.hero-prueba .fila.pocos img{height:40px}
+@media (min-width:761px){.hero-prueba{display:none}}
+@media (max-width:760px){
+  .hero h1{font-size:clamp(28px,7.8vw,34px);line-height:1.1}
+  .hero .lead{font-size:16px;line-height:1.5}
+  .hero .ctas{flex-direction:column;align-items:stretch;gap:4px}
+  .hero .ctas .btn{min-height:52px}
+  .hero .btn-link{min-height:44px}
+  .hero .vsl{margin-top:8px}
+}
+/* C2 · demo: etapas, pestañas en rejilla (escritorio) o tira con scroll (<1100 px) */
+#demo .etapas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin:30px 0 8px}
+#demo .etapas span{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--verde-claro);border-top:2px solid var(--verde-claro);padding-top:8px}
+#demo .etapas span:nth-child(1){grid-column:span 2}#demo .etapas span:nth-child(2){grid-column:span 3}#demo .etapas span:nth-child(3){grid-column:span 4}
+#demo .vistas{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-top:0;padding:0;background:none;border:0;border-radius:0;overflow:visible}
+#demo .vistas button{min-height:56px;justify-content:flex-start;text-align:left;white-space:normal;line-height:1.25;font-size:12.5px;padding:8px 8px;gap:6px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.03)}
+#demo .vistas button[aria-selected="true"]{background:#fff;color:var(--tinta);border-color:#fff}
+#demo .vistas button i{width:18px;height:18px;flex:none}
+#demo .vistas [role=tab]:focus-visible,#demo .vista-nav :focus-visible{outline:3px solid var(--verde-claro);outline-offset:2px}
+#demo .progreso{display:none}
+@media (max-width:1099px){
+  #demo .etapas{display:none}
+  #demo .progreso{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:8px;margin:28px 0 10px;font-size:13px;font-weight:800}
+  #demo .progreso b{color:var(--verde-claro)}#demo .progreso span{color:#C9CCD2}
+  #demo .progreso .seg{grid-column:1/-1;display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+  #demo .progreso .seg i{height:4px;border-radius:2px;background:rgba(255,255,255,.14)}
+  #demo .progreso .seg i.on{background:var(--verde-claro)}
+  #demo .vistas{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -24px;padding:4px 24px 12px;
+    -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  #demo .vistas::-webkit-scrollbar{display:none}
+  #demo .vistas button{flex:none;min-height:44px;white-space:nowrap;scroll-snap-align:center;border-radius:999px;padding:0 14px}
+}
+/* C3 · demo: anterior / siguiente y CTA en la última pestaña */
+#demo .vista-nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;margin-top:24px}
+#demo .vista-nav [data-prev]{justify-self:start;color:#C9CCD2;min-height:44px;background:none;border:0;font:800 15px var(--display);cursor:pointer;padding:0}
+#demo .vista-nav [data-prev]:hover{color:#fff}
+#demo .vista-pos{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#C9CCD2}
+#demo .vista-pos .seg{display:flex;gap:4px}#demo .vista-pos .seg i{width:14px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}#demo .vista-pos .seg i.on{background:var(--verde-claro)}
+#demo .vista-sig,#demo .vista-fin{justify-self:end}
+#demo .vista-sig{min-height:48px;padding:0 20px;border:1px solid var(--verde-claro);border-radius:12px;background:transparent;color:#fff;font:800 15px var(--display);cursor:pointer}
+#demo .vista-sig:hover{background:rgba(39,189,177,.12)}
+#demo .vista-fin{grid-column:3;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:10px;margin:0;color:#C9CCD2;font-size:14px}
+#demo .vista-fin .btn{min-height:52px;font-size:16px;white-space:nowrap;flex:none}
+@media (min-width:761px){#demo .vista-nav.ultimo .vista-pos{display:none}#demo .vista-nav.ultimo .vista-fin{grid-column:2/-1;flex-direction:row;align-items:center;justify-content:flex-end;gap:16px}}
+@media (max-width:760px){
+  #demo .vista-nav{grid-template-columns:minmax(0,1fr);gap:4px}
+  #demo .vista-pos{display:none}
+  #demo .vista-sig{justify-self:stretch;width:100%}
+  #demo .vista-fin{grid-column:1/-1;flex-direction:column;align-items:stretch;text-align:center}
+}
+/* C4 · formulario: en móvil, encabezado → Maikel → formulario → pasos; errores accesibles */
+@media (min-width:961px){#diagnostico .f-izq{position:sticky;top:96px;align-self:start}}
+@media (max-width:760px){
+  #diagnostico .grid-f{display:flex;flex-direction:column;gap:16px}
+  #diagnostico .f-izq{display:contents}
+  #diagnostico .f-izq > *{order:4;margin-top:0}
+  #diagnostico .f-izq > :is(.eyebrow,h2,.lead){order:1}
+  #diagnostico .maikel{order:2;font-size:14px}
+  #diagnostico .maikel img{width:48px;height:48px}
+  #diagnostico .caja-f{order:3}
+}
+#diagnostico .campo :is(input,select)[aria-invalid="true"]{border-color:#D94A3D;box-shadow:0 0 0 1px #D94A3D}
+#e1,#e2{font-weight:600;color:var(--tinta);border:1px solid #D94A3D;border-radius:10px;padding:12px;background:#FFF6F4}
+/* C5 · CTA fijo y WhatsApp en móvil */
+@media (max-width:760px){
+  body{padding-bottom:84px}
+  .top .btn-sm{display:inline-flex}
+  .wa{transition:bottom .25s ease}
+}
+@media (prefers-reduced-motion:reduce){.fijo,.wa{transition:none}}
+/* C6 · logos en rejilla de altura uniforme y ritmo en móvil */
+.res .logos{display:block;margin-top:56px;padding:40px 0 8px;border-top:1px solid var(--linea)}
+.res .logos p{max-width:none;margin-bottom:22px}
+.res .logos .fila{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 48px;align-items:center;opacity:1}
+.res .logos .fila img{height:48px;width:100%;object-fit:contain}
+@media (max-width:760px){
+  .res .logos .fila{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 24px}
+  .res .logos .fila img{height:36px}
+  #sistema .problemas .pb{padding:16px 0}
+  #sistema .solucion .flujo li{padding:12px 14px}
+}
+
+/* Paleta del logo (propuesta de Claude Design, 22-oct): blanco y azul marino. Para volver a la de siempre: PALETA='marfil' en el generador. */
+:root{--marfil:#FFFFFF;--marfil-2:#F1F3F5;--negro:#0F2540;--tinta:#0B1C33;--linea:rgba(11,28,51,.1)}
+.top{background:rgba(255,255,255,.94)}
+#sistema{background:#F1F3F5}
+.final{background:#E3F8F6}
+.claro{background:#F7F8FA}
+.claro .bar,.marco .bar{background:#0B1C33}
+.kpis div,.caja-d{background:#0B1D36}
+.caja-d{border-color:rgba(255,255,255,.14)}
+.fijo{background:rgba(15,37,64,.96)}
+.campo input,.campo select{border-color:#CBD1D9}
+.tl li::before{box-shadow:0 0 0 4px var(--negro)}
+.flujo li::after{background:var(--tinta)}
+
+/* producción (22-oct): navegación, portada genérica con sectores y pie con enlaces */
+.top nav{display:flex;align-items:center;gap:22px}
+.top nav a.l{font-weight:700;font-size:14.5px;text-decoration:none;color:var(--gris)}
+.top nav a.l:hover{color:var(--tinta)}
+@media(max-width:900px){.top nav a.l{display:none}}
+.sector-pick{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(16,19,25,.08)}
+.sp-t{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:12px}
+.sp-c{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--linea);border-radius:16px;text-decoration:none;margin-bottom:10px;transition:transform .16s ease,border-color .16s ease}
+.sp-c:hover{border-color:var(--verde-claro);transform:translateY(-2px)}
+.sp-c img{width:120px;height:68px;object-fit:cover;border-radius:10px}
+.sp-c b{display:block;font-size:16px;line-height:1.25}
+.sp-c small{display:block;font-size:13.5px;color:var(--gris);margin-top:4px;line-height:1.35}
+.sp-c i{font-style:normal;font-weight:900;color:var(--verde);font-size:20px}
+.sp-l{font-size:14.5px;color:var(--gris);margin-top:8px}
+.sp-l a{color:var(--verde);font-weight:800}
+.demo-sector{margin-top:12px;font-size:15px;color:#C9CCD2}
+.demo-sector a{color:var(--amarillo);font-weight:800}
+@media(max-width:560px){.sp-c{grid-template-columns:84px minmax(0,1fr) auto;gap:10px}.sp-c img{width:84px;height:48px}.sp-c b{font-size:15px}}
+.pie .cols{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px;margin-bottom:22px}
+.pie .cols b{display:block;color:#fff;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.pie .cols a{display:block;margin:0 0 8px;color:#C9CCD2}
+.pie .cols p{color:#9AA2AE;font-size:14.5px;max-width:34ch}
+@media(max-width:760px){.pie .cols{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -496,12 +745,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 <div class="top">
   <div class="wrap">
     <a href="/" aria-label="Qualivo"><img src="/assets/img/qualivo-logo.png" alt="Qualivo"></a>
-    <nav aria-label="Principal">
-      <a class="l" href="#como">Cómo funciona</a>
-      <a class="l" href="#casos">Casos</a>
-      <a class="l" href="/blog/">Blog</a>
-      <a href="#contacto" class="btn btn-sm" data-cta="barra">Diagnóstico sin coste</a>
-    </nav>
+    <nav aria-label="Principal"><a class="l" href="/formacion/">Formación</a><a class="l" href="/reformas/">Reformas</a><a class="l" href="/blog/">Blog</a>
+    <a href="#diagnostico" class="btn btn-sm" data-cta="barra"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span></a></nav>
   </div>
 </div>
 
@@ -509,25 +754,24 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 <header class="hero" id="hero">
   <div class="wrap grid-h">
     <div>
-      <p class="eyebrow">Sistemas de crecimiento comercial, gestionados</p>
-      <h1>Conseguimos que más oportunidades <span>se conviertan en clientes.</span></h1>
+      <p class="eyebrow">Para empresas que ya captan solicitudes</p>
+      <h1><span class="subr">Más clientes de las solicitudes que ya recibes.</span> <span class="h1-b">Del anuncio a la venta.</span></h1>
       <p class="lead">Conectamos la captación, la respuesta comercial y el seguimiento hasta la venta, para que tu empresa consiga más oportunidades, pierda menos por el camino y sepa qué funciona.</p>
       <div class="ctas">
-        <a href="#contacto" class="btn" data-cta="hero"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
-        <a href="#como" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
+        <a href="#diagnostico" class="btn" data-cta="hero"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
+        <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
-      <div class="sectores"><small>Por sector:</small><a href="/formacion/">Academias y formación</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
+      <div class="hero-prueba"><span>Han trabajado con Qualivo</span><div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="eager" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/selectra.webp" alt="Selectra" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" height="30" loading="eager" decoding="async"></div></div>
     </div>
 
-    <!-- VSL: YouTube oculto en modo sin cookies; el reproductor solo se carga al pulsar. -->
-    <figure class="vsl" id="vsl" data-embed="https://www.youtube-nocookie.com/embed/WrWcO7SwYKY?rel=0&amp;playsinline=1">
-      <button type="button" class="vsl-play" aria-label="Ver el vídeo (5:38): cómo convertimos más contactos en clientes">
-        <img src="/assets/img/home/vsl-portada.jpg" alt="100 contactos… ¿y clientes? Vídeo de Qualivo de 5 minutos" width="1280" height="720" fetchpriority="high">
-        <span class="vsl-dur" aria-hidden="true">5:38</span>
-      </button>
-      <figcaption>Maikel, fundador de Qualivo, te cuenta en 5 minutos cómo lo hacemos. Con subtítulos.</figcaption>
-    </figure>
+    <!-- Portada genérica: lleva a cada sector (vídeo y demo propios). El vídeo del sistema completo irá aquí cuando esté. -->
+    <div class="sector-pick" id="sectores">
+      <p class="sp-t">Mira cómo funciona en tu sector</p>
+      <a class="sp-c" href="/formacion/" data-cta="sector-formacion"><img src="/assets/video/qualivo-sistema-formacion-h-poster.jpg" alt="" width="160" height="90" loading="eager" decoding="async"><span><b>Academias y centros de formación</b><small>Del primer anuncio a la matrícula · vídeo de 70 s y demo</small></span><i aria-hidden="true">→</i></a>
+      <a class="sp-c" href="/reformas/" data-cta="sector-reformas"><img src="/assets/video/qualivo-sistema-reformas-h-poster.jpg" alt="" width="160" height="90" loading="eager" decoding="async"><span><b>Reformas, construcción e instalaciones</b><small>Del anuncio al presupuesto aceptado · vídeo de 67 s y demo</small></span><i aria-hidden="true">→</i></a>
+      <p class="sp-l">También trabajamos con <a href="/clinicas/" data-cta="sector-clinicas">clínicas</a> y <a href="/growth-b2b/" data-cta="sector-b2b">servicios B2B</a>.</p>
+    </div>
   </div>
 </header>
 
@@ -535,50 +779,49 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 <section class="sec res" id="casos" aria-labelledby="t-res">
   <div class="wrap">
     <p class="eyebrow">Resultados</p>
-    <h2 id="t-res">Resultados reales, del anuncio a la venta.</h2>
+    <h2 id="t-res">Resultados reales en captación.</h2>
     <div class="casos">
-      <article class="caso oscuro">
-        <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya · Formación</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
+      <article class="caso eac">
+        <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya · formación</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
         <div class="cifras">
           <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
           <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">facturados y atribuidos en un mes</div></div>
         </div>
-        <p class="ctx"><b>Captación conectada a la matrícula.</b> Campañas por curso en Meta, Google y TikTok, unidas al CRM, y cada solicitud seguida hasta la entrevista y la matrícula.</p>
-        <a class="ver" href="/casos/eac/">Ver el caso →</a>
+        <p class="ctx"><b>Tres cursos, tres públicos distintos.</b> Campañas por curso conectadas al CRM y cada solicitud seguida hasta la entrevista y la matrícula.</p>
+        <a class="ver" href="/casos/eac/">Ver el caso completo →</a>
       </article>
-      <article class="caso claro">
-        <div class="cab"><span class="quien">Nuria Roure · Servicios y formación online</span><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" loading="lazy"></div>
+      <article class="caso nail">
+        <div class="cab"><span class="quien">Bellovinilo · reformas y revestimientos</span><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" loading="lazy" style="filter:brightness(0);height:30px"></div>
         <div class="cifras">
-          <div><div class="big" data-cuenta="6.45" data-dec="2" data-suf="×">6,45×</div><div class="lbl">de retorno: 2.000 € invertidos, 12.900 € en ventas</div></div>
+          <div><div class="big" data-cuenta="8.3" data-dec="1" data-suf="×">8,3×</div><div class="lbl">retorno sobre la inversión</div></div>
+          <div><div class="big" data-cuenta="30000" data-suf="&nbsp;€">30.000&nbsp;€</div><div class="lbl">en ventas con 3.600&nbsp;€ de inversión</div></div>
         </div>
-        <p class="ctx"><b>Sin captar un lead más.</b> El problema no era conseguir más leads, sino saber cuáles merecían atención: cualificación, puntuación y seguimiento.</p>
-        <a class="ver" href="/casos/nuria-roure/">Ver el caso →</a>
+        <p class="ctx">No había un sistema que optimizar: lo construimos, de la captación al seguimiento.</p>
+        <a class="ver" href="/casos/bellovinilo/" style="color:var(--verde)">Ver el caso completo →</a>
       </article>
     </div>
-    <div class="mas-casos">
-      <a href="/casos/bellovinilo/"><b>8,3×</b><span><strong>BelloVinilo.</strong> Un sistema comercial construido desde cero.</span></a>
-      <a href="/formacion/"><b>21</b><span><strong>Nail Boss Academy.</strong> Matrículas en cuatro meses, partiendo de cero.</span></a>
-      <a href="/casos/focus-practical/"><b>−53&nbsp;%</b><span><strong>Focus Practical.</strong> Coste por contacto en formación de oficios.</span></a>
-    </div>
-    <div class="logos" id="wall">
+    <p class="fuente">EAC: cifras medidas en el CRM del centro, en un mes de campaña. Bellovinilo: cifras del caso publicado.</p>
+    <div class="logos">
       <p>Han trabajado con Qualivo</p>
       <div class="fila">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:44px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:38px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:22px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:36px;filter:grayscale(1) brightness(.5) contrast(1.6)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:28px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:32px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:28px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:26px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:28px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:26px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:32px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:20px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:12px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:22px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:30px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:22px">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="filter:grayscale(1) brightness(.5) contrast(1.6)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" >
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" style="filter:brightness(0)">
+        <img loading="lazy" decoding="async" src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" style="filter:brightness(0)">
       </div>
     </div>
   </div>
@@ -587,26 +830,190 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 
 
 
-<!-- 3 · CONVERSIÓN -->
-<section class="sec final" id="contacto" aria-labelledby="t-final">
-  <span id="analiza" class="ancla"></span><span id="diagnostico" class="ancla"></span><span id="diagnostic" class="ancla"></span>
+
+<!-- 4 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="sistema" aria-labelledby="t-prob">
+  <span id="como"></span>
+  <div class="wrap">
+    <p class="eyebrow">Dónde se pierden los clientes</p>
+    <h2 id="t-prob">No basta con conseguir solicitudes. Hay que convertirlas en clientes.</h2>
+    <div class="problemas">
+      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>No llegan suficientes interesados adecuados</h3><p>Campañas poco enfocadas y páginas que no convierten.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>Los interesados no avanzan</h3><p>Respuestas tardías, falta de cualificación y dificultades para contactar.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Las oportunidades se enfrían</h3><p>Seguimientos que no se hacen y propuestas que se quedan sin respuesta.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Campañas para el cliente que encaja con lo que vendes.</span></li>
+        <li><b>Convertir</b><span>Páginas y formularios que explican y cualifican.</span></li>
+        <li><b>Responder</b><span>Cada solicitud, con respuesta y siguiente paso.</span></li>
+        <li><b>Facilitar la venta</b><span>Tu equipo, con el contexto de cada cliente.</span></li>
+        <li><b>Medir</b><span>Qué campaña acaba en venta, y qué mejorar.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
+  <div class="wrap">
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">De la solicitud a la venta, paso a paso.</h2>
+    <p class="lead">Así lo viviría Laura, directora de operaciones de una empresa con tres sedes, y así lo vería tu equipo comercial. Empresa, personas, mensajes y cifras de ejemplo.</p><p class="demo-sector">¿Formación o reformas? <a href="/formacion/#demo" data-cta="demo-formacion">Mira el ejemplo de una academia</a> · <a href="/reformas/#demo" data-cta="demo-reformas">el de una empresa de reformas</a></p>
+    <div class="etapas" aria-hidden="true"><span>Captar</span><span>Atender</span><span>Seguir y medir</span></div>
+    <div class="progreso" aria-hidden="true"></div>
+    <div class="vistas" role="tablist" aria-label="Partes del sistema">
+      <button type="button" role="tab" id="tab-0" data-etapa="Captar" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
+      <button type="button" role="tab" id="tab-1" data-etapa="Captar" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
+      <button type="button" role="tab" id="tab-2" data-etapa="Atender" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
+      <button type="button" role="tab" id="tab-3" data-etapa="Atender" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
+      <button type="button" role="tab" id="tab-4" data-etapa="Atender" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
+      <button type="button" role="tab" id="tab-5" data-etapa="Seguir y medir" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" data-etapa="Seguir y medir" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" data-etapa="Seguir y medir" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" data-etapa="Seguir y medir" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><p class="cap">Qué anuncio trae clientes, no solo solicitudes</p>
+          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Reuniones celebradas</th><th>Ganadas</th><th>Qué revisamos</th></tr></thead><tbody><tr><td><b>«Demo del sistema con el sector»</b><small>Meta · vídeo</small></td><td>120</td><td>58</td><td>27</td><td>7</td><td><span class="vd si">Comparar coste por cliente</span></td></tr><tr><td><b>«Caso con cifras»</b><small>Meta · carrusel</small></td><td>90</td><td>31</td><td>16</td><td>3</td><td><span class="vd mm">Seguir midiendo</span></td></tr><tr><td><b>«Guía gratuita»</b><small>Meta · formulario</small></td><td>53</td><td>14</td><td>6</td><td>1</td><td><span class="vd no">Analizar falta de encaje</span></td></tr></tbody></table></div></div></div>
+      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por clientes, no por clics.</b> Cada anuncio con las solicitudes que trajo, cuántas encajaban y cuántas acabaron en venta. Antes de mover presupuesto se cruza con la inversión de cada anuncio para comparar el coste por cliente. La guía gratuita trae solicitudes con poco encaje: primero se miran los motivos.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="fm"><div><p class="q">¿Qué servicio necesitas?</p><div class="ops"><span class="si">Mantenimiento de oficinas</span><span class="">Limpieza técnica</span><span class="">Otro servicio</span></div></div><div><p class="q">¿Cuántas sedes tenéis?</p><div class="ops"><span class="">Una</span><span class="si">De 2 a 5</span><span class="">Más de 5</span></div></div><div><p class="q">¿Para cuándo?</p><div class="ops"><span class="si">Este trimestre</span><span class="">Más adelante</span><span class="">Todavía no lo sé</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
+        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Demo del sistema con el sector» · formulario</li><li><b>Necesidad</b>Mantenimiento de oficinas</li><li><b>Tamaño</b>3 sedes en Madrid</li><li><b>Momento</b>Este trimestre</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
+          <p style="margin-top:12px">Cuatro preguntas que separan a quien necesita el servicio de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
+      <div class="vista-g">
+        <div>
+          <div class="tel"><div class="tel-h"><span class="av">S</span><span><b>Servicios Horizonte</b><small>Asistente con IA · en línea</small></span></div>
+            <div class="chat" id="chat" aria-live="polite"></div></div>
+          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
+        </div>
+        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
+          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni condiciones: los da el equipo comercial, que ve cada conversación y puede entrar cuando quiera.</p></div>
+      </div>
+      <p class="pista">Elige las respuestas de Laura en el móvil. Cada camino deja algo distinto en la ficha.</p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Simulación · opcional</span></div>
+          <div class="audio-d"><p class="ad-t">▶ Escucha la llamada <span>· el asistente llama a Laura · 41 s</span></p>
+            <audio id="voz-audio" controls preload="none" src="/assets/audio/llamada-inicio.mp3"></audio>
+            <p class="ad-m">Llamada simulada, con datos ficticios y voces generadas con la misma tecnología que usa el asistente. La voz de Laura simula el sonido de teléfono.</p></div>
+          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Laura</b><small>Martes 11:40 · 41 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, Laura. Soy el asistente de voz con inteligencia artificial de Servicios Horizonte. Solicitaste información sobre el mantenimiento de oficinas y autorizaste que te llamáramos. ¿Te viene bien hablar un momento?</span></div><div class="linea cl"><b>Laura</b><span>Sí. Somos tres sedes en Madrid y queremos empezar este trimestre.</span></div><div class="linea"><b>Asistente</b><span>Perfecto. ¿El mantenimiento sería para las tres sedes o empezaríais por una?</span></div><div class="linea cl"><b>Laura</b><span>Para las tres. ¿Y cuánto costaría?</span></div><div class="linea"><b>Asistente</b><span>El precio te lo da Carlos, del equipo comercial, cuando conozca vuestras sedes. ¿Te viene mejor que te llame el martes a las diez o el miércoles a las cuatro y media?</span></div><div class="linea cl"><b>Laura</b><span>El martes a las diez.</span></div><div class="linea"><b>Asistente</b><span>Hecho. Te lo confirmo por WhatsApp y te lo recuerdo el día antes. Gracias, Laura.</span></div></div></div></div>
+        <div class="lado">
+          <div class="caja-d estado-v"><span class="k">Estado</span><p><b>Opcional, no incluido por defecto.</b> El asistente de voz se activa en cada proyecto solo después de configurarlo y probarlo con tu equipo. Mientras no está activo, todo sigue por WhatsApp.</p></div>
+          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
+            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
+            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
+            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
+            <li><span>No da precios ni promete nada: los da el equipo comercial.</span></li>
+          </ul></div>
+          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Laura, soy el asistente de Servicios Horizonte. Te llamaba por el mantenimiento de tus oficinas. Te escribo por WhatsApp para que elijas cuándo te llamamos.»</p></div>
+          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Necesidad, tamaño y momento confirmados, la llamada con Carlos en la agenda y el resumen de la llamada en la ficha.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="ficha">
+            <div class="ficha-h"><div><h3>Laura M. · Directora de operaciones</h3><p>Anuncio «Demo del sistema con el sector» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
+            <div class="notas">
+              <div class="nota-f"><small>Quién es · encaje</small><b>8<small>/10</small></b><div class="barra"><i style="--w:80%"></i></div></div>
+              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
+            </div>
+            <dl class="campos"><div><dt>Necesidad</dt><dd>Mantenimiento para 3 sedes</dd></div><div><dt>Zona</dt><dd>Madrid</dd></div><div><dt>Momento</dt><dd>Este trimestre</dd></div><div><dt>Duda</dt><dd>El precio: lo da Carlos tras conocer las sedes</dd></div><div><dt>Por qué «quién es» 8</dt><dd>Servicio que encaja · 3 sedes · empresa con equipo</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió llamada</dd></div><div><dt>Llamada</dt><dd>Martes 10:00 con Carlos · confirmada</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
+            <p class="resumen"><b>Resumen para Carlos</b>Laura busca mantenimiento para sus tres sedes de Madrid este trimestre y ha confirmado la llamada. Todavía no ha hablado de presupuesto.</p>
+            <p class="resumen"><b>Siguiente paso</b>Llamada del martes a las 10:00: llevar una propuesta para tres sedes y preguntar quién más decide.</p>
+          </div></div>
+        <div class="caja-d"><span class="k">Cómo se ordena</span>
+          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
+          <ul>
+            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
+            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
+            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
+            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
+          </ul>
+          <p style="margin-top:12px">Carlos no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Reuniones con el equipo comercial · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><div class="citas"><div class="cita"><time>Mar 10:00</time><span><b>Laura M.</b><small>Mantenimiento para 3 sedes · respondió «sí» al recordatorio</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Mar 12:30</time><span><b>Jorge P.</b><small>Recordatorio enviado, sin respuesta todavía</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Mié 16:30</time><span><b>Elena R.</b><small>Pidió cambiar la hora desde el mensaje; la eligió ella</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Lun 11:00</time><span><b>Marta G.</b><small>Celebrada. Falta registrar el resultado y el siguiente paso</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
+      <p class="nota-img"><span class="n">6</span><span><b>Reuniones que se celebran.</b> Cada una con un recordatorio la víspera que pide un «sí» y otro una hora antes. Se ve quién ha confirmado, quién no y qué reunión no tiene resultado registrado.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
+      <div class="vista-g">
+        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió información y no contesta</button>
+<button type="button" aria-pressed="false" data-seg="1">B · La reunión con el comercial</button>
+<button type="button" aria-pressed="false" data-seg="2">C · Propuesta enviada</button>
+<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Laura. Soy el asistente de Servicios Horizonte. Has pedido información sobre el mantenimiento de oficinas. ¿Es para una sede o para varias?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Laura, una pregunta que nos hacen mucho: se puede empezar por una sede y ampliar después. ¿Te cuento cómo?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">Cómo trabajamos</div><div class="bu">Asunto: Mantenimiento para varias sedes. Cómo organizamos las visitas y qué incluye.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿Lo seguís valorando para este trimestre o lo dejamos para más adelante? Cualquiera de las dos está bien.
+<span class="chip">Este trimestre</span><span class="chip">Más adelante</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la reunión reservada ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Laura: el martes a las 10:00 te llama Carlos. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Laura, mañana a las 10:00 hablas con Carlos sobre el mantenimiento de las sedes. ¿Te sigue viniendo bien?
+<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">A las 10:00 te llama Carlos. ¿Sigue bien la hora?</div></li><li class="alert"><div class="cu">Si no lo coge · 5 min después</div><div class="ti">Recuperación</div><div class="bu">Laura, Carlos te ha llamado y no hemos dado contigo. ¿Te viene mejor mañana?
+<span class="chip">10:00</span><span class="chip">16:30</span></div></li><li class="stop"><div class="cu">Después de la reunión</div><div class="ti">El comercial registra el resultado</div><div class="bu">Encaja, propuesta pendiente, más adelante o no sigue. Sin resultado, aparece en «Qué hacer hoy».</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Para que no se quede en el aire. Tareas con borrador que envía el comercial.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para Carlos</div><div class="ti">Una duda</div><div class="bu">¿Pudiste ver la propuesta, Laura? Si hay algo de las tres sedes que quieras aclarar antes de decidir, dímelo.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Lo que más se pregunta</div><div class="bu">Una duda habitual resuelta: qué pasa si una sede necesita una visita urgente.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">Lo cierro por mi lado. La propuesta sigue valiendo hasta el día X; si cambia algo, me escribes.</div></li><li class="stop"><div class="cu">Propuesta aceptada</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">Lo deja para más adelante y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Laura. Te escribimos cuando nos digas, solo una vez.</div></li><li class=""><div class="cu">En la fecha · WhatsApp</div><div class="ti">Retomar</div><div class="bu">Laura, como quedamos: ¿retomamos lo del mantenimiento de las sedes?
+<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
+        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
+          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
+          <li><span>Los mensajes de propuesta son <b>tareas con borrador</b>: los revisa y los envía Carlos, no un robot.</span></li>
+          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
+          <li><span>Quien dice «no» no recibe nada más.</span></li>
+          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Servicios Horizonte</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="panel">
+          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>263</b></div><div class=""><small>Reuniones celebradas</small><b>49</b></div><div class=""><small>Propuestas enviadas</small><b>29</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Ganadas</small><b>11</b></div></div>
+          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>263</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:72%"></i></span><b>190</b></div><div class="et"><span>Con encaje</span><span class="br"><i style="width:39%"></i></span><b>103</b></div><div class="et"><span>Reunión reservada</span><span class="br"><i style="width:24%"></i></span><b>62</b></div><div class="et"><span>Reunión celebrada</span><span class="br"><i style="width:19%"></i></span><b>49</b></div><div class="et"><span>Propuesta enviada</span><span class="br"><i style="width:11%"></i></span><b>29</b></div><div class="et"><span>Ganada</span><span class="br"><i style="width:4%"></i></span><b>11</b></div></div></div>
+          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>Propuestas sin respuesta</b> · 18 de 29 siguen sin decisión<small>→ Tareas a los 2, 5 y 10 días, con borrador para el comercial</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes sin encaje</b> · 87 de 190<small>→ Qué vendes y para quién, en el anuncio y en el formulario</small></span></div><div class="fu"><span class="nf">3</span><span><b>Reuniones reservadas que no se celebran</b> · 13 de 62<small>→ Recordatorio que pide un «sí» la víspera y aviso una hora antes</small></span></div></div></div></div>
+          <p class="pie-p">Cifras de ejemplo para una empresa de servicios. «Ganadas» son ventas que registra el equipo; no son cobros.</p>
+        </div></div>
+      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden los clientes.</b> Cada etapa con cuántas pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
+      <a class="abre-panel" href="/intelligence/?sector=b2b" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
+      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Servicios Horizonte</span><span class="tag-demo">Ejemplo</span></div>
+        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">SL</span><span class="qn"><b>Sonia L.</b><small>Propuesta enviada hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Carlos con la duda más habitual</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">PR</span><span class="qn"><b>Pablo R.</b><small>Pidió información hace 3 h · No contesta al WhatsApp; aceptó llamadas</small></span><span class="ac">📞 Llamarle hoy</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">JP</span><span class="qn"><b>Jorge P.</b><small>Reunión mañana a las 12:30 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la reunión</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">MG</span><span class="qn"><b>Marta G.</b><small>Reunión celebrada ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y siguiente paso</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">LM</span><span class="qn"><b>Laura M.</b><small>Reunión el martes a las 10:00 · Mantenimiento para 3 sedes</small></span><span class="ac">👤 Preparar la propuesta</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">AV</span><span class="qn"><b>Andrés V.</b><small>Dijo «más adelante» y aceptó que le escribiéramos · Hoy toca</small></span><span class="ac">💬 Mensaje para retomar</span><span class="pr media">● Media</span></div></div></div></div>
+      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> El equipo comercial abre el día con esta lista: cada oportunidad con su siguiente acción y su prioridad. No hay que buscar en el CRM.</span></p>
+    </div>
+    <nav class="vista-nav" aria-label="Recorrido de la demo">
+      <button type="button" data-prev hidden></button>
+      <span class="vista-pos"></span>
+      <button type="button" class="vista-sig" data-next></button>
+      <p class="vista-fin" hidden>Lo vemos con tu captación y tus solicitudes en el diagnóstico. <a class="btn" href="#diagnostico" data-cta="demo-fin">Pide tu diagnóstico&nbsp;→</a></p>
+    </nav>
+  </div>
+</section>
+
+<!-- CONVERSIÓN: después del recorrido y la demo -->
+<section class="sec final" id="diagnostico" aria-labelledby="t-final">
+  <span id="contacto"></span><span id="analiza"></span><span id="diagnostic"></span>
   <div class="wrap">
     <div class="grid-f">
-      <div>
+      <div class="f-izq">
         <p class="eyebrow">Diagnóstico sin coste · 30 minutos</p>
         <h2 id="t-final">Descubre dónde pierdes oportunidades.</h2>
-        <p class="lead" id="form-bajada">Miramos tu recorrido entero, de la captación a la venta, y te decimos dónde está la mayor fuga y qué haríamos primero. O que no tiene sentido.</p>
+        <p class="lead" id="form-bajada">Analizamos tu captación, la respuesta a cada solicitud y el seguimiento comercial para identificar dónde actuar primero.</p>
         <ol class="despues" aria-label="Qué pasa después">
           <li><span><b>Cuéntanos tu empresa</b> y deja tus datos. Un minuto.</span></li>
           <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
-          <li><span><b>En la videollamada</b> repasamos tus números y te decimos dónde actuar primero.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes e identificamos qué conviene revisar primero con la información disponible.</span></li>
         </ol>
-        <p class="precio">Antes de reservar, que lo sepas: <b>trabajamos con proyectos que empiezan en 1.200&nbsp;€ + IVA.</b> El diagnóstico no tiene coste.</p>
         <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
         <div class="maikel">
           <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="52" height="52">
           <p>La llamada la hace <b>Maikel Echevarría</b>, fundador de Qualivo. Antes revisa tu web y lo que nos cuentas.</p>
         </div>
+        <p class="wa-linea">¿Prefieres escribir? <a href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20web%20de%20Qualivo%20y%20tengo%20una%20pregunta%20sobre%20mi%20empresa." target="_blank" rel="noopener" data-wa="linea">Háblanos por WhatsApp</a>.</p>
       </div>
 
       <div class="caja-f">
@@ -616,21 +1023,21 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <form id="f" novalidate>
           <div id="p1">
             <h3>Cuéntanos tu empresa</h3>
-            <div class="dos">
-              <label class="campo"><span>Empresa</span><input type="text" name="empresa" autocomplete="organization" required></label>
-              <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tuempresa.com" required></label>
-            </div>
+            <label class="campo"><span>Nombre de la empresa</span><input type="text" name="centro" autocomplete="organization" required></label>
+            <label class="campo"><span>Web</span><input type="text" name="web" placeholder="tuempresa.com" required></label>
             <label class="campo"><span>Sector</span>
               <select name="sector" required>
+                <option value="">Elige una opción</option><option>Formación o academia</option><option>Salud, clínica o bienestar</option><option>Servicios profesionales (asesoría, consultoría, abogados)</option><option>Agencia o estudio</option><option>Reformas, construcción o instalaciones</option><option>Industria, taller o fabricación</option><option>Comercio o tienda</option><option>Otro</option>
+              </select>
+            </label>
+            <label class="campo"><span>Principal objetivo</span>
+              <select name="objetivo" required>
                 <option value="">Elige una opción</option>
-                <option>Formación o academia</option>
-                <option>Salud, clínica o bienestar</option>
-                <option>Servicios profesionales (asesoría, consultoría, abogados)</option>
-                <option>Agencia o estudio</option>
-                <option>Reformas, construcción o instalaciones</option>
-                <option>Industria, taller o fabricación</option>
-                <option>Comercio o tienda</option>
-                <option>Otro</option>
+                <option>Conseguir más solicitudes</option>
+                <option>Convertir más solicitudes en clientes</option>
+                <option>Que ninguna solicitud se quede sin seguimiento</option>
+                <option>Saber qué campañas traen clientes</option>
+                <option>Todavía no lo tengo claro</option>
               </select>
             </label>
             <div class="dos">
@@ -640,7 +1047,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
                   <option>Menos de 20</option><option>20-49</option><option>50-99</option><option>100-250</option><option>Más de 250</option>
                 </select>
               </label>
-              <label class="campo"><span>Ticket medio por cliente</span>
+              <label class="campo"><span>Valor medio de una venta</span>
                 <select name="ticket" required>
                   <option value="">Elige</option>
                   <option>Menos de 300 €</option><option>300-1.000 €</option><option>1.000-3.000 €</option><option>Más de 3.000 €</option>
@@ -651,7 +1058,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
               <select name="equipo" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
               <select name="inversion" tabindex="-1"><option value="0" selected>No se pregunta en esta landing</option></select>
             </div>
-            <p class="err" id="e1" hidden></p>
+            <p class="err" id="e1" role="alert" hidden></p>
             <button type="button" class="btn" style="width:100%" id="b1">Continuar&nbsp;→</button>
           </div>
 
@@ -660,20 +1067,10 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
             <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="name" required></label>
             <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
             <label class="campo"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" required></label>
-            <label class="campo"><span>¿Dónde crees que se te escapa más? <small>(opcional)</small></span>
-              <select name="donde">
-                <option value="">Elige una opción</option>
-                <option>En la captación: entran pocas oportunidades o no encajan</option>
-                <option>En la web o los formularios</option>
-                <option>En la respuesta: tardamos en contestar</option>
-                <option>En el seguimiento de presupuestos</option>
-                <option>No lo tengo claro</option>
-              </select>
-            </label>
             <input type="hidden" name="hipotesis">
             <label class="rgpd"><input type="checkbox" name="rgpd" required><span>He leído y acepto la <a href="/privacidad/" target="_blank" style="color:var(--verde)">política de privacidad</a>.</span></label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="err" id="e2" hidden></p>
+            <p class="err" id="e2" role="alert" hidden></p>
             <button type="submit" class="btn" style="width:100%" id="b2">Ir a elegir hora&nbsp;→</button>
             <p class="seguro">Solo usamos tus datos para preparar la llamada.</p>
           </div>
@@ -691,183 +1088,21 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         </form>
         <div class="reservado" id="reservado" hidden aria-live="polite">
           <h3>Reunión reservada.</h3>
-          <p style="font-size:15.5px;color:var(--gris);margin-top:6px">Te llegará la confirmación con el enlace de la videollamada. Si tienes a mano cuántas oportunidades os entran al mes y cuántas acaban en venta, mejor.</p>
+          <p style="font-size:15.5px;color:var(--gris);margin-top:6px">Te llegará la confirmación con el enlace de la videollamada. Si tienes a mano cuántas solicitudes recibís al mes y cuántas acaban en venta, mejor.</p>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- Portada, casos y formulario arriba; el detalle, debajo -->
-<!-- 4 · PROBLEMA + SOLUCIÓN -->
-<section class="sec" id="como" aria-labelledby="t-prob">
-  <div class="wrap">
-    <p class="eyebrow">Dónde se pierde el negocio</p>
-    <h2 id="t-prob">No necesitas solo más leads. Necesitas convertir más en clientes.</h2>
-    <div class="fugas">
-      <div class="fg"><span class="k">Captación</span><p>No entran suficientes oportunidades, o entran contactos que no encajan.</p></div>
-      <div class="fg"><span class="k">Conversión</span><p>Anuncios, páginas o formularios que no convierten.</p></div>
-      <div class="fg"><span class="k">Respuesta</span><p>Se tarda demasiado en contactar con los interesados.</p></div>
-      <div class="fg"><span class="k">Seguimiento</span><p>Se envía un presupuesto, no hay respuesta y nadie vuelve a insistir.</p></div>
-      <div class="fg"><span class="k">Ventas</span><p>Hay reuniones, pero no se sabe por qué no cierran.</p></div>
-      <div class="fg"><span class="k">Visibilidad</span><p>No sabes dónde pierdes dinero ni qué mejorar primero.</p></div>
-    </div>
-    <div class="solucion">
-      <div class="t">
-        <h3>Qualivo conecta todo el recorrido en un solo sistema.</h3>
-        <p>Una agencia suele vender campañas y leads; una empresa de automatización, procesos sueltos. Nosotros nos responsabilizamos de detectar y mejorar las fugas de todo el recorrido.</p>
-      </div>
-      <ol class="flujo">
-        <li><b>Atraer</b><span>Oportunidades que encajan con lo que vendes.</span><em>Anuncios · segmentación · creatividades</em></li>
-        <li><b>Convertir</b><span>Que quien llega pida información y se cualifique.</span><em>Landings · formularios · cualificación</em></li>
-        <li><b>Responder y seguir</b><span>Cada oportunidad, con respuesta y siguiente paso.</span><em>WhatsApp · email · voz IA · CRM</em></li>
-        <li><b>Vender</b><span>Reuniones preparadas y presupuestos con seguimiento.</span><em>Agenda · reuniones · presupuestos</em></li>
-        <li><b>Medir y mejorar</b><span>Saber qué funciona y corregir cada etapa.</span><em>Intelligence · métricas · optimización</em></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · DEMOSTRACIÓN -->
-<section class="sec demo" id="demo" aria-labelledby="t-demo">
-  <div class="wrap">
-    <p class="eyebrow">Así se ve por dentro</p>
-    <h2 id="t-demo">Todo conectado. Cada oportunidad bajo control.</h2>
-    <p class="lead extra">Desde que alguien pide información hasta que firma, sabes qué ocurre en cada etapa, dónde se pierden oportunidades y qué necesita atención hoy.</p>
-    <div class="kpis" role="list" aria-label="Ejemplo de métricas de un mes en Qualivo Intelligence, datos simulados">
-      <div role="listitem"><small>Oportunidades nuevas</small><b>263</b></div>
-      <div role="listitem"><small>Reuniones celebradas</small><b>49</b></div>
-      <div role="listitem"><small>Propuestas enviadas</small><b>29</b></div>
-      <div role="listitem" class="alerta"><small>Requieren atención hoy</small><b>14</b></div>
-      <div role="listitem" class="ok"><small>Ganadas</small><b>11</b></div>
-    </div>
-    <div class="vistas" role="tablist" aria-label="Partes del recorrido">
-      <button type="button" role="tab" id="v-anuncios" aria-controls="vp-anuncios" aria-selected="true"><span>1</span>Anuncios</button>
-      <button type="button" role="tab" id="v-whatsapp" aria-controls="vp-whatsapp" aria-selected="false" tabindex="-1"><span>2</span>Asistente de WhatsApp</button>
-      <button type="button" role="tab" id="v-ficha" aria-controls="vp-ficha" aria-selected="false" tabindex="-1"><span>3</span>Ficha del cliente</button>
-      <button type="button" role="tab" id="v-citas" aria-controls="vp-citas" aria-selected="false" tabindex="-1"><span>4</span>Citas</button>
-      <button type="button" role="tab" id="v-recorrido" aria-controls="vp-recorrido" aria-selected="false" tabindex="-1"><span>5</span>Dónde se pierden</button>
-      <button type="button" role="tab" id="v-hoy" aria-controls="vp-hoy" aria-selected="false" tabindex="-1"><span>6</span>Qué hacer hoy</button>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-anuncios" aria-labelledby="v-anuncios">
-      <div class="marco">
-        <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody">
-          <p class="cap">Qué anuncio trae clientes, no solo contactos</p>
-          <div class="vtabla"><table>
-            <thead><tr><th>Anuncio</th><th>Oportunidades</th><th>Con encaje</th><th>Reuniones celebradas</th><th>Ganadas</th><th>Qué hacemos</th></tr></thead>
-            <tbody>
-              <tr><td><b>Demo del sistema con el sector</b><small>Meta · vídeo</small></td><td>120</td><td>58</td><td>27</td><td>7</td><td><span class="ver si">Escalar</span></td></tr>
-              <tr><td><b>Caso con cifras</b><small>Meta · carrusel</small></td><td>90</td><td>31</td><td>16</td><td>3</td><td><span class="ver mm">Mantener</span></td></tr>
-              <tr><td><b>Guía gratuita</b><small>Meta · formulario</small></td><td>53</td><td>14</td><td>6</td><td>1</td><td><span class="ver no">Revisar público</span></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-      </div>
-      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por clientes.</b> Cada anuncio con las oportunidades que trajo, cuántas encajaban y cuántas acabaron en venta. Lo que se aprende decide qué anuncio sigue.</span></p>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-whatsapp" aria-labelledby="v-whatsapp" hidden>
-      <div class="marco">
-        <div class="bar"><i></i><i></i><i></i><span>Asistente de WhatsApp · una solicitud nueva</span><span class="tag-demo">Ejemplo</span></div>
-        <div class="vbody wa-esc">
-          <div class="chat" aria-label="Conversación de ejemplo">
-            <div class="m in"><small>Asistente de IA</small>Hola, Laura. Soy el asistente de la empresa. Has pedido información sobre el servicio de mantenimiento. ¿Es para una oficina o para varias sedes?</div>
-            <div class="m out">Tres sedes, en Madrid.</div>
-            <div class="m in"><small>Asistente de IA</small>Gracias. ¿Lo estáis valorando para este trimestre o más adelante?</div>
-            <div class="m out">Para este trimestre.</div>
-            <div class="m in"><small>Asistente de IA</small>Perfecto. Lo mejor es que lo veas con Carlos, del equipo comercial. ¿Te viene bien el martes a las 10:00 o el miércoles a las 16:30?</div>
-          </div>
-          <div class="detras">
-            <p class="cap" style="margin:0">Lo que recibe el equipo</p>
-            <div><span>Necesidad</span><b>Mantenimiento para 3 sedes en Madrid</b></div>
-            <div><span>Momento</span><b>Este trimestre</b></div>
-            <div><span>Origen</span><b>Anuncio «Demo del sistema con el sector»</b></div>
-            <div><span>Siguiente paso</span><b>Cita con Carlos, a elegir entre dos huecos</b></div>
-          </div>
-        </div>
-      </div>
-      <p class="nota-img"><span class="n">2</span><span><b>Responde en minutos y prepara la llamada.</b> Se presenta como IA, pregunta solo lo que falta y pasa a una persona lo que es suyo: precio, condiciones y decisión.</span></p>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-ficha" aria-labelledby="v-ficha" hidden>
-      <div class="marco">
-        <div class="bar"><i></i><i></i><i></i><span>Contactos › Laura M. · ficha</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody">
-          <div class="ficha-h">
-            <div><b>Laura M. · Directora de operaciones</b><small>Empresa con 3 sedes en Madrid · llegó por el anuncio «Demo del sistema con el sector»</small></div>
-            <div class="notas" aria-label="Puntuación">
-              <div class="nota"><small>Quién es</small><b>8</b><small>de 10</small></div>
-              <div class="nota"><small>Qué hace</small><b>9</b><small>de 10</small></div>
-              <div class="nota letra"><small>Nivel</small><b>A</b><small>prioridad</small></div>
-            </div>
-          </div>
-          <div class="ficha-g">
-            <div><span>Necesidad</span>Mantenimiento para 3 sedes</div>
-            <div><span>Momento</span>Este trimestre</div>
-            <div><span>Por qué «quién es» 8</span>Volumen de 3 sedes · servicio que encaja · empresa con equipo</div>
-            <div><span>Por qué «qué hace» 9</span>Contestó en minutos · quiere empezar este trimestre · eligió cita</div>
-            <div><span>Canal</span>WhatsApp, con el asistente de IA</div>
-            <div><span>Cita</span>Martes 10:00 con Carlos · confirmada</div>
-          </div>
-          <p class="ficha-res"><b>Resumen para el equipo:</b> busca mantenimiento para sus tres sedes este trimestre y ha confirmado la cita. No ha preguntado por precio todavía.</p>
-          <p class="ficha-sig">Siguiente paso: llamada del martes a las 10:00. Llevar una propuesta para tres sedes y preguntar quién más decide.</p>
-        </div>
-      </div>
-      <p class="nota-img"><span class="n">3</span><span><b>Cada cliente, con su ficha y su puntuación.</b> Dos notas: si encaja y si se está moviendo. Con ellas sale la prioridad, y quien llama lo hace con el contexto delante.</span></p>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-citas" aria-labelledby="v-citas" hidden>
-      <div class="marco">
-        <div class="bar"><i></i><i></i><i></i><span>Citas de esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody">
-          <div class="citas">
-            <div class="cita"><time>Mar 10:00</time><span><b>Laura M.</b><small>Respondió «sí» al recordatorio de la víspera</small></span><span class="ver si">Confirmada</span></div>
-            <div class="cita"><time>Mar 12:30</time><span><b>Jorge P.</b><small>Recordatorio enviado, sin respuesta todavía</small></span><span class="ver mm">Pendiente</span></div>
-            <div class="cita"><time>Mié 16:30</time><span><b>Elena R.</b><small>Pidió cambiar la hora desde el mensaje; la eligió ella</small></span><span class="ver si">Reprogramada</span></div>
-            <div class="cita"><time>Lun 11:00</time><span><b>Marta G.</b><small>Celebrada. Falta registrar el resultado y el siguiente paso</small></span><span class="ver no">Sin resultado</span></div>
-          </div>
-          <p class="vnota">Cada cita recibe un recordatorio la víspera que pide un «sí» y lleva el enlace, y otro una hora antes. Si la persona responde o pide otra hora, el seguimiento cambia con ella.</p>
-        </div>
-      </div>
-      <p class="nota-img"><span class="n">4</span><span><b>Citas que llegan.</b> Se ve quién ha confirmado, quién no y qué reunión celebrada aún no tiene resultado registrado.</span></p>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-recorrido" aria-labelledby="v-recorrido" hidden>
-      <div class="marco">
-        <div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Servicios B2B</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <img src="/assets/img/home/intelligence-recorrido.jpg" alt="Qualivo Intelligence: recorrido de la oportunidad a la firma y fugas ordenadas de mayor a menor. Ejemplo con datos simulados." width="1700" height="1080" loading="lazy" decoding="async">
-      </div>
-      <p class="nota-img"><span class="n">5</span><span><b>Dónde se pierden.</b> Cada etapa comparada con lo que pasa cuando el seguimiento está bien hecho. La fuga mayor, arriba.</span></p>
-    </div>
-
-    <div class="vista" role="tabpanel" id="vp-hoy" aria-labelledby="v-hoy" hidden>
-      <div style="max-width:620px">
-        <div class="marco">
-          <div class="bar"><i></i><i></i><i></i><span>Hoy</span><span class="tag-demo">Ejemplo</span></div>
-          <img src="/assets/img/home/intelligence-acciones.jpg" alt="Oportunidades que requieren atención hoy, con la acción recomendada para cada una. Ejemplo con datos simulados." width="922" height="840" loading="lazy" decoding="async">
-        </div>
-        <p class="nota-img"><span class="n">6</span><span><b>Qué hacer hoy.</b> Cada oportunidad con su siguiente acción y su prioridad.</span></p>
-      </div>
-    </div>
-
-    <div class="raquel" style="margin-top:22px;max-width:620px">
-      <span class="k">Capacidad del sistema · voz</span>
-      <h3>Raquel, asistente de voz</h3>
-      <p>Descubre cómo un asistente de IA puede atender a quien pide información y facilitar el agendamiento. Te llama en menos de un minuto, de 9:00 a 21:00.</p>
-      <a href="/prueba/" data-cta="raquel">Probar una llamada →</a>
-    </div>
   </div>
 </section>
 
 <!-- 6 · SERVICIO -->
 <section class="sec" aria-labelledby="t-serv">
+  <span id="quienes"></span>
   <div class="wrap">
     <p class="eyebrow">Qué recibe tu empresa</p>
     <h2 id="t-serv">Nos ocupamos del sistema de crecimiento. Tú, de tus clientes.</h2>
-    <p class="lead extra">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo dedique su tiempo a las oportunidades que pueden comprar.</p>
+    <p class="lead">Diseñamos, implementamos y optimizamos tu sistema de captación y seguimiento para que tu equipo dedique su tiempo a las oportunidades que pueden comprar.</p>
     <div class="serv-grid">
       <ol class="fases">
         <li><span class="num">01</span><h3>Diagnóstico</h3><p>Analizamos cómo captas clientes y dónde pierdes oportunidades.</p></li>
@@ -885,27 +1120,25 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
           <li>Panel de métricas</li>
           <li>Revisión y optimización</li>
         </ul>
-        <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico.</b> Organizamos el proceso, preparamos las reuniones y seguimos los presupuestos; la venta la cierra tu equipo.</p>
+        <p class="pie-i"><b>El alcance se acuerda tras el diagnóstico</b>, según lo que necesite tu empresa. Tú conservas las decisiones comerciales y la venta.</p>
       </div>
     </div>
-    <div class="fundador" id="quienes">
-      <img src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría" loading="lazy" width="64" height="64">
-      <p><b>Maikel Echevarría, fundador.</b> Años construyendo sistemas de captación y ventas para empresas de formación, servicios y B2B<span class="extra">, con un equipo de medios pagados, creatividades, vídeo y CRM</span>. ¿Ya tienes agencia? No hace falta sustituirla: trabajamos el recorrido completo, con ella.</p>
-      <a href="#contacto" class="btn" data-cta="servicio"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a>
-    </div>
+    <div class="serv-cta"><a href="#diagnostico" class="btn" data-cta="servicio"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a><p>Empezamos por un diagnóstico sin coste de 30 minutos.</p></div>
   </div>
 </section>
 
 <!-- 7 · PREGUNTAS -->
-<section class="sec final" aria-label="Preguntas frecuentes">
+<section class="sec" aria-label="Preguntas frecuentes">
   <div class="wrap">
     <div class="faq" style="margin-top:0">
       <h3>Preguntas frecuentes</h3>
       <div>
         <details><summary>¿Sois una agencia de marketing?</summary><p>No solo. Llevamos campañas cuando hace falta, pero nos responsabilizamos del recorrido completo: captación, conversión, respuesta, seguimiento y medición, conectados en un sistema.</p></details>
-        <details><summary>¿Tengo que cambiar mi CRM o mi agencia?</summary><p>No. Trabajamos sobre las herramientas que ya usas y nos coordinamos con tu agencia si la tienes. Lo que funciona se queda.</p></details>
-        <details><summary>¿Qué incluye y cuánto cuesta?</summary><p>Los proyectos empiezan en 1.200&nbsp;€ + IVA. Empezamos con un diagnóstico sin coste y, después, te proponemos el alcance que necesita tu recorrido y su precio. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
-        <details><summary>¿Para qué empresas tiene sentido?</summary><p>Para empresas que ya venden y reciben oportunidades, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, clínicas, servicios y B2B.</p></details>
+        <details><summary>¿Para qué empresas tiene sentido?</summary><p>Para empresas que ya venden y reciben solicitudes, aunque sean pocas, y pueden atender más negocio del que atienden hoy: formación, reformas, clínicas, servicios y B2B.</p></details>
+        <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes. Si no, el diagnóstico dice si tiene sentido empezar y por dónde.</p></details>
+        <details><summary>¿Qué incluye el servicio?</summary><p>Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No necesariamente. Primero revisamos tu CRM y qué podemos conectar: antes de proponer cambios, comprobamos qué permite el sistema que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu empresa.</p></details>
+        <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántos clientes quieras captar y de lo que vale una venta para tu empresa; en el diagnóstico hacemos esa cuenta con tus números y te decimos el alcance antes de empezar. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
       </div>
     </div>
   </div>
@@ -913,25 +1146,28 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 
 <footer class="pie">
   <div class="wrap">
-    <div>
-      <img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" loading="lazy">
-      <p style="max-width:34ch;color:#9AA2AE;font-size:14.5px">Conseguimos que más oportunidades se conviertan en clientes.</p>
-      <p style="margin-top:14px;font-size:13px">© 2026 Qualivo · España</p>
-    </div>
     <div class="cols">
-      <div><a href="/formacion/">Formación</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
-      <div><a href="/casos/eac/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
-      <div><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
+      <div><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" loading="lazy" style="height:24px;width:auto;margin-bottom:12px"><p>Conseguimos que más oportunidades se conviertan en clientes.</p></div>
+      <div><b>Sectores</b><a href="/formacion/">Formación</a><a href="/reformas/">Reformas</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
+      <div><b>Qualivo</b><a href="/casos/eac/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
+      <div><b>Legal</b><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
     </div>
+    <span>© 2026 Qualivo · España</span>
   </div>
 </footer>
 
-<div class="fijo" id="fijo"><a href="#contacto" class="btn" data-cta="fijo-movil"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
+<a class="wa" href="https://wa.me/34647118491?text=Hola%20Maikel%2C%20vengo%20de%20la%20web%20de%20Qualivo%20y%20tengo%20una%20pregunta%20sobre%20mi%20empresa." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" data-wa="flotante">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 0 1 5.3 16C5.3 10.1 10.1 5.3 16 5.3S26.7 10.1 26.7 16 21.9 26.7 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  <span>WhatsApp</span>
+</a>
+<div class="fijo" id="fijo"><a href="#diagnostico" class="btn" data-cta="fijo-movil"><span class="largo">Descubre dónde pierdes oportunidades</span><span class="corto">Pide tu diagnóstico</span>&nbsp;→</a></div>
 
 <script>
 (function(){
   'use strict';
   function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
+  var EV='home', PAG='inicio';
+  var WA={"inicio": ["Hola, Laura. Soy el asistente de IA de Servicios Horizonte. Has pedido información sobre el mantenimiento de oficinas para tres sedes en Madrid, para este trimestre.", "¿Qué te gustaría resolver primero?"], "ops": [["Hablar con alguien del equipo", "a1"], ["Un precio orientativo", "b1"], ["Es para más adelante", "c1"]], "nodos": {"a1": {"log": [["Quiere hablar con el equipo", "este trimestre", "g"]], "bot": ["Perfecto. Para preparar la llamada: ¿empezaríais por las tres sedes a la vez o por una?"], "ops": [["Las tres a la vez", "a2"], ["Primero una", "a2"]]}, "a2": {"log": [["Alcance anotado", "lo revisa Carlos en la llamada", ""]], "bot": ["Anotado. Te llama Carlos, del equipo comercial, y te explica cómo lo organizaríamos. ¿Te viene mejor el martes a las 10:00 o el miércoles a las 16:30?"], "ops": [["Martes a las 10:00", "a3"], ["Miércoles a las 16:30", "a3"]]}, "a3": {"log": [["Llamada reservada con Carlos", "confirmación simulada · recordatorio el día antes", "g"], ["Aviso a Carlos", "Laura M. · A · mantenimiento 3 sedes · este trimestre", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna cita real", "bot": ["Hecho: Carlos te llama a esa hora. El día antes te mando un recordatorio, y si te surge algo, me lo dices aquí y lo cambiamos."], "fin": true}, "b1": {"log": [["Pide precio", "no se da sin conocer las sedes", "h"]], "bot": ["Lo entiendo. Sin conocer las sedes no puedo darte un precio que valga: depende del tamaño, de las visitas y de lo que incluya.", "Lo da Carlos después de hablar contigo. ¿Quieres que te llame?"], "ops": [["Sí, que me llame", "b2"], ["Prefiero pensármelo", "b3"]]}, "b2": {"log": [["Llamada propuesta con Carlos", "prefiere teléfono", "g"]], "bot": ["Hecho. Carlos te llama mañana por la mañana y te explica cómo se calcula. Si prefieres otra hora, dímelo aquí."], "fin": true}, "b3": {"log": [["Lo está pensando", "seguimiento con una duda útil, sin presión", "h"]], "bot": ["Claro. Te dejo por aquí cómo trabajamos con empresas de varias sedes, por si te ayuda. Cuando quieras, me escribes."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa al comercial ahora", "h"]], "bot": ["Sin prisa. ¿Para cuándo lo estás pensando?"], "ops": [["Después del verano", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos en ese momento?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos en ese momento, solo una vez."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni condiciones: los da el equipo comercial, que ve cada conversación y puede entrar cuando quiera.", "hora": "10:12", "log0": [["Origen", "Anuncio «Demo del sistema con el sector» · formulario", ""], ["Necesidad", "Mantenimiento de oficinas", ""], ["Tamaño", "3 sedes en Madrid", ""], ["Momento", "Este trimestre", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
   var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
   function contar(el,fin,dec,suf,ms){
@@ -941,51 +1177,135 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   }
   function alVer(el,fn,u){ if(!el) return; if(!('IntersectionObserver' in window)){ fn(); return; }
     new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:u||.25}).observe(el); }
-  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track('home_cta',{ubicacion:a.getAttribute('data-cta'),version:'v2'}); }); });
 
-  /* VSL: el reproductor se carga al pulsar (sin cookies ni autoplay con sonido antes del clic). */
-  var vsl=document.getElementById('vsl');
-  if(vsl){ vsl.querySelector('.vsl-play').addEventListener('click',function(){
-    var src=vsl.getAttribute('data-embed'); if(!src) return;
-    var marco=document.createElement('div'), fr=document.createElement('iframe'); marco.className='vsl-marco';
-    fr.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1'; fr.title='Vídeo: cómo convertimos más contactos en clientes';
-    fr.allow='autoplay; fullscreen; picture-in-picture; encrypted-media'; fr.allowFullscreen=true; marco.appendChild(fr);
-    this.replaceWith(marco); track('home_vsl_play',{});
-  }); }
+  /* WhatsApp: mismo evento que el resto de landings (DiagnosticoWhatsApp en el píxel) */
+  document.querySelectorAll('[data-wa]').forEach(function(a){ a.addEventListener('click',function(){ track('diagnostico_whatsapp',{ubicacion:a.getAttribute('data-wa'),pagina:'inicio'}); }); });
 
-  /* formulario sobre /diagnostico/landing.js (sin cambios en ese archivo para esta página).
-     Empresa y «dónde se escapa» van en «hipotesis» (nota del CRM y primer WhatsApp). Estos listeners
-     se registran antes que los de landing.js. */
+  /* CTA: navegación, no lead */
+  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click',function(){ track(EV+'_cta',{ubicacion:a.getAttribute('data-cta'),pagina:PAG}); }); });
+
+  /* movimiento discreto: subrayado, barras, cifras que cuentan, entradas suaves */
+  var hero=document.getElementById('hero'), dash=document.getElementById('dash');
+
+  /* vídeo del sistema: inicio y final */
+  var vid=document.getElementById('vid');
+  if(vid){ vid.addEventListener('play',function una(){ track(EV+'_video_play',{video:'None',pagina:PAG}); vid.removeEventListener('play',una); }); vid.addEventListener('ended',function(){ track(EV+'_video_fin',{video:'None',pagina:PAG}); }); }
+  requestAnimationFrame(function(){ hero.classList.add('on'); });
+  alVer(dash,function(){ dash.classList.add('on'); dash.querySelectorAll('[data-n]').forEach(function(v){ contar(v,+v.getAttribute('data-n'),0,'',1100); }); });
+  document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
+
+  /* formulario sobre /diagnostico/landing.js (sin cambios en ese archivo).
+     Centro y objetivo van en «hipotesis» (nota del CRM). Estos listeners se registran antes que los de landing.js. */
   var f=document.getElementById('f'), pasos=document.querySelectorAll('#pasos-f li');
   function pasoF(n){ pasos.forEach(function(li,i){ li.className=i<n?'hecho':(i===n?'act':''); }); }
   f.addEventListener('submit',function(){
-    var e=f.elements.empresa.value.trim(), d=f.elements.donde.value;
-    f.elements.hipotesis.value=('Empresa: '+e+(d?' · Dónde se le escapa: '+d:'')).slice(0,1200);
+    var c=f.elements.centro.value.trim(), o=f.elements.objetivo.value;
+    f.elements.hipotesis.value=('Empresa: '+c+(o?' · Objetivo: '+o:'')).slice(0,1200);
   });
   document.getElementById('b1').addEventListener('click',function(ev){
-    if(!f.elements.empresa.value.trim()||!f.elements.web.value.trim()||!f.elements.sector.value||!f.elements.solicitudes.value||!f.elements.ticket.value){
-      ev.stopImmediatePropagation(); var e1=document.getElementById('e1'); e1.textContent='Rellena los cinco campos, son diez segundos.'; e1.hidden=false; return;
+    var req=['centro','web','objetivo','solicitudes','ticket'].concat(f.elements.sector&&f.elements.sector.required?['sector']:[]), mal=req.filter(function(n){ return !String(f.elements[n].value||'').trim(); });
+    req.forEach(function(n){ var el=f.elements[n]; if(mal.indexOf(n)>=0) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid'); });
+    if(mal.length){
+      ev.stopImmediatePropagation(); var e1=document.getElementById('e1');
+      e1.textContent=mal.length===1?'Revisa 1 campo para continuar.':'Revisa '+mal.length+' campos para continuar.'; e1.hidden=false;
+      f.elements[mal[0]].focus(); return;
     }
     pasoF(1);
   },true);
-  /* ?paso=agenda: para quien ya ha dejado sus datos (WhatsApp de confirmación). landing.js enseña el calendario directo. */
+  /* paso 2: marca los campos vacíos o mal escritos (el aviso lo da landing.js) */
+  f.addEventListener('submit',function(){
+    ['nombre','email','telefono'].forEach(function(n){ var el=f.elements[n], v=String(el.value||'').trim(), ok=v&&(n!=='email'||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+      if(ok) el.removeAttribute('aria-invalid'); else el.setAttribute('aria-invalid','true'); });
+  },true);
+  f.addEventListener('input',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
+  f.addEventListener('change',function(e){ if(e.target.getAttribute&&e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid'); });
+  /* ?paso=agenda: para quien ya ha dejado el formulario (enlace del WhatsApp de confirmación y del
+     segundo mensaje). landing.js enseña el calendario directo; aquí se ajusta el resto de la página. */
   if(new URLSearchParams(location.search).get('paso')==='agenda'){
     pasoF(2);
     document.getElementById('t-final').textContent='Elige la hora de tu diagnóstico.';
+    document.querySelectorAll('[data-cta]').forEach(function(a){ if(a.classList.contains('btn')) a.innerHTML='Elige tu hora&nbsp;→'; });
     var d1=document.querySelector('.despues li'); if(d1) d1.hidden=true;
   }
+
+  /* agenda abierta: cuando landing.js enseña el paso del calendario (una vez) */
   var p3=document.getElementById('p3'), agenda=false;
-  new MutationObserver(function(){ if(!p3.hidden&&!agenda){ agenda=true; pasoF(2); track('home_agenda_abierta',{}); } }).observe(p3,{attributes:true,attributeFilter:['hidden']});
-  /* reunión reservada: solo si el calendario de GHL avisa de una reserva completada (la reserva se mide en el CRM). */
+  new MutationObserver(function(){ if(!p3.hidden&&!agenda){ agenda=true; pasoF(2); track(EV+'_agenda_abierta',{pagina:PAG}); } }).observe(p3,{attributes:true,attributeFilter:['hidden']});
+  /* reunión reservada: solo si el calendario de GHL avisa de una reserva completada.
+     Si no llega ningún aviso, no se enseña confirmación (la reserva se mide en el CRM con el evento Schedule). */
   var reservada=false;
   addEventListener('message',function(e){
     if(reservada||!/leadconnectorhq\.com|msgsndr\.com/.test(String(e.origin||''))) return;
     var txt=''; try{ txt=typeof e.data==='string'?e.data:JSON.stringify(e.data); }catch(x){}
     if(/booking|appointment/i.test(txt)&&/(complete|confirm|success|booked)/i.test(txt)){
       reservada=true; pasos.forEach(function(li){ li.className='hecho'; });
-      document.getElementById('reservado').hidden=false; track('home_reserva',{});
+      document.getElementById('reservado').hidden=false; track(EV+'_reserva',{pagina:PAG});
     }
   });
+
+  /* DEMO por pestañas: teclado con flechas, evento por vista */
+  var tabs=[].slice.call(document.querySelectorAll('.vistas [role=tab]')), vistos={};
+  function abre(i,foco){ tabs.forEach(function(t,j){ var on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; document.getElementById('vista-'+j).hidden=!on; });
+    if(foco) tabs[i].focus({preventScroll:true});
+    var v=tabs[i].getAttribute('data-vista'); if(!vistos[v]){ vistos[v]=1; track(EV+'_demo_vista',{vista:v,pagina:PAG}); }
+    if(v==='whatsapp'&&!waIni) waReset(); }
+  var au=document.getElementById('voz-audio'); if(au) au.addEventListener('play',function una(){ track(EV+'_demo_audio',{pagina:PAG}); au.removeEventListener('play',una); });
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ abre(i); });
+    t.addEventListener('keydown',function(e){ var k=e.key, n=tabs.length;
+      if(k==='ArrowRight'){ e.preventDefault(); abre((i+1)%n,true); } else if(k==='ArrowLeft'){ e.preventDefault(); abre((i-1+n)%n,true); }
+      else if(k==='Home'){ e.preventDefault(); abre(0,true); } else if(k==='End'){ e.preventDefault(); abre(n-1,true); } }); });
+
+  /* Retoque de UX (Claude Design): «Anterior / Siguiente», posición, CTA final y pestaña activa centrada */
+  (function(){
+    var lista=document.querySelector('#demo .vistas'), nav=document.querySelector('#demo .vista-nav'); if(!lista||!nav) return;
+    var prev=nav.querySelector('[data-prev]'), next=nav.querySelector('[data-next]'), pos=nav.querySelector('.vista-pos'), fin=nav.querySelector('.vista-fin'), prog=document.querySelector('#demo .progreso');
+    function nombre(t){ return t.textContent.replace(/^\s*\d+\s*/,'').trim(); }
+    function actual(){ for(var i=0;i<tabs.length;i++) if(tabs[i].getAttribute('aria-selected')==='true') return i; return 0; }
+    function segs(i){ var h=''; for(var j=0;j<tabs.length;j++) h+='<i'+(j<=i?' class="on"':'')+'></i>'; return h; }
+    function pintar(){ var i=actual(), ultimo=i===tabs.length-1, et=tabs[i].getAttribute('data-etapa')||'';
+      prev.hidden=i===0; if(i>0) prev.textContent='← '+nombre(tabs[i-1]);
+      next.hidden=ultimo; fin.hidden=!ultimo; nav.classList.toggle('ultimo',ultimo); if(!ultimo) next.textContent='Siguiente: '+nombre(tabs[i+1])+' →';
+      pos.innerHTML='<span>'+(i+1)+' de '+tabs.length+' · '+et+'</span><span class="seg" aria-hidden="true">'+segs(i)+'</span>';
+      if(prog) prog.innerHTML='<b>'+et+'</b><span>'+(i+1)+' de '+tabs.length+'</span><span class="seg">'+segs(i)+'</span>';
+      var t=tabs[i]; if(lista.scrollWidth>lista.clientWidth) lista.scrollTo({left:t.offsetLeft-(lista.clientWidth-t.offsetWidth)/2,behavior:quieto?'auto':'smooth'}); }
+    function ir(d){ var i=actual()+d; if(i<0||i>=tabs.length) return; tabs[i].click(); tabs[i].focus({preventScroll:true});
+      var top=lista.getBoundingClientRect().top; if(top<0) window.scrollBy({top:top-90,behavior:quieto?'auto':'smooth'}); }
+    prev.addEventListener('click',function(){ ir(-1); }); next.addEventListener('click',function(){ ir(1); });
+    new MutationObserver(pintar).observe(lista,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+    pintar();
+  })();
+
+  /* WhatsApp de ejemplo: ramas con botones; «Por detrás» va apuntando lo que queda en el CRM */
+  var chat=document.getElementById('chat'), wlog=document.getElementById('wa-log'), waIni=false, waT=[];
+  function esp(ms){ return quieto?0:ms; }
+  function burbuja(t,c){ var d=document.createElement('div'); d.className='msg '+c; d.textContent=t;
+    if(c!=='sis'){ var s=document.createElement('small'); s.textContent=WA.hora; d.appendChild(s); } chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+  function apunta(l){ (l||[]).forEach(function(x){ var li=document.createElement('li'); li.className='nuevo '+(x[2]||''); var b=document.createElement('b'); b.textContent=x[0]; li.appendChild(b); li.appendChild(document.createTextNode(x[1])); wlog.appendChild(li); }); }
+  function bot(lista,fin){ var i=0; (function sig(){ if(i>=lista.length){ fin&&fin(); return; }
+      var e=document.createElement('div'); e.className='escribe'; e.innerHTML='<i></i><i></i><i></i>'; chat.appendChild(e); chat.scrollTop=chat.scrollHeight;
+      waT.push(setTimeout(function(){ e.remove(); burbuja(lista[i++],'bot'); waT.push(setTimeout(sig,esp(350))); },esp(700))); })(); }
+  function ops(lista){ if(!lista) return; var c=document.createElement('div'); c.className='opciones';
+    lista.forEach(function(o){ var b=document.createElement('button'); b.type='button'; b.textContent=o[0];
+      b.addEventListener('click',function(){ c.remove(); burbuja(o[0],'yo'); track(EV+'_demo_whatsapp',{rama:o[1],pagina:PAG}); nodo(o[1]); }); c.appendChild(b); });
+    chat.appendChild(c); chat.scrollTop=chat.scrollHeight; }
+  function nodo(k){ var n=WA.nodos[k]; apunta(n.log); if(n.sys) burbuja(n.sys,'sis');
+    bot(n.bot,function(){ if(n.fin){ burbuja('Fin de este camino. Prueba otro con «Empezar de nuevo».','sis'); } else ops(n.ops); }); }
+  function waReset(){ waT.forEach(clearTimeout); waT=[]; waIni=true; chat.innerHTML=''; wlog.innerHTML='';
+    apunta(WA.log0); bot(WA.inicio,function(){ ops(WA.ops); }); }
+  document.getElementById('wa-reini').addEventListener('click',waReset);
+
+  /* llamada: la transcripción aparece línea a línea la primera vez */
+  var vozHecha=false;
+  function vozPlay(){ if(vozHecha||quieto) return; vozHecha=true; var ls=[].slice.call(document.querySelectorAll('#voz-t .linea'));
+    ls.forEach(function(l,i){ if(i>0){ l.classList.add('oculta'); setTimeout(function(){ l.classList.remove('oculta'); l.style.animation='entra .35s ease'; },i*900); } }); }
+
+  /* seguimientos: cuatro situaciones */
+  var sbs=[].slice.call(document.querySelectorAll('[data-seg]'));
+  sbs.forEach(function(b){ b.addEventListener('click',function(){ var k=b.getAttribute('data-seg');
+    sbs.forEach(function(x){ x.setAttribute('aria-pressed',x===b); });
+    document.querySelectorAll('[data-seg-p]').forEach(function(p){ p.hidden=p.getAttribute('data-seg-p')!==k; });
+    track(EV+'_demo_seguimiento',{caso:k,pagina:PAG}); }); });
+
   /* huecos reales del calendario (api/huecos.js). Sin huecos, no se enseña nada. */
   fetch('/api/huecos/').then(function(r){ return r.ok?r.json():{huecos:[]}; }).then(function(d){
     var h=((d&&d.huecos)||[]).slice(0,3); if(!h.length) return;
@@ -993,27 +1313,22 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     document.getElementById('huecos-t').textContent=h.map(function(x){ return fx.format(new Date(x)).replace(',',''); }).join(' · ');
     document.getElementById('huecos').classList.add('on');
   }).catch(function(){});
-  document.querySelectorAll('[data-cuenta]').forEach(function(el){ alVer(el,function(){ contar(el,+el.getAttribute('data-cuenta'),+(el.getAttribute('data-dec')||0),el.getAttribute('data-suf')||'',1500); },.6); });
-  var fijo=document.getElementById('fijo'), hero=document.getElementById('hero'), fin=document.getElementById('contacto');
+
+  /* CTA fijo en móvil: se oculta mientras se ven los botones de la portada, la demo (tiene su CTA), el diagnóstico o el pie */
+  var fijo=document.getElementById('fijo');
   if('IntersectionObserver' in window){
-    var a=true,b=false; function pinta(){ fijo.classList.toggle('on',!a&&!b); }
-    new IntersectionObserver(function(e){ a=e[0].isIntersecting; pinta(); }).observe(hero);
-    new IntersectionObserver(function(e){ b=e[0].isIntersecting; pinta(); },{threshold:.05}).observe(fin);
+    var vistos=[];
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ var k=vistos.indexOf(e.target); if(e.isIntersecting&&k<0) vistos.push(e.target); else if(!e.isIntersecting&&k>=0) vistos.splice(k,1); });
+      var on=vistos.length===0; fijo.classList.toggle('on',on); fijo.inert=!on; document.body.classList.toggle('fijo-on',on);
+    });
+    [document.querySelector('.hero .ctas'),document.getElementById('demo'),document.getElementById('diagnostico'),document.querySelector('footer.pie')].forEach(function(el){ if(el) io.observe(el); });
   }
 })();
 </script>
-<script src="/assets/consent.js?v=1"></script>
+<script src="/assets/consent.js" defer></script>
 <script src="/diagnostico/landing.js" defer></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
-<script>
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.vistas [role="tab"]'));
-  function abre(t,foco){ tabs.forEach(function(b){ var on=b===t; b.setAttribute('aria-selected',on?'true':'false'); b.tabIndex=on?0:-1; document.getElementById(b.getAttribute('aria-controls')).hidden=!on; });
-    if(foco) t.focus(); if(window.qvTrack) window.qvTrack('home_demo_vista',{vista:t.id.slice(2)}); }
-  tabs.forEach(function(b,i){ b.addEventListener('click',function(){ abre(b); });
-    b.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); abre(tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length],true); } }); });
-})();
-</script>
 </body>
 </html>

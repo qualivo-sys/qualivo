@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Landing Reformas v22 (22-oct-2026). Generada desde el diseño de /formacion/v21/ (que no cambia).
+<!-- Landing Reformas v22 (22-oct-2026). Generada con content/… gen (scratchpad) desde el diseño de /formacion/v21/.
      Portada con el vídeo del sistema del sector, casos, sistema y demo por pestañas (anuncios, formulario, WhatsApp,
      llamada simulada con audio, ficha, citas, seguimientos, recorrido y qué hacer hoy) con datos de ejemplo; después,
      el formulario (el botón de arriba lleva a él). Sin precio (22-oct). Audio: /assets/audio/llamada-<sector>.mp3.
      Formulario: /diagnostico/landing.js → /api/diagnostico, con las preguntas de tamaño del funnel v2.
-     noindex: borrador para que Maikel la apruebe. No sustituye a /reformas/. -->
+     Copia noindex para enlaces ya enviados (email); la página principal es https://qualivo.io/reformas/. -->
 <title>Más obras de las solicitudes que ya recibes · Qualivo para reformas y construcción</title>
 <meta name="description" content="Conseguimos solicitudes de personas que de verdad quieren reformar y conectamos la captación con las visitas y el seguimiento de presupuestos. Diagnóstico sin coste de 30 minutos.">
 <meta name="robots" content="noindex,nofollow">
@@ -1027,7 +1027,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     f.elements.hipotesis.value=('Empresa: '+c+(o?' · Objetivo: '+o:'')).slice(0,1200);
   });
   document.getElementById('b1').addEventListener('click',function(ev){
-    var req=['centro','web','objetivo','solicitudes','ticket'], mal=req.filter(function(n){ return !String(f.elements[n].value||'').trim(); });
+    var req=['centro','web','objetivo','solicitudes','ticket'].concat(f.elements.sector&&f.elements.sector.required?['sector']:[]), mal=req.filter(function(n){ return !String(f.elements[n].value||'').trim(); });
     req.forEach(function(n){ var el=f.elements[n]; if(mal.indexOf(n)>=0) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid'); });
     if(mal.length){
       ev.stopImmediatePropagation(); var e1=document.getElementById('e1');
@@ -1152,5 +1152,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 </script>
 <script src="/assets/consent.js" defer></script>
 <script src="/diagnostico/landing.js" defer></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
