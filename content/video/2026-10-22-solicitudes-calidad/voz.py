@@ -9,7 +9,7 @@ import json, os, subprocess, sys, unicodedata
 AQUI = os.path.dirname(os.path.abspath(__file__))
 VA = os.path.join(AQUI, '../../../produccion/video-anuncios'); sys.path.insert(0, VA)
 GUION = [
- ('gancho', 'Si tienes un centro de formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.'),
+ ('gancho', 'Si vendes formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.'),
  ('dolor', 'Porque admisiones acaba llamando a quien no contesta.'),
  ('d2', 'Reserva gente que luego no aparece.'),
  ('d3', 'Y quien sí encajaba con el curso… se enfría esperando su turno.'),
@@ -19,7 +19,7 @@ GUION = [
  ('p3', 'Una respuesta por WhatsApp en minutos, que resuelve lo básico y recoge lo que falta.'),
  ('p4', 'Y admisiones llama con la ficha delante: qué quiere, qué le preocupa y por dónde empezar.'),
  ('prueba', 'Y cada solicitud tiene su siguiente paso. Nadie se queda esperando a que alguien se acuerde.'),
- ('cta', 'Si tu centro ya invierte en anuncios, toca en Más información y responde cuatro preguntas. Lo vemos en treinta minutos, con tus números.'),
+ ('cta', 'Si ya inviertes en anuncios para vender formación, toca en Más información y responde cuatro preguntas. Lo vemos en treinta minutos, con tus números.'),
 ]
 EXTRA = {
  'gancho_b': 'Lunes, nueve de la mañana. Admisiones abre el CRM: treinta solicitudes nuevas. ¿A quién llama primero?',

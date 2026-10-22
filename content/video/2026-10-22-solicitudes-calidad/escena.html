@@ -56,7 +56,7 @@ html,body{background:#000}
 .est.ok{background:#E3F2EF;color:#0E7C74}.est.pe{background:#FDF1C7;color:#8A5A00}.est.no{background:#C2410C;color:#fff}
 .cita.mal{background:#FFF1EA}
 /* chip de la solicitud enfriándose */
-.frio{position:absolute;left:150px;right:150px;top:1180px;background:rgba(250,247,240,.95);color:#101319;border-radius:22px;padding:20px 24px;font-size:24px;font-weight:700;opacity:0;z-index:5}
+.frio{position:absolute;left:170px;right:170px;top:1105px;background:rgba(250,247,240,.95);color:#101319;border-radius:22px;padding:20px 24px;font-size:24px;font-weight:700;opacity:0;z-index:5}
 .frio small{display:block;color:#C2410C;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
 /* recorrido */
 .pasos{position:absolute;left:90px;right:90px;top:760px}
@@ -69,7 +69,7 @@ html,body{background:#000}
 .ad .h .av{width:62px;height:62px;border-radius:50%;background:#0E7C74;color:#fff;font-weight:900;font-size:28px;display:flex;align-items:center;justify-content:center}
 .ad .h b{display:block;font-size:26px;font-weight:800}.ad .h small{font-size:20px;color:#7A7C82;font-weight:600}
 .ad .im{height:520px;background:#101319;color:#FAF7F0;display:flex;flex-direction:column;justify-content:center;padding:44px;gap:20px}
-.ad .im h4{font-family:Anton;font-size:74px;line-height:.98;text-transform:uppercase}
+.ad .im h4{font-family:Anton;font-size:64px;line-height:.98;text-transform:uppercase}
 .ad .im h4 i{font-style:normal;color:#F4CC38}
 .ad .im p{font-size:28px;color:#AEB5BF;font-weight:600;line-height:1.35}
 .ad .bt{margin:22px 26px 26px;border:3px solid #101319;border-radius:16px;text-align:center;font-weight:800;font-size:26px;padding:18px}
@@ -125,6 +125,12 @@ html,body{background:#000}
 .real b i{font-style:normal;color:#F4CC38}
 .real span{display:block;font-size:20px;font-weight:600;color:#AEB5BF;margin-top:8px}
 #s0 .clip{top:530px}#s0 .notis{top:600px}
+.full{position:absolute;inset:0;overflow:hidden}
+.full img{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.full::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,9,12,.78) 0,rgba(8,9,12,0) 34%,rgba(8,9,12,0) 62%,rgba(8,9,12,.7) 100%)}
+#preg{position:absolute;left:70px;right:70px;top:300px;font-family:Anton;font-size:96px;line-height:1;text-transform:uppercase;color:#FAF7F0;z-index:5;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+#preg i{font-style:normal;color:#F4CC38}
+.v45 .full img{top:-285px}.v45 #preg{top:70px;font-size:84px}
 /* 4:5 (?f=45): mismo montaje en 1080x1350 */
 #e.v45{height:1350px}
 .v45 #sector{top:60px}.v45 #s0 .clip{top:270px!important;height:840px!important}.v45 #s0 .notis{top:330px}.v45 #sector p{font-size:56px;margin-top:16px}.v45 .rot{top:60px}
@@ -132,7 +138,7 @@ html,body{background:#000}
 .v45 .clip{top:220px!important;height:880px!important}.v45 .clip img{height:1125px;margin-top:-120px}
 .v45 #sub{top:1150px}
 .v45 .notis{top:290px}.v45 #n1{top:330px!important}.v45 #n2{top:530px!important}.v45 #n3{top:730px!important}
-.v45 .frio{top:900px}.v45 .pasos{top:470px}.v45 .ad{top:250px}.v45 #logo{top:470px}
+.v45 .frio{top:820px}.v45 .pasos{top:470px}.v45 .ad{top:250px}.v45 #logo{top:470px}
 /* cierre */
 #dedo{position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(244,204,56,.55);border:6px solid #F4CC38;opacity:0;z-index:8}
 #logo{position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0}
@@ -140,11 +146,10 @@ html,body{background:#000}
 #logo p{font-family:Anton;font-size:48px;color:#F4CC38;letter-spacing:.06em;margin-top:30px}
 </style>
 <div id="e">
-  <div id="sector"><span>CENTROS DE FORMACIÓN</span><p id="filtro">¿Ya invertís en publicidad?</p></div>
+  <div id="sector"><span>SI VENDES FORMACIÓN</span><p id="filtro">¿Ya invertís en publicidad?</p></div>
 
   <!-- S0 · móvil con notificaciones -->
-  <div class="sc" id="s0"><div class="clip"><img id="c-movil"></div>
-    <div class="notis" id="notis"></div></div>
+  <div class="sc" id="s0"><div class="full"><img id="c-g1"></div><div class="notis" id="notis" style="display:none"></div></div>
 
   <!-- S1/S2 · bandeja de solicitudes -->
   <div class="sc" id="s1"><div class="rot" id="r1">El reto no es tener <i>más solicitudes</i></div>
@@ -165,18 +170,16 @@ html,body{background:#000}
       </div></div></div>
 
   <!-- S5 · se enfría -->
-  <div class="sc" id="s5"><div class="rot" id="r5">La que sí encajaba <i id="r5b">se enfría</i></div>
-    <div class="clip" style="top:500px"><img id="c-sofa"></div>
-    <div class="frio" id="frio"><small>Sin respuesta · 2 días</small>Laura · Curso de gestión administrativa</div></div>
+  <div class="sc" id="s5"><div class="full"><img id="c-g4"></div><div class="rot" id="r5">La que sí encajaba <i id="r5b">se congela</i></div>
+    <div class="frio" id="frio"><small>Sin respuesta · 2 días</small>Laura · Curso online de gestión administrativa</div></div>
 
   <!-- S6 · recorrido -->
-  <div class="sc" id="s6"><div class="rot"><small>La calidad se trabaja</small>en todo <i>el recorrido</i></div>
-    <div class="pasos"><div class="paso"><i>1</i><span>Anuncio</span></div><div class="paso"><i>2</i><span>Formulario</span></div><div class="paso"><i>3</i><span>WhatsApp</span></div><div class="paso"><i>4</i><span>Admisiones</span></div></div></div>
+  <div class="sc" id="s6"><div class="full"><img id="c-g5"></div><div class="frio" id="calor" style="border-left:8px solid #25D366"><small style="color:#0E7C74">WhatsApp · ahora</small>Hola, Laura. Te escribimos de Horizonte Formación…</div><div class="rot"><small>La calidad se trabaja</small>en todo <i>el recorrido</i></div></div>
 
   <!-- S7 · anuncio -->
   <div class="sc" id="s7"><div class="rot"><small>1 · Anuncio</small>Para quien <i>encaja</i></div>
-    <div class="ad" id="ad"><div class="h"><div class="av">H</div><div><b>Centro de Formación Horizonte</b><small>Publicidad</small></div></div>
-      <div class="im"><h4>Curso de gestión administrativa. <i>Martes y jueves, 18:30.</i></h4><p>Pensado para quien trabaja por las mañanas y quiere cambiar de puesto.</p></div>
+    <div class="ad" id="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Curso online de gestión administrativa. <i>En directo y grabado.</i></h4><p>Para quien trabaja y quiere cambiar de puesto, a su ritmo.</p></div>
       <div class="bt">Más información</div></div></div>
 
   <!-- S8 · formulario en vivo -->
@@ -192,10 +195,10 @@ html,body{background:#000}
 
   <!-- S9 · WhatsApp en vivo -->
   <div class="sc" id="s9"><div class="rot"><small>3 · WhatsApp</small>Respuesta <i>en minutos</i></div>
-    <div class="ven wa"><div class="wa-h"><span class="av">C</span><span><b>Centro de Formación Horizonte</b><small>Asistente con IA · en línea</small></span><span class="td">Ejemplo</span></div>
+    <div class="ven wa"><div class="wa-h"><span class="av">C</span><span><b>Horizonte Formación</b><small>Asistente con IA · en línea</small></span><span class="td">Ejemplo</span></div>
       <div class="chat" id="chat">
-        <div class="m bot">Hola, Laura. Soy el asistente de IA del Centro de Formación Horizonte. Has indicado que trabajas por las mañanas y quieres comprobar los horarios.<small>18:41</small></div>
-        <div class="m bot">Las clases del curso son martes y jueves de 18:30 a 20:00. ¿Te encajaría?<small>18:41</small></div>
+        <div class="m bot">Hola, Laura. Soy el asistente de IA de Horizonte Formación. Has indicado que trabajas por las mañanas y quieres comprobar los horarios.<small>18:41</small></div>
+        <div class="m bot">El curso es online: clases en directo los martes y jueves a las 18:30, y grabadas para verlas cuando quieras. ¿Te encajaría?<small>18:41</small></div>
         <div class="m yo">Sí, quiero saber más<small>18:42</small></div>
         <div class="m bot">Genial. ¿Qué te gustaría resolver antes de decidir?<small>18:42</small></div>
         <div class="escribe" id="escribe"><i></i><i></i><i></i></div>
@@ -209,21 +212,21 @@ html,body{background:#000}
         <div class="notas"><div class="nota"><small>Quién es · encaje</small><b id="n-q">0<em>/10</em></b><div class="br"><i id="b-q"></i></div></div>
           <div class="nota"><small>Qué hace · interés</small><b id="n-h">0<em>/10</em></b><div class="br"><i id="b-h"></i></div></div></div>
         <div class="campo"><dt>Objetivo</dt><dd>Formarse para cambiar de puesto</dd></div>
-        <div class="campo"><dt>Disponibilidad</dt><dd>Martes y jueves de 18:30 a 20:00</dd></div>
+        <div class="campo"><dt>Disponibilidad</dt><dd>Online · en directo o grabado</dd></div>
         <div class="campo sig"><dt>Siguiente paso</dt><dd>Llamada del miércoles a las 16:00: explicar metodología y pago</dd></div>
       </div>
       <div class="real" id="real"><small>Caso real · un mes de campaña</small><b>10 matrículas en un mes · <i>10,2 veces lo invertido</i></b><span>Escuela de aviación · medido en el CRM del centro</span></div></div></div>
 
   <!-- S11 · Qué hacer hoy en vivo -->
   <div class="sc" id="s11"><div class="rot">Cada solicitud, <i>con su siguiente paso</i></div>
-    <div class="ven"><div class="bar"><i></i><i></i><i></i><span>Hoy · Centro de Formación Horizonte</span><span class="td">Ejemplo · datos simulados</span></div>
+    <div class="ven"><div class="bar"><i></i><i></i><i></i><span>Hoy · Horizonte Formación</span><span class="td">Ejemplo · datos simulados</span></div>
       <div class="hy-t"><b>Requieren atención</b><span>Ordenado por prioridad</span></div>
       <div class="hys" id="hys"></div></div></div>
 
   <!-- S12 · CTA -->
-  <div class="sc" id="s12"><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
-    <div class="ad" id="ad2"><div class="h"><div class="av">H</div><div><b>Centro de Formación Horizonte</b><small>Publicidad</small></div></div>
-      <div class="im"><h4>Curso de gestión administrativa. <i>Martes y jueves, 18:30.</i></h4><p>Pensado para quien trabaja por las mañanas y quiere cambiar de puesto.</p></div>
+  <div class="sc" id="s12"><div class="full" id="g6w"><img id="c-g6"></div><div id="preg">¿Cuántas se te están <i>congelando?</i></div><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
+    <div class="ad" id="ad2"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Curso online de gestión administrativa. <i>En directo y grabado.</i></h4><p>Para quien trabaja y quiere cambiar de puesto, a su ritmo.</p></div>
       <div class="bt" id="bt2">Más información</div></div>
     <div id="dedo"></div>
     <div id="logo"><img src="../2026-10-07-demo-caso-v2/rec/logo-blanco.png"><p>Diagnóstico sin coste · 30 min</p></div></div>
@@ -243,7 +246,7 @@ function win(t,a,b,fi=.15,fo=.04){ if(t<a||t>b) return 0; return Math.min(nm(t,a
 function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
 // datos de ejemplo de la bandeja
 const NOM=['Lucía','Marcos','Sara','Iván','Nerea','Pablo','Elena','Hugo','Carmen','Diego','Alba','Raúl','Marta','Jorge','Irene','Óscar','Paula','Álvaro','Noelia','Adrián','Rocío','Sergio','Laura','Víctor','Ainhoa','Rubén','Celia','Mario','Andrea','Javier'];
-const CUR=['Gestión administrativa','Auxiliar de enfermería','Inglés B2','Contabilidad','Gestión administrativa','Marketing digital'];
+const CUR=['Gestión administrativa · online','Auxiliar de enfermería','Inglés B2 · online','Contabilidad · online','Gestión administrativa · online','Marketing digital · online'];
 let h=''; NOM.forEach((n,i)=>{ h+=`<div class="sol${n==='Laura'?'" id="laura':''}"><span class="av">${n[0]}</span><span><b>Nueva solicitud · ${n}</b><small>${CUR[i%6]}</small></span><em class="h">hace ${i+2} min</em><span class="nv">A</span></div>`; }); $('lista').innerHTML=h;
 const NO=[['Nueva solicitud','Curso de gestión administrativa'],['Nueva solicitud','Auxiliar de enfermería'],['Nueva solicitud','Inglés B2'],['Nueva solicitud','Contabilidad']];
 $('notis').innerHTML=NO.map(x=>`<div class="noti"><span class="ic">H</span><span><b>${x[0]}</b><small>${x[1]}</small></span></div>`).join('');
@@ -253,21 +256,21 @@ const HY=[['Sergio','Gestión administrativa · llamada mañana a las 12:00, sin
  ['Carmen','Llamada celebrada ayer · sin resultado registrado','Registrar resultado y siguiente paso','al','Alta',2,2],
  ['Nerea','Preguntó por requisitos hace 26 h y nadie ha respondido','Responder hoy','u','Urgente',3,0],
  ['Pablo','Condiciones enviadas hace 5 días · sin respuesta','Mensaje con la duda más habitual','al','Alta',4,3],
- ['Irene','Pidió que le escribiéramos en la próxima convocatoria','Mensaje con las fechas','me','Media',5,5]];
+ ['Irene','Pidió que le escribiéramos en la próxima edición','Mensaje con las fechas','me','Media',5,5]];
 $('hys').innerHTML=HY.map(x=>`<div class="hy" data-y0="${x[5]}" data-y1="${x[6]}"${x[3]==='u'?' data-u="1"':''}><span class="a">${x[0][0]}</span><span><b>${x[0]}</b><small>${x[1]}</small><span class="ac">→ ${x[2]}</span></span><span class="pr ${x[3]}"${x[3]==='u'?' id="pu"':''}>● ${x[4]}</span></div>`).join('');
 // clips de Kling (126 fotogramas a 25 fps)
 const CLIP={movil:'k-movil-noche',dedos:'k-dedos',sofa:'k-sofa',com:'broll-panel'};
 const espera=[];
-function clip(id,nombre,t0,t){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
+function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25*vel))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
   if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
-const S={s0:[0,1.7], s1:[1.7,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.p4], s10:[T.p4,T.prueba], s11:[T.prueba,T.cta], s12:[T.cta,DUR+1]};
+const S={s0:[0,2.6], s1:[2.6,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.p4], s10:[T.p4,T.prueba], s11:[T.prueba,T.cta], s12:[T.cta,DUR+1]};
 window.setT=function(t){
   espera.length=0;
   for(const k in S){ const [a,b]=S[k]; const o=k==='s0'?win(t,a,b,.01,.04):win(t,a,b); $(k).style.opacity=o; $(k).style.transform=`translateY(${(1-out(nm(t,a,a+.25)))*40}px)`; }
   // rótulo del sector, del fotograma 0 al segundo 4
   $('sector').style.opacity=t<T.g1-.2?1:1-nm(t,T.g1-.2,T.g1);
   // S0
-  if(t<S.s0[1]+.1) clip('c-movil',CLIP.movil,0,t+1.2);
+  if(t<S.s0[1]+.1) clip('c-g1','G1_avalancha',0,t,1.6);
   document.querySelectorAll('.noti').forEach((n,i)=>show(n,nm(t,.15+i*.32,.3+i*.32),-30));
   // S1-S2: bandeja que se desplaza y frena en «calidad»
   const a1=S.s1[0]; show($('r1'),nm(t,T.g1-.1,T.g1+.2),20);
@@ -280,9 +283,10 @@ window.setT=function(t){
   // S4
   const nop=t>S.s4[0]+1.0; $('cest').textContent=nop?'No se presentó':'Confirmada'; $('cest').className='est '+(nop?'no':'pe'); $('cmal').style.background=nop?'#FFF1EA':'transparent';
   // S5
-  if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-sofa',CLIP.sofa,S.s5[0],t);
-  const fr=nm(t,S.s5[0]+.5,S.s5[1]-.5); $('c-sofa').style.filter=`saturate(${1-.55*fr}) hue-rotate(${18*fr}deg) brightness(${1-.25*fr})`;
-  show($('frio'),nm(t,S.s5[0]+.8,S.s5[0]+1.1),20); $('r5b').style.opacity=nm(t,S.s5[0]+2.6,S.s5[0]+2.9);
+  if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-g4','G4_congela',S.s5[0],t,5/(S.s5[1]-S.s5[0]));
+  if(t>=S.s6[0]-.1&&t<S.s6[1]+.1) clip('c-g5','G5_deshielo',S.s6[0],t,5/(S.s6[1]-S.s6[0]));
+  if(t>=S.s12[0]-.1&&t<T.c1+.2) clip('c-g6','G6_rebobina',S.s12[0],t,5/(T.c1-S.s12[0]));
+  show($('frio'),nm(t,S.s5[0]+.3,S.s5[0]+.6),20); show($('calor'),nm(t,S.s6[0]+1.4,S.s6[0]+1.7),20); $('r5b').style.opacity=nm(t,S.s5[0]+2.6,S.s5[0]+2.9);
   // S6
   document.querySelectorAll('.paso').forEach((p,i)=>show(p,nm(t,S.s6[0]+i*.5,S.s6[0]+.2+i*.5),20));
   // S7
@@ -312,7 +316,8 @@ window.setT=function(t){
   // S12: portada, dedo en el botón y logo
   $('bt2').style.background=t>T.c1+.1&&t<T.c1+.6?'#F4CC38':'transparent';
   const dd=$('dedo'); dd.style.left='485px'; dd.style.top=(V45?882:1192)+'px'; dd.style.opacity=win(t,T.c1-.2,T.c1+.9,.15,.2); dd.style.transform=`scale(${1-.25*Math.sin(Math.PI*nm(t,T.c1,T.c1+.4))})`;
-  const lg=nm(t,T.c2,T.c2+.4); $('logo').style.opacity=lg; $('ad2').style.opacity=1-lg; $('r12a').style.opacity=1-lg;
+  const lg=nm(t,T.c2,T.c2+.4), ap=nm(t,T.c1-.3,T.c1); $('logo').style.opacity=lg; $('ad2').style.opacity=ap*(1-lg); $('r12a').style.opacity=ap*(1-lg);
+  $('g6w').style.opacity=1-ap; show($('preg'),nm(t,S.s12[0]+.5,S.s12[0]+.8)*(1-ap),20);
   // etiqueta de ejemplo en las pantallas de la demo
   $('tag').style.opacity=0;
   // subtítulos
