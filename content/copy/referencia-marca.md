@@ -65,6 +65,10 @@
 ## Aprendizajes
 
 - **21-oct:** que haya demo no basta. Hay que comprobar qué pantallas tiene antes de prometer «del anuncio a la matrícula».
+- **[A · Maikel, 22-oct, vía Chief of Staff]** En la apertura de prospección no se describe el destino del anuncio («que llevan a un formulario donde…»): es demasiado básico y no aporta.
+  - **Apertura aprobada:** «He visto que tenéis anuncios activos en Meta de [PROGRAMA o SERVICIO].»
+  - **Regla general:** la señal se cita en una frase corta. No se describen los detalles obvios del recorrido del anuncio; lo que tiene que aportar algo es lo que viene después.
+  - Cambia la regla 7 (destino comprobado): el destino se sigue verificando antes de escribir, pero ya no se pone en el mensaje.
 
 ## Pendiente
 

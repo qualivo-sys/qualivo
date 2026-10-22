@@ -19,6 +19,8 @@
 
 ## A · Cuentas con email adecuado (anuncio y destino comprobados)
 
+> **22-oct (Maikel, vía CoS):** la apertura ya no menciona el destino del anuncio. El destino se sigue comprobando, pero no se escribe.
+
 | Día | Canal | Acción |
 |---|---|---|
 | 0 | Email | Presentación y oferta de un ejemplo aplicado a un programa |
@@ -33,7 +35,7 @@ Si no hay respuesta, termina el día 12. Después no se añaden mensajes por Lin
 
 > Hola, [nombre]:
 >
-> He visto que tenéis anuncios activos en Meta de [programa] que llevan a [destino comprobado].
+> He visto que tenéis anuncios activos en Meta de [programa].
 >
 > A veces el reto no es conseguir más solicitudes, sino que encajen y se presenten a la llamada.
 >
