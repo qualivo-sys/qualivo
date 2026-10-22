@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Landing Reformas v22 (22-oct-2026). Generada desde el diseño de /formacion/v21/ (que no cambia).
-     Portada con el vídeo del sistema del sector, casos, formulario arriba y, debajo, la demo por pestañas
-     (anuncio, formulario, WhatsApp, llamada, ficha, seguimientos y panel), con personas, mensajes y cifras de ejemplo.
+     Portada con el vídeo del sistema del sector, casos, sistema y demo por pestañas (anuncios, formulario, WhatsApp,
+     llamada simulada con audio, ficha, citas, seguimientos, recorrido y qué hacer hoy) con datos de ejemplo; después,
+     el formulario (el botón de arriba lleva a él). Sin precio (22-oct). Audio: /assets/audio/llamada-<sector>.mp3.
      Formulario: /diagnostico/landing.js → /api/diagnostico, con las preguntas de tamaño del funnel v2.
      noindex: borrador para que Maikel la apruebe. No sustituye a /reformas/. -->
 <title>Más obras de las solicitudes que ya recibes · Qualivo para reformas y construcción</title>
@@ -290,6 +291,11 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .linea b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde);padding-top:2px}
 .linea.cl b{color:#8A5A00}
 .linea.oculta{display:none}
+.audio-d{padding:16px 18px 0}
+.audio-d .ad-t{font-weight:800;font-size:15px;margin-bottom:8px}.audio-d .ad-t span{font-weight:600;color:var(--gris)}
+.audio-d audio{width:100%}
+.audio-d .ad-m{font-size:12.5px;color:var(--gris);margin-top:6px}
+.estado-v{border-color:rgba(244,204,56,.45)}.estado-v .k{color:var(--amarillo)}
 /* ficha */
 .ficha{padding:20px}
 .ficha-h{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
@@ -555,7 +561,162 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 
 
 
-<!-- 3 · CONVERSIÓN -->
+
+<!-- 4 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="sistema" aria-labelledby="t-prob">
+  <div class="wrap">
+    <p class="eyebrow">Dónde se pierden las obras</p>
+    <h2 id="t-prob">No basta con que te pidan presupuesto. Hay que convertirlo en obra.</h2>
+    <div class="problemas">
+      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>Piden presupuesto quienes no van a reformar</h3><p>Curiosos, zonas que no cubres y obras que no haces.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>La visita se retrasa o no se confirma</h3><p>Respuestas tardías, llamadas que no se cogen y visitas que se caen.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Los presupuestos se quedan sin respuesta</h3><p>Nadie vuelve a llamar a quien se lo está pensando.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Campañas por tipo de obra y por zona.</span></li>
+        <li><b>Convertir</b><span>Páginas y formularios que piden lo necesario para valorar la obra.</span></li>
+        <li><b>Responder</b><span>Cada solicitud, con respuesta y visita propuesta.</span></li>
+        <li><b>Facilitar la venta</b><span>Tu técnico, con el contexto de cada obra.</span></li>
+        <li><b>Medir</b><span>Qué campaña acaba en obra, y qué mejorar.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
+  <div class="wrap">
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">De la solicitud de presupuesto a la obra, paso a paso.</h2>
+    <p class="lead">Así lo viviría Marta, que quiere reformar la cocina, y así lo vería tu técnico comercial. Empresa, personas, mensajes y cifras de ejemplo.</p>
+    <div class="vistas" role="tablist" aria-label="Partes del sistema">
+      <button type="button" role="tab" id="tab-0" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
+      <button type="button" role="tab" id="tab-1" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
+      <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
+      <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
+      <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
+      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><p class="cap">Qué anuncio trae obras, no solo solicitudes</p>
+          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Visitas</th><th>Presupuestos</th><th>Aceptadas</th><th>Qué revisamos</th></tr></thead><tbody><tr><td><b>«Reforma de cocina · visita técnica en casa»</b><small>Meta · vídeo</small></td><td>96</td><td>41</td><td>25</td><td>20</td><td>7</td><td><span class="vd si">Comparar coste por obra</span></td></tr><tr><td><b>«Baño: mira antes obras terminadas»</b><small>Meta · carrusel</small></td><td>52</td><td>21</td><td>14</td><td>12</td><td>4</td><td><span class="vd mm">Seguir midiendo</span></td></tr><tr><td><b>«Presupuesto de reforma en 24 h»</b><small>Meta · formulario</small></td><td>36</td><td>9</td><td>7</td><td>6</td><td>1</td><td><span class="vd no">Analizar falta de encaje</span></td></tr></tbody></table></div></div></div>
+      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por obras, no por clics.</b> Cada anuncio con las solicitudes que trajo, cuántas eran de vuestra zona y de obras que hacéis, y cuántas acabaron en presupuesto aceptado. Antes de mover presupuesto se cruza con la inversión de cada anuncio para comparar el coste por obra. El de «presupuesto en 24 h» trae poco encaje: primero se miran los motivos.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="fm"><div><p class="q">¿Qué quieres reformar?</p><div class="ops"><span class="si">Cocina completa</span><span class="">Baño</span><span class="">Reforma integral</span><span class="">Otra obra</span></div></div><div><p class="q">¿Cuántos metros, más o menos?</p><div class="ops"><span class="">Menos de 10 m²</span><span class="si">Unos 12 m²</span><span class="">Más de 20 m²</span></div></div><div><p class="q">¿Para cuándo?</p><div class="ops"><span class="si">En los próximos 3 meses</span><span class="">Después del verano</span><span class="">Todavía no lo sé</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
+        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Reforma de cocina» · formulario</li><li><b>Obra</b>Cocina completa, unos 12 m²</li><li><b>Plazo</b>En los próximos 3 meses</li><li><b>Zona</b>Badalona</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
+          <p style="margin-top:12px">Cuatro preguntas que separan a quien va a reformar de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
+      <div class="vista-g">
+        <div>
+          <div class="tel"><div class="tel-h"><span class="av">R</span><span><b>Reformas Horizonte</b><small>Asistente con IA · en línea</small></span></div>
+            <div class="chat" id="chat" aria-live="polite"></div></div>
+          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
+        </div>
+        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
+          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.</p></div>
+      </div>
+      <p class="pista">Elige las respuestas de Marta en el móvil. Cada camino deja algo distinto en la ficha.</p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Simulación · opcional</span></div>
+          <div class="audio-d"><p class="ad-t">▶ Escucha la llamada <span>· el asistente llama a Marta · 42 s</span></p>
+            <audio id="voz-audio" controls preload="none" src="/assets/audio/llamada-reformas.mp3"></audio>
+            <p class="ad-m">Llamada simulada, con datos ficticios y voces generadas con la misma tecnología que usa el asistente. La voz de Marta simula el sonido de teléfono.</p></div>
+          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Marta</b><small>Jueves 18:20 · 42 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, Marta. Soy el asistente de voz con inteligencia artificial de Reformas Horizonte. Solicitaste presupuesto para reformar la cocina y autorizaste que te llamáramos. ¿Te viene bien hablar un momento?</span></div><div class="linea cl"><b>Marta</b><span>Sí. Es una cocina de unos doce metros, en Badalona.</span></div><div class="linea"><b>Asistente</b><span>Perfecto. ¿La reforma sería para los próximos tres meses?</span></div><div class="linea cl"><b>Marta</b><span>Sí. ¿Y más o menos cuánto costaría?</span></div><div class="linea"><b>Asistente</b><span>El precio te lo da el técnico después de ver la cocina, porque depende de la instalación y de los materiales. La visita no tiene coste. ¿Te viene mejor el jueves a las seis de la tarde o el sábado a las diez?</span></div><div class="linea cl"><b>Marta</b><span>El sábado a las diez.</span></div><div class="linea"><b>Asistente</b><span>Hecho. Te lo confirmo por WhatsApp y te lo recuerdo el viernes. Gracias, Marta.</span></div></div></div></div>
+        <div class="lado">
+          <div class="caja-d estado-v"><span class="k">Estado</span><p><b>Opcional, no incluido por defecto.</b> El asistente de voz se activa en cada proyecto solo después de configurarlo y probarlo con tu equipo. Mientras no está activo, todo sigue por WhatsApp.</p></div>
+          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
+            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
+            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
+            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
+            <li><span>No da precios ni promete nada: los da el técnico tras la visita.</span></li>
+          </ul></div>
+          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Marta, soy el asistente de Reformas Horizonte. Te llamaba por el presupuesto de la cocina. Te escribo por WhatsApp para que elijas día de visita.»</p></div>
+          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Obra, metros, zona y plazo confirmados, la visita técnica en la agenda y el resumen de la llamada en la ficha.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="ficha">
+            <div class="ficha-h"><div><h3>Marta R. · Badalona</h3><p>Anuncio «Reforma de cocina» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
+            <div class="notas">
+              <div class="nota-f"><small>Quién es · encaje</small><b>8<small>/10</small></b><div class="barra"><i style="--w:80%"></i></div></div>
+              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
+            </div>
+            <dl class="campos"><div><dt>Obra</dt><dd>Cocina completa, unos 12 m²</dd></div><div><dt>Cambios</dt><dd>Quitar un tabique</dd></div><div><dt>Plazo</dt><dd>En los próximos 3 meses</dd></div><div><dt>Duda</dt><dd>El precio: se da tras la visita</dd></div><div><dt>Por qué «quién es» 8</dt><dd>Obra que hacéis · zona que cubrís · plazo cercano</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió visita</dd></div><div><dt>Visita</dt><dd>Sábado 10:00 con Carlos · confirmada</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
+            <p class="resumen"><b>Resumen para Carlos</b>Marta quiere reformar la cocina en los próximos tres meses y quitar un tabique. Ha confirmado la visita técnica. Todavía no ha hablado de presupuesto.</p>
+            <p class="resumen"><b>Siguiente paso</b>Visita del sábado a las 10:00: medir, ver el tabique y preguntar si decide sola o con alguien. Presupuesto en el plazo que acordéis.</p>
+          </div></div>
+        <div class="caja-d"><span class="k">Cómo se ordena</span>
+          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
+          <ul>
+            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
+            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
+            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
+            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
+          </ul>
+          <p style="margin-top:12px">Carlos no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Visitas técnicas · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><div class="citas"><div class="cita"><time>Jue 17:00</time><span><b>Ana G.</b><small>Baño en Sabadell · recordatorio de la víspera enviado, sin respuesta</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Vie 18:00</time><span><b>Luis F.</b><small>Reforma integral en Badalona · pidió otra hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Sáb 10:00</time><span><b>Marta R.</b><small>Cocina de 12 m² en Badalona · respondió «sí» al recordatorio</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Mié 12:00</time><span><b>Pere M.</b><small>Visitada. Falta registrar el resultado y la fecha del presupuesto</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
+      <p class="nota-img"><span class="n">6</span><span><b>Visitas que se hacen.</b> Cada una con un recordatorio la víspera que pide un «sí» y un aviso cuando el técnico sale. Se ve quién ha confirmado, quién no y qué visita no tiene resultado registrado.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
+      <div class="vista-g">
+        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió presupuesto y no contesta</button>
+<button type="button" aria-pressed="false" data-seg="1">B · La visita técnica</button>
+<button type="button" aria-pressed="false" data-seg="2">C · Presupuesto enviado</button>
+<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Marta. Soy el asistente de Reformas Horizonte. Has pedido presupuesto para la cocina, unos 12 m² en Badalona. ¿Quieres que vaya un técnico a verla?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Marta, una cosa que cambia mucho el presupuesto: ¿la cocina mantiene la distribución o cambia algo?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">Cómo es la visita</div><div class="bu">Asunto: Qué miramos en la visita técnica de tu cocina. Medidas, instalaciones y lo que conviene decidir antes del presupuesto.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿La reforma sigue siendo para estos meses o lo dejamos para más adelante? Cualquiera de las dos está bien.
+<span class="chip">Estos meses</span><span class="chip">Más adelante</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la visita ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Marta: el sábado a las 10:00 va Carlos a ver la cocina. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Marta, mañana a las 10:00 va Carlos a ver la cocina. ¿Te sigue viniendo bien?
+<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">Carlos sale hacia tu casa. Llega sobre las 10:00.</div></li><li class="alert"><div class="cu">Si no está · 15 min después</div><div class="ti">Recuperación</div><div class="bu">Marta, Carlos ha pasado y no hemos dado contigo. ¿Te viene mejor otro día?
+<span class="chip">Jueves 18:00</span><span class="chip">Sábado 12:00</span></div></li><li class="stop"><div class="cu">Después de la visita</div><div class="ti">El técnico registra el resultado</div><div class="bu">Encaja, presupuesto pendiente, más adelante o no sigue.</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Para que no se quede en el aire. Tareas con borrador que envía el técnico.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para Carlos</div><div class="ti">Una duda</div><div class="bu">Marta, ¿pudiste ver el presupuesto? Con esta obra la duda que más sale es el plazo; te lo aclaro antes de que lo preguntes.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Un ejemplo</div><div class="bu">Te paso cómo quedó una cocina parecida a la tuya, por si ayuda a decidir.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">Lo cierro por mi lado. El presupuesto sigue valiendo hasta el día X; si cambia algo, me escribes.</div></li><li class="stop"><div class="cu">Presupuesto aceptado</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">La reforma es para después del verano y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Marta. Te escribimos unas semanas antes de septiembre con huecos de visita, solo una vez.</div></li><li class=""><div class="cu">Unas semanas antes · WhatsApp</div><div class="ti">Huecos de visita</div><div class="bu">Marta, como quedamos: ¿te va bien que Carlos vaya a ver la cocina estas semanas?
+<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
+        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
+          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
+          <li><span>Los mensajes de presupuesto son <b>tareas con borrador</b>: los revisa y los envía Carlos, no un robot.</span></li>
+          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
+          <li><span>Quien dice «no» no recibe nada más.</span></li>
+          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Reformas Horizonte</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="panel">
+          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>184</b></div><div class=""><small>Visitas realizadas</small><b>46</b></div><div class=""><small>Presupuestos enviados</small><b>38</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Obras aceptadas</small><b>12</b></div></div>
+          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>184</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:72%"></i></span><b>132</b></div><div class="et"><span>Zona y obra que hacéis</span><span class="br"><i style="width:39%"></i></span><b>71</b></div><div class="et"><span>Visita reservada</span><span class="br"><i style="width:30%"></i></span><b>55</b></div><div class="et"><span>Visita realizada</span><span class="br"><i style="width:25%"></i></span><b>46</b></div><div class="et"><span>Presupuesto enviado</span><span class="br"><i style="width:21%"></i></span><b>38</b></div><div class="et"><span>Presupuesto aceptado</span><span class="br"><i style="width:7%"></i></span><b>12</b></div></div></div>
+          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>Presupuestos sin respuesta</b> · 26 de 38 siguen sin decisión<small>→ Tareas a los 2, 5 y 10 días, con borrador para el técnico</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes de fuera de zona o de obras que no hacéis</b> · 61 de 132<small>→ Zona y tipo de obra en el anuncio y en el formulario</small></span></div><div class="fu"><span class="nf">3</span><span><b>Visitas reservadas que se caen</b> · 9 de 55<small>→ Recordatorio que pide un «sí» la víspera y aviso una hora antes</small></span></div></div></div></div>
+          <p class="pie-p">Cifras de ejemplo para una empresa de reformas. «Obras aceptadas» son presupuestos aceptados que registra el equipo; no son cobros.</p>
+        </div></div>
+      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden las obras.</b> Cada etapa con cuántas pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
+      <a class="abre-panel" href="/intelligence/?sector=reformas" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
+      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Reformas Horizonte</span><span class="tag-demo">Ejemplo</span></div>
+        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">JP</span><span class="qn"><b>Jordi P.</b><small>Presupuesto de baño enviado hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Carlos con una obra parecida</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">RT</span><span class="qn"><b>Rosa T.</b><small>Pidió presupuesto de cocina hace 3 h · No contesta al WhatsApp; aceptó llamadas</small></span><span class="ac">📞 Llamarla hoy</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">AG</span><span class="qn"><b>Ana G.</b><small>Visita mañana a las 17:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la visita</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">PM</span><span class="qn"><b>Pere M.</b><small>Visita hecha ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y fecha del presupuesto</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">MR</span><span class="qn"><b>Marta R.</b><small>Visita el sábado a las 10:00 · Cocina de 12 m² y un tabique</small></span><span class="ac">👤 Preparar la visita</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">TB</span><span class="qn"><b>Toni B.</b><small>Dijo «después del verano» y aceptó que le escribiéramos · Hoy toca</small></span><span class="ac">💬 Mensaje con huecos de visita</span><span class="pr media">● Media</span></div></div></div></div>
+      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> El técnico abre el día con esta lista: cada solicitud con su siguiente acción y su prioridad. No hay que acordarse entre obra y obra.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSIÓN: después del recorrido y la demo -->
 <section class="sec final" id="diagnostico" aria-labelledby="t-final">
   <div class="wrap">
     <div class="grid-f">
@@ -566,7 +727,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <ol class="despues" aria-label="Qué pasa después">
           <li><span><b>Cuéntanos tu empresa</b> y deja tus datos. Un minuto.</span></li>
           <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
-          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes y te decimos dónde está la mayor fuga.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes e identificamos qué conviene revisar primero con la información disponible.</span></li>
         </ol>
         <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
         <div class="maikel">
@@ -652,157 +813,6 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- Para tráfico de pago: portada, prueba y formulario arriba; el detalle, debajo -->
-<!-- 4 · PROBLEMA + SOLUCIÓN -->
-<section class="sec" id="sistema" aria-labelledby="t-prob">
-  <div class="wrap">
-    <p class="eyebrow">Dónde se pierden las obras</p>
-    <h2 id="t-prob">No basta con que te pidan presupuesto. Hay que convertirlo en obra.</h2>
-    <div class="problemas">
-      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>Piden presupuesto quienes no van a reformar</h3><p>Curiosos, zonas que no cubres y obras que no haces.</p></div>
-      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>La visita se retrasa o no se confirma</h3><p>Respuestas tardías, llamadas que no se cogen y visitas que se caen.</p></div>
-      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Los presupuestos se quedan sin respuesta</h3><p>Nadie vuelve a llamar a quien se lo está pensando.</p></div>
-    </div>
-    <div class="solucion">
-      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
-      <ol class="flujo">
-        <li><b>Atraer</b><span>Campañas por tipo de obra y por zona.</span></li>
-        <li><b>Convertir</b><span>Páginas y formularios que piden lo necesario para valorar la obra.</span></li>
-        <li><b>Responder</b><span>Cada solicitud, con respuesta y visita propuesta.</span></li>
-        <li><b>Facilitar la venta</b><span>Tu técnico, con el contexto de cada obra.</span></li>
-        <li><b>Medir</b><span>Qué campaña acaba en obra, y qué mejorar.</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
-<section class="sec demo" id="demo" aria-labelledby="t-demo">
-  <div class="wrap">
-    <p class="eyebrow">Así se ve por dentro</p>
-    <h2 id="t-demo">De la solicitud de presupuesto a la obra, paso a paso.</h2>
-    <p class="lead">Así lo viviría Marta, que quiere reformar la cocina, y así lo vería tu técnico comercial. Empresa, personas, mensajes y cifras de ejemplo.</p>
-    <div class="vistas" role="tablist" aria-label="Partes del sistema">
-      <button type="button" role="tab" id="tab-0" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
-      <button type="button" role="tab" id="tab-1" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
-      <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
-      <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
-      <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
-      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
-      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
-      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
-      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody"><p class="cap">Qué anuncio trae obras, no solo solicitudes</p>
-          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Visitas</th><th>Presupuestos</th><th>Aceptadas</th><th>Qué hacemos</th></tr></thead><tbody><tr><td><b>«Reforma de cocina · visita técnica en casa»</b><small>Meta · vídeo</small></td><td>96</td><td>41</td><td>25</td><td>20</td><td>7</td><td><span class="vd si">Escalar</span></td></tr><tr><td><b>«Baño: mira antes obras terminadas»</b><small>Meta · carrusel</small></td><td>52</td><td>21</td><td>14</td><td>12</td><td>4</td><td><span class="vd mm">Mantener</span></td></tr><tr><td><b>«Presupuesto de reforma en 24 h»</b><small>Meta · formulario</small></td><td>36</td><td>9</td><td>7</td><td>6</td><td>1</td><td><span class="vd no">Revisar mensaje</span></td></tr></tbody></table></div></div></div>
-      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por obras.</b> Cada anuncio con las solicitudes que trajo, cuántas eran de vuestra zona y de obras que hacéis, y cuántas acabaron en presupuesto aceptado. El que promete presupuesto rápido atrae a quien compara precios: se cambia el mensaje.</span></p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
-          <div class="fm"><div><p class="q">¿Qué quieres reformar?</p><div class="ops"><span class="si">Cocina completa</span><span class="">Baño</span><span class="">Reforma integral</span><span class="">Otra obra</span></div></div><div><p class="q">¿Cuántos metros, más o menos?</p><div class="ops"><span class="">Menos de 10 m²</span><span class="si">Unos 12 m²</span><span class="">Más de 20 m²</span></div></div><div><p class="q">¿Para cuándo?</p><div class="ops"><span class="si">En los próximos 3 meses</span><span class="">Después del verano</span><span class="">Todavía no lo sé</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
-        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Reforma de cocina» · formulario</li><li><b>Obra</b>Cocina completa, unos 12 m²</li><li><b>Plazo</b>En los próximos 3 meses</li><li><b>Zona</b>Badalona</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
-          <p style="margin-top:12px">Cuatro preguntas que separan a quien va a reformar de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
-      <div class="vista-g">
-        <div>
-          <div class="tel"><div class="tel-h"><span class="av">R</span><span><b>Reformas de ejemplo</b><small>Asistente con IA · en línea</small></span></div>
-            <div class="chat" id="chat" aria-live="polite"></div></div>
-          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
-        </div>
-        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
-          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.</p></div>
-      </div>
-      <p class="pista">Elige las respuestas de Marta en el móvil. Cada camino deja algo distinto en la ficha.</p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Ejemplo · transcripción</span></div>
-          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Marta</b><small>Jueves 18:20 · 1 min 50 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
-          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, ¿Marta? Soy el asistente de voz con IA de Reformas de ejemplo. Te llamo porque pediste presupuesto para la cocina y aceptaste que te llamáramos. ¿Tienes dos minutos?</span></div><div class="linea cl"><b>Marta</b><span>Sí, dime.</span></div><div class="linea"><b>Asistente</b><span>Para confirmar: cocina de unos 12 metros en Badalona, para los próximos tres meses. ¿Es así?</span></div><div class="linea cl"><b>Marta</b><span>Sí. Y quiero quitar un tabique.</span></div><div class="linea"><b>Asistente</b><span>Anotado. Eso lo mira Carlos en la visita técnica, que no tiene coste. Él te da el presupuesto después. ¿Te viene mejor el jueves a las 18:00 o el sábado a las 10:00?</span></div><div class="linea cl"><b>Marta</b><span>El sábado.</span></div><div class="linea"><b>Asistente</b><span>Hecho: el sábado a las 10:00 va Carlos. Te lo dejo por escrito en WhatsApp y te lo recuerdo el viernes. Gracias, Marta.</span></div></div></div></div>
-        <div class="lado">
-          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
-            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
-            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
-            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
-            <li><span>No da precios ni promete nada: los da el técnico tras la visita.</span></li>
-          </ul></div>
-          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Marta, soy el asistente de Reformas de ejemplo. Te llamaba por el presupuesto de la cocina. Te escribo por WhatsApp para que elijas día de visita.»</p></div>
-          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Tipo de obra, metros, plazo y zona confirmados, el cambio de distribución anotado, la visita en la agenda del técnico y el resumen en la ficha.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
-          <div class="ficha">
-            <div class="ficha-h"><div><h3>Marta R. · Badalona</h3><p>Anuncio «Reforma de cocina» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
-            <div class="notas">
-              <div class="nota-f"><small>Quién es · encaje</small><b>8<small>/10</small></b><div class="barra"><i style="--w:80%"></i></div></div>
-              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
-            </div>
-            <dl class="campos"><div><dt>Obra</dt><dd>Cocina completa, unos 12 m²</dd></div><div><dt>Cambios</dt><dd>Quitar un tabique</dd></div><div><dt>Plazo</dt><dd>En los próximos 3 meses</dd></div><div><dt>Duda</dt><dd>El precio: se da tras la visita</dd></div><div><dt>Por qué «quién es» 8</dt><dd>Obra que hacéis · zona que cubrís · plazo cercano</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió visita</dd></div><div><dt>Visita</dt><dd>Sábado 10:00 con Carlos · confirmada</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
-            <p class="resumen"><b>Resumen para Carlos</b>Marta quiere reformar la cocina en los próximos tres meses y quitar un tabique. Ha confirmado la visita técnica. Todavía no ha hablado de presupuesto.</p>
-            <p class="resumen"><b>Siguiente paso</b>Visita del sábado a las 10:00: medir, ver el tabique y preguntar si decide sola o con alguien. Presupuesto en el plazo que acordéis.</p>
-          </div></div>
-        <div class="caja-d"><span class="k">Cómo se ordena</span>
-          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
-          <ul>
-            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
-            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
-            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
-            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
-          </ul>
-          <p style="margin-top:12px">Carlos no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Visitas técnicas · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody"><div class="citas"><div class="cita"><time>Jue 17:00</time><span><b>Ana G.</b><small>Baño en Sabadell · recordatorio de la víspera enviado, sin respuesta</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Vie 18:00</time><span><b>Luis F.</b><small>Reforma integral en Badalona · pidió otra hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Sáb 10:00</time><span><b>Marta R.</b><small>Cocina de 12 m² en Badalona · respondió «sí» al recordatorio</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Mié 12:00</time><span><b>Pere M.</b><small>Visitada. Falta registrar el resultado y la fecha del presupuesto</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
-      <p class="nota-img"><span class="n">6</span><span><b>Visitas que se hacen.</b> Cada una con un recordatorio la víspera que pide un «sí» y un aviso cuando el técnico sale. Se ve quién ha confirmado, quién no y qué visita no tiene resultado registrado.</span></p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
-      <div class="vista-g">
-        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió presupuesto y no contesta</button>
-<button type="button" aria-pressed="false" data-seg="1">B · La visita técnica</button>
-<button type="button" aria-pressed="false" data-seg="2">C · Presupuesto enviado</button>
-<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Marta. Soy el asistente de Reformas de ejemplo. Has pedido presupuesto para la cocina, unos 12 m² en Badalona. ¿Quieres que vaya un técnico a verla?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Marta, una cosa que cambia mucho el presupuesto: ¿la cocina mantiene la distribución o cambia algo?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">Cómo es la visita</div><div class="bu">Asunto: Qué miramos en la visita técnica de tu cocina. Medidas, instalaciones y lo que conviene decidir antes del presupuesto.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿La reforma sigue siendo para estos meses o lo dejamos para más adelante? Cualquiera de las dos está bien.
-<span class="chip">Estos meses</span><span class="chip">Más adelante</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la visita ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Marta: el sábado a las 10:00 va Carlos a ver la cocina. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Marta, mañana a las 10:00 va Carlos a ver la cocina. ¿Te sigue viniendo bien?
-<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">Carlos sale hacia tu casa. Llega sobre las 10:00.</div></li><li class="alert"><div class="cu">Si no está · 15 min después</div><div class="ti">Recuperación</div><div class="bu">Marta, Carlos ha pasado y no hemos dado contigo. ¿Te viene mejor otro día?
-<span class="chip">Jueves 18:00</span><span class="chip">Sábado 12:00</span></div></li><li class="stop"><div class="cu">Después de la visita</div><div class="ti">El técnico registra el resultado</div><div class="bu">Encaja, presupuesto pendiente, más adelante o no sigue.</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Para que no se quede en el aire. Tareas con borrador que envía el técnico.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para Carlos</div><div class="ti">Una duda</div><div class="bu">Marta, ¿pudiste ver el presupuesto? Con esta obra la duda que más sale es el plazo; te lo aclaro antes de que lo preguntes.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Un ejemplo</div><div class="bu">Te paso cómo quedó una cocina parecida a la tuya, por si ayuda a decidir.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">Lo cierro por mi lado. El presupuesto sigue valiendo hasta el día X; si cambia algo, me escribes.</div></li><li class="stop"><div class="cu">Presupuesto aceptado</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">La reforma es para después del verano y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Marta. Te escribimos unas semanas antes de septiembre con huecos de visita, solo una vez.</div></li><li class=""><div class="cu">Unas semanas antes · WhatsApp</div><div class="ti">Huecos de visita</div><div class="bu">Marta, como quedamos: ¿te va bien que Carlos vaya a ver la cocina estas semanas?
-<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
-        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
-          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
-          <li><span>Los mensajes de presupuesto son <b>tareas con borrador</b>: los revisa y los envía Carlos, no un robot.</span></li>
-          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
-          <li><span>Quien dice «no» no recibe nada más.</span></li>
-          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Reformas de ejemplo</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="panel">
-          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>184</b></div><div class=""><small>Visitas realizadas</small><b>46</b></div><div class=""><small>Presupuestos enviados</small><b>38</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Obras aceptadas</small><b>12</b></div></div>
-          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>184</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:72%"></i></span><b>132</b></div><div class="et"><span>Zona y obra que hacéis</span><span class="br"><i style="width:39%"></i></span><b>71</b></div><div class="et"><span>Visita reservada</span><span class="br"><i style="width:30%"></i></span><b>55</b></div><div class="et"><span>Visita realizada</span><span class="br"><i style="width:25%"></i></span><b>46</b></div><div class="et"><span>Presupuesto enviado</span><span class="br"><i style="width:21%"></i></span><b>38</b></div><div class="et"><span>Presupuesto aceptado</span><span class="br"><i style="width:7%"></i></span><b>12</b></div></div></div>
-          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>Presupuestos sin respuesta</b> · 26 de 38 siguen sin decisión<small>→ Tareas a los 2, 5 y 10 días, con borrador para el técnico</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes de fuera de zona o de obras que no hacéis</b> · 61 de 132<small>→ Zona y tipo de obra en el anuncio y en el formulario</small></span></div><div class="fu"><span class="nf">3</span><span><b>Visitas reservadas que se caen</b> · 9 de 55<small>→ Recordatorio que pide un «sí» la víspera y aviso una hora antes</small></span></div></div></div></div>
-          <p class="pie-p">Cifras de ejemplo para una empresa de reformas. «Obras aceptadas» son presupuestos aceptados que registra el equipo; no son cobros.</p>
-        </div></div>
-      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden las obras.</b> Cada etapa con cuántas pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
-      <a class="abre-panel" href="/intelligence/?sector=reformas" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
-      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Reformas de ejemplo</span><span class="tag-demo">Ejemplo</span></div>
-        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">JP</span><span class="qn"><b>Jordi P.</b><small>Presupuesto de baño enviado hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Carlos con una obra parecida</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">RT</span><span class="qn"><b>Rosa T.</b><small>Pidió presupuesto de cocina hace 3 h · No contesta al WhatsApp; aceptó llamadas</small></span><span class="ac">📞 Llamarla hoy</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">AG</span><span class="qn"><b>Ana G.</b><small>Visita mañana a las 17:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la visita</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">PM</span><span class="qn"><b>Pere M.</b><small>Visita hecha ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y fecha del presupuesto</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">MR</span><span class="qn"><b>Marta R.</b><small>Visita el sábado a las 10:00 · Cocina de 12 m² y un tabique</small></span><span class="ac">👤 Preparar la visita</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">TB</span><span class="qn"><b>Toni B.</b><small>Dijo «después del verano» y aceptó que le escribiéramos · Hoy toca</small></span><span class="ac">💬 Mensaje con huecos de visita</span><span class="pr media">● Media</span></div></div></div></div>
-      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> El técnico abre el día con esta lista: cada solicitud con su siguiente acción y su prioridad. No hay que acordarse entre obra y obra.</span></p>
-    </div>
-  </div>
-</section>
-
 <!-- 6 · SERVICIO -->
 <section class="sec" aria-labelledby="t-serv">
   <div class="wrap">
@@ -841,7 +851,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <div>
         <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes de presupuesto. Si no, el diagnóstico dice si tiene sentido empezar y por dónde.</p></details>
         <details><summary>¿Qué incluye el servicio?</summary><p>Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
-        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No. Trabajamos sobre el que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu empresa.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No necesariamente. Primero revisamos tu CRM y qué podemos conectar: antes de proponer cambios, comprobamos qué permite el sistema que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu empresa.</p></details>
         <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántas obras quieras captar y de lo que deja una obra a tu empresa; en el diagnóstico hacemos esa cuenta con tus números y te decimos el alcance antes de empezar. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
       </div>
     </div>
@@ -867,7 +877,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   'use strict';
   function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
   var EV='reformas', PAG='reformas-v22';
-  var WA={"inicio": ["Hola, Marta. Soy el asistente de IA de Reformas de ejemplo. Has pedido presupuesto para reformar la cocina, unos 12 m² en Badalona, para los próximos tres meses.", "¿Qué te gustaría resolver primero?"], "ops": [["Que vengan a verla", "a1"], ["Un precio orientativo", "b1"], ["Es para más adelante", "c1"]], "nodos": {"a1": {"log": [["Quiere visita", "obra en los próximos 3 meses", "g"]], "bot": ["Perfecto. Para preparar la visita: ¿la cocina mantiene la distribución o cambia algo?"], "ops": [["Se mantiene", "a2"], ["Quiero quitar un tabique", "a2"]]}, "a2": {"log": [["Distribución anotada", "lo revisa el técnico en la visita", ""]], "bot": ["Anotado. La visita la hace Carlos, el técnico, y no tiene coste. El presupuesto te lo da él después. ¿Te viene mejor el jueves a las 18:00 o el sábado a las 10:00?"], "ops": [["Jueves a las 18:00", "a3"], ["Sábado a las 10:00", "a3"]]}, "a3": {"log": [["Visita técnica reservada", "confirmación simulada · recordatorio la víspera", "g"], ["Aviso a Carlos", "Marta R. · A · cocina 12 m² · Badalona · 3 meses", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna visita real", "bot": ["Hecho: Carlos irá a esa hora. La víspera te lo recuerdo por aquí, y si te surge algo, me lo dices y lo cambiamos."], "fin": true}, "b1": {"log": [["Pide precio", "no se da sin visita", "h"]], "bot": ["Lo entiendo. Sin ver la obra no puedo darte un precio que valga: depende de la instalación, los materiales y si cambia la distribución.", "Lo da Carlos después de la visita, que no tiene coste. ¿Quieres que te llame y te lo explique?"], "ops": [["Sí, que me llame", "b2"], ["Prefiero pensármelo", "b3"]]}, "b2": {"log": [["Llamada propuesta con Carlos", "prefiere teléfono", "g"]], "bot": ["Hecho. Carlos te llama mañana por la tarde y te explica cómo calcula el presupuesto. Si prefieres otra hora, dímelo aquí."], "fin": true}, "b3": {"log": [["Lo está pensando", "seguimiento con una duda útil, sin presión", "h"]], "bot": ["Claro. Te dejo por aquí qué miramos en la visita, por si te ayuda a decidir. Cuando quieras, me escribes."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa al técnico ahora", "h"]], "bot": ["Sin prisa. ¿Para cuándo lo estás pensando?"], "ops": [["Después del verano", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos unas semanas antes con huecos de visita?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos unas semanas antes, solo una vez y con huecos de visita."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.", "hora": "20:47", "log0": [["Origen", "Anuncio «Reforma de cocina» · formulario", ""], ["Obra", "Cocina completa, unos 12 m²", ""], ["Plazo", "En los próximos 3 meses", ""], ["Zona", "Badalona", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
+  var WA={"inicio": ["Hola, Marta. Soy el asistente de IA de Reformas Horizonte. Has pedido presupuesto para reformar la cocina, unos 12 m² en Badalona, para los próximos tres meses.", "¿Qué te gustaría resolver primero?"], "ops": [["Que vengan a verla", "a1"], ["Un precio orientativo", "b1"], ["Es para más adelante", "c1"]], "nodos": {"a1": {"log": [["Quiere visita", "obra en los próximos 3 meses", "g"]], "bot": ["Perfecto. Para preparar la visita: ¿la cocina mantiene la distribución o cambia algo?"], "ops": [["Se mantiene", "a2"], ["Quiero quitar un tabique", "a2"]]}, "a2": {"log": [["Distribución anotada", "lo revisa el técnico en la visita", ""]], "bot": ["Anotado. La visita la hace Carlos, el técnico, y no tiene coste. El presupuesto te lo da él después. ¿Te viene mejor el jueves a las 18:00 o el sábado a las 10:00?"], "ops": [["Jueves a las 18:00", "a3"], ["Sábado a las 10:00", "a3"]]}, "a3": {"log": [["Visita técnica reservada", "confirmación simulada · recordatorio la víspera", "g"], ["Aviso a Carlos", "Marta R. · A · cocina 12 m² · Badalona · 3 meses", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna visita real", "bot": ["Hecho: Carlos irá a esa hora. La víspera te lo recuerdo por aquí, y si te surge algo, me lo dices y lo cambiamos."], "fin": true}, "b1": {"log": [["Pide precio", "no se da sin visita", "h"]], "bot": ["Lo entiendo. Sin ver la obra no puedo darte un precio que valga: depende de la instalación, los materiales y si cambia la distribución.", "Lo da Carlos después de la visita, que no tiene coste. ¿Quieres que te llame y te lo explique?"], "ops": [["Sí, que me llame", "b2"], ["Prefiero pensármelo", "b3"]]}, "b2": {"log": [["Llamada propuesta con Carlos", "prefiere teléfono", "g"]], "bot": ["Hecho. Carlos te llama mañana por la tarde y te explica cómo calcula el presupuesto. Si prefieres otra hora, dímelo aquí."], "fin": true}, "b3": {"log": [["Lo está pensando", "seguimiento con una duda útil, sin presión", "h"]], "bot": ["Claro. Te dejo por aquí qué miramos en la visita, por si te ayuda a decidir. Cuando quieras, me escribes."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa al técnico ahora", "h"]], "bot": ["Sin prisa. ¿Para cuándo lo estás pensando?"], "ops": [["Después del verano", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos unas semanas antes con huecos de visita?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos unas semanas antes, solo una vez y con huecos de visita."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que la empresa le ha dado. No da precios ni plazos de obra: los da el técnico tras la visita. El equipo ve cada conversación y puede entrar cuando quiera.", "hora": "20:47", "log0": [["Origen", "Anuncio «Reforma de cocina» · formulario", ""], ["Obra", "Cocina completa, unos 12 m²", ""], ["Plazo", "En los próximos 3 meses", ""], ["Zona", "Badalona", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
   var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
   function contar(el,fin,dec,suf,ms){
@@ -937,7 +947,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   function abre(i,foco){ tabs.forEach(function(t,j){ var on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; document.getElementById('vista-'+j).hidden=!on; });
     if(foco) tabs[i].focus(); tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
     var v=tabs[i].getAttribute('data-vista'); if(!vistos[v]){ vistos[v]=1; track(EV+'_demo_vista',{vista:v,pagina:PAG}); }
-    if(v==='whatsapp'&&!waIni) waReset(); if(v==='llamada') vozPlay(); }
+    if(v==='whatsapp'&&!waIni) waReset(); }
+  var au=document.getElementById('voz-audio'); if(au) au.addEventListener('play',function una(){ track(EV+'_demo_audio',{pagina:PAG}); au.removeEventListener('play',una); });
   tabs.forEach(function(t,i){ t.addEventListener('click',function(){ abre(i); });
     t.addEventListener('keydown',function(e){ var k=e.key, n=tabs.length;
       if(k==='ArrowRight'){ e.preventDefault(); abre((i+1)%n,true); } else if(k==='ArrowLeft'){ e.preventDefault(); abre((i-1+n)%n,true); }

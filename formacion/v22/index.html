@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Landing Formación v22 (22-oct-2026). Generada desde el diseño de /formacion/v21/ (que no cambia).
-     Portada con el vídeo del sistema del sector, casos, formulario arriba y, debajo, la demo por pestañas
-     (anuncio, formulario, WhatsApp, llamada, ficha, seguimientos y panel), con personas, mensajes y cifras de ejemplo.
+     Portada con el vídeo del sistema del sector, casos, sistema y demo por pestañas (anuncios, formulario, WhatsApp,
+     llamada simulada con audio, ficha, citas, seguimientos, recorrido y qué hacer hoy) con datos de ejemplo; después,
+     el formulario (el botón de arriba lleva a él). Sin precio (22-oct). Audio: /assets/audio/llamada-<sector>.mp3.
      Formulario: /diagnostico/landing.js → /api/diagnostico, con las preguntas de tamaño del funnel v2.
      noindex: borrador para que Maikel la apruebe. No sustituye a /formacion/. -->
 <title>Más alumnos para tu centro · Qualivo para academias y centros de formación</title>
@@ -290,6 +291,11 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .linea b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--verde);padding-top:2px}
 .linea.cl b{color:#8A5A00}
 .linea.oculta{display:none}
+.audio-d{padding:16px 18px 0}
+.audio-d .ad-t{font-weight:800;font-size:15px;margin-bottom:8px}.audio-d .ad-t span{font-weight:600;color:var(--gris)}
+.audio-d audio{width:100%}
+.audio-d .ad-m{font-size:12.5px;color:var(--gris);margin-top:6px}
+.estado-v{border-color:rgba(244,204,56,.45)}.estado-v .k{color:var(--amarillo)}
 /* ficha */
 .ficha{padding:20px}
 .ficha-h{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
@@ -554,7 +560,162 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 
 
 
-<!-- 3 · CONVERSIÓN -->
+
+<!-- 4 · PROBLEMA + SOLUCIÓN -->
+<section class="sec" id="sistema" aria-labelledby="t-prob">
+  <div class="wrap">
+    <p class="eyebrow">Dónde se pierden los alumnos</p>
+    <h2 id="t-prob">No basta con conseguir solicitudes. Hay que convertirlas en alumnos.</h2>
+    <div class="problemas">
+      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>No llegan suficientes interesados adecuados</h3><p>Campañas poco enfocadas y páginas que no convierten.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>Los interesados no avanzan</h3><p>Respuestas tardías, falta de cualificación y dificultades para contactar.</p></div>
+      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Las oportunidades se enfrían</h3><p>Seguimientos que no se hacen y contactos que se quedan olvidados.</p></div>
+    </div>
+    <div class="solucion">
+      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
+      <ol class="flujo">
+        <li><b>Atraer</b><span>Campañas para el alumno que encaja con cada curso.</span></li>
+        <li><b>Convertir</b><span>Páginas y formularios que explican y cualifican.</span></li>
+        <li><b>Responder</b><span>Cada solicitud, con respuesta y siguiente paso.</span></li>
+        <li><b>Facilitar la venta</b><span>Tu equipo, con el contexto de cada alumno.</span></li>
+        <li><b>Medir</b><span>Qué campaña acaba en matrícula, y qué mejorar.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
+<section class="sec demo" id="demo" aria-labelledby="t-demo">
+  <div class="wrap">
+    <p class="eyebrow">Así se ve por dentro</p>
+    <h2 id="t-demo">Del anuncio a la matrícula, paso a paso.</h2>
+    <p class="lead">Así lo viviría Laura, que trabaja por las mañanas y quiere formarse para cambiar de puesto, y así lo vería tu equipo de admisiones. Academia, personas, mensajes y cifras de ejemplo.</p>
+    <div class="vistas" role="tablist" aria-label="Partes del sistema">
+      <button type="button" role="tab" id="tab-0" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
+      <button type="button" role="tab" id="tab-1" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
+      <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
+      <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
+      <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
+      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
+      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
+      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
+      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><p class="cap">Qué anuncio trae alumnos, no solo solicitudes</p>
+          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Llamadas celebradas</th><th>Matrículas</th><th>Qué revisamos</th></tr></thead><tbody><tr><td><b>«Horarios compatibles con trabajo»</b><small>Meta · vídeo</small></td><td>42</td><td>17</td><td>8</td><td>3</td><td><span class="vd si">Comparar coste por matrícula</span></td></tr><tr><td><b>«Cambia de puesto con una formación»</b><small>Meta · carrusel</small></td><td>35</td><td>9</td><td>4</td><td>1</td><td><span class="vd mm">Seguir midiendo</span></td></tr><tr><td><b>«Próxima convocatoria»</b><small>Meta · formulario</small></td><td>58</td><td>11</td><td>5</td><td>2</td><td><span class="vd no">Analizar falta de encaje</span></td></tr></tbody></table></div></div></div>
+      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por matrículas, no por clics.</b> Cada anuncio con las solicitudes que trajo, cuántas encajaban con el curso y cuántas acabaron matriculadas. Antes de mover presupuesto se cruza con la inversión de cada anuncio para comparar el coste por matrícula. El de la próxima convocatoria trae más solicitudes y menos encaje: primero se miran los motivos.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="fm"><div><p class="q">¿Qué te gustaría conseguir?</p><div class="ops"><span class="si">Formarme para cambiar de puesto</span><span class="">Empezar a trabajar</span><span class="">Otro motivo</span></div></div><div><p class="q">¿Cuál es tu situación ahora?</p><div class="ops"><span class="si">Trabajo por las mañanas</span><span class="">Trabajo a jornada completa</span><span class="">No trabajo ahora</span></div></div><div><p class="q">¿Qué te gustaría resolver primero?</p><div class="ops"><span class="si">Si los horarios me encajan</span><span class="">Precio y forma de pago</span><span class="">Requisitos</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
+        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Curso de gestión administrativa» · formulario</li><li><b>Objetivo</b>Formarse para cambiar de puesto</li><li><b>Situación</b>Trabaja por las mañanas</li><li><b>Duda principal</b>Si los horarios le encajan</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
+          <p style="margin-top:12px">Cuatro preguntas que separan a quien encaja con el curso de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
+      <div class="vista-g">
+        <div>
+          <div class="tel"><div class="tel-h"><span class="av">C</span><span><b>Centro de Formación Horizonte</b><small>Asistente con IA · en línea</small></span></div>
+            <div class="chat" id="chat" aria-live="polite"></div></div>
+          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
+        </div>
+        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
+          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que el centro le ha dado. Precio, pago, requisitos y titulación los confirma admisiones, que ve cada conversación y puede entrar cuando quiera.</p></div>
+      </div>
+      <p class="pista">Elige las respuestas de Laura en el móvil. Cada camino deja algo distinto en la ficha.</p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Simulación · opcional</span></div>
+          <div class="audio-d"><p class="ad-t">▶ Escucha la llamada <span>· el asistente llama a Laura · 39 s</span></p>
+            <audio id="voz-audio" controls preload="none" src="/assets/audio/llamada-formacion.mp3"></audio>
+            <p class="ad-m">Llamada simulada, con datos ficticios y voces generadas con la misma tecnología que usa el asistente. La voz de Laura simula el sonido de teléfono.</p></div>
+          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Laura</b><small>Jueves 17:10 · 39 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, Laura. Soy el asistente de voz con inteligencia artificial del Centro de Formación Horizonte. Solicitaste información sobre el curso de gestión administrativa y autorizaste que te llamáramos. ¿Te viene bien hablar un momento?</span></div><div class="linea cl"><b>Laura</b><span>Sí. Quería saber si puedo hacerlo trabajando por las mañanas.</span></div><div class="linea"><b>Asistente</b><span>Las clases son online, los martes y jueves de seis y media a ocho de la tarde. ¿Ese horario te encajaría?</span></div><div class="linea cl"><b>Laura</b><span>Sí. ¿Y cuánto cuesta?</span></div><div class="linea"><b>Asistente</b><span>El equipo de admisiones te explicará el precio y las opciones de pago. Si quieres, les paso tu consulta indicando que el horario te encaja.</span></div><div class="linea cl"><b>Laura</b><span>Sí, perfecto.</span></div></div></div></div>
+        <div class="lado">
+          <div class="caja-d estado-v"><span class="k">Estado</span><p><b>Opcional, no incluido por defecto.</b> El asistente de voz se activa en cada proyecto solo después de configurarlo y probarlo con tu equipo. Mientras no está activo, todo sigue por WhatsApp.</p></div>
+          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
+            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
+            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
+            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
+            <li><span>No da precios ni promete nada: eso lo confirma admisiones.</span></li>
+          </ul></div>
+          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Laura, soy el asistente del Centro de Formación Horizonte. Te llamaba por el curso de gestión administrativa. Te escribo por WhatsApp para que elijas cuándo te llamamos.»</p></div>
+          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Horario confirmado, la consulta de precio y pago para admisiones y el resumen de la llamada en la ficha.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
+      <div class="vista-g">
+        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
+          <div class="ficha">
+            <div class="ficha-h"><div><h3>Laura · interesada en el curso de gestión administrativa</h3><p>Anuncio «Curso de gestión administrativa» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
+            <div class="notas">
+              <div class="nota-f"><small>Quién es · encaje</small><b>7<small>/10</small></b><div class="barra"><i style="--w:70%"></i></div></div>
+              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
+            </div>
+            <dl class="campos"><div><dt>Objetivo</dt><dd>Formarse para cambiar de puesto</dd></div><div><dt>Disponibilidad</dt><dd>Compatible con martes y jueves de 18:30 a 20:00</dd></div><div><dt>Ya explicado</dt><dd>Modalidad y horario</dd></div><div><dt>Pendiente</dt><dd>Metodología y opciones de pago</dd></div><div><dt>Por qué «quién es» 7</dt><dd>Curso que encaja con su objetivo · disponibilidad confirmada</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió llamada con admisiones</dd></div><div><dt>Contacto</dt><dd>Llamada con Marta · miércoles 16:00</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
+            <p class="resumen"><b>Resumen para Marta</b>Laura está valorando el curso y ha confirmado que el horario le encaja. Quiere entender cómo son las clases y las opciones de pago antes de decidir.</p>
+            <p class="resumen"><b>Siguiente paso</b>Llamada del miércoles a las 16:00: explicar metodología y pago. La matrícula solo cuenta cuando la registra admisiones.</p>
+          </div></div>
+        <div class="caja-d"><span class="k">Cómo se ordena</span>
+          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
+          <ul>
+            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
+            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
+            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
+            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
+          </ul>
+          <p style="margin-top:12px">Marta no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamadas con admisiones · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="vbody"><div class="citas"><div class="cita"><time>Mié 16:00</time><span><b>Laura</b><small>Gestión administrativa · respondió «sí» al recordatorio de la víspera</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Jue 12:00</time><span><b>Sergio</b><small>Gestión administrativa · recordatorio enviado, sin respuesta todavía</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Jue 18:30</time><span><b>Javier</b><small>Pidió cambiar la hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Mar 17:00</time><span><b>Carmen</b><small>Celebrada. Falta registrar el resultado y el siguiente paso</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
+      <p class="nota-img"><span class="n">6</span><span><b>Llamadas que se celebran.</b> Cada una con un recordatorio la víspera que pide un «sí» y otro una hora antes. Se ve quién ha confirmado, quién no y qué llamada no tiene resultado registrado.</span></p>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
+      <div class="vista-g">
+        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió información y no contesta</button>
+<button type="button" aria-pressed="false" data-seg="1">B · La llamada con admisiones</button>
+<button type="button" aria-pressed="false" data-seg="2">C · Condiciones enviadas</button>
+<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Laura. Soy el asistente de IA del Centro de Formación Horizonte. Las clases son martes y jueves de 18:30 a 20:00. ¿Te encajaría?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Laura, una pregunta que nos hacen mucho: las clases quedan grabadas por si un día no puedes conectarte. ¿Te cuento algo más del curso?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">El programa por escrito</div><div class="bu">Asunto: El curso de gestión administrativa, con fechas y horarios. Lo que verás, cuánto tiempo a la semana y cómo es la próxima convocatoria.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿Lo sigues pensando para esta convocatoria o lo dejamos para la siguiente? Cualquiera de las dos está bien.
+<span class="chip">Esta</span><span class="chip">La siguiente</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la llamada reservada ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Laura: el miércoles a las 16:00 te llama Marta, de admisiones. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Laura, mañana a las 16:00 hablas con Marta sobre las clases y el pago. ¿Te sigue viniendo bien?
+<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">A las 16:00 te llama Marta. ¿Sigue bien la hora?</div></li><li class="alert"><div class="cu">Si no lo coge · 5 min después</div><div class="ti">Recuperación</div><div class="bu">Laura, Marta te ha llamado y no hemos dado contigo. ¿Te viene mejor mañana?
+<span class="chip">10:00</span><span class="chip">16:00</span><span class="chip">18:00</span></div></li><li class="stop"><div class="cu">Después de la llamada</div><div class="ti">Admisiones registra el resultado</div><div class="bu">Encaja, duda pendiente, más adelante o no sigue. Sin resultado, aparece en «Qué hacer hoy».</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Admisiones mandó precio y forma de pago.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para admisiones</div><div class="ti">Un mensaje con borrador</div><div class="bu">¿Pudiste verlo, Laura? Si hay algo de las condiciones que quieras aclarar antes de decidir, dímelo.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Lo que más se pregunta</div><div class="bu">Una duda habitual resuelta: cómo se recuperan las clases que no puedas seguir en directo.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">La matrícula de esta convocatoria cierra el día X. Si no es el momento, lo dejamos para la siguiente.</div></li><li class="stop"><div class="cu">Matrícula registrada</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">Dijo que lo pensaba para otra convocatoria y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Laura. Te escribimos cuando se acerque la próxima convocatoria, solo una vez y con las fechas.</div></li><li class=""><div class="cu">Unas semanas antes · WhatsApp</div><div class="ti">Las fechas</div><div class="bu">Ya tenemos fechas de la próxima convocatoria del curso. ¿Te las paso?
+<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
+        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
+          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
+          <li><span>Los mensajes de condiciones son <b>tareas con borrador</b>: los revisa y los envía Marta, no un robot.</span></li>
+          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
+          <li><span>Quien dice «no» no recibe nada más.</span></li>
+          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
+      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Centro de Formación Horizonte</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
+        <div class="panel">
+          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>135</b></div><div class=""><small>Con encaje</small><b>37</b></div><div class=""><small>Llamadas con admisiones</small><b>17</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Matrículas registradas</small><b>6</b></div></div>
+          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>135</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:73%"></i></span><b>98</b></div><div class="et"><span>Con encaje</span><span class="br"><i style="width:27%"></i></span><b>37</b></div><div class="et"><span>Llamada reservada</span><span class="br"><i style="width:16%"></i></span><b>22</b></div><div class="et"><span>Llamada celebrada</span><span class="br"><i style="width:13%"></i></span><b>17</b></div><div class="et"><span>Matrícula</span><span class="br"><i style="width:4%"></i></span><b>6</b></div></div></div>
+          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>De la llamada celebrada a la matrícula</b> · 11 de 17 siguen sin decidir<small>→ Condiciones con tareas a los 2, 5 y 10 días, con borrador para admisiones</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes que no contestan</b> · 37 de 135 no responden al primer mensaje<small>→ Llamada solo si la aceptaron y un WhatsApp con una duda concreta al día siguiente</small></span></div><div class="fu"><span class="nf">3</span><span><b>Llamadas reservadas que no se celebran</b> · 5 de 22<small>→ Recordatorio que pide un «sí» y recuperación a los 5 minutos si no lo coge</small></span></div></div></div></div>
+          <p class="pie-p">Cifras de ejemplo para una academia. Las matrículas son las que registra admisiones; no son cobros.</p>
+        </div></div>
+      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden los alumnos.</b> Cada etapa con cuántos pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
+      <a class="abre-panel" href="/intelligence/?sector=formacion" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
+    </div>
+    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
+      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Centro de Formación Horizonte</span><span class="tag-demo">Ejemplo</span></div>
+        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">N</span><span class="qn"><b>Nerea</b><small>Curso de gestión administrativa · Preguntó por requisitos hace 26 h y nadie ha respondido</small></span><span class="ac">💬 Responder hoy</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">S</span><span class="qn"><b>Sergio</b><small>Llamada mañana a las 12:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la llamada</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">C</span><span class="qn"><b>Carmen</b><small>Llamada celebrada ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y siguiente paso</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">P</span><span class="qn"><b>Pablo</b><small>Condiciones enviadas hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Marta con la duda más habitual</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">L</span><span class="qn"><b>Laura</b><small>Llamada el miércoles a las 16:00 · Quiere metodología y pago</small></span><span class="ac">👤 Preparar la llamada</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">I</span><span class="qn"><b>Irene</b><small>Pidió que le escribiéramos en la próxima convocatoria · Hoy toca</small></span><span class="ac">💬 Mensaje con las fechas</span><span class="pr media">● Media</span></div></div></div></div>
+      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> Admisiones abre el día con esta lista: cada interesado con su siguiente acción y su prioridad. No hay que buscar en el CRM.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSIÓN: después del recorrido y la demo -->
 <section class="sec final" id="diagnostico" aria-labelledby="t-final">
   <div class="wrap">
     <div class="grid-f">
@@ -565,7 +726,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <ol class="despues" aria-label="Qué pasa después">
           <li><span><b>Cuéntanos tu centro</b> y deja tus datos. Un minuto.</span></li>
           <li><span><b>Elige la hora</b> que te venga bien en el calendario.</span></li>
-          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes y te decimos dónde está la mayor fuga.</span></li>
+          <li><span><b>En la videollamada</b> repasamos tu captación y tus solicitudes e identificamos qué conviene revisar primero con la información disponible.</span></li>
         </ol>
         <p class="huecos" id="huecos">Próximos huecos en la agenda: <b id="huecos-t"></b></p>
         <div class="maikel">
@@ -651,157 +812,6 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   </div>
 </section>
 
-<!-- Para tráfico de pago: portada, prueba y formulario arriba; el detalle, debajo -->
-<!-- 4 · PROBLEMA + SOLUCIÓN -->
-<section class="sec" id="sistema" aria-labelledby="t-prob">
-  <div class="wrap">
-    <p class="eyebrow">Dónde se pierden los alumnos</p>
-    <h2 id="t-prob">No basta con conseguir solicitudes. Hay que convertirlas en alumnos.</h2>
-    <div class="problemas">
-      <div class="pb"><span class="x" aria-hidden="true">1</span><h3>No llegan suficientes interesados adecuados</h3><p>Campañas poco enfocadas y páginas que no convierten.</p></div>
-      <div class="pb"><span class="x" aria-hidden="true">2</span><h3>Los interesados no avanzan</h3><p>Respuestas tardías, falta de cualificación y dificultades para contactar.</p></div>
-      <div class="pb"><span class="x" aria-hidden="true">3</span><h3>Las oportunidades se enfrían</h3><p>Seguimientos que no se hacen y contactos que se quedan olvidados.</p></div>
-    </div>
-    <div class="solucion">
-      <div class="t"><h3>Qualivo conecta todo el recorrido en un solo sistema.</h3><span>Medible de punta a punta</span></div>
-      <ol class="flujo">
-        <li><b>Atraer</b><span>Campañas para el alumno que encaja con cada curso.</span></li>
-        <li><b>Convertir</b><span>Páginas y formularios que explican y cualifican.</span></li>
-        <li><b>Responder</b><span>Cada solicitud, con respuesta y siguiente paso.</span></li>
-        <li><b>Facilitar la venta</b><span>Tu equipo, con el contexto de cada alumno.</span></li>
-        <li><b>Medir</b><span>Qué campaña acaba en matrícula, y qué mejorar.</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · DEMOSTRACIÓN: el recorrido de ejemplo, del anuncio al panel. Todo ficticio. -->
-<section class="sec demo" id="demo" aria-labelledby="t-demo">
-  <div class="wrap">
-    <p class="eyebrow">Así se ve por dentro</p>
-    <h2 id="t-demo">Del anuncio a la matrícula, paso a paso.</h2>
-    <p class="lead">Así lo viviría Laura, que trabaja por las mañanas y quiere formarse para cambiar de puesto, y así lo vería tu equipo de admisiones. Academia, personas, mensajes y cifras de ejemplo.</p>
-    <div class="vistas" role="tablist" aria-label="Partes del sistema">
-      <button type="button" role="tab" id="tab-0" aria-controls="vista-0" aria-selected="true" tabindex="0" data-vista="anuncios"><i>1</i>Anuncios</button>
-      <button type="button" role="tab" id="tab-1" aria-controls="vista-1" aria-selected="false" tabindex="-1" data-vista="formulario"><i>2</i>Formulario</button>
-      <button type="button" role="tab" id="tab-2" aria-controls="vista-2" aria-selected="false" tabindex="-1" data-vista="whatsapp"><i>3</i>WhatsApp</button>
-      <button type="button" role="tab" id="tab-3" aria-controls="vista-3" aria-selected="false" tabindex="-1" data-vista="llamada"><i>4</i>Llamada</button>
-      <button type="button" role="tab" id="tab-4" aria-controls="vista-4" aria-selected="false" tabindex="-1" data-vista="ficha"><i>5</i>Ficha</button>
-      <button type="button" role="tab" id="tab-5" aria-controls="vista-5" aria-selected="false" tabindex="-1" data-vista="citas"><i>6</i>Citas</button>
-      <button type="button" role="tab" id="tab-6" aria-controls="vista-6" aria-selected="false" tabindex="-1" data-vista="seguimientos"><i>7</i>Seguimientos</button>
-      <button type="button" role="tab" id="tab-7" aria-controls="vista-7" aria-selected="false" tabindex="-1" data-vista="recorrido"><i>8</i>Dónde se pierden</button>
-      <button type="button" role="tab" id="tab-8" aria-controls="vista-8" aria-selected="false" tabindex="-1" data-vista="hoy"><i>9</i>Qué hacer hoy</button>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-0" aria-labelledby="tab-0">
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Anuncios · 30 días</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody"><p class="cap">Qué anuncio trae alumnos, no solo solicitudes</p>
-          <div class="vtabla"><table><thead><tr><th>Anuncio</th><th>Solicitudes</th><th>Con encaje</th><th>Llamadas celebradas</th><th>Matrículas</th><th>Qué hacemos</th></tr></thead><tbody><tr><td><b>«Horarios compatibles con trabajo»</b><small>Meta · vídeo</small></td><td>42</td><td>17</td><td>8</td><td>3</td><td><span class="vd si">Escalar</span></td></tr><tr><td><b>«Cambia de puesto con una formación»</b><small>Meta · carrusel</small></td><td>35</td><td>9</td><td>4</td><td>1</td><td><span class="vd mm">Mantener</span></td></tr><tr><td><b>«Próxima convocatoria»</b><small>Meta · formulario</small></td><td>58</td><td>11</td><td>5</td><td>2</td><td><span class="vd no">Revisar público</span></td></tr></tbody></table></div></div></div>
-      <p class="nota-img"><span class="n">1</span><span><b>Anuncios medidos por matrículas.</b> Cada anuncio con las solicitudes que trajo, cuántas encajaban con el curso y cuántas acabaron matriculadas. El de la próxima convocatoria trae más solicitudes, pero menos alumnos: se revisa a quién se enseña.</span></p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-1" aria-labelledby="tab-1" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Formulario del anuncio</span><span class="tag-demo">Ejemplo</span></div>
-          <div class="fm"><div><p class="q">¿Qué te gustaría conseguir?</p><div class="ops"><span class="si">Formarme para cambiar de puesto</span><span class="">Empezar a trabajar</span><span class="">Otro motivo</span></div></div><div><p class="q">¿Cuál es tu situación ahora?</p><div class="ops"><span class="si">Trabajo por las mañanas</span><span class="">Trabajo a jornada completa</span><span class="">No trabajo ahora</span></div></div><div><p class="q">¿Qué te gustaría resolver primero?</p><div class="ops"><span class="si">Si los horarios me encajan</span><span class="">Precio y forma de pago</span><span class="">Requisitos</span></div></div><div><p class="q">¿Cómo prefieres que te contactemos?</p><div class="ops"><span class="si">WhatsApp</span><span class="">Llamada</span><span class="">Correo</span></div></div><p class="perm">☑ <span>Acepto que me escriban por WhatsApp. <b>☐ Acepto también una llamada</b> (casilla aparte, sin marcar por defecto).</span></p></div></div>
-        <div class="caja-d"><span class="k">Por detrás · lo que entra en el CRM</span><ul class="log"><li><b>Origen</b>Anuncio «Curso de gestión administrativa» · formulario</li><li><b>Objetivo</b>Formarse para cambiar de puesto</li><li><b>Situación</b>Trabaja por las mañanas</li><li><b>Duda principal</b>Si los horarios le encajan</li><li><b>Canal</b>WhatsApp, con permiso para escribirle</li></ul>
-          <p style="margin-top:12px">Cuatro preguntas que separan a quien encaja con el curso de quien solo mira. Con esto, el asistente no pregunta lo que ya se sabe.</p></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-2" aria-labelledby="tab-2" hidden>
-      <div class="vista-g">
-        <div>
-          <div class="tel"><div class="tel-h"><span class="av">A</span><span><b>Academia de ejemplo</b><small>Asistente con IA · en línea</small></span></div>
-            <div class="chat" id="chat" aria-live="polite"></div></div>
-          <div style="text-align:center"><button type="button" class="reini" id="wa-reini">↺ Empezar de nuevo</button></div>
-        </div>
-        <div class="caja-d"><span class="k">Por detrás · lo que ve tu equipo</span><ul class="log" id="wa-log"></ul>
-          <p style="margin-top:12px">El asistente se presenta como IA y solo usa la información que el centro le ha dado. Precio, pago, requisitos y titulación los confirma admisiones, que ve cada conversación y puede entrar cuando quiera.</p></div>
-      </div>
-      <p class="pista">Elige las respuestas de Laura en el móvil. Cada camino deja algo distinto en la ficha.</p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-3" aria-labelledby="tab-3" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamada del asistente de voz</span><span class="tag-demo">Ejemplo · transcripción</span></div>
-          <div class="voz"><div class="voz-h"><span><b>Llamada saliente a Laura</b><small>Jueves 17:10 · 2 min 05 s</small></span><span class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
-          <div id="voz-t"><div class="linea"><b>Asistente</b><span>Hola, ¿Laura? Soy el asistente de voz con IA de la Academia de ejemplo. Te llamo porque pediste información del curso de gestión administrativa y aceptaste que te llamáramos. ¿Tienes dos minutos?</span></div><div class="linea cl"><b>Laura</b><span>Sí, dime.</span></div><div class="linea"><b>Asistente</b><span>Gracias. Querías comprobar los horarios: las clases son en directo, martes y jueves de 18:30 a 20:00. ¿Te encajan?</span></div><div class="linea cl"><b>Laura</b><span>Sí, por las tardes estoy libre.</span></div><div class="linea"><b>Asistente</b><span>Perfecto. ¿Hay algo que necesites resolver antes de decidir?</span></div><div class="linea cl"><b>Laura</b><span>Cómo son las clases y cuánto cuesta.</span></div><div class="linea"><b>Asistente</b><span>Eso te lo explica mejor admisiones, que es quien confirma el precio y las formas de pago. ¿Te va bien que te llame Marta el miércoles a las 16:00?</span></div><div class="linea cl"><b>Laura</b><span>Sí, el miércoles.</span></div><div class="linea"><b>Asistente</b><span>Hecho. Te lo dejo por escrito en WhatsApp y te lo recuerdo el día antes. Gracias, Laura.</span></div></div></div></div>
-        <div class="lado">
-          <div class="caja-d"><span class="k">Reglas de la llamada</span><ul>
-            <li><span>Solo llama si la persona <b>marcó la casilla de llamada</b>. Si no, todo sigue por WhatsApp.</span></li>
-            <li><span>Dice desde el principio que es <b>un asistente con IA</b>.</span></li>
-            <li><span>Un intento. Si no contesta, deja un mensaje corto y sigue por WhatsApp.</span></li>
-            <li><span>No da precios ni promete nada: eso lo confirma admisiones.</span></li>
-          </ul></div>
-          <div class="caja-d"><span class="k">Si salta el buzón</span><p>«Hola, Laura, soy el asistente de la Academia de ejemplo. Te llamaba por el curso de gestión administrativa. Te escribo por WhatsApp para que elijas cuándo te llamamos.»</p></div>
-          <div class="caja-d"><span class="k">Qué deja en la ficha</span><p>Horario confirmado, la duda (metodología y precio), la llamada con admisiones en la agenda y el resumen en la ficha.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-4" aria-labelledby="tab-4" hidden>
-      <div class="vista-g">
-        <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Ficha en el CRM</span><span class="tag-demo">Ejemplo</span></div>
-          <div class="ficha">
-            <div class="ficha-h"><div><h3>Laura · interesada en el curso de gestión administrativa</h3><p>Anuncio «Curso de gestión administrativa» → formulario → WhatsApp con el asistente</p></div><span class="nivel" title="Nivel">A</span></div>
-            <div class="notas">
-              <div class="nota-f"><small>Quién es · encaje</small><b>7<small>/10</small></b><div class="barra"><i style="--w:70%"></i></div></div>
-              <div class="nota-f"><small>Qué hace · interés</small><b>9<small>/10</small></b><div class="barra"><i style="--w:90%"></i></div></div>
-            </div>
-            <dl class="campos"><div><dt>Objetivo</dt><dd>Formarse para cambiar de puesto</dd></div><div><dt>Disponibilidad</dt><dd>Compatible con martes y jueves de 18:30 a 20:00</dd></div><div><dt>Ya explicado</dt><dd>Modalidad y horario</dd></div><div><dt>Pendiente</dt><dd>Metodología y opciones de pago</dd></div><div><dt>Por qué «quién es» 7</dt><dd>Curso que encaja con su objetivo · disponibilidad confirmada</dd></div><div><dt>Por qué «qué hace» 9</dt><dd>Contestó en minutos · eligió llamada con admisiones</dd></div><div><dt>Contacto</dt><dd>Llamada con Marta · miércoles 16:00</dd></div><div><dt>Canal</dt><dd>WhatsApp, con el asistente de IA</dd></div></dl>
-            <p class="resumen"><b>Resumen para Marta</b>Laura está valorando el curso y ha confirmado que el horario le encaja. Quiere entender cómo son las clases y las opciones de pago antes de decidir.</p>
-            <p class="resumen"><b>Siguiente paso</b>Llamada del miércoles a las 16:00: explicar metodología y pago. La matrícula solo cuenta cuando la registra admisiones.</p>
-          </div></div>
-        <div class="caja-d"><span class="k">Cómo se ordena</span>
-          <p style="margin-bottom:12px"><b>Dos notas, no una.</b> «Quién es» mide el encaje con lo que dijo en el formulario. «Qué hace» mide el interés: si contesta, si reserva, si vuelve.</p>
-          <ul>
-            <li><span><b>A · las dos altas.</b> Llamar hoy, con la ficha delante.</span></li>
-            <li><span><b>B · encaja, pero aún no se mueve.</b> Seguimiento con una duda útil.</span></li>
-            <li><span><b>C · se mueve, pero no está claro que encaje.</b> Primero, dos preguntas.</span></li>
-            <li><span><b>D · ni una ni otra.</b> Respuesta amable y sin insistir.</span></li>
-          </ul>
-          <p style="margin-top:12px">Marta no tiene que leerse la conversación: el resumen y el siguiente paso ya están escritos.</p></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-5" aria-labelledby="tab-5" hidden>
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Llamadas con admisiones · esta semana</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="vbody"><div class="citas"><div class="cita"><time>Mié 16:00</time><span><b>Laura</b><small>Gestión administrativa · respondió «sí» al recordatorio de la víspera</small></span><span class="vd si">Confirmada</span></div><div class="cita"><time>Jue 12:00</time><span><b>Sergio</b><small>Gestión administrativa · recordatorio enviado, sin respuesta todavía</small></span><span class="vd mm">Pendiente</span></div><div class="cita"><time>Jue 18:30</time><span><b>Javier</b><small>Pidió cambiar la hora desde el mensaje; la eligió él</small></span><span class="vd si">Reprogramada</span></div><div class="cita"><time>Mar 17:00</time><span><b>Carmen</b><small>Celebrada. Falta registrar el resultado y el siguiente paso</small></span><span class="vd no">Sin resultado</span></div></div></div></div>
-      <p class="nota-img"><span class="n">6</span><span><b>Llamadas que se celebran.</b> Cada una con un recordatorio la víspera que pide un «sí» y otro una hora antes. Se ve quién ha confirmado, quién no y qué llamada no tiene resultado registrado.</span></p>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-6" aria-labelledby="tab-6" hidden>
-      <div class="vista-g">
-        <div><div class="segs" role="group" aria-label="Situaciones"><button type="button" aria-pressed="true" data-seg="0">A · Pidió información y no contesta</button>
-<button type="button" aria-pressed="false" data-seg="1">B · La llamada con admisiones</button>
-<button type="button" aria-pressed="false" data-seg="2">C · Condiciones enviadas</button>
-<button type="button" aria-pressed="false" data-seg="3">D · «Más adelante»</button></div><div class="seg" data-seg-p="0"><p class="seg-p">Dejó sus datos y no responde al primer WhatsApp.</p><ol class="tl"><li class=""><div class="cu">Minuto 1 · WhatsApp</div><div class="ti">El primer mensaje</div><div class="bu">Hola, Laura. Soy el asistente de IA de la Academia de ejemplo. Las clases son martes y jueves de 18:30 a 20:00. ¿Te encajaría?</div></li><li class="alert"><div class="cu">Unas horas después · voz</div><div class="ti">Llama el asistente de voz</div><div class="bu">Solo si aceptó llamadas en el formulario. Si no contesta, un WhatsApp, no más llamadas.</div></li><li class=""><div class="cu">Día 1 · WhatsApp</div><div class="ti">Una duda concreta</div><div class="bu">Laura, una pregunta que nos hacen mucho: las clases quedan grabadas por si un día no puedes conectarte. ¿Te cuento algo más del curso?</div></li><li class="mail"><div class="cu">Día 3 · email</div><div class="ti">El programa por escrito</div><div class="bu">Asunto: El curso de gestión administrativa, con fechas y horarios. Lo que verás, cuánto tiempo a la semana y cómo es la próxima convocatoria.</div></li><li class=""><div class="cu">Día 5 · WhatsApp</div><div class="ti">¿Ahora o más adelante?</div><div class="bu">¿Lo sigues pensando para esta convocatoria o lo dejamos para la siguiente? Cualquiera de las dos está bien.
-<span class="chip">Esta</span><span class="chip">La siguiente</span></div></li><li class="stop"><div class="cu">Día 7</div><div class="ti">Pasa a «más adelante», con su fecha guardada</div></li></ol></div><div class="seg" hidden data-seg-p="1"><p class="seg-p">Para que la llamada reservada ocurra.</p><ol class="tl"><li class=""><div class="cu">Al reservar · WhatsApp</div><div class="ti">Confirmación</div><div class="bu">Listo, Laura: el miércoles a las 16:00 te llama Marta, de admisiones. Si te viene mal, contesta aquí y lo movemos.</div></li><li class=""><div class="cu">Víspera · WhatsApp</div><div class="ti">Recordatorio que pide un «sí»</div><div class="bu">Laura, mañana a las 16:00 hablas con Marta sobre las clases y el pago. ¿Te sigue viniendo bien?
-<span class="chip">Sí</span><span class="chip">Cambiar la hora</span></div></li><li class=""><div class="cu">1 h antes · WhatsApp</div><div class="ti">Último aviso</div><div class="bu">A las 16:00 te llama Marta. ¿Sigue bien la hora?</div></li><li class="alert"><div class="cu">Si no lo coge · 5 min después</div><div class="ti">Recuperación</div><div class="bu">Laura, Marta te ha llamado y no hemos dado contigo. ¿Te viene mejor mañana?
-<span class="chip">10:00</span><span class="chip">16:00</span><span class="chip">18:00</span></div></li><li class="stop"><div class="cu">Después de la llamada</div><div class="ti">Admisiones registra el resultado</div><div class="bu">Encaja, duda pendiente, más adelante o no sigue. Sin resultado, aparece en «Qué hacer hoy».</div></li></ol></div><div class="seg" hidden data-seg-p="2"><p class="seg-p">Admisiones mandó precio y forma de pago.</p><ol class="tl"><li class=""><div class="cu">Día 2 · tarea para admisiones</div><div class="ti">Un mensaje con borrador</div><div class="bu">¿Pudiste verlo, Laura? Si hay algo de las condiciones que quieras aclarar antes de decidir, dímelo.</div></li><li class=""><div class="cu">Día 5 · tarea</div><div class="ti">Lo que más se pregunta</div><div class="bu">Una duda habitual resuelta: cómo se recuperan las clases que no puedas seguir en directo.</div></li><li class="alert"><div class="cu">Día 10 · tarea</div><div class="ti">Cierre con fecha real</div><div class="bu">La matrícula de esta convocatoria cierra el día X. Si no es el momento, lo dejamos para la siguiente.</div></li><li class="stop"><div class="cu">Matrícula registrada</div><div class="ti">Se para todo</div></li></ol></div><div class="seg" hidden data-seg-p="3"><p class="seg-p">Dijo que lo pensaba para otra convocatoria y aceptó que le escribiéramos.</p><ol class="tl"><li class=""><div class="cu">Hoy · WhatsApp</div><div class="ti">Guardado</div><div class="bu">Perfecto, Laura. Te escribimos cuando se acerque la próxima convocatoria, solo una vez y con las fechas.</div></li><li class=""><div class="cu">Unas semanas antes · WhatsApp</div><div class="ti">Las fechas</div><div class="bu">Ya tenemos fechas de la próxima convocatoria del curso. ¿Te las paso?
-<span class="chip">Sí</span><span class="chip">Este año no</span></div></li><li class="stop"><div class="cu">Si dice que sí</div><div class="ti">Vuelve a «ahora», con su ficha completa</div></li></ol></div></div>
-        <div class="caja-d"><span class="k">Reglas del seguimiento</span><ul>
-          <li><span>Cualquier respuesta <b>para la secuencia</b>. Sigue una persona.</span></li>
-          <li><span>Los mensajes de condiciones son <b>tareas con borrador</b>: los revisa y los envía Marta, no un robot.</span></li>
-          <li><span>«Más adelante» guarda la fecha y <b>solo se escribe si lo aceptó</b>.</span></li>
-          <li><span>Quien dice «no» no recibe nada más.</span></li>
-          <li><span>Una cita sin resultado registrado aparece en el panel al día siguiente.</span></li>
-        </ul></div>
-      </div>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-7" aria-labelledby="tab-7" hidden>
-      <div class="claro"><div class="bar"><i></i><i></i><i></i><span>Qualivo Intelligence · Academia de ejemplo</span><span class="tag-demo">Ejemplo · datos simulados</span></div>
-        <div class="panel">
-          <div class="pk"><div class=""><small>Solicitudes · 30 días</small><b>135</b></div><div class=""><small>Con encaje</small><b>37</b></div><div class=""><small>Llamadas con admisiones</small><b>17</b></div><div class="alerta"><small>Requieren atención hoy</small><b>6</b></div><div class="ok"><small>Matrículas registradas</small><b>6</b></div></div>
-          <div class="emb-g"><div><h4>Recorrido · últimos 30 días</h4><div class="emb"><div class="et"><span>Solicitudes</span><span class="br"><i style="width:100%"></i></span><b>135</b></div><div class="et"><span>Contestan al asistente</span><span class="br"><i style="width:73%"></i></span><b>98</b></div><div class="et"><span>Con encaje</span><span class="br"><i style="width:27%"></i></span><b>37</b></div><div class="et"><span>Llamada reservada</span><span class="br"><i style="width:16%"></i></span><b>22</b></div><div class="et"><span>Llamada celebrada</span><span class="br"><i style="width:13%"></i></span><b>17</b></div><div class="et"><span>Matrícula</span><span class="br"><i style="width:4%"></i></span><b>6</b></div></div></div>
-          <div><h4>Dónde se pierden más · de mayor a menor</h4><div class="fugas"><div class="fu"><span class="nf">1</span><span><b>De la llamada celebrada a la matrícula</b> · 11 de 17 siguen sin decidir<small>→ Condiciones con tareas a los 2, 5 y 10 días, con borrador para admisiones</small></span></div><div class="fu"><span class="nf">2</span><span><b>Solicitudes que no contestan</b> · 37 de 135 no responden al primer mensaje<small>→ Llamada solo si la aceptaron y un WhatsApp con una duda concreta al día siguiente</small></span></div><div class="fu"><span class="nf">3</span><span><b>Llamadas reservadas que no se celebran</b> · 5 de 22<small>→ Recordatorio que pide un «sí» y recuperación a los 5 minutos si no lo coge</small></span></div></div></div></div>
-          <p class="pie-p">Cifras de ejemplo para una academia. Las matrículas son las que registra admisiones; no son cobros.</p>
-        </div></div>
-      <p class="nota-img"><span class="n">8</span><span><b>Dónde se pierden los alumnos.</b> Cada etapa con cuántos pasan a la siguiente. La fuga mayor, arriba, con lo que se hace para cerrarla.</span></p>
-      <a class="abre-panel" href="/intelligence/?sector=formacion" target="_blank" rel="noopener" data-cta="demo-panel">Abrir el panel de ejemplo completo →</a>
-    </div>
-    <div class="vista" role="tabpanel" id="vista-8" aria-labelledby="tab-8" hidden>
-      <div class="claro" style="max-width:860px"><div class="bar"><i></i><i></i><i></i><span>Hoy · Academia de ejemplo</span><span class="tag-demo">Ejemplo</span></div>
-        <div class="vbody"><div class="hy-h"><b>Requieren atención</b><span>¿Dónde hay que actuar ahora?</span></div><div class="hys"><div class="hy"><span class="av2">N</span><span class="qn"><b>Nerea</b><small>Curso de gestión administrativa · Preguntó por requisitos hace 26 h y nadie ha respondido</small></span><span class="ac">💬 Responder hoy</span><span class="pr urgente">● Urgente</span></div><div class="hy"><span class="av2">S</span><span class="qn"><b>Sergio</b><small>Llamada mañana a las 12:00 · No ha confirmado el recordatorio</small></span><span class="ac">💬 Confirmar o mover la llamada</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">C</span><span class="qn"><b>Carmen</b><small>Llamada celebrada ayer · Sin resultado registrado</small></span><span class="ac">👤 Registrar resultado y siguiente paso</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">P</span><span class="qn"><b>Pablo</b><small>Condiciones enviadas hace 5 días · Sin respuesta</small></span><span class="ac">👤 Mensaje de Marta con la duda más habitual</span><span class="pr alta">● Alta</span></div><div class="hy"><span class="av2">L</span><span class="qn"><b>Laura</b><small>Llamada el miércoles a las 16:00 · Quiere metodología y pago</small></span><span class="ac">👤 Preparar la llamada</span><span class="pr media">● Media</span></div><div class="hy"><span class="av2">I</span><span class="qn"><b>Irene</b><small>Pidió que le escribiéramos en la próxima convocatoria · Hoy toca</small></span><span class="ac">💬 Mensaje con las fechas</span><span class="pr media">● Media</span></div></div></div></div>
-      <p class="nota-img"><span class="n">9</span><span><b>Qué hacer hoy.</b> Admisiones abre el día con esta lista: cada interesado con su siguiente acción y su prioridad. No hay que buscar en el CRM.</span></p>
-    </div>
-  </div>
-</section>
-
 <!-- 6 · SERVICIO -->
 <section class="sec" aria-labelledby="t-serv">
   <div class="wrap">
@@ -840,7 +850,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
       <div>
         <details><summary>¿Necesito estar invirtiendo en publicidad?</summary><p>No es imprescindible. Si ya inviertes, empezamos por ver qué pasa con esas solicitudes. Si no, el diagnóstico dice si tiene sentido empezar y por dónde.</p></details>
         <details><summary>¿Qué incluye el servicio?</summary><p>Lo que necesite tu recorrido: campañas, páginas, respuesta y seguimiento de las solicitudes, CRM y medición, con revisiones para mejorar. El alcance exacto se acuerda después del diagnóstico.</p></details>
-        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No. Trabajamos sobre el que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu centro.</p></details>
+        <details><summary>¿Tengo que cambiar mi CRM?</summary><p>No necesariamente. Primero revisamos tu CRM y qué podemos conectar: antes de proponer cambios, comprobamos qué permite el sistema que ya usas. Si no tienes ninguno, te recomendamos uno adecuado a tu centro.</p></details>
         <details><summary>¿Qué presupuesto necesito?</summary><p>Depende de cuántos alumnos quieras captar y de lo que vale una matrícula para tu centro; en el diagnóstico hacemos esa cuenta con tus números y te decimos el alcance antes de empezar. La publicidad se paga aparte, directamente a cada plataforma.</p></details>
       </div>
     </div>
@@ -866,7 +876,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   'use strict';
   function track(n,d){ if(window.qvTrack) window.qvTrack(n,d||{}); }
   var EV='formacion', PAG='formacion-v22';
-  var WA={"inicio": ["Hola, Laura. Soy el asistente de IA de esta academia de ejemplo. Has indicado que trabajas por las mañanas y quieres comprobar los horarios.", "Las clases del curso son martes y jueves de 18:30 a 20:00. ¿Te encajaría?"], "ops": [["Sí, quiero saber más", "a1"], ["Ese horario no me encaja", "b1"], ["Lo estoy mirando para más adelante", "c1"]], "nodos": {"a1": {"log": [["Horario compatible", "martes y jueves de 18:30 a 20:00", "g"]], "bot": ["Genial. ¿Qué te gustaría resolver antes de decidir?"], "ops": [["Cómo son las clases y cómo se paga", "a2"]]}, "a2": {"log": [["Duda para admisiones", "metodología y opciones de pago", ""]], "bot": ["Las clases son en directo por videollamada, así que puedes preguntar en el momento.", "La metodología en detalle, el precio y las formas de pago te los explica admisiones, que es quien los confirma. ¿Quieres hablarlo con una persona?"], "ops": [["Sí, que me llamen", "a3"], ["Mejor por WhatsApp", "awa"]]}, "a3": {"bot": ["¿Qué te viene mejor? Hay hueco el miércoles a las 16:00 o el jueves a las 17:00."], "ops": [["Miércoles a las 16:00", "a4"], ["Jueves a las 17:00", "a4"]]}, "a4": {"log": [["Llamada reservada con admisiones", "confirmación simulada · recordatorio el día antes", "g"], ["Aviso a Marta", "Laura · A · curso de gestión administrativa · quiere metodología y pago", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna cita real", "bot": ["Hecho: te llama Marta, de admisiones, a esa hora. El día antes te mando un recordatorio, y si te surge algo, me lo dices aquí y lo cambiamos."], "fin": true}, "awa": {"log": [["Prefiere WhatsApp", "admisiones entra en la conversación con la ficha delante", "h"]], "bot": ["Claro. Le paso tu conversación a admisiones y te escriben por aquí sobre la metodología y el pago, con lo que ya me has contado."], "fin": true}, "b1": {"log": [["Horario no compatible", "martes y jueves no le encajan", "h"]], "bot": ["Gracias por decírmelo, Laura. En este curso las clases en directo son solo martes y jueves de 18:30 a 20:00, y no quiero ofrecerte una alternativa que no sé si existe.", "¿Quieres que admisiones revise si hay otra opción que te encaje?"], "ops": [["Sí, que lo revisen", "b2"], ["No, gracias", "bno"]]}, "b2": {"log": [["Duda para admisiones", "si existe otra opción de horario", ""]], "bot": ["Apuntado. Admisiones revisa si hay otra opción y te contesta por aquí, haya o no. No te comprometes a nada."], "fin": true}, "bno": {"log": [["No quiere continuar", "se cierra el seguimiento", "h"]], "bot": ["Entendido. Cierro tu solicitud y no te escribiremos más sobre este curso. Si cambias de idea, escríbeme por aquí."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa a admisiones ahora", "h"]], "bot": ["Sin prisa. ¿Cuándo tendría sentido retomarlo?"], "ops": [["En la próxima convocatoria", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos en ese momento con las fechas?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos en ese momento, solo una vez y con las fechas."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que el centro le ha dado. Precio, pago, requisitos y titulación los confirma admisiones, que ve cada conversación y puede entrar cuando quiera.", "hora": "18:41", "log0": [["Origen", "Anuncio «Curso de gestión administrativa» · formulario", ""], ["Objetivo", "Formarse para cambiar de puesto", ""], ["Situación", "Trabaja por las mañanas", ""], ["Duda principal", "Si los horarios le encajan", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
+  var WA={"inicio": ["Hola, Laura. Soy el asistente de IA del Centro de Formación Horizonte. Has indicado que trabajas por las mañanas y quieres comprobar los horarios.", "Las clases del curso son martes y jueves de 18:30 a 20:00. ¿Te encajaría?"], "ops": [["Sí, quiero saber más", "a1"], ["Ese horario no me encaja", "b1"], ["Lo estoy mirando para más adelante", "c1"]], "nodos": {"a1": {"log": [["Horario compatible", "martes y jueves de 18:30 a 20:00", "g"]], "bot": ["Genial. ¿Qué te gustaría resolver antes de decidir?"], "ops": [["Cómo son las clases y cómo se paga", "a2"]]}, "a2": {"log": [["Duda para admisiones", "metodología y opciones de pago", ""]], "bot": ["Las clases son en directo por videollamada, así que puedes preguntar en el momento.", "La metodología en detalle, el precio y las formas de pago te los explica admisiones, que es quien los confirma. ¿Quieres hablarlo con una persona?"], "ops": [["Sí, que me llamen", "a3"], ["Mejor por WhatsApp", "awa"]]}, "a3": {"bot": ["¿Qué te viene mejor? Hay hueco el miércoles a las 16:00 o el jueves a las 17:00."], "ops": [["Miércoles a las 16:00", "a4"], ["Jueves a las 17:00", "a4"]]}, "a4": {"log": [["Llamada reservada con admisiones", "confirmación simulada · recordatorio el día antes", "g"], ["Aviso a Marta", "Laura · A · curso de gestión administrativa · quiere metodología y pago", "g"]], "sys": "Confirmación simulada: no se ha creado ninguna cita real", "bot": ["Hecho: te llama Marta, de admisiones, a esa hora. El día antes te mando un recordatorio, y si te surge algo, me lo dices aquí y lo cambiamos."], "fin": true}, "awa": {"log": [["Prefiere WhatsApp", "admisiones entra en la conversación con la ficha delante", "h"]], "bot": ["Claro. Le paso tu conversación a admisiones y te escriben por aquí sobre la metodología y el pago, con lo que ya me has contado."], "fin": true}, "b1": {"log": [["Horario no compatible", "martes y jueves no le encajan", "h"]], "bot": ["Gracias por decírmelo, Laura. En este curso las clases en directo son solo martes y jueves de 18:30 a 20:00, y no quiero ofrecerte una alternativa que no sé si existe.", "¿Quieres que admisiones revise si hay otra opción que te encaje?"], "ops": [["Sí, que lo revisen", "b2"], ["No, gracias", "bno"]]}, "b2": {"log": [["Duda para admisiones", "si existe otra opción de horario", ""]], "bot": ["Apuntado. Admisiones revisa si hay otra opción y te contesta por aquí, haya o no. No te comprometes a nada."], "fin": true}, "bno": {"log": [["No quiere continuar", "se cierra el seguimiento", "h"]], "bot": ["Entendido. Cierro tu solicitud y no te escribiremos más sobre este curso. Si cambias de idea, escríbeme por aquí."], "fin": true}, "c1": {"log": [["Más adelante", "no pasa a admisiones ahora", "h"]], "bot": ["Sin prisa. ¿Cuándo tendría sentido retomarlo?"], "ops": [["En la próxima convocatoria", "c2"], ["Todavía no lo sé", "c2"]]}, "c2": {"bot": ["¿Quieres que te escribamos en ese momento con las fechas?"], "ops": [["Sí, escribidme", "csi"], ["No, ya os escribo yo", "cno"]]}, "csi": {"log": [["Contacto acordado", "un solo mensaje, cuando ella dijo", "g"]], "bot": ["Hecho. Te escribiremos en ese momento, solo una vez y con las fechas."], "fin": true}, "cno": {"log": [["Sin seguimiento programado", "escribirá ella", "h"]], "bot": ["Perfecto. No te escribiremos. Cuando quieras retomarlo, escríbeme por aquí."], "fin": true}}, "nota": "El asistente se presenta como IA y solo usa la información que el centro le ha dado. Precio, pago, requisitos y titulación los confirma admisiones, que ve cada conversación y puede entrar cuando quiera.", "hora": "18:41", "log0": [["Origen", "Anuncio «Curso de gestión administrativa» · formulario", ""], ["Objetivo", "Formarse para cambiar de puesto", ""], ["Situación", "Trabaja por las mañanas", ""], ["Duda principal", "Si los horarios le encajan", ""], ["Canal", "WhatsApp, con permiso para escribirle", ""]]};
   var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function fmt(v,dec){ var t=v.toFixed(dec||0).split('.'); return t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(t[1]?','+t[1]:''); }
   function contar(el,fin,dec,suf,ms){
@@ -936,7 +946,8 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
   function abre(i,foco){ tabs.forEach(function(t,j){ var on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1; document.getElementById('vista-'+j).hidden=!on; });
     if(foco) tabs[i].focus(); tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});
     var v=tabs[i].getAttribute('data-vista'); if(!vistos[v]){ vistos[v]=1; track(EV+'_demo_vista',{vista:v,pagina:PAG}); }
-    if(v==='whatsapp'&&!waIni) waReset(); if(v==='llamada') vozPlay(); }
+    if(v==='whatsapp'&&!waIni) waReset(); }
+  var au=document.getElementById('voz-audio'); if(au) au.addEventListener('play',function una(){ track(EV+'_demo_audio',{pagina:PAG}); au.removeEventListener('play',una); });
   tabs.forEach(function(t,i){ t.addEventListener('click',function(){ abre(i); });
     t.addEventListener('keydown',function(e){ var k=e.key, n=tabs.length;
       if(k==='ArrowRight'){ e.preventDefault(); abre((i+1)%n,true); } else if(k==='ArrowLeft'){ e.preventDefault(); abre((i-1+n)%n,true); }
