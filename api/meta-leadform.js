@@ -163,7 +163,11 @@ const FORMULARIOS_SECTOR = {
   '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' },
   // 15-oct-2026: horizontal «ya inviertes» (Qualivo_HZ_demo). Pregunta el sector, así que
   // el sector sale de la respuesta (api/_funnel-hz.js), no de esta tabla.
-  '1593733452501786': { sector: '', angulo: 'hz-demo' }
+  '1593733452501786': { sector: '', angulo: 'hz-demo' },
+  // 19-oct-2026: test de cualificación de formación (21-31 oct). La copia es la que lleva el anuncio.
+  // Sin estas entradas el rescate no los miraba y el primer lead apto (22-oct) no llegó al CRM.
+  '2063720777591278': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' }
 };
 
 async function nombreFormulario(formId) {
