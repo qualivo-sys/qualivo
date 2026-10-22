@@ -17,6 +17,8 @@ VOCES = {  # biblioteca de ElevenLabs, español de España (peninsular), masculi
     'emilio': 'ZCh4e9eZSUf41K4cmCEL',  # Emilio · cálido y sólido
     'osborne':'W5JElH3dK1UYYAiHH7uh',  # Martin Osborne · íntimo y cálido
     'aaron':  't9LRTh3y1ioN00e9wsNh',  # Aaron Abad · castellano neutro
+    'javier': 'PToUZ7lhIUiz1SP94rGo',  # Javier · Qualivo (Las fugas V2, anuncio 09)
+    'javier_rojas': 'RxPoOxDaJiOdJGnMMaql',  # Javier Rojas · Qualivo (3V de septiembre)
 }
 MODELO = 'eleven_v3'
 MUESTRA = ('Martes, diez y media. El gabinete, preparado. La primera visita… no viene. No avisó. '
