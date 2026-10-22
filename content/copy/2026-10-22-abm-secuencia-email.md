@@ -36,7 +36,8 @@
 **Variables por cuenta (todas verificadas por Outbound, con su fuente en Notion):**
 - `[anuncio]`: el texto o título literal del anuncio activo.
 - `[desde]`: el mes desde el que circula, según la Biblioteca de anuncios.
-- `[destino]`: a dónde lleva, comprobado, por ejemplo «un formulario de Meta» o «una página para pedir presupuesto».
+- `[servicio]`: el servicio que anuncia, por ejemplo «reformas de cocina» o «reforma integral».
+- `[destino]`: a dónde lleva, comprobado, por ejemplo «un formulario de Meta» o «una página para pedir presupuesto». **No va en la apertura** (decisión de Maikel, 22-oct: aporta poco); solo se usa en los emails que lo necesitan.
 - `[señal de empresa]`: un dato público que diga que es una empresa consolidada que vende con visita o asesor, por ejemplo «hacéis visita técnica en casa» o «tenéis exposición». **Opcional:** si no hay uno claro, la frase se quita.
 - `[nombre]`: el decisor, si la empresa lo publica. Si no, «Hola:».
 
@@ -46,7 +47,7 @@
 >
 > Hola, [nombre]:
 >
-> He visto en la Biblioteca de anuncios de Meta que [empresa] tiene activo «[anuncio]» desde [desde], y que lleva a [destino]. [señal de empresa].
+> He visto que tenéis anuncios activos en Meta de [servicio]. [señal de empresa].
 >
 > Te escribo porque trabajamos justo ese recorrido: a quién atrae el anuncio, qué pregunta el formulario, quién atiende cada solicitud y cuándo, y qué solicitudes acaban en visita y en presupuesto aceptado. Lo que se aprende al final vuelve al principio, para saber qué anuncio trae obras y no solo contactos.
 >
