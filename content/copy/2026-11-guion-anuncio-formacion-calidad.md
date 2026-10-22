@@ -1,4 +1,4 @@
-# Anuncio de noviembre · formación · «Solicitudes de calidad» · guion v1 (22-oct)
+# Anuncio de noviembre · formación · «Solicitudes de calidad» · guion v2 (22-oct)
 
 > **Estado:** borrador para que lo apruebe Maikel. Después pasa a Creative, que lo monta sobre lo que ya tiene.
 > **Fuentes:**
@@ -16,6 +16,8 @@
 > - pantallas simuladas y rotuladas.
 >
 > **No aparece la voz:** el asistente de voz está en pausa y no se presenta como disponible.
+>
+> **v2 (22-oct, Maikel):** Maikel no sale a cámara. Todo el anuncio es el recorrido en pantalla, con voz en off y, donde aporte, planos generados en Higgsfield. Esos planos no se generan hasta aprobar el guion.
 
 ---
 
@@ -28,12 +30,12 @@
 | **Etapa / fuga** | Captación → cualificación → seguimiento. Entra gente que no encaja, y la que sí encaja se enfría. |
 | **Dolor** | Calidad: admisiones gasta el tiempo con quien no iba a matricularse. |
 | **Ángulo** | Contrarian («el reto no es conseguir más solicitudes») + pérdida (la que encajaba se enfría). |
-| **Formato** | Maikel a cámara + pantallas del recorrido de Laura (las de la landing v22 y el vídeo de 70 s). 9:16 y 4:5. Unos 55 s. |
+| **Formato** | Sin cara. Recorrido de Laura en pantalla (la demo de la v22 y el vídeo de 70 s), voz en off y 4-5 planos de apoyo de Higgsfield. 9:16 y 4:5. Unos 50 s. |
 | **Continuidad con la landing** | El gancho = la segunda pantalla de la v22: «No basta con conseguir solicitudes. Hay que convertirlas en alumnos». Las pantallas del anuncio = las pestañas de la demo. La oferta = «diagnóstico sin coste de 30 minutos». Quien hace clic reconoce todo al llegar. |
 
 ## 2 · Ganchos (0-4 s) · Maikel elige uno; probamos dos como mucho
 
-En todos: rótulo **CENTROS DE FORMACIÓN** desde el primer fotograma, dentro de la zona segura.
+En todos: rótulo **CENTROS DE FORMACIÓN** desde el primer fotograma, dentro de la zona segura. Sin cara, así que la imagen del segundo 0 tiene que parar el scroll por sí sola. Va indicada en el storyboard.
 
 | # | Tipo | Voz | Rótulo |
 |---|---|---|---|
@@ -48,15 +50,17 @@ En todos: rótulo **CENTROS DE FORMACIÓN** desde el primer fotograma, dentro de
 
 Nota sobre el gancho A: dura unos 6 s en voz. El sector está en el rótulo desde el segundo 0 y en la voz antes del 2. Si en el montaje se alarga, la versión corta es «Centros de formación que ya invertís en anuncios: el reto no es tener más solicitudes. Es que sean de calidad.»
 
-## 3 · Guion final (versión con el gancho A) · unos 55 s · unas 135 palabras
+**Voz en off:** propongo la voz de ElevenLabs «Javier · Qualivo», que ya se usó en «Las fugas» V2 y suena a la marca. Alternativa: Rodrigo, la del asistente de la demo; pero para no confundir al narrador con el asistente, mejor Javier. Tono de conversación, sin locución de anuncio.
 
-**[0-6 s · Gancho · Maikel a cámara]**
+## 3 · Guion final (versión con el gancho A) · unos 50 s · unas 130 palabras · todo en voz en off
+
+**[0-6 s · Gancho · voz en off]**
 > «Si tienes un centro de formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.»
 
-**[6-16 s · Dolor · Maikel a cámara, con rótulos]**
+**[6-16 s · Dolor · voz en off]**
 > «Porque admisiones acaba llamando a quien no contesta. Reserva gente que luego no aparece. Y quien sí encajaba con el curso… se enfría esperando su turno.»
 
-**[16-36 s · Qué cambia · voz en off sobre las pantallas de Laura]**
+**[16-36 s · Qué cambia · voz en off]**
 > «La calidad se trabaja en todo el recorrido. Un anuncio que habla a quien encaja con cada curso. Un formulario con cuatro preguntas que separa a quien está listo. Una respuesta por WhatsApp en minutos, que resuelve lo básico y recoge lo que falta. Y admisiones llama con la ficha delante: qué quiere, qué le preocupa y por dónde empezar.»
 
 **[36-44 s · Prueba · pantalla con la cifra]** (versión A, ver la decisión del punto 7)
@@ -65,29 +69,37 @@ Nota sobre el gancho A: dura unos 6 s en voz. El sector está en el rótulo desd
 Versión B, sin resultado de cliente:
 > «Y cada solicitud tiene su siguiente paso. Nadie se queda esperando a que alguien se acuerde.»
 
-**[44-55 s · Llamada a la acción · Maikel a cámara] (se graban las dos)**
+**[44-55 s · Llamada a la acción · voz en off] (se graban las dos)**
 - **Meta (formulario nativo):** «Si tu centro ya invierte en anuncios, toca en Más información y responde cuatro preguntas. Lo vemos en treinta minutos, con tus números.»
-- **Landing v22:** «Si tu centro ya invierte en anuncios, pide tu diagnóstico: treinta minutos conmigo, con tus números, y vemos dónde se te están quedando las matrículas.»
+- **Landing v22:** «Si tu centro ya invierte en anuncios, pide tu diagnóstico: treinta minutos, con tus números, y vemos dónde se te están quedando las matrículas.»
 
 ## 4 · Storyboard por segundos (9:16 · textos entre el 14 % y el 78 % del alto)
 
+**Leyenda de origen:**
+- **[D]** grabación de pantalla de la demo v22 a 390 px;
+- **[V]** vídeo de 70 s (`assets/video/qualivo-sistema-formacion-h.mp4`);
+- **[D*]** pantalla que no está en la demo y Creative monta con su mismo estilo (dos en total);
+- **[H]** plano de Higgsfield (prompts en la sección 8).
+
 | Segundo | Imagen | Texto en pantalla | Movimiento / transición |
 |---|---|---|---|
-| 0-2 | Maikel, plano medio, mirando a cámara | **CENTROS DE FORMACIÓN** (arriba, fijo hasta el s. 4) | Entra en corte seco, sin intro |
-| 2-6 | Igual, se cierra a plano corto en «es que sean de calidad» | EL RETO NO ES TENER MÁS SOLICITUDES → **ES QUE SEAN DE CALIDAD** | Zoom digital suave en la última frase |
-| 6-9 | Pantalla: lista de llamadas con tres «No contesta» seguidos | NO CONTESTA · NO CONTESTA · NO CONTESTA | Corte con la voz |
-| 9-12 | Pantalla: la agenda con una cita «Sin presentarse» | RESERVÓ · NO APARECIÓ | Corte |
-| 12-16 | Maikel a cámara, pausa antes de «se enfría» | LA QUE SÍ ENCAJABA → **SE ENFRÍA** | Pausa de medio segundo antes del rótulo |
-| 16-20 | Anuncio de Laura («Curso de gestión administrativa · martes y jueves 18:30-20:00»), del vídeo de 70 s | 1 · UN ANUNCIO PARA QUIEN ENCAJA | Barrido vertical, como en un móvil |
-| 20-24 | Formulario con 4 preguntas y la opción marcada (pestaña «Formulario» de la v22) | 2 · 4 PREGUNTAS | Las respuestas se marcan una a una |
-| 24-30 | WhatsApp: el primer mensaje con el horario y Laura respondiendo (pestaña «WhatsApp») | 3 · RESPUESTA EN MINUTOS | Los mensajes entran con el ritmo real del chat |
-| 30-36 | Ficha de Laura: «Quién es 7 · Qué hace 9 · Nivel A», resumen y siguiente paso | 4 · ADMISIONES, CON LA FICHA DELANTE | Zoom a «Nivel A» y al «Siguiente paso» |
-| 16-36 | (en todo el tramo) | Etiqueta pequeña fija: **Ejemplo · datos simulados** | — |
-| 36-44 | Fondo oscuro, cifra grande (versión A) o la lista «Qué hacer hoy» (versión B) | A: **10 MATRÍCULAS · 10× LO INVERTIDO · 1 MES**, debajo: «Escuela de aviación · medido en su CRM» · B: CADA SOLICITUD, CON SU SIGUIENTE PASO | La cifra sube contando, como en la landing |
-| 44-55 | Maikel a cámara | Meta: **TOCA EN «MÁS INFORMACIÓN»** · Landing: **DIAGNÓSTICO · 30 MIN** | Termina en Maikel, sin cartela de logo larga (1 s de logo como mucho) |
+| 0-1,5 | **[H1]** Móvil sobre una mesa de recepción; caen notificaciones una tras otra | **CENTROS DE FORMACIÓN** (arriba, fijo hasta el s. 4) | Entra en corte seco. Cada notificación, un golpe suave de sonido |
+| 1,5-3,5 | **[D*]** Bandeja con 30 «Nueva solicitud · Curso de…» apilándose (pantalla nueva, con el estilo de la demo) | EL RETO NO ES TENER MÁS SOLICITUDES | Scroll rápido hacia abajo |
+| 3,5-6 | La bandeja se para y una sola solicitud se ilumina | **ES QUE SEAN DE CALIDAD** | Frenazo del scroll con la voz |
+| 6-9 | **[H2]** Mano en el escritorio de admisiones marcando en el móvil; nadie lo coge | NO CONTESTA · NO CONTESTA · NO CONTESTA | Tres cortes cortos, uno por rótulo |
+| 9-12 | **[D*]** Lista de citas con el estilo de la pestaña «Citas»: una marcada «No se presentó» (en la demo no existe ese estado; se monta) | RESERVÓ · NO APARECIÓ | Corte |
+| 12-16 | **[H3]** Laura en el sofá por la noche con el móvil; un mensaje de su solicitud lleva dos días sin abrir | LA QUE SÍ ENCAJABA → **SE ENFRÍA** | El color se enfría un poco; medio segundo de pausa antes del rótulo |
+| 16-20 | **[V]** El anuncio de Laura («Curso de gestión administrativa · martes y jueves 18:30-20:00») | 1 · UN ANUNCIO PARA QUIEN ENCAJA | Barrido vertical, como en un móvil |
+| 20-24 | **[H4]** Laura de pie en el transporte, rellenando el formulario en el móvil (manos y pantalla, sin cara de frente). Corte a **[D]** pestaña «Formulario» con las 4 respuestas marcándose | 2 · 4 PREGUNTAS | Corte por coincidencia de pantalla: del móvil real a la interfaz |
+| 24-30 | **[D]** WhatsApp: el primer mensaje con el horario y Laura respondiendo «Sí, quiero saber más» | 3 · RESPUESTA EN MINUTOS | Los mensajes entran con el ritmo real del chat |
+| 30-36 | **[H5]** Plano por encima del hombro de alguien de admisiones abriendo una ficha en el portátil. Corte a **[D]** pestaña «Ficha»: «Quién es 7 · Qué hace 9 · Nivel A», resumen y siguiente paso | 4 · ADMISIONES, CON LA FICHA DELANTE | Zoom a «Nivel A» y al «Siguiente paso» |
+| 16-36 | (en todo el tramo de las pantallas [D] y [V]) | Etiqueta pequeña fija: **Ejemplo · datos simulados** | — |
+| 36-44 | Fondo oscuro, cifra grande (versión A) o **[D]** «Qué hacer hoy» (versión B) | A: **10 MATRÍCULAS · 10× LO INVERTIDO · 1 MES**, debajo: «Escuela de aviación · medido en su CRM» · B: CADA SOLICITUD, CON SU SIGUIENTE PASO | La cifra sube contando, como en la landing |
+| 44-50 | **[D]** La portada de la v22 en el móvil, con el botón amarillo; termina en el logo de Qualivo (1 s) | Meta: **TOCA EN «MÁS INFORMACIÓN»** · Landing: **DIAGNÓSTICO SIN COSTE · 30 MIN** | El dedo pulsa el botón y corta a logo |
 
-- **Sonido:** electrónica minimalista, baja, por debajo de la voz. Sin efectos de «notificación» exagerados.
-- **Subtítulos:** quemados en 9:16, en una línea y sin duplicar los rótulos grandes.
+- **Sonido:** electrónica minimalista, baja, por debajo de la voz. Sonidos de interfaz discretos (notificación, envío de mensaje), sin exagerar.
+- **Subtítulos:** quemados en 9:16, en una línea y sin duplicar los rótulos grandes. El anuncio tiene que entenderse sin audio.
+- **Personas de Higgsfield:** siempre rotuladas dentro de «Ejemplo». Nada de caras en primer plano hablando, para que no parezca un testimonio.
 
 ## 5 · Copy de Meta
 
@@ -129,27 +141,28 @@ Versión B, sin resultado de cliente:
    - el resto de la página no cambia;
    - son 15 minutos y lo puedo dejar preparado sin publicarlo.
 
-## 8 · Lista de tomas (el mismo día que el vídeo del email)
+## 8 · Material para Creative (sin grabar a nadie)
 
-Plano medio y plano corto, a la altura de los ojos, con luz natural lateral. 9:16 nativo, con margen para recortar a 4:5. Sin música en la grabación. Dos tomas buenas de cada una:
-
-1. **Gancho A**, entero y en la versión corta.
-2. **Gancho B.**
-3. **Gancho C.**
-4. **Dolor (6-16 s),** con una pausa clara antes de «se enfría».
-5. **Voz en off del tramo 16-36,** grabada con el mismo micro, sin mirar a cámara (se monta sobre las pantallas).
-6. **Prueba,** versión A y versión B.
-7. **CTA de Meta.**
-8. **CTA de la landing.**
-9. **Reformas** (para noviembre, aprovechando la sesión): el gancho y el CTA del punto 9.
-10. **Recurso:** 5 s de Maikel escuchando o asintiendo, para tapar cortes.
-
-**Pantallas** (Creative, sin producir nada nuevo):
-- **Grabación de pantalla de la v22 a 390 px:** pestañas Formulario, WhatsApp (rama «Sí, quiero saber más»), Ficha y Qué hacer hoy.
-- **Del vídeo de 70 s** (`assets/video/qualivo-sistema-formacion-h.mp4`): el anuncio de Laura y el paso al formulario.
+1. **Voz en off:** el guion de la sección 3 con la voz «Javier · Qualivo» de ElevenLabs. Los dos CTA y las versiones A y B de la prueba van en pistas separadas. La puedo generar yo cuando apruebes el texto.
+2. **Pantallas [D]:** grabación de la v22 a 390 px (9:16), con estas pestañas:
+   - bandeja o lista (se monta con «Qué hacer hoy» y «Citas»);
+   - Formulario;
+   - WhatsApp (rama «Sí, quiero saber más»);
+   - Ficha;
+   - Qué hacer hoy;
+   - portada con el botón.
+3. **Vídeo [V]:** el anuncio de Laura y el paso al formulario, sacados del vídeo de 70 s.
+4. **Planos de Higgsfield [H].** Se generan solo cuando el guion esté aprobado. Son 5 clips de unos 5 s, en 9:16, con aspecto de grabado con móvil, luz natural, España, sin texto ni logos, sin robots ni pantallas futuristas. Prompts de partida, en inglés porque los modelos responden mejor:
+   - **H1:** «Vertical 9:16, handheld smartphone footage. A smartphone lying on a wooden reception desk of a small training academy in Spain, screen lighting up repeatedly with incoming notifications. Shallow depth of field, soft daylight from a window, realistic, no readable text, no logos.»
+   - **H2:** «Vertical 9:16, close-up of a hand dialing on a smartphone at an admissions desk, holding the phone to the ear, then lowering it — nobody answered. Office background softly blurred, natural light, realistic, no faces in focus, no text.»
+   - **H3:** «Vertical 9:16, evening at home in Spain, a woman in her early 30s on a sofa scrolling her phone, warm lamp light turning slightly cooler, she ignores a notification. Candid, realistic, shot from the side, face not in sharp focus.»
+   - **H4:** «Vertical 9:16, over-the-shoulder shot of a woman standing on a commuter train in Spain filling in a short form on her phone with her thumb, natural movement, realistic, screen content blurred.»
+   - **H5:** «Vertical 9:16, over-the-shoulder shot of an admissions advisor at a laptop in a bright small office, opening a contact profile, notepad and phone beside the laptop, realistic, screen blurred, no faces.»
+5. **Montaje:** 9:16 primero; después el recorte a 4:5, comprobando que los rótulos no se salen.
 
 ## 9 · Adaptación a reformas (una línea por tramo)
 
+- **Formato:** igual, sin cara. Los planos [H] cambian a una cocina por reformar, un técnico midiendo y un presupuesto en el móvil.
 - **Gancho:** «Si tienes una empresa de reformas y ya inviertes en publicidad, ya lo sabes: el reto no es que te pidan presupuesto. Es que te lo pida quien va a reformar.»
 - **Dolor:** «Visitas que se caen, presupuestos que nadie contesta y quien sí iba a reformar llamando a otra empresa.»
 - **Qué cambia:** el mismo recorrido con Marta (cocina de 12 m² en Badalona), la visita técnica y el seguimiento del presupuesto a los 2, 5 y 10 días, con las pantallas de `reformas/v22`.

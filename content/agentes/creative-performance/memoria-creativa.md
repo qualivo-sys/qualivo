@@ -144,10 +144,10 @@ Plantilla:
 
 ### 09 · «Solicitudes de calidad» · formación (guion del 22-oct)
 - **Estado:** borrador de guion, pendiente del ok de Maikel. Después, montaje de Creative.
-- **Vertical · Etapa · Dolor · Ángulo · Formato:** formación · captación, cualificación y seguimiento · calidad (admisiones gasta el tiempo con quien no iba a matricularse) · contrarian + pérdida · Maikel a cámara + pantallas de la demo v22 (Laura), 9:16 y 4:5, unos 55 s.
+- **Vertical · Etapa · Dolor · Ángulo · Formato:** formación · captación, cualificación y seguimiento · calidad (admisiones gasta el tiempo con quien no iba a matricularse) · contrarian + pérdida · sin cara: recorrido en pantalla (demo v22, Laura), voz en off y planos de apoyo de Higgsfield, 9:16 y 4:5, unos 50 s (v2, decisión de Maikel: no sale a cámara).
 - **Hooks:** A «Si tienes un centro de formación y ya inviertes en publicidad, ya lo sabes: el reto no es conseguir más solicitudes. Es que sean de calidad.» · B «Lunes, nueve de la mañana. Admisiones abre el CRM: treinta solicitudes nuevas. ¿A quién llama primero?» · C «En tu centro pagas por cada solicitud. También por las que nunca iban a matricularse.»
 - **Mecanismo que enseña:** anuncio para quien encaja → formulario de 4 preguntas → respuesta por WhatsApp en minutos → ficha para admisiones. Sin voz (en pausa) ni atribución por anuncio.
-- **CTA:** Meta «Toca en Más información y responde cuatro preguntas» · landing «Pide tu diagnóstico: treinta minutos conmigo…».
+- **CTA:** Meta «Toca en Más información y responde cuatro preguntas» · landing «Pide tu diagnóstico: treinta minutos, con tus números…».
 - **Fuente:** `content/copy/2026-11-guion-anuncio-formacion-calidad.md`. Brief de Paid en la rama `claude/qualivo-paid`.
 - **Hipótesis de test:** P-03 de Paid. Cambia solo el vídeo; se mantienen el formulario de E-01, el público y el presupuesto. Decide el % de aptos y el coste por reunión con encaje.
 - **Resultados:** falta dato (no lanzado).
