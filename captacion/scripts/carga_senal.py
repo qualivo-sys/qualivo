@@ -47,7 +47,7 @@ for f in [a for a in sys.argv[2:] if a.endswith(".json")]:
              or (d in envd and "empresa ya contactada") or (d in BLOQ and "bloqueado")
              or ((l.get("country") or "Spain") != "Spain" and "fuera de Espana")
              or (d in ya and "duplicado")
-             or (re.search(r"marketing|advertising|staffing|recruit|computer software|information technology|internet", (l.get("industry") or "").lower()) and "sector fuera (agencia/software/seleccion)"))
+             or (re.search(r"marketing|advertising|staffing|recruit|computer software|information technology|internet|legal services|law practice", (l.get("industry") or "").lower()) and "sector fuera (agencia/software/seleccion)"))
         if m: fuera[m] = fuera.get(m, 0) + 1; continue
         ya.add(d)
         clave = l["puerta"] if l["puerta"] != "crm" else ("crm", l["v"]["crm"])

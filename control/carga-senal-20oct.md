@@ -84,3 +84,9 @@ El script acepta ahora los ficheros como argumentos: `python3 captacion/scripts/
 | HubSpot | 3940264 (motor V3) | 4 |
 
 De los 298 revelados con correo se quedaron fuera, sobre todo, 166 catch-all (contando los del 21-oct que se volvieron a pasar por el filtro) y 69 correos de otro dominio. LinkedIn Ads vuelve a tener leads: es la puerta con más respuestas (7 de 109 leads).
+
+## 22-oct · fuera el sector legal
+
+Las campañas de señal recibieron 5 bajas en la mañana del 22-oct: 3 en Google Ads, 1 en LinkedIn Ads y 1 en Construcción. Dos de las de Google Ads son despachos legales, de los 34 leads legales cargados el 21-oct.
+- Se han pausado los 11 leads legales de Google Ads que todavía no habían recibido ningún correo. Están en el scratchpad en `pausados_legal_22oct.json` y se pueden reanudar.
+- `carga_senal.py` deja fuera desde hoy las industrias `legal services` y `law practice`.
