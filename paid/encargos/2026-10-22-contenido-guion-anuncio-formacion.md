@@ -15,6 +15,20 @@ Se graba el mismo día que el vídeo del email de Outbound (unos 75 s, guion ya 
 - **Atraemos a gente que no invierte.** Quien contesta «nada todavía» de inversión ha llegado a 0 reuniones de 11.
 - **El anuncio «Ya inviertes» de octubre falló, pero no refuta el mensaje.** Gastó unos 49 € y nadie envió el formulario. Cambió tres cosas a la vez: no nombraba el sector, el formulario tenía 5 preguntas y el conjunto era nuevo. Maikel cree, además, que el filtro «más de 1.000 €» era demasiado concreto.
 
+## 2b · La landing a la que apunta: qualivo.io/formacion/v22 (leída el 22-oct)
+
+El guion tiene que **continuar** la landing, no contradecirla. Lo que ya hay en ella:
+- **Titular:** «Más alumnos para tu centro. Del primer anuncio a la matrícula.»
+- **El puente con nuestro gancho:** la sección «Dónde se pierden los alumnos» dice «No basta con conseguir solicitudes. Hay que convertirlas en alumnos.» El anuncio dice «el reto no es conseguir más solicitudes, sino que sean de calidad». Son la misma idea: quien llega del anuncio la reconoce en la segunda pantalla.
+- **Pruebas ya publicadas** (usar estas y no otras):
+  - EAC: 10,2× de retorno sobre la inversión en publicidad, 44.000 € facturados y atribuidos y 10 matrículas en un mes (medido en el CRM del centro).
+  - Nail Boss Academy: 1.160 solicitudes y 21 matrículas en cuatro meses, partiendo de cero.
+- **El recorrido de «Laura»:** anuncio → formulario → WhatsApp → llamada → ficha → citas → seguimientos → dónde se pierden → qué hacer hoy. Ya existe un vídeo de 70 s («Así funciona en una academia»). **Los planos del tramo 15-35 s deben salir de ese material**, para no producir pantallas nuevas.
+- **La landing ya filtra:** pregunta solicitudes al mes y precio medio del curso antes de pedir datos. El anuncio no tiene que filtrar con cifras: basta con que le hable a quien ya invierte.
+- **Su oferta:** diagnóstico sin coste de 30 minutos con Maikel. La llamada a la acción del anuncio debe prometer lo mismo.
+
+**Aviso para Growth (no para Contenido):** el titular «Más alumnos para tu centro» promete volumen y el anuncio promete calidad. Si el tráfico del anuncio va a la landing, conviene probar un titular alineado solo para ese tráfico (por ejemplo, «Solicitudes que acaban en matrícula»). Mientras, la prueba de Meta usa el formulario nativo de E-01 y no depende de la landing.
+
 ## 3 · La hipótesis que prueba el anuncio
 
 Si el gancho le habla **a quien ya invierte en publicidad** («el reto ya no es conseguir más solicitudes, sino que sean de calidad») **y nombra el sector**, quien no invierte se descartará solo. Esperamos menos leads, pero más leads aptos y más reuniones con encaje por euro.
@@ -28,8 +42,8 @@ Si el gancho le habla **a quien ya invierte en publicidad** («el reto ya no es 
 | **0-4 s · Gancho** | Nombra el sector y a quien ya invierte. Idea de Maikel: «Si ya invertís en publicidad, seguramente os habréis dado cuenta de que el reto no es conseguir más solicitudes, sino que sean de calidad». Rótulo: «CENTROS DE FORMACIÓN» | Maikel a cámara |
 | **4-15 s · Dolor** | Qué ve admisiones: gente que no encaja, que reserva y no aparece, que no contesta. **Sin decir que todos sus leads son malos** | Maikel a cámara |
 | **15-35 s · Qué cambia** | La calidad se trabaja desde el anuncio y se comprueba en la conversación: un mensaje para quien encaja, un formulario que separa a quien está listo, una respuesta inmediata y admisiones con el contexto completo | Una sola persona recorriendo anuncio → formulario → conversación → ficha. Pantallas simuladas e identificadas |
-| **35-45 s · Prueba** | Una cifra real de cliente, sin nombre. Candidata: una escuela con 3 comerciales, entrevistas +102 % y coste por lead −61 %. **Creative tiene que confirmar el caso y la cifra** | Pantalla con la cifra |
-| **45-55 s · Llamada a la acción** | «Toca en Más información y responde 4 preguntas. Te preparamos un ejemplo con uno de vuestros programas.» | Maikel a cámara |
+| **35-45 s · Prueba** | Una sola cifra de la landing: «Una escuela de aviación: 10 matrículas y 10 veces lo invertido en un mes» (EAC, medido en su CRM) | Pantalla con la cifra |
+| **45-55 s · Llamada a la acción** | Para Meta: «Toca en Más información y responde 4 preguntas.» Para la landing: «Pide tu diagnóstico: 30 minutos conmigo y te digo dónde se te escapan las matrículas.» Grabar las dos | Maikel a cámara |
 
 ## 5 · Reglas
 

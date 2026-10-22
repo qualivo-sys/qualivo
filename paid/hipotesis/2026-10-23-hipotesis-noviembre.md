@@ -243,3 +243,57 @@ Hoy, con Meta [C, CRM, 21-oct]:
 3. **P-3.** ¿Tenéis el dato de cierre de clientes de otros canales (outbound, referidos)? El 15 % del plan Q4, ¿es de toda la empresa o solo de pago?
 4. **P-4.** ¿Os vale que P-03 ocupe el hueco del 17 al 30-nov que el análisis daba a ICP-1 por edad? A cambio, la edad pasa a ser una lectura de datos (P-04).
 5. **P-5.** ¿Hay alguna cuenta de Google Ads de Qualivo, aunque esté vacía? Si existe, Paid necesita acceso de lectura al Planificador de palabras clave para cambiar las cifras de DinoRANK por las de Google.
+
+---
+
+## 6 · Anexo (22-oct) · Google Ads hacia la landing de formación v22
+
+Lo pidió Maikel el 22-oct. La fuente de las palabras clave es DinoRANK, España, del 14 y el 21-oct.
+
+**Búsqueda de formación: casi no hay volumen** [E, DinoRANK]:
+
+| Palabra clave | Volumen al mes | CPC |
+|---|---|---|
+| agencia de marketing educativo | 70 | sin dato |
+| marketing para centros educativos | 40 | sin dato |
+| marketing digital para academias | 20 | sin dato |
+| captación de alumnos | 20 | sin dato |
+
+- Ninguna otra palabra relacionada con academias y captación llega a 20 búsquedas al mes.
+- En total, **menos de 200 búsquedas al mes**. Unos **5-15 clics** si se cubre todo.
+
+**Tres maneras de llevar tráfico de Google, de más a menos recomendable:**
+
+1. **Demand Gen (vídeo en YouTube, Discover y Gmail) con segmentos personalizados de intención.** Personas que han buscado «crm para academias», «software gestión academia», «captar alumnos» o «campañas de matrícula», o que visitan webs de software de gestión de academias.
+   - **Creatividad:** el vídeo de 70 s de la landing y el anuncio nuevo de Contenido.
+   - **Por qué:** es el único formato de Google con alcance suficiente para formación. Se parece a cómo trabajamos en Meta: nombrar el sector y llevar a la landing.
+   - **Riesgo:** como no hay búsqueda, el filtro depende del vídeo y de las preguntas de la landing.
+2. **Búsqueda en concordancia exacta y de frase**, solo con las palabras de la tabla, más «agencia captación alumnos» y «marketing para academias».
+   - **Palabras negativas:** curso, máster, gratis, empleo, oposiciones, «academia de marketing».
+   - **Coste:** unos 5-10 € al día. Gastará poco por falta de búsquedas.
+   - **Conclusión:** sirve para no dejar escapar a quien busca, no para probar nada.
+3. **Remarketing:** visitantes de la v22 y personas que vieron el vídeo en YouTube.
+   - Hoy la audiencia es demasiado pequeña. Hacen falta unos 1.000 usuarios para servir anuncios en la Red de Display.
+   - Se activa después de 1 o 2.
+
+**Requisitos antes de gastar un euro** (Growth y Paid, unas 6-8 h) [E]:
+
+1. **Cuenta de Google Ads de Qualivo** con acceso para Paid. Hoy Paid no tiene ninguna.
+2. **Formulario de la v22:** campos ocultos de gclid y UTM, que se guarden en la ficha de GHL.
+3. **Conversiones:**
+   - «Reserva» en Google Ads.
+   - Importar «Qualified» (reunión con encaje) desde GHL.
+   - Sin eso, Google optimiza a cualquier reserva.
+4. **UTM:** `utm_source=google&utm_medium=cpc|demandgen&utm_campaign=formacion-v22&utm_content=<anuncio>`.
+5. **Titular de la landing:** uno alineado con el anuncio solo para este tráfico (ver el brief de Contenido).
+
+**Piloto propuesto:**
+- **Formato:** Demand Gen, más la búsqueda exacta como complemento.
+- **Presupuesto:** 200 € como máximo, en 3 semanas.
+- **Éxito:** al menos 1 reunión con encaje a 200 € o menos.
+- **Parada:** 100 € sin ninguna reserva que pase el filtro de la landing.
+- **Fecha de muerte:** 3 semanas desde el lanzamiento.
+
+**Condición del plan Q4:** cierre del 15 % o más. **Hoy no se cumple:** hay 1 piloto de 10 reuniones celebradas y 0 cobros [C]. Por eso Paid lo propone para diciembre, salvo que Maikel decida adelantarlo, sabiendo que la muestra será pequeña.
+
+**Contaminación:** Demand Gen y Meta llegan a gente parecida. Se mide por UTM y gclid en GHL, nunca por lo que reporta cada plataforma.
