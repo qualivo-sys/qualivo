@@ -14,6 +14,7 @@
 :root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--con:#0F170D;--con-ink:#D7E3D0;--con-mute:#7F8F78}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--con:#080D07}}
 :root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--con:#080D07}
+html,body{overflow-x:clip}
 .instant *,.instant *::before,.instant *::after{transition:none!important;animation-duration:0s!important;animation-delay:0s!important}
 
 /* barra de control */
@@ -48,7 +49,7 @@
 
 /* móvil */
 .phone{width:100%;max-width:360px;margin-inline:auto;background:#0E120D;border-radius:46px;padding:11px;box-shadow:0 0 0 1px #2b3328,0 30px 60px -20px rgba(12,33,9,.55),inset 0 0 0 2px #262c24;position:relative}
-.scr{position:relative;height:min(660px,calc(100vh - 292px));min-height:500px;border-radius:35px;overflow:hidden;background:#fff;color:#111;isolation:isolate}
+.scr{position:relative;height:min(660px,var(--scrH,calc(100vh - 292px)));min-height:500px;border-radius:35px;overflow:hidden;background:#fff;color:#111;isolation:isolate}
 .sbar{position:absolute;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:12px 26px 0;font-size:13px;font-weight:650;height:44px;color:#111;pointer-events:none;transition:color .3s}
 .sbar.light{color:#fff}
 .sbar .isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:100px;height:28px;border-radius:20px;background:#000}
@@ -178,6 +179,12 @@
 .m small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
 .m .who{display:block;font-size:11px;font-weight:700;color:#1F8A3A;margin-bottom:1px}
 .m .lk{display:block;margin-top:6px;border-radius:8px;background:rgba(0,0,0,.05);padding:6px 8px;font-size:12px;color:#0a58ca;overflow-wrap:anywhere}
+.m .qr{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.m .qr span{border:1px solid #1F8A3A;color:#1F8A3A;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:600}
+.m .qr span.on{background:#1F8A3A;color:#fff}
+#bBranch{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 40%,transparent);color:var(--warn)}
+#bBranch.pulse{animation:pulse 1.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--warn) 25%,transparent)}}
 .m.typing{display:flex;gap:4px;padding:11px 12px}
 .m.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:dot 1s infinite}
 .m.typing i:nth-child(2){animation-delay:.15s}.m.typing i:nth-child(3){animation-delay:.3s}
@@ -222,7 +229,7 @@
 .home span{opacity:.75;font-size:14px}
 
 /* consola */
-.con{background:var(--con);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,calc(100vh - 292px)) + 22px);min-height:522px;box-shadow:var(--shadow-lg);border:1px solid #1d2a19}
+.con{background:var(--con);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,var(--scrH,calc(100vh - 292px))) + 22px);min-height:522px;box-shadow:var(--shadow-lg);border:1px solid #1d2a19}
 .con .colh{flex-wrap:wrap;color:var(--con-mute);padding:2px 4px 8px;border-bottom:1px solid #1f2c1b;margin-bottom:8px}
 .con .colh b{color:var(--con-ink)}
 .con .colh .tagr{border-color:#2a3a25;color:var(--con-mute)}
@@ -241,7 +248,7 @@
 .legend .src{opacity:.85}
 
 /* lateral */
-.side{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,calc(100vh - 292px)) + 22px);min-height:522px;box-shadow:var(--shadow-lg);min-width:0}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;height:calc(min(660px,var(--scrH,calc(100vh - 292px))) + 22px);min-height:522px;box-shadow:var(--shadow-lg);min-width:0}
 .stabs{display:flex;gap:4px;background:var(--line-2);border-radius:11px;padding:3px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none}
 .stabs::-webkit-scrollbar{display:none}
 .stabs button{flex:1 0 auto;font:inherit;font-size:12.5px;font-weight:600;border:0;background:transparent;color:var(--muted);border-radius:8px;padding:7px 9px;cursor:pointer;white-space:nowrap}
@@ -331,7 +338,7 @@
 .capb{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center;background:var(--f900);color:#fff;border-radius:16px;padding:12px 18px;box-shadow:var(--shadow-lg)}
 .capb .n{font-family:var(--mono);font-size:12px;color:#BFE3B6;white-space:nowrap;display:grid;gap:3px}
 .capb .n .ar{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.02em;color:#0C2109;background:var(--moss);border-radius:6px;padding:2px 7px;width:fit-content}
-.capb p{font-size:clamp(15px,1.45vw,19px);line-height:1.4;font-weight:500;min-height:1.4em}
+.capb p{font-size:clamp(15px,1.4vw,18.5px);line-height:1.4;font-weight:500;min-height:2.8em;display:flex;align-items:center}
 .capb .pg{grid-column:1/-1;height:3px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden;margin-top:6px}
 .capb .pg i{display:block;height:100%;width:0;background:var(--moss);transition:width .5s}
 
@@ -362,7 +369,8 @@
   .scr{height:600px;min-height:0}
   .ctl h1{font-size:18px}
   .chaps{order:5;flex-basis:100%}
-  .btns{margin-left:auto}
+  .btns{margin-left:0;flex-wrap:wrap}
+  #bPlay{flex:1}
   .capb{position:sticky;bottom:8px;z-index:30;padding:10px 14px}
   .fl{grid-template-columns:100px minmax(0,1fr)}
   .fn div{grid-template-columns:96px 1fr 48px}
@@ -388,6 +396,7 @@
       <button id="bPrev" title="Paso anterior (←)" aria-label="Paso anterior"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button id="bPlay" title="Reproducir o pausar (espacio)"><span id="bPlayT">▶ Empezar</span></button>
       <button id="bNext" title="Paso siguiente (→)" aria-label="Paso siguiente"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button id="bBranch" title="Ver qué pasa si no reserva">↳ ¿Y si no reserva?</button>
       <button id="bMode" title="Avance automático o paso a paso">Auto</button>
       <button id="bSpeed" title="Velocidad">1×</button>
       <button id="bFull" title="Pantalla completa" aria-label="Pantalla completa"><svg class="i" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
@@ -458,7 +467,7 @@
         <p>Las tres áreas del piloto, una detrás de otra: <b>1 · conversión web</b>, <b>2 · seguimiento</b> con Clara, ActiveCampaign y vuestro equipo, y <b>3 · publicidad y medición</b>. Con vuestro ecosistema, sin herramientas duplicadas.</p>
         <p>A la izquierda, su móvil. En el centro, lo que pasa por detrás (web, Meta, ActiveCampaign, vuestro orquestador y los agentes). A la derecha, lo que ve vuestro equipo.</p>
         <button id="bStart">▶ Empezar</button>
-        <p class="note"><span class="sim">Simulación</span> Las cacerías, precios, fechas y observaciones son los de hunty.es comprobados el 22-oct-2026. Javier, Andrés, el comercial «Pablo», los mensajes, la hora y todas las cifras de contactos y del panel son inventados, y ninguna es una previsión. Teclas: <kbd>espacio</kbd> pausa, <kbd>←</kbd> <kbd>→</kbd> pasos.</p>
+        <p class="note"><span class="sim">Simulación</span> Las cacerías, precios, fechas y observaciones son los de hunty.es comprobados el 22-oct-2026. Javier, Andrés, el comercial «Pablo», los mensajes, la hora y todas las cifras de contactos y del panel son inventados, y ninguna es una previsión. Teclas: <kbd>espacio</kbd> pausa, <kbd>←</kbd> <kbd>→</kbd> pasos. En el paso 10, «¿Y si no reserva?» abre la rama de seguimiento.</p>
       </div>
     </div>
   </div>
@@ -629,6 +638,36 @@ function emailAndrés(){
   $('#mailB').scrollTop=0;
 }
 
+function igJR(){
+  $('#igFeed').innerHTML=filler('monteros_de_toledo',IMG.coto,'Preparando la temporada.')+
+  `<article class="post" id="adJ"><div class="h"><span class="av"></span><div><b>hunty</b><small>Publicidad</small></div></div><div class="img" style="background-image:url(${IMG.ciervo})"><div class="dyn"><img class="lg" src="../assets/logo-white.svg" alt=""><span class="pill">hunty.es</span><small>Montería · Toledo</small><h4>Los Jaronales · 26 de diciembre</h4><p>Robledo del Buey · 35 puestos por sorteo · ★ 5/5 (1 reseña)</p><div class="pr"><b>350 €</b><span>el puesto · 325 € con Prime</span></div></div></div><div class="cta"><span>Ver la montería</span><span>›</span></div>${ICO_ACTS}<p class="cap"><b>hunty</b>Monterías de diciembre en Toledo, al mismo precio que el organizador.</p></article>`;
+  $('#igFeed').scrollTop=0;
+}
+function emailJavier(){
+  $('#mailB').innerHTML=`<div class="em"><div class="sj">Javier, monterías con sitio para dos en diciembre y enero</div>
+  <div class="fr"><i></i><span><b style="color:#111">Hunty</b> · para mí · 10:30</span></div>
+  <p>Hola, Javier:</p>
+  <p>Por si lo estáis hablando, estas son las que encajan con lo que buscáis: 2 puestos, Toledo o Cáceres, hasta 400 €.</p>
+  <div class="hero" style="background-image:url(${IMG.mont})"></div>
+  <p><b>Río Frío</b> · Robledo del Mazo (Toledo) · 26 de diciembre · 350 € el puesto (332,50 € con Prime). Aún sin reseñas: es la primera temporada de esta organización. Después de reservar, reserva de 100 € a la organización.</p>
+  <div class="hero" style="background-image:url(${IMG.ciervo})"></div>
+  <p><b>Los Jaronales</b> · Robledo del Buey (Toledo) · 26 de diciembre · 350 € el puesto (325 € con Prime). 5/5 en 1 reseña. Puestos por sorteo; los acompañantes pueden ir por 20 €, con desayuno y comida.</p>
+  <p>Para 2 puestos, 700 € en cualquiera de las dos.</p>
+  <span class="bt">Ver las dos y reservar</span>
+  <span class="bt2">Que me llame Pablo</span>
+  <p class="ft">Valmorisco no aparece: su ficha dice que solo queda 1 puesto. Te escribimos porque hablaste con nosotros por WhatsApp y aceptaste recibir información. Darte de baja.</p></div>`;
+  $('#mailB').scrollTop=0;
+}
+function cmLeadJ(){
+  $('#p-cm').innerHTML=`<div class="lead"><div class="lh"><div><b>Javier · llamar ahora</b><small>Pide llamada por WhatsApp · 19:41</small></div><span class="hot">CALIENTE · 86</span></div>
+  <div class="lb">
+  <div><h5>Qué busca</h5><ul><li>Montería en diciembre o enero, Toledo o Cáceres, hasta 400 € el puesto.</li><li>Van dos.</li></ul></div>
+  <div><h5>Qué ha hecho</h5><ul><li>3 visitas a Valmorisco: solo queda 1 puesto, no le sirve.</li><li>Preguntó a Clara por Río Frío: reseñas y reserva de 100 € a la organización.</li><li>«Lo hablo con mi compañero». Día 3 abre el email y mira Los Jaronales.</li><li>Día 5 pide que le llames.</li></ul></div>
+  <div><h5>Cómo abrir la llamada</h5><p class="say">«Javier, soy Pablo, de Hunty. Me dice Clara que sois dos para el 26 de diciembre. ¿Os cuento la diferencia entre Río Frío y Los Jaronales?»</p></div>
+  <div><h5>Ten a mano</h5><ul><li>Río Frío: finca nueva para la organización, sin reseñas; 100 € a la organización tras reservar.</li><li>Los Jaronales: 5/5 con 1 reseña, puestos por sorteo, 325 € con Prime.</li><li>No prometas plazas que la ficha no indique.</li></ul></div>
+  <div class="acts"><span id="callBtn">Llamar</span><span class="o">Enviar WhatsApp</span></div></div></div>`;
+}
+
 /* ---------- consola ---------- */
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
 function fmt(o){
@@ -721,8 +760,8 @@ async function count(el,to,dec=0,ms=1200){
 }
 
 /* ---------- guion ---------- */
-const AREA=[3,1,3,2,1,2,2,2,2,3],AREAN={1:'Conversión web',2:'Seguimiento',3:'Publicidad y medición'};
-const CH=['Anuncio','Landing','Retargeting','WhatsApp','Reserva','Aviso','Ficha → email','Cliente','Comercial','Panel'];
+const AREA=[3,1,3,2,1,2,2,2,2,3,2],AREAN={1:'Conversión web',2:'Seguimiento',3:'Publicidad y medición'};
+const CH=['Anuncio','Landing','Retargeting','WhatsApp','Reserva','Aviso','Ficha → email','Cliente','Comercial','Panel','↳ Si no reserva'];
 const STEPS=[
 /* 1 */ {ch:0,clock:'Día 1 · 19:05',cap:'Javier, de Madrid, mira Instagram por la tarde. Le sale el anuncio de monterías de diciembre y enero.',run:async()=>{
   who('Móvil de Javier','cazador inventado · Madrid');phoneTime('19:05');igA();view('ig');await sleep(600);
@@ -786,14 +825,14 @@ const STEPS=[
   await waType('No veo reseñas. ¿Y qué es lo de los 100 € a la organización?');
   await waMsg('out','No veo reseñas. ¿Y qué es lo de los 100 € a la organización?','13:42');
 }},
-/* 10 */ {ch:3,clock:'Día 2 · 13:43',cap:'Resuelve las dos dudas que frenan a cualquiera con esta ficha: por qué no tiene reseñas y qué son los 100 € a la organización.',run:async()=>{
+/* 10 */ {ch:3,clock:'Día 2 · 13:43',cap:'Resuelve las dos dudas que frenan a cualquiera con esta ficha: por qué no tiene reseñas y qué son los 100 € a la organización. Y le deja elegir: llamada o enlace.',run:async()=>{
   await waMsg('in','Es la primera temporada que esta organización caza Río Frío, por eso aún no tiene reseñas. Y sí: una vez reservada, hay que hacer una reserva de 100 € a la organización para confirmar el puesto. Es finca abierta, 50 puestos y sin cupo, con desayuno y comida.<br><br>¿Quieres que Pablo, del equipo, te llame antes, o prefieres el enlace para reservar?','13:43','Clara · Hunty');
-  setF('fichas','Valmorisco (3) · Río Frío');score(74);
+  setF('fichas','Valmorisco (3) · Río Frío');score(74);next('Esperar su respuesta');
+}},
+/* 11 */ {ch:4,clock:'Día 2 · 13:44',cap:'Javier pide el enlace. Clara se lo manda directo a la reserva: elige 2 puestos y paga la señal desde el móvil.',run:async()=>{
   await waType('El enlace, reservamos los dos');
   await waMsg('out','El enlace, reservamos los dos','13:44');
   setF('estado','Quiere reservar Río Frío para 2');tag('interes-riofrio-NWR24E');next('Enviar enlace de reserva');
-}},
-/* 11 */ {ch:4,clock:'Día 2 · 13:44',cap:'Clara le manda el enlace directo a la reserva. Elige 2 puestos y paga la señal desde el móvil.',run:async()=>{
   await waMsg('in','Aquí lo tienes. Elige 2 puestos y paga la señal:<span class="lk">hunty.es/monterias/NWR24E</span>','13:44','Clara · Hunty');
   const lk=[...document.querySelectorAll('#waB .lk')].pop();await tap(lk);phoneTime('13:44');
   checkout();view('web');await sleep(500);
@@ -879,6 +918,58 @@ const STEPS=[
 }},
 /* 22 */ {ch:9,clock:'Semana 4',cap:'Lo que habéis visto usa vuestras fichas, vuestra web, ActiveCampaign y vuestros agentes. Lo que ponemos nosotros son las reglas, los textos, los segmentos y la medición.',run:async()=>{
   await ev('orq','Fin de la simulación',{piezas_de_hunty:['web','fichas','ActiveCampaign','Clara','Bruno','orquestador','comerciales'],aporta_qualivo:['anuncios y landings','retargeting','avisos','emails desde fichas','segmentos','medición']});
+}},
+/* B1 */ {ch:10,br:1,clock:'Día 2 · 13:44',cap:'¿Y si no reserva a la primera? Javier contesta que lo tiene que hablar con su compañero. Clara no insiste: le deja la ficha y queda en seguimiento.',run:async()=>{
+  await waType('Lo hablo con mi compañero y te digo');
+  await waMsg('out','Lo hablo con mi compañero y te digo','13:44');
+  await waMsg('in','Claro, Javier. Te dejo aquí la ficha para que la veáis juntos:<span class="lk">hunty.es/monterias/NWR24E</span>Si os surge cualquier duda, escríbeme por aquí.','13:44','Clara · Hunty');
+  await ev('orq','Sin reserva: entra en seguimiento',{motivo:'lo consulta con su compañero',regla:'no insistir el mismo día',siguiente:['email el día 3','WhatsApp el día 5 si no reserva']});
+  setF('estado','Lo consulta con su compañero');score(66);tag('seguimiento-sin-reserva');hist('«Lo hablo con mi compañero»');next('Email del día 3 con las opciones para dos');
+}},
+/* B2 */ {ch:10,br:1,clock:'Día 2 · 21:10',cap:'Esa noche sigue en el público de recuerdo. El anuncio le enseña monterías parecidas a las que miró, y una tiene reseñas: Los Jaronales, 5 sobre 5.',run:async()=>{
+  phoneTime('21:10');igJR();view('ig');await sleep(500);
+  await scrollTo($('#igFeed'),$('#adJ').offsetTop-50,1200);
+  await ev('meta','Anuncio dinámico de catálogo',{público:'habló con el asesor y no reservó · días 1-7',producto:'1320 · Los Jaronales',criterio:'parecida a lo que miró: montería · 26-dic · 350 €',límite:'2-3 impactos por semana'});
+}},
+/* B3 */ {ch:10,br:1,clock:'Día 3 · 10:30',cap:'Al día siguiente le llega un email con las monterías que tienen sitio para dos. Valmorisco no sale, porque su ficha dice que queda 1 puesto.',run:async()=>{
+  phoneTime('10:30');
+  inbox([{f:'Hunty',s:'Javier, monterías con sitio para dos en diciembre y enero',p:'Por si lo estáis hablando, estas son las que encajan…',n:1},{f:'Federación de Caza',s:'Renovación de la licencia',p:'Recuerda que…',o:1}]);
+  view('mail');
+  await notify('ml','Hunty','Javier, monterías con sitio para dos en diciembre y enero',1700);
+  $('#mi0').classList.add('hl');await tap($('#mi0'));
+  emailJavier();await sleep(300);
+  await ev('ac','Email de seguimiento',{plantilla:'opciones para tu grupo',fichas:['NWR24E · Río Frío','1320 · Los Jaronales'],excluye:'1790 · Valmorisco (queda 1 puesto)'});
+  await scrollTo($('#mailB'),420,1600);
+  await ev('ac','Email abierto',{clic:'Los Jaronales',reserva:'no'});
+  setF('fichas','Valmorisco (3) · Río Frío · Los Jaronales');score(70);hist('Abre el email y mira Los Jaronales');next('WhatsApp del día 5 si no reserva');
+}},
+/* B4 */ {ch:10,br:1,clock:'Día 5 · 19:30',cap:'Dos días después, como no ha reservado, Clara le escribe una sola vez, con una pregunta concreta y tres botones. Siempre dentro de horario, de 8:00 a 21:30.',run:async()=>{
+  phoneTime('19:30');view('home',true);
+  await notify('wa','Hunty · Asesor','Hola, Javier. ¿Lo pudisteis hablar?',1600);
+  view('wa',true);await sleep(300);
+  await waMsg('in','Hola, Javier. ¿Lo pudisteis hablar? Para el 26 de diciembre tenéis Río Frío y Los Jaronales, las dos a 350 € el puesto. Si queréis, Pablo, del equipo, os llama y lo veis en diez minutos.<span class="qr"><span>Reservar</span><span id="qrCall">Que me llame Pablo</span><span>Este año no</span></span>','19:30','Clara · Hunty');
+  await ev('clara','Seguimiento del día 5',{condición:'abrió el email y no reservó',horario:'8:00-21:30',máximo:'un WhatsApp de seguimiento'});
+  const q=$('#qrCall');await tap(q);q.classList.add('on');
+  await waMsg('out','Que me llame Pablo','19:41');
+  await ev('orq','Contacto caliente → comercial',{motivo:'grupo de 2 · 5 visitas · pide llamada',prioridad:'alta',plazo:'llamar en menos de 30 min'});
+  setF('estado','Pide llamada · 2 puestos, 26 de diciembre');score(86);tag('pide-llamada');hist('Pide que le llame Pablo');next('Llamada de Pablo');
+}},
+/* B5 */ {ch:10,br:1,clock:'Día 5 · 19:44',cap:'Pablo recibe la ficha de Javier con todo lo que ha pasado y le llama. Si reserva, la historia sigue como en el camino principal.',run:async()=>{
+  cmLeadJ();stab('cm');
+  await ev('com','Pablo recibe la ficha de Javier',{vista:'ActiveCampaign o vuestra plataforma',incluye:'visitas, conversación con Clara, email del día 3 y guion de apertura'});
+  await sleep(1200);await press($('#callBtn'));
+  phoneTime('19:44');view('call',true);
+  await ev('com','Llamada saliente',{a:'Javier',motivo:'Río Frío o Los Jaronales · 2 puestos'});
+}},
+/* B6 */ {ch:10,br:1,clock:'Día 5 · 19:58',cap:'Y si ni con la llamada reserva: «este año no». Se para todo, deja de ver anuncios y le queda un aviso para la temporada que viene. Nadie se pierde: o reserva, o habla con Pablo, o se queda en la base con lo que busca.',run:async()=>{
+  stab('cc');phoneTime('19:58');view('wa',true);await sleep(300);
+  await waMsg('in','Gracias por atender a Pablo, Javier. Entendido: este año no. ¿Te escribimos en octubre, cuando salgan las monterías de la próxima temporada para dos?','19:58','Clara · Hunty');
+  await waType('Sí, perfecto');
+  await waMsg('out','Sí, perfecto','19:59');
+  await ev('ac','«Este año no»',{secuencia:'parada',vuelve:'octubre de 2027, su mes',aviso:'montería · 2 puestos · Toledo o Cáceres · ≤ 400 €',consentimiento:'sí · 19:59'});
+  await ev('meta','Sale de los públicos de recuerdo',{motivo:'ha dicho «este año no»'});
+  untag('seguimiento-sin-reserva');untag('pide-llamada');tag('aviso-temporada-2027-28');
+  setF('estado','Este año no · vuelve en octubre de 2027');score(40);hist('«Este año no»: aviso para la próxima temporada');next('Escribirle en octubre de 2027 con lo nuevo para dos');
 }}
 ];
 
@@ -888,18 +979,22 @@ function resetAll(){
   $('#log').innerHTML='';waReset();$('#web').innerHTML='';$('#igFeed').innerHTML='';$('#mailB').innerHTML='';$('#notif').classList.remove('on');
   ccReset();agReset();cmReset();pnReset();stab('cc');
 }
+const MAIN=STEPS.map((x,k)=>k).filter(k=>!STEPS[k].br);
+const BR=MAIN.slice(0,10).concat(STEPS.map((x,k)=>k).filter(k=>STEPS[k].br));
+let P=MAIN;
+function setPath(br){P=br?BR:MAIN;$('#bBranch').textContent=br?'↩ Si reserva':'↳ ¿Y si no reserva?'}
 function ui(n){
-  const st=STEPS[n];S.clock=st.clock;
+  const st=STEPS[P[n]];$('#bBranch').classList.toggle('pulse',P===MAIN&&n===9);S.clock=st.clock;
   $('#clock').textContent=st.clock;$('#cap').textContent=st.cap;
-  $('#capN').innerHTML=`<b class="ar">Área ${AREA[st.ch]} · ${AREAN[AREA[st.ch]]}</b>`+(n+1)+' / '+STEPS.length;$('#capPg').style.width=((n+1)/STEPS.length*100)+'%';
-  document.querySelectorAll('#chaps button').forEach((b,k)=>{b.classList.toggle('on',k===st.ch);b.classList.toggle('done',k<st.ch)});
-  const on=document.querySelector('#chaps button.on');if(on&&!S.fast)on.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  $('#capN').innerHTML=`<b class="ar">Área ${AREA[st.ch]} · ${AREAN[AREA[st.ch]]}</b>`+(n+1)+' / '+P.length+(P===BR?' · rama':'');$('#capPg').style.width=((n+1)/P.length*100)+'%';
+  document.querySelectorAll('#chaps button').forEach((b,k)=>{b.classList.toggle('on',k===st.ch);b.classList.toggle('done',k<st.ch&&k<10)});
+  const on=document.querySelector('#chaps button.on');if(on&&!S.fast){const c=$('#chaps');c.scrollTo({left:on.offsetLeft-c.clientWidth/2+on.offsetWidth/2,behavior:'smooth'})}
 }
 async function go(n,play=true){
-  n=Math.max(0,Math.min(STEPS.length-1,n));
+  n=Math.max(0,Math.min(P.length-1,n));
   const tok=++S.tok;
   live.classList.add('instant');resetAll();S.fast=true;
-  try{for(let k=0;k<n;k++){S.i=k;ui(k);await STEPS[k].run()}}catch(e){if(e!==STOP)console.error(e)}
+  try{for(let k=0;k<n;k++){S.i=k;ui(k);await STEPS[P[k]].run()}}catch(e){if(e!==STOP)console.error(e)}
   S.fast=false;
   if(tok!==S.tok)return;
   requestAnimationFrame(()=>live.classList.remove('instant'));
@@ -910,10 +1005,10 @@ async function go(n,play=true){
 async function run(n,tok){
   S.running=true;
   try{
-    for(let k=n;k<STEPS.length;k++){
+    for(let k=n;k<P.length;k++){
       if(tok!==S.tok)return;
-      S.i=k;ui(k);await STEPS[k].run();
-      if(k===STEPS.length-1){setPaused(true);return}
+      S.i=k;ui(k);await STEPS[P[k]].run();
+      if(k===P.length-1){setPaused(true);return}
       if(!S.auto){return}
       await sleep(2200);
     }
@@ -927,7 +1022,7 @@ function start(){
 $('#bStart').onclick=start;
 $('#bPlay').onclick=()=>{
   if(!S.started)return start();
-  if(S.i>=STEPS.length-1&&S.paused){setPaused(false);go(0);return}
+  if(S.i>=P.length-1&&S.paused){setPaused(false);go(0);return}
   if(!S.auto&&!S.running){setPaused(false);go(S.i+1);return}
   setPaused(!S.paused);
 };
@@ -937,7 +1032,8 @@ $('#bSpeed').onclick=()=>{S.speed=S.speed===1?1.6:S.speed===1.6?0.7:1;$('#bSpeed
 $('#bFull').onclick=()=>{const d=document;if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen()};
 $('#bMode').onclick=()=>{S.auto=!S.auto;$('#bMode').textContent=S.auto?'Auto':'Paso a paso'};
 $('#chaps').innerHTML=CH.map((c,k)=>`<button role="tab" data-c="${k}">${k+1} · ${c}</button>`).join('');
-$('#chaps').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);go(STEPS.findIndex(s=>s.ch===+b.dataset.c))};
+$('#chaps').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);const c=+b.dataset.c;setPath(c===10);go(P.findIndex(k=>STEPS[k].ch===c))};
+$('#bBranch').onclick=()=>{if(!S.started){S.started=true;$('#cover').classList.add('off')}setPaused(false);setPath(P===MAIN);go(10)};
 $('#stabs').onclick=e=>{const b=e.target.closest('button');if(b)stab(b.dataset.p)};
 document.addEventListener('keydown',e=>{
   if(e.target.closest('input,textarea'))return;
@@ -945,9 +1041,16 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowRight'){e.preventDefault();$('#bNext').click()}
   else if(e.key==='ArrowLeft'){e.preventDefault();$('#bPrev').click()}
 });
-resetAll();S.clock=STEPS[0].clock;$('#capN').textContent='0 / '+STEPS.length;
-window.__hunty={go:n=>{S.started=true;$('#cover').classList.add('off');setPaused(false);go(n-1)},S};
-const mh=location.hash.match(/^#paso-(\d+)$/);if(mh){S.started=true;$('#cover').classList.add('off');setPaused(false);go(+mh[1]-1)}
+function fit(){
+  if(innerWidth<=760){document.documentElement.style.removeProperty('--scrH');return}
+  const st=$('#stage').getBoundingClientRect().top+scrollY,cap=$('.capb').offsetHeight;
+  const h=Math.max(480,Math.min(720,innerHeight-st-cap-28-22-12-14));
+  document.documentElement.style.setProperty('--scrH',h+'px');
+}
+addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);fit();
+resetAll();S.clock=STEPS[0].clock;$('#capN').textContent='0 / '+MAIN.length;
+window.__hunty={br:b=>setPath(b),go:n=>{S.started=true;$('#cover').classList.add('off');setPaused(false);go(n-1)},S};
+const mh=location.hash.match(/^#(rama-)?paso-(\d+)$/);if(mh){setPath(!!mh[1]);S.started=true;$('#cover').classList.add('off');setPaused(false);go(+mh[2]-1)}
 })();
 </script>
 </body>
