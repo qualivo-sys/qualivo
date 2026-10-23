@@ -38,13 +38,15 @@ for (const c of campaigns) {
   }
 }
 
-// La bandeja unificada devuelve como mucho 20 por página.
+// La bandeja unificada devuelve como mucho 20 por página y acepta hasta 5 campañas por consulta.
 const replied = new Set();
-for (let offset = 0; ; offset += 20) {
-  const res = call('POST', '/master-inbox/inbox-replies', { offset, limit: 20, filters: { campaignId: campaigns } });
-  const page = Array.isArray(res) ? res : res.data || [];
-  for (const x of page) replied.add(x.lead_email.toLowerCase());
-  if (page.length < 20) break;
+for (let k = 0; k < campaigns.length; k += 5) {
+  for (let offset = 0; ; offset += 20) {
+    const res = call('POST', '/master-inbox/inbox-replies', { offset, limit: 20, filters: { campaignId: campaigns.slice(k, k + 5) } });
+    const page = Array.isArray(res) ? res : res.data || [];
+    for (const x of page) replied.add(x.lead_email.toLowerCase());
+    if (page.length < 20) break;
+  }
 }
 
 const agencies = new Set([...replied].map(domain).filter((d) => !PERSONAL.test(d)));
