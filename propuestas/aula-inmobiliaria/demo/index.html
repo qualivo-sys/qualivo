@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Aula Inmobiliaria · demo del recorrido</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Demo guiada en pestañas para Aula Inmobiliaria: anuncio y solicitud, WhatsApp al minuto, ficha del asesor, seguimientos y panel.
+   Estructura, pestañas, chat y ficha tomados de la demo de Hunty; paleta azul marino en ../assets/deck.css. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#B87708;--real:#17734A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55}
+/* barra superior: marca en texto */
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+/* cabecera */
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 88% 18%,rgba(141,185,238,.28),transparent 42%),linear-gradient(135deg,#0A1A31 0%,#0F2747 55%,#143360 100%)}
+.dhero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,#000 60%)}
+.dhero .deco{position:absolute;right:5%;top:70px;width:280px;height:auto;opacity:.45;z-index:-1;pointer-events:none}
+@media (max-width:1180px){.dhero .deco{width:220px;right:2%}}
+.dhero .wrap{padding-block:56px 44px;display:grid;gap:12px}
+.dhero .eyebrow{color:var(--moss)}
+.dhero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 60;font-size:clamp(32px,4.8vw,54px);line-height:1.06;letter-spacing:-.02em;max-width:21ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:70ch;margin-top:6px}
+.dhero .lead q{font-style:italic}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;max-width:980px}
+.legend > div{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:13px 15px;background:rgba(255,255,255,.05);font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+.legend b{color:#fff}
+.legend .real,.legend .ej{margin-bottom:6px}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 60;font-size:clamp(25px,3vw,34px);line-height:1.14;letter-spacing:-.015em}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.55}
+.note a{color:var(--accent)}
+.ej,.real{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px;line-height:1.5}
+.ej{background:var(--ej)}
+.real{background:var(--real)}
+h2 .ej,h2 .real{vertical-align:6px;margin-left:6px}
+.rv{display:grid;gap:6px;font-size:13.5px;color:var(--muted);border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 13px;line-height:1.55;max-width:920px}
+/* pestañas */
+nav.tabs{position:sticky;top:64px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-26px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 9px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(10,26,49,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--muted);max-width:78ch;font-size:16.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);line-height:1.55}
+.why b{color:var(--ink)}
+.stackc{display:grid;gap:16px;min-width:0}
+/* 1 · anuncio */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);width:min(420px,100%);margin-inline:auto}
+.ig .h{display:flex;gap:10px;align-items:center;padding:10px 12px;font-size:13.5px;line-height:1.3}
+.ig .h small{display:block;color:var(--muted);font-size:12px}
+.av{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#143360,#1D5FAE);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.02em;flex:none}
+.ig .vis{position:relative;aspect-ratio:1/1;background:radial-gradient(circle at 80% 15%,rgba(141,185,238,.35),transparent 45%),linear-gradient(150deg,#0F2747,#1D5FAE);color:#fff;padding:24px;display:grid;align-content:space-between;overflow:hidden}
+.ig .vis svg.house{position:absolute;right:-18px;bottom:-10px;width:58%;opacity:.16}
+.ig .vis .k1{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss)}
+.ig .vis .t1{font-family:var(--serif);font-weight:600;font-size:clamp(22px,2.4vw,26px);line-height:1.12;letter-spacing:-.01em;max-width:17ch;margin-top:8px}
+.ig .vis ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px;max-width:24ch}
+.ig .vis li::before{content:"✓ ";color:var(--moss);font-weight:700}
+.ig .vis .price{display:inline-block;background:#fff;color:#0F2747;border-radius:10px;padding:6px 11px;font-weight:700;font-size:15px;width:fit-content}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;background:var(--accent-soft);font-weight:650;font-size:14px;color:var(--accent)}
+.ig .txt{padding:10px 12px 14px;font-size:14px;line-height:1.5}
+.ig .txt b{font-weight:650}
+.frm{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:14px;box-shadow:var(--shadow)}
+.frm h3{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.fq{display:grid;gap:6px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.fq:last-of-type{border-bottom:0;padding-bottom:0}
+.fq label{font-weight:650;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{border:1px solid var(--line);border-radius:99px;padding:4px 11px;font-size:13px;color:var(--muted);background:var(--paper)}
+.chips span.on{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:600}
+.fq .y{font-size:13px;color:var(--muted);line-height:1.5}
+.fq .y b{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper)}
+.consent{font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.consent i{flex:none;width:16px;height:16px;border-radius:4px;background:var(--accent);margin-top:2px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:11px}
+.sendbtn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:650;border-radius:99px;padding:10px 18px;font-size:15px;width:fit-content}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* 2 · WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0B111B;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #26303f,0 30px 60px -20px rgba(10,26,49,.55),inset 0 0 0 2px #222b38;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:86%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out;color:var(--ink)}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:7px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out;text-align:left}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.wa .opts button.restart:hover{background:var(--line-2);color:var(--ink)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0 2px 0 0;list-style:none;display:grid;gap:8px;align-content:start;max-height:330px;overflow-y:auto;scroll-behavior:smooth}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:var(--ej)}
+.log li.g{border-left-color:var(--good)}
+.live{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:12px}
+.live .sc{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.live .sc b.n{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;min-width:2ch}
+.meter{flex:1 1 120px;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.meter span{display:block;height:100%;width:0;background:var(--accent);border-radius:0 4px 4px 0;transition:width .5s}
+.live dl{display:grid;grid-template-columns:minmax(92px,auto) minmax(0,1fr);gap:5px 12px;margin:0;font-size:13.5px}
+.live dt{color:var(--muted);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.live dd{margin:0;font-weight:550;border-radius:5px;padding:0 4px;margin-left:-4px}
+.live dd.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%{background:var(--accent-soft)}70%{background:var(--accent-soft)}100%{background:transparent}}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:11px;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 8px;animation:pop .3s ease-out}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:13.5px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+/* 3 · ficha */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#DDE3EC;flex:none}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--ej);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.winbody > *{min-width:0}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd > div:first-child{flex:1 1 280px}
+.ficha .hd b{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.ficha .scn{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .yes{color:var(--good)}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
+.chk li{display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+.chk li .i{color:var(--accent);margin-top:3px;width:17px;height:17px}
+/* 4 · seguimientos */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--ej)}
+.tl li.mail::before{background:#6E7FA0}
+.tl li.call::before{background:var(--f700);box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--accent)}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+.tl .muted{font-size:13px}
+.legtl{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.legtl span{display:inline-flex;align-items:center;gap:6px}
+.legtl i{width:11px;height:11px;border-radius:50%;display:inline-block}
+/* 5 · panel */
+.tbl{overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap;vertical-align:middle}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl td.w{white-space:normal;min-width:200px}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl tfoot td{border-top:1px solid var(--line);border-bottom:0;font-weight:700}
+.tbl td.hl{font-weight:700;color:var(--accent)}
+.hb{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.hb i{display:block;height:10px;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:var(--ej);background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+.kb{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.kb > div{background:var(--surface-2);border:1px solid var(--line-2);border-radius:12px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.kb h4{font-size:12.5px;font-weight:650;display:flex;justify-content:space-between;gap:6px;color:var(--ink-2)}
+.kb h4 em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.kb p{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:12.5px;line-height:1.4}
+.kb p b{display:block;font-size:13px}
+.kb p span{color:var(--muted)}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.flinks{display:flex;flex-wrap:wrap;gap:8px}
+.flinks .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.flinks .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.seq,.two{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.kb{grid-template-columns:repeat(3,minmax(0,1fr))}.dhero .deco{display:none}}
+@media (max-width:640px){.legend{grid-template-columns:1fr}}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:580px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:32px}.dhero .wrap{padding-block:40px 44px}.kb{grid-template-columns:1fr 1fr}.seq > div{padding:16px}.tbl table{min-width:540px;font-size:13.5px}.tbl td:first-child{white-space:normal;min-width:118px;max-width:132px;box-shadow:1px 0 0 var(--line-2)}.tbl th,.tbl td{padding:9px 8px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.dhero::after{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol></svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="cl">Aula Inmobiliaria</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Demo</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<svg class="deco" viewBox="0 0 300 220" fill="none" stroke="#8DB9EE" stroke-width="1.5" aria-hidden="true"><path d="M20 220V110L110 40l90 70v110"/><path d="M200 220V80h80v140"/><path d="M60 220v-60h40v60M130 130h40v30h-40zM220 100h20v20h-20zM250 100h20v20h-20zM220 140h20v20h-20zM250 140h20v20h-20z"/><path d="M0 220h300"/></svg>
+<div class="wrap">
+  <p class="eyebrow">Demo · Aula Inmobiliaria · paso a paso</p>
+  <h1>De la solicitud a la matrícula, sin que nadie se quede esperando</h1>
+  <p class="lead">Olga, nos dijiste <q>necesito un CRM para gestionar los Leads</q> y que quieres mejorar el seguimiento. Aquí ves lo que haría ese sistema cada día, con una alumna inventada: Laura, 34 años, trabaja en una inmobiliaria de Sabadell. Un martes a las 21:40, con la oficina cerrada, pide información del curso de Agente Inmobiliario desde un anuncio de Instagram.</p>
+  <div class="legend">
+    <div><span class="real">Real</span><br><b>Tomado de aulainmobiliaria.com:</b> los cursos y sus precios con IVA, los packs, el pago a plazos con Aplazame, las condiciones de la bonificación FUNDAE (y sus 75 € + IVA de gestión), el 4,9 en Google con 955 reseñas, el teléfono gratuito 900 877 847 y el horario (lunes a jueves de 9 a 18 h, viernes de 9 a 14 h).</div>
+    <div><span class="ej">Inventado</span><br><b>Para la demo:</b> Laura, Marta (la asistente), Elena (la asesora), el anuncio, todos los mensajes, las puntuaciones y sus pesos, y las cifras del panel. Los textos finales los aprobáis vosotros. Marta nunca inventa fechas, plazas ni descuentos: eso lo confirma una persona del equipo.</div>
+  </div>
+</div>
+</header>
+
+<div class="wrap main">
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-anuncio" aria-controls="p-anuncio" data-p="anuncio"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncio y solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp al minuto</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha del asesor</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+</nav>
+
+<!-- 1 · ANUNCIO Y SOLICITUD -->
+<section class="pane" id="p-anuncio" role="tabpanel" aria-labelledby="t-anuncio">
+  <header>
+    <h2>1 · Del anuncio a la solicitud <span class="ej">Ejemplo</span></h2>
+    <p>Laura ve el anuncio a las 21:40 y pulsa «Solicitar información». El formulario tiene cinco preguntas cortas, y cada una está ahí por algo: decide qué le contamos, quién la llama y cuándo.</p>
+    <p class="rv"><span><span class="real">Real</span> curso, precio (390 € con IVA), videocurso de 30 horas, Aplazame y bonificación.</span><span><span class="ej">Inventado</span> el texto y el diseño del anuncio, las preguntas del formulario y las respuestas de Laura.</span></p>
+  </header>
+  <div class="two">
+    <div class="stackc">
+      <div class="ig" aria-label="Ejemplo de anuncio en Instagram">
+        <div class="h"><span class="av" aria-hidden="true">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis">
+          <svg class="house" viewBox="0 0 200 180" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><path d="M10 175V80L100 15l90 65v95"/><path d="M70 175v-55h60v55"/><path d="M30 70V30h28v20"/></svg>
+          <div><p class="k1">Curso online · Campus Virtual</p><p class="t1">¿Ya trabajas en una inmobiliaria? Hazte Agente Inmobiliario</p></div>
+          <ul><li>Incluye «Operativa Inmobiliaria 360º», 30 h de vídeo</li><li>A plazos con Aplazame</li><li>Si tienes nómina, tu empresa puede bonificarlo</li></ul>
+          <span class="price">390 € · IVA incluido</span>
+        </div>
+        <div class="cta"><span>Solicitar información</span><span aria-hidden="true">›</span></div>
+        <div class="txt"><b>aulainmobiliaria</b> Formando a profesionales inmobiliarios desde 2006. 4,9 en Google con 955 reseñas. Déjanos tu WhatsApp y te contamos todo en un minuto.</div>
+      </div>
+      <div class="why"><b>Por qué este anuncio:</b> habla a quien ya trabaja en el sector (el que más fácil tiene la bonificación) y pone el precio real a la vista. Quien pide información sabiendo que cuesta 390 € llega con una pregunta, no con curiosidad.</div>
+    </div>
+    <div class="stackc">
+      <div class="frm" aria-label="Ejemplo de formulario de solicitud">
+        <h3>Solicita información</h3>
+        <div class="fq"><label>¿Qué curso te interesa?</label><div class="chips"><span class="on">Agente Inmobiliario</span><span>Gestión Inmobiliaria</span><span>Administrador de Fincas</span><span>Perito Judicial</span><span>Rent to Rent</span><span>Mediación</span></div><p class="y"><b>Por qué</b>Marta sabe qué curso explicar y con qué precio, sin preguntar lo que ya está dicho.</p></div>
+        <div class="fq"><label>¿Trabajas ya en el sector inmobiliario?</label><div class="chips"><span class="on">Sí, en una inmobiliaria</span><span>Por mi cuenta</span><span>Todavía no</span></div><p class="y"><b>Por qué</b>Cambia la conversación (completar formación o empezar de cero) y suma en la puntuación: quien ya trabaja suele decidir antes.</p></div>
+        <div class="fq"><label>¿Tu empresa podría bonificarlo?</label><div class="chips"><span>Sí</span><span>No</span><span class="on">No lo sé</span></div><p class="y"><b>Por qué</b>Abre un camino aparte con la empresa. Solo vale para trabajadores por cuenta ajena del régimen general; «no lo sé» es la respuesta más habitual, y Marta lo aclara en el chat.</p></div>
+        <div class="fq"><label>¿Cuándo quieres empezar?</label><div class="chips"><span class="on">Este mes</span><span>En 1-3 meses</span><span>Más adelante</span></div><p class="y"><b>Por qué</b>Separa a quien quiere empezar ya de quien mira para más adelante. Así la asesora no llama antes de tiempo ni se olvida de nadie.</p></div>
+        <div class="fq"><label>Tu nombre y tu WhatsApp</label><div class="fake">Laura · +34 6XX XXX XXX</div><p class="y"><b>Por qué</b>Es donde contesta Marta al minuto. Ya os escriben unas 70 personas al mes por WhatsApp: es el canal en el que la gente responde.</p></div>
+        <p class="consent"><i aria-hidden="true">✓</i>Acepto que Aula Inmobiliaria me escriba por WhatsApp sobre este curso. Puedo pedir que dejen de hacerlo en cualquier momento.</p>
+        <span class="sendbtn">Enviar</span>
+      </div>
+      <div class="list">
+        <div><h3>Lo que no pregunta</h3><p>Ni DNI, ni dirección, ni datos de pago. Eso llega con la matrícula.</p></div>
+        <div><h3>Qué pasa a las 21:40, al enviar</h3><p>Se crea su ficha con una puntuación de partida (45 de 100) y Marta le escribe por WhatsApp en menos de un minuto. Hoy, con la oficina cerrada, Laura esperaría hasta las 9:00 del día siguiente, y para entonces quizá ya haya pedido información a otra escuela.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header>
+    <h2>2 · WhatsApp al minuto <span class="ej">Ejemplo</span></h2>
+    <p>Marta, la asistente, contesta a Laura en menos de un minuto, aunque sean las 21:40. Pregunta lo justo, conversando, y explica el curso con lo que está publicado. Elige las respuestas de Laura y prueba los distintos caminos. Junto al teléfono, lo que pasa por detrás.</p>
+    <p class="rv"><span><span class="real">Real</span> 390 € con IVA, videocurso de 30 horas, Aplazame, condiciones de la bonificación (régimen general, no autónomos ni funcionarios; consulta gratis, gestión 75 € + IVA), packs a 580 €, 4,9 con 955 reseñas, 900 877 847.</span><span><span class="ej">Inventado</span> Marta, Elena, Laura, todos los mensajes, los huecos de agenda y los puntos.</span></p>
+  </header>
+  <div class="two">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>21:41</b><span class="isl"></span><span>5G</span></div>
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><span class="av" aria-hidden="true">AI</span><div><b>Aula Inmobiliaria</b><small>Marta, asistente virtual · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="home" aria-hidden="true"></div></div>
+    <div class="log">
+      <h3>Lo que pasa por detrás</h3>
+      <div class="live" aria-live="polite">
+        <div class="sc"><b class="n" id="lv-n">45</b><div class="meter" aria-hidden="true"><span id="lv-bar"></span></div><span class="grp c" id="lv-g">C · por cualificar</span></div>
+        <dl id="lv-f"></dl>
+        <div class="tags" id="lv-t"></div>
+      </div>
+      <p class="cap" style="margin:4px 0 0">Registro · ejemplo</p>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Marta solo cuenta lo que está publicado en aulainmobiliaria.com. Fechas de acceso, plazas, descuentos o cuánto se bonifica en cada caso los confirma una persona del equipo. Las asesoras ven cada conversación y pueden entrar cuando quieran: en cuanto escriben, Marta se calla con esa persona. Marta contesta al momento a quien acaba de escribir; los mensajes que salen por iniciativa propia (seguimientos), solo de 8:00 a 21:30.</p>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha del asesor <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · FICHA -->
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header>
+    <h2>3 · Lo que ve la asesora antes de llamar <span class="ej">Ejemplo</span></h2>
+    <p>Miércoles, 9:55. Elena va a llamar a Laura a las 10:00 y no empieza de cero: tiene un resumen, la puntuación con sus motivos y el siguiente paso. Aquí Laura eligió en el chat que su empresa podía bonificarlo y pidió que la llamaran.</p>
+    <p class="rv"><span><span class="real">Real</span> curso y precios, condiciones de la bonificación, Aplazame, pack Agente + Gestión Inmobiliaria a 580 €.</span><span><span class="ej">Inventado</span> Laura, Elena, la puntuación y sus pesos, la conversación.</span></p>
+  </header>
+  <div class="two">
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Contactos › Laura G. · ficha</span><em>Ejemplo</em></div>
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Laura G. · 34 años · Sabadell</b><p class="muted" style="font-size:14px">Entró por: anuncio de Instagram «Hazte Agente Inmobiliario» → formulario (martes 21:40) → WhatsApp con Marta (21:41-21:49)</p></div><div style="text-align:right"><span class="scn">82</span><br><span class="grp a">A · llamar hoy</span></div></div>
+      <div class="grid">
+        <div><dl><dt>Curso</dt><dd>Agente Inmobiliario · 390 €</dd></dl></div>
+        <div><dl><dt>Experiencia</dt><dd>Más de 3 años en una inmobiliaria</dd></dl></div>
+        <div><dl><dt>Quiere</dt><dd>Completar su formación</dd></dl></div>
+        <div><dl><dt>Cuándo</dt><dd>Este mes</dd></dl></div>
+        <div><dl><dt>Bonificable</dt><dd class="yes">Probable · con nómina, régimen general · empresa de 10 a 49 personas</dd></dl></div>
+        <div><dl><dt>Pago si no se bonifica</dt><dd>Le interesa Aplazame</dd></dl></div>
+        <div><dl><dt>Objeciones</dt><dd>«¿Me lo puede pagar la empresa?» · trabaja a jornada completa</dd></dl></div>
+        <div><dl><dt>Ha visto</dt><dd>Página del curso (2 veces), opiniones de Google</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd>Miércoles 10:00 · confirmada por WhatsApp</dd></dl></div>
+      </div>
+      <div class="why2"><b>Resumen:</b> Lleva más de tres años en una inmobiliaria de Sabadell y quiere completar su formación este mes. Tiene nómina y su empresa tiene entre 10 y 49 personas, así que la bonificación es probable, pero no está comprobada. Si la empresa tarda, está dispuesta a pagarlo ella a plazos.</div>
+      <div class="next">Siguiente paso: llamar a las 10:00 · explicar la bonificación y pedir el contacto de su empresa para consultar el crédito (gratis; la gestión, 75 € + IVA) · si prefiere no esperar, matrícula directa a 390 € con Aplazame · mencionar el pack Agente + Gestión Inmobiliaria (580 €) solo si pregunta por ampliar.</div>
+    </div></div>
+    <div class="stackc">
+      <div class="box" style="box-shadow:var(--shadow)">
+        <h3>Por qué tiene 82</h3>
+        <table class="pts">
+          <tr><td>Ha elegido un curso concreto</td><td>10</td></tr>
+          <tr><td>Ya trabaja en el sector</td><td>15</td></tr>
+          <tr><td>Quiere empezar este mes</td><td>20</td></tr>
+          <tr><td>Más de 3 años de experiencia</td><td>5</td></tr>
+          <tr><td>Contesta a Marta en menos de 5 minutos</td><td>10</td></tr>
+          <tr><td>Bonificación probable (nómina, empresa de 10-49)</td><td>7</td></tr>
+          <tr><td>Pide que la llame una asesora</td><td>15</td></tr>
+          <tr><td><b>Total</b></td><td>82</td></tr>
+        </table>
+        <p class="note">Pesos de ejemplo. Los decidís vosotros y se revisan cada mes con las matrículas reales. 70 o más: llamada de una asesora el mismo día (en horario de oficina). De 50 a 69: sigue Marta y la asesora entra si contesta. Menos de 50: solo seguimientos.</p>
+      </div>
+      <div class="box">
+        <h3>Lo que Marta no ha dicho y confirma Elena</h3>
+        <ul class="chk">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Si su empresa tiene crédito de formación y cuánto cubre.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cuándo puede entrar al Campus Virtual y los plazos para comunicar la bonificación.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier condición que no esté publicada en la web.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header>
+    <h2>4 · Seguimientos: nadie se queda sin respuesta <span class="ej">Ejemplo</span></h2>
+    <p>Salen solos y siempre entre las 8:00 y las 21:30. Cualquier respuesta de la persona para la secuencia y la pasa a quien corresponda. Las llamadas de las asesoras, en vuestro horario. Cada texto lo aprobáis antes.</p>
+    <p class="rv"><span><span class="real">Real</span> lo que incluye el curso, 390 € con IVA, Aplazame, 4,9 con 955 reseñas, condiciones y coste de gestión de la bonificación, packs a 580 €, 900 877 847 y horario.</span><span><span class="ej">Inventado</span> todos los textos, los días y las horas de envío, Laura y Elena.</span></p>
+    <div class="legtl"><span><i style="background:var(--accent)"></i>WhatsApp</span><span><i style="background:#6E7FA0"></i>Email</span><span><i style="background:var(--f700)"></i>Llamada de una persona</span><span><i style="background:var(--ej)"></i>Aviso a la asesora</span><span><i style="background:var(--good)"></i>Fin o cambio de camino</span></div>
+  </header>
+  <div class="seq">
+    <div>
+      <h3>A · No contesta</h3>
+      <p>Dejó la solicitud y no responde a Marta.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · WhatsApp (respuesta a su solicitud)</span><b>Primer mensaje de Marta</b><blockquote>¡Hola, Laura! Soy Marta, la asistente virtual de Aula Inmobiliaria. Acabo de ver tu solicitud del curso de Agente Inmobiliario. ¿Te cuento lo principal por aquí?</blockquote></li>
+        <li class="call"><span class="w">Día 1, 10:00 · llamada</span><b>Llama Elena</b> <span class="muted">(solo si la puntuación es 70 o más)</span></li>
+        <li><span class="w">Día 1, 10:10 · WhatsApp (si no lo coge)</span><b>Elige ella la hora</b><blockquote>Laura, te ha llamado Elena, de Aula Inmobiliaria, por el curso de Agente Inmobiliario. ¿Cuándo te va mejor?
+[Hoy a las 17:00] [Mañana a las 10:00] [Mejor escríbeme]</blockquote></li>
+        <li class="mail"><span class="w">Día 1, 19:30 · email</span><b>El curso por escrito</b><blockquote><span class="subj">Asunto: Laura, el curso de Agente Inmobiliario en dos minutos</span>Es online, en el Campus Virtual, y cuesta 390 € con el IVA incluido. Incluye el videocurso «Operativa Inmobiliaria 360º», de 30 horas. Puedes pagarlo a plazos con Aplazame.
+Si prefieres que te llamemos, contesta a este correo con una hora o llámanos gratis al 900 877 847.</blockquote></li>
+        <li><span class="w">Día 2, 13:30 · WhatsApp</span><b>La duda más habitual</b><blockquote>Laura, una cosa que nos preguntan mucho: si trabajas con nómina, puede que tu empresa bonifique el curso. ¿Quieres que lo miremos?</blockquote></li>
+        <li><span class="w">Día 4, 18:30 · WhatsApp</span><b>¿Ahora o más adelante?</b><blockquote>Laura, ¿sigues pensando en empezar este mes o lo dejamos para más adelante? Cualquiera de las dos está bien.
+[Sigo interesada] [Más adelante] [Ya no me interesa]</blockquote></li>
+        <li class="alert"><span class="w">Día 5 · aviso a Elena</span><b>Solo si abrió el email o volvió a la web</b><blockquote>Laura G. · Agente Inmobiliario · ha vuelto 2 veces a la página del curso sin contestar. Mejor una llamada corta.</blockquote></li>
+        <li class="stop"><span class="w">Día 7</span><b>Pasa a «más adelante» (E) y deja de recibir mensajes de esta secuencia</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>B · «Me lo pienso»</h3>
+      <p>Le interesa, pero no decide en el chat. Se le manda lo que le ayuda a decidir, sin presión.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · WhatsApp</span><b>Sin prisa</b><blockquote>Claro, Laura, sin prisa. Te mando por email lo que incluye el curso para que lo veas con calma. Si te surge cualquier duda, escríbeme por aquí.</blockquote></li>
+        <li class="mail"><span class="w">Día 1, 19:30 · email</span><b>Qué incluye el curso</b><blockquote><span class="subj">Asunto: Laura, todo lo que incluye el curso de Agente Inmobiliario</span>• Online, en el Campus Virtual
+• 390 € con el IVA incluido
+• Incluye el videocurso «Operativa Inmobiliaria 360º», de 30 horas
+• Puedes pagarlo a plazos con Aplazame
+• Si tienes nómina, puede que tu empresa lo bonifique
+[Ver el curso]</blockquote></li>
+        <li><span class="w">Día 3, 13:30 · WhatsApp</span><b>Lo que dicen los alumnos</b><blockquote>Laura, por si te ayuda a decidir: tenemos un 4,9 en Google con 955 reseñas. Aquí puedes leerlas tú misma: [opiniones en Google]</blockquote></li>
+        <li><span class="w">Día 5, 20:00 · WhatsApp</span><b>Si el freno es el precio</b><blockquote>Si lo que te frena es pagarlo de una vez: con Aplazame lo pagas a plazos, y si tienes nómina, puede que lo bonifique tu empresa. ¿Te lo explica una asesora?
+[Sí, que me llamen] [Lo miro yo] [Ahora no]</blockquote></li>
+        <li class="alert"><span class="w">Día 6 · aviso a Elena</span><b>Solo si abrió el email dos veces o volvió a la página del curso</b></li>
+        <li><span class="w">Día 9, 12:00 · WhatsApp</span><b>Último mensaje</b><blockquote>Laura, ¿lo dejamos para más adelante? Cualquier respuesta está bien.
+[Sigo interesada] [En unos meses] [No me interesa]</blockquote></li>
+        <li class="stop"><span class="w">Fin</span><b>Sin respuesta, pasa a E. Si dice «no me interesa», no se le vuelve a escribir.</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>C · Bonificación con su empresa</h3>
+      <p>Tiene nómina y su empresa podría pagarlo. Aquí lo importante es que la empresa no se quede parada.</p>
+      <ol class="tl">
+        <li class="call"><span class="w">Día 1, 10:00 · llamada</span><b>Elena explica la bonificación</b> <span class="muted">y pide el contacto de quien lleva la formación en la empresa</span></li>
+        <li class="mail"><span class="w">Día 1, 10:30 · email para reenviar a la empresa</span><b>Lo que necesita la empresa</b><blockquote><span class="subj">Asunto: Formación bonificada para Laura: lo que necesita la empresa</span>Laura quiere hacer el curso de Agente Inmobiliario (online, 390 € con IVA). Como trabaja por cuenta ajena en el régimen general, la empresa puede bonificarlo con su crédito de formación (FUNDAE).
+Consultar el crédito es gratis. Si seguís adelante, la gestión cuesta 75 € + IVA.
+Para empezar necesitamos: [la lista que fije Aula Inmobiliaria, por ejemplo los datos de la empresa y una persona de contacto].
+Dudas: 900 877 847 (gratuito), de lunes a jueves de 9 a 18 h y viernes de 9 a 14 h.</blockquote></li>
+        <li><span class="w">Día 1, 10:35 · WhatsApp a Laura</span><b>Para que lo reenvíe</b><blockquote>Laura, te he mandado por email lo que tiene que ver tu empresa. Reenvíaselo a quien lleve la formación. Cuando nos escriban, lo juntamos con tu solicitud para que no tengáis que repetir nada.</blockquote></li>
+        <li><span class="w">Día 3, 9:30 · WhatsApp (si faltan datos)</span><b>Recordatorio</b><blockquote>Laura, ¿has podido pasárselo a tu empresa? Todavía no nos ha llegado nada. Si prefieres, danos el contacto y les escribimos nosotros.
+[Ya lo he enviado] [Os paso el contacto] [Lo dejo]</blockquote></li>
+        <li class="alert"><span class="w">Al llegar los datos · tarea para Elena</span><b>Comprobar el crédito y los plazos</b><blockquote>Elena confirma con la empresa si hay crédito, cuánto cubre y con cuánta antelación hay que comunicar el curso antes de empezar. Nada de esto lo dice la asistente.</blockquote></li>
+        <li><span class="w">Con la respuesta · WhatsApp</span><b>Aviso a Laura</b><blockquote>Laura, ya tenemos la respuesta sobre el crédito de tu empresa. Elena te llama hoy para contarte cómo queda y cuándo puedes empezar.</blockquote></li>
+        <li><span class="w">Día 7 sin respuesta de la empresa · WhatsApp, 18:00</span><b>Plan B, sin presión</b><blockquote>Laura, la respuesta de tu empresa se está alargando. Si prefieres no esperar, también puedes matricularte por tu cuenta (390 €, a plazos con Aplazame). Elena te explica qué cambia en cada caso.</blockquote></li>
+        <li class="stop"><span class="w">Matrícula hecha</span><b>Se para todo y empieza D</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>D · Matriculada</h3>
+      <p>Bienvenida, que entre en el Campus, que termine, y que nos ayude con su opinión.</p>
+      <ol class="tl">
+        <li><span class="w">Antes de pagar · WhatsApp o página de pago</span><b>El pack, solo si encaja</b><blockquote>Por si te interesa también la administración de fincas: existe el pack Agente Inmobiliario + Administrador de Fincas por 580 € en total (por separado serían 780 €). Si no, sigue con el curso tal cual.</blockquote></li>
+        <li><span class="w">Al matricularse · WhatsApp + email</span><b>Bienvenida</b><blockquote>¡Bienvenida, Laura! Ya estás matriculada en Agente Inmobiliario. Aquí tienes cómo entrar en el Campus Virtual: [instrucciones de acceso]. Recuerda que tienes incluido el videocurso «Operativa Inmobiliaria 360º». Cualquier problema, contesta a este mensaje.</blockquote></li>
+        <li><span class="w">Día 2, 18:00 · WhatsApp</span><b>¿Ha podido entrar?</b><blockquote>Laura, ¿has podido entrar en el Campus Virtual sin problema?
+[Sí, todo bien] [Tengo un problema]</blockquote></li>
+        <li><span class="w">Día 10, 19:00 · WhatsApp</span><b>¿Qué tal va?</b><blockquote>¿Qué tal estos primeros días con el curso? Si tienes alguna duda, dímelo y te pongo con el equipo.
+[Va bien] [Tengo una duda]</blockquote></li>
+        <li class="mail"><span class="w">Mitad del curso · email</span><b>Ampliar, si le interesa</b><blockquote><span class="subj">Asunto: Laura, ¿y si sumas Administración de Fincas o Gestión Inmobiliaria?</span>Si te está gustando y quieres ampliar, pregúntanos cómo quedaría en tu caso. Te lo confirma una asesora.</blockquote></li>
+        <li><span class="w">Al terminar · WhatsApp</span><b>Su opinión</b><blockquote>¡Enhorabuena por terminar, Laura! ¿Nos dejas tu opinión en Google? Ayuda mucho a quien está decidiendo, como tú hace unos meses.
+[Dejar mi opinión]</blockquote></li>
+        <li class="stop"><span class="w">Fin</span><b>Si deja la reseña o dice que no, no se le vuelve a pedir</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>E · «Más adelante (enero)»</h3>
+      <p>No pasa a la asesora ahora. Se guarda la fecha y se le escribe cuando dijo.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · en la conversación</span><b>Guardado</b><blockquote>Apuntado, Laura. Te escribo la primera semana de enero con el precio y las condiciones que estén publicados entonces. Hasta entonces no te molesto.</blockquote></li>
+        <li class="mail"><span class="w">Mediados de diciembre · un único email</span><b>Para tenerlo a mano</b><blockquote><span class="subj">Asunto: Lo que más nos preguntan del curso de Agente Inmobiliario</span>Qué incluye, cómo funciona el pago a plazos con Aplazame, quién puede bonificarlo y qué opinan los alumnos (4,9 en Google con 955 reseñas).</blockquote></li>
+        <li><span class="w">Lunes 4 de enero, 10:00 · WhatsApp</span><b>Lo prometido</b><blockquote>Hola, Laura. Me pediste que te escribiera a principios de enero por el curso de Agente Inmobiliario. ¿Lo retomamos?
+[Sí, que me llame una asesora] [Mándame la información] [Más adelante]</blockquote></li>
+        <li class="mail"><span class="w">Martes 5 de enero, 19:00 · email</span><b>El curso, con lo publicado en enero</b><blockquote>Precio, contenido y formas de pago tal como estén en la web ese día.</blockquote></li>
+        <li class="alert"><span class="w">Jueves 7 de enero · aviso a Elena</span><b>Solo si contestó, abrió el email o visitó la web</b></li>
+        <li class="stop"><span class="w">Fin</span><b>Si dice que sí, vuelve a empezar con toda su ficha. Sin respuesta, un último mensaje a los 15 días y se cierra.</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>Reglas para todas</h3>
+      <p>Lo que no cambia, sea cual sea el camino.</p>
+      <ul class="chk">
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Mensajes automáticos solo entre las 8:00 y las 21:30. Llamadas de asesoras, de lunes a jueves de 9 a 18 h y viernes de 9 a 14 h.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier respuesta para la secuencia. Si una asesora escribe, el sistema se calla con esa persona.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Como mucho, un WhatsApp al día por persona. Quien pide que no le escribamos, no recibe nada más.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Ni descuentos, ni fechas, ni plazas que no estén publicados: eso siempre lo confirma una persona.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header>
+    <h2>5 · El panel de cada lunes <span class="ej">Datos de ejemplo</span></h2>
+    <p>Una pantalla para ver la semana: de dónde llegan las solicitudes, cuánto se tarda en contestar, quién está sin atender, cuántas matrículas hay y cuánto cuesta cada una por campaña.</p>
+    <p class="rv"><span><span class="real">Real</span> solo los precios con los que se calculan los ingresos (390 € el curso, 580 € el pack).</span><span><span class="ej">Datos de ejemplo</span> todas las cifras de esta pestaña son redondas e inventadas para enseñar cómo se ve el panel. No son previsiones ni salen de vuestros datos.</span></p>
+  </header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · semana del 19 al 23 de octubre</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="kpis">
+    <div class="kpi"><b>1 min</b><span>mediana hasta la primera respuesta · datos de ejemplo</span></div>
+    <div class="kpi"><b>90 %</b><span>solicitudes contactadas en menos de 24 h · datos de ejemplo</span></div>
+    <div class="kpi"><b>6</b><span>matrículas esta semana · datos de ejemplo</span></div>
+    <div class="kpi alert"><b>3</b><span>con nota A sin llamar más de 4 h · datos de ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Solicitudes por canal · esta semana · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Canal</th><th>Solicitudes</th><th>Primera respuesta (mediana)</th><th>Contactadas en 24 h</th><th>Matrículas</th></tr></thead>
+      <tbody>
+        <tr><td>Anuncios (Instagram y Facebook)</td><td><span class="hb" title="20 solicitudes"><span>20</span><i style="width:80px"></i></span></td><td>1 min</td><td>95 %</td><td>4</td></tr>
+        <tr><td>WhatsApp directo</td><td><span class="hb" title="20 solicitudes"><span>20</span><i style="width:80px"></i></span></td><td>1 min</td><td>95 %</td><td>1</td></tr>
+        <tr><td>Formulario web «Solicita información»</td><td><span class="hb" title="10 solicitudes"><span>10</span><i style="width:40px"></i></span></td><td>1 min</td><td>90 %</td><td>1</td></tr>
+        <tr><td>Teléfono 900 (llamadas perdidas)</td><td><span class="hb" title="10 solicitudes"><span>10</span><i style="width:40px"></i></span></td><td>1 min*</td><td>70 %</td><td>0</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>60</td><td>1 min</td><td>90 %</td><td>6</td></tr></tfoot>
+    </table></div>
+    <p class="note">* Si alguien llama al 900 fuera de horario o no se le puede atender, recibe un WhatsApp de Marta al minuto. Datos de ejemplo.</p>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Por campaña · esta semana · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Campaña</th><th>Inversión</th><th>Solicitudes</th><th>Contactadas</th><th>Matrículas</th><th>Ingresos</th><th>Coste por matrícula</th></tr></thead>
+      <tbody>
+        <tr><td>Agente Inmobiliario · Instagram</td><td>300 €</td><td>10</td><td>10</td><td>3</td><td>1.170 €</td><td class="hl">100 €</td></tr>
+        <tr><td>Bonificación para empresas · Facebook</td><td>200 €</td><td>5</td><td>5</td><td>1</td><td>390 €</td><td class="hl">200 €</td></tr>
+        <tr><td>Pack Agente + Fincas · Instagram</td><td>100 €</td><td>5</td><td>4</td><td>0</td><td>0 €</td><td class="hl">—</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total anuncios</td><td>600 €</td><td>20</td><td>19</td><td>4</td><td>1.560 €</td><td class="hl">150 €</td></tr></tfoot>
+    </table></div>
+    <p class="note">Ingresos = matrículas × precio publicado (390 € el curso, 580 € el pack). Todos los datos son de ejemplo. En la versión real se rellena solo con cada solicitud, conversación, llamada y matrícula, y la campaña de cada persona viene del anuncio por el que entró.</p>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">A quién llamar hoy · Elena · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Persona</th><th>Nota</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Laura G.</td><td>82 A</td><td class="l w">Llamada agendada a las 10:00 · Agente Inmobiliario · bonificación probable</td><td class="l w">Pedir el contacto de su empresa para consultar el crédito</td></tr>
+        <tr><td>Marc R.</td><td>78 A</td><td class="l w">Empezó a pagar con Aplazame y no terminó, hace 3 h</td><td class="l w">Llamar: ¿duda con el pago?</td></tr>
+        <tr><td>Núria P.</td><td>66 B</td><td class="l w">«Me lo pienso» hace 6 días · abrió el email 2 veces</td><td class="l w">WhatsApp de Elena, no llamada</td></tr>
+        <tr><td>Antonio S.</td><td>74 A</td><td class="l w">Perito Judicial · su empresa ya ha mandado los datos</td><td class="l w">Comprobar el crédito y llamarle con la respuesta</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Dónde está cada persona · datos de ejemplo</p>
+    <div class="kb">
+      <div><h4>Nuevas <em>8</em></h4><p><b>Carla M.</b><span>Rent to Rent · hace 5 min</span></p></div>
+      <div><h4>Con Marta <em>12</em></h4><p><b>Jordi F.</b><span>Fincas · preguntando por plazos</span></p></div>
+      <div><h4>Llamada agendada <em>6</em></h4><p><b>Laura G.</b><span>Mié 10:00 · Elena</span></p></div>
+      <div><h4>Bonificación <em>4</em></h4><p><b>Antonio S.</b><span>Datos de la empresa recibidos</span></p></div>
+      <div><h4>Matriculadas <em>6</em></h4><p><b>Carmen V.</b><span>Pack Agente + Gestión</span></p></div>
+      <div><h4>Más adelante <em>14</em></h4><p><b>Pedro L.</b><span>Enero · aviso guardado</span></p></div>
+    </div>
+  </div>
+  </div></div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="flinks"><a class="btnl" href="../">Plan</a><a class="btnl" href="./">Demo</a></div>
+  <p><b>Maikel Echevarría · Qualivo · qualivo.io</b></p>
+  <p>Demo preparada por Qualivo el 23 de octubre de 2026 para Aula Inmobiliaria. No es una página de Aula Inmobiliaria.</p>
+  <p>Cursos, precios, valoración en Google y datos de contacto tomados de aulainmobiliaria.com ese día. Personas, mensajes, puntuaciones y cifras son de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncio', 'whatsapp', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncio';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    var at = document.getElementById('t-' + id), bar = at.parentNode;
+    bar.scrollLeft = at.offsetLeft - (bar.clientWidth - at.offsetWidth) / 2;
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // WhatsApp con Marta
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var lvN = document.getElementById('lv-n'), lvBar = document.getElementById('lv-bar'), lvG = document.getElementById('lv-g'), lvF = document.getElementById('lv-f'), lvT = document.getElementById('lv-t');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hh, mm, score, fields, tagset, timers = [], used = {};
+  var ORDER = ['Curso', 'Sector', 'Experiencia', 'Objetivo', 'Cuándo', 'Bonificable', 'Empresa', 'Objeción', 'Siguiente paso'];
+
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function hora() { mm++; if (mm >= 60) { mm -= 60; hh++; } return hh + ':' + String(mm).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls; d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    var b = document.createElement('b'); b.textContent = txt; li.appendChild(b);
+    var s = document.createElement('span'); s.textContent = sub || ''; li.appendChild(s);
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function grupo(g) {
+    var cls, txt;
+    if (g === 'luego') { cls = 'c'; txt = 'Más adelante · enero'; }
+    else if (score >= 70) { cls = 'a'; txt = 'A · llamar hoy'; }
+    else if (score >= 50) { cls = 'b'; txt = 'B · sigue Marta'; }
+    else { cls = 'c'; txt = 'C · por cualificar'; }
+    lvG.className = 'grp ' + cls; lvG.textContent = txt;
+  }
+  function render(changed) {
+    lvF.innerHTML = '';
+    ORDER.forEach(function (k) {
+      if (!(k in fields)) return;
+      var dt = document.createElement('dt'); dt.textContent = k;
+      var dd = document.createElement('dd'); dd.textContent = fields[k];
+      if (changed && changed.indexOf(k) >= 0) dd.className = 'flash';
+      lvF.appendChild(dt); lvF.appendChild(dd);
+    });
+    lvT.innerHTML = '';
+    tagset.forEach(function (t) { var s = document.createElement('span'); s.textContent = t; lvT.appendChild(s); });
+    lvN.textContent = score; lvBar.style.width = Math.min(score, 100) + '%';
+  }
+  function set(obj, pts, tags, g) {
+    var ch = Object.keys(obj || {});
+    ch.forEach(function (k) { fields[k] = obj[k]; });
+    if (pts) score += pts;
+    (tags || []).forEach(function (t) { if (tagset.indexOf(t) < 0) tagset.push(t); });
+    render(ch); grupo(g);
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      later(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, 800);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); later(function () { N[c[1]](c[2]); }, 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  function menu() {
+    var all = [['Quiero matricularme ya', 'ya'], ['¿Me lo puede pagar mi empresa?', 'bon'], ['Me lo pienso', 'piensa'], ['Mejor más adelante, en enero', 'luego'], ['¿Hay algún descuento?', 'desc']];
+    choices(all.filter(function (c) { return !used[c[1]]; }));
+  }
+  var N = {
+    inicio: function () {
+      bot(['¡Hola, Laura! Soy Marta, la asistente virtual de Aula Inmobiliaria.',
+           'Acabo de ver tu solicitud del curso de Agente Inmobiliario. El equipo ya ha terminado por hoy, pero yo te cuento lo principal y, si quieres, mañana te llama una asesora.',
+           'Me dices que ya trabajas en una inmobiliaria. ¿Cuánto tiempo llevas?'],
+        function () { choices([['Más de 3 años', 'exp', 'Más de 3 años'], ['Menos de un año', 'exp', 'Menos de 1 año']]); });
+    },
+    exp: function (v) {
+      set({ Experiencia: v }, v === 'Más de 3 años' ? 5 : 2);
+      apunta('Experiencia: ' + v.toLowerCase(), (v === 'Más de 3 años' ? '+5' : '+2') + ' · contesta a los 2 minutos (+10)', 'g');
+      set({}, 10, ['contesta-rapido']);
+      bot(['¿Y qué te gustaría conseguir con el curso?'],
+        function () { choices([['Completar mi formación', 'obj', 'Completar su formación'], ['Trabajar por mi cuenta', 'obj', 'Trabajar por su cuenta']]); });
+    },
+    obj: function (v) {
+      set({ Objetivo: v });
+      apunta('Objetivo guardado', v + ' · se escribe en la ficha');
+      bot(['Te cuento. El curso de Agente Inmobiliario es online, en nuestro Campus Virtual, y cuesta 390 € con el IVA incluido.',
+           'Incluye el videocurso «Operativa Inmobiliaria 360º», de 30 horas. Puedes pagarlo de una vez o a plazos con Aplazame.',
+           'Y si trabajas con nómina, puede que tu empresa lo bonifique. ¿Cómo lo ves?'],
+        function () { apunta('Curso explicado con lo publicado', '390 € IVA incl. · 30 h de vídeo · Aplazame · bonificación'); menu(); });
+    },
+    ya: function () {
+      used.ya = true;
+      set({ 'Siguiente paso': 'Matrícula' }, 15, ['quiere-matricularse']);
+      apunta('Quiere matricularse', '+15 · puntuación ' + score, 'g');
+      bot(['¡Qué bien! Tienes dos formas:\n• Matricularte tú en la web, en la página del curso. Al pagar puedes elegir Aplazame.\n• Que mañana te llame una asesora y lo hacéis juntas, resolviendo antes tus dudas.'],
+        function () { choices([['Me matriculo yo en la web', 'web'], ['Prefiero que me llamen', 'llamada']]); });
+    },
+    web: function () {
+      set({ 'Siguiente paso': 'Enlace enviado · comprobar matrícula en 24 h' }, 0, ['enlace-enviado']);
+      apunta('Enlace a la página del curso enviado', 'si no hay matrícula en 24 h → aviso a la asesora', 'g');
+      apunta('Al matricularse', 'empieza el seguimiento D: bienvenida, acceso al Campus y opinión');
+      bot(['Aquí tienes la página del curso para matricularte: [enlace al curso de Agente Inmobiliario]',
+           'Si algo falla con el pago o con Aplazame, contéstame aquí y mañana a primera hora te ayuda alguien del equipo.'], fin);
+    },
+    llamada: function () {
+      bot(['¿A qué hora te viene mejor mañana miércoles? Te propongo dos huecos libres de Elena, asesora del equipo:'],
+        function () { choices([['A las 10:00', 'cita', '10:00'], ['A las 17:00', 'cita', '17:00']]); });
+      apunta('Huecos de la agenda real de Elena', 'Marta solo ofrece horas libres dentro del horario (L-J 9-18, V 9-14)');
+    },
+    cita: function (h) {
+      set({ 'Siguiente paso': 'Llamada de Elena · miércoles ' + h }, 15, ['llamada-agendada']);
+      apunta('Llamada agendada: miércoles ' + h + ' con Elena', '+15 · puntuación ' + score + ' · recordatorio por WhatsApp 1 h antes', 'g');
+      apunta('Aviso a Elena', 'Laura G. · ' + score + ' · Agente Inmobiliario · ' + (fields.Bonificable || 'bonificación sin aclarar') + '\nresumen y conversación en la ficha', 'g');
+      bot(['Hecho: mañana miércoles a las ' + h + ' te llama Elena, de Aula Inmobiliaria. Te aviso un rato antes por aquí.',
+           'Si te surge algo, contéstame y lo cambiamos. ¡Buenas noches, Laura!'], fin);
+    },
+    bon: function () {
+      used.bon = true;
+      bot(['Puede que sí. La formación se puede bonificar con FUNDAE si trabajas por cuenta ajena, en el régimen general de la Seguridad Social. No sirve para autónomos ni funcionarios.',
+           '¿Es tu caso?'],
+        function () { choices([['Sí, tengo nómina', 'nomina'], ['Soy autónoma', 'auto']]); });
+    },
+    auto: function () {
+      set({ Bonificable: 'No (autónoma)' }, 0, ['no-bonificable']);
+      apunta('Bonificable: no', 'autónoma · se ofrece Aplazame', 'h');
+      bot(['Entonces la bonificación no te sirve, lo siento. Lo que sí puedes es pagarlo a plazos con Aplazame.', '¿Qué prefieres hacer?'], menu);
+    },
+    nomina: function () {
+      set({ Bonificable: 'Probable · con nómina' }, 5, ['bonificacion']);
+      apunta('Bonificable: probable', 'nómina, régimen general · +5', 'g');
+      bot(['Perfecto. ¿Cuántas personas trabajan en tu inmobiliaria, más o menos?'],
+        function () { choices([['Menos de 10', 'tam', 'Menos de 10'], ['De 10 a 49', 'tam', 'De 10 a 49'], ['50 o más', 'tam', '50 o más']]); });
+    },
+    tam: function (v) {
+      set({ Empresa: v + ' personas' }, 2);
+      apunta('Tamaño de la empresa: ' + v.toLowerCase(), 'orienta a la asesora · el crédito lo comprueba ella');
+      bot(['Gracias. El siguiente paso es mirar el crédito de formación que tiene tu empresa. Esa consulta es gratis.',
+           'Si luego se gestiona la bonificación, la gestión cuesta 75 € + IVA. Cuánto se puede bonificar en tu caso no te lo puedo decir yo: lo comprueba una asesora con tu empresa.',
+           '¿Quieres que mañana te llame Elena y te explique qué necesita tu empresa?'],
+        function () { choices([['Sí, mañana', 'llamada'], ['Mejor se lo paso a mi jefe', 'jefe']]); });
+    },
+    jefe: function () {
+      set({ 'Siguiente paso': 'Esperar a la empresa · recordatorio día 3' }, 0, ['seguimiento-C']);
+      apunta('Seguimiento C activado', 'email para reenviar a la empresa · recordatorio a Laura el día 3, 9:30', 'g');
+      bot(['Muy bien. Te mando por email un resumen para que se lo reenvíes: qué es la bonificación, lo que cuesta la gestión y cómo contactarnos (900 877 847, gratuito).',
+           'Cuando tu empresa nos escriba, lo juntamos con tu solicitud para que no tengáis que repetir nada.'], fin);
+    },
+    piensa: function () {
+      used.piensa = true;
+      bot(['Claro, sin prisa. ¿Hay algo que te haga dudar? Así te mando solo lo que te sirva.'],
+        function () { choices([['El precio', 'duda', 'precio'], ['No sé si tendré tiempo', 'duda', 'tiempo'], ['Quiero ver opiniones', 'duda', 'opiniones']]); });
+    },
+    duda: function (v) {
+      set({ Objeción: v === 'precio' ? 'El precio' : v === 'tiempo' ? 'El tiempo' : 'Quiere ver opiniones' }, 0, ['me-lo-pienso']);
+      apunta('Objeción: ' + v, 'se guarda para la asesora y para el seguimiento B', 'h');
+      var m = {
+        precio: 'Lo entiendo. Puedes pagarlo a plazos con Aplazame, y si tienes nómina, puede que tu empresa lo bonifique. Si quieres, una asesora te lo mira.',
+        tiempo: 'Es online, en el Campus Virtual. Cuántas horas a la semana pide y cómo organizarte con tu trabajo te lo explica mejor una asesora: no quiero decirte algo que no sea exacto.',
+        opiniones: 'Tenemos un 4,9 en Google con 955 reseñas. Te dejo el enlace para que las leas con calma: [opiniones en Google]'
+      }[v];
+      bot([m, 'Te lo dejo aquí. Te escribo en un par de días por si te ha surgido alguna duda. Y si prefieres que no te escriba, dímelo sin problema.'],
+        function () {
+          set({ 'Siguiente paso': 'Seguimiento B · email mañana 19:30' });
+          apunta('Seguimiento B («me lo pienso») activado', 'email día 1 · opiniones día 3 · Aplazame día 5 · cualquier respuesta lo para', 'g');
+          fin();
+        });
+    },
+    luego: function () {
+      used.luego = true;
+      bot(['Perfecto, Laura. ¿Te escribo en enero para retomarlo?'],
+        function () { choices([['Sí, a principios de enero', 'enero', 'lunes 4 de enero, 10:00'], ['Mejor a mediados', 'enero', 'lunes 18 de enero, 10:00']]); });
+    },
+    enero: function (f) {
+      set({ 'Cuándo': 'Enero', 'Siguiente paso': 'Recordatorio: ' + f }, 0, ['mas-adelante'], 'luego');
+      apunta('Guardado: más adelante', 'recordatorio el ' + f + ' · no pasa a la asesora ahora', 'g');
+      apunta('Seguimiento E activado', 'un único email en diciembre · WhatsApp en la fecha elegida');
+      bot(['Apuntado. Te escribo en enero con el precio y las condiciones que estén publicados entonces.',
+           'Hasta entonces no te molesto. Si te surge cualquier duda antes, escríbeme por aquí.'], fin);
+    },
+    desc: function () {
+      used.desc = true;
+      set({}, 0, ['pregunta-descuento']);
+      apunta('Pregunta por descuentos', 'Marta no ofrece ninguno · pregunta guardada para una persona del equipo', 'h');
+      bot(['No tengo ningún descuento que ofrecerte por aquí, y prefiero no decirte algo que no sea cierto.',
+           'Lo que sí está publicado son los packs: Agente Inmobiliario + Administrador de Fincas, + Gestión Inmobiliaria o + Perito Judicial, por 580 € cada uno (por separado serían 780 €).',
+           'Si quieres, le dejo tu pregunta a una asesora y te contesta mañana. ¿Cómo lo ves?'], menu);
+    }
+  };
+  function start() {
+    timers.forEach(clearTimeout); timers = [];
+    started = true; hh = 21; mm = 40; score = 45; used = {};
+    fields = { Curso: 'Agente Inmobiliario · 390 €', Sector: 'Sí, en una inmobiliaria', 'Cuándo': 'Este mes', Bonificable: 'No lo sabe' };
+    tagset = ['instagram', 'agente-inmobiliario'];
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    render(); grupo();
+    bubble('sys', 'Ejemplo · martes 21:40 · Laura envía la solicitud desde un anuncio de Instagram');
+    mm = 40;
+    apunta('Ficha creada', 'origen: anuncio de Instagram → formulario · curso, sector y fecha ya rellenos');
+    apunta('Puntuación de partida: 45', 'curso concreto (10) + trabaja en el sector (15) + este mes (20)');
+    apunta('Respuesta en menos de 1 minuto', 'aunque la oficina esté cerrada');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
