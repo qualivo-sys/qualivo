@@ -1630,3 +1630,42 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - el 290,90 € frente a 291,90 €.
 
 **Hipótesis para mañana:** si se aprueba el remitente único, los seguimientos de la semana que viene tendrán más respuestas por toque que los de la semana 42. Se compara con el registro de Growth, sin publicar tasas.
+
+### Viernes 23-oct · trabajo del día
+
+**Publicado:**
+- **Re-apunte de [/blog/funnel-de-ventas/](https://qualivo.io/blog/funnel-de-ventas/):**
+  - **El último bloque** cuenta lo que hacemos en nuestra propia captación: tareas a los 2, 5 y 10 días con el mensaje escrito después de cada propuesta (desde el 19-oct, commit 2cd71d9). Enlaza las demos de /formacion/ y /reformas/ con UTM.
+  - **Botón:** uno solo, «Pide tu diagnóstico», a /diagnostico/ («identificamos qué conviene revisar primero»).
+  - **Lo que sale:**
+    - el 8,3× de BelloVinilo, porque no hay permiso escrito (R6);
+    - «el diagnóstico completo te da el mapa con tus datos reales», porque no los tenemos antes de la reunión.
+  - **Metadatos:** dateModified y sitemap al día.
+  - **Por qué este artículo:** es de la semana 44 (seguimiento de propuestas), no se había tocado nunca y el plan de redes lleva tráfico al tema.
+  - **Queda en el cuerpo, sin tocar:** la frase de «una academia con la que trabajamos… el doble de entrevistas» es un resultado de cliente sin permiso. La regla del re-apunte no deja tocar el cuerpo, así que lo apunto para cuando llegue el permiso o se decida reescribir ese bloque.
+
+**Borradores:**
+- **Tesis contraria del viernes:** `content/borradores/2026-10-23-tesis-recordatorio-que-pide-un-si.md`, «Un recordatorio que no pide nada no te dice nada».
+  - **Dato:** el recordatorio de la víspera pide un «sí» desde el 19-oct (`api/_recordatorios.js`).
+  - **Riesgo:** ninguno.
+  - **Destino:** el lote de la semana 45, en lugar de la opinión sobre la tasa de plantones.
+
+**Redes (el estado nuevo del parte):**
+- **Publicado ayer:** nada.
+- **Programado para los próximos 7 días:** nada todavía.
+- **Espera aprobación:** el lote de la semana 44 (Notion, «Lote semana 44»), que Maikel aprueba hoy. Si no responde, el lunes solo salen las piezas sin riesgo.
+- **Resultados de la semana:** no hay piezas publicadas.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya tiene dos piezas fuertes (lead scoring y conversiones offline). Mi recomendación sigue siendo dos por semana.
+- **Newsletter.** No es miércoles. La general sale el 28-oct si Maikel la autoriza (R17).
+
+**Decisiones para Maikel:**
+1. **Aprobar hoy el lote de la semana 44.** Recomendación: aprobar todo lo marcado sin riesgo y decidir el remitente único. Con eso sale también el post del lunes.
+2. **La frase del cuerpo de /blog/funnel-de-ventas/** («una academia con la que trabajamos»). Recomendación: pedir el permiso a ese cliente junto con los demás (EAC, BelloVinilo, Nail Boss), o quitar la frase en la próxima revisión del artículo.
+3. **Siguen pendientes:**
+   - la cámara de los guiones y el día de grabación;
+   - la autorización de la newsletter del 28-oct;
+   - el planificador de GHL para programar.
+
+**Hipótesis para mañana:** las piezas del lote que cierran con una pregunta concreta (por ejemplo, «¿cuántos días pasan hasta el primer seguimiento?») abrirán más conversaciones con perfiles que encajan que las que llevan a un recurso. Se mide en `content/redes/registro.md` a las 48 horas.
