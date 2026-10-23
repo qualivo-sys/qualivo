@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Al Milímetro · recorrido y plan</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+
+.dhero{background:#1F1C19;color:#fff;padding:56px 0 44px}
+.dhero .eyebrow{color:#F9AB00}
+.dhero h1{font-family:"DM Serif Display",var(--serif);font-weight:400;font-size:clamp(32px,4.6vw,52px);line-height:1.06;max-width:22ch;margin-top:10px}
+.dhero h1 em{color:#F9AB00}
+.dhero .lede{color:rgba(255,255,255,.85);max-width:72ch;margin-top:14px}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#B87708;border-radius:6px;padding:2px 7px;vertical-align:middle}
+.tl{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.tl li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.tl .w{font-family:var(--mono);font-size:12.5px;color:var(--accent);font-weight:500}
+.tl .w small{display:block;color:var(--muted);font-size:11.5px;margin-top:4px}
+.tl b{display:block;margin-bottom:6px}
+.msg{background:#D9FDD3;color:#111;border-radius:12px 12px 12px 4px;padding:10px 13px;font-size:14.5px;line-height:1.5;max-width:60ch}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .msg{background:#005C4B;color:#E9EDEF}}
+:root[data-theme="dark"] .msg{background:#005C4B;color:#E9EDEF}
+@media (max-width:640px){.tl li{grid-template-columns:1fr;gap:8px}}
+.wk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.wk{grid-template-columns:1fr}}
+.wk article{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:10px;align-content:start;box-shadow:var(--shadow)}
+.wk h3{font-family:"DM Serif Display",var(--serif);font-weight:400;font-size:24px}
+.wk .d{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.wk ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px}
+.wk p.k{margin-top:4px}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol></svg>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="cl">Al Milímetro</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../recorrido/" aria-current="page">Recorrido</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a><a href="https://qualivo.io/intelligence/?sector=reformas&empresa=Al%20Mil%C3%ADmetro&objetivo=todo">Panel</a></div>
+  </div>
+</nav>
+
+<header class="dhero"><div class="wrap">
+  <p class="eyebrow">Recorrido · Al Milímetro</p>
+  <h1>Qué pasa desde que alguien pide presupuesto <em>hasta que firma</em></h1>
+  <p class="lede">Minuto a minuto, con los mensajes que saldrían desde tu número. Todo se para en cuanto la persona contesta: a partir de ahí sigues tú. Nunca más de dos mensajes seguidos sin respuesta. Y debajo, el plan de las próximas 4 semanas.</p>
+</div></header>
+
+<section class="sec" style="border-top:0">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>1</b><span></span></div><h2 class="t">Antes de la visita <span class="ej">Ejemplo</span></h2></div>
+    <ol class="tl">
+<li><div class="w">Minuto 0<small>Página</small></div><div><b>Rellena el formulario de 7 preguntas</b><p>Zona, tipo de obra, metros, presupuesto, cuándo, si la vivienda es suya y sus datos. El sistema le da una puntuación: A (llamas tú hoy), B (lo acompañamos) o C (más adelante).</p></div></li>
+<li><div class="w">Minuto 0<small>Tu móvil</small></div><div><b>Si es una A, te llega un aviso con su ficha</b><p>Para que le llames tú ese mismo día.</p></div></li>
+<li><div class="w">Minuto 1<small>WhatsApp</small></div><div><b>Primer mensaje desde tu número</b><p class="msg">Hola {{nombre}}, soy Sonia, arquitecta de Al Milímetro. He visto tu solicitud para reformar {{tipo}} de unos {{m2}} m² en {{zona}}. Para darte una cifra más ajustada, ¿te viene bien una llamada de 10 minutos hoy o mañana? Si me mandas un par de fotos o el plano, mejor todavía.</p></div></li>
+<li><div class="w">A las 2 h<small>Llamada</small></div><div><b>Si no contesta, le llama el asistente de voz</b><p>Solo de lunes a viernes, de 9:00 a 19:00, para concretar qué quiere y cuándo, y proponerle la visita. Si es una A, le llamas tú.</p></div></li>
+<li><div class="w">Día 1<small>WhatsApp</small></div><div><b>Una obra parecida a la suya</b><p class="msg">{{nombre}}, te dejo una reforma parecida a la tuya que terminamos hace poco [fotos de antes y después]. Si te apetece, lo hablamos y voy a ver tu casa esta semana.</p></div></li>
+<li><div class="w">Día 3<small>WhatsApp</small></div><div><b>¿Sigues con la idea?</b><p class="msg">¿Sigues con la idea de reformar en los próximos meses? Si ahora no es el momento, dímelo y te escribo más adelante.</p></div></li>
+<li><div class="w">Fuera de horario<small>Después de las 19:00 y el fin de semana</small></div><div><b>Nadie llama: solo sale este mensaje</b><p class="msg">Hola {{nombre}}, soy Sonia, de Al Milímetro. He recibido tu petición para la reforma de {{tipo}}. Te escribo mañana (el lunes) por la mañana para que lo hablemos con calma.</p></div></li>
+<li><div class="w">Si no encaja<small>Local, arreglo suelto o fuera de zona</small></div><div><b>Mensaje amable y no se insiste</b><p class="msg">Hola {{nombre}}, gracias por escribirnos. Te soy sincera: ese tipo de obra (o esa zona) no es en lo que mejor te podemos ayudar, y prefiero decírtelo antes que hacerte perder el tiempo. ¡Mucha suerte con tu reforma!</p></div></li>
+    </ol>
+    <p class="small muted">Reglas de descarte <span class="ej">A validar</span>: locales, arreglos puntuales, baño o cocina suelto fuera de la M-30, el sur de la M-30 a la M-40 y presupuestos por debajo de 15.000 €.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>2</b><span></span></div><h2 class="t">La visita y el presupuesto <span class="ej">Ejemplo</span></h2></div>
+    <ol class="tl">
+<li><div class="w">Al reservar<small>WhatsApp</small></div><div><b>Confirmación</b><p class="msg">¡Perfecto, {{nombre}}! Nos vemos el {{día}} a las {{hora}} en tu casa. Si puedes, ten a mano planos o fotos de cómo está y alguna idea de lo que te gusta.</p></div></li>
+<li><div class="w">La víspera<small>WhatsApp</small></div><div><b>Recordatorio</b><p class="msg">Hola {{nombre}}, te recuerdo que mañana a las {{hora}} paso a ver tu casa. ¿Sigue en pie?</p></div></li>
+<li><div class="w">Presupuesto + 7 días<small>WhatsApp</small></div><div><b>¿Lo repasamos?</b><p class="msg">{{nombre}}, ¿has podido ver el presupuesto? Si quieres, lo repasamos en 10 minutos y te resuelvo cualquier duda de partidas o plazos.</p></div></li>
+<li><div class="w">+ 10 días<small>WhatsApp</small></div><div><b>Cómo comparar</b><p class="msg">Si estás comparando con otros presupuestos, te paso las 5 cosas que yo miraría para comparar igual con igual. [enlace]</p></div></li>
+<li><div class="w">+ 14 días<small>WhatsApp</small></div><div><b>¿Algo que ajustar?</b><p class="msg">¿Hay algo del presupuesto (plazo, alguna partida, forma de pago) que podamos ajustar para que te encaje?</p></div></li>
+<li><div class="w">+ 21 días<small>WhatsApp</small></div><div><b>Cierre amable</b><p class="msg">{{nombre}}, no te escribo más para no agobiarte. Si más adelante retomas la idea, aquí estoy.</p></div></li>
+<li><div class="w">Después de la obra<small>WhatsApp</small></div><div><b>Reseña y recomendación</b><p>Petición de reseña en Google y de alguien a quien recomendarte.</p></div></li>
+    </ol>
+    <p class="small muted">Si un presupuesto depende de pedir precio a un proveedor (una carpintería especial, por ejemplo), los plazos se ajustan o ese seguimiento lo mandas tú a mano.</p>
+  </div>
+</section>
+
+<section class="sec" id="plan">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>3</b><span></span></div><h2 class="t">El plan de las próximas 4 semanas</h2></div>
+    <p class="muted">Objetivo: anuncios funcionando el <b>lunes 9 de noviembre</b>. Reunión semanal los miércoles a las 17:30: 28-oct, 4-nov, 11-nov y 18-nov. No sale nada sin tu OK.</p>
+    <div class="wk">
+      <article><span class="d">Semana 1 · 23-30 oct</span><h3>Accesos, zonas y formulario</h3>
+        <p class="k">Te mandamos</p><ul><li>Lun 26: resumen de hoy, cliente ideal y zonas.</li><li>Mié 28: formulario, mensajes automáticos y borradores de anuncios.</li></ul>
+        <p class="k">Necesitamos de ti</p><ul><li>Accesos: Facebook e Instagram y la cuenta de anuncios, WhatsApp del negocio, web y ficha de Google (hoy o mar 27).</li><li>Tu Excel de precios, o 3 obras con metros, calidad y precio (mar 27).</li><li>Fotos de 3 a 5 obras y permiso para usar las opiniones de tu web (mié 28).</li><li>Tus contactos antiguos (vie 30).</li></ul></article>
+      <article><span class="d">Semana 2 · 2-6 nov</span><h3>Landing, anuncios y seguimiento</h3>
+        <p class="k">Te mandamos</p><ul><li>Mar 3: landing con tus zonas y los anuncios definitivos.</li><li>Mié 4: seguimientos y reserva de la visita técnica.</li><li>Jue 5: prueba del asistente de voz con tu guion.</li></ul>
+        <p class="k">Necesitamos de ti</p><ul><li>Tus huecos para visitas técnicas (lun 2).</li><li>1 o 2 opiniones nuevas y el OK para lanzar (mié 4).</li><li>Método de pago de la cuenta de anuncios (vie 6).</li></ul></article>
+      <article><span class="d">Semana 3 · 9-13 nov</span><h3>Arrancamos</h3>
+        <p class="k">Hacemos</p><ul><li>Lun 9: encendemos los anuncios con el presupuesto de prueba que decidas y se activa tu panel.</li><li>Del 9 al 11: revisamos uno a uno los primeros contactos.</li></ul>
+        <p class="k">Necesitamos de ti</p><ul><li>Llamar el mismo día a los contactos buenos (te llega un aviso).</li><li>Decirnos en dos palabras cómo fue cada llamada.</li></ul></article>
+      <article><span class="d">Semana 4 · 16-20 nov</span><h3>Primera revisión</h3>
+        <p class="k">Te mandamos</p><ul><li>Mar 17: informe con peticiones, cuántas encajan, visitas técnicas y su coste.</li><li>Mié 18: qué anuncios funcionan, qué pausamos y qué hacemos más.</li></ul>
+        <p class="k">Decides tú</p><ul><li>La inversión de las semanas siguientes.</li><li>Si abrimos la línea de interioristas o la dejamos para más adelante.</li></ul></article>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+      <a class="btn pri" href="../anuncios/">Ver los anuncios <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn sec" href="../landing/">Ver la landing</a>
+    </div>
+  </div>
+</section>
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Maikel Echevarría · Qualivo</b><span><a href="https://qualivo.io">qualivo.io</a></span></div>
+    <p>Maqueta preparada el 23 de octubre de 2026 para Al Milímetro con su documento de arranque y las fotos de su web. No son anuncios publicados.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Anonymous+Pro:wght@700&display=swap">
 <style>
 /* Maqueta de landing para Al Milímetro: estructura y textos de la propuesta de Qualivo con su identidad
-   (logo, foto, paleta crema/ámbar/naranja y la Anonymous Pro como acento), en un diseño más cuidado. Cifras de la calculadora de ejemplo. */
+   (logo, foto, paleta crema/ámbar/naranja y la Anonymous Pro como acento), en un diseño más cuidado. Versión 23-oct: adaptada al documento de arranque (sin locales, chalets y pisos integrales, sus zonas, formulario de cualificación). */
 :root{--cream:#F7F3EA;--sand:#EEE6D4;--paper:#FFFDF8;--ink:#1F1C19;--ink-2:#3A3531;--muted:#6A625A;--line:#E4DCCB;
   --orange:#E8571A;--amber:#F9AB00;--amber-soft:#FFE9B3;--wa:#25D366;
   --serif:"DM Serif Display",Georgia,serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"Anonymous Pro",ui-monospace,monospace}
@@ -188,32 +188,45 @@ footer{background:var(--ink);color:#CFC6B8;padding-block:30px;font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;align-items:center}
 .wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.2);z-index:30}
 .wa svg{width:30px;height:30px;fill:#fff}
+
+/* Zonas */
+.zones{display:grid;gap:18px}
+@media (min-width:860px){.zones{grid-template-columns:1fr 1fr;gap:22px}}
+.zone{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;gap:14px;align-content:start}
+.zone h3{font-family:var(--serif);font-weight:400;font-size:28px}
+.zone p{color:var(--muted);font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{font-size:14.5px;font-weight:500;background:var(--cream);border-radius:999px;padding:7px 14px}
+.q select{font:400 17px var(--sans);color:var(--ink);background:var(--cream);border:1.5px solid transparent;padding:14px 16px;width:100%;border-radius:12px}
+.q .hint{font-size:13.5px;color:var(--muted)}
+.val{display:inline-block;font:700 10.5px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--amber-soft);color:#8A5A00;border-radius:6px;padding:1px 7px;vertical-align:middle}
+.no-fit{background:var(--cream);border-radius:18px;padding:24px;display:grid;gap:10px}
 </style>
 </head>
 <body>
-<div class="notice">Maqueta de Qualivo para Al Milímetro · textos para validar; las cifras de la calculadora son de ejemplo</div>
+<div class="notice">Maqueta de Qualivo para Al Milímetro (23-oct) · textos para validar con Sonia · no se envía ningún dato</div>
 
 <header class="top"><div class="wrap">
   <img class="logo" src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/Logo-Almilimetro-web-2-367w.png" alt="Al Milímetro">
   <a class="btn btn-fill btn-sm" href="#calculadora">Calcular mi reforma</a>
 </div></header>
 
-<!-- 1. Gancho: el mismo mensaje que el anuncio -->
+<!-- 1. Gancho: el mismo mensaje que los anuncios A y B -->
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">Reformas en Madrid ciudad</span>
-      <h1>¿Cuánto cuesta reformar tu piso? <em>Calcúlalo en 2 minutos</em></h1>
-      <p class="lead">Una arquitecta con 25 años de obra diseña y coordina tu reforma de principio a fin. Presupuesto cerrado por partidas, plazo por escrito y una sola persona al otro lado del teléfono.</p>
+      <span class="eyebrow">Reformas integrales · Madrid y noroeste</span>
+      <h1>Reforma integral de tu piso o tu chalet, <em>sin extras ocultos</em></h1>
+      <p class="lead">Una arquitecta diseña y coordina tu reforma de principio a fin. Presupuesto por partidas antes de empezar, plazo por escrito y una sola persona al otro lado del teléfono.</p>
       <div class="ctas">
         <a class="btn btn-fill" href="#calculadora">Calcular mi reforma <span class="arr">→</span></a>
-        <a class="btn btn-line" href="#despues">Qué pasa después</a>
+        <a class="btn btn-line" href="#zonas">Dónde trabajamos</a>
       </div>
-      <ul class="trust"><li>Visita técnica sin compromiso</li><li>Presupuesto cerrado</li><li>Un único interlocutor</li></ul>
+      <ul class="trust"><li>Visita técnica sin compromiso</li><li>Presupuesto por partidas</li><li>Un único interlocutor</li></ul>
     </div>
     <div class="hero-photo">
-      <div class="ph" role="img" aria-label="Sonia Vargas, arquitecta"></div>
-      <div class="badge"><b>25 años</b><span>diseñando y dirigiendo reformas</span></div>
+      <div class="ph" role="img" aria-label="Sonia, arquitecta de Al Milímetro"></div>
+      <div class="badge"><b>+20 años</b><span>diseñando y dirigiendo reformas <span class="val">a validar</span></span></div>
     </div>
   </div>
 </section>
@@ -223,113 +236,136 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-bet
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Lo que más frena antes de reformar</span><h2>Sabemos por qué da miedo empezar</h2></div>
     <div class="fears">
-      <article class="fear"><q>Se alarga y acaba costando el doble.</q><span class="fix">Cómo lo evito</span><p>Presupuesto cerrado por partidas antes de empezar y calendario de obra por escrito. Si algo cambia, lo decides tú antes de que se haga.</p></article>
-      <article class="fear"><q>Voy a tener que lidiar con cinco gremios.</q><span class="fix">Cómo lo evito</span><p>Albañiles, fontaneros y electricistas de confianza, coordinados por mí. Tú hablas con una sola persona.</p></article>
-      <article class="fear"><q>No va a quedar como lo imaginaba.</q><span class="fix">Cómo lo evito</span><p>Diseño e interiorismo incluidos: ves tu casa en plano y en 3D antes de mover un ladrillo.</p></article>
+      <article class="fear"><q>Me van a salir con extras a mitad de obra.</q><span class="fix">Cómo lo evito</span><p>Presupuesto por partidas antes de empezar. Si algo cambia, lo valoramos y lo decides tú antes de que se haga.</p></article>
+      <article class="fear"><q>Voy a tener que coordinar cinco gremios.</q><span class="fix">Cómo lo evito</span><p>Albañiles, fontaneros y electricistas de confianza, coordinados por mí. Tú hablas con una sola persona.</p></article>
+      <article class="fear"><q>Se alarga y no queda como lo imaginaba.</q><span class="fix">Cómo lo evito</span><p>Calendario de obra por escrito y diseño previo: ves tu casa en plano antes de mover un ladrillo.</p></article>
     </div>
   </div>
 </section>
 
-<!-- 3. Lo que hago -->
+<!-- 3. Lo que hago (sin locales) -->
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Qué hago</span><h2>Una reforma bien pensada, de principio a fin</h2></div>
+    <div class="sec-head"><span class="eyebrow">Qué hago</span><h2>Reformas completas, bien pensadas de principio a fin</h2></div>
     <div class="pillars">
-      <article class="pillar"><span class="ic">01</span><h3>Reformas integrales</h3><p>Desde instalaciones hasta el último acabado, con un solo presupuesto y un solo plazo.</p></article>
-      <article class="pillar"><span class="ic">02</span><h3>Cocinas y baños</h3><p>Las estancias que más cambian tu día a día, diseñadas al milímetro.</p></article>
-      <article class="pillar"><span class="ic">03</span><h3>Diseño y dirección de obra</h3><p>Plano, 3D, materiales y coordinación de todos los gremios.</p></article>
-      <article class="pillar"><span class="ic">04</span><h3>Anteproyectos</h3><p>Si aún no sabes qué quieres, vemos juntas qué se puede hacer en tu espacio.</p></article>
+      <article class="pillar"><span class="ic">01</span><h3>Chalets y viviendas</h3><p>Reforma integral de tu casa: instalaciones, distribución, cocina, baños y, si hace falta, ventanas.</p></article>
+      <article class="pillar"><span class="ic">02</span><h3>Pisos completos</h3><p>Desde instalaciones hasta el último acabado, con un solo presupuesto y un solo plazo.</p></article>
+      <article class="pillar"><span class="ic">03</span><h3>Cocina y baño a la vez</h3><p>Las dos estancias que más cambian tu día a día, en la misma obra.</p></article>
+      <article class="pillar"><span class="ic">04</span><h3>Diseño y dirección de obra</h3><p>Plano, materiales y coordinación de todos los gremios, de la visita a la entrega.</p></article>
     </div>
   </div>
 </section>
 
-<!-- 4. Calculadora -->
+<!-- 4. Dónde trabajamos (sin nombrar zonas excluidas) -->
+<section id="zonas" style="background:var(--cream)">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Dónde trabajamos</span><h2>Cerca de ti, para estar en tu obra</h2><p>Trabajamos donde podemos estar presentes de verdad durante toda la reforma.</p></div>
+    <div class="zones">
+      <article class="zone"><h3>Noroeste de Madrid</h3><p>Chalets y viviendas unifamiliares.</p><ul class="chips"><li>Boadilla del Monte</li><li>Villaviciosa de Odón</li><li>Majadahonda</li><li>Torrelodones</li><li>Moncloa-Aravaca</li></ul></article>
+      <article class="zone"><h3>Madrid capital</h3><p>Pisos y reformas integrales.</p><ul class="chips"><li>Alameda de Osuna</li><li>Las Tablas</li><li>Mirasierra</li><li>Hortaleza</li><li>Peña Grande</li><li>Chamberí</li><li>Prosperidad</li><li>Barrio de Salamanca</li><li>Retiro</li></ul></article>
+    </div>
+    <p class="note" style="margin-top:20px">Baños o cocinas sueltos: solo dentro de la M-30. Distritos exactos <span class="val">a validar</span></p>
+  </div>
+</section>
+
+<!-- 5. Formulario de cualificación (7 preguntas) -->
 <section class="calc-sec" id="calculadora">
   <div class="wrap calc-grid">
     <div class="calc-copy">
-      <span class="eyebrow">Calculadora</span>
-      <h2>Tu precio orientativo, <em>sin esperar a nadie</em></h2>
-      <p class="muted" style="font-size:18px">Seis preguntas y ves al momento en qué cifras se mueve tu reforma.</p>
-      <ul><li>Gratis y sin compromiso.</li><li>Con precios reales de obras en Madrid.</li><li>Después, si quieres, voy a verla y te doy la cifra cerrada.</li></ul>
+      <span class="eyebrow">Calcula tu reforma</span>
+      <h2>Cuéntame tu casa <em>en 2 minutos</em></h2>
+      <p class="muted" style="font-size:18px">Siete preguntas rápidas. Te digo en qué cifras se suele mover una obra como la tuya y, si te encaja, voy a verla.</p>
+      <ul><li>Gratis y sin compromiso.</li><li>Con cifras de obras reales en Madrid.</li><li>La cifra cerrada, siempre tras la visita técnica.</li></ul>
     </div>
     <div class="calc" id="calc">
-      <div class="top-row"><span>Tu reforma</span><span id="paso">1 de 6</span></div>
+      <div class="top-row"><span>Tu reforma</span><span id="paso">1 de 7</span></div>
       <div class="bar"><i id="barra" style="width:0%"></i></div>
 
-      <div class="q on" data-k="tipo"><h3>¿Qué quieres reformar?</h3>
-        <button class="opt" data-v="integral">Piso completo</button><button class="opt" data-v="cocina">Cocina</button><button class="opt" data-v="bano">Baño</button><button class="opt" data-v="parcial">Otra parte de la casa</button></div>
+      <div class="q on" data-k="zona"><h3>¿Dónde está la vivienda?</h3>
+        <select id="f-zona" aria-label="Zona">
+          <option value="">Elige tu zona</option>
+          <optgroup label="Noroeste"><option>Boadilla del Monte</option><option>Villaviciosa de Odón</option><option>Majadahonda</option><option>Torrelodones</option><option>Moncloa-Aravaca</option></optgroup>
+          <optgroup label="Madrid capital"><option>Alameda de Osuna</option><option>Las Tablas</option><option>Mirasierra</option><option>Hortaleza</option><option>Peña Grande</option><option>Chamberí</option><option>Prosperidad</option><option>Barrio de Salamanca</option><option>Retiro</option></optgroup>
+          <option value="otro">Otra zona de Madrid</option>
+        </select>
+        <label>Código postal<input id="f-cp" inputmode="numeric" maxlength="5"></label>
+        <button class="btn btn-fill" id="z-ok">Siguiente <span class="arr">→</span></button></div>
 
-      <div class="q" data-k="m2"><h3>¿Cuántos metros tiene?</h3>
-        <button class="opt" data-v="45">Menos de 50 m²</button><button class="opt" data-v="65">De 50 a 80 m²</button><button class="opt" data-v="100">De 80 a 120 m²</button><button class="opt" data-v="140">Más de 120 m²</button><button class="back">← Atrás</button></div>
+      <div class="q" data-k="tipo"><h3>¿Qué quieres reformar?</h3>
+        <button class="opt" data-v="chalet">Chalet o vivienda unifamiliar completa</button><button class="opt" data-v="piso">Piso completo (reforma integral)</button><button class="opt" data-v="cocina-bano">Cocina y baño de la misma vivienda</button><button class="opt" data-v="suelto">Solo un baño o solo una cocina</button><button class="opt" data-v="local">Un local o una oficina</button><button class="opt" data-v="arreglo">Arreglos puntuales (una puerta, un falso techo, alicatado…)</button><button class="back">← Atrás</button></div>
 
-      <div class="q" data-k="estado"><h3>¿En qué estado está?</h3>
-        <button class="opt" data-v="1.15">Hay que hacerlo todo, instalaciones incluidas</button><button class="opt" data-v="0.85">Solo acabados: suelos, pintura, puertas</button><button class="opt" data-v="1">No lo sé</button><button class="back">← Atrás</button></div>
+      <div class="q" data-k="m2"><h3>¿Cuántos metros tiene, más o menos?</h3>
+        <button class="opt" data-v="&lt;50">Menos de 50 m²</button><button class="opt" data-v="50-80">De 50 a 80 m²</button><button class="opt" data-v="80-120">De 80 a 120 m²</button><button class="opt" data-v="120-200">De 120 a 200 m²</button><button class="opt" data-v="&gt;200">Más de 200 m²</button><button class="back">← Atrás</button></div>
 
-      <div class="q" data-k="calidad"><h3>¿Qué acabados buscas?</h3>
-        <button class="opt" data-v="0.8">Básicos, buena relación calidad-precio</button><button class="opt" data-v="1">Medios</button><button class="opt" data-v="1.35">Altos, materiales de diseño</button><button class="back">← Atrás</button></div>
+      <div class="q" data-k="presupuesto"><h3>¿Qué presupuesto manejas?</h3>
+        <button class="opt" data-v="&lt;15">Menos de 15.000 €</button><button class="opt" data-v="15-20">De 15.000 a 20.000 €</button><button class="opt" data-v="20-40">De 20.000 a 40.000 €</button><button class="opt" data-v="40-80">De 40.000 a 80.000 €</button><button class="opt" data-v="80-160">De 80.000 a 160.000 €</button><button class="opt" data-v="&gt;160">Más de 160.000 €</button><button class="opt" data-v="nose">Aún no lo sé</button><p class="hint">Rangos <span class="val">a validar</span></p><button class="back">← Atrás</button></div>
 
       <div class="q" data-k="cuando"><h3>¿Cuándo te gustaría empezar?</h3>
         <button class="opt" data-v="ya">En menos de 3 meses</button><button class="opt" data-v="pronto">Entre 3 y 6 meses</button><button class="opt" data-v="luego">En más de 6 meses</button><button class="opt" data-v="mirando">Solo estoy mirando</button><button class="back">← Atrás</button></div>
 
-      <div class="q" data-k="datos"><h3>¿A dónde te envío tu horquilla?</h3>
+      <div class="q" data-k="propia"><h3>¿La vivienda ya es tuya?</h3>
+        <button class="opt" data-v="si">Sí</button><button class="opt" data-v="comprando">La estoy comprando</button><button class="opt" data-v="no">No</button><button class="back">← Atrás</button></div>
+
+      <div class="q" data-k="datos"><h3>¿A dónde te escribo?</h3>
         <label>Nombre<input id="f-nombre" autocomplete="name"></label>
         <label>Teléfono<input id="f-tel" type="tel" autocomplete="tel"></label>
-        <label>Código postal de la vivienda<input id="f-cp" inputmode="numeric" maxlength="5"></label>
-        <button class="btn btn-fill" id="ver">Ver mi precio orientativo <span class="arr">→</span></button>
+        <label>Email<input id="f-email" type="email" autocomplete="email"></label>
+        <p class="hint">Para enviarte la cifra orientativa y, si quieres, concertar la visita.</p>
+        <button class="btn btn-fill" id="ver">Ver mi resultado <span class="arr">→</span></button>
         <p class="note">Maqueta: no se envía ningún dato.</p>
         <button class="back">← Atrás</button></div>
 
       <div class="q" data-k="fin">
-        <div class="result"><span class="muted">Una reforma así suele estar entre</span><b id="horq">—</b><span class="muted" style="font-size:14px">Precio orientativo en Madrid, IVA no incluido. La cifra cerrada, tras la visita técnica.</span></div>
-        <p style="text-align:center">Gracias, <span id="nom">—</span>. En unos minutos te escribo por WhatsApp para concretar la visita.</p>
-        <p class="note">Cifras de ejemplo para la maqueta. Los €/m² reales los pone Sonia.</p>
+        <div class="result" id="res-si"><span class="muted" id="res-pre">Las obras como la tuya que hacemos suelen estar</span><b id="horq">—</b><span class="muted" style="font-size:14px">Orientativo. La cifra cerrada, por partidas, tras la visita técnica.</span></div>
+        <p style="text-align:center" id="res-gracias">Gracias, <span id="nom">—</span>. En unos minutos te escribo por WhatsApp para concretar una llamada de 10 minutos.</p>
+        <div class="no-fit" id="res-no" hidden><h3 style="font-family:var(--serif);font-weight:400;font-size:26px">Gracias por contármelo</h3><p>Te soy sincera: este tipo de obra (o esta zona) no es en lo que mejor te puedo ayudar, y prefiero decírtelo antes que hacerte perder el tiempo. ¡Mucha suerte con tu reforma!</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 5. Qué pasa después (el recorrido de la propuesta) -->
+<!-- 6. Qué pasa después -->
 <section id="despues">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Qué pasa después</span><h2>Del primer clic a tu casa terminada</h2></div>
     <ol class="steps">
-      <li><span class="n">01</span><b>Ves tu horquilla al momento</b><p>Sabes desde el primer minuto en qué cifras se mueve tu reforma.</p></li>
-      <li><span class="n">02</span><b>Te escribo por WhatsApp en unos minutos</b><p>Para una llamada de 10 minutos: qué quieres hacer, cuándo y qué te preocupa.</p></li>
-      <li><span class="n">03</span><b>Visita técnica en tu casa</b><p>Mido, miro instalaciones y te propongo soluciones. Sin coste y sin compromiso.</p></li>
-      <li><span class="n">04</span><b>Presupuesto cerrado por partidas</b><p>Con plano, materiales y plazo de obra, en [X] días. Lo repasamos juntas para que no te quede ninguna duda.</p></li>
-      <li><span class="n">05</span><b>Obra coordinada y entrega</b><p>Me encargo de todos los gremios. Tú solo hablas conmigo hasta que te entrego la casa lista para vivir.</p></li>
+      <li><span class="n">01</span><b>Te escribo por WhatsApp en unos minutos</b><p>Para una llamada de 10 minutos: qué quieres hacer, cuándo y qué te preocupa.</p></li>
+      <li><span class="n">02</span><b>Visita técnica en tu casa</b><p>Mido, miro instalaciones y te propongo soluciones. Sin compromiso.</p></li>
+      <li><span class="n">03</span><b>Presupuesto por partidas</b><p>Con plano, materiales y plazo de obra. Lo repasamos juntas para que no te quede ninguna duda.</p></li>
+      <li><span class="n">04</span><b>Obra coordinada</b><p>Me encargo de todos los gremios. Tú solo hablas conmigo.</p></li>
+      <li><span class="n">05</span><b>Entrega</b><p>Tu casa lista para vivir, sin sorpresas por el camino.</p></li>
     </ol>
   </div>
 </section>
 
-<!-- 6. Quién está detrás -->
+<!-- 7. Quién está detrás -->
 <section class="about">
   <div class="wrap about-grid">
-    <div class="about-photo"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/descarga-530w.png" alt="Sonia Vargas, arquitecta" loading="lazy"></div>
+    <div class="about-photo"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/descarga-530w.png" alt="Sonia, arquitecta de Al Milímetro" loading="lazy"></div>
     <div class="about-copy">
       <span class="eyebrow">Quién está detrás</span>
-      <h2>Soy Sonia, arquitecta. <em>Tu reforma, sin agobios.</em></h2>
-      <p>Llevo 25 años en obra, 10 de ellos como jefa de proyecto. Hoy dirijo Al Milímetro con arquitectos técnicos y gremios de confianza de toda la vida.</p>
-      <p>Diseño tu reforma, te doy un presupuesto que se cumple y coordino la obra para que tú no tengas que hacerlo.</p>
-      <div class="stats"><div><b>25</b><span>años en obra</span></div><div><b>[X]</b><span>reformas entregadas</span></div><div><b>1</b><span>persona de contacto</span></div></div>
-      <span class="sign">ARQ. SONIA VARGAS</span>
+      <h2>Soy Sonia, arquitecta. <em>Te hablo claro desde el primer día.</em></h2>
+      <p>Llevo más de 20 años en obra <span class="val">a validar</span>. Dirijo Al Milímetro con arquitectos técnicos y gremios de confianza.</p>
+      <p>Diseño tu reforma, te doy un presupuesto por partidas y coordino la obra para que tú no tengas que hacerlo.</p>
+      <div class="stats"><div><b>+20</b><span>años en obra</span></div><div><b>[X]</b><span>reformas entregadas</span></div><div><b>1</b><span>persona de contacto</span></div></div>
+      <span class="sign">ARQ. SONIA · AL MILÍMETRO</span>
     </div>
   </div>
 </section>
 
-<!-- 7. Antes y después -->
+<!-- 8. Proyectos (fotos de su web; se sustituyen por las obras que mande) -->
 <section>
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Proyectos</span><h2>Casas que ya disfrutan sus dueños</h2></div>
     <div class="proj">
-      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/1-407w.webp" alt="Cocina reformada" loading="lazy"><div><span class="meta">Cocina · [barrio]</span><h3>Todo en su sitio</h3><p>Una cocina diseñada para que el desorden del día a día no se vea.</p></div></article>
-      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/Captura+de+pantalla+2026-04-14+113949-407w.png" alt="Piso familiar de 80 m²" loading="lazy"><div><span class="meta">Integral · 80 m²</span><h3>Trabajar y vivir en los mismos metros</h3><p>Espacio para teletrabajar y para que los niños jueguen, sin ampliar un metro.</p></div></article>
-      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/Captura+de+pantalla+2026-04-14+114002-407w.png" alt="Baño reformado" loading="lazy"><div><span class="meta">Baño · [barrio]</span><h3>De oscuro y pequeño a luminoso</h3><p>Redistribución, almacenaje y acabados nuevos en [X] semanas.</p></div></article>
+      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/Captura+de+pantalla+2026-04-14+113949-407w.png" alt="Piso reformado" loading="lazy"><div><span class="meta">Integral · [zona]</span><h3>Trabajar y vivir en los mismos metros</h3><p>[Qué se hizo y en cuánto tiempo: lo completa Sonia.]</p></div></article>
+      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/1-407w.webp" alt="Cocina reformada" loading="lazy"><div><span class="meta">Cocina y baño · [zona]</span><h3>Todo en su sitio</h3><p>[Qué se hizo y en cuánto tiempo: lo completa Sonia.]</p></div></article>
+      <article class="card"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/Captura+de+pantalla+2026-04-14+114002-407w.png" alt="Baño reformado" loading="lazy"><div><span class="meta">Baño · [zona]</span><h3>De oscuro y pequeño a luminoso</h3><p>[Qué se hizo y en cuánto tiempo: lo completa Sonia.]</p></div></article>
     </div>
   </div>
 </section>
 
-<!-- 8. Prueba social -->
+<!-- 9. Prueba social -->
 <section style="padding-top:0">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Lo que dicen</span><h2>Clientes que repetirían</h2></div>
@@ -338,36 +374,36 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-bet
       <article class="t"><p>«Puntualidad en la entrega y excelente relación calidad/precio.»</p><div><div class="stars">★★★★★</div><div class="who"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/imgi_41_5-4c970a05-1920w.png" alt="" loading="lazy">Ana G.</div></div></article>
       <article class="t"><p>«Servicio personalizado y mucha paciencia para responder dudas y consultas.»</p><div><div class="stars">★★★★★</div><div class="who"><img src="https://le-de.cdn-website.com/17e1d390ca7048d19e1e17e03d1494d0/dms3rep/multi/opt/imgi_34_11-23243401-1920w.jpeg" alt="" loading="lazy">Cristina F.</div></div></article>
     </div>
-    <p class="note" style="margin-top:20px">Testimonios publicados en su web, acortados. Antes de usarlos en anuncios, pedir permiso a cada cliente.</p>
+    <p class="note" style="margin-top:20px">Testimonios publicados en su web, acortados. Antes de usarlos en anuncios, permiso de Sonia y de cada cliente.</p>
   </div>
 </section>
 
-<!-- 9. Para quién es -->
+<!-- 10. Para quién es -->
 <section style="background:var(--cream)">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">¿Es para ti?</span><h2>Trabajo con pocas obras para hacerlas bien</h2></div>
+    <div class="sec-head"><span class="eyebrow">¿Es para ti?</span><h2>Pocas obras, para hacerlas bien</h2></div>
     <div class="fit">
-      <article class="yes"><h3>Sí, si…</h3><ul><li>Tu piso o local está en Madrid ciudad.</li><li>Quieres reformarlo entero, o la cocina o el baño completos.</li><li>Quieres empezar en los próximos meses.</li><li>Prefieres planificar bien y que alguien coordine todo por ti.</li></ul></article>
-      <article class="no"><h3>No, si…</h3><ul><li>Buscas un arreglo puntual o una pequeña reparación.</li><li>Solo te importa el precio más bajo.</li><li>La vivienda está fuera de Madrid ciudad.</li></ul></article>
+      <article class="yes"><h3>Sí, si…</h3><ul><li>Quieres reformar tu chalet o tu piso entero, o la cocina y el baño a la vez.</li><li>Tu casa está en una de las zonas donde trabajamos.</li><li>Quieres empezar en los próximos meses.</li><li>Valoras que te hablen claro y que alguien coordine todo por ti.</li></ul></article>
+      <article class="no"><h3>No, si…</h3><ul><li>Buscas un arreglo puntual o una pequeña reparación.</li><li>Es un local u oficina.</li><li>Solo te importa el precio más bajo.</li></ul></article>
     </div>
   </div>
 </section>
 
-<!-- 10. Preguntas frecuentes -->
+<!-- 11. Preguntas frecuentes -->
 <section>
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Preguntas frecuentes</span><h2>Lo que me preguntan antes de empezar</h2></div>
     <div class="faq">
-      <details><summary>¿La visita técnica tiene coste?</summary><p>No. Voy, mido y te propongo soluciones. Si después no seguimos adelante, no pasa nada.</p></details>
-      <details><summary>¿El presupuesto es cerrado?</summary><p>Sí, por partidas. Si durante la obra decides cambiar algo, lo valoramos antes y lo apruebas tú.</p></details>
+      <details><summary>¿La visita técnica tiene coste?</summary><p>No. Voy, mido y te propongo soluciones. Si después no seguimos adelante, no pasa nada. <span class="val">a validar</span></p></details>
+      <details><summary>¿Me van a salir extras durante la obra?</summary><p>El presupuesto va por partidas. Si durante la obra decides cambiar algo, lo valoramos antes y lo apruebas tú.</p></details>
       <details><summary>¿Cuánto dura una reforma integral?</summary><p>Depende de los metros y del alcance. Te doy el calendario por escrito junto con el presupuesto.</p></details>
-      <details><summary>¿Te encargas de los permisos?</summary><p>Sí, te ayudo con la licencia o la declaración responsable que necesite tu obra.</p></details>
-      <details><summary>¿Y si todavía no sé lo que quiero?</summary><p>Para eso está el anteproyecto: vemos qué se puede hacer en tu espacio antes de decidir.</p></details>
+      <details><summary>¿Trabajáis fuera de estas zonas?</summary><p>Para reformas integrales grandes, cuéntanos tu caso y lo valoramos.</p></details>
+      <details><summary>¿Y si todavía no sé lo que quiero?</summary><p>Lo vemos juntas en la visita: qué se puede hacer en tu espacio antes de decidir.</p></details>
     </div>
   </div>
 </section>
 
-<!-- 11. Cierre -->
+<!-- 12. Cierre -->
 <section class="final">
   <div class="wrap">
     <h2>Empieza por saber cuánto costaría</h2>
@@ -377,7 +413,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-bet
 </section>
 
 <footer><div class="wrap">
-  <span>Al Milímetro · Reformas e interiorismo · Madrid</span>
+  <span>Al Milímetro · Reformas integrales · Madrid</span>
   <span>Maqueta preparada por Qualivo</span>
 </div></footer>
 
@@ -387,38 +423,31 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-bet
 (function () {
   var pasos = Array.prototype.slice.call(document.querySelectorAll('#calc .q'));
   var barra = document.getElementById('barra');
-  var r = {}, i = 0;
-  // Cifras de ejemplo (€/m² en calidad media y precios base de cocina, baño y parcial). Las sustituye Sonia.
-  var BASE = { integral: 700 };
-  var FIJO = { cocina: 12000, bano: 8000, parcial: 15000 };
+  var r = {}, i = 0, TOTAL = 7;
   function ir(n) {
     pasos[i].classList.remove('on'); i = n; pasos[i].classList.add('on');
     barra.style.width = Math.round(i / (pasos.length - 1) * 100) + '%';
-    var c = document.getElementById('paso'); if (c) c.textContent = i < pasos.length - 1 ? (i + 1) + ' de 6' : 'Listo';
+    document.getElementById('paso').textContent = i < pasos.length - 1 ? (i + 1) + ' de ' + TOTAL : 'Listo';
   }
-  function fmt(n) { return (Math.round(n / 500) * 500).toLocaleString('es-ES') + ' €'; }
+  document.getElementById('z-ok').addEventListener('click', function () { r.zona = document.getElementById('f-zona').value || 'otro'; ir(1); });
   pasos.forEach(function (p, idx) {
     p.querySelectorAll('.opt').forEach(function (b) {
-      b.addEventListener('click', function () {
-        r[p.dataset.k] = b.dataset.v;
-        var siguiente = idx + 1;
-        // Fuera de la reforma integral los metros no cuentan igual: se salta la pregunta de superficie.
-        if (p.dataset.k === 'tipo' && b.dataset.v !== 'integral') { r.m2 = 0; siguiente = idx + 2; }
-        ir(siguiente);
-      });
+      b.addEventListener('click', function () { r[p.dataset.k] = b.dataset.v; ir(idx + 1); });
     });
     var atras = p.querySelector('.back');
-    if (atras) atras.addEventListener('click', function () {
-      var ant = idx - 1;
-      if (pasos[ant].dataset.k === 'm2' && r.tipo !== 'integral') ant--;
-      ir(ant);
-    });
+    if (atras) atras.addEventListener('click', function () { ir(idx - 1); });
   });
+  // Reglas de descarte (hipótesis, a validar con Sonia): locales, arreglos sueltos y presupuestos por debajo de 15.000 €.
+  // «Solo baño o cocina» fuera de la M-30 se revisa a mano: la zona sola no basta para saberlo.
   document.getElementById('ver').addEventListener('click', function () {
-    var est = parseFloat(r.estado || 1), cal = parseFloat(r.calidad || 1), centro;
-    if (r.tipo && r.tipo !== 'integral') centro = FIJO[r.tipo] * est * cal;
-    else centro = BASE.integral * parseFloat(r.m2 || 65) * est * cal;
-    document.getElementById('horq').textContent = fmt(centro * 0.88) + ' – ' + fmt(centro * 1.12);
+    var fuera = r.tipo === 'local' || r.tipo === 'arreglo' || r.presupuesto === '<15';
+    document.getElementById('res-no').hidden = !fuera;
+    document.getElementById('res-si').hidden = fuera;
+    document.getElementById('res-gracias').hidden = fuera;
+    // Solo cifras de su documento de arranque; el resto se da en la llamada.
+    var cifra = { piso: '35.000 – 40.000 €', chalet: 'desde 160.000 €' }[r.tipo];
+    document.getElementById('res-pre').textContent = cifra ? 'Las obras como la tuya que hacemos suelen estar en' : 'Para darte una cifra ajustada necesito unos datos más';
+    document.getElementById('horq').textContent = cifra || 'Te la doy en la llamada';
     document.getElementById('nom').textContent = (document.getElementById('f-nombre').value || '').trim().split(' ')[0] || 'tu nombre';
     ir(pasos.length - 1);
   });
