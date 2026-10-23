@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty · llamada de prueba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Plan B de la reunión con Hunty (23-oct): la agente de voz llama al móvil de Maikel haciendo el caso de Javier. Usa api/prueba.js con la ficha api/_fichas/hunty.json. */
+.lw{max-width:560px;margin-inline:auto;padding:24px 16px 48px;display:grid;gap:16px}
+.lw > *{min-width:0}
+.lw h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,5vw,34px);line-height:1.1;letter-spacing:-.015em}
+.lw > p{color:var(--muted)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:grid;gap:14px}
+.esc{display:grid;gap:8px}
+.esc label{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;background:var(--surface-2)}
+.esc label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.esc input{margin-top:3px;accent-color:var(--accent)}
+.esc b{font-size:15px}
+.esc small{grid-column:2;color:var(--muted);font-size:13px;line-height:1.45}
+.fld{display:grid;gap:5px}
+.fld span{font-size:13px;font-weight:600;color:var(--ink-2)}
+.fld input{font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:11px;padding:11px 12px;background:var(--paper);color:var(--ink);width:100%}
+.fld input:focus{outline:none;border-color:var(--accent)}
+.go{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);padding:15px;cursor:pointer}
+.go:disabled{opacity:.6;cursor:wait}
+.st{border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.5;display:none}
+.st.on{display:block}
+.st.ok{background:var(--good-soft);color:var(--good)}
+.st.ko{background:var(--bad-soft);color:var(--bad)}
+.tips{font-size:13.5px;color:var(--muted);display:grid;gap:6px;margin:0;padding-left:18px}
+.tips b{color:var(--ink-2)}
+.hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><img src="../assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span></div>
+    <div class="links"><a href="../en-directo/">En directo</a><a href="../base/">Base</a><a href="./" aria-current="page">Llamada</a><a href="../demo/">Demo</a></div>
+  </div>
+</nav>
+<main class="lw">
+  <h1>Que la agente te llame ahora</h1>
+  <p>Llama en menos de un minuto a tu móvil y habla como el equipo de Hunty. Tú haces de Javier. Ponlo en altavoz cerca del micrófono del portátil y se oirá en la reunión.</p>
+
+  <form class="box" id="f" novalidate>
+    <div class="esc" role="radiogroup" aria-label="Qué caso">
+      <label><input type="radio" name="esc" value="aviso" checked><b>Javier pidió aviso y no contesta</b><small>Como la llamada de la demo: confirma fechas, cazadores y presupuesto, le cuenta las dos monterías con sitio para dos y agenda la llamada con Pablo.</small></label>
+      <label><input type="radio" name="esc" value="pago"><b>Javier empezó a pagar y no terminó</b><small>Reserva a medias de Río Frío para 2 puestos: le pregunta si tuvo algún problema o duda, la resuelve con la ficha y, si quiere, le pasa con Pablo.</small></label>
+    </div>
+    <label class="fld"><span>Tu móvil (español)</span><input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="6XX XXX XXX" required></label>
+    <label class="fld"><span>Tu email (te llega el resumen de la llamada)</span><input id="em" type="email" autocomplete="email" placeholder="tu@email" required></label>
+    <input class="hp" type="text" name="website" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="go" id="go" type="submit">📞 Que me llame</button>
+    <div class="st" id="st" role="status" aria-live="polite"></div>
+  </form>
+
+  <ul class="tips">
+    <li><b>Horario:</b> de 9:00 a 21:00. Fuera de horario no llama.</li>
+    <li><b>Hasta 5 llamadas por móvil y día.</b> Pruébala una vez antes de la reunión.</li>
+    <li><b>La voz es la de la agente («Lucía»),</b> no la de Álvaro de la grabación. Solo usa los datos de las fichas de Río Frío, Los Jaronales y Valmorisco comprobados el 22-oct.</li>
+    <li><b>Al colgar</b> te llegan a ti un WhatsApp y un email con el resumen. A Hunty no se le envía nada.</li>
+    <li><b>Si no llama en un minuto,</b> pon el audio de la demo: <a href="../assets/llamada-agente.mp3">llamada-agente.mp3</a>.</li>
+  </ul>
+</main>
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const CTX={
+  aviso:{contacto:'Javier',etapa:'Pidió aviso de monterías en Toledo o Cáceres y no ha contestado al WhatsApp',interes:'Montería en diciembre o enero, 2 puestos, hasta 400 € el puesto',
+    historial:['Ha visto 3 veces Valmorisco, pero solo queda 1 puesto y son dos','Ha mirado Río Frío y Los Jaronales, las dos el 26 de diciembre a 350 € el puesto'],
+    porque:'Caza esta temporada, en menos de 90 días, y busca 2 puestos.',accion:'Confirmar fechas, cazadores y presupuesto, contarle las dos opciones con sitio para dos y agendar la llamada con Pablo.',objetivo:'agendar una llamada con Pablo, del equipo de Hunty'},
+  pago:{contacto:'Javier',etapa:'Empezó a pagar Río Frío para 2 puestos hace dos horas y no terminó',interes:'Montería en Río Frío, 26 de diciembre, 2 puestos',
+    historial:['Preguntó a Clara por WhatsApp por las reseñas y por la reserva de 100 € a la organización','Le llegó el enlace de reserva y abrió el pago'],
+    porque:'Llegó al pago: o tuvo un problema o le queda una duda.',accion:'Preguntar si tuvo algún problema con el pago o alguna duda, resolverla con los datos de la ficha y, si quiere, agendar la llamada con Pablo.',objetivo:'resolver su duda y que termine la reserva, o agendar una llamada con Pablo'}
+};
+try{$('#tel').value=localStorage.getItem('hl_tel')||'';$('#em').value=localStorage.getItem('hl_em')||''}catch(e){}
+const MSG={telefono:'Ese móvil no parece español. Ponlo con 9 cifras, empezando por 6 o 7.',email:'Revisa el email.',ya_hoy:'Ya has usado las 5 llamadas de hoy con este móvil. Usa el audio de la demo.',tope:'Se ha llegado al tope diario de llamadas de prueba. Usa el audio de la demo.',llamada:'La llamada no ha salido. Usa el audio de la demo y avísame para revisarlo.'};
+function st(cls,txt){const s=$('#st');s.className='st on '+cls;s.textContent=txt}
+$('#f').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const tel=$('#tel').value.trim(),em=$('#em').value.trim();
+  try{localStorage.setItem('hl_tel',tel);localStorage.setItem('hl_em',em)}catch(e){}
+  const esc=document.querySelector('input[name="esc"]:checked').value;
+  $('#go').disabled=true;st('ok','Lanzando la llamada…');
+  try{
+    const r=await fetch('/api/prueba',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({preset:'hunty',nombre:'Maikel',telefono:tel,email:em,website:$('#hp').value,contexto:CTX[esc]})});
+    const j=await r.json().catch(()=>({}));
+    if(j.ok&&j.estado==='llamando')st('ok','Te está llamando '+(j.agente||'la agente')+'. Coge y ponlo en altavoz. Tú eres Javier.');
+    else if(j.ok&&j.estado==='fuera_horario')st('ko','Fuera de horario: solo llama de '+(j.desde||9)+':00 a 21:00.');
+    else st('ko',MSG[j.error]||'No ha salido. Usa el audio de la demo.');
+  }catch(err){st('ko','Sin conexión. Usa el audio de la demo.')}
+  $('#go').disabled=false;
+});
+})();
+</script>
+</body>
+</html>
