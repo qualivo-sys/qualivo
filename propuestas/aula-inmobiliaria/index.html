@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Aula Inmobiliaria · plan de captación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Plan de captación para Aula Inmobiliaria (reunión 23-oct). Página autónoma; la demo vive en ./demo/. */
+:root{--paper:#F6F7FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--ink:#14213D;--muted:#5B6478;--line:#DCE1EA;--line-2:#E9EDF3;--accent:#1F4E8C;--accent-ink:#fff;--accent-soft:#E6EEF8;--warn:#B45309;--warn-soft:#FDF2E3;--good:#1E7B4F;--good-soft:#E3F3EA;--bad:#B42318;--bad-soft:#FBE7E5;--navy:#0F1E3D;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--shadow:0 1px 2px rgba(15,30,61,.05),0 8px 24px -12px rgba(15,30,61,.15)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0C1424;--surface:#131D31;--surface-2:#18243B;--ink:#E8EDF6;--muted:#9AA6BC;--line:#26324A;--line-2:#1E2940;--accent:#6EA2E8;--accent-ink:#0C1424;--accent-soft:#1A2B47;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--bad-soft:#341A18;--navy:#070E1C}}
+:root[data-theme="dark"]{--paper:#0C1424;--surface:#131D31;--surface-2:#18243B;--ink:#E8EDF6;--muted:#9AA6BC;--line:#26324A;--line-2:#1E2940;--accent:#6EA2E8;--accent-ink:#0C1424;--accent-soft:#1A2B47;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--bad-soft:#341A18;--navy:#070E1C}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);overflow-x:hidden}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:16px}
+.topnav{position:sticky;top:0;z-index:30;background:rgba(15,30,61,.95);color:#fff;backdrop-filter:blur(10px)}
+.topnav .in{max-width:1120px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:baseline;margin-right:auto;font-weight:700}
+.brand small{font-family:var(--mono);font-weight:500;font-size:11px;opacity:.6}
+.links{display:flex;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600;font-size:13.5px;padding:6px 14px;border-radius:99px}
+.links a[aria-current]{background:#fff;color:var(--navy)}
+.hero{background:linear-gradient(135deg,#0F1E3D 0%,#1F4E8C 100%);color:#fff;padding:56px 0 48px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.08;letter-spacing:-.02em;max-width:22ch;margin-top:10px}
+.lead{font-size:18px;opacity:.88;max-width:70ch;margin-top:14px}
+.note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:10px;padding:9px 12px;margin-top:18px;max-width:92ch;opacity:.85}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:2px 7px;vertical-align:middle;font-weight:500}
+.tag.real{background:var(--good-soft);color:var(--good)}
+.tag.ej{background:var(--warn-soft);color:var(--warn)}
+.tag.hip{background:var(--accent-soft);color:var(--accent)}
+.hero .tag.ej{background:#C9860A;color:#fff}
+main{padding:36px 0 72px;display:grid;gap:44px}
+section{display:grid;gap:18px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3vw,32px);line-height:1.15;letter-spacing:-.01em}
+h2 .n{font-family:var(--mono);font-size:13px;color:var(--accent);display:block;letter-spacing:.1em;margin-bottom:4px}
+.sub{color:var(--muted);max-width:78ch}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:16px;line-height:1.35;margin-bottom:6px}
+.card p,.card li{font-size:14.5px;color:var(--muted)}
+.card ul,.card ol{padding-left:18px;display:grid;gap:5px}
+.kpi b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1;color:var(--ink)}
+.kpi span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line-2);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.w{min-width:240px}
+.find{display:grid;gap:10px}
+.find li{list-style:none;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:14.5px}
+.find li.bad{border-left-color:var(--bad)}
+.find li.good{border-left-color:var(--good)}
+.find b{color:var(--ink)}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:0;list-style:none}
+.flow li{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:12px;font-size:13.5px;color:var(--muted);display:grid;gap:4px;align-content:start}
+.flow li b{color:var(--ink);font-size:14.5px}
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.weeks .card h3 span{font-family:var(--mono);font-size:11px;color:var(--accent);display:block;letter-spacing:.08em}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:650;border-radius:99px;padding:12px 20px}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:960px){.grid,.grid.four,.weeks{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid,.grid.two,.grid.four,.weeks,.flow{grid-template-columns:1fr}.hero{padding:40px 0 36px}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Presentación"><div class="in">
+  <div class="brand">Aula Inmobiliaria × Qualivo <small>23-oct-2026</small></div>
+  <div class="links"><a href="./" aria-current="page">Plan</a><a href="./demo/">Demo</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Plan de captación · Aula Inmobiliaria</p>
+  <h1>Más matrículas con las solicitudes que ya os llegan</h1>
+  <p class="lead">Veinte años formando a profesionales inmobiliarios, 4,9 sobre 5 en Google y un catálogo con precio claro. El trabajo no es traer más curiosos: es que cada persona que pregunta tenga respuesta al momento, un siguiente paso y alguien que la siga hasta que se matricule.</p>
+  <p class="note"><span class="tag ej">Cómo leer esta página</span> Lo marcado como <b>real</b> sale de vuestra web y de la Biblioteca de anuncios de Meta, consultadas el 23-oct-2026, o de lo que nos contaste en el formulario y por WhatsApp. Lo marcado como <b>hipótesis</b> lo comprobamos juntos en la reunión. No hay ninguna cifra de resultados: se miden con vuestros datos.</p>
+</div></header>
+
+<main class="wrap">
+
+<section>
+  <h2><span class="n">01</span>Lo que ya tenéis</h2>
+  <div class="grid four">
+    <div class="card kpi"><b>2006</b><span>formando profesionales inmobiliarios <span class="tag real">real</span></span></div>
+    <div class="card kpi"><b>4,9 / 5</b><span>con 955 opiniones en Google <span class="tag real">real</span></span></div>
+    <div class="card kpi"><b>390 €</b><span>la mayoría de cursos; packs a 580 € y Rent to Rent a 450 € <span class="tag real">real</span></span></div>
+    <div class="card kpi"><b>~70</b><span>personas al mes que piden información, según nos dijiste <span class="tag real">dato tuyo</span></span></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Cómo se puede pagar</h3><p>Pago a plazos con Aplazame y formación bonificable para trabajadores por cuenta ajena; la comprobación del crédito es gratuita y la tramitación cuesta 75 € + IVA. <span class="tag real">real</span></p></div>
+    <div class="card"><h3>Cómo os contactan</h3><p>Teléfono gratuito, formulario «Solicita información», WhatsApp y la compra directa en la web. Atención de lunes a jueves de 9 a 18 h y viernes de 9 a 14 h. <span class="tag real">real</span></p></div>
+    <div class="card"><h3>Lo que nos pediste</h3><p>«Necesito un CRM para gestionar los leads». Inviertes entre 1.000 y 3.000 € al mes en anuncios, quieres mejorar el seguimiento y empezar en los próximos 30 días. <span class="tag real">dato tuyo</span></p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Vuestros anuncios hoy</h2>
+  <p class="sub">Biblioteca de anuncios de Meta, España, consultada el 23-oct-2026 por la mañana. Estos son los anuncios activos de la página Aula Inmobiliaria. <span class="tag real">real</span></p>
+  <div class="tbl"><table>
+    <thead><tr><th>Curso</th><th>Desde</th><th>Formato</th><th>Texto principal</th><th>Botón</th><th>A dónde lleva</th></tr></thead>
+    <tbody>
+      <tr><td>Agente Inmobiliario</td><td>12-sep</td><td>Imagen</td><td class="w">«¿Quieres trabajar en el sector inmobiliario con todas las garantías legales? … Formación de 250 horas adaptada a las normativas actuales.»</td><td>Ver detalles</td><td>Ficha del curso</td></tr>
+      <tr><td>Agente Inmobiliario</td><td>12-sep</td><td>Vídeo</td><td class="w">«Fórmate como Agente Inmobiliario profesional y trabaja con garantías … curso homologado y 100% actualizado.»</td><td>Comprar</td><td>Ficha del curso</td></tr>
+      <tr><td>Agente Inmobiliario</td><td>1-sep</td><td>Dinámico · titular «Información al momento»</td><td class="w">«Trabaja como Agente Inmobiliario profesional con total garantía legal y técnica…»</td><td>Comprar</td><td>Ficha del curso (no el WhatsApp)</td></tr>
+      <tr><td>AICAT (Cataluña)</td><td>25-ago</td><td>Dinámico</td><td class="w">«Fórmate como Agente Inmobiliario profesional y trabaja en Cataluña con garantías…»</td><td>Comprar</td><td>Ficha del curso</td></tr>
+      <tr><td>Mediación</td><td>25-ago</td><td>Imagen</td><td class="w">«Fórmate como profesional para la Mediación Civil-Mercantil en Conflictos Inmobiliarios…»</td><td>Comprar</td><td>Ficha del curso</td></tr>
+      <tr><td>Gestión Inmobiliaria</td><td>15-oct</td><td>Imagen · «Información al momento»</td><td class="w">«Fórmate con nuestro curso de Gestión Inmobiliaria … habilidades necesarias para aumentar tus ventas.»</td><td>WhatsApp</td><td>Chat de WhatsApp</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="find">
+    <li class="good"><b>Lo que funciona:</b> la oferta es clara, cada anuncio habla de un curso concreto y ya tenéis un catálogo conectado a Meta (anuncios dinámicos con los packs), que es la base para el retargeting.</li>
+    <li class="bad"><b>Casi todo pide comprar a quien no os conoce:</b> cinco de los seis llevan a la ficha del curso con «Comprar». Quien no compra en esa visita se va sin dejar nada y no hay forma de volver a él, salvo con anuncios.</li>
+    <li class="bad"><b>El precio y lo que facilita la decisión han desaparecido de los textos:</b> los anuncios de 2024 decían «390 €», las horas y «100% online». Los activos no dicen ni el precio, ni el pago a plazos, ni que se puede bonificar.</li>
+    <li class="bad"><b>«Información al momento» que no lleva a la información:</b> uno de los anuncios con ese titular manda a la ficha del curso con «Comprar», no al WhatsApp.</li>
+    <li><b>La competencia anuncia «sin coste»:</b> en la misma búsqueda aparecen cursos inmobiliarios «100% subvencionados» y talleres gratuitos de redes inmobiliarias. Vosotros tenéis la bonificación y no aparece en ningún anuncio.</li>
+    <li><b>Detalle visto en el historial:</b> un anuncio dinámico de Rent to Rent salió con el titular «{{product.name}}» sin rellenar. Ya no está activo, pero conviene revisar las plantillas del catálogo.</li>
+  </ul>
+  <p class="sub">No hemos podido revisar Google Ads desde fuera; si lo usáis, lo miramos con acceso.</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Dónde se pueden estar perdiendo matrículas</h2>
+  <p class="sub">Son hipótesis a partir de lo que vemos desde fuera y de lo que nos contaste. Las validamos en la reunión con tus números. <span class="tag hip">hipótesis</span></p>
+  <div class="grid">
+    <div class="card"><h3>1 · Fuera de horario</h3><p>Los anuncios funcionan las 24 horas y la atención termina a las 18:00 (viernes a las 14:00). Quien escribe a las 21:00 espera hasta el día siguiente y, para entonces, ya ha preguntado en otra escuela. Tu propia solicitud nos llegó un jueves a las 20:01.</p></div>
+    <div class="card"><h3>2 · Sin un sitio donde quede todo</h3><p>Unas 70 personas al mes entre WhatsApp, teléfono, formulario y compra. Sin CRM no se sabe quién está a medias, quién dijo «me lo pienso» ni de qué anuncio vino cada matrícula.</p></div>
+    <div class="card"><h3>3 · El «me lo pienso» y la bonificación</h3><p>Un curso de 390 € se decide en días, no en minutos, y la bonificación necesita a la empresa del alumno. Si nadie vuelve a escribir, esas matrículas se pierden aunque el interés fuera real.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span>El sistema que proponemos</h2>
+  <p class="sub">No cambia la web ni la compra directa: añade lo que falta alrededor. El recorrido completo se ve, paso a paso y con un alumno de ejemplo, en la <a href="./demo/">demo</a>.</p>
+  <ol class="flow">
+    <li><b>1 · Anuncio</b>Un mensaje por tipo de alumno, con precio, plazos y bonificación.</li>
+    <li><b>2 · Solicitud</b>Al WhatsApp o a un formulario corto: curso, experiencia, si su empresa lo puede bonificar y cuándo quiere empezar.</li>
+    <li><b>3 · Respuesta al minuto</b>Un asistente contesta a cualquier hora, resuelve dudas con datos de vuestra web y cualifica.</li>
+    <li><b>4 · Ficha en el CRM</b>Cada solicitud con su estado, su puntuación y el siguiente paso. El asesor llama solo a quien está listo.</li>
+    <li><b>5 · Seguimiento</b>Mensajes para quien no contesta, quien se lo piensa, quien tramita la bonificación y quien deja el curso para más adelante.</li>
+    <li><b>6 · Matrícula y después</b>Bienvenida, oferta de pack y petición de reseña. Y un panel que dice qué anuncio trae matrículas.</li>
+  </ol>
+  <div class="grid">
+    <div class="card"><h3>Campaña A · Empezar en el sector</h3><p>Agente Inmobiliario y AICAT para quien quiere entrar. Mensaje: «250 horas, 100% online, 390 € y a plazos». Destino: WhatsApp con respuesta al momento o ficha del curso, según la prueba.</p></div>
+    <div class="card"><h3>Campaña B · Especialización</h3><p>Perito, Administrador de Fincas, Mediación y los packs para profesionales que ya trabajan. Mensaje: lo que añade a su trabajo y el pack de 580 €. Destino: WhatsApp.</p></div>
+    <div class="card"><h3>Campaña C · Formación bonificada para equipos</h3><p>Para inmobiliarias y administradores con personal en plantilla: «Forma a tu equipo y bonifícalo». Ticket mayor y una sola conversación para varias matrículas. Destino: formulario corto y llamada.</p></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Retargeting con vuestro catálogo</h3><ul><li>Vio la ficha de un curso y no compró (1-7 días): el mismo curso con las 955 opiniones y el pago a plazos.</li><li>Empezó la compra y no la terminó (1-3 días): «¿te ayudamos a terminar la matrícula?» con botón al WhatsApp.</li><li>Más de 30 días: deja de ver anuncios. Quien ya se ha matriculado, fuera.</li></ul></div>
+    <div class="card"><h3>Lo que medimos desde el primer día</h3><ul><li>Solicitudes por canal y por anuncio.</li><li>Tiempo hasta la primera respuesta, también de noche y en fin de semana.</li><li>Cuántas solicitudes acaban en matrícula, por curso.</li><li>Ingresos y coste por matrícula de cada campaña.</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>Los primeros 30 días</h2>
+  <div class="weeks">
+    <div class="card"><h3><span>SEMANA 1</span>Diagnóstico y CRM</h3><p>Medimos el punto de partida (solicitudes, respuesta y matrículas). Montamos el CRM con vuestros cursos y conectamos el WhatsApp y el formulario.</p></div>
+    <div class="card"><h3><span>SEMANA 2</span>Respuesta y seguimiento</h3><p>Asistente de WhatsApp con vuestros textos aprobados y las secuencias de seguimiento. El equipo lo prueba antes de abrirlo.</p></div>
+    <div class="card"><h3><span>SEMANA 3</span>Anuncios</h3><p>Arreglos en los anuncios activos, campañas A y B con mensajes nuevos y retargeting con el catálogo. La campaña C, si hay interés.</p></div>
+    <div class="card"><h3><span>SEMANA 4</span>Panel y revisión</h3><p>Panel con solicitudes, matrículas e ingresos por anuncio. Primera revisión juntos: qué seguimos, qué cambiamos y qué apagamos.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">06</span>Para cerrar en la reunión</h2>
+  <div class="grid two">
+    <div class="card"><h3>Lo que queremos entender</h3><ol><li>¿Dónde quedan hoy esas 70 personas y quién las atiende?</li><li>De cada 10 que preguntan, ¿cuántas se matriculan? ¿Qué curso vende más?</li><li>¿Qué pasa con quien escribe por la tarde, por la noche o en fin de semana?</li><li>¿Cuánto pesa la formación bonificada? ¿Os escriben empresas?</li><li>¿Qué tendría que pasar en 30 días para decir que ha merecido la pena?</li></ol></div>
+    <div class="card"><h3>Lo que necesitaríamos de vosotros</h3><ul><li>Acceso a vuestra cuenta publicitaria de Meta (y Google Ads, si lo usáis).</li><li>El número de WhatsApp que queréis usar y quién atiende hoy.</li><li>Las preguntas que más os hacen, para preparar las respuestas.</li><li>Una persona de contacto para aprobar textos.</li></ul><p style="margin-top:8px">La propuesta económica, según el alcance que veamos juntos.</p></div>
+  </div>
+  <div class="cta"><a class="btn" href="./demo/">Ver la demo del recorrido</a><a class="btn alt" href="https://www.aulainmobiliaria.com/" target="_blank" rel="noopener">aulainmobiliaria.com</a></div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · qualivo.io</b></p>
+  <p>Plan preparado por Qualivo el 23 de octubre de 2026 para Aula Inmobiliaria. No es una página de Aula Inmobiliaria. Datos de cursos, precios, opiniones y anuncios tomados de aulainmobiliaria.com y de la Biblioteca de anuncios de Meta ese día.</p>
+</footer>
+</body>
+</html>
