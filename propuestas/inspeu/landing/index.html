@@ -13,7 +13,7 @@
 <style>
 /* Maqueta de landing para INSPEU (reunión 23-oct-2026). Plan en ../, anuncios en ../anuncios/, demo en ../demo/.
    Datos reales usados: nombre del instituto, curso «Educación Inclusiva y Atención a la Diversidad», online, certificado de INSPEU,
-   asesor Alejandro (de su primer mensaje). Todo lo que va en [corchetes] lo completa INSPEU. Los formularios no envían nada. */
+   precio 100 € y pago desde el móvil con la app de pagos que ya usan en Perú (reunión 23-oct). Todo lo que va en [corchetes] lo completa INSPEU. Los formularios no envían nada. */
 :root{--paper:#F7F5F0;--surface:#FFFFFF;--surface-2:#EFEDE6;--ink:#16211C;--muted:#5D6B64;--line:#E2DED5;--line-2:#ECE9E2;--accent:#1F6F4A;--accent-ink:#fff;--accent-soft:#E3F1E9;--warn:#A4561A;--warn-soft:#FBF0E4;--good:#1F7A4D;--good-soft:#E3F3EA;--bad:#B42318;--hero:#0E2A1E;--gold:#F2B53A;--gold-ink:#1B1203;--wa:#1FA855;--wa-ink:#fff;--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--wa-text:#111B21;--wa-meta:#667781;--ph:#8A5A00;--ph-soft:#FFF1D2;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--shadow:0 1px 2px rgba(14,42,30,.05),0 8px 24px -12px rgba(14,42,30,.18);color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0F1512;--surface:#17201B;--surface-2:#1C2721;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--line-2:#222C27;--accent:#5BC48D;--accent-ink:#0B1A12;--accent-soft:#183326;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--hero:#0A1F16;--wa:#25B862;--wa-ink:#05140B;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--wa-text:#E9EDEF;--wa-meta:#8696A0;--ph:#F2C467;--ph-soft:#33280F;color-scheme:dark}}
 :root[data-theme="dark"]{--paper:#0F1512;--surface:#17201B;--surface-2:#1C2721;--ink:#E9EFEB;--muted:#9AA8A0;--line:#2A3530;--line-2:#222C27;--accent:#5BC48D;--accent-ink:#0B1A12;--accent-soft:#183326;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--hero:#0A1F16;--wa:#25B862;--wa-ink:#05140B;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--wa-text:#E9EDEF;--wa-meta:#8696A0;--ph:#F2C467;--ph-soft:#33280F;color-scheme:dark}
@@ -233,7 +233,7 @@ form.call h3{font-size:19px}
   .hsub{margin-top:12px;gap:6px}
   .hsub li{font-size:13.5px;padding:4px 10px}
   .grid,.grid.four,.mods,.foot .in{grid-template-columns:1fr}
-  .mbar{display:grid;grid-template-columns:1fr 1.15fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(14,42,30,.3)}
+  .mbar{display:grid;grid-template-columns:1.35fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(14,42,30,.3)}
   .mbar .btn{padding:10px 8px;min-height:50px;font-size:15px;border-radius:11px}
   .mbar .btn small{font-size:11.5px}
   body{padding-bottom:78px}
@@ -276,6 +276,8 @@ form.call h3{font-size:19px}
   <symbol id="i-blocks" viewBox="0 0 24 24"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></symbol>
   <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
   <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></symbol>
+  <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-7"/><path d="M14 8h6v6"/></symbol>
 </svg>
 
@@ -299,6 +301,7 @@ form.call h3{font-size:19px}
       <p class="eyebrow">Curso online para docentes · Educación Inclusiva y Atención a la Diversidad</p>
       <h1 id="h-hero">Que cada estudiante de tu aula aprenda, también quien necesita algo distinto</h1>
       <ul class="hsub" aria-label="Lo principal">
+        <li><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>100&nbsp;€ · paga desde el móvil</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg>100&nbsp;% online</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-badge"/></svg>Certificado de INSPEU</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span class="ph">[horas]</span></li>
@@ -308,25 +311,28 @@ form.call h3{font-size:19px}
     </div>
 
     <div class="hctas">
-      <a class="btn btn-buy" href="#inscribete" data-track="empezar_inscripcion">Inscríbete</a>
-      <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Pregunta por WhatsApp<small>te contestamos al momento</small></span></a>
+      <a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Inscríbete por WhatsApp<small>100 € · pagas desde el móvil</small></span></a>
+      <a class="btn btn-line" href="#inscribete" data-track="ver_formulario"><span>¿Prefieres que te contactemos?<small>déjanos tu WhatsApp</small></span></a>
     </div>
 
     <aside class="kcard" aria-labelledby="h-esencial">
       <p class="lbl">Lo esencial del curso</p>
       <h2 id="h-esencial">Educación Inclusiva y Atención a la Diversidad</h2>
       <ul class="facts">
+        <li><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg><b>Precio</b><span><strong style="font-size:17px">100&nbsp;€</strong></span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-mobile"/></svg><b>Pago</b><span>Paga desde el móvil, con la app de pagos que ya usas en Perú</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><b>Modalidad</b><span>Online · <span class="ph">[a tu ritmo / sesiones en vivo]</span></span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><b>Duración</b><span><span class="ph">[horas]</span></span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg><b>Próximo inicio</b><span><span class="ph">[fecha de inicio]</span></span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-badge"/></svg><b>Certificado</b><span>De INSPEU, al terminar</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><b>Para</b><span>Docentes de Perú y de toda Latinoamérica</span></li>
       </ul>
-      <p class="qline"><span class="qtag">Qualivo</span> Precio y formas de pago: no los tenemos publicados, así que aquí no aparecen. Cuando INSPEU los confirme, van en esta tarjeta.</p>
-      <a class="btn btn-line" href="#temario" data-track="ver_temario">Ver el temario</a>
+      <p class="qline"><span class="qtag">Qualivo</span> Precio y forma de pago reales (reunión del 23-oct): 100 € y pago desde el móvil con la app de pagos que ya usáis en Perú. Si queréis mostrar también el importe en soles: <span class="ph">[importe en soles]</span>.</p>
+      <a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Inscríbete por WhatsApp</a>
+      <a class="btn btn-line" href="#temario" data-track="ver_temario" style="margin-top:8px">Ver el temario</a>
     </aside>
 
-    <p class="htrust">Respuesta por WhatsApp en menos de un minuto, en tu hora local · Una persona del equipo confirma todo lo que no está publicado.</p>
+    <p class="htrust">Te inscribes en el mismo chat de WhatsApp: te contestamos en menos de un minuto, pagas desde el móvil y recibes el acceso · Si prefieres hablar con una persona, te llama un asesor.</p>
   </div>
 </section>
 
@@ -350,7 +356,7 @@ form.call h3{font-size:19px}
     <article class="card prof">
       <div class="ico"><svg class="i" aria-hidden="true"><use href="#i-up"/></svg></div>
       <p class="q">«Quiero reforzar mi perfil profesional»</p>
-      <p>Para concursos, un cambio de colegio o un ascenso: un certificado de INSPEU que puedes añadir a tu CV docente.</p>
+      <p>Para concursos, un cambio de centro o un ascenso: un certificado de INSPEU que puedes añadir a tu CV docente.</p>
     </article>
   </div>
   <div class="cta-row">
@@ -392,7 +398,7 @@ form.call h3{font-size:19px}
     </div>
   </details>
   <div class="cta-row">
-    <a class="btn btn-buy" href="#inscribete" data-track="empezar_inscripcion">Inscríbete</a>
+    <a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Inscríbete por WhatsApp · 100&nbsp;€</a>
     <a class="btn btn-line" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pídenos el temario completo</a>
   </div>
 </section>
@@ -400,20 +406,21 @@ form.call h3{font-size:19px}
 <!-- Atención a cualquier hora -->
 <section id="atencion" aria-labelledby="h-atencion">
   <p class="kicker">Atención por WhatsApp</p>
-  <h2 id="h-atencion">Te atendemos a cualquier hora, estés donde estés</h2>
+  <h2 id="h-atencion">Te inscribes por WhatsApp, a cualquier hora</h2>
   <div class="agents">
     <div style="display:grid;gap:20px">
-      <p class="sub">Nos escriben docentes de varios países, cada uno con su hora. Escríbenos cuando te venga bien, después de clase o un domingo: te contesta el asistente virtual de INSPEU en menos de un minuto.</p>
+      <p class="sub">Nos escriben docentes de varios países, cada uno con su hora. Escríbenos cuando te venga bien, después de clase o un domingo: te contesta el asistente virtual de INSPEU en menos de un minuto, y si lo tienes claro te inscribes en ese mismo chat.</p>
       <div class="zones" aria-label="Ejemplo: la misma hora en distintos países">
         <span>Lima<b>22:30</b></span><span>Ciudad de México<b>21:30</b></span><span>Bogotá<b>22:30</b></span><span>Santiago<b>00:30</b></span><span>Madrid<b>05:30</b></span>
       </div>
       <ul class="points">
         <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><div><b>Respuesta en menos de un minuto</b><span>De día, de noche y en fin de semana, en tu hora local.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><div><b>Con el temario, las fechas y el precio publicados</b><span>Te da la información al momento, sin tener que pedir antes una llamada.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>Si quieres, te reserva una llamada con un asesor</b><span>Con una persona del equipo, a una hora que te venga bien en tu país.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Nunca se inventa precios ni fechas</b><span>Lo que no está publicado te lo confirma una persona del equipo.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><div><b>Con el temario, el precio y cómo pagar</b><span>Te da la información al momento, sin tener que pedir antes una llamada.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-mobile"/></svg></span><div><b>Te inscribes en el mismo chat</b><span>Pagas los 100 € desde el móvil, mandas la captura y recibes la confirmación y el acceso al curso.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>Si tienes dudas, te llama un asesor</b><span>Solo si lo pides: una persona del equipo, a una hora que te venga bien en tu país.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Nunca se inventa fechas ni condiciones</b><span>Lo que no está publicado te lo confirma una persona del equipo.</span></div></li>
       </ul>
-      <div class="cta-row"><a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Pregunta por WhatsApp<small>te contestamos al momento</small></span></a></div>
+      <div class="cta-row"><a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Inscríbete por WhatsApp<small>100 € · pagas desde el móvil</small></span></a><a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Pregunta por WhatsApp<small>te contestamos al momento</small></span></a></div>
 
       <aside class="qnote" aria-label="Nota para INSPEU">
         <p class="qh">Nota para INSPEU</p>
@@ -421,8 +428,9 @@ form.call h3{font-size:19px}
         <ul>
           <li><b>Ficha en el CRM</b> desde el primer mensaje: curso, país, hora local, anuncio de origen y lo que ha preguntado.</li>
           <li><b>Seguimientos</b> para quien no contesta o se lo está pensando, siempre en horario razonable de su país.</li>
-          <li><b>Aviso al asesor</b> (por ejemplo, Alejandro) con un resumen cuando alguien pide llamada o está listo para inscribirse. El equipo ve cada chat y puede entrar; en cuanto escribe una persona, el asistente se calla.</li>
-          <li><b>Solo con datos vuestros:</b> temario, fechas y precio que nos paséis. Lo demás, «te lo confirma el equipo».</li>
+          <li><b>Venta en el chat:</b> datos de pago al momento (<span class="ph">[datos de pago]</span>), captura del pago, confirmación y <span class="ph">[instrucciones de acceso]</span>. Seguimiento a quien pide los datos y no paga, y a quien paga y no manda la captura.</li>
+          <li><b>Aviso al asesor</b> con un resumen solo cuando alguien pide llamada o tiene una duda que el asistente no puede resolver. El equipo ve cada chat y puede entrar; en cuanto escribe una persona, el asistente se calla.</li>
+          <li><b>Solo con datos vuestros:</b> temario, fechas, precio (100 €) y datos de pago que nos paséis. Lo demás, «te lo confirma el equipo».</li>
         </ul>
         <p style="margin-top:8px"><a href="../demo/">Verlo paso a paso en la demo →</a></p>
       </aside>
@@ -430,7 +438,7 @@ form.call h3{font-size:19px}
 
     <div class="phonecol">
       <div class="phone">
-        <div class="wa" role="img" aria-label="Ejemplo de conversación de WhatsApp a las 22:30, hora de Lima, entre una docente de México y el asistente virtual de INSPEU">
+        <div class="wa" role="img" aria-label="Ejemplo de conversación de WhatsApp a las 22:30, hora de Lima, entre una docente de Perú y el asistente virtual de INSPEU: pregunta el precio, paga desde el móvil y queda inscrita">
           <div class="top">
             <span class="av" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5 4 9l8 4 8-4-8-4Z" fill="#1F6F4A"/><path d="M7.5 11v3.5c0 1.3 2 2.3 4.5 2.3s4.5-1 4.5-2.3V11" fill="none" stroke="#1F6F4A" stroke-width="1.8" stroke-linecap="round"/></svg></span>
             <div><b>INSPEU</b><small>asistente virtual</small></div>
@@ -438,17 +446,17 @@ form.call h3{font-size:19px}
           </div>
           <div class="body chat" id="chat">
             <span class="day">Hoy</span>
-            <div class="msg out">Hola, soy profesora de primaria en México. ¿Puedo hacer el curso de Educación Inclusiva desde aquí?<span class="meta">21:30 ✓✓</span></div>
-            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>¡Hola! Sí: es 100&nbsp;% online, lo puedes seguir desde México. Al terminar recibes el certificado de INSPEU. Te dejo el temario 👉 <span class="ph">[enlace]</span>. Próximo inicio: <span class="ph">[fecha]</span>.<span class="meta">21:30</span></div>
-            <div class="msg out">¿Cuánto cuesta? ¿Se puede pagar en cuotas?<span class="meta">21:31 ✓✓</span></div>
-            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>El precio es <span class="ph">[precio]</span>. Lo de las cuotas no lo tengo publicado, así que no te quiero decir algo que no sea: te lo confirma Alejandro, asesor del equipo. ¿Te llama mañana a las 10:00 o a las 18:00, hora de México?<span class="meta">21:31</span></div>
-            <div class="msg out">A las 18:00 👍<span class="meta">21:32 ✓✓</span></div>
-            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>Hecho: mañana a las 18:00 (hora de México) te llama Alejandro. Te escribo una hora antes para recordártelo.<span class="meta">21:32</span></div>
+            <div class="msg out">Hola, soy profesora de primaria en Arequipa. ¿Cuánto cuesta el curso de Educación Inclusiva?<span class="meta">22:30 ✓✓</span></div>
+            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>¡Hola! Cuesta 100&nbsp;€. Es 100&nbsp;% online y al terminar recibes el certificado de INSPEU. Te dejo el temario 👉 <span class="ph">[enlace]</span>. Próximo inicio: <span class="ph">[fecha]</span>.<span class="meta">22:30</span></div>
+            <div class="msg out">¿Y cómo pago?<span class="meta">22:31 ✓✓</span></div>
+            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>Desde el móvil, con la app de pagos que ya usas en Perú. Estos son los datos: <span class="ph">[datos de pago]</span>. Cuando pagues, mándame aquí la captura y te confirmo la inscripción.<span class="meta">22:31</span></div>
+            <div class="msg out">Listo, ya pagué 👍 <span class="ph">[captura del pago]</span><span class="meta">22:34 ✓✓</span></div>
+            <div class="msg in"><span class="who">Asistente virtual · INSPEU</span>¡Pago confirmado! Ya estás inscrita en Educación Inclusiva y Atención a la Diversidad. Así entras a la plataforma: <span class="ph">[instrucciones de acceso]</span>. Cualquier duda, escríbeme aquí.<span class="meta">22:35</span></div>
             <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
           </div>
         </div>
       </div>
-      <p class="phonecap">Conversación de ejemplo · las horas del chat son las de la alumna (México)</p>
+      <p class="phonecap">Conversación de ejemplo · sin llamada: de la pregunta a la inscripción en el mismo chat</p>
       <button class="replay" type="button" id="replay">Volver a ver la conversación</button>
     </div>
   </div>
@@ -475,9 +483,11 @@ form.call h3{font-size:19px}
     <details><summary>¿Necesito experiencia previa en educación inclusiva?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Te lo confirmamos por WhatsApp según tu caso. Cuéntanos en qué nivel enseñas y te decimos si el curso encaja contigo.</p></div></details>
     <details><summary>¿Es a mi ritmo o tiene clases en vivo?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Modalidad: <span class="ph">[a tu ritmo / sesiones en vivo]</span>. Si tienes dudas sobre horarios, te lo confirmamos por WhatsApp.</p></div></details>
     <details><summary>¿Cuándo empieza y cuánto dura?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Próximo inicio: <span class="ph">[fecha de inicio]</span>. Duración: <span class="ph">[horas]</span>. Si aún no está publicada la fecha, te la confirmamos por WhatsApp.</p></div></details>
-    <details><summary>¿Cuánto cuesta y se puede pagar en cuotas?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Te lo confirmamos por WhatsApp: el precio y las formas de pago te los da una persona del equipo si no están publicados aquí.</p></div></details>
+    <details><summary>¿Cuánto cuesta?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>100&nbsp;€. Si quieres saber si se puede pagar en partes, te lo confirmamos por WhatsApp.</p></div></details>
+    <details><summary>¿Cómo pago?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Desde el móvil, con la app de pagos que ya usas en Perú. Escríbenos por WhatsApp, te enviamos los datos de pago y, cuando nos mandes la captura, te confirmamos la inscripción y te enviamos el acceso al curso.</p></div></details>
+    <details><summary>¿Puedo pagar desde México o Chile?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Te lo confirmamos por WhatsApp: escríbenos y te decimos cómo hacerlo desde tu país.</p></div></details>
     <details><summary>¿Qué certificado recibo?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Al terminar recibes el certificado de INSPEU. Si necesitas saber qué datos figuran en él (horas, fechas), te lo confirmamos por WhatsApp.</p></div></details>
-    <details><summary>¿Qué pasa si escribo por WhatsApp de noche?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Te contesta al momento el asistente virtual de INSPEU con el temario y las fechas. Si quieres hablar con una persona, te reserva una llamada con un asesor a la hora que elijas.</p></div></details>
+    <details><summary>¿Qué pasa si escribo por WhatsApp de noche?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Te contesta al momento el asistente virtual de INSPEU con el temario, el precio y cómo pagar, y te puedes inscribir en ese mismo chat. Si prefieres hablar con una persona, te reserva una llamada con un asesor a la hora que elijas.</p></div></details>
   </div>
 </section>
 
@@ -487,12 +497,13 @@ form.call h3{font-size:19px}
     <div>
       <p class="kicker" style="color:#9FD8B8">Inscripción</p>
       <h2 id="h-final">Empieza a preparar clases para todo tu grupo</h2>
-      <p class="sub" style="margin-top:10px">Curso online de Educación Inclusiva y Atención a la Diversidad, con certificado de INSPEU al terminar. Próximo inicio: <span class="ph">[fecha de inicio]</span>.</p>
+      <p class="sub" style="margin-top:10px">Curso online de Educación Inclusiva y Atención a la Diversidad, con certificado de INSPEU al terminar. Próximo inicio: <span class="ph">[fecha de inicio]</span>. Precio: 100&nbsp;€, pagas desde el móvil.</p>
       <div class="cta-row">
-        <a class="btn btn-buy" href="#inscribete" data-track="empezar_inscripcion">Inscríbete</a>
+        <a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Inscríbete por WhatsApp<small>100 € · pagas desde el móvil</small></span></a>
         <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
       </div>
       <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Te inscribes en el mismo chat: pagas desde el móvil y recibes el acceso</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Respuesta en menos de un minuto, en tu hora local</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Una persona del equipo confirma todo lo que no está publicado</li>
       </ul>
@@ -500,7 +511,8 @@ form.call h3{font-size:19px}
 
     <form class="call" id="callform" novalidate>
       <div id="formfields" style="display:grid;gap:12px">
-        <h3>¿Prefieres que te escribamos?</h3>
+        <h3>¿Prefieres que te contactemos?</h3>
+        <p class="fine" style="margin-top:-6px">Déjanos tus datos y te escribimos por WhatsApp. Si lo pides, te llama un asesor.</p>
         <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="given-name" placeholder="Ej.: María" required></div>
         <div class="field"><label for="f-wa">WhatsApp <span class="hint">con el prefijo de tu país</span></label>
           <div class="phone-row">
@@ -527,12 +539,12 @@ form.call h3{font-size:19px}
           </select></div>
         <label class="consent"><input type="checkbox" id="f-ok" required><span>Acepto la <span class="ph">[política de privacidad]</span> y que INSPEU me escriba por WhatsApp sobre este curso. Puedo pedir que dejen de escribirme cuando quiera.</span></label>
         <p class="err" id="f-err" role="alert">Rellena todos los campos y marca la casilla, por favor.</p>
-        <button class="btn btn-buy" type="submit" style="width:100%">Quiero que me escribáis</button>
+        <button class="btn btn-buy" type="submit" style="width:100%">Quiero que me contactéis</button>
       </div>
       <div class="thanks" id="thanks" aria-live="polite" tabindex="-1">
         <span class="ok"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span>
         <h3 id="thanks-h">¡Gracias!</h3>
-        <p id="thanks-p">Te escribimos por WhatsApp en menos de un minuto con el temario y las fechas.</p>
+        <p id="thanks-p">Te escribimos por WhatsApp en menos de un minuto con el temario, el precio y cómo pagar.</p>
         <p class="fine">Maqueta: no se ha enviado ningún dato.</p>
       </div>
     </form>
@@ -544,11 +556,12 @@ form.call h3{font-size:19px}
   <p class="qh">Nota para INSPEU</p>
   <h3>Qué cambia respecto a su página actual</h3>
   <ul>
-    <li><b>Información antes que llamada:</b> hoy la primera respuesta pide agendar una llamada sin dar nada; aquí el temario, la modalidad y el certificado están a la vista, y el WhatsApp los manda al momento.</li>
-    <li><b>Atención a cualquier hora y en la hora de cada país:</b> quien escribe a las 22:30 desde México o Chile recibe respuesta al minuto y, si quiere, una llamada con un asesor en su horario.</li>
-    <li><b>Dos acciones claras siempre visibles:</b> «Inscríbete» y «Pregunta por WhatsApp», también en el móvil con una barra fija abajo.</li>
+    <li><b>La venta se cierra por WhatsApp, sin llamada obligatoria:</b> con un curso de 100 €, quien lo tiene claro se inscribe en el chat (datos de pago, pago desde el móvil, captura, confirmación y acceso). La llamada queda para quien tiene dudas o la pide; hoy es el paso donde se atasca la venta.</li>
+    <li><b>Información antes que llamada:</b> hoy la primera respuesta pide agendar una llamada sin dar nada; aquí el temario, el precio (100 €), cómo se paga, la modalidad y el certificado están a la vista, y el WhatsApp los manda al momento.</li>
+    <li><b>Atención a cualquier hora y en la hora de cada país:</b> quien escribe a las 22:30 recibe respuesta al minuto. Perú primero; para México y Chile, cómo pagar desde allí se confirma por WhatsApp hasta que lo tengáis definido.</li>
+    <li><b>Una acción principal siempre visible:</b> «Inscríbete por WhatsApp», también en el móvil con una barra fija abajo. El formulario sigue para quien prefiere que le contacten.</li>
     <li><b>Formulario corto</b> con prefijo de país, país y cuándo quiere empezar: el asesor sabe a quién llamar primero y a qué hora.</li>
-    <li><b>Un evento medido por cada botón:</b> <code>ver_temario</code>, <code>abrir_whatsapp</code>, <code>empezar_inscripcion</code> y <code>enviar_formulario</code>, para saber qué anuncio trae inscripciones y no solo clics.</li>
+    <li><b>Un evento medido por cada botón:</b> <code>inscribirse_whatsapp</code>, <code>abrir_whatsapp</code>, <code>ver_temario</code>, <code>ver_formulario</code> y <code>enviar_formulario</code>; y desde el CRM, los pagos y las inscripciones de cada chat, para saber qué anuncio trae inscripciones y no solo clics.</li>
   </ul>
 </aside>
 
@@ -557,12 +570,12 @@ form.call h3{font-size:19px}
 <footer class="foot"><div class="wrap in">
   <div><b>INSPEU</b><br>Instituto Peruano Europeo · formación online para docentes.</div>
   <div><b>Contacto</b><br><span class="ph">[WhatsApp, correo y aviso legal de INSPEU]</span></div>
-  <p class="mock">Maqueta preparada por Qualivo el 23 de octubre de 2026 para la reunión con INSPEU. No es una página publicada por INSPEU. Lo que va entre [corchetes] y el temario orientativo los completa INSPEU con sus datos reales; la conversación de WhatsApp es un ejemplo.</p>
+  <p class="mock">Maqueta preparada por Qualivo el 23 de octubre de 2026 para la reunión con INSPEU. No es una página publicada por INSPEU. El precio (100 €) y el pago desde el móvil son reales; lo que va entre [corchetes] y el temario orientativo los completa INSPEU con sus datos reales; la conversación de WhatsApp es un ejemplo.</p>
 </div></footer>
 
 <div class="mbar" aria-label="Acciones rápidas">
-  <a class="btn btn-buy" href="#inscribete" data-track="empezar_inscripcion">Inscríbete</a>
-  <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp<small>al momento</small></span></a>
+  <a class="btn btn-buy" href="#atencion" data-track="inscribirse_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Inscríbete<small>por WhatsApp · 100&nbsp;€</small></span></a>
+  <a class="btn btn-line" href="#inscribete" data-track="ver_formulario"><span>Que me contacten<small>déjanos tu número</small></span></a>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -578,7 +591,8 @@ form.call h3{font-size:19px}
   var notes = {
     ver_temario: "En la web real: cuenta quién mira el temario.",
     abrir_whatsapp: "En la web real: abre WhatsApp con «Hola, quiero información del curso de Educación Inclusiva».",
-    empezar_inscripcion: "En la web real: lleva a la inscripción del curso.",
+    inscribirse_whatsapp: "En la web real: abre WhatsApp con «Hola, quiero inscribirme en el curso de Educación Inclusiva» y el asistente envía precio y datos de pago.",
+    ver_formulario: "En la web real: lleva al formulario para quien prefiere que le contacten.",
     enviar_formulario: "En la web real: crea la ficha en el CRM y el asistente escribe por WhatsApp."
   };
   function track(name, params){
@@ -630,7 +644,7 @@ form.call h3{font-size:19px}
     if (!ok) { err.classList.add("show"); return; }
     err.classList.remove("show");
     document.getElementById("thanks-h").textContent = "¡Gracias, " + form.nombre.value.trim().split(/\s+/)[0] + "!";
-    document.getElementById("thanks-p").textContent = "Te escribimos al " + form.prefijo.value + " " + form.whatsapp.value.trim() + " en menos de un minuto con el temario y las fechas. Si quieres hablar con un asesor, te proponemos horarios en tu hora local.";
+    document.getElementById("thanks-p").textContent = "Te escribimos al " + form.prefijo.value + " " + form.whatsapp.value.trim() + " en menos de un minuto con el temario, el precio y cómo pagar. Si prefieres hablar con un asesor, te proponemos horarios en tu hora local.";
     document.getElementById("formfields").style.display = "none";
     var th = document.getElementById("thanks"); th.classList.add("show"); th.focus();
     track("enviar_formulario", {pais: form.pais.value, cuando: form.cuando.value, prefijo: form.prefijo.value});

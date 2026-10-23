@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="deck.css">
 <style>
-/* Demo guiada en pestañas para INSPEU: hoy y la solicitud, WhatsApp al minuto con Lucía, ficha de la asesora, seguimientos A-E y panel.
+/* Demo guiada en pestañas para INSPEU: hoy y la solicitud, WhatsApp al minuto con Lucía, ficha de la asesora, seguimientos A-F y panel.
    Estructura común a las demos de Qualivo; colores de INSPEU (../index.html) en deck.css. */
 :root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#B87708;--real:#1F6F4A;--ph:#8A5A00;--ph-soft:#FFF4DC}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ph:#F2C467;--ph-soft:#33280F}}
@@ -260,11 +260,11 @@ footer p b{color:var(--ink)}
 <svg class="deco" viewBox="0 0 300 220" fill="none" stroke="#9FD8B8" stroke-width="1.5" aria-hidden="true"><circle cx="150" cy="110" r="96"/><ellipse cx="150" cy="110" rx="42" ry="96"/><path d="M54 110h192M66 62h168M66 158h168"/><circle cx="118" cy="128" r="5" fill="#9FD8B8"/><circle cx="196" cy="74" r="5" fill="#9FD8B8"/><path d="M118 128C140 70 170 64 196 74" stroke-dasharray="4 5"/></svg>
 <div class="wrap">
   <p class="eyebrow">Demo del sistema · INSPEU · paso a paso</p>
-  <h1>Del primer mensaje a la matrícula, en la hora de cada alumna</h1>
-  <p class="lead">Nos contasteis que os llegan entre 50 y 100 solicitudes al mes, que invertís menos de 500 € al mes en anuncios y que lo que se escapa está <q>en el seguimiento y los presupuestos</q>. Aquí ves lo que haría el sistema cada día con una alumna inventada: Rosa, docente de primaria en Lima. Un martes a las 22:30, hora de Lima (las 5:30 del miércoles en Madrid), escribe por WhatsApp desde un anuncio para pedir el temario del curso de Educación Inclusiva.</p>
+  <h1>Del primer mensaje a la matrícula, por WhatsApp y sin esperar a una llamada</h1>
+  <p class="lead">Nos contasteis que os llegan unos 100 interesados cada 15 días y que hoy el camino es anuncio → formulario → WhatsApp para preguntar a qué hora llamar → llamada → pago. Cerráis cerca del 10 %, y el cuello de botella es conseguir la llamada y hacerla. Con un curso de 100 € que se paga desde el móvil, la venta puede cerrarse en el propio WhatsApp: temario, precio y cómo pagar al momento, y la llamada solo para quien tiene dudas de verdad o la pide. Aquí ves lo que haría el sistema con una alumna inventada: Rosa, docente de primaria en Lima. Un martes a las 22:30, hora de Lima (las 5:30 del miércoles en Madrid), escribe por WhatsApp desde un anuncio para pedir el temario del curso de Educación Inclusiva.</p>
   <div class="legend">
-    <div><span class="real">Real</span><br><b>Tomado de lo que vimos y nos contasteis:</b> INSPEU · Instituto Peruano Europeo, el curso «Educación Inclusiva y Atención a la Diversidad», online y con alumnado en Perú, España y Latinoamérica; la respuesta que da hoy vuestro WhatsApp (pide agendar una llamada antes de dar temario, fechas o precio, y no hay segundo mensaje si no contestas); 50-100 solicitudes al mes, menos de 500 € al mes en anuncios y la fuga en el seguimiento y los presupuestos.</div>
-    <div><span class="ej">Inventado</span><br><b>Para la demo:</b> Rosa, Lucía (la asistente), Andrea (la asesora), los anuncios, todos los mensajes, los horarios, las puntuaciones y las cifras del panel. No tenemos vuestro precio, fechas, horas, modalidad ni certificado: van <span class="ph">[entre corchetes]</span> y, mientras no los carguéis, Lucía dice que los confirma una persona del equipo. Nunca se los inventa.</div>
+    <div><span class="real">Real</span><br><b>Tomado de lo que vimos y nos contasteis:</b> INSPEU · Instituto Peruano Europeo, el curso online «Educación Inclusiva y Atención a la Diversidad» (lanzado; dos cursos más previstos este año); vendéis primero a docentes de Perú y queréis abrir México y Chile; el curso cuesta 100 € y se paga desde el móvil con la app de pagos que ya usáis en Perú; unos 100 interesados cada 15 días; el proceso de hoy (formulario, WhatsApp para pedir hora, llamada, pago), cerca del 10 % de cierre y el atasco en la llamada; la respuesta que da hoy vuestro WhatsApp; menos de 500 € al mes en anuncios.</div>
+    <div><span class="ej">Inventado</span><br><b>Para la demo:</b> Rosa, Lucía (la asistente), Andrea (la asesora), los anuncios, todos los mensajes, los horarios, las puntuaciones y las cifras del panel. No tenemos los datos de pago, las instrucciones de acceso, las fechas, las horas, la modalidad ni el certificado: van <span class="ph">[entre corchetes]</span> y, mientras no los carguéis, Lucía dice que los confirma una persona del equipo. Nunca se los inventa.</div>
   </div>
 </div>
 </header>
@@ -309,15 +309,15 @@ footer p b{color:var(--ink)}
         <ul class="chk">
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Le pide a ella que proponga la hora de una llamada, sin darle antes temario, fechas ni precio.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Es el mismo texto para todas: no sabe si es docente, de qué país es ni qué le preocupa.</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Si no contesta, ahí se acaba. Y si pide precio, el presupuesto depende de que alguien se acuerde de mandarlo y de volver a preguntar.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Si no contesta, ahí se acaba. Y la venta depende de conseguir la llamada y hacerla: es donde se atasca hoy, con cerca de un 10 % de cierre.</li>
         </ul>
       </div>
     </div>
     <div class="stackc">
       <div class="list">
-        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">22:30 en Lima: contesta Lucía en menos de un minuto</h3><p>Rosa ha escrito ella, así que se le responde al momento, aunque sea de noche. Lucía le manda el temario, le hace dos preguntas cortas (si da clase y en qué nivel) y le ofrece dos horarios concretos para hablar con Andrea, ya en hora de Lima.</p></div>
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">22:30 en Lima: contesta Lucía en menos de un minuto</h3><p>Rosa ha escrito ella, así que se le responde al momento, aunque sea de noche. Lucía le manda el temario, le dice que cuesta 100 € y que se paga desde el móvil, le hace dos preguntas cortas (si da clase y en qué nivel) y le ofrece matricularse ahí mismo. La llamada con Andrea solo si tiene dudas de verdad o la pide.</p></div>
         <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">El prefijo +51 dice dónde está</h3><p>Se crea su ficha con el país (Perú) y su zona horaria (Lima). Todo lo que el sistema envíe por iniciativa propia saldrá entre las 8:00 y las 21:30 de Lima, no de Madrid. A una alumna de Madrid se le escribe en hora de Madrid; a una de Ciudad de México, en la suya.</p></div>
-        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">Si pide precio, el presupuesto tiene dueña y fecha</h3><p>Lucía no se inventa precios ni fechas: crea una tarea para Andrea con hora límite, y el sistema comprueba que el presupuesto ha salido, que Rosa lo ha abierto y que alguien le pregunta qué le ha parecido.</p></div>
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">Si quiere matricularse, se matricula en el chat</h3><p>Lucía le envía los <span class="ph">[datos de pago]</span>, Rosa paga desde el móvil y manda la captura, y en cuanto se comprueba el pago recibe la confirmación y las <span class="ph">[instrucciones de acceso]</span>. Sin agendar nada. Si pide los datos y no paga, o paga y no manda la captura, hay seguimiento.</p></div>
         <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">Si no contesta, hay seguimiento</h3><p>Mensajes cortos y útiles durante una semana, siempre en su hora local. En cuanto responde, se para la secuencia y sigue la conversación.</p></div>
       </div>
       <div class="box">
@@ -327,7 +327,7 @@ footer p b{color:var(--ink)}
           <tbody>
             <tr><td>Lima (Perú)</td><td>9:30</td><td>16:30</td></tr>
             <tr><td>Ciudad de México</td><td>9:30</td><td>17:30</td></tr>
-            <tr><td>Buenos Aires</td><td>9:30</td><td>14:30</td></tr>
+            <tr><td>Santiago de Chile</td><td>9:30</td><td>14:30</td></tr>
             <tr><td>Madrid</td><td>9:30</td><td>9:30</td></tr>
           </tbody>
         </table></div>
@@ -342,8 +342,8 @@ footer p b{color:var(--ink)}
 <section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
   <header>
     <h2>2 · WhatsApp al minuto <span class="ej">Ejemplo</span></h2>
-    <p>Lucía, la asistente de INSPEU, contesta a Rosa en menos de un minuto, aunque en Lima sean las 22:30. Da primero lo útil, pregunta lo justo y, cuando no tiene un dato, lo dice y se lo pasa a Andrea. Elige las respuestas de Rosa y prueba los distintos caminos. Junto al teléfono, lo que pasa por detrás.</p>
-    <p class="rv"><span><span class="real">Real</span> el nombre del curso, que es online y que se puede seguir desde cualquier país.</span><span><span class="ej">Inventado</span> Lucía, Andrea, Rosa, todos los mensajes, los huecos de agenda y los puntos. Lo que va <span class="ph">[entre corchetes]</span> lo rellena INSPEU con sus datos reales.</span></p>
+    <p>Lucía, la asistente de INSPEU, contesta a Rosa en menos de un minuto, aunque en Lima sean las 22:30. Da primero lo útil (temario, precio y cómo se paga), pregunta lo justo y, si Rosa quiere, la matricula en el mismo chat: datos de pago, pago desde el móvil, confirmación y acceso. La llamada con Andrea queda para quien tiene dudas de verdad o la pide. Elige las respuestas de Rosa y prueba los distintos caminos; el principal es «Quiero matricularme». Junto al teléfono, lo que pasa por detrás.</p>
+    <p class="rv"><span><span class="real">Real</span> el nombre del curso, que es online, que cuesta 100 € y que se paga desde el móvil con la app de pagos que ya usáis en Perú.</span><span><span class="ej">Inventado</span> Lucía, Andrea, Rosa, todos los mensajes, los huecos de agenda y los puntos. Lo que va <span class="ph">[entre corchetes]</span> (datos de pago, instrucciones de acceso, fechas) lo rellena INSPEU con sus datos reales.</span></p>
   </header>
   <div class="two">
     <div class="phone"><div class="sbar" aria-hidden="true"><b>22:31</b><span class="isl"></span><span>4G</span></div>
@@ -364,34 +364,34 @@ footer p b{color:var(--ink)}
       <ol id="log"></ol>
     </div>
   </div>
-  <p class="note">Lucía solo cuenta lo que INSPEU haya cargado como información oficial del curso. Precio, formas de pago, fechas, horas, modalidad, certificado o descuentos: si no están cargados, los confirma una persona del equipo. Andrea ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Lucía se calla con esa persona. Lucía contesta al momento a quien acaba de escribir; los mensajes que salen por iniciativa propia (seguimientos), solo de 8:00 a 21:30 en la hora local de cada alumna.</p>
+  <p class="note">Lucía solo cuenta lo que INSPEU haya cargado como información oficial del curso: hoy, que es online, que cuesta 100 € y que se paga desde el móvil. Datos de pago, pago en partes, pago desde México o Chile, fechas, horas, modalidad, certificado o descuentos: si no están cargados, los confirma una persona del equipo. La matrícula se confirma cuando se ha comprobado el pago (<span class="ph">[cómo valida INSPEU los pagos]</span>), nunca antes. Andrea ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Lucía se calla con esa persona. Lucía contesta al momento a quien acaba de escribir; los mensajes que salen por iniciativa propia (seguimientos), solo de 8:00 a 21:30 en la hora local de cada alumna.</p>
   <div class="navnext"><button data-go="ficha">Siguiente: la ficha de la asesora <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
 <!-- 3 · FICHA -->
 <section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
   <header>
-    <h2>3 · Lo que ve la asesora antes de llamar <span class="ej">Ejemplo</span></h2>
-    <p>Miércoles, 9:55 en Lima. Andrea va a llamar a Rosa a las 10:00 (hora de Lima) y no empieza de cero: tiene un resumen, la puntuación con sus motivos, lo que Lucía no ha podido contestar y el siguiente paso. Aquí Rosa dijo que quería matricularse, preguntó por el precio y las cuotas, y eligió la llamada.</p>
-    <p class="rv"><span><span class="real">Real</span> el curso y que es online.</span><span><span class="ej">Inventado</span> Rosa, Andrea, la puntuación y sus pesos, la conversación. Precio, fechas y certificado siguen <span class="ph">[entre corchetes]</span>.</span></p>
+    <h2>3 · Lo que ve la asesora cuando hace falta llamar <span class="ej">Ejemplo</span></h2>
+    <p>La mayoría se matricula en el chat, sin llamada. Esta es la excepción: Rosa quiere matricularse, ya sabe que cuesta 100 € y cómo se paga, pero antes quiere saber si podrá compaginarlo con dar clase y pide hablar con una persona. Miércoles, 9:55 en Lima: Andrea la llama a las 10:00 y no empieza de cero. Tiene un resumen, la puntuación con sus motivos, lo que Lucía no ha podido contestar y el siguiente paso.</p>
+    <p class="rv"><span><span class="real">Real</span> el curso, que es online, el precio (100 €) y que se paga desde el móvil.</span><span><span class="ej">Inventado</span> Rosa, Andrea, la puntuación y sus pesos, la conversación. Datos de pago, fechas, modalidad y certificado siguen <span class="ph">[entre corchetes]</span>.</span></p>
   </header>
   <div class="two">
     <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Contactos › Rosa M. · ficha</span><em>Ejemplo</em></div>
     <div class="ficha">
-      <div class="hd"><div><b style="font-size:19px">Rosa M. · docente de primaria · Lima (Perú)</b><p class="muted" style="font-size:14px">Entró por: anuncio de Instagram «Tu aula ya es diversa» → WhatsApp con mensaje escrito (martes 22:30, hora de Lima) → conversación con Lucía (22:30-22:38)</p></div><div style="text-align:right"><span class="scn">80</span><br><span class="grp a">A · llamar hoy</span></div></div>
+      <div class="hd"><div><b style="font-size:19px">Rosa M. · docente de primaria · Lima (Perú)</b><p class="muted" style="font-size:14px">Entró por: anuncio de Instagram «Tu aula ya es diversa» → WhatsApp con mensaje escrito (martes 22:30, hora de Lima) → conversación con Lucía (22:30-22:38)</p></div><div style="text-align:right"><span class="scn">80</span><br><span class="grp a">A · llamada pedida</span></div></div>
       <div class="grid">
-        <div><dl><dt>Curso</dt><dd>Educación Inclusiva y Atención a la Diversidad</dd></dl></div>
+        <div><dl><dt>Curso</dt><dd>Educación Inclusiva y Atención a la Diversidad · 100 €</dd></dl></div>
         <div><dl><dt>País y hora</dt><dd>Perú · hora de Lima (UTC−5) · 7 h menos que Madrid esta semana</dd></dl></div>
-        <div><dl><dt>Perfil</dt><dd>Docente en activo · primaria · colegio público</dd></dl></div>
+        <div><dl><dt>Perfil</dt><dd>Docente en activo · primaria · escuela pública</dd></dl></div>
         <div><dl><dt>Quiere</dt><dd>Atender mejor a 2 alumnos con necesidades distintas en su aula</dd></dl></div>
         <div><dl><dt>Cuándo</dt><dd>Próximo grupo</dd></dl></div>
-        <div><dl><dt>Ha preguntado</dt><dd>Precio y si se puede pagar en cuotas</dd></dl></div>
+        <div><dl><dt>Ya sabe</dt><dd>Precio (100 €) y que se paga desde el móvil · tiene los datos de pago en el chat</dd></dl></div>
         <div><dl><dt>Le preocupa</dt><dd>Compaginarlo con dar clase</dd></dl></div>
         <div><dl><dt>Ha visto</dt><dd>Temario (lo abrió 2 veces)</dd></dl></div>
-        <div><dl><dt>Llamada</dt><dd class="yes">Miércoles 10:00, hora de Lima · confirmada por WhatsApp</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd class="yes">La pidió ella · miércoles 10:00, hora de Lima · confirmada por WhatsApp</dd></dl></div>
       </div>
-      <div class="why2"><b>Resumen:</b> Docente de primaria en un colegio público de Lima. Tiene en su aula dos alumnos con necesidades distintas y quiere herramientas prácticas. Quiere entrar en el próximo grupo. Ha preguntado el precio y si hay cuotas: Lucía le dijo que se lo confirma Andrea. Le preocupa el tiempo, porque da clase por la mañana y corrige por la tarde.</div>
-      <div class="next">Siguiente paso: llamar a las 10:00 (hora de Lima) · confirmar <span class="ph">[precio]</span>, <span class="ph">[formas de pago]</span>, <span class="ph">[fecha de inicio]</span> y <span class="ph">[modalidad y horas]</span> · al colgar, enviar el presupuesto por WhatsApp desde la ficha (queda registrado y empieza el seguimiento C) · si quiere matricularse ya, enviar el <span class="ph">[enlace de matrícula]</span>.</div>
+      <div class="why2"><b>Resumen:</b> Docente de primaria en una escuela pública de Lima. Tiene en su aula dos alumnos con necesidades distintas y quiere herramientas prácticas. Quiere entrar en el próximo grupo. Lucía ya le dio el temario, el precio (100 €) y cómo se paga: no hace falta explicárselo. Su duda es el tiempo, porque da clase por la mañana y corrige por la tarde, y prefirió hablarlo con una persona.</div>
+      <div class="next">Siguiente paso: llamar a las 10:00 (hora de Lima) · resolver su duda con <span class="ph">[modalidad y horas por semana]</span> y <span class="ph">[fecha de inicio]</span> · si quiere matricularse, enviar los <span class="ph">[datos de pago]</span> por WhatsApp desde la ficha al colgar · cuando llegue la captura y se compruebe el pago, Lucía confirma la matrícula y envía las <span class="ph">[instrucciones de acceso]</span> · si no paga, empieza el seguimiento C.</div>
     </div></div>
     <div class="stackc">
       <div class="box" style="box-shadow:var(--shadow)">
@@ -402,20 +402,21 @@ footer p b{color:var(--ink)}
           <tr><td>Docente en activo</td><td>15</td></tr>
           <tr><td>Contesta a Lucía en menos de 5 minutos</td><td>10</td></tr>
           <tr><td>Quiere matricularse en el próximo grupo</td><td>15</td></tr>
-          <tr><td>Pregunta por precio y cuotas</td><td>5</td></tr>
+          <tr><td>Pregunta cómo se paga</td><td>5</td></tr>
           <tr><td>Pide la llamada con Andrea</td><td>15</td></tr>
           <tr><td><b>Total</b></td><td>80</td></tr>
         </table>
-        <p class="note">Pesos de ejemplo. Los decidís vosotros y se revisan cada mes con las matrículas reales. 70 o más: llamada de Andrea el mismo día, en el horario del equipo y en una hora que también sea razonable para la alumna. De 50 a 69: sigue Lucía y Andrea entra si contesta. Menos de 50: solo seguimientos.</p>
+        <p class="note">Pesos de ejemplo. Los decidís vosotros y se revisan cada mes con las matrículas reales. La puntuación no decide a quién llamar, sino a quién atiende antes Andrea: a todas se les ofrece matricularse en el chat. Llamada solo si la piden o tienen una duda que Lucía no puede resolver con información oficial, en el horario del equipo y a una hora razonable para la alumna. Menos de 50: solo seguimientos.</p>
       </div>
       <div class="box">
         <h3>Lo que Lucía no ha dicho y confirma Andrea</h3>
         <ul class="chk">
-          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>El precio en su moneda y las formas de pago (si hay cuotas y cuántas).</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Si se puede pagar en partes y cómo se paga desde México o Chile: <span class="ph">[por confirmar]</span>.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>La fecha de inicio del próximo grupo y hasta cuándo se puede entrar.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Las horas, la modalidad (a su ritmo o con sesiones en vivo) y el certificado.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier descuento o condición que no esté cargada como oficial.</li>
         </ul>
+        <p class="note">Lo que Andrea ya no tiene que explicar: el precio (100 €) y cómo se paga. Rosa los tiene desde el primer mensaje, así que la llamada es corta y va a su duda.</p>
       </div>
     </div>
   </div>
@@ -427,25 +428,25 @@ footer p b{color:var(--ink)}
   <header>
     <h2>4 · Seguimientos: nadie se queda sin respuesta <span class="ej">Ejemplo</span></h2>
     <p>Salen solos y siempre entre las 8:00 y las 21:30 de la hora local de cada alumna. Las horas de abajo son las de Rosa, en Lima. Cualquier respuesta para la secuencia y la pasa a quien corresponda. Cada texto lo aprobáis antes.</p>
-    <p class="rv"><span><span class="real">Real</span> el curso, que es online y que hoy no hay segundo mensaje ni seguimiento del presupuesto.</span><span><span class="ej">Inventado</span> todos los textos, los días y las horas de envío, Rosa y Andrea. Lo que va <span class="ph">[entre corchetes]</span> lo pone INSPEU.</span></p>
-    <div class="legtl"><span><i style="background:var(--accent)"></i>WhatsApp</span><span><i style="background:#7A8A6E"></i>Llamada del agente de voz</span><span><i style="background:var(--f700)"></i>Llamada de una persona</span><span><i style="background:var(--ej)"></i>Aviso o tarea para Andrea</span><span><i style="background:var(--good)"></i>Fin o cambio de camino</span></div>
+    <p class="rv"><span><span class="real">Real</span> el curso, que es online, que cuesta 100 € y se paga desde el móvil, y que hoy se pide una llamada antes de vender y no hay segundo mensaje.</span><span><span class="ej">Inventado</span> todos los textos, los días y las horas de envío, Rosa y Andrea. Lo que va <span class="ph">[entre corchetes]</span> lo pone INSPEU.</span></p>
+    <div class="legtl"><span><i style="background:var(--accent)"></i>WhatsApp</span><span><i style="background:#7A8A6E"></i>Llamada del agente de voz (opcional)</span><span><i style="background:var(--f700)"></i>Llamada de una persona (la excepción)</span><span><i style="background:var(--ej)"></i>Aviso o tarea para Andrea</span><span><i style="background:var(--good)"></i>Fin o cambio de camino</span></div>
   </header>
   <div class="seq">
     <div>
       <h3>A · No contesta</h3>
-      <p>Escribió por el anuncio, recibió el temario y no responde a Lucía.</p>
+      <p>Escribió por el anuncio, recibió el temario, el precio y cómo se paga, y no responde a Lucía.</p>
       <ol class="tl">
-        <li><span class="w">Martes 22:30 · al momento (respuesta a su mensaje)</span><b>Primer mensaje de Lucía</b><blockquote>¡Hola! Soy Lucía, la asistente de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad: [enlace al temario]. Para orientarte bien: ¿das clase ahora mismo?</blockquote></li>
+        <li><span class="w">Martes 22:30 · al momento (respuesta a su mensaje)</span><b>Primer mensaje de Lucía</b><blockquote>¡Hola! Soy Lucía, la asistente de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad: [enlace al temario]. Cuesta 100 € y lo pagas desde el móvil, con la app de pagos que ya usas en Perú. Para orientarte bien: ¿das clase ahora mismo?</blockquote></li>
         <li><span class="w">Miércoles 9:30 (Lima) · WhatsApp</span><b>Una sola pregunta, con botones</b><blockquote>¡Buenos días! ¿Pudiste ver el temario? Para contarte lo que te sirve: ¿en qué nivel enseñas?
 [Inicial] [Primaria] [Secundaria] [Ahora no doy clase]</blockquote></li>
-        <li><span class="w">Jueves 18:30 · WhatsApp</span><b>La duda más habitual</b><blockquote>Lo que más nos preguntan las docentes es cómo compaginarlo con dar clase. ¿Te lo explica Andrea en 10 minutos?
-[Mañana 10:00] [Mañana 16:00] [Mejor por escrito]</blockquote></li>
-        <li class="voice"><span class="w">Viernes 17:00 · llamada corta del agente de voz (opcional)</span><b>Como en el audio del plan</b> <span class="muted">Recuerda lo que pidió, hace dos preguntas y deja agendada la llamada con Andrea.</span></li>
-        <li><span class="w">Sábado 11:00 · WhatsApp</span><b>Una experiencia real</b><blockquote>Te comparto lo que cuenta una docente que ya hizo el curso: [testimonio real, con su permiso]. Si quieres, te cuento cómo es el próximo grupo.</blockquote></li>
+        <li><span class="w">Jueves 18:30 · WhatsApp</span><b>La duda más habitual, y la matrícula a un toque</b><blockquote>Lo que más nos preguntan las docentes es cómo compaginarlo con dar clase: [modalidad y dedicación por semana, según INSPEU]. ¿Te paso los datos para matricularte?
+[Sí, pásamelos] [Tengo una duda] [Prefiero hablar con alguien]</blockquote></li>
+        <li class="voice"><span class="w">Viernes 17:00 · llamada corta del agente de voz (opcional, solo si lo activáis)</span><b>Como en el audio del plan</b> <span class="muted">Recuerda lo que pidió, resuelve una duda y le deja por WhatsApp los datos de pago.</span></li>
+        <li><span class="w">Sábado 11:00 · WhatsApp</span><b>Una experiencia real</b><blockquote>Te comparto lo que cuenta una docente que ya hizo el curso: [testimonio real, con su permiso]. Si quieres, te paso los datos y te matriculas por aquí.</blockquote></li>
         <li class="alert"><span class="w">Domingo · aviso a Andrea</span><b>Solo si abrió el temario dos veces o volvió a escribir</b></li>
         <li><span class="w">Martes siguiente, 19:00 · WhatsApp</span><b>¿Ahora o más adelante?</b><blockquote>No quiero insistirte. ¿Lo ves para el próximo grupo o lo dejamos para más adelante? Cualquiera de las dos está bien.
-[Para el próximo grupo] [Más adelante] [Ya no me interesa]</blockquote></li>
-        <li class="stop"><span class="w">Día 8</span><b>Pasa a «más adelante» (E) y deja de recibir mensajes de esta secuencia</b></li>
+[Me matriculo ahora] [Más adelante] [Ya no me interesa]</blockquote></li>
+        <li class="stop"><span class="w">Día 8</span><b>Pasa a «más adelante» (F) y deja de recibir mensajes de esta secuencia</b></li>
       </ol>
     </div>
 
@@ -457,63 +458,84 @@ footer p b{color:var(--ink)}
 [El tiempo] [El precio] [Si me sirve para mi aula]</blockquote></li>
         <li><span class="w">Día 1, 19:00 · WhatsApp</span><b>Lo que responde a su duda</b><blockquote>(Si es el tiempo) Te cuento cómo se organiza: [modalidad y dedicación por semana, según INSPEU]. Muchas docentes lo avanzan por la noche o el fin de semana.</blockquote></li>
         <li><span class="w">Día 3, 12:30 · WhatsApp</span><b>Para su aula</b><blockquote>Mira el módulo de [módulo del temario real que encaja con primaria]: es lo que más aplican las docentes de primaria al día siguiente.</blockquote></li>
-        <li><span class="w">Día 5, 19:30 · WhatsApp</span><b>Si el freno es el precio</b><blockquote>Si lo que te frena es el pago, Andrea te prepara un presupuesto con las formas de pago que tengamos para tu país. ¿Te lo mando?
-[Sí, mándamelo] [Ahora no]</blockquote></li>
-        <li class="alert"><span class="w">Día 6 · aviso a Andrea</span><b>Solo si abrió el temario otra vez o pidió presupuesto</b></li>
+        <li><span class="w">Día 5, 19:30 · WhatsApp</span><b>Si el freno es el precio</b><blockquote>Son 100 € y lo pagas desde el móvil, en un minuto. Si te viene mejor pagarlo de otra forma, Andrea te dice por aquí qué opciones hay. ¿Te paso los datos?
+[Sí, pásamelos] [Ahora no]</blockquote></li>
+        <li class="alert"><span class="w">Día 6 · aviso a Andrea</span><b>Solo si abrió el temario otra vez o pidió los datos de pago</b></li>
         <li><span class="w">Día 9, 12:00 · WhatsApp</span><b>Último mensaje</b><blockquote>Rosa, ¿lo dejamos para más adelante? Cualquier respuesta está bien.
-[Sigo interesada] [Más adelante] [No me interesa]</blockquote></li>
-        <li class="stop"><span class="w">Fin</span><b>Sin respuesta, pasa a E. Si dice «no me interesa», no se le vuelve a escribir.</b></li>
+[Me matriculo] [Más adelante] [No me interesa]</blockquote></li>
+        <li class="stop"><span class="w">Fin</span><b>Sin respuesta, pasa a F. Si dice «no me interesa», no se le vuelve a escribir.</b></li>
       </ol>
     </div>
 
     <div class="hot">
-      <h3>C · Pide precio o financiación</h3>
-      <p>Aquí es donde hoy se escapa: el presupuesto. Con el sistema tiene dueña, hora límite y seguimiento.</p>
+      <h3>C · Pidió los datos de pago y no pagó</h3>
+      <p>Es la venta más cerca de cerrarse. Hoy dependería de que alguien se acuerde; con el sistema, el recordatorio sale solo y Andrea entra si hay una duda.</p>
       <ol class="tl">
-        <li><span class="w">Al momento · WhatsApp</span><b>Lucía no inventa el precio</b><blockquote>Te lo confirma Andrea, del equipo, para no darte un dato equivocado. Te lo manda por aquí mañana antes de las 12:00 (hora de Lima), con las formas de pago. ¿Te parece?</blockquote></li>
-        <li class="alert"><span class="w">Al momento · tarea para Andrea</span><b>«Presupuesto para Rosa M. · antes de las 12:00 de Lima»</b><blockquote>Ficha con país, curso y lo que ha preguntado (cuotas). Si a las 11:30 no ha salido, aviso a Andrea y a quien coordine el equipo.</blockquote></li>
-        <li><span class="w">Miércoles 11:15 · WhatsApp de Andrea + PDF</span><b>El presupuesto, con plantilla</b><blockquote>Rosa, aquí tienes tu presupuesto del curso de Educación Inclusiva:
-• Inicio: [fecha de inicio]
-• Precio: [precio en su moneda]
-• Formas de pago: [cuotas o pago único]
-• Válido hasta: [fecha]
-[Quiero matricularme] [Tengo una duda]</blockquote></li>
-        <li><span class="w">Miércoles 19:00 · WhatsApp (si no lo ha abierto)</span><b>¿Le llegó?</b><blockquote>Rosa, ¿te llegó bien el presupuesto? Si tienes cualquier duda, me la dices por aquí.</blockquote></li>
-        <li><span class="w">Viernes 18:30 · WhatsApp</span><b>¿Qué te parece?</b><blockquote>¿Qué te pareció el presupuesto?
-[Me matriculo] [Lo comento en casa] [Me queda caro]</blockquote></li>
-        <li class="call"><span class="w">Lunes 10:00 (Lima) · llamada</span><b>Andrea llama</b> <span class="muted">solo si abrió el presupuesto y no ha contestado</span></li>
-        <li><span class="w">Día 10 · WhatsApp</span><b>Último aviso, solo con datos reales</b><blockquote>La matrícula del grupo que empieza el [fecha de inicio] cierra el [fecha de cierre]. ¿Te guardo plaza? (Solo si INSPEU tiene esa fecha; si no, no se envía.)</blockquote></li>
-        <li class="stop"><span class="w">Matrícula hecha</span><b>Se para todo y empieza D. Sin respuesta, pasa a E.</b></li>
+        <li><span class="w">Al momento · WhatsApp</span><b>Los datos, completos y en un solo mensaje</b><blockquote>Te matriculas aquí mismo:
+• Importe: 100 €
+• Cómo: desde el móvil, con la app de pagos que ya usas en Perú
+• Datos de pago: [datos de pago]
+Cuando pagues, mándame la captura y te confirmo la matrícula y el acceso.</blockquote></li>
+        <li><span class="w">Miércoles 12:00 (Lima) · WhatsApp</span><b>¿Pudo pagar?</b><blockquote>Rosa, ¿pudiste hacer el pago? Si la app te ha dado algún problema, dime y lo vemos.
+[Ya pagué] [Me dio un error] [Tengo una duda]</blockquote></li>
+        <li class="alert"><span class="w">Al momento, si contesta «error» o «duda» · aviso a Andrea</span><b>Andrea le escribe por WhatsApp</b> <span class="muted">y la llama solo si ella lo pide</span></li>
+        <li><span class="w">Jueves 19:00 · WhatsApp</span><b>Los datos, a mano</b><blockquote>Te dejo de nuevo los datos para que los tengas a mano: [datos de pago]. Son 100 € y, en cuanto se confirme el pago, te mando el acceso.</blockquote></li>
+        <li><span class="w">Día 5 · WhatsApp</span><b>Último aviso, solo con datos reales</b><blockquote>La matrícula del grupo que empieza el [fecha de inicio] cierra el [fecha de cierre]. ¿Te guardo plaza? (Solo si INSPEU tiene esa fecha; si no, no se envía.)</blockquote></li>
+        <li class="stop"><span class="w">Paga</span><b>Se para todo y empieza E. Paga sin captura: D. Sin respuesta, pasa a F.</b></li>
       </ol>
     </div>
 
     <div>
-      <h3>D · Matriculada</h3>
-      <p>Bienvenida, que entre a la plataforma, que termine, y después el siguiente curso, solo si encaja.</p>
+      <h3>D · Pagó y no envió el comprobante</h3>
+      <p>Dice «ya pagué» sin la captura, o el pago aparece en <span class="ph">[cuenta de cobro de INSPEU]</span> y en el chat no hay nada. Nadie que ha pagado se queda sin acceso.</p>
       <ol class="tl">
-        <li><span class="w">Al matricularse · WhatsApp</span><b>Bienvenida</b><blockquote>¡Bienvenida, Rosa! Ya estás matriculada en Educación Inclusiva y Atención a la Diversidad. Así entras a la plataforma: [instrucciones de acceso]. Empezamos el [fecha de inicio]. Cualquier problema, contéstame aquí.</blockquote></li>
+        <li><span class="w">A los 15 minutos · WhatsApp</span><b>Solo falta la captura</b><blockquote>¡Gracias, Rosa! Para confirmarte la matrícula, ¿me mandas por aquí la captura del pago? Con eso te envío el acceso.</blockquote></li>
+        <li><span class="w">3 horas después (dentro de 8:00-21:30 de Lima) · WhatsApp</span><b>Otra forma de encontrarlo</b><blockquote>Rosa, solo me falta comprobar el pago para darte el acceso. Si no encuentras la captura, dime a qué hora pagaste y desde qué número, y lo buscamos.</blockquote></li>
+        <li class="alert"><span class="w">Al día siguiente, 10:00 · tarea para Andrea</span><b>«Comprobar el pago de Rosa M.»</b><blockquote>Revisar [cuenta de cobro de INSPEU]. Si el pago está, se confirma la matrícula aunque no haya captura.</blockquote></li>
+        <li class="stop"><span class="w">Pago comprobado</span><b>Confirmación, [instrucciones de acceso] y empieza E</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>E · Matriculada</h3>
+      <p>Confirmación y acceso al momento, que entre a la plataforma, que termine, y después el siguiente curso, solo si encaja.</p>
+      <ol class="tl">
+        <li><span class="w">Al comprobar el pago · WhatsApp</span><b>Confirmación y acceso</b><blockquote>¡Pago confirmado, Rosa! Ya estás matriculada en Educación Inclusiva y Atención a la Diversidad. Así entras a la plataforma: [instrucciones de acceso]. Empezamos el [fecha de inicio]. Cualquier problema, contéstame aquí.</blockquote></li>
         <li><span class="w">Día 2, 18:00 · WhatsApp</span><b>¿Ha podido entrar?</b><blockquote>Rosa, ¿pudiste entrar a la plataforma sin problema?
 [Sí, todo bien] [Tengo un problema]</blockquote></li>
         <li class="alert"><span class="w">Si no ha entrado en 5 días · aviso a Andrea</span><b>Antes de que se desanime</b></li>
         <li><span class="w">Semana 2, 19:00 · WhatsApp</span><b>¿Qué tal va?</b><blockquote>¿Qué tal estos primeros días? Si algo no te queda claro, te pongo con [tutor o equipo docente].
 [Va bien] [Tengo una duda]</blockquote></li>
         <li><span class="w">Al terminar · WhatsApp</span><b>Certificado y opinión</b><blockquote>¡Enhorabuena por terminar, Rosa! [Cómo se recibe el certificado, según INSPEU]. ¿Nos cuentas en dos líneas qué te ha servido en tu aula? Con tu permiso, ayuda a otras docentes a decidir.</blockquote></li>
-        <li><span class="w">30 días después · WhatsApp</span><b>El siguiente curso</b><blockquote>Rosa, por si quieres seguir: [siguiente curso de INSPEU que encaja con docentes de primaria]. ¿Te mando el temario?
+        <li><span class="w">Cuando abra uno de los próximos cursos · WhatsApp</span><b>El siguiente curso</b><blockquote>Rosa, por si quieres seguir: [siguiente curso de INSPEU que encaja con docentes de primaria]. ¿Te mando el temario?
 [Sí] [Ahora no]</blockquote></li>
         <li class="stop"><span class="w">Fin</span><b>Si dice «ahora no», se le vuelve a ofrecer solo cuando abra un grupo nuevo de su interés</b></li>
       </ol>
     </div>
 
     <div>
-      <h3>E · «Más adelante (enero)»</h3>
+      <h3>F · «Más adelante (enero)»</h3>
       <p>Dice que en enero, cuando esté de vacaciones. No pasa a Andrea ahora: se guarda la fecha y se le escribe cuando dijo.</p>
       <ol class="tl">
-        <li><span class="w">Al momento · en la conversación</span><b>Guardado</b><blockquote>Apuntado, Rosa. Te escribo la primera semana de enero con las fechas y condiciones que estén publicadas entonces. Hasta entonces no te molesto.</blockquote></li>
+        <li><span class="w">Al momento · en la conversación</span><b>Guardado</b><blockquote>Apuntado, Rosa. Te escribo la primera semana de enero con las fechas que estén publicadas entonces. Hasta entonces no te molesto.</blockquote></li>
         <li><span class="w">Mediados de diciembre · un único WhatsApp</span><b>Para tenerlo a mano</b><blockquote>Rosa, te dejo de nuevo el temario por si quieres mirarlo en vacaciones: [enlace al temario]. En enero te escribo como quedamos.</blockquote></li>
         <li><span class="w">Lunes 4 de enero de 2027, 10:00 (Lima) · WhatsApp</span><b>Lo prometido</b><blockquote>Hola, Rosa. Me pediste que te escribiera a principios de enero por el curso de Educación Inclusiva. ¿Lo retomamos?
-[Sí, que me llame Andrea] [Mándame fechas y precio] [Más adelante]</blockquote></li>
+[Pásame los datos de pago] [Que me llame Andrea] [Más adelante]</blockquote></li>
         <li class="alert"><span class="w">Jueves 7 de enero · aviso a Andrea</span><b>Solo si contestó o abrió el temario</b></li>
         <li class="stop"><span class="w">Fin</span><b>Si dice que sí, vuelve a empezar con toda su ficha. Sin respuesta, un último mensaje a los 15 días y se cierra.</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>La llamada, solo cuando hace falta</h3>
+      <p>Para quien tiene una duda que Lucía no puede resolver con información oficial, o pide hablar con una persona. Ya no es un paso obligatorio para vender.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · WhatsApp</span><b>Lucía ofrece dos horarios, ya en su hora</b><blockquote>Claro. ¿Te llama Andrea mañana a las 10:00 o a las 16:00, hora de Lima?
+[A las 10:00] [A las 16:00]</blockquote></li>
+        <li class="alert"><span class="w">Al agendar · aviso a Andrea</span><b>Ficha con su duda y lo que ya sabe</b> <span class="muted">precio, cómo se paga y datos de pago ya enviados: la llamada va a la duda</span></li>
+        <li class="call"><span class="w">Miércoles 10:00 (Lima) · llamada de Andrea</span><b>Corta y con la ficha delante</b></li>
+        <li><span class="w">Al colgar · WhatsApp desde la ficha</span><b>Los datos de pago, si quiere matricularse</b><blockquote>Rosa, como hablamos: son 100 € y te dejo los datos de pago: [datos de pago]. Cuando pagues, mándame la captura y te envío el acceso.</blockquote></li>
+        <li class="stop"><span class="w">Después</span><b>Paga: E. No paga: C. Lo deja para más tarde: F.</b></li>
       </ol>
     </div>
 
@@ -522,10 +544,11 @@ footer p b{color:var(--ink)}
       <p>Lo que no cambia, sea cual sea el camino.</p>
       <ul class="chk">
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Mensajes por iniciativa propia solo entre las 8:00 y las 21:30 de la hora local de cada alumna, según su prefijo y su país. A quien escribe, se le contesta al momento, a cualquier hora.</li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Las llamadas de Andrea, en el <span class="ph">[horario del equipo]</span> y a una hora razonable para la alumna. Los huecos se le ofrecen ya en su hora.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Primero se intenta cerrar por WhatsApp. Las llamadas de Andrea, solo si la alumna las pide o tiene una duda real, en el <span class="ph">[horario del equipo]</span> y a una hora razonable para ella.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Quien paga recibe la confirmación y las <span class="ph">[instrucciones de acceso]</span> en cuanto se comprueba el pago. La matrícula nunca se confirma sin pago comprobado.</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier respuesta para la secuencia. Si Andrea escribe, el sistema se calla con esa persona.</li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Como mucho, un WhatsApp al día por persona. Quien pide que no le escribamos, no recibe nada más.</li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Ni precios, ni fechas, ni plazas, ni descuentos que INSPEU no haya confirmado: eso siempre lo dice una persona.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>El precio (100 €) y el pago desde el móvil, sí. Fechas, plazas, pago en partes, pago desde fuera de Perú o descuentos que INSPEU no haya confirmado: eso siempre lo dice una persona.</li>
       </ul>
     </div>
   </div>
@@ -536,67 +559,67 @@ footer p b{color:var(--ink)}
 <section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
   <header>
     <h2>5 · El panel de cada lunes <span class="ej">Datos de ejemplo</span></h2>
-    <p>Una pantalla para ver la semana: de qué países llegan las solicitudes, cuánto se tarda en contestar, qué presupuestos están sin respuesta, cuántas matrículas hay y cuánto cuesta cada una por anuncio.</p>
-    <p class="rv"><span><span class="real">Real</span> solo el orden de magnitud: 50-100 solicitudes al mes y menos de 500 € al mes en anuncios.</span><span><span class="ej">Datos de ejemplo</span> todas las cifras de esta pestaña son inventadas para enseñar cómo se ve el panel, dentro de ese orden de magnitud. No son previsiones ni salen de vuestros datos. Sin vuestro precio no se calculan ingresos.</span></p>
+    <p>Una pantalla para ver la semana: de qué países llegan las solicitudes, cuánto se tarda en contestar, cuántas ventas se cierran por WhatsApp sin llamada, quién pidió los datos de pago y no ha pagado, cuántas matrículas hay y cuánto cuesta cada una por anuncio.</p>
+    <p class="rv"><span><span class="real">Real</span> el precio (100 €), unos 100 interesados cada 15 días (unos 50 a la semana), cerca del 10 % de cierre hoy y menos de 500 € al mes en anuncios.</span><span><span class="ej">Datos de ejemplo</span> todas las cifras de esta pestaña son inventadas para enseñar cómo se ve el panel, dentro de ese orden de magnitud. No son previsiones ni salen de vuestros datos. Los ingresos son ilustrativos: matrículas de ejemplo × 100 €.</span></p>
   </header>
   <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · semana del 19 al 25 de octubre</span><em>Datos de ejemplo</em></div><div class="winbody">
   <div class="kpis">
-    <div class="kpi"><b>1 min</b><span>mediana hasta la primera respuesta, también de noche · datos de ejemplo</span></div>
-    <div class="kpi"><b>95 %</b><span>presupuestos enviados en menos de 24 h · datos de ejemplo</span></div>
-    <div class="kpi"><b>4</b><span>matrículas esta semana · datos de ejemplo</span></div>
-    <div class="kpi alert"><b>3</b><span>presupuestos abiertos sin respuesta más de 3 días · datos de ejemplo</span></div>
+    <div class="kpi"><b>1 min</b><span>mediana hasta la primera respuesta, con temario, precio y cómo pagar, también de noche · datos de ejemplo</span></div>
+    <div class="kpi"><b>800 €</b><span>ingresos de la semana: 8 matrículas × 100 € · ilustrativo, datos de ejemplo</span></div>
+    <div class="kpi"><b>6 de 8</b><span>ventas cerradas por WhatsApp sin llamada · datos de ejemplo</span></div>
+    <div class="kpi alert"><b>5</b><span>pidieron los datos de pago y aún no han pagado · seguimiento C en marcha · datos de ejemplo</span></div>
   </div>
   <div class="box">
     <p class="cap" style="margin:0">Solicitudes por país · esta semana · datos de ejemplo</p>
     <div class="tbl"><table>
-      <thead><tr><th>País</th><th>Solicitudes</th><th>Fuera del horario del equipo</th><th>Primera respuesta (mediana)</th><th>Presupuestos</th><th>Matrículas</th></tr></thead>
+      <thead><tr><th>País</th><th>Solicitudes</th><th>Fuera del horario del equipo</th><th>Primera respuesta (mediana)</th><th>Pidieron datos de pago</th><th>Matrículas</th><th>Sin llamada</th></tr></thead>
       <tbody>
-        <tr><td>Perú</td><td><span class="hb"><span>12</span><i style="width:96px"></i></span></td><td>5</td><td>1 min</td><td>8</td><td>3</td></tr>
-        <tr><td>España</td><td><span class="hb"><span>3</span><i style="width:24px"></i></span></td><td>1</td><td>1 min</td><td>2</td><td>1</td></tr>
-        <tr><td>México</td><td><span class="hb"><span>2</span><i style="width:16px"></i></span></td><td>1</td><td>1 min</td><td>2</td><td>0</td></tr>
-        <tr><td>Colombia</td><td><span class="hb"><span>2</span><i style="width:16px"></i></span></td><td>1</td><td>1 min</td><td>1</td><td>0</td></tr>
-        <tr><td>Otros países</td><td><span class="hb"><span>1</span><i style="width:8px"></i></span></td><td>0</td><td>1 min</td><td>1</td><td>0</td></tr>
+        <tr><td>Perú</td><td><span class="hb"><span>41</span><i style="width:96px"></i></span></td><td>18</td><td>1 min</td><td>14</td><td>8</td><td>6</td></tr>
+        <tr><td>México</td><td><span class="hb"><span>4</span><i style="width:9px"></i></span></td><td>2</td><td>1 min</td><td>—</td><td>0</td><td>—</td></tr>
+        <tr><td>Chile</td><td><span class="hb"><span>2</span><i style="width:5px"></i></span></td><td>1</td><td>1 min</td><td>—</td><td>0</td><td>—</td></tr>
+        <tr><td>Otros países</td><td><span class="hb"><span>1</span><i style="width:2px"></i></span></td><td>0</td><td>1 min</td><td>—</td><td>0</td><td>—</td></tr>
       </tbody>
-      <tfoot><tr><td>Total</td><td>20</td><td>8</td><td>1 min</td><td>14</td><td>4</td></tr></tfoot>
+      <tfoot><tr><td>Total</td><td>48</td><td>21</td><td>1 min</td><td>14</td><td>8</td><td>6</td></tr></tfoot>
     </table></div>
-    <p class="note">«Fuera del horario del equipo»: solicitudes que hoy esperarían horas a la primera respuesta. Con el sistema se contestan al minuto, y el seguimiento sale en la hora local de cada alumna. Datos de ejemplo.</p>
+    <p class="note">«Fuera del horario del equipo»: solicitudes que hoy esperarían horas a la primera respuesta. México y Chile se ven aparte desde el primer día, para cuando los abráis; cómo se paga desde allí está <span class="ph">[por confirmar]</span> y, mientras tanto, se lo dice una persona. Datos de ejemplo.</p>
   </div>
   <div class="box">
-    <p class="cap" style="margin:0">Presupuestos · dónde se quedan · esta semana · datos de ejemplo</p>
+    <p class="cap" style="margin:0">Venta por WhatsApp · dónde se queda cada persona · esta semana · datos de ejemplo</p>
     <div class="tbl"><table>
       <thead><tr><th>Paso</th><th>Personas</th><th class="l">Qué hace el sistema</th></tr></thead>
       <tbody>
-        <tr><td>Piden precio</td><td>15</td><td class="l w">Tarea para Andrea con hora límite</td></tr>
-        <tr><td>Presupuesto enviado en 24 h</td><td>14</td><td class="l w">Aviso si alguno se pasa de la hora</td></tr>
-        <tr><td>Lo abren</td><td>12</td><td class="l w">Mensaje «¿te llegó bien?» a quien no lo abre</td></tr>
-        <tr><td>Responden</td><td>8</td><td class="l w">Llamada de Andrea a quien lo abrió y calla</td></tr>
-        <tr><td>Se matriculan</td><td class="hl">4</td><td class="l w">Empieza la bienvenida (D)</td></tr>
+        <tr><td>Reciben temario, precio y cómo pagar</td><td>48</td><td class="l w">Lucía, en el primer minuto, sin pedir antes una llamada</td></tr>
+        <tr><td>Contestan a Lucía</td><td>31</td><td class="l w">Seguimiento A a quien no contesta</td></tr>
+        <tr><td>Piden los datos de pago</td><td>14</td><td class="l w">Se envían al momento · seguimiento C a quien no paga</td></tr>
+        <tr><td>Piden hablar con la asesora</td><td>3</td><td class="l w">Llamada de Andrea, la excepción · 2 se matriculan después</td></tr>
+        <tr><td>Pagan</td><td>9</td><td class="l w">Seguimiento D a quien pagó y no mandó la captura (1)</td></tr>
+        <tr><td>Matrícula confirmada</td><td class="hl">8</td><td class="l w">Confirmación, [instrucciones de acceso] y bienvenida (E)</td></tr>
       </tbody>
     </table></div>
   </div>
   <div class="box">
     <p class="cap" style="margin:0">Por anuncio · esta semana · datos de ejemplo</p>
     <div class="tbl"><table>
-      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Llamadas agendadas</th><th>Matrículas</th><th>Coste por matrícula</th></tr></thead>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Matrículas</th><th>Sin llamada</th><th>Ingresos (× 100 €)</th><th>Coste por matrícula</th></tr></thead>
       <tbody>
-        <tr><td>A · El aula diversa</td><td>40 €</td><td>8</td><td>4</td><td>2</td><td class="hl">20 €</td></tr>
-        <tr><td>C · A tu ritmo</td><td>35 €</td><td>5</td><td>2</td><td>1</td><td class="hl">35 €</td></tr>
-        <tr><td>B · El certificado</td><td>20 €</td><td>3</td><td>1</td><td>1</td><td class="hl">20 €</td></tr>
-        <tr><td>D · Guía gratuita</td><td>15 €</td><td>4</td><td>0</td><td>0</td><td class="hl">—</td></tr>
+        <tr><td>A · El aula diversa</td><td>40 €</td><td>19</td><td>4</td><td>3</td><td>400 €</td><td class="hl">10 €</td></tr>
+        <tr><td>C · A tu ritmo</td><td>35 €</td><td>12</td><td>2</td><td>2</td><td>200 €</td><td class="hl">17,50 €</td></tr>
+        <tr><td>B · El certificado</td><td>20 €</td><td>8</td><td>2</td><td>1</td><td>200 €</td><td class="hl">10 €</td></tr>
+        <tr><td>D · Guía gratuita</td><td>15 €</td><td>9</td><td>0</td><td>0</td><td>0 €</td><td class="hl">—</td></tr>
       </tbody>
-      <tfoot><tr><td>Total anuncios</td><td>110 €</td><td>20</td><td>7</td><td>4</td><td class="hl">27,50 €</td></tr></tfoot>
+      <tfoot><tr><td>Total anuncios</td><td>110 €</td><td>48</td><td>8</td><td>6</td><td>800 €</td><td class="hl">13,75 €</td></tr></tfoot>
     </table></div>
-    <p class="note">110 € a la semana son unos 470 € al mes, dentro de lo que invertís hoy. Los ángulos son los de la página de <a href="../anuncios/">anuncios de ejemplo</a>. En la versión real se rellena solo con cada conversación, llamada, presupuesto y matrícula, y el anuncio de cada persona viene del mensaje con el que entró. Todos los datos son de ejemplo.</p>
+    <p class="note">110 € a la semana son unos 470 € al mes, dentro de lo que invertís hoy. Ingresos = matrículas × 100 €, solo para ilustrar cómo se vería; no es una previsión. Los ángulos son los de la página de <a href="../anuncios/">anuncios de ejemplo</a>. En la versión real se rellena solo con cada conversación, pago y matrícula, y el anuncio de cada persona viene del mensaje con el que entró. Todos los datos son de ejemplo.</p>
   </div>
   <div class="box">
-    <p class="cap" style="margin:0">A quién llamar hoy · Andrea · datos de ejemplo</p>
+    <p class="cap" style="margin:0">A quién atender hoy · Andrea · datos de ejemplo</p>
     <div class="tbl"><table>
       <thead><tr><th>Persona</th><th>Nota</th><th class="l">Su hora ahora</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
       <tbody>
-        <tr><td>Rosa M.</td><td>80 A</td><td class="l">9:55 · Lima</td><td class="l w">Llamada agendada a las 10:00 · pregunta por cuotas</td><td class="l w">Confirmar precio y fechas, y enviar el presupuesto al colgar</td></tr>
-        <tr><td>Carmen V.</td><td>74 A</td><td class="l">16:55 · Madrid</td><td class="l w">Abrió el presupuesto 3 veces y no contesta, hace 4 días</td><td class="l w">Llamada corta: ¿alguna duda con el pago?</td></tr>
-        <tr><td>Milagros T.</td><td>66 B</td><td class="l">9:55 · Lima</td><td class="l w">«Me lo pienso» hace 6 días · su duda es el tiempo</td><td class="l w">WhatsApp de Andrea, no llamada</td></tr>
-        <tr><td>Javier P.</td><td>71 A</td><td class="l">9:55 · Bogotá</td><td class="l w">Pidió presupuesto ayer a las 23:10 de su hora</td><td class="l w">Enviar el presupuesto antes de las 12:00 de Bogotá</td></tr>
+        <tr><td>Rosa M.</td><td>80 A</td><td class="l">9:55 · Lima</td><td class="l w">Pidió la llamada a las 10:00 · su duda es el tiempo</td><td class="l w">Llamada corta y, al colgar, datos de pago por WhatsApp</td></tr>
+        <tr><td>Carmen V.</td><td>74 A</td><td class="l">9:55 · Lima</td><td class="l w">Pidió los datos de pago hace 2 días y contestó «me dio un error»</td><td class="l w">WhatsApp de Andrea: ayudarla con el pago, no llamada</td></tr>
+        <tr><td>Milagros T.</td><td>66 B</td><td class="l">9:55 · Lima</td><td class="l w">Dice que pagó ayer y no ha mandado la captura</td><td class="l w">Comprobar el pago en [cuenta de cobro] y confirmar la matrícula</td></tr>
+        <tr><td>Diego A.</td><td>71 A</td><td class="l">8:55 · Ciudad de México</td><td class="l w">Quiere matricularse y pregunta si puede pagar desde México</td><td class="l w">Responder por WhatsApp con [forma de pago desde México]</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -604,10 +627,10 @@ footer p b{color:var(--ink)}
     <p class="cap" style="margin:0">Dónde está cada persona · datos de ejemplo</p>
     <div class="kb">
       <div><h4>Nuevas <em>6</em></h4><p><b>Lucero G.</b><span>Arequipa · hace 5 min</span></p></div>
-      <div><h4>Con Lucía <em>9</em></h4><p><b>Diego A.</b><span>México · preguntando por la modalidad</span></p></div>
-      <div><h4>Llamada agendada <em>5</em></h4><p><b>Rosa M.</b><span>Mié 10:00 Lima · Andrea</span></p></div>
-      <div><h4>Presupuesto enviado <em>7</em></h4><p><b>Carmen V.</b><span>Madrid · abierto, sin respuesta</span></p></div>
-      <div><h4>Matriculadas <em>4</em></h4><p><b>Ana L.</b><span>Cusco · bienvenida enviada</span></p></div>
+      <div><h4>Con Lucía <em>9</em></h4><p><b>Diego A.</b><span>México · pregunta cómo pagar desde allí</span></p></div>
+      <div><h4>Datos de pago enviados <em>5</em></h4><p><b>Carmen V.</b><span>Trujillo · hace 2 días, sin pagar</span></p></div>
+      <div><h4>Llamada pedida <em>1</em></h4><p><b>Rosa M.</b><span>Mié 10:00 Lima · Andrea</span></p></div>
+      <div><h4>Matriculadas <em>8</em></h4><p><b>Ana L.</b><span>Cusco · por WhatsApp, acceso enviado</span></p></div>
       <div><h4>Más adelante <em>11</em></h4><p><b>Patricia S.</b><span>Enero · aviso guardado</span></p></div>
     </div>
   </div>
@@ -619,7 +642,7 @@ footer p b{color:var(--ink)}
   <div class="flinks"><a class="btnl" href="../">Plan</a><a class="btnl" href="../anuncios/">Anuncios</a><a class="btnl" href="../landing/">Landing</a><a class="btnl" href="./">Demo</a></div>
   <p><b>Maikel Echevarría · Qualivo · qualivo.io</b></p>
   <p>Demo preparada por Qualivo el 23 de octubre de 2026 para INSPEU. No es una página de INSPEU.</p>
-  <p>El curso, que es online, y la respuesta actual de vuestro WhatsApp son reales; las cifras de solicitudes, inversión y dónde se escapa la gente son las que nos disteis. Personas, mensajes, puntuaciones y cifras del panel son de ejemplo. Precio, fechas, horas, modalidad y certificado van entre corchetes hasta que INSPEU los confirme.</p>
+  <p>El curso, que es online, su precio (100 €), el pago desde el móvil, el proceso de venta actual y la respuesta actual de vuestro WhatsApp son reales; las cifras de interesados, cierre e inversión son las que nos disteis. Personas, mensajes, puntuaciones y cifras del panel (también los ingresos) son de ejemplo. Datos de pago, instrucciones de acceso, fechas, horas, modalidad y certificado van entre corchetes hasta que INSPEU los confirme.</p>
 </footer>
 </div>
 
@@ -659,7 +682,7 @@ footer p b{color:var(--ink)}
   var lvN = document.getElementById('lv-n'), lvBar = document.getElementById('lv-bar'), lvG = document.getElementById('lv-g'), lvF = document.getElementById('lv-f'), lvT = document.getElementById('lv-t');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hh, mm, score, fields, tagset, timers = [], used = {};
-  var ORDER = ['Curso', 'Canal', 'País', 'Hora local', 'Docente', 'Objetivo', 'Pregunta', 'Objeción', 'Cuándo', 'Siguiente paso'];
+  var ORDER = ['Curso', 'Canal', 'País', 'Hora local', 'Docente', 'Objetivo', 'Pregunta', 'Objeción', 'Cuándo', 'Pago', 'Siguiente paso'];
 
   function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
   function hora() { mm++; if (mm >= 60) { mm -= 60; hh = (hh + 1) % 24; } return hh + ':' + String(mm).padStart(2, '0'); }
@@ -677,7 +700,9 @@ footer p b{color:var(--ink)}
   function grupo(g) {
     var cls, txt;
     if (g === 'luego') { cls = 'c'; txt = 'Más adelante · fecha guardada'; }
-    else if (score >= 70) { cls = 'a'; txt = 'A · llamar hoy'; }
+    else if (g === 'matriculada') { cls = 'a'; txt = 'Matriculada por WhatsApp · sin llamada'; }
+    else if (g === 'llamada') { cls = 'a'; txt = 'Llamada pedida · Andrea'; }
+    else if (score >= 70) { cls = 'a'; txt = 'A · lista para matricularse'; }
     else if (score >= 50) { cls = 'b'; txt = 'B · sigue Lucía'; }
     else { cls = 'c'; txt = 'C · por cualificar'; }
     lvG.className = 'grp ' + cls; lvG.textContent = txt;
@@ -725,15 +750,20 @@ footer p b{color:var(--ink)}
     b.addEventListener('click', start); opts.appendChild(b);
   }
   function menu() {
-    var all = [['Quiero matricularme', 'ya'], ['¿Cuánto cuesta? ¿Hay cuotas?', 'precio'], ['¿Cuándo empieza?', 'fecha'], ['Me lo pienso', 'piensa'], ['Mejor más adelante', 'luego']];
+    var all = [['Quiero matricularme', 'ya'], ['¿Cómo se paga?', 'pago'], ['¿Cuándo empieza?', 'fecha'], ['Tengo dudas: prefiero hablar con alguien', 'dudas'], ['Me lo pienso', 'piensa'], ['Más adelante', 'luego']];
     choices(all.filter(function (c) { return !used[c[1]]; }));
   }
+  var DATOS = 'Importe: 100 €\nCómo: desde el móvil, con la app de pagos que ya usas en Perú\nDatos de pago: [datos de pago]';
   var N = {
+    menu: menu,
     inicio: function () {
       bot(['¡Hola! Soy Lucía, la asistente de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad: [enlace al temario]',
-           'Es un curso online, así que puedes seguirlo desde Perú o desde cualquier país.',
+           'Es online y cuesta 100 €. Lo pagas desde el móvil, con la app de pagos que ya usas en Perú, y te puedes matricular aquí mismo, sin esperar a una llamada.',
            'Para orientarte bien: ¿das clase ahora mismo? ¿En qué nivel?'],
-        function () { choices([['Sí, en inicial', 'nivel', 'Inicial'], ['Sí, en primaria', 'nivel', 'Primaria'], ['Sí, en secundaria', 'nivel', 'Secundaria'], ['Ahora no doy clase', 'nivel', 'No']]); });
+        function () {
+          apunta('Primer mensaje: temario, precio y cómo pagar', '100 € · pago desde el móvil · sin pedir antes una llamada', 'g');
+          choices([['Sí, en inicial', 'nivel', 'Inicial'], ['Sí, en primaria', 'nivel', 'Primaria'], ['Sí, en secundaria', 'nivel', 'Secundaria'], ['Ahora no doy clase', 'nivel', 'No']]);
+        });
     },
     nivel: function (v) {
       var doc = v !== 'No';
@@ -746,52 +776,94 @@ footer p b{color:var(--ink)}
     obj: function (v) {
       set({ Objetivo: v });
       apunta('Objetivo guardado', v + ' · se escribe en la ficha');
-      bot(['Te cuento lo que te puedo confirmar: es online y el temario lo tienes arriba.',
-           'La fecha de inicio del próximo grupo, las horas, el precio y el certificado te los confirma Andrea, del equipo, para no darte un dato equivocado.',
-           '¿Qué te gustaría hacer?'],
-        function () { apunta('Curso explicado solo con lo confirmado', 'online · temario · lo demás pasa a Andrea', 'h'); menu(); });
+      bot(['Te encaja. Resumen de lo que te puedo confirmar: es online, cuesta 100 €, se paga desde el móvil y el temario lo tienes arriba.',
+           'La fecha de inicio del próximo grupo y las horas te las confirma Andrea, la asesora, para no darte un dato equivocado.',
+           '¿Quieres matricularte ya? Lo hacemos aquí mismo en un par de minutos.'],
+        function () { apunta('Curso explicado solo con lo confirmado', 'online · temario · 100 € · pago desde el móvil · fecha y horas pasan a Andrea', 'h'); menu(); });
     },
     ya: function () {
-      used.ya = true;
-      set({ 'Siguiente paso': 'Matrícula' }, 15, ['quiere-matricularse']);
-      apunta('Quiere matricularse', '+15 · puntuación ' + score, 'g');
-      bot(['¡Qué bien! Andrea te confirma la fecha y la forma de pago y te manda el enlace de matrícula.',
-           '¿Hablas con ella mañana miércoles? Te propongo dos horarios, ya en hora de Lima:'],
-        function () { choices([['A las 10:00', 'cita', '10:00'], ['A las 16:00', 'cita', '16:00']]); });
-      apunta('Huecos libres de la agenda de Andrea', 'mostrados en hora de Lima · dentro del horario del equipo');
+      used.ya = true; used.pago = true;
+      set({ 'Siguiente paso': 'Pago · datos enviados' }, 15, ['quiere-matricularse', 'datos-de-pago']);
+      apunta('Quiere matricularse', '+15 · puntuación ' + score + ' · sin pasar por una llamada', 'g');
+      bot(['¡Qué bien, Rosa! Te matriculas aquí mismo:',
+           DATOS,
+           'Cuando pagues, mándame por aquí la captura del pago y te confirmo la matrícula y te envío cómo entrar a la plataforma.'],
+        function () {
+          apunta('Datos de pago enviados', 'si no paga: seguimiento C · si paga y no manda la captura: seguimiento D', 'h');
+          choices([['Ya pagué · te mando la captura', 'pagado'], ['Lo pago mañana', 'manana'], ['Antes tengo una duda', 'dudas']]);
+        });
+    },
+    pagado: function () {
+      bubble('out', '[Imagen: captura del pago]');
+      set({ Pago: 'Captura recibida' }, 0, ['comprobante']);
+      apunta('Comprobante recibido', 'se comprueba el pago: [cómo valida INSPEU los pagos] · si la revisión es manual, la confirmación sale cuando el equipo lo revise', 'h');
+      bot(['¡Recibido, Rosa! Compruebo el pago y te confirmo enseguida.'], function () {
+        later(function () {
+          bubble('sys', 'Ejemplo · pago comprobado ([cómo se valida el pago])');
+          set({ Pago: '100 € · comprobado', 'Siguiente paso': 'Bienvenida y acceso (seguimiento E)' }, 0, ['matriculada', 'venta-sin-llamada'], 'matriculada');
+          apunta('Venta cerrada por WhatsApp, sin llamada', '100 € · del primer mensaje a la matrícula sin agendar nada', 'g');
+          apunta('Matrícula registrada', 'ficha → matriculada · se para cualquier seguimiento de venta · empieza E', 'g');
+          bot(['¡Pago confirmado! Ya estás matriculada en Educación Inclusiva y Atención a la Diversidad.',
+               'Así entras a la plataforma: [instrucciones de acceso]\nEmpezamos el [fecha de inicio].',
+               'Cualquier problema para entrar, contéstame aquí. ¡Bienvenida, Rosa!'], fin);
+        }, 1200);
+      });
+    },
+    manana: function () {
+      set({ Pago: 'Pendiente', 'Siguiente paso': 'Recordatorio de pago · mañana 12:00 (Lima)' }, 0, ['pago-pendiente']);
+      apunta('Seguimiento C activado: pidió los datos y no ha pagado', 'recordatorio mañana a las 12:00 de Lima · Andrea entra solo si responde con un error o una duda', 'h');
+      bot(['Perfecto, sin problema. Los datos se quedan aquí arriba para cuando quieras.',
+           'Mañana a mediodía te dejo un recordatorio, por si acaso. ¡Buenas noches, Rosa!'], fin);
+    },
+    dudas: function () {
+      used.dudas = true;
+      bot(['Claro. Si es algo que te puedo contestar, te lo digo ahora. Y si prefieres hablarlo con una persona, te llama Andrea, la asesora.'],
+        function () { choices([['Te la escribo por aquí', 'escrita'], ['Que me llame Andrea', 'llamada']]); });
+    },
+    escrita: function () {
+      bot(['Dime.'], function () { choices([['¿Se puede pagar en dos partes?', 'resp', 'cuotas'], ['¿Es a mi ritmo o con clases en vivo?', 'resp', 'modal']]); });
+    },
+    resp: function (v) {
+      if (v === 'cuotas') {
+        set({ Pregunta: 'Pago en dos partes' }, 0, ['pregunta-cuotas']);
+        apunta('Tarea para Andrea: ¿pago en partes?', 'no está cargado como oficial · respuesta por WhatsApp antes de las 12:00 de Lima, sin llamada', 'h');
+        bot(['Pagarlo en partes no lo tengo cargado como oficial, así que no te quiero decir algo que no sea: te lo confirma Andrea por aquí mañana antes de las 12:00 (hora de Lima).',
+             'Mientras, ¿quieres hacer algo más?'], menu);
+      } else {
+        set({ Pregunta: 'Modalidad' }, 0, ['pregunta-modalidad']);
+        apunta('Duda resuelta por escrito', 'modalidad · solo con la información oficial que cargue INSPEU', 'g');
+        bot(['Modalidad: [a tu ritmo / sesiones en vivo], con [horas por semana]. Si aún no está cargada, te la confirma Andrea por aquí mañana.',
+             '¿Quieres matricularte ya?'], menu);
+      }
     },
     llamada: function () {
+      set({ 'Objeción': fields['Objeción'] || 'Quiere hablarlo con una persona' });
+      apunta('Pide hablar con una persona', 'la llamada es la excepción: solo para dudas de verdad o si la pide', 'h');
       bot(['Claro. ¿A qué hora te viene mejor mañana miércoles? Te propongo dos horarios, ya en hora de Lima:'],
         function () { choices([['A las 10:00', 'cita', '10:00'], ['A las 16:00', 'cita', '16:00']]); });
       apunta('Huecos libres de la agenda de Andrea', 'mostrados en hora de Lima · dentro del horario del equipo');
     },
     cita: function (h) {
-      set({ 'Siguiente paso': 'Llamada de Andrea · miércoles ' + h + ' (Lima)' }, 15, ['llamada-agendada']);
+      set({ 'Siguiente paso': 'Llamada de Andrea · miércoles ' + h + ' (Lima)' }, 15, ['llamada-agendada'], 'llamada');
       apunta('Llamada agendada: miércoles ' + h + ' (Lima) con Andrea', '+15 · puntuación ' + score + ' · recordatorio por WhatsApp 1 h antes, hora de Lima', 'g');
-      apunta('Aviso a Andrea', 'Rosa M. · ' + score + ' · Educación Inclusiva · ' + (fields.Docente || '') + '\nresumen, conversación y preguntas sin dato oficial en la ficha', 'g');
+      apunta('Aviso a Andrea', 'Rosa M. · ' + score + ' · ya sabe precio y cómo pagar · su duda en la ficha\nal colgar: [datos de pago] por WhatsApp desde la ficha', 'g');
       bot(['Hecho: mañana miércoles a las ' + h + ' (hora de Lima) te llama Andrea, de INSPEU. Te aviso por aquí un rato antes.',
-           'Si te surge algo, contéstame y lo cambiamos. ¡Buenas noches, Rosa!'], fin);
+           'Y si antes lo tienes claro, te puedes matricular por aquí cuando quieras. ¡Buenas noches, Rosa!'], fin);
     },
-    precio: function () {
-      used.precio = true;
-      set({ Pregunta: 'Precio y cuotas' }, 5, ['pide-precio']);
-      apunta('Pide precio y cuotas', '+5 · Lucía no tiene el precio cargado: no lo inventa', 'h');
-      bot(['Buena pregunta. El precio y las formas de pago te los confirma Andrea, del equipo: prefiero no darte un dato que no sea exacto.',
-           'Te manda por aquí tu presupuesto, con las formas de pago, mañana antes de las 12:00 (hora de Lima). ¿Te parece bien?'],
-        function () { choices([['Sí, perfecto', 'presu'], ['Prefiero que me llame', 'llamada']]); });
-    },
-    presu: function () {
-      set({ 'Siguiente paso': 'Presupuesto de Andrea · antes de las 12:00 (Lima)' }, 0, ['presupuesto']);
-      apunta('Tarea para Andrea: presupuesto', 'hora límite: miércoles 12:00 de Lima (19:00 en Madrid) · aviso si a las 11:30 no ha salido', 'h');
-      apunta('Seguimiento C activado', '¿te llegó? · ¿qué te parece? · llamada si lo abre y no contesta', 'g');
-      bot(['Perfecto. Mañana antes de las 12:00 lo tienes aquí.', 'Mientras, si quieres preguntarme algo más, dime.'], menu);
+    pago: function () {
+      used.pago = true;
+      set({ Pregunta: 'Cómo se paga' }, 5, ['pregunta-pago']);
+      apunta('Pregunta cómo se paga', '+5 · respuesta con lo cargado: 100 € y pago desde el móvil', 'g');
+      bot(['Son 100 €. Lo pagas desde el móvil, con la app de pagos que ya usas en Perú: te paso los datos, pagas, me mandas la captura y te envío el acceso.',
+           '¿Te paso los datos y te matriculas ya?'],
+        function () { choices([['Sí, pásamelos', 'ya'], ['Antes tengo una duda', 'dudas'], ['Ahora no', 'menu']]); });
     },
     fecha: function () {
       used.fecha = true;
       set({ Pregunta: (fields.Pregunta ? fields.Pregunta + ' · ' : '') + 'Fecha de inicio' }, 0, ['pide-fecha']);
-      apunta('Pregunta sin dato oficial: fecha de inicio', 'Lucía no la inventa · pasa a Andrea', 'h');
-      bot(['La fecha de inicio del próximo grupo te la confirma Andrea: no quiero decirte una que no sea la buena.',
-           'Se la dejo apuntada para que te la mande por aquí. ¿Algo más?'], menu);
+      apunta('Pregunta sin dato oficial: fecha de inicio', 'Lucía no la inventa · pasa a Andrea, que contesta por WhatsApp', 'h');
+      bot(['La fecha de inicio del próximo grupo te la confirma Andrea por aquí: no quiero decirte una que no sea la buena.',
+           '¿Algo más?'], menu);
     },
     piensa: function () {
       used.piensa = true;
@@ -803,13 +875,13 @@ footer p b{color:var(--ink)}
       apunta('Duda: ' + v, 'se guarda para Andrea y para el seguimiento B', 'h');
       var m = {
         tiempo: 'Te entiendo: das clase y corriges en casa. Es online; cuántas horas por semana pide y si es a tu ritmo o con sesiones en vivo te lo confirma Andrea, para no decirte algo que no sea exacto.',
-        precio: 'Te entiendo. Andrea te puede preparar un presupuesto con las formas de pago para Perú, sin compromiso.',
+        precio: 'Te entiendo. Son 100 € y lo pagas desde el móvil, sin trámites. Si te viene mejor pagarlo de otra forma, Andrea te dice por aquí qué opciones hay.',
         aula: 'Mira el temario con calma. Si me cuentas qué situación tienes en tu aula, se lo paso a Andrea para que te diga qué parte te sirve más.'
       }[v];
       bot([m, 'Te escribo en un par de días, ya de día en Lima, por si te ha surgido alguna duda. Y si prefieres que no te escriba, dímelo sin problema.'],
         function () {
           set({ 'Siguiente paso': 'Seguimiento B · mañana 19:00 (Lima)' });
-          apunta('Seguimiento B («me lo pienso») activado', 'día 1 su duda · día 3 su nivel · día 5 presupuesto · todo entre 8:00 y 21:30 de Lima', 'g');
+          apunta('Seguimiento B («me lo pienso») activado', 'día 1 su duda · día 3 su nivel · día 5 datos de pago · todo entre 8:00 y 21:30 de Lima', 'g');
           fin();
         });
     },
@@ -821,8 +893,8 @@ footer p b{color:var(--ink)}
     enero: function (f) {
       set({ 'Cuándo': f.indexOf('enero') > 0 ? 'Enero' : 'Febrero', 'Siguiente paso': 'Recordatorio: ' + f }, 0, ['mas-adelante'], 'luego');
       apunta('Guardado: más adelante', 'recordatorio el ' + f + ' · no pasa a Andrea ahora', 'g');
-      apunta('Seguimiento E activado', 'un único WhatsApp a mediados de diciembre · después, en la fecha elegida');
-      bot(['Apuntado. Te escribo entonces con las fechas y condiciones que estén publicadas.',
+      apunta('Seguimiento F activado', 'un único WhatsApp a mediados de diciembre · después, en la fecha elegida');
+      bot(['Apuntado. Te escribo entonces con las fechas que estén publicadas.',
            'Hasta entonces no te molesto. Si te surge cualquier duda antes, escríbeme por aquí.'], fin);
     }
   };
