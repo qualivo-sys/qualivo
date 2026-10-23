@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>INSPEU · demo del sistema</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="deck.css">
+<style>
+/* Demo guiada en pestañas para INSPEU: hoy y la solicitud, WhatsApp al minuto con Lucía, ficha de la asesora, seguimientos A-E y panel.
+   Estructura común a las demos de Qualivo; colores de INSPEU (../index.html) en deck.css. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#B87708;--real:#1F6F4A;--ph:#8A5A00;--ph-soft:#FFF4DC}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ph:#F2C467;--ph-soft:#33280F}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ph:#F2C467;--ph-soft:#33280F}
+/* barra superior: marca en texto */
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+/* cabecera */
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 88% 18%,rgba(159,216,184,.22),transparent 42%),linear-gradient(135deg,#0A1F16 0%,#0E2A1E 55%,#17442F 100%)}
+.dhero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,#000 60%)}
+.dhero .deco{position:absolute;right:5%;top:70px;width:280px;height:auto;opacity:.45;z-index:-1;pointer-events:none}
+@media (max-width:1180px){.dhero .deco{width:220px;right:2%}}
+.dhero .wrap{padding-block:56px 44px;display:grid;gap:12px}
+.dhero .eyebrow{color:var(--moss)}
+.dhero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 60;font-size:clamp(32px,4.8vw,54px);line-height:1.06;letter-spacing:-.02em;max-width:21ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:70ch;margin-top:6px}
+.dhero .lead q{font-style:italic}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;max-width:980px}
+.legend > div{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:13px 15px;background:rgba(255,255,255,.05);font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+.legend b{color:#fff}
+.legend .real,.legend .ej{margin-bottom:6px}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 60;font-size:clamp(25px,3vw,34px);line-height:1.14;letter-spacing:-.015em}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.55}
+.note a{color:var(--accent)}
+.ej,.real{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px;line-height:1.5}
+.ej{background:var(--ej)}
+.real{background:var(--real)}
+h2 .ej,h2 .real{vertical-align:6px;margin-left:6px}
+.rv{display:grid;gap:6px;font-size:13.5px;color:var(--muted);border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 13px;line-height:1.55;max-width:920px}
+/* pestañas */
+nav.tabs{position:sticky;top:64px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-26px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 9px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(14,42,30,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--muted);max-width:78ch;font-size:16.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);line-height:1.55}
+.why b{color:var(--ink)}
+.stackc{display:grid;gap:16px;min-width:0}
+/* 1 · anuncio */
+.ig{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);width:min(420px,100%);margin-inline:auto}
+.ig .h{display:flex;gap:10px;align-items:center;padding:10px 12px;font-size:13.5px;line-height:1.3}
+.ig .h small{display:block;color:var(--muted);font-size:12px}
+.av{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#17442F,#1F6F4A);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.02em;flex:none}
+.ig .vis{position:relative;aspect-ratio:1/1;background:radial-gradient(circle at 80% 15%,rgba(159,216,184,.3),transparent 45%),linear-gradient(150deg,#0E2A1E,#1F6F4A);color:#fff;padding:24px;display:grid;align-content:space-between;overflow:hidden}
+.ig .vis svg.house{position:absolute;right:-18px;bottom:-10px;width:58%;opacity:.16}
+.ig .vis .k1{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss)}
+.ig .vis .t1{font-family:var(--serif);font-weight:600;font-size:clamp(22px,2.4vw,26px);line-height:1.12;letter-spacing:-.01em;max-width:17ch;margin-top:8px}
+.ig .vis ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px;max-width:24ch}
+.ig .vis li::before{content:"✓ ";color:var(--moss);font-weight:700}
+.ig .vis .price{display:inline-block;background:#fff;color:#0E2A1E;border-radius:10px;padding:6px 11px;font-weight:700;font-size:15px;width:fit-content}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;background:var(--accent-soft);font-weight:650;font-size:14px;color:var(--accent)}
+.ig .txt{padding:10px 12px 14px;font-size:14px;line-height:1.5}
+.ig .txt b{font-weight:650}
+.frm{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:14px;box-shadow:var(--shadow)}
+.frm h3{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.fq{display:grid;gap:6px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.fq:last-of-type{border-bottom:0;padding-bottom:0}
+.fq label{font-weight:650;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{border:1px solid var(--line);border-radius:99px;padding:4px 11px;font-size:13px;color:var(--muted);background:var(--paper)}
+.chips span.on{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:600}
+.fq .y{font-size:13px;color:var(--muted);line-height:1.5}
+.fq .y b{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper)}
+.consent{font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.consent i{flex:none;width:16px;height:16px;border-radius:4px;background:var(--accent);margin-top:2px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:11px}
+.sendbtn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:650;border-radius:99px;padding:10px 18px;font-size:15px;width:fit-content}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* 2 · WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0B111B;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #26303f,0 30px 60px -20px rgba(14,42,30,.55),inset 0 0 0 2px #222b38;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:640px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:86%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out;color:var(--ink)}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:7px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out;text-align:left}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.wa .opts button.restart:hover{background:var(--line-2);color:var(--ink)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0 2px 0 0;list-style:none;display:grid;gap:8px;align-content:start;max-height:330px;overflow-y:auto;scroll-behavior:smooth}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:var(--ej)}
+.log li.g{border-left-color:var(--good)}
+.live{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:12px}
+.live .sc{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.live .sc b.n{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;min-width:2ch}
+.meter{flex:1 1 120px;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.meter span{display:block;height:100%;width:0;background:var(--accent);border-radius:0 4px 4px 0;transition:width .5s}
+.live dl{display:grid;grid-template-columns:minmax(92px,auto) minmax(0,1fr);gap:5px 12px;margin:0;font-size:13.5px}
+.live dt{color:var(--muted);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.live dd{margin:0;font-weight:550;border-radius:5px;padding:0 4px;margin-left:-4px}
+.live dd.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%{background:var(--accent-soft)}70%{background:var(--accent-soft)}100%{background:transparent}}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:11px;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 8px;animation:pop .3s ease-out}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:13.5px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+/* 3 · ficha */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#DDE3EC;flex:none}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--ej);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.winbody > *{min-width:0}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd > div:first-child{flex:1 1 280px}
+.ficha .hd b{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.ficha .scn{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .yes{color:var(--good)}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
+.chk li{display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+.chk li .i{color:var(--accent);margin-top:3px;width:17px;height:17px}
+/* 4 · seguimientos */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:var(--ej)}
+.tl li.voice::before{background:#7A8A6E}
+.tl li.call::before{background:var(--f700);box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--accent)}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+.tl .muted{font-size:13px}
+.legtl{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.legtl span{display:inline-flex;align-items:center;gap:6px}
+.legtl i{width:11px;height:11px;border-radius:50%;display:inline-block}
+/* 5 · panel */
+.tbl{overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap;vertical-align:middle}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl td.w{white-space:normal;min-width:200px}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl tfoot td{border-top:1px solid var(--line);border-bottom:0;font-weight:700}
+.tbl td.hl{font-weight:700;color:var(--accent)}
+.hb{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.hb i{display:block;height:10px;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:var(--ej);background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+.kb{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.kb > div{background:var(--surface-2);border:1px solid var(--line-2);border-radius:12px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.kb h4{font-size:12.5px;font-weight:650;display:flex;justify-content:space-between;gap:6px;color:var(--ink-2)}
+.kb h4 em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.kb p{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:12.5px;line-height:1.4}
+.kb p b{display:block;font-size:13px}
+.kb p span{color:var(--muted)}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.flinks{display:flex;flex-wrap:wrap;gap:8px}
+.flinks .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.flinks .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.seq,.two{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.kb{grid-template-columns:repeat(3,minmax(0,1fr))}.dhero .deco{display:none}}
+@media (max-width:640px){.legend{grid-template-columns:1fr}}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:580px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:32px}.dhero .wrap{padding-block:40px 44px}.kb{grid-template-columns:1fr 1fr}.seq > div{padding:16px}.tbl table{min-width:540px;font-size:13.5px}.tbl td:first-child{white-space:normal;min-width:118px;max-width:132px;box-shadow:1px 0 0 var(--line-2)}.tbl th,.tbl td{padding:9px 8px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.dhero::after{display:none}}
+/* añadidos INSPEU */
+.ph{background:var(--ph-soft);color:var(--ph);border-radius:5px;padding:0 4px;font-weight:600;-webkit-box-decoration-break:clone;box-decoration-break:clone;overflow-wrap:anywhere}
+.dhero .ph{background:rgba(242,196,103,.18);color:#F2D18A}
+.ig .vis .price{font-size:13.5px;line-height:1.3;max-width:100%}
+.minichat{background:var(--wa-bg);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.minichat .b{animation:none}
+.tbl table.tz{min-width:0}
+.tbl table.tz th,.tbl table.tz td{white-space:normal}
+.seq > div.hot{border-color:var(--ej);box-shadow:0 0 0 1px var(--ej),var(--shadow)}
+.rv a{color:var(--accent)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol></svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="cl">INSPEU</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a><a href="./" aria-current="page">Demo</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<svg class="deco" viewBox="0 0 300 220" fill="none" stroke="#9FD8B8" stroke-width="1.5" aria-hidden="true"><circle cx="150" cy="110" r="96"/><ellipse cx="150" cy="110" rx="42" ry="96"/><path d="M54 110h192M66 62h168M66 158h168"/><circle cx="118" cy="128" r="5" fill="#9FD8B8"/><circle cx="196" cy="74" r="5" fill="#9FD8B8"/><path d="M118 128C140 70 170 64 196 74" stroke-dasharray="4 5"/></svg>
+<div class="wrap">
+  <p class="eyebrow">Demo del sistema · INSPEU · paso a paso</p>
+  <h1>Del primer mensaje a la matrícula, en la hora de cada alumna</h1>
+  <p class="lead">Nos contasteis que os llegan entre 50 y 100 solicitudes al mes, que invertís menos de 500 € al mes en anuncios y que lo que se escapa está <q>en el seguimiento y los presupuestos</q>. Aquí ves lo que haría el sistema cada día con una alumna inventada: Rosa, docente de primaria en Lima. Un martes a las 22:30, hora de Lima (las 5:30 del miércoles en Madrid), escribe por WhatsApp desde un anuncio para pedir el temario del curso de Educación Inclusiva.</p>
+  <div class="legend">
+    <div><span class="real">Real</span><br><b>Tomado de lo que vimos y nos contasteis:</b> INSPEU · Instituto Peruano Europeo, el curso «Educación Inclusiva y Atención a la Diversidad», online y con alumnado en Perú, España y Latinoamérica; la respuesta que da hoy vuestro WhatsApp (pide agendar una llamada antes de dar temario, fechas o precio, y no hay segundo mensaje si no contestas); 50-100 solicitudes al mes, menos de 500 € al mes en anuncios y la fuga en el seguimiento y los presupuestos.</div>
+    <div><span class="ej">Inventado</span><br><b>Para la demo:</b> Rosa, Lucía (la asistente), Andrea (la asesora), los anuncios, todos los mensajes, los horarios, las puntuaciones y las cifras del panel. No tenemos vuestro precio, fechas, horas, modalidad ni certificado: van <span class="ph">[entre corchetes]</span> y, mientras no los carguéis, Lucía dice que los confirma una persona del equipo. Nunca se los inventa.</div>
+  </div>
+</div>
+</header>
+
+<div class="wrap main">
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-hoy" aria-controls="p-hoy" data-p="hoy"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Hoy y la solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp al minuto</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha de la asesora</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+</nav>
+
+<!-- 1 · HOY Y LA SOLICITUD -->
+<section class="pane" id="p-hoy" role="tabpanel" aria-labelledby="t-hoy">
+  <header>
+    <h2>1 · Lo que pasa hoy y lo que pasaría con el sistema <span class="real">Real</span><span class="ej">Ejemplo</span></h2>
+    <p>Rosa ve un anuncio a las 22:30 y pulsa «Enviar mensaje». WhatsApp se abre con el texto ya escrito. A la izquierda, lo que recibe hoy quien os escribe. A la derecha, lo que pasa con el sistema.</p>
+    <p class="rv"><span><span class="real">Real</span> la respuesta que da hoy vuestro WhatsApp (resumida, sin el nombre de quien la firma) y que no llega un segundo mensaje si no se contesta.</span><span><span class="ej">Inventado</span> el anuncio (es el ángulo A de la página de <a href="../anuncios/">anuncios de ejemplo</a>), Rosa y todo lo que pasa en la columna de la derecha.</span></p>
+  </header>
+  <div class="two">
+    <div class="stackc">
+      <div class="ig" aria-label="Ejemplo de anuncio en Instagram">
+        <div class="h"><span class="av" aria-hidden="true">IN</span><div><b>inspeu</b><small>Publicidad · ejemplo</small></div></div>
+        <div class="vis">
+          <svg class="house" viewBox="0 0 200 180" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><rect x="20" y="30" width="160" height="100" rx="6"/><path d="M40 60h70M40 80h110M40 100h90M100 130v30M60 160h80"/></svg>
+          <div><p class="k1">Curso online para docentes</p><p class="t1">Tu aula ya es diversa. Aprende a atender a cada alumno</p></div>
+          <ul><li>Ritmos distintos</li><li>Necesidades educativas</li><li>Adaptar tu clase</li></ul>
+          <span class="price">Educación Inclusiva y Atención a la Diversidad</span>
+        </div>
+        <div class="cta"><span>Enviar mensaje por WhatsApp</span><span aria-hidden="true">›</span></div>
+        <div class="txt"><b>inspeu</b> ¿Tienes en tu salón alumnos que aprenden a ritmos muy distintos? Escríbenos y te enviamos el temario al momento. <span class="muted">Mensaje ya escrito: «Hola, quiero el temario del curso de Educación Inclusiva.»</span></div>
+      </div>
+      <div class="box">
+        <p class="cap" style="margin:0"><span class="real">Real</span> Lo que recibe hoy (resumen)</p>
+        <div class="minichat">
+          <div class="b out">Hola, me interesa el curso. ¿Me dais información?</div>
+          <div class="b in">Buen día, mi nombre es [nombre] y me comunico desde INSPEU - Instituto Peruano Europeo. Gracias por su interés en capacitarse en Educación Inclusiva y Atención a la Diversidad. ¿Me puede decir por esta misma vía en qué momento podemos agendar una llamada telefónica? Quedo atento.</div>
+          <div class="b sys">Si no contesta: no hay segundo mensaje</div>
+        </div>
+        <ul class="chk">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Le pide a ella que proponga la hora de una llamada, sin darle antes temario, fechas ni precio.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Es el mismo texto para todas: no sabe si es docente, de qué país es ni qué le preocupa.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Si no contesta, ahí se acaba. Y si pide precio, el presupuesto depende de que alguien se acuerde de mandarlo y de volver a preguntar.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stackc">
+      <div class="list">
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">22:30 en Lima: contesta Lucía en menos de un minuto</h3><p>Rosa ha escrito ella, así que se le responde al momento, aunque sea de noche. Lucía le manda el temario, le hace dos preguntas cortas (si da clase y en qué nivel) y le ofrece dos horarios concretos para hablar con Andrea, ya en hora de Lima.</p></div>
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">El prefijo +51 dice dónde está</h3><p>Se crea su ficha con el país (Perú) y su zona horaria (Lima). Todo lo que el sistema envíe por iniciativa propia saldrá entre las 8:00 y las 21:30 de Lima, no de Madrid. A una alumna de Madrid se le escribe en hora de Madrid; a una de Ciudad de México, en la suya.</p></div>
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">Si pide precio, el presupuesto tiene dueña y fecha</h3><p>Lucía no se inventa precios ni fechas: crea una tarea para Andrea con hora límite, y el sistema comprueba que el presupuesto ha salido, que Rosa lo ha abierto y que alguien le pregunta qué le ha parecido.</p></div>
+        <div><span class="ej">Ejemplo</span><h3 style="margin-top:6px">Si no contesta, hay seguimiento</h3><p>Mensajes cortos y útiles durante una semana, siempre en su hora local. En cuanto responde, se para la secuencia y sigue la conversación.</p></div>
+      </div>
+      <div class="box">
+        <p class="cap" style="margin:0"><span class="ej">Ejemplo</span> Un mismo mensaje, a las 9:30 de cada alumna</p>
+        <div class="tbl"><table class="tz">
+          <thead><tr><th>Alumna en</th><th>Sale a su hora</th><th>Esa misma hora en Madrid</th></tr></thead>
+          <tbody>
+            <tr><td>Lima (Perú)</td><td>9:30</td><td>16:30</td></tr>
+            <tr><td>Ciudad de México</td><td>9:30</td><td>17:30</td></tr>
+            <tr><td>Buenos Aires</td><td>9:30</td><td>14:30</td></tr>
+            <tr><td>Madrid</td><td>9:30</td><td>9:30</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Diferencias de esta semana (España aún en horario de verano). El sistema las recalcula solo cuando cambia la hora; el 25 de octubre, Lima pasa a estar 6 horas por detrás de Madrid.</p>
+      </div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header>
+    <h2>2 · WhatsApp al minuto <span class="ej">Ejemplo</span></h2>
+    <p>Lucía, la asistente de INSPEU, contesta a Rosa en menos de un minuto, aunque en Lima sean las 22:30. Da primero lo útil, pregunta lo justo y, cuando no tiene un dato, lo dice y se lo pasa a Andrea. Elige las respuestas de Rosa y prueba los distintos caminos. Junto al teléfono, lo que pasa por detrás.</p>
+    <p class="rv"><span><span class="real">Real</span> el nombre del curso, que es online y que se puede seguir desde cualquier país.</span><span><span class="ej">Inventado</span> Lucía, Andrea, Rosa, todos los mensajes, los huecos de agenda y los puntos. Lo que va <span class="ph">[entre corchetes]</span> lo rellena INSPEU con sus datos reales.</span></p>
+  </header>
+  <div class="two">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>22:31</b><span class="isl"></span><span>4G</span></div>
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><span class="av" aria-hidden="true">IN</span><div><b>INSPEU</b><small>Lucía, asistente de INSPEU · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="home" aria-hidden="true"></div></div>
+    <div class="log">
+      <h3>Lo que pasa por detrás</h3>
+      <div class="live" aria-live="polite">
+        <div class="sc"><b class="n" id="lv-n">20</b><div class="meter" aria-hidden="true"><span id="lv-bar"></span></div><span class="grp c" id="lv-g">C · por cualificar</span></div>
+        <dl id="lv-f"></dl>
+        <div class="tags" id="lv-t"></div>
+      </div>
+      <p class="cap" style="margin:4px 0 0">Registro · ejemplo</p>
+      <ol id="log"></ol>
+    </div>
+  </div>
+  <p class="note">Lucía solo cuenta lo que INSPEU haya cargado como información oficial del curso. Precio, formas de pago, fechas, horas, modalidad, certificado o descuentos: si no están cargados, los confirma una persona del equipo. Andrea ve cada conversación y puede entrar cuando quiera: en cuanto escribe, Lucía se calla con esa persona. Lucía contesta al momento a quien acaba de escribir; los mensajes que salen por iniciativa propia (seguimientos), solo de 8:00 a 21:30 en la hora local de cada alumna.</p>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha de la asesora <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · FICHA -->
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header>
+    <h2>3 · Lo que ve la asesora antes de llamar <span class="ej">Ejemplo</span></h2>
+    <p>Miércoles, 9:55 en Lima. Andrea va a llamar a Rosa a las 10:00 (hora de Lima) y no empieza de cero: tiene un resumen, la puntuación con sus motivos, lo que Lucía no ha podido contestar y el siguiente paso. Aquí Rosa dijo que quería matricularse, preguntó por el precio y las cuotas, y eligió la llamada.</p>
+    <p class="rv"><span><span class="real">Real</span> el curso y que es online.</span><span><span class="ej">Inventado</span> Rosa, Andrea, la puntuación y sus pesos, la conversación. Precio, fechas y certificado siguen <span class="ph">[entre corchetes]</span>.</span></p>
+  </header>
+  <div class="two">
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Contactos › Rosa M. · ficha</span><em>Ejemplo</em></div>
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Rosa M. · docente de primaria · Lima (Perú)</b><p class="muted" style="font-size:14px">Entró por: anuncio de Instagram «Tu aula ya es diversa» → WhatsApp con mensaje escrito (martes 22:30, hora de Lima) → conversación con Lucía (22:30-22:38)</p></div><div style="text-align:right"><span class="scn">80</span><br><span class="grp a">A · llamar hoy</span></div></div>
+      <div class="grid">
+        <div><dl><dt>Curso</dt><dd>Educación Inclusiva y Atención a la Diversidad</dd></dl></div>
+        <div><dl><dt>País y hora</dt><dd>Perú · hora de Lima (UTC−5) · 7 h menos que Madrid esta semana</dd></dl></div>
+        <div><dl><dt>Perfil</dt><dd>Docente en activo · primaria · colegio público</dd></dl></div>
+        <div><dl><dt>Quiere</dt><dd>Atender mejor a 2 alumnos con necesidades distintas en su aula</dd></dl></div>
+        <div><dl><dt>Cuándo</dt><dd>Próximo grupo</dd></dl></div>
+        <div><dl><dt>Ha preguntado</dt><dd>Precio y si se puede pagar en cuotas</dd></dl></div>
+        <div><dl><dt>Le preocupa</dt><dd>Compaginarlo con dar clase</dd></dl></div>
+        <div><dl><dt>Ha visto</dt><dd>Temario (lo abrió 2 veces)</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd class="yes">Miércoles 10:00, hora de Lima · confirmada por WhatsApp</dd></dl></div>
+      </div>
+      <div class="why2"><b>Resumen:</b> Docente de primaria en un colegio público de Lima. Tiene en su aula dos alumnos con necesidades distintas y quiere herramientas prácticas. Quiere entrar en el próximo grupo. Ha preguntado el precio y si hay cuotas: Lucía le dijo que se lo confirma Andrea. Le preocupa el tiempo, porque da clase por la mañana y corrige por la tarde.</div>
+      <div class="next">Siguiente paso: llamar a las 10:00 (hora de Lima) · confirmar <span class="ph">[precio]</span>, <span class="ph">[formas de pago]</span>, <span class="ph">[fecha de inicio]</span> y <span class="ph">[modalidad y horas]</span> · al colgar, enviar el presupuesto por WhatsApp desde la ficha (queda registrado y empieza el seguimiento C) · si quiere matricularse ya, enviar el <span class="ph">[enlace de matrícula]</span>.</div>
+    </div></div>
+    <div class="stackc">
+      <div class="box" style="box-shadow:var(--shadow)">
+        <h3>Por qué tiene 80</h3>
+        <table class="pts">
+          <tr><td>Pide un curso concreto (mensaje del anuncio)</td><td>10</td></tr>
+          <tr><td>Escribe ella, desde un anuncio</td><td>10</td></tr>
+          <tr><td>Docente en activo</td><td>15</td></tr>
+          <tr><td>Contesta a Lucía en menos de 5 minutos</td><td>10</td></tr>
+          <tr><td>Quiere matricularse en el próximo grupo</td><td>15</td></tr>
+          <tr><td>Pregunta por precio y cuotas</td><td>5</td></tr>
+          <tr><td>Pide la llamada con Andrea</td><td>15</td></tr>
+          <tr><td><b>Total</b></td><td>80</td></tr>
+        </table>
+        <p class="note">Pesos de ejemplo. Los decidís vosotros y se revisan cada mes con las matrículas reales. 70 o más: llamada de Andrea el mismo día, en el horario del equipo y en una hora que también sea razonable para la alumna. De 50 a 69: sigue Lucía y Andrea entra si contesta. Menos de 50: solo seguimientos.</p>
+      </div>
+      <div class="box">
+        <h3>Lo que Lucía no ha dicho y confirma Andrea</h3>
+        <ul class="chk">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>El precio en su moneda y las formas de pago (si hay cuotas y cuántas).</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>La fecha de inicio del próximo grupo y hasta cuándo se puede entrar.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Las horas, la modalidad (a su ritmo o con sesiones en vivo) y el certificado.</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier descuento o condición que no esté cargada como oficial.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header>
+    <h2>4 · Seguimientos: nadie se queda sin respuesta <span class="ej">Ejemplo</span></h2>
+    <p>Salen solos y siempre entre las 8:00 y las 21:30 de la hora local de cada alumna. Las horas de abajo son las de Rosa, en Lima. Cualquier respuesta para la secuencia y la pasa a quien corresponda. Cada texto lo aprobáis antes.</p>
+    <p class="rv"><span><span class="real">Real</span> el curso, que es online y que hoy no hay segundo mensaje ni seguimiento del presupuesto.</span><span><span class="ej">Inventado</span> todos los textos, los días y las horas de envío, Rosa y Andrea. Lo que va <span class="ph">[entre corchetes]</span> lo pone INSPEU.</span></p>
+    <div class="legtl"><span><i style="background:var(--accent)"></i>WhatsApp</span><span><i style="background:#7A8A6E"></i>Llamada del agente de voz</span><span><i style="background:var(--f700)"></i>Llamada de una persona</span><span><i style="background:var(--ej)"></i>Aviso o tarea para Andrea</span><span><i style="background:var(--good)"></i>Fin o cambio de camino</span></div>
+  </header>
+  <div class="seq">
+    <div>
+      <h3>A · No contesta</h3>
+      <p>Escribió por el anuncio, recibió el temario y no responde a Lucía.</p>
+      <ol class="tl">
+        <li><span class="w">Martes 22:30 · al momento (respuesta a su mensaje)</span><b>Primer mensaje de Lucía</b><blockquote>¡Hola! Soy Lucía, la asistente de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad: [enlace al temario]. Para orientarte bien: ¿das clase ahora mismo?</blockquote></li>
+        <li><span class="w">Miércoles 9:30 (Lima) · WhatsApp</span><b>Una sola pregunta, con botones</b><blockquote>¡Buenos días! ¿Pudiste ver el temario? Para contarte lo que te sirve: ¿en qué nivel enseñas?
+[Inicial] [Primaria] [Secundaria] [Ahora no doy clase]</blockquote></li>
+        <li><span class="w">Jueves 18:30 · WhatsApp</span><b>La duda más habitual</b><blockquote>Lo que más nos preguntan las docentes es cómo compaginarlo con dar clase. ¿Te lo explica Andrea en 10 minutos?
+[Mañana 10:00] [Mañana 16:00] [Mejor por escrito]</blockquote></li>
+        <li class="voice"><span class="w">Viernes 17:00 · llamada corta del agente de voz (opcional)</span><b>Como en el audio del plan</b> <span class="muted">Recuerda lo que pidió, hace dos preguntas y deja agendada la llamada con Andrea.</span></li>
+        <li><span class="w">Sábado 11:00 · WhatsApp</span><b>Una experiencia real</b><blockquote>Te comparto lo que cuenta una docente que ya hizo el curso: [testimonio real, con su permiso]. Si quieres, te cuento cómo es el próximo grupo.</blockquote></li>
+        <li class="alert"><span class="w">Domingo · aviso a Andrea</span><b>Solo si abrió el temario dos veces o volvió a escribir</b></li>
+        <li><span class="w">Martes siguiente, 19:00 · WhatsApp</span><b>¿Ahora o más adelante?</b><blockquote>No quiero insistirte. ¿Lo ves para el próximo grupo o lo dejamos para más adelante? Cualquiera de las dos está bien.
+[Para el próximo grupo] [Más adelante] [Ya no me interesa]</blockquote></li>
+        <li class="stop"><span class="w">Día 8</span><b>Pasa a «más adelante» (E) y deja de recibir mensajes de esta secuencia</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>B · «Me lo pienso»</h3>
+      <p>Le interesa, pero no decide en el chat. Se le manda lo que le ayuda a decidir según su duda, sin presión.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · WhatsApp</span><b>Sin prisa, y con su duda guardada</b><blockquote>Claro, Rosa, sin prisa. ¿Hay algo que te haga dudar? Así te mando solo lo que te sirva.
+[El tiempo] [El precio] [Si me sirve para mi aula]</blockquote></li>
+        <li><span class="w">Día 1, 19:00 · WhatsApp</span><b>Lo que responde a su duda</b><blockquote>(Si es el tiempo) Te cuento cómo se organiza: [modalidad y dedicación por semana, según INSPEU]. Muchas docentes lo avanzan por la noche o el fin de semana.</blockquote></li>
+        <li><span class="w">Día 3, 12:30 · WhatsApp</span><b>Para su aula</b><blockquote>Mira el módulo de [módulo del temario real que encaja con primaria]: es lo que más aplican las docentes de primaria al día siguiente.</blockquote></li>
+        <li><span class="w">Día 5, 19:30 · WhatsApp</span><b>Si el freno es el precio</b><blockquote>Si lo que te frena es el pago, Andrea te prepara un presupuesto con las formas de pago que tengamos para tu país. ¿Te lo mando?
+[Sí, mándamelo] [Ahora no]</blockquote></li>
+        <li class="alert"><span class="w">Día 6 · aviso a Andrea</span><b>Solo si abrió el temario otra vez o pidió presupuesto</b></li>
+        <li><span class="w">Día 9, 12:00 · WhatsApp</span><b>Último mensaje</b><blockquote>Rosa, ¿lo dejamos para más adelante? Cualquier respuesta está bien.
+[Sigo interesada] [Más adelante] [No me interesa]</blockquote></li>
+        <li class="stop"><span class="w">Fin</span><b>Sin respuesta, pasa a E. Si dice «no me interesa», no se le vuelve a escribir.</b></li>
+      </ol>
+    </div>
+
+    <div class="hot">
+      <h3>C · Pide precio o financiación</h3>
+      <p>Aquí es donde hoy se escapa: el presupuesto. Con el sistema tiene dueña, hora límite y seguimiento.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · WhatsApp</span><b>Lucía no inventa el precio</b><blockquote>Te lo confirma Andrea, del equipo, para no darte un dato equivocado. Te lo manda por aquí mañana antes de las 12:00 (hora de Lima), con las formas de pago. ¿Te parece?</blockquote></li>
+        <li class="alert"><span class="w">Al momento · tarea para Andrea</span><b>«Presupuesto para Rosa M. · antes de las 12:00 de Lima»</b><blockquote>Ficha con país, curso y lo que ha preguntado (cuotas). Si a las 11:30 no ha salido, aviso a Andrea y a quien coordine el equipo.</blockquote></li>
+        <li><span class="w">Miércoles 11:15 · WhatsApp de Andrea + PDF</span><b>El presupuesto, con plantilla</b><blockquote>Rosa, aquí tienes tu presupuesto del curso de Educación Inclusiva:
+• Inicio: [fecha de inicio]
+• Precio: [precio en su moneda]
+• Formas de pago: [cuotas o pago único]
+• Válido hasta: [fecha]
+[Quiero matricularme] [Tengo una duda]</blockquote></li>
+        <li><span class="w">Miércoles 19:00 · WhatsApp (si no lo ha abierto)</span><b>¿Le llegó?</b><blockquote>Rosa, ¿te llegó bien el presupuesto? Si tienes cualquier duda, me la dices por aquí.</blockquote></li>
+        <li><span class="w">Viernes 18:30 · WhatsApp</span><b>¿Qué te parece?</b><blockquote>¿Qué te pareció el presupuesto?
+[Me matriculo] [Lo comento en casa] [Me queda caro]</blockquote></li>
+        <li class="call"><span class="w">Lunes 10:00 (Lima) · llamada</span><b>Andrea llama</b> <span class="muted">solo si abrió el presupuesto y no ha contestado</span></li>
+        <li><span class="w">Día 10 · WhatsApp</span><b>Último aviso, solo con datos reales</b><blockquote>La matrícula del grupo que empieza el [fecha de inicio] cierra el [fecha de cierre]. ¿Te guardo plaza? (Solo si INSPEU tiene esa fecha; si no, no se envía.)</blockquote></li>
+        <li class="stop"><span class="w">Matrícula hecha</span><b>Se para todo y empieza D. Sin respuesta, pasa a E.</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>D · Matriculada</h3>
+      <p>Bienvenida, que entre a la plataforma, que termine, y después el siguiente curso, solo si encaja.</p>
+      <ol class="tl">
+        <li><span class="w">Al matricularse · WhatsApp</span><b>Bienvenida</b><blockquote>¡Bienvenida, Rosa! Ya estás matriculada en Educación Inclusiva y Atención a la Diversidad. Así entras a la plataforma: [instrucciones de acceso]. Empezamos el [fecha de inicio]. Cualquier problema, contéstame aquí.</blockquote></li>
+        <li><span class="w">Día 2, 18:00 · WhatsApp</span><b>¿Ha podido entrar?</b><blockquote>Rosa, ¿pudiste entrar a la plataforma sin problema?
+[Sí, todo bien] [Tengo un problema]</blockquote></li>
+        <li class="alert"><span class="w">Si no ha entrado en 5 días · aviso a Andrea</span><b>Antes de que se desanime</b></li>
+        <li><span class="w">Semana 2, 19:00 · WhatsApp</span><b>¿Qué tal va?</b><blockquote>¿Qué tal estos primeros días? Si algo no te queda claro, te pongo con [tutor o equipo docente].
+[Va bien] [Tengo una duda]</blockquote></li>
+        <li><span class="w">Al terminar · WhatsApp</span><b>Certificado y opinión</b><blockquote>¡Enhorabuena por terminar, Rosa! [Cómo se recibe el certificado, según INSPEU]. ¿Nos cuentas en dos líneas qué te ha servido en tu aula? Con tu permiso, ayuda a otras docentes a decidir.</blockquote></li>
+        <li><span class="w">30 días después · WhatsApp</span><b>El siguiente curso</b><blockquote>Rosa, por si quieres seguir: [siguiente curso de INSPEU que encaja con docentes de primaria]. ¿Te mando el temario?
+[Sí] [Ahora no]</blockquote></li>
+        <li class="stop"><span class="w">Fin</span><b>Si dice «ahora no», se le vuelve a ofrecer solo cuando abra un grupo nuevo de su interés</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>E · «Más adelante (enero)»</h3>
+      <p>Dice que en enero, cuando esté de vacaciones. No pasa a Andrea ahora: se guarda la fecha y se le escribe cuando dijo.</p>
+      <ol class="tl">
+        <li><span class="w">Al momento · en la conversación</span><b>Guardado</b><blockquote>Apuntado, Rosa. Te escribo la primera semana de enero con las fechas y condiciones que estén publicadas entonces. Hasta entonces no te molesto.</blockquote></li>
+        <li><span class="w">Mediados de diciembre · un único WhatsApp</span><b>Para tenerlo a mano</b><blockquote>Rosa, te dejo de nuevo el temario por si quieres mirarlo en vacaciones: [enlace al temario]. En enero te escribo como quedamos.</blockquote></li>
+        <li><span class="w">Lunes 4 de enero de 2027, 10:00 (Lima) · WhatsApp</span><b>Lo prometido</b><blockquote>Hola, Rosa. Me pediste que te escribiera a principios de enero por el curso de Educación Inclusiva. ¿Lo retomamos?
+[Sí, que me llame Andrea] [Mándame fechas y precio] [Más adelante]</blockquote></li>
+        <li class="alert"><span class="w">Jueves 7 de enero · aviso a Andrea</span><b>Solo si contestó o abrió el temario</b></li>
+        <li class="stop"><span class="w">Fin</span><b>Si dice que sí, vuelve a empezar con toda su ficha. Sin respuesta, un último mensaje a los 15 días y se cierra.</b></li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>Reglas para todas</h3>
+      <p>Lo que no cambia, sea cual sea el camino.</p>
+      <ul class="chk">
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Mensajes por iniciativa propia solo entre las 8:00 y las 21:30 de la hora local de cada alumna, según su prefijo y su país. A quien escribe, se le contesta al momento, a cualquier hora.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Las llamadas de Andrea, en el <span class="ph">[horario del equipo]</span> y a una hora razonable para la alumna. Los huecos se le ofrecen ya en su hora.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cualquier respuesta para la secuencia. Si Andrea escribe, el sistema se calla con esa persona.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Como mucho, un WhatsApp al día por persona. Quien pide que no le escribamos, no recibe nada más.</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Ni precios, ni fechas, ni plazas, ni descuentos que INSPEU no haya confirmado: eso siempre lo dice una persona.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header>
+    <h2>5 · El panel de cada lunes <span class="ej">Datos de ejemplo</span></h2>
+    <p>Una pantalla para ver la semana: de qué países llegan las solicitudes, cuánto se tarda en contestar, qué presupuestos están sin respuesta, cuántas matrículas hay y cuánto cuesta cada una por anuncio.</p>
+    <p class="rv"><span><span class="real">Real</span> solo el orden de magnitud: 50-100 solicitudes al mes y menos de 500 € al mes en anuncios.</span><span><span class="ej">Datos de ejemplo</span> todas las cifras de esta pestaña son inventadas para enseñar cómo se ve el panel, dentro de ese orden de magnitud. No son previsiones ni salen de vuestros datos. Sin vuestro precio no se calculan ingresos.</span></p>
+  </header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · semana del 19 al 25 de octubre</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="kpis">
+    <div class="kpi"><b>1 min</b><span>mediana hasta la primera respuesta, también de noche · datos de ejemplo</span></div>
+    <div class="kpi"><b>95 %</b><span>presupuestos enviados en menos de 24 h · datos de ejemplo</span></div>
+    <div class="kpi"><b>4</b><span>matrículas esta semana · datos de ejemplo</span></div>
+    <div class="kpi alert"><b>3</b><span>presupuestos abiertos sin respuesta más de 3 días · datos de ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Solicitudes por país · esta semana · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>País</th><th>Solicitudes</th><th>Fuera del horario del equipo</th><th>Primera respuesta (mediana)</th><th>Presupuestos</th><th>Matrículas</th></tr></thead>
+      <tbody>
+        <tr><td>Perú</td><td><span class="hb"><span>12</span><i style="width:96px"></i></span></td><td>5</td><td>1 min</td><td>8</td><td>3</td></tr>
+        <tr><td>España</td><td><span class="hb"><span>3</span><i style="width:24px"></i></span></td><td>1</td><td>1 min</td><td>2</td><td>1</td></tr>
+        <tr><td>México</td><td><span class="hb"><span>2</span><i style="width:16px"></i></span></td><td>1</td><td>1 min</td><td>2</td><td>0</td></tr>
+        <tr><td>Colombia</td><td><span class="hb"><span>2</span><i style="width:16px"></i></span></td><td>1</td><td>1 min</td><td>1</td><td>0</td></tr>
+        <tr><td>Otros países</td><td><span class="hb"><span>1</span><i style="width:8px"></i></span></td><td>0</td><td>1 min</td><td>1</td><td>0</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td>20</td><td>8</td><td>1 min</td><td>14</td><td>4</td></tr></tfoot>
+    </table></div>
+    <p class="note">«Fuera del horario del equipo»: solicitudes que hoy esperarían horas a la primera respuesta. Con el sistema se contestan al minuto, y el seguimiento sale en la hora local de cada alumna. Datos de ejemplo.</p>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Presupuestos · dónde se quedan · esta semana · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Paso</th><th>Personas</th><th class="l">Qué hace el sistema</th></tr></thead>
+      <tbody>
+        <tr><td>Piden precio</td><td>15</td><td class="l w">Tarea para Andrea con hora límite</td></tr>
+        <tr><td>Presupuesto enviado en 24 h</td><td>14</td><td class="l w">Aviso si alguno se pasa de la hora</td></tr>
+        <tr><td>Lo abren</td><td>12</td><td class="l w">Mensaje «¿te llegó bien?» a quien no lo abre</td></tr>
+        <tr><td>Responden</td><td>8</td><td class="l w">Llamada de Andrea a quien lo abrió y calla</td></tr>
+        <tr><td>Se matriculan</td><td class="hl">4</td><td class="l w">Empieza la bienvenida (D)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Por anuncio · esta semana · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Llamadas agendadas</th><th>Matrículas</th><th>Coste por matrícula</th></tr></thead>
+      <tbody>
+        <tr><td>A · El aula diversa</td><td>40 €</td><td>8</td><td>4</td><td>2</td><td class="hl">20 €</td></tr>
+        <tr><td>C · A tu ritmo</td><td>35 €</td><td>5</td><td>2</td><td>1</td><td class="hl">35 €</td></tr>
+        <tr><td>B · El certificado</td><td>20 €</td><td>3</td><td>1</td><td>1</td><td class="hl">20 €</td></tr>
+        <tr><td>D · Guía gratuita</td><td>15 €</td><td>4</td><td>0</td><td>0</td><td class="hl">—</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total anuncios</td><td>110 €</td><td>20</td><td>7</td><td>4</td><td class="hl">27,50 €</td></tr></tfoot>
+    </table></div>
+    <p class="note">110 € a la semana son unos 470 € al mes, dentro de lo que invertís hoy. Los ángulos son los de la página de <a href="../anuncios/">anuncios de ejemplo</a>. En la versión real se rellena solo con cada conversación, llamada, presupuesto y matrícula, y el anuncio de cada persona viene del mensaje con el que entró. Todos los datos son de ejemplo.</p>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">A quién llamar hoy · Andrea · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Persona</th><th>Nota</th><th class="l">Su hora ahora</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Rosa M.</td><td>80 A</td><td class="l">9:55 · Lima</td><td class="l w">Llamada agendada a las 10:00 · pregunta por cuotas</td><td class="l w">Confirmar precio y fechas, y enviar el presupuesto al colgar</td></tr>
+        <tr><td>Carmen V.</td><td>74 A</td><td class="l">16:55 · Madrid</td><td class="l w">Abrió el presupuesto 3 veces y no contesta, hace 4 días</td><td class="l w">Llamada corta: ¿alguna duda con el pago?</td></tr>
+        <tr><td>Milagros T.</td><td>66 B</td><td class="l">9:55 · Lima</td><td class="l w">«Me lo pienso» hace 6 días · su duda es el tiempo</td><td class="l w">WhatsApp de Andrea, no llamada</td></tr>
+        <tr><td>Javier P.</td><td>71 A</td><td class="l">9:55 · Bogotá</td><td class="l w">Pidió presupuesto ayer a las 23:10 de su hora</td><td class="l w">Enviar el presupuesto antes de las 12:00 de Bogotá</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Dónde está cada persona · datos de ejemplo</p>
+    <div class="kb">
+      <div><h4>Nuevas <em>6</em></h4><p><b>Lucero G.</b><span>Arequipa · hace 5 min</span></p></div>
+      <div><h4>Con Lucía <em>9</em></h4><p><b>Diego A.</b><span>México · preguntando por la modalidad</span></p></div>
+      <div><h4>Llamada agendada <em>5</em></h4><p><b>Rosa M.</b><span>Mié 10:00 Lima · Andrea</span></p></div>
+      <div><h4>Presupuesto enviado <em>7</em></h4><p><b>Carmen V.</b><span>Madrid · abierto, sin respuesta</span></p></div>
+      <div><h4>Matriculadas <em>4</em></h4><p><b>Ana L.</b><span>Cusco · bienvenida enviada</span></p></div>
+      <div><h4>Más adelante <em>11</em></h4><p><b>Patricia S.</b><span>Enero · aviso guardado</span></p></div>
+    </div>
+  </div>
+  </div></div>
+  <div class="navnext"><a class="btnl" href="../">Volver al plan <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="flinks"><a class="btnl" href="../">Plan</a><a class="btnl" href="../anuncios/">Anuncios</a><a class="btnl" href="../landing/">Landing</a><a class="btnl" href="./">Demo</a></div>
+  <p><b>Maikel Echevarría · Qualivo · qualivo.io</b></p>
+  <p>Demo preparada por Qualivo el 23 de octubre de 2026 para INSPEU. No es una página de INSPEU.</p>
+  <p>El curso, que es online, y la respuesta actual de vuestro WhatsApp son reales; las cifras de solicitudes, inversión y dónde se escapa la gente son las que nos disteis. Personas, mensajes, puntuaciones y cifras del panel son de ejemplo. Precio, fechas, horas, modalidad y certificado van entre corchetes hasta que INSPEU los confirme.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['hoy', 'whatsapp', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'hoy';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    var at = document.getElementById('t-' + id), bar = at.parentNode;
+    bar.scrollLeft = at.offsetLeft - (bar.clientWidth - at.offsetWidth) / 2;
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // WhatsApp con Lucía
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var lvN = document.getElementById('lv-n'), lvBar = document.getElementById('lv-bar'), lvG = document.getElementById('lv-g'), lvF = document.getElementById('lv-f'), lvT = document.getElementById('lv-t');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hh, mm, score, fields, tagset, timers = [], used = {};
+  var ORDER = ['Curso', 'Canal', 'País', 'Hora local', 'Docente', 'Objetivo', 'Pregunta', 'Objeción', 'Cuándo', 'Siguiente paso'];
+
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function hora() { mm++; if (mm >= 60) { mm -= 60; hh = (hh + 1) % 24; } return hh + ':' + String(mm).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls; d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    var b = document.createElement('b'); b.textContent = txt; li.appendChild(b);
+    var s = document.createElement('span'); s.textContent = sub || ''; li.appendChild(s);
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function grupo(g) {
+    var cls, txt;
+    if (g === 'luego') { cls = 'c'; txt = 'Más adelante · fecha guardada'; }
+    else if (score >= 70) { cls = 'a'; txt = 'A · llamar hoy'; }
+    else if (score >= 50) { cls = 'b'; txt = 'B · sigue Lucía'; }
+    else { cls = 'c'; txt = 'C · por cualificar'; }
+    lvG.className = 'grp ' + cls; lvG.textContent = txt;
+  }
+  function render(changed) {
+    lvF.innerHTML = '';
+    ORDER.forEach(function (k) {
+      if (!(k in fields)) return;
+      var dt = document.createElement('dt'); dt.textContent = k;
+      var dd = document.createElement('dd'); dd.textContent = fields[k];
+      if (changed && changed.indexOf(k) >= 0) dd.className = 'flash';
+      lvF.appendChild(dt); lvF.appendChild(dd);
+    });
+    lvT.innerHTML = '';
+    tagset.forEach(function (t) { var s = document.createElement('span'); s.textContent = t; lvT.appendChild(s); });
+    lvN.textContent = score; lvBar.style.width = Math.min(score, 100) + '%';
+  }
+  function set(obj, pts, tags, g) {
+    var ch = Object.keys(obj || {});
+    ch.forEach(function (k) { fields[k] = obj[k]; });
+    if (pts) score += pts;
+    (tags || []).forEach(function (t) { if (tagset.indexOf(t) < 0) tagset.push(t); });
+    render(ch); grupo(g);
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      later(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, 800);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); later(function () { N[c[1]](c[2]); }, 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  function menu() {
+    var all = [['Quiero matricularme', 'ya'], ['¿Cuánto cuesta? ¿Hay cuotas?', 'precio'], ['¿Cuándo empieza?', 'fecha'], ['Me lo pienso', 'piensa'], ['Mejor más adelante', 'luego']];
+    choices(all.filter(function (c) { return !used[c[1]]; }));
+  }
+  var N = {
+    inicio: function () {
+      bot(['¡Hola! Soy Lucía, la asistente de INSPEU. Aquí tienes el temario del curso de Educación Inclusiva y Atención a la Diversidad: [enlace al temario]',
+           'Es un curso online, así que puedes seguirlo desde Perú o desde cualquier país.',
+           'Para orientarte bien: ¿das clase ahora mismo? ¿En qué nivel?'],
+        function () { choices([['Sí, en inicial', 'nivel', 'Inicial'], ['Sí, en primaria', 'nivel', 'Primaria'], ['Sí, en secundaria', 'nivel', 'Secundaria'], ['Ahora no doy clase', 'nivel', 'No']]); });
+    },
+    nivel: function (v) {
+      var doc = v !== 'No';
+      set({ Docente: doc ? 'Sí · ' + v.toLowerCase() : 'No en este momento' }, doc ? 15 : 0, doc ? ['docente-' + v.toLowerCase()] : ['no-docente']);
+      apunta('Docente: ' + (doc ? v.toLowerCase() : 'no ahora'), (doc ? '+15' : '+0') + ' · contesta a los 2 minutos (+10)', 'g');
+      set({}, 10, ['contesta-rapido']);
+      bot(['Gracias, Rosa. ¿Y qué te gustaría conseguir con el curso?'],
+        function () { choices([['Atender mejor a alumnos con necesidades distintas', 'obj', 'Atender mejor a alumnos con necesidades distintas'], ['Sumarlo a mi CV', 'obj', 'Sumarlo a su CV']]); });
+    },
+    obj: function (v) {
+      set({ Objetivo: v });
+      apunta('Objetivo guardado', v + ' · se escribe en la ficha');
+      bot(['Te cuento lo que te puedo confirmar: es online y el temario lo tienes arriba.',
+           'La fecha de inicio del próximo grupo, las horas, el precio y el certificado te los confirma Andrea, del equipo, para no darte un dato equivocado.',
+           '¿Qué te gustaría hacer?'],
+        function () { apunta('Curso explicado solo con lo confirmado', 'online · temario · lo demás pasa a Andrea', 'h'); menu(); });
+    },
+    ya: function () {
+      used.ya = true;
+      set({ 'Siguiente paso': 'Matrícula' }, 15, ['quiere-matricularse']);
+      apunta('Quiere matricularse', '+15 · puntuación ' + score, 'g');
+      bot(['¡Qué bien! Andrea te confirma la fecha y la forma de pago y te manda el enlace de matrícula.',
+           '¿Hablas con ella mañana miércoles? Te propongo dos horarios, ya en hora de Lima:'],
+        function () { choices([['A las 10:00', 'cita', '10:00'], ['A las 16:00', 'cita', '16:00']]); });
+      apunta('Huecos libres de la agenda de Andrea', 'mostrados en hora de Lima · dentro del horario del equipo');
+    },
+    llamada: function () {
+      bot(['Claro. ¿A qué hora te viene mejor mañana miércoles? Te propongo dos horarios, ya en hora de Lima:'],
+        function () { choices([['A las 10:00', 'cita', '10:00'], ['A las 16:00', 'cita', '16:00']]); });
+      apunta('Huecos libres de la agenda de Andrea', 'mostrados en hora de Lima · dentro del horario del equipo');
+    },
+    cita: function (h) {
+      set({ 'Siguiente paso': 'Llamada de Andrea · miércoles ' + h + ' (Lima)' }, 15, ['llamada-agendada']);
+      apunta('Llamada agendada: miércoles ' + h + ' (Lima) con Andrea', '+15 · puntuación ' + score + ' · recordatorio por WhatsApp 1 h antes, hora de Lima', 'g');
+      apunta('Aviso a Andrea', 'Rosa M. · ' + score + ' · Educación Inclusiva · ' + (fields.Docente || '') + '\nresumen, conversación y preguntas sin dato oficial en la ficha', 'g');
+      bot(['Hecho: mañana miércoles a las ' + h + ' (hora de Lima) te llama Andrea, de INSPEU. Te aviso por aquí un rato antes.',
+           'Si te surge algo, contéstame y lo cambiamos. ¡Buenas noches, Rosa!'], fin);
+    },
+    precio: function () {
+      used.precio = true;
+      set({ Pregunta: 'Precio y cuotas' }, 5, ['pide-precio']);
+      apunta('Pide precio y cuotas', '+5 · Lucía no tiene el precio cargado: no lo inventa', 'h');
+      bot(['Buena pregunta. El precio y las formas de pago te los confirma Andrea, del equipo: prefiero no darte un dato que no sea exacto.',
+           'Te manda por aquí tu presupuesto, con las formas de pago, mañana antes de las 12:00 (hora de Lima). ¿Te parece bien?'],
+        function () { choices([['Sí, perfecto', 'presu'], ['Prefiero que me llame', 'llamada']]); });
+    },
+    presu: function () {
+      set({ 'Siguiente paso': 'Presupuesto de Andrea · antes de las 12:00 (Lima)' }, 0, ['presupuesto']);
+      apunta('Tarea para Andrea: presupuesto', 'hora límite: miércoles 12:00 de Lima (19:00 en Madrid) · aviso si a las 11:30 no ha salido', 'h');
+      apunta('Seguimiento C activado', '¿te llegó? · ¿qué te parece? · llamada si lo abre y no contesta', 'g');
+      bot(['Perfecto. Mañana antes de las 12:00 lo tienes aquí.', 'Mientras, si quieres preguntarme algo más, dime.'], menu);
+    },
+    fecha: function () {
+      used.fecha = true;
+      set({ Pregunta: (fields.Pregunta ? fields.Pregunta + ' · ' : '') + 'Fecha de inicio' }, 0, ['pide-fecha']);
+      apunta('Pregunta sin dato oficial: fecha de inicio', 'Lucía no la inventa · pasa a Andrea', 'h');
+      bot(['La fecha de inicio del próximo grupo te la confirma Andrea: no quiero decirte una que no sea la buena.',
+           'Se la dejo apuntada para que te la mande por aquí. ¿Algo más?'], menu);
+    },
+    piensa: function () {
+      used.piensa = true;
+      bot(['Claro, sin prisa. ¿Hay algo que te haga dudar? Así te mando solo lo que te sirva.'],
+        function () { choices([['El tiempo', 'duda', 'tiempo'], ['El precio', 'duda', 'precio'], ['Si me sirve para mi aula', 'duda', 'aula']]); });
+    },
+    duda: function (v) {
+      set({ 'Objeción': v === 'precio' ? 'El precio' : v === 'tiempo' ? 'El tiempo (da clase y corrige)' : 'Si le sirve para su aula' }, 0, ['me-lo-pienso']);
+      apunta('Duda: ' + v, 'se guarda para Andrea y para el seguimiento B', 'h');
+      var m = {
+        tiempo: 'Te entiendo: das clase y corriges en casa. Es online; cuántas horas por semana pide y si es a tu ritmo o con sesiones en vivo te lo confirma Andrea, para no decirte algo que no sea exacto.',
+        precio: 'Te entiendo. Andrea te puede preparar un presupuesto con las formas de pago para Perú, sin compromiso.',
+        aula: 'Mira el temario con calma. Si me cuentas qué situación tienes en tu aula, se lo paso a Andrea para que te diga qué parte te sirve más.'
+      }[v];
+      bot([m, 'Te escribo en un par de días, ya de día en Lima, por si te ha surgido alguna duda. Y si prefieres que no te escriba, dímelo sin problema.'],
+        function () {
+          set({ 'Siguiente paso': 'Seguimiento B · mañana 19:00 (Lima)' });
+          apunta('Seguimiento B («me lo pienso») activado', 'día 1 su duda · día 3 su nivel · día 5 presupuesto · todo entre 8:00 y 21:30 de Lima', 'g');
+          fin();
+        });
+    },
+    luego: function () {
+      used.luego = true;
+      bot(['Perfecto, Rosa. ¿Cuándo te escribo para retomarlo?'],
+        function () { choices([['En enero, que estoy de vacaciones', 'enero', 'lunes 4 de enero, 10:00 (Lima)'], ['Mejor en febrero', 'enero', 'lunes 1 de febrero, 10:00 (Lima)']]); });
+    },
+    enero: function (f) {
+      set({ 'Cuándo': f.indexOf('enero') > 0 ? 'Enero' : 'Febrero', 'Siguiente paso': 'Recordatorio: ' + f }, 0, ['mas-adelante'], 'luego');
+      apunta('Guardado: más adelante', 'recordatorio el ' + f + ' · no pasa a Andrea ahora', 'g');
+      apunta('Seguimiento E activado', 'un único WhatsApp a mediados de diciembre · después, en la fecha elegida');
+      bot(['Apuntado. Te escribo entonces con las fechas y condiciones que estén publicadas.',
+           'Hasta entonces no te molesto. Si te surge cualquier duda antes, escríbeme por aquí.'], fin);
+    }
+  };
+  function start() {
+    timers.forEach(clearTimeout); timers = [];
+    started = true; hh = 22; mm = 29; score = 20; used = {};
+    fields = { Curso: 'Educación Inclusiva y Atención a la Diversidad', Canal: 'Anuncio A → WhatsApp', 'País': 'Perú (+51)', 'Hora local': 'Lima · 22:30 (5:30 en Madrid)' };
+    tagset = ['instagram', 'educacion-inclusiva', 'peru'];
+    chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    render(); grupo();
+    bubble('sys', 'Ejemplo · martes 22:30 en Lima (5:30 en Madrid) · Rosa escribe desde un anuncio de Instagram');
+    mm = 29;
+    bubble('out', 'Hola, quiero el temario del curso de Educación Inclusiva.');
+    apunta('Mensaje recibido · 22:30 hora de Lima', '5:30 del miércoles en Madrid');
+    apunta('Ficha creada', 'prefijo +51 → Perú, zona horaria de Lima · entra por el anuncio A');
+    apunta('Puntuación de partida: 20', 'curso concreto (10) + escribe desde un anuncio (10)');
+    apunta('Respuesta en menos de 1 minuto', 'ha escrito ella: se contesta a cualquier hora · los seguimientos esperan a las 8:00 de Lima');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
