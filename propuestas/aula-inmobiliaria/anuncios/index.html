@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Aula Inmobiliaria · anuncios</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Poppins:wght@600;800&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Galería de anuncios para Aula Inmobiliaria: lo que tienen hoy (Biblioteca de anuncios, 23-oct) y cinco anuncios nuevos
+   con sus fotos y su marca, en feed 4:5 y story 9:16 dentro del marco de Instagram. Base: la galería de Hunty. */
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+.ahero{position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#23232C}
+.ahero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(35,35,44,.97) 0%,rgba(35,35,44,.88) 55%,rgba(35,35,44,.55) 100%),url(../assets/img/curso-aicat-aula-inmobiliaria-min.jpg) center 30%/cover}
+.ahero .wrap{padding-block:60px 48px;display:grid;gap:14px}
+.ahero .eyebrow{color:#EC7B2A}
+.ahero h1{font-family:Poppins,var(--sans);font-weight:800;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:19ch}
+.ahero h1 em{font-style:normal;color:#EC7B2A}
+.ahero .lead{color:rgba(255,255,255,.84);font-size:18px;max-width:72ch}
+.ahero .maq{font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,.6);letter-spacing:.03em}
+nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+nav.jump a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);border-radius:99px;padding:7px 14px;transition:background .2s}
+nav.jump a:hover{background:rgba(236,123,42,.35)}
+.ej,.real{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;line-height:1.5}
+.ej{background:#B87708}.real{background:#17734A}
+/* hoy */
+.today{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.today{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.today figure{margin:0;display:grid;gap:8px}
+.today img{width:100%;height:auto;aspect-ratio:9/16;object-fit:contain;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--surface)}
+.today figcaption{font-size:12.5px;color:var(--muted);text-align:center}
+.diag{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.diag{grid-template-columns:1fr}}
+.diag ul{margin:8px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14.5px}
+/* resumen */
+.plan5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.plan5{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plan5{grid-template-columns:1fr}}
+.plan5 a{display:grid;gap:8px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.plan5 a:hover{transform:translateY(-2px);border-color:#EC7B2A}
+.lt{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#EC7B2A;color:#fff;font-family:Poppins,var(--sans);font-weight:800;font-size:17px}
+.plan5 b{font-size:15.5px}
+.plan5 p{color:var(--muted);font-size:13.5px;line-height:1.5}
+/* ángulo */
+.angle{scroll-margin-top:70px}
+.ah{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start}
+.ah .lt{grid-row:span 2;width:56px;height:56px;border-radius:16px;font-size:28px}
+.ah h2{font-family:Poppins,var(--sans);font-weight:800;font-size:clamp(24px,3vw,34px);line-height:1.15;letter-spacing:-.015em}
+.ah .meta{display:grid;gap:6px;font-size:14.5px;color:var(--muted);max-width:90ch}
+.ah .meta b{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#C2621A;margin-right:6px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ah .meta b{color:#F2A061}}
+:root[data-theme="dark"] .ah .meta b{color:#F2A061}
+@media (max-width:560px){.ah{grid-template-columns:1fr}.ah .lt{grid-row:auto;width:44px;height:44px;font-size:22px}}
+.ads{display:grid;grid-template-columns:380px 320px minmax(0,1fr);gap:28px;align-items:start;margin-top:8px}
+@media (max-width:1180px){.ads{grid-template-columns:380px 320px}.ads .copy{grid-column:1/-1}}
+@media (max-width:760px){.ads{grid-template-columns:minmax(0,1fr);justify-items:center}.ads .copy{justify-self:stretch}}
+figure{margin:0;min-width:0}
+.ads > figure{width:100%;display:grid;justify-items:center}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px;text-align:center;line-height:1.4}
+figcaption b{color:var(--ink);font-weight:650}
+.ig{width:min(380px,100%);background:#fff;color:#111;border-radius:14px;overflow:hidden;border:1px solid #DBDBDB;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;background:#3E4A6A;color:#fff;display:grid;place-items:center;font:800 11px Poppins,sans-serif;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #EC7B2A}
+.ig .h b{font-size:13.5px;display:block;line-height:1.2}
+.ig .h small{font-size:11.5px;color:#737373}
+.ig .h .dots{margin-left:auto;font-weight:700;color:#262626;letter-spacing:1px}
+.ig img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#111}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-bottom:1px solid #EFEFEF;font-size:13.5px;font-weight:600;color:#0095F6}
+.ig .cta svg{width:16px;height:16px}
+.ig .acts{display:flex;gap:14px;padding:10px 12px 4px;color:#262626}
+.ig .acts svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.ig .acts .sv{margin-left:auto}
+.ig .cap{padding:4px 12px 14px;font-size:13.5px;line-height:1.45}
+.ig .cap b{margin-right:5px}
+.ig .cap span{color:#737373}
+.story{position:relative;width:min(320px,100%);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.story img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story::before{content:"";position:absolute;inset:0 0 auto;height:90px;background:linear-gradient(rgba(0,0,0,.45),transparent);z-index:1}
+.story .pb{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:3px;z-index:2}
+.story .pb i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.4);overflow:hidden}
+.story .pb i:first-child::after{content:"";display:block;height:100%;width:60%;background:#fff}
+.story .sh2{position:absolute;top:18px;left:10px;right:10px;display:flex;align-items:center;gap:8px;color:#fff;z-index:2;font-size:12.5px}
+.story .sh2 .av{width:26px;height:26px;box-shadow:none;font-size:9px}
+.story .sh2 small{opacity:.8;font-size:11px;margin-left:4px}
+.story .up{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;display:grid;justify-items:center;gap:2px;color:#fff;font-size:12.5px;font-weight:600}
+.story .up span{background:#fff;color:#111;border-radius:99px;padding:6px 14px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.copy{display:grid;gap:12px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.copy .k{margin:0 0 4px}
+pre{white-space:pre-wrap;font:14.5px/1.55 var(--sans);background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:11px 13px;margin:0;color:var(--ink)}
+.meta2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.meta2 > div{min-width:0}
+.why pre{background:#FDF0E5;border-color:transparent;color:#5A3210}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .why pre{background:#2E2216;color:#F6D3B4}}
+:root[data-theme="dark"] .why pre{background:#2E2216;color:#F6D3B4}
+@media (max-width:560px){.meta2{grid-template-columns:1fr}}
+.sec.alt{background:var(--surface-2)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="cl">Aula Inmobiliaria</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">Anuncios</a><a href="../demo/">Demo</a><a href="../landing/">Landing</a></div>
+  </div>
+</nav>
+
+<header class="ahero">
+  <div class="wrap">
+    <p class="eyebrow">Anuncios · Aula Inmobiliaria</p>
+    <h1>Anuncios que hablan a quien <em>se va a matricular</em></h1>
+    <p class="lead">Hemos revisado los anuncios que tenéis activos en Meta y os proponemos cinco nuevos, con vuestras fotos, vuestros colores y vuestros datos reales. Cada uno le habla a un perfil distinto y responde a la duda que le frena. Los ves tal como saldrían en Instagram, en el feed y en stories.</p>
+    <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que tenéis hoy</a><a href="#a">A · Empezar</a><a href="#b">B · A plazos</a><a href="#c">C · Especializarse</a><a href="#d">D · Equipos</a><a href="#e">E · Opiniones</a><a href="#arreglos">Arreglos rápidos</a></nav>
+    <p class="maq">Maqueta de Qualivo para Aula Inmobiliaria · fotos y datos de aulainmobiliaria.com y de la Biblioteca de anuncios de Meta, 23-oct-2026 · no son anuncios publicados</p>
+  </div>
+</header>
+
+<section class="sec" id="hoy" style="border-top:0">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>HOY</b><span></span></div><h2 class="t">Lo que tenéis activo <span class="real">Real</span></h2></div>
+    <p class="lede">14 anuncios activos el 23-oct en la Biblioteca de anuncios de Meta (página Aula Inmobiliaria). Estos son cuatro, tal cual se publican.</p>
+    <div class="today">
+      <figure><img src="img/hoy-agente.jpg" alt="Anuncio actual: Curso Agente Inmobiliario, 390 €" loading="lazy" width="675" height="1200"><figcaption>Agente Inmobiliario · «Comprar»</figcaption></figure>
+      <figure><img src="img/hoy-perito.jpg" alt="Anuncio actual: Curso Perito Judicial Inmobiliario" loading="lazy" width="675" height="1200"><figcaption>Perito Judicial · «Comprar»</figcaption></figure>
+      <figure><img src="img/hoy-gestion.jpg" alt="Anuncio actual: Curso Gestión Inmobiliaria" loading="lazy" width="675" height="1200"><figcaption>Gestión Inmobiliaria · WhatsApp</figcaption></figure>
+      <figure><img src="img/hoy-mediacion.jpg" alt="Anuncio actual: Curso Mediación" loading="lazy" width="675" height="1200"><figcaption>Mediación · «Comprar»</figcaption></figure>
+    </div>
+    <div class="diag">
+      <div class="card"><p class="k">Lo que está bien</p><ul>
+        <li>Precio claro y la financiación «desde 79,65 €/mes» en la imagen.</li>
+        <li>Datos que dan confianza: registros oficiales y «Reconocido por el Colegio de APIs».</li>
+        <li>Desde el 15-oct hay anuncios que van directos a WhatsApp con «Información al momento». Es el camino correcto.</li>
+        <li>Catálogo montado, que sirve para el retargeting dinámico.</li>
+      </ul></div>
+      <div class="card"><p class="k">Lo que les falta</p><ul>
+        <li><b>Todos son la misma plantilla</b> (fondo gris, nombre del curso, precio). Meta los trata casi como el mismo anuncio, se cansan antes y no aprende a quién enseñárselos.</li>
+        <li><b>No sale ninguna persona</b> ni nada que diga «esto es para ti».</li>
+        <li>Los textos empiezan por «Fórmate como…»: hablan del curso, no de quien lo hace.</li>
+        <li>La mayoría pide «Comprar» a quien acaba de conoceros.</li>
+        <li>El 4,9 con 955 opiniones, vuestro mejor argumento, no aparece.</li>
+      </ul></div>
+    </div>
+    <p class="src">También vemos que tenéis campañas en Google Ads. Las miramos en una segunda fase; aquí nos centramos en Meta.</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:24px">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>PROPUESTA</b><span></span></div><h2 class="t">Cinco anuncios, cinco perfiles <span class="ej">Ejemplo</span></h2></div>
+    <div class="plan5">
+      <a href="#a"><span class="lt">A</span><b>Empezar en el sector</b><p>Quien quiere cambiar de trabajo. Duda: «¿me vale para ejercer?».</p></a>
+      <a href="#b"><span class="lt">B</span><b>A plazos</b><p>Quien ya casi lo ha decidido. Duda: «no puedo pagarlo de golpe».</p></a>
+      <a href="#c"><span class="lt">C</span><b>Especializarse</b><p>El agente en activo. Duda: «¿qué gano con otro curso?».</p></a>
+      <a href="#d"><span class="lt">D</span><b>Equipos · FUNDAE</b><p>El dueño de la agencia. Duda: «el papeleo de la bonificación».</p></a>
+      <a href="#e"><span class="lt">E</span><b>Opiniones</b><p>Retargeting para todos. Duda: «¿me puedo fiar?».</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle alt" id="a">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">A</span><h2>A · Hazte agente inmobiliario a tu ritmo</h2><div class="meta"><span><b>Destino</b>WhatsApp, con el agente que contesta al momento (también de noche)</span><span><b>Perfil</b>quiere empezar en el sector; público amplio en España, el anuncio hace de filtro</span></div></div>
+    <div class="ads">
+      <figure><div class="ig"><div class="h"><span class="av">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div><span class="dots">···</span></div><img src="img/a-feed.jpg" alt="Anuncio A en feed: Hazte agente inmobiliario a tu ritmo, mientras sigues trabajando" width="1080" height="1350" loading="lazy"><div class="cta"><span>Enviar mensaje de WhatsApp</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>aulainmobiliaria</b>¿Quieres trabajar en el sector inmobiliario pero no puedes dejar tu trabajo para formarte? <span>… más</span></p></div><figcaption><b>Feed 4:5</b> · Facebook e Instagram</figcaption></figure>
+      <figure><div class="story"><img src="img/a-story.jpg" alt="Anuncio A en story" width="1080" height="1920" loading="lazy"><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">AI</span><b>aulainmobiliaria</b><small>Publicidad</small></div><div class="up"><span>Enviar WhatsApp</span></div></div><figcaption><b>Story / Reels 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div><p class="k">Texto principal</p><pre>¿Quieres trabajar en el sector inmobiliario pero no puedes dejar tu trabajo para formarte?
+
+El curso de Agente Inmobiliario es 100% online: 250 horas que haces a tu ritmo, cuando te venga bien.
+
+✓ Válido para los registros AICAT, RAICV, ROAIIB y RAIAN
+✓ Reconocido por el Colegio de APIs
+✓ 390 € o a plazos
+
+Escríbenos y te contestamos al momento.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Hazte agente inmobiliario a tu ritmo</pre></div><div><p class="k">Botón</p><pre>Enviar mensaje de WhatsApp</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Habla de quien lo va a hacer («mientras sigues trabajando»), no del curso. Responde a la duda que frena al que empieza («¿me vale?») con los registros oficiales. Va a WhatsApp porque es público frío y tendrá preguntas.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle" id="b">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">B</span><h2>B · Desde 79,65 €/mes</h2><div class="meta"><span><b>Destino</b>landing del curso, con matrícula a un clic y Aplazame</span><span><b>Perfil</b>quiere empezar y está casi decidido; también retargeting de quien vio la ficha del curso</span></div></div>
+    <div class="ads">
+      <figure><div class="ig"><div class="h"><span class="av">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div><span class="dots">···</span></div><img src="img/b-feed.jpg" alt="Anuncio B en feed: 79,65 € al mes, empieza hoy y págalo a plazos" width="1080" height="1350" loading="lazy"><div class="cta"><span>Inscribirse</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>aulainmobiliaria</b>Tu curso de Agente Inmobiliario, desde hoy y a plazos. <span>… más</span></p></div><figcaption><b>Feed 4:5</b></figcaption></figure>
+      <figure><div class="story"><img src="img/b-story.jpg" alt="Anuncio B en story" width="1080" height="1920" loading="lazy"><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">AI</span><b>aulainmobiliaria</b><small>Publicidad</small></div><div class="up"><span>Inscribirse</span></div></div><figcaption><b>Story / Reels 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div><p class="k">Texto principal</p><pre>Tu curso de Agente Inmobiliario, desde hoy y a plazos.
+
+Desde 79,65 €/mes con Aplazame, o 390 € en un solo pago. Te matriculas en dos minutos y empiezas hoy mismo.
+
+250 horas online, a tu ritmo.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Desde 79,65 €/mes</pre></div><div><p class="k">Botón</p><pre>Inscribirse</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>El dato de la financiación ya lo tenéis, pero escondido en letra pequeña. Aquí es el protagonista: quita la barrera del pago de golpe. El color naranja de vuestra marca hace que destaque en el feed.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle alt" id="c">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">C</span><h2>C · Ya vendes pisos. ¿Y si también cobras por tasarlos?</h2><div class="meta"><span><b>Destino</b>ficha del pack, con WhatsApp siempre visible</span><span><b>Perfil</b>agentes en activo que quieren sumar servicios: perito, administración de fincas, mediación</span></div></div>
+    <div class="ads">
+      <figure><div class="ig"><div class="h"><span class="av">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div><span class="dots">···</span></div><img src="img/c-feed.jpg" alt="Anuncio C en feed: Ya vendes pisos, ¿y si también cobras por tasarlos?" width="1080" height="1350" loading="lazy"><div class="cta"><span>Más información</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>aulainmobiliaria</b>Ya eres agente. ¿Y si cobras por algo más que la venta? <span>… más</span></p></div><figcaption><b>Feed 4:5</b></figcaption></figure>
+      <figure><div class="story"><img src="img/c-story.jpg" alt="Anuncio C en story" width="1080" height="1920" loading="lazy"><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">AI</span><b>aulainmobiliaria</b><small>Publicidad</small></div><div class="up"><span>Más información</span></div></div><figcaption><b>Story / Reels 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div><p class="k">Texto principal</p><pre>Ya eres agente. ¿Y si cobras por algo más que la venta?
+
+Tres servicios que puedes ofrecer este año sin cambiar de agencia:
+🔸 Tasaciones periciales
+🔸 Administración de fincas
+🔸 Mediación en conflictos inmobiliarios
+
+Online, a tu ritmo, y en pack con el curso de Agente Inmobiliario.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Suma servicios a tu agencia</pre></div><div><p class="k">Botón</p><pre>Más información</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Al que ya trabaja no le vendes «formarse», le vendes ingresos nuevos. Usa vuestra propia foto (con la línea naranja) y convierte el catálogo de especialización en una decisión de negocio.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle" id="d">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Forma a tu equipo y bonifícalo</h2><div class="meta"><span><b>Destino</b>formulario de Meta de 3 preguntas (empresa, nº de personas, curso) y llamada de la asesora el mismo día</span><span><b>Perfil</b>dueños y gerentes de inmobiliarias y administraciones con personal en plantilla</span></div></div>
+    <div class="ads">
+      <figure><div class="ig"><div class="h"><span class="av">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div><span class="dots">···</span></div><img src="img/d-feed.jpg" alt="Anuncio D en feed: Forma a tu equipo y bonifícalo, el papeleo lo hacemos nosotros" width="1080" height="1350" loading="lazy"><div class="cta"><span>Solicitar información</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>aulainmobiliaria</b>¿Tienes una inmobiliaria con equipo? Formadlos y bonificadlo con FUNDAE. <span>… más</span></p></div><figcaption><b>Feed 4:5</b></figcaption></figure>
+      <figure><div class="story"><img src="img/d-story.jpg" alt="Anuncio D en story" width="1080" height="1920" loading="lazy"><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">AI</span><b>aulainmobiliaria</b><small>Publicidad</small></div><div class="up"><span>Solicitar información</span></div></div><figcaption><b>Story / Reels 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div><p class="k">Texto principal</p><pre>¿Tienes una inmobiliaria con equipo? Formadlos y bonificadlo con FUNDAE.
+
+Dinos cuántas personas sois y qué curso necesitáis. Te decimos cuánto se puede bonificar y nos ocupamos de todo el papeleo.
+
+Agente Inmobiliario, AICAT, Perito, Administración de Fincas, Mediación y más.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>Formación bonificable para tu equipo</pre></div><div><p class="k">Botón</p><pre>Solicitar información</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Es el ticket más alto: una conversación son varias matrículas. Hoy no tenéis ningún anuncio para este perfil. Usa vuestra foto de «bonificamos tu curso» y el formulario corto, para que la asesora llame ese mismo día.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec angle alt" id="e">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">E</span><h2>E · 4,9 en Google, 955 opiniones</h2><div class="meta"><span><b>Destino</b>WhatsApp: ya os conoce y le falta poco para decidir</span><span><b>Perfil</b>retargeting: vio un curso o habló con vosotros y no se ha matriculado (1–14 días)</span></div></div>
+    <div class="ads">
+      <figure><div class="ig"><div class="h"><span class="av">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div><span class="dots">···</span></div><img src="img/e-feed.jpg" alt="Anuncio E en feed: 4,9 en Google, 955 opiniones" width="1080" height="1350" loading="lazy"><div class="cta"><span>Enviar mensaje de WhatsApp</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></div><div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></svg><svg viewBox="0 0 24 24" class="sv"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div><p class="cap"><b>aulainmobiliaria</b>Antes de decidirte, lee lo que dicen quienes ya lo han hecho. <span>… más</span></p></div><figcaption><b>Feed 4:5</b></figcaption></figure>
+      <figure><div class="story"><img src="img/e-story.jpg" alt="Anuncio E en story" width="1080" height="1920" loading="lazy"><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">AI</span><b>aulainmobiliaria</b><small>Publicidad</small></div><div class="up"><span>Enviar WhatsApp</span></div></div><figcaption><b>Story / Reels 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div><p class="k">Texto principal</p><pre>Antes de decidirte, lee lo que dicen quienes ya lo han hecho: 4,9 sobre 5 en Google, con 955 opiniones.
+
+Formamos profesionales inmobiliarios desde 2006. Si te queda alguna duda sobre tu curso, escríbenos y te contestamos al momento.</pre></div>
+        <div class="meta2"><div><p class="k">Titular</p><pre>4,9 en Google · 955 opiniones</pre></div><div><p class="k">Botón</p><pre>Enviar mensaje de WhatsApp</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Es vuestro mejor argumento y hoy no sale en ningún anuncio. A quien ya os conoce y duda, lo que le falta es confianza, no más información del curso. En la versión de vídeo, opiniones reales de Google pasando por pantalla.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="arreglos">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>REGALO</b><span></span></div><h2 class="t">Arreglos rápidos de lo que tenéis activo</h2></div>
+    <div class="tw stack"><table>
+      <thead><tr><th>Qué vemos</th><th>Por qué importa</th><th>Arreglo</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Qué vemos"><b>La misma plantilla en todos los anuncios</b></td><td data-label="Por qué importa">Meta agrupa los anuncios que se parecen y deja de probar. Se fatigan antes.</td><td data-label="Arreglo">Mezclar formatos: foto con personas, precio protagonista, vídeo corto y carrusel.</td></tr>
+        <tr><td data-label="Qué vemos"><b>«Comprar» como botón para público frío</b></td><td data-label="Por qué importa">A quien no os conoce le pedís la compra en el primer contacto.</td><td data-label="Arreglo">«Más información» o WhatsApp en frío; «Comprar» solo en retargeting.</td></tr>
+        <tr><td data-label="Qué vemos"><b>Anuncios a WhatsApp «Información al momento»</b></td><td data-label="Por qué importa">Si alguien escribe a las 22:00 y le contestáis a las 9:00, el «al momento» se vuelve en contra.</td><td data-label="Arreglo">Respuesta automática real 24 h con el agente (lo vemos en el recorrido).</td></tr>
+        <tr><td data-label="Qué vemos"><b>Textos que empiezan por «Fórmate como…»</b></td><td data-label="Por qué importa">La primera línea es lo único que se lee. Hoy habla del curso.</td><td data-label="Arreglo">Empezar por la persona y su duda: «¿Quieres trabajar en el sector pero…?».</td></tr>
+        <tr><td data-label="Qué vemos"><b>El 4,9 con 955 opiniones no aparece</b></td><td data-label="Por qué importa">Es lo que más convence a quien duda.</td><td data-label="Arreglo">Un anuncio de opiniones para retargeting (anuncio E).</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Revisado el 23-oct-2026 en la Biblioteca de anuncios de Meta (España), página Aula Inmobiliaria. Puede haber versiones de los anuncios que la Biblioteca no muestra.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+      <a class="btn pri" href="../recorrido/#p3" style="background:#EC7B2A;color:#fff">Cómo encuentra Meta a esta gente <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn sec" href="../landing/">Ver la landing</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Maikel Echevarría · Qualivo</b><span>maikel@qualivo.io · <a href="https://qualivo.io">qualivo.io</a></span></div>
+    <p>Maqueta preparada el 23 de octubre de 2026 para Aula Inmobiliaria con sus fotos y datos públicos. No son anuncios publicados.</p>
+  </div>
+</footer>
+</body>
+</html>
