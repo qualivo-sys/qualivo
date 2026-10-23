@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Aula Inmobiliaria · el recorrido</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Recorrido completo para Aula Inmobiliaria (reunión del 23-oct): cliente potencial, anuncios con su porqué,
+   cómo trabaja el algoritmo, landing de curso, WhatsApp con agentes y su caso. Paleta en ../assets/deck.css. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#B87708;--real:#17734A;--ig:#FFFFFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ig:#111A28}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ig:#111A28}
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 85% 15%,rgba(141,185,238,.3),transparent 42%),linear-gradient(135deg,#0A1A31 0%,#0F2747 55%,#143360 100%)}
+.dhero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,#000 60%)}
+.dhero .wrap{padding-block:56px 46px;display:grid;gap:12px}
+.dhero .eyebrow{color:var(--moss)}
+.dhero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:72ch;margin-top:6px}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;max-width:980px}
+.legend > div{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:13px 15px;background:rgba(255,255,255,.05);font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+.legend b{color:#fff}
+@media (max-width:700px){.legend{grid-template-columns:1fr}}
+.ej,.real{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px;line-height:1.5}
+.ej{background:var(--ej)}.real{background:var(--real)}
+h2 .ej,h2 .real{vertical-align:6px;margin-left:6px}
+.wrap.main{display:grid;gap:26px;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3vw,34px);line-height:1.14;letter-spacing:-.015em}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.55}
+/* pestañas */
+nav.tabs{position:sticky;top:64px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-26px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 10px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(10,26,49,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+@media (max-width:560px){nav.tabs{top:96px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--muted);max-width:80ch;font-size:16.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.next{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+/* recorrido */
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;counter-reset:f}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.flow{grid-template-columns:1fr}}
+.flow button{all:unset;cursor:pointer;display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow);position:relative;transition:transform .2s,border-color .2s}
+.flow button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.flow button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.flow b{font-size:15px;line-height:1.3}
+.flow small{font-size:13px;color:var(--muted);line-height:1.5}
+.flow i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:4px}
+.fact b{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.02em}
+.fact span{font-size:13.5px;color:var(--muted);line-height:1.45}
+/* perfiles */
+.persona{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.persona .top{display:flex;gap:12px;align-items:center}
+.persona .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none}
+.persona h3{font-size:18px}
+.persona dl{margin:0;display:grid;gap:8px;font-size:14.5px}
+.persona dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.persona dd{margin:0;line-height:1.5}
+.persona q{font-style:italic}
+/* anuncios */
+.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+@media (max-width:400px){.ads{grid-template-columns:1fr}}
+.ad{display:grid;gap:12px;align-content:start}
+.post{background:var(--ig);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);max-width:380px;width:100%;justify-self:center}
+.post .ph{display:flex;align-items:center;gap:9px;padding:10px 12px;font-size:13px}
+.post .ph .lg{width:30px;height:30px;border-radius:50%;background:var(--f800);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;flex:none}
+.post .ph b{display:block;font-size:13px}
+.post .ph small{color:var(--muted);font-size:11.5px}
+.post .vis{position:relative;aspect-ratio:1/1;display:grid;align-content:end;padding:20px;color:#fff;overflow:hidden;isolation:isolate}
+.post .vis.r9{aspect-ratio:4/5}
+.post .vis::before{content:"";position:absolute;inset:0;z-index:-1}
+.post .vis .big{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+.post .vis .sm{font-size:13.5px;opacity:.9;margin-top:8px;line-height:1.45}
+.post .vis .tag{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:4px 10px}
+.post .vis .play{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.4);display:grid;place-items:center}
+.post .vis .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.post .vis .chips span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:99px;font-size:12px;padding:3px 10px}
+.post .vis .slides{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:4px}
+.post .vis .slides i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5)}.post .vis .slides i:first-child{background:#fff}
+.v1::before{background:linear-gradient(160deg,#1D5FAE 0%,#0A1A31 75%)}
+.v2::before{background:radial-gradient(circle at 80% 10%,#C99A3B 0,transparent 45%),linear-gradient(160deg,#143360,#0A1A31)}
+.v3::before{background:linear-gradient(140deg,#17734A 0%,#0F2747 80%)}
+.v4::before{background:linear-gradient(160deg,#24324A 0%,#0A1A31 100%)}
+.v5::before{background:radial-gradient(circle at 20% 15%,#8DB9EE 0,transparent 40%),linear-gradient(160deg,#0F2747,#0A1A31)}
+.v6::before{background:linear-gradient(160deg,#8F5A06 0%,#2E2614 90%)}
+.post .vis .stars{color:#F2C26B;font-size:20px;letter-spacing:2px}
+.post .tx{padding:11px 12px 6px;font-size:13.5px;line-height:1.5}
+.post .cta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--line-2);font-size:12.5px;color:var(--muted)}
+.post .cta b{display:block;color:var(--ink);font-size:13px}
+.post .cta span{background:var(--line-2);color:var(--ink);font-weight:650;font-size:13px;border-radius:8px;padding:7px 12px;white-space:nowrap}
+.post .cta span.wa{background:#25D366;color:#06210F}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:7px;font-size:14px;line-height:1.5}
+.why .k{margin:0}
+.why div{display:grid;grid-template-columns:86px 1fr;gap:8px}
+.why div > span:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.vs{grid-template-columns:1fr}}
+.vs .card ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;font-size:14.5px}
+/* algoritmo */
+.loop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.loop svg{width:100%;height:auto;display:block}
+.loop svg text{font-family:var(--sans);fill:var(--ink)}
+.loop svg .mut{fill:var(--muted)}
+.loop svg .box{fill:var(--surface-2);stroke:var(--line)}
+.loop svg .acc{fill:var(--accent-soft);stroke:var(--accent)}
+.loop svg .ar{stroke:var(--accent);fill:none;stroke-width:2}
+.loop svg .ar2{stroke:var(--good);fill:none;stroke-width:2;stroke-dasharray:6 5}
+.steps{display:grid;gap:12px;counter-reset:s}
+.steps .card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.steps .card::before{counter-increment:s;content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--f700);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:13px}
+.steps .card p{color:var(--muted);font-size:14.5px;margin-top:4px}
+/* landing */
+.phone{width:min(390px,100%);justify-self:center;border:10px solid #0A1A31;border-radius:38px;overflow:hidden;box-shadow:var(--shadow-lg);background:#0A1A31;position:relative}
+.phone iframe{display:block;width:100%;height:720px;border:0;background:#fff}
+.marks{display:grid;gap:12px}
+.mark{display:grid;grid-template-columns:30px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
+.mark > b{width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--mono);font-size:12px}
+.mark p{font-size:14px;color:var(--muted);margin-top:2px}
+/* whatsapp */
+.chat{background:var(--wa-bg);border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);max-width:440px;width:100%;justify-self:center}
+.chat .hd{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:11px 14px}
+.chat .hd .lg{width:34px;height:34px;border-radius:50%;background:#fff;color:#0F2747;font-weight:800;display:grid;place-items:center;font-size:12px}
+.chat .hd small{display:block;opacity:.8;font-size:12px}
+.chat .bd{padding:14px 12px;display:flex;flex-direction:column;gap:7px;height:520px;overflow-y:auto;scroll-behavior:smooth}
+.msg{max-width:84%;padding:7px 10px 5px;border-radius:10px;font-size:14px;line-height:1.45;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .3s ease-out}
+.msg.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:2px}
+.msg.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:2px}
+.msg small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.msg.sys{align-self:center;background:var(--accent-soft);color:var(--accent);font-size:12px;font-family:var(--mono);letter-spacing:.03em;box-shadow:none;max-width:95%;text-align:center}
+.msg .btns{display:grid;gap:4px;margin-top:6px}
+.msg .btns span{display:block;text-align:center;border-top:1px solid var(--line-2);padding-top:5px;color:#027EB5;font-weight:600;font-size:13.5px}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:9px 12px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,100%{opacity:.3}50%{opacity:1}}
+.scen{display:flex;gap:8px;flex-wrap:wrap}
+.scen button{font:inherit;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer}
+.scen button[aria-pressed="true"]{background:var(--f700);color:#fff;border-color:var(--f700)}
+.agents{display:grid;gap:10px}
+.agent{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;transition:border-color .3s,box-shadow .3s}
+.agent.lit{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.agent p{font-size:13.5px;color:var(--muted);margin-top:2px}
+.tl{display:grid;gap:0;border-left:2px solid var(--line);margin-left:8px}
+.tl > div{position:relative;padding:0 0 16px 20px;font-size:14.5px}
+.tl > div::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl b{display:block}
+.tl span{color:var(--muted);font-size:13.5px}
+/* calculadora */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+@media (max-width:800px){.calc{grid-template-columns:1fr}}
+.calc label{display:grid;gap:6px;font-size:14px;font-weight:600}
+.calc label span{font-weight:400;color:var(--muted);font-size:13px}
+.calc input[type=range]{width:100%;accent-color:var(--accent)}
+.calc output{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.res{display:grid;gap:12px;align-content:start}
+.res .fact b{font-size:34px}
+.res .fact.hl{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.links3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.links3{grid-template-columns:1fr}}
+.links3 a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.links3 a:hover{transform:translateY(-2px);border-color:var(--accent)}
+.links3 a small{color:var(--muted);font-size:13.5px;line-height:1.5}
+.links3 a b{font-size:16px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff" stroke="none"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="cl">Aula Inmobiliaria</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Recorrido</a><a href="../demo/">Demo</a><a href="../landing/">Landing</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">El recorrido completo · de quien aún no os conoce a alumno matriculado</p>
+  <h1>Del anuncio a la matrícula, con el algoritmo y los agentes trabajando para vosotros</h1>
+  <p class="lead">Olga, nos contaste que os piden información unas 70 personas al mes y que el problema está en lo que pasa después. Aquí ves el sistema entero, paso a paso: a quién buscamos, qué anuncios le enseñamos y por qué, cómo aprende Meta a traer a quien de verdad se matricula, la landing donde se puede matricular sin esperar a nadie y lo que pasa por WhatsApp cuando no lo hace.</p>
+  <div class="legend">
+    <div><span class="real">Real</span><br><b>De vuestra web, de la Biblioteca de anuncios de Meta (23-oct-2026) y de lo que nos contaste:</b> cursos, precios, Aplazame, la bonificación FUNDAE, el 4,9 en Google con 955 reseñas, los 14 anuncios activos y las ~70 solicitudes al mes.</div>
+    <div><span class="ej">Ejemplo</span><br><b>Propuesta nuestra para enseñar cómo funcionaría:</b> perfiles, textos de anuncio, conversaciones y personas. No hay ninguna cifra de resultados inventada: la calculadora del final la mueves tú con vuestros datos.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<nav class="tabs" role="tablist" aria-label="Pasos del recorrido">
+  <button role="tab" aria-selected="true" aria-controls="p0" id="t0"><span>0</span>En una pantalla</button>
+  <button role="tab" aria-selected="false" aria-controls="p1" id="t1"><span>1</span>Cliente potencial</button>
+  <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><span>2</span>Anuncios</button>
+  <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><span>3</span>El algoritmo</button>
+  <button role="tab" aria-selected="false" aria-controls="p4" id="t4"><span>4</span>Landing del curso</button>
+  <button role="tab" aria-selected="false" aria-controls="p5" id="t5"><span>5</span>WhatsApp y agentes</button>
+  <button role="tab" aria-selected="false" aria-controls="p6" id="t6"><span>6</span>Vuestro caso</button>
+</nav>
+
+<!-- 0 · EN UNA PANTALLA -->
+<section class="pane on" id="p0" role="tabpanel" aria-labelledby="t0">
+  <header>
+    <h2>El recorrido entero, en una pantalla</h2>
+    <p>Seis piezas que trabajan juntas. Cada una tiene su pestaña; pulsa cualquiera para verla en detalle.</p>
+  </header>
+  <div class="flow">
+    <button data-go="1"><i>01</i><b>Cliente potencial</b><small>Cuatro perfiles con motivos distintos para matricularse. Cada uno con su mensaje.</small></button>
+    <button data-go="2"><i>02</i><b>Anuncios con porqué</b><small>Cada anuncio habla a un perfil y a una duda concreta, no al catálogo.</small></button>
+    <button data-go="3"><i>03</i><b>El algoritmo busca</b><small>Le decimos a Meta quién se matricula de verdad y él trae más gente así.</small></button>
+    <button data-go="4"><i>04</i><b>Landing del curso</b><small>Matrícula directa, a plazos o bonificada, sin esperar a nadie.</small></button>
+    <button data-go="5"><i>05</i><b>WhatsApp y agentes</b><small>Quien no se matricula, pregunta. Le contestamos al momento, también a las 23:00.</small></button>
+    <button data-go="6"><i>06</i><b>Vuestro caso</b><small>La demo del sistema, el panel y una calculadora con vuestros números.</small></button>
+  </div>
+  <h3 style="margin-top:6px">Desde dónde partís <span class="real">Real</span></h3>
+  <div class="facts">
+    <div class="fact"><b class="num">~70</b><span>personas al mes os piden información (nos lo dijiste por WhatsApp).</span></div>
+    <div class="fact"><b class="num">14</b><span>anuncios activos en Meta el 23-oct, casi todos de catálogo y con el botón «Comprar».</span></div>
+    <div class="fact"><b class="num">4,9</b><span>en Google con 955 opiniones. Es vuestro mejor argumento y casi no sale en los anuncios.</span></div>
+    <div class="fact"><b class="num">L–V</b><span>atención de 9 a 18 h (viernes hasta las 14 h). Muchas solicitudes llegan fuera de ese horario.</span></div>
+  </div>
+  <div class="callout hyp"><svg class="i"><use href="#i-info"/></svg><div><b>La idea en una frase:</b> no se trata de traer más curiosos, sino de que el anuncio atraiga a quien tiene un motivo para matricularse, que la landing le deje hacerlo al momento y que, si duda, alguien le conteste en ese mismo minuto y le siga hasta que decida.</div></div>
+  <div class="next"><span></span><button class="btn pri" data-go="1">Empezar: el cliente potencial <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 1 · CLIENTE POTENCIAL -->
+<section class="pane" id="p1" role="tabpanel" aria-labelledby="t1">
+  <header>
+    <h2>1 · A quién buscamos <span class="ej">Ejemplo</span></h2>
+    <p>Vuestro catálogo sirve a personas muy distintas. Quien quiere entrar en el sector no se mueve por lo mismo que un agente que ya trabaja o que el dueño de una agencia. Si el anuncio le habla a todos, no convence a ninguno. Estos son los cuatro perfiles con los que empezaríamos; en la reunión los afinamos con lo que veis cada día.</p>
+  </header>
+  <div class="grid">
+    <article class="persona">
+      <div class="top"><div class="av" style="background:#1D5FAE">E</div><div><h3>Quiere entrar en el sector</h3><span class="small muted">28–50 años · cambio de trabajo</span></div></div>
+      <dl>
+        <div><dt>Qué piensa</dt><dd><q>Me gusta el sector, pero ¿un curso online sirve para trabajar de verdad?</q></dd></div>
+        <div><dt>Qué le frena</dt><dd>Si el título vale, el precio de golpe y no saber por dónde empezar.</dd></div>
+        <div><dt>Qué le decide</dt><dd>Curso homologado, 250 h a su ritmo, 390 € a plazos con Aplazame y las opiniones de otros alumnos.</dd></div>
+        <div><dt>Curso</dt><dd>Agente Inmobiliario (y AICAT si vive en Cataluña).</dd></div>
+      </dl>
+    </article>
+    <article class="persona">
+      <div class="top"><div class="av" style="background:#17734A">A</div><div><h3>Agente que quiere sumar</h3><span class="small muted">Ya trabaja en una inmobiliaria</span></div></div>
+      <dl>
+        <div><dt>Qué piensa</dt><dd><q>Quiero cobrar por más cosas que la comisión de venta.</q></dd></div>
+        <div><dt>Qué le frena</dt><dd>Tiempo. No quiere otro curso genérico.</dd></div>
+        <div><dt>Qué le decide</dt><dd>Un servicio nuevo que pueda ofrecer este año: tasaciones periciales, administración de fincas o mediación.</dd></div>
+        <div><dt>Curso</dt><dd>Perito Judicial, Administrador de Fincas, Mediación y los packs.</dd></div>
+      </dl>
+    </article>
+    <article class="persona">
+      <div class="top"><div class="av" style="background:#8F5A06">D</div><div><h3>Dueño de agencia</h3><span class="small muted">Equipo en plantilla</span></div></div>
+      <dl>
+        <div><dt>Qué piensa</dt><dd><q>Mis comerciales necesitan formarse, pero no quiero que me cueste.</q></dd></div>
+        <div><dt>Qué le frena</dt><dd>El papeleo de la bonificación y no saber cuánto crédito tiene.</dd></div>
+        <div><dt>Qué le decide</dt><dd>Que se lo gestionéis vosotros: formación bonificable por FUNDAE y una sola conversación para varias matrículas.</dd></div>
+        <div><dt>Curso</dt><dd>Cualquier curso o pack, para varias personas a la vez. Es el ticket más alto.</dd></div>
+      </dl>
+    </article>
+    <article class="persona">
+      <div class="top"><div class="av" style="background:#5E6B80">C</div><div><h3>Necesita el título para ejercer</h3><span class="small muted">Cataluña · registro AICAT</span></div></div>
+      <dl>
+        <div><dt>Qué piensa</dt><dd><q>Necesito la formación para poder inscribirme y no sé cuál me vale.</q></dd></div>
+        <div><dt>Qué le frena</dt><dd>Miedo a pagar un curso que luego no le sirva para el registro.</dd></div>
+        <div><dt>Qué le decide</dt><dd>Que se lo confirmen en un minuto, con el nombre del curso homologado.</dd></div>
+        <div><dt>Curso</dt><dd>Curso AICAT homologado.</dd></div>
+      </dl>
+    </article>
+  </div>
+  <div class="callout hyp"><svg class="i"><use href="#i-info"/></svg><div><b>Lo importante:</b> estos perfiles no se usan para segmentar a mano en Meta. Sirven para escribir los anuncios. Hoy el algoritmo encuentra a la gente por lo que dice el anuncio, así que cada perfil necesita el suyo. Lo vemos en la pestaña 3.</div></div>
+  <div class="next"><button class="btn sec" data-go="0"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="2">Los anuncios de cada perfil <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · ANUNCIOS -->
+<section class="pane" id="p2" role="tabpanel" aria-labelledby="t2">
+  <header>
+    <h2>2 · Seis anuncios, y por qué cada uno <span class="ej">Ejemplo</span></h2>
+    <p>Primero, lo que se ve hoy. Después, los seis anuncios con los que arrancaríamos: cada uno le habla a un perfil y responde a la duda que le frena.</p>
+  </header>
+  <div class="vs">
+    <div class="card"><p class="k">Hoy <span class="real">Real</span></p><h3>Los 14 anuncios activos (Biblioteca de anuncios, 23-oct)</h3>
+      <ul>
+        <li>Casi todos empiezan igual: <q>Fórmate como…</q>, seguido de modalidad, horas y precio.</li>
+        <li>La mayoría lleva el botón «Comprar» y va a la ficha del curso. Es pedir la compra a alguien que acaba de conoceros.</li>
+        <li>Varios son de catálogo dinámico, con el nombre del producto como título.</li>
+        <li>Desde el 15-oct hay dos anuncios que van a WhatsApp con «Información al momento». Es el camino correcto: ahora hay que contestar al momento de verdad.</li>
+        <li>El 4,9 con 955 opiniones casi no aparece.</li>
+      </ul></div>
+    <div class="card"><p class="k">Propuesta</p><h3>Lo que cambiamos</h3>
+      <ul>
+        <li>El anuncio habla de la persona y de su duda, no del curso.</li>
+        <li>Un anuncio por perfil y por formato (vídeo corto, imagen y carrusel), para que Meta aprenda qué funciona con cada uno.</li>
+        <li>Dos destinos según la temperatura: la landing para quien ya quiere matricularse y WhatsApp para quien tiene dudas.</li>
+        <li>Las opiniones y el «a plazos» en primer plano.</li>
+        <li>Retargeting distinto según lo que hizo cada persona.</li>
+      </ul></div>
+  </div>
+
+  <div class="ads">
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v1 r9"><span class="tag">Reel · 25 s</span><span class="play"><svg class="i" style="width:16px;height:16px"><use href="#i-play"/></svg></span>
+          <div class="big">«Con 41 años dejé la oficina y hoy vendo pisos.»</div>
+          <div class="sm">Lo que necesitas para empezar como agente inmobiliario, en 25 segundos.</div></div>
+        <div class="tx"><b>¿Se puede empezar en el sector inmobiliario sin experiencia?</b> Sí, con una base sólida. Curso homologado de Agente Inmobiliario, 250 h online, a tu ritmo y a plazos.</div>
+        <div class="cta"><div><small>WhatsApp</small><b>Te contestamos al momento</b></div><span class="wa">Enviar WhatsApp</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Quiere entrar en el sector.</span></div>
+        <div><span>Gancho</span><span>Una historia de cambio en primera persona. Quien está pensando en cambiar se reconoce en el primer segundo.</span></div>
+        <div><span>Duda</span><span>«¿Sirve de verdad?». Se responde con «homologado» y con alguien que ya lo ha hecho.</span></div>
+        <div><span>Destino</span><span>WhatsApp: es frío y tendrá preguntas. Contesta el agente al momento.</span></div>
+        <div><span>Pieza</span><span>Testimonio real de un alumno (si nos dais permiso) o guion con avatar. Lo grabamos nosotros.</span></div>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v2"><span class="tag">Imagen</span>
+          <div class="big">Tu curso de agente inmobiliario, desde hoy. Y a plazos.</div>
+          <div class="chips"><span>Homologado</span><span>250 h online</span><span>390 €</span><span>Aplazame</span></div></div>
+        <div class="tx">Empieza hoy mismo y págalo a plazos con Aplazame. Si trabajas por cuenta ajena, consulta si te lo podemos bonificar.</div>
+        <div class="cta"><div><small>aulainmobiliaria.com</small><b>Matricúlate en 2 minutos</b></div><span>Matricularme</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Quiere entrar y ya está casi decidido.</span></div>
+        <div><span>Gancho</span><span>Quitar la barrera del precio de golpe: «desde hoy» y «a plazos».</span></div>
+        <div><span>Duda</span><span>«No me lo puedo pagar ahora». Aplazame lo resuelve.</span></div>
+        <div><span>Destino</span><span>La landing nueva del curso (pestaña 4), con la matrícula a un clic.</span></div>
+        <div><span>Pieza</span><span>Imagen limpia con vuestra marca. Muy barata de producir y de probar.</span></div>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v3"><span class="tag">Carrusel · 4</span>
+          <div class="big">Tres servicios que puedes cobrar este año sin cambiar de agencia</div>
+          <div class="sm">1 · Tasaciones periciales &nbsp; 2 · Administración de fincas &nbsp; 3 · Mediación</div>
+          <div class="slides"><i></i><i></i><i></i><i></i></div></div>
+        <div class="tx"><b>Ya eres agente. ¿Y si cobras por algo más que la venta?</b> Especialízate online en perito judicial, administración de fincas o mediación. Juntos, en pack.</div>
+        <div class="cta"><div><small>aulainmobiliaria.com</small><b>Ver las especializaciones</b></div><span>Más información</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Agente que quiere sumar.</span></div>
+        <div><span>Gancho</span><span>Habla de ingresos nuevos, no de «formarse». Es lo que le importa.</span></div>
+        <div><span>Duda</span><span>«No tengo tiempo para un curso más». Cada tarjeta es un servicio concreto que puede ofrecer.</span></div>
+        <div><span>Destino</span><span>La ficha del pack, con WhatsApp siempre visible.</span></div>
+        <div><span>Pieza</span><span>Carrusel: una tarjeta por servicio y la última con el pack.</span></div>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v4"><span class="tag">Formulario</span>
+          <div class="big">¿Tu equipo puede formarse con la bonificación de FUNDAE?</div>
+          <div class="sm">Te lo decimos en dos minutos y nos ocupamos del papeleo.</div></div>
+        <div class="tx"><b>Para inmobiliarias y administradores con equipo.</b> Forma a tus comerciales en el curso que necesites y bonifícalo. Nosotros lo gestionamos.</div>
+        <div class="cta"><div><small>Formulario de 3 preguntas</small><b>Comprueba tu bonificación</b></div><span>Solicitar</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Dueño de agencia.</span></div>
+        <div><span>Gancho</span><span>Una pregunta que él no sabe contestar y que vosotros resolvéis en dos minutos.</span></div>
+        <div><span>Duda</span><span>«El papeleo». La frase «nosotros lo gestionamos» la quita.</span></div>
+        <div><span>Destino</span><span>Formulario corto dentro de Meta (empresa, nº de personas, curso) y llamada de la asesora el mismo día.</span></div>
+        <div><span>Pieza</span><span>Imagen sobria y profesional. Es el ticket más alto: una venta son varias matrículas.</span></div>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v5 r9"><span class="tag">Reel · opiniones</span><span class="play"><svg class="i" style="width:16px;height:16px"><use href="#i-play"/></svg></span>
+          <div class="stars">★★★★★</div>
+          <div class="big">4,9 en Google. 955 alumnos lo cuentan mejor que nosotros.</div>
+          <div class="sm">Desde 2006 formando profesionales inmobiliarios.</div></div>
+        <div class="tx">Antes de decidirte, lee lo que dicen quienes ya lo han hecho. Y si te queda alguna duda, escríbenos.</div>
+        <div class="cta"><div><small>WhatsApp</small><b>Resolvemos tu duda ahora</b></div><span class="wa">Enviar WhatsApp</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Todos, como retargeting: quien vio un curso y no se matriculó (1–7 días).</span></div>
+        <div><span>Gancho</span><span>La prueba social que ya tenéis y no estáis usando: 4,9 y 955 opiniones <span class="real">Real</span>.</span></div>
+        <div><span>Duda</span><span>«¿Me puedo fiar?». Lo contestan otros alumnos.</span></div>
+        <div><span>Destino</span><span>WhatsApp: ya os conoce y le falta poco.</span></div>
+        <div><span>Pieza</span><span>Opiniones reales de Google en pantalla, con movimiento.</span></div>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="post">
+        <div class="ph"><span class="lg">AI</span><div><b>aulainmobiliaria</b><small>Publicidad</small></div></div>
+        <div class="vis v6"><span class="tag">Catálogo · retargeting</span>
+          <div class="big">¿Te quedaste a medias con el curso de Perito Judicial?</div>
+          <div class="sm">Tu plaza sigue disponible. Si algo te frenó, cuéntanoslo y lo resolvemos.</div></div>
+        <div class="tx">Empezaste la matrícula y no la terminaste. Si fue por el pago, también puedes hacerlo a plazos.</div>
+        <div class="cta"><div><small>WhatsApp</small><b>¿Te ayudamos a terminarla?</b></div><span class="wa">Enviar WhatsApp</span></div>
+      </div>
+      <div class="why"><p class="k">Por qué este anuncio</p>
+        <div><span>Perfil</span><span>Quien empezó la compra y no la terminó (1–3 días).</span></div>
+        <div><span>Gancho</span><span>El curso exacto que miró, gracias a vuestro catálogo, que ya tenéis montado <span class="real">Real</span>.</span></div>
+        <div><span>Duda</span><span>Lo que le frenó en el último paso: casi siempre el pago o una pregunta sin contestar.</span></div>
+        <div><span>Destino</span><span>WhatsApp, con el agente que ya sabe qué curso estaba comprando.</span></div>
+        <div><span>Pieza</span><span>Anuncio dinámico: una sola plantilla sirve para todo el catálogo.</span></div>
+      </div>
+    </article>
+  </div>
+  <p class="note">Los textos son una primera versión para enseñar el enfoque. Los definitivos se escriben con vosotros, con vuestro tono y con lo que preguntan de verdad vuestros alumnos. De cada anuncio se prueban 2–3 variantes de gancho y se queda la que trae más matrículas, no más clics.</p>
+  <div class="next"><button class="btn sec" data-go="1"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="3">Cómo encuentra Meta a esta gente <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · ALGORITMO -->
+<section class="pane" id="p3" role="tabpanel" aria-labelledby="t3">
+  <header>
+    <h2>3 · Que el algoritmo vaya a buscar a quien se matricula</h2>
+    <p>Hoy Meta no necesita que le digas «mujeres de 30 a 45 interesadas en inmobiliarias». Encuentra a la gente sola, siempre que le des dos cosas: anuncios que digan claramente a quién le hablan y la señal de quién acabó comprando. Si solo le cuentas que alguien rellenó un formulario, te traerá más gente que rellena formularios. Si le cuentas quién se matriculó, te traerá más gente como esa.</p>
+  </header>
+  <div class="loop">
+    <svg viewBox="0 0 900 300" role="img" aria-label="Ciclo: el anuncio llega a la persona, solicita, el CRM marca quién se matricula, esa señal vuelve a Meta y Meta busca más personas parecidas">
+      <defs><marker id="m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1D5FAE"/></marker><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#17734A"/></marker></defs>
+      <rect class="box" x="10" y="40" width="190" height="86" rx="14"/><text x="105" y="76" text-anchor="middle" font-size="16" font-weight="700">Anuncio</text><text class="mut" x="105" y="100" text-anchor="middle" font-size="13">habla a un perfil</text>
+      <rect class="box" x="240" y="40" width="190" height="86" rx="14"/><text x="335" y="76" text-anchor="middle" font-size="16" font-weight="700">Solicitud</text><text class="mut" x="335" y="100" text-anchor="middle" font-size="13">landing o WhatsApp</text>
+      <rect class="box" x="470" y="40" width="190" height="86" rx="14"/><text x="565" y="76" text-anchor="middle" font-size="16" font-weight="700">CRM</text><text class="mut" x="565" y="100" text-anchor="middle" font-size="13">cualificado · matrícula</text>
+      <rect class="acc" x="700" y="40" width="190" height="86" rx="14"/><text x="795" y="76" text-anchor="middle" font-size="16" font-weight="700">Señal a Meta</text><text class="mut" x="795" y="100" text-anchor="middle" font-size="13">«este sí compró, 390 €»</text>
+      <path class="ar" d="M200 83H236" marker-end="url(#m)"/><path class="ar" d="M430 83H466" marker-end="url(#m)"/><path class="ar" d="M660 83H696" marker-end="url(#m)"/>
+      <path class="ar2" d="M795 128V220H105V130" marker-end="url(#m2)"/>
+      <rect x="300" y="200" width="300" height="40" rx="20" fill="var(--good-soft)"/><text x="450" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="var(--good)">Meta busca más personas como las que se matricularon</text>
+      <text class="mut" x="450" y="275" text-anchor="middle" font-size="13">Cada matrícula afina el siguiente anuncio que se enseña. Cuantas más señales buenas, más barata la siguiente matrícula.</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="card"><div><h3>El anuncio es la segmentación</h3><p>Público amplio en España (y Cataluña aparte para AICAT), sin intereses cerrados. Lo que decide a quién le llega es lo que dice el anuncio: el del cambio de vida lo verá quien piensa en cambiar y el del FUNDAE, quien tiene equipo. Por eso hacen falta anuncios distintos por perfil.</p></div></div>
+    <div class="card"><div><h3>Le contamos a Meta lo que pasa después</h3><p>Con la API de conversiones, el CRM le envía a Meta cada paso: solicitud, conversación cualificada y matrícula con su importe. Es la pieza que hoy falta y la que más cambia los resultados: Meta deja de optimizar hacia quien rellena formularios y empieza a hacerlo hacia quien paga.</p></div></div>
+    <div class="card"><div><h3>Le damos vuestros alumnos como punto de partida</h3><p>Con veinte años de alumnos, la lista de quienes ya se matricularon (cifrada, como exige Meta) sirve para que busque gente parecida desde el primer día y para no enseñar anuncios a quien ya es alumno.</p></div></div>
+    <div class="card"><div><h3>Una estructura sencilla, para que aprenda rápido</h3><p>Una campaña de captación con los anuncios de cada perfil, una de equipos (FUNDAE) con formulario y una de retargeting con el catálogo. Pocas campañas con presupuesto suficiente aprenden antes que muchas pequeñas.</p></div></div>
+  </div>
+  <div class="tw stack"><table>
+    <thead><tr><th>Señal</th><th>Cuándo se envía</th><th>Para qué le sirve a Meta</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Señal"><b>Solicitud</b></td><td data-label="Cuándo">Deja sus datos en la landing, en el formulario o escribe por WhatsApp.</td><td data-label="Para qué">Volumen. Es la señal más rápida, pero la menos fiable.</td></tr>
+      <tr><td data-label="Señal"><b>Cualificado</b></td><td data-label="Cuándo">El agente confirma curso, motivo y cuándo quiere empezar.</td><td data-label="Para qué">Distinguir a quien pregunta por curiosidad de quien va en serio.</td></tr>
+      <tr><td data-label="Señal"><b>Matrícula + importe</b></td><td data-label="Cuándo">Paga en la web, con Aplazame o con la bonificación confirmada.</td><td data-label="Para qué">La que importa: optimizar hacia ingresos, no hacia formularios.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="next"><button class="btn sec" data-go="2"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="4">La landing donde se matriculan <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · LANDING -->
+<section class="pane" id="p4" role="tabpanel" aria-labelledby="t4">
+  <header>
+    <h2>4 · Una landing donde se puede matricular sin esperar a nadie <span class="ej">Ejemplo</span></h2>
+    <p>Ejemplo hecho con el curso de Agente Inmobiliario, con vuestros datos reales de precio, horas y formas de pago. Es la que verías en el móvil al pulsar el anuncio. Desplázate dentro del teléfono para recorrerla.</p>
+  </header>
+  <div class="two">
+    <div class="phone"><iframe src="../landing/" title="Landing de ejemplo del curso de Agente Inmobiliario" loading="lazy"></iframe></div>
+    <div class="marks">
+      <div class="mark"><b>1</b><div><h3>La promesa, arriba y clara</h3><p>Qué consigues, que es homologado, 250 h online y 390 €. Quien llega del anuncio confirma en dos segundos que está en el sitio correcto.</p></div></div>
+      <div class="mark"><b>2</b><div><h3>Matricularse ya, de tres maneras</h3><p>Pago completo, a plazos con Aplazame o con la bonificación. El botón está siempre a mano en el móvil, con una barra fija.</p></div></div>
+      <div class="mark"><b>3</b><div><h3>«Da igual de dónde partas»</h3><p>Tres situaciones (empezar, especializarse o formar a tu equipo), para que cada perfil se reconozca.</p></div></div>
+      <div class="mark"><b>4</b><div><h3>Las dudas, resueltas antes de que las pregunte</h3><p>Temario, diplomas, si sirve para ejercer, plazos y preguntas frecuentes. Y las 955 opiniones a la vista.</p></div></div>
+      <div class="mark"><b>5</b><div><h3>Si no se matricula, que pregunte</h3><p>«Te atendemos a cualquier hora»: un botón de WhatsApp y una opción de reservar llamada. Ahí entran los agentes (pestaña 5).</p></div></div>
+      <div class="mark"><b>6</b><div><h3>Todo queda medido</h3><p>Cada visita, cada clic en «Matricularme» y cada conversación quedan registrados. Es la señal que alimenta a Meta (pestaña 3) y el retargeting.</p></div></div>
+      <a class="btn sec" href="../landing/" target="_blank" rel="noopener">Abrir la landing a pantalla completa <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="next"><button class="btn sec" data-go="3"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="5">Si no se matricula: WhatsApp y agentes <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · WHATSAPP Y AGENTES -->
+<section class="pane" id="p5" role="tabpanel" aria-labelledby="t5">
+  <header>
+    <h2>5 · Si no se matricula, habla por WhatsApp y entran los agentes <span class="ej">Ejemplo</span></h2>
+    <p>Elige una situación y pulsa «Reproducir». A la izquierda ves la conversación tal como la vería la persona; a la derecha, qué agente está trabajando en cada momento. Las respuestas salen de vuestro catálogo y de vuestras condiciones reales. Cuando hace falta una persona, el agente lo pasa a vuestra asesora con todo el contexto.</p>
+  </header>
+  <div class="scen" role="group" aria-label="Situación">
+    <button aria-pressed="true" data-s="noche">Martes 23:10 · precio y plazos</button>
+    <button aria-pressed="false" data-s="aicat">¿Me sirve para el AICAT?</button>
+    <button aria-pressed="false" data-s="equipo">Agencia con 4 comerciales</button>
+  </div>
+  <div class="two">
+    <div style="display:grid;gap:10px">
+      <div class="chat">
+        <div class="hd"><span class="lg">AI</span><div><b>Aula Inmobiliaria</b><small>Cuenta de empresa · responde al momento</small></div></div>
+        <div class="bd" id="chat" aria-live="polite"></div>
+      </div>
+      <button class="btn pri" id="play" style="justify-self:center"><svg class="i"><use href="#i-play"/></svg> Reproducir</button>
+    </div>
+    <div style="display:grid;gap:18px;align-content:start">
+      <div class="agents" id="agents">
+        <div class="agent" data-a="aten"><span class="ic">💬</span><div><h3>Agente de atención</h3><p>Contesta al momento, a cualquier hora, con vuestro catálogo, precios, plazos y condiciones. Nunca se inventa una respuesta: si no la sabe, lo pasa a una persona.</p></div></div>
+        <div class="agent" data-a="cual"><span class="ic">🎯</span><div><h3>Agente de cualificación</h3><p>Con tres preguntas naturales averigua qué curso, para qué y cuándo quiere empezar. Lo anota en la ficha y avisa a Meta de que es una conversación buena.</p></div></div>
+        <div class="agent" data-a="cierre"><span class="ic">🧾</span><div><h3>Agente de matrícula</h3><p>Envía el enlace de pago correcto (completo, Aplazame o bonificación) o reserva una llamada con la asesora en su agenda.</p></div></div>
+        <div class="agent" data-a="seg"><span class="ic">⏰</span><div><h3>Agente de seguimiento</h3><p>Si no contesta o no termina la matrícula, vuelve a escribir en el momento adecuado, con un motivo nuevo cada vez y sin agobiar.</p></div></div>
+        <div class="agent" data-a="ases"><span class="ic">👩‍💼</span><div><h3>Vuestra asesora</h3><p>Recibe solo las conversaciones que necesitan una persona, con el resumen ya hecho: quién es, qué quiere y qué le frena.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <h3>Y si no contesta: el seguimiento <span class="ej">Ejemplo</span></h3>
+  <div class="tl">
+    <div><b>Al minuto</b><span>Primera respuesta por WhatsApp, también de noche y en fin de semana.</span></div>
+    <div><b>Al día siguiente</b><span>«¿Pudiste ver el temario?», con el PDF del curso que preguntó.</span></div>
+    <div><b>A los 3 días</b><span>Una opinión de un alumno con un perfil parecido al suyo, y el enlace a plazos.</span></div>
+    <div><b>A los 7 días</b><span>La asesora le llama, con la ficha delante. Si no coge, WhatsApp con un hueco para hablar.</span></div>
+    <div><b>Matrícula a medias</b><span>Si empezó a pagar y no terminó: mensaje en menos de una hora y anuncio de retargeting (pestaña 2).</span></div>
+    <div><b>Si dice que no</b><span>Se respeta, se anota el motivo (precio, momento, otro centro) y sale de los anuncios. El motivo sirve para mejorar el resto.</span></div>
+  </div>
+  <div class="next"><button class="btn sec" data-go="4"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="6">Vuestro caso <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · VUESTRO CASO -->
+<section class="pane" id="p6" role="tabpanel" aria-labelledby="t6">
+  <header>
+    <h2>6 · Vuestro caso: el sistema, el panel y vuestros números</h2>
+    <p>La demo enseña lo que pasa por dentro con una alumna de ejemplo: la ficha que ve la asesora, los seguimientos y el panel de cada lunes. La calculadora la mueves tú: parte de las 70 solicitudes que nos dijiste. Pon en el resto vuestros datos reales.</p>
+  </header>
+  <div class="links3">
+    <a href="../demo/"><span class="k">Demo del sistema</span><b>De la solicitud a la matrícula</b><small>Laura pide información a las 21:40 desde Instagram: WhatsApp al minuto, ficha para la asesora, seguimientos y panel.</small></a>
+    <a href="../landing/"><span class="k">Landing</span><b>Curso de Agente Inmobiliario</b><small>Matrícula directa, Aplazame, bonificación y WhatsApp 24 h, en el móvil y en el ordenador.</small></a>
+    <a href="../"><span class="k">Plan</span><b>Plan de captación completo</b><small>Lo que ya tenéis, dónde se escapan matrículas, las tres campañas, el retargeting y lo que medimos.</small></a>
+  </div>
+
+  <h3>Calculadora: ¿cuánto cambia si cada solicitud tiene respuesta y seguimiento? <span class="ej">Pon vuestros datos</span></h3>
+  <div class="calc">
+    <div style="display:grid;gap:16px">
+      <label>Solicitudes al mes <output id="o-sol">70</output><input type="range" id="sol" min="20" max="300" step="5" value="70"><span>Nos dijiste unas 70 <span class="real">Real</span></span></label>
+      <label>De cada 100 solicitudes, ¿cuántas se matriculan hoy? <output id="o-hoy">10</output><input type="range" id="hoy" min="1" max="40" step="1" value="10"><span>Pon vuestro dato. El 10 es solo el punto de partida del deslizador.</span></label>
+      <label>¿Y con respuesta al minuto y seguimiento? <output id="o-con">14</output><input type="range" id="con" min="1" max="50" step="1" value="14"><span>Lo que creáis razonable. Lo medimos desde el primer mes.</span></label>
+      <label>Importe medio por matrícula (€) <output id="o-tk">390</output><input type="range" id="tk" min="150" max="1500" step="10" value="390"><span>390 € es el precio de los cursos sueltos <span class="real">Real</span>. Los packs y los equipos lo suben.</span></label>
+    </div>
+    <div class="res">
+      <div class="fact"><b class="num" id="r-hoy">7</b><span>matrículas al mes hoy</span></div>
+      <div class="fact"><b class="num" id="r-con">10</b><span>matrículas al mes con el sistema</span></div>
+      <div class="fact hl"><b class="num" id="r-dif">+1.170 €</b><span>al mes de diferencia, solo con las solicitudes que ya os llegan, sin gastar más en anuncios</span></div>
+      <p class="note">Es una simulación con los números que pongas, no una promesa. Las cifras reales salen del panel a partir del primer mes.</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="card"><p class="k">Cómo arrancaríamos</p>
+      <div class="tl" style="margin-top:10px">
+        <div><b>Semana 1–2</b><span>CRM, WhatsApp con agentes, landing del primer curso y la señal de matrícula conectada a Meta.</span></div>
+        <div><b>Semana 3–4</b><span>Anuncios nuevos por perfil y retargeting con vuestro catálogo. Primeras medidas.</span></div>
+        <div><b>Mes 2–3</b><span>Más cursos y packs, la campaña de equipos (FUNDAE) y ajustes con los datos reales.</span></div>
+      </div></div>
+    <div class="card"><p class="k">Lo que necesitaríamos de vosotros</p>
+      <ul style="margin:10px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14.5px">
+        <li>Acceso al Business Manager de Meta (cuenta publicitaria, píxel y catálogo).</li>
+        <li>El número de WhatsApp con el que atendéis y quién hace de asesora.</li>
+        <li>Las preguntas que más os hacen y vuestras respuestas.</li>
+        <li>Si es posible, la lista de alumnos (para la señal a Meta y para no enseñarles anuncios).</li>
+        <li>Permiso para usar opiniones y, si alguien se presta, un testimonio en vídeo.</li>
+      </ul></div>
+  </div>
+  <div class="next"><button class="btn sec" data-go="5"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn sec" data-go="0">Volver al principio</button></div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Qualivo</b><span>Preparado para Aula Inmobiliaria · 23-oct-2026</span></div>
+    <p>Lo marcado como «Real» sale de aulainmobiliaria.com, de la Biblioteca de anuncios de Meta (consultada el 23-oct-2026) y de lo que nos contasteis. Lo marcado como «Ejemplo» es una propuesta para enseñar cómo funcionaría. Personas y conversaciones son inventadas.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  var panes=[].slice.call(document.querySelectorAll('.pane'));
+  function go(n,scroll){
+    n=Number(n);
+    tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===n?'true':'false');t.tabIndex=i===n?0:-1;});
+    panes.forEach(function(p,i){p.classList.toggle('on',i===n);});
+    if(tabs[n].scrollIntoView)tabs[n].scrollIntoView({block:'nearest',inline:'center'});
+    if(scroll){var y=document.querySelector('nav.tabs').getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:y,behavior:'smooth'});}
+    try{history.replaceState(null,'','#p'+n);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(i,false);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){go((i+1)%tabs.length);tabs[(i+1)%tabs.length].focus();}if(e.key==='ArrowLeft'){var j=(i-1+tabs.length)%tabs.length;go(j);tabs[j].focus();}});
+  });
+  [].slice.call(document.querySelectorAll('[data-go]')).forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'),true);});});
+  var h=(location.hash.match(/^#p(\d)$/)||[])[1]; if(h)go(h,false);
+
+  // conversaciones
+  var S={
+    noche:[
+      ['sys','Martes 23:10 · llega desde el anuncio «Con 41 años dejé la oficina…»'],
+      ['in','Hola, quiero información del curso de agente inmobiliario. ¿Cuánto cuesta? ¿Se puede pagar a plazos?','aten'],
+      ['out','¡Hola! Soy Marta, la asistente de Aula Inmobiliaria 😊 El curso de Agente Inmobiliario cuesta 390 €, es 100% online, de 250 horas y lo haces a tu ritmo. Y sí: lo puedes pagar a plazos con Aplazame, eliges los plazos al matricularte.','aten'],
+      ['out','Para orientarte bien: ¿es para empezar en el sector o ya trabajas en una inmobiliaria?','cual'],
+      ['in','Para empezar. Ahora trabajo en logística pero quiero cambiar','cual'],
+      ['out','¡Buen momento para hacerlo! Una pregunta más: ¿te gustaría empezar ya o más adelante? Si trabajas por cuenta ajena, también podemos mirar si tu empresa te lo bonifica.','cual'],
+      ['in','Ya mismo si puede ser. Lo de la empresa mejor no jaja','cual'],
+      ['sys','Ficha actualizada: empezar en el sector · Agente Inmobiliario · empieza ya · pago a plazos → señal «cualificado» a Meta'],
+      ['out','Perfecto 👌 Aquí puedes matricularte a plazos en dos minutos y empezar esta misma noche:','cierre',['Matricularme a plazos','Prefiero que me llamen']],
+      ['in','Me matriculo ahora','cierre'],
+      ['sys','23:24 · Matrícula pagada con Aplazame · 390 € → señal «matrícula» a Meta · aviso a la asesora para darle la bienvenida mañana','ases']
+    ],
+    aicat:[
+      ['sys','Domingo 11:40 · llega desde la landing del curso AICAT'],
+      ['in','Buenas. Vivo en Girona y quiero inscribirme en el registro AICAT. ¿Vuestro curso me vale?','aten'],
+      ['out','¡Hola! Soy Marta, de Aula Inmobiliaria. Sí: el Curso AICAT Homologado está pensado justo para eso, para quien quiere ejercer en Cataluña e inscribirse en el registro.','aten'],
+      ['out','Para darte el detalle exacto: ¿tienes ya experiencia en el sector o empiezas de cero?','cual'],
+      ['in','Llevo 3 años trabajando en una agencia pero sin el título','cual'],
+      ['out','Entendido. Con tu caso concreto prefiero que te lo confirme Elena, nuestra asesora, para que no te quede ninguna duda antes de pagar. ¿Te va bien que te llame mañana lunes? Elige hora:','cierre',['Lunes 10:00','Lunes 12:30','Lunes 16:00']],
+      ['in','Lunes 10:00','cierre'],
+      ['sys','Llamada reservada en la agenda de Elena · ficha con el resumen: Girona · 3 años en agencia · necesita el AICAT para el registro','ases'],
+      ['out','¡Hecho! Elena te llama mañana a las 10:00. Mientras, te dejo el temario del curso por si quieres echarle un vistazo 📄','seg']
+    ],
+    equipo:[
+      ['sys','Jueves 19:05 · llega desde el formulario «¿Tu equipo puede formarse con FUNDAE?»'],
+      ['in','Tengo una agencia en Valencia con 4 comerciales. Queremos formarnos en administración de fincas. ¿Cómo va lo de bonificarlo?','aten'],
+      ['out','¡Hola! Soy Marta, de Aula Inmobiliaria. Con equipo en plantilla, lo normal es que la formación se pueda bonificar con FUNDAE, y nosotros nos encargamos de la gestión. Así no tenéis que hacer el papeleo.','aten'],
+      ['out','Para preparar la propuesta: ¿los 4 están contratados por cuenta ajena? ¿Y lo haríais todos a la vez?','cual'],
+      ['in','Sí, los 4 en plantilla. Todos a la vez si puede ser','cual'],
+      ['sys','Ficha: agencia · 4 personas · Administración de Fincas · bonificación → prioridad alta (ticket de equipo)'],
+      ['out','Perfecto. Mañana te llama Elena, nuestra asesora, con el cálculo de la bonificación para vuestro caso y los pasos. ¿A qué hora te va mejor?','cierre',['Viernes 9:30','Viernes 11:00','Viernes 13:00']],
+      ['in','Viernes 9:30','cierre'],
+      ['sys','Aviso inmediato a Elena: oportunidad de equipo (4 matrículas) · llamada el viernes a las 9:30 con la ficha preparada','ases']
+    ]
+  };
+  var cur='noche',timer=null,chat=document.getElementById('chat'),agents=[].slice.call(document.querySelectorAll('.agent'));
+  function lit(a){agents.forEach(function(x){x.classList.toggle('lit',x.getAttribute('data-a')===a);});}
+  function hora(i){var base=cur==='noche'?[23,10]:cur==='aicat'?[11,40]:[19,5];var m=base[1]+Math.floor(i*1.4);return base[0]+':'+String(m%60).padStart(2,'0');}
+  function render(n){
+    chat.innerHTML='';
+    S[cur].slice(0,n).forEach(function(m,i){
+      var d=document.createElement('div');d.className='msg '+m[0];
+      d.textContent=m[1];
+      if(m[3]){var b=document.createElement('div');b.className='btns';m[3].forEach(function(t){var s=document.createElement('span');s.textContent=t;b.appendChild(s);});d.appendChild(b);}
+      if(m[0]!=='sys'){var t=document.createElement('small');t.textContent=hora(i)+(m[0]==='out'?' ✓✓':'');d.appendChild(t);}
+      chat.appendChild(d);
+    });
+    chat.scrollTop=chat.scrollHeight;
+  }
+  function play(){
+    clearTimeout(timer);var i=0,msgs=S[cur];chat.innerHTML='';lit(null);
+    (function step(){
+      if(i>=msgs.length){lit(null);return;}
+      var m=msgs[i];
+      if(m[0]==='out'){var ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';chat.appendChild(ty);chat.scrollTop=chat.scrollHeight;lit(m[2]);
+        timer=setTimeout(function(){i++;render(i);timer=setTimeout(step,700);},900);}
+      else{i++;render(i);if(m[2])lit(m[2]);timer=setTimeout(step,m[0]==='sys'?1300:1100);}
+    })();
+  }
+  document.getElementById('play').addEventListener('click',play);
+  [].slice.call(document.querySelectorAll('.scen button')).forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.scen button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');cur=b.getAttribute('data-s');clearTimeout(timer);render(S[cur].length);lit(null);
+  });});
+  render(S[cur].length);
+
+  // calculadora
+  var f=new Intl.NumberFormat('es-ES');
+  function $(id){return document.getElementById(id);}
+  function calc(){
+    var sol=+$('sol').value,hoy=+$('hoy').value,con=+$('con').value,tk=+$('tk').value;
+    $('o-sol').textContent=sol;$('o-hoy').textContent=hoy;$('o-con').textContent=con;$('o-tk').textContent=f.format(tk)+' €';
+    var a=sol*hoy/100,b=sol*con/100,d=(b-a)*tk;
+    $('r-hoy').textContent=f.format(Math.round(a*10)/10);$('r-con').textContent=f.format(Math.round(b*10)/10);
+    $('r-dif').textContent=(d>=0?'+':'−')+f.format(Math.abs(Math.round(d)))+' €';
+  }
+  ['sol','hoy','con','tk'].forEach(function(id){$(id).addEventListener('input',calc);});calc();
+})();
+</script>
+</body>
+</html>
