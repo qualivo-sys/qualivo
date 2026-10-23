@@ -37,7 +37,7 @@
       entrevista: { txt: 'Seguimiento', exp: 'los «me lo pienso» a los que nadie vuelve a escribir' },
       matricula: { txt: 'Cierre', exp: 'pagos empezados que no se terminan' }
     },
-    mesDatos: { respuestaAntes: 410, respuestaAhora: 1, agendadas: 21 },
+    mesDatos: { respuestaAntes: 410, respuestaAhora: 1, agendadas: 27 },
     campanas: [
       { id: 'c1', canal: 'Meta', nombre: 'Curso de Agente Inmobiliario', inversion: 900, ticket: 390,
         embudo: { anuncio: 14200, info: 30, contactado: 26, cualificado: 17, entrevista: 10, matricula: 6, alumno: 6 } },
