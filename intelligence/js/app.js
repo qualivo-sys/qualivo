@@ -26,6 +26,7 @@
     { id: 'aviacion', txt: 'Escuela de aviación', desc: 'TCP, azafata de tierra y despachador de vuelo', ico: 'formacion' },
     { id: 'academia', txt: 'Academia de idiomas y apoyo', desc: 'Inglés para niños y adultos, apoyo escolar y prueba de nivel', ico: 'formacion' },
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
+    { id: 'aula', txt: 'Formación inmobiliaria', desc: 'Escuela online de cursos inmobiliarios: Agente, AICAT, Perito, Fincas y equipos con FUNDAE', ico: 'formacion' },
     { id: 'masters', txt: 'Másteres online', desc: 'Escuela online con alumnos de varios países', ico: 'formacion' },
     { id: 'suscripcion', txt: 'Suscripción', desc: 'Cajas o productos por suscripción: altas, pausas y bajas', ico: 'sube' },
     { id: 'maritima', txt: 'Formación marítima', desc: 'Formación homologada: certificados para embarcar y cursos para flotas, náuticas y puertos', ico: 'formacion' },
