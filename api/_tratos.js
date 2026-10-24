@@ -84,7 +84,7 @@ async function pipelineDe(contactId) {
 // a Segunda reunión, Oferta o Negociación (a mano o desde el panel), o el contacto lleva la
 // etiqueta reunion-encaja; api/seguimientos.js lo barre cada mañana.
 const META_POR_ETAPA = { conversacion: 'Contacted', celebrada: 'Qualified', oferta: 'Qualified', seguimiento: 'Qualified', piloto: 'Converted', cliente: 'Converted', noEncaja: 'Disqualified' };
-async function calidadAMeta(contacto, etapa, motivo) {
+async function calidadAMeta(contacto, etapa, motivo, valor) {
   try {
     const evento = META_POR_ETAPA[etapa];
     if (!evento || !contacto) return;
@@ -95,7 +95,8 @@ async function calidadAMeta(contacto, etapa, motivo) {
     const marca = 'meta-' + evento.toLowerCase();
     if (tags.indexOf(marca) !== -1) return 'ya_enviado';
     const r = await require('./_meta.js').calidadLead(evento, {
-      leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id, motivo: motivo
+      leadgenId: idMeta.slice(10), email: contacto.email, telefono: contacto.phone, contactId: contacto.id, motivo: motivo,
+      valor: evento === 'Converted' ? valor : undefined
     });
     if (r === 'enviado' && contacto.id) {
       await fetch(GHL_BASE + '/contacts/' + contacto.id + '/tags', { method: 'POST', headers: cabeceras(), body: JSON.stringify({ tags: [marca] }) });
