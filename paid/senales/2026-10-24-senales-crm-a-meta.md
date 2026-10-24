@@ -47,3 +47,15 @@ Fuente: píxel /stats y GHL, 24-oct [C].
 4. **Control diario de Paid:** en el cierre se compara cada lead con `meta-lead-*` y su etapa con sus etiquetas `meta-*`. Si falta algo que debería haber salido, se avisa.
 
 **Qué tiene que hacer el equipo:** nada nuevo. Basta con mover el trato en GHL o poner las etiquetas `reunion-encaja` / `cliente`, y con poner el importe en la oportunidad. Sin importe, la venta sale sin valor.
+
+## Responsabilidad (confirmada por Maikel el 24-oct)
+
+**Paid se encarga de:**
+- Que cada lead llegue a Meta con su etapa.
+- La comprobación diaria de que el CRM y Meta coinciden.
+- El código de las señales.
+- La decisión de optimizar por clientes cualificados.
+
+**Maikel y Growth se encargan de:** tener el CRM al día (etapas, `reunion-encaja` o `cliente`, e importe).
+
+**Growth se encarga de:** las reuniones y las demos.
