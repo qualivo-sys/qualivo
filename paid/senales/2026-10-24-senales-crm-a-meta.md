@@ -34,3 +34,16 @@ Fuente: píxel /stats y GHL, 24-oct [C].
 `Qualified` (23-oct, 13:00 UTC) y `Converted` (24-oct, valor 3.600 €), con `lead_id` 849695508226387 y `external_id` hasheado, por la API de conversiones al píxel 879197745226987. Los event_id siguen el mismo patrón que el código (`lead-<id>-qualified`, `lead-<id>-converted`).
 
 **Estado (24-oct):** bloqueado. El control de permisos de esta sesión no deja escribir en sistemas externos (Meta y GHL) sin aprobación de Maikel.
+
+## Hecho el 24-oct (aprobado por Maikel: «hazlo todo tú y encárgate de que se haga automatizado»)
+
+1. **Envío manual del primer cliente:** Meta confirmó `events_received: 2` (Qualified y Converted, 3.600 €). En GHL, la oportunidad pasó a «Cliente», ganada, con 3.600 €, y el contacto tiene las etiquetas `meta-qualified` y `meta-converted`.
+2. **Automatización publicada:** commit f5bd6e44 en `claude/qualivo-landing-vercel-nubk1i`, desplegado (`/api/senales-meta/` responde 401 sin el secreto).
+   - `api/senales-meta.js`: cron cada 2 horas, todos los días. Recorre los tratos abiertos y ganados de Prospección y manda Schedule, Qualified y Converted (con importe) a cada lead con `meta-lead-*`, una sola vez por evento.
+   - `api/_meta.js`: `calidadLead` acepta `valor` (value/EUR) y `cuando`.
+   - `api/_tratos.js`: `calidadAMeta(..., valor)` pasa el importe en Converted.
+   - `vercel.json`: cron `25 */2 * * *`.
+3. **Prueba en seco antes de subir** (GHL real, escrituras bloqueadas): 74 tratos revisados, 29 leads de Meta, 22 eventos pendientes (21 Schedule y 1 Qualified del piloto de reformas) y 0 errores.
+4. **Control diario de Paid:** en el cierre se compara cada lead con `meta-lead-*` y su etapa con sus etiquetas `meta-*`. Si falta algo que debería haber salido, se avisa.
+
+**Qué tiene que hacer el equipo:** nada nuevo. Basta con mover el trato en GHL o poner las etiquetas `reunion-encaja` / `cliente`, y con poner el importe en la oportunidad. Sin importe, la venta sale sin valor.
