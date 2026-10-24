@@ -188,6 +188,7 @@ Unas 25 sesiones de marzo a agosto: lead magnets (×2), Instagram ABM y publicac
 | Propuestas y precio | Maikel decide; agente de propuestas con reglas (Plan oct Notion §11) | Decisión 7-oct: mínimo 1.000 €/mes | Sin agente de propuestas operativo (Ventas dormido). Lo hace Growth/Maikel a mano. |
 | Retención, onboarding, informe al cliente | Gestores de cuenta | CFO: «informe semanal por cliente de una página que envía Maikel» (Q1 2027); Codex: Customer Success «EXTEND» | **Nadie lo hace hoy.** |
 | Notion Sala de Mando | «Solo el cerebro escribe» | — | El cerebro no escribe desde el 1-sep. |
+| Señales del CRM a Meta (etapa real de cada lead de formulario: reserva, reunión con encaje, venta con importe, descarte) | — | **Actualización 24-oct (Paid, por indicación de Maikel):** dueño **Paid**. Incluye el envío, el cuadre nocturno CRM↔Meta en su cierre, el código (`api/senales-meta.js`, `api/_meta.js`, `api/_tratos.js`; cron `/api/senales-meta/` cada 2 h) y decidir cuándo hay volumen para optimizar por cliente cualificado (PAID-05). Tener el CRM al día (etapas, etiquetas `reunion-encaja`/`cliente`, importe) es de **Maikel y Growth**; Paid detecta y avisa. Growth sigue con reuniones y demos | Resuelto. Primera señal enviada el 24-oct: cliente de E-01, venta de 3.600 €, recepción confirmada por Meta. |
 
 ---
 
