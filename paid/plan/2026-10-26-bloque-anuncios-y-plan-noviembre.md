@@ -1,4 +1,6 @@
-# Bloque del 26-oct · anuncios nuevos y plan de noviembre · lo que lleva Paid
+# Bloque del 26-oct (13:30-15:30) · anuncios nuevos y plan de noviembre · propuesta de Paid YA DECIDIDA
+
+Maikel solo tiene que validar o corregir. Reglas del bloque (Chief of Staff): una sola prueba de pago activa a la vez y **sin subir presupuesto**: el gasto se queda en **20 €/día en total** (unos 600 € en noviembre).
 
 Datos de la Meta API y de GHL a 25-oct, 19:07 UTC. Sin datos personales.
 
@@ -28,20 +30,24 @@ Datos de la Meta API y de GHL a 25-oct, 19:07 UTC. Sin datos personales.
 - Un formulario con prefijo `Qualivo_`, probado con un envío que llegue a GHL antes de activarlo.
 - En pausa hasta tu OK.
 
-## 3 · Calendario propuesto (una prueba de pago a la vez)
+## 3 · Calendario decidido (20 €/día en total, una prueba a la vez)
 
-| Fechas | Qué | Presupuesto | Parada |
-|---|---|---|---|
-| hasta el 31-oct | E-01 sigue como está | 20 €/día | — |
-| desde el 1-nov | **A** entra como 2.º anuncio en el conjunto de formación (comparar por anuncio, sin reiniciar el aprendizaje) | El mismo de formación | 75 € sin ningún lead apto en A |
-| 3-16 nov | **B · reformas** en su propio conjunto | 10 €/día, 140 € como máximo | 70 € sin ningún lead A o B |
-| 17-30 nov | La ganadora sube de presupuesto **o** PAID-05 (optimizar por cualificados), según volumen de señales | A decidir el 16-nov | — |
-| diciembre | Google Ads, si se cumple la condición del plan Q4 (cierre ≥15 %) y hay acceso a la cuenta | 200 € de piloto | 100 € sin ningún apto |
+| Fechas | Prueba activa | Reparto de los 20 €/día | Éxito | Parada |
+|---|---|---|---|---|
+| hasta el 31-oct | E-01 (como está) | 20 € formación | — | — |
+| 1-14 nov | **A · anuncio 09** frente al vídeo actual, en el mismo conjunto de formación (comparar por anuncio) | 20 € formación | ≥1 reunión con encaje de A, o coste por lead apto de A < actual | 75 € en A sin ningún lead apto → se queda el actual |
+| 15-28 nov | **B · reformas filtrado** en su propio conjunto | 10 € formación (solo el anuncio ganador) + 10 € reformas | ≥1 reunión con encaje a ≤137 € y ≥4 leads A o B | 70 € sin ningún lead A o B |
+| 29-30 nov | Lectura del mes y decisión de diciembre | — | — | — |
+
+**Fuera de noviembre:**
+- **PAID-05** (optimizar por cualificados): no hay volumen. Se acumulan señales, que ya están automatizadas.
+- **Google Ads:** la condición del plan Q4 no se cumple. El paquete del martes queda en pausa o listo para cargar.
+- **Retargeting:** las audiencias están por debajo de 1.000 personas. Queda documentado, sin campaña.
 
 ## 4 · Lo que necesito que decidas en el bloque
 
 1. El OK al arranque de ventanas, más el ID de la voz para Creative y las 3 frases de la voz.
-2. ¿A desde el 1-nov dentro de formación? (Recomendado.)
-3. El presupuesto de noviembre en total. Propuesta: unos 600 € (formación a 15-20 €/día más reformas, 140 €).
+2. Validar A desde el 1-nov dentro de formación.
+3. Confirmar que se mantienen 20 €/día en total y el reparto del 15-nov (10 € formación y 10 € reformas).
 4. Acceso a Google Ads, o confirmar que no hay cuenta (para el paquete del martes).
 5. Cómo encaja Outbound: el mismo mensaje de «solicitudes de calidad» en el correo, y no lanzar a la misma cuenta por dos canales a la vez.
