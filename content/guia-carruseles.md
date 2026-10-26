@@ -105,3 +105,11 @@ redactorfreelance.com, thepower.education) más la guía de voz de casa.
 **Prohibido en el copy:** empezar por el tema, «hoy os traigo», «en este carrusel», más de una idea por lámina, tres CTA, cifras sin fuente, «no se trata de X sino de Y», raya larga, punto y coma.
 
 **Pantallas:** cuando se enseña una herramienta (calendario, WhatsApp, CRM), se imita la de verdad para que sea creíble: mismo orden de elementos, mismos colores de interfaz, datos reales. Nunca el logotipo de la marca ajena.
+
+**Menos es más (Maikel, 26-oct).** La pieza «Los leads de Meta son malos» pasó por cuatro versiones con tablas, gráficos, etiquetas «Error 1 · captación» y párrafos de 40-60 palabras. El veredicto de Maikel: «demasiado texto, muy ChatGPT, el usuario pasa». Lo que manda desde hoy, contrastado con el radar de octubre (`content/redes/radar-2026-10.md`):
+- **Una frase grande y, como mucho, una pequeña por lámina.** Menos de 25 palabras. Si hace falta una tabla para explicarlo, no es para carrusel.
+- **Nada alrededor:** ni etiquetas de sección, ni pies de fuente en cada lámina, ni logotipo grande. Solo «Maikel · Qualivo» en la primera y la última y el número de lámina.
+- **Tono hablado:** se tiene que poder decir en voz alta tal cual.
+- **Portada = frase literal que el sector reconoce** («Hazme anuncios. Si entran clientes, te pago» es lo que más conversación genera del radar).
+- **Cierre = pregunta que pide una anécdota corta,** no una opinión ni una venta.
+- **Los datos de ejemplo,** una sola vez y en pequeño.

@@ -1,169 +1,59 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=block" rel="stylesheet">
 <style>
 html,body{margin:0;background:#888}
-.l{position:relative;width:1080px;height:1350px;background:#F4F1EA;overflow:hidden;font-family:'Space Grotesk',sans-serif;color:#0B0C0E;margin-bottom:20px}
-.l.osc{background:#0B0C0E;color:#fff}
-.et{position:absolute;left:72px;top:64px;font:500 21px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#6B6F76}
-.osc .et{color:#8A8F98}
-.et b{color:#E8590C;font-weight:700}
-h1{position:absolute;left:72px;top:118px;margin:0;font-size:76px;line-height:1.04;font-weight:700;letter-spacing:-.025em;width:936px}
-h1 span{color:#E8590C}
-.sub{position:absolute;left:72px;font-size:36px;line-height:1.32;color:#2B2F35;width:936px}
-.osc .sub{color:#C9CDD4}
-.gris{color:#6B6F76!important}
-.ej{position:absolute;left:72px;bottom:118px;font:500 19px 'JetBrains Mono',monospace;color:#8A867E;letter-spacing:.04em;text-transform:uppercase}
-.osc .ej{color:#6B6F76}
-.n{position:absolute;right:72px;bottom:56px;font:500 20px 'JetBrains Mono',monospace;color:#6B6F76}
-.marca{position:absolute;left:72px;bottom:56px;font:700 22px 'Space Grotesk';letter-spacing:-.01em}
-.mono{font-family:'JetBrains Mono',monospace}
-.cita{position:absolute;left:72px;top:250px;font-size:132px;line-height:.98;font-weight:700;letter-spacing:-.035em;width:960px}
-.cita i{font-style:normal;color:#E8590C}
-/* barras */
-.fila{position:absolute;left:72px;width:936px}
-.fila .et2{font:500 24px 'JetBrains Mono',monospace;color:#6B6F76;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
-.fila .bar{height:76px;border-radius:6px}
-.fila .val{font-size:64px;font-weight:700;letter-spacing:-.02em;margin-top:12px}
-/* puntos */
-.puntos{position:absolute;left:72px;top:320px;display:grid;grid-template-columns:repeat(10,48px);gap:14px 39.5px}
-.p{width:48px;height:48px;border-radius:50%;background:#0B0C0E}
-.p.o{background:none;box-shadow:inset 0 0 0 4px #E8590C}
-/* chat */
-.chat{position:absolute;left:120px;top:340px;width:840px}
-.bur{display:inline-block;max-width:600px;font-size:34px;line-height:1.3;padding:22px 28px;border-radius:26px}
-.ellos{background:#fff;border:1.5px solid #E2DCCF;border-bottom-left-radius:6px}
-.nos{background:#0B0C0E;color:#fff;border-bottom-right-radius:6px;float:right}
-.meta{font:500 20px 'JetBrains Mono',monospace;color:#8A867E;margin:10px 4px 0}
-.dias{display:flex;gap:12px;margin-top:40px}
-.dia{flex:1;height:64px;border-radius:8px;border:2px dashed #CFC7B6;display:flex;align-items:center;justify-content:center;font:500 20px 'JetBrains Mono',monospace;color:#A8A091}
-/* comparativa */
-.comp{position:absolute;left:72px;top:330px;width:936px;border-collapse:collapse}
-.comp th{font:500 22px 'JetBrains Mono',monospace;color:#8A8F98;text-align:right;padding:0 0 18px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
-.comp th:first-child{text-align:left}
-.comp td{font-size:48px;font-weight:700;text-align:right;padding:18px 0;border-top:1.5px solid #2A2D33;letter-spacing:-.02em}
-.comp td:first-child{text-align:left;font:500 26px 'JetBrains Mono',monospace;color:#8A8F98;letter-spacing:.02em}
-.comp .naranja{color:#E8590C}
-</style><style>
-.flujo{position:absolute;left:72px;width:936px;display:flex;align-items:stretch;gap:22px}
-.caja{flex:1;border-radius:18px;padding:26px 28px;background:#fff;border:1.5px solid #E2DCCF}
-.caja .k{font:500 20px 'JetBrains Mono',monospace;color:#8A867E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
-.caja .v{font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-.01em}
-.flecha{align-self:center;font:700 44px 'Space Grotesk';color:#0B0C0E}
-.caja.on{border:3px solid #E8590C}
-.form{position:absolute;top:330px;width:438px;border-radius:22px;background:#fff;border:1.5px solid #E2DCCF;padding:30px 28px;box-sizing:border-box}
-.form .tt{font:500 20px 'JetBrains Mono',monospace;color:#8A867E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:22px}
-.campo{border:1.5px solid #E2DCCF;border-radius:10px;padding:14px 16px;font-size:24px;color:#9A968E;margin-bottom:12px}
-.campo small{display:block;font:500 15px 'JetBrains Mono',monospace;color:#B4AFA5;margin-bottom:4px;text-transform:uppercase}
-.btn{margin-top:18px;background:#0B0C0E;color:#fff;border-radius:10px;padding:16px;text-align:center;font-size:26px;font-weight:700}
-.preg{border:3px solid #E8590C;border-radius:12px;padding:14px 16px;margin-top:6px}
-.preg b{display:block;font-size:24px;margin-bottom:10px}
-.op{font-size:22px;color:#2B2F35;padding:6px 0}
-.op:before{content:"";display:inline-block;width:18px;height:18px;border:2px solid #9A968E;border-radius:50%;vertical-align:-3px;margin-right:10px}
-.lado{position:absolute;top:290px;font:700 26px 'Space Grotesk'}
-.lin{display:flex;align-items:baseline;border-bottom:2px solid #0B0C0E;padding:26px 0 18px}
-.hn{font:700 26px 'JetBrains Mono',monospace;color:#E8590C;width:56px}
-.ht{flex:1;font-size:38px;font-weight:500}
-.hb{font:500 34px 'JetBrains Mono',monospace;color:#8A867E}
+.l{position:relative;width:1080px;height:1350px;background:#F4F1EA;overflow:hidden;font-family:'Space Grotesk',sans-serif;color:#0B0C0E;margin-bottom:20px;box-sizing:border-box;padding:0 96px;display:flex;flex-direction:column;justify-content:center}
+.l.osc{background:#0B0C0E;color:#F4F1EA}
+.g{font-size:92px;line-height:1.06;font-weight:700;letter-spacing:-.03em;margin:0}
+.m{font-size:50px;line-height:1.25;font-weight:500;color:#5E625F;margin:44px 0 0}
+.osc .m{color:#A9ADB3}
+.a{color:#E8590C}
+.pie{position:absolute;left:96px;bottom:64px;font-size:26px;font-weight:500;color:#8A867E}
+.n{position:absolute;right:96px;bottom:64px;font-size:26px;font-weight:500;color:#8A867E}
+.ej{font-size:28px;color:#8A867E;margin-top:40px}
 </style></head><body>
 
-
-<!-- 1 · portada -->
 <div class="l" id="s1">
-  <div class="et"><b>Captación</b> · formación</div>
-  <div class="cita"><i>«</i>Los leads de Meta son malos.<i>»</i></div>
-  <div class="sub" style="top:820px;font-size:44px;line-height:1.25;color:#0B0C0E;font-weight:500">A veces es verdad. Cinco errores que los hacen malos. Tres están antes del formulario.</div>
-  <div class="sub gris" style="top:1040px;font-size:30px">Con datos de ejemplo de un centro de formación.</div>
-  <div class="marca">Qualivo</div><div class="n">1/7 →</div>
+  <p class="g">«Los leads de Meta son malos.»</p>
+  <p class="m">A veces es verdad.<br>Casi nunca es solo eso.</p>
+  <div class="pie">Maikel · Qualivo</div><div class="n">→</div>
 </div>
 
-<!-- 2 · qué le pides a Meta -->
 <div class="l" id="s2">
-  <div class="et"><b>Error 1</b> · captación</div>
-  <h1>Le pides a Meta formularios, <span>no clientes.</span></h1>
-  <div class="flujo" style="top:360px"><div class="caja"><div class="k">Le cuentas</div><div class="v">Formulario enviado</div></div><div class="flecha">→</div><div class="caja"><div class="k">Te trae</div><div class="v">Gente que rellena formularios</div></div></div>
-  <div class="flujo" style="top:560px"><div class="caja on"><div class="k">Le cuentas</div><div class="v">Quién se matriculó</div></div><div class="flecha">→</div><div class="caja on"><div class="k">Te trae</div><div class="v">Gente parecida a la que se matricula</div></div></div>
-  <div class="sub" style="top:800px">Meta busca lo que le pides. Si solo sabe quién rellenó el formulario, nunca aprende quién acabó comprando.</div>
-  <div class="sub gris" style="top:1000px;font-size:32px">Hay que devolverle qué pasó después: cualificado, cita, venta.</div>
-  <div class="marca">Qualivo</div><div class="n">2/7 →</div>
+  <p class="g">Primero, mira qué le pides a Meta.</p>
+  <p class="m">Si solo le cuentas quién rellena el formulario, te trae <span class="a">gente que rellena formularios.</span></p>
+  <div class="n">2/7</div>
 </div>
 
-<!-- 3 · el formulario -->
 <div class="l" id="s3">
-  <div class="et"><b>Error 2</b> · captación</div>
-  <h1 style="font-size:68px">Un formulario que se rellena <span>en dos toques.</span></h1>
-  <div class="lado" style="left:72px;top:330px;color:#8A867E;font:500 20px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em">Sin filtro</div>
-  <div class="lado" style="left:570px;top:330px;color:#E8590C;font:700 20px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em">Con una pregunta</div>
-  <div class="form" style="left:72px;top:375px">
-    <div class="campo"><small>Nombre</small>Laura Martín</div>
-    <div class="campo"><small>Teléfono</small>6•• ••• •••</div>
-    <div class="campo"><small>Email</small>laura@•••••.com</div>
-    <div class="btn">Enviar</div>
-  </div>
-  <div class="form" style="left:570px;top:375px">
-    <div class="campo"><small>Nombre</small>Laura Martín</div>
-    <div class="campo"><small>Teléfono</small>6•• ••• •••</div>
-    <div class="preg"><b>¿Cuándo quieres empezar?</b><div class="op">Este mes</div><div class="op">En dos o tres meses</div><div class="op">Solo estoy mirando</div></div>
-    <div class="btn">Enviar</div>
-  </div>
-  <div class="sub" style="top:945px;font-size:33px">Con los datos ya rellenos, pedir información cuesta lo mismo que dar un «me gusta». Una pregunta más suele traer menos solicitudes. Si trae más ventas, solo lo sabrás midiéndolo: pruébalo dos semanas y cuenta matrículas, no formularios.</div>
-  <div class="ej">Ejemplo</div>
-  <div class="marca">Qualivo</div><div class="n">3/7 →</div>
+  <p class="g">Luego, tu formulario.</p>
+  <p class="m">Si se rellena en dos toques, <span class="a">lo rellena cualquiera.</span></p>
+  <div class="n">3/7</div>
 </div>
-<div class="l osc" id="s4">
-  <div class="et"><b>Error 3</b> · captación</div>
-  <h1 style="font-size:66px">Mides el anuncio por lo <span>barato que es el contacto.</span></h1>
-  <table class="comp">
-    <tr><th></th><th>Anuncio A</th><th>Anuncio B</th></tr>
-    <tr><td>Inversión</td><td>3.000 €</td><td>3.000 €</td></tr>
-    <tr><td>Coste por contacto</td><td class="naranja">15 €</td><td>40 €</td></tr>
-    <tr><td>Contactos</td><td>200</td><td>75</td></tr>
-    <tr><td>Matrículas</td><td>3</td><td>9</td></tr>
-    <tr><td>Coste por matrícula</td><td>1.000 €</td><td class="naranja">333 €</td></tr>
-  </table>
-  <div class="sub" style="top:985px;font-size:34px">Mismo presupuesto. El barato trae casi el triple de contactos y cada matrícula le sale tres veces más cara.</div>
-  <div class="sub" style="top:1100px;font-size:32px;color:#8A8F98">Si solo miras el coste por contacto, apagas el que vende.</div>
-  <div class="ej">Datos de ejemplo</div>
-  <div class="marca" style="color:#fff">Qualivo</div><div class="n">4/7 →</div>
+
+<div class="l" id="s4">
+  <p class="g">El anuncio barato engaña.</p>
+  <p class="m">15 € por contacto.<br><span class="a">1.000 € por venta.</span></p>
+  <p class="m" style="margin-top:28px">40 € por contacto.<br><span class="a">333 € por venta.</span></p>
+  <p class="ej">Mismo presupuesto. Datos de ejemplo.</p>
+  <div class="n">4/7</div>
 </div>
 
 <div class="l" id="s5">
-  <div class="et"><b>Error 4</b> · después del formulario</div>
-  <h1>Contestas <span>a las cuatro horas.</span></h1>
-  <div class="fila" style="top:350px"><div class="et2">El equipo, de media</div><div class="bar" style="width:936px;background:#0B0C0E"></div><div class="val">4 h 12 min</div></div>
-  <div class="fila" style="top:620px"><div class="et2">Con respuesta automática</div><div class="bar" style="width:10px;background:#E8590C"></div><div class="val" style="color:#E8590C">2 min</div></div>
-  <div class="sub" style="top:880px">Quien rellena un formulario a las diez está pensando en ti a las diez. A las dos de la tarde ya ha seguido con su día. Cuando le llamas y no contesta, parece un lead malo.</div>
-  <div class="ej">Datos de ejemplo</div>
-  <div class="marca">Qualivo</div><div class="n">5/7 →</div>
+  <p class="g">Y después del formulario:</p>
+  <p class="m">¿Cuánto tardáis en contestar?<br>¿Cuántas veces lo intentáis?</p>
+  <div class="n">5/7</div>
 </div>
 
 <div class="l" id="s6">
-  <div class="et"><b>Error 5</b> · después del formulario</div>
-  <h1 style="font-size:68px">Le interesaba <span>y nadie volvió a escribir.</span></h1>
-  <div class="chat">
-    <div class="bur nos">Hola, Laura. Te escribo por el curso que consultaste. ¿Te cuento cómo funciona?</div>
-    <div style="clear:both"></div>
-    <div class="bur ellos" style="margin-top:26px">Sí, me interesa. ¿Cuándo empieza el próximo?</div>
-    <div class="meta">Martes 10:42</div>
-    <div class="dias"><div class="dia">mié</div><div class="dia">jue</div><div class="dia">vie</div><div class="dia">lun</div><div class="dia">mar</div><div class="dia">mié</div></div>
-    <div class="meta" style="margin-top:14px">Nadie le ha vuelto a escribir</div>
-  </div>
-  <div class="sub" style="top:960px">Contestó, dijo que le interesaba y ahí se quedó. En el ejemplo hay <b>8</b> así este mes.</div>
-  <div class="ej">Datos de ejemplo</div>
-  <div class="marca">Qualivo</div><div class="n">6/7 →</div>
+  <p class="g">A veces el lead es malo.</p>
+  <p class="m">Pero eso solo lo sabes <span class="a">después de haberle llamado.</span></p>
+  <div class="n">6/7</div>
 </div>
 
-
-<!-- 7 · cierre -->
-<div class="l" id="s7">
-  <div class="et"><b>Guárdalo para el lunes</b></div>
-  <h1 style="font-size:68px">Antes de culpar a Meta, <span>comprueba tres cosas.</span></h1>
-  <div style="position:absolute;left:72px;top:330px;width:936px">
-    <div class="lin"><span class="hn">1</span><span class="ht">Cuántos leads son cualificados</span><span class="hb">___ %</span></div>
-    <div class="lin"><span class="hn">2</span><span class="ht">Cuánto tardáis en responder</span><span class="hb">___ min</span></div>
-    <div class="lin"><span class="hn">3</span><span class="ht">Cuántos terminan comprando</span><span class="hb">___ %</span></div>
-  </div>
-  <div class="sub gris" style="top:730px;font-size:30px">Si no podéis rellenar alguna, ese es el primer error.</div>
-  <div class="sub" style="top:870px;font-size:42px;font-weight:500;color:#0B0C0E">Cuando decís que los leads son malos, ¿lo sabéis por los datos de ventas o por lo que os dice el equipo comercial?</div>
-  <div class="marca">Qualivo</div><div class="n">7/7</div>
+<div class="l osc" id="s7">
+  <p class="g">¿Cuándo fue la última vez que lo oíste en tu empresa?</p>
+  <p class="m">¿Y alguien lo comprobó?</p>
+  <div class="pie">Maikel · Qualivo</div><div class="n">7/7</div>
 </div>
 </body></html>

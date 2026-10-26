@@ -6,60 +6,41 @@
 
 ## Ficha
 
-- **Pilar:** diagnóstico de problemas.
-- **Sector del ejemplo:** formación.
-- **Dolor:** «los leads de Meta son malos».
-- **Etapa:** captación (anuncio, formulario y medición) y los primeros días después del formulario.
-- **Tesis:** a veces los leads son malos, pero casi siempre por errores propios:
-  - tres antes del formulario: qué le pides a Meta, un formulario sin filtro y medir el anuncio por el coste del contacto;
-  - dos después: contestar tarde y no volver a escribir.
-- **Datos:** de ejemplo, indicado en las láminas:
-  - mismo presupuesto, 3.000 €;
-  - anuncio A: 15 € por contacto, 200 contactos, 3 matrículas, 1.000 € por matrícula;
-  - anuncio B: 40 € por contacto, 75 contactos, 9 matrículas, 333 € por matrícula;
-  - 4 h 12 min frente a 2 min (de la demo de Intelligence);
-  - 8 contactos que dijeron «me interesa» y nadie les volvió a escribir.
-- **Cuentas comprobadas:**
-  - 3.000 / 15 = 200;
-  - 3.000 / 40 = 75;
-  - 3.000 / 3 = 1.000;
-  - 3.000 / 9 ≈ 333.
-- **Afirmaciones técnicas:** son conocimiento general de Meta, no datos nuestros.
-  - Meta optimiza al evento que le das.
-  - Devolverle cualificado, cita y venta le enseña a buscar compradores (lo explica nuestro artículo /blog/conversiones-offline-meta/).
-  - Un formulario con los datos ya rellenos se envía casi sin esfuerzo.
-  - Añadir una pregunta se plantea como prueba que hay que medir en matrículas, no como regla.
-  - No se da ninguna cifra de cuánto mejora.
+- **v5 (26-oct):** Maikel ve la v4 con demasiado texto y «muy ChatGPT». Reescrita con el radar de octubre (`content/redes/radar-2026-10.md`) y la regla nueva de `content/guia-carruseles.md`: una frase por lámina, sin etiquetas, tablas ni gráficos, y en tono hablado.
+- **Pilar:** diagnóstico de problemas, con foco en captación.
+- **Dolor:** «los leads de Meta son malos», una frase literal que el sector reconoce.
+- **Tesis:** a veces es verdad, pero casi nunca es solo eso. Hay que mirar qué le pides a Meta, cómo es el formulario y cuánto te cuesta cada venta (no cada contacto). Y después, cuánto tardas y cuántas veces lo intentas.
+- **Datos:** uno solo, de ejemplo y marcado como tal (mismo presupuesto: 15 € por contacto y 1.000 € por venta frente a 40 € y 333 €).
 - **Formato:** carrusel de 7 láminas, 1080 × 1350 (`lamina-1.png` a `lamina-7.png`, fuente en `carrusel.html`).
-- **Herramienta del cierre:** tres comprobaciones para rellenar (porcentaje de cualificados, minutos en responder y porcentaje que compra).
-- **Pregunta:** «Cuando decís que los leads son malos, ¿lo sabéis por los datos de ventas o por lo que os dice el equipo comercial?»
+- **Pregunta:** «¿Cuándo fue la última vez que lo oíste en tu empresa? ¿Y alguien lo comprobó?»
 - **CTA:** conversación.
-- **Qué se mide:** comentarios de directores, responsables comerciales o de marketing que cuentan su caso.
-- **Riesgo:** sin riesgo. No hay clientes, cifras nuestras ni promesas, y los datos de ejemplo están indicados.
+- **Riesgo:** sin riesgo.
+
+## Las 7 láminas
+
+1. «Los leads de Meta son malos.» / A veces es verdad. Casi nunca es solo eso.
+2. Primero, mira qué le pides a Meta. / Si solo le cuentas quién rellena el formulario, te trae gente que rellena formularios.
+3. Luego, tu formulario. / Si se rellena en dos toques, lo rellena cualquiera.
+4. El anuncio barato engaña. / 15 € por contacto, 1.000 € por venta. 40 € por contacto, 333 € por venta. (Mismo presupuesto. Datos de ejemplo.)
+5. Y después del formulario: / ¿Cuánto tardáis en contestar? ¿Cuántas veces lo intentáis?
+6. A veces el lead es malo. / Pero eso solo lo sabes después de haberle llamado.
+7. ¿Cuándo fue la última vez que lo oíste en tu empresa? / ¿Y alguien lo comprobó?
 
 ## Texto para LinkedIn
 
 > «Los leads de Meta son malos.»
 >
-> A veces es verdad. Pero cuando lo miras de cerca, casi siempre hay un error propio detrás, y la mayoría están antes del formulario.
+> A veces es verdad. Casi nunca es solo eso.
 >
-> El primero es lo que le pides a Meta. Si solo le cuentas quién rellenó el formulario, te trae a más gente que rellena formularios. No sabe quién acabó comprando porque nadie se lo ha dicho.
+> Antes de darle la razón a tu equipo, yo miraría qué le estás pidiendo a Meta, cómo es tu formulario y cuánto te cuesta cada venta, no cada contacto.
 >
-> El segundo es el formulario. Con el nombre y el teléfono ya rellenos, pedir información cuesta lo mismo que dar un «me gusta». Una pregunta sobre cuándo quieren empezar suele traer menos solicitudes. Si trae más ventas, solo lo sabes midiéndolo: dos semanas, contando matrículas y no formularios.
+> Y luego lo de siempre: cuánto tardáis en contestar y cuántas veces lo intentáis.
 >
-> El tercero es cómo se mide el anuncio. En el ejemplo del carrusel, dos anuncios con 3.000 € cada uno: el de 15 € por contacto trae 200 contactos y 3 matrículas; el de 40 €, 75 contactos y 9 matrículas. Por coste por contacto ganaría el primero. Por coste por matrícula, el segundo sale tres veces más barato.
->
-> Y después del formulario, los dos de siempre: contestar a las cuatro horas y no volver a escribir a quien dijo que le interesaba.
->
-> Antes de culpar a Meta, comprobaría tres cosas: cuántos leads son cualificados, cuánto tardáis en responder y cuántos terminan comprando. Si alguna no sabéis rellenarla, ese es el primer error.
->
-> Los números son de ejemplo, de un centro de formación. Los errores se repiten en cualquier empresa que capte con anuncios.
->
-> Cuando decís que los leads son malos, ¿lo sabéis por los datos de ventas o por lo que os dice el equipo comercial?
+> ¿Cuándo fue la última vez que lo oíste en tu empresa?
 
-## Para Instagram (jueves 29-oct, si funciona en LinkedIn)
+## Para Instagram
 
-> «Los leads de Meta son malos.» A veces sí. Cinco errores que los hacen malos, y tres están antes del formulario. ¿Cuál veis en vuestra empresa?
+> «Los leads de Meta son malos.» A veces sí. Casi nunca es solo eso. ¿Cuándo lo oíste por última vez?
 
 ## Pendiente de Maikel
 
