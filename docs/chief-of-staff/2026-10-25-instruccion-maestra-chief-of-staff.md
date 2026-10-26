@@ -256,3 +256,12 @@ Se valora:
 8. Las tres decisiones de la semana.
 
 No se crean agentes, documentos duplicados, campañas ni automatizaciones sin comprobar antes qué existe. No se inicia ninguna acción externa ni se da ninguna autorización por supuesta.
+
+---
+
+## Anexo · Canales con clientes en otra cuenta de Claude
+
+- **Equipzilla** (desde el 26-oct): repositorio `maikel-stack/equipzilla`, rama `claude/brevo-equipzilla-template-t47ip0`.
+  - Para saber cómo va, se lee cada día `reportes/director/AAAA-MM-DD.md`.
+  - Las órdenes se escriben en `coordinacion/qualivo-ordenes.md`, con numeración Q-001, Q-002… Sus agentes las leen al empezar porque lo dice `.claude/agents/_reglas.md`.
+  - Ninguna orden puede saltarse sus reglas; en particular, nada se envía a clientes sin el OK de Maikel.
