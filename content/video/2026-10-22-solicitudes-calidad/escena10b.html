@@ -449,7 +449,7 @@ window.setT=function(t){
   const RL=[[T.dolor,T.d2,'admisiones llama','10:02'],[T.d2,T.d3,'cita reservada','mar 17:30'],[T.d3,T.cambia,'sin respuesta','+2 días'],[T.cambia,T.p1,'al entrar','00:00'],[T.p1,T.p2,'desde el anuncio','00:00'],[T.p2,T.p3,'en el formulario','00:40'],[T.p3,T.voz,'por WhatsApp','02:00'],[T.voz,T.p4,'si no contesta','llamada'],[T.p4,T.f2-.2,'antes de llamar','ficha'],[T.f2-.2,T.intel,'a la mañana','07:30']];
   const rr=RL.find(x=>t>=x[0]&&t<x[1]); const rl=$('reloj'); if(rr){ rl.style.opacity=win(t,rr[0],rr[1],.2,.1); rl.querySelector('span').textContent=rr[2]; rl.querySelector('b').textContent=rr[3]; } else rl.style.opacity=0;
   $('ej').style.opacity=(t>=T.dolor&&t<T.intel)?1:0;
-  return Promise.all(espera);
+  return Promise.race([Promise.all(espera),new Promise(r=>setTimeout(r,4000))]);
 };
 window.setT(0);
 </script>

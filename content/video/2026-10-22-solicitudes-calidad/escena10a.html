@@ -366,7 +366,7 @@ window.setT=function(t){
   $('tag').style.opacity=0;
   // subtítulos
   const s=SUBS.find(x=>t>=x[0]&&t<x[1]); $('sub').style.opacity=s?1:0; if(s) $('subt').textContent=s[2];
-  return Promise.all(espera);
+  return Promise.race([Promise.all(espera),new Promise(r=>setTimeout(r,4000))]);
 };
 window.setT(0);
 </script>
