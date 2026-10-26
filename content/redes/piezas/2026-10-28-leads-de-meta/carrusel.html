@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=block" rel="stylesheet">
+<style>
+html,body{margin:0;background:#888}
+.l{position:relative;width:1080px;height:1350px;background:#F4F1EA;overflow:hidden;font-family:'Space Grotesk',sans-serif;color:#0B0C0E;margin-bottom:20px}
+.l.osc{background:#0B0C0E;color:#fff}
+.et{position:absolute;left:72px;top:64px;font:500 21px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#6B6F76}
+.osc .et{color:#8A8F98}
+.et b{color:#E8590C;font-weight:700}
+h1{position:absolute;left:72px;top:118px;margin:0;font-size:76px;line-height:1.04;font-weight:700;letter-spacing:-.025em;width:936px}
+h1 span{color:#E8590C}
+.sub{position:absolute;left:72px;font-size:36px;line-height:1.32;color:#2B2F35;width:936px}
+.osc .sub{color:#C9CDD4}
+.gris{color:#6B6F76!important}
+.ej{position:absolute;left:72px;bottom:118px;font:500 19px 'JetBrains Mono',monospace;color:#8A867E;letter-spacing:.04em;text-transform:uppercase}
+.osc .ej{color:#6B6F76}
+.n{position:absolute;right:72px;bottom:56px;font:500 20px 'JetBrains Mono',monospace;color:#6B6F76}
+.marca{position:absolute;left:72px;bottom:56px;font:700 22px 'Space Grotesk';letter-spacing:-.01em}
+.mono{font-family:'JetBrains Mono',monospace}
+.cita{position:absolute;left:72px;top:250px;font-size:132px;line-height:.98;font-weight:700;letter-spacing:-.035em;width:960px}
+.cita i{font-style:normal;color:#E8590C}
+/* barras */
+.fila{position:absolute;left:72px;width:936px}
+.fila .et2{font:500 24px 'JetBrains Mono',monospace;color:#6B6F76;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+.fila .bar{height:76px;border-radius:6px}
+.fila .val{font-size:64px;font-weight:700;letter-spacing:-.02em;margin-top:12px}
+/* puntos */
+.puntos{position:absolute;left:72px;top:320px;display:grid;grid-template-columns:repeat(10,48px);gap:14px 39.5px}
+.p{width:48px;height:48px;border-radius:50%;background:#0B0C0E}
+.p.o{background:none;box-shadow:inset 0 0 0 4px #E8590C}
+/* chat */
+.chat{position:absolute;left:120px;top:340px;width:840px}
+.bur{display:inline-block;max-width:600px;font-size:34px;line-height:1.3;padding:22px 28px;border-radius:26px}
+.ellos{background:#fff;border:1.5px solid #E2DCCF;border-bottom-left-radius:6px}
+.nos{background:#0B0C0E;color:#fff;border-bottom-right-radius:6px;float:right}
+.meta{font:500 20px 'JetBrains Mono',monospace;color:#8A867E;margin:10px 4px 0}
+.dias{display:flex;gap:12px;margin-top:40px}
+.dia{flex:1;height:64px;border-radius:8px;border:2px dashed #CFC7B6;display:flex;align-items:center;justify-content:center;font:500 20px 'JetBrains Mono',monospace;color:#A8A091}
+/* comparativa */
+.comp{position:absolute;left:72px;top:330px;width:936px;border-collapse:collapse}
+.comp th{font:500 22px 'JetBrains Mono',monospace;color:#8A8F98;text-align:right;padding:0 0 18px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
+.comp th:first-child{text-align:left}
+.comp td{font-size:52px;font-weight:700;text-align:right;padding:22px 0;border-top:1.5px solid #2A2D33;letter-spacing:-.02em}
+.comp td:first-child{text-align:left;font:500 26px 'JetBrains Mono',monospace;color:#8A8F98;letter-spacing:.02em}
+.comp .naranja{color:#E8590C}
+</style></head><body>
+
+<!-- 1 · portada -->
+<div class="l" id="s1">
+  <div class="et"><b>Captación</b> · formación</div>
+  <div class="cita"><i>«</i>Los leads de Meta son malos.<i>»</i></div>
+  <div class="sub" style="top:820px;font-size:44px;line-height:1.25;color:#0B0C0E;font-weight:500">Antes de darle la razón a tu equipo, hazle cuatro preguntas.</div>
+  <div class="sub gris" style="top:1010px;font-size:30px">Con un ejemplo: un centro de formación que recibe 692 solicitudes al mes.</div>
+  <div class="marca">Qualivo</div><div class="n">1/6 →</div>
+</div>
+
+<!-- 2 · tiempo de respuesta -->
+<div class="l" id="s2">
+  <div class="et"><b>Pregunta 1</b> de 4</div>
+  <h1>¿Cuánto tardasteis en <span>contestar?</span></h1>
+  <div class="fila" style="top:350px"><div class="et2">El equipo, de media</div><div class="bar" style="width:936px;background:#0B0C0E"></div><div class="val">4 h 12 min</div></div>
+  <div class="fila" style="top:620px"><div class="et2">Con respuesta automática</div><div class="bar" style="width:10px;background:#E8590C"></div><div class="val" style="color:#E8590C">2 min</div></div>
+  <div class="sub" style="top:880px">Quien rellena un formulario a las diez está pensando en ti a las diez. A las dos de la tarde ya ha seguido con su día.</div>
+  <div class="ej">Datos de ejemplo</div>
+  <div class="marca">Qualivo</div><div class="n">2/6 →</div>
+</div>
+
+<!-- 3 · contactados -->
+<div class="l" id="s3">
+  <div class="et"><b>Pregunta 2</b> de 4</div>
+  <h1>¿Llegasteis a hablar <span>con todos?</span></h1>
+  <div class="puntos" id="puntos"></div>
+  <div class="sub" style="top:985px"><b style="color:#E8590C">44 de cada 100</b> que piden información no llegan a hablar con nadie. A esos todavía no los puedes llamar malos.</div>
+  <div class="ej">Datos de ejemplo</div>
+  <div class="marca">Qualivo</div><div class="n">3/6 →</div>
+</div>
+
+<!-- 4 · seguimiento -->
+<div class="l" id="s4">
+  <div class="et"><b>Pregunta 3</b> de 4</div>
+  <h1>¿Cuántas veces <span>lo intentasteis?</span></h1>
+  <div class="chat">
+    <div class="bur nos">Hola, Laura. Te escribo por el curso que consultaste. ¿Te cuento cómo funciona?</div>
+    <div style="clear:both"></div>
+    <div class="bur ellos" style="margin-top:26px">Sí, me interesa. ¿Cuándo empieza el próximo?</div>
+    <div class="meta">Martes 10:42</div>
+    <div class="dias"><div class="dia">mié</div><div class="dia">jue</div><div class="dia">vie</div><div class="dia">lun</div><div class="dia">mar</div><div class="dia">mié</div></div>
+    <div class="meta" style="margin-top:14px">Nadie le ha vuelto a escribir</div>
+  </div>
+  <div class="sub" style="top:960px">Contestó, dijo que le interesaba y ahí se quedó. En el ejemplo hay <b>8</b> así este mes.</div>
+  <div class="ej">Datos de ejemplo</div>
+  <div class="marca">Qualivo</div><div class="n">4/6 →</div>
+</div>
+
+<!-- 5 · anuncios -->
+<div class="l osc" id="s5">
+  <div class="et"><b>Pregunta 4</b> de 4</div>
+  <h1>¿De qué anuncio <span>venían?</span></h1>
+  <table class="comp">
+    <tr><th></th><th>Anuncio A</th><th>Anuncio B</th></tr>
+    <tr><td>Coste por contacto</td><td class="naranja">15 €</td><td>50 €</td></tr>
+    <tr><td>Contactos</td><td>212</td><td>58</td></tr>
+    <tr><td>Matrículas</td><td>6</td><td>5</td></tr>
+    <tr><td>Retorno</td><td>1,3×</td><td class="naranja">12,8×</td></tr>
+  </table>
+  <div class="sub" style="top:900px">El anuncio barato trae más gente y devuelve casi diez veces menos.</div>
+  <div class="sub" style="top:1020px;font-size:32px;color:#8A8F98">Si solo miras el coste por contacto, apagas el que vende.</div>
+  <div class="ej">Datos de ejemplo</div>
+  <div class="marca" style="color:#fff">Qualivo</div><div class="n">5/6 →</div>
+</div>
+
+<!-- 6 · cierre -->
+<div class="l" id="s6">
+  <div class="et"><b>Antes de culpar al anuncio</b></div>
+  <h1 style="font-size:70px">Si después de las cuatro preguntas siguen sin comprar, <span>entonces sí: revisad el anuncio.</span></h1>
+  <div class="sub mono" style="top:560px;font-size:30px;line-height:1.6;color:#0B0C0E">
+    1 · ¿Cuánto tardasteis en contestar?<br>
+    2 · ¿Llegasteis a hablar con todos?<br>
+    3 · ¿Cuántas veces lo intentasteis?<br>
+    4 · ¿De qué anuncio venían?
+  </div>
+  <div class="sub" style="top:900px;font-size:42px;font-weight:500;color:#0B0C0E">Cuando decís que un lead es malo, ¿lo decís antes o después de haberle llamado?</div>
+  <div class="marca">Qualivo</div><div class="n">6/6</div>
+</div>
+<script>
+const c = document.getElementById('puntos');
+for (let i = 0; i < 100; i++) { const d = document.createElement('div'); d.className = 'p' + (i >= 56 ? ' o' : ''); c.appendChild(d); }
+</script>
+</body></html>
