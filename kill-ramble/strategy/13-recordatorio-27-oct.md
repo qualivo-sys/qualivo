@@ -1,6 +1,6 @@
 # 13 · Recordatorio del 27 de octubre a los creadores que dijeron que sí
 
-Propuesta para aprobar. Un único correo el martes 27 de octubre por la mañana (hora de Buenos Aires) a los creadores que respondieron con interés, para que el jueves 29 jueguen o publiquen. No se ha enviado nada.
+Aprobado por Maikel el 26 de octubre. Creado en Smartlead (EN 4238881, ES 4238888, BR 4238897), un solo correo desde press@scubalightstudios.com, programado para el martes 27 a las 10:00 de Buenos Aires. Lea contesta a quien responda.
 
 ## A quién (18, sacado de las respuestas en Smartlead)
 
