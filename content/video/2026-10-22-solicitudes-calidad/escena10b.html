@@ -170,7 +170,22 @@ html,body{background:#000}
 #e{background:#1FA396;color:#0A0A0B}
 #tex{opacity:.35;mix-blend-mode:multiply}
 .full,.clip{display:none!important}
-#s12 #g6w{display:block!important}
+#si .full{display:block!important}
+.adf{top:640px;transform-origin:50% 100%}.adf .im{height:430px}
+.aud{position:absolute;left:150px;top:560px;background:#0A0A0B;color:#F4CC38;font-weight:900;font-size:26px;letter-spacing:.06em;text-transform:uppercase;padding:14px 26px;border-radius:999px;z-index:9;white-space:nowrap}
+.v45 .adf{top:330px}.v45 .aud{top:255px}
+#pregi{position:absolute;left:70px;right:70px;top:250px;font-family:Anton;font-size:104px;line-height:.95;text-transform:uppercase;color:#F4F1EB;z-index:6}
+#pregi i{font-style:normal;color:#F4CC38}#pregi small{display:block;font-family:Montserrat,sans-serif;font-size:26px;letter-spacing:.2em;color:#1FA396;font-weight:800;margin-bottom:18px}
+#intel{top:640px;height:auto;padding-bottom:34px;z-index:6}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:26px 30px 8px}
+.kp div{border:3px solid #0A0A0B;border-radius:20px;padding:16px 20px;background:#fff}
+.kp small{display:block;font-size:19px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6B6E74}
+.kp b{font-family:Anton;font-size:60px;font-weight:400;line-height:1.05;color:#0A0A0B}
+.fu{padding:18px 30px 0}.fu h5{font-size:22px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;color:#0A0A0B}
+.fr{display:flex;align-items:center;gap:16px;margin:12px 0;font-size:23px;font-weight:700;color:#24262B}
+.fr span{width:330px;flex:none}.fr i{display:block;height:34px;border-radius:10px;background:#C9CCD1;width:0}
+.fr.r i{background:#E5484D}.fr.r span{color:#C42F35;font-weight:900}
+.v45 #pregi{top:60px;font-size:84px}.v45 #intel{top:330px}
 .negro{background:#0A0A0B}
 .rot{display:none}
 #s0 .rot,#s1 .rot{display:block}
@@ -241,9 +256,13 @@ html,body{background:#000}
 
   <!-- S7 · anuncio -->
   <div class="sc" id="s7"><div class="ag">Anuncio <small>para quien encaja</small></div><div class="rot"><small>1 · Anuncio</small>Para quien <i>encaja</i></div>
-    <div class="ad" id="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
-      <div class="im"><h4>Curso online de gestión administrativa. <i>En directo y grabado.</i></h4><p>Para quien trabaja y quiere cambiar de puesto, a su ritmo.</p></div>
-      <div class="bt">Más información</div></div></div>
+    <div id="ad"></div><div class="aud" id="aud"></div>
+    <div class="ad adf" id="adf0"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>¿Quieres cambiar <i>de puesto?</i></h4><p>Curso online de gestión administrativa, en directo y grabado.</p></div><div class="bt">Más información</div></div>
+    <div class="ad adf" id="adf1"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Fórmate <i>sin dejar tu trabajo</i></h4><p>Clases en directo y grabadas, a tu ritmo.</p></div><div class="bt">Más información</div></div>
+    <div class="ad adf" id="adf2"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
+      <div class="im"><h4>Forma a tu equipo <i>en gestión administrativa</i></h4><p>Formación online para empresas.</p></div><div class="bt">Más información</div></div></div>
 
   <!-- S8 · formulario en vivo -->
   <div class="sc" id="s8"><div class="ag">Formulario <small>4 preguntas</small></div><div class="rot"><small>2 · Formulario</small>Detecta la <i>intención</i></div>
@@ -293,9 +312,16 @@ html,body{background:#000}
       <div class="real" id="real"><small>Caso real · un mes de campaña</small><b>10 matrículas en un mes · <i>10,2 veces lo invertido</i></b><span>Escuela de aviación · medido en el CRM del centro</span></div></div></div>
 
   <!-- S12 · CTA -->
+  <div class="sc negro" id="si"><div class="full"><img id="c-si"></div><div id="pregi"><small>Intelligence</small>Qué funciona <i>y qué no</i></div>
+    <div class="ven" id="intel"><div class="bar"><i></i><i></i><i></i><span>Intelligence · métricas del negocio</span><span class="td">Ejemplo · datos simulados</span></div>
+      <div class="kp"><div><small>Solicitudes</small><b>214</b></div><div><small>Nivel A y B</small><b>38 %</b></div><div><small>Reuniones</small><b>41</b></div><div><small>Matrículas</small><b>12</b></div></div>
+      <div class="fu"><h5>Dónde se pierden más</h5>
+        <div class="fr r"><span>Sin respuesta en 24 h</span><i data-w="420"></i></div>
+        <div class="fr"><span>No se presenta</span><i data-w="250"></i></div>
+        <div class="fr"><span>Formulario a medias</span><i data-w="150"></i></div></div></div></div>
   <div class="sc negro" id="s12"><div id="g6w" class="full"><img id="c-h3"></div><div class="ava" id="ava2" style="display:none"></div><div id="preg">Encuentra a quien <i>sí va a comprar</i></div><div class="rot" id="r12a">Toca en <i>«Más información»</i></div>
-    <div class="ad" id="ad2"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div>
-      <div class="im"><h4>Curso online de gestión administrativa. <i>En directo y grabado.</i></h4><p>Para quien trabaja y quiere cambiar de puesto, a su ritmo.</p></div>
+    <div class="ad" id="ad2"><div class="h"><div class="av">Q</div><div><b>Qualivo</b><small>Diagnóstico sin coste · 30 min</small></div></div>
+      <div class="im"><h4>¿Cómo sería este sistema <i>en tu empresa?</i></h4><p>Te lo enseñamos con tus números.</p></div>
       <div class="bt" id="bt2">Más información</div></div>
     <div id="dedo"></div>
     <div id="logo"><img src="../2026-10-07-demo-caso-v2/rec/logo-blanco.png"><p>Diagnóstico sin coste · 30 min</p></div></div>
@@ -333,7 +359,7 @@ const CLIP={movil:'k-movil-noche',dedos:'k-dedos',sofa:'k-sofa',com:'broll-panel
 const espera=[];
 function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25*vel))); const img=$(id); if(!img) return; const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
   if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
-const S={s0:[0,4.0], s1:[4.0,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.voz], s9b:[T.voz,T.p4], s10:[T.p4,T.f2-.2], s11:[T.f2-.2,T.cta], s12:[T.cta,DUR+1]};
+const S={s0:[0,4.0], s1:[4.0,T.dolor], s3:[T.dolor,T.d2], s4:[T.d2,T.d3], s5:[T.d3,T.cambia], s6:[T.cambia,T.p1], s7:[T.p1,T.p2], s8:[T.p2,T.p3], s9:[T.p3,T.voz], s9b:[T.voz,T.p4], s10:[T.p4,T.f2-.2], s11:[T.f2-.2,T.intel], si:[T.intel,T.cta], s12:[T.cta,DUR+1]};
 // avalancha de notificaciones (arranque) y la misma pila ordenándose (remate)
 const YF=V45?1350/1920:1; let rs=7; const rnd=()=>{ rs=(rs*16807)%2147483647; return rs/2147483647; };
 const CURS=['Curso online de gestión administrativa','Inglés B2 online','Contabilidad online','Marketing digital','Auxiliar de enfermería','Excel avanzado online'];
@@ -365,7 +391,10 @@ window.setT=function(t){
   if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-g4','G4_congela',S.s5[0],t,5/(S.s5[1]-S.s5[0]));
   if(t<4.2) clip('c-h1','H1_arena',0,t,5/4.2);
   if(t>=3.9&&t<T.dolor+.1) clip('c-h2','H2_arena_dorado',4.0,t,5/(T.dolor-4.0));
-  if(t>=S.s12[0]-.1&&t<T.c1+.2) clip('c-h3','S3b_datos',S.s12[0],t,5/(T.c1-S.s12[0]));
+  if(t>=S.si[0]-.1&&t<S.si[1]+.1) clip('c-si','S3b_datos',S.si[0],t,5/(S.si[1]-S.si[0]));
+  { const a=S.si[0]; show($('pregi'),nm(t,a+.2,a+.5),20); const ip=out(nm(t,a+1.4,a+1.9)); $('intel').style.opacity=ip; $('intel').style.transform=`translateY(${(1-ip)*120}px)`;
+    document.querySelectorAll('#intel .fr i').forEach((b,k)=>{ b.style.width=(+b.dataset.w*out(nm(t,a+2.6+k*.25,a+3.3+k*.25)))+'px'; });
+    const rr=document.querySelector('#intel .fr.r'); rr.style.transform=`scale(${1+.04*Math.sin(Math.PI*2*nm(t,a+4.2,a+5.2))})`; }
   // S6: la bandeja se escanea, cada solicitud recibe su nivel y se ordena
   const a6=S.s6[0], sc=nm(t,a6+.2,a6+1.4), ord6=io(nm(t,a6+1.6,a6+2.3)); $('scan').style.opacity=sc>0&&sc<1?1:0; $('scan').style.top=(80+sc*640)+'px';
   [...$('cls').children].forEach((e,i)=>{ const x=CL[i]; const tb=a6+.2+1.2*(x[3]*108+50)/640; const nv=e.querySelector('.nv'); nv.style.opacity=nm(t,tb,tb+.12); nv.style.transform=`scale(${1.5-.5*out(nm(t,tb,tb+.2))})`;
@@ -377,7 +406,13 @@ window.setT=function(t){
   // S6
   document.querySelectorAll('.paso').forEach((p,i)=>show(p,nm(t,S.s6[0]+i*.5,S.s6[0]+.2+i*.5),20));
   // S7
-  $('ad').style.transform=`translateY(${(1-out(nm(t,S.s7[0],S.s7[0]+.4)))*200}px)`;
+  { const a=S.s7[0], d=(S.s7[1]-a)/3, AU=['Para quien quiere cambiar de puesto','Para quien trabaja','Para empresas'];
+    const f=Math.max(0,Math.min(2.999,(t-a)/d)), k=Math.floor(f), e=out(nm(f-k,0,.25)), ent=out(nm(t,a,a+.4));
+    [0,1,2].forEach(i=>{ const el=$('adf'+i); let rel=i-k; const x=rel*150, rot=rel*7, sc=rel===0?1:.86;
+      const xp=(i-(k-1))*150*(1-e)+x*e, rp=(i-(k-1))*7*(1-e)+rot*e, sp=(i===k?(.86+.14*e):(i===k-1?(1-.14*e):.86));
+      el.style.transform=`translateY(${(1-ent)*220}px) translateX(${k>0?xp:x}px) rotate(${k>0?rp:rot}deg) scale(${k>0?sp:sc})`;
+      el.style.zIndex=10-Math.abs(rel); el.style.opacity=ent*(rel===0?1:.55); });
+    $('aud').textContent=AU[k]; $('aud').style.opacity=ent*nm(f-k,.1,.3); }
   // S8: el formulario se rellena tocando cada opción
   const a8=S.s8[0], L8=S.s8[1]-a8, q8=[...document.querySelectorAll('#fm .fq')];
   let tq=null;
@@ -402,18 +437,18 @@ window.setT=function(t){
   // S12: portada, dedo en el botón y logo
   $('bt2').style.background=t>T.c1+.1&&t<T.c1+.6?'#F4CC38':'transparent';
   const dd=$('dedo'); dd.style.left='485px'; dd.style.top=(V45?882:1192)+'px'; dd.style.opacity=win(t,T.c1-.2,T.c1+.9,.15,.2); dd.style.transform=`scale(${1-.25*Math.sin(Math.PI*nm(t,T.c1,T.c1+.4))})`;
-  const lg=nm(t,T.c2,T.c2+.4), ap=nm(t,T.c1-.3,T.c1); $('s12').style.background=`rgba(10,10,11,${1-nm(t,T.c1-.3,T.c1)})`; $('logo').style.opacity=lg; $('ad2').style.opacity=ap*(1-lg); $('r12a').style.opacity=ap*(1-lg);
-  $('g6w').style.opacity=1-ap;
+  const lg=nm(t,T.c2,T.c2+.4), ap=nm(t,S.s12[0],S.s12[0]+.35); $('s12').style.background=`rgba(10,10,11,${1-ap})`; $('logo').style.opacity=lg; $('ad2').style.opacity=ap*(1-lg); $('r12a').style.opacity=ap*(1-lg);
+  $('g6w').style.opacity=0;
   [...$('ava2').children].forEach((n,i)=>{ const p=AV[i], k=io(nm(t,S.s12[0]+.2+i*.012,S.s12[0]+1.6+i*.012)); const top=i===AV.length-1; const tx=200, ty=(V45?560:860)-i*5;
-    n.style.transform=`translate(${p.x+130+(tx-p.x-130)*k}px,${p.y+(ty-p.y)*k}px) rotate(${p.r*(1-k)}deg) scale(${top?1+.12*nm(t,S.s12[0]+1.7,S.s12[0]+2):1})`; n.style.zIndex=i; }); show($('preg'),nm(t,S.s12[0]+.5,S.s12[0]+.8)*(1-ap),20);
+    n.style.transform=`translate(${p.x+130+(tx-p.x-130)*k}px,${p.y+(ty-p.y)*k}px) rotate(${p.r*(1-k)}deg) scale(${top?1+.12*nm(t,S.s12[0]+1.7,S.s12[0]+2):1})`; n.style.zIndex=i; }); $('preg').style.opacity=0;
   // etiqueta de ejemplo en las pantallas de la demo
   $('tag').style.opacity=0;
   // subtítulos
-  const s=SUBS.find(x=>t>=x[0]&&t<x[1]); const neg=t<T.dolor||(t>=T.cta&&t<T.c1-.3); $('sub').classList.toggle('neg',neg);
-  $('sub').style.opacity=s&&!(t<T.dolor)&&!(t>=T.cta&&t<T.c1-.3)?1:0; if(s){ const w=s[2].split(' '); const k=Math.max(1,Math.ceil(w.length*.45)); $('subt').innerHTML=w.slice(0,w.length-k).join(' ')+' <i>'+w.slice(-k).join(' ')+'</i>'; }
-  const RL=[[T.dolor,T.d2,'admisiones llama','10:02'],[T.d2,T.d3,'cita reservada','mar 17:30'],[T.d3,T.cambia,'sin respuesta','+2 días'],[T.cambia,T.p1,'al entrar','00:00'],[T.p1,T.p2,'desde el anuncio','00:00'],[T.p2,T.p3,'en el formulario','00:40'],[T.p3,T.voz,'por WhatsApp','02:00'],[T.voz,T.p4,'si no contesta','llamada'],[T.p4,T.f2-.2,'antes de llamar','ficha'],[T.f2-.2,T.cta,'a la mañana','07:30']];
+  const s=SUBS.find(x=>t>=x[0]&&t<x[1]); const neg=t<T.dolor||(t>=T.intel&&t<T.cta); $('sub').classList.toggle('neg',neg);
+  $('sub').style.opacity=s&&!(t<T.dolor)?1:0; if(s){ const w=s[2].split(' '); const k=Math.max(1,Math.ceil(w.length*.45)); $('subt').innerHTML=w.slice(0,w.length-k).join(' ')+' <i>'+w.slice(-k).join(' ')+'</i>'; }
+  const RL=[[T.dolor,T.d2,'admisiones llama','10:02'],[T.d2,T.d3,'cita reservada','mar 17:30'],[T.d3,T.cambia,'sin respuesta','+2 días'],[T.cambia,T.p1,'al entrar','00:00'],[T.p1,T.p2,'desde el anuncio','00:00'],[T.p2,T.p3,'en el formulario','00:40'],[T.p3,T.voz,'por WhatsApp','02:00'],[T.voz,T.p4,'si no contesta','llamada'],[T.p4,T.f2-.2,'antes de llamar','ficha'],[T.f2-.2,T.intel,'a la mañana','07:30']];
   const rr=RL.find(x=>t>=x[0]&&t<x[1]); const rl=$('reloj'); if(rr){ rl.style.opacity=win(t,rr[0],rr[1],.2,.1); rl.querySelector('span').textContent=rr[2]; rl.querySelector('b').textContent=rr[3]; } else rl.style.opacity=0;
-  $('ej').style.opacity=(t>=T.dolor&&t<T.cta)?1:0;
+  $('ej').style.opacity=(t>=T.dolor&&t<T.intel)?1:0;
   return Promise.all(espera);
 };
 window.setT(0);

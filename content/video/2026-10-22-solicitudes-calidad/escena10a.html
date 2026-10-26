@@ -321,7 +321,7 @@ window.setT=function(t){
   // S5
   if(t<4.2) clip('c-s1','S1b_gancho',0,t,5/4.0);
   if(t>=S.s5[0]-.1&&t<S.s5[1]+.1) clip('c-g4','G4_congela',S.s5[0],t,5/(S.s5[1]-S.s5[0]));
-  const dh=nm(t,17.2,17.45); $('c-s2').style.opacity=dh; if(t>=17.1&&t<S.s5[1]+.1) clip('c-s2','S2b_deshielo',17.3-1.0/1.6,t,1.6);
+  const dh=nm(t,T.cambia-1.85,T.cambia-1.6); $('c-s2').style.opacity=dh; if(t>=T.cambia-1.95&&t<S.s5[1]+.1) clip('c-s2','S2b_deshielo',T.cambia-1.75-1.0/1.6,t,1.6);
   // S6: la bandeja se escanea, cada solicitud recibe su nivel y se ordena
   const a6=S.s6[0], sc=nm(t,a6+.2,a6+1.4), ord6=io(nm(t,a6+1.6,a6+2.3)); $('scan').style.opacity=sc>0&&sc<1?1:0; $('scan').style.top=(80+sc*640)+'px';
   [...$('cls').children].forEach((e,i)=>{ const x=CL[i]; const tb=a6+.2+1.2*(x[3]*108+50)/640; const nv=e.querySelector('.nv'); nv.style.opacity=nm(t,tb,tb+.12); nv.style.transform=`scale(${1.5-.5*out(nm(t,tb,tb+.2))})`;

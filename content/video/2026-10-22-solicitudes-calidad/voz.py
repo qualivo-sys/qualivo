@@ -19,7 +19,8 @@ GUION = [
  ('p3', 'Una respuesta por WhatsApp en minutos, que resuelve lo básico y recoge lo que falta.'),
  ('voz', 'Y si no contesta, un asistente de voz le llama y le propone hora.'),
  ('p4', 'Admisiones recibe la ficha con su nivel: sabe a quién llamar primero y qué decirle.'),
- ('cta', 'Si ya inviertes en anuncios para vender formación, toca en Más información y responde cuatro preguntas. Lo vemos en treinta minutos, con tus números.'),
+ ('intel', 'Y con Intelligence ves las métricas de tu negocio: qué funciona, qué no, y dónde profundizar.'),
+ ('cta', '¿Quieres ver cómo sería este sistema aplicado a tu empresa? Toca en Más información y solicita tu diagnóstico.'),
 ]
 EXTRA = {
  'gancho_b': 'Lunes, nueve de la mañana. Admisiones abre el CRM: treinta solicitudes nuevas. ¿A quién llama primero?',
@@ -28,7 +29,7 @@ EXTRA = {
 }
 # v5 (Maikel 22-oct): más peso a la cualificación, vuelve el asistente de voz, sin la frase de «siguiente paso».
 # marcas finas: (nombre, bloque, palabra)
-MARCAS = [('g2', 'gancho', 'calidad'), ('g1', 'gancho', 'reto'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'lo'), ('v2', 'voz', 'propone'), ('f2', 'p4', 'sabe')]
+MARCAS = [('g2', 'gancho', 'calidad'), ('g1', 'gancho', 'reto'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'solicita'), ('v2', 'voz', 'propone'), ('f2', 'p4', 'sabe')]
 COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
