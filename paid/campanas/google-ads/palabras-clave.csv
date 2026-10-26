@@ -1,0 +1,28 @@
+Campaign,Ad group,Keyword,Criterion Type,Max CPC
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,agencia de marketing educativo,Exact,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,agencia marketing educativo,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,agencia captacion de alumnos,Exact,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,captacion de alumnos,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,captación de alumnos,Exact,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,marketing para academias,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,marketing digital para academias,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,marketing para centros de formacion,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,marketing para centros educativos,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Agencia captación alumnos,marketing para escuelas,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Seguimiento admisiones,crm para academias,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Seguimiento admisiones,crm para centros de formacion,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Seguimiento admisiones,seguimiento de alumnos potenciales,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Seguimiento admisiones,gestion de leads academia,Phrase,4.00
+QV_SEARCH_Formacion_B2B,Seguimiento admisiones,como captar alumnos,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,como conseguir clientes para reformas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,clientes para empresas de reformas,Exact,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,publicidad para empresas de reformas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,marketing para empresas de reformas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,agencia de marketing para constructoras,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,marketing para constructoras,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,como conseguir obras privadas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Captación clientes reformas,captar clientes ventanas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Seguimiento presupuestos,seguimiento de presupuestos reformas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Seguimiento presupuestos,crm para reformas,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Seguimiento presupuestos,crm para constructoras,Phrase,4.00
+QV_SEARCH_Reformas_B2B,Seguimiento presupuestos,crm instaladores,Phrase,4.00
