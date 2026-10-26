@@ -1669,3 +1669,48 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - el planificador de GHL para programar.
 
 **Hipótesis para mañana:** las piezas del lote que cierran con una pregunta concreta (por ejemplo, «¿cuántos días pasan hasta el primer seguimiento?») abrirán más conversaciones con perfiles que encajan que las que llevan a un recurso. Se mide en `content/redes/registro.md` a las 48 horas.
+
+### Lunes 26-oct · trabajo del día
+
+**Publicado:**
+- **Artículo nuevo: [/blog/propuesta-comercial/](https://qualivo.io/blog/propuesta-comercial/),** «Propuesta comercial: qué poner y qué hacer en los 10 días después de enviarla».
+  - **Contenido:**
+    - qué debe incluir una propuesta;
+    - cuándo enviarla (la tarea «Propuesta sin enviar» a los 3 días de la reunión);
+    - los seguimientos de los días 2, 5 y 10 con los borradores reales;
+    - la tarea a 30 días en Negociación;
+    - cómo montarlo en un CRM.
+  - **Fuente:** `api/seguimientos.js` y commit 2cd71d9.
+  - **Por qué:** es el artículo de la semana 44 (seguimiento de propuestas). La palabra clave «propuesta comercial» no estaba usada y no compite con presupuestos-sin-respuesta.
+  - **Dónde queda registrado:** tarjeta en el blog, sitemap, llms.txt y registro de palabras clave.
+- **Re-apunte de [/blog/agencia-google-ads/](https://qualivo.io/blog/agencia-google-ads/):**
+  - **Cambio:** el final dice que antes de hablar de Google Ads miramos el recorrido entero, y el botón lleva al diagnóstico («qué conviene revisar primero»).
+  - **Lo que sale:**
+    - la caja de EAC, porque no hay permiso escrito (R6);
+    - «plan por escrito en 24 horas», «sin permanencia» y «no cobramos porcentaje», porque no están confirmados (R10).
+- **Registro de re-apuntes:** añadido el de /blog/funnel-de-ventas/ del 23-oct, que faltaba.
+
+**Borradores:**
+- **Agentizando del lunes:** `content/borradores/2026-10-26-agentizando-vigia-primer-mensaje.md`, «Tres horas sin nada».
+  - **Dato:** el vigía del primer mensaje (commit 2c48f7dc, 22-oct). Si un contacto nuevo lleva 15 minutos sin primer WhatsApp con el horario abierto, avisa a Maikel.
+  - **Destino:** el lote de la semana 45.
+
+**Redes:**
+- **Publicado ayer:** nada.
+- **Programado para los próximos 7 días:** nada. El lote de la semana 44 no tiene respuesta de Maikel, y el planificador de GHL sigue sin confirmar.
+- **Espera aprobación:** el lote de la semana 44. Hoy tocaba el Agentizando «Me escribía demasiada gente», que necesita ok, así que no sale.
+- **Resultados de la semana:** ninguno, porque no hay nada publicado.
+
+**Descartado:**
+- **Newsletter.** No es miércoles. La general del 28-oct sigue pendiente del recuento de Growth y de la autorización escrita (R17).
+
+**Decisiones para Maikel:**
+1. **El lote de la semana 44.** Recomendación: aprobar lo que no tiene riesgo para que salga desde el martes 27, y decidir el remitente único.
+2. **La frase del Agentizando nuevo** («no puede pasar que entre un lead y no le enviemos nada»). Está en el comentario del código, atribuida a Maikel. Recomendación: confirmarla y usarla, porque es el gancho.
+3. **Siguen pendientes:**
+   - el planificador de GHL;
+   - la cámara de los guiones;
+   - la newsletter del 28-oct;
+   - los permisos de casos.
+
+**Hipótesis para mañana:** el artículo de propuesta comercial traerá más clics al diagnóstico que el de presupuestos sin respuesta, porque lleva los mensajes listos para copiar. Se compara con Search Console a las cuatro semanas.
