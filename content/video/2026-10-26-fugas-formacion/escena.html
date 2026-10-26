@@ -48,6 +48,34 @@ body{background:#000}
 .ad .im p{font-size:30px;color:#AEB5BF;font-weight:600;line-height:1.35}
 .ad .bt{margin:22px 26px 26px;border:3px solid #101319;border-radius:16px;text-align:center;font-weight:800;font-size:26px;padding:18px}
 #aud{position:absolute;left:150px;top:610px;background:#F4CC38;color:#0A0A0B;font-weight:900;font-size:30px;letter-spacing:.06em;text-transform:uppercase;padding:16px 28px;border-radius:999px;z-index:6;opacity:0;white-space:nowrap}
+/* anuncio genérico */
+#audg{position:absolute;left:150px;top:610px;background:#FF5A4E;color:#fff;font-weight:900;font-size:30px;letter-spacing:.06em;text-transform:uppercase;padding:16px 28px;border-radius:999px;z-index:6;opacity:0;white-space:nowrap}
+/* ficha del alumno ideal y la nuestra */
+.fi{position:absolute;left:100px;right:100px;top:640px;background:#FAF7F0;border:5px solid #0A0A0B;border-radius:40px;padding:46px 50px;color:#0A0A0B;opacity:0;z-index:6}
+.fi small{display:block;font-size:24px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#0E7C74;margin-bottom:18px}
+.fi h5{font-family:Anton;font-weight:400;font-size:76px;line-height:1;text-transform:uppercase;margin-bottom:26px}
+.fi .rw{font-size:38px;font-weight:700;padding:14px 0;border-top:2px solid #E3DDD0;opacity:0}
+.fi .rw:before{content:'✓ ';color:#0E7C74;font-weight:900}
+.fi .dl{display:inline-block;background:#FF5A4E;color:#fff;font-weight:800;font-size:30px;padding:14px 22px;border-radius:999px;margin:16px 10px 0 0;opacity:0}
+.fi .ch{display:block;background:#1FA396;color:#fff;font-weight:900;font-size:40px;padding:22px 30px;border-radius:22px;margin-top:18px;opacity:0}
+.fi .dt{font-size:30px;font-weight:800;color:#6B6E74;margin:22px 0 4px}
+/* un dolor, un anuncio */
+.col{position:absolute;top:620px;width:310px;opacity:0;z-index:6}
+.col .dl{background:#FF5A4E;color:#fff;font-weight:800;font-size:28px;line-height:1.2;padding:16px 18px;border-radius:20px;min-height:116px;display:flex;align-items:center}
+.col .fl{height:60px;margin-left:150px;border-left:5px dashed #F4CC38}
+.col .ad{position:relative;left:0;top:0;width:780px;transform:scale(.397);transform-origin:0 0;opacity:1}
+/* el formulario filtra */
+#fil{position:absolute;inset:0;opacity:0;z-index:6}
+#fil .fo{position:absolute;left:240px;width:600px;top:760px;background:#FAF7F0;border:5px solid #0A0A0B;border-radius:34px;padding:34px 38px;color:#0A0A0B}
+#fil .fo small{display:block;font-size:22px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#6B6E74;margin-bottom:14px}
+#fil .fo b{display:block;font-size:34px;font-weight:800;line-height:1.25}
+#fil .fo i{display:block;height:22px;border-radius:8px;background:#E3DDD0;margin-top:16px;font-style:normal}
+#fil .pt{position:absolute;width:44px;height:44px;border-radius:50%;background:#F4F1EB}
+#fil .bin{position:absolute;top:1290px;width:380px;text-align:center;font-family:Anton;font-size:64px;text-transform:uppercase}
+#fil .si{left:90px;color:#1FA396}#fil .no{left:610px;color:#8A8D93}
+/* 4:5 */
+.v45 #audg{top:300px}.v45 .fi{top:300px;padding:34px 44px}.v45 .fi h5{font-size:62px}.v45 .fi .rw{font-size:32px;padding:10px 0}
+.v45 .col{top:290px}.v45 #fil .fo{top:420px}.v45 #fil .bin{top:960px}
 /* deshielo */
 #des{position:absolute;inset:0;opacity:0;z-index:7}#des img{width:1080px;height:1920px;object-fit:cover}
 #des::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,11,.75),rgba(10,10,11,0) 40%)}
@@ -81,8 +109,11 @@ body{background:#000}
   <div id="cont"><b id="num">692</b><span id="unid">solicitudes</span><em>Ejemplo · datos simulados</em></div>
   <div class="tit" id="h1">El problema empieza <i>en el anuncio</i></div>
   <div class="tit" id="h1b">Habla a todos, <b>atrae a cualquiera</b></div>
-  <div class="tit" id="h2">Y sigue <b>después</b></div>
-  <div class="tit" id="h3">Anuncios para <i>quien encaja</i></div>
+  <div class="tit" id="h2">Y después, <b>nadie contesta</b></div>
+  <div class="tit" id="hM">Tu alumno <i>ideal</i></div>
+  <div class="tit" id="h3">Un dolor, <i>un anuncio</i></div>
+  <div class="tit" id="hF">Filtra quién <i>encaja</i></div>
+  <div class="tit" id="hN">Así captamos <i>nuestros clientes</i></div>
   <div class="tit" id="h4a">Respuesta <i>en minutos</i></div>
   <div class="tit" id="h4b">Ordenadas por <i>intención</i></div>
   <div class="tit" id="h4c">A quién llamar <i>primero</i></div>
@@ -99,6 +130,18 @@ body{background:#000}
   </div><img id="cab" src="pantallas/cabecera.jpg"></div></div>
   <div class="call" id="call1"><i>212</i> contactos → <i>6</i> alumnos</div>
   <div class="call" id="call2"><i>44 %</i> no habla con nadie</div>
+  <div id="audg">Anuncio genérico · habla a todos</div>
+  <div class="ad" id="adg"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>Cursos online. <i>¡Fórmate con nosotros!</i></h4><p>Más de 50 cursos. Infórmate sin compromiso.</p></div><div class="bt">Más información</div></div>
+  <div class="fi" id="fi"><small>Ejemplo · curso de gestión administrativa</small><h5>Alumno ideal</h5>
+    <div class="rw">Trabaja en una oficina</div><div class="rw">Quiere ascender o cambiar de puesto</div><div class="rw">Puede invertir en su formación</div>
+    <div class="dt">Dolores</div><span class="dl">Lleva años en el mismo puesto</span><span class="dl">No tiene tiempo para estudiar</span><span class="dl">Empezó un curso y lo dejó</span></div>
+  <div class="col" id="co0" style="left:40px"><div class="dl">Lleva años en el mismo puesto</div><div class="fl"></div><div class="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>¿Quieres cambiar <i>de puesto?</i></h4><p>Curso online de gestión administrativa, en directo y grabado.</p></div><div class="bt">Más información</div></div></div>
+  <div class="col" id="co1" style="left:385px"><div class="dl">No tiene tiempo para estudiar</div><div class="fl"></div><div class="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>Fórmate <i>sin dejar tu trabajo</i></h4><p>Clases en directo y grabadas, a tu ritmo.</p></div><div class="bt">Más información</div></div></div>
+  <div class="col" id="co2" style="left:730px"><div class="dl">Empezó un curso y lo dejó</div><div class="fl"></div><div class="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>Esta vez <i>lo terminas</i></h4><p>Tutor personal y clases en directo.</p></div><div class="bt">Más información</div></div></div>
+  <div id="fil"><div class="fo"><small>Formulario · 4 preguntas</small><b>¿Cuánto inviertes al mes en tu formación?</b><i></i><i></i></div>
+    <div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="pt"></div><div class="bin si">✔ Encaja</div><div class="bin no">✖ No encaja</div></div>
+  <div class="fi" id="nos"><small>Qualivo · nuestros propios anuncios</small><h5>Nuestro cliente ideal</h5>
+    <span class="ch">Invierte en publicidad</span><span class="ch">Tiene equipo comercial</span><span class="ch">Ticket desde 500 €</span></div>
   <div id="aud"></div>
   <div class="ad" id="ad0"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>¿Quieres cambiar <i>de puesto?</i></h4><p>Curso online de gestión administrativa, en directo y grabado.</p></div><div class="bt">Más información</div></div>
   <div class="ad" id="ad1"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>Fórmate <i>sin dejar tu trabajo</i></h4><p>Clases en directo y grabadas, a tu ritmo.</p></div><div class="bt">Más información</div></div>
@@ -126,8 +169,7 @@ function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floo
   if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
 // planos del móvil: [página, desde, hasta, caja de foco en px css [x,y,w,h], zoom, color de la marca]
 const PL=[
- ['Anuncios',T.antes-.4,T.despues,[16,935,368,72],1.06,'r'],
- ['Recorrido',T.despues,T.cambia,[22,282,356,86],1.08,'r'],
+ ['Recorrido',T.despues-.4,T.sis-.2,[22,282,356,86],1.08,'r'],
  ['Conversaciones',T.sis-.2,T.s2,[150,470,240,470],1.04,'v'],
  ['Oportunidades',T.s2,T.s3,[10,325,380,240],1.04,'v'],
  ['Resumen',T.s3,T.meta,[16,70,368,132],1.06,'v'],
@@ -151,26 +193,30 @@ window.setT=function(t){
   show($('cont'),win(t,T.g2+.1,T.antes-.05,.2,.2),30); const k=io(nm(t,T.g2+.5,T.antes-.8));
   $('num').textContent=Math.round(692-(692-31)*k); $('num').style.color=k>=1?'#FF5A4E':'#F4F1EB'; $('unid').textContent=k>=1?'alumnos':'solicitudes';
   // móvil: fuera durante el deshielo y los anuncios
-  const mi=out(nm(t,T.antes-.3,T.antes+.25)), mo=nm(t,T.cta-.1,T.cta+.35);
-  const hueco=(t>=T.cambia-.15&&t<T.sis-.15)?0:(t>=T.sis-.15&&t<T.sis+.2?nm(t,T.sis-.15,T.sis+.2):(t>=T.cambia-.35&&t<T.cambia-.15?1-nm(t,T.cambia-.35,T.cambia-.15):1));
-  const vis=mi*(1-mo)*hueco;
-  $('movil').style.opacity=vis; $('movil').style.transform=`translateY(${(1-mi)*500+mo*700+(1-hueco)*120}px)`; $('chip').style.opacity=.95*vis;
-  if(t>=T.antes-.5&&t<T.cta+.4) movil(t);
+  const mi=out(nm(t,T.despues-.3,T.despues+.25)), mo=nm(t,T.cta-.1,T.cta+.35); const vis=mi*(1-mo);
+  $('movil').style.opacity=vis; $('movil').style.transform=`translateY(${(1-mi)*500+mo*700}px)`; $('chip').style.opacity=.95*vis;
+  if(t>=T.despues-.5&&t<T.cta+.4) movil(t);
   // titulares y cifras
-  show($('h1'),win(t,T.antes+.1,T.a2-.05),30); show($('h1b'),win(t,T.a2-.05,T.despues-.05),30); show($('h2'),win(t,T.despues,T.cambia-.1),30);
-  show($('h3'),win(t,T.anun,T.sis-.05),30);
+  show($('h1'),win(t,T.antes+.1,T.a2-.05),30); show($('h1b'),win(t,T.a2-.05,T.metodo-.05),30);
+  show($('hM'),win(t,T.metodo,T.angulos-.05),30); show($('h3'),win(t,T.angulos,T.filtro-.05),30); show($('hF'),win(t,T.filtro,T.nos-.05),30); show($('hN'),win(t,T.nos,T.despues-.05),30);
+  show($('h2'),win(t,T.despues,T.sis-.05),30);
   show($('h4a'),win(t,T.sis+.1,T.s2-.05),30); show($('h4b'),win(t,T.s2,T.s3-.05),30); show($('h4c'),win(t,T.s3,T.meta-.05),30); show($('h5'),win(t,T.meta+.05,T.cta-.1),30);
   ['call1','call2'].forEach(id=>$(id).style.top=(V45?236:466)+'px');
-  show($('call1'),win(t,T.a2+.2,T.despues-.1),20); show($('call2'),win(t,T.despues+1,T.cambia-.1),20);
-  // tres anuncios por perfil
-  { const a=T.anun, d=(T.sis-a)/3, AU=['Quiere cambiar de puesto','Trabaja y estudia','Empresas'];
-    const f=cl((t-a)/d,0,2.999), k=Math.floor(f), ent=win(t,a-.05,T.sis+.05,.3,.25), e=out(nm(f-k,0,.3));
-    [0,1,2].forEach(i=>{ const rel=i-k, el=$('ad'+i);
-      el.style.transform=`translateX(${rel===0?(1-e)*170:rel*170}px) rotate(${rel*6}deg) scale(${rel===0?.9+.1*e:.86})`; el.style.zIndex=10-Math.abs(rel); el.style.opacity=ent*(rel===0?1:(Math.abs(rel)===1?.45:0)); });
-    $('aud').textContent='Para: '+AU[k]; $('aud').style.opacity=ent*nm(f-k,.1,.3); }
-  // deshielo
-  $('des').style.opacity=win(t,T.cambia-.15,T.anun+.1,.25,.3); if(t>=T.cambia-.2&&t<T.anun+.2) clip('c-des','S2b_deshielo',T.cambia-.15-1.0/1.6,t,1.6);
-  show($('tdes'),win(t,T.cambia+.1,T.anun-.05,.25,.2),30);
+  show($('call1'),win(t,T.a2+.2,T.metodo-.1),20); show($('call2'),win(t,T.d2+.4,T.sis-.1),20);
+  // anuncio genérico
+  { const g=win(t,T.antes+.1,T.metodo-.05,.3,.2); show($('adg'),g,80); $('audg').style.opacity=g*nm(t,T.antes+.4,T.antes+.6); }
+  // ficha del alumno ideal: rasgos y, en «dolores», los tres dolores
+  { show($('fi'),win(t,T.metodo,T.angulos+.05,.3,.2),60); [...$('fi').querySelectorAll('.rw')].forEach((e,i)=>show(e,nm(t,T.metodo+.5+i*.4,T.metodo+.8+i*.4),14));
+    [...$('fi').querySelectorAll('.dl')].forEach((e,i)=>{ const o=nm(t,T.m2+i*.35,T.m2+.25+i*.35); e.style.opacity=o; e.style.transform=`scale(${1.3-.3*out(o)})`; }); }
+  // un dolor, un anuncio
+  [0,1,2].forEach(i=>show($('co'+i),win(t,T.angulos-.05+i*.3,T.filtro,.3,.2),60));
+  // el formulario filtra: entran contactos, unos salen a «encaja» y otros a «no encaja»
+  { const f=win(t,T.filtro-.05,T.nos,.3,.2); $('fil').style.opacity=f; const fo=$('fil').querySelector('.fo'); const y0=V45?250:560, yf=(V45?420:760)+120, yb=V45?900:1230;
+    const pts=$('fil').querySelectorAll('.pt'); pts.forEach((p,i)=>{ const a=T.filtro+.2+i*.17, k1=io(nm(t,a,a+.5)), k2=io(nm(t,a+.55,a+1.05)); const ok=[0,3,6,9,12].includes(i);
+      const x0=300+((i*137)%480), xb=ok?240+(i%3)*40:760+(i%3)*40; const x=x0+(540-x0)*k1+(xb-540)*k2, y=y0+(yf-y0)*k1+(yb-yf)*k2;
+      p.style.left=(x-22)+'px'; p.style.top=(y-22)+'px'; p.style.opacity=k1>0?(k1<1?k1:1):0; p.style.zIndex=k2>0?3:0; p.style.background=k2>.1?(ok?'#1FA396':'#5A5D63'):'#F4F1EB'; }); }
+  // nuestro cliente ideal
+  { show($('nos'),win(t,T.nos,T.despues-.05,.3,.2),60); [...$('nos').querySelectorAll('.ch')].forEach((e,i)=>show(e,nm(t,T.nos+.4+i*.35,T.nos+.7+i*.35),14)); }
   // cierre
   const tq=nm(t,T.cta-.1,T.cta+.3); $('turq').style.opacity=tq; $('fondo').style.opacity=1-tq;
   const lg=nm(t,T.c2+.9,T.c2+1.3); show($('cta'),nm(t,T.cta+.15,T.cta+.5)*(1-lg),60); show($('noes'),nm(t,T.cta+1,T.cta+1.3)*(1-lg),20);

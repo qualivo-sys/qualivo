@@ -9,11 +9,13 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 VA = os.path.join(AQUI, '../../../produccion/video-anuncios'); sys.path.insert(0, VA)
 GUION = [
  ('gancho', 'Inviertes en anuncios para vender formación. ¿Sabes cuántas solicitudes acaban en matrícula?'),
- ('antes', 'Muchas veces, el problema empieza en el anuncio: si habla para todos, atrae a cualquiera… y quien sí iba a comprar ni se da por aludido.'),
- ('despues', 'Y sigue después: piden información, y nadie les contesta a tiempo.'),
- ('cambia', 'Por eso lo trabajamos de punta a punta.'),
- ('anun', 'Anuncios pensados para quien encaja con cada curso.'),
- ('sis', 'Respuesta en minutos, cada solicitud ordenada por intención de compra, y admisiones sabe a quién llamar primero.'),
+ ('antes', 'Muchas veces, el problema empieza en el anuncio: si habla para todos, atrae a cualquiera.'),
+ ('metodo', 'Nosotros empezamos antes: definimos a tu alumno ideal, sus dolores, y lo que le frustra en el día a día.'),
+ ('angulos', 'Cada anuncio toca un dolor distinto.'),
+ ('filtro', 'Y el formulario filtra quién encaja de verdad.'),
+ ('nos', 'Es lo mismo que hacemos con nuestros propios anuncios.'),
+ ('despues', 'Pero el anuncio es solo el principio: después, piden información… y nadie les contesta a tiempo.'),
+ ('sis', 'Por eso cada solicitud recibe respuesta en minutos, se ordena por intención de compra, y admisiones sabe a quién llamar primero.'),
  ('meta', 'Y tus anuncios aprenden de quién se matricula de verdad.'),
  ('cta', 'Si ya inviertes en captar alumnos, toca en Más información. Te enseñamos dónde se pierden los tuyos.'),
 ]
@@ -22,7 +24,7 @@ EXTRA = {}
 VAR = os.environ.get('VARIANTE', ''); SUF = f'_{VAR}' if VAR else ''
 if VAR == 'nolose':   # gancho con la respuesta literal más repetida del formulario (Growth, 26-oct)
     GUION = [('gancho', '¿Dónde se te pierden los alumnos? La respuesta que más nos dan es: no lo sé.'), ('aver', 'Vamos a averiguarlo.')] + GUION[1:]
-MARCAS = [('g2', 'gancho', 'sabes' if not VAR else 'respuesta'), ('a2', 'antes', 'atrae'), ('a3', 'antes', 'quien'), ('s2', 'sis', 'ordenada'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
+MARCAS = [('g2', 'gancho', 'sabes' if not VAR else 'respuesta'), ('a2', 'antes', 'atrae'), ('m2', 'metodo', 'dolores'), ('d2', 'despues', 'piden'), ('s2', 'sis', 'ordena'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
 COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
