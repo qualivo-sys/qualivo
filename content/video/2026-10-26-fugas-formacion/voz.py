@@ -19,7 +19,10 @@ GUION = [
 ]
 EXTRA = {}
 # marcas finas: (nombre, bloque, palabra)
-MARCAS = [('g2', 'gancho', 'sabes'), ('a2', 'antes', 'atrae'), ('a3', 'antes', 'quien'), ('s2', 'sis', 'ordenada'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
+VAR = os.environ.get('VARIANTE', ''); SUF = f'_{VAR}' if VAR else ''
+if VAR == 'nolose':   # gancho con la respuesta literal más repetida del formulario (Growth, 26-oct)
+    GUION = [('gancho', '¿Dónde se te pierden los alumnos? La respuesta que más nos dan es: no lo sé.'), ('aver', 'Vamos a averiguarlo.')] + GUION[1:]
+MARCAS = [('g2', 'gancho', 'sabes' if not VAR else 'respuesta'), ('a2', 'antes', 'atrae'), ('a3', 'antes', 'quien'), ('s2', 'sis', 'ordenada'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
 COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
@@ -27,7 +30,7 @@ def norm(w):
     return ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
 
 def tiempos():
-    pal = json.load(open(f'{AQUI}/voz/principal.json')); ws = [norm(p['w']) for p in pal]; T, i = {}, 0
+    pal = json.load(open(f'{AQUI}/voz/principal{SUF}.json')); ws = [norm(p['w']) for p in pal]; T, i = {}, 0
     for bloque, frase in GUION:
         cab = [norm(x) for x in frase.split()[:2]]
         while i < len(ws) - 1 and ws[i:i + 2] != cab: i += 1
@@ -47,14 +50,14 @@ def tiempos():
         for k in range(0, len(tr), tam):
             c = tr[k:k + tam]; subs.append([round(c[0]['s'], 2), round(c[-1]['e'] + .15, 2), ' '.join(x['w'] for x in c)])
     for k in range(len(subs) - 1): subs[k][1] = min(subs[k][1], subs[k + 1][0])
-    open(f'{AQUI}/tiempos.js', 'w').write(f'window.TIEMPOS={json.dumps(T)};window.DURACION={dur};window.SUBS={json.dumps(subs, ensure_ascii=False)};\n')
+    open(f'{AQUI}/tiempos{SUF}.js', 'w').write(f'window.TIEMPOS={json.dumps(T)};window.DURACION={dur};window.SUBS={json.dumps(subs, ensure_ascii=False)};\n')
     print(T, dur)
 
 def mezcla(muda, salida):
     import imageio_ffmpeg
     ff = imageio_ffmpeg.get_ffmpeg_exe(); musica = os.path.join(VA, 'musica6/h-urbano-norm.mp3')
-    dur = float(open(f'{AQUI}/tiempos.js').read().split('DURACION=')[1].split(';')[0]); fo = dur - 1.4
-    subprocess.run([ff, '-y', '-loglevel', 'error', '-i', muda, '-i', f'{AQUI}/voz/principal.mp3', '-i', musica, '-filter_complex',
+    dur = float(open(f'{AQUI}/tiempos{SUF}.js').read().split('DURACION=')[1].split(';')[0]); fo = dur - 1.4
+    subprocess.run([ff, '-y', '-loglevel', 'error', '-i', muda, '-i', f'{AQUI}/voz/principal{SUF}.mp3', '-i', musica, '-filter_complex',
         f'[2:a]aformat=sample_rates=44100:channel_layouts=stereo,atrim=0:{dur},asetpts=PTS-STARTPTS,afade=t=in:d=0.3,afade=t=out:st={fo}:d=1.4,volume=0.5[m];'
         f'[1:a]aformat=sample_rates=44100:channel_layouts=stereo,apad=whole_dur={dur},asplit=2[v][vsc];'
         '[m][vsc]sidechaincompress=threshold=0.03:ratio=3:attack=40:release=700:makeup=1[md];'
@@ -66,7 +69,7 @@ if __name__ == '__main__':
     orden, *resto = sys.argv[1:]
     if orden == 'voz':
         import voz_elevenlabs as v
-        v.tts(' '.join(f for _, f in GUION), 'javier', f'{AQUI}/voz/principal', ajustes=AJUSTES)
+        v.tts(' '.join(f for _, f in GUION), 'javier', f'{AQUI}/voz/principal{SUF}', ajustes=AJUSTES)
         if resto[:1] == ['extra']:
             for k, t in EXTRA.items(): v.tts(t, 'javier', f'{AQUI}/voz/{k}', ajustes=AJUSTES)
     elif orden == 'tiempos': tiempos()
