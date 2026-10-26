@@ -1,6 +1,6 @@
 # Pieza 1 · Mié 28-oct · «Los leads de Meta son malos»
 
-> Plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), pieza 1. **Sin publicar.** Necesita el ok de Maikel.
+> Plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), pieza 1. **Aprobada por Maikel el 26-oct («me parece bien»).** Sin publicar: pendiente de programar.
 > **v3 (26-oct):** Maikel pide más foco en los errores de captación. Tres de los cinco errores están ahora antes del formulario. Sin capturas: gráficos propios con datos de ejemplo.
 > **v4 (26-oct):** revisión de Maikel. La lámina 4 no cuadraba: el anuncio «bueno» salía más caro por matrícula. Ahora se compara con el mismo presupuesto y por coste por matrícula. El formulario se presenta como una prueba que hay que medir, y el cierre deja tres comprobaciones y una pregunta nueva.
 
@@ -49,6 +49,6 @@
 
 > «Los leads de Meta son malos.» A veces sí. Casi nunca es solo eso. ¿Cuándo lo oíste por última vez?
 
-## Pendiente de Maikel
+## Estado
 
-- Ok al carrusel y al texto.
+- Aprobada el 26-oct. Falta programarla en el planificador de GHL (bloqueo abierto: confirmar que están conectados el LinkedIn y el Instagram de Maikel).
