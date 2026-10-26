@@ -1,0 +1,155 @@
+<!doctype html>
+<!-- Anuncio 11 «Dónde se pierden» (formación, 26-oct). Pantallas reales de Intelligence (sector formación, datos simulados) dentro de un móvil,
+     con zooms y marcas de editor. Voz de Javier (voz.py). Se graba con graba.js. ?f=45 para el corte 4:5. -->
+<html lang="es"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:Mont;src:url(fuentes/montserrat-latin.woff2) format('woff2');font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000}
+#e{position:relative;width:1080px;height:1920px;overflow:hidden;background:#0A0A0B;font-family:Mont,sans-serif;color:#F4F1EB}
+#e.v45{height:1350px}
+#fondo{position:absolute;inset:0;background:radial-gradient(900px 700px at 50% 70%,rgba(31,163,150,.22),rgba(10,10,11,0) 70%)}
+#turq{position:absolute;inset:0;background:#1FA396;opacity:0}
+.tit{position:absolute;left:80px;right:80px;top:250px;font-family:Anton;font-size:104px;line-height:.96;text-transform:uppercase;opacity:0;z-index:6}
+.tit i{font-style:normal;color:#F4CC38}.tit b{font-weight:400;color:#FF5A4E}
+/* gancho */
+#g1{top:520px;font-size:120px}
+#g2{top:300px;font-size:112px}
+#cont{position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0;z-index:6}
+#cont b{display:block;font-family:Anton;font-weight:400;font-size:330px;line-height:1;color:#F4F1EB}
+#cont span{display:block;font-size:44px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,241,235,.7);margin-top:10px}
+/* móvil */
+#movil{position:absolute;left:70px;top:600px;width:940px;height:1560px;border-radius:96px;background:#1B1B1D;padding:20px;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 3px #2B2B2E;z-index:4;opacity:0}
+#pant{position:relative;width:900px;height:1520px;border-radius:78px;overflow:hidden;background:#F7F4EE}
+#cam{position:absolute;inset:0;transform-origin:50% 40%}
+.pag{position:absolute;left:0;top:0;width:900px;opacity:0}
+.pag img{display:block;width:900px}
+#cab,#bar{position:absolute;left:0;width:900px;z-index:3}#cab{top:0}#bar{bottom:0;display:none}
+.mk{position:absolute;border:7px solid #FF5A4E;border-radius:22px;opacity:0;box-shadow:0 0 0 9999px rgba(10,10,11,0);z-index:2}
+.mk.ok{border-color:#1FA396}
+#chip{position:absolute;right:90px;top:560px;font-size:21px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,241,235,.6);opacity:0;z-index:6}
+/* deshielo */
+#des{position:absolute;inset:0;opacity:0;z-index:7}#des img{width:1080px;height:1920px;object-fit:cover}
+#des::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,11,.75),rgba(10,10,11,0) 40%)}
+#tdes{top:300px;z-index:8;text-align:center;font-size:120px}
+/* cierre */
+#cta{position:absolute;left:110px;right:110px;top:470px;background:#FAF7F0;border:5px solid #0A0A0B;border-radius:40px;color:#0A0A0B;padding:56px 56px 50px;opacity:0;z-index:6}
+#cta small{display:block;font-size:26px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#0E7C74;margin-bottom:22px}
+#cta h3{font-family:Anton;font-weight:400;font-size:104px;line-height:.95;text-transform:uppercase}
+#cta h3 i{font-style:normal;color:#0E7C74}
+#cta p{font-size:34px;font-weight:600;line-height:1.35;margin-top:26px;color:#33363C}
+#bt{margin-top:40px;border:4px solid #0A0A0B;border-radius:22px;text-align:center;font-weight:900;font-size:36px;padding:26px}
+#noes{position:absolute;left:110px;right:110px;top:1330px;font-size:30px;font-weight:700;color:#0A0A0B;opacity:0;z-index:6;text-align:center}
+#dedo{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(244,204,56,.55);border:6px solid #F4CC38;opacity:0;z-index:9}
+#logo{position:absolute;left:0;right:0;top:760px;text-align:center;opacity:0;z-index:9}
+#logo img{width:600px}
+#logo p{font-family:Anton;font-size:52px;color:#F4CC38;letter-spacing:.06em;margin-top:34px}
+/* subtítulos */
+#sub{position:absolute;left:70px;right:70px;top:1480px;text-align:center;z-index:10;opacity:0}
+#sub span{display:inline;font-family:Anton;font-size:56px;line-height:1.35;text-transform:uppercase;color:#F4F1EB;background:#0A0A0B;padding:6px 18px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#sub span i{font-style:normal;color:#F4CC38}
+/* 4:5 */
+.v45 .tit{top:70px;font-size:88px}.v45 #g1{top:330px}.v45 #g2{top:120px}.v45 #cont{top:560px}.v45 #cont b{font-size:280px}
+.v45 #movil{top:330px}.v45 #chip{top:290px}.v45 #sub{top:1110px}.v45 #tdes{top:120px}
+.v45 #cta{top:140px}.v45 #noes{top:1010px}.v45 #logo{top:450px}
+</style></head><body>
+<div id="e">
+  <div id="fondo"></div><div id="turq"></div>
+  <!-- gancho -->
+  <div class="tit" id="g1">Inviertes en anuncios para <i>vender formación</i></div>
+  <div class="tit" id="g2">¿Cuántas solicitudes acaban <i>en matrícula?</i></div>
+  <div id="cont"><b id="num">692</b><span id="unid">solicitudes</span></div>
+  <!-- titulares sobre el móvil -->
+  <div class="tit" id="h1">No se pierden <i>en el anuncio</i></div>
+  <div class="tit" id="h1b">Se pierden <b>después</b></div>
+  <div class="tit" id="h2">El más barato <i>no es el que más vende</i></div>
+  <div class="tit" id="h4a">Respuesta <i>en minutos</i></div>
+  <div class="tit" id="h4b">Ordenadas por <i>intención</i></div>
+  <div class="tit" id="h4c">A quién llamar <i>primero</i></div>
+  <div class="tit" id="h5">Meta aprende quién <i>se matricula</i></div>
+  <div id="chip">Pantallas reales · datos simulados</div>
+  <div id="movil"><div id="pant"><div id="cam">
+    <div class="pag" id="pRecorrido"><img src="pantallas/Recorrido.jpg"><div class="mk" id="m1"></div><div class="mk" id="m2"></div></div>
+    <div class="pag" id="pAnuncios"><img src="pantallas/Anuncios.jpg"><div class="mk" id="m3"></div><div class="mk" id="m4"></div><div class="mk ok" id="m7"></div></div>
+    <div class="pag" id="pConversaciones"><img src="pantallas/Conversaciones.jpg"></div>
+    <div class="pag" id="pOportunidades"><img src="pantallas/Oportunidades.jpg"></div>
+    <div class="pag" id="pResumen"><img src="pantallas/Resumen.jpg"><div class="mk ok" id="m6"></div></div>
+  </div><img id="cab" src="pantallas/cabecera.jpg"></div></div>
+  <!-- deshielo -->
+  <div id="des"><img id="c-des"></div>
+  <div class="tit" id="tdes">Eso es lo que <i>arreglamos</i></div>
+  <!-- cierre -->
+  <div id="cta"><small>Qualivo · diagnóstico de 30 min</small><h3>¿Dónde se pierden <i>tus alumnos?</i></h3>
+    <p>Para centros que ya invierten en captar. Te enseñamos tu recorrido, con tu caso.</p><div id="bt">Más información</div></div>
+  <div id="noes">Si todavía no inviertes en anuncios, esto no es para ti (aún).</div>
+  <div id="dedo"></div>
+  <div id="logo"><img src="../2026-10-07-demo-caso-v2/rec/logo-blanco.png"><p>Diagnóstico sin coste · 30 min</p></div>
+  <div id="sub"><span id="subt"></span></div>
+</div>
+<script src="tiempos.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const V45=new URLSearchParams(location.search).get('f')==='45'; if(V45) $('e').classList.add('v45');
+const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3); const io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function win(t,a,b,fi=.2,fo=.15){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
+function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
+const K=900/400;   // px de pantalla por px css de la captura (400 de ancho)
+const CAJAS={m1:[22,282,356,86],m2:[24,722,352,62],m3:[16,250,368,150],m4:[16,935,368,90],m6:[16,70,368,132],m7:[22,1160,356,300]};
+for(const k in CAJAS){ const [x,y,w,h]=CAJAS[k]; Object.assign($(k).style,{left:x*K+'px',top:y*K+'px',width:w*K+'px',height:h*K+'px'}); }
+// clips generados
+const espera=[];
+function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25*vel))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
+  if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
+// cámara: por tramo, página y fotogramas clave [t, y css arriba, zoom]
+const CAM=[
+ ['Recorrido',T.fuga-.4,[[T.fuga,175,1.0],[T.f2-.35,175,1.04],[T.f2+.5,600,1.12],[T.anun,660,1.16]]],
+ ['Anuncios',T.anun-.05,[[T.anun,40,1.0],[T.anun+2,40,1.08],[T.anun+2.9,840,1.12],[T.cambia,860,1.14]]],
+ ['Conversaciones',T.sis-.2,[[T.sis,560,1.02],[T.s2,700,1.06]]],
+ ['Oportunidades',T.s2-.05,[[T.s2,110,1.0],[T.s3,230,1.04]]],
+ ['Resumen',T.s3-.05,[[T.s3,20,1.0],[T.meta,20,1.1]]],
+ ['Anuncios',T.meta-.05,[[T.meta,1100,1.0],[T.cta,1130,1.08]]],
+];
+function camara(t){ let i=CAM.length-1; while(i>0&&t<CAM[i][1]) i--; const [pag,,kf]=CAM[i];
+  let y=kf[0][1], z=kf[0][2]; for(let j=0;j<kf.length-1;j++){ const a=kf[j], b=kf[j+1]; if(t>=a[0]){ const e=io(nm(t,a[0],b[0])); y=a[1]+(b[1]-a[1])*e; z=a[2]+(b[2]-a[2])*e; } }
+  if(t>=kf[kf.length-1][0]){ y=kf[kf.length-1][1]; z=kf[kf.length-1][2]; }
+  ['Recorrido','Anuncios','Conversaciones','Oportunidades','Resumen'].forEach(p=>{ const el=$('p'+p); el.style.opacity=p===pag?1:0; if(p===pag) el.style.transform=`translateY(${(-y*K+80)}px)`; });
+  $('cam').style.transform=`scale(${z})`; }
+window.setT=function(t){
+  espera.length=0;
+  const enMovil=t>=T.fuga-.2&&t<T.cta+.3&&!(t>=T.cambia&&t<T.sis);
+  // gancho
+  show($('g1'),win(t,.05,T.g2-.1,.25,.2),40); show($('g2'),win(t,T.g2-.15,T.fuga-.05,.25,.2),40);
+  const cn=win(t,T.g2+.1,T.fuga-.05,.2,.2); show($('cont'),cn,30); const k=io(nm(t,T.g2+.5,T.fuga-.8));
+  $('num').textContent=Math.round(692-(692-31)*k); $('num').style.color=k>=1?'#FF5A4E':'#F4F1EB'; $('unid').textContent=k>=1?'alumnos':'solicitudes';
+  // móvil
+  const mi=out(nm(t,T.fuga-.3,T.fuga+.25)), mo=nm(t,T.cta-.1,T.cta+.35);
+  const md=(t>=T.cambia-.15&&t<T.sis+.2)?1-Math.min(nm(t,T.cambia-.15,T.cambia+.1),1-nm(t,T.sis-.1,T.sis+.2)):1;
+  $('movil').style.opacity=mi*(1-mo)*md; $('movil').style.transform=`translateY(${(1-mi)*500+mo*700}px)`;
+  $('chip').style.opacity=enMovil?.95*mi*(1-mo):0;
+  if(t>=T.fuga-.5&&t<T.cta+.4) camara(t);
+  // marcas
+  $('m1').style.opacity=win(t,T.fuga+1.3,T.f2-.2,.2,.15); $('m2').style.opacity=win(t,T.f2+.55,T.anun-.05,.2,.15);
+  $('m3').style.opacity=win(t,T.anun+.5,T.anun+2.1,.2,.15); $('m4').style.opacity=win(t,T.anun+3,T.cambia-.05,.2,.15);
+  $('m6').style.opacity=win(t,T.s3+.4,T.meta-.05,.2,.15); $('m7').style.opacity=win(t,T.meta+.8,T.cta-.05,.2,.15);
+  // titulares
+  show($('h1'),win(t,T.fuga+.1,T.f2-.1),30); show($('h1b'),win(t,T.f2-.05,T.anun-.05),30); show($('h2'),win(t,T.anun+.05,T.cambia-.1),30);
+  show($('h4a'),win(t,T.sis+.1,T.s2-.05),30); show($('h4b'),win(t,T.s2,T.s3-.05),30); show($('h4c'),win(t,T.s3,T.meta-.05),30); show($('h5'),win(t,T.meta+.05,T.cta-.1),30);
+  // deshielo
+  const dz=win(t,T.cambia-.15,T.sis+.15,.25,.3); $('des').style.opacity=dz; if(t>=T.cambia-.2&&t<T.sis+.2) clip('c-des','S2b_deshielo',T.cambia-.15-1.0/1.6,t,1.6);
+  show($('tdes'),win(t,T.cambia+.1,T.sis,.25,.2),30);
+  // cierre
+  const tq=nm(t,T.cta-.1,T.cta+.3); $('turq').style.opacity=tq; $('fondo').style.opacity=1-tq;
+  const lg=nm(t,T.c2+.9,T.c2+1.3); show($('cta'),nm(t,T.cta+.15,T.cta+.5)*(1-lg),60); show($('noes'),nm(t,T.cta+1,T.cta+1.3)*(1-lg),20);
+  $('bt').style.background=t>T.c1+.1&&t<T.c1+.7?'#F4CC38':'transparent';
+  const dd=$('dedo'); const br=$('bt').getBoundingClientRect(), er=$('e').getBoundingClientRect(); dd.style.left=(br.left-er.left+br.width/2-60)+'px'; dd.style.top=(br.top-er.top+br.height/2-60)+'px';
+  dd.style.opacity=win(t,T.c1-.25,T.c1+.9,.15,.2); dd.style.transform=`scale(${1-.25*Math.sin(Math.PI*nm(t,T.c1,T.c1+.4))})`;
+  $('logo').style.opacity=lg;
+  // subtítulos (no durante el gancho, que ya va en grande)
+  const s=SUBS.find(x=>t>=x[0]&&t<x[1]); const vis=s&&t>=T.fuga&&lg<.5;
+  $('sub').style.opacity=vis?1:0; if(s){ const w=s[2].split(' '); const n=Math.max(1,Math.ceil(w.length*.45)); $('subt').innerHTML=w.slice(0,w.length-n).join(' ')+' <i>'+w.slice(w.length-n).join(' ')+'</i>'; }
+  return Promise.race([Promise.all(espera),new Promise(r=>setTimeout(r,4000))]);
+};
+window.setT(0);
+</script></body></html>

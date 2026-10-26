@@ -1,0 +1,122 @@
+{
+ "Resumen": {
+  "alto": 2416,
+  "requieren atención hoy": {
+   "x": 36,
+   "y": 92,
+   "w": 328,
+   "h": 40
+  },
+  "Tiempo de respuesta": {
+   "x": 31,
+   "y": 708.34375,
+   "w": 154.5,
+   "h": 16.671875
+  },
+  "Donde se pierde": null,
+  "Dónde se pierde más": {
+   "x": 35,
+   "y": 1571.21875,
+   "w": 330,
+   "h": 19.5625
+  }
+ },
+ "Oportunidades": {
+  "alto": 945,
+  "Ordenadas por prioridad": {
+   "x": 16,
+   "y": 137.828125,
+   "w": 368,
+   "h": 60.890625
+  },
+  "Carmen Vidal": {
+   "x": 71,
+   "y": 342.65625,
+   "w": 220,
+   "h": 18.125
+  }
+ },
+ "Conversaciones": {
+  "alto": 1293,
+  "Álvaro Méndez": {
+   "x": 31,
+   "y": 228.71875,
+   "w": 108.6875,
+   "h": 20.296875
+  },
+  "Agente de WhatsApp": {
+   "x": 139.40625,
+   "y": 638.40625,
+   "w": 213.59375,
+   "h": 15.21875
+  },
+  "Llamada de Raquel": {
+   "x": 33,
+   "y": 1145.5,
+   "w": 166.09375,
+   "h": 28
+  }
+ },
+ "Recorrido": {
+  "alto": 2100,
+  "Últimos 30 días": {
+   "x": 35,
+   "y": 233.71875,
+   "w": 330,
+   "h": 19.5625
+  },
+  "Fugas, de mayor a menor": {
+   "x": 35,
+   "y": 661.625,
+   "w": 330,
+   "h": 19.5625
+  },
+  "Respuesta": {
+   "x": 47,
+   "y": 739.125,
+   "w": 68.390625,
+   "h": 15
+  },
+  "La mayor:": {
+   "x": 35,
+   "y": 981.3125,
+   "w": 330,
+   "h": 36.25
+  },
+  "Lo que vuelve a las plataformas": null,
+  "HOY EN EL SISTEMA": {
+   "x": 16,
+   "y": 1054.5625,
+   "w": 368,
+   "h": 31.875
+  }
+ },
+ "Anuncios": {
+  "alto": 2079,
+  "¿Qué anuncio trae clientes de verdad?": {
+   "x": 16,
+   "y": 78,
+   "w": 368,
+   "h": 15.9375
+  },
+  "Curso de Excel e IA": {
+   "x": 83,
+   "y": 275.3125,
+   "w": 240.921875,
+   "h": 18
+  },
+  "CAMPAÑA": null,
+  "Lo que vuelve a las plataformas": {
+   "x": 35,
+   "y": 1175.109375,
+   "w": 330,
+   "h": 19.5625
+  },
+  "Nota de esta semana": {
+   "x": 35,
+   "y": 1497.5625,
+   "w": 330,
+   "h": 39.125
+  }
+ }
+}
