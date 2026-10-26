@@ -31,6 +31,7 @@ body{background:#000}
 #cam{position:absolute;inset:0;transform-origin:50% 700px}
 .pag{position:absolute;left:0;top:0;width:900px;opacity:0}
 .pag img{display:block;width:900px}
+.tapa{position:absolute;left:0;top:0;width:900px;height:112px;background:#F7F4EE}
 #cab{position:absolute;left:0;top:0;width:900px;z-index:3}
 #velo{position:absolute;inset:0;background:rgba(10,10,11,.72);opacity:0;z-index:2;pointer-events:none}
 .mk{position:absolute;border:7px solid #FF5A4E;border-radius:22px;opacity:0;z-index:3}
@@ -107,7 +108,7 @@ body{background:#000}
   <div id="fondo"></div><div id="turq"></div>
   <div class="tit" id="g1">Inviertes en anuncios para <i>vender formación</i></div>
   <div class="tit" id="g2">¿Cuántas solicitudes acaban <i>en matrícula?</i></div>
-  <div id="cont"><b id="num">692</b><span id="unid">solicitudes</span><em>Ejemplo · datos simulados</em></div>
+  <div id="cont"><b id="num">692</b><span id="unid">solicitudes</span></div>
   <div class="tit" id="h1">El problema empieza <i>en el anuncio</i></div>
   <div class="tit" id="h1b">Habla a todos, <b>atrae a cualquiera</b></div>
   <div class="tit" id="h2">Y después, <b>nadie contesta</b></div>
@@ -119,21 +120,21 @@ body{background:#000}
   <div class="tit" id="h4b">Ordenadas por <i>intención</i></div>
   <div class="tit" id="h4c">A quién llamar <i>primero</i></div>
   <div class="tit" id="h5">Qué anuncio trae <i>matrículas</i></div>
-  <div id="chip">Pantallas reales · datos simulados</div>
+  <div id="chip"></div>
   <div id="movil"><div id="pant"><div id="cam">
-    <div class="pag" id="pAnuncios"><img src="pantallas/Anuncios.jpg"></div>
-    <div class="pag" id="pRecorrido"><img src="pantallas/Recorrido.jpg"></div>
-    <div class="pag" id="pConversaciones"><img src="pantallas/Conversaciones.jpg"></div>
-    <div class="pag" id="pOportunidades"><img src="pantallas/Oportunidades.jpg"></div>
-    <div class="pag" id="pResumen"><img src="pantallas/Resumen.jpg"></div>
+    <div class="pag" id="pAnuncios"><img src="pantallas/Anuncios.jpg"><div class="tapa"></div></div>
+    <div class="pag" id="pRecorrido"><img src="pantallas/Recorrido.jpg"><div class="tapa"></div></div>
+    <div class="pag" id="pConversaciones"><img src="pantallas/Conversaciones.jpg"><div class="tapa"></div></div>
+    <div class="pag" id="pOportunidades"><img src="pantallas/Oportunidades.jpg"><div class="tapa"></div></div>
+    <div class="pag" id="pResumen"><img src="pantallas/Resumen.jpg"><div class="tapa"></div></div>
     <div id="velo"></div>
     <div class="luz" id="luz"><img id="luzimg"></div><div class="mk" id="mk"></div>
-  </div><img id="cab" src="pantallas/cabecera.jpg"></div></div>
-  <div class="call" id="call1"><i>212</i> contactos → <i>6</i> alumnos<small>Ejemplo · datos simulados</small></div>
-  <div class="call" id="call2"><i>44 %</i> no habla con nadie<small>Ejemplo · datos simulados</small></div>
+  </div></div></div>
+  <div class="call" id="call1"><i>212</i> contactos → <i>6</i> alumnos</div>
+  <div class="call" id="call2"><i>44 %</i> no habla con nadie</div>
   <div id="audg">Anuncio genérico · habla a todos</div>
   <div class="ad" id="adg"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>Cursos online. <i>¡Fórmate con nosotros!</i></h4><p>Más de 50 cursos. Infórmate sin compromiso.</p></div><div class="bt">Más información</div></div>
-  <div class="fi" id="fi"><small>Ejemplo · curso de gestión administrativa</small><h5>Alumno ideal</h5>
+  <div class="fi" id="fi"><small>Curso de gestión administrativa</small><h5>Alumno ideal</h5>
     <div class="rw">Trabaja en una oficina</div><div class="rw">Quiere ascender o cambiar de puesto</div><div class="rw">Puede invertir en su formación</div>
     <div class="dt">Dolores</div><span class="dl">Lleva años en el mismo puesto</span><span class="dl">No tiene tiempo para estudiar</span><span class="dl">No sabe si el título le servirá</span></div>
   <div class="col" id="co0" style="left:40px"><div class="dl">Lleva años en el mismo puesto</div><div class="fl"></div><div class="ad"><div class="h"><div class="av">H</div><div><b>Horizonte Formación</b><small>Publicidad</small></div></div><div class="im"><h4>¿Quieres cambiar <i>de puesto?</i></h4><p>Curso online de gestión administrativa, en directo y grabado.</p></div><div class="bt">Más información</div></div></div>
@@ -164,17 +165,17 @@ const T=window.TIEMPOS, DUR=window.DURACION, SUBS=window.SUBS;
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)); const nm=(t,a,b)=>cl((t-a)/(b-a),0,1); const out=x=>1-Math.pow(1-x,3); const io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function win(t,a,b,fi=.2,fo=.15){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
 function show(el,op,dy=0){ el.style.opacity=op; el.style.transform=`translateY(${(1-out(op))*dy}px)`; }
-const K=900/400, MID=V45?480:700;   // px de pantalla por px css de la captura; altura de la pantalla donde se centra el foco
+const K=900/400, MID=V45?440:560;   // px de pantalla por px css de la captura; altura de la pantalla donde se centra el foco
 const espera=[];
 function clip(id,nombre,t0,t,vel=1){ const k=Math.max(1,Math.min(126,1+Math.floor((t-t0)*25*vel))); const img=$(id); const src=`out/clips/${nombre}/f${String(k).padStart(3,'0')}.jpg`;
   if(!img.src.endsWith(src)){ img.src=src; espera.push(img.decode().catch(()=>{})); } }
 // planos del móvil: [página, desde, hasta, caja de foco en px css [x,y,w,h], zoom, color de la marca]
 const PL=[
- ['Recorrido',T.despues-.4,T.sis-.2,[22,282,356,86],1.08,'r'],
- ['Conversaciones',T.sis-.2,T.s2,[150,470,240,470],1.04,'v'],
- ['Oportunidades',T.s2,T.s3,[10,325,380,240],1.04,'v'],
- ['Resumen',T.s3,T.meta,[16,70,368,132],1.06,'v'],
- ['Anuncios',T.meta,T.cta+.3,[22,1235,356,200],1.06,'v'],
+ ['Recorrido',T.despues-.4,T.sis-.2,[22,282,356,86],1.0,'r'],
+ ['Conversaciones',T.sis-.2,T.s2,[12,620,376,280],1.0,'v'],
+ ['Oportunidades',T.s2,T.s3,[10,325,380,240],1.0,'v'],
+ ['Resumen',T.s3,T.meta,[16,70,368,132],1.0,'v'],
+ ['Anuncios',T.meta,T.cta+.3,[22,1264,356,168],1.0,'v'],
 ];
 function movil(t){ const pl=PL.find(p=>t>=p[1]&&t<p[2])||PL[PL.length-1]; const [pag,a,b,[x,y,w,h],z,c]=pl;
   const top=Math.max(0,(y+h/2)*K-MID);   // la caja de foco queda a la altura MID de la pantalla

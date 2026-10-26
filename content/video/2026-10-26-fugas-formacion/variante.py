@@ -24,7 +24,7 @@ r('</style>', '''#fo{position:absolute;left:110px;right:110px;top:820px;backgrou
 #g1{top:330px}.v45 #g1{top:120px}
 .v45 #fo{top:420px}.v45 #aver{top:520px}
 </style>''')
-r('<div id="cont">', '''<div id="fo"><small>Formulario · pregunta 3 de 4</small><b>¿Dónde crees que se te pierden hoy las oportunidades?</b><div id="resp"></div><em>Respuesta de ejemplo</em></div>
+r('<div id="cont">', '''<div id="fo"><small>Formulario · pregunta 3 de 4</small><b>¿Dónde crees que se te pierden hoy las oportunidades?</b><div id="resp"></div></div>
   <div class="tit" id="aver">Vamos a <i>averiguarlo</i></div>
   <div id="cont">''')
 r('window.setT(0);', '''{ const base=window.setT; const R='No lo sé, eso es lo que quiero averiguar.';
