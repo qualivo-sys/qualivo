@@ -9,16 +9,17 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 VA = os.path.join(AQUI, '../../../produccion/video-anuncios'); sys.path.insert(0, VA)
 GUION = [
  ('gancho', 'Inviertes en anuncios para vender formación. ¿Sabes cuántas solicitudes acaban en matrícula?'),
- ('fuga', 'Casi nunca se pierden en el anuncio. Se pierden después: piden información… y nadie les contesta a tiempo.'),
- ('anun', 'Y el anuncio con los contactos más baratos no suele ser el que más matrículas trae.'),
- ('cambia', 'Eso es lo que arreglamos.'),
- ('sis', 'Cada solicitud recibe respuesta en minutos, se ordena por intención de compra, y admisiones sabe a quién llamar primero.'),
+ ('antes', 'Muchas veces, el problema empieza en el anuncio: si habla para todos, atrae a cualquiera… y quien sí iba a comprar ni se da por aludido.'),
+ ('despues', 'Y sigue después: piden información, y nadie les contesta a tiempo.'),
+ ('cambia', 'Por eso lo trabajamos de punta a punta.'),
+ ('anun', 'Anuncios pensados para quien encaja con cada curso.'),
+ ('sis', 'Respuesta en minutos, cada solicitud ordenada por intención de compra, y admisiones sabe a quién llamar primero.'),
  ('meta', 'Y Meta aprende quién se matricula de verdad, para traerte más gente como esa.'),
  ('cta', 'Si ya inviertes en captar alumnos, toca en Más información. Te enseñamos dónde se pierden los tuyos.'),
 ]
 EXTRA = {}
 # marcas finas: (nombre, bloque, palabra)
-MARCAS = [('g2', 'gancho', 'sabes'), ('f2', 'fuga', 'piden'), ('s2', 'sis', 'ordena'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
+MARCAS = [('g2', 'gancho', 'sabes'), ('a2', 'antes', 'atrae'), ('a3', 'antes', 'quien'), ('s2', 'sis', 'ordenada'), ('s3', 'sis', 'admisiones'), ('c1', 'cta', 'toca'), ('c2', 'cta', 'te')]
 COLA, ADELANTO, AJUSTES = 1.6, 0.15, {'stability': 1.0}
 
 def norm(w):
