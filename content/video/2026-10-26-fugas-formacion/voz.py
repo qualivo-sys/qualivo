@@ -16,7 +16,7 @@ GUION = [
  ('nos', 'Es lo mismo que hacemos con nuestros propios anuncios.'),
  ('despues', 'Pero el anuncio es solo el principio: después, piden información… y nadie les contesta a tiempo.'),
  ('sis', 'Por eso cada solicitud recibe respuesta en minutos, se ordena por intención de compra, y admisiones sabe a quién llamar primero.'),
- ('meta', 'Y tus anuncios aprenden de quién se matricula de verdad.'),
+ ('meta', 'Y medimos qué anuncio trae matrículas, no solo contactos.'),
  ('cta', 'Si ya inviertes en captar alumnos, toca en Más información. Te enseñamos dónde se pierden los tuyos.'),
 ]
 EXTRA = {}
