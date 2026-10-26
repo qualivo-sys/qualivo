@@ -22,7 +22,7 @@ r('</style>', '''#fo{position:absolute;left:110px;right:110px;top:820px;backgrou
 #fo em{display:block;font-style:normal;font-size:22px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#0E7C74;margin-top:20px}
 #aver{top:860px;text-align:center;font-size:150px}
 #g1{top:330px}.v45 #g1{top:120px}
-.v45 #fo{top:420px}.v45 #aver{top:520px}
+.v45 #fo{top:480px}.v45 #aver{top:520px}
 </style>''')
 r('<div id="cont">', '''<div id="fo"><small>Formulario · pregunta 3 de 4</small><b>¿Dónde crees que se te pierden hoy las oportunidades?</b><div id="resp"></div></div>
   <div class="tit" id="aver">Vamos a <i>averiguarlo</i></div>
