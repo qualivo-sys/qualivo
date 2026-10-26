@@ -6,25 +6,32 @@
 
 ## Ficha
 
-- **v5 (26-oct):** Maikel ve la v4 con demasiado texto y «muy ChatGPT». Reescrita con el radar de octubre (`content/redes/radar-2026-10.md`) y la regla nueva de `content/guia-carruseles.md`: una frase por lámina, sin etiquetas, tablas ni gráficos, y en tono hablado.
+- **v6 (26-oct):** Maikel ve la v5 demasiado simple. Pide imágenes, aprovechar Higgsfield, nada de texto de relleno (fuera «Maikel · Qualivo») y hablar con Growth. Rehecha con el radar visual de Growth (`content/redes/radar-visual-2026-10.md`):
+  - un objeto real fotografiado por lámina que hace la metáfora sin leer (bodegón de estudio, sin personas generadas);
+  - de 5 a 15 palabras por lámina;
+  - fondo crema y un acento naranja.
+- **Imágenes:** Higgsfield, GPT Image 2.5, calidad alta 2K, 7 imágenes (unos 19 créditos). Originales en `foto-1.jpg` a `foto-7.jpg`; montaje en `carrusel.html`.
 - **Pilar:** diagnóstico de problemas, con foco en captación.
-- **Dolor:** «los leads de Meta son malos», una frase literal que el sector reconoce.
-- **Tesis:** a veces es verdad, pero casi nunca es solo eso. Hay que mirar qué le pides a Meta, cómo es el formulario y cuánto te cuesta cada venta (no cada contacto). Y después, cuánto tardas y cuántas veces lo intentas.
-- **Datos:** uno solo, de ejemplo y marcado como tal (mismo presupuesto: 15 € por contacto y 1.000 € por venta frente a 40 € y 333 €).
-- **Formato:** carrusel de 7 láminas, 1080 × 1350 (`lamina-1.png` a `lamina-7.png`, fuente en `carrusel.html`).
-- **Pregunta:** «¿Cuándo fue la última vez que lo oíste en tu empresa? ¿Y alguien lo comprobó?»
-- **CTA:** conversación.
+- **Dolor:** «los leads de Meta son malos», frase literal que el sector reconoce.
+- **Datos:** uno solo, de ejemplo y marcado como tal (15 € el contacto, 1.000 € la venta).
 - **Riesgo:** sin riesgo.
 
 ## Las 7 láminas
 
-1. «Los leads de Meta son malos.» / A veces es verdad. Casi nunca es solo eso.
-2. Primero, mira qué le pides a Meta. / Si solo le cuentas quién rellena el formulario, te trae gente que rellena formularios.
-3. Luego, tu formulario. / Si se rellena en dos toques, lo rellena cualquiera.
-4. El anuncio barato engaña. / 15 € por contacto, 1.000 € por venta. 40 € por contacto, 333 € por venta. (Mismo presupuesto. Datos de ejemplo.)
-5. Y después del formulario: / ¿Cuánto tardáis en contestar? ¿Cuántas veces lo intentáis?
-6. A veces el lead es malo. / Pero eso solo lo sabes después de haberle llamado.
-7. ¿Cuándo fue la última vez que lo oíste en tu empresa? / ¿Y alguien lo comprobó?
+| # | Texto | Imagen |
+|---|---|---|
+| 1 | «Los leads de Meta son malos.» / ¿Seguro? | Bandeja de oficina desbordada de fichas de contacto |
+| 2 | Le pides formularios. / Te trae gente que rellena formularios. | Anzuelo con un formulario de papel como cebo |
+| 3 | Dos toques y enviado. / Entra cualquiera. | Torno de acceso sin brazos, abierto |
+| 4 | Barato por contacto. / Caro por venta. (Ejemplo: 15 € el contacto, 1.000 € la venta.) | Papelera llena de fichas arrugadas y una sola ficha buena con pinza naranja |
+| 5 | Pidió información a las 10:02. / Le llamasteis a las 14:30. | Móvil con un aviso sin abrir y un reloj de arena casi vacío |
+| 6 | A veces el lead es malo. / Lo sabes cuando le llamas. | Teléfono de sobremesa con el auricular descolgado |
+| 7 | ¿Cuándo lo oíste por última vez en tu empresa? | La misma bandeja, ahora ordenada con separadores naranjas, sobre fondo oscuro |
+
+## Canales
+
+- **Instagram:** el carrusel completo.
+- **LinkedIn:** solo la lámina 1, con el texto de abajo. El radar visual dice que en LinkedIn una imagen buena rinde más que un PDF de carrusel: mediana de 17 reacciones frente a 1,5.
 
 ## Texto para LinkedIn
 
