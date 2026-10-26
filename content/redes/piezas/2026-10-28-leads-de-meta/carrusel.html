@@ -40,7 +40,7 @@ h1 span{color:#E8590C}
 .comp{position:absolute;left:72px;top:330px;width:936px;border-collapse:collapse}
 .comp th{font:500 22px 'JetBrains Mono',monospace;color:#8A8F98;text-align:right;padding:0 0 18px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
 .comp th:first-child{text-align:left}
-.comp td{font-size:52px;font-weight:700;text-align:right;padding:22px 0;border-top:1.5px solid #2A2D33;letter-spacing:-.02em}
+.comp td{font-size:48px;font-weight:700;text-align:right;padding:18px 0;border-top:1.5px solid #2A2D33;letter-spacing:-.02em}
 .comp td:first-child{text-align:left;font:500 26px 'JetBrains Mono',monospace;color:#8A8F98;letter-spacing:.02em}
 .comp .naranja{color:#E8590C}
 </style><style>
@@ -60,6 +60,10 @@ h1 span{color:#E8590C}
 .op{font-size:22px;color:#2B2F35;padding:6px 0}
 .op:before{content:"";display:inline-block;width:18px;height:18px;border:2px solid #9A968E;border-radius:50%;vertical-align:-3px;margin-right:10px}
 .lado{position:absolute;top:290px;font:700 26px 'Space Grotesk'}
+.lin{display:flex;align-items:baseline;border-bottom:2px solid #0B0C0E;padding:26px 0 18px}
+.hn{font:700 26px 'JetBrains Mono',monospace;color:#E8590C;width:56px}
+.ht{flex:1;font-size:38px;font-weight:500}
+.hb{font:500 34px 'JetBrains Mono',monospace;color:#8A867E}
 </style></head><body>
 
 
@@ -68,7 +72,7 @@ h1 span{color:#E8590C}
   <div class="et"><b>Captación</b> · formación</div>
   <div class="cita"><i>«</i>Los leads de Meta son malos.<i>»</i></div>
   <div class="sub" style="top:820px;font-size:44px;line-height:1.25;color:#0B0C0E;font-weight:500">A veces es verdad. Cinco errores que los hacen malos. Tres están antes del formulario.</div>
-  <div class="sub gris" style="top:1040px;font-size:30px">Con un ejemplo: un centro de formación que recibe 692 solicitudes al mes.</div>
+  <div class="sub gris" style="top:1040px;font-size:30px">Con datos de ejemplo de un centro de formación.</div>
   <div class="marca">Qualivo</div><div class="n">1/7 →</div>
 </div>
 
@@ -101,7 +105,7 @@ h1 span{color:#E8590C}
     <div class="preg"><b>¿Cuándo quieres empezar?</b><div class="op">Este mes</div><div class="op">En dos o tres meses</div><div class="op">Solo estoy mirando</div></div>
     <div class="btn">Enviar</div>
   </div>
-  <div class="sub" style="top:960px">Con los datos ya rellenos, pedir información cuesta lo mismo que dar un «me gusta». Una pregunta más trae menos solicitudes, pero de gente que se ha parado a pensar.</div>
+  <div class="sub" style="top:945px;font-size:33px">Con los datos ya rellenos, pedir información cuesta lo mismo que dar un «me gusta». Una pregunta más suele traer menos solicitudes. Si trae más ventas, solo lo sabrás midiéndolo: pruébalo dos semanas y cuenta matrículas, no formularios.</div>
   <div class="ej">Ejemplo</div>
   <div class="marca">Qualivo</div><div class="n">3/7 →</div>
 </div>
@@ -110,13 +114,14 @@ h1 span{color:#E8590C}
   <h1 style="font-size:66px">Mides el anuncio por lo <span>barato que es el contacto.</span></h1>
   <table class="comp">
     <tr><th></th><th>Anuncio A</th><th>Anuncio B</th></tr>
-    <tr><td>Coste por contacto</td><td class="naranja">15 €</td><td>50 €</td></tr>
-    <tr><td>Contactos</td><td>212</td><td>58</td></tr>
-    <tr><td>Matrículas</td><td>6</td><td>5</td></tr>
-    <tr><td>Retorno</td><td>1,3×</td><td class="naranja">12,8×</td></tr>
+    <tr><td>Inversión</td><td>3.000 €</td><td>3.000 €</td></tr>
+    <tr><td>Coste por contacto</td><td class="naranja">15 €</td><td>40 €</td></tr>
+    <tr><td>Contactos</td><td>200</td><td>75</td></tr>
+    <tr><td>Matrículas</td><td>3</td><td>9</td></tr>
+    <tr><td>Coste por matrícula</td><td>1.000 €</td><td class="naranja">333 €</td></tr>
   </table>
-  <div class="sub" style="top:930px">El anuncio barato trae más gente y devuelve casi diez veces menos.</div>
-  <div class="sub" style="top:1045px;font-size:32px;color:#8A8F98">Si solo miras el coste por contacto, apagas el que vende.</div>
+  <div class="sub" style="top:985px;font-size:34px">Mismo presupuesto. El barato trae casi el triple de contactos y cada matrícula le sale tres veces más cara.</div>
+  <div class="sub" style="top:1100px;font-size:32px;color:#8A8F98">Si solo miras el coste por contacto, apagas el que vende.</div>
   <div class="ej">Datos de ejemplo</div>
   <div class="marca" style="color:#fff">Qualivo</div><div class="n">4/7 →</div>
 </div>
@@ -150,16 +155,15 @@ h1 span{color:#E8590C}
 
 <!-- 7 · cierre -->
 <div class="l" id="s7">
-  <div class="et"><b>Antes de culpar a Meta</b></div>
-  <h1 style="font-size:68px">Tres errores antes del formulario. <span>Dos después.</span></h1>
-  <div class="sub mono" style="top:400px;font-size:28px;line-height:1.75;color:#0B0C0E">
-    1 · Le pides formularios, no clientes<br>
-    2 · El formulario se rellena en dos toques<br>
-    3 · Mides el anuncio por el coste del contacto<br>
-    <span style="color:#8A867E">4 · Contestas a las cuatro horas<br>
-    5 · Nadie vuelve a escribir</span>
+  <div class="et"><b>Guárdalo para el lunes</b></div>
+  <h1 style="font-size:68px">Antes de culpar a Meta, <span>comprueba tres cosas.</span></h1>
+  <div style="position:absolute;left:72px;top:330px;width:936px">
+    <div class="lin"><span class="hn">1</span><span class="ht">Cuántos leads son cualificados</span><span class="hb">___ %</span></div>
+    <div class="lin"><span class="hn">2</span><span class="ht">Cuánto tardáis en responder</span><span class="hb">___ min</span></div>
+    <div class="lin"><span class="hn">3</span><span class="ht">Cuántos terminan comprando</span><span class="hb">___ %</span></div>
   </div>
-  <div class="sub" style="top:850px;font-size:42px;font-weight:500;color:#0B0C0E">Cuando decís que los leads son malos, ¿habéis mirado qué le pedís a Meta que os traiga?</div>
+  <div class="sub gris" style="top:730px;font-size:30px">Si no podéis rellenar alguna, ese es el primer error.</div>
+  <div class="sub" style="top:870px;font-size:42px;font-weight:500;color:#0B0C0E">Cuando decís que los leads son malos, ¿lo sabéis por los datos de ventas o por lo que os dice el equipo comercial?</div>
   <div class="marca">Qualivo</div><div class="n">7/7</div>
 </div>
 </body></html>

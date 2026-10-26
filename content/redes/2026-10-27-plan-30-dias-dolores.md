@@ -61,7 +61,7 @@ Canal principal: el LinkedIn de Maikel. Las dos mejores piezas de cada semana se
 |---|---|---|---|---|---|---|---|---|---|
 | | **Semana 1** | **Ver el problema** | | | | | | | |
 | 1 | Mié 28-oct | Diagnóstico | Formación | «Los leads de Meta son malos.» Cinco errores que los hacen malos, tres antes del formulario | Carrusel | Datos de ejemplo de la demo de formación | ¿Habéis mirado qué le pedís a Meta que os traiga? | Conversación | sr |
-| 2 | Vie 30-oct | Opinión | Formación | Un lead de 8 € puede salirte más caro que uno de 40 € | Texto con captura | Intelligence, Anuncios (simulado) | ¿Vuestro informe termina en leads o en ventas? | Conversación | sr |
+| 2 | Vie 30-oct | Opinión | Reformas | «Presupuesto gratis»: lo que promete tu anuncio decide quién te llama | Texto con imagen | Dos anuncios de ejemplo y a quién atrae cada uno (datos de ejemplo) | ¿Qué promete vuestro anuncio, y a quién atrae eso? | Conversación | sr |
 | | **Semana 2** | **Entender por qué pasa** | | | | | | | |
 | 3 | Lun 2-nov | Diagnóstico | Clínicas | Lo que pasa en las 24 horas después de que alguien rellena tu formulario | Vídeo 45-60 s, voz y pantalla | Grabación del modo demo | ¿Habéis medido cuánto tardáis? | Conversación | sr |
 | 4 | Mié 4-nov | Educación | Transversal | Cómo auditar tu proceso comercial en 20 minutos | Documento PDF | El autodiagnóstico | ¿En qué paso os habéis quedado sin respuesta? | Guardar | sr |
