@@ -1,49 +1,55 @@
 # Pieza 1 · Mié 28-oct · «Los leads de Meta son malos»
 
 > Plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), pieza 1. **Sin publicar.** Necesita el ok de Maikel.
+> **v3 (26-oct):** Maikel pide más foco en los errores de captación. Tres de los cinco errores están ahora antes del formulario. Sin capturas: gráficos propios con datos de ejemplo.
 
 ## Ficha
 
 - **Pilar:** diagnóstico de problemas.
 - **Sector del ejemplo:** formación.
-- **Dolor:** el equipo culpa a los leads de Meta.
-- **Etapa:** entre el formulario y la venta.
-- **Tesis:** antes de llamar malo a un lead, hay que saber si se le contestó a tiempo, si alguien llegó a hablar con él, cuántas veces se intentó y de qué anuncio venía.
-- **Datos:** de ejemplo, con «Datos de ejemplo» en cada lámina. Salen de la demo de formación de Qualivo Intelligence (692 solicitudes al mes), redibujados como gráficos propios (cambio pedido por Maikel el 26-oct: sin capturas):
+- **Dolor:** «los leads de Meta son malos».
+- **Etapa:** captación (anuncio, formulario y medición) y los primeros días después del formulario.
+- **Tesis:** a veces los leads son malos, pero casi siempre por errores propios:
+  - tres antes del formulario: qué le pides a Meta, un formulario sin filtro y medir el anuncio por el coste del contacto;
+  - dos después: contestar tarde y no volver a escribir.
+- **Datos:** de ejemplo, indicado en las láminas. Son los de la demo de formación de Qualivo Intelligence (692 solicitudes al mes):
+  - anuncio A a 15 € por contacto, con 212 contactos, 6 matrículas y 1,3×;
+  - anuncio B a 50 €, con 58 contactos, 5 matrículas y 12,8×;
   - 4 h 12 min frente a 2 min;
-  - 44 de cada 100 no llegan a hablar con nadie (en la demo, solo pasa el 56 % a «Contactado»);
-  - un contacto que contesta «me interesa» y nadie le vuelve a escribir (8 así en el mes del ejemplo);
-  - anuncio A a 15 € por contacto con 1,3× de retorno frente a anuncio B a 50 € con 12,8×.
-- **Formato:** carrusel de 6 láminas, 1080 × 1350 (`leads-s1.png` a `leads-s6.png`, fuente en `carrusel.html`).
-- **Pregunta:** «Cuando decís que un lead es malo, ¿lo decís antes o después de haberle llamado?»
+  - 8 contactos que dijeron «me interesa» y nadie les volvió a escribir.
+- **Afirmaciones técnicas:** son conocimiento general de Meta, no datos nuestros.
+  - Meta optimiza al evento que le das.
+  - Devolverle cualificado, cita y venta le enseña a buscar compradores (lo explica nuestro artículo /blog/conversiones-offline-meta/).
+  - Un formulario con los datos ya rellenos se envía casi sin esfuerzo.
+  - No se da ninguna cifra de cuánto mejora.
+- **Formato:** carrusel de 7 láminas, 1080 × 1350 (`lamina-1.png` a `lamina-7.png`, fuente en `carrusel.html`).
+- **Pregunta:** «Cuando decís que los leads son malos, ¿habéis mirado qué le pedís a Meta que os traiga?»
 - **CTA:** conversación.
-- **Qué se mide:** comentarios de directores o responsables comerciales que cuentan su caso.
+- **Qué se mide:** comentarios de directores, responsables comerciales o de marketing que cuentan su caso.
 - **Riesgo:** sin riesgo. No hay clientes, cifras nuestras ni promesas, y los datos de ejemplo están indicados.
-- **Validar:** que nadie lea el ejemplo como datos de un cliente real. Por eso el pie lo dice en cada lámina y el texto lo repite.
 
 ## Texto para LinkedIn
 
 > «Los leads de Meta son malos.»
 >
-> Es de las frases que más se oyen cuando una campaña no vende. A veces es verdad. Pero antes de darle la razón al equipo, yo haría cuatro preguntas.
+> A veces es verdad. Pero cuando lo miras de cerca, casi siempre hay un error propio detrás, y la mayoría están antes del formulario.
 >
-> ¿Cuánto tardasteis en contestar? Quien rellena un formulario a las diez está pensando en ti a las diez. A las dos de la tarde ya ha seguido con su día.
+> El primero es lo que le pides a Meta. Si solo le cuentas quién rellenó el formulario, te trae a más gente que rellena formularios. No sabe quién acabó comprando porque nadie se lo ha dicho.
 >
-> ¿Llegasteis a hablar con todos? A quien nadie ha contactado todavía no lo puedes llamar malo.
+> El segundo es el formulario. Con el nombre y el teléfono ya rellenos, pedir información cuesta lo mismo que dar un «me gusta». Una pregunta sobre cuándo quieren empezar trae menos solicitudes, pero de gente que se ha parado a pensar.
 >
-> ¿Cuántas veces lo intentasteis? Hay gente que contesta, muestra interés y luego nadie le vuelve a escribir.
+> El tercero es cómo se mide el anuncio. En el ejemplo del carrusel, el de 15 € por contacto trae más gente que ninguno y devuelve 1,3 veces lo invertido. El de 50 € devuelve 12,8. Si solo miras el coste por contacto, apagas el que vende.
 >
-> ¿De qué anuncio venían? En el ejemplo del carrusel, el anuncio de 15 € por contacto es el que más gente trae y el que menos devuelve. El de 50 € devuelve casi diez veces más.
+> Y después del formulario, los dos de siempre: contestar a las cuatro horas y no volver a escribir a quien dijo que le interesaba.
 >
-> Los números del carrusel son de ejemplo, de un centro de formación que recibe unas 700 solicitudes al mes. Las preguntas sirven para cualquier empresa que capte con anuncios.
+> Los números son de ejemplo, de un centro de formación que recibe unas 700 solicitudes al mes. Los errores se repiten en cualquier empresa que capte con anuncios.
 >
-> Cuando decís que un lead es malo, ¿lo decís antes o después de haberle llamado?
+> Cuando decís que los leads son malos, ¿habéis mirado qué le pedís a Meta que os traiga?
 
 ## Para Instagram (jueves 29-oct, si funciona en LinkedIn)
 
-> Antes de decir que los leads de Meta son malos, cuatro preguntas. ¿Cuál os cuesta más responder?
+> «Los leads de Meta son malos.» A veces sí. Cinco errores que los hacen malos, y tres están antes del formulario. ¿Cuál veis en vuestra empresa?
 
 ## Pendiente de Maikel
 
 - Ok al carrusel y al texto.
-- La frase «Es de las frases que más se oyen» es una opinión suya. Si no la ha oído así, se cambia por «Es una frase que se oye mucho cuando una campaña no vende».
