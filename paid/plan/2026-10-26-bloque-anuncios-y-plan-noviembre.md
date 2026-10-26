@@ -2,7 +2,9 @@
 
 Maikel solo tiene que validar o corregir. Reglas del bloque (Chief of Staff): una sola prueba de pago activa a la vez y **sin subir presupuesto**: el gasto se queda en **20 €/día en total** (unos 600 € en noviembre).
 
-Datos de la Meta API y de GHL a 25-oct, 19:07 UTC. Sin datos personales.
+Datos de la Meta API y de GHL a 26-oct, 06:09 UTC (E-01 acumulado: 114,45 €). Sin datos personales.
+
+Paquete de Google Ads y retargeting ya entregado: `paid/campanas/2026-10-27-paquete-google-y-retargeting.md`. Queda en pausa, para diciembre.
 
 ## 1 · Dónde estamos [C]
 
