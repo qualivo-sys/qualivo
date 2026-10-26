@@ -14,7 +14,7 @@ GUION = [
  ('cambia', 'Por eso lo trabajamos de punta a punta.'),
  ('anun', 'Anuncios pensados para quien encaja con cada curso.'),
  ('sis', 'Respuesta en minutos, cada solicitud ordenada por intención de compra, y admisiones sabe a quién llamar primero.'),
- ('meta', 'Y Meta aprende quién se matricula de verdad, para traerte más gente como esa.'),
+ ('meta', 'Y tus anuncios aprenden de quién se matricula de verdad.'),
  ('cta', 'Si ya inviertes en captar alumnos, toca en Más información. Te enseñamos dónde se pierden los tuyos.'),
 ]
 EXTRA = {}
