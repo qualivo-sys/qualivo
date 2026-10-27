@@ -37,8 +37,10 @@ Hola [nombre]:
 
 Quiero contar en qualivo.io lo que conseguimos juntos, y solo lo haré con tu permiso por escrito. Por ahora lo he dejado sin tu nombre. Este es el texto exacto:
 
-> «Consulta de salud con servicios y formación online. No faltaban leads: faltaba saber cuáles merecían atención. Cuestionario inicial, lead scoring y seguimiento reestructurado. Resultado: 6,45 veces lo invertido en ventas atribuibles, sin invertir más en captación.»
+> «Consulta de salud con servicios y formación online. No faltaban leads: faltaba saber cuáles merecían atención. Cuestionario inicial, lead scoring y seguimiento reestructurado, centrado en las oportunidades que ya entraban.»
 > Nombre: no · Cita: no · Logo: no
+
+Me gustaría añadir la cifra de ventas sobre lo invertido, pero solo la publicaré si sale de tus números. Si te parece, pásame las ventas atribuibles y lo invertido, con las fechas del periodo, y te enseño la frase antes de publicarla.
 
 Puedes elegir:
 1. **Anónimo:** tal cual.
@@ -66,8 +68,10 @@ Hola [nombre]:
 
 Quiero contar en qualivo.io lo que construimos juntos, y solo lo haré con vuestro permiso por escrito. Por ahora lo he dejado sin vuestro nombre. Este es el texto exacto:
 
-> «Empresa de reformas y decoración para negocios. No había un sistema de captación: lo construimos desde cero (captación, landing, publicidad, CRM, seguimiento y medición). Resultado: 8,3 veces lo invertido, en ventas.»
+> «Empresa de reformas y decoración para negocios. No había un sistema de captación: lo construimos desde cero (captación, landing, publicidad, CRM, seguimiento y medición): seis piezas conectadas.»
 > Nombre: no · Cita: no · Logo: no
+
+Me gustaría añadir la cifra de ventas sobre lo invertido, pero solo la publicaré si sale de vuestros números. Si os parece, pasadme las ventas y lo invertido, con las fechas del periodo, y os enseño la frase antes de publicarla.
 
 Podéis elegir:
 1. **Anónimo:** tal cual.
@@ -89,8 +93,10 @@ Hola [nombre]:
 
 Quiero contar en qualivo.io lo que conseguimos juntos, y solo lo haré con vuestro permiso por escrito. Por ahora lo he dejado sin vuestro nombre. Este es el texto exacto:
 
-> «Centro de formación profesional. Campañas por curso en Meta, Google y TikTok, conectadas al CRM hasta la matrícula. En un mes: ROAS de 10,2×, coste por lead bajo 8 €, 12 % de leads a entrevista y 15 % de entrevistas a matrícula.»
+> «Centro de formación profesional. Campañas por curso en Meta, Google y TikTok, conectadas al CRM hasta la matrícula, con un panel que se actualiza solo cada día. Coste por lead en Meta de 5 a 9 € al mes entre junio y septiembre de 2026.»
 > Nombre: no · Cita: no · Logo: no
+
+Me gustaría añadir el retorno en matrículas, pero solo lo publicaré si sale de vuestros números. Si os parece, confirmadme las matrículas y lo facturado en un mes concreto, y os enseño la frase antes de publicarla.
 
 Podéis elegir:
 1. **Anónimo:** tal cual.
@@ -112,7 +118,7 @@ Hola [nombre]:
 
 Quiero contar en qualivo.io lo que conseguimos juntos, y solo lo haré con vuestro permiso por escrito. Por ahora lo he dejado sin vuestro nombre. Este es el texto exacto:
 
-> «Academia de formación en oficios. Campañas de Meta con preguntas filtro, CRM ordenado e integración automática. Resultado: coste por lead −53 % en el curso principal, cursos cortos bajo 3 € por lead y cada lead en el CRM en unos 8 segundos.»
+> «Academia de formación en oficios. Campañas de Meta con preguntas filtro, CRM ordenado e integración automática. Resultado: coste por lead −53 % en el curso principal (de 6,86 € a 3,21 €, julio-agosto de 2026), cursos cortos a unos 3,6 € por lead y cada lead en el CRM en segundos, sin copiar datos a mano.»
 > Nombre: no · Cita: no · Logo: no
 
 Podéis elegir:
@@ -124,6 +130,8 @@ Si os parece bien, contestadme «sí» y el nivel. Si queréis cambiar algo, o p
 
 Un abrazo,
 Maikel
+
+> Nota interna (27-oct, auditoría de cifras): los textos de C-01, C-02 y C-03 ya no llevan cifras de retorno ni de ventas, y el de C-04 lleva las cifras comprobadas con la cuenta de Meta. Detalle en `content/casos/2026-10-27-auditoria-cifras.md`.
 
 ---
 

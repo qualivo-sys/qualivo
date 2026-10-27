@@ -25,10 +25,10 @@ Fundada y dirigida por Maikel Echevarría, con equipo especializado en medios pa
 
 ## Casos
 
-- [Consulta de salud con servicios y formación online](https://qualivo.io/casos/salud-servicios-online/): caso anónimo. El problema no era conseguir más leads, sino saber cuáles merecían atención. Sistema de cualificación, lead scoring y seguimiento: 6,45x lo invertido en ventas atribuibles, sin captar un lead más.
-- [Empresa de reformas B2B](https://qualivo.io/casos/reformas-b2b/): caso anónimo. No había sistema que optimizar; se construyó desde cero (captación, funnels, CRM, seguimiento, medición): 8,3x lo invertido en ventas.
-- [Centro de formación profesional](https://qualivo.io/casos/formacion-profesional/): caso anónimo. Sistema de captación de alumnos con campañas segmentadas por curso (Meta, Google, TikTok), embudo medido de lead a matrícula en CRM y dashboard en vivo: ROAS 10,2x, CPL medio por debajo de 8 €, trazabilidad total del anuncio a la matrícula.
-- [Academia de formación en oficios](https://qualivo.io/casos/academia-oficios/): caso anónimo. Campañas de Meta con cualificación en formulario, CRM en GoHighLevel e integración automática verificada: CPL −53% iterando creatividades hasta el reel, cursos cortos por debajo de 3 €/lead, y cada lead entra en el CRM con su trato creado en ~8 segundos, sin trabajo manual.
+- [Consulta de salud con servicios y formación online](https://qualivo.io/casos/salud-servicios-online/): caso anónimo. El problema no era conseguir más leads, sino saber cuáles merecían atención. Sistema de cualificación, lead scoring y seguimiento centrado en las oportunidades que ya entraban.
+- [Empresa de reformas B2B](https://qualivo.io/casos/reformas-b2b/): caso anónimo. No había sistema que optimizar; se construyó desde cero (captación, funnels, CRM, seguimiento, medición): seis piezas conectadas.
+- [Centro de formación profesional](https://qualivo.io/casos/formacion-profesional/): caso anónimo. Sistema de captación de alumnos con campañas segmentadas por curso (Meta, Google, TikTok), embudo medido de lead a matrícula en CRM y dashboard que se actualiza solo cada día; coste por lead en Meta de 5 a 9 € al mes (junio-septiembre de 2026).
+- [Academia de formación en oficios](https://qualivo.io/casos/academia-oficios/): caso anónimo. Campañas de Meta con preguntas filtro en formulario, CRM en GoHighLevel e integración automática: CPL del curso principal −53 % iterando creatividades hasta el reel (de 6,86 € a 3,21 €, julio-agosto de 2026, datos de Meta), cursos cortos a unos 3,6 €/lead, y cada lead entra en el CRM con su trato creado en segundos, sin trabajo manual.
 
 ## Recursos
 
