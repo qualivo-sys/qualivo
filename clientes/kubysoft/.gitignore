@@ -4,3 +4,9 @@ datos/
 *.xlsx
 .apify_key
 .smartlead_key
+
+# Excepcion: el contador de clics SI va versionado. Lleva la fecha en que se
+# detecto cada clic, y eso no se puede recuperar de la API de Smartlead, que
+# solo devuelve la del ultimo. Si se pierde, se pierde para siempre: el 19-oct
+# se reciclo el contenedor y se llevo todo el scratchpad por delante.
+!clics-estado.json

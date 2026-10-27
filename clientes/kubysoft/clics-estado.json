@@ -1,0 +1,1305 @@
+{
+ "avisados": {},
+ "correos": {
+  "01e45ae9-1d1d-4b97-96c7-8949618a08e5": {
+   "asunto": "RE: una pregunta sobre TECNOAIR",
+   "clics": 0,
+   "enviado": "2026-10-16T08:03:36.369Z",
+   "fechas": [],
+   "lead": "tecnoair@tecnoair.es",
+   "paso": 2
+  },
+  "021c7b7b-e003-4f2c-9b0c-e56c79b9d40a": {
+   "asunto": "una pregunta sobre Climar",
+   "clics": 3,
+   "enviado": "2026-10-08T07:21:55.032Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-08T07:22:49.680Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "sat@climar.es",
+   "paso": 1
+  },
+  "05d445bb-5c0e-4321-8761-2d5acc362d6c": {
+   "asunto": "RE: una pregunta sobre Instalaciones Mega Clima, S.L",
+   "clics": 0,
+   "enviado": "2026-10-15T11:21:12.169Z",
+   "fechas": [],
+   "lead": "imc@megaclima.es",
+   "paso": 2
+  },
+  "0820623f-4e33-4a53-a130-be0689c6da30": {
+   "asunto": "una pregunta sobre ROIGSAT | Reparación Calderas y Aire Acondicionado Barcelona | (Oficina sin atención al público)",
+   "clics": 0,
+   "enviado": "2026-10-08T06:02:33.740Z",
+   "fechas": [],
+   "lead": "girona@roigsat.com",
+   "paso": 1
+  },
+  "088b6598-785a-47d1-ab24-7632b02431c3": {
+   "asunto": "una pregunta sobre Climargas",
+   "clics": 0,
+   "enviado": "2026-10-08T08:42:05.695Z",
+   "fechas": [],
+   "lead": "info@climargas.es",
+   "paso": 1
+  },
+  "0b2e0210-c434-4215-90f1-5739f809c9a5": {
+   "asunto": "RE: una pregunta sobre Nikavia soluciones electricas",
+   "clics": 0,
+   "enviado": "2026-10-23T06:21:13.576Z",
+   "fechas": [],
+   "lead": "info@nikaviasolucioneselectricas.es",
+   "paso": 2
+  },
+  "0b94fb27-1f33-4728-b127-9334517824a0": {
+   "asunto": "una pregunta sobre Instalaciones Maldonado",
+   "clics": 0,
+   "enviado": "2026-10-20T06:21:23.439Z",
+   "fechas": [],
+   "lead": "info@instalacionesmaldonado.com",
+   "paso": 1
+  },
+  "0bd7bb46-2d7f-479a-8f6c-5bb09a4a3518": {
+   "asunto": "una pregunta sobre Artic Refrigeració - Cámaras frigoríficas y aire acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-09T06:41:06.643Z",
+   "fechas": [],
+   "lead": "info@articrefrigeracio.es",
+   "paso": 1
+  },
+  "0e0c76db-fba2-4a58-ad3e-82a1803aa056": {
+   "asunto": "RE: una pregunta sobre Aire Mediterráneo Climatizacion, SL.",
+   "clics": 0,
+   "enviado": "2026-10-26T11:23:04.602Z",
+   "fechas": [],
+   "lead": "info@aimed.es",
+   "paso": 2
+  },
+  "0eb89fe8-a043-420a-8d55-471f976a2fc1": {
+   "asunto": "una pregunta sobre Mairo Valenciana de Climatización",
+   "clics": 0,
+   "enviado": "2026-10-08T09:02:13.677Z",
+   "fechas": [],
+   "lead": "mairo@mairoclimatizacion.com",
+   "paso": 1
+  },
+  "0ed7168e-51b9-4f59-a259-f9897d0738ad": {
+   "asunto": "una pregunta sobre CITENGAS Compañía Instaladora Técnica de Gas S.L.",
+   "clics": 0,
+   "enviado": "2026-10-06T14:22:46.996Z",
+   "fechas": [],
+   "lead": "info@citengas.es",
+   "paso": 1
+  },
+  "0ee4858d-11b5-4b0f-b42c-65ac51d924f8": {
+   "asunto": "una pregunta sobre Grupo Arcess | Climatización y Energías renovables",
+   "clics": 0,
+   "enviado": "2026-10-27T07:40:57.591Z",
+   "fechas": [],
+   "lead": "info@arcess.es",
+   "paso": 1
+  },
+  "0ef4e7d3-0541-48ee-a9cc-7b3c98e9bd6e": {
+   "asunto": "RE: una pregunta sobre Climatizaciones Frioclima",
+   "clics": 0,
+   "enviado": "2026-10-21T06:01:59.650Z",
+   "fechas": [],
+   "lead": "info@frioclima.com",
+   "paso": 3
+  },
+  "101c3d6e-294e-4335-8351-512497aab326": {
+   "asunto": "una pregunta sobre Ecotech Solutions",
+   "clics": 0,
+   "enviado": "2026-10-07T10:02:01.129Z",
+   "fechas": [],
+   "lead": "info@ecotechsolutions.es",
+   "paso": 1
+  },
+  "128c9d18-f37b-47f8-b48a-456d0f6b33d8": {
+   "asunto": "una pregunta sobre Aire Sevilla - Servicios de Instalacion y mantenimiento de Aire Acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-09T07:22:07.733Z",
+   "fechas": [],
+   "lead": "info@airesevilla.es",
+   "paso": 1
+  },
+  "12b0fbb7-5308-442d-8b0c-af42f1d917e6": {
+   "asunto": "una pregunta sobre Climarfrica - Aire acondicionado y climatización en Zaragoza",
+   "clics": 0,
+   "enviado": "2026-10-26T14:30:46.876Z",
+   "fechas": [],
+   "lead": "climarfrica@climarfrica.com",
+   "paso": 1
+  },
+  "148e5a29-4f8c-4e05-ac90-eddc67e73c47": {
+   "asunto": "una pregunta sobre Aire Mediterráneo Climatizacion, SL.",
+   "clics": 0,
+   "enviado": "2026-10-21T11:22:55.967Z",
+   "fechas": [],
+   "lead": "info@aimed.es",
+   "paso": 1
+  },
+  "15e4fc8a-2950-4b90-8311-afaa10d80ab2": {
+   "asunto": "una pregunta sobre Telfra Málaga S.l",
+   "clics": 0,
+   "enviado": "2026-10-19T07:02:50.375Z",
+   "fechas": [],
+   "lead": "telfra@telfra.es",
+   "paso": 1
+  },
+  "174c9b3b-0d60-4e28-81e4-f6cc22d4732d": {
+   "asunto": "RE: una pregunta sobre Air-Mant Instalacions i serveis",
+   "clics": 0,
+   "enviado": "2026-10-15T12:43:10.601Z",
+   "fechas": [],
+   "lead": "airmant@airmant.com",
+   "paso": 2
+  },
+  "1a280b2d-9da0-4ff5-be2f-7c4c8930264f": {
+   "asunto": "una pregunta sobre Tu Servicio Técnico",
+   "clics": 0,
+   "enviado": "2026-10-08T08:21:53.848Z",
+   "fechas": [],
+   "lead": "info@tuserviciotecnico.net",
+   "paso": 1
+  },
+  "1a74d9e0-7c0d-4e71-bb47-c031d982ef4a": {
+   "asunto": "una pregunta sobre Air Climatec S.L.",
+   "clics": 0,
+   "enviado": "2026-10-07T08:42:05.372Z",
+   "fechas": [],
+   "lead": "airclimatec@airclimatec.com",
+   "paso": 1
+  },
+  "1a96af1d-c998-4ede-9520-d7afe2d05249": {
+   "asunto": "RE: una pregunta sobre Artic Refrigeració - Cámaras frigoríficas y aire acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-21T09:22:56.354Z",
+   "fechas": [],
+   "lead": "info@articrefrigeracio.es",
+   "paso": 3
+  },
+  "1b6eb75b-e51a-4958-a6f2-60f211224eb5": {
+   "asunto": "una pregunta sobre Gbusiness - Toshibamurcia",
+   "clics": 2,
+   "enviado": "2026-10-21T10:22:30.073Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-21T10:23:53.910Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "info@toshibamurcia.es",
+   "paso": 1
+  },
+  "1c430bbc-bfe2-49b2-a0e1-e94c1b7ac575": {
+   "asunto": "RE: una pregunta sobre Climar",
+   "clics": 1,
+   "enviado": "2026-10-21T07:03:10.021Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-21T07:12:20.156Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "sat@climar.es",
+   "paso": 3
+  },
+  "1c9bc6f0-0595-40fb-b9bf-84c40c634a37": {
+   "asunto": "una pregunta sobre TECNOAIR",
+   "clics": 0,
+   "enviado": "2026-10-09T06:21:10.732Z",
+   "fechas": [],
+   "lead": "tecnoair@tecnoair.es",
+   "paso": 1
+  },
+  "1dae3370-79fd-4a4d-a248-4164d803601b": {
+   "asunto": "una pregunta sobre Instalaciones Mega Clima, S.L",
+   "clics": 0,
+   "enviado": "2026-10-07T06:21:21.035Z",
+   "fechas": [],
+   "lead": "imc@megaclima.es",
+   "paso": 1
+  },
+  "21117fa2-e949-4002-8e9c-72a7c4ccaa28": {
+   "asunto": "RE: una pregunta sobre Air Climatec S.L.",
+   "clics": 0,
+   "enviado": "2026-10-20T14:13:58.322Z",
+   "fechas": [],
+   "lead": "airclimatec@airclimatec.com",
+   "paso": 3
+  },
+  "239af592-5416-4141-b8fc-5c81f042b955": {
+   "asunto": "RE: una pregunta sobre Westaflex Ibérica S.A.",
+   "clics": 0,
+   "enviado": "2026-10-26T11:42:49.351Z",
+   "fechas": [],
+   "lead": "info@westaflex.es",
+   "paso": 2
+  },
+  "267eba99-cbc1-4dae-93e5-1c69e2705594": {
+   "asunto": "RE: una pregunta sobre MANALTAIR S.L",
+   "clics": 0,
+   "enviado": "2026-10-15T11:25:30.155Z",
+   "fechas": [],
+   "lead": "manaltair@manaltair.com",
+   "paso": 2
+  },
+  "26f590b3-4898-4952-a7ad-0f65f8e844ae": {
+   "asunto": "RE: una pregunta sobre Climargas",
+   "clics": 0,
+   "enviado": "2026-10-16T07:21:30.211Z",
+   "fechas": [],
+   "lead": "info@climargas.es",
+   "paso": 2
+  },
+  "27c7f9a8-ff51-4a04-8dd2-2dbffb630b9b": {
+   "asunto": "una pregunta sobre stA+ Servicio Técnico de Electrodomésticos y Aire Acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-08T08:02:16.364Z",
+   "fechas": [],
+   "lead": "info@serviciotecnico-aplus.com",
+   "paso": 1
+  },
+  "2830f05a-2e51-4c20-bed8-68c720d7eea8": {
+   "asunto": "una pregunta sobre Irtesc S.L.",
+   "clics": 2,
+   "enviado": "2026-10-26T14:14:52.396Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-26T14:15:31.222Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "irtesc@irtesc.es",
+   "paso": 1
+  },
+  "29d2c4b6-64a3-4918-a9c3-fbe6281e28a4": {
+   "asunto": "RE: una pregunta sobre stA+ Servicio Técnico de Electrodomésticos y Aire Acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-21T07:41:39.113Z",
+   "fechas": [],
+   "lead": "info@serviciotecnico-aplus.com",
+   "paso": 3
+  },
+  "2a3d6d78-a328-4e6b-be43-fcd903c63d72": {
+   "asunto": "una pregunta sobre EnergyClima Acondicionament Climàtic",
+   "clics": 0,
+   "enviado": "2026-10-08T07:02:11.203Z",
+   "fechas": [],
+   "lead": "energyclima@energyclimaac.com",
+   "paso": 1
+  },
+  "2ad2e3ca-16db-44ea-a824-0be45cc31010": {
+   "asunto": "una pregunta sobre Q-Tech Houses, division s.l.u.",
+   "clics": 0,
+   "enviado": "2026-10-20T07:03:10.779Z",
+   "fechas": [],
+   "lead": "info@q-tech.es",
+   "paso": 1
+  },
+  "2f367801-3f65-4c86-9d62-990213c10afe": {
+   "asunto": "una pregunta sobre DISMAFRIO, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-23T09:03:01.714Z",
+   "fechas": [],
+   "lead": "dismafrio@dismafrio.com",
+   "paso": 1
+  },
+  "304dbfeb-c292-4244-a534-d165199d407b": {
+   "asunto": "una pregunta sobre Levitec",
+   "clics": 2,
+   "enviado": "2026-10-22T07:21:31.232Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-22T07:22:07.807Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "administracion@levitec.es",
+   "paso": 1
+  },
+  "30efb750-575d-4621-bd23-1965bb1e617d": {
+   "asunto": "una pregunta sobre Moncayo - Aire acondicionado Zaragoza",
+   "clics": 0,
+   "enviado": "2026-10-27T07:20:58.412Z",
+   "fechas": [],
+   "lead": "info@moncayoclima.es",
+   "paso": 1
+  },
+  "3361fc01-2268-4dca-a47d-7e949b885bf2": {
+   "asunto": "RE: una pregunta sobre Climaroaza S.L.",
+   "clics": 0,
+   "enviado": "2026-10-20T11:42:55.576Z",
+   "fechas": [],
+   "lead": "info@climaroaza.es",
+   "paso": 3
+  },
+  "3484e9ac-4c29-422f-a677-ed6c7e4bc293": {
+   "asunto": "RE: una pregunta sobre ROIGSAT | Reparación Calderas y Aire Acondicionado Barcelona | (Oficina sin atención al público)",
+   "clics": 0,
+   "enviado": "2026-10-15T14:08:35.917Z",
+   "fechas": [],
+   "lead": "girona@roigsat.com",
+   "paso": 2
+  },
+  "35854d01-6dca-4ad3-97bf-ac29e9d8ef4a": {
+   "asunto": "una pregunta sobre MANALTAIR S.L",
+   "clics": 0,
+   "enviado": "2026-10-07T06:41:10.998Z",
+   "fechas": [],
+   "lead": "manaltair@manaltair.com",
+   "paso": 1
+  },
+  "36701f0e-dd30-4614-aac0-db3244bd283f": {
+   "asunto": "RE: una pregunta sobre Gbusiness - Toshibamurcia",
+   "clics": 1,
+   "enviado": "2026-10-26T10:03:15.211Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-26T10:04:25.783Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "info@toshibamurcia.es",
+   "paso": 2
+  },
+  "38cadfe6-abdb-4272-968c-5360e2861730": {
+   "asunto": "RE: una pregunta sobre ROLAFRI S.L.",
+   "clics": 0,
+   "enviado": "2026-10-21T09:42:32.525Z",
+   "fechas": [],
+   "lead": "rolafri@rolafri.com",
+   "paso": 3
+  },
+  "39cbd1a3-7520-4d0b-9f75-df1d41bd9e03": {
+   "asunto": "RE: una pregunta sobre Doblec Instalaciones",
+   "clics": 0,
+   "enviado": "2026-10-20T14:29:06.215Z",
+   "fechas": [],
+   "lead": "info@doblecinstalaciones.es",
+   "paso": 3
+  },
+  "3ae35d04-f791-403a-8cf2-de0706c1269c": {
+   "asunto": "RE: una pregunta sobre Reparación aire acondicionado Barcelona - Climafix",
+   "clics": 0,
+   "enviado": "2026-10-15T12:06:26.057Z",
+   "fechas": [],
+   "lead": "info@climafix.net",
+   "paso": 2
+  },
+  "3bca78da-70a6-4f0b-8c05-048523481b5b": {
+   "asunto": "una pregunta sobre Confortclima,S.C.A.",
+   "clics": 0,
+   "enviado": "2026-10-16T09:22:09.693Z",
+   "fechas": [],
+   "lead": "confortclima@confortclima.es",
+   "paso": 1
+  },
+  "3ee6adb7-ae8c-4cdc-86e5-6a56469134b9": {
+   "asunto": "una pregunta sobre FONHAQUIESTOY",
+   "clics": 0,
+   "enviado": "2026-10-16T10:22:21.586Z",
+   "fechas": [],
+   "lead": "info@haquiestoy.com",
+   "paso": 1
+  },
+  "3ffcbdd7-43a1-4ed8-a192-fd1f374e51d6": {
+   "asunto": "RE: una pregunta sobre Seguas | Soluciones en Aire Comprimido, Refrigeración y Climatización Industrial en Zaragoza",
+   "clics": 1,
+   "enviado": "2026-10-27T08:21:31.167Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-27T08:23:25.613Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "seguas@seguas.com",
+   "paso": 2
+  },
+  "41225090-6634-486f-87b8-7ace3480d6c9": {
+   "asunto": "una pregunta sobre Aire Acondicionado en Alicante ❄️TUAIRE🔥",
+   "clics": 0,
+   "enviado": "2026-10-27T10:03:12.061Z",
+   "fechas": [],
+   "lead": "info@tuaire.es",
+   "paso": 1
+  },
+  "4333b07a-4720-43de-9cc3-4c9861435e2b": {
+   "asunto": "RE: una pregunta sobre Mairo Valenciana de Climatización",
+   "clics": 0,
+   "enviado": "2026-10-16T07:41:39.234Z",
+   "fechas": [],
+   "lead": "mairo@mairoclimatizacion.com",
+   "paso": 2
+  },
+  "43dcd552-314e-426c-aa7e-9a802c02cc1e": {
+   "asunto": "RE: una pregunta sobre ROLAFRI S.L.",
+   "clics": 0,
+   "enviado": "2026-10-16T08:42:17.751Z",
+   "fechas": [],
+   "lead": "rolafri@rolafri.com",
+   "paso": 2
+  },
+  "4449c597-89bb-494d-9443-7e8f7da265e1": {
+   "asunto": "RE: una pregunta sobre Soluciones Energéticas Del Sur S.L.",
+   "clics": 0,
+   "enviado": "2026-10-23T07:03:24.506Z",
+   "fechas": [],
+   "lead": "info@solensur.es",
+   "paso": 2
+  },
+  "44c3c7ea-c4d8-41bf-a0d4-89b38031b656": {
+   "asunto": "RE: una pregunta sobre EnergyClima Acondicionament Climàtic",
+   "clics": 0,
+   "enviado": "2026-10-21T06:41:11.020Z",
+   "fechas": [],
+   "lead": "energyclima@energyclimaac.com",
+   "paso": 3
+  },
+  "451f0d55-d0d1-452d-b15a-ab358208356f": {
+   "asunto": "RE: una pregunta sobre Manteni2 - mantenimiento y climatización",
+   "clics": 0,
+   "enviado": "2026-10-26T08:41:29.932Z",
+   "fechas": [],
+   "lead": "manteni2@manteni2.es",
+   "paso": 3
+  },
+  "45c599c5-5530-4f6d-bb21-c62d9dcca17a": {
+   "asunto": "RE: una pregunta sobre Tu Servicio Técnico",
+   "clics": 0,
+   "enviado": "2026-10-21T08:03:38.520Z",
+   "fechas": [],
+   "lead": "info@tuserviciotecnico.net",
+   "paso": 3
+  },
+  "478b76fa-9dfb-417b-9914-5a1f9e99e101": {
+   "asunto": "una pregunta sobre Doblec Instalaciones",
+   "clics": 0,
+   "enviado": "2026-10-07T09:22:02.503Z",
+   "fechas": [],
+   "lead": "info@doblecinstalaciones.es",
+   "paso": 1
+  },
+  "4bc30e4a-551e-44b0-9ff3-79d7f197ad32": {
+   "asunto": "una pregunta sobre Aldania | Climatización Industrial Madrid",
+   "clics": 0,
+   "enviado": "2026-10-07T07:02:13.923Z",
+   "fechas": [],
+   "lead": "hola@aldania.com",
+   "paso": 1
+  },
+  "4cf8d755-d883-43ed-a21a-bdd22c3dced8": {
+   "asunto": "RE: una pregunta sobre Aldar Servicio Técnico de Reparación e Instalación de Electrodomésticos",
+   "clics": 0,
+   "enviado": "2026-10-15T10:02:50.316Z",
+   "fechas": [],
+   "lead": "contacto@aldarserviciotecnico.com",
+   "paso": 2
+  },
+  "4d92d0b3-c85e-4549-a140-7f0c84c87968": {
+   "asunto": "RE: una pregunta sobre CLIMATIZACIONES DANFRI, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-26T07:01:47.560Z",
+   "fechas": [],
+   "lead": "administracion@danfri.es",
+   "paso": 2
+  },
+  "4eadf82a-aafc-4a2a-a209-8fc996cb1a0d": {
+   "asunto": "una pregunta sobre ROLAFRI S.L.",
+   "clics": 0,
+   "enviado": "2026-10-09T07:02:26.288Z",
+   "fechas": [],
+   "lead": "rolafri@rolafri.com",
+   "paso": 1
+  },
+  "4f7b2a44-3c6e-4060-8639-b0822be937ae": {
+   "asunto": "una pregunta sobre Solerfrio EAR",
+   "clics": 0,
+   "enviado": "2026-10-21T11:05:09.870Z",
+   "fechas": [],
+   "lead": "j.soler@solerfrio.es",
+   "paso": 1
+  },
+  "4fb8c0a4-f481-4257-a858-dc643c9dbcba": {
+   "asunto": "RE: una pregunta sobre TECNOAIR",
+   "clics": 0,
+   "enviado": "2026-10-21T09:03:11.525Z",
+   "fechas": [],
+   "lead": "tecnoair@tecnoair.es",
+   "paso": 3
+  },
+  "50c85119-1224-4c87-868a-18c23aa70b7a": {
+   "asunto": "RE: una pregunta sobre stA+ Servicio Técnico de Electrodomésticos y Aire Acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-16T06:41:13.977Z",
+   "fechas": [],
+   "lead": "info@serviciotecnico-aplus.com",
+   "paso": 2
+  },
+  "533da95a-ef4f-4739-b88b-053f40656278": {
+   "asunto": "RE: una pregunta sobre Tu Servicio Técnico",
+   "clics": 0,
+   "enviado": "2026-10-16T07:02:46.945Z",
+   "fechas": [],
+   "lead": "info@tuserviciotecnico.net",
+   "paso": 2
+  },
+  "564800c3-d15d-47d9-9a82-dd92f21ba6ce": {
+   "asunto": "RE: una pregunta sobre Abcon Servicios Integrales S.L.",
+   "clics": 0,
+   "enviado": "2026-10-26T12:43:35.511Z",
+   "fechas": [],
+   "lead": "sara@abcon.es",
+   "paso": 2
+  },
+  "56ae07ce-aa3f-485e-8585-7f20e807d549": {
+   "asunto": "RE: una pregunta sobre Soluciones DTM",
+   "clics": 0,
+   "enviado": "2026-10-26T08:21:36.361Z",
+   "fechas": [],
+   "lead": "david@solucionesdtm.es",
+   "paso": 2
+  },
+  "572f9cb8-2cb8-4d84-a6a9-84ed6638c343": {
+   "asunto": "una pregunta sobre Soluciones DTM",
+   "clics": 0,
+   "enviado": "2026-10-20T07:21:43.480Z",
+   "fechas": [],
+   "lead": "david@solucionesdtm.es",
+   "paso": 1
+  },
+  "57d09c60-5cce-4625-919d-5e456f4eee9c": {
+   "asunto": "RE: una pregunta sobre GILCO CLIMATIZACION",
+   "clics": 0,
+   "enviado": "2026-10-21T06:21:19.853Z",
+   "fechas": [],
+   "lead": "gilco@gilco73.com",
+   "paso": 3
+  },
+  "59d2797e-b835-45b2-8e8c-8feb8a50ae19": {
+   "asunto": "RE: una pregunta sobre Telfra Málaga S.l",
+   "clics": 0,
+   "enviado": "2026-10-23T07:21:33.180Z",
+   "fechas": [],
+   "lead": "telfra@telfra.es",
+   "paso": 2
+  },
+  "5c24544b-ac57-4f22-80e0-7555c6219733": {
+   "asunto": "una pregunta sobre Abcon Servicios Integrales S.L.",
+   "clics": 0,
+   "enviado": "2026-10-22T07:03:04.121Z",
+   "fechas": [],
+   "lead": "sara@abcon.es",
+   "paso": 1
+  },
+  "5dbf5e94-35bf-4965-a808-fa9fd26db22b": {
+   "asunto": "RE: una pregunta sobre ACCIÓN SERVICIOS DE MANTENIMIENTO Y GESTIÓN INTEGRAL, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-26T09:23:03.821Z",
+   "fechas": [],
+   "lead": "comercial@accionservicios.com",
+   "paso": 3
+  },
+  "60bb900b-2138-445d-b06b-e1ac4c1d33dd": {
+   "asunto": "una pregunta sobre Frío y Calor Perfecto",
+   "clics": 0,
+   "enviado": "2026-10-23T06:01:48.095Z",
+   "fechas": [],
+   "lead": "info@frioycalorperfecto.com",
+   "paso": 1
+  },
+  "60fc2964-8c70-4213-addf-e0f69cc9c58c": {
+   "asunto": "RE: una pregunta sobre Ecotech Solutions",
+   "clics": 0,
+   "enviado": "2026-10-20T14:51:06.457Z",
+   "fechas": [],
+   "lead": "info@ecotechsolutions.es",
+   "paso": 3
+  },
+  "61075291-0951-43a7-9dd4-1e42adac38ae": {
+   "asunto": "una pregunta sobre Benito Sánchez Oviedo",
+   "clics": 0,
+   "enviado": "2026-10-27T09:41:27.362Z",
+   "fechas": [],
+   "lead": "benito@aislamientos-benitosanchez.com",
+   "paso": 1
+  },
+  "62da7c65-9112-4961-8892-69f54fcd8faa": {
+   "asunto": "una pregunta sobre Climatizaciones Frioclima",
+   "clics": 0,
+   "enviado": "2026-10-08T06:21:08.966Z",
+   "fechas": [],
+   "lead": "info@frioclima.com",
+   "paso": 1
+  },
+  "642ee953-fd6c-46ce-bd67-7b644fc31085": {
+   "asunto": "RE: una pregunta sobre Rualclima",
+   "clics": 0,
+   "enviado": "2026-10-15T10:22:26.790Z",
+   "fechas": [],
+   "lead": "info@rualclima.es",
+   "paso": 2
+  },
+  "64bf9f60-3fea-4d15-9139-0dbaed031d21": {
+   "asunto": "una pregunta sobre Seguas | Soluciones en Aire Comprimido, Refrigeración y Climatización Industrial en Zaragoza",
+   "clics": 2,
+   "enviado": "2026-10-23T08:04:41.223Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-23T08:06:48.850Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "seguas@seguas.com",
+   "paso": 1
+  },
+  "6749567f-613c-4739-af06-200d281abd2e": {
+   "asunto": "RE: una pregunta sobre Q-Tech Houses, division s.l.u.",
+   "clics": 0,
+   "enviado": "2026-10-26T08:02:53.806Z",
+   "fechas": [],
+   "lead": "info@q-tech.es",
+   "paso": 2
+  },
+  "6a27c122-ac58-4928-8642-a298c236016d": {
+   "asunto": "RE: una pregunta sobre CITENGAS Compañía Instaladora Técnica de Gas S.L.",
+   "clics": 0,
+   "enviado": "2026-10-20T10:22:33.218Z",
+   "fechas": [],
+   "lead": "info@citengas.es",
+   "paso": 3
+  },
+  "6a9b211b-3303-44f7-a872-a5e845eb5814": {
+   "asunto": "RE: una pregunta sobre Neotérmica",
+   "clics": 0,
+   "enviado": "2026-10-26T10:23:02.217Z",
+   "fechas": [],
+   "lead": "info@neotermica.es",
+   "paso": 2
+  },
+  "6bbc9317-bf71-40b6-9946-0a96453e44e6": {
+   "asunto": "RE: una pregunta sobre Servicios Técnicos Madrid",
+   "clics": 0,
+   "enviado": "2026-10-20T09:42:19.874Z",
+   "fechas": [],
+   "lead": "info@serviciostecnicosmadrid.com",
+   "paso": 3
+  },
+  "6cd5ede5-a3ef-4abc-b7c3-3e5e476c58a2": {
+   "asunto": "una pregunta sobre GILCO CLIMATIZACION",
+   "clics": 0,
+   "enviado": "2026-10-08T06:41:13.817Z",
+   "fechas": [],
+   "lead": "gilco@gilco73.com",
+   "paso": 1
+  },
+  "6edb84d4-b51c-41b6-893b-49ef76379688": {
+   "asunto": "RE: una pregunta sobre CLIMAMIX MONTAJES E INSTALACIONES",
+   "clics": 0,
+   "enviado": "2026-10-26T10:42:30.864Z",
+   "fechas": [],
+   "lead": "info@climamixmontajes.com",
+   "paso": 3
+  },
+  "70b20d13-3362-48a0-a96a-de88b4e83b5c": {
+   "asunto": "RE: una pregunta sobre Servicios Técnicos Madrid",
+   "clics": 0,
+   "enviado": "2026-10-15T09:22:35.797Z",
+   "fechas": [],
+   "lead": "info@serviciostecnicosmadrid.com",
+   "paso": 2
+  },
+  "721bce0c-f6ad-4414-affe-d812f9482b6a": {
+   "asunto": "RE: una pregunta sobre DISMAFRIO, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-27T09:21:44.110Z",
+   "fechas": [],
+   "lead": "dismafrio@dismafrio.com",
+   "paso": 2
+  },
+  "761d198a-1f83-4850-9185-ca86ce7ff654": {
+   "asunto": "RE: una pregunta sobre GILCO CLIMATIZACION",
+   "clics": 0,
+   "enviado": "2026-10-15T14:44:51.666Z",
+   "fechas": [],
+   "lead": "gilco@gilco73.com",
+   "paso": 2
+  },
+  "784927c6-6b18-4bf2-8c26-5613a4da84ca": {
+   "asunto": "una pregunta sobre JOSE MARIA MUNIENTE S.L.",
+   "clics": 0,
+   "enviado": "2026-10-22T06:41:03.790Z",
+   "fechas": [],
+   "lead": "web@jmmsatferroli.com",
+   "paso": 1
+  },
+  "786a6402-098c-4700-8cf7-cdc4c0ec119f": {
+   "asunto": "RE: una pregunta sobre CITENGAS Compañía Instaladora Técnica de Gas S.L.",
+   "clics": 0,
+   "enviado": "2026-10-15T09:42:32.644Z",
+   "fechas": [],
+   "lead": "info@citengas.es",
+   "paso": 2
+  },
+  "79f748d8-dbeb-4f5f-84dd-385560d7726f": {
+   "asunto": "una pregunta sobre Climaroaza S.L.",
+   "clics": 0,
+   "enviado": "2026-10-07T06:02:08.983Z",
+   "fechas": [],
+   "lead": "info@climaroaza.es",
+   "paso": 1
+  },
+  "7a705046-9e01-4378-8d17-e810889c0afe": {
+   "asunto": "RE: una pregunta sobre Climar",
+   "clics": 2,
+   "enviado": "2026-10-16T06:01:54.175Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-16T06:02:45.923Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "sat@climar.es",
+   "paso": 2
+  },
+  "7b605ac8-208e-49bb-b8a7-b8062f101f97": {
+   "asunto": "una pregunta sobre Neotérmica",
+   "clics": 0,
+   "enviado": "2026-10-21T10:42:35.040Z",
+   "fechas": [],
+   "lead": "info@neotermica.es",
+   "paso": 1
+  },
+  "7d019bcc-0bcd-4132-9971-d38363d5bb4f": {
+   "asunto": "RE: una pregunta sobre Reparación aire acondicionado Barcelona - Climafix",
+   "clics": 0,
+   "enviado": "2026-10-20T13:09:54.915Z",
+   "fechas": [],
+   "lead": "info@climafix.net",
+   "paso": 3
+  },
+  "7db31288-6ee4-45ba-a21e-8b538fb6a82b": {
+   "asunto": "una pregunta sobre Soltec Instalaciones Sl",
+   "clics": 0,
+   "enviado": "2026-10-23T08:42:31.880Z",
+   "fechas": [],
+   "lead": "info@soltecinstalaciones.com",
+   "paso": 1
+  },
+  "7e4b938f-a9f7-4c32-b731-6919a31ea809": {
+   "asunto": "una pregunta sobre Instalaciones y Servicios ADM",
+   "clics": 0,
+   "enviado": "2026-10-20T06:41:00.942Z",
+   "fechas": [],
+   "lead": "info@adminstalacionesyservicios.com",
+   "paso": 1
+  },
+  "81916128-5e20-4fa7-99c8-32594f3353a6": {
+   "asunto": "RE: una pregunta sobre Climargas",
+   "clics": 0,
+   "enviado": "2026-10-21T08:22:32.017Z",
+   "fechas": [],
+   "lead": "info@climargas.es",
+   "paso": 3
+  },
+  "82846986-55b7-4f6d-82ac-3f2abf0beba3": {
+   "asunto": "RE: una pregunta sobre Aldar Servicio Técnico de Reparación e Instalación de Electrodomésticos",
+   "clics": 0,
+   "enviado": "2026-10-20T10:42:22.443Z",
+   "fechas": [],
+   "lead": "contacto@aldarserviciotecnico.com",
+   "paso": 3
+  },
+  "82ce4f72-5afb-4346-877b-6a3a271c6240": {
+   "asunto": "una pregunta sobre Instaladores de Aerotermia y Domótica Clilux Instalaciones",
+   "clics": 0,
+   "enviado": "2026-10-19T06:21:11.389Z",
+   "fechas": [],
+   "lead": "instalaciones@clilux.com",
+   "paso": 1
+  },
+  "82da7c8e-5b74-4051-a443-ba429dcd83fe": {
+   "asunto": "una pregunta sobre INRELECSA",
+   "clics": 0,
+   "enviado": "2026-10-22T06:21:07.011Z",
+   "fechas": [],
+   "lead": "inrelecsa@inrelecsa.com",
+   "paso": 1
+  },
+  "84a34f0f-e4c5-4224-9104-98bca34f2712": {
+   "asunto": "RE: una pregunta sobre Técnicos Fernando Valencia",
+   "clics": 0,
+   "enviado": "2026-10-21T07:21:38.161Z",
+   "fechas": [],
+   "lead": "info@tecnicosvalencia.es",
+   "paso": 3
+  },
+  "85c99d67-e6c3-4764-b557-3668205176f1": {
+   "asunto": "una pregunta sobre ACCIÓN SERVICIOS DE MANTENIMIENTO Y GESTIÓN INTEGRAL, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-16T09:41:51.476Z",
+   "fechas": [],
+   "lead": "comercial@accionservicios.com",
+   "paso": 1
+  },
+  "87570df7-b673-467b-919b-8ec982c64476": {
+   "asunto": "una pregunta sobre Nikavia soluciones electricas",
+   "clics": 0,
+   "enviado": "2026-10-19T06:01:43.437Z",
+   "fechas": [],
+   "lead": "info@nikaviasolucioneselectricas.es",
+   "paso": 1
+  },
+  "87695d9a-4ccd-41de-b2a9-80a8803b7ba4": {
+   "asunto": "RE: una pregunta sobre Reparacion Aire Acondicionado | Reparacion Caldera | Nevera | Electrodomesticos",
+   "clics": 0,
+   "enviado": "2026-10-20T13:29:30.386Z",
+   "fechas": [],
+   "lead": "hola@reparaciondeaireacondicionado.net",
+   "paso": 3
+  },
+  "88c45098-e5f4-4235-bdc6-0e654b5549d4": {
+   "asunto": "RE: una pregunta sobre Satialia Reparación Electrodomésticos Málaga",
+   "clics": 0,
+   "enviado": "2026-10-23T07:41:26.373Z",
+   "fechas": [],
+   "lead": "info@satialia.com",
+   "paso": 2
+  },
+  "8a52596a-00a4-4486-9c4d-2cd44bdf151a": {
+   "asunto": "RE: una pregunta sobre CLIMAMIX MONTAJES E INSTALACIONES",
+   "clics": 0,
+   "enviado": "2026-10-20T11:04:52.707Z",
+   "fechas": [],
+   "lead": "info@climamixmontajes.com",
+   "paso": 2
+  },
+  "8b85b20b-bbe0-4217-813f-9ec994e30685": {
+   "asunto": "RE: una pregunta sobre Climaroaza S.L.",
+   "clics": 0,
+   "enviado": "2026-10-15T10:44:00.142Z",
+   "fechas": [],
+   "lead": "info@climaroaza.es",
+   "paso": 2
+  },
+  "8d7ef1c4-d343-4fe6-8a47-cc83a171cfb6": {
+   "asunto": "una pregunta sobre Aldar Servicio Técnico de Reparación e Instalación de Electrodomésticos",
+   "clics": 0,
+   "enviado": "2026-10-06T14:42:23.421Z",
+   "fechas": [],
+   "lead": "contacto@aldarserviciotecnico.com",
+   "paso": 1
+  },
+  "8e465b9c-b35b-4152-97d1-9c602175ae6f": {
+   "asunto": "una pregunta sobre Instalaciones Cliper",
+   "clics": 0,
+   "enviado": "2026-10-26T14:55:50.753Z",
+   "fechas": [],
+   "lead": "zaragoza@instalacionescliper.es",
+   "paso": 1
+  },
+  "8f2ce262-da62-4204-89fd-0232c385184d": {
+   "asunto": "una pregunta sobre Reparación aire acondicionado Barcelona - Climafix",
+   "clics": 0,
+   "enviado": "2026-10-07T07:21:49.341Z",
+   "fechas": [],
+   "lead": "info@climafix.net",
+   "paso": 1
+  },
+  "8f60d3d1-cb04-4f42-83f8-c6f53c352f99": {
+   "asunto": "RE: una pregunta sobre Confortclima,S.C.A.",
+   "clics": 0,
+   "enviado": "2026-10-26T09:03:38.700Z",
+   "fechas": [],
+   "lead": "confortclima@confortclima.es",
+   "paso": 3
+  },
+  "95aaaf98-1eb7-4ebe-a534-70b96be028b3": {
+   "asunto": "RE: una pregunta sobre Soltec Instalaciones Sl",
+   "clics": 0,
+   "enviado": "2026-10-27T09:03:38.286Z",
+   "fechas": [],
+   "lead": "info@soltecinstalaciones.com",
+   "paso": 2
+  },
+  "95d2a819-dd92-45ab-826a-35f00482803f": {
+   "asunto": "una pregunta sobre CLIMAMIX MONTAJES E INSTALACIONES",
+   "clics": 0,
+   "enviado": "2026-10-16T10:03:34.750Z",
+   "fechas": [],
+   "lead": "info@climamixmontajes.com",
+   "paso": 1
+  },
+  "9d637cf6-bc8e-4f97-b725-df77b546a8d9": {
+   "asunto": "RE: una pregunta sobre -Tubei S.L.",
+   "clics": 0,
+   "enviado": "2026-10-27T08:41:39.269Z",
+   "fechas": [],
+   "lead": "tecnico@tubei.es",
+   "paso": 2
+  },
+  "9dd37d1f-346f-45fd-91dd-1915eb44d635": {
+   "asunto": "RE: una pregunta sobre Ecotech Solutions",
+   "clics": 0,
+   "enviado": "2026-10-15T13:44:29.015Z",
+   "fechas": [],
+   "lead": "info@ecotechsolutions.es",
+   "paso": 2
+  },
+  "9dd51882-3632-40d8-8415-24803eaceb78": {
+   "asunto": "RE: una pregunta sobre Instalaciones y Servicios ADM",
+   "clics": 0,
+   "enviado": "2026-10-26T07:41:04.745Z",
+   "fechas": [],
+   "lead": "info@adminstalacionesyservicios.com",
+   "paso": 2
+  },
+  "a0b01897-54c0-4c34-81ea-40b2ff9085cc": {
+   "asunto": "RE: una pregunta sobre Air-Mant Instalacions i serveis",
+   "clics": 0,
+   "enviado": "2026-10-20T13:54:33.607Z",
+   "fechas": [],
+   "lead": "airmant@airmant.com",
+   "paso": 3
+  },
+  "a5f1d967-770a-4f61-84ac-aa803e089861": {
+   "asunto": "RE: una pregunta sobre Mairo Valenciana de Climatización",
+   "clics": 0,
+   "enviado": "2026-10-21T08:42:36.628Z",
+   "fechas": [],
+   "lead": "mairo@mairoclimatizacion.com",
+   "paso": 3
+  },
+  "a91d361c-c671-4daf-adda-0360c61c0d94": {
+   "asunto": "RE: una pregunta sobre Manteni2 - mantenimiento y climatización",
+   "clics": 0,
+   "enviado": "2026-10-20T09:03:23.490Z",
+   "fechas": [],
+   "lead": "manteni2@manteni2.es",
+   "paso": 2
+  },
+  "a970bca1-1fcf-4530-9f67-7f68c24b3b32": {
+   "asunto": "RE: una pregunta sobre MANALTAIR S.L",
+   "clics": 0,
+   "enviado": "2026-10-20T12:24:31.002Z",
+   "fechas": [],
+   "lead": "manaltair@manaltair.com",
+   "paso": 3
+  },
+  "aa521817-62f6-44c4-9b88-d158d85f68d1": {
+   "asunto": "RE: una pregunta sobre ROIGSAT | Reparación Calderas y Aire Acondicionado Barcelona | (Oficina sin atención al público)",
+   "clics": 0,
+   "enviado": "2026-10-20T15:14:33.099Z",
+   "fechas": [],
+   "lead": "girona@roigsat.com",
+   "paso": 3
+  },
+  "aeaef06a-4c56-4963-a016-e1bbb503d583": {
+   "asunto": "una pregunta sobre EIMER S.L. INSTALACIONES ELECTRICAS - AIRE ACONDICONADO",
+   "clics": 0,
+   "enviado": "2026-10-26T13:49:04.774Z",
+   "fechas": [],
+   "lead": "eimer@eimer.net",
+   "paso": 1
+  },
+  "b23d8838-0d2d-4322-84ae-5c9eab013f3c": {
+   "asunto": "RE: una pregunta sobre Instalaciones Maldonado",
+   "clics": 0,
+   "enviado": "2026-10-26T07:21:03.778Z",
+   "fechas": [],
+   "lead": "info@instalacionesmaldonado.com",
+   "paso": 2
+  },
+  "b2eb097f-3db2-45ac-b13e-55504920a665": {
+   "asunto": "una pregunta sobre Servicios Técnicos Madrid",
+   "clics": 0,
+   "enviado": "2026-10-06T14:02:46.592Z",
+   "fechas": [],
+   "lead": "info@serviciostecnicosmadrid.com",
+   "paso": 1
+  },
+  "b35ce443-2d2a-4e38-af9f-6312e84e5048": {
+   "asunto": "RE: una pregunta sobre Anfrixa Refrigeración",
+   "clics": 0,
+   "enviado": "2026-10-26T09:42:21.191Z",
+   "fechas": [],
+   "lead": "info@anfrixa.es",
+   "paso": 2
+  },
+  "b403bd8b-8811-44ea-b3b6-6668e286fc1e": {
+   "asunto": "una pregunta sobre AEROTERMIA y PLACAS SOLARES Flavio Severini",
+   "clics": 0,
+   "enviado": "2026-10-09T06:02:16.846Z",
+   "fechas": [],
+   "lead": "severini@aeroclimapro.es",
+   "paso": 1
+  },
+  "b51d9f27-ee55-4d96-b958-6de2f55f6c2f": {
+   "asunto": "RE: una pregunta sobre ACCIÓN SERVICIOS DE MANTENIMIENTO Y GESTIÓN INTEGRAL, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-20T10:03:30.321Z",
+   "fechas": [],
+   "lead": "comercial@accionservicios.com",
+   "paso": 2
+  },
+  "b57ec1a8-2978-48b6-818c-d205710456f0": {
+   "asunto": "RE: una pregunta sobre Técnicos Fernando Valencia",
+   "clics": 0,
+   "enviado": "2026-10-16T06:21:21.919Z",
+   "fechas": [],
+   "lead": "info@tecnicosvalencia.es",
+   "paso": 2
+  },
+  "b5ea7b03-85f9-435b-b57c-ade9c7bcbe5e": {
+   "asunto": "RE: una pregunta sobre Frío y Calor Perfecto",
+   "clics": 0,
+   "enviado": "2026-10-27T07:01:52.312Z",
+   "fechas": [],
+   "lead": "info@frioycalorperfecto.com",
+   "paso": 2
+  },
+  "be0828e6-d5e1-4178-bb8b-fc1b9c4c9ad4": {
+   "asunto": "RE: una pregunta sobre Doblec Instalaciones",
+   "clics": 0,
+   "enviado": "2026-10-15T13:25:18.253Z",
+   "fechas": [],
+   "lead": "info@doblecinstalaciones.es",
+   "paso": 2
+  },
+  "c0b3551e-9d0a-4aab-84df-ae25316c2ce0": {
+   "asunto": "RE: una pregunta sobre Reparacion Aire Acondicionado | Reparacion Caldera | Nevera | Electrodomesticos",
+   "clics": 0,
+   "enviado": "2026-10-15T12:23:15.396Z",
+   "fechas": [],
+   "lead": "hola@reparaciondeaireacondicionado.net",
+   "paso": 2
+  },
+  "c12b2066-1744-4185-9d25-7a89b33c7d3d": {
+   "asunto": "RE: una pregunta sobre Levitec",
+   "clics": 1,
+   "enviado": "2026-10-26T13:12:38.736Z",
+   "fechas": [
+    {
+     "cuando": "2026-10-26T13:15:08.420Z",
+     "origen": "historico"
+    }
+   ],
+   "lead": "administracion@levitec.es",
+   "paso": 2
+  },
+  "c6b05dcf-bfae-4701-a195-e345eb41b10f": {
+   "asunto": "una pregunta sobre Westaflex Ibérica S.A.",
+   "clics": 0,
+   "enviado": "2026-10-22T06:01:50.863Z",
+   "fechas": [],
+   "lead": "info@westaflex.es",
+   "paso": 1
+  },
+  "c79e7aaf-9ccd-4bec-bc20-c43aacc97a88": {
+   "asunto": "RE: una pregunta sobre Climatizaciones Frioclima",
+   "clics": 0,
+   "enviado": "2026-10-15T14:26:49.741Z",
+   "fechas": [],
+   "lead": "info@frioclima.com",
+   "paso": 2
+  },
+  "cf7b80d1-b5f4-418e-9818-4d821e28e18f": {
+   "asunto": "RE: una pregunta sobre Artic Refrigeració - Cámaras frigoríficas y aire acondicionado",
+   "clics": 0,
+   "enviado": "2026-10-16T08:21:56.917Z",
+   "fechas": [],
+   "lead": "info@articrefrigeracio.es",
+   "paso": 2
+  },
+  "d02eda65-484a-4bdf-ba6d-c5ec0974b522": {
+   "asunto": "una pregunta sobre Técnicos Fernando Valencia",
+   "clics": 0,
+   "enviado": "2026-10-08T07:42:00.256Z",
+   "fechas": [],
+   "lead": "info@tecnicosvalencia.es",
+   "paso": 1
+  },
+  "d20c20ed-d48f-4072-b88d-3bc1feaa43a9": {
+   "asunto": "RE: una pregunta sobre Solerfrio EAR",
+   "clics": 0,
+   "enviado": "2026-10-26T11:04:27.281Z",
+   "fechas": [],
+   "lead": "j.soler@solerfrio.es",
+   "paso": 2
+  },
+  "d38d7723-4385-4eeb-b85a-80d8166aa4b8": {
+   "asunto": "RE: una pregunta sobre Aldania | Climatización Industrial Madrid",
+   "clics": 0,
+   "enviado": "2026-10-20T12:43:58.092Z",
+   "fechas": [],
+   "lead": "hola@aldania.com",
+   "paso": 3
+  },
+  "d59ef00a-bd70-4e2e-8617-0d329b215982": {
+   "asunto": "una pregunta sobre -Tubei S.L.",
+   "clics": 0,
+   "enviado": "2026-10-23T08:22:33.600Z",
+   "fechas": [],
+   "lead": "tecnico@tubei.es",
+   "paso": 1
+  },
+  "d68bc219-ff13-4002-8a0f-41de038bb66d": {
+   "asunto": "una pregunta sobre Air-Mant Instalacions i serveis",
+   "clics": 0,
+   "enviado": "2026-10-07T08:01:54.903Z",
+   "fechas": [],
+   "lead": "airmant@airmant.com",
+   "paso": 1
+  },
+  "df049679-75ea-4a9c-ac10-3d639817225c": {
+   "asunto": "una pregunta sobre Rualclima",
+   "clics": 0,
+   "enviado": "2026-10-06T15:02:38.452Z",
+   "fechas": [],
+   "lead": "info@rualclima.es",
+   "paso": 1
+  },
+  "df7b3a28-4945-4f3c-95cc-fa9388042ab6": {
+   "asunto": "RE: una pregunta sobre EnergyClima Acondicionament Climàtic",
+   "clics": 0,
+   "enviado": "2026-10-15T15:07:07.439Z",
+   "fechas": [],
+   "lead": "energyclima@energyclimaac.com",
+   "paso": 2
+  },
+  "df9bf4d0-0994-466f-a0fc-373c6ff29545": {
+   "asunto": "una pregunta sobre Satialia Reparación Electrodomésticos Málaga",
+   "clics": 0,
+   "enviado": "2026-10-19T07:21:49.373Z",
+   "fechas": [],
+   "lead": "info@satialia.com",
+   "paso": 1
+  },
+  "e17f469b-41e4-4dfe-9695-8fc5e887564c": {
+   "asunto": "una pregunta sobre CLIMATIZACIONES DANFRI, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-20T06:01:34.147Z",
+   "fechas": [],
+   "lead": "administracion@danfri.es",
+   "paso": 1
+  },
+  "e49e742a-6ad0-4be2-a9ea-f1211c27a2f7": {
+   "asunto": "una pregunta sobre TROX España S.A.",
+   "clics": 0,
+   "enviado": "2026-10-27T08:02:50.806Z",
+   "fechas": [],
+   "lead": "trox@trox.es",
+   "paso": 1
+  },
+  "e4dbe1b2-2210-4f1c-8272-ce9ad1630325": {
+   "asunto": "una pregunta sobre Anfrixa Refrigeración",
+   "clics": 0,
+   "enviado": "2026-10-21T10:03:34.668Z",
+   "fechas": [],
+   "lead": "info@anfrixa.es",
+   "paso": 1
+  },
+  "e8464c8f-9ea8-4e0c-b233-b86bf56e68c7": {
+   "asunto": "RE: una pregunta sobre Aldania | Climatización Industrial Madrid",
+   "clics": 0,
+   "enviado": "2026-10-15T11:43:37.042Z",
+   "fechas": [],
+   "lead": "hola@aldania.com",
+   "paso": 2
+  },
+  "e8e5fabe-2105-4b15-b71b-da2227b668ad": {
+   "asunto": "RE: una pregunta sobre INRELECSA",
+   "clics": 0,
+   "enviado": "2026-10-26T12:05:36.470Z",
+   "fechas": [],
+   "lead": "inrelecsa@inrelecsa.com",
+   "paso": 2
+  },
+  "e90e243f-8a0b-41bf-aaae-c8269e9ea323": {
+   "asunto": "RE: una pregunta sobre Air Climatec S.L.",
+   "clics": 0,
+   "enviado": "2026-10-15T13:07:02.741Z",
+   "fechas": [],
+   "lead": "airclimatec@airclimatec.com",
+   "paso": 2
+  },
+  "e9e207d7-e029-4314-a1a0-669a331715b5": {
+   "asunto": "RE: una pregunta sobre JOSE MARIA MUNIENTE S.L.",
+   "clics": 0,
+   "enviado": "2026-10-26T12:23:33.876Z",
+   "fechas": [],
+   "lead": "web@jmmsatferroli.com",
+   "paso": 2
+  },
+  "eaaab6e0-4f83-4233-a727-07583c37a881": {
+   "asunto": "RE: una pregunta sobre Instaladores de Aerotermia y Domótica Clilux Instalaciones",
+   "clics": 0,
+   "enviado": "2026-10-23T06:41:04.771Z",
+   "fechas": [],
+   "lead": "instalaciones@clilux.com",
+   "paso": 2
+  },
+  "ecaa7146-ccac-4fc8-8973-019ef766b6ea": {
+   "asunto": "RE: una pregunta sobre Rualclima",
+   "clics": 0,
+   "enviado": "2026-10-20T11:22:35.003Z",
+   "fechas": [],
+   "lead": "info@rualclima.es",
+   "paso": 3
+  },
+  "f0bc2fb1-58f5-46ca-a056-af809c35a386": {
+   "asunto": "RE: una pregunta sobre Confortclima,S.C.A.",
+   "clics": 0,
+   "enviado": "2026-10-20T09:22:29.144Z",
+   "fechas": [],
+   "lead": "confortclima@confortclima.es",
+   "paso": 2
+  },
+  "f32fd38f-4309-4d9a-abc7-3bf0975bbb3d": {
+   "asunto": "RE: una pregunta sobre Instalaciones Mega Clima, S.L",
+   "clics": 0,
+   "enviado": "2026-10-20T12:04:42.301Z",
+   "fechas": [],
+   "lead": "imc@megaclima.es",
+   "paso": 3
+  },
+  "f5790f3e-0e82-48ce-a8ef-96b2d4e9bfb6": {
+   "asunto": "una pregunta sobre Norgas Climatización, S.L.",
+   "clics": 0,
+   "enviado": "2026-10-26T13:28:23.278Z",
+   "fechas": [],
+   "lead": "info@norgasclimatizacion.com",
+   "paso": 1
+  },
+  "f6cbf1f2-ce76-41ec-b8ae-2ea132ddda2d": {
+   "asunto": "una pregunta sobre Reparacion Aire Acondicionado | Reparacion Caldera | Nevera | Electrodomesticos",
+   "clics": 0,
+   "enviado": "2026-10-07T07:41:53.028Z",
+   "fechas": [],
+   "lead": "hola@reparaciondeaireacondicionado.net",
+   "paso": 1
+  },
+  "f8d761df-eb00-4532-b21e-c08a0fe1df82": {
+   "asunto": "una pregunta sobre Manteni2 - mantenimiento y climatización",
+   "clics": 0,
+   "enviado": "2026-10-16T09:02:36.508Z",
+   "fechas": [],
+   "lead": "manteni2@manteni2.es",
+   "paso": 1
+  },
+  "fbf245b1-244c-49b4-9cb4-875bdc52b3d5": {
+   "asunto": "una pregunta sobre Soluciones Energéticas Del Sur S.L.",
+   "clics": 0,
+   "enviado": "2026-10-19T06:41:19.300Z",
+   "fechas": [],
+   "lead": "info@solensur.es",
+   "paso": 1
+  }
+ },
+ "creado": "2026-10-27T17:08:41.418861+00:00",
+ "version": 1
+}
