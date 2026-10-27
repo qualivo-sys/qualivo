@@ -1,6 +1,6 @@
 # 5-9 · Temario, embudo, validación, plan y riesgos
 
-**Estado:** BORRADOR (v0, 27-oct-2026). Se cierra el 30-oct tras la sesión del 29.
+**Estado:** v1 para la sesión del 29-oct (27-oct-2026). Completo, pero depende de las decisiones; se cierra el 30-oct.
 **Depende de** las decisiones de `00-decisiones-maikel.md`. Si cambia el avatar o el formato, cambia casi todo lo de aquí.
 **Etiquetas:** **[C]** comprobado · **[E]** estimación · **[H]** hipótesis.
 
@@ -26,6 +26,10 @@
 - Prompts de los agentes (respuesta, cualificación, recordatorio, seguimiento) con sus límites.
 - Hoja de métricas (Google Sheets) para quien no tiene CRM.
 
+**Dos condiciones que piden las academias** [C, cierres de Growth del 24 y el 26-oct]:
+- **Herramienta, no método:** cada semana termina con algo instalado y funcionando, no con teoría.
+- **Los datos son suyos:** todo se monta en la cuenta del alumno (su GHL, su n8n, su WhatsApp). Qualivo no guarda ni usa sus contactos.
+
 **Lo que no se reutiliza:** nada con datos de clientes. Toda captura sale de la demo con datos simulados o de la cuenta de Qualivo.
 
 ---
@@ -36,7 +40,7 @@
 
 ```
 Contenido (LinkedIn de Maikel + Instagram)       ┐
-Base propia con consentimiento                    ├─→ Imán: calculadora + guía «72 horas»  ─→ Clase en directo (60 min)
+Base propia con consentimiento                    ├─→ Imán: simulador + guía 5 fugas  ─→ Clase en directo (60 min)
 Anuncios Meta (solo si hace falta; ver 7)         ┘         (lista de espera)                         │
                                                                                                      ▼
                                      Kit 47 € (tras el imán)        Oferta del programa (48-72 h, plazas limitadas)
@@ -53,7 +57,7 @@ Anuncios Meta (solo si hace falta; ver 7)         ┘         (lista de espera) 
 
 | Canal | Qué | Quién | Coste |
 |---|---|---|---|
-| LinkedIn de Maikel | Ya hay 3 piezas por semana sobre dolores (plan del 27-oct). **No se añaden piezas:** 1 de cada 3 lleva la llamada a la guía «72 horas» con ejemplo de formación | Contenido | 0 € |
+| LinkedIn de Maikel | Ya hay 3 piezas por semana sobre dolores (plan del 27-oct). **No se añaden piezas:** 1 de cada 3 lleva la llamada al simulador del embudo para academias, con ejemplo de formación | Contenido | 0 € |
 | Instagram | Las 2 mejores piezas de la semana adaptadas, como ya prevé el plan | Contenido y Creative | 0 € |
 | Base propia | Solo contactos con **consentimiento de comunicaciones comerciales** o clientes de servicios similares (art. 21.2 LSSI). **No se usan las bases de outbound** | Growth audita qué contactos cumplen | 0 € |
 | Anuncios Meta | Solo para la clase y solo si el orgánico se queda corto (ver 7.3). Anuncio con el sector nombrado, que es el formato que trae reuniones [C, Creative] | Paid y Creative | 300 € como máximo en la validación |
@@ -67,7 +71,7 @@ Bloques: titular de 3.4 · para quién y para quién no · las 6 semanas · qué
 
 | Cuándo | Canal | Mensaje |
 |---|---|---|
-| Al apuntarse | Email | Guía «72 horas» + enlace a la clase |
+| Al apuntarse | Email | Simulador y guía de las 5 fugas + enlace a la clase |
 | Al apuntarse, si marcó WhatsApp | WhatsApp | Primer mensaje en menos de 1 minuto: «¿Cuántas solicitudes os entran al mes?» (cualifica y demuestra) |
 | Día 1 | Email | Un error propio de Qualivo y qué aprendió |
 | Día 3 | Email | La fuga más cara en formación, con ejemplo simulado |
@@ -84,6 +88,7 @@ Cada email lleva baja en un clic. Cada mensaje de WhatsApp usa plantilla aprobad
 - **Venta:** pago en la página (Stripe). Llamada opcional de 15 min para dudas, agendada por el propio sistema; la hace Maikel solo si el agente no resuelve la duda por escrito.
 - **Desistimiento:** el programa incluye sesiones en directo, así que es un **servicio** y tiene 14 días [H: confirmar con asesor]. El Kit de 47 € es contenido digital: casillas del art. 103.m TRLGDCU [C].
 - **Bienvenida:** email + formulario de punto de partida + acceso + fecha de la sesión 0.
+- **Antes de la clase:** recordatorio que pide un «sí» a las -24 h y aviso a la -1 h, igual que en las citas de Qualivo. Los leads de formación con poco presupuesto faltan mucho a las citas [C, `04`].
 - **Comunidad:** grupo privado **solo durante la edición y 30 días más**. Después, se cierra. Las grabaciones siguen accesibles 12 meses.
 
 ### 6.6 Métricas objetivo por etapa [E]
@@ -124,7 +129,7 @@ Son estimaciones prudentes para España sin lista grande. Se sustituyen por dato
 
 | Semana | Acción | Trabajo |
 |---|---|---|
-| **S1 · 2-8 nov** | **Página de lista de espera** con la guía «72 horas» como imán y una encuesta de 4 preguntas (sector, solicitudes al mes, quién las atiende, qué pagarías). **8 entrevistas de 20 min** con dueños o directores de academias. **Auditoría de la base** con consentimiento | Contenido y Creative: página y guía. Growth: base y lista de entrevistados. Maikel: entrevistas |
+| **S1 · 2-8 nov** | **Página de lista de espera** con el simulador y la guía de las 5 fugas, que ya existen, como imán y una encuesta de 4 preguntas (sector, solicitudes al mes, quién las atiende, qué pagarías). **8 entrevistas de 20 min** con dueños o directores de academias. **Auditoría de la base** con consentimiento | Contenido y Creative: página y revisión del imán. Growth: base y lista de entrevistados. Maikel: entrevistas |
 | **S2 · 9-15 nov** | Invitación a la **clase en directo del martes 17-nov** (16:00-17:00). Si el jueves 12 hay menos de 60 inscritos, se activan los 300 € de anuncios | Contenido: piezas. Paid: campaña preparada en borrador |
 | **S3 · 16-22 nov** | **Clase** el 17-nov. **Preventa** de la edición fundadora del 17 al 22-nov: 490 € + IVA, 12 plazas, empieza el 12-ene. **Si no se llega a 8 plazas, se devuelve el 100 % el 23-nov** | Maikel: la clase. Agentes: secuencia de emails y WhatsApp |
 | **Lun 23-nov** | **Decisión** | Maikel y Chief of Staff |
@@ -138,6 +143,8 @@ Son estimaciones prudentes para España sin lista grande. Se sustituyen por dato
 | **8 o más preventas pagadas** (≥ 3.920 € de base) **y** ≥ 60 % de inscritos encaja con el avatar | **Seguir.** Se construye en diciembre y la edición empieza el 12-ene |
 | **4 a 7 preventas**, o mucho interés de un avatar distinto (por ejemplo agencias o infoproductores) | **Pivotar.** Se devuelve el dinero o se ofrece el kit + una sesión. Se ajusta avatar, precio o formato y se repite **una vez** en enero |
 | **3 o menos preventas** y menos de 60 inscritos a la clase | **Parar.** Se devuelve el dinero. Lo producido (guía, clase grabada) se queda como contenido de captación del servicio |
+
+**Referencia de flujo:** si Maikel pide a Growth el recuento del CRM (`04`, apartado 2.4), se sabrá cuántos leads de formación por debajo del servicio entran al mes. Con unos 8 leads de formación por semana gastando unos 17 €/día [C, semana 38], 8 preventas exigen convertir una parte grande de lo que llega: por eso la clase se alimenta también de LinkedIn y, si hace falta, de los 300 €.
 
 **Coste máximo de equivocarse [E]:** ~15 h de Maikel y ≤ 500 € en caja. Y la clase sirve igualmente para captar academias que prefieran el servicio: se mide cuántas piden diagnóstico.
 
@@ -153,7 +160,7 @@ Inscritos y su encaje · asistencia · preventas · pedidos de diagnóstico de Q
 
 | Semana | Contenido | Creative | Paid | Growth | Maikel | Horas de Maikel |
 |---|---|---|---|---|---|---|
-| S1 · 2-8 nov | Guía «72 h», textos de la página, encuesta | Página de lista de espera y portada de la guía | — | Auditoría de consentimientos; lista de 15 posibles entrevistados | Aprueba página y guía (1 h). 8 entrevistas de 20 min (3 h) | **4 h** |
+| S1 · 2-8 nov | Revisión del simulador y la guía, textos de la página, encuesta | Página de lista de espera y portada de la guía | — | Auditoría de consentimientos; lista de 15 posibles entrevistados | Aprueba página y guía (1 h). 8 entrevistas de 20 min (3 h) | **4 h** |
 | S2 · 9-15 nov | Guion de la clase, 3 invitaciones dentro del plan de LinkedIn ya previsto | Diapositivas con pantallas reales | Campaña de 300 € en borrador | Seguimiento de inscritos | Revisa guion (1 h). Graba 1 vídeo corto de invitación (0,5 h). Decide anuncios el jueves 12 | **2 h** |
 | S3 · 16-22 nov | Secuencia de emails y WhatsApp de la preventa | Página de venta | Campaña si se activó | Respuestas y dudas de la preventa | Clase (1,5 h con ensayo). Llamadas de dudas (1,5 h) | **3 h** |
 | S4 · 23-29 nov | Informe de validación | — | Cierre de la campaña | Datos de conversión | Decisión con el Chief of Staff (0,5 h). Si sigue: correo a fundadores (0,5 h) | **1 h** |
@@ -195,6 +202,8 @@ Inscritos y su encaje · asistencia · preventas · pedidos de diagnóstico de Q
 | **Devoluciones** | Media / bajo | Kit: casillas de renuncia al desistimiento del art. 103.m ([TRLGDCU](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555)) [C]. Programa: 14 días como servicio [H] + garantía propia |
 | **Plataforma** | Baja / bajo | Empezar con lo que hay: web de Qualivo + Stripe + GHL [H: confirmar la cuenta]. Alternativas si hiciera falta: Skool 99 $/mes y 2,9 % (añade el IVA a compradores de la UE) [C], Teachable 89 $/mes con OSS gestionado [C], Hotmart sin cuota y 9,9 % [C], Kajabi desde 179 $/mes [C] |
 | **Que suene a «otro curso de IA»** | Media / alto | Reglas del apartado 2.4: pantalla real, algo instalado por lección, errores propios, voz de Maikel |
+| **La infraestructura del embudo falla** | Alta / alto | En octubre fallaron la pasarela de WhatsApp (tope de 20 envíos al día, salientes atascados), la voz de Twilio (caída desde el 15-oct) y n8n (tope de ejecuciones el 24-oct) [C, diarios de Growth]. Como «el embudo es la demo», un fallo delante de alumnos potenciales cuesta caro. **Antes del 9-nov:** prueba de extremo a extremo del recorrido de la clase con 5 registros de prueba, sin voz, y comprobar el tope de WhatsApp frente a los inscritos previstos |
+| **Poco compromiso del avatar** | Alta / medio | Los leads de formación de bajo presupuesto faltan a citas gratis [C]. Se valida con preventa pagada, no con lista de espera, y se usa el recordatorio que pide un «sí» |
 | **Tiempo de Maikel y el plan Reset** | Media / alto | Las horas del plan respetan la desconexión de las 19:00. La clase es a las 16:00. Diciembre a partir del 19 sin trabajo del infoproducto |
 
 **Pendiente de asesor (una consulta, antes de abrir la preventa):** desistimiento en un programa mixto (grabado + directo), redacción de la garantía, si el precio se muestra con o sin IVA, y si la preventa con devolución condicionada necesita alguna mención especial.

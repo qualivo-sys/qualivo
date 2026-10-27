@@ -136,7 +136,7 @@ Está ligada a lo que Qualivo controla (que el sistema funcione), no a lo que no
 
 | Escalón | Qué incluye | Precio orientativo | Margen [E] | Horas de Maikel |
 |---|---|---|---|---|
-| **0 · Imán** · *Calculadora de matrículas perdidas* + guía «Las primeras 72 horas» | Adaptación de la [calculadora de fugas](https://qualivo.io/calculadora-de-fugas/) existente a formación. Guía con los 9 mensajes de las primeras 72 horas (WhatsApp, llamada, email) | **0 €** | — | ~1 h de revisión, una vez |
+| **0 · Imán** · *Simulador del embudo para academias* + *guía de las 5 fugas* | **Ya existen** en `recursos/simulador-embudo/` (Excel con fórmulas y PDF), sin indexar y pendientes del ok de Maikel desde el 29-sep [C]. Solo hace falta revisarlos y publicarlos | **0 €** | — | ~1 h de revisión, una vez |
 | **1 · Entrada** · *Kit Primeras 72 horas* | Plantillas listas: secuencia de respuesta y seguimiento (día 0, 2, 5, 10), guion de cualificación de 3 preguntas, recordatorio que pide un «sí», hoja de métricas. Vídeo de 45 min montándolo | **47 € IVA incl.** (38,84 € de base) | ~97 % (Stripe ≈ 1 €) | ~3 h para grabar, una vez. Soporte: 0 (preguntas por email, las filtra un agente) |
 | **2 · Principal** · *Sistema Matrícula*, edición en grupo | 6 semanas. 6 módulos grabados + 6 sesiones en directo de 75 min (una por semana) + 2 revisiones en vídeo del sistema de cada alumno + grupo privado durante la edición y 30 días más. Plantillas de GHL, flujos de n8n, guiones, prompts de agentes y panel de métricas. **Máximo 15 alumnos por edición** | **690 € + IVA**. Edición fundadora: **490 € + IVA** | ~95 % antes de horas (Stripe y herramientas ≈ 15 €/alumno) [E] | ~25 h para montar, una vez. **~4 h/semana durante la edición** (ver 4.3) |
 | **3 · Alta** · *Implantación hecha contigo* | Qualivo monta el sistema en la cuenta del alumno en 4 semanas, con sus anuncios y su CRM. Incluye el programa | **2.900 € + IVA** [E] | ~70 % [E] | ~12 h por cliente. **Máximo 2 al mes** |
@@ -171,7 +171,7 @@ Está ligada a lo que Qualivo controla (que el sistema funcione), no a lo que no
 
 ### 4.5 Casos que pueden servir de prueba y permisos necesarios
 
-**Ninguno se cita con nombre ni cifras sin permiso escrito.** Aviso: `qualivo.io/casos/` ya publica EAC, Nuria Roure, Bellovinilo y Focus Practical con nombre y cifras [C]. **Hay que comprobar que esos permisos existen por escrito.** Si no existen, es un riesgo hoy, no solo para el infoproducto.
+**Ninguno se cita con nombre ni cifras sin permiso escrito.** Ya existe el procedimiento: la regla R6 y el registro `content/casos-permisos.md`. A 27-oct **el registro no tiene ninguna fila**: no hay ningún permiso escrito [C]. Los casos que ya publica `qualivo.io/casos/` los revisa el Chief of Staff con Growth. Este documento solo trata su uso en el infoproducto.
 
 | Caso | Qué aportaría | Permiso que haría falta | Alternativa sin permiso |
 |---|---|---|---|
@@ -181,4 +181,4 @@ Está ligada a lo que Qualivo controla (que el sistema funcione), no a lo que no
 | **Equipzilla** | Rescate de una cuenta. No es formación | Escrito. Ojo: hay un canal de órdenes abierto; la petición pasa por Maikel | No usar en este producto |
 | **El sistema de Qualivo** | Su propio CRM, el vigía de los 15 minutos, el recordatorio que pide un «sí» | No hace falta | — |
 
-**Propuesta:** un texto de autorización corto y estándar (nombre, cifras, capturas, anuncios, revocable) que Maikel envía a EAC y Eleva. El borrador lo prepara este agente; **no se envía sin Maikel**.
+**Propuesta:** usar el procedimiento R6 tal como está: Maikel enseña al cliente el texto exacto y el cliente contesta «sí» por escrito. Este agente prepara el texto exacto para EAC y Eleva. Para el infoproducto hay que añadir dos usos al texto: **en anuncios de pago** y **en material de un curso de pago**. **No se envía sin Maikel.**

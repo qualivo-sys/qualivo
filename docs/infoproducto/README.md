@@ -7,7 +7,8 @@ Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se h
 | [`00-decisiones-maikel.md`](00-decisiones-maikel.md) | Decisiones para la sesión del 29-oct (5 preguntas cerradas) | Listo |
 | [`01-mercado-y-competidores.md`](01-mercado-y-competidores.md) | 1 · Mercado y competidores (España, LATAM, inglés) | Terminado v1 |
 | [`02-posicionamiento-promesa-escalera.md`](02-posicionamiento-promesa-escalera.md) | 2 · Hueco y posicionamiento · 3 · Promesa · 4 · Escalera y precios (con permisos de casos) | Terminado v1 |
-| [`03-temario-embudo-validacion-plan-riesgos.md`](03-temario-embudo-validacion-plan-riesgos.md) | 5 · Temario · 6 · Embudo · 7 · Validación · 8 · Plan por semanas · 9 · Riesgos | Borrador v0 |
+| [`03-temario-embudo-validacion-plan-riesgos.md`](03-temario-embudo-validacion-plan-riesgos.md) | 5 · Temario · 6 · Embudo · 7 · Validación · 8 · Plan por semanas · 9 · Riesgos | v1, pendiente de las decisiones |
+| [`04-avatares-y-demanda.md`](04-avatares-y-demanda.md) | Tres opciones de avatar y demanda real del recomendado (CRM, web, blog, anuncios) | Listo para la sesión |
 
 ## La recomendación en seis líneas
 
