@@ -324,10 +324,10 @@ const EMAILS = [
       const n = nombreCorto(d.nombre);
       return envoltura(
         '<p>' + (n ? 'Hola ' + n + '. Te' : 'Te') + ' dejo un caso, porque explica mejor que yo lo que hacemos.</p>' +
-        '<p>Nuria Roure ya tenía tráfico y ya tenía leads. No cambiamos las campañas ni compramos más demanda: ordenamos lo que pasaba <em>después</em> de que el lead entrara. ' +
-        'Resultado: <strong>6,45 veces lo invertido, sin captar un lead más</strong>.</p>' +
-        '<p>En una academia de formación fue al revés: la fuga estaba antes, en cómo se medía y se captaba. Ahí salieron <strong>1.160 leads y 21 matrículas en cuatro meses</strong>, ' +
-        'y las entrevistas de venta pasaron de 83 a 168 al mes.</p>' +
+        '<p>Una consulta de salud ya tenía tráfico y ya tenía leads. No cambiamos las campañas ni compramos más demanda: ordenamos lo que pasaba <em>después</em> de que el lead entrara, ' +
+        'para saber cuáles merecían atención y no dejar ninguno bueno sin seguimiento.</p>' +
+        '<p>En una academia de oficios fue al revés: la fuga estaba antes, en cómo se captaba. Con preguntas filtro en el formulario y creatividades nuevas, ' +
+        'el coste por lead bajó un <strong>53 %</strong> (de 6,86 € a 3,21 €, julio-agosto de 2026, datos de Meta).</p>' +
         '<p>Los dos empezaron igual: encontrando dónde se perdía el rendimiento antes de tocar nada.</p>' +
         boton('Ver dónde está la fuga en tu caso', d));
     }

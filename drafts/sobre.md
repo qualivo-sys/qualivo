@@ -13,7 +13,7 @@ Más de 10 años en adquisición de clientes, automatización comercial y despli
 VER → PRIORIZAR → TAPAR. Primero medir qué pasa de verdad (los datos mienten más de lo que parece: en una academia, contar bien las etapas reveló el doble de entrevistas). Después ordenar las fugas por dinero. Solo entonces, actuar — con tu equipo, tu agencia o el nuestro.
 
 ### Los números que nos avalan
-[Banda de stats en mono: 10,2× · 8,3× · 6,45× · −53 % con enlaces a los 4 casos]
+[Banda de stats en mono: −53 % de coste por lead (de 6,86 € a 3,21 €, jul-ago 2026) y 5-9 € de CPL en Meta (jun-sep 2026), con enlaces a los 4 casos. Sin retornos: ver content/casos/2026-10-27-auditoria-cifras.md]
 
 ### A quién servimos (y a quién no)
 [Reutilizar las dos columnas de la home «Trabajamos contigo si / No somos para ti si»]

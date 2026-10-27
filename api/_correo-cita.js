@@ -12,9 +12,10 @@
 // Las vistas previas están en content/correos/*-v2.html y se regeneran con:
 //   node herramientas/correos-cita-v2.js
 //
-// Casos: solo las cifras aprobadas (Nuria Roure 6,45 veces lo invertido; una
-// academia de formación 1.160 leads y 21 matrículas en cuatro meses; Antic
-// Barcelona 113 —el 113 es parte del nombre—: visitas agendadas en menos de 24 horas). No se inventa ninguna.
+// Casos: solo cifras que pasaron la auditoría del 27-oct-2026 (content/casos/2026-10-27-auditoria-cifras.md):
+// academia de oficios, −53 % de coste por lead; consulta de salud, sin cifra; Antic Barcelona 113
+// —el 113 es parte del nombre—: visitas agendadas en menos de 24 horas. Los casos de la web van
+// anónimos. No se inventa ninguna.
 
 const F = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
 const TINTA = '#101319';
@@ -95,7 +96,7 @@ const SECTOR = {
     n3: 'Cuántas personas vienen a la entrevista o a la clase de prueba.',
     n4: 'Cuánto deja de media un alumno.', ventas: 'matrículas',
     duda: 'quien dice «ya te digo» hasta que se matricula o te dice que no',
-    caso: 'En una academia de formación salieron 1.160 leads y 21 matrículas en cuatro meses.'
+    caso: 'En una academia de oficios, el coste por lead bajó un 53 % (de 6,86 € a 3,21 €, julio-agosto de 2026, datos de Meta).'
   },
   clinica: {
     persona: 'paciente', contactos: 'consultas de pacientes nuevos', piden: 'pide cita',
@@ -103,7 +104,7 @@ const SECTOR = {
     n3: 'Cuántos pacientes vienen a la primera visita.',
     n4: 'Cuánto vale de media un tratamiento.', ventas: 'tratamientos aceptados',
     duda: 'el paciente que se lleva el presupuesto a casa y dice «me lo pienso»',
-    caso: 'Con Nuria Roure, en su clínica, el resultado fue 6,45 veces lo invertido.'
+    caso: 'En una consulta de salud no faltaban pacientes interesados: faltaba saber cuáles merecían atención y seguirlos en orden.'
   },
   reformas: {
     persona: 'cliente', contactos: 'peticiones de presupuesto', piden: 'pide presupuesto',

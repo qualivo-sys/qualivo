@@ -5,7 +5,7 @@
 3. **Se mantienen 4** (C-04: 6,86 €, 5,95 €, 3,2 € y −53 %), siempre con fecha y fuente.
 4. **Hay que reformular 9**: pasan a un rango o a una redacción con fecha y fuente. Tres de ellas **contradicen los datos de Meta** (2,86 €, «ambas por debajo de 3,50 €» y CPC de 0,20 €).
 5. **Hay que quitar 23**: todos los retornos, las ventas y las inversiones en euros, el embudo de C-03 (559 / 573 / 68 / 10) y los datos del CRM que no se pueden ver.
-6. **Aplicado en la rama:** las 4 páginas anónimas, `llms.txt` (líneas de los casos) y los borradores de permiso. **No está aplicado** en el resto de páginas ni en `api/` (lista en la sección 4). La rama no debe fusionarse sin eso.
+6. **Aplicado en la rama:** las 4 páginas anónimas, `llms.txt`, los borradores de permiso y, desde la tarde del 27-oct, **el resto de la web y los correos y agentes de `api/`** (sección 4, con el estado y las comprobaciones).
 
 > Repo público: los clientes van por código (C-01…C-04), como en
 > `content/casos/2026-10-27-borradores-permiso.md`. No se citan rutas, nombres ni
@@ -142,9 +142,30 @@ Todas las cifras de esta tabla, con la cuenta de Meta del cliente. «Arranque» 
 
 ---
 
-## 4. Pendiente antes de fusionar: el resto de la web y los correos
+## 4. El resto de la web y los correos (aplicado el 27-oct)
 
-Estas páginas repiten las cifras de la sección 1 y **no se han tocado** (en la rama, ya sin nombres). Rutas de producción. Hay que revisar los falsos positivos de la búsqueda.
+**Estado:** aplicado en toda la tabla, con los textos de la última columna.
+- **Web:** unas 50 páginas, metas incluidas (title, description, og y JSON-LD).
+  - Las tarjetas con número llevan ahora «5-9 €», «3 canales», «6 piezas», «De cero», «Mismos leads» o «−53 %».
+  - La tarjeta de la academia de manicura pasa a ser la del caso C-04.
+  - El embudo de `blog/funnel-de-ventas/` queda con las etapas, sin números.
+  - El caso de la academia de oficios también se quita en `consultoria-ia/` y `sobre/` («+102 %», «8 seg» y «mejor ROAS»).
+- **Correos y agentes:**
+  - En `api/_secuencia.js`, cada cuello usa un caso anónimo (C-01 a C-04). Ya no aparecen «Eleva» (−61 %) ni el 0,1→7,6. La frase «se arregló sin invertir más en captación» pasa a «lo que cambió: …».
+  - Mismo criterio en `api/_agente.js`, `api/_correo-cita.js` y `api/_mensajes.js`.
+  - El correo 2 de nurturing, en sus dos versiones, se cambia en `content/nurturing/correo/generar.py` y se regenera, junto con `api/_nurturing-correos.json`.
+  - `herramientas/simular-nurturing.js` busca ahora «consulta de salud».
+- **También:** `entity/descripcion-canonica.md`, `drafts/sobre.md` y `drafts/answer-first.md`.
+
+**Comprobaciones:**
+- **Búsqueda de las cifras de la tabla en lo publicable:** 0. Lo único que sale son falsos positivos (`rgba(…)`, 27,66 $, los tramos «500 a 2.000 €» de los formularios, los «2.000 €» y «30.000 €» de las guías de maquinaria y un ejemplo de 3.600 € en un comentario de `api/_meta.js`). También quedan las notas internas `CAMBIOS.md` y `AUDITORIA.md`, que son historial.
+- **Nombres de los clientes C-01 a C-04:** no aparecen en ninguna página ni correo. Solo quedan las fuentes de las redirecciones de `vercel.json` y el código de un servicio que se da a la propia clienta (no es publicación del caso).
+- **Redirecciones 301:** las 8 de los slugs antiguos llevan a páginas que existen, y ninguna carpeta antigua sigue en pie.
+- **`sitemap.xml`:** es XML válido, tiene 94 URL y todas existen. No queda ningún slug antiguo y están los 4 nuevos.
+- **Enlaces internos a slugs antiguos:** 0 en páginas. Solo quedan en `LANDING.md` y `CAMBIOS.md`, que son notas.
+- **Simuladores:** nurturing 11/11 y bloque 2 25/25. El bloque 1 da 19/22, con los mismos 3 fallos que antes del cambio (la programación de Raquel en fin de semana o festivo), que no tienen que ver con los casos.
+
+Tabla original (antes de aplicar):
 
 | Cifra | Ficheros | Propuesta (texto exacto) |
 |---|---|---|

@@ -116,7 +116,7 @@ const formacion = function (iniIso, waIso) { return ['leadform', 'activacion', '
     const m = N.componer('formacion', 0, { firstName: '', companyName: '' });
     const k = N.componer('clinicas', 2, { firstName: 'Javier', companyName: 'Dentotec <x>' });
     if (!/Hola:/.test(m.html) || m.asunto !== 'lo que vamos a mirar en vuestro centro') return m.asunto;
-    return /Hola Javier:/.test(k.html) && /Nuria Roure/.test(k.html) && !/\{\{/.test(k.html + m.html) ? true : 'clínicas';
+    return /Hola Javier:/.test(k.html) && /consulta de salud/.test(k.html) && !/\{\{/.test(k.html + m.html) ? true : 'clínicas';
   });
 
   await caso('Clínicas: correo 0 con su texto', async function () {

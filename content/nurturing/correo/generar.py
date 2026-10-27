@@ -26,7 +26,7 @@ def caja(filas, titulo=''):
             f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">{rows}</table></td></tr></table>')
 
 def cifras(items):
-    # 2 × 2 (28-sep): en una fila de cuatro, «44.000 €» se partía en dos líneas en el móvil.
+    # 2 × 2 (28-sep): en una fila de cuatro, las cifras largas se partían en dos líneas en el móvil.
     celda = lambda n, l: (f'<td align="center" width="50%" bgcolor="{TINTA}" style="background-color:{TINTA};padding:14px 6px;">'
         f'<div style="{F}font-weight:800;font-size:22px;line-height:1.1;color:{TEAL};white-space:nowrap;">{n}</div>'
         f'<div style="{F}font-size:12px;line-height:1.3;color:#C9CED6;margin-top:4px;">{l}</div></td>')
@@ -81,15 +81,15 @@ FORMACION = [
    caja([('Mañana','Mira las diez últimas solicitudes y apunta cuánto tardó alguien en contestar a cada una.'),
          ('Si ves…','alguna que pasó la noche o el fin de semana sin respuesta, ahí hay matrículas.')], 'Una prueba de cinco minutos') +
    p('Si quieres, te digo cómo lo arreglaríamos en {{empresa}} sin contratar a nadie. Basta con que respondas a este correo.')),
- dict(n=2, dia='Día 5', cuando='', asunto='559 interesados, 10 matrículas y qué cambió',
-  pre='Una escuela de formación que no sabía qué anuncio acababa en matrícula.',
+ dict(n=2, dia='Día 5', cuando='', asunto='Qué anuncio acababa en matrícula (y qué cambió)',
+  pre='Un centro de formación que no sabía qué anuncio acababa en matrícula.',
   cuerpo=p('Hola {{nombre}}:') +
    p('Te cuento un caso de formación, por si se parece al vuestro.') +
-   p('Una escuela aeronáutica de Cataluña invertía en Meta, Google y TikTok para tres cursos muy distintos. Tenían interesados de sobra, pero no sabían qué anuncio acababa en matrícula y cuál solo traía curiosos.') +
-   p('Unimos cada anuncio con lo que pasaba después: interesado, entrevista, matrícula. En un mes:') +
-   cifras([('559','interesados'),('68','entrevistas'),('10','matrículas'),('44.000 €','atribuidos')]) +
-   p('Unas diez veces lo invertido. Lo más útil no fue el número, fue poder apagar lo que no vendía.') +
-   enlace('El caso completo, si te apetece', 'https://qualivo.io/casos/eac/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-2')),
+   p('Un centro de formación profesional invertía en Meta, Google y TikTok para tres cursos muy distintos. Tenían interesados de sobra, pero no sabían qué anuncio acababa en matrícula y cuál solo traía curiosos.') +
+   p('Unimos cada anuncio con lo que pasaba después: interesado, entrevista, matrícula, cada mes, por curso y por canal. Lo más útil fue poder apagar lo que no vendía y llevar el presupuesto a lo que sí acababa en matrícula.') +
+   p('En otra academia, de oficios, preguntas filtro en el formulario y creatividades nuevas bajaron el coste por lead del curso principal (julio-agosto de 2026, datos de Meta):') +
+   cifras([('6,86 €','por lead al arrancar'),('3,21 €','por lead con el reel')]) +
+   enlace('El caso del centro de formación, si te apetece', 'https://qualivo.io/casos/formacion-profesional/?utm_source=nurturing&utm_medium=email&utm_campaign=formacion-2')),
  dict(n=3, dia='Día 8', cuando='', asunto='¿cuánto se os queda por el camino?',
   pre='Una calculadora de tres minutos, sin correo ni teléfono.',
   cuerpo=p('Hola {{nombre}}:') +
@@ -133,15 +133,14 @@ CLINICAS = [
    caja([('Mañana','Mira las diez últimas consultas (formulario, WhatsApp, Instagram) y apunta cuánto tardó alguien en contestar a cada una.'),
          ('Si ves…','alguna que pasó la noche o el fin de semana sin respuesta, ahí hay pacientes.')], 'Una prueba de cinco minutos') +
    p('Si quieres, te digo cómo lo arreglaríamos en {{empresa}} sin contratar a nadie. Basta con que respondas a este correo.')),
- dict(n=2, dia='Día 5', cuando='', asunto='2.000 € invertidos, 12.900 € en ventas y qué cambió',
-  pre='Mismo tráfico, sistema distinto.',
+ dict(n=2, dia='Día 5', cuando='', asunto='Mismas oportunidades, sistema distinto',
+  pre='A veces la fuga no está en los anuncios, sino en lo que pasa después.',
   cuerpo=p('Hola {{nombre}}:') +
    p('Te cuento un caso de salud, por si se parece al vuestro.') +
-   p('Nuria Roure es psicóloga y doctora en medicina del sueño. Le entraban contactos, pero no sabía cuáles merecían atención primero, y los que no contestaban a la primera se quedaban sin seguimiento.') +
-   p('No subimos la inversión en anuncios. Recogimos mejor la información de cada persona, la usamos para priorizar a quién llamar antes y reordenamos el seguimiento para que nadie interesante se quedara sin respuesta. El resultado:') +
-   cifras([('2.000 €','invertidos'),('12.900 €','en ventas atribuidas'),('6,45×','de retorno'),('0 €','más en anuncios')]) +
-   p('Mismo tráfico, sistema distinto. A veces la fuga no está en los anuncios, sino en lo que pasa después.') +
-   enlace('El caso completo, si te apetece', 'https://qualivo.io/casos/nuria-roure/?utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-2')),
+   p('Una consulta de salud, con servicios y formación online, tenía contactos, pero no sabía cuáles merecían atención primero, y los que no contestaban a la primera se quedaban sin seguimiento.') +
+   p('Recogimos mejor la información de cada persona, la usamos para priorizar a quién llamar antes y reordenamos el seguimiento para que nadie interesante se quedara sin respuesta.') +
+   p('Mismas oportunidades, sistema distinto. A veces la fuga no está en los anuncios, sino en lo que pasa después.') +
+   enlace('El caso completo, si te apetece', 'https://qualivo.io/casos/salud-servicios-online/?utm_source=nurturing&utm_medium=email&utm_campaign=clinicas-2')),
  dict(n=3, dia='Día 8', cuando='', asunto='¿cuánto se os queda por el camino?',
   pre='Una calculadora de tres minutos, sin correo ni teléfono.',
   cuerpo=p('Hola {{nombre}}:') +

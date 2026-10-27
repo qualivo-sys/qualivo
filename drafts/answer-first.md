@@ -11,7 +11,7 @@
 ## /blog/funnel-de-ventas/
 ```html
 <div class="post-destacado" style="margin-top:8px">
-  <p><strong>Un funnel de ventas</strong> es el recorrido de desconocido a cliente: visita → lead → oportunidad → venta → repetición. La clave que casi nadie aplica: el funnel no se rompe en las etapas sino <em>entre</em> ellas — en un mes real medimos 559 leads que acabaron en 10 matrículas y 44.000 € atribuidos, y cada transición contaba su propia historia.</p>
+  <p><strong>Un funnel de ventas</strong> es el recorrido de desconocido a cliente: visita → lead → oportunidad → venta → repetición. La clave que casi nadie aplica: el funnel no se rompe en las etapas sino <em>entre</em> ellas — en un centro de formación medimos cada mes, por curso y canal, cuántos leads llegaban a entrevista y a matrícula, y cada transición contaba su propia historia.</p>
 </div>
 ```
 
