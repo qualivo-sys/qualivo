@@ -1714,3 +1714,41 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
    - los permisos de casos.
 
 **Hipótesis para mañana:** el artículo de propuesta comercial traerá más clics al diagnóstico que el de presupuestos sin respuesta, porque lleva los mensajes listos para copiar. Se compara con Search Console a las cuatro semanas.
+
+## Martes 27-oct-2026
+
+**Publicado:**
+- **Artículo nuevo:** https://qualivo.io/blog/leads-de-mala-calidad/, «Leads de mala calidad: cinco cosas que revisar antes de culpar a Meta».
+  - **Keyword:** «leads de mala calidad».
+  - **Datos reales:**
+    - los 28 «cualificados» que eran reservas, hasta el 19-oct (`api/_tratos.js`, sin la cifra de no presentados, R7);
+    - la respuesta «Más adelante, solo estoy mirando» del formulario v2;
+    - los 120 anuncios de la Biblioteca de Meta del 26-oct, sin nombrar al anunciante.
+  - **Ejemplo:** la tabla A/B va marcada como ejemplo.
+  - **Registro:** tarjeta en el blog, sitemap, llms.txt y keywords.
+- **Re-apuntado:** /blog/formulario-de-facebook-o-landing-page/.
+  - **Añadido:** el cambio del 19-oct en lo que se devuelve a Meta y el enlace al artículo nuevo.
+  - **Quitado:** «el plan por escrito te lo quedas en 24 horas», porque no está confirmado.
+  - **Botón:** uno solo, a /diagnostico/.
+
+**Borradores:**
+- **Pieza 4 del plan de 30 días** (miércoles 4-nov): `content/redes/piezas/2026-11-04-landing-que-filtra/`, «Déjanos tus datos y te llamamos».
+  - **Formato:** 5 bodegones de Higgsfield.
+  - **Dato real:** la respuesta «solo estoy mirando» del formulario.
+- **Serie de los martes:** «Sin humo» ya no se usa. La guía de voz veta ese rótulo y el plan de 30 días sustituye las series por días.
+
+**Ayer, con Maikel (26-oct):**
+- **Plan nuevo:** de 30 días por dolores.
+- **Pieza 1:** aprobada tras seis versiones. El estilo final son bodegones fotográficos y de 5 a 15 palabras por lámina.
+- **Piezas 2 y 3:** hechas con el mismo estilo.
+- **Radares de Growth:** el de octubre y el visual.
+- **Biblioteca de dolores:** creada en Notion.
+
+**Pide el OK de Maikel:**
+1. **Piezas 2, 3 y 4.** Recomendación: aprobarlas. Las tres siguen el estilo de la pieza 1 y no tienen riesgo.
+2. **Cambio de tema de la pieza 4** (de la auditoría de 20 minutos a la landing que filtra). Recomendación: sí, por su petición de más captación.
+3. **Planificador de GHL:** confirmar que están conectados su LinkedIn y su Instagram. Sin eso no se programa nada.
+
+**Descartes:** no hay newsletter, porque no es miércoles.
+
+**Hipótesis para mañana:** la portada de la pieza 1 como imagen única en LinkedIn sacará más comentarios que los posts solo de texto del radar (mediana de 0). Se mide a las 48 horas en `content/redes/registro.md`.
