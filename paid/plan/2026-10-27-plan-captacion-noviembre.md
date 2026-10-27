@@ -76,21 +76,14 @@
 
 **Coordinación con Paid:** a una cuenta que ya está en Outbound no se le apunta con Paid ni al revés. Los leads que entran por anuncios se excluyen de las listas de Apollo (cruce semanal de Outbound con GHL).
 
----|---|---|---|
-| **A · Pausar el email frío** (también lo ya cargado) hasta que la asesoría responda | Outbound solo contesta y cualifica lo que entra | 0 | Ninguno legal. Se pierde un canal que hoy da 0 reuniones |
-| **B · Solo destinatarios con relación previa** (excliente, contacto que ya nos escribió, base con permiso que recuente Growth) | Mensajes de Outbound y newsletter de Growth | 0-2 | Bajo, si el permiso se puede acreditar |
-| **C · LinkedIn manual y llamadas** | ABM de 10 cuentas por LinkedIn cuando se reconecte la cuenta. Llamadas solo a quien lo pida (sin consentimiento no se llama, Ley 11/2022) | 0-1 | Medio: falta el criterio de la asesoría sobre los mensajes comerciales en LinkedIn |
-
-**Recomendación:** **A + B ya**, y **C solo si la asesoría lo valida**. Las campañas que siguen enviando a leads cargados se **pausan**: 0 reuniones de 1.373 envíos no compensan el riesgo legal.
-
 ---
 
 ## 4 · Calendario por semanas
 
 | Semana | Paid | Outbound | Creative | Contenido | Growth | **Maikel (horas)** |
 |---|---|---|---|---|---|---|
-| **27-31 oct** | **E-02 activo** (11 contra 11-nolose, 15 + 15 €/día); lectura de E-01 (31) | Cargar leads nuevos de Apollo; arrancar ABM formación (10 cuentas) | Subir los MP4 del 11 y miniaturas (antes del 29) | — | Recuento de la base con permiso (opción B) | **1 h:** aprobar el plan, validar anuncios y la cifra del rótulo |
-| **2-8 nov** | **Prueba A en marcha** (11 contra 11-nolose) | Email frío al volumen actual; ABM en curso; cruce con GHL | Retoques del 3V reformas (arranque de ventanas) | Brief del 2.º anuncio de reformas, si hace falta | Newsletter de formación (con permiso) | **2-3 h:** reuniones que salgan (1 h cada una) |
+| **27-31 oct** | **E-02 activo** (11 contra 11-nolose, 15 + 15 €/día); lectura de E-01 (31) | Cargar leads nuevos de Apollo; arrancar ABM formación (10 cuentas) | Subir los MP4 del 11 y miniaturas (antes del 29) | — | Recuento de la base con permiso (newsletter) | **1 h:** aprobar el plan, validar anuncios y la cifra del rótulo |
+| **2-8 nov** | **E-02 en marcha** (11 contra 11-nolose; control: el anuncio de E-01) | Email frío al volumen actual; ABM en curso; cruce con GHL | Retoques del 3V reformas (arranque de ventanas) | Brief del 2.º anuncio de reformas, si hace falta | Newsletter de formación (con permiso) | **2-3 h:** reuniones que salgan (1 h cada una) |
 | **9-15 nov** | Lectura de E-02 (10-nov) y vuelta a 20 €/día; montar reformas en pausa y probar el envío a GHL | **Revisión del 13-nov** con el criterio de Outbound (mantener, cambiar ángulo o cerrar) | Entregar el 3V de ventanas | — | Newsletter de reformas | **2-3 h:** reuniones y OK a la prueba B |
 | **16-22 nov** | **Prueba B en marcha** (reformas) + ganador de A a 10 €/día | Email frío y ABM; LinkedIn de apoyo si se reconecta | — | — | Seguimiento de propuestas | **2-4 h:** reuniones y propuestas |
 | **23-30 nov** | Lectura de B (28-nov); cierre del mes; propuesta de diciembre (Google o retargeting, si se cumplen las condiciones) | Informe del mes | — | — | — | **2-3 h:** reuniones y revisión del mes (30 min) |
