@@ -3,6 +3,12 @@
 > Encargo del Chief of Staff (27-oct), para la revisión conjunta del jueves 29 a las 11:00. Lo desarrolla el plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), y aquí va solo lo que se decide.
 > [C] = confirmado · [E] = estimado. **No se publica nada sin el ok de Maikel.**
 
+> **Cambio de Maikel (27-oct, tarde):**
+> - **Ritmo:** cada semana, 3 carruseles (lunes, miércoles y viernes, en LinkedIn e Instagram), 2 vídeos (martes y jueves) y una newsletter semanal (jueves).
+> - **Grabación:** tarde fija los jueves de 17:00 a 18:30, con micro. Se graba lo de la semana siguiente y el montaje lo hace Contenido.
+> - **Semanas 45 y 46:** ya están creadas y diseñadas, una ficha por pieza para comentar, en Notion › Máquina de Contenido › «Contenido noviembre · semanas 45-46 (para revisar)»: https://app.notion.com/p/b991e574698a484ab2a47bc1fe713d7a
+> - **Lo que sustituye:** donde este documento dice «vídeos de Maikel los miércoles a las 12:30» o «newsletter quincenal», manda lo de esta nota.
+
 ## 1. El objetivo del mes
 
 | Meta | Cifra | Cómo se mide |
