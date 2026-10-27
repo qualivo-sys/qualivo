@@ -171,10 +171,11 @@ Ordenadas por cuánta incertidumbre eliminan.
 | Sin dato | 4 | 0 | 1 |
 | **Total** | **29** | **18** | **6** |
 
-- **El 59 % (17 de 29) invierte menos de 500 € o nada.** 26 de los 29 entraron por el formulario de Meta.
+- **El 59 % (17 de 29) invierte menos de 500 € o nada.** Por origen: 26 por el formulario de Meta, 2 por /formacion/ y 1 sin dato. Por mes: 15 en septiembre (desde el 15) y 14 en octubre.
+- **Cómo se cuenta:** «con cita» = etiquetas act-agendado, act-cita-confirmada, reunion-reservada o reunion-agendada. «Celebrada» = reunion-celebrada* o reunion-realizada.
 - **Flujo real:** unos 5 leads de formación por semana (29 en 6 semanas), y menos de 3 por semana por debajo de 500 €. Es menos de lo que suponía la extrapolación de la semana 38 (unos 8).
 - **Compromiso:** de 11 citas con quien invierte menos de 500 € o nada, se celebraron 2 (18 %). Con 500 € o más, 3 de 7 (43 %). La etiqueta «celebrada» es manual y puede quedarse corta.
-- **DinoRank:** sin credenciales; las búsquedas siguen sin dato [H].
+- **DinoRank:** sin credenciales. Para tener el dato, Maikel tendría que buscar las 8 consultas de `04` (apartado 2.2) y pasar la captura. Hasta entonces, [H].
 
 **Efecto en la matriz:** el alcance de G baja de 4 a 3 porque el flujo es menor de lo supuesto. G pasa de 59 a 56 y sigue cuarta.
 
