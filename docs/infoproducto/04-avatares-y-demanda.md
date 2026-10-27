@@ -75,7 +75,7 @@ Que A tenga que cuidar el compromiso (plantones) y la canibalización no lo desc
 | Último cierre | Una escuela de formación, entrada por formulario de Meta el 22-oct: **3.600 €** por el periodo mínimo. Le respondieron en 1 minuto por WhatsApp | Growth, 24-oct [C] |
 
 **Lectura [E]:**
-1. **Hay flujo:** con 20 €/día entran unos 8 leads de formación por semana, a unos 11 € cada uno [C para la semana 38; E para extrapolarlo].
+1. **Hay flujo, pero menor del supuesto.** El recuento del CRM del 27-oct da 29 leads de formación en 6 semanas: unos 5 por semana. 17 de ellos (59 %) invierten menos de 500 € o nada, y de sus 11 citas solo se celebraron 2 [C, Growth vía Chief of Staff]. Detalle en `05`, apartado 5.
 2. **Más de la mitad está por debajo del servicio.** 5 de 8 invierten menos de 500 € o nada [C]. Hoy Qualivo los descarta. Para el infoproducto son el público natural, **si pagan**.
 3. **Su compromiso es bajo.** Faltan a citas gratis. Una lista de espera no prueba demanda; solo una preventa pagada.
 4. **La muestra es pequeña:** 8 leads de una semana. No se vende como conclusión (regla del Chief of Staff).

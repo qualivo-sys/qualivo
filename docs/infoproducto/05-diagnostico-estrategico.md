@@ -7,7 +7,7 @@
 
 > **En cinco líneas**
 > 1. La idea tal como está («aprende a construir un sistema de captación y ventas con IA») **no tiene cliente definido** y **promete más de lo que hoy se puede demostrar**. Varias piezas siguen siendo experimentales y ningún caso tiene permiso escrito.
-> 2. En la matriz ponderada gana **B · propietarios de pequeñas agencias** (69/100), seguido de **E · responsables de marketing y ventas de pymes** (63). **Academias**, mi recomendación anterior, queda cuarta (59): hay leads, pero no hay evidencia de que paguen.
+> 2. En la matriz ponderada gana **B · propietarios de pequeñas agencias** (69/100), seguido de **E · responsables de marketing y ventas de pymes** (63). **Academias**, mi recomendación anterior, queda cuarta (56): hay leads, pero pocos (unos 5 por semana) y con poco compromiso, y no hay evidencia de que paguen.
 > 3. Conviene vender un **sistema implementable**: componentes probados, método y verificación. Ni herramientas, que caducan y se venden a 10-77 $/mes, ni una metodología sola, que es difícil de diferenciar y se abandona.
 > 4. Antes de construir hay que **validar dos cosas en 3-4 semanas**: si las agencias pagan por implantar el sistema en un cliente y si una pyme paga un taller para su equipo comercial. Todo con preventa o depósito, no con «me interesa».
 > 5. Hay **dos decisiones que solo puede tomar Maikel** y cambian todo: si acepta enseñar a posibles competidores y qué parte del sistema está dispuesto a abrir.
@@ -84,7 +84,7 @@ El registro de permisos (`content/casos-permisos.md`) **está vacío** [C].
 |---|---|---|---|
 | **Qué es** | La agencia aprende a montar en **su primer cliente** el recorrido después del lead (respuesta, cualificación, seguimiento, panel), con plantillas y verificación | Taller práctico de 1-2 días (o 4 sesiones) con la empresa: que el equipo responda rápido, siga cada oportunidad y use el CRM. Deja plantillas instaladas | Kit de plantillas y edición en grupo para que la academia monte su sistema de admisiones |
 | **Para quién** | Agencias de 1-49 personas que ya venden anuncios o webs y quieren vender «lo de después» | Gerencia, dirección comercial o marketing de pymes con equipo y CRM infrautilizado: **el ICP del servicio** | Academias que captan con anuncios y no pueden pagar el servicio |
-| **Por qué podría funcionar** | Pueden **revender** lo que aprenden. En España, un WhatsApp con IA se cobra a 2.000-8.000 € por proyecto [C, precio de un proveedor], así que el retorno de un programa de 1.000-1.500 € es evidente. Y nadie vende el recorrido completo [C] | La falta de personal cualificado es la primera barrera a la IA en las empresas españolas (Banco de España) [C]. El uso de IA en empresas de 10 o más pasó del 21,1 % al 33,6 % en un año (INE) [C]. Hay vehículo de pago: FUNDAE, con casi la mitad del crédito sin usar [C] | Ya entran unos 8 leads de formación por semana a ~11 € [C]. Nadie les vende un programa [C] |
+| **Por qué podría funcionar** | Pueden **revender** lo que aprenden. En España, un WhatsApp con IA se cobra a 2.000-8.000 € por proyecto [C, precio de un proveedor], así que el retorno de un programa de 1.000-1.500 € es evidente. Y nadie vende el recorrido completo [C] | La falta de personal cualificado es la primera barrera a la IA en las empresas españolas (Banco de España) [C]. El uso de IA en empresas de 10 o más pasó del 21,1 % al 33,6 % en un año (INE) [C]. Hay vehículo de pago: FUNDAE, con casi la mitad del crédito sin usar [C] | Entraron 29 leads de formación en 6 semanas, unos 5 por semana [C, recuento del CRM]. Nadie les vende un programa [C] |
 | **Evidencia a favor** | Tamaño: 12.396 agencias de 1-9 personas y 1.090 de 10-49 (INE, CNAE 731) [C]. Qualivo ya las encuentra: 20 de 133 prospectos de una muestra eran agencias competidoras [C] | Las objeciones del ICP son de proceso («la gente no usa el CRM») [C, ICP 21-oct] | Leads y conversaciones reales [C] |
 | **Evidencia en contra** | Ninguna encuesta española mide si pagan [C: no existe]. El mercado de «monta tu agencia» está saturado, aunque sobre todo de principiantes [C] | No hay dato de formación en IA vía FUNDAE [C]. El crédito de una microempresa es pequeño (~420 €/año [H]). Venta B2B más lenta | 3 de 4 citas de formación fueron plantón; 5 de 8 invierten menos de 500 € [C]. Ninguna evidencia de que paguen por formación [C] |
 | **Qué tendría que ser cierto** | Que al menos 1 de cada 10 agencias contactadas con relación previa pague una preventa; que acepten un método ajeno; que Maikel acepte formar a posibles competidores | Que una pyme pague 2.500-4.500 € por un taller; que el taller lleve a contratar el servicio en al menos 1 de cada 5 casos | Que paguen 490-690 € a pesar del bajo compromiso |
@@ -142,14 +142,14 @@ Ordenadas por cuánta incertidumbre eliminan.
 | Problema urgente | 12 | 3 | 4 | 3 | 4 | 3 | 3 | 4 |
 | Disposición a pagar (con evidencia) | 15 | 3 | 4 | 3 | 3 | 3 | 2 | 2 |
 | Poder adquisitivo | 10 | 2 | 4 | 3 | 3 | 4 | 2 | 2 |
-| Facilidad para que Maikel lo alcance | 12 | 3 | 3 | 3 | 3 | 2 | 3 | 4 |
+| Facilidad para que Maikel lo alcance | 12 | 3 | 3 | 3 | 3 | 2 | 3 | 3 |
 | Competencia | 8 | 1 | 2 | 3 | 3 | 3 | 1 | 4 |
 | Capacidad de obtener resultados | 12 | 3 | 4 | 3 | 2 | 3 | 1 | 3 |
 | Potencial de recomendación | 5 | 4 | 3 | 3 | 2 | 3 | 3 | 3 |
 | Coste de soporte | 8 | 2 | 3 | 3 | 1 | 3 | 1 | 2 |
 | Riesgo de abandono | 6 | 3 | 4 | 3 | 2 | 4 | 1 | 2 |
 | Encaje con Qualivo | 12 | 2 | 3 | 3 | 3 | 4 | 1 | 3 |
-| **Total sobre 100** | **100** | **52** | **69** | **60** | **55** | **63** | **37** | **59** |
+| **Total sobre 100** | **100** | **52** | **69** | **60** | **55** | **63** | **37** | **56** |
 
 **Por qué cada puntuación clave:**
 - **B, disposición a pagar 4:** venden a sus clientes implantaciones de 2.000-8.000 € [C, precio de un proveedor]. Que paguen es una **hipótesis**, porque no hay encuesta [C]. Es el número más frágil de la matriz.
@@ -158,7 +158,26 @@ Ordenadas por cuánta incertidumbre eliminan.
 - **E, encaje 4:** su empresa es el ICP del servicio. Un taller es la puerta de entrada natural [C, ICP 21-oct].
 - **E, alcance 2:** venta B2B a empresas, con más pasos y más lenta [E].
 - **G, disposición a pagar 2:** bajo compromiso medido (plantones) y presupuesto bajo [C]. Ninguna fuente sobre su gasto en formación [C].
-- **G, alcance 4:** ya entran leads a ~11 € [C].
+- **G, alcance 3:** entran leads a ~11 €, pero unos 5 por semana y menos de 3 por debajo de 500 € [C, recuento del CRM del 27-oct].
+
+**Recuento del CRM de Growth (27-oct) [C]:** leads de formación del 15-sep al 27-oct según su inversión mensual declarada.
+
+| Inversión mensual | Leads | Con cita | Reunión celebrada |
+|---|---|---|---|
+| 0 € | 6 | 3 | 0 |
+| Menos de 500 € | 11 | 8 | 2 |
+| 500-2.000 € | 5 | 4 | 1 |
+| Más de 2.000 € | 3 | 3 | 2 |
+| Sin dato | 4 | 0 | 1 |
+| **Total** | **29** | **18** | **6** |
+
+- **El 59 % (17 de 29) invierte menos de 500 € o nada.** 26 de los 29 entraron por el formulario de Meta.
+- **Flujo real:** unos 5 leads de formación por semana (29 en 6 semanas), y menos de 3 por semana por debajo de 500 €. Es menos de lo que suponía la extrapolación de la semana 38 (unos 8).
+- **Compromiso:** de 11 citas con quien invierte menos de 500 € o nada, se celebraron 2 (18 %). Con 500 € o más, 3 de 7 (43 %). La etiqueta «celebrada» es manual y puede quedarse corta.
+- **DinoRank:** sin credenciales; las búsquedas siguen sin dato [H].
+
+**Efecto en la matriz:** el alcance de G baja de 4 a 3 porque el flujo es menor de lo supuesto. G pasa de 59 a 56 y sigue cuarta.
+
 - **A y F, competencia 1:** oferta de freelancers de IA creciendo el triple que la demanda en España [C, Malt]. Mercado de Skool a 10-77 $/mes [C].
 - **F, resultados 1:** sin clientes ni experiencia donde aplicar el sistema [E].
 

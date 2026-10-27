@@ -144,7 +144,7 @@ Son estimaciones prudentes para España sin lista grande. Se sustituyen por dato
 | **4 a 7 preventas**, o mucho interés de un avatar distinto (por ejemplo agencias o infoproductores) | **Pivotar.** Se devuelve el dinero o se ofrece el kit + una sesión. Se ajusta avatar, precio o formato y se repite **una vez** en enero |
 | **3 o menos preventas** y menos de 60 inscritos a la clase | **Parar.** Se devuelve el dinero. Lo producido (guía, clase grabada) se queda como contenido de captación del servicio |
 
-**Referencia de flujo:** si Maikel pide a Growth el recuento del CRM (`04`, apartado 2.4), se sabrá cuántos leads de formación por debajo del servicio entran al mes. Con unos 8 leads de formación por semana gastando unos 17 €/día [C, semana 38], 8 preventas exigen convertir una parte grande de lo que llega: por eso la clase se alimenta también de LinkedIn y, si hace falta, de los 300 €.
+**Referencia de flujo:** si Maikel pide a Growth el recuento del CRM (`04`, apartado 2.4), se sabrá cuántos leads de formación por debajo del servicio entran al mes. Con unos 5 leads de formación por semana, menos de 3 por debajo de 500 € [C, recuento del CRM del 27-oct], 8 preventas exigen convertir una parte grande de lo que llega: por eso la clase se alimenta también de LinkedIn y, si hace falta, de los 300 €.
 
 **Coste máximo de equivocarse [E]:** ~15 h de Maikel y ≤ 500 € en caja. Y la clase sirve igualmente para captar academias que prefieran el servicio: se mide cuántas piden diagnóstico.
 
