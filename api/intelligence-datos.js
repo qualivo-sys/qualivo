@@ -28,6 +28,7 @@ const PLAZO_MS = 40000;
 let cache = null; // { t, datos }
 let enCurso = null;
 let cacheInf = null, infEnCurso = null;
+let cacheOut = null, outEnCurso = null;
 
 // ---------------------------------------------------------------------------
 // Lectura: todo es GET, salvo mover un trato de etapa desde el tablero (acción «mover»).
@@ -718,6 +719,20 @@ module.exports = async function (req, res) {
   }
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
+  if (accion === 'outbound' || accion === 'outbound-ficha') {
+    // 20-oct: pestaña Outbound (api/_intel-outbound.js). Solo lectura de Smartlead. Cache de 7 minutos.
+    const O = require('./_intel-outbound.js');
+    try {
+      if (accion === 'outbound-ficha') return res.status(200).json(await O.ficha(String(req.query.campana || ''), String(req.query.lead || '')));
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      if (!cacheOut || Date.now() - cacheOut.t > 7 * 60000 || (fresco && Date.now() - cacheOut.t > 60000)) {
+        if (!outEnCurso) outEnCurso = O.datos().then(function (d) { if (!d.error) cacheOut = { t: Date.now(), d: d }; return d; }).finally(function () { outEnCurso = null; });
+        const d = await outEnCurso;
+        if (d.error) return res.status(502).json({ error: d.error });
+      }
+      return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheOut.t) / 1000) }, cacheOut.d));
+    } catch (e) { return res.status(502).json({ error: 'No se ha podido leer Smartlead: ' + String(e.message || e).slice(0, 120) }); }
+  }
   if (accion === 'finanzas') {
     try { return res.status(200).json(await finanzas(String((req.query && req.query.fresco) || '') === '1')); }
     catch (e) { return res.status(502).json({ error: 'No se ha podido leer la hoja de finanzas: ' + String(e.message || e).slice(0, 120) }); }
