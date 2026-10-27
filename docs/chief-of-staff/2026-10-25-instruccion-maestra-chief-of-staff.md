@@ -265,3 +265,13 @@ No se crean agentes, documentos duplicados, campañas ni automatizaciones sin co
   - Para saber cómo va, se lee cada día `reportes/director/AAAA-MM-DD.md`.
   - Las órdenes se escriben en `coordinacion/qualivo-ordenes.md`, con numeración Q-001, Q-002… Sus agentes las leen al empezar porque lo dice `.claude/agents/_reglas.md`.
   - Ninguna orden puede saltarse sus reglas; en particular, nada se envía a clientes sin el OK de Maikel.
+
+## Anexo · Registro de decisiones que modifican esta instrucción
+
+- **27-oct-2026 · Outbound y LSSI.** Maikel decide activar ya el email frío y el ABM por email, y meter más leads, sin esperar a que la asesoría valide el art. 21 de la LSSI («Activa ya, deja lo de la LSSI»). Se le explicó antes el riesgo y lo asume. Para el outbound de Qualivo, esto deja sin efecto la regla del punto 3 («no activar envíos sin validar la LSSI»). Se mantienen las barandillas:
+  - identificación y baja inmediata;
+  - solo direcciones profesionales verificadas;
+  - registro de la fuente;
+  - parada si las bajas o quejas pasan del 1 % o el rebote del 3 %.
+
+  No aplica a Equipzilla (Q-002/Q-005), que sigue a la espera de su propio OK.
