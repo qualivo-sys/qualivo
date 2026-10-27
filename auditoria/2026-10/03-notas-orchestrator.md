@@ -1,8 +1,23 @@
-# 3 · Cold email · informe de Outbound · auditoría oct-2026
+# Notas del Orchestrator · datos de cold email · auditoría oct-2026
 
-> Entregado el 19-oct-2026 como página hija de la auditoría en Notion:
-> https://app.notion.com/p/3fe56e1ad6ed81e5be59ca4c1c417052
-> Esta es la copia en el repo. Sin nombres, correos ni teléfonos de contactos.
+> **ESTO NO ES EL INFORME OFICIAL DEL ÁREA 3.** El encargo del 19-oct a las 13:45 me pidió el informe
+> de cold email; a las 14:02 Growth avisó de que Maikel lo reasignaba al **Agente Outbound**, y que lo
+> que yo tuviera lo dejara como nota. **El aviso llegó unos quince minutos después de que yo ya lo
+> hubiera entregado**, incluido publicado en Notion. Esto es esa nota.
+>
+> Qué hice al recibir la corrección: paré, retitulé la página de Notion a
+> «Notas del Orchestrator · datos de cold email (encargo reasignado al Agente Outbound)» para que no
+> siguiera pareciendo el informe oficial, y renombré este fichero. **No he cambiado nada en campañas
+> ni en herramientas en ningún momento: toda la auditoría fue de solo lectura.**
+>
+> **Aviso que importa:** la página estuvo en Notion con el título «3 · Cold email · informe de
+> Outbound» desde el 19-oct hasta que la retitulé. Ese periodo cubre el diagnóstico conjunto del
+> 22-oct y la reunión de decisiones del 26-oct, así que **es posible que estos datos se leyeran como
+> si fueran el informe oficial del área**. Si el Agente Outbound entregó cifras distintas, **las suyas
+> son las que valen**: él tenía las claves y yo no.
+>
+> Lo que sigue se conserva porque las cifras están medidas y llevan su fichero fuente. Página de
+> Notion: https://app.notion.com/p/3fe56e1ad6ed81e5be59ca4c1c417052
 
 **Fuente y su límite.** No tengo claves de Smartlead ni de GoHighLevel en esta sesión, así que **no he
 consultado las APIs**: todas las cifras salen de los ficheros medidos que los scripts dejaron en el
