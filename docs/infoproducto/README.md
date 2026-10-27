@@ -2,22 +2,25 @@
 
 Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se ha publicado, enviado, comprado ni contratado.** Todo lo que sale hacia fuera es un borrador pendiente de Maikel.
 
-| Archivo | Puntos del encargo | Estado |
+> **27-oct, cambio de marco.** Maikel ha enviado un marco de trabajo nuevo (vía Chief of Staff) que pasa a mandar. Lo vigente es el **diagnóstico estratégico (`05`)** y sus **preguntas (`06`)**. Los documentos `00` y `02`-`04` partían del avatar «academias» y quedan como antecedente hasta que Maikel decida. `01` sigue valiendo.
+
+| Archivo | Contenido | Estado |
 |---|---|---|
-| [`00-decisiones-maikel.md`](00-decisiones-maikel.md) | Decisiones para la sesión del 29-oct (5 preguntas cerradas) | Listo |
-| [`01-mercado-y-competidores.md`](01-mercado-y-competidores.md) | 1 · Mercado y competidores (España, LATAM, inglés) | Terminado v1 |
-| [`02-posicionamiento-promesa-escalera.md`](02-posicionamiento-promesa-escalera.md) | 2 · Hueco y posicionamiento · 3 · Promesa · 4 · Escalera y precios (con permisos de casos) | Terminado v1 |
-| [`03-temario-embudo-validacion-plan-riesgos.md`](03-temario-embudo-validacion-plan-riesgos.md) | 5 · Temario · 6 · Embudo · 7 · Validación · 8 · Plan por semanas · 9 · Riesgos | v1, pendiente de las decisiones |
-| [`04-avatares-y-demanda.md`](04-avatares-y-demanda.md) | Tres opciones de avatar y demanda real del recomendado (CRM, web, blog, anuncios) | Listo para la sesión |
+| [`05-diagnostico-estrategico.md`](05-diagnostico-estrategico.md) | Primer encargo del marco de Maikel: evaluación crítica, capacidades verificadas, 3 oportunidades, hipótesis, competidores, matriz de 7 segmentos, herramientas/método/sistema, modelo provisional, hoja de ruta de 30 días | **Vigente · para el 29-oct** |
+| [`06-preguntas-priorizadas.md`](06-preguntas-priorizadas.md) | 11 preguntas ordenadas por impacto | **Vigente · para el 29-oct** |
+| [`01-mercado-y-competidores.md`](01-mercado-y-competidores.md) | Mercado y competidores (España, LATAM, inglés) | Vigente |
+| [`00-decisiones-maikel.md`](00-decisiones-maikel.md) | Decisiones del avatar «academias» | Antecedente |
+| [`02-posicionamiento-promesa-escalera.md`](02-posicionamiento-promesa-escalera.md) | Posicionamiento, promesa y escalera para academias | Antecedente |
+| [`03-temario-embudo-validacion-plan-riesgos.md`](03-temario-embudo-validacion-plan-riesgos.md) | Temario, embudo, validación, plan y riesgos para academias | Antecedente (los riesgos y el 8.1 siguen valiendo) |
+| [`04-avatares-y-demanda.md`](04-avatares-y-demanda.md) | Tres avatares y demanda de academias | Antecedente |
 
-## La recomendación en seis líneas
+## La recomendación vigente (05), en cinco líneas
 
-1. **Avatar:** academias y centros de formación privada que ya invierten en anuncios y atienden con 1-3 personas. Es quien hoy no puede pagar el servicio completo.
-2. **Hueco:** todo el mercado vende la herramienta o el anuncio. Nadie vende, por sector, lo que pasa **después** del lead hasta la matrícula.
-3. **Promesa:** en 6 semanas, respuesta en menos de 5 minutos, ninguna solicitud sin siguiente paso y coste por matrícula visible. Sin promesas de ingresos.
-4. **Escalera:** imán gratis → kit de 47 € → programa en grupo de 690 € (fundador 490 €) → implantación de 2.900 € → servicio de Qualivo.
-5. **Validación antes de construir:** del 2 al 23-nov, con preventa y devolución si no hay 8 plazas. ~10 h de Maikel y ≤ 500 € en caja.
-6. **Límite:** ≤ 4 h/semana de Maikel de media. Si se pasa, se para esa semana.
+1. La idea inicial no tiene cliente definido y promete más de lo que hoy se puede demostrar (casos sin datos primarios ni permiso, piezas experimentales).
+2. Matriz de 7 segmentos: gana **B · pequeñas agencias** (69/100), luego **E · responsables de marketing y ventas de pymes** (63). Academias, 59.
+3. Vender un **sistema implementable** con solo los componentes probados, no herramientas ni solo método.
+4. Validar O1 (agencias) y O2 (taller para empresas) en 30 días con dinero real: ~11,5 h de Maikel y ≤ 150 €.
+5. Dos líneas rojas que decide Maikel: enseñar a posibles competidores y qué parte del sistema se abre.
 
 ## Fechas
 
