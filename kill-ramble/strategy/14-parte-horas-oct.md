@@ -59,3 +59,7 @@ Reuniones según el calendario [C]: kick-off (10 sep, 45 min), Lea (15 sep, 1 h;
 
 - **Facturar ahora lo consumido:** 27,5 h, del 10 de septiembre al 27 de octubre.
 - **Facturar la bolsa completa (30 h) al cierre,** el 29 de octubre, con las 2,5 h restantes para el lanzamiento y el cierre.
+
+## Decisión del 27 oct
+
+Maikel factura la bolsa completa (30 h): las 27,5 h anteriores más 2,5 h para el lanzamiento y el cierre (28-29 oct). El trabajo real estimado supera las 30 h (unas 40-50 h [E]); el exceso no se factura en esta bolsa y se usa como argumento para la siguiente fase. El correo a María (Shakers) con el resumen y el listado de horas está en el chat del 27 oct.
