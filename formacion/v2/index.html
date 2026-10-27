@@ -85,25 +85,25 @@ p{font-size:clamp(16.5px,1.9vw,18px)}
 .res{background:#fff}
 .casos{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:40px}
 .caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column;justify-content:space-between;min-height:320px;position:relative;overflow:hidden}
-.caso.eac{background:var(--tinta);color:#fff}
-.caso.eac::after{content:'';position:absolute;right:-120px;bottom:-140px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.35),transparent 65%)}
+.caso.oscuro-a{background:var(--tinta);color:#fff}
+.caso.oscuro-a::after{content:'';position:absolute;right:-120px;bottom:-140px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(39,189,177,.35),transparent 65%)}
 .caso.nail{background:var(--verde-suave);color:var(--tinta)}
 .caso .quien{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.8}
 .caso .cifras{display:flex;flex-wrap:wrap;gap:12px 36px;margin:22px 0 10px;position:relative;z-index:1}
 .caso .big{font-size:clamp(46px,6.4vw,76px);font-weight:900;letter-spacing:-.05em;line-height:.95}
-.caso.eac .big{color:var(--amarillo)}
+.caso.oscuro-a .big{color:var(--amarillo)}
 .caso.nail .big{color:var(--verde)}
 .caso .lbl{font-size:14.5px;font-weight:700;margin-top:6px;max-width:22ch;line-height:1.35}
-.caso.eac .lbl{color:#C6CBD3}
+.caso.oscuro-a .lbl{color:#C6CBD3}
 .caso p.ctx{font-size:15.5px;line-height:1.5;max-width:42ch;position:relative;z-index:1}
-.caso.eac p.ctx{color:#AEB5BF}
+.caso.oscuro-a p.ctx{color:#AEB5BF}
 .caso.nail p.ctx{color:#3E434B}
 .caso .pie-caso{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;position:relative;z-index:1}
 .caso .pie-caso img{height:40px;width:auto}
-.caso.eac .pie-caso img{filter:brightness(0) invert(1);opacity:.9;height:30px}
+.caso.oscuro-a .pie-caso img{filter:brightness(0) invert(1);opacity:.9;height:30px}
 .caso.nail .pie-caso img{filter:grayscale(1) brightness(.5) contrast(1.6);height:46px}
 .caso a{font-weight:800;font-size:15px;text-decoration:none;white-space:nowrap}
-.caso.eac a{color:var(--amarillo)}
+.caso.oscuro-a a{color:var(--amarillo)}
 .otro{margin-top:16px;font-size:15px;color:var(--gris)}
 .otro a{font-weight:800;color:var(--verde);text-decoration:none}
 .logos{margin-top:clamp(40px,5vw,60px);padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--linea)}
@@ -375,14 +375,14 @@ p{font-size:clamp(16.5px,1.9vw,18px)}
     <p class="eyebrow">Resultados</p>
     <h2 id="t-res">Resultados reales en captación para formación.</h2>
     <div class="casos aparece">
-      <article class="caso eac">
-        <span class="quien">Escola Aeronàutica de Catalunya</span>
+      <article class="caso oscuro-a">
+        <span class="quien">Centro de formación profesional</span>
         <div class="cifras">
           <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
-          <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">atribuidos en un mes</div></div>
+          <div><div class="big" data-cuenta="100" data-suf="&nbsp;%">100&nbsp;%</div><div class="lbl">de las matrículas atribuidas a su anuncio</div></div>
         </div>
         <p class="ctx">Campañas por curso y el recorrido medido del anuncio a la matrícula, con cada euro conectado a su resultado.</p>
-        <div class="pie-caso"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"><a href="/casos/eac/">Ver el caso →</a></div>
+        <div class="pie-caso"><a href="/casos/formacion-profesional/">Ver el caso →</a></div>
       </article>
       <article class="caso nail">
         <span class="quien">Nail Boss Academy</span>
@@ -391,49 +391,10 @@ p{font-size:clamp(16.5px,1.9vw,18px)}
           <div><div class="big" data-cuenta="21">21</div><div class="lbl">matrículas</div></div>
         </div>
         <p class="ctx">En cuatro meses, partiendo de cero.</p>
-        <div class="pie-caso"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" loading="lazy"></div>
       </article>
     </div>
-    <p class="otro">Y en formación de oficios, un 53&nbsp;% menos de coste por contacto. <a href="/casos/focus-practical/">Ver el caso de Focus Practical →</a></p>
+    <p class="otro">Y en formación de oficios, un 53&nbsp;% menos de coste por contacto. <a href="/casos/academia-oficios/">Ver el caso →</a></p>
 
-    <div class="logos">
-      <p>Hemos trabajado con</p>
-      <div class="pista"><div class="fila">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" style="height:52px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" style="height:44px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" style="height:32px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="height:42px;filter:grayscale(1) brightness(.5) contrast(1.6)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" style="height:32px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" style="height:30px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" style="height:32px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" style="height:30px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" style="height:38px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" style="height:26px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" style="height:22px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" style="height:14px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="height:26px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="height:36px;filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" style="height:24px">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" style="height:38px">
-
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" style="height:52px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" style="height:44px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" style="height:32px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" style="height:42px;filter:grayscale(1) brightness(.5) contrast(1.6)">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" style="height:32px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" style="height:30px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" style="height:32px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" style="height:30px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" style="height:38px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" style="height:26px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" style="height:22px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" style="height:14px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" style="height:26px;filter:brightness(0)">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" style="height:36px;filter:brightness(0)">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" style="height:24px">
-        <img aria-hidden="true" alt="" data-dup loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" style="height:38px">
-      </div></div>
-    </div>
   </div>
 </section>
 

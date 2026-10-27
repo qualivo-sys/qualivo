@@ -147,6 +147,46 @@
       "permanent": true
     },
     {
+      "source": "/casos/eac",
+      "destination": "/casos/formacion-profesional/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/eac/",
+      "destination": "/casos/formacion-profesional/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/focus-practical",
+      "destination": "/casos/academia-oficios/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/focus-practical/",
+      "destination": "/casos/academia-oficios/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/bellovinilo",
+      "destination": "/casos/reformas-b2b/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/bellovinilo/",
+      "destination": "/casos/reformas-b2b/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/nuria-roure",
+      "destination": "/casos/salud-servicios-online/",
+      "permanent": true
+    },
+    {
+      "source": "/casos/nuria-roure/",
+      "destination": "/casos/salud-servicios-online/",
+      "permanent": true
+    },
+    {
       "source": "/donde-pierdes-clientes",
       "destination": "/diagnostico/",
       "permanent": true

@@ -235,22 +235,22 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
 .res{background:#fff}
 .casos{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:36px}
 .caso{border-radius:22px;padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column}
-.caso.eac{background:var(--tinta);color:#fff}
+.caso.oscuro-a{background:var(--tinta);color:#fff}
 .caso.nail{background:var(--verde-suave)}
 .caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
 .caso .cab img{height:34px;width:auto}
-.caso.eac .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
+.caso.oscuro-a .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
 .caso.nail .cab img{filter:grayscale(1) brightness(.5) contrast(1.6);height:44px}
 .caso .quien{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.75}
 .caso .cifras{display:flex;flex-wrap:wrap;gap:14px 34px;margin:24px 0 18px}
 .caso .big{font-size:clamp(44px,5.8vw,70px);font-weight:900;letter-spacing:-.05em;line-height:.95}
-.caso.eac .big{color:var(--amarillo)}
+.caso.oscuro-a .big{color:var(--amarillo)}
 .caso.nail .big{color:var(--verde)}
 .caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:20ch;line-height:1.35}
-.caso.eac .lbl{color:#C6CBD3}
+.caso.oscuro-a .lbl{color:#C6CBD3}
 .caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
-.caso.eac .ctx{color:#AEB5BF}
-.caso.eac .ctx b{color:#fff}
+.caso.oscuro-a .ctx{color:#AEB5BF}
+.caso.oscuro-a .ctx b{color:#fff}
 .caso.nail .ctx{color:#3E434B}
 .caso .ver{margin-top:16px;font-weight:800;font-size:15px;text-decoration:none;color:var(--amarillo)}
 .logos{margin-top:clamp(36px,5vw,52px);display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center}
@@ -766,7 +766,6 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
         <a href="#demo" class="btn-link" data-cta="hero-secundario">Ver cómo funciona ↓</a>
       </div>
       <p class="micro"><span>✓</span> Diagnóstico sin coste · 30 minutos</p>
-      <div class="hero-prueba"><span>Han trabajado con Qualivo</span><div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="eager" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" height="30" loading="eager" decoding="async" style="filter:brightness(0)"><img src="/assets/img/clientes/selectra.webp" alt="Selectra" height="30" loading="eager" decoding="async"><img src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" height="30" loading="eager" decoding="async"></div></div>
       <p class="sectores"><small>Por sector:</small><a href="/formacion/" data-cta="sector-formacion">Formación</a><a href="/reformas/" data-cta="sector-reformas">Reformas</a><a href="/clinicas/" data-cta="sector-clinicas">Clínicas</a><a href="/growth-b2b/" data-cta="sector-b2b">Servicios B2B</a></p>
     </div>
 
@@ -787,49 +786,26 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     <p class="eyebrow">Resultados</p>
     <h2 id="t-res">Resultados reales en captación.</h2>
     <div class="casos">
-      <article class="caso eac">
-        <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya · formación</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
+      <article class="caso oscuro-a">
+        <div class="cab"><span class="quien">Centro de formación profesional</span></div>
         <div class="cifras">
           <div><div class="big" data-cuenta="10.2" data-dec="1" data-suf="×">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
-          <div><div class="big" data-cuenta="44000" data-suf="&nbsp;€">44.000&nbsp;€</div><div class="lbl">facturados y atribuidos en un mes</div></div>
+          <div><div class="big" data-cuenta="100" data-suf="&nbsp;%">100&nbsp;%</div><div class="lbl">de las matrículas atribuidas a su anuncio</div></div>
         </div>
         <p class="ctx"><b>Tres cursos, tres públicos distintos.</b> Campañas por curso conectadas al CRM y cada solicitud seguida hasta la entrevista y la matrícula.</p>
-        <a class="ver" href="/casos/eac/">Ver el caso completo →</a>
+        <a class="ver" href="/casos/formacion-profesional/">Ver el caso completo →</a>
       </article>
       <article class="caso nail">
-        <div class="cab"><span class="quien">Bellovinilo · reformas y revestimientos</span><img src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" loading="lazy" style="filter:brightness(0);height:30px"></div>
+        <div class="cab"><span class="quien">Empresa de reformas B2B</span></div>
         <div class="cifras">
           <div><div class="big" data-cuenta="8.3" data-dec="1" data-suf="×">8,3×</div><div class="lbl">retorno sobre la inversión</div></div>
-          <div><div class="big" data-cuenta="30000" data-suf="&nbsp;€">30.000&nbsp;€</div><div class="lbl">en ventas con 3.600&nbsp;€ de inversión</div></div>
+          <div><div class="big">De cero</div><div class="lbl">sistema de captación construido entero</div></div>
         </div>
         <p class="ctx">No había un sistema que optimizar: lo construimos, de la captación al seguimiento.</p>
-        <a class="ver" href="/casos/bellovinilo/" style="color:var(--verde)">Ver el caso completo →</a>
+        <a class="ver" href="/casos/reformas-b2b/" style="color:var(--verde)">Ver el caso completo →</a>
       </article>
     </div>
-    <p class="fuente">EAC: cifras medidas en el CRM del centro, en un mes de campaña. Bellovinilo: cifras del caso publicado.</p>
-    <div class="logos">
-      <p>Han trabajado con Qualivo</p>
-      <div class="fila">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" style="filter:grayscale(1) brightness(.5) contrast(1.6)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/equipzilla.webp" alt="Equipzilla" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/selectra.webp" alt="Selectra" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/adigital.svg" alt="Adigital" style="filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/observatorio-ecommerce.svg" alt="Observatorio de Comercio Electrónico" style="filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/mauco.webp" alt="Mauco" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/cloud-district.webp" alt="Cloud District" >
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/antic-barcelona.png" alt="Antic Barcelona 113" style="filter:brightness(0)">
-        <img loading="lazy" decoding="async" src="/assets/img/clientes/bellovinilo.svg" alt="Bellovinilo" style="filter:brightness(0)">
-      </div>
-    </div>
+    <p class="fuente">Casos anónimos. Centro de formación: cifras medidas en su CRM, en un mes de campaña. Empresa de reformas: cifras del caso publicado.</p>
   </div>
 </section>
 
@@ -1155,7 +1131,7 @@ p{font-size:clamp(16px,1.8vw,17.5px)}
     <div class="cols">
       <div><img src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" loading="lazy" style="height:24px;width:auto;margin-bottom:12px"><p>Conseguimos que más oportunidades se conviertan en clientes.</p></div>
       <div><b>Sectores</b><a href="/formacion/">Formación</a><a href="/reformas/">Reformas</a><a href="/clinicas/">Clínicas</a><a href="/growth-b2b/">Servicios B2B</a></div>
-      <div><b>Qualivo</b><a href="/casos/eac/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
+      <div><b>Qualivo</b><a href="/casos/formacion-profesional/">Casos</a><a href="/blog/">Blog</a><a href="/sobre/">Sobre Qualivo</a></div>
       <div><b>Legal</b><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
     </div>
     <span>© 2026 Qualivo · España</span>
