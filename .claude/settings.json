@@ -17,7 +17,8 @@
       "mcp__HeyReach__get_conversations_v2",
       "mcp__Google_Drive__search_files",
       "mcp__Mailerfind__mailerfind_analyses_list",
-      "mcp__Claude_Code_Remote__list_triggers"
+      "mcp__Claude_Code_Remote__list_triggers",
+      "mcp__Apollo_io__apollo_people_bulk_match"
     ]
   }
 }
