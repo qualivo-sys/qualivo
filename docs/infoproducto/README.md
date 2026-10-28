@@ -2,12 +2,15 @@
 
 Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se ha publicado, enviado, comprado ni contratado.** Todo lo que sale hacia fuera es un borrador pendiente de Maikel.
 
+> **28-oct, nuevo encuadre (aprobado por Maikel):** el infoproducto es un **experimento de validación** hasta el 30-nov, con un máximo de 2 h a la semana de Maikel y 150 €, sin construir nada. Lo vigente para la sesión del **viernes 30-oct (12:00-14:00)** es **`07`**.
+>
 > **27-oct, cambio de marco.** Maikel ha enviado un marco de trabajo nuevo (vía Chief of Staff) que pasa a mandar. Lo vigente es el **diagnóstico estratégico (`05`)** y sus **preguntas (`06`)**. Los documentos `00` y `02`-`04` partían del avatar «academias» y quedan como antecedente hasta que Maikel decida. `01` sigue valiendo.
 
 | Archivo | Contenido | Estado |
 |---|---|---|
-| [`05-diagnostico-estrategico.md`](05-diagnostico-estrategico.md) | Primer encargo del marco de Maikel: evaluación crítica, capacidades verificadas, 3 oportunidades, hipótesis, competidores, matriz de 7 segmentos, herramientas/método/sistema, modelo provisional, hoja de ruta de 30 días | **Vigente · para el 29-oct** |
-| [`06-preguntas-priorizadas.md`](06-preguntas-priorizadas.md) | 11 preguntas ordenadas por impacto | **Vigente · para el 29-oct** |
+| [`07-experimento-validacion.md`](07-experimento-validacion.md) | Avatar, promesa, hipótesis, experimento (2-29 nov, ~6 h de Maikel, 0 € previstos) y criterio para seguir o parar el 30-nov | **Vigente · para el 30-oct** |
+| [`05-diagnostico-estrategico.md`](05-diagnostico-estrategico.md) | Primer encargo del marco de Maikel: evaluación crítica, capacidades verificadas, 3 oportunidades, hipótesis, competidores, matriz de 7 segmentos, herramientas/método/sistema, modelo provisional, hoja de ruta de 30 días | Vigente como análisis (sus apartados 7 y 8 los sustituye `07`) |
+| [`06-preguntas-priorizadas.md`](06-preguntas-priorizadas.md) | 11 preguntas ordenadas por impacto (para el experimento solo hacen falta las 4 de `07`) | Referencia |
 | [`01-mercado-y-competidores.md`](01-mercado-y-competidores.md) | Mercado y competidores (España, LATAM, inglés) | Vigente |
 | [`00-decisiones-maikel.md`](00-decisiones-maikel.md) | Decisiones del avatar «academias» | Antecedente |
 | [`02-posicionamiento-promesa-escalera.md`](02-posicionamiento-promesa-escalera.md) | Posicionamiento, promesa y escalera para academias | Antecedente |
@@ -24,9 +27,9 @@ Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se h
 
 ## Fechas
 
-- **29-oct 12:00:** este documento (puntos 1-4 terminados, 5-9 en borrador y decisiones).
-- **29-oct 15:00-17:00:** sesión con Maikel.
-- **30-oct 15:00-16:00:** versión 1 cerrada y semana 1 de validación lista para el 2-nov.
+- **Viernes 30-oct, 12:00-14:00:** sesión con Maikel. Sale con avatar, promesa, hipótesis, experimento y criterio. La sesión de las 15:00 queda cancelada.
+- **2-29 nov:** experimento.
+- **Lunes 30-nov:** decisión de seguir, pivotar o parar.
 
 ## Etiquetas
 
