@@ -14,8 +14,8 @@ const D = require('./_demo');
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // Demos preparadas para un negocio concreto (qualivo.io/<negocio>/): la ficha
 // ya está hecha, no se lee la web ni se pide sector. Equipzilla, 23-sep-2026.
-// Hunty (23-oct-2026): plan B de la reunión, la agente llama a Maikel haciendo el caso de Javier.
-const PRESETS = { equipzilla: require('./_fichas/equipzilla.json'), nuria: require('./_fichas/nuria.json'), hunty: require('./_fichas/hunty.json') };
+// Hunty (28-oct): retirada la ficha de la demo; las páginas de /propuestas/hunty/ redirigen a la portada.
+const PRESETS = { equipzilla: require('./_fichas/equipzilla.json'), nuria: require('./_fichas/nuria.json') };
 const SECTORES = ['clinicas', 'formacion', 'reformas', 'asesorias', 'otro'];
 const DESDE = parseInt(process.env.DEMO_DESDE || '9', 10);
 const HASTA = parseInt(process.env.DEMO_HASTA || '21', 10);

@@ -117,6 +117,16 @@
   ],
   "redirects": [
     {
+      "source": "/propuestas/hunty",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/propuestas/hunty/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/inicio/v2",
       "destination": "/",
       "permanent": true
