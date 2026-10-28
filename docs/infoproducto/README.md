@@ -22,7 +22,7 @@ Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se h
 1. La idea inicial no tiene cliente definido y promete más de lo que hoy se puede demostrar (casos sin datos primarios ni permiso, piezas experimentales).
 2. Matriz de 7 segmentos: gana **B · pequeñas agencias** (69/100), luego **E · responsables de marketing y ventas de pymes** (63). Academias, 56.
 3. Vender un **sistema implementable** con solo los componentes probados, no herramientas ni solo método.
-4. Validar O1 (agencias) y O2 (taller para empresas) en 30 días con dinero real: ~11,5 h de Maikel y ≤ 150 €.
+4. Validar con dinero real, dentro del nuevo encuadre: 8 entrevistas y depósitos de 100 € entre el 2 y el 29-nov, con ~6 h de Maikel y 0 € previstos (detalle en `07`).
 5. Dos líneas rojas que decide Maikel: enseñar a posibles competidores y qué parte del sistema se abre.
 
 ## Fechas
