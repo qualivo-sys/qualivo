@@ -82,7 +82,7 @@ Por campaña, de esos 492:
 | Semana del 19-oct | 1.373 | 41 |
 | 26 y 27-oct | 600 | 10 |
 
-**Resultado:** 1 reunión agendada (Habitabio, 12-nov), salida de la campaña de señal de Meta. Hay además 2 conversaciones abiertas:
+**Resultado:** 2 reuniones de email frío en octubre. Faraday Venture Partners se celebró el 20-oct y salió de LinkedIn Ads; Habitabio está agendada para el 12-nov y salió de Meta. Hay además 2 conversaciones abiertas:
 - Siello, por WhatsApp;
 - Tunergia, que pide retomarlo en diciembre.
 
@@ -101,11 +101,11 @@ Por campaña, de esos 492:
 
 ## 5. Objetivo de reuniones y coste
 
-**Ritmo real hasta hoy:** 1 reunión por unos 2.700 correos [C], con 1 reunión de origen frío en todo octubre.
+**Ritmo real hasta hoy:** 2 reuniones en octubre con 2.697 correos, 1 por cada unos 1.350 [C]. Detalle de las respuestas en `docs/outbound/2026-10-28-respuestas-octubre.md`.
 
-**Objetivo para noviembre: 3-4 reuniones cualificadas de outbound [E].**
-- ~6.000 correos al ritmo actual dan 2.
-- La comprobación de la señal y las verticales de formación y reformas, alineadas con Paid, deberían subirlo a 3-4.
+**Objetivo para noviembre: 4-5 reuniones cualificadas de outbound [E].**
+- ~6.000 correos al ritmo actual dan 4.
+- La comprobación de la señal y las verticales de formación y reformas, alineadas con Paid, deberían subirlo a 4-5.
 
 **Coste variable de noviembre** [E]:
 
@@ -114,7 +114,7 @@ Por campaña, de esos 492:
 | Créditos de Apollo | ~2.000-2.200 (casi todo el saldo) |
 | Smartlead y buzones | Ya pagados, sin coste añadido |
 
-Coste por reunión: unos 550-700 créditos de Apollo [E].
+Coste por reunión: unos 450-550 créditos de Apollo [E].
 
 **Qué se aplica de lo aprendido con Kubysoft:**
 - **Preselección a mano antes de enviar:**
