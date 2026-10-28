@@ -181,7 +181,7 @@ async function googleAdsNames() {
   if (!dev || !cid) return GNAMES;
   const tok = await googleToken(['https://www.googleapis.com/auth/adwords']);
   if (!tok) return GNAMES;
-  const ver = process.env.GADS_API_VERSION || 'v22';
+  const ver = process.env.GADS_API_VERSION || 'v23';
   const headers = { authorization: `Bearer ${tok}`, 'developer-token': dev, 'content-type': 'application/json' };
   if (login) headers['login-customer-id'] = login;
   const q = async (query) => { const r = await fetch(`https://googleads.googleapis.com/${ver}/customers/${cid}/googleAds:search`, { method: 'POST', headers, body: JSON.stringify({ query }) }); return r.ok ? (await r.json()).results || [] : []; };
@@ -212,7 +212,7 @@ async function fetchGoogleAdsDaily(since, until) {
   if (!dev || !cid) return null;
   const tok = await googleToken(['https://www.googleapis.com/auth/adwords']);
   if (!tok) return null;
-  const ver = process.env.GADS_API_VERSION || 'v22';
+  const ver = process.env.GADS_API_VERSION || 'v23';
   const headers = { authorization: `Bearer ${tok}`, 'developer-token': dev, 'content-type': 'application/json' };
   if (login) headers['login-customer-id'] = login;
   const query = `SELECT segments.date, campaign.name, campaign.advertising_channel_type, metrics.cost_micros, metrics.conversions, metrics.clicks, metrics.impressions FROM campaign WHERE segments.date BETWEEN '${since}' AND '${until}' AND metrics.cost_micros > 0`;
