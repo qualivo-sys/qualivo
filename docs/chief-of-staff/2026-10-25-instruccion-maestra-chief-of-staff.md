@@ -275,3 +275,27 @@ No se crean agentes, documentos duplicados, campañas ni automatizaciones sin co
   - parada si las bajas o quejas pasan del 1 % o el rebote del 3 %.
 
   No aplica a Equipzilla (Q-002/Q-005), que sigue a la espera de su propio OK.
+
+- **28-oct · El Documento Madre pasa a ser el criterio de decisión.** Versión 1.1 en Notion: https://app.notion.com/p/40756e1ad6ed81f88776ed35e366c7e0. Queda por encima de esta instrucción en estrategia, objetivos y Rocks. Esta instrucción sigue mandando en cómo trabaja el Chief of Staff.
+  - **Filtro obligatorio para cualquier iniciativa nueva**, sea de un agente o del Chief of Staff:
+    1. ¿A qué Rock o prioridad de consolidación contribuye?
+    2. ¿Qué cuello de botella real corrige?
+    3. ¿Qué resultado se mide y desde qué cifra de partida?
+    4. ¿Qué dejamos de hacer, automatizamos o posponemos?
+    5. ¿Hay capacidad (horas de Maikel) y caja?
+
+    Lo que no responda a las cinco no se aprueba.
+  - **Rocks de Q4** (en Todoist, Dirección › Rocks Q4):
+    - R1 Adquisición (coste por reunión cualificada y 2 clientes nuevos);
+    - R2 Entrega (5 procedimientos e informe mensual por cliente);
+    - R3 Finanzas (previsión a 90 días, MRR cobrado y menos concentración);
+    - R4 Fundador (Reset).
+
+    Las cifras se validan el viernes 30-oct.
+  - **Decisiones tomadas:**
+    - outbound con barandillas, sin consulta legal; la clave es que el ICP encaje con el mensaje;
+    - el infoproducto pasa a experimento hasta el 30-nov (como mucho 2 h a la semana y 150 €);
+    - contenido desde la semana 47: 2 carruseles, 1 vídeo y la newsletter, todo de trabajo real;
+    - HeyReach se cancela y LinkedIn queda en pausa hasta Q1;
+    - no se abren verticales ni productos nuevos hasta el cierre de Q4;
+    - Equipzilla se mide como riesgo de concentración.
