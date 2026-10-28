@@ -1,34 +1,39 @@
-# Pieza 8 · Vie 13-nov · «Un anuncio también se cansa»
+# Pieza 8 · Vie 13-nov · «El porcentaje de clics bajó. Todavía no sabemos por qué»
 
 > Noviembre, semana 46. **Sin publicar.** Necesita el ok de Maikel.
+> **v2 (28-oct):** cambio de tesis por la revisión editorial del 27-oct, que había que hacer antes de publicar. La caída del porcentaje de clics es lo que vimos. El cansancio del anuncio es una hipótesis. Fuera las cifras 0,47 % y 0,25 %, porque no tienen periodo, impresiones ni tipo de CTR. La prueba de Paid se cuenta como prueba, sin darla por hecha.
 
 ## Ficha
+
 - **Pilar:** casos y experimentos (nuestro propio anuncio). **Sector:** Qualivo.
 - **Dato real:**
-  - **El cansancio:** nuestro vídeo de captación pasó de un CTR de 0,47 % a 0,25 % [C, lectura de Paid y Growth en el bus del 25-oct].
-  - **La prueba de Paid desde el 1-nov:** mismo cuerpo de anuncio y otro gancho (11 frente a 11-nolose) [C, bus del 26-oct].
-  - **Lo que no damos:** el periodo exacto ni el resultado de la prueba. Si el 13-nov ya lo hay, se añade con el ok de Paid.
-- **Riesgo:** necesita ok. Enseña una cifra de nuestros anuncios. No es de un cliente ni es un resultado de venta, pero Maikel decide si la enseñamos.
+  - **Lo que vimos:** bajó el porcentaje de clics de nuestro vídeo de captación [C, lectura de Paid y Growth en el bus del 25-oct]. Sin cifras en la pieza.
+  - **Lo que probamos:** desde el 1-nov, mismo cuerpo del anuncio con otro gancho (11 frente a 11-nolose) [C, bus del 26-oct].
+- **Si llegan las cifras:** solo se publican con periodo, impresiones, tipo de CTR y frecuencia, y con el ok de Paid y de Maikel.
+- **Riesgo:** sin riesgo sin cifras.
 
 ## Láminas
+
 | # | Texto | Imagen |
 |---|---|---|
-| 1 | Nuestro anuncio pasó de 0,47 % a 0,25 % de clics. / Mismo vídeo. | Manómetro de latón con la aguja baja |
-| 2 | Un anuncio también se cansa. / La gente ya lo ha visto demasiadas veces. | Tulipán marchito |
-| 3 | No lo cambies todo. / Cambia el gancho y deja el resto. | Cinco señuelos, uno naranja |
-| 4 | Y míralo por ventas, no por clics. / Un gancho que trae curiosos no arregla nada. | Balanza: una ficha naranja pesa más que un montón |
-| 5 | ¿Cada cuánto renováis vuestros anuncios? | Tulipán fresco, fondo oscuro |
+| 1 | El porcentaje de clics de nuestro anuncio bajó. / Todavía no sabemos por qué. | Manómetro de latón con la aguja baja |
+| 2 | «Se ha cansado» es una hipótesis. / Antes: frecuencia, público y ubicaciones. | Tulipán marchito |
+| 3 | Cambiar el gancho es una prueba. / Solo el gancho. El resto, igual. | Cinco señuelos, uno naranja |
+| 4 | Y se lee por ventas, no por clics. / Un gancho que trae curiosos no arregla nada. | Balanza: una ficha naranja pesa más que un montón |
+| 5 | ¿Qué miráis primero cuando un anuncio baja? | Tulipán fresco, fondo oscuro |
 
 ## Texto para LinkedIn
-> Nuestro anuncio de vídeo pasó de un 0,47 % a un 0,25 % de clics. El mismo vídeo.
+
+> El porcentaje de clics de nuestro anuncio de vídeo bajó. Todavía no sabemos por qué.
 >
-> Un anuncio también se cansa: la gente que lo ve ya lo ha visto demasiadas veces.
+> Lo fácil es decir que el anuncio se ha cansado. Es una hipótesis. Antes miramos la frecuencia, si cambió el público y en qué ubicaciones se muestra.
 >
-> Lo que estamos probando: no cambiarlo todo. Mismo cuerpo del anuncio y otro gancho al principio, para saber qué parte se había gastado.
+> Lo que estamos probando: el mismo anuncio con otro gancho al principio. Solo el gancho, para saber si el cambio viene de ahí.
 >
-> Y lo miramos por las ventas que trae, no por los clics. Un gancho nuevo que trae curiosos no arregla nada.
+> Y lo leeremos por la calidad comercial de lo que traiga, no solo por los clics. Un gancho que trae curiosos no arregla nada.
 >
-> ¿Cada cuánto renováis vuestros anuncios?
+> ¿Qué miráis primero cuando un anuncio baja?
 
 ## Instagram
-> Nuestro anuncio pasó de 0,47 % a 0,25 % de clics. Mismo vídeo. Un anuncio también se cansa. ¿Cada cuánto renováis los vuestros?
+
+> El porcentaje de clics de nuestro anuncio bajó. Todavía no sabemos por qué. Cambiar el gancho es una prueba, y se lee por ventas.

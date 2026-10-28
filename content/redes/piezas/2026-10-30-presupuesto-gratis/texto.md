@@ -1,25 +1,26 @@
 # Pieza 2 · Vie 30-oct · «Presupuesto gratis y sin compromiso»
 
 > Plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), pieza 2. **Sin publicar.** Necesita el ok de Maikel.
+> **v2 (28-oct):** revisión editorial del 27-oct aplicada. Se mantiene el tema y cambia la explicación: pedir varios presupuestos es normal y «gratis» no demuestra que el contacto sea malo. El anuncio tiene que decir qué proyecto, en qué zona y por qué tú. Fuera el precio de partida (solo si es real) y el plazo de un mes.
 
 ## Ficha
 
 - **Pilar:** opinión, sobre un error de captación.
 - **Sector:** reformas.
-- **Dolor:** llaman muchos, pero casi todos para comparar precios.
-- **Tesis:** lo que promete el anuncio decide quién llama. «Gratis y sin compromiso» atrae a quien compara. Se puede probar a poner un precio de partida y medir obras, no llamadas.
-- **Datos:** ninguno. La prueba se plantea como experimento, sin prometer resultado.
-- **Estilo:** el mismo de la pieza 1, con un bodegón de estudio por lámina (Higgsfield, GPT Image 2.5), de 5 a 15 palabras y sin personas. Originales en `foto-1.jpg` a `foto-5.jpg` y montaje en `carrusel.html`.
+- **Dolor:** llaman muchos para comparar y el anuncio no ayuda a entender por qué elegirte.
+- **Tesis:** comparar presupuestos es normal. Lo que puedes cambiar es lo que el anuncio cuenta antes del formulario: qué proyecto, en qué zona, qué incluye el primer paso y qué te diferencia. Y medir por obras cerradas, dándoles el tiempo que tarda una obra en decidirse.
+- **Datos:** ninguno.
+- **Estilo:** bodegones de Higgsfield (GPT Image 2.5), sin personas. Originales en `foto-1.jpg` a `foto-5.jpg` y montaje en `carrusel.html`.
 - **Riesgo:** sin riesgo.
 
 ## Las 5 láminas
 
 | # | Texto | Imagen |
 |---|---|---|
-| 1 | «Presupuesto gratis y sin compromiso.» / Y luego nadie se compromete. | Pila de presupuestos con pinzas |
-| 2 | Lo que prometes decide quién te llama. / «Gratis» atrae a quien compara precios. | Imán con chatarra de todo tipo pegada |
-| 3 | Muchos piden precio. / Pocos van a reformar ya. | Cinco cascos de obra, uno naranja |
-| 4 | Prueba a poner un precio de partida. / Un mes. Cuenta obras, no llamadas. | Casita de madera con una etiqueta de precio en blanco |
+| 1 | «Presupuesto gratis y sin compromiso.» / ¿Y por qué te elegirían a ti? | Pila de presupuestos con pinzas |
+| 2 | Comparar presupuestos es normal. / El anuncio tiene que decir por qué tú. | Imán con chatarra de todo tipo pegada |
+| 3 | Di qué proyecto haces y dónde. / Baño, cocina o integral. Y en qué zona. | Cinco cascos de obra, uno naranja |
+| 4 | Cuenta qué incluye la primera visita. / Y mide obras cerradas. Dales su tiempo. | Casita de madera con una etiqueta en blanco |
 | 5 | ¿Qué promete vuestro anuncio? / ¿Y a quién atrae eso? | Un solo presupuesto con pinza naranja, fondo oscuro |
 
 ## Canales
@@ -31,17 +32,17 @@
 
 > «Presupuesto gratis y sin compromiso.»
 >
-> Seguro que lo has visto en algún anuncio de reformas. Y luego nos sorprende que nadie se comprometa.
+> Pedir varios presupuestos es una forma normal de comprar una reforma. El problema aparece cuando el anuncio no ayuda a entender para qué proyecto sois una buena opción.
 >
-> Lo que prometes decide quién te llama. «Gratis» atrae a mucha gente que solo quiere comparar precios.
+> Antes del formulario, yo contaría tres cosas: qué proyecto hacéis y en qué zona, qué incluye la primera visita y qué os diferencia. Un precio de partida, solo si es real y se parece a lo que pagan vuestros clientes.
 >
-> Una prueba sencilla: un mes con un precio de partida en el anuncio. Probablemente llamen menos. Lo que importa es si salen más obras, así que cuenta obras, no llamadas.
+> Después, mediría por obras cerradas y no por llamadas. Y con paciencia: una reforma puede tardar meses en decidirse.
 >
 > ¿Qué promete vuestro anuncio? ¿Y a quién atrae eso?
 
 ## Para Instagram
 
-> «Presupuesto gratis y sin compromiso.» Y luego nadie se compromete. ¿Qué promete vuestro anuncio?
+> «Presupuesto gratis y sin compromiso.» Comparar es normal. ¿Tu anuncio dice por qué elegirte a ti?
 
 ## Pendiente de Maikel
 

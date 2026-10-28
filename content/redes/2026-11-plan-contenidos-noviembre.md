@@ -3,11 +3,24 @@
 > Encargo del Chief of Staff (27-oct), para la revisión conjunta del jueves 29 a las 11:00. Lo desarrolla el plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), y aquí va solo lo que se decide.
 > [C] = confirmado · [E] = estimado. **No se publica nada sin el ok de Maikel.**
 
-> **Cambio de Maikel (27-oct, tarde):**
-> - **Ritmo:** cada semana, 3 carruseles (lunes, miércoles y viernes, en LinkedIn e Instagram), 2 vídeos (martes y jueves) y una newsletter semanal (jueves).
-> - **Grabación:** tarde fija los jueves de 17:00 a 18:30, con micro. Se graba lo de la semana siguiente y el montaje lo hace Contenido.
-> - **Semanas 45 y 46:** ya están creadas y diseñadas, una ficha por pieza para comentar, en Notion › Máquina de Contenido › «Contenido noviembre · semanas 45-46 (para revisar)»: https://app.notion.com/p/b991e574698a484ab2a47bc1fe713d7a
-> - **Lo que sustituye:** donde este documento dice «vídeos de Maikel los miércoles a las 12:30» o «newsletter quincenal», manda lo de esta nota.
+> **Ritmo vigente (28-oct).** Lo fija el Chief of Staff con delegación de Maikel, de acuerdo con el Documento Madre: credibilidad antes que frecuencia, y piezas que salen de trabajo real sin quitar tiempo a ventas ni a entregas.
+> - **Semanas 45 y 46:** se quedan como están, con las correcciones de la revisión editorial del 27-oct. El carrusel 3 y los vídeos V2 y V4 pasan a reserva. Quedan 7 carruseles, 2 vídeos (V1 y V3) y 2 newsletters.
+> - **Desde la semana 47 (16-nov), cada semana:**
+>   - 2 carruseles (lunes y jueves);
+>   - 1 vídeo (martes);
+>   - la newsletter del jueves.
+>
+>   Cada pieza sale de un caso, un dato o un aprendizaje real, con la fuente en la ficha.
+> - **Tiempo de Maikel:** unas 2 horas a la semana como máximo. Revisión los jueves de 13:00 a 14:00. Grabación los jueves de 17:00 a 18:00.
+> - **El 30-nov:** una línea con lo que ha funcionado (alcance, respuestas y reuniones) para ajustar el ritmo.
+> - **Las fichas:** en Notion, base «📝 Piezas de noviembre · para revisar» (https://app.notion.com/p/e7227459f29a4f9c98053c86142c937c), con una ficha por pieza para comentar.
+> - **Qué manda:** donde este documento diga otra cosa sobre ritmo, día de grabación o newsletter, manda esta nota.
+> - **Revisión editorial del 27-oct** (Notion, «Revisión para Contenido · Noviembre 2026»): aplicada en todas las fichas el 28-oct. Sus criterios valen para todo el mes:
+>   - una sola tesis por pieza;
+>   - separar ejemplo, hipótesis y hecho;
+>   - nada de cifras sin periodo ni denominador;
+>   - nada de reglas universales;
+>   - una sola llamada a la acción.
 
 ## 1. El objetivo del mes
 
