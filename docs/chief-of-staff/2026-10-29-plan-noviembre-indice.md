@@ -40,4 +40,5 @@ Una sola página que reúne cada parte del plan. [C] es un dato confirmado; [E],
 - **Decisiones:** las 5 de arriba, tal como venían recomendadas.
 - **Objetivo nuevo:** **al menos 2 clientes nuevos en noviembre.** Hay que meter caña al contenido, al ABM, al outbound y a la captación.
 - **Inversión:** Maikel está dispuesto a invertir más. Comprar buzones nuevos y contratar una herramienta un mes, si hace falta.
+- **HeyReach:** no se cancela; LinkedIn vuelve en noviembre (62 €/mes). Se revisa el 30-nov: se mantiene si trae al menos 1 reunión celebrada con encaje.
 - **Siguiente paso:** Paid recalcula el embudo para 2 clientes con Outbound y Growth: qué falta, cuánto cuesta y desde cuándo se nota. Lo trae al ritual del viernes 30 a las 9:00, donde Maikel confirma los pagos.
