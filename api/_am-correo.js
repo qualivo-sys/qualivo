@@ -43,6 +43,30 @@ function firmaValida(leadId, accion, f) {
 }
 function waMe(telefono, texto) { return 'https://wa.me/' + String(telefono).replace(/\D/g, '') + '?text=' + encodeURIComponent(texto); }
 
+// ---------- Visita: recordatorio W8 ----------
+// A la apertura (9:00) del último día de trabajo de Sonia antes de la cita: cita el lunes → viernes,
+// cita tras un festivo → el día laborable anterior. Si ese momento ya pasó cuando se agenda, no hay
+// recordatorio: la confirmación (W7) sale en el momento y basta.
+const H = require('./_horario.js');
+function vispera(citaMs, desdeMs) {
+  const dia = H.madrid(citaMs).fecha;
+  const [y, mo, d] = dia.split('-').map(Number);
+  for (let k = 1; k <= 7; k++) {
+    const f = new Date(Date.UTC(y, mo - 1, d - k)).toISOString().slice(0, 10);
+    const nueve = H.msDeMadrid(f, 9 * 60);
+    const m = madrid(new Date(nueve));
+    if (m.dia > 5 || H.esFestivo(nueve)) continue;
+    return nueve >= desdeMs ? nueve : null;
+  }
+  return null;
+}
+// «jueves 5 a las 10:00» en hora de Madrid
+function citaTexto(cita) {
+  const d = new Date(cita);
+  const dia = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric' }).format(d);
+  return dia + ' a las ' + new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(d);
+}
+
 // ---------- Envío ----------
 async function enviar(para, asunto, html, opciones) {
   const key = process.env.RESEND_API_KEY;
@@ -104,15 +128,18 @@ const WA = {
   W3: function (L) { return 'Hola ' + L.nombre + ', soy Sonia, de Al Milímetro. Gracias por contarme tu proyecto. Para saber si te puedo ayudar bien, ¿me cuentas en una frase qué te gustaría cambiar? Si me mandas 2 o 3 fotos, mejor.'; },
   W5: function (L) { return L.nombre + ', ¿pudiste ver mi mensaje de ayer? Cuando te venga bien, lo hablamos en 10 minutos y, si encaja, voy a ver tu casa esta semana. Sin compromiso.'; },
   W6: function (L) { return '¿Sigues con la idea de reformar en los próximos meses, ' + L.nombre + '? Si ahora no es el momento, dímelo sin problema y te escribo más adelante.'; },
+  // W8 dice el día y no «mañana»: con cita en lunes, el recordatorio sale el viernes
+  W7: function (L) { return '¡Perfecto, ' + L.nombre + '! Nos vemos el ' + citaTexto(L.cita) + ' en ' + (L.mun ? 'tu casa de ' + L.mun : 'tu casa') + '. Si puedes, ten a mano planos o fotos de cómo está ahora y alguna idea de lo que te gusta. Cualquier cambio, me escribes por aquí.'; },
+  W8: function (L) { return 'Hola ' + L.nombre + ', te recuerdo que el ' + citaTexto(L.cita) + ' paso a ver tu casa. ¿Sigue en pie?'; },
   W9: function (L) { return L.nombre + ', ¿has podido ver el presupuesto? Si quieres, lo repasamos en 10 minutos y te resuelvo cualquier duda de partidas o plazos.'; },
   W10: function (L) { return 'Si estás comparando con otros presupuestos, ' + L.nombre + ', te paso las 3 cosas que yo miraría: que venga por partidas, que tenga fechas y qué pasa si algo cambia en obra. Así comparas igual con igual.'; },
   W11: function (L) { return '¿Hay algo del presupuesto (el plazo, alguna partida, la forma de pago) que podamos ajustar para que te encaje, ' + L.nombre + '?'; },
   W12: function (L) { return L.nombre + ', no te escribo más para no agobiarte. Si más adelante retomas la idea, aquí estoy.'; }
 };
-const WA_TITULO = { W5: 'Día 1 sin respuesta', W6: 'Día 3 sin respuesta', W9: 'Presupuesto + 2 días', W10: 'Presupuesto + 7 días', W11: 'Presupuesto + 14 días', W12: 'Presupuesto + 21 días' };
+const WA_TITULO = { W7: 'Confirmar la visita', W8: 'Recordatorio de la visita', W5: 'Día 1 sin respuesta', W6: 'Día 3 sin respuesta', W9: 'Presupuesto + 2 días', W10: 'Presupuesto + 7 días', W11: 'Presupuesto + 14 días', W12: 'Presupuesto + 21 días' };
 
 // ---------- Avisos a Sonia ----------
-const ACCIONES = [['contesto', 'Ha contestado'], ['visita', 'Visita agendada'], ['presupuesto', 'Presupuesto enviado'], ['firmado', 'Firmado'], ['perdido', 'Perdido']];
+const ACCIONES = [['contesto', 'Ha contestado'], ['visita', 'Visita agendada'], ['presupuesto', 'Presupuesto enviado'], ['firmado', 'Firmado'], ['perdido', 'Perdido'], ['parar', 'Parar todo']];
 const boton = function (href, txt, fondo) { return '<a href="' + esc(href) + '" style="display:inline-block;margin:4px 6px 4px 0;padding:10px 14px;border-radius:10px;border:2px solid #252525;background:' + (fondo || '#FBFAF3') + ';color:#252525;font:700 14px Arial,sans-serif;text-decoration:none">' + esc(txt) + '</a>'; };
 
 function avisoNuevo(L) {
@@ -135,10 +162,10 @@ function resumen(d) {
   const bloques = [];
   bloques.push(p('Buenos días, Sonia. En las últimas 24 horas entraron <b>' + d.ayer.total + '</b> contactos (' + d.ayer.A + ' A, ' + d.ayer.B + ' B, ' + d.ayer.C + ' C).'));
   if (d.sinContactar.length) bloques.push('<h3 style="font-size:18px">Contactos A sin contactar</h3><ul>' + d.sinContactar.map(function (L) { return linea(L, '<br>' + boton(waMe(L.telefono, WA.W1(L)), 'WhatsApp') + boton(enlaceAccion(L.id, 'contesto'), 'Ha contestado')); }).join('') + '</ul>');
-  if (d.whatsapp.length) bloques.push('<h3 style="font-size:18px">WhatsApp de seguimiento para hoy</h3><ul>' + d.whatsapp.map(function (x) { return linea(x.L, ' · ' + esc(WA_TITULO[x.paso]) + '<br>' + boton(waMe(x.L.telefono, WA[x.paso](x.L)), 'Abrir WhatsApp con el mensaje', '#FDC023') + boton(enlaceAccion(x.L.id, 'contesto'), 'Ha contestado')); }).join('') + '</ul>');
+  if (d.whatsapp.length) bloques.push('<h3 style="font-size:18px">WhatsApp de seguimiento para hoy</h3><ul>' + d.whatsapp.map(function (x) { return linea(x.L, ' · ' + esc(WA_TITULO[x.paso]) + '<br>' + boton(waMe(x.L.telefono, WA[x.paso](x.L)), 'Abrir WhatsApp con el mensaje', '#FDC023') + boton(enlaceAccion(x.L.id, 'contesto'), 'Ha contestado') + (x.paso === 'W6' ? boton(enlaceAccion(x.L.id, 'mas_adelante'), 'Dice «más adelante»') : '')); }).join('') + '</ul>');
   if (!d.sinContactar.length && !d.whatsapp.length) bloques.push(p('Hoy no tienes seguimientos pendientes.'));
   return { asunto: (d.prueba ? '[PRUEBA] ' : '') + 'Tu día en Al Milímetro · ' + d.fecha, html: marco(bloques.join(''), 'Resumen automático de lunes a viernes a las 9:00.') };
 }
 
-module.exports = { madrid: madrid, enHorario: enHorario, cuandoEscribo: cuandoEscribo, enlaceAccion: enlaceAccion, firmaValida: firmaValida, waMe: waMe,
+module.exports = { vispera: vispera, citaTexto: citaTexto, madrid: madrid, enHorario: enHorario, cuandoEscribo: cuandoEscribo, enlaceAccion: enlaceAccion, firmaValida: firmaValida, waMe: waMe,
   enviar: enviar, CORREOS: CORREOS, WA: WA, WA_TITULO: WA_TITULO, avisoNuevo: avisoNuevo, resumen: resumen, marco: marco, esc: esc };

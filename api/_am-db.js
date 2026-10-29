@@ -27,7 +27,9 @@ const ESQUEMA = [
      UNIQUE (lead_id, paso))`,
   `CREATE TABLE IF NOT EXISTS am_eventos (
      id bigserial PRIMARY KEY, lead_id uuid, t timestamptz NOT NULL DEFAULT now(), tipo text NOT NULL, detalle jsonb)`,
-  `CREATE INDEX IF NOT EXISTS am_envios_pend ON am_envios (estado, programado)`
+  `CREATE INDEX IF NOT EXISTS am_envios_pend ON am_envios (estado, programado)`,
+  // Fecha y hora de la visita técnica (botón «Visita agendada»): de ella sale el recordatorio W8
+  `ALTER TABLE am_leads ADD COLUMN IF NOT EXISTS cita timestamptz`
 ];
 
 let listo = null;

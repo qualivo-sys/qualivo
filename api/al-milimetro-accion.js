@@ -16,6 +16,8 @@ const ACCIONES = {
   contesto: { txt: 'Marcar que ha contestado', hecho: 'Hecho: ya no le saldrán los recordatorios de «sin respuesta».' },
   visita: { txt: 'Marcar visita técnica agendada', hecho: 'Hecho: pasa a «Visita técnica» y se paran los seguimientos de antes de la visita.' },
   presupuesto: { txt: 'Marcar presupuesto enviado', hecho: 'Hecho: tendrás los recordatorios de WhatsApp a los 2, 7, 14 y 21 días en tu resumen diario.' },
+  mas_adelante: { txt: 'Marcar «más adelante»', hecho: 'Hecho: ya no le saldrán WhatsApp de seguimiento; sigue recibiendo los correos.' },
+  parar: { txt: 'Parar todo lo automático con este contacto', hecho: 'Hecho: no le saldrá nada más, ni correos ni WhatsApp.' },
   firmado: { txt: 'Marcar obra firmada', hecho: '¡Enhorabuena! Pasa a «Firmado» y se para todo lo automático.' },
   perdido: { txt: 'Marcar como perdido', hecho: 'Hecho: pasa a «Perdido» y se para todo lo automático.' },
   baja: { txt: 'No quiero recibir más correos', hecho: 'Hecho. No vas a recibir más correos de Al Milímetro.' }
@@ -43,7 +45,8 @@ module.exports = async function handler(req, res) {
 
   if (req.method !== 'POST') {
     const quien = a === 'baja' ? '' : '<p>' + C.esc(L.nombre) + ' · ' + C.esc(L.tipoLargo) + (L.mun ? ' en ' + C.esc(L.mun) : '') + ' · ahora en «' + C.esc(L.etapa) + '».</p>';
-    const extra = a === 'perdido' ? '<p><label for="motivo">Motivo (opcional)</label><br><input id="motivo" name="motivo" style="width:100%;padding:10px;font:16px Arial;border:2px solid #252525;border-radius:10px"></p>' : '';
+    const extra = a === 'visita' ? '<p><label for="cita">Fecha y hora de la visita (para el recordatorio por WhatsApp)</label><br><input id="cita" name="cita" type="datetime-local" style="width:100%;padding:10px;font:16px Arial;border:2px solid #252525;border-radius:10px"></p>'
+      : a === 'perdido' ? '<p><label for="motivo">Motivo (opcional)</label><br><input id="motivo" name="motivo" style="width:100%;padding:10px;font:16px Arial;border:2px solid #252525;border-radius:10px"></p>' : '';
     return pagina(res, 200, ACCIONES[a].txt, quien + '<form method="post">' + extra +
       '<button type="submit" style="padding:14px 22px;border:2px solid #252525;border-radius:12px;background:#FDC023;font:700 16px Arial,sans-serif;box-shadow:4px 4px 0 #252525;cursor:pointer">' + C.esc(ACCIONES[a].txt) + '</button></form>');
   }
@@ -51,7 +54,8 @@ module.exports = async function handler(req, res) {
   const cuerpo = typeof req.body === 'string' ? Object.fromEntries(new URLSearchParams(req.body)) : (req.body || {});
   const ahora = new Date().toISOString();
   const cancelar = function (pasos) { return DB.sql("UPDATE am_envios SET estado = 'cancelado', hecho = now(), detalle = $2 WHERE lead_id = $1 AND estado = 'pendiente' AND paso = ANY($3)", [id, 'parada: ' + a, pasos]); };
-  const ANTES = ['W5', 'W6', 'E2', 'E3', 'E4'], DESPUES = ['W9', 'W10', 'W11', 'W12'];
+  const ANTES = ['W5', 'W6', 'E2', 'E3', 'E4'], DESPUES = ['W9', 'W10', 'W11', 'W12'], TODO = ANTES.concat(DESPUES, ['W8']);
+  let tras = '';
   if (a === 'baja') {
     await DB.sql('UPDATE am_leads SET baja = true WHERE id = $1', [id]);
     await DB.sql("UPDATE am_envios SET estado = 'cancelado', hecho = now(), detalle = 'baja' WHERE lead_id = $1 AND estado = 'pendiente' AND canal = 'email'", [id]);
@@ -61,6 +65,28 @@ module.exports = async function handler(req, res) {
   } else if (a === 'visita') {
     await DB.sql("UPDATE am_leads SET etapa = 'visita', etapa_cambio = now(), contesto = true WHERE id = $1", [id]);
     await cancelar(ANTES);
+    // Con fecha y hora: confirmación W7 aquí mismo y recordatorio W8 al resumen del último día de trabajo antes
+    const cita = String(cuerpo.cita || '');
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(cita)) {
+      const H = require('./_horario.js');
+      const [fecha, hm] = cita.split('T'), [hh, mm] = hm.split(':').map(Number);
+      const citaMs = H.msDeMadrid(fecha, hh * 60 + mm);
+      await DB.sql('UPDATE am_leads SET cita = $2 WHERE id = $1', [id, new Date(citaMs).toISOString()]);
+      L.cita = new Date(citaMs).toISOString();
+      await DB.sql("INSERT INTO am_envios (lead_id, paso, canal, programado, estado, hecho) VALUES ($1,'W7','wa',now(),'avisado',now()) ON CONFLICT (lead_id, paso) DO UPDATE SET programado = now(), estado = 'avisado', hecho = now()", [id]);
+      const w8 = C.vispera(citaMs, Date.now());
+      if (w8) await DB.sql("INSERT INTO am_envios (lead_id, paso, canal, programado) VALUES ($1,'W8','wa',$2) ON CONFLICT (lead_id, paso) DO UPDATE SET programado = EXCLUDED.programado, estado = 'pendiente', hecho = NULL, detalle = NULL", [id, new Date(w8).toISOString()]);
+      else await cancelar(['W8']);
+      tras = '<p>Confírmasela ahora por WhatsApp:</p><p><a href="' + C.esc(C.waMe(L.telefono, C.WA.W7(L))) + '" style="display:inline-block;padding:12px 18px;border:2px solid #252525;border-radius:12px;background:#FDC023;color:#252525;font:700 16px Arial,sans-serif;text-decoration:none">Abrir WhatsApp con la confirmación</a></p>' +
+        (w8 ? '<p>El recordatorio te saldrá en el resumen del ' + C.esc(new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric' }).format(new Date(w8))) + '.</p>' : '<p>La visita es demasiado pronto para un recordatorio aparte.</p>');
+    }
+  } else if (a === 'mas_adelante') {
+    // Pasa a C: fuera los WhatsApp de seguimiento; los correos siguen (E4 pregunta justo eso)
+    await DB.sql("UPDATE am_leads SET clase = 'C' WHERE id = $1", [id]);
+    await cancelar(['W5', 'W6']);
+  } else if (a === 'parar') {
+    await DB.sql("UPDATE am_leads SET etapa = 'parado', etapa_cambio = now() WHERE id = $1", [id]);
+    await DB.sql("UPDATE am_envios SET estado = 'cancelado', hecho = now(), detalle = 'parada: parar' WHERE lead_id = $1 AND estado = 'pendiente'", [id]);
   } else if (a === 'presupuesto') {
     await DB.sql("UPDATE am_leads SET etapa = 'presupuesto', etapa_cambio = now(), contesto = true WHERE id = $1", [id]);
     await cancelar(ANTES);
@@ -69,8 +95,8 @@ module.exports = async function handler(req, res) {
     }
   } else if (a === 'firmado' || a === 'perdido') {
     await DB.sql('UPDATE am_leads SET etapa = $2, etapa_cambio = now(), motivo_perdido = $3 WHERE id = $1', [id, a, a === 'perdido' ? String(cuerpo.motivo || '').slice(0, 200) || null : null]);
-    await cancelar(ANTES.concat(DESPUES));
+    await cancelar(TODO);
   }
   await DB.evento(id, 'accion', { accion: a, t: ahora });
-  return pagina(res, 200, ACCIONES[a].hecho.split(':')[0].replace(/\.$/, ''), '<p>' + C.esc(ACCIONES[a].hecho) + '</p>');
+  return pagina(res, 200, ACCIONES[a].hecho.split(':')[0].replace(/\.$/, ''), '<p>' + C.esc(ACCIONES[a].hecho) + '</p>' + tras);
 };

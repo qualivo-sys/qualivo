@@ -155,6 +155,8 @@ const correos = [];
     await llamar(accion, { method: 'POST', query: { l: idA, a: 'presupuesto', f: f }, body: '' });
     assert.equal((await q("SELECT count(*)::int n FROM am_envios WHERE lead_id=$1 AND paso IN ('W9','W10','W11','W12') AND estado='pendiente'", [idA]))[0].n, 4);
     await pg.query("UPDATE am_envios SET programado = now() - interval '1 hour' WHERE paso = 'W9'");
+    // El cron simula el 16-nov: W10-W12 se llevan lejos para que solo venza W9 (si vencieran varios, saldría solo el último)
+    await pg.query("UPDATE am_envios SET programado = now() + interval '60 days' WHERE paso IN ('W10','W11','W12')");
     correos.length = 0;
     const r = await cron.vuelta(new Date('2026-11-16T08:05:00Z'));   // lunes 16-nov, 9:05 en Madrid
     assert.equal(r.resumen, true);
@@ -192,6 +194,69 @@ const correos = [];
     const laura = cs.find(function (c) { return c.n === 'Laura'; });
     assert.equal(laura.fin, 'ganado'); assert.equal(laura.origen, 'pared'); assert.equal(laura.clase, 'A');
     assert.ok(JSON.stringify(r.json).indexOf('600000000') < 0 && JSON.stringify(r.json).indexOf('@qualivo.io') < 0);
+  });
+
+  // ---------- Visita con fecha, «más adelante», parar y caducidad (Automatización, 29-oct) ----------
+  const nuevo = async function (nombre, tel, extra) {
+    await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO ' + nombre, tel: tel, email: tel + '@qualivo.io' }, extra || {}) });
+    return (await q('SELECT id FROM am_leads WHERE nombre = $1', ['PRUEBA QUALIVO ' + nombre]))[0].id;
+  };
+  const pulsar = function (id, a, body) {
+    const f = new URL(C.enlaceAccion(id, a)).searchParams.get('f');
+    return llamar(accion, { method: 'POST', query: { l: id, a: a, f: f }, body: body || '' });
+  };
+  // Un lunes al menos 7 días por delante, a las 10:00 de Madrid
+  const H = require(API + '_horario.js');
+  let lunes = Date.now() + 7 * 864e5; while (H.madrid(lunes).dia !== 1) lunes += 864e5;
+  const fLunes = H.madrid(lunes).fecha;
+  await t('visita con fecha y hora: W7 en la confirmación y W8 al resumen del viernes de antes', async function () {
+    const id = await nuevo('Pedro', '633333333');
+    const g = await llamar(accion, { query: { l: id, a: 'visita', f: new URL(C.enlaceAccion(id, 'visita')).searchParams.get('f') } });
+    assert.ok(g.body.indexOf('type="datetime-local"') > -1);
+    const r = await pulsar(id, 'visita', 'cita=' + fLunes + 'T10%3A00');
+    assert.equal(r.status, 200);
+    assert.ok(decodeURIComponent(r.body).indexOf('Nos vemos el lunes') > -1 && r.body.indexOf('https://wa.me/34633333333?text=') > -1, r.body);
+    const env = await q("SELECT paso, estado, programado FROM am_envios WHERE lead_id=$1 AND paso IN ('W7','W8') ORDER BY paso", [id]);
+    assert.deepEqual(env.map(function (e) { return e.paso + ':' + e.estado; }), ['W7:avisado', 'W8:pendiente']);
+    const w8 = H.madrid(env[1].programado.getTime());
+    assert.equal(w8.dia, 5); assert.equal(w8.hora, 9);                       // el viernes anterior, a las 9:00
+    correos.length = 0;
+    await cron.vuelta(new Date(env[1].programado.getTime() + 5 * 60e3));      // resumen de ese viernes
+    const res = correos.find(function (c) { return /Tu día en Al Milímetro/.test(c.subject); });
+    assert.ok(res && decodeURIComponent(res.html).indexOf('te recuerdo que el lunes') > -1, 'falta W8 en el resumen');
+  });
+  await t('visita sin fecha: como antes, sin W8', async function () {
+    const id = await nuevo('Sin Fecha', '644444444');
+    await pulsar(id, 'visita', '');
+    assert.equal((await q("SELECT count(*)::int n FROM am_envios WHERE lead_id=$1 AND paso IN ('W7','W8')", [id]))[0].n, 0);
+  });
+  await t('«más adelante»: pasa a C, fuera W5 y W6, siguen los correos', async function () {
+    const id = await nuevo('Marta', '655555555');
+    await pulsar(id, 'mas_adelante');
+    assert.equal((await q('SELECT clase FROM am_leads WHERE id=$1', [id]))[0].clase, 'C');
+    const env = await q("SELECT paso, estado FROM am_envios WHERE lead_id=$1 AND paso IN ('W5','W6','E2','E3','E4') ORDER BY paso", [id]);
+    assert.deepEqual(env.map(function (e) { return e.paso + ':' + e.estado; }), ['E2:pendiente', 'E3:pendiente', 'E4:pendiente', 'W5:cancelado', 'W6:cancelado']);
+    await pg.query("UPDATE am_envios SET programado = now() - interval '1 hour' WHERE lead_id = $1 AND paso = 'E2'", [id]);
+    correos.length = 0;
+    await cron.vuelta(martes11);
+    assert.ok(correos.some(function (c) { return c.to === '655555555@qualivo.io'; }), 'E2 tiene que salir');
+  });
+  await t('parar: etapa «parado» y se cancela todo lo pendiente', async function () {
+    const id = await nuevo('Parado', '666666666');
+    await pulsar(id, 'parar');
+    assert.equal((await q('SELECT etapa FROM am_leads WHERE id=$1', [id]))[0].etapa, 'parado');
+    assert.equal((await q("SELECT count(*)::int n FROM am_envios WHERE lead_id=$1 AND estado='pendiente'", [id]))[0].n, 0);
+  });
+  await t('caducidad: con E2 y E3 vencidos a la vez sale solo E3 (no se mide en horas: lo del fin de semana sale el lunes)', async function () {
+    const id = await nuevo('Rosa', '677777777');
+    await pg.query("UPDATE am_envios SET programado = now() - interval '3 days' WHERE lead_id = $1 AND paso = 'E2'", [id]);
+    await pg.query("UPDATE am_envios SET programado = now() - interval '1 hour' WHERE lead_id = $1 AND paso = 'E3'", [id]);
+    correos.length = 0;
+    await cron.vuelta(martes11);
+    const e = await q("SELECT paso, estado, detalle FROM am_envios WHERE lead_id=$1 AND paso IN ('E2','E3') ORDER BY paso", [id]);
+    assert.equal(e[0].estado, 'cancelado'); assert.equal(e[0].detalle, 'parada: caducado: lo sustituye E3');
+    assert.equal(e[1].estado, 'enviado');
+    assert.equal(correos.filter(function (c) { return c.to === '677777777@qualivo.io'; }).length, 1);
   });
 
   console.log(ok + ' pruebas en verde');
