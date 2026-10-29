@@ -1,6 +1,8 @@
 # Infoproducto · Experimento de validación (2 al 29-nov)
 
-**Para la sesión del viernes 30-oct, 12:00-14:00.** Resultado esperado de la sesión: avatar, promesa, hipótesis, experimento con su coste y criterio para seguir o parar.
+**Para la sesión del viernes 30-oct, 14:00-16:00** (movida desde las 12:00).
+**Resultado esperado de la sesión:** avatar, promesa, hipótesis, experimento con su coste y criterio para seguir o parar.
+**Contenido:** competidores, posicionamiento, promesa, escalera y 5 decisiones.
 **Encuadre aprobado por Maikel (28-oct, vía Chief of Staff):** la prioridad es consolidar los servicios. El infoproducto es un **experimento**, no un proyecto:
 - como mucho **2 h a la semana de Maikel** y **150 €** hasta el 30-nov;
 - **no se construye nada** (curso, plataforma ni módulos);
@@ -32,6 +34,40 @@
 - **Se promete lo que el sistema hace, no ingresos.** Cumple la Ley General de Publicidad y la política de Meta [C, `01` y `03`].
 - **Solo componentes probados** [C, `05` apartado 1.1]: primera respuesta por WhatsApp, preguntas de encaje y puntuación, seguimiento 2/5/10, recordatorio que pide un «sí», panel comercial y atribución. **Sin agentes de voz.**
 - **Precio que se pone a prueba:** 1.200-1.800 € + IVA, máximo 12 plazas, con inicio no antes de enero [H].
+
+## 2 bis · Competidores del avatar y posicionamiento
+
+**Con quién compara una pequeña agencia** (detalle y fuentes en `01` y `05`):
+
+| Alternativa | Qué ofrece | Precio | Qué le falta a la agencia |
+|---|---|---|---|
+| [KERS Agency](https://kersagency.es/) (España) | Comunidad de GHL con plantillas importables | 29-39 €/mes [C] | La herramienta, sin oferta, cualificación ni cierre |
+| [GoHighLevel Español](https://gohighlevel-espanol.com/) · [AI Native Agency Founders](https://www.skool.com/tu-negocio-ia-en-60-minutos/about) | Plantillas de GHL y procedimientos para agencias | 39-497 $/mes [C] | Lo más parecido, pero sin pruebas publicadas y con poca marca |
+| Comunidades de Skool en español (Imperio Agéntico, IA Masters, Playground) | Directos, n8n, agentes, «cobra por hacerlo» | 10-77 $/mes [C] | Pensadas para principiantes. Persiguen la herramienta de moda |
+| [AAA Accelerator](https://www.skool.com/learn-ai/about) (Liam Ottley, en inglés) | Programa para montar una agencia de IA | 5.000-7.150 $ según terceros [H] | En inglés. Quejas por reembolsos y porque a los principiantes les cuesta vender [C/H] |
+| Programas de partners de GHL, HubSpot o Clientify | Formación y certificación de la herramienta | Gratis | El producto, no el recorrido completo |
+| No hacer nada, o YouTube | — | 0 € | Tiempo y prueba y error |
+
+**Posicionamiento (una frase):**
+> Para agencias que ya traen leads a sus clientes: **el sistema de lo que pasa después del lead, sacado de una agencia que lo opera cada día, para implantarlo en tu primer cliente y verificar que funciona.**
+
+**En qué se diferencia [H]:**
+1. **Del recorrido entero**, no de una herramienta suelta.
+2. **Sale de un sistema en producción**, con sus fallos incluidos, no de un laboratorio.
+3. **Se verifica en un cliente real** de la agencia.
+4. **Cumple la normativa española**: LSSI, RGPD y WhatsApp oficial.
+5. **No promete ingresos.**
+
+## 2 ter · Escalera provisional (no se construye nada hasta el 30-nov)
+
+Solo se pone a prueba el **escalón 2**. Los demás son hipótesis para decidir después.
+
+| Escalón | Qué sería | Precio [H] | En el experimento |
+|---|---|---|---|
+| 1 · Imán | Lista de comprobación «12 fugas después del lead» para auditar a un cliente | 0 € | No se hace |
+| **2 · Programa principal** | 6 semanas en grupo, máximo 12, para montar el sistema en su primer cliente | **1.200-1.800 € + IVA** | **Se prueba con el depósito de 100 €** |
+| 3 · Licencia anual | Actualización de plantillas y prompts + una sesión al mes | 600-1.200 €/año | Solo como pregunta en la entrevista |
+| 4 · Derivación a Qualivo | Implantaciones complejas que la agencia pasa a Qualivo | Precio del servicio | Solo como pregunta en la entrevista |
 
 ## 3 · Hipótesis
 
@@ -95,11 +131,12 @@ Variante E: «seguir» = ≥ 5 con el problema confirmado y **≥ 1 propuesta ac
 
 **Por qué estos números [E]:** 3 depósitos de 8 entrevistas es un 37 %. Es alto a propósito: las entrevistas salen de la red de Maikel y son el público más fácil que habrá. Si no pagan ellos, un público frío pagará menos.
 
-## 6 · Lo que hay que decidir el viernes
+## 6 · Lo que hay que decidir el viernes (5 decisiones)
 
 1. **¿Enseñarías tu sistema a agencias?** Sí → avatar B. No → variante E. *(Decide el avatar.)*
 2. **¿Apruebas la promesa y el precio que se ponen a prueba** (apartado 2), o cambias algo?
 3. **¿Apruebas el criterio** del apartado 5?
-4. **¿De dónde salen tus 2 h semanales?** Propuesta: de la revisión de las adaptaciones a Instagram y de los artículos nuevos del blog, hasta el 30-nov. Era el 8.1 de `03`, todavía pendiente de decisión.
+4. **¿Apruebas el posicionamiento y la escalera** (apartados 2 bis y 2 ter) como hipótesis para la entrevista?
+5. **¿De dónde salen tus 2 h semanales?** Propuesta: de la revisión de las adaptaciones a Instagram y de los artículos nuevos del blog, hasta el 30-nov. Era el 8.1 de `03`, todavía pendiente de decisión.
 
 Las demás preguntas de `06` (casos y permisos, «más de 100 funnels», Equipzilla, marca, cuenta de Meta) **no hacen falta para el experimento**. Se quedan para después del 30-nov si se sigue. La de permisos y casos publicados ya la lleva el Chief of Staff con Growth.

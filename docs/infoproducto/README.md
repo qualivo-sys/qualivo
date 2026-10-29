@@ -2,7 +2,7 @@
 
 Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se ha publicado, enviado, comprado ni contratado.** Todo lo que sale hacia fuera es un borrador pendiente de Maikel.
 
-> **28-oct, nuevo encuadre (aprobado por Maikel):** el infoproducto es un **experimento de validación** hasta el 30-nov, con un máximo de 2 h a la semana de Maikel y 150 €, sin construir nada. Lo vigente para la sesión del **viernes 30-oct (12:00-14:00)** es **`07`**.
+> **28-oct, nuevo encuadre (aprobado por Maikel):** el infoproducto es un **experimento de validación** hasta el 30-nov, con un máximo de 2 h a la semana de Maikel y 150 €, sin construir nada. Lo vigente para la sesión del **viernes 30-oct (14:00-16:00)** es **`07`**.
 >
 > **27-oct, cambio de marco.** Maikel ha enviado un marco de trabajo nuevo (vía Chief of Staff) que pasa a mandar. Lo vigente es el **diagnóstico estratégico (`05`)** y sus **preguntas (`06`)**. Los documentos `00` y `02`-`04` partían del avatar «academias» y quedan como antecedente hasta que Maikel decida. `01` sigue valiendo.
 
@@ -27,7 +27,7 @@ Documento de trabajo del agente de Infoproducto. **Nada de lo que hay aquí se h
 
 ## Fechas
 
-- **Viernes 30-oct, 12:00-14:00:** sesión con Maikel. Sale con avatar, promesa, hipótesis, experimento y criterio. La sesión de las 15:00 queda cancelada.
+- **Viernes 30-oct, 14:00-16:00:** sesión con Maikel (movida desde las 12:00). Sale con avatar, promesa, hipótesis, experimento y criterio. La página `07` está lista antes de las 13:30.
 - **2-29 nov:** experimento.
 - **Lunes 30-nov:** decisión de seguir, pivotar o parar.
 
