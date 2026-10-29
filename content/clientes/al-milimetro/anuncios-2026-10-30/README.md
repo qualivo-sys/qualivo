@@ -1,6 +1,8 @@
 # Al Milímetro · borradores de anuncios (revisión vie 30-oct, 9:00)
 
-Revisión: https://claude.ai/artifact/TbgFxH9ZXwravksoz8wa3m (privada; `index.html` es la misma página).
+> **Versión que enseña Maikel el 30-oct:** la del agente de Al Milímetro, rehecha con el estilo de la web de Sonia (crema, naranja, Anonymous Pro): https://claude.ai/artifact/UG4kRxXjTo9x4af8Vi2T9W (rama `claude/al-milimetro-landing`, `propuestas-wip/anuncios/`). Mismos 3 mensajes y fotos; «plazo por escrito» pasa a «presupuesto en 7 días». Esta carpeta queda como referencia.
+
+Revisión original de Creative: https://claude.ai/artifact/TbgFxH9ZXwravksoz8wa3m (privada; `index.html` es la misma página).
 
 Tres mensajes, sin vídeo y sin la cara de Sonia (decidido el 23-oct):
 
