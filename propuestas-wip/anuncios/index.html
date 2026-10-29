@@ -1,0 +1,152 @@
+<title>Al Milímetro · anuncios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Anonymous+Pro:wght@400;700&display=swap">
+<style>
+/* Hoja de anuncios con la misma identidad que la landing (colores, cinta y Anonymous Pro de su web).
+   Una sección por mensaje: piezas en fila y, al lado, el texto listo para Meta. Tema único y claro, como su marca. */
+:root{
+  color-scheme:light;
+  --crema:#F5F4E7; --papel:#FBFAF3; --arena:#ECE7D3; --linea:#DED8C2;
+  --tinta:#252525; --tinta2:#3B3936; --mut:#6A665E;
+  --naranja:#F46315; --naranja2:#C94A0A; --ambar:#EA9011; --amarillo:#FDC023;
+  --rev:#6B4A00; --revbg:#FFF0BF;
+  --serif:"DM Serif Display",Georgia,serif; --sans:"Inter","Segoe UI",system-ui,sans-serif; --mono:"Anonymous Pro",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--crema);color:var(--tinta);font:400 16px/1.6 var(--sans)}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.012em;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(38px,5.4vw,62px)} h2{font-size:clamp(28px,3.4vw,40px)}
+h1 em,h2 em{font-style:italic;color:var(--naranja)}
+.eb{display:inline-flex;align-items:center;gap:10px;font:700 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--naranja2)}
+.eb::before{content:"";width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--naranja),var(--amarillo))}
+.lead{font-size:18px;color:var(--tinta2);max-width:62ch}
+.rev{display:inline;font:400 13px/1.5 var(--mono);color:var(--rev);background:var(--revbg);border-radius:6px;padding:2px 7px}
+header{padding-block:48px 36px;display:grid;gap:18px}
+header img{width:150px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{font:700 14px/1 var(--mono);text-decoration:none;color:var(--tinta);background:var(--papel);border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;box-shadow:3px 3px 0 var(--tinta)}
+.links a.hl{background:var(--amarillo)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px 16px;border-bottom:1px solid var(--linea)}
+th{font:700 12.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+tr:last-child td{border-bottom:0}
+.tbl{overflow-x:auto;background:var(--papel);border:2px solid var(--tinta);border-radius:16px;box-shadow:6px 6px 0 var(--tinta)}
+.msg{padding-block:52px;border-top:2px solid var(--tinta);display:grid;gap:22px}
+.mh{display:flex;gap:18px;align-items:center}
+.mh .k{flex:none;width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:var(--amarillo);border:2px solid var(--tinta);box-shadow:3px 3px 0 var(--tinta);font:700 28px/1 var(--mono)}
+.meta{font:700 13px/1.4 var(--mono);color:var(--mut);letter-spacing:.04em}
+.strip{display:flex;gap:16px;overflow-x:auto;padding:4px 10px 18px 4px;scroll-snap-type:x mandatory}
+.strip figure{margin:0;flex:none;width:min(260px,72vw);scroll-snap-align:start;display:grid;gap:8px}
+.strip figure.story{width:min(210px,58vw)}
+.strip img{display:block;width:100%;height:auto;border-radius:12px;border:2px solid var(--tinta);box-shadow:5px 5px 0 var(--tinta);max-width:100%}
+.strip figcaption{font:700 12.5px/1.3 var(--mono);color:var(--mut)}
+.cols{display:grid;gap:18px}
+@media (min-width:860px){.cols{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
+.panel{background:var(--papel);border:2px solid var(--tinta);border-radius:18px;padding:20px 22px;display:grid;gap:12px;align-content:start;min-width:0}
+.lab{font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.copy{white-space:pre-line;font-size:15.5px;border-left:4px solid var(--amarillo);padding-left:14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0;font-size:15px}
+dt{font:700 12.5px/1.9 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+dd{margin:0;min-width:0}
+ul{margin:0;padding-left:20px;display:grid;gap:6px}
+footer{padding-block:28px 48px;border-top:2px solid var(--tinta);font-size:14px;color:var(--mut)}
+</style>
+
+<div class="wrap">
+<header>
+  <img src="img/logo.png" alt="Al Milímetro">
+  <span class="eb">Anuncios de Meta · para revisar el vie 30-oct</span>
+  <h1>Tres anuncios con el estilo de <em>tu web.</em></h1>
+  <p class="lead">Los mismos colores, la cinta naranja y la letra de almilimetroreformas.com, sin vídeo y sin tu cara. Cada uno lleva a la misma página, con el formulario «Calcula tu reforma». Hablas tú, en primera persona, como en tu web.</p>
+  <div class="links"><a class="hl" href="https://claude.ai/artifact/8dyLmRMAmje2Y8uyvYovSp" target="_blank" rel="noopener">Ver la landing →</a><a href="#a">A · Sin extras ocultos</a><a href="#b">B · Chalets</a><a href="#c">C · ¿Cuánto cuesta?</a></div>
+</header>
+
+<div class="tbl" style="margin-bottom:52px">
+  <table>
+    <thead><tr><th>Mensaje</th><th>Duda que responde</th><th>Piezas</th><th>Público</th><th>Botón de Meta</th></tr></thead>
+    <tbody>
+      <tr><td><b>A · Sin extras ocultos</b></td><td>«¿Y si se me dispara el precio o no acaba nunca?»</td><td>Carrusel de 4 · story</td><td>Todas tus zonas, 35-70 años</td><td>Solicitar presupuesto</td></tr>
+      <tr><td><b>B · Tu chalet, de principio a fin</b></td><td>«¿Quién me coordina una reforma tan grande?»</td><td>Imagen · story</td><td>Boadilla, Majadahonda, Villaviciosa, Torrelodones y Aravaca</td><td>Solicitar presupuesto</td></tr>
+      <tr><td><b>C · ¿Cuánto cuesta?</b></td><td>«¿Cuánto me va a costar?»</td><td>Imagen · story</td><td>Todas tus zonas y quien visitó la página sin terminar</td><td>Más información</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<section class="msg" id="a">
+  <div class="mh"><span class="k">A</span><div><h2>Sin extras ocultos</h2><p class="meta">Carrusel 4:5 de 4 láminas · story 9:16</p></div></div>
+  <div class="strip">
+    <figure><img src="prev/A1.jpg" alt="Portada: Reformar tu casa no debería ser una caja de sorpresas" loading="lazy"><figcaption>1 · Portada</figcaption></figure>
+    <figure><img src="prev/A2.jpg" alt="Miedo 1: que acabe costando el doble" loading="lazy"><figcaption>2 · Que cueste el doble</figcaption></figure>
+    <figure><img src="prev/A3.jpg" alt="Miedo 2: que la obra no se acabe nunca" loading="lazy"><figcaption>3 · Que no se acabe</figcaption></figure>
+    <figure><img src="prev/A4.jpg" alt="Miedo 3 y cierre con el botón Calcula tu reforma" loading="lazy"><figcaption>4 · Cinco gremios y cierre</figcaption></figure>
+    <figure class="story"><img src="prev/A-story.jpg" alt="Story del mensaje A" loading="lazy"><figcaption>Story 9:16</figcaption></figure>
+  </div>
+  <div class="cols">
+    <div class="panel"><span class="lab">Texto para Meta</span>
+      <div class="copy">Reformar tu casa no debería ser una caja de sorpresas.
+
+Antes de empezar voy a tu casa, mido y te doy un presupuesto por partidas, en 7 días desde la visita. Proyecto y coordino toda la obra: tú hablas solo conmigo.
+
+Reformas completas de pisos y chalets en Madrid capital y el noroeste.
+
+Cuéntame tu obra en 2 minutos y te escribo por WhatsApp.</div>
+      <dl><dt>Titular</dt><dd>Tu reforma integral, sin extras ocultos</dd><dt>Botón</dt><dd>Solicitar presupuesto</dd></dl>
+    </div>
+    <div class="panel"><span class="lab">Por qué funciona</span>
+      <p>Es la pregunta con la que abre tu web: el miedo a los imprevistos y a los sobrecostes. El carrusel nombra los tres miedos con las palabras del cliente y responde a cada uno con algo que tú ya haces.</p>
+      <span class="lab">Pendiente</span>
+      <ul><li>Sin «plazo por escrito» ni «más de 20 años» hasta que lo confirmes. En su lugar va «presupuesto en 7 días», que es tu norma.</li><li>Las fotos se cambian por las de tus obras cuando las tengas, sin tocar el diseño.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="msg" id="b">
+  <div class="mh"><span class="k">B</span><div><h2>Tu chalet, de principio a fin</h2><p class="meta">Imagen 4:5 · story 9:16 · se puede sacar una versión por municipio</p></div></div>
+  <div class="strip">
+    <figure><img src="prev/B1.jpg" alt="Imagen: ¿Tu chalet necesita una reforma de verdad?" loading="lazy"><figcaption>Imagen 4:5</figcaption></figure>
+    <figure class="story"><img src="prev/B-story.jpg" alt="Story del mensaje B" loading="lazy"><figcaption>Story 9:16</figcaption></figure>
+  </div>
+  <div class="cols">
+    <div class="panel"><span class="lab">Texto para Meta</span>
+      <div class="copy">¿Tu chalet necesita una reforma de verdad?
+
+Instalaciones, cocina, baños, distribución y, si hace falta, ventanas. Lo proyecto y lo coordino de principio a fin: un presupuesto por partidas y una sola persona al otro lado del teléfono.
+
+Trabajo en Boadilla del Monte, Majadahonda, Villaviciosa de Odón, Torrelodones y Moncloa-Aravaca.</div>
+      <dl><dt>Titular</dt><dd>Reforma integral de chalets, de principio a fin</dd><dt>Variante</dt><dd>«¿Tienes un chalet en {municipio} que pide una reforma completa?», un conjunto de anuncios por municipio</dd><dt>Botón</dt><dd>Solicitar presupuesto</dd></dl>
+    </div>
+    <div class="panel"><span class="lab">Por qué funciona</span>
+      <p>Es tu obra prioritaria y la de más importe. Nombrar el municipio hace que quien vive allí se pare, y la versión por municipio deja ver en dos semanas qué zona trae visitas.</p>
+      <span class="lab">Pendiente</span>
+      <ul><li>Hasta dónde vas con los chalets (¿Las Rozas, Pozuelo?). Si amplías, se añade al texto y al público.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="msg" id="c">
+  <div class="mh"><span class="k">C</span><div><h2>¿Cuánto cuesta reformar tu casa?</h2><p class="meta">Imagen 4:5 · story 9:16</p></div></div>
+  <div class="strip">
+    <figure><img src="prev/C1.jpg" alt="Imagen con las 6 preguntas del formulario" loading="lazy"><figcaption>Imagen 4:5</figcaption></figure>
+    <figure class="story"><img src="prev/C-story.jpg" alt="Story del mensaje C" loading="lazy"><figcaption>Story 9:16</figcaption></figure>
+  </div>
+  <div class="cols">
+    <div class="panel"><span class="lab">Texto para Meta</span>
+      <div class="copy">¿Cuánto cuesta reformar tu piso o tu chalet en Madrid?
+
+Depende de los metros, del estado y de los acabados. Contesta 6 preguntas y te digo desde cuánto sale tu reforma, antes de cualquier visita.
+
+Si encaja, voy a verla y te doy la cifra cerrada por partidas.</div>
+      <dl><dt>Titular</dt><dd>Calcula tu reforma en 2 minutos</dd><dt>Botón</dt><dd>Más información (Meta no tiene «Calcular»; la pieza y el formulario dicen «Calcula tu reforma»)</dd></dl>
+    </div>
+    <div class="panel"><span class="lab">Por qué funciona</span>
+      <p>Tu cliente ya ha preguntado a Google cuánto cuesta. Le das un «desde» a cambio de las 6 preguntas, que son justo las que filtran. La imagen enseña el formulario tal cual, así nadie se sorprende al abrirlo.</p>
+      <span class="lab">Pendiente</span>
+      <ul><li>Las cifras «desde» no salen en el anuncio, solo en la página, hasta que valides el Excel.</li></ul>
+    </div>
+  </div>
+</section>
+
+<footer>Borrador de Qualivo para Al Milímetro, 29-oct-2026. Nada se publica sin tu OK. Las piezas a tamaño real (1080×1350 y 1080×1920) están listas para subir a Meta.</footer>
+</div>
