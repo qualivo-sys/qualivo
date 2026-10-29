@@ -299,3 +299,20 @@ No se crean agentes, documentos duplicados, campañas ni automatizaciones sin co
     - HeyReach se cancela y LinkedIn queda en pausa hasta Q1;
     - no se abren verticales ni productos nuevos hasta el cierre de Q4;
     - Equipzilla se mide como riesgo de concentración.
+
+- **29-oct · Arquitectura de agentes (limpieza pedida por Maikel: «todo lo que no utilicemos, quitémoslo»).**
+  - **Un solo punto de contacto:** el Chief of Staff. Ningún agente le escribe a Maikel por su cuenta salvo un 🔴 real. A Maikel le llega todo en 3 momentos: 8:40 (parte del día), 13:00 y 17:00 (bloque de decisiones).
+  - **Núcleo (7):** Growth, Paid, Outbound, CFO, Contenido v2, Creative v2 (solo bajo demanda) y Automatización v2.
+  - **Clientes (1 agente por cliente activo):** EAC, Eleva, Alpha v2, Aula, Al Milímetro v2, Nuria Roure, Kill & Ramble y Kubysoft v2. Equipzilla va por su repo.
+  - **Experimento:** Infoproducto, hasta el 30-nov.
+  - **Rutinas por agente:** un parte diario en Notion (8:20-8:25) y, como mucho, la rutina operativa que sostiene su trabajo. Nada de informes que dupliquen el parte ni el bloque del Chief of Staff.
+  - **Normas de funcionamiento:**
+    1. Todo agente nuevo se crea en modo auto. Si una sesión se bloquea por permisos, se sustituye por una v2: no se interrumpe (al interrumpir, lo toma como un rechazo).
+    2. Cuando un encargo termina, la sesión se archiva y sus rutinas se pausan el mismo día.
+    3. Las claves viven en los secretos del entorno, no en la carpeta temporal ni en el texto de las rutinas.
+    4. Solo el propio agente puede cambiar el texto de sus rutinas; el Chief of Staff solo puede pausarlas o activarlas.
+  - **Hecho hoy:**
+    - 35 sesiones archivadas: las v1 sustituidas y las de proyectos cerrados o abandonados.
+    - 17 rutinas pausadas por duplicadas u obsoletas. Entre ellas, el sprint de Growth (lo cubre el parte de las 8:40), el radar IA, la revisión de llamadas de Raquel (la voz está pausada) y las de Paid con campañas de septiembre. También los partes del CFO de lunes, viernes y diario, y el SDR, el triaje diario, el informe de los lunes y el correo de las 17:30 de Outbound.
+    - La guardia de la campaña de Kubysoft pasa al triaje horario de Outbound.
+  - **Se mantienen fuera de esto:** las sesiones personales de Maikel (inglés, entrenamiento y similares) y la de LinkedIn hasta que termine la exportación a Drive.
