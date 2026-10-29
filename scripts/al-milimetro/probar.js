@@ -275,6 +275,7 @@ const correos = [];
     let d = {};
     if (/customFields/.test(ruta)) d = { customFields: ['obra_tipo', 'obra_texto', 'codigo_postal', 'zona', 'metros', 'cuando', 'presupuesto', 'vivienda_propia', 'clase', 'puntos', 'origen', 'revision', 'precio_desde', 'instalaciones', 'que_cambiar'].map(function (k, i) { return { id: 'f' + i, fieldKey: 'contact.' + k }; }) };
     else if (/pipelines/.test(ruta)) d = { pipelines: [{ id: 'P1', name: 'Reformas', stages: ['Nuevo', 'Contactado', 'Visita técnica', 'Presupuesto enviado', 'Seguimiento', 'Firmado', 'Perdido'].map(function (n, i) { return { id: 'S' + i, name: n }; }) }] };
+    else if (/contacts\/search\/duplicate/.test(ruta)) d = { contact: ghl.existe ? { id: 'C1', firstName: 'PRUEBA QUALIVO Marta', phone: '+34600000000', email: 'prueba@qualivo.io' } : null };
     else if (/upsert/.test(ruta)) { d = { new: !ghl.existe, contact: { id: 'C1' } }; ghl.existe = true; }
     else if (/\/contacts\/C1\/tags$/.test(ruta)) {
       if (o.method === 'DELETE') ghl.tags = ghl.tags.filter(function (x) { return cuerpo.tags.indexOf(x) < 0; });
@@ -306,15 +307,19 @@ const correos = [];
     assert.ok(ghlLlamadas.some(function (l) { return /\/notes$/.test(l.ruta); }));
     assert.equal((await q('SELECT count(*)::int n FROM am_leads'))[0].n, antes);
   });
-  await t('GHL: repite el formulario con la oportunidad abierta → cambia clase y origen, no se repite la bienvenida, sigue en su etapa', async function () {
+  await t('GHL: mismo email con la oportunidad abierta → conserva nombre y teléfono, una sola clase, oportunidad actualizada sin duplicar, sin repetir la bienvenida', async function () {
     ghlLlamadas.length = 0; ghl.ops[0].pipelineStageId = 'S2';
-    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO Marta', a: 'chalet', ppto: '15-30', cuando: '6' }) });
+    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO Laura', tel: '611 111 111', a: 'chalet', ppto: '15-30', cuando: '6' }) });
     assert.equal(r.json.ok, true); assert.equal(r.json.clase, 'B');
+    const up = ghlLlamadas.find(function (l) { return /upsert/.test(l.ruta); });
+    assert.ok(!('firstName' in up.cuerpo) && !('phone' in up.cuerpo), 'no pisa nombre ni teléfono');
+    assert.ok(ghlLlamadas.some(function (l) { return l.m === 'PUT' && l.ruta === '/opportunities/O1' && /Marta/.test(l.cuerpo.name) && !l.cuerpo.pipelineStageId; }));
     assert.deepEqual(ghl.tags.filter(function (x) { return /^(clase|origen)-/.test(x); }).sort(), ['clase-b', 'origen-chalet']);
     assert.ok(ghl.tags.indexOf('repite') > -1);
     assert.ok(!ghlLlamadas.some(function (l) { return l.m === 'POST' && /\/tags$/.test(l.ruta) && l.cuerpo.tags.indexOf('nuevo') > -1; }), 'sin «nuevo» otra vez');
     assert.equal(ghl.ops.length, 1); assert.equal(ghl.ops[0].pipelineStageId, 'S2');
-    assert.ok(/Repite el formulario: ya estaba/.test(ghlLlamadas.find(function (l) { return /\/notes$/.test(l.ruta); }).cuerpo.body));
+    const nota = ghlLlamadas.find(function (l) { return /\/notes$/.test(l.ruta); }).cuerpo.body;
+    assert.ok(/^Nuevo envío del formulario · .*nombre «PRUEBA QUALIVO Laura» y teléfono \+34611111111/.test(nota), nota);
   });
   await t('GHL: repite con la oportunidad perdida → vuelve a «Nuevo» y salta otra vez la bienvenida', async function () {
     ghlLlamadas.length = 0; ghl.ops[0].status = 'lost'; ghl.ops[0].pipelineStageId = 'S6';

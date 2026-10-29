@@ -66,11 +66,18 @@ async function oportunidadDe(contactId) {
 const CLASES = ['a', 'b', 'c'];
 const ORIGENES = ['pared', 'chalet', 'precio', 'portal', 'web'];
 
+// ¿Ya está en la subcuenta? Mismo email o, si no hay, mismo teléfono (lo mismo que usa el upsert para casar)
+async function existente(L) {
+  const q = L.email ? '&email=' + encodeURIComponent(L.email) : '&number=' + encodeURIComponent(L.telefono);
+  const d = await ghl('GET', '/contacts/search/duplicate?locationId=' + loc() + q);
+  return (d && d.contact && d.contact.id) ? d.contact : null;
+}
+
 // Escribe el lead: contacto (sin pisar sus etiquetas), campos, etiquetas, oportunidad en «Nuevo» y nota.
-// Si el contacto ya existía (mismo email o teléfono), se quitan su clase, su origen y su «revision» anteriores y:
-// · con oportunidad abierta: se queda en su etapa, sin «nuevo» (no se repite la bienvenida) y con la etiqueta «repite»;
-// · con oportunidad cerrada (firmado o perdido): vuelve a «Nuevo» y se vuelve a poner «nuevo»;
-// · sin oportunidad: se crea, como a uno nuevo.
+// Si el contacto ya existía (decisión del CoS del 29-oct): se conservan su nombre y su teléfono (los de este envío van
+// a la nota), solo queda una clase-x y un origen-x, y nota «Nuevo envío del formulario». Su oportunidad:
+// · abierta: se actualiza en su etapa, sin «nuevo» (no se repite la bienvenida) y con la etiqueta «repite»;
+// · sin oportunidad abierta: se crea en «Nuevo» y se vuelve a poner «nuevo» (si GHL no deja otra, se reabre la cerrada).
 // L: lead ya validado y puntuado (M.vista) · origen: pared|chalet|precio|portal|web
 async function escribirLead(L, sc, extra) {
   const ids = (await campos()).porClave;
@@ -85,14 +92,16 @@ async function escribirLead(L, sc, extra) {
   if (faltan.length) console.error('[am-ghl] Faltan campos (los crea ghl-alta-subcuenta.js de Automatización):', faltan.join(', '));
   const customFields = Object.keys(valores).filter(function (k) { return ids[k] && valores[k] !== ''; }).map(function (k) { return { id: ids[k], field_value: valores[k] }; });
 
+  let antes = null;
+  try { antes = await existente(L); } catch (e) { console.error('[am-ghl] No se pudo buscar si ya existía:', e.message); }
   // Sin «tags» en el upsert: si el contacto ya existía, GHL sustituiría sus etiquetas. Se suman después.
-  const up = await ghl('POST', '/contacts/upsert', {
-    locationId: process.env.AM_GHL_LOCATION_ID, firstName: L.nombre, phone: L.telefono, email: L.email || undefined,
+  const up = await ghl('POST', '/contacts/upsert', Object.assign({
+    locationId: process.env.AM_GHL_LOCATION_ID, email: L.email || undefined,
     source: 'Landing Al Milímetro · ' + M.OPCIONES.origen[L.origen], customFields: customFields
-  });
+  }, antes ? (L.email && antes.phone ? {} : { phone: L.telefono }) : { firstName: L.nombre, phone: L.telefono }));
   const contactId = up && up.contact && up.contact.id;
   if (!contactId) throw new Error('upsert sin id');
-  const repetido = up.new !== true;
+  const repetido = !!antes || up.new === false;
 
   let previa = null, oportunidad = 'creada';
   if (repetido) {
@@ -117,18 +126,27 @@ async function escribirLead(L, sc, extra) {
   try {
     const p = await pipeline();
     const nuevo = p.etapas.nuevo || (p.stages[0] && p.stages[0].id);
-    const nombre = (L.prueba ? '[PRUEBA] ' : '') + L.nombre + ' · ' + M.OPCIONES.tipo[L.tipo] + ' · ' + (L.mun || L.cp);
-    if (abierta) oportunidad = 'abierta';
-    else if (previa) {
-      await ghl('PUT', '/opportunities/' + previa.id, { pipelineStageId: nuevo, status: 'open', name: nombre });
-      oportunidad = 'reabierta';
+    const nombre = (L.prueba ? '[PRUEBA] ' : '') + (antes && antes.firstName || L.nombre) + ' · ' + M.OPCIONES.tipo[L.tipo] + ' · ' + (L.mun || L.cp);
+    if (abierta) {
+      await ghl('PUT', '/opportunities/' + previa.id, { name: nombre });
+      oportunidad = 'actualizada';
     } else {
-      await ghl('POST', '/opportunities/', { locationId: process.env.AM_GHL_LOCATION_ID, pipelineId: p.id, pipelineStageId: nuevo, contactId: contactId, status: 'open', name: nombre });
+      try {
+        await ghl('POST', '/opportunities/', { locationId: process.env.AM_GHL_LOCATION_ID, pipelineId: p.id, pipelineStageId: nuevo, contactId: contactId, status: 'open', name: nombre });
+      } catch (e) {
+        if (!previa) throw e;
+        // La subcuenta no deja dos oportunidades por contacto: se reabre la cerrada en «Nuevo»
+        await ghl('PUT', '/opportunities/' + previa.id, { pipelineStageId: nuevo, status: 'open', name: nombre });
+        oportunidad = 'reabierta';
+      }
     }
   } catch (e) { oportunidad = 'error'; console.error('[am-ghl] Oportunidad:', e.message); }
 
+  const ahora = new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', dateStyle: 'short', timeStyle: 'short' });
+  const otros = antes ? [L.nombre !== antes.firstName ? 'nombre «' + L.nombre + '»' : '', antes.phone && antes.phone.replace(/\D/g, '').slice(-9) !== String(L.telefono).replace(/\D/g, '').slice(-9) ? 'teléfono ' + L.telefono : ''].filter(Boolean) : [];
   const nota = [
-    'Formulario «Calcula tu reforma» · ' + new Date().toISOString(),
+    repetido ? 'Nuevo envío del formulario · ' + ahora + (otros.length ? ' · en este envío puso ' + otros.join(' y ') : '') : '',
+    'Formulario «Calcula tu reforma» · ' + ahora,
     'Clase ' + sc.clase + ' · ' + sc.puntos + ' puntos (' + sc.motivos.join(', ') + ')' + (L.revision ? ' · pasa por segundas preguntas' : ''),
     'Obra: ' + M.OPCIONES.tipo[L.tipo] + ' · ' + (M.OPCIONES.m2[L.m2] || '—') + ' · ' + (L.mun || '') + ' (' + L.cp + ')',
     'Cuándo: ' + (M.OPCIONES.cuando[L.cuando] || '—') + ' · Presupuesto: ' + (M.OPCIONES.ppto[L.ppto] || '—') + ' · Vivienda propia: ' + (M.OPCIONES.propia[L.propia] || '—'),
@@ -136,7 +154,7 @@ async function escribirLead(L, sc, extra) {
     L.frase ? 'Qué quiere cambiar: ' + L.frase : '',
     'Origen: ' + M.OPCIONES.origen[L.origen] + (extra && extra.municipio ? ' · municipio del anuncio: ' + extra.municipio : '') + (extra && extra.utm ? ' · ' + extra.utm : ''),
     'Consentimiento: sí',
-    oportunidad === 'abierta' ? 'Repite el formulario: ya estaba en el pipeline y se queda en su etapa.' : oportunidad === 'reabierta' ? 'Repite el formulario: tenía la oportunidad cerrada y vuelve a «Nuevo».' : '',
+    oportunidad === 'actualizada' ? 'Ya estaba en el pipeline: su oportunidad se actualiza y se queda en su etapa.' : oportunidad === 'reabierta' ? 'Tenía la oportunidad cerrada: vuelve a «Nuevo».' : '',
     oportunidad === 'error' ? 'OJO: no se pudo crear ni actualizar la oportunidad. Hay que crearla a mano.' : ''
   ].filter(Boolean).join('\n');
   try { await ghl('POST', '/contacts/' + contactId + '/notes', { body: nota }); } catch (e) { console.error('[am-ghl] Nota no creada:', e.message); }
