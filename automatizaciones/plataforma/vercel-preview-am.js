@@ -7,6 +7,7 @@
 //   AM_GHL_LOCATION_ID · AM_GHL_API_KEY (token de ubicación de unas 24 h: SOLO para la prueba; el duradero es la
 //   Private Integration de la subcuenta, guía A3.2) · AM_SOLO_PRUEBA=1 · AM_GHL_PIPELINE_ID (si se da) ·
 //   INTELLIGENCE_CLAVE_AM (contraseña larga nueva, si no existe ya; se imprime UNA vez para el Chief of Staff).
+// Con --aplicar, al final hace redeploy del último deploy de la rama e imprime la URL de la preview.
 // Opcionales: VERCEL_PROJECT (por defecto «qualivo»), VERCEL_TEAM_ID.
 
 const crypto = require('crypto');
@@ -55,7 +56,18 @@ async function main() {
     });
   }
   if (aplicar && clave) console.log('\nINTELLIGENCE_CLAVE_AM (pásala SOLO al Chief of Staff o a Maikel; no se vuelve a mostrar): ' + clave);
-  if (aplicar) console.log('\nHecho. Para que la preview las coja hace falta un deploy nuevo de la rama (un push o «Redeploy» en Vercel).');
+  if (!aplicar) return;
+
+  // Redeploy del último deploy de la rama, para que la preview coja las variables (el agente de Al Milímetro no
+  // tiene VERCEL_TOKEN). La URL se le pasa junto con el ID de la subcuenta.
+  const pj = await pedir(V + '/v9/projects/' + encodeURIComponent(proyecto) + '?' + team.slice(1), { headers: cabV });
+  const ds = await pedir(V + '/v6/deployments?projectId=' + pj.id + '&target=preview&limit=50' + team, { headers: cabV });
+  const ultimo = (ds.deployments || []).filter((d) => d.meta && d.meta.githubCommitRef === RAMA).sort((x, y) => y.created - x.created)[0];
+  if (!ultimo) { console.log('\n⚠ No hay ningún deploy de ' + RAMA + ': haz un push a la rama para crear la preview.'); return; }
+  const nuevo = await pedir(V + '/v13/deployments?forceNew=1' + team, {
+    method: 'POST', headers: cabV, body: JSON.stringify({ name: proyecto, deploymentId: ultimo.uid, target: 'preview' })
+  });
+  console.log('\nRedeploy lanzado: https://' + nuevo.url + ' (tarda un par de minutos). Esa es la URL de la preview para la prueba.');
 }
 
 if (require.main === module) main().catch((e) => { console.error('✗ ' + e.message); process.exit(1); });

@@ -330,6 +330,6 @@ node automatizaciones/plataforma/vercel-preview-am.js <ID de la subcuenta del pa
 **Después:**
 
 - **`INTELLIGENCE_CLAVE_AM`** sale impresa una sola vez. Se le pasa **solo al Chief of Staff** (o a Maikel), nunca al agente de Al Milímetro ni al repositorio.
-- **Al agente de Al Milímetro** (`session_01MkLw1AucMdomaoD3uZM2Zs`) solo el ID de la subcuenta y el aviso de que la preview ya tiene las variables. Necesita un deploy nuevo de su rama (un push o *Redeploy*) para que la preview las coja. Con eso hace la prueba de punta a punta con «PRUEBA QUALIVO».
+- **Al agente de Al Milímetro** (`session_01MkLw1AucMdomaoD3uZM2Zs`) solo el **ID de la subcuenta** y la **URL de la preview** que imprime el paso 3. El paso 3 ya hace él solo el redeploy, porque ese agente no tiene `VERCEL_TOKEN`. Hay que esperar un par de minutos a que termine; después él hace la prueba de punta a punta con «PRUEBA QUALIVO».
 - **El `AM_GHL_API_KEY` de la preview caduca en unas 24 h** (es un token de ubicación). Hasta que Maikel cree la Private Integration (A3.2), se refresca repitiendo el paso 3. La clave de Intelligence no cambia al repetirlo.
 - **Cuando Maikel cree el pipeline «Reformas»** (C4), se repite el paso 3 con `--pipeline=<id del pipeline>`. Hasta entonces, el receptor guarda el contacto, los campos y las etiquetas, pero no la oportunidad.
