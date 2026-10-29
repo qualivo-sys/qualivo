@@ -1,6 +1,5 @@
 // (Verificación) Comprueba la subcuenta de GHL de Al Milímetro. Los campos los crea Automatización con ghl-alta-subcuenta.js;
 // este script sirve para comprobar que las opciones coinciden con api/_am-modelo.js. Con --aplicar crea los que falten.
-// (con las opciones EXACTAS de api/_am-modelo.js) y comprueba el pipeline y sus etapas.
 // Uso: AM_GHL_API_KEY=… AM_GHL_LOCATION_ID=… node scripts/al-milimetro/ghl-preparar.js [--aplicar]
 // Sin --aplicar solo enseña lo que haría. No borra ni cambia nada que ya exista.
 const M = require('../../api/_am-modelo.js');

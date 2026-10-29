@@ -79,7 +79,6 @@ async function escribirLead(L, sc, extra) {
   const contactId = up && up.contact && up.contact.id;
   if (!contactId) throw new Error('upsert sin id');
 
-  // El orden importa: los workflows se disparan con «nuevo» y miran ya las demás etiquetas
   // Etiquetas genéricas de la plantilla «Reformas v1» de la agencia (29-oct). «nuevo» dispara el workflow del
   // primer contacto y va la última, en otra llamada, para que las demás ya estén puestas.
   const tags = ['clase-' + sc.clase.toLowerCase(), 'origen-' + L.origen].concat(L.revision ? ['revision'] : []).concat(L.prueba ? ['prueba'] : []);
