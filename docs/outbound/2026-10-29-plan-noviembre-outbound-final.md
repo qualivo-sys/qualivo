@@ -103,9 +103,11 @@ Por campaña, de esos 492:
 
 **Ritmo real hasta hoy:** 2 reuniones en octubre con 2.697 correos, 1 por cada unos 1.350 [C]. Detalle de las respuestas en `docs/outbound/2026-10-28-respuestas-octubre.md`.
 
-**Objetivo para noviembre: 4-5 reuniones cualificadas de outbound [E].**
-- ~6.000 correos al ritmo actual dan 4.
-- La comprobación de la señal y las verticales de formación y reformas, alineadas con Paid, deberían subirlo a 4-5.
+**Objetivo para noviembre** [E], con la definición común acordada con Paid el 29-oct: reunión CELEBRADA con encaje y contada en GHL (etapa o etiqueta `reunion-encaja`), no solo agendada.
+- **Agendadas:** ~4-5. Con ~6.000 correos al ritmo de octubre salen ~4; la comprobación de la señal y las verticales de formación y reformas deberían subirlo a 4-5.
+- **Celebradas con encaje: 3, con 4 como parte alta.** En octubre se agendaron 2 y por ahora se ha celebrado 1; Habitabio se celebra el 12-nov.
+- **Revisión:** 13-nov.
+- **Riesgo:** el volumen. A 29-oct el depósito está por debajo del suelo y la carga diaria rinde menos de lo previsto.
 
 **Coste variable de noviembre** [E]:
 
