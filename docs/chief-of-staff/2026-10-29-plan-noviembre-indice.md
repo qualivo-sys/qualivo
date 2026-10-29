@@ -1,0 +1,36 @@
+# Plan de noviembre · índice para la revisión del 29-oct (11:00)
+
+Una sola página que reúne cada parte del plan. [C] es un dato confirmado; [E], una estimación.
+
+## Objetivo del mes
+
+| Etapa | Meta | Fuente |
+|---|---|---|
+| Leads aptos | 10-13 [E] | Paid |
+| Reuniones con encaje | 5-7 [E] según Paid; Outbound se pone 4-5 solo para su canal | Paid y Outbound (**hay que cuadrarlo**, ver abajo) |
+| Propuestas | 2-3 [E] | Paid |
+| Clientes nuevos | 1-2 (1 es lo realista) | Instrucción maestra |
+
+## Las partes
+
+| Área | Documento | Estado |
+|---|---|---|
+| **Paid** | [Plan de captación de noviembre](https://github.com/qualivo-sys/qualivo/blob/claude/qualivo-paid/paid/plan/2026-10-27-plan-captacion-noviembre.md) | ✅ Listo. Unos 750 € (tope 780 €); E-02 activo hasta el 10-nov y prueba B de reformas del 15 al 28 |
+| **Outbound** | [Plan final de noviembre](https://github.com/qualivo-sys/qualivo/blob/claude/client-acquisition-ideas-k00f5d/docs/outbound/2026-10-29-plan-noviembre-outbound-final.md) | ✅ Listo. Sus 3 decisiones ya están resueltas: ABM de reformas activo, permiso de Apollo y go/got fuera. Hoy está en 🔴 porque la carga va en 7 de 100 leads al día [C] |
+| **Contenido** | [Plan de contenidos](https://github.com/qualivo-sys/qualivo/blob/claude/qualivo-landing-vercel-nubk1i/content/redes/2026-11-plan-contenidos-noviembre.md) · [Piezas para validar en Notion](https://app.notion.com/p/e7227459f29a4f9c98053c86142c937c) | ⚠️ Pendiente de confirmar a las 10:45 qué fichas están listas y que el ritmo es el decidido el 28-oct (desde la semana 47: 2 carruseles, 1 vídeo y la newsletter) |
+| **Newsletter (Growth)** | [Nº 1 · 5-nov](https://github.com/qualivo-sys/qualivo/blob/claude/qualivo-landing-vercel-nubk1i/content/newsletter/2026-11-05.md) · [Nº 2 · 12-nov](https://github.com/qualivo-sys/qualivo/blob/claude/qualivo-landing-vercel-nubk1i/content/newsletter/2026-11-12.md) | ✅ Borradores. No sale ninguna sin tu autorización escrita y con la audiencia cerrada |
+| **CFO** | Plan financiero de noviembre semana a semana y facturas de octubre. Ya existe la [hoja de control de noviembre](https://github.com/qualivo-sys/qualivo/blob/claude/quipu-billing-dashboard-g2s2ap/dashboard/noviembre.py) | ⚠️ Plazo 10:45 para el enlace |
+| **Casos anónimos** | [Registro de permisos](https://github.com/qualivo-sys/qualivo/blob/claude/qualivo-landing-vercel-nubk1i/content/casos-permisos.md) · casos publicados: EAC, Nuria Roure y Focus Practical en /casos/ | ❌ Sin ningún permiso escrito registrado: no se puede usar ningún caso nuevo en contenido ni en anuncios |
+
+## Decisiones para Maikel (5)
+
+1. **Presupuesto de Paid de noviembre:** unos 750 € con un tope de 780 €. → Recomiendo **aprobar**.
+2. **Rótulo del anuncio 11:** «sus clientes pagan 500 € o más» o «1.000 € o más». → Recomiendo **500 €**: el cliente que firmó por E-01 declaró entre 300 y 999 € por cliente [C].
+3. **Quién publica las redes:** el planificador de GHL conectado a tu LinkedIn y tu Instagram, o tú a mano tres veces por semana. → Recomiendo **GHL**, porque si no, la pieza aprobada no sale el miércoles.
+4. **Casos:** pedir por escrito el permiso de caso al cliente de formación que arrancó el 28-oct. Lo pides tú, porque es tu relación. → Recomiendo **pedirlo ya**, para tenerlo en la semana 48.
+5. **Los 1.221 leads de Instagram:** son una extracción de seguidores hecha con Mailerfind [C], y Paid no los usa en Meta. → Recomiendo **dejarlos fuera de noviembre** y no meterlos en ningún envío.
+
+## Lo que cuadran los agentes, sin ti
+
+- **Objetivo de reuniones:** Paid cuenta 1-2 reuniones de Outbound y Outbound se pone 4-5. Paid y Outbound lo unifican en un solo número antes del viernes.
+- **Pendientes de Outbound que no son del plan:** los borradores de Tunergia y Strat (llevan 6 días esperando) y la regla de responder solos a los «ahora no». Van al bloque de las 13:00.
