@@ -19,6 +19,7 @@
 | `seguimientos-3-7-14/` | Workflow n8n nº 1: lista diaria de toques del tracker de ventas + borradores Gmail (sin destinatario). | **Listo para importar** |
 | `radiografia/` | Recorrido Radiografía → reunión: secuencia día 1/3/7 por email (GHL) + workflow de parada total con tarea puente. Encargo del cerebro 9-sep. | **Listo para importar** (modo prueba) |
 | `avisar-a-maikel/` | Webhook único para que cualquier agente avise a Maikel (email Gmail + WhatsApp GHL). Doc de uso: `docs/agentes/avisar-a-maikel.md`. Encargo del Chief of Staff 29-oct. | **Listo para importar** (falta GHL + Location ID) |
+| `alta-clientes/` | A1 · Alta en un clic: firma → proyecto en Todoist con 26 tareas fechadas + Client OS en Notion + aviso. Del playbook `playbooks/alta-clientes/` (Rock R2). | **Listo para importar** (apagado) |
 | `auditoria-automatizables.md` | Auditoría de procesos repetitivos del repo: Problema→Impacto→Solución→Automatización, con horas/mes y coste. | v1 (2026-09-01) |
 | `parte-2026-09-01.md` / `parte-2026-09-09.md` | Partes de turno para el cerebro. | — |
 

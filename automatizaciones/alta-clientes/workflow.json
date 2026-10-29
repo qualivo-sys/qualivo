@@ -1,0 +1,267 @@
+{
+  "name": "Qualivo · Alta de cliente (firma → Todoist + Notion + aviso)",
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "c5000000-0000-4000-8000-000000000001",
+      "name": "Cliente firmado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "clientes-alta",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "clientes/alta",
+        "authentication": "headerAuth",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Avisos agentes (X-Qualivo-Token)"
+        }
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000002",
+      "name": "Plan de alta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// Payload: { cliente, fecha_firma: 'AAAA-MM-DD', contacto?, servicio?, variante?: 'corta'|'larga' }\n// Convierte el playbook de alta (playbooks/alta-clientes) en tareas fechadas desde el día 0.\nconst entrada = $input.first().json;\nconst b = entrada.body || entrada;\nconst cliente = String(b.cliente || '').trim();\nconst firma = String(b.fecha_firma || '').trim();\nif (!cliente || !/^\\d{4}-\\d{2}-\\d{2}$/.test(firma)) {\n  throw new Error('Faltan campos: cliente y fecha_firma (AAAA-MM-DD).');\n}\nconst larga = String(b.variante || 'corta').toLowerCase() === 'larga';\nconst extra = larga ? 7 : 0; // la variante larga alarga la construcción una semana\n\nconst dia = (n) => {\n  const d = new Date(firma + 'T12:00:00Z');\n  d.setUTCDate(d.getUTCDate() + n);\n  const s = d.getUTCDay(); // fines de semana al lunes siguiente\n  if (s === 6) d.setUTCDate(d.getUTCDate() + 2);\n  if (s === 0) d.setUTCDate(d.getUTCDate() + 1);\n  return d.toISOString().slice(0, 10);\n};\n\n// [día, fase, quién, tarea]  · M Maikel · V Ventas · CFO · A Automatización · G Growth · CoS\nconst PLAN = [\n  [0, 'Día 0', 'CFO', 'Factura de la entrada → Maikel la envía'],\n  [0, 'Día 0', 'M', 'Proponer reunión de arranque (máx. D+2) e invitar a todos los que deciden'],\n  [1, 'Arranque', 'M', 'Preparar la reunión: decidir antes de entrar · preguntas · salir con'],\n  [2, 'Arranque', 'M', 'Reunión de arranque: accesos con responsable y fecha, cifras de partida, avisos y reunión semanal'],\n  [3, 'Arranque', 'CoS', 'Acta y lista de tareas por email (borrador para Maikel)'],\n  [3, 'Semana 1', 'G', 'Cliente ideal y zonas con sus cambios → pedir «me vale»'],\n  [4, 'Semana 1', 'A', 'Pedir a Meta las plantillas de WhatsApp (recordatorio, último seguimiento, pago a medias)'],\n  [5, 'Semana 1', 'A', 'CRM: etapas, origen (UTM) y campos'],\n  [6, 'Semana 1', 'A', 'Preguntas del formulario, descarte y mensajes automáticos → aprobar en la reunión'],\n  [6, 'Semana 1', 'G', 'Primeros borradores de anuncios'],\n  [7, 'Semana 1', 'M', 'Revisar accesos pendientes del cliente y reclamar los vencidos'],\n  [9 + extra, 'Semana 2', 'G', 'Landing con sus zonas, casos y opiniones → revisión en el móvil'],\n  [9 + extra, 'Semana 2', 'G', 'Anuncios definitivos (3 mensajes) → OK en la reunión'],\n  [10 + extra, 'Semana 2', 'A', 'Secuencias de seguimiento (WhatsApp + email) → revisar el tono'],\n  [10 + extra, 'Semana 2', 'A', 'Reserva de cita: confirmación y recordatorio de la víspera'],\n  [11 + extra, 'Semana 2', 'A', 'Avisos al cliente cuando un lead pide una persona → probar que le llegan'],\n  [12 + extra, 'Semana 2', 'A', 'QA interno del recorrido completo con un lead de prueba'],\n  [13 + extra, 'Semana 2', 'M', 'OK del cliente para lanzar y método de pago de la cuenta publicitaria'],\n  [14 + extra, 'Semana 3', 'G', 'Encender anuncios con el presupuesto de prueba (OK de Maikel)'],\n  [14 + extra, 'Semana 3', 'A', 'Activar el panel con datos reales'],\n  [16 + extra, 'Semana 3', 'A', 'Revisar uno a uno los primeros contactos: puntuación y mensajes'],\n  [18 + extra, 'Semana 3', 'M', 'Pedir por email la confirmación de puesta en marcha (las 3 condiciones)'],\n  [18 + extra, 'Semana 3', 'CFO', 'Factura del segundo pago al llegar la confirmación'],\n  [22 + extra, 'Semana 4', 'G', 'Informe de las 2 primeras semanas: solicitudes, encajan, citas/ventas y coste de cada una'],\n  [23 + extra, 'Semana 4', 'M', 'Primera revisión con datos: decidir la inversión de las semanas siguientes'],\n  [24 + extra, 'Semana 4', 'CoS', 'Actualizar el Client OS: resultado, aprendizajes y decisiones; pasar a operación normal'],\n];\nconst QUIEN = { M: 'Maikel', V: 'Ventas', CFO: 'CFO', A: 'Automatización', G: 'Growth', CoS: 'Chief of Staff' };\nconst tareas = PLAN.map(([n, fase, q, t]) => ({\n  content: `[${fase}] ${t}`,\n  due_date: dia(n),\n  labels: [QUIEN[q].toLowerCase().replace(/\\s+/g, '-')],\n}));\n\nconst ACCESOS = ['Meta Business Manager y cuenta publicitaria', 'Facebook / Instagram', 'Google Ads', 'GA4 y GTM',\n  'Search Console', 'Web / CMS', 'Hosting o servidor y DNS', 'WhatsApp Business / Cloud API', 'Email',\n  'Pagos / confirmación de venta', 'Cifras históricas agregadas (ventas, inversión y leads)'];\n\nconst p = (txt) => ({ object: 'block', type: 'paragraph', paragraph: { rich_text: [{ type: 'text', text: { content: txt } }] } });\nconst h = (txt) => ({ object: 'block', type: 'heading_2', heading_2: { rich_text: [{ type: 'text', text: { content: txt } }] } });\nconst todo = (txt) => ({ object: 'block', type: 'to_do', to_do: { rich_text: [{ type: 'text', text: { content: txt } }], checked: false } });\nconst bloques = [\n  { object: 'block', type: 'callout', callout: { icon: { emoji: '🔒' }, rich_text: [{ type: 'text', text: { content: 'Página interna. No se comparte con el cliente. Creada por la automatización de alta (A1). Estructura completa en «Plantilla · [Cliente] · Client OS (interna)».' } }] } },\n  p(`Cliente: ${cliente}${b.contacto ? ' · contacto: ' + b.contacto : ''}`),\n  p(`Servicio: ${b.servicio || 'pendiente'} · Firma: ${firma} · Variante: ${larga ? 'larga (5 semanas)' : 'corta (4 semanas)'}`),\n  p(`Puesta en marcha prevista: ${dia(18 + extra)} · Primera revisión con datos: ${dia(23 + extra)}`),\n  h('🔑 Accesos (ninguno antes de contrato + Anexo I firmados)'),\n  ...ACCESOS.map(todo),\n  h('✅ Puesta en marcha (el cliente la confirma por email)'),\n  todo('CRM recibe contactos de todos los canales'), todo('WhatsApp responde solo'), todo('Avisos al cliente llegando'),\n  h('🗓️ Reunión de arranque'), p('Decidir antes de entrar · Preguntas por prioridad · Salir de la reunión con'),\n  h('🧠 Decisiones'), p('Fecha · Decisión · Motivo · Responsable'),\n  h('⚠️ Riesgos'), p('Riesgo · Impacto · Mitigación'),\n];\n\nreturn [{ json: { cliente, firma, proyecto: `Cliente · ${cliente}`, tareas, bloques,\n  puesta_en_marcha: dia(18 + extra), revision: dia(23 + extra) } }];\n"
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000003",
+      "name": "Proyecto en Todoist",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.todoist.com/api/v1/projects",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $json.proyecto, view_style: 'board' }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Todoist (Bearer)"
+        }
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000004",
+      "name": "Una tarea por item",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const proyecto = $('Proyecto en Todoist').first().json.id;\nreturn $('Plan de alta').first().json.tareas.map((t) => ({ json: { ...t, project_id: proyecto } }));"
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000005",
+      "name": "Tarea en Todoist",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1080,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.todoist.com/api/v1/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: $json.content, project_id: $json.project_id, due_date: $json.due_date, labels: $json.labels }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Todoist (Bearer)"
+        }
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000006",
+      "name": "Juntar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const plan = $('Plan de alta').first().json;\nreturn [{ json: { tareas_creadas: $input.all().length, todoist: `https://app.todoist.com/app/project/${$('Proyecto en Todoist').first().json.id}`, ...plan } }];"
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000007",
+      "name": "Client OS en Notion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ parent: { page_id: '32656e1ad6ed81bda22aef63169696a1' }, icon: { emoji: '🏢' }, properties: { title: { title: [{ text: { content: $json.cliente + ' · Client OS (interna)' } }] } }, children: $json.bloques }) }}",
+        "options": {},
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Notion-Version",
+              "value": "2022-06-28"
+            }
+          ]
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Notion (Bearer)"
+        }
+      }
+    },
+    {
+      "id": "c5000000-0000-4000-8000-000000000008",
+      "name": "Avisar a Maikel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://qualivo.app.n8n.cloud/webhook/agentes/avisar-maikel",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ urgencia: 'normal', agente: 'Automatización · alta de clientes', titulo: 'Alta creada: ' + $('Juntar').first().json.cliente, texto: 'Proyecto en Todoist con ' + $('Juntar').first().json.tareas_creadas + ' tareas (' + $('Juntar').first().json.todoist + ').\\nPuesta en marcha prevista: ' + $('Juntar').first().json.puesta_en_marcha + '. Primera revisión: ' + $('Juntar').first().json.revision + '.\\nFalta: duplicar a mano la página del cliente («tu plan de arranque») desde la plantilla.', enlace: $json.url }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Avisos agentes (X-Qualivo-Token)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "Cliente firmado": {
+      "main": [
+        [
+          {
+            "node": "Plan de alta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Plan de alta": {
+      "main": [
+        [
+          {
+            "node": "Proyecto en Todoist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Proyecto en Todoist": {
+      "main": [
+        [
+          {
+            "node": "Una tarea por item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Una tarea por item": {
+      "main": [
+        [
+          {
+            "node": "Tarea en Todoist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tarea en Todoist": {
+      "main": [
+        [
+          {
+            "node": "Juntar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Juntar": {
+      "main": [
+        [
+          {
+            "node": "Client OS en Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Client OS en Notion": {
+      "main": [
+        [
+          {
+            "node": "Avisar a Maikel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false
+}
