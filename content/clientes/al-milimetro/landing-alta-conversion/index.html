@@ -128,6 +128,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .step b{font:700 16px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em}
 .step p{font-size:15px;color:var(--tinta2)}
 
+/* Mis obras */
+.obras{background:var(--crema)}
+.obras h2 em{color:var(--naranja)}
+.obras-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.obras-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}}
+.ovid{margin:0;max-width:360px;width:100%;justify-self:center;display:grid;gap:10px}
+.ovid video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:24px;border:2px solid var(--tinta);box-shadow:10px 10px 0 var(--tinta);background:var(--noche)}
+.ovid figcaption{font:700 13.5px/1.4 var(--mono);color:var(--mut);text-align:center}
+.ogal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ogal img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;border:2px solid var(--tinta)}
+
 /* Para quién */
 .fit{background:var(--noche);color:#F1EDE0;position:relative;overflow:hidden}
 .fit>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}
@@ -219,7 +230,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 @media (min-width:900px){.mbar{display:none}}
 </style>
 
-<div class="draft"><div class="wrap"><b>Borrador para Sonia</b> · no publicada · fotos de referencia, no son obras suyas · cifras «desde» pendientes de que valide el Excel</div></div>
+<div class="draft"><div class="wrap"><b>Borrador para Sonia</b> · no publicada · el bloque «Mis obras» usa fotos y vídeo de su Instagram (a confirmar que son suyas); el resto son fotos de referencia · cifras «desde» pendientes de que valide el Excel</div></div>
 
 <header class="top">
   <div class="wrap">
@@ -314,6 +325,26 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       <li class="step"><small>En 7 días</small><b>Presupuesto</b><p>Por partidas, con materiales y plazo.</p></li>
       <li class="step"><small>Hasta la entrega</small><b>Obra</b><p>La coordino yo. Cualquier cambio, por escrito antes de hacerlo.</p></li>
     </ol>
+  </div>
+</section>
+
+<section class="obras" aria-labelledby="h-obras">
+  <div class="wrap obras-grid">
+    <figure class="ovid">
+      <video src="img/obra.mp4" poster="img/obra-poster.jpg" autoplay muted loop playsinline aria-label="Vídeo de una obra: demolición, instalaciones nuevas y resultado"></video>
+      <figcaption>Una de mis obras, de la demolición a la entrega</figcaption>
+    </figure>
+    <div style="display:grid;gap:20px;min-width:0">
+      <span class="eb">Mis obras</span>
+      <h2 id="h-obras">Tu reforma, <em>sin agobios.</em></h2>
+      <p class="lead">¿Quieres reformar pero te da vértigo meterte en el fregado? Te acompaño en todo el proceso, de la primera visita a los últimos remates.</p>
+      <div class="ogal">
+        <img src="img/obra-bano-marmol.jpg" alt="Baño reformado con porcelánico tipo mármol y grifería dorada" loading="lazy">
+        <img src="img/obra-aseo-azul.jpg" alt="Aseo con papel pintado azul de flor de almendro" loading="lazy">
+        <img src="img/obra-bano-gris.jpg" alt="Baño gris con mampara" loading="lazy">
+        <img src="img/obra-bano-espejo.jpg" alt="Baño con espejo iluminado y grifería dorada" loading="lazy">
+      </div>
+    </div>
   </div>
 </section>
 
