@@ -13,7 +13,7 @@ const M = require('./_am-modelo.js');
 const DB = require('./_am-db.js');
 
 const CACHE_MS = 60000;
-const ETAPAS = { nuevo: [1, 'Nuevo'], contactado: [2, 'Contactado'], visita: [3, 'Visita técnica'], presupuesto: [4, 'Presupuesto enviado'], firmado: [6, 'Firmado'], perdido: [4, 'Perdido'] };
+const ETAPAS = { nuevo: [1, 'Nuevo'], contactado: [2, 'Contactado'], visita: [3, 'Visita técnica'], presupuesto: [4, 'Presupuesto enviado'], firmado: [6, 'Firmado'], perdido: [4, 'Perdido'], parado: [2, 'Parado'] };
 // Valor orientativo de la obra según el tramo que marcó (para ordenar y sumar; no es su presupuesto)
 const VALOR = { '<15': 12000, '15-30': 22000, '30-60': 45000, '60-160': 100000, '>160': 180000, nose: 27500 };
 
@@ -31,7 +31,7 @@ async function recoger() {
   const contactos = filas.map(function (r) {
     const L = M.vista(r), e = ETAPAS[L.etapa] || ETAPAS.nuevo;
     return {
-      id: L.id, n: corto(L.nombre), etapaNombre: e[1], etapa: e[0], fin: L.etapa === 'firmado' ? 'ganado' : L.etapa === 'perdido' ? 'perdido' : null,
+      id: L.id, n: corto(L.nombre), etapaNombre: e[1], etapa: e[0], fin: L.etapa === 'firmado' ? 'ganado' : (L.etapa === 'perdido' || L.etapa === 'parado') ? 'perdido' : null,
       clase: L.clase, puntos: L.puntos, origen: L.origen, tipo: L.tipoLargo, zona: L.mun, cp: L.cp, metros: L.m2Txt, cuando: L.cuandoTxt,
       presupuesto: L.pptoTxt, revision: L.revision, prueba: L.prueba, contesto: L.contesto, valor: VALOR[L.ppto] || 27500,
       creado: Date.parse(L.creado), cambio: Date.parse(L.etapa_cambio)
