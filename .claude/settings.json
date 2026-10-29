@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "mcp__Apollo_io",
       "mcp__Apollo_io__apollo_mixed_people_api_search",
       "mcp__Apollo_io__apollo_organizations_lookup",
       "mcp__Gmail__search_threads",
