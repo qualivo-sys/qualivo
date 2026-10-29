@@ -1,0 +1,528 @@
+<title>Al Milímetro · Calcula tu reforma</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Anonymous+Pro:wght@400;700&display=swap">
+<style>
+/* Landing de conversión con la identidad de su web: foto a sangre como los anuncios, un solo botón,
+   el formulario empieza en la portada. Tema único claro, como su marca. */
+:root{
+  color-scheme:light;
+  --crema:#F5F4E7; --papel:#FBFAF3; --arena:#ECE7D3; --linea:#DED8C2;
+  --tinta:#252525; --tinta2:#3B3936; --mut:#625E56;
+  --naranja:#F46315; --naranja2:#C94A0A; --ambar:#EA9011; --amarillo:#FDC023;
+  --ok:#2F6B4F; --noche:#1C1A18;
+  --serif:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --sans:"Inter","Segoe UI",system-ui,sans-serif;
+  --mono:"Anonymous Pro",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--papel);color:var(--tinta);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.012em;line-height:1.03;text-wrap:balance}
+h1{font-size:clamp(40px,6.6vw,78px)}
+h2{font-size:clamp(32px,4.4vw,52px)}
+h1 em,h2 em{font-style:italic}
+:focus-visible{outline:3px solid var(--naranja);outline-offset:3px}
+.wrap{max-width:1140px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:760px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+section{padding-block:72px}
+@media (min-width:900px){section{padding-block:104px}}
+.eb{display:inline-flex;align-items:center;gap:10px;font:700 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--naranja2)}
+.eb::before{content:"";width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--naranja),var(--amarillo))}
+.lead{font-size:19px;color:var(--tinta2);max-width:38em}
+.head{display:grid;gap:16px;max-width:720px;margin-bottom:44px}
+.head h2 em{color:var(--naranja)}
+
+.btn{font:700 17px/1.2 var(--mono);display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:14px;padding:16px 26px;min-height:56px;text-decoration:none;border:2px solid var(--tinta);cursor:pointer;background:var(--amarillo);color:var(--tinta);transition:transform .15s,box-shadow .15s;box-shadow:4px 4px 0 var(--tinta)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--tinta)}
+.btn-sm{min-height:44px;padding:10px 16px;font-size:15px;box-shadow:3px 3px 0 var(--tinta)}
+.btn-ghost{background:transparent;box-shadow:none}
+.btn-ghost:hover{background:var(--crema);box-shadow:none;transform:none}
+
+/* Aviso de borrador */
+.draft{background:var(--tinta);color:#E9E4D6;font-size:13.5px}
+.draft .wrap{padding-block:8px}
+.draft b{color:var(--amarillo)}
+
+/* Cabecera */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(251,250,243,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--papel)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.top img{width:150px;filter:brightness(0)}
+@media (max-width:480px){.top img{width:116px}}
+
+/* Portada: foto a sangre, como los anuncios */
+.hero{position:relative;color:#fff;background:var(--noche);overflow:hidden;padding-block:0}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,20,18,.35) 0%,rgba(22,20,18,.55) 40%,rgba(22,20,18,.92) 100%)}
+@media (min-width:960px){.hero::after{background:linear-gradient(90deg,rgba(22,20,18,.9) 0%,rgba(22,20,18,.72) 48%,rgba(22,20,18,.2) 100%)}}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:28px;padding-block:120px 48px}
+@media (min-width:960px){.hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:end;gap:56px;padding-block:140px 96px}}
+.hero-copy{display:grid;gap:20px;min-width:0}
+.hero .eb{color:var(--amarillo)}
+.hero h1 em{color:var(--amarillo)}
+.hero .lead{color:rgba(255,255,255,.9)}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;font:700 14px/1.3 var(--mono);color:#fff}
+.trust span::before{content:"✓ ";color:var(--amarillo)}
+
+/* Primer paso del formulario dentro de la portada */
+.quick{background:var(--papel);color:var(--tinta);border:2px solid var(--tinta);border-radius:22px;box-shadow:8px 8px 0 var(--amarillo);padding:22px;display:grid;gap:14px;min-width:0}
+.quick .k{font:700 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--naranja2)}
+.quick h2{font-size:clamp(26px,3vw,32px)}
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.qbtn{font:600 16px/1.3 var(--sans);text-align:left;background:#fff;color:var(--tinta);border:2px solid var(--linea);border-radius:14px;padding:14px;cursor:pointer;min-height:64px;display:flex;flex-direction:column;gap:2px;transition:border-color .12s,background .12s}
+.qbtn:hover{border-color:var(--tinta);background:var(--amarillo)}
+.qbtn small{font-weight:400;color:var(--mut);font-size:13.5px}
+.quick .foot{font-size:13.5px;color:var(--mut)}
+
+/* Franja */
+.strip{background:var(--tinta);color:#EFEBDD}
+.strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.strip div{padding:22px 16px;display:grid;gap:4px;border-left:1px solid #3F3C38}
+.strip div:first-child{border-left:0}
+.strip b{font:700 15px/1.2 var(--mono);color:var(--amarillo);text-transform:uppercase;letter-spacing:.04em}
+.strip span{font-size:15px;color:#CFC9BA}
+@media (max-width:520px){.strip div{border-left:0;border-top:1px solid #3F3C38}.strip div:first-child{border-top:0}}
+
+/* Antes y después */
+.ba-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.ba-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px}}
+.ba{position:relative;max-width:440px;width:100%;justify-self:center;border-radius:24px;overflow:hidden;border:2px solid var(--tinta);box-shadow:10px 10px 0 var(--tinta);aspect-ratio:9/14;background:var(--arena);touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .after{clip-path:inset(0 0 0 var(--cut,50%))}
+.ba .line{position:absolute;top:0;bottom:0;left:var(--cut,50%);width:3px;background:#fff;transform:translateX(-50%);pointer-events:none}
+.ba .line::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--amarillo);border:2px solid var(--tinta);display:grid;place-items:center;font:700 20px/1 var(--mono);color:var(--tinta)}
+.ba .tag{position:absolute;top:14px;font:700 13px/1 var(--mono);background:var(--papel);border:1.5px solid var(--tinta);border-radius:8px;padding:7px 10px}
+.ba .tag.l{left:14px}.ba .tag.r{right:14px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.checks{display:grid;gap:14px;list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:auto 1fr;gap:2px 16px;padding:16px 0;border-top:2px solid var(--tinta)}
+.checks li span:first-child{grid-row:span 2;font:700 15px/1.6 var(--mono);color:var(--naranja2)}
+.checks b{font-size:18px}
+.checks p{color:var(--tinta2);font-size:16px}
+
+/* Portal o aquí */
+.vs{background:var(--crema)}
+.vs-grid{display:grid;gap:22px}
+@media (min-width:860px){.vs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vcol{border-radius:24px;padding:28px;display:grid;gap:14px;align-content:start}
+.vcol h3{font:700 14px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.vcol ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.vcol li{display:flex;gap:12px;align-items:flex-start;font-size:17px}
+.vcol li::before{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 14px/1 var(--mono);margin-top:1px}
+.v-no{background:var(--arena);color:var(--tinta2)}
+.v-no h3{color:var(--mut)}
+.v-no li::before{content:"✕";border:1.5px solid var(--mut);color:var(--mut)}
+.v-si{background:var(--tinta);color:#F1EDE0;box-shadow:8px 8px 0 var(--naranja)}
+.v-si h3{color:var(--amarillo)}
+.v-si li::before{content:"✓";background:var(--amarillo);color:var(--tinta)}
+
+/* Proceso */
+.steps{display:grid;gap:16px;list-style:none;padding:0;margin:0}
+@media (min-width:760px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1080px){.steps{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.step{background:#fff;border:2px solid var(--tinta);border-radius:20px;padding:20px;display:grid;gap:8px;align-content:start}
+.step small{font:700 12.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--naranja2)}
+.step b{font:700 16px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em}
+.step p{font-size:15px;color:var(--tinta2)}
+
+/* Para quién */
+.fit{background:var(--noche);color:#F1EDE0;position:relative;overflow:hidden}
+.fit>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28}
+.fit .wrap{position:relative;z-index:1}
+.fit .eb{color:var(--amarillo)}
+.fit h2 em{color:var(--amarillo)}
+.fit .lead{color:#D6D0C2}
+.yn{display:grid;gap:22px}
+@media (min-width:860px){.yn{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.yn div{background:rgba(251,250,243,.06);border:1.5px solid rgba(255,255,255,.25);border-radius:22px;padding:26px;display:grid;gap:12px;align-content:start}
+.yn h3{font-family:var(--serif);font-weight:400;font-size:28px}
+.yn ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.zones{margin-top:28px;font:700 14.5px/1.7 var(--mono);color:#E9E4D6}
+.zones b{color:var(--amarillo)}
+
+/* Quién */
+.who{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.who{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}}
+.portrait{aspect-ratio:4/5;max-width:400px;width:100%;justify-self:center;border-radius:24px;border:2px dashed var(--tinta);background:var(--arena);display:grid;place-items:center;text-align:center;padding:24px;color:var(--mut)}
+.portrait b{display:block;font-family:var(--serif);font-weight:400;font-size:26px;color:var(--tinta)}
+blockquote{margin:0;font-family:var(--serif);font-size:clamp(26px,3vw,34px);line-height:1.2;text-wrap:balance}
+.sig{font:700 16px/1.3 var(--mono)}.sig span{display:block;font:400 15px/1.4 var(--sans);color:var(--mut)}
+
+/* Formulario */
+.calc{background:var(--crema)}
+.calc-grid{display:grid;gap:40px}
+@media (min-width:980px){.calc-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}}
+.side{display:grid;gap:20px;min-width:0}
+.side h2 em{color:var(--naranja)}
+.ticks{display:grid;gap:10px;padding:0;margin:0;list-style:none;font-weight:500}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--amarillo);border:1.5px solid var(--tinta);font:700 13px/1 var(--mono);margin-top:1px}
+.side .note{border-top:2px solid var(--tinta);padding-top:16px;font:400 15px/1.55 var(--mono)}
+.panel{background:#fff;border:2px solid var(--tinta);border-radius:24px;box-shadow:10px 10px 0 var(--tinta);padding:22px;display:grid;gap:20px;min-width:0;scroll-margin-top:90px}
+@media (min-width:600px){.panel{padding:34px}}
+.prog{display:flex;gap:6px}
+.prog i{flex:1;height:7px;border-radius:9px;background:var(--arena)}
+.prog i.on{background:linear-gradient(90deg,var(--naranja),var(--amarillo))}
+.panel .k{font:700 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.panel h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,33px);line-height:1.12}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.opt{display:block;border:2px solid var(--linea);background:var(--papel);border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;font:500 16px/1.35 var(--sans);color:var(--tinta);width:100%;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--tinta)}
+.opt[aria-pressed="true"]{border-color:var(--tinta);background:var(--amarillo)}
+.opt small{display:block;color:var(--mut);font-weight:400;font-size:14px}
+.field{display:grid;gap:6px}
+.field label{font:700 14.5px/1.3 var(--mono)}
+.field input,.field textarea{font:400 16px/1.4 var(--sans);border:2px solid var(--linea);border-radius:12px;padding:13px 14px;background:var(--papel);color:var(--tinta);width:100%}
+.field input:focus,.field textarea:focus{border-color:var(--tinta);outline:none}
+.row2{display:grid;gap:12px}
+@media (min-width:560px){.row2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut)}
+.consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--naranja)}
+.navq{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.err{color:var(--naranja2);font-size:14px;font-weight:600}
+.result{display:grid;gap:14px}
+.price{font-family:var(--serif);font-size:clamp(46px,6vw,66px);line-height:1}
+.price small{font:700 17px var(--mono);color:var(--mut);margin-right:8px}
+.nextlist{display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.nextlist li{display:flex;gap:12px;align-items:flex-start}
+.nextlist li b{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--amarillo);border:1.5px solid var(--tinta);font:700 13px var(--mono)}
+
+/* Preguntas */
+.faq{display:grid;gap:12px;max-width:840px}
+.faq details{background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:4px 20px}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding-block:16px;font-weight:600;font-size:17.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:700 24px/.9 var(--mono);color:var(--naranja)}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding-bottom:18px;color:var(--tinta2);max-width:62ch}
+
+/* Cierre */
+.end{position:relative;color:#fff;background:var(--noche);overflow:hidden}
+.end>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.end .wrap{position:relative;z-index:1;display:grid;gap:22px;justify-items:start}
+.end h2 em{color:var(--amarillo)}
+footer{background:var(--tinta);color:#BDB6A6;font-size:14.5px}
+footer .wrap{display:grid;gap:20px;padding-block:40px 120px}
+@media (min-width:860px){footer .wrap{grid-template-columns:1.2fr 1fr 1fr;padding-bottom:44px}}
+footer img{width:140px;filter:brightness(0) invert(1);opacity:.9}
+footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6px}
+
+/* Barra fija en el móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(251,250,243,.97);border-top:2px solid var(--tinta);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;gap:12px;align-items:center;justify-content:space-between;transform:translateY(110%);transition:transform .25s}
+.mbar.on{transform:none}
+.mbar span{font-size:13.5px;color:var(--mut);line-height:1.3}
+.mbar .btn{flex:none}
+@media (min-width:900px){.mbar{display:none}}
+</style>
+
+<div class="draft"><div class="wrap"><b>Borrador para Sonia</b> · no publicada · fotos de referencia, no son obras suyas · cifras «desde» pendientes de que valide el Excel</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <img src="img/logo.png" alt="Al Milímetro">
+    <a class="btn btn-sm" href="#calcula" data-track="clic_calcula" data-pos="cabecera">Calcula tu reforma</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio" aria-labelledby="h1">
+  <img id="hero-img" src="img/salon.jpg" alt="" width="1100" height="1375">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eb" id="hero-eb">Reformas integrales · Madrid y noroeste</span>
+      <h1 id="h1">La arquitecta que te da el presupuesto es <em>la que hace tu obra.</em></h1>
+      <p class="lead" id="hero-lead">Pisos y chalets completos. Visito tu casa, reviso lo que no se ve y en 7 días tienes el presupuesto por partidas. Sin comerciales ni portales.</p>
+      <div class="trust"><span>Partidas en 7 días</span><span>Sin portales</span><span>Una sola persona</span></div>
+    </div>
+    <div class="quick" aria-labelledby="h-quick">
+      <span class="k">Calcula tu reforma · 2 minutos</span>
+      <h2 id="h-quick">¿Qué quieres reformar?</h2>
+      <div class="qgrid">
+        <button type="button" class="qbtn" data-v="chalet">Una casa o chalet<small>completo</small></button>
+        <button type="button" class="qbtn" data-v="piso">Un piso<small>completo</small></button>
+        <button type="button" class="qbtn" data-v="cb">Cocina y baño<small>de la misma vivienda</small></button>
+        <button type="button" class="qbtn" data-v="otro">Otra cosa<small>dos baños, un baño…</small></button>
+      </div>
+      <p class="foot">6 preguntas y te digo desde cuánto sale. Tus datos no van a ninguna otra empresa.</p>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-label="Lo esencial">
+  <div class="wrap">
+    <div><b>Sin portales</b><span>Lo que me cuentas lo leo yo, no cuatro empresas</span></div>
+    <div><b>7 días</b><span>De la visita al presupuesto por partidas</span></div>
+    <div><b>Una sola persona</b><span>Proyecto y coordino todos los gremios</span></div>
+    <div><b>Desde 15.000 €</b><span>Si tu obra no es lo mío, te lo digo el primer día</span></div>
+  </div>
+</div>
+
+<section aria-labelledby="h-ba">
+  <div class="wrap ba-grid">
+    <div class="ba" id="ba" style="--cut:50%">
+      <img src="img/antes.jpg" alt="Pasillo de un piso antiguo con la pared abierta: tuberías y cables viejos" loading="lazy">
+      <img class="after" src="img/despues.jpg" alt="El mismo pasillo reformado, con suelo de madera y paredes blancas" loading="lazy">
+      <span class="tag l">Lo que no se ve</span><span class="tag r">Reformado</span>
+      <span class="line" aria-hidden="true"></span>
+      <label for="ba-range" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Mover para comparar antes y después</label>
+      <input type="range" id="ba-range" min="0" max="100" value="50">
+    </div>
+    <div style="display:grid;gap:22px;min-width:0">
+      <span class="eb">Antes de darte el precio</span>
+      <h2 id="h-ba">Lo que encarece una reforma <em style="color:var(--naranja)">está detrás de las paredes.</em></h2>
+      <p class="lead">El presupuesto que entra bajo y luego sube suele fallar en lo que no se ve. Por eso lo reviso en la visita, antes de darte una cifra.</p>
+      <ul class="checks">
+        <li><span>01</span><b>Instalaciones de luz y agua</b><p>Cuadro, cableado y tuberías. Si hay que cambiarlos, va en el presupuesto desde el principio.</p></li>
+        <li><span>02</span><b>Bajantes</b><p>La sorpresa más cara de un piso antiguo. La compruebo antes de tocar baño o cocina.</p></li>
+        <li><span>03</span><b>Suelo y ventanas</b><p>Si hay que levantar o cambiar, te lo digo ahora y no cuando ya está pintado.</p></li>
+      </ul>
+      <a class="btn" href="#calcula" data-track="clic_calcula" data-pos="antes-despues" style="justify-self:start">Calcula tu reforma →</a>
+    </div>
+  </div>
+</section>
+
+<section class="vs" aria-labelledby="h-vs">
+  <div class="wrap">
+    <div class="head">
+      <span class="eb">Por qué no es un portal</span>
+      <h2 id="h-vs">Pedir presupuesto no debería <em>llenarte el móvil de llamadas.</em></h2>
+    </div>
+    <div class="vs-grid">
+      <div class="vcol v-no"><h3>En un portal de presupuestos</h3><ul>
+        <li>Tu teléfono pasa a varias empresas que no conoces.</li>
+        <li>Te llama un comercial que no va a hacer tu obra.</li>
+        <li>Recibes totales sin desglose que no se pueden comparar.</li></ul></div>
+      <div class="vcol v-si"><h3>Con Al Milímetro</h3><ul>
+        <li>Lo que me cuentas lo leo yo, la arquitecta que hará tu obra.</li>
+        <li>Te escribo por WhatsApp en horario de oficina, sin llamadas a deshoras.</li>
+        <li>Presupuesto por partidas en 7 días desde la visita.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" aria-labelledby="h-steps">
+  <div class="wrap">
+    <div class="head"><span class="eb">El proceso</span><h2 id="h-steps">Del formulario a tu obra, <em>con fechas.</em></h2></div>
+    <ol class="steps">
+      <li class="step"><small>2 minutos</small><b>Formulario</b><p>Me cuentas tu casa y ves desde cuánto sale.</p></li>
+      <li class="step"><small>El mismo día laborable</small><b>WhatsApp</b><p>Te escribo para hablar 10 minutos.</p></li>
+      <li class="step"><small>Cuando te venga bien</small><b>Visita técnica</b><p>Mido y reviso lo que no se ve.</p></li>
+      <li class="step"><small>En 7 días</small><b>Presupuesto</b><p>Por partidas, con materiales y plazo.</p></li>
+      <li class="step"><small>Hasta la entrega</small><b>Obra</b><p>La coordino yo. Cualquier cambio, por escrito antes de hacerlo.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="fit" aria-labelledby="h-fit">
+  <img src="img/chalet.jpg" alt="" loading="lazy">
+  <div class="wrap">
+    <div class="head">
+      <span class="eb">Para quién</span>
+      <h2 id="h-fit">Hago pocas obras, <em>para hacerlas bien.</em></h2>
+      <p class="lead">Si lo tuyo no encaja, te lo digo el primer día y no te hago perder el tiempo.</p>
+    </div>
+    <div class="yn">
+      <div><h3>Sí, si…</h3><ul>
+        <li>Quieres reformar tu chalet o tu piso entero, o la cocina y el baño a la vez.</li>
+        <li>La obra parte de unos 15.000 €.</li>
+        <li>Quieres saber qué pagas por cada partida antes de empezar.</li></ul></div>
+      <div><h3>No, si…</h3><ul>
+        <li>Buscas un arreglo suelto: una puerta, unos azulejos, un falso techo.</li>
+        <li>Es un local o una oficina.</li>
+        <li>Solo te importa el precio más bajo.</li></ul></div>
+    </div>
+    <p class="zones"><b>Chalets:</b> Boadilla del Monte · Majadahonda · Villaviciosa de Odón · Torrelodones · Moncloa-Aravaca<br><b>Pisos:</b> Chamberí · Salamanca · Retiro · Prosperidad · Hortaleza · Alameda de Osuna · Las Tablas · Mirasierra · Peña Grande</p>
+  </div>
+</section>
+
+<section aria-labelledby="h-who">
+  <div class="wrap who">
+    <div class="portrait"><div><b>Foto de Sonia</b>La que va a mandar, en blanco y negro como en su web.</div></div>
+    <div style="display:grid;gap:22px;min-width:0">
+      <span class="eb">Quién está detrás</span>
+      <h2 id="h-who">Soy Sonia, arquitecta. <em style="color:var(--naranja)">Te hablo claro desde el primer día.</em></h2>
+      <blockquote>«Prefiero decirte la verdad antes de empezar que darte una sorpresa a mitad de obra.»</blockquote>
+      <p class="sig">Sonia<span>Arquitecta · Al Milímetro</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="calc" id="calcula" aria-labelledby="h-calc">
+  <div class="wrap calc-grid">
+    <div class="side">
+      <span class="eb">Calcula tu reforma</span>
+      <h2 id="h-calc">Seis preguntas y te digo <em>desde cuánto sale.</em></h2>
+      <p class="lead">Tardas 2 minutos. La cifra buena te la doy después de ver tu casa.</p>
+      <ul class="ticks">
+        <li>Tus datos no van a ningún portal ni a otras empresas</li>
+        <li>Te escribo por WhatsApp, sin llamadas a deshoras</li>
+        <li>Si no es lo mío, te lo digo y no te molesto más</li>
+      </ul>
+      <p class="note">Lunes a jueves, de 9:00 a 19:00 · viernes, de 9:00 a 15:00</p>
+    </div>
+    <form class="panel" id="calc" novalidate aria-live="polite">
+      <div class="prog" id="prog" aria-hidden="true"></div>
+      <div id="stage"></div>
+    </form>
+  </div>
+</section>
+
+<section id="preguntas" aria-labelledby="h-faq">
+  <div class="wrap">
+    <div class="head"><span class="eb">Preguntas</span><h2 id="h-faq">Lo que me preguntáis antes de empezar.</h2></div>
+    <div class="faq">
+      <details><summary>¿Cuánto cuesta reformar un piso en Madrid?</summary><p>Depende de los metros, del estado y de los acabados. Una reforma completa de un piso suele empezar en unos 35.000 € a partir de 50 m². La cifra cerrada, por partidas, te la doy después de la visita.</p></details>
+      <details><summary>¿Pasáis mis datos a otras empresas?</summary><p>No. Esto no es un portal: lo que me cuentas en el formulario lo leo yo, la arquitecta que hará tu obra.</p></details>
+      <details><summary>¿Cuánto tarda una reforma integral?</summary><p>Depende del tamaño y de lo que haya que cambiar. Te doy el plazo antes de empezar, junto con el presupuesto.</p></details>
+      <details><summary>¿Qué pasa si algo cambia durante la obra?</summary><p>Te lo explico, te doy el precio y no se hace hasta que lo apruebas por escrito.</p></details>
+      <details><summary>¿Hacéis reformas pequeñas o arreglos?</summary><p>No. Me dedico a reformas completas de viviendas, y a cocina y baño de la misma vivienda. Para un arreglo suelto te irá mejor un albañil u oficial de confianza de tu zona.</p></details>
+      <details><summary>¿Trabajáis fuera de estas zonas?</summary><p>Depende de la obra. Dime en el formulario dónde está tu casa y te digo si llego.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="end" aria-labelledby="h-end">
+  <img src="img/despues.jpg" alt="" loading="lazy">
+  <div class="wrap">
+    <h2 id="h-end">¿Empezamos por saber <em>cuánto cuesta tu reforma?</em></h2>
+    <a class="btn" href="#calcula" data-track="clic_calcula" data-pos="cierre">Calcula tu reforma →</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:grid;gap:12px"><img src="img/logo.png" alt="Al Milímetro"><p>Reformas integrales de pisos y chalets en Madrid.</p></div>
+    <div><b>Horario</b>Lunes a jueves, de 9:00 a 19:00<br>Viernes, de 9:00 a 15:00</div>
+    <div><b>Contacto</b>WhatsApp [número nuevo del negocio]<br>almilimetroreformas.com<br>Aviso legal · Privacidad</div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true"><span>2 minutos · sin portales</span><a class="btn btn-sm" href="#calcula" data-track="clic_calcula" data-pos="barra-movil" tabindex="-1">Calcula tu reforma →</a></div>
+
+<script>
+(function(){
+  // Medición: va a dataLayer (GTM → Meta y GA4)
+  window.dataLayer=window.dataLayer||[];
+  function track(ev,data){var o={event:ev};for(var k in (data||{}))o[k]=data[k];window.dataLayer.push(o)}
+  document.querySelectorAll('[data-track]').forEach(function(a){a.addEventListener('click',function(){track(a.dataset.track,{posicion:a.dataset.pos})})});
+  var hit={};window.addEventListener('scroll',function(){var h=document.documentElement,pc=(h.scrollTop+innerHeight)/h.scrollHeight*100;[25,50,75,100].forEach(function(m){if(pc>=m-1&&!hit[m]){hit[m]=1;track('scroll_'+m)}})},{passive:true});
+
+  // Mismo mensaje que el anuncio: ?a=pared | chalet | precio | portal (y &m=municipio para chalet)
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var qs={};try{location.search.slice(1).split('&').forEach(function(p){var kv=p.split('=');if(kv[0])qs[kv[0]]=decodeURIComponent((kv[1]||'').replace(/\+/g,' '))})}catch(e){}
+  var MUN=['Majadahonda','Boadilla del Monte','Villaviciosa de Odón','Torrelodones','Aravaca'];
+  var V={
+    pared:{img:'img/pared.jpg',eb:'Pisos de más de 30 años',h:'¿Tu piso tiene más de 30 años? Esto es lo que hay <em>detrás de sus paredes.</em>',l:'Tuberías, cables y bajantes: lo que dispara una reforma. Yo lo reviso en la visita, antes de darte el precio, y en 7 días tienes el presupuesto por partidas.'},
+    chalet:{img:'img/chalet.jpg',eb:'Chalets · noroeste de Madrid',h:'¿Tu chalet necesita una reforma <em>de verdad?</em>',l:'Instalaciones, cocina, baños, distribución y, si hace falta, ventanas. Lo proyecto y lo coordino yo, de principio a fin.'},
+    precio:{img:'img/cocina.jpg',eb:'Calcula tu reforma',h:'¿Cuánto cuesta reformar <em>tu casa en Madrid?</em>',l:'Contesta 6 preguntas y te digo desde cuánto sale, antes de cualquier visita. La cifra buena, por partidas, después de ver tu casa.'},
+    portal:{img:'img/salon.jpg',eb:'Sin portales',h:'Tus datos no van a <em>cuatro empresas.</em>',l:'Lo que me cuentas lo leo yo, la arquitecta que hará tu obra. Te escribo por WhatsApp y, si tu obra encaja, voy a verla.'}
+  };
+  var v=V[qs.a];
+  if(v){
+    if(qs.a==='chalet'&&MUN.indexOf(qs.m)>-1){v.h='¿Tienes un chalet en <em>'+esc(qs.m)+'</em> que pide una reforma completa?'}
+    document.getElementById('hero-img').src=v.img;document.getElementById('hero-eb').textContent=v.eb;document.getElementById('h1').innerHTML=v.h;document.getElementById('hero-lead').textContent=v.l;
+    track('variante_landing',{anuncio:qs.a});
+  }
+
+  // Antes y después
+  var ba=document.getElementById('ba'),r=document.getElementById('ba-range');
+  r.addEventListener('input',function(){ba.style.setProperty('--cut',r.value+'%')});
+  r.addEventListener('change',function(){track('antes_despues')},{once:true});
+
+  // Barra fija en el móvil: aparece tras la portada y se esconde al llegar al formulario
+  var bar=document.getElementById('mbar'),hero=document.getElementById('inicio'),calc=document.getElementById('calcula'),pastHero=false,atCalc=false;
+  function upd(){var on=pastHero&&!atCalc;bar.classList.toggle('on',on);bar.setAttribute('aria-hidden',on?'false':'true');bar.querySelector('a').tabIndex=on?0:-1}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){pastHero=!e[0].isIntersecting;upd()}).observe(hero);
+    new IntersectionObserver(function(e){atCalc=e[0].isIntersecting;upd()}).observe(calc);
+  }
+
+  // «Calcula tu reforma»: 6 preguntas + contacto, con los descartes y las segundas preguntas del 23-oct
+  var Q=[
+    {id:'tipo',t:'¿Qué quieres reformar?',o:[
+      ['chalet','Una casa o chalet entero'],['piso','Un piso entero'],['cb','Cocina y baño de la misma vivienda'],['2b','Dos baños'],
+      ['suelto','Solo un baño o solo la cocina'],['local','Un local u oficina'],['arreglo','Arreglos sueltos','Una puerta, unos azulejos, un falso techo…']]},
+    {id:'zona',t:'¿Dónde está la vivienda?',input:true},
+    {id:'m2',t:'¿Cuántos metros tiene, más o menos?',two:true,o:[['<50','Menos de 50 m²'],['50-80','50-80 m²'],['80-120','80-120 m²'],['120-200','120-200 m²'],['>200','Más de 200 m²']]},
+    {id:'cuando',t:'¿Cuándo te gustaría empezar?',two:true,o:[['3','En menos de 3 meses'],['6','Entre 3 y 6 meses'],['mas','Más adelante'],['mirando','Solo estoy mirando precios']]},
+    {id:'ppto',t:'¿Qué presupuesto orientativo tienes en mente?',two:true,o:[['<15','Menos de 15.000 €'],['15-30','15.000-30.000 €'],['30-60','30.000-60.000 €'],['60-160','60.000-160.000 €'],['>160','Más de 160.000 €'],['nose','Todavía no lo sé']]},
+    {id:'propia',t:'¿La vivienda ya es tuya?',two:true,o:[['si','Sí'],['comprando','La estoy comprando'],['no','No']]}
+  ];
+  // Códigos postales estimados por nosotros, a confirmar con Sonia: sur excluido e interior de la M-30
+  var SUR=/^(2803[18]|28041|28051|28053|28021|2890\d|2891\d|2893\d|2897\d)$/;
+  var M30=/^(2800[1-9]|2801[0-5]|28020|28028|28045|28036|28039)$/;
+  var DESDE={chalet:['160.000 €','chalet completo, unos 200 m²'],piso:['35.000 €','piso completo, desde 50 m²'],cb:['15.000 €','cocina y baño de la misma vivienda'],'2b':['15.000 €','dos baños'],suelto:['15.000 €','obra mínima']};
+  var started=0,A={},i=0,form=document.getElementById('calc'),stage=document.getElementById('stage'),prog=document.getElementById('prog');
+  function bar7(n){prog.innerHTML='';for(var k=0;k<7;k++){var e=document.createElement('i');if(k<n)e.className='on';prog.appendChild(e)}}
+  function start(){if(!started){started=1;track('form_inicio')}}
+  function render(){
+    var q=Q[i];bar7(i+1);
+    var h='<span class="k">Pregunta '+(i+1)+' de 6</span><h3>'+q.t+'</h3>';
+    if(q.input){h+='<div class="row2"><div class="field"><label for="f-cp">Código postal</label><input id="f-cp" inputmode="numeric" maxlength="5" placeholder="28010" value="'+esc(A.cp||'')+'"></div><div class="field"><label for="f-mun">Municipio o barrio</label><input id="f-mun" placeholder="Chamberí" value="'+esc(A.mun||'')+'"></div></div><p class="err" id="err" hidden>Escribe un código postal de 5 cifras.</p>';}
+    else{h+='<div class="opts'+(q.two?' two':'')+'">';q.o.forEach(function(o){h+='<button type="button" class="opt" data-v="'+o[0]+'" aria-pressed="'+(A[q.id]===o[0])+'">'+o[1]+(o[2]?'<small>'+o[2]+'</small>':'')+'</button>'});h+='</div>';}
+    h+='<div class="navq">'+(i>0?'<button type="button" class="btn btn-ghost btn-sm" id="back">← Atrás</button>':'<span></span>')+(q.input?'<button type="button" class="btn btn-sm" id="next">Siguiente →</button>':'')+'</div>';
+    stage.innerHTML=h;
+    stage.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){start();A[q.id]=b.dataset.v;afterAnswer(q.id)})});
+    var nx=document.getElementById('next');if(nx)nx.addEventListener('click',function(){var cp=document.getElementById('f-cp').value.trim();A.cp=cp;A.mun=document.getElementById('f-mun').value.trim();if(!/^\d{5}$/.test(cp)){document.getElementById('err').hidden=false;return}afterAnswer('zona')});
+  }
+  function afterAnswer(id){
+    if(id==='tipo'&&(A.tipo==='local'||A.tipo==='arreglo'))return nofit('tipo');
+    if(id==='zona'){if(SUR.test(A.cp))return nofit('zona');if(A.tipo==='suelto'&&!M30.test(A.cp))return nofit('suelto');}
+    i++;
+    if(i<Q.length)return render();
+    if(A.ppto==='<15'||A.tipo==='suelto'||(A.ppto==='nose'&&A.m2==='<50'))return second();
+    contact();
+  }
+  document.addEventListener('click',function(e){if(e.target&&e.target.id==='back'){i=Math.max(0,i-1);render()}});
+  function second(){bar7(6);
+    stage.innerHTML='<span class="k">Dos preguntas más</span><h3>Para saber si te puedo ayudar bien</h3>'+
+    '<div class="field"><label for="f-frase">Cuéntame en una frase qué te gustaría cambiar</label><textarea id="f-frase" rows="2" placeholder="Los dos baños y la cocina, que están como hace 30 años"></textarea></div>'+
+    '<div class="field"><span style="font:700 14.5px/1.3 var(--mono)">¿Hay que tocar fontanería o electricidad, o es sobre todo cambiar acabados?</span><div class="opts two"><button type="button" class="opt" data-v="inst">Fontanería o electricidad</button><button type="button" class="opt" data-v="acab">Solo acabados</button><button type="button" class="opt" data-v="nose">No lo sé</button></div></div>';
+    stage.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){A.inst=b.dataset.v;A.frase=document.getElementById('f-frase').value;if(A.inst==='acab')return nofit('acab');contact(true)})});
+  }
+  function contact(review){bar7(7);A.review=!!review;
+    stage.innerHTML='<span class="k">Último paso</span><h3>¿Dónde te mando la cifra?</h3>'+
+    '<div class="field"><label for="f-nom">Nombre</label><input id="f-nom" autocomplete="given-name" placeholder="Laura"></div>'+
+    '<div class="row2"><div class="field"><label for="f-tel">Teléfono (WhatsApp)</label><input id="f-tel" type="tel" autocomplete="tel" placeholder="600 000 000"></div><div class="field"><label for="f-mail">Email</label><input id="f-mail" type="email" autocomplete="email" placeholder="laura@correo.com"></div></div>'+
+    '<label class="consent" for="f-ok"><input type="checkbox" id="f-ok"> Acepto que Al Milímetro me escriba para darme la cifra y, si quiero, quedar para la visita. Política de privacidad.</label>'+
+    '<p class="err" id="err" hidden>Falta el nombre, el teléfono o aceptar la privacidad.</p>'+
+    '<div class="navq"><span></span><button type="submit" class="btn">Ver desde cuánto sale →</button></div>';
+  }
+  form.addEventListener('submit',function(e){e.preventDefault();
+    var n=document.getElementById('f-nom'),tel=document.getElementById('f-tel'),ok=document.getElementById('f-ok');
+    if(!n||!n.value.trim()||tel.value.replace(/\D/g,'').length<9||!ok.checked){document.getElementById('err').hidden=false;return}
+    track('form_fin',{tipo:A.tipo,revision:A.review?'segundas':'desde'});result(n.value.trim());
+  });
+  function inHours(d){var day=d.getDay(),h=d.getHours()+d.getMinutes()/60;if(day>=1&&day<=4)return h>=9&&h<19;if(day===5)return h>=9&&h<15;return false}
+  function madridNow(){try{return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Madrid'}))}catch(e){return new Date()}}
+  function result(nombre){bar7(7);
+    var d=DESDE[A.tipo]||DESDE.piso,open=inHours(madridNow());
+    var h='<div class="result"><span class="k" style="color:var(--ok)">Recibido, '+esc(nombre)+'</span>';
+    if(A.review){h+='<h3>Gracias. Miro tu caso y te digo si es una obra que puedo hacer bien.</h3><p style="color:var(--mut)">Con lo que me has contado no puedo darte todavía una cifra fiable. Te escribo por WhatsApp para entenderlo mejor.</p>';}
+    else{h+='<h3>Una reforma así, en Madrid, empieza</h3><p class="price"><small>desde</small>'+d[0]+'</p><p style="color:var(--mut)">Referencia: '+d[1]+'. La cifra buena, por partidas, te la doy después de ver tu casa.</p>';}
+    h+='<ul class="nextlist"><li><b>1</b><span>'+(open?'En un momento te escribo por WhatsApp para hablar 10 minutos.':'Ahora estoy fuera de horario: te escribo por WhatsApp en cuanto abra (lunes a jueves de 9:00 a 19:00, viernes hasta las 15:00).')+'</span></li><li><b>2</b><span>Quedamos para la visita técnica en tu casa.</span></li><li><b>3</b><span>En 7 días tienes el presupuesto por partidas.</span></li></ul>'+
+      '<div class="navq"><button type="button" class="btn btn-ghost btn-sm" id="again">Volver a empezar</button></div></div>';
+    stage.innerHTML=h;document.getElementById('again').addEventListener('click',reset);
+  }
+  function nofit(why){bar7(0);track('form_descarte',{motivo:why});
+    var msg={tipo:'Me dedico a reformas completas de viviendas, y para lo que necesitas no te voy a poder dar el mejor precio.',zona:'Ahora mismo no trabajo en tu zona, y prefiero decírtelo antes que hacerte esperar.',suelto:'Un baño o una cocina sueltos solo los hago en el centro de Madrid, y tu casa queda fuera.',acab:'Para cambiar acabados sin tocar instalaciones no te voy a poder dar el mejor precio.'}[why];
+    stage.innerHTML='<div class="result"><span class="k" style="color:var(--naranja2)">Gracias por contarme tu proyecto</span><h3>Te soy sincera: esto no es lo mío.</h3><p>'+msg+'</p><p style="color:var(--mut)">Te recomiendo hablar con un albañil o un oficial de confianza de tu zona: te va a salir mejor. ¡Mucha suerte con tu casa!</p><div class="navq"><button type="button" class="btn btn-ghost btn-sm" id="again">Me he equivocado, volver a empezar</button></div></div>';
+    document.getElementById('again').addEventListener('click',reset);
+  }
+  function reset(){A={};i=0;started=0;render()}
+
+  // Primer paso en la portada: responde y sigue en el formulario completo
+  document.querySelectorAll('.qbtn').forEach(function(b){b.addEventListener('click',function(){
+    start();track('portada_paso1',{tipo:b.dataset.v});
+    if(b.dataset.v==='otro'){A={};i=0;render()}
+    else{A={tipo:b.dataset.v};i=1;render()}
+    form.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  })});
+  render();
+})();
+</script>
