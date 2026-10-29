@@ -12,9 +12,9 @@ Gracias por los permisos de Meta, Gemma. Esta semana los acepto y vinculo el Wha
 
 Os escribo tres cosas en un solo correo.
 
-**1. Zoho de pruebas: lo necesitamos antes del viernes a las 12:00**
+**1. Zoho de pruebas**
 
-Para enseñaros el lunes las 8 etapas montadas, con sus campos y tareas, necesitamos entrar en el Zoho de pruebas con permiso de administrador. El usuario de API que usábamos sale como «inactivo» desde el martes. Sergi, ¿nos confirmas que el usuario que nos pasaste sirve para el Zoho de pruebas y tiene permiso de administrador? Si no, ¿puedes reactivar el usuario de API? Si no llega a tiempo, el lunes por la mañana lo montamos en directo con quien administre vuestro Zoho, en unos 45 minutos.
+Para enseñaros el lunes las 8 etapas montadas, las preparamos en vuestro Zoho de pruebas con el usuario zohoit, sin tocar producción. Sergi, ¿nos confirmas que zohoit tiene acceso al entorno de pruebas (sandbox)? Si no lo tiene, ¿puedes añadirlo antes del viernes a las 12:00?
 
 **2. Aircall: ¿se puede compartir una licencia entre comerciales?**
 

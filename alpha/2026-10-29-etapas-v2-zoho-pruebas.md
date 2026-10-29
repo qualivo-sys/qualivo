@@ -4,7 +4,7 @@
 
 ## Estado a las 29-oct
 
-- **Bloqueado.** El Zoho de pruebas rechaza nuestro usuario de API («usuario inactivo») desde el 27-oct [C, parte del 29-oct]. No se puede crear nada hasta que Alpha lo reactive.
+- **Bloqueado.** El Zoho de pruebas rechaza nuestro usuario de API («usuario inactivo») desde el 27-oct [C, parte del 29-oct]. La causa probable [E]: el 26-oct Sergi dio de baja el usuario «maikel» de Zoho para liberar una licencia, y le dijo a Maikel que usara «zohoit», el usuario de partners tecnológicos [C, WhatsApp]. Camino: usar zohoit **solo en el sandbox**. zohoit también tiene acceso a producción, que no se toca sin el OK de Maikel.
 - **Listo para aplicarse en cuanto se reactive:** la configuración completa (`alpha/zoho/etapas_v2.json`) y el script que crea campos y etapas (`alpha/zoho/aplicar_etapas_v2.py`). El script solo trabaja contra un dominio de sandbox y por defecto solo lee y enseña el plan.
 - **Fecha límite para llegar al lunes:** reactivación el **viernes 30 a las 12:00**. Montarlo lleva unas 3 h [E]: 10 min el script, ~2 h las reglas de validación y de flujo a mano, ~45 min las pruebas.
 - **Plan B** si no se reactiva el viernes: una sesión de 45 min con Sergi o con quien administre Zoho el lunes por la mañana, en la que él comparte pantalla y lo montamos con esta guía. O bien que Alpha dé de alta a maikel@qualivo.io como administrador del sandbox.
