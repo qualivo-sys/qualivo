@@ -37,7 +37,7 @@ TIPOS_ZOHO = {
 }
 
 
-def api(base, token, method, path, body=None):
+def api(base, token, method, path, body=None, fatal=True):
     req = urllib.request.Request(
         f"{base}/crm/v8{path}",
         method=method,
@@ -52,7 +52,9 @@ def api(base, token, method, path, body=None):
         detalle = e.read().decode(errors="replace")
         if "INACTIVE" in detalle.upper() or "inactive" in detalle:
             sys.exit("El usuario de API de pruebas sigue inactivo. Lo tiene que reactivar Alpha.")
-        sys.exit(f"{method} {path} -> {e.code}: {detalle[:500]}")
+        if fatal:
+            sys.exit(f"{method} {path} -> {e.code}: {detalle[:500]}")
+        return {"_error": f"{e.code}: {detalle[:300]}"}
 
 
 def main():
@@ -83,7 +85,7 @@ def main():
     print(f"Etapas que faltan ({len(faltan_etapas)}): {[e['nombre'] for e in faltan_etapas]}")
     print(f"Campos que faltan ({len(faltan_campos)}): {[c['etiqueta'] for c in faltan_campos]}")
     for ya in cfg["_campos_que_ya_existen_en_pruebas"]:
-        base_label = ya.split(" (")[0].lower()
+        base_label = ya.lower()
         print(f"  comprobación «{ya}»: {'está' if base_label in por_etiqueta else 'NO ESTÁ'}")
 
     if not args.aplicar:
@@ -98,13 +100,23 @@ def main():
             campo["currency"] = {"rounding_option": "normal", "precision": 2}
         if c["tipo"] in ("text",):
             campo["length"] = 255
-        r = api(base, token, "POST", f"/settings/fields?module={modulo}", {"fields": [campo]})
-        print(f"campo «{c['etiqueta']}»: {r.get('fields', [{}])[0].get('status', r)}")
+        if c["tipo"] == "textarea":
+            campo["textarea"] = {"type": "small"}  # las reglas de validación no admiten "large"
+        r = api(base, token, "POST", f"/settings/fields?module={modulo}", {"fields": [campo]}, fatal=False)
+        print(f"campo «{c['etiqueta']}»: {r.get('_error') or r.get('fields', [{}])[0].get('status', r)}")
 
     if faltan_etapas:
+        # Zoho pide la categoría de cada etapa: se copia de una etapa existente del mismo tipo
+        modelo = {}
+        for v in stage.get("pick_list_values", []):
+            modelo.setdefault(v.get("forecast_type"), v)
+        ultimo = max(v.get("sequence_number", 0) for v in stage.get("pick_list_values", []))
         valores = stage.get("pick_list_values", []) + [
-            {"display_value": e["nombre"], "actual_value": e["nombre"], "probability": e["probabilidad"], "forecast_type": e["tipo"]}
-            for e in faltan_etapas
+            {"display_value": e["nombre"], "actual_value": e["nombre"], "probability": e["probabilidad"],
+             "forecast_type": e["tipo"], "deal_category": modelo[e["tipo"]]["deal_category"],
+             "forecast_category": {"id": modelo[e["tipo"]]["forecast_category"]["id"]},
+             "sequence_number": ultimo + i}
+            for i, e in enumerate(faltan_etapas, start=1)
         ]
         r = api(base, token, "PATCH", f"/settings/fields/{stage['id']}?module={modulo}",
                 {"fields": [{"pick_list_values": valores}]})

@@ -2,63 +2,332 @@
   "_nota": "Configuración de las 8 etapas del flujo comercial v2 de Alpha (documento de Sergi, 26-oct) para el Zoho de PRUEBAS. La lee aplicar_etapas_v2.py. Plazos en días naturales enteros porque Zoho no cuenta días laborables; Nexus mide las horas laborables.",
   "modulo": "Deals",
   "etapas": [
-    {"n": 1, "nombre": "Nueva oportunidad",          "probabilidad": 10,  "tipo": "Open"},
-    {"n": 2, "nombre": "Cualificación (briefing)",   "probabilidad": 20,  "tipo": "Open"},
-    {"n": 3, "nombre": "Planificación",              "probabilidad": 30,  "tipo": "Open"},
-    {"n": 4, "nombre": "Propuesta enviada",          "probabilidad": 40,  "tipo": "Open"},
-    {"n": 5, "nombre": "Ajustes y versionado",       "probabilidad": 50,  "tipo": "Open"},
-    {"n": 6, "nombre": "Reservada",                  "probabilidad": 75,  "tipo": "Open"},
-    {"n": 7, "nombre": "Ganada",                     "probabilidad": 100, "tipo": "Closed Won"},
-    {"n": 8, "nombre": "Operaciones y facturación",  "probabilidad": 100, "tipo": "Closed Won"}
+    {
+      "n": 1,
+      "nombre": "Oportunidad",
+      "probabilidad": 10,
+      "tipo": "Open",
+      "_reutiliza_la_existente": true
+    },
+    {
+      "n": 2,
+      "nombre": "Cualificación (briefing)",
+      "probabilidad": 20,
+      "tipo": "Open"
+    },
+    {
+      "n": 3,
+      "nombre": "Planificación",
+      "probabilidad": 30,
+      "tipo": "Open"
+    },
+    {
+      "n": 4,
+      "nombre": "Propuesta",
+      "probabilidad": 40,
+      "tipo": "Open",
+      "_reutiliza_la_existente": true
+    },
+    {
+      "n": 5,
+      "nombre": "Ajustes y versionado",
+      "probabilidad": 50,
+      "tipo": "Open"
+    },
+    {
+      "n": 6,
+      "nombre": "Reservada",
+      "probabilidad": 75,
+      "tipo": "Open"
+    },
+    {
+      "n": 7,
+      "nombre": "Ganada",
+      "probabilidad": 100,
+      "tipo": "Closed Won"
+    },
+    {
+      "n": 8,
+      "nombre": "Operaciones y facturación",
+      "probabilidad": 100,
+      "tipo": "Closed Won"
+    }
   ],
   "estados_de_salida": [
-    {"nombre": "Pospuesta", "probabilidad": 0, "tipo": "Open",        "_nota": "Ya existe en Zoho; se conserva"},
-    {"nombre": "Perdida",   "probabilidad": 0, "tipo": "Closed Lost", "_nota": "Ya existe; motivo de pérdida ya obligatorio en pruebas"}
+    {
+      "nombre": "Pospuesta",
+      "probabilidad": 0,
+      "tipo": "Open",
+      "_nota": "Ya existe en Zoho; se conserva"
+    },
+    {
+      "nombre": "Perdida",
+      "probabilidad": 0,
+      "tipo": "Closed Lost",
+      "_nota": "Ya existe; motivo de pérdida ya obligatorio en pruebas"
+    }
   ],
-  "etapas_que_dejan_de_usarse": ["Contactada", "Reunión agendada"],
+  "etapas_que_dejan_de_usarse": [
+    "Contactada",
+    "Reunión agendada"
+  ],
   "campos": [
-    {"grupo": "Briefing", "etiqueta": "Objetivo de campaña",      "tipo": "picklist", "valores": ["Notoriedad", "Lanzamiento", "Tráfico a punto de venta", "Promoción", "Otro"]},
-    {"grupo": "Briefing", "etiqueta": "Zonas",                    "tipo": "textarea"},
-    {"grupo": "Briefing", "etiqueta": "Inicio de campaña",        "tipo": "date"},
-    {"grupo": "Briefing", "etiqueta": "Fin de campaña",           "tipo": "date"},
-    {"grupo": "Briefing", "etiqueta": "Presupuesto orientativo",  "tipo": "currency"},
-    {"grupo": "Briefing", "etiqueta": "Decisor",                  "tipo": "text"},
-    {"grupo": "Briefing", "etiqueta": "Empresa a facturar",       "tipo": "text"},
-
-    {"grupo": "Versionado", "etiqueta": "Versión de la propuesta", "tipo": "integer"},
-    {"grupo": "Versionado", "etiqueta": "Fecha de la última versión", "tipo": "date"},
-    {"grupo": "Versionado", "etiqueta": "Qué cambia en esta versión", "tipo": "textarea"},
-
-    {"grupo": "Cierre", "etiqueta": "Documento de cierre", "tipo": "picklist", "valores": ["-None-", "Contrato firmado", "Orden de compra", "Confirmación por correo autorizada"]},
-    {"grupo": "Cierre", "etiqueta": "Archivo del documento de cierre", "tipo": "fileupload"},
-
-    {"grupo": "Operaciones", "etiqueta": "Foto de la campaña colocada", "tipo": "imageupload"},
-    {"grupo": "Operaciones", "etiqueta": "Fecha de colocación",        "tipo": "date"},
-    {"grupo": "Operaciones", "etiqueta": "Lista para facturar",        "tipo": "boolean"},
-
-    {"grupo": "Pospuesta", "etiqueta": "Motivo de pospuesta", "tipo": "picklist", "valores": ["-None-", "Sin presupuesto ahora", "Fechas lejanas", "Pendiente de decisión interna", "Otro"]}
+    {
+      "grupo": "Briefing",
+      "etiqueta": "Zonas de campaña",
+      "tipo": "textarea"
+    },
+    {
+      "grupo": "Briefing",
+      "etiqueta": "Presupuesto orientativo",
+      "tipo": "currency"
+    },
+    {
+      "grupo": "Briefing",
+      "etiqueta": "Decisor",
+      "tipo": "text"
+    },
+    {
+      "grupo": "Briefing",
+      "etiqueta": "Empresa a facturar",
+      "tipo": "text"
+    },
+    {
+      "grupo": "Versionado",
+      "etiqueta": "Versión de la propuesta",
+      "tipo": "integer"
+    },
+    {
+      "grupo": "Versionado",
+      "etiqueta": "Fecha de la última versión",
+      "tipo": "date"
+    },
+    {
+      "grupo": "Versionado",
+      "etiqueta": "Cambios de esta versión",
+      "tipo": "textarea"
+    },
+    {
+      "grupo": "Cierre",
+      "etiqueta": "Documento de cierre",
+      "tipo": "picklist",
+      "valores": [
+        "Contrato firmado",
+        "Orden de compra",
+        "Confirmación por correo autorizada"
+      ]
+    },
+    {
+      "grupo": "Cierre",
+      "etiqueta": "Archivo del documento de cierre",
+      "tipo": "fileupload"
+    },
+    {
+      "grupo": "Operaciones",
+      "etiqueta": "Foto de la campaña colocada",
+      "tipo": "imageupload"
+    },
+    {
+      "grupo": "Operaciones",
+      "etiqueta": "Fecha de colocación",
+      "tipo": "date"
+    },
+    {
+      "grupo": "Operaciones",
+      "etiqueta": "Lista para facturar",
+      "tipo": "boolean"
+    },
+    {
+      "grupo": "Pospuesta",
+      "etiqueta": "Motivo de pospuesta",
+      "tipo": "picklist",
+      "valores": [
+        "Sin presupuesto ahora",
+        "Fechas lejanas",
+        "Pendiente de decisión interna",
+        "Otro"
+      ]
+    }
   ],
-  "_campos_que_ya_existen_en_pruebas": ["Fecha primer contacto", "Fecha de recontacto", "Motivo de pérdida (obligatorio)"],
+  "_campos_que_ya_existen_en_pruebas": [
+    "Fecha Primer Contacto",
+    "Fecha Recontacto",
+    "Motivo Pérdida",
+    "Necesidad",
+    "Fecha de Inicio de Campaña",
+    "Total de meses de campaña"
+  ],
   "reglas_de_validacion": [
-    {"al_pasar_a": "Planificación",             "exige": ["Objetivo de campaña", "Zonas", "Inicio de campaña", "Fin de campaña", "Presupuesto orientativo", "Decisor", "Empresa a facturar"], "mensaje": "Falta el briefing: completa los 7 campos del bloque Briefing antes de pasar a Planificación."},
-    {"al_pasar_a": "Ajustes y versionado",      "exige": ["Versión de la propuesta", "Qué cambia en esta versión"], "mensaje": "Indica el número de versión y qué cambia."},
-    {"al_pasar_a": "Ganada",                    "exige": ["Documento de cierre", "Archivo del documento de cierre"], "mensaje": "Solo se gana con contrato firmado u orden de compra adjunta."},
-    {"al_pasar_a": "Operaciones y facturación", "exige": ["Documento de cierre"], "mensaje": "No hay documento de cierre."},
-    {"al_marcar": "Lista para facturar",        "exige": ["Foto de la campaña colocada", "Fecha de colocación"], "mensaje": "Para facturar hace falta la foto de la campaña colocada."},
-    {"al_pasar_a": "Pospuesta",                 "exige": ["Motivo de pospuesta", "Fecha de recontacto"], "mensaje": "Pon el motivo y la fecha de recontacto (máximo 90 días)."}
+    {
+      "al_pasar_a": "Planificación",
+      "exige": [
+        "Necesidad",
+        "Zonas de campaña",
+        "Fecha de Inicio de Campaña",
+        "Total de meses de campaña",
+        "Presupuesto orientativo",
+        "Decisor",
+        "Empresa a facturar"
+      ],
+      "mensaje": "Falta el briefing: completa los 7 campos del bloque Briefing antes de pasar a Planificación."
+    },
+    {
+      "al_pasar_a": "Ajustes y versionado",
+      "exige": [
+        "Versión de la propuesta",
+        "Cambios de esta versión"
+      ],
+      "mensaje": "Indica el número de versión y qué cambia."
+    },
+    {
+      "al_pasar_a": "Ganada",
+      "exige": [
+        "Documento de cierre",
+        "Archivo del documento de cierre"
+      ],
+      "mensaje": "Solo se gana con contrato firmado u orden de compra adjunta."
+    },
+    {
+      "al_pasar_a": "Operaciones y facturación",
+      "exige": [
+        "Documento de cierre"
+      ],
+      "mensaje": "No hay documento de cierre."
+    },
+    {
+      "al_marcar": "Lista para facturar",
+      "exige": [
+        "Foto de la campaña colocada",
+        "Fecha de colocación"
+      ],
+      "mensaje": "Para facturar hace falta la foto de la campaña colocada."
+    },
+    {
+      "al_pasar_a": "Pospuesta",
+      "exige": [
+        "Motivo de pospuesta",
+        "Fecha Recontacto"
+      ],
+      "mensaje": "Pon el motivo y la fecha de recontacto (máximo 90 días)."
+    }
   ],
   "tareas_por_etapa": [
-    {"al_entrar_en": "Nueva oportunidad",         "tareas": [{"asunto": "Primer contacto (intento 1 de 3)", "vence_en_dias": 0}, {"asunto": "Primer contacto (intento 3 de 3)", "vence_en_dias": 2}]},
-    {"al_entrar_en": "Cualificación (briefing)",  "tareas": [{"asunto": "Completar el briefing", "vence_en_dias": 7}]},
-    {"al_entrar_en": "Planificación",             "tareas": [{"asunto": "Elegir caras y montar la propuesta", "vence_en_dias": 2}]},
-    {"al_entrar_en": "Propuesta enviada",         "tareas": [{"asunto": "Seguimiento día 2", "vence_en_dias": 2}, {"asunto": "Seguimiento día 5", "vence_en_dias": 7}, {"asunto": "Seguimiento día 10", "vence_en_dias": 14}, {"asunto": "Decidir: ajustes, reservada, pospuesta o perdida", "vence_en_dias": 21}]},
-    {"al_entrar_en": "Ajustes y versionado",      "tareas": [{"asunto": "Enviar versión nueva", "vence_en_dias": 2}]},
-    {"al_entrar_en": "Reservada",                 "tareas": [{"asunto": "Confirmar reserva (contrato u orden de compra)", "vence_en_dias": 3}]},
-    {"al_entrar_en": "Ganada",                    "tareas": [{"asunto": "Traspaso a operaciones", "vence_en_dias": 1}]},
-    {"al_entrar_en": "Operaciones y facturación", "tareas": [{"asunto": "Subir foto de la campaña colocada", "vence_en_dias": 0, "_nota": "vence en la fecha de inicio de campaña"}, {"asunto": "Emitir factura", "vence_en_dias": 1, "_nota": "al marcar Lista para facturar"}]},
-    {"al_entrar_en": "Pospuesta",                 "tareas": [{"asunto": "Recontactar", "vence_en": "Fecha de recontacto"}]}
+    {
+      "al_entrar_en": "Oportunidad",
+      "tareas": [
+        {
+          "asunto": "Primer contacto (intento 1 de 3)",
+          "vence_en_dias": 0
+        },
+        {
+          "asunto": "Primer contacto (intento 3 de 3)",
+          "vence_en_dias": 2
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Cualificación (briefing)",
+      "tareas": [
+        {
+          "asunto": "Completar el briefing",
+          "vence_en_dias": 7
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Planificación",
+      "tareas": [
+        {
+          "asunto": "Elegir caras y montar la propuesta",
+          "vence_en_dias": 2
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Propuesta",
+      "tareas": [
+        {
+          "asunto": "Seguimiento día 2",
+          "vence_en_dias": 2
+        },
+        {
+          "asunto": "Seguimiento día 5",
+          "vence_en_dias": 7
+        },
+        {
+          "asunto": "Seguimiento día 10",
+          "vence_en_dias": 14
+        },
+        {
+          "asunto": "Decidir: ajustes, reservada, pospuesta o perdida",
+          "vence_en_dias": 21
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Ajustes y versionado",
+      "tareas": [
+        {
+          "asunto": "Enviar versión nueva",
+          "vence_en_dias": 2
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Reservada",
+      "tareas": [
+        {
+          "asunto": "Confirmar reserva (contrato u orden de compra)",
+          "vence_en_dias": 3
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Ganada",
+      "tareas": [
+        {
+          "asunto": "Traspaso a operaciones",
+          "vence_en_dias": 1
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Operaciones y facturación",
+      "tareas": [
+        {
+          "asunto": "Subir foto de la campaña colocada",
+          "vence_en_dias": 0,
+          "_nota": "vence en la fecha de inicio de campaña"
+        },
+        {
+          "asunto": "Emitir factura",
+          "vence_en_dias": 1,
+          "_nota": "al marcar Lista para facturar"
+        }
+      ]
+    },
+    {
+      "al_entrar_en": "Pospuesta",
+      "tareas": [
+        {
+          "asunto": "Recontactar",
+          "vence_en": "Fecha de recontacto"
+        }
+      ]
+    }
   ],
   "avisos": [
-    {"cuando": "Importe >= 30.000 € y la etapa cambia a Propuesta enviada, Ganada o Perdida", "a": "CEO", "como": "correo de la regla de flujo"}
-  ]
+    {
+      "cuando": "Importe >= 30.000 € y la etapa cambia a Propuesta enviada, Ganada o Perdida",
+      "a": "CEO",
+      "como": "correo de la regla de flujo"
+    }
+  ],
+  "_reutilizados": {
+    "Objetivo de campaña": "Necesidad",
+    "Inicio de campaña": "Fecha de Inicio de Campaña",
+    "Fin de campaña": "Total de meses de campaña (la fecha de fin es fórmula)",
+    "Nueva oportunidad": "etapa Oportunidad",
+    "Propuesta enviada": "etapa Propuesta"
+  }
 }
