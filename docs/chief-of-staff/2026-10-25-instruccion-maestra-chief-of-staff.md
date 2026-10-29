@@ -315,4 +315,5 @@ No se crean agentes, documentos duplicados, campañas ni automatizaciones sin co
     - 35 sesiones archivadas: las v1 sustituidas y las de proyectos cerrados o abandonados.
     - 17 rutinas pausadas por duplicadas u obsoletas. Entre ellas, el sprint de Growth (lo cubre el parte de las 8:40), el radar IA, la revisión de llamadas de Raquel (la voz está pausada) y las de Paid con campañas de septiembre. También los partes del CFO de lunes, viernes y diario, y el SDR, el triaje diario, el informe de los lunes y el correo de las 17:30 de Outbound.
     - La guardia de la campaña de Kubysoft pasa al triaje horario de Outbound.
+  - **Procesos autónomos:** `docs/chief-of-staff/2026-10-29-procesos-autonomos.md` (qué decide cada uno, el bucle creativo de los viernes, la salud de clientes y cuándo se crea un agente).
   - **Se mantienen fuera de esto:** las sesiones personales de Maikel (inglés, entrenamiento y similares) y la de LinkedIn hasta que termine la exportación a Drive.
