@@ -17,15 +17,15 @@ El canal envía, pero con poco margen:
 | Señal: anuncios (Google Ads, Meta, LinkedIn Ads) | 61 | 507 | 21 | 8 | 55 |
 | Señal: CRM (Odoo, Salesforce, Zoho, Pipedrive, HubSpot V3) | 51 | 238 | 9 | 0 | 8 |
 | ABM (formación y reformas) | 6 | 8 | 0 | 0 | 0 |
-| Campañas antiguas aún activas (Infoproducto, Construcción, Servicios B2B, Obra, Asesorías, Playbook Q4, Formación) | 72 | 869 | 26 | 15 | 1.173 |
-| **Total Qualivo** | **190** [C] | **1.622** [C] | **56** [C] | **23** [C] | **1.236** [C] |
+| Campañas antiguas aún activas (Infoproducto, Construcción, Servicios B2B, Obra, Asesorías, Playbook Q4, Formación) | 72 | 869 | 26 | 16 | 1.173 |
+| **Total Qualivo** | **190** [C] | **1.622** [C] | **56** [C] | **24** [C] | **1.236** [C] |
 
 \*Las respuestas incluyen rebotes y respuestas automáticas. En octubre, solo ~39% de lo que volvía lo había escrito una persona [C].
 
 - **Rebote de las campañas de señal en 7 días:** 8 de 745, un 1,1% [C], por debajo del límite del 3%.
 - **Leads sin empezar:** el 95% son de Infoproducto (1.173) [C]. Falta decidir si esa lista es de Qualivo o de un cliente.
 - **Carga de hoy:** 86 leads [C] (Meta 30, Google Ads 19, Odoo 16, Salesforce 11, HubSpot 7, Zoho 3). Han costado 177 créditos de Apollo [C].
-- **Créditos de Apollo:** quedan ~2.240 hasta el 14-nov [C], cuando se recargan 4.000.
+- **Créditos de Apollo:** quedan ~2.390 hasta el 14-nov [E] (2.419 a las 12:05 [C], antes de los últimos lotes), y ese día se recargan 4.000.
 - **Las campañas de los clientes DKR y Kubysoft no están en estas cifras.**
 
 ## 3. Reuniones de octubre (email en frío)
