@@ -35,7 +35,9 @@
     { id: 'caza', txt: 'Marketplace de caza', desc: 'Jornadas de caza: monterías, recechos y esperas con comerciales y reservas con señal', ico: 'otro' },
     { id: 'retiros', txt: 'Marketplace de retiros', desc: 'Retiros de yoga, meditación y silencio: base de datos, plazas y reservas', ico: 'otro' },
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
-    { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' }
+    { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' },
+    // Cuentas de cliente: se abren por enlace (?sector=almilimetro) y no salen en la pantalla de inicio
+    { id: 'almilimetro', txt: 'Al Milímetro', desc: 'Reformas integrales de Sonia, arquitecta', ico: 'reformas', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
@@ -802,7 +804,7 @@
   // ---------------------------------------------------------------------------
   const eleccion = { sector: null, objetivo: 'todo' };
   function pintarInicio() {
-    $('#inicioSectores').innerHTML = SECTORES.map(function (s) {
+    $('#inicioSectores').innerHTML = SECTORES.filter(function (s) { return !s.oculto; }).map(function (s) {
       return '<button type="button" class="sector-card" role="radio" aria-checked="' + (eleccion.sector === s.id) + '" data-sector="' + s.id + '">' + ico(s.ico) + '<strong>' + s.txt + '</strong><span>' + s.desc + '</span></button>';
     }).join('');
     $('#inicioObjetivos').innerHTML = OBJETIVOS.map(function (o) {
