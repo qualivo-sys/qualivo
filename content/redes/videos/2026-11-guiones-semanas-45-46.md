@@ -6,6 +6,8 @@
 > - **Diciembre:** V4, para no cargar noviembre de automatización.
 > - **Una grabación no cuenta como publicación.** Se graba solo lo que va a sustituir o completar una pieza elegida.
 >
+> **v3 (29-oct, 14:30): definitivos para grabar hoy V1 y V3.** En la revisión de las 13:00 no hubo comentarios nuevos de Maikel en las fichas (solo los del 27-oct, ya aplicados en la v2). Único cambio: el cierre lleva a la llamada y la pregunta pasa al primer comentario (decisión del 29-oct).
+>
 > **Grabación:** jueves de 17:00 a 18:00 (una hora).
 > - Jueves 29-oct: V1 y V3.
 > - Jueves 5-nov: el vídeo de la semana 47.
@@ -26,9 +28,10 @@
 | Nada de eso convierte al contacto en malo. Solo dice qué ha pasado. | Fichas ordenadas con separadores |
 | En octubre cambiamos cómo lo contamos: cualificado es una reunión que se ha celebrado y que encaja. Las reservas van aparte. | Rótulo: «Cualificado = celebrada + encaje» |
 | Y miramos siempre la misma tanda de solicitudes, con lo pendiente a la vista. | Cuatro tarros (pieza 5) |
-| Cuando vuestro informe dice «cualificado», ¿qué ha pasado exactamente? | Cierre con la pregunta |
+| Cuando vuestro informe dice «cualificado», ¿qué ha pasado exactamente? Si quieres que lo miremos juntos, tienes el enlace en el post. | Cierre: «qualivo.io/llamada» |
 
-- **LinkedIn:** «Reservada, celebrada y con encaje: tres cosas distintas. Durante un tiempo nosotros las contábamos como una sola, y en octubre lo cambiamos. Cuando vuestro informe dice "cualificado", ¿qué ha pasado exactamente?»
+- **LinkedIn:** «Reservada, celebrada y con encaje: tres cosas distintas. Durante un tiempo nosotros las contábamos como una sola, y en octubre lo cambiamos. Si quieres que revisemos qué cuenta tu informe como "cualificado": https://qualivo.io/llamada/»
+- **Primer comentario (Maikel, nada más publicar):** «Cuando vuestro informe dice "cualificado", ¿qué ha pasado exactamente?»
 - **Dato:** cambio de definición del 19-oct [C, `api/_tratos.js`]. Sin la cifra de 28 y sin la de no presentados (R7).
 
 ---
@@ -44,9 +47,10 @@
 | Después, cada mensaje continúa esa conversación: «Quedaba por decidir si hacerlo por fases. Te resumo qué cambia». | Rótulo con el mensaje de ejemplo |
 | Nosotros nos apuntamos el día 2, el 5 y el 10 como recordatorio. El borrador lo prepara el sistema y lo envía una persona. | Calendario con pósit (pieza 7) |
 | Y si quedasteis en hablar en enero, se habla en enero. | Reloj de pared |
-| ¿Qué le aporta vuestro tercer mensaje al cliente? | Cierre |
+| ¿Qué le aporta vuestro tercer mensaje? Si quieres que revisemos tu seguimiento, tienes el enlace en el post. | Cierre: «qualivo.io/llamada» |
 
-- **LinkedIn:** «"¿Pudiste ver el presupuesto?" Si ya lo preguntaste dos veces, el tercer mensaje tiene que aportar algo. Nosotros nos apuntamos el día 2, el 5 y el 10, pero manda lo que acordaste con el cliente. ¿Qué le aporta vuestro tercer mensaje?»
+- **LinkedIn:** «"¿Pudiste ver el presupuesto?" Si ya lo preguntaste dos veces, el tercer mensaje tiene que aportar algo. Nosotros nos apuntamos el día 2, el 5 y el 10, pero manda lo que acordaste con el cliente. Si quieres que revisemos tu seguimiento contigo: https://qualivo.io/llamada/»
+- **Primer comentario (Maikel, nada más publicar):** «¿Qué le aporta vuestro tercer mensaje?»
 - **Enlace:** https://qualivo.io/blog/propuesta-comercial/ (comprobar antes de publicar).
 
 ---
