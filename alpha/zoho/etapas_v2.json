@@ -74,8 +74,8 @@
   "campos": [
     {
       "grupo": "Briefing",
-      "etiqueta": "Zonas de campaña",
-      "tipo": "textarea"
+      "etiqueta": "Zonas a cubrir",
+      "tipo": "text"
     },
     {
       "grupo": "Briefing",
@@ -104,8 +104,8 @@
     },
     {
       "grupo": "Versionado",
-      "etiqueta": "Cambios de esta versión",
-      "tipo": "textarea"
+      "etiqueta": "Cambios en la versión",
+      "tipo": "text"
     },
     {
       "grupo": "Cierre",
@@ -162,7 +162,7 @@
       "al_pasar_a": "Planificación",
       "exige": [
         "Necesidad",
-        "Zonas de campaña",
+        "Zonas a cubrir",
         "Fecha de Inicio de Campaña",
         "Total de meses de campaña",
         "Presupuesto orientativo",
@@ -175,7 +175,7 @@
       "al_pasar_a": "Ajustes y versionado",
       "exige": [
         "Versión de la propuesta",
-        "Cambios de esta versión"
+        "Cambios en la versión"
       ],
       "mensaje": "Indica el número de versión y qué cambia."
     },
@@ -296,15 +296,10 @@
       "tareas": [
         {
           "asunto": "Subir foto de la campaña colocada",
-          "vence_en_dias": 0,
-          "_nota": "vence en la fecha de inicio de campaña"
-        },
-        {
-          "asunto": "Emitir factura",
-          "vence_en_dias": 1,
-          "_nota": "al marcar Lista para facturar"
+          "vence_en": "Fecha de Inicio de Campaña"
         }
-      ]
+      ],
+      "_nota": "«Emitir factura» al marcar «Lista para facturar» va en otra regla (pendiente)."
     },
     {
       "al_entrar_en": "Pospuesta",
@@ -329,5 +324,6 @@
     "Fin de campaña": "Total de meses de campaña (la fecha de fin es fórmula)",
     "Nueva oportunidad": "etapa Oportunidad",
     "Propuesta enviada": "etapa Propuesta"
-  }
+  },
+  "_nota_validacion": "Las reglas de validación de Zoho no admiten campos multilínea (textarea) ni de archivo o imagen. Por eso Zonas y Cambios son texto de una línea, y Necesidad (campo de Alpha, multilínea), el archivo del documento de cierre y la foto no se pueden hacer obligatorios con una regla: hace falta Blueprint."
 }

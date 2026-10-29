@@ -2,14 +2,39 @@
 
 29-oct-2026 · para la reunión del lunes 2-nov a las 17:00 · [C] confirmado · [E] estimación
 
-## Estado a las 29-oct
+## Estado · 29-oct, 12:20 · MONTADO en el Zoho de pruebas
 
-- **Bloqueado.** El Zoho de pruebas rechaza nuestro usuario de API («usuario inactivo») desde el 27-oct [C, parte del 29-oct]. La causa probable [E]: el 26-oct Sergi dio de baja el usuario «maikel» de Zoho para liberar una licencia, y le dijo a Maikel que usara «zohoit», el usuario de partners tecnológicos [C, WhatsApp]. Camino: usar zohoit **solo en el sandbox**. zohoit también tiene acceso a producción, que no se toca sin el OK de Maikel.
-- **Listo para aplicarse en cuanto se reactive:** la configuración completa (`alpha/zoho/etapas_v2.json`) y el script que crea campos y etapas (`alpha/zoho/aplicar_etapas_v2.py`). El script solo trabaja contra un dominio de sandbox y por defecto solo lee y enseña el plan.
-- **Fecha límite para llegar al lunes:** reactivación el **viernes 30 a las 12:00**. Montarlo lleva unas 3 h [E]: 10 min el script, ~2 h las reglas de validación y de flujo a mano, ~45 min las pruebas.
-- **Plan B** si no se reactiva el viernes: una sesión de 45 min con Sergi o con quien administre Zoho el lunes por la mañana, en la que él comparte pantalla y lo montamos con esta guía. O bien que Alpha dé de alta a maikel@qualivo.io como administrador del sandbox.
+Entorno: sandbox **«Nexus And IA»** (8.780 oportunidades del ZIP anonimizado del 16-oct), con el usuario zohoit (administrador) [C]. **En producción («Alpha Publicidad») no se ha tocado ni leído nada.** Se pasa a producción después, con el OK de Maikel y de Sergi.
 
-Para pedir la reactivación hace falta escribir a Sergi: **pendiente del OK de Maikel**.
+| Pieza | Estado | Cómo quedó |
+|---|---|---|
+| Etapas | ✅ [C] | 4 nuevas (Cualificación (briefing), Planificación, Ajustes y versionado, Operaciones y facturación). Se reutilizan **Oportunidad** y **Propuesta**, que son las que ya usan los tratos de Alpha |
+| Pipeline «Standard» | ✅ [C] | Oportunidad → Cualificación → Planificación → Propuesta → Ajustes → Reservada → Ganada → Operaciones y facturación · Perdida · Pospuesta |
+| Campos | ✅ 13 nuevos [C] | Se reutilizan los que ya existían: Necesidad, Fecha de Inicio de Campaña, Total de meses de campaña, Fecha Recontacto, Motivo Pérdida |
+| Reglas de validación | ✅ [C] | Añadidas a la regla de «Fase» que ya existía, sin quitar las de Sonia. Briefing (Zonas, Presupuesto, Decisor, Empresa a facturar) para Planificación en adelante · versión y cambios en Ajustes · documento de cierre en Ganada · motivo y fecha en Pospuesta |
+| Tareas por etapa | ✅ [C] | Flujo «Qualivo · tareas por etapa» (al cambiar la fase) y «Qualivo · tareas al crear oportunidad». 13 tareas, asignadas al propietario |
+| Aviso al CEO ≥ 30.000 € | ⏸ | No montado: falta decidir quién lo recibe. En pruebas mandaría correos reales |
+| «Emitir factura» al marcar «Lista para facturar» | ⏸ | Pendiente: va en otra regla |
+
+**Lo que Zoho no deja con reglas de validación [C]:** campos multilínea (Necesidad) y campos de archivo o imagen (archivo del contrato, foto de la campaña colocada). Para hacerlos obligatorios hace falta **Blueprint**. Se propone a Sergi el lunes.
+
+**Probado por API [C]:** las tareas salen con sus fechas en cada etapa (seguimientos a +2, +7 y +14 días, decidir a +21, primer contacto al crear, recontactar en la fecha). **Las reglas de validación no se aplican a la API**, solo en pantalla: hay que comprobarlas en pantalla (5 min, lista abajo).
+
+**Cuidado al probar [C]:**
+- El flujo de Alpha «crea_actualiza_oport_chronos» crea la oportunidad en Chronos al pasar a **Ganada** si la entidad es Alphamedia y la cuenta tiene ID de Chronos. **No pasar a Ganada tratos con entidad Alphamedia.** Los tratos de prueba no tienen entidad, y el flujo no se disparó (última ejecución el 8-oct).
+- «Auto-rellenar Chronos ID de Cuenta» y «Generar Prorrateo de Ingresos» (funciones de Alpha) se ejecutan con cada edición. Se ejecutaron con las pruebas, igual que el 19-oct.
+
+Tratos de prueba en el sandbox: «QUALIVO PRUEBA · etapas v2» y «QUALIVO PRUEBA · oportunidad nueva».
+
+### Comprobación en pantalla (5 min, en el sandbox)
+
+1. Abrir «QUALIVO PRUEBA · oportunidad nueva» y pasarlo a **Planificación** sin rellenar el briefing → debe salir «Briefing: faltan las zonas».
+2. Rellenar Zonas a cubrir, Presupuesto orientativo, Decisor y Empresa a facturar → debe guardar.
+3. Pasarlo a **Ajustes y versionado** sin versión → debe bloquear.
+4. Pasarlo a **Ganada** sin documento de cierre → debe bloquear. **No completar el paso a Ganada.**
+5. Pasarlo a **Pospuesta** sin fecha → debe bloquear. Con motivo y fecha → guarda y crea «Recontactar» en esa fecha.
+
+Scripts: `alpha/zoho/aplicar_etapas_v2.py` (etapas y campos) y `alpha/zoho/tareas_por_etapa.py` (tareas), los dos solo contra sandbox.
 
 ## Por qué son 8
 
