@@ -42,11 +42,19 @@
 >
 > Y cada pregunta nueva tiene un coste: mira en cuál abandona la gente.
 >
+> Si quieres que revisemos tu landing contigo: https://qualivo.io/llamada/
+
+## Primer comentario (lo pone Maikel nada más publicar)
+
 > ¿Qué pone vuestra landing justo encima del botón?
 
 ## Para Instagram
 
 > «Déjanos tus datos y te llamamos.» ¿Y qué sabrás cuando llames? Dos preguntas: qué necesita y cuándo quiere empezar.
+
+## Cierre (29-oct)
+
+- Decisión del 29-oct (objetivo: reuniones): el texto cierra con una línea a la llamada o a la calculadora, y la pregunta de conversación va al primer comentario. En Instagram, «enlace en la bio».
 
 ## Pendiente de Maikel
 

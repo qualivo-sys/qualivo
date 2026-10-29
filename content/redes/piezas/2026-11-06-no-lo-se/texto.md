@@ -37,6 +37,10 @@
 >
 > Donde cae más, investiga por qué. Puede ser un filtro que funciona, gente que aún está decidiendo o un problema de verdad. La prioridad la decide el motivo y lo que te cuesta arreglarlo.
 >
+> Para ponerle número a lo que se te escapa: https://qualivo.io/calculadora-de-fugas/
+
+## Primer comentario (lo pone Maikel nada más publicar)
+
 > ¿Vosotros sabéis dónde se os escapa? Vale contestar «no lo sé».
 
 ## Instagram

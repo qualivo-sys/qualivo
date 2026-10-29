@@ -34,6 +34,10 @@
 >
 > No hace falta una página por servicio. Separaría cuando cambian la intención, la oferta o los argumentos. Si todos buscan lo mismo, quizá basta con ordenar mejor la que tienes.
 >
+> Si quieres que revisemos tu anuncio y tu landing contigo: https://qualivo.io/llamada/
+
+## Primer comentario (lo pone Maikel nada más publicar)
+
 > Pon tu anuncio y tu landing uno al lado del otro. ¿Siguen la misma conversación?
 
 ## Instagram
