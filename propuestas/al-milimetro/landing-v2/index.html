@@ -266,7 +266,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
         <button type="button" class="qbtn" data-v="chalet">Una casa o chalet<small>completo</small></button>
         <button type="button" class="qbtn" data-v="piso">Un piso<small>completo</small></button>
         <button type="button" class="qbtn" data-v="cb">Cocina y baño<small>de la misma vivienda</small></button>
-        <button type="button" class="qbtn" data-v="otro">Otra cosa<small>dos baños, un baño…</small></button>
+        <button type="button" class="qbtn" data-v="otro">Otra cosa<small>dos baños, otra obra…</small></button>
       </div>
       <p class="foot">6 preguntas y te digo desde cuánto sale. Tus datos no van a ninguna otra empresa.</p>
     </div>
@@ -373,6 +373,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
         <li>Quieres saber qué pagas por cada partida antes de empezar.</li></ul></div>
       <div><h3>No, si…</h3><ul>
         <li>Buscas un arreglo suelto: una puerta, unos azulejos, un falso techo.</li>
+        <li>Quieres reformar solo un baño o solo la cocina.</li>
         <li>Es un local o una oficina.</li>
         <li>Solo te importa el precio más bajo.</li></ul></div>
     </div>
@@ -494,9 +495,8 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
     {id:'ppto',t:'¿Qué presupuesto orientativo tienes en mente?',two:true,o:[['<15','Menos de 15.000 €'],['15-30','15.000-30.000 €'],['30-60','30.000-60.000 €'],['60-160','60.000-160.000 €'],['>160','Más de 160.000 €'],['nose','Todavía no lo sé']]},
     {id:'propia',t:'¿La vivienda ya es tuya?',two:true,o:[['si','Sí'],['comprando','La estoy comprando'],['no','No']]}
   ];
-  // Códigos postales estimados por nosotros, a confirmar con Sonia: sur excluido e interior de la M-30
+  // Códigos postales del sur excluido, estimados por nosotros y a confirmar con Sonia (los repite api/_am-modelo.js)
   var SUR=/^(2803[18]|28041|28051|28053|28021|2890\d|2891\d|2893\d|2897\d)$/;
-  var M30=/^(2800[1-9]|2801[0-5]|28020|28028|28045|28036|28039)$/;
   var DESDE={chalet:['160.000 €','chalet completo, unos 200 m²'],piso:['35.000 €','piso completo, desde 50 m²'],cb:['15.000 €','cocina y baño de la misma vivienda'],'2b':['15.000 €','dos baños'],suelto:['15.000 €','obra mínima']};
   var started=0,A={},i=0,form=document.getElementById('calc'),stage=document.getElementById('stage'),prog=document.getElementById('prog');
   function bar7(n){prog.innerHTML='';for(var k=0;k<7;k++){var e=document.createElement('i');if(k<n)e.className='on';prog.appendChild(e)}}
@@ -513,10 +513,11 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
   }
   function afterAnswer(id){
     if(id==='tipo'&&(A.tipo==='local'||A.tipo==='arreglo'))return nofit('tipo');
-    if(id==='zona'){if(SUR.test(A.cp))return nofit('zona');if(A.tipo==='suelto'&&!M30.test(A.cp))return nofit('suelto');}
+    if(id==='tipo'&&A.tipo==='suelto')return nofit('suelto');
+    if(id==='zona'&&SUR.test(A.cp))return nofit('zona');
     i++;
     if(i<Q.length)return render();
-    if(A.ppto==='<15'||A.tipo==='suelto'||(A.ppto==='nose'&&A.m2==='<50'))return second();
+    if(A.ppto==='<15'||(A.ppto==='nose'&&A.m2==='<50'))return second();
     contact();
   }
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='back'){i=Math.max(0,i-1);render()}});
@@ -531,13 +532,21 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
     '<div class="field"><label for="f-nom">Nombre</label><input id="f-nom" autocomplete="given-name" placeholder="Laura"></div>'+
     '<div class="row2"><div class="field"><label for="f-tel">Teléfono (WhatsApp)</label><input id="f-tel" type="tel" autocomplete="tel" placeholder="600 000 000"></div><div class="field"><label for="f-mail">Email</label><input id="f-mail" type="email" autocomplete="email" placeholder="laura@correo.com"></div></div>'+
     '<label class="consent" for="f-ok"><input type="checkbox" id="f-ok"> Acepto que Al Milímetro me escriba para darme la cifra y, si quiero, quedar para la visita. Política de privacidad.</label>'+
+    '<input type="text" id="f-web" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">'+
     '<p class="err" id="err" hidden>Falta el nombre, el teléfono o aceptar la privacidad.</p>'+
     '<div class="navq"><span></span><button type="submit" class="btn">Ver desde cuánto sale →</button></div>';
   }
   form.addEventListener('submit',function(e){e.preventDefault();
     var n=document.getElementById('f-nom'),tel=document.getElementById('f-tel'),ok=document.getElementById('f-ok');
     if(!n||!n.value.trim()||tel.value.replace(/\D/g,'').length<9||!ok.checked){document.getElementById('err').hidden=false;return}
-    track('form_fin',{tipo:A.tipo,revision:A.review?'segundas':'desde'});result(n.value.trim());
+    var btn=form.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Enviando…';
+    var mail=document.getElementById('f-mail').value.trim(),utm={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){if(qs[k])utm[k]=qs[k]});
+    var datos={nombre:n.value.trim(),tel:tel.value,email:mail,rgpd:true,tipo:A.tipo,cp:A.cp,mun:A.mun,m2:A.m2,cuando:A.cuando,ppto:A.ppto,propia:A.propia,inst:A.inst||'',frase:A.frase||'',a:qs.a||'',m:qs.m||'',utm:utm,website:(document.getElementById('f-web')||{}).value||''};
+    // El contacto va a la subcuenta de GHL de Sonia (api/al-milimetro-lead.js); los WhatsApp y emails salen de allí
+    fetch('/api/al-milimetro-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(datos)})
+      .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+      .then(function(j){track('form_fin',{tipo:A.tipo,revision:A.review?'segundas':'desde',clase:j.clase||''});result(datos.nombre)})
+      .catch(function(){btn.disabled=false;btn.textContent='Ver desde cuánto sale →';var e=document.getElementById('err');e.textContent='No se ha podido enviar. Revisa la conexión y vuelve a intentarlo.';e.hidden=false;track('form_error')});
   });
   function inHours(d){var day=d.getDay(),h=d.getHours()+d.getMinutes()/60;if(day>=1&&day<=4)return h>=9&&h<19;if(day===5)return h>=9&&h<15;return false}
   function madridNow(){try{return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Madrid'}))}catch(e){return new Date()}}
@@ -551,7 +560,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
     stage.innerHTML=h;document.getElementById('again').addEventListener('click',reset);
   }
   function nofit(why){bar7(0);track('form_descarte',{motivo:why});
-    var msg={tipo:'Me dedico a reformas completas de viviendas, y para lo que necesitas no te voy a poder dar el mejor precio.',zona:'Ahora mismo no trabajo en tu zona, y prefiero decírtelo antes que hacerte esperar.',suelto:'Un baño o una cocina sueltos solo los hago en el centro de Madrid, y tu casa queda fuera.',acab:'Para cambiar acabados sin tocar instalaciones no te voy a poder dar el mejor precio.'}[why];
+    var msg={tipo:'Me dedico a reformas completas de viviendas, y para lo que necesitas no te voy a poder dar el mejor precio.',zona:'Ahora mismo no trabajo en tu zona, y prefiero decírtelo antes que hacerte esperar.',suelto:'Un baño o una cocina sueltos no los hago: me dedico a reformas completas, o a cocina y baño a la vez.',acab:'Para cambiar acabados sin tocar instalaciones no te voy a poder dar el mejor precio.'}[why];
     stage.innerHTML='<div class="result"><span class="k" style="color:var(--naranja2)">Gracias por contarme tu proyecto</span><h3>Te soy sincera: esto no es lo mío.</h3><p>'+msg+'</p><p style="color:var(--mut)">Te recomiendo hablar con un albañil o un oficial de confianza de tu zona: te va a salir mejor. ¡Mucha suerte con tu casa!</p><div class="navq"><button type="button" class="btn btn-ghost btn-sm" id="again">Me he equivocado, volver a empezar</button></div></div>';
     document.getElementById('again').addEventListener('click',reset);
   }
