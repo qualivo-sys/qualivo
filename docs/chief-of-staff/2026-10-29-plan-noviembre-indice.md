@@ -34,3 +34,10 @@ Una sola página que reúne cada parte del plan. [C] es un dato confirmado; [E],
 
 - **Objetivo de reuniones:** ✅ cuadrado. Son 7-9 reuniones celebradas; el 4-5 que daba Outbound eran reuniones agendadas.
 - **Pendientes de Outbound que no son del plan:** los borradores de Tunergia y Strat (llevan 6 días esperando) y la regla de responder solos a los «ahora no». Van al bloque de las 13:00.
+
+## Aprobado por Maikel el 29-oct (11:10)
+
+- **Decisiones:** las 5 de arriba, tal como venían recomendadas.
+- **Objetivo nuevo:** **al menos 2 clientes nuevos en noviembre.** Hay que meter caña al contenido, al ABM, al outbound y a la captación.
+- **Inversión:** Maikel está dispuesto a invertir más. Comprar buzones nuevos y contratar una herramienta un mes, si hace falta.
+- **Siguiente paso:** Paid recalcula el embudo para 2 clientes con Outbound y Growth: qué falta, cuánto cuesta y desde cuándo se nota. Lo trae al ritual del viernes 30 a las 9:00, donde Maikel confirma los pagos.
