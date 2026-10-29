@@ -1,6 +1,8 @@
 // Al Milímetro: recibe el formulario «Calcula tu reforma» de la landing
-// (qualivo.io/propuestas/al-milimetro/landing-v2/) y lo deja en la base de datos propia de Al Milímetro.
-// Decidido el 29-oct: sistema propio en qualivo.io, sin GHL.
+// (qualivo.io/propuestas/al-milimetro/landing-v2/) y lo deja en la subcuenta de GHL de Sonia.
+// Destino (29-oct, 13:58): la subcuenta de GoHighLevel de la agencia (api/_am-ghl.js). Los mensajes los lanzan
+// los workflows de GHL con las etiquetas am-*; el WhatsApp sale por Wazzap desde el número de Sonia.
+// De reserva: la base de datos propia + Resend (lo de abajo), que solo se usa si NO hay AM_GHL_API_KEY.
 //
 //   POST /api/al-milimetro-lead   { nombre, tel, email, rgpd, tipo, cp, mun, m2, cuando, ppto, propia,
 //                                   inst, frase, a, m, utm, website (honeypot) }
@@ -14,10 +16,12 @@
 //
 // Variables: AM_DATABASE_URL · RESEND_API_KEY · AM_EMAIL_FROM · AM_AVISO_TO · AM_LINK_SECRET · AM_BASE_URL
 //            AM_SOLO_PRUEBA=1 mientras Sonia no dé el OK: solo se guardan los leads «PRUEBA QUALIVO».
-// Sin AM_DATABASE_URL responde en modo vista previa: puntúa y no guarda nada.
+// Variables de GHL: AM_GHL_API_KEY · AM_GHL_LOCATION_ID · AM_GHL_PIPELINE_ID (opcional).
+// Sin GHL ni AM_DATABASE_URL responde en modo vista previa: puntúa y no guarda nada.
 
 const M = require('./_am-modelo.js');
 const DB = require('./_am-db.js');
+const G = require('./_am-ghl.js');
 const C = require('./_am-correo.js');
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -56,10 +60,22 @@ module.exports = async function handler(req, res) {
   const revision = M.necesitaRevision(r);
   const sc = M.puntuar(r);
 
-  if (!DB.configurada()) return res.status(200).json({ ok: true, modo: 'vista_previa', clase: sc.clase, puntos: sc.puntos, revision: revision, prueba: prueba });
+  if (!G.configurada() && !DB.configurada()) return res.status(200).json({ ok: true, modo: 'vista_previa', clase: sc.clase, puntos: sc.puntos, revision: revision, prueba: prueba });
   if (process.env.AM_SOLO_PRUEBA === '1' && !prueba) {
     console.warn('[am-lead] Lead real con AM_SOLO_PRUEBA=1: no se guarda');
     return res.status(200).json({ ok: true, modo: 'solo_prueba' });
+  }
+
+  // Destino principal: la subcuenta de GHL
+  if (G.configurada()) {
+    try {
+      const utm = Object.keys(b.utm || {}).filter(function (k) { return /^utm_(source|medium|campaign|content|term)$/.test(k); }).map(function (k) { return k + '=' + limpio(b.utm[k], 60); }).join(' · ');
+      await G.escribirLead(M.vista(Object.assign({ nombre: nombre, telefono: tel, email: email, prueba: prueba, origen: origen, revision: revision }, r)), sc, { municipio: limpio(b.m, 40), utm: utm });
+      return res.status(200).json({ ok: true, clase: sc.clase, revision: revision, prueba: prueba });
+    } catch (err) {
+      console.error('[am-lead] GHL:', err.message);
+      return res.status(502).json({ ok: false, error: 'crm_error' });
+    }
   }
 
   let L;

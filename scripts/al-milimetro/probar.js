@@ -259,6 +259,53 @@ const correos = [];
     assert.equal(correos.filter(function (c) { return c.to === '677777777@qualivo.io'; }).length, 1);
   });
 
+  // ---------- Destino GHL (subcuenta de Sonia), con GHL simulado ----------
+  const G = require(API + '_am-ghl.js');
+  const ghlLlamadas = [];
+  const fetchAntes = global.fetch;
+  global.fetch = async function (url, o) {
+    if (!/leadconnectorhq/.test(url)) return fetchAntes(url, o);
+    const ruta = url.replace('https://services.leadconnectorhq.com', ''); const cuerpo = o.body ? JSON.parse(o.body) : null;
+    ghlLlamadas.push({ m: o.method, ruta: ruta, cuerpo: cuerpo });
+    let d = {};
+    if (/customFields/.test(ruta)) d = { customFields: ['am_tipo_obra', 'am_tipo_texto', 'am_codigo_postal', 'am_zona', 'am_metros', 'am_cuando', 'am_presupuesto', 'am_vivienda_propia', 'am_clase', 'am_puntos', 'am_origen', 'am_revision', 'am_desde', 'am_instalaciones', 'am_que_cambiar'].map(function (k, i) { return { id: 'f' + i, fieldKey: 'contact.' + k }; }) };
+    else if (/pipelines/.test(ruta)) d = { pipelines: [{ id: 'P1', name: 'Reformas', stages: ['Nuevo', 'Contactado', 'Visita técnica', 'Presupuesto enviado', 'Seguimiento', 'Firmado', 'Perdido'].map(function (n, i) { return { id: 'S' + i, name: n }; }) }] };
+    else if (/upsert/.test(ruta)) d = { contact: { id: 'C1' } };
+    else if (/opportunities\/search/.test(ruta)) d = { opportunities: [{ id: 'O1', contactId: 'C1', pipelineStageId: 'S2', status: 'open', createdAt: new Date().toISOString() }] };
+    else if (/^\/contacts\/C1$/.test(ruta)) d = { contact: { firstName: 'PRUEBA QUALIVO Marta', tags: ['am-prueba'], customFields: [{ id: 'f8', value: 'A' }, { id: 'f9', value: 85 }, { id: 'f10', value: 'C · Cuánto cuesta' }, { id: 'f0', value: 'Piso entero' }] } };
+    return { ok: true, status: 200, text: async function () { return JSON.stringify(d); }, json: async function () { return d; } };
+  };
+  process.env.AM_GHL_API_KEY = 'tok'; process.env.AM_GHL_LOCATION_ID = 'L1';
+  await t('GHL: contacto con campos, etiquetas (am-lead la última), oportunidad en «Nuevo» y nota; nada en la base de datos', async function () {
+    const antes = (await q('SELECT count(*)::int n FROM am_leads'))[0].n;
+    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO Marta', a: 'precio' }) });
+    assert.equal(r.json.ok, true); assert.equal(r.json.clase, 'A');
+    const up = ghlLlamadas.find(function (l) { return /upsert/.test(l.ruta); });
+    assert.equal(up.cuerpo.phone, '+34600000000'); assert.ok(!up.cuerpo.tags);
+    assert.equal(up.cuerpo.customFields.find(function (c) { return c.id === 'f10'; }).field_value, 'C · Cuánto cuesta');
+    const tags = ghlLlamadas.filter(function (l) { return /\/tags$/.test(l.ruta); }).map(function (l) { return l.cuerpo.tags; });
+    assert.deepEqual(tags, [['am-a', 'am-origen-precio', 'am-prueba'], ['am-lead']]);
+    const op = ghlLlamadas.find(function (l) { return l.ruta === '/opportunities/'; });
+    assert.equal(op.cuerpo.pipelineStageId, 'S0'); assert.ok(/^\[PRUEBA\]/.test(op.cuerpo.name));
+    assert.ok(ghlLlamadas.some(function (l) { return /\/notes$/.test(l.ruta); }));
+    assert.equal((await q('SELECT count(*)::int n FROM am_leads'))[0].n, antes);
+  });
+  await t('GHL: descartado no toca GHL', async function () {
+    ghlLlamadas.length = 0;
+    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { tipo: 'arreglo' }) });
+    assert.equal(r.json.descartado, 'tipo'); assert.equal(ghlLlamadas.length, 0);
+  });
+  await t('GHL: Intelligence lee el pipeline, sin teléfonos ni emails', async function () {
+    const e = await llamar(intel, { method: 'POST', query: { accion: 'entrar' }, body: { clave: 'clave' } });
+    const cookie = String(e.headers['Set-Cookie']).split(';')[0];
+    const r = await llamar(intel, { query: { accion: 'tablero', fresco: '1' }, headers: { cookie: cookie } });
+    assert.equal(r.json.fuente, 'ghl'); assert.equal(r.json.contactos.length, 1);
+    const c = r.json.contactos[0];
+    assert.equal(c.n, 'Marta'); assert.equal(c.etapa, 3); assert.equal(c.origen, 'precio'); assert.equal(c.clase, 'A');
+    assert.ok(JSON.stringify(r.json).indexOf('+34') < 0);
+  });
+  delete process.env.AM_GHL_API_KEY; delete process.env.AM_GHL_LOCATION_ID; global.fetch = fetchAntes; G._reiniciar();
+
   console.log(ok + ' pruebas en verde');
   await pg.end(); emu.close();
 })().catch(function (e) { console.error('✗', e.stack || e.message); process.exit(1); });

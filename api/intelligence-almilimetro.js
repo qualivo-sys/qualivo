@@ -1,16 +1,18 @@
-// Intelligence privado de Al Milímetro: el embudo de Sonia leído de su base de datos (api/_am-db.js).
+// Intelligence privado de Al Milímetro: el embudo de Sonia leído de su subcuenta de GHL (api/_am-ghl.js)
+// o, si no hay GHL, de la base de datos de reserva (api/_am-db.js).
 // Página: qualivo.io/intelligence/?cuenta=almilimetro
 //
 //   POST /api/intelligence-almilimetro/?accion=entrar   { clave }  → cookie de sesión
 //   POST /api/intelligence-almilimetro/?accion=salir               → borra la cookie
 //   GET  /api/intelligence-almilimetro/?accion=tablero             → contactos y su etapa (401 sin sesión)
 //
-// Variables: INTELLIGENCE_CLAVE_AM (contraseña de la página) · AM_DATABASE_URL
-// Reglas: SOLO LECTURA (solo SELECT). Nunca teléfonos ni emails al navegador; el nombre, como «Nombre I.».
+// Variables: INTELLIGENCE_CLAVE_AM (contraseña de la página) · AM_GHL_API_KEY + AM_GHL_LOCATION_ID (o AM_DATABASE_URL)
+// Reglas: SOLO LECTURA (solo GET en GHL, solo SELECT en la base de datos). Nunca teléfonos ni emails al navegador; el nombre, como «Nombre I.».
 
 const S = require('./_intel-sesion.js').crear({ cookie: 'qi_am', env: 'INTELLIGENCE_CLAVE_AM', sal: 'almilimetro-intelligence|' });
 const M = require('./_am-modelo.js');
 const DB = require('./_am-db.js');
+const G = require('./_am-ghl.js');
 
 const CACHE_MS = 60000;
 const ETAPAS = { nuevo: [1, 'Nuevo'], contactado: [2, 'Contactado'], visita: [3, 'Visita técnica'], presupuesto: [4, 'Presupuesto enviado'], firmado: [6, 'Firmado'], perdido: [4, 'Perdido'], parado: [2, 'Parado'] };
@@ -58,13 +60,13 @@ module.exports = async function handler(req, res) {
   }
   if (req.method === 'POST' && accion === 'salir') { res.setHeader('Set-Cookie', S.cookieBorrar()); return res.status(200).json({ ok: true }); }
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
-  if (!DB.configurada()) return res.status(503).json({ error: 'Falta conectar la base de datos (AM_DATABASE_URL).' });
+  if (!G.configurada() && !DB.configurada()) return res.status(503).json({ error: 'Falta conectar la subcuenta de GHL (AM_GHL_API_KEY y AM_GHL_LOCATION_ID).' });
   try {
     const fresco = req.query && req.query.fresco === '1';
-    if (!cache || fresco || Date.now() - cache.t > CACHE_MS) cache = { t: Date.now(), d: await recoger() };
+    if (!cache || fresco || Date.now() - cache.t > CACHE_MS) cache = { t: Date.now(), d: G.configurada() ? await G.leerTablero() : await recoger() };
     return res.status(200).json(cache.d);
   } catch (e) {
     console.error('[intel-am]', e.message);
-    return res.status(502).json({ error: 'No se ha podido leer la base de datos: ' + e.message });
+    return res.status(502).json({ error: 'No se han podido leer los datos: ' + e.message });
   }
 };
