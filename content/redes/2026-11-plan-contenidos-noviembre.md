@@ -53,18 +53,29 @@
 - de 5 a 15 palabras por lámina;
 - desde el perfil de Maikel, porque la página de empresa tiene una mediana de 0 comentarios [C, radar de octubre].
 
+**Semanas 45 y 46 (se quedan como están, salvo lo que la nota de arriba pasa a reserva):**
+
 | Semana | Lunes · LinkedIn e Instagram | Miércoles | Viernes | Vídeo (Maikel, miércoles 12:30) | Blog (2/semana) | Newsletter (Growth) |
 |---|---|---|---|---|---|---|
 | 45 · 2-8 | Pieza 3 «Pidió cita a las 21:14» (clínicas) · hecha | Pieza 4 «Déjanos tus datos y te llamamos» (landing) · hecha | «Si te pregunto dónde se te pierden los clientes…» (gancho «No lo sé», igual que Paid) | Se graban G1 y G4 del lote S44 | Respuesta y fuera de horario | La que decida Growth |
 | 46 · 9-15 | «Mandas el presupuesto el martes…» (reformas, día 2/5/10, rescatado del S44) | Oportunidades olvidadas en el CRM (servicios B2B) | Opinión: «Lo que nunca dejaríamos en manos de un agente» | Sale el reel de G1; se graba G2 | Seguimiento y CRM | General del 11-nov (Growth) |
-| 47 · 16-22 | «Una cita no es una oportunidad hasta que aparece» (clínicas, el recordatorio que pide un «sí») | Las métricas antes de subir presupuesto (inmobiliaria) | Agentizando: «Tres horas sin nada» (el vigía) | Sale el reel de G4; se graba G3 | Citas y medición | — |
-| 48 · 23-29 | Caso con permiso escrito, si llega. Si no, «Qué aprendí analizando un embudo…» sin nombres | «Las cinco fugas entre el anuncio y la venta» (con diagnóstico) | Opinión: «Tus datos son tuyos», la objeción de los cierres | Sale el reel de G2 o G3 | Fugas y propiedad de los datos | General del 25-nov (Growth) |
+
+**Desde la semana 47 (ritmo del 28-oct):** 2 carruseles, 1 vídeo y la newsletter del jueves. Cada pieza sale de un caso, un dato o un aprendizaje real.
+
+| Semana | Lunes · carrusel | Martes · vídeo | Jueves · carrusel | Jueves · newsletter (la escribe Contenido y la envía Growth) | Blog (2/semana) |
+|---|---|---|---|---|---|
+| 47 · 16-20 | «Una cita no es una oportunidad hasta que aparece» (clínicas, el recordatorio que pide un «sí») | V2 «El teléfono nos tiene enganchadas» (sale de la reserva; se graba el 29-oct) | Agentizando: «Tres horas sin nada» (el vigía) | 19-nov · sale de la pieza de la semana | Citas y medición |
+| 48 · 23-27 | Caso con permiso escrito, si llega. Si no, «Qué aprendí analizando un embudo…» sin nombres | V4 «Lo que no dejamos en manos del sistema» (sale de la reserva; se graba el 5-nov) | Opinión: «Tus datos son tuyos», la objeción de los cierres [C, bus 26-oct] | 26-nov · sale de la pieza de la semana | Fugas y propiedad de los datos |
+
+Quedan en reserva: «Las métricas antes de subir presupuesto» (inmobiliaria) y «Las cinco fugas entre el anuncio y la venta».
+
+**Grabaciones (jueves de 17:00 a 18:00):** el 29-oct, V1 (sale el 3-nov) y V2 (semana 47); el 5-nov, V3 (sale el 10-nov) y V4 (semana 48).
 
 **Quién hace qué:**
 - Contenido: piezas, imágenes, textos y blog.
-- Maikel: graba los miércoles a las 12:30 y aprueba los viernes.
+- Maikel: revisa los jueves de 13:00 a 14:00 y graba los jueves de 17:00 a 18:00.
 - Paid: anuncios.
-- Growth: newsletters y radar mensual.
+- Growth: envía la newsletter del jueves (la escribe Contenido) y hace el radar mensual.
 - Las piezas 1 y 2 salen el 28 y el 30 de octubre y abren el mes.
 
 ## 4. Qué reutilizamos antes de crear nada
