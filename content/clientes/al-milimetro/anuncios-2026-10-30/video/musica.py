@@ -1,5 +1,5 @@
-import numpy as np, wave
-SR=44100; DUR=16.0; N=int(SR*DUR); t=np.arange(N)/SR
+import numpy as np, wave, json
+SR=44100; import os; DUR=float(os.environ.get('DUR','16')); N=int(SR*DUR); t=np.arange(N)/SR
 out=np.zeros((N,2))
 bpm=100; beat=60/bpm; bar=4*beat
 def note(f): return 440*2**((f-69)/12)
@@ -34,7 +34,7 @@ rng=np.random.default_rng(1)
 nb_=int(DUR/beat)+1
 for k in range(nb_):
     st=k*beat
-    if st<1.2 or st>15.4: continue
+    if st<1.2 or st>DUR-0.6: continue
     n=int(0.35*SR); tt=np.arange(n)/SR
     kick=np.sin(2*np.pi*(55+70*np.exp(-tt*30))*tt)*np.exp(-tt*9)
     add(kick*0.32,st,0.5)
@@ -54,17 +54,17 @@ def whoosh(d,peak):
     for i in range(n): 
         a=max(0,i-w[i]); y[i]=(k[i]-k[a])/max(1,i-a)
     return y*e*peak
-add(whoosh(1.4,0.35),2.4,0.5); add(whoosh(1.0,0.28),6.5,0.5)
+[add(whoosh(0.9,0.22),w-0.6,0.5) for w in json.loads(os.environ.get('WH','[2.4,6.5]'))]
 # soft chime at button (13.4)
 n=int(1.2*SR); tt=np.arange(n)/SR
 ch=sum(np.sin(2*np.pi*note(m)*tt) for m in (84,88,91))*np.exp(-tt*4)
-add(ch*0.06,13.4,0.5)
+add(ch*0.06,float(os.environ.get('CHIME','13.4')),0.5)
 # master: fades
 fade=np.ones(N); fi=int(0.3*SR); fo=int(1.2*SR)
 fade[:fi]=np.linspace(0,1,fi); fade[-fo:]=np.linspace(1,0,fo)
 out*=fade[:,None]
 out/=np.max(np.abs(out))*1.12
 pcm=(out*32767).astype(np.int16)
-with wave.open('music.wav','wb') as w:
+with wave.open(os.environ.get('OUT','music.wav'),'wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
 print('ok')
