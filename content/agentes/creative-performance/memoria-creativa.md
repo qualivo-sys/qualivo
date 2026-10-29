@@ -315,3 +315,7 @@ Una fila por anuncio y semana:
 - Paid y Growth: que cada lead entre en el CRM con el nombre exacto del anuncio. Pedir a Paid el desglose por creativo de septiembre.
 - Confirmar con Maikel el seguimiento de ofertas para clientes (lo citan «Las fugas» y la toma a cámara).
 - Aclarar si «mejores leads» es la semana 1 (encargo y `contexto.md`) o la 2 (`plan-octubre-2026.md`).
+
+## Al Milímetro · 3 borradores (29-oct, para el 30-oct)
+
+Cliente de reformas (Sonia). Sin vídeo y sin su cara. A «sin extras ocultos» (carrusel de 3 miedos), B «tu chalet, de principio a fin» (con variante por municipio), C «¿cuánto cuesta?» (diseño con las 6 preguntas del formulario y cifras «desde»). Fotos de referencia hechas con IA porque las de su web son de banco. Piezas en `content/clientes/al-milimetro/anuncios-2026-10-30/`. Sin datos todavía: lanzamiento previsto en noviembre.

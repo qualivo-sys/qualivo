@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+:root{--ink:#1F1C19;--cream:#F6F1E8;--sand:#EADFCC;--or:#E8571A;--or2:#C2410C;--mut:#6B6258;--ok:#2F6B4F}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#888;font-family:Inter,sans-serif;color:var(--ink);display:flex;flex-wrap:wrap;gap:40px;padding:40px}
+.s{position:relative;overflow:hidden;background:var(--cream);flex:none}
+.f{width:1080px;height:1350px}.st{width:1080px;height:1920px}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,28,25,0) 35%,rgba(31,28,25,.86) 78%,rgba(31,28,25,.95) 100%)}
+.shadeT{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,28,25,.78) 0%,rgba(31,28,25,.25) 32%,rgba(31,28,25,0) 48%,rgba(31,28,25,.55) 72%,rgba(31,28,25,.95) 100%)}
+.serif{font-family:"DM Serif Display",serif;font-weight:400;letter-spacing:-.015em}
+.eb{font-weight:700;font-size:26px;letter-spacing:.14em;text-transform:uppercase}
+.logo{height:60px;filter:brightness(0) invert(1)}
+.pill{display:inline-block;background:var(--or);color:#fff;border-radius:999px;padding:14px 28px;font-weight:700;font-size:26px;letter-spacing:.04em}
+.btn{display:inline-flex;align-items:center;gap:16px;background:var(--or);color:#fff;border-radius:18px;padding:28px 44px;font-weight:800;font-size:40px}
+.dots{position:absolute;bottom:44px;left:0;right:0;display:flex;justify-content:center;gap:12px}
+.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.45)}.dots i.on{background:#fff}
+.dots.dk i{background:rgba(31,28,25,.2)}.dots.dk i.on{background:var(--ink)}
+.num{font-family:"DM Serif Display",serif;color:var(--or);font-size:120px;line-height:1}
+.chk{display:grid;gap:22px;font-size:40px;font-weight:600}
+.chk div{display:flex;gap:20px;align-items:center}
+.chk b{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--or);color:#fff;font-size:30px}
+.card{background:#fff;border-radius:28px;box-shadow:0 20px 60px rgba(31,28,25,.16)}
+.q{display:flex;align-items:center;gap:22px;padding:20px 30px;border-bottom:2px solid #F0E9DD;font-size:34px;font-weight:600}
+.q:last-child{border-bottom:0}
+.q span{flex:none;width:50px;height:50px;border-radius:14px;background:var(--sand);display:grid;place-items:center;font-weight:800;font-size:26px;color:var(--or2)}
+.price{display:flex;justify-content:space-between;align-items:baseline;padding:34px 40px;border-bottom:2px solid #F0E9DD}
+.price:last-child{border-bottom:0}
+.price .l{font-size:36px;font-weight:600}.price .l small{display:block;font-size:26px;font-weight:500;color:var(--mut);margin-top:6px}
+.price .v{font-family:"DM Serif Display",serif;font-size:58px;white-space:nowrap}.price .v em{font-style:normal;font-family:Inter;font-size:26px;color:var(--mut);margin-right:10px}
+</style></head><body>
+
+<!-- ============ A · SIN EXTRAS OCULTOS (carrusel 5 + story) ============ -->
+<div class="s f" id="A1">
+  <img class="ph" src="fotos/ia0.jpg"><div class="shade"></div>
+  <div style="position:absolute;top:64px;left:72px"><img class="logo" src="fotos/logo-web.png"></div>
+  <div style="position:absolute;left:72px;right:72px;bottom:150px;color:#fff">
+    <div class="eb" style="color:#FFB48A;margin-bottom:26px">Reformas integrales · Madrid</div>
+    <h1 class="serif" style="font-size:96px;line-height:1.02">Reformar tu casa no debería ser una caja de sorpresas.</h1>
+    <p style="font-size:36px;margin-top:30px;color:rgba(255,255,255,.88)">Los 3 miedos de toda reforma y cómo los quitamos →</p>
+  </div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="A2">
+  <img class="ph" src="fotos/ia2.jpg" style="height:560px"><div style="position:absolute;top:0;left:0;right:0;height:560px;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(246,241,232,1) 100%)"></div>
+  <div style="position:absolute;top:520px;left:72px;right:72px">
+    <div class="num">1</div>
+    <div class="eb" style="color:var(--mut);margin-top:10px">El miedo</div>
+    <h2 class="serif" style="font-size:84px;line-height:1.04;margin-top:10px">«Que acabe costando el doble.»</h2>
+    <p style="font-size:40px;line-height:1.35;margin-top:34px"><b style="color:var(--or2)">Cómo lo quitamos:</b> antes de empezar vamos a tu casa, medimos y te damos un presupuesto <b>por partidas</b>. Sabes qué pagas y por qué.</p>
+  </div>
+  <div class="dots dk"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="A3">
+  <img class="ph" src="fotos/ia1.jpg" style="height:560px"><div style="position:absolute;top:0;left:0;right:0;height:560px;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(246,241,232,1) 100%)"></div>
+  <div style="position:absolute;top:520px;left:72px;right:72px">
+    <div class="num">2</div>
+    <div class="eb" style="color:var(--mut);margin-top:10px">El miedo</div>
+    <h2 class="serif" style="font-size:84px;line-height:1.04;margin-top:10px">«Que la obra no se acabe nunca.»</h2>
+    <p style="font-size:40px;line-height:1.35;margin-top:34px"><b style="color:var(--or2)">Cómo lo quitamos:</b> el plazo va <b>por escrito</b> antes de empezar, y revisamos lo que no se ve (instalaciones, bajantes, suelo) para que no aparezca a mitad de obra.</p>
+  </div>
+  <div class="dots dk"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="A4">
+  <img class="ph" src="fotos/ia5.jpg" style="height:560px"><div style="position:absolute;top:0;left:0;right:0;height:560px;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(246,241,232,1) 100%)"></div>
+  <div style="position:absolute;top:520px;left:72px;right:72px">
+    <div class="num">3</div>
+    <div class="eb" style="color:var(--mut);margin-top:10px">El miedo</div>
+    <h2 class="serif" style="font-size:84px;line-height:1.04;margin-top:10px">«Pelearme con cinco gremios.»</h2>
+    <p style="font-size:40px;line-height:1.35;margin-top:34px"><b style="color:var(--or2)">Cómo lo quitamos:</b> una arquitecta proyecta y coordina toda la obra. Tú hablas con <b>una sola persona</b>.</p>
+  </div>
+  <div class="dots dk"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<div class="s f" id="A5" style="background:var(--ink);color:#fff">
+  <div style="position:absolute;top:96px;left:72px"><img class="logo" src="fotos/logo-web.png"></div>
+  <div style="position:absolute;top:250px;left:72px;right:72px">
+    <h2 class="serif" style="font-size:92px;line-height:1.02">Tu reforma, <span style="color:var(--or)">sin extras ocultos.</span></h2>
+    <div class="chk" style="margin-top:64px">
+      <div><b>✓</b>Presupuesto por partidas</div>
+      <div><b>✓</b>Plazo por escrito</div>
+      <div><b>✓</b>Una arquitecta, un solo interlocutor</div>
+    </div>
+    <p style="font-size:32px;color:rgba(255,255,255,.7);margin-top:60px;line-height:1.4">Pisos y chalets completos, o cocina y baño de la misma vivienda.<br>Madrid capital y noroeste.</p>
+    <div class="btn" style="margin-top:56px">Pedir visita técnica →</div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<div class="s st" id="A-story">
+  <img class="ph" src="fotos/ia0.jpg" style="height:1150px"><div style="position:absolute;top:0;left:0;right:0;height:1150px;background:linear-gradient(180deg,rgba(31,28,25,.55) 0%,rgba(31,28,25,0) 22%,rgba(31,28,25,0) 75%,var(--ink) 100%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,transparent 1150px,var(--ink) 1150px)"></div>
+  <div style="position:absolute;top:250px;left:72px"><img class="logo" src="fotos/logo-web.png"></div>
+  <div style="position:absolute;left:72px;right:72px;top:920px;color:#fff">
+    <h1 class="serif" style="font-size:92px;line-height:1.02">Reformar tu casa no debería ser una caja de sorpresas.</h1>
+    <div class="chk" style="margin-top:50px;font-size:36px;gap:18px">
+      <div><b>✓</b>Presupuesto por partidas</div>
+      <div><b>✓</b>Plazo por escrito</div>
+      <div><b>✓</b>Tú hablas con una sola persona</div>
+    </div>
+    <div class="btn" style="margin-top:50px">Pedir visita técnica →</div>
+  </div>
+</div>
+
+<!-- ============ B · CHALET EN TU ZONA (imagen + carrusel 4 + story) ============ -->
+<div class="s f" id="B1">
+  <img class="ph" src="fotos/ia3.jpg"><div class="shadeT"></div>
+  <div style="position:absolute;top:64px;left:72px;right:72px;color:#fff">
+    <div class="eb" style="color:#FFD2B8;font-size:24px;line-height:1.6">Boadilla · Majadahonda · Villaviciosa<br>Torrelodones · Aravaca</div>
+  </div>
+  <div style="position:absolute;left:72px;right:72px;bottom:110px;color:#fff">
+    <h1 class="serif" style="font-size:100px;line-height:1">¿Tu chalet necesita una reforma de verdad?</h1>
+    <p style="font-size:36px;line-height:1.4;margin-top:28px;color:rgba(255,255,255,.9)">Instalaciones, cocina, baños y distribución.<br>Lo proyectamos y lo coordinamos de principio a fin.</p>
+  </div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="B1-zona">
+  <img class="ph" src="fotos/ia3.jpg"><div class="shadeT"></div>
+  <div style="position:absolute;top:64px;left:72px"><span class="pill">Majadahonda</span></div>
+  <div style="position:absolute;left:72px;right:72px;bottom:110px;color:#fff">
+    <h1 class="serif" style="font-size:96px;line-height:1.02">¿Tienes un chalet en Majadahonda que pide una reforma completa?</h1>
+    <p style="font-size:36px;line-height:1.4;margin-top:28px;color:rgba(255,255,255,.9)">Una arquitecta, un presupuesto por partidas y una sola persona al teléfono.</p>
+    <div class="btn" style="margin-top:40px;font-size:36px;padding:24px 38px">Pedir visita técnica →</div>
+  </div>
+</div>
+
+<div class="s f" id="B2">
+  <img class="ph" src="fotos/ia1.jpg" style="height:620px"><div style="position:absolute;top:0;left:0;right:0;height:620px;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(246,241,232,1) 100%)"></div>
+  <div style="position:absolute;top:580px;left:72px;right:72px">
+    <div class="eb" style="color:var(--or2)">Lo primero que miramos</div>
+    <h2 class="serif" style="font-size:78px;line-height:1.04;margin-top:16px">Lo que no se ve es lo que encarece una reforma.</h2>
+    <div class="chk" style="margin-top:44px;font-size:36px;gap:18px">
+      <div><b>1</b>Instalaciones de luz y agua</div>
+      <div><b>2</b>Cubierta, fachada y ventanas</div>
+      <div><b>3</b>Distribución y estructura</div>
+    </div>
+  </div>
+  <div class="dots dk"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="B3">
+  <img class="ph" src="fotos/ia4.jpg"><div class="shade"></div>
+  <div style="position:absolute;left:72px;right:72px;bottom:150px;color:#fff">
+    <div class="eb" style="color:#FFB48A">Redistribuir</div>
+    <h2 class="serif" style="font-size:88px;line-height:1.02;margin-top:18px">La misma casa, vivida de otra manera.</h2>
+    <p style="font-size:36px;line-height:1.4;margin-top:24px;color:rgba(255,255,255,.9)">Cocina abierta al salón, más luz y la casa adaptada a cómo vivís hoy.</p>
+  </div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<div class="s f" id="B4" style="background:var(--ink);color:#fff">
+  <div style="position:absolute;top:96px;left:72px"><img class="logo" src="fotos/logo-web.png"></div>
+  <div style="position:absolute;top:250px;left:72px;right:72px">
+    <h2 class="serif" style="font-size:86px;line-height:1.04">Reforma integral de chalets, <span style="color:var(--or)">de principio a fin.</span></h2>
+    <div class="chk" style="margin-top:56px">
+      <div><b>✓</b>Una arquitecta proyecta y coordina</div>
+      <div><b>✓</b>Presupuesto por partidas</div>
+      <div><b>✓</b>Una sola persona al teléfono</div>
+    </div>
+    <p style="font-size:30px;color:rgba(255,255,255,.7);margin-top:56px;line-height:1.45">Boadilla del Monte · Majadahonda · Villaviciosa de Odón · Torrelodones · Moncloa-Aravaca</p>
+    <div class="btn" style="margin-top:48px">Pedir visita técnica →</div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<div class="s st" id="B-story">
+  <img class="ph" src="fotos/ia3.jpg"><div class="shadeT"></div>
+  <div style="position:absolute;top:260px;left:72px;right:72px;color:#fff">
+    <div class="eb" style="color:#FFD2B8;font-size:26px;line-height:1.6">Boadilla · Majadahonda · Villaviciosa<br>Torrelodones · Aravaca</div>
+  </div>
+  <div style="position:absolute;left:72px;right:72px;bottom:330px;color:#fff">
+    <h1 class="serif" style="font-size:104px;line-height:1">¿Tu chalet necesita una reforma de verdad?</h1>
+    <p style="font-size:38px;line-height:1.4;margin-top:30px;color:rgba(255,255,255,.9)">Lo proyectamos y lo coordinamos de principio a fin. Una arquitecta y una sola persona al teléfono.</p>
+    <div class="btn" style="margin-top:46px">Pedir visita técnica →</div>
+  </div>
+</div>
+
+<!-- ============ C · ¿CUÁNTO CUESTA? (diseño + carrusel 4 + story) ============ -->
+<div class="s f" id="C1">
+  <div style="position:absolute;top:80px;left:72px;right:72px">
+    <div class="eb" style="color:var(--or2)">Reformas en Madrid</div>
+    <h1 class="serif" style="font-size:104px;line-height:1;margin-top:20px">¿Cuánto cuesta reformar tu piso?</h1>
+    <p style="font-size:38px;line-height:1.35;margin-top:26px;color:var(--mut)">Contesta 6 preguntas y te decimos <b style="color:var(--ink)">desde cuánto</b>, antes de cualquier visita.</p>
+  </div>
+  <div class="card" style="position:absolute;left:72px;right:72px;top:540px">
+    <div class="q"><span>1</span>¿Qué quieres reformar?</div>
+    <div class="q"><span>2</span>¿Dónde está la vivienda?</div>
+    <div class="q"><span>3</span>¿Cuántos metros tiene?</div>
+    <div class="q"><span>4</span>¿Cuándo te gustaría empezar?</div>
+    <div class="q"><span>5</span>¿Qué presupuesto tienes en mente?</div>
+    <div class="q"><span>6</span>¿La vivienda ya es tuya?</div>
+  </div>
+  <div style="position:absolute;left:72px;bottom:70px;display:flex;align-items:center;gap:30px">
+    <div class="btn">Calcular mi reforma →</div><span style="font-size:30px;color:var(--mut);font-weight:600">2 minutos</span>
+  </div>
+</div>
+
+<div class="s f" id="C2">
+  <img class="ph" src="fotos/ia7.jpg" style="height:600px"><div style="position:absolute;top:0;left:0;right:0;height:600px;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(246,241,232,1) 100%)"></div>
+  <div style="position:absolute;top:560px;left:72px;right:72px">
+    <div class="eb" style="color:var(--or2)">El precio depende de 3 cosas</div>
+    <div style="display:grid;gap:30px;margin-top:34px">
+      <div><h3 class="serif" style="font-size:62px">Los metros</h3><p style="font-size:34px;color:var(--mut);margin-top:4px">No cuesta lo mismo un piso de 60 m² que uno de 120.</p></div>
+      <div><h3 class="serif" style="font-size:62px">El estado</h3><p style="font-size:34px;color:var(--mut);margin-top:4px">Si hay que cambiar luz, agua y bajantes, o solo acabados.</p></div>
+      <div><h3 class="serif" style="font-size:62px">Los acabados</h3><p style="font-size:34px;color:var(--mut);margin-top:4px">Básicos, medios o altos. La mano de obra es la misma.</p></div>
+    </div>
+  </div>
+  <div class="dots dk"><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<div class="s f" id="C3">
+  <div style="position:absolute;top:90px;left:72px;right:72px">
+    <div class="eb" style="color:var(--or2)">Como referencia</div>
+    <h2 class="serif" style="font-size:88px;line-height:1.02;margin-top:18px">Desde cuánto, en Madrid.</h2>
+  </div>
+  <div class="card" style="position:absolute;left:72px;right:72px;top:420px">
+    <div class="price"><div class="l">Piso completo<small>a partir de 50 m²</small></div><div class="v"><em>desde</em>35.000 €</div></div>
+    <div class="price"><div class="l">Cocina y baño<small>de la misma vivienda</small></div><div class="v"><em>desde</em>15.000 €</div></div>
+    <div class="price"><div class="l">Chalet completo<small>unos 200 m², ventanas incluidas</small></div><div class="v"><em>desde</em>160.000 €</div></div>
+  </div>
+  <p style="position:absolute;left:72px;right:72px;bottom:120px;font-size:30px;color:var(--mut);line-height:1.4">Cifras orientativas. La cifra buena te la damos después de ver tu casa.</p>
+  <div class="dots dk"><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<div class="s f" id="C4" style="background:var(--ink);color:#fff">
+  <div style="position:absolute;top:96px;left:72px"><img class="logo" src="fotos/logo-web.png"></div>
+  <div style="position:absolute;top:270px;left:72px;right:72px">
+    <h2 class="serif" style="font-size:96px;line-height:1">¿Y la tuya? <span style="color:var(--or)">Calcúlala en 2 minutos.</span></h2>
+    <p style="font-size:40px;line-height:1.4;margin-top:44px;color:rgba(255,255,255,.86)">6 preguntas sobre tu casa y te decimos desde cuánto sale. Si encaja, una arquitecta va a verla y te da la cifra cerrada por partidas.</p>
+    <div class="btn" style="margin-top:64px">Calcular mi reforma →</div>
+    <p style="font-size:30px;color:rgba(255,255,255,.6);margin-top:40px">Reformas completas de pisos y chalets · Madrid capital y noroeste</p>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+<div class="s st" id="C-story">
+  <div style="position:absolute;top:250px;left:72px;right:72px">
+    <div class="eb" style="color:var(--or2)">Reformas en Madrid</div>
+    <h1 class="serif" style="font-size:112px;line-height:1;margin-top:20px">¿Cuánto cuesta reformar tu piso?</h1>
+    <p style="font-size:40px;line-height:1.35;margin-top:30px;color:var(--mut)">6 preguntas y te decimos <b style="color:var(--ink)">desde cuánto</b>.</p>
+  </div>
+  <div class="card" style="position:absolute;left:72px;right:72px;top:830px">
+    <div class="q"><span>1</span>¿Qué quieres reformar?</div>
+    <div class="q"><span>2</span>¿Dónde está la vivienda?</div>
+    <div class="q"><span>3</span>¿Cuántos metros tiene?</div>
+    <div class="q"><span>4</span>¿Cuándo te gustaría empezar?</div>
+    <div class="q"><span>5</span>¿Qué presupuesto tienes en mente?</div>
+    <div class="q"><span>6</span>¿La vivienda ya es tuya?</div>
+  </div>
+  <div style="position:absolute;left:72px;right:72px;top:1500px;display:flex;align-items:center;gap:30px"><div class="btn">Calcular mi reforma →</div><span style="font-size:30px;color:var(--mut);font-weight:600">2 minutos</span></div>
+</div>
+
+</body></html>
