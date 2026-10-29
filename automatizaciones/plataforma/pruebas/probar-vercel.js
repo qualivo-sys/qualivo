@@ -2,7 +2,7 @@
 const assert = require('assert'); const path = require('path').join(__dirname, '..', 'vercel-preview-am.js');
 for (const k of Object.keys(process.env)) if (/^(GHL_|AM_GHL_|VERCEL_)/.test(k)) delete process.env[k]; // nunca el entorno real
 Object.assign(process.env, { GHL_AGENCY_API_KEY: 'ag', GHL_COMPANY_ID: 'co', VERCEL_TOKEN: 'vt' });
-const puestas = []; let envs = []; let redeploys = 0; const valores = {};
+const puestas = []; let envs = []; let redeploys = 0; let conRepo = false; const valores = {};
 global.fetch = async (url, o) => {
   const res = (j) => ({ ok: true, status: 200, text: async () => JSON.stringify(j) });
   if (url.includes('locationToken')) return res({ access_token: 'tok24h' });
@@ -10,12 +10,19 @@ global.fetch = async (url, o) => {
   if (/leadconnectorhq\.com\/locations\/otra$/.test(url)) return res({ location: { id: 'otra-distinta' } });
   if (url.includes('/v9/projects/qualivo/env')) { assert.ok(url.includes('gitBranch=claude%2Fal-milimetro-landing-v2-site')); return res({ envs }); }
   if (url.includes('/v10/projects/qualivo/env?upsert=true')) { const b = JSON.parse(o.body); valores[b.key] = b.value; assert.deepEqual(b.target, ['preview']); assert.equal(b.gitBranch, 'claude/al-milimetro-landing-v2-site'); puestas.push(b.key); envs.push({ key: b.key, target: ['preview'] }); return res({}); }
-  if (url.includes('/v9/projects/qualivo?')) return res({ id: 'prj1' });
+  if (url.includes('/v9/projects/qualivo?')) return res(conRepo ? { id: 'prj1', link: { type: 'github', repoId: 4242 } } : { id: 'prj1' });
   if (url.includes('/v6/deployments?projectId=prj1')) return res({ deployments: [
     { uid: 'd-otra', created: 3, meta: { githubCommitRef: 'otra-rama' } },
     { uid: 'd-vieja', created: 1, meta: { githubCommitRef: 'claude/al-milimetro-landing-v2-site' } },
     { uid: 'd-buena', created: 2, meta: { githubCommitRef: 'claude/al-milimetro-landing-v2-site' } }] });
-  if (url.includes('/v13/deployments?forceNew=1')) { const b = JSON.parse(o.body); assert.equal(b.deploymentId, 'd-buena'); assert.equal(b.target, 'preview'); redeploys++; return res({ url: 'qualivo-git-am.vercel.app' }); }
+  if (url.includes('/v13/deployments?forceNew=1')) {
+    const b = JSON.parse(o.body);
+    // Como la API real (29-oct): 400 si llega target «preview»
+    if ('target' in b) return { ok: false, status: 400, text: async () => '{"error":{"message":"`target` should be \'production\', \'staging\', or a custom environment identifier"}}' };
+    if (conRepo) { assert.deepEqual(b.gitSource, { type: 'github', repoId: 4242, ref: 'claude/al-milimetro-landing-v2-site' }); }
+    else assert.equal(b.deploymentId, 'd-buena');
+    redeploys++; return res({ url: 'qualivo-git-am.vercel.app' });
+  }
   throw new Error('no simulado ' + url);
 };
 (async () => {
@@ -28,6 +35,11 @@ global.fetch = async (url, o) => {
   puestas.length = 0; await run(['loc1', '--aplicar']);
   assert.ok(!puestas.includes('INTELLIGENCE_CLAVE_AM'), 'no cambia una clave que ya existe');
   await assert.rejects(run(['bHGMuZEGUESZmVoNv9HT', '--aplicar']), /Qualivo/);
+  // Proyecto enlazado a GitHub: despliega la rama desde Git (gitSource con su ref), sin target
+  conRepo = true; const r0 = redeploys;
+  await run(['loc1', '--aplicar']);
+  assert.equal(redeploys, r0 + 1);
+  conRepo = false;
   // Modo habitual: Private Integration de la subcuenta en el entorno, sin clave de agencia
   delete process.env.GHL_AGENCY_API_KEY; delete process.env.GHL_COMPANY_ID;
   Object.assign(process.env, { AM_GHL_API_KEY: 'pit', AM_GHL_LOCATION_ID: 'locManual' });
@@ -35,5 +47,5 @@ global.fetch = async (url, o) => {
   assert.equal(valores.AM_GHL_API_KEY, 'pit'); assert.equal(valores.AM_GHL_LOCATION_ID, 'locManual');
   await assert.rejects(run(['otra', '--aplicar']), /no es de la subcuenta/);
   console.log('✓ modo Private Integration: pone el token duradero tras comprobar que es de esa subcuenta, sin clave de agencia');
-  console.log('✓ vista previa sin escrituras · ✓ preview de la rama, nunca producción · ✓ clave de Intelligence una vez · ✓ refrescar el token no la cambia · ✓ se niega con Qualivo · ✓ redeploy del último deploy de la rama con su URL');
+  console.log('✓ vista previa sin escrituras · ✓ preview de la rama, nunca producción · ✓ clave de Intelligence una vez · ✓ refrescar el token no la cambia · ✓ se niega con Qualivo · ✓ deploy de preview sin target: desde Git con la ref de la rama, o redeploy de su último deploy, con su URL');
 })().catch((e) => { console.error('✗', e); process.exit(1); });

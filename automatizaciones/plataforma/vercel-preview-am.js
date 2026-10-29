@@ -11,7 +11,7 @@
 //   AM_GHL_LOCATION_ID · AM_GHL_API_KEY (token de ubicación de unas 24 h: SOLO para la prueba; el duradero es la
 //   Private Integration de la subcuenta, guía A3.2) · AM_SOLO_PRUEBA=1 · AM_GHL_PIPELINE_ID (si se da) ·
 //   INTELLIGENCE_CLAVE_AM (contraseña larga nueva, si no existe ya; se imprime UNA vez para el Chief of Staff).
-// Con --aplicar, al final hace redeploy del último deploy de la rama e imprime la URL de la preview.
+// Con --aplicar, al final despliega la rama en preview (desde Git, su último commit) e imprime la URL.
 // Opcionales: VERCEL_PROJECT (por defecto «qualivo»), VERCEL_TEAM_ID.
 
 const crypto = require('crypto');
@@ -80,12 +80,19 @@ async function main() {
   // Redeploy del último deploy de la rama, para que la preview coja las variables (el agente de Al Milímetro no
   // tiene VERCEL_TOKEN). La URL se le pasa junto con el ID de la subcuenta.
   const pj = await pedir(V + '/v9/projects/' + encodeURIComponent(proyecto) + '?' + team.slice(1), { headers: cabV });
-  const ds = await pedir(V + '/v6/deployments?projectId=' + pj.id + '&target=preview&limit=50' + team, { headers: cabV });
-  const ultimo = (ds.deployments || []).filter((d) => d.meta && d.meta.githubCommitRef === RAMA).sort((x, y) => y.created - x.created)[0];
-  if (!ultimo) { console.log('\n⚠ No hay ningún deploy de ' + RAMA + ': haz un push a la rama para crear la preview.'); return; }
-  const nuevo = await pedir(V + '/v13/deployments?forceNew=1' + team, {
-    method: 'POST', headers: cabV, body: JSON.stringify({ name: proyecto, deploymentId: ultimo.uid, target: 'preview' })
-  });
+  // Sin «target»: así el deploy es de preview (Vercel solo acepta production, staging o un entorno propio;
+  // «preview» da 400). Se despliega la rama desde Git (gitSource con su ref), es decir, su último commit.
+  let cuerpo;
+  if (pj.link && pj.link.type === 'github' && pj.link.repoId) {
+    cuerpo = { name: proyecto, project: pj.id, gitSource: { type: 'github', repoId: pj.link.repoId, ref: RAMA } };
+  } else {
+    // Sin repo enlazado: redeploy del último deploy de la rama (mantiene su commit)
+    const ds = await pedir(V + '/v6/deployments?projectId=' + pj.id + '&limit=50' + team, { headers: cabV });
+    const ultimo = (ds.deployments || []).filter((d) => d.meta && d.meta.githubCommitRef === RAMA).sort((x, y) => y.created - x.created)[0];
+    if (!ultimo) { console.log('\n⚠ No hay ningún deploy de ' + RAMA + ': haz un push a la rama para crear la preview.'); return; }
+    cuerpo = { name: proyecto, deploymentId: ultimo.uid };
+  }
+  const nuevo = await pedir(V + '/v13/deployments?forceNew=1' + team, { method: 'POST', headers: cabV, body: JSON.stringify(cuerpo) });
   console.log('\nRedeploy lanzado: https://' + nuevo.url + ' (tarda un par de minutos). Esa es la URL de la preview para la prueba.');
 }
 
