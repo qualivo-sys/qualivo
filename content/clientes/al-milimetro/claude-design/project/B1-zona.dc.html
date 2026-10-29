@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>B1 · Variante por municipio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=Inter:wght@500;600&amp;family=Anonymous+Pro:wght@400;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1080px; height: 1350px; position: relative; overflow: hidden; background: #F5F4E7; color: #252525; font-family: Inter, sans-serif">
+<img src="/_blob/961038922eb1da6bdec2e8e5c68a94b5" alt="Cocina abierta al jardín en un chalet reformado (imagen de referencia)" style="position: absolute; left: 80px; top: 80px; width: 920px; height: 560px; object-fit: cover; border: 5px solid #252525; border-radius: 34px; box-shadow: 14px 14px 0 #252525">
+<div style="position: absolute; left: 120px; top: 120px; display: inline-flex; align-items: center; gap: 12px; background: #F46315; color: #FFFFFF; border: 4px solid #252525; border-radius: 999px; padding: 12px 26px; font-family: 'Anonymous Pro', monospace; font-weight: 700; font-size: 32px"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>{{municipio}}</div>
+<div style="position: absolute; left: 80px; right: 80px; top: 710px; display: flex; flex-direction: column; gap: 26px">
+<h1 style="margin: 0; font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 92px; line-height: 1.03; letter-spacing: -.015em">¿Tienes un chalet en <em style="color: #F46315">{{municipio}}</em> que pide una reforma completa?</h1>
+<p style="margin: 0; font-size: 36px; line-height: 1.4; font-weight: 500">La arquitecta que te presupuesta es la que hace tu obra. Por partidas, en 7 días desde la visita.</p>
+</div>
+<a href="#" style="position: absolute; left: 80px; top: 1170px; display: inline-flex; align-items: center; gap: 16px; background: #FDC023; color: #252525; text-decoration: none; border: 4px solid #252525; border-radius: 22px; box-shadow: 7px 7px 0 #252525; padding: 22px 38px; font-family: 'Anonymous Pro', monospace; font-weight: 700; font-size: 38px">Calcula tu reforma →</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"municipio":{"editor":"enum","options":["Majadahonda","Boadilla del Monte","Villaviciosa de Odón","Torrelodones","Aravaca"],"default":"Majadahonda"},"$preview":{"width":1080,"height":1350}}'>
+class Component extends DCLogic {
+renderVals() { return { municipio: this.props.municipio ?? 'Majadahonda' }; }
+}
+</script>
+</body>
+</html>
